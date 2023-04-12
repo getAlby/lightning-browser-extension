@@ -75,9 +75,9 @@ export default function ConnectLnd() {
           t={t}
           components={[
             // eslint-disable-next-line react/jsx-key
-            <br />,
-            // eslint-disable-next-line react/jsx-key
             <strong></strong>,
+            // eslint-disable-next-line react/jsx-key
+            <br />,
           ]}
         />
       }
