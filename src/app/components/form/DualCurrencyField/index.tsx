@@ -45,7 +45,7 @@ export default function DualCurrencyField({
       className={classNames(
         "dual-currency-field",
         "block w-full placeholder-gray-500 dark:placeholder-gray-600 dark:text-white ",
-        "pr-0 border-0 focus:ring-0 bg-transparent"
+        "px-0 border-0 focus:ring-0 bg-transparent"
       )}
       placeholder={placeholder}
       required={required}
@@ -85,7 +85,7 @@ export default function DualCurrencyField({
           {label}
         </label>
         {(min || max) && (
-          <span className="text-xs font-normal text-gray-700 dark:text-neutral-400">
+          <span className="text-xs text-gray-700 dark:text-neutral-400">
             <RangeLabel min={min} max={max} /> sats
           </span>
         )}
@@ -93,17 +93,16 @@ export default function DualCurrencyField({
 
       <div
         className={classNames(
-          `flex items-center overflow-hidden field mt-1 ${
-            !hint && "mb-2"
-          } px-3 `,
+          "flex items-center overflow-hidden field mt-1 px-3",
           "focus-within:ring-primary focus-within:border-primary focus-within:dark:border-primary focus-within:ring-1",
+          !hint && "mb-2",
           outerStyles
         )}
       >
         {inputNode}
 
         {!!fiatValue && (
-          <p className="helper text-base text-gray-500 z-1 font-semibold pointer-events-none">
+          <p className="helper text-gray-500 z-1 pointer-events-none">
             ~{fiatValue}
           </p>
         )}
