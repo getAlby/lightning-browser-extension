@@ -786,7 +786,7 @@
     "success": "Exitoso",
     "error": "Error",
     "settings": "Ajustes",
-    "websites": "Sitios web",
+    "connected_sites": "",
     "sats_one": "sat",
     "sats_other": "sats",
     "loading": "cargando",
