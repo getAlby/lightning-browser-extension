@@ -13,7 +13,12 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import msg from "~/common/lib/msg";
 
-export default function ConnectCommando() {
+type Props = {
+  logo?: string;
+};
+
+export default function ConnectCommando(props: Props) {
+  const { logo } = props;
   const navigate = useNavigate();
   const { t } = useTranslation("translation", {
     keyPrefix: `choose_connector.commando`,
@@ -101,6 +106,7 @@ export default function ConnectCommando() {
     <ConnectorForm
       title={t("page.title")}
       description={t("page.instructions")}
+      logo={logo}
       submitLoading={loading}
       submitDisabled={
         formData.host === "" && formData.pubkey === "" && formData.rune === ""

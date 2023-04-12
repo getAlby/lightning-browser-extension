@@ -45,19 +45,19 @@ function getConnectorRoutes() {
     },
     {
       path: "lnc",
-      element: <ConnectLnc />,
+      element: <ConnectLnc logo={lnd} />,
       title: i18n.t("translation:choose_connector.lnc.title"),
       logo: lnd,
     },
     {
       path: "commando",
-      element: <ConnectCommando />,
+      element: <ConnectCommando logo={core_ln} />,
       title: i18n.t("translation:choose_connector.commando.title"),
       logo: core_ln,
     },
     {
       path: "lnbits",
-      element: <ConnectLnbits />,
+      element: <ConnectLnbits logo={lnbits} />,
       title: i18n.t("translation:choose_connector.lnbits.title"),
       logo: lnbits,
     },

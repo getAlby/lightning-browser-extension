@@ -11,7 +11,12 @@ const initialFormData = Object.freeze({
   pairingPhrase: "",
 });
 
-export default function ConnectLnd() {
+type Props = {
+  logo?: string;
+};
+
+export default function ConnectLnd(props: Props) {
+  const { logo } = props;
   const navigate = useNavigate();
   const { t } = useTranslation("translation", {
     keyPrefix: "choose_connector.lnc",
@@ -81,6 +86,7 @@ export default function ConnectLnd() {
           ]}
         />
       }
+      logo={logo}
       submitLoading={loading}
       submitDisabled={formData.pairingPhrase === ""}
       onSubmit={handleSubmit}
