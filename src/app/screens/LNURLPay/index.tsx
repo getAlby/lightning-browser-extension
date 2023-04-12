@@ -418,7 +418,7 @@ function LNURLPay() {
                               onChange={(e) => setValueSat(e.target.value)}
                               fiatValue={fiatValue}
                               hint={`${tCommon("balance")}: ${
-                                auth.balancesDecorated.accountBalance
+                                auth?.balancesDecorated?.accountBalance
                               }`}
                             />
                             <SatButtons
