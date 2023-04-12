@@ -258,31 +258,22 @@
       "kollider": {
         "title": "Kollider",
         "description": "Anmeldung bei deinem Kollider Konto",
+        "page": {
+          "description": "Du hast noch kein Konto? <0>Jetzt anmelden</0>!",
+          "title": "Verbinde dich mit deinem Kollider-Konto"
+        },
+        "password": {
+          "label": "Gebe dein Kollider Passwort ein"
+        },
         "currency": {
           "label": "Wähle dein Währungskonto"
         },
         "errors": {
-          "connection_failed": "Verbindung fehlgeschlagen. Bist du dir sicher, dass die Kontodaten korrekt sind?",
-          "registration_limit_exceeded": "Registrierungslimit überschritten, versuche es später noch einmal.",
-          "user_already_exists": "Benutzername existiert bereits"
+          "connection_failed": "Verbindung fehlgeschlagen. Bist du dir sicher, dass die Kontodaten korrekt sind?"
         },
         "username": {
-          "label": "Benutzername"
-        },
-        "choose_path": {
-          "title": "Verbinde dich mit deiner Kollider-Wallet",
-          "description": "Melde dich an oder registriere dich für ein neues Kollider-Konto und stelle eine Verbindung zu Alby her.",
-          "create_new": "Registriere dich"
-        },
-        "create": {
-          "description": "Erstelle ein neues Kollider-Konto, um Bitcoin zu senden, zu empfangen und zu handeln.",
-          "title": "Erstelle dein Kollider-Konto und verbinde dich mit Alby"
-        },
-        "login": {
-          "title": "Verbinde dich mit deinem Kollider-Konto",
-          "description": "Du hast noch kein Konto? <0>Jetzt anmelden</0>!"
-        },
-        "warning": "Bitte stelle sicher, dass du deine Anmeldedaten sicher in einem Passwort-Manager speicherst. Ohne diese Zugangsdaten kann dein Konto nicht wiederhergestellt werden."
+          "label": "Gebe dein Kollider Benutzernamen ein"
+        }
       },
       "title": "Verbinde Lightning Wallet",
       "lnc": {
@@ -739,12 +730,11 @@
       "list": {
         "gaming": "Spielen",
         "trading": "Handel",
-        "entertainment": "Unterhaltung",
+        "entertaiment": "Unterhaltung",
         "shopping": "Einkaufen",
         "miscellaneous": "Sonstiges",
         "showcases": "Schaukästen",
-        "nostr": "Nostr",
-        "nodeManagement": "Verwalte deine Note"
+        "nostr": "Nostr"
       },
       "tips": {
         "title": "Deine Alby-Wallet ist bereit",
@@ -784,9 +774,7 @@
       "options": {
         "account": {
           "add": "Füge einen neuen Account hinzu",
-          "manage": "Konten verwalten",
-          "account_settings": "Kontoeinstellungen",
-          "go_to_web_wallet": "Verwalten Sie Ihr Alby-Konto"
+          "manage": "Konten verwalten"
         }
       },
       "title": "Konto wechseln",
@@ -936,8 +924,7 @@
       "lessThan": "< {{max}}",
       "greaterThan": "> {{min}}"
     },
-    "transactions": "Transaktionen",
-    "balance": "Bilanz"
+    "transactions": "Transaktionen"
   },
   "permissions": {
     "commando": {

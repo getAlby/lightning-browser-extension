@@ -1,26 +1,14 @@
 import { ReactNode } from "react";
-import { classNames } from "~/app/utils";
 
 type Props = {
-  href?: string;
-  onClick?: () => void;
+  onClick: () => void;
   children: ReactNode;
-  className?: string;
 };
 
-export default function Hyperlink({
-  onClick,
-  children,
-  href,
-  className,
-}: Props) {
+export default function Hyperlink({ onClick, children }: Props) {
   return (
     <a
-      className={classNames(
-        "cursor-pointer text-blue-700 hover:text-blue-500",
-        className ?? ""
-      )}
-      href={href}
+      className="cursor-pointer text-sky-500 hover:text-sky-400"
       onClick={onClick}
     >
       {children}

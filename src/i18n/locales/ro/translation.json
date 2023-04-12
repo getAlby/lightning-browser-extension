@@ -285,8 +285,15 @@
       "kollider": {
         "title": "Kollider",
         "description": "Logare la contul tau Kollider",
+        "page": {
+          "title": "Conectare la contul tau Kollider",
+          "description": "Nu ai inca un cont? <0>Inregistreaza-te</0> acum!"
+        },
         "username": {
           "label": "Introdu numele de utilizator Kollider"
+        },
+        "password": {
+          "label": "Introdu parola ta Kollider"
         },
         "currency": {
           "label": "Selecteaza contul de moneda"
@@ -628,7 +635,7 @@
       "list": {
         "trading": "",
         "gaming": "",
-        "entertainment": "",
+        "entertaiment": "",
         "shopping": "",
         "miscellaneous": "",
         "showcases": "",
