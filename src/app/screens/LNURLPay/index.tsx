@@ -61,7 +61,7 @@ function LNURLPay() {
       Math.floor(+details?.minSendable / 1000).toString()) ||
       ""
   );
-
+  const userBalance = auth.account?.balance;
   const [fiatValue, setFiatValue] = useState("");
   const [comment, setComment] = useState("");
   const [userName, setUserName] = useState("");
@@ -418,6 +418,7 @@ function LNURLPay() {
                               value={valueSat}
                               onChange={(e) => setValueSat(e.target.value)}
                               fiatValue={fiatValue}
+                              hint={`Balance: ` + userBalance + ` sats`}
                             />
                             <SatButtons
                               min={Math.floor(+details.minSendable / 1000)}

@@ -93,9 +93,9 @@ export default function DualCurrencyField({
 
       <div
         className={classNames(
-          `flex items-stretch overflow-hidden field mt-1 ${!hint && "mb-2"} ${
-            fiatValue && "pb-6"
-          } relative`,
+          `flex items-center overflow-hidden field mt-1 ${
+            !hint && "mb-2"
+          } px-3 `,
           "focus-within:ring-primary focus-within:border-primary focus-within:dark:border-primary focus-within:ring-1",
           outerStyles
         )}
@@ -103,7 +103,7 @@ export default function DualCurrencyField({
         {inputNode}
 
         {!!fiatValue && (
-          <p className="helper text-xs text-gray-600 absolute z-1 top-0 left-0 font-semibold pointer-events-none translate-x-4 translate-y-10">
+          <p className="helper text-base text-gray-500 z-1 font-semibold pointer-events-none">
             ~{fiatValue}
           </p>
         )}
