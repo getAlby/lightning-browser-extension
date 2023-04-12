@@ -9,6 +9,7 @@ import Input from "@components/form/Input";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
+import Hyperlink from "~/app/components/Hyperlink";
 import { useAccount } from "~/app/context/AccountContext";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
@@ -116,14 +117,14 @@ function Unlock() {
             disabled={loading || password === ""}
           />
 
-          <div className="flex justify-center space-x-1 mt-5">
-            <span className="text-gray-500">{t("help_contact.part1")} </span>
-            <a
-              className="text-orange-bitcoin font-semibold"
+          <div className="flex justify-center col space-x-1 mt-5">
+            <div className="text-gray-500">{t("help_contact.part1")} </div>
+            <Hyperlink
+              className="font-medium"
               href="mailto:support@getalby.com"
             >
               {t("help_contact.part2")}
-            </a>
+            </Hyperlink>
           </div>
         </form>
       </div>
