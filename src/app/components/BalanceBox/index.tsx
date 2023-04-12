@@ -3,10 +3,12 @@ import { useAccount } from "~/app/context/AccountContext";
 type Props = {
   className: string;
 };
+
 function BalanceBox(pops: Props) {
   const { balancesDecorated, account } = useAccount();
   const hasFiatBalance = Boolean(balancesDecorated.fiatBalance);
-  const { balance, currency } = account || {};
+  const balance = account ? account.balance : undefined;
+  const currency = account ? account.currency : undefined;
 
   return (
     <div
@@ -15,10 +17,12 @@ function BalanceBox(pops: Props) {
       }`}
     >
       <div className={hasFiatBalance ? "mt-4 mb-2" : "mt-0 mb-0"}>
-        <span className="text-xl font-medium ">
-          {balance}
-          <span className="text-xl font-normal m-1">{currency}</span>
-        </span>
+        {balance && (
+          <span className="text-xl font-medium ">
+            {balance.toLocaleString()}
+            <span className="text-xl font-normal m-1">{currency}</span>
+          </span>
+        )}
       </div>
       {balancesDecorated.fiatBalance && (
         <span className="text-sm font-normal text-gray-500 mb-4 ">
