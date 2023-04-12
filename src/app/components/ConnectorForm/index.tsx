@@ -49,13 +49,8 @@ function ConnectorForm({
               <div className="w-full md:w-full mb-8 lg:w-full lg:mb-0">
                 <img
                   src={image}
-                  alt="Image"
-                  className="block dark:hidden w-full"
-                />
-                <img
-                  src={image}
-                  alt="Image"
-                  className="hidden dark:block w-full"
+                  alt="Screenshot"
+                  className="block w-full rounded-md"
                 />
               </div>
             </>
