@@ -158,8 +158,8 @@ const DefaultView: FC<Props> = (props) => {
         <PublisherLnData lnData={props.lnDataFromCurrentTab[0]} />
       )}
       <div className="p-4">
-        <div className="flex space-x-4 mb-[16px]">
-          <BalanceBox />
+        <div className="flex space-x-4 mb-4">
+          <BalanceBox className={""} />
         </div>
         <div className="flex mb-6 space-x-4">
           <Button
