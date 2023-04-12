@@ -1,29 +1,34 @@
 import * as secp256k1 from "@noble/secp256k1";
-import { Transaction } from "@scure/btc-signer";
+import { hex } from "@scure/base";
+import { HDKey } from "@scure/bip32";
+import * as bip39 from "@scure/bip39";
+import * as btc from "@scure/btc-signer";
 import { MessageSignPsbt } from "~/types";
+
+// TODO: Load from account
+// TODO: Make network configurable via ENV
+const mnemonic =
+  "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about";
+const seed = bip39.mnemonicToSeedSync(mnemonic);
+const hdkey = HDKey.fromMasterSeed(seed);
 
 const signPsbt = async (message: MessageSignPsbt) => {
   try {
-    const privateKey = secp256k1.utils.hexToBytes(
-      "0101010101010101010101010101010101010101010101010101010101010101"
-    );
-
-    console.log("🔑 Private key", privateKey);
+    const privateKey = hdkey.privateKey!;
 
     const psbtBytes = secp256k1.utils.hexToBytes(message.args.psbt);
+    const transaction = btc.Transaction.fromPSBT(psbtBytes);
 
-    console.log("🔟 psbtBytes", psbtBytes);
+    transaction.sign(privateKey);
 
-    const transaction = Transaction.fromPSBT(psbtBytes); // PSBT tx
+    // TODO: Do we need to finalize() here or should that be done by websites?
+    transaction.finalize();
 
-    console.log("🔑 Decoded transaction", transaction);
-
-    const result = transaction.sign(privateKey);
+    const signedTransaction = hex.encode(transaction.extract());
 
     return {
       data: {
-        status: "OK",
-        signed: result,
+        signed: signedTransaction,
       },
     };
   } catch (e) {
