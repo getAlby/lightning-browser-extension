@@ -1,2 +1,2 @@
-export { default as ConnectedSiteIcon } from "./ConnectedSiteIcon.js";
-export { default as HelpIcon } from "./HelpIcon.js";
+export { default as ConnectedSiteIcon } from "./ConnectedSiteIcon";
+export { default as HelpIcon } from "./HelpIcon";

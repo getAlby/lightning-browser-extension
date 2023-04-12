@@ -1,4 +1,6 @@
-const HelpIcon = (props) => (
+import { SVGProps } from "react";
+
+const HelpIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg
     width={24}
     height={24}

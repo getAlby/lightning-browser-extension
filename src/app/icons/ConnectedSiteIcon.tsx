@@ -1,4 +1,6 @@
-const ConnectedSiteIcon = (props) => (
+import { SVGProps } from "react";
+
+const ConnectedSiteIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg
     width={24}
     height={24}
