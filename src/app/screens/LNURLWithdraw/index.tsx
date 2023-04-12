@@ -143,6 +143,10 @@ function LNURLWithdraw() {
     navigate(-1);
   }
 
+  function closeResult() {
+    navigate(-1);
+  }
+
   return (
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <ScreenHeader title={t("title")} />
@@ -170,7 +174,7 @@ function LNURLWithdraw() {
         </Container>
       ) : (
         <Container justifyBetween maxWidth="sm">
-          <ResultCard isSuccess message={successMessage} />
+          <ResultCard isSuccess message={successMessage} close={closeResult} />
           <div className="my-4">
             <Button
               onClick={close}

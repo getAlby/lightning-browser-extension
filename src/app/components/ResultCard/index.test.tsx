@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import "jest-canvas-mock";
 import { MemoryRouter } from "react-router-dom";
 
 import type { Props } from "./index";
@@ -23,7 +24,6 @@ describe("ResultCard", () => {
     );
 
     expect(screen.getByText("Test Successful!")).toBeInTheDocument();
-    expect(screen.getByAltText("success")).toBeInTheDocument();
   });
 
   test("failure render", async () => {
@@ -34,6 +34,5 @@ describe("ResultCard", () => {
     );
 
     expect(screen.getByText("Test Successful!")).toBeInTheDocument();
-    expect(screen.getByAltText("failure")).toBeInTheDocument();
   });
 });

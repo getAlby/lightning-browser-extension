@@ -1,4 +1,5 @@
 import { render, screen, waitFor } from "@testing-library/react";
+import "jest-canvas-mock";
 import { MemoryRouter } from "react-router-dom";
 import { settingsFixture as mockSettings } from "~/../tests/fixtures/settings";
 import type { LNURLDetails, OriginData } from "~/types";
