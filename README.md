@@ -58,9 +58,9 @@ Add Alby to your browser
 ### Try out the most recent version of Alby (Nightly Releases)
 
 - [Firefox Nightly](https://nightly.link/getAlby/lightning-browser-extension/workflows/build/master/firefox.xpi.zip) - best to install it as a temporary add-on as discussed in the "[Load extension into browser](/doc/SETUP.md#-load-extension-into-browser)" section
-- [Chrome Nightly](https://nightly.link/getAlby/lightning-browser-extension/workflows/build/master/chrome.zip) 
-    - for Chrome: go to `chrome://extensions/`, enable "Developer mode" (top right), and drag & drop the file in the browser
-    - for Edge: go to `edge://extensions/`, enable "Developer mode" (left column), and load the unpacked file in the browser
+- [Chrome Nightly](https://nightly.link/getAlby/lightning-browser-extension/workflows/build/master/chrome.zip)
+  - for Chrome: go to `chrome://extensions/`, enable "Developer mode" (top right), and drag & drop the file in the browser
+  - for Edge: go to `edge://extensions/`, enable "Developer mode" (left column), and load the unpacked file in the browser
 
 (Note: You might need to reconfigure your wallet after installing new versions)
 
