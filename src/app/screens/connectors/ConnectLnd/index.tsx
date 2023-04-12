@@ -15,7 +15,12 @@ const initialFormData = {
   macaroon: "",
 };
 
-export default function ConnectLnd() {
+type Props = {
+  logo?: string;
+};
+
+export default function ConnectLnd(props: Props) {
+  const { logo } = props;
   const navigate = useNavigate();
   const { t } = useTranslation("translation", {
     keyPrefix: "choose_connector.lnd",
@@ -142,6 +147,7 @@ export default function ConnectLnd() {
     <ConnectorForm
       title={t("page.title")}
       description={t("page.description")}
+      logo={logo}
       submitLoading={loading}
       submitDisabled={formData.url === "" || formData.macaroon === ""}
       onSubmit={handleSubmit}

@@ -13,6 +13,7 @@ type Props = {
   children: React.ReactNode;
   video?: string;
   image?: string;
+  logo?: string;
 };
 
 function ConnectorForm({
@@ -25,6 +26,7 @@ function ConnectorForm({
   children,
   video,
   image,
+  logo,
 }: Props) {
   const media = (
     <div className="flex h-full justify-center items-center">
@@ -55,16 +57,19 @@ function ConnectorForm({
   return (
     <form onSubmit={onSubmit}>
       <div className="max-w-[600px] mx-auto relative mt-14 bg-white dark:bg-surface-02dp p-10 shadow rounded-lg">
-        {/*
-            TODO: this can be simplified to always wrap the title in h1, without checking if it
-                    is string or Trans component, so we centralize the styles of the h1 tag in
-                    just one place 
-        */}
-        {typeof title === "string" ? (
-          <h1 className="mb-4 text-2xl font-bold dark:text-white">{title}</h1>
-        ) : (
-          title
-        )}
+        <div className="flex items-center mb-4">
+          {logo && <img src={logo} className="w-16 mr-4" />}
+          {/*
+              TODO: this can be simplified to always wrap the title in h1, without checking if it
+                      is string or Trans component, so we centralize the styles of the h1 tag in
+                      just one place 
+          */}
+          {typeof title === "string" ? (
+            <h1 className="text-2xl font-bold dark:text-white">{title}</h1>
+          ) : (
+            title
+          )}
+        </div>
         {media}
         {description && (
           <div className="text-gray-500 dark:text-neutral-400 whitespace-pre-line">

@@ -39,7 +39,7 @@ function getConnectorRoutes() {
   return [
     {
       path: "lnd",
-      element: <ConnectLnd />,
+      element: <ConnectLnd logo={lnd} />,
       title: i18n.t("translation:choose_connector.lnd.title"),
       logo: lnd,
     },
