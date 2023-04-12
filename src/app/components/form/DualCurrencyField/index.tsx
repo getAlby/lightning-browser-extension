@@ -96,7 +96,7 @@ export default function DualCurrencyField({
           `flex items-stretch overflow-hidden field mt-1 ${!hint && "mb-2"} ${
             fiatValue && "pb-6"
           } relative`,
-          "focus-within:ring-orange-bitcoin focus-within:border-orange-bitcoin focus-within:dark:border-orange-bitcoin focus-within:ring-1",
+          "focus-within:ring-primary focus-within:border-primary focus-within:dark:border-primary focus-within:ring-1",
           outerStyles
         )}
       >
