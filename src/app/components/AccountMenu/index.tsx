@@ -79,11 +79,11 @@ function AccountMenu({ showOptions = true }: Props) {
   return (
     <div className="relative pl-2 flex justify-end w-72">
       <Menu as="div">
-        <Menu.Button className="h-full px-2 rounded-md hover:bg-gray-200 dark:hover:bg-white/10 transition-colors duration-200">
+        <Menu.Button className="h-full px-2 rounded-md hover:bg-gray-100 dark:hover:bg-white/10 transition-colors duration-200">
           <div className="flex items-center">
             <Avatar size={24} name={authAccount?.id || ""} />
             <div
-              className={`flex-auto mx-2 py-3 overflow-hidden min-w-[10rem] max-w-[14rem] text-left`}
+              className={`flex-auto mx-2 py-3 overflow-hidden max-w-[14rem] text-left`}
             >
               <p
                 title={title || ""}
