@@ -541,7 +541,7 @@
     "success": "Menestys",
     "error": "Virhe",
     "settings": "Asetukset",
-    "connected_sites": "Connected Sites",
+    "connected_sites": "",
     "sats_one": "sat",
     "sats_other": "satia",
     "loading": "ladataan",
