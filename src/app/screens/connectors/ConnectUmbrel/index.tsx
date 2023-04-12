@@ -119,13 +119,13 @@ export default function ConnectUmbrel() {
           i18nKey={"page.instructions"}
           t={t}
           // eslint-disable-next-line react/jsx-key
-          components={[<strong></strong>]}
+          components={[<strong></strong>, <br />]}
         />
       }
       submitLoading={loading}
       submitDisabled={formData.url === "" || formData.macaroon === ""}
       onSubmit={handleSubmit}
-      video="https://cdn.getalby-assets.com/connector-guides/in_extension_guide_umbrel.mp4"
+      image="https://cdn.getalby-assets.com/connector-guides/umbrel.png"
     >
       <TextField
         id="lndconnect"
