@@ -21,6 +21,7 @@ type Currency = {
 
 export type Props = {
   variant: "login" | "create" | "select";
+  logo?: string;
 };
 
 const supportedCurrencies: Currency[] = [
@@ -38,7 +39,7 @@ const supportedCurrencies: Currency[] = [
   },
 ];
 
-export default function ConnectKollidier({ variant }: Props) {
+export default function ConnectKollidier({ variant, logo }: Props) {
   const navigate = useNavigate();
   const { t } = useTranslation("translation", {
     keyPrefix: `choose_connector.kollider`,
@@ -188,6 +189,7 @@ export default function ConnectKollidier({ variant }: Props) {
           />
         )
       }
+      logo={logo}
       submitLoading={loading}
       submitDisabled={
         loading ||

@@ -11,10 +11,12 @@ import msg from "~/common/lib/msg";
 
 export type Props = {
   lndHubType?: "lndhub_bluewallet" | "lndhub_go";
+  logo?: string;
 };
 
 export default function ConnectLndHub({
   lndHubType = "lndhub_bluewallet",
+  logo,
 }: Props) {
   const navigate = useNavigate();
   const { t } = useTranslation("translation", {
@@ -101,6 +103,7 @@ export default function ConnectLndHub({
     <ConnectorForm
       title={t("page.title")}
       description={t("page.description")}
+      logo={logo}
       submitLoading={loading}
       submitDisabled={formData.uri === ""}
       onSubmit={handleSubmit}

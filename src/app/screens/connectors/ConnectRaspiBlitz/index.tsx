@@ -13,7 +13,12 @@ const initialFormData = Object.freeze({
   macaroon: "",
 });
 
-export default function ConnectRaspiBlitz() {
+type Props = {
+  logo?: string;
+};
+
+export default function ConnectRaspiBlitz(props: Props) {
+  const { logo } = props;
   const navigate = useNavigate();
   const { t } = useTranslation("translation", {
     keyPrefix: "choose_connector.raspiblitz",
@@ -100,7 +105,7 @@ export default function ConnectRaspiBlitz() {
   return (
     <ConnectorForm
       title={
-        <h1 className="mb-4 text-2xl font-bold dark:text-white">
+        <h1 className="text-2xl font-bold dark:text-white">
           <Trans
             i18nKey={"page.title"}
             t={t}
@@ -123,6 +128,7 @@ export default function ConnectRaspiBlitz() {
           ]}
         />
       }
+      logo={logo}
       submitLoading={loading}
       submitDisabled={formData.url === "" || formData.macaroon === ""}
       onSubmit={handleSubmit}

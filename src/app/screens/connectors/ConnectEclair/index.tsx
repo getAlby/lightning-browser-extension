@@ -11,7 +11,12 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import msg from "~/common/lib/msg";
 
-export default function ConnectEclair() {
+type Props = {
+  logo?: string;
+};
+
+export default function ConnectEclair(props: Props) {
+  const { logo } = props;
   const navigate = useNavigate();
   const { t } = useTranslation("translation", {
     keyPrefix: "choose_connector.eclair",
@@ -73,7 +78,7 @@ export default function ConnectEclair() {
   return (
     <ConnectorForm
       title={
-        <h1 className="mb-4 text-2xl font-bold dark:text-white">
+        <h1 className="text-2xl font-bold dark:text-white">
           <Trans
             i18nKey={"page.title"}
             t={t}
@@ -88,6 +93,7 @@ export default function ConnectEclair() {
         </h1>
       }
       description={t("page.instructions")}
+      logo={logo}
       submitLoading={loading}
       submitDisabled={formData.password === "" || formData.url === ""}
       onSubmit={handleSubmit}

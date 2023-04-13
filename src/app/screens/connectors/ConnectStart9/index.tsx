@@ -14,7 +14,12 @@ const initialFormData = {
   macaroon: "",
 };
 
-export default function ConnectStart9() {
+type Props = {
+  logo?: string;
+};
+
+export default function ConnectStart9(props: Props) {
+  const { logo } = props;
   const navigate = useNavigate();
   const { t } = useTranslation("translation", {
     keyPrefix: "choose_connector.start9",
@@ -103,7 +108,7 @@ export default function ConnectStart9() {
   return (
     <ConnectorForm
       title={
-        <h1 className="mb-4 text-2xl font-bold dark:text-white">
+        <h1 className="text-2xl font-bold dark:text-white">
           <Trans
             i18nKey={"page.title"}
             t={t}
@@ -126,6 +131,7 @@ export default function ConnectStart9() {
           ]}
         />
       }
+      logo={logo}
       submitLoading={loading}
       submitDisabled={formData.url === "" || formData.macaroon === ""}
       onSubmit={handleSubmit}

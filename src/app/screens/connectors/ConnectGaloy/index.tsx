@@ -36,10 +36,11 @@ const defaultHeaders = {
 
 type Props = {
   instance: keyof typeof galoyUrls;
+  logo?: string;
 };
 
 export default function ConnectGaloy(props: Props) {
-  const { instance } = props;
+  const { instance, logo } = props;
   const { url, label, website, i18nPrefix } = galoyUrls[instance];
 
   const navigate = useNavigate();
@@ -301,7 +302,7 @@ export default function ConnectGaloy(props: Props) {
   return (
     <ConnectorForm
       title={
-        <h1 className="mb-4 text-2xl font-bold dark:text-white">
+        <h1 className="text-2xl font-bold dark:text-white">
           <Trans
             i18nKey={`${i18nPrefix}.page.title`}
             t={t}
@@ -312,6 +313,7 @@ export default function ConnectGaloy(props: Props) {
           />
         </h1>
       }
+      logo={logo}
       submitLabel={
         smsCodeRequested || smsCode || acceptJwtDirectly || jwt
           ? t("galoy.actions.login")

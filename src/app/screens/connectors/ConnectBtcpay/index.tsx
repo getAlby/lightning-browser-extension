@@ -15,7 +15,12 @@ const initialFormData = {
   name: "",
 };
 
-export default function ConnectBtcpay() {
+type Props = {
+  logo?: string;
+};
+
+export default function ConnectBtcpay(props: Props) {
+  const { logo } = props;
   const navigate = useNavigate();
   const { t } = useTranslation("translation", {
     keyPrefix: "choose_connector.btcpay",
@@ -114,6 +119,7 @@ export default function ConnectBtcpay() {
     <ConnectorForm
       title={t("page.title")}
       description={t("page.instructions")}
+      logo={logo}
       submitLoading={loading}
       submitDisabled={formData.url === "" || formData.macaroon === ""}
       onSubmit={handleSubmit}

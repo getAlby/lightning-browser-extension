@@ -14,7 +14,12 @@ const initialFormData = {
   macaroon: "",
 };
 
-export default function ConnectMyNode() {
+type Props = {
+  logo?: string;
+};
+
+export default function ConnectMyNode(props: Props) {
+  const { logo } = props;
   const navigate = useNavigate();
   const { t } = useTranslation("translation", {
     keyPrefix: "choose_connector.mynode",
@@ -103,7 +108,7 @@ export default function ConnectMyNode() {
   return (
     <ConnectorForm
       title={
-        <h1 className="mb-4 text-2xl font-bold dark:text-white">
+        <h1 className="text-2xl font-bold dark:text-white">
           <Trans
             i18nKey={"page.title"}
             t={t}
@@ -122,6 +127,7 @@ export default function ConnectMyNode() {
           components={[<strong></strong>, <br />]}
         />
       }
+      logo={logo}
       submitLoading={loading}
       submitDisabled={formData.url === "" || formData.macaroon === ""}
       onSubmit={handleSubmit}
