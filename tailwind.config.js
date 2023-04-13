@@ -58,11 +58,6 @@ module.exports = {
         "surface-16dp": lighten(surfaceColor, 15),
         "surface-24dp": lighten(surfaceColor, 16),
       },
-      flexBasis: {
-        "1/5-gap-4": "calc(100% / 5 - (4/5 * 1rem))",
-        "1/3-gap-4": "calc(100% / 3 - (2/3 * 1rem))",
-        "1/2-gap-4": "calc(100% / 2 - (1/2 * 1rem))"
-      }
     },
     backgroundImage: (theme) => ({
       "primary-gradient": `linear-gradient(180deg, #FFDE6E 63%, #F8C455 95%)`,
