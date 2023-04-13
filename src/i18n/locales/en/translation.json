@@ -37,7 +37,7 @@
       "pin_extension": {
         "title": "Pin your Alby extension",
         "description": "You're almost there. To use Alby conveniently, remember to pin your extension to the browser toolbar:",
-        "explanation": "1. Click on in the top right corner of your browser<0/>2. Find Alby and click to pin it to the toolbar<0/>3. That's it. To access Alby just click on the Alby icon",
+        "explanation": "1. Click on <0/> in the top right corner of your browser<1/>2. Find Alby and click to pin it to the toolbar<1/>3. That's it. To access Alby just click on the <2/> icon",
         "next_btn": "Start buzzin \uD83D\uDC1D with Alby"
       }
     },
