@@ -318,7 +318,7 @@
       "commando": {
         "title": "Core Lightning",
         "page": {
-          "title": "your Core Lightning node से कनेक्ट करें",
+          "title": "अपने Core Lightning node से कनेक्ट करें",
           "instructions": "निश्चित करें कि आपके पास कोर लाइटनिंग संस्करण 0.12.0 या नया है, कमांडो प्लगइन चल रहा है और आपका नोड लाइटनिंग नेटवर्क पर पहुंच योग्य है। 'lightning-cli commando-rune' चलाकर एक rune बनाएं।"
         },
         "host": {
