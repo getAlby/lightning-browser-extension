@@ -24,6 +24,7 @@ interface LNDHubCreateResponse {
 
 export type Props = {
   variant: "login" | "create";
+  logo?: string;
 };
 
 const initialFormData = {
@@ -33,7 +34,7 @@ const initialFormData = {
   lnAddress: "",
 };
 
-export default function AlbyWallet({ variant }: Props) {
+export default function AlbyWallet({ variant, logo }: Props) {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { t } = useTranslation("translation", {
@@ -160,6 +161,7 @@ export default function AlbyWallet({ variant }: Props) {
     <ConnectorForm
       title={t("pre_connect.title")}
       description={t(`pre_connect.${variant}_account`)}
+      logo={logo}
       submitLoading={loading}
       onSubmit={signup}
       submitDisabled={

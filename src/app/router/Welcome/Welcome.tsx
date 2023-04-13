@@ -14,6 +14,8 @@ import AlbyWallet from "~/app/screens/connectors/AlbyWallet";
 import ChooseConnectorPath from "~/app/screens/connectors/ChooseConnectorPath";
 import i18n from "~/i18n/i18nConfig";
 
+import alby from "/static/assets/icons/alby.png";
+
 const connectorRoutes = getConnectorRoutes();
 
 function getRoutes(
@@ -43,11 +45,11 @@ function getRoutes(
         },
         {
           path: "create",
-          element: <AlbyWallet variant="create" />,
+          element: <AlbyWallet logo={alby} variant="create" />,
         },
         {
           path: "login",
-          element: <AlbyWallet variant="login" />,
+          element: <AlbyWallet logo={alby} variant="login" />,
         },
         {
           path: "choose-connector",
