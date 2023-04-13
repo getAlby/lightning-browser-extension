@@ -134,6 +134,7 @@ export default function ConnectMyNode() {
           placeholder={t("rest_url.placeholder")}
           onChange={handleLndconnectUrl}
           required
+          autoFocus={true}
         />
       </div>
       {formData.url.match(/\.onion/i) && (

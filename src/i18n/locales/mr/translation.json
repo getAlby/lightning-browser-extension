@@ -285,15 +285,8 @@
       "kollider": {
         "title": "Kollider",
         "description": "तुमच्या Kollider खात्यात लॉग इन करा",
-        "page": {
-          "title": "Kollider खाते ला कनेक्ट करा",
-          "description": "आधीच खाते नाही? <0>साइन अप करा</0> !"
-        },
         "username": {
           "label": "तुमचे Kollider username प्रविष्ट करा"
-        },
-        "password": {
-          "label": "तुमचे Kollider password  प्रविष्ट करा"
         },
         "currency": {
           "label": "तुमचे चलन खाते निवडा"
@@ -631,7 +624,7 @@
       "list": {
         "trading": "व्यापार",
         "gaming": "गेमिंग",
-        "entertaiment": "मनोरंजन",
+        "entertainment": "मनोरंजन",
         "shopping": "खरेदी",
         "miscellaneous": "विविध",
         "showcases": "शोकेस",

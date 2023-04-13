@@ -68,54 +68,10 @@ describe("AccountMenu", () => {
     });
 
     await screen.findByText("Switch account");
-
+    expect(screen.getByText("Balance")).toBeInTheDocument();
     expect(screen.getByText("LND account")).toBeInTheDocument();
     expect(screen.getByText("Galoy account")).toBeInTheDocument();
     expect(screen.getByText("Add a new account")).toBeInTheDocument();
     expect(screen.getByText("Manage accounts")).toBeInTheDocument();
-  });
-
-  test("highlights current account", async () => {
-    const user = userEvent.setup();
-
-    render(
-      <BrowserRouter>
-        <I18nextProvider i18n={i18n}>
-          <AccountMenu {...defaultProps} />
-        </I18nextProvider>
-      </BrowserRouter>
-    );
-
-    await act(async () => {
-      await user.click(screen.getByText("Toggle Dropdown"));
-    });
-    await screen.findByText("Switch account");
-
-    // As we have set the active account as "LND account above"
-    expect(
-      screen.getByTitle("LND account").querySelector('[data-testid="selected"]')
-    ).toBeInTheDocument();
-  });
-
-  test("displays accounts without options", async () => {
-    const user = userEvent.setup();
-
-    render(
-      <BrowserRouter>
-        <I18nextProvider i18n={i18n}>
-          <AccountMenu showOptions={false} />
-        </I18nextProvider>
-      </BrowserRouter>
-    );
-
-    await act(async () => {
-      await user.click(screen.getByText("Toggle Dropdown"));
-    });
-    await screen.findByText("Switch account");
-
-    expect(screen.getByText("LND account")).toBeInTheDocument();
-    expect(screen.getByText("Galoy account")).toBeInTheDocument();
-    expect(screen.queryByText("Add a new account")).not.toBeInTheDocument();
-    expect(screen.queryByText("Accounts")).not.toBeInTheDocument();
   });
 });

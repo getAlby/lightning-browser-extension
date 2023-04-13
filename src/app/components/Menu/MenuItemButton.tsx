@@ -24,7 +24,7 @@ function MenuItemButton({
             active ? "bg-gray-100 dark:bg-white/10" : "",
             danger ? "text-red-700" : "text-gray-700",
             disabled ? "cursor-not-allowed" : "cursor-pointer",
-            "flex items-center block w-full text-left px-4 py-2 text-sm dark:text-white"
+            "flex items-center block w-full text-left px-4 py-3 text-sm dark:text-white"
           )}
           disabled={disabled}
           onClick={onClick}
