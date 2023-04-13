@@ -101,7 +101,7 @@ function ConfirmSignMessage() {
                 content={
                   event.kind === EventKind.Contacts
                     ? ""
-                    : event.content || t("no_content")
+                    : JSON.parse(event.content) || t("no_content")
                 }
               />
               <div className="flex justify-center mb-4 gap-4">
