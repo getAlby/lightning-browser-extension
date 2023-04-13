@@ -17,7 +17,7 @@
         }
       },
       "test_connection": {
-        "ready": "Genial, estás listo para comenzar!",
+        "ready": "¡Genial, estás listo para comenzar!",
         "initializing": "Accediendo a su cuenta. Por favor, espere, esto puede tardar un minuto...",
         "connection_error": "Error de Conexión",
         "review_connection_details": "Revise los detalles de su conexión.",
