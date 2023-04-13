@@ -16,9 +16,12 @@ function Transactions() {
 
   const { settings, getFormattedFiat } = useSettings();
   const [transactions, setTransactions] = useState<Transaction[]>([]);
-  const [transactionsLoading, setTransactionsLoading] = useState<boolean>(true);
+  const [transactionsLoading, setTransactionsLoading] =
+    useState<boolean>(false);
 
   const fetchData = useCallback(async () => {
+    setTransactionsLoading(true);
+
     try {
       // @Todo: add SWR caching? Check where to reset/mutate the cache?
       const { payments } = await api.getPayments();
