@@ -617,7 +617,7 @@
     },
     "choose_path": {
       "title": "Conectar",
-      "description": "Para empezar a utilizar la Extensión de Alby, conecta tu monedero lightning.",
+      "description": "Para empezar a utilizar la Extensión de Alby, usa tu cuenta de Alby o conecta tu monedero lightning.",
       "alby": {
         "title": "Cuenta de Alby",
         "create_new": "Regístrate",
@@ -780,7 +780,7 @@
     "success": "Exitoso",
     "error": "Error",
     "settings": "Ajustes",
-    "connected_sites": "",
+    "connected_sites": "Sitios conectados",
     "sats_one": "sat",
     "sats_other": "sats",
     "loading": "cargando",
