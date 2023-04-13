@@ -786,7 +786,7 @@
     "success": "Genomfört",
     "error": "Misslyckades",
     "settings": "Inställningar",
-    "websites": "Webbplatser",
+    "connected_sites": "",
     "loading": "laddar",
     "amount": "Belopp",
     "optional": "Valfritt",
