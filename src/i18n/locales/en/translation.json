@@ -37,7 +37,7 @@
     },
     "choose_path": {
       "title": "Connect",
-      "description": "To start using the Alby Extension, connect your lightning wallet.",
+      "description": "To start using the Alby Extension, use your Alby Account or connect to your lightning wallet.",
       "alby": {
         "title": "Alby Account",
         "description": "Sign up or use your existing Alby Account to get started with lightning payments in no time.",
