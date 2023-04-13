@@ -1,12 +1,6 @@
 {
   "translation": {
     "welcome": {
-      "nav": {
-        "welcome": "Bem-vindo",
-        "password": "Senha",
-        "connect": "Sua conta",
-        "done": "Feito"
-      },
       "set_password": {
         "title": "Definir uma senha de desbloqueio",
         "description": "Essa senha é usada para proteger sua carteira e fornecer acesso à extensão do navegador. Não esqueça essa senha pois não é possível recuperá-la. Obs. Essa senha é diferente da senha da conta da Alby.",

@@ -2,12 +2,6 @@
   "translation": {
     "welcome": {
       "title": "歡迎來到Alby",
-      "nav": {
-        "welcome": "歡迎",
-        "password": "你的密碼",
-        "connect": "你的閃電帳戶",
-        "done": "完成"
-      },
       "set_password": {
         "title": "設置解鎖密碼",
         "description": "此密碼用於保護你的錢包並提供對瀏覽器擴展程式的訪問。它無法重置，並且與你的Alby帳戶密碼不同。",

@@ -2,12 +2,6 @@
   "translation": {
     "welcome": {
       "title": "Witaj w Alby",
-      "nav": {
-        "welcome": "Powitanie",
-        "password": "Twoje hasło",
-        "connect": "Twoje konto Lightning",
-        "done": "Koniec"
-      },
       "set_password": {
         "title": "Ustaw hasło blokady",
         "description": "To hasło zabezpiecza Twój portfel i umożliwia dostęp do rozszerzenia przeglądarki. Nie można go zresetować i jest odrębne od hasła do Twojego konta Alby.",
