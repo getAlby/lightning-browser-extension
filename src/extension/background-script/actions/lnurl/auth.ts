@@ -1,3 +1,4 @@
+import fetchAdapter from "@vespaiach/axios-fetch-adapter";
 import axios from "axios";
 import Hex from "crypto-js/enc-hex";
 import hmacSHA256 from "crypto-js/hmac-sha256";
@@ -87,7 +88,10 @@ export async function authFunction({
 
   try {
     const authResponse = await axios.get<AuthResponseObject>(
-      loginURL.toString()
+      loginURL.toString(),
+      {
+        adapter: fetchAdapter,
+      }
     );
 
     // if the service returned with a HTTP 200 we still check if the response data is OK

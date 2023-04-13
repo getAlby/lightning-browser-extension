@@ -129,10 +129,14 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
       })
       .catch((e) => {
         toast.error(`An unexpected error occurred (${e.message})`);
+        console.error(
+          `AccountContext: An unexpected error occurred (${e.message})`
+        );
       })
       .finally(() => {
         setLoading(false);
       });
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

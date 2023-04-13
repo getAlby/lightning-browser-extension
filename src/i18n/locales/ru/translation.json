@@ -285,14 +285,7 @@
       "kollider": {
         "title": "",
         "description": "",
-        "page": {
-          "title": "",
-          "description": ""
-        },
         "username": {
-          "label": ""
-        },
-        "password": {
           "label": ""
         },
         "currency": {
@@ -634,7 +627,7 @@
       "list": {
         "trading": "",
         "gaming": "",
-        "entertaiment": "",
+        "entertainment": "",
         "shopping": "",
         "miscellaneous": "",
         "showcases": "",

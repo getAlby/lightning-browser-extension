@@ -16,7 +16,6 @@ jest.mock("~/common/lib/crypto", () => {
 });
 
 const mockState = {
-  password: "123456",
   saveToStorage: jest.fn,
   accounts: {
     "888": {
@@ -38,6 +37,10 @@ describe("edit account", () => {
   });
 
   test("edit existing account", async () => {
+    (chrome.storage.session.get as jest.Mock).mockResolvedValue({
+      password: 123456,
+    });
+
     const message: MessageAccountEdit = {
       application: "LBE",
       args: {

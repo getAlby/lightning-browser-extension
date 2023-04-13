@@ -54,7 +54,7 @@ class Nostr {
     )}`;
   }
 
-  decrypt(pubkey: string, ciphertext: string) {
+  async decrypt(pubkey: string, ciphertext: string) {
     const [cip, iv] = ciphertext.split("?iv=");
     const key = secp256k1.getSharedSecret(this.privateKey, "02" + pubkey);
     const normalizedKey = Buffer.from(key.slice(1, 33));

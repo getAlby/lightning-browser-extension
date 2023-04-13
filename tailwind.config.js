@@ -43,13 +43,8 @@ module.exports = {
         18: "4.5rem",
       },
       colors: {
-        "orange-bitcoin": "#f7931a",
-        "orange-bitcoin-700": "#e78308",
-        "orange-bitcoin-50": "#fdf0d5",
-        "red-bitcoin": "#eb5757",
+        primary: "#F8C455",
         "green-bitcoin": "#27ae60",
-        "blue-bitcoin": "#2d9cdb",
-        "purple-bitcoin": "#bb6bd9",
 
         // Material Design Surface Colors
         "surface-00dp": surfaceColor,
@@ -64,5 +59,9 @@ module.exports = {
         "surface-24dp": lighten(surfaceColor, 16),
       },
     },
+    backgroundImage: (theme) => ({
+      "primary-gradient": `linear-gradient(180deg, #FFDE6E 63%, #F8C455 95%)`,
+      "primary-gradient-hover": `linear-gradient(180deg, #F2D369 63%, #ECBA51 95%)`,
+    }),
   },
 };
