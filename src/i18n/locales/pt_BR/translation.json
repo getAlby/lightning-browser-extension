@@ -99,7 +99,7 @@
         "title": "Umbrel",
         "page": {
           "title": "Conecte no servidor <0>Umbrel</0>",
-          "instructions": "Na Umbrel vá até <0>Connect Wallet</0>. Selecione <0>lndconnect REST</0> e copie a <0>lndconnect URL</0>. (Dependendo da sua configuração você pode usar a conexão local ou a conexão Tor.)"
+          "instructions": "1. In your Lightning Node dashboard go to <0>Connect wallet</0><1/>2. Select <0>REST (Tor)</0> or <0>REST (Local Network)</0> mode<1/>3. Copy the <0>lndconnect URL</0> and paste it below"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -254,7 +254,7 @@
       "lnc": {
         "page": {
           "title": "Conecte no servidor LND usando LNC",
-          "description": "Crie uma nova sessão no terminal (litd) para obter uma nova frase de pareamento e insira-a aqui"
+          "description": "1. Open Lightning Terminal and choose <0>Lightning Node Connect</0> from the sidebar.<1/> 2. Click <0>Create a new session</0><1/>3. Label the session, choose desired permissions and submit<1/>4. <0>Copy pairing phrase</0> and paste it below."
         },
         "title": "LND usando LNC",
         "pairing_phrase": {
