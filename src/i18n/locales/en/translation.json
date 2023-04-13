@@ -2,12 +2,6 @@
   "translation": {
     "welcome": {
       "title": "Welcome to Alby",
-      "nav": {
-        "welcome": "Welcome",
-        "password": "Your Password",
-        "connect": "Your Lightning Account",
-        "done": "Done"
-      },
       "set_password": {
         "title": "Set an unlock password",
         "description": "This password is used to protect your wallet and provide access to the browser extension. It cannot be reset and is separate from your Alby Account password.",

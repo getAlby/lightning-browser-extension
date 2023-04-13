@@ -1,12 +1,6 @@
 {
   "translation": {
     "welcome": {
-      "nav": {
-        "welcome": "Bonvenon",
-        "password": "Via pasvorto",
-        "connect": "Via konto ĉe Lightning",
-        "done": "Farite"
-      },
       "set_password": {
         "title": "",
         "description": "",

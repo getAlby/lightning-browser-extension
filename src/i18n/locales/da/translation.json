@@ -2,12 +2,6 @@
   "translation": {
     "welcome": {
       "title": "Velkommen til Alby",
-      "nav": {
-        "welcome": "Velkommen",
-        "password": "Din adgangskode",
-        "connect": "Din Lightning-konto",
-        "done": "Færdig"
-      },
       "set_password": {
         "title": "Angiv en nøglekode",
         "description": "Dette kodeord bruges til at beskytte din wallet og giver adgang til browserudvidelsen. Det kan ikke nulstilles, og er ikke den samme som adgangskoden til din Alby-konto.",

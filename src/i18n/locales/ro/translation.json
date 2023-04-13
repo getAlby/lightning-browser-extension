@@ -2,12 +2,6 @@
   "translation": {
     "welcome": {
       "title": "Bine ai venit la Alby",
-      "nav": {
-        "welcome": "Bine ai venit",
-        "password": "Parola ta",
-        "connect": "Contul tau de Lightning",
-        "done": "Gata"
-      },
       "set_password": {
         "title": "Seteaza o parola pentru deblocare",
         "description": "Aceasta parola este folosita pentru a proteja portofelul tau si pentru a permite accesul la extensia de browser. Aceasta parola nu poate fi resetata si este separata de parola contului Alby.",

@@ -1,12 +1,6 @@
 {
   "translation": {
     "welcome": {
-      "nav": {
-        "welcome": "Willkommen",
-        "password": "Dein Passwort",
-        "connect": "Dein Lightning Konto",
-        "done": "Fertig"
-      },
       "set_password": {
         "title": "Passwort zum Entsperren festlegen",
         "description": "Dieses Passwort wird verwendet, um deine Wallet zu schützen und den Zugriff auf die Browser-Erweiterung zu ermöglichen. Es kann nicht zurückgesetzt werden und ist unabhängig von Ihrem Alby Konto Passwort.",
