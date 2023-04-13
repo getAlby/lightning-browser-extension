@@ -1,10 +1,10 @@
 import { useAccount } from "~/app/context/AccountContext";
 
 type Props = {
-  className: string;
+  className?: string;
 };
 
-function BalanceBox(pops: Props) {
+function BalanceBox(props: Props) {
   const { balancesDecorated, account } = useAccount();
   const hasFiatBalance = Boolean(balancesDecorated.fiatBalance);
   const balance = account ? account.balance : undefined;
@@ -25,7 +25,7 @@ function BalanceBox(pops: Props) {
         )}
       </div>
       {balancesDecorated.fiatBalance && (
-        <span className="text-sm font-normal text-gray-500 mb-4 ">
+        <span className="text-sm font-normal text-gray-500 mb-4">
           ~{balancesDecorated.fiatBalance}
         </span>
       )}

@@ -159,7 +159,7 @@ const DefaultView: FC<Props> = (props) => {
       )}
       <div className="p-4">
         <div className="flex space-x-4 mb-4">
-          <BalanceBox className={""} />
+          <BalanceBox />
         </div>
         <div className="flex mb-6 space-x-4">
           <Button
