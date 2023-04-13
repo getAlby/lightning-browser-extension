@@ -107,7 +107,7 @@
       },
       "umbrel": {
         "page": {
-          "instructions": "Gehe in deine Umbrel Seite zu <0>verbinde Wallet</0>. Wähle <0>lndconnect REST</0> und kopiere <0>lndconnect URL</0>. (Abhängig von deinem Setup kannst du entweder eine lokale Verbindung verwenden oder die Verbindung über TOR.)",
+          "instructions": "In deinem Lightning Node Dashboard gehst du auf <0>Brieftasche verbinden</0><1/>2. Wähle <0>REST (Tor)</0> oder <0>REST (Lokales Netzwerk)</0> Modus<1/>3. Kopiere die <0>lndconnect URL</0> und füge sie unten ein",
           "title": "Verbinde dich <0>Umbrel</0>-Knoten"
         },
         "rest_url": {
@@ -283,7 +283,7 @@
         "title": "LND mit LNC",
         "page": {
           "title": "Verbinde dich mit deinem LND Knoten",
-          "description": "Erstelle eine neue Sitzung im Terminal (litd), um eine neue Paarungsphrase zu erhalten, und gebe sie hier ein"
+          "description": "1. Öffne dein Lightning Terminal und wähle <0>Lightning Node Connect</0> in der Seitenleiste.<1/> 2. Klicke auf <0>Erstelle eine neue Sitzung</0><1/>3. Beschrifte die Sitzung, wähle dann die gewünschte Berechtigung und sende sie ab<1/>4. <0>Kopiere die Pairing-Phrase</0> und füge sie hier unten ein."
         },
         "pairing_phrase": {
           "label": "Dein Paarungssatz ",
@@ -725,7 +725,7 @@
         "create_new": "Anmelden"
       },
       "title": "Verbinden",
-      "description": "Um mit der Verwendung der Alby Erweiterung zu beginnen, verbinde deine Lightning Wallet."
+      "description": "Um die Alby Erweiterung zu nutzen, verwende dein Alby Konto oder verbinde dich mit deiner Lightning Wallet."
     },
     "discover": {
       "description": "Websites und Webapplikationen, auf denen du Alby verwenden kannst",
@@ -878,7 +878,7 @@
     "optional": "Optional",
     "feedback": "Rückmeldung",
     "error": "Fehler",
-    "connected_sites": "",
+    "connected_sites": "Verbundene Standorte",
     "loading": "Laden",
     "sats_one": "sat",
     "success": "Erfolgreich",
