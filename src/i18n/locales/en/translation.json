@@ -228,7 +228,7 @@
         "title": "Start9",
         "page": {
           "title": "Connect to your <0>Start9 Server</0>",
-          "instructions": "On your Embassy dashboard click on the <0>lightning network daemon</0> service.<1/>Select the <0>Properties</0> tab.<1/>Now copy the <0>LND Connect REST URL.</0>"
+          "instructions": "On your Embassy dashboard click on the <0>Lightning Network Daemon</0> service.<1/>Select the <0>Properties</0> tab.<1/>Now copy the <0>LND Connect REST URL.</0>"
         },
         "rest_url": {
           "label": "lndconnect REST URL",

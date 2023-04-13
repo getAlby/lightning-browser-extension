@@ -155,7 +155,7 @@
         "title": "Start9",
         "page": {
           "title": "Collega il tuo nodo Embassy",
-          "instructions": "<0>Nota:</0> Al momento supportiamo solamente LND, aggiungeremo il supporto per c-lightning in futuro!<1/>Nella dashboard di Embassy clicca sul servizio <0>lightning network daemon</0>.<1/>Seleziona il tab <0>Proprieta'</0>.<1/>Adesso copia l'<0>LND Connect REST URL.</0>"
+          "instructions": "<0>Nota:</0> Al momento supportiamo solamente LND, aggiungeremo il supporto per c-lightning in futuro!<1/>Nella dashboard di Embassy clicca sul servizio <0>Lightning Network Daemon</0>.<1/>Seleziona il tab <0>Proprieta'</0>.<1/>Adesso copia l'<0>LND Connect REST URL.</0>"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
