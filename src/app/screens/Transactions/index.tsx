@@ -1,4 +1,5 @@
 import Container from "@components/Container";
+import Loading from "@components/Loading";
 import TransactionsTable from "@components/TransactionsTable";
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -15,8 +16,12 @@ function Transactions() {
 
   const { settings, getFormattedFiat } = useSettings();
   const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const [transactionsLoading, setTransactionsLoading] =
+    useState<boolean>(false);
 
   const fetchData = useCallback(async () => {
+    setTransactionsLoading(true);
+
     try {
       // @Todo: add SWR caching? Check where to reset/mutate the cache?
       const { payments } = await api.getPayments();
@@ -34,6 +39,8 @@ function Transactions() {
     } catch (e) {
       console.error(e);
       if (e instanceof Error) toast.error(`Error: ${e.message}`);
+    } finally {
+      setTransactionsLoading(false);
     }
   }, [settings, getFormattedFiat]);
 
@@ -51,11 +58,17 @@ function Transactions() {
         {t("description")}
       </p>
 
-      <div>
-        {transactions?.length > 0 && (
-          <TransactionsTable transactions={transactions} />
-        )}
-      </div>
+      {transactionsLoading ? (
+        <div className="flex justify-center mt-12">
+          <Loading />
+        </div>
+      ) : (
+        <div>
+          {transactions?.length > 0 && (
+            <TransactionsTable transactions={transactions} />
+          )}
+        </div>
+      )}
     </Container>
   );
 }

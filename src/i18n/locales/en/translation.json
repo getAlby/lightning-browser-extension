@@ -2,12 +2,6 @@
   "translation": {
     "welcome": {
       "title": "Welcome to Alby",
-      "nav": {
-        "welcome": "Welcome",
-        "password": "Your Password",
-        "connect": "Your Lightning Account",
-        "done": "Done"
-      },
       "set_password": {
         "title": "Set an unlock password",
         "description": "This password is used to protect your wallet and provide access to the browser extension. It cannot be reset and is separate from your Alby Account password.",
@@ -43,7 +37,7 @@
     },
     "choose_path": {
       "title": "Connect",
-      "description": "To start using the Alby Extension, connect your lightning wallet.",
+      "description": "To start using the Alby Extension, use your Alby Account or connect to your lightning wallet.",
       "alby": {
         "title": "Alby Account",
         "description": "Sign up or use your existing Alby Account to get started with lightning payments in no time.",
@@ -796,7 +790,7 @@
     "settings": "Settings",
     "accounts": "Accounts",
     "discover": "Discover",
-    "websites": "Websites",
+    "connected_sites": "Connected Sites",
     "transactions": "Transactions",
     "sats_one": "sat",
     "sats_other": "sats",
