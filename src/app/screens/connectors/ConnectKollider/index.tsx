@@ -158,15 +158,6 @@ export default function ConnectKollidier({ variant, logo }: Props) {
             </>
           }
         />
-        <div className="mb-4 mt-8 md:my-8 flex justify-center gap-4 md:flex-row">
-          <Button
-            label={tCommon("actions.back")}
-            onClick={(e) => {
-              navigate(-1);
-            }}
-            className="max-sm:w-full"
-          />
-        </div>
       </div>
     </div>
   ) : (
