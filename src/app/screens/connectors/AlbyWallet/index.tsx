@@ -127,7 +127,7 @@ export default function AlbyWallet({ variant }: Props) {
         url,
         lnAddress,
       },
-      connector: "lndhub",
+      connector: "alby",
     };
 
     try {
