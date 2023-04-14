@@ -42,7 +42,7 @@ function ConnectorForm({
       )}
       {image && (
         <>
-          <div className="w-full md:w-full mb-8 lg:w-full lg:mb-0">
+          <div className="w-full mb-6">
             <img
               src={image}
               alt="Screenshot"

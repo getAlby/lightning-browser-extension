@@ -92,15 +92,17 @@ export default function ConnectLnd(props: Props) {
       onSubmit={handleSubmit}
       image="https://cdn.getalby-assets.com/connector-guides/lnc.png"
     >
-      <TextField
-        id="pairingPhrase"
-        type="password"
-        label={t("pairing_phrase.label")}
-        placeholder={t("pairing_phrase.placeholder")}
-        onChange={handleChange}
-        required
-        autoFocus={true}
-      />
+      <div className="mt-6">
+        <TextField
+          id="pairingPhrase"
+          type="password"
+          label={t("pairing_phrase.label")}
+          placeholder={t("pairing_phrase.placeholder")}
+          onChange={handleChange}
+          required
+          autoFocus={true}
+        />
+      </div>
     </ConnectorForm>
   );
 }
