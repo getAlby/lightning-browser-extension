@@ -8,6 +8,9 @@ const mockState = {
   settings: { exchange: "coindesk", currency: CURRENCIES["USD"] },
 };
 
+// eslint-disable-next-line @typescript-eslint/no-empty-function
+jest.mock("@vespaiach/axios-fetch-adapter", () => {});
+
 state.getState = jest.fn().mockReturnValue(mockState);
 
 jest.useFakeTimers().setSystemTime(new Date(1577836800000)); // Wed Jan 01 2020 08:00:00

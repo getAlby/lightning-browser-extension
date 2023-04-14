@@ -27,7 +27,7 @@ describe("nostr", () => {
 
     const bobNostr = new Nostr(bob.privateKey);
 
-    const decrypted = bobNostr.decrypt(alice.publicKey, encrypted);
+    const decrypted = await bobNostr.decrypt(alice.publicKey, encrypted);
 
     expect(decrypted).toMatch(message);
   });
@@ -42,7 +42,7 @@ describe("nostr", () => {
 
     let decrypted;
     try {
-      decrypted = carolNostr.decrypt(alice.publicKey, encrypted);
+      decrypted = await carolNostr.decrypt(alice.publicKey, encrypted);
     } catch (e) {
       decrypted = "error decrypting message";
     }

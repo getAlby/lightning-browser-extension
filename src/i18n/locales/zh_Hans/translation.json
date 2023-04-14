@@ -1,12 +1,6 @@
 {
   "translation": {
     "welcome": {
-      "nav": {
-        "welcome": "欢迎",
-        "password": "你的密码",
-        "done": "已完成",
-        "connect": "你的闪电账户"
-      },
       "set_password": {
         "title": "设置解锁密码",
         "description": "此密码用于保护你的钱包并提供对浏览器扩展程序的访问权限。它无法重置，而且与你的 Alby 帐户密码不同。",
@@ -24,13 +18,13 @@
       },
       "test_connection": {
         "ready": "真棒，你已准备就绪!",
-        "initializing": "正在初始化你的账户。请耐心等待，可能需要几分钟。。。",
+        "initializing": "正在初始化你的帐户。请耐心等待，可能需要几分钟。。。",
         "connection_error": "连接错误",
         "review_connection_details": "请检查你的连接详情。",
         "connection_taking_long": "尝试连接花费的时间不预期的要长。。。你的详情正确吗？你的节点是否可达？",
         "contact_support": "如果你需要帮助，请联系support@getalby.com",
         "actions": {
-          "delete_edit_account": "删除无效账户并重新编辑"
+          "delete_edit_account": "删除无效帐户并重新编辑"
         }
       },
       "title": "欢迎使用Alby"
@@ -41,7 +35,7 @@
           "connection_failed": "连接失败。你的LND凭据是否正确？"
         },
         "page": {
-          "description": "你需要你的节点URL和一个具有读取和发送权限的macaroon（例如：admin.macaroon）",
+          "description": "你需要你的节点URL和一个具有读取和发送权限的macaroon（例如admin.macaroon）",
           "title": "连接你的LND节点"
         },
         "url": {
@@ -177,8 +171,8 @@
       },
       "raspiblitz": {
         "page": {
-          "instructions2": "选择<0>CONNECT</0>。<1/>选择<0>EXPORT</0>。<1/>选择<0>HEX</0>。<1/>复制<0>adminMacaroon</0>。<1/>将Macaroon粘贴到下面的输入中。",
-          "instructions1": "你需要你的节点洋葱地址，端口，和一个具有读取和发送权限的macaroon（例如admin.macaroon）。<1/><1/><0>SSH</0>进入你的<0>RaspiBlitz</0>.<1/>运行命令<0>sudo cat /mnt/hdd/tor/lndrest/hostname</0>。<1/>复制并粘贴<0>.onion</0>地址到下面的输入中。<1/>在onion地址后面添加你的<0>端口</0>，默认端口是<0>:8080</0>。",
+          "instructions2": "将（admin）<0>macaroon</0>粘贴到下面的输入中。",
+          "instructions1": "按照以下步骤操作：<1/> 1.<0>SSH</0>进入你的<0>Raspiblitz</0><1/>2。从列表中选择<0>Connect Apps & Show Credentials</0><1/><0/>3。选择 <0>Connect Alby to this node</0><1/>4。按 <0>OK</0> 以显示连接凭据<1/><1/>在下面的输入中复制并粘贴<0>REST API 主机</0>或 <0>.onion</0> 地址以通过 Tor 连接。",
           "title": "连接你的<0>RaspiBlitz</0>节点"
         },
         "rest_api_host": {
@@ -191,7 +185,7 @@
         "title": "Bluewallet",
         "page": {
           "title": "连接BlueWallet",
-          "description": "在BlueWallet中，选择你要连接的钱包，打开它，点击\"...\"，点击导出/备份，显示二维码，用摄像头扫描。"
+          "description": "在BlueWallet中，选择你要连接的钱包，打开它，点击\"...\"，点击导出/备份，显示二维码并使用摄像头扫描。"
         },
         "uri": {
           "label": "BlueWallet导出URI"
@@ -248,7 +242,7 @@
         "title": "myNode",
         "page": {
           "title": "连接<0>myNode</0>",
-          "instructions": "在你的myNode主页上点击你的<0>Lightning</0>服务的<0>Wallet</0>按钮。<1/> 现在点击<0>Status</0>标签下的<0>Pair Wallet</0>按钮。<1/>选择下拉菜单并选择一个配对选项。根据你的设置，你可以使用<0>闪电（REST +本地IP）</0>连接或<0>闪电（REST + Tor）</0>连接。"
+          "instructions": "在你的myNode主页上点击你的<0>Lightning</0>服务的<0>Wallet</0>按钮。<1/> 现在点击<0>Status</0>标签下的<0>Pair Wallet</0>按钮。出现提示时输入密码。<1/>选择下拉菜单并选择一个配对选项。根据你的设置，你可以使用<0>闪电（REST +本地IP）</0>连接或<0>闪电（REST + Tor）</0>连接。"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -268,23 +262,32 @@
       },
       "kollider": {
         "title": "Kollider",
-        "page": {
-          "title": "连接你的Kollider账户",
-          "description": "还没有帐户？立即<0>注册</0>！"
-        },
-        "description": "登录你的Kollider账户",
+        "description": "登录你的Kollider帐户",
         "username": {
-          "label": "输入你的Kollider用户名"
-        },
-        "password": {
-          "label": "输入你的Kollider密码"
+          "label": "用户名"
         },
         "currency": {
-          "label": "选择你的货币账户"
+          "label": "选择你的货币帐户"
         },
         "errors": {
-          "connection_failed": "连接失败。你确定账户数据是正确的吗？"
-        }
+          "connection_failed": "连接失败。你确定帐户数据是正确的吗？",
+          "user_already_exists": "用户名已存在",
+          "registration_limit_exceeded": "超过了注册限制，请稍后再试。"
+        },
+        "choose_path": {
+          "create_new": "注册",
+          "description": "登录或注册一个新的Kollider帐户并连接到Alby。",
+          "title": "连接到你的Kollider钱包"
+        },
+        "create": {
+          "title": "创建你的Kollider帐户并连接到Alby",
+          "description": "创建一个新的Kollider帐户来发送、接收和交易比特币。"
+        },
+        "login": {
+          "title": "连接到你的Kollider帐户",
+          "description": "还没有帐户？立即<0>注册</0>！"
+        },
+        "warning": "⚠️ 请确保你将你的凭证安全地保存在密码管理器中。没有这些凭证，你的帐户将无法恢复。"
       },
       "title": "连接闪电钱包"
     },
@@ -293,7 +296,7 @@
       "allowance_view": {
         "recent_transactions": "近期交易",
         "no_transactions": "<0>{{name}}</0>还没有交易。",
-        "sats_used": "已使用的sats",
+        "sats_used": "已使用的聪",
         "allowance": "限额"
       },
       "default_view": {
@@ -314,9 +317,9 @@
       }
     },
     "accounts": {
-      "title": "账户",
+      "title": "帐户",
       "actions": {
-        "add_account": "添加账户"
+        "add_account": "添加帐户"
       },
       "account_view": {
         "nostr": {
@@ -328,24 +331,26 @@
             "label": "公钥"
           },
           "generate_keys": {
-            "screen_reader": "为你的账户生成一个新的Nostr密钥",
+            "screen_reader": "为你的帐户生成一个新的Nostr密钥",
             "actions": {
               "random_keys": "生成随机密钥",
               "derived_keys": "从帐户派生密钥"
             },
             "title": "生成新的 Nostr 密钥",
-            "hint": "你可以从这个账户的详细信息中生成一个随机密钥或派生密钥（使用一个签名的规范短语）。 <0>了解更多\"</0>"
+            "hint": "你可以从这个帐户的详细信息中生成一个随机密钥或派生密钥（使用一个签名的规范短语）。 <0>了解更多\"</0>"
           },
           "actions": {
             "generate": "生成新密钥"
           },
           "private_key": {
-            "subtitle": "粘贴你的私钥或生成一个新的。请确保在生成新的私钥之前备份你的私钥。 <0>了解更多\"</0>",
-            "title": "管理你的钥匙",
-            "warning": "这将删除你的旧私钥。是否确定？",
+            "subtitle": "粘贴你的私钥或生成一个新的。<0>了解更多»</0>",
+            "title": "管理你的密钥",
+            "warning": "请输入帐户名称以确认删除私钥：",
             "success": "私钥已加密并成功保存。",
             "successfully_removed": "私钥成功删除。",
-            "label": "私钥"
+            "label": "私钥",
+            "backup": "⚠️ 不要忘记备份你的私钥!不备份你的密钥可能会导致失去访问权。",
+            "failed_to_remove": "输入的帐户名称不匹配，你的旧私钥已被恢复。"
           },
           "hint": "是一个简单而开放的协议，旨在创建抗审查的社交网络。 Nostr 使用加密密钥。你可以使用你的密钥对内容进行签名并将其发送到多个中继。你可以使用 Alby 来管理你的 Nostr 密钥。许多 Nostr 应用程序将允许你简单地使用 Alby 扩展中的密钥。"
         },
@@ -354,7 +359,7 @@
           "export_uri": "LNDHub凭证URI",
           "tip_mobile": "提示：用你的移动设备使用这个钱包",
           "scan_qr": "通过扫描二维码将这个钱包导入Zeus或BlueWallet。",
-          "title": "导出账户",
+          "title": "导出帐户",
           "screen_reader": "导出帐户详情",
           "waiting": "等待LndHub的数据...",
           "your_ln_address": "你的闪电地址："
@@ -385,8 +390,8 @@
         "invalid_password": "密码无效"
       },
       "unlock_error": {
-        "help": "你的账户数据是用你的解锁密码加密的。如果你真的忘记了你的解锁密码，你必须重置并再次添加你的闪电账户。",
-        "link": "立即重置并添加新账户"
+        "help": "你的帐户数据是用你的解锁密码加密的。如果你真的忘记了你的解锁密码，你必须重置并再次添加你的闪电帐户。",
+        "link": "立即重置并添加新帐户"
       },
       "unlock_password": "你的解锁密码"
     },
@@ -416,12 +421,12 @@
         "title": "LNURL-认证",
         "legacy_lnurl_auth": {
           "title": "LNDhub 和 LNbits 的旧签名方式",
-          "subtitle": "用LNDhub（如BlueWallet）和LNbits账户进行的消息签署和登录已经改变（2022年3月）。如果你用这些账户登录，你仍然可以启用旧的签名方法。这个选项以后会被删除，请确保切换到新的登录方式。"
+          "subtitle": "用LNDhub（如BlueWallet）和LNbits账户进行的消息签署和登录已经改变（2022年3月）。如果你用这些帐户登录，你仍然可以启用旧的签名方法。这个选项以后会被删除，请确保切换到新的登录方式。"
         },
-        "hint": "是一个通用的认证协议。它使用数字签名对用户进行认证。该协议不需要任何其他识别信息，如密码、电子邮件、用户名或类似信息。通过Alby，你可以使用你的闪电账户安全地登录网站。为了与其他钱包兼容，我们不得不做一些改变，你可以在这里进行配置。 <0>理想情况下，所有这些选项都是关闭的。</0>仅当你有旧帐户时才使用它们。",
+        "hint": "是一个通用的认证协议。它使用数字签名对用户进行认证。该协议不需要任何其他识别信息，如密码、电子邮件、用户名或类似信息。通过Alby，你可以使用你的闪电帐户安全地登录网站。为了与其他钱包兼容，我们不得不做一些改变，你可以在这里进行配置。 <0>理想情况下，所有这些选项都是关闭的。</0>仅当你有旧帐户时才使用它们。",
         "legacy_lnurl_auth_202207": {
-          "subtitle": "LNURL-auth的密钥生成已经改变（2022年7月）。Alby与其他实现不兼容。这被改变了，但现在使用不同的登录密钥。如果你之前使用LNURL-auth登录，你仍然可以启用旧方法。这个选项以后会被删除，请务必切换到新的登录方式。",
-          "title": "旧版 LNURL-Auth"
+          "subtitle": "LNURL-认证的密钥生成已经改变（2022年7月）。Alby与其他实现不兼容。这被改变了，但现在使用不同的登录密钥。如果你之前使用LNURL-认证登录，你仍然可以启用旧方法。这个选项以后会被删除，请务必切换到新的登录方式。",
+          "title": "旧版 LNURL-认证"
         }
       },
       "browser_notifications": {
@@ -500,7 +505,7 @@
       "receiver": {
         "label": "将付款发送至"
       },
-      "success": "付款已发送! Preimage: {{preimage}}",
+      "success": "付款已发送！原像：{{preimage}}",
       "amount": {
         "label": "金额(聪)"
       },
@@ -517,7 +522,7 @@
     "send": {
       "input": {
         "hint": "发票、闪电地址或LNURL",
-        "label": "接受者"
+        "label": "接收者"
       },
       "title": "发送",
       "qrcode": {
@@ -530,7 +535,7 @@
         "heading": "你是否想登录"
       },
       "title": "认证",
-      "success": "登录成功 {{name}}",
+      "success": "成功登录 {{name}}",
       "errors": {
         "status": "错误：认证状态不正常"
       }
@@ -592,7 +597,37 @@
       "block_and_ignore": "阻止并忽略 {{host}}",
       "content": "该网站要求你签署:",
       "allow_sign": "允许{{host}}签署：",
-      "block_added": "已将{{host}}添加到屏蔽列表，请重新加载网站。"
+      "block_added": "已将{{host}}添加到屏蔽列表，请重新加载网站。",
+      "allow_sign_event": "允许 {{host}} 签署 {{kind}}：",
+      "view_details": "查看详情",
+      "hide_details": "隐藏详情",
+      "no_content": "(无内容)",
+      "kinds": {
+        "unknown": "nostr 事件类型 {{kind}}",
+        "1": "短文便条",
+        "3": "联系人",
+        "4": "加密的直接消息",
+        "5": "删除事件",
+        "7": "回应",
+        "8": "徽章奖励",
+        "1984": "报告",
+        "9734": "电击请求",
+        "9735": "电击",
+        "10002": "中继器列表元数据",
+        "22242": "客户端认证",
+        "30008": "个人资料徽章",
+        "30023": "长篇内容",
+        "30078": "应用程序特定数据",
+        "2": "推荐中继器",
+        "30009": "徽章定义",
+        "0": "元数据",
+        "40": "频道创建",
+        "43": "频道隐藏消息",
+        "44": "频道静音用户",
+        "24133": "nostr 连接",
+        "41": "频道元数据",
+        "42": "频道消息"
+      }
     },
     "lnurlpay": {
       "amount": {
@@ -625,7 +660,7 @@
     },
     "choose_path": {
       "title": "连接",
-      "description": "要使用Alby进行在线支付，请将Alby连接到你的闪电网络钱包。",
+      "description": "要开始使用Alby进行在线支付，请将Alby连接到你的闪电网络钱包。",
       "other": {
         "title": "其他钱包",
         "description": "连接到你现有的闪电钱包或节点，可从各种连接器中选择。",
@@ -633,9 +668,9 @@
         "connect": "连接"
       },
       "alby": {
-        "description": "注册或使用您现有的Alby账户，立即开始闪电支付。",
+        "description": "注册或使用你现有的Alby帐户，立即开始闪电支付。",
         "create_new": "注册",
-        "title": "Alby"
+        "title": "Alby帐户"
       }
     },
     "discover": {
@@ -643,10 +678,11 @@
         "trading": "交易",
         "miscellaneous": "杂项",
         "shopping": "购物",
-        "entertaiment": "娱乐",
+        "entertainment": "娱乐",
         "gaming": "游戏",
         "showcases": "展示",
-        "nostr": "Nostr"
+        "nostr": "Nostr",
+        "nodeManagement": "节点管理"
       },
       "description": "可以使用 Alby 的网站和网络应用程序",
       "title": "探索闪电⚡️生态系统",
@@ -659,7 +695,7 @@
         "pin": {
           "description3": "就这样！要访问 Alby，只需点击 Alby 图标",
           "title": "📌 固定你的 Alby 扩展",
-          "description1": "<0>要轻松访问阿尔比，请点击浏览器右上角的扩展图标</0> <1/> <2>",
+          "description1": "<0>要轻松访问Alby，请点击浏览器右上角的扩展图标</0> <1/> <2>",
           "description2": "在扩展列表中，找到 Alby 并点击固定图标以将其固定到工具栏"
         },
         "top_up_wallet": {
@@ -672,20 +708,20 @@
         "description": "一些让你开始嗡嗡作响的小贴士🐝",
         "demo": {
           "title": "🕹️ 试用 Alby 演示",
-          "description": "在我们的演示网站上发现你可以用Alby做的所有事情",
+          "description": "在我们的演示网站上发现你可以用Alby执行的所有操作",
           "label1": "试一试"
         }
       }
     },
     "alby": {
       "pre_connect": {
-        "create_account": "创建一个新的Alby账户以发送和接收比特币付款。",
+        "create_account": "创建一个新的Alby帐户以发送和接收比特币付款。",
         "title": "你的Alby帐户",
-        "login_account": "登录以连接你现有的Alby账户。",
+        "login_account": "登录以连接你现有的Alby帐户。",
         "errors": {
-          "create_wallet_error1": "登录或创建新账户失败。",
+          "create_wallet_error1": "登录或创建新帐户失败。",
           "create_wallet_error2": "如果你需要帮助，请联系support@getalby.com",
-          "create_wallet_error": "登录或创建新账户失败。如果你需要帮助，请联系 support@getalby.com"
+          "create_wallet_error": "登录或创建新帐户失败。如果你需要帮助，请联系 support@getalby.com"
         },
         "forgot_password": "忘记密码？",
         "host_wallet": "我们为你托管的闪电钱包！",
@@ -716,7 +752,7 @@
           }
         },
         "optional_lightning_note": {
-          "part1": "你的Alby账户还附带一个可选的",
+          "part1": "你的Alby帐户还附带一个可选的",
           "part2": "闪电地址",
           "part3": "。这是任何人都可以轻松地在闪电网络上向你发送比特币的一个方法。",
           "part4": "了解更多"
@@ -727,8 +763,13 @@
       "content_message": {
         "heading": "向节点请求通道"
       },
-      "title": "通道要求",
+      "title": "通道请求",
       "success": "通道请求已成功发送到 {{name}}"
+    },
+    "transactions": {
+      "list_empty": "尚无交易。",
+      "title": "交易",
+      "description": "你所有帐户的传出交易"
     }
   },
   "common": {
@@ -737,7 +778,7 @@
       "receive": "收款",
       "close": "关闭",
       "back": "返回",
-      "next": "下一个",
+      "next": "下一步",
       "cancel": "取消",
       "delete": "删除",
       "edit": "编辑",
@@ -753,7 +794,8 @@
       "copy": "复制",
       "log_in": "登录",
       "receive_again": "接收另一笔付款",
-      "remember": "记住我的选择，不要再问"
+      "remember": "记住我的选择，不要再问",
+      "transactions": "交易"
     },
     "errors": {
       "connection_failed": "连接失败",
@@ -761,10 +803,10 @@
     },
     "feedback": "反馈",
     "success": "成功",
-    "description_full": "完整描述",
+    "description_full": "详细描述",
     "password": "密码",
     "settings": "设置",
-    "websites": "网站",
+    "connected_sites": "",
     "amount": "金额",
     "optional": "可选",
     "description": "描述",
@@ -780,7 +822,14 @@
     "advanced": "高级",
     "accounts": "帐户",
     "confirm_password": "确认密码",
-    "discover": "发现"
+    "discover": "发现",
+    "range": {
+      "between": "在 {{min}} 和 {{max}} 之间",
+      "lessThan": "< {{max}}",
+      "greaterThan": ">{{min}}"
+    },
+    "transactions": "交易",
+    "balance": "余额"
   },
   "components": {
     "toasts": {
@@ -801,8 +850,10 @@
       "title": "切换帐户",
       "options": {
         "account": {
-          "add": "添加新账户",
-          "manage": "管理账户"
+          "add": "添加新帐户",
+          "manage": "管理帐户",
+          "account_settings": "帐户设置",
+          "go_to_web_wallet": "管理你的 Alby 帐户"
         }
       },
       "screen_reader": "切换下拉菜单"
@@ -867,6 +918,18 @@
     "publishers_table": {
       "used": "已使用",
       "payments": "付款"
+    },
+    "companion_download_info": {
+      "heading": "你想如何连接到TOR网络？",
+      "download": "下载",
+      "tor_native": {
+        "title": "TOR（本地）",
+        "description": "如果该浏览器已经连接到TOR网络，请选择该选项。"
+      },
+      "companion": {
+        "title": "配套应用",
+        "description": "将浏览器连接到 TOR 网络的轻量级应用程序。"
+      }
     }
   },
   "permissions": {
@@ -877,7 +940,7 @@
       "getpublickey": "读取你的公钥。"
     },
     "commando": {
-      "bkpr-listbalances": "所有当前和历史账户余额列表。",
+      "bkpr-listbalances": "所有当前和历史帐户余额列表。",
       "checkmessage": "验证该签名是由一个给定的节点产生的。",
       "decode": "解码一个bolt11/bolt12/rune字符串。",
       "connect": "与另一个节点建立新的连接。",
@@ -927,7 +990,9 @@
       "routermc": "读取内部任务控制状态。",
       "queryroutes": "查询可能的途径。",
       "verifymessage": "通过消息验证签名。",
-      "decodepayreq": "解码支付请求字符串。"
+      "decodepayreq": "解码支付请求字符串。",
+      "addholdinvoice": "创建新的 HODL 发票。",
+      "settleinvoice": "结算已接受的发票。"
     },
     "lnd": {
       "sendtoroute": "通过指定的途径付款。",
@@ -951,7 +1016,9 @@
       "getinfo": "获取节点信息。",
       "listchannels": "获取所有开放频道的描述。",
       "connectpeer": "建立与远程对等点的连接。",
-      "openchannel": "开通新渠道。"
+      "openchannel": "开通新渠道。",
+      "addholdinvoice": "创建新的HODL发票。",
+      "settleinvoice": "结算已接受的发票。"
     }
   }
 }

@@ -10,7 +10,7 @@ const enable = async (
   message: MessageAllowanceEnable,
   sender: Runtime.MessageSender
 ) => {
-  const isUnlocked = state.getState().isUnlocked();
+  const isUnlocked = await state.getState().isUnlocked();
   const host = message.origin.host || message.args.host;
   const allowance = await db.allowances
     .where("host")

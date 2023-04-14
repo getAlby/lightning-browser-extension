@@ -33,9 +33,12 @@ function Discover() {
         {t("discover.description")}
       </p>
 
-      <div className="mb-12">
-        {websites.map(({ title, items }) => (
-          <div className="mb-10" key={title}>
+      <div>
+        {websites.map(({ title, items }, index) => (
+          <div
+            className={index !== websites.length - 1 ? "mb-10" : ""}
+            key={title}
+          >
             <h4 className="mb-2 text-xl font-bold dark:text-white">
               {t(`discover.list.${title as "trading"}`)}
             </h4>
@@ -43,7 +46,7 @@ function Discover() {
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
               {items.map(({ title, subtitle, logo, url }) => (
                 <a key={url} href={url} target="_blank" rel="noreferrer">
-                  <div className="bg-white dark:bg-surface-02dp shadow flex p-4 h-24 rounded-lg hover:bg-gray-50 cursor-pointer w-full">
+                  <div className="bg-white dark:bg-surface-02dp shadow flex p-4 h-24 rounded-lg hover:bg-gray-50 dark:hover:bg-neutral-800 cursor-pointer w-full">
                     <div className="flex space-x-3">
                       <img
                         src={logo}

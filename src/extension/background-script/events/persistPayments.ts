@@ -7,7 +7,7 @@ const persistSuccessfulPayment = async (
   data: PaymentNotificationData
 ) => {
   const name = data?.origin?.name;
-  const host = data?.origin?.host;
+  const host = data?.origin?.host || "";
   const location = data?.origin?.location;
   const accountId = data.accountId;
   const paymentResponse = data.response;

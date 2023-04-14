@@ -2,12 +2,6 @@
   "translation": {
     "welcome": {
       "title": "Bienvenue sur Alby",
-      "nav": {
-        "welcome": "Bienvenue",
-        "password": "Mot de passe",
-        "connect": "Votre compte Lightning",
-        "done": "Fait"
-      },
       "set_password": {
         "title": "Définir un mot de passe de déverrouillage",
         "description": "Ce mot de passe est utilisé pour protéger votre portefeuille et donner accès à l'extension du navigateur. Il ne peut pas être réinitialisé et est distinct du mot de passe de votre compte Alby.",
@@ -285,15 +279,8 @@
       "kollider": {
         "title": "Kollider",
         "description": "Connectez-vous à votre compte Kollider",
-        "page": {
-          "title": "Connectez-vous à votre compte Kollider",
-          "description": "Vous n'avez pas encore de compte ? <0>Sign up</0> maintenant !"
-        },
         "username": {
           "label": "Saisissez votre nom d'utilisateur pour Kollider"
-        },
-        "password": {
-          "label": "Entrez votre mot de passe Kollider"
         },
         "currency": {
           "label": "Sélectionnez votre compte en devise"
@@ -635,7 +622,7 @@
       "list": {
         "trading": "Commerce",
         "gaming": "Jeux",
-        "entertaiment": "Divertissement",
+        "entertainment": "Divertissement",
         "shopping": "Achats",
         "miscellaneous": "Divers",
         "showcases": "Vitrines",
@@ -744,7 +731,7 @@
     "settings": "Paramètres",
     "accounts": "Comptes",
     "discover": "Découvrir",
-    "websites": "Sites Internet",
+    "connected_sites": "",
     "sats_one": "sat",
     "sats_other": "sats",
     "loading": "chargement",

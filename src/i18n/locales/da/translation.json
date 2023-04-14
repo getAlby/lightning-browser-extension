@@ -2,12 +2,6 @@
   "translation": {
     "welcome": {
       "title": "Velkommen til Alby",
-      "nav": {
-        "welcome": "Velkommen",
-        "password": "Din adgangskode",
-        "connect": "Din Lightning-konto",
-        "done": "Færdig"
-      },
       "set_password": {
         "title": "Angiv en nøglekode",
         "description": "Dette kodeord bruges til at beskytte din wallet og giver adgang til browserudvidelsen. Det kan ikke nulstilles, og er ikke den samme som adgangskoden til din Alby-konto.",
@@ -285,15 +279,8 @@
       "kollider": {
         "title": "Kollider",
         "description": "Log ind på din Kollider-konto",
-        "page": {
-          "title": "Opret forbindelse til din Kollider-konto",
-          "description": "Har du ikke en konto? <0>Opret en konto</0> nu!"
-        },
         "username": {
           "label": "Indtast dit Kollider-brugernavn"
-        },
-        "password": {
-          "label": "Indtast din Kollider adgangskode"
         },
         "currency": {
           "label": "Vælg din kontovaluta"
@@ -634,7 +621,7 @@
       "list": {
         "trading": "Handel",
         "gaming": "Spil",
-        "entertaiment": "Underholdning",
+        "entertainment": "Underholdning",
         "shopping": "Indkøb",
         "miscellaneous": "Diverse",
         "showcases": "Eksempler",
@@ -743,7 +730,7 @@
     "settings": "Indstillinger",
     "accounts": "Konti",
     "discover": "Opdag",
-    "websites": "Hjemmesider",
+    "connected_sites": "",
     "sats_one": "sat",
     "sats_other": "sat",
     "loading": "indlæser",
