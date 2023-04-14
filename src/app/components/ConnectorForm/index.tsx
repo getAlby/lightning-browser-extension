@@ -58,7 +58,7 @@ function ConnectorForm({
     <form onSubmit={onSubmit}>
       <div className="max-w-[600px] mx-auto relative mt-14 bg-white dark:bg-surface-02dp p-10 shadow rounded-lg">
         <div className="flex items-center mb-4">
-          {logo && <img src={logo} className="w-16 mr-4" />}
+          {logo && <img src={logo} className="w-16 mr-4 rounded-lg" />}
           {/*
               TODO: this can be simplified to always wrap the title in h1, without checking if it
                       is string or Trans component, so we centralize the styles of the h1 tag in
