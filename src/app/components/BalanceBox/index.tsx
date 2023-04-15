@@ -5,27 +5,22 @@ type Props = {
 };
 
 function BalanceBox(props: Props) {
-  const { balancesDecorated, account } = useAccount();
-  const hasFiatBalance = Boolean(balancesDecorated.fiatBalance);
-  const balance = account ? account.balance : undefined;
-  const currency = account ? account.currency : undefined;
+  const { balancesDecorated } = useAccount();
+  const balanceParts = balancesDecorated.accountBalance.split(" ");
 
   return (
     <div
-      className={`w-full flex flex-col items-center justify-center bg-white dark:bg-surface-02dp dark:text-white shadow rounded-md  ${
-        hasFiatBalance ? "" : "min-h-[88px]"
-      }`}
+      className={`w-full flex flex-col items-center justify-center dark:text-white p-4`}
     >
-      <div className={hasFiatBalance ? "mt-4 mb-2" : "mt-0 mb-0"}>
-        {balance && (
-          <span className="text-xl font-medium ">
-            {balance.toLocaleString()}
-            <span className="text-xl font-normal m-1">{currency}</span>
-          </span>
-        )}
-      </div>
+      {balancesDecorated.accountBalance && (
+        <div className="text-xl">
+          <span className="font-medium slashed-zero">{balanceParts[0]}</span>
+          <span>&nbsp;{balanceParts[1]}</span>
+        </div>
+      )}
+
       {balancesDecorated.fiatBalance && (
-        <span className="text-sm font-normal text-gray-500 mb-4">
+        <span className="text-sm text-gray-500 mt-2">
           ~{balancesDecorated.fiatBalance}
         </span>
       )}
