@@ -149,7 +149,7 @@
         "title": "Start9",
         "page": {
           "title": "Připojení k vašemu uzlu <0>Embassy</0>",
-          "instructions": "<0>Pozn.:</0> Aktuálně podporujeme pouze LND, ale v budoucnu plánujeme přidávat podporu c-lightning!<1/>V dashboardu vašeho Embassy zvolte službu <0>lightning network daemon</0>.<1/>Vyberte záložku <0>Vlastnosti (Properties)</0>.<1/>Následně zkopírujte <0>LND Connect REST URL.</0>"
+          "instructions": "<0>Pozn.:</0> Aktuálně podporujeme pouze LND, ale v budoucnu plánujeme přidávat podporu c-lightning!<1/>V dashboardu vašeho Embassy zvolte službu <0>Lightning Network Daemon</0>.<1/>Vyberte záložku <0>Vlastnosti (Properties)</0>.<1/>Následně zkopírujte <0>LND Connect REST URL.</0>"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
