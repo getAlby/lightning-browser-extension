@@ -1,12 +1,6 @@
 {
   "translation": {
     "welcome": {
-      "nav": {
-        "welcome": "Bienvenido",
-        "password": "Su Contraseña",
-        "connect": "Tu cuenta Lightning",
-        "done": "Hecho"
-      },
       "set_password": {
         "title": "Proteja su billetera",
         "description": "Esta contraseña se utiliza para proteger su monedero y proporcionar acceso a la extensión del navegador. No se puede restablecer y es independiente de la contraseña de su cuenta de Alby.",

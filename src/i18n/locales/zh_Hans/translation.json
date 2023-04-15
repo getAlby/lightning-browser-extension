@@ -1,12 +1,6 @@
 {
   "translation": {
     "welcome": {
-      "nav": {
-        "welcome": "欢迎",
-        "password": "你的密码",
-        "done": "已完成",
-        "connect": "你的闪电帐户"
-      },
       "set_password": {
         "title": "设置解锁密码",
         "description": "此密码用于保护你的钱包并提供对浏览器扩展程序的访问权限。它无法重置，而且与你的 Alby 帐户密码不同。",

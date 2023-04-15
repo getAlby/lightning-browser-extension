@@ -1,12 +1,6 @@
 {
   "translation": {
     "welcome": {
-      "nav": {
-        "welcome": "Willkommen",
-        "password": "Dein Passwort",
-        "connect": "Dein Lightning Konto",
-        "done": "Fertig"
-      },
       "set_password": {
         "title": "Passwort zum Entsperren festlegen",
         "description": "Dieses Passwort wird verwendet, um deine Wallet zu schützen und den Zugriff auf die Browser-Erweiterung zu ermöglichen. Es kann nicht zurückgesetzt werden und ist unabhängig von Ihrem Alby Konto Passwort.",
@@ -165,7 +159,7 @@
       },
       "start9": {
         "page": {
-          "instructions": "<0>Hinweis: Derzeit unterstützen wir nur LND, aber wir werden in Zukunft c-lightning Unterstützung hinzufügen!<1/>Klicke auf deinem Embassy Dashboard auf den Dienst <0>lightning network Daemon. <1/>Wähle die Registerkarte <0>Eigenschaften.<1/>Kopiere nun die <0>LND Connect REST URL.",
+          "instructions": "<0>Hinweis: Derzeit unterstützen wir nur LND, aber wir werden in Zukunft c-lightning Unterstützung hinzufügen!<1/>Klicke auf deinem Embassy Dashboard auf den Dienst <0>Lightning Network Daemon</0><1/>Wähle die Registerkarte <0>Eigenschaften</0>.<1/>Kopiere nun die <0>LND Connect REST URL</0>.",
           "title": "Verbinde mit deinem <0>Embassy</0> Knoten"
         },
         "rest_url": {
