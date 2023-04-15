@@ -116,6 +116,7 @@ export default function ConnectLndHub({
           title="lndhub://..."
           value={formData.uri}
           onChange={handleChange}
+          autoFocus={true}
         />
       </div>
       {formData.uri.match(/\.onion/i) && (

@@ -11,6 +11,7 @@ import Reddit from "./Reddit";
 import SoundCloud from "./SoundCloud";
 import StackOverflow from "./StackOverflow";
 import Substack from "./Substack";
+import Twitch from "./Twitch";
 import Twitter from "./Twitter";
 import Vida from "./Vida";
 import VimeoVideo from "./VimeoVideo";
@@ -34,6 +35,7 @@ const enhancements = [
   Substack,
   GeyserProject,
   Vida,
+  Twitch,
 
   // Monetization must likely always be the last one as this is the fallback option if no specific enhancement matched
   Monetization,

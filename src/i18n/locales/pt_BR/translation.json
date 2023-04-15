@@ -256,6 +256,16 @@
       "title": "Conectar Carteira Bitcoin",
       "kollider": {
         "title": "Kollider"
+      },
+      "lnc": {
+        "page": {
+          "title": "Conecte no servidor LND usando LNC",
+          "description": "Crie uma nova sessão no terminal (litd) para obter uma nova frase de pareamento e insira-a aqui"
+        },
+        "title": "LND usando LNC",
+        "pairing_phrase": {
+          "label": "Frase de pareamento "
+        }
       }
     },
     "home": {
@@ -621,21 +631,21 @@
       "list": {
         "trading": "Negociação",
         "gaming": "Jogos",
-        "entertaiment": "Entretenimento",
+        "entertainment": "Entretenimento",
         "shopping": "Compras",
         "miscellaneous": "Outros",
         "nostr": "Nostr"
       },
       "tips": {
         "top_up_wallet": {
-          "description": "Crie uma fatura relâmpago, envie alguns bitcoins para você mesmo e comece a usar a Alby",
+          "description": "Crie uma fatura relâmpago e envie alguns bitcoins para você mesmo",
           "label2": "Comprar Bitcoin",
           "label1": "Receber Bitcoin",
           "title": "⚡️ Adicione fundos na sua carteira"
         },
         "pin": {
           "title": "📌 Fixar extensão Alby",
-          "description1": "<0>Para acessar a Alby facilmente, clique no ícone da extensão</0> <1/> <2>no canto superior direito do seu navegador</2>",
+          "description1": "<0>Para acessar a Alby, clique no ícone da extensão</0> <1/> <2>no canto superior direito do seu navegador</2>",
           "description2": "Na lista de extensões, localize a Alby e clique no ícone de fixação para fixá-lo na barra de ferramentas do navegador",
           "description3": "É isso! Agora é só clicar no ícone da Alby"
         },
@@ -650,7 +660,7 @@
           "label1": "Experimente"
         },
         "title": "Sua carteira Alby está pronta",
-        "description": "Algumas dicas para você iniciar na Alby 🐝"
+        "description": "Algumas dicas para você começar a usar a Alby 🐝"
       }
     },
     "choose_path": {
@@ -724,7 +734,7 @@
     "success": "Sucesso",
     "error": "Erro",
     "settings": "Configurações",
-    "websites": "Sites",
+    "connected_sites": "",
     "sats_one": "sat",
     "sats_other": "sats",
     "loading": "carregando",
@@ -775,7 +785,8 @@
       "lessThan": "< {{max}}",
       "greaterThan": "> {{min}}"
     },
-    "transactions": "Transações"
+    "transactions": "Transações",
+    "balance": "Saldo"
   },
   "components": {
     "allowance_menu": {
@@ -844,11 +855,13 @@
       }
     },
     "account_menu": {
-      "title": "Selecionar conta",
+      "title": "Trocar conta",
       "options": {
         "account": {
           "add": "Adicionar nova conta",
-          "manage": "Gerenciar contas"
+          "manage": "Gerenciar contas",
+          "account_settings": "Configurações da conta",
+          "go_to_web_wallet": "Gerenciar sua conta Alby"
         }
       }
     },
@@ -874,6 +887,9 @@
       "signmessage": "Assinar mensagem com sua chave.",
       "nip04decrypt": "Descriptografar dados.",
       "nip04encrypt": "Criptografar dados."
+    },
+    "lnc": {
+      "openchannel": ""
     }
   }
 }

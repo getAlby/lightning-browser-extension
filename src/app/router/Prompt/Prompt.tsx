@@ -126,7 +126,7 @@ const Layout = () => {
   return (
     <>
       <ToastContainer autoClose={10000} hideProgressBar={true} />
-      <div className="px-4 py-2 bg-white flex border-b border-gray-200 dark:bg-surface-02dp dark:border-neutral-500">
+      <div className="px-4 py-2 justify-end bg-white flex border-b border-gray-200 dark:bg-surface-02dp dark:border-neutral-500">
         <AccountMenu showOptions={false} />
       </div>
 
