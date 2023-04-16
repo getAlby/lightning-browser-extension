@@ -120,8 +120,8 @@
       "start9": {
         "title": "Cuenta Start9",
         "page": {
-          "title": "Conecta tu nodo <0>Embassy</0>",
-          "instructions": "<0>Nota:</0> Actualmente solo admitimos LND, ¡pero agregaremos compatibilidad con c-lightning en el futuro!<1/>En su panel de Embassy, haga clic en el servicio <0>Lightning Network Daemon</0>. <1/>Seleccione la pestaña <0>Propiedades</0>.<1/>Ahora copie la <0>URL REST de LND Connect.</0>"
+          "title": "Conéctate a tu <0>Start9 Server</0>",
+          "instructions": "En tu panel de Embassy, haz clic en el servicio <0>Lightning Network Daemon</0>.<1/>Selecciona la pestaña <0>Propiedades</0>.<1/>Ahora copia la URL REST de <0>LND Connect. </0>"
         },
         "rest_url": {
           "label": "URL REST conectalnd",
