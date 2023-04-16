@@ -1,8 +1,6 @@
 import Button from "@components/Button";
-import { CSSProperties } from "react";
 import { Trans, useTranslation } from "react-i18next";
-import { useSettings } from "~/app/context/SettingsContext";
-import { getBrowserType } from "~/app/utils";
+import { getBrowserType, useTheme } from "~/app/utils";
 import utils from "~/common/lib/utils";
 
 export default function PinExtension() {
@@ -10,33 +8,22 @@ export default function PinExtension() {
     keyPrefix: "welcome.pin_extension",
   });
 
-  const { settings } = useSettings();
+  const onNext = () => {
+    utils.redirectPage("options.html#/discover");
+  };
+
+  const theme = useTheme();
 
   const getImage = () => {
-    const imageType = getBrowserType() ?? "chrome";
-    const theme =
-      settings.theme === "dark" ||
-      (settings.theme === "system" &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches)
-        ? "dark"
-        : "light";
+    const imageType = getBrowserType("chrome");
 
     return (
       <img
         src={`assets/images/pin_your_alby_extension_${imageType}_${theme}.png`}
         alt="Pin your Alby extension"
-        className="w-80"
+        className="w-full"
       />
     );
-  };
-
-  const onNext = () => {
-    utils.redirectPage("options.html#/discover");
-  };
-
-  const imgStyle: CSSProperties = {
-    position: "relative",
-    top: "-1px",
   };
 
   return (
@@ -58,16 +45,14 @@ export default function PinExtension() {
               // eslint-disable-next-line react/jsx-key
               <img
                 src="assets/icons/puzzle.svg"
-                className="w-5 inline align-bottom dark:invert"
-                style={imgStyle}
+                className="relative -top-1 w-5 inline align-bottom dark:invert"
               />,
               // eslint-disable-next-line react/jsx-key
               <br />,
               // eslint-disable-next-line react/jsx-key
               <img
                 src="assets/icons/alby_icon_yellow.svg"
-                className="w-5 inline align-bottom dark:invert"
-                style={imgStyle}
+                className="relative -top-1 w-5 inline align-bottom dark:invert"
               />,
             ]}
           />
@@ -75,8 +60,7 @@ export default function PinExtension() {
       </div>
       <div className="my-8 flex justify-center">
         <Button
-          label={t("next_btn")}
-          type="submit"
+          label={t("next_btn", { icon: "🐝" })}
           primary
           className="max-sm:w-full"
           onClick={onNext}
