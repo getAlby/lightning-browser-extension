@@ -3,6 +3,7 @@ import TestConnection from "@screens/Onboard/TestConnection";
 import ChooseConnector from "@screens/connectors/ChooseConnector";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { RouteObject } from "react-router";
 import { HashRouter as Router, useRoutes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Container from "~/app/components/Container";
@@ -21,16 +22,14 @@ function getRoutes(
     title: string;
     logo: string;
   }[]
-) {
+): RouteObject[] {
   return [
     {
       path: "/",
       element: <SetPassword />,
-      name: i18n.t("translation:welcome.nav.password"),
     },
     {
       path: "/choose-path",
-      name: i18n.t("translation:welcome.nav.connect"),
       children: [
         {
           index: true,
@@ -71,7 +70,6 @@ function getRoutes(
     {
       path: "/test-connection",
       element: <TestConnection />,
-      name: i18n.t("translation:welcome.nav.done"),
     },
   ];
 }

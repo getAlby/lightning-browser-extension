@@ -1,12 +1,6 @@
 {
   "translation": {
     "welcome": {
-      "nav": {
-        "welcome": "नमस्कार",
-        "password": "आपका पासवर्ड",
-        "connect": "आपका लाइटनिंग खाता",
-        "done": "किया गया"
-      },
       "set_password": {
         "title": "एक अनलॉक पासवर्ड सेट करें",
         "confirm_password": {

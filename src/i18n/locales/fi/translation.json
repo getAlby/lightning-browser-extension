@@ -1,12 +1,6 @@
 {
   "translation": {
     "welcome": {
-      "nav": {
-        "welcome": "Tervetuloa",
-        "password": "Salasanasi",
-        "connect": "Lightning-tilisi",
-        "done": "Tehty"
-      },
       "set_password": {
         "title": "Aseta lukituksen avaussalasana",
         "description": "Lightning-tilisi tiedot on salattu turvallisesti salasanan avulla. Älä unohda tätä salasanaa! Tarvitset sitä avataksesi Alby-laajennuksen lukituksen (tässä selaimessa)",
@@ -541,7 +535,7 @@
     "success": "Menestys",
     "error": "Virhe",
     "settings": "Asetukset",
-    "websites": "Verkkosivustot",
+    "connected_sites": "",
     "sats_one": "sat",
     "sats_other": "satia",
     "loading": "ladataan",

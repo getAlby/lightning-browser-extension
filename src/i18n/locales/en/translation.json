@@ -2,12 +2,6 @@
   "translation": {
     "welcome": {
       "title": "Welcome to Alby",
-      "nav": {
-        "welcome": "Welcome",
-        "password": "Your Password",
-        "connect": "Your Lightning Account",
-        "done": "Done"
-      },
       "set_password": {
         "title": "Set an unlock password",
         "description": "This password is used to protect your wallet and provide access to the browser extension. It cannot be reset and is separate from your Alby Account password.",
@@ -37,7 +31,7 @@
     },
     "choose_path": {
       "title": "Connect",
-      "description": "To start using the Alby Extension, connect your lightning wallet.",
+      "description": "To start using the Alby Extension, use your Alby Account or connect to your lightning wallet.",
       "alby": {
         "title": "Alby Account",
         "description": "Sign up or use your existing Alby Account to get started with lightning payments in no time.",
@@ -122,7 +116,7 @@
         "title": "LND with LNC",
         "page": {
           "title": "Connect to your LND node",
-          "description": "Create a new session in terminal (litd) to obtain a new pairing phrase and enter it here"
+          "description": "1. Open Lightning Terminal and choose <0>Lightning Node Connect</0> from the sidebar.<1/> 2. Click <0>Create a new session</0><1/>3. Label the session, choose desired permissions and submit<1/>4. <0>Copy pairing phrase</0> and paste it below."
         },
         "pairing_phrase": {
           "label": "Your pairing phrase ",
@@ -206,7 +200,7 @@
         "title": "Umbrel",
         "page": {
           "title": "Connect to <0>Umbrel</0> node",
-          "instructions": "In your Umbrel dashboard go to <0>Connect Wallet</0>. Select <0>lndconnect REST</0> and copy the <0>lndconnect URL</0>. (Depending on your setup you can either use the local connection or the Tor connection.)"
+          "instructions": "1. In your Lightning Node dashboard go to <0>Connect wallet</0><1/>2. Select <0>REST (Tor)</0> or <0>REST (Local Network)</0> mode<1/>3. Copy the <0>lndconnect URL</0> and paste it below"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -227,8 +221,8 @@
       "start9": {
         "title": "Start9",
         "page": {
-          "title": "Connect to your <0>Embassy</0> node",
-          "instructions": "<0>Note:</0> Currently we only support LND but we will be adding c-lightning support in the future!<1/>On your Embassy dashboard click on the <0>lightning network Daemon</0> service.<1/>Select the <0>Properties</0> tab.<1/>Now copy the <0>LND Connect REST URL.</0>"
+          "title": "Connect to your <0>Start9 Server</0>",
+          "instructions": "On your Embassy dashboard click on the <0>Lightning Network Daemon</0> service.<1/>Select the <0>Properties</0> tab.<1/>Now copy the <0>LND Connect REST URL.</0>"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -790,7 +784,7 @@
     "settings": "Settings",
     "accounts": "Accounts",
     "discover": "Discover",
-    "websites": "Websites",
+    "connected_sites": "Connected Sites",
     "transactions": "Transactions",
     "sats_one": "sat",
     "sats_other": "sats",
