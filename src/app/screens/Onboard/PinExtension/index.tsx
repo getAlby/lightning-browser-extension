@@ -62,7 +62,6 @@ export default function PinExtension() {
         <Button
           label={t("next_btn", { icon: "🐝" })}
           primary
-          className="max-sm:w-full"
           onClick={onNext}
         />
       </div>
