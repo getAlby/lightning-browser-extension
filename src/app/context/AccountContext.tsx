@@ -19,6 +19,7 @@ interface AccountContextType {
     alias?: AccountInfo["alias"];
     balance?: AccountInfo["balance"];
     currency?: AccountInfo["currency"];
+    connector?: AccountInfo["connector"];
   } | null;
   balancesDecorated: {
     fiatBalance: string;

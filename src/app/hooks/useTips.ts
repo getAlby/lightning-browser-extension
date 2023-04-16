@@ -5,11 +5,11 @@ import { TIPS } from "~/common/constants";
 
 const DEFAULT_TIPS = [TIPS.TOP_UP_WALLET, TIPS.DEMO];
 
-export const filterTips = (closedTips: TIPS[], alias = "") => {
+export const filterTips = (closedTips: TIPS[], connector = "") => {
   return DEFAULT_TIPS.filter((tip: TIPS) => {
     if (closedTips.includes(tip)) return false;
 
-    if (tip === TIPS.TOP_UP_WALLET && !isAlbyAccount(alias)) return false;
+    if (tip === TIPS.TOP_UP_WALLET && !isAlbyAccount(connector)) return false;
 
     return true;
   });
@@ -19,7 +19,7 @@ export const useTips = () => {
   const { settings, updateSetting } = useSettings();
   const { account } = useAccount();
 
-  const tips = filterTips(settings.closedTips, account?.alias);
+  const tips = filterTips(settings.closedTips, account?.connector);
 
   const closeTip = (tip: TIPS) => {
     updateSetting({

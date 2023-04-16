@@ -31,6 +31,7 @@ export interface AccountInfo {
   balance: number;
   id: string;
   name: string;
+  connector: ConnectorType;
   currency: ACCOUNT_CURRENCIES;
 }
 
