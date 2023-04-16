@@ -39,6 +39,6 @@ export function getBrowserType(): BrowserType | null {
   return null;
 }
 
-export function isAlbyAccount(alias = "") {
-  return alias === "🐝 getalby.com";
+export function isAlbyAccount(connector = "") {
+  return connector === "alby";
 }

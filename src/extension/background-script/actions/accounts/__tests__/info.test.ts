@@ -41,6 +41,7 @@ describe("account info", () => {
       name: "Alby",
       info: { alias: "getalby.com" },
       balance: { balance: 0, currency: "BTC" },
+      connector: "alby",
     };
 
     expect(await infoAccount(message)).toStrictEqual({

@@ -10,6 +10,7 @@ import type {
   AccountInfo,
   Accounts,
   Allowance,
+  ConnectorType,
   DbPayment,
   Invoice,
   LnurlAuthResponse,
@@ -28,6 +29,7 @@ import {
 import msg from "./msg";
 
 export interface AccountInfoRes {
+  connector: ConnectorType;
   balance: { balance: string | number; currency: ACCOUNT_CURRENCIES };
   currentAccountId: string;
   info: { alias: string; pubkey?: string };
@@ -77,6 +79,7 @@ export const swrGetAccountInfo = async (
         const { alias } = response.info;
         const { balance: resBalance, currency } = response.balance;
         const name = response.name;
+        const connector = response.connector;
         const balance =
           typeof resBalance === "number" ? resBalance : parseInt(resBalance); // TODO: handle amounts
         const account = {
@@ -84,6 +87,7 @@ export const swrGetAccountInfo = async (
           name,
           alias,
           balance,
+          connector,
           currency: currency || "BTC", // set default currency for every account
         };
         storeAccounts({
