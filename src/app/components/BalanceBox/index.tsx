@@ -10,7 +10,7 @@ function BalanceBox(props: Props) {
 
   return (
     <div
-      className={`w-full flex flex-col items-center justify-center dark:text-white p-4`}
+      className="w-full flex flex-col items-center justify-center dark:text-white p-4"
     >
       {balancesDecorated.accountBalance && (
         <div className="text-xl">
