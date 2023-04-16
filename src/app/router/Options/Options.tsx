@@ -163,7 +163,9 @@ const Layout = () => {
     <div>
       <Navbar>
         <Navbar.Link href="/discover">{tCommon("discover")}</Navbar.Link>
-        <Navbar.Link href="/publishers">{tCommon("websites")}</Navbar.Link>
+        <Navbar.Link href="/publishers">
+          {tCommon("connected_sites")}
+        </Navbar.Link>
         <Navbar.Link href="/wallet">{tCommon("wallet")}</Navbar.Link>
       </Navbar>
       <ToastContainer

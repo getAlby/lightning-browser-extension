@@ -2,12 +2,6 @@
   "translation": {
     "welcome": {
       "title": "Alby मध्ये आपले स्वागत आहे",
-      "nav": {
-        "welcome": "नमस्कार",
-        "password": "तुमचा पासवर्ड",
-        "connect": "आपले लाइटनिंग खाते जोडा ",
-        "done": "पूर्ण झाले"
-      },
       "set_password": {
         "title": "अनलॉक पासवर्ड सेट करा",
         "description": "तुमचे लाइटनिंग खाते पासवर्डसह सुरक्षितपणे एन्क्रिप्ट केलेले आहे. कृपया हा पासवर्ड लक्षात ठेवा. ब्राउझरमध्ये alby एक्सटेंशन उघडण्यासाठी तुम्हाला पासवर्डची आवश्यकता असेल.",
@@ -228,7 +222,7 @@
         "title": "Start9",
         "page": {
           "title": "your <0>Embassy</0> node ला कनेक्ट करा",
-          "instructions": "<0>Note:</0> Currently we only support LND but we will be adding c-lightning support in the future!<1/>On your Embassy dashboard click on the <0>lightning network Daemon</0> service.<1/>Select the <0>Properties</0> tab.<1/>Now copy the <0>LND Connect REST URL.</0>"
+          "instructions": "<0>Note:</0> Currently we only support LND but we will be adding c-lightning support in the future!<1/>On your Embassy dashboard click on the <0>Lightning Network Daemon</0> service.<1/>Select the <0>Properties</0> tab.<1/>Now copy the <0>LND Connect REST URL.</0>"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -761,7 +755,7 @@
     "settings": "सेटिंग्ज",
     "accounts": "खाते",
     "discover": "शोध",
-    "websites": "वेबसाइट्स",
+    "connected_sites": "",
     "transactions": "व्यवहार",
     "sats_one": "sat",
     "sats_other": "sats",
