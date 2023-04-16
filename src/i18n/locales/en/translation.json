@@ -361,29 +361,27 @@
         }
       }
     },
-    "choose_umbrel_connector": {
-      "title": "Connect to Umbrel",
-      "description": "Choose which Umbrel app you would like to connect with"
-    },
-    "choose_citadel_connector": {
-      "title": "Connect to Citadel",
-      "description": "Choose which Citadel app you would like to connect with"
-    },
-    "choose_btcpay_connector": {
-      "title": "Connect to BTCPay",
-      "description": "Choose which BTCPay app you would like to connect with"
-    },
-    "choose_raspiblitz_connector": {
-      "title": "Connect to Raspiblitz",
-      "description": "Choose which Raspiblitz app you would like to connect with"
-    },
-    "choose_mynode_connector": {
-      "title": "Connect to myNode",
-      "description": "Choose which myNode app you would like to connect with"
-    },
-    "choose_start9_connector": {
-      "title": "Connect to Start9",
-      "description": "Choose which Start9 app you would like to connect with"
+    "distributions": {
+      "title": "Connect to {{name}}",
+      "description": "Choose which {{name}} app you would like to connect with",
+      "umbrel": {
+        "name": "Umbrel"
+      },
+      "citadel": {
+        "name": "Citadel"
+      },
+      "btcpay": {
+        "name": "BTCPay"
+      },
+      "raspiblitz": {
+        "name": "Raspiblitz"
+      },
+      "mynode": {
+        "name": "myNode"
+      },
+      "start9": {
+        "name": "Start9"
+      }
     },
     "home": {
       "actions": {

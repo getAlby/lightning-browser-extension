@@ -33,19 +33,30 @@ import raspiblitz from "/static/assets/icons/raspiblitz.png";
 import start9 from "/static/assets/icons/start9.png";
 import umbrel from "/static/assets/icons/umbrel.png";
 
-interface ConnectorRoute {
+export const normalizeKey = (key: string) =>
+  key as unknown as TemplateStringsArray;
+
+interface ChildRoute {
+  path: string;
+  element: JSX.Element;
+}
+
+interface ConnectorElementChildRoute extends ChildRoute {
+  title: string;
+  description?: string;
+  logo: string;
+}
+
+interface Route {
   path: string;
   element: JSX.Element;
   title: string;
   description?: string;
   logo: string;
-  children?: {
-    path: string;
-    element: JSX.Element;
-    title?: string;
-    description?: string;
-    logo?: string;
-  }[];
+}
+
+interface ConnectorRoute extends Route {
+  children?: (ChildRoute | ConnectorElementChildRoute)[];
 }
 
 const galoyPaths: { [key: string]: keyof typeof galoyUrls } = {
@@ -53,7 +64,7 @@ const galoyPaths: { [key: string]: keyof typeof galoyUrls } = {
   bitcoinJungle: "galoy-bitcoin-jungle",
 };
 
-const kolliderConnectorRoutes = [
+const kolliderConnectorRoutes: ChildRoute[] = [
   {
     path: "create",
     element: <ConnectKollider variant="create" />,
@@ -165,108 +176,74 @@ const connectorMap: { [key: string]: ConnectorRoute } = {
   },
 };
 
-const umbrelConnectorRoutes = [
+const umbrelConnectorRoutes: Route[] = [
   connectorMap["umbrel-lnd"],
   connectorMap["lnc"],
   connectorMap["commando"],
   connectorMap["lnbits"],
 ];
 
-const citadelConnectorRoutes = [
+const citadelConnectorRoutes: Route[] = [
   connectorMap["citadel"],
   connectorMap["lnc"],
   connectorMap["commando"],
   connectorMap["lnbits"],
 ];
 
-const raspiblitzConnectorRoutes = [
+const raspiblitzConnectorRoutes: Route[] = [
   connectorMap["raspiblitz-lnd"],
   connectorMap["lnc"],
   connectorMap["commando"],
   connectorMap["lnbits"],
 ];
 
-const myNodeConnectorRoutes = [
+const myNodeConnectorRoutes: Route[] = [
   connectorMap["mynode-lnd"],
   connectorMap["lnc"],
   connectorMap["commando"],
   connectorMap["lnbits"],
 ];
 
-const start9ConnectorRoutes = [
+const start9ConnectorRoutes: Route[] = [
   connectorMap["start9-lnd"],
   connectorMap["lnc"],
   connectorMap["commando"],
   connectorMap["lnbits"],
 ];
 
-const distributionMap: { [key: string]: ConnectorRoute } = {
-  citadel: {
-    path: "citadel",
+function getDistribution(key: string, children: Route[]): ConnectorRoute {
+  const name = i18n.t(normalizeKey(`translation:distributions.${key}.name`));
+
+  return {
+    path: key,
     element: (
       <ChooseConnector
-        title={i18n.t("translation:choose_citadel_connector.title")}
-        description={i18n.t("translation:choose_citadel_connector.description")}
-        connectorRoutes={citadelConnectorRoutes}
+        title={i18n.t("translation:distributions.title", { name })}
+        description={i18n.t("translation:distributions.description", { name })}
+        connectorRoutes={children}
       />
     ),
-    title: i18n.t("translation:choose_connector.citadel.title"),
+    title: i18n.t(normalizeKey(`translation:choose_connector.${key}.title`)),
+    logo: distributionMap[key]["logo"],
+    children,
+  };
+}
+
+const distributionMap: { [key: string]: { logo: string } } = {
+  citadel: {
     logo: citadel,
-    children: citadelConnectorRoutes,
   },
   umbrel: {
-    path: "umbrel",
-    element: (
-      <ChooseConnector
-        title={i18n.t("translation:choose_umbrel_connector.title")}
-        description={i18n.t("translation:choose_umbrel_connector.description")}
-        connectorRoutes={umbrelConnectorRoutes}
-      />
-    ),
-    title: i18n.t("translation:choose_connector.umbrel.title"),
     logo: umbrel,
-    children: umbrelConnectorRoutes,
   },
   mynode: {
-    path: "mynode",
-    element: (
-      <ChooseConnector
-        title={i18n.t("translation:choose_mynode_connector.title")}
-        description={i18n.t("translation:choose_mynode_connector.description")}
-        connectorRoutes={myNodeConnectorRoutes}
-      />
-    ),
-    title: i18n.t("translation:choose_connector.mynode.title"),
     logo: mynode,
-    children: myNodeConnectorRoutes,
   },
   start9: {
-    path: "start9",
-    element: (
-      <ChooseConnector
-        title={i18n.t("translation:choose_start9_connector.title")}
-        description={i18n.t("translation:choose_start9_connector.description")}
-        connectorRoutes={start9ConnectorRoutes}
-      />
-    ),
-    title: i18n.t("translation:choose_connector.start9.title"),
     logo: start9,
-    children: start9ConnectorRoutes,
   },
   raspiblitz: {
-    path: "raspiblitz",
-    element: (
-      <ChooseConnector
-        title={i18n.t("translation:choose_raspiblitz_connector.title")}
-        description={i18n.t(
-          "translation:choose_raspiblitz_connector.description"
-        )}
-        connectorRoutes={raspiblitzConnectorRoutes}
-      />
-    ),
-    title: i18n.t("translation:choose_connector.raspiblitz.title"),
     logo: raspiblitz,
-    children: raspiblitzConnectorRoutes,
   },
 };
 
@@ -280,14 +257,14 @@ function getConnectorRoutes(): ConnectorRoute[] {
     connectorMap["kollider"],
     connectorMap["lnd-hub-bluewallet"],
     connectorMap["eclair"],
-    distributionMap["citadel"],
-    distributionMap["umbrel"],
-    distributionMap["mynode"],
-    distributionMap["start9"],
-    distributionMap["raspiblitz"],
+    connectorMap["btcpay"],
     connectorMap[galoyPaths.bitcoinBeach],
     connectorMap[galoyPaths.bitcoinJungle],
-    connectorMap["btcpay"],
+    getDistribution("citadel", citadelConnectorRoutes),
+    getDistribution("umbrel", umbrelConnectorRoutes),
+    getDistribution("mynode", myNodeConnectorRoutes),
+    getDistribution("start9", start9ConnectorRoutes),
+    getDistribution("raspiblitz", raspiblitzConnectorRoutes),
   ];
 }
 
