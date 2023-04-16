@@ -25,6 +25,18 @@
         "subtitle": "Articles about the Lightning Network",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/yalls.png",
         "url": "https://yalls.org/"
+      },
+      {
+        "title": "Music Side Project",
+        "subtitle": "Music web player",
+        "logo": "https://user-images.githubusercontent.com/100958893/232284397-765976b4-4ce4-44a7-ba6f-668c2fff2520.png",
+        "url": "https://musicsideproject.com/"
+      },
+      {
+        "title": "CurioCaster",
+        "subtitle": "Podcast web player",
+        "logo": "https://user-images.githubusercontent.com/100958893/232284035-0dce1c80-54d2-4910-a71d-2552bc9510a8.png",
+        "url": "https://curiocaster.com"
       }
     ]
   },
