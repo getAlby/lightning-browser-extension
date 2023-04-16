@@ -2,18 +2,18 @@
   "translation": {
     "welcome": {
       "set_password": {
-        "title": "Passwort zum Entsperren festlegen",
-        "description": "Dieses Passwort wird verwendet, um deine Wallet zu schützen und den Zugriff auf die Browser-Erweiterung zu ermöglichen. Es kann nicht zurückgesetzt werden und ist unabhängig von Ihrem Alby Konto Passwort.",
+        "title": "Entsperrkennwort festlegen",
+        "description": "Dieses Kennwort wird verwendet, um deine Wallet zu schützen und den Zugriff auf die Browser-Erweiterung zu ermöglichen. Es kann nicht zurückgesetzt werden und ist unabhängig von deinem Alby-Konto-Kennwort.",
         "choose_password": {
-          "label": "Wähle ein Password zum Entsperren:"
+          "label": "Wähle ein Entsperrkennwort:"
         },
         "errors": {
-          "mismatched_password": "Die Passwörter stimmen nicht überein.",
-          "enter_password": "Bitte gebe ein Passwort ein.",
-          "confirm_password": "Bitte bestätige dein Passwort."
+          "mismatched_password": "Kennwörter stimmen nicht überein.",
+          "enter_password": "Bitte gib ein Kennwort ein.",
+          "confirm_password": "Bitte bestätige dein Kennwort."
         },
         "confirm_password": {
-          "label": "Lass uns es bestätigen, dass du es richtig eingegeben hast:"
+          "label": "Vergewisse dich, dass du es richtig eingegeben hast:"
         }
       },
       "test_connection": {
@@ -22,9 +22,9 @@
           "delete_edit_account": "Ungültiges Konto löschen und erneut bearbeiten"
         },
         "ready": "Großartig, du bist startklar!",
-        "initializing": "Ihr Konto wird initialisiert. Bitte warten Sie, dies kann eine Minute dauern...",
+        "initializing": "Dein Konto wird initialisiert. Bitte warte, dies kann eine Minute dauern...",
         "connection_error": "Verbindungsfehler",
-        "connection_taking_long": "Der Verbindungsversuch dauert länger als erwartet... Sind deine Angaben korrekt? Ist dein Knoten erreichbar?",
+        "connection_taking_long": "Der Verbindungsversuch dauert länger als erwartet... Sind deine Angaben korrekt? Ist deine Node erreichbar?",
         "contact_support": "Wenn du Hilfe benötigst, wende dich bitte an support@getalby.com"
       },
       "title": "Willkommen bei Alby"
@@ -32,20 +32,20 @@
     "choose_connector": {
       "lnd": {
         "or": "OR",
-        "drag_and_drop": "Ziehe deine Makrone hierher oder lege sie dort ab <0>durchsuchen</0>",
+        "drag_and_drop": "Ziehe und lege deine Macaroon hier ab oder <0>durchsuche</0>",
         "errors": {
           "connection_failed": "Verbindung fehlgeschlagen. Sind deine LND-Anmeldeinformationen korrekt?"
         },
         "url": {
           "label": "REST-API-Host und -Port",
-          "placeholder": "https://Dein-Knoten-URL:8080"
+          "placeholder": "https://dein-node-url:8080"
         },
         "macaroon": {
-          "label": "Makrone (HEX-Format)"
+          "label": "Macaroon (HEX-Format)"
         },
         "page": {
-          "description": "Du benötigst deinen URL-Knoten und eine Macaroon mit Lese- und Sendeberechtigung (z.B. admin.macaroon)",
-          "title": "Verbinde dich zu deinem LND Node"
+          "description": "Du benötigst deine Node-URL und einen Macaroon mit Lese- und Sendeberechtigung (z.B. admin.macaroon)",
+          "title": "Verbinden mit deiner LND Node"
         },
         "title": "LND"
       },
@@ -59,7 +59,7 @@
         },
         "title": "BlueWallet",
         "page": {
-          "title": "Verbinde dich mit BlueWallet",
+          "title": "Verbinden mit BlueWallet",
           "description": "Wähle in der BlueWallet die Wallet, die du verbinden willst, öffne sie, klicke auf \"...\", klicke auf Export/Backup, um den QR Code anzuzeigen. Scanne ihn dann mit deiner Webcam."
         }
       },
@@ -73,7 +73,7 @@
           "connection_failed": "Verbindung fehlgeschlagen. Ist dein LNDHub-URI korrekt?"
         },
         "page": {
-          "title": "Verbinde dich mit LNDHub",
+          "title": "Verbinden mit LNDHub",
           "description": "Gebe hier deine LNDHub-Zugangsdaten-URI ein oder scanne den QR-Code mit deiner Webcam."
         }
       },
@@ -84,7 +84,7 @@
         },
         "title": "LNbits",
         "page": {
-          "title": "Verbinde dich mit <0>LNbits</0>",
+          "title": "Verbinden mit <0>LNbits</0>",
           "instructions": "Wähle in LNbits die Wallet, die du verbinden möchtest, öffne sie, klicke auf API Info und kopiere den Admin Key. Füge ihn unten ein:"
         },
         "url": {
@@ -96,8 +96,8 @@
       },
       "mynode": {
         "page": {
-          "instructions": "Klicke auf deiner myNode-Startseite auf die Schaltfläche <0>Wallet für Ihren <0>Llightning-Dienst.<1/> Klicke nun auf die Schaltfläche <0>Wallet koppeln unter der <0 Registerkarte >Status. Gebe dein Passwort ein, wenn du dazu aufgefordert wirst.<1/> Wählen dann das Dropdown-Menü und wähle eine Kopplungsoption. Abhängig von deiner Einrichtung könnte entweder die Verbindung <0>Llightning (REST + Local IP) oder die Verbindung <0>Llightning (REST + Tor) verwenden.",
-          "title": "Verbinde dich <0>myNode</0>"
+          "instructions": "Klicke auf deiner MyNode Startseite auf die Schaltfläche <0>Wallet</0> für deinen <0>Lightning</0> Service.<1/> Klicke nun auf die Schaltfläche <0>Pair Wallet</0> unter dem Reiter <0>Status</0>. Gib dein Kennwort ein, wenn du dazu aufgefordert wirst.<1/> Wähle das Dropdown-Menü und wähle eine Kopplungsoption. Abhängig von deiner Einrichtung kannst du entweder die <0>lightning (REST + Local IP)</0> Verbindung oder die <0>lightning (REST + Tor)</0> Verbindung verwenden.",
+          "title": "Verbinden mit <0>myNode</0>"
         },
         "rest_url": {
           "label": "Indconnect REST URL",
@@ -108,7 +108,7 @@
       "umbrel": {
         "page": {
           "instructions": "In deinem Lightning Node Dashboard gehst du auf <0>Brieftasche verbinden</0><1/>2. Wähle <0>REST (Tor)</0> oder <0>REST (Lokales Netzwerk)</0> Modus<1/>3. Kopiere die <0>lndconnect URL</0> und füge sie unten ein",
-          "title": "Verbinde dich <0>Umbrel</0>-Knoten"
+          "title": "Verbinden mit <0>Umbrel</0> Node"
         },
         "rest_url": {
           "label": "Indconnect-REST URL",
@@ -116,15 +116,15 @@
         },
         "title": "Umbrel"
       },
-      "description": "Stelle eine Verbindung zu deiner externen Lightning-Wallet oder deinem Knoten her",
+      "description": "Verbinden mit deinem externen Lightning Wallet oder Node",
       "citadel": {
         "page": {
           "instructions": "Das funktioniert aktuell nicht, wenn 2FA ausgewählt ist.",
-          "title": "Verbinde dich <0>Citadel</0> Knoten"
+          "title": "Verbinden mit <0>Citadel</0> Node"
         },
         "title": "Citadel",
         "password": {
-          "label": "Citadel Passwort"
+          "label": "Citadel Kennwort"
         },
         "url": {
           "label": "Citadel URL",
@@ -134,8 +134,8 @@
       "raspiblitz": {
         "page": {
           "instructions1": "Folge diese Schritte:<1/> 1. <0>SSH</0> in deinem <0>Raspiblitz</0><1/>2. Wähle <0>Connect Apps & Show Credentials</0> aus der Liste<1/><0/>3. Wähle <0>Connect Alby to this node</0><1/>4. Drücke <0>OK</0>, um die Verbindungsdaten anzuzeigen<1/><1/>Kopiere den <0>REST API-Host</0> oder die <0>.onion</0>-Adresse, um dich über Tor zu verbinden, und füge sie in das Feld darunter ein.",
-          "title": "Verbinde dich mit deinem <0>RaspiBlitz</0> Knoten",
-          "instructions2": "Kopiere (admin) <0>macaroon</0> in die unten stehende Eingabe."
+          "title": "Verbinden mit deiner <0>RaspiBlitz</0> Node",
+          "instructions2": "Kopiere das (admin) <0>Macaroon</0> in die untenstehende Eingabe."
         },
         "title": "RaspiBlitz",
         "rest_api_host": {
@@ -146,11 +146,11 @@
       "eclair": {
         "title": "Eclair",
         "page": {
-          "title": "Verbinde dich mit <0>Eclair</0>",
-          "instructions": "Du benötigst deine Eclair URL und dein Passwort."
+          "title": "Verbinden mit <0>Eclair</0>",
+          "instructions": "Du brauchst deine Eclair URL und dein Kennwort."
         },
         "password": {
-          "label": "Eclair Passwort"
+          "label": "Eclair Kennwort"
         },
         "url": {
           "label": "Eclair URL",
@@ -159,8 +159,8 @@
       },
       "start9": {
         "page": {
-          "instructions": "<0>Hinweis: Derzeit unterstützen wir nur LND, aber wir werden in Zukunft c-lightning Unterstützung hinzufügen!<1/>Klicke auf deinem Embassy Dashboard auf den Dienst <0>Lightning Network Daemon</0><1/>Wähle die Registerkarte <0>Eigenschaften</0>.<1/>Kopiere nun die <0>LND Connect REST URL</0>.",
-          "title": "Verbinde mit deinem <0>Embassy</0> Knoten"
+          "instructions": "Klicke in deinem Embassy Dashboard auf den <0>Lightning Network Daemon</0> Service.<1/>Wähle den Reiter <0>Properties</0>.<1/>Kopiere nun die <0>LND Connect REST URL.</0>",
+          "title": "Verbinden mit deinem <0>Start9 Server</0>"
         },
         "rest_url": {
           "placeholder": "lndconnect://deinknoten:8080?...",
@@ -171,13 +171,13 @@
       "bitcoin_beach": {
         "title": "Bitcoin Beach Wallet",
         "page": {
-          "title": "Verbinde dich mit <0> Bitcoin Beach Wallet"
+          "title": "Verbinden mit <0>Bitcoin Beach Wallet</0>"
         }
       },
       "bitcoin_jungle": {
         "title": "Bitcoin Jungle Wallet",
         "page": {
-          "title": "Verbinde dich mit <0>Bitcoin Jungle Wallet</0>"
+          "title": "Verbinden mit <0>Bitcoin Jungle Wallet</0>"
         }
       },
       "galoy": {
@@ -206,7 +206,7 @@
       "btcpay": {
         "title": "BTCPay Server",
         "page": {
-          "title": "Verbinde dich mit deinem BTCPay LND-Knoten",
+          "title": "Verbinden mit deiner BTCPay LND Node",
           "instructions": "Navigiere zu deinem BTCPayServer und melde dich als Administrator an. Gehe zu Servereinstellungen > Dienste > LND-Rest – Siehe Informationen. Klicke dann auf „QR-Code-Informationen anzeigen“ und kopiere die QR-Code-Daten. Füge es unten ein:"
         },
         "config": {
@@ -220,7 +220,7 @@
       "commando": {
         "title": "Core Lightning",
         "page": {
-          "title": "Stelle eine Verbindung zu deinem Core Lightning Knoten her",
+          "title": "Verbinden mit deiner Core Lightning Node",
           "instructions": "Stelle sicher, dass du die Core Lightning Version 0.12.0 oder neuer hast, das Commando-Plugin ausgeführt wird und dein Knoten über das Llightning Network zugänglich ist. Erstelle eine Rune, indem du „lightning-cli commando-rune“ ausführst."
         },
         "host": {
@@ -264,7 +264,7 @@
           "label": "Benutzername"
         },
         "choose_path": {
-          "title": "Verbinde dich mit deiner Kollider-Wallet",
+          "title": "Verbinden mit deiner Kollider-Wallet",
           "description": "Melde dich an oder registriere dich für ein neues Kollider-Konto und stelle eine Verbindung zu Alby her.",
           "create_new": "Registriere dich"
         },
@@ -273,16 +273,16 @@
           "title": "Erstelle dein Kollider-Konto und verbinde dich mit Alby"
         },
         "login": {
-          "title": "Verbinde dich mit deinem Kollider-Konto",
+          "title": "Verbinden mit deinem Kollider-Konto",
           "description": "Du hast noch kein Konto? <0>Jetzt anmelden</0>!"
         },
-        "warning": "Bitte stelle sicher, dass du deine Anmeldedaten sicher in einem Passwort-Manager speicherst. Ohne diese Zugangsdaten kann dein Konto nicht wiederhergestellt werden."
+        "warning": "⚠️ Bitte stelle sicher, dass du deine Zugangsdaten sicher in einem Passwort-Manager speicherst. Ohne diese Zugangsdaten kann dein Konto nicht wiederhergestellt werden."
       },
       "title": "Verbinde Lightning Wallet",
       "lnc": {
         "title": "LND mit LNC",
         "page": {
-          "title": "Verbinde dich mit deinem LND Knoten",
+          "title": "Verbinden mit deiner LND Node",
           "description": "1. Öffne dein Lightning Terminal und wähle <0>Lightning Node Connect</0> in der Seitenleiste.<1/> 2. Klicke auf <0>Erstelle eine neue Sitzung</0><1/>3. Beschrifte die Sitzung, wähle dann die gewünschte Berechtigung und sende sie ab<1/>4. <0>Kopiere die Pairing-Phrase</0> und füge sie hier unten ein."
         },
         "pairing_phrase": {
@@ -294,17 +294,17 @@
     "unlock": {
       "unlock_error": {
         "link": "Zurücksetzen und neuen Account erstellen",
-        "help": "Deine Kontodaten werden mit deinem Entsperrpasswort verschlüsselt. Wenn du dein Entsperrpasswort wirklich vergessen hast, must du das Lightning-Konto zurücksetzen und erneut hinzufügen."
+        "help": "Deine Kontodaten werden mit deinem Entsperrkennwort verschlüsselt. Wenn du dein Entsperrkennwort wirklich vergessen hast, musst du dein Lightning-Konto zurücksetzen und erneut hinzufügen."
       },
       "errors": {
-        "invalid_password": "ungültiges Passwort"
+        "invalid_password": "Ungültiges Kennwort"
       },
       "unlock_to_continue": "Freigeben zum Fortfahren",
       "help_contact": {
         "part1": "Brauchst du Hilfe? Kontaktiere uns",
         "part2": "Alby-Unterstützung"
       },
-      "unlock_password": "Dein Freischalt Passwort"
+      "unlock_password": "Dein Entsperrkennwort"
     },
     "settings": {
       "nostr": {
@@ -326,7 +326,7 @@
           "title": "Vererbte LNURL-Authentifizierung"
         },
         "title": "LNURL Authentifizierung",
-        "hint": "ist ein allgemeines Authentifizierungsprotokoll. Es authentifiziert den Benutzer anhand digitaler Signaturen. Das Protokoll erfordert keine anderen identifizierenden Informationen wie Passwörter, E-Mails, Benutzernamen oder ähnliches. Mit Alby kannst du deine Lightning-Konten verwenden, um sich sicher auf Websites anzumelden. <br /> Um mit anderen Wallets kompatibel zu sein, mussten wir ein paar Änderungen vornehmen, die du hier konfigurieren kannst. <br /> <strong>Idealerweise sind alle diese Optionen ausgeschaltet.</strong> Verwende es nur, wenn du alte Konten hast."
+        "hint": "ist ein allgemeines Authentifizierungsprotokoll. Es authentifiziert den Benutzer anhand digitaler Signaturen. Das Protokoll erfordert keine anderen identifizierenden Informationen wie Kennwörter, E-Mails, Benutzernamen oder Ähnliches. Mit Alby kannst du deine Lightning-Konten verwenden, um dich sicher auf Webseiten anzumelden. Um mit anderen Wallets kompatibel zu sein, mussten wir ein paar Änderungen vornehmen, die du hier konfigurieren kannst. <0>In der Regel sind alle diese Optionen ausgeschaltet.</0> Verwende sie nur, wenn du alte Konten hast."
       },
       "browser_notifications": {
         "subtitle": "Zahlungs- und Authentifizierungsbezogene Benachrichtigungen.",
@@ -345,15 +345,15 @@
           "label": "Ändern"
         },
         "errors": {
-          "enter_password": "Bitte gebe ein neues Freischalt-Passwort ein.",
-          "confirm_password": "Bitte bestätige dein Passwort.",
-          "mismatched_password": "Die Passwörter stimmen nicht überein."
+          "enter_password": "Bitte gib ein neues Entsperrkennwort ein.",
+          "confirm_password": "Bitte bestätige dein Kennwort.",
+          "mismatched_password": "Kennwörter stimmen nicht überein."
         },
-        "success": "Passwort erfolgreich geändert",
-        "title": "Freischalt-Passwort ändern",
-        "screen_reader": "Freischalt-Passwort ändern",
+        "success": "Kennwort erfolgreich geändert",
+        "title": "Entsperrkennwort ändern",
+        "screen_reader": "Entsperrkennwort ändern",
         "confirm_password": {
-          "label": "Bestätige das neue Passwort:"
+          "label": "Neues Kennwort bestätigen:"
         }
       },
       "theme": {
@@ -393,12 +393,12 @@
       },
       "name": {
         "title": "Name",
-        "placeholder": "Geben Sie Ihren Namen ein",
+        "placeholder": "Gib deinen Namen ein",
         "subtitle": ""
       },
       "email": {
         "title": "E-Mail",
-        "placeholder": "Geben Sie Ihre E-Mail Adresse ein"
+        "placeholder": "Gib deine E-Mail Adresse ein"
       }
     },
     "home": {
@@ -406,7 +406,7 @@
         "is_blocked_hint": "Alby ist derzeit auf dem {{host}} deaktiviert",
         "recent_transactions": "Jüngste Transaktionen",
         "no_transactions": "Es wurden noch keine Transaktionen mit Alby getätigt.",
-        "block_removed": "{{Host}} aktiviert. Bitte lade die Website neu."
+        "block_removed": "{{host}} aktiviert. Bitte lade die Website neu."
       },
       "allowance_view": {
         "sats_used": "verwendete Sats",
@@ -482,7 +482,7 @@
         "remove": {
           "title": "Dieses Konto entfernen",
           "subtitle": "Alle verknüpften Zertifikate werden gelöscht. Bitte sei dir sicher.",
-          "confirm": "Bis du dir sicher, dass du das Konto entfernen möchtest: {{Name}}?\nDies kann nicht rückgängig gemacht werden. Wenn du dich mit diesem Konto bei Websites angemeldet haben, verlierst du möglicherweise den Zugriff auf diese."
+          "confirm": "Bist du sicher, dass du das Konto entfernen möchtest: {{name}}? \nDies kann nicht rückgängig gemacht werden. Wenn du dich mit diesem Konto bei Webseiten angemeldet hast, könntest du den Zugang zu diesen verlieren."
         },
         "actions": {
           "remove_account": "Konto entfernen",
@@ -491,7 +491,7 @@
       }
     },
     "enable": {
-      "allow": "Erlaube {{host}} zu:",
+      "allow": "Erlaube diese Webseite zu:",
       "title": "Verbinden",
       "request1": "Genehmigung für Transaktionen anfordern",
       "request2": "Fordere deine Rechnungen und Lightning Informationen an",
@@ -549,7 +549,7 @@
         "label": "Betrag (Satoshi)"
       },
       "memo": {
-        "label": "Memo"
+        "label": "Notiz"
       }
     },
     "lnurlwithdraw": {
@@ -559,7 +559,7 @@
       "amount": {
         "label": "Betrag"
       },
-      "success": "Abhebungsantrag erfolgreich gesendet",
+      "success": "Abbuchungsauftrag von {{amount}} erfolgreich an {{sender}} gesendet",
       "title": "Zurückziehen"
     },
     "nostr": {
@@ -608,19 +608,19 @@
     "lnurlauth": {
       "submit": "Anmeldung",
       "content_message": {
-        "heading": "Möchten Sie sich anmelden bei"
+        "heading": "Möchtest du dich anmelden bei"
       },
       "errors": {
         "status": "Fehler: Auth-Status ist nicht in Ordnung"
       },
-      "success": "Erfolgreich authentifiziert",
+      "success": "Anmeldung bei {{name}} erfolgreich",
       "title": "Authentifizierung"
     },
     "keysend": {
       "amount": {
         "label": "Betrag (Satoshi)"
       },
-      "success": "Zahlung gesendet! Preimage: {{Preimage}}",
+      "success": "Zahlung gesendet! Vorschaubild: {{preimage}}",
       "title": "Senden",
       "receiver": {
         "label": "Sende die Zahlung an"
@@ -632,9 +632,9 @@
     },
     "confirm_keysend": {
       "title": "Zahlung genehmigen",
-      "success": "Zahlung gesendet! Preimage: {{Preimage}}",
+      "success": "Zahlung gesendet! Vorschaubild: {{preimage}}",
       "payment_summary": {
-        "description": "Senden Sie die Zahlung an: {{Bestimmungsort}}"
+        "description": "Sende Zahlung an: {{destination}}"
       }
     },
     "confirm_payment": {
@@ -642,7 +642,7 @@
       "actions": {
         "pay_now": "Jetzt bezahlen"
       },
-      "success": "Zahlung von einem {{Betrag}} erfolgreich gesendet!"
+      "success": "Zahlung von {{amount}} erfolgreich!"
     },
     "lnurlpay": {
       "amount": {
@@ -664,7 +664,7 @@
       "content_message": {
         "heading": "Einen Kanal vom Knoten anfordern"
       },
-      "success": "Kanalanfrage erfolgreich gesendet"
+      "success": "Kanalanfrage erfolgreich an {{name}} gesendet"
     },
     "alby": {
       "pre_connect": {
@@ -695,19 +695,19 @@
           "create_wallet_error1": "Du konntest dich nicht anmelden oder ein neues Konto erstellen.",
           "create_wallet_error2": "Wenn du Hilfe benötigst, wende dich bitte an support@getalby.com"
         },
-        "forgot_password": "Passwort vergessen?",
+        "forgot_password": "Kennwort vergessen?",
         "title": "Dein Alby-Konto",
         "set_password": {
           "choose_password": {
-            "label": "Password"
+            "label": "Kennwort"
           },
           "confirm_password": {
-            "label": "Passwort bestätigen"
+            "label": "Kennwort bestätigen"
           },
           "errors": {
-            "enter_password": "Bitte gebe dein Passwort ein.",
-            "confirm_password": "Bitte bestätige dein Passwort.",
-            "mismatched_password": "Die Passwörter stimmen nicht überein."
+            "enter_password": "Bitte gib ein Kennwort ein.",
+            "confirm_password": "Bitte bestätige dein Kennwort.",
+            "mismatched_password": "Kennwörter stimmen nicht überein."
           }
         }
       }
@@ -763,7 +763,7 @@
           "title": "📌 Pin für die Alby-Erweiterung",
           "description2": "Suche in der Liste der Erweiterungen von Alby und klicke auf das Pinsymbol, um es an die Symbolleiste anzuheften",
           "description3": "Das war's! Um auf Alby zuzugreifen, klicke einfach auf das Alby-Symbol",
-          "description1": "<0>Um einfach auf Alby zuzugreifen, klicke auf das Erweiterungssymbol <1/> <2>in der oberen rechten Ecke Ihres Browsers"
+          "description1": "<0>Um auf Alby zuzugreifen, klicke einfach auf das Erweiterungssymbol</0> <1/> <2>in der oberen rechten Ecke deines Browsers</2>"
         }
       }
     },
@@ -780,7 +780,7 @@
           "add": "Füge einen neuen Account hinzu",
           "manage": "Konten verwalten",
           "account_settings": "Kontoeinstellungen",
-          "go_to_web_wallet": "Verwalten Sie Ihr Alby-Konto"
+          "go_to_web_wallet": "Verwalte dein Alby-Konto"
         }
       },
       "title": "Konto wechseln",
@@ -798,10 +798,10 @@
         "what_you_can_do": "Das kannst du tun:"
       },
       "errors": {
-        "invalid_credentials": "Falsches Passwort. Überprüfe das Passwort und E-Mail Adresse und versuche es noch einmal."
+        "invalid_credentials": "Ungültiges Kennwort. Bitte überprüfe dein Kennwort und deine E-Mail-Adresse und versuche es erneut."
       },
       "login_failed": {
-        "password_reset": "Hast du dein Passwort vergessen? Klicke bitte hier"
+        "password_reset": "Dein Kennwort vergessen? Klicke hier"
       }
     },
     "companion_download_info": {
@@ -882,7 +882,7 @@
     "loading": "Laden",
     "sats_one": "sat",
     "success": "Erfolgreich",
-    "password": "Passwort",
+    "password": "Kennwort",
     "advanced": "Fortgeschrittene",
     "description_full": "Vollständige Beschreibung",
     "amount": "Betrag",
@@ -890,7 +890,7 @@
     "description": "Beschreibung",
     "settings": "Einstellungen",
     "sats_other": "sats",
-    "confirm_password": "Bestätige dein Passwort",
+    "confirm_password": "Kennwort bestätigen",
     "help": "Hilfe",
     "actions": {
       "back": "Zurück",
