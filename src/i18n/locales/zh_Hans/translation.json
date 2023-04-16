@@ -160,8 +160,8 @@
       },
       "start9": {
         "page": {
-          "instructions": "<0>注意：</0>目前我们只支持LND，但是我们将在未来增加对c-lightning的支持！<1/>在你的Embassy仪表板上点击<0>Lightning Network Daemon</0>服务。<1/>选择<0>属性</0>标签。<1/>然后复制<0>LND连接REST URL。</0>",
-          "title": "连接你的<0>Embassy</0>节点"
+          "instructions": "在你的Embassy仪表板上点击<0>Lightning Network Daemon</0>服务。<1/>选择<0>Properties</0>标签。<1/>复制<0>LND Connect REST URL。</0>",
+          "title": "连接你的<0>Start9 服务器</0>"
         },
         "rest_url": {
           "placeholder": "lndconnect://yournode:8080?...",
@@ -229,7 +229,7 @@
       "umbrel": {
         "page": {
           "title": "连接<0>Umbrel</0>节点",
-          "instructions": "在你的Umbrel仪表板上，进入<0>连接钱包</0>。选择<0>lndconnect REST</0>并复制<0>lndconnect URL</0>。(根据你的设置，你可以使用本地连接或Tor连接。）"
+          "instructions": "1. 在你的Umbrel仪表板上，进入<0>连接钱包</0><1/>2. 选择<0>REST (Tor)</0>或<0>REST （本地网络）</0>模式<1/>3. 复制<0>lndconnect URL</0>并粘贴到下方"
         },
         "title": "Umbrel",
         "rest_url": {
@@ -251,7 +251,7 @@
       },
       "lnc": {
         "page": {
-          "description": "在终端（litd）中创建一个新的会话，以获得一个新的配对短语，并在这里输入它",
+          "description": "1. 打开 Lightning Terminal 并从侧边栏选择 <0>Lightning Node Connect</0> 。<1/> 2. 点击 <0>Create a new session</0><1/>3. 标记对话，选择所需的权限并提交<1/>4. <0>复制配对词句</0> 并粘贴到下方。",
           "title": "连接你的LND节点"
         },
         "title": "LND使用LNC",
@@ -423,9 +423,9 @@
           "title": "LNDhub 和 LNbits 的旧签名方式",
           "subtitle": "用LNDhub（如BlueWallet）和LNbits账户进行的消息签署和登录已经改变（2022年3月）。如果你用这些帐户登录，你仍然可以启用旧的签名方法。这个选项以后会被删除，请确保切换到新的登录方式。"
         },
-        "hint": "是一个通用的认证协议。它使用数字签名对用户进行认证。该协议不需要任何其他识别信息，如密码、电子邮件、用户名或类似信息。通过Alby，你可以使用你的闪电帐户安全地登录网站。为了与其他钱包兼容，我们不得不做一些改变，你可以在这里进行配置。 <0>理想情况下，所有这些选项都是关闭的。</0>仅当你有旧帐户时才使用它们。",
+        "hint": "是一个通用的认证协议。它使用数字签名对用户进行认证。该协议不需要任何其他识别信息，如密码、电子邮件、用户名或类似信息。通过 Alby，你可以使用你的闪电帐户安全地登录网站。为了与其他钱包兼容，我们不得不做一些改变，你可以在这里进行配置。 <0>理想情况下，所有这些选项都是关闭的。</0>仅当你有旧帐户时才应该启用它们。",
         "legacy_lnurl_auth_202207": {
-          "subtitle": "LNURL-认证的密钥生成已经改变（2022年7月）。Alby与其他实现不兼容。这被改变了，但现在使用不同的登录密钥。如果你之前使用LNURL-认证登录，你仍然可以启用旧方法。这个选项以后会被删除，请务必切换到新的登录方式。",
+          "subtitle": "LNURL-认证的密钥生成已经改变（2022年7月）。Alby与其他实施方式不再兼容。这已被改变了，但现在使用的是不同的登录密钥。如果你之前使用LNURL-认证登录，你仍然可以启用旧方法。这个选项以后会被删除，请务必切换到新的登录方式。",
           "title": "旧版 LNURL-认证"
         }
       },
@@ -660,7 +660,7 @@
     },
     "choose_path": {
       "title": "连接",
-      "description": "要开始使用Alby进行在线支付，请将Alby连接到你的闪电网络钱包。",
+      "description": "请使用你的 Alby 帐户或将 Alby 连接到你的闪电网络钱包以开始使用 Alby 扩展。",
       "other": {
         "title": "其他钱包",
         "description": "连接到你现有的闪电钱包或节点，可从各种连接器中选择。",
@@ -695,13 +695,13 @@
         "pin": {
           "description3": "就这样！要访问 Alby，只需点击 Alby 图标",
           "title": "📌 固定你的 Alby 扩展",
-          "description1": "<0>要轻松访问Alby，请点击浏览器右上角的扩展图标</0> <1/> <2>",
+          "description1": "<0>请点击浏览器右上角的扩展图标</0> <1/> <2>以轻松访问 Alby</2>",
           "description2": "在扩展列表中，找到 Alby 并点击固定图标以将其固定到工具栏"
         },
         "top_up_wallet": {
           "label1": "接收比特币",
           "title": "⚡️充值你的钱包",
-          "description": "创建一张闪电发票，给自己发送一些比特币，即可开始在闪电生态系统中使用Alby",
+          "description": "创建一张闪电发票，给自己发送一些比特币，即可开始在闪电生态系统中使用 Alby",
           "label2": "购买比特币"
         },
         "title": "你的Alby钱包已准备就绪",
@@ -806,7 +806,7 @@
     "description_full": "详细描述",
     "password": "密码",
     "settings": "设置",
-    "connected_sites": "",
+    "connected_sites": "已连接的网站",
     "amount": "金额",
     "optional": "可选",
     "description": "描述",
@@ -843,7 +843,7 @@
         "visit_guides": "访问我们的指南以获取更多帮助",
         "what_you_can_do": "以下是你可以执行的操作：",
         "double_check": "仔细检查你的连接详情",
-        "if_ssl_errors": "如果有SSL错误（如ERR_CERT_AUTHORITY_INVALID），点击 \"高级 \"并继续接受证书。"
+        "if_ssl_errors": "如果有SSL错误（如ERR_CERT_AUTHORITY_INVALID），点击 \"高级 \"并继续接受凭证。"
       }
     },
     "account_menu": {
@@ -866,7 +866,7 @@
       },
       "enable_login": {
         "title": "启用网站登录",
-        "subtitle": "网站请求时自动登录，无需确认。"
+        "subtitle": "当网站要求时，无需确认即可自动登录。"
       },
       "edit_allowance": {
         "title": "编辑限额",
@@ -893,7 +893,7 @@
     "budget_control": {
       "remember": {
         "label": "保存并设定预算",
-        "description": "你可以设置一个余额，在它用完之前不要求确认付款。"
+        "description": "你可以设置一个预算余额，在它用完之前不要求确认付款。"
       },
       "budget": {
         "label": "预算"
@@ -906,7 +906,7 @@
         "start_scanning": "开始扫描"
       },
       "errors": {
-        "allow_camera_access": "请在设置屏幕中允许相机访问。"
+        "allow_camera_access": "请在设置屏幕中允许摄像头访问。"
       }
     },
     "badge": {
@@ -920,11 +920,11 @@
       "payments": "付款"
     },
     "companion_download_info": {
-      "heading": "你想如何连接到TOR网络？",
+      "heading": "你想如何连接到 TOR 网络？",
       "download": "下载",
       "tor_native": {
         "title": "TOR（本地）",
-        "description": "如果该浏览器已经连接到TOR网络，请选择该选项。"
+        "description": "如果该浏览器已经连线 TOR 网络，请选择该选项。"
       },
       "companion": {
         "title": "配套应用",
@@ -942,7 +942,7 @@
     "commando": {
       "bkpr-listbalances": "所有当前和历史帐户余额列表。",
       "checkmessage": "验证该签名是由一个给定的节点产生的。",
-      "decode": "解码一个bolt11/bolt12/rune字符串。",
+      "decode": "解码 bolt11/bolt12/rune 字符串。",
       "connect": "与另一个节点建立新的连接。",
       "decodepay": "检查并解析 bolt11 字符串。",
       "disconnect": "关闭与对等方的现有连接。",
