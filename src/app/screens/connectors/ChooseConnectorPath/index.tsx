@@ -27,11 +27,9 @@ export default function ChooseConnectorPath({ title, description }: Props) {
         <div>
           <h1 className="text-3xl font-bold dark:text-white">{title}</h1>
           {description && (
-            <div className="flex justify-center">
-              <p className="text-gray-500 mt-6 dark:text-neutral-400 w-[500px]">
-                {description}
-              </p>
-            </div>
+            <p className="text-gray-500 mt-6 dark:text-neutral-400 w-full">
+              {description}
+            </p>
           )}
         </div>
 

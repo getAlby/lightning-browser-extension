@@ -116,6 +116,21 @@ const routeCalls = (
   return call;
 };
 
+browser.runtime.onMessage.addListener(debugLogger);
+
+// this is the only handler that may and must return a Promise which resolve with the response to the content script
+browser.runtime.onMessage.addListener(routeCalls);
+
+// Update the extension icon
+browser.tabs.onUpdated.addListener(updateIcon);
+
+// Notify the content script that the tab has been updated.
+browser.tabs.onUpdated.addListener(extractLightningData);
+
+// The onInstalled event is fired directly after the code is loaded.
+// When we subscribe to that event asynchronously in the init() function it is too late and we miss the event.
+browser.runtime.onInstalled.addListener(handleInstalled);
+
 async function init() {
   console.info("Loading background script");
 
@@ -135,23 +150,8 @@ async function init() {
   events.subscribe();
   console.info("Events subscribed");
 
-  browser.runtime.onMessage.addListener(debugLogger);
-
-  // this is the only handler that may and must return a Promise which resolve with the response to the content script
-  browser.runtime.onMessage.addListener(routeCalls);
-
-  // Update the extension icon
-  browser.tabs.onUpdated.addListener(updateIcon);
-
-  // Notify the content script that the tab has been updated.
-  browser.tabs.onUpdated.addListener(extractLightningData);
-
   console.info("Loading completed");
 }
-
-// The onInstalled event is fired directly after the code is loaded.
-// When we subscribe to that event asynchronously in the init() function it is too late and we miss the event.
-browser.runtime.onInstalled.addListener(handleInstalled);
 
 console.info("Welcome to Alby");
 init().then(() => {

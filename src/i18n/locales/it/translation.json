@@ -1,12 +1,6 @@
 {
   "translation": {
     "welcome": {
-      "nav": {
-        "welcome": "Benvenuto",
-        "password": "La tua Password",
-        "connect": "Il tuo Account Lightning",
-        "done": "Fatto"
-      },
       "set_password": {
         "title": "Imposta una password di sblocco",
         "description": "Questa password serve a proteggere il tuo wallet e a fornirti l'accesso all'estensione del browser. Non può essere reimpostata ed è differente dalla password dell'account Alby.",
@@ -732,7 +726,7 @@
     "success": "Successo",
     "error": "Errore",
     "settings": "Impostazioni",
-    "websites": "Siti web",
+    "connected_sites": "",
     "loading": "caricamento",
     "amount": "Importo",
     "optional": "Facoltativo",

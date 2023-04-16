@@ -1,12 +1,6 @@
 {
   "translation": {
     "welcome": {
-      "nav": {
-        "welcome": "Välkommen",
-        "password": "Ditt lösenord",
-        "connect": "Ditt Lightning-konto",
-        "done": "Klar"
-      },
       "set_password": {
         "title": "Ange ett lösenord för upplåsning",
         "description": "Ditt Lightning-konto är krypterat med ett lösenord för upplåsning. Glöm inte detta lösenord! Du behöver lösenordet för att kunna låsa upp Alby-tillägget (i denna webbläsare).",
@@ -786,7 +780,7 @@
     "success": "Genomfört",
     "error": "Misslyckades",
     "settings": "Inställningar",
-    "websites": "Webbplatser",
+    "connected_sites": "",
     "loading": "laddar",
     "amount": "Belopp",
     "optional": "Valfritt",

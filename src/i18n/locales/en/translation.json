@@ -2,12 +2,6 @@
   "translation": {
     "welcome": {
       "title": "Welcome to Alby",
-      "nav": {
-        "welcome": "Welcome",
-        "password": "Your Password",
-        "connect": "Your Lightning Account",
-        "done": "Done"
-      },
       "set_password": {
         "title": "Set an unlock password",
         "description": "This password is used to protect your wallet and provide access to the browser extension. It cannot be reset and is separate from your Alby Account password.",
@@ -37,7 +31,7 @@
     },
     "choose_path": {
       "title": "Connect",
-      "description": "To start using the Alby Extension, connect your lightning wallet.",
+      "description": "To start using the Alby Extension, use your Alby Account or connect to your lightning wallet.",
       "alby": {
         "title": "Alby Account",
         "description": "Sign up or use your existing Alby Account to get started with lightning payments in no time.",
@@ -230,8 +224,8 @@
       "start9": {
         "title": "Start9",
         "page": {
-          "title": "Connect to your <0>Embassy</0> node",
-          "instructions": "<0>Note:</0> Currently we only support LND but we will be adding c-lightning support in the future!<1/>On your Embassy dashboard click on the <0>lightning network Daemon</0> service.<1/>Select the <0>Properties</0> tab.<1/>Now copy the <0>LND Connect REST URL.</0>"
+          "title": "Connect to your <0>Start9 Server</0>",
+          "instructions": "On your Embassy dashboard click on the <0>Lightning Network Daemon</0> service.<1/>Select the <0>Properties</0> tab.<1/>Now copy the <0>LND Connect REST URL.</0>"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -815,7 +809,7 @@
     "settings": "Settings",
     "accounts": "Accounts",
     "discover": "Discover",
-    "websites": "Websites",
+    "connected_sites": "Connected Sites",
     "transactions": "Transactions",
     "sats_one": "sat",
     "sats_other": "sats",

@@ -2,12 +2,6 @@
   "translation": {
     "welcome": {
       "title": "Bienvenue sur Alby",
-      "nav": {
-        "welcome": "Bienvenue",
-        "password": "Mot de passe",
-        "connect": "Votre compte Lightning",
-        "done": "Fait"
-      },
       "set_password": {
         "title": "Définir un mot de passe de déverrouillage",
         "description": "Ce mot de passe est utilisé pour protéger votre portefeuille et donner accès à l'extension du navigateur. Il ne peut pas être réinitialisé et est distinct du mot de passe de votre compte Alby.",
@@ -737,7 +731,7 @@
     "settings": "Paramètres",
     "accounts": "Comptes",
     "discover": "Découvrir",
-    "websites": "Sites Internet",
+    "connected_sites": "",
     "sats_one": "sat",
     "sats_other": "sats",
     "loading": "chargement",
