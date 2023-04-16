@@ -96,14 +96,14 @@
       },
       "mynode": {
         "page": {
-          "instructions": "Klicke auf deiner MyNode Startseite auf die Schaltfläche <0>Wallet</0> für deinen <0>Lightning</0> Service.<1/> Klicke nun auf die Schaltfläche <0>Pair Wallet</0> unter dem Reiter <0>Status</0>. Gib dein Kennwort ein, wenn du dazu aufgefordert wirst.<1/> Wähle das Dropdown-Menü und wähle eine Kopplungsoption. Abhängig von deiner Einrichtung kannst du entweder die <0>lightning (REST + Local IP)</0> Verbindung oder die <0>lightning (REST + Tor)</0> Verbindung verwenden.",
+          "instructions": "Klicke auf deiner myNode Startseite auf die Schaltfläche <0>Wallet</0> für deinen <0>Lightning</0> Service.<1/> Klicke nun auf die Schaltfläche <0>Pair Wallet</0> unter dem Reiter <0>Status</0>. Gib dein Kennwort ein, wenn du dazu aufgefordert wirst.<1/> Wähle das Dropdown-Menü und wähle eine Kopplungsoption. Abhängig von deiner Einrichtung kannst du entweder die <0>lightning (REST + Local IP)</0> Verbindung oder die <0>lightning (REST + Tor)</0> Verbindung verwenden.",
           "title": "Verbinden mit <0>myNode</0>"
         },
         "rest_url": {
           "label": "Indconnect REST URL",
-          "placeholder": "Indconnect://DeinKnoten:8080?..."
+          "placeholder": "lndconnect://deinenode:8080?..."
         },
-        "title": "meinKnoten"
+        "title": "myNode"
       },
       "umbrel": {
         "page": {
@@ -112,7 +112,7 @@
         },
         "rest_url": {
           "label": "Indconnect-REST URL",
-          "placeholder": "lndconnect://deinknoten:8080?..."
+          "placeholder": "lndconnect://deinenode:8080?..."
         },
         "title": "Umbrel"
       },
@@ -140,7 +140,7 @@
         "title": "RaspiBlitz",
         "rest_api_host": {
           "label": "REST API Host",
-          "placeholder": "Deine Knoten-Onion-Adresse: Port"
+          "placeholder": "deine-node-onion-adresse:port"
         }
       },
       "eclair": {
@@ -163,7 +163,7 @@
           "title": "Verbinden mit deinem <0>Start9 Server</0>"
         },
         "rest_url": {
-          "placeholder": "lndconnect://deinknoten:8080?...",
+          "placeholder": "lndconnect://deinenode:8080?...",
           "label": "Indconnect REST URL"
         },
         "title": "Start9"
@@ -221,7 +221,7 @@
         "title": "Core Lightning",
         "page": {
           "title": "Verbinden mit deiner Core Lightning Node",
-          "instructions": "Stelle sicher, dass du die Core Lightning Version 0.12.0 oder neuer hast, das Commando-Plugin ausgeführt wird und dein Knoten über das Llightning Network zugänglich ist. Erstelle eine Rune, indem du „lightning-cli commando-rune“ ausführst."
+          "instructions": "Stelle sicher, dass du die Core Lightning Version 0.12.0 oder neuer hast, das Commando-Plugin ausgeführt wird und deine Node über das Llightning Network zugänglich ist. Erstelle eine Rune, indem du „lightning-cli commando-rune“ ausführst."
         },
         "host": {
           "label": "Host"
@@ -246,7 +246,7 @@
           "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
         },
         "errors": {
-          "connection_failed": "Verbindung fehlgeschlagen. Ist dein Core Lightning Knoten online und verwendet es das Commando Plugin?"
+          "connection_failed": "Verbindung fehlgeschlagen. Ist deine Core Lightning Node online und verwendet diese das Commando Plugin?"
         }
       },
       "kollider": {
@@ -662,7 +662,7 @@
     "lnurlchannel": {
       "title": "Kanal-Anfrage",
       "content_message": {
-        "heading": "Einen Kanal vom Knoten anfordern"
+        "heading": "Anforderung eines Kanals von der Node"
       },
       "success": "Kanalanfrage erfolgreich an {{name}} gesendet"
     },
@@ -738,7 +738,7 @@
         "miscellaneous": "Sonstiges",
         "showcases": "Schaukästen",
         "nostr": "Nostr",
-        "nodeManagement": "Verwalte deine Note"
+        "nodeManagement": "Node-Verwaltung"
       },
       "tips": {
         "title": "Deine Alby-Wallet ist bereit",
@@ -936,32 +936,32 @@
   "permissions": {
     "commando": {
       "bkpr-listbalances": "Liste aller aktuellen und historischen Kontosalden.",
-      "checkmessage": "Überprüfe, ob die Signatur von einem bestimmten Knoten erzeugt wurde.",
+      "checkmessage": "Überprüfe, ob die Signatur von einem bestimmten Node erstellt wurde.",
       "fundchannel": "Öffne einen Zahlungskanal mit einem Peer, indem du eine Finanzierungstransaktion durchführst.",
-      "getroute": "Finde die beste Route für die Zahlung an einen Lightningnoten.",
+      "getroute": "Finde die beste Route für die Zahlung an eine Lightning Node.",
       "invoice": "Schaffe die Erwartung einer Zahlung.",
-      "keysend": "Sende eine Zahlung an einen anderen Knoten.",
+      "keysend": "Sende eine Zahlung an eine andere Node.",
       "listoffers": "Alle Angebote auflisten oder ein bestimmtes Angebot erhalten.",
       "listpays": "Ruft den Status aller Zahlungsbefehle ab.",
-      "signmessage": "Erstelle eine Signatur aus diesem Knoten.",
+      "signmessage": "Erstellen Sie eine Signatur von dieser Node.",
       "feerates": "Rückgabe der Fee Rate, die bei CLN verwenden wird.",
       "listforwards": "Auflistung aller versuchten Übermittlungsversuche.",
       "listfunds": "Listet alle verfügbaren Mittel auf.",
       "listinvoices": "Abrufen des Status aller Rechnungen.",
       "sendpay": "Sende eine Zahlung über eine Route.",
-      "multifundchannel": "Öffne mehrere Zahlungskanäle mit Knotenpunkten, indem du eine einzige Finanzierungstransaktion durchführst.",
+      "multifundchannel": "Öffne mehrere Zahlungskanäle mit Nodes, indem du eine einzige Finanzierungstransaktion durchführst.",
       "disconnect": "Schließen einer bestehenden Verbindung zu einem Peer.",
       "decodepay": "Prüfe und analysiere einen Bolt11-String.",
-      "getinfo": "Abrufen der Zusammenfassung des Knotens.",
+      "getinfo": "Abrufen der Zusammenfassung der Node.",
       "listtransactions": "Liste der in der Wallet verfolgten Transaktionen.",
       "offer": "Erstelle ein Angebot.",
-      "connect": "Stelle eine neue Verbindung zu einem anderen Knoten her.",
+      "connect": "Stellen Sie eine neue Verbindung mit einer anderen Node her.",
       "decode": "Dekodiere eine Bolt11/Bolt12/Rune-Kette.",
-      "listpeers": "Liste der Knoten, die mit diesem Knoten verbunden sind oder offene Kanäle haben.",
+      "listpeers": "Liste der Nodes, die mit dieser Node verbunden sind oder offene Kanäle haben.",
       "listsendpays": "Ruft den Status aller sendpay-Befehle ab.",
       "pay": "Sende eine Zahlung an eine BOLT11-Rechnung.",
       "setchannel": "Konfiguriere die für einen Kanal beworbenen Gebühren / htlc-Bereiche.",
-      "listnodes": "Nodes auflisten, von denen der Node über Nachrichten erfahren hat."
+      "listnodes": "Auflistung von Nodes, von denen der Node durch Gossip-Nachrichten erfahren hat."
     },
     "lnd": {
       "channelbalance": "Du erhältst einen Bericht über den Gesamtbetrag der Mittel für alle offenen Kanäle.",
@@ -970,12 +970,12 @@
       "openchannel": "Öffne einen neuen Kanal.",
       "estimatefee": "Schätze den Gebührensatz und die Gesamtgebühren für eine Transaktion.",
       "getchaninfo": "Ermittelt die Netzansage für den angegebenen Kanal.",
-      "getinfo": "Abrufen der Knoteninformationen.",
+      "getinfo": "Abrufen der Node-Informationen.",
       "listinvoices": "Erhalte eine Liste aller Rechnungen.",
       "connectpeer": "Stelle eine Verbindung zu einer entfernten Gegenstelle her.",
       "disconnectpeer": "Trenne die Verbindung zu einer entfernten Gegenstelle.",
       "getnetworkinfo": "Abrufen grundlegender Statistiken über die bekannte Kanalkurve.",
-      "getnodeinfo": "Abrufen der Kanalinformationen für einen Knoten.",
+      "getnodeinfo": "Abrufen der Kanalinformationen für einen Node.",
       "gettransactions": "Abrufen einer Liste aller für die Wallets relevanten Transaktionen.",
       "listpeers": "Erhalte eine Liste aller derzeit aktiven Peers.",
       "lookupinvoice": "Rechnungsdetails nachschlagen.",
@@ -999,7 +999,7 @@
       "connectpeer": "Stelle eine Verbindung zu einer Gegenstelle her.",
       "disconnectpeer": "Trenne die Verbindung zu einer entfernten Gegenstelle.",
       "estimatefee": "Schätze den Gebührensatz und die Gesamtgebühren für eine Transaktion.",
-      "getnodeinfo": "Abrufen der Kanalinformationen für einen Knoten.",
+      "getnodeinfo": "Abrufen der Kanalinformationen für eine Node.",
       "getchaninfo": "Ermittelt die Netzansage für den angegebenen Kanal.",
       "listpayments": "Erhalte eine Liste aller ausgehenden Zahlungen.",
       "queryroutes": "Abfrage nach einer möglichen Route.",
@@ -1012,7 +1012,7 @@
       "gettransactions": "Abrufen einer Liste aller für die Wallet relevanten Transaktionen.",
       "getnetworkinfo": "Abrufen grundlegender Statistiken über die bekannte Kanalkurve.",
       "lookupinvoice": "Rechnungsdetails nachschlagen.",
-      "getinfo": "Abrufen der Knoteninformationen.",
+      "getinfo": "Abrufen der Node-Informationen.",
       "listchannels": "Erhalte eine Beschreibung aller offenen Kanäle.",
       "listinvoices": "Erhalte eine Liste aller Rechnungen.",
       "channelbalance": "Erhalte einen Bericht über den Gesamtbetrag der Mittel für alle offenen Kanäle.",
