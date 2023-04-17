@@ -4,8 +4,8 @@ import {
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import Button from "@components/Button";
 import Loading from "@components/Loading";
+import Tab from "@components/Tab";
 import TransactionsTable from "@components/TransactionsTable";
-import { Tab } from "@headlessui/react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { FC, useCallback, useEffect, useState } from "react";
@@ -15,7 +15,6 @@ import { toast } from "react-toastify";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
 import { PublisherLnData } from "~/app/screens/Home/PublisherLnData";
-import { classNames } from "~/app/utils/index";
 import { convertPaymentsToTransactions } from "~/app/utils/payments";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
@@ -36,7 +35,7 @@ const DefaultView: FC<Props> = (props) => {
   const [incomingTransactions, setIncomingTransactions] = useState<
     Transaction[] | null
   >(null);
-
+  const [tabCategory, setTabCategory] = useState("");
   const [isBlockedUrl, setIsBlockedUrl] = useState<boolean>(false);
 
   const {
@@ -215,17 +214,12 @@ const DefaultView: FC<Props> = (props) => {
                 ].map((category) => (
                   <Tab
                     key={category}
-                    className={({ selected }) =>
-                      classNames(
-                        "w-1/2 rounded-lg py-2.5 font-bold transition duration-150",
-                        "focus:outline-none",
-                        "hover:bg-gray-50 dark:hover:bg-surface-16dp hover:text-gray-600 dark:hover:text-gray-300",
-                        selected ? "text-black" : "text-gray-400"
-                      )
-                    }
-                  >
-                    {category}
-                  </Tab>
+                    active={tabCategory === category}
+                    label={category}
+                    onClick={() => {
+                      setTabCategory(category);
+                    }}
+                  ></Tab>
                 ))}
               </Tab.List>
 
