@@ -2,12 +2,6 @@
   "translation": {
     "welcome": {
       "title": "Velkommen til Alby",
-      "nav": {
-        "welcome": "Velkommen",
-        "password": "Din adgangskode",
-        "connect": "Din Lightning-konto",
-        "done": "Færdig"
-      },
       "set_password": {
         "title": "Angiv en nøglekode",
         "description": "Dette kodeord bruges til at beskytte din wallet og giver adgang til browserudvidelsen. Det kan ikke nulstilles, og er ikke den samme som adgangskoden til din Alby-konto.",
@@ -228,7 +222,7 @@
         "title": "Start9",
         "page": {
           "title": "Opret forbindelse til din <0>Embassy</0> node",
-          "instructions": "<0>Note:</0> I øjeblikket understøtter vi kun LND, men vi vil fremover også tilføje support af c-lightning!<1/>I din Embassys indstillingsmenu klikker du på servicen <0>lightning network Daemon</0>.<1/>Vælg fanen <0>Properties</0>.<1/>Kopier så <0>LND Connect REST URL.</0>"
+          "instructions": "<0>Note:</0> I øjeblikket understøtter vi kun LND, men vi vil fremover også tilføje support af c-lightning!<1/>I din Embassys indstillingsmenu klikker du på servicen <0>Lightning Network Daemon</0>.<1/>Vælg fanen <0>Properties</0>.<1/>Kopier så <0>LND Connect REST URL.</0>"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
