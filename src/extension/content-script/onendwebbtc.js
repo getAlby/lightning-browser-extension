@@ -21,7 +21,7 @@ async function init() {
 
   const SCOPE = "webbtc";
 
-  // message listener to listen to inpage webln calls
+  // message listener to listen to inpage webbtc calls
   // those calls get passed on to the background script
   // (the inpage script can not do that directly, but only the inpage script can make webln available to the page)
   window.addEventListener("message", (ev) => {
@@ -38,7 +38,7 @@ async function init() {
       // if an enable call railed we ignore the request to prevent spamming the user with prompts
       if (isRejected) {
         console.error(
-          "Enable had failed. Rejecting further WebLN calls until the next reload"
+          "Enable had failed. Rejecting further WebBTC calls until the next reload"
         );
         return;
       }
