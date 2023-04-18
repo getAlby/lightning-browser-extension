@@ -1,10 +1,14 @@
 import getOriginData from "../originData";
 import { findLnurlFromYouTubeAboutPage } from "./YouTubeChannel";
-import { findLightningAddressInText, setLightningData } from "./helpers";
+import {
+  findLightningAddressInText,
+  resetIcon,
+  setLightningData,
+} from "./helpers";
 
 const urlMatcher = /^https:\/\/www\.youtube.com\/watch.*/;
 
-const battery = async (): Promise<void> => {
+const setData = async (): Promise<void> => {
   let text = "";
   document
     .querySelectorAll(
@@ -60,6 +64,24 @@ const battery = async (): Promise<void> => {
       icon: imageUrl,
     },
   ]);
+};
+
+const battery = async (): Promise<void> => {
+  setData();
+  const videoDescription = document.querySelector(
+    "div#bottom-row.style-scope.ytd-watch-metadata"
+  );
+  if (!videoDescription) return;
+
+  const observer = new MutationObserver((mutations) => {
+    const latestMutation = mutations[mutations.length - 1];
+    const newDescription = latestMutation.target.textContent?.trim();
+    if (!newDescription) return;
+    resetIcon();
+    setData();
+  });
+
+  observer.observe(videoDescription, { childList: true, subtree: true });
 };
 
 const YouTubeVideo = {
