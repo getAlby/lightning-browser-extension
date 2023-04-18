@@ -41,13 +41,14 @@ export function useTheme(): Theme {
     : "light";
 }
 
-export function getBrowserType(defaultType?: BrowserType): BrowserType | null {
+export function getBrowserType(): BrowserType | null {
   if (!chrome?.runtime) return null;
   const url = chrome.runtime.getURL("");
   if (url.startsWith("moz-extension://")) return "firefox";
   if (url.startsWith("chrome-extension://")) return "chrome";
 
-  return defaultType || null;
+  // default to "chrome"
+  return "chrome";
 }
 
 export function isAlbyAccount(alias = "") {

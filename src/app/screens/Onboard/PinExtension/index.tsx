@@ -15,7 +15,7 @@ export default function PinExtension() {
   const theme = useTheme();
 
   const getImage = () => {
-    const imageType = getBrowserType("chrome");
+    const imageType = getBrowserType();
 
     return (
       <img
@@ -45,14 +45,14 @@ export default function PinExtension() {
               // eslint-disable-next-line react/jsx-key
               <img
                 src="assets/icons/puzzle.svg"
-                className="relative -top-1 w-5 inline align-bottom dark:invert"
+                className="w-5 inline align-bottom dark:invert"
               />,
               // eslint-disable-next-line react/jsx-key
               <br />,
               // eslint-disable-next-line react/jsx-key
               <img
                 src="assets/icons/alby_icon_yellow.svg"
-                className="relative -top-1 w-5 inline align-bottom dark:invert"
+                className="w-5 inline align-bottom dark:invert"
               />,
             ]}
           />
