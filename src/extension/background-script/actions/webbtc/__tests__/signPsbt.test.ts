@@ -4,9 +4,7 @@ import { HDKey } from "@scure/bip32";
 import * as bip39 from "@scure/bip39";
 import * as btc from "@scure/btc-signer";
 import signPsbt from "~/extension/background-script/actions/webbtc/signPsbt";
-import state from "~/extension/background-script/state";
-import { allowanceFixture } from "~/fixtures/allowances";
-import type { DbAllowance, MessageSignPsbt } from "~/types";
+import type { MessageSignPsbt } from "~/types";
 
 jest.mock("~/extension/background-script/state");
 
@@ -43,23 +41,12 @@ const TX_TEST_INPUTS = [
   },
 ];
 
-const defaultMockState = {
-  currentAccountId: "8b7f1dc6-ab87-4c6c-bca5-19fa8632731e",
-};
-
 const regtest = {
   bech32: "bcrt",
   pubKeyHash: 0x6f,
   scriptHash: 0xc4,
   wif: 0,
 };
-
-const mockState = defaultMockState;
-state.getState = jest.fn().mockReturnValue(mockState);
-
-Date.now = jest.fn(() => 1487076708000);
-
-const mockAllowances: DbAllowance[] = [allowanceFixture[0]];
 
 beforeEach(async () => {
   // fill the DB first
@@ -143,10 +130,7 @@ describe("test transaction building", () => {
       "xprv9s21ZrQH143K3GJpoapnV8SFfukcVBSfeCficPSGfubmSFDxo1kuHnLisriDvSnRRuL2Qrg5ggqHKNVpxR86QEC8w35uxmGoggxtQTPvfUu"
     );
 
-    console.log("root", hdkey.privateExtendedKey, hdkey.publicExtendedKey);
-
     // Check
-
     // ✅ m/0'/0'
     // BIP32 Extended Private key
     // xprv9w83TkwTJSpYjV4hWcxttB9bQWHdrFCPzCLnMHKceyd4WGBfsUgijUirvMaHM6TFBqQegpt3hZysUeBP8PFmkjPWitahm71vjNhMLqKmuLb
@@ -154,20 +138,54 @@ describe("test transaction building", () => {
     // ❌ m/49'/0'/0'/0
     // ❌ m/84'/0'/0'/0
     // zprvAg4yBxbZcJpcLxtXp5kZuh8jC1FXGtZnCjrkG69JPf96KZ1TqSakA1HF3EZkNjt9yC4CTjm7txs4sRD9EoHLgDqwhUE6s1yD9nY4BCNN4hw
+    // 49 / 84 doesn't seem to follow the same derivation logic 🤔
 
-    const derivedKey = hdkey.derive("m/84'/0'/0'");
+    // const derivedKey = hdkey.derive("m/84'/0'/0'");
+    // const addressKey = hdkey.derive("m/84'/0'/0'/0/0");
 
-    const addressKey = hdkey.derive("m/84'/0'/0'/0/0");
+    // const nostrKey = hdkey.derive("m/1237'/0'/0");
+    // const liquidKey = hdkey.derive("m/1776'/0'/0");
 
-    console.log(
-      "derived",
-      derivedKey.privateExtendedKey,
-      derivedKey.publicExtendedKey
-    );
-    console.log(
-      "address",
-      btc.getAddress("wpkh", addressKey.privateKey, btc.NETWORK)
-    );
+    // console.log(nostrKey, liquidKey);
+
+    // console.log(
+    //   "derived",
+    //   derivedKey.privateExtendedKey,
+    //   derivedKey.publicExtendedKey
+    // );
+    // console.log(
+    //   "address",
+    //   btc.getAddress("wpkh", addressKey.privateKey!, btc.NETWORK)
+    // );
+
+    // Assemble transaction
+    // const result1 = btc.WIF(regtest).encode(derivedKey.publicKey!);
+    // console.log(result1);
+
+    const tx32 = new btc.Transaction({ version: 1 });
+    for (const [address, amount] of TX_TEST_OUTPUTS)
+      tx32.addOutputAddress(address, amount);
+    for (const inp of TX_TEST_INPUTS) {
+      tx32.addInput({
+        txid: inp.txid,
+        index: inp.index,
+        witnessUtxo: {
+          amount: inp.amount,
+          script: btc.p2wpkh(secp256k1.getPublicKey(hdkey.privateKey!, true))
+            .script,
+        },
+      });
+    }
+
+    // Create psbt
+    const psbt = hex.encode(tx32.toPSBT());
+
+    // Sign transaction
+    const result = await sendPsbtMessage(psbt);
+
+    // Check signatures
+    expect(result.data).not.toBe(undefined);
+    expect(result.error).toBe(undefined);
   });
 });
 
