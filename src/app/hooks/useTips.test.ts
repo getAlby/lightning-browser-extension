@@ -13,7 +13,7 @@ jest.mock("~/app/context/SettingsContext", () => ({
   }),
 }));
 
-let tmpAccount = { id: "1", name: "LND account", alias: "" };
+let tmpAccount = { id: "1", name: "LND account", connector: "" };
 
 jest.mock("~/app/context/AccountContext", () => ({
   useAccount: () => ({
@@ -39,15 +39,15 @@ jest.mock("~/app/utils", () => {
 });
 
 describe("useTips", () => {
-  test("should have 1 tips in chrome", async () => {
-    tmpAccount = { id: "1", name: "LND account", alias: "" };
+  test("should have 2 tips in chrome", async () => {
+    tmpAccount = { id: "1", name: "LND account", connector: "" };
     const { tips } = useTips();
     expect(tips.length).toBe(1);
     const hasTopUpWallet = tips.some((tip) => tip === TIPS.TOP_UP_WALLET);
     expect(hasTopUpWallet).toBe(false);
   });
-  test("should have 2 tips with top up wallet in chrome when having alby account", async () => {
-    tmpAccount = { id: "2", name: "Alby", alias: "🐝 getalby.com" };
+  test("should have 3 tips with top up wallet in chrome when having alby account", async () => {
+    tmpAccount = { id: "2", name: "Alby", connector: "alby" };
     const { tips } = useTips();
     expect(tips.length).toBe(2);
     const hasTopUpWallet = tips.some((tip) => tip === TIPS.TOP_UP_WALLET);
