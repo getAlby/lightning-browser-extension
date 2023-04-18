@@ -148,8 +148,8 @@
       "start9": {
         "title": "Start9",
         "page": {
-          "title": "Anslut din <0>Embassy</0>-nod",
-          "instructions": "<0>Notis:</0> Vi stödjer endast LND men kommer lägga till stöd för c-lightning i framtiden!<1/>På din Embassy-översikt klicka på <0>Lightning Network Daemon</0> tjänst.<1/>Välj fliken <0>Properties</0>.<1/>Kopiera <0>LND Connect REST URL.</0>"
+          "title": "Anslut till din <0>Start9 Server</0>",
+          "instructions": "På din Embassy instrumentpanel klickar du på tjänsten <0>Lightning Network Daemon</0>.<1/>Välj fliken <0>Egenskaper</0>.<1/>Kopiera nu <0>LND Connect REST URL. </0>"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
