@@ -13,7 +13,7 @@ type Props = React.FormHTMLAttributes<HTMLFormElement> & {
   ) => void;
 };
 
-const RecieveTab = ({
+const LightningReceiveForm = ({
   handleSubmit,
   loading,
   fiatAmount,
@@ -63,4 +63,4 @@ const RecieveTab = ({
   );
 };
 
-export default RecieveTab;
+export default LightningReceiveForm;

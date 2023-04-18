@@ -8,7 +8,6 @@ import Container from "@components/Container";
 import Header from "@components/Header";
 import IconButton from "@components/IconButton";
 import Loading from "@components/Loading";
-import RecieveTab from "@components/RecieveTab";
 import Tab from "@components/Tab";
 import { useEffect, useRef, useState } from "react";
 import Confetti from "react-confetti";
@@ -16,15 +15,15 @@ import { useTranslation } from "react-i18next";
 import QRCode from "react-qr-code";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import LightningReceiveForm from "~/app/components/LightningReceiveForm";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
+import BlockIcon from "~/app/icons/BlockIcon";
+import ThunderIcon from "~/app/icons/ThunderIcon";
 import { isAlbyAccount } from "~/app/utils";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import { poll } from "~/common/utils/helpers";
-
-import Block from "../../../../static/assets/icons/Block.svg";
-import Thunder from "../../../../static/assets/icons/thunder.svg";
 
 function Receive() {
   const { t } = useTranslation("translation", { keyPrefix: "receive" });
@@ -54,7 +53,6 @@ function Receive() {
   const [paid, setPaid] = useState(false);
   const [pollingForPayment, setPollingForPayment] = useState(false);
   const mounted = useRef(false);
-  const [recieveType, setRecieveType] = useState("lightning");
   const isAlbyUser = isAlbyAccount(auth.account?.alias);
 
   useEffect(() => {
@@ -245,37 +243,21 @@ function Receive() {
           <div className=" h-full mx-auto">
             <Tab.Group>
               <Tab.List className="flex mb-6 mt-4 items-center px-4">
-                <Tab
-                  active={recieveType === "lightning"}
-                  onClick={() => {
-                    setRecieveType("lightning");
-                  }}
-                  leftTab={true}
-                  icon={<img src={Thunder}></img>}
-                  label="Lightning"
-                ></Tab>
+                <Tab icon={<ThunderIcon></ThunderIcon>} label="Lightning"></Tab>
 
-                <Tab
-                  active={recieveType === "onchain"}
-                  onClick={() => {
-                    setRecieveType("onchain");
-                  }}
-                  rightTab={true}
-                  icon={<img src={Block}></img>}
-                  label="Onchain"
-                ></Tab>
+                <Tab icon={<BlockIcon></BlockIcon>} label="Onchain"></Tab>
               </Tab.List>
               <Tab.Panels className="h-full">
                 <Tab.Panel className="h-full">
                   {invoice ? (
                     <Container maxWidth="sm">{renderInvoice()}</Container>
                   ) : (
-                    <RecieveTab
+                    <LightningReceiveForm
                       handleSubmit={handleSubmit}
                       handleChange={handleChange}
                       loading={loading}
                       fiatAmount={fiatAmount}
-                    ></RecieveTab>
+                    ></LightningReceiveForm>
                   )}
                 </Tab.Panel>
                 <Tab.Panel className="h-full">
@@ -319,12 +301,12 @@ function Receive() {
           {invoice ? (
             <Container maxWidth="sm">{renderInvoice()}</Container>
           ) : (
-            <RecieveTab
+            <LightningReceiveForm
               handleSubmit={handleSubmit}
               handleChange={handleChange}
               loading={loading}
               fiatAmount={fiatAmount}
-            ></RecieveTab>
+            ></LightningReceiveForm>
           )}
         </div>
       )}

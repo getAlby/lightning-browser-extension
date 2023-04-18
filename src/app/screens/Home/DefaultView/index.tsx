@@ -35,7 +35,6 @@ const DefaultView: FC<Props> = (props) => {
   const [incomingTransactions, setIncomingTransactions] = useState<
     Transaction[] | null
   >(null);
-  const [tabCategory, setTabCategory] = useState("");
   const [isBlockedUrl, setIsBlockedUrl] = useState<boolean>(false);
 
   const {
@@ -212,14 +211,7 @@ const DefaultView: FC<Props> = (props) => {
                   t("transaction_list.tabs.outgoing"),
                   t("transaction_list.tabs.incoming"),
                 ].map((category) => (
-                  <Tab
-                    key={category}
-                    active={tabCategory === category}
-                    label={category}
-                    onClick={() => {
-                      setTabCategory(category);
-                    }}
-                  ></Tab>
+                  <Tab key={category} label={category}></Tab>
                 ))}
               </Tab.List>
 
