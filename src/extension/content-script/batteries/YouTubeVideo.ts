@@ -85,10 +85,7 @@ const battery = async (): Promise<void> => {
         setData();
       }
 
-      const observer = new MutationObserver((mutations) => {
-        const latestMutation = mutations[mutations.length - 1];
-        const newDescription = latestMutation.target.textContent?.trim();
-        if (!newDescription) return;
+      const observer = new MutationObserver(() => {
         resetLightningData();
         setData();
       });
