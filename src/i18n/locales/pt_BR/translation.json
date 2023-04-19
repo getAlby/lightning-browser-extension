@@ -120,7 +120,7 @@
       "start9": {
         "title": "Start9",
         "page": {
-          "title": "Conecte no seu servidor <0>Embassy</0>",
+          "title": "Connect to your <0>Start9 Server</0>",
           "instructions": "<0>Note:</0> Atualmente somente a LND é suportada mas nós adicionaremos suporte para a c-lightning no futuro!<1/>No seu Embassy clique em service <0>Lightning Network Daemon</0>.<1/>Selecione a tab <0>Properties</0>.<1/>Agora copie o <0>LND Connect REST URL.</0>"
         },
         "rest_url": {
