@@ -769,3 +769,9 @@ export interface Invoice {
 }
 
 export type BrowserType = "chrome" | "firefox";
+
+export interface DeferredPromise {
+  promise: Promise<unknown>;
+  resolve?: () => void;
+  reject?: () => void;
+}
