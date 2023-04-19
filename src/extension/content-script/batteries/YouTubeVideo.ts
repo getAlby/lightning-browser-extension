@@ -2,11 +2,17 @@ import getOriginData from "../originData";
 import { findLnurlFromYouTubeAboutPage } from "./YouTubeChannel";
 import {
   findLightningAddressInText,
-  resetIcon,
+  resetLightningData,
   setLightningData,
 } from "./helpers";
 
 const urlMatcher = /^https:\/\/www\.youtube.com\/watch.*/;
+
+declare global {
+  interface Window {
+    ALBY_BATTERY: boolean;
+  }
+}
 
 const setData = async (): Promise<void> => {
   let text = "";
@@ -67,7 +73,11 @@ const setData = async (): Promise<void> => {
 };
 
 const battery = async (): Promise<void> => {
-  setData();
+  if (!window.ALBY_BATTERY) {
+    window.ALBY_BATTERY = true;
+    setData();
+  }
+
   const videoDescription = document.querySelector(
     "div#bottom-row.style-scope.ytd-watch-metadata"
   );
@@ -77,7 +87,7 @@ const battery = async (): Promise<void> => {
     const latestMutation = mutations[mutations.length - 1];
     const newDescription = latestMutation.target.textContent?.trim();
     if (!newDescription) return;
-    resetIcon();
+    resetLightningData();
     setData();
   });
 
