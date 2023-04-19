@@ -44,7 +44,7 @@ export default function TestConnection() {
     }, 45000);
     try {
       const { currentAccountId } = await api.getStatus();
-      auth.setAccountId(currentAccountId, true);
+      auth.setAccountId(currentAccountId);
       const accountInfo = await auth.fetchAccountInfo({
         accountId: currentAccountId,
       });

@@ -31,7 +31,7 @@ interface AccountContextType {
   /**
    * Set new id and clears current info, which causes a loading indicator for the alias/balance
    */
-  setAccountId: (id: string, willFetch: boolean) => void;
+  setAccountId: (id: string) => void;
   /**
    * Fetch the additional account info: alias/balance and update account
    */
@@ -62,7 +62,7 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
 
   const unlock = (password: string, callback: VoidFunction) => {
     return api.unlock(password).then((response) => {
-      setAccountId(response.currentAccountId, true);
+      setAccountId(response.currentAccountId);
       fetchAccountInfo({ accountId: response.currentAccountId });
 
       // callback - e.g. navigate to the requested route after unlocking
@@ -77,11 +77,9 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
     });
   };
 
-  const setAccountId = (id: string, willFetch: boolean) => {
+  const setAccountId = (id: string) => {
     setAccount({ id });
-    if (willFetch) {
-      setBalanceLoading(true);
-    }
+    setBalanceLoading(true);
   };
 
   const updateFiatValue = useCallback(
@@ -131,7 +129,7 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
           if (response.configured && onWelcomePage) {
             utils.redirectPage("options.html");
           }
-          setAccountId(response.currentAccountId, true);
+          setAccountId(response.currentAccountId);
           fetchAccountInfo({ accountId: response.currentAccountId });
         } else {
           setAccount(null);
