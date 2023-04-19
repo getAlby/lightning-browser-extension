@@ -44,7 +44,7 @@ We also do a bi-weekly call on Thursday at [15:00 UTC](https://everytimezone.com
 
 Alby supports
 
-- All [Chromium based browsers](<https://en.wikipedia.org/wiki/Chromium_(web_browser)#Browsers_based_on_Chromium>) - Chrome Opera, Brave etc.
+- All [Chromium based browsers](<https://en.wikipedia.org/wiki/Chromium_(web_browser)#Browsers_based_on_Chromium>) - Chrome, Edge, Opera, Brave etc.
 - Firefox
 - more coming soon...
 
@@ -58,7 +58,9 @@ Add Alby to your browser
 ### Try out the most recent version of Alby (Nightly Releases)
 
 - [Firefox Nightly](https://nightly.link/getAlby/lightning-browser-extension/workflows/build/master/firefox.xpi.zip) - best to install it as a temporary add-on as discussed in the "[Load extension into browser](/doc/SETUP.md#-load-extension-into-browser)" section
-- [Chrome Nightly](https://nightly.link/getAlby/lightning-browser-extension/workflows/build/master/chrome.zip) - go to `chrome://extensions/`, enable "Developer mode" (top right), and drag & drop the file in the browser
+- [Chrome Nightly](https://nightly.link/getAlby/lightning-browser-extension/workflows/build/master/chrome.zip)
+  - for Chrome: go to `chrome://extensions/`, enable "Developer mode" (top right), and drag & drop the file in the browser
+  - for Edge: go to `edge://extensions/`, enable "Developer mode" (left column), and load the unpacked file in the browser
 
 (Note: You might need to reconfigure your wallet after installing new versions)
 
@@ -108,7 +110,7 @@ We use the [Development Project Board](https://github.com/orgs/getAlby/projects/
 
 - Have a look at our [Open source Design guide](https://github.com/getAlby/lightning-browser-extension/wiki/Open-source-Design)
 - Check out the issues that have specifically been [marked with "design"](https://github.com/getAlby/lightning-browser-extension/issues?q=is%3Aopen+is%3Aissue+label%3A%22design%22)
-- We also have a [Figma Design Guide Project](https://www.figma.com/file/xwGXHxW4FWpV03Tt37atZv/Extension-1.10.0) which you can have a look at
+- You can find and copy current version of the extension in this Figma file: [Alby Extension Master Design](https://www.figma.com/file/O49NS4o3IjWwmHvFLncTy6/Alby-Extension-Master-Design?node-id=0%3A1&t=rd4dQkDtwZ4Nuuqo-1)
 
 #### Anyone
 

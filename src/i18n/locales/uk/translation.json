@@ -2,12 +2,6 @@
   "translation": {
     "welcome": {
       "title": "Вітаємо у Alby",
-      "nav": {
-        "welcome": "Вітаємо",
-        "password": "Ваш пароль",
-        "connect": "Ваш обліковий запис у Lightning",
-        "done": "Готово"
-      },
       "set_password": {
         "title": "Встановити пароль для розблокування",
         "description": "Пароль використовується для захисту вашого гаманця і надання доступу до розширення браузера. Його не можна скинути і він є відокремленим від вашого паролю до облікового запису Alby.",
@@ -285,14 +279,7 @@
       "kollider": {
         "title": "",
         "description": "",
-        "page": {
-          "title": "",
-          "description": ""
-        },
         "username": {
-          "label": ""
-        },
-        "password": {
           "label": ""
         },
         "currency": {
@@ -634,7 +621,7 @@
       "list": {
         "trading": "",
         "gaming": "",
-        "entertaiment": "",
+        "entertainment": "",
         "shopping": "",
         "miscellaneous": "",
         "showcases": "",
@@ -743,7 +730,7 @@
     "settings": "",
     "accounts": "",
     "discover": "",
-    "websites": "",
+    "connected_sites": "",
     "sats_one": "",
     "sats_other": "",
     "loading": "",

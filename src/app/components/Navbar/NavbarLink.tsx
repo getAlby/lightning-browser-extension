@@ -14,7 +14,7 @@ function NavbarLink({ children, end = false, href }: Props) {
       to={href}
       className={({ isActive }) =>
         classNames(
-          "block font-semibold px-1 text-md",
+          "block font-semibold hover:text-gray-600 dark:hover:text-gray-300 transition px-1 text-md",
           isActive
             ? " text-gray-900 dark:text-gray-100"
             : " text-gray-400 dark:text-gray-400"

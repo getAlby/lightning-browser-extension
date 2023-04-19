@@ -24,9 +24,9 @@ import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
 import type {
   LNURLError,
+  LNURLPayServiceResponse,
   LNURLPaymentInfo,
   LNURLPaymentSuccessAction,
-  LNURLPayServiceResponse,
   PaymentResponse,
 } from "~/types";
 
@@ -61,7 +61,6 @@ function LNURLPay() {
       Math.floor(+details?.minSendable / 1000).toString()) ||
       ""
   );
-
   const [fiatValue, setFiatValue] = useState("");
   const [comment, setComment] = useState("");
   const [userName, setUserName] = useState("");
@@ -418,6 +417,9 @@ function LNURLPay() {
                               value={valueSat}
                               onChange={(e) => setValueSat(e.target.value)}
                               fiatValue={fiatValue}
+                              hint={`${tCommon("balance")}: ${
+                                auth?.balancesDecorated?.accountBalance
+                              }`}
                             />
                             <SatButtons
                               min={Math.floor(+details.minSendable / 1000)}
