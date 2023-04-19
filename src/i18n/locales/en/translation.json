@@ -297,7 +297,7 @@
         },
         "login": {
           "title": "Connect to your Kollider account",
-          "description": "Don't have an account already? <0>Sign up</0> now!"
+          "description": "Don't have an account already? Sign up now!"
         },
         "username": {
           "label": "Username"

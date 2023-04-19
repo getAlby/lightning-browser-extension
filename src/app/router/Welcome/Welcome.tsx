@@ -20,6 +20,11 @@ function getRoutes(
     element?: JSX.Element;
     title: string;
     logo: string;
+    children?: {
+      index?: boolean;
+      element: JSX.Element;
+      path?: string;
+    }[];
   }[]
 ) {
   return [
