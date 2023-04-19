@@ -15,7 +15,7 @@ import SkeletonLoader from "~/app/components/SkeletonLoader";
 import { useAccount } from "~/app/context/AccountContext";
 import { useAccounts } from "~/app/context/AccountsContext";
 import { isAlbyAccount } from "~/app/utils";
-import msg from "~/common/lib/msg";
+import api from "~/common/lib/api";
 import utils from "~/common/lib/utils";
 
 import Menu from "../Menu";
@@ -52,10 +52,8 @@ function AccountMenu({ showOptions = true }: Props) {
   async function selectAccount(accountId: string) {
     setLoading(true);
     try {
-      setAccountId(accountId);
-      await msg.request("selectAccount", {
-        id: accountId,
-      });
+      setAccountId(accountId, true);
+      await api.selectAccount(accountId);
       await fetchAccountInfo({ accountId });
     } catch (e) {
       console.error(e);

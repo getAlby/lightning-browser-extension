@@ -14,9 +14,11 @@ function BalanceBox(props: Props) {
       {balanceLoading && (
         <>
           <div className="text-2xl">
-            <SkeletonLoader className="w-20" />
+            <SkeletonLoader className="w-32" />
           </div>
-          <SkeletonLoader className="w-10 mt-2" />
+          <div className="mt-2">
+            <SkeletonLoader className="w-10" />
+          </div>
         </>
       )}
       {!balanceLoading && balancesDecorated.accountBalance && (
@@ -26,9 +28,9 @@ function BalanceBox(props: Props) {
         </div>
       )}
       {!balanceLoading && balancesDecorated.fiatBalance && (
-        <span className="text-gray-500 mt-2">
+        <div className="text-gray-500 mt-2">
           ~{balancesDecorated.fiatBalance}
-        </span>
+        </div>
       )}
     </div>
   );

@@ -204,7 +204,7 @@ function AccountDetail() {
   }
 
   async function selectAccount(accountId: string) {
-    auth.setAccountId(accountId);
+    auth.setAccountId(accountId, true);
     await api.selectAccount(accountId);
     auth.fetchAccountInfo({ accountId });
   }
