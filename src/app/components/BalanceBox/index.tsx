@@ -1,4 +1,4 @@
-import Skeleton from "react-loading-skeleton";
+import SkeletonLoader from "~/app/components/SkeletonLoader";
 import { useAccount } from "~/app/context/AccountContext";
 
 type Props = {
@@ -14,14 +14,9 @@ function BalanceBox(props: Props) {
       {balanceLoading && (
         <>
           <div className="text-2xl">
-            <Skeleton
-              style={{ opacity: 0.2 }}
-              className="w-20"
-              baseColor="#AAA"
-              highlightColor="#FFF"
-            />
+            <SkeletonLoader className="w-20" />
           </div>
-          <Skeleton className="w-10 mt-2" />
+          <SkeletonLoader className="w-10 mt-2" />
         </>
       )}
       {!balanceLoading && balancesDecorated.accountBalance && (
