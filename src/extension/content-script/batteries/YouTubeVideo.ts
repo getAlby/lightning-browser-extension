@@ -73,25 +73,32 @@ const setData = async (): Promise<void> => {
 };
 
 const battery = async (): Promise<void> => {
-  if (!window.ALBY_BATTERY) {
-    window.ALBY_BATTERY = true;
-    setData();
+  function waitForDescription() {
+    const description = document.querySelector(
+      "div#bottom-row.style-scope.ytd-watch-metadata"
+    );
+    if (description) {
+      clearInterval(descriptionInterval); // Stop checking for the element
+
+      if (!window.ALBY_BATTERY) {
+        window.ALBY_BATTERY = true;
+        setData();
+      }
+
+      const observer = new MutationObserver((mutations) => {
+        const latestMutation = mutations[mutations.length - 1];
+        const newDescription = latestMutation.target.textContent?.trim();
+        if (!newDescription) return;
+        resetLightningData();
+        setData();
+      });
+
+      observer.observe(description, { childList: true, subtree: true });
+    }
   }
 
-  const videoDescription = document.querySelector(
-    "div#bottom-row.style-scope.ytd-watch-metadata"
-  );
-  if (!videoDescription) return;
-
-  const observer = new MutationObserver((mutations) => {
-    const latestMutation = mutations[mutations.length - 1];
-    const newDescription = latestMutation.target.textContent?.trim();
-    if (!newDescription) return;
-    resetLightningData();
-    setData();
-  });
-
-  observer.observe(videoDescription, { childList: true, subtree: true });
+  const descriptionInterval = setInterval(waitForDescription, 100);
+  setTimeout(() => clearInterval(descriptionInterval), 2000);
 };
 
 const YouTubeVideo = {
