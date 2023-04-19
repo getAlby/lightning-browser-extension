@@ -47,7 +47,7 @@ const Button = forwardRef(
           primary
             ? "bg-primary-gradient border-2 border-transparent text-black"
             : outline
-            ? "bg-white text-gray-700 border-2 border-primary dark:bg-surface-02dp"
+            ? "bg-white text-gray-700 border-2 border-primary dark:text-primary dark:bg-surface-02dp"
             : `bg-white text-gray-700 dark:bg-surface-02dp dark:text-neutral-200 dark:border-neutral-800`,
           primary && !disabled && "hover:bg-primary-gradient-hover",
           !primary &&
