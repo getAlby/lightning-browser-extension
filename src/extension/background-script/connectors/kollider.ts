@@ -376,6 +376,7 @@ export default class Kollider implements Connector {
       method,
       url: `${API_URL}${path}`,
       responseType: "json",
+      adapter: fetchAdapter,
       headers: {
         ...defaultHeaders,
         Authorization: `${this.access_token}`,
