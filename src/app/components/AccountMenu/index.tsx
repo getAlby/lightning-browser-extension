@@ -89,7 +89,7 @@ function AccountMenu({ showOptions = true }: Props) {
                 title={title || ""}
                 className="text-sm font-medium text-gray-700 dark:text-neutral-400 text-ellipsis overflow-hidden whitespace-nowrap"
               >
-                {title || <Skeleton />}
+                {title || <Skeleton className="w-20" />}
               </p>
             </div>
             <CaretDownIcon className="h-4 w-4 dark:text-white" />
