@@ -174,7 +174,7 @@ function Receive() {
                     navigator.clipboard.writeText(invoice.paymentRequest);
                     setCopyLabel(tCommon("copied"));
                     setTimeout(() => {
-                      setCopyLabel(tCommon("actions.copy"));
+                      setCopyLabel(tCommon("actions.copy_invoice"));
                     }, 1000);
                   } catch (e) {
                     if (e instanceof Error) {
