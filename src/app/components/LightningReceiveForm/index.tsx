@@ -25,7 +25,7 @@ const LightningReceiveForm = ({
     <form onSubmit={handleSubmit} className="h-full">
       <fieldset className="h-full" disabled={loading}>
         <Container justifyBetween maxWidth="sm">
-          <div className="py-4">
+          <div className="">
             <div className="mb-4">
               <DualCurrencyField
                 id="amount"
@@ -47,7 +47,7 @@ const LightningReceiveForm = ({
               />
             </div>
           </div>
-          <div className="mb-8">
+          <div className="mb-4">
             <Button
               type="submit"
               label={t("actions.create_invoice")}

@@ -239,63 +239,58 @@ function Receive() {
       />
 
       {isAlbyUser ? (
-        <Container maxWidth="sm">
-          <div className=" h-full mx-auto">
-            <Tab.Group>
-              <Tab.List className="flex mb-6 mt-4 items-center px-4">
-                <Tab icon={<ThunderIcon></ThunderIcon>} label="Lightning"></Tab>
+        <Tab.Group>
+          <Tab.List className="flex mb-6 mt-4 items-center px-4">
+            <Tab icon={<ThunderIcon />} label="Lightning" />
+            <Tab icon={<BlockIcon />} label="Onchain" />
+          </Tab.List>
+          <Tab.Panels className="h-full">
+            <Tab.Panel className="h-full">
+              {invoice ? (
+                <Container maxWidth="sm">{renderInvoice()}</Container>
+              ) : (
+                <LightningReceiveForm
+                  handleSubmit={handleSubmit}
+                  handleChange={handleChange}
+                  loading={loading}
+                  fiatAmount={fiatAmount}
+                />
+              )}
+            </Tab.Panel>
+            <Tab.Panel className="h-full">
+              <Container justifyBetween maxWidth="sm">
+                <div className="text-center dark:text-neutral-200 h-full flex flex-col justify-center items-center">
+                  <div className="mb-8">
+                    <p>
+                      To receive Bitcoin on-chain, log-in to your{" "}
+                      <strong>Alby Account </strong>at getalby.com
+                    </p>
+                  </div>
 
-                <Tab icon={<BlockIcon></BlockIcon>} label="Onchain"></Tab>
-              </Tab.List>
-              <Tab.Panels className="h-full">
-                <Tab.Panel className="h-full">
-                  {invoice ? (
-                    <Container maxWidth="sm">{renderInvoice()}</Container>
-                  ) : (
-                    <LightningReceiveForm
-                      handleSubmit={handleSubmit}
-                      handleChange={handleChange}
+                  <div className="mb-8">
+                    <p>
+                      Your bitcoin on-chain address is under{" "}
+                      <strong>Receive</strong> page, accessible from{" "}
+                      <strong>Payments</strong>
+                    </p>
+                  </div>
+                </div>
+                <div className="mb-4">
+                  <a href="https://getalby.com/node/receive">
+                    <Button
+                      type="submit"
+                      label={"Go Alby Account on getalby.com ->"}
+                      fullWidth
+                      primary
                       loading={loading}
-                      fiatAmount={fiatAmount}
-                    ></LightningReceiveForm>
-                  )}
-                </Tab.Panel>
-                <Tab.Panel className="h-full">
-                  <Container justifyBetween maxWidth="sm">
-                    <div className="py-8 text-center dark:text-neutral-200">
-                      <div className="mb-8">
-                        <p>
-                          To receive Bitcoin on-chain, log-in to{" "}
-                          <strong>Alby Account </strong>on getalby.com
-                        </p>
-                      </div>
-
-                      <div className="mb-8">
-                        <p>
-                          Your bitcoin on-chain address is under{" "}
-                          <strong>Receive</strong> page, accessible from{" "}
-                          <strong>Payments</strong>
-                        </p>
-                      </div>
-                    </div>
-                    <div className="mb-4 ">
-                      <a href="https://getalby.com/node/receive">
-                        <Button
-                          type="submit"
-                          label={"Go Alby Account on getalby.com ->"}
-                          fullWidth
-                          primary
-                          loading={loading}
-                          disabled={loading}
-                        />
-                      </a>
-                    </div>
-                  </Container>
-                </Tab.Panel>
-              </Tab.Panels>
-            </Tab.Group>
-          </div>
-        </Container>
+                      disabled={loading}
+                    />
+                  </a>
+                </div>
+              </Container>
+            </Tab.Panel>
+          </Tab.Panels>
+        </Tab.Group>
       ) : (
         <div className=" h-full">
           {invoice ? (
@@ -306,7 +301,7 @@ function Receive() {
               handleChange={handleChange}
               loading={loading}
               fiatAmount={fiatAmount}
-            ></LightningReceiveForm>
+            />
           )}
         </div>
       )}
