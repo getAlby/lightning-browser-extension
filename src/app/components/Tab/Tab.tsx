@@ -1,14 +1,18 @@
 import { Tab as HeadlessUiTab } from "@headlessui/react";
+import React from "react";
 import { classNames } from "~/app/utils/index";
 
-type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
+type Props = {
   icon?: React.ReactNode;
   label?: string;
+  className?: string;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 };
 
-export function Tab({ icon, onClick, label, className }: Props) {
+export function Tab({ icon, onClick, label, className, ...otherProps }: Props) {
   return (
     <HeadlessUiTab
+      {...otherProps}
       onClick={onClick}
       className={({ selected }) =>
         classNames(

@@ -1,9 +1,9 @@
 import { Tab as HeadlessUiTab } from "@headlessui/react";
 import { classNames } from "~/app/utils/index";
 
-type Props = React.HTMLAttributes<HTMLDivElement> & {
-  children?: React.ReactNode;
-};
+type Props = React.PropsWithChildren<{
+  className?: string;
+}>;
 
 export default function TabPanel({ children, className }: Props) {
   return (

@@ -1,10 +1,9 @@
 import { Tab as HeadlessUiTab } from "@headlessui/react";
 import { classNames } from "~/app/utils/index";
 
-type Props = {
-  children?: React.ReactNode;
+type Props = React.PropsWithChildren<{
   className?: string;
-};
+}>;
 
 export default function TabList({ children, className }: Props) {
   return (
