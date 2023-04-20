@@ -809,6 +809,7 @@
       "export": "Exportera",
       "remove": "Tag bort",
       "copy": "Kopiera",
+      "copy_invoice": "Kopiera Faktura",
       "transactions": "Transaktioner",
       "receive_again": "Ta emot en ny betalning",
       "remember": "Kom ihåg mitt val och fråga inte igen",

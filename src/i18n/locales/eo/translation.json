@@ -567,7 +567,9 @@
       "close": "Fermi",
       "export": "Elporti",
       "remove": "Forigi",
-      "copy": "Kopii"
+      "copy": "Kopii",
+      "copy_invoice": "Kopii fakturon"
+
     },
     "errors": {
       "connection_failed": "",

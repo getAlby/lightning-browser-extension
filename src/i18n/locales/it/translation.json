@@ -755,6 +755,7 @@
       "export": "Esporta",
       "remove": "Rimuovi",
       "copy": "Copia",
+      "copy_invoice":"Copia fattura",
       "log_in": "Log in",
       "remember": "Ricorda la mia scelta e non chiederlo più",
       "receive_again": "Ricevi un altro pagamento"

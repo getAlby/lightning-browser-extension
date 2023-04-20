@@ -805,6 +805,7 @@
       "export": "Exportar",
       "remove": "Quitar",
       "copy": "Copiar",
+      "copy_invoice": "Copiar Factura",
       "open": "Abrir",
       "back": "Volver",
       "receive_again": "Recibir otro pago",
