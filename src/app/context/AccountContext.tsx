@@ -79,6 +79,8 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
 
   const setAccountId = (id: string) => {
     setAccount({ id });
+    // setAccountId is always called before switching the account with msg.request()
+    // Switching accounts can take some time, therefore set the balance to loading right away
     setBalanceLoading(true);
   };
 
