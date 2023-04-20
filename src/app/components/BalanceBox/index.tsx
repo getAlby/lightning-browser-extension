@@ -11,27 +11,27 @@ function BalanceBox(props: Props) {
 
   return (
     <div className="w-full flex flex-col items-center justify-center dark:text-white p-4">
-      {balanceLoading && (
-        <>
-          <div className="text-2xl">
-            <SkeletonLoader className="w-32" />
-          </div>
-          <div className="mt-2">
-            <SkeletonLoader className="w-10" />
-          </div>
-        </>
-      )}
-      {!balanceLoading && balancesDecorated.accountBalance && (
-        <div className="text-2xl">
-          <span className="font-medium slashed-zero">{balanceParts[0]}</span>
-          <span>&nbsp;{balanceParts[1]}</span>
-        </div>
-      )}
-      {!balanceLoading && balancesDecorated.fiatBalance && (
-        <div className="text-gray-500 mt-2">
-          ~{balancesDecorated.fiatBalance}
-        </div>
-      )}
+      <div className="text-2xl slashed-zero">
+        {!balanceLoading && balancesDecorated.accountBalance ? (
+          <>
+            <span className="font-medium">{balanceParts[0]}</span>
+            <span>&nbsp;{balanceParts[1]}</span>
+          </>
+        ) : (
+          <SkeletonLoader className="w-32" />
+        )}
+      </div>
+      <div className="text-gray-500 mt-2">
+        {!balanceLoading ? (
+          <>
+            {balancesDecorated.fiatBalance && (
+              <>~{balancesDecorated.fiatBalance}</>
+            )}
+          </>
+        ) : (
+          <SkeletonLoader className="w-10" />
+        )}
+      </div>
     </div>
   );
 }

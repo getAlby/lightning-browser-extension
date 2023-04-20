@@ -115,6 +115,7 @@ function AccountMenu({ showOptions = true }: Props) {
                 </span>
                 <span className="text-gray-500 dark:text-neutral-300">
                   {!balanceLoading ? (
+                    balancesDecorated.fiatBalance &&
                     "~" + balancesDecorated.fiatBalance
                   ) : (
                     <SkeletonLoader className="w-16" />
