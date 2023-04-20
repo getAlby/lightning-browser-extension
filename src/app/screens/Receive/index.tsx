@@ -16,6 +16,7 @@ import QRCode from "react-qr-code";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import LightningReceiveForm from "~/app/components/LightningReceiveForm";
+import OnChainReceive from "~/app/components/OnChainReceive";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
 import BlockIcon from "~/app/icons/BlockIcon";
@@ -266,36 +267,7 @@ function Receive() {
               )}
             </Tab.Panel>
             <Tab.Panel className="h-full">
-              <Container justifyBetween maxWidth="sm">
-                <div className="text-center dark:text-neutral-200 h-full flex flex-col justify-center items-center">
-                  <div className="mb-8">
-                    <p>
-                      To receive Bitcoin on-chain, log-in to your{" "}
-                      <strong>Alby Account </strong>at getalby.com
-                    </p>
-                  </div>
-
-                  <div className="mb-8">
-                    <p>
-                      Your bitcoin on-chain address is under{" "}
-                      <strong>Receive</strong> page, accessible from{" "}
-                      <strong>Payments</strong>
-                    </p>
-                  </div>
-                </div>
-                <div className="mb-4">
-                  <a href="https://getalby.com/node/receive">
-                    <Button
-                      type="submit"
-                      label={"Go Alby Account on getalby.com ->"}
-                      fullWidth
-                      primary
-                      loading={loading}
-                      disabled={loading}
-                    />
-                  </a>
-                </div>
-              </Container>
+              <OnChainReceive />
             </Tab.Panel>
           </Tab.Panels>
         </Tab.Group>
