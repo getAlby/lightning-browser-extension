@@ -144,7 +144,15 @@ function Receive() {
     return (
       <div className="py-4">
         <div className="relative p-8  bg-white rounded-lg shadow-sm ring-1 ring-black ring-opacity-5 flex justify-center items-center overflow-hidden">
-          <QRCode value={invoice.paymentRequest.toUpperCase()} level="M" />
+          <div className="h-auto mx-auto my-0 w-48">
+            <QRCode
+              value={invoice.paymentRequest.toUpperCase()}
+              level="M"
+              size={256}
+              style={{ height: "auto", maxWidth: "100%", width: "100%" }}
+              viewBox={`0 0 256 256`}
+            />
+          </div>
           {paid && (
             <div className="absolute inset-0 flex justify-center items-center bg-white/90">
               <div className="text-center">
