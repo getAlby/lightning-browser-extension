@@ -1,21 +1,34 @@
+import { Trans, useTranslation } from "react-i18next";
 import Button from "~/app/components/Button";
 import Container from "~/app/components/Container";
 
 export default function OnChainReceive() {
+  const { t } = useTranslation("translation", {
+    keyPrefix: "receive.on_chain",
+  });
+
   return (
     <Container justifyBetween maxWidth="sm">
       <div className="text-center dark:text-neutral-200 h-full flex flex-col justify-center items-center">
         <div className="mb-8">
           <p>
-            To receive Bitcoin on-chain, log-in to your{" "}
-            <strong>Alby Account </strong>at getalby.com
+            <Trans
+              i18nKey={"instructions1"}
+              t={t}
+              // eslint-disable-next-line react/jsx-key
+              components={[<strong></strong>]}
+            />
           </p>
         </div>
 
         <div className="mb-8">
           <p>
-            Your bitcoin on-chain address is under <strong>Receive</strong>{" "}
-            page, accessible from <strong>Payments</strong>
+            <Trans
+              i18nKey={"instructions2"}
+              t={t}
+              // eslint-disable-next-line react/jsx-key
+              components={[<strong></strong>]}
+            />
           </p>
         </div>
       </div>
@@ -23,9 +36,10 @@ export default function OnChainReceive() {
         <a href="https://getalby.com/node/receive">
           <Button
             type="submit"
-            label={"Go Alby Account on getalby.com ->"}
+            label={t("go")}
             fullWidth
             primary
+            onClick={() => window.open(`https://getalby.com/user`, "_blank")}
           />
         </a>
       </div>
