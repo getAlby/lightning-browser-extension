@@ -33,6 +33,7 @@ function AccountMenu({ showOptions = true }: Props) {
     fetchAccountInfo,
     account: authAccount,
     balancesDecorated,
+    balanceLoading,
   } = useAccount();
   const navigate = useNavigate();
   const { accounts, getAccounts } = useAccounts();
@@ -104,20 +105,22 @@ function AccountMenu({ showOptions = true }: Props) {
               <span className="text-xs text-gray-500 dark:text-neutral-300">
                 {tCommon("balance")}
               </span>
-              {balancesDecorated.accountBalance ? (
-                <p className="flex justify-between">
-                  <span className="dark:text-white">
-                    {balancesDecorated.accountBalance}
-                  </span>
-                  {!!balancesDecorated.fiatBalance && (
-                    <span className="text-gray-500 dark:text-neutral-300">
-                      ~{balancesDecorated.fiatBalance}
-                    </span>
+              <p className="flex justify-between slashed-zero">
+                <span className="dark:text-white">
+                  {!balanceLoading ? (
+                    balancesDecorated.accountBalance
+                  ) : (
+                    <SkeletonLoader className="w-20" />
                   )}
-                </p>
-              ) : (
-                <SkeletonLoader />
-              )}
+                </span>
+                <span className="text-gray-500 dark:text-neutral-300">
+                  {!balanceLoading ? (
+                    "~" + balancesDecorated.fiatBalance
+                  ) : (
+                    <SkeletonLoader className="w-16" />
+                  )}
+                </span>
+              </p>
             </div>
           </Menu.Item>
           <Menu.ItemButton
