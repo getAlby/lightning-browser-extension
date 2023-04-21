@@ -139,6 +139,9 @@ export type NavigationState = {
     destination?: string;
     amount?: string;
     customRecords?: Record<string, string>;
+    connector?: string;
+    name?: string;
+    config?: unknown;
     message?: string;
     event?: Event;
     sigHash?: string;

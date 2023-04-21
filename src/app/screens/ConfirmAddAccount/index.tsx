@@ -11,6 +11,7 @@ import ScreenHeader from "~/app/components/ScreenHeader";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
+import type { OriginData } from "~/types";
 
 function ConfirmAddAccount() {
   const navState = useNavigationState();
@@ -20,13 +21,10 @@ function ConfirmAddAccount() {
   });
   const navigate = useNavigate();
 
-  const { name, connector, config } = navState.args as unknown as {
-    name: string;
-    connector: string;
-    config: unknown;
-  };
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const origin = navState.origin!;
+  const name = navState.args?.name as string;
+  const connector = navState.args?.connector as string;
+  const config = navState.args?.config as string;
+  const origin = navState.origin as OriginData;
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
 
