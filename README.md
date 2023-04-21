@@ -19,10 +19,10 @@ The extension can connect to different node implementations and supports custodi
 - [x] Custom budgets/allowances for websites to allow payment streams/auto-payments
 - [x] Multiple accounts and support for different node backends (lnd, etc.)
 - [x] Full WebLN send and receive payment flows (getInfo, sendPayment, fixed makeInvoice support)
-- [x] [LNURL-pay](https://xn--57h.bigsun.xyz/lnurl-pay-flow.txt) support
-- [x] [LNURL-auth](https://xn--57h.bigsun.xyz/lnurl-auth.html) support
+- [x] [LNURL-pay](https://github.com/lnurl/luds/blob/luds/06.md) support
+- [x] [LNURL-auth](https://github.com/lnurl/luds/blob/luds/04.md) support
 - [x] Payment history with additional website metadata
-- [x] [LNURL-withdraw](https://xn--57h.bigsun.xyz/lnurl-withdraw-flow.txt) support
+- [x] [LNURL-withdraw](https://github.com/lnurl/luds/blob/luds/03.md) support
 - [x] WebLN signMessage, verifyMessage support
 - [x] WebLN dynamic makeInvoice support
 - [x] Keysend
@@ -38,13 +38,13 @@ Alby is open-source and currently in alpha stage. Our goal is to create the best
 
 We have a channel on the [bitcoin.design](https://bitcoin.design/) Slack community [#lightning-browser-extension](https://bitcoindesign.slack.com/archives/C02591ADXM2) and a [Telegram group](https://t.me/getAlby). Come and join us!
 
-We also do a bi-weekly call on Thursday at [13:00 UTC](https://everytimezone.com/s/436cf0d2) on [Jitsi](https://meet.fulmo.org/AlbyCommunityCall)
+We also do a bi-weekly call on Thursday at [15:00 UTC](https://everytimezone.com/?t=642e0b80,ec4) on [Jitsi](https://meet.fulmo.org/AlbyCommunityCall)
 
 ## Browser Support
 
 Alby supports
 
-- All [Chromium based browsers](<https://en.wikipedia.org/wiki/Chromium_(web_browser)#Browsers_based_on_Chromium>) - Chrome Opera, Brave etc.
+- All [Chromium based browsers](<https://en.wikipedia.org/wiki/Chromium_(web_browser)#Browsers_based_on_Chromium>) - Chrome, Edge, Opera, Brave etc.
 - Firefox
 - more coming soon...
 
@@ -57,8 +57,10 @@ Add Alby to your browser
 
 ### Try out the most recent version of Alby (Nightly Releases)
 
-- [Firefox Nightly](https://nightly.link/getAlby/lightning-browser-extension/workflows/build/master/firefox.xpi.zip) - best to install it as a temporary add-on as discussed in the "Load extension into browser" section
-- [Chrome Nightly](https://nightly.link/getAlby/lightning-browser-extension/workflows/build/master/chrome.zip) - go to `chrome://extensions/`, enable "Developer mode" (top right), and drag & drop the file in the browser
+- [Firefox Nightly](https://nightly.link/getAlby/lightning-browser-extension/workflows/build/master/firefox.xpi.zip) - best to install it as a temporary add-on as discussed in the "[Load extension into browser](/doc/SETUP.md#-load-extension-into-browser)" section
+- [Chrome Nightly](https://nightly.link/getAlby/lightning-browser-extension/workflows/build/master/chrome.zip)
+  - for Chrome: go to `chrome://extensions/`, enable "Developer mode" (top right), and drag & drop the file in the browser
+  - for Edge: go to `edge://extensions/`, enable "Developer mode" (left column), and load the unpacked file in the browser
 
 (Note: You might need to reconfigure your wallet after installing new versions)
 
@@ -100,7 +102,7 @@ We use the [Development Project Board](https://github.com/orgs/getAlby/projects/
 
 #### Developer
 
-- Check out the issues that have specifically been [marked as being friendly to new contributors](https://github.com/getAlby/lightning-browser-extension/issues?q=is%3Aopen+is%3Aissue+label%3Adesign+label%3A%22good+first+issue%22)
+- Check out the issues that have specifically been [marked as being friendly to new contributors](https://github.com/getAlby/lightning-browser-extension/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22)
 - You can also review open PRs
 - [Contribution guide for new developers](./doc/CONTRIBUTION.md)
 
@@ -108,7 +110,7 @@ We use the [Development Project Board](https://github.com/orgs/getAlby/projects/
 
 - Have a look at our [Open source Design guide](https://github.com/getAlby/lightning-browser-extension/wiki/Open-source-Design)
 - Check out the issues that have specifically been [marked with "design"](https://github.com/getAlby/lightning-browser-extension/issues?q=is%3Aopen+is%3Aissue+label%3A%22design%22)
-- We also have a [Figma Design Guide Project](https://www.figma.com/file/xwGXHxW4FWpV03Tt37atZv/Extension-1.10.0) which you can have a look at
+- You can find and copy current version of the extension in this Figma file: [Alby Extension Master Design](https://www.figma.com/file/O49NS4o3IjWwmHvFLncTy6/Alby-Extension-Master-Design?node-id=0%3A1&t=rd4dQkDtwZ4Nuuqo-1)
 
 #### Anyone
 

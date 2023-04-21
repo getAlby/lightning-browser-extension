@@ -1,9 +1,10 @@
 import ConnectorForm from "@components/ConnectorForm";
 import Input from "@components/form/Input";
 import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
+import fetchAdapter from "@vespaiach/axios-fetch-adapter";
 import axios from "axios";
 import { useState } from "react";
-import { useTranslation, Trans } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import msg from "~/common/lib/msg";
@@ -94,6 +95,7 @@ export default function ConnectGaloy(props: Props) {
         data: { data, errors },
       } = await axios.post(url, query, {
         headers: defaultHeaders,
+        adapter: fetchAdapter,
       });
       const errs = errors || data.userRequestAuthCode.errors;
       if (errs && errs.length) {
@@ -157,6 +159,7 @@ export default function ConnectGaloy(props: Props) {
     try {
       const { data: authData } = await axios.post(url, authQuery, {
         headers: defaultHeaders,
+        adapter: fetchAdapter,
       });
       if (authData.error || authData.errors) {
         const error = authData.error || authData.errors;
@@ -176,6 +179,7 @@ export default function ConnectGaloy(props: Props) {
           ...defaultHeaders,
           Authorization: `Bearer ${authToken}`,
         },
+        adapter: fetchAdapter,
       });
       if (meData.error || meData.errors) {
         const error = meData.error || meData.errors;
@@ -225,6 +229,7 @@ export default function ConnectGaloy(props: Props) {
           ...defaultHeaders,
           Authorization: `Bearer ${authToken}`,
         },
+        adapter: fetchAdapter,
       });
       if (meData.error || meData.errors) {
         const error = meData.error || meData.errors;
@@ -339,6 +344,7 @@ export default function ConnectGaloy(props: Props) {
               placeholder="+503"
               disabled={smsCodeRequested}
               onChange={handlePhoneNumberChange}
+              autoFocus={true}
             />
           </div>
         </div>
@@ -387,6 +393,7 @@ export default function ConnectGaloy(props: Props) {
               type="text"
               required
               onChange={handleJwtChange}
+              autoFocus={true}
             />
           </div>
         </div>

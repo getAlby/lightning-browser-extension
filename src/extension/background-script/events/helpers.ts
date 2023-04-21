@@ -7,7 +7,7 @@ const notify = (options: { title: string; message: string }) => {
 
   const notification: browser.Notifications.CreateNotificationOptions = {
     type: "basic",
-    iconUrl: "assets/icons/alby_icon_yellow_48x48.png",
+    iconUrl: "../assets/icons/alby_icon_yellow_48x48.png",
     ...options,
   };
 

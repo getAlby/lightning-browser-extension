@@ -13,6 +13,7 @@ import MakeInvoice from "@screens/MakeInvoice";
 import NostrConfirm from "@screens/Nostr/Confirm";
 import NostrConfirmGetPublicKey from "@screens/Nostr/ConfirmGetPublicKey";
 import NostrConfirmSignMessage from "@screens/Nostr/ConfirmSignMessage";
+import NostrConfirmSignSchnorr from "@screens/Nostr/ConfirmSignSchnorr";
 import Unlock from "@screens/Unlock";
 import { HashRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -83,6 +84,10 @@ function Prompt() {
               path="public/nostr/confirmSignMessage"
               element={<NostrConfirmSignMessage />}
             />
+            <Route
+              path="public/nostr/confirmSignSchnorr"
+              element={<NostrConfirmSignSchnorr />}
+            />
 
             <Route path="lnurlAuth" element={<LNURLAuth />} />
             <Route path="lnurlPay" element={<LNURLPay />} />
@@ -117,7 +122,7 @@ const Layout = () => {
   return (
     <>
       <ToastContainer autoClose={10000} hideProgressBar={true} />
-      <div className="px-4 py-2 bg-white flex border-b border-gray-200 dark:bg-surface-02dp dark:border-neutral-500">
+      <div className="px-4 py-2 justify-end bg-white flex border-b border-gray-200 dark:bg-surface-02dp dark:border-neutral-500">
         <AccountMenu showOptions={false} />
       </div>
 

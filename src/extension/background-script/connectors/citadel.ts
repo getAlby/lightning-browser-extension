@@ -1,17 +1,19 @@
+import { Account } from "~/types";
+
 import Connector, {
-  ConnectPeerResponse,
-  SendPaymentArgs,
-  SendPaymentResponse,
-  GetInfoResponse,
-  GetBalanceResponse,
-  GetInvoicesResponse,
-  MakeInvoiceArgs,
-  MakeInvoiceResponse,
-  SignMessageArgs,
-  SignMessageResponse,
   CheckPaymentArgs,
   CheckPaymentResponse,
+  ConnectPeerResponse,
+  GetBalanceResponse,
+  GetInfoResponse,
+  GetInvoicesResponse,
   KeysendArgs,
+  MakeInvoiceArgs,
+  MakeInvoiceResponse,
+  SendPaymentArgs,
+  SendPaymentResponse,
+  SignMessageArgs,
+  SignMessageResponse,
 } from "./connector.interface";
 
 interface Config {
@@ -27,10 +29,12 @@ type RequestFunction = <ResponseType = unknown>(
 ) => Promise<ResponseType>;
 
 class CitadelConnector implements Connector {
+  account: Account;
   config: Config;
   jwt: string;
 
-  constructor(config: Config) {
+  constructor(account: Account, config: Config) {
+    this.account = account;
     this.config = config;
     this.jwt = "";
   }

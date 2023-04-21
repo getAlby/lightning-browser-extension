@@ -1,5 +1,6 @@
 {
   "manifest_version": 2,
+  "__chrome__manifest_version": 3,
   "name": "Alby - Bitcoin Lightning Wallet",
   "version": "0.0.0",
 
@@ -11,23 +12,49 @@
   },
   "description": "The Bitcoin Lightning wallet for direct payments across the globe, Bitcoin Lightning applications and passwordless logins.",
   "homepage_url": "https://getAlby.com/",
+
   "web_accessible_resources": [
     "js/inpageScript.bundle.js",
     "js/inpageScriptWebLN.bundle.js",
     "js/inpageScriptNostr.bundle.js",
     "js/inpageScriptAlby.bundle.js"
   ],
+
+  "__chrome__web_accessible_resources": [
+    {
+      "resources": [
+        "js/inpageScript.bundle.js",
+        "js/inpageScriptWebLN.bundle.js",
+        "js/inpageScriptNostr.bundle.js"
+      ],
+      "matches": ["https://*/*"]
+    }
+  ],
+
   "permissions": [
-    "notifications",
     "activeTab",
-    "tabs",
-    "storage",
-    "unlimitedStorage",
     "nativeMessaging",
+    "notifications",
+    "storage",
+    "tabs",
+    "unlimitedStorage",
     "*://*/*"
   ],
 
-  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "__chrome__permissions": [
+    "activeTab",
+    "nativeMessaging",
+    "notifications",
+    "storage",
+    "tabs",
+    "unlimitedStorage"
+  ],
+  "__chrome__host_permissions": ["*://*/*"],
+
+  "content_security_policy": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'",
+  "__chrome__content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
+  },
 
   "__chrome|firefox__author": "Alby",
   "__opera__developer": {
@@ -40,10 +67,10 @@
     }
   },
 
-  "__chrome__minimum_chrome_version": "49",
-  "__opera__minimum_opera_version": "36",
+  "__chrome__minimum_chrome_version": "88",
+  "__opera__minimum_opera_version": "74",
 
-  "browser_action": {
+  "__firefox|opera__browser_action": {
     "default_popup": "popup.html",
     "default_icon": {
       "16": "assets/icons/alby_icon_yellow_16x16.png",
@@ -74,8 +101,41 @@
       }
     ],
     "default_title": "Alby - Bitcoin Lightning Wallet",
-    "__chrome|opera__chrome_style": false,
+    "__opera__chrome_style": false,
     "__firefox__browser_style": false
+  },
+
+  "__chrome__action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "assets/icons/alby_icon_yellow_16x16.png",
+      "32": "assets/icons/alby_icon_yellow_32x32.png",
+      "48": "assets/icons/alby_icon_yellow_48x48.png",
+      "128": "assets/icons/alby_icon_yellow_128x128.png"
+    },
+    "theme_icons": [
+      {
+        "dark": "assets/icons/alby_icon_yellow_16x16.png",
+        "light": "assets/icons/alby_icon_yellow_dark_16x16.png",
+        "size": 16
+      },
+      {
+        "dark": "assets/icons/alby_icon_yellow_32x32.png",
+        "light": "assets/icons/alby_icon_yellow_dark_32x32.png",
+        "size": 32
+      },
+      {
+        "dark": "assets/icons/alby_icon_yellow_48x48.png",
+        "light": "assets/icons/alby_icon_yellow_dark_48x48.png",
+        "size": 48
+      },
+      {
+        "dark": "assets/icons/alby_icon_yellow_128x128.png",
+        "light": "assets/icons/alby_icon_yellow_dark_128x128.png",
+        "size": 128
+      }
+    ],
+    "default_title": "Alby - Bitcoin Lightning Wallet"
   },
 
   "commands": {
@@ -89,13 +149,17 @@
   "options_ui": {
     "page": "options.html",
     "open_in_tab": true,
-    "__chrome|opera__chrome_style": false,
+    "__opera__chrome_style": false,
     "__firefox__browser_style": false
   },
 
   "background": {
     "scripts": ["js/background.bundle.js"],
-    "__chrome|opera__persistent": true
+    "__opera__persistent": true
+  },
+
+  "__chrome__background": {
+    "service_worker": "js/background.bundle.js"
   },
 
   "content_scripts": [

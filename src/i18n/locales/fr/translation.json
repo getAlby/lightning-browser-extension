@@ -1,0 +1,953 @@
+{
+  "translation": {
+    "welcome": {
+      "title": "Bienvenue sur Alby",
+      "set_password": {
+        "title": "Définir un mot de passe de déverrouillage",
+        "description": "Ce mot de passe est utilisé pour protéger votre portefeuille et donner accès à l'extension du navigateur. Il ne peut pas être réinitialisé et est distinct du mot de passe de votre compte Alby.",
+        "choose_password": {
+          "label": "Choisissez un mot de passe de déverrouillage :"
+        },
+        "confirm_password": {
+          "label": "Confirmons que vous l'avez tapé correctement :"
+        },
+        "errors": {
+          "enter_password": "S'il vous plait, entrez votre mot de passe.",
+          "confirm_password": "Veuillez confirmer votre mot de passe.",
+          "mismatched_password": "Les mots de passe entrés ne sont pas les mêmes."
+        }
+      },
+      "test_connection": {
+        "ready": "Parfait, vous êtes prêt !",
+        "initializing": "Création de votre compte. S'il vous plait, veuillez patienter, ceci peut prendre une minute...",
+        "connection_error": "Erreur de connexion",
+        "review_connection_details": "Veuillez vérifier vos informations de connexion.",
+        "connection_taking_long": "Essayer de se connecter prend plus de temps que prévu... Vos informations sont-elles correctes ? Votre nœud est-il accessible ?",
+        "contact_support": "Si vous avez besoin d'aide, veuillez contacter support@getalby.com",
+        "actions": {
+          "delete_edit_account": "Supprimer le compte invalide et modifier à nouveau"
+        }
+      }
+    },
+    "choose_path": {
+      "title": "Connecter",
+      "description": "Pour commencer à utiliser Alby pour effectuer des paiements en ligne, connectez votre Lightning wallet à l'extension.",
+      "alby": {
+        "title": "Alby",
+        "description": "Inscrivez-vous ou utilisez votre compte Alby existant pour commencer à utiliser les paiements éclair en un rien de temps.",
+        "create_new": "S'inscrire"
+      },
+      "other": {
+        "title": "Autres portefeuilles",
+        "description": "Connectez-vous à votre portefeuille ou nœud Lightning et choisissez parmi différents connecteurs.",
+        "and_more": "& plus...",
+        "connect": "Connecter"
+      }
+    },
+    "alby": {
+      "pre_connect": {
+        "set_password": {
+          "choose_password": {
+            "label": "Mot de passe"
+          },
+          "confirm_password": {
+            "label": "Confirmez le mot de passe"
+          },
+          "errors": {
+            "enter_password": "Veuillez entrer un mot de passe.",
+            "confirm_password": "Veuillez confirmer votre mot de passe.",
+            "mismatched_password": "Les mots de passe ne correspondent pas."
+          }
+        },
+        "forgot_password": "Mot de passe oublié?",
+        "title": "Votre compte Alby",
+        "create_account": "Créez un nouveau compte Alby pour envoyer et recevoir des paiements en bitcoins.",
+        "login_account": "Connectez-vous pour connecter votre compte Alby existant.",
+        "host_wallet": "Nous hébergeons un portefeuille Lightning pour vous !",
+        "email": {
+          "create": {
+            "label": "Adresse e-mail"
+          },
+          "login": {
+            "label": "Adresse e-mail ou adresse Lightning"
+          }
+        },
+        "optional_lightning_note": {
+          "part1": "Votre compte Alby est également livré avec une option",
+          "part2": "adresse lightning",
+          "part3": ". C'est un moyen simple pour quiconque de vous envoyer des bitcoins sur le réseau Lightning.",
+          "part4": "apprendre encore plus"
+        },
+        "optional_lightning_address": {
+          "label": "Choisissez votre adresse Lightning (facultatif)",
+          "suffix": "@getalby.com",
+          "title": "chiffres et lettres, au moins 4 caractères"
+        },
+        "errors": {
+          "create_wallet_error": "Impossible de se connecter ou de créer un nouveau compte. Si vous avez besoin d'aide, veuillez contacter support@getalby.com",
+          "create_wallet_error1": "Impossible de se connecter ou de créer un nouveau compte.",
+          "create_wallet_error2": "Si vous avez besoin d'aide, veuillez contacter support@getalby.com"
+        }
+      }
+    },
+    "choose_connector": {
+      "title": "Connecter le portefeuille Lightning",
+      "description": "Connectez-vous à votre portefeuille ou nœud Lightning externe",
+      "lnd": {
+        "title": "LND",
+        "page": {
+          "title": "Connectez-vous à votre nœud LND",
+          "description": "Vous avez besoin de l'URL de votre nœud et d'un macaroon avec des autorisations de lecture et d'envoi (par exemple, admin.macaroon )"
+        },
+        "url": {
+          "label": "REST API host et port",
+          "placeholder": "https://url-de-votre-node:8080"
+        },
+        "macaroon": {
+          "label": "Macaroon (format HEX )"
+        },
+        "or": "OR",
+        "drag_and_drop": "Faites glisser et déposez votre macaroon ici ou <0>naviguez</0>",
+        "errors": {
+          "connection_failed": "La connexion a échoué. Vos informations d'identification LND sont-elles correctes ?"
+        }
+      },
+      "lnc": {
+        "title": "LND avec LNC",
+        "page": {
+          "title": "Connectez-vous à votre nœud LND",
+          "description": "Créez une nouvelle session dans le terminal (litd) pour obtenir une nouvelle phrase d'appariement et entrez-la ici"
+        },
+        "pairing_phrase": {
+          "label": "Votre phrase d'appariement ",
+          "placeholder": "phrase de sats de pile secrète"
+        }
+      },
+      "lndhub_bluewallet": {
+        "title": "Bluewallet",
+        "page": {
+          "title": "Connectez-vous à BlueWallet",
+          "description": "Dans BlueWallet, choisissez le wallet que vous souhaitez connecter, ouvrez-le, cliquez sur \"...\", cliquez sur Export/Backup pour afficher le QR code et scannez-le avec votre webcam."
+        },
+        "uri": {
+          "label": "URI d'exportation BlueWallet"
+        },
+        "errors": {
+          "invalid_uri": "URI BlueWallet non valide",
+          "connection_failed": "La connexion a échoué. Votre URI BlueWallet est-il correct ?"
+        }
+      },
+      "lndhub_go": {
+        "title": "LNDHub",
+        "page": {
+          "title": "Connectez-vous à LNDHub",
+          "description": "Saisissez ici l'URI de votre identifiant LNDHub ou scannez le code QR avec votre webcam."
+        },
+        "uri": {
+          "label": "URI d'exportation LNDHub"
+        },
+        "errors": {
+          "invalid_uri": "",
+          "connection_failed": "La connexion a échoué. Votre URI LNDHub est-elle correcte ?"
+        }
+      },
+      "lnbits": {
+        "title": "LNbits",
+        "page": {
+          "title": "Connectez-vous à <0>LNbits</0>",
+          "instructions": "Dans LNbits, choisissez le portefeuille que vous souhaitez connecter, ouvrez-le, cliquez sur API Info et copiez la clé d'administration. Collez-le ci-dessous :"
+        },
+        "admin_key": {
+          "label": "Clé d'administration LNbits",
+          "placeholder": "Votre clé d'administrateur à 32 chiffres"
+        },
+        "url": {
+          "label": "URL LNbits"
+        },
+        "errors": {
+          "connection_failed": "La connexion a échoué. Disposez-vous de l'URL et de la clé d'administration correctes ?"
+        }
+      },
+      "eclair": {
+        "title": "Eclair",
+        "page": {
+          "title": "Connectez-vous à <0>Eclair</0>",
+          "instructions": "Vous avez besoin de votre URL et de votre mot de passe Eclair."
+        },
+        "password": {
+          "label": "Mot de passe Eclair"
+        },
+        "url": {
+          "label": "URL de l'éclair",
+          "placeholder": "http://localhost:8080"
+        }
+      },
+      "citadel": {
+        "title": "Citadelle",
+        "page": {
+          "title": "Connectez-vous au nœud <0>Citadelle</0>",
+          "instructions": "Cela ne fonctionne pas actuellement si 2FA est activé."
+        },
+        "password": {
+          "label": "Mot de passe Citadelle"
+        },
+        "url": {
+          "label": "URL de la Citadelle",
+          "placeholder": "http://citadel.local"
+        }
+      },
+      "umbrel": {
+        "title": "Parapluie",
+        "page": {
+          "title": "Connectez-vous au nœud <0>Umbrel</0>",
+          "instructions": "Dans votre tableau de bord Umbrel, accédez à <0>Connect Wallet</0>. Sélectionnez <0>lndconnect REST</0> et copiez l'<0>URL lndconnect</0>. (Selon votre configuration, vous pouvez utiliser la connexion locale ou la connexion Tor.)"
+        },
+        "rest_url": {
+          "label": "lndconnect REST URL",
+          "placeholder": "lndconnect://votrenode:8080?..."
+        }
+      },
+      "mynode": {
+        "title": "monNode",
+        "page": {
+          "title": "Connectez-vous à <0>monNode</0>",
+          "instructions": "Sur votre page d'accueil myNode, cliquez sur le bouton <0>Wallet</0> pour votre service <0>lightning</0>.<1/> Cliquez maintenant sur le bouton <0>Pair Wallet</0> sous le <0 Onglet >État</0>. Saisissez votre mot de passe lorsque vous y êtes invité.<1/> Sélectionnez le menu déroulant et choisissez une option de couplage. Selon votre configuration, vous pouvez soit utiliser la connexion <0>lightning (REST + Local IP)</0> ou la connexion <0>lightning (REST + Tor)</0>."
+        },
+        "rest_url": {
+          "label": "URL REST lndconnect",
+          "placeholder": "lndconnect://votrenode:8080?..."
+        }
+      },
+      "start9": {
+        "title": "Start9",
+        "page": {
+          "title": "Connectez-vous à votre nœud <0>Embassy</0>",
+          "instructions": "<0>Remarque :</0> Actuellement, nous ne prenons en charge que LND, mais nous ajouterons la prise en charge de c-lightning à l'avenir !<1/>Sur votre tableau de bord Embassy, cliquez sur le service <0>daemon du réseau Lightning</0>. <1/>Sélectionnez l'onglet <0>Properties</0>.<1/>Copiez maintenant l'<0>URL REST LND Connect.</0>"
+        },
+        "rest_url": {
+          "label": "URL REST lndconnect",
+          "placeholder": "lndconnect://votrenoeud:8080?..."
+        }
+      },
+      "raspiblitz": {
+        "title": "RaspiBlitz",
+        "page": {
+          "title": "Connectez-vous à votre nœud <0>RaspiBlitz</0>",
+          "instructions1": "Suivez ces étapes :<1/> 1. <0>SSH</0> dans votre <0>Raspiblitz</0><1/>2. Sélectionnez <0>Connect Apps & Show Credentials</0> dans la liste<1/><0/>3. Choisissez <0>Connecter Alby à ce nœud</0><1/>4. Appuyez sur <0>OK</0> pour afficher les identifiants de connexion<1/><1/>Copiez et collez l'<0>hôte API REST</0> ou l'adresse <0>.onion</0> pour vous connecter via Tor dans l'entrée ci-dessous.",
+          "instructions2": "Copiez le <0>macaroon</0> (admin) dans l'entrée ci-dessous."
+        },
+        "rest_api_host": {
+          "label": "Hôte d'API REST",
+          "placeholder": "adresse-de-votre-node-onion:port"
+        }
+      },
+      "bitcoin_beach": {
+        "title": "Portefeuille de plage Bitcoin",
+        "page": {
+          "title": "Connectez-vous à <0>Bitcoin Beach Wallet</0>"
+        }
+      },
+      "bitcoin_jungle": {
+        "title": "Portefeuille Jungle Bitcoin",
+        "page": {
+          "title": "Connectez-vous au <0>portefeuille Bitcoin Jungle</0>"
+        }
+      },
+      "galoy": {
+        "phone_number": {
+          "label": "Entrez votre numéro de téléphone"
+        },
+        "sms_code": {
+          "label": "Entrez votre code de vérification par SMS"
+        },
+        "jwt": {
+          "label": "Entrez votre jeton JWT",
+          "info": "La connexion {{label}} est en cours de mise à jour. Si vous êtes un utilisateur avancé, vous pouvez récupérer votre jeton JWT en vous connectant via le <0>Portefeuille Web (wallet.mainnet.galoy.io)</0><1/><1/>Le JWT ressemble : < 2>eyJhbG...</2><1/><1/>"
+        },
+        "actions": {
+          "login": "Connexion",
+          "request_sms_code": "Demander un code SMS"
+        },
+        "errors": {
+          "failed_to_request_sms": "Impossible de demander un code SMS",
+          "failed_to_login_sms": "Échec de la connexion avec le code SMS",
+          "setup_failed": "La configuration a échoué",
+          "missing_jwt": "JWT manquant, impossible de se connecter.",
+          "invalid_jwt": "JWT invalide passé"
+        }
+      },
+      "kollider": {
+        "title": "Kollider",
+        "description": "Connectez-vous à votre compte Kollider",
+        "username": {
+          "label": "Saisissez votre nom d'utilisateur pour Kollider"
+        },
+        "currency": {
+          "label": "Sélectionnez votre compte en devise"
+        },
+        "errors": {
+          "connection_failed": "La connexion a échoué. Êtes-vous sûr que les données du compte sont correctes ?"
+        }
+      },
+      "btcpay": {
+        "title": "Serveur BTCPay",
+        "page": {
+          "title": "Connectez-vous à votre nœud BTCPay LND",
+          "instructions": "Accédez à votre BTCPayServer et connectez-vous en tant qu'administrateur. Accédez à Paramètres du serveur > Services > LND Rest - Voir les informations. Cliquez ensuite sur \"Voir les informations du code QR\" et copiez les données du code QR. Collez-le ci-dessous :"
+        },
+        "config": {
+          "label": "Données de configuration",
+          "placeholder": "config=https://votre-btc-pay.org/lnd-config/212121/lnd.config"
+        },
+        "errors": {
+          "connection_failed": "La connexion a échoué. L'URL de connexion BTCPay est-elle correcte et accessible ?"
+        }
+      },
+      "commando": {
+        "title": "Core Lightning",
+        "page": {
+          "title": "Connectez-vous à votre nœud Core Lightning",
+          "instructions": "Assurez-vous que vous disposez de Core Lightning version 0.12.0 ou plus récente, que le plug-in commando est en cours d'exécution et que votre nœud est accessible via le réseau Lightning. Créez une rune en exécutant 'lightning-cli commando-rune'."
+        },
+        "host": {
+          "label": "Hôte"
+        },
+        "pubkey": {
+          "label": "Clé publique"
+        },
+        "rune": {
+          "label": "Rune"
+        },
+        "port": {
+          "label": "Port"
+        },
+        "proxy": {
+          "label": "Proxy websocket"
+        },
+        "privKey": {
+          "label": "Clé privée locale (générée automatiquement)"
+        },
+        "config": {
+          "label": "Données de configuration",
+          "placeholder": "config=https://votre-btc-payer.org/lnd-config/212121/lnd.config"
+        },
+        "errors": {
+          "connection_failed": "La connexion a échoué. Votre nœud Core Lightning est-il en ligne et utilise-t-il le plugin commando ?"
+        }
+      }
+    },
+    "home": {
+      "actions": {
+        "send_satoshis": "⚡️ Envoyez des Satoshis ⚡️",
+        "enable_now": "Activer maintenant"
+      },
+      "recent_transactions": "transactions récentes",
+      "transaction_list": {
+        "tabs": {
+          "outgoing": "Sortant",
+          "incoming": "Entrant"
+        }
+      },
+      "allowance_view": {
+        "recent_transactions": "transactions récentes",
+        "allowance": "Allocation",
+        "sats_used": "sats utilisés",
+        "no_transactions": "Aucune transaction sur <0>{{name}}</0> pour le moment."
+      },
+      "default_view": {
+        "recent_transactions": "transactions récentes",
+        "no_transactions": "Aucune transaction effectuée avec Alby pour le moment.",
+        "is_blocked_hint": "Alby est actuellement désactivé sur {{host}}",
+        "block_removed": "{{hôte}} activé. Veuillez recharger le site Web."
+      }
+    },
+    "accounts": {
+      "title": "Comptes",
+      "account_view": {
+        "title1": "Information sur le compte",
+        "title2": "Modifier le compte",
+        "name": {
+          "title": "Nom",
+          "placeholder": "Nom du compte"
+        },
+        "export": {
+          "title": "Compte d'exportation",
+          "screen_reader": "Exporter les détails du compte",
+          "waiting": "en attente des données LndHub...",
+          "your_ln_address": "Votre adresse Lightning :",
+          "tip_mobile": "Astuce : Utilisez ce portefeuille avec votre appareil mobile",
+          "export_uri": "URI des identifiants LNDHub",
+          "scan_qr": "Importez ce portefeuille dans Zeus ou BlueWallet en scannant le QRCode."
+        },
+        "nostr": {
+          "title": "Nostr",
+          "hint": "est un protocole simple et ouvert qui vise à créer des réseaux sociaux résistants à la censure. Nostr fonctionne avec des clés cryptographiques. Pour publier quelque chose vous le signez avec votre clé et l'envoyez à plusieurs relais. Vous pouvez utiliser Alby pour gérer votre clé Nostr. De nombreuses applications Nostr vous permettront alors d'utiliser simplement la clé de l'extension Alby.",
+          "private_key": {
+            "title": "Gérez votre clé",
+            "subtitle": "Collez votre clé privée ou générez-en une nouvelle. Assurez-vous de sauvegarder votre clé privée avant d'en générer une nouvelle. <0>En savoir plus »</0>",
+            "warning": "Veuillez entrer le nom du compte pour confirmer la suppression de la clé privée :",
+            "success": "Clé privée cryptée et enregistrée avec succès.",
+            "successfully_removed": "Clé privée supprimée avec succès.",
+            "label": "Clé privée",
+            "failed_to_remove": "Le nom de compte saisi ne correspondait pas, votre ancien compte privé a été restauré."
+          },
+          "public_key": {
+            "label": "Clé publique"
+          },
+          "generate_keys": {
+            "title": "Générer une nouvelle clé Nostr",
+            "screen_reader": "Générez une nouvelle clé Nostr pour votre compte",
+            "hint": "Vous pouvez générer une clé aléatoire ou une clé dérivée à partir des détails de ce compte (en utilisant une phrase canonique signée). <0>En savoir plus »</0>",
+            "actions": {
+              "random_keys": "Générer une clé aléatoire",
+              "derived_keys": "Dériver une clé du compte"
+            }
+          },
+          "actions": {
+            "generate": "Générer une nouvelle clé"
+          },
+          "errors": {
+            "failed_to_load": "Échec du chargement de la clé Nostr. Est-ce une clé Nostr valide ?"
+          }
+        },
+        "remove": {
+          "title": "Supprimer ce compte",
+          "subtitle": "Tous les quotas liés seront supprimés. S'il vous plaît soyez certain.",
+          "confirm": "Voulez-vous vraiment supprimer le compte : {{name}} ?\nÇa ne peut pas être annulé. Si vous avez utilisé ce compte pour vous connecter à des sites Web, vous risquez de perdre l'accès à ceux-ci."
+        },
+        "actions": {
+          "remove_account": "Supprimer le compte",
+          "export": "Exporter"
+        }
+      },
+      "actions": {
+        "add_account": "Ajouter un compte"
+      }
+    },
+    "enable": {
+      "title": "Connecter",
+      "allow": "Autoriser ce site Web à :",
+      "request1": "Demander l'approbation des transactions",
+      "request2": "Demander des factures et des informations sur la foudre",
+      "block_and_ignore": "Bloquer et ignorer {{host}}",
+      "block_added": "{{host}} a été ajouté à la liste de blocage, veuillez recharger le site Web."
+    },
+    "unlock": {
+      "unlock_to_continue": "Déverrouiller pour continuer",
+      "unlock_password": "Votre mot de passe de déverrouillage",
+      "help_contact": {
+        "part1": "Besoin d'aide? Contacter",
+        "part2": "Assistance Alby"
+      },
+      "unlock_error": {
+        "help": "Les données de votre compte sont cryptées avec votre mot de passe de déverrouillage. Si vous avez vraiment oublié votre mot de passe de déverrouillage, vous devez réinitialiser et ajouter à nouveau votre compte Lightning.",
+        "link": "Réinitialisez maintenant et ajoutez un nouveau compte"
+      },
+      "errors": {
+        "invalid_password": "Mot de passe incorrect"
+      }
+    },
+    "settings": {
+      "title": "Paramètres",
+      "browser_notifications": {
+        "title": "Notifications du navigateur",
+        "subtitle": "Notifications liées au paiement et à l'authentification."
+      },
+      "website_enhancements": {
+        "title": "Améliorations du site Web",
+        "subtitle": "Améliorations des pourboires pour Twitter, YouTube, etc."
+      },
+      "lnurl_auth": {
+        "title": "LNURL-Auth",
+        "hint": "est un protocole d'authentification générique. Il authentifie l'utilisateur à l'aide de signatures numériques. Le protocole ne nécessite aucune autre information d'identification telle que des mots de passe, des e-mails, des noms d'utilisateur ou similaires. Avec Alby, vous pouvez utiliser vos comptes Lightning pour vous connecter en toute sécurité aux sites Web. Pour être compatible avec d'autres portefeuilles, nous avons dû apporter quelques modifications que vous pouvez configurer ici. <0>Idéalement, toutes ces options sont désactivées.</0> Utilisez-les uniquement si vous avez d'anciens comptes.",
+        "legacy_lnurl_auth_202207": {
+          "title": "Hérité LNURL-Auth",
+          "subtitle": "La génération de clé pour LNURL-auth a changé (juillet 2022). Alby n'était pas compatible avec d'autres implémentations. Cela a été changé, mais maintenant différentes clés de connexion sont utilisées. Si vous avez utilisé LNURL-auth pour vous connecter auparavant, vous pouvez toujours activer l'ancienne méthode. Cette option sera supprimée plus tard, assurez-vous de passer à la nouvelle connexion."
+        },
+        "legacy_lnurl_auth": {
+          "title": "Signature héritée pour LNDhub et LNbits",
+          "subtitle": "La signature des messages et la connexion avec LNDhub (par exemple BlueWallet) et les comptes LNbits ont été modifiées (mars 2022). Si vous vous êtes connecté avec ces comptes, vous pouvez toujours activer l'ancienne méthode de signature. Cette option sera supprimée plus tard, assurez-vous de passer à la nouvelle connexion."
+        }
+      },
+      "camera_access": {
+        "title": "accès à la caméra",
+        "subtitle": "Pour scanner les codes QR",
+        "allow": "Autoriser l'accès à la caméra",
+        "granted": "Permission accordée"
+      },
+      "language": {
+        "title": "Langue",
+        "subtitle": "Les traductions ne sont pas encore terminées à 100 %. <0>Aidez-nous à traduire Alby dans votre langue !</0>"
+      },
+      "theme": {
+        "title": "Thème",
+        "subtitle": "Utiliser Alby en mode sombre ou clair",
+        "options": {
+          "dark": "Sombre",
+          "light": "Lumière",
+          "system": "Système"
+        }
+      },
+      "show_fiat": {
+        "title": "Sat à Fiat",
+        "subtitle": "Toujours convertir dans la devise sélectionnée à partir de l'échange sélectionné"
+      },
+      "currency": {
+        "title": "Monnaie",
+        "subtitle": "Afficher les montants en plus dans cette devise"
+      },
+      "exchange": {
+        "title": "Source d'échange",
+        "subtitle": "Source des taux de change Bitcoin"
+      },
+      "personal_data": {
+        "title": "Données personnelles",
+        "description": "Les bénéficiaires peuvent demander que des données supplémentaires soient envoyées avec un paiement. Ces données ne sont partagées avec personne sans votre consentement, vous serez toujours invité avant que ces données ne soient envoyées avec un paiement."
+      },
+      "name": {
+        "title": "Nom",
+        "subtitle": "",
+        "placeholder": "Entrez votre nom"
+      },
+      "email": {
+        "title": "E-mail",
+        "subtitle": "",
+        "placeholder": "Entrez votre adresse email"
+      },
+      "change_password": {
+        "title": "Changer le mot de passe de déverrouillage",
+        "subtitle": "",
+        "screen_reader": "Changer le mot de passe de déverrouillage",
+        "choose_password": {
+          "label": "Saisissez un nouveau mot de passe de déverrouillage :"
+        },
+        "confirm_password": {
+          "label": "Confirmer le nouveau mot de passe:"
+        },
+        "submit": {
+          "label": "Changement"
+        },
+        "errors": {
+          "enter_password": "Veuillez saisir un nouveau mot de passe de déverrouillage.",
+          "confirm_password": "Veuillez confirmer votre mot de passe.",
+          "mismatched_password": "Les mots de passe ne correspondent pas."
+        },
+        "success": "Le mot de passe a été changé avec succès"
+      },
+      "nostr": {
+        "title": "Nostr",
+        "hint": "est un protocole simple et ouvert qui vise à créer des réseaux sociaux résistants à la censure. Nostr fonctionne avec des clés cryptographiques. Pour publier quelque chose vous le signez avec votre clé et l'envoyez à plusieurs relais. Vous pouvez utiliser Alby pour gérer votre clé Nostr. De nombreuses applications Nostr vous permettront alors d'utiliser simplement la clé de l'extension Alby.",
+        "private_key": {
+          "title": "Clé privée",
+          "subtitle": "Cette section est déplacée vers la page des comptes car les clés sont désormais spécifiques au compte.",
+          "go_to": "Aller aux comptes"
+        }
+      }
+    },
+    "send": {
+      "title": "Envoyer",
+      "qrcode": {
+        "title": "En attente de numérisation"
+      },
+      "input": {
+        "label": "Destinataire",
+        "hint": "Facture, adresse Lightning ou LNURL"
+      }
+    },
+    "lnurlpay": {
+      "amount": {
+        "label": "Montant"
+      },
+      "comment": {
+        "label": "Commentaire"
+      },
+      "name": {
+        "label": "Nom"
+      },
+      "email": {
+        "label": "E-mail"
+      },
+      "success": "Succès, paiement envoyé !"
+    },
+    "lnurlauth": {
+      "title": "Authentification",
+      "content_message": {
+        "heading": "Voulez-vous vous connecter à"
+      },
+      "submit": "Connexion",
+      "success": "Connexion réussie sur {{name}}",
+      "errors": {
+        "status": "Erreur : Le statut d'authentification n'est pas correct"
+      }
+    },
+    "lnurlchannel": {
+      "title": "Demande de chaîne",
+      "content_message": {
+        "heading": "Demander un canal au nœud"
+      },
+      "success": "La demande de chaîne a été envoyée avec succès à {{name}}"
+    },
+    "lnurlwithdraw": {
+      "title": "Retirer",
+      "content_message": {
+        "heading": "Montant"
+      },
+      "amount": {
+        "label": "Montant"
+      },
+      "success": "Demande de retrait de {{amount}} envoyée avec succès à {{sender}}"
+    },
+    "receive": {
+      "title": "Recevoir",
+      "actions": {
+        "create_invoice": "Créer une facture"
+      },
+      "amount": {
+        "label": "Montant",
+        "placeholder": "Montant en Satoshi..."
+      },
+      "description": {
+        "label": "Description",
+        "placeholder": "Par ex. qui envoie ce paiement ?"
+      },
+      "success": "Paiement reçu!",
+      "payment": {
+        "waiting": "en attente de paiement...",
+        "status": "Vérifier l'état du paiement"
+      }
+    },
+    "discover": {
+      "title": "Explorez l'écosystème Lightning ⚡️",
+      "description": "Sites Web et applications Web où vous pouvez utiliser Alby",
+      "list": {
+        "trading": "Commerce",
+        "gaming": "Jeux",
+        "entertainment": "Divertissement",
+        "shopping": "Achats",
+        "miscellaneous": "Divers",
+        "showcases": "Vitrines",
+        "nostr": "Nostr"
+      },
+      "tips": {
+        "title": "Votre portefeuille Alby est prêt",
+        "description": "Quelques conseils pour commencer à buzzer🐝",
+        "top_up_wallet": {
+          "title": "⚡️ Rechargez votre portefeuille",
+          "description": "Créez une facture Lightning, envoyez-vous des bitcoins et commencez à utiliser Alby dans l'écosystème Lightning",
+          "label1": "Recevez des bitcoins",
+          "label2": "Recevez des bitcoins"
+        },
+        "pin": {
+          "title": "📌 Épinglez votre extension Alby",
+          "description1": "<0>Pour accéder facilement à Alby, cliquez sur l'icône d'extension</0> <1/> <2>dans le coin supérieur droit de votre navigateur</2>",
+          "description2": "Dans la liste des extensions, recherchez Alby et cliquez sur l'icône d'épingle pour l'épingler à la barre d'outils",
+          "description3": "C'est ça! Pour accéder à Alby, cliquez simplement sur l'icône Alby"
+        },
+        "demo": {
+          "title": "🕹️ Essayez la démo d'Alby",
+          "description": "Découvrez tout ce que vous pouvez faire avec Alby sur notre site de démonstration",
+          "label1": "Essaie"
+        },
+        "address": {
+          "title": "⚡️ Obtenez une adresse éclair",
+          "description": "Créez votre propre adresse éclair et recevez des paiements éclair en envoyant facilement un e-mail",
+          "label1": "Obtenez le maintenant!"
+        }
+      }
+    },
+    "publishers": {
+      "title": "Vos sites ⚡",
+      "description": "Sites Web sur lesquels vous avez déjà utilisé Alby",
+      "no_info": "Il semble que vous n'ayez encore utilisé Alby sur aucun site Web.",
+      "discover": "Découvrir des sites Web",
+      "publisher": {
+        "allowance": {
+          "title": "Allocation",
+          "used_budget": "sats utilisés"
+        }
+      }
+    },
+    "make_invoice": {
+      "title": "Créer une facture",
+      "amount": {
+        "label": "Montant (Satoshi)"
+      },
+      "memo": {
+        "label": "Note"
+      },
+      "errors": {
+        "amount_too_small": "Le montant est inférieur au minimum",
+        "amount_too_big": "Le montant dépasse le maximum"
+      }
+    },
+    "confirm_sign_message": {
+      "title": "Signe",
+      "content": "Ce site vous demande de signer :"
+    },
+    "confirm_keysend": {
+      "title": "Approuver le paiement",
+      "success": "Paiement envoyé! Préimage : {{preimage}}",
+      "payment_summary": {
+        "description": "Envoyez le paiement à : {{destination}}"
+      }
+    },
+    "keysend": {
+      "title": "Envoyer",
+      "success": "Paiement envoyé! Préimage : {{preimage}}",
+      "receiver": {
+        "label": "Envoyez le paiement à"
+      },
+      "amount": {
+        "label": "Montant (Satoshi)"
+      }
+    },
+    "confirm_payment": {
+      "title": "Approuver le paiement",
+      "success": "Paiement de {{amount}} réussi !",
+      "actions": {
+        "pay_now": "Payez maintenant"
+      }
+    },
+    "confirm_request_permission": {
+      "title": "Approuver la demande",
+      "allow": "Autoriser ce site Web à exécuter :",
+      "always_allow": "Souviens-toi de mon choix et ne redemande plus"
+    },
+    "nostr": {
+      "title": "Nostr",
+      "allow": "Autoriser ce site Web à :",
+      "content": "Ce site vous demande de signer :",
+      "allow_sign": "Autoriser {{host}} à signer :",
+      "block_and_ignore": "Bloquer et ignorer {{host}}",
+      "block_added": "{{host}} a été ajouté à la liste de blocage, veuillez recharger le site Web."
+    }
+  },
+  "common": {
+    "password": "Mot de passe",
+    "confirm_password": "Confirmez le mot de passe",
+    "advanced": "Avancé",
+    "success": "Succès",
+    "error": "Erreur",
+    "settings": "Paramètres",
+    "accounts": "Comptes",
+    "discover": "Découvrir",
+    "connected_sites": "",
+    "sats_one": "sat",
+    "sats_other": "sats",
+    "loading": "chargement",
+    "amount": "Montant",
+    "optional": "Facultatif",
+    "feedback": "Retour",
+    "copied": "Copié !",
+    "description": "Description",
+    "description_full": "Description complète",
+    "success_message": "{{amount}}{{fiatAmount}} envoyé à {{destination}}",
+    "response": "Réponse",
+    "message": "Message",
+    "help": "Aider",
+    "actions": {
+      "back": "arrière",
+      "delete": "Supprimer",
+      "edit": "Modifier",
+      "next": "Suivant",
+      "open": "Ouvrir",
+      "cancel": "Annuler",
+      "confirm": "Confirmer",
+      "continue": "Continuer",
+      "connect": "Connecter",
+      "lock": "Verrouiller",
+      "unlock": "Déverrouiller",
+      "send": "Envoyer",
+      "save": "Sauvegarder",
+      "receive": "Recevoir",
+      "receive_again": "Recevoir un autre paiement",
+      "close": "Fermer",
+      "export": "Exporter",
+      "remove": "Retirer",
+      "copy": "Copie",
+      "log_in": "Connexion",
+      "remember": "Souviens-toi de mon choix et ne redemande plus"
+    },
+    "errors": {
+      "connection_failed": "La connexion a échoué",
+      "payment_failed": "Paiement échoué"
+    },
+    "range": {
+      "lessThan": "< {{max}}",
+      "greaterThan": "> {{min}}",
+      "between": "entre {{min}} et {{max}}"
+    }
+  },
+  "components": {
+    "allowance_menu": {
+      "confirm_delete": "Voulez-vous vraiment supprimer ce site ?",
+      "hint": "Cela réinitialisera le budget actuel",
+      "new_budget": {
+        "label": "Nouveau budget"
+      },
+      "enable_login": {
+        "title": "Activer la connexion au site Web",
+        "subtitle": "Connectez-vous automatiquement sans confirmation lorsque le site Web le demande."
+      },
+      "edit_allowance": {
+        "title": "Modifier l'allocation",
+        "screen_reader": "Options d'allocation"
+      },
+      "edit_permissions": "Modifier les autorisations"
+    },
+    "qrcode_scanner": {
+      "title": "Scanner le code QR",
+      "actions": {
+        "start_scanning": "Lancer la numérisation",
+        "stop_scanning": "Arrêter la numérisation"
+      },
+      "errors": {
+        "allow_camera_access": "Veuillez autoriser l'accès à la caméra dans l'écran des paramètres."
+      }
+    },
+    "transactionsTable": {
+      "fee": "Frais",
+      "preimage": "Préimage",
+      "received": "Reçu",
+      "sent": "Envoyé",
+      "boostagram": {
+        "sender": "Expéditeur",
+        "message": "Message",
+        "app": "Application",
+        "podcast": "Podcast"
+      },
+      "open_location": "Ouvrir le site Web"
+    },
+    "confirm_or_cancel": {
+      "only_trusted": "Connectez-vous uniquement aux sites auxquels vous faites confiance."
+    },
+    "budget_control": {
+      "remember": {
+        "label": "Rappelez-vous et établissez un budget",
+        "description": "Vous pouvez définir un solde pour ne pas être invité à confirmer les paiements tant qu'il n'est pas épuisé."
+      },
+      "budget": {
+        "label": "Budget"
+      }
+    },
+    "toasts": {
+      "connection_error": {
+        "what_you_can_do": "Voici ce que vous pouvez faire :",
+        "double_check": "Vérifiez vos informations de connexion",
+        "if_ssl_errors": "et s'il y a des erreurs SSL (par exemple ERR_CERT_AUTHORITY_INVALID), cliquez sur \"avancé\" et continuez à accepter le certificat.",
+        "visit_guides": "Consultez nos guides pour plus d'aide"
+      },
+      "login_failed": {
+        "password_reset": "Mot de passe oublié? Cliquez ici"
+      },
+      "errors": {
+        "invalid_credentials": "Mot de passe incorrect. Veuillez vérifier votre mot de passe et votre adresse e-mail et réessayer."
+      }
+    },
+    "account_menu": {
+      "screen_reader": "Basculer la liste déroulante",
+      "title": "Changer de compte",
+      "options": {
+        "account": {
+          "add": "Ajouter un nouveau compte",
+          "manage": "Gérer les comptes"
+        }
+      }
+    },
+    "publishers_table": {
+      "payments": "Paiements",
+      "used": "utilisé"
+    },
+    "badge": {
+      "label": {
+        "active": "ACTIF",
+        "auth": "CONNEXION"
+      }
+    }
+  },
+  "permissions": {
+    "nostr": {
+      "getpublickey": "Lisez votre clé publique.",
+      "nip04encrypt": "Crypter les données.",
+      "nip04decrypt": "Déchiffrer les données.",
+      "signmessage": "Signez le message avec votre clé."
+    },
+    "commando": {
+      "bkpr-listbalances": "Liste de tous les soldes de compte actuels et historiques.",
+      "checkmessage": "Vérifiez que la signature a été générée par un nœud donné.",
+      "connect": "Établissez une nouvelle connexion avec un autre nœud.",
+      "decode": "Décode une chaîne bolt11/bolt12/ rune chaîne.",
+      "decodepay": "Vérifier et analyser une chaîne bolt11.",
+      "disconnect": "Fermez une connexion existante à un pair.",
+      "feerates": "Renvoie les frais que CLN utilisera.",
+      "fundchannel": "Ouvrez un canal de paiement avec un pair en engageant une transaction de financement.",
+      "getinfo": "Obtenez le résumé du nœud.",
+      "getroute": "Trouvez le meilleur itinéraire pour le paiement vers un nœud Lightning.",
+      "invoice": "Créer l'attente d'un paiement.",
+      "keysend": "Envoyez un paiement à un autre nœud.",
+      "listforwards": "Répertorier tous les htlcs qui ont été tentés d'être transférés.",
+      "listfunds": "Dressez la liste de tous les fonds disponibles.",
+      "listinvoices": "Obtenez le statut de toutes les factures.",
+      "listnodes": "Listez les nœuds dont le nœud a eu connaissance via des messages de potins.",
+      "listoffers": "Listez toutes les offres ou obtenez une offre spécifique.",
+      "listpays": "Obtient le statut de toutes les commandes de paiement.",
+      "listpeers": "Répertorier les nœuds connectés ou ayant des canaux ouverts avec ce nœud.",
+      "listsendpays": "Obtient le statut de toutes les commandes sendpay.",
+      "listtransactions": "Répertorier les transactions suivies dans le portefeuille.",
+      "multifundchannel": "Ouvrez plusieurs canaux de paiement avec des nœuds en effectuant une seule transaction de financement.",
+      "offer": "Créer une offre.",
+      "pay": "Envoyez un paiement à une facture BOLT11.",
+      "sendpay": "Envoyer un paiement via un itinéraire.",
+      "setchannel": "Configurez les frais / la gamme htlc annoncée pour un canal.",
+      "signmessage": "Créez une signature à partir de ce nœud."
+    },
+    "lnd": {
+      "getinfo": "Obtenez les informations sur le nœud.",
+      "listchannels": "Obtenez une description de tous les canaux ouverts.",
+      "listinvoices": "Obtenez une liste de toutes les factures.",
+      "channelbalance": "Obtenez un rapport sur le total des fonds sur tous les canaux ouverts.",
+      "walletbalance": "Obtenez le total des sorties non dépensées du portefeuille.",
+      "openchannel": "Ouvrez une nouvelle chaîne.",
+      "connectpeer": "Établissez une connexion à un pair distant.",
+      "disconnectpeer": "Déconnectez-vous d'un pair distant.",
+      "estimatefee": "Estimez le taux de frais et les frais totaux pour une transaction.",
+      "getchaninfo": "Obtenez l'annonce du réseau pour la chaîne donnée.",
+      "getnetworkinfo": "Obtenez des statistiques de base sur le graphique des canaux connus.",
+      "getnodeinfo": "Obtenir les informations de canal pour un nœud.",
+      "gettransactions": "Obtenez une liste de toutes les transactions pertinentes pour le portefeuille.",
+      "listpayments": "Obtenez une liste de tous les paiements sortants.",
+      "listpeers": "Obtenez une liste de tous les pairs actuellement actifs.",
+      "lookupinvoice": "Consulter les détails de la facture.",
+      "queryroutes": "Requête pour un itinéraire possible.",
+      "verifymessage": "Vérifier une signature sur un msg.",
+      "sendtoroute": "Effectuez un paiement via l'itinéraire spécifié.",
+      "decodepayreq": "Décoder une chaîne de demande de paiement.",
+      "routermc": "Lire l'état du contrôle de mission interne.",
+      "addinvoice": "Créer de nouvelles factures."
+    },
+    "lnc": {
+      "getinfo": "Obtenez les informations sur le nœud.",
+      "listchannels": "Obtenez une description de tous les canaux ouverts.",
+      "listinvoices": "Obtenez une liste de toutes les factures.",
+      "channelbalance": "Obtenez un rapport sur le total des fonds sur tous les canaux ouverts.",
+      "walletbalance": "Obtenez le total des sorties non dépensées du portefeuille.",
+      "openchannel": "Ouvrez une nouvelle chaîne.",
+      "connectpeer": "Établissez une connexion à un pair distant.",
+      "disconnectpeer": "Déconnectez-vous d'un pair distant.",
+      "estimatefee": "Estimez le taux de frais et les frais totaux pour une transaction.",
+      "getchaninfo": "Obtenez l'annonce du réseau pour la chaîne donnée.",
+      "getnetworkinfo": "Obtenez des statistiques de base sur le graphique des canaux connus.",
+      "getnodeinfo": "Obtenir les informations de canal pour un nœud.",
+      "gettransactions": "Obtenez une liste de toutes les transactions pertinentes pour le portefeuille.",
+      "listpayments": "Obtenez une liste de tous les paiements sortants.",
+      "listpeers": "Obtenez une liste de tous les pairs actuellement actifs.",
+      "lookupinvoice": "Consulter les détails de la facture.",
+      "queryroutes": "Requête pour un itinéraire possible.",
+      "verifymessage": "Vérifier une signature sur un msg.",
+      "sendtoroute": "Effectuez un paiement via l'itinéraire spécifié.",
+      "decodepayreq": "Décoder une chaîne de demande de paiement.",
+      "routermc": "Lire l'état du contrôle de mission interne.",
+      "addinvoice": "Créer de nouvelles factures."
+    }
+  }
+}

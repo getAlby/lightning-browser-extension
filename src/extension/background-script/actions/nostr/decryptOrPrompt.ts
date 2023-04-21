@@ -3,7 +3,7 @@ import state from "~/extension/background-script/state";
 import i18n from "~/i18n/i18nConfig";
 import { MessageDecryptGet, PermissionMethodNostr } from "~/types";
 
-import { hasPermissionFor, addPermissionFor } from "./helpers";
+import { addPermissionFor, hasPermissionFor } from "./helpers";
 
 const decryptOrPrompt = async (message: MessageDecryptGet) => {
   if (!("host" in message.origin)) {
@@ -18,10 +18,11 @@ const decryptOrPrompt = async (message: MessageDecryptGet) => {
     );
 
     if (hasPermission) {
-      const response = state
-        .getState()
-        .getNostr()
-        .decrypt(message.args.peer, message.args.ciphertext);
+      const nostr = await state.getState().getNostr();
+      const response = await nostr.decrypt(
+        message.args.peer,
+        message.args.ciphertext
+      );
 
       return { data: response };
     } else {
@@ -32,7 +33,7 @@ const decryptOrPrompt = async (message: MessageDecryptGet) => {
         ...message,
         action: "public/nostr/confirm",
         args: {
-          description: i18n.t("translation:nostr.permissions.decrypt"),
+          description: i18n.t("permissions:nostr.nip04decrypt"),
         },
       });
 
@@ -44,10 +45,11 @@ const decryptOrPrompt = async (message: MessageDecryptGet) => {
         );
       }
       if (promptResponse.data.confirm) {
-        const response = state
-          .getState()
-          .getNostr()
-          .decrypt(message.args.peer, message.args.ciphertext);
+        const nostr = await state.getState().getNostr();
+        const response = await nostr.decrypt(
+          message.args.peer,
+          message.args.ciphertext
+        );
 
         return { data: response };
       } else {

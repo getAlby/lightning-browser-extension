@@ -6,7 +6,7 @@ import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
 import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
 import { useState } from "react";
-import { useTranslation, Trans } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import msg from "~/common/lib/msg";
@@ -98,6 +98,7 @@ export default function ConnectEclair() {
           label={t("password.label")}
           type={passwordView ? "text" : "password"}
           required
+          autoFocus={true}
           onChange={handleChange}
           endAdornment={
             <button

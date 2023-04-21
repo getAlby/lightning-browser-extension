@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import { classNames } from "~/app/utils";
 
 type Props = {
   children: React.ReactNode;
@@ -12,10 +13,12 @@ function NavbarLink({ children, end = false, href }: Props) {
       end={end}
       to={href}
       className={({ isActive }) =>
-        "block px-1 font-semibold transition-colors duration-200" +
-        (isActive
-          ? " text-orange-bitcoin hover:text-orange-bitcoin dark:text-orange-bitcoin"
-          : " text-gray-500 dark:text-neutral-400 hover:text-gray-700")
+        classNames(
+          "block font-semibold hover:text-gray-600 dark:hover:text-gray-300 transition px-1 text-md",
+          isActive
+            ? " text-gray-900 dark:text-gray-100"
+            : " text-gray-400 dark:text-gray-400"
+        )
       }
     >
       {children}

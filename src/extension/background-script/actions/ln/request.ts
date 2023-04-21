@@ -10,6 +10,7 @@ const request = async (
   message: MessageGenericRequest
 ): Promise<{ data: unknown } | { error: string }> => {
   const connector = await state.getState().getConnector();
+  const accountId = state.getState().currentAccountId;
 
   const { origin, args } = message;
 
@@ -43,13 +44,19 @@ const request = async (
       throw new Error("Could not find an allowance for this host");
     }
 
+    if (!accountId) {
+      // type guard
+      throw new Error("Could not find a selected account");
+    }
+
+    const connectorName = connector.constructor.name.toLowerCase();
     // prefix method with webln to prevent potential naming conflicts (e.g. with nostr calls that also use the permissions)
-    const weblnMethod = `${WEBLN_PREFIX}${methodInLowerCase}`;
+    const weblnMethod = `${WEBLN_PREFIX}${connectorName}/${methodInLowerCase}`;
 
     const permission = await db.permissions
       .where("host")
       .equalsIgnoreCase(origin.host)
-      .and((p) => p.method === weblnMethod)
+      .and((p) => p.accountId === accountId && p.method === weblnMethod)
       .first();
 
     // request method is allowed to be called
@@ -64,6 +71,7 @@ const request = async (
       );
       return response;
     } else {
+      // throws an error if the user rejects
       const promptResponse = await utils.openPrompt<{
         enabled: boolean;
         blocked: boolean;
@@ -71,7 +79,7 @@ const request = async (
         args: {
           requestPermission: {
             method: methodInLowerCase,
-            description: `${connector.constructor.name.toLowerCase()}.${methodInLowerCase}`,
+            description: `${connectorName}.${methodInLowerCase}`,
           },
         },
         origin,
@@ -87,6 +95,7 @@ const request = async (
       if (promptResponse.data.enabled) {
         const permissionIsAdded = await db.permissions.add({
           createdAt: Date.now().toString(),
+          accountId: accountId,
           allowanceId: allowance.id,
           host: origin.host,
           method: weblnMethod, // ensure to store the prefixed method string

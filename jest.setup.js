@@ -7,6 +7,11 @@ import "@testing-library/jest-dom";
 // https://github.com/mswjs/examples/tree/master/examples/rest-react
 import { server } from "./tests/unit/helpers/server";
 
+import { TextEncoder, TextDecoder } from 'util'
+global.TextEncoder = TextEncoder
+global.TextDecoder = TextDecoder
+
+
 // fix "This script should only be loaded in a browser extension." e.g. https://github.com/mozilla/webextension-polyfill/issues/218
 if (!chrome.runtime.id) chrome.runtime.id = "history-delete";
 
@@ -29,6 +34,12 @@ Object.defineProperty(window, "matchMedia", {
 beforeAll(() => {
   // Enable the mocking in tests.
   server.listen();
+
+  //https://github.com/mozilla/webextension-polyfill/issues/329
+  global.chrome.storage.session = {
+    set: jest.fn(),
+    get: jest.fn(),
+  };
 });
 
 afterEach(() => {
@@ -39,4 +50,5 @@ afterEach(() => {
 afterAll(() => {
   // Clean up once the tests are done.
   server.close();
+  jest.restoreAllMocks();
 });

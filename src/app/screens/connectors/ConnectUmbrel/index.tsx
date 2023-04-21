@@ -3,7 +3,7 @@ import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
 import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
 import { useState } from "react";
-import { useTranslation, Trans } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import msg from "~/common/lib/msg";
@@ -119,13 +119,13 @@ export default function ConnectUmbrel() {
           i18nKey={"page.instructions"}
           t={t}
           // eslint-disable-next-line react/jsx-key
-          components={[<strong></strong>]}
+          components={[<strong></strong>, <br />]}
         />
       }
       submitLoading={loading}
       submitDisabled={formData.url === "" || formData.macaroon === ""}
       onSubmit={handleSubmit}
-      video="https://cdn.getalby-assets.com/connector-guides/in_extension_guide_umbrel.mp4"
+      image="https://cdn.getalby-assets.com/connector-guides/umbrel.png"
     >
       <TextField
         id="lndconnect"
@@ -133,12 +133,13 @@ export default function ConnectUmbrel() {
         placeholder={t("rest_url.placeholder")}
         onChange={handleLndconnectUrl}
         required
+        autoFocus={true}
       />
       {formData.url.match(/\.onion/i) && (
         <div className="mt-6">
           <CompanionDownloadInfo
-            hasTorCallback={() => {
-              setHasTorSupport(true);
+            hasTorCallback={(hasTor: boolean) => {
+              setHasTorSupport(hasTor);
             }}
           />
         </div>

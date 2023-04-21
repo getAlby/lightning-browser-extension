@@ -1,34 +1,6 @@
 {
   "translation": {
     "welcome": {
-      "title": "De Power van ⚡ Bitcoin ⚡ in jouw Browser",
-      "nav": {
-        "welcome": "Welkom",
-        "password": "Jouw Wachtwoord",
-        "connect": "Jouw Lightning account",
-        "done": "Klaar"
-      },
-      "intro": {
-        "send": {
-          "title": "Verstuur in één klik",
-          "description": "Lightning transacties gebeuren in je browser. Geen alt+tab of QR-code scan nodig."
-        },
-        "paywall": {
-          "title": "Geen vervelende paywalls meer",
-          "description": "Definieer individuele budgetten voor websites om naadloze betalingsstromen mogelijk te maken. Geen vervelende paywalls meer."
-        },
-        "privacy": {
-          "title": "Privacy voorop",
-          "description": "Gebruik Lightning om te verifiëren en controle te houden over je privacy."
-        },
-        "foss": {
-          "title": "Gratis en Open Source",
-          "description": "Volledig transparante open code. Geen statistieken of trackers. Jij hebt de controle."
-        },
-        "actions": {
-          "get_started": "Begin Nu"
-        }
-      },
       "set_password": {
         "title": "Stel een ontgrendelingswachtwoord in",
         "description": "Lightning-accountgegevens zijn veilig versleuteld met een ontgrendelingswachtwoord. Vergeet dit wachtwoord niet! Je hebt het nodig om de Alby-extensie te ontgrendelen (in deze browser)",
@@ -46,8 +18,6 @@
       },
       "test_connection": {
         "ready": "Geweldig, klaar om te starten!",
-        "tutorial": "Nu je Lightning wallet is geconnect, wil je een tutorial doorlopen?",
-        "try_tutorial": "Probeer nu",
         "initializing": "Uw account wordt geïnitialiseerd. Even geduld, dit kan even duren...",
         "connection_error": "Connectie Error",
         "review_connection_details": "Controleer uw verbindingsgegevens.",
@@ -56,43 +26,13 @@
         "actions": {
           "delete_edit_account": "Verwijderd invalide account en probeer opnieuw"
         }
-      }
+      },
+      "title": "Welkom bij Alby"
     },
     "choose_connector": {
-      "title": {
-        "welcome": "Heb je een Lightning wallet?",
-        "options": "Voeg een nieuwe Lightning account toe"
-      },
       "description": "Maak eerst verbinding met een Lightning wallet zodat je kan synchen met websites die bitcoin Lightning betalingen accepteren!",
-      "alby": {
-        "title": "Alby Wallet",
-        "description": "Maak een Alby account aan of log direct in",
-        "pre_connect": {
-          "title": "Jouw Alby Lightning Wallet",
-          "login_account": "Maak een Alby account aan of log direct in.",
-          "host_wallet": "Wij hosten een Lightning wallet voor jouw!",
-          "email": {
-            "label": "Emailadres"
-          },
-          "optional_lightning_note": {
-            "part1": "Jouw Alby-account komt ook met een optionele",
-            "part2": "Lightning Address",
-            "part3": ". Dit is een eenvoudige manier voor anderen om jou bitcoin via het Lightning Netwerk te versturen.",
-            "part4": "leer meer"
-          },
-          "optional_lightning_address": {
-            "label": "Kies je Lightning Address (optioneel)",
-            "suffix": "@getalby.com",
-            "title": "nummers en letters, minimaal 3 karakters"
-          },
-          "errors": {
-            "create_wallet_error": "Kan niet inloggen of een nieuw account aanmaken. Hulp nodig? Neem contact op met support@getalby.com"
-          }
-        }
-      },
       "lnd": {
         "title": "LND",
-        "description": "Verbind met je LND node",
         "page": {
           "title": "Verbind met je LND node",
           "description": "Je hebt je node-URL nodig en een macaroon met lees- en verzendrechten (bijv. admin.macaroon)"
@@ -112,7 +52,6 @@
       },
       "lndhub_bluewallet": {
         "title": "Bluewallet",
-        "description": "Verbind met je Bluewallet",
         "page": {
           "title": "Verbind met BlueWallet",
           "description": "Kies in BlueWallet de Lightning wallet waarmee je wilt verbinden, open deze, klik op \"...\", klik op Exporteren/Back-up om de QR-code weer te geven en scan deze."
@@ -127,7 +66,6 @@
       },
       "lndhub_go": {
         "title": "LNDHub",
-        "description": "Verbind met je LNDHub account",
         "page": {
           "title": "Verbind met LNDHub",
           "description": "Voer hier je LNDHub credential URI in of scan de QR code met je webcam."
@@ -142,7 +80,6 @@
       },
       "lnbits": {
         "title": "LNbits",
-        "description": "Verbind met je LNDHub account",
         "page": {
           "title": "Verbinden met <0>LNbits</0>",
           "instructions": "Kies in LNbits de portemonnee die u wilt verbinden, open deze, klik op API-info en kopieer de admin-sleutel. Plak het hieronder:"
@@ -160,7 +97,6 @@
       },
       "eclair": {
         "title": "Eclair",
-        "description": "Verbinding met je Eclair node",
         "page": {
           "title": "Verbinden met <0>Eclair</0>",
           "instructions": "U hebt uw Eclair-URL en wachtwoord nodig."
@@ -175,7 +111,6 @@
       },
       "citadel": {
         "title": "Citadel",
-        "description": "Maak verbinding met je lokale Citadel",
         "page": {
           "title": "Verbinding maken met <0>Citadel</0> node",
           "instructions": "Dit werkt momenteel niet als 2FA is ingeschakeld."
@@ -190,7 +125,6 @@
       },
       "umbrel": {
         "title": "Umbrel",
-        "description": "Maak verbinding met uw Umbrel",
         "page": {
           "title": "Verbinding maken met <0>Umbrel</0> node",
           "instructions": "Ga in uw Umbrel dashboard naar <0>Connect Wallet</0>. Selecteer <0>lndconnect REST</0> en kopieer de URL <0>lndconnect</0>. (Afhankelijk van uw installatie kunt u de lokale verbinding of de Tor-verbinding gebruiken.)"
@@ -202,35 +136,32 @@
       },
       "mynode": {
         "title": "myNode",
-        "description": "Maak verbinding met uw myNode",
         "page": {
           "title": "Verbinding maken met <0>myNode</0>",
-          "instructions": ""
+          "instructions": "Op uw myNode homepage klikt u op de <0>Wallet</0> knop voor uw <0>Lightning</0> dienst.<1/> Klik nu op de <0>Pair Wallet</0> knop onder de <0>Status</0> tab. Voer uw wachtwoord in wanneer daarom wordt gevraagd.<1/> Selecteer het dropdown menu en kies een koppelingsoptie. Afhankelijk van uw instelling kunt u de <0>Lightning (REST + Lokaal IP)</0> verbinding of de <0>Lightning (REST + Tor)</0> verbinding gebruiken."
         },
         "rest_url": {
-          "label": "",
-          "placeholder": ""
+          "label": "lndconnect REST URL",
+          "placeholder": "lndconnect://yournode:8080?..."
         }
       },
       "start9": {
-        "title": "",
-        "description": "",
+        "title": "Start9",
         "page": {
-          "title": "",
-          "instructions": ""
+          "title": "Maak verbinding met uw <0>Embassy</0> node",
+          "instructions": "<0>Note:</0> Momenteel ondersteunen we alleen LND, maar we zullen in de toekomst c-lightning ondersteuning toevoegen! <1/>Op uw Embassy dashboard klikt u op de <0>Lightning Network Daemon</0> service.<1/>Selecteer de <0>Properties</0> tab.<1/>Kopieer nu de <0>LND Connect REST URL.</0>"
         },
         "rest_url": {
-          "label": "",
-          "placeholder": ""
+          "label": "lndconnect REST URL",
+          "placeholder": "lndconnect://yournode:8080?..."
         }
       },
       "raspiblitz": {
-        "title": "",
-        "description": "",
+        "title": "RaspiBlitz",
         "page": {
-          "title": "",
-          "instructions1": "",
-          "instructions2": ""
+          "title": "Verbind met uw RaspiBlitz node",
+          "instructions1": "Je hebt je node onion adres, poort en een macaroon met lees- en verzendrechten nodig (bijv. admin.macaroon).<1/><1/><0>SSH</0> in uw <0>RaspiBlitz</0>.<1/>Run het commando <0>sudo cat /mnt/hdd/tor/lndrest/hostname</0>.<1/>Kopieer en plak het <0>.onion</0> adres in de onderstaande invoer.<1/>Voeg uw <0>port</0> toe na het onion adres, de standaard poort is <0>:8080</0>.",
+          "instructions2": "Selecteer <0>CONNECT</0>.<1/>Selecteer <0>EXPORT</0>.<1/>Selecteer <0>HEX</0>.<1/>Kopieer de <0>adminMacaroon</0>.<1/>Plak de macaroon in de onderstaande invoer."
         },
         "rest_api_host": {
           "label": "",
@@ -239,14 +170,12 @@
       },
       "bitcoin_beach": {
         "title": "",
-        "description": "",
         "page": {
           "title": ""
         }
       },
       "bitcoin_jungle": {
         "title": "",
-        "description": "",
         "page": {
           "title": ""
         }
@@ -276,7 +205,6 @@
       },
       "btcpay": {
         "title": "",
-        "description": "",
         "page": {
           "title": "",
           "instructions": ""
@@ -291,7 +219,6 @@
       },
       "commando": {
         "title": "",
-        "description": "",
         "page": {
           "title": "",
           "instructions": ""
@@ -352,25 +279,6 @@
       "title": "",
       "actions": {
         "add_account": ""
-      },
-      "edit": {
-        "title": "",
-        "name": {
-          "label": ""
-        },
-        "screen_reader": ""
-      },
-      "export": {
-        "title": "",
-        "screen_reader": "",
-        "waiting": "",
-        "your_ln_address": "",
-        "tip_mobile": "",
-        "export_uri": "",
-        "scan_qr": ""
-      },
-      "remove": {
-        "confirm": ""
       }
     },
     "enable": {
@@ -488,10 +396,7 @@
         "hint": "",
         "private_key": {
           "title": "",
-          "subtitle": "",
-          "generate": "",
-          "warning": "",
-          "success": ""
+          "subtitle": ""
         }
       }
     },
@@ -568,23 +473,6 @@
       }
     },
     "publishers": {
-      "used": {
-        "title": "",
-        "description": "",
-        "no_info": ""
-      },
-      "suggestions": {
-        "title": "",
-        "description": "",
-        "list": {
-          "trading": "",
-          "gaming": "",
-          "entertaiment": "",
-          "shopping": "",
-          "miscellaneous": "",
-          "showcases": ""
-        }
-      },
       "publisher": {
         "allowance": {
           "title": "",
@@ -642,18 +530,14 @@
       "title": "",
       "allow": "",
       "content": "",
-      "read_public_key": "",
       "block_and_ignore": "",
-      "block_added": "",
-      "confirm_sign_message": {
-        "remember": {
-          "label": ""
-        }
-      },
-      "permissions": {
-        "decrypt": "",
-        "encrypt": "",
-        "allow_sign": ""
+      "block_added": ""
+    },
+    "choose_path": {
+      "description": "Om Alby te gebruiken voor online betalingen, verbind je lightning wallet met de extensie.",
+      "title": "Verbinden",
+      "alby": {
+        "title": "Alby"
       }
     }
   },
@@ -663,7 +547,7 @@
     "success": "",
     "error": "",
     "settings": "",
-    "websites": "",
+    "connected_sites": "",
     "sats_one": "",
     "sats_other": "",
     "loading": "",
@@ -752,12 +636,6 @@
       "budget": {
         "label": ""
       }
-    },
-    "companion_download_info": {
-      "description": "",
-      "download_here": "",
-      "using_tor": "",
-      "or": ""
     },
     "toasts": {
       "connection_error": {

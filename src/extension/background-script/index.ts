@@ -2,8 +2,7 @@ import browser, { Runtime, Tabs } from "webextension-polyfill";
 import utils from "~/common/lib/utils";
 
 import { ExtensionIcon, setIcon } from "./actions/setup/setIcon";
-import connectors from "./connectors";
-import db from "./db";
+import { db, isIndexedDbAvailable } from "./db";
 import * as events from "./events";
 import migrate from "./migrations";
 import { router } from "./router";
@@ -11,6 +10,8 @@ import state from "./state";
 
 let isFirstInstalled = false;
 let isRecentlyUpdated = false;
+
+const debug = process.env.NODE_ENV === "development";
 
 // when debugging is enabled in development mode a window.debugAlby object is defined that can be used within the console. This is the type interface for that
 declare global {
@@ -34,6 +35,7 @@ const extractLightningData = (
     // Adding a short delay because I've seen cases where this call has happened too fast
     // before the receiving side in the content-script was connected/listening
     setTimeout(() => {
+      // double check: https://developer.chrome.com/docs/extensions/mv3/migrating_to_service_workers/#alarms
       browser.tabs.sendMessage(tabId, {
         action: "extractLightningData",
       });
@@ -64,7 +66,7 @@ const updateIcon = async (
 };
 
 const debugLogger = (message: unknown, sender: Runtime.MessageSender) => {
-  if (state.getState().settings.debug) {
+  if (debug) {
     console.info("Background onMessage: ", message, sender);
   }
 };
@@ -96,8 +98,6 @@ const routeCalls = (
   if (message.application !== "LBE" || !message.prompt) {
     return;
   }
-  const debug = state.getState().settings.debug;
-
   if (message.type) {
     console.error("Invalid message, using type: ", message);
   }
@@ -116,49 +116,46 @@ const routeCalls = (
   return call;
 };
 
-async function init() {
-  console.info("Loading background script");
+browser.runtime.onMessage.addListener(debugLogger);
 
-  //await browser.storage.sync.set({ settings: { debug: true }, allowances: [] });
-  await state.getState().init();
-  console.info("State loaded");
+// this is the only handler that may and must return a Promise which resolve with the response to the content script
+browser.runtime.onMessage.addListener(routeCalls);
 
-  await db.open();
-  console.info("DB opened");
+// Update the extension icon
+browser.tabs.onUpdated.addListener(updateIcon);
 
-  events.subscribe();
-  console.info("Events subscribed");
-
-  browser.runtime.onMessage.addListener(debugLogger);
-
-  // this is the only handler that may and must return a Promise which resolve with the response to the content script
-  browser.runtime.onMessage.addListener(routeCalls);
-
-  // Update the extension icon
-  browser.tabs.onUpdated.addListener(updateIcon);
-
-  // Notify the content script that the tab has been updated.
-  browser.tabs.onUpdated.addListener(extractLightningData);
-
-  if (state.getState().settings.debug) {
-    console.info("Debug mode enabled, use window.debugAlby");
-    window.debugAlby = {
-      state,
-      db,
-      connectors,
-      router,
-    };
-  }
-  console.info("Loading completed");
-}
+// Notify the content script that the tab has been updated.
+browser.tabs.onUpdated.addListener(extractLightningData);
 
 // The onInstalled event is fired directly after the code is loaded.
 // When we subscribe to that event asynchronously in the init() function it is too late and we miss the event.
 browser.runtime.onInstalled.addListener(handleInstalled);
 
+async function init() {
+  console.info("Loading background script");
+
+  await state.getState().init();
+  console.info("State loaded");
+
+  const dbAvailable = await isIndexedDbAvailable();
+  if (dbAvailable) {
+    console.info("Using indexedDB");
+    await db.open();
+  } else {
+    console.info("Using in memory DB");
+    await db.openWithInMemoryDB();
+  }
+  console.info("DB opened");
+
+  events.subscribe();
+  console.info("Events subscribed");
+
+  console.info("Loading completed");
+}
+
 console.info("Welcome to Alby");
 init().then(() => {
-  if (isFirstInstalled) {
+  if (isFirstInstalled && !state.getState().getAccount()) {
     utils.openUrl("welcome.html");
   }
   if (isRecentlyUpdated) {

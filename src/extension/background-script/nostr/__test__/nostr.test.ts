@@ -12,18 +12,41 @@ const bob = {
   publicKey: "519f5ae2cd7d4b970c4edadb2efc947c9b803838de918d1c5bfd4b9c1a143b72",
 };
 
+const carol = {
+  privateKey:
+    "43a2d71f40dde6fb7588e7962a54b8bbd8dd4bd617a9a5c58b7bf0d8f3482f11",
+  publicKey: "a8c7d70a7d2e2826ce519a0a490fb953464c9d130235c321282983cd73be333f",
+};
+
 describe("nostr", () => {
   test("encrypt & decrypt", async () => {
-    const nostr = new Nostr();
-    nostr.getPrivateKey = jest.fn().mockReturnValue(alice.privateKey);
+    const aliceNostr = new Nostr(alice.privateKey);
 
     const message = "Secret message that is sent from Alice to Bob";
-    const encrypted = nostr.encrypt(bob.publicKey, message);
+    const encrypted = aliceNostr.encrypt(bob.publicKey, message);
 
-    nostr.getPrivateKey = jest.fn().mockReturnValue(bob.privateKey);
+    const bobNostr = new Nostr(bob.privateKey);
 
-    const decrypted = nostr.decrypt(alice.publicKey, encrypted);
+    const decrypted = await bobNostr.decrypt(alice.publicKey, encrypted);
 
     expect(decrypted).toMatch(message);
+  });
+
+  test("Carol can't decrypt Alice's message for Bob", async () => {
+    const aliceNostr = new Nostr(alice.privateKey);
+
+    const message = "Secret message that is sent from Alice to Bob";
+    const encrypted = aliceNostr.encrypt(bob.publicKey, message);
+
+    const carolNostr = new Nostr(carol.privateKey);
+
+    let decrypted;
+    try {
+      decrypted = await carolNostr.decrypt(alice.publicKey, encrypted);
+    } catch (e) {
+      decrypted = "error decrypting message";
+    }
+
+    expect(decrypted).not.toMatch(message);
   });
 });

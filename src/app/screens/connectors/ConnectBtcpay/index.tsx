@@ -125,13 +125,14 @@ export default function ConnectBtcpay() {
           placeholder={t("config.placeholder")}
           onChange={handleChange}
           required
+          autoFocus={true}
         />
       </div>
       {formData.url.match(/\.onion/i) && (
         <div className="mb-6">
           <CompanionDownloadInfo
-            hasTorCallback={() => {
-              setHasTorSupport(true);
+            hasTorCallback={(hasTor: boolean) => {
+              setHasTorSupport(hasTor);
             }}
           />
         </div>

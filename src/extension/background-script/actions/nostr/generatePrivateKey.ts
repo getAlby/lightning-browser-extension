@@ -1,10 +1,33 @@
 import * as secp256k1 from "@noble/secp256k1";
 import Hex from "crypto-js/enc-hex";
 import sha512 from "crypto-js/sha512";
+import type { MessagePrivateKeyGenerate } from "~/types";
 
 import state from "../../state";
 
-const generatePrivateKey = async () => {
+const generatePrivateKey = async (message: MessagePrivateKeyGenerate) => {
+  const type = message?.args?.type;
+
+  const privateKey =
+    type === "random" ? generateRandomKey() : await deriveKey();
+
+  if (privateKey)
+    return {
+      data: {
+        privateKey: secp256k1.utils.bytesToHex(privateKey),
+      },
+    };
+  else
+    return {
+      error: "Error generating private key.",
+    };
+};
+
+const generateRandomKey = () => {
+  return secp256k1.utils.randomPrivateKey();
+};
+
+const deriveKey = async () => {
   const connector = await state.getState().getConnector();
   try {
     const response = await connector.signMessage({
@@ -23,12 +46,7 @@ const generatePrivateKey = async () => {
     // Use SHA-512 to provide enough key material for secp256k1 (> 40 bytes)
     const hash = sha512(keymaterial).toString(Hex);
     const privateKey = secp256k1.utils.hashToPrivateKey(hash);
-
-    return {
-      data: {
-        privateKey: secp256k1.utils.bytesToHex(privateKey),
-      },
-    };
+    return privateKey;
   } catch (e) {
     console.error(e);
   }

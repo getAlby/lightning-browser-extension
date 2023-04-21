@@ -7,7 +7,7 @@ import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
 import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
 import { useState } from "react";
-import { useTranslation, Trans } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import msg from "~/common/lib/msg";
@@ -113,6 +113,7 @@ export default function ConnectCitadel() {
           label={t("password.label")}
           id="password"
           type={passwordView ? "text" : "password"}
+          autoFocus={true}
           required
           onChange={handleChange}
           endAdornment={
@@ -144,8 +145,8 @@ export default function ConnectCitadel() {
       {formData.url.match(/\.onion/i) && (
         <div className="mb-6">
           <CompanionDownloadInfo
-            hasTorCallback={() => {
-              setHasTorSupport(true);
+            hasTorCallback={(hasTor: boolean) => {
+              setHasTorSupport(hasTor);
             }}
           />
         </div>

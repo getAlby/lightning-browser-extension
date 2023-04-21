@@ -1,34 +1,6 @@
 {
   "translation": {
     "welcome": {
-      "title": "⚡Bitcoinin⚡ voima selaimessasi",
-      "nav": {
-        "welcome": "Tervetuloa",
-        "password": "Salasanasi",
-        "connect": "Lightning-tilisi",
-        "done": "Tehty"
-      },
-      "intro": {
-        "send": {
-          "title": "Lähetä yhdellä napsautuksella",
-          "description": "Lightning-transaktiot tapahtuvat selaimessasi. Alt+tab tai QR-koodin skannausta ei tarvita."
-        },
-        "paywall": {
-          "title": "Ei enää ärsyttäviä maksumuureja",
-          "description": "Määrittele verkkosivustoille omat budjetit, jotta maksuvirrat ovat saumattomia. Ei enää ärsyttäviä maksumuureja."
-        },
-        "privacy": {
-          "title": "Yksityisyys ensin",
-          "description": "Käytä Lightningia todentamiseen ja yksityisyyden hallintaan."
-        },
-        "foss": {
-          "title": "Ilmainen ja avoin lähdekoodi",
-          "description": "Täysin avoin koodi, jonka kuka tahansa voi tarkastaa. Ei tilastoja tai jäljittimiä. Sinä hallitset."
-        },
-        "actions": {
-          "get_started": "Aloita"
-        }
-      },
       "set_password": {
         "title": "Aseta lukituksen avaussalasana",
         "description": "Lightning-tilisi tiedot on salattu turvallisesti salasanan avulla. Älä unohda tätä salasanaa! Tarvitset sitä avataksesi Alby-laajennuksen lukituksen (tässä selaimessa)",
@@ -46,8 +18,6 @@
       },
       "test_connection": {
         "ready": "Mahtavaa, olet valmis menemään!",
-        "tutorial": "Nyt kun olet yhdistänyt lompakkosi, haluaisitko käydä läpi opastuksen?",
-        "try_tutorial": "Kokeile sitä nyt",
         "initializing": "Tilin alustaminen. Odota, tämä voi kestää hetken...",
         "connection_error": "Yhteysvirhe",
         "review_connection_details": "Ole hyvä ja tarkista yhteystietosi.",
@@ -59,40 +29,9 @@
       }
     },
     "choose_connector": {
-      "title": {
-        "welcome": "Onko sinulla Lightning-lompakko?",
-        "options": "Lisää uusi Lightning-tili"
-      },
       "description": "Sinun täytyy ensin muodostaa yhteys Lightning-lompakkoon, jotta voit olla vuorovaikutuksessa suosikkisivustojesi kanssa, jotka hyväksyvät Bitcoin Lightning -maksut!",
-      "alby": {
-        "title": "Alby-lompakko",
-        "description": "Luo tai kirjaudu sisään Alby-tilillesi",
-        "pre_connect": {
-          "title": "Alby Lightning -lompakkosi",
-          "login_account": "Luo tai kirjaudu sisään Alby-tilillesi.",
-          "host_wallet": "Me isännöimme Lightning-lompakko sinun puolestasi!",
-          "email": {
-            "label": "Sähköpostiosoite"
-          },
-          "optional_lightning_note": {
-            "part1": "Alby-tilisi mukana tulee myös valinnainen",
-            "part2": "Lightning-osoite",
-            "part3": ". Tämä on yksinkertainen tapa, jolla kuka tahansa voi lähettää sinulle Bitcoinia Lightning-verkossa.",
-            "part4": "opi lisää"
-          },
-          "optional_lightning_address": {
-            "label": "Valitse Lightning-osoitteesi (valinnainen)",
-            "suffix": "@getalby.com",
-            "title": "numerot ja kirjaimet, vähintään kolme merkkiä"
-          },
-          "errors": {
-            "create_wallet_error": "Kirjautuminen tai uuden tilin luominen epäonnistui. Jos tarvitset apua, ota yhteyttä support@getalby.com"
-          }
-        }
-      },
       "lnd": {
         "title": "LND",
-        "description": "Yhdistä LND-solmuusi",
         "page": {
           "title": "Yhdistä LND-solmuusi",
           "description": "Tarvitset solmusi URL-osoitteen ja macaroonin, jolla on luku- ja lähetysoikeudet (esim. admin.macaroon)"
@@ -112,7 +51,6 @@
       },
       "lndhub_bluewallet": {
         "title": "Sinilompakko",
-        "description": "Yhdistä sinilompakko-mobiililompakkoosi",
         "page": {
           "title": "Yhdistä sinilompakkoosi",
           "description": "Valitse sinilompakossa lompakko, jonka haluat yhdistää, avaa se, napsauta \"...\", napsauta Vie/Varmuuskopioi näyttääksesi QR-koodin ja skannaa se webbikamerallasi."
@@ -127,7 +65,6 @@
       },
       "lndhub_go": {
         "title": "LNDHub",
-        "description": "Yhdistä LNDHub-tiliisi",
         "page": {
           "title": "Yhdistä LNDHubiin",
           "description": "Syötä LNDHub-tunnuksesi URI tästä tai skannaa QR-koodi webbikamerallasi."
@@ -142,7 +79,6 @@
       },
       "lnbits": {
         "title": "LNbits",
-        "description": "Yhdistä LNbits-tiliisi",
         "page": {
           "title": "Yhdistä <0>LNbits</0>:een",
           "instructions": "Valitse LNbitsissä lompakko, johon haluat yhdistää, avaa se, napsauta API-tiedot ja kopioi järjestelmänvalvojan avain. Liitä se alle:"
@@ -160,7 +96,6 @@
       },
       "eclair": {
         "title": "Eclair",
-        "description": "Yhdistä Eclair-solmuusi",
         "page": {
           "title": "Yhdistä <0>Eclairiin</0>",
           "instructions": "Tarvitset Eclairin URL-osoitteen ja salasanan."
@@ -175,7 +110,6 @@
       },
       "citadel": {
         "title": "Citadel",
-        "description": "Yhdistä paikalliseen Citadeliin",
         "page": {
           "title": "Yhdistä <0>Citadel</0> solmuun",
           "instructions": "Tämä ei tällä hetkellä toimi, jos 2FA on käytössä."
@@ -190,7 +124,6 @@
       },
       "umbrel": {
         "title": "Umbrel",
-        "description": "Yhdistä Umbreliisi",
         "page": {
           "title": "Yhdistä <0>Umbrel</0>-solmuun",
           "instructions": "Siirry Umbrelin kojelaudassa kohtaan <0>Yhdistä lompakkoon</0>. Valitse <0>lndconnect REST</0> ja kopioi <0>lndconnect URL-osoite</0>. (Asetuksistasi riippuen voit käyttää joko paikallista yhteyttä tai Tor-yhteyttä)"
@@ -202,7 +135,6 @@
       },
       "mynode": {
         "title": "myNode",
-        "description": "Yhdistä myNode-solmuusi",
         "page": {
           "title": "Yhteys <0>myNode</0>:een",
           "instructions": "Napsauta myNode-etusivullasi <0>Lompakko</0>-painiketta <0>Lightning</0>-palvelun kohdalla.<1/> Napsauta nyt <0>Muodosta parilompakko</0>-painiketta <0>Tila</0>-välilehden alla. Syötä salasanasi, kun sitä pyydetään.<1/> Valitse pudotusvalikosta pariliitäntävaihtoehto. Asetuksestasi riippuen voit käyttää joko <0>Lightning (REST + paikallinen IP-osoite)</0> -yhteyttä tai <0>Lightning (REST + Tor)</0> -yhteyttä."
@@ -214,7 +146,6 @@
       },
       "start9": {
         "title": "Start9",
-        "description": "Yhdistä Embassyysi",
         "page": {
           "title": "Yhdistä <0>Embassy</0>-solmuun",
           "instructions": "<0>Huomautus:</0> Tällä hetkellä tuemme vain LND:tä, mutta lisäämme c-lightning-tuen tulevaisuudessa!<1/>Klikkaa Embassy-kojelaudallasi <0>Lightning Network Daemon</0> -palvelua.<1/>Valitse <0>Ominaisuudet</0>-välilehti.<1/>Kopioi nyt <0>LND Yhdistä -REST URL-osoite.</0>"
@@ -226,7 +157,6 @@
       },
       "raspiblitz": {
         "title": "RaspiBlitz",
-        "description": "Yhdistä RaspiBlitziisi",
         "page": {
           "title": "Yhdistä <0>RaspiBlitz</0>solmuusi",
           "instructions1": "Tarvitset solmusi sipuliosoitteen, portin ja makaroonin, jolla on luku- ja lähetysoikeudet (esim. admin.makaroon). <1/><1/><0>SSH</0> sisään <0>RaspiBlitz</0>. <1/>Aja komento <0>sudo cat /mnt/hdd/tor/lndrest/hostname</0>.<1/>Kopioi ja liitä <0>.onion</0> osoite alla olevaan syötteeseen.<1/>Lisää <0>portti</0> sipilin osoitteen perään, oletusportti on <0>:8080</0>.",
@@ -239,14 +169,12 @@
       },
       "bitcoin_beach": {
         "title": "Bitcoin Beach -lompakko",
-        "description": "Luo Bitcoin Beach (Galoy) -tili tai yhdistä siihen",
         "page": {
           "title": "Yhdistä <0>Bitcoin Beach -lompakkoon</0>"
         }
       },
       "bitcoin_jungle": {
         "title": "Bitcoin Jungle - lompakko",
-        "description": "Luo Bitcoin Jungle (Galoy) -tili tai yhdistä siihen",
         "page": {
           "title": "Yhdistä <0>Bitcoin Jungle -lompakkoon</0>"
         }
@@ -276,7 +204,6 @@
       },
       "btcpay": {
         "title": "BTCPay-palvelin",
-        "description": "Yhdistä BTCPay LND -solmuusi",
         "page": {
           "title": "Yhdistä BTCPay LND -solmuusi",
           "instructions": "Siirry BTCPayServerillesi ja kirjaudu sisään järjestelmänvalvojana. Siirry kohtaan Palvelinasetukset > Palvelut > LND Rest - Katso tiedot. Napsauta sitten \"Katso QR-koodin tiedot\" ja kopioi QR-koodin tiedot. Liitä se alle:"
@@ -291,7 +218,6 @@
       },
       "commando": {
         "title": "Core Lightning",
-        "description": "Yhdistä Core Lightning -solmuusi",
         "page": {
           "title": "Yhdistä Core Lightning -solmuusi",
           "instructions": "Varmista, että sinulla on Core Lightning -versio 0.12.0 tai uudempi, että Commando-laajennus on käynnissä ja että solmuasi on käytettävissä Lightning-verkon kautta. Luo riimu suorittamalla \"lightning-cli commando-rune\"."
@@ -351,25 +277,6 @@
       "title": "Tilit",
       "actions": {
         "add_account": "Lisää tili"
-      },
-      "edit": {
-        "title": "Muokkaa tiliä",
-        "name": {
-          "label": "Nimi"
-        },
-        "screen_reader": "Muokkaa tilin nimeä"
-      },
-      "export": {
-        "title": "Vie tili",
-        "screen_reader": "Vie tilin yksityiskohdat",
-        "waiting": "Odotetaan LndHub-tietoja...",
-        "your_ln_address": "Lightning-osoitteesi:",
-        "tip_mobile": "Vinkki: Käytä tätä lompakkoa mobiililaitteesi kanssa",
-        "export_uri": "LNDHub-tunnistetietojen URI",
-        "scan_qr": "Tuo tämä lompakko Zeusiin tai sinilompakkoon skannaamalla QRCode."
-      },
-      "remove": {
-        "confirm": "Haluatko varmasti poistaa tilin: {{name}}?\nTätä ei voi peruuttaa. Jos käytit tätä tiliä verkkosivustoille kirjautumiseen, saatat menettää pääsyn niihin."
       }
     },
     "enable": {
@@ -486,10 +393,7 @@
         "hint": "on yksinkertainen ja avoin protokolla, jonka tarkoituksena on luoda sensuurin kestäviä sosiaalisia verkostoja. Nostr toimii kryptografisten avainten kanssa. Jos haluat julkaista jotain, allekirjoita se avaimellasi ja lähetä se useille välittäjille. Voit käyttää Albyä Nostr-avaimen hallintaan. Monet Nostr-sovellukset sallivat sitten yksinkertaisesti käyttää avainta Alby-laajennuksesta.",
         "private_key": {
           "title": "Yksityinen avain",
-          "subtitle": "Avaimen luominen luo uuden avaimen nykyisen käyttämäsi tilin perusteella. Varmista, että varmuuskopioit tämän yksityisen avaimen.",
-          "generate": "Luo",
-          "warning": "Tämä poistaa vanhan yksityisen avaimesi. Oletko varma?",
-          "success": "Yksityinen avain salattu ja tallennettu onnistuneesti."
+          "subtitle": "Avaimen luominen luo uuden avaimen nykyisen käyttämäsi tilin perusteella. Varmista, että varmuuskopioit tämän yksityisen avaimen."
         }
       }
     },
@@ -566,23 +470,6 @@
       }
     },
     "publishers": {
-      "used": {
-        "title": "⚡️ Verkkosivustosi",
-        "description": "Verkkosivustot, joilla olet käyttänyt Albya aiemmin",
-        "no_info": "Ei vielä verkkosivustoja."
-      },
-      "suggestions": {
-        "title": "Muut ⚡️ verkkosivustot",
-        "description": "Verkkosivustot, joilla voit käyttää Albya",
-        "list": {
-          "trading": "Kaupankäynti",
-          "gaming": "Pelaaminen",
-          "entertaiment": "Viihde",
-          "shopping": "Ostokset",
-          "miscellaneous": "Sekalaista",
-          "showcases": "Näyttelyt"
-        }
-      },
       "publisher": {
         "allowance": {
           "title": "Korvaus",
@@ -639,7 +526,6 @@
     "nostr": {
       "title": "Nostr",
       "allow": "Salli {{host}}:",
-      "read_public_key": "Lue julkinen avaimesi",
       "block_and_ignore": "Estä ja jätä huomiotta {{host}}"
     }
   },
@@ -649,7 +535,7 @@
     "success": "Menestys",
     "error": "Virhe",
     "settings": "Asetukset",
-    "websites": "Verkkosivustot",
+    "connected_sites": "",
     "sats_one": "sat",
     "sats_other": "satia",
     "loading": "ladataan",
@@ -738,12 +624,6 @@
         "label": "Budjetti"
       }
     },
-    "companion_download_info": {
-      "description": "Yrität muodostaa yhteyden Torin takana olevaan solmuun. Tätä varten sinulla on oltava joko asennettuna Alby companion -sovellus tai Tor käynnissä. (Kun olet epävarma, suosittelemme Alby companion -sovellusta.)",
-      "download_here": "Lataa Alby companion täältä!",
-      "using_tor": "klikkaa tästä jatkaaksesi, jos käytät Tor-selainta",
-      "or": "Tai:"
-    },
     "toasts": {
       "connection_error": {
         "what_you_can_do": "Voit tehdä näin:",
@@ -777,5 +657,6 @@
         "active": "TOIMIVA"
       }
     }
-  }
+  },
+  "permissions": {}
 }

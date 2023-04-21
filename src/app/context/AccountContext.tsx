@@ -14,16 +14,18 @@ import type { AccountInfo } from "~/types";
 
 interface AccountContextType {
   account: {
-    id: string;
-    name?: string;
-    alias?: string;
-    balance?: number;
+    id: AccountInfo["id"];
+    name?: AccountInfo["name"];
+    alias?: AccountInfo["alias"];
+    balance?: AccountInfo["balance"];
+    currency?: AccountInfo["currency"];
   } | null;
   balancesDecorated: {
     fiatBalance: string;
-    satsBalance: string;
+    accountBalance: string;
   };
   loading: boolean;
+  balanceLoading: boolean;
   unlock: (user: string, callback: VoidFunction) => Promise<void>;
   lock: (callback: VoidFunction) => void;
   /**
@@ -45,15 +47,18 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
     isLoading: isLoadingSettings,
     settings,
     getFormattedFiat,
-    getFormattedSats,
+    getFormattedInCurrency,
   } = useSettings();
 
   const [account, setAccount] = useState<AccountContextType["account"]>(null);
   const [loading, setLoading] = useState(true);
-  const [satsBalance, setSatBalance] = useState("");
+  const [balanceLoading, setBalanceLoading] = useState(true);
+  const [accountBalance, setAccountBalance] = useState("");
   const [fiatBalance, setFiatBalance] = useState("");
 
-  const showFiat = !isLoadingSettings && settings.showFiat && !loading;
+  const isSatsAccount = account?.currency === "BTC"; // show fiatValue only if the base currency is not already fiat
+  const showFiat =
+    !isLoadingSettings && settings.showFiat && !loading && isSatsAccount;
 
   const unlock = (password: string, callback: VoidFunction) => {
     return api.unlock(password).then((response) => {
@@ -82,28 +87,28 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
     [getFormattedFiat]
   );
 
-  const updateSatValue = (amount: number) => {
-    const sats = getFormattedSats(amount);
-    setSatBalance(sats);
+  const updateAccountBalance = (
+    amount: number,
+    currency?: AccountInfo["currency"]
+  ) => {
+    const balance = getFormattedInCurrency(amount, currency);
+    setAccountBalance(balance);
   };
 
   const fetchAccountInfo = async (options?: { accountId?: string }) => {
+    setBalanceLoading(true);
     const id = options?.accountId || account?.id;
     if (!id) return;
 
-    const callback = (account: AccountInfo) => {
-      setAccount(account);
-
-      updateSatValue(account.balance);
-
-      if (!isLoadingSettings && settings.showFiat) {
-        updateFiatValue(account.balance);
-      }
+    const callback = (accountRes: AccountInfo) => {
+      setAccount(accountRes);
+      updateAccountBalance(accountRes.balance, accountRes.currency);
     };
 
     const accountInfo = await api.swr.getAccountInfo(id, callback);
+    setBalanceLoading(false);
 
-    return { ...accountInfo, fiatBalance, satsBalance };
+    return { ...accountInfo, fiatBalance, accountBalance };
   };
 
   // Invoked only on on mount.
@@ -128,10 +133,14 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
       })
       .catch((e) => {
         toast.error(`An unexpected error occurred (${e.message})`);
+        console.error(
+          `AccountContext: An unexpected error occurred (${e.message})`
+        );
       })
       .finally(() => {
         setLoading(false);
       });
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -146,18 +155,20 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
 
   // Listen to language change
   useEffect(() => {
-    !!account?.balance && updateSatValue(account?.balance);
+    !!account?.balance &&
+      updateAccountBalance(account.balance, account.currency);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [settings.locale]);
 
   const value = {
     account,
     balancesDecorated: {
-      satsBalance,
+      accountBalance,
       fiatBalance,
     },
     fetchAccountInfo,
     loading,
+    balanceLoading,
     lock,
     setAccountId,
     unlock,

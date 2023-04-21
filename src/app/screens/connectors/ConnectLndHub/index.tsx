@@ -116,13 +116,14 @@ export default function ConnectLndHub({
           title="lndhub://..."
           value={formData.uri}
           onChange={handleChange}
+          autoFocus={true}
         />
       </div>
       {formData.uri.match(/\.onion/i) && (
         <div className="mb-6">
           <CompanionDownloadInfo
-            hasTorCallback={() => {
-              setHasTorSupport(true);
+            hasTorCallback={(hasTor: boolean) => {
+              setHasTorSupport(hasTor);
             }}
           />
         </div>

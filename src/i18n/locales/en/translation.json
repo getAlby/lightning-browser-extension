@@ -1,37 +1,10 @@
 {
   "translation": {
     "welcome": {
-      "title": "The power of⚡ bitcoin ⚡in your browser",
-      "nav": {
-        "welcome": "Welcome",
-        "password": "Your Password",
-        "connect": "Your Lightning account",
-        "done": "Done"
-      },
-      "intro": {
-        "send": {
-          "title": "Send in One Click",
-          "description": "Lightning transactions happen all in your browser. No alt+tab or QR-code scanning needed."
-        },
-        "paywall": {
-          "title": "No more annoying paywalls",
-          "description": "Define individual budgets for websites to enable seamless payment streams. No more annoying paywalls."
-        },
-        "privacy": {
-          "title": "Privacy first",
-          "description": "Use lightning to authenticate and control your privacy."
-        },
-        "foss": {
-          "title": "Free and Open Source",
-          "description": "Completely open code that can be audited by anyone. No stats or trackers. You are in control."
-        },
-        "actions": {
-          "get_started": "Get Started"
-        }
-      },
+      "title": "Welcome to Alby",
       "set_password": {
         "title": "Set an unlock password",
-        "description": "Your Lightning account data is securely encrypted with an unlock password. Do not forget this password! You need it to unlock the Alby Extension (in this browser)",
+        "description": "This password is used to protect your wallet and provide access to the browser extension. It cannot be reset and is separate from your Alby Account password.",
         "choose_password": {
           "label": "Choose an unlock password:"
         },
@@ -46,8 +19,6 @@
       },
       "test_connection": {
         "ready": "Awesome, you’re ready to go!",
-        "tutorial": "Now you’ve connected your wallet would you like to go through a tutorial?",
-        "try_tutorial": "Give it a try now",
         "initializing": "Initializing your account. Please wait, this can take a minute...",
         "connection_error": "Connection Error",
         "review_connection_details": "Please review your connection details.",
@@ -58,41 +29,72 @@
         }
       }
     },
-    "choose_connector": {
-      "title": {
-        "welcome": "Do you have a lightning wallet?",
-        "options": "Add a new lightning account"
-      },
-      "description": "You need to first connect to a lightning wallet so that you can interact with your favorite websites that accept bitcoin lightning payments!",
+    "choose_path": {
+      "title": "Connect",
+      "description": "To start using the Alby Extension, use your Alby Account or connect to your lightning wallet.",
       "alby": {
-        "title": "Alby Wallet",
-        "description": "Create or log in to your Alby account",
-        "pre_connect": {
-          "title": "Your Alby Lightning Wallet",
-          "login_account": "Create or log in to your Alby account.",
-          "host_wallet": "We host a Lightning wallet for you!",
-          "email": {
-            "label": "Email Address"
+        "title": "Alby Account",
+        "description": "Sign up or use your existing Alby Account to get started with lightning payments in no time.",
+        "create_new": "Sign up"
+      },
+      "other": {
+        "title": "Other Wallets",
+        "description": "Connect to your existing lightning wallet or node and choose from various connectors.",
+        "and_more": "& more...",
+        "connect": "Connect"
+      }
+    },
+    "alby": {
+      "pre_connect": {
+        "set_password": {
+          "choose_password": {
+            "label": "Password"
           },
-          "optional_lightning_note": {
-            "part1": "Your Alby account also comes with an optional",
-            "part2": "Lightning Address",
-            "part3": ". This is a simple way for anyone to send you Bitcoin on the Lightning Network.",
-            "part4": "learn more"
-          },
-          "optional_lightning_address": {
-            "label": "Choose your Lightning Address (optional)",
-            "suffix": "@getalby.com",
-            "title": "numbers and letters, at least 3 characters"
+          "confirm_password": {
+            "label": "Confirm Password"
           },
           "errors": {
-            "create_wallet_error": "Failed to log in or create a new account. If you need help, please contact support@getalby.com"
+            "enter_password": "Please enter a password.",
+            "confirm_password": "Please confirm your password.",
+            "mismatched_password": "Passwords don't match."
           }
+        },
+        "forgot_password": "Forgot password?",
+        "title": "Your Alby Account",
+        "create_account": "Create a new Alby Account to send and receive bitcoin payments.",
+        "login_account": "Log in to connect your existing Alby Account.",
+        "host_wallet": "We host a Lightning wallet for you!",
+        "email": {
+          "create": {
+            "label": "Email Address"
+          },
+          "login": {
+            "label": "Email Address or Lightning Address"
+          }
+        },
+        "optional_lightning_note": {
+          "part1": "Your Alby Account also comes with an optional",
+          "part2": "lightning address",
+          "part3": ". This is a simple way for anyone to send you bitcoin on the lightning network.",
+          "part4": "learn more"
+        },
+        "optional_lightning_address": {
+          "label": "Choose your Lightning Address (optional)",
+          "suffix": "@getalby.com",
+          "title": "numbers and letters, at least 4 characters"
+        },
+        "errors": {
+          "create_wallet_error": "Failed to log in or create a new account. If you need help, please contact support@getalby.com",
+          "create_wallet_error1": "Failed to log in or create a new account.",
+          "create_wallet_error2": "If you need help, please contact support@getalby.com"
         }
-      },
+      }
+    },
+    "choose_connector": {
+      "title": "Connect Lightning Wallet",
+      "description": "Connect to your external lightning wallet or node",
       "lnd": {
         "title": "LND",
-        "description": "Connect to your LND node",
         "page": {
           "title": "Connect to your LND node",
           "description": "You need your node URL and a macaroon with read and send permissions (e.g. admin.macaroon)"
@@ -110,9 +112,19 @@
           "connection_failed": "Connection failed. Are your LND credentials correct?"
         }
       },
+      "lnc": {
+        "title": "LND with LNC",
+        "page": {
+          "title": "Connect to your LND node",
+          "description": "1. Open Lightning Terminal and choose <0>Lightning Node Connect</0> from the sidebar.<1/> 2. Click <0>Create a new session</0><1/>3. Label the session, choose desired permissions and submit<1/>4. <0>Copy pairing phrase</0> and paste it below."
+        },
+        "pairing_phrase": {
+          "label": "Your pairing phrase ",
+          "placeholder": "secret stack sats phrase"
+        }
+      },
       "lndhub_bluewallet": {
         "title": "Bluewallet",
-        "description": "Connect to your Bluewallet mobile wallet",
         "page": {
           "title": "Connect to BlueWallet",
           "description": "In BlueWallet, choose the wallet you want to connect, open it, click on \"...\", click on Export/Backup to display the QR code and scan it with your webcam."
@@ -127,7 +139,6 @@
       },
       "lndhub_go": {
         "title": "LNDHub",
-        "description": "Connect to your LNDHub account",
         "page": {
           "title": "Connect to LNDHub",
           "description": "Input your LNDHub credential URI here or scan the QR code with your webcam."
@@ -142,7 +153,6 @@
       },
       "lnbits": {
         "title": "LNbits",
-        "description": "Connect to your LNbits account",
         "page": {
           "title": "Connect to <0>LNbits</0>",
           "instructions": "In LNbits, choose the wallet you want to connect, open it, click on API Info and copy the Admin Key. Paste it below:"
@@ -160,7 +170,6 @@
       },
       "eclair": {
         "title": "Eclair",
-        "description": "Connect to your Eclair node",
         "page": {
           "title": "Connect to <0>Eclair</0>",
           "instructions": "You need your Eclair URL and password."
@@ -175,7 +184,6 @@
       },
       "citadel": {
         "title": "Citadel",
-        "description": "Connect to your local Citadel",
         "page": {
           "title": "Connect to <0>Citadel</0> node",
           "instructions": "This currently doesn't work if 2FA is enabled."
@@ -190,10 +198,9 @@
       },
       "umbrel": {
         "title": "Umbrel",
-        "description": "Connect to your Umbrel",
         "page": {
           "title": "Connect to <0>Umbrel</0> node",
-          "instructions": "In your Umbrel dashboard go to <0>Connect Wallet</0>. Select <0>lndconnect REST</0> and copy the <0>lndconnect URL</0>. (Depending on your setup you can either use the local connection or the Tor connection.)"
+          "instructions": "1. In your Lightning Node dashboard go to <0>Connect wallet</0><1/>2. Select <0>REST (Tor)</0> or <0>REST (Local Network)</0> mode<1/>3. Copy the <0>lndconnect URL</0> and paste it below"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -202,10 +209,9 @@
       },
       "mynode": {
         "title": "myNode",
-        "description": "Connect to your myNode",
         "page": {
           "title": "Connect to <0>myNode</0>",
-          "instructions": "On your myNode homepage click on the <0>Wallet</0> button for your <0>Lightning</0> service.<1/> Now click on the <0>Pair Wallet</0> button under the <0>Status</0> tab. Enter your password when prompted.<1/> Select the dropdown menu and choose a pairing option. Depending on your setup you can either use the <0>Lightning (REST + Local IP)</0> connection or the <0>Lightning (REST + Tor)</0> connection."
+          "instructions": "On your myNode homepage click on the <0>Wallet</0> button for your <0>lightning</0> service.<1/> Now click on the <0>Pair Wallet</0> button under the <0>Status</0> tab. Enter your password when prompted.<1/> Select the dropdown menu and choose a pairing option. Depending on your setup you can either use the <0>lightning (REST + Local IP)</0> connection or the <0>lightning (REST + Tor)</0> connection."
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -214,10 +220,9 @@
       },
       "start9": {
         "title": "Start9",
-        "description": "Connect to your Embassy",
         "page": {
-          "title": "Connect to your <0>Embassy</0> node",
-          "instructions": "<0>Note:</0> Currently we only support LND but we will be adding c-lightning support in the future!<1/>On your Embassy dashboard click on the <0>Lightning Network Daemon</0> service.<1/>Select the <0>Properties</0> tab.<1/>Now copy the <0>LND Connect REST URL.</0>"
+          "title": "Connect to your <0>Start9 Server</0>",
+          "instructions": "On your Embassy dashboard click on the <0>Lightning Network Daemon</0> service.<1/>Select the <0>Properties</0> tab.<1/>Now copy the <0>LND Connect REST URL.</0>"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -226,11 +231,10 @@
       },
       "raspiblitz": {
         "title": "RaspiBlitz",
-        "description": "Connect to your RaspiBlitz",
         "page": {
           "title": "Connect to your <0>RaspiBlitz</0> node",
-          "instructions1": "You need your node onion address, port, and a macaroon with read and send permissions (e.g. admin.macaroon).<1/><1/><0>SSH</0> into your <0>RaspiBlitz</0>.<1/>Run the command <0>sudo cat /mnt/hdd/tor/lndrest/hostname</0>.<1/>Copy and paste the <0>.onion</0> address in the input below.<1/>Add your <0>port</0> after the onion address, the default port is <0>:8080</0>.",
-          "instructions2": "Select <0>CONNECT</0>.<1/>Select <0>EXPORT</0>.<1/>Select <0>HEX</0>.<1/>Copy the <0>adminMacaroon</0>.<1/>Paste the macaroon in the input below."
+          "instructions1": "Follow these steps:<1/> 1. <0>SSH</0> into your <0>Raspiblitz</0><1/>2. Select <0>Connect Apps & Show Credentials</0> from the list<1/><0/>3. Choose <0>Connect Alby to this node</0><1/>4. Press <0>OK</0> to display the connection credentials<1/><1/>Copy and paste the <0>REST API host</0> or the <0>.onion</0> address to connect through Tor into the input below.",
+          "instructions2": "Copy the (admin) <0>macaroon</0> into the input below."
         },
         "rest_api_host": {
           "label": "REST API host",
@@ -239,14 +243,12 @@
       },
       "bitcoin_beach": {
         "title": "Bitcoin Beach Wallet",
-        "description": "Create or connect to a Bitcoin Beach (Galoy) account",
         "page": {
           "title": "Connect to <0>Bitcoin Beach Wallet</0>"
         }
       },
       "bitcoin_jungle": {
         "title": "Bitcoin Jungle Wallet",
-        "description": "Create or connect to a Bitcoin Jungle (Galoy) account",
         "page": {
           "title": "Connect to <0>Bitcoin Jungle Wallet</0>"
         }
@@ -274,9 +276,37 @@
           "invalid_jwt": "invalid JWT passed"
         }
       },
+      "kollider": {
+        "title": "Kollider",
+        "description": "Login to your Kollider account",
+        "warning": "⚠️ Please make sure you store your credentials securely in a password manager. Without these credentials your account will not be recoverable.",
+        "choose_path": {
+          "title": "Connect to your Kollider Wallet",
+          "description": "Login or sign up for a new Kollider account and connect to Alby.",
+          "create_new": "Sign up"
+        },
+        "create": {
+          "title": "Create your Kollider account and connect to Alby",
+          "description": "Create a new Kollider account to send, receive and trade Bitcoin."
+        },
+        "login": {
+          "title": "Connect to your Kollider account",
+          "description": "Don't have an account already? <0>Sign up</0> now!"
+        },
+        "username": {
+          "label": "Username"
+        },
+        "currency": {
+          "label": "Select your currency account"
+        },
+        "errors": {
+          "connection_failed": "Connection failed. Are you sure the account data is correct?",
+          "user_already_exists": "Username already exists",
+          "registration_limit_exceeded": "Registration limit exceeded, try after sometime."
+        }
+      },
       "btcpay": {
         "title": "BTCPay Server",
-        "description": "Connect to your BTCPay LND node",
         "page": {
           "title": "Connect to your BTCPay LND node",
           "instructions": "Navigate to your BTCPayServer and log in as an admin. Go to Server Settings > Services > LND Rest - See information. Then Click \"See QR Code information\" and copy the QR Code data. Paste it below:"
@@ -291,10 +321,9 @@
       },
       "commando": {
         "title": "Core Lightning",
-        "description": "Connect to your Core Lightning node",
         "page": {
           "title": "Connect to your Core Lightning node",
-          "instructions": "Make sure you have Core Lightning version 0.12.0 or newer, the commando plugin is running and your node is accessible over the Lightning Network. Create a rune by running 'lightning-cli commando-rune'."
+          "instructions": "Make sure you have Core Lightning version 0.12.0 or newer, the commando plugin is running and your node is accessible over the lightning network. Create a rune by running 'lightning-cli commando-rune'."
         },
         "host": {
           "label": "Host"
@@ -350,27 +379,66 @@
     },
     "accounts": {
       "title": "Accounts",
+      "account_view": {
+        "title1": "Account Information",
+        "title2": "Edit Account",
+        "name": {
+          "title": "Name",
+          "placeholder": "Account Name"
+        },
+        "export": {
+          "title": "Export Account",
+          "screen_reader": "Export account details",
+          "waiting": "waiting for LndHub data...",
+          "your_ln_address": "Your Lightning Address:",
+          "tip_mobile": "Tip: Use this wallet with your mobile device",
+          "export_uri": "LNDHub Credentials URI",
+          "scan_qr": "Import this wallet into Zeus or BlueWallet by scanning the QRCode."
+        },
+        "nostr": {
+          "title": "Nostr",
+          "hint": "is a simple and open protocol that aims to create censorship-resistant social networks. Nostr works with cryptographic keys. To publish something you sign it with your key and send it to multiple relays. You can use Alby to manage your Nostr key. Many Nostr applications will then allow you to simply use the key from the Alby extension.",
+          "private_key": {
+            "title": "Manage your key",
+            "subtitle": "Paste your private key or generate a new one. <0>Learn more »</0>",
+            "backup": "⚠️ Don't forget to back up your private key! Not backing up your key might result in losing access.",
+            "warning": "Please enter the name of the account to confirm the deletion of the private key:",
+            "success": "Private key encrypted & saved successfully.",
+            "failed_to_remove": "The entered account name didn't match, your old private has been restored.",
+            "successfully_removed": "Private key removed successfully.",
+            "label": "Private Key"
+          },
+          "public_key": {
+            "label": "Public Key"
+          },
+          "generate_keys": {
+            "title": "Generate a new Nostr key",
+            "screen_reader": "Generate a new Nostr key for your account",
+            "hint": "You can generate a random key or a derive key from this account details (using a signed canonical phrase). <0>Learn more »</0>",
+            "actions": {
+              "random_keys": "Generate a random key",
+              "derived_keys": "Derive a key from account"
+            }
+          },
+          "actions": {
+            "generate": "Generate a new key"
+          },
+          "errors": {
+            "failed_to_load": "Failed to load the Nostr key. Is it a valid Nostr key?"
+          }
+        },
+        "remove": {
+          "title": "Remove This Account",
+          "subtitle": "All the linked allowances will be deleted. Please be certain.",
+          "confirm": "Are you sure you want to remove account: {{name}}? \nThis can not be undone. If you used this account to login to websites you might lose access to those."
+        },
+        "actions": {
+          "remove_account": "Remove account",
+          "export": "Export"
+        }
+      },
       "actions": {
         "add_account": "Add account"
-      },
-      "edit": {
-        "title": "Edit Account",
-        "name": {
-          "label": "Name"
-        },
-        "screen_reader": "Edit account name"
-      },
-      "export": {
-        "title": "Export Account",
-        "screen_reader": "Export account details",
-        "waiting": "waiting for LndHub data...",
-        "your_ln_address": "Your Lightning Address:",
-        "tip_mobile": "Tip: Use this wallet with your mobile device",
-        "export_uri": "LNDHub Credentials URI",
-        "scan_qr": "Import this wallet into Zeus or BlueWallet by scanning the QRCode."
-      },
-      "remove": {
-        "confirm": "Are you sure you want to remove account: {{name}}? \nThis can not be undone. If you used this account to login to websites you might lose access to those."
       }
     },
     "enable": {
@@ -389,7 +457,7 @@
         "part2": "Alby Support"
       },
       "unlock_error": {
-        "help": "Your account data is encrypted with your unlock password. If you really forgot your unlock password you have to reset and add your Lightning account again.",
+        "help": "Your account data is encrypted with your unlock password. If you really forgot your unlock password you have to reset and add your lightning account again.",
         "link": "Reset now and add a new account"
       },
       "errors": {
@@ -447,7 +515,7 @@
       },
       "exchange": {
         "title": "Exchange Source",
-        "subtitle": "Source of Bitcoin exchange rates"
+        "subtitle": "Source of bitcoin exchange rates"
       },
       "personal_data": {
         "title": "Personal data",
@@ -488,10 +556,8 @@
         "hint": "is a simple and open protocol that aims to create censorship-resistant social networks. Nostr works with cryptographic keys. To publish something you sign it with your key and send it to multiple relays. You can use Alby to manage your Nostr key. Many Nostr applications will then allow you to simply use the key from the Alby extension.",
         "private_key": {
           "title": "Private key",
-          "subtitle": "Generating a key will create a new key based on the current account you use. It can be re-generated, but please make sure you backup this private key. <0>Learn more »</0>",
-          "generate": "Generate",
-          "warning": "This will delete your old private key. Are you sure?",
-          "success": "Private key encrypted & saved successfully."
+          "subtitle": "This section is moved to accounts page as keys are account specific now.",
+          "go_to": "Go To Accounts"
         }
       }
     },
@@ -567,24 +633,51 @@
         "status": "Check payment status"
       }
     },
-    "publishers": {
-      "used": {
-        "title": "Your ⚡️ Websites",
-        "description": "Websites where you have used Alby before",
-        "no_info": "No websites yet."
+    "discover": {
+      "title": "Explore the Lightning ⚡️ Ecosystem",
+      "description": "Websites and webapps where you can use Alby",
+      "list": {
+        "trading": "Trading",
+        "gaming": "Gaming",
+        "entertainment": "Entertainment",
+        "shopping": "Shopping",
+        "miscellaneous": "Miscellaneous",
+        "showcases": "Showcases",
+        "nostr": "Nostr",
+        "nodeManagement": "Node Management"
       },
-      "suggestions": {
-        "title": "Other ⚡️ Websites",
-        "description": "Websites where you can use Alby",
-        "list": {
-          "trading": "Trading",
-          "gaming": "Gaming",
-          "entertaiment": "Entertaiment",
-          "shopping": "Shopping",
-          "miscellaneous": "Miscellaneous",
-          "showcases": "Showcases"
+      "tips": {
+        "title": "Your Alby wallet is ready",
+        "description": "A few tips to get you started buzzin'🐝",
+        "top_up_wallet": {
+          "title": "⚡️ Top up your wallet",
+          "description": "Create a lightning invoice, send some bitcoin to yourself and start using Alby in the lightning ecosystem",
+          "label1": "Receive Bitcoin",
+          "label2": "Buy Bitcoin"
+        },
+        "pin": {
+          "title": "📌 Pin your Alby extension",
+          "description1": "<0>To access Alby easily, click on extension icon</0> <1/> <2>in the top right corner of your browser</2>",
+          "description2": "In the list of extensions, find Alby and click pin icon to pin it to the toolbar",
+          "description3": "Thats it! To access Alby just click Alby icon"
+        },
+        "demo": {
+          "title": "🕹️ Try out Alby Demo",
+          "description": "Discover all things you can do with Alby on our demo website",
+          "label1": "Give it a try"
+        },
+        "address": {
+          "title": "⚡️ Get a lightning address",
+          "description": "Create your own lightning address and to receive lightning payments with ease of sending an e-mail",
+          "label1": "Get it now!"
         }
-      },
+      }
+    },
+    "publishers": {
+      "title": "Your ⚡ Websites",
+      "description": "Websites where you have used Alby before",
+      "no_info": "It looks like you haven't used Alby in any websites yet.",
+      "discover": "Discover Websites",
       "publisher": {
         "allowance": {
           "title": "Allowance",
@@ -657,28 +750,57 @@
       "title": "Nostr",
       "allow": "Allow this website to:",
       "content": "This website asks you to sign:",
-      "read_public_key": "Read your public key",
+      "allow_sign": "Allow {{host}} to sign:",
+      "allow_sign_event": "Allow {{host}} to sign a {{kind}}:",
+      "view_details": "View details",
+      "hide_details": "Hide details",
+      "no_content": "(No content)",
       "block_and_ignore": "Block and ignore {{host}}",
       "block_added": "Added {{host}} to the blocklist, please reload the website.",
-      "confirm_sign_message": {
-        "remember": {
-          "label": "Remember my choice and don't ask again"
-        }
-      },
-      "permissions": {
-        "decrypt": "Decrypt data",
-        "encrypt": "Encrypt data",
-        "allow_sign": "Allow {{host}} to sign:"
+      "kinds": {
+        "unknown": "nostr event of kind {{kind}}",
+        "0": "metadata",
+        "1": "short text note",
+        "2": "recommend relay",
+        "3": "contacts",
+        "4": "encrypted direct messages",
+        "5": "event deletion",
+        "7": "reaction",
+        "8": "badge award",
+        "40": "channel creation",
+        "41": "channel metadata",
+        "42": "channel message",
+        "43": "channel hide message",
+        "44": "channel mute user",
+        "1984": "reporting",
+        "9734": "zap request",
+        "9735": "zap",
+        "10002": "relay list metadata",
+        "22242": "client authentication",
+        "24133": "nostr connect",
+        "30008": "profile badges",
+        "30009": "badge definition",
+        "30023": "long-form content",
+        "30078": "application-specific data"
       }
+    },
+    "transactions": {
+      "title": "Transactions",
+      "description": "Outgoing transactions across all of your accounts",
+      "list_empty": "No transactions available yet."
     }
   },
   "common": {
     "password": "Password",
+    "confirm_password": "Confirm Password",
     "advanced": "Advanced",
     "success": "Success",
     "error": "Error",
     "settings": "Settings",
-    "websites": "Websites",
+    "accounts": "Accounts",
+    "discover": "Discover",
+    "connected_sites": "Connected Sites",
+    "transactions": "Transactions",
     "sats_one": "sat",
     "sats_other": "sats",
     "loading": "loading",
@@ -692,6 +814,7 @@
     "response": "Response",
     "message": "Message",
     "help": "Help",
+    "balance": "Balance",
     "actions": {
       "back": "Back",
       "delete": "Delete",
@@ -707,14 +830,23 @@
       "send": "Send",
       "save": "Save",
       "receive": "Receive",
+      "receive_again": "Receive another payment",
+      "transactions": "Transactions",
       "close": "Close",
       "export": "Export",
       "remove": "Remove",
-      "copy": "Copy"
+      "copy": "Copy",
+      "log_in": "Log in",
+      "remember": "Remember my choice and don't ask again"
     },
     "errors": {
       "connection_failed": "Connection failed",
       "payment_failed": "Payment Failed"
+    },
+    "range": {
+      "between": "between {{min}} and {{max}}",
+      "lessThan": "< {{max}}",
+      "greaterThan": "> {{min}}"
     }
   },
   "components": {
@@ -731,7 +863,8 @@
       "edit_allowance": {
         "title": "Edit Allowance",
         "screen_reader": "Allowance Options"
-      }
+      },
+      "edit_permissions": "Edit Permissions"
     },
     "qrcode_scanner": {
       "title": "Scan QR Code",
@@ -769,10 +902,16 @@
       }
     },
     "companion_download_info": {
-      "description": "You are trying to connect to a node behind Tor. To do this you either need to have the Alby companion app installed or have Tor running. (When you're unsure, we recommend the Alby companion app.)",
-      "download_here": "Download the Alby companion here!",
-      "using_tor": "click here to continue if you use the Tor Browser",
-      "or": "Or:"
+      "heading": "How do you want to connect to the TOR network?",
+      "download": "Download",
+      "companion": {
+        "title": "Companion App",
+        "description": "Lightweight app that connects your browser to the TOR network."
+      },
+      "tor_native": {
+        "title": "TOR (native)",
+        "description": "Select this option if this browser is already connected to the TOR network."
+      }
     },
     "toasts": {
       "connection_error": {
@@ -794,7 +933,9 @@
       "options": {
         "account": {
           "add": "Add a new account",
-          "manage": "Manage accounts"
+          "manage": "Manage accounts",
+          "account_settings": "Account settings",
+          "go_to_web_wallet": "Manage your Alby Account"
         }
       }
     },
@@ -810,6 +951,12 @@
     }
   },
   "permissions": {
+    "nostr": {
+      "getpublickey": "Read your public key.",
+      "nip04encrypt": "Encrypt data.",
+      "nip04decrypt": "Decrypt data.",
+      "signmessage": "Sign message with your key."
+    },
     "commando": {
       "bkpr-listbalances": "List of all current and historical account balances.",
       "checkmessage": "Verify that the signature was generated by a given node.",
@@ -853,14 +1000,43 @@
       "getnetworkinfo": "Get basic stats about the known channel graph.",
       "getnodeinfo": "Get the channel information for a node.",
       "gettransactions": "Get a list of all transactions relevant to the wallet.",
-      "listpayments": "list of all outgoing payments.",
-      "listpeers": "list all currently active peers.",
+      "listpayments": "Get a list of all outgoing payments.",
+      "listpeers": "Get a list all currently active peers.",
       "lookupinvoice": "Look up invoice details.",
       "queryroutes": "Query for a possible route.",
       "verifymessage": "Verify a signature over a msg.",
       "sendtoroute": "Make a payment via the specified route.",
       "decodepayreq": "Decode a payment request string.",
-      "routermc": "Read the internal mission control state."
+      "routermc": "Read the internal mission control state.",
+      "addinvoice": "Create new invoices.",
+      "addholdinvoice": "Create new HODL invoices.",
+      "settleinvoice": "Settle an accepted invoice."
+    },
+    "lnc": {
+      "getinfo": "Get the node information.",
+      "listchannels": "Get a description of all the open channels.",
+      "listinvoices": "Get a list of all invoices.",
+      "channelbalance": "Get a report on the total funds across all open channels.",
+      "walletbalance": "Get the total unspent outputs of the wallet.",
+      "openchannel": "Open a new channel.",
+      "connectpeer": "Establish a connection to a remote peer.",
+      "disconnectpeer": "Disconnect from a remote peer.",
+      "estimatefee": "Estimate the fee rate and total fees for a transaction.",
+      "getchaninfo": "Get the network announcement for the given channel.",
+      "getnetworkinfo": "Get basic stats about the known channel graph.",
+      "getnodeinfo": "Get the channel information for a node.",
+      "gettransactions": "Get a list of all transactions relevant to the wallet.",
+      "listpayments": "Get a list of all outgoing payments.",
+      "listpeers": "Get a list all currently active peers.",
+      "lookupinvoice": "Look up invoice details.",
+      "queryroutes": "Query for a possible route.",
+      "verifymessage": "Verify a signature over a msg.",
+      "sendtoroute": "Make a payment via the specified route.",
+      "decodepayreq": "Decode a payment request string.",
+      "routermc": "Read the internal mission control state.",
+      "addinvoice": "Create new invoices.",
+      "addholdinvoice": "Create new HODL invoices.",
+      "settleinvoice": "Settle an accepted invoice."
     }
   }
 }

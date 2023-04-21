@@ -5,39 +5,29 @@ import Button from "../Button";
 type Props = {
   onClick: (amount: string) => void;
   disabled?: boolean;
+  min?: number;
+  max?: number;
 };
 
-function SatButtons({ onClick, disabled }: Props) {
+function SatButtons({ onClick, disabled, min, max }: Props) {
+  const sizes = [1000, 5000, 10000, 25000];
+
   return (
     <div className="flex gap-2">
-      <Button
-        icon={<SatoshiV2Icon className="w-4 h-4" />}
-        label="1k ⚡"
-        onClick={() => onClick("1000")}
-        fullWidth
-        disabled={disabled}
-      />
-      <Button
-        icon={<SatoshiV2Icon className="w-4 h-4" />}
-        label="5k ⚡"
-        onClick={() => onClick("5000")}
-        fullWidth
-        disabled={disabled}
-      />
-      <Button
-        icon={<SatoshiV2Icon className="w-4 h-4" />}
-        label="10k ⚡"
-        onClick={() => onClick("10000")}
-        fullWidth
-        disabled={disabled}
-      />
-      <Button
-        icon={<SatoshiV2Icon className="w-4 h-4" />}
-        label="25k ⚡"
-        onClick={() => onClick("25000")}
-        fullWidth
-        disabled={disabled}
-      />
+      {sizes.map((size) => (
+        <Button
+          key={size}
+          icon={<SatoshiV2Icon className="w-4 h-4" />}
+          label={size / 1000 + "k"}
+          onClick={() => onClick(size.toString())}
+          fullWidth
+          disabled={
+            disabled ||
+            (min != undefined && min > size) ||
+            (max != undefined && max < size)
+          }
+        />
+      ))}
     </div>
   );
 }

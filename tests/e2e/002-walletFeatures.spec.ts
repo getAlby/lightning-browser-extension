@@ -11,10 +11,16 @@ const {
   findAllByText,
 } = queries;
 
-const unlockExtension = async ({ page, extensionId }) => {
+const unlockExtension = async ({
+  page,
+  extensionId,
+  password = "g3tal6y",
+  screen = "",
+}) => {
   await page.waitForTimeout(1000);
 
-  const optionsPage = `chrome-extension://${extensionId}/options.html`;
+  const optionsPage =
+    `chrome-extension://${extensionId}/options.html` + `#/${screen}`;
   await page.goto(optionsPage);
   await page.waitForTimeout(1000);
 
@@ -23,7 +29,7 @@ const unlockExtension = async ({ page, extensionId }) => {
     $optionsdocument,
     "Your unlock password"
   );
-  await passwordField.type("unlock-password");
+  await passwordField.type(password);
 
   const unlockButton = await findByText($optionsdocument, "Unlock");
   unlockButton.click();
@@ -32,15 +38,63 @@ const unlockExtension = async ({ page, extensionId }) => {
 };
 
 test.describe("Wallet features", () => {
-  test("opens publishers screen", async () => {
+  // this test runs first to change the password and the following
+  // tests use the new password thereby verifying the change
+  test("change password", async () => {
+    const { page, browser, extensionId } = await loadExtension();
+    const screen = "settings";
+    const $optionsdocument = await unlockExtension({
+      page,
+      extensionId,
+      password: "unlock-password",
+      screen,
+    });
+
+    // open change password modal
+    await (
+      await findAllByText($optionsdocument, "Change unlock password")
+    )[1].click();
+
+    const newPasswordInput = await getByLabelText(
+      $optionsdocument,
+      "Enter a new unlock password:"
+    );
+    await newPasswordInput.type("g3tal6y");
+
+    const confirmPasswordInput = await getByLabelText(
+      $optionsdocument,
+      "Confirm new password:"
+    );
+    await confirmPasswordInput.type("g3tal6y");
+
+    await (await findByText($optionsdocument, "Change")).click();
+    await page.waitForSelector(".Toastify");
+
+    await browser.close();
+  });
+
+  test("opens your websites screen by default", async () => {
     const { page, browser, extensionId } = await loadExtension();
     const $optionsdocument = await unlockExtension({
       page,
       extensionId,
     });
 
-    await findByText($optionsdocument, "Your ⚡️ Websites");
-    await findByText($optionsdocument, "Other ⚡️ Websites");
+    await findByText($optionsdocument, "Your ⚡ Websites");
+
+    await browser.close();
+  });
+
+  test("open discover screen", async () => {
+    const { page, browser, extensionId } = await loadExtension();
+    const $optionsdocument = await unlockExtension({
+      page,
+      extensionId,
+    });
+
+    // open discover screen
+    await (await findByText($optionsdocument, "Discover")).click();
+    await findByText($optionsdocument, "Explore the Lightning ⚡️ Ecosystem");
 
     await browser.close();
   });

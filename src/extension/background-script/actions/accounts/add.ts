@@ -10,12 +10,10 @@ const add = async (message: MessageAccountAdd) => {
 
   // TODO: add validations
   // TODO: make sure a password is set
-
-  const password = state.getState().password;
-  const currentAccountId = state.getState().currentAccountId;
-
+  const password = await state.getState().password();
   if (!password) return { error: "Password is missing" };
 
+  const currentAccountId = state.getState().currentAccountId;
   const accountId = uuidv4();
   newAccount.config = encryptData(newAccount.config, password);
   tmpAccounts[accountId] = {

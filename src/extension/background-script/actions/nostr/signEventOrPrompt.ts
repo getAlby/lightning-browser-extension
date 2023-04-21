@@ -1,10 +1,8 @@
 import utils from "~/common/lib/utils";
-import { MessageSignEvent } from "~/types";
-import { PermissionMethodNostr } from "~/types";
+import { MessageSignEvent, PermissionMethodNostr } from "~/types";
 
 import state from "../../state";
-import { hasPermissionFor, addPermissionFor } from "./helpers";
-import { validateEvent } from "./helpers";
+import { addPermissionFor, hasPermissionFor, validateEvent } from "./helpers";
 
 const signEventOrPrompt = async (message: MessageSignEvent) => {
   if (!("host" in message.origin)) {
@@ -12,7 +10,14 @@ const signEventOrPrompt = async (message: MessageSignEvent) => {
     return;
   }
 
-  if (!validateEvent(message.args.event)) {
+  const nostr = await state.getState().getNostr();
+
+  // check event and add an ID and pubkey if not present
+  const event = message.args.event;
+  if (!event.pubkey) event.pubkey = nostr.getPublicKey();
+  if (!event.id) event.id = nostr.getEventHash(event);
+
+  if (!validateEvent(event)) {
     console.error("Invalid event");
     return {
       error: "Invalid event.",
@@ -42,10 +47,7 @@ const signEventOrPrompt = async (message: MessageSignEvent) => {
       }
     }
 
-    const signedEvent = await state
-      .getState()
-      .getNostr()
-      .signEvent(message.args.event);
+    const signedEvent = await nostr.signEvent(event);
 
     return { data: signedEvent };
   } catch (e) {

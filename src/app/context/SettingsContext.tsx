@@ -1,16 +1,20 @@
 import dayjs from "dayjs";
 import i18n from "i18next";
-import { useState, useEffect, createContext, useContext, useRef } from "react";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { getTheme } from "~/app/utils";
-import { CURRENCIES } from "~/common/constants";
+import {
+  ACCOUNT_CURRENCIES,
+  CURRENCIES,
+  DEFAULT_SETTINGS,
+} from "~/common/constants";
 import api from "~/common/lib/api";
 import {
+  getFormattedCurrency as getFormattedCurrencyUtil,
   getFormattedFiat as getFormattedFiatUtil,
-  getFormattedSats as getFormattedSatsUtil,
   getFormattedNumber as getFormattedNumberUtil,
+  getFormattedSats as getFormattedSatsUtil,
 } from "~/common/utils/currencyConvert";
-import { DEFAULT_SETTINGS } from "~/extension/background-script/state";
 import type { SettingsStorage } from "~/types";
 
 interface SettingsContextType {
@@ -20,6 +24,10 @@ interface SettingsContextType {
   getFormattedFiat: (amount: number | string) => Promise<string>;
   getFormattedSats: (amount: number | string) => string;
   getFormattedNumber: (amount: number | string) => string;
+  getFormattedInCurrency: (
+    amount: number | string,
+    currency?: ACCOUNT_CURRENCIES
+  ) => string;
 }
 
 type Setting = Partial<SettingsStorage>;
@@ -53,11 +61,12 @@ export const SettingsProvider = ({
   useEffect(() => {
     api
       .getSettings()
-      .then((response) => {
-        setSettings(response);
+      .then((settings) => {
+        setSettings(settings);
       })
       .catch((e) => {
-        toast.error(
+        toast.error(`An unexpected error occurred (${e.message})`);
+        console.error(
           `SettingsProvider: An unexpected error occurred (${e.message})`
         );
       })
@@ -107,6 +116,21 @@ export const SettingsProvider = ({
     return getFormattedNumberUtil({ amount, locale: settings.locale });
   };
 
+  const getFormattedInCurrency = (
+    amount: number | string,
+    currency = "BTC" as ACCOUNT_CURRENCIES
+  ) => {
+    if (currency === "BTC") {
+      return getFormattedSats(amount);
+    }
+
+    return getFormattedCurrencyUtil({
+      amount,
+      locale: settings.locale,
+      currency,
+    });
+  };
+
   // update locale on every change
   useEffect(() => {
     i18n.changeLanguage(settings.locale);
@@ -127,6 +151,7 @@ export const SettingsProvider = ({
     getFormattedFiat,
     getFormattedSats,
     getFormattedNumber,
+    getFormattedInCurrency,
     settings,
     updateSetting,
     isLoading,
