@@ -68,6 +68,10 @@ function Prompt() {
               }
             />
             <Route
+              path="public/alby/enable"
+              element={<Enable origin={navigationState.origin as OriginData} />} // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
+            />
+            <Route
               path="public/webln/enable"
               element={<Enable origin={navigationState.origin as OriginData} />} // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
             />

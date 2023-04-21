@@ -67,6 +67,7 @@ const routes = {
   // Public calls that are accessible from the inpage script (through the content script)
   public: {
     alby: {
+      enable: allowances.enable,
       addAccount: accounts.promptAdd,
     },
     webln: {

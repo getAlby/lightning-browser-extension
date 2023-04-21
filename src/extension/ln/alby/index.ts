@@ -1,5 +1,21 @@
 export default class AlbyProvider {
-  executing = false;
+  enabled: boolean;
+
+  constructor() {
+    this.enabled = false;
+  }
+
+  enable() {
+    if (this.enabled) {
+      return Promise.resolve({ enabled: true });
+    }
+    return this.execute("enable").then((result) => {
+      if (typeof result.enabled === "boolean") {
+        this.enabled = result.enabled;
+      }
+      return result;
+    });
+  }
 
   /**
    * Adds a wallet to the user's Alby extension
@@ -10,6 +26,9 @@ export default class AlbyProvider {
    * @returns Nothing, throws if user rejects
    */
   addAccount(name: string, connector: string, config: Record<string, unknown>) {
+    if (!this.enabled) {
+      throw new Error("Provider must be enabled before calling getInfo");
+    }
     return this.execute("addAccount", { connector, name, config });
   }
 

@@ -25,7 +25,8 @@
       "resources": [
         "js/inpageScript.bundle.js",
         "js/inpageScriptWebLN.bundle.js",
-        "js/inpageScriptNostr.bundle.js"
+        "js/inpageScriptNostr.bundle.js",
+        "js/inpageScriptAlby.bundle.js"
       ],
       "matches": ["https://*/*"]
     }
@@ -169,6 +170,7 @@
       "run_at": "document_end",
       "js": [
         "js/contentScriptOnEnd.bundle.js",
+        "js/contentScriptOnEndAlby.bundle.js",
         "js/contentScriptOnEndNostr.bundle.js"
       ]
     },

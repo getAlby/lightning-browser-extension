@@ -23,7 +23,7 @@ function ConfirmAddAccount() {
 
   const name = navState.args?.name as string;
   const connector = navState.args?.connector as string;
-  const config = navState.args?.config as string;
+  const config = navState.args?.config as unknown;
   const origin = navState.origin as OriginData;
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
