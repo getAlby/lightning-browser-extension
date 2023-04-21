@@ -14,6 +14,8 @@ declare global {
   }
 }
 
+let oldVideoId: string;
+
 const setData = async (): Promise<void> => {
   let text = "";
   document
@@ -21,12 +23,20 @@ const setData = async (): Promise<void> => {
       "#columns #primary #primary-inner #meta-contents #description .content"
     )
     .forEach((e) => {
-      text += ` ${e.textContent}`;
+      text += `${e.textContent} `;
     });
+
+  const searchParams = new URLSearchParams(window.location.search);
+  const videoId = searchParams.get("v");
+  if (videoId === oldVideoId) {
+    return;
+  }
+  oldVideoId = videoId as string;
   const channelLink = document.querySelector<HTMLAnchorElement>(
     "#columns #primary #primary-inner #meta-contents .ytd-channel-name a"
   );
   if (!text || !channelLink) {
+    resetLightningData();
     return;
   }
   let match;
@@ -49,7 +59,10 @@ const setData = async (): Promise<void> => {
     }
   }
 
-  if (!lnurl) return;
+  if (!lnurl) {
+    resetLightningData();
+    return;
+  }
 
   const name = channelLink.textContent || "";
   const imageUrl =
@@ -86,7 +99,6 @@ const battery = async (): Promise<void> => {
       }
 
       const observer = new MutationObserver(() => {
-        resetLightningData();
         setData();
       });
 
