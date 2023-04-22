@@ -817,7 +817,7 @@
       "export": "導出",
       "remove": "移除",
       "copy": "複製",
-      "copy_invoice": "发票副本",
+      "copy_invoice": "",
       "log_in": "登錄",
       "remember": "記住我的選擇，不要再問了",
       "transactions": "交易"

@@ -568,7 +568,7 @@
       "export": "Vie",
       "remove": "Poista",
       "copy": "Kopioi",
-      "copy_invoice": "Kopioi lasku"
+      "copy_invoice": ""
     },
     "errors": {
       "connection_failed": "Yhteyden muodostaminen epäonnistui",

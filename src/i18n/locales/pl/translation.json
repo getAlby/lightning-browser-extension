@@ -801,7 +801,7 @@
       "export": "Eksport",
       "remove": "Usuń",
       "copy": "Kopiuj",
-      "copy_invoice": "Kopiuj fakturę",
+      "copy_invoice": "",
       "log_in": "Zaloguj",
       "remember": "Pamiętaj mój wybór i więcej nie pytaj",
       "transactions": "Transakcje"
