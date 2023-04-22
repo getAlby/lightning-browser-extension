@@ -22,6 +22,7 @@ import { ToastContainer } from "react-toastify";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
 import getConnectorRoutes from "~/app/router/connectorRoutes";
+import GenerateSecretKey from "~/app/screens/Accounts/GenerateSecretKey";
 import Discover from "~/app/screens/Discover";
 import AlbyWallet from "~/app/screens/connectors/AlbyWallet";
 import ChooseConnector from "~/app/screens/connectors/ChooseConnector";
@@ -63,6 +64,10 @@ function Options() {
             <Route path="settings" element={<Settings />} />
             <Route path="accounts">
               <Route path=":id" element={<AccountDetail />} />
+              <Route
+                path=":id/secret-key/generate"
+                element={<GenerateSecretKey />}
+              />
               <Route
                 path="new"
                 element={

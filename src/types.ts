@@ -17,6 +17,7 @@ export interface Account {
   config: string;
   name: string;
   nostrPrivateKey?: string | null;
+  // mnemonic?: string | null;
 }
 
 export interface Accounts {

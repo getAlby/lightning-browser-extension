@@ -22,7 +22,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import Modal from "react-modal";
 import QRCode from "react-qr-code";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Avatar from "~/app/components/Avatar";
 import { useAccount } from "~/app/context/AccountContext";
@@ -415,6 +415,40 @@ function AccountDetail() {
               </div>
             </form>
           </div>
+
+          <h2 className="text-2xl mt-12 font-bold dark:text-white">
+            {/*t("nostr.title")*/}Secret Key
+          </h2>
+          {
+            /* TODO: secret key exists &&*/ <p className="mb-6 text-gray-500 dark:text-neutral-500 text-sm">
+              {/*t("nostr.hint")*/}Your Account Secret Key allows you to use
+              Alby to interact with protocols such as Nostr or Oridinals.
+            </p>
+          }
+
+          <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 dark:bg-surface-02dp">
+            <div className="rounded-md font-medium p-4 mb-4 text-orange-700 bg-orange-50 dark:text-orange-400 dark:bg-orange-900">
+              {/*t("nostr.private_key.backup")*/}⚠️ Back up your Secret Key! Not
+              backing it up might result in permanently loosing access to your
+              Nostr identity or purchased Oridinals.
+            </div>
+            <div className="mb-4 flex justify-between items-end">
+              <div className="w-7/12">Generate your Secret Key</div>
+
+              <div className="w-1/5 flex-none">
+                <Link to="secret-key/generate">
+                  <Button
+                    label={
+                      /*tCommon("actions.save")*/ "Back up your Secret Key"
+                    }
+                    primary
+                    fullWidth
+                  />
+                </Link>
+              </div>
+            </div>
+          </div>
+
           <h2 className="text-2xl mt-12 font-bold dark:text-white">
             {t("nostr.title")}
           </h2>
