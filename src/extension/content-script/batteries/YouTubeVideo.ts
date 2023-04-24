@@ -17,6 +17,14 @@ declare global {
 let oldVideoId: string;
 
 const setData = async (): Promise<void> => {
+  const searchParams = new URLSearchParams(window.location.search);
+  const videoId = searchParams.get("v");
+  // to keep the battery info stable after the description settles
+  // ex. prevents flickering on clicking "Show more"
+  if (videoId === oldVideoId) {
+    return;
+  }
+
   let text = "";
   document
     .querySelectorAll(
@@ -26,11 +34,6 @@ const setData = async (): Promise<void> => {
       text += `${e.textContent} `;
     });
 
-  const searchParams = new URLSearchParams(window.location.search);
-  const videoId = searchParams.get("v");
-  if (videoId === oldVideoId) {
-    return;
-  }
   oldVideoId = videoId as string;
   const channelLink = document.querySelector<HTMLAnchorElement>(
     "#columns #primary #primary-inner #meta-contents .ytd-channel-name a"
@@ -87,22 +90,31 @@ const setData = async (): Promise<void> => {
 
 const battery = async (): Promise<void> => {
   function waitForDescription() {
+    // to observe changes on page change
     const description = document.querySelector(
       "div#bottom-row.style-scope.ytd-watch-metadata"
     );
-    if (description) {
+    // because the above element doesn't have complete text
+    const descriptionContent = document.querySelector(
+      "#columns #primary #primary-inner #meta-contents #description .content"
+    );
+    // we need to ensure both are present because they don't load at the same time
+    // and this causes an issue because "description" alone isn't full
+    if (description && descriptionContent) {
       clearInterval(descriptionInterval); // Stop checking for the element
 
       if (!window.ALBY_BATTERY) {
         window.ALBY_BATTERY = true;
+        // we need to run setData if this is the first time the user is
+        // visiting youtube as the observer doesn't run intially on attach
         setData();
+
+        const observer = new MutationObserver(() => {
+          setData();
+        });
+        // subtree is required, otherwise we the observer doesn't work
+        observer.observe(description, { childList: true, subtree: true });
       }
-
-      const observer = new MutationObserver(() => {
-        setData();
-      });
-
-      observer.observe(description, { childList: true, subtree: true });
     }
   }
 
