@@ -184,7 +184,7 @@ function Send() {
                   className="flex justify-center items-center w-10 h-8"
                   onClick={() => setQrIsOpen(true)}
                 >
-                  <QrCodeIcon className="h-6 w-6 text-blue-500" />
+                  <QrCodeIcon className="h-6 w-6 text-blue-600" />
                 </button>
               }
             />

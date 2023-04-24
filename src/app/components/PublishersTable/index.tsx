@@ -94,7 +94,7 @@ export default function PublishersTable({
                           <Progressbar percentage={publisher.percentage} />
                         </div>
                         <span
-                          className={`ml-2 text-sm font-semibold text-blue-500`}
+                          className={`ml-2 text-sm font-semibold text-blue-600`}
                         >
                           {publisher.percentage}%
                         </span>
