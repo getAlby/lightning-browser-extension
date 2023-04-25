@@ -7,8 +7,8 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import Button from "~/app/components/Button";
+import MnemonicInputs from "~/app/components/MnemonicInputs";
 import Checkbox from "~/app/components/form/Checkbox";
-import Input from "~/app/components/form/Input";
 import { useAccount } from "~/app/context/AccountContext";
 import NostrIcon from "~/app/icons/NostrIcon";
 import OrdinalsIcon from "~/app/icons/OrdinalsIcon";
@@ -17,11 +17,11 @@ import OrdinalsIcon from "~/app/icons/OrdinalsIcon";
 const SECRET_KEY_EXISTS = false;
 
 function BackupSecretKey() {
-  const [mnemomic, setMnemonic] = useState<string | undefined>();
+  const [mnemonic, setMnemonic] = useState<string | undefined>();
   const account = useAccount();
   const { t: tCommon } = useTranslation("common");
   const [publicKeyCopyLabel, setPublicKeyCopyLabel] = useState(
-    tCommon("actions.copy") as string
+    tCommon("actions.copy_clipboard") as string
   );
   const [hasBackedUp, setBackedUp] = useState(false);
 
@@ -32,8 +32,7 @@ function BackupSecretKey() {
 
   /*const { t } = useTranslation("translation", {
     keyPrefix: "accounts.account_view",
-  });
-  const { t: tCommon } = useTranslation("common");*/
+  });*/
 
   async function saveSecretKey() {
     try {
@@ -48,7 +47,7 @@ function BackupSecretKey() {
         throw new Error("No account available");
       }
 
-      alert("Mnemonic: " + mnemomic);
+      alert("Mnemonic: " + mnemonic);
 
       // TODO: make sure secret key doesn't already exist
 
@@ -93,7 +92,7 @@ function BackupSecretKey() {
             keys to those protocols on a new device or in case you loose access
             to your account:
           </p>
-          <MnemonicInputs mnemonic={mnemomic} disabled>
+          <MnemonicInputs mnemonic={mnemonic} disabled>
             <>
               {/* TODO: consider making CopyButton component */}
               <Button
@@ -102,13 +101,13 @@ function BackupSecretKey() {
                 label={publicKeyCopyLabel}
                 onClick={async () => {
                   try {
-                    if (!mnemomic) {
+                    if (!mnemonic) {
                       throw new Error("No Secret Key set");
                     }
-                    navigator.clipboard.writeText(mnemomic);
+                    navigator.clipboard.writeText(mnemonic);
                     setPublicKeyCopyLabel(tCommon("copied"));
                     setTimeout(() => {
-                      setPublicKeyCopyLabel(tCommon("actions.copy"));
+                      setPublicKeyCopyLabel(tCommon("actions.copy_clipboard"));
                     }, 1000);
                   } catch (e) {
                     if (e instanceof Error) {
@@ -163,43 +162,6 @@ function ProtocolListItem({ icon, title }: ProtocolListItemProps) {
     <div className="flex gap-2">
       {icon}
       <span className="text-gray-500">{title}</span>
-    </div>
-  );
-}
-
-// TODO: move to separate file
-type MnemonicInputsProps = {
-  mnemonic?: string;
-  disabled?: boolean;
-};
-
-function MnemonicInputs({
-  mnemonic,
-  disabled,
-  children,
-}: React.PropsWithChildren<MnemonicInputsProps>) {
-  const words = mnemonic?.split(" ") || [];
-
-  return (
-    <div className="border-[1px] border-gray-200 rounded-lg py-8 px-4 flex flex-col gap-8 items-center justify-center w-[520px] self-center">
-      <h3 className="font-semibold">{"Your Secret Key"}</h3>
-      <div className="flex flex-wrap gap-4 justify-center items-center">
-        {[...new Array(12)].map((_, i) => (
-          <div key={i} className="flex justify-center items-center">
-            <span className="w-7 text-gray-500 slashed-zero">{i + 1}.</span>
-            <Input
-              type="text"
-              required
-              placeholder={wordlist[i * 32]}
-              disabled={disabled}
-              block={false}
-              className="w-24 text-center"
-              value={words[i]}
-            />
-          </div>
-        ))}
-      </div>
-      {children}
     </div>
   );
 }
