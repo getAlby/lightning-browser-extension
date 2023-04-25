@@ -3,10 +3,11 @@ import Container from "@components/Container";
 import Loading from "@components/Loading";
 import * as bip39 from "@scure/bip39";
 import { wordlist } from "@scure/bip39/wordlists/english";
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import Button from "~/app/components/Button";
+import Checkbox from "~/app/components/form/Checkbox";
 import Input from "~/app/components/form/Input";
 import { useAccount } from "~/app/context/AccountContext";
 
@@ -14,12 +15,13 @@ import { useAccount } from "~/app/context/AccountContext";
 const SECRET_KEY_EXISTS = false;
 
 function BackupSecretKey() {
-  const [mnemomic, setMnemonic] = React.useState<string | undefined>();
+  const [mnemomic, setMnemonic] = useState<string | undefined>();
   const account = useAccount();
   const { t: tCommon } = useTranslation("common");
-  const [publicKeyCopyLabel, setPublicKeyCopyLabel] = React.useState(
+  const [publicKeyCopyLabel, setPublicKeyCopyLabel] = useState(
     tCommon("actions.copy") as string
   );
+  const [hasBackedUp, setBackedUp] = useState(false);
 
   React.useEffect(() => {
     // TODO: only generate mnemonic if account doesn't have one yet
@@ -33,6 +35,11 @@ function BackupSecretKey() {
 
   async function saveSecretKey() {
     try {
+      if (!hasBackedUp) {
+        throw new Error(
+          "Please confirm that you have backed up your secret key."
+        );
+      }
       // TODO: re-add
       if (!account) {
         // type guard
@@ -77,28 +84,50 @@ function BackupSecretKey() {
             to your account:
           </p>
           <MnemonicInputs mnemonic={mnemomic} disabled>
-            {/* TODO: consider making CopyButton component */}
-            <Button
-              outline
-              icon={<CopyIcon className="w-6 h-6 mr-2 text-orange-400" />}
-              label={publicKeyCopyLabel}
-              onClick={async () => {
-                try {
-                  if (!mnemomic) {
-                    throw new Error("No Secret Key set");
+            <>
+              {/* TODO: consider making CopyButton component */}
+              <Button
+                outline
+                icon={<CopyIcon className="w-6 h-6 mr-2 text-orange-400" />}
+                label={publicKeyCopyLabel}
+                onClick={async () => {
+                  try {
+                    if (!mnemomic) {
+                      throw new Error("No Secret Key set");
+                    }
+                    navigator.clipboard.writeText(mnemomic);
+                    setPublicKeyCopyLabel(tCommon("copied"));
+                    setTimeout(() => {
+                      setPublicKeyCopyLabel(tCommon("actions.copy"));
+                    }, 1000);
+                  } catch (e) {
+                    if (e instanceof Error) {
+                      toast.error(e.message);
+                    }
                   }
-                  navigator.clipboard.writeText(mnemomic);
-                  setPublicKeyCopyLabel(tCommon("copied"));
-                  setTimeout(() => {
-                    setPublicKeyCopyLabel(tCommon("actions.copy"));
-                  }, 1000);
-                } catch (e) {
-                  if (e instanceof Error) {
-                    toast.error(e.message);
-                  }
-                }
-              }}
-            />
+                }}
+              />
+              {!SECRET_KEY_EXISTS && (
+                <div className="flex items-center">
+                  <Checkbox
+                    id="has_backed_up"
+                    name="Backup confirmation checkbox"
+                    checked={hasBackedUp}
+                    onChange={(event) => {
+                      setBackedUp(event.target.checked);
+                    }}
+                  />
+                  <label
+                    htmlFor="has_backed_up"
+                    className="cursor-pointer ml-2 block text-sm text-gray-900 font-medium dark:text-white"
+                  >
+                    {
+                      /*tCommon("actions.remember")*/ "I’ve backed my account’s Secret Key in a private and secure place"
+                    }
+                  </label>
+                </div>
+              )}
+            </>
           </MnemonicInputs>
         </div>
         {!SECRET_KEY_EXISTS && (
