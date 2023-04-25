@@ -19,6 +19,7 @@ import Unlock from "@screens/Unlock";
 import { useTranslation } from "react-i18next";
 import { HashRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import ScrollToTop from "~/app/components/ScrollToTop";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
 import getConnectorRoutes from "~/app/router/connectorRoutes";
@@ -32,10 +33,10 @@ import i18n from "~/i18n/i18nConfig";
 
 function Options() {
   const connectorRoutes = getConnectorRoutes();
-
   return (
     <Providers>
       <HashRouter>
+        <ScrollToTop />
         <Routes>
           <Route
             path="/"
