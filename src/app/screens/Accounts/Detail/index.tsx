@@ -454,13 +454,7 @@ function AccountDetail() {
               </div>
 
               <div className="w-1/5 flex-none">
-                <Link
-                  to={
-                    SECRET_KEY_EXISTS
-                      ? "secret-key/backup"
-                      : "secret-key/generate"
-                  }
-                >
+                <Link to="secret-key/backup">
                   <Button
                     label={
                       /*tCommon("actions.save")*/ SECRET_KEY_EXISTS
@@ -486,7 +480,7 @@ function AccountDetail() {
               </div>
 
               <div className="w-1/5 flex-none">
-                <Link to="secret-key/generate">
+                <Link to="secret-key/import">
                   <Button
                     label={/*tCommon("actions.save")*/ "Import Secret Key"}
                     primary

@@ -5,6 +5,7 @@ import { classNames } from "../../../utils";
 type Props = {
   suffix?: string;
   endAdornment?: React.ReactNode;
+  block?: boolean;
 };
 
 export default function Input({
@@ -26,6 +27,8 @@ export default function Input({
   max,
   suffix,
   endAdornment,
+  block = true,
+  className,
 }: React.InputHTMLAttributes<HTMLInputElement> & Props) {
   const inputEl = useRef<HTMLInputElement>(null);
   const outerStyles =
@@ -38,13 +41,15 @@ export default function Input({
       name={name}
       id={id}
       className={classNames(
-        "block w-full placeholder-gray-500 dark:placeholder-neutral-600",
+        "placeholder-gray-500 dark:placeholder-neutral-600",
+        block && "block w-full",
         !suffix && !endAdornment
           ? `${outerStyles} focus:ring-primary focus:border-primary focus:ring-1`
           : "pr-0 border-0 focus:ring-0",
         disabled
           ? "bg-gray-50 dark:bg-surface-01dp text-gray-500 dark:text-neutral-500"
-          : "bg-white dark:bg-black dark:text-white"
+          : "bg-white dark:bg-black dark:text-white",
+        !!className && className
       )}
       placeholder={placeholder}
       required={required}
