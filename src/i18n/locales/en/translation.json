@@ -409,7 +409,7 @@
             "label": "Private Key"
           },
           "public_key": {
-            "label": "Public Key"
+            "label": "Nostr Public Key"
           },
           "generate_keys": {
             "title": "Generate a new Nostr key",

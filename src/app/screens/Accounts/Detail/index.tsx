@@ -25,6 +25,7 @@ import QRCode from "react-qr-code";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Avatar from "~/app/components/Avatar";
+import MenuDivider from "~/app/components/Menu/MenuDivider";
 import { useAccount } from "~/app/context/AccountContext";
 import { useAccounts } from "~/app/context/AccountsContext";
 import { useSettings } from "~/app/context/SettingsContext";
@@ -36,6 +37,9 @@ import type { Account } from "~/types";
 
 type AccountAction = Omit<Account, "connector" | "config" | "nostrPrivateKey">;
 dayjs.extend(relativeTime);
+
+// TODO: replace with checking account
+const SECRET_KEY_EXISTS = false;
 
 function AccountDetail() {
   const auth = useAccount();
@@ -420,31 +424,116 @@ function AccountDetail() {
             {/*t("nostr.title")*/}Secret Key
           </h2>
           {
-            /* TODO: secret key exists &&*/ <p className="mb-6 text-gray-500 dark:text-neutral-500 text-sm">
+            <p className="mb-6 text-gray-500 dark:text-neutral-500 text-sm">
               {/*t("nostr.hint")*/}Your Account Secret Key allows you to use
               Alby to interact with protocols such as Nostr or Oridinals.
             </p>
           }
 
-          <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 dark:bg-surface-02dp">
-            <div className="rounded-md font-medium p-4 mb-4 text-orange-700 bg-orange-50 dark:text-orange-400 dark:bg-orange-900">
-              {/*t("nostr.private_key.backup")*/}⚠️ Back up your Secret Key! Not
-              backing it up might result in permanently loosing access to your
-              Nostr identity or purchased Oridinals.
-            </div>
-            <div className="mb-4 flex justify-between items-end">
-              <div className="w-7/12">Generate your Secret Key</div>
+          <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 dark:bg-surface-02dp flex flex-col gap-4">
+            {SECRET_KEY_EXISTS && (
+              <div className="rounded-md font-medium p-4 text-orange-700 bg-orange-50 dark:text-orange-400 dark:bg-orange-900">
+                {/*t("nostr.private_key.backup")*/}⚠️ Backup your Secret Key!
+                Not backing it up might result in permanently loosing access to
+                your Nostr identity or purchased Oridinals.
+              </div>
+            )}
+
+            <div className="flex justify-between items-end">
+              <div className="w-9/12">
+                <p className="font-medium">
+                  {SECRET_KEY_EXISTS
+                    ? "Backup your Secret Key"
+                    : "Generate your Secret Key"}
+                </p>
+                <p className="text-gray-500 text-sm">
+                  Your Secret Key is a set of 12 words that will allow you to
+                  access your keys to protocols such as Nostr or Oridinals on a
+                  new device or in case you loose access to your account.
+                </p>
+              </div>
 
               <div className="w-1/5 flex-none">
-                <Link to="secret-key/generate">
+                <Link
+                  to={
+                    SECRET_KEY_EXISTS
+                      ? "secret-key/backup"
+                      : "secret-key/generate"
+                  }
+                >
                   <Button
                     label={
-                      /*tCommon("actions.save")*/ "Back up your Secret Key"
+                      /*tCommon("actions.save")*/ SECRET_KEY_EXISTS
+                        ? "Generate Secret Key"
+                        : "Backup Secret Key"
                     }
                     primary
                     fullWidth
                   />
                 </Link>
+              </div>
+            </div>
+            <MenuDivider />
+            <div className="flex justify-between items-end">
+              <div className="w-7/12">
+                <p className="font-medium">
+                  {/*tCommon("actions.save")*/}Import a Secret Key
+                </p>
+                <p className="text-gray-500 text-sm">
+                  {/*tCommon("actions.save")*/}Use an existing Secret Key to
+                  recover your derived keys.
+                </p>
+              </div>
+
+              <div className="w-1/5 flex-none">
+                <Link to="secret-key/generate">
+                  <Button
+                    label={/*tCommon("actions.save")*/ "Import Secret Key"}
+                    primary
+                    fullWidth
+                  />
+                </Link>
+              </div>
+            </div>
+            <MenuDivider />
+            <div className="mb-4 flex justify-between items-end">
+              <div className="w-7/12">
+                <TextField
+                  id="nostrPublicKey"
+                  label={t("nostr.public_key.label")}
+                  type="text"
+                  value={nostrPublicKey}
+                  disabled
+                />
+              </div>
+              <div className="w-1/6 flex-none mx-4">
+                <Button
+                  icon={<CopyIcon className="w-6 h-6 mr-2" />}
+                  label={publicKeyCopyLabel}
+                  onClick={async () => {
+                    try {
+                      navigator.clipboard.writeText(nostrPublicKey);
+                      setPublicKeyCopyLabel(tCommon("copied"));
+                      setTimeout(() => {
+                        setPublicKeyCopyLabel(tCommon("actions.copy"));
+                      }, 1000);
+                    } catch (e) {
+                      if (e instanceof Error) {
+                        toast.error(e.message);
+                      }
+                    }
+                  }}
+                  fullWidth
+                />
+              </div>
+
+              <div className="w-1/5 flex-none">
+                <Button
+                  label={/*tCommon("actions.save")*/ "Advanced Settings"}
+                  primary
+                  fullWidth
+                  onClick={() => alert("TODO")}
+                />
               </div>
             </div>
           </div>
