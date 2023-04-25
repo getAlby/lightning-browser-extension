@@ -3,13 +3,15 @@ import Container from "@components/Container";
 import Loading from "@components/Loading";
 import * as bip39 from "@scure/bip39";
 import { wordlist } from "@scure/bip39/wordlists/english";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import Button from "~/app/components/Button";
 import Checkbox from "~/app/components/form/Checkbox";
 import Input from "~/app/components/form/Input";
 import { useAccount } from "~/app/context/AccountContext";
+import NostrIcon from "~/app/icons/NostrIcon";
+import OrdinalsIcon from "~/app/icons/OrdinalsIcon";
 
 // TODO: replace with checking account
 const SECRET_KEY_EXISTS = false;
@@ -23,7 +25,7 @@ function BackupSecretKey() {
   );
   const [hasBackedUp, setBackedUp] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     // TODO: only generate mnemonic if account doesn't have one yet
     setMnemonic(bip39.generateMnemonic(wordlist, 128));
   }, []);
@@ -56,6 +58,8 @@ function BackupSecretKey() {
       //   });
       //   toast.success(t("nostr.private_key.success"));
       // }
+      toast.success(/*t("nostr.private_key.success")*/ "Secret Key saved");
+      history.back();
     } catch (e) {
       if (e instanceof Error) toast.error(e.message);
     }
@@ -68,17 +72,23 @@ function BackupSecretKey() {
   ) : (
     <div>
       <Container>
-        <div className="mt-12 shadow bg-white sm:rounded-md sm:overflow-hidden p-10 divide-black/10 dark:divide-white/10 dark:bg-surface-02dp flex flex-col">
-          <h1 className="font-bold text-2xl mb-4">
+        <div className="mt-12 shadow bg-white sm:rounded-md sm:overflow-hidden p-10 divide-black/10 dark:divide-white/10 dark:bg-surface-02dp flex flex-col gap-4">
+          <h1 className="font-bold text-2xl">
             {SECRET_KEY_EXISTS
               ? "Back up your Secret Key"
               : "Generate your Secret Key"}
           </h1>
-          <p>
+          <p className="text-gray-500">
             In addition to Bitcoin Lightning Network, Alby allows you to
             generate keys and interact with other protocols such as:
           </p>
-          <p className="mb-8">
+          <div className="flex flex-col gap-4">
+            <ProtocolListItem icon={<NostrIcon />} title="Nostr protocol" />
+            <ProtocolListItem icon={<OrdinalsIcon />} title="Ordinals" />
+            {/* <ProtocolListItem icon={<LiquidIcon />} title="Liquid" /> */}
+          </div>
+
+          <p className="mb-8 text-gray-500">
             Secret Key is a set of 12 words that will allow you to access your
             keys to those protocols on a new device or in case you loose access
             to your account:
@@ -145,6 +155,17 @@ function BackupSecretKey() {
 }
 
 export default BackupSecretKey;
+
+type ProtocolListItemProps = { icon: React.ReactNode; title: string };
+
+function ProtocolListItem({ icon, title }: ProtocolListItemProps) {
+  return (
+    <div className="flex gap-2">
+      {icon}
+      <span className="text-gray-500">{title}</span>
+    </div>
+  );
+}
 
 // TODO: move to separate file
 type MnemonicInputsProps = {
