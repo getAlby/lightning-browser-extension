@@ -139,7 +139,7 @@ const AllowanceView: FC<Props> = (props) => {
 
         {hasTransactions && <TransactionsTable transactions={transactions} />}
 
-        {!hasTransactions && !transactions?.length && (
+        {!isLoadingTransactions && !transactions?.length && (
           <p className="text-gray-500 dark:text-neutral-400">
             <Trans
               i18nKey={"allowance_view.no_transactions"}
