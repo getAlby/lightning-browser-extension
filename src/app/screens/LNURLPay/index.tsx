@@ -1,7 +1,12 @@
-import { CaretLeftIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
+import {
+  CaretDownIcon,
+  CaretLeftIcon,
+  CaretUpIcon,
+} from "@bitcoin-design/bitcoin-icons-react/filled";
 import Button from "@components/Button";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
+import Hyperlink from "@components/Hyperlink";
 import PublisherCard from "@components/PublisherCard";
 import ResultCard from "@components/ResultCard";
 import SatButtons from "@components/SatButtons";
@@ -61,6 +66,8 @@ function LNURLPay() {
       Math.floor(+details?.minSendable / 1000).toString()) ||
       ""
   );
+
+  const [showMoreFields, setShowMoreFields] = useState(false);
   const [fiatValue, setFiatValue] = useState("");
   const [comment, setComment] = useState("");
   const [userName, setUserName] = useState("");
@@ -349,6 +356,26 @@ function LNURLPay() {
     confirm();
   }
 
+  function toggleShowMoreFields() {
+    setShowMoreFields(!showMoreFields);
+  }
+
+  function showCommentField() {
+    return (
+      details &&
+      typeof details.commentAllowed === "number" &&
+      details.commentAllowed > 0
+    );
+  }
+
+  function showNameField() {
+    return !!details?.payerData?.name;
+  }
+
+  function showEmailField() {
+    return !!details?.payerData?.email;
+  }
+
   return (
     <>
       <div className="flex flex-col grow overflow-hidden">
@@ -429,45 +456,63 @@ function LNURLPay() {
                             />
                           </div>
                         )}
-                      {details &&
-                        typeof details?.commentAllowed === "number" &&
-                        details?.commentAllowed > 0 && (
-                          <div className="mt-4">
-                            <TextField
-                              id="comment"
-                              label={t("comment.label")}
-                              placeholder={tCommon("optional")}
-                              onChange={(e) => {
-                                setComment(e.target.value);
-                              }}
-                            />
-                          </div>
-                        )}
-                      {details && details?.payerData?.name && (
-                        <div className="mt-4">
-                          <TextField
-                            id="name"
-                            label={t("name.label")}
-                            placeholder={tCommon("optional")}
-                            value={userName}
-                            onChange={(e) => {
-                              setUserName(e.target.value);
-                            }}
-                          />
+
+                      {(showCommentField() ||
+                        showNameField() ||
+                        showEmailField()) && (
+                        <div className="flex justify-center mt-4 mb-4">
+                          <Hyperlink onClick={toggleShowMoreFields}>
+                            {tCommon("actions.more")}{" "}
+                            {showMoreFields ? (
+                              <CaretUpIcon className="h-4 w-4 inline-flex" />
+                            ) : (
+                              <CaretDownIcon className="h-4 w-4 inline-flex" />
+                            )}
+                          </Hyperlink>
                         </div>
                       )}
-                      {details && details?.payerData?.email && (
-                        <div className="mt-4">
-                          <TextField
-                            id="email"
-                            label={t("email.label")}
-                            placeholder={tCommon("optional")}
-                            value={userEmail}
-                            onChange={(e) => {
-                              setUserEmail(e.target.value);
-                            }}
-                          />
-                        </div>
+
+                      {showMoreFields && (
+                        <>
+                          {showCommentField() && (
+                            <div className="mt-4">
+                              <TextField
+                                id="comment"
+                                label={t("comment.label")}
+                                placeholder={tCommon("optional")}
+                                onChange={(e) => {
+                                  setComment(e.target.value);
+                                }}
+                              />
+                            </div>
+                          )}
+                          {showNameField() && (
+                            <div className="mt-4">
+                              <TextField
+                                id="name"
+                                label={t("name.label")}
+                                placeholder={tCommon("optional")}
+                                value={userName}
+                                onChange={(e) => {
+                                  setUserName(e.target.value);
+                                }}
+                              />
+                            </div>
+                          )}
+                          {showEmailField() && (
+                            <div className="mt-4">
+                              <TextField
+                                id="email"
+                                label={t("email.label")}
+                                placeholder={tCommon("optional")}
+                                value={userEmail}
+                                onChange={(e) => {
+                                  setUserEmail(e.target.value);
+                                }}
+                              />
+                            </div>
+                          )}
+                        </>
                       )}
                     </div>
                     <div className="pt-2 border-t border-gray-200 dark:border-white/10">
