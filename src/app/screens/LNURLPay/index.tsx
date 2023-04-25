@@ -409,113 +409,109 @@ function LNURLPay() {
                 />
                 <form onSubmit={handleSubmit}>
                   <fieldset disabled={loadingConfirm}>
-                    <div className="my-4">
-                      <dl className="overflow-hidden">
-                        <>
-                          {formattedMetadata(details.metadata).map(
-                            ([dt, dd], i) => (
-                              <Fragment key={`element-${i}`}>
-                                <Dt>{dt}</Dt>
-                                <Dd>{dd}</Dd>
-                              </Fragment>
-                            )
+                    <dl className="mt-4 overflow-hidden">
+                      <>
+                        {formattedMetadata(details.metadata).map(
+                          ([dt, dd], i) => (
+                            <Fragment key={`element-${i}`}>
+                              <Dt>{dt}</Dt>
+                              <Dd>{dd}</Dd>
+                            </Fragment>
+                          )
+                        )}
+                        {details.minSendable === details.maxSendable && (
+                          <>
+                            <Dt>{t("amount.label")}</Dt>
+                            <Dd>
+                              {getFormattedSats(
+                                Math.floor(+details.minSendable / 1000)
+                              )}
+                            </Dd>
+                          </>
+                        )}
+                      </>
+                    </dl>
+                    {details && details.minSendable !== details.maxSendable && (
+                      <div>
+                        <DualCurrencyField
+                          autoFocus
+                          id="amount"
+                          label={t("amount.label")}
+                          min={Math.floor(+details.minSendable / 1000)}
+                          max={Math.floor(+details.maxSendable / 1000)}
+                          value={valueSat}
+                          onChange={(e) => setValueSat(e.target.value)}
+                          fiatValue={fiatValue}
+                          hint={`${tCommon("balance")}: ${
+                            auth?.balancesDecorated?.accountBalance
+                          }`}
+                        />
+                        <SatButtons
+                          min={Math.floor(+details.minSendable / 1000)}
+                          max={Math.floor(+details.maxSendable / 1000)}
+                          onClick={setValueSat}
+                          disabled={loadingConfirm}
+                        />
+                      </div>
+                    )}
+
+                    {showCommentField() && (
+                      <div className="mt-4">
+                        <TextField
+                          id="comment"
+                          label={t("comment.label")}
+                          placeholder={tCommon("optional")}
+                          onChange={(e) => {
+                            setComment(e.target.value);
+                          }}
+                        />
+                      </div>
+                    )}
+
+                    {(showNameField() || showEmailField()) && (
+                      <div className="flex justify-center mt-4">
+                        <Hyperlink onClick={toggleShowMoreFields}>
+                          {tCommon("actions.more")}{" "}
+                          {showMoreFields ? (
+                            <CaretUpIcon className="h-4 w-4 inline-flex" />
+                          ) : (
+                            <CaretDownIcon className="h-4 w-4 inline-flex" />
                           )}
-                          {details.minSendable === details.maxSendable && (
-                            <>
-                              <Dt>{t("amount.label")}</Dt>
-                              <Dd>
-                                {getFormattedSats(
-                                  Math.floor(+details.minSendable / 1000)
-                                )}
-                              </Dd>
-                            </>
-                          )}
-                        </>
-                      </dl>
-                      {details &&
-                        details.minSendable !== details.maxSendable && (
-                          <div>
-                            <DualCurrencyField
-                              autoFocus
-                              id="amount"
-                              label={t("amount.label")}
-                              min={Math.floor(+details.minSendable / 1000)}
-                              max={Math.floor(+details.maxSendable / 1000)}
-                              value={valueSat}
-                              onChange={(e) => setValueSat(e.target.value)}
-                              fiatValue={fiatValue}
-                              hint={`${tCommon("balance")}: ${
-                                auth?.balancesDecorated?.accountBalance
-                              }`}
-                            />
-                            <SatButtons
-                              min={Math.floor(+details.minSendable / 1000)}
-                              max={Math.floor(+details.maxSendable / 1000)}
-                              onClick={setValueSat}
-                              disabled={loadingConfirm}
+                        </Hyperlink>
+                      </div>
+                    )}
+
+                    {showMoreFields && (
+                      <>
+                        {showNameField() && (
+                          <div className="mt-4">
+                            <TextField
+                              id="name"
+                              label={t("name.label")}
+                              placeholder={tCommon("optional")}
+                              value={userName}
+                              onChange={(e) => {
+                                setUserName(e.target.value);
+                              }}
                             />
                           </div>
                         )}
-
-                      {(showCommentField() ||
-                        showNameField() ||
-                        showEmailField()) && (
-                        <div className="flex justify-center mt-4 mb-4">
-                          <Hyperlink onClick={toggleShowMoreFields}>
-                            {tCommon("actions.more")}{" "}
-                            {showMoreFields ? (
-                              <CaretUpIcon className="h-4 w-4 inline-flex" />
-                            ) : (
-                              <CaretDownIcon className="h-4 w-4 inline-flex" />
-                            )}
-                          </Hyperlink>
-                        </div>
-                      )}
-
-                      {showMoreFields && (
-                        <>
-                          {showCommentField() && (
-                            <div className="mt-4">
-                              <TextField
-                                id="comment"
-                                label={t("comment.label")}
-                                placeholder={tCommon("optional")}
-                                onChange={(e) => {
-                                  setComment(e.target.value);
-                                }}
-                              />
-                            </div>
-                          )}
-                          {showNameField() && (
-                            <div className="mt-4">
-                              <TextField
-                                id="name"
-                                label={t("name.label")}
-                                placeholder={tCommon("optional")}
-                                value={userName}
-                                onChange={(e) => {
-                                  setUserName(e.target.value);
-                                }}
-                              />
-                            </div>
-                          )}
-                          {showEmailField() && (
-                            <div className="mt-4">
-                              <TextField
-                                id="email"
-                                label={t("email.label")}
-                                placeholder={tCommon("optional")}
-                                value={userEmail}
-                                onChange={(e) => {
-                                  setUserEmail(e.target.value);
-                                }}
-                              />
-                            </div>
-                          )}
-                        </>
-                      )}
-                    </div>
-                    <div className="pt-2 border-t border-gray-200 dark:border-white/10">
+                        {showEmailField() && (
+                          <div className="mt-4">
+                            <TextField
+                              id="email"
+                              label={t("email.label")}
+                              placeholder={tCommon("optional")}
+                              value={userEmail}
+                              onChange={(e) => {
+                                setUserEmail(e.target.value);
+                              }}
+                            />
+                          </div>
+                        )}
+                      </>
+                    )}
+                    <div className="mt-4 dark:border-white/10">
                       <ConfirmOrCancel
                         isFocused={false}
                         label={tCommon("actions.confirm")}
