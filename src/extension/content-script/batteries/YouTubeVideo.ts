@@ -88,7 +88,7 @@ const setData = async (): Promise<void> => {
   ]);
 };
 
-const battery = async (): Promise<void> => {
+const battery = (): void => {
   function waitForDescription() {
     // to observe changes on page change
     const description = document.querySelector(
@@ -103,6 +103,7 @@ const battery = async (): Promise<void> => {
     if (description && descriptionContent) {
       clearInterval(descriptionInterval); // Stop checking for the element
 
+      // run this only once, during the first load
       if (!window.ALBY_BATTERY) {
         window.ALBY_BATTERY = true;
         // we need to run setData if this is the first time the user is
