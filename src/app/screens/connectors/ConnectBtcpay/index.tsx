@@ -9,18 +9,15 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import msg from "~/common/lib/msg";
 
+import logo from "/static/assets/icons/btcpay.svg";
+
 const initialFormData = {
   url: "",
   macaroon: "",
   name: "",
 };
 
-type Props = {
-  logo?: string;
-};
-
-export default function ConnectBtcpay(props: Props) {
-  const { logo } = props;
+export default function ConnectBtcpay() {
   const navigate = useNavigate();
   const { t } = useTranslation("translation", {
     keyPrefix: "choose_connector.btcpay",

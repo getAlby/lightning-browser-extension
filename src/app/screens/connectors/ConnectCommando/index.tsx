@@ -13,12 +13,9 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import msg from "~/common/lib/msg";
 
-type Props = {
-  logo?: string;
-};
+import logo from "/static/assets/icons/core_ln.svg";
 
-export default function ConnectCommando(props: Props) {
-  const { logo } = props;
+export default function ConnectCommando() {
   const navigate = useNavigate();
   const { t } = useTranslation("translation", {
     keyPrefix: `choose_connector.commando`,

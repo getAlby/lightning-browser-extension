@@ -11,12 +11,9 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import msg from "~/common/lib/msg";
 
-type Props = {
-  logo?: string;
-};
+import logo from "/static/assets/icons/eclair.jpg";
 
-export default function ConnectEclair(props: Props) {
-  const { logo } = props;
+export default function ConnectEclair() {
   const navigate = useNavigate();
   const { t } = useTranslation("translation", {
     keyPrefix: "choose_connector.eclair",

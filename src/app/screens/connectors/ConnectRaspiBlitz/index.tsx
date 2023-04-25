@@ -8,17 +8,14 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import msg from "~/common/lib/msg";
 
+import logo from "/static/assets/icons/raspiblitz.png";
+
 const initialFormData = Object.freeze({
   url: "",
   macaroon: "",
 });
 
-type Props = {
-  logo?: string;
-};
-
-export default function ConnectRaspiBlitz(props: Props) {
-  const { logo } = props;
+export default function ConnectRaspiBlitz() {
   const navigate = useNavigate();
   const { t } = useTranslation("translation", {
     keyPrefix: "choose_connector.raspiblitz",

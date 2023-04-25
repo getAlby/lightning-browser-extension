@@ -9,17 +9,14 @@ import { toast } from "react-toastify";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
 
+import logo from "/static/assets/icons/start9.png";
+
 const initialFormData = {
   url: "",
   macaroon: "",
 };
 
-type Props = {
-  logo?: string;
-};
-
-export default function ConnectStart9(props: Props) {
-  const { logo } = props;
+export default function ConnectStart9() {
   const navigate = useNavigate();
   const { t } = useTranslation("translation", {
     keyPrefix: "choose_connector.start9",

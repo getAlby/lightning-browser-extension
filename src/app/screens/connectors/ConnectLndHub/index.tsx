@@ -9,16 +9,19 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import msg from "~/common/lib/msg";
 
+import lndhubBlueWallet from "/static/assets/icons/lndhub_bluewallet.png";
+import lndhubGo from "/static/assets/icons/lndhub_go.png";
+
 export type Props = {
   lndHubType?: "lndhub_bluewallet" | "lndhub_go";
-  logo?: string;
 };
 
 export default function ConnectLndHub({
   lndHubType = "lndhub_bluewallet",
-  logo,
 }: Props) {
   const navigate = useNavigate();
+  const logo = lndHubType === "lndhub_bluewallet" ? lndhubBlueWallet : lndhubGo;
+
   const { t } = useTranslation("translation", {
     keyPrefix: `choose_connector.${lndHubType}`,
   });

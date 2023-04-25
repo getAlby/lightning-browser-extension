@@ -39,37 +39,37 @@ function getConnectorRoutes() {
   return [
     {
       path: "lnd",
-      element: <ConnectLnd logo={lnd} />,
+      element: <ConnectLnd />,
       title: i18n.t("translation:choose_connector.lnd.title"),
       logo: lnd,
     },
     {
       path: "lnc",
-      element: <ConnectLnc logo={lnd} />,
+      element: <ConnectLnc />,
       title: i18n.t("translation:choose_connector.lnc.title"),
       logo: lnd,
     },
     {
       path: "commando",
-      element: <ConnectCommando logo={core_ln} />,
+      element: <ConnectCommando />,
       title: i18n.t("translation:choose_connector.commando.title"),
       logo: core_ln,
     },
     {
       path: "lnbits",
-      element: <ConnectLnbits logo={lnbits} />,
+      element: <ConnectLnbits />,
       title: i18n.t("translation:choose_connector.lnbits.title"),
       logo: lnbits,
     },
     {
       path: "lnd-hub-go",
-      element: <ConnectLndHub logo={lndhubGo} lndHubType="lndhub_go" />,
+      element: <ConnectLndHub lndHubType="lndhub_go" />,
       title: i18n.t("translation:choose_connector.lndhub_go.title"),
       logo: lndhubGo,
     },
     {
       path: "kollider",
-      element: <ConnectKollider logo={kolliderLogo} variant="select" />,
+      element: <ConnectKollider variant="select" />,
       title: i18n.t("translation:choose_connector.kollider.title"),
       description: i18n.t("translation:choose_connector.kollider.description"),
       logo: kolliderLogo,
@@ -86,71 +86,61 @@ function getConnectorRoutes() {
     },
     {
       path: "lnd-hub-bluewallet",
-      element: <ConnectLndHub logo={lndhubBlueWallet} />,
+      element: <ConnectLndHub />,
       title: i18n.t("translation:choose_connector.lndhub_bluewallet.title"),
       logo: lndhubBlueWallet,
     },
     {
       path: "eclair",
-      element: <ConnectEclair logo={eclair} />,
+      element: <ConnectEclair />,
       title: i18n.t("translation:choose_connector.eclair.title"),
       logo: eclair,
     },
     {
       path: "citadel",
-      element: <ConnectCitadel logo={citadel} />,
+      element: <ConnectCitadel />,
       title: i18n.t("translation:choose_connector.citadel.title"),
       logo: citadel,
     },
     {
       path: "umbrel",
-      element: <ConnectUmbrel logo={umbrel} />,
+      element: <ConnectUmbrel />,
       title: i18n.t("translation:choose_connector.umbrel.title"),
       logo: umbrel,
     },
     {
       path: "mynode",
-      element: <ConnectMyNode logo={mynode} />,
+      element: <ConnectMyNode />,
       title: i18n.t("translation:choose_connector.mynode.title"),
       logo: mynode,
     },
     {
       path: "start9",
-      element: <ConnectStart9 logo={start9} />,
+      element: <ConnectStart9 />,
       title: i18n.t("translation:choose_connector.start9.title"),
       logo: start9,
     },
     {
       path: "raspiblitz",
-      element: <ConnectRaspiBlitz logo={raspiblitz} />,
+      element: <ConnectRaspiBlitz />,
       title: i18n.t("translation:choose_connector.raspiblitz.title"),
       logo: raspiblitz,
     },
     {
       path: galoyPaths.bitcoinBeach,
-      element: (
-        <ConnectGaloy
-          logo={galoyBitcoinBeach}
-          instance={galoyPaths.bitcoinBeach}
-        />
-      ),
+      element: <ConnectGaloy instance={galoyPaths.bitcoinBeach} />,
       title: i18n.t("translation:choose_connector.bitcoin_beach.title"),
       logo: galoyBitcoinBeach,
     },
     {
       path: galoyPaths.bitcoinJungle,
-      element: (
-        <ConnectGaloy
-          logo={galoyBitcoinJungle}
-          instance={galoyPaths.bitcoinJungle}
-        />
-      ),
+      element: <ConnectGaloy instance={galoyPaths.bitcoinJungle} />,
       title: i18n.t("translation:choose_connector.bitcoin_jungle.title"),
       logo: galoyBitcoinJungle,
     },
     {
       path: "btcpay",
-      element: <ConnectBtcpay logo={btcpay} />,
+      element: <ConnectBtcpay />,
       title: i18n.t("translation:choose_connector.btcpay.title"),
       logo: btcpay,
     },

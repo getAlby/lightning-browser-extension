@@ -10,17 +10,14 @@ import { toast } from "react-toastify";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
 
+import logo from "/static/assets/icons/lnd.png";
+
 const initialFormData = {
   url: "",
   macaroon: "",
 };
 
-type Props = {
-  logo?: string;
-};
-
-export default function ConnectLnd(props: Props) {
-  const { logo } = props;
+export default function ConnectLnd() {
   const navigate = useNavigate();
   const { t } = useTranslation("translation", {
     keyPrefix: "choose_connector.lnd",

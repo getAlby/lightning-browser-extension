@@ -12,7 +12,7 @@ import { toast } from "react-toastify";
 import { ACCOUNT_CURRENCIES } from "~/common/constants";
 import msg from "~/common/lib/msg";
 
-import kolliderLogo from "/static/assets/icons/kollider.png";
+import logo from "/static/assets/icons/kollider.png";
 
 type Currency = {
   value: ACCOUNT_CURRENCIES;
@@ -21,7 +21,6 @@ type Currency = {
 
 export type Props = {
   variant: "login" | "create" | "select";
-  logo?: string;
 };
 
 const supportedCurrencies: Currency[] = [
@@ -39,7 +38,7 @@ const supportedCurrencies: Currency[] = [
   },
 ];
 
-export default function ConnectKollidier({ variant, logo }: Props) {
+export default function ConnectKollidier({ variant }: Props) {
   const navigate = useNavigate();
   const { t } = useTranslation("translation", {
     keyPrefix: `choose_connector.kollider`,
@@ -141,11 +140,7 @@ export default function ConnectKollidier({ variant, logo }: Props) {
           title={t("choose_path.title")}
           description={t("choose_path.description")}
           content={
-            <img
-              src={kolliderLogo}
-              alt="logo"
-              className="inline rounded-3xl w-32"
-            />
+            <img src={logo} alt="logo" className="inline rounded-3xl w-32" />
           }
           actions={
             <>

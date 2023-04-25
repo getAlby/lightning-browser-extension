@@ -10,6 +10,8 @@ import { toast } from "react-toastify";
 import PasswordForm from "~/app/components/PasswordForm";
 import msg from "~/common/lib/msg";
 
+import logo from "/static/assets/icons/alby.png";
+
 const walletCreateUrl =
   process.env.WALLET_CREATE_URL || "https://app.regtest.getalby.com/api/users";
 const HMAC_VERIFY_HEADER_KEY =
@@ -24,7 +26,6 @@ interface LNDHubCreateResponse {
 
 export type Props = {
   variant: "login" | "create";
-  logo?: string;
 };
 
 const initialFormData = {
@@ -34,7 +35,7 @@ const initialFormData = {
   lnAddress: "",
 };
 
-export default function AlbyWallet({ variant, logo }: Props) {
+export default function AlbyWallet({ variant }: Props) {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { t } = useTranslation("translation", {
