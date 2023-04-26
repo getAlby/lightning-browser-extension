@@ -428,6 +428,13 @@ export interface MessagePublicKeyGet extends MessageDefault {
   action: "getPublicKeyOrPrompt";
 }
 
+export interface MessageKeyOrigin extends MessageDefault {
+  args?: {
+    id?: Account["id"];
+  };
+  action: "getKeyOrigin";
+}
+
 export interface MessagePrivateKeyGet extends MessageDefault {
   args?: {
     id?: Account["id"];

@@ -936,7 +936,9 @@
     "badge": {
       "label": {
         "active": "ACTIVE",
-        "auth": "LOGIN"
+        "auth": "LOGIN",
+        "derived": "DERIVED",
+        "unknown": "UNKNOWN"
       }
     }
   },

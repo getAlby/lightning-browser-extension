@@ -1,5 +1,6 @@
 import {
   CaretLeftIcon,
+  CopyIcon as CopyFilledIcon,
   ExportIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import {
@@ -25,6 +26,7 @@ import QRCode from "react-qr-code";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Avatar from "~/app/components/Avatar";
+import Badge from "~/app/components/Badge";
 import MenuDivider from "~/app/components/Menu/MenuDivider";
 import { useAccount } from "~/app/context/AccountContext";
 import { useAccounts } from "~/app/context/AccountsContext";
@@ -66,13 +68,14 @@ function AccountDetail() {
   const [currentPrivateKey, setCurrentPrivateKey] = useState("");
   const [nostrPrivateKey, setNostrPrivateKey] = useState("");
   const [nostrPublicKey, setNostrPublicKey] = useState("");
+  const [nostrKeyOrigin, setNostrKeyOrigin] = useState<"derived" | "unknown">(
+    "unknown"
+  );
   const [nostrPrivateKeyVisible, setNostrPrivateKeyVisible] = useState(false);
   const [privateKeyCopyLabel, setPrivateKeyCopyLabel] = useState(
     tCommon("actions.copy") as string
   );
-  const [publicKeyCopyLabel, setPublicKeyCopyLabel] = useState(
-    tCommon("actions.copy") as string
-  );
+  const [publicKeyCopied, setPublicKeyCopied] = useState(false);
 
   const [exportLoading, setExportLoading] = useState(false);
   const [exportModalIsOpen, setExportModalIsOpen] = useState(false);
@@ -98,6 +101,10 @@ function AccountDetail() {
         if (priv) {
           setCurrentPrivateKey(priv);
         }
+        const keyOrigin = (await msg.request("nostr/getKeyOrigin", {
+          id,
+        })) as FixMe;
+        setNostrKeyOrigin(keyOrigin);
       }
     } catch (e) {
       console.error(e);
@@ -491,33 +498,44 @@ function AccountDetail() {
             </div>
             <MenuDivider />
             <div className="mb-4 flex justify-between items-end">
-              <div className="w-7/12">
+              <div className="w-9/12 flex items-center gap-2">
                 <TextField
                   id="nostrPublicKey"
                   label={t("nostr.public_key.label")}
                   type="text"
                   value={nostrPublicKey}
                   disabled
-                />
-              </div>
-              <div className="w-1/6 flex-none mx-4">
-                <Button
-                  icon={<CopyIcon className="w-6 h-6 mr-2" />}
-                  label={publicKeyCopyLabel}
-                  onClick={async () => {
-                    try {
-                      navigator.clipboard.writeText(nostrPublicKey);
-                      setPublicKeyCopyLabel(tCommon("copied"));
-                      setTimeout(() => {
-                        setPublicKeyCopyLabel(tCommon("actions.copy"));
-                      }, 1000);
-                    } catch (e) {
-                      if (e instanceof Error) {
-                        toast.error(e.message);
+                  endAdornment={
+                    <Button
+                      icon={
+                        !publicKeyCopied ? (
+                          <CopyIcon className="w-6 h-6 mx-2" />
+                        ) : (
+                          <CopyFilledIcon className="w-6 h-6 mx-2" />
+                        )
                       }
-                    }
-                  }}
-                  fullWidth
+                      label=""
+                      onClick={async () => {
+                        try {
+                          navigator.clipboard.writeText(nostrPublicKey);
+                          setPublicKeyCopied(true);
+                          setTimeout(() => {
+                            setPublicKeyCopied(false);
+                          }, 1000);
+                        } catch (e) {
+                          if (e instanceof Error) {
+                            toast.error(e.message);
+                          }
+                        }
+                      }}
+                      fullWidth
+                    />
+                  }
+                />
+                <Badge
+                  label={nostrKeyOrigin}
+                  color="green-bitcoin"
+                  textColor="white"
                 />
               </div>
 
@@ -526,7 +544,7 @@ function AccountDetail() {
                   label={/*tCommon("actions.save")*/ "Advanced Settings"}
                   primary
                   fullWidth
-                  onClick={() => alert("TODO")}
+                  onClick={() => setNostrKeyModalIsOpen(true)}
                 />
               </div>
             </div>
@@ -657,26 +675,7 @@ function AccountDetail() {
                   disabled
                 />
               </div>
-              <div className="w-1/5 flex-none mx-4">
-                <Button
-                  icon={<CopyIcon className="w-6 h-6 mr-2" />}
-                  label={publicKeyCopyLabel}
-                  onClick={async () => {
-                    try {
-                      navigator.clipboard.writeText(nostrPublicKey);
-                      setPublicKeyCopyLabel(tCommon("copied"));
-                      setTimeout(() => {
-                        setPublicKeyCopyLabel(tCommon("actions.copy"));
-                      }, 1000);
-                    } catch (e) {
-                      if (e instanceof Error) {
-                        toast.error(e.message);
-                      }
-                    }
-                  }}
-                  fullWidth
-                />
-              </div>
+
               <div className="w-1/5 flex-none d-none"></div>
             </div>
           </div>

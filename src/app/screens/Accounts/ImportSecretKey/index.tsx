@@ -44,6 +44,9 @@ function ImportSecretKey() {
       alert("Mnemonic: " + mnemonic);
 
       // TODO: make sure secret key doesn't already exist
+      // TODO: check if nostr key exists and warn about replacement - where should this happen?
+      // TODO: save key and regenerate derived keys
+      // TODO: this code should be shared between Import & Backup
 
       //   await msg.request("secretKey/save", {
       //     id: account.id,
