@@ -4,6 +4,7 @@ import * as blocklist from "./actions/blocklist";
 import * as cache from "./actions/cache";
 import * as ln from "./actions/ln";
 import lnurl, { auth } from "./actions/lnurl";
+import * as mnemonic from "./actions/mnemonic";
 import * as nostr from "./actions/nostr";
 import * as payments from "./actions/payments";
 import * as permissions from "./actions/permissions";
@@ -59,6 +60,8 @@ const routes = {
   lnurlAuth: auth,
   getCurrencyRate: cache.getCurrencyRate,
   signPsbt: webbtc.signPsbt,
+  setMnemonic: mnemonic.setMnemonic,
+  getMnemonic: mnemonic.getMnemonic,
 
   nostr: {
     generatePrivateKey: nostr.generatePrivateKey,

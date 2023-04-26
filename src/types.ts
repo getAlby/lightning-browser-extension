@@ -17,7 +17,7 @@ export interface Account {
   config: string;
   name: string;
   nostrPrivateKey?: string | null;
-  // mnemonic?: string | null;
+  mnemonic?: string | null;
 }
 
 export interface Accounts {
@@ -424,10 +424,12 @@ export interface MessageCurrencyRateGet extends MessageDefault {
   action: "getCurrencyRate";
 }
 
+// TODO: add Nostr Prefix
 export interface MessagePublicKeyGet extends MessageDefault {
   action: "getPublicKeyOrPrompt";
 }
 
+// TODO: add Nostr Prefix
 export interface MessageKeyOrigin extends MessageDefault {
   args?: {
     id?: Account["id"];
@@ -435,6 +437,7 @@ export interface MessageKeyOrigin extends MessageDefault {
   action: "getKeyOrigin";
 }
 
+// TODO: add Nostr Prefix
 export interface MessagePrivateKeyGet extends MessageDefault {
   args?: {
     id?: Account["id"];
@@ -442,6 +445,7 @@ export interface MessagePrivateKeyGet extends MessageDefault {
   action: "getPrivateKey";
 }
 
+// TODO: add Nostr Prefix
 export interface MessagePrivateKeyGenerate extends MessageDefault {
   args?: {
     type?: "random";
@@ -449,6 +453,7 @@ export interface MessagePrivateKeyGenerate extends MessageDefault {
   action: "generatePrivateKey";
 }
 
+// TODO: add Nostr Prefix
 export interface MessagePrivateKeySet extends MessageDefault {
   args: {
     id?: Account["id"];
@@ -457,11 +462,27 @@ export interface MessagePrivateKeySet extends MessageDefault {
   action: "setPrivateKey";
 }
 
+// TODO: add Nostr Prefix
 export interface MessagePrivateKeyRemove extends MessageDefault {
   args: {
     id?: Account["id"];
   };
   action: "removePrivateKey";
+}
+
+export interface MessageMnemonicSet extends MessageDefault {
+  args: {
+    id?: Account["id"];
+    mnemonic: string;
+  };
+  action: "setMnemonic";
+}
+
+export interface MessageMnemonicGet extends MessageDefault {
+  args?: {
+    id?: Account["id"];
+  };
+  action: "getMnemonic";
 }
 
 export interface MessageSignEvent extends MessageDefault {

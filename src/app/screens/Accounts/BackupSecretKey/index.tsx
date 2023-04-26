@@ -5,6 +5,7 @@ import * as bip39 from "@scure/bip39";
 import { wordlist } from "@scure/bip39/wordlists/english";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Button from "~/app/components/Button";
 import MnemonicInputs from "~/app/components/MnemonicInputs";
@@ -12,6 +13,7 @@ import Checkbox from "~/app/components/form/Checkbox";
 import { useAccount } from "~/app/context/AccountContext";
 import NostrIcon from "~/app/icons/NostrIcon";
 import OrdinalsIcon from "~/app/icons/OrdinalsIcon";
+import msg from "~/common/lib/msg";
 
 // TODO: replace with checking account
 const SECRET_KEY_EXISTS = false;
@@ -29,6 +31,7 @@ function BackupSecretKey() {
     // TODO: only generate mnemonic if account doesn't have one yet
     setMnemonic(bip39.generateMnemonic(wordlist, 128));
   }, []);
+  const { id } = useParams();
 
   /*const { t } = useTranslation("translation", {
     keyPrefix: "accounts.account_view",
@@ -47,19 +50,15 @@ function BackupSecretKey() {
         throw new Error("No account available");
       }
 
-      alert("Mnemonic: " + mnemonic);
-
       // TODO: make sure secret key doesn't already exist
-      // TODO: check if nostr key exists and warn about replacement - where should this happen?
-      // TODO: save key and regenerate derived keys
+      // TODO: check if nostr key exists and warn nostr key not replaced
+      // TODO: save key and regenerate derived keys that don't exist
       // TODO: this code should be shared between Import & Backup
 
-      //   await msg.request("secretKey/save", {
-      //     id: account.id,
-      //     mnemomic,
-      //   });
-      //   toast.success(t("nostr.private_key.success"));
-      // }
+      await msg.request("setMnemonic", {
+        id,
+        mnemonic,
+      });
       toast.success(/*t("nostr.private_key.success")*/ "Secret Key saved");
       history.back();
     } catch (e) {

@@ -4,6 +4,8 @@ import {
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import Container from "@components/Container";
 import Loading from "@components/Loading";
+import { HDKey } from "@scure/bip32";
+import * as bip39 from "@scure/bip39";
 import { FormEvent, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
@@ -26,6 +28,8 @@ function NostrAdvancedSettings() {
   const { t } = useTranslation("translation", {
     keyPrefix: "accounts.account_view",
   });
+  // TODO: add hooks useMnemonic, useNostrPrivateKey, ...
+  const [mnemonic, setMnemonic] = useState("");
   const [currentPrivateKey, setCurrentPrivateKey] = useState("");
   const [nostrPrivateKey, setNostrPrivateKey] = useState("");
   const [nostrPrivateKeyVisible, setNostrPrivateKeyVisible] = useState(false);
@@ -48,6 +52,13 @@ function NostrAdvancedSettings() {
           id,
         })) as FixMe;
         setNostrKeyOrigin(keyOrigin);
+
+        const accountMnemonic = (await msg.request("getMnemonic", {
+          id,
+        })) as string;
+        if (accountMnemonic) {
+          setMnemonic(accountMnemonic);
+        }
       }
     } catch (e) {
       console.error(e);
@@ -91,14 +102,35 @@ function NostrAdvancedSettings() {
     history.back();
   }
 
-  function deriveNostrKeyFromSecretKey() {
-    alert("TODO");
+  async function deriveNostrKeyFromSecretKey() {
+    // TODO: if no mnemonic, go to backup secret key page
+    if (!mnemonic) {
+      toast.error("You haven't setup your secret key yet");
+      return;
+    }
+
+    // TODO: move this functionality somewhere else
+    const seed = bip39.mnemonicToSeedSync(mnemonic);
+    const hdkey = HDKey.fromMasterSeed(seed);
+    if (!hdkey) {
+      throw new Error("invalid hdkey");
+    }
+    const nostrPrivateKeyBytes = hdkey.derive("m/1237'/0'/0").privateKey;
+    if (!nostrPrivateKeyBytes) {
+      throw new Error("invalid derived private key");
+    }
+    const nostrPrivateKey = Buffer.from(nostrPrivateKeyBytes).toString("hex");
+
+    saveNostrPrivateKey(nostrPrivateKey);
   }
 
   async function saveNostrPrivateKey(nostrPrivateKey: string) {
     nostrPrivateKey = nostrlib.normalizeToHex(nostrPrivateKey);
 
-    if (nostrPrivateKey === currentPrivateKey) return;
+    if (nostrPrivateKey === currentPrivateKey) {
+      toast.error("Your private key hasn't changed");
+      return;
+    }
 
     if (
       currentPrivateKey &&

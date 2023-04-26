@@ -35,9 +35,6 @@ import type { Account } from "~/types";
 type AccountAction = Omit<Account, "connector" | "config" | "nostrPrivateKey">;
 dayjs.extend(relativeTime);
 
-// TODO: replace with checking account
-const SECRET_KEY_EXISTS = false;
-
 function AccountDetail() {
   const auth = useAccount();
   const { accounts, getAccounts } = useAccounts();
@@ -60,6 +57,8 @@ function AccountDetail() {
   });
   const [accountName, setAccountName] = useState("");
 
+  // TODO: add hooks useMnemonic, useNostrPrivateKey, ...
+  const [mnemonic, setMnemonic] = useState("");
   const [currentPrivateKey, setCurrentPrivateKey] = useState("");
   const [nostrPublicKey, setNostrPublicKey] = useState("");
   const [nostrKeyOrigin, setNostrKeyOrigin] = useState<
@@ -89,6 +88,12 @@ function AccountDetail() {
           id,
         })) as FixMe;
         setNostrKeyOrigin(keyOrigin);
+        const accountMnemonic = (await msg.request("getMnemonic", {
+          id,
+        })) as string;
+        if (accountMnemonic) {
+          setMnemonic(accountMnemonic);
+        }
       }
     } catch (e) {
       console.error(e);
@@ -351,7 +356,7 @@ function AccountDetail() {
           }
 
           <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 dark:bg-surface-02dp flex flex-col gap-4">
-            {SECRET_KEY_EXISTS && (
+            {mnemonic && (
               <div className="rounded-md font-medium p-4 text-orange-700 bg-orange-50 dark:text-orange-400 dark:bg-orange-900">
                 {/*t("nostr.private_key.backup")*/}⚠️ Backup your Secret Key!
                 Not backing it up might result in permanently loosing access to
@@ -362,7 +367,7 @@ function AccountDetail() {
             <div className="flex justify-between items-end">
               <div className="w-9/12">
                 <p className="font-medium">
-                  {SECRET_KEY_EXISTS
+                  {mnemonic
                     ? "Backup your Secret Key"
                     : "Generate your Secret Key"}
                 </p>
@@ -377,9 +382,9 @@ function AccountDetail() {
                 <Link to="secret-key/backup">
                   <Button
                     label={
-                      /*tCommon("actions.save")*/ SECRET_KEY_EXISTS
-                        ? "Generate Secret Key"
-                        : "Backup Secret Key"
+                      /*tCommon("actions.save")*/ mnemonic
+                        ? "Backup Secret Key"
+                        : "Generate Secret Key"
                     }
                     primary
                     fullWidth
