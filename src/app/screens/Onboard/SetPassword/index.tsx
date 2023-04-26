@@ -42,7 +42,7 @@ export default function SetPassword() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="max-w-[600px] mx-auto shadow-lg rounded-xl relative mt-14 lg:flex lg:space-x-8 bg-white dark:bg-surface-02dp pt-10 pb-10 px-10">
+      <div className="max-w-xl shadow-lg rounded-xl mx-auto relative mt-14 lg:flex lg:space-x-8 bg-white dark:bg-surface-02dp pt-10 pb-10 px-10">
         <div>
           <h1 className="text-2xl font-bold dark:text-white max-sm:text-center">
             {t("title")}

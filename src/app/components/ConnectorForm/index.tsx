@@ -56,7 +56,7 @@ function ConnectorForm({
 
   return (
     <form onSubmit={onSubmit}>
-      <div className="max-w-[600px] mx-auto relative mt-14 bg-white dark:bg-surface-02dp p-10 shadow rounded-lg">
+      <div className="max-w-xl mx-auto relative mt-14 bg-white dark:bg-surface-02dp p-10 shadow rounded-lg">
         <div className="flex items-center mb-4">
           {logo && <img src={logo} className="w-16 mr-4 rounded-lg" />}
           {/*
