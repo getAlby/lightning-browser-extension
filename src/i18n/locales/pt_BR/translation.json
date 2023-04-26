@@ -758,7 +758,8 @@
       "log_in": "Fazer login",
       "remember": "Lembrar minha escolha e não perguntar novamente",
       "receive_again": "Receber outro pagamento",
-      "transactions": "Transações"
+      "transactions": "Transações",
+      "more": "Mais"
     },
     "errors": {
       "connection_failed": "Falha na conexão",
