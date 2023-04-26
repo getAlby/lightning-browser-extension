@@ -406,7 +406,7 @@
             "success": "Private key encrypted & saved successfully.",
             "failed_to_remove": "The entered account name didn't match, your old private has been restored.",
             "successfully_removed": "Private key removed successfully.",
-            "label": "Private Key"
+            "label": "Nostr Private Key"
           },
           "public_key": {
             "label": "Nostr Public Key"
@@ -937,8 +937,7 @@
       "label": {
         "active": "ACTIVE",
         "auth": "LOGIN",
-        "derived": "DERIVED",
-        "unknown": "UNKNOWN"
+        "imported": "IMPORTED"
       }
     }
   },
