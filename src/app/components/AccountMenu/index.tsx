@@ -39,9 +39,10 @@ function AccountMenu({ showOptions = true }: Props) {
   const [loading, setLoading] = useState(false);
 
   // update title
-  const title = authAccount?.id
-    ? accounts[authAccount?.id] && accounts[authAccount?.id].name
-    : "";
+  const title =
+    !!authAccount?.name &&
+    typeof authAccount?.name === "string" &&
+    `${authAccount?.name}`;
 
   useEffect(() => {
     getAccounts();
@@ -88,7 +89,7 @@ function AccountMenu({ showOptions = true }: Props) {
                 title={title || ""}
                 className="text-sm font-medium text-gray-700 dark:text-neutral-400 text-ellipsis overflow-hidden whitespace-nowrap"
               >
-                {loading ? <SkeletonLoader className="w-20" /> : title}
+                {loading ? <SkeletonLoader className="w-20" /> : title || "⚠️"}
               </div>
             </div>
             <CaretDownIcon className="h-4 w-4 dark:text-white" />
