@@ -156,8 +156,8 @@ async function init() {
 
   events.subscribe();
   console.info("Events subscribed");
-  console.info("Running any migrations");
   if (isRecentlyUpdated) {
+    console.info("Running any pending migrations");
     await migrate();
   }
   console.info("Loading completed");
