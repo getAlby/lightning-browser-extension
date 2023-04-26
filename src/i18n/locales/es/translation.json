@@ -810,7 +810,8 @@
       "receive_again": "Recibir otro pago",
       "log_in": "Iniciar Sesión",
       "remember": "Recordar mi elección y no preguntar nuevamente",
-      "transactions": "Transacciones"
+      "transactions": "Transacciones",
+      "more": "Más"
     },
     "errors": {
       "connection_failed": "Error de conexión",
