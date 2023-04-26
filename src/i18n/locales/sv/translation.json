@@ -812,7 +812,8 @@
       "transactions": "Transaktioner",
       "receive_again": "Ta emot en ny betalning",
       "remember": "Kom ihåg mitt val och fråga inte igen",
-      "log_in": "Logga in"
+      "log_in": "Logga in",
+      "more": "Mer"
     },
     "errors": {
       "connection_failed": "Anslutning misslyckades",
