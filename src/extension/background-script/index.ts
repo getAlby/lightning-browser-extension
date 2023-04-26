@@ -156,7 +156,10 @@ async function init() {
 
   events.subscribe();
   console.info("Events subscribed");
-
+  if (isRecentlyUpdated) {
+    console.info("Running any pending migrations");
+    await migrate();
+  }
   console.info("Loading completed");
 }
 
@@ -168,9 +171,6 @@ init()
     }
     if (isFirstInstalled && !state.getState().getAccount()) {
       utils.openUrl("welcome.html");
-    }
-    if (isRecentlyUpdated) {
-      migrate();
     }
   })
   .catch((err) => {
