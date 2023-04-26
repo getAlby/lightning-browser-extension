@@ -9,7 +9,7 @@ import { router } from "./router";
 import state from "./state";
 
 let isFirstInstalled = false;
-let isRecentlyUpdated = false;
+// let isRecentlyUpdated = false;
 const {
   promise: isInitialized,
   resolve: resolveInit,
@@ -84,7 +84,7 @@ const handleInstalled = (details: { reason: string }) => {
   }
   if (details.reason === "update") {
     console.info("Alby was recently updated");
-    isRecentlyUpdated = true;
+    // isRecentlyUpdated = true;
   }
 };
 
@@ -156,7 +156,8 @@ async function init() {
 
   events.subscribe();
   console.info("Events subscribed");
-
+  console.info("Running any migrations");
+  await migrate();
   console.info("Loading completed");
 }
 
@@ -168,9 +169,6 @@ init()
     }
     if (isFirstInstalled && !state.getState().getAccount()) {
       utils.openUrl("welcome.html");
-    }
-    if (isRecentlyUpdated) {
-      migrate();
     }
   })
   .catch((err) => {
