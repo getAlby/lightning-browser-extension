@@ -32,7 +32,7 @@ export default function PublisherCard({
       className={classNames(
         isSmall ? "p-2" : "flex-col justify-center p-4",
         isCard && "drop-shadow rounded-lg mt-4",
-        !image && "h-24",
+        !image && "h-16",
         "flex items-center bg-white dark:bg-surface-02dp"
       )}
     >
@@ -54,7 +54,7 @@ export default function PublisherCard({
         className={
           "flex flex-col overflow-hidden w-full " +
           (isSmall ? "" : "text-center ") +
-          (isSmall && !image && "ml-4")
+          (isSmall && !image && "ml-1")
         }
       >
         <h2
