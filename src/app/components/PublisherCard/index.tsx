@@ -38,7 +38,7 @@ export default function PublisherCard({
     >
       {image && (
         <img
-          className={`ml-1 mr-2 shrink-0 object-cover rounded-lg ${
+          className={`ml-1 mr-2 shrink-0 object-cover rounded-md ${
             isSmall ? "w-10 h-10 mr-3" : "w-20 h-20"
           }`}
           src={image || DEFAULT_IMAGE}
