@@ -4,8 +4,6 @@ import {
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import Container from "@components/Container";
 import Loading from "@components/Loading";
-import { HDKey } from "@scure/bip32";
-import * as bip39 from "@scure/bip39";
 import { FormEvent, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
@@ -14,6 +12,7 @@ import Button from "~/app/components/Button";
 import InputCopyButton from "~/app/components/InputCopyButton";
 import TextField from "~/app/components/form/TextField";
 import { useAccount } from "~/app/context/AccountContext";
+import { deriveNostrKeyFromSecretKey } from "~/app/utils/deriveNostrKeyFromSecretKey";
 import msg from "~/common/lib/msg";
 import nostrlib from "~/common/lib/nostr";
 import Nostr from "~/extension/background-script/nostr";
@@ -102,25 +101,14 @@ function NostrAdvancedSettings() {
     history.back();
   }
 
-  async function deriveNostrKeyFromSecretKey() {
+  async function onDeriveNostrKeyFromSecretKey() {
     // TODO: if no mnemonic, go to backup secret key page
     if (!mnemonic) {
       toast.error("You haven't setup your secret key yet");
       return;
     }
 
-    // TODO: move this functionality somewhere else
-    const seed = bip39.mnemonicToSeedSync(mnemonic);
-    const hdkey = HDKey.fromMasterSeed(seed);
-    if (!hdkey) {
-      throw new Error("invalid hdkey");
-    }
-    const nostrPrivateKeyBytes = hdkey.derive("m/1237'/0'/0").privateKey;
-    if (!nostrPrivateKeyBytes) {
-      throw new Error("invalid derived private key");
-    }
-    const nostrPrivateKey = Buffer.from(nostrPrivateKeyBytes).toString("hex");
-
+    const nostrPrivateKey = await deriveNostrKeyFromSecretKey(mnemonic);
     saveNostrPrivateKey(nostrPrivateKey);
   }
 
@@ -247,7 +235,7 @@ function NostrAdvancedSettings() {
                 <Button
                   outline
                   label="Derive Nostr keys from your Secret Key"
-                  onClick={deriveNostrKeyFromSecretKey}
+                  onClick={onDeriveNostrKeyFromSecretKey}
                 />
               </div>
             )}

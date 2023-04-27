@@ -3,12 +3,15 @@ import Container from "@components/Container";
 import Loading from "@components/Loading";
 import * as bip39 from "@scure/bip39";
 import { wordlist } from "@scure/bip39/wordlists/english";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Button from "~/app/components/Button";
 import MnemonicInputs from "~/app/components/MnemonicInputs";
 import { useAccount } from "~/app/context/AccountContext";
+import { saveMnemonic } from "~/app/utils/saveMnemonic";
+import msg from "~/common/lib/msg";
 
 function ImportSecretKey() {
   const [mnemonic, setMnemonic] = useState<string>("");
@@ -17,6 +20,32 @@ function ImportSecretKey() {
   const [importPasteLabel, setImportPasteLabel] = useState(
     tCommon("actions.paste_clipboard") as string
   );
+
+  // TODO: useMnemonic hook
+  const [hasFetchedData, setHasFetchedData] = useState(false);
+  const [hasMnemonic, setHasMnemonic] = useState(false);
+  const { id } = useParams();
+
+  const fetchData = useCallback(async () => {
+    try {
+      if (id) {
+        const accountMnemonic = (await msg.request("getMnemonic", {
+          id,
+        })) as string;
+        if (accountMnemonic) {
+          setHasMnemonic(true);
+        }
+        setHasFetchedData(true);
+      }
+    } catch (e) {
+      console.error(e);
+      if (e instanceof Error) toast.error(`Error: ${e.message}`);
+    }
+  }, [id]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   /*const { t } = useTranslation("translation", {
     keyPrefix: "accounts.account_view",
@@ -28,8 +57,16 @@ function ImportSecretKey() {
 
   async function importKey() {
     try {
-      // TODO: re-add
-      if (!account) {
+      if (hasMnemonic) {
+        if (
+          !window.confirm(
+            "You already have a secret key, are you sure you want to overwrite it?"
+          )
+        ) {
+          return;
+        }
+      }
+      if (!account || !id) {
         // type guard
         throw new Error("No account available");
       }
@@ -41,27 +78,13 @@ function ImportSecretKey() {
         throw new Error("Invalid mnemonic");
       }
 
-      alert("Mnemonic: " + mnemonic);
-
-      // TODO: make sure secret key doesn't already exist
-      // TODO: check if nostr key exists and warn nostr key not replaced
-      // TODO: save key and regenerate derived keys that don't exist
-      // TODO: this code should be shared between Import & Backup
-
-      //   await msg.request("secretKey/save", {
-      //     id: account.id,
-      //     mnemomic,
-      //   });
-      //   toast.success(t("nostr.private_key.success"));
-      // }
-      toast.success(/*t("nostr.private_key.success")*/ "Secret Key saved");
-      history.back();
+      await saveMnemonic(id, mnemonic);
     } catch (e) {
       if (e instanceof Error) toast.error(e.message);
     }
   }
 
-  return !account ? (
+  return !account || !hasFetchedData ? (
     <div className="flex justify-center mt-5">
       <Loading />
     </div>

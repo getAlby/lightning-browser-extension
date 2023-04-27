@@ -1,5 +1,4 @@
-import { HDKey } from "@scure/bip32";
-import * as bip39 from "@scure/bip39";
+import { deriveNostrKeyFromSecretKey } from "~/app/utils/deriveNostrKeyFromSecretKey";
 import { getMnemonic } from "~/extension/background-script/actions/mnemonic";
 import { MessageKeyOrigin } from "~/types";
 
@@ -18,18 +17,9 @@ const getKeyOrigin = async (message: MessageKeyOrigin) => {
   });
 
   if (mnemonic.data) {
-    // FIXME: this is all copied from NostrAdvancedSettings
-    const seed = bip39.mnemonicToSeedSync(mnemonic.data);
-    const hdkey = HDKey.fromMasterSeed(seed);
-    if (!hdkey) {
-      throw new Error("invalid hdkey");
-    }
-    const nostrPrivateKeyBytes = hdkey.derive("m/1237'/0'/0").privateKey;
-    if (!nostrPrivateKeyBytes) {
-      throw new Error("invalid derived private key");
-    }
-    const mnemonicDerivedPrivateKey =
-      Buffer.from(nostrPrivateKeyBytes).toString("hex");
+    const mnemonicDerivedPrivateKey = await deriveNostrKeyFromSecretKey(
+      mnemonic.data
+    );
 
     if (mnemonicDerivedPrivateKey === privateKey.data) {
       return {

@@ -13,7 +13,10 @@ import Checkbox from "~/app/components/form/Checkbox";
 import { useAccount } from "~/app/context/AccountContext";
 import NostrIcon from "~/app/icons/NostrIcon";
 import OrdinalsIcon from "~/app/icons/OrdinalsIcon";
+import { saveMnemonic } from "~/app/utils/saveMnemonic";
 import msg from "~/common/lib/msg";
+
+const debug = process.env.NODE_ENV === "development";
 
 function BackupSecretKey() {
   const [mnemonic, setMnemonic] = useState<string | undefined>();
@@ -23,6 +26,7 @@ function BackupSecretKey() {
     tCommon("actions.copy_clipboard") as string
   );
   const [hasConfirmedBackup, setHasConfirmedBackup] = useState(false);
+  // TODO: useMnemonic hook
   const [hasMnemonic, setHasMnemonic] = useState(false);
   const { id } = useParams();
 
@@ -54,7 +58,7 @@ function BackupSecretKey() {
     keyPrefix: "accounts.account_view",
   });*/
 
-  async function saveSecretKey() {
+  async function backupSecretKey() {
     try {
       if (!hasConfirmedBackup) {
         throw new Error(
@@ -62,22 +66,15 @@ function BackupSecretKey() {
         );
       }
       // TODO: re-add
-      if (!account) {
+      if (!account || !id) {
         // type guard
         throw new Error("No account available");
       }
+      if (!mnemonic) {
+        throw new Error("No mnemonic available");
+      }
 
-      // TODO: make sure secret key doesn't already exist
-      // TODO: check if nostr key exists and warn nostr key not replaced
-      // TODO: save key and regenerate derived keys that don't exist
-      // TODO: this code should be shared between Import & Backup
-
-      await msg.request("setMnemonic", {
-        id,
-        mnemonic,
-      });
-      toast.success(/*t("nostr.private_key.success")*/ "Secret Key saved");
-      history.back();
+      await saveMnemonic(id, mnemonic);
     } catch (e) {
       if (e instanceof Error) toast.error(e.message);
     }
@@ -163,7 +160,23 @@ function BackupSecretKey() {
             <Button
               label={/*tCommon("actions.save")*/ "Save Secret Key"}
               primary
-              onClick={saveSecretKey}
+              onClick={backupSecretKey}
+            />
+          </div>
+        )}
+        {debug && hasMnemonic && (
+          <div className="flex justify-center mt-8 mb-16">
+            <Button
+              label={/*tCommon("actions.save")*/ "Remove Secret Key"}
+              primary
+              onClick={async () => {
+                await msg.request("setMnemonic", {
+                  id,
+                  mnemonic: null,
+                });
+                toast.success("Removed secret key");
+                history.back();
+              }}
             />
           </div>
         )}
