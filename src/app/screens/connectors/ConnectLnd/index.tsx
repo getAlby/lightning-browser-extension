@@ -180,7 +180,7 @@ export default function ConnectLnd() {
         <p className="text-center my-4 dark:text-white">{t("or")}</p>
         <div
           className={`cursor-pointer flex flex-col items-center dark:bg-surface-02dp p-4 py-3 border-dashed border-2 border-gray-300 bg-gray-50 rounded-md text-center transition duration-200 ${
-            isDragging ? "border-blue-500 bg-blue-50" : ""
+            isDragging ? "border-blue-600 bg-blue-50" : ""
           }`}
           onDrop={dropHandler}
           onDragOver={dragOverHandler}
@@ -189,7 +189,7 @@ export default function ConnectLnd() {
             if (hiddenFileInput?.current) hiddenFileInput.current.click();
           }}
         >
-          <SendIcon className="mb-3 h-6 w-6 text-blue-500" />
+          <SendIcon className="mb-3 h-6 w-6 text-blue-600 hover:text-blue-700" />
           <p className="dark:text-white">
             <Trans
               i18nKey={"drag_and_drop"}

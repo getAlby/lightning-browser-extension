@@ -236,7 +236,7 @@ const DefaultView: FC<Props> = (props) => {
                   {hasTransactions && (
                     <TransactionsTable transactions={transactions} />
                   )}
-                  {!hasTransactions && (
+                  {!isLoadingTransactions && !transactions?.length && (
                     <p className="text-gray-500 dark:text-neutral-400">
                       {t("default_view.no_transactions")}
                     </p>
