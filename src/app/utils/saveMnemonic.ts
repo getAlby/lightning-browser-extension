@@ -9,7 +9,7 @@ export async function saveMnemonic(id: string, mnemonic: string) {
 
   if (hasNostrPrivateKey) {
     alert(
-      "This account already has a nostr private key set. Your nostr private key will not be replaced."
+      "This account already has a nostr private key set and will not be derived from this secret key. You can manage your nostr key from your account settings."
     );
   }
   await msg.request("setMnemonic", {
