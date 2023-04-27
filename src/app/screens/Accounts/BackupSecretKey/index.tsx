@@ -3,7 +3,7 @@ import Container from "@components/Container";
 import Loading from "@components/Loading";
 import * as bip39 from "@scure/bip39";
 import { wordlist } from "@scure/bip39/wordlists/english";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -15,9 +15,6 @@ import NostrIcon from "~/app/icons/NostrIcon";
 import OrdinalsIcon from "~/app/icons/OrdinalsIcon";
 import msg from "~/common/lib/msg";
 
-// TODO: replace with checking account
-const SECRET_KEY_EXISTS = false;
-
 function BackupSecretKey() {
   const [mnemonic, setMnemonic] = useState<string | undefined>();
   const account = useAccount();
@@ -25,13 +22,33 @@ function BackupSecretKey() {
   const [publicKeyCopyLabel, setPublicKeyCopyLabel] = useState(
     tCommon("actions.copy_clipboard") as string
   );
-  const [hasBackedUp, setBackedUp] = useState(false);
+  const [hasConfirmedBackup, setHasConfirmedBackup] = useState(false);
+  const [hasMnemonic, setHasMnemonic] = useState(false);
+  const { id } = useParams();
+
+  const fetchData = useCallback(async () => {
+    try {
+      if (id) {
+        const accountMnemonic = (await msg.request("getMnemonic", {
+          id,
+        })) as string;
+        if (accountMnemonic) {
+          setMnemonic(accountMnemonic);
+          setHasMnemonic(true);
+        } else {
+          // generate a new mnemonic
+          setMnemonic(bip39.generateMnemonic(wordlist, 128));
+        }
+      }
+    } catch (e) {
+      console.error(e);
+      if (e instanceof Error) toast.error(`Error: ${e.message}`);
+    }
+  }, [id]);
 
   useEffect(() => {
-    // TODO: only generate mnemonic if account doesn't have one yet
-    setMnemonic(bip39.generateMnemonic(wordlist, 128));
-  }, []);
-  const { id } = useParams();
+    fetchData();
+  }, [fetchData]);
 
   /*const { t } = useTranslation("translation", {
     keyPrefix: "accounts.account_view",
@@ -39,7 +56,7 @@ function BackupSecretKey() {
 
   async function saveSecretKey() {
     try {
-      if (!hasBackedUp) {
+      if (!hasConfirmedBackup) {
         throw new Error(
           "Please confirm that you have backed up your secret key."
         );
@@ -66,7 +83,7 @@ function BackupSecretKey() {
     }
   }
 
-  return !account ? (
+  return !account || !mnemonic ? (
     <div className="flex justify-center mt-5">
       <Loading />
     </div>
@@ -75,7 +92,7 @@ function BackupSecretKey() {
       <Container>
         <div className="mt-12 shadow bg-white sm:rounded-md sm:overflow-hidden p-10 divide-black/10 dark:divide-white/10 dark:bg-surface-02dp flex flex-col gap-4">
           <h1 className="font-bold text-2xl">
-            {SECRET_KEY_EXISTS
+            {hasMnemonic
               ? "Back up your Secret Key"
               : "Generate your Secret Key"}
           </h1>
@@ -118,14 +135,14 @@ function BackupSecretKey() {
                   }
                 }}
               />
-              {!SECRET_KEY_EXISTS && (
+              {!hasMnemonic && (
                 <div className="flex items-center">
                   <Checkbox
                     id="has_backed_up"
                     name="Backup confirmation checkbox"
-                    checked={hasBackedUp}
+                    checked={hasConfirmedBackup}
                     onChange={(event) => {
-                      setBackedUp(event.target.checked);
+                      setHasConfirmedBackup(event.target.checked);
                     }}
                   />
                   <label
@@ -141,7 +158,7 @@ function BackupSecretKey() {
             </>
           </MnemonicInputs>
         </div>
-        {!SECRET_KEY_EXISTS && (
+        {!hasMnemonic && (
           <div className="flex justify-center mt-8 mb-16">
             <Button
               label={/*tCommon("actions.save")*/ "Save Secret Key"}
