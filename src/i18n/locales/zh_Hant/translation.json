@@ -820,7 +820,8 @@
       "copy": "複製",
       "log_in": "登錄",
       "remember": "記住我的選擇，不要再問了",
-      "transactions": "交易"
+      "transactions": "交易",
+      "more": "更多"
     },
     "errors": {
       "connection_failed": "連接失敗",
