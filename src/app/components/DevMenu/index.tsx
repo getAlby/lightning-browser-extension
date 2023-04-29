@@ -19,7 +19,7 @@ class DevMenu extends Component {
       <div className="flex items-center px-3 py-2 space-x-3 bg-gray-800 text-white">
         <span>Dev Menu</span>
         <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
+          className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
           onClick={() => {
             this.initDevelopmentAccount();
           }}
@@ -27,7 +27,7 @@ class DevMenu extends Component {
           Reset and add development account
         </button>
         <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
+          className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
           onClick={() => {
             this.reset();
           }}

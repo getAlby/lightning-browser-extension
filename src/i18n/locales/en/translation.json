@@ -822,7 +822,8 @@
       "remove": "Remove",
       "copy": "Copy",
       "log_in": "Log in",
-      "remember": "Remember my choice and don't ask again"
+      "remember": "Remember my choice and don't ask again",
+      "more": "More"
     },
     "errors": {
       "connection_failed": "Connection failed",
