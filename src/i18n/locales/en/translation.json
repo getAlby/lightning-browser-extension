@@ -733,18 +733,7 @@
     },
     "confirm_add_account": {
       "title": "Add account",
-      "content": "{{host}} wants to add a wallet (with the \"{{connector}}\" connector) to Alby:",
-      "lnd": "LND",
-      "nativelnd": "LND (over Tor)",
-      "lndhub": "LNDHub",
-      "nativelndhub": "LNDHub (over Tor)",
-      "lnbits": "LNBits",
-      "nativelnbits": "LNBits (over Tor)",
-      "galoy": "Galoy",
-      "eclair": "Eclair",
-      "citadel": "Citadel",
-      "nativecitadel": "Citadel (over Tor)",
-      "commando": "Commando"
+      "content": "This website wants to add an account ({{connector}}) to Alby:"
     },
     "nostr": {
       "title": "Nostr",
@@ -838,6 +827,19 @@
       "copy": "Copy",
       "log_in": "Log in",
       "remember": "Remember my choice and don't ask again"
+    },
+    "connectors": {
+      "lnd": "LND",
+      "nativelnd": "LND (over Tor)",
+      "lndhub": "LNDHub",
+      "nativelndhub": "LNDHub (over Tor)",
+      "lnbits": "LNBits",
+      "nativelnbits": "LNBits (over Tor)",
+      "galoy": "Galoy",
+      "eclair": "Eclair",
+      "citadel": "Citadel",
+      "nativecitadel": "Citadel (over Tor)",
+      "commando": "Commando"
     },
     "errors": {
       "connection_failed": "Connection failed",

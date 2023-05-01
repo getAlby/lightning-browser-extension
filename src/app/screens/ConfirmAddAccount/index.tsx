@@ -73,8 +73,9 @@ function ConfirmAddAccount() {
             />
             <ContentMessage
               heading={t("content", {
-                host: origin.host,
-                connector: t(connector as "lndhub" /* Type hack */),
+                connector: tCommon(
+                  `connectors.${connector as "lndhub"}` /* Type hack */
+                ),
               })}
               content={name}
             />
