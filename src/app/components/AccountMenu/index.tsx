@@ -7,11 +7,11 @@ import {
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import Skeleton from "react-loading-skeleton";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Avatar from "~/app/components/Avatar";
 import MenuDivider from "~/app/components/Menu/MenuDivider";
+import SkeletonLoader from "~/app/components/SkeletonLoader";
 import { useAccount } from "~/app/context/AccountContext";
 import { useAccounts } from "~/app/context/AccountsContext";
 import { isAlbyAccount } from "~/app/utils";
@@ -85,12 +85,12 @@ function AccountMenu({ showOptions = true }: Props) {
             <div
               className={`flex-auto mx-2 py-3 overflow-hidden max-w-[14rem] text-left`}
             >
-              <p
+              <div
                 title={title || ""}
                 className="text-sm font-medium text-gray-700 dark:text-neutral-400 text-ellipsis overflow-hidden whitespace-nowrap"
               >
-                {title || <Skeleton />}
-              </p>
+                {loading ? <SkeletonLoader className="w-20" /> : title || "⚠️"}
+              </div>
             </div>
             <CaretDownIcon className="h-4 w-4 dark:text-white" />
             <span className="sr-only">{t("screen_reader")}</span>
@@ -118,7 +118,7 @@ function AccountMenu({ showOptions = true }: Props) {
                   )}
                 </p>
               ) : (
-                <Skeleton />
+                <SkeletonLoader />
               )}
             </div>
           </Menu.Item>

@@ -27,6 +27,12 @@
         "actions": {
           "delete_edit_account": "Delete invalid account and edit again"
         }
+      },
+      "pin_extension": {
+        "title": "Pin your Alby extension",
+        "description": "You're almost there. To use Alby conveniently, remember to pin your extension to the browser toolbar:",
+        "explanation": "1. Click on <0/> in the top right corner of your browser<1/>2. Find Alby and click to pin it to the toolbar<1/>3. That's it. To access Alby just click on the <2/> icon",
+        "next_btn": "Start buzzin' {{icon}} with Alby"
       }
     },
     "choose_path": {
@@ -654,12 +660,6 @@
           "description": "Create a lightning invoice, send some bitcoin to yourself and start using Alby in the lightning ecosystem",
           "label1": "Receive Bitcoin",
           "label2": "Buy Bitcoin"
-        },
-        "pin": {
-          "title": "📌 Pin your Alby extension",
-          "description1": "<0>To access Alby easily, click on extension icon</0> <1/> <2>in the top right corner of your browser</2>",
-          "description2": "In the list of extensions, find Alby and click pin icon to pin it to the toolbar",
-          "description3": "Thats it! To access Alby just click Alby icon"
         },
         "demo": {
           "title": "🕹️ Try out Alby Demo",

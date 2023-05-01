@@ -775,3 +775,5 @@ export interface DeferredPromise {
   resolve?: () => void;
   reject?: () => void;
 }
+
+export type Theme = "dark" | "light";

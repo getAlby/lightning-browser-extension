@@ -692,12 +692,6 @@
           "label1": "立即获取！",
           "description": "创建你自己的闪电地址，并像电子邮件一样轻松接收闪电付款"
         },
-        "pin": {
-          "description3": "就这样！要访问 Alby，只需点击 Alby 图标",
-          "title": "📌 固定你的 Alby 扩展",
-          "description1": "<0>要轻松访问Alby，请点击浏览器右上角的扩展图标</0> <1/> <2>",
-          "description2": "在扩展列表中，找到 Alby 并点击固定图标以将其固定到工具栏"
-        },
         "top_up_wallet": {
           "label1": "接收比特币",
           "title": "⚡️充值你的钱包",

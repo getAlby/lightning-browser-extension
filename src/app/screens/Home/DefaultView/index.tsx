@@ -12,6 +12,7 @@ import { FC, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import BalanceBox from "~/app/components/BalanceBox";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
 import { PublisherLnData } from "~/app/screens/Home/PublisherLnData";
@@ -157,6 +158,9 @@ const DefaultView: FC<Props> = (props) => {
         <PublisherLnData lnData={props.lnDataFromCurrentTab[0]} />
       )}
       <div className="p-4">
+        <div className="flex space-x-4 mb-4">
+          <BalanceBox />
+        </div>
         <div className="flex mb-6 space-x-4">
           <Button
             fullWidth
