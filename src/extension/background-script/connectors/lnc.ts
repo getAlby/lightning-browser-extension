@@ -1,4 +1,4 @@
-import LNC, { CredentialStore } from "@lightninglabs/lnc-web";
+import LNC from "@lightninglabs/lnc-web";
 import Base64 from "crypto-js/enc-base64";
 import Hex from "crypto-js/enc-hex";
 import UTF8 from "crypto-js/enc-utf8";
@@ -83,7 +83,7 @@ const snakeCaseObjectDeep = (value: FixMe): FixMe => {
   return value;
 };
 
-class LncCredentialStore implements CredentialStore {
+class LncCredentialStore {
   account: Account;
   config: Config;
 
@@ -160,6 +160,7 @@ class Lnc implements Connector {
     this.config = config;
     this.lnc = new LNC({
       credentialStore: new LncCredentialStore(account, config),
+      namespace: this.account.id,
     });
   }
 
@@ -178,7 +179,7 @@ class Lnc implements Connector {
         // TODO: investigate garbage collection
         delete this.lnc;
         resolve();
-      }, 1000);
+      }, 2000);
     });
   }
 
