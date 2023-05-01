@@ -52,10 +52,10 @@ function AccountMenu({ showOptions = true }: Props) {
   async function selectAccount(accountId: string) {
     setLoading(true);
     try {
-      setAccountId(accountId);
       await msg.request("selectAccount", {
         id: accountId,
       });
+      setAccountId(accountId);
       await fetchAccountInfo({ accountId });
     } catch (e) {
       console.error(e);
