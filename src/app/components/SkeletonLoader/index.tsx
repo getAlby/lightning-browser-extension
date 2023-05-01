@@ -8,7 +8,6 @@ export type Props = {
 function SkeletonLoader({ className }: Props) {
   return (
     <Skeleton
-      style={{ opacity: 0.2 }}
       className={classNames(className ?? "", "opacity-20")}
       baseColor="#AAA"
       highlightColor="#FFF"
