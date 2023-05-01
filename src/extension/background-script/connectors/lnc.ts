@@ -241,15 +241,15 @@ class Lnc implements Connector {
     const invoices: ConnectorInvoice[] = data.invoices
       .map((invoice: FixMe, index: number): ConnectorInvoice => {
         const custom_records =
-          invoice.htlcs[0] && invoice.htlcs[0].custom_records;
+          invoice.htlcs[0] && invoice.htlcs[0].customRecords;
 
         return {
           custom_records,
-          id: `${invoice.payment_request}-${index}`,
+          id: `${invoice.paymentRequest}-${index}`,
           memo: invoice.memo,
-          preimage: invoice.r_preimage,
+          preimage: invoice.rPreimage,
           settled: invoice.settled,
-          settleDate: parseInt(invoice.settle_date) * 1000,
+          settleDate: parseInt(invoice.settleDate) * 1000,
           totalAmount: invoice.value,
           type: "received",
         };
