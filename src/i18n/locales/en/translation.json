@@ -395,6 +395,31 @@
           "export_uri": "LNDHub Credentials URI",
           "scan_qr": "Import this wallet into Zeus or BlueWallet by scanning the QRCode."
         },
+        "mnemonic": {
+          "title": "Secret Key",
+          "description": "Your Account Secret Key allows you to use Alby to interact with protocols such as Nostr or Oridinals.",
+          "success": "Secret Key encrypted & saved successfully.",
+          "existing_nostr_key": "⚠️ This account already has a nostr private key set and will not be derived from this secret key. You can manage your nostr key from your account settings.",
+          "backup_warning": "⚠️ Backup your Secret Key! Not backing it up might result in permanently loosing access to your Nostr identity or purchased Oridinals.",
+          "generate": {
+            "title": "Generate your Secret Key"
+          },
+          "backup": {
+            "title": "Back up your Secret Key",
+            "confirm": "I’ve backed my account’s Secret Key in a private and secure place",
+            "error_confirm": "Please confirm that you have backed up your secret key.",
+            "save": "Save Secret Key",
+            "description1": "In addition to the Bitcoin Lightning Network, Alby allows you to generate keys and interact with other protocols such as:",
+            "description2": "Secret Key is a set of 12 words that will allow you to access your keys to those protocols on a new device or in case you loose access to your account:",
+            "protocols": {
+              "nostr": "Nostr protocol",
+              "ordinals": "Ordinals"
+            }
+          },
+          "inputs": {
+            "title": "Your Secret Key"
+          }
+        },
         "nostr": {
           "title": "Nostr",
           "hint": "is a simple and open protocol that aims to create censorship-resistant social networks. Nostr works with cryptographic keys. To publish something you sign it with your key and send it to multiple relays. You can use Alby to manage your Nostr key. Many Nostr applications will then allow you to simply use the key from the Alby extension.",

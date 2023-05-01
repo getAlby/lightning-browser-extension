@@ -341,21 +341,18 @@ function AccountDetail() {
           </div>
 
           <h2 className="text-2xl mt-12 font-bold dark:text-white">
-            {/*t("nostr.title")*/}Secret Key
+            {t("mnemonic.title")}
           </h2>
           {
             <p className="mb-6 text-gray-500 dark:text-neutral-500 text-sm">
-              {/*t("nostr.hint")*/}Your Account Secret Key allows you to use
-              Alby to interact with protocols such as Nostr or Oridinals.
+              {t("mnemonic.description")}
             </p>
           }
 
           <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 dark:bg-surface-02dp flex flex-col gap-4">
             {mnemonic && (
               <div className="rounded-md font-medium p-4 text-orange-700 bg-orange-50 dark:text-orange-400 dark:bg-orange-900">
-                {/*t("nostr.private_key.backup")*/}⚠️ Backup your Secret Key!
-                Not backing it up might result in permanently loosing access to
-                your Nostr identity or purchased Oridinals.
+                {t("mnemonic.backup_warning")}
               </div>
             )}
 

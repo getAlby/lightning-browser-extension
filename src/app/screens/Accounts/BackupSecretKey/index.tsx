@@ -22,6 +22,9 @@ function BackupSecretKey() {
   const [mnemonic, setMnemonic] = useState<string | undefined>();
   const account = useAccount();
   const { t: tCommon } = useTranslation("common");
+  const { t } = useTranslation("translation", {
+    keyPrefix: "accounts.account_view.mnemonic",
+  });
   const [publicKeyCopyLabel, setPublicKeyCopyLabel] = useState(
     tCommon("actions.copy_clipboard") as string
   );
@@ -64,18 +67,11 @@ function BackupSecretKey() {
     fetchData();
   }, [fetchData]);
 
-  /*const { t } = useTranslation("translation", {
-    keyPrefix: "accounts.account_view",
-  });*/
-
   async function backupSecretKey() {
     try {
       if (!hasConfirmedBackup) {
-        throw new Error(
-          "Please confirm that you have backed up your secret key."
-        );
+        throw new Error(t("backup.error_confirm"));
       }
-      // TODO: re-add
       if (!account || !id) {
         // type guard
         throw new Error("No account available");
@@ -85,9 +81,7 @@ function BackupSecretKey() {
       }
 
       await saveMnemonic(id, mnemonic);
-      toast.success(
-        /*t("nostr.private_key.success")*/ "Secret Key encrypted & saved successfully."
-      );
+      toast.success(t("success"));
       history.back();
     } catch (e) {
       if (e instanceof Error) toast.error(e.message);
@@ -103,25 +97,22 @@ function BackupSecretKey() {
       <Container>
         <div className="mt-12 shadow bg-white sm:rounded-md sm:overflow-hidden p-10 divide-black/10 dark:divide-white/10 dark:bg-surface-02dp flex flex-col gap-4">
           <h1 className="font-bold text-2xl">
-            {hasMnemonic
-              ? "Back up your Secret Key"
-              : "Generate your Secret Key"}
+            {hasMnemonic ? t("backup.title") : t("generate.title")}
           </h1>
-          <p className="text-gray-500">
-            In addition to Bitcoin Lightning Network, Alby allows you to
-            generate keys and interact with other protocols such as:
-          </p>
+          <p className="text-gray-500">{t("backup.description1")}</p>
           <div className="flex flex-col gap-4">
-            <ProtocolListItem icon={<NostrIcon />} title="Nostr protocol" />
-            <ProtocolListItem icon={<OrdinalsIcon />} title="Ordinals" />
+            <ProtocolListItem
+              icon={<NostrIcon />}
+              title={t("backup.protocols.nostr")}
+            />
+            <ProtocolListItem
+              icon={<OrdinalsIcon />}
+              title={t("backup.protocols.ordinals")}
+            />
             {/* <ProtocolListItem icon={<LiquidIcon />} title="Liquid" /> */}
           </div>
 
-          <p className="mb-8 text-gray-500">
-            Secret Key is a set of 12 words that will allow you to access your
-            keys to those protocols on a new device or in case you loose access
-            to your account:
-          </p>
+          <p className="mb-8 text-gray-500">{t("backup.description2")}</p>
           <MnemonicInputs mnemonic={mnemonic} disabled>
             <>
               {/* TODO: consider making CopyButton component */}
@@ -160,9 +151,7 @@ function BackupSecretKey() {
                     htmlFor="has_backed_up"
                     className="cursor-pointer ml-2 block text-sm text-gray-900 font-medium dark:text-white"
                   >
-                    {
-                      /*tCommon("actions.remember")*/ "I’ve backed my account’s Secret Key in a private and secure place"
-                    }
+                    {t("backup.confirm")}
                   </label>
                 </div>
               )}
@@ -170,26 +159,24 @@ function BackupSecretKey() {
           </MnemonicInputs>
           {!hasMnemonic && currentPrivateKey && (
             <div className="rounded-md font-medium p-4 text-orange-700 bg-orange-50 dark:text-orange-400 dark:bg-orange-900">
-              {/*t("nostr.private_key.backup")*/}
-              {
-                "⚠️ This account already has a nostr private key set and will not be derived from this secret key. You can manage your nostr key from your account settings."
-              }
+              {t("existing_nostr_key")}
             </div>
           )}
         </div>
         {!hasMnemonic && (
           <div className="flex justify-center mt-8 mb-16">
             <Button
-              label={/*tCommon("actions.save")*/ "Save Secret Key"}
+              label={t("backup.save")}
               primary
               onClick={backupSecretKey}
             />
           </div>
         )}
+        {/* TODO: remove - only for testing */}
         {debug && hasMnemonic && (
           <div className="flex justify-center mt-8 mb-16">
             <Button
-              label={/*tCommon("actions.save")*/ "Remove Secret Key"}
+              label={"Remove Secret Key"}
               primary
               onClick={async () => {
                 await msg.request("setMnemonic", {

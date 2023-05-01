@@ -6,7 +6,7 @@ import Container from "@components/Container";
 import Loading from "@components/Loading";
 import { FormEvent, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Button from "~/app/components/Button";
 import InputCopyButton from "~/app/components/InputCopyButton";
@@ -221,15 +221,28 @@ function NostrAdvancedSettings() {
               disabled
               endAdornment={<InputCopyButton value={nostrPublicKey} />}
             />
-            {nostrKeyOrigin !== "secret-key" && (
-              <div className="mt-4">
-                <Button
-                  outline
-                  label="Derive Nostr keys from your Secret Key"
-                  onClick={handleDeriveNostrKeyFromSecretKey}
-                />
-              </div>
-            )}
+            {nostrKeyOrigin !== "secret-key" &&
+              (mnemonic ? (
+                <div className="mt-4">
+                  <Button
+                    outline
+                    label="Derive Nostr keys from your Secret Key"
+                    onClick={handleDeriveNostrKeyFromSecretKey}
+                  />
+                </div>
+              ) : (
+                <p>
+                  You {"don't"} have a secret key yet.{" "}
+                  <Link
+                    to="../secret-key/backup"
+                    relative="path"
+                    className="underline"
+                  >
+                    Click here
+                  </Link>{" "}
+                  to create your secret key and derive your nostr keys.
+                </p>
+              ))}
           </div>
           <div className="flex justify-center mt-8 mb-16 gap-4">
             <Button label={tCommon("actions.cancel")} onClick={onCancel} />

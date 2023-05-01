@@ -1,4 +1,5 @@
 import { wordlist } from "@scure/bip39/wordlists/english";
+import { useTranslation } from "react-i18next";
 import Input from "~/app/components/form/Input";
 
 type MnemonicInputsProps = {
@@ -13,6 +14,10 @@ export default function MnemonicInputs({
   disabled,
   children,
 }: React.PropsWithChildren<MnemonicInputsProps>) {
+  const { t } = useTranslation("translation", {
+    keyPrefix: "accounts.account_view.mnemonic",
+  });
+
   const words = mnemonic?.split(" ") || [];
   while (words.length < 12) {
     words.push("");
@@ -20,7 +25,7 @@ export default function MnemonicInputs({
 
   return (
     <div className="border-[1px] border-gray-200 rounded-lg py-8 px-4 flex flex-col gap-8 items-center justify-center w-[520px] self-center">
-      <h3 className="font-semibold">{"Your Secret Key"}</h3>
+      <h3 className="font-semibold">{t("inputs.title")}</h3>
       <div className="flex flex-wrap gap-4 justify-center items-center">
         {[...new Array(12)].map((_, i) => (
           <div key={i} className="flex justify-center items-center">
