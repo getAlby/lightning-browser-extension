@@ -43,7 +43,6 @@ function Wallet() {
 
   const loadTransactions = useCallback(async () => {
     try {
-      // @Todo: add SWR caching? Check where to reset/mutate the cache?
       const { payments } = await api.getPayments();
       const _transactions: Transaction[] = await convertPaymentsToTransactions(
         payments
@@ -73,9 +72,7 @@ function Wallet() {
     try {
       result = await api.getInvoices({ isSettled: true });
     } catch (e) {
-      if (e instanceof Error) {
-        toast.error(e.message);
-      }
+      if (e instanceof Error) toast.error(`Error: ${e.message}`);
       setIsLoadingInvoices(false);
       return;
     }
@@ -107,7 +104,7 @@ function Wallet() {
         {t("title")}
       </h2>
 
-      <div className="flex mb-10 space-x-4">
+      <div className="flex mb-12 space-x-4">
         <Button
           fullWidth
           icon={<SendIcon className="h-6" />}
@@ -190,7 +187,7 @@ function Wallet() {
                   <TransactionsTable transactions={incomingTransactions} />
                 )}
                 {!hasInvoices && (
-                  <p className="text-gray-500 dark:text-neutral-400 text-center">
+                  <p className="text-gray-500 dark:text-neutral-400 text-center mt-6">
                     {t("no_incoming_transactions")}
                   </p>
                 )}
