@@ -638,12 +638,6 @@
           "label1": "Otrzymaj Bitcoin",
           "label2": "Kup Bitcoin"
         },
-        "pin": {
-          "title": "📌 Przypnij rozszerzenie Alby",
-          "description1": "<0>Aby mieć łatwy dostęp do Alby, kliknij na ikonę rozszerzeń</0><1/> <2>w prawym górnym rogu przeglądarki</2>",
-          "description2": "Na liście rozszerzeń, odszukaj Alby i kliknij ikonę pinezki aby przypiąć do paska narzędzi",
-          "description3": "To wszystko! Aby używać Alby po prostu kliknij w ikonę"
-        },
         "demo": {
           "title": "🕹️ Spróbuj demonstracyjnej wersji Alby",
           "description": "Odkryj wszystkie możliwości, jakie daje Alby na naszej stronie demonstracyjnej",

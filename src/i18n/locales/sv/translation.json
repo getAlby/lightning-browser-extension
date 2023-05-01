@@ -736,12 +736,6 @@
         "nodeManagement": "Nodhantering"
       },
       "tips": {
-        "pin": {
-          "title": "📌 Fäst din Alby-förlängning",
-          "description1": "<0>För att enkelt komma åt Alby, klicka på tilläggsikonen</0> <1/> <2>i det övre högra hörnet av din webbläsare</2>",
-          "description2": "I listan över tillägg letar du upp Alby och klickar på nålikonen för att fästa den i verktygsfältet",
-          "description3": "Det är allt! För att komma åt Alby, klicka bara på Alby-ikonen"
-        },
         "title": "Din Alby plånbok är redo",
         "description": "Några tips för att få igång dig'🐝",
         "top_up_wallet": {
