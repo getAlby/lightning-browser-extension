@@ -708,12 +708,6 @@
           "label1": "Přijmout Bitcoin",
           "label2": "Koupit Bitcoin"
         },
-        "pin": {
-          "title": "📌 Připnout váš doplněk Alby",
-          "description1": "<0>Pro jednoduchý přístup k Alby, klikněte na ikonu doplňku</0> <1/> <2>v pravém horním rohu vašeho prohlížeče</2>",
-          "description2": "V seznamu doplňků najděte Alby a klikněte na ikonu pro připnutí k vašemu panelu nástrojů",
-          "description3": "To je vše! Pro přístup k Alby pouze klikněte na ikonu Alby"
-        },
         "demo": {
           "description": "Objevte vše, co lze s Alby dělat, na naší demo stránce",
           "label1": "Vyzkoušet",

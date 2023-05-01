@@ -661,12 +661,6 @@
           "label1": "Receive Bitcoin",
           "label2": "Buy Bitcoin"
         },
-        "pin": {
-          "title": "📌 Pin your Alby extension",
-          "description1": "<0>To access Alby easily, click on extension icon</0> <1/> <2>in the top right corner of your browser</2>",
-          "description2": "In the list of extensions, find Alby and click pin icon to pin it to the toolbar",
-          "description3": "Thats it! To access Alby just click Alby icon"
-        },
         "demo": {
           "title": "🕹️ Try out Alby Demo",
           "description": "Discover all things you can do with Alby on our demo website",
