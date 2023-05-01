@@ -41,31 +41,35 @@ function Wallet() {
   const hasTransactions = !isLoadingTransactions && !!transactions?.length;
   const hasInvoices = !isLoadingInvoices && !!incomingTransactions?.length;
 
-  const loadTransactions = useCallback(async () => {
-    try {
-      const { payments } = await api.getPayments();
-      const _transactions: Transaction[] = await convertPaymentsToTransactions(
-        payments
-      );
+  // outgoing
+  const loadTransactions = useCallback(
+    async (accountId: string) => {
+      try {
+        const { payments } = await api.getPaymentsByAccount({ accountId });
+        const _transactions: Transaction[] =
+          await convertPaymentsToTransactions(payments);
 
-      for (const transaction of _transactions) {
-        transaction.totalAmountFiat = settings.showFiat
-          ? await getFormattedFiat(transaction.totalAmount)
-          : "";
+        for (const transaction of _transactions) {
+          transaction.totalAmountFiat = settings.showFiat
+            ? await getFormattedFiat(transaction.totalAmount)
+            : "";
+        }
+
+        setTransactions(_transactions);
+        setIsLoadingTransactions(false);
+      } catch (e) {
+        console.error(e);
+        if (e instanceof Error) toast.error(`Error: ${e.message}`);
       }
-
-      setTransactions(_transactions);
-      setIsLoadingTransactions(false);
-    } catch (e) {
-      console.error(e);
-      if (e instanceof Error) toast.error(`Error: ${e.message}`);
-    }
-  }, [settings, getFormattedFiat]);
+    },
+    [settings, getFormattedFiat]
+  );
 
   useEffect(() => {
-    loadTransactions();
+    if (account?.id) loadTransactions(account.id);
   }, [account?.id, balancesDecorated?.accountBalance, loadTransactions]);
 
+  // incoming
   const loadInvoices = useCallback(async () => {
     setIsLoadingInvoices(true);
     let result;
