@@ -25,7 +25,7 @@ const surfaceColor = "#121212";
 module.exports = {
   darkMode: "class",
   content: ["./static/views/**/*.html", "./src/app/**/*.{js,ts,jsx,tsx}"],
-  plugins: [require("@tailwindcss/forms"), require("@tailwindcss/line-clamp")],
+  plugins: [require("@tailwindcss/forms")],
   theme: {
     extend: {
       animation: {
