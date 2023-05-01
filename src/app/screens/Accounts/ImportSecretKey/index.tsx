@@ -24,11 +24,20 @@ function ImportSecretKey() {
   // TODO: useMnemonic hook
   const [hasFetchedData, setHasFetchedData] = useState(false);
   const [hasMnemonic, setHasMnemonic] = useState(false);
+  // TODO: useNostrPrivateKey hook
+  const [currentPrivateKey, setCurrentPrivateKey] = useState("");
   const { id } = useParams();
 
   const fetchData = useCallback(async () => {
     try {
       if (id) {
+        const priv = (await msg.request("nostr/getPrivateKey", {
+          id,
+        })) as string;
+        if (priv) {
+          setCurrentPrivateKey(priv);
+        }
+
         const accountMnemonic = (await msg.request("getMnemonic", {
           id,
         })) as string;
@@ -123,6 +132,14 @@ function ImportSecretKey() {
               />
             </>
           </MnemonicInputs>
+          {currentPrivateKey && (
+            <div className="rounded-md font-medium p-4 text-orange-700 bg-orange-50 dark:text-orange-400 dark:bg-orange-900">
+              {/*t("nostr.private_key.backup")*/}
+              {
+                "⚠️ This account already has a nostr private key set and will not be derived from this secret key. You can manage your nostr key from your account settings."
+              }
+            </div>
+          )}
         </div>
 
         <div className="flex justify-center mt-8 mb-16 gap-4">

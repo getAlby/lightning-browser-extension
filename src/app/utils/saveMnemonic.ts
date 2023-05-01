@@ -8,11 +8,6 @@ export async function saveMnemonic(accountId: string, mnemonic: string) {
   })) as string;
   const hasNostrPrivateKey = !!priv;
 
-  if (hasNostrPrivateKey) {
-    alert(
-      "This account already has a nostr private key set and will not be derived from this secret key. You can manage your nostr key from your account settings."
-    );
-  }
   await msg.request("setMnemonic", {
     id: accountId,
     mnemonic,
