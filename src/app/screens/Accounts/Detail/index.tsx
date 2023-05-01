@@ -26,10 +26,13 @@ import MenuDivider from "~/app/components/Menu/MenuDivider";
 import { useAccount } from "~/app/context/AccountContext";
 import { useAccounts } from "~/app/context/AccountsContext";
 import { useSettings } from "~/app/context/SettingsContext";
+import {
+  NostrKeyOrigin,
+  getNostrKeyOrigin,
+} from "~/app/utils/getNostrKeyOrigin";
 import api, { GetAccountRes } from "~/common/lib/api";
 import msg from "~/common/lib/msg";
-import nostrlib from "~/common/lib/nostr";
-import Nostr from "~/extension/background-script/nostr";
+import nostr from "~/common/lib/nostr";
 import type { Account } from "~/types";
 
 type AccountAction = Omit<Account, "connector" | "config" | "nostrPrivateKey">;
@@ -61,9 +64,8 @@ function AccountDetail() {
   const [mnemonic, setMnemonic] = useState("");
   const [currentPrivateKey, setCurrentPrivateKey] = useState("");
   const [nostrPublicKey, setNostrPublicKey] = useState("");
-  const [nostrKeyOrigin, setNostrKeyOrigin] = useState<
-    "derived" | "unknown" | "secret-key"
-  >("unknown");
+  const [nostrKeyOrigin, setNostrKeyOrigin] =
+    useState<NostrKeyOrigin>("unknown");
 
   const [exportLoading, setExportLoading] = useState(false);
   const [exportModalIsOpen, setExportModalIsOpen] = useState(false);
@@ -84,15 +86,16 @@ function AccountDetail() {
         if (priv) {
           setCurrentPrivateKey(priv);
         }
-        const keyOrigin = (await msg.request("nostr/getKeyOrigin", {
-          id,
-        })) as FixMe;
-        setNostrKeyOrigin(keyOrigin);
+
         const accountMnemonic = (await msg.request("getMnemonic", {
           id,
         })) as string;
         if (accountMnemonic) {
           setMnemonic(accountMnemonic);
+        }
+        if (priv) {
+          const keyOrigin = await getNostrKeyOrigin(priv, accountMnemonic);
+          setNostrKeyOrigin(keyOrigin);
         }
       }
     } catch (e) {
@@ -103,14 +106,6 @@ function AccountDetail() {
 
   function closeExportModal() {
     setExportModalIsOpen(false);
-  }
-
-  // TODO: make utility function
-  function generatePublicKey(priv: string) {
-    // FIXME: this is using code from background script
-    const nostr = new Nostr(priv);
-    const pubkeyHex = nostr.getPublicKey();
-    return nostrlib.hexToNip19(pubkeyHex, "npub");
   }
 
   async function updateAccountName({ id, name }: AccountAction) {
@@ -173,7 +168,7 @@ function AccountDetail() {
   useEffect(() => {
     try {
       setNostrPublicKey(
-        currentPrivateKey ? generatePublicKey(currentPrivateKey) : ""
+        currentPrivateKey ? nostr.generatePublicKey(currentPrivateKey) : ""
       );
     } catch (e) {
       if (e instanceof Error)
@@ -416,16 +411,18 @@ function AccountDetail() {
             </div>
             <MenuDivider />
             <div className="mb-4 flex justify-between items-end">
-              <div className="w-9/12 flex items-center gap-2">
+              <div className="w-7/12 flex items-center gap-2">
                 <TextField
                   id="nostrPublicKey"
                   label={t("nostr.public_key.label")}
                   type="text"
                   value={nostrPublicKey}
                   disabled
-                  endAdornment={<InputCopyButton value={nostrPublicKey} />}
+                  endAdornment={
+                    nostrPublicKey && <InputCopyButton value={nostrPublicKey} />
+                  }
                 />
-                {nostrKeyOrigin !== "secret-key" && (
+                {nostrPublicKey && nostrKeyOrigin !== "secret-key" && (
                   <Badge
                     label="imported"
                     color="green-bitcoin"

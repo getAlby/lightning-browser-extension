@@ -1,9 +1,10 @@
-import { toast } from "react-toastify";
+import { saveNostrPrivateKey } from "~/app/utils/saveNostrPrivateKey";
+import { deriveNostrPrivateKey } from "~/common/lib/mnemonic";
 import msg from "~/common/lib/msg";
 
-export async function saveMnemonic(id: string, mnemonic: string) {
+export async function saveMnemonic(accountId: string, mnemonic: string) {
   const priv = (await msg.request("nostr/getPrivateKey", {
-    id,
+    id: accountId,
   })) as string;
   const hasNostrPrivateKey = !!priv;
 
@@ -13,14 +14,12 @@ export async function saveMnemonic(id: string, mnemonic: string) {
     );
   }
   await msg.request("setMnemonic", {
-    id,
+    id: accountId,
     mnemonic,
   });
 
   if (!hasNostrPrivateKey) {
-    alert("TODO derive nostr key");
+    const nostrPrivateKey = await deriveNostrPrivateKey(mnemonic);
+    await saveNostrPrivateKey(accountId, nostrPrivateKey);
   }
-
-  toast.success(/*t("nostr.private_key.success")*/ "Secret Key saved");
-  history.back();
 }

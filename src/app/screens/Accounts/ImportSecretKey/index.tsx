@@ -79,6 +79,10 @@ function ImportSecretKey() {
       }
 
       await saveMnemonic(id, mnemonic);
+      toast.success(
+        /*t("nostr.private_key.success")*/ "Secret Key encrypted & saved successfully."
+      );
+      history.back();
     } catch (e) {
       if (e instanceof Error) toast.error(e.message);
     }

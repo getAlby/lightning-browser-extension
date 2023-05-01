@@ -32,7 +32,7 @@ export default function Input({
 }: React.InputHTMLAttributes<HTMLInputElement> & Props) {
   const inputEl = useRef<HTMLInputElement>(null);
   const outerStyles =
-    "rounded-md border border-gray-300 dark:border-neutral-800 transition duration-300";
+    "rounded-md border border-gray-300 dark:border-neutral-800 transition duration-300 flex-1";
 
   const inputNode = (
     <input

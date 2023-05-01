@@ -12,10 +12,14 @@ import Button from "~/app/components/Button";
 import InputCopyButton from "~/app/components/InputCopyButton";
 import TextField from "~/app/components/form/TextField";
 import { useAccount } from "~/app/context/AccountContext";
-import { deriveNostrKeyFromSecretKey } from "~/app/utils/deriveNostrKeyFromSecretKey";
+import {
+  NostrKeyOrigin,
+  getNostrKeyOrigin,
+} from "~/app/utils/getNostrKeyOrigin";
+import { saveNostrPrivateKey } from "~/app/utils/saveNostrPrivateKey";
+import { deriveNostrPrivateKey } from "~/common/lib/mnemonic";
 import msg from "~/common/lib/msg";
-import nostrlib from "~/common/lib/nostr";
-import Nostr from "~/extension/background-script/nostr";
+import { default as nostr, default as nostrlib } from "~/common/lib/nostr";
 
 // import { GetAccountRes } from "~/common/lib/api";
 
@@ -33,9 +37,8 @@ function NostrAdvancedSettings() {
   const [nostrPrivateKey, setNostrPrivateKey] = useState("");
   const [nostrPrivateKeyVisible, setNostrPrivateKeyVisible] = useState(false);
   const [nostrPublicKey, setNostrPublicKey] = useState("");
-  const [nostrKeyOrigin, setNostrKeyOrigin] = useState<
-    "derived" | "unknown" | "secret-key"
-  >("unknown");
+  const [nostrKeyOrigin, setNostrKeyOrigin] =
+    useState<NostrKeyOrigin>("unknown");
   const { id } = useParams();
 
   const fetchData = useCallback(async () => {
@@ -47,16 +50,17 @@ function NostrAdvancedSettings() {
         if (priv) {
           setCurrentPrivateKey(priv);
         }
-        const keyOrigin = (await msg.request("nostr/getKeyOrigin", {
-          id,
-        })) as FixMe;
-        setNostrKeyOrigin(keyOrigin);
 
         const accountMnemonic = (await msg.request("getMnemonic", {
           id,
         })) as string;
         if (accountMnemonic) {
           setMnemonic(accountMnemonic);
+        }
+
+        if (priv) {
+          const keyOrigin = await getNostrKeyOrigin(priv, accountMnemonic);
+          setNostrKeyOrigin(keyOrigin);
         }
       }
     } catch (e) {
@@ -69,18 +73,10 @@ function NostrAdvancedSettings() {
     fetchData();
   }, [fetchData]);
 
-  // TODO: make utility function
-  function generatePublicKey(priv: string) {
-    // FIXME: this is using code from background script
-    const nostr = new Nostr(priv);
-    const pubkeyHex = nostr.getPublicKey();
-    return nostrlib.hexToNip19(pubkeyHex, "npub");
-  }
-
   useEffect(() => {
     try {
       setNostrPublicKey(
-        currentPrivateKey ? generatePublicKey(currentPrivateKey) : ""
+        currentPrivateKey ? nostr.generatePublicKey(currentPrivateKey) : ""
       );
       setNostrPrivateKey(
         currentPrivateKey ? nostrlib.hexToNip19(currentPrivateKey, "nsec") : ""
@@ -101,20 +97,25 @@ function NostrAdvancedSettings() {
     history.back();
   }
 
-  async function onDeriveNostrKeyFromSecretKey() {
-    // TODO: if no mnemonic, go to backup secret key page
+  async function handleDeriveNostrKeyFromSecretKey() {
+    if (!id) {
+      throw new Error("No id set");
+    }
+
     if (!mnemonic) {
       toast.error("You haven't setup your secret key yet");
       return;
     }
 
-    const nostrPrivateKey = await deriveNostrKeyFromSecretKey(mnemonic);
-    saveNostrPrivateKey(nostrPrivateKey);
+    const nostrPrivateKey = await deriveNostrPrivateKey(mnemonic);
+
+    await handleSaveNostrPrivateKey(nostrPrivateKey);
   }
 
-  async function saveNostrPrivateKey(nostrPrivateKey: string) {
-    nostrPrivateKey = nostrlib.normalizeToHex(nostrPrivateKey);
-
+  async function handleSaveNostrPrivateKey(nostrPrivateKey: string) {
+    if (!id) {
+      throw new Error("No id set");
+    }
     if (nostrPrivateKey === currentPrivateKey) {
       toast.error("Your private key hasn't changed");
       return;
@@ -130,31 +131,21 @@ function NostrAdvancedSettings() {
     }
 
     try {
-      if (!account) {
-        // type guard
-        throw new Error("No account available");
-      }
-
-      if (nostrPrivateKey) {
-        // Validate the private key before saving
-        generatePublicKey(nostrPrivateKey);
-        nostrlib.hexToNip19(nostrPrivateKey, "nsec");
-
-        await msg.request("nostr/setPrivateKey", {
-          id,
-          privateKey: nostrPrivateKey,
-        });
-        toast.success(t("nostr.private_key.success"));
-      } else {
-        await msg.request("nostr/removePrivateKey", {
-          id,
-        });
-        toast.success(t("nostr.private_key.successfully_removed"));
-      }
-      history.back();
+      saveNostrPrivateKey(id, nostrPrivateKey);
+      toast.success(
+        t(
+          nostrPrivateKey
+            ? "nostr.private_key.success"
+            : "nostr.private_key.successfully_removed"
+        )
+      );
     } catch (e) {
-      if (e instanceof Error) toast.error(e.message);
+      console.error(e);
+      if (e instanceof Error) {
+        toast.error(e.message);
+      }
     }
+    history.back();
   }
 
   return !account ? (
@@ -166,7 +157,7 @@ function NostrAdvancedSettings() {
       <form
         onSubmit={(e: FormEvent) => {
           e.preventDefault();
-          saveNostrPrivateKey(nostrPrivateKey);
+          handleSaveNostrPrivateKey(nostrPrivateKey);
         }}
       >
         <Container maxWidth="sm">
@@ -235,7 +226,7 @@ function NostrAdvancedSettings() {
                 <Button
                   outline
                   label="Derive Nostr keys from your Secret Key"
-                  onClick={onDeriveNostrKeyFromSecretKey}
+                  onClick={handleDeriveNostrKeyFromSecretKey}
                 />
               </div>
             )}

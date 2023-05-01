@@ -430,14 +430,6 @@ export interface MessagePublicKeyGet extends MessageDefault {
 }
 
 // TODO: add Nostr Prefix
-export interface MessageKeyOrigin extends MessageDefault {
-  args?: {
-    id?: Account["id"];
-  };
-  action: "getKeyOrigin";
-}
-
-// TODO: add Nostr Prefix
 export interface MessagePrivateKeyGet extends MessageDefault {
   args?: {
     id?: Account["id"];
