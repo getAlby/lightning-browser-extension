@@ -17,7 +17,7 @@ export default function Hyperlink({
   return (
     <a
       className={classNames(
-        "cursor-pointer text-blue-700 hover:text-blue-500",
+        "cursor-pointer text-blue-600 hover:text-blue-700",
         className ?? ""
       )}
       href={href}
