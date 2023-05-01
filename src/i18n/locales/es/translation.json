@@ -680,12 +680,6 @@
         },
         "title": "Tu billetera Alby está lista",
         "description": "Algunos consejos para que empieces a zumbar 🐝",
-        "pin": {
-          "description2": "En la lista de extensiones, busque Alby y haga clic en el ícono de la chincheta para fijarlo a la barra de herramientas",
-          "description1": "<0>Para acceder fácilmente a Alby, haga clic en el icono de la extensión</0> <1/> <2>en la esquina superior derecha de su navegador</2>",
-          "title": "📌 Fija tu extensión Alby",
-          "description3": "¡Eso es todo! Para acceder a Alby simplemente haga clic en el icono de Alby"
-        },
         "demo": {
           "label1": "Inténtalo",
           "title": "🕹️ Prueba la versión Demo de Alby",

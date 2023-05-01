@@ -2,7 +2,7 @@ import dayjs from "dayjs";
 import i18n from "i18next";
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
-import { getTheme } from "~/app/utils";
+import { setTheme } from "~/app/utils";
 import {
   ACCOUNT_CURRENCIES,
   CURRENCIES,
@@ -144,7 +144,7 @@ export const SettingsProvider = ({
 
   // update theme on every change
   useEffect(() => {
-    getTheme(); // Get the active theme and apply corresponding Tailwind classes to the document
+    setTheme(); // Get the active theme and apply corresponding Tailwind classes to the document
   }, [settings.theme]);
 
   const value = {
