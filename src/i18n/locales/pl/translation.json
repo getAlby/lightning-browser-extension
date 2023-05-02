@@ -821,7 +821,7 @@
         "title": "Włącz logowanie na stronie",
         "subtitle": "Automatycznie loguj się bez potwierdzenia gdy strona o to poprosi."
       },
-      "edit_preferences": {
+      "edit_allowance": {
         "title": "Edytuj preferencje",
         "screen_reader": "Opcje limitu"
       },
