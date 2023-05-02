@@ -5,20 +5,17 @@ import {
 import BalanceBox from "@components/BalanceBox";
 import Button from "@components/Button";
 import Container from "@components/Container";
+import Hyperlink from "@components/Hyperlink";
 import Loading from "@components/Loading";
 import TransactionsTable from "@components/TransactionsTable";
 import { Tab } from "@headlessui/react";
-import dayjs from "dayjs";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import { useAccount } from "~/app/context/AccountContext";
-import { useSettings } from "~/app/context/SettingsContext";
+import { useInvoices } from "~/app/hooks/useInvoices";
+import { useTransactions } from "~/app/hooks/useTransactions";
 import { classNames } from "~/app/utils";
-import { convertPaymentsToTransactions } from "~/app/utils/payments";
-import api from "~/common/lib/api";
-import { Transaction } from "~/types";
 
 function Wallet() {
   const { t } = useTranslation("translation", { keyPrefix: "wallet" });
@@ -27,87 +24,34 @@ function Wallet() {
 
   const navigate = useNavigate();
 
-  const { settings, getFormattedFiat } = useSettings();
   const { account, balancesDecorated } = useAccount();
 
-  const [isLoadingTransactions, setIsLoadingTransactions] = useState(true);
-  const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const { transactions, isLoadingTransactions, loadTransactions } =
+    useTransactions();
 
-  const [isLoadingInvoices, setIsLoadingInvoices] = useState(false);
-  const [incomingTransactions, setIncomingTransactions] = useState<
-    Transaction[] | null
-  >(null);
+  const { isLoadingInvoices, incomingTransactions, loadInvoices } =
+    useInvoices();
 
   const hasTransactions = !isLoadingTransactions && !!transactions?.length;
   const hasInvoices = !isLoadingInvoices && !!incomingTransactions?.length;
 
-  // outgoing
-  const loadTransactions = useCallback(
-    async (accountId: string) => {
-      try {
-        const { payments } = await api.getPaymentsByAccount({ accountId });
-        const _transactions: Transaction[] =
-          await convertPaymentsToTransactions(payments);
-
-        for (const transaction of _transactions) {
-          transaction.totalAmountFiat = settings.showFiat
-            ? await getFormattedFiat(transaction.totalAmount)
-            : "";
-        }
-
-        setTransactions(_transactions);
-        setIsLoadingTransactions(false);
-      } catch (e) {
-        console.error(e);
-        if (e instanceof Error) toast.error(`Error: ${e.message}`);
-      }
-    },
-    [settings, getFormattedFiat]
-  );
-
   useEffect(() => {
-    if (account?.id) loadTransactions(account.id);
+    if (account?.id) loadTransactions(account.id, 5);
   }, [account?.id, balancesDecorated?.accountBalance, loadTransactions]);
 
-  // incoming
-  const loadInvoices = useCallback(async () => {
-    setIsLoadingInvoices(true);
-    let result;
-    try {
-      result = await api.getInvoices({ isSettled: true });
-    } catch (e) {
-      if (e instanceof Error) toast.error(`Error: ${e.message}`);
-      setIsLoadingInvoices(false);
-      return;
-    }
-
-    const invoices: Transaction[] = result.invoices.map((invoice) => ({
-      ...invoice,
-      title: invoice.memo,
-      description: invoice.memo,
-      date: dayjs(invoice.settleDate).fromNow(),
-    }));
-
-    for (const invoice of invoices) {
-      invoice.totalAmountFiat = settings.showFiat
-        ? await getFormattedFiat(invoice.totalAmount)
-        : "";
-    }
-
-    setIncomingTransactions(invoices);
-    setIsLoadingInvoices(false);
-  }, [getFormattedFiat, settings.showFiat]);
-
   useEffect(() => {
-    loadInvoices();
+    loadInvoices(5);
   }, [account?.id, balancesDecorated?.accountBalance, loadInvoices]);
 
   return (
     <Container>
-      <h2 className="mt-12 mb-6 text-2xl font-bold dark:text-white">
+      <h2 className="mt-12 mb-2 text-2xl font-bold dark:text-white">
         {t("title")}
       </h2>
 
+      <div className="mb-2">
+        <BalanceBox className="h-28 grow"></BalanceBox>
+      </div>
       <div className="flex mb-12 space-x-4">
         <Button
           fullWidth
@@ -119,8 +63,6 @@ function Wallet() {
             navigate("/send");
           }}
         />
-
-        <BalanceBox className="h-28 grow"></BalanceBox>
 
         <Button
           fullWidth
@@ -145,7 +87,7 @@ function Wallet() {
       )}
 
       {!isLoadingTransactions && (
-        <div>
+        <>
           <Tab.Group>
             <Tab.List className="mb-2">
               {[
@@ -173,7 +115,18 @@ function Wallet() {
             <Tab.Panels>
               <Tab.Panel>
                 {hasTransactions && (
-                  <TransactionsTable transactions={transactions} />
+                  <>
+                    <TransactionsTable transactions={transactions} />
+                    <div className="mt-8 text-center">
+                      <Hyperlink
+                        onClick={() => {
+                          navigate("/transactions/outgoing");
+                        }}
+                      >
+                        {t("all_transactions_link")}
+                      </Hyperlink>
+                    </div>
+                  </>
                 )}
                 {!hasTransactions && (
                   <p className="text-gray-500 dark:text-neutral-400 text-center mt-6">
@@ -188,7 +141,18 @@ function Wallet() {
                   </div>
                 )}
                 {hasInvoices && (
-                  <TransactionsTable transactions={incomingTransactions} />
+                  <>
+                    <TransactionsTable transactions={incomingTransactions} />
+                    <div className="mt-8 text-center">
+                      <Hyperlink
+                        onClick={() => {
+                          navigate("/transactions/incoming");
+                        }}
+                      >
+                        {t("all_transactions_link")}
+                      </Hyperlink>
+                    </div>
+                  </>
                 )}
                 {!hasInvoices && (
                   <p className="text-gray-500 dark:text-neutral-400 text-center mt-6">
@@ -198,7 +162,7 @@ function Wallet() {
               </Tab.Panel>
             </Tab.Panels>
           </Tab.Group>
-        </div>
+        </>
       )}
     </Container>
   );

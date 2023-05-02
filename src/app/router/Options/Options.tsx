@@ -14,6 +14,7 @@ import PublisherDetail from "@screens/Publishers/Detail";
 import Receive from "@screens/Receive";
 import Send from "@screens/Send";
 import Settings from "@screens/Settings";
+import Transactions from "@screens/Transactions";
 import Unlock from "@screens/Unlock";
 import Wallet from "@screens/Wallet";
 import { useTranslation } from "react-i18next";
@@ -56,6 +57,16 @@ function Options() {
             <Route path="keysend" element={<Keysend />} />
             <Route path="receive" element={<Receive />} />
             <Route path="wallet" element={<Wallet />} />
+            <Route path="transactions">
+              <Route
+                path="outgoing"
+                element={<Transactions type="outgoing" />}
+              />
+              <Route
+                path="incoming"
+                element={<Transactions type="incoming" />}
+              />
+            </Route>
             <Route path="lnurlPay" element={<LNURLPay />} />
             <Route path="lnurlChannel" element={<LNURLChannel />} />
             <Route path="lnurlWithdraw" element={<LNURLWithdraw />} />

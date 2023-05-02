@@ -765,14 +765,18 @@
     },
     "transactions": {
       "title": "Transactions",
-      "description": "Outgoing transactions across all of your accounts",
+      "description": {
+        "outgoing": "Outgoing transactions for selected account",
+        "incoming": "Incoming transactions for selected account"
+      },
       "list_empty": "No transactions available yet."
     },
     "wallet": {
       "title": "Wallet",
       "recent_transactions": "Recent transactions",
       "no_outgoing_transactions": "No outgoing transactions for this account yet.",
-      "no_incoming_transactions": "No incoming transactions for this account yet."
+      "no_incoming_transactions": "No incoming transactions for this account yet.",
+      "all_transactions_link": "See all transactions"
     }
   },
   "common": {
