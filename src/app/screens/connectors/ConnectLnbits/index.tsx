@@ -109,6 +109,7 @@ export default function ConnectLnbits() {
           type="text"
           required
           onChange={handleChange}
+          autoFocus={true}
         />
       </div>
       <div className="mb-6">

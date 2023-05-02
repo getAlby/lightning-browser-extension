@@ -1,8 +1,10 @@
+import PinExtension from "@screens/Onboard/PinExtension";
 import SetPassword from "@screens/Onboard/SetPassword";
 import TestConnection from "@screens/Onboard/TestConnection";
 import ChooseConnector from "@screens/connectors/ChooseConnector";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { RouteObject } from "react-router";
 import { HashRouter as Router, useRoutes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Container from "~/app/components/Container";
@@ -21,16 +23,14 @@ function getRoutes(
     title: string;
     logo: string;
   }[]
-) {
+): RouteObject[] {
   return [
     {
       path: "/",
       element: <SetPassword />,
-      name: i18n.t("translation:welcome.nav.password"),
     },
     {
       path: "/choose-path",
-      name: i18n.t("translation:welcome.nav.connect"),
       children: [
         {
           index: true,
@@ -71,7 +71,10 @@ function getRoutes(
     {
       path: "/test-connection",
       element: <TestConnection />,
-      name: i18n.t("translation:welcome.nav.done"),
+    },
+    {
+      path: "/pin-extension",
+      element: <PinExtension />,
     },
   ];
 }
@@ -106,7 +109,7 @@ function App() {
   return (
     <div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center font-serif font-medium text-2xl my-10 dark:text-white">
+        <div className="text-center font-serif font-medium text-2xl my-14 dark:text-white">
           <p>
             {t("welcome.title")}
             <img

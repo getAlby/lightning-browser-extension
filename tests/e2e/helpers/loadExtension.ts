@@ -27,23 +27,17 @@ export const loadExtension = async () => {
 
   // trick to bring the new welcome page to the front
   await delay(1000);
+
   const page = await browser.newPage();
   await page.setViewport({ width: 1366, height: 768 });
 
-  // get extensionId
-  // https://github.com/microsoft/playwright/issues/5593#issuecomment-949813218
-  await page.goto("chrome://inspect/#extensions");
-  // https://techoverflow.net/2019/01/26/puppeteer-get-text-content-inner-html-of-an-element/
-  // TODO: check if just `page.$('...') will work because it should:
-  // https://puppeteer.github.io/puppeteer/docs/puppeteer.elementhandle
-  const url = await page.evaluate(
-    () =>
-      (
-        document.querySelector(
-          '#extensions-list div[class="url"]'
-        ) as HTMLElement
-      ).innerText
+  const targets = await browser.targets();
+  const albyExtensionServiceWorkerTarget = targets.find(
+    (target) => target.url().indexOf("chrome-extension") > -1
   );
+  if (!albyExtensionServiceWorkerTarget) return;
+
+  const url = albyExtensionServiceWorkerTarget.url();
   const [, , extensionId] = url.split("/");
 
   const extensionOptionHtml = "welcome.html";

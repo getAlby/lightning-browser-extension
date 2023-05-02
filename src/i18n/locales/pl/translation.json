@@ -2,12 +2,6 @@
   "translation": {
     "welcome": {
       "title": "Witaj w Alby",
-      "nav": {
-        "welcome": "Powitanie",
-        "password": "Twoje hasło",
-        "connect": "Twoje konto Lightning",
-        "done": "Koniec"
-      },
       "set_password": {
         "title": "Ustaw hasło blokady",
         "description": "To hasło zabezpiecza Twój portfel i umożliwia dostęp do rozszerzenia przeglądarki. Nie można go zresetować i jest odrębne od hasła do Twojego konta Alby.",
@@ -65,7 +59,7 @@
             "mismatched_password": "Hasła się nie zgadzają."
           }
         },
-        "forgot_password": "Zapomniałeś hasło?",
+        "forgot_password": "Nie pamiętasz hasła?",
         "title": "Twoje konto Alby",
         "create_account": "Utwórz nowe konto Alby aby wysyłać i otrzymywać płatności w bitcoinie.",
         "login_account": "Zaloguj się aby połączyć swoje konto Alby.",
@@ -228,7 +222,7 @@
         "title": "Start9",
         "page": {
           "title": "Podłącz do węzła <0>Embassy</0>",
-          "instructions": "<0>Uwaga:</0>Obecnie wspieramy tylko LND, ale zamierzamy dodać obsługę c-lightning w przyszłości!<1/>Na pulpicie twojego Embassy kliknij na usługę <0>lightning network Daemon</0>.<1/>Wybierz zakładkę <0>Properties</0>.<1/>Następnie skopiuj <0>LND Connect REST URL.</0>"
+          "instructions": "<0>Uwaga:</0>Obecnie wspieramy tylko LND, ale zamierzamy dodać obsługę c-lightning w przyszłości!<1/>Na pulpicie twojego Embassy kliknij na usługę <0>Lightning Network Daemon</0>.<1/>Wybierz zakładkę <0>Properties</0>.<1/>Następnie skopiuj <0>LND Connect REST URL.</0>"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -285,15 +279,8 @@
       "kollider": {
         "title": "Kollider",
         "description": "Zaloguj się do swojego konta Kollider",
-        "page": {
-          "title": "Podłącz do konta Kollider",
-          "description": "Nie masz jeszcze konta? <0>Zarejestruj się</0> teraz!"
-        },
         "username": {
           "label": "Wprowadź nazwę użytkownika Kollider"
-        },
-        "password": {
-          "label": "Wprowadź swoje hasło Kollider"
         },
         "currency": {
           "label": "Wybierz walutę swojego konta"
@@ -476,11 +463,11 @@
         "hint": "jest generycznym protokołem uwierzytelniania. Poświadcza tożsamość użytkownika za pomocą podpisów cyfrowych. Protokół nie wyamga żadnych danych identyfikujących takich jak hasła, emaile, nazwy użytkownika, itp. Za pomocą Alby możesz używać swoich kont Lightning aby bezpiecznie logować się na stronach internetowych. Aby zapewnić kompatybilność z innymi portfelami musieliśmy zrobić kilka modyfikacji, które możesz skonfigurować tutaj. <0>Najlepiej gdy te opcje są WYŁĄCZONE.</0> Używaj ich tylko gdy masz stare konta.",
         "legacy_lnurl_auth_202207": {
           "title": "Stary (Legacy) LNURL-Auth",
-          "subtitle": "Generowanie kluczy dla LNURL-auth zmieniło się (w lipcu 2022 r.) Alby nie było kompatybilne z innymi implementacjami. To się zmieniło, ale teraz inne klucze logowania są używane. Jeśli używałeś LNURL-auth do logowanie wcześniej możesz nadal używać starej metody. Ta opcja później będzie usunięta, więc pamiętaj by przejść na nowy login."
+          "subtitle": "Generowanie kluczy dla LNURL-auth zmieniło się (w lipcu 2022 r.) Alby nie było kompatybilne z innymi implementacjami. To się zmieniło, ale teraz używane są inne klucze logowania. Jeśli używano wcześniej LNURL-auth do logowania, możesz nadal używać starej metody. Ta opcja później będzie usunięta, więc pamiętaj by przejść na nowy login."
         },
         "legacy_lnurl_auth": {
           "title": "Stare podpisywanie dla LNDhub i LNbits",
-          "subtitle": "Podpisywanie wiadomości i logowanie z kontami LNDhub (np. BlueWallet) i LNbits zmieniło się (marzec 2022 r.) Jeśli logowałeś się z tymi kontami możesz nadal włączyć stary sposób podpisywania. Ta opcja później będzie usunięta, więc pamiętaj by przejść na nowy login."
+          "subtitle": "Podpisywanie wiadomości i logowanie z kontami LNDhub (np. BlueWallet) i LNbits zmieniło się (w marcu 2022 r.) Jeśli logowano się z tymi kontami możesz nadal włączyć stary sposób podpisywania. Ta opcja później będzie usunięta, więc pamiętaj by przejść na nowy login."
         }
       },
       "camera_access": {
@@ -636,7 +623,7 @@
       "list": {
         "trading": "Handel",
         "gaming": "Gry",
-        "entertaiment": "Rozrywka",
+        "entertainment": "Rozrywka",
         "shopping": "Zakupy",
         "miscellaneous": "Różne",
         "showcases": "Prezentowane",
@@ -650,12 +637,6 @@
           "description": "Stwórz fakturę Lightning, wyślij sobie trochę bitcoinów i zacznij korzystać z Alby w ekosystemie Lightning",
           "label1": "Otrzymaj Bitcoin",
           "label2": "Kup Bitcoin"
-        },
-        "pin": {
-          "title": "📌 Przypnij rozszerzenie Alby",
-          "description1": "<0>Aby mieć łatwy dostęp do Alby, kliknij na ikonę rozszerzeń</0><1/> <2>w prawym górnym rogu przeglądarki</2>",
-          "description2": "Na liście rozszerzeń, odszukaj Alby i kliknij ikonę pinezki aby przypiąć do paska narzędzi",
-          "description3": "To wszystko! Aby używać Alby po prostu kliknij w ikonę"
         },
         "demo": {
           "title": "🕹️ Spróbuj demonstracyjnej wersji Alby",
@@ -780,7 +761,7 @@
     "settings": "Ustawienia",
     "accounts": "Konta",
     "discover": "Odkrywaj",
-    "websites": "Strony",
+    "connected_sites": "",
     "sats_one": "sat",
     "sats_other": "sats",
     "loading": "ładowanie",
@@ -841,7 +822,7 @@
         "subtitle": "Automatycznie loguj się bez potwierdzenia gdy strona o to poprosi."
       },
       "edit_allowance": {
-        "title": "Edytuj limit",
+        "title": "Edytuj preferencje",
         "screen_reader": "Opcje limitu"
       },
       "edit_permissions": "Edytuj uprawnienia"
@@ -889,7 +870,7 @@
         "visit_guides": "Aby uzyskać więcej pomocy zobacz nasze przewodniki"
       },
       "login_failed": {
-        "password_reset": "Zapomniałeś hasło? Kliknij tutaj"
+        "password_reset": "Nie pamiętasz hasła? Kliknij tutaj"
       },
       "errors": {
         "invalid_credentials": "Hasło niepoprawne. Sprawdź swoje hasło i adres email i spróbuj ponownie."

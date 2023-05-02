@@ -1,7 +1,12 @@
-import { CaretLeftIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
+import {
+  CaretDownIcon,
+  CaretLeftIcon,
+  CaretUpIcon,
+} from "@bitcoin-design/bitcoin-icons-react/filled";
 import Button from "@components/Button";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
+import Hyperlink from "@components/Hyperlink";
 import PublisherCard from "@components/PublisherCard";
 import ResultCard from "@components/ResultCard";
 import SatButtons from "@components/SatButtons";
@@ -24,9 +29,9 @@ import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
 import type {
   LNURLError,
+  LNURLPayServiceResponse,
   LNURLPaymentInfo,
   LNURLPaymentSuccessAction,
-  LNURLPayServiceResponse,
   PaymentResponse,
 } from "~/types";
 
@@ -62,6 +67,7 @@ function LNURLPay() {
       ""
   );
 
+  const [showMoreFields, setShowMoreFields] = useState(false);
   const [fiatValue, setFiatValue] = useState("");
   const [comment, setComment] = useState("");
   const [userName, setUserName] = useState("");
@@ -350,6 +356,26 @@ function LNURLPay() {
     confirm();
   }
 
+  function toggleShowMoreFields() {
+    setShowMoreFields(!showMoreFields);
+  }
+
+  function showCommentField() {
+    return (
+      details &&
+      typeof details.commentAllowed === "number" &&
+      details.commentAllowed > 0
+    );
+  }
+
+  function showNameField() {
+    return !!details?.payerData?.name;
+  }
+
+  function showEmailField() {
+    return !!details?.payerData?.email;
+  }
+
   return (
     <>
       <div className="flex flex-col grow overflow-hidden">
@@ -383,92 +409,109 @@ function LNURLPay() {
                 />
                 <form onSubmit={handleSubmit}>
                   <fieldset disabled={loadingConfirm}>
-                    <div className="my-4">
-                      <dl className="overflow-hidden">
-                        <>
-                          {formattedMetadata(details.metadata).map(
-                            ([dt, dd], i) => (
-                              <Fragment key={`element-${i}`}>
-                                <Dt>{dt}</Dt>
-                                <Dd>{dd}</Dd>
-                              </Fragment>
-                            )
-                          )}
-                          {details.minSendable === details.maxSendable && (
-                            <>
-                              <Dt>{t("amount.label")}</Dt>
-                              <Dd>
-                                {getFormattedSats(
-                                  Math.floor(+details.minSendable / 1000)
-                                )}
-                              </Dd>
-                            </>
-                          )}
-                        </>
-                      </dl>
-                      {details &&
-                        details.minSendable !== details.maxSendable && (
-                          <div>
-                            <DualCurrencyField
-                              autoFocus
-                              id="amount"
-                              label={t("amount.label")}
-                              min={Math.floor(+details.minSendable / 1000)}
-                              max={Math.floor(+details.maxSendable / 1000)}
-                              value={valueSat}
-                              onChange={(e) => setValueSat(e.target.value)}
-                              fiatValue={fiatValue}
-                            />
-                            <SatButtons
-                              min={Math.floor(+details.minSendable / 1000)}
-                              max={Math.floor(+details.maxSendable / 1000)}
-                              onClick={setValueSat}
-                              disabled={loadingConfirm}
-                            />
-                          </div>
+                    <dl className="mt-4 overflow-hidden">
+                      <>
+                        {formattedMetadata(details.metadata).map(
+                          ([dt, dd], i) => (
+                            <Fragment key={`element-${i}`}>
+                              <Dt>{dt}</Dt>
+                              <Dd>{dd}</Dd>
+                            </Fragment>
+                          )
                         )}
-                      {details &&
-                        typeof details?.commentAllowed === "number" &&
-                        details?.commentAllowed > 0 && (
+                        {details.minSendable === details.maxSendable && (
+                          <>
+                            <Dt>{t("amount.label")}</Dt>
+                            <Dd>
+                              {getFormattedSats(
+                                Math.floor(+details.minSendable / 1000)
+                              )}
+                            </Dd>
+                          </>
+                        )}
+                      </>
+                    </dl>
+                    {details && details.minSendable !== details.maxSendable && (
+                      <div>
+                        <DualCurrencyField
+                          autoFocus
+                          id="amount"
+                          label={t("amount.label")}
+                          min={Math.floor(+details.minSendable / 1000)}
+                          max={Math.floor(+details.maxSendable / 1000)}
+                          value={valueSat}
+                          onChange={(e) => setValueSat(e.target.value)}
+                          fiatValue={fiatValue}
+                          hint={`${tCommon("balance")}: ${
+                            auth?.balancesDecorated?.accountBalance
+                          }`}
+                        />
+                        <SatButtons
+                          min={Math.floor(+details.minSendable / 1000)}
+                          max={Math.floor(+details.maxSendable / 1000)}
+                          onClick={setValueSat}
+                          disabled={loadingConfirm}
+                        />
+                      </div>
+                    )}
+
+                    {showCommentField() && (
+                      <div className="mt-4">
+                        <TextField
+                          id="comment"
+                          label={t("comment.label")}
+                          placeholder={tCommon("optional")}
+                          onChange={(e) => {
+                            setComment(e.target.value);
+                          }}
+                        />
+                      </div>
+                    )}
+
+                    {(showNameField() || showEmailField()) && (
+                      <div className="flex justify-center mt-4">
+                        <Hyperlink onClick={toggleShowMoreFields}>
+                          {tCommon("actions.more")}{" "}
+                          {showMoreFields ? (
+                            <CaretUpIcon className="h-4 w-4 inline-flex" />
+                          ) : (
+                            <CaretDownIcon className="h-4 w-4 inline-flex" />
+                          )}
+                        </Hyperlink>
+                      </div>
+                    )}
+
+                    {showMoreFields && (
+                      <div className="mb-4">
+                        {showNameField() && (
                           <div className="mt-4">
                             <TextField
-                              id="comment"
-                              label={t("comment.label")}
+                              id="name"
+                              label={t("name.label")}
                               placeholder={tCommon("optional")}
+                              value={userName}
                               onChange={(e) => {
-                                setComment(e.target.value);
+                                setUserName(e.target.value);
                               }}
                             />
                           </div>
                         )}
-                      {details && details?.payerData?.name && (
-                        <div className="mt-4">
-                          <TextField
-                            id="name"
-                            label={t("name.label")}
-                            placeholder={tCommon("optional")}
-                            value={userName}
-                            onChange={(e) => {
-                              setUserName(e.target.value);
-                            }}
-                          />
-                        </div>
-                      )}
-                      {details && details?.payerData?.email && (
-                        <div className="mt-4">
-                          <TextField
-                            id="email"
-                            label={t("email.label")}
-                            placeholder={tCommon("optional")}
-                            value={userEmail}
-                            onChange={(e) => {
-                              setUserEmail(e.target.value);
-                            }}
-                          />
-                        </div>
-                      )}
-                    </div>
-                    <div className="pt-2 border-t border-gray-200 dark:border-white/10">
+                        {showEmailField() && (
+                          <div className="mt-4">
+                            <TextField
+                              id="email"
+                              label={t("email.label")}
+                              placeholder={tCommon("optional")}
+                              value={userEmail}
+                              onChange={(e) => {
+                                setUserEmail(e.target.value);
+                              }}
+                            />
+                          </div>
+                        )}
+                      </div>
+                    )}
+                    <div className="mt-2 dark:border-white/10">
                       <ConfirmOrCancel
                         isFocused={false}
                         label={tCommon("actions.confirm")}

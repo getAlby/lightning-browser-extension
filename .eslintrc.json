@@ -19,6 +19,12 @@
     "jest": true
   },
   "rules": {
+    "@typescript-eslint/ban-ts-comment": [
+      "error",
+      {
+        "ts-ignore": "allow-with-description"
+      }
+    ],
     "@typescript-eslint/no-unused-vars": ["warn", { "args": "none" }], // No warnings for unused function arguments, which might be used in the future.
     "no-console": ["error", { "allow": ["info", "warn", "error"] }],
     "no-constant-binary-expression": "error",

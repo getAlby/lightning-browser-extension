@@ -1,12 +1,6 @@
 {
   "translation": {
     "welcome": {
-      "nav": {
-        "welcome": "Benvenuto",
-        "password": "La tua Password",
-        "connect": "Il tuo Account Lightning",
-        "done": "Fatto"
-      },
       "set_password": {
         "title": "Imposta una password di sblocco",
         "description": "Questa password serve a proteggere il tuo wallet e a fornirti l'accesso all'estensione del browser. Non può essere reimpostata ed è differente dalla password dell'account Alby.",
@@ -225,15 +219,8 @@
       },
       "kollider": {
         "description": "Accedi al tuo account Kollider",
-        "page": {
-          "title": "Connettiti al tuo account Kollider",
-          "description": "Non hai ancora un account? <0>Registrati</0> ora!"
-        },
         "username": {
           "label": "Inserisci il tuo username Kollider"
-        },
-        "password": {
-          "label": "Inserisci la tua password Kollider"
         },
         "currency": {
           "label": "Seleziona la valuta del tuo account"
@@ -698,7 +685,7 @@
       "list": {
         "trading": "Trading",
         "gaming": "Gaming",
-        "entertaiment": "Intrattenimento",
+        "entertainment": "Intrattenimento",
         "miscellaneous": "Altro",
         "showcases": "Vetrine",
         "nostr": "Nostr",
@@ -711,12 +698,6 @@
           "label1": "Ricevi Bitcoin",
           "label2": "Compra Bitcoin",
           "description": "Crea una fattura lightning, inviati qualche bitcoin e inizia ad usare Alby nell'ecosistema lightning"
-        },
-        "pin": {
-          "title": "📌 Aggiungi la tua estensione Alby",
-          "description3": "Ecco fatto! Per accedere ad Alby basta cliccare l'icona di Alby",
-          "description1": "<0>Per accedere facilmente ad Alby, clicca sull'icona dell'estensione</0> <1/> <2>in alto a destra del tuo browser</2>",
-          "description2": "Nella lista delle estensioni, trova Alby e clicca su aggiungi alla barra degli strumenti"
         },
         "demo": {
           "title": "🕹️ Prova la Demo di Alby",
@@ -739,7 +720,7 @@
     "success": "Successo",
     "error": "Errore",
     "settings": "Impostazioni",
-    "websites": "Siti web",
+    "connected_sites": "",
     "loading": "caricamento",
     "amount": "Importo",
     "optional": "Facoltativo",

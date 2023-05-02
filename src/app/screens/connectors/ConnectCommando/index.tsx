@@ -117,6 +117,7 @@ export default function ConnectCommando() {
           title="host"
           value={formData.host}
           onChange={handleChange}
+          autoFocus={true}
         />
       </div>
       <div className="mb-6">

@@ -1,12 +1,6 @@
 {
   "translation": {
     "welcome": {
-      "nav": {
-        "welcome": "Bonvenon",
-        "password": "Via pasvorto",
-        "connect": "Via konto ĉe Lightning",
-        "done": "Farite"
-      },
       "set_password": {
         "title": "",
         "description": "",
@@ -541,7 +535,7 @@
     "success": "Sukceso",
     "error": "Eraro",
     "settings": "Agordoj",
-    "websites": "Retejoj",
+    "connected_sites": "",
     "sats_one": "satoŝio",
     "sats_other": "satoŝioj",
     "loading": "ŝargante",
