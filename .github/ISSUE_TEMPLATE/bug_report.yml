@@ -49,7 +49,7 @@ body:
       placeholder: |
         - Alby Version: [e.g. 1.5.0]
         - Alby installed through: [e.g. installed through the browser stores, installed manually]
-        - Wallet connected with Alby: [e.g. LND
+        - Wallet connected with Alby: [e.g. LND, Core-Lightning, Lightning Terminal, LNBits, etc.]
     validations:
       required: true
   - type: textarea
