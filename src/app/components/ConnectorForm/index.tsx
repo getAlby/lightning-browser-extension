@@ -80,7 +80,13 @@ function ConnectorForm({
       <div className="relative lg:flex lg:gap-4 mt-14 bg-white dark:bg-surface-02dp p-10 shadow rounded-lg">
         <div className="lg:w-1/2">
           {typeof title === "string" ? (
-            <h1 className="mb-1 text-2xl font-bold dark:text-white">{title}</h1>
+            <h1
+              className={`text-2xl font-bold dark:text-white ${
+                description ? "mb-1" : "mb-4"
+              }`}
+            >
+              {title}
+            </h1>
           ) : (
             title
           )}
