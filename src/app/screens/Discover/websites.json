@@ -3,6 +3,18 @@
     "title": "entertainment",
     "items": [
       {
+        "title": "CurioCaster",
+        "subtitle": "Podcast web player",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/curiocaster_thumbnail.png",
+        "url": "https://curiocaster.com"
+      },
+      {
+        "title": "Music Side Project",
+        "subtitle": "Music web player",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/musicsideproject_thumbnail.png",
+        "url": "https://musicsideproject.com/"
+      },
+      {
         "title": "Podverse",
         "subtitle": "Podcast player with bitcoin payments",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/podverse_thumbnail.png",
