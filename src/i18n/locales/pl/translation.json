@@ -822,8 +822,8 @@
         "subtitle": "Automatycznie loguj się bez potwierdzenia gdy strona o to poprosi."
       },
       "edit_preferences": {
-        "title": "",
-        "screen_reader": ""
+        "title": "Edytuj preferencje",
+        "screen_reader": "Opcje limitu"
       },
       "edit_permissions": "Edytuj uprawnienia"
     },
