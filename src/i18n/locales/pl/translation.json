@@ -822,7 +822,7 @@
         "subtitle": "Automatycznie loguj się bez potwierdzenia gdy strona o to poprosi."
       },
       "edit_allowance": {
-        "title": "Edytuj limit",
+        "title": "Edytuj preferencje",
         "screen_reader": "Opcje limitu"
       },
       "edit_permissions": "Edytuj uprawnienia"

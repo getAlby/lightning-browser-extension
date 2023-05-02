@@ -12,6 +12,7 @@ import ResultCard from "@components/ResultCard";
 import SatButtons from "@components/SatButtons";
 import DualCurrencyField from "@components/form/DualCurrencyField";
 import TextField from "@components/form/TextField";
+import fetchAdapter from "@vespaiach/axios-fetch-adapter";
 import axios from "axios";
 import React, { Fragment, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -135,6 +136,7 @@ function LNURLPay() {
             params,
             // https://github.com/fiatjaf/lnurl-rfc/blob/luds/01.md#http-status-codes-and-content-type
             validateStatus: () => true,
+            adapter: fetchAdapter,
           }
         );
 
@@ -482,7 +484,7 @@ function LNURLPay() {
                     )}
 
                     {showMoreFields && (
-                      <>
+                      <div className="mb-4">
                         {showNameField() && (
                           <div className="mt-4">
                             <TextField
@@ -509,9 +511,9 @@ function LNURLPay() {
                             />
                           </div>
                         )}
-                      </>
+                      </div>
                     )}
-                    <div className="mt-4 dark:border-white/10">
+                    <div className="mt-2 dark:border-white/10">
                       <ConfirmOrCancel
                         isFocused={false}
                         label={tCommon("actions.confirm")}

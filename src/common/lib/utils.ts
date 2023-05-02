@@ -1,7 +1,12 @@
 import browser, { Runtime } from "webextension-polyfill";
 import { ABORT_PROMPT_ERROR } from "~/common/constants";
 import { getPosition as getWindowPosition } from "~/common/utils/window";
-import type { Invoice, OriginData, OriginDataInternal } from "~/types";
+import type {
+  Invoice,
+  OriginData,
+  OriginDataInternal,
+  DeferredPromise,
+} from "~/types";
 
 const utils = {
   base64ToHex: (str: string) => {
@@ -36,6 +41,17 @@ const utils = {
   },
   stringToUint8Array: (str: string) => {
     return Uint8Array.from(str, (x) => x.charCodeAt(0));
+  },
+  deferredPromise: (): DeferredPromise => {
+    let resolve: DeferredPromise["resolve"];
+    let reject: DeferredPromise["reject"];
+    const promise = new Promise<void>(
+      (innerResolve: () => void, innerReject: () => void) => {
+        resolve = innerResolve;
+        reject = innerReject;
+      }
+    );
+    return { promise, resolve, reject };
   },
   openPage: (page: string) => {
     browser.tabs.create({ url: browser.runtime.getURL(page) });

@@ -7,7 +7,7 @@ import {
   WebLNNode,
 } from "~/extension/background-script/connectors/connector.interface";
 
-import { Event } from "./extension/ln/nostr/types";
+import { Event } from "./extension/providers/nostr/types";
 
 export type ConnectorType = keyof typeof connectors;
 
@@ -772,5 +772,11 @@ export interface Invoice {
 }
 
 export type BrowserType = "chrome" | "firefox";
+
+export interface DeferredPromise {
+  promise: Promise<unknown>;
+  resolve?: () => void;
+  reject?: () => void;
+}
 
 export type Theme = "dark" | "light";
