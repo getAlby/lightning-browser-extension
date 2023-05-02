@@ -6358,10 +6358,10 @@ listr2@^5.0.7:
     through "^2.3.8"
     wrap-ansi "^7.0.0"
 
-lnmessage@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/lnmessage/-/lnmessage-0.2.0.tgz#3f24f2f6aef31f8c7dbcd48903087d02ee050ca6"
-  integrity sha512-zyNLn3BPz+lQq0B7Vu3Y93qjBeLxyZAHEMRzhUAHdEVlRhg4wKViJjjiKSqxs8pMHfHCizMu73U2lt38OSvpjw==
+lnmessage@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/lnmessage/-/lnmessage-0.2.1.tgz#ff8daaa52632c12b4f90559f04922e3e5f6ecb80"
+  integrity sha512-TZQNZP4EYyaHE4bRuoGb81NbSGkyAwzZkSbrYHKLpKpe2yLlBp7vgru9n9d8iEMQNlkyGLIwvi2eRbRJPkqi1Q==
   dependencies:
     "@noble/hashes" "^1.2.0"
     "@noble/secp256k1" "^1.7.1"
