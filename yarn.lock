@@ -940,17 +940,17 @@
   resolved "https://registry.yarnpkg.com/@leichtgewicht/ip-codec/-/ip-codec-2.0.3.tgz#0300943770e04231041a51bd39f0439b5c7ab4f0"
   integrity sha512-nkalE/f1RvRGChwBnEIoBfSEYOXnCRdleKuv6+lePbMDrMZXeDQnqak5XDOeBgrPPyPfAdcCu/B5z+v3VhplGg==
 
-"@lightninglabs/lnc-core@0.2.2-alpha":
-  version "0.2.2-alpha"
-  resolved "https://registry.yarnpkg.com/@lightninglabs/lnc-core/-/lnc-core-0.2.2-alpha.tgz#37e1dcf3419844f70e5df7901ec55cb62a9b0b1e"
-  integrity sha512-S46tZ6cH7jPgrotbZS9Pceyb2Nf+gaC9gmorm1DC7OpWxaf2gilelNk+0wVf9B8pqIwnBfr1z3h/sTophvLkUQ==
+"@lightninglabs/lnc-core@0.2.4-alpha":
+  version "0.2.4-alpha"
+  resolved "https://registry.yarnpkg.com/@lightninglabs/lnc-core/-/lnc-core-0.2.4-alpha.tgz#3864ea91cd57d3340ed250cdff9318ba6dbcfe6e"
+  integrity sha512-vZQJzMB5tWW/GFxUFyxrfDAGM8Q4jz55vjO4IJyp9Pk8fxBeYEyYJYF8+cJ9/9CKZ7fgX9MPp8m08oOVjJVlhQ==
 
-"@lightninglabs/lnc-web@^0.2.2-alpha":
-  version "0.2.2-alpha"
-  resolved "https://registry.yarnpkg.com/@lightninglabs/lnc-web/-/lnc-web-0.2.2-alpha.tgz#c8b9ee39760a2e5bb2a1e1367e88662aa0fca2a8"
-  integrity sha512-S79ziWZ2pICiK4KMmWxB0JTJqqSpmbfPAXenVXEDbtElDXpYrSabcW8WY3sund9BetF2un0AgcgArqITYqqrqw==
+"@lightninglabs/lnc-web@^0.2.4-alpha":
+  version "0.2.4-alpha"
+  resolved "https://registry.yarnpkg.com/@lightninglabs/lnc-web/-/lnc-web-0.2.4-alpha.tgz#deaf09bc7505c1c0680edf20c5d9c3889233cf46"
+  integrity sha512-qfoP5I8md/M08MqM6APyzjFF7xm7q6YTy6y64CVXvVkeE16NQHvPy4FK+hvxrE2ZOv6q7BSeWKaLMMA80bX6BA==
   dependencies:
-    "@lightninglabs/lnc-core" "0.2.2-alpha"
+    "@lightninglabs/lnc-core" "0.2.4-alpha"
     crypto-js "4.1.1"
 
 "@mswjs/cookies@^0.2.2":
