@@ -79,6 +79,12 @@
         "url": "https://blogstack.io/"
       },
       {
+        "title": "Blowater",
+        "subtitle": "A web chat client with delightful UX",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/blowater_thumbnail.png",
+        "url": "https://blowater.deno.dev"
+      },
+      {
         "title": "emon.chat",
         "subtitle": "Instant messaging client with built in lightning payments",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/emon_thumbnail.svg",
