@@ -1,5 +1,5 @@
-import WebBTCProvider from "../ln/webbtc";
-import WebLNProvider from "../ln/webln";
+import WebBTCProvider from "../providers/webbtc";
+import WebLNProvider from "../providers/webln";
 
 if (document) {
   window.webln = new WebLNProvider();
