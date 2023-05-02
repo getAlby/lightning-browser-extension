@@ -320,6 +320,7 @@ function AccountDetail() {
                 <TextField
                   id="name"
                   label={t("name.title")}
+                  placeholder={t("name.placeholder")}
                   type="text"
                   value={accountName}
                   onChange={(event) => {
@@ -352,32 +353,32 @@ function AccountDetail() {
           <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 dark:bg-surface-02dp flex flex-col gap-4">
             {mnemonic && (
               <div className="rounded-md font-medium p-4 text-orange-700 bg-orange-50 dark:text-orange-400 dark:bg-orange-900">
-                {t("mnemonic.backup_warning")}
+                {t("mnemonic.backup.warning")}
               </div>
             )}
 
             <div className="flex justify-between items-end">
               <div className="w-9/12">
                 <p className="font-medium">
-                  {mnemonic
-                    ? "Backup your Secret Key"
-                    : "Generate your Secret Key"}
+                  {t(
+                    mnemonic
+                      ? "mnemonic.backup.title"
+                      : "mnemonic.generate.title"
+                  )}
                 </p>
                 <p className="text-gray-500 text-sm">
-                  Your Secret Key is a set of 12 words that will allow you to
-                  access your keys to protocols such as Nostr or Oridinals on a
-                  new device or in case you loose access to your account.
+                  {t("mnemonic.description2")}
                 </p>
               </div>
 
               <div className="w-1/5 flex-none">
                 <Link to="secret-key/backup">
                   <Button
-                    label={
-                      /*tCommon("actions.save")*/ mnemonic
-                        ? "Backup Secret Key"
-                        : "Generate Secret Key"
-                    }
+                    label={t(
+                      mnemonic
+                        ? "mnemonic.backup.button"
+                        : "mnemonic.generate.button"
+                    )}
                     primary
                     fullWidth
                   />
@@ -387,19 +388,16 @@ function AccountDetail() {
             <MenuDivider />
             <div className="flex justify-between items-end">
               <div className="w-7/12">
-                <p className="font-medium">
-                  {/*tCommon("actions.save")*/}Import a Secret Key
-                </p>
+                <p className="font-medium">{t("mnemonic.import.title")}</p>
                 <p className="text-gray-500 text-sm">
-                  {/*tCommon("actions.save")*/}Use an existing Secret Key to
-                  recover your derived keys.
+                  {t("mnemonic.import.description")}
                 </p>
               </div>
 
               <div className="w-1/5 flex-none">
                 <Link to="secret-key/import">
                   <Button
-                    label={/*tCommon("actions.save")*/ "Import Secret Key"}
+                    label={t("mnemonic.import.button")}
                     primary
                     fullWidth
                   />
@@ -431,7 +429,7 @@ function AccountDetail() {
               <div className="w-1/5 flex-none">
                 <Link to="nostr">
                   <Button
-                    label={/*tCommon("actions.save")*/ "Advanced Settings"}
+                    label={t("nostr.advanced_settings.label")}
                     primary
                     fullWidth
                   />

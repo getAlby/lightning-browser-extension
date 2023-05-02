@@ -81,7 +81,7 @@ function BackupSecretKey() {
       }
 
       await saveMnemonic(id, mnemonic);
-      toast.success(t("success"));
+      toast.success(t("saved"));
       history.back();
     } catch (e) {
       if (e instanceof Error) toast.error(e.message);
@@ -159,7 +159,7 @@ function BackupSecretKey() {
           </MnemonicInputs>
           {!hasMnemonic && currentPrivateKey && (
             <div className="rounded-md font-medium p-4 text-orange-700 bg-orange-50 dark:text-orange-400 dark:bg-orange-900">
-              {t("existing_nostr_key")}
+              {t("existing_nostr_key_notice")}
             </div>
           )}
         </div>

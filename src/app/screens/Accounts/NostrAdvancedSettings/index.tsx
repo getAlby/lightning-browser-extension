@@ -5,7 +5,7 @@ import {
 import Container from "@components/Container";
 import Loading from "@components/Loading";
 import { FormEvent, useCallback, useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { Link, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Button from "~/app/components/Button";
@@ -21,13 +21,9 @@ import { deriveNostrPrivateKey } from "~/common/lib/mnemonic";
 import msg from "~/common/lib/msg";
 import { default as nostr, default as nostrlib } from "~/common/lib/nostr";
 
-// import { GetAccountRes } from "~/common/lib/api";
-
 function NostrAdvancedSettings() {
   const account = useAccount();
-  //const [account, setAccount] = useState<GetAccountRes | null>(null);
   const { t: tCommon } = useTranslation("common");
-  // TODO: move these translations to the correct place
   const { t } = useTranslation("translation", {
     keyPrefix: "accounts.account_view",
   });
@@ -103,8 +99,7 @@ function NostrAdvancedSettings() {
     }
 
     if (!mnemonic) {
-      toast.error("You haven't setup your secret key yet");
-      return;
+      throw new Error("No mnemonic exists");
     }
 
     const nostrPrivateKey = await deriveNostrPrivateKey(mnemonic);
@@ -117,8 +112,7 @@ function NostrAdvancedSettings() {
       throw new Error("No id set");
     }
     if (nostrPrivateKey === currentPrivateKey) {
-      toast.error("Your private key hasn't changed");
-      return;
+      throw new Error("private key hasn't changed");
     }
 
     if (
@@ -163,25 +157,27 @@ function NostrAdvancedSettings() {
         <Container maxWidth="sm">
           <div className="mt-12 shadow bg-white sm:rounded-md sm:overflow-hidden p-10 divide-black/10 dark:divide-white/10 dark:bg-surface-02dp flex flex-col gap-4">
             <h1 className="font-bold text-2xl">
-              {/*{t("nostr.generate_keys.title")}*/}Advanced Nostr Settings
+              {t("nostr.advanced_settings.title")}
             </h1>
             <p className="text-gray-500">
-              {/*{t("nostr.generate_keys.title")}*/}Derive Nostr keys from your
-              Secret Key or import your existing private key by pasting it in
-              “Nostr Private Key” field.
+              {t("nostr.advanced_settings.description")}
             </p>
 
             {currentPrivateKey && nostrKeyOrigin !== "secret-key" ? (
+              // TODO: extract to Alert component
               <div className="rounded-md font-medium p-4 text-orange-700 bg-orange-50 dark:text-orange-400 dark:bg-orange-900">
-                {/*t("nostr.private_key.backup")*/}
-                {nostrKeyOrigin === "unknown"
-                  ? "⚠️ You’re currently using an imported or randomly generated Nostr key which cannot be restored by your Secret Key, so remember to back up your Nostr private key."
-                  : "⚠️ You’re currently using a Nostr key derived from your account (legacy) which cannot be restored by your Secret Key, so remember to back up your Nostr private key."}
+                <p>
+                  {t(
+                    nostrKeyOrigin === "unknown"
+                      ? "nostr.advanced_settings.imported_key_warning"
+                      : "nostr.advanced_settings.legacy_derived_key_warning"
+                  )}
+                </p>
               </div>
             ) : nostrKeyOrigin === "secret-key" ? (
-              <div className="rounded-md font-medium p-4 text-green-700 bg-orange-50 dark:text-green-400 dark:bg-green-900">
-                {/*t("nostr.private_key.backup")*/}
-                {"✅ Nostr key derived from your secret key"}
+              // TODO: extract to Alert component
+              <div className="rounded-md font-medium p-4 text-green-700 bg-green-50 dark:text-green-400 dark:bg-green-900">
+                <p>{t("nostr.advanced_settings.can_restore")}</p>
               </div>
             ) : null}
             <TextField
@@ -222,27 +218,35 @@ function NostrAdvancedSettings() {
               endAdornment={<InputCopyButton value={nostrPublicKey} />}
             />
             {nostrKeyOrigin !== "secret-key" &&
-              (mnemonic ? (
+              (mnemonic || !currentPrivateKey) && (
                 <div className="mt-4">
-                  <Button
-                    outline
-                    label="Derive Nostr keys from your Secret Key"
-                    onClick={handleDeriveNostrKeyFromSecretKey}
-                  />
+                  {mnemonic ? (
+                    <Button
+                      outline
+                      label={t("nostr.advanced_settings.derive")}
+                      onClick={handleDeriveNostrKeyFromSecretKey}
+                    />
+                  ) : (
+                    // TODO: extract to Alert component
+                    <div className="rounded-md font-medium p-4 text-blue-700 bg-blue-50 dark:text-blue-400 dark:bg-blue-900">
+                      <p>
+                        <Trans
+                          i18nKey={"nostr.advanced_settings.no_secret_key"}
+                          t={t}
+                          components={[
+                            // eslint-disable-next-line react/jsx-key
+                            <Link
+                              to="../secret-key/backup"
+                              relative="path"
+                              className="underline"
+                            />,
+                          ]}
+                        />
+                      </p>
+                    </div>
+                  )}
                 </div>
-              ) : (
-                <p>
-                  You {"don't"} have a secret key yet.{" "}
-                  <Link
-                    to="../secret-key/backup"
-                    relative="path"
-                    className="underline"
-                  >
-                    Click here
-                  </Link>{" "}
-                  to create your secret key and derive your nostr keys.
-                </p>
-              ))}
+              )}
           </div>
           <div className="flex justify-center mt-8 mb-16 gap-4">
             <Button label={tCommon("actions.cancel")} onClick={onCancel} />

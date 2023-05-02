@@ -18,7 +18,7 @@
         }
       },
       "test_connection": {
-        "ready": "Awesome, you’re ready to go!",
+        "ready": "Awesome, you're ready to go!",
         "initializing": "Initializing your account. Please wait, this can take a minute...",
         "connection_error": "Connection Error",
         "review_connection_details": "Please review your connection details.",
@@ -383,8 +383,8 @@
         "title1": "Account Information",
         "title2": "Edit Account",
         "name": {
-          "title": "Name",
-          "placeholder": "Account Name"
+          "title": "Display Name",
+          "placeholder": "Account Display Name"
         },
         "export": {
           "title": "Export Account",
@@ -398,23 +398,32 @@
         "mnemonic": {
           "title": "Secret Key",
           "description": "Your Account Secret Key allows you to use Alby to interact with protocols such as Nostr or Oridinals.",
-          "success": "Secret Key encrypted & saved successfully.",
-          "existing_nostr_key": "⚠️ This account already has a nostr private key set and will not be derived from this secret key. You can manage your nostr key from your account settings.",
-          "backup_warning": "⚠️ Backup your Secret Key! Not backing it up might result in permanently loosing access to your Nostr identity or purchased Oridinals.",
+          "description2": "Your Secret Key is a set of 12 words that will allow you to access your keys to protocols such as Nostr or Oridinals on a new device or in case you loose access to your account.",
+          "saved": "Secret Key encrypted & saved successfully.",
+          "existing_nostr_key_notice": "⚠️ This account already has a nostr private key set and will not be derived from this secret key. You can manage your nostr key from your account settings.",
           "generate": {
-            "title": "Generate your Secret Key"
+            "title": "Generate your Secret Key",
+            "button": "Generate Secret Key"
           },
           "backup": {
             "title": "Back up your Secret Key",
-            "confirm": "I’ve backed my account’s Secret Key in a private and secure place",
+            "confirm": "I've backed my account's Secret Key in a private and secure place",
             "error_confirm": "Please confirm that you have backed up your secret key.",
             "save": "Save Secret Key",
+            "button": "Backup Secret Key",
+            "warning": "⚠️ Backup your Secret Key! Not backing it up might result in permanently loosing access to your Nostr identity or purchased Oridinals.",
             "description1": "In addition to the Bitcoin Lightning Network, Alby allows you to generate keys and interact with other protocols such as:",
             "description2": "Secret Key is a set of 12 words that will allow you to access your keys to those protocols on a new device or in case you loose access to your account:",
             "protocols": {
               "nostr": "Nostr protocol",
               "ordinals": "Ordinals"
             }
+          },
+          "import": {
+            "title": "Import a Secret Key",
+            "description": "Use an existing Secret Key to recover your derived keys.",
+            "button": "Import Secret Key",
+            "confirm_overwrite": "You already have a secret key, are you sure you want to overwrite it?"
           },
           "inputs": {
             "title": "Your Secret Key"
@@ -423,10 +432,19 @@
         "nostr": {
           "title": "Nostr",
           "hint": "is a simple and open protocol that aims to create censorship-resistant social networks. Nostr works with cryptographic keys. To publish something you sign it with your key and send it to multiple relays. You can use Alby to manage your Nostr key. Many Nostr applications will then allow you to simply use the key from the Alby extension.",
+          "advanced_settings": {
+            "label": "Advanced Settings",
+            "title": "Advanced Nostr Settings",
+            "description": "Derive Nostr keys from your Secret Key or import your existing private key by pasting it in the \"Nostr Private Key\" field.",
+            "imported_key_warning": "⚠️ You're currently using an imported or randomly generated Nostr key. Your Nostr private key cannot be restored by your Secret Key, so remember to back up your Nostr private key.",
+            "legacy_derived_key_warning": "⚠️ You're currently using a Nostr key derived from your account (legacy). Your Nostr private key cannot be restored by your Secret Key, so remember to back up your Nostr private key.",
+            "can_restore": "✅ Nostr key derived from your secret key",
+            "derive": "Derive Nostr keys from your Secret Key",
+            "no_secret_key": "💡 You don't have a secret key yet. <0>Click here</0></div> to create your secret key and derive your nostr keys."
+          },
           "private_key": {
             "title": "Manage your Nostr private key",
             "subtitle": "Paste your nostr private key or generate a new one. <0>Learn more »</0>",
-            "backup": "⚠️ Don't forget to back up your nostr private key! Not backing up your key might result in losing access.",
             "warning": "Please enter the name of the account to confirm the deletion of your nostr private key:",
             "success": "Nostr private key encrypted & saved successfully.",
             "failed_to_remove": "The entered account name didn't match, your old Nostr private key has been restored.",
@@ -950,7 +968,7 @@
           "add": "Add a new account",
           "manage": "Manage accounts",
           "account_settings": "Account settings",
-          "go_to_web_wallet": "Manage your Alby Account"
+          "go_to_web_wallet": "Manage your web account"
         }
       }
     },

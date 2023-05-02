@@ -20,6 +20,9 @@ function ImportSecretKey() {
   const [importPasteLabel, setImportPasteLabel] = useState(
     tCommon("actions.paste_clipboard") as string
   );
+  const { t } = useTranslation("translation", {
+    keyPrefix: "accounts.account_view.mnemonic",
+  });
 
   // TODO: useMnemonic hook
   const [hasFetchedData, setHasFetchedData] = useState(false);
@@ -56,10 +59,6 @@ function ImportSecretKey() {
     fetchData();
   }, [fetchData]);
 
-  /*const { t } = useTranslation("translation", {
-    keyPrefix: "accounts.account_view",
-  });*/
-
   function cancelImport() {
     history.back();
   }
@@ -67,11 +66,7 @@ function ImportSecretKey() {
   async function importKey() {
     try {
       if (hasMnemonic) {
-        if (
-          !window.confirm(
-            "You already have a secret key, are you sure you want to overwrite it?"
-          )
-        ) {
+        if (!window.confirm(t("import.confirm_overwrite"))) {
           return;
         }
       }
@@ -88,9 +83,7 @@ function ImportSecretKey() {
       }
 
       await saveMnemonic(id, mnemonic);
-      toast.success(
-        /*t("nostr.private_key.success")*/ "Secret Key encrypted & saved successfully."
-      );
+      toast.success(t("saved"));
       history.back();
     } catch (e) {
       if (e instanceof Error) toast.error(e.message);
@@ -105,10 +98,8 @@ function ImportSecretKey() {
     <div>
       <Container>
         <div className="mt-12 shadow bg-white sm:rounded-md sm:overflow-hidden p-10 divide-black/10 dark:divide-white/10 dark:bg-surface-02dp flex flex-col gap-4">
-          <h1 className="font-bold text-2xl">Import Secret Key</h1>
-          <p className="text-gray-500">
-            Use existing Secret Key to derive protocol keys:
-          </p>
+          <h1 className="font-bold text-2xl">{t("import.title")}</h1>
+          <p className="text-gray-500">{t("import.description")}</p>
 
           <MnemonicInputs mnemonic={mnemonic} setMnemonic={setMnemonic}>
             <>
@@ -134,21 +125,14 @@ function ImportSecretKey() {
           </MnemonicInputs>
           {currentPrivateKey && (
             <div className="rounded-md font-medium p-4 text-orange-700 bg-orange-50 dark:text-orange-400 dark:bg-orange-900">
-              {/*t("nostr.private_key.backup")*/}
-              {
-                "⚠️ This account already has a nostr private key set and will not be derived from this secret key. You can manage your nostr key from your account settings."
-              }
+              {t("existing_nostr_key_notice")}
             </div>
           )}
         </div>
 
         <div className="flex justify-center mt-8 mb-16 gap-4">
           <Button label={tCommon("actions.cancel")} onClick={cancelImport} />
-          <Button
-            label={tCommon("actions.import")}
-            primary
-            onClick={importKey}
-          />
+          <Button label={t("import.button")} primary onClick={importKey} />
         </div>
       </Container>
     </div>
