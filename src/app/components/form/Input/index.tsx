@@ -29,6 +29,7 @@ export default function Input({
   endAdornment,
   block = true,
   className,
+  ...otherProps
 }: React.InputHTMLAttributes<HTMLInputElement> & Props) {
   const inputEl = useRef<HTMLInputElement>(null);
   const outerStyles =
@@ -64,6 +65,7 @@ export default function Input({
       disabled={disabled}
       min={min}
       max={max}
+      {...otherProps}
     />
   );
 
@@ -73,7 +75,8 @@ export default function Input({
     <div
       className={classNames(
         "flex items-stretch overflow-hidden",
-        "focus-within:ring-primary focus-within:border-primary focus-within:dark:border-primary focus-within:ring-1",
+        !disabled &&
+          "focus-within:ring-primary focus-within:border-primary focus-within:dark:border-primary focus-within:ring-1",
         outerStyles
       )}
     >
@@ -89,7 +92,12 @@ export default function Input({
         </span>
       )}
       {endAdornment && (
-        <span className="flex items-center bg-white dark:bg-black dark:text-neutral-400">
+        <span
+          className={classNames(
+            "flex items-center bg-white dark:bg-black dark:text-neutral-400",
+            !!disabled && "bg-gray-50 dark:bg-surface-01dp"
+          )}
+        >
           {endAdornment}
         </span>
       )}

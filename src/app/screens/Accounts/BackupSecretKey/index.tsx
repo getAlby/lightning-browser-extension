@@ -96,23 +96,30 @@ function BackupSecretKey() {
     <div>
       <Container>
         <div className="mt-12 shadow bg-white sm:rounded-md sm:overflow-hidden p-10 divide-black/10 dark:divide-white/10 dark:bg-surface-02dp flex flex-col gap-4">
-          <h1 className="font-bold text-2xl">
+          <h1 className="font-bold text-2xl dark:text-white">
             {hasMnemonic ? t("backup.title") : t("generate.title")}
           </h1>
-          <p className="text-gray-500">{t("backup.description1")}</p>
+          <p className="text-gray-500 dark:text-neutral-500">
+            {t("backup.description1")}
+          </p>
           <div className="flex flex-col gap-4">
             <ProtocolListItem
-              icon={<NostrIcon />}
+              icon={
+                <NostrIcon className="text-gray-500 dark:text-neutral-500" />
+              }
               title={t("backup.protocols.nostr")}
             />
             <ProtocolListItem
-              icon={<OrdinalsIcon />}
+              icon={
+                <OrdinalsIcon className="text-gray-500 dark:text-neutral-500" />
+              }
               title={t("backup.protocols.ordinals")}
             />
-            {/* <ProtocolListItem icon={<LiquidIcon />} title="Liquid" /> */}
           </div>
 
-          <p className="mb-8 text-gray-500">{t("backup.description2")}</p>
+          <p className="mb-8 text-gray-500 dark:text-neutral-500">
+            {t("backup.description2")}
+          </p>
           <MnemonicInputs mnemonic={mnemonic} disabled>
             <>
               {/* TODO: consider making CopyButton component */}
@@ -158,6 +165,7 @@ function BackupSecretKey() {
             </>
           </MnemonicInputs>
           {!hasMnemonic && currentPrivateKey && (
+            // TODO: extract to Alert component
             <div className="rounded-md font-medium p-4 text-orange-700 bg-orange-50 dark:text-orange-400 dark:bg-orange-900">
               {t("existing_nostr_key_notice")}
             </div>
@@ -202,7 +210,7 @@ function ProtocolListItem({ icon, title }: ProtocolListItemProps) {
   return (
     <div className="flex gap-2">
       {icon}
-      <span className="text-gray-500">{title}</span>
+      <span className="text-gray-500 dark:text-neutral-500">{title}</span>
     </div>
   );
 }

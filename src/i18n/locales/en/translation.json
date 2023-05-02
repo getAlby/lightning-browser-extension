@@ -413,7 +413,7 @@
             "button": "Backup Secret Key",
             "warning": "⚠️ Backup your Secret Key! Not backing it up might result in permanently loosing access to your Nostr identity or purchased Oridinals.",
             "description1": "In addition to the Bitcoin Lightning Network, Alby allows you to generate keys and interact with other protocols such as:",
-            "description2": "Secret Key is a set of 12 words that will allow you to access your keys to those protocols on a new device or in case you loose access to your account:",
+            "description2": "Your Secret Key is a set of 12 words that will allow you to access your keys to those protocols on a new device or in case you loose access to your account:",
             "protocols": {
               "nostr": "Nostr protocol",
               "ordinals": "Ordinals"

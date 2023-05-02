@@ -359,14 +359,14 @@ function AccountDetail() {
 
             <div className="flex justify-between items-end">
               <div className="w-9/12">
-                <p className="font-medium">
+                <p className="text-gray-900 dark:text-white font-medium">
                   {t(
                     mnemonic
                       ? "mnemonic.backup.title"
                       : "mnemonic.generate.title"
                   )}
                 </p>
-                <p className="text-gray-500 text-sm">
+                <p className="text-gray-500 text-sm dark:text-neutral-500">
                   {t("mnemonic.description2")}
                 </p>
               </div>
@@ -388,8 +388,10 @@ function AccountDetail() {
             <MenuDivider />
             <div className="flex justify-between items-end">
               <div className="w-7/12">
-                <p className="font-medium">{t("mnemonic.import.title")}</p>
-                <p className="text-gray-500 text-sm">
+                <p className="text-gray-900 dark:text-white font-medium">
+                  {t("mnemonic.import.title")}
+                </p>
+                <p className="text-gray-500 text-sm dark:text-neutral-500">
                   {t("mnemonic.import.description")}
                 </p>
               </div>

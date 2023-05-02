@@ -156,10 +156,10 @@ function NostrAdvancedSettings() {
       >
         <Container maxWidth="sm">
           <div className="mt-12 shadow bg-white sm:rounded-md sm:overflow-hidden p-10 divide-black/10 dark:divide-white/10 dark:bg-surface-02dp flex flex-col gap-4">
-            <h1 className="font-bold text-2xl">
+            <h1 className="font-bold text-2xl dark:text-white">
               {t("nostr.advanced_settings.title")}
             </h1>
-            <p className="text-gray-500">
+            <p className="text-gray-500 dark:text-neutral-500 -mt-4 mb-4">
               {t("nostr.advanced_settings.description")}
             </p>
 
