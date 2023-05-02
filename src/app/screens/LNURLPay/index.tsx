@@ -482,7 +482,7 @@ function LNURLPay() {
                     )}
 
                     {showMoreFields && (
-                      <>
+                      <div className="mb-4">
                         {showNameField() && (
                           <div className="mt-4">
                             <TextField
@@ -509,9 +509,9 @@ function LNURLPay() {
                             />
                           </div>
                         )}
-                      </>
+                      </div>
                     )}
-                    <div className="mt-4 dark:border-white/10">
+                    <div className="mt-2 dark:border-white/10">
                       <ConfirmOrCancel
                         isFocused={false}
                         label={tCommon("actions.confirm")}
