@@ -85,6 +85,12 @@
         "url": "https://blowater.deno.dev"
       },
       {
+        "title": "Broadcstr",
+        "subtitle": "Social media that you control and define the boundaries",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/broadcstr.png",
+        "url": "https://www.broadcstr.com/"
+      },
+      {
         "title": "emon.chat",
         "subtitle": "Instant messaging client with built in lightning payments",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/emon_thumbnail.svg",
