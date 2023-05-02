@@ -1,12 +1,6 @@
 {
   "translation": {
     "welcome": {
-      "nav": {
-        "welcome": "Willkommen",
-        "password": "Dein Passwort",
-        "connect": "Dein Lightning Konto",
-        "done": "Fertig"
-      },
       "set_password": {
         "title": "Passwort zum Entsperren festlegen",
         "description": "Dieses Passwort wird verwendet, um deine Wallet zu schützen und den Zugriff auf die Browser-Erweiterung zu ermöglichen. Es kann nicht zurückgesetzt werden und ist unabhängig von Ihrem Alby Konto Passwort.",
@@ -165,7 +159,7 @@
       },
       "start9": {
         "page": {
-          "instructions": "<0>Hinweis: Derzeit unterstützen wir nur LND, aber wir werden in Zukunft c-lightning Unterstützung hinzufügen!<1/>Klicke auf deinem Embassy Dashboard auf den Dienst <0>lightning network Daemon. <1/>Wähle die Registerkarte <0>Eigenschaften.<1/>Kopiere nun die <0>LND Connect REST URL.",
+          "instructions": "<0>Hinweis: Derzeit unterstützen wir nur LND, aber wir werden in Zukunft c-lightning Unterstützung hinzufügen!<1/>Klicke auf deinem Embassy Dashboard auf den Dienst <0>Lightning Network Daemon</0><1/>Wähle die Registerkarte <0>Eigenschaften</0>.<1/>Kopiere nun die <0>LND Connect REST URL</0>.",
           "title": "Verbinde mit deinem <0>Embassy</0> Knoten"
         },
         "rest_url": {
@@ -258,22 +252,31 @@
       "kollider": {
         "title": "Kollider",
         "description": "Anmeldung bei deinem Kollider Konto",
-        "page": {
-          "description": "Du hast noch kein Konto? <0>Jetzt anmelden</0>!",
-          "title": "Verbinde dich mit deinem Kollider-Konto"
-        },
-        "password": {
-          "label": "Gebe dein Kollider Passwort ein"
-        },
         "currency": {
           "label": "Wähle dein Währungskonto"
         },
         "errors": {
-          "connection_failed": "Verbindung fehlgeschlagen. Bist du dir sicher, dass die Kontodaten korrekt sind?"
+          "connection_failed": "Verbindung fehlgeschlagen. Bist du dir sicher, dass die Kontodaten korrekt sind?",
+          "registration_limit_exceeded": "Registrierungslimit überschritten, versuche es später noch einmal.",
+          "user_already_exists": "Benutzername existiert bereits"
         },
         "username": {
-          "label": "Gebe dein Kollider Benutzernamen ein"
-        }
+          "label": "Benutzername"
+        },
+        "choose_path": {
+          "title": "Verbinde dich mit deiner Kollider-Wallet",
+          "description": "Melde dich an oder registriere dich für ein neues Kollider-Konto und stelle eine Verbindung zu Alby her.",
+          "create_new": "Registriere dich"
+        },
+        "create": {
+          "description": "Erstelle ein neues Kollider-Konto, um Bitcoin zu senden, zu empfangen und zu handeln.",
+          "title": "Erstelle dein Kollider-Konto und verbinde dich mit Alby"
+        },
+        "login": {
+          "title": "Verbinde dich mit deinem Kollider-Konto",
+          "description": "Du hast noch kein Konto? <0>Jetzt anmelden</0>!"
+        },
+        "warning": "Bitte stelle sicher, dass du deine Anmeldedaten sicher in einem Passwort-Manager speicherst. Ohne diese Zugangsdaten kann dein Konto nicht wiederhergestellt werden."
       },
       "title": "Verbinde Lightning Wallet",
       "lnc": {
@@ -730,11 +733,12 @@
       "list": {
         "gaming": "Spielen",
         "trading": "Handel",
-        "entertaiment": "Unterhaltung",
+        "entertainment": "Unterhaltung",
         "shopping": "Einkaufen",
         "miscellaneous": "Sonstiges",
         "showcases": "Schaukästen",
-        "nostr": "Nostr"
+        "nostr": "Nostr",
+        "nodeManagement": "Verwalte deine Note"
       },
       "tips": {
         "title": "Deine Alby-Wallet ist bereit",
@@ -754,13 +758,7 @@
           "title": "Eine Lightning Adresse erhalten",
           "label1": "Hole es dir jetzt!"
         },
-        "description": "Ein paar Tipps für den Anfang 🐝",
-        "pin": {
-          "title": "📌 Pin für die Alby-Erweiterung",
-          "description2": "Suche in der Liste der Erweiterungen von Alby und klicke auf das Pinsymbol, um es an die Symbolleiste anzuheften",
-          "description3": "Das war's! Um auf Alby zuzugreifen, klicke einfach auf das Alby-Symbol",
-          "description1": "<0>Um einfach auf Alby zuzugreifen, klicke auf das Erweiterungssymbol <1/> <2>in der oberen rechten Ecke Ihres Browsers"
-        }
+        "description": "Ein paar Tipps für den Anfang 🐝"
       }
     },
     "transactions": {
@@ -774,7 +772,9 @@
       "options": {
         "account": {
           "add": "Füge einen neuen Account hinzu",
-          "manage": "Konten verwalten"
+          "manage": "Konten verwalten",
+          "account_settings": "Kontoeinstellungen",
+          "go_to_web_wallet": "Verwalten Sie Ihr Alby-Konto"
         }
       },
       "title": "Konto wechseln",
@@ -872,7 +872,7 @@
     "optional": "Optional",
     "feedback": "Rückmeldung",
     "error": "Fehler",
-    "websites": "Webseite",
+    "connected_sites": "",
     "loading": "Laden",
     "sats_one": "sat",
     "success": "Erfolgreich",
@@ -924,7 +924,8 @@
       "lessThan": "< {{max}}",
       "greaterThan": "> {{min}}"
     },
-    "transactions": "Transaktionen"
+    "transactions": "Transaktionen",
+    "balance": "Bilanz"
   },
   "permissions": {
     "commando": {

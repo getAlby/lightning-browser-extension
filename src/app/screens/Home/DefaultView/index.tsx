@@ -12,6 +12,7 @@ import { FC, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import BalanceBox from "~/app/components/BalanceBox";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
 import { PublisherLnData } from "~/app/screens/Home/PublisherLnData";
@@ -131,7 +132,7 @@ const DefaultView: FC<Props> = (props) => {
       ...invoice,
       title: invoice.memo,
       description: invoice.memo,
-      date: dayjs(invoice.settleDate).fromNow(),
+      date: invoice.settleDate ? dayjs(invoice.settleDate).fromNow() : "",
     }));
 
     for (const invoice of invoices) {
@@ -157,17 +158,10 @@ const DefaultView: FC<Props> = (props) => {
         <PublisherLnData lnData={props.lnDataFromCurrentTab[0]} />
       )}
       <div className="p-4">
+        <div className="flex space-x-4 mb-4">
+          <BalanceBox />
+        </div>
         <div className="flex mb-6 space-x-4">
-          <Button
-            fullWidth
-            icon={<SendIcon className="w-6 h-6" />}
-            label={tCommon("actions.send")}
-            direction="column"
-            onClick={() => {
-              navigate("/send");
-            }}
-          />
-
           <Button
             fullWidth
             icon={<ReceiveIcon className="w-6 h-6" />}
@@ -175,6 +169,16 @@ const DefaultView: FC<Props> = (props) => {
             direction="column"
             onClick={() => {
               navigate("/receive");
+            }}
+          />
+
+          <Button
+            fullWidth
+            icon={<SendIcon className="w-6 h-6" />}
+            label={tCommon("actions.send")}
+            direction="column"
+            onClick={() => {
+              navigate("/send");
             }}
           />
         </div>
@@ -219,10 +223,10 @@ const DefaultView: FC<Props> = (props) => {
                       classNames(
                         "w-1/2 rounded-lg py-2.5 font-bold transition duration-150",
                         "focus:outline-none",
-                        "hover:bg-gray-50 dark:hover:bg-surface-16dp",
+                        "hover:text-gray-600 dark:hover:text-gray-300",
                         selected
-                          ? "text-orange-bitcoin"
-                          : "text-gray-700  dark:text-neutral-200"
+                          ? "text-black dark:text-white"
+                          : "text-gray-400"
                       )
                     }
                   >
@@ -236,7 +240,7 @@ const DefaultView: FC<Props> = (props) => {
                   {hasTransactions && (
                     <TransactionsTable transactions={transactions} />
                   )}
-                  {!hasTransactions && (
+                  {!isLoadingTransactions && !transactions?.length && (
                     <p className="text-gray-500 dark:text-neutral-400">
                       {t("default_view.no_transactions")}
                     </p>

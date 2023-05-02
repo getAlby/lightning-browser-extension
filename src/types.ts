@@ -7,7 +7,7 @@ import {
   WebLNNode,
 } from "~/extension/background-script/connectors/connector.interface";
 
-import { Event } from "./extension/ln/nostr/types";
+import { Event } from "./extension/providers/nostr/types";
 
 export type ConnectorType = keyof typeof connectors;
 
@@ -769,3 +769,5 @@ export interface Invoice {
 }
 
 export type BrowserType = "chrome" | "firefox";
+
+export type Theme = "dark" | "light";

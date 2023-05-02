@@ -16,8 +16,8 @@ jest.mock("~/common/lib/crypto", () => {
 });
 
 const defaultMockState = {
-  password: "123456",
   saveToStorage: jest.fn,
+  password: () => "123456",
   accounts: {},
 };
 

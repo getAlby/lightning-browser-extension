@@ -1,12 +1,6 @@
 {
   "translation": {
     "welcome": {
-      "nav": {
-        "welcome": "Bienvenido",
-        "password": "Su Contraseña",
-        "connect": "Tu cuenta Lightning",
-        "done": "Hecho"
-      },
       "set_password": {
         "title": "Proteja su billetera",
         "description": "Esta contraseña se utiliza para proteger su monedero y proporcionar acceso a la extensión del navegador. No se puede restablecer y es independiente de la contraseña de su cuenta de Alby.",
@@ -202,23 +196,32 @@
       },
       "kollider": {
         "description": "Inicie sesión en su cuenta Kollider",
-        "page": {
-          "title": "Conéctese a su cuenta Kollider",
-          "description": "¿Aún no tienes una cuenta? <0>¡Regístrese</0> ahora!"
-        },
         "username": {
-          "label": "Introduzca su nombre de usuario Kollider"
-        },
-        "password": {
-          "label": "Introduzca su contraseña de Kollider"
+          "label": "Nombre de usuario"
         },
         "errors": {
-          "connection_failed": "La conexión falló. ¿Te aseguraste de que los datos de la cuenta son correctos?"
+          "connection_failed": "La conexión falló. ¿Te aseguraste de que los datos de la cuenta son correctos?",
+          "user_already_exists": "El nombre de usuario ya existe",
+          "registration_limit_exceeded": "Límite de registro excedido, inténtalo más tarde."
         },
         "title": "Kollider",
         "currency": {
           "label": "Seleccione su cuenta de divisas"
-        }
+        },
+        "choose_path": {
+          "description": "Inicia sesión o regístrate para obtener una nueva cuenta de Kollider y conéctate a Alby.",
+          "title": "Conéctate a tú monedero Kollider",
+          "create_new": "Regístrate"
+        },
+        "create": {
+          "title": "Crea tú cuenta Kollider y conéctate a Alby",
+          "description": "Crea una nueva cuenta Kollider para enviar, recibir e intercambiar Bitcoin."
+        },
+        "login": {
+          "title": "Conéctate a tú cuenta Kollider",
+          "description": "¿Aún no tienes una cuenta? <0>¡Regístrese</0> ahora!"
+        },
+        "warning": "⚠️ Asegúrate de almacenar tus credenciales de forma segura en un administrador de contraseñas. Sin estas credenciales, tú cuenta no será recuperable."
       },
       "commando": {
         "pubkey": {
@@ -677,12 +680,6 @@
         },
         "title": "Tu billetera Alby está lista",
         "description": "Algunos consejos para que empieces a zumbar 🐝",
-        "pin": {
-          "description2": "En la lista de extensiones, busque Alby y haga clic en el ícono de la chincheta para fijarlo a la barra de herramientas",
-          "description1": "<0>Para acceder fácilmente a Alby, haga clic en el icono de la extensión</0> <1/> <2>en la esquina superior derecha de su navegador</2>",
-          "title": "📌 Fija tu extensión Alby",
-          "description3": "¡Eso es todo! Para acceder a Alby simplemente haga clic en el icono de Alby"
-        },
         "demo": {
           "label1": "Inténtalo",
           "title": "🕹️ Prueba la versión Demo de Alby",
@@ -695,13 +692,14 @@
         }
       },
       "list": {
-        "entertaiment": "Entretenimiento",
+        "entertainment": "Entretenimiento",
         "shopping": "Compras",
         "miscellaneous": "Varios",
         "showcases": "Vitrinas",
         "nostr": "Nostr",
         "trading": "Comerciar",
-        "gaming": "Juegos"
+        "gaming": "Juegos",
+        "nodeManagement": "Gestión de nodos"
       }
     },
     "confirm_request_permission": {
@@ -776,7 +774,7 @@
     "success": "Exitoso",
     "error": "Error",
     "settings": "Ajustes",
-    "websites": "Sitios web",
+    "connected_sites": "",
     "sats_one": "sat",
     "sats_other": "sats",
     "loading": "cargando",
@@ -827,7 +825,8 @@
       "lessThan": "menor que {{max}}",
       "greaterThan": "mayor que {{min}}"
     },
-    "transactions": "Transacciones"
+    "transactions": "Transacciones",
+    "balance": "Balance"
   },
   "components": {
     "allowance_menu": {
@@ -900,7 +899,9 @@
       "options": {
         "account": {
           "add": "Agregar una nueva cuenta",
-          "manage": "Administrar cuentas"
+          "manage": "Administrar cuentas",
+          "account_settings": "Configuraciones de la cuenta",
+          "go_to_web_wallet": "Administra tu cuenta de Alby"
         }
       },
       "screen_reader": "Alternar menú desplegable"

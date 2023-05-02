@@ -139,9 +139,11 @@ class LncCredentialStore implements CredentialStore {
 
   private async _save() {
     const accounts = state.getState().accounts;
-    const password = state.getState().password as string;
-    const currentAccountId = this.account.id;
-    accounts[currentAccountId].config = encryptData(this.config, password);
+    const password = await state.getState().password();
+    accounts[this.account.id].config = encryptData(
+      this.config,
+      password as string
+    );
     state.setState({ accounts });
     await state.getState().saveToStorage();
     return true;

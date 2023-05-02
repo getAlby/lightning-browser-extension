@@ -1,12 +1,6 @@
 {
   "translation": {
     "welcome": {
-      "nav": {
-        "welcome": "Vítejte",
-        "password": "Vaše heslo",
-        "connect": "Váš Lightning účet",
-        "done": "Hotovo"
-      },
       "set_password": {
         "title": "Nastavte/Nastavit heslo pro odemčení účtu",
         "description": "Toto heslo je použito pro zabezpečení vaši peněženky a pokytuje přístup k doplňku prohlížeče. Již nemůže být resetováno a nijak nesouvisí s heslem k vašemu Alby účtu.",
@@ -155,7 +149,7 @@
         "title": "Start9",
         "page": {
           "title": "Připojení k vašemu uzlu <0>Embassy</0>",
-          "instructions": "<0>Pozn.:</0> Aktuálně podporujeme pouze LND, ale v budoucnu plánujeme přidávat podporu c-lightning!<1/>V dashboardu vašeho Embassy zvolte službu <0>lightning network daemon</0>.<1/>Vyberte záložku <0>Vlastnosti (Properties)</0>.<1/>Následně zkopírujte <0>LND Connect REST URL.</0>"
+          "instructions": "<0>Pozn.:</0> Aktuálně podporujeme pouze LND, ale v budoucnu plánujeme přidávat podporu c-lightning!<1/>V dashboardu vašeho Embassy zvolte službu <0>Lightning Network Daemon</0>.<1/>Vyberte záložku <0>Vlastnosti (Properties)</0>.<1/>Následně zkopírujte <0>LND Connect REST URL.</0>"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -273,15 +267,8 @@
         "errors": {
           "connection_failed": "Připojení se nezdařilo. Jste si jisti, že jste zadali údaje k účtu správně?"
         },
-        "page": {
-          "title": "Připojení k vašemu účtu Kollider",
-          "description": "Nemáte ještě účet? <0>Vytvořte</0> ho!"
-        },
         "username": {
           "label": "Vložte vaše uživatelské jméno ke Kollider"
-        },
-        "password": {
-          "label": "Vložte vaše heslo ke Kollider"
         },
         "currency": {
           "label": "Zvolte měnu vašeho účtu"
@@ -701,7 +688,7 @@
       "list": {
         "trading": "Obchodování",
         "gaming": "Hraní her",
-        "entertaiment": "Zábava",
+        "entertainment": "Zábava",
         "shopping": "Nakupování",
         "nostr": "Nostr",
         "miscellaneous": "Různé",
@@ -721,12 +708,6 @@
           "label1": "Přijmout Bitcoin",
           "label2": "Koupit Bitcoin"
         },
-        "pin": {
-          "title": "📌 Připnout váš doplněk Alby",
-          "description1": "<0>Pro jednoduchý přístup k Alby, klikněte na ikonu doplňku</0> <1/> <2>v pravém horním rohu vašeho prohlížeče</2>",
-          "description2": "V seznamu doplňků najděte Alby a klikněte na ikonu pro připnutí k vašemu panelu nástrojů",
-          "description3": "To je vše! Pro přístup k Alby pouze klikněte na ikonu Alby"
-        },
         "demo": {
           "description": "Objevte vše, co lze s Alby dělat, na naší demo stránce",
           "label1": "Vyzkoušet",
@@ -741,7 +722,7 @@
     "success": "Úspěch",
     "error": "Chyba",
     "settings": "Nastavení",
-    "websites": "Webové stránky",
+    "connected_sites": "",
     "sats_one": "sat",
     "sats_other": "satů",
     "loading": "načítání",

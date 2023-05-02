@@ -3,7 +3,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 import Modal from "react-modal";
 import "react-toastify/dist/ReactToastify.css";
 import "~/app/styles/index.css";
-import { getTheme } from "~/app/utils";
+import { setTheme } from "~/app/utils";
 import "~/i18n/i18nConfig";
 
 import Options from "./Options";
@@ -12,7 +12,7 @@ import Options from "./Options";
 Modal.setAppElement("#options-root");
 
 // Get the active theme and apply corresponding Tailwind classes to the document
-getTheme();
+setTheme();
 
 const container = document.getElementById("options-root") as HTMLElement;
 const root = createRoot(container);
