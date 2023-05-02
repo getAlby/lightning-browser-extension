@@ -138,12 +138,6 @@
     "title": "trading",
     "items": [
       {
-        "title": "LOFT",
-        "subtitle": "Trade investment products in Bitcoin",
-        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/loft-trade_thumbnail.png",
-        "url": "https://loft.trade/"
-      },
-      {
         "title": "Kollider",
         "subtitle": "Instant Bitcoin derivatives trading",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/kollider_thumbnail.png",
