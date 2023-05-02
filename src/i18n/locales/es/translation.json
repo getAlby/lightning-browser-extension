@@ -835,7 +835,7 @@
       "new_budget": {
         "label": "Nuevo presupuesto"
       },
-      "edit_preferences": {
+      "edit_allowance": {
         "title": "Editar Asignación",
         "screen_reader": "Opciones de Asignación"
       },

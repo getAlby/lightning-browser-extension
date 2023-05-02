@@ -585,7 +585,7 @@
         "title": "Ota verkkosivustoon kirjautuminen käyttöön",
         "subtitle": "Automaattinen kirjautuminen ilman vahvistusta, kun verkkosivusto pyytää."
       },
-      "edit_preferences": {
+      "edit_allowance": {
         "title": "Muokkaa korvausta",
         "screen_reader": "Korvausvaihtoehdot"
       }

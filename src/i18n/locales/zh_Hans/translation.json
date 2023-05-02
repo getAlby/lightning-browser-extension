@@ -862,7 +862,7 @@
         "title": "启用网站登录",
         "subtitle": "网站请求时自动登录，无需确认。"
       },
-      "edit_preferences": {
+      "edit_allowance": {
         "title": "编辑限额",
         "screen_reader": "限额选项"
       },

@@ -783,7 +783,7 @@
         "title": "Activer la connexion au site Web",
         "subtitle": "Connectez-vous automatiquement sans confirmation lorsque le site Web le demande."
       },
-      "edit_preferences": {
+      "edit_allowance": {
         "title": "Modifier l'allocation",
         "screen_reader": "Options d'allocation"
       },

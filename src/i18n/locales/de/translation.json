@@ -811,7 +811,7 @@
       "heading": "Wie willst du dich mit dem TOR-Netzwerk verbinden?"
     },
     "allowance_menu": {
-      "edit_preferences": {
+      "edit_allowance": {
         "title": "Zulage bearbeiten",
         "screen_reader": "Zulässigkeitsoptionen"
       },

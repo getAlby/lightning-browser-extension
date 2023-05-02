@@ -783,7 +783,7 @@
       "new_budget": {
         "label": "Novo limite"
       },
-      "edit_preferences": {
+      "edit_allowance": {
         "title": "Editar preferências",
         "screen_reader": "Opções limite de gastos"
       },

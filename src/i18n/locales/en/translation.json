@@ -846,7 +846,7 @@
         "title": "Enable website login",
         "subtitle": "Automatically log in without confirmation when the website requests."
       },
-      "edit_preferences": {
+      "edit_allowance": {
         "title": "Edit Preferences",
         "screen_reader": "Allowance Options"
       },

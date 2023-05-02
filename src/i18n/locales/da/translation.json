@@ -777,7 +777,7 @@
         "title": "Aktiver log ind til hjemmeside",
         "subtitle": "Log ind automatisk uden bekræftelse efter anmodning fra hjemmesiden."
       },
-      "edit_preferences": {
+      "edit_allowance": {
         "title": "Rediger pulje",
         "screen_reader": "Indstillinger for pulje"
       },

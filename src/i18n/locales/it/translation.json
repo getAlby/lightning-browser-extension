@@ -777,7 +777,7 @@
         "title": "Abilita l'accesso al sito web",
         "subtitle": "Accedi automaticamente senza conferma quando il sito web lo richiede."
       },
-      "edit_preferences": {
+      "edit_allowance": {
         "title": "Modifica tolleranza",
         "screen_reader": "Opzioni di tolleranza"
       },
