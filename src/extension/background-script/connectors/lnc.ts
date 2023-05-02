@@ -172,15 +172,8 @@ class Lnc implements Connector {
   async unload() {
     console.info("LNC disconnect");
     await this.lnc.disconnect();
-    return new Promise<void>((resolve) => {
-      // give lnc a bit time to disconnect.
-      // not sure what there happens, best would be to have disconnect() return a promise
-      setTimeout(() => {
-        // TODO: investigate garbage collection
-        delete this.lnc;
-        resolve();
-      }, 2000);
-    });
+
+    delete this.lnc;
   }
 
   get supportedMethods() {
