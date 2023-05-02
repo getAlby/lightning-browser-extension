@@ -798,3 +798,5 @@ export interface Invoice {
 }
 
 export type BrowserType = "chrome" | "firefox";
+
+export type Theme = "dark" | "light";

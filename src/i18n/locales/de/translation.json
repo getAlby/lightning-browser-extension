@@ -758,13 +758,7 @@
           "title": "Eine Lightning Adresse erhalten",
           "label1": "Hole es dir jetzt!"
         },
-        "description": "Ein paar Tipps für den Anfang 🐝",
-        "pin": {
-          "title": "📌 Pin für die Alby-Erweiterung",
-          "description2": "Suche in der Liste der Erweiterungen von Alby und klicke auf das Pinsymbol, um es an die Symbolleiste anzuheften",
-          "description3": "Das war's! Um auf Alby zuzugreifen, klicke einfach auf das Alby-Symbol",
-          "description1": "<0>Um einfach auf Alby zuzugreifen, klicke auf das Erweiterungssymbol <1/> <2>in der oberen rechten Ecke Ihres Browsers"
-        }
+        "description": "Ein paar Tipps für den Anfang 🐝"
       }
     },
     "transactions": {

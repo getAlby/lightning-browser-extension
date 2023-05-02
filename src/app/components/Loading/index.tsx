@@ -5,7 +5,7 @@ function Loading({ color = "currentColor" }) {
   return (
     <div>
       <svg
-        className="animate-spin-fast h-5 w-5 text-blue-500"
+        className="animate-spin-fast h-5 w-5 text-blue-600"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
