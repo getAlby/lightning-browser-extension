@@ -21,64 +21,12 @@ import { HashRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
-import { getConnectorRoutes } from "~/app/router/connectorRoutes";
+import { getConnectorRoutes, renderRoutes } from "~/app/router/connectorRoutes";
 import Discover from "~/app/screens/Discover";
 import AlbyWallet from "~/app/screens/connectors/AlbyWallet";
 import ChooseConnector from "~/app/screens/connectors/ChooseConnector";
 import ChooseConnectorPath from "~/app/screens/connectors/ChooseConnectorPath";
 import i18n from "~/i18n/i18nConfig";
-
-function renderRoutes(
-  routes:
-    | {
-        path: string;
-        element?: JSX.Element;
-        title: string;
-        logo: string;
-        children?: {
-          index?: boolean;
-          element: JSX.Element;
-          path?: string;
-        }[];
-      }[]
-    | {
-        index?: boolean;
-        element: JSX.Element;
-        path?: string;
-      }[]
-) {
-  return routes.map((route) => {
-    if ("children" in route && route.children) {
-      if ("element" in route && route.element) {
-        return (
-          <Route key={route.path} path={route.path}>
-            <Route index element={route.element} />
-            {renderRoutes(route.children)}
-          </Route>
-        );
-      } else {
-        let indexRoute;
-        const indexRouteIndex = route.children.findIndex(
-          (childRoute) => childRoute.index === true
-        );
-
-        if (indexRouteIndex !== -1) {
-          indexRoute = route.children.splice(indexRouteIndex, 1)[0];
-          return (
-            <Route key={route.path} path={route.path}>
-              <Route index element={indexRoute.element} />
-              {renderRoutes(route.children)}
-            </Route>
-          );
-        }
-      }
-    } else {
-      return (
-        <Route key={route.path} path={route.path} element={route.element} />
-      );
-    }
-  });
-}
 
 function Options() {
   const connectorRoutes = getConnectorRoutes();

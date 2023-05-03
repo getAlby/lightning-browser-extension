@@ -8,7 +8,7 @@ import { HashRouter as Router, Routes, Route, Outlet } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Container from "~/app/components/Container";
 import { SettingsProvider } from "~/app/context/SettingsContext";
-import { getConnectorRoutes } from "~/app/router/connectorRoutes";
+import { getConnectorRoutes, renderRoutes } from "~/app/router/connectorRoutes";
 import AlbyWallet from "~/app/screens/connectors/AlbyWallet";
 import ChooseConnectorPath from "~/app/screens/connectors/ChooseConnectorPath";
 import i18n from "~/i18n/i18nConfig";
@@ -52,33 +52,7 @@ function Welcome() {
                     />
                   }
                 ></Route>
-                {connectorRoutes.map((connectorRoute) => {
-                  if (connectorRoute.children) {
-                    return (
-                      <Route
-                        key={connectorRoute.path}
-                        path={connectorRoute.path}
-                      >
-                        <Route index element={connectorRoute.element} />
-                        {connectorRoute.children.map((connectorRoute) => (
-                          <Route
-                            key={connectorRoute.path}
-                            path={connectorRoute.path}
-                            element={connectorRoute.element}
-                          />
-                        ))}
-                      </Route>
-                    );
-                  } else {
-                    return (
-                      <Route
-                        key={connectorRoute.path}
-                        path={connectorRoute.path}
-                        element={connectorRoute.element}
-                      />
-                    );
-                  }
-                })}
+                {renderRoutes(connectorRoutes)}
               </Route>
             </Route>
             <Route path="test-connection" element={<TestConnection />} />

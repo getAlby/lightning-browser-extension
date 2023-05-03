@@ -12,6 +12,7 @@ import ConnectMyNode from "@screens/connectors/ConnectMyNode";
 import ConnectRaspiBlitz from "@screens/connectors/ConnectRaspiBlitz";
 import ConnectStart9 from "@screens/connectors/ConnectStart9";
 import ConnectUmbrel from "@screens/connectors/ConnectUmbrel";
+import { Route } from "react-router-dom";
 import i18n from "~/i18n/i18nConfig";
 
 import ConnectCommando from "../screens/connectors/ConnectCommando";
@@ -271,4 +272,38 @@ function getConnectorRoutes(): ConnectorRoute[] {
   ];
 }
 
-export { getConnectorRoutes, ConnectorRoute };
+function renderRoutes(routes: (ChildRoute | ConnectorRoute)[]) {
+  return routes.map((route: ChildRoute | ConnectorRoute) => {
+    if ("children" in route && route.children) {
+      if ("element" in route && route.element) {
+        return (
+          <Route key={route.path} path={route.path}>
+            <Route index element={route.element} />
+            {renderRoutes(route.children)}
+          </Route>
+        );
+      } else {
+        let indexRoute;
+        const indexRouteIndex = route.children.findIndex(
+          (childRoute) => childRoute.index === true
+        );
+
+        if (indexRouteIndex !== -1) {
+          indexRoute = route.children.splice(indexRouteIndex, 1)[0];
+          return (
+            <Route key={route.path} path={route.path}>
+              <Route index element={indexRoute.element} />
+              {renderRoutes(route.children)}
+            </Route>
+          );
+        }
+      }
+    } else {
+      return (
+        <Route key={route.path} path={route.path} element={route.element} />
+      );
+    }
+  });
+}
+
+export { getConnectorRoutes, ConnectorRoute, renderRoutes };
