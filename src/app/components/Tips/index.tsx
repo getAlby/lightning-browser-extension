@@ -1,7 +1,6 @@
 import Button from "@components/Button";
 import CloseableCard from "@components/CloseableCard";
-import { Fragment } from "react";
-import { Trans, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useTips } from "~/app/hooks/useTips";
 import { TIPS } from "~/common/constants";
@@ -45,28 +44,6 @@ export default function Tips() {
           >
             <Button label={t("top_up_wallet.label2")} />
           </a>,
-        ]}
-      />
-    );
-  }
-  if (hasTip(TIPS.PIN)) {
-    tipElements.push(
-      <CloseableCard
-        key={TIPS.PIN}
-        handleClose={() => closeTip(TIPS.PIN)}
-        title={t("pin.title")}
-        description={[
-          // eslint-disable-next-line react/jsx-key
-          <Trans i18nKey={"pin.description1"} t={t}>
-            <Fragment />
-            <img
-              src="assets/icons/puzzle.svg"
-              className="w-5 inline align-bottom dark:invert"
-            />
-            <Fragment />
-          </Trans>,
-          t("pin.description2"),
-          t("pin.description3"),
         ]}
       />
     );

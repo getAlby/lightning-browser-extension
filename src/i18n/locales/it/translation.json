@@ -699,12 +699,6 @@
           "label2": "Compra Bitcoin",
           "description": "Crea una fattura lightning, inviati qualche bitcoin e inizia ad usare Alby nell'ecosistema lightning"
         },
-        "pin": {
-          "title": "📌 Aggiungi la tua estensione Alby",
-          "description3": "Ecco fatto! Per accedere ad Alby basta cliccare l'icona di Alby",
-          "description1": "<0>Per accedere facilmente ad Alby, clicca sull'icona dell'estensione</0> <1/> <2>in alto a destra del tuo browser</2>",
-          "description2": "Nella lista delle estensioni, trova Alby e clicca su aggiungi alla barra degli strumenti"
-        },
         "demo": {
           "title": "🕹️ Prova la Demo di Alby",
           "description": "Scopri tutto quello che puoi fare con Alby sul nostro sito demo",

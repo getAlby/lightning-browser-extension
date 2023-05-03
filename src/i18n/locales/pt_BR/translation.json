@@ -637,12 +637,6 @@
           "label1": "Receber Bitcoin",
           "title": "⚡️ Adicione fundos na sua carteira"
         },
-        "pin": {
-          "title": "📌 Fixar extensão Alby",
-          "description1": "<0>Para acessar a Alby, clique no ícone da extensão</0> <1/> <2>no canto superior direito do seu navegador</2>",
-          "description2": "Na lista de extensões, localize a Alby e clique no ícone de fixação para fixá-lo na barra de ferramentas do navegador",
-          "description3": "É isso! Agora é só clicar no ícone da Alby"
-        },
         "address": {
           "label1": "Eu quero!",
           "title": "⚡️ Endereço relâmpago",

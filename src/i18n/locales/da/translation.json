@@ -636,12 +636,6 @@
           "label1": "Modtag Bitcoin",
           "label2": "Køb Bitcoin"
         },
-        "pin": {
-          "title": "📌 Fastgør din Alby-udvidelse",
-          "description1": "<0>Få nem adgang til Alby ved at klikke på udvidelsesikonet</0> <1/> <2>i din browsers øverste højre hjørne</2>",
-          "description2": "Find Alby i listen med udvidelser, og klik på tegnestift-ikonet for at fastgøre den til værktøjslinjen",
-          "description3": "Sådan! Et klik på Albys ikon åbner den"
-        },
         "demo": {
           "title": "🕹️ Få en prøvetur med Alby",
           "description": "Se alle de ting, du kan med Alby på vores præsentationsside",

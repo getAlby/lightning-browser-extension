@@ -9,11 +9,15 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import msg from "~/common/lib/msg";
 
+import galoyBitcoinBeach from "/static/assets/icons/galoy_bitcoin_beach.png";
+import galoyBitcoinJungle from "/static/assets/icons/galoy_bitcoin_jungle.png";
+
 export const galoyUrls = {
   "galoy-bitcoin-beach": {
     i18nPrefix: "bitcoin_beach",
     label: "Bitcoin Beach Wallet",
     website: "https://galoy.io/bitcoin-beach-wallet/",
+    logo: galoyBitcoinBeach,
     url:
       process.env.BITCOIN_BEACH_GALOY_URL ||
       "https://api.mainnet.galoy.io/graphql/",
@@ -22,6 +26,7 @@ export const galoyUrls = {
     i18nPrefix: "bitcoin_jungle",
     label: "Bitcoin Jungle Wallet",
     website: "https://bitcoinjungle.app/",
+    logo: galoyBitcoinJungle,
     url:
       process.env.BITCOIN_JUNGLE_GALOY_URL ||
       "https://api.mainnet.bitcoinjungle.app/graphql",
@@ -40,7 +45,7 @@ type Props = {
 
 export default function ConnectGaloy(props: Props) {
   const { instance } = props;
-  const { url, label, website, i18nPrefix } = galoyUrls[instance];
+  const { url, label, website, i18nPrefix, logo } = galoyUrls[instance];
 
   const navigate = useNavigate();
   const { t } = useTranslation("translation", {
@@ -301,7 +306,7 @@ export default function ConnectGaloy(props: Props) {
   return (
     <ConnectorForm
       title={
-        <h1 className="mb-6 text-2xl font-bold dark:text-white">
+        <h1 className="text-2xl font-bold dark:text-white">
           <Trans
             i18nKey={`${i18nPrefix}.page.title`}
             t={t}
@@ -312,6 +317,7 @@ export default function ConnectGaloy(props: Props) {
           />
         </h1>
       }
+      logo={logo}
       submitLabel={
         smsCodeRequested || smsCode || acceptJwtDirectly || jwt
           ? t("galoy.actions.login")

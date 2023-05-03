@@ -32,14 +32,14 @@ export default function PublisherCard({
       className={classNames(
         isSmall ? "p-2" : "flex-col justify-center p-4",
         isCard && "drop-shadow rounded-lg mt-4",
-        !image && "h-24",
+        !image && "h-16",
         "flex items-center bg-white dark:bg-surface-02dp"
       )}
     >
       {image && (
         <img
-          className={`m-2 shrink-0 object-cover rounded-lg ${
-            isSmall ? "w-14 h-14 mr-4" : "w-20 h-20"
+          className={`ml-1 mr-2 shrink-0 object-cover rounded-md ${
+            isSmall ? "w-10 h-10 mr-3" : "w-20 h-20"
           }`}
           src={image || DEFAULT_IMAGE}
           alt={`${title} logo`}
@@ -54,14 +54,14 @@ export default function PublisherCard({
         className={
           "flex flex-col overflow-hidden w-full " +
           (isSmall ? "" : "text-center ") +
-          (isSmall && !image && "ml-4")
+          (isSmall && !image && "ml-1")
         }
       >
         <h2
           title={title}
           className={
-            "text-xl font-semibold dark:text-white overflow-hidden text-ellipsis whitespace-nowrap leading-1" +
-            (isSmall ? "my-1" : "my-2")
+            "font-semibold dark:text-white overflow-hidden text-ellipsis whitespace-nowrap leading-1" +
+            (isSmall ? " text-l" : " my-2 text-xl")
           }
         >
           {title}
@@ -80,7 +80,10 @@ export default function PublisherCard({
         {!url && description && (
           <p
             title={description}
-            className="text-gray-500 dark:text-gray-400 mb-2 line-clamp-2"
+            className={
+              "text-gray-500 dark:text-gray-400 line-clamp-2" +
+              (isSmall ? " -mt-1" : " mb-2")
+            }
           >
             {description}
           </p>
