@@ -5,7 +5,11 @@ import shouldInject from "./shouldInject";
 
 // Nostr calls that can be executed from the WebBTC Provider.
 // Update when new calls are added
-const webbtcCalls = ["webbtc/getInfo", "webbtc/signPsbtWithPrompt"];
+const webbtcCalls = [
+  "webbtc/enable",
+  "webbtc/getInfo",
+  "webbtc/signPsbtWithPrompt",
+];
 // calls that can be executed when `window.webbtc` is not enabled for the current content page
 const disabledCalls = ["webbtc/enable"];
 
@@ -13,13 +17,13 @@ let isEnabled = false; // store if nostr is enabled for this content page
 let isRejected = false; // store if the nostr enable call failed. if so we do not prompt again
 let callActive = false; // store if a nostr call is currently active. Used to prevent multiple calls in parallel
 
+const SCOPE = "webbtc";
+
 async function init() {
   const inject = await shouldInject();
   if (!inject) {
     return;
   }
-
-  const SCOPE = "webbtc";
 
   // message listener to listen to inpage webbtc calls
   // those calls get passed on to the background script
@@ -80,15 +84,7 @@ async function init() {
           }
         }
 
-        window.postMessage(
-          {
-            application: "LBE",
-            response: true,
-            data: response,
-            scope: SCOPE,
-          },
-          "*" // TODO use origin
-        );
+        postMessage(ev, response);
       };
 
       callActive = true;
@@ -101,5 +97,18 @@ async function init() {
 }
 
 init();
+
+function postMessage(ev, response) {
+  window.postMessage(
+    {
+      id: ev.data.id,
+      application: "LBE",
+      response: true,
+      data: response,
+      scope: SCOPE,
+    },
+    "*"
+  );
+}
 
 export {};
