@@ -167,7 +167,7 @@ export enum CURRENCIES {
 export enum TIPS {
   TOP_UP_WALLET = "top_up_wallet",
   DEMO = "demo",
-  ADDRESS = "address",
+  MNEMONIC = "mnemonic",
 }
 
 export const DEFAULT_SETTINGS: SettingsStorage = {

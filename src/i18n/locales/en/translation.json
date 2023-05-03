@@ -403,8 +403,8 @@
         },
         "mnemonic": {
           "title": "Secret Key",
-          "description": "Your Account Secret Key allows you to use Alby to interact with protocols such as Nostr or Oridinals.",
-          "description2": "Your Secret Key is a set of 12 words that will allow you to access your keys to protocols such as Nostr or Oridinals on a new device or in case you loose access to your account.",
+          "description": "Your Account Secret Key allows you to use Alby to interact with protocols such as Nostr or Ordinals.",
+          "description2": "Your Secret Key is a set of 12 words that will allow you to access your keys to protocols such as Nostr or Ordinals on a new device or in case you loose access to your account.",
           "saved": "Secret Key encrypted & saved successfully.",
           "existing_nostr_key_notice": "⚠️ This account already has a nostr private key set and will not be derived from this secret key. You can manage your nostr key from your account settings.",
           "generate": {
@@ -417,7 +417,7 @@
             "error_confirm": "Please confirm that you have backed up your secret key.",
             "save": "Save Secret Key",
             "button": "Backup Secret Key",
-            "warning": "⚠️ Backup your Secret Key! Not backing it up might result in permanently loosing access to your Nostr identity or purchased Oridinals.",
+            "warning": "⚠️ Backup your Secret Key! Not backing it up might result in permanently loosing access to your Nostr identity or purchased Ordinals.",
             "description1": "In addition to the Bitcoin Lightning Network, Alby allows you to generate keys and interact with other protocols such as:",
             "description2": "Your Secret Key is a set of 12 words that will allow you to access your keys to those protocols on a new device or in case you loose access to your account:",
             "protocols": {
@@ -699,20 +699,16 @@
         "title": "Your Alby wallet is ready",
         "description": "A few tips to get you started buzzin'🐝",
         "top_up_wallet": {
-          "title": "⚡️ Top up your wallet",
-          "description": "Create a lightning invoice, send some bitcoin to yourself and start using Alby in the lightning ecosystem",
-          "label1": "Receive Bitcoin",
-          "label2": "Buy Bitcoin"
+          "title": "Buy Bitcoin",
+          "description": "Need a top up?\nWe got you!"
         },
         "demo": {
-          "title": "🕹️ Try out Alby Demo",
-          "description": "Discover all things you can do with Alby on our demo website",
-          "label1": "Give it a try"
+          "title": "Alby Demo",
+          "description": "Discover Alby's features\non our demo website"
         },
-        "address": {
-          "title": "⚡️ Get a lightning address",
-          "description": "Create your own lightning address and to receive lightning payments with ease of sending an e-mail",
-          "label1": "Get it now!"
+        "mnemonic": {
+          "title": "Nostr and Ordinals",
+          "description": "Planning to use those?\nGenerate your keys now"
         }
       }
     },

@@ -1,16 +1,52 @@
-import Button from "@components/Button";
-import CloseableCard from "@components/CloseableCard";
+import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
+import TipCard from "~/app/components/TipCard";
+import { useAccount } from "~/app/context/AccountContext";
 import { useTips } from "~/app/hooks/useTips";
+import BuyBitcoinTipCardIcon from "~/app/icons/BuyBitcoinTipCardIcon";
+import DemoTipCardIcon from "~/app/icons/DemoTipCardIcon";
+import MnemonicTipCardIcon from "~/app/icons/MnemonicTipCardIcon";
+import { classNames } from "~/app/utils";
 import { TIPS } from "~/common/constants";
 
 export default function Tips() {
   const { t } = useTranslation("translation", {
     keyPrefix: "discover.tips",
   });
+  const accountContext = useAccount();
+  const accountId = accountContext?.account?.id;
 
-  const navigate = useNavigate();
+  const tipCardConfigs = useMemo(
+    () =>
+      ({
+        [TIPS.TOP_UP_WALLET]: {
+          background: false,
+          border: "border-orange-500",
+          arrow: "text-orange-500",
+          backgroundIcon: <BuyBitcoinTipCardIcon />,
+          link: "https://getalby.com/topup",
+        },
+        [TIPS.DEMO]: {
+          background: false,
+          border: "border-yellow-500",
+          arrow: "text-yellow-500",
+          backgroundIcon: <DemoTipCardIcon />,
+          link: "https://getalby.com/demo",
+        },
+        [TIPS.MNEMONIC]: {
+          background: "bg-purple-50",
+          border: "border-purple-500",
+          arrow: "text-purple-500",
+          backgroundIcon: <MnemonicTipCardIcon />,
+          link: `/accounts/${accountId}/secret-key/backup`,
+        },
+      } as const),
+    [accountId]
+  );
+
+  // const navigate = useNavigate();
 
   const { tips, closeTip } = useTips();
 
@@ -18,73 +54,32 @@ export default function Tips() {
     return tips.includes(id);
   }
 
-  const tipElements = [] as JSX.Element[];
-
-  if (hasTip(TIPS.TOP_UP_WALLET)) {
-    tipElements.push(
-      <CloseableCard
-        key={TIPS.TOP_UP_WALLET}
-        handleClose={() => closeTip(TIPS.TOP_UP_WALLET)}
-        title={t("top_up_wallet.title")}
-        description={t("top_up_wallet.description")}
-        buttons={[
-          <Button
-            key={1}
-            label={t("top_up_wallet.label1")}
-            primary
-            onClick={() => {
-              navigate("/receive");
+  const tipElements = Object.values(TIPS)
+    .filter(hasTip)
+    .map((tip) => {
+      const config = tipCardConfigs[tip];
+      const isExternal = config.link.startsWith("http");
+      return (
+        <Link
+          key={tip}
+          to={config.link}
+          target={isExternal ? "_blank" : undefined}
+          rel={isExternal ? "noreferrer" : undefined}
+        >
+          <TipCard
+            handleClose={(e) => {
+              closeTip(tip);
+              e.preventDefault();
             }}
-          />,
-          <a
-            key={2}
-            href="https://getalby.com/topup"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <Button label={t("top_up_wallet.label2")} />
-          </a>,
-        ]}
-      />
-    );
-  }
-
-  if (hasTip(TIPS.DEMO)) {
-    tipElements.push(
-      <CloseableCard
-        key={TIPS.DEMO}
-        handleClose={() => closeTip(TIPS.DEMO)}
-        title={t("demo.title")}
-        description={t("demo.description")}
-        buttons={[
-          <a
-            key={1}
-            href="https://getalby.com/demo"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <Button label={t("demo.label1")} primary />
-          </a>,
-        ]}
-      />
-    );
-  }
-
-  if (hasTip(TIPS.ADDRESS)) {
-    tipElements.push(
-      <CloseableCard
-        key={TIPS.ADDRESS}
-        handleClose={() => closeTip(TIPS.ADDRESS)}
-        title={t("address.title")}
-        description={t("address.description")}
-        buttons={[
-          <a key={1} href="https://getalby.com/demo">
-            <Button label={t("address.label1")} primary />
-          </a>,
-        ]}
-      />
-    );
-  }
+            title={t(`${tip}.title`)}
+            description={t(`${tip}.description`)}
+            className={classNames(config.background, config.border)}
+            arrowClassName={config.arrow}
+            backgroundIcon={config.backgroundIcon}
+          />
+        </Link>
+      );
+    });
 
   return <>{tipElements}</>;
 }
