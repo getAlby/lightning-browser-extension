@@ -1,3 +1,4 @@
+import fetchAdapter from "@vespaiach/axios-fetch-adapter";
 import axios, { AxiosRequestConfig } from "axios";
 import lightningPayReq from "bolt11";
 import { Account } from "~/types";
@@ -347,6 +348,7 @@ class Galoy implements Connector {
         "Content-Type": "application/json",
         Authorization: `Bearer ${this.config.accessToken}`,
       },
+      adapter: fetchAdapter,
     };
     reqConfig.data = query;
     let data;

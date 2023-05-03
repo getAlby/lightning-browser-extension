@@ -895,7 +895,7 @@
         "subtitle": "Automatically log in without confirmation when the website requests."
       },
       "edit_allowance": {
-        "title": "Edit Allowance",
+        "title": "Edit Preferences",
         "screen_reader": "Allowance Options"
       },
       "edit_permissions": "Edit Permissions"

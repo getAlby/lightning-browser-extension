@@ -91,7 +91,7 @@ export default function PasswordForm<
 
   return (
     <>
-      <div className="w-full mb-6">
+      <div className="w-full">
         <TextField
           autoFocus={autoFocus}
           id="password"
@@ -132,7 +132,7 @@ export default function PasswordForm<
         )}
       </div>
       {confirm && (
-        <div className="w-full">
+        <div className="mt-6 w-full">
           <TextField
             id="passwordConfirmation"
             label={t("confirm_password.label")}

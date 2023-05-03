@@ -1,4 +1,4 @@
-import WebBTCProvider from "../ln/webbtc";
+import WebBTCProvider from "../providers/webbtc";
 
 if (document) {
   window.webbtc = new WebBTCProvider();

@@ -3,7 +3,7 @@ import Hex from "crypto-js/enc-hex";
 import sha256 from "crypto-js/sha256";
 import db from "~/extension/background-script/db";
 import state from "~/extension/background-script/state";
-import { Event } from "~/extension/ln/nostr/types";
+import { Event } from "~/extension/providers/nostr/types";
 
 export async function hasPermissionFor(method: string, host: string) {
   if (!host) {

@@ -9,6 +9,8 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import msg from "~/common/lib/msg";
 
+import logo from "/static/assets/icons/btcpay.svg";
+
 const initialFormData = {
   url: "",
   macaroon: "",
@@ -114,22 +116,21 @@ export default function ConnectBtcpay() {
     <ConnectorForm
       title={t("page.title")}
       description={t("page.instructions")}
+      logo={logo}
       submitLoading={loading}
       submitDisabled={formData.url === "" || formData.macaroon === ""}
       onSubmit={handleSubmit}
     >
-      <div className="mb-6">
-        <TextField
-          id="btcpay-config"
-          label={t("config.label")}
-          placeholder={t("config.placeholder")}
-          onChange={handleChange}
-          required
-          autoFocus={true}
-        />
-      </div>
+      <TextField
+        id="btcpay-config"
+        label={t("config.label")}
+        placeholder={t("config.placeholder")}
+        onChange={handleChange}
+        required
+        autoFocus={true}
+      />
       {formData.url.match(/\.onion/i) && (
-        <div className="mb-6">
+        <div className="mt-6">
           <CompanionDownloadInfo
             hasTorCallback={(hasTor: boolean) => {
               setHasTorSupport(hasTor);

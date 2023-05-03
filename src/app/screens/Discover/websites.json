@@ -3,6 +3,18 @@
     "title": "entertainment",
     "items": [
       {
+        "title": "CurioCaster",
+        "subtitle": "Podcast web player",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/curiocaster_thumbnail.png",
+        "url": "https://curiocaster.com"
+      },
+      {
+        "title": "Music Side Project",
+        "subtitle": "Music web player",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/musicsideproject_thumbnail.png",
+        "url": "https://musicsideproject.com/"
+      },
+      {
         "title": "Podverse",
         "subtitle": "Podcast player with bitcoin payments",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/podverse_thumbnail.png",
@@ -67,6 +79,18 @@
         "url": "https://blogstack.io/"
       },
       {
+        "title": "Blowater",
+        "subtitle": "A web chat client with delightful UX",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/blowater_thumbnail.png",
+        "url": "https://blowater.deno.dev"
+      },
+      {
+        "title": "Broadcstr",
+        "subtitle": "Social media that you control and define the boundaries",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/broadcstr.png",
+        "url": "https://www.broadcstr.com/"
+      },
+      {
         "title": "emon.chat",
         "subtitle": "Instant messaging client with built in lightning payments",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/emon_thumbnail.svg",
@@ -113,12 +137,6 @@
   {
     "title": "trading",
     "items": [
-      {
-        "title": "LOFT",
-        "subtitle": "Trade investment products in Bitcoin",
-        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/loft-trade_thumbnail.png",
-        "url": "https://loft.trade/"
-      },
       {
         "title": "Kollider",
         "subtitle": "Instant Bitcoin derivatives trading",
