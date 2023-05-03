@@ -510,6 +510,7 @@ export interface MessageDecryptGet extends MessageDefault {
 export interface MessageSignPsbt extends MessageDefault {
   args: {
     psbt: string;
+    testnet?: boolean; // TODO: review
   };
   action: "signPsbt";
 }

@@ -1,20 +1,32 @@
 import * as secp256k1 from "@noble/secp256k1";
 import { hex } from "@scure/base";
-import { HDKey } from "@scure/bip32";
-import * as bip39 from "@scure/bip39";
 import * as btc from "@scure/btc-signer";
+import { decryptData } from "~/common/lib/crypto";
+import { getRootPrivateKey } from "~/common/lib/mnemonic";
+import state from "~/extension/background-script/state";
 import { MessageSignPsbt } from "~/types";
 
-// TODO: Load from account
-// TODO: Make network configurable via ENV
-const mnemonic =
-  "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about";
-const seed = bip39.mnemonicToSeedSync(mnemonic);
-const hdkey = HDKey.fromMasterSeed(seed);
+// TODO: Make network (mainnet or testnet) configurable via ENV
 
 const signPsbt = async (message: MessageSignPsbt) => {
   try {
-    const privateKey = hdkey.privateKey!;
+    // TODO: is this the correct way to decrypt the mnmenonic?
+    const password = await state.getState().password();
+    if (!password) {
+      throw new Error("No password set");
+    }
+    const account = await state.getState().getAccount();
+    if (!account) {
+      throw new Error("No account selected");
+    }
+    if (!account.mnemonic) {
+      throw new Error("No mnemonic set");
+    }
+    const mnemonic = decryptData(account.mnemonic, password);
+    const privateKey = secp256k1.utils.hexToBytes(
+      //deriveBitcoinPrivateKey(mnemonic, message.args.testnet)
+      getRootPrivateKey(mnemonic)
+    );
 
     const psbtBytes = secp256k1.utils.hexToBytes(message.args.psbt);
     const transaction = btc.Transaction.fromPSBT(psbtBytes);
