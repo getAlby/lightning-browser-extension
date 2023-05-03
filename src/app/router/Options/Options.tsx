@@ -49,12 +49,29 @@ function renderRoutes(
 ) {
   return routes.map((route) => {
     if ("children" in route && route.children) {
-      return (
-        <Route key={route.path} path={route.path}>
-          <Route index element={route.children[0].element} />
-          {route.children.shift() && renderRoutes(route.children)}
-        </Route>
-      );
+      if ("element" in route && route.element) {
+        return (
+          <Route key={route.path} path={route.path}>
+            <Route index element={route.element} />
+            {renderRoutes(route.children)}
+          </Route>
+        );
+      } else {
+        let indexRoute;
+        const indexRouteIndex = route.children.findIndex(
+          (childRoute) => childRoute.index === true
+        );
+
+        if (indexRouteIndex !== -1) {
+          indexRoute = route.children.splice(indexRouteIndex, 1)[0];
+          return (
+            <Route key={route.path} path={route.path}>
+              <Route index element={indexRoute.element} />
+              {renderRoutes(route.children)}
+            </Route>
+          );
+        }
+      }
     } else {
       return (
         <Route key={route.path} path={route.path} element={route.element} />
