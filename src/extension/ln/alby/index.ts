@@ -27,7 +27,7 @@ export default class AlbyProvider {
    */
   addAccount(name: string, connector: string, config: Record<string, unknown>) {
     if (!this.enabled) {
-      throw new Error("Provider must be enabled before calling getInfo");
+      throw new Error("Provider must be enabled before calling addAccount");
     }
     return this.execute("addAccount", { connector, name, config });
   }

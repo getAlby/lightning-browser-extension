@@ -35,25 +35,23 @@ async function init() {
     if (ev.data && !ev.data.response) {
       // if an enable call railed we ignore the request to prevent spamming the user with prompts
       if (isRejected) {
-        console.error(
-          "Enable had failed. Rejecting further Alby calls until the next reload"
-        );
+        postMessage(ev, {
+          error:
+            "window.alby call cancelled (rejecting further window.alby calls until the next reload)",
+        });
         return;
       }
       // if a call is active we ignore the request
       if (callActive) {
-        console.error("alby call already executing");
+        postMessage(ev, { error: "window.alby call already executing" });
         return;
       }
-      // limit the calls that can be made from alby
+      // limit the calls that can be made from window.alby
       // only listed calls can be executed
       // if not enabled only enable can be called.
       const availableCalls = isEnabled ? albyCalls : disabledCalls;
       if (!availableCalls.includes(ev.data.action)) {
-        console.error(
-          "Function not available. Is the provider enabled?",
-          ev.data.action
-        );
+        console.error("Function not available.");
         return;
       }
 
@@ -79,15 +77,7 @@ async function init() {
             isRejected = true;
           }
         }
-        window.postMessage(
-          {
-            application: "LBE",
-            response: true,
-            data: response,
-            scope: "alby",
-          },
-          "*" // TODO use origin
-        );
+        postMessage(ev, response);
       };
       callActive = true;
       return browser.runtime
@@ -96,6 +86,19 @@ async function init() {
         .catch(replyFunction);
     }
   });
+}
+
+function postMessage(ev, response) {
+  window.postMessage(
+    {
+      id: ev.data.id,
+      application: "LBE",
+      response: true,
+      data: response,
+      scope: "alby",
+    },
+    "*"
+  );
 }
 
 init();
