@@ -24,16 +24,16 @@ export default function ChooseConnectorPath({ title, description }: Props) {
   return (
     <div className="relative mt-14 lg:grid lg:gap-8 text-center">
       <div className="relative">
-        <div>
+        <div className="w-full flex flex-col justify-center items-center">
           <h1 className="text-3xl font-bold dark:text-white">{title}</h1>
           {description && (
-            <p className="text-gray-500 mt-6 dark:text-neutral-400 w-full">
+            <p className="text-gray-500 mt-10 dark:text-neutral-400 w-96 text-center">
               {description}
             </p>
           )}
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-4 lg:gap-8 xl:gap-18 mt-8 mb-4 lg:my-12">
+        <div className="grid lg:grid-cols-2 gap-4 lg:gap-8 xl:gap-18 mt-8 mb-4 lg:mt-14 lg:mb-12">
           <ConnectorPath
             title={t("alby.title")}
             description={t("alby.description")}
