@@ -6,7 +6,7 @@ import Select from "@components/form/Select";
 import TextField from "@components/form/TextField";
 import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
 import { useState } from "react";
-import { Trans, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { ACCOUNT_CURRENCIES } from "~/common/constants";
@@ -158,25 +158,9 @@ export default function ConnectKollidier({ variant }: Props) {
   ) : (
     <ConnectorForm
       title={t(`${variant}.title`)}
-      description={
-        variant === "create" ? (
-          t(`create.description`)
-        ) : (
-          <Trans
-            i18nKey={"login.description"}
-            t={t}
-            components={[
-              // eslint-disable-next-line react/jsx-key
-              <Link
-                className="underline"
-                to="/accounts/new/choose-connector/kollider/create"
-              ></Link>,
-            ]}
-          />
-        )
-      }
-      logo={logo}
+      description={variant === "create" ? t(`create.description`) : null}
       submitLoading={loading}
+      logo={logo}
       submitDisabled={
         loading ||
         formData.password === "" ||
