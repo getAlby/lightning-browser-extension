@@ -16,7 +16,7 @@ interface State {
   account: Account | null;
   accounts: Accounts;
   migrations: Migration[] | null;
-  connector: Connector | null;
+  connector: Promise<Connector> | null;
   currentAccountId: string | null;
   nostrPrivateKey: string | null;
   nostr: Nostr | null;
@@ -96,19 +96,25 @@ const state = createState<State>((set, get) => ({
   },
   getConnector: async () => {
     if (get().connector) {
-      return get().connector as Connector;
+      const connector = (await get().connector) as Connector;
+      return connector;
     }
-    const currentAccountId = get().currentAccountId as string;
-    const account = get().accounts[currentAccountId];
-    const password = await get().password();
-    if (!password) throw new Error("Password is not set");
-    const config = decryptData(account.config as string, password);
+    // use a Promise to initialize the connector
+    // this makes sure we can immediatelly set the state and use the same promise for future calls
+    // we must make sure not two connections are initialized
+    const connectorPromise = (async () => {
+      const currentAccountId = get().currentAccountId as string;
+      const account = get().accounts[currentAccountId];
+      const password = await get().password();
+      if (!password) throw new Error("Password is not set");
+      const config = decryptData(account.config as string, password);
+      const connector = new connectors[account.connector](account, config);
+      await connector.init();
+      return connector;
+    })();
+    set({ connector: connectorPromise });
 
-    const connector = new connectors[account.connector](account, config);
-    await connector.init();
-
-    set({ connector: connector });
-
+    const connector = await connectorPromise;
     return connector;
   },
   getNostr: async () => {
@@ -146,8 +152,8 @@ const state = createState<State>((set, get) => ({
 
     browser.tabs.remove(allTabIds);
 
-    const connector = get().connector;
-    if (connector) {
+    if (get().connector) {
+      const connector = (await get().connector) as Connector;
       await connector.unload();
     }
     set({ connector: null, account: null, nostr: null });

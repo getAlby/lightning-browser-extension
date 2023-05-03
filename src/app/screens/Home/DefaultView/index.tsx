@@ -132,7 +132,7 @@ const DefaultView: FC<Props> = (props) => {
       ...invoice,
       title: invoice.memo,
       description: invoice.memo,
-      date: dayjs(invoice.settleDate).fromNow(),
+      date: invoice.settleDate ? dayjs(invoice.settleDate).fromNow() : "",
     }));
 
     for (const invoice of invoices) {
