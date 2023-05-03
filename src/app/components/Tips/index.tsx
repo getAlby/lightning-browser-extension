@@ -22,21 +22,21 @@ export default function Tips() {
     () =>
       ({
         [TIPS.TOP_UP_WALLET]: {
-          background: false,
+          background: "bg-white dark:bg-surface-02dp",
           border: "border-orange-500",
           arrow: "text-orange-500",
           backgroundIcon: <BuyBitcoinTipCardIcon />,
           link: "https://getalby.com/topup",
         },
         [TIPS.DEMO]: {
-          background: false,
+          background: "bg-white dark:bg-surface-02dp",
           border: "border-yellow-500",
           arrow: "text-yellow-500",
           backgroundIcon: <DemoTipCardIcon />,
           link: "https://getalby.com/demo",
         },
         [TIPS.MNEMONIC]: {
-          background: "bg-purple-50",
+          background: "bg-purple-50 dark:bg-purple-950",
           border: "border-purple-500",
           arrow: "text-purple-500",
           backgroundIcon: <MnemonicTipCardIcon />,

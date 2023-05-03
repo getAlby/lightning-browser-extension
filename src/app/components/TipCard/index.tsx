@@ -25,7 +25,7 @@ export default function TipCard({
   return (
     <div
       className={classNames(
-        "bg-white dark:bg-surface-02dp shadow-md p-6 w-80 h-36 rounded-lg border-solid border-2 relative",
+        "shadow-md p-6 w-80 h-36 rounded-lg border-solid border-2 relative",
         !!className && className
       )}
     >
@@ -46,7 +46,7 @@ export default function TipCard({
         onClick={handleClose}
         className="flex items-center absolute top-0 right-0 p-2 dark:text-white"
       >
-        <CrossIcon className="h-5 w-5 text-gray-500 hover:text-black" />
+        <CrossIcon className="h-5 w-5 text-gray-500 hover:text-black dark:hover:text-white" />
       </button>
       <h4 className="text-lg font-bold text-gray-700 dark:text-white">
         {title}
