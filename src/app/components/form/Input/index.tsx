@@ -37,6 +37,7 @@ export default function Input({
 
   const inputNode = (
     <input
+      {...otherProps}
       ref={inputEl}
       type={type}
       name={name}
@@ -65,7 +66,6 @@ export default function Input({
       disabled={disabled}
       min={min}
       max={max}
-      {...otherProps}
     />
   );
 

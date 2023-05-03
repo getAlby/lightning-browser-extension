@@ -32,11 +32,13 @@ const Button = forwardRef(
       loading = false,
       flex = false,
       className,
+      ...otherProps
     }: Props,
     ref: Ref<HTMLButtonElement>
   ) => {
     return (
       <button
+        {...otherProps}
         ref={ref}
         type={type}
         className={classNames(

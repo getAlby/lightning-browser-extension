@@ -43,10 +43,20 @@ export default function ChooseConnectorPath({ title, description }: Props) {
             actions={
               <>
                 <Link to="create" className="flex flex-1">
-                  <Button label={t("alby.create_new")} primary flex />
+                  <Button
+                    tabIndex={-1}
+                    label={t("alby.create_new")}
+                    primary
+                    flex
+                  />
                 </Link>
                 <Link to="login" className="flex flex-1">
-                  <Button label={tCommon("actions.log_in")} outline flex />
+                  <Button
+                    tabIndex={-1}
+                    label={tCommon("actions.log_in")}
+                    outline
+                    flex
+                  />
                 </Link>
               </>
             }
@@ -58,6 +68,7 @@ export default function ChooseConnectorPath({ title, description }: Props) {
               <Link
                 to="choose-connector"
                 className="flex flex-wrap gap-6 w-72 lg:w-80 mx-auto my-5 items-center"
+                tabIndex={-1}
               >
                 {connectorRoutes.slice(1, 8).map(({ path, title, logo }) => (
                   <img
@@ -75,7 +86,7 @@ export default function ChooseConnectorPath({ title, description }: Props) {
             }
             actions={
               <Link to="choose-connector" className="flex flex-1">
-                <Button label={t("other.connect")} primary flex />
+                <Button tabIndex={-1} label={t("other.connect")} primary flex />
               </Link>
             }
           />
