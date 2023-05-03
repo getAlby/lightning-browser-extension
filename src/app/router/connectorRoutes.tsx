@@ -85,7 +85,7 @@ const connectorMap: { [key: string]: ConnectorRoute } = {
   "umbrel-lnd": {
     path: "lnd",
     element: <ConnectUmbrel />,
-    title: i18n.t("translation:choose_connector.lightning_node.title"),
+    title: i18n.t("translation:choose_connector.umbrel_lightning_node.title"),
     logo: lightning_node,
   },
   "raspiblitz-lnd": {
@@ -176,43 +176,9 @@ const connectorMap: { [key: string]: ConnectorRoute } = {
   },
 };
 
-const umbrelConnectorRoutes: Route[] = [
-  connectorMap["umbrel-lnd"],
-  connectorMap["lnc"],
-  connectorMap["commando"],
-  connectorMap["lnbits"],
-];
-
-const citadelConnectorRoutes: Route[] = [
-  connectorMap["citadel"],
-  connectorMap["lnc"],
-  connectorMap["commando"],
-  connectorMap["lnbits"],
-];
-
-const raspiblitzConnectorRoutes: Route[] = [
-  connectorMap["raspiblitz-lnd"],
-  connectorMap["lnc"],
-  connectorMap["commando"],
-  connectorMap["lnbits"],
-];
-
-const myNodeConnectorRoutes: Route[] = [
-  connectorMap["mynode-lnd"],
-  connectorMap["lnc"],
-  connectorMap["commando"],
-  connectorMap["lnbits"],
-];
-
-const start9ConnectorRoutes: Route[] = [
-  connectorMap["start9-lnd"],
-  connectorMap["lnc"],
-  connectorMap["commando"],
-  connectorMap["lnbits"],
-];
-
-function getDistribution(key: string, children: Route[]): ConnectorRoute {
+function getDistribution(key: string): ConnectorRoute {
   const name = i18n.t(normalizeKey(`translation:distributions.${key}.name`));
+  const children = distributionMap[key]["children"];
 
   return {
     path: key,
@@ -229,23 +195,54 @@ function getDistribution(key: string, children: Route[]): ConnectorRoute {
   };
 }
 
-const distributionMap: { [key: string]: { logo: string } } = {
-  citadel: {
-    logo: citadel,
-  },
-  umbrel: {
-    logo: umbrel,
-  },
-  mynode: {
-    logo: mynode,
-  },
-  start9: {
-    logo: start9,
-  },
-  raspiblitz: {
-    logo: raspiblitz,
-  },
-};
+const distributionMap: { [key: string]: { logo: string; children: Route[] } } =
+  {
+    citadel: {
+      logo: citadel,
+      children: [
+        connectorMap["citadel"],
+        connectorMap["lnc"],
+        connectorMap["commando"],
+        connectorMap["lnbits"],
+      ],
+    },
+    umbrel: {
+      logo: umbrel,
+      children: [
+        connectorMap["umbrel-lnd"],
+        connectorMap["lnc"],
+        connectorMap["commando"],
+        connectorMap["lnbits"],
+      ],
+    },
+    mynode: {
+      logo: mynode,
+      children: [
+        connectorMap["mynode-lnd"],
+        connectorMap["lnc"],
+        connectorMap["commando"],
+        connectorMap["lnbits"],
+      ],
+    },
+    start9: {
+      logo: start9,
+      children: [
+        connectorMap["start9-lnd"],
+        connectorMap["lnc"],
+        connectorMap["commando"],
+        connectorMap["lnbits"],
+      ],
+    },
+    raspiblitz: {
+      logo: raspiblitz,
+      children: [
+        connectorMap["raspiblitz-lnd"],
+        connectorMap["lnc"],
+        connectorMap["commando"],
+        connectorMap["lnbits"],
+      ],
+    },
+  };
 
 function getConnectorRoutes(): ConnectorRoute[] {
   return [
@@ -260,11 +257,11 @@ function getConnectorRoutes(): ConnectorRoute[] {
     connectorMap["btcpay"],
     connectorMap[galoyPaths.bitcoinBeach],
     connectorMap[galoyPaths.bitcoinJungle],
-    getDistribution("citadel", citadelConnectorRoutes),
-    getDistribution("umbrel", umbrelConnectorRoutes),
-    getDistribution("mynode", myNodeConnectorRoutes),
-    getDistribution("start9", start9ConnectorRoutes),
-    getDistribution("raspiblitz", raspiblitzConnectorRoutes),
+    getDistribution("citadel"),
+    getDistribution("umbrel"),
+    getDistribution("mynode"),
+    getDistribution("start9"),
+    getDistribution("raspiblitz"),
   ];
 }
 

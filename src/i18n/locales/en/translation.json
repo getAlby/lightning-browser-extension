@@ -118,7 +118,7 @@
           "connection_failed": "Connection failed. Are your LND credentials correct?"
         }
       },
-      "lightning_node": {
+      "umbrel_lightning_node": {
         "title": "Lightning Node"
       },
       "lnc": {
