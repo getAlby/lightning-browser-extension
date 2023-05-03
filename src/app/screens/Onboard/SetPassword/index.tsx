@@ -42,27 +42,25 @@ export default function SetPassword() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="relative mt-14 lg:flex lg:space-x-8 bg-white dark:bg-surface-02dp pt-12 pb-4 lg:py-12 px-10">
-        <div className="lg:w-1/2">
+      <div className="max-w-xl shadow-lg rounded-xl mx-auto relative mt-14 lg:flex lg:space-x-8 bg-white dark:bg-surface-02dp pt-10 pb-10 px-10">
+        <div>
           <h1 className="text-2xl font-bold dark:text-white max-sm:text-center">
             {t("title")}
           </h1>
-          <div className="lg:hidden mt-4 w-full flex justify-center">
-            {unlockScreenshot}
-          </div>
-          <p className="text-gray-500 my-6 dark:text-gray-400">
+
+          <p className="text-gray-500 mt-4 dark:text-gray-400">
             {t("description")}
           </p>
-          <div className="lg:w-4/5 mb-6">
+          <div className="my-6 w-full flex justify-center">
+            {unlockScreenshot}
+          </div>
+          <div>
             <PasswordForm
               i18nKeyPrefix="welcome.set_password"
               formData={formData}
               setFormData={setFormData}
             />
           </div>
-        </div>
-        <div className="hidden lg:flex w-1/2 justify-center items-center self-center">
-          {unlockScreenshot}
         </div>
       </div>
       <div className="my-8 flex justify-center">
@@ -74,7 +72,7 @@ export default function SetPassword() {
             !formData.password ||
             formData.password !== formData.passwordConfirmation
           }
-          className="max-sm:w-full"
+          className="w-64"
         />
       </div>
     </form>

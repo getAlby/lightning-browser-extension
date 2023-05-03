@@ -10,6 +10,8 @@ import { toast } from "react-toastify";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
 
+import logo from "/static/assets/icons/lnd.png";
+
 const initialFormData = {
   url: "",
   macaroon: "",
@@ -142,6 +144,7 @@ export default function ConnectLnd() {
     <ConnectorForm
       title={t("page.title")}
       description={t("page.description")}
+      logo={logo}
       submitLoading={loading}
       submitDisabled={formData.url === "" || formData.macaroon === ""}
       onSubmit={handleSubmit}
@@ -177,7 +180,7 @@ export default function ConnectLnd() {
             required
           />
         </div>
-        <p className="text-center my-4 dark:text-white">{t("or")}</p>
+        <p className="text-center my-6 dark:text-white">{t("or")}</p>
         <div
           className={`cursor-pointer flex flex-col items-center dark:bg-surface-02dp p-4 py-3 border-dashed border-2 border-gray-300 bg-gray-50 rounded-md text-center transition duration-200 ${
             isDragging ? "border-blue-600 bg-blue-50" : ""

@@ -70,7 +70,7 @@ describe("AllowanceMenu", () => {
       user.click(editButton);
     });
 
-    await screen.findByText("Edit Allowance");
+    await screen.findByText("Edit Preferences");
 
     // update fiat value when modal is open
     expect(mockGetFiatValue).toHaveBeenCalledWith(
@@ -120,7 +120,7 @@ describe("AllowanceMenu", () => {
       user.click(editButton);
     });
 
-    await screen.findByText("Edit Allowance");
+    await screen.findByText("Edit Preferences");
 
     const toggleButton = await screen.findByRole("switch");
 

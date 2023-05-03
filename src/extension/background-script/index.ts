@@ -10,6 +10,11 @@ import state from "./state";
 
 let isFirstInstalled = false;
 let isRecentlyUpdated = false;
+const {
+  promise: isInitialized,
+  resolve: resolveInit,
+  reject: rejectInit,
+} = utils.deferredPromise();
 
 const debug = process.env.NODE_ENV === "development";
 
@@ -85,7 +90,7 @@ const handleInstalled = (details: { reason: string }) => {
 
 // listen to calls from the content script and calls the actions through the router
 // returns a promise to be handled in the content script
-const routeCalls = (
+const routeCalls = async (
   message: {
     application: string;
     prompt: boolean;
@@ -101,6 +106,7 @@ const routeCalls = (
   if (message.type) {
     console.error("Invalid message, using type: ", message);
   }
+  await isInitialized;
   const action = message.action || message.type;
   console.info(`Routing call: ${action}`);
   // Potentially check for internal vs. public calls
@@ -113,7 +119,8 @@ const routeCalls = (
       return r;
     });
   }
-  return call;
+  const result = await call;
+  return result;
 };
 
 browser.runtime.onMessage.addListener(debugLogger);
@@ -149,18 +156,28 @@ async function init() {
 
   events.subscribe();
   console.info("Events subscribed");
-
+  if (isRecentlyUpdated) {
+    console.info("Running any pending migrations");
+    await migrate();
+  }
   console.info("Loading completed");
 }
 
 console.info("Welcome to Alby");
-init().then(() => {
-  if (isFirstInstalled && !state.getState().getAccount()) {
-    utils.openUrl("welcome.html");
-  }
-  if (isRecentlyUpdated) {
-    migrate();
-  }
-});
+init()
+  .then(() => {
+    if (resolveInit) {
+      resolveInit();
+    }
+    if (isFirstInstalled && !state.getState().getAccount()) {
+      utils.openUrl("welcome.html");
+    }
+  })
+  .catch((err) => {
+    console.error(err);
+    if (rejectInit) {
+      rejectInit();
+    }
+  });
 
 browser.runtime.setUninstallURL("https://getalby.com/goodbye");
