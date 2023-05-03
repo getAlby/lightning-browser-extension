@@ -160,6 +160,7 @@ export default function ConnectKollidier({ variant }: Props) {
       title={t(`${variant}.title`)}
       description={variant === "create" ? t(`create.description`) : null}
       submitLoading={loading}
+      logo={logo}
       submitDisabled={
         loading ||
         formData.password === "" ||
