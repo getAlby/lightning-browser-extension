@@ -65,7 +65,7 @@ function ConnectorForm({
                       just one place
           */}
           {typeof title === "string" ? (
-            <h1 className="`text-2xl font-bold dark:text-white">{title}</h1>
+            <h1 className="text-2xl font-bold dark:text-white">{title}</h1>
           ) : (
             title
           )}
