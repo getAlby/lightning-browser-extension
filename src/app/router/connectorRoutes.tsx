@@ -37,12 +37,14 @@ export const normalizeKey = (key: string) =>
   key as unknown as TemplateStringsArray;
 
 interface ChildRoute {
-  path: string;
+  index?: boolean;
+  path?: string;
   element: JSX.Element;
 }
 
 interface ConnectorElementChildRoute extends ChildRoute {
   title: string;
+  path: string;
   description?: string;
   logo: string;
 }
@@ -65,6 +67,10 @@ const galoyPaths: { [key: string]: keyof typeof galoyUrls } = {
 };
 
 const kolliderConnectorRoutes: ChildRoute[] = [
+  {
+    index: true,
+    element: <ConnectKollider variant="select" />,
+  },
   {
     path: "create",
     element: <ConnectKollider variant="create" />,

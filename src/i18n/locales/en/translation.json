@@ -299,8 +299,7 @@
           "description": "Create a new Kollider account to send, receive and trade Bitcoin."
         },
         "login": {
-          "title": "Connect to your Kollider account",
-          "description": "Don't have an account already? <0>Sign up</0> now!"
+          "title": "Connect to your Kollider account"
         },
         "username": {
           "label": "Username"
