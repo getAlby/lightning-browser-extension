@@ -19,9 +19,14 @@ const connectorRoutes = getConnectorRoutes();
 function getRoutes(
   connectorRoutes: {
     path: string;
-    element: JSX.Element;
+    element?: JSX.Element;
     title: string;
     logo: string;
+    children?: {
+      index?: boolean;
+      element: JSX.Element;
+      path?: string;
+    }[];
   }[]
 ): RouteObject[] {
   return [
