@@ -1,101 +1,21 @@
 import { test } from "@playwright/test";
 import { USER } from "complete-randomer";
-import { getDocument, queries } from "pptr-testing-library";
-import { Browser, ElementHandle, Page } from "puppeteer";
+import { queries } from "pptr-testing-library";
 
-import { loadExtension } from "./helpers/loadExtension";
+import {
+  commonCreateWalletSuccessCheck,
+  createNewWalletWithPassword,
+} from "./helpers/loadExtension";
 
-const {
-  getByText,
-  getByLabelText,
-  findByLabelText,
-  findByText,
-  findAllByText,
-} = queries;
+const { getByText, getByLabelText, findByLabelText, findByText } = queries;
 
 type User = { email: string; password: string };
 const defaultUser = USER.SINGLE() as User;
 
-const commonCreateWalletUserCreate = async (
-  options: { connectToLightningWallet: boolean; user?: User } = {
-    connectToLightningWallet: true,
-  }
-): Promise<{
-  user: User;
-  page: Page;
-  browser: Browser;
-  $document: ElementHandle<Element>;
-}> => {
-  const { page, browser } = await loadExtension();
-
-  // get document from onboard page
-  const $document = await getDocument(page);
-  await findByText($document, "Set an unlock password");
-
-  // type user password and confirm password
-  const passwordField = await getByLabelText(
-    $document,
-    "Choose an unlock password:"
-  );
-  await passwordField.type("unlock-password");
-
-  const passwordConfirmationField = await getByLabelText(
-    $document,
-    "Let's confirm you typed it correct:"
-  );
-  await passwordConfirmationField.type("unlock-password");
-
-  // submit password form
-  const passwordFormNextButton = await findByText($document, "Next");
-  passwordFormNextButton.click();
-
-  await Promise.all([
-    page.waitForResponse(() => true),
-    page.waitForNavigation(), // The promise resolves after navigation has finished
-  ]);
-
-  await findByText(
-    $document,
-    "To start using the Alby Extension, use your Alby Account or connect to your lightning wallet."
-  );
-
-  if (options.connectToLightningWallet) {
-    const connectTexts = await findAllByText($document, "Connect");
-    connectTexts[1].click(); // we have headline and button using "connect", button is second
-
-    await Promise.all([
-      page.waitForResponse(() => true),
-      page.waitForNavigation(), // The promise resolves after navigation has finished
-    ]);
-
-    await findByText($document, "Connect Lightning Wallet");
-  }
-
-  return { user: options.user || defaultUser, browser, page, $document };
-};
-
-const commonCreateWalletSuccessCheck = async ({ page, $document }) => {
-  // submit form
-  const continueButton = await findByText($document, "Continue");
-  continueButton.click(),
-    // options.html
-    await Promise.all([
-      page.waitForNavigation(), // The promise resolves after navigation has finished
-    ]);
-
-  // options.html#publishers
-  await Promise.all([
-    page.waitForNavigation(), // The promise resolves after navigation has finished
-  ]);
-
-  const $optionsdocument = await getDocument(page);
-  await findByText($optionsdocument, "Explore the Lightning ⚡️ Ecosystem");
-};
-
 test.describe("Create or connect wallets", () => {
   test("successfully creates an Alby wallet", async () => {
-    const { user, browser, page, $document } =
-      await commonCreateWalletUserCreate({ connectToLightningWallet: false });
+    const user = defaultUser;
+    const { browser, page, $document } = await createNewWalletWithPassword();
 
     // click on the button to create a new wallet
     const createNewWalletButton = await getByText($document, "Sign up");
@@ -123,14 +43,11 @@ test.describe("Create or connect wallets", () => {
   });
 
   test("successfully connects to an existing Alby testnet wallet", async () => {
-    const { user, browser, page, $document } =
-      await commonCreateWalletUserCreate({
-        connectToLightningWallet: false,
-        user: {
-          email: "albytest001@example.com",
-          password: "12345678",
-        },
-      });
+    const user = {
+      email: "albytest001@example.com",
+      password: "12345678",
+    };
+    const { browser, page, $document } = await createNewWalletWithPassword();
 
     // click "Log in" button
     const loginButton = await getByText($document, "Log in");
@@ -155,7 +72,9 @@ test.describe("Create or connect wallets", () => {
   });
 
   test("successfully connects to LNbits wallet", async () => {
-    const { browser, page, $document } = await commonCreateWalletUserCreate();
+    const { browser, page, $document } = await createNewWalletWithPassword({
+      openConnectOtherWallet: true,
+    });
 
     // click at "Create LNbits Wallet"
     const createNewWalletButton = await getByText($document, "LNbits");
@@ -170,7 +89,9 @@ test.describe("Create or connect wallets", () => {
   });
 
   test("successfully connects to LND", async () => {
-    const { browser, page, $document } = await commonCreateWalletUserCreate();
+    const { browser, page, $document } = await createNewWalletWithPassword({
+      openConnectOtherWallet: true,
+    });
 
     const createNewWalletButton = await getByText($document, "LND");
     createNewWalletButton.click();
@@ -199,7 +120,9 @@ test.describe("Create or connect wallets", () => {
   });
 
   test("successfully connects to Core Lightning", async () => {
-    const { browser, page, $document } = await commonCreateWalletUserCreate();
+    const { browser, page, $document } = await createNewWalletWithPassword({
+      openConnectOtherWallet: true,
+    });
 
     const createNewWalletButton = await getByText($document, "Core Lightning");
     createNewWalletButton.click();
@@ -226,7 +149,9 @@ test.describe("Create or connect wallets", () => {
   });
 
   test("successfully connects to Umbrel", async () => {
-    const { browser, page, $document } = await commonCreateWalletUserCreate();
+    const { browser, page, $document } = await createNewWalletWithPassword({
+      openConnectOtherWallet: true,
+    });
 
     const connectButton = await getByText($document, "Umbrel");
     connectButton.click();
@@ -248,7 +173,9 @@ test.describe("Create or connect wallets", () => {
   });
 
   test("successfully connects to myNode", async () => {
-    const { browser, page, $document } = await commonCreateWalletUserCreate();
+    const { browser, page, $document } = await createNewWalletWithPassword({
+      openConnectOtherWallet: true,
+    });
 
     const connectButton = await getByText($document, "myNode");
     connectButton.click();
@@ -270,7 +197,9 @@ test.describe("Create or connect wallets", () => {
   });
 
   test("successfully connects to Start9", async () => {
-    const { browser, page, $document } = await commonCreateWalletUserCreate();
+    const { browser, page, $document } = await createNewWalletWithPassword({
+      openConnectOtherWallet: true,
+    });
 
     const connectButton = await getByText($document, "Start9");
     connectButton.click();
@@ -293,7 +222,9 @@ test.describe("Create or connect wallets", () => {
 
   // under maintenance for now
   test.skip("successfully connects to Eclair", async () => {
-    const { browser, page, $document } = await commonCreateWalletUserCreate();
+    const { browser, page, $document } = await createNewWalletWithPassword({
+      openConnectOtherWallet: true,
+    });
 
     const connectButton = await getByText($document, "Eclair");
     connectButton.click();
@@ -314,7 +245,9 @@ test.describe("Create or connect wallets", () => {
   });
 
   test.skip("successfully connects to BTCPay", async () => {
-    const { browser, page, $document } = await commonCreateWalletUserCreate();
+    const { browser, page, $document } = await createNewWalletWithPassword({
+      openConnectOtherWallet: true,
+    });
 
     const connectButton = await getByText($document, "BTCPay Server");
     connectButton.click();
