@@ -62,7 +62,7 @@ function ConnectorForm({
           {/*
               TODO: this can be simplified to always wrap the title in h1, without checking if it
                       is string or Trans component, so we centralize the styles of the h1 tag in
-                      just one place 
+                      just one place
           */}
           {typeof title === "string" ? (
             <h1 className="text-2xl font-bold dark:text-white">{title}</h1>
