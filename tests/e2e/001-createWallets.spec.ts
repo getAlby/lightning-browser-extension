@@ -148,13 +148,16 @@ test.describe("Create or connect wallets", () => {
     await browser.close();
   });
 
-  test("successfully connects to Umbrel", async () => {
+  test("successfully connects to Umbrel LND", async () => {
     const { browser, page, $document } = await createNewWalletWithPassword({
       openConnectOtherWallet: true,
     });
 
     const connectButton = await getByText($document, "Umbrel");
     connectButton.click();
+
+    const lndButton = await getByText($document, "Lightning Node");
+    lndButton.click();
 
     // wait for the field label instead of headline (headline text already exists on the page before)
     await findByText($document, "lndconnect REST URL");
@@ -172,7 +175,7 @@ test.describe("Create or connect wallets", () => {
     await browser.close();
   });
 
-  test("successfully connects to myNode", async () => {
+  test("successfully connects to myNode LND", async () => {
     const { browser, page, $document } = await createNewWalletWithPassword({
       openConnectOtherWallet: true,
     });
@@ -203,6 +206,9 @@ test.describe("Create or connect wallets", () => {
 
     const connectButton = await getByText($document, "Start9");
     connectButton.click();
+
+    const lndButton = await getByText($document, "LND");
+    lndButton.click();
 
     // wait for the field label instead of headline (headline text already exists on the page before)
     await findByText($document, "lndconnect REST URL");
