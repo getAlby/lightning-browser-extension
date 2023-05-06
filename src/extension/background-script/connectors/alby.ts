@@ -1,4 +1,5 @@
 import fetchAdapter from "@vespaiach/axios-fetch-adapter";
+import { auth } from "alby-js-sdk";
 import type { AxiosResponse } from "axios";
 import axios, { AxiosRequestConfig, Method } from "axios";
 import lightningPayReq from "bolt11";
@@ -333,19 +334,32 @@ export default class Alby implements Connector {
   }
 
   async authorize() {
-    const url = `${this.config.url}/auth?type=auth`;
+    const lnurlAuthUrl = await this.getLnurlAuthUrl();
     try {
+      const authResult = await chrome.identity.launchWebAuthFlow({
+        interactive: true,
+        url: lnurlAuthUrl,
+      });
+
+      let authToken;
+      if (authResult) {
+        authToken = new URL(authResult).searchParams.get("token");
+      } else {
+        throw new Error("Authentication failed: missing authResult");
+      }
+
+      if (!authToken) {
+        throw new Error("Authentication failed: missing token");
+      }
+
       const { data: authData } = await axios.post(
-        url,
-        {
-          login: this.config.login,
-          password: this.config.password,
-        },
+        lnurlAuthUrl,
+        { auth_token: authToken },
         {
           headers: {
             ...defaultHeaders,
             "X-TS": Math.floor(Date.now() / 1000),
-            "X-VERIFY": this.generateHmacVerification(url),
+            "X-VERIFY": this.generateHmacVerification(lnurlAuthUrl),
           },
           adapter: fetchAdapter,
         }
@@ -371,6 +385,39 @@ export default class Alby implements Connector {
         }`
       );
     }
+  }
+
+  // Helper function to generate the lnurl authentication URL
+  async getLnurlAuthUrl() {
+    const redirectURL = chrome.identity.getRedirectURL();
+    const authClient = new auth.OAuth2User({
+      client_id: "test_client",
+      client_secret: "test_secret",
+      callback: redirectURL,
+      scopes: [
+        "invoices:read",
+        "account:read",
+        "balance:read",
+        "invoices:create",
+        "invoices:read",
+        "payments:send",
+      ],
+      token: {
+        access_token: undefined,
+        refresh_token: undefined,
+        expires_at: undefined,
+      }, // initialize with existing token
+    });
+    const authUrl = authClient.generateAuthURL({
+      code_challenge_method: "S256",
+    });
+
+    let newAuthUrl = authUrl;
+    if (process.env.NODE_ENV === "development") {
+      newAuthUrl = authUrl.replace("getalby.com", "app.regtest.getalby.com");
+    }
+
+    return newAuthUrl;
   }
 
   generateHmacVerification(uri: string) {

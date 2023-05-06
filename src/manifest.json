@@ -37,7 +37,8 @@
     "storage",
     "tabs",
     "unlimitedStorage",
-    "*://*/*"
+    "*://*/*",
+    "identity"
   ],
 
   "__chrome__permissions": [
@@ -46,7 +47,8 @@
     "notifications",
     "storage",
     "tabs",
-    "unlimitedStorage"
+    "unlimitedStorage",
+    "identity"
   ],
   "__chrome__host_permissions": ["*://*/*"],
 
