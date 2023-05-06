@@ -1,6 +1,6 @@
 {
   "name": "lightning-browser-extension",
-  "version": "1.28.1",
+  "version": "2.0.0",
   "description": "Lightning browser extension",
   "private": true,
   "repository": "https://github.com/bumi/lightning-browser-extension.git",
