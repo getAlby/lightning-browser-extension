@@ -183,6 +183,9 @@ test.describe("Create or connect wallets", () => {
     const connectButton = await getByText($document, "myNode");
     connectButton.click();
 
+    const lndButton = await getByText($document, "LND");
+    lndButton.click()
+
     // wait for the field label instead of headline (headline text already exists on the page before)
     await findByText($document, "lndconnect REST URL");
 
