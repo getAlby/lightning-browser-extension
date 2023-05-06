@@ -120,11 +120,11 @@ export const createNewWalletWithPassword = async (options?: {
 export const commonCreateWalletSuccessCheck = async ({ page, $document }) => {
   // submit form
   const continueButton = await findByText($document, "Continue");
-  continueButton.click(),
-    // options.html
-    await Promise.all([
-      page.waitForNavigation(), // The promise resolves after navigation has finished
-    ]);
+  continueButton.click();
+  // options.html
+  await Promise.all([
+    page.waitForNavigation(), // The promise resolves after navigation has finished
+  ]);
 
   // options.html#publishers
   await Promise.all([
