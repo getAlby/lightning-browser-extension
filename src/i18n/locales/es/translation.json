@@ -17,7 +17,7 @@
         }
       },
       "test_connection": {
-        "ready": "Genial, estás listo para comenzar!",
+        "ready": "¡Genial, estás listo para comenzar!",
         "initializing": "Accediendo a su cuenta. Por favor, espere, esto puede tardar un minuto...",
         "connection_error": "Error de Conexión",
         "review_connection_details": "Revise los detalles de su conexión.",
@@ -99,7 +99,7 @@
         "title": "Cuenta de Umbrel",
         "page": {
           "title": "Conectar a Umbrel",
-          "instructions": "En tu cuadro de mandos Umbrel ve a <0>Conecta Billetera</0>. Selecciona <0>lndconnect REST</0> y copia el <0>URL lndconnect</0>. (Dependiendo de tu configuración puedes usar la conexión local o la conexión TOR)"
+          "instructions": "1. En tu Lightning Node dashboard ve a <0>Connect wallet</0><1/>2. Selecciona <0>REST (Tor)</0> o <0>REST (Local Network)</0> mode<1/>3. Copia la <0>lndconnect URL</0> y pégala a continuación"
         },
         "rest_url": {
           "placeholder": "lndconnect://sunodo:8080?...",
@@ -120,8 +120,8 @@
       "start9": {
         "title": "Cuenta Start9",
         "page": {
-          "title": "Conecta tu nodo <0>Embassy</0>",
-          "instructions": "<0>Nota:</0> Actualmente solo admitimos LND, ¡pero agregaremos compatibilidad con c-lightning en el futuro!<1/>En su panel de Embassy, haga clic en el servicio <0>Lightning Network Daemon</0>. <1/>Seleccione la pestaña <0>Propiedades</0>.<1/>Ahora copie la <0>URL REST de LND Connect.</0>"
+          "title": "Conéctate a tu <0>Start9 Server</0>",
+          "instructions": "En tu panel de Embassy, haz clic en el servicio <0>Lightning Network Daemon</0>.<1/>Selecciona la pestaña <0>Propiedades</0>.<1/>Ahora copia la URL REST de <0>LND Connect. </0>"
         },
         "rest_url": {
           "label": "URL REST conectalnd",
@@ -281,7 +281,7 @@
       "lnc": {
         "page": {
           "title": "Conecta tu nodo LND",
-          "description": "Crea una nueva sesión en terminal (litd) para obtener una nueva frase y colocala aquí"
+          "description": "1. Abra tu Lightning Terminal y selecciona <0>Lightning Node Connect</0> en la barra lateral.<1/> 2. Haz clic en <0>Crear una nueva sesión</0><1/>3. Etiqueta la sesión, luego elige el permiso que deseas y envía<1/>4. <0>Copia la frase de emparejamiento</0> y pégala a continuación."
         },
         "title": "LND con LNC",
         "pairing_phrase": {
@@ -617,7 +617,7 @@
     },
     "choose_path": {
       "title": "Conectar",
-      "description": "Para empezar a utilizar la Extensión de Alby, conecta tu monedero lightning.",
+      "description": "Para empezar a utilizar la Extensión de Alby, usa tu cuenta de Alby o conecta tu monedero lightning.",
       "alby": {
         "title": "Cuenta de Alby",
         "create_new": "Regístrate",
@@ -774,7 +774,7 @@
     "success": "Exitoso",
     "error": "Error",
     "settings": "Ajustes",
-    "connected_sites": "",
+    "connected_sites": "Sitios conectados",
     "sats_one": "sat",
     "sats_other": "sats",
     "loading": "cargando",
@@ -804,7 +804,8 @@
       "receive_again": "Recibir otro pago",
       "log_in": "Iniciar Sesión",
       "remember": "Recordar mi elección y no preguntar nuevamente",
-      "transactions": "Transacciones"
+      "transactions": "Transacciones",
+      "more": "Más"
     },
     "errors": {
       "connection_failed": "Error de conexión",
