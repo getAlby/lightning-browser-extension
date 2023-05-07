@@ -284,8 +284,7 @@
           "description": "创建一个新的Kollider帐户来发送、接收和交易比特币。"
         },
         "login": {
-          "title": "连接到你的Kollider帐户",
-          "description": "还没有帐户？立即<0>注册</0>！"
+          "title": "连接到你的Kollider帐户"
         },
         "warning": "⚠️ 请确保你将你的凭证安全地保存在密码管理器中。没有这些凭证，你的帐户将无法恢复。"
       },

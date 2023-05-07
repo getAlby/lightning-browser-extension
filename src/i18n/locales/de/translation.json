@@ -273,8 +273,7 @@
           "title": "Erstelle dein Kollider-Konto und verbinde dich mit Alby"
         },
         "login": {
-          "title": "Verbinden mit deinem Kollider-Konto",
-          "description": "Du hast noch kein Konto? <0>Jetzt anmelden</0>!"
+          "title": "Verbinden mit deinem Kollider-Konto"
         },
         "warning": "⚠️ Bitte stelle sicher, dass du deine Zugangsdaten sicher in einem Passwort-Manager speicherst. Ohne diese Zugangsdaten kann dein Konto nicht wiederhergestellt werden."
       },
