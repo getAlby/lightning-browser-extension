@@ -45,7 +45,9 @@ function Receive() {
     paymentRequest: string;
     rHash: string;
   } | null>();
-  const [copyLabel, setCopyLabel] = useState(tCommon("actions.copy") as string);
+  const [copyLabel, setCopyLabel] = useState(
+    tCommon("actions.copy_invoice") as string
+  );
   const [paid, setPaid] = useState(false);
   const [pollingForPayment, setPollingForPayment] = useState(false);
   const mounted = useRef(false);
