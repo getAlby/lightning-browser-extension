@@ -1,3 +1,4 @@
+import fetchAdapter from "@vespaiach/axios-fetch-adapter";
 import type { AxiosResponse } from "axios";
 import axios, { AxiosRequestConfig, Method } from "axios";
 import Hex from "crypto-js/enc-hex";
@@ -308,6 +309,7 @@ export default class Kollider implements Connector {
       },
       {
         headers: defaultHeaders,
+        adapter: fetchAdapter,
       }
     );
 
@@ -374,6 +376,7 @@ export default class Kollider implements Connector {
       method,
       url: `${API_URL}${path}`,
       responseType: "json",
+      adapter: fetchAdapter,
       headers: {
         ...defaultHeaders,
         Authorization: `${this.access_token}`,

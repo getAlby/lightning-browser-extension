@@ -1,9 +1,9 @@
 import {
-  useState,
-  useEffect,
   createContext,
-  useContext,
   useCallback,
+  useContext,
+  useEffect,
+  useState,
 } from "react";
 import { toast } from "react-toastify";
 import { useSettings } from "~/app/context/SettingsContext";
@@ -25,6 +25,7 @@ interface AccountContextType {
     accountBalance: string;
   };
   loading: boolean;
+  balanceLoading: boolean;
   unlock: (user: string, callback: VoidFunction) => Promise<void>;
   lock: (callback: VoidFunction) => void;
   /**
@@ -51,6 +52,7 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
 
   const [account, setAccount] = useState<AccountContextType["account"]>(null);
   const [loading, setLoading] = useState(true);
+  const [balanceLoading, setBalanceLoading] = useState(true);
   const [accountBalance, setAccountBalance] = useState("");
   const [fiatBalance, setFiatBalance] = useState("");
 
@@ -94,6 +96,7 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
   };
 
   const fetchAccountInfo = async (options?: { accountId?: string }) => {
+    setBalanceLoading(true);
     const id = options?.accountId || account?.id;
     if (!id) return;
 
@@ -103,6 +106,7 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
     };
 
     const accountInfo = await api.swr.getAccountInfo(id, callback);
+    setBalanceLoading(false);
 
     return { ...accountInfo, fiatBalance, accountBalance };
   };
@@ -129,10 +133,14 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
       })
       .catch((e) => {
         toast.error(`An unexpected error occurred (${e.message})`);
+        console.error(
+          `AccountContext: An unexpected error occurred (${e.message})`
+        );
       })
       .finally(() => {
         setLoading(false);
       });
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -160,6 +168,7 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
     },
     fetchAccountInfo,
     loading,
+    balanceLoading,
     lock,
     setAccountId,
     unlock,

@@ -1,12 +1,6 @@
 {
   "translation": {
     "welcome": {
-      "nav": {
-        "welcome": "Bem-vindo",
-        "password": "Senha",
-        "connect": "Sua conta",
-        "done": "Feito"
-      },
       "set_password": {
         "title": "Definir uma senha de desbloqueio",
         "description": "Essa senha é usada para proteger sua carteira e fornecer acesso à extensão do navegador. Não esqueça essa senha pois não é possível recuperá-la. Obs. Essa senha é diferente da senha da conta da Alby.",
@@ -105,7 +99,7 @@
         "title": "Umbrel",
         "page": {
           "title": "Conecte no servidor <0>Umbrel</0>",
-          "instructions": "Na Umbrel vá até <0>Connect Wallet</0>. Selecione <0>lndconnect REST</0> e copie a <0>lndconnect URL</0>. (Dependendo da sua configuração você pode usar a conexão local ou a conexão Tor.)"
+          "instructions": "1. In your Lightning Node dashboard go to <0>Connect wallet</0><1/>2. Select <0>REST (Tor)</0> or <0>REST (Local Network)</0> mode<1/>3. Copy the <0>lndconnect URL</0> and paste it below"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -126,8 +120,8 @@
       "start9": {
         "title": "Start9",
         "page": {
-          "title": "Conecte no seu servidor <0>Embassy</0>",
-          "instructions": "<0>Note:</0> Atualmente somente a LND é suportada mas nós adicionaremos suporte para a c-lightning no futuro!<1/>No seu Embassy clique em service <0>lightning network Daemon</0>.<1/>Selecione a tab <0>Properties</0>.<1/>Agora copie o <0>LND Connect REST URL.</0>"
+          "title": "Connect to your <0>Start9 Server</0>",
+          "instructions": "<0>Note:</0> Atualmente somente a LND é suportada mas nós adicionaremos suporte para a c-lightning no futuro!<1/>No seu Embassy clique em service <0>Lightning Network Daemon</0>.<1/>Selecione a tab <0>Properties</0>.<1/>Agora copie o <0>LND Connect REST URL.</0>"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -256,6 +250,16 @@
       "title": "Conectar Carteira Bitcoin",
       "kollider": {
         "title": "Kollider"
+      },
+      "lnc": {
+        "page": {
+          "title": "Conecte no servidor LND usando LNC",
+          "description": "1. Open Lightning Terminal and choose <0>Lightning Node Connect</0> from the sidebar.<1/> 2. Click <0>Create a new session</0><1/>3. Label the session, choose desired permissions and submit<1/>4. <0>Copy pairing phrase</0> and paste it below."
+        },
+        "title": "LND usando LNC",
+        "pairing_phrase": {
+          "label": "Frase de pareamento "
+        }
       }
     },
     "home": {
@@ -621,23 +625,17 @@
       "list": {
         "trading": "Negociação",
         "gaming": "Jogos",
-        "entertaiment": "Entretenimento",
+        "entertainment": "Entretenimento",
         "shopping": "Compras",
         "miscellaneous": "Outros",
         "nostr": "Nostr"
       },
       "tips": {
         "top_up_wallet": {
-          "description": "Crie uma fatura relâmpago, envie alguns bitcoins para você mesmo e comece a usar a Alby",
+          "description": "Crie uma fatura relâmpago e envie alguns bitcoins para você mesmo",
           "label2": "Comprar Bitcoin",
           "label1": "Receber Bitcoin",
           "title": "⚡️ Adicione fundos na sua carteira"
-        },
-        "pin": {
-          "title": "📌 Fixar extensão Alby",
-          "description1": "<0>Para acessar a Alby facilmente, clique no ícone da extensão</0> <1/> <2>no canto superior direito do seu navegador</2>",
-          "description2": "Na lista de extensões, localize a Alby e clique no ícone de fixação para fixá-lo na barra de ferramentas do navegador",
-          "description3": "É isso! Agora é só clicar no ícone da Alby"
         },
         "address": {
           "label1": "Eu quero!",
@@ -650,7 +648,7 @@
           "label1": "Experimente"
         },
         "title": "Sua carteira Alby está pronta",
-        "description": "Algumas dicas para você iniciar na Alby 🐝"
+        "description": "Algumas dicas para você começar a usar a Alby 🐝"
       }
     },
     "choose_path": {
@@ -724,7 +722,7 @@
     "success": "Sucesso",
     "error": "Erro",
     "settings": "Configurações",
-    "websites": "Sites",
+    "connected_sites": "Sites conectados",
     "sats_one": "sat",
     "sats_other": "sats",
     "loading": "carregando",
@@ -754,7 +752,8 @@
       "log_in": "Fazer login",
       "remember": "Lembrar minha escolha e não perguntar novamente",
       "receive_again": "Receber outro pagamento",
-      "transactions": "Transações"
+      "transactions": "Transações",
+      "more": "Mais"
     },
     "errors": {
       "connection_failed": "Falha na conexão",
@@ -775,7 +774,8 @@
       "lessThan": "< {{max}}",
       "greaterThan": "> {{min}}"
     },
-    "transactions": "Transações"
+    "transactions": "Transações",
+    "balance": "Saldo"
   },
   "components": {
     "allowance_menu": {
@@ -844,11 +844,13 @@
       }
     },
     "account_menu": {
-      "title": "Selecionar conta",
+      "title": "Trocar conta",
       "options": {
         "account": {
           "add": "Adicionar nova conta",
-          "manage": "Gerenciar contas"
+          "manage": "Gerenciar contas",
+          "account_settings": "Configurações da conta",
+          "go_to_web_wallet": "Gerenciar sua conta Alby"
         }
       }
     },
@@ -874,6 +876,9 @@
       "signmessage": "Assinar mensagem com sua chave.",
       "nip04decrypt": "Descriptografar dados.",
       "nip04encrypt": "Criptografar dados."
+    },
+    "lnc": {
+      "openchannel": ""
     }
   }
 }

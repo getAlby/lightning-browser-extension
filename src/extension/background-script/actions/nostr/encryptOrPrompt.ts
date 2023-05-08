@@ -18,10 +18,10 @@ const encryptOrPrompt = async (message: MessageEncryptGet) => {
     );
 
     if (hasPermission) {
-      const response = state
-        .getState()
-        .getNostr()
-        .encrypt(message.args.peer, message.args.plaintext);
+      const response = (await state.getState().getNostr()).encrypt(
+        message.args.peer,
+        message.args.plaintext
+      );
 
       return { data: response };
     } else {
@@ -44,10 +44,10 @@ const encryptOrPrompt = async (message: MessageEncryptGet) => {
         );
       }
       if (promptResponse.data.confirm) {
-        const response = state
-          .getState()
-          .getNostr()
-          .encrypt(message.args.peer, message.args.plaintext);
+        const response = (await state.getState().getNostr()).encrypt(
+          message.args.peer,
+          message.args.plaintext
+        );
 
         return { data: response };
       } else {

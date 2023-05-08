@@ -1,4 +1,4 @@
-import LNC, { CredentialStore } from "@lightninglabs/lnc-web";
+import LNC from "@lightninglabs/lnc-web";
 import Base64 from "crypto-js/enc-base64";
 import Hex from "crypto-js/enc-hex";
 import UTF8 from "crypto-js/enc-utf8";
@@ -83,7 +83,7 @@ const snakeCaseObjectDeep = (value: FixMe): FixMe => {
   return value;
 };
 
-class LncCredentialStore implements CredentialStore {
+class LncCredentialStore {
   account: Account;
   config: Config;
 
@@ -139,9 +139,11 @@ class LncCredentialStore implements CredentialStore {
 
   private async _save() {
     const accounts = state.getState().accounts;
-    const password = state.getState().password as string;
-    const currentAccountId = this.account.id;
-    accounts[currentAccountId].config = encryptData(this.config, password);
+    const password = await state.getState().password();
+    accounts[this.account.id].config = encryptData(
+      this.config,
+      password as string
+    );
     state.setState({ accounts });
     await state.getState().saveToStorage();
     return true;
@@ -158,6 +160,7 @@ class Lnc implements Connector {
     this.config = config;
     this.lnc = new LNC({
       credentialStore: new LncCredentialStore(account, config),
+      namespace: this.account.id,
     });
   }
 
@@ -169,15 +172,8 @@ class Lnc implements Connector {
   async unload() {
     console.info("LNC disconnect");
     await this.lnc.disconnect();
-    return new Promise<void>((resolve) => {
-      // give lnc a bit time to disconnect.
-      // not sure what there happens, best would be to have disconnect() return a promise
-      setTimeout(() => {
-        // TODO: investigate garbage collection
-        delete this.lnc;
-        resolve();
-      }, 1000);
-    });
+
+    delete this.lnc;
   }
 
   get supportedMethods() {
@@ -238,15 +234,15 @@ class Lnc implements Connector {
     const invoices: ConnectorInvoice[] = data.invoices
       .map((invoice: FixMe, index: number): ConnectorInvoice => {
         const custom_records =
-          invoice.htlcs[0] && invoice.htlcs[0].custom_records;
+          invoice.htlcs[0] && invoice.htlcs[0].customRecords;
 
         return {
           custom_records,
-          id: `${invoice.payment_request}-${index}`,
+          id: `${invoice.paymentRequest}-${index}`,
           memo: invoice.memo,
-          preimage: invoice.r_preimage,
+          preimage: invoice.rPreimage,
           settled: invoice.settled,
-          settleDate: parseInt(invoice.settle_date) * 1000,
+          settleDate: parseInt(invoice.settleDate) * 1000,
           totalAmount: invoice.value,
           type: "received",
         };

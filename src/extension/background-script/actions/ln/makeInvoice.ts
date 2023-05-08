@@ -12,13 +12,14 @@ const makeInvoice = async (message: MessageMakeInvoice) => {
 
   if (message.args.amount) {
     amount = parseInt(message.args.amount);
-
     const connector = await state.getState().getConnector();
+
     try {
       const response = await connector.makeInvoice({
         amount,
         memo,
       });
+
       return response;
     } catch (e) {
       if (e instanceof Error) {

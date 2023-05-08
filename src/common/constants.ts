@@ -166,7 +166,6 @@ export enum CURRENCIES {
 
 export enum TIPS {
   TOP_UP_WALLET = "top_up_wallet",
-  PIN = "pin",
   DEMO = "demo",
   ADDRESS = "address",
 }

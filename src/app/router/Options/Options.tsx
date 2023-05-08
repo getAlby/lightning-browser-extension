@@ -21,7 +21,7 @@ import { HashRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
-import getConnectorRoutes from "~/app/router/connectorRoutes";
+import { getConnectorRoutes, renderRoutes } from "~/app/router/connectorRoutes";
 import Discover from "~/app/screens/Discover";
 import AlbyWallet from "~/app/screens/connectors/AlbyWallet";
 import ChooseConnector from "~/app/screens/connectors/ChooseConnector";
@@ -96,16 +96,11 @@ function Options() {
                         description={i18n.t(
                           "translation:choose_connector.description"
                         )}
+                        connectorRoutes={connectorRoutes}
                       />
                     }
                   />
-                  {connectorRoutes.map((connectorRoute) => (
-                    <Route
-                      key={connectorRoute.path}
-                      path={connectorRoute.path}
-                      element={connectorRoute.element}
-                    />
-                  ))}
+                  {renderRoutes(connectorRoutes)}
                 </Route>
               </Route>
               <Route index element={<Accounts />} />
@@ -141,7 +136,9 @@ const Layout = () => {
     <div>
       <Navbar>
         <Navbar.Link href="/discover">{tCommon("discover")}</Navbar.Link>
-        <Navbar.Link href="/publishers">{tCommon("websites")}</Navbar.Link>
+        <Navbar.Link href="/publishers">
+          {tCommon("connected_sites")}
+        </Navbar.Link>
         <Navbar.Link href="/send">{tCommon("actions.send")}</Navbar.Link>
         <Navbar.Link href="/receive">{tCommon("actions.receive")}</Navbar.Link>
         <Navbar.Link href="/transactions">

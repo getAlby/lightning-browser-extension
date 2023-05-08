@@ -27,7 +27,7 @@ async function init() {
     return;
   }
 
-  // message listener to listen to inpage webln calls
+  // message listener to listen to inpage nostr calls
   // those calls get passed on to the background script
   // (the inpage script can not do that directly, but only the inpage script can make webln available to the page)
   window.addEventListener("message", (ev) => {
@@ -43,14 +43,16 @@ async function init() {
     if (ev.data && !ev.data.response) {
       // if an enable call railed we ignore the request to prevent spamming the user with prompts
       if (isRejected) {
-        console.error(
-          "Enable had failed. Rejecting further WebLN calls until the next reload"
-        );
+        postMessage(ev, {
+          error:
+            "window.nostr call cancelled (rejecting further window.nostr calls until the next reload)",
+        });
         return;
       }
+
       // if a call is active we ignore the request
       if (callActive) {
-        console.error("nostr call already executing");
+        postMessage(ev, { error: "window.nostr call already executing" });
         return;
       }
 
@@ -86,15 +88,7 @@ async function init() {
           }
         }
 
-        window.postMessage(
-          {
-            application: "LBE",
-            response: true,
-            data: response,
-            scope: "nostr",
-          },
-          "*" // TODO use origin
-        );
+        postMessage(ev, response);
       };
 
       callActive = true;
@@ -104,6 +98,19 @@ async function init() {
         .catch(replyFunction);
     }
   });
+}
+
+function postMessage(ev, response) {
+  window.postMessage(
+    {
+      id: ev.data.id,
+      application: "LBE",
+      response: true,
+      data: response,
+      scope: "nostr",
+    },
+    "*"
+  );
 }
 
 init();

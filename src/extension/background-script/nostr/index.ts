@@ -5,7 +5,7 @@ import { AES } from "crypto-js";
 import Base64 from "crypto-js/enc-base64";
 import Hex from "crypto-js/enc-hex";
 import Utf8 from "crypto-js/enc-utf8";
-import { Event } from "~/extension/ln/nostr/types";
+import { Event } from "~/extension/providers/nostr/types";
 
 import { getEventHash, signEvent } from "../actions/nostr/helpers";
 
@@ -54,7 +54,7 @@ class Nostr {
     )}`;
   }
 
-  decrypt(pubkey: string, ciphertext: string) {
+  async decrypt(pubkey: string, ciphertext: string) {
     const [cip, iv] = ciphertext.split("?iv=");
     const key = secp256k1.getSharedSecret(this.privateKey, "02" + pubkey);
     const normalizedKey = Buffer.from(key.slice(1, 33));

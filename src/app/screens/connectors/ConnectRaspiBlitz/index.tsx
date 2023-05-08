@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import msg from "~/common/lib/msg";
 
+import logo from "/static/assets/icons/raspiblitz.png";
+
 const initialFormData = Object.freeze({
   url: "",
   macaroon: "",
@@ -100,7 +102,7 @@ export default function ConnectRaspiBlitz() {
   return (
     <ConnectorForm
       title={
-        <h1 className="mb-6 text-2xl font-bold dark:text-white">
+        <h1 className="text-2xl font-bold dark:text-white">
           <Trans
             i18nKey={"page.title"}
             t={t}
@@ -123,6 +125,7 @@ export default function ConnectRaspiBlitz() {
           ]}
         />
       }
+      logo={logo}
       submitLoading={loading}
       submitDisabled={formData.url === "" || formData.macaroon === ""}
       onSubmit={handleSubmit}
@@ -135,6 +138,7 @@ export default function ConnectRaspiBlitz() {
           placeholder={t("rest_api_host.placeholder")}
           onChange={handleUrl}
           required
+          autoFocus={true}
         />
       </div>
       {formData.url.match(/\.onion/i) && (

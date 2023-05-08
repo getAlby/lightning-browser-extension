@@ -13,6 +13,8 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import msg from "~/common/lib/msg";
 
+import logo from "/static/assets/icons/core_ln.svg";
+
 export default function ConnectCommando() {
   const navigate = useNavigate();
   const { t } = useTranslation("translation", {
@@ -101,6 +103,7 @@ export default function ConnectCommando() {
     <ConnectorForm
       title={t("page.title")}
       description={t("page.instructions")}
+      logo={logo}
       submitLoading={loading}
       submitDisabled={
         formData.host === "" && formData.pubkey === "" && formData.rune === ""
@@ -117,6 +120,7 @@ export default function ConnectCommando() {
           title="host"
           value={formData.host}
           onChange={handleChange}
+          autoFocus={true}
         />
       </div>
       <div className="mb-6">
@@ -174,30 +178,28 @@ export default function ConnectCommando() {
               onChange={handleChange}
             />
           </div>
-          <div className="mb-6">
-            <TextField
-              id="commandoPrivateKey"
-              label={t("privKey.label")}
-              type={commandoPrivateKeyVisible ? "text" : "password"}
-              value={formData.privateKey}
-              endAdornment={
-                <button
-                  type="button"
-                  tabIndex={-1}
-                  className="flex justify-center items-center w-10 h-8"
-                  onClick={() => {
-                    setCommandoPrivateKeyVisible(!commandoPrivateKeyVisible);
-                  }}
-                >
-                  {commandoPrivateKeyVisible ? (
-                    <HiddenIcon className="h-6 w-6" />
-                  ) : (
-                    <VisibleIcon className="h-6 w-6" />
-                  )}
-                </button>
-              }
-            />
-          </div>
+          <TextField
+            id="commandoPrivateKey"
+            label={t("privKey.label")}
+            type={commandoPrivateKeyVisible ? "text" : "password"}
+            value={formData.privateKey}
+            endAdornment={
+              <button
+                type="button"
+                tabIndex={-1}
+                className="flex justify-center items-center w-10 h-8"
+                onClick={() => {
+                  setCommandoPrivateKeyVisible(!commandoPrivateKeyVisible);
+                }}
+              >
+                {commandoPrivateKeyVisible ? (
+                  <HiddenIcon className="h-6 w-6" />
+                ) : (
+                  <VisibleIcon className="h-6 w-6" />
+                )}
+              </button>
+            }
+          />
         </div>
       )}
     </ConnectorForm>

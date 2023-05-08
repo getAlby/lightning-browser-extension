@@ -2,12 +2,6 @@
   "translation": {
     "welcome": {
       "title": "Velkommen til Alby",
-      "nav": {
-        "welcome": "Velkommen",
-        "password": "Din adgangskode",
-        "connect": "Din Lightning-konto",
-        "done": "Færdig"
-      },
       "set_password": {
         "title": "Angiv en nøglekode",
         "description": "Dette kodeord bruges til at beskytte din wallet og giver adgang til browserudvidelsen. Det kan ikke nulstilles, og er ikke den samme som adgangskoden til din Alby-konto.",
@@ -228,7 +222,7 @@
         "title": "Start9",
         "page": {
           "title": "Opret forbindelse til din <0>Embassy</0> node",
-          "instructions": "<0>Note:</0> I øjeblikket understøtter vi kun LND, men vi vil fremover også tilføje support af c-lightning!<1/>I din Embassys indstillingsmenu klikker du på servicen <0>lightning network Daemon</0>.<1/>Vælg fanen <0>Properties</0>.<1/>Kopier så <0>LND Connect REST URL.</0>"
+          "instructions": "<0>Note:</0> I øjeblikket understøtter vi kun LND, men vi vil fremover også tilføje support af c-lightning!<1/>I din Embassys indstillingsmenu klikker du på servicen <0>Lightning Network Daemon</0>.<1/>Vælg fanen <0>Properties</0>.<1/>Kopier så <0>LND Connect REST URL.</0>"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -285,15 +279,8 @@
       "kollider": {
         "title": "Kollider",
         "description": "Log ind på din Kollider-konto",
-        "page": {
-          "title": "Opret forbindelse til din Kollider-konto",
-          "description": "Har du ikke en konto? <0>Opret en konto</0> nu!"
-        },
         "username": {
           "label": "Indtast dit Kollider-brugernavn"
-        },
-        "password": {
-          "label": "Indtast din Kollider adgangskode"
         },
         "currency": {
           "label": "Vælg din kontovaluta"
@@ -634,7 +621,7 @@
       "list": {
         "trading": "Handel",
         "gaming": "Spil",
-        "entertaiment": "Underholdning",
+        "entertainment": "Underholdning",
         "shopping": "Indkøb",
         "miscellaneous": "Diverse",
         "showcases": "Eksempler",
@@ -648,12 +635,6 @@
           "description": "Generer en lightning-faktura, send lidt bitcoin til dig selv og begynd at bruge Alby i lightnings økosystem",
           "label1": "Modtag Bitcoin",
           "label2": "Køb Bitcoin"
-        },
-        "pin": {
-          "title": "📌 Fastgør din Alby-udvidelse",
-          "description1": "<0>Få nem adgang til Alby ved at klikke på udvidelsesikonet</0> <1/> <2>i din browsers øverste højre hjørne</2>",
-          "description2": "Find Alby i listen med udvidelser, og klik på tegnestift-ikonet for at fastgøre den til værktøjslinjen",
-          "description3": "Sådan! Et klik på Albys ikon åbner den"
         },
         "demo": {
           "title": "🕹️ Få en prøvetur med Alby",
@@ -743,7 +724,7 @@
     "settings": "Indstillinger",
     "accounts": "Konti",
     "discover": "Opdag",
-    "websites": "Hjemmesider",
+    "connected_sites": "",
     "sats_one": "sat",
     "sats_other": "sat",
     "loading": "indlæser",
