@@ -27,7 +27,13 @@
           "delete_edit_account": "Remover conta inválida e editar novamente"
         }
       },
-      "title": "Bem-vindo a Alby"
+      "title": "Bem-vindo à Alby",
+      "pin_extension": {
+        "title": "Fixar extensão Alby",
+        "description": "Quase lá. Para facilitar seu acesso a Alby , lembre-se de fixar a extensão Alby na barra de ferramentas do navegador:",
+        "explanation": "1. Clique em <0/> no canto superior direito do seu navegador<1/>2. Localize a Alby e clique no ícone de fixação para fixá-lo na barra de ferramentas do navegador<1/>3. É isso. Agora é só clicar no ícone da Alby <2/>",
+        "next_btn": "Comece a usar a Alby {{icon}}"
+      }
     },
     "choose_connector": {
       "description": "Escolha uma carteira ou servidor disponível abaixo",
@@ -256,7 +262,7 @@
           "title": "Conecte no servidor LND usando LNC",
           "description": "1. Open Lightning Terminal and choose <0>Lightning Node Connect</0> from the sidebar.<1/> 2. Click <0>Create a new session</0><1/>3. Label the session, choose desired permissions and submit<1/>4. <0>Copy pairing phrase</0> and paste it below."
         },
-        "title": "LND usando LNC",
+        "title": "Lightning Terminal (LNC)",
         "pairing_phrase": {
           "label": "Frase de pareamento "
         }
@@ -347,7 +353,7 @@
           "placeholder": "Nome da conta"
         },
         "title2": "Editar conta",
-        "title1": "Dados da conta"
+        "title1": "Configurações da conta"
       }
     },
     "enable": {
@@ -362,7 +368,7 @@
       "unlock_to_continue": "Desbloqueie para continuar",
       "unlock_password": "Sua senha de desbloqueio",
       "help_contact": {
-        "part1": "Precisa de ajuda? Contato",
+        "part1": "Precisa de ajuda?",
         "part2": "Suporte Alby"
       },
       "unlock_error": {
@@ -628,7 +634,8 @@
         "entertainment": "Entretenimento",
         "shopping": "Compras",
         "miscellaneous": "Outros",
-        "nostr": "Nostr"
+        "nostr": "Nostr",
+        "nodeManagement": "Gerenciamento de servidor"
       },
       "tips": {
         "top_up_wallet": {
@@ -676,7 +683,7 @@
             "mismatched_password": "As senhas não correspondem."
           },
           "confirm_password": {
-            "label": "Confirmar Senha"
+            "label": "Confirmar senha"
           },
           "choose_password": {
             "label": "Senha"
@@ -687,7 +694,7 @@
         "create_account": "Crie uma nova conta Alby para enviar e receber pagamentos em bitcoin.",
         "email": {
           "create": {
-            "label": "Endereço de E-mail"
+            "label": "Endereço de e-mail"
           },
           "login": {
             "label": "Endereço de E-mail ou Endereço Relâmpago"
@@ -715,6 +722,27 @@
     "transactions": {
       "title": "Transações",
       "description": "Transações enviadas usando suas contas"
+    },
+    "distributions": {
+      "umbrel": {
+        "name": "Umbrel"
+      },
+      "citadel": {
+        "name": "Citadel"
+      },
+      "btcpay": {
+        "name": "BTCPay"
+      },
+      "raspiblitz": {
+        "name": "Raspiblitz"
+      },
+      "mynode": {
+        "name": "myNode"
+      },
+      "start9": {
+        "name": "Start9"
+      },
+      "description": "Escolha com qual aplicativo {{name}} você gostaria de se conectar"
     }
   },
   "common": {
@@ -748,7 +776,7 @@
       "export": "Exportar",
       "remove": "Remover",
       "copy": "Copiar",
-      "copy_invoice": "",
+      "copy_invoice": "Copiar fatura",
       "back": "Voltar",
       "log_in": "Fazer login",
       "remember": "Lembrar minha escolha e não perguntar novamente",
@@ -851,7 +879,7 @@
           "add": "Adicionar nova conta",
           "manage": "Gerenciar contas",
           "account_settings": "Configurações da conta",
-          "go_to_web_wallet": "Gerenciar sua conta Alby"
+          "go_to_web_wallet": "Acessar conta Alby na web"
         }
       }
     },

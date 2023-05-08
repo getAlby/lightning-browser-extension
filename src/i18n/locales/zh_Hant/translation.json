@@ -27,6 +27,9 @@
         "actions": {
           "delete_edit_account": "刪除無效帳戶並重新編輯"
         }
+      },
+      "pin_extension": {
+        "title": "釘選你的Alby擴充套件"
       }
     },
     "choose_path": {
@@ -296,7 +299,6 @@
           "title": "連接到你的Kollider錢包"
         },
         "login": {
-          "description": "還沒有帳戶？立即<0>註冊</0>！",
           "title": "連接到你的 Kollider 帳戶"
         },
         "create": {

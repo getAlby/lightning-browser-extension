@@ -27,7 +27,13 @@
           "delete_edit_account": "删除无效帐户并重新编辑"
         }
       },
-      "title": "欢迎使用Alby"
+      "title": "欢迎使用Alby",
+      "pin_extension": {
+        "title": "固定你的 Alby 扩展",
+        "description": "就快完成了。以便方便地使用 Alby，请记住把扩展固定到工具栏：",
+        "next_btn": "与 Alby 一起开始嗡嗡作响{{icon}}",
+        "explanation": "1.点击浏览器右上角的<0/><1/>2.找到Alby并点击将其固定到工具栏<1/>3.就这样。要访问Alby，只需点击<2/>图标"
+      }
     },
     "choose_connector": {
       "lnd": {
@@ -254,7 +260,7 @@
           "description": "1. 打开 Lightning Terminal 并从侧边栏选择 <0>Lightning Node Connect</0> 。<1/> 2. 点击 <0>Create a new session</0><1/>3. 标记对话，选择所需的权限并提交<1/>4. <0>复制配对词句</0> 并粘贴到下方。",
           "title": "连接你的LND节点"
         },
-        "title": "LND使用LNC",
+        "title": "Lightning Terminal (LNC)",
         "pairing_phrase": {
           "placeholder": "秘密的堆聪短语",
           "label": "你的配对短语 "
@@ -284,12 +290,14 @@
           "description": "创建一个新的Kollider帐户来发送、接收和交易比特币。"
         },
         "login": {
-          "title": "连接到你的Kollider帐户",
-          "description": "还没有帐户？立即<0>注册</0>！"
+          "title": "连接到你的Kollider帐户"
         },
         "warning": "⚠️ 请确保你将你的凭证安全地保存在密码管理器中。没有这些凭证，你的帐户将无法恢复。"
       },
-      "title": "连接闪电钱包"
+      "title": "连接闪电钱包",
+      "umbrel_lightning_node": {
+        "title": "闪电节点"
+      }
     },
     "home": {
       "recent_transactions": "近期交易",
@@ -764,6 +772,28 @@
       "list_empty": "尚无交易。",
       "title": "交易",
       "description": "你所有帐户的传出交易"
+    },
+    "distributions": {
+      "title": "连接到 {{name}}",
+      "description": "选择你想连接的{{name}}应用程序",
+      "citadel": {
+        "name": "Citadel"
+      },
+      "btcpay": {
+        "name": "BTCPay"
+      },
+      "raspiblitz": {
+        "name": "Raspiblitz"
+      },
+      "mynode": {
+        "name": "myNode"
+      },
+      "start9": {
+        "name": "Start9"
+      },
+      "umbrel": {
+        "name": "Umbrel"
+      }
     }
   },
   "common": {
@@ -786,7 +816,7 @@
       "open": "打开",
       "confirm": "确认",
       "copy": "复制",
-      "copy_invoice": "",
+      "copy_invoice": "复制发票",
       "log_in": "登录",
       "receive_again": "接收另一笔付款",
       "remember": "记住我的选择，不要再问",
@@ -865,7 +895,7 @@
         "subtitle": "当网站要求时，无需确认即可自动登录。"
       },
       "edit_allowance": {
-        "title": "编辑限额",
+        "title": "编辑偏好",
         "screen_reader": "限额选项"
       },
       "edit_permissions": "编辑权限"

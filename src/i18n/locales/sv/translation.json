@@ -242,8 +242,7 @@
           "description": "Skapa ett nytt Kollider-konto för att skicka, ta emot och handla Bitcoin."
         },
         "login": {
-          "title": "Anslut till ditt Kollider-konto",
-          "description": "Har du inte ett konto? <0>Registrera dig</0> nu!"
+          "title": "Anslut till ditt Kollider-konto"
         }
       },
       "commando": {

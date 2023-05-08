@@ -27,7 +27,13 @@
         "connection_taking_long": "Der Verbindungsversuch dauert länger als erwartet... Sind deine Angaben korrekt? Ist deine Node erreichbar?",
         "contact_support": "Wenn du Hilfe benötigst, wende dich bitte an support@getalby.com"
       },
-      "title": "Willkommen bei Alby"
+      "title": "Willkommen bei Alby",
+      "pin_extension": {
+        "title": "Pin für die Alby Erweiterung",
+        "description": "Du bist fast am Ziel. Um Alby bequem nutzen zu können, musst du deine Erweiterung an die Browser Symbolleiste anheften:",
+        "next_btn": "Beginne mit Alby {{icon}}",
+        "explanation": "1. Klicke auf <0/> in der oberen rechten Ecke deines Browsers<1/>2. Suche Alby und klicke, um es an die Symbolleiste anzuheften<1/>3. Das war es. Um auf Alby zuzugreifen, klicke einfach auf das Symbol <2/>."
+      }
     },
     "choose_connector": {
       "lnd": {
@@ -273,14 +279,13 @@
           "title": "Erstelle dein Kollider-Konto und verbinde dich mit Alby"
         },
         "login": {
-          "title": "Verbinden mit deinem Kollider-Konto",
-          "description": "Du hast noch kein Konto? <0>Jetzt anmelden</0>!"
+          "title": "Verbinden mit deinem Kollider-Konto"
         },
         "warning": "⚠️ Bitte stelle sicher, dass du deine Zugangsdaten sicher in einem Passwort-Manager speicherst. Ohne diese Zugangsdaten kann dein Konto nicht wiederhergestellt werden."
       },
       "title": "Verbinde Lightning Wallet",
       "lnc": {
-        "title": "LND mit LNC",
+        "title": "Lightning Terminal (LNC)",
         "page": {
           "title": "Verbinden mit deiner LND Node",
           "description": "1. Öffne dein Lightning Terminal und wähle <0>Lightning Node Connect</0> in der Seitenleiste.<1/> 2. Klicke auf <0>Erstelle eine neue Sitzung</0><1/>3. Beschrifte die Sitzung, wähle dann die gewünschte Berechtigung und sende sie ab<1/>4. <0>Kopiere die Pairing-Phrase</0> und füge sie hier unten ein."
@@ -289,6 +294,9 @@
           "label": "Dein Paarungssatz ",
           "placeholder": "geheimer stapel sats phrase"
         }
+      },
+      "umbrel_lightning_node": {
+        "title": "Lightning Node"
       }
     },
     "unlock": {
@@ -765,6 +773,28 @@
       "title": "Transaktionen",
       "description": "Ausgehende Transaktionen über alle deine Konten",
       "list_empty": "Noch keine Transaktionen verfügbar."
+    },
+    "distributions": {
+      "title": "Verbinden mit {{Name}}",
+      "description": "Wähle die {{Name}} App, mit der du dich verbinden möchtest",
+      "umbrel": {
+        "name": "Umbrel"
+      },
+      "citadel": {
+        "name": "Citadel"
+      },
+      "btcpay": {
+        "name": "BTCPay"
+      },
+      "raspiblitz": {
+        "name": "Raspiblitz"
+      },
+      "mynode": {
+        "name": "myNode"
+      },
+      "start9": {
+        "name": "Start9"
+      }
     }
   },
   "components": {
@@ -812,7 +842,7 @@
     },
     "allowance_menu": {
       "edit_allowance": {
-        "title": "Zulage bearbeiten",
+        "title": "Präferenzen bearbeiten",
         "screen_reader": "Zulässigkeitsoptionen"
       },
       "enable_login": {
@@ -909,7 +939,8 @@
       "copy_invoice": "",
       "remember": "Denke an meine Wahl und frage nicht noch einmal",
       "receive_again": "Eine weitere Zahlung erhalten",
-      "transactions": "Transaktionen"
+      "transactions": "Transaktionen",
+      "more": "Mehr"
     },
     "discover": "Entdecken",
     "errors": {

@@ -218,8 +218,7 @@
           "description": "Crea una nueva cuenta Kollider para enviar, recibir e intercambiar Bitcoin."
         },
         "login": {
-          "title": "Conéctate a tú cuenta Kollider",
-          "description": "¿Aún no tienes una cuenta? <0>¡Regístrese</0> ahora!"
+          "title": "Conéctate a tú cuenta Kollider"
         },
         "warning": "⚠️ Asegúrate de almacenar tus credenciales de forma segura en un administrador de contraseñas. Sin estas credenciales, tú cuenta no será recuperable."
       },
