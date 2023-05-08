@@ -45,7 +45,9 @@ function Receive() {
     paymentRequest: string;
     rHash: string;
   } | null>();
-  const [copyLabel, setCopyLabel] = useState(tCommon("actions.copy") as string);
+  const [copyLabel, setCopyLabel] = useState(
+    tCommon("actions.copy_invoice") as string
+  );
   const [paid, setPaid] = useState(false);
   const [pollingForPayment, setPollingForPayment] = useState(false);
   const mounted = useRef(false);
@@ -174,7 +176,7 @@ function Receive() {
                     navigator.clipboard.writeText(invoice.paymentRequest);
                     setCopyLabel(tCommon("copied"));
                     setTimeout(() => {
-                      setCopyLabel(tCommon("actions.copy"));
+                      setCopyLabel(tCommon("actions.copy_invoice"));
                     }, 1000);
                   } catch (e) {
                     if (e instanceof Error) {

@@ -755,6 +755,7 @@
       "export": "Exportovat",
       "remove": "Odstranit",
       "copy": "Zkopírovat",
+      "copy_invoice": "",
       "log_in": "Přihlásit se",
       "receive_again": "Přijmout další platbu",
       "remember": "Zapamatovat moji volbu a nikdy se už neptat"

@@ -906,6 +906,7 @@
       "connect": "Verbinden",
       "save": "Speichern",
       "copy": "Kopieren",
+      "copy_invoice": "",
       "remember": "Denke an meine Wahl und frage nicht noch einmal",
       "receive_again": "Eine weitere Zahlung erhalten",
       "transactions": "Transaktionen"

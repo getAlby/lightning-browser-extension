@@ -786,6 +786,7 @@
       "open": "打开",
       "confirm": "确认",
       "copy": "复制",
+      "copy_invoice": "",
       "log_in": "登录",
       "receive_again": "接收另一笔付款",
       "remember": "记住我的选择，不要再问",

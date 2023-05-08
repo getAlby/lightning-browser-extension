@@ -758,6 +758,7 @@
       "export": "Eksporter",
       "remove": "Fjern",
       "copy": "Kopier",
+      "copy_invoice": "",
       "log_in": "Log ind",
       "remember": "Husk mit valg, og spørg ikke igen"
     },
