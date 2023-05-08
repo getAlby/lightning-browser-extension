@@ -66,7 +66,7 @@ test.describe("Wallet features", () => {
     await (await getByText($document, "Create Invoice")).click();
     page.waitForSelector("button");
     // copy invoice
-    await (await findByText($document, "Copy")).click();
+    await (await findByText($document, "Copy Invoice")).click();
 
     await browser.close();
   });
