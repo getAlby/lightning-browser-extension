@@ -60,6 +60,12 @@
         "subtitle": "Collection of stores and websites accepting bitcoin",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/lightning-network-stores_thumbnail.png",
         "url": "https://lightningnetworkstores.com/"
+      },
+      {
+        "title": "Coincards",
+        "subtitle": "Shop for Gift Cards, Mobile Top-ups & Prepaid Vouchers for hundreds of retailers",
+        "logo": "https://assets.coincards.com/wp-content/uploads/2023/05/08102339/56logo.png",
+        "url": "https://coincards.com/"
       }
     ]
   },
