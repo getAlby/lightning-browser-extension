@@ -27,6 +27,9 @@
         "actions": {
           "delete_edit_account": "刪除無效帳戶並重新編輯"
         }
+      },
+      "pin_extension": {
+        "title": "釘選你的Alby擴充套件"
       }
     },
     "choose_path": {
