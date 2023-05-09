@@ -71,17 +71,7 @@ function Options() {
                   </Container>
                 }
               >
-                <Route
-                  index
-                  element={
-                    <ChooseConnectorPath
-                      title={i18n.t("translation:choose_path.title")}
-                      description={i18n.t(
-                        "translation:choose_path.description"
-                      )}
-                    />
-                  }
-                />
+                <Route index element={<ChooseConnectorPath />} />
                 <Route
                   path="create"
                   element={<AlbyWallet variant="create" />}

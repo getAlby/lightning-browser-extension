@@ -4,7 +4,7 @@ import TestConnection from "@screens/Onboard/TestConnection";
 import ChooseConnector from "@screens/connectors/ChooseConnector";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { HashRouter as Router, Routes, Route, Outlet } from "react-router-dom";
+import { Outlet, Route, HashRouter as Router, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Container from "~/app/components/Container";
 import { SettingsProvider } from "~/app/context/SettingsContext";
@@ -28,15 +28,7 @@ function Welcome() {
           <Route path="/" element={<Layout />}>
             <Route index element={<SetPassword />} />
             <Route path="choose-path">
-              <Route
-                index={true}
-                element={
-                  <ChooseConnectorPath
-                    title={i18n.t("translation:choose_path.title")}
-                    description={i18n.t("translation:choose_path.description")}
-                  />
-                }
-              ></Route>
+              <Route index={true} element={<ChooseConnectorPath />}></Route>
               <Route path="create" element={<AlbyWallet variant="create" />} />
               <Route path="login" element={<AlbyWallet variant="login" />} />
               <Route path="choose-connector">
@@ -76,7 +68,7 @@ function Layout() {
   return (
     <div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center font-serif font-medium text-2xl my-14 dark:text-white">
+        <div className="text-center font-serif font-medium text-2xl my-10 dark:text-white">
           <p>
             {t("welcome.title")}
             <img
