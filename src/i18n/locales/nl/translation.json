@@ -579,7 +579,8 @@
       "close": "",
       "export": "",
       "remove": "",
-      "copy": ""
+      "copy": "",
+      "copy_invoice": ""
     },
     "errors": {
       "connection_failed": "",

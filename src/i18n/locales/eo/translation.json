@@ -567,7 +567,8 @@
       "close": "Fermi",
       "export": "Elporti",
       "remove": "Forigi",
-      "copy": "Kopii"
+      "copy": "Kopii",
+      "copy_invoice": ""
     },
     "errors": {
       "connection_failed": "",

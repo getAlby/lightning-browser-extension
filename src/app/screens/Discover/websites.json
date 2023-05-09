@@ -131,6 +131,12 @@
         "subtitle": "The blue bird experience for Nostr",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/yosup_thumbnail.svg",
         "url": "https://yosup.app/"
+      },
+      {
+        "title": "Satellite",
+        "subtitle": "Explore the Nostr Universe",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/satellite-earth.png",
+        "url": "https://satellite.earth/"
       }
     ]
   },

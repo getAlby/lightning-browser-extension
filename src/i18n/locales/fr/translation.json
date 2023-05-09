@@ -759,6 +759,7 @@
       "export": "Exporter",
       "remove": "Retirer",
       "copy": "Copie",
+      "copy_invoice": "",
       "log_in": "Connexion",
       "remember": "Souviens-toi de mon choix et ne redemande plus"
     },

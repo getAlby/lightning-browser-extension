@@ -61,8 +61,12 @@ export default function AlbyWallet({ variant }: Props) {
       lightning_addresses_attributes: [{ address: formData.lnAddress }], // address must be provided as array, in theory we support multiple addresses per account
     });
     headers.append("X-TS", timestamp.toString());
-    const mac = hmacSHA256(body, HMAC_VERIFY_HEADER_KEY).toString(Base64);
-    headers.append("X-VERIFY", encodeURIComponent(mac));
+    const macBody = hmacSHA256(body, HMAC_VERIFY_HEADER_KEY).toString(Base64);
+    const macUrl = hmacSHA256(walletCreateUrl, HMAC_VERIFY_HEADER_KEY).toString(
+      Base64
+    );
+    headers.append("X-VERIFY", encodeURIComponent(macBody));
+    headers.append("X-VERIFY-URL", encodeURIComponent(macUrl));
 
     return fetch(walletCreateUrl, {
       method: "POST",
