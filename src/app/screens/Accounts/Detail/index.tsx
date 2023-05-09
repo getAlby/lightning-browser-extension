@@ -116,6 +116,7 @@ function AccountDetail() {
   }
 
   async function generateNostrPrivateKey(random?: boolean) {
+    // @Todo: why not use account here?
     const selectedAccount = await auth.fetchAccountInfo();
 
     if (!random && selectedAccount?.id !== id) {
@@ -181,6 +182,7 @@ function AccountDetail() {
     }
   }
 
+  // @Todo: this should be handled in AccountContext
   async function updateAccountName({ id, name }: AccountAction) {
     await msg.request("editAccount", {
       name,
@@ -206,7 +208,7 @@ function AccountDetail() {
   async function selectAccount(accountId: string) {
     auth.setAccountId(accountId);
     await api.selectAccount(accountId);
-    auth.fetchAccountInfo({ accountId });
+    auth.fetchAccountInfo();
   }
 
   async function removeAccount({ id, name }: AccountAction) {

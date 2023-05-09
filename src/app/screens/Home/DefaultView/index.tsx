@@ -47,11 +47,12 @@ const DefaultView: FC<Props> = (props) => {
   } = useSettings();
 
   const showFiat = !isLoadingSettings && settings.showFiat;
-  const hasTransactions = !isLoadingTransactions && !!transactions?.length;
-  const hasInvoices = !isLoadingInvoices && !!incomingTransactions?.length;
 
   const navigate = useNavigate();
-  const { account, balancesDecorated } = useAccount();
+  const { account, balancesDecorated, accountLoading } = useAccount();
+
+  const isLoadingOutgoing = accountLoading || isLoadingTransactions;
+  const isLoadingIncoming = accountLoading || isLoadingInvoices;
 
   const { t } = useTranslation("translation", { keyPrefix: "home" });
   const { t: tCommon } = useTranslation("common");
@@ -237,29 +238,18 @@ const DefaultView: FC<Props> = (props) => {
 
               <Tab.Panels>
                 <Tab.Panel>
-                  {hasTransactions && (
-                    <TransactionsTable transactions={transactions} />
-                  )}
-                  {!isLoadingTransactions && !transactions?.length && (
-                    <p className="text-gray-500 dark:text-neutral-400">
-                      {t("default_view.no_transactions")}
-                    </p>
-                  )}
+                  <TransactionsTable
+                    transactions={transactions}
+                    loading={isLoadingOutgoing}
+                    noResultMsg={t("default_view.no_transactions")}
+                  />
                 </Tab.Panel>
                 <Tab.Panel>
-                  {isLoadingInvoices && (
-                    <div className="flex justify-center">
-                      <Loading />
-                    </div>
-                  )}
-                  {hasInvoices && (
-                    <TransactionsTable transactions={incomingTransactions} />
-                  )}
-                  {!hasInvoices && (
-                    <p className="text-gray-500 dark:text-neutral-400">
-                      {t("default_view.no_transactions")}
-                    </p>
-                  )}
+                  <TransactionsTable
+                    transactions={incomingTransactions}
+                    loading={isLoadingIncoming}
+                    noResultMsg={t("default_view.no_transactions")}
+                  />
                 </Tab.Panel>
               </Tab.Panels>
             </Tab.Group>
