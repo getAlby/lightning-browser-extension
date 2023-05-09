@@ -32,7 +32,7 @@
         "title": "Pin für die Alby Erweiterung",
         "description": "Du bist fast am Ziel. Um Alby bequem nutzen zu können, musst du deine Erweiterung an die Browser Symbolleiste anheften:",
         "next_btn": "Beginne mit Alby {{icon}}",
-        "explanation": "1. Klicke auf <0/> in der oberen rechten Ecke deines Browsers<1/>2. Suche Alby und klicke, um es an die Symbolleiste anzuheften<1/>3. Das war es. Um auf Alby zuzugreifen, klicke einfach auf das Symbol <2/>."
+        "explanation": "1. Klicke auf <0/> in der oberen rechten Ecke deines Browsers<1/>2. Suche Alby und klicke, um es an die Symbolleiste anzuheften<1/>3. Das war es, um auf Alby zuzugreifen, klicke einfach auf das Symbol <2/>."
       }
     },
     "choose_connector": {
@@ -934,7 +934,7 @@
       "connect": "Verbinden",
       "save": "Speichern",
       "copy": "Kopieren",
-      "copy_invoice": "",
+      "copy_invoice": "Rechnung kopieren",
       "remember": "Denke an meine Wahl und frage nicht noch einmal",
       "receive_again": "Eine weitere Zahlung erhalten",
       "transactions": "Transaktionen",
