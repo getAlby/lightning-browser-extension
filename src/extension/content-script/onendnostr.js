@@ -109,7 +109,7 @@ function postMessage(ev, response) {
       data: response,
       scope: "nostr",
     },
-    "*"
+    window.location.origin
   );
 }
 

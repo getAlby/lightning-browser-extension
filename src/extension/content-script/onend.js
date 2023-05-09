@@ -119,7 +119,7 @@ function postMessage(ev, response) {
       data: response,
       scope: "webln",
     },
-    "*"
+    window.location.origin
   );
 }
 
