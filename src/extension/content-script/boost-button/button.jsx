@@ -1,12 +1,9 @@
 import { LightningAddress } from "alby-tools";
-import { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
 import "~/app/styles/index.css";
-import WebLNProvider from "~/extension/ln/webln";
+import WebLNProvider from "~/extension/providers/webln";
 
-import extractLightningData from "../batteries/index";
-
-function BoostButton() {
-  const [lnurl, setLnurl] = useState(false);
+function BoostButton({ lnurl }) {
   const [webLNDisabled, setWebLNDisabled] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -20,28 +17,12 @@ function BoostButton() {
   const [expand, setExpand] = useState(false);
   const [satsClicked, setSatsClicked] = useState(0);
 
-  useEffect(() => {
-    let count = 0;
-
-    const extract = async () => {
-      count++;
-      const lnData = await extractLightningData();
-      if (lnData) {
-        setLnurl(lnData.address);
-        clearInterval(intervalId);
-      } else if (count >= 5) {
-        clearInterval(intervalId);
-      }
-    };
-
-    const intervalId = setInterval(extract, 3000);
-    extract();
-  }, []);
-
-  const sendSatsToLnurl = useCallback(async () => {
+  const sendSatsToLnurl = async () => {
     setLoading(true);
     try {
-      window.webln = new WebLNProvider();
+      if (!window.webln) {
+        window.webln = new WebLNProvider();
+      }
       await window.webln.enable();
       const result = await window.webln.lnurl(lnurl);
       if (result) {
@@ -56,35 +37,34 @@ function BoostButton() {
       setLoading(false);
       setHold(false);
     }
-  }, [lnurl]);
+  };
 
-  const generateInvoice = useCallback(
-    async (satsClicked) => {
-      setLoading(true);
-      if (!satsClicked) return;
-      const ln = new LightningAddress(lnurl);
-      const invoice = await ln.generateInvoice({
-        amount: (satsClicked * 1000).toString(),
-      });
+  const generateInvoice = async (satsClicked) => {
+    setLoading(true);
+    if (!satsClicked) return;
+    const ln = new LightningAddress(lnurl);
+    const invoice = await ln.generateInvoice({
+      amount: (satsClicked * 1000).toString(),
+    });
+    if (!window.webln) {
       window.webln = new WebLNProvider();
-      try {
-        await window.webln.enable();
-        const result = await window.webln.sendPayment(invoice.paymentRequest);
-        if (result) {
-          setSats(result.route.total_amt);
-          setSent(true);
-        }
-      } catch (e) {
-        setSatsClicked(0);
-        if (e.message !== "Prompt was closed" && e.message !== "User rejected")
-          setWebLNDisabled(true);
-        console.error(e.message);
-      } finally {
-        setLoading(false);
+    }
+    try {
+      await window.webln.enable();
+      const result = await window.webln.sendPayment(invoice.paymentRequest);
+      if (result) {
+        setSats(result.route.total_amt);
+        setSent(true);
       }
-    },
-    [lnurl]
-  );
+    } catch (e) {
+      setSatsClicked(0);
+      if (e.message !== "Prompt was closed" && e.message !== "User rejected")
+        setWebLNDisabled(true);
+      console.error(e.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const textStyle = {
     fontFamily: "Inter",
@@ -102,7 +82,7 @@ function BoostButton() {
 
   const timesClicked = satsClicked / 1000;
 
-  return lnurl ? (
+  return (
     <button
       className={`${
         !webLNDisabled && !satsClicked && !sent
@@ -309,7 +289,7 @@ function BoostButton() {
           : `No WebLN`}
       </div>
     </button>
-  ) : null;
+  );
 }
 
 export default BoostButton;

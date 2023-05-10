@@ -2053,6 +2053,11 @@
     "@webassemblyjs/ast" "1.11.6"
     "@xtuc/long" "4.2.2"
 
+"@webbtc/webln-types@^1.0.10":
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/@webbtc/webln-types/-/webln-types-1.0.10.tgz#03e41779df6ba9bdca57635ca6b5a70c7233c8c6"
+  integrity sha512-Cy9+uNqvRct3yHB+bs5hJ3idf4VEmnyKxwMpe1/lWpOXbbdi/h7GgAB1JMsnblwN74QKSBEnOPvURoA+RAG9qg==
+
 "@webpack-cli/configtest@^2.1.1":
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/@webpack-cli/configtest/-/configtest-2.1.1.tgz#3b2f852e91dac6e3b85fb2a314fb8bef46d94646"
@@ -2262,11 +2267,12 @@ alby-js-sdk@^2.1.2:
     crypto-js "^4.1.1"
     nostr-tools "^1.13.1"
 
-alby-tools@^1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/alby-tools/-/alby-tools-1.3.0.tgz#fb61b65da5d962d903dcd334ec0e8ea264e03a05"
-  integrity sha512-sIXT5HIBj+ulDwtKEgXoxf0EgU5OIOJlsf5e1LSfqOxwP1O281ypAb7pBModNuhxhYL6rkS2Kr0GgkW/KNJL7g==
+alby-tools@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/alby-tools/-/alby-tools-2.3.0.tgz#7f87360b078ea2b1ac63f54d630a46ca4f3c7527"
+  integrity sha512-WSoTEyTJvB0XWTz/lJAOYY8y0hJERjm3odqyfMB6CeJKPU9qjrsdCYo0BIfp7gflbutMqXIG6hLtsdBUXq53hA==
   dependencies:
+    "@webbtc/webln-types" "^1.0.10"
     cross-fetch "^3.1.5"
     crypto-js "^4.1.1"
     light-bolt11-decoder "^3.0.0"

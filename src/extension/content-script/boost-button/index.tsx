@@ -1,10 +1,14 @@
 import { createRoot } from "react-dom/client";
 import "~/app/styles/index.css";
 import "~/i18n/i18nConfig";
+import { Battery } from "~/types";
 
 import BoostButton from "./button";
 
-function injectBoostButton() {
+function injectBoostButton(data: [Battery]) {
+  if (document.querySelector("body #alby-shadow")) {
+    return;
+  }
   const body = document.querySelector("body");
   const shadowWrapper = document.createElement("div");
   const app = document.createElement("div");
@@ -20,7 +24,7 @@ function injectBoostButton() {
 
   const root = createRoot(app);
 
-  root.render(<BoostButton />);
+  root.render(<BoostButton lnurl={data[0].address} />);
 }
 
 export default injectBoostButton;

@@ -1,6 +1,6 @@
 import browser from "webextension-polyfill";
 
-import injectBoostButton from "./boost-button";
+import extractLightningData from "./batteries";
 import injectScript from "./injectScript";
 import getOriginData from "./originData";
 import shouldInject from "./shouldInject";
@@ -34,12 +34,11 @@ async function init() {
   }
 
   injectScript(browser.runtime.getURL("js/inpageScript.bundle.js")); // registers the DOM event listeners and checks webln again (which is also loaded onstart
-  injectBoostButton();
 
   browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
     // extract LN data from websites
     if (request.action === "extractLightningData") {
-      // extractLightningData();
+      extractLightningData();
     }
     // forward account changed messaged to inpage script
     else if (request.action === "accountChanged" && isEnabled) {

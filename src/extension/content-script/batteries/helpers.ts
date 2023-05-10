@@ -1,5 +1,6 @@
 import browser from "webextension-polyfill";
 import msg from "~/common/lib/msg";
+import injectBoostButton from "~/extension/content-script/boost-button";
 import type { Battery } from "~/types";
 
 // duplicate also in setup/setIcon action
@@ -55,4 +56,5 @@ export const setLightningData = (data: [Battery]): void => {
     args: data,
   });
   msg.request("setIcon", { icon: ExtensionIcon.Tipping });
+  injectBoostButton(data);
 };
