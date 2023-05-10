@@ -802,7 +802,7 @@
       "greaterThan": "> {{min}}"
     },
     "transactions": "Transações",
-    "balance": "Saldo"
+    "balance": "Saldo disponível"
   },
   "components": {
     "allowance_menu": {
@@ -877,7 +877,7 @@
           "add": "Adicionar nova conta",
           "manage": "Gerenciar contas",
           "account_settings": "Configurações da conta",
-          "go_to_web_wallet": "Acessar conta Alby na web"
+          "go_to_web_wallet": "Acessar conta Alby na Web"
         }
       }
     },
