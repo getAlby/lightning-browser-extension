@@ -1,11 +1,9 @@
-import { Battery } from "~/types";
-
 import getOriginData from "../originData";
-import { findLightningAddressInText } from "./helpers";
+import { findLightningAddressInText, setLightningData } from "./helpers";
 
 const urlMatcher = /^https:\/\/(.+\.)?medium.com\/(\S+)?/;
 
-const battery = (): Battery | void => {
+const battery = (): void => {
   const name =
     document.querySelector<HTMLHeadingElement>(".pw-author-name")?.innerText;
   const description =
@@ -15,16 +13,18 @@ const battery = (): Battery | void => {
   const match = findLightningAddressInText(description);
   if (!match) return;
 
-  return {
-    method: "lnurl",
-    address: match,
-    ...getOriginData(),
-    description,
-    name,
-    icon:
-      document.querySelector<HTMLImageElement>(`img[alt*='${name}']`)?.src ??
-      "",
-  };
+  setLightningData([
+    {
+      method: "lnurl",
+      address: match,
+      ...getOriginData(),
+      description,
+      name,
+      icon:
+        document.querySelector<HTMLImageElement>(`img[alt*='${name}']`)?.src ??
+        "",
+    },
+  ]);
 };
 
 const Medium = {

@@ -1,13 +1,12 @@
 import axios from "axios";
-import { Battery } from "~/types";
 
 import getOriginData from "../originData";
-import { findLightningAddressInText } from "./helpers";
+import { findLightningAddressInText, setLightningData } from "./helpers";
 
 const urlMatcher =
   /^https:\/\/www\.youtube.com\/(((channel|c)\/([^/]+))|(@[^/]+)).*/;
 
-const battery = async (): Promise<Battery | void> => {
+const battery = async (): Promise<void> => {
   const match = document.location.toString().match(urlMatcher);
   if (!match) {
     return;
@@ -36,14 +35,16 @@ const battery = async (): Promise<Battery | void> => {
 
   if (!lnurl) return;
 
-  return {
-    method: "lnurl",
-    address: lnurl,
-    ...getOriginData(),
-    name: name,
-    description: "", // we can not reliably find a description (the meta tag might be of a different video)
-    icon: imageUrl,
-  };
+  setLightningData([
+    {
+      method: "lnurl",
+      address: lnurl,
+      ...getOriginData(),
+      name: name,
+      description: "", // we can not reliably find a description (the meta tag might be of a different video)
+      icon: imageUrl,
+    },
+  ]);
 };
 
 const findLnurlFromHeaderLink = (

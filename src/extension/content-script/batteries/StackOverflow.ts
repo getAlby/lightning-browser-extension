@@ -3,12 +3,12 @@ import axios from "axios";
 import type { Battery } from "~/types";
 
 import getOriginData from "../originData";
-import { findLightningAddressInText } from "./helpers";
+import { findLightningAddressInText, setLightningData } from "./helpers";
 
 const urlMatcher =
   /^https:\/\/stackoverflow\.com\/(users|questions)\/(\d+)\/(\w+).*/;
 
-const battery = async (): Promise<Battery | void> => {
+const battery = async (): Promise<void> => {
   const urlParts = document.location.pathname.split("/");
   const route = urlParts[1];
   const userOrQuestionId = urlParts[2];
@@ -22,7 +22,7 @@ const battery = async (): Promise<Battery | void> => {
     lightningData = await handleQuestionPage(userOrQuestionId);
   }
 
-  if (lightningData) return lightningData;
+  if (lightningData) setLightningData([lightningData]);
 };
 
 function htmlToText(html: string) {

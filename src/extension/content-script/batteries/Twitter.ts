@@ -1,6 +1,5 @@
-import { Battery } from "~/types";
-
 import getOriginData from "../originData";
+import { setLightningData } from "./helpers";
 
 declare global {
   interface Window {
@@ -74,7 +73,7 @@ function getUserData(username: string) {
   return null;
 }
 
-function battery(): Battery | void {
+function battery(): void {
   // Twitter loads everything async...so we observe DOM changes to check if data finished loading.
   function twitterDOMChanged(_: MutationRecord[], observer: MutationObserver) {
     const username = getUsername();
@@ -124,13 +123,15 @@ function battery(): Battery | void {
         return;
       }
 
-      return {
-        method: "lnurl",
-        address: recipient,
-        ...getOriginData(),
-        icon: userData.imageUrl,
-        name: userData.name,
-      };
+      setLightningData([
+        {
+          method: "lnurl",
+          address: recipient,
+          ...getOriginData(),
+          icon: userData.imageUrl,
+          name: userData.name,
+        },
+      ]);
     }
   }
 
@@ -145,7 +146,7 @@ function battery(): Battery | void {
   });
   // On slow connections the observer is added after the DOM is fully loaded.
   // Therefore the callback twitterDOMChanged needs to also be called manually.
-  return twitterDOMChanged([], window.LBE_TWITTER_MUTATION_OBSERVER);
+  twitterDOMChanged([], window.LBE_TWITTER_MUTATION_OBSERVER);
 }
 
 const twitter = {

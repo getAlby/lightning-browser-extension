@@ -1,11 +1,9 @@
-import { Battery } from "~/types";
-
 import getOriginData from "../originData";
-import { findLightningAddressInText } from "./helpers";
+import { findLightningAddressInText, setLightningData } from "./helpers";
 
 const urlMatcher = /^https:\/\/vimeo.com\/.*\d{4,}\/?$/;
 
-const battery = (): Battery | void => {
+const battery = (): void => {
   const videoDescription = document.querySelector("[data-description-content]");
   const channelLink = document.querySelector(
     ".clip_info-subline--watch .js-user_link"
@@ -32,13 +30,15 @@ const battery = (): Battery | void => {
   const imageUrl =
     document.querySelector<HTMLImageElement>(".clip_info-subline--watch img")
       ?.src || "";
-  return {
-    method: "lnurl",
-    address: recipient,
-    ...getOriginData(),
-    name,
-    icon: imageUrl,
-  };
+  setLightningData([
+    {
+      method: "lnurl",
+      address: recipient,
+      ...getOriginData(),
+      name,
+      icon: imageUrl,
+    },
+  ]);
 };
 
 const VimeoVideo = {

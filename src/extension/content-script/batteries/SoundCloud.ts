@@ -1,13 +1,11 @@
-import { Battery } from "~/types";
-
 import getOriginData from "../originData";
-import { findLightningAddressInText } from "./helpers";
+import { findLightningAddressInText, setLightningData } from "./helpers";
 
 const urlMatcher =
   /^https:\/\/soundcloud.com\/([^/]+)(\/([^/]+))?(\/([^/]+))?(\/([^/]+))?$/;
 
 const pages = ["popular-tracks", "tracks", "albums", "sets", "reposts"];
-function battery(): Battery | void {
+function battery(): void {
   const urlParts = document.location
     .toString()
     .replace("https://soundcloud.com", "")
@@ -16,9 +14,9 @@ function battery(): Battery | void {
   const page = urlParts[2];
 
   if (username && (!page || pages.includes(page))) {
-    return handleProfilePage();
+    handleProfilePage();
   } else if (username && page) {
-    return handleTrackPage();
+    handleTrackPage();
   }
 }
 
@@ -31,23 +29,26 @@ function handleTrackPage() {
   const address = findLightningAddressInText(description.innerText);
   if (!address) return;
 
-  return {
-    method: "lnurl",
-    address: address,
-    ...getOriginData(),
-    description:
-      document.querySelector<HTMLDivElement>(".soundTitle__titleHeroContainer")
-        ?.innerText ?? "",
-    name:
-      document.querySelector<HTMLAnchorElement>(
-        ".userBadge__username .userBadge__usernameLink"
-      )?.innerText ?? "",
-    icon:
-      document
-        .querySelector<HTMLSpanElement>(`.userBadge__avatar span.sc-artwork`)
-        ?.style.backgroundImage.slice(4, -1)
-        .replace(/"/g, "") ?? "",
-  };
+  setLightningData([
+    {
+      method: "lnurl",
+      address: address,
+      ...getOriginData(),
+      description:
+        document.querySelector<HTMLDivElement>(
+          ".soundTitle__titleHeroContainer"
+        )?.innerText ?? "",
+      name:
+        document.querySelector<HTMLAnchorElement>(
+          ".userBadge__username .userBadge__usernameLink"
+        )?.innerText ?? "",
+      icon:
+        document
+          .querySelector<HTMLSpanElement>(`.userBadge__avatar span.sc-artwork`)
+          ?.style.backgroundImage.slice(4, -1)
+          .replace(/"/g, "") ?? "",
+    },
+  ]);
 }
 
 function handleProfilePage() {
@@ -75,23 +76,25 @@ function handleProfilePage() {
   const address = findLightningAddressInText(text);
   if (!address) return;
 
-  return {
-    method: "lnurl",
-    address: address,
-    ...getOriginData(),
-    description: descriptionElement?.innerText ?? "",
-    name:
-      document
-        .querySelector<HTMLHeadingElement>(".profileHeaderInfo__userName")
-        ?.childNodes[0]?.textContent?.trim() ?? "",
-    icon:
-      document
-        .querySelector<HTMLSpanElement>(
-          `.profileHeaderInfo__avatar span.sc-artwork`
-        )
-        ?.style.backgroundImage.slice(4, -1)
-        .replace(/"/g, "") ?? "",
-  };
+  setLightningData([
+    {
+      method: "lnurl",
+      address: address,
+      ...getOriginData(),
+      description: descriptionElement?.innerText ?? "",
+      name:
+        document
+          .querySelector<HTMLHeadingElement>(".profileHeaderInfo__userName")
+          ?.childNodes[0]?.textContent?.trim() ?? "",
+      icon:
+        document
+          .querySelector<HTMLSpanElement>(
+            `.profileHeaderInfo__avatar span.sc-artwork`
+          )
+          ?.style.backgroundImage.slice(4, -1)
+          .replace(/"/g, "") ?? "",
+    },
+  ]);
 }
 
 const soundCloud = {

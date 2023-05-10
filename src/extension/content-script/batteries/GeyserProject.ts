@@ -1,10 +1,9 @@
-import { Battery } from "~/types";
-
 import getOriginData from "../originData";
+import { setLightningData } from "./helpers";
 
 const urlMatcher = /^https:\/\/geyser.fund\/([^/]+)(\/([^/]+))?$/;
 
-const battery = (): Battery | void => {
+const battery = (): void => {
   const urlParts = document.location.pathname.split("/");
   const project = urlParts[1];
   const name = urlParts[2];
@@ -23,14 +22,16 @@ function handleProjectPage(name: string) {
     ?.src;
 
   if (address) {
-    return {
-      method: "lnurl",
-      address: address,
-      ...getOriginData(),
-      description: "geyser.fund",
-      name: title ?? name,
-      icon: icon ?? "https://geyser.fund/logo-brand.svg",
-    };
+    setLightningData([
+      {
+        method: "lnurl",
+        address: address,
+        ...getOriginData(),
+        description: "geyser.fund",
+        name: title ?? name,
+        icon: icon ?? "https://geyser.fund/logo-brand.svg",
+      },
+    ]);
   }
 }
 

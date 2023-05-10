@@ -1,11 +1,9 @@
-import { Battery } from "~/types";
-
 import getOriginData from "../originData";
-import { findLightningAddressInText } from "./helpers";
+import { findLightningAddressInText, setLightningData } from "./helpers";
 
 const urlMatcher = /^https:\/\/linktr.ee\/([\S]+)$/;
 
-function battery(): Battery | void {
+function battery(): void {
   const linkElement = document.querySelector<HTMLAnchorElement>(
     "a[href*='getalby.com']"
   );
@@ -22,16 +20,18 @@ function battery(): Battery | void {
   const address = findLightningAddressInText(text ?? "");
   if (!address) return;
 
-  return {
-    method: "lnurl",
-    address,
-    ...getOriginData(),
-    description: description?.innerText ?? "",
-    name: document.querySelector<HTMLHeadingElement>("h1")?.innerText ?? "",
-    icon:
-      document.querySelector<HTMLImageElement>('[data-testid="ProfileImage"]')
-        ?.src ?? "",
-  };
+  setLightningData([
+    {
+      method: "lnurl",
+      address,
+      ...getOriginData(),
+      description: description?.innerText ?? "",
+      name: document.querySelector<HTMLHeadingElement>("h1")?.innerText ?? "",
+      icon:
+        document.querySelector<HTMLImageElement>('[data-testid="ProfileImage"]')
+          ?.src ?? "",
+    },
+  ]);
 }
 
 const linkTree = {

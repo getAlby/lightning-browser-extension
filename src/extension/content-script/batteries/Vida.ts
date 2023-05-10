@@ -1,11 +1,9 @@
-import { Battery } from "~/types";
-
 import getOriginData from "../originData";
-import { findLightningAddressInText } from "./helpers";
+import { findLightningAddressInText, setLightningData } from "./helpers";
 
 const urlMatcher = /^https:\/\/vida.page\/(\w+)$/;
 
-function battery(): Battery | void {
+function battery(): void {
   const monetizationTag = document.querySelector<HTMLMetaElement>(
     'head > meta[name="lightning" i]'
   );
@@ -45,11 +43,13 @@ function battery(): Battery | void {
   if (icon) {
     originData.icon = icon;
   }
-  return {
-    method: "lnurl",
-    address,
-    ...originData,
-  };
+  setLightningData([
+    {
+      method: "lnurl",
+      address,
+      ...originData,
+    },
+  ]);
 }
 
 const vida = {
