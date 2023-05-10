@@ -33,8 +33,6 @@
       }
     },
     "choose_path": {
-      "title": "連接",
-      "description": "請使用你的 Alby 帳戶或將 Alby 連接到你的閃電網絡錢包以開始使用 Alby 擴展。",
       "alby": {
         "title": "Alby帳戶",
         "description": "註冊或使用你現有的 Alby 帳戶立即開始閃電支付。",

@@ -29,8 +29,6 @@
       }
     },
     "choose_path": {
-      "title": "जुड़ें",
-      "description": "Alby extension का उपयोग शुरू करने के लिए, अपना Lightning Wallet कनेक्ट करें।",
       "alby": {
         "title": "Alby अकाउंट",
         "description": "बिजली भुगतान के साथ जल्दी से आरंभ करने के लिए साइन अप करें या अपने मौजूदा Alby खाते का उपयोग करें.",

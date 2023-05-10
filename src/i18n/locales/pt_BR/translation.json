@@ -669,9 +669,7 @@
         "and_more": "& mais...",
         "description": "Conecte-se em sua carteira bitcoin ou em um dos vários servidores de carteira disponíveis.",
         "connect": "Conectar"
-      },
-      "description": "Você pode usar a extensão Alby criando uma conta conosco ou conectando-se nas carteiras bitcoin disponíveis.",
-      "title": "Escolha o tipo de conta"
+      }
     },
     "alby": {
       "pre_connect": {

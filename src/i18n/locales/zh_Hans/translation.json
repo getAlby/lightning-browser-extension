@@ -667,8 +667,6 @@
       }
     },
     "choose_path": {
-      "title": "连接",
-      "description": "请使用你的 Alby 帐户或将 Alby 连接到你的闪电网络钱包以开始使用 Alby 扩展。",
       "other": {
         "title": "其他钱包",
         "description": "连接到你现有的闪电钱包或节点，可从各种连接器中选择。",

@@ -731,9 +731,7 @@
         "title": "Alby Konto",
         "description": "Melde dich an oder verwende dein bestehendes Alby-Konto, um im Handumdrehen mit Lightningzahlungen zu beginnen.",
         "create_new": "Anmelden"
-      },
-      "title": "Verbinden",
-      "description": "Um die Alby Erweiterung zu nutzen, verwende dein Alby Konto oder verbinde dich mit deiner Lightning Wallet."
+      }
     },
     "discover": {
       "description": "Websites und Webapplikationen, auf denen du Alby verwenden kannst",
