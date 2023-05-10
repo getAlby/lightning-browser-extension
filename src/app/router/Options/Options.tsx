@@ -3,6 +3,7 @@ import Navbar from "@components/Navbar";
 import Accounts from "@screens/Accounts";
 import AccountDetail from "@screens/Accounts/Detail";
 import ConfirmPayment from "@screens/ConfirmPayment";
+import DefaultView from "@screens/Home/DefaultView";
 import Keysend from "@screens/Keysend";
 import LNURLAuth from "@screens/LNURLAuth";
 import LNURLChannel from "@screens/LNURLChannel";
@@ -16,7 +17,6 @@ import Send from "@screens/Send";
 import Settings from "@screens/Settings";
 import Transactions from "@screens/Transactions";
 import Unlock from "@screens/Unlock";
-import Wallet from "@screens/Wallet";
 import { useTranslation } from "react-i18next";
 import { HashRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -56,7 +56,10 @@ function Options() {
             <Route path="confirmPayment" element={<ConfirmPayment />} />
             <Route path="keysend" element={<Keysend />} />
             <Route path="receive" element={<Receive />} />
-            <Route path="wallet" element={<Wallet />} />
+            <Route
+              path="wallet"
+              element={<DefaultView isOptionsPage={true} />}
+            />
             <Route path="transactions">
               <Route
                 path="outgoing"

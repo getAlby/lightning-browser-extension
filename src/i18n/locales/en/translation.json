@@ -395,10 +395,15 @@
         "no_transactions": "No transactions on <0>{{name}}</0> yet."
       },
       "default_view": {
+        "options_page": {
+          "title": "Wallet"
+        },
         "recent_transactions": "Recent Transactions",
-        "no_transactions": "No transactions made with Alby, yet.",
         "is_blocked_hint": "Alby is currently disabled on {{host}}",
-        "block_removed": "Enabled {{host}}. Please reload the website."
+        "block_removed": "Enabled {{host}}. Please reload the website.",
+        "no_outgoing_transactions": "No outgoing transactions for this account yet.",
+        "no_incoming_transactions": "No incoming transactions for this account yet.",
+        "all_transactions_link": "See all transactions"
       }
     },
     "accounts": {
@@ -794,13 +799,6 @@
         "incoming": "Incoming transactions for selected account"
       },
       "list_empty": "No transactions available yet."
-    },
-    "wallet": {
-      "title": "Wallet",
-      "recent_transactions": "Recent transactions",
-      "no_outgoing_transactions": "No outgoing transactions for this account yet.",
-      "no_incoming_transactions": "No incoming transactions for this account yet.",
-      "all_transactions_link": "See all transactions"
     }
   },
   "common": {
