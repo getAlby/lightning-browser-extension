@@ -137,6 +137,12 @@
         "subtitle": "Explore the Nostr Universe",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/satellite-earth.png",
         "url": "https://satellite.earth/"
+      },
+      {
+        "title": "Vida",
+        "subtitle": "Host live podcasts and earn sats.",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/vida.png",
+        "url": "https://vida.live/"
       }
     ]
   },
