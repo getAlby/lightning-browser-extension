@@ -21,6 +21,7 @@ import { PublisherLnData } from "~/app/screens/Home/PublisherLnData";
 import { classNames } from "~/app/utils/index";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
+import utils from "~/common/lib/utils";
 import type { Battery } from "~/types";
 
 dayjs.extend(relativeTime);
@@ -97,6 +98,14 @@ const DefaultView: FC<Props> = (props) => {
     } catch (e) {
       console.error(e);
       if (e instanceof Error) toast.error(`Error: ${e.message}`);
+    }
+  };
+
+  const handleViewAllLink = (path: string) => {
+    if (props.isOptionsPage) {
+      navigate(path);
+    } else {
+      utils.openPage(`options.html#${path}`);
     }
   };
 
@@ -197,9 +206,9 @@ const DefaultView: FC<Props> = (props) => {
                       <TransactionsTable transactions={transactions} />
                       <div className="mt-8 text-center">
                         <Hyperlink
-                          onClick={() => {
-                            navigate("/transactions/outgoing");
-                          }}
+                          onClick={() =>
+                            handleViewAllLink("/transactions/outgoing")
+                          }
                         >
                           {t("default_view.all_transactions_link")}
                         </Hyperlink>
@@ -223,9 +232,9 @@ const DefaultView: FC<Props> = (props) => {
                       <TransactionsTable transactions={incomingTransactions} />
                       <div className="mt-8 text-center">
                         <Hyperlink
-                          onClick={() => {
-                            navigate("/transactions/incoming");
-                          }}
+                          onClick={() =>
+                            handleViewAllLink("/transactions/incoming")
+                          }
                         >
                           {t("default_view.all_transactions_link")}
                         </Hyperlink>
