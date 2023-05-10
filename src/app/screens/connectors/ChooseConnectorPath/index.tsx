@@ -19,7 +19,7 @@ export default function ChooseConnectorPath() {
   return (
     <div className="relative mt-10 lg:grid lg:gap-8 text-center">
       <div className="relative">
-        <div className="grid lg:grid-cols-2 gap-4 lg:gap-8 xl:gap-18 mb-4">
+        <div className="grid lg:grid-cols-2 gap-10 mb-4">
           <ConnectorPath
             title={t("alby.title")}
             description={t("alby.description")}
