@@ -1,4 +1,3 @@
-import { expect } from "@playwright/test";
 import { getDocument, queries } from "pptr-testing-library";
 import puppeteer, { Browser, ElementHandle, Page } from "puppeteer";
 
