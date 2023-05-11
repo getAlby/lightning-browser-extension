@@ -92,14 +92,9 @@ export const createNewWalletWithPassword = async (options?: {
     page.waitForNavigation(), // The promise resolves after navigation has finished
   ]);
 
-  await findByText(
-    $document,
-    "To start using the Alby Extension, use your Alby Account or connect to your lightning wallet."
-  );
-
   if (options?.openConnectOtherWallet) {
-    const connectTexts = await findAllByText($document, "Connect");
-    connectTexts[1].click(); // we have headline and button using "connect", button is second
+    const connectTexts = await findByText($document, "Connect");
+    connectTexts.click();
 
     await Promise.all([
       page.waitForResponse(() => true),

@@ -534,8 +534,6 @@
       "block_added": ""
     },
     "choose_path": {
-      "description": "Om Alby te gebruiken voor online betalingen, verbind je lightning wallet met de extensie.",
-      "title": "Verbinden",
       "alby": {
         "title": "Alby"
       }

@@ -673,9 +673,7 @@
         "connect": "Anslut",
         "and_more": "& mer...",
         "description": "Anslut till din befintliga lightning Plånbok eller Node och välj från olika kontakter."
-      },
-      "title": "Anslut",
-      "description": "För att börja använda Alby tillägget, använd ditt Alby-konto eller anslut till din lightning-plånbok."
+      }
     },
     "alby": {
       "pre_connect": {
