@@ -137,12 +137,6 @@
         "subtitle": "Explore the Nostr Universe",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/satellite-earth.png",
         "url": "https://satellite.earth/"
-      },
-      {
-        "title": "Vida",
-        "subtitle": "Host live podcasts and earn sats.",
-        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/vida_thumbnail.png",
-        "url": "https://vida.live/"
       }
     ]
   },
@@ -253,6 +247,12 @@
         "subtitle": "Earn sats anytime someone wants to connect and chat",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/vida_thumbnail.png",
         "url": "https://vida.page/"
+      },
+      {
+        "title": "Vida.live",
+        "subtitle": "Host live podcasts and earn sats.",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/vida_thumbnail.png",
+        "url": "https://vida.live/"
       },
       {
         "title": "WebLN Experiments",
