@@ -400,7 +400,8 @@
       },
       "default_view": {
         "recent_transactions": "Recent Transactions",
-        "no_transactions": "No transactions made with Alby, yet.",
+        "no_transactions_out": "No transactions made with Alby, yet.",
+        "no_transactions_in": "No transactions received with this account, yet.",
         "is_blocked_hint": "Alby is currently disabled on {{host}}",
         "block_removed": "Enabled {{host}}. Please reload the website."
       }
