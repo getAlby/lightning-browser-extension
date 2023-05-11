@@ -93,9 +93,9 @@ export const createNewWalletWithPassword = async (options?: {
   ]);
 
   if (options?.openConnectOtherWallet) {
-    const connectTexts = await findAllByText($document, "Connect");
-    connectTexts[0].click();
-    
+    const connectTexts = await findByText($document, "Connect");
+    connectTexts.click();
+
     await Promise.all([
       page.waitForResponse(() => true),
       page.waitForNavigation(), // The promise resolves after navigation has finished
