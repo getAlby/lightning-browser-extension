@@ -4,14 +4,16 @@ import Container from "@components/Container";
 import ContentMessage from "@components/ContentMessage";
 import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Loading from "~/app/components/Loading";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
+import { PsbtPreview, getPsbtPreview } from "~/common/lib/psbt";
 import type { OriginData } from "~/types";
 
 function ConfirmSignPsbt() {
@@ -27,6 +29,12 @@ function ConfirmSignPsbt() {
   const origin = navState.origin as OriginData;
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
+  const [preview, setPreview] = useState<PsbtPreview | undefined>(undefined);
+
+  useEffect(() => {
+    // FIXME: do not hardcode the network type
+    setPreview(getPsbtPreview(psbt, "regtest"));
+  }, [psbt]);
 
   async function confirm() {
     try {
@@ -60,9 +68,13 @@ function ConfirmSignPsbt() {
     }
   }
 
+  if (!preview) {
+    return <Loading />;
+  }
+
   return (
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
-      <ScreenHeader title={t("title")} />
+      <ScreenHeader title={/*t("title")*/ "Sign PSBT"} />
       {!successMessage ? (
         <Container justifyBetween maxWidth="sm">
           <div>
@@ -70,6 +82,40 @@ function ConfirmSignPsbt() {
               title={origin.name}
               image={origin.icon}
               url={origin.host}
+            />
+            <ContentMessage
+              heading={"inputs"}
+              content={preview.inputs
+                .map(
+                  (input) =>
+                    input.address.substring(0, 5) +
+                    "..." +
+                    input.address.substring(
+                      input.address.length - 5,
+                      input.address.length
+                    ) +
+                    ": " +
+                    input.amount +
+                    " sats"
+                )
+                .join("\n")}
+            />
+            <ContentMessage
+              heading={"outputs"}
+              content={preview.outputs
+                .map(
+                  (output) =>
+                    output.address.substring(0, 5) +
+                    "..." +
+                    output.address.substring(
+                      output.address.length - 5,
+                      output.address.length
+                    ) +
+                    ": " +
+                    output.amount +
+                    " sats"
+                )
+                .join("\n")}
             />
             <ContentMessage
               heading={t("content", { host: origin.host })}

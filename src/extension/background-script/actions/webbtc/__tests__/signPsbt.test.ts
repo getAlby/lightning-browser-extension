@@ -1,5 +1,7 @@
 import { hex } from "@scure/base";
 import * as btc from "@scure/btc-signer";
+import { Psbt, networks, payments } from "bitcoinjs-lib";
+import { getPsbtPreview } from "~/common/lib/psbt";
 import signPsbt from "~/extension/background-script/actions/webbtc/signPsbt";
 import state from "~/extension/background-script/state";
 import type { MessageSignPsbt } from "~/types";
@@ -69,7 +71,7 @@ describe("signPsbt", () => {
   test("1 input, segwit, regtest", async () => {
     const result = await sendPsbtMessage(
       regtestSegwitPsbt,
-      regtestSegwitDerivationPath
+      regtestSegwitDerivationPath // TODO: move to account btc derivation path
     );
     if (!result.data) {
       throw new Error("Result should have data");
@@ -89,5 +91,66 @@ describe("signPsbt input validation", () => {
   test("invalid psbt", async () => {
     const result = await sendPsbtMessage("test");
     expect(result.error).not.toBe(null);
+  });
+});
+
+describe("decode psbt", () => {
+  test("manually decode segwit transaction", async () => {
+    const unsignedPsbt = Psbt.fromHex(regtestSegwitPsbt, {
+      network: networks.regtest,
+    });
+    expect(unsignedPsbt.data.inputs[0].witnessUtxo?.value).toBe(59999234);
+
+    expect(unsignedPsbt.getInputType(0)).toBe("witnesspubkeyhash");
+    expect(
+      hex.encode(
+        unsignedPsbt.data.inputs[0].bip32Derivation?.[0].pubkey ??
+          new Uint8Array()
+      )
+    ).toBe(
+      "02e7ab2537b5d49e970309aae06e9e49f36ce1c9febbd44ec8e0d1cca0b4f9c319"
+    );
+    const address = payments.p2wpkh({
+      pubkey: unsignedPsbt.data.inputs[0].bip32Derivation?.[0].pubkey,
+      network: networks.regtest,
+    }).address;
+    expect(address).toBe("bcrt1q6rz28mcfaxtmd6v789l9rrlrusdprr9pz3cppk");
+    expect(unsignedPsbt.txOutputs[0].address).toBe(
+      "bcrt1qd7spv5q28348xl4myc8zmh983w5jx32cs707jh"
+    );
+    expect(unsignedPsbt.txOutputs[0].value).toBe(10000000);
+    expect(unsignedPsbt.txOutputs[1].address).toBe(
+      "bcrt1qw3xfnyuspj8qnr2envc448mxwam7f7p249rqs0"
+    );
+    expect(unsignedPsbt.txOutputs[1].value).toBe(49999093);
+
+    console.info(
+      hex.encode(unsignedPsbt.txInputs[0].hash),
+      unsignedPsbt.data.inputs[0]
+    );
+
+    // fee should be 141 sats
+    // input should be bcrt1q6rz28mcfaxtmd6v789l9rrlrusdprr9pz3cppk 59,999,234 sats
+    // output 1 should be bcrt1qd7spv5q28348xl4myc8zmh983w5jx32cs707jh 10,000,000 sats
+    // output 2 should be bcrt1qw3xfnyuspj8qnr2envc448mxwam7f7p249rqs0 49,999,093 sats
+  });
+
+  test("get segwit transaction preview", async () => {
+    const preview = getPsbtPreview(regtestSegwitPsbt, "regtest");
+    expect(preview.inputs.length).toBe(1);
+    expect(preview.inputs[0].address).toBe(
+      "bcrt1q6rz28mcfaxtmd6v789l9rrlrusdprr9pz3cppk"
+    );
+    expect(preview.inputs[0].amount).toBe(59999234);
+    expect(preview.outputs.length).toBe(2);
+
+    expect(preview.outputs[0].address).toBe(
+      "bcrt1qd7spv5q28348xl4myc8zmh983w5jx32cs707jh"
+    );
+    expect(preview.outputs[0].amount).toBe(10000000);
+    expect(preview.outputs[1].address).toBe(
+      "bcrt1qw3xfnyuspj8qnr2envc448mxwam7f7p249rqs0"
+    );
+    expect(preview.outputs[1].amount).toBe(49999093);
   });
 });
