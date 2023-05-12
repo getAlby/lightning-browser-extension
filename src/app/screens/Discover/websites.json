@@ -137,6 +137,12 @@
         "subtitle": "Explore the Nostr Universe",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/satellite-earth.png",
         "url": "https://satellite.earth/"
+      },
+      {
+        "title": "Zappedit",
+        "subtitle": "",
+        "logo": "https://user-images.githubusercontent.com/100958893/237755942-f4f3c8d9-cdfd-421b-b18a-551df575c630.png",
+        "url": "https://zappedit.com/"
       }
     ]
   },
