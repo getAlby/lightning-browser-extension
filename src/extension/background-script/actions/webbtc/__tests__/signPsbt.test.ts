@@ -1,52 +1,44 @@
-import * as secp256k1 from "@noble/secp256k1";
 import { hex } from "@scure/base";
-import { HDKey } from "@scure/bip32";
-import * as bip39 from "@scure/bip39";
 import * as btc from "@scure/btc-signer";
 import signPsbt from "~/extension/background-script/actions/webbtc/signPsbt";
+import state from "~/extension/background-script/state";
 import type { MessageSignPsbt } from "~/types";
 
-jest.mock("~/extension/background-script/state");
+const passwordMock = jest.fn;
 
-// Same as above
-const TX_TEST_OUTPUTS: [string, bigint][] = [
-  ["1cMh228HTCiwS8ZsaakH8A8wze1JR5ZsP", 10n],
-  ["3H3Kc7aSPP4THLX68k4mQMyf1gvL6AtmDm", 50n],
-  ["bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq", 93n],
-];
-const TX_TEST_INPUTS = [
-  {
-    txid: hex.decode(
-      "c061c23190ed3370ad5206769651eaf6fac6d87d85b5db34e30a74e0c4a6da3e"
-    ),
-    index: 0,
-    amount: 550n,
-    script: hex.decode("76a91411dbe48cc6b617f9c6adaf4d9ed5f625b1c7cb5988ac"),
-  },
-  {
-    txid: hex.decode(
-      "a21965903c938af35e7280ae5779b9fea4f7f01ac256b8a2a53b1b19a4e89a0d"
-    ),
-    index: 0,
-    amount: 600n,
-    script: hex.decode("76a91411dbe48cc6b617f9c6adaf4d9ed5f625b1c7cb5988ac"),
-  },
-  {
-    txid: hex.decode(
-      "fae21e319ca827df32462afc3225c17719338a8e8d3e3b3ddeb0c2387da3a4c7"
-    ),
-    index: 0,
-    amount: 600n,
-    script: hex.decode("76a91411dbe48cc6b617f9c6adaf4d9ed5f625b1c7cb5988ac"),
-  },
-];
+// generated in sparrow wallet using mock mnemonic below,
+// native segwit derivation: m/84'/1'/0' - 1 input ("m/84'/1'/0'/0/0" - first receive address), 2 outputs, saved as binary PSBT file
+// imported using `cat "filename.psbt" | xxd -p -c 1000`
+const regtestSegwitPsbt =
+  "70736274ff0100710200000001fe1204e9e35f90c356bb6fe1d8944a46b0c5ac57160f707f6f5ca728bf1ab5490000000000fdffffff0280969800000000001600146fa016500a3c6a737ebb260e2ddca78ba9234558f5ecfa0200000000160014744c9993900c8e098d599b315a9f667777e4f82a1e0100004f01043587cf030ef4b1af800000003c8c2037ee4c1621da0d348db51163709a622d0d2838dde6d8419c51f6301c6203b88e0fbe3f646337ed93bc0c0f3b843fcf7d2589e5ec884754e6402027a890b41073c5da0a5400008001000080000000800001005202000000010380d5854dfa1e789fe3cb615e834b0cef9f1aad732db4bac886eb8750497a180000000000fdffffff010284930300000000160014d0c4a3ef09e997b6e99e397e518fe3e41a118ca11401000001011f0284930300000000160014d0c4a3ef09e997b6e99e397e518fe3e41a118ca101030401000000220602e7ab2537b5d49e970309aae06e9e49f36ce1c9febbd44ec8e0d1cca0b4f9c3191873c5da0a540000800100008000000080000000000000000000220203eeed205a69022fed4a62a02457f3699b19c06bf74bf801acc6d9ae84bc16a9e11873c5da0a540000800100008000000080000000000100000000220202e6c60079372951c3024a033ecf6584579ebf2f7927ae99c42633e805596f29351873c5da0a540000800100008000000080010000000400000000";
 
-const regtest = {
-  bech32: "bcrt",
-  pubKeyHash: 0x6f,
-  scriptHash: 0xc4,
-  wif: 0,
+// signed PSBT and verified by importing in sparrow and broadcasting transaction
+const regtestSegwitSignedPsbt =
+  "02000000000101fe1204e9e35f90c356bb6fe1d8944a46b0c5ac57160f707f6f5ca728bf1ab5490000000000fdffffff0280969800000000001600146fa016500a3c6a737ebb260e2ddca78ba9234558f5ecfa0200000000160014744c9993900c8e098d599b315a9f667777e4f82a02473044022065255b047fecc1b5a0afdf095a367c538c6afde33a1d6fb9f5fe28638aa7dbcf022072de13455179e876c336b32cc525c1b862f7199913e8b67c0663566489fcd2c0012102e7ab2537b5d49e970309aae06e9e49f36ce1c9febbd44ec8e0d1cca0b4f9c3191e010000";
+
+const regtestSegwitDerivationPath = "m/84'/1'/0'/0/0";
+
+const mockMnemnoic =
+  "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about";
+
+const mockState = {
+  password: passwordMock,
+  currentAccountId: "1e1e8ea6-493e-480b-9855-303d37506e97",
+  getAccount: () => ({
+    mnemonic: mockMnemnoic,
+  }),
+  getConnector: jest.fn(),
 };
+
+state.getState = jest.fn().mockReturnValue(mockState);
+
+jest.mock("~/common/lib/crypto", () => {
+  return {
+    decryptData: jest.fn(() => {
+      return mockMnemnoic;
+    }),
+  };
+});
 
 beforeEach(async () => {
   // fill the DB first
@@ -56,7 +48,7 @@ afterEach(() => {
   jest.clearAllMocks();
 });
 
-async function sendPsbtMessage(psbt: string) {
+async function sendPsbtMessage(psbt: string, derivationPath?: string) {
   const message: MessageSignPsbt = {
     application: "LBE",
     prompt: true,
@@ -65,7 +57,8 @@ async function sendPsbtMessage(psbt: string) {
       internal: true,
     },
     args: {
-      psbt: psbt,
+      psbt,
+      derivationPath,
     },
   };
 
@@ -73,127 +66,26 @@ async function sendPsbtMessage(psbt: string) {
 }
 
 describe("signPsbt", () => {
-  const mnemonic =
-    "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about";
-  const seed = bip39.mnemonicToSeedSync(mnemonic);
-
-  const hdkey = HDKey.fromMasterSeed(seed);
-  if (!hdkey) throw Error("invalid hdkey");
-
-  const privateKey = hdkey.privateKey;
-
-  if (!privateKey) throw Error("no private key available");
-
-  test("successfully signed psbt", async () => {
-    const tx32 = new btc.Transaction({ version: 1 });
-    for (const [address, amount] of TX_TEST_OUTPUTS)
-      tx32.addOutputAddress(address, amount);
-    for (const inp of TX_TEST_INPUTS) {
-      tx32.addInput({
-        txid: inp.txid,
-        index: inp.index,
-        witnessUtxo: {
-          amount: inp.amount,
-          script: btc.p2wpkh(secp256k1.getPublicKey(privateKey, true)).script,
-        },
-      });
-    }
-    const psbt = tx32.toPSBT(2);
-
-    expect(tx32.isFinal).toBe(false);
-
-    const result = await sendPsbtMessage(secp256k1.utils.bytesToHex(psbt));
-
-    expect(result.data).not.toBe(undefined);
-    expect(result.error).toBe(undefined);
-
-    // expect(result.data?.signed).toBe(
-    //   "010000000001033edaa6c4e0740ae334dbb5857dd8c6faf6ea5196760652ad7033ed9031c261c00000000000ffffffff0d9ae8a4191b3ba5a2b856c21af0f7a4feb97957ae80725ef38a933c906519a20000000000ffffffffc7a4a37d38c2b0de3d3b3e8d8e8a331977c12532fc2a4632df27a89c311ee2fa0000000000ffffffff030a000000000000001976a91406afd46bcdfd22ef94ac122aa11f241244a37ecc88ac320000000000000017a914a860f76561c85551594c18eecceffaee8c4822d7875d00000000000000160014e8df018c7e326cc253faac7e46cdc51e68542c420248304502210089852ee0ca628998de7bd3ca155058196c4c1f66aa3ffb775fd363dafc121c5f0220424ca42eafaa529ac3ff6f1f5af690f45fa2ba294e250c8e91eab0bd37d82a07012103d902f35f560e0470c63313c7369168d9d7df2d49bf295fd9fb7cb109ccee049402483045022100dd99ceb0b087568f62da6de5ac6e875a47c3758f18853dccbafed9c2709892ec022010f1d1dc54fb369a033a57da8a7d0ef897682499efeb216016a265f414546417012103d902f35f560e0470c63313c7369168d9d7df2d49bf295fd9fb7cb109ccee049402483045022100cbad3acff2f56bec89b08496ed2953cc1785282effbe651c4aea79cd601c6b6f02207b0e43638e7ba4933ea13ed562854c893b8e416baa08f2a9ec5ad806bb19aa27012103d902f35f560e0470c63313c7369168d9d7df2d49bf295fd9fb7cb109ccee049400000000"
-    // );
-
-    if (result.data?.signed) {
-      const checkTx = btc.Transaction.fromRaw(hex.decode(result.data?.signed));
-      expect(checkTx.isFinal).toBe(true);
-    }
-  });
-});
-
-// from https://github.com/satoshilabs/slips/blob/master/slip-0132.md
-describe("test transaction building", () => {
-  test("create from mnemonic", async () => {
-    const mnemonic =
-      "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about";
-    const seed = bip39.mnemonicToSeedSync(mnemonic);
-    const hdkey = HDKey.fromMasterSeed(seed);
-
-    expect(hdkey.privateExtendedKey).toBe(
-      "xprv9s21ZrQH143K3GJpoapnV8SFfukcVBSfeCficPSGfubmSFDxo1kuHnLisriDvSnRRuL2Qrg5ggqHKNVpxR86QEC8w35uxmGoggxtQTPvfUu"
+  test("1 input, segwit, regtest", async () => {
+    const result = await sendPsbtMessage(
+      regtestSegwitPsbt,
+      regtestSegwitDerivationPath
     );
-
-    // Check
-    // ✅ m/0'/0'
-    // BIP32 Extended Private key
-    // xprv9w83TkwTJSpYjV4hWcxttB9bQWHdrFCPzCLnMHKceyd4WGBfsUgijUirvMaHM6TFBqQegpt3hZysUeBP8PFmkjPWitahm71vjNhMLqKmuLb
-    // ✅ m/44'/0'/0'/0
-    // ❌ m/49'/0'/0'/0
-    // ❌ m/84'/0'/0'/0
-    // zprvAg4yBxbZcJpcLxtXp5kZuh8jC1FXGtZnCjrkG69JPf96KZ1TqSakA1HF3EZkNjt9yC4CTjm7txs4sRD9EoHLgDqwhUE6s1yD9nY4BCNN4hw
-    // 49 / 84 doesn't seem to follow the same derivation logic 🤔
-
-    // const derivedKey = hdkey.derive("m/84'/0'/0'");
-    // const addressKey = hdkey.derive("m/84'/0'/0'/0/0");
-
-    // const nostrKey = hdkey.derive("m/1237'/0'/0");
-    // const liquidKey = hdkey.derive("m/1776'/0'/0");
-
-    // console.log(nostrKey, liquidKey);
-
-    // console.log(
-    //   "derived",
-    //   derivedKey.privateExtendedKey,
-    //   derivedKey.publicExtendedKey
-    // );
-    // console.log(
-    //   "address",
-    //   btc.getAddress("wpkh", addressKey.privateKey!, btc.NETWORK)
-    // );
-
-    // Assemble transaction
-    // const result1 = btc.WIF(regtest).encode(derivedKey.publicKey!);
-    // console.log(result1);
-
-    const tx32 = new btc.Transaction({ version: 1 });
-    for (const [address, amount] of TX_TEST_OUTPUTS)
-      tx32.addOutputAddress(address, amount);
-    for (const inp of TX_TEST_INPUTS) {
-      tx32.addInput({
-        txid: inp.txid,
-        index: inp.index,
-        witnessUtxo: {
-          amount: inp.amount,
-          script: btc.p2wpkh(secp256k1.getPublicKey(hdkey.privateKey!, true))
-            .script,
-        },
-      });
+    if (!result.data) {
+      throw new Error("Result should have data");
     }
 
-    // Create psbt
-    const psbt = hex.encode(tx32.toPSBT());
-
-    // Sign transaction
-    const result = await sendPsbtMessage(psbt);
-
-    // Check signatures
     expect(result.data).not.toBe(undefined);
+    expect(result.data?.signed).not.toBe(undefined);
     expect(result.error).toBe(undefined);
+
+    const checkTx = btc.Transaction.fromRaw(hex.decode(result.data.signed));
+    expect(checkTx.isFinal).toBe(true);
+    expect(result.data?.signed).toBe(regtestSegwitSignedPsbt);
   });
 });
 
 describe("signPsbt input validation", () => {
-  test("no inputs signed", async () => {
-    const result = await sendPsbtMessage("test");
-    expect(result.error).not.toBe(null);
-  });
   test("invalid psbt", async () => {
     const result = await sendPsbtMessage("test");
     expect(result.error).not.toBe(null);

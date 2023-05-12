@@ -44,7 +44,12 @@ export default function MnemonicInputs({
               value={words[i]}
               onChange={(e) => {
                 words[i] = e.target.value;
-                setMnemonic?.(words.join(" "));
+                setMnemonic?.(
+                  words
+                    .map((word) => word.trim())
+                    .join(" ")
+                    .trim()
+                );
               }}
             />
           </div>

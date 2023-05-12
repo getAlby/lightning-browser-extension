@@ -150,6 +150,7 @@ export type NavigationState = {
       description: string;
     };
     psbt?: string;
+    derivationPath?: string;
   };
   isPrompt?: true; // only passed via Prompt.tsx
   action: string;
@@ -510,7 +511,7 @@ export interface MessageDecryptGet extends MessageDefault {
 export interface MessageSignPsbt extends MessageDefault {
   args: {
     psbt: string;
-    testnet?: boolean; // TODO: review
+    derivationPath?: string; // custom derivation path
   };
   action: "signPsbt";
 }

@@ -79,6 +79,7 @@ function ImportSecretKey() {
         mnemonic.split(" ").length !== 12 ||
         !bip39.validateMnemonic(mnemonic, wordlist)
       ) {
+        console.error("Invalid mnemonic: '" + mnemonic + "'");
         throw new Error("Invalid mnemonic");
       }
 

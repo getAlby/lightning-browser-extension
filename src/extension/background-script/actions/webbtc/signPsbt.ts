@@ -2,11 +2,12 @@ import * as secp256k1 from "@noble/secp256k1";
 import { hex } from "@scure/base";
 import * as btc from "@scure/btc-signer";
 import { decryptData } from "~/common/lib/crypto";
-import { getRootPrivateKey } from "~/common/lib/mnemonic";
+import {
+  BTC_TAPROOT_DERIVATION_PATH,
+  derivePrivateKey,
+} from "~/common/lib/mnemonic";
 import state from "~/extension/background-script/state";
 import { MessageSignPsbt } from "~/types";
-
-// TODO: Make network (mainnet or testnet) configurable via ENV
 
 const signPsbt = async (message: MessageSignPsbt) => {
   try {
@@ -24,16 +25,22 @@ const signPsbt = async (message: MessageSignPsbt) => {
     }
     const mnemonic = decryptData(account.mnemonic, password);
     const privateKey = secp256k1.utils.hexToBytes(
-      //deriveBitcoinPrivateKey(mnemonic, message.args.testnet)
-      getRootPrivateKey(mnemonic)
+      // TODO: allow account to specify derivation path
+      derivePrivateKey(
+        mnemonic,
+        message.args.derivationPath || BTC_TAPROOT_DERIVATION_PATH
+      )
     );
 
     const psbtBytes = secp256k1.utils.hexToBytes(message.args.psbt);
     const transaction = btc.Transaction.fromPSBT(psbtBytes);
 
+    // this only works with a single input
+    // TODO: support signing individual inputs
     transaction.sign(privateKey);
 
     // TODO: Do we need to finalize() here or should that be done by websites?
+    // if signing individual inputs, each should be finalized individually
     transaction.finalize();
 
     const signedTransaction = hex.encode(transaction.extract());

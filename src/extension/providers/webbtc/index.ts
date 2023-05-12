@@ -37,12 +37,12 @@ export default class WebBTCProvider {
     return this.execute("getInfo");
   }
 
-  signPsbt(psbt: string) {
+  signPsbt(psbt: string, derivationPath?: string) {
     if (!this.enabled) {
       throw new Error("Provider must be enabled before calling signPsbt");
     }
 
-    return this.execute("signPsbtWithPrompt", { psbt });
+    return this.execute("signPsbtWithPrompt", { psbt, derivationPath });
   }
 
   sendTransaction(address: string, amount: string) {

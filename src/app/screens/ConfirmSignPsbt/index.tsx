@@ -23,6 +23,7 @@ function ConfirmSignPsbt() {
   const navigate = useNavigate();
 
   const psbt = navState.args?.psbt as string;
+  const derivationPath = navState.args?.derivationPath as string | undefined;
   const origin = navState.origin as OriginData;
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
@@ -30,7 +31,11 @@ function ConfirmSignPsbt() {
   async function confirm() {
     try {
       setLoading(true);
-      const response = await msg.request("signPsbt", { psbt }, { origin });
+      const response = await msg.request(
+        "signPsbt",
+        { psbt, derivationPath },
+        { origin }
+      );
       msg.reply(response);
       setSuccessMessage(tCommon("success"));
     } catch (e) {
