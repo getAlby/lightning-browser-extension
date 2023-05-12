@@ -395,9 +395,6 @@
         "no_transactions": "No transactions on <0>{{name}}</0> yet."
       },
       "default_view": {
-        "options_page": {
-          "title": "Wallet"
-        },
         "recent_transactions": "Recent Transactions",
         "is_blocked_hint": "Alby is currently disabled on {{host}}",
         "block_removed": "Enabled {{host}}. Please reload the website.",

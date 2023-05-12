@@ -115,11 +115,6 @@ const DefaultView: FC<Props> = (props) => {
         <PublisherLnData lnData={props.lnDataFromCurrentTab[0]} />
       )}
       <div className="p-4">
-        {props.isOptionsPage && (
-          <h2 className="mt-8 mb-2 text-2xl font-bold dark:text-white">
-            {t("default_view.options_page.title")}
-          </h2>
-        )}
         <div className="flex space-x-4 mb-4">
           <BalanceBox className="lg:h-28 grow" />
         </div>
@@ -204,7 +199,7 @@ const DefaultView: FC<Props> = (props) => {
                   {hasTransactions && (
                     <>
                       <TransactionsTable transactions={transactions} />
-                      <div className="mt-8 text-center">
+                      <div className="mt-5 text-center">
                         <Hyperlink
                           onClick={() =>
                             handleViewAllLink("/transactions/outgoing")
@@ -230,7 +225,7 @@ const DefaultView: FC<Props> = (props) => {
                   {hasInvoices && (
                     <>
                       <TransactionsTable transactions={incomingTransactions} />
-                      <div className="mt-8 text-center">
+                      <div className="mt-5 text-center">
                         <Hyperlink
                           onClick={() =>
                             handleViewAllLink("/transactions/incoming")
