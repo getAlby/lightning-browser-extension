@@ -4,7 +4,7 @@
       "title": "歡迎來到Alby",
       "set_password": {
         "title": "設置解鎖密碼",
-        "description": "此密碼用於保護你的錢包並提供對瀏覽器擴展程式的訪問。它無法重置，並且與你的Alby帳戶密碼不同。",
+        "description": "此密碼用於保護你的錢包並提供對瀏覽器擴充套件的訪問。它無法重置，並且與你的Alby帳戶密碼不同。",
         "choose_password": {
           "label": "選擇解鎖密碼："
         },
@@ -29,7 +29,10 @@
         }
       },
       "pin_extension": {
-        "title": "釘選你的Alby擴充套件"
+        "title": "釘選你的Alby擴充套件",
+        "description": "就快完成了。以方便地使用 Alby，請記住把擴充套件固定到工具欄：",
+        "explanation": "1. 點擊瀏覽器右上角的 <0/><1/>2. 找到 Alby 並點擊將其固定到工具欄<1/>3. 就這樣。要訪問 Alby，只需點擊<2/>圖標",
+        "next_btn": "與 Alby 一起開始嗡嗡作響{{icon}}"
       }
     },
     "choose_path": {
@@ -114,7 +117,7 @@
         }
       },
       "lnc": {
-        "title": "LND使用LNC",
+        "title": "Lightning Terminal (LNC)",
         "page": {
           "title": "連接你的 LND 節點",
           "description": "1. 打開 Lightning Terminal 並從側邊欄選擇 <0>Lightning Node Connect</0>。2. 點擊 <0>Create a new session</0><1/>3. 標記對話，選擇所需的權限並提交<1/>4. <0>複製配對詞句</0> 並粘貼到下方。"
@@ -350,6 +353,9 @@
         "errors": {
           "connection_failed": "連接失敗。你的Core Lightning節點是否在線並使用commando插件？"
         }
+      },
+      "umbrel_lightning_node": {
+        "title": "閃電節點"
       }
     },
     "home": {
@@ -397,7 +403,7 @@
         },
         "nostr": {
           "title": "Nostr",
-          "hint": "是一個簡單而開放的協議，旨在創建抗審查的社交網絡。Nostr 使用加密密鑰。你可以使用你的密鑰對內容進行簽署並將其發送到多個中繼。你可以使用 Alby 來管理你的 Nostr 密鑰。許多 Nostr 應用程序將允許你輕鬆地使用 Alby 擴展中的密鑰。",
+          "hint": "是一個簡單而開放的協議，旨在創建抗審查的社交網絡。Nostr 使用加密密鑰。你可以使用你的密鑰對內容進行簽署並將其發送到多個中繼。你可以使用 Alby 來管理你的 Nostr 密鑰。許多 Nostr 應用程序將允許你輕鬆地使用 Alby 擴充套件中的密鑰。",
           "private_key": {
             "title": "管理你的私鑰",
             "subtitle": "粘貼你的私鑰或生成一個新私鑰。<0>瞭解更多 »</0>",
@@ -553,7 +559,7 @@
       },
       "nostr": {
         "title": "Nostr",
-        "hint": "是一個簡單而開放的協議，旨在創建抗審查的社交網絡。Nostr 使用加密密鑰。你可以使用你的密鑰對內容進行簽署並將其發送到多個中繼。你可以使用 Alby 來管理你的 Nostr 密鑰。許多 Nostr 應用程序將允許你輕鬆地使用 Alby 擴展中的密鑰。",
+        "hint": "是一個簡單而開放的協議，旨在創建抗審查的社交網絡。Nostr 使用加密密鑰。你可以使用你的密鑰對內容進行簽署並將其發送到多個中繼。你可以使用 Alby 來管理你的 Nostr 密鑰。許多 Nostr 應用程序將允許你輕鬆地使用 Alby 擴充套件中的密鑰。",
         "private_key": {
           "title": "私鑰",
           "subtitle": "此部分已移至帳戶頁面，因為私鑰現在是特定於帳戶的。",
@@ -767,6 +773,28 @@
       "title": "交易",
       "description": "你所有帳戶的傳出交易",
       "list_empty": "尚無可用交易。"
+    },
+    "distributions": {
+      "title": "連接 {{name}}",
+      "description": "選擇你想連接的{{name}}應用程序",
+      "citadel": {
+        "name": "Citadel"
+      },
+      "btcpay": {
+        "name": "BTCPay"
+      },
+      "umbrel": {
+        "name": "Umbrel"
+      },
+      "raspiblitz": {
+        "name": "Raspiblitz"
+      },
+      "mynode": {
+        "name": "myNode"
+      },
+      "start9": {
+        "name": "Start9"
+      }
     }
   },
   "common": {
@@ -812,7 +840,7 @@
       "export": "導出",
       "remove": "移除",
       "copy": "複製",
-      "copy_invoice": "",
+      "copy_invoice": "複製發票",
       "log_in": "登錄",
       "remember": "記住我的選擇，不要再問了",
       "transactions": "交易",
@@ -842,7 +870,7 @@
         "subtitle": "當網站要求時，無須確認即可自動登錄。"
       },
       "edit_allowance": {
-        "title": "編輯限額",
+        "title": "編輯偏好",
         "screen_reader": "限額選項"
       },
       "edit_permissions": "編輯權限"
