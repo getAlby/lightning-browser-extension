@@ -151,6 +151,9 @@ export type NavigationState = {
     };
     psbt?: string;
     derivationPath?: string;
+    index?: number;
+    num?: number;
+    change?: boolean;
   };
   isPrompt?: true; // only passed via Prompt.tsx
   action: string;
@@ -511,9 +514,19 @@ export interface MessageDecryptGet extends MessageDefault {
 export interface MessageSignPsbt extends MessageDefault {
   args: {
     psbt: string;
-    derivationPath?: string; // custom derivation path
+    derivationPath?: string; // custom derivation path TODO: move to account
   };
   action: "signPsbt";
+}
+
+export interface MessageGetAddresses extends MessageDefault {
+  args: {
+    index: number;
+    num: number;
+    change: boolean;
+    derivationPath?: string; // custom derivation path TODO: move to account
+  };
+  action: "getAddresses";
 }
 
 export interface LNURLChannelServiceResponse {

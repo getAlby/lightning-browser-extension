@@ -60,6 +60,7 @@ const routes = {
   lnurlAuth: auth,
   getCurrencyRate: cache.getCurrencyRate,
   signPsbt: webbtc.signPsbt,
+  getAddresses: webbtc.getAddresses,
   setMnemonic: mnemonic.setMnemonic,
   getMnemonic: mnemonic.getMnemonic,
 
@@ -76,6 +77,7 @@ const routes = {
       enable: allowances.enable,
       getInfo: webbtc.getInfo,
       signPsbtWithPrompt: webbtc.signPsbtWithPrompt,
+      getAddressesWithPrompt: webbtc.getAddressesWithPrompt,
     },
     webln: {
       enable: allowances.enable,
