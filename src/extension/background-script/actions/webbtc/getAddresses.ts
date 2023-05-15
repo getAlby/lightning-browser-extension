@@ -31,26 +31,23 @@ const getAddresses = async (message: MessageGetAddresses) => {
     }[] = [];
 
     // TODO: derivation path should come from the user's account
-    const accountDerivationPath =
+    const derivationPath =
       message.args.derivationPath || BTC_TAPROOT_DERIVATION_PATH;
-    const accountDerivationPathParts = accountDerivationPath
-      .split("/")
-      .slice(0, 4);
+    const accountDerivationPathParts = derivationPath.split("/").slice(0, 4);
     if (accountDerivationPathParts.length !== 4) {
-      throw new Error(
-        "Invalid account derivation path: " + accountDerivationPath
-      );
+      throw new Error("Invalid account derivation path: " + derivationPath);
     }
+    const accountDerivationPath = accountDerivationPathParts.join("/");
 
     for (let i = 0; i < message.args.num; i++) {
       const index = message.args.index + i;
-      const derivationPath =
+      const indexDerivationPath =
         accountDerivationPath +
         "/" +
         (message.args.change ? 1 : 0) +
         "/" +
         index;
-      const publicKey = getPublicKey(mnemonic, derivationPath);
+      const publicKey = getPublicKey(mnemonic, indexDerivationPath);
       const purpose = accountDerivationPathParts[1];
       const coinType = accountDerivationPathParts[2];
       const addressType = getAddressType(purpose);
@@ -62,7 +59,7 @@ const getAddresses = async (message: MessageGetAddresses) => {
       );
       addresses.push({
         publicKey,
-        derivationPath,
+        derivationPath: indexDerivationPath,
         index,
         address,
       });
