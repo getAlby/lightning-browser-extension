@@ -772,7 +772,7 @@
       "description": "你所有帐户的传出交易"
     },
     "distributions": {
-      "title": "连接到 {{name}}",
+      "title": "连接 {{name}}",
       "description": "选择你想连接的{{name}}应用程序",
       "citadel": {
         "name": "Citadel"
