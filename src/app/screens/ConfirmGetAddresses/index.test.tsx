@@ -28,7 +28,9 @@ jest.mock("~/app/hooks/useNavigationState", () => {
     useNavigationState: jest.fn(() => ({
       origin: mockOrigin,
       args: {
-        psbt: "psbt",
+        index: 0,
+        num: 1,
+        change: false,
       },
     })),
   };
@@ -44,9 +46,12 @@ describe("ConfirmGetAddresses", () => {
       );
     });
 
+    // TODO: update copy
     expect(
       await screen.findByText("This website asks you to sign:")
     ).toBeInTheDocument();
-    expect(await screen.findByText("psbt")).toBeInTheDocument();
+    expect(
+      await screen.findByText("Get 1 external addresses from index 0")
+    ).toBeInTheDocument();
   });
 });

@@ -81,8 +81,9 @@ function ConfirmGetAddresses() {
               content={`Get ${num} ${
                 change ? "change" : "external"
               } addresses from index ${index}${
-                derivationPath &&
-                ` with custom derivation path: ${derivationPath}`
+                derivationPath
+                  ? ` with custom derivation path: ${derivationPath}`
+                  : ""
               }`}
             />
           </div>
