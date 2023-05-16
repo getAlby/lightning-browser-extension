@@ -1,84 +1,84 @@
 {
   "translation": {
     "welcome": {
-      "title": "",
+      "title": "به Alby خوش آمدید",
       "set_password": {
-        "title": "",
-        "description": "",
+        "title": "یک گذرواژه برای بازکردن تنظیم کنید",
+        "description": "این گذرواژه برای محافظت از کیف پول شما و فراهم کردن دسترسی به افزونه مرورگر استفاده می شود. این گذرواژه نمی تواند مجدد تنظیم شود و متفاوت از گذرواژه حساب کاربری البی شماست.",
         "choose_password": {
-          "label": ""
+          "label": "یک گذرواژه برای باز کردن انتخاب کنید:"
         },
         "confirm_password": {
-          "label": ""
+          "label": "بیایید تایید کنیم که درست تایپش کردید:"
         },
         "errors": {
-          "enter_password": "",
-          "confirm_password": "",
-          "mismatched_password": ""
+          "enter_password": "لطفا یک گذرواژه وارد کنید.",
+          "confirm_password": "لطفا گذرواژه تان را تایید کنید.",
+          "mismatched_password": "گذرواژه مطابقت ندارد."
         }
       },
       "test_connection": {
-        "ready": "",
-        "initializing": "",
-        "connection_error": "",
-        "review_connection_details": "",
-        "connection_taking_long": "",
-        "contact_support": "",
+        "ready": "عالی، برای شروع آماده اید!",
+        "initializing": "در حال راه اندازی اکانت شما، لطفا شکیبا باشید، این کار ممکن است دقایقی طول بکشد...",
+        "connection_error": "خطا در اتصال",
+        "review_connection_details": "لطفا جزییات اتصال خود را بازبینی کنید.",
+        "connection_taking_long": "تلاش برای اتصال بیش از انتظار طول کشید... جزییات اتصال درست است؟ گره شما قابل دسترسی است؟",
+        "contact_support": "اگر به کمک نیاز دارید لطفا با support@getalby.com تماس بگیرید",
         "actions": {
-          "delete_edit_account": ""
+          "delete_edit_account": "حساب کاربری نامعتبر را حذف کرده و دوباره ویرایش کنید"
         }
       },
       "pin_extension": {
-        "title": "",
-        "description": "",
-        "explanation": "",
-        "next_btn": ""
+        "title": "افزونه البی خود را سنجاق کنید",
+        "description": "تقریبا تمام شد. برای راحتتر استفاده کردن البی، یادت باشه افزونه را در جعبه ابزار مرورگر سنجاق کنی:",
+        "explanation": "۱. روی <0/> در گوشه بالا راست مرورگرتان کلیک کنید <0/> ۲. البی را بیابید و کلیک کنید تا در جعبه ابزار سنجاق شود<1/> ۳. همین، برای دسترسی به البی روی آیکن <2/> کلیک کنید",
+        "next_btn": "ویزویز {{icon}} با البی را شروع کن"
       }
     },
     "choose_path": {
       "alby": {
-        "title": "",
-        "description": "",
-        "create_new": ""
+        "title": "حساب کاربری البی",
+        "description": "ثبتام کنید یا از حساب کاربری البی که دارید استفاده کنید تا بی درنگ شروع به پرداخت و دریافت لاتنینگی نمایید.",
+        "create_new": "ثبتنام"
       },
       "other": {
-        "title": "",
-        "description": "",
-        "and_more": "",
-        "connect": ""
+        "title": "کیف پول های دیگر",
+        "description": "به کیف پول یا گره لایتنینگی موجود خود وصل شوید و از بین متصل کنندهای گوناگون انتخاب کنید.",
+        "and_more": "و بیشتر...",
+        "connect": "اتصال"
       }
     },
     "alby": {
       "pre_connect": {
         "set_password": {
           "choose_password": {
-            "label": ""
+            "label": "گذرواژه"
           },
           "confirm_password": {
-            "label": ""
+            "label": "‏تایید گذرواژه"
           },
           "errors": {
-            "enter_password": "",
-            "confirm_password": "",
-            "mismatched_password": ""
+            "enter_password": "لطفا گذرواژه را وارد کنید.",
+            "confirm_password": "لطفا گذرواژه خود را تایید کنید.",
+            "mismatched_password": "گذرواژه مطابقت ندارد."
           }
         },
-        "forgot_password": "",
-        "title": "",
-        "create_account": "",
-        "login_account": "",
-        "host_wallet": "",
+        "forgot_password": "گذرواژه را فراموش کردید؟",
+        "title": "حساب کاربری البی شما",
+        "create_account": "حساب کاربری البی جدیدی بسازید تا پرداخت های بیتکوینی ارسال و دریافت کنید.",
+        "login_account": "برای اتصال به حساب کاربری البی موجود خود، وارد شوید.",
+        "host_wallet": "ما یک کیف پول لایتنینگی برای شما میزبانی می کنیم!",
         "email": {
           "create": {
-            "label": ""
+            "label": "آدرس ایمیل"
           },
           "login": {
-            "label": ""
+            "label": "آدرس ایمیل یا آدرس لایتنینگ"
           }
         },
         "optional_lightning_note": {
-          "part1": "",
-          "part2": "",
+          "part1": "همراه حساب کاربریتان یک آدرس لایتنینگ هم هست",
+          "part2": "آدرس لایتنینگ",
           "part3": "",
           "part4": ""
         },
