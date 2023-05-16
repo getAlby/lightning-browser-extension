@@ -32,9 +32,22 @@ function ConfirmSignPsbt() {
   const [preview, setPreview] = useState<PsbtPreview | undefined>(undefined);
 
   useEffect(() => {
-    // FIXME: do not hardcode the network type
-    setPreview(getPsbtPreview(psbt, "regtest"));
-  }, [psbt]);
+    (async () => {
+      const derivationPath = (await msg.request(
+        "getDerivationPath",
+        {},
+        { origin }
+      )) as string;
+      setPreview(
+        getPsbtPreview(
+          psbt,
+          derivationPath && derivationPath.split("/")[2] === "1'"
+            ? "regtest"
+            : undefined
+        )
+      );
+    })();
+  }, [origin, psbt]);
 
   async function confirm() {
     try {

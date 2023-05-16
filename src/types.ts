@@ -18,6 +18,7 @@ export interface Account {
   name: string;
   nostrPrivateKey?: string | null;
   mnemonic?: string | null;
+  bip32DerivationPath?: string | null;
 }
 
 export interface Accounts {
@@ -529,6 +530,12 @@ export interface MessageGetAddresses extends MessageDefault {
   action: "getAddresses";
 }
 
+export interface MessageGetDerivationPath extends MessageDefault {
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  args: {};
+  action: "getDerivationPath";
+}
+
 export interface LNURLChannelServiceResponse {
   uri: string; // Remote node address of form node_key@ip_address:port_number
   callback: string; // a second-level URL which would initiate an OpenChannel message from target LN node
@@ -821,3 +828,10 @@ export interface DeferredPromise {
 }
 
 export type Theme = "dark" | "light";
+
+export type BitcoinAddress = {
+  publicKey: string;
+  derivationPath: string;
+  index: number;
+  address: string;
+};

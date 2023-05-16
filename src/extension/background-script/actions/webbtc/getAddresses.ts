@@ -5,7 +5,7 @@ import {
   getPublicKey,
 } from "~/common/lib/mnemonic";
 import state from "~/extension/background-script/state";
-import { MessageGetAddresses } from "~/types";
+import { BitcoinAddress, MessageGetAddresses } from "~/types";
 
 const getAddresses = async (message: MessageGetAddresses) => {
   try {
@@ -23,12 +23,7 @@ const getAddresses = async (message: MessageGetAddresses) => {
     }
     const mnemonic = decryptData(account.mnemonic, password);
 
-    const addresses: {
-      publicKey: string;
-      derivationPath: string;
-      index: number;
-      address: string;
-    }[] = [];
+    const addresses: BitcoinAddress[] = [];
 
     // TODO: derivation path should come from the user's account
     const derivationPath =

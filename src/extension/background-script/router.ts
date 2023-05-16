@@ -60,6 +60,7 @@ const routes = {
   lnurlAuth: auth,
   getCurrencyRate: cache.getCurrencyRate,
   signPsbt: webbtc.signPsbt,
+  getDerivationPath: webbtc.getDerivationPath,
   getAddresses: webbtc.getAddresses,
   setMnemonic: mnemonic.setMnemonic,
   getMnemonic: mnemonic.getMnemonic,

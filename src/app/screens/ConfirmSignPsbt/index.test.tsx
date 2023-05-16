@@ -1,5 +1,6 @@
 import { act, render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
+import msg from "~/common/lib/msg";
 import type { OriginData } from "~/types";
 
 import ConfirmSignPsbt from "./index";
@@ -40,6 +41,10 @@ jest.mock("~/app/hooks/useNavigationState", () => {
   };
 });
 
+const regtestSegwitDerivationPath = "m/84'/1'/0'/0/0";
+// mock getDerivationPath to return regtestSegwitDerivationPath
+msg.request = jest.fn().mockReturnValue(regtestSegwitDerivationPath);
+
 describe("ConfirmSignMessage", () => {
   test("render", async () => {
     await act(async () => {
@@ -55,5 +60,19 @@ describe("ConfirmSignMessage", () => {
       await screen.findByText("This website asks you to sign:")
     ).toBeInTheDocument();
     expect(await screen.findByText(regtestSegwitPsbt)).toBeInTheDocument();
+    // check input and outputs
+    expect(
+      await screen.findByText("bcrt1...3cppk: 59999234 sats")
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByText("bcrt1...707jh: 10000000 sats", {
+        exact: false,
+      })
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByText("bcrt1...9rqs0: 49999093 sats", {
+        exact: false,
+      })
+    ).toBeInTheDocument();
   });
 });
