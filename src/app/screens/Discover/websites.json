@@ -249,6 +249,12 @@
         "url": "https://vida.page/"
       },
       {
+        "title": "Vida Live",
+        "subtitle": "Host live podcasts and earn sats",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/vida_thumbnail.png",
+        "url": "https://vida.live/"
+      },
+      {
         "title": "WebLN Experiments",
         "subtitle": "A collection of Lightning web widgets",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/twentyuno.svg",
