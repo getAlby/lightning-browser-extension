@@ -4,7 +4,7 @@
       "title": "به Alby خوش آمدید",
       "set_password": {
         "title": "یک گذرواژه برای بازکردن تنظیم کنید",
-        "description": "این گذرواژه برای محافظت از کیف پول شما و فراهم کردن دسترسی به افزونه مرورگر استفاده می شود. این گذرواژه نمی تواند مجدد تنظیم شود و متفاوت از گذرواژه حساب کاربری البی شماست.",
+        "description": "این گذرواژه به شما اجازه می دهد البی را در این دستگاه باز کنید. این گذرواژه قابل بازیابی نیست، ولی می تواند بعدا تغییر کند.",
         "choose_password": {
           "label": "یک گذرواژه برای باز کردن انتخاب کنید:"
         },
@@ -221,98 +221,98 @@
           "instructions": ""
         },
         "rest_url": {
-          "label": "",
-          "placeholder": ""
+          "label": "lndconnect REST URL",
+          "placeholder": "lndconnect://yournode:8080?..."
         }
       },
       "start9": {
-        "title": "",
+        "title": "Start9",
         "page": {
-          "title": "",
+          "title": "متصل شدن به <0>Start9 Server</0>‎ شما",
           "instructions": ""
         },
         "rest_url": {
-          "label": "",
-          "placeholder": ""
+          "label": "lndconnect REST URL",
+          "placeholder": "lndconnect://yournode:8080?..."
         }
       },
       "raspiblitz": {
-        "title": "",
+        "title": "RaspiBlitz",
         "page": {
           "title": "",
           "instructions1": "",
           "instructions2": ""
         },
         "rest_api_host": {
-          "label": "",
-          "placeholder": ""
+          "label": "REST API host",
+          "placeholder": "your-node-onion-address:port"
         }
       },
       "bitcoin_beach": {
-        "title": "",
+        "title": "کیف پول Bitcoin Beach",
         "page": {
           "title": ""
         }
       },
       "bitcoin_jungle": {
-        "title": "",
+        "title": "کیف پول Bitcoin Jungl",
         "page": {
-          "title": ""
+          "title": "اتصال به کیف پول Bitcoin Jungl"
         }
       },
       "galoy": {
         "phone_number": {
-          "label": ""
+          "label": "شماره تلفن خود را وارد کنید"
         },
         "sms_code": {
-          "label": ""
+          "label": "کد تایید پیامکی خود را وارد کنید"
         },
         "jwt": {
-          "label": "",
+          "label": "توکن JWT خود را وارد کنید",
           "info": ""
         },
         "actions": {
-          "login": "",
-          "request_sms_code": ""
+          "login": "ورود",
+          "request_sms_code": "درخواست کد پیامکی"
         },
         "errors": {
-          "failed_to_request_sms": "",
-          "failed_to_login_sms": "",
-          "setup_failed": "",
-          "missing_jwt": "",
+          "failed_to_request_sms": "درخواست کد پیامکی انجام نشد",
+          "failed_to_login_sms": "ورود با کد پیامکی انجام نشد",
+          "setup_failed": "راه اندازی انجام نشد",
+          "missing_jwt": "JWT وجود ندارد، نمی توان وارد شد.",
           "invalid_jwt": ""
         }
       },
       "kollider": {
-        "title": "",
-        "description": "",
-        "warning": "",
+        "title": "Kollider",
+        "description": "به اکانت Kollider  وارد شوید",
+        "warning": "لطفا اطمینان حاصل کنید اعتبارنامه هایتان بطور امن در یک برنامه مدیریت گذواژه ذخیره شده است. بدون این اعتبارنامه ها حساب کاربریتان قابل بازیابی نخواهد بود.",
         "choose_path": {
-          "title": "",
-          "description": "",
-          "create_new": ""
+          "title": "اتصال به کیف پول Kollider شما",
+          "description": "به حساب کاربری Kollider  وارد شوید یا ثبتنام کنید تا به البی وصل شوید.",
+          "create_new": "ثبتنام"
         },
         "create": {
-          "title": "",
-          "description": ""
+          "title": "حساب کاربری Kollider بسازید تا به البی وصل شوید",
+          "description": "یک حساب کاربری Kollider جدید بسازید تا ارسال، دریافت و معامله انجام دهید."
         },
         "login": {
-          "title": ""
+          "title": "اتصال به حساب کاربری Kollider شما"
         },
         "username": {
-          "label": ""
+          "label": "نام کاربری"
         },
         "currency": {
           "label": ""
         },
         "errors": {
-          "connection_failed": "",
-          "user_already_exists": "",
-          "registration_limit_exceeded": ""
+          "connection_failed": "اتصال انجام نشد. مطمئنید داده های حساب کاربری صحیح است؟",
+          "user_already_exists": "این نام کاربری در حال حاضر وجود دارد",
+          "registration_limit_exceeded": "از محدودیت ثبتنام فراتر رفته اید، پس از مدتی دوباره تلاش کنید."
         }
       },
       "btcpay": {
-        "title": "",
+        "title": "سرور BTCPay",
         "page": {
           "title": "",
           "instructions": ""
@@ -1014,36 +1014,36 @@
       "queryroutes": "",
       "verifymessage": "",
       "sendtoroute": "",
-      "decodepayreq": "رشته درخواست پرداخت را رمزگشایی کنید.",
-      "routermc": "",
-      "addinvoice": "",
-      "addholdinvoice": "صورت حساب HODL  جدید بسازید",
-      "settleinvoice": "یک صورتحساب پذیرفته شده را تسویه کنید."
+      "decodepayreq": "رشته درخواست پرداخت را رمزگشایی کن.",
+      "routermc": "وضعیت کنترل ماموریت داخلی را بخوان.",
+      "addinvoice": "صورتحساب جدید بساز.",
+      "addholdinvoice": "صورت حساب HODL جدید بساز.",
+      "settleinvoice": "یک صورتحساب پذیرفته شده را تسویه کن."
     },
     "lnc": {
-      "getinfo": "اطلاعات گره را بگیرید.",
-      "listchannels": "",
-      "listinvoices": "",
-      "channelbalance": "",
-      "walletbalance": "",
-      "openchannel": "",
-      "connectpeer": "",
-      "disconnectpeer": "",
-      "estimatefee": "",
-      "getchaninfo": "",
-      "getnetworkinfo": "",
-      "getnodeinfo": "",
-      "gettransactions": "",
-      "listpayments": "",
-      "listpeers": "",
-      "lookupinvoice": "",
-      "queryroutes": "",
-      "verifymessage": "",
-      "sendtoroute": "",
-      "decodepayreq": "",
-      "routermc": "",
-      "addinvoice": "",
-      "addholdinvoice": "",
+      "getinfo": "اطلاعات گره را بگیر.",
+      "listchannels": "توصیفی از تمام کانال های گره بگیر.",
+      "listinvoices": "لیستی از تمام صورتحساب ها بگیر.",
+      "channelbalance": "گزارشی از کل وجوه مالی سراسر تمام کانال های باز بگیر.",
+      "walletbalance": "جمع کل خروجی های خرج نشده کیف پول را بگیر.",
+      "openchannel": "کانال جدیدی باز کن.",
+      "connectpeer": "اتصالی به یک همتای دور برقرار کن.",
+      "disconnectpeer": "اتصال همتای دور را قطع کن.",
+      "estimatefee": "نرخ کارمزد و کارمزدهای کل را برای یک تراکنش تخمین بزن.",
+      "getchaninfo": "اطلاعیه شبکه برای کانال داده شده را بگیر.",
+      "getnetworkinfo": "آمار پایه درباره نمودار کانال مشخص را بگیر.",
+      "getnodeinfo": "اطلاعات کانال برای یک گره را بگیر.",
+      "gettransactions": "لیست تمام تراکنش های مربوط به کیف پول را بگیر.",
+      "listpayments": "لیست تمام پرداخت های خروجی را بگیر.",
+      "listpeers": "لیست تمام همتایان فعال کنونی را بگیر.",
+      "lookupinvoice": "جزییات صورتحساب را بررسی کن.",
+      "queryroutes": "دنبال مسیر ممکن بگرد.",
+      "verifymessage": "امضای پیام را تصدیق کن.",
+      "sendtoroute": "از مسیر مشخص شده پرداخت انجام بده.",
+      "decodepayreq": "رشته درخواست پرداخت را رمزگشایی کن.",
+      "routermc": "وضعیت کنترل ماموریت داخلی را بخوان.",
+      "addinvoice": "صورتحساب های جدید بساز.",
+      "addholdinvoice": "صورتحساب های جدید HODL بساز.",
       "settleinvoice": "یک صورت حساب پذیرفته شده انتخاب کنید."
     }
   }
