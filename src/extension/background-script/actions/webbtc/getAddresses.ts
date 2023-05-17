@@ -25,9 +25,10 @@ const getAddresses = async (message: MessageGetAddresses) => {
 
     const addresses: BitcoinAddress[] = [];
 
-    // TODO: derivation path should come from the user's account
-    const derivationPath =
-      message.args.derivationPath || BTC_TAPROOT_DERIVATION_PATH;
+    const derivationPath = account.bip32DerivationPath
+      ? decryptData(account.bip32DerivationPath, password)
+      : BTC_TAPROOT_DERIVATION_PATH;
+
     const accountDerivationPathParts = derivationPath.split("/").slice(0, 4);
     if (accountDerivationPathParts.length !== 4) {
       throw new Error("Invalid account derivation path: " + derivationPath);

@@ -25,7 +25,6 @@ function ConfirmGetAddresses() {
   const index = navState.args?.index as number;
   const num = navState.args?.num as number;
   const change = navState.args?.change as boolean;
-  const derivationPath = navState.args?.derivationPath as string | undefined;
 
   const origin = navState.origin as OriginData;
   const [loading, setLoading] = useState(false);
@@ -36,7 +35,7 @@ function ConfirmGetAddresses() {
       setLoading(true);
       const response = await msg.request(
         "getAddresses",
-        { index, num, change, derivationPath },
+        { index, num, change },
         { origin }
       );
       msg.reply(response);
@@ -80,11 +79,7 @@ function ConfirmGetAddresses() {
               heading={t("content", { host: origin.host })}
               content={`Get ${num} ${
                 change ? "change" : "external"
-              } addresses from index ${index}${
-                derivationPath
-                  ? ` with custom derivation path: ${derivationPath}`
-                  : ""
-              }`}
+              } addresses from index ${index}`}
             />
           </div>
           <ConfirmOrCancel

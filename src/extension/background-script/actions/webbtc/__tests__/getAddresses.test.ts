@@ -14,6 +14,7 @@ const mockState = {
   currentAccountId: "1e1e8ea6-493e-480b-9855-303d37506e97",
   getAccount: () => ({
     mnemonic: mockMnemnoic,
+    bip32DerivationPath: regtestSegwitDerivationPath,
   }),
   getConnector: jest.fn(),
 };
@@ -22,8 +23,8 @@ state.getState = jest.fn().mockReturnValue(mockState);
 
 jest.mock("~/common/lib/crypto", () => {
   return {
-    decryptData: jest.fn(() => {
-      return mockMnemnoic;
+    decryptData: jest.fn((encrypted, _password) => {
+      return encrypted;
     }),
   };
 });
@@ -39,8 +40,7 @@ afterEach(() => {
 async function sendGetAddressesMessage(
   index: number,
   num: number,
-  change: boolean,
-  derivationPath?: string
+  change: boolean
 ) {
   const message: MessageGetAddresses = {
     application: "LBE",
@@ -53,7 +53,6 @@ async function sendGetAddressesMessage(
       index,
       num,
       change,
-      derivationPath,
     },
   };
 
@@ -62,12 +61,7 @@ async function sendGetAddressesMessage(
 
 describe("getAddresses", () => {
   test("get one segwit address", async () => {
-    const result = await sendGetAddressesMessage(
-      0,
-      1,
-      false,
-      regtestSegwitDerivationPath // TODO: move to account btc derivation path
-    );
+    const result = await sendGetAddressesMessage(0, 1, false);
     if (!result.data) {
       throw new Error("Result should have data");
     }
@@ -82,12 +76,7 @@ describe("getAddresses", () => {
   });
 
   test("get two change addresses from index 1", async () => {
-    const result = await sendGetAddressesMessage(
-      1,
-      2,
-      true,
-      regtestSegwitDerivationPath // TODO: move to account btc derivation path
-    );
+    const result = await sendGetAddressesMessage(1, 2, true);
     if (!result.data) {
       throw new Error("Result should have data");
     }

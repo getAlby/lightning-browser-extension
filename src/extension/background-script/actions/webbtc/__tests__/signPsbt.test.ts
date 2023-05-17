@@ -1,6 +1,7 @@
 import { hex } from "@scure/base";
 import * as btc from "@scure/btc-signer";
 import { Psbt, networks, payments } from "bitcoinjs-lib";
+import msg from "~/common/lib/msg";
 import { getPsbtPreview } from "~/common/lib/psbt";
 import signPsbt from "~/extension/background-script/actions/webbtc/signPsbt";
 import state from "~/extension/background-script/state";
@@ -28,6 +29,7 @@ const mockState = {
   currentAccountId: "1e1e8ea6-493e-480b-9855-303d37506e97",
   getAccount: () => ({
     mnemonic: mockMnemnoic,
+    bip32DerivationPath: regtestSegwitDerivationPath,
   }),
   getConnector: jest.fn(),
 };
@@ -36,11 +38,14 @@ state.getState = jest.fn().mockReturnValue(mockState);
 
 jest.mock("~/common/lib/crypto", () => {
   return {
-    decryptData: jest.fn(() => {
-      return mockMnemnoic;
+    decryptData: jest.fn((encrypted, _password) => {
+      return encrypted;
     }),
   };
 });
+
+// mock getDerivationPath to return regtestSegwitDerivationPath
+msg.request = jest.fn().mockReturnValue(regtestSegwitDerivationPath);
 
 beforeEach(async () => {
   // fill the DB first
@@ -60,7 +65,6 @@ async function sendPsbtMessage(psbt: string, derivationPath?: string) {
     },
     args: {
       psbt,
-      derivationPath,
     },
   };
 
@@ -69,10 +73,7 @@ async function sendPsbtMessage(psbt: string, derivationPath?: string) {
 
 describe("signPsbt", () => {
   test("1 input, segwit, regtest", async () => {
-    const result = await sendPsbtMessage(
-      regtestSegwitPsbt,
-      regtestSegwitDerivationPath // TODO: move to account btc derivation path
-    );
+    const result = await sendPsbtMessage(regtestSegwitPsbt);
     if (!result.data) {
       throw new Error("Result should have data");
     }
@@ -123,11 +124,6 @@ describe("decode psbt", () => {
       "bcrt1qw3xfnyuspj8qnr2envc448mxwam7f7p249rqs0"
     );
     expect(unsignedPsbt.txOutputs[1].value).toBe(49999093);
-
-    console.info(
-      hex.encode(unsignedPsbt.txInputs[0].hash),
-      unsignedPsbt.data.inputs[0]
-    );
 
     // fee should be 141 sats
     // input should be bcrt1q6rz28mcfaxtmd6v789l9rrlrusdprr9pz3cppk 59,999,234 sats

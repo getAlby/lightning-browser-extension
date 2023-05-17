@@ -515,7 +515,6 @@ export interface MessageDecryptGet extends MessageDefault {
 export interface MessageSignPsbt extends MessageDefault {
   args: {
     psbt: string;
-    derivationPath?: string; // custom derivation path TODO: move to account
   };
   action: "signPsbt";
 }
@@ -525,7 +524,6 @@ export interface MessageGetAddresses extends MessageDefault {
     index: number;
     num: number;
     change: boolean;
-    derivationPath?: string; // custom derivation path TODO: move to account
   };
   action: "getAddresses";
 }

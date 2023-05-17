@@ -37,12 +37,12 @@ export default class WebBTCProvider {
     return this.execute("getInfo");
   }
 
-  signPsbt(psbt: string, derivationPath?: string) {
+  signPsbt(psbt: string) {
     if (!this.enabled) {
       throw new Error("Provider must be enabled before calling signPsbt");
     }
 
-    return this.execute("signPsbtWithPrompt", { psbt, derivationPath });
+    return this.execute("signPsbtWithPrompt", { psbt });
   }
 
   sendTransaction(address: string, amount: string) {
@@ -54,17 +54,12 @@ export default class WebBTCProvider {
     throw new Error("Alby does not support `sendTransaction`");
   }
 
-  async getAddress(index?: number, change?: boolean, derivationPath?: string) {
-    const addresses = await this.getAddresses(index, 1, change, derivationPath);
+  async getAddress(index?: number, change?: boolean) {
+    const addresses = await this.getAddresses(index, 1, change);
     return addresses[0];
   }
 
-  getAddresses(
-    index?: number,
-    num?: number,
-    change?: boolean,
-    derivationPath?: string
-  ) {
+  getAddresses(index?: number, num?: number, change?: boolean) {
     if (!this.enabled) {
       throw new Error("Provider must be enabled before calling getAddress");
     }
@@ -72,7 +67,6 @@ export default class WebBTCProvider {
       index,
       num,
       change,
-      derivationPath,
     });
   }
 

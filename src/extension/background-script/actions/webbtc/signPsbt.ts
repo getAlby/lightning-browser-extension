@@ -24,12 +24,12 @@ const signPsbt = async (message: MessageSignPsbt) => {
       throw new Error("No mnemonic set");
     }
     const mnemonic = decryptData(account.mnemonic, password);
+    const derivationPath = account.bip32DerivationPath
+      ? decryptData(account.bip32DerivationPath, password)
+      : undefined;
     const privateKey = secp256k1.utils.hexToBytes(
       // TODO: allow account to specify derivation path
-      derivePrivateKey(
-        mnemonic,
-        message.args.derivationPath || BTC_TAPROOT_DERIVATION_PATH
-      )
+      derivePrivateKey(mnemonic, derivationPath || BTC_TAPROOT_DERIVATION_PATH)
     );
 
     const psbtBytes = secp256k1.utils.hexToBytes(message.args.psbt);
