@@ -904,28 +904,28 @@
     "budget_control": {
       "remember": {
         "label": "بودجه ای تنظیم کرده و به یاد بسپارید.",
-        "description": ""
+        "description": "می توانید ترازی را تعیین کنید تا لازم نباشد پرداخت ها را تایید نمایید تا زمانی که بودجه تمام شود."
       },
       "budget": {
-        "label": ""
+        "label": "بودجه"
       }
     },
     "companion_download_info": {
-      "heading": "",
-      "download": "",
+      "heading": "چطور می خواهید به شبکه تور وصل شوید؟",
+      "download": "بارگیری",
       "companion": {
-        "title": "",
-        "description": ""
+        "title": "Companion App",
+        "description": "اپلیکشنی سبک که مرورگر شما را به شبکه تور متصل می کند."
       },
       "tor_native": {
-        "title": "",
-        "description": ""
+        "title": "TOR (محلی)",
+        "description": "اگر این مرورگر در حال حاضر به شبکه تور وصل است این گزینه را انتخاب کنید."
       }
     },
     "toasts": {
       "connection_error": {
-        "what_you_can_do": "",
-        "double_check": "",
+        "what_you_can_do": "کاری که می توانید بکنید این است:",
+        "double_check": "جزییات اتصال خود را دوباره بررسی کنید",
         "if_ssl_errors": "",
         "visit_guides": ""
       },
@@ -1015,7 +1015,7 @@
       "queryroutes": "",
       "verifymessage": "",
       "sendtoroute": "",
-      "decodepayreq": "",
+      "decodepayreq": "رشته درخواست پرداخت را رمزگشایی کنید.",
       "routermc": "",
       "addinvoice": "",
       "addholdinvoice": "",
