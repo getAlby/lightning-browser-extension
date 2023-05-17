@@ -26,7 +26,7 @@ function Transactions({ type }: Props) {
 
   const isLoading =
     type === "incoming" ? isLoadingInvoices : isLoadingTransactions;
-  const list = type === "incoming" ? incomingTransactions : transactions;
+  const listItems = type === "incoming" ? incomingTransactions : transactions;
 
   useEffect(() => {
     if (type === "incoming") {
@@ -58,8 +58,8 @@ function Transactions({ type }: Props) {
         </div>
       ) : (
         <div>
-          {Array.isArray(list) && list.length > 0 && (
-            <TransactionsTable transactions={list} />
+          {listItems && listItems.length > 0 && (
+            <TransactionsTable transactions={listItems} />
           )}
         </div>
       )}
