@@ -110,17 +110,16 @@ const DefaultView: FC<Props> = (props) => {
   };
 
   return (
-    <div className="h-full max-w-screen-lg lg:mx-auto overflow-y-auto no-scrollbar">
+    <div className="w-full max-w-screen-sm h-full mx-auto overflow-y-auto no-scrollbar">
       {!!props.lnDataFromCurrentTab?.length && (
         <PublisherLnData lnData={props.lnDataFromCurrentTab[0]} />
       )}
       <div className="p-4">
         <div className="flex space-x-4 mb-4">
-          <BalanceBox className="lg:h-28 grow" />
+          <BalanceBox />
         </div>
         <div className="flex mb-6 lg:mb-12 space-x-4">
           <Button
-            className="lg:h-28 grow lg:text-xl"
             fullWidth
             icon={<ReceiveIcon className="w-6 h-6" />}
             label={tCommon("actions.receive")}
@@ -131,7 +130,6 @@ const DefaultView: FC<Props> = (props) => {
           />
 
           <Button
-            className="lg:h-28 grow lg:text-xl"
             fullWidth
             icon={<SendIcon className="w-6 h-6" />}
             label={tCommon("actions.send")}

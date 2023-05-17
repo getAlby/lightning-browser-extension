@@ -43,7 +43,7 @@ function Transactions({ type }: Props) {
   ]);
 
   return (
-    <Container>
+    <Container maxWidth="sm">
       <h2 className="mt-12 mb-2 text-2xl font-bold dark:text-white">
         {t("title")}
       </h2>
