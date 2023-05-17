@@ -36,7 +36,7 @@ Alby is open-source and currently in alpha stage. Our goal is to create the best
 
 ## Join the conversation
 
-We have a channel on the [bitcoin.design](https://bitcoin.design/) Slack community [#lightning-browser-extension](https://bitcoindesign.slack.com/archives/C02591ADXM2) and a [Telegram group](https://t.me/getAlby). Come and join us!
+We have a channel on the [bitcoin.design](https://bitcoin.design/) Discord community [#alby](https://discord.com/channels/903125802726596648/956366795265159189) and a [Telegram group](https://t.me/getAlby). Come and join us!
 
 We also do a bi-weekly call on Thursday at [15:00 UTC](https://everytimezone.com/?t=642e0b80,ec4) on [Jitsi](https://meet.fulmo.org/AlbyCommunityCall)
 
