@@ -1,12 +1,7 @@
 import { MessageGetInfo } from "~/types";
 
 const getInfo = async (message: MessageGetInfo) => {
-  const supportedMethods = [
-    "getInfo",
-    "signPsbt",
-    "getAddress",
-    "getAddresses",
-  ];
+  const supportedMethods = ["getInfo", "signPsbt", "getAddress", "getAddress"];
 
   return {
     data: {

@@ -54,20 +54,11 @@ export default class WebBTCProvider {
     throw new Error("Alby does not support `sendTransaction`");
   }
 
-  async getAddress(index?: number, change?: boolean) {
-    const addresses = await this.getAddresses(index, 1, change);
-    return addresses[0];
-  }
-
-  getAddresses(index?: number, num?: number, change?: boolean) {
+  getAddress() {
     if (!this.enabled) {
       throw new Error("Provider must be enabled before calling getAddress");
     }
-    return this.execute("getAddressesWithPrompt", {
-      index,
-      num,
-      change,
-    });
+    return this.execute("getAddressWithPrompt", {});
   }
 
   request(method: string, params: Record<string, unknown>) {

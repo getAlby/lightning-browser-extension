@@ -518,13 +518,10 @@ export interface MessageSignPsbt extends MessageDefault {
   action: "signPsbt";
 }
 
-export interface MessageGetAddresses extends MessageDefault {
-  args: {
-    index: number;
-    num: number;
-    change: boolean;
-  };
-  action: "getAddresses";
+export interface MessageGetAddress extends MessageDefault {
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  args: {};
+  action: "getAddress";
 }
 
 export interface LNURLChannelServiceResponse {

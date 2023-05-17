@@ -1,5 +1,5 @@
-import getAddresses from "~/extension/background-script/actions/webbtc/getAddresses";
-import getAddressesWithPrompt from "~/extension/background-script/actions/webbtc/getAddressesWithPrompt";
+import getAddress from "~/extension/background-script/actions/webbtc/getAddress";
+import getAddressWithPrompt from "~/extension/background-script/actions/webbtc/getAddressWithPrompt";
 import signPsbt from "~/extension/background-script/actions/webbtc/signPsbt";
 
 import getInfo from "./getInfo";
@@ -9,6 +9,6 @@ export {
   getInfo,
   signPsbtWithPrompt,
   signPsbt,
-  getAddressesWithPrompt,
-  getAddresses,
+  getAddressWithPrompt,
+  getAddress,
 };

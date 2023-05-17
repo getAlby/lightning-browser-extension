@@ -752,6 +752,11 @@
       "title": "Sign",
       "content": "This website asks you to sign:"
     },
+    "confirm_get_address": {
+      "title": "Get Address",
+      "heading": "This website asks you to read:",
+      "content": "Your Bitcoin receive address"
+    },
     "confirm_keysend": {
       "title": "Approve Payment",
       "success": "Payment sent! Preimage: {{preimage}}",

@@ -14,17 +14,13 @@ import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import type { OriginData } from "~/types";
 
-function ConfirmGetAddresses() {
+function ConfirmGetAddress() {
   const navState = useNavigationState();
   const { t: tCommon } = useTranslation("common");
   const { t } = useTranslation("translation", {
-    keyPrefix: "confirm_sign_message",
+    keyPrefix: "confirm_get_address",
   });
   const navigate = useNavigate();
-
-  const index = navState.args?.index as number;
-  const num = navState.args?.num as number;
-  const change = navState.args?.change as boolean;
 
   const origin = navState.origin as OriginData;
   const [loading, setLoading] = useState(false);
@@ -33,11 +29,7 @@ function ConfirmGetAddresses() {
   async function confirm() {
     try {
       setLoading(true);
-      const response = await msg.request(
-        "getAddresses",
-        { index, num, change },
-        { origin }
-      );
+      const response = await msg.request("getAddress", {}, { origin });
       msg.reply(response);
       setSuccessMessage(tCommon("success"));
     } catch (e) {
@@ -64,7 +56,7 @@ function ConfirmGetAddresses() {
 
   return (
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
-      <ScreenHeader title={/*t("title")*/ "Get Addresses"} />
+      <ScreenHeader title={t("title")} />
       {!successMessage ? (
         <Container justifyBetween maxWidth="sm">
           <div>
@@ -74,13 +66,7 @@ function ConfirmGetAddresses() {
               url={origin.host}
             />
 
-            <ContentMessage
-              // TODO: "This website asks you to sign:" doesn't make sense here?
-              heading={t("content", { host: origin.host })}
-              content={`Get ${num} ${
-                change ? "change" : "external"
-              } addresses from index ${index}`}
-            />
+            <ContentMessage heading={t("heading")} content={t("content")} />
           </div>
           <ConfirmOrCancel
             disabled={loading}
@@ -103,4 +89,4 @@ function ConfirmGetAddresses() {
   );
 }
 
-export default ConfirmGetAddresses;
+export default ConfirmGetAddress;

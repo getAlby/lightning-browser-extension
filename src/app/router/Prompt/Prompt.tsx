@@ -18,7 +18,7 @@ import { HashRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
-import ConfirmGetAddresses from "~/app/screens/ConfirmGetAddresses";
+import ConfirmGetAddress from "~/app/screens/ConfirmGetAddress";
 import ConfirmSignPsbt from "~/app/screens/ConfirmSignPsbt";
 import type { NavigationState, OriginData } from "~/types";
 
@@ -103,10 +103,7 @@ function Prompt() {
             <Route path="confirmKeysend" element={<ConfirmKeysend />} />
             <Route path="confirmSignMessage" element={<ConfirmSignMessage />} />
             <Route path="confirmSignPsbt" element={<ConfirmSignPsbt />} />
-            <Route
-              path="confirmGetAddresses"
-              element={<ConfirmGetAddresses />}
-            />
+            <Route path="confirmGetAddress" element={<ConfirmGetAddress />} />
             <Route
               path="public/confirmRequestPermission"
               element={<ConfirmRequestPermission />}

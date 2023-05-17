@@ -2,7 +2,7 @@ import { act, render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import type { OriginData } from "~/types";
 
-import ConfirmGetAddresses from "./index";
+import ConfirmGetAddress from "./index";
 
 const mockOrigin: OriginData = {
   location: "https://getalby.com/demo",
@@ -36,22 +36,21 @@ jest.mock("~/app/hooks/useNavigationState", () => {
   };
 });
 
-describe("ConfirmGetAddresses", () => {
+describe("ConfirmGetAddress", () => {
   test("render", async () => {
     await act(async () => {
       render(
         <MemoryRouter>
-          <ConfirmGetAddresses />
+          <ConfirmGetAddress />
         </MemoryRouter>
       );
     });
 
-    // TODO: update copy
     expect(
-      await screen.findByText("This website asks you to sign:")
+      await screen.findByText("This website asks you to read:")
     ).toBeInTheDocument();
     expect(
-      await screen.findByText("Get 1 external addresses from index 0")
+      await screen.findByText("Your Bitcoin receive address")
     ).toBeInTheDocument();
   });
 });
