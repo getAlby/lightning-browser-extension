@@ -1,4 +1,5 @@
-import { Psbt, networks, payments } from "bitcoinjs-lib";
+import * as btc from "@scure/btc-signer";
+import { Psbt, networks } from "bitcoinjs-lib";
 
 type Address = { amount: number; address: string };
 
@@ -26,18 +27,16 @@ export function getPsbtPreview(
     if (i > 0) {
       throw new Error("Multiple inputs currently unsupported");
     }
-    const inputType = unsignedPsbt.getInputType(i);
-    if (inputType !== "witnesspubkeyhash") {
-      throw new Error("Unsupported input type: " + inputType);
-    }
-    const bip32Derivation = unsignedPsbt.data.inputs[i].bip32Derivation;
-    if (!bip32Derivation) {
+
+    const tapBip32Derivation = unsignedPsbt.data.inputs[i].tapBip32Derivation;
+    if (!tapBip32Derivation) {
       throw new Error("No bip32Derivation in input " + i);
     }
-    const address = payments.p2wpkh({
-      pubkey: bip32Derivation[0].pubkey,
-      network,
-    }).address;
+    const address = btc.p2tr(
+      tapBip32Derivation[0].pubkey,
+      undefined,
+      network
+    ).address;
 
     if (!address) {
       throw new Error("No address found in input " + i);
@@ -52,16 +51,26 @@ export function getPsbtPreview(
       address,
     });
   }
-  for (let i = 0; i < unsignedPsbt.txOutputs.length; i++) {
+  for (let i = 0; i < unsignedPsbt.data.outputs.length; i++) {
     const txOutput = unsignedPsbt.txOutputs[i];
-    if (!txOutput.address) {
-      throw new Error("No address in output " + i);
+    const output = unsignedPsbt.data.outputs[i];
+    if (!output.tapBip32Derivation) {
+      throw new Error("No tapBip32Derivation in output");
     }
-    const output: Address = {
+    const address = btc.p2tr(
+      output.tapBip32Derivation[0].pubkey,
+      undefined,
+      network
+    ).address;
+    if (!address) {
+      throw new Error("No address found in output " + i);
+    }
+
+    const previewOutput: Address = {
       amount: txOutput.value,
-      address: txOutput.address,
+      address,
     };
-    preview.outputs.push(output);
+    preview.outputs.push(previewOutput);
   }
   return preview;
 }

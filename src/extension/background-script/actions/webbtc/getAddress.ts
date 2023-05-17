@@ -1,9 +1,10 @@
-import { getAddressFromPubkey, getAddressType } from "~/common/lib/btc";
+import { getTaprootAddressFromPrivateKey } from "~/common/lib/btc";
 import { decryptData } from "~/common/lib/crypto";
 import {
   BTC_TAPROOT_DERIVATION_PATH,
   BTC_TAPROOT_DERIVATION_PATH_REGTEST,
-  getPublicKey,
+  derivePrivateKey,
+  derivePublicKey,
 } from "~/common/lib/mnemonic";
 import state from "~/extension/background-script/state";
 import { BitcoinAddress, MessageGetAddress } from "~/types";
@@ -30,14 +31,11 @@ const getAddress = async (message: MessageGetAddress) => {
         ? BTC_TAPROOT_DERIVATION_PATH
         : BTC_TAPROOT_DERIVATION_PATH_REGTEST;
 
-    const derivationPathParts = derivationPath.split("/");
-    const publicKey = getPublicKey(mnemonic, derivationPath);
-    const purpose = derivationPathParts[1];
-    const addressType = getAddressType(purpose);
+    const privateKey = derivePrivateKey(mnemonic, derivationPath);
+    const publicKey = derivePublicKey(mnemonic, derivationPath);
 
-    const address = getAddressFromPubkey(
-      publicKey,
-      addressType,
+    const address = getTaprootAddressFromPrivateKey(
+      privateKey,
       settings.bitcoinNetwork
     );
 
@@ -52,6 +50,7 @@ const getAddress = async (message: MessageGetAddress) => {
       data,
     };
   } catch (e) {
+    console.error("getAddress failed: ", e);
     return {
       error: "getAddress failed: " + e,
     };

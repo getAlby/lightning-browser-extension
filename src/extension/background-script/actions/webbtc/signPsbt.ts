@@ -1,6 +1,14 @@
 import * as secp256k1 from "@noble/secp256k1";
-import { hex } from "@scure/base";
-import * as btc from "@scure/btc-signer";
+import {
+  Network,
+  Psbt,
+  Signer,
+  crypto,
+  initEccLib,
+  networks,
+} from "bitcoinjs-lib";
+import ECPairFactory, { ECPairAPI } from "ecpair";
+import * as tinysecp from "tiny-secp256k1";
 import { decryptData } from "~/common/lib/crypto";
 import {
   BTC_TAPROOT_DERIVATION_PATH,
@@ -36,18 +44,33 @@ const signPsbt = async (message: MessageSignPsbt) => {
       derivePrivateKey(mnemonic, derivationPath)
     );
 
-    const psbtBytes = secp256k1.utils.hexToBytes(message.args.psbt);
-    const transaction = btc.Transaction.fromPSBT(psbtBytes);
+    const taprootPsbt = Psbt.fromHex(message.args.psbt, {
+      network: networks[settings.bitcoinNetwork],
+    });
 
-    // this only works with a single input
-    // TODO: support signing individual inputs
-    transaction.sign(privateKey);
+    initEccLib(tinysecp);
+    const ECPair: ECPairAPI = ECPairFactory(tinysecp);
 
-    // TODO: Do we need to finalize() here or should that be done by websites?
-    // if signing individual inputs, each should be finalized individually
-    transaction.finalize();
+    const keyPair = tweakSigner(
+      ECPair,
+      ECPair.fromPrivateKey(Buffer.from(privateKey), {
+        network: networks[settings.bitcoinNetwork],
+      }),
+      {
+        network: networks[settings.bitcoinNetwork],
+      }
+    );
 
-    const signedTransaction = hex.encode(transaction.extract());
+    // Step 1: Sign the Taproot PSBT inputs
+    taprootPsbt.data.inputs.forEach((input, index) => {
+      taprootPsbt.signTaprootInput(index, keyPair);
+    });
+
+    // Step 2: Finalize the Taproot PSBT
+    taprootPsbt.finalizeAllInputs();
+
+    // Step 3: Get the finalized transaction
+    const signedTransaction = taprootPsbt.extractTransaction().toHex();
 
     return {
       data: {
@@ -55,6 +78,7 @@ const signPsbt = async (message: MessageSignPsbt) => {
       },
     };
   } catch (e) {
+    console.error("signPsbt failed: ", e);
     return {
       error: "signPsbt failed: " + e,
     };
@@ -62,3 +86,42 @@ const signPsbt = async (message: MessageSignPsbt) => {
 };
 
 export default signPsbt;
+
+// Below code taken from https://github.com/bitcoinjs/bitcoinjs-lib/blob/master/test/integration/taproot.spec.ts#L636
+const toXOnly = (pubKey: Buffer) =>
+  pubKey.length === 32 ? pubKey : pubKey.slice(1, 33);
+
+function tweakSigner(
+  ECPair: ECPairAPI,
+  signer: Signer,
+  opts: { network: Network; tweakHash?: Buffer | undefined }
+): Signer {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  let privateKey: Uint8Array | undefined = signer.privateKey;
+  if (!privateKey) {
+    throw new Error("Private key is required for tweaking signer!");
+  }
+  if (signer.publicKey[0] === 3) {
+    privateKey = tinysecp.privateNegate(privateKey);
+  }
+
+  const tweakedPrivateKey = tinysecp.privateAdd(
+    privateKey,
+    tapTweakHash(toXOnly(signer.publicKey), opts.tweakHash)
+  );
+  if (!tweakedPrivateKey) {
+    throw new Error("Invalid tweaked private key!");
+  }
+
+  return ECPair.fromPrivateKey(Buffer.from(tweakedPrivateKey), {
+    network: opts.network,
+  });
+}
+
+function tapTweakHash(pubKey: Buffer, h: Buffer | undefined): Buffer {
+  return crypto.taggedHash(
+    "TapTweak",
+    Buffer.concat(h ? [pubKey, h] : [pubKey])
+  );
+}

@@ -1,17 +1,15 @@
 import getAddress from "~/extension/background-script/actions/webbtc/getAddress";
 import state from "~/extension/background-script/state";
+import { btcFixture } from "~/fixtures/btc";
 import type { MessageGetAddress } from "~/types";
 
 const passwordMock = jest.fn;
-
-const mockMnemnoic =
-  "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about";
 
 const mockState = {
   password: passwordMock,
   currentAccountId: "1e1e8ea6-493e-480b-9855-303d37506e97",
   getAccount: () => ({
-    mnemonic: mockMnemnoic,
+    mnemonic: btcFixture.mnemnoic,
   }),
   getConnector: jest.fn(),
   settings: {
@@ -52,7 +50,7 @@ async function sendGetAddressMessage() {
 }
 
 describe("getAddress", () => {
-  test("get one segwit address", async () => {
+  test("get taproot address", async () => {
     const result = await sendGetAddressMessage();
     if (!result.data) {
       throw new Error("Result should have data");
@@ -60,10 +58,11 @@ describe("getAddress", () => {
 
     expect(result.data).toMatchObject({
       publicKey:
-        "02e7ab2537b5d49e970309aae06e9e49f36ce1c9febbd44ec8e0d1cca0b4f9c319",
-      derivationPath: "m/84'/1'/0'/0/0",
+        "0255355ca83c973f1d97ce0e3843c85d78905af16b4dc531bc488e57212d230116",
+      derivationPath: "m/86'/1'/0'/0/0",
       index: 0,
-      address: "bcrt1q6rz28mcfaxtmd6v789l9rrlrusdprr9pz3cppk",
+      address:
+        "bcrt1p8wpt9v4frpf3tkn0srd97pksgsxc5hs52lafxwru9kgeephvs7rqjeprhg",
     });
   });
 });
