@@ -1018,11 +1018,11 @@
       "decodepayreq": "رشته درخواست پرداخت را رمزگشایی کنید.",
       "routermc": "",
       "addinvoice": "",
-      "addholdinvoice": "",
-      "settleinvoice": ""
+      "addholdinvoice": "صورت حساب HODL  جدید بسازید",
+      "settleinvoice": "یک صورتحساب پذیرفته شده را تسویه کنید."
     },
     "lnc": {
-      "getinfo": "",
+      "getinfo": "اطلاعات گره را بگیرید.",
       "listchannels": "",
       "listinvoices": "",
       "channelbalance": "",
