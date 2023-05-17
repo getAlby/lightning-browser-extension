@@ -56,10 +56,7 @@ function Options() {
             <Route path="confirmPayment" element={<ConfirmPayment />} />
             <Route path="keysend" element={<Keysend />} />
             <Route path="receive" element={<Receive />} />
-            <Route
-              path="wallet"
-              element={<DefaultView isOptionsPage={true} />}
-            />
+            <Route path="wallet" element={<DefaultView />} />
             <Route path="transactions">
               <Route
                 path="outgoing"

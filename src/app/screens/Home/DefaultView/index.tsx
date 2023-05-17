@@ -29,7 +29,6 @@ dayjs.extend(relativeTime);
 export type Props = {
   lnDataFromCurrentTab?: Battery[];
   currentUrl?: URL | null;
-  isOptionsPage?: boolean;
 };
 
 const DefaultView: FC<Props> = (props) => {
@@ -52,7 +51,7 @@ const DefaultView: FC<Props> = (props) => {
   const hasTransactions = !isLoadingTransactions && !!transactions?.length;
   const hasInvoices = !isLoadingInvoices && !!incomingTransactions?.length;
 
-  const itemsLimit = props.isOptionsPage ? 10 : 5;
+  const itemsLimit = 8;
 
   useEffect(() => {
     if (account?.id) loadTransactions(account.id, itemsLimit);
@@ -101,13 +100,14 @@ const DefaultView: FC<Props> = (props) => {
     }
   };
 
-  const handleViewAllLink = (path: string) => {
-    if (props.isOptionsPage) {
-      navigate(path);
-    } else {
+  function handleViewAllLink(path: string) {
+    // if we are in the popup
+    if (window.location.pathname !== "/options.html") {
       utils.openPage(`options.html#${path}`);
+    } else {
+      navigate(path);
     }
-  };
+  }
 
   return (
     <div className="w-full max-w-screen-sm h-full mx-auto overflow-y-auto no-scrollbar">
