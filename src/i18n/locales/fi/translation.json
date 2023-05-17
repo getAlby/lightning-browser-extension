@@ -269,7 +269,6 @@
       },
       "default_view": {
         "recent_transactions": "Viimeaikaiset tapahtumat",
-        "no_transactions": "Albyn kanssa, ei vielä tehty tapahtumia.",
         "is_blocked_hint": "Alby on tällä hetkellä poissa käytöstä {{host}}:lla"
       }
     },
@@ -658,6 +657,5 @@
         "active": "TOIMIVA"
       }
     }
-  },
-  "permissions": {}
+  }
 }

@@ -354,7 +354,6 @@
       },
       "default_view": {
         "recent_transactions": "",
-        "no_transactions": "",
         "is_blocked_hint": "",
         "block_removed": ""
       }

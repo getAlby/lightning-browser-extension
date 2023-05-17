@@ -354,7 +354,6 @@
       },
       "default_view": {
         "recent_transactions": "transactions récentes",
-        "no_transactions": "Aucune transaction effectuée avec Alby pour le moment.",
         "is_blocked_hint": "Alby est actuellement désactivé sur {{host}}",
         "block_removed": "{{hôte}} activé. Veuillez recharger le site Web."
       }

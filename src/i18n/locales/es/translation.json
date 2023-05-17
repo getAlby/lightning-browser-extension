@@ -310,7 +310,6 @@
       },
       "default_view": {
         "recent_transactions": "Transacciones Recientes",
-        "no_transactions": "Aún no se han hecho transacciones con Alby.",
         "is_blocked_hint": "Alby está actualmente deshabilitado en {{host}}",
         "block_removed": "{{host}} habilitado. Vuelva a cargar el sitio web."
       }

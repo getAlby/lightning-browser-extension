@@ -354,7 +354,6 @@
       },
       "default_view": {
         "recent_transactions": "अलीकडचे व्यवहार",
-        "no_transactions": "Alby सह अद्याप कोणतेही व्यवहार केलेले नाहीत.",
         "is_blocked_hint": "Alby सध्या {{host}} वर अक्षम आहे",
         "block_removed": "{{host}} सक्षम केले. कृपया वेबसाइट रीलोड करा."
       }

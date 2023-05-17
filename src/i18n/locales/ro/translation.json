@@ -354,7 +354,6 @@
       },
       "default_view": {
         "recent_transactions": "Tranzactii recente",
-        "no_transactions": "Nicio tranzactie efectuata cu Alby, momentan.",
         "is_blocked_hint": "Momentan, Alby este dezactivat pentru {{host}}",
         "block_removed": "{{host}} activat. Te rugam sa reincarci website-ul."
       }

@@ -295,7 +295,6 @@
       },
       "default_view": {
         "recent_transactions": "Nedávné transakce",
-        "no_transactions": "S Alby prozatím nebyly uskutečněny žádné transakce.",
         "is_blocked_hint": "Alby je v současnosti zakázaná na {host}}",
         "block_removed": "Povolen {{host}}. Prosím znovu načtěte webovou stránku."
       }

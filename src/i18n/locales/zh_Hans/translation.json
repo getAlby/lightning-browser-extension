@@ -308,7 +308,6 @@
         "allowance": "限额"
       },
       "default_view": {
-        "no_transactions": "尚未用Alby进行任何交易。",
         "is_blocked_hint": "Alby 目前在 {{host}} 上被禁用",
         "recent_transactions": "近期交易",
         "block_removed": "启用了{{host}}。请重新加载网站。"

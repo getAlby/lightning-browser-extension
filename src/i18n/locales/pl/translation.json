@@ -354,7 +354,6 @@
       },
       "default_view": {
         "recent_transactions": "Ostatnie transakcje",
-        "no_transactions": "Jeszcze nie ma transakcji z użyciem Alby.",
         "is_blocked_hint": "Alby jest obecnie wyłączone na {{host}}",
         "block_removed": "Włączono {{host}}. Odśwież stronę."
       }
