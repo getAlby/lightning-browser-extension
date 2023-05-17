@@ -790,8 +790,8 @@
     "transactions": {
       "title": "Transactions",
       "description": {
-        "outgoing": "Outgoing transactions for selected account",
-        "incoming": "Incoming transactions for selected account"
+        "outgoing": "Outgoing transactions for this account",
+        "incoming": "Incoming transactions for this account"
       },
       "list_empty": "No transactions available yet."
     }
