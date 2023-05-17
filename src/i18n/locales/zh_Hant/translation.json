@@ -378,7 +378,6 @@
       },
       "default_view": {
         "recent_transactions": "近期交易",
-        "no_transactions": "尚未用Alby進行任何交易。",
         "is_blocked_hint": "Alby目前在 {{host}} 上被禁用",
         "block_removed": "已啟用 {{host}}。請重新載入網站。"
       }

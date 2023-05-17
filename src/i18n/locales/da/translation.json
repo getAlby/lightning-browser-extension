@@ -354,7 +354,6 @@
       },
       "default_view": {
         "recent_transactions": "Seneste transaktioner",
-        "no_transactions": "Endnu ingen transaktioner udført med Alby.",
         "is_blocked_hint": "Alby er i øjeblikket deaktiveret på {{vært}}",
         "block_removed": "{{vært}} blev aktiveret. Indlæs hjemmesiden igen."
       }

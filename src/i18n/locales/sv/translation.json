@@ -319,7 +319,6 @@
       },
       "default_view": {
         "recent_transactions": "Senaste Transaktioner",
-        "no_transactions": "Inga transaktioner genomförda med Alby.",
         "is_blocked_hint": "Alby är för tillfället avstängt hos {{host}}",
         "block_removed": "Aktiverade {{host}}. Ladda om webbplatsen."
       }

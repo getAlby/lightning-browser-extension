@@ -413,7 +413,6 @@
       "default_view": {
         "is_blocked_hint": "Alby ist derzeit auf dem {{host}} deaktiviert",
         "recent_transactions": "Jüngste Transaktionen",
-        "no_transactions": "Es wurden noch keine Transaktionen mit Alby getätigt.",
         "block_removed": "{{host}} aktiviert. Bitte lade die Website neu."
       },
       "allowance_view": {
