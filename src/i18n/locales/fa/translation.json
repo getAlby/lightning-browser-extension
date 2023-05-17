@@ -79,145 +79,145 @@
         "optional_lightning_note": {
           "part1": "همراه حساب کاربریتان یک آدرس لایتنینگ هم هست",
           "part2": "آدرس لایتنینگ",
-          "part3": "",
-          "part4": ""
+          "part3": "این برای همه روش آسانی است تا برای شما بیتکوین بفرستند.",
+          "part4": "بیشتر بدانید"
         },
         "optional_lightning_address": {
-          "label": "",
-          "suffix": "",
-          "title": ""
+          "label": "آدرس لایتنینگ خود را انتخاب کنید(اختیاری)",
+          "suffix": "@getalby.com",
+          "title": "اعداد و حروف، حداقل ۴ کاراکتر"
         },
         "errors": {
-          "create_wallet_error": "",
-          "create_wallet_error1": "",
-          "create_wallet_error2": ""
+          "create_wallet_error": "نتوانست وارد شود یا حساب کاربری جدید بسازد. اگر به کمک نیاز دارید با support@getalby.com تماس بگیرید",
+          "create_wallet_error1": "قادر به ورود یا ساخت حساب کاربری جدید نیست.",
+          "create_wallet_error2": "اگر به کمک نیاز دارید با support@getalby.com تماس بگیرید"
         }
       }
     },
     "choose_connector": {
-      "title": "",
-      "description": "",
+      "title": "اتصال به کیف پول لایتنینگی",
+      "description": "به کیف پول یا گره لایتنینگی خارجی خود متصل شوید",
       "lnd": {
-        "title": "",
+        "title": "LND",
         "page": {
-          "title": "",
-          "description": ""
+          "title": "به گره LND خود متصل شوید",
+          "description": "به گره تان و یک مکارون macaroon با مجوز خواندن و ارسال نیاز دارید (مثال admin.macaroon)"
         },
         "url": {
-          "label": "",
-          "placeholder": ""
+          "label": "درگاه و میزبان REST API",
+          "placeholder": "https://your-node-url:8080"
         },
         "macaroon": {
-          "label": ""
+          "label": "Macaroon (HEX format)"
         },
-        "or": "",
-        "drag_and_drop": "",
+        "or": "OR",
+        "drag_and_drop": "مکارون خود را اینجا بکشید و بیاورید یا <0>جستجو کنید</0>",
         "errors": {
-          "connection_failed": ""
+          "connection_failed": "اتصال وصل نشد. اعتبارنامه های گره لایتنینگ شما صحیح است؟"
         }
       },
       "umbrel_lightning_node": {
-        "title": ""
+        "title": "گره لایتنینگ"
       },
       "lnc": {
-        "title": "",
+        "title": "ترمینال لایتنینگ (LNC)",
         "page": {
-          "title": "",
-          "description": ""
+          "title": "به گره لایتنینگ خود وصل شوید",
+          "description": "۱. ترمینال لایتنینگ را باز کرده و <0>اتصال گره لایتنینگ</0> را از منوی کناری انتخاب کنید. <1/>۲. روی <0>ساخت جلسه جدید</0>کلیک کنید<1/>۳. عنوانی رو جلسه بگذارید، مجوزهای مطلوب را انتخاب کرده و ثبت کنید<1/> ۴. <0>عبارت جفت را کپی کرده</0> و در پایین بچسبانید."
         },
         "pairing_phrase": {
-          "label": "",
-          "placeholder": ""
+          "label": "عبارت جفت شما ",
+          "placeholder": "عبارت مخفی انباشتن ساتوشی"
         }
       },
       "lndhub_bluewallet": {
-        "title": "",
+        "title": "Bluewallet",
         "page": {
-          "title": "",
-          "description": ""
+          "title": "اتصال به بلو والت",
+          "description": "در بلو والت، کیف پولی که می خواهید به آن متصل شوید را انتخاب کرده، روی\"...\" کلیک کنید، روی Export/Backup کلیک کنید تا کدQR نمایش داده شود و با دوربین وب آن را اسکن کنید."
         },
         "uri": {
-          "label": ""
+          "label": "آدرس استخراج بلووالت"
         },
         "errors": {
-          "invalid_uri": "",
-          "connection_failed": ""
+          "invalid_uri": "آدرس بلووالت نامعتبر",
+          "connection_failed": "اتصال ناموفق. آدرس بلووالت شما درست است؟"
         }
       },
       "lndhub_go": {
-        "title": "",
+        "title": "LNDHub",
         "page": {
-          "title": "",
-          "description": ""
+          "title": "به LNDHub متصل شوید",
+          "description": "URI اعتبارنامه های LNDHub خود را اینجا وارد کرده یا کدQR را با دوربین وب خود اسکن کنید."
         },
         "uri": {
-          "label": ""
+          "label": "URI استخراج LNDHub"
         },
         "errors": {
-          "invalid_uri": "",
-          "connection_failed": ""
+          "invalid_uri": "LNDHub URI نامعتبر",
+          "connection_failed": "اتصال انجام نشد. آیا LNDHub URI شما صحیح است؟"
         }
       },
       "lnbits": {
-        "title": "",
+        "title": "LNbits",
         "page": {
-          "title": "",
-          "instructions": ""
+          "title": "اتصال به <0>LNbits </0>",
+          "instructions": "در LNbits ، کیف پولی که می خواهید به آن متصل شوید را انتخاب کرده و باز کنید، روی اطلاعات API کلیک کرده و کلید ادمین را کپی نمایید. آن را در زیر بچسبانید:"
         },
         "admin_key": {
-          "label": "",
-          "placeholder": ""
+          "label": "کلید ادمین LNbits",
+          "placeholder": "کلید ادمین ۳۲ رقمی شما"
         },
         "url": {
-          "label": ""
+          "label": "LNbits URL"
         },
         "errors": {
-          "connection_failed": ""
+          "connection_failed": "اتصال انجام نشد. آیا URL و کلید ادمین صحیح را دارید؟"
         }
       },
       "eclair": {
-        "title": "",
+        "title": "Eclair",
         "page": {
-          "title": "",
-          "instructions": ""
+          "title": "اتصال به <0>Eclair </0>",
+          "instructions": "به گذرواژه و URL اکلیر خود نیاز دارید."
         },
         "password": {
-          "label": ""
+          "label": "گذرواژه اکلیر"
         },
         "url": {
-          "label": "",
-          "placeholder": ""
+          "label": "URL اکلیر",
+          "placeholder": "http://localhost:8080"
         }
       },
       "citadel": {
-        "title": "",
+        "title": "Citadel",
         "page": {
-          "title": "",
-          "instructions": ""
+          "title": "به گره <0>Citadel</0> متصل شوید",
+          "instructions": "در حال حاضر در صورت فعال بودن تایید دو مرحله ای، این کار نمی کند."
         },
         "password": {
-          "label": ""
+          "label": "گذرواژه سیتادل"
         },
         "url": {
-          "label": "",
-          "placeholder": ""
+          "label": "آدرس اینترنتی سیتادل",
+          "placeholder": "http://citadel.local"
         }
       },
       "umbrel": {
-        "title": "",
+        "title": "Umbrel",
         "page": {
-          "title": "",
-          "instructions": ""
+          "title": "اتصال به گره <0>Umbrel</0>",
+          "instructions": "۱. در داشبورد گره لایتنینگی به <0>اتصال کیف پول</0><1/> بروید ۲. حالت <0>تنظیم مجدد (تور)</0> یا <0>تنظیم مجدد(شبکه محلی)</0> را انتخاب کنید ۳. <0>lndconnect URL</0>‎‎‎‎ را کپی کرده و در زیر بچسبانید"
         },
         "rest_url": {
-          "label": "",
-          "placeholder": ""
+          "label": "lndconnect REST URL",
+          "placeholder": "lndconnect://yournode:8080?..."
         }
       },
       "mynode": {
-        "title": "",
+        "title": "myNode",
         "page": {
-          "title": "",
+          "title": "اتصال به ‎<0>myNode</0>",
           "instructions": ""
         },
         "rest_url": {
@@ -406,20 +406,20 @@
       }
     },
     "accounts": {
-      "title": "",
+      "title": "حساب های کاربری",
       "account_view": {
-        "title1": "",
+        "title1": "اطلاعات حساب کاربری",
         "title2": "",
         "name": {
           "title": "",
           "placeholder": ""
         },
         "export": {
-          "title": "",
+          "title": "استخراج حساب کاربری",
           "screen_reader": "",
-          "waiting": "",
-          "your_ln_address": "",
-          "tip_mobile": "",
+          "waiting": "منتظر داده های",
+          "your_ln_address": "آدرس لایتنینگ شما",
+          "tip_mobile": "راهنمایی: با گوشی موبایل از این کیف پول  استفاده کنید",
           "export_uri": "",
           "scan_qr": ""
         },
@@ -432,71 +432,71 @@
             "backup": "",
             "warning": "",
             "success": "",
-            "failed_to_remove": "",
-            "successfully_removed": "",
-            "label": ""
+            "failed_to_remove": "نام حساب کاربری وارد شده مطابقت ندارد، ‬کلید خصوصی قدیمی شما بازیابی شده است.",
+            "successfully_removed": "کلید خصوصی با موفقیت حذف شد.",
+            "label": "کلید خصوصی"
           },
           "public_key": {
-            "label": ""
+            "label": "کلید عمومی"
           },
           "generate_keys": {
-            "title": "",
-            "screen_reader": "",
-            "hint": "",
+            "title": "یک جفت کلید نوستر جدید بسازید",
+            "screen_reader": "یک کلید نوستر جدید برای حساب کاربریتان بسازید",
+            "hint": "می توانید یک کلید تصادفی بسازید یا از جزییات حساب کاربری (با استفاده از یک عبارت معیار) یک کلید درآورید",
             "actions": {
-              "random_keys": "",
-              "derived_keys": ""
+              "random_keys": "ساخت کلید تصادفی",
+              "derived_keys": "در آوردن کلید از حساب کاربری"
             }
           },
           "actions": {
-            "generate": ""
+            "generate": "ساخت کلید جدید"
           },
           "errors": {
-            "failed_to_load": ""
+            "failed_to_load": "کلید نوستر بارگیری نشد. آیا این کلید معتبر است؟"
           }
         },
         "remove": {
-          "title": "",
-          "subtitle": "",
+          "title": "حذف این حساب کاربری",
+          "subtitle": "تمام مجوزهای وابسته حذف خواهند شد. لطفا اطمینان حاصل کنید.",
           "confirm": ""
         },
         "actions": {
-          "remove_account": "",
-          "export": ""
+          "remove_account": "حذف حساب کاربری",
+          "export": "استخراج"
         }
       },
       "actions": {
-        "add_account": ""
+        "add_account": "افزودن جساب کاربری"
       }
     },
     "enable": {
-      "title": "",
-      "allow": "",
-      "request1": "",
-      "request2": "",
-      "block_and_ignore": "",
-      "block_added": ""
+      "title": "اتصال",
+      "allow": "به این وبسایت اجازه بدهید:",
+      "request1": "دخواست تایید تراکنش ها",
+      "request2": "درخواست اطلاعات لایتنینگ و صورتحساب ها",
+      "block_and_ignore": "مسدود کردن و نادیده گرفتن {{host}}",
+      "block_added": "افزودن {{host}} به لیست مسدودی ها، لطفا دوباره وبسایت را بارگیری کنید."
     },
     "unlock": {
-      "unlock_to_continue": "",
-      "unlock_password": "",
+      "unlock_to_continue": "رفع مسدودی برای ادامه",
+      "unlock_password": "گذرواژه باز کردن",
       "help_contact": {
-        "part1": "",
-        "part2": ""
+        "part1": "کمک نیاز دارید؟ تماس بگیرید",
+        "part2": "پشتیبانی البی"
       },
       "unlock_error": {
         "help": "",
-        "link": ""
+        "link": "تنظیم مجدد و افزودن حساب کاربری جدید"
       },
       "errors": {
-        "invalid_password": ""
+        "invalid_password": "گذرواژه نامعتبر"
       }
     },
     "settings": {
-      "title": "",
+      "title": "تنظیمات",
       "browser_notifications": {
-        "title": "",
-        "subtitle": ""
+        "title": "اعلان های مرورگر",
+        "subtitle": "اعلان های مربوط به پرداخت و اصالت سنجی"
       },
       "website_enhancements": {
         "title": "",
@@ -550,9 +550,9 @@
         "description": ""
       },
       "name": {
-        "title": "",
+        "title": "نام",
         "subtitle": "",
-        "placeholder": ""
+        "placeholder": "نام خود را وارد نمایید"
       },
       "email": {
         "title": "",
@@ -716,48 +716,48 @@
         "label": ""
       },
       "errors": {
-        "amount_too_small": "",
-        "amount_too_big": ""
+        "amount_too_small": "مبلغ از حداقل کمتر است",
+        "amount_too_big": "مبلغ از حداکثر بیشتر است"
       }
     },
     "confirm_sign_message": {
-      "title": "",
-      "content": ""
+      "title": "امضا کردن",
+      "content": "این وبسایت از شما می خواهد امضا کنید:"
     },
     "confirm_keysend": {
-      "title": "",
+      "title": "پرداخت را تایید کنید",
       "success": "",
       "payment_summary": {
         "description": ""
       }
     },
     "keysend": {
-      "title": "",
+      "title": "ارسال",
       "success": "",
       "receiver": {
-        "label": ""
+        "label": "پرداخت به"
       },
       "amount": {
-        "label": ""
+        "label": "مبلغ (ساتوشی)"
       }
     },
     "confirm_payment": {
-      "title": "",
-      "success": "",
+      "title": "تایید پرداخت",
+      "success": "پرداخت موفقیت آمیز {{مبلغ}}",
       "actions": {
-        "pay_now": ""
+        "pay_now": "اکنون بپردازید"
       }
     },
     "confirm_request_permission": {
-      "title": "",
-      "allow": "",
-      "always_allow": ""
+      "title": "تایید درخواست",
+      "allow": "به این وبسایت اجازه اجرا بدهید:",
+      "always_allow": "انتخاب مرا به خاطر بسپار و دوباره نپرس"
     },
     "nostr": {
-      "title": "",
-      "allow": "",
-      "content": "",
-      "allow_sign": "",
+      "title": "نوستر",
+      "allow": "به این وبسایت اجازه دهید که:",
+      "content": "این وبسایت از شما می خواهد که امضا کنید:",
+      "allow_sign": "به {{میزبان}} اجاره امضا بدهید:",
       "allow_sign_event": "",
       "view_details": "",
       "hide_details": "",
@@ -779,7 +779,7 @@
         "42": "",
         "43": "",
         "44": "",
-        "1984": "",
+        "1984": "گزارش دادن",
         "9734": "",
         "9735": "",
         "10002": "",
@@ -804,53 +804,53 @@
     "success": "",
     "error": "",
     "settings": "",
-    "accounts": "",
-    "discover": "",
-    "connected_sites": "",
-    "transactions": "",
-    "sats_one": "",
-    "sats_other": "",
-    "loading": "",
-    "amount": "",
-    "optional": "",
-    "feedback": "",
-    "copied": "",
-    "description": "",
-    "description_full": "",
+    "accounts": "حساب های کاربری",
+    "discover": "کشف کنید",
+    "connected_sites": "سایت های متصل",
+    "transactions": "تراکنش ها",
+    "sats_one": "ساتوشی",
+    "sats_other": "ساتوشی",
+    "loading": "در حال بارگیری",
+    "amount": "مبلغ",
+    "optional": "اختیاری",
+    "feedback": "بازخورد",
+    "copied": "کپی شد!",
+    "description": "توصیف",
+    "description_full": "توصیف کامل",
     "success_message": "",
-    "response": "",
-    "message": "",
-    "help": "",
-    "balance": "",
+    "response": "پاسخ",
+    "message": "پیام",
+    "help": "کمک",
+    "balance": "تراز",
     "actions": {
-      "back": "",
-      "delete": "",
-      "edit": "",
-      "next": "",
-      "open": "",
+      "back": "برگشت",
+      "delete": "حذف",
+      "edit": "ویرایش",
+      "next": "بعدی",
+      "open": "باز کردن",
       "cancel": "",
       "confirm": "",
-      "continue": "",
-      "connect": "",
-      "lock": "",
-      "unlock": "",
-      "send": "",
-      "save": "",
-      "receive": "",
-      "receive_again": "",
-      "transactions": "",
-      "close": "",
-      "export": "",
-      "remove": "",
-      "copy": "",
+      "continue": "لغو",
+      "connect": "اتصال",
+      "lock": "قفل",
+      "unlock": "باز کردن",
+      "send": "ارسال",
+      "save": "ذخیره",
+      "receive": "دریافت",
+      "receive_again": "دریافت یک پرداخت دیگر",
+      "transactions": "تراکنش ها",
+      "close": "بستن",
+      "export": "استخراج",
+      "remove": "حذف کردن",
+      "copy": "کپی",
       "copy_invoice": "",
       "log_in": "",
       "remember": "",
       "more": ""
     },
     "errors": {
-      "connection_failed": "",
-      "payment_failed": ""
+      "connection_failed": "متصل نشد",
+      "payment_failed": "پرداخت نشد"
     },
     "range": {
       "between": "",
@@ -860,50 +860,50 @@
   },
   "components": {
     "allowance_menu": {
-      "confirm_delete": "",
-      "hint": "",
+      "confirm_delete": "مطمئنید می خواهید این وبسایت را حذف کنید؟",
+      "hint": "این بودجه فعلی را باز تنظیم می کند",
       "new_budget": {
-        "label": ""
+        "label": "بودجه جدید"
       },
       "enable_login": {
-        "title": "",
-        "subtitle": ""
+        "title": "ورود به وبسایت را فعال کن",
+        "subtitle": "هنگامی که وبسایت درخواست می کند، به طور خودکار بدون پرسیدن وارد شو."
       },
       "edit_allowance": {
-        "title": "",
-        "screen_reader": ""
+        "title": "ویرایش ترجیحات",
+        "screen_reader": "گزینه های جیره بندی"
       },
-      "edit_permissions": ""
+      "edit_permissions": "ویرایش مجوزها"
     },
     "qrcode_scanner": {
-      "title": "",
+      "title": "اسکن کدQR",
       "actions": {
         "start_scanning": "",
-        "stop_scanning": ""
+        "stop_scanning": "توقف اسکن"
       },
       "errors": {
-        "allow_camera_access": ""
+        "allow_camera_access": "لطفا در صفحه تنظیمات اجازه دسترسی به دوربین بدهید"
       }
     },
     "transactionsTable": {
-      "fee": "",
+      "fee": "کارمزد",
       "preimage": "",
-      "received": "",
-      "sent": "",
+      "received": "دریافت شد",
+      "sent": "ارسال شد",
       "boostagram": {
-        "sender": "",
-        "message": "",
-        "app": "",
-        "podcast": ""
+        "sender": "فرستنده",
+        "message": "پیام",
+        "app": "اپلیکیشن",
+        "podcast": "پادکست"
       },
-      "open_location": ""
+      "open_location": "بازکردن وبسایت"
     },
     "confirm_or_cancel": {
-      "only_trusted": ""
+      "only_trusted": "فقط به سایت هایی که اعتماد دارید متصل شوید."
     },
     "budget_control": {
       "remember": {
-        "label": "",
+        "label": "بودجه ای تنظیم کرده و به یاد بسپارید.",
         "description": ""
       },
       "budget": {
@@ -1045,7 +1045,7 @@
       "routermc": "",
       "addinvoice": "",
       "addholdinvoice": "",
-      "settleinvoice": ""
+      "settleinvoice": "یک صورت حساب پذیرفته شده انتخاب کنید."
     }
   }
 }
