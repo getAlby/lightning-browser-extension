@@ -68,20 +68,20 @@ export const createNewWalletWithPassword = async (options?: {
 
   // get document from onboard page
   const $document = await getDocument(page);
-  await findByText($document, "Set an unlock password");
+  await findByText($document, "Set an unlock passcode");
 
   // type user password and confirm password
   const passwordField = await getByLabelText(
     $document,
-    "Choose an unlock password:"
+    "Choose an unlock passcode:"
   );
-  await passwordField.type("unlock-password");
+  await passwordField.type("unlock-passcode");
 
   const passwordConfirmationField = await getByLabelText(
     $document,
     "Let's confirm you typed it correct:"
   );
-  await passwordConfirmationField.type("unlock-password");
+  await passwordConfirmationField.type("unlock-passcode");
 
   // submit password form
   const passwordFormNextButton = await findByText($document, "Next");
