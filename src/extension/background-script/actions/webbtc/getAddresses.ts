@@ -2,6 +2,7 @@ import { getAddressFromPubkey, getAddressType } from "~/common/lib/btc";
 import { decryptData } from "~/common/lib/crypto";
 import {
   BTC_TAPROOT_DERIVATION_PATH,
+  BTC_TAPROOT_DERIVATION_PATH_REGTEST,
   getPublicKey,
 } from "~/common/lib/mnemonic";
 import state from "~/extension/background-script/state";
@@ -22,12 +23,14 @@ const getAddresses = async (message: MessageGetAddresses) => {
       throw new Error("No mnemonic set");
     }
     const mnemonic = decryptData(account.mnemonic, password);
+    const settings = state.getState().settings;
 
     const addresses: BitcoinAddress[] = [];
 
-    const derivationPath = account.bip32DerivationPath
-      ? decryptData(account.bip32DerivationPath, password)
-      : BTC_TAPROOT_DERIVATION_PATH;
+    const derivationPath =
+      settings.bitcoinNetwork === "bitcoin"
+        ? BTC_TAPROOT_DERIVATION_PATH
+        : BTC_TAPROOT_DERIVATION_PATH_REGTEST;
 
     const accountDerivationPathParts = derivationPath.split("/").slice(0, 4);
     if (accountDerivationPathParts.length !== 4) {

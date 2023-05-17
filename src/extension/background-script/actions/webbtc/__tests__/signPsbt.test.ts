@@ -1,7 +1,6 @@
 import { hex } from "@scure/base";
 import * as btc from "@scure/btc-signer";
 import { Psbt, networks, payments } from "bitcoinjs-lib";
-import msg from "~/common/lib/msg";
 import { getPsbtPreview } from "~/common/lib/psbt";
 import signPsbt from "~/extension/background-script/actions/webbtc/signPsbt";
 import state from "~/extension/background-script/state";
@@ -19,8 +18,6 @@ const regtestSegwitPsbt =
 const regtestSegwitSignedPsbt =
   "02000000000101fe1204e9e35f90c356bb6fe1d8944a46b0c5ac57160f707f6f5ca728bf1ab5490000000000fdffffff0280969800000000001600146fa016500a3c6a737ebb260e2ddca78ba9234558f5ecfa0200000000160014744c9993900c8e098d599b315a9f667777e4f82a02473044022065255b047fecc1b5a0afdf095a367c538c6afde33a1d6fb9f5fe28638aa7dbcf022072de13455179e876c336b32cc525c1b862f7199913e8b67c0663566489fcd2c0012102e7ab2537b5d49e970309aae06e9e49f36ce1c9febbd44ec8e0d1cca0b4f9c3191e010000";
 
-const regtestSegwitDerivationPath = "m/84'/1'/0'/0/0";
-
 const mockMnemnoic =
   "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about";
 
@@ -29,9 +26,11 @@ const mockState = {
   currentAccountId: "1e1e8ea6-493e-480b-9855-303d37506e97",
   getAccount: () => ({
     mnemonic: mockMnemnoic,
-    bip32DerivationPath: regtestSegwitDerivationPath,
   }),
   getConnector: jest.fn(),
+  settings: {
+    bitcoinNetwork: "regtest",
+  },
 };
 
 state.getState = jest.fn().mockReturnValue(mockState);
@@ -43,9 +42,6 @@ jest.mock("~/common/lib/crypto", () => {
     }),
   };
 });
-
-// mock getDerivationPath to return regtestSegwitDerivationPath
-msg.request = jest.fn().mockReturnValue(regtestSegwitDerivationPath);
 
 beforeEach(async () => {
   // fill the DB first

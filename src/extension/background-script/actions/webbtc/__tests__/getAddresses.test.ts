@@ -4,8 +4,6 @@ import type { MessageGetAddresses } from "~/types";
 
 const passwordMock = jest.fn;
 
-const regtestSegwitDerivationPath = "m/84'/1'/0'/0/0";
-
 const mockMnemnoic =
   "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about";
 
@@ -14,9 +12,11 @@ const mockState = {
   currentAccountId: "1e1e8ea6-493e-480b-9855-303d37506e97",
   getAccount: () => ({
     mnemonic: mockMnemnoic,
-    bip32DerivationPath: regtestSegwitDerivationPath,
   }),
   getConnector: jest.fn(),
+  settings: {
+    bitcoinNetwork: "regtest",
+  },
 };
 
 state.getState = jest.fn().mockReturnValue(mockState);

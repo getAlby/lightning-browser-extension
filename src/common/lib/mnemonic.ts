@@ -4,12 +4,7 @@ import * as bip39 from "@scure/bip39";
 
 export const NOSTR_DERIVATION_PATH = "m/44'/1237'/0'/0/0"; // NIP-06
 export const BTC_TAPROOT_DERIVATION_PATH = "m/86'/0'/0'/0/0";
-// Segwit
-// m/84'/0'/0'/0/0
-// Nested segwit
-// m/84'/0'/0'/0/0
-// Legacy
-// m/44'/0'/0'/0/0
+export const BTC_TAPROOT_DERIVATION_PATH_REGTEST = "m/84'/1'/0'/0/0"; //"m/86'/1'/0'/0/0"; // FIXME:
 
 export function deriveNostrPrivateKey(mnemonic: string) {
   return derivePrivateKey(mnemonic, NOSTR_DERIVATION_PATH);

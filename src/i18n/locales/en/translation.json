@@ -553,6 +553,18 @@
           "system": "System"
         }
       },
+      "bitcoin": {
+        "title": "Bitcoin",
+        "hint": "Manage your Bitcoin settings for WebBTC-enabled apps",
+        "network": {
+          "title": "Network",
+          "subtitle": "Choose network to derive addresses and decode transactions",
+          "options": {
+            "bitcoin": "Mainnet",
+            "regtest": "Regtest"
+          }
+        }
+      },
       "show_fiat": {
         "title": "Sats to Fiat",
         "subtitle": "Always convert into selected currency from selected exchange"

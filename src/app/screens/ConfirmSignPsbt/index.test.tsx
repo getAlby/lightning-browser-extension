@@ -1,6 +1,7 @@
 import { act, render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import msg from "~/common/lib/msg";
+import state from "~/extension/background-script/state";
 import type { OriginData } from "~/types";
 
 import ConfirmSignPsbt from "./index";
@@ -41,9 +42,24 @@ jest.mock("~/app/hooks/useNavigationState", () => {
   };
 });
 
-const regtestSegwitDerivationPath = "m/84'/1'/0'/0/0";
-// mock getDerivationPath to return regtestSegwitDerivationPath
-msg.request = jest.fn().mockReturnValue(regtestSegwitDerivationPath);
+const passwordMock = jest.fn;
+
+const mockState = {
+  password: passwordMock,
+  currentAccountId: "1e1e8ea6-493e-480b-9855-303d37506e97",
+  getAccount: () => ({}),
+  getConnector: jest.fn(),
+  settings: {
+    bitcoinNetwork: "regtest",
+  },
+};
+
+state.getState = jest.fn().mockReturnValue(mockState);
+
+// mock get settings
+msg.request = jest.fn().mockReturnValue({
+  bitcoinNetwork: "regtest",
+});
 
 describe("ConfirmSignMessage", () => {
   test("render", async () => {

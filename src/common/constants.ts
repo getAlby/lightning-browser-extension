@@ -184,4 +184,5 @@ export const DEFAULT_SETTINGS: SettingsStorage = {
   exchange: "alby",
   nostrEnabled: false,
   closedTips: [],
+  bitcoinNetwork: "bitcoin",
 };

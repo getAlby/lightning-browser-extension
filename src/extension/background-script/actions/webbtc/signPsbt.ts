@@ -4,6 +4,7 @@ import * as btc from "@scure/btc-signer";
 import { decryptData } from "~/common/lib/crypto";
 import {
   BTC_TAPROOT_DERIVATION_PATH,
+  BTC_TAPROOT_DERIVATION_PATH_REGTEST,
   derivePrivateKey,
 } from "~/common/lib/mnemonic";
 import state from "~/extension/background-script/state";
@@ -24,12 +25,15 @@ const signPsbt = async (message: MessageSignPsbt) => {
       throw new Error("No mnemonic set");
     }
     const mnemonic = decryptData(account.mnemonic, password);
-    const derivationPath = account.bip32DerivationPath
-      ? decryptData(account.bip32DerivationPath, password)
-      : undefined;
+    const settings = state.getState().settings;
+
+    const derivationPath =
+      settings.bitcoinNetwork === "bitcoin"
+        ? BTC_TAPROOT_DERIVATION_PATH
+        : BTC_TAPROOT_DERIVATION_PATH_REGTEST;
+
     const privateKey = secp256k1.utils.hexToBytes(
-      // TODO: allow account to specify derivation path
-      derivePrivateKey(mnemonic, derivationPath || BTC_TAPROOT_DERIVATION_PATH)
+      derivePrivateKey(mnemonic, derivationPath)
     );
 
     const psbtBytes = secp256k1.utils.hexToBytes(message.args.psbt);

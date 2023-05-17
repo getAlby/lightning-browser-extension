@@ -12,6 +12,7 @@ import Loading from "~/app/components/Loading";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
+import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import { PsbtPreview, getPsbtPreview } from "~/common/lib/psbt";
 import type { OriginData } from "~/types";
@@ -32,19 +33,8 @@ function ConfirmSignPsbt() {
 
   useEffect(() => {
     (async () => {
-      const derivationPath = (await msg.request(
-        "getDerivationPath",
-        {},
-        { origin }
-      )) as string;
-      setPreview(
-        getPsbtPreview(
-          psbt,
-          derivationPath && derivationPath.split("/")[2] === "1'"
-            ? "regtest"
-            : undefined
-        )
-      );
+      const settings = await api.getSettings();
+      setPreview(getPsbtPreview(psbt, settings.bitcoinNetwork));
     })();
   }, [origin, psbt]);
 
