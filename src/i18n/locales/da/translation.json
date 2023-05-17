@@ -30,8 +30,6 @@
       }
     },
     "choose_path": {
-      "title": "Opret forbindelse",
-      "description": "Opret forbindelse til udvidelsen fra din lightning-wallet for at bruge Alby til at betale online.",
       "alby": {
         "title": "Alby",
         "description": "Opret dig, eller brug din eksisterende Alby-konto til hurtigt at starte med at betale via lightning.",

@@ -615,8 +615,6 @@
       "success": "Solicitud de retiro de {{amount}} enviada con éxito a {{sender}}"
     },
     "choose_path": {
-      "title": "Conectar",
-      "description": "Para empezar a utilizar la Extensión de Alby, usa tu cuenta de Alby o conecta tu monedero lightning.",
       "alby": {
         "title": "Cuenta de Alby",
         "create_new": "Regístrate",

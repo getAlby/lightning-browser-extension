@@ -622,7 +622,6 @@
       "content": "Tato webová stránka vás žádá o podpis:"
     },
     "choose_path": {
-      "title": "Připojit",
       "other": {
         "title": "Jiné peněženky",
         "description": "Připojte svou existující lightning peněženku nebo svůj uzel pomocí různých konektorů.",
@@ -633,8 +632,7 @@
         "create_new": "Vytvoření účtu",
         "title": "Alby",
         "description": "Zaregistrujte se, nebo se přihlašte ke svému existujícímu Alby účtu a začněte využívat lightning platby."
-      },
-      "description": "Pro použití Alby pro online platby, připojte svou lightning peněženku k doplňku."
+      }
     },
     "alby": {
       "pre_connect": {
