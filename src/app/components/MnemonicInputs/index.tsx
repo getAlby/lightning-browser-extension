@@ -35,7 +35,6 @@ export default function MnemonicInputs({
             <Input
               type="text"
               required
-              placeholder={wordlist[i * 32]}
               disabled={disabled}
               block={false}
               className="w-24 text-center"
