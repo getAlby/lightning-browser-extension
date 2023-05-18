@@ -1,12 +1,5 @@
 import * as secp256k1 from "@noble/secp256k1";
-import {
-  Network,
-  Psbt,
-  Signer,
-  crypto,
-  initEccLib,
-  networks,
-} from "bitcoinjs-lib";
+import * as bitcoin from "bitcoinjs-lib";
 import ECPairFactory, { ECPairAPI } from "ecpair";
 import * as tinysecp from "tiny-secp256k1";
 import { decryptData } from "~/common/lib/crypto";
@@ -44,20 +37,26 @@ const signPsbt = async (message: MessageSignPsbt) => {
       derivePrivateKey(mnemonic, derivationPath)
     );
 
-    const taprootPsbt = Psbt.fromHex(message.args.psbt, {
-      network: networks[settings.bitcoinNetwork],
+    const taprootPsbt = bitcoin.Psbt.fromHex(message.args.psbt, {
+      network: bitcoin.networks[settings.bitcoinNetwork],
     });
 
-    initEccLib(tinysecp);
+    // fix usages of window (unavailable in service worker)
+    globalThis.window = globalThis.window || {};
+    if (!globalThis.window.crypto) {
+      globalThis.window.crypto = crypto;
+    }
+
+    bitcoin.initEccLib(tinysecp);
     const ECPair: ECPairAPI = ECPairFactory(tinysecp);
 
     const keyPair = tweakSigner(
       ECPair,
       ECPair.fromPrivateKey(Buffer.from(privateKey), {
-        network: networks[settings.bitcoinNetwork],
+        network: bitcoin.networks[settings.bitcoinNetwork],
       }),
       {
-        network: networks[settings.bitcoinNetwork],
+        network: bitcoin.networks[settings.bitcoinNetwork],
       }
     );
 
@@ -93,9 +92,9 @@ const toXOnly = (pubKey: Buffer) =>
 
 function tweakSigner(
   ECPair: ECPairAPI,
-  signer: Signer,
-  opts: { network: Network; tweakHash?: Buffer | undefined }
-): Signer {
+  signer: bitcoin.Signer,
+  opts: { network: bitcoin.Network; tweakHash?: Buffer | undefined }
+): bitcoin.Signer {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   let privateKey: Uint8Array | undefined = signer.privateKey;
@@ -120,7 +119,7 @@ function tweakSigner(
 }
 
 function tapTweakHash(pubKey: Buffer, h: Buffer | undefined): Buffer {
-  return crypto.taggedHash(
+  return bitcoin.crypto.taggedHash(
     "TapTweak",
     Buffer.concat(h ? [pubKey, h] : [pubKey])
   );
