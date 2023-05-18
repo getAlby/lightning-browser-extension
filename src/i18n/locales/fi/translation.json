@@ -567,7 +567,8 @@
       "close": "Sulje",
       "export": "Vie",
       "remove": "Poista",
-      "copy": "Kopioi"
+      "copy": "Kopioi",
+      "copy_invoice": ""
     },
     "errors": {
       "connection_failed": "Yhteyden muodostaminen epäonnistui",

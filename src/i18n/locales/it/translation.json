@@ -662,8 +662,6 @@
       }
     },
     "choose_path": {
-      "title": "Connettiti",
-      "description": "Per iniziare a utilizzare Alby per effettuare pagamenti online, collega il tuo portafoglio lightning all'estensione.",
       "alby": {
         "title": "Alby",
         "description": "Registrati o utilizza il tuo account Alby per iniziare a pagare attraverso lightning in pochissimo tempo.",
@@ -749,6 +747,7 @@
       "export": "Esporta",
       "remove": "Rimuovi",
       "copy": "Copia",
+      "copy_invoice": "",
       "log_in": "Log in",
       "remember": "Ricorda la mia scelta e non chiederlo più",
       "receive_again": "Ricevi un altro pagamento"

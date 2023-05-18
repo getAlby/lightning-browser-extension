@@ -3,18 +3,18 @@
     "welcome": {
       "title": "Welcome to Alby",
       "set_password": {
-        "title": "Set an unlock password",
-        "description": "This password is used to protect your wallet and provide access to the browser extension. It cannot be reset and is separate from your Alby Account password.",
+        "title": "Set an unlock passcode",
+        "description": "This passcode will allow you to unlock Alby on this device. It cannot be recovered, but may be changed later.",
         "choose_password": {
-          "label": "Choose an unlock password:"
+          "label": "Choose an unlock passcode:"
         },
         "confirm_password": {
           "label": "Let's confirm you typed it correct:"
         },
         "errors": {
-          "enter_password": "Please enter a password.",
-          "confirm_password": "Please confirm your password.",
-          "mismatched_password": "Passwords don't match."
+          "enter_password": "Please enter a passcode.",
+          "confirm_password": "Please confirm your passcode.",
+          "mismatched_password": "Passcodes don't match."
         }
       },
       "test_connection": {
@@ -36,8 +36,6 @@
       }
     },
     "choose_path": {
-      "title": "Connect",
-      "description": "To start using the Alby Extension, use your Alby Account or connect to your lightning wallet.",
       "alby": {
         "title": "Alby Account",
         "description": "Sign up or use your existing Alby Account to get started with lightning payments in no time.",
@@ -118,8 +116,11 @@
           "connection_failed": "Connection failed. Are your LND credentials correct?"
         }
       },
+      "umbrel_lightning_node": {
+        "title": "Lightning Node"
+      },
       "lnc": {
-        "title": "LND with LNC",
+        "title": "Lightning Terminal (LNC)",
         "page": {
           "title": "Connect to your LND node",
           "description": "1. Open Lightning Terminal and choose <0>Lightning Node Connect</0> from the sidebar.<1/> 2. Click <0>Create a new session</0><1/>3. Label the session, choose desired permissions and submit<1/>4. <0>Copy pairing phrase</0> and paste it below."
@@ -357,6 +358,28 @@
         }
       }
     },
+    "distributions": {
+      "title": "Connect to {{name}}",
+      "description": "Choose which {{name}} app you would like to connect with",
+      "umbrel": {
+        "name": "Umbrel"
+      },
+      "citadel": {
+        "name": "Citadel"
+      },
+      "btcpay": {
+        "name": "BTCPay"
+      },
+      "raspiblitz": {
+        "name": "Raspiblitz"
+      },
+      "mynode": {
+        "name": "myNode"
+      },
+      "start9": {
+        "name": "Start9"
+      }
+    },
     "home": {
       "actions": {
         "send_satoshis": "⚡️ Send Satoshis ⚡️",
@@ -377,7 +400,8 @@
       },
       "default_view": {
         "recent_transactions": "Recent Transactions",
-        "no_transactions": "No transactions made with Alby, yet.",
+        "no_transactions_out": "No transactions made with Alby, yet.",
+        "no_transactions_in": "No transactions received with this account, yet.",
         "is_blocked_hint": "Alby is currently disabled on {{host}}",
         "block_removed": "Enabled {{host}}. Please reload the website."
       }
@@ -499,17 +523,17 @@
     },
     "unlock": {
       "unlock_to_continue": "Unlock to continue",
-      "unlock_password": "Your unlock password",
+      "unlock_password": "Your unlock passcode",
       "help_contact": {
         "part1": "Need help? Contact",
         "part2": "Alby Support"
       },
       "unlock_error": {
-        "help": "Your account data is encrypted with your unlock password. If you really forgot your unlock password you have to reset and add your lightning account again.",
+        "help": "Your account data is encrypted with your unlock passcode. If you really forgot your unlock passcode you have to reset and add your lightning account again.",
         "link": "Reset now and add a new account"
       },
       "errors": {
-        "invalid_password": "Invalid password"
+        "invalid_password": "Invalid passcode"
       }
     },
     "settings": {
@@ -592,24 +616,24 @@
         "placeholder": "Enter your email address"
       },
       "change_password": {
-        "title": "Change unlock password",
+        "title": "Change unlock passcode",
         "subtitle": "",
-        "screen_reader": "Change unlock password",
+        "screen_reader": "Change unlock passcode",
         "choose_password": {
-          "label": "Enter a new unlock password:"
+          "label": "Enter a new unlock passcode:"
         },
         "confirm_password": {
-          "label": "Confirm new password:"
+          "label": "Confirm new passcode:"
         },
         "submit": {
           "label": "Change"
         },
         "errors": {
-          "enter_password": "Please enter a new unlock password.",
-          "confirm_password": "Please confirm your password.",
-          "mismatched_password": "Passwords don't match."
+          "enter_password": "Please enter a new unlock passcode.",
+          "confirm_password": "Please confirm your passcode.",
+          "mismatched_password": "Passcodes don't match."
         },
-        "success": "Password changed successfully"
+        "success": "Passcode changed successfully"
       },
       "nostr": {
         "title": "Nostr",
@@ -893,6 +917,7 @@
       "copy_clipboard": "Copy to clipboard",
       "paste": "Paste",
       "paste_clipboard": "Paste from clipboard",
+      "copy_invoice": "Copy Invoice",
       "log_in": "Log in",
       "remember": "Remember my choice and don't ask again",
       "more": "More"

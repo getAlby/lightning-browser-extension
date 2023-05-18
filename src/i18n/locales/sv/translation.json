@@ -127,7 +127,7 @@
         "title": "Umbrel",
         "page": {
           "title": "Anslut <0>Umbrel</0>-nod",
-          "instructions": "I Umbrels översikt, gå till <0>Connect Wallet</0>. Välj <0>lndconnect REST</0> och kopiera <0>lndconnect URL</0>. (Avhängigt dina inställningar kan du antingen använda den lokala Tor-anslutningen.)"
+          "instructions": "1. Gå till <0>Anslut plånbok</0><1/>2 i din Lightning Node-instrumentpanel. Välj läge <0>REST (Tor)</0> eller <0>REST (Lokalt nätverk)</0><1/>3. Kopiera <0>lndconnect URL</0> och klistra in den nedan"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -148,8 +148,8 @@
       "start9": {
         "title": "Start9",
         "page": {
-          "title": "Anslut din <0>Embassy</0>-nod",
-          "instructions": "<0>Notis:</0> Vi stödjer endast LND men kommer lägga till stöd för c-lightning i framtiden!<1/>På din Embassy-översikt klicka på <0>Lightning Network Daemon</0> tjänst.<1/>Välj fliken <0>Properties</0>.<1/>Kopiera <0>LND Connect REST URL.</0>"
+          "title": "Anslut till din <0>Start9 Server</0>",
+          "instructions": "På din Embassy instrumentpanel klickar du på tjänsten <0>Lightning Network Daemon</0>.<1/>Välj fliken <0>Egenskaper</0>.<1/>Kopiera nu <0>LND Connect REST URL. </0>"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -242,8 +242,7 @@
           "description": "Skapa ett nytt Kollider-konto för att skicka, ta emot och handla Bitcoin."
         },
         "login": {
-          "title": "Anslut till ditt Kollider-konto",
-          "description": "Har du inte ett konto? <0>Registrera dig</0> nu!"
+          "title": "Anslut till ditt Kollider-konto"
         }
       },
       "commando": {
@@ -287,7 +286,7 @@
         "title": "LND med LNC",
         "page": {
           "title": "Anslut till din LND node",
-          "description": "Skapa en ny session i terminal (litd) för att få en ny parningsfras och skriv in den här"
+          "description": "1. Öppna Lightning Terminal och välj <0>Lightning Node Connect</0> från sidofältet.<1/> 2. Klicka på <0>Skapa en ny session</0><1/>3. Märk sessionen, välj önskade behörigheter och skicka in<1/>4. <0>Kopiera parningsfras</0> och klistra in den nedan."
         }
       }
     },
@@ -674,9 +673,7 @@
         "connect": "Anslut",
         "and_more": "& mer...",
         "description": "Anslut till din befintliga lightning Plånbok eller Node och välj från olika kontakter."
-      },
-      "title": "Anslut",
-      "description": "För att börja använda Alby tillägget, anslut din lightning plånbok."
+      }
     },
     "alby": {
       "pre_connect": {
@@ -774,7 +771,7 @@
     "success": "Genomfört",
     "error": "Misslyckades",
     "settings": "Inställningar",
-    "connected_sites": "",
+    "connected_sites": "Anslutna webbplatser",
     "loading": "laddar",
     "amount": "Belopp",
     "optional": "Valfritt",
@@ -803,10 +800,12 @@
       "export": "Exportera",
       "remove": "Tag bort",
       "copy": "Kopiera",
+      "copy_invoice": "",
       "transactions": "Transaktioner",
       "receive_again": "Ta emot en ny betalning",
       "remember": "Kom ihåg mitt val och fråga inte igen",
-      "log_in": "Logga in"
+      "log_in": "Logga in",
+      "more": "Mer"
     },
     "errors": {
       "connection_failed": "Anslutning misslyckades",

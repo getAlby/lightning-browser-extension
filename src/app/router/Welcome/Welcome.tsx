@@ -4,89 +4,18 @@ import TestConnection from "@screens/Onboard/TestConnection";
 import ChooseConnector from "@screens/connectors/ChooseConnector";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { RouteObject } from "react-router";
-import { HashRouter as Router, useRoutes } from "react-router-dom";
+import { Outlet, Route, HashRouter as Router, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Container from "~/app/components/Container";
 import { SettingsProvider } from "~/app/context/SettingsContext";
-import getConnectorRoutes from "~/app/router/connectorRoutes";
+import { getConnectorRoutes, renderRoutes } from "~/app/router/connectorRoutes";
 import AlbyWallet from "~/app/screens/connectors/AlbyWallet";
 import ChooseConnectorPath from "~/app/screens/connectors/ChooseConnectorPath";
 import i18n from "~/i18n/i18nConfig";
 
 const connectorRoutes = getConnectorRoutes();
 
-function getRoutes(
-  connectorRoutes: {
-    path: string;
-    element?: JSX.Element;
-    title: string;
-    logo: string;
-    children?: {
-      index?: boolean;
-      element: JSX.Element;
-      path?: string;
-    }[];
-  }[]
-): RouteObject[] {
-  return [
-    {
-      path: "/",
-      element: <SetPassword />,
-    },
-    {
-      path: "/choose-path",
-      children: [
-        {
-          index: true,
-          element: (
-            <ChooseConnectorPath
-              title={i18n.t("translation:choose_path.title")}
-              description={i18n.t("translation:choose_path.description")}
-            />
-          ),
-        },
-        {
-          path: "create",
-          element: <AlbyWallet variant="create" />,
-        },
-        {
-          path: "login",
-          element: <AlbyWallet variant="login" />,
-        },
-        {
-          path: "choose-connector",
-          children: [
-            {
-              index: true,
-              element: (
-                <ChooseConnector
-                  title={i18n.t("translation:choose_connector.title")}
-                  description={i18n.t(
-                    "translation:choose_connector.description"
-                  )}
-                />
-              ),
-            },
-            ...connectorRoutes,
-          ],
-        },
-      ],
-    },
-    {
-      path: "/test-connection",
-      element: <TestConnection />,
-    },
-    {
-      path: "/pin-extension",
-      element: <PinExtension />,
-    },
-  ];
-}
-
-const routes = getRoutes(connectorRoutes);
-
-function WelcomeRouter() {
+function Welcome() {
   return (
     <SettingsProvider>
       <Router>
@@ -95,15 +24,40 @@ function WelcomeRouter() {
           hideProgressBar={true}
           className="w-fit max-w-2xl"
         />
-        <App />
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<SetPassword />} />
+            <Route path="choose-path">
+              <Route index={true} element={<ChooseConnectorPath />}></Route>
+              <Route path="create" element={<AlbyWallet variant="create" />} />
+              <Route path="login" element={<AlbyWallet variant="login" />} />
+              <Route path="choose-connector">
+                <Route
+                  index={true}
+                  element={
+                    <ChooseConnector
+                      title={i18n.t("translation:choose_connector.title")}
+                      description={i18n.t(
+                        "translation:choose_connector.description"
+                      )}
+                      connectorRoutes={connectorRoutes}
+                    />
+                  }
+                ></Route>
+                {renderRoutes(connectorRoutes)}
+              </Route>
+            </Route>
+            <Route path="test-connection" element={<TestConnection />} />
+            <Route path="pin-extension" element={<PinExtension />} />
+          </Route>
+        </Routes>
       </Router>
     </SettingsProvider>
   );
 }
 
-function App() {
+function Layout() {
   const { t } = useTranslation();
-  const routesElement = useRoutes(routes);
 
   const [languageChanged, setLanguageChanged] = useState(false);
   i18n.on("languageChanged", () => {
@@ -114,7 +68,7 @@ function App() {
   return (
     <div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center font-serif font-medium text-2xl my-14 dark:text-white">
+        <div className="text-center font-serif font-medium text-2xl my-10 dark:text-white">
           <p>
             {t("welcome.title")}
             <img
@@ -130,9 +84,11 @@ function App() {
           </p>
         </div>
       </div>
-      <Container maxWidth="xl">{routesElement}</Container>
+      <Container maxWidth="xl">
+        <Outlet />
+      </Container>
     </div>
   );
 }
 
-export default WelcomeRouter;
+export default Welcome;

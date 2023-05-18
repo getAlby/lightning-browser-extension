@@ -30,8 +30,6 @@
       }
     },
     "choose_path": {
-      "title": "Conecteaza-te",
-      "description": "Pentru a incepe sa efectuezi plati online utilizand Alby, conecteaza portofelul Lightning la extensie.",
       "alby": {
         "title": "Alby",
         "description": "Inregistreaza-te sau foloseste un cont Alby deja existent pentru a incepe sa faci plati prin Lightning imediat.",
@@ -758,6 +756,7 @@
       "export": "",
       "remove": "",
       "copy": "",
+      "copy_invoice": "",
       "log_in": "",
       "remember": ""
     },

@@ -30,8 +30,6 @@
       }
     },
     "choose_path": {
-      "title": "Connecter",
-      "description": "Pour commencer à utiliser Alby pour effectuer des paiements en ligne, connectez votre Lightning wallet à l'extension.",
       "alby": {
         "title": "Alby",
         "description": "Inscrivez-vous ou utilisez votre compte Alby existant pour commencer à utiliser les paiements éclair en un rien de temps.",
@@ -759,6 +757,7 @@
       "export": "Exporter",
       "remove": "Retirer",
       "copy": "Copie",
+      "copy_invoice": "",
       "log_in": "Connexion",
       "remember": "Souviens-toi de mon choix et ne redemande plus"
     },

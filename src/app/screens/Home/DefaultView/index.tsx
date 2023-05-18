@@ -241,8 +241,8 @@ const DefaultView: FC<Props> = (props) => {
                     <TransactionsTable transactions={transactions} />
                   )}
                   {!isLoadingTransactions && !transactions?.length && (
-                    <p className="text-gray-500 dark:text-neutral-400">
-                      {t("default_view.no_transactions")}
+                    <p className="text-sm text-center text-gray-500 dark:text-neutral-400">
+                      {t("default_view.no_transactions_out")}
                     </p>
                   )}
                 </Tab.Panel>
@@ -255,9 +255,9 @@ const DefaultView: FC<Props> = (props) => {
                   {hasInvoices && (
                     <TransactionsTable transactions={incomingTransactions} />
                   )}
-                  {!hasInvoices && (
-                    <p className="text-gray-500 dark:text-neutral-400">
-                      {t("default_view.no_transactions")}
+                  {!isLoadingInvoices && !hasInvoices && (
+                    <p className="text-sm text-center text-gray-500 dark:text-neutral-400">
+                      {t("default_view.no_transactions_in")}
                     </p>
                   )}
                 </Tab.Panel>
