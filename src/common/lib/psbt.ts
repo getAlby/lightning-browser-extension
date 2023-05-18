@@ -1,7 +1,7 @@
 import * as btc from "@scure/btc-signer";
 import { Psbt, networks } from "bitcoinjs-lib";
 
-type Address = { amount: number; address: string };
+export type Address = { amount: number; address: string };
 
 export type PsbtPreview = {
   inputs: Address[];
