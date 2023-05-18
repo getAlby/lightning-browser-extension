@@ -4,7 +4,7 @@
       "title": "歡迎來到Alby",
       "set_password": {
         "title": "設置解鎖密碼",
-        "description": "此密碼用於保護你的錢包並提供對瀏覽器擴充套件的訪問。它無法重置，並且與你的Alby帳戶密碼不同。",
+        "description": "此密碼將允許你在此設備上解鎖 Alby。它無法恢復，但可以稍後更改。",
         "choose_password": {
           "label": "選擇解鎖密碼："
         },
@@ -379,7 +379,9 @@
       "default_view": {
         "recent_transactions": "近期交易",
         "is_blocked_hint": "Alby目前在 {{host}} 上被禁用",
-        "block_removed": "已啟用 {{host}}。請重新載入網站。"
+        "block_removed": "已啟用 {{host}}。請重新載入網站。",
+        "no_transactions_out": "尚未用 Alby 執行任何交易。",
+        "no_transactions_in": "該帳戶尚未收到任何交易。"
       }
     },
     "accounts": {
