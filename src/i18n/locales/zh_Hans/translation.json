@@ -3,9 +3,9 @@
     "welcome": {
       "set_password": {
         "title": "设置解锁密码",
-        "description": "此密码用于保护你的钱包并提供对浏览器扩展程序的访问权限。它无法重置，而且与你的 Alby 帐户密码不同。",
+        "description": "此密码将允许你在此设备上解锁 Alby。它无法恢复，但可以稍后更改。",
         "choose_password": {
-          "label": "选择一个解锁密码："
+          "label": "选择解锁密码："
         },
         "confirm_password": {
           "label": "让我们确认你输入的内容是否正确："
@@ -310,7 +310,9 @@
       "default_view": {
         "is_blocked_hint": "Alby 目前在 {{host}} 上被禁用",
         "recent_transactions": "近期交易",
-        "block_removed": "启用了{{host}}。请重新加载网站。"
+        "block_removed": "启用了{{host}}。请重新加载网站。",
+        "no_transactions_out": "尚未用 Alby 执行任何交易。",
+        "no_transactions_in": "该帐户尚未收到任何交易。"
       },
       "actions": {
         "send_satoshis": "⚡️ 发送聪 ⚡️",
