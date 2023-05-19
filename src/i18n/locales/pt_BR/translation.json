@@ -312,7 +312,9 @@
       "default_view": {
         "recent_transactions": "Transações recentes",
         "is_blocked_hint": "A Alby está desativada em {{host}}",
-        "block_removed": "{{host}} ativado. Por favor, recarregue o site."
+        "block_removed": "{{host}} ativado. Por favor, recarregue o site.",
+        "no_transactions_in": "Você ainda não recebeu transações com a Alby.",
+        "no_transactions_out": "Você ainda não realizou transações com a Alby."
       }
     },
     "accounts": {
@@ -328,7 +330,7 @@
           "waiting": "aguardando dados LndHub...",
           "tip_mobile": "Dica: Use esta carteira no seu dispositivo móvel",
           "export_uri": "Credenciais URI LNDHub",
-          "scan_qr": "Leia o Código QR para importar esta carteira na Zeus ou BlueWallet."
+          "scan_qr": "Leia o código QR para importar esta carteira na Zeus ou BlueWallet."
         },
         "nostr": {
           "title": "Nostr",
@@ -381,7 +383,7 @@
     "enable": {
       "allow": "Permitir este site:",
       "request1": "Solicitar aprovação para transações",
-      "request2": "Gerar códigos de pagamento e solicitar informações do servidor",
+      "request2": "Gerar faturas e solicitar informações do servidor",
       "block_and_ignore": "Bloquear e ignorar {{host}}",
       "title": "Conectar",
       "block_added": "{{host}} adicionado na lista de bloqueio, por favor recarregue o site."
@@ -505,7 +507,7 @@
       },
       "input": {
         "label": "Destinatário",
-        "hint": "Código de pagamento, Endereço Relâmpago ou LNURL"
+        "hint": "Fatura, Endereço Relâmpago ou LNURL"
       }
     },
     "lnurlpay": {
@@ -526,7 +528,7 @@
     "receive": {
       "title": "Receber",
       "actions": {
-        "create_invoice": "Gerar código de pagamento"
+        "create_invoice": "Gerar fatura"
       },
       "amount": {
         "label": "Quantia",
@@ -551,11 +553,11 @@
       },
       "title": "Sua lista de sites ⚡️",
       "description": "Sites onde você já usou a Alby",
-      "no_info": "Nenhum site ainda.",
+      "no_info": "Parece que você ainda não usou a Alby em sites.",
       "discover": "Descubra sites"
     },
     "make_invoice": {
-      "title": "Gerar código de pagamento",
+      "title": "Gerar fatura",
       "amount": {
         "label": "Quantia"
       },
@@ -663,7 +665,7 @@
       },
       "tips": {
         "top_up_wallet": {
-          "description": "Crie um código de pagamento relâmpago e envie alguns bitcoins para você mesmo",
+          "description": "Crie uma fatura relâmpago e envie alguns bitcoins para você mesmo",
           "label2": "Comprar Bitcoin",
           "label1": "Receber Bitcoin",
           "title": "⚡️ Adicione fundos na sua carteira"
