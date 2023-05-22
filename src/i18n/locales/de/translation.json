@@ -2,15 +2,15 @@
   "translation": {
     "welcome": {
       "set_password": {
-        "title": "Entsperrkennwort festlegen",
-        "description": "Dieses Kennwort wird verwendet, um deine Wallet zu schützen und den Zugriff auf die Browser-Erweiterung zu ermöglichen. Es kann nicht zurückgesetzt werden und ist unabhängig von deinem Alby-Konto-Kennwort.",
+        "title": "Einen Passcode zum Entsperren festlegen",
+        "description": "Mit diesem Passcode kannst du Alby auf diesem Gerät entsperren. Er kann nicht wiederhergestellt werden, kann aber später geändert werden.",
         "choose_password": {
-          "label": "Wähle ein Entsperrkennwort:"
+          "label": "Wähle einen Passcode zum Entsperren:"
         },
         "errors": {
-          "mismatched_password": "Kennwörter stimmen nicht überein.",
-          "enter_password": "Bitte gib ein Kennwort ein.",
-          "confirm_password": "Bitte bestätige dein Kennwort."
+          "mismatched_password": "Die Passwörter stimmen nicht überein.",
+          "enter_password": "Bitte gebe einen Passcode ein.",
+          "confirm_password": "Bitte bestätige deinen Passcode."
         },
         "confirm_password": {
           "label": "Vergewisse dich, dass du es richtig eingegeben hast:"
@@ -302,17 +302,17 @@
     "unlock": {
       "unlock_error": {
         "link": "Zurücksetzen und neuen Account erstellen",
-        "help": "Deine Kontodaten werden mit deinem Entsperrkennwort verschlüsselt. Wenn du dein Entsperrkennwort wirklich vergessen hast, musst du dein Lightning-Konto zurücksetzen und erneut hinzufügen."
+        "help": "Deine Kontodaten werden mit deinem Freischalt-Passcode verschlüsselt. Wenn du deinen Freischaltcode wirklich vergessen hast, musst du dein Lightning Account zurücksetzen und erneut hinzufügen."
       },
       "errors": {
-        "invalid_password": "Ungültiges Kennwort"
+        "invalid_password": "Ungültiger Passcode"
       },
       "unlock_to_continue": "Freigeben zum Fortfahren",
       "help_contact": {
         "part1": "Brauchst du Hilfe? Kontaktiere uns",
         "part2": "Alby-Unterstützung"
       },
-      "unlock_password": "Dein Entsperrkennwort"
+      "unlock_password": "Ihr Entsperr-Passwort"
     },
     "settings": {
       "nostr": {
@@ -347,21 +347,21 @@
       "title": "Einstellungen",
       "change_password": {
         "choose_password": {
-          "label": "Gib ein neues Entsperrkennwort ein:"
+          "label": "Gebe einen neuen Passcode zum Entsperren ein:"
         },
         "submit": {
           "label": "Ändern"
         },
         "errors": {
-          "enter_password": "Bitte gib ein neues Entsperrkennwort ein.",
-          "confirm_password": "Bitte bestätige dein Kennwort.",
-          "mismatched_password": "Kennwörter stimmen nicht überein."
+          "enter_password": "Bitte gebe einen neuen Passcode zum Entsperren ein.",
+          "confirm_password": "Bitte bestätige dein Passcode.",
+          "mismatched_password": "Die Passwörter stimmen nicht überein."
         },
-        "success": "Kennwort erfolgreich geändert",
-        "title": "Entsperrkennwort ändern",
-        "screen_reader": "Entsperrkennwort ändern",
+        "success": "Passcode erfolgreich geändert",
+        "title": "Passcode zum Entsperren ändern",
+        "screen_reader": "Passcode zum Entsperren ändern",
         "confirm_password": {
-          "label": "Neues Kennwort bestätigen:"
+          "label": "Bestätige den neuen Passcode:"
         }
       },
       "theme": {
