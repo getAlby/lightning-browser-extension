@@ -1,5 +1,6 @@
 import type { MessageReset } from "~/types";
 
+import db from "../../db";
 import state from "../../state";
 
 const reset = async (message: MessageReset) => {
@@ -11,6 +12,7 @@ const reset = async (message: MessageReset) => {
     currentAccountId: null,
   });
   await state.getState().saveToStorage();
+  await db.clearAllTables();
 
   return { data: { reset: true } };
 };

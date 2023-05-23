@@ -86,6 +86,21 @@ export class DB extends Dexie {
     return true;
   }
 
+  async clearAllTables() {
+    await this.allowances.clear();
+    await this.payments.clear();
+    await this.blocklist.clear();
+    await this.permissions.clear();
+
+    await browser.storage.local.set({
+      allowances: null,
+      payments: null,
+      blocklist: null,
+      permissions: null,
+    });
+    return true;
+  }
+
   // Loads the data from the browser.storage and adds the data to the IndexedDB.
   // This is needed because the IndexedDB is not necessarily persistent,
   // BUT maybe there are already entries in the IndexedDB (that depends on the browser).
