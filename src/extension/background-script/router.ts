@@ -32,7 +32,7 @@ const routes = {
   signMessage: ln.signMessage,
   makeInvoice: ln.makeInvoice,
   connectPeer: ln.connectPeer,
-  getPayments: payments.all,
+  getPayments: payments.listByAccount,
   getPaymentsByAccount: payments.listByAccount,
   accountInfo: accounts.info,
   accountDecryptedDetails: accounts.decryptedDetails,

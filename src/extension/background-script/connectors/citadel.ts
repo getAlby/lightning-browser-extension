@@ -7,6 +7,7 @@ import Connector, {
   GetBalanceResponse,
   GetInfoResponse,
   GetInvoicesResponse,
+  GetTransactionsResponse,
   KeysendArgs,
   MakeInvoiceArgs,
   MakeInvoiceResponse,
@@ -77,6 +78,14 @@ class CitadelConnector implements Connector {
     throw new Error(
       `${this.constructor.name}: "getInvoices" is not yet supported. Contact us if you need it.`
     );
+  }
+
+  // @Todo: implement function call
+  async getTransactions(): Promise<GetTransactionsResponse> {
+    console.error(
+      `${this.constructor.name} has not implementation for getTransactions yet`
+    );
+    throw new Error("Not yet implemented with the currently used connector.");
   }
 
   // not yet implemented

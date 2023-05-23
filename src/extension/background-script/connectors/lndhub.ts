@@ -15,10 +15,12 @@ import Connector, {
   CheckPaymentArgs,
   CheckPaymentResponse,
   ConnectorInvoice,
+  ConnectorTransaction,
   ConnectPeerResponse,
   GetBalanceResponse,
   GetInfoResponse,
   GetInvoicesResponse,
+  GetTransactionsResponse,
   KeysendArgs,
   MakeInvoiceArgs,
   MakeInvoiceResponse,
@@ -119,6 +121,39 @@ export default class LndHub implements Connector {
     return {
       data: {
         invoices,
+      },
+    };
+  }
+
+  async getTransactions(): Promise<GetTransactionsResponse> {
+    // this connector endpoint has a fixed result set of 100 entries
+    const data = await this.request<
+      {
+        r_hash: string;
+        payment_hash: string;
+        payment_preimage: string;
+        value: number;
+        type: string;
+        fee: number;
+        timestamp: number;
+        memo: string;
+        keysend: boolean;
+        custom_records: Record<number, number>;
+      }[]
+    >("GET", "/gettxs", undefined);
+
+    const transactions: ConnectorTransaction[] = data.map(
+      (p): ConnectorTransaction => ({
+        r_hash: p.r_hash,
+        payment_preimage: p.payment_preimage,
+        memo: p.memo,
+        value: p.value,
+      })
+    );
+
+    return {
+      data: {
+        transactions,
       },
     };
   }

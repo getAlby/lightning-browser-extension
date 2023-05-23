@@ -26,6 +26,14 @@ export interface ConnectorInvoice {
   type: "received";
 }
 
+// @Todo: extend missing properties accordingly
+export interface ConnectorTransaction {
+  r_hash: string;
+  memo: string;
+  value: number;
+  payment_preimage: string;
+}
+
 export interface MakeInvoiceArgs {
   amount: string | number;
   memo: string;
@@ -52,6 +60,12 @@ export type GetBalanceResponse = {
 export type GetInvoicesResponse = {
   data: {
     invoices: ConnectorInvoice[];
+  };
+};
+
+export type GetTransactionsResponse = {
+  data: {
+    transactions: ConnectorTransaction[];
   };
 };
 
@@ -115,6 +129,7 @@ export default interface Connector {
   getInfo(): Promise<GetInfoResponse>;
   getBalance(): Promise<GetBalanceResponse>;
   getInvoices(): Promise<GetInvoicesResponse>;
+  getTransactions(): Promise<GetTransactionsResponse>;
   makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse>;
   sendPayment(args: SendPaymentArgs): Promise<SendPaymentResponse>;
   keysend(args: KeysendArgs): Promise<SendPaymentResponse>;

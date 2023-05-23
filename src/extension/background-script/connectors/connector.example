@@ -57,6 +57,14 @@ class ConnectorExample implements Connector {
   makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse> {
     // Add your own implementation.
   }
+
+  getInvoices(): Promise<GetInvoicesResponse> {
+    // Add your own implementation.
+  }
+
+  getTransactions(): Promise<GetTransactionsResponse> {
+    // Add your own implementation.
+  }
 }
 
 export default ConnectorExample;

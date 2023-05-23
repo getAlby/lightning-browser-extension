@@ -13,6 +13,7 @@ import Connector, {
   GetBalanceResponse,
   GetInfoResponse,
   GetInvoicesResponse,
+  GetTransactionsResponse,
   KeysendArgs,
   MakeInvoiceArgs,
   MakeInvoiceResponse,
@@ -210,6 +211,14 @@ export default class Commando implements Connector {
           },
         };
       });
+  }
+
+  // @Todo: implement function call
+  async getTransactions(): Promise<GetTransactionsResponse> {
+    console.error(
+      `${this.constructor.name} has not implementation for getTransactions yet`
+    );
+    throw new Error("Not yet implemented with the currently used connector.");
   }
 
   async getInfo(): Promise<GetInfoResponse> {
