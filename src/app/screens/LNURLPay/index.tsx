@@ -49,6 +49,7 @@ const Dd = ({ children }: { children: React.ReactNode }) => (
 function LNURLPay() {
   const navState = useNavigationState();
   const details = navState.args?.lnurlDetails as LNURLPayServiceResponse;
+
   const {
     isLoading: isLoadingSettings,
     settings,
@@ -67,6 +68,13 @@ function LNURLPay() {
       Math.floor(+details?.minSendable / 1000).toString()) ||
       ""
   );
+
+  // amountMax for the field should be the lower one of either account.balance or details.maxSendable
+  const amountMax = Math.min(
+    Math.floor(+details.maxSendable / 1000),
+    auth?.account?.balance || 0
+  );
+  const amountExceeded = +valueSat > (auth?.account?.balance || 0);
 
   const [showMoreFields, setShowMoreFields] = useState(false);
   const [fiatValue, setFiatValue] = useState("");
@@ -440,13 +448,14 @@ function LNURLPay() {
                           id="amount"
                           label={t("amount.label")}
                           min={Math.floor(+details.minSendable / 1000)}
-                          max={Math.floor(+details.maxSendable / 1000)}
+                          max={amountMax}
                           value={valueSat}
                           onChange={(e) => setValueSat(e.target.value)}
                           fiatValue={fiatValue}
                           hint={`${tCommon("balance")}: ${
                             auth?.balancesDecorated?.accountBalance
                           }`}
+                          amountExceeded={amountExceeded}
                         />
                         <SatButtons
                           min={Math.floor(+details.minSendable / 1000)}
@@ -518,7 +527,7 @@ function LNURLPay() {
                         isFocused={false}
                         label={tCommon("actions.confirm")}
                         loading={loadingConfirm}
-                        disabled={loadingConfirm || !valueSat}
+                        disabled={loadingConfirm || !valueSat || amountExceeded}
                         onCancel={reject}
                       />
                     </div>
