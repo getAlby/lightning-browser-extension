@@ -3,7 +3,7 @@
     "welcome": {
       "set_password": {
         "title": "Ange ett lösenord för upplåsning",
-        "description": "Ditt Lightning-konto är krypterat med ett lösenord för upplåsning. Glöm inte detta lösenord! Du behöver lösenordet för att kunna låsa upp Alby-tillägget (i denna webbläsare).",
+        "description": "Detta lösenord låter dig låsa upp Alby på den här enheten. Det kan inte återställas, men kan ändras senare.",
         "choose_password": {
           "label": "Välj ett lösenord för upplåsning:"
         },
@@ -320,7 +320,9 @@
       "default_view": {
         "recent_transactions": "Senaste Transaktioner",
         "is_blocked_hint": "Alby är för tillfället avstängt hos {{host}}",
-        "block_removed": "Aktiverade {{host}}. Ladda om webbplatsen."
+        "block_removed": "Aktiverade {{host}}. Ladda om webbplatsen.",
+        "no_transactions_out": "Inga transaktioner gjorda med Alby ännu.",
+        "no_transactions_in": "Inga transaktioner har tagits emot med detta konto ännu."
       }
     },
     "accounts": {
