@@ -29,15 +29,17 @@ function Keysend() {
   const navState = useNavigationState();
   const navigate = useNavigate();
   const auth = useAccount();
-  const [amountSat, setAmountSat] = useState(navState.args?.amount || "");
-  const customRecords = navState.args?.customRecords;
-  const destination = navState.args?.destination as string;
+  const [amountSat, setAmountSat] = useState(navState?.args?.amount || "");
+  const customRecords = navState?.args?.customRecords;
+  const destination = navState?.args?.destination as string;
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [fiatAmount, setFiatAmount] = useState("");
 
   const { t } = useTranslation("translation", { keyPrefix: "keysend" });
   const { t: tCommon } = useTranslation("common");
+
+  const amountExceeded = +amountSat > (auth?.account?.balance || 0);
 
   useEffect(() => {
     (async () => {
@@ -123,6 +125,10 @@ function Keysend() {
                     onChange={(e) => setAmountSat(e.target.value)}
                     value={amountSat}
                     fiatValue={fiatAmount}
+                    hint={`${tCommon("balance")}: ${
+                      auth?.balancesDecorated?.accountBalance
+                    }`}
+                    amountExceeded={amountExceeded}
                   />
                   <SatButtons onClick={setAmountSat} />
                 </div>
