@@ -69,11 +69,6 @@ function LNURLPay() {
       ""
   );
 
-  // amountMax for the field should be the lower one of either account.balance or details.maxSendable
-  const amountMax = Math.min(
-    Math.floor(+details.maxSendable / 1000),
-    auth?.account?.balance || 0
-  );
   const amountExceeded = +valueSat > (auth?.account?.balance || 0);
 
   const [showMoreFields, setShowMoreFields] = useState(false);
@@ -448,7 +443,7 @@ function LNURLPay() {
                           id="amount"
                           label={t("amount.label")}
                           min={Math.floor(+details.minSendable / 1000)}
-                          max={amountMax}
+                          max={Math.floor(+details.maxSendable / 1000)}
                           value={valueSat}
                           onChange={(e) => setValueSat(e.target.value)}
                           fiatValue={fiatValue}
