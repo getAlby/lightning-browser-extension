@@ -77,10 +77,11 @@
           }
         },
         "optional_lightning_note": {
-          "part1": "Your Alby Account also comes with an optional",
+          "part1": "Your Alby Account also comes with a",
           "part2": "lightning address",
           "part3": ". This is a simple way for anyone to send you bitcoin on the lightning network.",
-          "part4": "learn more"
+          "part4": "learn more",
+          "footer": "A lightning address has already been generated for you. You can change it at any time from your account dashboard."
         },
         "optional_lightning_address": {
           "label": "Choose your Lightning Address (optional)",

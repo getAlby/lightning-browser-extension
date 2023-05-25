@@ -3,11 +3,13 @@ import TextField from "@components/form/TextField";
 import LoginFailedToast from "@components/toasts/LoginFailedToast";
 import Base64 from "crypto-js/enc-base64";
 import hmacSHA256 from "crypto-js/hmac-sha256";
+import Haikunator from "haikunator";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import PasswordForm from "~/app/components/PasswordForm";
+import { classNames } from "~/app/utils";
 import msg from "~/common/lib/msg";
 
 import logo from "/static/assets/icons/alby.png";
@@ -43,6 +45,12 @@ export default function AlbyWallet({ variant }: Props) {
   });
   const { t: tCommon } = useTranslation("common");
   const [formData, setFormData] = useState(initialFormData);
+  const [generatedLightningAddress] = useState(
+    new Haikunator().haikunate({
+      delimiter: "",
+      tokenLength: 3,
+    })
+  );
 
   function signup(event: React.FormEvent<HTMLFormElement>) {
     setLoading(true);
@@ -58,7 +66,9 @@ export default function AlbyWallet({ variant }: Props) {
     const body = JSON.stringify({
       email: formData.email,
       password: formData.password,
-      lightning_addresses_attributes: [{ address: formData.lnAddress }], // address must be provided as array, in theory we support multiple addresses per account
+      lightning_addresses_attributes: [
+        { address: formData.lnAddress || generatedLightningAddress },
+      ], // address must be provided as array, in theory we support multiple addresses per account
     });
     headers.append("X-TS", timestamp.toString());
     const macBody = hmacSHA256(body, HMAC_VERIFY_HEADER_KEY).toString(Base64);
@@ -242,11 +252,20 @@ export default function AlbyWallet({ variant }: Props) {
               type="text"
               pattern="[a-zA-Z0-9-]{4,}"
               title={t("pre_connect.optional_lightning_address.title")}
+              placeholder={generatedLightningAddress}
               onChange={(e) => {
                 const lnAddress = e.target.value.trim().split("@")[0]; // in case somebody enters a full address we simple remove the domain
                 setFormData({ ...formData, lnAddress });
               }}
             />
+            <p
+              className={classNames(
+                "mt-2 text-gray-700 dark:text-neutral-400 text-sm",
+                !!formData.lnAddress && "hidden"
+              )}
+            >
+              {t("pre_connect.optional_lightning_note.footer")}
+            </p>
           </div>
         </div>
       )}
