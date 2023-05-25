@@ -70,6 +70,7 @@ function LNURLPay() {
   );
 
   const amountExceeded = +valueSat > (auth?.account?.balance || 0);
+  const maxExceeded = +valueSat > Math.floor(+details.maxSendable / 1000);
 
   const [showMoreFields, setShowMoreFields] = useState(false);
   const [fiatValue, setFiatValue] = useState("");
@@ -444,6 +445,7 @@ function LNURLPay() {
                           label={t("amount.label")}
                           min={Math.floor(+details.minSendable / 1000)}
                           max={Math.floor(+details.maxSendable / 1000)}
+                          maxExceeded={maxExceeded}
                           value={valueSat}
                           onChange={(e) => setValueSat(e.target.value)}
                           fiatValue={fiatValue}

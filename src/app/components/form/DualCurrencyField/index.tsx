@@ -11,6 +11,7 @@ export type Props = {
   label: string;
   hint?: string;
   amountExceeded?: boolean;
+  maxExceeded?: boolean;
 };
 
 export default function DualCurrencyField({
@@ -34,6 +35,7 @@ export default function DualCurrencyField({
   endAdornment,
   hint,
   amountExceeded,
+  maxExceeded,
 }: React.InputHTMLAttributes<HTMLInputElement> & Props) {
   const { t: tCommon } = useTranslation("common");
   const inputEl = useRef<HTMLInputElement>(null);
@@ -89,7 +91,12 @@ export default function DualCurrencyField({
           {label}
         </label>
         {(min || max) && (
-          <span className="text-xs text-gray-700 dark:text-neutral-400">
+          <span
+            className={classNames(
+              "text-xs text-gray-700 dark:text-neutral-400",
+              !!max && !!maxExceeded && "text-red-500"
+            )}
+          >
             <RangeLabel min={min} max={max} /> {tCommon("sats_other")}
           </span>
         )}
