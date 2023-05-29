@@ -297,11 +297,6 @@
         "enable_now": "Ativar"
       },
       "recent_transactions": "Transações recentes",
-      "transaction_list": {
-        "tabs": {
-          "outgoing": "Enviadas"
-        }
-      },
       "allowance_view": {
         "recent_transactions": "Transações recentes",
         "allowance": "Limite de gastos",
@@ -312,7 +307,9 @@
         "recent_transactions": "Transações recentes",
         "is_blocked_hint": "A Alby está desativada em {{host}}",
         "block_removed": "{{host}} ativado. Por favor, recarregue o site.",
-        "no_transactions_out": "Você ainda não realizou transações com a Alby."
+        "no_outgoing_transactions": "Você ainda não realizou transações usando esta conta.",
+        "all_transactions_link": "Ver todas as transações",
+        "no_incoming_transactions": "Você ainda não recebeu transações nesta conta."
       }
     },
     "accounts": {
@@ -763,7 +760,8 @@
       "start9": {
         "name": "Start9"
       },
-      "description": "Escolha com qual aplicativo {{name}} você gostaria de se conectar"
+      "description": "Escolha com qual aplicativo {{name}} você gostaria de se conectar",
+      "title": "Conectar em {{name}}"
     }
   },
   "common": {
@@ -824,7 +822,8 @@
       "lessThan": "< {{max}}",
       "greaterThan": "> {{min}}"
     },
-    "balance": "Saldo disponível"
+    "balance": "Saldo disponível",
+    "wallet": "Carteira"
   },
   "components": {
     "allowance_menu": {
@@ -920,6 +919,12 @@
       },
       "heading": "Como você deseja se conectar à rede TOR?",
       "download": "Baixar"
+    },
+    "transaction_list": {
+      "tabs": {
+        "outgoing": "Enviadas",
+        "incoming": "Recebidas"
+      }
     }
   },
   "permissions": {
