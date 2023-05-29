@@ -311,16 +311,13 @@
         "is_blocked_hint": "Alby 目前在 {{host}} 上被禁用",
         "recent_transactions": "近期交易",
         "block_removed": "启用了{{host}}。请重新加载网站。",
-        "no_transactions_in": "该帐户尚未收到任何交易。"
+        "all_transactions_link": "查看所有交易",
+        "no_incoming_transactions": "此帐户尚无传入交易。",
+        "no_outgoing_transactions": "此帐户尚无传出交易。"
       },
       "actions": {
         "send_satoshis": "⚡️ 发送聪 ⚡️",
         "enable_now": "立即启用"
-      },
-      "transaction_list": {
-        "tabs": {
-          "incoming": "传入"
-        }
       }
     },
     "accounts": {
@@ -767,7 +764,11 @@
     },
     "transactions": {
       "list_empty": "尚无交易。",
-      "title": "交易"
+      "title": "交易",
+      "description": {
+        "incoming": "此帐户的传入交易",
+        "outgoing": "此帐户的传出交易"
+      }
     },
     "distributions": {
       "title": "连接 {{name}}",
@@ -850,7 +851,8 @@
       "lessThan": "< {{max}}",
       "greaterThan": ">{{min}}"
     },
-    "balance": "余额"
+    "balance": "余额",
+    "wallet": "钱包"
   },
   "components": {
     "toasts": {
@@ -950,6 +952,12 @@
       "companion": {
         "title": "配套应用",
         "description": "将浏览器连接到 TOR 网络的轻量级应用程序。"
+      }
+    },
+    "transaction_list": {
+      "tabs": {
+        "incoming": "传入",
+        "outgoing": "外发"
       }
     }
   },
