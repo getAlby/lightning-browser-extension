@@ -414,7 +414,6 @@
         "is_blocked_hint": "Alby ist derzeit auf dem {{host}} deaktiviert",
         "recent_transactions": "Jüngste Transaktionen",
         "block_removed": "{{host}} aktiviert. Bitte lade die Website neu.",
-        "no_transactions_out": "Bisher keine Transaktion mit Alby durchgeführt.",
         "no_transactions_in": "Bisher keine Transaktion mit diesem Account erhalten."
       },
       "allowance_view": {
@@ -429,7 +428,6 @@
       },
       "transaction_list": {
         "tabs": {
-          "outgoing": "Ausgehend",
           "incoming": "Eingehend"
         }
       },
@@ -770,7 +768,6 @@
     },
     "transactions": {
       "title": "Transaktionen",
-      "description": "Ausgehende Transaktionen über alle deine Konten",
       "list_empty": "Noch keine Transaktionen verfügbar."
     },
     "distributions": {
@@ -955,7 +952,6 @@
       "lessThan": "< {{max}}",
       "greaterThan": "> {{min}}"
     },
-    "transactions": "Transaktionen",
     "balance": "Bilanz"
   },
   "permissions": {

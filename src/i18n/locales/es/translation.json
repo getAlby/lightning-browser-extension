@@ -298,7 +298,6 @@
       "recent_transactions": "Transacciones Recientes",
       "transaction_list": {
         "tabs": {
-          "outgoing": "Saliente",
           "incoming": "Entrante"
         }
       },
@@ -761,7 +760,6 @@
     },
     "transactions": {
       "title": "Transacciones",
-      "description": "Transacciones salientes en todas sus cuentas",
       "list_empty": "Todavía no hay transacciones disponibles."
     }
   },
@@ -823,7 +821,6 @@
       "lessThan": "menor que {{max}}",
       "greaterThan": "mayor que {{min}}"
     },
-    "transactions": "Transacciones",
     "balance": "Balance"
   },
   "components": {

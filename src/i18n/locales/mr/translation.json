@@ -342,7 +342,6 @@
       "recent_transactions": "अलीकडचे व्यवहार",
       "transaction_list": {
         "tabs": {
-          "outgoing": "बाहेर जाणरे",
           "incoming": "येणारे"
         }
       },
@@ -734,7 +733,6 @@
     },
     "transactions": {
       "title": "व्यवहार",
-      "description": "तुमच्या सर्व खात्यांमधील आउटगोइंग व्यवहार",
       "list_empty": "अद्याप कोणतेही व्यवहार उपलब्ध नाहीत."
     }
   },
@@ -747,7 +745,6 @@
     "accounts": "खाते",
     "discover": "शोध",
     "connected_sites": "",
-    "transactions": "व्यवहार",
     "sats_one": "sat",
     "sats_other": "sats",
     "loading": "लोड होत आहे",

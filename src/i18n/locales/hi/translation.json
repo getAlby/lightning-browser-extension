@@ -621,7 +621,6 @@
     },
     "transactions": {
       "title": "लेन-देन",
-      "description": "आपके सभी खातों में जावक लेन-देन",
       "list_empty": "अभी तक कोई लेन-देन उपलब्ध नहीं है।"
     }
   },
@@ -634,7 +633,6 @@
     "settings": "सेटिंग्स",
     "accounts": "खाते",
     "discover": "खोजें",
-    "transactions": "लेन-देन",
     "sats_one": "sat",
     "sats_other": "sats",
     "loading": "लोड हो रहा है",

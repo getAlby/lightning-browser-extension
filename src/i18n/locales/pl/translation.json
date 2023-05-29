@@ -342,7 +342,6 @@
       "recent_transactions": "Ostatnie transakcje",
       "transaction_list": {
         "tabs": {
-          "outgoing": "Wychodzące",
           "incoming": "Przychodzące"
         }
       },
@@ -744,7 +743,6 @@
       "view_details": "Pokaż szczegóły"
     },
     "transactions": {
-      "description": "Transakcje wychodzące ze wszystkich Twoich kont",
       "title": "Transakcje",
       "list_empty": "Brak dostępnych transakcji."
     }
@@ -805,8 +803,7 @@
       "between": "pomiędzy {{min}} a {{max}}",
       "lessThan": "< {{max}}",
       "greaterThan": "> {{min}}"
-    },
-    "transactions": "Transakcje"
+    }
   },
   "components": {
     "allowance_menu": {

@@ -283,7 +283,6 @@
       "recent_transactions": "Nedávné transakce",
       "transaction_list": {
         "tabs": {
-          "outgoing": "Odchozí",
           "incoming": "Příchozí"
         }
       },

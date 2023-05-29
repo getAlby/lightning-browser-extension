@@ -388,7 +388,6 @@
       "recent_transactions": "تراکنش های اخیر",
       "transaction_list": {
         "tabs": {
-          "outgoing": "پرداختی",
           "incoming": "دریافتی"
         }
       },
@@ -402,7 +401,6 @@
         "recent_transactions": "تراکنش های اخیر",
         "is_blocked_hint": "البی در حال حاضر در {{host}} غیرفعال شده است",
         "block_removed": "{{host}} فعال شد. لطفا دوباره بارگیری کنید.",
-        "no_transactions_out": "هنوز تراکنشی با البی انجام نشده است.",
         "no_transactions_in": "هنوز هیچ تراکنشی با این حساب کاربری انجام نشده است."
       }
     },
@@ -794,7 +792,6 @@
     },
     "transactions": {
       "title": "تراکنش ها",
-      "description": "تراکنش خروجی روی همه حساب های کاربری شما",
       "list_empty": "هنوز هیچ تراکنشی موجود نیست."
     }
   },
@@ -808,7 +805,6 @@
     "accounts": "حساب های کاربری",
     "discover": "کشف کنید",
     "connected_sites": "سایت های متصل",
-    "transactions": "تراکنش ها",
     "sats_one": "ساتوشی",
     "sats_other": "ساتوشی",
     "loading": "در حال بارگیری",
