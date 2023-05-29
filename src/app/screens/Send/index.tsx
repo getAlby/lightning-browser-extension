@@ -159,7 +159,7 @@ function Send() {
         title={t("title")}
         headerLeft={
           <IconButton
-            onClick={() => navigate("/")}
+            onClick={() => navigate(-1)}
             icon={<CaretLeftIcon className="w-4 h-4" />}
           />
         }
