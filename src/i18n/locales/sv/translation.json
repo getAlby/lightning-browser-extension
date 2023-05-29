@@ -307,7 +307,6 @@
       "recent_transactions": "Senaste Transaktioner",
       "transaction_list": {
         "tabs": {
-          "outgoing": "Utgående",
           "incoming": "Inkommande"
         }
       },
@@ -321,7 +320,6 @@
         "recent_transactions": "Senaste Transaktioner",
         "is_blocked_hint": "Alby är för tillfället avstängt hos {{host}}",
         "block_removed": "Aktiverade {{host}}. Ladda om webbplatsen.",
-        "no_transactions_out": "Inga transaktioner gjorda med Alby ännu.",
         "no_transactions_in": "Inga transaktioner har tagits emot med detta konto ännu."
       }
     },
@@ -772,7 +770,6 @@
     },
     "transactions": {
       "title": "Transaktion",
-      "description": "Utgående transaktioner på alla dina konton",
       "list_empty": "Inga transaktioner tillgängliga ännu."
     },
     "distributions": {
@@ -853,7 +850,6 @@
     "advanced": "Avancerat",
     "accounts": "Konton",
     "discover": "Upptäcka",
-    "transactions": "Transaktion",
     "success_message": "{{amount}}{{fiatAmount}} skickat till {{destination}}",
     "response": "Svar",
     "confirm_password": "Bekräfta Lösenord",

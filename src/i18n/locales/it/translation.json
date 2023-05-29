@@ -283,7 +283,6 @@
       "recent_transactions": "Transazioni recenti",
       "transaction_list": {
         "tabs": {
-          "outgoing": "Uscite",
           "incoming": "Entrate"
         }
       },

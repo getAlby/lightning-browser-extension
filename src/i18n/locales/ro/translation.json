@@ -342,7 +342,6 @@
       "recent_transactions": "Tranzactii recente",
       "transaction_list": {
         "tabs": {
-          "outgoing": "Trimitere",
           "incoming": "Primire"
         }
       },

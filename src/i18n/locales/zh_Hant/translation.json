@@ -366,7 +366,6 @@
       "recent_transactions": "近期交易",
       "transaction_list": {
         "tabs": {
-          "outgoing": "外發",
           "incoming": "傳入"
         }
       },
@@ -380,7 +379,6 @@
         "recent_transactions": "近期交易",
         "is_blocked_hint": "Alby目前在 {{host}} 上被禁用",
         "block_removed": "已啟用 {{host}}。請重新載入網站。",
-        "no_transactions_out": "尚未用 Alby 執行任何交易。",
         "no_transactions_in": "該帳戶尚未收到任何交易。"
       }
     },
@@ -772,7 +770,6 @@
     },
     "transactions": {
       "title": "交易",
-      "description": "你所有帳戶的傳出交易",
       "list_empty": "尚無可用交易。"
     },
     "distributions": {
@@ -851,7 +848,6 @@
       "connection_failed": "連接失敗",
       "payment_failed": "付款失敗"
     },
-    "transactions": "交易",
     "range": {
       "lessThan": "< {{max}}",
       "between": "在{{min}}和{{max}}之間",

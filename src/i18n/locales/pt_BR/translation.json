@@ -299,7 +299,6 @@
       "recent_transactions": "Transações recentes",
       "transaction_list": {
         "tabs": {
-          "incoming": "Recebidas",
           "outgoing": "Enviadas"
         }
       },
@@ -313,7 +312,6 @@
         "recent_transactions": "Transações recentes",
         "is_blocked_hint": "A Alby está desativada em {{host}}",
         "block_removed": "{{host}} ativado. Por favor, recarregue o site.",
-        "no_transactions_in": "Você ainda não recebeu transações com a Alby.",
         "no_transactions_out": "Você ainda não realizou transações com a Alby."
       }
     },
@@ -744,8 +742,7 @@
       }
     },
     "transactions": {
-      "title": "Transações",
-      "description": "Transações enviadas usando suas contas"
+      "title": "Transações"
     },
     "distributions": {
       "umbrel": {
@@ -827,7 +824,6 @@
       "lessThan": "< {{max}}",
       "greaterThan": "> {{min}}"
     },
-    "transactions": "Transações",
     "balance": "Saldo disponível"
   },
   "components": {

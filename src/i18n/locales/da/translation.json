@@ -342,7 +342,6 @@
       "recent_transactions": "Seneste transaktioner",
       "transaction_list": {
         "tabs": {
-          "outgoing": "Udgående",
           "incoming": "Indkommende"
         }
       },

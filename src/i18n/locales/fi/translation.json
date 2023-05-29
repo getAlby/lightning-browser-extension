@@ -257,7 +257,6 @@
       "recent_transactions": "Viimeaikaiset tapahtumat",
       "transaction_list": {
         "tabs": {
-          "outgoing": "Lähtevä",
           "incoming": "Saapuva"
         }
       },
