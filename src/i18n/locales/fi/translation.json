@@ -255,11 +255,6 @@
         "enable_now": "Ota nyt käyttöön"
       },
       "recent_transactions": "Viimeaikaiset tapahtumat",
-      "transaction_list": {
-        "tabs": {
-          "incoming": "Saapuva"
-        }
-      },
       "allowance_view": {
         "recent_transactions": "Viimeaikaiset tapahtumat",
         "allowance": "Korvaus",

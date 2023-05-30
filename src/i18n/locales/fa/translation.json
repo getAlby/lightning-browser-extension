@@ -386,11 +386,6 @@
         "enable_now": "اکنون فعال کن"
       },
       "recent_transactions": "تراکنش های اخیر",
-      "transaction_list": {
-        "tabs": {
-          "incoming": "دریافتی"
-        }
-      },
       "allowance_view": {
         "recent_transactions": "تراکنش های اخیر",
         "allowance": "جیره",
@@ -400,8 +395,7 @@
       "default_view": {
         "recent_transactions": "تراکنش های اخیر",
         "is_blocked_hint": "البی در حال حاضر در {{host}} غیرفعال شده است",
-        "block_removed": "{{host}} فعال شد. لطفا دوباره بارگیری کنید.",
-        "no_transactions_in": "هنوز هیچ تراکنشی با این حساب کاربری انجام نشده است."
+        "block_removed": "{{host}} فعال شد. لطفا دوباره بارگیری کنید."
       }
     },
     "accounts": {

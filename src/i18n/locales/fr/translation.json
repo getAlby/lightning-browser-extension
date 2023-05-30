@@ -340,11 +340,6 @@
         "enable_now": "Activer maintenant"
       },
       "recent_transactions": "transactions récentes",
-      "transaction_list": {
-        "tabs": {
-          "incoming": "Entrant"
-        }
-      },
       "allowance_view": {
         "recent_transactions": "transactions récentes",
         "allowance": "Allocation",

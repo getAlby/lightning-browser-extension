@@ -281,11 +281,6 @@
         "enable_now": "Attiva ora"
       },
       "recent_transactions": "Transazioni recenti",
-      "transaction_list": {
-        "tabs": {
-          "incoming": "Entrate"
-        }
-      },
       "allowance_view": {
         "recent_transactions": "Transazioni recenti",
         "allowance": "Margine",
