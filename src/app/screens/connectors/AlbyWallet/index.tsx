@@ -48,7 +48,7 @@ export default function AlbyWallet({ variant }: Props) {
   const [generatedLightningAddress] = useState(
     new Haikunator().haikunate({
       delimiter: "",
-      tokenLength: 3,
+      tokenLength: 2,
     })
   );
 
