@@ -125,7 +125,7 @@ function BackupSecretKey() {
               {/* TODO: consider making CopyButton component */}
               <Button
                 outline
-                icon={<CopyIcon className="w-6 h-6 mr-2 text-orange-400" />}
+                icon={<CopyIcon className="w-6 h-6 mr-2" />}
                 label={publicKeyCopyLabel}
                 onClick={async () => {
                   try {

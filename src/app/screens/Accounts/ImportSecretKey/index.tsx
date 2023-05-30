@@ -110,7 +110,7 @@ function ImportSecretKey() {
             <>
               <Button
                 outline
-                icon={<CopyIcon className="w-6 h-6 mr-2 text-orange-400" />}
+                icon={<CopyIcon className="w-6 h-6 mr-2" />}
                 label={importPasteLabel}
                 onClick={async () => {
                   try {
