@@ -137,7 +137,10 @@ function AccountDetail() {
   }
 
   async function removeAccount({ id, name }: AccountAction) {
-    if (window.confirm(t("remove.confirm", { name }))) {
+    if (
+      window.prompt(t("remove.confirm", { name }))?.toLowerCase() ==
+      accountName.toLowerCase()
+    ) {
       let nextAccountId;
       let accountIds = Object.keys(accounts);
       if (auth.account?.id === id && accountIds.length > 1) {
@@ -154,6 +157,23 @@ function AccountDetail() {
       } else {
         window.close();
       }
+    } else {
+      toast.error(t("remove.error"));
+    }
+  }
+  async function removeMnemonic({ id, name }: AccountAction) {
+    if (
+      window.prompt(t("remove_secretkey.confirm", { name }))?.toLowerCase() ==
+      accountName.toLowerCase()
+    ) {
+      await msg.request("setMnemonic", {
+        id,
+        mnemonic: null,
+      });
+      setMnemonic("");
+      toast.success(t("remove_secretkey.success"));
+    } else {
+      toast.error(t("remove.error"));
     }
   }
 
@@ -448,6 +468,25 @@ function AccountDetail() {
             <div className="flex-grow border-t border-gray-300 dark:border-gray-700"></div>
           </div>
           <div className="shadow bg-white sm:rounded-md sm:overflow-hidden mb-5 px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">
+            {mnemonic && (
+              <Setting
+                title={t("remove_secretkey.title")}
+                subtitle={t("remove_secretkey.subtitle")}
+              >
+                <div className="w-64">
+                  <Button
+                    onClick={() => {
+                      removeMnemonic({
+                        id: account.id,
+                        name: account.name,
+                      });
+                    }}
+                    label={t("actions.remove_secretkey")}
+                    fullWidth
+                  />
+                </div>
+              </Setting>
+            )}
             <Setting title={t("remove.title")} subtitle={t("remove.subtitle")}>
               <div className="w-64">
                 <Button

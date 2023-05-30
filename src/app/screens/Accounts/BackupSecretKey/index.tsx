@@ -16,8 +16,6 @@ import OrdinalsIcon from "~/app/icons/OrdinalsIcon";
 import { saveMnemonic } from "~/app/utils/saveMnemonic";
 import msg from "~/common/lib/msg";
 
-const debug = process.env.NODE_ENV === "development";
-
 function BackupSecretKey() {
   const [mnemonic, setMnemonic] = useState<string | undefined>();
   const account = useAccount();
@@ -95,7 +93,7 @@ function BackupSecretKey() {
   ) : (
     <div>
       <Container>
-        <div className="mt-12 shadow bg-white sm:rounded-md sm:overflow-hidden p-10 divide-black/10 dark:divide-white/10 dark:bg-surface-02dp flex flex-col gap-4">
+        <div className="mt-12 shadow bg-white rounded-md p-10 divide-black/10 dark:divide-white/10 dark:bg-surface-02dp flex flex-col gap-4">
           <h1 className="font-bold text-2xl dark:text-white">
             {hasMnemonic ? t("backup.title") : t("generate.title")}
           </h1>
@@ -177,23 +175,6 @@ function BackupSecretKey() {
               label={t("backup.save")}
               primary
               onClick={backupSecretKey}
-            />
-          </div>
-        )}
-        {/* TODO: remove - only for testing */}
-        {debug && hasMnemonic && (
-          <div className="flex justify-center mt-8 mb-16">
-            <Button
-              label={"Remove Secret Key"}
-              primary
-              onClick={async () => {
-                await msg.request("setMnemonic", {
-                  id,
-                  mnemonic: null,
-                });
-                toast.success("Removed secret key");
-                history.back();
-              }}
             />
           </div>
         )}

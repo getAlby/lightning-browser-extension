@@ -496,11 +496,19 @@
         },
         "remove": {
           "title": "Remove This Account",
-          "subtitle": "All the linked allowances will be deleted. Please be certain.",
-          "confirm": "Are you sure you want to remove account: {{name}}? \nThis can not be undone. If you used this account to login to websites you might lose access to those."
+          "subtitle": "Removes all allowances, payment data and keys associated with this account.",
+          "confirm": "Are you sure you want to remove account: {{name}}? \nThis can not be undone. If you used this account to login to websites you might lose access to those.",
+          "error": "The entered account name didn't match."
+        },
+        "remove_secretkey": {
+          "title": "Remove Secret Key",
+          "subtitle": "Removes the secret key from this account.",
+          "confirm": "Please enter the name of the account to confirm the deletion of your Secret Key.",
+          "success": "Successfully removed the Secret Key."
         },
         "actions": {
           "remove_account": "Remove account",
+          "remove_secretkey": "Remove Secret Key",
           "export": "Export"
         }
       },
