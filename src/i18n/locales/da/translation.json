@@ -340,11 +340,6 @@
         "enable_now": "Aktiver nu"
       },
       "recent_transactions": "Seneste transaktioner",
-      "transaction_list": {
-        "tabs": {
-          "incoming": "Indkommende"
-        }
-      },
       "allowance_view": {
         "recent_transactions": "Seneste transaktioner",
         "allowance": "Pulje",

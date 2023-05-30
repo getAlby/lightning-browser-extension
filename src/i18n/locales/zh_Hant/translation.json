@@ -364,11 +364,6 @@
         "enable_now": "立即啟用"
       },
       "recent_transactions": "近期交易",
-      "transaction_list": {
-        "tabs": {
-          "incoming": "傳入"
-        }
-      },
       "allowance_view": {
         "recent_transactions": "近期交易",
         "allowance": "限額",
@@ -378,8 +373,7 @@
       "default_view": {
         "recent_transactions": "近期交易",
         "is_blocked_hint": "Alby目前在 {{host}} 上被禁用",
-        "block_removed": "已啟用 {{host}}。請重新載入網站。",
-        "no_transactions_in": "該帳戶尚未收到任何交易。"
+        "block_removed": "已啟用 {{host}}。請重新載入網站。"
       }
     },
     "accounts": {

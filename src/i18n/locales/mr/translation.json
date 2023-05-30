@@ -340,11 +340,6 @@
         "enable_now": "आता सुरू करा"
       },
       "recent_transactions": "अलीकडचे व्यवहार",
-      "transaction_list": {
-        "tabs": {
-          "incoming": "येणारे"
-        }
-      },
       "allowance_view": {
         "recent_transactions": "अलीकडचे व्यवहार",
         "allowance": "भत्ता",

@@ -340,11 +340,6 @@
         "enable_now": "Activeaza acum"
       },
       "recent_transactions": "Tranzactii recente",
-      "transaction_list": {
-        "tabs": {
-          "incoming": "Primire"
-        }
-      },
       "allowance_view": {
         "recent_transactions": "Tranzactii recente",
         "allowance": "Permisiuni",

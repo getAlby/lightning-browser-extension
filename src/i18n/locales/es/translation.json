@@ -296,11 +296,6 @@
         "enable_now": "Habilitar ahora"
       },
       "recent_transactions": "Transacciones Recientes",
-      "transaction_list": {
-        "tabs": {
-          "incoming": "Entrante"
-        }
-      },
       "allowance_view": {
         "recent_transactions": "Transacciones Recientes",
         "allowance": "Subsidio",
