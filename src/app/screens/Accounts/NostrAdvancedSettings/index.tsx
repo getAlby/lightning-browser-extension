@@ -156,12 +156,14 @@ function NostrAdvancedSettings() {
       >
         <Container maxWidth="sm">
           <div className="mt-12 shadow bg-white sm:rounded-md sm:overflow-hidden p-10 divide-black/10 dark:divide-white/10 dark:bg-surface-02dp flex flex-col gap-4">
-            <h1 className="font-bold text-2xl dark:text-white">
-              {t("nostr.advanced_settings.title")}
-            </h1>
-            <p className="text-gray-500 dark:text-neutral-500 -mt-4 mb-4">
-              {t("nostr.advanced_settings.description")}
-            </p>
+            <div>
+              <h1 className="font-bold text-2xl dark:text-white">
+                {t("nostr.advanced_settings.title")}
+              </h1>
+              <p className="text-gray-500 dark:text-neutral-500">
+                {t("nostr.advanced_settings.description")}
+              </p>
+            </div>
 
             {currentPrivateKey && nostrKeyOrigin !== "secret-key" ? (
               // TODO: extract to Alert component
@@ -180,73 +182,78 @@ function NostrAdvancedSettings() {
                 <p>{t("nostr.advanced_settings.can_restore")}</p>
               </div>
             ) : null}
-            <TextField
-              id="nostrPrivateKey"
-              label={t("nostr.private_key.label")}
-              type={nostrPrivateKeyVisible ? "text" : "password"}
-              value={nostrPrivateKey}
-              onChange={(event) => {
-                setNostrPrivateKey(event.target.value.trim());
-              }}
-              endAdornment={
-                <div className="flex items-center gap-1 px-2">
-                  <button
-                    type="button"
-                    tabIndex={-1}
-                    className="flex justify-center items-center h-8"
-                    onClick={() => {
-                      setNostrPrivateKeyVisible(!nostrPrivateKeyVisible);
-                    }}
-                  >
-                    {nostrPrivateKeyVisible ? (
-                      <HiddenIcon className="h-6 w-6" />
-                    ) : (
-                      <VisibleIcon className="h-6 w-6" />
-                    )}
-                  </button>
-                  <InputCopyButton value={nostrPrivateKey} className="w-6" />
-                </div>
-              }
-            />
 
-            <TextField
-              id="nostrPublicKey"
-              label={t("nostr.public_key.label")}
-              type="text"
-              value={nostrPublicKey}
-              disabled
-              endAdornment={<InputCopyButton value={nostrPublicKey} />}
-            />
-            {nostrKeyOrigin !== "secret-key" &&
-              (mnemonic || !currentPrivateKey) && (
-                <div className="mt-4">
-                  {mnemonic ? (
-                    <Button
-                      outline
-                      label={t("nostr.advanced_settings.derive")}
-                      onClick={handleDeriveNostrKeyFromSecretKey}
-                    />
-                  ) : (
-                    // TODO: extract to Alert component
-                    <div className="rounded-md font-medium p-4 text-blue-700 bg-blue-50 dark:text-blue-400 dark:bg-blue-900">
-                      <p>
-                        <Trans
-                          i18nKey={"nostr.advanced_settings.no_secret_key"}
-                          t={t}
-                          components={[
-                            // eslint-disable-next-line react/jsx-key
-                            <Link
-                              to="../secret-key/backup"
-                              relative="path"
-                              className="underline"
-                            />,
-                          ]}
-                        />
-                      </p>
-                    </div>
-                  )}
-                </div>
-              )}
+            <div>
+              <TextField
+                id="nostrPrivateKey"
+                label={t("nostr.private_key.label")}
+                type={nostrPrivateKeyVisible ? "text" : "password"}
+                value={nostrPrivateKey}
+                onChange={(event) => {
+                  setNostrPrivateKey(event.target.value.trim());
+                }}
+                endAdornment={
+                  <div className="flex items-center gap-1 px-2">
+                    <button
+                      type="button"
+                      tabIndex={-1}
+                      className="flex justify-center items-center h-8"
+                      onClick={() => {
+                        setNostrPrivateKeyVisible(!nostrPrivateKeyVisible);
+                      }}
+                    >
+                      {nostrPrivateKeyVisible ? (
+                        <HiddenIcon className="h-6 w-6" />
+                      ) : (
+                        <VisibleIcon className="h-6 w-6" />
+                      )}
+                    </button>
+                    <InputCopyButton value={nostrPrivateKey} className="w-6" />
+                  </div>
+                }
+              />
+            </div>
+
+            <div>
+              <TextField
+                id="nostrPublicKey"
+                label={t("nostr.public_key.label")}
+                type="text"
+                value={nostrPublicKey}
+                disabled
+                endAdornment={<InputCopyButton value={nostrPublicKey} />}
+              />
+              {nostrKeyOrigin !== "secret-key" &&
+                (mnemonic || !currentPrivateKey) && (
+                  <div className="mt-4">
+                    {mnemonic ? (
+                      <Button
+                        outline
+                        label={t("nostr.advanced_settings.derive")}
+                        onClick={handleDeriveNostrKeyFromSecretKey}
+                      />
+                    ) : (
+                      // TODO: extract to Alert component
+                      <div className="rounded-md font-medium p-4 text-blue-700 bg-blue-50 dark:text-blue-400 dark:bg-blue-900">
+                        <p>
+                          <Trans
+                            i18nKey={"nostr.advanced_settings.no_secret_key"}
+                            t={t}
+                            components={[
+                              // eslint-disable-next-line react/jsx-key
+                              <Link
+                                to="../secret-key/backup"
+                                relative="path"
+                                className="underline"
+                              />,
+                            ]}
+                          />
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                )}
+            </div>
           </div>
           <div className="flex justify-center mt-8 mb-16 gap-4">
             <Button label={tCommon("actions.cancel")} onClick={onCancel} />
