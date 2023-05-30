@@ -305,11 +305,6 @@
         "enable_now": "Aktivera Nu"
       },
       "recent_transactions": "Senaste Transaktioner",
-      "transaction_list": {
-        "tabs": {
-          "incoming": "Inkommande"
-        }
-      },
       "allowance_view": {
         "recent_transactions": "Senaste Transaktioner",
         "allowance": "Beloppsgräns",
@@ -320,7 +315,7 @@
         "recent_transactions": "Senaste Transaktioner",
         "is_blocked_hint": "Alby är för tillfället avstängt hos {{host}}",
         "block_removed": "Aktiverade {{host}}. Ladda om webbplatsen.",
-        "no_transactions_in": "Inga transaktioner har tagits emot med detta konto ännu."
+        "no_outgoing_transactions": "Inga utgående transaktioner för detta konto ännu."
       }
     },
     "accounts": {
