@@ -3,12 +3,9 @@ import i18n from "i18next";
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { setTheme } from "~/app/utils";
-import {
-  ACCOUNT_CURRENCIES,
-  CURRENCIES,
-  DEFAULT_SETTINGS,
-} from "~/common/constants";
+import { ACCOUNT_CURRENCIES, CURRENCIES } from "~/common/constants";
 import api from "~/common/lib/api";
+import { DEFAULT_SETTINGS } from "~/common/settings";
 import {
   getFormattedCurrency as getFormattedCurrencyUtil,
   getFormattedFiat as getFormattedFiatUtil,

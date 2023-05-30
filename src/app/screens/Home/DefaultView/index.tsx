@@ -3,100 +3,85 @@ import {
   SendIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import Button from "@components/Button";
+import Hyperlink from "@components/Hyperlink";
 import Loading from "@components/Loading";
 import TransactionsTable from "@components/TransactionsTable";
 import { Tab } from "@headlessui/react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { FC, useCallback, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import BalanceBox from "~/app/components/BalanceBox";
 import { useAccount } from "~/app/context/AccountContext";
-import { useSettings } from "~/app/context/SettingsContext";
+import { useInvoices } from "~/app/hooks/useInvoices";
+import { useTransactions } from "~/app/hooks/useTransactions";
 import { PublisherLnData } from "~/app/screens/Home/PublisherLnData";
 import { classNames } from "~/app/utils/index";
-import { convertPaymentsToTransactions } from "~/app/utils/payments";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
-import type { Battery, Transaction } from "~/types";
+import utils from "~/common/lib/utils";
+import type { Battery } from "~/types";
 
 dayjs.extend(relativeTime);
 
 export type Props = {
   lnDataFromCurrentTab?: Battery[];
-  currentUrl: URL | null;
+  currentUrl?: URL | null;
 };
 
 const DefaultView: FC<Props> = (props) => {
-  const [isLoadingTransactions, setIsLoadingTransactions] = useState(true);
-  const [transactions, setTransactions] = useState<Transaction[] | null>(null);
+  const { t } = useTranslation("translation", { keyPrefix: "home" });
+  const { t: tCommon } = useTranslation("common");
+  const { t: tComponents } = useTranslation("components");
 
-  const [isLoadingInvoices, setIsLoadingInvoices] = useState(false);
-  const [incomingTransactions, setIncomingTransactions] = useState<
-    Transaction[] | null
-  >(null);
+  const navigate = useNavigate();
+
+  const { account, balancesDecorated } = useAccount();
 
   const [isBlockedUrl, setIsBlockedUrl] = useState<boolean>(false);
 
-  const {
-    isLoading: isLoadingSettings,
-    settings,
-    getFormattedFiat,
-  } = useSettings();
+  const { transactions, isLoadingTransactions, loadTransactions } =
+    useTransactions();
 
-  const showFiat = !isLoadingSettings && settings.showFiat;
+  const { isLoadingInvoices, incomingTransactions, loadInvoices } =
+    useInvoices();
+
   const hasTransactions = !isLoadingTransactions && !!transactions?.length;
   const hasInvoices = !isLoadingInvoices && !!incomingTransactions?.length;
 
-  const navigate = useNavigate();
-  const { account, balancesDecorated } = useAccount();
+  const itemsLimit = 8;
 
-  const { t } = useTranslation("translation", { keyPrefix: "home" });
-  const { t: tCommon } = useTranslation("common");
+  useEffect(() => {
+    if (account?.id) loadTransactions(account.id, itemsLimit);
+  }, [
+    account?.id,
+    balancesDecorated?.accountBalance,
+    loadTransactions,
+    itemsLimit,
+  ]);
+
+  useEffect(() => {
+    loadInvoices(itemsLimit);
+  }, [
+    account?.id,
+    balancesDecorated?.accountBalance,
+    loadInvoices,
+    itemsLimit,
+  ]);
 
   // check if currentURL is blocked
   useEffect(() => {
-    const checkBlockedUrl = async () => {
-      if (!props.currentUrl) return;
-
-      const blocklistResult = await api.getBlocklist(props.currentUrl.host);
-      if (blocklistResult.blocked) {
-        setIsBlockedUrl(blocklistResult.blocked);
-      }
+    const checkBlockedUrl = async (host: string) => {
+      const { blocked } = await api.getBlocklist(host);
+      setIsBlockedUrl(blocked);
     };
 
-    checkBlockedUrl();
+    if (props.currentUrl?.host) {
+      checkBlockedUrl(props.currentUrl.host);
+    }
   }, [props.currentUrl]);
-
-  // get array of transactions if not done yet
-  useEffect(() => {
-    const getTransactions = async () => {
-      try {
-        const { payments } = await api.getPayments({ limit: 10 });
-        const transactions: Transaction[] = await convertPaymentsToTransactions(
-          payments,
-          "options.html#/publishers"
-        );
-        // attach fiatAmount if enabled
-        for (const transaction of transactions) {
-          transaction.totalAmountFiat = showFiat
-            ? await getFormattedFiat(transaction.totalAmount)
-            : "";
-        }
-
-        setTransactions(transactions);
-      } catch (e) {
-        console.error(e);
-        if (e instanceof Error) toast.error(e.message);
-      } finally {
-        setIsLoadingTransactions(false);
-      }
-    };
-
-    !transactions && !isLoadingSettings && getTransactions();
-  }, [isLoadingSettings, transactions, getFormattedFiat, showFiat]);
 
   const unblock = async () => {
     try {
@@ -115,45 +100,17 @@ const DefaultView: FC<Props> = (props) => {
     }
   };
 
-  const loadInvoices = useCallback(async () => {
-    setIsLoadingInvoices(true);
-    let result;
-    try {
-      result = await api.getInvoices({ isSettled: true });
-    } catch (e) {
-      if (e instanceof Error) {
-        toast.error(e.message);
-      }
-      setIsLoadingInvoices(false);
-      return;
+  function handleViewAllLink(path: string) {
+    // if we are in the popup
+    if (window.location.pathname !== "/options.html") {
+      utils.openPage(`options.html#${path}`);
+    } else {
+      navigate(path);
     }
-
-    const invoices: Transaction[] = result.invoices.map((invoice) => ({
-      ...invoice,
-      title: invoice.memo,
-      description: invoice.memo,
-      date: invoice.settleDate ? dayjs(invoice.settleDate).fromNow() : "",
-    }));
-
-    for (const invoice of invoices) {
-      invoice.totalAmountFiat = settings.showFiat
-        ? await getFormattedFiat(invoice.totalAmount)
-        : "";
-    }
-
-    setIncomingTransactions(invoices);
-    setIsLoadingInvoices(false);
-  }, [getFormattedFiat, settings.showFiat]);
-
-  useEffect(() => {
-    const load = async () => {
-      await loadInvoices();
-    };
-    load();
-  }, [account?.id, balancesDecorated?.accountBalance, loadInvoices]);
+  }
 
   return (
-    <div className="overflow-y-auto no-scrollbar h-full">
+    <div className="w-full max-w-screen-sm h-full mx-auto overflow-y-auto no-scrollbar">
       {!!props.lnDataFromCurrentTab?.length && (
         <PublisherLnData lnData={props.lnDataFromCurrentTab[0]} />
       )}
@@ -161,7 +118,7 @@ const DefaultView: FC<Props> = (props) => {
         <div className="flex space-x-4 mb-4">
           <BalanceBox />
         </div>
-        <div className="flex mb-6 space-x-4">
+        <div className="flex mb-6 lg:mb-12 space-x-4">
           <Button
             fullWidth
             icon={<ReceiveIcon className="w-6 h-6" />}
@@ -207,15 +164,15 @@ const DefaultView: FC<Props> = (props) => {
 
         {!isLoadingTransactions && (
           <div>
-            <h2 className="mb-2 text-lg text-gray-900 font-bold dark:text-white">
+            <h2 className="mb-2 text-lg lg:text-xl text-gray-900 font-bold dark:text-white">
               {t("default_view.recent_transactions")}
             </h2>
 
             <Tab.Group>
               <Tab.List className="mb-2">
                 {[
-                  t("transaction_list.tabs.outgoing"),
-                  t("transaction_list.tabs.incoming"),
+                  tComponents("transaction_list.tabs.outgoing"),
+                  tComponents("transaction_list.tabs.incoming"),
                 ].map((category) => (
                   <Tab
                     key={category}
@@ -238,11 +195,22 @@ const DefaultView: FC<Props> = (props) => {
               <Tab.Panels>
                 <Tab.Panel>
                   {hasTransactions && (
-                    <TransactionsTable transactions={transactions} />
+                    <>
+                      <TransactionsTable transactions={transactions} />
+                      <div className="mt-5 text-center">
+                        <Hyperlink
+                          onClick={() =>
+                            handleViewAllLink("/transactions/outgoing")
+                          }
+                        >
+                          {t("default_view.all_transactions_link")}
+                        </Hyperlink>
+                      </div>
+                    </>
                   )}
                   {!isLoadingTransactions && !transactions?.length && (
-                    <p className="text-sm text-center text-gray-500 dark:text-neutral-400">
-                      {t("default_view.no_transactions_out")}
+                    <p className="text-gray-500 dark:text-neutral-400">
+                      {t("default_view.no_outgoing_transactions")}
                     </p>
                   )}
                 </Tab.Panel>
@@ -253,11 +221,22 @@ const DefaultView: FC<Props> = (props) => {
                     </div>
                   )}
                   {hasInvoices && (
-                    <TransactionsTable transactions={incomingTransactions} />
+                    <>
+                      <TransactionsTable transactions={incomingTransactions} />
+                      <div className="mt-5 text-center">
+                        <Hyperlink
+                          onClick={() =>
+                            handleViewAllLink("/transactions/incoming")
+                          }
+                        >
+                          {t("default_view.all_transactions_link")}
+                        </Hyperlink>
+                      </div>
+                    </>
                   )}
-                  {!isLoadingInvoices && !hasInvoices && (
-                    <p className="text-sm text-center text-gray-500 dark:text-neutral-400">
-                      {t("default_view.no_transactions_in")}
+                  {!hasInvoices && (
+                    <p className="text-gray-500 dark:text-neutral-400">
+                      {t("default_view.no_incoming_transactions")}
                     </p>
                   )}
                 </Tab.Panel>

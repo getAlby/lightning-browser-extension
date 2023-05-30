@@ -3,6 +3,7 @@ import Navbar from "@components/Navbar";
 import Accounts from "@screens/Accounts";
 import AccountDetail from "@screens/Accounts/Detail";
 import ConfirmPayment from "@screens/ConfirmPayment";
+import DefaultView from "@screens/Home/DefaultView";
 import Keysend from "@screens/Keysend";
 import LNURLAuth from "@screens/LNURLAuth";
 import LNURLChannel from "@screens/LNURLChannel";
@@ -59,7 +60,17 @@ function Options() {
             <Route path="confirmPayment" element={<ConfirmPayment />} />
             <Route path="keysend" element={<Keysend />} />
             <Route path="receive" element={<Receive />} />
-            <Route path="transactions" element={<Transactions />} />
+            <Route path="wallet" element={<DefaultView />} />
+            <Route path="transactions">
+              <Route
+                path="outgoing"
+                element={<Transactions type="outgoing" />}
+              />
+              <Route
+                path="incoming"
+                element={<Transactions type="incoming" />}
+              />
+            </Route>
             <Route path="lnurlPay" element={<LNURLPay />} />
             <Route path="lnurlChannel" element={<LNURLChannel />} />
             <Route path="lnurlWithdraw" element={<LNURLWithdraw />} />
@@ -142,11 +153,7 @@ const Layout = () => {
         <Navbar.Link href="/publishers">
           {tCommon("connected_sites")}
         </Navbar.Link>
-        <Navbar.Link href="/send">{tCommon("actions.send")}</Navbar.Link>
-        <Navbar.Link href="/receive">{tCommon("actions.receive")}</Navbar.Link>
-        <Navbar.Link href="/transactions">
-          {tCommon("actions.transactions")}
-        </Navbar.Link>
+        <Navbar.Link href="/wallet">{tCommon("wallet")}</Navbar.Link>
       </Navbar>
       <ToastContainer
         autoClose={15000}

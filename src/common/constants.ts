@@ -2,8 +2,6 @@
 // Could be split up into i.e.
 // constants/messages
 // constants/[...etc]
-import i18n from "~/i18n/i18nConfig";
-import type { SettingsStorage } from "~/types";
 
 export const ABORT_PROMPT_ERROR = "Prompt was closed";
 export const USER_REJECTED_ERROR = "User rejected";
@@ -169,20 +167,3 @@ export enum TIPS {
   DEMO = "demo",
   MNEMONIC = "mnemonic",
 }
-
-export const DEFAULT_SETTINGS: SettingsStorage = {
-  browserNotifications: true,
-  websiteEnhancements: true,
-  legacyLnurlAuth: false,
-  isUsingLegacyLnurlAuthKey: false,
-  userName: "",
-  userEmail: "",
-  locale: i18n.resolvedLanguage,
-  theme: "system",
-  showFiat: true,
-  currency: CURRENCIES.USD,
-  exchange: "alby",
-  nostrEnabled: false,
-  closedTips: [],
-  bitcoinNetwork: "bitcoin",
-};
