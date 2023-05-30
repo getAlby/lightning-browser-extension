@@ -315,7 +315,9 @@
         "recent_transactions": "Senaste Transaktioner",
         "is_blocked_hint": "Alby är för tillfället avstängt hos {{host}}",
         "block_removed": "Aktiverade {{host}}. Ladda om webbplatsen.",
-        "no_outgoing_transactions": "Inga utgående transaktioner för detta konto ännu."
+        "no_outgoing_transactions": "Inga utgående transaktioner för detta konto ännu.",
+        "all_transactions_link": "Se alla transaktioner",
+        "no_incoming_transactions": "Inga inkommande transaktioner för detta konto ännu."
       }
     },
     "accounts": {
@@ -765,7 +767,11 @@
     },
     "transactions": {
       "title": "Transaktion",
-      "list_empty": "Inga transaktioner tillgängliga ännu."
+      "list_empty": "Inga transaktioner tillgängliga ännu.",
+      "description": {
+        "incoming": "Inkommande transaktioner för detta konto",
+        "outgoing": "Utgående transaktioner för detta konto"
+      }
     },
     "distributions": {
       "title": "Anslut till {{namn}}",
@@ -848,7 +854,8 @@
     "success_message": "{{amount}}{{fiatAmount}} skickat till {{destination}}",
     "response": "Svar",
     "confirm_password": "Bekräfta Lösenord",
-    "balance": "Balans"
+    "balance": "Balans",
+    "wallet": "Plånbok"
   },
   "components": {
     "allowance_menu": {
@@ -948,6 +955,12 @@
       "tor_native": {
         "title": "TOR (native)",
         "description": "Välj det här alternativet om den här webbläsaren redan är ansluten till TOR-nätverket."
+      }
+    },
+    "transaction_list": {
+      "tabs": {
+        "incoming": "Inkommande",
+        "outgoing": "Utgående"
       }
     }
   },
