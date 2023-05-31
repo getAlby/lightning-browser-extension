@@ -386,12 +386,6 @@
         "enable_now": "Enable Now"
       },
       "recent_transactions": "Recent Transactions",
-      "transaction_list": {
-        "tabs": {
-          "outgoing": "Outgoing",
-          "incoming": "Incoming"
-        }
-      },
       "allowance_view": {
         "recent_transactions": "Recent Transactions",
         "allowance": "Allowance",
@@ -400,10 +394,11 @@
       },
       "default_view": {
         "recent_transactions": "Recent Transactions",
-        "no_transactions_out": "No transactions made with Alby, yet.",
-        "no_transactions_in": "No transactions received with this account, yet.",
         "is_blocked_hint": "Alby is currently disabled on {{host}}",
-        "block_removed": "Enabled {{host}}. Please reload the website."
+        "block_removed": "Enabled {{host}}. Please reload the website.",
+        "no_outgoing_transactions": "No outgoing transactions for this account yet.",
+        "no_incoming_transactions": "No incoming transactions for this account yet.",
+        "all_transactions_link": "See all transactions"
       }
     },
     "accounts": {
@@ -794,7 +789,10 @@
     },
     "transactions": {
       "title": "Transactions",
-      "description": "Outgoing transactions across all of your accounts",
+      "description": {
+        "outgoing": "Outgoing transactions for this account",
+        "incoming": "Incoming transactions for this account"
+      },
       "list_empty": "No transactions available yet."
     }
   },
@@ -808,7 +806,7 @@
     "accounts": "Accounts",
     "discover": "Discover",
     "connected_sites": "Connected Sites",
-    "transactions": "Transactions",
+    "wallet": "Wallet",
     "sats_one": "sat",
     "sats_other": "sats",
     "loading": "loading",
@@ -898,6 +896,12 @@
         "podcast": "Podcast"
       },
       "open_location": "Open website"
+    },
+    "transaction_list": {
+      "tabs": {
+        "outgoing": "Outgoing",
+        "incoming": "Incoming"
+      }
     },
     "confirm_or_cancel": {
       "only_trusted": "Only connect with sites you trust."
