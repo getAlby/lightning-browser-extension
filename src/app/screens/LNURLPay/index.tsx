@@ -69,8 +69,10 @@ function LNURLPay() {
       ""
   );
 
+  const amountMin = Math.floor(+details.minSendable / 1000);
+  const amountMax = Math.floor(+details.maxSendable / 1000);
   const amountExceeded = +valueSat > (auth?.account?.balance || 0);
-  const maxExceeded = +valueSat > Math.floor(+details.maxSendable / 1000);
+  const rangeExceeded = +valueSat > amountMax || +valueSat < amountMin;
 
   const [showMoreFields, setShowMoreFields] = useState(false);
   const [fiatValue, setFiatValue] = useState("");
@@ -443,9 +445,9 @@ function LNURLPay() {
                           autoFocus
                           id="amount"
                           label={t("amount.label")}
-                          min={Math.floor(+details.minSendable / 1000)}
-                          max={Math.floor(+details.maxSendable / 1000)}
-                          maxExceeded={maxExceeded}
+                          min={amountMin}
+                          max={amountMax}
+                          rangeExceeded={rangeExceeded}
                           value={valueSat}
                           onChange={(e) => setValueSat(e.target.value)}
                           fiatValue={fiatValue}
@@ -455,8 +457,8 @@ function LNURLPay() {
                           amountExceeded={amountExceeded}
                         />
                         <SatButtons
-                          min={Math.floor(+details.minSendable / 1000)}
-                          max={Math.floor(+details.maxSendable / 1000)}
+                          min={amountMin}
+                          max={amountMax}
                           onClick={setValueSat}
                           disabled={loadingConfirm}
                         />
@@ -524,7 +526,9 @@ function LNURLPay() {
                         isFocused={false}
                         label={tCommon("actions.confirm")}
                         loading={loadingConfirm}
-                        disabled={loadingConfirm || !valueSat || amountExceeded}
+                        disabled={
+                          loadingConfirm || amountExceeded || rangeExceeded
+                        }
                         onCancel={reject}
                       />
                     </div>
