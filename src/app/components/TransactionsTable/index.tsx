@@ -9,7 +9,7 @@ import { Transaction } from "~/types";
 import Badge from "../Badge";
 
 export type Props = {
-  transactions: Transaction[] | null;
+  transactions: Transaction[] | null | undefined;
   loading?: boolean;
   noResultMsg?: string;
 };

@@ -30,8 +30,6 @@
       }
     },
     "choose_path": {
-      "title": "Połącz",
-      "description": "Aby zacząć używać rozszerzenia Alby, połącz swój portfel lightning.",
       "alby": {
         "title": "Konto Alby",
         "description": "Zarejestruj się lub użyj istniejącego konta Alby aby zacząć z płatnościami lightning w mgnieniu oka.",

@@ -68,20 +68,20 @@ export const createNewWalletWithPassword = async (options?: {
 
   // get document from onboard page
   const $document = await getDocument(page);
-  await findByText($document, "Set an unlock password");
+  await findByText($document, "Set an unlock passcode");
 
   // type user password and confirm password
   const passwordField = await getByLabelText(
     $document,
-    "Choose an unlock password:"
+    "Choose an unlock passcode:"
   );
-  await passwordField.type("unlock-password");
+  await passwordField.type("unlock-passcode");
 
   const passwordConfirmationField = await getByLabelText(
     $document,
     "Let's confirm you typed it correct:"
   );
-  await passwordConfirmationField.type("unlock-password");
+  await passwordConfirmationField.type("unlock-passcode");
 
   // submit password form
   const passwordFormNextButton = await findByText($document, "Next");
@@ -92,14 +92,9 @@ export const createNewWalletWithPassword = async (options?: {
     page.waitForNavigation(), // The promise resolves after navigation has finished
   ]);
 
-  await findByText(
-    $document,
-    "To start using the Alby Extension, use your Alby Account or connect to your lightning wallet."
-  );
-
   if (options?.openConnectOtherWallet) {
-    const connectTexts = await findAllByText($document, "Connect");
-    connectTexts[1].click(); // we have headline and button using "connect", button is second
+    const connectTexts = await findByText($document, "Connect");
+    connectTexts.click();
 
     await Promise.all([
       page.waitForResponse(() => true),
