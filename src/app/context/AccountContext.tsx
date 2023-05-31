@@ -30,7 +30,6 @@ interface AccountContextType {
   lock: (callback: VoidFunction) => void;
   selectAccount: (accountId: string) => void;
 
-  // @Todo: maybe this implicit logic should be handled explicitly with the new "accountLoading" in all places
   /**
    * Set new id and clears current info, which causes a loading indicator for the alias/balance
    */
@@ -95,7 +94,6 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
     setAccountBalance(balance);
   };
 
-  // @Todo: remove options, in every case they are used, setAccountId is called before
   const fetchAccountInfo = async (options?: { accountId?: string }) => {
     const id = options?.accountId || account?.id;
     if (!id) return;
