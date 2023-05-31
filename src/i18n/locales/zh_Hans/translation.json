@@ -957,7 +957,7 @@
     "transaction_list": {
       "tabs": {
         "incoming": "传入",
-        "outgoing": "外发"
+        "outgoing": "传出"
       }
     }
   },
@@ -1009,7 +1009,7 @@
       "disconnectpeer": "与远程对等体断线。",
       "estimatefee": "估算交易的费率和总费用。",
       "getnetworkinfo": "获取有关已知渠道图的基本统计信息。",
-      "listpayments": "获取所有付款的列表。",
+      "listpayments": "列出所有付款。",
       "lookupinvoice": "查看发票详情。",
       "listchannels": "获取所有开放频道的描述。",
       "channelbalance": "获取所有开放渠道的总资金报告。",
