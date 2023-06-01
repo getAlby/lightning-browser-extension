@@ -59,9 +59,6 @@ export default function ConnectGaloy(props: Props) {
   }
 
   async function loginWithJwt(event: React.FormEvent<HTMLFormElement>) {
-    if (!jwt) {
-      return null;
-    }
 
     event.preventDefault();
     setLoading(true);
