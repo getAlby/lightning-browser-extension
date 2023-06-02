@@ -2,7 +2,9 @@ import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
 import LoginFailedToast from "@components/toasts/LoginFailedToast";
 import Base64 from "crypto-js/enc-base64";
+import Hex from "crypto-js/enc-hex";
 import hmacSHA256 from "crypto-js/hmac-sha256";
+import sha256 from "crypto-js/sha256";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -16,6 +18,7 @@ const walletCreateUrl =
   process.env.WALLET_CREATE_URL || "https://app.regtest.getalby.com/api/users";
 const HMAC_VERIFY_HEADER_KEY =
   process.env.HMAC_VERIFY_HEADER_KEY || "alby-extension"; // default is mainly that TS is happy
+const ALBY_VERSION = process.env.VERSION || "";
 
 interface LNDHubCreateResponse {
   login: string;
@@ -52,7 +55,7 @@ export default function AlbyWallet({ variant }: Props) {
     headers.append("Accept", "application/json");
     headers.append("Access-Control-Allow-Origin", "*");
     headers.append("Content-Type", "application/json");
-    headers.append("X-User-Agent", "alby-extension");
+    headers.append("X-User-Agent", `alby-extension/${ALBY_VERSION}`);
 
     const timestamp = Math.floor(Date.now() / 1000);
     const body = JSON.stringify({
@@ -60,15 +63,27 @@ export default function AlbyWallet({ variant }: Props) {
       password: formData.password,
       lightning_addresses_attributes: [{ address: formData.lnAddress }], // address must be provided as array, in theory we support multiple addresses per account
     });
-    headers.append("X-TS", timestamp.toString());
-    const macBody = hmacSHA256(body, HMAC_VERIFY_HEADER_KEY).toString(Base64);
-    const macUrl = hmacSHA256(walletCreateUrl, HMAC_VERIFY_HEADER_KEY).toString(
-      Base64
-    );
-    headers.append("X-VERIFY", encodeURIComponent(macBody));
-    headers.append("X-VERIFY-URL", encodeURIComponent(macUrl));
+    const hashBody = sha256(body).toString(Hex);
+    const hashEmail = sha256(formData.email).toString(Hex);
 
-    return fetch(walletCreateUrl, {
+    const macEmail = hmacSHA256(
+      formData.email,
+      HMAC_VERIFY_HEADER_KEY
+    ).toString(Hex);
+    const macBody = hmacSHA256(body, HMAC_VERIFY_HEADER_KEY).toString(Hex);
+
+    let url = `${walletCreateUrl}?t=${timestamp.toString()}&e=${macEmail}`;
+    const macUrl = hmacSHA256(url, HMAC_VERIFY_HEADER_KEY).toString(Base64); // Base64 for cloudflare
+    url = `${url}&v=${macUrl}`;
+
+    headers.append("X-TS", timestamp.toString());
+    headers.append("X-VERIFY-B", encodeURIComponent(macBody));
+    headers.append("X-VERIFY-U", encodeURIComponent(macUrl));
+    headers.append("X-VERIFY-E", encodeURIComponent(macEmail));
+    headers.append("X-SHA-B", hashBody);
+    headers.append("X-SHA-E", hashEmail);
+
+    return fetch(url, {
       method: "POST",
       headers,
       body,

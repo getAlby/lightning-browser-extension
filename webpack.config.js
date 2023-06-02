@@ -155,6 +155,7 @@ var options = {
       "TARGET_BROWSER",
       "WALLET_CREATE_URL",
       "HMAC_VERIFY_HEADER_KEY",
+      "VERSION",
     ]),
     // delete previous build files
     new CleanWebpackPlugin({
