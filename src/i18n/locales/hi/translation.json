@@ -261,12 +261,10 @@
           "info": "{{label}} लॉगिन वर्तमान में अपग्रेड किया जा रहा है। यदि आप एक उन्नत उपयोगकर्ता हैं, तो आप <0>वेब वॉलेट (wallet.mainnet.galoy.io)< के माध्यम से लॉग इन करके अपना JWT टोकन प्राप्त कर सकते हैं। /0><1/><1/>JWT ऐसा दिखता है: <2>eyJhbG...</2><1/><1/>"
         },
         "actions": {
-          "login": "लॉग इन",
-          "request_sms_code": "अनुरोध SMS Code"
+          "login": "लॉग इन"
         },
         "errors": {
           "failed_to_request_sms": "SMS कोड का अनुरोध करने में विफल",
-          "failed_to_login_sms": "SMS कोड से प्रवेश करने में विफल",
           "setup_failed": "स्थापना विफल",
           "missing_token": "JWT गायब, लॉग इन नहीं हो सका।",
           "invalid_token": "अवैध JWT उत्तीर्ण"

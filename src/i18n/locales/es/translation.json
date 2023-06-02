@@ -256,11 +256,9 @@
       },
       "galoy": {
         "errors": {
-          "failed_to_login_sms": "No se pudo iniciar sesión con el código de SMS",
           "setup_failed": "Falló la configuración",
           "missing_token": "Falta JWT, no se pudo iniciar sesión.",
-          "invalid_token": "JWT inválido aprobado",
-          "failed_to_request_sms": "Hubo un error al solicitar un código SMS"
+          "invalid_token": "JWT inválido aprobado"
         },
         "phone_number": {
           "label": "Ingrese su número telefónico"
@@ -273,8 +271,7 @@
           "info": "El inicio de sesión de {{label}} se está actualizando actualmente. Si es un usuario avanzado, puede obtener su token JWT iniciando sesión a través de <0>Web Wallet (wallet.mainnet.galoy.io)</0><1/><1/>El JWT se ve así: < 2>eyJhbG...</2><1/><1/>"
         },
         "actions": {
-          "login": "Ingresar",
-          "request_sms_code": "Solicitar código por Mensaje de Texto"
+          "login": "Ingresar"
         }
       },
       "lnc": {

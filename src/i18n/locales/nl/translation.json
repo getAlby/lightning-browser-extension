@@ -192,12 +192,10 @@
           "info": ""
         },
         "actions": {
-          "login": "",
-          "request_sms_code": ""
+          "login": ""
         },
         "errors": {
           "failed_to_request_sms": "",
-          "failed_to_login_sms": "",
           "setup_failed": "",
           "missing_token": "",
           "invalid_token": ""

@@ -198,12 +198,10 @@
           "info": "Das {{label}}-Login wird derzeit aktualisiert. Wenn du ein fortgeschrittener Benutzer bist, kannst du dir dein JWT-Token holen, indem du über <0>Web Wallet (wallet.mainnet.galoy.io)</0><1/><1/> anmeldest. Das JWT sieht so aus: < 2>eyJhbG...</2><1/><1/>"
         },
         "actions": {
-          "login": "Anmeldung",
-          "request_sms_code": "SMS-Code anfordern"
+          "login": "Anmeldung"
         },
         "errors": {
           "failed_to_request_sms": "SMS-Code konnte nicht angefordert werden",
-          "failed_to_login_sms": "Anmeldung mit SMS Code fehlgeschlagen",
           "setup_failed": "Einrichtung fehlgeschlagen",
           "missing_token": "JWT fehlt, Anmeldung nicht möglich.",
           "invalid_token": "ungültige JWT übermittelt"

@@ -183,12 +183,10 @@
           "label": "Insira o token JWT"
         },
         "actions": {
-          "login": "Login",
-          "request_sms_code": "Solicitar código SMS"
+          "login": "Login"
         },
         "errors": {
           "failed_to_request_sms": "Falha ao solicitar código SMS",
-          "failed_to_login_sms": "Falha ao logar usando o código SMS",
           "setup_failed": "Falha na configuração",
           "missing_token": "JWT ausente, não foi possível fazer login."
         }

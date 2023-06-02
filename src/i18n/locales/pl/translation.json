@@ -263,12 +263,10 @@
           "info": "Logowanie do {{label}} jest w trakcie aktualizacji. Jeśli jesteś zaawansowanym użytkownikiem, pobierz swój token JWT logując się przez <0>Portfel webowy (wallet.mainnet.galoy.io)</0><1/><1/>Token JWT wygląda tak: <2>eyJhbG...</2><1/><1/>"
         },
         "actions": {
-          "login": "Zaloguj",
-          "request_sms_code": "Wyślij kod SMS"
+          "login": "Zaloguj"
         },
         "errors": {
           "failed_to_request_sms": "Nie udało się wysłać kodu SMS",
-          "failed_to_login_sms": "Logowanie z kodem SMS nie udało się",
           "setup_failed": "Konfiguracja nie powiodła się",
           "missing_token": "Brakuje tokenu JWT, logowanie nieudane.",
           "invalid_token": "podano nieprawidłowy token JWT"
