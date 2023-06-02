@@ -1,17 +1,18 @@
 import fetchAdapter from "@vespaiach/axios-fetch-adapter";
-import { auth } from "alby-js-sdk";
-import type { AxiosResponse } from "axios";
-import axios, { AxiosRequestConfig, Method } from "axios";
+import type { AxiosResponse, Method } from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import lightningPayReq from "bolt11";
 import Base64 from "crypto-js/enc-base64";
 import Hex from "crypto-js/enc-hex";
 import hmacSHA256 from "crypto-js/hmac-sha256";
 import sha256 from "crypto-js/sha256";
+import browser from "webextension-polyfill";
 import utils from "~/common/lib/utils";
 import HashKeySigner from "~/common/utils/signer";
 import { Account } from "~/types";
 
 import state from "../state";
+import { auth } from "./alby-js-sdk/src";
 import Connector, {
   CheckPaymentArgs,
   CheckPaymentResponse,
@@ -33,6 +34,9 @@ interface Config {
   login: string;
   password: string;
   url: string;
+  accessToken: string;
+  refreshToken: string;
+  tokenExpiresAt: number;
 }
 
 const HMAC_VERIFY_HEADER_KEY =
@@ -80,43 +84,86 @@ export default class Alby implements Connector {
   }
 
   async getInvoices(): Promise<GetInvoicesResponse> {
-    const data = await this.request<
+    const outgoingData = await this.request<
       {
         r_hash: {
           type: "Buffer";
           data: number[];
         };
-        amt: number;
+        amount: number;
         custom_records: ConnectorInvoice["custom_records"];
-        description: string;
+        memo: string;
         expire_time: number;
         ispaid: boolean;
         keysend: boolean;
         pay_req: string;
         payment_hash: string;
         payment_request: string;
-        timestamp: number;
-        type: "user_invoice";
+        r_hash_str: string;
+        settled: boolean;
+        settled_at: number;
+        state: string;
+        type: string;
+        value: number;
+        metadata: string;
       }[]
-    >("GET", "/getuserinvoices", undefined);
+    >("GET", "/invoices/outgoing", undefined);
 
-    const invoices: ConnectorInvoice[] = data
+    const incomingData = await this.request<
+      {
+        r_hash: {
+          type: "Buffer";
+          data: number[];
+        };
+        amount: number;
+        custom_records: ConnectorInvoice["custom_records"];
+        memo: string;
+        expire_time: number;
+        ispaid: boolean;
+        keysend: boolean;
+        pay_req: string;
+        payment_hash: string;
+        payment_request: string;
+        r_hash_str: string;
+        settled: boolean;
+        settled_at: number;
+        state: string;
+        type: string;
+        value: number;
+        metadata: string;
+      }[]
+    >("GET", "/invoices/incoming", undefined);
+
+    const invoices: ConnectorInvoice[] = incomingData
       .map(
         (invoice, index): ConnectorInvoice => ({
           custom_records: invoice.custom_records,
           id: `${invoice.payment_request}-${index}`,
-          memo: invoice.description,
+          memo: invoice.memo,
           preimage: "", // lndhub doesn't support preimage (yet)
-          settled: invoice.ispaid,
-          settleDate: invoice.timestamp * 1000,
-          totalAmount: `${invoice.amt}`,
-          type: "received",
+          settled: invoice.settled,
+          settleDate: invoice.settled_at,
+          totalAmount: `${invoice.amount}`,
+          type: "incoming",
         })
+      )
+      .concat(
+        outgoingData.map(
+          (invoice, index): ConnectorInvoice => ({
+            custom_records: invoice.custom_records,
+            id: `${invoice.payment_request}-${index}`,
+            memo: invoice.memo,
+            preimage: "", // lndhub doesn't support preimage (yet)
+            settled: invoice.ispaid,
+            settleDate: invoice.settled_at,
+            totalAmount: `${invoice.amount}`,
+            type: "outgoing",
+          })
+        )
       )
       .sort((a, b) => {
         return b.settleDate - a.settleDate;
       });
-
     return {
       data: {
         invoices,
@@ -125,11 +172,7 @@ export default class Alby implements Connector {
   }
 
   async getInfo(): Promise<GetInfoResponse> {
-    const { alias } = await this.request<{ alias: string }>(
-      "GET",
-      "/getinfo",
-      undefined
-    );
+    const alias = "🐝 getalby.com";
     return {
       data: {
         alias,
@@ -138,15 +181,14 @@ export default class Alby implements Connector {
   }
 
   async getBalance(): Promise<GetBalanceResponse> {
-    const { BTC } = await this.request<{ BTC: { AvailableBalance: number } }>(
+    const { balance } = await this.request<{ balance: number }>(
       "GET",
       "/balance",
       undefined
     );
-
     return {
       data: {
-        balance: BTC.AvailableBalance,
+        balance: balance,
       },
     };
   }
@@ -169,7 +211,7 @@ export default class Alby implements Connector {
           }
         | string;
       payment_route?: { total_amt: number; total_fees: number };
-    }>("POST", "/payinvoice", {
+    }>("POST", "/payments/bolt11", {
       invoice: args.paymentRequest,
     });
     if (data.error) {
@@ -229,7 +271,7 @@ export default class Alby implements Connector {
           }
         | string;
       payment_route: { total_amt: number; total_fees: number };
-    }>("POST", "/keysend", {
+    }>("POST", "/payments/keysend", {
       destination: args.pubkey,
       amount: args.amount,
       customRecords: args.customRecords,
@@ -265,16 +307,46 @@ export default class Alby implements Connector {
   }
 
   async checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {
-    const { paid } = await this.request<{ paid: boolean }>(
-      "GET",
-      `/checkpayment/${args.paymentHash}`,
-      undefined
-    );
-    return {
-      data: {
-        paid,
-      },
-    };
+    let paid: boolean = false;
+
+    try {
+      const response = await this.request<{
+        r_hash: {
+          type: "Buffer";
+          data: number[];
+        };
+        amount: number;
+        custom_records: ConnectorInvoice["custom_records"];
+        memo: string;
+        expire_time: number;
+        ispaid: boolean;
+        keysend: boolean;
+        pay_req: string;
+        payment_hash: string;
+        payment_request: string;
+        r_hash_str: string;
+        settled: boolean;
+        settled_at: number;
+        state: string;
+        type: string;
+        value: number;
+        metadata: string;
+      }>("GET", `/invoices/${args.paymentHash}`, undefined);
+
+      const settled = response.settled === true;
+      if (settled) paid = true;
+      return {
+        data: {
+          paid,
+        },
+      };
+    } catch (error) {
+      return {
+        data: {
+          paid,
+        },
+      };
+    }
   }
 
   signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {
@@ -317,65 +389,127 @@ export default class Alby implements Connector {
   async makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse> {
     const data = await this.request<{
       payment_request: string;
-      r_hash: { type: string; data: ArrayBuffer } | string;
-    }>("POST", "/addinvoice", {
-      amt: args.amount,
+      payment_hash: { type: string; data: ArrayBuffer } | string;
+    }>("POST", "/invoices", {
+      amount: args.amount,
       memo: args.memo,
     });
-    if (typeof data.r_hash === "object" && data.r_hash.type === "Buffer") {
-      data.r_hash = Buffer.from(data.r_hash.data).toString("hex");
+    if (
+      typeof data.payment_hash === "object" &&
+      data.payment_hash.type === "Buffer"
+    ) {
+      data.payment_hash = Buffer.from(data.payment_hash.data).toString("hex");
     }
+
     return {
       data: {
         paymentRequest: data.payment_request,
-        rHash: data.r_hash as string,
+        rHash: data.payment_hash as string,
       },
     };
   }
 
   async authorize() {
-    const lnurlAuthUrl = await this.getLnurlAuthUrl();
-    try {
-      const authResult = await chrome.identity.launchWebAuthFlow({
-        interactive: true,
-        url: lnurlAuthUrl,
-      });
+    const redirectURL = browser.identity.getRedirectURL();
+    const authClient = new auth.OAuth2User({
+      client_id:
+        process.env.NODE_ENV === "development" ? "pjUO3A9Sha" : "LlHAh0TRmg",
+      client_secret:
+        process.env.NODE_ENV === "development"
+          ? "ECGEPB4E0g95WscEdG8M"
+          : "SUlqS1DEvXTw2tFQS7vQ",
+      callback: redirectURL,
+      scopes: [
+        "invoices:read",
+        "account:read",
+        "balance:read",
+        "invoices:create",
+        "invoices:read",
+        "payments:send",
+        "transactions:read", // for outgoing invoice
+      ],
+      token: {
+        access_token: this.config.accessToken,
+        refresh_token: this.config.refreshToken,
+        expires_at: this.config.tokenExpiresAt,
+      }, // initialize with existing token
+    });
+    let lnurlAuthUrl = authClient.generateAuthURL({
+      code_challenge_method: "S256",
+    });
 
-      let authToken;
-      if (authResult) {
-        authToken = new URL(authResult).searchParams.get("token");
-      } else {
-        throw new Error("Authentication failed: missing authResult");
-      }
-
-      if (!authToken) {
-        throw new Error("Authentication failed: missing token");
-      }
-
-      const { data: authData } = await axios.post(
-        lnurlAuthUrl,
-        { auth_token: authToken },
-        {
-          headers: {
-            ...defaultHeaders,
-            "X-TS": Math.floor(Date.now() / 1000),
-            "X-VERIFY": this.generateHmacVerification(lnurlAuthUrl),
-          },
-          adapter: fetchAdapter,
-        }
+    if (process.env.NODE_ENV === "development")
+      lnurlAuthUrl = lnurlAuthUrl.replace(
+        "getalby.com",
+        "app.regtest.getalby.com"
       );
 
-      if (authData.error || authData.errors) {
-        const error = authData.error || authData.errors;
-        const errMessage = error?.errors?.[0]?.message || error?.[0]?.message;
+    try {
+      let authToken;
 
-        throw new Error(errMessage);
+      if (
+        this.config.accessToken != undefined &&
+        this.config.refreshToken != undefined
+      ) {
+        this.access_token = this.config.accessToken;
+        this.refresh_token = this.config.refreshToken;
+        if (authClient.token) {
+          authClient.token.access_token = this.config.accessToken;
+          authClient.token.refresh_token = this.config.refreshToken;
+          authClient.token.expires_at = this.config.tokenExpiresAt;
+        }
+
+        if (authClient.isAccessTokenExpired()) {
+          // launching webauth flow again when accesstoken is expired
+          // case1: after regenerating ore back in the config
+          // case2: how to detect expiry of refresh token and update config
+          const authResult = await this.launchWebAuthFlow(lnurlAuthUrl);
+          if (authResult) {
+            authToken = new URL(authResult).searchParams.get("code");
+          } else {
+            throw new Error("Authentication failed: missing authResult");
+          }
+
+          if (!authToken) {
+            throw new Error("Authentication failed: missing token");
+          }
+
+          await authClient.requestAccessToken(authToken);
+        }
+      } else {
+        const authResult = await this.launchWebAuthFlow(lnurlAuthUrl);
+
+        if (authResult) {
+          authToken = new URL(authResult).searchParams.get("code");
+        } else {
+          throw new Error("Authentication failed: missing authResult");
+        }
+
+        if (!authToken) {
+          throw new Error("Authentication failed: missing token");
+        }
+
+        await authClient.requestAccessToken(authToken);
       }
 
-      this.refresh_token = authData.refresh_token;
-      this.access_token = authData.access_token;
-      this.refresh_token_created = +new Date();
+      this.access_token = authClient.token?.access_token;
+      const expires_at = authClient.token?.expires_at;
+
       this.access_token_created = +new Date();
+      this.refresh_token = authClient.token?.refresh_token;
+
+      this.refresh_token_created = +new Date();
+
+      const authData: {
+        access_token?: string;
+        refresh_token?: string;
+        expires_at?: number;
+      } = {};
+
+      authData.access_token = this.access_token;
+
+      authData.refresh_token = this.refresh_token;
+      authData.expires_at = expires_at;
 
       return authData;
     } catch (e) {
@@ -387,37 +521,13 @@ export default class Alby implements Connector {
     }
   }
 
-  // Helper function to generate the lnurl authentication URL
-  async getLnurlAuthUrl() {
-    const redirectURL = chrome.identity.getRedirectURL();
-    const authClient = new auth.OAuth2User({
-      client_id: "test_client",
-      client_secret: "test_secret",
-      callback: redirectURL,
-      scopes: [
-        "invoices:read",
-        "account:read",
-        "balance:read",
-        "invoices:create",
-        "invoices:read",
-        "payments:send",
-      ],
-      token: {
-        access_token: undefined,
-        refresh_token: undefined,
-        expires_at: undefined,
-      }, // initialize with existing token
-    });
-    const authUrl = authClient.generateAuthURL({
-      code_challenge_method: "S256",
+  async launchWebAuthFlow(lnurlAuthUrl: string) {
+    const authResult = await browser.identity.launchWebAuthFlow({
+      interactive: true,
+      url: lnurlAuthUrl,
     });
 
-    let newAuthUrl = authUrl;
-    if (process.env.NODE_ENV === "development") {
-      newAuthUrl = authUrl.replace("getalby.com", "app.regtest.getalby.com");
-    }
-
-    return newAuthUrl;
+    return authResult;
   }
 
   generateHmacVerification(uri: string) {
@@ -433,8 +543,11 @@ export default class Alby implements Connector {
     if (!this.access_token) {
       await this.authorize();
     }
+    const url =
+      process.env.NODE_ENV === "development"
+        ? `https://api.regtest.getalby.com${path}`
+        : `https://api.getalby.com${path}`;
 
-    const url = `${this.config.url}${path}`;
     const reqConfig: AxiosRequestConfig = {
       method,
       url: url,

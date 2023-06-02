@@ -24,6 +24,12 @@ interface LNDHubCreateResponse {
   lnAddress: string;
 }
 
+interface AuthData {
+  access_token?: string;
+  refresh_token?: string;
+  expires_at?: number;
+}
+
 export type Props = {
   variant: "login" | "create";
 };
@@ -120,7 +126,10 @@ export default function AlbyWallet({ variant }: Props) {
     setLoading(true);
 
     const { login, password, url, lnAddress } = lndhub;
-    const name = lnAddress || "Alby"; // use the ln address as name or Alby to default
+    const name = lnAddress || "Alby";
+    let accessToken: string | undefined;
+    let refreshToken: string | undefined;
+    let tokenExpiresAt: number | undefined; // use the ln address as name or Alby to default
     const account = {
       name,
       config: {
@@ -128,6 +137,9 @@ export default function AlbyWallet({ variant }: Props) {
         password,
         url,
         lnAddress,
+        accessToken,
+        refreshToken,
+        tokenExpiresAt,
       },
       connector: "alby",
     };
@@ -135,6 +147,13 @@ export default function AlbyWallet({ variant }: Props) {
     try {
       const validation = await msg.request("validateAccount", account);
       if (validation.valid) {
+        if (validation.authData) {
+          const authData = validation.authData as AuthData;
+          account["config"]["accessToken"] = authData.access_token;
+          account["config"]["refreshToken"] = authData.refresh_token;
+          account["config"]["tokenExpiresAt"] = authData.expires_at;
+        }
+
         const addResult = await msg.request("addAccount", account);
         if (addResult.accountId) {
           await msg.request("selectAccount", {

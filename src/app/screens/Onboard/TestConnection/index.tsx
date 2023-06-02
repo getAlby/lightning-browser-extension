@@ -29,6 +29,7 @@ export default function TestConnection() {
 
     try {
       const response = await api.getAccountInfo();
+      // we shall use connector property here
       if (response.name && response.info.alias) {
         navigate("/pin-extension");
       } else {
