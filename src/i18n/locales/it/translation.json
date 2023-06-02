@@ -192,12 +192,10 @@
           "info": "Il login {{label}} è attualmente in fase di aggiornamento. Se sei un utente avanzato puoi recuperare il tuo token JWT effettuando il login via il <0>Web Wallet (wallet.mainnet.galoy.io)</0><1/><1/>Il token JWT assomiglia a: <2>eyJhbG...</2><1/><1/>"
         },
         "actions": {
-          "login": "Login",
-          "request_sms_code": "Richiedi codice SMS"
+          "login": "Login"
         },
         "errors": {
           "failed_to_request_sms": "Problema durante la richiesta del codice SMS",
-          "failed_to_login_sms": "Impossibile accedere con il codice SMS",
           "setup_failed": "Setup non riuscito",
           "missing_token": "JWT mancante, impossibile effettuare il login.",
           "invalid_token": "passato JWT non valido"

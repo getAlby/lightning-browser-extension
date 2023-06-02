@@ -192,12 +192,10 @@
           "info": "Přihlášení {{label}} je aktuálně aktualizováno. Pokud jste pokročilý uživatel, můžete svůj JWT token získat přihlášením přes <0>Webovou peněženku (wallet.mainnet.galoy.io)</0><1/><1/>JWT token vypadá podobně jako: <2>eyJhbG...</2><1/><1/>"
         },
         "actions": {
-          "login": "Přihlásit",
-          "request_sms_code": "Zažádat o SMS kód"
+          "login": "Přihlásit"
         },
         "errors": {
           "failed_to_request_sms": "Nepodařilo se vyžádat SMS kód",
-          "failed_to_login_sms": "Nepodařilo se přihlášení s SMS kódem",
           "setup_failed": "Nastavení se nezdařilo",
           "missing_token": "JWT chybí, přihlášení se nezdařilo.",
           "invalid_token": "Vloženo nevalidní JWT"

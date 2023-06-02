@@ -263,12 +263,10 @@
           "info": "Log ind med {{label}} bliver i øjeblikketl opgraderet. Hvis du er en øvet bruger, kan du få din JWT-token ved at logge ind via <0>Web Wallet (wallet.mainnet.galoy.io)</0><1/><1/>JWT ser sådan ud: <2>eyJhbG...</2><1/><1/>"
         },
         "actions": {
-          "login": "Adgangsoplysninger",
-          "request_sms_code": "Anmod om SMS-kode"
+          "login": "Adgangsoplysninger"
         },
         "errors": {
           "failed_to_request_sms": "Kunne ikke anmode om SMS-kode",
-          "failed_to_login_sms": "Kunne ikke logge ind med SMS-kode",
           "setup_failed": "Opsætning mislykkedes",
           "missing_token": "JWT mangler, kunne ikke logge ind.",
           "invalid_token": "ugyldig JWT givet"
