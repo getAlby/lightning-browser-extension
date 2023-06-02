@@ -59,7 +59,6 @@ export default function ConnectGaloy(props: Props) {
   }
 
   async function loginWithJwt(event: React.FormEvent<HTMLFormElement>) {
-
     event.preventDefault();
     setLoading(true);
     const meQuery = {
