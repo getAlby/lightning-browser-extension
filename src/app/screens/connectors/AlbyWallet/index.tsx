@@ -5,7 +5,7 @@ import Base64 from "crypto-js/enc-base64";
 import hmacSHA256 from "crypto-js/hmac-sha256";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import PasswordForm from "~/app/components/PasswordForm";
 import msg from "~/common/lib/msg";
@@ -16,6 +16,8 @@ const walletCreateUrl =
   process.env.WALLET_CREATE_URL || "https://app.regtest.getalby.com/api/users";
 const HMAC_VERIFY_HEADER_KEY =
   process.env.HMAC_VERIFY_HEADER_KEY || "alby-extension"; // default is mainly that TS is happy
+
+const SIGNUP_DISABLED = true;
 
 interface LNDHubCreateResponse {
   login: string;
@@ -160,6 +162,28 @@ export default function AlbyWallet({ variant }: Props) {
     } finally {
       setLoading(false);
     }
+  }
+
+  if (variant === "create" && SIGNUP_DISABLED) {
+    return (
+      <div className="max-w-xl mx-auto relative mt-14 bg-white dark:bg-surface-02dp p-10 shadow rounded-lg">
+        <p>
+          Please sign up via{" "}
+          <Link
+            className="underline"
+            to="https://getalby.com/user/new"
+            target="_blank"
+          >
+            getalby.com
+          </Link>{" "}
+          and then{" "}
+          <Link className="underline" to="/accounts/new/login">
+            click here
+          </Link>{" "}
+          to login.
+        </p>
+      </div>
+    );
   }
 
   return (
