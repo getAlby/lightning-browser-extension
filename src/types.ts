@@ -196,6 +196,9 @@ export interface MessageAccountEdit extends MessageDefault {
   args: {
     id: Account["id"];
     name: Account["name"];
+    accessToken?: string;
+    refreshToken?: string;
+    tokenExpiresAt?: number;
   };
   action: "editAccount";
 }

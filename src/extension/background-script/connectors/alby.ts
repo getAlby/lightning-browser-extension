@@ -9,6 +9,7 @@ import sha256 from "crypto-js/sha256";
 import browser from "webextension-polyfill";
 import utils from "~/common/lib/utils";
 import HashKeySigner from "~/common/utils/signer";
+import { edit, get } from "~/extension/background-script/actions/accounts";
 import { Account } from "~/types";
 
 import state from "../state";
@@ -451,30 +452,38 @@ export default class Alby implements Connector {
         this.config.accessToken != undefined &&
         this.config.refreshToken != undefined
       ) {
-        this.access_token = this.config.accessToken;
-        this.refresh_token = this.config.refreshToken;
-        if (authClient.token) {
-          authClient.token.access_token = this.config.accessToken;
-          authClient.token.refresh_token = this.config.refreshToken;
-          authClient.token.expires_at = this.config.tokenExpiresAt;
-        }
-
         if (authClient.isAccessTokenExpired()) {
-          // launching webauth flow again when accesstoken is expired
-          // case1: after regenerating ore back in the config
+          // launching webauth flow again when accesstoken is expired - now refreshing access token
+          // case1: after regenerating ore back in the config - storing back after regeneration
           // case2: how to detect expiry of refresh token and update config
-          const authResult = await this.launchWebAuthFlow(lnurlAuthUrl);
-          if (authResult) {
-            authToken = new URL(authResult).searchParams.get("code");
-          } else {
-            throw new Error("Authentication failed: missing authResult");
+
+          const token = await authClient.refreshAccessToken();
+
+          if (authClient.token) {
+            authClient.token.access_token = token.token.access_token;
+            authClient.token.refresh_token = token.token.refresh_token;
           }
 
-          if (!authToken) {
-            throw new Error("Authentication failed: missing token");
-          }
+          const account = await get({
+            action: "getAccount",
+            origin: { internal: true },
+          });
 
-          await authClient.requestAccessToken(authToken);
+          if (account) {
+            edit({
+              action: "editAccount",
+              args: {
+                name: account.data?.name,
+                id: account.data?.id,
+                accessToken: authClient.token?.access_token,
+                refreshToken: authClient.token?.refresh_token,
+                tokenExpiresAt: authClient.token?.expires_at,
+              },
+              origin: {
+                internal: true,
+              },
+            });
+          }
         }
       } else {
         const authResult = await this.launchWebAuthFlow(lnurlAuthUrl);
