@@ -7,10 +7,12 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Button from "~/app/components/Button";
 import PasswordForm from "~/app/components/PasswordForm";
 import msg from "~/common/lib/msg";
 
 import logo from "/static/assets/icons/alby.png";
+import blueIcon from "/static/assets/icons/alby_icon_blue_stream_256x256.png";
 
 const walletCreateUrl =
   process.env.WALLET_CREATE_URL || "https://app.regtest.getalby.com/api/users";
@@ -166,17 +168,25 @@ export default function AlbyWallet({ variant }: Props) {
 
   if (variant === "create" && SIGNUP_DISABLED) {
     return (
-      <div className="max-w-xl mx-auto relative mt-14 bg-white dark:bg-surface-02dp p-10 shadow rounded-lg">
+      <div className="max-w-xl space-y-4 mx-auto relative mt-14 bg-white dark:bg-surface-02dp p-10 shadow rounded-lg items-center flex flex-col text-center">
+        <img src={blueIcon} alt="logo" className="inline w-64" />
         <p>
-          Please sign up via{" "}
+          Please sign up on{" "}
           <Link
             className="underline"
             to="https://getalby.com/user/new"
             target="_blank"
           >
             getalby.com
-          </Link>{" "}
-          and then{" "}
+          </Link>
+        </p>
+        <Button
+          primary
+          label={"Sign up"}
+          onClick={() => window.open("https://getalby.com/user/new", "_blank")}
+        />
+        <p>
+          After you have created your account,{" "}
           <Link className="underline" to="/accounts/new/login">
             click here
           </Link>{" "}
