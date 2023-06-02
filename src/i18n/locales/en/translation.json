@@ -267,20 +267,17 @@
         "sms_code": {
           "label": "Enter your SMS verification code"
         },
-        "jwt": {
-          "label": "Enter your JWT token",
-          "info": "The {{label}} login is currently being upgraded. If you are an advanced user, you can grab your JWT token by logging in via the <0>Web Wallet (wallet.mainnet.galoy.io)</0><1/><1/>The JWT looks like: <2>eyJhbG...</2><1/><1/>"
+        "token": {
+          "label": "Enter your Access token",
+          "info": "The {{label}} integration with Alby is in alpha and only recommended for advanced users.<br><br>You can grab your Access token by going into the mobile app, clicking on the settings icon, and then tapping 3 times on the build number to open the developer menu.<br><br>The access token can be copied from here.<br><br>"
         },
         "actions": {
-          "login": "Login",
-          "request_sms_code": "Request SMS Code"
+          "login": "Login"
         },
         "errors": {
-          "failed_to_request_sms": "Failed to request a SMS code",
-          "failed_to_login_sms": "Failed to login with SMS code",
           "setup_failed": "Setup failed",
-          "missing_jwt": "JWT missing, couldn't log in.",
-          "invalid_jwt": "invalid JWT passed"
+          "missing_token": "Access token missing, couldn't log in.",
+          "invalid_token": "invalid Access token passed"
         }
       },
       "kollider": {

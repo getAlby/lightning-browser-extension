@@ -261,7 +261,7 @@
         "sms_code": {
           "label": "輸入你的短信驗證碼"
         },
-        "jwt": {
+        "token": {
           "label": "輸入你的 JWT 令牌",
           "info": "當前正在升級 {{label}} 登錄名。如果你是高級使用者，你可以通過<0>網絡錢包（wallet.mainnet.galoy.io）</0><1/><1/>登錄來獲取你的JWT令牌，JWT看起來像：<2>eyJhbG...</2><1/><1/>"
         },
@@ -273,8 +273,8 @@
           "failed_to_request_sms": "索取短信驗證碼失敗",
           "failed_to_login_sms": "短信驗證碼登錄失敗",
           "setup_failed": "設置失敗",
-          "missing_jwt": "JWT不存在，無法登陸。",
-          "invalid_jwt": "傳遞了無效的JWT"
+          "missing_token": "JWT不存在，無法登陸。",
+          "invalid_token": "傳遞了無效的JWT"
         }
       },
       "kollider": {
