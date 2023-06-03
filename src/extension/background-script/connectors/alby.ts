@@ -446,22 +446,25 @@ export default class Alby implements Connector {
       );
 
     try {
-      let authToken;
-
       if (
         this.config.accessToken != undefined &&
         this.config.refreshToken != undefined
       ) {
         if (authClient.isAccessTokenExpired()) {
-          // launching webauth flow again when accesstoken is expired - now refreshing access token
-          // case1: after regenerating ore back in the config - storing back after regeneration
-          // case2: how to detect expiry of refresh token and update config
+          try {
+            const token = await authClient.refreshAccessToken();
+            if (authClient.token) {
+              authClient.token.access_token = token.token.access_token;
+              authClient.token.refresh_token = token.token.refresh_token;
+            }
+          } catch {
+            const authResult = await this.launchWebAuthFlow(lnurlAuthUrl);
 
-          const token = await authClient.refreshAccessToken();
-
-          if (authClient.token) {
-            authClient.token.access_token = token.token.access_token;
-            authClient.token.refresh_token = token.token.refresh_token;
+            if (authResult) {
+              await this.getAccessToken(authResult, authClient);
+            } else {
+              throw new Error("Authentication failed: missing authResult");
+            }
           }
 
           const account = await get({
@@ -489,16 +492,10 @@ export default class Alby implements Connector {
         const authResult = await this.launchWebAuthFlow(lnurlAuthUrl);
 
         if (authResult) {
-          authToken = new URL(authResult).searchParams.get("code");
+          await this.getAccessToken(authResult, authClient);
         } else {
           throw new Error("Authentication failed: missing authResult");
         }
-
-        if (!authToken) {
-          throw new Error("Authentication failed: missing token");
-        }
-
-        await authClient.requestAccessToken(authToken);
       }
 
       this.access_token = authClient.token?.access_token;
@@ -537,6 +534,15 @@ export default class Alby implements Connector {
     });
 
     return authResult;
+  }
+
+  async getAccessToken(authResult: string, authClient: auth.OAuth2User) {
+    const authToken = new URL(authResult).searchParams.get("code");
+    if (!authToken) {
+      throw new Error("Authentication failed: missing token");
+    }
+
+    await authClient.requestAccessToken(authToken);
   }
 
   generateHmacVerification(uri: string) {
