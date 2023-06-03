@@ -23,7 +23,6 @@ import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
 import getConnectorRoutes from "~/app/router/connectorRoutes";
 import Discover from "~/app/screens/Discover";
-import AlbyWallet from "~/app/screens/connectors/AlbyWallet";
 import ChooseConnector from "~/app/screens/connectors/ChooseConnector";
 import ChooseConnectorPath from "~/app/screens/connectors/ChooseConnectorPath";
 import i18n from "~/i18n/i18nConfig";
@@ -134,11 +133,7 @@ function Options() {
                     />
                   }
                 />
-                <Route
-                  path="create"
-                  element={<AlbyWallet variant="create" />}
-                />
-                <Route path="login" element={<AlbyWallet variant="login" />} />
+
                 <Route path="choose-connector">
                   <Route
                     index

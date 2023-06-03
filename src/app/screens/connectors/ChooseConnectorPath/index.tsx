@@ -1,8 +1,10 @@
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import Button from "~/app/components/Button";
 import ConnectorPath from "~/app/components/ConnectorPath";
 import getConnectorRoutes from "~/app/router/connectorRoutes";
+import msg from "~/common/lib/msg";
 import i18n from "~/i18n/i18nConfig";
 
 import alby from "/static/assets/icons/alby.png";
@@ -11,9 +13,16 @@ type Props = {
   title: string;
   description: string;
 };
-
+interface AuthData {
+  access_token?: string;
+  refresh_token?: string;
+  expires_at?: number;
+}
 export default function ChooseConnectorPath({ title, description }: Props) {
   let connectorRoutes = getConnectorRoutes();
+
+  const navigate = useNavigate();
+
   i18n.on("languageChanged", () => {
     connectorRoutes = getConnectorRoutes();
   });
@@ -21,6 +30,53 @@ export default function ChooseConnectorPath({ title, description }: Props) {
     keyPrefix: "choose_path",
   });
   const { t: tCommon } = useTranslation("common");
+
+  async function connect() {
+    const name = "Alby";
+    let accessToken: string | undefined;
+    let refreshToken: string | undefined;
+    let tokenExpiresAt: number | undefined; // use the ln address as name or Alby to default
+    const account = {
+      name,
+      config: {
+        accessToken,
+        refreshToken,
+        tokenExpiresAt,
+      },
+      connector: "alby",
+    };
+
+    try {
+      const validation = await msg.request("validateAccount", account);
+      if (validation.valid) {
+        if (validation.authData) {
+          const authData = validation.authData as AuthData;
+          account["config"]["accessToken"] = authData.access_token;
+          account["config"]["refreshToken"] = authData.refresh_token;
+          account["config"]["tokenExpiresAt"] = authData.expires_at;
+        }
+
+        const addResult = await msg.request("addAccount", account);
+        if (addResult.accountId) {
+          await msg.request("selectAccount", {
+            id: addResult.accountId,
+          });
+          navigate("/test-connection");
+        }
+      } else {
+        console.error({ validation });
+        toast.error(
+          `${tCommon("errors.connection_failed")} (${validation.error})`
+        );
+      }
+    } catch (e) {
+      console.error(e);
+      if (e instanceof Error) {
+        toast.error(`${tCommon("errors.connection_failed")} (${e.message})`);
+      }
+    }
+  }
+
   return (
     <div className="relative mt-14 lg:grid lg:gap-8 text-center">
       <div className="relative">
@@ -41,14 +97,13 @@ export default function ChooseConnectorPath({ title, description }: Props) {
               <img src={alby} alt="logo" className="inline rounded-3xl w-32" />
             }
             actions={
-              <>
-                <Link to="create" className="flex flex-1">
-                  <Button label={t("alby.create_new")} primary flex />
-                </Link>
-                <Link to="login" className="flex flex-1">
-                  <Button label={tCommon("actions.log_in")} outline flex />
-                </Link>
-              </>
+              <Button
+                className="flex flex-1 items-center"
+                label="Connect With Alby"
+                outline
+                flex
+                onClick={connect}
+              />
             }
           />
           <ConnectorPath
