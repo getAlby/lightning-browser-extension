@@ -2170,12 +2170,11 @@ ajv@^8.11.0:
     require-from-string "^2.0.2"
     uri-js "^4.2.2"
 
-alby-js-sdk@^1.7.0:
-  version "1.7.1"
-  resolved "https://registry.yarnpkg.com/alby-js-sdk/-/alby-js-sdk-1.7.1.tgz#0f60c2a32d821042123d14307c2b8f4aa3f9d6d3"
-  integrity sha512-L5q4U2lMtsLLYs5UREzCT+XgNWKV4CV1iWx3QYrUuvws6qSpoTUyk+j/RhUa8YkSJ/78rytOIYlIT9VuHxmftg==
+alby-js-sdk@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/alby-js-sdk/-/alby-js-sdk-2.0.0.tgz#417957b8a089653a96f8d4808e98a48baf628d6d"
+  integrity sha512-VbBM4sTOvbiMi2sWF/jaoBer006fQ7hYIwzi7puYti9aprxWt3qb2GwL24ZFytUhwH3uuX9XPzJhkCWGR0JMAA==
   dependencies:
-    cross-fetch "^3.1.5"
     crypto-js "^4.1.1"
     nostr-tools "^1.10.0"
 
@@ -3329,13 +3328,6 @@ cross-fetch@3.1.5:
   integrity sha512-lvb1SBsI0Z7GDwmuid+mU3kWVBwTVUbe7S0H52yaaAdQOXq2YktTCZdlAcNKFzE6QtRz0snpw9bNiPeOIkkQvw==
   dependencies:
     node-fetch "2.6.7"
-
-cross-fetch@^3.1.5:
-  version "3.1.6"
-  resolved "https://registry.yarnpkg.com/cross-fetch/-/cross-fetch-3.1.6.tgz#bae05aa31a4da760969756318feeee6e70f15d6c"
-  integrity sha512-riRvo06crlE8HiqOwIpQhxwdOk4fOeR7FVM/wXoxchFEqMNUjvbs3bfo4OTgMEMHzppd4DxFBDbyySj8Cv781g==
-  dependencies:
-    node-fetch "^2.6.11"
 
 cross-spawn@^7.0.1, cross-spawn@^7.0.2, cross-spawn@^7.0.3:
   version "7.0.3"
@@ -6936,13 +6928,6 @@ node-fetch@2.6.7, node-fetch@^2.6.7:
   version "2.6.7"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.7.tgz#24de9fba827e3b4ae44dc8b20256a379160052ad"
   integrity sha512-ZjMPFEfVx5j+y2yF35Kzx5sF7kDzxuDj6ziH4FFbOp87zKDZNx8yExJIb05OGF4Nlt9IHFIMBkRl41VdvcNdbQ==
-  dependencies:
-    whatwg-url "^5.0.0"
-
-node-fetch@^2.6.11:
-  version "2.6.11"
-  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.11.tgz#cde7fc71deef3131ef80a738919f999e6edfff25"
-  integrity sha512-4I6pdBY1EthSqDmJkiNk3JIT8cswwR9nfeW/cPdUagJYEQG7R95WRH74wpz7ma8Gh/9dI9FP+OU+0E4FvtA55w==
   dependencies:
     whatwg-url "^5.0.0"
 

@@ -1,4 +1,5 @@
 import fetchAdapter from "@vespaiach/axios-fetch-adapter";
+import { auth } from "alby-js-sdk";
 import type { AxiosResponse, Method } from "axios";
 import axios, { AxiosRequestConfig } from "axios";
 import lightningPayReq from "bolt11";
@@ -13,7 +14,6 @@ import { edit, get } from "~/extension/background-script/actions/accounts";
 import { Account } from "~/types";
 
 import state from "../state";
-import { auth } from "./alby-js-sdk/src";
 import Connector, {
   CheckPaymentArgs,
   CheckPaymentResponse,
@@ -413,12 +413,8 @@ export default class Alby implements Connector {
   async authorize() {
     const redirectURL = browser.identity.getRedirectURL();
     const authClient = new auth.OAuth2User({
-      client_id:
-        process.env.NODE_ENV === "development" ? "pjUO3A9Sha" : "LlHAh0TRmg",
-      client_secret:
-        process.env.NODE_ENV === "development"
-          ? "ECGEPB4E0g95WscEdG8M"
-          : "SUlqS1DEvXTw2tFQS7vQ",
+      client_id: "LlHAh0TRmg",
+      client_secret: "SUlqS1DEvXTw2tFQS7vQ",
       callback: redirectURL,
       scopes: [
         "invoices:read",
@@ -438,12 +434,6 @@ export default class Alby implements Connector {
     let lnurlAuthUrl = authClient.generateAuthURL({
       code_challenge_method: "S256",
     });
-
-    if (process.env.NODE_ENV === "development")
-      lnurlAuthUrl = lnurlAuthUrl.replace(
-        "getalby.com",
-        "app.regtest.getalby.com"
-      );
 
     try {
       if (
@@ -558,10 +548,7 @@ export default class Alby implements Connector {
     if (!this.access_token) {
       await this.authorize();
     }
-    const url =
-      process.env.NODE_ENV === "development"
-        ? `https://api.regtest.getalby.com${path}`
-        : `https://api.getalby.com${path}`;
+    const url = `https://api.getalby.com${path}`;
 
     const reqConfig: AxiosRequestConfig = {
       method,
