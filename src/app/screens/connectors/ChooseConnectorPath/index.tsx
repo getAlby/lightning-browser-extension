@@ -31,6 +31,7 @@ export default function ChooseConnectorPath({ title, description }: Props) {
   });
   const { t: tCommon } = useTranslation("common");
 
+  // TODO: rename & move to a separate file (it's only for connecting to an Alby account)
   async function connect() {
     const name = "Alby";
     let accessToken: string | undefined;

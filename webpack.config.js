@@ -9,7 +9,8 @@ const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const WextManifestWebpackPlugin = require("wext-manifest-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const BundleAnalyzerPlugin =
+  require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
 // default value is set in the code where it is used
 if (!process.env.WALLET_CREATE_URL) {
@@ -155,6 +156,10 @@ var options = {
       "TARGET_BROWSER",
       "WALLET_CREATE_URL",
       "HMAC_VERIFY_HEADER_KEY",
+      "ALBY_OAUTH_CLIENT_ID",
+      "ALBY_OAUTH_CLIENT_SECRET",
+      "ALBY_OAUTH_AUTHORIZE_URL",
+      "ALBY_API_URL",
     ]),
     // delete previous build files
     new CleanWebpackPlugin({
@@ -205,10 +210,10 @@ var options = {
       patterns: [{ from: "static/assets", to: "assets" }],
     }),
     new BundleAnalyzerPlugin({
-      generateStatsFile: (nodeEnv !== "development" ? true : false),
-      analyzerMode: (nodeEnv !== "development" ? 'static' : 'disabled'),
-      reportFilename: '../bundle-report.html',
-      statsFilename: '../bundle-stats.json',
+      generateStatsFile: nodeEnv !== "development" ? true : false,
+      analyzerMode: nodeEnv !== "development" ? "static" : "disabled",
+      reportFilename: "../bundle-report.html",
+      statsFilename: "../bundle-stats.json",
       openAnalyzer: nodeEnv !== "development",
     }),
   ],
