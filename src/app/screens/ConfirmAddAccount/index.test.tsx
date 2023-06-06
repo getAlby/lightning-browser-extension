@@ -30,6 +30,7 @@ jest.mock("~/app/hooks/useNavigationState", () => {
       args: {
         connector: "nativecitadel",
         name: "Your Citadel wallet",
+        config: { connectionString: "..." },
       },
     })),
   };
@@ -47,7 +48,7 @@ describe("ConfirmAddAccount", () => {
 
     expect(
       await screen.findByText(
-        "This website wants to add an account (Citadel (over Tor)) to Alby:"
+        "This website wants to add an account (Citadel (over Tor)):"
       )
     ).toBeInTheDocument();
     expect(await screen.findByText("Your Citadel wallet")).toBeInTheDocument();
