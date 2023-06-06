@@ -65,7 +65,7 @@ export default class Alby implements Connector {
   }
 
   async init() {
-    await this.authorize();
+    return this.authorize();
   }
 
   unload() {
