@@ -447,6 +447,7 @@ export default class Alby implements Connector {
         process.env.ALBY_OAUTH_AUTHORIZE_URL
       );
     }
+    authUrl += "&webln=false"; // stop getalby.com login modal launching lnurl auth
 
     try {
       if (
@@ -531,10 +532,10 @@ export default class Alby implements Connector {
     }
   }
 
-  async launchWebAuthFlow(lnurlAuthUrl: string) {
+  async launchWebAuthFlow(authUrl: string) {
     const authResult = await browser.identity.launchWebAuthFlow({
       interactive: true,
-      url: lnurlAuthUrl,
+      url: authUrl,
     });
 
     return authResult;
