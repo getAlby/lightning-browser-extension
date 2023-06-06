@@ -201,7 +201,6 @@
           "login": "Logga in"
         },
         "errors": {
-          "failed_to_request_sms": "Begäran om SMS-kod misslyckades",
           "setup_failed": "Konfiguration misslyckades",
           "missing_token": "JWT saknas, kunde inte logga in.",
           "invalid_token": "ogiltig JWT godkändes"

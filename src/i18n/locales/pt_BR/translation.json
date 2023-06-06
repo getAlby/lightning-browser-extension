@@ -186,7 +186,6 @@
           "login": "Login"
         },
         "errors": {
-          "failed_to_request_sms": "Falha ao solicitar código SMS",
           "setup_failed": "Falha na configuração",
           "missing_token": "JWT ausente, não foi possível fazer login."
         }

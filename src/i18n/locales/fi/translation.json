@@ -194,7 +194,6 @@
           "login": "Kirjaudu sisään"
         },
         "errors": {
-          "failed_to_request_sms": "Tekstiviestikoodin pyytäminen epäonnistui",
           "setup_failed": "Määritys epäonnistui",
           "missing_token": "JWT puuttuu, sisäänkirjautuminen ei onnistunut.",
           "invalid_token": "virheellinen JWT välitetty"

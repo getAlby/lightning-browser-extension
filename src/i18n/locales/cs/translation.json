@@ -195,7 +195,6 @@
           "login": "Přihlásit"
         },
         "errors": {
-          "failed_to_request_sms": "Nepodařilo se vyžádat SMS kód",
           "setup_failed": "Nastavení se nezdařilo",
           "missing_token": "JWT chybí, přihlášení se nezdařilo.",
           "invalid_token": "Vloženo nevalidní JWT"

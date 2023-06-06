@@ -264,7 +264,6 @@
           "login": "लॉग इन"
         },
         "errors": {
-          "failed_to_request_sms": "SMS कोड का अनुरोध करने में विफल",
           "setup_failed": "स्थापना विफल",
           "missing_token": "JWT गायब, लॉग इन नहीं हो सका।",
           "invalid_token": "अवैध JWT उत्तीर्ण"

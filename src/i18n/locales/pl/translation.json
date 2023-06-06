@@ -266,7 +266,6 @@
           "login": "Zaloguj"
         },
         "errors": {
-          "failed_to_request_sms": "Nie udało się wysłać kodu SMS",
           "setup_failed": "Konfiguracja nie powiodła się",
           "missing_token": "Brakuje tokenu JWT, logowanie nieudane.",
           "invalid_token": "podano nieprawidłowy token JWT"

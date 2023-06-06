@@ -266,7 +266,6 @@
           "login": "Adgangsoplysninger"
         },
         "errors": {
-          "failed_to_request_sms": "Kunne ikke anmode om SMS-kode",
           "setup_failed": "Opsætning mislykkedes",
           "missing_token": "JWT mangler, kunne ikke logge ind.",
           "invalid_token": "ugyldig JWT givet"

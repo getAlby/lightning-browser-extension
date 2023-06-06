@@ -266,7 +266,6 @@
           "login": ""
         },
         "errors": {
-          "failed_to_request_sms": "",
           "setup_failed": "",
           "missing_token": "",
           "invalid_token": ""

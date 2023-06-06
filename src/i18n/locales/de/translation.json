@@ -201,7 +201,6 @@
           "login": "Anmeldung"
         },
         "errors": {
-          "failed_to_request_sms": "SMS-Code konnte nicht angefordert werden",
           "setup_failed": "Einrichtung fehlgeschlagen",
           "missing_token": "JWT fehlt, Anmeldung nicht möglich.",
           "invalid_token": "ungültige JWT übermittelt"
