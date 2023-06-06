@@ -411,10 +411,16 @@ export default class Alby implements Connector {
   }
 
   async authorize() {
+    const clientId = process.env.ALBY_OAUTH_CLIENT_ID;
+    const clientSecret = process.env.ALBY_OAUTH_CLIENT_SECRET;
+    if (!clientId || !clientSecret) {
+      throw new Error("OAuth client credentials missing");
+    }
+
     const redirectURL = browser.identity.getRedirectURL();
     const authClient = new auth.OAuth2User({
-      client_id: "LlHAh0TRmg",
-      client_secret: "SUlqS1DEvXTw2tFQS7vQ",
+      client_id: clientId,
+      client_secret: clientSecret,
       callback: redirectURL,
       scopes: [
         "invoices:read",
@@ -431,9 +437,17 @@ export default class Alby implements Connector {
         expires_at: this.config.tokenExpiresAt,
       }, // initialize with existing token
     });
-    let lnurlAuthUrl = authClient.generateAuthURL({
+    let authUrl = authClient.generateAuthURL({
       code_challenge_method: "S256",
     });
+    // TODO: make authorize URL in alby-js-sdk customizable
+    if (process.env.ALBY_OAUTH_AUTHORIZE_URL) {
+      authUrl = authUrl.replace(
+        "https://getalby.com/oauth",
+        process.env.ALBY_OAUTH_AUTHORIZE_URL
+      );
+    }
+    authUrl += "&webln=false"; // stop getalby.com login modal launching lnurl auth
 
     try {
       if (
@@ -448,7 +462,7 @@ export default class Alby implements Connector {
               authClient.token.refresh_token = token.token.refresh_token;
             }
           } catch {
-            const authResult = await this.launchWebAuthFlow(lnurlAuthUrl);
+            const authResult = await this.launchWebAuthFlow(authUrl);
 
             if (authResult) {
               await this.getAccessToken(authResult, authClient);
@@ -479,7 +493,7 @@ export default class Alby implements Connector {
           }
         }
       } else {
-        const authResult = await this.launchWebAuthFlow(lnurlAuthUrl);
+        const authResult = await this.launchWebAuthFlow(authUrl);
 
         if (authResult) {
           await this.getAccessToken(authResult, authClient);
@@ -509,6 +523,7 @@ export default class Alby implements Connector {
 
       return authData;
     } catch (e) {
+      console.error(e);
       throw new Error(
         `API error (${this.config.url})${
           e instanceof Error ? `: ${e.message}` : ""
@@ -517,10 +532,10 @@ export default class Alby implements Connector {
     }
   }
 
-  async launchWebAuthFlow(lnurlAuthUrl: string) {
+  async launchWebAuthFlow(authUrl: string) {
     const authResult = await browser.identity.launchWebAuthFlow({
       interactive: true,
-      url: lnurlAuthUrl,
+      url: authUrl,
     });
 
     return authResult;

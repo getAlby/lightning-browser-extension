@@ -4,19 +4,21 @@
 
 - Install dependencies\
   `$ yarn install`
+- Create development .env file
+  `$ cp .env.example .env`
 
 ### 💻 Load extension into browser
 
 - Start development build, which will automatically watch for file changes:
 
   - Chrome\
-    `$ yarn run dev:chrome`
+    `$ dotenv yarn run dev:chrome`
   - Firefox\
-    `$ yarn run dev:firefox`
+    `$ dotenv yarn run dev:firefox`
   - Opera\
-     `$ yarn run dev:opera`
+     `$ dotenv yarn run dev:opera`
 
-  **NOTE:** by default, the extension built this way will talk to the testnet API (which runs under [app.regtest.getalby.com](https://app.regtest.getalby.com/user)). In case you want to do manual tests against the mainnet API, add the following `WALLET_CREATE_URL` environment variable to your command: `$ WALLET_CREATE_URL="https://getalby.com/api/users" yarn run dev:your-browser-of-choice`
+  **NOTE:** by default, the extension built this way will talk to the testnet API (which runs under [app.regtest.getalby.com](https://app.regtest.getalby.com/user)). In case you want to do manual tests against the mainnet API, set the following `WALLET_CREATE_URL` environment variable in your .env: `WALLET_CREATE_URL="https://getalby.com/api/users"`
 
 - **Chrome**
 
