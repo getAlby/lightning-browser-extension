@@ -99,7 +99,6 @@
         },
         "errors": {
           "setup_failed": "设置失败",
-          "failed_to_login_sms": "使用短信验证码登录失败",
           "missing_token": "JWT不存在，无法登录。",
           "invalid_token": "传递了无效的JWT"
         },

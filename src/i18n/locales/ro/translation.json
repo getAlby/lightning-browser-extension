@@ -266,7 +266,6 @@
           "login": "Login"
         },
         "errors": {
-          "failed_to_request_sms": "Solicitare pentru cod SMS esuata",
           "setup_failed": "Setare esuata",
           "missing_token": "Lipseste JWT, nu s-a putut efectua logarea.",
           "invalid_token": "JWT invalid a trecut"

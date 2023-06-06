@@ -266,7 +266,6 @@
           "login": "Login"
         },
         "errors": {
-          "failed_to_request_sms": "SMS कोडची विनंती करण्यात अयशस्वी",
           "setup_failed": "Setup अयशस्वी",
           "missing_token": "JWT शोधू शकत नाही म्हणून लॉग इन करू शकलो नाही.",
           "invalid_token": "चुकीचे JWT पास झाले"

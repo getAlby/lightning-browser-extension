@@ -266,7 +266,6 @@
           "login": "Connexion"
         },
         "errors": {
-          "failed_to_request_sms": "Impossible de demander un code SMS",
           "setup_failed": "La configuration a échoué",
           "missing_token": "JWT manquant, impossible de se connecter.",
           "invalid_token": "JWT invalide passé"
