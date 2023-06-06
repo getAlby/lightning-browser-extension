@@ -90,7 +90,7 @@
         "title": "Citadel"
       },
       "galoy": {
-        "jwt": {
+        "token": {
           "label": "输入你的JWT令牌",
           "info": "目前{{label}}登录正在升级中。如果你是高级用户，你可以通过<0>网络钱包（wallet.mainnet.galoy.io）</0><1/><1/>登录来获取你的JWT令牌，JWT看起来像：<2>eyJhbG...</2><1/><1/>"
         },
@@ -102,8 +102,8 @@
           "setup_failed": "设置失败",
           "failed_to_request_sms": "索取短信验证码失败",
           "failed_to_login_sms": "使用短信验证码登录失败",
-          "missing_jwt": "JWT不存在，无法登录。",
-          "invalid_jwt": "传递了无效的JWT"
+          "missing_token": "JWT不存在，无法登录。",
+          "invalid_token": "传递了无效的JWT"
         },
         "sms_code": {
           "label": "输入你的短信验证码"
