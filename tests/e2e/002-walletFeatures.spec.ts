@@ -19,17 +19,17 @@ test.describe("Wallet features", () => {
     const $document = await getDocument(page);
 
     // open change password modal
-    await (await findAllByText($document, "Change unlock password"))[1].click();
+    await (await findAllByText($document, "Change unlock passcode"))[1].click();
 
     const newPasswordInput = await getByLabelText(
       $document,
-      "Enter a new unlock password:"
+      "Enter a new unlock passcode:"
     );
     await newPasswordInput.type("g3tal6y");
 
     const confirmPasswordInput = await getByLabelText(
       $document,
-      "Confirm new password:"
+      "Confirm new passcode:"
     );
     await confirmPasswordInput.type("g3tal6y");
 
