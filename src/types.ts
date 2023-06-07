@@ -139,6 +139,7 @@ export type NavigationState = {
     destination?: string;
     amount?: string;
     customRecords?: Record<string, string>;
+    bitcoinAddress?: string;
     connector?: string;
     name?: string;
     config?: unknown;

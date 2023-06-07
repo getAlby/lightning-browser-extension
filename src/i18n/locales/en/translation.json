@@ -734,6 +734,24 @@
         "label": "Amount (Satoshi)"
       }
     },
+    "send_to_bitcoin_address": {
+      "title": "Send to bitcoin address",
+      "recipient": {
+        "label": "Recipient"
+      },
+      "amount": {
+        "label": "Amount (sats)"
+      },
+      "network_fee": {
+        "label": "Network fee"
+      },
+      "swap_fee": {
+        "label": "Swap fee"
+      },
+      "total": {
+        "label": "Total"
+      }
+    },
     "confirm_payment": {
       "title": "Approve Payment",
       "success": "Payment of {{amount}} successful!",
@@ -846,7 +864,8 @@
       "copy_invoice": "Copy Invoice",
       "log_in": "Log in",
       "remember": "Remember my choice and don't ask again",
-      "more": "More"
+      "more": "More",
+      "review": "Review"
     },
     "connectors": {
       "lnd": "LND",

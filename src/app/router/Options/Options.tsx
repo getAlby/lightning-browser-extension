@@ -24,6 +24,7 @@ import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
 import { getConnectorRoutes, renderRoutes } from "~/app/router/connectorRoutes";
 import Discover from "~/app/screens/Discover";
+import SendToBitcoinAddress from "~/app/screens/SendToBitcoinAddress";
 import AlbyWallet from "~/app/screens/connectors/AlbyWallet";
 import ChooseConnector from "~/app/screens/connectors/ChooseConnector";
 import ChooseConnectorPath from "~/app/screens/connectors/ChooseConnectorPath";
@@ -55,6 +56,10 @@ function Options() {
             <Route path="send" element={<Send />} />
             <Route path="confirmPayment" element={<ConfirmPayment />} />
             <Route path="keysend" element={<Keysend />} />
+            <Route
+              path="sendToBitcoinAddress"
+              element={<SendToBitcoinAddress />}
+            />
             <Route path="receive" element={<Receive />} />
             <Route path="wallet" element={<DefaultView />} />
             <Route path="transactions">

@@ -94,6 +94,11 @@ function Send() {
             },
           },
         });
+      } else if (invoice.startsWith("bc1")) {
+        // TODO: Parse bitcoin addresses
+        navigate("/sendToBitcoinAddress", {
+          state: { args: { bitcoinAddress: invoice } },
+        });
       } else {
         lightningPayReq.decode(invoice); // throws if invalid.
         navigate("/confirmPayment", {
