@@ -2,15 +2,10 @@ import { auth, Client } from "alby-js-sdk";
 import { RequestOptions } from "alby-js-sdk/dist/request";
 import { Invoice, Token } from "alby-js-sdk/dist/types";
 import type { Method } from "axios";
-import lightningPayReq from "bolt11";
 import Base64 from "crypto-js/enc-base64";
-import Hex from "crypto-js/enc-hex";
 import hmacSHA256 from "crypto-js/hmac-sha256";
-import sha256 from "crypto-js/sha256";
 import browser from "webextension-polyfill";
 import { decryptData, encryptData } from "~/common/lib/crypto";
-import utils from "~/common/lib/utils";
-import HashKeySigner from "~/common/utils/signer";
 import { Account, OAuthToken } from "~/types";
 
 import state from "../state";
@@ -130,223 +125,106 @@ export default class Alby implements Connector {
   }
 
   async sendPayment(args: SendPaymentArgs): Promise<SendPaymentResponse> {
-    const data = await this.request<{
-      error?: string;
-      message: string;
-      payment_error?: string;
-      payment_hash:
-        | {
-            type: string;
-            data: ArrayBuffer;
-          }
-        | string;
-      payment_preimage:
-        | {
-            type: string;
-            data: ArrayBuffer;
-          }
-        | string;
-      payment_route?: { total_amt: number; total_fees: number };
-    }>("POST", "/payments/bolt11", {
-      invoice: args.paymentRequest,
-    });
-    if (data.error) {
-      throw new Error(data.message);
-    }
-    if (data.payment_error) {
-      throw new Error(data.payment_error);
-    }
-    if (
-      typeof data.payment_hash === "object" &&
-      data.payment_hash.type === "Buffer"
-    ) {
-      data.payment_hash = Buffer.from(data.payment_hash.data).toString("hex");
-    }
-    if (
-      typeof data.payment_preimage === "object" &&
-      data.payment_preimage.type === "Buffer"
-    ) {
-      data.payment_preimage = Buffer.from(data.payment_preimage.data).toString(
-        "hex"
-      );
-    }
+    const data = await this._request((client) =>
+      client.sendPayment({
+        invoice: args.paymentRequest,
+      })
+    );
 
-    // HACK!
-    // some Lnbits extension that implement the LNDHub API do not return the route information.
-    // to somewhat work around this we set a payment route and use the amount from the payment request.
-    // lnbits needs to fix this and return proper route information with a total amount and fees
-    if (!data.payment_route) {
-      const paymentRequestDetails = lightningPayReq.decode(args.paymentRequest);
-      const amountInSats = paymentRequestDetails.satoshis || 0;
-      data.payment_route = { total_amt: amountInSats, total_fees: 0 };
-    }
     return {
       data: {
-        preimage: data.payment_preimage as string,
-        paymentHash: data.payment_hash as string,
-        route: data.payment_route,
+        preimage: data.payment_preimage,
+        paymentHash: data.payment_hash,
+        route: { total_amt: data.amount, total_fees: data.fee },
       },
     };
   }
 
   async keysend(args: KeysendArgs): Promise<SendPaymentResponse> {
-    const data = await this.request<{
-      error: string;
-      message: string;
-      payment_error?: string;
-      payment_hash:
-        | {
-            type: string;
-            data: ArrayBuffer;
-          }
-        | string;
-      payment_preimage:
-        | {
-            type: string;
-            data: ArrayBuffer;
-          }
-        | string;
-      payment_route: { total_amt: number; total_fees: number };
-    }>("POST", "/payments/keysend", {
-      destination: args.pubkey,
-      amount: args.amount,
-      customRecords: args.customRecords,
-    });
-    if (data.error) {
-      throw new Error(data.message);
-    }
-    if (data.payment_error) {
-      throw new Error(data.payment_error);
-    }
-    if (
-      typeof data.payment_hash === "object" &&
-      data.payment_hash.type === "Buffer"
-    ) {
-      data.payment_hash = Buffer.from(data.payment_hash.data).toString("hex");
-    }
-    if (
-      typeof data.payment_preimage === "object" &&
-      data.payment_preimage.type === "Buffer"
-    ) {
-      data.payment_preimage = Buffer.from(data.payment_preimage.data).toString(
-        "hex"
-      );
-    }
+    const data = await this._request((client) =>
+      client.keysend({
+        destination: args.pubkey,
+        amount: args.amount,
+        customRecords: args.customRecords,
+      })
+    );
 
     return {
       data: {
-        preimage: data.payment_preimage as string,
-        paymentHash: data.payment_hash as string,
-        route: data.payment_route,
+        preimage: data.payment_preimage,
+        paymentHash: data.payment_hash,
+        route: { total_amt: data.amount, total_fees: data.fee },
       },
     };
   }
 
   async checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {
-    let paid = false;
-
-    try {
-      const response = await this.request<{
-        r_hash: {
-          type: "Buffer";
-          data: number[];
-        };
-        amount: number;
-        custom_records: ConnectorInvoice["custom_records"];
-        memo: string;
-        expire_time: number;
-        ispaid: boolean;
-        keysend: boolean;
-        pay_req: string;
-        payment_hash: string;
-        payment_request: string;
-        r_hash_str: string;
-        settled: boolean;
-        settled_at: number;
-        state: string;
-        type: string;
-        value: number;
-        metadata: string;
-      }>("GET", `/invoices/${args.paymentHash}`, undefined);
-
-      const settled = response.settled === true;
-      if (settled) paid = true;
-      return {
-        data: {
-          paid,
-        },
-      };
-    } catch (error) {
-      return {
-        data: {
-          paid,
-        },
-      };
-    }
+    const invoice = await this._request((client) =>
+      client.getInvoice(args.paymentHash)
+    );
+    return {
+      data: {
+        paid: !!invoice?.settled,
+      },
+    };
   }
 
   signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {
-    // make sure we got the config to create a new key
-    if (!this.config.url || !this.config.login || !this.config.password) {
-      return Promise.reject(new Error("Missing config"));
-    }
-    if (!args.message) {
-      return Promise.reject(new Error("Invalid message"));
-    }
-    let message: string | Uint8Array;
-    message = sha256(args.message).toString(Hex);
-    let keyHex = sha256(
-      `lndhub://${this.config.login}:${this.config.password}`
-    ).toString(Hex);
-    const { settings } = state.getState();
-    if (settings.legacyLnurlAuth) {
-      message = utils.stringToUint8Array(args.message);
-      keyHex = sha256(
-        `LBE-LNDHUB-${this.config.url}-${this.config.login}-${this.config.password}`
-      ).toString(Hex);
-    }
-    if (!keyHex) {
-      return Promise.reject(new Error("Could not create key"));
-    }
-    const signer = new HashKeySigner(keyHex);
-    const signedMessageDERHex = signer.sign(message).toDER("hex");
-    // make sure we got some signed message
-    if (!signedMessageDERHex) {
-      return Promise.reject(new Error("Signing failed"));
-    }
-    return Promise.resolve({
-      data: {
-        message: args.message,
-        signature: signedMessageDERHex,
-      },
-    });
+    // // make sure we got the config to create a new key
+    // if (!this.config.url || !this.config.login || !this.config.password) {
+    //   return Promise.reject(new Error("Missing config"));
+    // }
+    // if (!args.message) {
+    //   return Promise.reject(new Error("Invalid message"));
+    // }
+    // let message: string | Uint8Array;
+    // message = sha256(args.message).toString(Hex);
+    // let keyHex = sha256(
+    //   `lndhub://${this.config.login}:${this.config.password}`
+    // ).toString(Hex);
+    // const { settings } = state.getState();
+    // if (settings.legacyLnurlAuth) {
+    //   message = utils.stringToUint8Array(args.message);
+    //   keyHex = sha256(
+    //     `LBE-LNDHUB-${this.config.url}-${this.config.login}-${this.config.password}`
+    //   ).toString(Hex);
+    // }
+    // if (!keyHex) {
+    //   return Promise.reject(new Error("Could not create key"));
+    // }
+    // const signer = new HashKeySigner(keyHex);
+    // const signedMessageDERHex = signer.sign(message).toDER("hex");
+    // // make sure we got some signed message
+    // if (!signedMessageDERHex) {
+    //   return Promise.reject(new Error("Signing failed"));
+    // }
+    // return Promise.resolve({
+    //   data: {
+    //     message: args.message,
+    //     signature: signedMessageDERHex,
+    //   },
+    // });
+    throw new Error("SignMessage is unsupported");
   }
 
   async makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse> {
-    const data = await this.request<{
-      payment_request: string;
-      payment_hash: { type: string; data: ArrayBuffer } | string;
-    }>("POST", "/invoices", {
-      amount: args.amount,
-      memo: args.memo,
-    });
-    if (
-      typeof data.payment_hash === "object" &&
-      data.payment_hash.type === "Buffer"
-    ) {
-      data.payment_hash = Buffer.from(data.payment_hash.data).toString("hex");
-    }
+    const data = await this._request((client) =>
+      client.createInvoice({
+        amount: parseInt(args.amount.toString()),
+        description: args.memo,
+      })
+    );
 
     return {
       data: {
         paymentRequest: data.payment_request,
-        rHash: data.payment_hash as string,
+        rHash: data.payment_hash,
       },
     };
   }
 
   private async authorize(): Promise<auth.OAuth2User> {
-    console.info("this.config.oAuthToken", this.config.oAuthToken);
+    // console.info("this.config.oAuthToken", this.config.oAuthToken);
     try {
       const clientId = process.env.ALBY_OAUTH_CLIENT_ID;
       const clientSecret = process.env.ALBY_OAUTH_CLIENT_SECRET;
