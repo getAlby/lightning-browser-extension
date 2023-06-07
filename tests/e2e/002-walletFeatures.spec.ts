@@ -54,6 +54,8 @@ test.describe("Wallet features", () => {
     await loginToExistingAlbyAccount(page);
     const $document = await getDocument(page);
 
+    await (await findByText($document, "Wallet")).click();
+    page.waitForSelector("button");
     // create invoice
     await (await findByText($document, "Receive")).click();
 
@@ -76,6 +78,8 @@ test.describe("Wallet features", () => {
     await loginToExistingAlbyAccount(page);
     const $document = await getDocument(page);
 
+    await (await findByText($document, "Wallet")).click();
+    page.waitForSelector("button");
     // go to send
     await (await findByText($document, "Send")).click();
     const invoiceInput = await findByText(
@@ -97,6 +101,8 @@ test.describe("Wallet features", () => {
     await loginToExistingAlbyAccount(page);
     const $document = await getDocument(page);
 
+    await (await findByText($document, "Wallet")).click();
+    page.waitForSelector("button");
     // go to send
     await (await findByText($document, "Send")).click();
     const invoiceInput = await findByText(
