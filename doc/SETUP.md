@@ -18,7 +18,7 @@
   - Opera\
      `$ dotenv yarn run dev:opera`
 
-  **NOTE:** by default, the extension built this way will talk to the testnet API (which runs under [app.regtest.getalby.com](https://app.regtest.getalby.com/user)). In case you want to do manual tests against the mainnet API, set the following `WALLET_CREATE_URL` environment variable in your .env: `WALLET_CREATE_URL="https://getalby.com/api/users"`
+  **NOTE:** by default, the extension built this way will talk to the testnet API (which runs under [app.regtest.getalby.com](https://app.regtest.getalby.com/user)). In case you want to do manual tests against the mainnet API, update your .env file (see .env.example)
 
 - **Chrome**
 

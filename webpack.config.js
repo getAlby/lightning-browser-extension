@@ -13,9 +13,15 @@ const BundleAnalyzerPlugin =
   require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
 // default value is set in the code where it is used
-if (!process.env.WALLET_CREATE_URL) {
-  process.env.WALLET_CREATE_URL = ""; // env variables are passed as string. empty strings are still falsy
+if (!process.env.ALBY_API_URL) {
+  process.env.ALBY_API_URL = ""; // env variables are passed as string. empty strings are still falsy
 }
+
+// default value is set in the code where it is used
+if (!process.env.ALBY_OAUTH_AUTHORIZE_URL) {
+  process.env.ALBY_OAUTH_AUTHORIZE_URL = ""; // env variables are passed as string. empty strings are still falsy
+}
+
 // default value is set in the code where it is used
 if (!process.env.BITCOIN_BEACH_GALOY_URL) {
   process.env.BITCOIN_BEACH_GALOY_URL = ""; // env variables are passed as string. empty strings are still falsy
@@ -154,7 +160,6 @@ var options = {
       "BITCOIN_JUNGLE_GALOY_URL",
       "NODE_ENV",
       "TARGET_BROWSER",
-      "WALLET_CREATE_URL",
       "HMAC_VERIFY_HEADER_KEY",
       "ALBY_OAUTH_CLIENT_ID",
       "ALBY_OAUTH_CLIENT_SECRET",

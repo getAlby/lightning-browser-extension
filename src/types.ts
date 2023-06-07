@@ -781,3 +781,9 @@ export interface DeferredPromise {
 }
 
 export type Theme = "dark" | "light";
+
+export type OAuthToken = {
+  access_token: string;
+  refresh_token: string;
+  expires_at: number;
+};

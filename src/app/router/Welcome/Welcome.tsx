@@ -42,6 +42,7 @@ function getRoutes(
             <ChooseConnectorPath
               title={i18n.t("translation:choose_path.title")}
               description={i18n.t("translation:choose_path.description")}
+              fromWelcome
             />
           ),
         },
