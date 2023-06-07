@@ -179,7 +179,7 @@
         "sms_code": {
           "label": "Insira o código de verificação SMS"
         },
-        "jwt": {
+        "token": {
           "label": "Insira o token JWT"
         },
         "actions": {
@@ -190,7 +190,7 @@
           "failed_to_request_sms": "Falha ao solicitar código SMS",
           "failed_to_login_sms": "Falha ao logar usando o código SMS",
           "setup_failed": "Falha na configuração",
-          "missing_jwt": "JWT ausente, não foi possível fazer login."
+          "missing_token": "JWT ausente, não foi possível fazer login."
         }
       },
       "lndhub_bluewallet": {

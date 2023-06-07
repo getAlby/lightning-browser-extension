@@ -18,6 +18,9 @@ async function onstart() {
   if (nostrEnabled) {
     injectScript(browser.runtime.getURL("js/inpageScriptNostr.bundle.js"));
   }
+
+  // window.alby
+  injectScript(browser.runtime.getURL("js/inpageScriptAlby.bundle.js"));
 }
 
 onstart();

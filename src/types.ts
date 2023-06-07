@@ -139,6 +139,9 @@ export type NavigationState = {
     destination?: string;
     amount?: string;
     customRecords?: Record<string, string>;
+    connector?: string;
+    name?: string;
+    config?: unknown;
     message?: string;
     event?: Event;
     sigHash?: string;
@@ -321,7 +324,7 @@ export interface MessageAllowanceEnable extends MessageDefault {
   args: {
     host: Allowance["host"];
   };
-  action: "public/webln/enable" | "public/nostr/enable";
+  action: "public/webln/enable" | "public/nostr/enable" | "public/alby/enable";
 }
 
 export interface MessageAllowanceDelete extends MessageDefault {

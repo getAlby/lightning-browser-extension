@@ -187,7 +187,7 @@
         "sms_code": {
           "label": "Fyll i verifieringskoden du fick via SMS"
         },
-        "jwt": {
+        "token": {
           "label": "Fyll i din JWT-token",
           "info": "Inloggning till {{label}} uppdateras. Om du är avancerad användare kan du hämta din JWT token genom att logga in via <0>Web Wallet (wallet.mainnet.galoy.io)</0><1/><1/> JWT ser ut som följer: <2>eyJhbG...</2><1/><1/>"
         },
@@ -199,8 +199,8 @@
           "failed_to_request_sms": "Begäran om SMS-kod misslyckades",
           "failed_to_login_sms": "Inloggning med SMS-kod misslyckades",
           "setup_failed": "Konfiguration misslyckades",
-          "missing_jwt": "JWT saknas, kunde inte logga in.",
-          "invalid_jwt": "ogiltig JWT godkändes"
+          "missing_token": "JWT saknas, kunde inte logga in.",
+          "invalid_token": "ogiltig JWT godkändes"
         }
       },
       "btcpay": {
