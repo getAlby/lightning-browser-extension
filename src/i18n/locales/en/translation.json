@@ -746,6 +746,10 @@
       "allow": "Allow this website to execute:",
       "always_allow": "Remember my choice and don't ask again"
     },
+    "confirm_add_account": {
+      "title": "Add account",
+      "content": "This website wants to add an account ({{connector}}):"
+    },
     "nostr": {
       "title": "Nostr",
       "allow": "Allow this website to:",
@@ -843,6 +847,19 @@
       "log_in": "Log in",
       "remember": "Remember my choice and don't ask again",
       "more": "More"
+    },
+    "connectors": {
+      "lnd": "LND",
+      "nativelnd": "LND (over Tor)",
+      "lndhub": "LNDHub",
+      "nativelndhub": "LNDHub (over Tor)",
+      "lnbits": "LNBits",
+      "nativelnbits": "LNBits (over Tor)",
+      "galoy": "Galoy",
+      "eclair": "Eclair",
+      "citadel": "Citadel",
+      "nativecitadel": "Citadel (over Tor)",
+      "commando": "Commando"
     },
     "errors": {
       "connection_failed": "Connection failed",
