@@ -789,6 +789,10 @@
       "start9": {
         "name": "Start9"
       }
+    },
+    "confirm_add_account": {
+      "title": "Konto hinzufügen",
+      "content": "Diese Website möchte ein Konto hinzufügen ({{connector}}):"
     }
   },
   "components": {
@@ -957,7 +961,20 @@
       "greaterThan": "> {{min}}"
     },
     "balance": "Bilanz",
-    "wallet": "Wallet"
+    "wallet": "Wallet",
+    "connectors": {
+      "lnd": "LND",
+      "nativelnd": "LND (über Tor)",
+      "citadel": "Citadel",
+      "nativecitadel": "Citadel (über Tor)",
+      "commando": "Kommando",
+      "lnbits": "LNBits",
+      "lndhub": "LNDHub",
+      "nativelndhub": "LNDHub (über Tor)",
+      "nativelnbits": "LNBits (über Tor)",
+      "galoy": "Galoy",
+      "eclair": "Eclair"
+    }
   },
   "permissions": {
     "commando": {
