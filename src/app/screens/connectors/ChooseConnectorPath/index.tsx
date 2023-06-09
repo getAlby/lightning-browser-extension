@@ -35,9 +35,8 @@ export default function ChooseConnectorPath({
 
   // TODO: rename & move to a separate file (it's only for connecting to an Alby account)
   async function connect() {
-    const name = "Alby";
     const initialAccount = {
-      name,
+      name: "Alby",
       config: {},
       connector: "alby",
     };
@@ -49,9 +48,10 @@ export default function ChooseConnectorPath({
           throw new Error("No oAuthToken returned");
         }
 
+        const alias = (validation.info as { data: WebLNNode }).data.alias;
         const account = {
           ...initialAccount,
-          name: (validation.info as { data: WebLNNode }).data.alias,
+          name: alias || initialAccount.name,
           config: {
             ...initialAccount.config,
             oAuthToken: validation.oAuthToken,
