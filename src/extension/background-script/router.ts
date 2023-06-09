@@ -2,6 +2,7 @@ import * as accounts from "./actions/accounts";
 import * as allowances from "./actions/allowances";
 import * as blocklist from "./actions/blocklist";
 import * as cache from "./actions/cache";
+import * as liquid from "./actions/liquid";
 import * as ln from "./actions/ln";
 import lnurl, { auth } from "./actions/lnurl";
 import * as mnemonic from "./actions/mnemonic";
@@ -64,6 +65,11 @@ const routes = {
   setMnemonic: mnemonic.setMnemonic,
   getMnemonic: mnemonic.getMnemonic,
 
+  liquid: {
+    getPrivateKey: liquid.getPrivateKey,
+    setPrivateKey: liquid.setPrivateKey,
+  },
+
   nostr: {
     generatePrivateKey: nostr.generatePrivateKey,
     getPrivateKey: nostr.getPrivateKey,
@@ -92,6 +98,11 @@ const routes = {
       lnurl: webln.lnurl,
       makeInvoice: webln.makeInvoiceOrPrompt,
       request: ln.request,
+    },
+    liquid: {
+      enable: allowances.enable,
+      getPublicKeyOrPrompt: liquid.getPublicKeyOrPrompt,
+      signSchnorrOrPrompt: liquid.signSchnorrOrPrompt,
     },
     nostr: {
       enable: allowances.enable,

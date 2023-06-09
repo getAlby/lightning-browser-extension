@@ -9,6 +9,8 @@ import LNURLAuth from "@screens/LNURLAuth";
 import LNURLChannel from "@screens/LNURLChannel";
 import LNURLPay from "@screens/LNURLPay";
 import LNURLWithdraw from "@screens/LNURLWithdraw";
+import LiquidConfirmGetPublicKey from "@screens/Liquid/ConfirmGetPublicKey";
+import LiquidConfirmSignSchnorr from "@screens/Liquid/ConfirmSignSchnorr";
 import MakeInvoice from "@screens/MakeInvoice";
 import NostrConfirm from "@screens/Nostr/Confirm";
 import NostrConfirmGetPublicKey from "@screens/Nostr/ConfirmGetPublicKey";
@@ -78,12 +80,24 @@ function Prompt() {
               element={<Enable origin={navigationState.origin as OriginData} />} // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
             />
             <Route
+              path="public/liquid/enable"
+              element={<Enable origin={navigationState.origin as OriginData} />} // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
+            />
+            <Route
               path="public/nostr/enable"
               element={<Enable origin={navigationState.origin as OriginData} />} // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
             />
             <Route
               path="public/webbtc/enable"
               element={<Enable origin={navigationState.origin as OriginData} />} // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
+            />
+            <Route
+              path="public/liquid/confirmGetPublicKey"
+              element={<LiquidConfirmGetPublicKey />}
+            />
+            <Route
+              path="public/liquid/confirmSignSchnorr"
+              element={<LiquidConfirmSignSchnorr />}
             />
             <Route path="public/nostr/confirm" element={<NostrConfirm />} />
             <Route

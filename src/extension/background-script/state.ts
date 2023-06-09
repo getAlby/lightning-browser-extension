@@ -10,6 +10,7 @@ import type { Account, Accounts, SettingsStorage } from "~/types";
 
 import connectors from "./connectors";
 import type Connector from "./connectors/connector.interface";
+import Liquid from "./liquid";
 import Nostr from "./nostr";
 
 interface State {
@@ -19,11 +20,13 @@ interface State {
   connector: Promise<Connector> | null;
   currentAccountId: string | null;
   nostrPrivateKey: string | null;
+  liquid: Liquid | null;
   nostr: Nostr | null;
   mv2Password: string | null;
   password: (password?: string | null) => Promise<string | null>;
   getAccount: () => Account | null;
   getConnector: () => Promise<Connector>;
+  getLiquid: () => Promise<Liquid>;
   getNostr: () => Promise<Nostr>;
   init: () => Promise<void>;
   isUnlocked: () => Promise<boolean>;
@@ -64,6 +67,7 @@ const state = createState<State>((set, get) => ({
   migrations: [],
   accounts: {},
   currentAccountId: null,
+  liquid: null,
   nostr: null,
   nostrPrivateKey: null,
   mv2Password: null,
@@ -117,6 +121,25 @@ const state = createState<State>((set, get) => ({
     const connector = await connectorPromise;
     return connector;
   },
+  getLiquid: async () => {
+    if (get().liquid) {
+      return get().liquid as Liquid;
+    }
+    const currentAccountId = get().currentAccountId as string;
+    const account = get().accounts[currentAccountId];
+
+    const password = await get().password();
+    if (!password) throw new Error("Password is not set");
+    const privateKey = decryptData(
+      account.liquidPrivateKey as string,
+      password
+    );
+
+    const liquid = new Liquid(privateKey);
+    set({ liquid: liquid });
+
+    return liquid;
+  },
   getNostr: async () => {
     if (get().nostr) {
       return get().nostr as Nostr;
@@ -156,7 +179,7 @@ const state = createState<State>((set, get) => ({
       const connector = (await get().connector) as Connector;
       await connector.unload();
     }
-    set({ connector: null, account: null, nostr: null });
+    set({ connector: null, account: null, liquid: null, nostr: null });
   },
   isUnlocked: async () => {
     const password = await await get().password();

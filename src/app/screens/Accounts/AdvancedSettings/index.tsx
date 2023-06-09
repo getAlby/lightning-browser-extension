@@ -12,35 +12,35 @@ import Button from "~/app/components/Button";
 import InputCopyButton from "~/app/components/InputCopyButton";
 import TextField from "~/app/components/form/TextField";
 import { useAccount } from "~/app/context/AccountContext";
+import { KeyOrigin, getKeyOrigin } from "~/app/utils/getKeyOrigin";
+import { savePrivateKey } from "~/app/utils/savePrivateKey";
+import { default as liquid } from "~/common/lib/liquid";
 import {
-  NostrKeyOrigin,
-  getNostrKeyOrigin,
-} from "~/app/utils/getNostrKeyOrigin";
-import { saveNostrPrivateKey } from "~/app/utils/saveNostrPrivateKey";
-import { deriveNostrPrivateKey } from "~/common/lib/mnemonic";
+  deriveLiquidPrivateKey,
+  deriveNostrPrivateKey,
+} from "~/common/lib/mnemonic";
 import msg from "~/common/lib/msg";
 import { default as nostr, default as nostrlib } from "~/common/lib/nostr";
 
-function NostrAdvancedSettings() {
+function AdvancedSettings({ type }: { type: "nostr" | "liquid" }) {
   const account = useAccount();
   const { t: tCommon } = useTranslation("common");
   const { t } = useTranslation("translation", {
-    keyPrefix: "accounts.account_view",
+    keyPrefix: `accounts.account_view.${type}`,
   });
   // TODO: add hooks useMnemonic, useNostrPrivateKey, ...
   const [mnemonic, setMnemonic] = useState("");
   const [currentPrivateKey, setCurrentPrivateKey] = useState("");
-  const [nostrPrivateKey, setNostrPrivateKey] = useState("");
-  const [nostrPrivateKeyVisible, setNostrPrivateKeyVisible] = useState(false);
-  const [nostrPublicKey, setNostrPublicKey] = useState("");
-  const [nostrKeyOrigin, setNostrKeyOrigin] =
-    useState<NostrKeyOrigin>("unknown");
+  const [privateKey, setPrivateKey] = useState("");
+  const [privateKeyVisible, setPrivateKeyVisible] = useState(false);
+  const [publicKey, setPublicKey] = useState("");
+  const [keyOrigin, setKeyOrigin] = useState<KeyOrigin>("unknown");
   const { id } = useParams();
 
   const fetchData = useCallback(async () => {
     try {
       if (id) {
-        const priv = (await msg.request("nostr/getPrivateKey", {
+        const priv = (await msg.request(`${type}/getPrivateKey`, {
           id,
         })) as string;
         if (priv) {
@@ -55,15 +55,15 @@ function NostrAdvancedSettings() {
         }
 
         if (priv) {
-          const keyOrigin = await getNostrKeyOrigin(priv, accountMnemonic);
-          setNostrKeyOrigin(keyOrigin);
+          const keyOrigin = await getKeyOrigin(type, priv, accountMnemonic);
+          setKeyOrigin(keyOrigin);
         }
       }
     } catch (e) {
       console.error(e);
       if (e instanceof Error) toast.error(`Error: ${e.message}`);
     }
-  }, [id]);
+  }, [id, type]);
 
   useEffect(() => {
     fetchData();
@@ -71,29 +71,37 @@ function NostrAdvancedSettings() {
 
   useEffect(() => {
     try {
-      setNostrPublicKey(
-        currentPrivateKey ? nostr.generatePublicKey(currentPrivateKey) : ""
+      setPublicKey(
+        currentPrivateKey
+          ? type === "nostr"
+            ? nostr.generatePublicKey(currentPrivateKey)
+            : liquid.generatePublicKey(currentPrivateKey)
+          : ""
       );
-      setNostrPrivateKey(
-        currentPrivateKey ? nostrlib.hexToNip19(currentPrivateKey, "nsec") : ""
-      );
+      type === "nostr"
+        ? setPrivateKey(
+            currentPrivateKey
+              ? nostrlib.hexToNip19(currentPrivateKey, "nsec")
+              : ""
+          )
+        : setPrivateKey(currentPrivateKey);
     } catch (e) {
       if (e instanceof Error)
         toast.error(
           <p>
-            {t("nostr.errors.failed_to_load")}
+            {t("errors.failed_to_load")}
             <br />
             {e.message}
           </p>
         );
     }
-  }, [currentPrivateKey, t]);
+  }, [currentPrivateKey, t, type]);
 
   function onCancel() {
     history.back();
   }
 
-  async function handleDeriveNostrKeyFromSecretKey() {
+  async function handleDeriveKeyFromSecretKey() {
     if (!id) {
       throw new Error("No id set");
     }
@@ -102,35 +110,38 @@ function NostrAdvancedSettings() {
       throw new Error("No mnemonic exists");
     }
 
-    const nostrPrivateKey = await deriveNostrPrivateKey(mnemonic);
+    const privateKey =
+      type === "nostr"
+        ? await deriveNostrPrivateKey(mnemonic)
+        : await deriveLiquidPrivateKey(mnemonic);
 
-    await handleSaveNostrPrivateKey(nostrPrivateKey);
+    await handleSavePrivateKey(privateKey);
   }
 
-  async function handleSaveNostrPrivateKey(nostrPrivateKey: string) {
+  async function handleSavePrivateKey(privateKey: string) {
     if (!id) {
       throw new Error("No id set");
     }
-    if (nostrPrivateKey === currentPrivateKey) {
+    if (privateKey === currentPrivateKey) {
       throw new Error("private key hasn't changed");
     }
 
     if (
       currentPrivateKey &&
-      prompt(t("nostr.private_key.warning"))?.toLowerCase() !==
+      prompt(t("private_key.warning"))?.toLowerCase() !==
         account?.account?.name?.toLowerCase()
     ) {
-      toast.error(t("nostr.private_key.failed_to_remove"));
+      toast.error(t("private_key.failed_to_remove"));
       return;
     }
 
     try {
-      saveNostrPrivateKey(id, nostrPrivateKey);
+      savePrivateKey(type, id, privateKey);
       toast.success(
         t(
-          nostrPrivateKey
-            ? "nostr.private_key.success"
-            : "nostr.private_key.successfully_removed"
+          privateKey
+            ? "private_key.success"
+            : "private_key.successfully_removed"
         )
       );
     } catch (e) {
@@ -151,46 +162,46 @@ function NostrAdvancedSettings() {
       <form
         onSubmit={(e: FormEvent) => {
           e.preventDefault();
-          handleSaveNostrPrivateKey(nostrPrivateKey);
+          handleSavePrivateKey(privateKey);
         }}
       >
         <Container maxWidth="sm">
           <div className="mt-12 shadow bg-white sm:rounded-md sm:overflow-hidden p-10 divide-black/10 dark:divide-white/10 dark:bg-surface-02dp flex flex-col gap-4">
             <div>
               <h1 className="font-bold text-2xl dark:text-white">
-                {t("nostr.advanced_settings.title")}
+                {t("advanced_settings.title")}
               </h1>
               <p className="text-gray-500 dark:text-neutral-500">
-                {t("nostr.advanced_settings.description")}
+                {t("advanced_settings.description")}
               </p>
             </div>
 
-            {currentPrivateKey && nostrKeyOrigin !== "secret-key" ? (
+            {currentPrivateKey && keyOrigin !== "secret-key" ? (
               // TODO: extract to Alert component
               <div className="rounded-md font-medium p-4 text-orange-700 bg-orange-50 dark:text-orange-400 dark:bg-orange-900">
                 <p>
                   {t(
-                    nostrKeyOrigin === "unknown"
-                      ? "nostr.advanced_settings.imported_key_warning"
-                      : "nostr.advanced_settings.legacy_derived_key_warning"
+                    keyOrigin === "unknown"
+                      ? "advanced_settings.imported_key_warning"
+                      : "advanced_settings.legacy_derived_key_warning"
                   )}
                 </p>
               </div>
-            ) : nostrKeyOrigin === "secret-key" ? (
+            ) : keyOrigin === "secret-key" ? (
               // TODO: extract to Alert component
               <div className="rounded-md font-medium p-4 text-green-700 bg-green-50 dark:text-green-400 dark:bg-green-900">
-                <p>{t("nostr.advanced_settings.can_restore")}</p>
+                <p>{t("advanced_settings.can_restore")}</p>
               </div>
             ) : null}
 
             <div>
               <TextField
-                id="nostrPrivateKey"
-                label={t("nostr.private_key.label")}
-                type={nostrPrivateKeyVisible ? "text" : "password"}
-                value={nostrPrivateKey}
+                id="privateKey"
+                label={t("private_key.label")}
+                type={privateKeyVisible ? "text" : "password"}
+                value={privateKey}
                 onChange={(event) => {
-                  setNostrPrivateKey(event.target.value.trim());
+                  setPrivateKey(event.target.value.trim());
                 }}
                 endAdornment={
                   <div className="flex items-center gap-1 px-2">
@@ -199,16 +210,16 @@ function NostrAdvancedSettings() {
                       tabIndex={-1}
                       className="flex justify-center items-center h-8"
                       onClick={() => {
-                        setNostrPrivateKeyVisible(!nostrPrivateKeyVisible);
+                        setPrivateKeyVisible(!privateKeyVisible);
                       }}
                     >
-                      {nostrPrivateKeyVisible ? (
+                      {privateKeyVisible ? (
                         <HiddenIcon className="h-6 w-6" />
                       ) : (
                         <VisibleIcon className="h-6 w-6" />
                       )}
                     </button>
-                    <InputCopyButton value={nostrPrivateKey} className="w-6" />
+                    <InputCopyButton value={privateKey} className="w-6" />
                   </div>
                 }
               />
@@ -216,28 +227,28 @@ function NostrAdvancedSettings() {
 
             <div>
               <TextField
-                id="nostrPublicKey"
-                label={t("nostr.public_key.label")}
+                id="publicKey"
+                label={t("public_key.label")}
                 type="text"
-                value={nostrPublicKey}
+                value={publicKey}
                 disabled
-                endAdornment={<InputCopyButton value={nostrPublicKey} />}
+                endAdornment={<InputCopyButton value={publicKey} />}
               />
-              {nostrKeyOrigin !== "secret-key" &&
+              {keyOrigin !== "secret-key" &&
                 (mnemonic || !currentPrivateKey) && (
                   <div className="mt-4">
                     {mnemonic ? (
                       <Button
                         outline
-                        label={t("nostr.advanced_settings.derive")}
-                        onClick={handleDeriveNostrKeyFromSecretKey}
+                        label={t("advanced_settings.derive")}
+                        onClick={handleDeriveKeyFromSecretKey}
                       />
                     ) : (
                       // TODO: extract to Alert component
                       <div className="rounded-md font-medium p-4 text-blue-700 bg-blue-50 dark:text-blue-400 dark:bg-blue-900">
                         <p>
                           <Trans
-                            i18nKey={"nostr.advanced_settings.no_secret_key"}
+                            i18nKey={"advanced_settings.no_secret_key"}
                             t={t}
                             components={[
                               // eslint-disable-next-line react/jsx-key
@@ -261,7 +272,9 @@ function NostrAdvancedSettings() {
               type="submit"
               label={tCommon("actions.save")}
               disabled={
-                nostrlib.normalizeToHex(nostrPrivateKey) === currentPrivateKey
+                type === "nostr"
+                  ? nostrlib.normalizeToHex(privateKey) === currentPrivateKey
+                  : privateKey === currentPrivateKey
               }
               primary
             />
@@ -272,4 +285,4 @@ function NostrAdvancedSettings() {
   );
 }
 
-export default NostrAdvancedSettings;
+export default AdvancedSettings;

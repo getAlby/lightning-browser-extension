@@ -26,11 +26,9 @@ import MenuDivider from "~/app/components/Menu/MenuDivider";
 import { useAccount } from "~/app/context/AccountContext";
 import { useAccounts } from "~/app/context/AccountsContext";
 import { useSettings } from "~/app/context/SettingsContext";
-import {
-  NostrKeyOrigin,
-  getNostrKeyOrigin,
-} from "~/app/utils/getNostrKeyOrigin";
+import { KeyOrigin, getKeyOrigin } from "~/app/utils/getKeyOrigin";
 import api, { GetAccountRes } from "~/common/lib/api";
+import liquid from "~/common/lib/liquid";
 import msg from "~/common/lib/msg";
 import nostr from "~/common/lib/nostr";
 import type { Account } from "~/types";
@@ -62,10 +60,12 @@ function AccountDetail() {
 
   // TODO: add hooks useMnemonic, useNostrPrivateKey, ...
   const [mnemonic, setMnemonic] = useState("");
-  const [currentPrivateKey, setCurrentPrivateKey] = useState("");
+  const [nostrPrivateKey, setNostrPrivateKey] = useState("");
   const [nostrPublicKey, setNostrPublicKey] = useState("");
-  const [nostrKeyOrigin, setNostrKeyOrigin] =
-    useState<NostrKeyOrigin>("unknown");
+  const [nostrKeyOrigin, setNostrKeyOrigin] = useState<KeyOrigin>("unknown");
+  const [liquidPrivateKey, setLiquidPrivateKey] = useState("");
+  const [liquidPublicKey, setLiquidPublicKey] = useState("");
+  const [liquidKeyOrigin, setLiquidKeyOrigin] = useState<KeyOrigin>("unknown");
 
   const [exportLoading, setExportLoading] = useState(false);
   const [exportModalIsOpen, setExportModalIsOpen] = useState(false);
@@ -80,11 +80,18 @@ function AccountDetail() {
         setAccount(response);
         setAccountName(response.name);
 
-        const priv = (await msg.request("nostr/getPrivateKey", {
+        const privLiquid = (await msg.request("liquid/getPrivateKey", {
           id,
         })) as string;
-        if (priv) {
-          setCurrentPrivateKey(priv);
+        if (privLiquid) {
+          setLiquidPrivateKey(privLiquid);
+        }
+
+        const privNostr = (await msg.request("nostr/getPrivateKey", {
+          id,
+        })) as string;
+        if (privNostr) {
+          setNostrPrivateKey(privNostr);
         }
 
         const accountMnemonic = (await msg.request("getMnemonic", {
@@ -93,8 +100,20 @@ function AccountDetail() {
         if (accountMnemonic) {
           setMnemonic(accountMnemonic);
         }
-        if (priv) {
-          const keyOrigin = await getNostrKeyOrigin(priv, accountMnemonic);
+        if (privLiquid) {
+          const keyOrigin = await getKeyOrigin(
+            "liquid",
+            privLiquid,
+            accountMnemonic
+          );
+          setLiquidKeyOrigin(keyOrigin);
+        }
+        if (privNostr) {
+          const keyOrigin = await getKeyOrigin(
+            "nostr",
+            privNostr,
+            accountMnemonic
+          );
           setNostrKeyOrigin(keyOrigin);
         }
       }
@@ -187,8 +206,25 @@ function AccountDetail() {
 
   useEffect(() => {
     try {
+      setLiquidPublicKey(
+        liquidPrivateKey ? liquid.generatePublicKey(liquidPrivateKey) : ""
+      );
+    } catch (e) {
+      if (e instanceof Error)
+        toast.error(
+          <p>
+            {t("liquid.errors.failed_to_load")}
+            <br />
+            {e.message}
+          </p>
+        );
+    }
+  }, [liquidPrivateKey, t]);
+
+  useEffect(() => {
+    try {
       setNostrPublicKey(
-        currentPrivateKey ? nostr.generatePublicKey(currentPrivateKey) : ""
+        nostrPrivateKey ? nostr.generatePublicKey(nostrPrivateKey) : ""
       );
     } catch (e) {
       if (e instanceof Error)
@@ -200,7 +236,7 @@ function AccountDetail() {
           </p>
         );
     }
-  }, [currentPrivateKey, t]);
+  }, [nostrPrivateKey, t]);
 
   return !account ? (
     <div className="flex justify-center mt-5">
@@ -427,7 +463,7 @@ function AccountDetail() {
               </div>
             </div>
             <MenuDivider />
-            <div className="mb-4 flex justify-between items-end">
+            <div className="flex justify-between items-end">
               <div className="w-7/12 flex items-center gap-2">
                 <TextField
                   id="nostrPublicKey"
@@ -452,6 +488,40 @@ function AccountDetail() {
                 <Link to="nostr">
                   <Button
                     label={t("nostr.advanced_settings.label")}
+                    primary
+                    fullWidth
+                  />
+                </Link>
+              </div>
+            </div>
+            <MenuDivider />
+            <div className="flex justify-between items-end">
+              <div className="w-7/12 flex items-center gap-2">
+                <TextField
+                  id="liquidPublicKey"
+                  label={t("liquid.public_key.label")}
+                  type="text"
+                  value={liquidPublicKey}
+                  disabled
+                  endAdornment={
+                    liquidPublicKey && (
+                      <InputCopyButton value={liquidPublicKey} />
+                    )
+                  }
+                />
+                {liquidPublicKey && liquidKeyOrigin !== "secret-key" && (
+                  <Badge
+                    label="imported"
+                    color="green-bitcoin"
+                    textColor="white"
+                  />
+                )}
+              </div>
+
+              <div className="w-1/5 flex-none">
+                <Link to="liquid">
+                  <Button
+                    label={t("liquid.advanced_settings.label")}
                     primary
                     fullWidth
                   />

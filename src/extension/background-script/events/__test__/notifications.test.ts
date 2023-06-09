@@ -29,6 +29,7 @@ const settings: SettingsStorage = {
   userEmail: "",
   userName: "",
   websiteEnhancements: true,
+  liquidEnabled: false,
   nostrEnabled: false,
   closedTips: [],
   bitcoinNetwork: "bitcoin",

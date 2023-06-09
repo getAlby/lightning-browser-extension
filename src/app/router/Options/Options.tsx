@@ -24,9 +24,9 @@ import ScrollToTop from "~/app/components/ScrollToTop";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
 import { getConnectorRoutes, renderRoutes } from "~/app/router/connectorRoutes";
+import AdvancedSettings from "~/app/screens/Accounts/AdvancedSettings";
 import BackupSecretKey from "~/app/screens/Accounts/BackupSecretKey";
 import ImportSecretKey from "~/app/screens/Accounts/ImportSecretKey";
-import NostrAdvancedSettings from "~/app/screens/Accounts/NostrAdvancedSettings";
 import Discover from "~/app/screens/Discover";
 import AlbyWallet from "~/app/screens/connectors/AlbyWallet";
 import ChooseConnector from "~/app/screens/connectors/ChooseConnector";
@@ -86,7 +86,14 @@ function Options() {
                 path=":id/secret-key/import"
                 element={<ImportSecretKey />}
               />
-              <Route path=":id/nostr" element={<NostrAdvancedSettings />} />
+              <Route
+                path=":id/liquid"
+                element={<AdvancedSettings type="liquid" />}
+              />
+              <Route
+                path=":id/nostr"
+                element={<AdvancedSettings type="nostr" />}
+              />
               <Route
                 path="new"
                 element={

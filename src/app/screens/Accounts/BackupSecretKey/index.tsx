@@ -30,18 +30,25 @@ function BackupSecretKey() {
   // TODO: useMnemonic hook
   const [hasMnemonic, setHasMnemonic] = useState(false);
   // TODO: useNostrPrivateKey hook
-  const [currentPrivateKey, setCurrentPrivateKey] = useState("");
+  const [currentLiquidPrivateKey, setCurrentLiquidPrivateKey] = useState("");
+  const [currentNostrPrivateKey, setCurrentNostrPrivateKey] = useState("");
 
   const { id } = useParams();
 
   const fetchData = useCallback(async () => {
     try {
       if (id) {
-        const priv = (await msg.request("nostr/getPrivateKey", {
+        const nostrPriv = (await msg.request("nostr/getPrivateKey", {
           id,
         })) as string;
-        if (priv) {
-          setCurrentPrivateKey(priv);
+        if (nostrPriv) {
+          setCurrentNostrPrivateKey(nostrPriv);
+        }
+        const liquidPriv = (await msg.request("liquid/getPrivateKey", {
+          id,
+        })) as string;
+        if (liquidPriv) {
+          setCurrentLiquidPrivateKey(liquidPriv);
         }
         const accountMnemonic = (await msg.request("getMnemonic", {
           id,
@@ -162,7 +169,13 @@ function BackupSecretKey() {
               )}
             </>
           </MnemonicInputs>
-          {!hasMnemonic && currentPrivateKey && (
+          {!hasMnemonic && currentLiquidPrivateKey && (
+            // TODO: extract to Alert component
+            <div className="rounded-md font-medium p-4 text-orange-700 bg-orange-50 dark:text-orange-400 dark:bg-orange-900">
+              {t("existing_liquid_key_notice")}
+            </div>
+          )}
+          {!hasMnemonic && currentNostrPrivateKey && (
             // TODO: extract to Alert component
             <div className="rounded-md font-medium p-4 text-orange-700 bg-orange-50 dark:text-orange-400 dark:bg-orange-900">
               {t("existing_nostr_key_notice")}

@@ -15,6 +15,7 @@ export const DEFAULT_SETTINGS: SettingsStorage = {
   showFiat: true,
   currency: CURRENCIES.USD,
   exchange: "alby",
+  liquidEnabled: false,
   nostrEnabled: false,
   closedTips: [],
   bitcoinNetwork: "bitcoin",

@@ -9,6 +9,7 @@ async function onstart() {
   if (!inject) {
     return;
   }
+  const accountDetails = await api.getAccount();
 
   // window.webln
   injectScript(browser.runtime.getURL("js/inpageScriptWebLN.bundle.js"));
@@ -18,13 +19,17 @@ async function onstart() {
   injectScript(browser.runtime.getURL("js/inpageScriptWebBTC.bundle.js"));
 
   // window.nostr
-  const nostrEnabled = (await api.getAccount()).nostrEnabled;
-  if (nostrEnabled) {
+  if (accountDetails.nostrEnabled) {
     injectScript(browser.runtime.getURL("js/inpageScriptNostr.bundle.js"));
   }
 
   // window.alby
   injectScript(browser.runtime.getURL("js/inpageScriptAlby.bundle.js"));
+
+  // window.secp256k1
+  if (accountDetails.liquidEnabled) {
+    injectScript(browser.runtime.getURL("js/inpageScriptLiquid.bundle.js"));
+  }
 }
 
 onstart();

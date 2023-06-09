@@ -421,6 +421,7 @@
           "description": "Your Account Secret Key allows you to use Alby to interact with protocols such as Nostr or Ordinals.",
           "description2": "Your Secret Key is a set of 12 words that will allow you to access your keys to protocols such as Nostr or Ordinals on a new device or in case you loose access to your account.",
           "saved": "Secret Key encrypted & saved successfully.",
+          "existing_liquid_key_notice": "⚠️ This account already has a liquid private key set and will not be derived from this secret key. You can manage your liquid key from your account settings.",
           "existing_nostr_key_notice": "⚠️ This account already has a nostr private key set and will not be derived from this secret key. You can manage your nostr key from your account settings.",
           "generate": {
             "title": "Generate your Secret Key",
@@ -448,6 +449,47 @@
           },
           "inputs": {
             "title": "Your Secret Key"
+          }
+        },
+        "liquid": {
+          "title": "Liquid",
+          "hint": "have to fill this.",
+          "advanced_settings": {
+            "label": "Advanced Settings",
+            "title": "Advanced Liquid Settings",
+            "description": "Derive Liquid keys from your Secret Key or import your existing private key by pasting it in the \"Liquid Private Key\" field.",
+            "imported_key_warning": "⚠️ You're currently using an imported or randomly generated Liquid key. Your Liquid private key cannot be restored by your Secret Key, so remember to back up your Liquid private key.",
+            "legacy_derived_key_warning": "⚠️ You're currently using a Liquid key derived from your account (legacy). Your Liquid private key cannot be restored by your Secret Key, so remember to back up your Liquid private key.",
+            "can_restore": "✅ Liquid key derived from your secret key",
+            "derive": "Derive Liquid keys from your Secret Key",
+            "no_secret_key": "💡 You don't have a secret key yet. <0>Click here</0></div> to create your secret key and derive your liquid keys."
+          },
+          "private_key": {
+            "title": "Manage your Liquid private key",
+            "subtitle": "Paste your liquid private key or generate a new one. <0>Learn more »</0>",
+            "warning": "Please enter the name of the account to confirm the deletion of your liquid private key:",
+            "success": "Liquid private key encrypted & saved successfully.",
+            "failed_to_remove": "The entered account name didn't match, your old Liquid private key has been restored.",
+            "successfully_removed": "Liquid private key removed successfully.",
+            "label": "Liquid Private Key"
+          },
+          "public_key": {
+            "label": "Liquid Public Key"
+          },
+          "generate_keys": {
+            "title": "Generate a new Liquid key",
+            "screen_reader": "Generate a new Liquid key for your account",
+            "hint": "You can generate a random key or a derive key from this account details (using a signed canonical phrase). <0>Learn more »</0>",
+            "actions": {
+              "random_keys": "Generate a random key",
+              "derived_keys": "Derive a key from account"
+            }
+          },
+          "actions": {
+            "generate": "Generate a new key"
+          },
+          "errors": {
+            "failed_to_load": "Failed to load the Liquid key. Is it a valid Liquid key?"
           }
         },
         "nostr": {
@@ -826,6 +868,18 @@
       "title": "Add account",
       "content": "This website wants to add an account ({{connector}}):"
     },
+    "liquid": {
+      "title": "Nostr",
+      "allow": "Allow this website to:",
+      "content": "This website asks you to sign:",
+      "allow_sign": "Allow {{host}} to sign:",
+      "allow_sign_event": "Allow {{host}} to sign a {{kind}}:",
+      "view_details": "View details",
+      "hide_details": "Hide details",
+      "no_content": "(No content)",
+      "block_and_ignore": "Block and ignore {{host}}",
+      "block_added": "Added {{host}} to the blocklist, please reload the website."
+    },
     "nostr": {
       "title": "Nostr",
       "allow": "Allow this website to:",
@@ -1062,6 +1116,12 @@
   },
   "permissions": {
     "nostr": {
+      "getpublickey": "Read your public key.",
+      "nip04encrypt": "Encrypt data.",
+      "nip04decrypt": "Decrypt data.",
+      "signmessage": "Sign message with your key."
+    },
+    "liquid": {
       "getpublickey": "Read your public key.",
       "nip04encrypt": "Encrypt data.",
       "nip04decrypt": "Decrypt data.",
