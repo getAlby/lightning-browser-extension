@@ -26,8 +26,9 @@ function AdvancedKeySettings({ type }: { type: "nostr" | "liquid" }) {
   const account = useAccount();
   const { t: tCommon } = useTranslation("common");
   const { t } = useTranslation("translation", {
-    keyPrefix: `accounts.account_view.${type}`,
+    keyPrefix: "accounts.account_view",
   });
+  const capitalizedType = type.charAt(0).toUpperCase() + type.slice(1);
   // TODO: add hooks useMnemonic, useNostrPrivateKey, ...
   const [mnemonic, setMnemonic] = useState("");
   const [currentPrivateKey, setCurrentPrivateKey] = useState("");
@@ -89,7 +90,7 @@ function AdvancedKeySettings({ type }: { type: "nostr" | "liquid" }) {
       if (e instanceof Error)
         toast.error(
           <p>
-            {t("errors.failed_to_load")}
+            {t(`${type}.errors.failed_to_load`)}
             <br />
             {e.message}
           </p>
@@ -128,10 +129,10 @@ function AdvancedKeySettings({ type }: { type: "nostr" | "liquid" }) {
 
     if (
       currentPrivateKey &&
-      prompt(t("private_key.warning"))?.toLowerCase() !==
+      prompt(t(`${type}.private_key.warning`))?.toLowerCase() !==
         account?.account?.name?.toLowerCase()
     ) {
-      toast.error(t("private_key.failed_to_remove"));
+      toast.error(t(`${type}.private_key.failed_to_remove`));
       return;
     }
 
@@ -139,9 +140,11 @@ function AdvancedKeySettings({ type }: { type: "nostr" | "liquid" }) {
       savePrivateKey(type, id, privateKey);
       toast.success(
         t(
-          privateKey
-            ? "private_key.success"
-            : "private_key.successfully_removed"
+          `${type}.${
+            privateKey
+              ? "private_key.success"
+              : "private_key.successfully_removed"
+          }`
         )
       );
     } catch (e) {
@@ -169,10 +172,10 @@ function AdvancedKeySettings({ type }: { type: "nostr" | "liquid" }) {
           <div className="mt-12 shadow bg-white sm:rounded-md sm:overflow-hidden p-10 divide-black/10 dark:divide-white/10 dark:bg-surface-02dp flex flex-col gap-4">
             <div>
               <h1 className="font-bold text-2xl dark:text-white">
-                {t("advanced_settings.title")}
+                {t("advanced_settings.title", { type: capitalizedType })}
               </h1>
               <p className="text-gray-500 dark:text-neutral-500">
-                {t("advanced_settings.description")}
+                {t("advanced_settings.description", { type: capitalizedType })}
               </p>
             </div>
 
@@ -183,21 +186,26 @@ function AdvancedKeySettings({ type }: { type: "nostr" | "liquid" }) {
                   {t(
                     keyOrigin === "unknown"
                       ? "advanced_settings.imported_key_warning"
-                      : "advanced_settings.legacy_derived_key_warning"
+                      : "advanced_settings.legacy_derived_key_warning",
+                    { type: capitalizedType }
                   )}
                 </p>
               </div>
             ) : keyOrigin === "secret-key" ? (
               // TODO: extract to Alert component
               <div className="rounded-md font-medium p-4 text-green-700 bg-green-50 dark:text-green-400 dark:bg-green-900">
-                <p>{t("advanced_settings.can_restore")}</p>
+                <p>
+                  {t("advanced_settings.can_restore", {
+                    type: capitalizedType,
+                  })}
+                </p>
               </div>
             ) : null}
 
             <div>
               <TextField
                 id="privateKey"
-                label={t("private_key.label")}
+                label={t(`${type}.private_key.label`)}
                 type={privateKeyVisible ? "text" : "password"}
                 value={privateKey}
                 onChange={(event) => {
@@ -228,7 +236,7 @@ function AdvancedKeySettings({ type }: { type: "nostr" | "liquid" }) {
             <div>
               <TextField
                 id="publicKey"
-                label={t("public_key.label")}
+                label={t(`${type}.public_key.label`)}
                 type="text"
                 value={publicKey}
                 disabled
@@ -240,7 +248,9 @@ function AdvancedKeySettings({ type }: { type: "nostr" | "liquid" }) {
                     {mnemonic ? (
                       <Button
                         outline
-                        label={t("advanced_settings.derive")}
+                        label={t("advanced_settings.derive", {
+                          type: capitalizedType,
+                        })}
                         onClick={handleDeriveKeyFromSecretKey}
                       />
                     ) : (
@@ -250,6 +260,7 @@ function AdvancedKeySettings({ type }: { type: "nostr" | "liquid" }) {
                           <Trans
                             i18nKey={"advanced_settings.no_secret_key"}
                             t={t}
+                            values={{ type: capitalizedType }}
                             components={[
                               // eslint-disable-next-line react/jsx-key
                               <Link

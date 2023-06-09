@@ -487,7 +487,7 @@ function AccountDetail() {
               <div className="w-1/5 flex-none">
                 <Link to="nostr">
                   <Button
-                    label={t("nostr.advanced_settings.label")}
+                    label={t("advanced_settings.label")}
                     primary
                     fullWidth
                   />
@@ -521,7 +521,7 @@ function AccountDetail() {
               <div className="w-1/5 flex-none">
                 <Link to="liquid">
                   <Button
-                    label={t("liquid.advanced_settings.label")}
+                    label={t("advanced_settings.label")}
                     primary
                     fullWidth
                   />

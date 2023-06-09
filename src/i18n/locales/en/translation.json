@@ -452,21 +452,8 @@
           }
         },
         "liquid": {
-          "title": "Liquid",
-          "hint": "have to fill this.",
-          "advanced_settings": {
-            "label": "Advanced Settings",
-            "title": "Advanced Liquid Settings",
-            "description": "Derive Liquid keys from your Secret Key or import your existing private key by pasting it in the \"Liquid Private Key\" field.",
-            "imported_key_warning": "⚠️ You're currently using an imported or randomly generated Liquid key. Your Liquid private key cannot be restored by your Secret Key, so remember to back up your Liquid private key.",
-            "legacy_derived_key_warning": "⚠️ You're currently using a Liquid key derived from your account (legacy). Your Liquid private key cannot be restored by your Secret Key, so remember to back up your Liquid private key.",
-            "can_restore": "✅ Liquid key derived from your secret key",
-            "derive": "Derive Liquid keys from your Secret Key",
-            "no_secret_key": "💡 You don't have a secret key yet. <0>Click here</0></div> to create your secret key and derive your liquid keys."
-          },
           "private_key": {
             "title": "Manage your Liquid private key",
-            "subtitle": "Paste your liquid private key or generate a new one. <0>Learn more »</0>",
             "warning": "Please enter the name of the account to confirm the deletion of your liquid private key:",
             "success": "Liquid private key encrypted & saved successfully.",
             "failed_to_remove": "The entered account name didn't match, your old Liquid private key has been restored.",
@@ -476,38 +463,13 @@
           "public_key": {
             "label": "Liquid Public Key"
           },
-          "generate_keys": {
-            "title": "Generate a new Liquid key",
-            "screen_reader": "Generate a new Liquid key for your account",
-            "hint": "You can generate a random key or a derive key from this account details (using a signed canonical phrase). <0>Learn more »</0>",
-            "actions": {
-              "random_keys": "Generate a random key",
-              "derived_keys": "Derive a key from account"
-            }
-          },
-          "actions": {
-            "generate": "Generate a new key"
-          },
           "errors": {
             "failed_to_load": "Failed to load the Liquid key. Is it a valid Liquid key?"
           }
         },
         "nostr": {
-          "title": "Nostr",
-          "hint": "is a simple and open protocol that aims to create censorship-resistant social networks. Nostr works with cryptographic keys. To publish something you sign it with your key and send it to multiple relays. You can use Alby to manage your Nostr key. Many Nostr applications will then allow you to simply use the key from the Alby extension.",
-          "advanced_settings": {
-            "label": "Advanced Settings",
-            "title": "Advanced Nostr Settings",
-            "description": "Derive Nostr keys from your Secret Key or import your existing private key by pasting it in the \"Nostr Private Key\" field.",
-            "imported_key_warning": "⚠️ You're currently using an imported or randomly generated Nostr key. Your Nostr private key cannot be restored by your Secret Key, so remember to back up your Nostr private key.",
-            "legacy_derived_key_warning": "⚠️ You're currently using a Nostr key derived from your account (legacy). Your Nostr private key cannot be restored by your Secret Key, so remember to back up your Nostr private key.",
-            "can_restore": "✅ Nostr key derived from your secret key",
-            "derive": "Derive Nostr keys from your Secret Key",
-            "no_secret_key": "💡 You don't have a secret key yet. <0>Click here</0></div> to create your secret key and derive your nostr keys."
-          },
           "private_key": {
             "title": "Manage your Nostr private key",
-            "subtitle": "Paste your nostr private key or generate a new one. <0>Learn more »</0>",
             "warning": "Please enter the name of the account to confirm the deletion of your nostr private key:",
             "success": "Nostr private key encrypted & saved successfully.",
             "failed_to_remove": "The entered account name didn't match, your old Nostr private key has been restored.",
@@ -517,21 +479,19 @@
           "public_key": {
             "label": "Nostr Public Key"
           },
-          "generate_keys": {
-            "title": "Generate a new Nostr key",
-            "screen_reader": "Generate a new Nostr key for your account",
-            "hint": "You can generate a random key or a derive key from this account details (using a signed canonical phrase). <0>Learn more »</0>",
-            "actions": {
-              "random_keys": "Generate a random key",
-              "derived_keys": "Derive a key from account"
-            }
-          },
-          "actions": {
-            "generate": "Generate a new key"
-          },
           "errors": {
             "failed_to_load": "Failed to load the Nostr key. Is it a valid Nostr key?"
           }
+        },
+        "advanced_settings": {
+          "label": "Advanced Settings",
+          "title": "Advanced {{type}} Settings",
+          "description": "Derive {{type}} keys from your Secret Key or import your existing private key by pasting it in the \"{{type}} Private Key\" field.",
+          "imported_key_warning": "⚠️ You're currently using an imported or randomly generated {{type}} key. Your {{type}} private key cannot be restored by your Secret Key, so remember to back up your {{type}} private key.",
+          "legacy_derived_key_warning": "⚠️ You're currently using a {{type}} key derived from your account (legacy). Your {{type}} private key cannot be restored by your Secret Key, so remember to back up your {{type}} private key.",
+          "can_restore": "✅ {{type}} key derived from your secret key",
+          "derive": "Derive {{type}} keys from your Secret Key",
+          "no_secret_key": "💡 You don't have a secret key yet. <0>Click here</0></div> to create your secret key and derive your {{type}} keys."
         },
         "remove": {
           "title": "Remove This Account",
@@ -869,14 +829,9 @@
       "content": "This website wants to add an account ({{connector}}):"
     },
     "liquid": {
-      "title": "Nostr",
+      "title": "Liquid",
       "allow": "Allow this website to:",
-      "content": "This website asks you to sign:",
       "allow_sign": "Allow {{host}} to sign:",
-      "allow_sign_event": "Allow {{host}} to sign a {{kind}}:",
-      "view_details": "View details",
-      "hide_details": "Hide details",
-      "no_content": "(No content)",
       "block_and_ignore": "Block and ignore {{host}}",
       "block_added": "Added {{host}} to the blocklist, please reload the website."
     },
@@ -1123,9 +1078,7 @@
     },
     "liquid": {
       "getpublickey": "Read your public key.",
-      "nip04encrypt": "Encrypt data.",
-      "nip04decrypt": "Decrypt data.",
-      "signmessage": "Sign message with your key."
+      "signschnorr": "Sign message with your key."
     },
     "commando": {
       "bkpr-listbalances": "List of all current and historical account balances.",
