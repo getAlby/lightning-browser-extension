@@ -5,6 +5,7 @@ import Button from "~/app/components/Button";
 import ConnectorPath from "~/app/components/ConnectorPath";
 import getConnectorRoutes from "~/app/router/connectorRoutes";
 import msg from "~/common/lib/msg";
+import { WebLNNode } from "~/extension/background-script/connectors/connector.interface";
 import i18n from "~/i18n/i18nConfig";
 
 import alby from "/static/assets/icons/alby.png";
@@ -12,13 +13,14 @@ import alby from "/static/assets/icons/alby.png";
 type Props = {
   title: string;
   description: string;
+  fromWelcome?: boolean;
 };
-interface AuthData {
-  access_token?: string;
-  refresh_token?: string;
-  expires_at?: number;
-}
-export default function ChooseConnectorPath({ title, description }: Props) {
+
+export default function ChooseConnectorPath({
+  title,
+  description,
+  fromWelcome,
+}: Props) {
   let connectorRoutes = getConnectorRoutes();
 
   const navigate = useNavigate();
@@ -33,36 +35,39 @@ export default function ChooseConnectorPath({ title, description }: Props) {
 
   // TODO: rename & move to a separate file (it's only for connecting to an Alby account)
   async function connect() {
-    const name = "Alby";
-    let accessToken: string | undefined;
-    let refreshToken: string | undefined;
-    let tokenExpiresAt: number | undefined; // use the ln address as name or Alby to default
-    const account = {
-      name,
-      config: {
-        accessToken,
-        refreshToken,
-        tokenExpiresAt,
-      },
+    const initialAccount = {
+      name: "Alby",
+      config: {},
       connector: "alby",
     };
 
     try {
-      const validation = await msg.request("validateAccount", account);
+      const validation = await msg.request("validateAccount", initialAccount);
       if (validation.valid) {
-        if (validation.authData) {
-          const authData = validation.authData as AuthData;
-          account["config"]["accessToken"] = authData.access_token;
-          account["config"]["refreshToken"] = authData.refresh_token;
-          account["config"]["tokenExpiresAt"] = authData.expires_at;
+        if (!validation.oAuthToken) {
+          throw new Error("No oAuthToken returned");
         }
+
+        const alias = (validation.info as { data: WebLNNode }).data.alias;
+        const account = {
+          ...initialAccount,
+          name: alias || initialAccount.name,
+          config: {
+            ...initialAccount.config,
+            oAuthToken: validation.oAuthToken,
+          },
+        };
 
         const addResult = await msg.request("addAccount", account);
         if (addResult.accountId) {
           await msg.request("selectAccount", {
             id: addResult.accountId,
           });
-          navigate("/test-connection");
+          if (fromWelcome) {
+            navigate("/pin-extension");
+          } else {
+            navigate("/discover");
+          }
         }
       } else {
         console.error({ validation });

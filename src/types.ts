@@ -196,9 +196,6 @@ export interface MessageAccountEdit extends MessageDefault {
   args: {
     id: Account["id"];
     name: Account["name"];
-    accessToken?: string;
-    refreshToken?: string;
-    tokenExpiresAt?: number;
   };
   action: "editAccount";
 }
@@ -781,3 +778,9 @@ export interface DeferredPromise {
 }
 
 export type Theme = "dark" | "light";
+
+export type OAuthToken = {
+  access_token: string;
+  refresh_token: string;
+  expires_at: number;
+};

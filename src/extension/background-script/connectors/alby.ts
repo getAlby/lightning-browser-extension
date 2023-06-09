@@ -1,17 +1,12 @@
-import fetchAdapter from "@vespaiach/axios-fetch-adapter";
-import { auth } from "alby-js-sdk";
-import type { AxiosResponse, Method } from "axios";
-import axios, { AxiosRequestConfig } from "axios";
-import lightningPayReq from "bolt11";
+import { auth, Client } from "alby-js-sdk";
+import { RequestOptions } from "alby-js-sdk/dist/request";
+import { Invoice, Token } from "alby-js-sdk/dist/types";
+import type { Method } from "axios";
 import Base64 from "crypto-js/enc-base64";
-import Hex from "crypto-js/enc-hex";
 import hmacSHA256 from "crypto-js/hmac-sha256";
-import sha256 from "crypto-js/sha256";
 import browser from "webextension-polyfill";
-import utils from "~/common/lib/utils";
-import HashKeySigner from "~/common/utils/signer";
-import { edit, get } from "~/extension/background-script/actions/accounts";
-import { Account } from "~/types";
+import { decryptData, encryptData } from "~/common/lib/crypto";
+import { Account, OAuthToken } from "~/types";
 
 import state from "../state";
 import Connector, {
@@ -35,29 +30,16 @@ interface Config {
   login: string;
   password: string;
   url: string;
-  accessToken: string;
-  refreshToken: string;
-  tokenExpiresAt: number;
+  oAuthToken: OAuthToken | undefined;
 }
 
 const HMAC_VERIFY_HEADER_KEY =
   process.env.HMAC_VERIFY_HEADER_KEY || "alby-extension"; // default is mainly that TS is happy
-
-const defaultHeaders = {
-  Accept: "application/json",
-  "Access-Control-Allow-Origin": "*",
-  "Content-Type": "application/json",
-  "X-User-Agent": "alby-extension",
-};
-
 export default class Alby implements Connector {
-  account: Account;
-  config: Config;
-  access_token?: string;
-  access_token_created?: number;
-  refresh_token?: string;
-  refresh_token_created?: number;
-  noRetry?: boolean;
+  private account: Account;
+  private config: Config;
+  private _clientPromise: Promise<Client> | undefined;
+  private _authUser: auth.OAuth2User | undefined;
 
   constructor(account: Account, config: Config) {
     this.account = account;
@@ -65,7 +47,12 @@ export default class Alby implements Connector {
   }
 
   async init() {
-    return this.authorize();
+    // not needed - client is created when the first connector method is called
+    return;
+  }
+
+  getOAuthToken(): OAuthToken | undefined {
+    return this.config.oAuthToken;
   }
 
   unload() {
@@ -79,92 +66,29 @@ export default class Alby implements Connector {
   // not yet implemented
   async connectPeer(): Promise<ConnectPeerResponse> {
     console.error(
-      `${this.constructor.name} does not implement the getInvoices call`
+      `${this.constructor.name} does not implement the connectPeer call`
     );
     throw new Error("Not yet supported with the currently used account.");
   }
 
   async getInvoices(): Promise<GetInvoicesResponse> {
-    const outgoingData = await this.request<
-      {
-        r_hash: {
-          type: "Buffer";
-          data: number[];
-        };
-        amount: number;
-        custom_records: ConnectorInvoice["custom_records"];
-        memo: string;
-        expire_time: number;
-        ispaid: boolean;
-        keysend: boolean;
-        pay_req: string;
-        payment_hash: string;
-        payment_request: string;
-        r_hash_str: string;
-        settled: boolean;
-        settled_at: number;
-        state: string;
-        type: string;
-        value: number;
-        metadata: string;
-      }[]
-    >("GET", "/invoices/outgoing", undefined);
+    const incomingInvoices = (await this._request((client) =>
+      client.incomingInvoices({})
+    )) as Invoice[];
+    console.info("incomingInvoices", incomingInvoices);
 
-    const incomingData = await this.request<
-      {
-        r_hash: {
-          type: "Buffer";
-          data: number[];
-        };
-        amount: number;
-        custom_records: ConnectorInvoice["custom_records"];
-        memo: string;
-        expire_time: number;
-        ispaid: boolean;
-        keysend: boolean;
-        pay_req: string;
-        payment_hash: string;
-        payment_request: string;
-        r_hash_str: string;
-        settled: boolean;
-        settled_at: number;
-        state: string;
-        type: string;
-        value: number;
-        metadata: string;
-      }[]
-    >("GET", "/invoices/incoming", undefined);
-
-    const invoices: ConnectorInvoice[] = incomingData
-      .map(
-        (invoice, index): ConnectorInvoice => ({
-          custom_records: invoice.custom_records,
-          id: `${invoice.payment_request}-${index}`,
-          memo: invoice.memo,
-          preimage: "", // lndhub doesn't support preimage (yet)
-          settled: invoice.settled,
-          settleDate: invoice.settled_at,
-          totalAmount: `${invoice.amount}`,
-          type: "incoming",
-        })
-      )
-      .concat(
-        outgoingData.map(
-          (invoice, index): ConnectorInvoice => ({
-            custom_records: invoice.custom_records,
-            id: `${invoice.payment_request}-${index}`,
-            memo: invoice.memo,
-            preimage: "", // lndhub doesn't support preimage (yet)
-            settled: invoice.ispaid,
-            settleDate: invoice.settled_at,
-            totalAmount: `${invoice.amount}`,
-            type: "outgoing",
-          })
-        )
-      )
-      .sort((a, b) => {
-        return b.settleDate - a.settleDate;
-      });
+    const invoices: ConnectorInvoice[] = incomingInvoices.map(
+      (invoice, index): ConnectorInvoice => ({
+        custom_records: invoice.custom_records,
+        id: `${invoice.payment_request}-${index}`,
+        memo: invoice.memo,
+        preimage: "", // lndhub doesn't support preimage (yet)
+        settled: invoice.settled,
+        settleDate: new Date(invoice.settled_at).getTime(),
+        totalAmount: `${invoice.amount}`,
+        type: "incoming",
+      })
+    );
     return {
       data: {
         invoices,
@@ -173,362 +97,197 @@ export default class Alby implements Connector {
   }
 
   async getInfo(): Promise<GetInfoResponse> {
-    const alias = "🐝 getalby.com";
-    return {
-      data: {
-        alias,
-      },
-    };
+    try {
+      const info = await this._request((client) =>
+        client.accountInformation({})
+      );
+      return {
+        data: {
+          alias: info.lightning_address,
+        },
+      };
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
   }
 
   async getBalance(): Promise<GetBalanceResponse> {
-    const { balance } = await this.request<{ balance: number }>(
-      "GET",
-      "/balance",
-      undefined
+    const { balance } = await this._request((client) =>
+      client.accountBalance({})
     );
+
     return {
       data: {
-        balance: balance,
+        balance,
       },
     };
   }
 
   async sendPayment(args: SendPaymentArgs): Promise<SendPaymentResponse> {
-    const data = await this.request<{
-      error?: string;
-      message: string;
-      payment_error?: string;
-      payment_hash:
-        | {
-            type: string;
-            data: ArrayBuffer;
-          }
-        | string;
-      payment_preimage:
-        | {
-            type: string;
-            data: ArrayBuffer;
-          }
-        | string;
-      payment_route?: { total_amt: number; total_fees: number };
-    }>("POST", "/payments/bolt11", {
-      invoice: args.paymentRequest,
-    });
-    if (data.error) {
-      throw new Error(data.message);
-    }
-    if (data.payment_error) {
-      throw new Error(data.payment_error);
-    }
-    if (
-      typeof data.payment_hash === "object" &&
-      data.payment_hash.type === "Buffer"
-    ) {
-      data.payment_hash = Buffer.from(data.payment_hash.data).toString("hex");
-    }
-    if (
-      typeof data.payment_preimage === "object" &&
-      data.payment_preimage.type === "Buffer"
-    ) {
-      data.payment_preimage = Buffer.from(data.payment_preimage.data).toString(
-        "hex"
-      );
-    }
+    const data = await this._request((client) =>
+      client.sendPayment({
+        invoice: args.paymentRequest,
+      })
+    );
 
-    // HACK!
-    // some Lnbits extension that implement the LNDHub API do not return the route information.
-    // to somewhat work around this we set a payment route and use the amount from the payment request.
-    // lnbits needs to fix this and return proper route information with a total amount and fees
-    if (!data.payment_route) {
-      const paymentRequestDetails = lightningPayReq.decode(args.paymentRequest);
-      const amountInSats = paymentRequestDetails.satoshis || 0;
-      data.payment_route = { total_amt: amountInSats, total_fees: 0 };
-    }
     return {
       data: {
-        preimage: data.payment_preimage as string,
-        paymentHash: data.payment_hash as string,
-        route: data.payment_route,
+        preimage: data.payment_preimage,
+        paymentHash: data.payment_hash,
+        route: { total_amt: data.amount, total_fees: data.fee },
       },
     };
   }
 
   async keysend(args: KeysendArgs): Promise<SendPaymentResponse> {
-    const data = await this.request<{
-      error: string;
-      message: string;
-      payment_error?: string;
-      payment_hash:
-        | {
-            type: string;
-            data: ArrayBuffer;
-          }
-        | string;
-      payment_preimage:
-        | {
-            type: string;
-            data: ArrayBuffer;
-          }
-        | string;
-      payment_route: { total_amt: number; total_fees: number };
-    }>("POST", "/payments/keysend", {
-      destination: args.pubkey,
-      amount: args.amount,
-      customRecords: args.customRecords,
-    });
-    if (data.error) {
-      throw new Error(data.message);
-    }
-    if (data.payment_error) {
-      throw new Error(data.payment_error);
-    }
-    if (
-      typeof data.payment_hash === "object" &&
-      data.payment_hash.type === "Buffer"
-    ) {
-      data.payment_hash = Buffer.from(data.payment_hash.data).toString("hex");
-    }
-    if (
-      typeof data.payment_preimage === "object" &&
-      data.payment_preimage.type === "Buffer"
-    ) {
-      data.payment_preimage = Buffer.from(data.payment_preimage.data).toString(
-        "hex"
-      );
-    }
+    const data = await this._request((client) =>
+      client.keysend({
+        destination: args.pubkey,
+        amount: args.amount,
+        customRecords: args.customRecords,
+      })
+    );
 
     return {
       data: {
-        preimage: data.payment_preimage as string,
-        paymentHash: data.payment_hash as string,
-        route: data.payment_route,
+        preimage: data.payment_preimage,
+        paymentHash: data.payment_hash,
+        route: { total_amt: data.amount, total_fees: data.fee },
       },
     };
   }
 
   async checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {
-    let paid: boolean = false;
-
-    try {
-      const response = await this.request<{
-        r_hash: {
-          type: "Buffer";
-          data: number[];
-        };
-        amount: number;
-        custom_records: ConnectorInvoice["custom_records"];
-        memo: string;
-        expire_time: number;
-        ispaid: boolean;
-        keysend: boolean;
-        pay_req: string;
-        payment_hash: string;
-        payment_request: string;
-        r_hash_str: string;
-        settled: boolean;
-        settled_at: number;
-        state: string;
-        type: string;
-        value: number;
-        metadata: string;
-      }>("GET", `/invoices/${args.paymentHash}`, undefined);
-
-      const settled = response.settled === true;
-      if (settled) paid = true;
-      return {
-        data: {
-          paid,
-        },
-      };
-    } catch (error) {
-      return {
-        data: {
-          paid,
-        },
-      };
-    }
-  }
-
-  signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {
-    // make sure we got the config to create a new key
-    if (!this.config.url || !this.config.login || !this.config.password) {
-      return Promise.reject(new Error("Missing config"));
-    }
-    if (!args.message) {
-      return Promise.reject(new Error("Invalid message"));
-    }
-    let message: string | Uint8Array;
-    message = sha256(args.message).toString(Hex);
-    let keyHex = sha256(
-      `lndhub://${this.config.login}:${this.config.password}`
-    ).toString(Hex);
-    const { settings } = state.getState();
-    if (settings.legacyLnurlAuth) {
-      message = utils.stringToUint8Array(args.message);
-      keyHex = sha256(
-        `LBE-LNDHUB-${this.config.url}-${this.config.login}-${this.config.password}`
-      ).toString(Hex);
-    }
-    if (!keyHex) {
-      return Promise.reject(new Error("Could not create key"));
-    }
-    const signer = new HashKeySigner(keyHex);
-    const signedMessageDERHex = signer.sign(message).toDER("hex");
-    // make sure we got some signed message
-    if (!signedMessageDERHex) {
-      return Promise.reject(new Error("Signing failed"));
-    }
-    return Promise.resolve({
-      data: {
-        message: args.message,
-        signature: signedMessageDERHex,
-      },
-    });
-  }
-
-  async makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse> {
-    const data = await this.request<{
-      payment_request: string;
-      payment_hash: { type: string; data: ArrayBuffer } | string;
-    }>("POST", "/invoices", {
-      amount: args.amount,
-      memo: args.memo,
-    });
-    if (
-      typeof data.payment_hash === "object" &&
-      data.payment_hash.type === "Buffer"
-    ) {
-      data.payment_hash = Buffer.from(data.payment_hash.data).toString("hex");
-    }
-
+    const invoice = await this._request((client) =>
+      client.getInvoice(args.paymentHash)
+    );
     return {
       data: {
-        paymentRequest: data.payment_request,
-        rHash: data.payment_hash as string,
+        paid: !!invoice?.settled,
       },
     };
   }
 
-  async authorize() {
-    const clientId = process.env.ALBY_OAUTH_CLIENT_ID;
-    const clientSecret = process.env.ALBY_OAUTH_CLIENT_SECRET;
-    if (!clientId || !clientSecret) {
-      throw new Error("OAuth client credentials missing");
-    }
+  signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {
+    // // make sure we got the config to create a new key
+    // if (!this.config.url || !this.config.login || !this.config.password) {
+    //   return Promise.reject(new Error("Missing config"));
+    // }
+    // if (!args.message) {
+    //   return Promise.reject(new Error("Invalid message"));
+    // }
+    // let message: string | Uint8Array;
+    // message = sha256(args.message).toString(Hex);
+    // let keyHex = sha256(
+    //   `lndhub://${this.config.login}:${this.config.password}`
+    // ).toString(Hex);
+    // const { settings } = state.getState();
+    // if (settings.legacyLnurlAuth) {
+    //   message = utils.stringToUint8Array(args.message);
+    //   keyHex = sha256(
+    //     `LBE-LNDHUB-${this.config.url}-${this.config.login}-${this.config.password}`
+    //   ).toString(Hex);
+    // }
+    // if (!keyHex) {
+    //   return Promise.reject(new Error("Could not create key"));
+    // }
+    // const signer = new HashKeySigner(keyHex);
+    // const signedMessageDERHex = signer.sign(message).toDER("hex");
+    // // make sure we got some signed message
+    // if (!signedMessageDERHex) {
+    //   return Promise.reject(new Error("Signing failed"));
+    // }
+    // return Promise.resolve({
+    //   data: {
+    //     message: args.message,
+    //     signature: signedMessageDERHex,
+    //   },
+    // });
+    throw new Error("SignMessage is unsupported");
+  }
 
-    const redirectURL = browser.identity.getRedirectURL();
-    const authClient = new auth.OAuth2User({
-      client_id: clientId,
-      client_secret: clientSecret,
-      callback: redirectURL,
-      scopes: [
-        "invoices:read",
-        "account:read",
-        "balance:read",
-        "invoices:create",
-        "invoices:read",
-        "payments:send",
-        "transactions:read", // for outgoing invoice
-      ],
-      token: {
-        access_token: this.config.accessToken,
-        refresh_token: this.config.refreshToken,
-        expires_at: this.config.tokenExpiresAt,
-      }, // initialize with existing token
-    });
-    let authUrl = authClient.generateAuthURL({
-      code_challenge_method: "S256",
-    });
-    // TODO: make authorize URL in alby-js-sdk customizable
-    if (process.env.ALBY_OAUTH_AUTHORIZE_URL) {
-      authUrl = authUrl.replace(
-        "https://getalby.com/oauth",
-        process.env.ALBY_OAUTH_AUTHORIZE_URL
-      );
-    }
-    authUrl += "&webln=false"; // stop getalby.com login modal launching lnurl auth
+  async makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse> {
+    const data = await this._request((client) =>
+      client.createInvoice({
+        amount: parseInt(args.amount.toString()),
+        description: args.memo,
+      })
+    );
 
+    return {
+      data: {
+        paymentRequest: data.payment_request,
+        rHash: data.payment_hash,
+      },
+    };
+  }
+
+  private async authorize(): Promise<auth.OAuth2User> {
+    // console.info("this.config.oAuthToken", this.config.oAuthToken);
     try {
-      if (
-        this.config.accessToken != undefined &&
-        this.config.refreshToken != undefined
-      ) {
-        if (authClient.isAccessTokenExpired()) {
-          try {
+      const clientId = process.env.ALBY_OAUTH_CLIENT_ID;
+      const clientSecret = process.env.ALBY_OAUTH_CLIENT_SECRET;
+      if (!clientId || !clientSecret) {
+        throw new Error("OAuth client credentials missing");
+      }
+
+      const redirectURL = browser.identity.getRedirectURL();
+      const authClient = new auth.OAuth2User({
+        request_options: this._getRequestOptions(),
+        client_id: clientId,
+        client_secret: clientSecret,
+        callback: redirectURL,
+        scopes: [
+          "invoices:read",
+          "account:read",
+          "balance:read",
+          "invoices:create",
+          "invoices:read",
+          "payments:send",
+          "transactions:read", // for outgoing invoice
+        ],
+        token: this.config.oAuthToken, // initialize with existing token
+      });
+
+      if (this.config.oAuthToken) {
+        console.info("Requesting new oAuth token");
+        try {
+          if (authClient.isAccessTokenExpired()) {
             const token = await authClient.refreshAccessToken();
-            if (authClient.token) {
-              authClient.token.access_token = token.token.access_token;
-              authClient.token.refresh_token = token.token.refresh_token;
-            }
-          } catch {
-            const authResult = await this.launchWebAuthFlow(authUrl);
-
-            if (authResult) {
-              await this.getAccessToken(authResult, authClient);
-            } else {
-              throw new Error("Authentication failed: missing authResult");
-            }
+            await this._updateOAuthToken(token.token);
           }
-
-          const account = await get({
-            action: "getAccount",
-            origin: { internal: true },
-          });
-
-          if (account) {
-            edit({
-              action: "editAccount",
-              args: {
-                name: account.data?.name,
-                id: account.data?.id,
-                accessToken: authClient.token?.access_token,
-                refreshToken: authClient.token?.refresh_token,
-                tokenExpiresAt: authClient.token?.expires_at,
-              },
-              origin: {
-                internal: true,
-              },
-            });
-          }
-        }
-      } else {
-        const authResult = await this.launchWebAuthFlow(authUrl);
-
-        if (authResult) {
-          await this.getAccessToken(authResult, authClient);
-        } else {
-          throw new Error("Authentication failed: missing authResult");
+          return authClient;
+        } catch (error) {
+          // if auth token refresh fails, the refresh token has probably expired or is invalid
+          // the user will be asked to re-login
+          console.error("Failed to request new auth token", error);
         }
       }
 
-      this.access_token = authClient.token?.access_token;
-      const expires_at = authClient.token?.expires_at;
+      let authUrl = authClient.generateAuthURL({
+        code_challenge_method: "S256",
+      });
+      // TODO: make authorize URL in alby-js-sdk customizable
+      if (process.env.ALBY_OAUTH_AUTHORIZE_URL) {
+        authUrl = authUrl.replace(
+          "https://getalby.com/oauth",
+          process.env.ALBY_OAUTH_AUTHORIZE_URL
+        );
+      }
+      authUrl += "&webln=false"; // stop getalby.com login modal launching lnurl auth
+      const authResult = await this.launchWebAuthFlow(authUrl);
+      const code = new URL(authResult).searchParams.get("code");
+      if (!code) {
+        throw new Error("Authentication failed: missing authResult");
+      }
 
-      this.access_token_created = +new Date();
-      this.refresh_token = authClient.token?.refresh_token;
-
-      this.refresh_token_created = +new Date();
-
-      const authData: {
-        access_token?: string;
-        refresh_token?: string;
-        expires_at?: number;
-      } = {};
-
-      authData.access_token = this.access_token;
-
-      authData.refresh_token = this.refresh_token;
-      authData.expires_at = expires_at;
-
-      return authData;
-    } catch (e) {
-      console.error(e);
-      throw new Error(
-        `API error (${this.config.url})${
-          e instanceof Error ? `: ${e.message}` : ""
-        }`
-      );
+      const token = await authClient.requestAccessToken(code);
+      await this._updateOAuthToken(token.token);
+      return authClient;
+    } catch (error) {
+      console.error(error);
+      throw error;
     }
   }
 
@@ -560,76 +319,84 @@ export default class Alby implements Connector {
     path: string,
     args?: Record<string, unknown>
   ): Promise<Type> {
-    if (!this.access_token) {
-      await this.authorize();
-    }
-    const url = `https://api.getalby.com${path}`;
+    throw new Error(
+      "Unsupported. Migrate to alby-js-sdk and remove this function"
+    );
+  }
 
-    const reqConfig: AxiosRequestConfig = {
-      method,
-      url: url,
-      responseType: "json",
-      headers: {
-        ...defaultHeaders,
-        Authorization: `Bearer ${this.access_token}`,
-        "X-TS": Math.floor(Date.now() / 1000),
-        "X-VERIFY": this.generateHmacVerification(url),
-      },
-      adapter: fetchAdapter,
-    };
-
-    if (method === "POST") {
-      reqConfig.data = args;
-    } else if (args !== undefined) {
-      reqConfig.params = args;
+  private async _getAlbyClient(): Promise<Client> {
+    if (this._clientPromise) {
+      return this._clientPromise;
     }
 
-    let data;
+    this._clientPromise = new Promise<Client>((resolve) => {
+      (async () => {
+        this._authUser = await this.authorize();
+        resolve(new Client(this._authUser, this._getRequestOptions()));
+      })();
+    });
+    return this._clientPromise;
+  }
 
+  private async _request<T>(func: (client: Client) => T) {
+    const client = await this._getAlbyClient();
+    if (!this._authUser) {
+      throw new Error("this._authUser was not created");
+    }
+    const oldToken = this._authUser?.token;
+    let result: T;
     try {
-      const res = await axios(reqConfig);
-      data = res.data;
-    } catch (e) {
-      console.error(e);
-
-      if (axios.isAxiosError(e)) {
-        const errResponse = e.response as AxiosResponse;
-
-        if (errResponse?.status === 404) {
-          const method = path.replace("/", "");
-          throw new Error(`${method} not supported by the connected account.`);
-        }
-
-        if (errResponse?.status === 401) {
-          try {
-            await this.authorize();
-          } catch (e) {
-            console.error(e);
-            if (e instanceof Error) throw new Error(e.message);
-          }
-          return this.request(method, path, args);
-        }
-
-        const errorMessage = `${errResponse?.data.message}\n(${e.message})`;
-        throw new Error(errorMessage);
+      result = await func(client);
+    } catch (error) {
+      console.error(error);
+      throw error;
+    } finally {
+      const newToken = this._authUser.token;
+      if (newToken && newToken !== oldToken) {
+        await this._updateOAuthToken(newToken);
       }
     }
+    return result;
+  }
 
-    if (data?.error) {
-      if (data.code * 1 === 1 && !this.noRetry) {
-        try {
-          await this.authorize();
-        } catch (e) {
-          console.error(e);
-          if (e instanceof Error) throw new Error(e.message);
-        }
-        this.noRetry = true;
-        return this.request(method, path, args);
-      } else {
-        throw new Error(data.message);
+  private _getRequestOptions(): Partial<RequestOptions> {
+    return {
+      ...(process.env.ALBY_API_URL
+        ? { base_url: process.env.ALBY_API_URL }
+        : {}),
+    };
+  }
+
+  private async _updateOAuthToken(newToken: Token) {
+    console.info("Updating account oauth token", newToken);
+    const access_token = newToken.access_token;
+    const refresh_token = newToken.refresh_token;
+    const expires_at = newToken.expires_at;
+
+    if (access_token && refresh_token && expires_at) {
+      this.config.oAuthToken = { access_token, refresh_token, expires_at };
+      if (this.account.id) {
+        const accounts = state.getState().accounts;
+        const password = (await state.getState().password()) as string;
+
+        const configData = decryptData(
+          accounts[this.account.id].config,
+          password
+        );
+        configData.oAuthToken = this.config.oAuthToken;
+        accounts[this.account.id].config = encryptData(configData, password);
+        state.setState({ accounts });
+        // make sure we immediately persist the updated accounts
+        await state.getState().saveToStorage();
       }
+      console.info(
+        "Updated account oauth token",
+        this.config.oAuthToken,
+        "Account ID: " + this.account.id
+      );
+    } else {
+      console.error("Invalid token", newToken);
+      throw new Error("Invalid token");
     }
-
-    return data;
   }
 }

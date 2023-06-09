@@ -1,4 +1,5 @@
 import { ACCOUNT_CURRENCIES } from "~/common/constants";
+import { OAuthToken } from "~/types";
 
 export interface WebLNNode {
   alias: string;
@@ -13,10 +14,10 @@ interface Route {
 
 export interface ConnectorInvoice {
   custom_records?: {
-    "696969": string;
-    "7629169": string;
-    "5482373484": string;
-  };
+    "696969"?: string;
+    "7629169"?: string;
+    "5482373484"?: string;
+  } & Record<string, string>;
   id: string;
   memo: string;
   preimage: string;
@@ -126,4 +127,5 @@ export default interface Connector {
     method: string,
     args: Record<string, unknown>
   ): Promise<{ data: unknown }>;
+  getOAuthToken?(): OAuthToken | undefined;
 }

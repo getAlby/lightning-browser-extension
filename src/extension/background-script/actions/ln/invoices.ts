@@ -10,11 +10,15 @@ const invoices = async (message: MessageInvoices) => {
     const result = await connector.getInvoices();
     const invoices: Invoice[] = result.data.invoices
       .filter((invoice) => (isSettled ? invoice.settled : !invoice.settled))
-      .map((invoice: Invoice) => {
+      .map((invoice) => {
         const boostagram = utils.getBoostagramFromInvoiceCustomRecords(
           invoice.custom_records
         );
-        return { ...invoice, boostagram };
+        const type = invoice.type;
+        if (type !== "received") {
+          throw new Error("unexpected invoice type: " + type);
+        }
+        return { ...invoice, boostagram, type };
       });
 
     return {
