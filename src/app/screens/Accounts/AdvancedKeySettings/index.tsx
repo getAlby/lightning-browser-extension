@@ -22,7 +22,7 @@ import {
 import msg from "~/common/lib/msg";
 import { default as nostr, default as nostrlib } from "~/common/lib/nostr";
 
-function AdvancedSettings({ type }: { type: "nostr" | "liquid" }) {
+function AdvancedKeySettings({ type }: { type: "nostr" | "liquid" }) {
   const account = useAccount();
   const { t: tCommon } = useTranslation("common");
   const { t } = useTranslation("translation", {
@@ -285,4 +285,4 @@ function AdvancedSettings({ type }: { type: "nostr" | "liquid" }) {
   );
 }
 
-export default AdvancedSettings;
+export default AdvancedKeySettings;

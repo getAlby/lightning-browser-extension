@@ -24,7 +24,7 @@ import ScrollToTop from "~/app/components/ScrollToTop";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
 import { getConnectorRoutes, renderRoutes } from "~/app/router/connectorRoutes";
-import AdvancedSettings from "~/app/screens/Accounts/AdvancedSettings";
+import AdvancedKeySettings from "~/app/screens/Accounts/AdvancedKeySettings";
 import BackupSecretKey from "~/app/screens/Accounts/BackupSecretKey";
 import ImportSecretKey from "~/app/screens/Accounts/ImportSecretKey";
 import Discover from "~/app/screens/Discover";
@@ -88,11 +88,11 @@ function Options() {
               />
               <Route
                 path=":id/liquid"
-                element={<AdvancedSettings type="liquid" />}
+                element={<AdvancedKeySettings type="liquid" />}
               />
               <Route
                 path=":id/nostr"
-                element={<AdvancedSettings type="nostr" />}
+                element={<AdvancedKeySettings type="nostr" />}
               />
               <Route
                 path="new"
