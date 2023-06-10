@@ -791,6 +791,10 @@
       "start9": {
         "name": "Start9"
       }
+    },
+    "confirm_add_account": {
+      "title": "Lägg till konto",
+      "content": "Den här webbplatsen vill lägga till ett konto ({{connector}}):"
     }
   },
   "common": {
@@ -852,7 +856,20 @@
     "response": "Svar",
     "confirm_password": "Bekräfta Lösenord",
     "balance": "Balans",
-    "wallet": "Plånbok"
+    "wallet": "Plånbok",
+    "connectors": {
+      "lnd": "LND",
+      "nativelnd": "LND (över Tor)",
+      "nativelndhub": "LNDHub (över Tor)",
+      "galoy": "Galoy",
+      "eclair": "Eclair",
+      "nativecitadel": "Citadel (över Tor)",
+      "commando": "Commando",
+      "nativelnbits": "LNBits (över Tor)",
+      "lndhub": "LNDHub",
+      "lnbits": "LNBits",
+      "citadel": "Citadel"
+    }
   },
   "components": {
     "allowance_menu": {
