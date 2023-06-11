@@ -788,6 +788,10 @@
       "umbrel": {
         "name": "Umbrel"
       }
+    },
+    "confirm_add_account": {
+      "title": "添加帐户",
+      "content": "此网站想要添加一个帐户（{{connector}}）："
     }
   },
   "common": {
@@ -849,7 +853,20 @@
       "greaterThan": ">{{min}}"
     },
     "balance": "余额",
-    "wallet": "钱包"
+    "wallet": "钱包",
+    "connectors": {
+      "lnd": "LND",
+      "nativelnd": "LND（通过 Tor）",
+      "lndhub": "LNDHub",
+      "nativelndhub": "LNDHub（通过 Tor）",
+      "lnbits": "LNBits",
+      "nativelnbits": "LNBits（通过 Tor）",
+      "galoy": "Galoy",
+      "eclair": "Eclair",
+      "citadel": "Citadel",
+      "nativecitadel": "Citadel（通过 Tor）",
+      "commando": "Commando"
+    }
   },
   "components": {
     "toasts": {
