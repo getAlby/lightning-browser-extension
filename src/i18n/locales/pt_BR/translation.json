@@ -759,6 +759,10 @@
       },
       "description": "Escolha com qual aplicativo {{name}} você gostaria de se conectar",
       "title": "Conectar em {{name}}"
+    },
+    "confirm_add_account": {
+      "content": "Este site deseja adicionar uma conta ({{connector}}):",
+      "title": "Adicionar conta"
     }
   },
   "common": {
