@@ -791,6 +791,10 @@
       "start9": {
         "name": "Start9"
       }
+    },
+    "confirm_add_account": {
+      "content": "此網站想要添加一個帳戶（{{connector}}）：",
+      "title": "添加帳戶"
     }
   },
   "common": {
@@ -852,7 +856,20 @@
       "greaterThan": "> {{min}}"
     },
     "balance": "餘額",
-    "wallet": "錢包"
+    "wallet": "錢包",
+    "connectors": {
+      "lnd": "LND",
+      "nativelnd": "LND（通過 Tor）",
+      "lndhub": "LNDHub",
+      "lnbits": "LNBits",
+      "nativelnbits": "LNBits（通過 Tor）",
+      "galoy": "Galoy",
+      "eclair": "Eclair",
+      "citadel": "Citadel",
+      "nativecitadel": "Citadel（通過 Tor）",
+      "commando": "Commando",
+      "nativelndhub": "LNDHub（通過 Tor）"
+    }
   },
   "components": {
     "allowance_menu": {
