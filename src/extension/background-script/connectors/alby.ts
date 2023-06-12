@@ -86,7 +86,7 @@ export default class Alby implements Connector {
         settled: invoice.settled,
         settleDate: new Date(invoice.settled_at).getTime(),
         totalAmount: `${invoice.amount}`,
-        type: "incoming",
+        type: "received",
       })
     );
     return {

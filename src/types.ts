@@ -745,7 +745,7 @@ export type SupportedExchanges = "alby" | "coindesk" | "yadio";
 export interface Invoice {
   id: string;
   memo: string;
-  type: "incoming" | "received";
+  type: "received";
   settled: boolean;
   settleDate: number;
   totalAmount: string;
