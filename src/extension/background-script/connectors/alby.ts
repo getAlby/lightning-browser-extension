@@ -329,10 +329,14 @@ export default class Alby implements Connector {
       return this._clientPromise;
     }
 
-    this._clientPromise = new Promise<Client>((resolve) => {
+    this._clientPromise = new Promise<Client>((resolve, reject) => {
       (async () => {
-        this._authUser = await this.authorize();
-        resolve(new Client(this._authUser, this._getRequestOptions()));
+        try {
+          this._authUser = await this.authorize();
+          resolve(new Client(this._authUser, this._getRequestOptions()));
+        } catch (error) {
+          reject(error);
+        }
       })();
     });
     return this._clientPromise;

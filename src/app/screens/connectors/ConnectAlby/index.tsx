@@ -27,7 +27,6 @@ export default function ConnectAlby({ fromWelcome }: Props) {
       const validation = await msg.request("validateAccount", initialAccount);
       if (validation.valid) {
         if (!validation.oAuthToken) {
-          setLoading(false);
           throw new Error("No oAuthToken returned");
         }
 
@@ -50,21 +49,21 @@ export default function ConnectAlby({ fromWelcome }: Props) {
           } else {
             navigate("/discover");
           }
+        } else {
+          console.error("Failed to add account", addResult);
+          throw new Error(addResult.error as string);
         }
-        setLoading(false);
       } else {
-        setLoading(false);
-        console.error({ validation });
-        toast.error(
-          `${tCommon("errors.connection_failed")} (${validation.error})`
-        );
+        console.error("Failed to validate account", validation);
+        throw new Error(validation.error as string);
       }
     } catch (e) {
-      setLoading(false);
       console.error(e);
       if (e instanceof Error) {
         toast.error(`${tCommon("errors.connection_failed")} (${e.message})`);
       }
+    } finally {
+      setLoading(false);
     }
   }
 
