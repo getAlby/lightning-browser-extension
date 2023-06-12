@@ -15,7 +15,7 @@ const invoices = async (message: MessageInvoices) => {
           invoice.custom_records
         );
         const type = invoice.type;
-        if (type !== "received") {
+        if (type !== "received" && type !== "incoming") {
           throw new Error("unexpected invoice type: " + type);
         }
         return { ...invoice, boostagram, type };
