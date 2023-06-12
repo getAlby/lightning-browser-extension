@@ -1,11 +1,9 @@
 import { useTranslation } from "react-i18next";
-import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 import Button from "~/app/components/Button";
 import ConnectorPath from "~/app/components/ConnectorPath";
 import getConnectorRoutes from "~/app/router/connectorRoutes";
-import msg from "~/common/lib/msg";
-import { WebLNNode } from "~/extension/background-script/connectors/connector.interface";
+import ConnectAlby from "~/app/screens/connectors/ConnectAlby";
 import i18n from "~/i18n/i18nConfig";
 
 import alby from "/static/assets/icons/alby.png";
@@ -23,65 +21,12 @@ export default function ChooseConnectorPath({
 }: Props) {
   let connectorRoutes = getConnectorRoutes();
 
-  const navigate = useNavigate();
-
   i18n.on("languageChanged", () => {
     connectorRoutes = getConnectorRoutes();
   });
   const { t } = useTranslation("translation", {
     keyPrefix: "choose_path",
   });
-  const { t: tCommon } = useTranslation("common");
-
-  // TODO: rename & move to a separate file (it's only for connecting to an Alby account)
-  async function connect() {
-    const initialAccount = {
-      name: "Alby",
-      config: {},
-      connector: "alby",
-    };
-
-    try {
-      const validation = await msg.request("validateAccount", initialAccount);
-      if (validation.valid) {
-        if (!validation.oAuthToken) {
-          throw new Error("No oAuthToken returned");
-        }
-
-        const alias = (validation.info as { data: WebLNNode }).data.alias;
-        const account = {
-          ...initialAccount,
-          name: alias || initialAccount.name,
-          config: {
-            ...initialAccount.config,
-            oAuthToken: validation.oAuthToken,
-          },
-        };
-
-        const addResult = await msg.request("addAccount", account);
-        if (addResult.accountId) {
-          await msg.request("selectAccount", {
-            id: addResult.accountId,
-          });
-          if (fromWelcome) {
-            navigate("/pin-extension");
-          } else {
-            navigate("/discover");
-          }
-        }
-      } else {
-        console.error({ validation });
-        toast.error(
-          `${tCommon("errors.connection_failed")} (${validation.error})`
-        );
-      }
-    } catch (e) {
-      console.error(e);
-      if (e instanceof Error) {
-        toast.error(`${tCommon("errors.connection_failed")} (${e.message})`);
-      }
-    }
-  }
 
   return (
     <div className="relative mt-14 lg:grid lg:gap-8 text-center">
@@ -102,15 +47,7 @@ export default function ChooseConnectorPath({
             content={
               <img src={alby} alt="logo" className="inline rounded-3xl w-32" />
             }
-            actions={
-              <Button
-                className="flex flex-1 items-center"
-                label="Connect With Alby"
-                outline
-                flex
-                onClick={connect}
-              />
-            }
+            actions={<ConnectAlby fromWelcome={fromWelcome} />}
           />
           <ConnectorPath
             title={t("other.title")}
