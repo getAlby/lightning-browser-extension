@@ -350,17 +350,14 @@
       },
       "name": {
         "title": "Nimi",
-        "subtitle": "",
         "placeholder": "Syötä nimesi"
       },
       "email": {
         "title": "Sähköposti",
-        "subtitle": "",
         "placeholder": "Syötä sähköpostiosoitteesi"
       },
       "change_password": {
         "title": "Vaihda lukituksen avaussalasana",
-        "subtitle": "",
         "screen_reader": "Vaihda lukituksen avaussalasana",
         "choose_password": {
           "label": "Syötä uusi lukituksen avaussalasana:"
@@ -525,7 +522,6 @@
     "success": "Menestys",
     "error": "Virhe",
     "settings": "Asetukset",
-    "connected_sites": "",
     "sats_one": "sat",
     "sats_other": "satia",
     "loading": "ladataan",
@@ -557,8 +553,7 @@
       "close": "Sulje",
       "export": "Vie",
       "remove": "Poista",
-      "copy": "Kopioi",
-      "copy_invoice": ""
+      "copy": "Kopioi"
     },
     "errors": {
       "connection_failed": "Yhteyden muodostaminen epäonnistui",
@@ -648,5 +643,6 @@
         "active": "TOIMIVA"
       }
     }
-  }
+  },
+  "permissions": {}
 }
