@@ -58,10 +58,12 @@ export async function getAlbyWalletOptions() {
   try {
     const walletRootUrl =
       process.env.WALLET_ROOT_URL || "https://app.regtest.getalby.com";
+    const VERSION = process.env.VERSION || "unknown"; // default is mainly that TS is happy
     const walletOptionsUrl = `${walletRootUrl}/extension/options`;
     const headers = new Headers();
     headers.append("Accept", "application/json");
     headers.append("X-User-Agent", "alby-extension");
+    headers.append("X-Alby-Version", VERSION);
     const timestamp = Math.floor(Date.now() / 1000);
     headers.append("X-TS", timestamp.toString());
 

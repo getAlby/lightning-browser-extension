@@ -43,7 +43,10 @@ function Welcome() {
                 path="create"
                 element={<AlbyWalletCreate options={options} />}
               />
-              <Route path="login" element={<AlbyWalletLogin />} />
+              <Route
+                path="login"
+                element={<AlbyWalletLogin options={options} />}
+              />
               <Route path="choose-connector">
                 <Route
                   index={true}

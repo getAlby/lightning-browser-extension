@@ -30,6 +30,9 @@ if (!process.env.BITCOIN_JUNGLE_GALOY_URL) {
 if (!process.env.HMAC_VERIFY_HEADER_KEY) {
   process.env.HMAC_VERIFY_HEADER_KEY = ""; // env variables are passed as string. empty strings are still falsy
 }
+if (!process.env.VERSION) {
+  process.env.VERSION = require("./package.json").version;
+}
 
 const viewsPath = path.join(__dirname, "static", "views");
 const nodeEnv = process.env.NODE_ENV || "development";
@@ -157,6 +160,7 @@ var options = {
       "NODE_ENV",
       "TARGET_BROWSER",
       "WALLET_ROOT_URL",
+      "VERSION",
       "HMAC_VERIFY_HEADER_KEY",
     ]),
     // delete previous build files

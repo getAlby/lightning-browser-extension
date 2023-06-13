@@ -20,6 +20,7 @@ const walletCreateUrl = `${walletRootUrl}/extension/users`;
 
 const HMAC_VERIFY_HEADER_KEY =
   process.env.HMAC_VERIFY_HEADER_KEY || "alby-extension"; // default is mainly that TS is happy
+const VERSION = process.env.VERSION || "unknown"; // default is mainly that TS is happy
 
 interface LNDHubCreateResponse {
   login: string;
@@ -54,9 +55,10 @@ export default function AlbyWalletCreate({ options }: Props) {
 
     const headers = new Headers();
     headers.append("Accept", "application/json");
-    headers.append("Access-Control-Allow-Origin", "*");
     headers.append("Content-Type", "application/json");
     headers.append("X-User-Agent", "alby-extension");
+    headers.append("X-Alby-Version", VERSION);
+    headers.append("X-Session-Key", options.session_key as string);
 
     const timestamp = Math.floor(Date.now() / 1000);
     const body = JSON.stringify({
