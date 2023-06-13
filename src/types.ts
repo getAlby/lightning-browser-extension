@@ -7,7 +7,7 @@ import {
   WebLNNode,
 } from "~/extension/background-script/connectors/connector.interface";
 
-import { Event } from "./extension/ln/nostr/types";
+import { Event } from "./extension/providers/nostr/types";
 
 export type ConnectorType = keyof typeof connectors;
 
@@ -139,6 +139,9 @@ export type NavigationState = {
     destination?: string;
     amount?: string;
     customRecords?: Record<string, string>;
+    connector?: string;
+    name?: string;
+    config?: unknown;
     message?: string;
     event?: Event;
     sigHash?: string;
@@ -321,7 +324,7 @@ export interface MessageAllowanceEnable extends MessageDefault {
   args: {
     host: Allowance["host"];
   };
-  action: "public/webln/enable" | "public/nostr/enable";
+  action: "public/webln/enable" | "public/nostr/enable" | "public/alby/enable";
 }
 
 export interface MessageAllowanceDelete extends MessageDefault {
@@ -769,3 +772,11 @@ export interface Invoice {
 }
 
 export type BrowserType = "chrome" | "firefox";
+
+export interface DeferredPromise {
+  promise: Promise<unknown>;
+  resolve?: () => void;
+  reject?: () => void;
+}
+
+export type Theme = "dark" | "light";

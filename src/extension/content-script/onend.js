@@ -55,14 +55,15 @@ async function init() {
     if (ev.data && !ev.data.response) {
       // if an enable call railed we ignore the request to prevent spamming the user with prompts
       if (isRejected) {
-        console.error(
-          "Enable had failed. Rejecting further WebLN calls until the next reload"
-        );
+        postMessage(ev, {
+          error:
+            "webln.enable() failed (rejecting further window.webln calls until the next reload)",
+        });
         return;
       }
       // if a call is active we ignore the request
       if (callActive) {
-        console.error("WebLN call already executing");
+        postMessage(ev, { error: "window.webln call already executing" });
         return;
       }
       // limit the calls that can be made from webln
@@ -96,16 +97,7 @@ async function init() {
             isRejected = true;
           }
         }
-        window.postMessage(
-          {
-            application: "LBE",
-            response: true,
-            data: response,
-            //action: ev.data.action,
-            scope: "webln",
-          },
-          "*" // TODO use origin
-        );
+        postMessage(ev, response);
       };
       callActive = true;
       return browser.runtime
@@ -117,5 +109,18 @@ async function init() {
 }
 
 init();
+
+function postMessage(ev, response) {
+  window.postMessage(
+    {
+      id: ev.data.id,
+      application: "LBE",
+      response: true,
+      data: response,
+      scope: "webln",
+    },
+    "*"
+  );
+}
 
 export {};

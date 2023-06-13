@@ -187,7 +187,7 @@
         "sms_code": {
           "label": "Vlože verifikační kód ze SMS"
         },
-        "jwt": {
+        "token": {
           "label": "Vlože svůj JWT token",
           "info": "Přihlášení {{label}} je aktuálně aktualizováno. Pokud jste pokročilý uživatel, můžete svůj JWT token získat přihlášením přes <0>Webovou peněženku (wallet.mainnet.galoy.io)</0><1/><1/>JWT token vypadá podobně jako: <2>eyJhbG...</2><1/><1/>"
         },
@@ -199,8 +199,8 @@
           "failed_to_request_sms": "Nepodařilo se vyžádat SMS kód",
           "failed_to_login_sms": "Nepodařilo se přihlášení s SMS kódem",
           "setup_failed": "Nastavení se nezdařilo",
-          "missing_jwt": "JWT chybí, přihlášení se nezdařilo.",
-          "invalid_jwt": "Vloženo nevalidní JWT"
+          "missing_token": "JWT chybí, přihlášení se nezdařilo.",
+          "invalid_token": "Vloženo nevalidní JWT"
         }
       },
       "btcpay": {
@@ -622,7 +622,6 @@
       "content": "Tato webová stránka vás žádá o podpis:"
     },
     "choose_path": {
-      "title": "Připojit",
       "other": {
         "title": "Jiné peněženky",
         "description": "Připojte svou existující lightning peněženku nebo svůj uzel pomocí různých konektorů.",
@@ -633,8 +632,7 @@
         "create_new": "Vytvoření účtu",
         "title": "Alby",
         "description": "Zaregistrujte se, nebo se přihlašte ke svému existujícímu Alby účtu a začněte využívat lightning platby."
-      },
-      "description": "Pro použití Alby pro online platby, připojte svou lightning peněženku k doplňku."
+      }
     },
     "alby": {
       "pre_connect": {
@@ -708,12 +706,6 @@
           "label1": "Přijmout Bitcoin",
           "label2": "Koupit Bitcoin"
         },
-        "pin": {
-          "title": "📌 Připnout váš doplněk Alby",
-          "description1": "<0>Pro jednoduchý přístup k Alby, klikněte na ikonu doplňku</0> <1/> <2>v pravém horním rohu vašeho prohlížeče</2>",
-          "description2": "V seznamu doplňků najděte Alby a klikněte na ikonu pro připnutí k vašemu panelu nástrojů",
-          "description3": "To je vše! Pro přístup k Alby pouze klikněte na ikonu Alby"
-        },
         "demo": {
           "description": "Objevte vše, co lze s Alby dělat, na naší demo stránce",
           "label1": "Vyzkoušet",
@@ -761,6 +753,7 @@
       "export": "Exportovat",
       "remove": "Odstranit",
       "copy": "Zkopírovat",
+      "copy_invoice": "",
       "log_in": "Přihlásit se",
       "receive_again": "Přijmout další platbu",
       "remember": "Zapamatovat moji volbu a nikdy se už neptat"

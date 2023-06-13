@@ -30,8 +30,6 @@
       }
     },
     "choose_path": {
-      "title": "З'єднатися",
-      "description": "Під'єднайте Ваш lightning гаманець до розширення, щоб почати робити онлайн платежі з Alby",
       "alby": {
         "title": "Alby",
         "description": "Зареєструйтеся або скористайтеся наявним обліковим записом Alby, щоб миттєво розпочати роботу з lightning платежами.",
@@ -260,7 +258,7 @@
         "sms_code": {
           "label": ""
         },
-        "jwt": {
+        "token": {
           "label": "",
           "info": ""
         },
@@ -272,8 +270,8 @@
           "failed_to_request_sms": "",
           "failed_to_login_sms": "",
           "setup_failed": "",
-          "missing_jwt": "",
-          "invalid_jwt": ""
+          "missing_token": "",
+          "invalid_token": ""
         }
       },
       "kollider": {
@@ -636,12 +634,6 @@
           "label1": "",
           "label2": ""
         },
-        "pin": {
-          "title": "",
-          "description1": "",
-          "description2": "",
-          "description3": ""
-        },
         "demo": {
           "title": "",
           "description": "",
@@ -764,6 +756,7 @@
       "export": "",
       "remove": "",
       "copy": "",
+      "copy_invoice": "",
       "log_in": "",
       "remember": ""
     },

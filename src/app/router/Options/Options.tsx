@@ -3,6 +3,7 @@ import Navbar from "@components/Navbar";
 import Accounts from "@screens/Accounts";
 import AccountDetail from "@screens/Accounts/Detail";
 import ConfirmPayment from "@screens/ConfirmPayment";
+import DefaultView from "@screens/Home/DefaultView";
 import Keysend from "@screens/Keysend";
 import LNURLAuth from "@screens/LNURLAuth";
 import LNURLChannel from "@screens/LNURLChannel";
@@ -21,7 +22,7 @@ import { HashRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
-import getConnectorRoutes from "~/app/router/connectorRoutes";
+import { getConnectorRoutes, renderRoutes } from "~/app/router/connectorRoutes";
 import Discover from "~/app/screens/Discover";
 import AlbyWallet from "~/app/screens/connectors/AlbyWallet";
 import ChooseConnector from "~/app/screens/connectors/ChooseConnector";
@@ -55,7 +56,17 @@ function Options() {
             <Route path="confirmPayment" element={<ConfirmPayment />} />
             <Route path="keysend" element={<Keysend />} />
             <Route path="receive" element={<Receive />} />
-            <Route path="transactions" element={<Transactions />} />
+            <Route path="wallet" element={<DefaultView />} />
+            <Route path="transactions">
+              <Route
+                path="outgoing"
+                element={<Transactions type="outgoing" />}
+              />
+              <Route
+                path="incoming"
+                element={<Transactions type="incoming" />}
+              />
+            </Route>
             <Route path="lnurlPay" element={<LNURLPay />} />
             <Route path="lnurlChannel" element={<LNURLChannel />} />
             <Route path="lnurlWithdraw" element={<LNURLWithdraw />} />
@@ -71,17 +82,7 @@ function Options() {
                   </Container>
                 }
               >
-                <Route
-                  index
-                  element={
-                    <ChooseConnectorPath
-                      title={i18n.t("translation:choose_path.title")}
-                      description={i18n.t(
-                        "translation:choose_path.description"
-                      )}
-                    />
-                  }
-                />
+                <Route index element={<ChooseConnectorPath />} />
                 <Route
                   path="create"
                   element={<AlbyWallet variant="create" />}
@@ -96,36 +97,11 @@ function Options() {
                         description={i18n.t(
                           "translation:choose_connector.description"
                         )}
+                        connectorRoutes={connectorRoutes}
                       />
                     }
                   />
-                  {connectorRoutes.map((connectorRoute) => {
-                    if (connectorRoute.children) {
-                      return (
-                        <Route
-                          key={connectorRoute.path}
-                          path={connectorRoute.path}
-                        >
-                          <Route index element={connectorRoute.element} />
-                          {connectorRoute.children.map((connectorRoute) => (
-                            <Route
-                              key={connectorRoute.path}
-                              path={connectorRoute.path}
-                              element={connectorRoute.element}
-                            />
-                          ))}
-                        </Route>
-                      );
-                    } else {
-                      return (
-                        <Route
-                          key={connectorRoute.path}
-                          path={connectorRoute.path}
-                          element={connectorRoute.element}
-                        />
-                      );
-                    }
-                  })}
+                  {renderRoutes(connectorRoutes)}
                 </Route>
               </Route>
               <Route index element={<Accounts />} />
@@ -164,11 +140,7 @@ const Layout = () => {
         <Navbar.Link href="/publishers">
           {tCommon("connected_sites")}
         </Navbar.Link>
-        <Navbar.Link href="/send">{tCommon("actions.send")}</Navbar.Link>
-        <Navbar.Link href="/receive">{tCommon("actions.receive")}</Navbar.Link>
-        <Navbar.Link href="/transactions">
-          {tCommon("actions.transactions")}
-        </Navbar.Link>
+        <Navbar.Link href="/wallet">{tCommon("wallet")}</Navbar.Link>
       </Navbar>
       <ToastContainer
         autoClose={15000}

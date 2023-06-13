@@ -30,8 +30,6 @@
       }
     },
     "choose_path": {
-      "title": "Opret forbindelse",
-      "description": "Opret forbindelse til udvidelsen fra din lightning-wallet for at bruge Alby til at betale online.",
       "alby": {
         "title": "Alby",
         "description": "Opret dig, eller brug din eksisterende Alby-konto til hurtigt at starte med at betale via lightning.",
@@ -260,7 +258,7 @@
         "sms_code": {
           "label": "Indtast din SMS-bekræftelseskode"
         },
-        "jwt": {
+        "token": {
           "label": "Indtast din JWT-token",
           "info": "Log ind med {{label}} bliver i øjeblikketl opgraderet. Hvis du er en øvet bruger, kan du få din JWT-token ved at logge ind via <0>Web Wallet (wallet.mainnet.galoy.io)</0><1/><1/>JWT ser sådan ud: <2>eyJhbG...</2><1/><1/>"
         },
@@ -272,8 +270,8 @@
           "failed_to_request_sms": "Kunne ikke anmode om SMS-kode",
           "failed_to_login_sms": "Kunne ikke logge ind med SMS-kode",
           "setup_failed": "Opsætning mislykkedes",
-          "missing_jwt": "JWT mangler, kunne ikke logge ind.",
-          "invalid_jwt": "ugyldig JWT givet"
+          "missing_token": "JWT mangler, kunne ikke logge ind.",
+          "invalid_token": "ugyldig JWT givet"
         }
       },
       "kollider": {
@@ -636,12 +634,6 @@
           "label1": "Modtag Bitcoin",
           "label2": "Køb Bitcoin"
         },
-        "pin": {
-          "title": "📌 Fastgør din Alby-udvidelse",
-          "description1": "<0>Få nem adgang til Alby ved at klikke på udvidelsesikonet</0> <1/> <2>i din browsers øverste højre hjørne</2>",
-          "description2": "Find Alby i listen med udvidelser, og klik på tegnestift-ikonet for at fastgøre den til værktøjslinjen",
-          "description3": "Sådan! Et klik på Albys ikon åbner den"
-        },
         "demo": {
           "title": "🕹️ Få en prøvetur med Alby",
           "description": "Se alle de ting, du kan med Alby på vores præsentationsside",
@@ -764,6 +756,7 @@
       "export": "Eksporter",
       "remove": "Fjern",
       "copy": "Kopier",
+      "copy_invoice": "",
       "log_in": "Log ind",
       "remember": "Husk mit valg, og spørg ikke igen"
     },

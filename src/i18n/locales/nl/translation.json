@@ -187,7 +187,7 @@
         "sms_code": {
           "label": ""
         },
-        "jwt": {
+        "token": {
           "label": "",
           "info": ""
         },
@@ -199,8 +199,8 @@
           "failed_to_request_sms": "",
           "failed_to_login_sms": "",
           "setup_failed": "",
-          "missing_jwt": "",
-          "invalid_jwt": ""
+          "missing_token": "",
+          "invalid_token": ""
         }
       },
       "btcpay": {
@@ -534,8 +534,6 @@
       "block_added": ""
     },
     "choose_path": {
-      "description": "Om Alby te gebruiken voor online betalingen, verbind je lightning wallet met de extensie.",
-      "title": "Verbinden",
       "alby": {
         "title": "Alby"
       }
@@ -579,7 +577,8 @@
       "close": "",
       "export": "",
       "remove": "",
-      "copy": ""
+      "copy": "",
+      "copy_invoice": ""
     },
     "errors": {
       "connection_failed": "",

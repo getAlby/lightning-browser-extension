@@ -6,13 +6,13 @@ import Select from "@components/form/Select";
 import TextField from "@components/form/TextField";
 import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
 import { useState } from "react";
-import { Trans, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { ACCOUNT_CURRENCIES } from "~/common/constants";
 import msg from "~/common/lib/msg";
 
-import kolliderLogo from "/static/assets/icons/kollider.png";
+import logo from "/static/assets/icons/kollider.png";
 
 type Currency = {
   value: ACCOUNT_CURRENCIES;
@@ -140,11 +140,7 @@ export default function ConnectKollidier({ variant }: Props) {
           title={t("choose_path.title")}
           description={t("choose_path.description")}
           content={
-            <img
-              src={kolliderLogo}
-              alt="logo"
-              className="inline rounded-3xl w-32"
-            />
+            <img src={logo} alt="logo" className="inline rounded-3xl w-32" />
           }
           actions={
             <>
@@ -157,38 +153,14 @@ export default function ConnectKollidier({ variant }: Props) {
             </>
           }
         />
-        <div className="mb-4 mt-8 md:my-8 flex justify-center gap-4 md:flex-row">
-          <Button
-            label={tCommon("actions.back")}
-            onClick={(e) => {
-              navigate(-1);
-            }}
-            className="max-sm:w-full"
-          />
-        </div>
       </div>
     </div>
   ) : (
     <ConnectorForm
       title={t(`${variant}.title`)}
-      description={
-        variant === "create" ? (
-          t(`create.description`)
-        ) : (
-          <Trans
-            i18nKey={"login.description"}
-            t={t}
-            components={[
-              // eslint-disable-next-line react/jsx-key
-              <Link
-                className="underline"
-                to="/accounts/new/choose-connector/kollider/create"
-              ></Link>,
-            ]}
-          />
-        )
-      }
+      description={variant === "create" ? t(`create.description`) : null}
       submitLoading={loading}
+      logo={logo}
       submitDisabled={
         loading ||
         formData.password === "" ||
@@ -203,7 +175,7 @@ export default function ConnectKollidier({ variant }: Props) {
           {t("warning")}
         </div>
       )}
-      <div className="mb-6">
+      <div className="mt-6 mb-6">
         <TextField
           id="username"
           label={t(`username.label`)}
@@ -224,7 +196,7 @@ export default function ConnectKollidier({ variant }: Props) {
           autoFocus={false}
         />
       </div>
-      <div className="mb-6">
+      <div>
         <p className="font-medium text-gray-800 dark:text-white">
           {t("currency.label")}
         </p>

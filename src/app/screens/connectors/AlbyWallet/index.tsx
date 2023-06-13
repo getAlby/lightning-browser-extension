@@ -5,15 +5,21 @@ import Base64 from "crypto-js/enc-base64";
 import hmacSHA256 from "crypto-js/hmac-sha256";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Button from "~/app/components/Button";
 import PasswordForm from "~/app/components/PasswordForm";
 import msg from "~/common/lib/msg";
+
+import logo from "/static/assets/icons/alby.png";
+import blueIcon from "/static/assets/icons/alby_icon_blue_stream_256x256.png";
 
 const walletCreateUrl =
   process.env.WALLET_CREATE_URL || "https://app.regtest.getalby.com/api/users";
 const HMAC_VERIFY_HEADER_KEY =
   process.env.HMAC_VERIFY_HEADER_KEY || "alby-extension"; // default is mainly that TS is happy
+
+const SIGNUP_DISABLED = true;
 
 interface LNDHubCreateResponse {
   login: string;
@@ -59,8 +65,12 @@ export default function AlbyWallet({ variant }: Props) {
       lightning_addresses_attributes: [{ address: formData.lnAddress }], // address must be provided as array, in theory we support multiple addresses per account
     });
     headers.append("X-TS", timestamp.toString());
-    const mac = hmacSHA256(body, HMAC_VERIFY_HEADER_KEY).toString(Base64);
-    headers.append("X-VERIFY", encodeURIComponent(mac));
+    const macBody = hmacSHA256(body, HMAC_VERIFY_HEADER_KEY).toString(Base64);
+    const macUrl = hmacSHA256(walletCreateUrl, HMAC_VERIFY_HEADER_KEY).toString(
+      Base64
+    );
+    headers.append("X-VERIFY", encodeURIComponent(macBody));
+    headers.append("X-VERIFY-URL", encodeURIComponent(macUrl));
 
     return fetch(walletCreateUrl, {
       method: "POST",
@@ -156,10 +166,41 @@ export default function AlbyWallet({ variant }: Props) {
     }
   }
 
+  if (variant === "create" && SIGNUP_DISABLED) {
+    return (
+      <div className="max-w-xl space-y-4 mx-auto relative mt-14 bg-white dark:bg-surface-02dp p-10 shadow rounded-lg items-center flex flex-col text-center">
+        <img src={blueIcon} alt="logo" className="inline w-64" />
+        <p>
+          Please sign up on{" "}
+          <Link
+            className="underline"
+            to="https://getalby.com/user/new"
+            target="_blank"
+          >
+            getalby.com
+          </Link>
+        </p>
+        <Button
+          primary
+          label={"Sign up"}
+          onClick={() => window.open("https://getalby.com/user/new", "_blank")}
+        />
+        <p>
+          After you have created your account,{" "}
+          <Link className="underline" to="/accounts/new/login">
+            click here
+          </Link>{" "}
+          to login.
+        </p>
+      </div>
+    );
+  }
+
   return (
     <ConnectorForm
       title={t("pre_connect.title")}
       description={t(`pre_connect.${variant}_account`)}
+      logo={logo}
       submitLoading={loading}
       onSubmit={signup}
       submitDisabled={
@@ -193,7 +234,7 @@ export default function AlbyWallet({ variant }: Props) {
         />
       </div>
       {variant === "login" && (
-        <p className="mb-2 text-gray-700 dark:text-neutral-400">
+        <p className="text-gray-700 dark:text-neutral-400">
           <a
             className="underline"
             target="_blank"

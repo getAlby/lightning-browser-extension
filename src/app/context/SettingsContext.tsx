@@ -2,13 +2,10 @@ import dayjs from "dayjs";
 import i18n from "i18next";
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
-import { getTheme } from "~/app/utils";
-import {
-  ACCOUNT_CURRENCIES,
-  CURRENCIES,
-  DEFAULT_SETTINGS,
-} from "~/common/constants";
+import { setTheme } from "~/app/utils";
+import { ACCOUNT_CURRENCIES, CURRENCIES } from "~/common/constants";
 import api from "~/common/lib/api";
+import { DEFAULT_SETTINGS } from "~/common/settings";
 import {
   getFormattedCurrency as getFormattedCurrencyUtil,
   getFormattedFiat as getFormattedFiatUtil,
@@ -144,7 +141,7 @@ export const SettingsProvider = ({
 
   // update theme on every change
   useEffect(() => {
-    getTheme(); // Get the active theme and apply corresponding Tailwind classes to the document
+    setTheme(); // Get the active theme and apply corresponding Tailwind classes to the document
   }, [settings.theme]);
 
   const value = {

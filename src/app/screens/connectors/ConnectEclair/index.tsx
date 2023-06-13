@@ -11,6 +11,8 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import msg from "~/common/lib/msg";
 
+import logo from "/static/assets/icons/eclair.jpg";
+
 export default function ConnectEclair() {
   const navigate = useNavigate();
   const { t } = useTranslation("translation", {
@@ -73,7 +75,7 @@ export default function ConnectEclair() {
   return (
     <ConnectorForm
       title={
-        <h1 className="mb-6 text-2xl font-bold dark:text-white">
+        <h1 className="text-2xl font-bold dark:text-white">
           <Trans
             i18nKey={"page.title"}
             t={t}
@@ -88,6 +90,7 @@ export default function ConnectEclair() {
         </h1>
       }
       description={t("page.instructions")}
+      logo={logo}
       submitLoading={loading}
       submitDisabled={formData.password === "" || formData.url === ""}
       onSubmit={handleSubmit}
