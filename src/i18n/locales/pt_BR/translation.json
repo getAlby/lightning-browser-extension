@@ -40,7 +40,7 @@
       "lnd": {
         "title": "LND",
         "page": {
-          "title": "Conecte no servidor LND",
+          "title": "Conecte-se no servidor LND",
           "description": "Você precisa da URL do servidor e um macaroon com permissão de envio e leitura (ex. admin.macaroon)"
         },
         "url": {
@@ -59,7 +59,7 @@
       "lnbits": {
         "title": "LNbits",
         "page": {
-          "title": "Conecte na <0>LNbits</0>",
+          "title": "Conecte-se na <0>LNbits</0>",
           "instructions": "Na LNbits, escolha a carteira que você deseja conectar, abra ela, clica em API Info a e copie a Chave Admin e cole abaixo:"
         },
         "admin_key": {
@@ -76,7 +76,7 @@
       "eclair": {
         "title": "Eclair",
         "page": {
-          "title": "Conecte no servidor <0>Eclair</0>",
+          "title": "Conecte-se no servidor <0>Eclair</0>",
           "instructions": "Você precisa da URL e senha da Eclair."
         },
         "url": {
@@ -90,7 +90,7 @@
       "citadel": {
         "title": "Citadel",
         "page": {
-          "title": "Conecte no servidor <0>Citadel</0>",
+          "title": "Conecte-se no servidor <0>Citadel</0>",
           "instructions": "Não funciona se o 2FA estiver ativado."
         },
         "password": {
@@ -104,7 +104,7 @@
       "umbrel": {
         "title": "Umbrel",
         "page": {
-          "title": "Conecte no servidor <0>Umbrel</0>",
+          "title": "Conecte-se no servidor <0>Umbrel</0>",
           "instructions": "1. In your Lightning Node dashboard go to <0>Connect wallet</0><1/>2. Select <0>REST (Tor)</0> or <0>REST (Local Network)</0> mode<1/>3. Copy the <0>lndconnect URL</0> and paste it below"
         },
         "rest_url": {
@@ -115,7 +115,7 @@
       "mynode": {
         "title": "myNode",
         "page": {
-          "title": "Conecte na <0>myNode</0>",
+          "title": "Conecte-se no servidor <0>myNode</0>",
           "instructions": "No myNode clique em <0>Wallet</0> botão para seu serviço <0>lightning</0>.<1/> Agora clique em <0>Pair Wallet</0> botão abaixo da tab <0>Status</0>. Insira sua senha quando solicitada.<1/> Selecione o menu suspenso e escolha uma opção de emparelhamento. Dependendo da sua configuração você pode escolher <0>Conexão lightning (REST + Local IP)</0> ou conexão <0>lightning (REST + Tor)</0>."
         },
         "rest_url": {
@@ -126,7 +126,7 @@
       "start9": {
         "title": "Start9",
         "page": {
-          "title": "Connect to your <0>Start9 Server</0>",
+          "title": "Conecte-se no seu servidor <0>Start9</0>",
           "instructions": "<0>Note:</0> Atualmente somente a LND é suportada mas nós adicionaremos suporte para a c-lightning no futuro!<1/>No seu Embassy clique em service <0>Lightning Network Daemon</0>.<1/>Selecione a tab <0>Properties</0>.<1/>Agora copie o <0>LND Connect REST URL.</0>"
         },
         "rest_url": {
@@ -137,7 +137,7 @@
       "raspiblitz": {
         "title": "RaspiBlitz",
         "page": {
-          "title": "Conecte seu servidor <0>RaspiBlitz</0>",
+          "title": "Conecte-se seu servidor <0>RaspiBlitz</0>",
           "instructions2": "Copie o (admin) <0>macaroon</0> no campo abaixo.",
           "instructions1": "Siga esses passos<1/> 1. <0>SSH</0> na <0>Raspiblitz</0><1/>2. Selecione <0>Conectar apps & Mostrar credenciais</0> da lista<1/><0/>3. Escolher <0>Conectar Alby neste servidor</0><1/>4. Pressione <0>OK</0> para exibir as credenciais de conexão<1/><1/>Copie e cole o <0>REST API host</0> ou o <0>.onion</0> endereço para conectar -se através do TOR na entrada abaixo."
         },
@@ -149,19 +149,19 @@
       "bitcoin_beach": {
         "title": "Carteira Bitcoin Beach",
         "page": {
-          "title": "Conecte na <0>Carteira Bitcoin Beach</0>"
+          "title": "Conecte-se na <0>Carteira Bitcoin Beach</0>"
         }
       },
       "bitcoin_jungle": {
         "title": "Carteira Bitcoin Jungle",
         "page": {
-          "title": "Conecte na <0>Carteira Bitcoin Jungle</0>"
+          "title": "Conecte-se na <0>Carteira Bitcoin Jungle</0>"
         }
       },
       "btcpay": {
         "title": "Servidor BTCPay",
         "page": {
-          "title": "Conecte no servidor LND BTCPay",
+          "title": "Conecte-se no servidor LND BTCPay",
           "instructions": "Navegue até a BTCPayServer e acesse como administrador. Vá até Configurações>Serviços>LND Rest - Ver informação. Depois Clique \"Ver Código QR\" e copie os dados do Código QR. Cole os dados abaixo:"
         },
         "config": {
@@ -183,12 +183,9 @@
           "label": "Insira o token JWT"
         },
         "actions": {
-          "login": "Login",
-          "request_sms_code": "Solicitar código SMS"
+          "login": "Login"
         },
         "errors": {
-          "failed_to_request_sms": "Falha ao solicitar código SMS",
-          "failed_to_login_sms": "Falha ao logar usando o código SMS",
           "setup_failed": "Falha na configuração",
           "missing_token": "JWT ausente, não foi possível fazer login."
         }
@@ -196,7 +193,7 @@
       "lndhub_bluewallet": {
         "title": "Bluewallet",
         "page": {
-          "title": "Conectar na BlueWallet",
+          "title": "Conecte-se na BlueWallet",
           "description": "Na BlueWallet, escolha a carteira que você deseja conectar, abra ela, clique em \"...\", clique em Exportar/Backup para exibir o código QR e leia o código com sua webcam."
         },
         "uri": {
@@ -210,7 +207,7 @@
       "lndhub_go": {
         "title": "LNDHub",
         "page": {
-          "title": "Conectar na LNDHub",
+          "title": "Conecte-se na LNDHub",
           "description": "Insira sua credencial URI LNDHub aqui ou leia o código QR com sua webcam."
         },
         "uri": {
@@ -223,7 +220,7 @@
       },
       "commando": {
         "page": {
-          "title": "Conecte no servidor Core Lightning",
+          "title": "Conecte-se no seu servidor Core Lightning",
           "instructions": "Certifique-se de conectar em um servidor Core Lightning que esteja na versão 0.12.0 ou mais recente, o plugin commando instalado e rodando e o servidor acessível na rede relâmpago. Crie um rune executando o comando 'lightning-cli commando-rune'."
         },
         "title": "Core Lightning",
@@ -255,11 +252,34 @@
       },
       "title": "Conectar Carteira Bitcoin",
       "kollider": {
-        "title": "Kollider"
+        "title": "Kollider",
+        "warning": "⚠️ Certifique-se de armazenar suas credenciais com segurança em um gerenciador de senhas. Sem essas credenciais, não poderemos recuperar sua conta.",
+        "choose_path": {
+          "create_new": "Criar conta Kollider",
+          "description": "Crie uma conta Kollider ou faça o login caso já possua uma conta.",
+          "title": "Conecte-se na sua carteira Kollider"
+        },
+        "create": {
+          "title": "Crie sua conta na Kollider e conecte-se na Alby",
+          "description": "Crie uma nova conta Kollider para enviar, receber e negociar Bitcoin."
+        },
+        "login": {
+          "title": "Conecte-se na sua conta Kollider"
+        },
+        "username": {
+          "label": "Nome de usuário"
+        },
+        "errors": {
+          "user_already_exists": "Esse nome de usuário já existe",
+          "connection_failed": "Falha na conexão. Você tem certeza de que os dados da conta estão corretos?"
+        },
+        "currency": {
+          "label": "Escolha a moeda da conta"
+        }
       },
       "lnc": {
         "page": {
-          "title": "Conecte no servidor LND usando LNC",
+          "title": "Conecte-se no servidor LND usando LNC",
           "description": "1. Open Lightning Terminal and choose <0>Lightning Node Connect</0> from the sidebar.<1/> 2. Click <0>Create a new session</0><1/>3. Label the session, choose desired permissions and submit<1/>4. <0>Copy pairing phrase</0> and paste it below."
         },
         "title": "Lightning Terminal (LNC)",
@@ -274,12 +294,6 @@
         "enable_now": "Ativar"
       },
       "recent_transactions": "Transações recentes",
-      "transaction_list": {
-        "tabs": {
-          "incoming": "Recebidas",
-          "outgoing": "Enviadas"
-        }
-      },
       "allowance_view": {
         "recent_transactions": "Transações recentes",
         "allowance": "Limite de gastos",
@@ -288,9 +302,11 @@
       },
       "default_view": {
         "recent_transactions": "Transações recentes",
-        "no_transactions": "Você ainda não realizou transações com a Alby.",
         "is_blocked_hint": "A Alby está desativada em {{host}}",
-        "block_removed": "{{host}} ativado. Por favor, recarregue o site."
+        "block_removed": "{{host}} ativado. Por favor, recarregue o site.",
+        "no_outgoing_transactions": "Você ainda não realizou transações usando esta conta.",
+        "all_transactions_link": "Ver todas as transações",
+        "no_incoming_transactions": "Você ainda não recebeu transações nesta conta."
       }
     },
     "accounts": {
@@ -306,7 +322,7 @@
           "waiting": "aguardando dados LndHub...",
           "tip_mobile": "Dica: Use esta carteira no seu dispositivo móvel",
           "export_uri": "Credenciais URI LNDHub",
-          "scan_qr": "Leia o Código QR para importar esta carteira na Zeus ou BlueWallet."
+          "scan_qr": "Leia o código QR para importar esta carteira na Zeus ou BlueWallet."
         },
         "nostr": {
           "title": "Nostr",
@@ -529,7 +545,7 @@
       },
       "title": "Sua lista de sites ⚡️",
       "description": "Sites onde você já usou a Alby",
-      "no_info": "Nenhum site ainda.",
+      "no_info": "Parece que você ainda não usou a Alby em sites.",
       "discover": "Descubra sites"
     },
     "make_invoice": {
@@ -617,8 +633,10 @@
         "5": "exclusão de evento",
         "4": "mensagens diretas criptografadas",
         "9735": "zap",
-        "3": "contatos"
-      }
+        "3": "contatos",
+        "1": "nota de texto curta"
+      },
+      "no_content": "(Sem conteúdo)"
     },
     "confirm_request_permission": {
       "title": "Aprovar solicitação",
@@ -718,8 +736,7 @@
       }
     },
     "transactions": {
-      "title": "Transações",
-      "description": "Transações enviadas usando suas contas"
+      "title": "Transações"
     },
     "distributions": {
       "umbrel": {
@@ -740,7 +757,12 @@
       "start9": {
         "name": "Start9"
       },
-      "description": "Escolha com qual aplicativo {{name}} você gostaria de se conectar"
+      "description": "Escolha com qual aplicativo {{name}} você gostaria de se conectar",
+      "title": "Conectar em {{name}}"
+    },
+    "confirm_add_account": {
+      "content": "Este site deseja adicionar uma conta ({{connector}}):",
+      "title": "Adicionar conta"
     }
   },
   "common": {
@@ -774,7 +796,7 @@
       "export": "Exportar",
       "remove": "Remover",
       "copy": "Copiar",
-      "copy_invoice": "Copiar fatura",
+      "copy_invoice": "Copiar código",
       "back": "Voltar",
       "log_in": "Fazer login",
       "remember": "Lembrar minha escolha e não perguntar novamente",
@@ -801,8 +823,8 @@
       "lessThan": "< {{max}}",
       "greaterThan": "> {{min}}"
     },
-    "transactions": "Transações",
-    "balance": "Saldo"
+    "balance": "Saldo disponível",
+    "wallet": "Carteira"
   },
   "components": {
     "allowance_menu": {
@@ -893,7 +915,16 @@
     },
     "companion_download_info": {
       "tor_native": {
-        "title": "TOR (nativo)"
+        "title": "TOR (nativo)",
+        "description": "Selecione esta opção se este navegador já estiver conectado à rede TOR."
+      },
+      "heading": "Como você deseja se conectar à rede TOR?",
+      "download": "Baixar"
+    },
+    "transaction_list": {
+      "tabs": {
+        "outgoing": "Enviadas",
+        "incoming": "Recebidas"
       }
     }
   },

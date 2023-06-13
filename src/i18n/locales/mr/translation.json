@@ -263,12 +263,9 @@
           "info": "The {{label}} login सध्या अपग्रेड केले जात आहे. तुम्ही प्रगत वापरकर्ते असल्यास, तुम्ही <0>वेब वॉलेट (wallet.mainnet.galoy.io)</0><1/><1/>JWT द्वारे लॉग इन करून तुमचे JWT टोकन मिळवू शकता: < 2>eyJhbG...</2><1/><1/>"
         },
         "actions": {
-          "login": "Login",
-          "request_sms_code": "SMS कोडची विनंती करा"
+          "login": "Login"
         },
         "errors": {
-          "failed_to_request_sms": "SMS कोडची विनंती करण्यात अयशस्वी",
-          "failed_to_login_sms": "SMS कोडची विनंती करताना अपयश आले",
           "setup_failed": "Setup अयशस्वी",
           "missing_token": "JWT शोधू शकत नाही म्हणून लॉग इन करू शकलो नाही.",
           "invalid_token": "चुकीचे JWT पास झाले"
@@ -340,12 +337,6 @@
         "enable_now": "आता सुरू करा"
       },
       "recent_transactions": "अलीकडचे व्यवहार",
-      "transaction_list": {
-        "tabs": {
-          "outgoing": "बाहेर जाणरे",
-          "incoming": "येणारे"
-        }
-      },
       "allowance_view": {
         "recent_transactions": "अलीकडचे व्यवहार",
         "allowance": "भत्ता",
@@ -354,7 +345,6 @@
       },
       "default_view": {
         "recent_transactions": "अलीकडचे व्यवहार",
-        "no_transactions": "Alby सह अद्याप कोणतेही व्यवहार केलेले नाहीत.",
         "is_blocked_hint": "Alby सध्या {{host}} वर अक्षम आहे",
         "block_removed": "{{host}} सक्षम केले. कृपया वेबसाइट रीलोड करा."
       }
@@ -735,7 +725,6 @@
     },
     "transactions": {
       "title": "व्यवहार",
-      "description": "तुमच्या सर्व खात्यांमधील आउटगोइंग व्यवहार",
       "list_empty": "अद्याप कोणतेही व्यवहार उपलब्ध नाहीत."
     }
   },
@@ -748,7 +737,6 @@
     "accounts": "खाते",
     "discover": "शोध",
     "connected_sites": "",
-    "transactions": "व्यवहार",
     "sats_one": "sat",
     "sats_other": "sats",
     "loading": "लोड होत आहे",
