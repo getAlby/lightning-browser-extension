@@ -8,20 +8,16 @@ import Container from "@components/Container";
 import Header from "@components/Header";
 import IconButton from "@components/IconButton";
 import Loading from "@components/Loading";
-import Tab from "@components/Tab";
+import DualCurrencyField from "@components/form/DualCurrencyField";
+import TextField from "@components/form/TextField";
 import { useEffect, useRef, useState } from "react";
 import Confetti from "react-confetti";
 import { useTranslation } from "react-i18next";
 import QRCode from "react-qr-code";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import LightningReceiveForm from "~/app/components/LightningReceiveForm";
-import OnChainReceive from "~/app/components/OnChainReceive";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
-import BlockIcon from "~/app/icons/BlockIcon";
-import ThunderIcon from "~/app/icons/ThunderIcon";
-import { isAlbyAccount } from "~/app/utils";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import { poll } from "~/common/utils/helpers";
@@ -31,7 +27,6 @@ function Receive() {
   const { t: tCommon } = useTranslation("common");
 
   const auth = useAccount();
-
   const {
     isLoading: isLoadingSettings,
     settings,
@@ -54,7 +49,6 @@ function Receive() {
   const [paid, setPaid] = useState(false);
   const [pollingForPayment, setPollingForPayment] = useState(false);
   const mounted = useRef(false);
-  const isAlbyUser = isAlbyAccount(auth.account?.alias);
 
   useEffect(() => {
     mounted.current = true;
@@ -144,16 +138,8 @@ function Receive() {
     if (!invoice) return null;
     return (
       <div className="py-4">
-        <div className="relative p-8  bg-white rounded-lg shadow-sm ring-1 ring-black ring-opacity-5 flex justify-center items-center overflow-hidden">
-          <div className="h-auto mx-auto my-0 w-48">
-            <QRCode
-              value={invoice.paymentRequest.toUpperCase()}
-              level="M"
-              size={256}
-              style={{ height: "auto", maxWidth: "100%", width: "100%" }}
-              viewBox={`0 0 256 256`}
-            />
-          </div>
+        <div className="relative p-8 bg-white rounded-lg shadow-sm ring-1 ring-black ring-opacity-5 flex justify-center items-center overflow-hidden">
+          <QRCode value={invoice.paymentRequest.toUpperCase()} level="M" />
           {paid && (
             <div className="absolute inset-0 flex justify-center items-center bg-white/90">
               <div className="text-center">
@@ -246,44 +232,47 @@ function Receive() {
           />
         }
       />
-
-      {isAlbyUser ? (
-        <Tab.Group>
-          <Tab.List className="flex mb-6 mt-4 items-center px-4">
-            <Tab icon={<ThunderIcon />} label="Lightning" />
-            <Tab icon={<BlockIcon />} label="Onchain" />
-          </Tab.List>
-          <Tab.Panels className="h-full">
-            <Tab.Panel className="h-full">
-              {invoice ? (
-                <Container maxWidth="sm">{renderInvoice()}</Container>
-              ) : (
-                <LightningReceiveForm
-                  handleSubmit={handleSubmit}
-                  handleChange={handleChange}
-                  loading={loading}
-                  fiatAmount={fiatAmount}
-                />
-              )}
-            </Tab.Panel>
-            <Tab.Panel className="h-full">
-              <OnChainReceive />
-            </Tab.Panel>
-          </Tab.Panels>
-        </Tab.Group>
+      {invoice ? (
+        <Container maxWidth="sm">{renderInvoice()}</Container>
       ) : (
-        <div className=" h-full">
-          {invoice ? (
-            <Container maxWidth="sm">{renderInvoice()}</Container>
-          ) : (
-            <LightningReceiveForm
-              handleSubmit={handleSubmit}
-              handleChange={handleChange}
-              loading={loading}
-              fiatAmount={fiatAmount}
-            />
-          )}
-        </div>
+        <form onSubmit={handleSubmit} className="h-full">
+          <fieldset className="h-full" disabled={loading}>
+            <Container justifyBetween maxWidth="sm">
+              <div className="py-4">
+                <div className="mb-4">
+                  <DualCurrencyField
+                    id="amount"
+                    min={0}
+                    label={t("amount.label")}
+                    placeholder={t("amount.placeholder")}
+                    fiatValue={fiatAmount}
+                    onChange={handleChange}
+                    autoFocus
+                  />
+                </div>
+
+                <div className="mb-4">
+                  <TextField
+                    id="description"
+                    label={t("description.label")}
+                    placeholder={t("description.placeholder")}
+                    onChange={handleChange}
+                  />
+                </div>
+              </div>
+              <div className="mb-4">
+                <Button
+                  type="submit"
+                  label={t("actions.create_invoice")}
+                  fullWidth
+                  primary
+                  loading={loading}
+                  disabled={loading}
+                />
+              </div>
+            </Container>
+          </fieldset>
+        </form>
       )}
     </div>
   );
