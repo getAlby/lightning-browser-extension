@@ -9,7 +9,7 @@ export default function TabList({ children, className }: Props) {
   return (
     <HeadlessUiTab.List
       className={classNames(
-        "flex justify-center items-center",
+        "flex justify-center items-center rounded-md mb-2 bg-gray-100 dark:bg-surface-02dp",
         !!className && className
       )}
     >

@@ -168,7 +168,7 @@ const DefaultView: FC<Props> = (props) => {
             </h2>
 
             <Tab.Group>
-              <Tab.List className="mb-2">
+              <Tab.List>
                 {[
                   tComponents("transaction_list.tabs.outgoing"),
                   tComponents("transaction_list.tabs.incoming"),
