@@ -3,7 +3,7 @@ import TextField from "@components/form/TextField";
 import LoginFailedToast from "@components/toasts/LoginFailedToast";
 import Base64 from "crypto-js/enc-base64";
 import hmacSHA256 from "crypto-js/hmac-sha256";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -17,7 +17,6 @@ import blueIcon from "/static/assets/icons/alby_icon_blue_stream_256x256.png";
 const walletRootUrl =
   process.env.WALLET_ROOT_URL || "https://app.regtest.getalby.com";
 const walletCreateUrl = `${walletRootUrl}/extension/users`;
-const walletOptionsUrl = `${walletRootUrl}/extension/options`;
 
 const HMAC_VERIFY_HEADER_KEY =
   process.env.HMAC_VERIFY_HEADER_KEY || "alby-extension"; // default is mainly that TS is happy
@@ -36,41 +35,18 @@ const initialFormData = {
   lnAddress: "",
 };
 
-export default function AlbyWalletCreate() {
+type Props = {
+  options: Record<string, unknown>;
+};
+
+export default function AlbyWalletCreate({ options }: Props) {
   const [loading, setLoading] = useState(false);
-  const [loadingOptions, setLoadingOptions] = useState(true);
-  const [options, setOptions] = useState({ signup_disabled: false });
   const navigate = useNavigate();
   const { t } = useTranslation("translation", {
     keyPrefix: "alby",
   });
   const { t: tCommon } = useTranslation("common");
   const [formData, setFormData] = useState(initialFormData);
-
-  useEffect(() => {
-    getWalletOptions();
-  }, []);
-
-  async function getWalletOptions() {
-    setLoadingOptions(true);
-    try {
-      const headers = new Headers();
-      headers.append("Accept", "application/json");
-      headers.append("X-User-Agent", "alby-extension");
-      const timestamp = Math.floor(Date.now() / 1000);
-      headers.append("X-TS", timestamp.toString());
-
-      const response = await fetch(walletOptionsUrl, {
-        method: "GET",
-        headers: headers,
-        cache: "no-cache",
-      });
-      const data = await response.json();
-      setOptions(data);
-    } finally {
-      setLoadingOptions(false);
-    }
-  }
 
   function signup(event: React.FormEvent<HTMLFormElement>) {
     setLoading(true);
@@ -190,9 +166,6 @@ export default function AlbyWalletCreate() {
     }
   }
 
-  if (loadingOptions) {
-    return <></>;
-  }
   if (options && options.signup_disabled) {
     return (
       <div className="max-w-xl space-y-4 mx-auto relative mt-14 bg-white dark:bg-surface-02dp p-10 shadow rounded-lg items-center flex flex-col text-center">
