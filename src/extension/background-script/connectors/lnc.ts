@@ -170,7 +170,7 @@ class Lnc implements Connector {
       await this.lnc.connect();
     } catch (error) {
       console.error("Init LNC failed", error);
-      this.unload();
+      await this.unload();
     }
   }
 
@@ -181,11 +181,10 @@ class Lnc implements Connector {
     try {
       console.info("LNC disconnect");
       await this.lnc.disconnect();
+      delete this.lnc;
     } catch (error) {
       console.error("Unload LNC failed", error);
     }
-
-    delete this.lnc;
   }
 
   get supportedMethods() {
