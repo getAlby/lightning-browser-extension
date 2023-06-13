@@ -14,7 +14,7 @@ import logo from "/static/assets/icons/alby.png";
 
 const walletRootUrl =
   process.env.WALLET_ROOT_URL || "https://app.regtest.getalby.com";
-const walletLoginUrl = `${walletRootUrl}/extension/users`;
+const walletLoginUrl = `${walletRootUrl}/extension/users/login`;
 const HMAC_VERIFY_HEADER_KEY =
   process.env.HMAC_VERIFY_HEADER_KEY || "alby-extension"; // default is mainly that TS is happy
 
