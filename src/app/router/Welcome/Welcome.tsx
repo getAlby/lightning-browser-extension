@@ -9,7 +9,8 @@ import { ToastContainer } from "react-toastify";
 import Container from "~/app/components/Container";
 import { SettingsProvider } from "~/app/context/SettingsContext";
 import { getConnectorRoutes, renderRoutes } from "~/app/router/connectorRoutes";
-import AlbyWallet from "~/app/screens/connectors/AlbyWallet";
+import AlbyWalletCreate from "~/app/screens/connectors/AlbyWallet/create";
+import AlbyWalletLogin from "~/app/screens/connectors/AlbyWallet/login";
 import ChooseConnectorPath from "~/app/screens/connectors/ChooseConnectorPath";
 import i18n from "~/i18n/i18nConfig";
 
@@ -29,8 +30,8 @@ function Welcome() {
             <Route index element={<SetPassword />} />
             <Route path="choose-path">
               <Route index={true} element={<ChooseConnectorPath />}></Route>
-              <Route path="create" element={<AlbyWallet variant="create" />} />
-              <Route path="login" element={<AlbyWallet variant="login" />} />
+              <Route path="create" element={<AlbyWalletCreate />} />
+              <Route path="login" element={<AlbyWalletLogin />} />
               <Route path="choose-connector">
                 <Route
                   index={true}

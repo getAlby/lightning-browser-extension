@@ -13,8 +13,8 @@ const BundleAnalyzerPlugin =
   require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
 // default value is set in the code where it is used
-if (!process.env.WALLET_CREATE_URL) {
-  process.env.WALLET_CREATE_URL = ""; // env variables are passed as string. empty strings are still falsy
+if (!process.env.WALLET_ROOT_URL) {
+  process.env.WALLET_ROOT_URL = ""; // env variables are passed as string. empty strings are still falsy
 }
 // default value is set in the code where it is used
 if (!process.env.BITCOIN_BEACH_GALOY_URL) {
@@ -156,7 +156,7 @@ var options = {
       "BITCOIN_JUNGLE_GALOY_URL",
       "NODE_ENV",
       "TARGET_BROWSER",
-      "WALLET_CREATE_URL",
+      "WALLET_ROOT_URL",
       "HMAC_VERIFY_HEADER_KEY",
     ]),
     // delete previous build files
