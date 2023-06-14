@@ -258,7 +258,7 @@
         "sms_code": {
           "label": "Entrez votre code de vérification par SMS"
         },
-        "jwt": {
+        "token": {
           "label": "Entrez votre jeton JWT",
           "info": "La connexion {{label}} est en cours de mise à jour. Si vous êtes un utilisateur avancé, vous pouvez récupérer votre jeton JWT en vous connectant via le <0>Portefeuille Web (wallet.mainnet.galoy.io)</0><1/><1/>Le JWT ressemble : < 2>eyJhbG...</2><1/><1/>"
         },
@@ -270,8 +270,8 @@
           "failed_to_request_sms": "Impossible de demander un code SMS",
           "failed_to_login_sms": "Échec de la connexion avec le code SMS",
           "setup_failed": "La configuration a échoué",
-          "missing_jwt": "JWT manquant, impossible de se connecter.",
-          "invalid_jwt": "JWT invalide passé"
+          "missing_token": "JWT manquant, impossible de se connecter.",
+          "invalid_token": "JWT invalide passé"
         }
       },
       "kollider": {
