@@ -107,7 +107,7 @@ export const resources = {
 // needs to be aligned with `resources`
 export const supportedLocales = [
   { locale: "en", label: "English" },
-  { locale: "cs", label: "Čeština," },
+  { locale: "cs", label: "Čeština" },
   { locale: "da", label: "Dansk" },
   { locale: "es", label: "Español" },
   { locale: "fr", label: "Français" },

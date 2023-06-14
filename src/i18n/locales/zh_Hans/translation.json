@@ -3,9 +3,9 @@
     "welcome": {
       "set_password": {
         "title": "设置解锁密码",
-        "description": "此密码用于保护你的钱包并提供对浏览器扩展程序的访问权限。它无法重置，而且与你的 Alby 帐户密码不同。",
+        "description": "此密码将允许你在此设备上解锁 Alby。它无法恢复，但可以稍后更改。",
         "choose_password": {
-          "label": "选择一个解锁密码："
+          "label": "选择解锁密码："
         },
         "confirm_password": {
           "label": "让我们确认你输入的内容是否正确："
@@ -90,20 +90,17 @@
         "title": "Citadel"
       },
       "galoy": {
-        "jwt": {
+        "token": {
           "label": "输入你的JWT令牌",
           "info": "目前{{label}}登录正在升级中。如果你是高级用户，你可以通过<0>网络钱包（wallet.mainnet.galoy.io）</0><1/><1/>登录来获取你的JWT令牌，JWT看起来像：<2>eyJhbG...</2><1/><1/>"
         },
         "actions": {
-          "login": "登录",
-          "request_sms_code": "索取短信验证码"
+          "login": "登录"
         },
         "errors": {
           "setup_failed": "设置失败",
-          "failed_to_request_sms": "索取短信验证码失败",
-          "failed_to_login_sms": "使用短信验证码登录失败",
-          "missing_jwt": "JWT不存在，无法登录。",
-          "invalid_jwt": "传递了无效的JWT"
+          "missing_token": "JWT不存在，无法登录。",
+          "invalid_token": "传递了无效的JWT"
         },
         "sms_code": {
           "label": "输入你的短信验证码"
@@ -308,20 +305,16 @@
         "allowance": "限额"
       },
       "default_view": {
-        "no_transactions": "尚未用Alby进行任何交易。",
         "is_blocked_hint": "Alby 目前在 {{host}} 上被禁用",
         "recent_transactions": "近期交易",
-        "block_removed": "启用了{{host}}。请重新加载网站。"
+        "block_removed": "启用了{{host}}。请重新加载网站。",
+        "all_transactions_link": "查看所有交易",
+        "no_incoming_transactions": "此帐户尚无传入交易。",
+        "no_outgoing_transactions": "此帐户尚无传出交易。"
       },
       "actions": {
         "send_satoshis": "⚡️ 发送聪 ⚡️",
         "enable_now": "立即启用"
-      },
-      "transaction_list": {
-        "tabs": {
-          "outgoing": "外发",
-          "incoming": "传入"
-        }
       }
     },
     "accounts": {
@@ -769,10 +762,13 @@
     "transactions": {
       "list_empty": "尚无交易。",
       "title": "交易",
-      "description": "你所有帐户的传出交易"
+      "description": {
+        "incoming": "此帐户的传入交易",
+        "outgoing": "此帐户的传出交易"
+      }
     },
     "distributions": {
-      "title": "连接到 {{name}}",
+      "title": "连接 {{name}}",
       "description": "选择你想连接的{{name}}应用程序",
       "citadel": {
         "name": "Citadel"
@@ -792,6 +788,10 @@
       "umbrel": {
         "name": "Umbrel"
       }
+    },
+    "confirm_add_account": {
+      "title": "添加帐户",
+      "content": "此网站想要添加一个帐户（{{connector}}）："
     }
   },
   "common": {
@@ -852,8 +852,21 @@
       "lessThan": "< {{max}}",
       "greaterThan": ">{{min}}"
     },
-    "transactions": "交易",
-    "balance": "余额"
+    "balance": "余额",
+    "wallet": "钱包",
+    "connectors": {
+      "lnd": "LND",
+      "nativelnd": "LND（通过 Tor）",
+      "lndhub": "LNDHub",
+      "nativelndhub": "LNDHub（通过 Tor）",
+      "lnbits": "LNBits",
+      "nativelnbits": "LNBits（通过 Tor）",
+      "galoy": "Galoy",
+      "eclair": "Eclair",
+      "citadel": "Citadel",
+      "nativecitadel": "Citadel（通过 Tor）",
+      "commando": "Commando"
+    }
   },
   "components": {
     "toasts": {
@@ -954,6 +967,12 @@
         "title": "配套应用",
         "description": "将浏览器连接到 TOR 网络的轻量级应用程序。"
       }
+    },
+    "transaction_list": {
+      "tabs": {
+        "incoming": "传入",
+        "outgoing": "传出"
+      }
     }
   },
   "permissions": {
@@ -1004,7 +1023,7 @@
       "disconnectpeer": "与远程对等体断线。",
       "estimatefee": "估算交易的费率和总费用。",
       "getnetworkinfo": "获取有关已知渠道图的基本统计信息。",
-      "listpayments": "获取所有付款的列表。",
+      "listpayments": "列出所有付款。",
       "lookupinvoice": "查看发票详情。",
       "listchannels": "获取所有开放频道的描述。",
       "channelbalance": "获取所有开放渠道的总资金报告。",

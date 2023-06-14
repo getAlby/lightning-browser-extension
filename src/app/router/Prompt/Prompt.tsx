@@ -1,4 +1,5 @@
 import AccountMenu from "@components/AccountMenu";
+import ConfirmAddAccount from "@screens/ConfirmAddAccount";
 import ConfirmKeysend from "@screens/ConfirmKeysend";
 import ConfirmPayment from "@screens/ConfirmPayment";
 import ConfirmRequestPermission from "@screens/ConfirmRequestPermission";
@@ -69,6 +70,10 @@ function Prompt() {
               }
             />
             <Route
+              path="public/alby/enable"
+              element={<Enable origin={navigationState.origin as OriginData} />} // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
+            />
+            <Route
               path="public/webln/enable"
               element={<Enable origin={navigationState.origin as OriginData} />} // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
             />
@@ -102,6 +107,7 @@ function Prompt() {
             <Route path="confirmPayment" element={<ConfirmPayment />} />
             <Route path="confirmKeysend" element={<ConfirmKeysend />} />
             <Route path="confirmSignMessage" element={<ConfirmSignMessage />} />
+            <Route path="confirmAddAccount" element={<ConfirmAddAccount />} />
             <Route path="confirmSignPsbt" element={<ConfirmSignPsbt />} />
             <Route path="confirmGetAddress" element={<ConfirmGetAddress />} />
             <Route

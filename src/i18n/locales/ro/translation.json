@@ -258,20 +258,17 @@
         "sms_code": {
           "label": "Introdu codul de verificare primit prin SMS"
         },
-        "jwt": {
+        "token": {
           "label": "Introdu tokenul tau JWT",
           "info": "Momentan {{eticheta}} de login este in curs de actualizare. Daca esti un utilizator avansat, poti sa iei tokenul tau JWT prin logare via <0>Web Wallet (wallet.mainnet.galoy.io)</0><1/><1/>Tokenul JWT este de tipul: <2>eyJhbG...</2><1/><1/>"
         },
         "actions": {
-          "login": "Login",
-          "request_sms_code": "Solicita cod prin SMS"
+          "login": "Login"
         },
         "errors": {
-          "failed_to_request_sms": "Solicitare pentru cod SMS esuata",
-          "failed_to_login_sms": "Logare prin cod SMS esuata",
           "setup_failed": "Setare esuata",
-          "missing_jwt": "Lipseste JWT, nu s-a putut efectua logarea.",
-          "invalid_jwt": "JWT invalid a trecut"
+          "missing_token": "Lipseste JWT, nu s-a putut efectua logarea.",
+          "invalid_token": "JWT invalid a trecut"
         }
       },
       "kollider": {
@@ -340,12 +337,6 @@
         "enable_now": "Activeaza acum"
       },
       "recent_transactions": "Tranzactii recente",
-      "transaction_list": {
-        "tabs": {
-          "outgoing": "Trimitere",
-          "incoming": "Primire"
-        }
-      },
       "allowance_view": {
         "recent_transactions": "Tranzactii recente",
         "allowance": "Permisiuni",
@@ -354,7 +345,6 @@
       },
       "default_view": {
         "recent_transactions": "Tranzactii recente",
-        "no_transactions": "Nicio tranzactie efectuata cu Alby, momentan.",
         "is_blocked_hint": "Momentan, Alby este dezactivat pentru {{host}}",
         "block_removed": "{{host}} activat. Te rugam sa reincarci website-ul."
       }

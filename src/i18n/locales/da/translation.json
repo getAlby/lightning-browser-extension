@@ -258,20 +258,17 @@
         "sms_code": {
           "label": "Indtast din SMS-bekræftelseskode"
         },
-        "jwt": {
+        "token": {
           "label": "Indtast din JWT-token",
           "info": "Log ind med {{label}} bliver i øjeblikketl opgraderet. Hvis du er en øvet bruger, kan du få din JWT-token ved at logge ind via <0>Web Wallet (wallet.mainnet.galoy.io)</0><1/><1/>JWT ser sådan ud: <2>eyJhbG...</2><1/><1/>"
         },
         "actions": {
-          "login": "Adgangsoplysninger",
-          "request_sms_code": "Anmod om SMS-kode"
+          "login": "Adgangsoplysninger"
         },
         "errors": {
-          "failed_to_request_sms": "Kunne ikke anmode om SMS-kode",
-          "failed_to_login_sms": "Kunne ikke logge ind med SMS-kode",
           "setup_failed": "Opsætning mislykkedes",
-          "missing_jwt": "JWT mangler, kunne ikke logge ind.",
-          "invalid_jwt": "ugyldig JWT givet"
+          "missing_token": "JWT mangler, kunne ikke logge ind.",
+          "invalid_token": "ugyldig JWT givet"
         }
       },
       "kollider": {
@@ -340,12 +337,6 @@
         "enable_now": "Aktiver nu"
       },
       "recent_transactions": "Seneste transaktioner",
-      "transaction_list": {
-        "tabs": {
-          "outgoing": "Udgående",
-          "incoming": "Indkommende"
-        }
-      },
       "allowance_view": {
         "recent_transactions": "Seneste transaktioner",
         "allowance": "Pulje",
@@ -354,7 +345,6 @@
       },
       "default_view": {
         "recent_transactions": "Seneste transaktioner",
-        "no_transactions": "Endnu ingen transaktioner udført med Alby.",
         "is_blocked_hint": "Alby er i øjeblikket deaktiveret på {{vært}}",
         "block_removed": "{{vært}} blev aktiveret. Indlæs hjemmesiden igen."
       }

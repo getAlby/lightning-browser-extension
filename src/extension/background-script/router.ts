@@ -79,6 +79,10 @@ const routes = {
       signPsbtWithPrompt: webbtc.signPsbtWithPrompt,
       getAddressWithPrompt: webbtc.getAddressWithPrompt,
     },
+    alby: {
+      enable: allowances.enable,
+      addAccount: accounts.promptAdd,
+    },
     webln: {
       enable: allowances.enable,
       getInfo: ln.getInfo,
