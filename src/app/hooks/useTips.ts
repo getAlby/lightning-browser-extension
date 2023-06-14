@@ -3,7 +3,7 @@ import { useSettings } from "~/app/context/SettingsContext";
 import { isAlbyAccount } from "~/app/utils";
 import { TIPS } from "~/common/constants";
 
-const DEFAULT_TIPS = [TIPS.TOP_UP_WALLET, TIPS.DEMO];
+const DEFAULT_TIPS = [TIPS.TOP_UP_WALLET, TIPS.DEMO, TIPS.MNEMONIC];
 
 export const filterTips = (closedTips: TIPS[], alias = "") => {
   return DEFAULT_TIPS.filter((tip: TIPS) => {

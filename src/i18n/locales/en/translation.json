@@ -671,20 +671,16 @@
         "title": "Your Alby wallet is ready",
         "description": "A few tips to get you started buzzin'🐝",
         "top_up_wallet": {
-          "title": "⚡️ Top up your wallet",
-          "description": "Create a lightning invoice, send some bitcoin to yourself and start using Alby in the lightning ecosystem",
-          "label1": "Receive Bitcoin",
-          "label2": "Buy Bitcoin"
+          "title": "⚡️ Buy Bitcoin",
+          "description": "Need a top up?\nWe got you!"
         },
         "demo": {
-          "title": "🕹️ Try out Alby Demo",
-          "description": "Discover all things you can do with Alby on our demo website",
-          "label1": "Give it a try"
+          "title": "Alby Demo",
+          "description": "Discover Alby's features\non our demo website"
         },
-        "address": {
-          "title": "⚡️ Get a lightning address",
-          "description": "Create your own lightning address and to receive lightning payments with ease of sending an e-mail",
-          "label1": "Get it now!"
+        "mnemonic": {
+          "title": "Nostr and Ordinals",
+          "description": "Planning to use those?\nGenerate your keys now"
         }
       }
     },
