@@ -779,7 +779,7 @@
     "confirm_sign_psbt": {
       "warning": "⚠️ Signing a PSBT may result in loosing your funds or Ordinals. Sign only if you understand what you're doing and trust this transaction",
       "title": "Sign PSBT",
-      "allow_sign": "Allow {{host}} to sign a Partially Signed Bitcoin Transaction:",
+      "allow_sign": "This website asks you to sign a Partially Signed Bitcoin Transaction:",
       "view_addresses": "View addresses",
       "hide_addresses": "Hide addresses",
       "view_hex": "View PSBT hex",

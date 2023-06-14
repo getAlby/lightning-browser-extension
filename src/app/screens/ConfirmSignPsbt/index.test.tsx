@@ -1,4 +1,5 @@
-import { act, render, screen } from "@testing-library/react";
+import { act, render, screen, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router-dom";
 import msg from "~/common/lib/msg";
 import state from "~/extension/background-script/state";
@@ -66,26 +67,53 @@ describe("ConfirmSignMessage", () => {
       );
     });
 
+    const user = userEvent.setup();
+
+    await act(async () => {
+      await user.click(screen.getByText("View addresses"));
+    });
+    await act(async () => {
+      await user.click(screen.getByText("View PSBT hex"));
+    });
+
     // TODO: update copy
     expect(
-      await screen.findByText("This website asks you to sign:")
+      await screen.findByText(
+        "This website asks you to sign a Partially Signed Bitcoin Transaction:"
+      )
     ).toBeInTheDocument();
+
     expect(
       await screen.findByText(btcFixture.regtestTaprootPsbt)
     ).toBeInTheDocument();
-    // check input and outputs
+
+    // Check inputs
+    const inputsContainer = (await screen.getByText("Input")
+      .parentElement) as HTMLElement;
+    expect(inputsContainer).toBeInTheDocument();
+    const inputsRef = within(inputsContainer);
     expect(
-      await screen.findByText("bcrt1...eprhg: 10000000 sats")
+      await inputsRef.findByText(
+        "bcrt1p8wpt9v4frpf3tkn0srd97pksgsxc5hs52lafxwru9kgeephvs7rqjeprhg"
+      )
     ).toBeInTheDocument();
+
+    // Check outputs
+    const outputsContainer = screen.getByText("Outputs")
+      .parentElement as HTMLElement;
+    expect(outputsContainer).toBeInTheDocument();
+
+    const outputsRef = within(outputsContainer);
     expect(
-      await screen.findByText("bcrt1...c7l22: 4999845 sats", {
-        exact: false,
-      })
+      await outputsRef.findByText(
+        "bcrt1p6uav7en8k7zsumsqugdmg5j6930zmzy4dg7jcddshsr0fvxlqx7qnc7l22"
+      )
     ).toBeInTheDocument();
+
     expect(
-      await screen.findByText("bcrt1...cyx0f: 5000000 sats", {
-        exact: false,
-      })
+      await outputsRef.findByText(
+        "bcrt1p90h6z3p36n9hrzy7580h5l429uwchyg8uc9sz4jwzhdtuhqdl5eqkcyx0f"
+      )
     ).toBeInTheDocument();
   });
 });
