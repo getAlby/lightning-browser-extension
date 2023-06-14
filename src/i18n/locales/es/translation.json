@@ -256,11 +256,9 @@
       },
       "galoy": {
         "errors": {
-          "failed_to_login_sms": "No se pudo iniciar sesión con el código de SMS",
           "setup_failed": "Falló la configuración",
           "missing_token": "Falta JWT, no se pudo iniciar sesión.",
-          "invalid_token": "JWT inválido aprobado",
-          "failed_to_request_sms": "Hubo un error al solicitar un código SMS"
+          "invalid_token": "JWT inválido aprobado"
         },
         "phone_number": {
           "label": "Ingrese su número telefónico"
@@ -273,8 +271,7 @@
           "info": "El inicio de sesión de {{label}} se está actualizando actualmente. Si es un usuario avanzado, puede obtener su token JWT iniciando sesión a través de <0>Web Wallet (wallet.mainnet.galoy.io)</0><1/><1/>El JWT se ve así: < 2>eyJhbG...</2><1/><1/>"
         },
         "actions": {
-          "login": "Ingresar",
-          "request_sms_code": "Solicitar código por Mensaje de Texto"
+          "login": "Ingresar"
         }
       },
       "lnc": {
@@ -296,12 +293,6 @@
         "enable_now": "Habilitar ahora"
       },
       "recent_transactions": "Transacciones Recientes",
-      "transaction_list": {
-        "tabs": {
-          "outgoing": "Saliente",
-          "incoming": "Entrante"
-        }
-      },
       "allowance_view": {
         "recent_transactions": "Transacciones Recientes",
         "allowance": "Subsidio",
@@ -310,7 +301,6 @@
       },
       "default_view": {
         "recent_transactions": "Transacciones Recientes",
-        "no_transactions": "Aún no se han hecho transacciones con Alby.",
         "is_blocked_hint": "Alby está actualmente deshabilitado en {{host}}",
         "block_removed": "{{host}} habilitado. Vuelva a cargar el sitio web."
       }
@@ -672,20 +662,16 @@
         "top_up_wallet": {
           "title": "⚡️ Recarga tu billetera",
           "description": "Cree una factura lightning, envíese algunos bitcoins y comience a usar Alby en el ecosistema lightning",
-          "label1": "Recibir Bitcoin",
           "label2": "Comprar Bitcoin"
         },
         "title": "Tu billetera Alby está lista",
         "description": "Algunos consejos para que empieces a zumbar 🐝",
         "demo": {
-          "label1": "Inténtalo",
           "title": "🕹️ Prueba la versión Demo de Alby",
           "description": "Descubra todo lo que puede hacer con Alby en nuestro sitio web de demostraciones"
         },
         "address": {
-          "title": "⚡️ Obtén una dirección lightning",
-          "description": "Cree su propia dirección lightning y reciba pagos lightning tan fácil como enviar un correo electrónico",
-          "label1": "¡Obtenlo Ahora!"
+          "description": "Cree su propia dirección lightning y reciba pagos lightning tan fácil como enviar un correo electrónico"
         }
       },
       "list": {
@@ -762,7 +748,6 @@
     },
     "transactions": {
       "title": "Transacciones",
-      "description": "Transacciones salientes en todas sus cuentas",
       "list_empty": "Todavía no hay transacciones disponibles."
     }
   },
@@ -824,7 +809,6 @@
       "lessThan": "menor que {{max}}",
       "greaterThan": "mayor que {{min}}"
     },
-    "transactions": "Transacciones",
     "balance": "Balance"
   },
   "components": {

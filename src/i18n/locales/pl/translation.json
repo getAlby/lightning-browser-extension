@@ -263,12 +263,9 @@
           "info": "Logowanie do {{label}} jest w trakcie aktualizacji. Jeśli jesteś zaawansowanym użytkownikiem, pobierz swój token JWT logując się przez <0>Portfel webowy (wallet.mainnet.galoy.io)</0><1/><1/>Token JWT wygląda tak: <2>eyJhbG...</2><1/><1/>"
         },
         "actions": {
-          "login": "Zaloguj",
-          "request_sms_code": "Wyślij kod SMS"
+          "login": "Zaloguj"
         },
         "errors": {
-          "failed_to_request_sms": "Nie udało się wysłać kodu SMS",
-          "failed_to_login_sms": "Logowanie z kodem SMS nie udało się",
           "setup_failed": "Konfiguracja nie powiodła się",
           "missing_token": "Brakuje tokenu JWT, logowanie nieudane.",
           "invalid_token": "podano nieprawidłowy token JWT"
@@ -340,12 +337,6 @@
         "enable_now": "Włącz teraz"
       },
       "recent_transactions": "Ostatnie transakcje",
-      "transaction_list": {
-        "tabs": {
-          "outgoing": "Wychodzące",
-          "incoming": "Przychodzące"
-        }
-      },
       "allowance_view": {
         "recent_transactions": "Ostatnie transakcje",
         "allowance": "Limity",
@@ -354,7 +345,6 @@
       },
       "default_view": {
         "recent_transactions": "Ostatnie transakcje",
-        "no_transactions": "Jeszcze nie ma transakcji z użyciem Alby.",
         "is_blocked_hint": "Alby jest obecnie wyłączone na {{host}}",
         "block_removed": "Włączono {{host}}. Odśwież stronę."
       }
@@ -633,17 +623,14 @@
         "top_up_wallet": {
           "title": "⚡️ Doładuj swój portfel",
           "description": "Stwórz fakturę Lightning, wyślij sobie trochę bitcoinów i zacznij korzystać z Alby w ekosystemie Lightning",
-          "label1": "Otrzymaj Bitcoin",
           "label2": "Kup Bitcoin"
         },
         "demo": {
           "title": "🕹️ Spróbuj demonstracyjnej wersji Alby",
-          "description": "Odkryj wszystkie możliwości, jakie daje Alby na naszej stronie demonstracyjnej",
-          "label1": "Wypróbuj"
+          "description": "Odkryj wszystkie możliwości, jakie daje Alby na naszej stronie demonstracyjnej"
         },
         "address": {
           "title": "⚡️ Zdobądź adres lightning",
-          "description": "Stwórz swój własny adres lightning aby przyjmować płatności tak łatwo jak wysyłanie emaila",
           "label1": "Zdobądź go!"
         }
       }
@@ -745,7 +732,6 @@
       "view_details": "Pokaż szczegóły"
     },
     "transactions": {
-      "description": "Transakcje wychodzące ze wszystkich Twoich kont",
       "title": "Transakcje",
       "list_empty": "Brak dostępnych transakcji."
     }
@@ -806,8 +792,7 @@
       "between": "pomiędzy {{min}} a {{max}}",
       "lessThan": "< {{max}}",
       "greaterThan": "> {{min}}"
-    },
-    "transactions": "Transakcje"
+    }
   },
   "components": {
     "allowance_menu": {
