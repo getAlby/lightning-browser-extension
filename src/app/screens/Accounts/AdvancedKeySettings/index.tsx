@@ -14,6 +14,7 @@ import TextField from "~/app/components/form/TextField";
 import { useAccount } from "~/app/context/AccountContext";
 import { KeyOrigin, getKeyOrigin } from "~/app/utils/getKeyOrigin";
 import { savePrivateKey } from "~/app/utils/savePrivateKey";
+import { GetAccountRes } from "~/common/lib/api";
 import { default as liquid } from "~/common/lib/liquid";
 import {
   deriveLiquidPrivateKey,
@@ -30,6 +31,7 @@ function AdvancedKeySettings({ type }: { type: "nostr" | "liquid" }) {
   });
   const capitalizedType = type.charAt(0).toUpperCase() + type.slice(1);
   // TODO: add hooks useMnemonic, useNostrPrivateKey, ...
+  const [accountName, setAccountName] = useState("");
   const [mnemonic, setMnemonic] = useState("");
   const [currentPrivateKey, setCurrentPrivateKey] = useState("");
   const [privateKey, setPrivateKey] = useState("");
@@ -41,6 +43,10 @@ function AdvancedKeySettings({ type }: { type: "nostr" | "liquid" }) {
   const fetchData = useCallback(async () => {
     try {
       if (id) {
+        const response = await msg.request<GetAccountRes>("getAccount", {
+          id,
+        });
+        setAccountName(response.name);
         const priv = (await msg.request(`${type}/getPrivateKey`, {
           id,
         })) as string;
@@ -70,33 +76,40 @@ function AdvancedKeySettings({ type }: { type: "nostr" | "liquid" }) {
     fetchData();
   }, [fetchData]);
 
-  useEffect(() => {
-    try {
-      setPublicKey(
-        currentPrivateKey
-          ? type === "nostr"
-            ? nostr.generatePublicKey(currentPrivateKey)
-            : liquid.generatePublicKey(currentPrivateKey)
-          : ""
-      );
-      type === "nostr"
-        ? setPrivateKey(
-            currentPrivateKey
-              ? nostrlib.hexToNip19(currentPrivateKey, "nsec")
-              : ""
-          )
-        : setPrivateKey(currentPrivateKey);
-    } catch (e) {
-      if (e instanceof Error)
-        toast.error(
-          <p>
-            {t(`${type}.errors.failed_to_load`)}
-            <br />
-            {e.message}
-          </p>
+  const setPubPrivKeys = useCallback(
+    (currentPrivateKey: string) => {
+      try {
+        setPublicKey(
+          currentPrivateKey
+            ? type === "nostr"
+              ? nostr.generatePublicKey(currentPrivateKey)
+              : liquid.generatePublicKey(currentPrivateKey)
+            : ""
         );
-    }
-  }, [currentPrivateKey, t, type]);
+        type === "nostr"
+          ? setPrivateKey(
+              currentPrivateKey
+                ? nostrlib.hexToNip19(currentPrivateKey, "nsec")
+                : ""
+            )
+          : setPrivateKey(currentPrivateKey);
+      } catch (e) {
+        if (e instanceof Error)
+          toast.error(
+            <p>
+              {t(`${type}.errors.failed_to_load`)}
+              <br />
+              {e.message}
+            </p>
+          );
+      }
+    },
+    [t, type]
+  );
+
+  useEffect(() => {
+    setPubPrivKeys(currentPrivateKey);
+  }, [currentPrivateKey, setPubPrivKeys]);
 
   function onCancel() {
     history.back();
@@ -130,7 +143,7 @@ function AdvancedKeySettings({ type }: { type: "nostr" | "liquid" }) {
     if (
       currentPrivateKey &&
       prompt(t(`${type}.private_key.warning`))?.toLowerCase() !==
-        account?.account?.name?.toLowerCase()
+        accountName.toLowerCase()
     ) {
       toast.error(t(`${type}.private_key.failed_to_remove`));
       return;
@@ -209,7 +222,9 @@ function AdvancedKeySettings({ type }: { type: "nostr" | "liquid" }) {
                 type={privateKeyVisible ? "text" : "password"}
                 value={privateKey}
                 onChange={(event) => {
-                  setPrivateKey(event.target.value.trim());
+                  setPubPrivKeys(
+                    nostrlib.normalizeToHex(event.target.value.trim())
+                  );
                 }}
                 endAdornment={
                   <div className="flex items-center gap-1 px-2">
