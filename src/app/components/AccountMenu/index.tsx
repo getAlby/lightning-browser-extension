@@ -91,7 +91,7 @@ function AccountMenu({ showOptions = true }: Props) {
               <span className="text-xs text-gray-500 dark:text-neutral-300">
                 {tCommon("balance")}
               </span>
-              {balancesDecorated.accountBalance ? (
+              {!accountLoading ? (
                 <p className="flex justify-between">
                   <span className="dark:text-white">
                     {balancesDecorated.accountBalance}

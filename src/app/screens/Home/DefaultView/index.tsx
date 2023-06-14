@@ -200,15 +200,17 @@ const DefaultView: FC<Props> = (props) => {
                       loading={isLoadingOutgoing}
                       noResultMsg={t("default_view.no_outgoing_transactions")}
                     />
-                    <div className="mt-5 text-center">
-                      <Hyperlink
-                        onClick={() =>
-                          handleViewAllLink("/transactions/outgoing")
-                        }
-                      >
-                        {t("default_view.all_transactions_link")}
-                      </Hyperlink>
-                    </div>
+                    {!isLoadingOutgoing && transactions.length > 0 && (
+                      <div className="mt-5 text-center">
+                        <Hyperlink
+                          onClick={() =>
+                            handleViewAllLink("/transactions/outgoing")
+                          }
+                        >
+                          {t("default_view.all_transactions_link")}
+                        </Hyperlink>
+                      </div>
+                    )}
                   </>
                 </Tab.Panel>
                 <Tab.Panel>
@@ -218,15 +220,17 @@ const DefaultView: FC<Props> = (props) => {
                       loading={isLoadingIncoming}
                       noResultMsg={t("default_view.no_incoming_transactions")}
                     />
-                    <div className="mt-5 text-center">
-                      <Hyperlink
-                        onClick={() =>
-                          handleViewAllLink("/transactions/incoming")
-                        }
-                      >
-                        {t("default_view.all_transactions_link")}
-                      </Hyperlink>
-                    </div>
+                    {!isLoadingIncoming && incomingTransactions.length > 0 && (
+                      <div className="mt-5 text-center">
+                        <Hyperlink
+                          onClick={() =>
+                            handleViewAllLink("/transactions/incoming")
+                          }
+                        >
+                          {t("default_view.all_transactions_link")}
+                        </Hyperlink>
+                      </div>
+                    )}
                   </>
                 </Tab.Panel>
               </Tab.Panels>
