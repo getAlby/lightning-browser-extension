@@ -68,6 +68,7 @@ const routes = {
   liquid: {
     getPrivateKey: liquid.getPrivateKey,
     setPrivateKey: liquid.setPrivateKey,
+    removePrivateKey: liquid.removePrivateKey,
   },
 
   nostr: {
