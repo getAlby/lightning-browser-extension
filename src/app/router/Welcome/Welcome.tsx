@@ -2,20 +2,30 @@ import PinExtension from "@screens/Onboard/PinExtension";
 import SetPassword from "@screens/Onboard/SetPassword";
 import TestConnection from "@screens/Onboard/TestConnection";
 import ChooseConnector from "@screens/connectors/ChooseConnector";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Outlet, Route, HashRouter as Router, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Container from "~/app/components/Container";
 import { SettingsProvider } from "~/app/context/SettingsContext";
 import { getConnectorRoutes, renderRoutes } from "~/app/router/connectorRoutes";
-import AlbyWallet from "~/app/screens/connectors/AlbyWallet";
+import AlbyWalletCreate from "~/app/screens/connectors/AlbyWallet/create";
+import AlbyWalletLogin from "~/app/screens/connectors/AlbyWallet/login";
 import ChooseConnectorPath from "~/app/screens/connectors/ChooseConnectorPath";
+import { getAlbyWalletOptions } from "~/app/utils";
 import i18n from "~/i18n/i18nConfig";
 
 const connectorRoutes = getConnectorRoutes();
 
 function Welcome() {
+  const [options, setOptions] = useState({ signup_disabled: false });
+
+  useEffect(() => {
+    getAlbyWalletOptions().then((options) => {
+      setOptions(options);
+    });
+  }, []);
+
   return (
     <SettingsProvider>
       <Router>
@@ -29,8 +39,14 @@ function Welcome() {
             <Route index element={<SetPassword />} />
             <Route path="choose-path">
               <Route index={true} element={<ChooseConnectorPath />}></Route>
-              <Route path="create" element={<AlbyWallet variant="create" />} />
-              <Route path="login" element={<AlbyWallet variant="login" />} />
+              <Route
+                path="create"
+                element={<AlbyWalletCreate options={options} />}
+              />
+              <Route
+                path="login"
+                element={<AlbyWalletLogin options={options} />}
+              />
               <Route path="choose-connector">
                 <Route
                   index={true}
