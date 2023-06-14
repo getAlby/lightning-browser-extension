@@ -25,10 +25,8 @@ function Transactions({ type }: Props) {
     useInvoices();
 
   const isLoading =
-    accountLoading && type === "incoming"
-      ? isLoadingInvoices
-      : isLoadingTransactions;
-
+    accountLoading ||
+    (type === "incoming" ? isLoadingInvoices : isLoadingTransactions);
   const listItems = type === "incoming" ? incomingTransactions : transactions;
 
   useEffect(() => {
