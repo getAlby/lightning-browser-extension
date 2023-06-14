@@ -742,8 +742,8 @@
           "description": "Discover Alby's features\non our demo website"
         },
         "mnemonic": {
-          "title": "Nostr and Ordinals",
-          "description": "Planning to use those?\nGenerate your keys now"
+          "title": "Nostr",
+          "description": "Planning to use Nostr?\nGenerate your keys now."
         }
       }
     },

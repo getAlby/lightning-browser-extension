@@ -23,6 +23,6 @@ describe("Tips", () => {
 
     expect(await screen.findByText("Buy Bitcoin")).toBeInTheDocument();
     expect(await screen.findByText("Alby Demo")).toBeInTheDocument();
-    expect(await screen.findByText("Nostr and Ordinals")).toBeInTheDocument();
+    expect(await screen.findByText("Nostr")).toBeInTheDocument();
   });
 });

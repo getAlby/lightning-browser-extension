@@ -621,19 +621,11 @@
         "description": "",
         "top_up_wallet": {
           "title": "",
-          "description": "",
-          "label1": "",
-          "label2": ""
+          "description": ""
         },
         "demo": {
           "title": "",
-          "description": "",
-          "label1": ""
-        },
-        "address": {
-          "title": "",
-          "description": "",
-          "label1": ""
+          "description": ""
         }
       }
     },

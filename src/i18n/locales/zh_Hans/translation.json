@@ -686,23 +686,15 @@
       "description": "可以使用 Alby 的网站和网络应用程序",
       "title": "探索闪电⚡️生态系统",
       "tips": {
-        "address": {
-          "title": "⚡️ 获取闪电地址",
-          "label1": "立即获取！",
-          "description": "创建你自己的闪电地址，并像电子邮件一样轻松接收闪电付款"
-        },
         "top_up_wallet": {
-          "label1": "接收比特币",
           "title": "⚡️充值你的钱包",
-          "description": "创建一张闪电发票，给自己发送一些比特币，即可开始在闪电生态系统中使用 Alby",
-          "label2": "购买比特币"
+          "description": "创建一张闪电发票，给自己发送一些比特币，即可开始在闪电生态系统中使用 Alby"
         },
         "title": "你的Alby钱包已准备就绪",
         "description": "一些让你开始嗡嗡作响的小贴士🐝",
         "demo": {
           "title": "🕹️ 试用 Alby 演示",
-          "description": "在我们的演示网站上发现你可以用Alby执行的所有操作",
-          "label1": "试一试"
+          "description": "在我们的演示网站上发现你可以用Alby执行的所有操作"
         }
       }
     },

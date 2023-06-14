@@ -622,19 +622,11 @@
         "description": "Oto klika wskazówek na start 🐝",
         "top_up_wallet": {
           "title": "⚡️ Doładuj swój portfel",
-          "description": "Stwórz fakturę Lightning, wyślij sobie trochę bitcoinów i zacznij korzystać z Alby w ekosystemie Lightning",
-          "label1": "Otrzymaj Bitcoin",
-          "label2": "Kup Bitcoin"
+          "description": "Stwórz fakturę Lightning, wyślij sobie trochę bitcoinów i zacznij korzystać z Alby w ekosystemie Lightning"
         },
         "demo": {
           "title": "🕹️ Spróbuj demonstracyjnej wersji Alby",
-          "description": "Odkryj wszystkie możliwości, jakie daje Alby na naszej stronie demonstracyjnej",
-          "label1": "Wypróbuj"
-        },
-        "address": {
-          "title": "⚡️ Zdobądź adres lightning",
-          "description": "Stwórz swój własny adres lightning aby przyjmować płatności tak łatwo jak wysyłanie emaila",
-          "label1": "Zdobądź go!"
+          "description": "Odkryj wszystkie możliwości, jakie daje Alby na naszej stronie demonstracyjnej"
         }
       }
     },
