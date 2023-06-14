@@ -26,7 +26,7 @@ async function onstart() {
   // window.alby
   injectScript(browser.runtime.getURL("js/inpageScriptAlby.bundle.js"));
 
-  // window.secp256k1
+  // window.liquid
   if (accountDetails.liquidEnabled) {
     injectScript(browser.runtime.getURL("js/inpageScriptLiquid.bundle.js"));
   }
