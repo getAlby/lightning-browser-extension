@@ -37,6 +37,10 @@ function Welcome() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<SetPassword />} />
+            <Route
+              path="/accounts/new/login"
+              element={<AlbyWalletLogin options={options} />}
+            />
             <Route path="choose-path">
               <Route index={true} element={<ChooseConnectorPath />}></Route>
               <Route
