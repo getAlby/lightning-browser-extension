@@ -621,16 +621,11 @@
         "description": "Quelques conseils pour commencer à buzzer🐝",
         "top_up_wallet": {
           "title": "⚡️ Rechargez votre portefeuille",
-          "description": "Créez une facture Lightning, envoyez-vous des bitcoins et commencez à utiliser Alby dans l'écosystème Lightning",
-          "label2": "Recevez des bitcoins"
+          "description": "Créez une facture Lightning, envoyez-vous des bitcoins et commencez à utiliser Alby dans l'écosystème Lightning"
         },
         "demo": {
           "title": "🕹️ Essayez la démo d'Alby",
           "description": "Découvrez tout ce que vous pouvez faire avec Alby sur notre site de démonstration"
-        },
-        "address": {
-          "title": "⚡️ Obtenez une adresse éclair",
-          "label1": "Obtenez le maintenant!"
         }
       }
     },

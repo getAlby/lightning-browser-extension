@@ -686,11 +686,7 @@
       "description": "可以使用 Alby 的网站和网络应用程序",
       "title": "探索闪电⚡️生态系统",
       "tips": {
-        "address": {
-          "label1": "立即获取！"
-        },
         "top_up_wallet": {
-          "label1": "接收比特币",
           "title": "⚡️充值你的钱包",
           "description": "创建一张闪电发票，给自己发送一些比特币，即可开始在闪电生态系统中使用 Alby"
         },

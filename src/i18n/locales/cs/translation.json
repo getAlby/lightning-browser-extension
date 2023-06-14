@@ -683,15 +683,11 @@
         "showcases": "Příklady užití"
       },
       "tips": {
-        "address": {
-          "label1": "Získat!"
-        },
         "title": "Vaše Alby peněženka je připravena",
         "description": "Pár tipů než začnete",
         "top_up_wallet": {
           "title": "⚡️ Dobít peněženku",
-          "description": "Vytvořte lightning fakturu, pošlete si bitcoiny a začněte používat Alby v ekosystému lightning",
-          "label2": "Koupit Bitcoin"
+          "description": "Vytvořte lightning fakturu, pošlete si bitcoiny a začněte používat Alby v ekosystému lightning"
         },
         "demo": {
           "description": "Objevte vše, co lze s Alby dělat, na naší demo stránce",
