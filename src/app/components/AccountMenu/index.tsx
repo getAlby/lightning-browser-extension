@@ -57,6 +57,7 @@ function AccountMenu({ showOptions = true }: Props) {
       });
       setAccountId(accountId);
       await fetchAccountInfo({ accountId });
+      navigate("/");
     } catch (e) {
       console.error(e);
       if (e instanceof Error) toast.error(`Error: ${e.message}`);
