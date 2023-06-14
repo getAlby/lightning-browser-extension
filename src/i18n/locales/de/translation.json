@@ -742,17 +742,18 @@
       "tips": {
         "title": "Deine Alby-Wallet ist bereit",
         "top_up_wallet": {
-          "description": "Erstelle eine Lightning-Rechnung, sende dir selbst Bitcoin und nutze das Alby im Lightning-Ökosystem",
-          "title": "⚡️ Wallet aufladen"
+          "description": "Brauchst du eine Auffrischung?\nWir haben Sie!",
+          "title": "Bitcoin kaufen"
         },
         "demo": {
-          "description": "Entdecke alles, was du mit Alby tun könntest, auf unserer Demo-Website",
-          "title": "🕹️ Alby Demo ausprobieren"
+          "description": "Entdecke die Funktionen von Alby\nauf unserer Demo Website",
+          "title": "Alby Demo"
         },
-        "address": {
-          "label1": "Hole es dir jetzt!"
-        },
-        "description": "Ein paar Tipps für den Anfang 🐝"
+        "description": "Ein paar Tipps für den Anfang 🐝",
+        "mnemonic": {
+          "title": "Nostr",
+          "description": "Plane die Nutzung von Nostr?\nGeneriere jetzt deinen Schlüssel."
+        }
       }
     },
     "transactions": {
