@@ -364,11 +364,9 @@ function AccountDetail() {
           <h2 className="text-2xl mt-12 font-bold dark:text-white">
             {t("mnemonic.title")}
           </h2>
-          {
-            <p className="mb-6 text-gray-500 dark:text-neutral-500 text-sm">
-              {t("mnemonic.description")}
-            </p>
-          }
+          <p className="mb-6 text-gray-500 dark:text-neutral-500 text-sm">
+            {t("mnemonic.description")}
+          </p>
 
           <div className="shadow bg-white sm:rounded-md sm:overflow-hidden p-6 dark:bg-surface-02dp flex flex-col gap-4">
             {mnemonic && (
