@@ -42,7 +42,7 @@ const signPsbt = async (message: MessageSignPsbt) => {
     });
 
     // fix usages of window (unavailable in service worker)
-    globalThis.window = globalThis.window || {};
+    globalThis.window ??= globalThis.window || {};
     if (!globalThis.window.crypto) {
       globalThis.window.crypto = crypto;
     }
