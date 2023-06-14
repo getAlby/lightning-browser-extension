@@ -658,19 +658,15 @@
       "tips": {
         "top_up_wallet": {
           "description": "Crie uma fatura relâmpago e envie alguns bitcoins para você mesmo",
-          "label2": "Comprar Bitcoin",
           "label1": "Receber Bitcoin",
           "title": "⚡️ Adicione fundos na sua carteira"
         },
         "address": {
-          "label1": "Eu quero!",
-          "title": "⚡️ Endereço relâmpago",
-          "description": "Crie seu próprio endereço relâmpago e receba pagamentos bitcoin com a mesma facilidade de enviar um e-mail"
+          "title": "⚡️ Endereço relâmpago"
         },
         "demo": {
           "title": "🕹️ Teste a Alby",
-          "description": "Descubra tudo o que você pode fazer com a Alby em nosso site de demonstração",
-          "label1": "Experimente"
+          "description": "Descubra tudo o que você pode fazer com a Alby em nosso site de demonstração"
         },
         "title": "Sua carteira Alby está pronta",
         "description": "Algumas dicas para você começar a usar a Alby 🐝"

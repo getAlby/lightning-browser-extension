@@ -622,17 +622,14 @@
         "top_up_wallet": {
           "title": "",
           "description": "",
-          "label1": "",
           "label2": ""
         },
         "demo": {
           "title": "",
-          "description": "",
-          "label1": ""
+          "description": ""
         },
         "address": {
           "title": "",
-          "description": "",
           "label1": ""
         }
       }

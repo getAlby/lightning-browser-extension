@@ -621,17 +621,14 @@
         "top_up_wallet": {
           "title": "⚡️ Fyld din wallet op",
           "description": "Generer en lightning-faktura, send lidt bitcoin til dig selv og begynd at bruge Alby i lightnings økosystem",
-          "label1": "Modtag Bitcoin",
           "label2": "Køb Bitcoin"
         },
         "demo": {
           "title": "🕹️ Få en prøvetur med Alby",
-          "description": "Se alle de ting, du kan med Alby på vores præsentationsside",
-          "label1": "Kom igang"
+          "description": "Se alle de ting, du kan med Alby på vores præsentationsside"
         },
         "address": {
           "title": "⚡️ Få en lightning-adresse",
-          "description": "Lav din egen lightning-adresse, og få betaling med lightning lige så let som når du sender en e-mail",
           "label1": "Få den nu!"
         }
       }
