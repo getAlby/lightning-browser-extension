@@ -742,12 +742,8 @@
           "description": "Skapa en lightning-faktura, skicka lite bitcoin till dig själv och börja använda Alby i lightnings ekosystem"
         },
         "demo": {
-          "label1": "Ge det ett försök",
           "title": "🕹️ Testa Alby Demo",
           "description": "Upptäck allt du kan göra med Alby på vår demowebbplats"
-        },
-        "address": {
-          "label1": "Hämta de nu!"
         }
       },
       "title": "Utforska Lightnings ⚡️ Eco system",

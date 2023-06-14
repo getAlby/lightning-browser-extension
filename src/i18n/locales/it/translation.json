@@ -683,7 +683,6 @@
         "description": "Qualche suggerimento per iniziare a ronzare 🐝",
         "top_up_wallet": {
           "title": "⚡️ Ricarica il tuo wallet",
-          "label2": "Compra Bitcoin",
           "description": "Crea una fattura lightning, inviati qualche bitcoin e inizia ad usare Alby nell'ecosistema lightning"
         },
         "demo": {
@@ -691,7 +690,6 @@
           "description": "Scopri tutto quello che puoi fare con Alby sul nostro sito demo"
         },
         "address": {
-          "description": "Crea il tuo indirizzo lightning personale e ricevi pagamenti lightning con la semplicità di una mail",
           "title": "⚡️ Ottieni un indirizzo lightning"
         },
         "title": "Il tuo wallet Alby è pronto"

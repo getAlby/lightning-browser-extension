@@ -658,11 +658,7 @@
       "tips": {
         "top_up_wallet": {
           "description": "Crie uma fatura relâmpago e envie alguns bitcoins para você mesmo",
-          "label1": "Receber Bitcoin",
           "title": "⚡️ Adicione fundos na sua carteira"
-        },
-        "address": {
-          "title": "⚡️ Endereço relâmpago"
         },
         "demo": {
           "title": "🕹️ Teste a Alby",

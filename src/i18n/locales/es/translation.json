@@ -661,17 +661,13 @@
       "tips": {
         "top_up_wallet": {
           "title": "⚡️ Recarga tu billetera",
-          "description": "Cree una factura lightning, envíese algunos bitcoins y comience a usar Alby en el ecosistema lightning",
-          "label2": "Comprar Bitcoin"
+          "description": "Cree una factura lightning, envíese algunos bitcoins y comience a usar Alby en el ecosistema lightning"
         },
         "title": "Tu billetera Alby está lista",
         "description": "Algunos consejos para que empieces a zumbar 🐝",
         "demo": {
           "title": "🕹️ Prueba la versión Demo de Alby",
           "description": "Descubra todo lo que puede hacer con Alby en nuestro sitio web de demostraciones"
-        },
-        "address": {
-          "description": "Cree su propia dirección lightning y reciba pagos lightning tan fácil como enviar un correo electrónico"
         }
       },
       "list": {

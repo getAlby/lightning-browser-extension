@@ -650,15 +650,13 @@
         "description": "一些讓你開始嗡嗡作响的小貼士🐝",
         "top_up_wallet": {
           "title": "⚡️充值你的錢包",
-          "description": "創建一張閃電發票，給自己發送一些比特幣，即可開始在閃電生態系統中使用 Alby",
-          "label2": "購買比特幣"
+          "description": "創建一張閃電發票，給自己發送一些比特幣，即可開始在閃電生態系統中使用 Alby"
         },
         "demo": {
           "title": "🕹️ 試用 Alby 演示",
           "description": "在我們的演示網站上發現你可以使用 Alby 執行的所有操作"
         },
         "address": {
-          "title": "⚡️ 獲取閃電地址",
           "label1": "立即獲取！"
         }
       }

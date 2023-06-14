@@ -620,15 +620,13 @@
         "description": "",
         "top_up_wallet": {
           "title": "",
-          "description": "",
-          "label2": ""
+          "description": ""
         },
         "demo": {
           "title": "",
           "description": ""
         },
         "address": {
-          "title": "",
           "label1": ""
         }
       }
