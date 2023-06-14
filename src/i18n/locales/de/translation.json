@@ -744,17 +744,14 @@
         "top_up_wallet": {
           "description": "Erstelle eine Lightning-Rechnung, sende dir selbst Bitcoin und nutze das Alby im Lightning-Ökosystem",
           "title": "⚡️ Wallet aufladen",
-          "label1": "Bitcoin erhalten",
           "label2": "Bitcoin kaufen"
         },
         "demo": {
           "description": "Entdecke alles, was du mit Alby tun könntest, auf unserer Demo-Website",
-          "title": "🕹️ Alby Demo ausprobieren",
-          "label1": "Probiere es aus"
+          "title": "🕹️ Alby Demo ausprobieren"
         },
         "address": {
           "description": "Erstelle eine eigene Lightningadresse und empfange Lightningzahlungen einfach per E-Mail",
-          "title": "Eine Lightning Adresse erhalten",
           "label1": "Hole es dir jetzt!"
         },
         "description": "Ein paar Tipps für den Anfang 🐝"

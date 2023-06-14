@@ -739,9 +739,7 @@
         "description": "Några tips för att få igång dig'🐝",
         "top_up_wallet": {
           "title": "⚡️ Fyll på plånboken",
-          "label1": "Ta emot Bitcoin",
-          "description": "Skapa en lightning-faktura, skicka lite bitcoin till dig själv och börja använda Alby i lightnings ekosystem",
-          "label2": "Köp Bitcoin"
+          "description": "Skapa en lightning-faktura, skicka lite bitcoin till dig själv och börja använda Alby i lightnings ekosystem"
         },
         "demo": {
           "label1": "Ge det ett försök",
@@ -749,9 +747,7 @@
           "description": "Upptäck allt du kan göra med Alby på vår demowebbplats"
         },
         "address": {
-          "description": "Skapa din egen lightning-adress för att ta kunna emot lightning-betalningar med lätthet. Som att skicka ett e-postmeddelande",
-          "label1": "Hämta de nu!",
-          "title": "⚡️ Få en lightning-address"
+          "label1": "Hämta de nu!"
         }
       },
       "title": "Utforska Lightnings ⚡️ Eco system",

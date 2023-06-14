@@ -684,21 +684,17 @@
       },
       "tips": {
         "address": {
-          "description": "Vytvořte si svou vlastní lightning adresu pro příjímání lightning plateb tak jednoduše, jak kdybyste odesílali e-mail",
-          "label1": "Získat!",
-          "title": "⚡️ Získat lightning adresu"
+          "label1": "Získat!"
         },
         "title": "Vaše Alby peněženka je připravena",
         "description": "Pár tipů než začnete",
         "top_up_wallet": {
           "title": "⚡️ Dobít peněženku",
           "description": "Vytvořte lightning fakturu, pošlete si bitcoiny a začněte používat Alby v ekosystému lightning",
-          "label1": "Přijmout Bitcoin",
           "label2": "Koupit Bitcoin"
         },
         "demo": {
           "description": "Objevte vše, co lze s Alby dělat, na naší demo stránce",
-          "label1": "Vyzkoušet",
           "title": "🕹️ Vyzkoušejte demo Alby"
         }
       }

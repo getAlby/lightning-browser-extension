@@ -622,17 +622,14 @@
         "top_up_wallet": {
           "title": "⚡️ Rechargez votre portefeuille",
           "description": "Créez une facture Lightning, envoyez-vous des bitcoins et commencez à utiliser Alby dans l'écosystème Lightning",
-          "label1": "Recevez des bitcoins",
           "label2": "Recevez des bitcoins"
         },
         "demo": {
           "title": "🕹️ Essayez la démo d'Alby",
-          "description": "Découvrez tout ce que vous pouvez faire avec Alby sur notre site de démonstration",
-          "label1": "Essaie"
+          "description": "Découvrez tout ce que vous pouvez faire avec Alby sur notre site de démonstration"
         },
         "address": {
           "title": "⚡️ Obtenez une adresse éclair",
-          "description": "Créez votre propre adresse éclair et recevez des paiements éclair en envoyant facilement un e-mail",
           "label1": "Obtenez le maintenant!"
         }
       }
