@@ -1,10 +1,13 @@
 import db from "~/extension/background-script/db";
-import { MessageDefaultPublic } from "~/types";
+import { MessageDefaultPublic, Sender } from "~/types";
 
-const getRelays = async (message: MessageDefaultPublic) => {
-  const allowance = await db.allowances.get({
-    host: message.origin.host,
-  });
+const getRelays = async (message: MessageDefaultPublic, sender: Sender) => {
+  let host;
+  if (sender.origin) host = new URL(sender.origin).host;
+  else if (sender.url) host = new URL(sender.url).host;
+  else return;
+
+  const allowance = await db.allowances.get({ host });
 
   if (!allowance?.id) {
     return { error: "Could not find an allowance for this host" };

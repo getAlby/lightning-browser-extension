@@ -2,20 +2,20 @@ import { USER_REJECTED_ERROR } from "~/common/constants";
 import utils from "~/common/lib/utils";
 import state from "~/extension/background-script/state";
 import i18n from "~/i18n/i18nConfig";
-import { MessageDecryptGet, PermissionMethodNostr } from "~/types";
+import { MessageDecryptGet, PermissionMethodNostr, Sender } from "~/types";
 
 import { addPermissionFor, hasPermissionFor } from "./helpers";
 
-const decryptOrPrompt = async (message: MessageDecryptGet) => {
-  if (!("host" in message.origin)) {
-    console.error("error", message.origin);
-    return;
-  }
+const decryptOrPrompt = async (message: MessageDecryptGet, sender: Sender) => {
+  let host;
+  if (sender.origin) host = new URL(sender.origin).host;
+  else if (sender.url) host = new URL(sender.url).host;
+  else return;
 
   try {
     const hasPermission = await hasPermissionFor(
       PermissionMethodNostr["NOSTR_NIP04DECRYPT"],
-      message.origin.host
+      host
     );
 
     if (hasPermission) {
@@ -42,7 +42,7 @@ const decryptOrPrompt = async (message: MessageDecryptGet) => {
       if (promptResponse.data.rememberPermission) {
         await addPermissionFor(
           PermissionMethodNostr["NOSTR_NIP04DECRYPT"],
-          message.origin.host
+          host
         );
       }
       if (promptResponse.data.confirm) {

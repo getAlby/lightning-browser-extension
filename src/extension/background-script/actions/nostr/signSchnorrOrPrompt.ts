@@ -1,14 +1,17 @@
 import utils from "~/common/lib/utils";
-import { MessageSignSchnorr, PermissionMethodNostr } from "~/types";
+import { MessageSignSchnorr, PermissionMethodNostr, Sender } from "~/types";
 
 import state from "../../state";
 import { addPermissionFor, hasPermissionFor } from "../nostr/helpers";
 
-const signSchnorrOrPrompt = async (message: MessageSignSchnorr) => {
-  if (!("host" in message.origin)) {
-    console.error("error", message.origin);
-    return;
-  }
+const signSchnorrOrPrompt = async (
+  message: MessageSignSchnorr,
+  sender: Sender
+) => {
+  let host;
+  if (sender.origin) host = new URL(sender.origin).host;
+  else if (sender.url) host = new URL(sender.url).host;
+  else return;
 
   const nostr = await state.getState().getNostr();
   const sigHash = message.args.sigHash;
@@ -20,7 +23,7 @@ const signSchnorrOrPrompt = async (message: MessageSignSchnorr) => {
 
     const hasPermission = await hasPermissionFor(
       PermissionMethodNostr["NOSTR_SIGNSCHNORR"],
-      message.origin.host
+      host
     );
     if (!hasPermission) {
       const promptResponse = await utils.openPrompt<{
@@ -35,7 +38,7 @@ const signSchnorrOrPrompt = async (message: MessageSignSchnorr) => {
       if (promptResponse.data.enabled) {
         await addPermissionFor(
           PermissionMethodNostr["NOSTR_SIGNSCHNORR"],
-          message.origin.host
+          host
         );
       }
     }

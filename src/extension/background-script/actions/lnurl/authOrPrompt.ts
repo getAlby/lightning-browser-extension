@@ -3,17 +3,24 @@ import utils from "~/common/lib/utils";
 import db from "~/extension/background-script/db";
 import state from "~/extension/background-script/state";
 import type {
-  MessageWebLnLnurl,
   LNURLDetails,
   LnurlAuthResponse,
+  MessageWebLnLnurl,
+  Sender,
 } from "~/types";
 
 import { authFunction } from "./auth";
 
 async function authOrPrompt(
   message: MessageWebLnLnurl,
+  sender: Sender,
   lnurlDetails: LNURLDetails
 ) {
+  let host;
+  if (sender.origin) host = new URL(sender.origin).host;
+  else if (sender.url) host = new URL(sender.url).host;
+  else return;
+
   if (!("host" in message.origin)) return;
 
   PubSub.publish(`lnurl.auth.start`, { message, lnurlDetails });
@@ -21,7 +28,7 @@ async function authOrPrompt(
   // get the publisher to check if lnurlAuth for auto-login is enabled
   const allowance = await db.allowances
     .where("host")
-    .equalsIgnoreCase(message.origin.host)
+    .equalsIgnoreCase(host)
     .first();
 
   // we have the check the unlock status manually. The account can still be locked

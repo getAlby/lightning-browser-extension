@@ -15,7 +15,11 @@ const signMessageOrPrompt = async (message: Message) => {
   return signWithPrompt(message);
 
   /*
-	const host = message.origin.host;
+  let host;
+  if (sender.origin) host = new URL(sender.origin).host;
+  else if (sender.url) host = new URL(sender.url).host;
+  else return;
+
 	const allowance = await db.allowances
 		.where("host")
 		.equalsIgnoreCase(host)

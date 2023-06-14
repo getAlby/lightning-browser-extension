@@ -1,4 +1,5 @@
 import { PaymentRequestObject } from "bolt11";
+import { Runtime } from "webextension-polyfill";
 import { ACCOUNT_CURRENCIES, CURRENCIES, TIPS } from "~/common/constants";
 import connectors from "~/extension/background-script/connectors";
 import {
@@ -117,6 +118,15 @@ export interface Message {
   prompt?: boolean;
 }
 
+export interface Sender extends Runtime.MessageSender {
+  tlsChannelId?: string;
+  // only Chrome 80+
+  origin?: string;
+  // the below are not necessary
+  documentId?: string;
+  documentLifecycle?: string;
+  nativeApplication?: string;
+}
 // new message  type, please use this
 export interface MessageDefault {
   origin: OriginData | OriginDataInternal;
