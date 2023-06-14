@@ -87,17 +87,9 @@ export class DB extends Dexie {
   }
 
   async clearAllTables() {
-    await this.allowances.clear();
-    await this.payments.clear();
-    await this.blocklist.clear();
-    await this.permissions.clear();
+    await this.tables.forEach(async (table) => await table.clear());
+    await browser.storage.local.clear();
 
-    await browser.storage.local.set({
-      allowances: null,
-      payments: null,
-      blocklist: null,
-      permissions: null,
-    });
     return true;
   }
 
