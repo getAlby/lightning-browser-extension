@@ -1,4 +1,5 @@
 import utils from "~/common/lib/utils";
+import { getHostFromSender } from "~/common/utils/helpers";
 import db from "~/extension/background-script/db";
 import type { MessageAllowanceEnable, Sender } from "~/types";
 
@@ -6,10 +7,8 @@ import state from "../../state";
 import { ExtensionIcon, setIcon } from "../setup/setIcon";
 
 const enable = async (message: MessageAllowanceEnable, sender: Sender) => {
-  let host;
-  if (sender.origin) host = new URL(sender.origin).host;
-  else if (sender.url) host = new URL(sender.url).host;
-  else return;
+  const host = getHostFromSender(sender);
+  if (!host) return;
 
   const isUnlocked = await state.getState().isUnlocked();
   const allowance = await db.allowances

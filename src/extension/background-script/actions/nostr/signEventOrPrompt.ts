@@ -1,14 +1,13 @@
 import utils from "~/common/lib/utils";
+import { getHostFromSender } from "~/common/utils/helpers";
 import { MessageSignEvent, PermissionMethodNostr, Sender } from "~/types";
 
 import state from "../../state";
 import { addPermissionFor, hasPermissionFor, validateEvent } from "./helpers";
 
 const signEventOrPrompt = async (message: MessageSignEvent, sender: Sender) => {
-  let host;
-  if (sender.origin) host = new URL(sender.origin).host;
-  else if (sender.url) host = new URL(sender.url).host;
-  else return;
+  const host = getHostFromSender(sender);
+  if (!host) return;
 
   const nostr = await state.getState().getNostr();
 

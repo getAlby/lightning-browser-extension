@@ -1,5 +1,6 @@
 import PubSub from "pubsub-js";
 import utils from "~/common/lib/utils";
+import { getHostFromSender } from "~/common/utils/helpers";
 import db from "~/extension/background-script/db";
 import state from "~/extension/background-script/state";
 import type {
@@ -16,10 +17,8 @@ async function authOrPrompt(
   sender: Sender,
   lnurlDetails: LNURLDetails
 ) {
-  let host;
-  if (sender.origin) host = new URL(sender.origin).host;
-  else if (sender.url) host = new URL(sender.url).host;
-  else return;
+  const host = getHostFromSender(sender);
+  if (!host) return;
 
   if (!("host" in message.origin)) return;
 

@@ -1,11 +1,10 @@
+import { getHostFromSender } from "~/common/utils/helpers";
 import db from "~/extension/background-script/db";
 import { MessageDefaultPublic, Sender } from "~/types";
 
 const getRelays = async (message: MessageDefaultPublic, sender: Sender) => {
-  let host;
-  if (sender.origin) host = new URL(sender.origin).host;
-  else if (sender.url) host = new URL(sender.url).host;
-  else return;
+  const host = getHostFromSender(sender);
+  if (!host) return;
 
   const allowance = await db.allowances.get({ host });
 

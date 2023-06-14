@@ -1,4 +1,5 @@
 import utils from "~/common/lib/utils";
+import { getHostFromSender } from "~/common/utils/helpers";
 import { MessageSignSchnorr, PermissionMethodNostr, Sender } from "~/types";
 
 import state from "../../state";
@@ -8,10 +9,8 @@ const signSchnorrOrPrompt = async (
   message: MessageSignSchnorr,
   sender: Sender
 ) => {
-  let host;
-  if (sender.origin) host = new URL(sender.origin).host;
-  else if (sender.url) host = new URL(sender.url).host;
-  else return;
+  const host = getHostFromSender(sender);
+  if (!host) return;
 
   const nostr = await state.getState().getNostr();
   const sigHash = message.args.sigHash;

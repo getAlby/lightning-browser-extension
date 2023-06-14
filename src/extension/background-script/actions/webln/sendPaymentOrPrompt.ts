@@ -1,15 +1,14 @@
 import lightningPayReq from "bolt11";
 import utils from "~/common/lib/utils";
+import { getHostFromSender } from "~/common/utils/helpers";
 import { Message, Sender } from "~/types";
 
 import db from "../../db";
 import sendPayment from "../ln/sendPayment";
 
 const sendPaymentOrPrompt = async (message: Message, sender: Sender) => {
-  let host;
-  if (sender.origin) host = new URL(sender.origin).host;
-  else if (sender.url) host = new URL(sender.url).host;
-  else return;
+  const host = getHostFromSender(sender);
+  if (!host) return;
 
   const paymentRequest = message.args.paymentRequest;
   if (typeof paymentRequest !== "string") {

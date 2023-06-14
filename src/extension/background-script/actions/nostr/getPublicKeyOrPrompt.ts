@@ -1,4 +1,5 @@
 import utils from "~/common/lib/utils";
+import { getHostFromSender } from "~/common/utils/helpers";
 import type { MessagePublicKeyGet, Sender } from "~/types";
 import { PermissionMethodNostr } from "~/types";
 
@@ -9,10 +10,8 @@ const getPublicKeyOrPrompt = async (
   message: MessagePublicKeyGet,
   sender: Sender
 ) => {
-  let host;
-  if (sender.origin) host = new URL(sender.origin).host;
-  else if (sender.url) host = new URL(sender.url).host;
-  else return;
+  const host = getHostFromSender(sender);
+  if (!host) return;
 
   try {
     const hasPermission = await hasPermissionFor(

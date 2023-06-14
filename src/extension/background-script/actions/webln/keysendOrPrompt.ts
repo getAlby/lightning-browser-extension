@@ -1,15 +1,14 @@
 import utils from "~/common/lib/utils";
+// TODO: move checkAllowance to some helpers/models?
+import { getHostFromSender } from "~/common/utils/helpers";
 import { Message, Sender } from "~/types";
 
 import keysend from "../ln/keysend";
-// TODO: move checkAllowance to some helpers/models?
 import { checkAllowance } from "./sendPaymentOrPrompt";
 
 const keysendOrPrompt = async (message: Message, sender: Sender) => {
-  let host;
-  if (sender.origin) host = new URL(sender.origin).host;
-  else if (sender.url) host = new URL(sender.url).host;
-  else return;
+  const host = getHostFromSender(sender);
+  if (!host) return;
 
   const destination = message.args.destination;
   const amount = message.args.amount;
