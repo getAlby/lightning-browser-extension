@@ -649,12 +649,16 @@
         "title": "你的Alby錢包已準備就緒",
         "description": "一些讓你開始嗡嗡作响的小貼士🐝",
         "top_up_wallet": {
-          "title": "⚡️充值你的錢包",
-          "description": "創建一張閃電發票，給自己發送一些比特幣，即可開始在閃電生態系統中使用 Alby"
+          "title": "購買比特幣",
+          "description": "需要充值？\n我們能幫忙！"
         },
         "demo": {
-          "title": "🕹️ 試用 Alby 演示",
-          "description": "在我們的演示網站上發現你可以使用 Alby 執行的所有操作"
+          "title": "Alby 演示",
+          "description": "在我們的演示網站上\n發現 Alby 的所有功能"
+        },
+        "mnemonic": {
+          "description": "打算使用 Nostr？\n立即生成你的密鑰。",
+          "title": "Nostr"
         }
       }
     },
