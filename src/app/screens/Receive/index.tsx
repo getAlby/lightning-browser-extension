@@ -8,7 +8,6 @@ import Container from "@components/Container";
 import Header from "@components/Header";
 import IconButton from "@components/IconButton";
 import Loading from "@components/Loading";
-import Tab from "@components/Tab";
 import { useEffect, useRef, useState } from "react";
 import Confetti from "react-confetti";
 import { useTranslation } from "react-i18next";
@@ -16,11 +15,8 @@ import QRCode from "react-qr-code";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import LightningReceiveForm from "~/app/components/LightningReceiveForm";
-import OnChainReceive from "~/app/components/OnChainReceive";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
-import BlockIcon from "~/app/icons/BlockIcon";
-import ThunderIcon from "~/app/icons/ThunderIcon";
 import { isAlbyAccount } from "~/app/utils";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
@@ -246,43 +242,42 @@ function Receive() {
           />
         }
       />
-
-      {isAlbyUser ? (
-        <Tab.Group>
-          <Tab.List className="flex mb-6 mt-4 items-center px-4">
-            <Tab icon={<ThunderIcon />} label="Lightning" />
-            <Tab icon={<BlockIcon />} label="Onchain" />
-          </Tab.List>
-          <Tab.Panels className="h-full">
-            <Tab.Panel className="h-full">
-              {invoice ? (
-                <Container maxWidth="sm">{renderInvoice()}</Container>
-              ) : (
-                <LightningReceiveForm
-                  handleSubmit={handleSubmit}
-                  handleChange={handleChange}
-                  loading={loading}
-                  fiatAmount={fiatAmount}
-                />
-              )}
-            </Tab.Panel>
-            <Tab.Panel className="h-full">
-              <OnChainReceive />
-            </Tab.Panel>
-          </Tab.Panels>
-        </Tab.Group>
+      {invoice ? (
+        <Container maxWidth="sm">{renderInvoice()}</Container>
       ) : (
-        <div className=" h-full">
-          {invoice ? (
-            <Container maxWidth="sm">{renderInvoice()}</Container>
-          ) : (
-            <LightningReceiveForm
-              handleSubmit={handleSubmit}
-              handleChange={handleChange}
-              loading={loading}
-              fiatAmount={fiatAmount}
-            />
-          )}
+        <div className="pt-4">
+          <LightningReceiveForm
+            handleSubmit={handleSubmit}
+            handleChange={handleChange}
+            loading={loading}
+            fiatAmount={fiatAmount}
+          />
+          {isAlbyUser ? (
+            <div>
+              <Container justifyBetween maxWidth="sm">
+                <div className="relative flex  items-center mb-4">
+                  <div className="flex-grow border-t border-gray-300 dark:border-gray-700"></div>
+                  <span className="flex-shrink mx-4  text-gray-500 dark:text-gray-400 fw-bold">
+                    or
+                  </span>
+                  <div className="flex-grow border-t  border-gray-300 dark:border-gray-700"></div>
+                </div>
+
+                <div className="mb-4">
+                  <Button
+                    type="button"
+                    label="Receive via bitcoin address"
+                    fullWidth
+                    loading={loading}
+                    disabled={loading}
+                    onClick={() => {
+                      navigate("/onChainReceive");
+                    }}
+                  />
+                </div>
+              </Container>
+            </div>
+          ) : null}
         </div>
       )}
     </div>

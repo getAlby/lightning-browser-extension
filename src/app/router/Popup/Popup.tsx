@@ -11,6 +11,7 @@ import Send from "@screens/Send";
 import Unlock from "@screens/Unlock";
 import { HashRouter, Outlet, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import OnChainReceive from "~/app/components/OnChainReceive";
 import Providers from "~/app/context/Providers";
 
 import RequireAuth from "../RequireAuth";
@@ -31,6 +32,7 @@ function Popup() {
             <Route index element={<Home />} />
             <Route path="send" element={<Send />} />
             <Route path="receive" element={<Receive />} />
+            <Route path="onChainReceive" element={<OnChainReceive />} />
             <Route path="lnurlPay" element={<LNURLPay />} />
             <Route path="lnurlChannel" element={<LNURLChannel />} />
             <Route path="lnurlWithdraw" element={<LNURLWithdraw />} />

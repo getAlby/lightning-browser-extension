@@ -22,8 +22,8 @@ const LightningReceiveForm = ({
   const { t } = useTranslation("translation", { keyPrefix: "receive" });
 
   return (
-    <form onSubmit={handleSubmit} className="h-full">
-      <fieldset className="h-full" disabled={loading}>
+    <form onSubmit={handleSubmit}>
+      <fieldset disabled={loading}>
         <Container justifyBetween maxWidth="sm">
           <div className="">
             <div className="mb-4">
