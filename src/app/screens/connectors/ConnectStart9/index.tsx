@@ -9,6 +9,8 @@ import { toast } from "react-toastify";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
 
+import logo from "/static/assets/icons/start9.png";
+
 const initialFormData = {
   url: "",
   macaroon: "",
@@ -103,7 +105,7 @@ export default function ConnectStart9() {
   return (
     <ConnectorForm
       title={
-        <h1 className="mb-6 text-2xl font-bold dark:text-white">
+        <h1 className="text-2xl font-bold dark:text-white">
           <Trans
             i18nKey={"page.title"}
             t={t}
@@ -126,18 +128,21 @@ export default function ConnectStart9() {
           ]}
         />
       }
+      logo={logo}
       submitLoading={loading}
       submitDisabled={formData.url === "" || formData.macaroon === ""}
       onSubmit={handleSubmit}
     >
-      <TextField
-        id="lndconnect"
-        label={t("rest_url.label")}
-        placeholder={t("rest_url.placeholder")}
-        onChange={handleLndconnectUrl}
-        required
-        autoFocus={true}
-      />
+      <div className="mt-6">
+        <TextField
+          id="lndconnect"
+          label={t("rest_url.label")}
+          placeholder={t("rest_url.placeholder")}
+          onChange={handleLndconnectUrl}
+          required
+          autoFocus={true}
+        />
+      </div>
       {formData.url.match(/\.onion/i) && (
         <div className="mt-6">
           <CompanionDownloadInfo

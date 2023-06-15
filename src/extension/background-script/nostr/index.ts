@@ -5,7 +5,7 @@ import { AES } from "crypto-js";
 import Base64 from "crypto-js/enc-base64";
 import Hex from "crypto-js/enc-hex";
 import Utf8 from "crypto-js/enc-utf8";
-import { Event } from "~/extension/ln/nostr/types";
+import { Event } from "~/extension/providers/nostr/types";
 
 import { getEventHash, signEvent } from "../actions/nostr/helpers";
 
