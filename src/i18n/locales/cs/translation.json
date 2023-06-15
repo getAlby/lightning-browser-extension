@@ -192,12 +192,9 @@
           "info": "Přihlášení {{label}} je aktuálně aktualizováno. Pokud jste pokročilý uživatel, můžete svůj JWT token získat přihlášením přes <0>Webovou peněženku (wallet.mainnet.galoy.io)</0><1/><1/>JWT token vypadá podobně jako: <2>eyJhbG...</2><1/><1/>"
         },
         "actions": {
-          "login": "Přihlásit",
-          "request_sms_code": "Zažádat o SMS kód"
+          "login": "Přihlásit"
         },
         "errors": {
-          "failed_to_request_sms": "Nepodařilo se vyžádat SMS kód",
-          "failed_to_login_sms": "Nepodařilo se přihlášení s SMS kódem",
           "setup_failed": "Nastavení se nezdařilo",
           "missing_token": "JWT chybí, přihlášení se nezdařilo.",
           "invalid_token": "Vloženo nevalidní JWT"
@@ -281,12 +278,6 @@
         "enable_now": "Povolit nyní"
       },
       "recent_transactions": "Nedávné transakce",
-      "transaction_list": {
-        "tabs": {
-          "outgoing": "Odchozí",
-          "incoming": "Příchozí"
-        }
-      },
       "allowance_view": {
         "recent_transactions": "Nedávné transakce",
         "allowance": "Příspěvek",
@@ -295,7 +286,6 @@
       },
       "default_view": {
         "recent_transactions": "Nedávné transakce",
-        "no_transactions": "S Alby prozatím nebyly uskutečněny žádné transakce.",
         "is_blocked_hint": "Alby je v současnosti zakázaná na {host}}",
         "block_removed": "Povolen {{host}}. Prosím znovu načtěte webovou stránku."
       }
@@ -693,22 +683,14 @@
         "showcases": "Příklady užití"
       },
       "tips": {
-        "address": {
-          "description": "Vytvořte si svou vlastní lightning adresu pro příjímání lightning plateb tak jednoduše, jak kdybyste odesílali e-mail",
-          "label1": "Získat!",
-          "title": "⚡️ Získat lightning adresu"
-        },
         "title": "Vaše Alby peněženka je připravena",
         "description": "Pár tipů než začnete",
         "top_up_wallet": {
           "title": "⚡️ Dobít peněženku",
-          "description": "Vytvořte lightning fakturu, pošlete si bitcoiny a začněte používat Alby v ekosystému lightning",
-          "label1": "Přijmout Bitcoin",
-          "label2": "Koupit Bitcoin"
+          "description": "Vytvořte lightning fakturu, pošlete si bitcoiny a začněte používat Alby v ekosystému lightning"
         },
         "demo": {
           "description": "Objevte vše, co lze s Alby dělat, na naší demo stránce",
-          "label1": "Vyzkoušet",
           "title": "🕹️ Vyzkoušejte demo Alby"
         }
       }
