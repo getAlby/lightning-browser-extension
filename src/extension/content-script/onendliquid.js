@@ -17,6 +17,8 @@ let isEnabled = false; // store if liquid is enabled for this content page
 let isRejected = false; // store if the liquid enable call failed. if so we do not prompt again
 let callActive = false; // store if a lqiuid call is currently active. Used to prevent multiple calls in parallel
 
+const SCOPE = "liquid";
+
 async function init() {
   const inject = await shouldInject();
   if (!inject) {
@@ -31,7 +33,7 @@ async function init() {
     if (
       ev.source !== window ||
       ev.data.application !== "LBE" ||
-      ev.data.scope !== "liquid"
+      ev.data.scope !== SCOPE
     ) {
       return;
     }
@@ -73,7 +75,7 @@ async function init() {
       const replyFunction = (response) => {
         callActive = false; // reset call is active
 
-        if (ev.data.action === "liquid/enable") {
+        if (ev.data.action === `${SCOPE}/enable`) {
           isEnabled = response.data?.enabled;
           if (response.error) {
             console.error(response.error);
@@ -82,15 +84,7 @@ async function init() {
           }
         }
 
-        window.postMessage(
-          {
-            application: "LBE",
-            response: true,
-            data: response,
-            scope: "liquid",
-          },
-          "*" // TODO use origin
-        );
+        postMessage(ev, response);
       };
 
       callActive = true;
@@ -103,5 +97,18 @@ async function init() {
 }
 
 init();
+
+function postMessage(ev, response) {
+  window.postMessage(
+    {
+      id: ev.data.id,
+      application: "LBE",
+      response: true,
+      data: response,
+      scope: SCOPE,
+    },
+    "*"
+  );
+}
 
 export {};
