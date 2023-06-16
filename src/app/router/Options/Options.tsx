@@ -21,6 +21,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { HashRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import OnChainReceive from "~/app/components/OnChainReceive";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
 import { getConnectorRoutes, renderRoutes } from "~/app/router/connectorRoutes";
@@ -66,6 +67,7 @@ function Options() {
             <Route path="confirmPayment" element={<ConfirmPayment />} />
             <Route path="keysend" element={<Keysend />} />
             <Route path="receive" element={<Receive />} />
+            <Route path="onChainReceive" element={<OnChainReceive />} />
             <Route path="wallet" element={<DefaultView />} />
             <Route path="transactions">
               <Route
