@@ -3,7 +3,7 @@ import browser from "webextension-polyfill";
 import getOriginData from "./originData";
 import shouldInject from "./shouldInject";
 
-// Nostr calls that can be executed from the WebBTC Provider.
+// WebBTC calls that can be executed from the WebBTC Provider.
 // Update when new calls are added
 const webbtcCalls = [
   "webbtc/enable",
@@ -13,9 +13,9 @@ const webbtcCalls = [
 // calls that can be executed when `window.webbtc` is not enabled for the current content page
 const disabledCalls = ["webbtc/enable"];
 
-let isEnabled = false; // store if nostr is enabled for this content page
-let isRejected = false; // store if the nostr enable call failed. if so we do not prompt again
-let callActive = false; // store if a nostr call is currently active. Used to prevent multiple calls in parallel
+let isEnabled = false; // store if webbtc is enabled for this content page
+let isRejected = false; // store if the webbtc enable call failed. if so we do not prompt again
+let callActive = false; // store if a webbtc call is currently active. Used to prevent multiple calls in parallel
 
 const SCOPE = "webbtc";
 
@@ -52,7 +52,7 @@ async function init() {
         return;
       }
 
-      // limit the calls that can be made from window.nostr
+      // limit the calls that can be made from window.webbtc
       // only listed calls can be executed
       // if not enabled only enable can be called.
       const availableCalls = isEnabled ? webbtcCalls : disabledCalls;
@@ -79,7 +79,7 @@ async function init() {
           isEnabled = response.data?.enabled;
           if (response.error) {
             console.error(response.error);
-            console.info("Enable was rejected ignoring further nostr calls");
+            console.info("Enable was rejected ignoring further webbtc calls");
             isRejected = true;
           }
         }
