@@ -175,7 +175,7 @@ function NostrAdvancedSettings() {
                 )}
               </Alert>
             ) : nostrKeyOrigin === "secret-key" ? (
-              <Alert type="warn">
+              <Alert type="info">
                 {t("nostr.advanced_settings.can_restore")}
               </Alert>
             ) : null}
