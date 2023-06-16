@@ -61,11 +61,6 @@ var options = {
   },
 
   mode: nodeEnv,
-  experiments: {
-    // TODO: remove along with tiny-secp256k1
-    asyncWebAssembly: true,
-  },
-
   entry: {
     manifest: "./src/manifest.json",
     background: "./src/extension/background-script/index.ts",
