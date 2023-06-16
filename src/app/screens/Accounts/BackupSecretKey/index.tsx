@@ -7,6 +7,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import Alert from "~/app/components/Alert";
 import Button from "~/app/components/Button";
 import MnemonicInputs from "~/app/components/MnemonicInputs";
 import Checkbox from "~/app/components/form/Checkbox";
@@ -163,10 +164,7 @@ function BackupSecretKey() {
             </>
           </MnemonicInputs>
           {!hasMnemonic && currentPrivateKey && (
-            // TODO: extract to Alert component
-            <div className="rounded-md font-medium p-4 text-orange-700 bg-orange-50 dark:text-orange-400 dark:bg-orange-900">
-              {t("existing_nostr_key_notice")}
-            </div>
+            <Alert type="warn">{t("existing_nostr_key_notice")}</Alert>
           )}
         </div>
         {!hasMnemonic && (
