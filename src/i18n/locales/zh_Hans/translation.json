@@ -687,14 +687,18 @@
       "title": "探索闪电⚡️生态系统",
       "tips": {
         "top_up_wallet": {
-          "title": "⚡️充值你的钱包",
-          "description": "创建一张闪电发票，给自己发送一些比特币，即可开始在闪电生态系统中使用 Alby"
+          "title": "购买比特币",
+          "description": "需要充值？\n我们能帮忙！"
         },
         "title": "你的Alby钱包已准备就绪",
         "description": "一些让你开始嗡嗡作响的小贴士🐝",
         "demo": {
-          "title": "🕹️ 试用 Alby 演示",
-          "description": "在我们的演示网站上发现你可以用Alby执行的所有操作"
+          "title": "Alby 演示",
+          "description": "在我们的演示网站上\n发现 Alby 的所有功能"
+        },
+        "mnemonic": {
+          "title": "Nostr",
+          "description": "打算使用 Nostr？\n立即生成你的密钥。"
         }
       }
     },

@@ -3,7 +3,7 @@
     "welcome": {
       "set_password": {
         "title": "Definir uma senha de desbloqueio",
-        "description": "Essa senha é usada para proteger sua carteira e fornecer acesso à extensão do navegador. Não esqueça essa senha pois não é possível recuperá-la. Obs. Essa senha é diferente da senha da conta da Alby.",
+        "description": "Essa senha é usada para proteger sua carteira e fornecer acesso à extensão do navegador neste dispositivo. Não esqueça essa senha pois não é possível recuperá-la. Obs. Essa senha é diferente da senha da conta da Alby e você alterá-la quando quiser.",
         "choose_password": {
           "label": "Escolha uma senha de desbloqueio:"
         },
@@ -657,15 +657,19 @@
       },
       "tips": {
         "top_up_wallet": {
-          "description": "Crie uma fatura relâmpago e envie alguns bitcoins para você mesmo",
-          "title": "⚡️ Adicione fundos na sua carteira"
+          "description": "Precisa adicionar fundos?\nClique aqui!",
+          "title": "Comprar Bitcoin"
         },
         "demo": {
-          "title": "🕹️ Teste a Alby",
-          "description": "Descubra tudo o que você pode fazer com a Alby em nosso site de demonstração"
+          "title": "Teste a Alby",
+          "description": "Descubra tudo o que você pode fazer com a Alby\nem nosso site de demonstração"
         },
         "title": "Sua carteira Alby está pronta",
-        "description": "Algumas dicas para você começar a usar a Alby 🐝"
+        "description": "Algumas dicas para você começar a usar a Alby 🐝",
+        "mnemonic": {
+          "description": "Planejando usar apps Nostr?\nGere suas chaves agora.",
+          "title": "Nostr"
+        }
       }
     },
     "choose_path": {
@@ -728,7 +732,12 @@
       }
     },
     "transactions": {
-      "title": "Transações"
+      "title": "Transações",
+      "description": {
+        "outgoing": "Transações enviadas usando esta conta",
+        "incoming": "Transações recebidas nesta conta"
+      },
+      "list_empty": "Sem transações."
     },
     "distributions": {
       "umbrel": {
@@ -816,7 +825,20 @@
       "greaterThan": "> {{min}}"
     },
     "balance": "Saldo disponível",
-    "wallet": "Carteira"
+    "wallet": "Carteira",
+    "connectors": {
+      "galoy": "Galoy",
+      "lndhub": "LNDHub",
+      "eclair": "Eclair",
+      "lnd": "LND",
+      "lnbits": "LNBits",
+      "nativelndhub": "LNDHub (usando Tor)",
+      "commando": "Commando",
+      "citadel": "Citadel",
+      "nativelnbits": "LNBits (usando Tor)",
+      "nativecitadel": "Citadel (usando Tor)",
+      "nativelnd": "LND (usando Tor)"
+    }
   },
   "components": {
     "allowance_menu": {
