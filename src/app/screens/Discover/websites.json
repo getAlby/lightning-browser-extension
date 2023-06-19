@@ -56,6 +56,12 @@
         "url": "https://btcmap.org/"
       },
       {
+        "title": "Coincards",
+        "subtitle": "Shop for gift cards, mobile top-ups & prepaid vouchers",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/coincards.png",
+        "url": "https://coincards.com/"
+      },
+      {
         "title": "Lightning Network Stores",
         "subtitle": "Collection of stores and websites accepting bitcoin",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/lightning-network-stores_thumbnail.png",
@@ -131,6 +137,12 @@
         "subtitle": "The blue bird experience for Nostr",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/yosup_thumbnail.svg",
         "url": "https://yosup.app/"
+      },
+      {
+        "title": "Satellite",
+        "subtitle": "Explore the Nostr Universe",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/satellite-earth.png",
+        "url": "https://satellite.earth/"
       }
     ]
   },
@@ -241,6 +253,12 @@
         "subtitle": "Earn sats anytime someone wants to connect and chat",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/vida_thumbnail.png",
         "url": "https://vida.page/"
+      },
+      {
+        "title": "Vida Live",
+        "subtitle": "Host live podcasts and earn sats",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/vida_thumbnail.png",
+        "url": "https://vida.live/"
       },
       {
         "title": "WebLN Experiments",

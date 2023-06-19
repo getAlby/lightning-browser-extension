@@ -13,6 +13,8 @@ jobs:
 
     name: build-prod
     env:
+      ALBY_API_URL: "https://getalby.com/api"
+      WALLET_ROOT_URL: "https://getalby.com/"
 
     permissions:
       issues: write

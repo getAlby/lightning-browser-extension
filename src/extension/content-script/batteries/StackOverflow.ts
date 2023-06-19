@@ -26,9 +26,8 @@ const battery = async (): Promise<void> => {
 };
 
 function htmlToText(html: string) {
-  const temp = document.createElement("div");
-  temp.innerHTML = html;
-  return temp.textContent;
+  const doc = new DOMParser().parseFromString(html, "text/html");
+  return doc.textContent;
 }
 
 async function handleQuestionPage(questionId: string): Promise<Battery | null> {

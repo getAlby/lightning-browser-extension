@@ -3,9 +3,9 @@
     "welcome": {
       "set_password": {
         "title": "设置解锁密码",
-        "description": "此密码用于保护你的钱包并提供对浏览器扩展程序的访问权限。它无法重置，而且与你的 Alby 帐户密码不同。",
+        "description": "此密码将允许你在此设备上解锁 Alby。它无法恢复，但可以稍后更改。",
         "choose_password": {
-          "label": "选择一个解锁密码："
+          "label": "选择解锁密码："
         },
         "confirm_password": {
           "label": "让我们确认你输入的内容是否正确："
@@ -27,7 +27,13 @@
           "delete_edit_account": "删除无效帐户并重新编辑"
         }
       },
-      "title": "欢迎使用Alby"
+      "title": "欢迎使用Alby",
+      "pin_extension": {
+        "title": "固定你的 Alby 扩展",
+        "description": "就快完成了。以便方便地使用 Alby，请记住把扩展固定到工具栏：",
+        "next_btn": "与 Alby 一起开始嗡嗡作响{{icon}}",
+        "explanation": "1.点击浏览器右上角的<0/><1/>2.找到Alby并点击将其固定到工具栏<1/>3.就这样。要访问Alby，只需点击<2/>图标"
+      }
     },
     "choose_connector": {
       "lnd": {
@@ -84,20 +90,17 @@
         "title": "Citadel"
       },
       "galoy": {
-        "jwt": {
+        "token": {
           "label": "输入你的JWT令牌",
           "info": "目前{{label}}登录正在升级中。如果你是高级用户，你可以通过<0>网络钱包（wallet.mainnet.galoy.io）</0><1/><1/>登录来获取你的JWT令牌，JWT看起来像：<2>eyJhbG...</2><1/><1/>"
         },
         "actions": {
-          "login": "登录",
-          "request_sms_code": "索取短信验证码"
+          "login": "登录"
         },
         "errors": {
           "setup_failed": "设置失败",
-          "failed_to_request_sms": "索取短信验证码失败",
-          "failed_to_login_sms": "使用短信验证码登录失败",
-          "missing_jwt": "JWT不存在，无法登录。",
-          "invalid_jwt": "传递了无效的JWT"
+          "missing_token": "JWT不存在，无法登录。",
+          "invalid_token": "传递了无效的JWT"
         },
         "sms_code": {
           "label": "输入你的短信验证码"
@@ -160,8 +163,8 @@
       },
       "start9": {
         "page": {
-          "instructions": "<0>注意：</0>目前我们只支持LND，但是我们将在未来增加对c-lightning的支持！<1/>在你的Embassy仪表板上点击<0>Lightning Network Daemon</0>服务。<1/>选择<0>属性</0>标签。<1/>然后复制<0>LND连接REST URL。</0>",
-          "title": "连接你的<0>Embassy</0>节点"
+          "instructions": "在你的 Embassy 仪表板上点击 <0>Lightning Network Daemon</0> 服务。<1/>选择 <0>Properties</0> 标签。<1/>复制 <0>LND Connect REST URL。</0>",
+          "title": "连接你的<0>Start9 服务器</0>"
         },
         "rest_url": {
           "placeholder": "lndconnect://yournode:8080?...",
@@ -229,7 +232,7 @@
       "umbrel": {
         "page": {
           "title": "连接<0>Umbrel</0>节点",
-          "instructions": "在你的Umbrel仪表板上，进入<0>连接钱包</0>。选择<0>lndconnect REST</0>并复制<0>lndconnect URL</0>。(根据你的设置，你可以使用本地连接或Tor连接。）"
+          "instructions": "1. 在你的Umbrel仪表板上，进入<0>连接钱包</0><1/>2. 选择<0>REST (Tor)</0>或<0>REST （本地网络）</0>模式<1/>3. 复制<0>lndconnect URL</0>并粘贴到下方"
         },
         "title": "Umbrel",
         "rest_url": {
@@ -251,10 +254,10 @@
       },
       "lnc": {
         "page": {
-          "description": "在终端（litd）中创建一个新的会话，以获得一个新的配对短语，并在这里输入它",
+          "description": "1. 打开 Lightning Terminal 并从侧边栏选择 <0>Lightning Node Connect</0> 。<1/> 2. 点击 <0>Create a new session</0><1/>3. 标记对话，选择所需的权限并提交<1/>4. <0>复制配对词句</0> 并粘贴到下方。",
           "title": "连接你的LND节点"
         },
-        "title": "LND使用LNC",
+        "title": "Lightning Terminal (LNC)",
         "pairing_phrase": {
           "placeholder": "秘密的堆聪短语",
           "label": "你的配对短语 "
@@ -284,12 +287,14 @@
           "description": "创建一个新的Kollider帐户来发送、接收和交易比特币。"
         },
         "login": {
-          "title": "连接到你的Kollider帐户",
-          "description": "还没有帐户？立即<0>注册</0>！"
+          "title": "连接到你的Kollider帐户"
         },
         "warning": "⚠️ 请确保你将你的凭证安全地保存在密码管理器中。没有这些凭证，你的帐户将无法恢复。"
       },
-      "title": "连接闪电钱包"
+      "title": "连接闪电钱包",
+      "umbrel_lightning_node": {
+        "title": "闪电节点"
+      }
     },
     "home": {
       "recent_transactions": "近期交易",
@@ -300,20 +305,16 @@
         "allowance": "限额"
       },
       "default_view": {
-        "no_transactions": "尚未用Alby进行任何交易。",
         "is_blocked_hint": "Alby 目前在 {{host}} 上被禁用",
         "recent_transactions": "近期交易",
-        "block_removed": "启用了{{host}}。请重新加载网站。"
+        "block_removed": "启用了{{host}}。请重新加载网站。",
+        "all_transactions_link": "查看所有交易",
+        "no_incoming_transactions": "此帐户尚无传入交易。",
+        "no_outgoing_transactions": "此帐户尚无传出交易。"
       },
       "actions": {
         "send_satoshis": "⚡️ 发送聪 ⚡️",
         "enable_now": "立即启用"
-      },
-      "transaction_list": {
-        "tabs": {
-          "outgoing": "外发",
-          "incoming": "传入"
-        }
       }
     },
     "accounts": {
@@ -352,7 +353,7 @@
             "backup": "⚠️ 不要忘记备份你的私钥!不备份你的密钥可能会导致失去访问权。",
             "failed_to_remove": "输入的帐户名称不匹配，你的旧私钥已被恢复。"
           },
-          "hint": "是一个简单而开放的协议，旨在创建抗审查的社交网络。 Nostr 使用加密密钥。你可以使用你的密钥对内容进行签名并将其发送到多个中继。你可以使用 Alby 来管理你的 Nostr 密钥。许多 Nostr 应用程序将允许你简单地使用 Alby 扩展中的密钥。"
+          "hint": "是一个简单而开放的协议，旨在创建抗审查的社交网络。Nostr 使用加密密钥。你可以使用你的密钥对内容进行签署并将其发送到多个中继。你可以使用 Alby 来管理你的 Nostr 密钥。许多 Nostr 应用程序允许你轻松地使用 Alby 扩展中的密钥。"
         },
         "title1": "帐户信息",
         "export": {
@@ -415,17 +416,17 @@
           "go_to": "前往帐户"
         },
         "title": "Nostr",
-        "hint": "是一个简单而开放的协议，旨在创建抗审查的社交网络。 Nostr 使用加密密钥。你可以使用你的密钥对内容进行签名并将其发送到多个中继。你可以使用 Alby 来管理你的 Nostr 密钥。许多 Nostr 应用程序将允许你简单地使用 Alby 扩展中的密钥。"
+        "hint": "是一个简单而开放的协议，旨在创建抗审查的社交网络。 Nostr 使用加密密钥。你可以使用你的密钥对内容进行签署并将其发送到多个中继。你可以使用 Alby 来管理你的 Nostr 密钥。许多 Nostr 应用程序允许你轻松地使用 Alby 扩展中的密钥。"
       },
       "lnurl_auth": {
         "title": "LNURL-认证",
         "legacy_lnurl_auth": {
           "title": "LNDhub 和 LNbits 的旧签名方式",
-          "subtitle": "用LNDhub（如BlueWallet）和LNbits账户进行的消息签署和登录已经改变（2022年3月）。如果你用这些帐户登录，你仍然可以启用旧的签名方法。这个选项以后会被删除，请确保切换到新的登录方式。"
+          "subtitle": "用 LNDhub（如 BlueWallet）和 LNbits 帐户进行的消息签署和登录已经改变（2022年3月）。如果你使用这些帐户登录，你仍然可以启用旧的签名方法。这个选项以后会被删除，请确保切换到新的登录方式。"
         },
-        "hint": "是一个通用的认证协议。它使用数字签名对用户进行认证。该协议不需要任何其他识别信息，如密码、电子邮件、用户名或类似信息。通过Alby，你可以使用你的闪电帐户安全地登录网站。为了与其他钱包兼容，我们不得不做一些改变，你可以在这里进行配置。 <0>理想情况下，所有这些选项都是关闭的。</0>仅当你有旧帐户时才使用它们。",
+        "hint": "是一个通用的认证协议。它使用数字签名对用户进行认证。该协议不需要任何其他识别信息，如密码、电子邮件、用户名或类似信息。通过 Alby，你可以使用你的闪电帐户安全地登录网站。为了与其他钱包兼容，我们不得不做一些改变，你可以在这里进行配置。 <0>理想情况下，所有这些选项都是关闭的。</0>仅当你有旧帐户时才应该启用它们。",
         "legacy_lnurl_auth_202207": {
-          "subtitle": "LNURL-认证的密钥生成已经改变（2022年7月）。Alby与其他实现不兼容。这被改变了，但现在使用不同的登录密钥。如果你之前使用LNURL-认证登录，你仍然可以启用旧方法。这个选项以后会被删除，请务必切换到新的登录方式。",
+          "subtitle": "LNURL-认证的密钥生成已经改变（2022年7月）。Alby与其他实施方式不再兼容。这已被改变了，但现在使用的是不同的登录密钥。如果你之前使用LNURL-认证登录，你仍然可以启用旧方法。这个选项以后会被删除，请务必切换到新的登录方式。",
           "title": "旧版 LNURL-认证"
         }
       },
@@ -604,15 +605,15 @@
       "no_content": "(无内容)",
       "kinds": {
         "unknown": "nostr 事件类型 {{kind}}",
-        "1": "短文便条",
+        "1": "短文笔记",
         "3": "联系人",
         "4": "加密的直接消息",
         "5": "删除事件",
         "7": "回应",
         "8": "徽章奖励",
         "1984": "报告",
-        "9734": "电击请求",
-        "9735": "电击",
+        "9734": "打闪请求",
+        "9735": "打闪",
         "10002": "中继器列表元数据",
         "22242": "客户端认证",
         "30008": "个人资料徽章",
@@ -659,8 +660,6 @@
       }
     },
     "choose_path": {
-      "title": "连接",
-      "description": "要开始使用Alby进行在线支付，请将Alby连接到你的闪电网络钱包。",
       "other": {
         "title": "其他钱包",
         "description": "连接到你现有的闪电钱包或节点，可从各种连接器中选择。",
@@ -687,23 +686,19 @@
       "description": "可以使用 Alby 的网站和网络应用程序",
       "title": "探索闪电⚡️生态系统",
       "tips": {
-        "address": {
-          "title": "⚡️ 获取闪电地址",
-          "label1": "立即获取！",
-          "description": "创建你自己的闪电地址，并像电子邮件一样轻松接收闪电付款"
-        },
         "top_up_wallet": {
-          "label1": "接收比特币",
-          "title": "⚡️充值你的钱包",
-          "description": "创建一张闪电发票，给自己发送一些比特币，即可开始在闪电生态系统中使用Alby",
-          "label2": "购买比特币"
+          "title": "购买比特币",
+          "description": "需要充值？\n我们能帮忙！"
         },
         "title": "你的Alby钱包已准备就绪",
         "description": "一些让你开始嗡嗡作响的小贴士🐝",
         "demo": {
-          "title": "🕹️ 试用 Alby 演示",
-          "description": "在我们的演示网站上发现你可以用Alby执行的所有操作",
-          "label1": "试一试"
+          "title": "Alby 演示",
+          "description": "在我们的演示网站上\n发现 Alby 的所有功能"
+        },
+        "mnemonic": {
+          "title": "Nostr",
+          "description": "打算使用 Nostr？\n立即生成你的密钥。"
         }
       }
     },
@@ -763,7 +758,36 @@
     "transactions": {
       "list_empty": "尚无交易。",
       "title": "交易",
-      "description": "你所有帐户的传出交易"
+      "description": {
+        "incoming": "此帐户的传入交易",
+        "outgoing": "此帐户的传出交易"
+      }
+    },
+    "distributions": {
+      "title": "连接 {{name}}",
+      "description": "选择你想连接的{{name}}应用程序",
+      "citadel": {
+        "name": "Citadel"
+      },
+      "btcpay": {
+        "name": "BTCPay"
+      },
+      "raspiblitz": {
+        "name": "Raspiblitz"
+      },
+      "mynode": {
+        "name": "myNode"
+      },
+      "start9": {
+        "name": "Start9"
+      },
+      "umbrel": {
+        "name": "Umbrel"
+      }
+    },
+    "confirm_add_account": {
+      "title": "添加帐户",
+      "content": "此网站想要添加一个帐户（{{connector}}）："
     }
   },
   "common": {
@@ -786,10 +810,12 @@
       "open": "打开",
       "confirm": "确认",
       "copy": "复制",
+      "copy_invoice": "复制发票",
       "log_in": "登录",
       "receive_again": "接收另一笔付款",
       "remember": "记住我的选择，不要再问",
-      "transactions": "交易"
+      "transactions": "交易",
+      "more": "更多"
     },
     "errors": {
       "connection_failed": "连接失败",
@@ -800,7 +826,7 @@
     "description_full": "详细描述",
     "password": "密码",
     "settings": "设置",
-    "connected_sites": "",
+    "connected_sites": "已连接的网站",
     "amount": "金额",
     "optional": "可选",
     "description": "描述",
@@ -822,8 +848,21 @@
       "lessThan": "< {{max}}",
       "greaterThan": ">{{min}}"
     },
-    "transactions": "交易",
-    "balance": "余额"
+    "balance": "余额",
+    "wallet": "钱包",
+    "connectors": {
+      "lnd": "LND",
+      "nativelnd": "LND（通过 Tor）",
+      "lndhub": "LNDHub",
+      "nativelndhub": "LNDHub（通过 Tor）",
+      "lnbits": "LNBits",
+      "nativelnbits": "LNBits（通过 Tor）",
+      "galoy": "Galoy",
+      "eclair": "Eclair",
+      "citadel": "Citadel",
+      "nativecitadel": "Citadel（通过 Tor）",
+      "commando": "Commando"
+    }
   },
   "components": {
     "toasts": {
@@ -837,7 +876,7 @@
         "visit_guides": "访问我们的指南以获取更多帮助",
         "what_you_can_do": "以下是你可以执行的操作：",
         "double_check": "仔细检查你的连接详情",
-        "if_ssl_errors": "如果有SSL错误（如ERR_CERT_AUTHORITY_INVALID），点击 \"高级 \"并继续接受证书。"
+        "if_ssl_errors": "如果有SSL错误（如ERR_CERT_AUTHORITY_INVALID），点击 \"高级 \"并继续接受凭证。"
       }
     },
     "account_menu": {
@@ -860,10 +899,10 @@
       },
       "enable_login": {
         "title": "启用网站登录",
-        "subtitle": "网站请求时自动登录，无需确认。"
+        "subtitle": "当网站要求时，无需确认即可自动登录。"
       },
       "edit_allowance": {
-        "title": "编辑限额",
+        "title": "编辑偏好",
         "screen_reader": "限额选项"
       },
       "edit_permissions": "编辑权限"
@@ -887,7 +926,7 @@
     "budget_control": {
       "remember": {
         "label": "保存并设定预算",
-        "description": "你可以设置一个余额，在它用完之前不要求确认付款。"
+        "description": "你可以设置一个预算余额，在它用完之前不要求确认付款。"
       },
       "budget": {
         "label": "预算"
@@ -900,7 +939,7 @@
         "start_scanning": "开始扫描"
       },
       "errors": {
-        "allow_camera_access": "请在设置屏幕中允许相机访问。"
+        "allow_camera_access": "请在设置屏幕中允许摄像头访问。"
       }
     },
     "badge": {
@@ -914,15 +953,21 @@
       "payments": "付款"
     },
     "companion_download_info": {
-      "heading": "你想如何连接到TOR网络？",
+      "heading": "你想如何连接到 TOR 网络？",
       "download": "下载",
       "tor_native": {
         "title": "TOR（本地）",
-        "description": "如果该浏览器已经连接到TOR网络，请选择该选项。"
+        "description": "如果该浏览器已经连线 TOR 网络，请选择该选项。"
       },
       "companion": {
         "title": "配套应用",
         "description": "将浏览器连接到 TOR 网络的轻量级应用程序。"
+      }
+    },
+    "transaction_list": {
+      "tabs": {
+        "incoming": "传入",
+        "outgoing": "传出"
       }
     }
   },
@@ -936,28 +981,28 @@
     "commando": {
       "bkpr-listbalances": "所有当前和历史帐户余额列表。",
       "checkmessage": "验证该签名是由一个给定的节点产生的。",
-      "decode": "解码一个bolt11/bolt12/rune字符串。",
+      "decode": "解码 bolt11/bolt12/rune 字符串。",
       "connect": "与另一个节点建立新的连接。",
       "decodepay": "检查并解析 bolt11 字符串。",
-      "disconnect": "关闭与对等方的现有连接。",
-      "fundchannel": "通过投入资金交易与对等方打开支付渠道。",
+      "disconnect": "关闭与对等体的现有连接。",
+      "fundchannel": "通过投入资金交易与对等体打开支付渠道。",
       "getroute": "寻找支付到闪电节点的最佳途径。",
       "invoice": "创建付款的期望。",
       "listforwards": "列出所有已尝试转发的 htlc。",
       "listfunds": "列出所有可用资金。",
       "listnodes": "列出该节点通过八卦消息了解到的节点。",
       "listpeers": "列出与该节点相连或有开放渠道的节点。",
-      "listsendpays": "获取所有sendpay命令的状态。",
+      "listsendpays": "获取所有 sendpay 命令的状态。",
       "listtransactions": "列出钱包中跟踪的交易。",
       "offer": "创建报价。",
-      "multifundchannel": "通过投入一笔资金交易，与多个节点开通支付渠道。",
+      "multifundchannel": "通过投入一笔资金交易与多个节点开通支付渠道。",
       "pay": "向 BOLT11 发票发送付款。",
       "signmessage": "从这个节点创建一个签名。",
       "keysend": "向另一个节点发送付款。",
       "listinvoices": "获取所有发票的状态。",
-      "getinfo": "获取节点的摘要。",
+      "getinfo": "获取节点摘要。",
       "listoffers": "列出所有报价或获取特定报价。",
-      "setchannel": "配置为渠道宣传的费用/htlc 范围。",
+      "setchannel": "配置为渠道宣传的费用 / htlc 范围。",
       "sendpay": "通过途径发送付款。",
       "feerates": "返回 CLN 将使用的费率。",
       "listpays": "获取所有支付命令的状态。"
@@ -965,16 +1010,16 @@
     "lnc": {
       "getnodeinfo": "获取节点的渠道信息。",
       "gettransactions": "获取与该钱包相关的所有交易的列表。",
-      "listpeers": "获取所有当前活跃的对等点的列表。",
+      "listpeers": "列出所有当前活跃的对等体。",
       "addinvoice": "创建新发票。",
       "getinfo": "获取节点信息。",
       "listinvoices": "获取所有发票的列表。",
       "walletbalance": "获取钱包的总未花费输出。",
-      "connectpeer": "建立与远程对等点的连接。",
-      "disconnectpeer": "断开与远程对等点的连接。",
+      "connectpeer": "与远程对等体连线。",
+      "disconnectpeer": "与远程对等体断线。",
       "estimatefee": "估算交易的费率和总费用。",
       "getnetworkinfo": "获取有关已知渠道图的基本统计信息。",
-      "listpayments": "获取所有付款的列表。",
+      "listpayments": "列出所有付款。",
       "lookupinvoice": "查看发票详情。",
       "listchannels": "获取所有开放频道的描述。",
       "channelbalance": "获取所有开放渠道的总资金报告。",
@@ -993,25 +1038,25 @@
       "queryroutes": "查询可能的途径。",
       "verifymessage": "通过消息验证签名。",
       "lookupinvoice": "查看发票详情。",
-      "listpeers": "获取所有当前活跃的对等点的列表。",
+      "listpeers": "列出所有当前活跃的对等体。",
       "listinvoices": "获取所有发票的列表。",
       "channelbalance": "获取所有开放渠道的总资金报告。",
-      "walletbalance": "获取钱包的总未花费输出。",
-      "disconnectpeer": "断开与远程对等点的连接。",
+      "walletbalance": "获取钱包中的总未花费输出。",
+      "disconnectpeer": "与远程对等体断线。",
       "estimatefee": "估算交易的费率和总费用。",
       "getchaninfo": "获取给定渠道的网络公告。",
       "getnetworkinfo": "获取有关已知渠道图的基本统计信息。",
       "getnodeinfo": "获取节点的渠道信息。",
-      "gettransactions": "获取与该钱包相关的所有交易的列表。",
-      "listpayments": "获取所有付款的列表。",
+      "gettransactions": "列出与该钱包相关的所有交易。",
+      "listpayments": "列出所有付款。",
       "decodepayreq": "解码支付请求字符串。",
       "routermc": "读取内部任务控制状态。",
       "addinvoice": "创建新发票。",
       "getinfo": "获取节点信息。",
-      "listchannels": "获取所有开放频道的描述。",
-      "connectpeer": "建立与远程对等点的连接。",
+      "listchannels": "获取所有开放渠道的描述。",
+      "connectpeer": "与远程对等体连线。",
       "openchannel": "开通新渠道。",
-      "addholdinvoice": "创建新的HODL发票。",
+      "addholdinvoice": "创建新的 HODL 发票。",
       "settleinvoice": "结算已接受的发票。"
     }
   }

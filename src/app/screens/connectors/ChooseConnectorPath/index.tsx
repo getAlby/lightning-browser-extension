@@ -2,23 +2,17 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import Button from "~/app/components/Button";
 import ConnectorPath from "~/app/components/ConnectorPath";
-import getConnectorRoutes from "~/app/router/connectorRoutes";
+import { getConnectorRoutes } from "~/app/router/connectorRoutes";
 import ConnectAlby from "~/app/screens/connectors/ConnectAlby";
 import i18n from "~/i18n/i18nConfig";
 
 import alby from "/static/assets/icons/alby.png";
 
 type Props = {
-  title: string;
-  description: string;
   fromWelcome?: boolean;
 };
 
-export default function ChooseConnectorPath({
-  title,
-  description,
-  fromWelcome,
-}: Props) {
+export default function ChooseConnectorPath({ fromWelcome }: Props) {
   let connectorRoutes = getConnectorRoutes();
 
   i18n.on("languageChanged", () => {
@@ -29,18 +23,9 @@ export default function ChooseConnectorPath({
   });
 
   return (
-    <div className="relative mt-14 lg:grid lg:gap-8 text-center">
+    <div className="relative mt-10 lg:grid lg:gap-8 text-center">
       <div className="relative">
-        <div className="w-full flex flex-col justify-center items-center">
-          <h1 className="text-3xl font-bold dark:text-white">{title}</h1>
-          {description && (
-            <p className="text-gray-500 mt-10 dark:text-neutral-400 w-96 text-center">
-              {description}
-            </p>
-          )}
-        </div>
-
-        <div className="grid lg:grid-cols-2 gap-4 lg:gap-8 xl:gap-18 mt-8 mb-4 lg:mt-14 lg:mb-12">
+        <div className="grid lg:grid-cols-2 gap-10 mb-4">
           <ConnectorPath
             title={t("alby.title")}
             description={t("alby.description")}

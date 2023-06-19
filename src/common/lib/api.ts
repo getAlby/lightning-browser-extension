@@ -111,7 +111,7 @@ export const getPayments = (options?: { limit?: number }) =>
   msg.request<{ payments: DbPayment[] }>("getPayments", options);
 export const getPaymentsByAccount = (options: {
   accountId: Account["id"];
-  limit: number;
+  limit?: number;
 }) => msg.request<{ payments: DbPayment[] }>("getPaymentsByAccount", options);
 export const getSettings = () => msg.request<SettingsStorage>("getSettings");
 export const getStatus = () => msg.request<StatusRes>("status");
@@ -152,6 +152,7 @@ export default {
   getAllowance,
   updateAllowance,
   getPayments,
+  getPaymentsByAccount,
   getSettings,
   getStatus,
   makeInvoice,

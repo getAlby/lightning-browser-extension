@@ -4,11 +4,12 @@ import type { Invoice, MessageInvoices } from "~/types";
 
 const invoices = async (message: MessageInvoices) => {
   const isSettled = message.args.isSettled;
+  const limit = message.args.limit;
 
   const connector = await state.getState().getConnector();
   try {
     const result = await connector.getInvoices();
-    const invoices: Invoice[] = result.data.invoices
+    let invoices: Invoice[] = result.data.invoices
       .filter((invoice) => (isSettled ? invoice.settled : !invoice.settled))
       .map((invoice) => {
         const boostagram = utils.getBoostagramFromInvoiceCustomRecords(
@@ -20,6 +21,10 @@ const invoices = async (message: MessageInvoices) => {
         }
         return { ...invoice, boostagram, type };
       });
+
+    if (limit) {
+      invoices = invoices.slice(0, limit);
+    }
 
     return {
       data: {

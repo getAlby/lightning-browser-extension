@@ -18,7 +18,7 @@
   - Opera\
      `$ dotenv yarn run dev:opera`
 
-  **NOTE:** by default, the extension built this way will talk to the testnet API (which runs under [app.regtest.getalby.com](https://app.regtest.getalby.com/user)). In case you want to do manual tests against the mainnet API, update your .env file (see .env.example)
+  **NOTE:** by default, the extension built this way will talk to the testnet API (which runs under [app.regtest.getalby.com](https://app.regtest.getalby.com/api)). In case you want to do manual tests against the mainnet API, update your .env file (see .env.example)
 
 - **Chrome**
 
