@@ -39,30 +39,25 @@ function NostrAdvancedSettings() {
   const { id } = useParams();
 
   const fetchData = useCallback(async () => {
-    try {
-      if (id) {
-        const priv = (await msg.request("nostr/getPrivateKey", {
-          id,
-        })) as string;
-        if (priv) {
-          setCurrentPrivateKey(priv);
-        }
-
-        const accountMnemonic = (await msg.request("getMnemonic", {
-          id,
-        })) as string;
-        if (accountMnemonic) {
-          setMnemonic(accountMnemonic);
-        }
-
-        if (priv) {
-          const keyOrigin = await getNostrKeyOrigin(priv, accountMnemonic);
-          setNostrKeyOrigin(keyOrigin);
-        }
+    if (id) {
+      const priv = (await msg.request("nostr/getPrivateKey", {
+        id,
+      })) as string;
+      if (priv) {
+        setCurrentPrivateKey(priv);
       }
-    } catch (e) {
-      console.error(e);
-      if (e instanceof Error) toast.error(`Error: ${e.message}`);
+
+      const accountMnemonic = (await msg.request("getMnemonic", {
+        id,
+      })) as string;
+      if (accountMnemonic) {
+        setMnemonic(accountMnemonic);
+      }
+
+      if (priv) {
+        const keyOrigin = await getNostrKeyOrigin(priv, accountMnemonic);
+        setNostrKeyOrigin(keyOrigin);
+      }
     }
   }, [id]);
 
