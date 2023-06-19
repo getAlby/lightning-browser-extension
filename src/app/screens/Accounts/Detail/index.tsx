@@ -2,12 +2,7 @@ import {
   CaretLeftIcon,
   ExportIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
-import {
-  CopyIcon,
-  CrossIcon,
-  HiddenIcon,
-  VisibleIcon,
-} from "@bitcoin-design/bitcoin-icons-react/outline";
+import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import Button from "@components/Button";
 import Container from "@components/Container";
 import Header from "@components/Header";
@@ -19,19 +14,26 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import type { FormEvent } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Trans, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import Modal from "react-modal";
 import QRCode from "react-qr-code";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import Alert from "~/app/components/Alert";
 import Avatar from "~/app/components/Avatar";
+import Badge from "~/app/components/Badge";
+import InputCopyButton from "~/app/components/InputCopyButton";
+import MenuDivider from "~/app/components/Menu/MenuDivider";
 import { useAccount } from "~/app/context/AccountContext";
 import { useAccounts } from "~/app/context/AccountsContext";
 import { useSettings } from "~/app/context/SettingsContext";
+import {
+  NostrKeyOrigin,
+  getNostrKeyOrigin,
+} from "~/app/utils/getNostrKeyOrigin";
 import api, { GetAccountRes } from "~/common/lib/api";
 import msg from "~/common/lib/msg";
-import nostrlib from "~/common/lib/nostr";
-import Nostr from "~/extension/background-script/nostr";
+import nostr from "~/common/lib/nostr";
 import type { Account } from "~/types";
 
 type AccountAction = Omit<Account, "connector" | "config" | "nostrPrivateKey">;
@@ -59,20 +61,15 @@ function AccountDetail() {
   });
   const [accountName, setAccountName] = useState("");
 
+  // TODO: add hooks useMnemonic, useNostrPrivateKey, ...
+  const [mnemonic, setMnemonic] = useState("");
   const [currentPrivateKey, setCurrentPrivateKey] = useState("");
-  const [nostrPrivateKey, setNostrPrivateKey] = useState("");
   const [nostrPublicKey, setNostrPublicKey] = useState("");
-  const [nostrPrivateKeyVisible, setNostrPrivateKeyVisible] = useState(false);
-  const [privateKeyCopyLabel, setPrivateKeyCopyLabel] = useState(
-    tCommon("actions.copy") as string
-  );
-  const [publicKeyCopyLabel, setPublicKeyCopyLabel] = useState(
-    tCommon("actions.copy") as string
-  );
+  const [nostrKeyOrigin, setNostrKeyOrigin] =
+    useState<NostrKeyOrigin>("unknown");
 
   const [exportLoading, setExportLoading] = useState(false);
   const [exportModalIsOpen, setExportModalIsOpen] = useState(false);
-  const [nostrKeyModalIsOpen, setNostrKeyModalIsOpen] = useState(false);
 
   const fetchData = useCallback(async () => {
     try {
@@ -80,11 +77,7 @@ function AccountDetail() {
         const response = await msg.request<GetAccountRes>("getAccount", {
           id,
         });
-        // for backwards compatibility
-        // TODO: remove. if you ask when, then it's probably now.
-        if (!response.id) {
-          response.id = id;
-        }
+
         setAccount(response);
         setAccountName(response.name);
 
@@ -93,6 +86,17 @@ function AccountDetail() {
         })) as string;
         if (priv) {
           setCurrentPrivateKey(priv);
+        }
+
+        const accountMnemonic = (await msg.request("getMnemonic", {
+          id,
+        })) as string;
+        if (accountMnemonic) {
+          setMnemonic(accountMnemonic);
+        }
+        if (priv) {
+          const keyOrigin = await getNostrKeyOrigin(priv, accountMnemonic);
+          setNostrKeyOrigin(keyOrigin);
         }
       }
     } catch (e) {
@@ -103,82 +107,6 @@ function AccountDetail() {
 
   function closeExportModal() {
     setExportModalIsOpen(false);
-  }
-
-  function closeNostrKeyModal() {
-    setNostrKeyModalIsOpen(false);
-  }
-
-  function generatePublicKey(priv: string) {
-    const nostr = new Nostr(priv);
-    const pubkeyHex = nostr.getPublicKey();
-    return nostrlib.hexToNip19(pubkeyHex, "npub");
-  }
-
-  async function generateNostrPrivateKey(random?: boolean) {
-    const selectedAccount = await auth.fetchAccountInfo();
-
-    if (!random && selectedAccount?.id !== id) {
-      alert(
-        `Please match the account in the account dropdown at the top with this account to derive keys.`
-      );
-      closeNostrKeyModal();
-      return;
-    }
-    // check with current selected account
-    const result = await msg.request(
-      "nostr/generatePrivateKey",
-      random
-        ? {
-            type: "random",
-          }
-        : undefined
-    );
-    saveNostrPrivateKey(result.privateKey as string);
-    closeNostrKeyModal();
-  }
-
-  async function saveNostrPrivateKey(nostrPrivateKey: string) {
-    nostrPrivateKey = nostrlib.normalizeToHex(nostrPrivateKey);
-
-    if (nostrPrivateKey === currentPrivateKey) return;
-
-    if (
-      currentPrivateKey &&
-      prompt(t("nostr.private_key.warning"))?.toLowerCase() !==
-        account?.name?.toLowerCase()
-    ) {
-      toast.error(t("nostr.private_key.failed_to_remove"));
-      return;
-    }
-
-    try {
-      if (!account) {
-        // type guard
-        throw new Error("No account available");
-      }
-
-      if (nostrPrivateKey) {
-        // Validate the private key before saving
-        generatePublicKey(nostrPrivateKey);
-        nostrlib.hexToNip19(nostrPrivateKey, "nsec");
-
-        await msg.request("nostr/setPrivateKey", {
-          id: account.id,
-          privateKey: nostrPrivateKey,
-        });
-        toast.success(t("nostr.private_key.success"));
-      } else {
-        await msg.request("nostr/removePrivateKey", {
-          id: account.id,
-        });
-        toast.success(t("nostr.private_key.successfully_removed"));
-      }
-
-      setCurrentPrivateKey(nostrPrivateKey);
-    } catch (e) {
-      if (e instanceof Error) toast.error(e.message);
-    }
   }
 
   async function updateAccountName({ id, name }: AccountAction) {
@@ -210,7 +138,10 @@ function AccountDetail() {
   }
 
   async function removeAccount({ id, name }: AccountAction) {
-    if (window.confirm(t("remove.confirm", { name }))) {
+    if (
+      window.prompt(t("remove.confirm", { name }))?.toLowerCase() ==
+      accountName.toLowerCase()
+    ) {
       let nextAccountId;
       let accountIds = Object.keys(accounts);
       if (auth.account?.id === id && accountIds.length > 1) {
@@ -227,6 +158,23 @@ function AccountDetail() {
       } else {
         window.close();
       }
+    } else {
+      toast.error(t("remove.error"));
+    }
+  }
+  async function removeMnemonic({ id, name }: AccountAction) {
+    if (
+      window.prompt(t("remove_secretkey.confirm", { name }))?.toLowerCase() ==
+      accountName.toLowerCase()
+    ) {
+      await msg.request("setMnemonic", {
+        id,
+        mnemonic: null,
+      });
+      setMnemonic("");
+      toast.success(t("remove_secretkey.success"));
+    } else {
+      toast.error(t("remove.error"));
     }
   }
 
@@ -241,10 +189,7 @@ function AccountDetail() {
   useEffect(() => {
     try {
       setNostrPublicKey(
-        currentPrivateKey ? generatePublicKey(currentPrivateKey) : ""
-      );
-      setNostrPrivateKey(
-        currentPrivateKey ? nostrlib.hexToNip19(currentPrivateKey, "nsec") : ""
+        currentPrivateKey ? nostr.generatePublicKey(currentPrivateKey) : ""
       );
     } catch (e) {
       if (e instanceof Error)
@@ -396,6 +341,7 @@ function AccountDetail() {
                 <TextField
                   id="name"
                   label={t("name.title")}
+                  placeholder={t("name.placeholder")}
                   type="text"
                   value={accountName}
                   onChange={(event) => {
@@ -415,152 +361,99 @@ function AccountDetail() {
               </div>
             </form>
           </div>
+
           <h2 className="text-2xl mt-12 font-bold dark:text-white">
-            {t("nostr.title")}
+            {t("mnemonic.title")}
           </h2>
           <p className="mb-6 text-gray-500 dark:text-neutral-500 text-sm">
-            <a
-              href="https://github.com/nostr-protocol/nostr"
-              target="_blank"
-              rel="noreferrer noopener"
-              className="underline"
-            >
-              {t("nostr.title")}
-            </a>{" "}
-            {t("nostr.hint")}
+            {t("mnemonic.description")}
           </p>
-          <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 dark:bg-surface-02dp">
-            <div className="py-4 flex justify-between items-center">
-              <div>
-                <span className="text-gray-900 dark:text-white font-medium">
-                  {t("nostr.private_key.title")}
-                </span>
-                <p className="text-gray-500 mr-1 dark:text-neutral-500 text-sm">
-                  <Trans
-                    i18nKey={"nostr.private_key.subtitle"}
-                    t={t}
-                    components={[
-                      // eslint-disable-next-line react/jsx-key
-                      <a
-                        className="underline"
-                        target="_blank"
-                        rel="noreferrer noopener"
-                        href="https://guides.getalby.com/overall-guide/alby-browser-extension/features/nostr"
-                      ></a>,
-                    ]}
-                  />
+
+          <div className="shadow bg-white sm:rounded-md sm:overflow-hidden p-6 dark:bg-surface-02dp flex flex-col gap-4">
+            {mnemonic && (
+              <Alert type="warn">{t("mnemonic.backup.warning")}</Alert>
+            )}
+
+            <div className="flex justify-between items-end">
+              <div className="w-9/12">
+                <p className="text-gray-900 dark:text-white font-medium">
+                  {t(
+                    mnemonic
+                      ? "mnemonic.backup.title"
+                      : "mnemonic.generate.title"
+                  )}
+                </p>
+                <p className="text-gray-500 text-sm dark:text-neutral-500">
+                  {t("mnemonic.description2")}
                 </p>
               </div>
-              <div className="w-1/5 flex-none ml-6">
-                <Button
-                  label={t("nostr.actions.generate")}
-                  onClick={() => setNostrKeyModalIsOpen(true)}
-                  fullWidth
-                />
-              </div>
-            </div>
-            <div className="rounded-md font-medium p-4 mb-4 text-orange-700 bg-orange-50 dark:text-orange-400 dark:bg-orange-900">
-              {t("nostr.private_key.backup")}
-            </div>
-            <form
-              onSubmit={(e: FormEvent) => {
-                e.preventDefault();
-                saveNostrPrivateKey(nostrPrivateKey);
-              }}
-              className="mb-4 flex justify-between items-end"
-            >
-              <div className="w-7/12">
-                <TextField
-                  id="nostrPrivateKey"
-                  label={t("nostr.private_key.label")}
-                  type={nostrPrivateKeyVisible ? "text" : "password"}
-                  value={nostrPrivateKey}
-                  onChange={(event) => {
-                    setNostrPrivateKey(event.target.value.trim());
-                  }}
-                  endAdornment={
-                    <button
-                      type="button"
-                      tabIndex={-1}
-                      className="flex justify-center items-center w-10 h-8"
-                      onClick={() => {
-                        setNostrPrivateKeyVisible(!nostrPrivateKeyVisible);
-                      }}
-                    >
-                      {nostrPrivateKeyVisible ? (
-                        <HiddenIcon className="h-6 w-6" />
-                      ) : (
-                        <VisibleIcon className="h-6 w-6" />
-                      )}
-                    </button>
-                  }
-                />
-              </div>
-              <div className="w-1/5 flex-none mx-4">
-                <Button
-                  icon={<CopyIcon className="w-6 h-6 mr-2" />}
-                  label={privateKeyCopyLabel}
-                  onClick={async () => {
-                    try {
-                      navigator.clipboard.writeText(nostrPrivateKey);
-                      setPrivateKeyCopyLabel(tCommon("copied"));
-                      setTimeout(() => {
-                        setPrivateKeyCopyLabel(tCommon("actions.copy"));
-                      }, 1000);
-                    } catch (e) {
-                      if (e instanceof Error) {
-                        toast.error(e.message);
-                      }
-                    }
-                  }}
-                  fullWidth
-                />
-              </div>
-              <div className="w-1/5 flex-none">
-                <Button
-                  type="submit"
-                  label={tCommon("actions.save")}
-                  disabled={
-                    nostrlib.normalizeToHex(nostrPrivateKey) ===
-                    currentPrivateKey
-                  }
-                  primary
-                  fullWidth
-                />
-              </div>
-            </form>
 
-            <div className="mb-4 flex justify-between items-end">
+              <div className="w-1/5 flex-none">
+                <Link to="secret-key/backup">
+                  <Button
+                    label={t(
+                      mnemonic
+                        ? "mnemonic.backup.button"
+                        : "mnemonic.generate.button"
+                    )}
+                    primary
+                    fullWidth
+                  />
+                </Link>
+              </div>
+            </div>
+            <MenuDivider />
+            <div className="flex justify-between items-end">
               <div className="w-7/12">
+                <p className="text-gray-900 dark:text-white font-medium">
+                  {t("mnemonic.import.title")}
+                </p>
+                <p className="text-gray-500 text-sm dark:text-neutral-500">
+                  {t("mnemonic.import.description")}
+                </p>
+              </div>
+
+              <div className="w-1/5 flex-none">
+                <Link to="secret-key/import">
+                  <Button
+                    label={t("mnemonic.import.button")}
+                    primary
+                    fullWidth
+                  />
+                </Link>
+              </div>
+            </div>
+            <MenuDivider />
+            <div className="mb-4 flex justify-between items-end">
+              <div className="w-7/12 flex items-center gap-2">
                 <TextField
                   id="nostrPublicKey"
                   label={t("nostr.public_key.label")}
                   type="text"
                   value={nostrPublicKey}
                   disabled
+                  endAdornment={
+                    nostrPublicKey && <InputCopyButton value={nostrPublicKey} />
+                  }
                 />
+                {nostrPublicKey && nostrKeyOrigin !== "secret-key" && (
+                  <Badge
+                    label="imported"
+                    color="green-bitcoin"
+                    textColor="white"
+                  />
+                )}
               </div>
-              <div className="w-1/5 flex-none mx-4">
-                <Button
-                  icon={<CopyIcon className="w-6 h-6 mr-2" />}
-                  label={publicKeyCopyLabel}
-                  onClick={async () => {
-                    try {
-                      navigator.clipboard.writeText(nostrPublicKey);
-                      setPublicKeyCopyLabel(tCommon("copied"));
-                      setTimeout(() => {
-                        setPublicKeyCopyLabel(tCommon("actions.copy"));
-                      }, 1000);
-                    } catch (e) {
-                      if (e instanceof Error) {
-                        toast.error(e.message);
-                      }
-                    }
-                  }}
-                  fullWidth
-                />
+
+              <div className="w-1/5 flex-none">
+                <Link to="nostr">
+                  <Button
+                    label={t("nostr.advanced_settings.label")}
+                    primary
+                    fullWidth
+                  />
+                </Link>
               </div>
-              <div className="w-1/5 flex-none d-none"></div>
             </div>
           </div>
 
@@ -572,6 +465,25 @@ function AccountDetail() {
             <div className="flex-grow border-t border-gray-300 dark:border-gray-700"></div>
           </div>
           <div className="shadow bg-white sm:rounded-md sm:overflow-hidden mb-5 px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">
+            {mnemonic && (
+              <Setting
+                title={t("remove_secretkey.title")}
+                subtitle={t("remove_secretkey.subtitle")}
+              >
+                <div className="w-64">
+                  <Button
+                    onClick={() => {
+                      removeMnemonic({
+                        id: account.id,
+                        name: account.name,
+                      });
+                    }}
+                    label={t("actions.remove_secretkey")}
+                    fullWidth
+                  />
+                </div>
+              </Setting>
+            )}
             <Setting title={t("remove.title")} subtitle={t("remove.subtitle")}>
               <div className="w-64">
                 <Button
@@ -587,57 +499,6 @@ function AccountDetail() {
               </div>
             </Setting>
           </div>
-
-          <Modal
-            ariaHideApp={false}
-            closeTimeoutMS={200}
-            isOpen={nostrKeyModalIsOpen}
-            onRequestClose={closeNostrKeyModal}
-            contentLabel={t("nostr.generate_keys.screen_reader")}
-            overlayClassName="bg-black bg-opacity-25 fixed inset-0 flex justify-center items-center p-5"
-            className="rounded-lg bg-white w-full max-w-lg"
-          >
-            <div className="p-5 flex justify-between dark:bg-surface-02dp">
-              <h2 className="text-2xl font-bold dark:text-white">
-                {t("nostr.generate_keys.title")}
-              </h2>
-              <button onClick={closeNostrKeyModal}>
-                <CrossIcon className="w-6 h-6 dark:text-white" />
-              </button>
-            </div>
-            <div className="p-5 border-t border-b dark:text-white border-gray-200 dark:bg-surface-02dp dark:border-neutral-500">
-              <Trans
-                i18nKey={"nostr.generate_keys.hint"}
-                t={t}
-                components={[
-                  // eslint-disable-next-line react/jsx-key
-                  <a
-                    className="underline"
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    href="https://guides.getalby.com/overall-guide/alby-browser-extension/features/nostr"
-                  ></a>,
-                ]}
-              />
-            </div>
-            <div className="p-4 dark:bg-surface-02dp">
-              <div className="flex flex-row justify-between">
-                <Button
-                  type="submit"
-                  onClick={() => generateNostrPrivateKey(true)}
-                  label={t("nostr.generate_keys.actions.random_keys")}
-                  primary
-                  halfWidth
-                />
-                <Button
-                  type="submit"
-                  onClick={() => generateNostrPrivateKey()}
-                  label={t("nostr.generate_keys.actions.derived_keys")}
-                  halfWidth
-                />
-              </div>
-            </div>
-          </Modal>
         </div>
       </Container>
     </div>

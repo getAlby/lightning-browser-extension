@@ -369,6 +369,40 @@ function Settings() {
         </Setting>
       </div>
 
+      <h2 className="text-2xl mt-12 font-bold dark:text-white">
+        {t("bitcoin.title")}
+      </h2>
+      <p className="mb-6 text-gray-500 dark:text-neutral-500 text-sm">
+        {t("bitcoin.hint")}
+      </p>
+      <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">
+        <Setting
+          title={t("bitcoin.network.title")}
+          subtitle={t("bitcoin.network.subtitle")}
+        >
+          {!isLoading && (
+            <div className="w-64">
+              <Select
+                name="network"
+                value={settings.bitcoinNetwork}
+                onChange={async (event) => {
+                  await saveSetting({
+                    bitcoinNetwork: event.target.value,
+                  });
+                }}
+              >
+                <option value="bitcoin">
+                  {t("bitcoin.network.options.bitcoin")}
+                </option>
+                <option value="regtest">
+                  {t("bitcoin.network.options.regtest")}
+                </option>
+              </Select>
+            </div>
+          )}
+        </Setting>
+      </div>
+
       <div className="relative flex py-5 mt-5 items-center">
         <div className="flex-grow border-t border-gray-300 dark:border-gray-700"></div>
         <span className="flex-shrink mx-4 text-gray-500 dark:text-gray-400 fw-bold">

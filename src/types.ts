@@ -17,6 +17,7 @@ export interface Account {
   config: string;
   name: string;
   nostrPrivateKey?: string | null;
+  mnemonic?: string | null;
 }
 
 export interface Accounts {
@@ -152,6 +153,10 @@ export type NavigationState = {
       method: string;
       description: string;
     };
+    derivationPath?: string;
+    index?: number;
+    num?: number;
+    change?: boolean;
   };
   isPrompt?: true; // only passed via Prompt.tsx
   action: string;
@@ -426,10 +431,12 @@ export interface MessageCurrencyRateGet extends MessageDefault {
   action: "getCurrencyRate";
 }
 
+// TODO: add Nostr Prefix
 export interface MessagePublicKeyGet extends MessageDefault {
   action: "getPublicKeyOrPrompt";
 }
 
+// TODO: add Nostr Prefix
 export interface MessagePrivateKeyGet extends MessageDefault {
   args?: {
     id?: Account["id"];
@@ -437,6 +444,7 @@ export interface MessagePrivateKeyGet extends MessageDefault {
   action: "getPrivateKey";
 }
 
+// TODO: add Nostr Prefix
 export interface MessagePrivateKeyGenerate extends MessageDefault {
   args?: {
     type?: "random";
@@ -444,6 +452,7 @@ export interface MessagePrivateKeyGenerate extends MessageDefault {
   action: "generatePrivateKey";
 }
 
+// TODO: add Nostr Prefix
 export interface MessagePrivateKeySet extends MessageDefault {
   args: {
     id?: Account["id"];
@@ -452,11 +461,27 @@ export interface MessagePrivateKeySet extends MessageDefault {
   action: "setPrivateKey";
 }
 
+// TODO: add Nostr Prefix
 export interface MessagePrivateKeyRemove extends MessageDefault {
   args: {
     id?: Account["id"];
   };
   action: "removePrivateKey";
+}
+
+export interface MessageMnemonicSet extends MessageDefault {
+  args: {
+    id?: Account["id"];
+    mnemonic: string;
+  };
+  action: "setMnemonic";
+}
+
+export interface MessageMnemonicGet extends MessageDefault {
+  args?: {
+    id?: Account["id"];
+  };
+  action: "getMnemonic";
 }
 
 export interface MessageSignEvent extends MessageDefault {
@@ -487,6 +512,12 @@ export interface MessageDecryptGet extends MessageDefault {
     ciphertext: string;
   };
   action: "decrypt";
+}
+
+export interface MessageGetAddress extends MessageDefault {
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  args: {};
+  action: "getAddress";
 }
 
 export interface LNURLChannelServiceResponse {
@@ -717,6 +748,7 @@ export interface SettingsStorage {
   exchange: SupportedExchanges;
   nostrEnabled: boolean;
   closedTips: TIPS[];
+  bitcoinNetwork: "bitcoin" | "regtest";
 }
 
 export interface Badge {
@@ -786,4 +818,11 @@ export type OAuthToken = {
   access_token: string;
   refresh_token: string;
   expires_at: number;
+};
+
+export type BitcoinAddress = {
+  publicKey: string;
+  derivationPath: string;
+  index: number;
+  address: string;
 };

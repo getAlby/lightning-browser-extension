@@ -40,7 +40,7 @@ export default function Tips() {
           border: "border-purple-500",
           arrow: "text-purple-500",
           backgroundIcon: <MnemonicTipCardIcon />,
-          link: `/accounts/${accountId}`,
+          link: `/accounts/${accountId}/secret-key/backup`,
         },
       } as const),
     [accountId]
