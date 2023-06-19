@@ -176,9 +176,7 @@ export default class Alby implements Connector {
   signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {
     // signMessage requires proof of ownership of a non-custodial node
     // this is not the case in the Alby connector which connects to Lndhub
-    throw new Error(
-      "SignMessage is unsupported. Please add a secret key to your account to use LNURL-auth."
-    );
+    throw new Error("SignMessage is not supported by Alby accounts.");
   }
 
   async makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse> {

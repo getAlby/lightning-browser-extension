@@ -4,13 +4,15 @@ import Hex from "crypto-js/enc-hex";
 import hmacSHA256 from "crypto-js/hmac-sha256";
 import sha256 from "crypto-js/sha256";
 import PubSub from "pubsub-js";
+import { decryptData } from "~/common/lib/crypto";
+import { signMessage } from "~/common/lib/mnemonic";
 import utils from "~/common/lib/utils";
 import HashKeySigner from "~/common/utils/signer";
 import state from "~/extension/background-script/state";
 import {
   AuthResponseObject,
-  LnurlAuthResponse,
   LNURLDetails,
+  LnurlAuthResponse,
   MessageLnurlAuth,
   OriginData,
 } from "~/types";
@@ -35,18 +37,41 @@ export async function authFunction({
       `LNURL-AUTH FAIL: incorrect tag: ${lnurlDetails.tag} was used`
     );
 
-  const connector = await state.getState().getConnector();
+  const account = await state.getState().getAccount();
+  if (!account) {
+    throw new Error("LNURL-AUTH FAIL: no account selected");
+  }
 
-  // Note: the signMessage call can fail / this is currently not caught.
-  const signResponse = await connector.signMessage({
-    message: LNURLAUTH_CANONICAL_PHRASE,
-    key_loc: {
-      key_family: 0,
-      key_index: 0,
-    },
-  });
+  let lnSignature: string;
 
-  const lnSignature = signResponse.data.signature;
+  // use secret key for LNURL auth
+  if (
+    account.connector ===
+    "alby" /* OR TODO: lnurl auth toggle is on for current account && mnemonic exists */
+  ) {
+    if (!account.mnemonic) {
+      throw new Error("Please set a secret key to use LNURL auth");
+    }
+    const password = await state.getState().password();
+    if (!password) {
+      throw new Error("No password set");
+    }
+    const mnemonic = decryptData(account.mnemonic, password);
+    lnSignature = await signMessage(mnemonic, LNURLAUTH_CANONICAL_PHRASE);
+  } else {
+    const connector = await state.getState().getConnector();
+
+    // Note: the signMessage call can fail / this is currently not caught.
+    const signResponse = await connector.signMessage({
+      message: LNURLAUTH_CANONICAL_PHRASE,
+      key_loc: {
+        key_family: 0,
+        key_index: 0,
+      },
+    });
+
+    lnSignature = signResponse.data.signature;
+  }
 
   // make sure we got a signature
   if (!lnSignature) {

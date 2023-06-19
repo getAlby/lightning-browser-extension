@@ -1,6 +1,8 @@
 import * as secp256k1 from "@noble/secp256k1";
 import { HDKey } from "@scure/bip32";
 import * as bip39 from "@scure/bip39";
+import Hex from "crypto-js/enc-hex";
+import sha256 from "crypto-js/sha256";
 
 export const NOSTR_DERIVATION_PATH = "m/44'/1237'/0'/0/0"; // NIP-06
 export const BTC_TAPROOT_DERIVATION_PATH = "m/86'/0'/0'/0/0";
@@ -28,4 +30,16 @@ export function derivePublicKey(mnemonic: string, path: string) {
     throw new Error("invalid derived public key");
   }
   return secp256k1.utils.bytesToHex(publicKeyBytes);
+}
+
+export async function signMessage(mnemonic: string, message: string) {
+  const seed = bip39.mnemonicToSeedSync(mnemonic);
+  const hdkey = HDKey.fromMasterSeed(seed);
+  if (!hdkey.privateKey) {
+    throw new Error("Could not generate private key from mnemonic");
+  }
+
+  const messageHex = sha256(message).toString(Hex);
+  const signedMessageBytes = await secp256k1.sign(messageHex, hdkey.privateKey);
+  return secp256k1.utils.bytesToHex(signedMessageBytes);
 }
