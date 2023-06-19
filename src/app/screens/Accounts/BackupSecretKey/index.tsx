@@ -108,12 +108,6 @@ function BackupSecretKey() {
               }
               title={t("backup.protocols.nostr")}
             />
-            <ProtocolListItem
-              icon={
-                <OrdinalsIcon className="text-gray-500 dark:text-neutral-500" />
-              }
-              title={t("backup.protocols.ordinals")}
-            />
           </div>
 
           <p className="mb-8 text-gray-500 dark:text-neutral-500">
