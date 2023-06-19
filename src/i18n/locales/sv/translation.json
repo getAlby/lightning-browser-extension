@@ -738,12 +738,16 @@
         "title": "Din Alby plånbok är redo",
         "description": "Några tips för att få igång dig'🐝",
         "top_up_wallet": {
-          "title": "⚡️ Fyll på plånboken",
-          "description": "Skapa en lightning-faktura, skicka lite bitcoin till dig själv och börja använda Alby i lightnings ekosystem"
+          "title": "Köp Bitcoin",
+          "description": "Behöver du en påfyllning?\nVi hjälper dig!"
         },
         "demo": {
-          "title": "🕹️ Testa Alby Demo",
-          "description": "Upptäck allt du kan göra med Alby på vår demowebbplats"
+          "title": "Alby Demo",
+          "description": "Upptäck Albys funktioner\npå vår demowebbplats"
+        },
+        "mnemonic": {
+          "title": "Nostr",
+          "description": "Planerar du att använda Nostr?\nSkapa dina nycklar nu."
         }
       },
       "title": "Utforska Lightnings ⚡️ Eco system",

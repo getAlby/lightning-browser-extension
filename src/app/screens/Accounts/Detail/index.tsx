@@ -19,6 +19,7 @@ import Modal from "react-modal";
 import QRCode from "react-qr-code";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import Alert from "~/app/components/Alert";
 import Avatar from "~/app/components/Avatar";
 import Badge from "~/app/components/Badge";
 import InputCopyButton from "~/app/components/InputCopyButton";
@@ -370,9 +371,7 @@ function AccountDetail() {
 
           <div className="shadow bg-white sm:rounded-md sm:overflow-hidden p-6 dark:bg-surface-02dp flex flex-col gap-4">
             {mnemonic && (
-              <div className="rounded-md font-medium p-4 text-orange-700 bg-orange-50 dark:text-orange-400 dark:bg-orange-900">
-                {t("mnemonic.backup.warning")}
-              </div>
+              <Alert type="warn">{t("mnemonic.backup.warning")}</Alert>
             )}
 
             <div className="flex justify-between items-end">

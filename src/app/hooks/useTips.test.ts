@@ -34,14 +34,14 @@ describe("useTips", () => {
   test("should not have top up wallet tip when using a non-alby account", async () => {
     tmpAccount = { id: "1", name: "LND account", alias: "" };
     const { tips } = useTips();
-    expect(tips.length).toBe(2);
+    expect(tips.length).toBe(1); // mnemonic
     const hasTopUpWallet = tips.some((tip) => tip === TIPS.TOP_UP_WALLET);
     expect(hasTopUpWallet).toBe(false);
   });
   test("should have top up wallet tip when having alby account", async () => {
     tmpAccount = { id: "2", name: "Alby", alias: "🐝 getalby.com" };
     const { tips } = useTips();
-    expect(tips.length).toBe(3);
+    expect(tips.length).toBe(2); // mnemonic + top up
     const hasTopUpWallet = tips.some((tip) => tip === TIPS.TOP_UP_WALLET);
     expect(hasTopUpWallet).toBe(true);
   });

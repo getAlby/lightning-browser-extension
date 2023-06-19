@@ -20,7 +20,6 @@ import { ToastContainer } from "react-toastify";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
 import ConfirmGetAddress from "~/app/screens/ConfirmGetAddress";
-import ConfirmSignPsbt from "~/app/screens/ConfirmSignPsbt";
 import type { NavigationState, OriginData } from "~/types";
 
 // Parse out the parameters from the querystring.
@@ -108,7 +107,6 @@ function Prompt() {
             <Route path="confirmKeysend" element={<ConfirmKeysend />} />
             <Route path="confirmSignMessage" element={<ConfirmSignMessage />} />
             <Route path="confirmAddAccount" element={<ConfirmAddAccount />} />
-            <Route path="confirmSignPsbt" element={<ConfirmSignPsbt />} />
             <Route path="confirmGetAddress" element={<ConfirmGetAddress />} />
             <Route
               path="public/confirmRequestPermission"

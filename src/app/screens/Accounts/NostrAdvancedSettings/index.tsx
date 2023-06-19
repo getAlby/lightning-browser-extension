@@ -8,6 +8,7 @@ import { FormEvent, useCallback, useEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { Link, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import Alert from "~/app/components/Alert";
 import Button from "~/app/components/Button";
 import InputCopyButton from "~/app/components/InputCopyButton";
 import TextField from "~/app/components/form/TextField";
@@ -38,30 +39,25 @@ function NostrAdvancedSettings() {
   const { id } = useParams();
 
   const fetchData = useCallback(async () => {
-    try {
-      if (id) {
-        const priv = (await msg.request("nostr/getPrivateKey", {
-          id,
-        })) as string;
-        if (priv) {
-          setCurrentPrivateKey(priv);
-        }
-
-        const accountMnemonic = (await msg.request("getMnemonic", {
-          id,
-        })) as string;
-        if (accountMnemonic) {
-          setMnemonic(accountMnemonic);
-        }
-
-        if (priv) {
-          const keyOrigin = await getNostrKeyOrigin(priv, accountMnemonic);
-          setNostrKeyOrigin(keyOrigin);
-        }
+    if (id) {
+      const priv = (await msg.request("nostr/getPrivateKey", {
+        id,
+      })) as string;
+      if (priv) {
+        setCurrentPrivateKey(priv);
       }
-    } catch (e) {
-      console.error(e);
-      if (e instanceof Error) toast.error(`Error: ${e.message}`);
+
+      const accountMnemonic = (await msg.request("getMnemonic", {
+        id,
+      })) as string;
+      if (accountMnemonic) {
+        setMnemonic(accountMnemonic);
+      }
+
+      if (priv) {
+        const keyOrigin = await getNostrKeyOrigin(priv, accountMnemonic);
+        setNostrKeyOrigin(keyOrigin);
+      }
     }
   }, [id]);
 
@@ -166,21 +162,17 @@ function NostrAdvancedSettings() {
             </div>
 
             {currentPrivateKey && nostrKeyOrigin !== "secret-key" ? (
-              // TODO: extract to Alert component
-              <div className="rounded-md font-medium p-4 text-orange-700 bg-orange-50 dark:text-orange-400 dark:bg-orange-900">
-                <p>
-                  {t(
-                    nostrKeyOrigin === "unknown"
-                      ? "nostr.advanced_settings.imported_key_warning"
-                      : "nostr.advanced_settings.legacy_derived_key_warning"
-                  )}
-                </p>
-              </div>
+              <Alert type="warn">
+                {t(
+                  nostrKeyOrigin === "unknown"
+                    ? "nostr.advanced_settings.imported_key_warning"
+                    : "nostr.advanced_settings.legacy_derived_key_warning"
+                )}
+              </Alert>
             ) : nostrKeyOrigin === "secret-key" ? (
-              // TODO: extract to Alert component
-              <div className="rounded-md font-medium p-4 text-green-700 bg-green-50 dark:text-green-400 dark:bg-green-900">
-                <p>{t("nostr.advanced_settings.can_restore")}</p>
-              </div>
+              <Alert type="info">
+                {t("nostr.advanced_settings.can_restore")}
+              </Alert>
             ) : null}
 
             <div>
@@ -233,23 +225,20 @@ function NostrAdvancedSettings() {
                         onClick={handleDeriveNostrKeyFromSecretKey}
                       />
                     ) : (
-                      // TODO: extract to Alert component
-                      <div className="rounded-md font-medium p-4 text-blue-700 bg-blue-50 dark:text-blue-400 dark:bg-blue-900">
-                        <p>
-                          <Trans
-                            i18nKey={"nostr.advanced_settings.no_secret_key"}
-                            t={t}
-                            components={[
-                              // eslint-disable-next-line react/jsx-key
-                              <Link
-                                to="../secret-key/backup"
-                                relative="path"
-                                className="underline"
-                              />,
-                            ]}
-                          />
-                        </p>
-                      </div>
+                      <Alert type="warn">
+                        <Trans
+                          i18nKey={"nostr.advanced_settings.no_secret_key"}
+                          t={t}
+                          components={[
+                            // eslint-disable-next-line react/jsx-key
+                            <Link
+                              to="../secret-key/backup"
+                              relative="path"
+                              className="underline"
+                            />,
+                          ]}
+                        />
+                      </Alert>
                     )}
                   </div>
                 )}
