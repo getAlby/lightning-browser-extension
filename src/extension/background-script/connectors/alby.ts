@@ -101,9 +101,13 @@ export default class Alby implements Connector {
       const info = await this._request((client) =>
         client.accountInformation({})
       );
+      const alias = info.lightning_address
+        ? info.lightning_address
+        : "🐝 getalby.com";
+
       return {
         data: {
-          alias: info.lightning_address,
+          alias: alias,
         },
       };
     } catch (error) {
