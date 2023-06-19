@@ -13,7 +13,6 @@ import MnemonicInputs from "~/app/components/MnemonicInputs";
 import Checkbox from "~/app/components/form/Checkbox";
 import { useAccount } from "~/app/context/AccountContext";
 import NostrIcon from "~/app/icons/NostrIcon";
-import OrdinalsIcon from "~/app/icons/OrdinalsIcon";
 import { saveMnemonic } from "~/app/utils/saveMnemonic";
 import msg from "~/common/lib/msg";
 

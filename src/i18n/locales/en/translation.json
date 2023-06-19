@@ -418,8 +418,8 @@
         },
         "mnemonic": {
           "title": "Secret Key",
-          "description": "Your Account Secret Key allows you to use Alby to interact with protocols such as Nostr or Ordinals.",
-          "description2": "Your Secret Key is a set of 12 words that will allow you to access your keys to protocols such as Nostr or Ordinals on a new device or in case you loose access to your account.",
+          "description": "Your Account Secret Key allows you to use Alby to interact with protocols such as Nostr.",
+          "description2": "Your Secret Key is a set of 12 words that will allow you to access your keys to protocols such as Nostr on a new device or in case you loose access to your account.",
           "saved": "Secret Key encrypted & saved successfully.",
           "existing_nostr_key_notice": "⚠️ This account already has a nostr private key set and will not be derived from this secret key. You can manage your nostr key from your account settings.",
           "generate": {
@@ -436,8 +436,7 @@
             "description1": "In addition to the Bitcoin Lightning Network, Alby allows you to generate keys and interact with other protocols such as:",
             "description2": "Your Secret Key is a set of 12 words that will allow you to access your keys to those protocols on a new device or in case you loose access to your account:",
             "protocols": {
-              "nostr": "Nostr protocol",
-              "ordinals": "Ordinals"
+              "nostr": "Nostr protocol"
             }
           },
           "import": {
@@ -775,18 +774,6 @@
     "confirm_sign_message": {
       "title": "Sign",
       "content": "This website asks you to sign:"
-    },
-    "confirm_sign_psbt": {
-      "warning": "⚠️ Signing a PSBT may result in loosing your funds or Ordinals. Sign only if you understand what you're doing and trust this transaction",
-      "title": "Sign PSBT",
-      "allow_sign": "This website asks you to sign a Partially Signed Bitcoin Transaction:",
-      "view_addresses": "View addresses",
-      "hide_addresses": "Hide addresses",
-      "view_hex": "View PSBT hex",
-      "hide_hex": "Hide PSBT hex",
-      "input": "Input",
-      "outputs": "Outputs",
-      "amount": "{{amount}} sats"
     },
     "confirm_get_address": {
       "title": "Get Address",
