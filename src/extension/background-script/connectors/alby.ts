@@ -170,41 +170,11 @@ export default class Alby implements Connector {
   }
 
   signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {
-    // // make sure we got the config to create a new key
-    // if (!this.config.url || !this.config.login || !this.config.password) {
-    //   return Promise.reject(new Error("Missing config"));
-    // }
-    // if (!args.message) {
-    //   return Promise.reject(new Error("Invalid message"));
-    // }
-    // let message: string | Uint8Array;
-    // message = sha256(args.message).toString(Hex);
-    // let keyHex = sha256(
-    //   `lndhub://${this.config.login}:${this.config.password}`
-    // ).toString(Hex);
-    // const { settings } = state.getState();
-    // if (settings.legacyLnurlAuth) {
-    //   message = utils.stringToUint8Array(args.message);
-    //   keyHex = sha256(
-    //     `LBE-LNDHUB-${this.config.url}-${this.config.login}-${this.config.password}`
-    //   ).toString(Hex);
-    // }
-    // if (!keyHex) {
-    //   return Promise.reject(new Error("Could not create key"));
-    // }
-    // const signer = new HashKeySigner(keyHex);
-    // const signedMessageDERHex = signer.sign(message).toDER("hex");
-    // // make sure we got some signed message
-    // if (!signedMessageDERHex) {
-    //   return Promise.reject(new Error("Signing failed"));
-    // }
-    // return Promise.resolve({
-    //   data: {
-    //     message: args.message,
-    //     signature: signedMessageDERHex,
-    //   },
-    // });
-    throw new Error("SignMessage is unsupported");
+    // signMessage requires proof of ownership of a non-custodial node
+    // this is not the case in the Alby connector which connects to Lndhub
+    throw new Error(
+      "SignMessage is unsupported. Please add a secret key to your account to use LNURL-auth."
+    );
   }
 
   async makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse> {
