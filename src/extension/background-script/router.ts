@@ -33,6 +33,7 @@ const routes = {
   makeInvoice: ln.makeInvoice,
   connectPeer: ln.connectPeer,
   getPayments: payments.all,
+  getPaymentsByAccount: payments.listByAccount,
   accountInfo: accounts.info,
   accountDecryptedDetails: accounts.decryptedDetails,
   addAccount: accounts.add,
@@ -65,6 +66,10 @@ const routes = {
 
   // Public calls that are accessible from the inpage script (through the content script)
   public: {
+    alby: {
+      enable: allowances.enable,
+      addAccount: accounts.promptAdd,
+    },
     webln: {
       enable: allowances.enable,
       getInfo: ln.getInfo,

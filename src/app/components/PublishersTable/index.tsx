@@ -34,7 +34,7 @@ export default function PublishersTable({
               className="cursor-pointer hover:bg-gray-50 transition duration-200 dark:hover:bg-neutral-800"
               onClick={() => navigateToPublisher(publisher.id)}
             >
-              <td className="px-4 py-6 whitespace-nowrap">
+              <td className="px-4 py-4 whitespace-nowrap">
                 <div className="flex items-center">
                   <div className="shrink-0">
                     <img
@@ -82,19 +82,19 @@ export default function PublishersTable({
               <td className="px-6 py-6 whitespace-nowrap text-right">
                 {publisher.totalBudget > 0 && (
                   <div className="ml-40">
-                    <p className="text-lg text-gray-500 mb-0 dark:text-neutral-400">
+                    <p className="text-sm text-gray-500 mb-0 dark:text-neutral-400">
                       {getFormattedNumber(publisher.usedBudget)} /{" "}
                       {getFormattedNumber(publisher.totalBudget)}{" "}
                       {tCommon("sats", { count: publisher.usedBudget })}{" "}
                       {tComponents("used")}
                     </p>
-                    <div className="relative mt-2 ml-auto">
+                    <div className="relative ml-auto">
                       <div className="flex items-center justify-end">
                         <div className="w-40">
                           <Progressbar percentage={publisher.percentage} />
                         </div>
                         <span
-                          className={`ml-2 text-sm font-semibold text-blue-500`}
+                          className={`ml-2 text-sm font-semibold text-blue-600`}
                         >
                           {publisher.percentage}%
                         </span>

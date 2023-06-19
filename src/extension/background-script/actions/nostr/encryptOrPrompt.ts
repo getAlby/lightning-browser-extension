@@ -1,3 +1,4 @@
+import { USER_REJECTED_ERROR } from "~/common/constants";
 import utils from "~/common/lib/utils";
 import state from "~/extension/background-script/state";
 import i18n from "~/i18n/i18nConfig";
@@ -18,10 +19,10 @@ const encryptOrPrompt = async (message: MessageEncryptGet) => {
     );
 
     if (hasPermission) {
-      const response = state
-        .getState()
-        .getNostr()
-        .encrypt(message.args.peer, message.args.plaintext);
+      const response = (await state.getState().getNostr()).encrypt(
+        message.args.peer,
+        message.args.plaintext
+      );
 
       return { data: response };
     } else {
@@ -44,14 +45,14 @@ const encryptOrPrompt = async (message: MessageEncryptGet) => {
         );
       }
       if (promptResponse.data.confirm) {
-        const response = state
-          .getState()
-          .getNostr()
-          .encrypt(message.args.peer, message.args.plaintext);
+        const response = (await state.getState().getNostr()).encrypt(
+          message.args.peer,
+          message.args.plaintext
+        );
 
         return { data: response };
       } else {
-        return { error: "User rejected" };
+        return { error: USER_REJECTED_ERROR };
       }
     }
   } catch (e) {

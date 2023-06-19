@@ -1,4 +1,5 @@
 import type Connector from "~/extension/background-script/connectors/connector.interface";
+import type { SignMessageResponse } from "~/extension/background-script/connectors/connector.interface";
 import type { Message } from "~/types";
 
 import signMessage from "../signMessage";
@@ -30,7 +31,12 @@ const message: Message = {
   prompt: true,
 };
 
-const requestResponse = { data: [] };
+const requestResponse: SignMessageResponse = {
+  data: {
+    message: "hello sign me",
+    signature: "123456789",
+  },
+};
 const fullConnector = {
   // hacky fix because Jest doesn't return constructor name
   constructor: {

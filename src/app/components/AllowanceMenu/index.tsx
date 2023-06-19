@@ -3,10 +3,11 @@ import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import Setting from "@components/Setting";
 import Toggle from "@components/form/Toggle";
 import type { FormEvent } from "react";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Modal from "react-modal";
 import { toast } from "react-toastify";
+import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
 import msg from "~/common/lib/msg";
 import type { Allowance, Permission } from "~/types";
@@ -28,7 +29,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
     getFormattedFiat,
   } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
-
+  const { account } = useAccount();
   const [modalIsOpen, setIsOpen] = useState(false);
   const [budget, setBudget] = useState("");
   const [lnurlAuth, setLnurlAuth] = useState(false);
@@ -58,6 +59,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
           permissions: Permission[];
         }>("listPermissions", {
           id: allowance.id,
+          accountId: account?.id,
         });
 
         const permissions: Permission[] = permissionResponse?.permissions;
@@ -72,8 +74,8 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
       }
     };
 
-    !permissions && fetchPermissions();
-  }, [allowance.id, permissions]);
+    fetchPermissions();
+  }, [account?.id, allowance.id]);
 
   useEffect(() => {
     if (budget !== "" && showFiat) {
@@ -125,6 +127,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
       if (changedIds.length) {
         await msg.request("deletePermissionsById", {
           ids: changedIds,
+          accountId: account?.id,
         });
       }
 
@@ -237,7 +240,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
                 </h2>
                 <div>
                   {permissions.map((permission) => (
-                    <>
+                    <Fragment key={permission.id}>
                       <Setting
                         title={permission.method}
                         subtitle={tPermissions(
@@ -265,7 +268,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
                           }}
                         />
                       </Setting>
-                    </>
+                    </Fragment>
                   ))}
                 </div>
               </div>

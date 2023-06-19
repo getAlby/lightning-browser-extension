@@ -143,7 +143,12 @@ function AccountDetail() {
 
     if (nostrPrivateKey === currentPrivateKey) return;
 
-    if (currentPrivateKey && !confirm(t("nostr.private_key.warning"))) {
+    if (
+      currentPrivateKey &&
+      prompt(t("nostr.private_key.warning"))?.toLowerCase() !==
+        account?.name?.toLowerCase()
+    ) {
+      toast.error(t("nostr.private_key.failed_to_remove"));
       return;
     }
 
@@ -263,14 +268,14 @@ function AccountDetail() {
         title={t("title1")}
         headerLeft={
           <IconButton
-            onClick={() => navigate(-1)}
+            onClick={() => navigate("/accounts")}
             icon={<CaretLeftIcon className="w-4 h-4" />}
           />
         }
       />
       <div className="border-b border-gray-200 dark:border-neutral-500">
         <div className="flex-col justify-center p-4 flex items-center bg-white dark:bg-surface-02dp">
-          <Avatar name={account.name} size={80} />
+          <Avatar name={account.id} size={96} />
           <div className="flex flex-col overflow-hidden w-full text-center">
             <h2
               title={account.name}
@@ -453,6 +458,9 @@ function AccountDetail() {
                   fullWidth
                 />
               </div>
+            </div>
+            <div className="rounded-md font-medium p-4 mb-4 text-orange-700 bg-orange-50 dark:text-orange-400 dark:bg-orange-900">
+              {t("nostr.private_key.backup")}
             </div>
             <form
               onSubmit={(e: FormEvent) => {

@@ -1,4 +1,5 @@
 import Container from "@components/Container";
+import Loading from "@components/Loading";
 import PublishersTable from "@components/PublishersTable";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -14,6 +15,7 @@ function Publishers() {
   });
 
   const [publishers, setPublishers] = useState<Publisher[]>([]);
+  const [publishersLoading, setPublishersLoading] = useState<boolean>(true);
   const navigate = useNavigate();
 
   function navigateToPublisher(id: number) {
@@ -80,6 +82,8 @@ function Publishers() {
     } catch (e) {
       console.error(e);
       if (e instanceof Error) toast.error(`Error: ${e.message}`);
+    } finally {
+      setPublishersLoading(false);
     }
   }
 
@@ -97,17 +101,25 @@ function Publishers() {
         {t("description")}
       </p>
 
-      {publishers.length > 0 ? (
-        <PublishersTable
-          publishers={publishers}
-          navigateToPublisher={navigateToPublisher}
-        />
+      {publishersLoading ? (
+        <div className="flex justify-center mt-12">
+          <Loading />
+        </div>
       ) : (
         <>
-          <p className="dark:text-white mb-4"> {t("no_info")}</p>
-          <Link to="/discover">
-            <Button primary label={t("discover")} />
-          </Link>
+          {publishers.length > 0 ? (
+            <PublishersTable
+              publishers={publishers}
+              navigateToPublisher={navigateToPublisher}
+            />
+          ) : (
+            <>
+              <p className="dark:text-white mb-4"> {t("no_info")}</p>
+              <Link to="/discover">
+                <Button primary label={t("discover")} />
+              </Link>
+            </>
+          )}
         </>
       )}
     </Container>

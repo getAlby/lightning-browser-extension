@@ -1,8 +1,12 @@
 // dayjs locales must be imported as well, list: https://github.com/iamkun/dayjs/tree/dev/src/locale
 import "dayjs/locale/cs";
+import "dayjs/locale/da";
 import "dayjs/locale/es";
 import "dayjs/locale/fi";
+import "dayjs/locale/fr";
 import "dayjs/locale/it";
+import "dayjs/locale/mr";
+import "dayjs/locale/pl";
 import "dayjs/locale/pt-br";
 import "dayjs/locale/sv";
 import "dayjs/locale/zh-cn";
@@ -11,10 +15,14 @@ import LanguageDetector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
 // import our translations
 import cs from "~/i18n/locales/cs/translation.json";
+import da from "~/i18n/locales/da/translation.json";
 import en from "~/i18n/locales/en/translation.json";
 import es from "~/i18n/locales/es/translation.json";
 import fi from "~/i18n/locales/fi/translation.json";
+import fr from "~/i18n/locales/fr/translation.json";
 import it from "~/i18n/locales/it/translation.json";
+import mr from "~/i18n/locales/mr/translation.json";
+import pl from "~/i18n/locales/pl/translation.json";
 import pt_BR from "~/i18n/locales/pt_BR/translation.json";
 import sv from "~/i18n/locales/sv/translation.json";
 import zh_Hans from "~/i18n/locales/zh_Hans/translation.json";
@@ -34,6 +42,12 @@ export const resources = {
     components: cs.components,
     permissions: cs.permissions,
   },
+  da: {
+    translation: da.translation,
+    common: da.common,
+    components: da.components,
+    permissions: da.permissions,
+  },
   es: {
     translation: es.translation,
     common: es.common,
@@ -46,11 +60,29 @@ export const resources = {
     components: fi.components,
     permissions: fi.permissions,
   },
+  fr: {
+    translation: fr.translation,
+    common: fr.common,
+    components: fr.components,
+    permissions: fr.permissions,
+  },
   it: {
     translation: it.translation,
     common: it.common,
     components: it.components,
     permissions: it.permissions,
+  },
+  mr: {
+    translation: mr.translation,
+    common: mr.common,
+    components: mr.components,
+    permissions: mr.permissions,
+  },
+  pl: {
+    translation: pl.translation,
+    common: pl.common,
+    components: pl.components,
+    permissions: pl.permissions,
   },
   "pt-BR": {
     translation: pt_BR.translation,
@@ -75,13 +107,17 @@ export const resources = {
 // needs to be aligned with `resources`
 export const supportedLocales = [
   { locale: "en", label: "English" },
-  { locale: "cs", label: "Czech" },
+  { locale: "cs", label: "Čeština" },
+  { locale: "da", label: "Dansk" },
   { locale: "es", label: "Español" },
-  { locale: "fi", label: "Finnish" },
+  { locale: "fr", label: "Français" },
   { locale: "it", label: "Italiano" },
+  { locale: "pl", label: "Polski" },
   { locale: "pt-BR", label: "Português (Brasil)" },
+  { locale: "fi", label: "Suomalainen" },
   { locale: "sv", label: "Svenska" },
   { locale: "zh-CN", label: "中文（简化字）" },
+  { locale: "mr", label: "मराठी (India)" },
 ];
 
 i18n

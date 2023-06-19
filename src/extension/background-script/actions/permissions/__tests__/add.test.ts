@@ -1,9 +1,19 @@
 import db from "~/extension/background-script/db";
+import state from "~/extension/background-script/state";
 import { allowanceFixture } from "~/fixtures/allowances";
 import { permissionsFixture } from "~/fixtures/permissions";
 import type { DbAllowance, MessagePermissionAdd } from "~/types";
 
 import addPermission from "../add";
+
+jest.mock("~/extension/background-script/state");
+
+const defaultMockState = {
+  currentAccountId: "8b7f1dc6-ab87-4c6c-bca5-19fa8632731e",
+};
+
+const mockState = defaultMockState;
+state.getState = jest.fn().mockReturnValue(mockState);
 
 Date.now = jest.fn(() => 1487076708000);
 

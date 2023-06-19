@@ -1,15 +1,9 @@
 {
   "translation": {
     "welcome": {
-      "nav": {
-        "welcome": "Bienvenido",
-        "password": "Su Contraseña",
-        "connect": "Tu cuenta Lightning",
-        "done": "Hecho"
-      },
       "set_password": {
         "title": "Proteja su billetera",
-        "description": "Esta contraseña se utiliza para proteger tu billetera y darte acceso a la extensión del navegador. No se puede restablecer y es independiente de la contraseña de tu cuenta de Alby.",
+        "description": "Esta contraseña se utiliza para proteger su monedero y proporcionar acceso a la extensión del navegador. No se puede restablecer y es independiente de la contraseña de su cuenta de Alby.",
         "choose_password": {
           "label": "Elige una contraseña:"
         },
@@ -23,7 +17,7 @@
         }
       },
       "test_connection": {
-        "ready": "Genial, estás listo para comenzar!",
+        "ready": "¡Genial, estás listo para comenzar!",
         "initializing": "Accediendo a su cuenta. Por favor, espere, esto puede tardar un minuto...",
         "connection_error": "Error de Conexión",
         "review_connection_details": "Revise los detalles de su conexión.",
@@ -105,7 +99,7 @@
         "title": "Cuenta de Umbrel",
         "page": {
           "title": "Conectar a Umbrel",
-          "instructions": "En tu cuadro de mandos Umbrel ve a <0>Conecta Billetera</0>. Selecciona <0>lndconnect REST</0> y copia el <0>URL lndconnect</0>. (Dependiendo de tu configuración puedes usar la conexión local o la conexión TOR)"
+          "instructions": "1. En tu Lightning Node dashboard ve a <0>Connect wallet</0><1/>2. Selecciona <0>REST (Tor)</0> o <0>REST (Local Network)</0> mode<1/>3. Copia la <0>lndconnect URL</0> y pégala a continuación"
         },
         "rest_url": {
           "placeholder": "lndconnect://sunodo:8080?...",
@@ -126,8 +120,8 @@
       "start9": {
         "title": "Cuenta Start9",
         "page": {
-          "title": "Conecta tu nodo <0>Embassy</0>",
-          "instructions": "<0>Nota:</0> Actualmente solo admitimos LND, ¡pero agregaremos compatibilidad con c-lightning en el futuro!<1/>En su panel de Embassy, haga clic en el servicio <0>Lightning Network Daemon</0>. <1/>Seleccione la pestaña <0>Propiedades</0>.<1/>Ahora copie la <0>URL REST de LND Connect.</0>"
+          "title": "Conéctate a tu <0>Start9 Server</0>",
+          "instructions": "En tu panel de Embassy, haz clic en el servicio <0>Lightning Network Daemon</0>.<1/>Selecciona la pestaña <0>Propiedades</0>.<1/>Ahora copia la URL REST de <0>LND Connect. </0>"
         },
         "rest_url": {
           "label": "URL REST conectalnd",
@@ -138,8 +132,8 @@
         "title": "Cuenta RaspiBlitz",
         "page": {
           "title": "Conecta tu nodo <0>RaspiBlitz</0>",
-          "instructions2": "Selecciona <0>CONECTAR</0>.<1/>Selecciona <0>EXPORTAR</0>.<1/>Selecciona <0>HEX</0>.<1/>Copia el <0>adminMacaroon</ 0>.<1/>Pega el macarrón en la entrada de abajo.",
-          "instructions1": "Necesita la dirección onion de su nodo, el puerto y un macarrón con permisos de lectura y envío (por ejemplo, admin.macaroon).<1/><1/><0>SSH</0> en su <0>RaspiBlitz</0> .<1/>Ejecute el comando <0>sudo cat /mnt/hdd/tor/lndrest/hostname</0>.<1/>Copie y pegue la dirección <0>.onion</0> en la entrada a continuación .<1/>Agregue su <0>puerto</0> después de la dirección onion, el puerto predeterminado es <0>:8080</0>."
+          "instructions2": "Copie el (admin) <0>macaroon</0> en la entrada de abajo.",
+          "instructions1": "Siga estos pasos:<1/> 1. <0>SSH</0> en su <0>Raspiblitz</0><1/>2. Seleccione <0>Conectar aplicaciones y mostrar credenciales</0> de la lista<1/><0/>3. Elija <0>Conectar Alby a este nodo</0><1/>4. Pulsa <0>Aceptar</0> para mostrar las credenciales de conexión<1/><1/>Copia y pega el <0>host API REST</0> o la dirección <0>.onion</0> para conectarte a través de Tor en la entrada de abajo."
         },
         "rest_api_host": {
           "label": "Host de la API REST",
@@ -202,23 +196,31 @@
       },
       "kollider": {
         "description": "Inicie sesión en su cuenta Kollider",
-        "page": {
-          "title": "Conéctese a su cuenta Kollider",
-          "description": "¿Aún no tienes una cuenta? <0>¡Regístrese</0> ahora!"
-        },
         "username": {
-          "label": "Introduzca su nombre de usuario Kollider"
-        },
-        "password": {
-          "label": "Introduzca su contraseña de Kollider"
+          "label": "Nombre de usuario"
         },
         "errors": {
-          "connection_failed": "La conexión falló. ¿Te aseguraste de que los datos de la cuenta son correctos?"
+          "connection_failed": "La conexión falló. ¿Te aseguraste de que los datos de la cuenta son correctos?",
+          "user_already_exists": "El nombre de usuario ya existe",
+          "registration_limit_exceeded": "Límite de registro excedido, inténtalo más tarde."
         },
         "title": "Kollider",
         "currency": {
           "label": "Seleccione su cuenta de divisas"
-        }
+        },
+        "choose_path": {
+          "description": "Inicia sesión o regístrate para obtener una nueva cuenta de Kollider y conéctate a Alby.",
+          "title": "Conéctate a tú monedero Kollider",
+          "create_new": "Regístrate"
+        },
+        "create": {
+          "title": "Crea tú cuenta Kollider y conéctate a Alby",
+          "description": "Crea una nueva cuenta Kollider para enviar, recibir e intercambiar Bitcoin."
+        },
+        "login": {
+          "title": "Conéctate a tú cuenta Kollider"
+        },
+        "warning": "⚠️ Asegúrate de almacenar tus credenciales de forma segura en un administrador de contraseñas. Sin estas credenciales, tú cuenta no será recuperable."
       },
       "commando": {
         "pubkey": {
@@ -254,11 +256,9 @@
       },
       "galoy": {
         "errors": {
-          "failed_to_login_sms": "No se pudo iniciar sesión con el código de SMS",
           "setup_failed": "Falló la configuración",
-          "missing_jwt": "Falta JWT, no se pudo iniciar sesión.",
-          "invalid_jwt": "JWT inválido aprobado",
-          "failed_to_request_sms": "Hubo un error al solicitar un código SMS"
+          "missing_token": "Falta JWT, no se pudo iniciar sesión.",
+          "invalid_token": "JWT inválido aprobado"
         },
         "phone_number": {
           "label": "Ingrese su número telefónico"
@@ -266,19 +266,18 @@
         "sms_code": {
           "label": "Ingrese su código de verificación de SMS"
         },
-        "jwt": {
+        "token": {
           "label": "Ingresa tu token de JWT",
           "info": "El inicio de sesión de {{label}} se está actualizando actualmente. Si es un usuario avanzado, puede obtener su token JWT iniciando sesión a través de <0>Web Wallet (wallet.mainnet.galoy.io)</0><1/><1/>El JWT se ve así: < 2>eyJhbG...</2><1/><1/>"
         },
         "actions": {
-          "login": "Ingresar",
-          "request_sms_code": "Solicitar código por Mensaje de Texto"
+          "login": "Ingresar"
         }
       },
       "lnc": {
         "page": {
           "title": "Conecta tu nodo LND",
-          "description": "Crea una nueva sesión en terminal (litd) para obtener una nueva frase y colocala aquí"
+          "description": "1. Abra tu Lightning Terminal y selecciona <0>Lightning Node Connect</0> en la barra lateral.<1/> 2. Haz clic en <0>Crear una nueva sesión</0><1/>3. Etiqueta la sesión, luego elige el permiso que deseas y envía<1/>4. <0>Copia la frase de emparejamiento</0> y pégala a continuación."
         },
         "title": "LND con LNC",
         "pairing_phrase": {
@@ -294,12 +293,6 @@
         "enable_now": "Habilitar ahora"
       },
       "recent_transactions": "Transacciones Recientes",
-      "transaction_list": {
-        "tabs": {
-          "outgoing": "Saliente",
-          "incoming": "Entrante"
-        }
-      },
       "allowance_view": {
         "recent_transactions": "Transacciones Recientes",
         "allowance": "Subsidio",
@@ -308,7 +301,6 @@
       },
       "default_view": {
         "recent_transactions": "Transacciones Recientes",
-        "no_transactions": "Aún no se han hecho transacciones con Alby.",
         "is_blocked_hint": "Alby está actualmente deshabilitado en {{host}}",
         "block_removed": "{{host}} habilitado. Vuelva a cargar el sitio web."
       }
@@ -328,8 +320,10 @@
             "successfully_removed": "Clave privada eliminada con éxito.",
             "label": "Clave Privada",
             "title": "Administra tu clave",
-            "subtitle": "Pegue su clave privada o genere una nueva. Asegúrese de hacer una copia de seguridad de su clave privada antes de generar una nueva. <0>Más información »</0>",
-            "warning": "Esto eliminará su antigua clave privada. ¿Desea continuar?"
+            "subtitle": "Pega tu clave privada o genera una nueva. <0>Más información \"</0>",
+            "warning": "Introduzca el nombre de la cuenta para confirmar la eliminación de la clave privada:",
+            "failed_to_remove": "El nombre de cuenta introducido no coincide, tu antiguo privado ha sido restaurado.",
+            "backup": "⚠️ ¡No olvides hacer una copia de seguridad de tu clave privada! Si no haces una copia de seguridad de tu clave puedes perder el acceso."
           },
           "public_key": {
             "label": "Clave Pública"
@@ -611,12 +605,10 @@
       "success": "Solicitud de retiro de {{amount}} enviada con éxito a {{sender}}"
     },
     "choose_path": {
-      "title": "Conectar",
-      "description": "Para comenzar a usar Alby y realizar pagos en línea, conecta tu billetera Lightning a la extensión.",
       "alby": {
-        "title": "Alby",
+        "title": "Cuenta de Alby",
         "create_new": "Regístrate",
-        "description": "Regístrate o usa tu cuenta existente de Alby para empezar con pagos lightning en poco tiempo."
+        "description": "Regístrate o usa tú cuenta de Alby existente para empezar a realizar pagos relámpago en un abrir y cerrar de ojos."
       },
       "other": {
         "title": "Otras Billeteras",
@@ -631,7 +623,37 @@
       "content": "Este sitio web te solicita firmar:",
       "allow_sign": "Permitir que {{host}} firme:",
       "block_and_ignore": "Bloquear e ignorar {{host}}",
-      "block_added": "Se agregó {{host}} a la lista de bloqueados, vuelva a cargar el sitio web."
+      "block_added": "Se agregó {{host}} a la lista de bloqueados, vuelva a cargar el sitio web.",
+      "allow_sign_event": "Permitir que {{host}} firme un {{kind}}:",
+      "view_details": "Más información",
+      "hide_details": "Ocultar los detalles",
+      "no_content": "(Sin contenido)",
+      "kinds": {
+        "unknown": "nostr evento del tipo {{kind}}",
+        "0": "metadatos",
+        "1": "nota corta de texto",
+        "2": "Recomendar un relé",
+        "3": "contactos",
+        "7": "reacción",
+        "8": "concesión de distintivo",
+        "40": "creación del canal",
+        "41": "metadatos del canal",
+        "42": "mensaje del canal",
+        "43": "ocultar mensaje del canal",
+        "44": "silenciar a un usuario del canal",
+        "9734": "solicitud de eliminación",
+        "9735": "borrar",
+        "10002": "metadatos de la lista de relés",
+        "22242": "autenticación del cliente",
+        "24133": "conectarse a nostr",
+        "30008": "distintivos del perfil",
+        "30023": "contenidos largos",
+        "30078": "datos específicos de la aplicación",
+        "5": "borrado de eventos",
+        "4": "mensajes directos cifrados",
+        "1984": "reportando",
+        "30009": "definición del distintivo"
+      }
     },
     "discover": {
       "title": "Explora el Ecosistema ⚡️ Lightning",
@@ -639,37 +661,24 @@
       "tips": {
         "top_up_wallet": {
           "title": "⚡️ Recarga tu billetera",
-          "description": "Cree una factura lightning, envíese algunos bitcoins y comience a usar Alby en el ecosistema lightning",
-          "label1": "Recibir Bitcoin",
-          "label2": "Comprar Bitcoin"
+          "description": "Cree una factura lightning, envíese algunos bitcoins y comience a usar Alby en el ecosistema lightning"
         },
         "title": "Tu billetera Alby está lista",
         "description": "Algunos consejos para que empieces a zumbar 🐝",
-        "pin": {
-          "description2": "En la lista de extensiones, busque Alby y haga clic en el ícono de la chincheta para fijarlo a la barra de herramientas",
-          "description1": "<0>Para acceder fácilmente a Alby, haga clic en el icono de la extensión</0> <1/> <2>en la esquina superior derecha de su navegador</2>",
-          "title": "📌 Fija tu extensión Alby",
-          "description3": "¡Eso es todo! Para acceder a Alby simplemente haga clic en el icono de Alby"
-        },
         "demo": {
-          "label1": "Inténtalo",
           "title": "🕹️ Prueba la versión Demo de Alby",
           "description": "Descubra todo lo que puede hacer con Alby en nuestro sitio web de demostraciones"
-        },
-        "address": {
-          "title": "⚡️ Obtén una dirección lightning",
-          "description": "Cree su propia dirección lightning y reciba pagos lightning tan fácil como enviar un correo electrónico",
-          "label1": "¡Obtenlo Ahora!"
         }
       },
       "list": {
-        "entertaiment": "Entretenimiento",
+        "entertainment": "Entretenimiento",
         "shopping": "Compras",
         "miscellaneous": "Varios",
         "showcases": "Vitrinas",
         "nostr": "Nostr",
         "trading": "Comerciar",
-        "gaming": "Juegos"
+        "gaming": "Juegos",
+        "nodeManagement": "Gestión de nodos"
       }
     },
     "confirm_request_permission": {
@@ -685,13 +694,13 @@
           "create_wallet_error": "Error al iniciar sesión o crear una cuenta nueva. Si necesita ayuda, por favor contacte support@getalby.com"
         },
         "forgot_password": "¿Olvidó su contraseña?",
-        "create_account": "Cree una nueva cuenta Alby para enviar y recibir pagos de bitcoin.",
-        "login_account": "Inicie sesión para conectar su cuenta de Alby existente.",
+        "create_account": "Crea una nueva Cuenta de Alby para enviar y recibir pagos en bitcoin.",
+        "login_account": "Inicia sesión para conectar tú cuenta de Alby existente.",
         "optional_lightning_note": {
           "part2": "dirección lightning",
           "part4": "aprende más",
           "part3": ". Este es un modo simple para que cualquiera te envie Bitcoin en la red lightning.",
-          "part1": "Su cuenta de Alby también viene con una opción"
+          "part1": "Tú cuenta de Alby también viene con una opción"
         },
         "set_password": {
           "choose_password": {
@@ -706,7 +715,7 @@
             "mismatched_password": "Las contraseñas no coinciden."
           }
         },
-        "title": "Tu cuenta Alby",
+        "title": "Tu cuenta de Alby",
         "optional_lightning_address": {
           "label": "Elige tu Dirección Lightning (opcional)",
           "title": "números y letras, al menos 4 caracteres",
@@ -732,6 +741,10 @@
       "amount": {
         "label": "Cantidad (Satoshi)"
       }
+    },
+    "transactions": {
+      "title": "Transacciones",
+      "list_empty": "Todavía no hay transacciones disponibles."
     }
   },
   "common": {
@@ -739,7 +752,7 @@
     "success": "Exitoso",
     "error": "Error",
     "settings": "Ajustes",
-    "websites": "Sitios web",
+    "connected_sites": "Sitios conectados",
     "sats_one": "sat",
     "sats_other": "sats",
     "loading": "cargando",
@@ -764,11 +777,14 @@
       "export": "Exportar",
       "remove": "Quitar",
       "copy": "Copiar",
+      "copy_invoice": "",
       "open": "Abrir",
       "back": "Volver",
       "receive_again": "Recibir otro pago",
       "log_in": "Iniciar Sesión",
-      "remember": "Recordar mi elección y no preguntar nuevamente"
+      "remember": "Recordar mi elección y no preguntar nuevamente",
+      "transactions": "Transacciones",
+      "more": "Más"
     },
     "errors": {
       "connection_failed": "Error de conexión",
@@ -783,7 +799,13 @@
     "accounts": "Cuentas",
     "discover": "Descubrir",
     "response": "Respuesta",
-    "help": "Ayuda"
+    "help": "Ayuda",
+    "range": {
+      "between": "entre el {{min}} y el {{max}}",
+      "lessThan": "menor que {{max}}",
+      "greaterThan": "mayor que {{min}}"
+    },
+    "balance": "Balance"
   },
   "components": {
     "allowance_menu": {
@@ -837,12 +859,6 @@
         "label": "Presupuesto"
       }
     },
-    "companion_download_info": {
-      "description": "Estás intentando conectarte a un nodo detrás de Tor. Para hacer esto, necesitas tener instalada la aplicación Alby companion o tener Tor en ejecución. (Cuando no esté seguro, le recomendamos la aplicación complementaria Alby.)",
-      "download_here": "¡Descargue el compañero Alby aquí!",
-      "using_tor": "haz clic aquí para continuar si utilizas el navegador Tor",
-      "or": "O:"
-    },
     "toasts": {
       "connection_error": {
         "what_you_can_do": "Esto es lo que puedes hacer:",
@@ -862,7 +878,9 @@
       "options": {
         "account": {
           "add": "Agregar una nueva cuenta",
-          "manage": "Administrar cuentas"
+          "manage": "Administrar cuentas",
+          "account_settings": "Configuraciones de la cuenta",
+          "go_to_web_wallet": "Administra tu cuenta de Alby"
         }
       },
       "screen_reader": "Alternar menú desplegable"
@@ -876,6 +894,18 @@
         "active": "ACTIVO",
         "auth": "INICIAR SESIÓN"
       }
+    },
+    "companion_download_info": {
+      "download": "Descargar",
+      "companion": {
+        "title": "Aplicación complementaria",
+        "description": "Aplicación ligera que conecta tu navegador a la red TOR."
+      },
+      "tor_native": {
+        "title": "TOR (nativa)",
+        "description": "Seleccione esta opción si este navegador ya está conectado a la red TOR."
+      },
+      "heading": "¿Cómo quieres conectarte a la red TOR?"
     }
   },
   "permissions": {
@@ -936,7 +966,9 @@
       "sendtoroute": "Realizar un pago a través de la ruta especificada.",
       "decodepayreq": "Decodificar una cadena de solicitud de pago.",
       "verifymessage": "Verificar una firma sobre un mensaje.",
-      "routermc": "Lea el estado de control de la misión interna."
+      "routermc": "Lea el estado de control de la misión interna.",
+      "settleinvoice": "Pagar una factura aceptada.",
+      "addholdinvoice": "Crear nuevas facturas HODL."
     },
     "lnc": {
       "getinfo": "Obtener la información del nodo.",
@@ -960,7 +992,9 @@
       "listchannels": "Obtener una descripción de todos los canales abiertos.",
       "decodepayreq": "Decodificar una cadena de solicitud de pago.",
       "verifymessage": "Verificar una firma sobre un mensaje.",
-      "routermc": "Lea el estado de control de la misión interna."
+      "routermc": "Lea el estado de control de la misión interna.",
+      "addholdinvoice": "Crear nuevas facturas HODL.",
+      "settleinvoice": "Pagar una factura aceptada."
     }
   }
 }

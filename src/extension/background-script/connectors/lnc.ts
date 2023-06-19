@@ -1,5 +1,4 @@
 import LNC from "@lightninglabs/lnc-web";
-import { CredentialStore } from "@lightninglabs/lnc-web";
 import Base64 from "crypto-js/enc-base64";
 import Hex from "crypto-js/enc-hex";
 import UTF8 from "crypto-js/enc-utf8";
@@ -8,23 +7,24 @@ import SHA256 from "crypto-js/sha256";
 import snakeCase from "lodash.snakecase";
 import { encryptData } from "~/common/lib/crypto";
 import utils from "~/common/lib/utils";
+import { Account } from "~/types";
 
 import state from "../state";
 import Connector, {
   CheckPaymentArgs,
   CheckPaymentResponse,
-  SendPaymentArgs,
-  SendPaymentResponse,
-  GetInfoResponse,
-  GetBalanceResponse,
-  GetInvoicesResponse,
-  ConnectPeerResponse,
   ConnectorInvoice,
+  ConnectPeerResponse,
+  GetBalanceResponse,
+  GetInfoResponse,
+  GetInvoicesResponse,
+  KeysendArgs,
   MakeInvoiceArgs,
   MakeInvoiceResponse,
+  SendPaymentArgs,
+  SendPaymentResponse,
   SignMessageArgs,
   SignMessageResponse,
-  KeysendArgs,
 } from "./connector.interface";
 
 interface Config {
@@ -36,6 +36,8 @@ interface Config {
 
 const methods: Record<string, string> = {
   addinvoice: "lnd.lightning.AddInvoice",
+  addholdinvoice: "lnd.invoices.AddHoldInvoice",
+  settleinvoice: "lnd.invoices.SettleInvoice",
   channelbalance: "lnd.lightning.ChannelBalance",
   connectpeer: "lnd.lightning.ConnectPeer",
   decodepayreq: "lnd.lightning.DecodePayReq",
@@ -81,10 +83,12 @@ const snakeCaseObjectDeep = (value: FixMe): FixMe => {
   return value;
 };
 
-class LncCredentialStore implements CredentialStore {
+class LncCredentialStore {
+  account: Account;
   config: Config;
 
-  constructor(config: Config) {
+  constructor(account: Account, config: Config) {
+    this.account = account;
     this.config = config;
   }
 
@@ -135,9 +139,11 @@ class LncCredentialStore implements CredentialStore {
 
   private async _save() {
     const accounts = state.getState().accounts;
-    const password = state.getState().password as string;
-    const currentAccountId = state.getState().currentAccountId as string;
-    accounts[currentAccountId].config = encryptData(this.config, password);
+    const password = await state.getState().password();
+    accounts[this.account.id].config = encryptData(
+      this.config,
+      password as string
+    );
     state.setState({ accounts });
     await state.getState().saveToStorage();
     return true;
@@ -145,33 +151,40 @@ class LncCredentialStore implements CredentialStore {
 }
 
 class Lnc implements Connector {
+  account: Account;
   config: Config;
   lnc: FixMe;
 
-  constructor(config: Config) {
+  constructor(account: Account, config: Config) {
+    this.account = account;
     this.config = config;
     this.lnc = new LNC({
-      credentialStore: new LncCredentialStore(config),
+      credentialStore: new LncCredentialStore(account, config),
+      namespace: this.account.id,
     });
   }
 
   async init(): Promise<void> {
     console.info("init LNC");
-    await this.lnc.connect();
+    try {
+      await this.lnc.connect();
+    } catch (error) {
+      console.error("Init LNC failed", error);
+      await this.unload();
+    }
   }
 
   async unload() {
-    console.info("LNC disconnect");
-    await this.lnc.disconnect();
-    return new Promise<void>((resolve) => {
-      // give lnc a bit time to disconnect.
-      // not sure what there happens, best would be to have disconnect() return a promise
-      setTimeout(() => {
-        // TODO: investigate garbage collection
-        delete this.lnc;
-        resolve();
-      }, 1000);
-    });
+    if (!this.lnc) {
+      return;
+    }
+    try {
+      console.info("LNC disconnect");
+      await this.lnc.disconnect();
+      delete this.lnc;
+    } catch (error) {
+      console.error("Unload LNC failed", error);
+    }
   }
 
   get supportedMethods() {
@@ -196,9 +209,7 @@ class Lnc implements Connector {
   }
 
   getInfo(): Promise<GetInfoResponse> {
-    if (!this.lnc.isConnected) {
-      return Promise.reject(new Error("Account is still loading"));
-    }
+    this.checkConnection();
     return this.lnc.lnd.lightning.GetInfo().then((data: FixMe) => {
       return {
         data: {
@@ -211,9 +222,7 @@ class Lnc implements Connector {
   }
 
   getBalance(): Promise<GetBalanceResponse> {
-    if (!this.lnc.isConnected) {
-      return Promise.reject(new Error("Account is still loading"));
-    }
+    this.checkConnection();
     return this.lnc.lnd.lightning.ChannelBalance().then((data: FixMe) => {
       return {
         data: {
@@ -224,23 +233,21 @@ class Lnc implements Connector {
   }
 
   async getInvoices(): Promise<GetInvoicesResponse> {
-    if (!this.lnc.isConnected) {
-      throw new Error("Account is still loading");
-    }
+    this.checkConnection();
     const data = await this.lnc.lnd.lightning.ListInvoices({ reversed: true });
 
     const invoices: ConnectorInvoice[] = data.invoices
       .map((invoice: FixMe, index: number): ConnectorInvoice => {
         const custom_records =
-          invoice.htlcs[0] && invoice.htlcs[0].custom_records;
+          invoice.htlcs[0] && invoice.htlcs[0].customRecords;
 
         return {
           custom_records,
-          id: `${invoice.payment_request}-${index}`,
+          id: `${invoice.paymentRequest}-${index}`,
           memo: invoice.memo,
-          preimage: invoice.r_preimage,
+          preimage: invoice.rPreimage,
           settled: invoice.settled,
-          settleDate: parseInt(invoice.settle_date) * 1000,
+          settleDate: parseInt(invoice.settleDate) * 1000,
           totalAmount: invoice.value,
           type: "received",
         };
@@ -263,9 +270,7 @@ class Lnc implements Connector {
   }
 
   async checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {
-    if (!this.lnc.isConnected) {
-      throw new Error("Account is still loading");
-    }
+    this.checkConnection();
     return this.lnc.lnd.lightning
       .LookupInvoice({ r_hash_str: args.paymentHash })
       .then((data: FixMe) => {
@@ -278,9 +283,7 @@ class Lnc implements Connector {
   }
 
   sendPayment(args: SendPaymentArgs): Promise<SendPaymentResponse> {
-    if (!this.lnc.isConnected) {
-      return Promise.reject(new Error("Account is still loading"));
-    }
+    this.checkConnection();
     return this.lnc.lnd.lightning
       .SendPaymentSync({
         payment_request: args.paymentRequest,
@@ -302,9 +305,7 @@ class Lnc implements Connector {
       });
   }
   async keysend(args: KeysendArgs): Promise<SendPaymentResponse> {
-    if (!this.lnc.isConnected) {
-      throw new Error("Account is still loading");
-    }
+    this.checkConnection();
     //See: https://gist.github.com/dellagustin/c3793308b75b6b0faf134e64db7dc915
     const dest_pubkey_hex = args.pubkey;
     const dest_pubkey_base64 = Hex.parse(dest_pubkey_hex).toString(Base64);
@@ -348,9 +349,7 @@ class Lnc implements Connector {
   }
 
   signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {
-    if (!this.lnc.isConnected) {
-      return Promise.reject(new Error("Account is still loading"));
-    }
+    this.checkConnection();
     return this.lnc.lnd.lightning
       .SignMessage({ msg: Base64.stringify(UTF8.parse(args.message)) })
       .then((data: FixMe) => {
@@ -364,9 +363,7 @@ class Lnc implements Connector {
   }
 
   makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse> {
-    if (!this.lnc.isConnected) {
-      return Promise.reject(new Error("Account is still loading"));
-    }
+    this.checkConnection();
     return this.lnc.lnd.lightning
       .AddInvoice({ memo: args.memo, value: args.amount })
       .then((data: FixMe) => {
@@ -377,6 +374,15 @@ class Lnc implements Connector {
           },
         };
       });
+  }
+
+  private checkConnection() {
+    if (!this.lnc) {
+      throw new Error("Account failed to load");
+    }
+    if (!this.lnc.isConnected) {
+      throw new Error("Account is still loading");
+    }
   }
 }
 
