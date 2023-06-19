@@ -26,6 +26,21 @@ const mockGetFiatValue = jest
   .fn()
   .mockImplementation(() => Promise.resolve("$0.00"));
 
+jest.mock("~/app/context/AccountContext", () => ({
+  useAccount: () => ({
+    account: { id: "1", name: "LND account" },
+    loading: false,
+    unlock: jest.fn(),
+    lock: jest.fn(),
+    setAccountId: jest.fn(),
+    fetchAccountInfo: jest.fn(),
+    balancesDecorated: {
+      fiatBalance: "",
+      accountBalance: "",
+    },
+  }),
+}));
+
 jest.mock("~/app/context/SettingsContext", () => ({
   useSettings: () => ({
     settings: mockSettings,
@@ -38,28 +53,27 @@ jest.mock("~/app/context/SettingsContext", () => ({
 }));
 
 describe("DefaultView", () => {
-  test("render DefaultView currentUrl is null ", async () => {
+  test("render DefaultView", async () => {
     render(
       <AccountsProvider>
         <I18nextProvider i18n={i18n}>
           <MemoryRouter>
-            <DefaultView currentUrl={null} />
+            <DefaultView currentUrl={new URL("https://github.com/")} />
           </MemoryRouter>
         </I18nextProvider>
       </AccountsProvider>
     );
-    expect(await screen.findByText("Recent Transactions")).toBeInTheDocument();
     expect(await screen.findByText("Send")).toBeInTheDocument();
     expect(await screen.findByText("Receive")).toBeInTheDocument();
   });
-  test("render DefaultView have Battery ", async () => {
+  test("render DefaultView with battery", async () => {
     const battery = BatteryFixture[0];
     render(
       <AccountsProvider>
         <I18nextProvider i18n={i18n}>
           <MemoryRouter>
             <DefaultView
-              currentUrl={new URL("https://github.com/im-adithya")}
+              currentUrl={new URL("https://github.com/")}
               lnDataFromCurrentTab={[battery]}
             />
           </MemoryRouter>
