@@ -152,7 +152,6 @@ export type NavigationState = {
       method: string;
       description: string;
     };
-    psbt?: string;
     derivationPath?: string;
     index?: number;
     num?: number;
