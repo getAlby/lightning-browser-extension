@@ -6,6 +6,7 @@
   `$ yarn install`
 - Create development .env file
   `$ cp .env.example .env`
+- Set your desired .env settings to connect to either regtest or production for your specific browser.
 
 ### 💻 Load extension into browser
 
