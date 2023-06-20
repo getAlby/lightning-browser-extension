@@ -1,4 +1,5 @@
 import { wordlist } from "@scure/bip39/wordlists/english";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import Input from "~/app/components/form/Input";
 
@@ -17,6 +18,9 @@ export default function MnemonicInputs({
   const { t } = useTranslation("translation", {
     keyPrefix: "accounts.account_view.mnemonic",
   });
+  const [revealedIndex, setRevealedIndex] = useState<number | undefined>(
+    undefined
+  );
 
   const words = mnemonic?.split(" ") || [];
   while (words.length < 12) {
@@ -33,15 +37,23 @@ export default function MnemonicInputs({
               {i + 1}.
             </span>
             <Input
-              type="text"
+              type={revealedIndex === i ? "text" : "password"}
               required
-              disabled={disabled}
+              onFocus={() => setRevealedIndex(i)}
+              onBlur={() => setRevealedIndex(undefined)}
+              //disabled={disabled}
+              contentEditable={!disabled}
               block={false}
               className="w-24 text-center"
               autoComplete=""
               list={disabled ? undefined : "wordlist"}
-              value={words[i]}
+              value={
+                revealedIndex === i ? words[i] : words[i].length ? "xxxxx" : ""
+              }
               onChange={(e) => {
+                if (revealedIndex !== i) {
+                  return;
+                }
                 words[i] = e.target.value;
                 setMnemonic?.(
                   words

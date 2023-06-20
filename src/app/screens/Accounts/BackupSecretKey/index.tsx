@@ -1,4 +1,3 @@
-import { CopyIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import Container from "@components/Container";
 import Loading from "@components/Loading";
 import * as bip39 from "@scure/bip39";
@@ -19,14 +18,11 @@ import msg from "~/common/lib/msg";
 function BackupSecretKey() {
   const [mnemonic, setMnemonic] = useState<string | undefined>();
   const account = useAccount();
-  const { t: tCommon } = useTranslation("common");
   const { t } = useTranslation("translation", {
     keyPrefix: "accounts.account_view.mnemonic",
   });
-  const [publicKeyCopyLabel, setPublicKeyCopyLabel] = useState(
-    tCommon("actions.copy_clipboard") as string
-  );
   const [hasConfirmedBackup, setHasConfirmedBackup] = useState(false);
+  useState(false);
   // TODO: useMnemonic hook
   const [hasMnemonic, setHasMnemonic] = useState(false);
   // TODO: useNostrPrivateKey hook
@@ -114,28 +110,6 @@ function BackupSecretKey() {
           </p>
           <MnemonicInputs mnemonic={mnemonic} disabled>
             <>
-              {/* TODO: consider making CopyButton component */}
-              <Button
-                outline
-                icon={<CopyIcon className="w-6 h-6 mr-2" />}
-                label={publicKeyCopyLabel}
-                onClick={async () => {
-                  try {
-                    if (!mnemonic) {
-                      throw new Error("No Secret Key set");
-                    }
-                    navigator.clipboard.writeText(mnemonic);
-                    setPublicKeyCopyLabel(tCommon("copied"));
-                    setTimeout(() => {
-                      setPublicKeyCopyLabel(tCommon("actions.copy_clipboard"));
-                    }, 1000);
-                  } catch (e) {
-                    if (e instanceof Error) {
-                      toast.error(e.message);
-                    }
-                  }
-                }}
-              />
               {!hasMnemonic && (
                 <div className="flex items-center">
                   <Checkbox
