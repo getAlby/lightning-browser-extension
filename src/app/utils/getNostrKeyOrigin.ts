@@ -19,9 +19,11 @@ export async function getNostrKeyOrigin(
   }
 
   // TODO: consider removing this at some point and just returning "unknown"
-  const legacyAccountDerivedPrivateKey = (
-    await msg.request("nostr/generatePrivateKey")
-  ).privateKey;
+  const legacyAccountDerivedPrivateKeyResponse = await msg.request(
+    "nostr/generatePrivateKey"
+  );
+  const legacyAccountDerivedPrivateKey =
+    legacyAccountDerivedPrivateKeyResponse.privateKey;
 
   return legacyAccountDerivedPrivateKey === nostrPrivateKey
     ? "legacy-account-derived"
