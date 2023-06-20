@@ -470,6 +470,11 @@ function AccountDetail() {
               className="mb-4 flex justify-between items-end"
             >
               <div className="w-7/12">
+                {/* We use a hidden field to hint Firefox's password manager
+                    that this password field is for an account different
+                    than the unlock passcode (no username)
+                */}
+                <input value={accountName} style={{ display: "none" }} />
                 <TextField
                   id="nostrPrivateKey"
                   label={t("nostr.private_key.label")}
