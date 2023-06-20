@@ -115,7 +115,8 @@ function ImportSecretKey() {
                 label={importPasteLabel}
                 onClick={async () => {
                   try {
-                    setMnemonic(await navigator.clipboard.readText());
+                    const clipboardText = await navigator.clipboard.readText();
+                    setMnemonic(clipboardText);
                     setImportPasteLabel(tCommon("pasted"));
                     setTimeout(() => {
                       setImportPasteLabel(tCommon("actions.paste_clipboard"));
