@@ -4,7 +4,7 @@ import * as bip39 from "@scure/bip39";
 import { wordlist } from "@scure/bip39/wordlists/english";
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Alert from "~/app/components/Alert";
 import Button from "~/app/components/Button";
@@ -19,6 +19,7 @@ function ImportSecretKey() {
   const [mnemonic, setMnemonic] = useState<string>("");
   const account = useAccount();
   const { t: tCommon } = useTranslation("common");
+  const navigate = useNavigate();
   const { t } = useTranslation("translation", {
     keyPrefix: "accounts.account_view.mnemonic",
   });
@@ -53,7 +54,8 @@ function ImportSecretKey() {
   }, [fetchData]);
 
   function cancelImport() {
-    history.back();
+    // go to account settings
+    navigate(`/accounts/${id}`);
   }
 
   async function importKey() {
@@ -77,7 +79,8 @@ function ImportSecretKey() {
 
       await saveMnemonic(id, mnemonic);
       toast.success(t("saved"));
-      history.back();
+      // go to account settings
+      navigate(`/accounts/${id}`);
     } catch (e) {
       if (e instanceof Error) toast.error(e.message);
     }

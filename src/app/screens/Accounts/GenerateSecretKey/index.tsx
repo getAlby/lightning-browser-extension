@@ -4,7 +4,7 @@ import * as bip39 from "@scure/bip39";
 import { wordlist } from "@scure/bip39/wordlists/english";
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Alert from "~/app/components/Alert";
 import Button from "~/app/components/Button";
@@ -17,6 +17,7 @@ import { saveMnemonic } from "~/app/utils/saveMnemonic";
 import api from "~/common/lib/api";
 
 function GenerateSecretKey() {
+  const navigate = useNavigate();
   const [mnemonic, setMnemonic] = useState<string | undefined>();
   const account = useAccount();
   const { t } = useTranslation("translation", {
@@ -61,7 +62,8 @@ function GenerateSecretKey() {
 
       await saveMnemonic(id, mnemonic);
       toast.success(t("saved"));
-      history.back();
+      // go to account settings
+      navigate(`/accounts/${id}`);
     } catch (e) {
       if (e instanceof Error) toast.error(e.message);
     }

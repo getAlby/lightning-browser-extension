@@ -6,7 +6,7 @@ import Container from "@components/Container";
 import Loading from "@components/Loading";
 import { FormEvent, useCallback, useEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Alert from "~/app/components/Alert";
 import Button from "~/app/components/Button";
@@ -25,6 +25,7 @@ function NostrAdvancedSettings() {
   const { t } = useTranslation("translation", {
     keyPrefix: "accounts.account_view",
   });
+  const navigate = useNavigate();
   // FIXME: use account hasMnemonic
   const [mnemonic, setMnemonic] = useState("");
   const [currentPrivateKey, setCurrentPrivateKey] = useState("");
@@ -83,7 +84,8 @@ function NostrAdvancedSettings() {
   }, [currentPrivateKey, t]);
 
   function onCancel() {
-    history.back();
+    // go to account settings
+    navigate(`/accounts/${id}`);
   }
 
   async function handleDeriveNostrKeyFromSecretKey() {
@@ -132,7 +134,8 @@ function NostrAdvancedSettings() {
         toast.error(e.message);
       }
     }
-    history.back();
+    // go to account settings
+    navigate(`/accounts/${id}`);
   }
 
   return !account ? (
