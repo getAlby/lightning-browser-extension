@@ -10,11 +10,9 @@ const mockState = {
   currentAccountId: "1e1e8ea6-493e-480b-9855-303d37506e97",
   getAccount: () => ({
     mnemonic: btcFixture.mnemnoic,
+    bitcoinNetwork: "regtest",
   }),
   getConnector: jest.fn(),
-  settings: {
-    bitcoinNetwork: "regtest",
-  },
 };
 
 state.getState = jest.fn().mockReturnValue(mockState);

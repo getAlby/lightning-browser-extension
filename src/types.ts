@@ -11,6 +11,8 @@ import { Event } from "./extension/providers/nostr/types";
 
 export type ConnectorType = keyof typeof connectors;
 
+export type BitcoinNetworkType = "bitcoin" | "regtest";
+
 export interface Account {
   id: string;
   connector: ConnectorType;
@@ -19,6 +21,7 @@ export interface Account {
   nostrPrivateKey?: string | null;
   mnemonic?: string | null;
   hasImportedNostrKey?: boolean;
+  bitcoinNetwork?: BitcoinNetworkType;
 }
 
 export interface Accounts {
@@ -203,7 +206,8 @@ export interface MessageAccountAdd extends MessageDefault {
 export interface MessageAccountEdit extends MessageDefault {
   args: {
     id: Account["id"];
-    name: Account["name"];
+    name?: Account["name"];
+    bitcoinNetwork?: BitcoinNetworkType;
   };
   action: "editAccount";
 }
@@ -749,7 +753,6 @@ export interface SettingsStorage {
   exchange: SupportedExchanges;
   nostrEnabled: boolean;
   closedTips: TIPS[];
-  bitcoinNetwork: "bitcoin" | "regtest";
 }
 
 export interface Badge {

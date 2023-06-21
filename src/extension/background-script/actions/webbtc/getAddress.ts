@@ -24,10 +24,9 @@ const getAddress = async (message: MessageGetAddress) => {
       throw new Error("No mnemonic set");
     }
     const mnemonic = decryptData(account.mnemonic, password);
-    const settings = state.getState().settings;
 
     const derivationPath =
-      settings.bitcoinNetwork === "bitcoin"
+      (account.bitcoinNetwork || "bitcoin") === "bitcoin"
         ? BTC_TAPROOT_DERIVATION_PATH
         : BTC_TAPROOT_DERIVATION_PATH_REGTEST;
 
@@ -36,7 +35,7 @@ const getAddress = async (message: MessageGetAddress) => {
 
     const address = getTaprootAddressFromPrivateKey(
       privateKey,
-      settings.bitcoinNetwork
+      account.bitcoinNetwork || "bitcoin"
     );
 
     const data: BitcoinAddress = {

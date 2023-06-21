@@ -28,6 +28,7 @@ const mockState = {
       name: "Alby",
       nostrPrivateKey: "nostr-123-456",
       mnemonic: btcFixture.mnemnoic,
+      bitcoinNetwork: "regtest",
     },
     "1e1e8ea6-493e-480b-9855-303d37506e97": {
       config: "config-123-456",
@@ -60,6 +61,7 @@ describe("account info", () => {
       nostrEnabled: false,
       hasMnemonic: false,
       hasImportedNostrKey: true,
+      bitcoinNetwork: "bitcoin",
     };
 
     expect(await getAccount(message)).toStrictEqual({
@@ -84,6 +86,7 @@ describe("account info", () => {
       nostrEnabled: true,
       hasMnemonic: true,
       hasImportedNostrKey: true,
+      bitcoinNetwork: "regtest",
     };
 
     expect(await getAccount(message)).toStrictEqual({

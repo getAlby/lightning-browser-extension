@@ -449,6 +449,16 @@
             "title": "Your Secret Key"
           }
         },
+        "bitcoin": {
+          "network": {
+            "title": "Bitcoin Network",
+            "subtitle": "Choose network to derive addresses and decode transactions",
+            "options": {
+              "bitcoin": "Mainnet",
+              "regtest": "Regtest"
+            }
+          }
+        },
         "nostr": {
           "title": "Nostr",
           "hint": "is a simple and open protocol that aims to create censorship-resistant social networks. Nostr works with cryptographic keys. To publish something you sign it with your key and send it to multiple relays. You can use Alby to manage your Nostr key. Many Nostr applications will then allow you to simply use the key from the Alby extension.",
@@ -573,18 +583,6 @@
           "dark": "Dark",
           "light": "Light",
           "system": "System"
-        }
-      },
-      "bitcoin": {
-        "title": "Bitcoin",
-        "hint": "Manage your Bitcoin settings for WebBTC-enabled apps",
-        "network": {
-          "title": "Network",
-          "subtitle": "Choose network to derive addresses and decode transactions",
-          "options": {
-            "bitcoin": "Mainnet",
-            "regtest": "Regtest"
-          }
         }
       },
       "show_fiat": {

@@ -10,6 +10,7 @@ import type {
   AccountInfo,
   Accounts,
   Allowance,
+  BitcoinNetworkType,
   DbPayment,
   Invoice,
   LnurlAuthResponse,
@@ -39,6 +40,7 @@ export interface GetAccountRes
   nostrEnabled: boolean;
   hasMnemonic: boolean;
   hasImportedNostrKey: boolean;
+  bitcoinNetwork: BitcoinNetworkType;
 }
 interface StatusRes {
   configured: boolean;
