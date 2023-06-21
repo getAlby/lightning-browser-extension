@@ -13,6 +13,7 @@ import Checkbox from "~/app/components/form/Checkbox";
 import { useAccount } from "~/app/context/AccountContext";
 import NostrIcon from "~/app/icons/NostrIcon";
 import { saveMnemonic } from "~/app/utils/saveMnemonic";
+import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 
 function BackupSecretKey() {
@@ -24,18 +25,15 @@ function BackupSecretKey() {
   const [hasConfirmedBackup, setHasConfirmedBackup] = useState(false);
   useState(false);
   const [hasMnemonic, setHasMnemonic] = useState(false);
-  const [currentPrivateKey, setCurrentPrivateKey] = useState("");
+  const [hasNostrPrivateKey, setHasNostrPrivateKey] = useState(false);
 
   const { id } = useParams();
 
   const fetchData = useCallback(async () => {
     try {
-      const priv = (await msg.request("nostr/getPrivateKey", {
-        id,
-      })) as string;
-      if (priv) {
-        setCurrentPrivateKey(priv);
-      }
+      const account = await api.getAccount();
+      setHasNostrPrivateKey(account.nostrEnabled);
+
       const accountMnemonic = (await msg.request("getMnemonic", {
         id,
       })) as string;
@@ -126,7 +124,7 @@ function BackupSecretKey() {
               )}
             </>
           </MnemonicInputs>
-          {!hasMnemonic && currentPrivateKey && (
+          {!hasMnemonic && hasNostrPrivateKey && (
             <Alert type="warn">{t("existing_nostr_key_notice")}</Alert>
           )}
         </div>

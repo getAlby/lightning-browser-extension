@@ -11,6 +11,7 @@ import Button from "~/app/components/Button";
 import MnemonicInputs from "~/app/components/MnemonicInputs";
 import { useAccount } from "~/app/context/AccountContext";
 import { saveMnemonic } from "~/app/utils/saveMnemonic";
+import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 
 function ImportSecretKey() {
@@ -23,18 +24,14 @@ function ImportSecretKey() {
 
   const [hasFetchedData, setHasFetchedData] = useState(false);
   const [hasMnemonic, setHasMnemonic] = useState(false);
-  const [currentPrivateKey, setCurrentPrivateKey] = useState("");
+  const [hasNostrPrivateKey, setHasNostrPrivateKey] = useState(false);
   const { id } = useParams();
 
   const fetchData = useCallback(async () => {
     try {
       if (id) {
-        const priv = (await msg.request("nostr/getPrivateKey", {
-          id,
-        })) as string;
-        if (priv) {
-          setCurrentPrivateKey(priv);
-        }
+        const account = await api.getAccount();
+        setHasNostrPrivateKey(account.nostrEnabled);
 
         const accountMnemonic = (await msg.request("getMnemonic", {
           id,
@@ -101,7 +98,7 @@ function ImportSecretKey() {
           </p>
 
           <MnemonicInputs mnemonic={mnemonic} setMnemonic={setMnemonic} />
-          {currentPrivateKey && (
+          {hasNostrPrivateKey && (
             <Alert type="warn">{t("existing_nostr_key_notice")}</Alert>
           )}
         </div>
