@@ -36,7 +36,7 @@ import msg from "~/common/lib/msg";
 import nostr from "~/common/lib/nostr";
 import type { Account } from "~/types";
 
-type AccountAction = Omit<Account, "connector" | "config" | "nostrPrivateKey">;
+type AccountAction = Pick<Account, "id" | "name">;
 dayjs.extend(relativeTime);
 
 function AccountDetail() {
@@ -61,8 +61,8 @@ function AccountDetail() {
   });
   const [accountName, setAccountName] = useState("");
 
-  // TODO: add hooks useMnemonic, useNostrPrivateKey, ...
   const [mnemonic, setMnemonic] = useState("");
+  // TODO: do not get private key here to just calculate public key!
   const [currentPrivateKey, setCurrentPrivateKey] = useState("");
   const [nostrPublicKey, setNostrPublicKey] = useState("");
   const [nostrKeyOrigin, setNostrKeyOrigin] =
