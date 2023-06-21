@@ -26,6 +26,7 @@ import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
 import { getConnectorRoutes, renderRoutes } from "~/app/router/connectorRoutes";
 import BackupSecretKey from "~/app/screens/Accounts/BackupSecretKey";
+import GenerateSecretKey from "~/app/screens/Accounts/GenerateSecretKey";
 import ImportSecretKey from "~/app/screens/Accounts/ImportSecretKey";
 import NostrAdvancedSettings from "~/app/screens/Accounts/NostrAdvancedSettings";
 import Discover from "~/app/screens/Discover";
@@ -92,6 +93,10 @@ function Options() {
               <Route
                 path=":id/secret-key/backup"
                 element={<BackupSecretKey />}
+              />
+              <Route
+                path=":id/secret-key/generate"
+                element={<GenerateSecretKey />}
               />
               <Route
                 path=":id/secret-key/import"

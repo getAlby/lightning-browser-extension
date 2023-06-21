@@ -25,6 +25,7 @@ function NostrAdvancedSettings() {
   const { t } = useTranslation("translation", {
     keyPrefix: "accounts.account_view",
   });
+  // FIXME: use account hasMnemonic
   const [mnemonic, setMnemonic] = useState("");
   const [currentPrivateKey, setCurrentPrivateKey] = useState("");
   const [nostrPrivateKey, setNostrPrivateKey] = useState("");
@@ -157,7 +158,7 @@ function NostrAdvancedSettings() {
               </p>
             </div>
 
-            {currentPrivateKey ? (
+            {mnemonic && currentPrivateKey ? (
               hasImportedNostrKey ? (
                 <Alert type="warn">
                   {t("nostr.advanced_settings.imported_key_warning")}
@@ -225,7 +226,7 @@ function NostrAdvancedSettings() {
                         components={[
                           // eslint-disable-next-line react/jsx-key
                           <Link
-                            to="../secret-key/backup"
+                            to="../secret-key/generate"
                             relative="path"
                             className="underline"
                           />,

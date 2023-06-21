@@ -376,7 +376,7 @@ function AccountDetail() {
               </div>
 
               <div className="w-1/5 flex-none">
-                <Link to="secret-key/backup">
+                <Link to={`secret-key/${hasMnemonic ? "backup" : "generate"}`}>
                   <Button
                     label={t(
                       hasMnemonic

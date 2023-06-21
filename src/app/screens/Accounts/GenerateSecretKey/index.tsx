@@ -10,69 +10,53 @@ import Alert from "~/app/components/Alert";
 import Button from "~/app/components/Button";
 import { ContentBox } from "~/app/components/ContentBox";
 import MnemonicInputs from "~/app/components/MnemonicInputs";
+import SecretKeyDescription from "~/app/components/SecretKeyDescription";
+import Checkbox from "~/app/components/form/Checkbox";
 import { useAccount } from "~/app/context/AccountContext";
 import { saveMnemonic } from "~/app/utils/saveMnemonic";
 import api from "~/common/lib/api";
-import msg from "~/common/lib/msg";
 
-function ImportSecretKey() {
-  const [mnemonic, setMnemonic] = useState<string>("");
+function GenerateSecretKey() {
+  const [mnemonic, setMnemonic] = useState<string | undefined>();
   const account = useAccount();
-  const { t: tCommon } = useTranslation("common");
   const { t } = useTranslation("translation", {
     keyPrefix: "accounts.account_view.mnemonic",
   });
-
-  const [hasFetchedData, setHasFetchedData] = useState(false);
-  const [hasMnemonic, setHasMnemonic] = useState(false);
+  const [hasConfirmedBackup, setHasConfirmedBackup] = useState(false);
+  useState(false);
   const [hasNostrPrivateKey, setHasNostrPrivateKey] = useState(false);
+
   const { id } = useParams();
 
   const fetchData = useCallback(async () => {
     try {
-      if (id) {
-        const account = await api.getAccount();
-        setHasNostrPrivateKey(account.nostrEnabled);
+      const account = await api.getAccount();
+      setHasNostrPrivateKey(account.nostrEnabled);
 
-        const accountMnemonic = (await msg.request("getMnemonic", {
-          id,
-        })) as string;
-        if (accountMnemonic) {
-          setHasMnemonic(true);
-        }
-        setHasFetchedData(true);
-      }
+      // TODO: move to background script
+      // generate a new mnemonic
+      setMnemonic(bip39.generateMnemonic(wordlist, 128));
     } catch (e) {
       console.error(e);
       if (e instanceof Error) toast.error(`Error: ${e.message}`);
     }
-  }, [id]);
+  }, []);
 
   useEffect(() => {
     fetchData();
   }, [fetchData]);
 
-  function cancelImport() {
-    history.back();
-  }
-
-  async function importKey() {
+  async function backupSecretKey() {
     try {
-      if (hasMnemonic) {
-        if (!window.confirm(t("import.confirm_overwrite"))) {
-          return;
-        }
+      if (!hasConfirmedBackup) {
+        throw new Error(t("backup.error_confirm"));
       }
       if (!account || !id) {
         // type guard
         throw new Error("No account available");
       }
-
-      if (
-        mnemonic.split(" ").length !== 12 ||
-        !bip39.validateMnemonic(mnemonic, wordlist)
-      ) {
-        throw new Error("Invalid mnemonic");
+      if (!mnemonic) {
+        throw new Error("No mnemonic available");
       }
 
       await saveMnemonic(id, mnemonic);
@@ -83,7 +67,7 @@ function ImportSecretKey() {
     }
   }
 
-  return !account || !hasFetchedData ? (
+  return !account || !mnemonic ? (
     <div className="flex justify-center mt-5">
       <Loading />
     </div>
@@ -92,25 +76,39 @@ function ImportSecretKey() {
       <Container>
         <ContentBox>
           <h1 className="font-bold text-2xl dark:text-white">
-            {t("import.title")}
+            {t("generate.title")}
           </h1>
-          <p className="text-gray-500 dark:text-neutral-500 -mt-2 mb-4">
-            {t("import.description")}
-          </p>
-
-          <MnemonicInputs mnemonic={mnemonic} setMnemonic={setMnemonic} />
+          <SecretKeyDescription />
+          <MnemonicInputs mnemonic={mnemonic} readOnly>
+            <>
+              <div className="flex items-center">
+                <Checkbox
+                  id="has_backed_up"
+                  name="Backup confirmation checkbox"
+                  checked={hasConfirmedBackup}
+                  onChange={(event) => {
+                    setHasConfirmedBackup(event.target.checked);
+                  }}
+                />
+                <label
+                  htmlFor="has_backed_up"
+                  className="cursor-pointer ml-2 block text-sm text-gray-900 font-medium dark:text-white"
+                >
+                  {t("backup.confirm")}
+                </label>
+              </div>
+            </>
+          </MnemonicInputs>
           {hasNostrPrivateKey && (
             <Alert type="warn">{t("existing_nostr_key_notice")}</Alert>
           )}
         </ContentBox>
-
-        <div className="flex justify-center mt-8 mb-16 gap-4">
-          <Button label={tCommon("actions.cancel")} onClick={cancelImport} />
-          <Button label={t("import.button")} primary onClick={importKey} />
+        <div className="flex justify-center mt-8 mb-16">
+          <Button label={t("backup.save")} primary onClick={backupSecretKey} />
         </div>
       </Container>
     </div>
   );
 }
 
-export default ImportSecretKey;
+export default GenerateSecretKey;
