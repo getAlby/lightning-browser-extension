@@ -13,7 +13,7 @@ export default function OnChainReceive() {
   });
 
   return (
-    <div className=" flex flex-col overflow-y-auto no-scrollbar">
+    <div className=" flex flex-col overflow-y-auto no-scrollbar h-full">
       <Header
         title={t("title")}
         headerLeft={
@@ -25,7 +25,7 @@ export default function OnChainReceive() {
           />
         }
       />
-      <div className="pt-4">
+      <div className="pt-4 h-full">
         <Container justifyBetween maxWidth="sm">
           <div className="text-center dark:text-neutral-200 h-full flex flex-col justify-center items-center">
             <div className="mb-8">
@@ -49,17 +49,15 @@ export default function OnChainReceive() {
             </div>
           </div>
           <div className="mb-4">
-            <a href="https://getalby.com/node/receive">
-              <Button
-                type="submit"
-                label={t("go")}
-                fullWidth
-                primary
-                onClick={() =>
-                  window.open(`https://getalby.com/user`, "_blank")
-                }
-              />
-            </a>
+            <Button
+              type="submit"
+              label={t("go")}
+              fullWidth
+              primary
+              onClick={() =>
+                window.open("https://getalby.com/node/receive", "_blank")
+              }
+            />
           </div>
         </Container>
       </div>

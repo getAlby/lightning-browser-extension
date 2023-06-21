@@ -278,7 +278,7 @@ function Receive() {
               </Container>
             </fieldset>
           </form>
-          {isAlbyUser ? (
+          {isAlbyUser && (
             <div>
               <Container justifyBetween maxWidth="sm">
                 <div className="relative flex  items-center mb-4">
@@ -294,8 +294,6 @@ function Receive() {
                     type="button"
                     label={t("receive_via_bitcoin_address")}
                     fullWidth
-                    loading={loading}
-                    disabled={loading}
                     onClick={() => {
                       navigate("/onChainReceive");
                     }}
@@ -303,7 +301,7 @@ function Receive() {
                 </div>
               </Container>
             </div>
-          ) : null}
+          )}
         </div>
       )}
     </div>

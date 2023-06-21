@@ -11,8 +11,8 @@ import Send from "@screens/Send";
 import Unlock from "@screens/Unlock";
 import { HashRouter, Outlet, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import OnChainReceive from "~/app/components/OnChainReceive";
 import Providers from "~/app/context/Providers";
+import OnChainReceive from "~/app/screens/OnChainReceive";
 
 import RequireAuth from "../RequireAuth";
 
