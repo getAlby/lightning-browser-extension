@@ -108,7 +108,7 @@ function BackupSecretKey() {
           <p className="mb-8 text-gray-500 dark:text-neutral-500">
             {t("backup.description2")}
           </p>
-          <MnemonicInputs mnemonic={mnemonic} disabled>
+          <MnemonicInputs mnemonic={mnemonic} readOnly>
             <>
               {!hasMnemonic && (
                 <div className="flex items-center">
