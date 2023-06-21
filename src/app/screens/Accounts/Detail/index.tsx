@@ -27,10 +27,6 @@ import MenuDivider from "~/app/components/Menu/MenuDivider";
 import { useAccount } from "~/app/context/AccountContext";
 import { useAccounts } from "~/app/context/AccountsContext";
 import { useSettings } from "~/app/context/SettingsContext";
-import {
-  NostrKeyOrigin,
-  getNostrKeyOrigin,
-} from "~/app/utils/getNostrKeyOrigin";
 import api, { GetAccountRes } from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import nostr from "~/common/lib/nostr";
@@ -61,12 +57,11 @@ function AccountDetail() {
   });
   const [accountName, setAccountName] = useState("");
 
-  const [mnemonic, setMnemonic] = useState("");
+  const [hasMnemonic, setHasMnemonic] = useState(false);
   // TODO: do not get private key here to just calculate public key!
   const [currentPrivateKey, setCurrentPrivateKey] = useState("");
   const [nostrPublicKey, setNostrPublicKey] = useState("");
-  const [nostrKeyOrigin, setNostrKeyOrigin] =
-    useState<NostrKeyOrigin>("unknown");
+  const [hasImportedNostrKey, setHasImportedNostrKey] = useState(false);
 
   const [exportLoading, setExportLoading] = useState(false);
   const [exportModalIsOpen, setExportModalIsOpen] = useState(false);
@@ -80,23 +75,14 @@ function AccountDetail() {
 
         setAccount(response);
         setAccountName(response.name);
+        setHasMnemonic(response.hasMnemonic);
+        setHasImportedNostrKey(response.hasImportedNostrKey);
 
         const priv = (await msg.request("nostr/getPrivateKey", {
           id,
         })) as string;
         if (priv) {
           setCurrentPrivateKey(priv);
-        }
-
-        const accountMnemonic = (await msg.request("getMnemonic", {
-          id,
-        })) as string;
-        if (accountMnemonic) {
-          setMnemonic(accountMnemonic);
-        }
-        if (priv) {
-          const keyOrigin = await getNostrKeyOrigin(priv, accountMnemonic);
-          setNostrKeyOrigin(keyOrigin);
         }
       }
     } catch (e) {
@@ -171,7 +157,8 @@ function AccountDetail() {
         id,
         mnemonic: null,
       });
-      setMnemonic("");
+      setHasMnemonic(false);
+      setHasImportedNostrKey(true);
       toast.success(t("remove_secretkey.success"));
     } else {
       toast.error(t("remove.error"));
@@ -370,7 +357,7 @@ function AccountDetail() {
           </p>
 
           <div className="shadow bg-white sm:rounded-md sm:overflow-hidden p-6 dark:bg-surface-02dp flex flex-col gap-4">
-            {mnemonic && (
+            {hasMnemonic && (
               <Alert type="warn">{t("mnemonic.backup.warning")}</Alert>
             )}
 
@@ -378,7 +365,7 @@ function AccountDetail() {
               <div className="w-9/12">
                 <p className="text-gray-900 dark:text-white font-medium">
                   {t(
-                    mnemonic
+                    hasMnemonic
                       ? "mnemonic.backup.title"
                       : "mnemonic.generate.title"
                   )}
@@ -392,7 +379,7 @@ function AccountDetail() {
                 <Link to="secret-key/backup">
                   <Button
                     label={t(
-                      mnemonic
+                      hasMnemonic
                         ? "mnemonic.backup.button"
                         : "mnemonic.generate.button"
                     )}
@@ -436,7 +423,7 @@ function AccountDetail() {
                     nostrPublicKey && <InputCopyButton value={nostrPublicKey} />
                   }
                 />
-                {nostrPublicKey && nostrKeyOrigin !== "secret-key" && (
+                {nostrPublicKey && hasImportedNostrKey && (
                   <Badge
                     label="imported"
                     color="green-bitcoin"
@@ -465,7 +452,7 @@ function AccountDetail() {
             <div className="flex-grow border-t border-gray-300 dark:border-gray-700"></div>
           </div>
           <div className="shadow bg-white sm:rounded-md sm:overflow-hidden mb-5 px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">
-            {mnemonic && (
+            {hasMnemonic && (
               <Setting
                 title={t("remove_secretkey.title")}
                 subtitle={t("remove_secretkey.subtitle")}

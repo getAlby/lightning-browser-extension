@@ -18,6 +18,7 @@ const setMnemonic = async (message: MessageMnemonicSet) => {
   if (id && Object.keys(accounts).includes(id)) {
     const account = accounts[id];
     account.mnemonic = mnemonic ? encryptData(mnemonic, password) : null;
+    account.hasImportedNostrKey = true;
     accounts[id] = account;
     state.setState({ accounts });
     await state.getState().saveToStorage();

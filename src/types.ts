@@ -18,6 +18,7 @@ export interface Account {
   name: string;
   nostrPrivateKey?: string | null;
   mnemonic?: string | null;
+  hasImportedNostrKey?: boolean;
 }
 
 export interface Accounts {

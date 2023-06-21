@@ -1,5 +1,8 @@
 import * as btc from "@scure/btc-signer";
 
+// TODO: move these functions to new Bitcoin object
+
+// TODO: private key should not be needed to be passed in
 export function getTaprootAddressFromPrivateKey(
   privateKey: string,
   networkType?: keyof typeof networks

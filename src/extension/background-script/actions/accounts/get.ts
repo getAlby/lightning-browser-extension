@@ -19,7 +19,9 @@ const get = async (message: MessageAccountGet) => {
     connector: account.connector,
     name: account.name,
     nostrEnabled: !!account.nostrPrivateKey,
-    hasSecretKey: !!account.mnemonic,
+    hasMnemonic: !!account.mnemonic,
+    // Note: undefined (default for new accounts) it is also considered imported
+    hasImportedNostrKey: account.hasImportedNostrKey !== false,
   };
 
   return {

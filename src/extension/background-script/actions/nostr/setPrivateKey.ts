@@ -1,4 +1,5 @@
-import { encryptData } from "~/common/lib/crypto";
+import { decryptData, encryptData } from "~/common/lib/crypto";
+import { deriveNostrPrivateKey } from "~/common/lib/mnemonic";
 import type { MessagePrivateKeySet } from "~/types";
 
 import state from "../../state";
@@ -20,6 +21,12 @@ const setPrivateKey = async (message: MessagePrivateKeySet) => {
     account.nostrPrivateKey = privateKey
       ? encryptData(privateKey, password)
       : null;
+
+    // TODO: move deriveNostrPrivateKey to new Mnemonic object
+    account.hasImportedNostrKey =
+      !account.mnemonic ||
+      deriveNostrPrivateKey(decryptData(account.mnemonic, password)) !==
+        privateKey;
     accounts[id] = account;
     state.setState({ accounts });
     await state.getState().saveToStorage();

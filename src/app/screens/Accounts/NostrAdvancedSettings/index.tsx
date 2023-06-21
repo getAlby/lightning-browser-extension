@@ -13,11 +13,8 @@ import Button from "~/app/components/Button";
 import InputCopyButton from "~/app/components/InputCopyButton";
 import TextField from "~/app/components/form/TextField";
 import { useAccount } from "~/app/context/AccountContext";
-import {
-  NostrKeyOrigin,
-  getNostrKeyOrigin,
-} from "~/app/utils/getNostrKeyOrigin";
 import { saveNostrPrivateKey } from "~/app/utils/saveNostrPrivateKey";
+import { GetAccountRes } from "~/common/lib/api";
 import { deriveNostrPrivateKey } from "~/common/lib/mnemonic";
 import msg from "~/common/lib/msg";
 import { default as nostr, default as nostrlib } from "~/common/lib/nostr";
@@ -28,14 +25,12 @@ function NostrAdvancedSettings() {
   const { t } = useTranslation("translation", {
     keyPrefix: "accounts.account_view",
   });
-  // TODO: add hooks useMnemonic, useNostrPrivateKey, ...
   const [mnemonic, setMnemonic] = useState("");
   const [currentPrivateKey, setCurrentPrivateKey] = useState("");
   const [nostrPrivateKey, setNostrPrivateKey] = useState("");
   const [nostrPrivateKeyVisible, setNostrPrivateKeyVisible] = useState(false);
   const [nostrPublicKey, setNostrPublicKey] = useState("");
-  const [nostrKeyOrigin, setNostrKeyOrigin] =
-    useState<NostrKeyOrigin>("unknown");
+  const [hasImportedNostrKey, setHasImportedNostrKey] = useState(false);
   const { id } = useParams();
 
   const fetchData = useCallback(async () => {
@@ -47,6 +42,7 @@ function NostrAdvancedSettings() {
         setCurrentPrivateKey(priv);
       }
 
+      // FIXME: do not get mnemonic here
       const accountMnemonic = (await msg.request("getMnemonic", {
         id,
       })) as string;
@@ -54,10 +50,10 @@ function NostrAdvancedSettings() {
         setMnemonic(accountMnemonic);
       }
 
-      if (priv) {
-        const keyOrigin = await getNostrKeyOrigin(priv, accountMnemonic);
-        setNostrKeyOrigin(keyOrigin);
-      }
+      const accountResponse = await msg.request<GetAccountRes>("getAccount", {
+        id,
+      });
+      setHasImportedNostrKey(accountResponse.hasImportedNostrKey);
     }
   }, [id]);
 
@@ -161,18 +157,16 @@ function NostrAdvancedSettings() {
               </p>
             </div>
 
-            {currentPrivateKey && nostrKeyOrigin !== "secret-key" ? (
-              <Alert type="warn">
-                {t(
-                  nostrKeyOrigin === "unknown"
-                    ? "nostr.advanced_settings.imported_key_warning"
-                    : "nostr.advanced_settings.legacy_derived_key_warning"
-                )}
-              </Alert>
-            ) : nostrKeyOrigin === "secret-key" ? (
-              <Alert type="info">
-                {t("nostr.advanced_settings.can_restore")}
-              </Alert>
+            {currentPrivateKey ? (
+              hasImportedNostrKey ? (
+                <Alert type="warn">
+                  {t("nostr.advanced_settings.imported_key_warning")}
+                </Alert>
+              ) : (
+                <Alert type="info">
+                  {t("nostr.advanced_settings.can_restore")}
+                </Alert>
+              )
             ) : null}
 
             <div>
@@ -215,33 +209,32 @@ function NostrAdvancedSettings() {
                 disabled
                 endAdornment={<InputCopyButton value={nostrPublicKey} />}
               />
-              {nostrKeyOrigin !== "secret-key" &&
-                (mnemonic || !currentPrivateKey) && (
-                  <div className="mt-4">
-                    {mnemonic ? (
-                      <Button
-                        outline
-                        label={t("nostr.advanced_settings.derive")}
-                        onClick={handleDeriveNostrKeyFromSecretKey}
+              {hasImportedNostrKey && (
+                <div className="mt-4">
+                  {mnemonic ? (
+                    <Button
+                      outline
+                      label={t("nostr.advanced_settings.derive")}
+                      onClick={handleDeriveNostrKeyFromSecretKey}
+                    />
+                  ) : (
+                    <Alert type="warn">
+                      <Trans
+                        i18nKey={"nostr.advanced_settings.no_secret_key"}
+                        t={t}
+                        components={[
+                          // eslint-disable-next-line react/jsx-key
+                          <Link
+                            to="../secret-key/backup"
+                            relative="path"
+                            className="underline"
+                          />,
+                        ]}
                       />
-                    ) : (
-                      <Alert type="warn">
-                        <Trans
-                          i18nKey={"nostr.advanced_settings.no_secret_key"}
-                          t={t}
-                          components={[
-                            // eslint-disable-next-line react/jsx-key
-                            <Link
-                              to="../secret-key/backup"
-                              relative="path"
-                              className="underline"
-                            />,
-                          ]}
-                        />
-                      </Alert>
-                    )}
-                  </div>
-                )}
+                    </Alert>
+                  )}
+                </div>
+              )}
             </div>
           </div>
           <div className="flex justify-center mt-8 mb-16 gap-4">

@@ -58,7 +58,8 @@ describe("account info", () => {
       name: "Alby",
       connector: "lndhub",
       nostrEnabled: false,
-      hasSecretKey: false,
+      hasMnemonic: false,
+      hasImportedNostrKey: true,
     };
 
     expect(await getAccount(message)).toStrictEqual({
@@ -81,7 +82,8 @@ describe("account info", () => {
       name: "Alby",
       connector: "lndhub",
       nostrEnabled: true,
-      hasSecretKey: true,
+      hasMnemonic: true,
+      hasImportedNostrKey: true,
     };
 
     expect(await getAccount(message)).toStrictEqual({

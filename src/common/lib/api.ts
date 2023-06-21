@@ -37,7 +37,8 @@ export interface AccountInfoRes {
 export interface GetAccountRes
   extends Pick<Account, "id" | "connector" | "name"> {
   nostrEnabled: boolean;
-  hasSecretKey: boolean;
+  hasMnemonic: boolean;
+  hasImportedNostrKey: boolean;
 }
 interface StatusRes {
   configured: boolean;

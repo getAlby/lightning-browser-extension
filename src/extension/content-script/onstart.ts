@@ -15,7 +15,7 @@ async function onstart() {
   injectScript(browser.runtime.getURL("js/inpageScriptWebLN.bundle.js"));
 
   // window.webbtc
-  if (account.hasSecretKey) {
+  if (account.hasMnemonic) {
     injectScript(browser.runtime.getURL("js/inpageScriptWebBTC.bundle.js"));
   }
 
