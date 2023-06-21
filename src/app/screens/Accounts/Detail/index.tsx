@@ -58,8 +58,6 @@ function AccountDetail() {
   const [accountName, setAccountName] = useState("");
 
   const [hasMnemonic, setHasMnemonic] = useState(false);
-  // TODO: do not get private key here to just calculate public key!
-  const [currentPrivateKey, setCurrentPrivateKey] = useState("");
   const [nostrPublicKey, setNostrPublicKey] = useState("");
   const [hasImportedNostrKey, setHasImportedNostrKey] = useState(false);
 
@@ -78,11 +76,17 @@ function AccountDetail() {
         setHasMnemonic(response.hasMnemonic);
         setHasImportedNostrKey(response.hasImportedNostrKey);
 
-        const priv = (await msg.request("nostr/getPrivateKey", {
-          id,
-        })) as string;
-        if (priv) {
-          setCurrentPrivateKey(priv);
+        if (response.nostrEnabled) {
+          const nostrPublicKeyHex = (await msg.request("nostr/getPublicKey", {
+            id,
+          })) as string;
+          if (nostrPublicKeyHex) {
+            const nostrPublicKeyNpub = nostr.hexToNip19(
+              nostrPublicKeyHex,
+              "npub"
+            );
+            setNostrPublicKey(nostrPublicKeyNpub);
+          }
         }
       }
     } catch (e) {
@@ -172,23 +176,6 @@ function AccountDetail() {
       hasFetchedData.current = true;
     }
   }, [fetchData, isLoadingSettings]);
-
-  useEffect(() => {
-    try {
-      setNostrPublicKey(
-        currentPrivateKey ? nostr.generatePublicKey(currentPrivateKey) : ""
-      );
-    } catch (e) {
-      if (e instanceof Error)
-        toast.error(
-          <p>
-            {t("nostr.errors.failed_to_load")}
-            <br />
-            {e.message}
-          </p>
-        );
-    }
-  }, [currentPrivateKey, t]);
 
   return !account ? (
     <div className="flex justify-center mt-5">
