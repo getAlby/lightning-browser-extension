@@ -1,14 +1,15 @@
 import { decryptData } from "~/common/lib/crypto";
-import type { MessageNostrPrivateKeyGet } from "~/types";
+import Nostr from "~/extension/background-script/nostr";
+import { MessageNostrPublicKeyGet } from "~/types";
 
 import state from "../../state";
 
-const getPrivateKey = async (message: MessageNostrPrivateKeyGet) => {
+const getPublicKey = async (message: MessageNostrPublicKeyGet) => {
   const id = message?.args?.id;
 
   if (!id) {
     return {
-      data: (await state.getState().getNostr()).privateKey,
+      data: (await state.getState().getNostr()).getPublicKey(),
     };
   }
 
@@ -23,8 +24,9 @@ const getPrivateKey = async (message: MessageNostrPrivateKeyGet) => {
     const account = accounts[id];
     if (!account.nostrPrivateKey) return { data: null };
     const privateKey = decryptData(account.nostrPrivateKey, password);
+    const publicKey = new Nostr(privateKey).getPublicKey();
     return {
-      data: privateKey,
+      data: publicKey,
     };
   }
 
@@ -33,4 +35,4 @@ const getPrivateKey = async (message: MessageNostrPrivateKeyGet) => {
   };
 };
 
-export default getPrivateKey;
+export default getPublicKey;

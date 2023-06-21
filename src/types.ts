@@ -431,29 +431,31 @@ export interface MessageCurrencyRateGet extends MessageDefault {
   action: "getCurrencyRate";
 }
 
-// TODO: add Nostr Prefix
-export interface MessagePublicKeyGet extends MessageDefault {
+export interface MessageNostrPublicKeyGetOrPrompt extends MessageDefault {
   action: "getPublicKeyOrPrompt";
 }
 
-// TODO: add Nostr Prefix
-export interface MessagePrivateKeyGet extends MessageDefault {
+export interface MessageNostrPublicKeyGet extends MessageDefault {
+  args?: {
+    id?: Account["id"];
+  };
+  action: "getPublicKey";
+}
+export interface MessageNostrPrivateKeyGet extends MessageDefault {
   args?: {
     id?: Account["id"];
   };
   action: "getPrivateKey";
 }
 
-// TODO: add Nostr Prefix
-export interface MessagePrivateKeyGenerate extends MessageDefault {
+export interface MessageNostrPrivateKeyGenerate extends MessageDefault {
   args?: {
     type?: "random";
   };
   action: "generatePrivateKey";
 }
 
-// TODO: add Nostr Prefix
-export interface MessagePrivateKeySet extends MessageDefault {
+export interface MessageNostrPrivateKeySet extends MessageDefault {
   args: {
     id?: Account["id"];
     privateKey: string;
@@ -461,8 +463,7 @@ export interface MessagePrivateKeySet extends MessageDefault {
   action: "setPrivateKey";
 }
 
-// TODO: add Nostr Prefix
-export interface MessagePrivateKeyRemove extends MessageDefault {
+export interface MessageNostrPrivateKeyRemove extends MessageDefault {
   args: {
     id?: Account["id"];
   };

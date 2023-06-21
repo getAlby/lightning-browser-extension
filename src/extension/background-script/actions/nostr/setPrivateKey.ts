@@ -1,10 +1,10 @@
 import { decryptData, encryptData } from "~/common/lib/crypto";
 import { deriveNostrPrivateKey } from "~/common/lib/mnemonic";
-import type { MessagePrivateKeySet } from "~/types";
+import type { MessageNostrPrivateKeySet } from "~/types";
 
 import state from "../../state";
 
-const setPrivateKey = async (message: MessagePrivateKeySet) => {
+const setPrivateKey = async (message: MessageNostrPrivateKeySet) => {
   const id = message.args?.id || state.getState().currentAccountId;
 
   const password = await state.getState().password();

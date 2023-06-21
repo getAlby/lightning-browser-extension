@@ -1,11 +1,11 @@
 import * as secp256k1 from "@noble/secp256k1";
 import Hex from "crypto-js/enc-hex";
 import sha512 from "crypto-js/sha512";
-import type { MessagePrivateKeyGenerate } from "~/types";
+import type { MessageNostrPrivateKeyGenerate } from "~/types";
 
 import state from "../../state";
 
-const generatePrivateKey = async (message: MessagePrivateKeyGenerate) => {
+const generatePrivateKey = async (message: MessageNostrPrivateKeyGenerate) => {
   const type = message?.args?.type;
 
   const privateKey =

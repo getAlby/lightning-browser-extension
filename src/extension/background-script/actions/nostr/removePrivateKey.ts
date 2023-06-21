@@ -1,8 +1,8 @@
-import type { MessagePrivateKeyRemove } from "~/types";
+import type { MessageNostrPrivateKeyRemove } from "~/types";
 
 import state from "../../state";
 
-const removePrivateKey = async (message: MessagePrivateKeyRemove) => {
+const removePrivateKey = async (message: MessageNostrPrivateKeyRemove) => {
   const id = message.args?.id || state.getState().currentAccountId;
 
   const accounts = state.getState().accounts;
