@@ -37,6 +37,7 @@ export interface AccountInfoRes {
 export interface GetAccountRes
   extends Pick<Account, "id" | "connector" | "name"> {
   nostrEnabled: boolean;
+  hasSecretKey: boolean;
 }
 interface StatusRes {
   configured: boolean;
