@@ -19,17 +19,17 @@ test.describe("Wallet features", () => {
     const $document = await getDocument(page);
 
     // open change password modal
-    await (await findAllByText($document, "Change unlock password"))[1].click();
+    await (await findAllByText($document, "Change unlock passcode"))[1].click();
 
     const newPasswordInput = await getByLabelText(
       $document,
-      "Enter a new unlock password:"
+      "Enter a new unlock passcode:"
     );
     await newPasswordInput.type("g3tal6y");
 
     const confirmPasswordInput = await getByLabelText(
       $document,
-      "Confirm new password:"
+      "Confirm new passcode:"
     );
     await confirmPasswordInput.type("g3tal6y");
 
@@ -54,6 +54,8 @@ test.describe("Wallet features", () => {
     await loginToExistingAlbyAccount(page);
     const $document = await getDocument(page);
 
+    await (await findByText($document, "Wallet")).click();
+    page.waitForSelector("button");
     // create invoice
     await (await findByText($document, "Receive")).click();
 
@@ -76,6 +78,8 @@ test.describe("Wallet features", () => {
     await loginToExistingAlbyAccount(page);
     const $document = await getDocument(page);
 
+    await (await findByText($document, "Wallet")).click();
+    page.waitForSelector("button");
     // go to send
     await (await findByText($document, "Send")).click();
     const invoiceInput = await findByText(
@@ -97,6 +101,8 @@ test.describe("Wallet features", () => {
     await loginToExistingAlbyAccount(page);
     const $document = await getDocument(page);
 
+    await (await findByText($document, "Wallet")).click();
+    page.waitForSelector("button");
     // go to send
     await (await findByText($document, "Send")).click();
     const invoiceInput = await findByText(
