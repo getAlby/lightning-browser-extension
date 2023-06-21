@@ -30,24 +30,22 @@ function BackupSecretKey() {
 
   const fetchData = useCallback(async () => {
     try {
-      if (id) {
-        const priv = (await msg.request("nostr/getPrivateKey", {
-          id,
-        })) as string;
-        if (priv) {
-          setCurrentPrivateKey(priv);
-        }
-        const accountMnemonic = (await msg.request("getMnemonic", {
-          id,
-        })) as string;
+      const priv = (await msg.request("nostr/getPrivateKey", {
+        id,
+      })) as string;
+      if (priv) {
+        setCurrentPrivateKey(priv);
+      }
+      const accountMnemonic = (await msg.request("getMnemonic", {
+        id,
+      })) as string;
 
-        if (accountMnemonic) {
-          setMnemonic(accountMnemonic);
-          setHasMnemonic(true);
-        } else {
-          // generate a new mnemonic
-          setMnemonic(bip39.generateMnemonic(wordlist, 128));
-        }
+      if (accountMnemonic) {
+        setMnemonic(accountMnemonic);
+        setHasMnemonic(true);
+      } else {
+        // generate a new mnemonic
+        setMnemonic(bip39.generateMnemonic(wordlist, 128));
       }
     } catch (e) {
       console.error(e);
