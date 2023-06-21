@@ -21,10 +21,8 @@ function ImportSecretKey() {
     keyPrefix: "accounts.account_view.mnemonic",
   });
 
-  // TODO: useMnemonic hook
   const [hasFetchedData, setHasFetchedData] = useState(false);
   const [hasMnemonic, setHasMnemonic] = useState(false);
-  // TODO: useNostrPrivateKey hook
   const [currentPrivateKey, setCurrentPrivateKey] = useState("");
   const { id } = useParams();
 

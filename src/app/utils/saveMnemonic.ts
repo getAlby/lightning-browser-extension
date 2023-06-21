@@ -2,6 +2,7 @@ import { saveNostrPrivateKey } from "~/app/utils/saveNostrPrivateKey";
 import { deriveNostrPrivateKey } from "~/common/lib/mnemonic";
 import msg from "~/common/lib/msg";
 
+// TODO: move to background script
 export async function saveMnemonic(accountId: string, mnemonic: string) {
   const priv = (await msg.request("nostr/getPrivateKey", {
     id: accountId,

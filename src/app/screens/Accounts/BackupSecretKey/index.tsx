@@ -23,9 +23,7 @@ function BackupSecretKey() {
   });
   const [hasConfirmedBackup, setHasConfirmedBackup] = useState(false);
   useState(false);
-  // TODO: useMnemonic hook
   const [hasMnemonic, setHasMnemonic] = useState(false);
-  // TODO: useNostrPrivateKey hook
   const [currentPrivateKey, setCurrentPrivateKey] = useState("");
 
   const { id } = useParams();
