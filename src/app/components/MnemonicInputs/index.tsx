@@ -46,9 +46,6 @@ export default function MnemonicInputs({
               <div className="relative">
                 <Input
                   id={inputId}
-                  type={isRevealed ? "text" : "password"}
-                  required
-                  autoComplete="off"
                   autoFocus={!readOnly && i === 0}
                   onFocus={() => setRevealedIndex(i)}
                   onBlur={() => setRevealedIndex(undefined)}
@@ -56,7 +53,7 @@ export default function MnemonicInputs({
                   block={false}
                   className="w-24 text-center"
                   list={readOnly ? undefined : "wordlist"}
-                  value={isRevealed ? word : word.length ? "xxxxx" : ""}
+                  value={isRevealed ? word : word.length ? "•••••" : ""}
                   onChange={(e) => {
                     if (revealedIndex !== i) {
                       return;
