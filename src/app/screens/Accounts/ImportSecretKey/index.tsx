@@ -1,4 +1,3 @@
-import { CopyIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import Container from "@components/Container";
 import Loading from "@components/Loading";
 import * as bip39 from "@scure/bip39";
@@ -18,9 +17,6 @@ function ImportSecretKey() {
   const [mnemonic, setMnemonic] = useState<string>("");
   const account = useAccount();
   const { t: tCommon } = useTranslation("common");
-  const [importPasteLabel, setImportPasteLabel] = useState(
-    tCommon("actions.paste_clipboard") as string
-  );
   const { t } = useTranslation("translation", {
     keyPrefix: "accounts.account_view.mnemonic",
   });
@@ -106,29 +102,7 @@ function ImportSecretKey() {
             {t("import.description")}
           </p>
 
-          <MnemonicInputs mnemonic={mnemonic} setMnemonic={setMnemonic}>
-            <>
-              <Button
-                outline
-                icon={<CopyIcon className="w-6 h-6 mr-2" />}
-                label={importPasteLabel}
-                onClick={async () => {
-                  try {
-                    const clipboardText = await navigator.clipboard.readText();
-                    setMnemonic(clipboardText);
-                    setImportPasteLabel(tCommon("pasted"));
-                    setTimeout(() => {
-                      setImportPasteLabel(tCommon("actions.paste_clipboard"));
-                    }, 1000);
-                  } catch (e) {
-                    if (e instanceof Error) {
-                      toast.error(e.message);
-                    }
-                  }
-                }}
-              />
-            </>
-          </MnemonicInputs>
+          <MnemonicInputs mnemonic={mnemonic} setMnemonic={setMnemonic} />
           {currentPrivateKey && (
             <Alert type="warn">{t("existing_nostr_key_notice")}</Alert>
           )}
