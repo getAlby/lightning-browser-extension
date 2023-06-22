@@ -11,11 +11,11 @@ const generatePrivateKey = async (message: MessageNostrPrivateKeyGenerate) => {
       error: "Password is missing.",
     };
   }
-  const mnemonic = await state.getState().getMnemonic();
-  const privateKey = mnemonic.deriveNostrPrivateKey();
   const accounts = state.getState().accounts;
 
   if (id && Object.keys(accounts).includes(id)) {
+    const mnemonic = await state.getState().getMnemonic();
+    const privateKey = mnemonic.deriveNostrPrivateKey();
     const account = accounts[id];
     account.nostrPrivateKey = encryptData(privateKey, password);
 
