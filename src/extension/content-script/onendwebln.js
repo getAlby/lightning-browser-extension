@@ -32,10 +32,14 @@ async function init() {
 
   injectScript(browser.runtime.getURL("js/inpageScript.bundle.js")); // registers the DOM event listeners and checks webln again (which is also loaded onstart
 
-  // extract LN data from websites
   browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    // extract LN data from websites
     if (request.action === "extractLightningData") {
       extractLightningData();
+    }
+    // forward account switched messages to the website
+    else if (request.action === "accountSwitched") {
+      window.postMessage("accountSwitched", "*");
     }
   });
 
