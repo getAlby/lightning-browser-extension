@@ -1,5 +1,6 @@
 import { decryptData, encryptData } from "~/common/lib/crypto";
-import { deriveNostrPrivateKey } from "~/common/lib/mnemonic";
+import nostr from "~/common/lib/nostr";
+import Mnemonic from "~/extension/background-script/mnemonic";
 import type { MessageNostrPrivateKeySet } from "~/types";
 
 import state from "../../state";
@@ -13,7 +14,12 @@ const setPrivateKey = async (message: MessageNostrPrivateKeySet) => {
       error: "Password is missing.",
     };
   }
-  const privateKey = message.args.privateKey;
+  // make sure private key is saved in hex format
+  const privateKey = nostr.normalizeToHex(message.args.privateKey);
+  // Validate the private key before saving
+  nostr.generatePublicKey(privateKey);
+  nostr.hexToNip19(privateKey, "nsec");
+
   const accounts = state.getState().accounts;
 
   if (id && Object.keys(accounts).includes(id)) {
@@ -22,13 +28,16 @@ const setPrivateKey = async (message: MessageNostrPrivateKeySet) => {
       ? encryptData(privateKey, password)
       : null;
 
-    // TODO: move deriveNostrPrivateKey to new Mnemonic object
     account.hasImportedNostrKey =
       !account.mnemonic ||
-      deriveNostrPrivateKey(decryptData(account.mnemonic, password)) !==
-        privateKey;
+      new Mnemonic(
+        decryptData(account.mnemonic, password)
+      ).deriveNostrPrivateKey() !== privateKey;
     accounts[id] = account;
-    state.setState({ accounts });
+    state.setState({
+      accounts,
+      nostr: null, // reset memoized nostr instance
+    });
     await state.getState().saveToStorage();
     return {
       data: {

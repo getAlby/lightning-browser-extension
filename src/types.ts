@@ -454,7 +454,7 @@ export interface MessageNostrPrivateKeyGet extends MessageDefault {
 
 export interface MessageNostrPrivateKeyGenerate extends MessageDefault {
   args?: {
-    type?: "random";
+    id?: Account["id"];
   };
   action: "generatePrivateKey";
 }

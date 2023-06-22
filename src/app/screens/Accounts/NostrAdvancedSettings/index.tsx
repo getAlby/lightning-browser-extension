@@ -13,9 +13,7 @@ import Button from "~/app/components/Button";
 import InputCopyButton from "~/app/components/InputCopyButton";
 import TextField from "~/app/components/form/TextField";
 import { useAccount } from "~/app/context/AccountContext";
-import { saveNostrPrivateKey } from "~/app/utils/saveNostrPrivateKey";
 import { GetAccountRes } from "~/common/lib/api";
-import { deriveNostrPrivateKey } from "~/common/lib/mnemonic";
 import msg from "~/common/lib/msg";
 import { default as nostr, default as nostrlib } from "~/common/lib/nostr";
 
@@ -26,8 +24,7 @@ function NostrAdvancedSettings() {
     keyPrefix: "accounts.account_view",
   });
   const navigate = useNavigate();
-  // FIXME: use account hasMnemonic
-  const [mnemonic, setMnemonic] = useState("");
+  const [hasMnemonic, setHasMnemonic] = useState(false);
   const [currentPrivateKey, setCurrentPrivateKey] = useState("");
   const [nostrPrivateKey, setNostrPrivateKey] = useState("");
   const [nostrPrivateKeyVisible, setNostrPrivateKeyVisible] = useState(false);
@@ -43,18 +40,10 @@ function NostrAdvancedSettings() {
       if (priv) {
         setCurrentPrivateKey(priv);
       }
-
-      // FIXME: do not get mnemonic here
-      const accountMnemonic = (await msg.request("getMnemonic", {
-        id,
-      })) as string;
-      if (accountMnemonic) {
-        setMnemonic(accountMnemonic);
-      }
-
       const accountResponse = await msg.request<GetAccountRes>("getAccount", {
         id,
       });
+      setHasMnemonic(accountResponse.hasMnemonic);
       setHasImportedNostrKey(accountResponse.hasImportedNostrKey);
     }
   }, [id]);
@@ -93,20 +82,19 @@ function NostrAdvancedSettings() {
       throw new Error("No id set");
     }
 
-    if (!mnemonic) {
+    if (!hasMnemonic) {
       throw new Error("No mnemonic exists");
     }
 
-    const nostrPrivateKey = await deriveNostrPrivateKey(mnemonic);
-
-    await handleSaveNostrPrivateKey(nostrPrivateKey);
+    await handleSaveNostrPrivateKey(true);
   }
 
-  async function handleSaveNostrPrivateKey(nostrPrivateKey: string) {
+  // TODO: simplify this method (do not handle deriving, saving and removing in one)
+  async function handleSaveNostrPrivateKey(deriveFromMnemonic: boolean) {
     if (!id) {
       throw new Error("No id set");
     }
-    if (nostrPrivateKey === currentPrivateKey) {
+    if (!deriveFromMnemonic && nostrPrivateKey === currentPrivateKey) {
       throw new Error("private key hasn't changed");
     }
 
@@ -120,10 +108,24 @@ function NostrAdvancedSettings() {
     }
 
     try {
-      saveNostrPrivateKey(id, nostrPrivateKey);
+      if (deriveFromMnemonic) {
+        await msg.request("nostr/generatePrivateKey", {
+          id,
+        });
+      } else if (nostrPrivateKey) {
+        await msg.request("nostr/setPrivateKey", {
+          id,
+          privateKey: nostrPrivateKey,
+        });
+      } else {
+        await msg.request("nostr/removePrivateKey", {
+          id,
+        });
+      }
+
       toast.success(
         t(
-          nostrPrivateKey
+          nostrPrivateKey || deriveFromMnemonic
             ? "nostr.private_key.success"
             : "nostr.private_key.successfully_removed"
         )
@@ -147,7 +149,7 @@ function NostrAdvancedSettings() {
       <form
         onSubmit={(e: FormEvent) => {
           e.preventDefault();
-          handleSaveNostrPrivateKey(nostrPrivateKey);
+          handleSaveNostrPrivateKey(false);
         }}
       >
         <Container maxWidth="sm">
@@ -161,7 +163,7 @@ function NostrAdvancedSettings() {
               </p>
             </div>
 
-            {mnemonic && currentPrivateKey ? (
+            {hasMnemonic && currentPrivateKey ? (
               hasImportedNostrKey ? (
                 <Alert type="warn">
                   {t("nostr.advanced_settings.imported_key_warning")}
@@ -215,7 +217,7 @@ function NostrAdvancedSettings() {
               />
               {hasImportedNostrKey && (
                 <div className="mt-4">
-                  {mnemonic ? (
+                  {hasMnemonic ? (
                     <Button
                       outline
                       label={t("nostr.advanced_settings.derive")}

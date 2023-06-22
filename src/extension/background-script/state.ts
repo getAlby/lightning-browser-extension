@@ -6,6 +6,7 @@ import { decryptData } from "~/common/lib/crypto";
 import { DEFAULT_SETTINGS } from "~/common/settings";
 import { isManifestV3 } from "~/common/utils/mv3";
 import { Migration } from "~/extension/background-script/migrations";
+import Mnemonic from "~/extension/background-script/mnemonic";
 import type { Account, Accounts, SettingsStorage } from "~/types";
 
 import connectors from "./connectors";
@@ -20,11 +21,13 @@ interface State {
   currentAccountId: string | null;
   nostrPrivateKey: string | null;
   nostr: Nostr | null;
+  mnemonic: Mnemonic | null;
   mv2Password: string | null;
   password: (password?: string | null) => Promise<string | null>;
   getAccount: () => Account | null;
   getConnector: () => Promise<Connector>;
   getNostr: () => Promise<Nostr>;
+  getMnemonic: () => Promise<Mnemonic>;
   init: () => Promise<void>;
   isUnlocked: () => Promise<boolean>;
   lock: () => Promise<void>;
@@ -66,6 +69,7 @@ const state = createState<State>((set, get) => ({
   currentAccountId: null,
   nostr: null,
   nostrPrivateKey: null,
+  mnemonic: null,
   mv2Password: null,
   password: async (password) => {
     if (isManifestV3) {
@@ -129,9 +133,25 @@ const state = createState<State>((set, get) => ({
     const privateKey = decryptData(account.nostrPrivateKey as string, password);
 
     const nostr = new Nostr(privateKey);
-    set({ nostr: nostr });
+    set({ nostr });
 
     return nostr;
+  },
+  getMnemonic: async () => {
+    if (get().mnemonic) {
+      return get().mnemonic as Mnemonic;
+    }
+    const currentAccountId = get().currentAccountId as string;
+    const account = get().accounts[currentAccountId];
+
+    const password = await get().password();
+    if (!password) throw new Error("Password is not set");
+    const mnemonicString = decryptData(account.mnemonic as string, password);
+
+    const mnemonic = new Mnemonic(mnemonicString);
+    set({ mnemonic });
+
+    return mnemonic;
   },
   lock: async () => {
     if (isManifestV3) {
@@ -156,7 +176,7 @@ const state = createState<State>((set, get) => ({
       const connector = (await get().connector) as Connector;
       await connector.unload();
     }
-    set({ connector: null, account: null, nostr: null });
+    set({ connector: null, account: null, nostr: null, mnemonic: null });
   },
   isUnlocked: async () => {
     const password = await await get().password();

@@ -13,8 +13,8 @@ import MnemonicInputs from "~/app/components/MnemonicInputs";
 import SecretKeyDescription from "~/app/components/SecretKeyDescription";
 import Checkbox from "~/app/components/form/Checkbox";
 import { useAccount } from "~/app/context/AccountContext";
-import { saveMnemonic } from "~/app/utils/saveMnemonic";
 import api from "~/common/lib/api";
+import msg from "~/common/lib/msg";
 
 function GenerateSecretKey() {
   const navigate = useNavigate();
@@ -47,7 +47,7 @@ function GenerateSecretKey() {
     fetchData();
   }, [fetchData]);
 
-  async function backupSecretKey() {
+  async function saveGeneratedSecretKey() {
     try {
       if (!hasConfirmedBackup) {
         throw new Error(t("backup.error_confirm"));
@@ -60,7 +60,11 @@ function GenerateSecretKey() {
         throw new Error("No mnemonic available");
       }
 
-      await saveMnemonic(id, mnemonic);
+      await msg.request("setMnemonic", {
+        id,
+        mnemonic,
+      });
+
       toast.success(t("saved"));
       // go to account settings
       navigate(`/accounts/${id}`);
@@ -106,7 +110,11 @@ function GenerateSecretKey() {
           )}
         </ContentBox>
         <div className="flex justify-center mt-8 mb-16">
-          <Button label={t("backup.save")} primary onClick={backupSecretKey} />
+          <Button
+            label={t("backup.save")}
+            primary
+            onClick={saveGeneratedSecretKey}
+          />
         </div>
       </Container>
     </div>

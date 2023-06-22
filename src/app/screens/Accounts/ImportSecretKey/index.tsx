@@ -11,7 +11,6 @@ import Button from "~/app/components/Button";
 import { ContentBox } from "~/app/components/ContentBox";
 import MnemonicInputs from "~/app/components/MnemonicInputs";
 import { useAccount } from "~/app/context/AccountContext";
-import { saveMnemonic } from "~/app/utils/saveMnemonic";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 
@@ -77,7 +76,10 @@ function ImportSecretKey() {
         throw new Error("Invalid mnemonic");
       }
 
-      await saveMnemonic(id, mnemonic);
+      await msg.request("setMnemonic", {
+        id,
+        mnemonic,
+      });
       toast.success(t("saved"));
       // go to account settings
       navigate(`/accounts/${id}`);

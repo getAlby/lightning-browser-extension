@@ -1,4 +1,5 @@
 import { encryptData } from "~/common/lib/crypto";
+import Mnemonic from "~/extension/background-script/mnemonic";
 import type { MessageMnemonicSet } from "~/types";
 
 import state from "../../state";
@@ -18,9 +19,20 @@ const setMnemonic = async (message: MessageMnemonicSet) => {
   if (id && Object.keys(accounts).includes(id)) {
     const account = accounts[id];
     account.mnemonic = mnemonic ? encryptData(mnemonic, password) : null;
-    account.hasImportedNostrKey = true;
+
+    if (mnemonic && !account.nostrPrivateKey) {
+      const nostrPrivateKey = new Mnemonic(mnemonic).deriveNostrPrivateKey();
+      account.nostrPrivateKey = encryptData(nostrPrivateKey, password);
+      account.hasImportedNostrKey = false;
+    } else {
+      account.hasImportedNostrKey = true;
+    }
     accounts[id] = account;
-    state.setState({ accounts });
+
+    state.setState({
+      accounts,
+      mnemonic: null, // reset memoized mnemonic
+    });
     await state.getState().saveToStorage();
     return {
       data: {
