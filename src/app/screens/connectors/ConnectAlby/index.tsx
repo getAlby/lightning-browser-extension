@@ -47,7 +47,9 @@ export default function ConnectAlby({ fromWelcome }: Props) {
           if (fromWelcome) {
             navigate("/pin-extension");
           } else {
-            navigate("/discover");
+            // NOTE: testing connection is not necessary but this screen will also update the account list and select the current account
+            // TODO: find a better way to do this
+            navigate("/test-connection");
           }
         } else {
           console.error("Failed to add account", addResult);
