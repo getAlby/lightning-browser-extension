@@ -1,7 +1,5 @@
 import Container from "@components/Container";
 import Loading from "@components/Loading";
-import * as bip39 from "@scure/bip39";
-import { wordlist } from "@scure/bip39/wordlists/english";
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
@@ -33,10 +31,8 @@ function GenerateSecretKey() {
     try {
       const account = await api.getAccount();
       setHasNostrPrivateKey(account.nostrEnabled);
-
-      // TODO: move to background script
-      // generate a new mnemonic
-      setMnemonic(bip39.generateMnemonic(wordlist, 128));
+      const newMnemonic = (await msg.request("generateMnemonic")) as string;
+      setMnemonic(newMnemonic);
     } catch (e) {
       console.error(e);
       if (e instanceof Error) toast.error(`Error: ${e.message}`);

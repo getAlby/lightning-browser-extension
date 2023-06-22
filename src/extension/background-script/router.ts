@@ -62,6 +62,7 @@ const routes = {
   getAddress: webbtc.getAddress,
   setMnemonic: mnemonic.setMnemonic,
   getMnemonic: mnemonic.getMnemonic,
+  generateMnemonic: mnemonic.generateMnemonic,
 
   nostr: {
     generatePrivateKey: nostr.generatePrivateKey,

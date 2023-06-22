@@ -488,6 +488,9 @@ export interface MessageMnemonicGet extends MessageDefault {
   };
   action: "getMnemonic";
 }
+export interface MessageMnemonicGenerate extends MessageDefault {
+  action: "generateMnemonic";
+}
 
 export interface MessageSignEvent extends MessageDefault {
   args: {
