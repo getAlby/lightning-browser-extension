@@ -653,13 +653,12 @@
         "waiting": "waiting for payment...",
         "status": "Check payment status"
       },
-      "or": "OR",
       "receive_via_bitcoin_address": "Receive via bitcoin address"
     },
     "on_chain": {
-      "title": "On Chain",
-      "instructions1": "To receive Bitcoin on-chain, log-in to your <0>Alby Account</0> at getalby.com",
-      "instructions2": "Your bitcoin on-chain address is under the <0>Receive</0> page, accessible from <0>Payments</0>",
+      "title": "Receive via bitcoin address",
+      "instructions1": "To receive bitcoin via a bitcoin address, login to your <0>Alby Account</0> on getalby.com",
+      "instructions2": "You can find your bitcoin address on the <0>Receive</0> page.",
       "go": "Go to your Alby account ->"
     },
     "discover": {
@@ -826,6 +825,7 @@
     "message": "Message",
     "help": "Help",
     "balance": "Balance",
+    "or": "or",
     "actions": {
       "back": "Back",
       "delete": "Delete",

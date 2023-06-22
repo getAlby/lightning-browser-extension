@@ -25,7 +25,7 @@ export default function OnChainReceive() {
           />
         }
       />
-      <div className="pt-4 h-full">
+      <div className="mt-8 h-full">
         <Container justifyBetween maxWidth="sm">
           <div className="text-center dark:text-neutral-200 h-full flex flex-col justify-center items-center">
             <div className="mb-8">
