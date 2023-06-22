@@ -33,13 +33,7 @@ function ImportSecretKey() {
       if (id) {
         const account = await api.getAccount();
         setHasNostrPrivateKey(account.nostrEnabled);
-
-        const accountMnemonic = (await msg.request("getMnemonic", {
-          id,
-        })) as string;
-        if (accountMnemonic) {
-          setHasMnemonic(true);
-        }
+        setHasMnemonic(account.hasMnemonic);
         setHasFetchedData(true);
       }
     } catch (e) {
