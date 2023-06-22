@@ -1,4 +1,5 @@
-import { encryptData } from "~/common/lib/crypto";
+import { decryptData, encryptData } from "~/common/lib/crypto";
+import Mnemonic from "~/extension/background-script/mnemonic";
 import type { MessageNostrPrivateKeyGenerate } from "~/types";
 
 import state from "../../state";
@@ -14,10 +15,15 @@ const generatePrivateKey = async (message: MessageNostrPrivateKeyGenerate) => {
   const accounts = state.getState().accounts;
 
   if (id && Object.keys(accounts).includes(id)) {
-    const mnemonic = await state.getState().getMnemonic();
-    const privateKey = mnemonic.deriveNostrPrivateKey();
     const account = accounts[id];
-    account.nostrPrivateKey = encryptData(privateKey, password);
+    if (!account.mnemonic) {
+      return {
+        error: "Secret key is missing.",
+      };
+    }
+    const mnemonic = new Mnemonic(decryptData(account.mnemonic, password));
+    const nostrPrivateKey = mnemonic.deriveNostrPrivateKey();
+    account.nostrPrivateKey = encryptData(nostrPrivateKey, password);
 
     account.hasImportedNostrKey = false;
     accounts[id] = account;
