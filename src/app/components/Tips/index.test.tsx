@@ -7,12 +7,12 @@ import { TIPS } from "~/common/constants";
 
 jest.mock("~/app/hooks/useTips", () => ({
   useTips: () => ({
-    tips: [TIPS.TOP_UP_WALLET, TIPS.DEMO],
+    tips: Object.values(TIPS),
   }),
 }));
 
 describe("Tips", () => {
-  test("should have 2 tips", async () => {
+  test("should have 3 tips", async () => {
     render(
       <I18nextProvider i18n={i18n}>
         <MemoryRouter>
@@ -21,9 +21,8 @@ describe("Tips", () => {
       </I18nextProvider>
     );
 
-    expect(
-      await screen.findByText("⚡️ Top up your wallet")
-    ).toBeInTheDocument();
-    expect(await screen.findByText("🕹️ Try out Alby Demo")).toBeInTheDocument();
+    expect(await screen.findByText("Buy Bitcoin")).toBeInTheDocument();
+    expect(await screen.findByText("Alby Demo")).toBeInTheDocument();
+    expect(await screen.findByText("Nostr")).toBeInTheDocument();
   });
 });

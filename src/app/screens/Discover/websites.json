@@ -56,6 +56,12 @@
         "url": "https://btcmap.org/"
       },
       {
+        "title": "Coincards",
+        "subtitle": "Shop for gift cards, mobile top-ups & prepaid vouchers",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/coincards.png",
+        "url": "https://coincards.com/"
+      },
+      {
         "title": "Lightning Network Stores",
         "subtitle": "Collection of stores and websites accepting bitcoin",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/lightning-network-stores_thumbnail.png",
