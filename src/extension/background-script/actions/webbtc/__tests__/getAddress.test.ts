@@ -1,4 +1,5 @@
 import getAddress from "~/extension/background-script/actions/webbtc/getAddress";
+import Bitcoin from "~/extension/background-script/bitcoin";
 import Mnemonic from "~/extension/background-script/mnemonic";
 import state from "~/extension/background-script/state";
 import { btcFixture } from "~/fixtures/btc";
@@ -14,6 +15,7 @@ const mockState = {
     bitcoinNetwork: "regtest",
   }),
   getMnemonic: () => new Mnemonic(btcFixture.mnemnoic),
+  getBitcoin: () => new Bitcoin(new Mnemonic(btcFixture.mnemnoic), "regtest"),
   getConnector: jest.fn(),
 };
 
