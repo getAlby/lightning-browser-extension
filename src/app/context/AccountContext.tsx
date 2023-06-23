@@ -51,7 +51,8 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
   const [accountId, setAccountId] = useState<string | undefined>();
   const [balanceLoading, setBalanceLoading] = useState(true);
 
-  const { accountInfo, mutateAccountInfo } = useAccountSWR(accountId);
+  const { accountInfo, mutateAccountInfo: refetchAccountInfo } =
+    useAccountSWR(accountId);
   const [fiatBalance, setFiatBalance] = useState("");
 
   const isSatsAccount = accountInfo?.currency === "BTC"; // show fiatValue only if the base currency is not already fiat
@@ -85,10 +86,6 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
       setAccountId(undefined);
       callback();
     });
-  };
-
-  const refetchAccountInfo = () => {
-    mutateAccountInfo();
   };
 
   const value = {
