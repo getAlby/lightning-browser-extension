@@ -7,7 +7,6 @@ import {
 } from "~/extension/background-script/connectors/connector.interface";
 import type {
   Account,
-  AccountInfo,
   Accounts,
   Allowance,
   DbPayment,
@@ -20,11 +19,6 @@ import type {
   SettingsStorage,
 } from "~/types";
 
-import {
-  getAccountsCache,
-  removeAccountFromCache,
-  storeAccounts,
-} from "./cache";
 import msg from "./msg";
 
 export interface AccountInfoRes {
@@ -38,13 +32,13 @@ export interface GetAccountRes
   extends Pick<Account, "id" | "connector" | "name"> {
   nostrEnabled: boolean;
 }
-interface StatusRes {
+export interface StatusRes {
   configured: boolean;
   unlocked: boolean;
   currentAccountId: string;
 }
 
-interface UnlockRes {
+export interface UnlockRes {
   currentAccountId: string;
 }
 
@@ -52,50 +46,9 @@ interface BlocklistRes {
   blocked: boolean;
 }
 
-export const getAccountInfo = () => msg.request<AccountInfoRes>("accountInfo");
+export const getAccountInfo = (): Promise<AccountInfoRes> =>
+  msg.request<AccountInfoRes>("accountInfo");
 
-/**
- * stale-while-revalidate get account info
- * @param id - account id
- * @param callback - will be called first with cached (stale) data first, then with fresh data.
- */
-export const swrGetAccountInfo = async (
-  id: string,
-  callback?: (account: AccountInfo) => void
-): Promise<AccountInfo> => {
-  const accountsCache = await getAccountsCache();
-
-  return new Promise((resolve, reject) => {
-    if (accountsCache[id]) {
-      if (callback) callback(accountsCache[id]);
-      resolve(accountsCache[id]);
-    }
-
-    // Update account info with most recent data, save to cache.
-    getAccountInfo()
-      .then((response) => {
-        const { alias } = response.info;
-        const { balance: resBalance, currency } = response.balance;
-        const name = response.name;
-        const balance =
-          typeof resBalance === "number" ? resBalance : parseInt(resBalance); // TODO: handle amounts
-        const account = {
-          id,
-          name,
-          alias,
-          balance,
-          currency: currency || "BTC", // set default currency for every account
-        };
-        storeAccounts({
-          ...accountsCache,
-          [id]: account,
-        });
-        if (callback) callback(account);
-        return resolve(account);
-      })
-      .catch(reject);
-  });
-};
 export const getAccounts = () => msg.request<Accounts>("getAccounts");
 export const getAccount = () => msg.request<GetAccountRes>("getAccount");
 export const updateAllowance = () => msg.request<Accounts>("updateAllowance");
@@ -121,10 +74,7 @@ export const setSetting = (setting: MessageSettingsSet["args"]["setting"]) =>
     setting,
   });
 export const removeAccount = (id: string) =>
-  Promise.all([
-    msg.request("removeAccount", { id }),
-    removeAccountFromCache(id),
-  ]);
+  msg.request("removeAccount", { id });
 export const unlock = (password: string) =>
   msg.request<UnlockRes>("unlock", { password });
 export const getBlocklist = (host: string) =>
@@ -154,9 +104,6 @@ export default {
   makeInvoice,
   connectPeer,
   setSetting,
-  swr: {
-    getAccountInfo: swrGetAccountInfo,
-  },
   removeAccount,
   unlock,
   getBlocklist,

@@ -7,23 +7,19 @@ import { useNavigate } from "react-router-dom";
 import { useAccount } from "~/app/context/AccountContext";
 import { useAccounts } from "~/app/context/AccountsContext";
 import { useSettings } from "~/app/context/SettingsContext";
+import { useAccountSWR } from "~/app/hooks/useAccountSWR";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
-import type { AccountInfo } from "~/types";
 
 export default function TestConnection() {
   const { getFormattedInCurrency } = useSettings();
-  const auth = useAccount();
   const { getAccounts } = useAccounts();
+  const { setAccountId } = useAccount();
 
-  const [accountInfo, setAccountInfo] = useState<{
-    alias: AccountInfo["alias"];
-    name: AccountInfo["name"];
-    balance: AccountInfo["balance"];
-    currency: AccountInfo["currency"];
-  }>();
+  const [currentAccountId, setCurrentAccountId] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const { accountInfo } = useAccountSWR(currentAccountId);
 
   const navigate = useNavigate();
   const { t } = useTranslation("translation", {
@@ -31,7 +27,7 @@ export default function TestConnection() {
   });
   const { t: tCommon } = useTranslation("common");
 
-  async function handleEdit(event: React.MouseEvent<HTMLButtonElement>) {
+  async function handleEdit() {
     await msg.request("removeAccount");
     navigate(-1);
   }
@@ -43,22 +39,8 @@ export default function TestConnection() {
       setErrorMessage(t("connection_taking_long"));
     }, 45000);
     try {
-      const { currentAccountId } = await api.getStatus();
-      auth.setAccountId(currentAccountId);
-      const accountInfo = await auth.fetchAccountInfo({
-        accountId: currentAccountId,
-      });
-      if (accountInfo) {
-        setAccountInfo({
-          alias: accountInfo.alias,
-          balance: accountInfo.balance,
-          currency: accountInfo.currency,
-          name: accountInfo.name,
-        });
-      }
-      getAccounts();
+      handleSelectAccount();
     } catch (e) {
-      console.error(e);
       if (e instanceof Error) {
         setErrorMessage(e.message);
       }
@@ -67,6 +49,21 @@ export default function TestConnection() {
       clearTimeout(timer);
     }
   }
+
+  /**
+   * update AccountContext, but handle currentAccountId separately,
+   * to keep TestConnection account,
+   * even though the account menu might be changed
+   */
+  const handleSelectAccount = async () => {
+    const { currentAccountId } = await api.getStatus();
+    await msg.request("selectAccount", {
+      id: currentAccountId,
+    });
+    setAccountId(currentAccountId);
+    setCurrentAccountId(currentAccountId);
+    getAccounts();
+  };
 
   useEffect(() => {
     loadAccountInfo();

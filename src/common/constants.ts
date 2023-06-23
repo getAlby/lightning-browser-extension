@@ -10,6 +10,8 @@ export const USER_REJECTED_ERROR = "User rejected";
 // all other connectors fall back to BTC
 export type ACCOUNT_CURRENCIES = "EUR" | "USD" | "BTC";
 
+export const ACCOUNT_DEFAULT_CURRENCY = "BTC";
+
 // Supported currencies by Alby API, Coindesk and yadio
 // FYI: yadio is i.e. not supporting "ISK", maybe more?
 // https://github.com/AryanJ-NYC/bitcoin-conversion/blob/master/src/index.ts#L143

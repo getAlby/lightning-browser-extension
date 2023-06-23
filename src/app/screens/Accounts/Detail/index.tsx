@@ -116,9 +116,7 @@ function AccountDetail() {
   }
 
   async function generateNostrPrivateKey(random?: boolean) {
-    const selectedAccount = await auth.fetchAccountInfo();
-
-    if (!random && selectedAccount?.id !== id) {
+    if (!random && auth.accountId !== id) {
       alert(
         `Please match the account in the account dropdown at the top with this account to derive keys.`
       );
@@ -187,7 +185,7 @@ function AccountDetail() {
       id,
     });
 
-    auth.fetchAccountInfo(); // Update active account name
+    auth.refetchAccountInfo(); // Update active account name
     getAccounts(); // update all accounts
   }
 
@@ -206,7 +204,6 @@ function AccountDetail() {
   async function selectAccount(accountId: string) {
     auth.setAccountId(accountId);
     await api.selectAccount(accountId);
-    auth.fetchAccountInfo({ accountId });
   }
 
   async function removeAccount({ id, name }: AccountAction) {

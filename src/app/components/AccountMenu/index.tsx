@@ -30,8 +30,8 @@ function AccountMenu({ showOptions = true }: Props) {
 
   const {
     setAccountId,
-    fetchAccountInfo,
     account: authAccount,
+    accountId: authAccountId,
     balancesDecorated,
   } = useAccount();
   const navigate = useNavigate();
@@ -40,9 +40,10 @@ function AccountMenu({ showOptions = true }: Props) {
 
   // update title
   const title =
-    !!authAccount?.name &&
-    typeof authAccount?.name === "string" &&
-    `${authAccount?.name}`;
+    authAccountId &&
+    !!accounts[authAccountId]?.name &&
+    typeof accounts[authAccountId]?.name === "string" &&
+    `${accounts[authAccountId]?.name}`;
 
   useEffect(() => {
     getAccounts();
@@ -52,11 +53,10 @@ function AccountMenu({ showOptions = true }: Props) {
   async function selectAccount(accountId: string) {
     setLoading(true);
     try {
+      setAccountId(accountId);
       await msg.request("selectAccount", {
         id: accountId,
       });
-      setAccountId(accountId);
-      await fetchAccountInfo({ accountId });
     } catch (e) {
       console.error(e);
       if (e instanceof Error) toast.error(`Error: ${e.message}`);
@@ -81,7 +81,7 @@ function AccountMenu({ showOptions = true }: Props) {
       <Menu as="div">
         <Menu.Button className="h-full px-2 rounded-md hover:bg-gray-100 dark:hover:bg-white/10 transition-colors duration-200">
           <div className="flex items-center">
-            <Avatar size={24} name={authAccount?.id || ""} />
+            <Avatar size={24} name={authAccountId || ""} />
             <div
               className={`flex-auto mx-2 py-3 overflow-hidden max-w-[14rem] text-left`}
             >
@@ -89,7 +89,13 @@ function AccountMenu({ showOptions = true }: Props) {
                 title={title || ""}
                 className="text-sm font-medium text-gray-700 dark:text-neutral-400 text-ellipsis overflow-hidden whitespace-nowrap"
               >
-                {loading ? <SkeletonLoader className="w-20" /> : title || "⚠️"}
+                {title ? (
+                  title
+                ) : loading ? (
+                  <SkeletonLoader className="w-20" />
+                ) : (
+                  "⚠️"
+                )}
               </div>
             </div>
             <CaretDownIcon className="h-4 w-4 dark:text-white" />
@@ -124,7 +130,7 @@ function AccountMenu({ showOptions = true }: Props) {
           </Menu.Item>
           <Menu.ItemButton
             onClick={() => {
-              openOptions(`accounts/${authAccount?.id}`);
+              openOptions(`accounts/${authAccountId}`);
             }}
           >
             <WalletIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
@@ -147,7 +153,7 @@ function AccountMenu({ showOptions = true }: Props) {
               <Menu.Subheader>{t("title")}</Menu.Subheader>
               {Object.keys(accounts).map((accountId) => {
                 // Do not render the current active account
-                if (accountId === authAccount?.id) {
+                if (accountId === authAccountId) {
                   return;
                 }
 
