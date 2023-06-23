@@ -184,8 +184,13 @@ const state = createState<State>((set, get) => ({
       });
   },
   reset: async () => {
+    if (storage === "sync") {
+      await browser.storage.sync.clear();
+    } else {
+      await browser.storage.local.clear();
+    }
     set({ ...browserStorageDefaults });
-    get().saveToStorage();
+    await get().saveToStorage();
   },
   saveToStorage: () => {
     const current = get();
