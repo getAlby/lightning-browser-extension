@@ -88,8 +88,6 @@ export class DB extends Dexie {
 
   async clearAllTables() {
     await this.tables.forEach(async (table) => await table.clear());
-    await browser.storage.local.clear();
-
     return true;
   }
 

@@ -1,3 +1,4 @@
+import browser from "webextension-polyfill";
 import type { MessageReset } from "~/types";
 
 import db from "../../db";
@@ -13,6 +14,7 @@ const reset = async (message: MessageReset) => {
   });
   await state.getState().saveToStorage();
   await db.clearAllTables();
+  await browser.storage.local.clear();
 
   return { data: { reset: true } };
 };
