@@ -399,7 +399,7 @@ function AccountDetail() {
               </div>
             </div>
             <MenuDivider />
-            <div className="mb-4 flex justify-between items-end">
+            <div className="flex justify-between items-end">
               <div className="w-7/12 flex items-center gap-2">
                 <TextField
                   id="nostrPublicKey"
@@ -431,7 +431,7 @@ function AccountDetail() {
               </div>
             </div>
             <MenuDivider />
-            <div className="mb-4 flex justify-between items-end">
+            <div className="flex justify-between items-end">
               <div className="w-7/12 flex flex-col gap-2">
                 <p className="text-gray-900 dark:text-white font-medium">
                   {t("bitcoin.network.title")}
