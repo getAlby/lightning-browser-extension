@@ -87,8 +87,7 @@ export class DB extends Dexie {
   }
 
   async clearAllTables() {
-    await this.tables.forEach(async (table) => await table.clear());
-    return true;
+    return Promise.all(this.tables.map((table) => table.clear()));
   }
 
   // Loads the data from the browser.storage and adds the data to the IndexedDB.
