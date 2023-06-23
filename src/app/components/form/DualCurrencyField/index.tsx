@@ -107,7 +107,8 @@ export default function DualCurrencyField({
           "flex items-center overflow-hidden field mt-1 px-3",
           "focus-within:ring-primary focus-within:border-primary focus-within:dark:border-primary focus-within:ring-1",
           !hint && "mb-2",
-          !!amountExceeded && "border-red-500",
+          (!!amountExceeded || !!rangeExceeded) &&
+            "border-red-500 dark:border-red-500",
           outerStyles
         )}
       >
