@@ -802,8 +802,8 @@
     "help": "Ayuda",
     "range": {
       "between": "entre el {{min}} y el {{max}}",
-      "lessThan": "menor que {{max}}",
-      "greaterThan": "mayor que {{min}}"
+      "lessThanOrEqual": "≤ {{max}}",
+      "greaterOrEqual": "≥ {{min}}"
     },
     "balance": "Balance"
   },
