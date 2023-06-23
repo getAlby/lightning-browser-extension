@@ -1,4 +1,10 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { useSettings } from "~/app/context/SettingsContext";
 import { useAccountSWR } from "~/app/hooks/useAccountSWR";
 import api, { UnlockRes } from "~/common/lib/api";
@@ -24,6 +30,7 @@ interface AccountContextType {
    * revalidation (mark the data as expired and trigger a refetch) for the resource
    */
   refetchAccountInfo: () => void;
+  setStatusLoaded: () => void;
 }
 
 const AccountContext = createContext({} as AccountContextType);
@@ -36,6 +43,11 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
     getFormattedInCurrency,
   } = useSettings();
 
+  const [statusLoading, setStatusLoading] = useState(true);
+  const setStatusLoaded = useCallback(
+    () => setStatusLoading(false),
+    [setStatusLoading]
+  );
   const [accountId, setAccountId] = useState<string | undefined>();
   const [balanceLoading, setBalanceLoading] = useState(true);
 
@@ -89,11 +101,12 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
       fiatBalance,
     },
     refetchAccountInfo,
-    loading: !!accountId && !accountInfo,
+    loading: statusLoading || (!!accountId && !accountInfo),
     balanceLoading,
     lock,
     setAccountId,
     unlock,
+    setStatusLoaded,
   };
 
   return (

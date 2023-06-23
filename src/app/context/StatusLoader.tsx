@@ -5,7 +5,7 @@ import { useAccount } from "~/app/context/AccountContext";
 import api, { StatusRes } from "~/common/lib/api";
 
 export function StatusLoader() {
-  const { setAccountId } = useAccount();
+  const { setAccountId, setStatusLoaded } = useAccount();
 
   const handleGetStatus = (status: StatusRes) => {
     const onWelcomePage = window.location.pathname.indexOf("welcome.html") >= 0;
@@ -13,11 +13,12 @@ export function StatusLoader() {
       utils.openPage("welcome.html");
       window.close();
     } else if (status.unlocked) {
+      setAccountId(status.currentAccountId);
       if (status.configured && onWelcomePage) {
         utils.redirectPage("options.html");
       }
-      setAccountId(status.currentAccountId);
     }
+    setStatusLoaded();
   };
 
   // Invoked only on on mount.

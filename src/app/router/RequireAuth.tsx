@@ -9,7 +9,7 @@ function RequireAuth({ children }: { children: JSX.Element }) {
     return null;
   }
 
-  if (!auth.account) {
+  if (!auth.accountId) {
     return <Navigate to="/unlock" state={{ from: location }} />;
   }
 
