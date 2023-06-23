@@ -62,6 +62,7 @@ const Layout = () => {
 
       <main className="flex flex-col grow min-h-0">
         {auth.loading ? (
+          // TODO: add an account loading screen
           <p className="dark:text-white">Loading account...</p>
         ) : (
           <Outlet />
