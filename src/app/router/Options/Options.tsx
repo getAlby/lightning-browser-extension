@@ -17,6 +17,7 @@ import Send from "@screens/Send";
 import Settings from "@screens/Settings";
 import Transactions from "@screens/Transactions";
 import Unlock from "@screens/Unlock";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { HashRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -24,13 +25,22 @@ import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
 import { getConnectorRoutes, renderRoutes } from "~/app/router/connectorRoutes";
 import Discover from "~/app/screens/Discover";
-import AlbyWallet from "~/app/screens/connectors/AlbyWallet";
+import AlbyWalletCreate from "~/app/screens/connectors/AlbyWallet/create";
+import AlbyWalletLogin from "~/app/screens/connectors/AlbyWallet/login";
 import ChooseConnector from "~/app/screens/connectors/ChooseConnector";
 import ChooseConnectorPath from "~/app/screens/connectors/ChooseConnectorPath";
+import { getAlbyWalletOptions } from "~/app/utils";
 import i18n from "~/i18n/i18nConfig";
 
 function Options() {
   const connectorRoutes = getConnectorRoutes();
+  const [options, setOptions] = useState({ signup_disabled: false });
+
+  useEffect(() => {
+    getAlbyWalletOptions().then((options) => {
+      setOptions(options);
+    });
+  }, []);
 
   return (
     <Providers>
@@ -85,9 +95,12 @@ function Options() {
                 <Route index element={<ChooseConnectorPath />} />
                 <Route
                   path="create"
-                  element={<AlbyWallet variant="create" />}
+                  element={<AlbyWalletCreate options={options} />}
                 />
-                <Route path="login" element={<AlbyWallet variant="login" />} />
+                <Route
+                  path="login"
+                  element={<AlbyWalletLogin options={options} />}
+                />
                 <Route path="choose-connector">
                   <Route
                     index

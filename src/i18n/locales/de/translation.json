@@ -2,15 +2,15 @@
   "translation": {
     "welcome": {
       "set_password": {
-        "title": "Entsperrkennwort festlegen",
-        "description": "Dieses Kennwort wird verwendet, um deine Wallet zu schützen und den Zugriff auf die Browser-Erweiterung zu ermöglichen. Es kann nicht zurückgesetzt werden und ist unabhängig von deinem Alby-Konto-Kennwort.",
+        "title": "Einen Passcode zum Entsperren festlegen",
+        "description": "Mit diesem Passcode kannst du Alby auf diesem Gerät entsperren. Er kann nicht wiederhergestellt werden, kann aber später geändert werden.",
         "choose_password": {
-          "label": "Wähle ein Entsperrkennwort:"
+          "label": "Wähle einen Passcode zum Entsperren:"
         },
         "errors": {
-          "mismatched_password": "Kennwörter stimmen nicht überein.",
-          "enter_password": "Bitte gib ein Kennwort ein.",
-          "confirm_password": "Bitte bestätige dein Kennwort."
+          "mismatched_password": "Die Passwörter stimmen nicht überein.",
+          "enter_password": "Bitte gebe einen Passcode ein.",
+          "confirm_password": "Bitte bestätige deinen Passcode."
         },
         "confirm_password": {
           "label": "Vergewisse dich, dass du es richtig eingegeben hast:"
@@ -32,7 +32,7 @@
         "title": "Pin für die Alby Erweiterung",
         "description": "Du bist fast am Ziel. Um Alby bequem nutzen zu können, musst du deine Erweiterung an die Browser Symbolleiste anheften:",
         "next_btn": "Beginne mit Alby {{icon}}",
-        "explanation": "1. Klicke auf <0/> in der oberen rechten Ecke deines Browsers<1/>2. Suche Alby und klicke, um es an die Symbolleiste anzuheften<1/>3. Das war es. Um auf Alby zuzugreifen, klicke einfach auf das Symbol <2/>."
+        "explanation": "1. Klicke auf <0/> in der oberen rechten Ecke deines Browsers<1/>2. Suche das Symbol für Alby und klicke, um es an die Symbolleiste anzuheften<1/>3. Das war es. Um auf Alby zuzugreifen, klicke einfach auf das Symbol <2/>"
       }
     },
     "choose_connector": {
@@ -193,20 +193,17 @@
         "sms_code": {
           "label": "Gib deinen SMS-Bestätigungscode ein"
         },
-        "jwt": {
+        "token": {
           "label": "Gebe deinen JWT Token ein",
           "info": "Das {{label}}-Login wird derzeit aktualisiert. Wenn du ein fortgeschrittener Benutzer bist, kannst du dir dein JWT-Token holen, indem du über <0>Web Wallet (wallet.mainnet.galoy.io)</0><1/><1/> anmeldest. Das JWT sieht so aus: < 2>eyJhbG...</2><1/><1/>"
         },
         "actions": {
-          "login": "Anmeldung",
-          "request_sms_code": "SMS-Code anfordern"
+          "login": "Anmeldung"
         },
         "errors": {
-          "failed_to_request_sms": "SMS-Code konnte nicht angefordert werden",
-          "failed_to_login_sms": "Anmeldung mit SMS Code fehlgeschlagen",
           "setup_failed": "Einrichtung fehlgeschlagen",
-          "missing_jwt": "JWT fehlt, Anmeldung nicht möglich.",
-          "invalid_jwt": "ungültige JWT übermittelt"
+          "missing_token": "JWT fehlt, Anmeldung nicht möglich.",
+          "invalid_token": "ungültige JWT übermittelt"
         }
       },
       "btcpay": {
@@ -302,17 +299,17 @@
     "unlock": {
       "unlock_error": {
         "link": "Zurücksetzen und neuen Account erstellen",
-        "help": "Deine Kontodaten werden mit deinem Entsperrkennwort verschlüsselt. Wenn du dein Entsperrkennwort wirklich vergessen hast, musst du dein Lightning-Konto zurücksetzen und erneut hinzufügen."
+        "help": "Deine Kontodaten werden mit deinem Freischalt-Passcode verschlüsselt. Wenn du deinen Freischaltcode wirklich vergessen hast, musst du dein Lightning Account zurücksetzen und erneut hinzufügen."
       },
       "errors": {
-        "invalid_password": "Ungültiges Kennwort"
+        "invalid_password": "Ungültiger Passcode"
       },
       "unlock_to_continue": "Freigeben zum Fortfahren",
       "help_contact": {
         "part1": "Brauchst du Hilfe? Kontaktiere uns",
         "part2": "Alby-Unterstützung"
       },
-      "unlock_password": "Dein Entsperrkennwort"
+      "unlock_password": "Ihr Entsperr-Passwort"
     },
     "settings": {
       "nostr": {
@@ -347,21 +344,21 @@
       "title": "Einstellungen",
       "change_password": {
         "choose_password": {
-          "label": "Gib ein neues Entsperrkennwort ein:"
+          "label": "Gebe einen neuen Passcode zum Entsperren ein:"
         },
         "submit": {
           "label": "Ändern"
         },
         "errors": {
-          "enter_password": "Bitte gib ein neues Entsperrkennwort ein.",
-          "confirm_password": "Bitte bestätige dein Kennwort.",
-          "mismatched_password": "Kennwörter stimmen nicht überein."
+          "enter_password": "Bitte gebe einen neuen Passcode zum Entsperren ein.",
+          "confirm_password": "Bitte bestätige dein Passcode.",
+          "mismatched_password": "Die Passwörter stimmen nicht überein."
         },
-        "success": "Kennwort erfolgreich geändert",
-        "title": "Entsperrkennwort ändern",
-        "screen_reader": "Entsperrkennwort ändern",
+        "success": "Passcode erfolgreich geändert",
+        "title": "Passcode zum Entsperren ändern",
+        "screen_reader": "Passcode zum Entsperren ändern",
         "confirm_password": {
-          "label": "Neues Kennwort bestätigen:"
+          "label": "Bestätige den neuen Passcode:"
         }
       },
       "theme": {
@@ -413,8 +410,10 @@
       "default_view": {
         "is_blocked_hint": "Alby ist derzeit auf dem {{host}} deaktiviert",
         "recent_transactions": "Jüngste Transaktionen",
-        "no_transactions": "Es wurden noch keine Transaktionen mit Alby getätigt.",
-        "block_removed": "{{host}} aktiviert. Bitte lade die Website neu."
+        "block_removed": "{{host}} aktiviert. Bitte lade die Website neu.",
+        "all_transactions_link": "Alle Transaktionen anzeigen",
+        "no_outgoing_transactions": "Noch keine ausgehenden Transaktionen für dieses Konto.",
+        "no_incoming_transactions": "Noch keine eingehenden Transaktionen für dieses Konto."
       },
       "allowance_view": {
         "sats_used": "verwendete Sats",
@@ -425,12 +424,6 @@
       "actions": {
         "send_satoshis": "⚡️ Satoshis senden ⚡️",
         "enable_now": "Jetzt aktivieren"
-      },
-      "transaction_list": {
-        "tabs": {
-          "outgoing": "Ausgehend",
-          "incoming": "Eingehend"
-        }
       },
       "recent_transactions": "Jüngste Transaktionen"
     },
@@ -749,28 +742,27 @@
       "tips": {
         "title": "Deine Alby-Wallet ist bereit",
         "top_up_wallet": {
-          "description": "Erstelle eine Lightning-Rechnung, sende dir selbst Bitcoin und nutze das Alby im Lightning-Ökosystem",
-          "title": "⚡️ Wallet aufladen",
-          "label1": "Bitcoin erhalten",
-          "label2": "Bitcoin kaufen"
+          "description": "Brauchst du eine Auffrischung?\nWir haben Sie!",
+          "title": "Bitcoin kaufen"
         },
         "demo": {
-          "description": "Entdecke alles, was du mit Alby tun könntest, auf unserer Demo-Website",
-          "title": "🕹️ Alby Demo ausprobieren",
-          "label1": "Probiere es aus"
+          "description": "Entdecke die Funktionen von Alby\nauf unserer Demo Website",
+          "title": "Alby Demo"
         },
-        "address": {
-          "description": "Erstelle eine eigene Lightningadresse und empfange Lightningzahlungen einfach per E-Mail",
-          "title": "Eine Lightning Adresse erhalten",
-          "label1": "Hole es dir jetzt!"
-        },
-        "description": "Ein paar Tipps für den Anfang 🐝"
+        "description": "Ein paar Tipps für den Anfang 🐝",
+        "mnemonic": {
+          "title": "Nostr",
+          "description": "Plane die Nutzung von Nostr?\nGeneriere jetzt deinen Schlüssel."
+        }
       }
     },
     "transactions": {
       "title": "Transaktionen",
-      "description": "Ausgehende Transaktionen über alle deine Konten",
-      "list_empty": "Noch keine Transaktionen verfügbar."
+      "list_empty": "Noch keine Transaktionen verfügbar.",
+      "description": {
+        "outgoing": "Ausgehende Transaktionen für dieses Konto",
+        "incoming": "Eingehende Transaktionen für dieses Konto"
+      }
     },
     "distributions": {
       "title": "Verbinden mit {{Name}}",
@@ -793,6 +785,10 @@
       "start9": {
         "name": "Start9"
       }
+    },
+    "confirm_add_account": {
+      "title": "Konto hinzufügen",
+      "content": "Diese Website möchte ein Konto hinzufügen ({{connector}}):"
     }
   },
   "components": {
@@ -894,6 +890,12 @@
     },
     "confirm_or_cancel": {
       "only_trusted": "Verbinde dich nur mit Websites, denen du vertraust."
+    },
+    "transaction_list": {
+      "tabs": {
+        "outgoing": "Ausgehend von",
+        "incoming": "Eingehend"
+      }
     }
   },
   "common": {
@@ -934,7 +936,7 @@
       "connect": "Verbinden",
       "save": "Speichern",
       "copy": "Kopieren",
-      "copy_invoice": "",
+      "copy_invoice": "Rechnung kopieren",
       "remember": "Denke an meine Wahl und frage nicht noch einmal",
       "receive_again": "Eine weitere Zahlung erhalten",
       "transactions": "Transaktionen",
@@ -954,8 +956,21 @@
       "lessThan": "< {{max}}",
       "greaterThan": "> {{min}}"
     },
-    "transactions": "Transaktionen",
-    "balance": "Bilanz"
+    "balance": "Bilanz",
+    "wallet": "Wallet",
+    "connectors": {
+      "lnd": "LND",
+      "nativelnd": "LND (über Tor)",
+      "citadel": "Citadel",
+      "nativecitadel": "Citadel (über Tor)",
+      "commando": "Kommando",
+      "lnbits": "LNBits",
+      "lndhub": "LNDHub",
+      "nativelndhub": "LNDHub (über Tor)",
+      "nativelnbits": "LNBits (über Tor)",
+      "galoy": "Galoy",
+      "eclair": "Eclair"
+    }
   },
   "permissions": {
     "commando": {

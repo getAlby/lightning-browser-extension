@@ -267,20 +267,17 @@
         "sms_code": {
           "label": "Enter your SMS verification code"
         },
-        "jwt": {
-          "label": "Enter your JWT token",
-          "info": "The {{label}} login is currently being upgraded. If you are an advanced user, you can grab your JWT token by logging in via the <0>Web Wallet (wallet.mainnet.galoy.io)</0><1/><1/>The JWT looks like: <2>eyJhbG...</2><1/><1/>"
+        "token": {
+          "label": "Enter your Access token",
+          "info": "The {{label}} integration with Alby is in alpha and only recommended for advanced users.<br><br>You can grab your Access token by going into the mobile app, clicking on the settings icon, and then tapping 3 times on the build number to open the developer menu.<br><br>The access token can be copied from here.<br><br>"
         },
         "actions": {
-          "login": "Login",
-          "request_sms_code": "Request SMS Code"
+          "login": "Login"
         },
         "errors": {
-          "failed_to_request_sms": "Failed to request a SMS code",
-          "failed_to_login_sms": "Failed to login with SMS code",
           "setup_failed": "Setup failed",
-          "missing_jwt": "JWT missing, couldn't log in.",
-          "invalid_jwt": "invalid JWT passed"
+          "missing_token": "Access token missing, couldn't log in.",
+          "invalid_token": "invalid Access token passed"
         }
       },
       "kollider": {
@@ -674,20 +671,16 @@
         "title": "Your Alby wallet is ready",
         "description": "A few tips to get you started buzzin'🐝",
         "top_up_wallet": {
-          "title": "⚡️ Top up your wallet",
-          "description": "Create a lightning invoice, send some bitcoin to yourself and start using Alby in the lightning ecosystem",
-          "label1": "Receive Bitcoin",
-          "label2": "Buy Bitcoin"
+          "title": "Buy Bitcoin",
+          "description": "Need a top up?\nWe got you!"
         },
         "demo": {
-          "title": "🕹️ Try out Alby Demo",
-          "description": "Discover all things you can do with Alby on our demo website",
-          "label1": "Give it a try"
+          "title": "Alby Demo",
+          "description": "Discover Alby's features\non our demo website"
         },
-        "address": {
-          "title": "⚡️ Get a lightning address",
-          "description": "Create your own lightning address and to receive lightning payments with ease of sending an e-mail",
-          "label1": "Get it now!"
+        "mnemonic": {
+          "title": "Nostr",
+          "description": "Planning to use Nostr?\nGenerate your keys now."
         }
       }
     },
@@ -748,6 +741,10 @@
       "title": "Approve Request",
       "allow": "Allow this website to execute:",
       "always_allow": "Remember my choice and don't ask again"
+    },
+    "confirm_add_account": {
+      "title": "Add account",
+      "content": "This website wants to add an account ({{connector}}):"
     },
     "nostr": {
       "title": "Nostr",
@@ -846,6 +843,19 @@
       "log_in": "Log in",
       "remember": "Remember my choice and don't ask again",
       "more": "More"
+    },
+    "connectors": {
+      "lnd": "LND",
+      "nativelnd": "LND (over Tor)",
+      "lndhub": "LNDHub",
+      "nativelndhub": "LNDHub (over Tor)",
+      "lnbits": "LNBits",
+      "nativelnbits": "LNBits (over Tor)",
+      "galoy": "Galoy",
+      "eclair": "Eclair",
+      "citadel": "Citadel",
+      "nativecitadel": "Citadel (over Tor)",
+      "commando": "Commando"
     },
     "errors": {
       "connection_failed": "Connection failed",
