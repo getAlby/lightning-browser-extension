@@ -93,7 +93,7 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
 
   const value = {
     accountId,
-    account: accountInfo,
+    account: accountInfo?.id === accountId ? accountInfo : null,
     balancesDecorated: {
       accountBalance: accountInfo
         ? getFormattedInCurrency(accountInfo.balance || 0, accountInfo.currency)
@@ -101,7 +101,7 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
       fiatBalance,
     },
     refetchAccountInfo,
-    loading: statusLoading || (!!accountId && !accountInfo),
+    loading: statusLoading || accountId !== accountInfo?.id,
     balanceLoading,
     lock,
     setAccountId,

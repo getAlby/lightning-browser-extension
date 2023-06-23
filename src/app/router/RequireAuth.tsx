@@ -5,11 +5,7 @@ function RequireAuth({ children }: { children: JSX.Element }) {
   const auth = useAccount();
   const location = useLocation();
 
-  if (auth.loading) {
-    return null;
-  }
-
-  if (!auth.accountId) {
+  if (!auth.loading && !auth.accountId) {
     return <Navigate to="/unlock" state={{ from: location }} />;
   }
 
