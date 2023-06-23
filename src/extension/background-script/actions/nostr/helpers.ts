@@ -61,11 +61,12 @@ export async function addPermissionFor(method: string, host: string) {
 // from: https://github.com/nbd-wtf/nostr-tools/blob/160987472fd4922dd80c75648ca8939dd2d96cc0/event.ts#L61
 // to avoid the additional dependency
 export function validateEvent(event: Event): boolean {
+  if (!(event instanceof Object)) return false;
+  if (typeof event.kind !== "number") return false;
   if (typeof event.content !== "string") return false;
   if (typeof event.created_at !== "number") return false;
-  // ignore these checks because if the pubkey is not set we add it to the event. same for the ID.
-  // if (typeof event.pubkey !== "string") return false;
-  // if (!event.pubkey.match(/^[a-f0-9]{64}$/)) return false;
+  //if (typeof event.pubkey !== "string") return false;
+  //if (!event.pubkey.match(/^[a-f0-9]{64}$/)) return false;
 
   if (!Array.isArray(event.tags)) return false;
   for (let i = 0; i < event.tags.length; i++) {
