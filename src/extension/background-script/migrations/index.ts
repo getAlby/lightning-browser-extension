@@ -1,7 +1,12 @@
-import db from "../db";
-import state from "../state";
+// import db from "../db";
+// import state from "../state";
 
 export type Migration = keyof typeof migrations;
+
+/*
+
+// TS does not want unused code.
+// we need this for the next migration again
 
 const shouldMigrate = (name: Migration): boolean => {
   const { migrations } = state.getState();
@@ -25,50 +30,19 @@ const setMigrated = (name: Migration): Promise<void> => {
   return state.getState().saveToStorage();
 };
 
-const migrations = {
-  migratedeleteLegacyWeblnPermissions: async () => {
-    await db.permissions
-      .where("method")
-      .startsWithIgnoreCase("webln/")
-      .delete();
-  },
-  migrateisUsingLegacyLnurlAuthKeySetting: async () => {
-    const { settings } = state.getState();
-    const allowances = await db.allowances
-      .filter((allowance) => {
-        return !!allowance.lnurlAuth;
-      })
-      .toArray();
+*/
 
-    // if there is an allowance that uses lnurlAuth we enable the legacy signing
-    if (allowances.length > 0) {
-      const newSettings = {
-        ...settings,
-        isUsingLegacyLnurlAuthKey: true,
-      };
-      state.setState({
-        settings: newSettings,
-      });
-      // state is saved with the setMigrated call
-    }
-  },
-};
+const migrations = {};
 
 const migrate = async () => {
   // going forward we can iterate through the the migrations object above and DRY this up:
   // Object.keys(migrations).forEach((name: string) => {
-  if (shouldMigrate("migrateisUsingLegacyLnurlAuthKeySetting")) {
-    console.info(
-      "Running migration for: migrateisUsingLegacyLnurlAuthKeySetting"
-    );
-    await migrations["migrateisUsingLegacyLnurlAuthKeySetting"]();
-    await setMigrated("migrateisUsingLegacyLnurlAuthKeySetting");
-  }
-  if (shouldMigrate("migratedeleteLegacyWeblnPermissions")) {
-    console.info("Running migration for: migratedeleteLegacyWeblnPermissions");
-    await migrations["migratedeleteLegacyWeblnPermissions"]();
-    await setMigrated("migratedeleteLegacyWeblnPermissions");
-  }
+  // example:
+  //if (shouldMigrate("migratePermissionsWithoutAccountId")) {
+  //  console.info("Running migration for: migratePermissionsWithoutAccountId");
+  //  await migrations["migratePermissionsWithoutAccountId"]();
+  //  await setMigrated("migratePermissionsWithoutAccountId");
+  //}
 };
 
 export default migrate;

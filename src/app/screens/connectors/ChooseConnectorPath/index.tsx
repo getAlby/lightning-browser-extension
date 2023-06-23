@@ -2,17 +2,12 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import Button from "~/app/components/Button";
 import ConnectorPath from "~/app/components/ConnectorPath";
-import getConnectorRoutes from "~/app/router/connectorRoutes";
+import { getConnectorRoutes } from "~/app/router/connectorRoutes";
 import i18n from "~/i18n/i18nConfig";
 
 import alby from "/static/assets/icons/alby.png";
 
-type Props = {
-  title: string;
-  description: string;
-};
-
-export default function ChooseConnectorPath({ title, description }: Props) {
+export default function ChooseConnectorPath() {
   let connectorRoutes = getConnectorRoutes();
   i18n.on("languageChanged", () => {
     connectorRoutes = getConnectorRoutes();
@@ -22,20 +17,9 @@ export default function ChooseConnectorPath({ title, description }: Props) {
   });
   const { t: tCommon } = useTranslation("common");
   return (
-    <div className="relative mt-14 lg:grid lg:gap-8 text-center">
+    <div className="relative mt-10 lg:grid lg:gap-8 text-center">
       <div className="relative">
-        <div>
-          <h1 className="text-3xl font-bold dark:text-white">{title}</h1>
-          {description && (
-            <div className="flex justify-center">
-              <p className="text-gray-500 mt-6 dark:text-neutral-400 w-[500px]">
-                {description}
-              </p>
-            </div>
-          )}
-        </div>
-
-        <div className="grid lg:grid-cols-2 gap-4 lg:gap-8 xl:gap-18 mt-8 mb-4 lg:my-12">
+        <div className="grid lg:grid-cols-2 gap-10 mb-4">
           <ConnectorPath
             title={t("alby.title")}
             description={t("alby.description")}
@@ -57,8 +41,11 @@ export default function ChooseConnectorPath({ title, description }: Props) {
             title={t("other.title")}
             description={t("other.description")}
             content={
-              <div className="flex flex-wrap gap-6 w-72 lg:w-80 mx-auto my-5 items-center">
-                {connectorRoutes.slice(0, 7).map(({ path, title, logo }) => (
+              <Link
+                to="choose-connector"
+                className="flex flex-wrap gap-6 w-72 lg:w-80 mx-auto my-5 items-center"
+              >
+                {connectorRoutes.slice(1, 8).map(({ path, title, logo }) => (
                   <img
                     key={path}
                     title={title}
@@ -70,7 +57,7 @@ export default function ChooseConnectorPath({ title, description }: Props) {
                 <p className="text-gray-500 dark:text-neutral-400">
                   {t("other.and_more")}
                 </p>
-              </div>
+              </Link>
             }
             actions={
               <Link to="choose-connector" className="flex flex-1">

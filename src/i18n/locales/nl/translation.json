@@ -1,12 +1,6 @@
 {
   "translation": {
     "welcome": {
-      "nav": {
-        "welcome": "Welkom",
-        "password": "Jouw Wachtwoord",
-        "connect": "Jouw Lightning account",
-        "done": "Klaar"
-      },
       "set_password": {
         "title": "Stel een ontgrendelingswachtwoord in",
         "description": "Lightning-accountgegevens zijn veilig versleuteld met een ontgrendelingswachtwoord. Vergeet dit wachtwoord niet! Je hebt het nodig om de Alby-extensie te ontgrendelen (in deze browser)",
@@ -32,7 +26,8 @@
         "actions": {
           "delete_edit_account": "Verwijderd invalide account en probeer opnieuw"
         }
-      }
+      },
+      "title": "Welkom bij Alby"
     },
     "choose_connector": {
       "description": "Maak eerst verbinding met een Lightning wallet zodat je kan synchen met websites die bitcoin Lightning betalingen accepteren!",
@@ -192,20 +187,17 @@
         "sms_code": {
           "label": ""
         },
-        "jwt": {
+        "token": {
           "label": "",
           "info": ""
         },
         "actions": {
-          "login": "",
-          "request_sms_code": ""
+          "login": ""
         },
         "errors": {
-          "failed_to_request_sms": "",
-          "failed_to_login_sms": "",
           "setup_failed": "",
-          "missing_jwt": "",
-          "invalid_jwt": ""
+          "missing_token": "",
+          "invalid_token": ""
         }
       },
       "btcpay": {
@@ -261,12 +253,6 @@
         "enable_now": ""
       },
       "recent_transactions": "",
-      "transaction_list": {
-        "tabs": {
-          "outgoing": "",
-          "incoming": ""
-        }
-      },
       "allowance_view": {
         "recent_transactions": "",
         "allowance": "",
@@ -275,7 +261,6 @@
       },
       "default_view": {
         "recent_transactions": "",
-        "no_transactions": "",
         "is_blocked_hint": "",
         "block_removed": ""
       }
@@ -284,25 +269,6 @@
       "title": "",
       "actions": {
         "add_account": ""
-      },
-      "edit": {
-        "title": "",
-        "name": {
-          "label": ""
-        },
-        "screen_reader": ""
-      },
-      "export": {
-        "title": "",
-        "screen_reader": "",
-        "waiting": "",
-        "your_ln_address": "",
-        "tip_mobile": "",
-        "export_uri": "",
-        "scan_qr": ""
-      },
-      "remove": {
-        "confirm": ""
       }
     },
     "enable": {
@@ -420,10 +386,7 @@
         "hint": "",
         "private_key": {
           "title": "",
-          "subtitle": "",
-          "generate": "",
-          "warning": "",
-          "success": ""
+          "subtitle": ""
         }
       }
     },
@@ -559,6 +522,11 @@
       "content": "",
       "block_and_ignore": "",
       "block_added": ""
+    },
+    "choose_path": {
+      "alby": {
+        "title": "Alby"
+      }
     }
   },
   "common": {
@@ -567,7 +535,7 @@
     "success": "",
     "error": "",
     "settings": "",
-    "websites": "",
+    "connected_sites": "",
     "sats_one": "",
     "sats_other": "",
     "loading": "",
@@ -599,7 +567,8 @@
       "close": "",
       "export": "",
       "remove": "",
-      "copy": ""
+      "copy": "",
+      "copy_invoice": ""
     },
     "errors": {
       "connection_failed": "",
@@ -656,12 +625,6 @@
       "budget": {
         "label": ""
       }
-    },
-    "companion_download_info": {
-      "description": "",
-      "download_here": "",
-      "using_tor": "",
-      "or": ""
     },
     "toasts": {
       "connection_error": {

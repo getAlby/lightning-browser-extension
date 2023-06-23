@@ -16,8 +16,8 @@ jest.mock("~/common/lib/crypto", () => {
 });
 
 const defaultMockState = {
-  password: "123456",
   saveToStorage: jest.fn,
+  password: () => "123456",
   accounts: {},
 };
 
@@ -27,6 +27,7 @@ const message: MessageAccountAdd = {
     connector: "lnd",
     config: "123456config",
     name: "purple",
+    nostrPrivateKey: "123456nostr",
   },
   origin: { internal: true },
   prompt: true,
@@ -57,6 +58,7 @@ describe("add account to account-list", () => {
           connector: "lnd",
           config: "secret-config-string-42",
           name: "purple",
+          nostrPrivateKey: "123456nostr",
         },
       },
     });
@@ -77,11 +79,13 @@ describe("add account to account-list", () => {
           config: "abc",
           connector: "lnd",
           name: "BLUE",
+          nostrPrivateKey: "123",
         },
         "666": {
           config: "xyz",
           connector: "lnd",
           name: "GREEN",
+          nostrPrivateKey: "123",
         },
       },
     };
@@ -102,9 +106,20 @@ describe("add account to account-list", () => {
           connector: "lnd",
           config: "secret-config-string-42",
           name: "purple",
+          nostrPrivateKey: "123456nostr",
         },
-        "666": { config: "xyz", connector: "lnd", name: "GREEN" },
-        "888": { config: "abc", connector: "lnd", name: "BLUE" },
+        "666": {
+          config: "xyz",
+          connector: "lnd",
+          name: "GREEN",
+          nostrPrivateKey: "123",
+        },
+        "888": {
+          config: "abc",
+          connector: "lnd",
+          name: "BLUE",
+          nostrPrivateKey: "123",
+        },
       },
     });
 

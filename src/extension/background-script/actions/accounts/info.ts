@@ -7,10 +7,8 @@ const info = async (message: MessageAccountInfo) => {
   const currentAccountId = state.getState().currentAccountId;
   const currentAccount = state.getState().getAccount();
 
-  const [info, balance] = await Promise.all([
-    connector.getInfo(),
-    connector.getBalance(),
-  ]);
+  const info = await connector.getInfo();
+  const balance = await connector.getBalance();
 
   if (!currentAccount || !currentAccountId) {
     return { error: "No current account set" };

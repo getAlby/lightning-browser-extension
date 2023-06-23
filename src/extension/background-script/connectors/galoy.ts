@@ -1,21 +1,22 @@
-import axios from "axios";
-import { AxiosRequestConfig } from "axios";
+import fetchAdapter from "@vespaiach/axios-fetch-adapter";
+import axios, { AxiosRequestConfig } from "axios";
 import lightningPayReq from "bolt11";
+import { Account } from "~/types";
 
 import Connector, {
-  SendPaymentArgs,
-  SendPaymentResponse,
   CheckPaymentArgs,
   CheckPaymentResponse,
   ConnectPeerResponse,
+  GetBalanceResponse,
   GetInfoResponse,
   GetInvoicesResponse,
-  GetBalanceResponse,
+  KeysendArgs,
   MakeInvoiceArgs,
   MakeInvoiceResponse,
+  SendPaymentArgs,
+  SendPaymentResponse,
   SignMessageArgs,
   SignMessageResponse,
-  KeysendArgs,
 } from "./connector.interface";
 
 interface Config {
@@ -25,9 +26,11 @@ interface Config {
 }
 
 class Galoy implements Connector {
+  account: Account;
   config: Config;
 
-  constructor(config: Config) {
+  constructor(account: Account, config: Config) {
+    this.account = account;
     this.config = config;
   }
 
@@ -43,7 +46,7 @@ class Galoy implements Connector {
     return ["getInfo", "makeInvoice", "sendPayment", "signMessage"];
   }
 
-  getInfo(): Promise<GetInfoResponse> {
+  async getInfo(): Promise<GetInfoResponse> {
     const query = {
       query: `
         query getinfo {
@@ -84,12 +87,10 @@ class Galoy implements Connector {
     console.error(
       `Not yet supported with the currently used account: ${this.constructor.name}`
     );
-    throw new Error(
-      `${this.constructor.name}: "getInvoices" is not yet supported. Contact us if you need it.`
-    );
+    return { data: { invoices: [] } };
   }
 
-  getBalance(): Promise<GetBalanceResponse> {
+  async getBalance(): Promise<GetBalanceResponse> {
     const query = {
       query: `
         query getinfo {
@@ -126,7 +127,7 @@ class Galoy implements Connector {
     });
   }
 
-  sendPayment(args: SendPaymentArgs): Promise<SendPaymentResponse> {
+  async sendPayment(args: SendPaymentArgs): Promise<SendPaymentResponse> {
     const query = {
       query: `
         mutation lnInvoicePaymentSend($input: LnInvoicePaymentInput!) {
@@ -292,9 +293,7 @@ class Galoy implements Connector {
     return Promise.reject(new Error("Not yet supported with Galoy."));
   }
 
-  // TODO: walletId is required here
-  // error:  message: "Variable \"$input\" got invalid value { amount: 200, memo: \"test\" }; Field \"walletId\" of required type \"WalletId!\" was not provided.", code: "BAD_USER_INPUT", locations: […]
-  makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse> {
+  async makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse> {
     const query = {
       query: `
         mutation lnInvoiceCreate($input: LnInvoiceCreateInput!) {
@@ -345,6 +344,7 @@ class Galoy implements Connector {
         "Content-Type": "application/json",
         Authorization: `Bearer ${this.config.accessToken}`,
       },
+      adapter: fetchAdapter,
     };
     reqConfig.data = query;
     let data;

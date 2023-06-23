@@ -16,7 +16,7 @@
   - Opera\
      `$ yarn run dev:opera`
 
-  **NOTE:** by default, the extension built this way will talk to the testnet API (which runs under [app.regtest.getalby.com](https://app.regtest.getalby.com/user)). In case you want to do manual tests against the mainnet API, add the following `WALLET_CREATE_URL` environment variable to your command: `$ WALLET_CREATE_URL="https://getalby.com/api/users" yarn run dev:your-browser-of-choice`
+  **NOTE:** by default, the extension built this way will talk to the testnet API (which runs under [app.regtest.getalby.com](https://app.regtest.getalby.com/user)). In case you want to do manual tests against the mainnet API, add the following `WALLET_ROOT_URL` environment variable to your command: `$ WALLET_ROOT_URL="https://getalby.com" yarn run dev:your-browser-of-choice`
 
 - **Chrome**
 
@@ -64,6 +64,8 @@ For most people who are new to the btc lightning network, starting a test versio
 │   ├── app                     # React UI App
 │   ├── extension               # Browser Extension
 │   ├── common                  # Helpers and utilities used by both the React App and the Browser Extension
+│   ├── fixtures                # Reusable sample data for tests
+│   ├── i18n                    # Translations for internationalization
 ├── static                  # Static Resources
 │   ├── assets                  # Images, logos, etc
 │   └── views                   # Static HTML files

@@ -33,11 +33,13 @@ const routes = {
   makeInvoice: ln.makeInvoice,
   connectPeer: ln.connectPeer,
   getPayments: payments.all,
+  getPaymentsByAccount: payments.listByAccount,
   accountInfo: accounts.info,
   accountDecryptedDetails: accounts.decryptedDetails,
   addAccount: accounts.add,
   editAccount: accounts.edit,
   getAccounts: accounts.all,
+  getAccount: accounts.get,
   removeAccount: accounts.remove,
   selectAccount: accounts.select,
   setPassword: setup.setPassword,
@@ -58,11 +60,16 @@ const routes = {
   nostr: {
     generatePrivateKey: nostr.generatePrivateKey,
     getPrivateKey: nostr.getPrivateKey,
+    removePrivateKey: nostr.removePrivateKey,
     setPrivateKey: nostr.setPrivateKey,
   },
 
   // Public calls that are accessible from the inpage script (through the content script)
   public: {
+    alby: {
+      enable: allowances.enable,
+      addAccount: accounts.promptAdd,
+    },
     webln: {
       enable: allowances.enable,
       getInfo: ln.getInfo,
@@ -77,6 +84,7 @@ const routes = {
       enable: allowances.enable,
       getPublicKeyOrPrompt: nostr.getPublicKeyOrPrompt,
       signEventOrPrompt: nostr.signEventOrPrompt,
+      signSchnorrOrPrompt: nostr.signSchnorrOrPrompt,
       getRelays: nostr.getRelays,
       encryptOrPrompt: nostr.encryptOrPrompt,
       decryptOrPrompt: nostr.decryptOrPrompt,

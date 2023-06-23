@@ -21,6 +21,7 @@ const ConnectorClass = jest.fn().mockImplementation(() => {
 jest.mock("~/extension/background-script/state", () => ({
   getState: () => ({
     getConnector: jest.fn(() => Promise.resolve(new ConnectorClass())),
+    currentAccountId: "8b7f1dc6-ab87-4c6c-bca5-19fa8632731e",
   }),
 }));
 
@@ -40,6 +41,7 @@ const allowanceInDB = {
 
 const permissionInDB = {
   id: 1,
+  accountId: "8b7f1dc6-ab87-4c6c-bca5-19fa8632731e",
   allowanceId: allowanceInDB.id,
   createdAt: "1487076708000",
   host: allowanceInDB.host,
@@ -288,6 +290,40 @@ describe("ln request", () => {
       );
 
       expect(result).toStrictEqual(requestResponse);
+    });
+
+    test("doesn't call requestMethod if clicks cancel", async () => {
+      (utils.openPrompt as jest.Mock).mockImplementationOnce(() => {
+        throw new Error();
+      });
+      // prepare DB with a permission
+      await db.permissions.bulkAdd([permissionInDB]);
+
+      const messageWithOtherPermission = {
+        ...message,
+        args: {
+          ...message.args,
+          method: "sendPayment",
+        },
+      };
+
+      expect(await db.permissions.toArray()).toHaveLength(1);
+      expect(
+        await db.permissions.get({ method: "webln/lnd/sendpayment" })
+      ).toBeUndefined();
+
+      const result = await request(messageWithOtherPermission);
+
+      expect(utils.openPrompt).toHaveBeenCalledTimes(1);
+
+      expect(connector.requestMethod).not.toHaveBeenCalled();
+
+      expect(await db.permissions.toArray()).toHaveLength(1);
+      expect(
+        await db.permissions.get({ method: "webln/lnd/sendpayment" })
+      ).toBeUndefined();
+
+      expect(result).toHaveProperty("error");
     });
 
     test("does not save the permission if enabled 'false'", async () => {

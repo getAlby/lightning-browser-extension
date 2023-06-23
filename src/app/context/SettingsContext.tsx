@@ -2,16 +2,16 @@ import dayjs from "dayjs";
 import i18n from "i18next";
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
-import { getTheme } from "~/app/utils";
-import { CURRENCIES, ACCOUNT_CURRENCIES } from "~/common/constants";
+import { setTheme } from "~/app/utils";
+import { ACCOUNT_CURRENCIES, CURRENCIES } from "~/common/constants";
 import api from "~/common/lib/api";
+import { DEFAULT_SETTINGS } from "~/common/settings";
 import {
+  getFormattedCurrency as getFormattedCurrencyUtil,
   getFormattedFiat as getFormattedFiatUtil,
   getFormattedNumber as getFormattedNumberUtil,
   getFormattedSats as getFormattedSatsUtil,
-  getFormattedCurrency as getFormattedCurrencyUtil,
 } from "~/common/utils/currencyConvert";
-import { DEFAULT_SETTINGS } from "~/extension/background-script/state";
 import type { SettingsStorage } from "~/types";
 
 interface SettingsContextType {
@@ -58,11 +58,12 @@ export const SettingsProvider = ({
   useEffect(() => {
     api
       .getSettings()
-      .then((response) => {
-        setSettings(response);
+      .then((settings) => {
+        setSettings(settings);
       })
       .catch((e) => {
-        toast.error(
+        toast.error(`An unexpected error occurred (${e.message})`);
+        console.error(
           `SettingsProvider: An unexpected error occurred (${e.message})`
         );
       })
@@ -140,7 +141,7 @@ export const SettingsProvider = ({
 
   // update theme on every change
   useEffect(() => {
-    getTheme(); // Get the active theme and apply corresponding Tailwind classes to the document
+    setTheme(); // Get the active theme and apply corresponding Tailwind classes to the document
   }, [settings.theme]);
 
   const value = {

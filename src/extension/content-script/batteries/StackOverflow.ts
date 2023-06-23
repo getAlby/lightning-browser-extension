@@ -1,3 +1,4 @@
+import fetchAdapter from "@vespaiach/axios-fetch-adapter";
 import axios from "axios";
 import type { Battery } from "~/types";
 
@@ -25,15 +26,15 @@ const battery = async (): Promise<void> => {
 };
 
 function htmlToText(html: string) {
-  const temp = document.createElement("div");
-  temp.innerHTML = html;
-  return temp.textContent;
+  const doc = new DOMParser().parseFromString(html, "text/html");
+  return doc.textContent;
 }
 
 async function handleQuestionPage(questionId: string): Promise<Battery | null> {
   const questionResponse = await axios.get(
     // The filter can be generated here: https://api.stackexchange.com/docs/users-by-ids
-    `https://api.stackexchange.com/2.2/questions/${questionId}?site=stackoverflow&filter=!9bOY8fLl6`
+    `https://api.stackexchange.com/2.2/questions/${questionId}?site=stackoverflow&filter=!9bOY8fLl6`,
+    { adapter: fetchAdapter }
   );
 
   if (!questionResponse) {
@@ -54,7 +55,8 @@ async function handleQuestionPage(questionId: string): Promise<Battery | null> {
 
   const answerResponse = await axios.get(
     // The filter can be generated here: https://api.stackexchange.com/docs/users-by-ids
-    `https://api.stackexchange.com/2.2/answers/${questionData.accepted_answer_id}?site=stackoverflow&filter=!-)QWsbXSB(JQ`
+    `https://api.stackexchange.com/2.2/answers/${questionData.accepted_answer_id}?site=stackoverflow&filter=!-)QWsbXSB(JQ`,
+    { adapter: fetchAdapter }
   );
 
   if (!answerResponse) {
@@ -78,7 +80,8 @@ async function handleQuestionPage(questionId: string): Promise<Battery | null> {
 async function handleProfilePage(userId: string): Promise<Battery | null> {
   const response = await axios.get(
     // The filter can be generated here: https://api.stackexchange.com/docs/users-by-ids
-    `https://api.stackexchange.com/2.2/users/${userId}?site=stackoverflow&filter=!-B3yqvQ2YYGK1t-Hg_ydU`
+    `https://api.stackexchange.com/2.2/users/${userId}?site=stackoverflow&filter=!-B3yqvQ2YYGK1t-Hg_ydU`,
+    { adapter: fetchAdapter }
   );
 
   if (!response) {

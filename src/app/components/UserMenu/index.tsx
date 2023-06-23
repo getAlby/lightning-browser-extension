@@ -1,17 +1,14 @@
 import {
   GearIcon,
-  GlobeIcon,
   LockIcon,
+  MagicWandIcon,
   MenuIcon,
-  QuestionIcon,
-  ReceiveIcon,
   RocketIcon,
-  SendIcon,
-  TransactionsIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useAccount } from "~/app/context/AccountContext";
+import { ConnectedSiteIcon, HelpIcon } from "~/app/icons";
 import utils from "~/common/lib/utils";
 
 import Menu from "../Menu";
@@ -48,38 +45,25 @@ export default function UserMenu() {
         <MenuIcon className="h-6 w-6" />
       </Menu.Button>
       <Menu.List position="left">
-        <Menu.ItemButton
-          onClick={() => {
-            openOptions("discover");
-          }}
-        >
-          <GlobeIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
-          {tCommon("discover")}
-        </Menu.ItemButton>
-        <Menu.ItemButton
-          onClick={() => {
-            openOptions("publishers");
-          }}
-        >
-          <TransactionsIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
-          {tCommon("websites")}
-        </Menu.ItemButton>
-        <Menu.ItemButton
-          onClick={() => {
-            navigate("/send");
-          }}
-        >
-          <SendIcon className="w-6 h-6 -ml-0.5 mr-2 text-gray-700 dark:text-neutral-300" />
-          {tCommon("actions.send")}
-        </Menu.ItemButton>
-        <Menu.ItemButton
-          onClick={() => {
-            navigate("/receive");
-          }}
-        >
-          <ReceiveIcon className="w-6 h-6 -ml-0.5 mr-2 text-gray-700 dark:text-neutral-300" />
-          {tCommon("actions.receive")}
-        </Menu.ItemButton>
+        <div className="lg:hidden">
+          <Menu.ItemButton
+            onClick={() => {
+              openOptions("discover");
+            }}
+          >
+            <RocketIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
+            {tCommon("discover")}
+          </Menu.ItemButton>
+          <Menu.ItemButton
+            onClick={() => {
+              openOptions("publishers");
+            }}
+          >
+            <ConnectedSiteIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
+            {tCommon("connected_sites")}
+          </Menu.ItemButton>
+          <Menu.Divider />
+        </div>
         <Menu.ItemButton
           onClick={() => {
             openOptions("settings");
@@ -88,13 +72,12 @@ export default function UserMenu() {
           <GearIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
           {tCommon("settings")}
         </Menu.ItemButton>
-        <Menu.Divider />
         <Menu.ItemButton
           onClick={() => {
             utils.openUrl("https://feedback.getalby.com");
           }}
         >
-          <RocketIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
+          <MagicWandIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
           {tCommon("feedback")}
         </Menu.ItemButton>
         <Menu.ItemButton
@@ -102,7 +85,7 @@ export default function UserMenu() {
             utils.openUrl("https://guides.getalby.com");
           }}
         >
-          <QuestionIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
+          <HelpIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
           {tCommon("help")}
         </Menu.ItemButton>
         <Menu.Divider />

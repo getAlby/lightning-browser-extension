@@ -6,6 +6,7 @@ import {
   MakeInvoiceResponse,
 } from "~/extension/background-script/connectors/connector.interface";
 import type {
+  Account,
   Accounts,
   Allowance,
   DbPayment,
@@ -27,6 +28,10 @@ export interface AccountInfoRes {
   name: string;
 }
 
+export interface GetAccountRes
+  extends Pick<Account, "id" | "connector" | "name"> {
+  nostrEnabled: boolean;
+}
 export interface StatusRes {
   configured: boolean;
   unlocked: boolean;
@@ -45,13 +50,18 @@ export const getAccountInfo = (): Promise<AccountInfoRes> =>
   msg.request<AccountInfoRes>("accountInfo");
 
 export const getAccounts = () => msg.request<Accounts>("getAccounts");
+export const getAccount = () => msg.request<GetAccountRes>("getAccount");
 export const updateAllowance = () => msg.request<Accounts>("updateAllowance");
 export const selectAccount = (id: string) =>
   msg.request("selectAccount", { id });
 export const getAllowance = (host: string) =>
   msg.request<Allowance>("getAllowance", { host });
-export const getPayments = (options: { limit: number }) =>
+export const getPayments = (options?: { limit?: number }) =>
   msg.request<{ payments: DbPayment[] }>("getPayments", options);
+export const getPaymentsByAccount = (options: {
+  accountId: Account["id"];
+  limit?: number;
+}) => msg.request<{ payments: DbPayment[] }>("getPaymentsByAccount", options);
 export const getSettings = () => msg.request<SettingsStorage>("getSettings");
 export const getStatus = () => msg.request<StatusRes>("status");
 export const getInfo = () => msg.request<NodeInfo>("getInfo");
@@ -80,6 +90,7 @@ export const getCurrencyRate = async () =>
   msg.request<{ rate: number }>("getCurrencyRate");
 
 export default {
+  getAccount,
   getAccountInfo,
   getAccounts,
   getInfo,
@@ -87,6 +98,7 @@ export default {
   getAllowance,
   updateAllowance,
   getPayments,
+  getPaymentsByAccount,
   getSettings,
   getStatus,
   makeInvoice,

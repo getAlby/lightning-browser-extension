@@ -5,10 +5,10 @@ import state from "../../state";
 
 const changePassword = async (message: Message) => {
   const accounts = state.getState().accounts;
-  const password = state.getState().password as string;
+  const password = await state.getState().password();
+  if (!password) return { error: "Password is missing" };
   const newPassword = message.args.password as string;
   const tmpAccounts = { ...accounts };
-  const nostPrivateKey = await state.getState().getNostr().getPrivateKey();
 
   for (const accountId in tmpAccounts) {
     const accountConfig = decryptData(
@@ -16,9 +16,19 @@ const changePassword = async (message: Message) => {
       password
     );
     tmpAccounts[accountId].config = encryptData(accountConfig, newPassword);
+    if (accounts[accountId].nostrPrivateKey) {
+      const accountNostrKey = decryptData(
+        accounts[accountId].nostrPrivateKey as string,
+        password
+      );
+      tmpAccounts[accountId].nostrPrivateKey = encryptData(
+        accountNostrKey,
+        newPassword
+      );
+    }
   }
-  state.setState({ accounts: tmpAccounts, password: newPassword });
-  await state.getState().getNostr().setPrivateKey(nostPrivateKey);
+  await state.getState().password(newPassword);
+  state.setState({ accounts: tmpAccounts });
   // make sure we immediately persist the updated accounts
   await state.getState().saveToStorage();
 

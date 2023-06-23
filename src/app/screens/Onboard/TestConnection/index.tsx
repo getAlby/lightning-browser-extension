@@ -5,7 +5,6 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
-import utils from "~/common/lib/utils";
 
 export default function TestConnection() {
   const [errorMessage, setErrorMessage] = useState("");
@@ -31,7 +30,7 @@ export default function TestConnection() {
     try {
       const response = await api.getAccountInfo();
       if (response.name && response.info.alias) {
-        utils.redirectPage("options.html#/discover");
+        navigate("/pin-extension");
       } else {
         setErrorMessage(t("connection_error"));
       }
@@ -51,7 +50,7 @@ export default function TestConnection() {
   }, []);
 
   return (
-    <div className="relative mt-14 lg:grid lg:grid-cols-2 lg:gap-8 bg-white dark:bg-surface-02dp px-10 py-12">
+    <div className="relative mt-14 lg:grid lg:grid-cols-2 gap-8 bg-white dark:bg-surface-02dp p-10 shadow rounded-lg">
       <div className="relative">
         <div>
           {errorMessage && (

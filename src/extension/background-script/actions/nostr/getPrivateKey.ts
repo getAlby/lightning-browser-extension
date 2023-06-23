@@ -1,9 +1,35 @@
+import { decryptData } from "~/common/lib/crypto";
+import type { MessagePrivateKeyGet } from "~/types";
+
 import state from "../../state";
 
-const getPrivateKey = async () => {
-  const privateKey = state.getState().getNostr().getPrivateKey();
+const getPrivateKey = async (message: MessagePrivateKeyGet) => {
+  const id = message?.args?.id;
+
+  if (!id) {
+    return {
+      data: (await state.getState().getNostr()).privateKey,
+    };
+  }
+
+  const accounts = state.getState().accounts;
+  if (Object.keys(accounts).includes(id)) {
+    const password = await state.getState().password();
+    if (!password) {
+      return {
+        error: "Password is missing.",
+      };
+    }
+    const account = accounts[id];
+    if (!account.nostrPrivateKey) return { data: null };
+    const privateKey = decryptData(account.nostrPrivateKey, password);
+    return {
+      data: privateKey,
+    };
+  }
+
   return {
-    data: privateKey,
+    error: "Account does not exist.",
   };
 };
 

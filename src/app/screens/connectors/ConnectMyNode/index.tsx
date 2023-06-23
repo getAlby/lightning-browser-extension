@@ -3,11 +3,13 @@ import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
 import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
 import { useState } from "react";
-import { useTranslation, Trans } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
+
+import logo from "/static/assets/icons/mynode.png";
 
 const initialFormData = {
   url: "",
@@ -103,7 +105,7 @@ export default function ConnectMyNode() {
   return (
     <ConnectorForm
       title={
-        <h1 className="mb-6 text-2xl font-bold dark:text-white">
+        <h1 className="text-2xl font-bold dark:text-white">
           <Trans
             i18nKey={"page.title"}
             t={t}
@@ -122,25 +124,27 @@ export default function ConnectMyNode() {
           components={[<strong></strong>, <br />]}
         />
       }
+      logo={logo}
       submitLoading={loading}
       submitDisabled={formData.url === "" || formData.macaroon === ""}
       onSubmit={handleSubmit}
       video="https://cdn.getalby-assets.com/connector-guides/in_extension_guide_mynode.mp4"
     >
-      <div className="mb-6">
+      <div className="mt-6">
         <TextField
           id="lndconnect"
           label={t("rest_url.label")}
           placeholder={t("rest_url.placeholder")}
           onChange={handleLndconnectUrl}
           required
+          autoFocus={true}
         />
       </div>
       {formData.url.match(/\.onion/i) && (
         <div className="mt-6">
           <CompanionDownloadInfo
-            hasTorCallback={() => {
-              setHasTorSupport(true);
+            hasTorCallback={(hasTor: boolean) => {
+              setHasTorSupport(hasTor);
             }}
           />
         </div>

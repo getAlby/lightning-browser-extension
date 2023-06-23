@@ -7,12 +7,20 @@ import state from "../../state";
 export default async function keysend(message: Message) {
   PubSub.publish(`ln.keysend.start`, message);
   const { destination, amount, customRecords } = message.args;
+
+  const accountId = await state.getState().currentAccountId;
+  if (!accountId) {
+    return {
+      error: "Select an account.",
+    };
+  }
+
   if (
     typeof destination !== "string" ||
     (typeof amount !== "string" && typeof amount !== "number")
   ) {
     return {
-      error: "destination or amount missing.",
+      error: "Destination or amount missing.",
     };
   }
 
@@ -30,7 +38,8 @@ export default async function keysend(message: Message) {
       error: e instanceof Error ? e.message : "Something went wrong",
     };
   }
-  pubsub.publishPaymentNotification(message, {
+  pubsub.publishPaymentNotification("keysend", message, {
+    accountId,
     response,
     details: {
       destination: destination,

@@ -1,4 +1,5 @@
 import AccountMenu from "@components/AccountMenu";
+import ConfirmAddAccount from "@screens/ConfirmAddAccount";
 import ConfirmKeysend from "@screens/ConfirmKeysend";
 import ConfirmPayment from "@screens/ConfirmPayment";
 import ConfirmRequestPermission from "@screens/ConfirmRequestPermission";
@@ -12,8 +13,9 @@ import MakeInvoice from "@screens/MakeInvoice";
 import NostrConfirm from "@screens/Nostr/Confirm";
 import NostrConfirmGetPublicKey from "@screens/Nostr/ConfirmGetPublicKey";
 import NostrConfirmSignMessage from "@screens/Nostr/ConfirmSignMessage";
+import NostrConfirmSignSchnorr from "@screens/Nostr/ConfirmSignSchnorr";
 import Unlock from "@screens/Unlock";
-import { HashRouter, Outlet, Route, Routes, Navigate } from "react-router-dom";
+import { HashRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
@@ -66,6 +68,10 @@ function Prompt() {
               }
             />
             <Route
+              path="public/alby/enable"
+              element={<Enable origin={navigationState.origin as OriginData} />} // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
+            />
+            <Route
               path="public/webln/enable"
               element={<Enable origin={navigationState.origin as OriginData} />} // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
             />
@@ -82,6 +88,10 @@ function Prompt() {
               path="public/nostr/confirmSignMessage"
               element={<NostrConfirmSignMessage />}
             />
+            <Route
+              path="public/nostr/confirmSignSchnorr"
+              element={<NostrConfirmSignSchnorr />}
+            />
 
             <Route path="lnurlAuth" element={<LNURLAuth />} />
             <Route path="lnurlPay" element={<LNURLPay />} />
@@ -91,6 +101,7 @@ function Prompt() {
             <Route path="confirmPayment" element={<ConfirmPayment />} />
             <Route path="confirmKeysend" element={<ConfirmKeysend />} />
             <Route path="confirmSignMessage" element={<ConfirmSignMessage />} />
+            <Route path="confirmAddAccount" element={<ConfirmAddAccount />} />
             <Route
               path="public/confirmRequestPermission"
               element={<ConfirmRequestPermission />}
@@ -115,7 +126,7 @@ const Layout = () => {
   return (
     <>
       <ToastContainer autoClose={10000} hideProgressBar={true} />
-      <div className="px-4 py-2 bg-white flex border-b border-gray-200 dark:bg-surface-02dp dark:border-neutral-500">
+      <div className="px-4 py-2 justify-end bg-white flex border-b border-gray-200 dark:bg-surface-02dp dark:border-neutral-500">
         <AccountMenu showOptions={false} />
       </div>
 

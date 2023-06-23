@@ -9,6 +9,9 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import msg from "~/common/lib/msg";
 
+import lndhubBlueWallet from "/static/assets/icons/lndhub_bluewallet.png";
+import lndhubGo from "/static/assets/icons/lndhub_go.png";
+
 export type Props = {
   lndHubType?: "lndhub_bluewallet" | "lndhub_go";
 };
@@ -17,6 +20,8 @@ export default function ConnectLndHub({
   lndHubType = "lndhub_bluewallet",
 }: Props) {
   const navigate = useNavigate();
+  const logo = lndHubType === "lndhub_bluewallet" ? lndhubBlueWallet : lndhubGo;
+
   const { t } = useTranslation("translation", {
     keyPrefix: `choose_connector.${lndHubType}`,
   });
@@ -101,6 +106,7 @@ export default function ConnectLndHub({
     <ConnectorForm
       title={t("page.title")}
       description={t("page.description")}
+      logo={logo}
       submitLoading={loading}
       submitDisabled={formData.uri === ""}
       onSubmit={handleSubmit}
@@ -116,19 +122,20 @@ export default function ConnectLndHub({
           title="lndhub://..."
           value={formData.uri}
           onChange={handleChange}
+          autoFocus={true}
         />
       </div>
       {formData.uri.match(/\.onion/i) && (
         <div className="mb-6">
           <CompanionDownloadInfo
-            hasTorCallback={() => {
-              setHasTorSupport(true);
+            hasTorCallback={(hasTor: boolean) => {
+              setHasTorSupport(hasTor);
             }}
           />
         </div>
       )}
       <div>
-        <p className="text-center my-4 dark:text-white">OR</p>
+        <p className="text-center my-6 dark:text-white">OR</p>
         <QrcodeScanner
           fps={10}
           qrbox={250}

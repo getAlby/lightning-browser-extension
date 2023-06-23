@@ -1,5 +1,6 @@
+import { useSettings } from "~/app/context/SettingsContext";
 import api from "~/common/lib/api";
-import { BrowserType } from "~/types";
+import { BrowserType, Theme } from "~/types";
 
 export function classNames(...classes: (string | boolean)[]) {
   return classes.filter(Boolean).join(" ");
@@ -8,7 +9,7 @@ export function classNames(...classes: (string | boolean)[]) {
 /**
  * Get the active theme and apply corresponding Tailwind classes to the document.
  */
-export function getTheme() {
+export function setTheme() {
   api.getSettings().then((settings) => {
     // check if settings theme selection is system (this is the default)
     if (settings.theme === "system") {
@@ -30,15 +31,50 @@ export function getTheme() {
   });
 }
 
-export function getBrowserType(): BrowserType | null {
-  if (!chrome?.runtime) return null;
+export function useTheme(): Theme {
+  const { settings } = useSettings();
+
+  return settings.theme === "dark" ||
+    (settings.theme === "system" &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches)
+    ? "dark"
+    : "light";
+}
+
+const DEFAULT_BROWSER: BrowserType = "chrome";
+export function getBrowserType(): BrowserType {
+  if (!chrome?.runtime) return DEFAULT_BROWSER;
   const url = chrome.runtime.getURL("");
   if (url.startsWith("moz-extension://")) return "firefox";
   if (url.startsWith("chrome-extension://")) return "chrome";
-
-  return null;
+  return DEFAULT_BROWSER;
 }
 
 export function isAlbyAccount(alias = "") {
   return alias === "🐝 getalby.com";
+}
+
+export async function getAlbyWalletOptions() {
+  try {
+    const walletRootUrl =
+      process.env.WALLET_ROOT_URL || "https://app.regtest.getalby.com";
+    const VERSION = process.env.VERSION || "unknown"; // default is mainly that TS is happy
+    const walletOptionsUrl = `${walletRootUrl}/extension/options`;
+    const headers = new Headers();
+    headers.append("Accept", "application/json");
+    headers.append("X-User-Agent", "alby-extension");
+    headers.append("X-Alby-Version", VERSION);
+    const timestamp = Math.floor(Date.now() / 1000);
+    headers.append("X-TS", timestamp.toString());
+
+    const response = await fetch(walletOptionsUrl, {
+      method: "GET",
+      headers: headers,
+      cache: "no-cache",
+    });
+    const data = await response.json();
+    return data;
+  } catch (e) {
+    console.error(e);
+  }
 }

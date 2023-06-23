@@ -14,10 +14,13 @@ async function onstart() {
   injectScript(browser.runtime.getURL("js/inpageScriptWebLN.bundle.js"));
 
   // window.nostr
-  const nostrEnabled = (await api.getSettings()).nostrEnabled;
+  const nostrEnabled = (await api.getAccount()).nostrEnabled;
   if (nostrEnabled) {
     injectScript(browser.runtime.getURL("js/inpageScriptNostr.bundle.js"));
   }
+
+  // window.alby
+  injectScript(browser.runtime.getURL("js/inpageScriptAlby.bundle.js"));
 }
 
 onstart();

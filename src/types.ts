@@ -7,7 +7,7 @@ import {
   WebLNNode,
 } from "~/extension/background-script/connectors/connector.interface";
 
-import { Event } from "./extension/ln/nostr/types";
+import { Event } from "./extension/providers/nostr/types";
 
 export type ConnectorType = keyof typeof connectors;
 
@@ -16,6 +16,7 @@ export interface Account {
   connector: ConnectorType;
   config: string;
   name: string;
+  nostrPrivateKey?: string | null;
 }
 
 export interface Accounts {
@@ -59,6 +60,7 @@ export interface OriginData {
 }
 
 export interface PaymentNotificationData {
+  accountId: Account["id"];
   paymentRequestDetails?: PaymentRequestObject | undefined;
   response: SendPaymentResponse | { error: string };
   origin?: OriginData;
@@ -137,8 +139,12 @@ export type NavigationState = {
     destination?: string;
     amount?: string;
     customRecords?: Record<string, string>;
+    connector?: string;
+    name?: string;
+    config?: unknown;
     message?: string;
     event?: Event;
+    sigHash?: string;
     description?: string;
     details?: string;
     requestPermission: {
@@ -164,6 +170,19 @@ export interface MessagePaymentAll extends MessageDefault {
   args?: {
     limit?: number;
   };
+}
+
+export interface MessagePaymentListByAccount extends MessageDefault {
+  action: "getPaymentsByAccount";
+  args: {
+    accountId: Account["id"];
+    limit?: number;
+  };
+}
+
+export interface MessageAccountGet extends MessageDefault {
+  args?: { id?: Account["id"] };
+  action: "getAccount";
 }
 
 export interface MessageAccountRemove extends MessageDefault {
@@ -212,6 +231,7 @@ export interface MessagePermissionDelete extends MessageDefault {
   args: {
     host: Permission["host"];
     method: Permission["method"];
+    accountId: Account["id"];
   };
   action: "deletePermission";
 }
@@ -219,6 +239,7 @@ export interface MessagePermissionDelete extends MessageDefault {
 export interface MessagePermissionsList extends MessageDefault {
   args: {
     id: Allowance["id"];
+    accountId: Account["id"];
   };
   action: "listPermissions";
 }
@@ -226,6 +247,7 @@ export interface MessagePermissionsList extends MessageDefault {
 export interface MessagePermissionsDelete extends MessageDefault {
   args: {
     ids: Permission["id"][];
+    accountId: Account["id"];
   };
   action: "deletePermissions";
 }
@@ -251,6 +273,10 @@ export interface MessageBlocklistGet extends MessageDefault {
     host: string;
   };
   action: "getBlocklist";
+}
+
+export interface MessageBlocklistList extends MessageDefault {
+  action: "listBlocklist";
 }
 
 export interface MessageSetIcon extends MessageDefault {
@@ -298,7 +324,7 @@ export interface MessageAllowanceEnable extends MessageDefault {
   args: {
     host: Allowance["host"];
   };
-  action: "public/webln/enable" | "public/nostr/enable";
+  action: "public/webln/enable" | "public/nostr/enable" | "public/alby/enable";
 }
 
 export interface MessageAllowanceDelete extends MessageDefault {
@@ -332,6 +358,37 @@ export interface MessageWebLnLnurl extends MessageDefault {
   args: { lnurlEncoded: string };
   public: boolean;
   action: "webln/lnurl";
+}
+
+export interface MessageGetInfo extends MessageDefault {
+  action: "getInfo";
+}
+
+export interface MessageMakeInvoice extends MessageDefault {
+  args: { memo?: string; defaultMemo?: string; amount?: string };
+  action: "makeInvoice";
+}
+
+export interface MessageReset extends MessageDefault {
+  action: "reset";
+}
+
+export interface MessageStatus extends MessageDefault {
+  action: "status";
+}
+
+export interface MessageSetPassword extends MessageDefault {
+  args: { password: string };
+  action: "setPassword";
+}
+
+export interface MessageAccountValidate extends MessageDefault {
+  args: {
+    connector: ConnectorType;
+    config: Record<string, string>;
+    name: string;
+  };
+  action: "validateAccount";
 }
 
 export interface MessageConnectPeer extends MessageDefault {
@@ -372,11 +429,33 @@ export interface MessagePublicKeyGet extends MessageDefault {
   action: "getPublicKeyOrPrompt";
 }
 
+export interface MessagePrivateKeyGet extends MessageDefault {
+  args?: {
+    id?: Account["id"];
+  };
+  action: "getPrivateKey";
+}
+
+export interface MessagePrivateKeyGenerate extends MessageDefault {
+  args?: {
+    type?: "random";
+  };
+  action: "generatePrivateKey";
+}
+
 export interface MessagePrivateKeySet extends MessageDefault {
   args: {
+    id?: Account["id"];
     privateKey: string;
   };
   action: "setPrivateKey";
+}
+
+export interface MessagePrivateKeyRemove extends MessageDefault {
+  args: {
+    id?: Account["id"];
+  };
+  action: "removePrivateKey";
 }
 
 export interface MessageSignEvent extends MessageDefault {
@@ -384,6 +463,13 @@ export interface MessageSignEvent extends MessageDefault {
     event: Event;
   };
   action: "signEvent";
+}
+
+export interface MessageSignSchnorr extends MessageDefault {
+  args: {
+    sigHash: string;
+  };
+  action: "signSchnorr";
 }
 
 export interface MessageEncryptGet extends MessageDefault {
@@ -512,6 +598,7 @@ export type Transaction = {
 };
 
 export interface DbPayment {
+  accountId: string;
   allowanceId: string;
   createdAt: string;
   description: string;
@@ -533,6 +620,7 @@ export interface Payment extends Omit<DbPayment, "id"> {
 
 export enum PermissionMethodNostr {
   NOSTR_SIGNMESSAGE = "nostr/signMessage",
+  NOSTR_SIGNSCHNORR = "nostr/signSchnorr",
   NOSTR_GETPUBLICKEY = "nostr/getPublicKey",
   NOSTR_NIP04DECRYPT = "nostr/nip04decrypt",
   NOSTR_NIP04ENCRYPT = "nostr/nip04encrypt",
@@ -541,6 +629,7 @@ export enum PermissionMethodNostr {
 export interface DbPermission {
   id?: number;
   createdAt: string;
+  accountId: string;
   allowanceId: number;
   host: string;
   method: string | PermissionMethodNostr;
@@ -625,7 +714,6 @@ export interface SettingsStorage {
   showFiat: boolean;
   currency: CURRENCIES;
   exchange: SupportedExchanges;
-  debug: boolean;
   nostrEnabled: boolean;
   closedTips: TIPS[];
 }
@@ -684,3 +772,11 @@ export interface Invoice {
 }
 
 export type BrowserType = "chrome" | "firefox";
+
+export interface DeferredPromise {
+  promise: Promise<unknown>;
+  resolve?: () => void;
+  reject?: () => void;
+}
+
+export type Theme = "dark" | "light";

@@ -9,18 +9,21 @@ const select = async (message: MessageAccountSelect) => {
   if (account) {
     if (currentState.connector) {
       console.info("Unloading connector");
-      await currentState.connector.unload();
+      const connector = await currentState.connector;
+      await connector.unload();
     }
 
     state.setState({
       account,
+      nostr: null, // reset memoized nostr instance
       connector: null, // reset memoized connector
       currentAccountId: accountId,
     });
-    await state.getState().saveToStorage();
-
     // init connector this also memoizes the connector in the state object
     await state.getState().getConnector();
+
+    // save the current account id once the connector is loaded
+    await state.getState().saveToStorage();
 
     return {
       data: { unlocked: true },
