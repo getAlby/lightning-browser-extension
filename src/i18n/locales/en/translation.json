@@ -695,6 +695,19 @@
       },
       "success": "Withdraw request of {{amount}} sent successfully to {{sender}}"
     },
+    "lnurlredeem": {
+      "title": "Redeem bitcoin",
+      "input": {
+        "label": "LNURL-withdraw code",
+        "placeholder": "LNURL..."
+      },
+      "actions": {
+        "withdraw": "Withdraw"
+      },
+      "qrcode": {
+        "title": "Waiting to scan"
+      }
+    },
     "receive": {
       "title": "Receive",
       "actions": {
@@ -713,6 +726,7 @@
         "waiting": "waiting for payment...",
         "status": "Check payment status"
       },
+      "redeem_lnurl": "Redeem LNURL",
       "receive_via_bitcoin_address": "Receive via bitcoin address"
     },
     "on_chain": {

@@ -30,6 +30,7 @@ import GenerateSecretKey from "~/app/screens/Accounts/GenerateSecretKey";
 import ImportSecretKey from "~/app/screens/Accounts/ImportSecretKey";
 import NostrSettings from "~/app/screens/Accounts/NostrSettings";
 import Discover from "~/app/screens/Discover";
+import LNURLRedeem from "~/app/screens/LNURLRedeem";
 import OnChainReceive from "~/app/screens/OnChainReceive";
 import AlbyWalletCreate from "~/app/screens/connectors/AlbyWallet/create";
 import AlbyWalletLogin from "~/app/screens/connectors/AlbyWallet/login";
@@ -88,6 +89,7 @@ function Options() {
             <Route path="lnurlPay" element={<LNURLPay />} />
             <Route path="lnurlChannel" element={<LNURLChannel />} />
             <Route path="lnurlWithdraw" element={<LNURLWithdraw />} />
+            <Route path="lnurlRedeem" element={<LNURLRedeem />} />
             <Route path="lnurlAuth" element={<LNURLAuth />} />
             <Route path="settings" element={<Settings />} />
             <Route path="accounts">
