@@ -16,9 +16,9 @@ export function Tab({ icon, onClick, label, className, ...otherProps }: Props) {
       onClick={onClick}
       className={({ selected }) =>
         classNames(
-          "font-bold text-base gap-[6px] flex px-2 py-2 justify-center items-center rounded-md focus:outline-none transition duration-150 w-44 h-10",
+          "font-bold flex px-2 py-2 justify-center items-center rounded-md focus:outline-none duration-150",
           selected
-            ? "text-gray-700 drop-shadow-md dark:text-neutral-200 bg-white dark:bg-surface-16dp"
+            ? "text-gray-700 shadow-sm dark:text-neutral-200 bg-white dark:bg-surface-16dp"
             : "text-gray-500 dark:text-neutral-500 hover:text-gray-700 dark:hover:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600",
           !!className && className
         )
