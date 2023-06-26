@@ -533,7 +533,8 @@
       "payment": {
         "waiting": "aguardando pagamento...",
         "status": "Verificar status do pagamento"
-      }
+      },
+      "receive_via_bitcoin_address": "Receber via endereço bitcoin"
     },
     "publishers": {
       "publisher": {
@@ -764,6 +765,12 @@
     "confirm_add_account": {
       "content": "Este site deseja adicionar uma conta ({{connector}}):",
       "title": "Adicionar conta"
+    },
+    "on_chain": {
+      "instructions1": "Para receber via endereço bitcoin, acesse sua <0>conta Alby</0> em getalby.com",
+      "go": "Ir para sua conta Alby na web →",
+      "title": "Receber via endereço bitcoin",
+      "instructions2": "Seu endereço bitcoin está na página <0>Receber</0>."
     }
   },
   "common": {
