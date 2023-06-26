@@ -5,6 +5,7 @@ import PublisherCard from "@components/PublisherCard";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
+import Hyperlink from "~/app/components/Hyperlink";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
@@ -56,6 +57,16 @@ function ConfirmAddAccount() {
             image={origin.icon}
             url={origin.host}
           />
+          {/* TODO: Replace with Alert component */}
+          <div className="mt-4 rounded-md font-medium p-4 text-blue-700 bg-blue-50 dark:text-blue-400 dark:bg-blue-900">
+            <p>
+              In order to connect through the TOR network you need to first
+              install the Alby companion app:
+              <br />
+              <br />
+              <Hyperlink>⬇️ Download</Hyperlink>
+            </p>
+          </div>
           <ContentMessage
             heading={t("content", {
               connector: tCommon(
