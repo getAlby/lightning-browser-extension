@@ -104,7 +104,6 @@
         "macaroon": {
           "label": "Macaroon (HEX-format)"
         },
-        "or": "ELLER",
         "drag_and_drop": "Træk din macaroon herhen eller <0>find den</0>",
         "errors": {
           "connection_failed": "Forbindelse kunne ikke oprettes. Er dine LND-oplysninger korrekte?"

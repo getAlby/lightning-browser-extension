@@ -104,7 +104,6 @@
         "macaroon": {
           "label": "Macaroon (HEX format)"
         },
-        "or": "किंवा",
         "drag_and_drop": "आपले Macaroon येथे खेचून टाका किंवा <0> browse</0>",
         "errors": {
           "connection_failed": "कनेक्शन निकामी झाले. आपली LND क्रेडेंशियल्स योग्य आहेत का?"

@@ -104,7 +104,6 @@
         "macaroon": {
           "label": "Macaroon (format heksadecymalny)"
         },
-        "or": "LUB",
         "drag_and_drop": "Przeciągnij i upuść Twój macaroon tutaj lub <0>znajdź plik</0>",
         "errors": {
           "connection_failed": "Połączenie nie powiodło się. Czy Twoje dane uwierzytelniające są poprawne?"

@@ -50,7 +50,6 @@
         "macaroon": {
           "label": "Macaroon (formato HEX)"
         },
-        "or": "OU",
         "drag_and_drop": "Arraste e solte o macaroon aqui ou clique em <0>procurar</0>",
         "errors": {
           "connection_failed": "Falha na conexão. As credenciais LND estão corretas?"

@@ -110,7 +110,6 @@
         "macaroon": {
           "label": "Macaroon (HEX format)"
         },
-        "or": "OR",
         "drag_and_drop": "macaroon خود را اینجا بکشید و بیاورید یا <0>جستجو کنید</0>",
         "errors": {
           "connection_failed": "اتصال وصل نشد. اعتبارنامه های گره لایتنینگ شما صحیح است؟"

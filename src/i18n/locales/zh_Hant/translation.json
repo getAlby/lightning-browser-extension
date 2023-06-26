@@ -110,7 +110,6 @@
         "macaroon": {
           "label": "Macaroon(HEX格式)"
         },
-        "or": "或",
         "drag_and_drop": "將macaroon拖放到此處或<0>瀏覽</0>",
         "errors": {
           "connection_failed": "連接失敗。你的 LND 憑證是否正確？"

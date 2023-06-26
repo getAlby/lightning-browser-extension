@@ -104,7 +104,6 @@
         "macaroon": {
           "label": "Macaroon (format HEX )"
         },
-        "or": "OR",
         "drag_and_drop": "Faites glisser et déposez votre macaroon ici ou <0>naviguez</0>",
         "errors": {
           "connection_failed": "La connexion a échoué. Vos informations d'identification LND sont-elles correctes ?"

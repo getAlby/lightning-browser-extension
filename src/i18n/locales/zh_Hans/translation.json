@@ -52,8 +52,7 @@
           "label": "Macaroon(HEX格式)"
         },
         "drag_and_drop": "将你的macaroon拖放到此处或<0>浏览</0>",
-        "title": "LND",
-        "or": "或"
+        "title": "LND"
       },
       "bitcoin_jungle": {
         "page": {

@@ -104,7 +104,6 @@
         "macaroon": {
           "label": "Macaroon (format HEX)"
         },
-        "or": "SAU",
         "drag_and_drop": "Trage si plaseaza macaroon aici sau <0>browse</0>",
         "errors": {
           "connection_failed": "Conexiune esuata. Credentialele tale LND sunt corecte?"

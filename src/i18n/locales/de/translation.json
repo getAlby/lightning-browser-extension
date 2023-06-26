@@ -37,7 +37,6 @@
     },
     "choose_connector": {
       "lnd": {
-        "or": "OR",
         "drag_and_drop": "Ziehe und lege deine Macaroon hier ab oder <0>durchsuche</0>",
         "errors": {
           "connection_failed": "Verbindung fehlgeschlagen. Sind deine LND-Anmeldeinformationen korrekt?"

@@ -50,7 +50,6 @@
         "macaroon": {
           "label": "Macaroon (HEX-format)"
         },
-        "or": "ELLER",
         "drag_and_drop": "Drag och släpp din macaroon här eller <0>bläddra</0>",
         "errors": {
           "connection_failed": "Koppling misslyckades. Är dina LND-uppgifter korrekta?"

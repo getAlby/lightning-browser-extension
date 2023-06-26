@@ -102,7 +102,6 @@
         "macaroon": {
           "label": "Macaroon (HEX format)"
         },
-        "or": "या",
         "drag_and_drop": "अपने मैक्रों को यहाँ खींचें और छोड़ें या <0> ब्राउज़ करें </0>",
         "errors": {
           "connection_failed": "कनेक्शन विफल रहा। क्या आपके LND क्रेडेंशियल्स सही हैं?"

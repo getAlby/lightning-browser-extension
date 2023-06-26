@@ -44,7 +44,6 @@
         "macaroon": {
           "label": "Macaroon (v hexadecimálním formátu)"
         },
-        "or": "NEBO",
         "drag_and_drop": "Přetáhněte svůj macaroon zde nebo ho <0>vyhledejte</0>",
         "errors": {
           "connection_failed": "Připojení se nezdařilo. Jsou vaše údaje pro LND zadány správně?"
