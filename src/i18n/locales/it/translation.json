@@ -187,20 +187,17 @@
         "sms_code": {
           "label": "Inserisci il codice di verifica SMS"
         },
-        "jwt": {
+        "token": {
           "label": "Inserisci il tuo token JWT",
           "info": "Il login {{label}} è attualmente in fase di aggiornamento. Se sei un utente avanzato puoi recuperare il tuo token JWT effettuando il login via il <0>Web Wallet (wallet.mainnet.galoy.io)</0><1/><1/>Il token JWT assomiglia a: <2>eyJhbG...</2><1/><1/>"
         },
         "actions": {
-          "login": "Login",
-          "request_sms_code": "Richiedi codice SMS"
+          "login": "Login"
         },
         "errors": {
-          "failed_to_request_sms": "Problema durante la richiesta del codice SMS",
-          "failed_to_login_sms": "Impossibile accedere con il codice SMS",
           "setup_failed": "Setup non riuscito",
-          "missing_jwt": "JWT mancante, impossibile effettuare il login.",
-          "invalid_jwt": "passato JWT non valido"
+          "missing_token": "JWT mancante, impossibile effettuare il login.",
+          "invalid_token": "passato JWT non valido"
         }
       },
       "btcpay": {
@@ -281,12 +278,6 @@
         "enable_now": "Attiva ora"
       },
       "recent_transactions": "Transazioni recenti",
-      "transaction_list": {
-        "tabs": {
-          "outgoing": "Uscite",
-          "incoming": "Entrate"
-        }
-      },
       "allowance_view": {
         "recent_transactions": "Transazioni recenti",
         "allowance": "Margine",
@@ -295,7 +286,6 @@
       },
       "default_view": {
         "recent_transactions": "Transazioni recenti",
-        "no_transactions": "Ancora nessuna transazione effettuata con Alby.",
         "is_blocked_hint": "Alby è attualmente disabilitato su {{host}}",
         "block_removed": "{{host}} abilitato. Si prega di ricaricare la pagina."
       }
@@ -693,19 +683,11 @@
         "description": "Qualche suggerimento per iniziare a ronzare 🐝",
         "top_up_wallet": {
           "title": "⚡️ Ricarica il tuo wallet",
-          "label1": "Ricevi Bitcoin",
-          "label2": "Compra Bitcoin",
           "description": "Crea una fattura lightning, inviati qualche bitcoin e inizia ad usare Alby nell'ecosistema lightning"
         },
         "demo": {
           "title": "🕹️ Prova la Demo di Alby",
-          "description": "Scopri tutto quello che puoi fare con Alby sul nostro sito demo",
-          "label1": "Prova"
-        },
-        "address": {
-          "description": "Crea il tuo indirizzo lightning personale e ricevi pagamenti lightning con la semplicità di una mail",
-          "label1": "Registrati ora!",
-          "title": "⚡️ Ottieni un indirizzo lightning"
+          "description": "Scopri tutto quello che puoi fare con Alby sul nostro sito demo"
         },
         "title": "Il tuo wallet Alby è pronto"
       },

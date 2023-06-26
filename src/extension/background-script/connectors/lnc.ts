@@ -167,14 +167,25 @@ class Lnc implements Connector {
 
   async init(): Promise<void> {
     console.info("init LNC");
-    await this.lnc.connect();
+    try {
+      await this.lnc.connect();
+    } catch (error) {
+      console.error("Init LNC failed", error);
+      await this.unload();
+    }
   }
 
   async unload() {
-    console.info("LNC disconnect");
-    await this.lnc.disconnect();
-
-    delete this.lnc;
+    if (!this.lnc) {
+      return;
+    }
+    try {
+      console.info("LNC disconnect");
+      await this.lnc.disconnect();
+      delete this.lnc;
+    } catch (error) {
+      console.error("Unload LNC failed", error);
+    }
   }
 
   get supportedMethods() {
@@ -199,9 +210,7 @@ class Lnc implements Connector {
   }
 
   getInfo(): Promise<GetInfoResponse> {
-    if (!this.lnc.isConnected) {
-      return Promise.reject(new Error("Account is still loading"));
-    }
+    this.checkConnection();
     return this.lnc.lnd.lightning.GetInfo().then((data: FixMe) => {
       return {
         data: {
@@ -214,9 +223,7 @@ class Lnc implements Connector {
   }
 
   getBalance(): Promise<GetBalanceResponse> {
-    if (!this.lnc.isConnected) {
-      return Promise.reject(new Error("Account is still loading"));
-    }
+    this.checkConnection();
     return this.lnc.lnd.lightning.ChannelBalance().then((data: FixMe) => {
       return {
         data: {
@@ -227,9 +234,7 @@ class Lnc implements Connector {
   }
 
   async getInvoices(): Promise<GetInvoicesResponse> {
-    if (!this.lnc.isConnected) {
-      throw new Error("Account is still loading");
-    }
+    this.checkConnection();
     const data = await this.lnc.lnd.lightning.ListInvoices({ reversed: true });
 
     const invoices: ConnectorInvoice[] = data.invoices
@@ -274,9 +279,7 @@ class Lnc implements Connector {
   }
 
   async checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {
-    if (!this.lnc.isConnected) {
-      throw new Error("Account is still loading");
-    }
+    this.checkConnection();
     return this.lnc.lnd.lightning
       .LookupInvoice({ r_hash_str: args.paymentHash })
       .then((data: FixMe) => {
@@ -289,9 +292,7 @@ class Lnc implements Connector {
   }
 
   sendPayment(args: SendPaymentArgs): Promise<SendPaymentResponse> {
-    if (!this.lnc.isConnected) {
-      return Promise.reject(new Error("Account is still loading"));
-    }
+    this.checkConnection();
     return this.lnc.lnd.lightning
       .SendPaymentSync({
         payment_request: args.paymentRequest,
@@ -313,9 +314,7 @@ class Lnc implements Connector {
       });
   }
   async keysend(args: KeysendArgs): Promise<SendPaymentResponse> {
-    if (!this.lnc.isConnected) {
-      throw new Error("Account is still loading");
-    }
+    this.checkConnection();
     //See: https://gist.github.com/dellagustin/c3793308b75b6b0faf134e64db7dc915
     const dest_pubkey_hex = args.pubkey;
     const dest_pubkey_base64 = Hex.parse(dest_pubkey_hex).toString(Base64);
@@ -359,9 +358,7 @@ class Lnc implements Connector {
   }
 
   signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {
-    if (!this.lnc.isConnected) {
-      return Promise.reject(new Error("Account is still loading"));
-    }
+    this.checkConnection();
     return this.lnc.lnd.lightning
       .SignMessage({ msg: Base64.stringify(UTF8.parse(args.message)) })
       .then((data: FixMe) => {
@@ -375,9 +372,7 @@ class Lnc implements Connector {
   }
 
   makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse> {
-    if (!this.lnc.isConnected) {
-      return Promise.reject(new Error("Account is still loading"));
-    }
+    this.checkConnection();
     return this.lnc.lnd.lightning
       .AddInvoice({ memo: args.memo, value: args.amount })
       .then((data: FixMe) => {
@@ -388,6 +383,15 @@ class Lnc implements Connector {
           },
         };
       });
+  }
+
+  private checkConnection() {
+    if (!this.lnc) {
+      throw new Error("Account failed to load");
+    }
+    if (!this.lnc.isConnected) {
+      throw new Error("Account is still loading");
+    }
   }
 }
 

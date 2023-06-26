@@ -21,7 +21,7 @@ const listByAccount = async (message: MessagePaymentListByAccount) => {
   // get IndexDB payments
   const dbPayments = await db.payments
     .toCollection()
-    .and((p) => p.accountId === accountId)
+    .filter((p) => p.accountId === accountId)
     .limit(limit)
     .reverse()
     .sortBy("createdAt");
