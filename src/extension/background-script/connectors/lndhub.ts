@@ -129,24 +129,36 @@ export default class LndHub implements Connector {
     // this connector endpoint has a fixed result set of 100 entries
     const data = await this.request<
       {
-        r_hash: string;
-        payment_hash: string;
-        payment_preimage: string;
-        value: number;
-        type: string;
-        fee: number;
-        timestamp: number;
-        memo: string;
-        keysend: boolean;
         custom_records: Record<number, number>;
+        fee: number;
+        keysend: boolean;
+        memo: string;
+        payment_hash: {
+          data: number[];
+          type: string;
+        };
+        payment_preimage: string;
+        r_hash: {
+          data: number[];
+          type: string;
+        };
+        timestamp: number;
+        type: string;
+        value: number;
       }[]
     >("GET", "/gettxs", undefined);
 
     const transactions: ConnectorTransaction[] = data.map(
       (p): ConnectorTransaction => ({
-        r_hash: p.r_hash,
-        payment_preimage: p.payment_preimage,
+        custom_records: p.custom_records,
+        fee: p.fee,
+        keysend: p.keysend,
         memo: p.memo,
+        payment_hash: p.payment_hash,
+        payment_preimage: p.payment_preimage,
+        r_hash: p.r_hash,
+        timestamp: p.timestamp,
+        type: p.type,
         value: p.value,
       })
     );

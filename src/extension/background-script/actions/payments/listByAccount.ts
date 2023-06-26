@@ -31,18 +31,25 @@ const listByAccount = async (message: MessagePaymentListByAccount) => {
 
     // map IndexDB payment data onto ConnectorTransaction
     const transactions: Transaction[] = result.data.transactions.map(
-      (connectorPayment: ConnectorTransaction) => {
+      (transaction: ConnectorTransaction) => {
         const dbPayment = dbPayments.find(
-          (p: DbPayment) => p.preimage === connectorPayment.payment_preimage
+          (p: DbPayment) => p.preimage === transaction.payment_preimage
         );
-        // @Todo: map transactions correctly
 
+        // @Todo: map transactions correctly
+        // @Todo: how to we use/map "title" and "description" and "memo"
+
+        // @Todo: this comes from convertPaymentToTransaction function - remove there if this is right
+        const title = dbPayment ? dbPayment.name || dbPayment.description : "";
         return {
-          ...dbPayment,
+          ...(dbPayment ? dbPayment : {}),
           id: "",
-          amount: connectorPayment.value + "",
+          amount: transaction.value + "",
+          totalFees: transaction.fee,
+          description: transaction.memo,
+          // @Todo: can we use converPaymentToTransaction's date: dayjs(+payment.createdAt).fromNow(), here?
           date: "",
-          title: "",
+          title,
         } as Transaction;
       }
     );

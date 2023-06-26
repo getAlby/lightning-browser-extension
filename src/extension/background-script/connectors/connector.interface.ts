@@ -28,10 +28,22 @@ export interface ConnectorInvoice {
 
 // @Todo: extend missing properties accordingly
 export interface ConnectorTransaction {
-  r_hash: string;
+  custom_records: Record<number, number>;
+  fee: number;
+  keysend: boolean;
   memo: string;
-  value: number;
+  payment_hash: {
+    data: number[];
+    type: string;
+  };
   payment_preimage: string;
+  r_hash: {
+    data: number[];
+    type: string;
+  };
+  timestamp: number;
+  type: string;
+  value: number;
 }
 
 export interface MakeInvoiceArgs {
