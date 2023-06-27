@@ -629,7 +629,8 @@
       "payment": {
         "waiting": "等待付款...",
         "status": "查看付款狀態"
-      }
+      },
+      "receive_via_bitcoin_address": "通過比特幣地址接收"
     },
     "discover": {
       "title": "探索閃電⚡️生態系統",
@@ -790,6 +791,12 @@
     "confirm_add_account": {
       "content": "此網站想要添加一個帳戶（{{connector}}）：",
       "title": "添加帳戶"
+    },
+    "on_chain": {
+      "instructions1": "要通過比特幣地址接收比特幣，請在 getalby.com 上登錄你的 <0>Alby 帳戶</0>",
+      "instructions2": "你可以在<0>收款</0>頁面上找到你的比特幣地址。",
+      "go": "前往你的 Alby 帳戶 →",
+      "title": "通過比特幣地址接收"
     }
   },
   "common": {
@@ -864,7 +871,8 @@
       "nativecitadel": "Citadel（通過 Tor）",
       "commando": "Commando",
       "nativelndhub": "LNDHub（通過 Tor）"
-    }
+    },
+    "or": "或"
   },
   "components": {
     "allowance_menu": {
