@@ -188,6 +188,12 @@ const state = createState<State>((set, get) => ({
       });
   },
   reset: async () => {
+    try {
+      // @ts-ignore: https://github.com/mozilla/webextension-polyfill/issues/329
+      await browser.storage.session.clear();
+    } catch (error) {
+      console.error("Failed to clear session storage", error);
+    }
     if (storage === "sync") {
       await browser.storage.sync.clear();
     } else {
