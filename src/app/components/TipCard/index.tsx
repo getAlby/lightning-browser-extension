@@ -46,12 +46,12 @@ export default function TipCard({
         onClick={handleClose}
         className="flex items-center absolute top-0 right-0 p-2 dark:text-white"
       >
-        <CrossIcon className="h-5 w-5 text-gray-500 hover:text-black dark:hover:text-white" />
+        <CrossIcon className="h-5 w-5 text-neutral-400 hover:text-black dark:hover:text-white" />
       </button>
-      <h4 className="text-lg font-bold text-gray-700 dark:text-white">
+      <h4 className="text-xl font-bold text-gray-700 dark:text-white">
         {title}
       </h4>
-      <p className="whitespace-pre-line text-gray-500 dark:text-neutral-500 mt-4">
+      <p className="whitespace-pre-line text-gray-500 dark:text-neutral-400 mt-4">
         {description}
       </p>
     </div>
