@@ -11,9 +11,9 @@ export default function Alert({ type, children }: Props) {
       className={classNames(
         "rounded-md font-medium p-4",
         type == "warn" &&
-          "text-orange-700 bg-orange-50 dark:text-orange-400 dark:bg-orange-900",
+          "text-orange-700 bg-orange-50 dark:text-orange-200 dark:bg-orange-900",
         type == "info" &&
-          "text-blue-700 bg-blue-50 dark:text-blue-400 dark:bg-blue-900"
+          "text-blue-700 bg-blue-50 dark:text-blue-200 dark:bg-blue-900"
       )}
     >
       <p>{children}</p>
