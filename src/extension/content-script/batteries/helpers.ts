@@ -48,11 +48,22 @@ export const findLightningAddressInText = (text: string): string | null => {
   return null;
 };
 
-export const setLightningData = (data: [Battery]): void => {
+let lightningData: [Battery] | null;
+
+export const resetLightningData = (): void => {
+  lightningData = null;
+  msg.request("setIcon", { icon: ExtensionIcon.Default });
+};
+
+export const sendLightningData = () => {
   browser.runtime.sendMessage({
     application: "LBE",
     action: "lightningData",
-    args: data,
+    args: lightningData,
   });
+};
+
+export const setLightningData = (data: [Battery]): void => {
+  lightningData = data;
   msg.request("setIcon", { icon: ExtensionIcon.Tipping });
 };

@@ -1,4 +1,4 @@
-import { FC, useState, useEffect, useCallback } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
 import browser from "webextension-polyfill";
 import api from "~/common/lib/api";
 import type { Allowance, Battery } from "~/types";
@@ -65,7 +65,7 @@ const Home: FC = () => {
 
       if (currentUrl && currentUrl.startsWith("http")) {
         browser.tabs.sendMessage(tabs[0].id as number, {
-          action: "extractLightningData",
+          action: "getCurrentLightningData",
         });
       }
     };
