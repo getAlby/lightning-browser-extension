@@ -10,6 +10,7 @@ import ScreenHeader from "~/app/components/ScreenHeader";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
+import getOS from "~/common/utils/os";
 import type { OriginData } from "~/types";
 
 function ConfirmAddAccount() {
@@ -24,6 +25,7 @@ function ConfirmAddAccount() {
   const config = navState.args?.config as unknown;
   const origin = navState.origin as OriginData;
   const [loading, setLoading] = useState(false);
+  const isTor = connector.startsWith("native");
 
   async function confirm() {
     try {
@@ -58,17 +60,21 @@ function ConfirmAddAccount() {
             url={origin.host}
           />
           {/* TODO: Replace with Alert component */}
-          <div className="mt-4 rounded-md font-medium p-4 text-blue-700 bg-blue-50 dark:text-blue-200 dark:bg-blue-900">
-            <p>
-              In order to connect through the TOR network you need to first
-              install the Alby companion app:
-              <br />
-              <br />
-              <Hyperlink className="text-white hover:text-gray-300">
-                ⬇️ Download
-              </Hyperlink>
-            </p>
-          </div>
+          {isTor && (
+            <div className="mt-4 rounded-md font-medium p-4 text-blue-700 bg-blue-50 dark:text-blue-200 dark:bg-blue-900">
+              <p>
+                {t("tor_info")}
+                <br />
+                <br />
+                <Hyperlink
+                  className="text-white hover:text-gray-300"
+                  href={`https://getalby.com/install/companion/${getOS()}`}
+                >
+                  ⬇️ {tCommon("actions.download")}
+                </Hyperlink>
+              </p>
+            </div>
+          )}
           <ContentMessage
             heading={t("content", {
               connector: tCommon(

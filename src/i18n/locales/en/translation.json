@@ -744,7 +744,8 @@
     },
     "confirm_add_account": {
       "title": "Add account",
-      "content": "This website wants to add an account ({{connector}}):"
+      "content": "This website wants to add an account ({{connector}}):",
+      "tor_info": "In order to connect through the TOR network you need to first install the Alby companion app:"
     },
     "nostr": {
       "title": "Nostr",
@@ -842,7 +843,8 @@
       "copy_invoice": "Copy Invoice",
       "log_in": "Log in",
       "remember": "Remember my choice and don't ask again",
-      "more": "More"
+      "more": "More",
+      "download": "Download"
     },
     "connectors": {
       "lnd": "LND",
