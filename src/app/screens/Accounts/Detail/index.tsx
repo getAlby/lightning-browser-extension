@@ -29,6 +29,11 @@ import { useSettings } from "~/app/context/SettingsContext";
 import { KeyOrigin, getKeyOrigin } from "~/app/utils/getKeyOrigin";
 import api, { GetAccountRes } from "~/common/lib/api";
 import liquid from "~/common/lib/liquid";
+import {
+  LIQUID_DERIVATION_PATH,
+  LIQUID_DERIVATION_PATH_REGTEST,
+  derivePrivateKey,
+} from "~/common/lib/mnemonic";
 import msg from "~/common/lib/msg";
 import nostr from "~/common/lib/nostr";
 import type { Account } from "~/types";
@@ -80,11 +85,22 @@ function AccountDetail() {
         setAccount(response);
         setAccountName(response.name);
 
-        const privLiquid = (await msg.request("liquid/getPrivateKey", {
+        const accountMnemonic = (await msg.request("getMnemonic", {
           id,
         })) as string;
-        if (privLiquid) {
+        if (accountMnemonic) {
+          setMnemonic(accountMnemonic);
+        }
+
+        const settings = await api.getSettings();
+        if (settings.liquidEnabled) {
+          const derivationPath = settings
+            ? LIQUID_DERIVATION_PATH
+            : LIQUID_DERIVATION_PATH_REGTEST;
+
+          const privLiquid = derivePrivateKey(accountMnemonic, derivationPath);
           setLiquidPrivateKey(privLiquid);
+          setLiquidKeyOrigin("secret-key");
         }
 
         const privNostr = (await msg.request("nostr/getPrivateKey", {
@@ -93,27 +109,8 @@ function AccountDetail() {
         if (privNostr) {
           setNostrPrivateKey(privNostr);
         }
-
-        const accountMnemonic = (await msg.request("getMnemonic", {
-          id,
-        })) as string;
-        if (accountMnemonic) {
-          setMnemonic(accountMnemonic);
-        }
-        if (privLiquid) {
-          const keyOrigin = await getKeyOrigin(
-            "liquid",
-            privLiquid,
-            accountMnemonic
-          );
-          setLiquidKeyOrigin(keyOrigin);
-        }
         if (privNostr) {
-          const keyOrigin = await getKeyOrigin(
-            "nostr",
-            privNostr,
-            accountMnemonic
-          );
+          const keyOrigin = await getKeyOrigin(privNostr, accountMnemonic);
           setNostrKeyOrigin(keyOrigin);
         }
       }

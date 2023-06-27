@@ -14,11 +14,13 @@ import TextField from "~/app/components/form/TextField";
 import { useAccount } from "~/app/context/AccountContext";
 import { KeyOrigin, getKeyOrigin } from "~/app/utils/getKeyOrigin";
 import { savePrivateKey } from "~/app/utils/savePrivateKey";
-import { GetAccountRes } from "~/common/lib/api";
+import api, { GetAccountRes } from "~/common/lib/api";
 import { default as liquid } from "~/common/lib/liquid";
 import {
-  deriveLiquidPrivateKey,
+  LIQUID_DERIVATION_PATH,
+  LIQUID_DERIVATION_PATH_REGTEST,
   deriveNostrPrivateKey,
+  derivePrivateKey,
 } from "~/common/lib/mnemonic";
 import msg from "~/common/lib/msg";
 import { default as nostr, default as nostrlib } from "~/common/lib/nostr";
@@ -47,12 +49,6 @@ function AdvancedKeySettings({ type }: { type: "nostr" | "liquid" }) {
           id,
         });
         setAccountName(response.name);
-        const priv = (await msg.request(`${type}/getPrivateKey`, {
-          id,
-        })) as string;
-        if (priv) {
-          setCurrentPrivateKey(priv);
-        }
 
         const accountMnemonic = (await msg.request("getMnemonic", {
           id,
@@ -61,8 +57,32 @@ function AdvancedKeySettings({ type }: { type: "nostr" | "liquid" }) {
           setMnemonic(accountMnemonic);
         }
 
+        if (type === "liquid") {
+          const settings = await api.getSettings();
+          if (settings.liquidEnabled) {
+            const derivationPath = settings
+              ? LIQUID_DERIVATION_PATH
+              : LIQUID_DERIVATION_PATH_REGTEST;
+
+            const privLiquid = derivePrivateKey(
+              accountMnemonic,
+              derivationPath
+            );
+            setCurrentPrivateKey(privLiquid);
+            setKeyOrigin("secret-key");
+          }
+          return;
+        }
+
+        const priv = (await msg.request(`${type}/getPrivateKey`, {
+          id,
+        })) as string;
         if (priv) {
-          const keyOrigin = await getKeyOrigin(type, priv, accountMnemonic);
+          setCurrentPrivateKey(priv);
+        }
+
+        if (priv) {
+          const keyOrigin = await getKeyOrigin(priv, accountMnemonic);
           setKeyOrigin(keyOrigin);
         }
       }
@@ -116,6 +136,8 @@ function AdvancedKeySettings({ type }: { type: "nostr" | "liquid" }) {
   }
 
   async function handleDeriveKeyFromSecretKey() {
+    if (type === "liquid") return;
+
     if (!id) {
       throw new Error("No id set");
     }
@@ -124,15 +146,13 @@ function AdvancedKeySettings({ type }: { type: "nostr" | "liquid" }) {
       throw new Error("No mnemonic exists");
     }
 
-    const privateKey =
-      type === "nostr"
-        ? await deriveNostrPrivateKey(mnemonic)
-        : await deriveLiquidPrivateKey(mnemonic);
-
+    const privateKey = deriveNostrPrivateKey(mnemonic);
     await handleSavePrivateKey(privateKey);
   }
 
   async function handleSavePrivateKey(privateKey: string) {
+    if (type === "liquid") return; // skip for liquid
+
     if (!id) {
       throw new Error("No id set");
     }

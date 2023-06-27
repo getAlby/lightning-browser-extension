@@ -17,7 +17,6 @@ export interface Account {
   config: string;
   name: string;
   nostrPrivateKey?: string | null;
-  liquidPrivateKey?: string | null;
   mnemonic?: string | null;
 }
 
@@ -158,6 +157,8 @@ export type NavigationState = {
     index?: number;
     num?: number;
     change?: boolean;
+    // liquid
+    pset?: string;
   };
   isPrompt?: true; // only passed via Prompt.tsx
   action: string;
@@ -436,6 +437,10 @@ export interface MessageCurrencyRateGet extends MessageDefault {
   action: "getCurrencyRate";
 }
 
+export interface MessageGetLiquidAddress extends MessageDefault {
+  action: "getLiquidAddress";
+}
+
 // TODO: add Nostr Prefix
 export interface MessagePublicKeyGet extends MessageDefault {
   action: "getPublicKeyOrPrompt";
@@ -462,6 +467,7 @@ export interface MessagePrivateKeySet extends MessageDefault {
   args: {
     id?: Account["id"];
     privateKey: string;
+    masterBlindingKey?: string; // only for liquid
   };
   action: "setPrivateKey";
 }
@@ -530,6 +536,30 @@ export interface MessageGetAddress extends MessageDefault {
   // eslint-disable-next-line @typescript-eslint/ban-types
   args: {};
   action: "getAddress";
+}
+
+// Liquid
+export interface MessageSignPsetWithPrompt extends MessageDefault {
+  args: {
+    pset: string;
+  };
+  action: "signPsetWithPrompt";
+}
+
+export interface MessageSignPset extends MessageDefault {
+  args: {
+    pset: string;
+    network: "liquid" | "testnet" | "regtest";
+  };
+  action: "signPset";
+}
+
+export interface MessageSetMasterBlindingKey extends MessageDefault {
+  args: {
+    id: string;
+    masterBlindingKey: string;
+  };
+  action: "setMasterBlindingKey";
 }
 
 export interface LNURLChannelServiceResponse {

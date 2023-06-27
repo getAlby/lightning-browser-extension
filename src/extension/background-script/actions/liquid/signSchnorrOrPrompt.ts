@@ -36,7 +36,7 @@ const signSchnorrOrPrompt = async (message: MessageSignSchnorr) => {
       }
     }
 
-    const signedSchnorr = await liquid.signSchnorr(sigHash);
+    const signedSchnorr = liquid.signSchnorr(sigHash);
 
     return { data: signedSchnorr };
   } catch (e) {

@@ -1,13 +1,11 @@
-import getPrivateKey from "./getPrivateKey";
-import getPublicKeyOrPrompt from "./getPublicKeyOrPrompt";
-import removePrivateKey from "./removePrivateKey";
-import setPrivateKey from "./setPrivateKey";
+import getAddressOrPrompt from "./getAddressOrPrompt";
+import signPset from "./signPset";
+import signPsetWithPrompt from "./signPsetWithPrompt";
 import signSchnorrOrPrompt from "./signSchnorrOrPrompt";
 
 export {
-  getPublicKeyOrPrompt,
+  getAddressOrPrompt,
   signSchnorrOrPrompt,
-  getPrivateKey,
-  setPrivateKey,
-  removePrivateKey,
+  signPsetWithPrompt,
+  signPset,
 };

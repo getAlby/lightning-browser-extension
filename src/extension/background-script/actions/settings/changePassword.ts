@@ -29,18 +29,6 @@ const changePassword = async (message: Message) => {
       );
     }
 
-    // Re-encrypt liquid key with the new password
-    if (accounts[accountId].liquidPrivateKey) {
-      const accountLiquidKey = decryptData(
-        accounts[accountId].liquidPrivateKey as string,
-        password
-      );
-      tmpAccounts[accountId].liquidPrivateKey = encryptData(
-        accountLiquidKey,
-        newPassword
-      );
-    }
-
     // Re-encrypt mnemonic with the new password
     if (accounts[accountId].mnemonic) {
       const accountMnemonic = decryptData(

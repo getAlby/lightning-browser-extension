@@ -790,6 +790,19 @@
       "outputs": "Outputs",
       "amount": "{{amount}} sats"
     },
+    "confirm_sign_pset": {
+      "warning": "⚠️ Signing a PSET may result in loosing your funds or Ordinals. Sign only if you understand what you're doing and trust this transaction",
+      "title": "Sign PSET",
+      "allow_sign": "This website asks you to sign a Partially Signed Elements (Liquid) Transaction:",
+      "view_addresses": "View addresses",
+      "hide_addresses": "Hide addresses",
+      "view_hex": "View PSET base64",
+      "hide_hex": "Hide PSET base64",
+      "input": "Input",
+      "outputs": "Outputs",
+      "amount": "{{amount}} sats",
+      "asset": "assetHash: {{asset}}"
+    },
     "confirm_get_address": {
       "title": "Get Address",
       "heading": "This website asks you to read:",

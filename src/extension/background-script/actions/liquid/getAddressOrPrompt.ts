@@ -1,11 +1,11 @@
 import utils from "~/common/lib/utils";
-import type { MessagePublicKeyGet } from "~/types";
+import type { MessageGetLiquidAddress } from "~/types";
 import { PermissionMethodLiquid } from "~/types";
 
 import state from "../../state";
 import { addPermissionFor, hasPermissionFor } from "../nostr/helpers";
 
-const getPublicKeyOrPrompt = async (message: MessagePublicKeyGet) => {
+const getAddressOrPrompt = async (message: MessageGetLiquidAddress) => {
   if (!("host" in message.origin)) {
     console.error("error", message.origin);
     return;
@@ -17,9 +17,17 @@ const getPublicKeyOrPrompt = async (message: MessagePublicKeyGet) => {
       message.origin.host
     );
 
+    const liquid = await state.getState().getLiquid();
+
     if (hasPermission) {
-      const publicKey = (await state.getState().getLiquid()).getPublicKey();
-      return { data: publicKey };
+      const publicKey = liquid.getPublicKey();
+      const address = liquid.getAddress();
+      return {
+        data: {
+          ...address,
+          publicKey,
+        },
+      };
     } else {
       const promptResponse = await utils.openPrompt<{
         confirm: boolean;
@@ -27,7 +35,7 @@ const getPublicKeyOrPrompt = async (message: MessagePublicKeyGet) => {
       }>({
         args: {},
         ...message,
-        action: "public/liquid/confirmGetPublicKey",
+        action: "public/liquid/confirmGetAddress",
       });
       // add permission to db only if user decided to always allow this request
       if (promptResponse.data.rememberPermission) {
@@ -39,8 +47,14 @@ const getPublicKeyOrPrompt = async (message: MessagePublicKeyGet) => {
 
       if (promptResponse.data.confirm) {
         // Normally `openPrompt` would throw already, but to make sure we got a confirm from the user we check this here
-        const publicKey = (await state.getState().getLiquid()).getPublicKey();
-        return { data: publicKey };
+        const publicKey = liquid.getPublicKey();
+        const address = liquid.getAddress();
+        return {
+          data: {
+            ...address,
+            publicKey,
+          },
+        };
       } else {
         return { error: "User rejected" };
       }
@@ -53,4 +67,4 @@ const getPublicKeyOrPrompt = async (message: MessagePublicKeyGet) => {
   }
 };
 
-export default getPublicKeyOrPrompt;
+export default getAddressOrPrompt;

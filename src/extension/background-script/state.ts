@@ -3,6 +3,12 @@ import pick from "lodash.pick";
 import browser from "webextension-polyfill";
 import createState from "zustand";
 import { decryptData } from "~/common/lib/crypto";
+import {
+  LIQUID_DERIVATION_PATH,
+  LIQUID_DERIVATION_PATH_REGTEST,
+  deriveLiquidMasterBlindingKey,
+  derivePrivateKey,
+} from "~/common/lib/mnemonic";
 import { DEFAULT_SETTINGS } from "~/common/settings";
 import { isManifestV3 } from "~/common/utils/mv3";
 import { Migration } from "~/extension/background-script/migrations";
@@ -128,16 +134,28 @@ const state = createState<State>((set, get) => ({
     const currentAccountId = get().currentAccountId as string;
     const account = get().accounts[currentAccountId];
 
+    if (!account.mnemonic) throw new Error("Account mnemonic is not set");
+
     const password = await get().password();
     if (!password) throw new Error("Password is not set");
-    const privateKey = decryptData(
-      account.liquidPrivateKey as string,
-      password
+
+    const mnemonic = decryptData(account.mnemonic, password);
+
+    const isMainnet = get().settings.bitcoinNetwork === "bitcoin";
+
+    const derivationPath = isMainnet
+      ? LIQUID_DERIVATION_PATH
+      : LIQUID_DERIVATION_PATH_REGTEST;
+
+    const privateKey = derivePrivateKey(mnemonic, derivationPath);
+    const masterBlindingKey = deriveLiquidMasterBlindingKey(mnemonic);
+
+    const liquid = new Liquid(
+      privateKey,
+      masterBlindingKey,
+      isMainnet ? "liquid" : "testnet"
     );
-
-    const liquid = new Liquid(privateKey);
-    set({ liquid: liquid });
-
+    set({ liquid });
     return liquid;
   },
   getNostr: async () => {

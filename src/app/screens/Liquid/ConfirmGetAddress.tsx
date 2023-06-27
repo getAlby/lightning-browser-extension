@@ -11,7 +11,7 @@ import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import { OriginData } from "~/types";
 
-function LiquidConfirmGetPublicKey() {
+function LiquidConfirmGetAddress() {
   const { t } = useTranslation("translation", {
     keyPrefix: "liquid",
   });
@@ -113,4 +113,4 @@ function LiquidConfirmGetPublicKey() {
   );
 }
 
-export default LiquidConfirmGetPublicKey;
+export default LiquidConfirmGetAddress;

@@ -66,9 +66,7 @@ const routes = {
   getMnemonic: mnemonic.getMnemonic,
 
   liquid: {
-    getPrivateKey: liquid.getPrivateKey,
-    setPrivateKey: liquid.setPrivateKey,
-    removePrivateKey: liquid.removePrivateKey,
+    signPset: liquid.signPset,
   },
 
   nostr: {
@@ -102,7 +100,8 @@ const routes = {
     },
     liquid: {
       enable: allowances.enable,
-      getPublicKeyOrPrompt: liquid.getPublicKeyOrPrompt,
+      getAddressOrPrompt: liquid.getAddressOrPrompt,
+      signPsetWithPrompt: liquid.signPsetWithPrompt,
       signSchnorrOrPrompt: liquid.signSchnorrOrPrompt,
     },
     nostr: {

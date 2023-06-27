@@ -1,6 +1,8 @@
 import * as secp256k1 from "@noble/secp256k1";
 import { HDKey } from "@scure/bip32";
 import * as bip39 from "@scure/bip39";
+import { SLIP77Factory } from "slip77";
+import * as tinysecp from "tiny-secp256k1";
 
 export const LIQUID_DERIVATION_PATH = "m/84'/1776'/0'/0/0";
 export const LIQUID_DERIVATION_PATH_REGTEST = "m/84'/1'/0'/0/0";
@@ -8,8 +10,10 @@ export const NOSTR_DERIVATION_PATH = "m/44'/1237'/0'/0/0"; // NIP-06
 export const BTC_TAPROOT_DERIVATION_PATH = "m/86'/0'/0'/0/0";
 export const BTC_TAPROOT_DERIVATION_PATH_REGTEST = "m/86'/1'/0'/0/0";
 
-export function deriveLiquidPrivateKey(mnemonic: string) {
-  return derivePrivateKey(mnemonic, LIQUID_DERIVATION_PATH);
+export function deriveLiquidMasterBlindingKey(mnemonic: string): string {
+  return SLIP77Factory(tinysecp)
+    .fromSeed(Buffer.from(bip39.mnemonicToSeedSync(mnemonic)))
+    .masterKey.toString("hex");
 }
 
 export function deriveNostrPrivateKey(mnemonic: string) {

@@ -3,7 +3,7 @@ import msg from "~/common/lib/msg";
 import { default as nostr, default as nostrlib } from "~/common/lib/nostr";
 
 export async function savePrivateKey(
-  type: "nostr" | "liquid",
+  type: "nostr",
   accountId: string,
   privateKey: string
 ) {
