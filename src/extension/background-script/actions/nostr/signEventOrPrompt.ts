@@ -44,8 +44,8 @@ const signEventOrPrompt = async (message: MessageSignEvent) => {
       }
     }
 
-    if (!event.id) event.id = nostr.getEventHash(event);
-    if (!event.pubkey) event.pubkey = nostr.getPublicKey();
+    event.pubkey = nostr.getPublicKey();
+    event.id = nostr.getEventHash(event);
     const signedEvent = await nostr.signEvent(event);
 
     return { data: signedEvent };
