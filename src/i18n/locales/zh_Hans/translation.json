@@ -567,7 +567,8 @@
         "waiting": "等待付款...",
         "status": "检查付款状态"
       },
-      "title": "收款"
+      "title": "收款",
+      "receive_via_bitcoin_address": "通过比特币地址接收"
     },
     "make_invoice": {
       "memo": {
@@ -787,6 +788,12 @@
     "confirm_add_account": {
       "title": "添加帐户",
       "content": "此网站想要添加一个帐户（{{connector}}）："
+    },
+    "on_chain": {
+      "instructions1": "要通过比特币地址接收比特币，请在 getalby.com 上登录你的 <0>Alby 帐户</0>",
+      "go": "前往你的 Alby 帐户 →",
+      "title": "通过比特币地址接收",
+      "instructions2": "你可以在<0>收款</0>页面上找到你的比特币地址。"
     }
   },
   "common": {
@@ -861,7 +868,8 @@
       "citadel": "Citadel",
       "nativecitadel": "Citadel（通过 Tor）",
       "commando": "Commando"
-    }
+    },
+    "or": "或"
   },
   "components": {
     "toasts": {
