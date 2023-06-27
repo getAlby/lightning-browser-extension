@@ -58,13 +58,15 @@ function ConfirmAddAccount() {
             url={origin.host}
           />
           {/* TODO: Replace with Alert component */}
-          <div className="mt-4 rounded-md font-medium p-4 text-blue-700 bg-blue-50 dark:text-blue-400 dark:bg-blue-900">
+          <div className="mt-4 rounded-md font-medium p-4 text-blue-700 bg-blue-50 dark:text-blue-200 dark:bg-blue-900">
             <p>
               In order to connect through the TOR network you need to first
               install the Alby companion app:
               <br />
               <br />
-              <Hyperlink>⬇️ Download</Hyperlink>
+              <Hyperlink className="text-white hover:text-gray-300">
+                ⬇️ Download
+              </Hyperlink>
             </p>
           </div>
           <ContentMessage
