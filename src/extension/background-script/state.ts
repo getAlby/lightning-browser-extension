@@ -57,16 +57,20 @@ const browserStorageKeys = Object.keys(browserStorageDefaults) as Array<
 
 let storage: "sync" | "local" = "sync";
 
-const state = createState<State>((set, get) => ({
+const getFreshState = () => ({
   connector: null,
   account: null,
-  settings: DEFAULT_SETTINGS,
+  settings: { ...DEFAULT_SETTINGS },
   migrations: [],
   accounts: {},
   currentAccountId: null,
   nostr: null,
   nostrPrivateKey: null,
   mv2Password: null,
+});
+
+const state = createState<State>((set, get) => ({
+  ...getFreshState(),
   password: async (password) => {
     if (isManifestV3) {
       if (password) {
@@ -189,7 +193,7 @@ const state = createState<State>((set, get) => ({
     } else {
       await browser.storage.local.clear();
     }
-    set({ ...browserStorageDefaults });
+    set({ ...getFreshState() });
     await get().saveToStorage();
   },
   saveToStorage: () => {
