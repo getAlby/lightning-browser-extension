@@ -76,6 +76,7 @@ const AllowanceView: FC<Props> = (props) => {
     showFiat,
   ]);
 
+  const hasBudget = +props.allowance.totalBudget > 0;
   return (
     <div className="overflow-y-auto no-scrollbar h-full">
       <Header
@@ -100,33 +101,40 @@ const AllowanceView: FC<Props> = (props) => {
         </div>
       )}
       <div className="px-4 pb-5">
-        <div className="flex justify-between items-center py-3">
-          <dl className="mb-0">
-            <dt className="text-xs text-gray-500 dark:text-neutral-400">
-              {t("allowance_view.allowance")}
-            </dt>
-            <dd className="flex items-center mb-0 text-sm font-medium dark:text-neutral-400">
-              {+props.allowance.totalBudget > 0
-                ? `${getFormattedNumber(
-                    props.allowance.usedBudget
-                  )} / ${getFormattedNumber(props.allowance.totalBudget)} `
-                : "0 / 0 "}
-              {t("allowance_view.sats_used")}
-              <div className="ml-3 w-24">
-                <Progressbar percentage={props.allowance.percentage} />
-              </div>
-            </dd>
-          </dl>
+        {hasBudget ? (
+          <div className="flex justify-between items-center py-3">
+            <dl className="mb-0">
+              <dt className="text-xs text-gray-500 dark:text-neutral-400">
+                {t("allowance_view.allowance")}
+              </dt>
+              <dd className="flex items-center mb-0 text-sm font-medium dark:text-neutral-400">
+                {hasBudget
+                  ? `${getFormattedNumber(
+                      props.allowance.usedBudget
+                    )} / ${getFormattedNumber(props.allowance.totalBudget)} `
+                  : "0 / 0 "}
+                {t("allowance_view.sats_used")}
+                <div className="ml-3 w-24">
+                  <Progressbar percentage={props.allowance.percentage} />
+                </div>
+              </dd>
+            </dl>
 
-          <div className="flex items-center">
-            <AllowanceMenu
-              allowance={props.allowance}
-              onEdit={props.onEditComplete}
-              onDelete={props.onDeleteComplete}
-            />
+            <div className="flex items-center">
+              <AllowanceMenu
+                allowance={props.allowance}
+                onEdit={props.onEditComplete}
+                onDelete={props.onDeleteComplete}
+              />
+            </div>
           </div>
-        </div>
-
+        ) : (
+          <AllowanceMenu
+            allowance={props.allowance}
+            onEdit={props.onEditComplete}
+            onDelete={props.onDeleteComplete}
+          />
+        )}
         <h2 className="mb-2 text-lg text-gray-900 font-bold dark:text-white">
           {t("allowance_view.recent_transactions")}
         </h2>

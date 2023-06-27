@@ -927,7 +927,8 @@
       "confirm_delete": "Are you sure you want to delete this website?",
       "hint": "This will reset the current budget",
       "new_budget": {
-        "label": "New budget"
+        "label": "New budget",
+        "link_label": "Set a budget for one-click payments"
       },
       "enable_login": {
         "title": "Enable website login",

@@ -1,5 +1,6 @@
 import { GearIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
+import Hyperlink from "@components/Hyperlink";
 import Setting from "@components/Setting";
 import Toggle from "@components/form/Toggle";
 import type { FormEvent } from "react";
@@ -142,36 +143,45 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
     }
   }
 
+  const hasBudget = +allowance.totalBudget > 0;
   return (
     <>
-      <Menu as="div" className="relative">
-        <Menu.Button className="flex items-center text-gray-500 hover:text-black transition-color duration-200 dark:hover:text-white">
-          <GearIcon className="h-6 w-6" />
-        </Menu.Button>
-        <Menu.List position="right">
-          <Menu.ItemButton onClick={openModal}>
-            {tCommon("actions.edit")}
-          </Menu.ItemButton>
-          <Menu.ItemButton
-            danger
-            onClick={async () => {
-              if (window.confirm(t("confirm_delete"))) {
-                try {
-                  await msg.request("deleteAllowance", {
-                    id: allowance.id,
-                  });
-                  onDelete && onDelete();
-                } catch (e) {
-                  console.error(e);
-                  if (e instanceof Error) toast.error(`Error: ${e.message}`);
+      {hasBudget ? (
+        <Menu as="div" className="relative">
+          <Menu.Button className="flex items-center text-gray-500 hover:text-black transition-color duration-200 dark:hover:text-white">
+            <GearIcon className="h-6 w-6" />
+          </Menu.Button>
+          <Menu.List position="right">
+            <Menu.ItemButton onClick={openModal}>
+              {tCommon("actions.edit")}
+            </Menu.ItemButton>
+            <Menu.ItemButton
+              danger
+              onClick={async () => {
+                if (window.confirm(t("confirm_delete"))) {
+                  try {
+                    await msg.request("deleteAllowance", {
+                      id: allowance.id,
+                    });
+                    onDelete && onDelete();
+                  } catch (e) {
+                    console.error(e);
+                    if (e instanceof Error) toast.error(`Error: ${e.message}`);
+                  }
                 }
-              }
-            }}
-          >
-            {tCommon("actions.delete")}
-          </Menu.ItemButton>
-        </Menu.List>
-      </Menu>
+              }}
+            >
+              {tCommon("actions.delete")}
+            </Menu.ItemButton>
+          </Menu.List>
+        </Menu>
+      ) : (
+        <div className="my-6 text-center">
+          <Hyperlink onClick={openModal}>
+            {t("new_budget.link_label")}
+          </Hyperlink>
+        </div>
+      )}
 
       <Modal
         ariaHideApp={false}
