@@ -515,7 +515,8 @@
         "label": "Beschreibung",
         "placeholder": "Zum Beispiel: Wer schickt diese Zahlung?"
       },
-      "success": "Zahlung erhalten!"
+      "success": "Zahlung erhalten!",
+      "receive_via_bitcoin_address": "Empfangen über Bitcoin Adresse"
     },
     "publishers": {
       "publisher": {
@@ -788,6 +789,12 @@
     "confirm_add_account": {
       "title": "Konto hinzufügen",
       "content": "Diese Website möchte ein Konto hinzufügen ({{connector}}):"
+    },
+    "on_chain": {
+      "title": "Empfangen über Bitcoin Adresse",
+      "instructions2": "Du kannst deine Bitcoin-Adresse auf der Seite <0>Empfangen</0> finden.",
+      "go": "Gehe zu deinem Alby Account →",
+      "instructions1": "Um Bitcoin über eine Bitcoin-Adresse zu erhalten, melde dich bei deinem <0>Alby-Account</0> auf getalby.com an"
     }
   },
   "components": {
@@ -969,7 +976,8 @@
       "nativelnbits": "LNBits (über Tor)",
       "galoy": "Galoy",
       "eclair": "Eclair"
-    }
+    },
+    "or": "oder"
   },
   "permissions": {
     "commando": {
