@@ -21,7 +21,7 @@ const setMnemonic = async (message: MessageMnemonicSet) => {
     account.mnemonic = mnemonic ? encryptData(mnemonic, password) : null;
 
     if (mnemonic && !account.nostrPrivateKey) {
-      const nostrPrivateKey = new Mnemonic(mnemonic).deriveNostrPrivateKey();
+      const nostrPrivateKey = new Mnemonic(mnemonic).deriveNostrPrivateKeyHex();
       account.nostrPrivateKey = encryptData(nostrPrivateKey, password);
       account.hasImportedNostrKey = false;
     } else {

@@ -22,7 +22,7 @@ const generatePrivateKey = async (message: MessageNostrPrivateKeyGenerate) => {
       };
     }
     const mnemonic = new Mnemonic(decryptData(account.mnemonic, password));
-    const nostrPrivateKey = mnemonic.deriveNostrPrivateKey();
+    const nostrPrivateKey = mnemonic.deriveNostrPrivateKeyHex();
     account.nostrPrivateKey = encryptData(nostrPrivateKey, password);
 
     account.hasImportedNostrKey = false;

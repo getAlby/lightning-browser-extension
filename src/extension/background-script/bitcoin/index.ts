@@ -1,3 +1,4 @@
+import * as secp256k1 from "@noble/secp256k1";
 import * as btc from "@scure/btc-signer";
 import Mnemonic from "~/extension/background-script/mnemonic";
 import { BitcoinAddress, BitcoinNetworkType } from "~/types";
@@ -23,18 +24,22 @@ class Bitcoin {
         : BTC_TAPROOT_DERIVATION_PATH_REGTEST;
 
     const derivationPath = `${derivationPathWithoutIndex}/${index}`;
-    const privateKey = this.mnemonic.derivePrivateKey(derivationPath);
-    const publicKey = this.mnemonic.derivePublicKey(derivationPath);
+    const derivedKey = this.mnemonic.deriveKey(derivationPath);
 
     const address = btc.getAddress(
       "tr",
-      Buffer.from(privateKey, "hex"),
+      derivedKey.privateKey as Uint8Array,
       this.network
     );
     if (!address) {
       throw new Error("No taproot address found from private key");
     }
-    return { address, derivationPath, index, publicKey };
+    return {
+      address,
+      derivationPath,
+      index,
+      publicKey: secp256k1.utils.bytesToHex(derivedKey.publicKey as Uint8Array),
+    };
   }
 }
 

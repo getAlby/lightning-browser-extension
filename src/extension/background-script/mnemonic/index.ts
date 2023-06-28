@@ -14,24 +14,14 @@ class Mnemonic {
     this._hdkey = HDKey.fromMasterSeed(seed);
   }
 
-  deriveNostrPrivateKey() {
-    return this.derivePrivateKey(NOSTR_DERIVATION_PATH);
+  deriveNostrPrivateKeyHex() {
+    return secp256k1.utils.bytesToHex(
+      this.deriveKey(NOSTR_DERIVATION_PATH).privateKey as Uint8Array
+    );
   }
 
-  derivePrivateKey(path: string) {
-    const privateKeyBytes = this._hdkey.derive(path).privateKey;
-    if (!privateKeyBytes) {
-      throw new Error("invalid derived private key");
-    }
-    return secp256k1.utils.bytesToHex(privateKeyBytes);
-  }
-
-  derivePublicKey(path: string) {
-    const publicKeyBytes = this._hdkey.derive(path).publicKey;
-    if (!publicKeyBytes) {
-      throw new Error("invalid derived public key");
-    }
-    return secp256k1.utils.bytesToHex(publicKeyBytes);
+  deriveKey(path: string): HDKey {
+    return this._hdkey.derive(path);
   }
 }
 

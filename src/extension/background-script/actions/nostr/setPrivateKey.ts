@@ -39,7 +39,7 @@ const setPrivateKey = async (message: MessageNostrPrivateKeySet) => {
       !account.mnemonic ||
       new Mnemonic(
         decryptData(account.mnemonic, password)
-      ).deriveNostrPrivateKey() !== privateKey;
+      ).deriveNostrPrivateKeyHex() !== privateKey;
     accounts[id] = account;
     state.setState({
       accounts,
