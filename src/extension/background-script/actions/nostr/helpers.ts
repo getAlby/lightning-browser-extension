@@ -58,14 +58,14 @@ export async function addPermissionFor(method: string, host: string) {
   return !!permissionIsAdded && (await db.saveToStorage());
 }
 
-// from: https://github.com/nbd-wtf/nostr-tools/blob/b9a7f814aaa08a4b1cec705517b664390abd3f69/event.ts#L95
+// based upon : https://github.com/nbd-wtf/nostr-tools/blob/b9a7f814aaa08a4b1cec705517b664390abd3f69/event.ts#L95
 // to avoid the additional dependency
 export function validateEvent(event: Event): boolean {
   if (!(event instanceof Object)) return false;
   if (typeof event.kind !== "number") return false;
   if (typeof event.content !== "string") return false;
   if (typeof event.created_at !== "number") return false;
-  // ignore pubkey checks because we always override it with the pubkey from the extension's account
+  // ignore pubkey checks because if the pubkey is not set we add it to the event. same for the ID.
 
   if (!Array.isArray(event.tags)) return false;
   for (let i = 0; i < event.tags.length; i++) {
