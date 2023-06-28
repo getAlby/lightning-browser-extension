@@ -11,15 +11,18 @@ interface Route {
   total_fees: number;
 }
 
-export interface ConnectorInvoice {
+export interface ITransaction {
+  memo: string;
+  preimage: string;
+}
+
+export interface ConnectorInvoice extends ITransaction {
   custom_records?: {
     "696969": string;
     "7629169": string;
     "5482373484": string;
   };
   id: string;
-  memo: string;
-  preimage: string;
   settled: boolean;
   settleDate: number;
   totalAmount: string;
@@ -27,21 +30,11 @@ export interface ConnectorInvoice {
 }
 
 // @Todo: extend missing properties accordingly
-export interface ConnectorTransaction {
+export interface ConnectorTransaction extends ITransaction {
   // @Todo: can this be the same custom type as in ConnectorInvoice above?
   custom_records?: Record<number, number>;
   fee: number;
   keysend: boolean;
-  memo: string;
-  payment_hash: {
-    data: number[];
-    type: string;
-  };
-  payment_preimage: string;
-  r_hash: {
-    data: number[];
-    type: string;
-  };
   timestamp: number;
   type: string;
   value: number;

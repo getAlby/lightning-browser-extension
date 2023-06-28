@@ -27,7 +27,7 @@ const list = async (message: MessagePaymentList) => {
     const transactions: Transaction[] = result.data.transactions.map(
       (transaction: ConnectorTransaction) => {
         const dbPayment = dbPayments.find(
-          (p: DbPayment) => p.preimage === transaction.payment_preimage
+          (p: DbPayment) => p.preimage === transaction.preimage
         );
 
         // @Todo: map transactions correctly
