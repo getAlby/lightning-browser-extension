@@ -54,6 +54,8 @@ function NostrSettings() {
 
   useEffect(() => {
     try {
+      // TODO: is there a way this can be moved to the background script and use the Nostr object?
+      // NOTE: it is done this way to show the user the new public key before saving
       setNostrPublicKey(
         currentPrivateKey ? nostr.derivePublicKey(currentPrivateKey) : ""
       );
