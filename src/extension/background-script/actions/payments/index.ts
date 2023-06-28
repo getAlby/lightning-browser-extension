@@ -1,4 +1,3 @@
-import all from "./all";
-import listByAccount from "./listByAccount";
+import list from "./list";
 
-export { all, listByAccount };
+export { list };

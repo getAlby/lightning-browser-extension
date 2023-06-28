@@ -1,7 +1,7 @@
 import db from "~/extension/background-script/db";
-import type { DbPayment, MessagePaymentAll } from "~/types";
+import type { DbPayment, MessagePaymentList } from "~/types";
 
-import getPayments from "../all";
+import list from "../list";
 
 const mockPayments: DbPayment[] = [
   {
@@ -38,13 +38,13 @@ const mockPayments: DbPayment[] = [
   },
 ];
 
-describe("payment all", () => {
+describe("payment list", () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
 
-  test("get all payments", async () => {
-    const message: MessagePaymentAll = {
+  test("get payments list", async () => {
+    const message: MessagePaymentList = {
       application: "LBE",
       origin: { internal: true },
       prompt: true,
@@ -53,7 +53,7 @@ describe("payment all", () => {
 
     await db.payments.bulkAdd(mockPayments);
 
-    expect(await getPayments(message)).toStrictEqual({
+    expect(await list(message)).toStrictEqual({
       data: {
         payments: [...mockPayments.reverse()],
       },

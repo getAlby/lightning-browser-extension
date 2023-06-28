@@ -32,7 +32,7 @@ function Transactions({ type }: Props) {
     if (type === "incoming") {
       loadInvoices();
     } else {
-      if (account?.id) loadTransactions(account.id);
+      loadTransactions();
     }
   }, [
     type,

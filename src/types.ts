@@ -165,17 +165,9 @@ export interface MessageGenericRequest extends MessageDefault {
   };
 }
 
-export interface MessagePaymentAll extends MessageDefault {
+export interface MessagePaymentList extends MessageDefault {
   action: "getPayments";
   args?: {
-    limit?: number;
-  };
-}
-
-export interface MessagePaymentListByAccount extends MessageDefault {
-  action: "getPaymentsByAccount";
-  args: {
-    accountId: Account["id"];
     limit?: number;
   };
 }

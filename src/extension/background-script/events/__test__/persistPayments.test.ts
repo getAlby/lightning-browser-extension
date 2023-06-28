@@ -1,14 +1,14 @@
+import { list } from "~/extension/background-script/actions/payments";
 import db from "~/extension/background-script/db";
 import { allowanceFixture } from "~/fixtures/allowances";
 import { paymentsFixture } from "~/fixtures/payment";
 import type {
   DbAllowance,
   DbPayment,
-  MessagePaymentAll,
+  MessagePaymentList,
   PaymentNotificationData,
 } from "~/types";
 
-import getPayments from "../../actions/payments/all";
 import { persistSuccessfulPayment } from "../persistPayments";
 
 Date.now = jest.fn(() => 1487076708000);
@@ -110,7 +110,7 @@ describe("Persist payments", () => {
   });
 
   test("updates payments on persisting successful payment", async () => {
-    const message: MessagePaymentAll = {
+    const message: MessagePaymentList = {
       application: "LBE",
       origin: { internal: true },
       prompt: true,
@@ -119,7 +119,7 @@ describe("Persist payments", () => {
 
     await persistSuccessfulPayment("ln.sendPayment.success", data);
 
-    expect(await getPayments(message)).toEqual({
+    expect(await list(message)).toEqual({
       data: {
         payments: [...updatedPayments.reverse()],
       },
@@ -127,7 +127,7 @@ describe("Persist payments", () => {
   });
 
   test("updates payments on persisting successful payment with empty origin (i.e. pay to ln-address inside popup)", async () => {
-    const message: MessagePaymentAll = {
+    const message: MessagePaymentList = {
       application: "LBE",
       origin: { internal: true },
       prompt: true,
@@ -136,7 +136,7 @@ describe("Persist payments", () => {
 
     await persistSuccessfulPayment("ln.sendPayment.success", dataWitouthOrigin);
 
-    expect(await getPayments(message)).toEqual({
+    expect(await list(message)).toEqual({
       data: {
         payments: [...updatedPaymentsWithoutOrigin.reverse()],
       },

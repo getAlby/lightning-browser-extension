@@ -54,7 +54,7 @@ const DefaultView: FC<Props> = (props) => {
   const itemsLimit = 8;
 
   useEffect(() => {
-    if (account?.id) loadTransactions(account.id, itemsLimit);
+    loadTransactions(itemsLimit);
   }, [
     account?.id,
     balancesDecorated?.accountBalance,

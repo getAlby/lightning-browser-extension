@@ -28,7 +28,8 @@ export interface ConnectorInvoice {
 
 // @Todo: extend missing properties accordingly
 export interface ConnectorTransaction {
-  custom_records: Record<number, number>;
+  // @Todo: can this be the same custom type as in ConnectorInvoice above?
+  custom_records?: Record<number, number>;
   fee: number;
   keysend: boolean;
   memo: string;

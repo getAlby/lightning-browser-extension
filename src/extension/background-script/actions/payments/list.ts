@@ -1,16 +1,10 @@
 import { ConnectorTransaction } from "~/extension/background-script/connectors/connector.interface";
 import state from "~/extension/background-script/state";
-import type {
-  DbPayment,
-  MessagePaymentListByAccount,
-  Transaction,
-} from "~/types";
+import type { DbPayment, MessagePaymentList, Transaction } from "~/types";
 
 import db from "../../db";
 
-// @Todo: renmae, due to fact that "byAccount" will be default
-
-const listByAccount = async (message: MessagePaymentListByAccount) => {
+const list = async (message: MessagePaymentList) => {
   const accountId = state.getState().currentAccountId;
 
   // TODO: Add pagination instead of limiting to 2121
@@ -68,4 +62,4 @@ const listByAccount = async (message: MessagePaymentListByAccount) => {
   }
 };
 
-export default listByAccount;
+export default list;

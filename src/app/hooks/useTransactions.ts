@@ -11,10 +11,9 @@ export const useTransactions = () => {
   const [isLoadingTransactions, setIsLoadingTransactions] = useState(true);
 
   const loadTransactions = useCallback(
-    async (accountId: string, limit?: number) => {
+    async (limit?: number) => {
       try {
-        const { payments } = await api.getPaymentsByAccount({
-          accountId,
+        const { payments } = await api.getPayments({
           limit,
         });
         const _transactions: Transaction[] =
