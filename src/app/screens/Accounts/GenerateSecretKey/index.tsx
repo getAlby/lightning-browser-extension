@@ -1,6 +1,6 @@
 import Container from "@components/Container";
 import Loading from "@components/Loading";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -10,14 +10,12 @@ import { ContentBox } from "~/app/components/ContentBox";
 import MnemonicInputs from "~/app/components/MnemonicInputs";
 import SecretKeyDescription from "~/app/components/SecretKeyDescription";
 import Checkbox from "~/app/components/form/Checkbox";
-import { useAccount } from "~/app/context/AccountContext";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 
 function GenerateSecretKey() {
   const navigate = useNavigate();
   const [mnemonic, setMnemonic] = useState<string | undefined>();
-  const account = useAccount();
   const { t } = useTranslation("translation", {
     keyPrefix: "accounts.account_view.mnemonic",
   });
@@ -27,30 +25,29 @@ function GenerateSecretKey() {
 
   const { id } = useParams();
 
-  const fetchData = useCallback(async () => {
-    try {
-      const account = await api.getAccount();
-      setHasNostrPrivateKey(account.nostrEnabled);
-      const newMnemonic = (await msg.request("generateMnemonic")) as string;
-      setMnemonic(newMnemonic);
-    } catch (e) {
-      console.error(e);
-      if (e instanceof Error) toast.error(`Error: ${e.message}`);
-    }
-  }, []);
-
   useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+    (async () => {
+      try {
+        const account = await api.getAccount(id);
+        setHasNostrPrivateKey(account.nostrEnabled);
+        if (account.hasMnemonic) {
+          // do not allow user to generate a mnemonic if they already have one for the current account
+          // go to account settings
+          navigate(`/accounts/${id}`);
+        }
+        const newMnemonic = (await msg.request("generateMnemonic")) as string;
+        setMnemonic(newMnemonic);
+      } catch (e) {
+        console.error(e);
+        if (e instanceof Error) toast.error(`Error: ${e.message}`);
+      }
+    })();
+  }, [id, navigate]);
 
   async function saveGeneratedSecretKey() {
     try {
       if (!hasConfirmedBackup) {
         throw new Error(t("backup.error_confirm"));
-      }
-      if (!account || !id) {
-        // type guard
-        throw new Error("No account available");
       }
       if (!mnemonic) {
         throw new Error("No mnemonic available");
@@ -69,7 +66,7 @@ function GenerateSecretKey() {
     }
   }
 
-  return !account || !mnemonic ? (
+  return !mnemonic ? (
     <div className="flex justify-center mt-5">
       <Loading />
     </div>

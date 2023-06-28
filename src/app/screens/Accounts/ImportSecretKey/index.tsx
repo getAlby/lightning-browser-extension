@@ -2,7 +2,7 @@ import Container from "@components/Container";
 import Loading from "@components/Loading";
 import * as bip39 from "@scure/bip39";
 import { wordlist } from "@scure/bip39/wordlists/english";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -10,13 +10,11 @@ import Alert from "~/app/components/Alert";
 import Button from "~/app/components/Button";
 import { ContentBox } from "~/app/components/ContentBox";
 import MnemonicInputs from "~/app/components/MnemonicInputs";
-import { useAccount } from "~/app/context/AccountContext";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 
 function ImportSecretKey() {
   const [mnemonic, setMnemonic] = useState<string>("");
-  const account = useAccount();
   const { t: tCommon } = useTranslation("common");
   const navigate = useNavigate();
   const { t } = useTranslation("translation", {
@@ -24,27 +22,26 @@ function ImportSecretKey() {
   });
 
   const [hasFetchedData, setHasFetchedData] = useState(false);
-  const [hasMnemonic, setHasMnemonic] = useState(false);
   const [hasNostrPrivateKey, setHasNostrPrivateKey] = useState(false);
   const { id } = useParams();
 
-  const fetchData = useCallback(async () => {
-    try {
-      if (id) {
-        const account = await api.getAccount();
-        setHasNostrPrivateKey(account.nostrEnabled);
-        setHasMnemonic(account.hasMnemonic);
-        setHasFetchedData(true);
-      }
-    } catch (e) {
-      console.error(e);
-      if (e instanceof Error) toast.error(`Error: ${e.message}`);
-    }
-  }, [id]);
-
   useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+    (async () => {
+      try {
+        const account = await api.getAccount(id);
+        setHasNostrPrivateKey(account.nostrEnabled);
+        if (account.hasMnemonic) {
+          // do not allow user to import a mnemonic if they already have one for the current account
+          // go to account settings
+          navigate(`/accounts/${id}`);
+        }
+        setHasFetchedData(true);
+      } catch (e) {
+        console.error(e);
+        if (e instanceof Error) toast.error(`Error: ${e.message}`);
+      }
+    })();
+  }, [id, navigate]);
 
   function cancelImport() {
     // go to account settings
@@ -53,16 +50,6 @@ function ImportSecretKey() {
 
   async function importKey() {
     try {
-      if (hasMnemonic) {
-        if (!window.confirm(t("import.confirm_overwrite"))) {
-          return;
-        }
-      }
-      if (!account || !id) {
-        // type guard
-        throw new Error("No account available");
-      }
-
       if (
         mnemonic.split(" ").length !== 12 ||
         !bip39.validateMnemonic(mnemonic, wordlist)
@@ -82,7 +69,7 @@ function ImportSecretKey() {
     }
   }
 
-  return !account || !hasFetchedData ? (
+  return !hasFetchedData ? (
     <div className="flex justify-center mt-5">
       <Loading />
     </div>

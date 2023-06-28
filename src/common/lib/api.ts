@@ -101,7 +101,10 @@ export const swrGetAccountInfo = async (
   });
 };
 export const getAccounts = () => msg.request<Accounts>("getAccounts");
-export const getAccount = () => msg.request<GetAccountRes>("getAccount");
+export const getAccount = (id?: string) =>
+  msg.request<GetAccountRes>("getAccount", {
+    id,
+  });
 export const updateAllowance = () => msg.request<Accounts>("updateAllowance");
 export const selectAccount = (id: string) =>
   msg.request("selectAccount", { id });
