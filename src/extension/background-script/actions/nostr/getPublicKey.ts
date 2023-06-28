@@ -5,13 +5,7 @@ import { MessageNostrPublicKeyGet } from "~/types";
 import state from "../../state";
 
 const getPublicKey = async (message: MessageNostrPublicKeyGet) => {
-  const id = message?.args?.id;
-
-  if (!id) {
-    return {
-      data: (await state.getState().getNostr()).getPublicKey(),
-    };
-  }
+  const id = message.args.id;
 
   const accounts = state.getState().accounts;
   if (Object.keys(accounts).includes(id)) {

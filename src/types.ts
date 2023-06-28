@@ -436,8 +436,8 @@ export interface MessageNostrPublicKeyGetOrPrompt extends MessageDefault {
 }
 
 export interface MessageNostrPublicKeyGet extends MessageDefault {
-  args?: {
-    id?: Account["id"];
+  args: {
+    id: Account["id"];
   };
   action: "getPublicKey";
 }
