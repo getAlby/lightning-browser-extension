@@ -2,7 +2,7 @@ import * as secp256k1 from "@noble/secp256k1";
 import { HDKey } from "@scure/bip32";
 import * as bip39 from "@scure/bip39";
 
-export const NOSTR_DERIVATION_PATH = "m/44'/1237'/0'/0/0"; // NIP-06
+const NOSTR_DERIVATION_PATH = "m/44'/1237'/0'/0/0"; // NIP-06
 
 class Mnemonic {
   readonly mnemonic: string;
