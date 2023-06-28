@@ -11,7 +11,7 @@ import { Event } from "./extension/providers/nostr/types";
 
 export type ConnectorType = keyof typeof connectors;
 
-export type BitcoinNetworkType = "bitcoin" | "regtest";
+export type BitcoinNetworkType = "bitcoin" | "testnet" | "regtest";
 
 export interface Account {
   id: string;

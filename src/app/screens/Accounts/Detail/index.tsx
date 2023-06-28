@@ -460,6 +460,9 @@ function AccountDetail() {
                   <option value="bitcoin">
                     {t("bitcoin.network.options.bitcoin")}
                   </option>
+                  <option value="testnet">
+                    {t("bitcoin.network.options.testnet")}
+                  </option>
                   <option value="regtest">
                     {t("bitcoin.network.options.regtest")}
                   </option>

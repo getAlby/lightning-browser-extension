@@ -455,6 +455,7 @@
             "subtitle": "Choose network to derive addresses and decode transactions",
             "options": {
               "bitcoin": "Mainnet",
+              "testnet": "Testnet",
               "regtest": "Regtest"
             }
           }
