@@ -70,9 +70,13 @@ const state = createState<State>((set, get) => ({
   migrations: [],
   accounts: {},
   currentAccountId: null,
+  // TODO: move nostr object to account state and handle encryption/decryption there
   nostr: null,
+  // TODO: can this be removed?
   nostrPrivateKey: null,
+  // TODO: move mnemonic object to account state and handle encryption/decryption there
   mnemonic: null,
+  // TODO: move bitcoin object to account state and handle encryption/decryption there
   bitcoin: null,
   mv2Password: null,
   password: async (password) => {
