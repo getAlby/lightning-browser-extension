@@ -37,7 +37,7 @@ const list = async (message: MessagePaymentList) => {
         const title = dbPayment ? dbPayment.name || dbPayment.description : "";
         return {
           ...(dbPayment ? dbPayment : {}),
-          id: "",
+          id: dbPayment?.id || "",
           amount: transaction.value + "",
           totalFees: transaction.fee,
           description: transaction.memo,
