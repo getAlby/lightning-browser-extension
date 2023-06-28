@@ -1,4 +1,4 @@
-import { decryptData, encryptData } from "~/common/lib/crypto";
+import { decryptData } from "~/common/lib/crypto";
 import Mnemonic from "~/extension/background-script/mnemonic";
 import type { MessageNostrPrivateKeyGenerate } from "~/types";
 
@@ -23,20 +23,9 @@ const generatePrivateKey = async (message: MessageNostrPrivateKeyGenerate) => {
     }
     const mnemonic = new Mnemonic(decryptData(account.mnemonic, password));
     const nostrPrivateKey = mnemonic.deriveNostrPrivateKeyHex();
-    account.nostrPrivateKey = encryptData(nostrPrivateKey, password);
-
-    account.hasImportedNostrKey = false;
-    accounts[id] = account;
-    state.setState({
-      accounts,
-      nostr: null, // reset memoized nostr instance
-    });
-    await state.getState().saveToStorage();
 
     return {
-      data: {
-        accountId: id,
-      },
+      data: nostrPrivateKey,
     };
   } else {
     return {

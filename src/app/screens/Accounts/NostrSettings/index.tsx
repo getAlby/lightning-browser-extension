@@ -13,8 +13,7 @@ import Button from "~/app/components/Button";
 import InputCopyButton from "~/app/components/InputCopyButton";
 import TextField from "~/app/components/form/TextField";
 import { useAccount } from "~/app/context/AccountContext";
-import api, { GetAccountRes } from "~/common/lib/api";
-import msg from "~/common/lib/msg";
+import api from "~/common/lib/api";
 import { default as nostr, default as nostrlib } from "~/common/lib/nostr";
 
 function NostrSettings() {
@@ -37,10 +36,9 @@ function NostrSettings() {
       const priv = await api.nostr.getPrivateKey(id);
       if (priv) {
         setCurrentPrivateKey(priv);
+        setNostrPrivateKey(priv);
       }
-      const accountResponse = await msg.request<GetAccountRes>("getAccount", {
-        id,
-      });
+      const accountResponse = await api.getAccount(id);
       setHasMnemonic(accountResponse.hasMnemonic);
       setHasImportedNostrKey(accountResponse.hasImportedNostrKey);
     }
@@ -55,10 +53,9 @@ function NostrSettings() {
       // TODO: is there a way this can be moved to the background script and use the Nostr object?
       // NOTE: it is done this way to show the user the new public key before saving
       setNostrPublicKey(
-        currentPrivateKey ? nostr.derivePublicKey(currentPrivateKey) : ""
-      );
-      setNostrPrivateKey(
-        currentPrivateKey ? nostrlib.hexToNip19(currentPrivateKey, "nsec") : ""
+        nostrPrivateKey
+          ? nostr.derivePublicKey(nostr.normalizeToHex(nostrPrivateKey))
+          : ""
       );
     } catch (e) {
       if (e instanceof Error)
@@ -70,7 +67,7 @@ function NostrSettings() {
           </p>
         );
     }
-  }, [currentPrivateKey, t]);
+  }, [nostrPrivateKey, t]);
 
   function onCancel() {
     // go to account settings
@@ -82,12 +79,13 @@ function NostrSettings() {
       throw new Error("No mnemonic exists");
     }
 
-    await handleSaveNostrPrivateKey(true);
+    const derivedNostrPrivateKey = await api.nostr.generatePrivateKey(id);
+    setNostrPrivateKey(derivedNostrPrivateKey);
   }
 
-  // TODO: simplify this method (do not handle deriving, saving and removing in one)
-  async function handleSaveNostrPrivateKey(deriveFromMnemonic: boolean) {
-    if (!deriveFromMnemonic && nostrPrivateKey === currentPrivateKey) {
+  // TODO: simplify this method - would be good to have a dedicated "remove nostr key" button
+  async function handleSaveNostrPrivateKey() {
+    if (nostrPrivateKey === currentPrivateKey) {
       throw new Error("private key hasn't changed");
     }
 
@@ -101,9 +99,7 @@ function NostrSettings() {
     }
 
     try {
-      if (deriveFromMnemonic) {
-        await api.nostr.generatePrivateKey(id);
-      } else if (nostrPrivateKey) {
+      if (nostrPrivateKey) {
         await api.nostr.setPrivateKey(id, nostrPrivateKey);
       } else {
         await api.nostr.removePrivateKey(id);
@@ -111,7 +107,7 @@ function NostrSettings() {
 
       toast.success(
         t(
-          nostrPrivateKey || deriveFromMnemonic
+          nostrPrivateKey
             ? "nostr.private_key.success"
             : "nostr.private_key.successfully_removed"
         )
@@ -135,7 +131,7 @@ function NostrSettings() {
       <form
         onSubmit={(e: FormEvent) => {
           e.preventDefault();
-          handleSaveNostrPrivateKey(false);
+          handleSaveNostrPrivateKey();
         }}
       >
         <Container maxWidth="sm">
@@ -149,7 +145,9 @@ function NostrSettings() {
               </p>
             </div>
 
-            {hasMnemonic && currentPrivateKey ? (
+            {hasMnemonic &&
+            currentPrivateKey &&
+            nostrPrivateKey === currentPrivateKey ? (
               hasImportedNostrKey ? (
                 <Alert type="warn">
                   {t("nostr.settings.imported_key_warning")}
@@ -199,7 +197,7 @@ function NostrSettings() {
                 disabled
                 endAdornment={<InputCopyButton value={nostrPublicKey} />}
               />
-              {hasImportedNostrKey && (
+              {hasImportedNostrKey && nostrPrivateKey === currentPrivateKey && (
                 <div className="mt-4">
                   {hasMnemonic ? (
                     <Button

@@ -156,8 +156,7 @@ const getNostrPublicKey = (id: string): Promise<string> =>
     id,
   });
 
-// TODO: rename or change this function (inconsistent with generateMnemonic)
-const generateAndSaveNostrPrivateKey = (id: string): Promise<void> =>
+const generateNostrPrivateKey = (id: string): Promise<string> =>
   msg.request("nostr/generatePrivateKey", {
     id,
   });
@@ -214,7 +213,7 @@ export default {
   nostr: {
     getPrivateKey: getNostrPrivateKey,
     getPublicKey: getNostrPublicKey,
-    generatePrivateKey: generateAndSaveNostrPrivateKey,
+    generatePrivateKey: generateNostrPrivateKey,
     setPrivateKey: setNostrPrivateKey,
     removePrivateKey: removeNostrPrivateKey,
   },
