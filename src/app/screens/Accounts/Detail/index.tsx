@@ -68,10 +68,7 @@ function AccountDetail() {
   const fetchData = useCallback(async () => {
     try {
       if (id) {
-        const response = await msg.request<GetAccountRes>("getAccount", {
-          id,
-        });
-
+        const response = await api.getAccount(id);
         setAccount(response);
         setAccountName(response.name);
         setHasMnemonic(response.hasMnemonic);
