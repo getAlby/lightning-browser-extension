@@ -11,7 +11,6 @@ import Button from "~/app/components/Button";
 import { ContentBox } from "~/app/components/ContentBox";
 import MnemonicInputs from "~/app/components/mnemonic/MnemonicInputs";
 import api from "~/common/lib/api";
-import msg from "~/common/lib/msg";
 
 function ImportSecretKey() {
   const [mnemonic, setMnemonic] = useState<string>("");
@@ -23,7 +22,7 @@ function ImportSecretKey() {
 
   const [hasFetchedData, setHasFetchedData] = useState(false);
   const [hasNostrPrivateKey, setHasNostrPrivateKey] = useState(false);
-  const { id } = useParams();
+  const { id } = useParams() as { id: string };
 
   useEffect(() => {
     (async () => {
@@ -57,10 +56,7 @@ function ImportSecretKey() {
         throw new Error("Invalid mnemonic");
       }
 
-      await msg.request("setMnemonic", {
-        id,
-        mnemonic,
-      });
+      await api.setMnemonic(id, mnemonic);
       toast.success(t("saved"));
       // go to account settings
       navigate(`/accounts/${id}`);

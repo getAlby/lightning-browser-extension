@@ -146,6 +146,47 @@ export const lnurlAuth = (
 export const getCurrencyRate = async () =>
   msg.request<{ rate: number }>("getCurrencyRate");
 
+const getNostrPrivateKey = (id: string): Promise<string> =>
+  msg.request("nostr/getPrivateKey", {
+    id,
+  });
+
+const getNostrPublicKey = (id: string): Promise<string> =>
+  msg.request("nostr/getPublicKey", {
+    id,
+  });
+
+// TODO: rename or change this function (inconsistent with generateMnemonic)
+const generateAndSaveNostrPrivateKey = (id: string): Promise<void> =>
+  msg.request("nostr/generatePrivateKey", {
+    id,
+  });
+
+const removeNostrPrivateKey = (id: string): Promise<void> =>
+  msg.request("nostr/removePrivateKey", {
+    id,
+  });
+
+const setNostrPrivateKey = (id: string, privateKey: string): Promise<void> =>
+  msg.request("nostr/setPrivateKey", {
+    id,
+    privateKey,
+  });
+
+const getMnemonic = (id: string): Promise<string> =>
+  msg.request("getMnemonic", {
+    id,
+  });
+
+const generateMnemonic = (): Promise<string> => msg.request("generateMnemonic");
+
+// TODO: consider adding removeMnemonic function, make mnemonic a string here
+const setMnemonic = (id: string, mnemonic: string | null): Promise<void> =>
+  msg.request("setMnemonic", {
+    id,
+    mnemonic,
+  });
+
 export default {
   getAccount,
   getAccountInfo,
@@ -170,4 +211,14 @@ export default {
   getInvoices,
   lnurlAuth,
   getCurrencyRate,
+  nostr: {
+    getPrivateKey: getNostrPrivateKey,
+    getPublicKey: getNostrPublicKey,
+    generatePrivateKey: generateAndSaveNostrPrivateKey,
+    setPrivateKey: setNostrPrivateKey,
+    removePrivateKey: removeNostrPrivateKey,
+  },
+  getMnemonic,
+  setMnemonic,
+  generateMnemonic,
 };

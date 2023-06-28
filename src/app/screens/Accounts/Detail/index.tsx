@@ -78,9 +78,7 @@ function AccountDetail() {
         setHasImportedNostrKey(response.hasImportedNostrKey);
 
         if (response.nostrEnabled) {
-          const nostrPublicKeyHex = (await msg.request("nostr/getPublicKey", {
-            id,
-          })) as string;
+          const nostrPublicKeyHex = await api.nostr.getPublicKey(id);
           if (nostrPublicKeyHex) {
             const nostrPublicKeyNpub = nostr.hexToNip19(
               nostrPublicKeyHex,
@@ -158,10 +156,8 @@ function AccountDetail() {
       window.prompt(t("remove_secretkey.confirm", { name }))?.toLowerCase() ==
       accountName.toLowerCase()
     ) {
-      await msg.request("setMnemonic", {
-        id,
-        mnemonic: null,
-      });
+      // TODO: consider adding removeMnemonic function
+      await api.setMnemonic(id, null);
       setHasMnemonic(false);
       setHasImportedNostrKey(true);
       toast.success(t("remove_secretkey.success"));

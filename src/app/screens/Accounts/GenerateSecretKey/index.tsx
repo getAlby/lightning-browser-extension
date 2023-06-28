@@ -11,7 +11,6 @@ import Checkbox from "~/app/components/form/Checkbox";
 import MnemonicInputs from "~/app/components/mnemonic/MnemonicInputs";
 import SecretKeyDescription from "~/app/components/mnemonic/SecretKeyDescription";
 import api from "~/common/lib/api";
-import msg from "~/common/lib/msg";
 
 function GenerateSecretKey() {
   const navigate = useNavigate();
@@ -23,7 +22,7 @@ function GenerateSecretKey() {
   useState(false);
   const [hasNostrPrivateKey, setHasNostrPrivateKey] = useState(false);
 
-  const { id } = useParams();
+  const { id } = useParams() as { id: string };
 
   useEffect(() => {
     (async () => {
@@ -35,7 +34,7 @@ function GenerateSecretKey() {
           // go to account settings
           navigate(`/accounts/${id}`);
         }
-        const newMnemonic = (await msg.request("generateMnemonic")) as string;
+        const newMnemonic = await api.generateMnemonic();
         setMnemonic(newMnemonic);
       } catch (e) {
         console.error(e);
@@ -53,10 +52,7 @@ function GenerateSecretKey() {
         throw new Error("No mnemonic available");
       }
 
-      await msg.request("setMnemonic", {
-        id,
-        mnemonic,
-      });
+      await api.setMnemonic(id, mnemonic);
 
       toast.success(t("saved"));
       // go to account settings

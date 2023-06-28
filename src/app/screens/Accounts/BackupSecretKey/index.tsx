@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import { ContentBox } from "~/app/components/ContentBox";
 import MnemonicInputs from "~/app/components/mnemonic/MnemonicInputs";
 import SecretKeyDescription from "~/app/components/mnemonic/SecretKeyDescription";
-import msg from "~/common/lib/msg";
+import api from "~/common/lib/api";
 
 function BackupSecretKey() {
   const [mnemonic, setMnemonic] = useState<string | undefined>();
@@ -19,10 +19,7 @@ function BackupSecretKey() {
 
   const fetchData = useCallback(async () => {
     try {
-      const accountMnemonic = (await msg.request("getMnemonic", {
-        id,
-      })) as string;
-
+      const accountMnemonic = await api.getMnemonic(id as string);
       setMnemonic(accountMnemonic);
     } catch (e) {
       console.error(e);

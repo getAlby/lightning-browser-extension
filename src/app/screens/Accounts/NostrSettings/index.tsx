@@ -13,7 +13,7 @@ import Button from "~/app/components/Button";
 import InputCopyButton from "~/app/components/InputCopyButton";
 import TextField from "~/app/components/form/TextField";
 import { useAccount } from "~/app/context/AccountContext";
-import { GetAccountRes } from "~/common/lib/api";
+import api, { GetAccountRes } from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import { default as nostr, default as nostrlib } from "~/common/lib/nostr";
 
@@ -30,13 +30,11 @@ function NostrSettings() {
   const [nostrPrivateKeyVisible, setNostrPrivateKeyVisible] = useState(false);
   const [nostrPublicKey, setNostrPublicKey] = useState("");
   const [hasImportedNostrKey, setHasImportedNostrKey] = useState(false);
-  const { id } = useParams();
+  const { id } = useParams() as { id: string };
 
   const fetchData = useCallback(async () => {
     if (id) {
-      const priv = (await msg.request("nostr/getPrivateKey", {
-        id,
-      })) as string;
+      const priv = await api.nostr.getPrivateKey(id);
       if (priv) {
         setCurrentPrivateKey(priv);
       }
@@ -80,10 +78,6 @@ function NostrSettings() {
   }
 
   async function handleDeriveNostrKeyFromSecretKey() {
-    if (!id) {
-      throw new Error("No id set");
-    }
-
     if (!hasMnemonic) {
       throw new Error("No mnemonic exists");
     }
@@ -93,9 +87,6 @@ function NostrSettings() {
 
   // TODO: simplify this method (do not handle deriving, saving and removing in one)
   async function handleSaveNostrPrivateKey(deriveFromMnemonic: boolean) {
-    if (!id) {
-      throw new Error("No id set");
-    }
     if (!deriveFromMnemonic && nostrPrivateKey === currentPrivateKey) {
       throw new Error("private key hasn't changed");
     }
@@ -111,18 +102,11 @@ function NostrSettings() {
 
     try {
       if (deriveFromMnemonic) {
-        await msg.request("nostr/generatePrivateKey", {
-          id,
-        });
+        await api.nostr.generatePrivateKey(id);
       } else if (nostrPrivateKey) {
-        await msg.request("nostr/setPrivateKey", {
-          id,
-          privateKey: nostrPrivateKey,
-        });
+        await api.nostr.setPrivateKey(id, nostrPrivateKey);
       } else {
-        await msg.request("nostr/removePrivateKey", {
-          id,
-        });
+        await api.nostr.removePrivateKey(id);
       }
 
       toast.success(
