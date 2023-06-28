@@ -377,27 +377,31 @@ function AccountDetail() {
                 </Link>
               </div>
             </div>
-            <MenuDivider />
-            <div className="flex justify-between items-end">
-              <div className="w-7/12">
-                <p className="text-gray-900 dark:text-white font-medium">
-                  {t("mnemonic.import.title")}
-                </p>
-                <p className="text-gray-500 text-sm dark:text-neutral-500">
-                  {t("mnemonic.import.description")}
-                </p>
-              </div>
+            {!hasMnemonic && (
+              <>
+                <MenuDivider />
+                <div className="flex justify-between items-end">
+                  <div className="w-7/12">
+                    <p className="text-gray-900 dark:text-white font-medium">
+                      {t("mnemonic.import.title")}
+                    </p>
+                    <p className="text-gray-500 text-sm dark:text-neutral-500">
+                      {t("mnemonic.import.description")}
+                    </p>
+                  </div>
 
-              <div className="w-1/5 flex-none">
-                <Link to="secret-key/import">
-                  <Button
-                    label={t("mnemonic.import.button")}
-                    primary
-                    fullWidth
-                  />
-                </Link>
-              </div>
-            </div>
+                  <div className="w-1/5 flex-none">
+                    <Link to="secret-key/import">
+                      <Button
+                        label={t("mnemonic.import.button")}
+                        primary
+                        fullWidth
+                      />
+                    </Link>
+                  </div>
+                </div>
+              </>
+            )}
             <MenuDivider />
             <div className="flex justify-between items-end">
               <div className="w-7/12 flex items-center gap-2">
