@@ -31,7 +31,8 @@ const setMnemonic = async (message: MessageMnemonicSet) => {
 
     state.setState({
       accounts,
-      mnemonic: null, // reset memoized mnemonic
+      mnemonic: null, // reset memoized mnemonic instance
+      bitcoin: null, // reset memoized bitcoin instance
     });
     await state.getState().saveToStorage();
     return {

@@ -11,6 +11,10 @@ const edit = async (message: MessageAccountEdit) => {
     }
     if (message.args.bitcoinNetwork) {
       accounts[accountId].bitcoinNetwork = message.args.bitcoinNetwork;
+
+      state.setState({
+        bitcoin: null, // reset memoized bitcoin state
+      });
     }
 
     state.setState({ accounts });

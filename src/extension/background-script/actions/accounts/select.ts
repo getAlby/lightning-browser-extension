@@ -17,6 +17,7 @@ const select = async (message: MessageAccountSelect) => {
       account,
       nostr: null, // reset memoized nostr instance
       mnemonic: null, // reset memoized mnemonic instance
+      bitcoin: null, // reset memoized bitcoin instance
       connector: null, // reset memoized connector
       currentAccountId: accountId,
     });

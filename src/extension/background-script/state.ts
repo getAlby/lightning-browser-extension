@@ -130,8 +130,9 @@ const state = createState<State>((set, get) => ({
     return connector;
   },
   getNostr: async () => {
-    if (get().nostr) {
-      return get().nostr as Nostr;
+    const currentNostr = get().nostr;
+    if (currentNostr) {
+      return currentNostr;
     }
     const currentAccountId = get().currentAccountId as string;
     const account = get().accounts[currentAccountId];
@@ -146,8 +147,9 @@ const state = createState<State>((set, get) => ({
     return nostr;
   },
   getMnemonic: async () => {
-    if (get().mnemonic) {
-      return get().mnemonic as Mnemonic;
+    const currentMnemonic = get().mnemonic;
+    if (currentMnemonic) {
+      return currentMnemonic;
     }
     const currentAccountId = get().currentAccountId as string;
     const account = get().accounts[currentAccountId];
@@ -163,11 +165,10 @@ const state = createState<State>((set, get) => ({
   },
   getBitcoin: async () => {
     const currentBitcoin = get().bitcoin;
-    const mnemonic = await get().getMnemonic();
-    // make sure the mnemonic hasn't changed
-    if (currentBitcoin && currentBitcoin.mnemonic === mnemonic) {
+    if (currentBitcoin) {
       return currentBitcoin;
     }
+    const mnemonic = await get().getMnemonic();
     const currentAccountId = get().currentAccountId as string;
     const account = get().accounts[currentAccountId];
 
