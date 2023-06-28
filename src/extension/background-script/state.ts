@@ -72,7 +72,7 @@ const state = createState<State>((set, get) => ({
   currentAccountId: null,
   // TODO: move nostr object to account state and handle encryption/decryption there
   nostr: null,
-  // TODO: can this be removed?
+  // TODO: this should be deleted from storage and then can be removed
   nostrPrivateKey: null,
   // TODO: move mnemonic object to account state and handle encryption/decryption there
   mnemonic: null,
