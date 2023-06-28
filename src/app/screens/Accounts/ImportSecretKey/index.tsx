@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import Alert from "~/app/components/Alert";
 import Button from "~/app/components/Button";
 import { ContentBox } from "~/app/components/ContentBox";
-import MnemonicInputs from "~/app/components/MnemonicInputs";
+import MnemonicInputs from "~/app/components/mnemonic/MnemonicInputs";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 

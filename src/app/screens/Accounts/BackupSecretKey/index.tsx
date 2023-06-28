@@ -5,8 +5,8 @@ import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { ContentBox } from "~/app/components/ContentBox";
-import MnemonicInputs from "~/app/components/MnemonicInputs";
-import SecretKeyDescription from "~/app/components/SecretKeyDescription";
+import MnemonicInputs from "~/app/components/mnemonic/MnemonicInputs";
+import SecretKeyDescription from "~/app/components/mnemonic/SecretKeyDescription";
 import msg from "~/common/lib/msg";
 
 function BackupSecretKey() {

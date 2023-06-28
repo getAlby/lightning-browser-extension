@@ -7,9 +7,9 @@ import { toast } from "react-toastify";
 import Alert from "~/app/components/Alert";
 import Button from "~/app/components/Button";
 import { ContentBox } from "~/app/components/ContentBox";
-import MnemonicInputs from "~/app/components/MnemonicInputs";
-import SecretKeyDescription from "~/app/components/SecretKeyDescription";
 import Checkbox from "~/app/components/form/Checkbox";
+import MnemonicInputs from "~/app/components/mnemonic/MnemonicInputs";
+import SecretKeyDescription from "~/app/components/mnemonic/SecretKeyDescription";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 
