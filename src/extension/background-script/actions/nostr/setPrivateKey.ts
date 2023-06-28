@@ -15,10 +15,17 @@ const setPrivateKey = async (message: MessageNostrPrivateKeySet) => {
     };
   }
   // make sure private key is saved in hex format
-  const privateKey = nostr.normalizeToHex(message.args.privateKey);
-  // Validate the private key before saving
-  nostr.generatePublicKey(privateKey);
-  nostr.hexToNip19(privateKey, "nsec");
+  let privateKey;
+  try {
+    privateKey = nostr.normalizeToHex(message.args.privateKey);
+    // Validate the private key before saving
+    nostr.generatePublicKey(privateKey);
+    nostr.hexToNip19(privateKey, "nsec");
+  } catch (error) {
+    return {
+      error: "Invalid private key",
+    };
+  }
 
   const accounts = state.getState().accounts;
 
