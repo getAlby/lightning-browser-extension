@@ -55,7 +55,7 @@ function NostrSettings() {
   useEffect(() => {
     try {
       setNostrPublicKey(
-        currentPrivateKey ? nostr.generatePublicKey(currentPrivateKey) : ""
+        currentPrivateKey ? nostr.derivePublicKey(currentPrivateKey) : ""
       );
       setNostrPrivateKey(
         currentPrivateKey ? nostrlib.hexToNip19(currentPrivateKey, "nsec") : ""

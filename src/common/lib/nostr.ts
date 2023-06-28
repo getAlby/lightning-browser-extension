@@ -20,7 +20,7 @@ const nostr = {
   hexToNip19(hex: string, prefix = "nsec") {
     return bech32Encode(prefix, hex);
   },
-  generatePublicKey(privateKey: string) {
+  derivePublicKey(privateKey: string) {
     const publicKey = secp256k1.schnorr.getPublicKey(
       secp256k1.utils.hexToBytes(privateKey)
     );

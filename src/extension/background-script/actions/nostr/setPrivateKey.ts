@@ -19,7 +19,7 @@ const setPrivateKey = async (message: MessageNostrPrivateKeySet) => {
   try {
     privateKey = nostr.normalizeToHex(message.args.privateKey);
     // Validate the private key before saving
-    nostr.generatePublicKey(privateKey);
+    nostr.derivePublicKey(privateKey);
     nostr.hexToNip19(privateKey, "nsec");
   } catch (error) {
     return {
