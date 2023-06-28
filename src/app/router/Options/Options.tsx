@@ -28,7 +28,7 @@ import { getConnectorRoutes, renderRoutes } from "~/app/router/connectorRoutes";
 import BackupSecretKey from "~/app/screens/Accounts/BackupSecretKey";
 import GenerateSecretKey from "~/app/screens/Accounts/GenerateSecretKey";
 import ImportSecretKey from "~/app/screens/Accounts/ImportSecretKey";
-import NostrAdvancedSettings from "~/app/screens/Accounts/NostrAdvancedSettings";
+import NostrSettings from "~/app/screens/Accounts/NostrSettings";
 import Discover from "~/app/screens/Discover";
 import AlbyWalletCreate from "~/app/screens/connectors/AlbyWallet/create";
 import AlbyWalletLogin from "~/app/screens/connectors/AlbyWallet/login";
@@ -102,7 +102,7 @@ function Options() {
                 path=":id/secret-key/import"
                 element={<ImportSecretKey />}
               />
-              <Route path=":id/nostr" element={<NostrAdvancedSettings />} />
+              <Route path=":id/nostr" element={<NostrSettings />} />
               <Route
                 path="new"
                 element={

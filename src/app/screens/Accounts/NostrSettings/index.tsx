@@ -17,7 +17,7 @@ import { GetAccountRes } from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import { default as nostr, default as nostrlib } from "~/common/lib/nostr";
 
-function NostrAdvancedSettings() {
+function NostrSettings() {
   const account = useAccount();
   const { t: tCommon } = useTranslation("common");
   const { t } = useTranslation("translation", {
@@ -156,22 +156,20 @@ function NostrAdvancedSettings() {
           <div className="mt-12 shadow bg-white sm:rounded-md sm:overflow-hidden p-10 divide-black/10 dark:divide-white/10 dark:bg-surface-02dp flex flex-col gap-4">
             <div>
               <h1 className="font-bold text-2xl dark:text-white">
-                {t("nostr.advanced_settings.title")}
+                {t("nostr.settings.title")}
               </h1>
               <p className="text-gray-500 dark:text-neutral-500">
-                {t("nostr.advanced_settings.description")}
+                {t("nostr.settings.description")}
               </p>
             </div>
 
             {hasMnemonic && currentPrivateKey ? (
               hasImportedNostrKey ? (
                 <Alert type="warn">
-                  {t("nostr.advanced_settings.imported_key_warning")}
+                  {t("nostr.settings.imported_key_warning")}
                 </Alert>
               ) : (
-                <Alert type="info">
-                  {t("nostr.advanced_settings.can_restore")}
-                </Alert>
+                <Alert type="info">{t("nostr.settings.can_restore")}</Alert>
               )
             ) : null}
 
@@ -220,13 +218,13 @@ function NostrAdvancedSettings() {
                   {hasMnemonic ? (
                     <Button
                       outline
-                      label={t("nostr.advanced_settings.derive")}
+                      label={t("nostr.settings.derive")}
                       onClick={handleDeriveNostrKeyFromSecretKey}
                     />
                   ) : (
                     <Alert type="warn">
                       <Trans
-                        i18nKey={"nostr.advanced_settings.no_secret_key"}
+                        i18nKey={"nostr.settings.no_secret_key"}
                         t={t}
                         components={[
                           // eslint-disable-next-line react/jsx-key
@@ -260,4 +258,4 @@ function NostrAdvancedSettings() {
   );
 }
 
-export default NostrAdvancedSettings;
+export default NostrSettings;

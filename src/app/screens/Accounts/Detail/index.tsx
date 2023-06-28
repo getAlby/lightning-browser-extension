@@ -426,11 +426,7 @@ function AccountDetail() {
 
               <div className="w-1/5 flex-none">
                 <Link to="nostr">
-                  <Button
-                    label={t("nostr.advanced_settings.label")}
-                    primary
-                    fullWidth
-                  />
+                  <Button label={t("nostr.settings.label")} primary fullWidth />
                 </Link>
               </div>
             </div>
