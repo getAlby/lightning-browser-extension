@@ -156,10 +156,6 @@ export type NavigationState = {
       method: string;
       description: string;
     };
-    derivationPath?: string;
-    index?: number;
-    num?: number;
-    change?: boolean;
   };
   isPrompt?: true; // only passed via Prompt.tsx
   action: string;
