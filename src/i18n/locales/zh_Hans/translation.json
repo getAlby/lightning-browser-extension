@@ -821,7 +821,8 @@
       "receive_again": "接收另一笔付款",
       "remember": "记住我的选择，不要再问",
       "transactions": "交易",
-      "more": "更多"
+      "more": "更多",
+      "download": "下载"
     },
     "errors": {
       "connection_failed": "连接失败",
