@@ -110,7 +110,6 @@
         "macaroon": {
           "label": "Macaroon (HEX format)"
         },
-        "or": "OR",
         "drag_and_drop": "Drag and drop your macaroon here or <0>browse</0>",
         "errors": {
           "connection_failed": "Connection failed. Are your LND credentials correct?"
@@ -652,7 +651,14 @@
       "payment": {
         "waiting": "waiting for payment...",
         "status": "Check payment status"
-      }
+      },
+      "receive_via_bitcoin_address": "Receive via bitcoin address"
+    },
+    "on_chain": {
+      "title": "Receive via bitcoin address",
+      "instructions1": "To receive bitcoin via a bitcoin address, login to your <0>Alby Account</0> on getalby.com",
+      "instructions2": "You can find your bitcoin address on the <0>Receive</0> page.",
+      "go": "Go to your Alby account →"
     },
     "discover": {
       "title": "Explore the Lightning ⚡️ Ecosystem",
@@ -744,7 +750,8 @@
     },
     "confirm_add_account": {
       "title": "Add account",
-      "content": "This website wants to add an account ({{connector}}):"
+      "content": "This website wants to add an account ({{connector}}):",
+      "tor_info": "In order to connect through the TOR network you need to first install the Alby companion app:"
     },
     "nostr": {
       "title": "Nostr",
@@ -818,6 +825,7 @@
     "message": "Message",
     "help": "Help",
     "balance": "Balance",
+    "or": "or",
     "actions": {
       "back": "Back",
       "delete": "Delete",
@@ -842,7 +850,8 @@
       "copy_invoice": "Copy Invoice",
       "log_in": "Log in",
       "remember": "Remember my choice and don't ask again",
-      "more": "More"
+      "more": "More",
+      "download": "Download"
     },
     "connectors": {
       "lnd": "LND",

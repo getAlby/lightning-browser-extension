@@ -4,7 +4,6 @@ import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import ContentMessage from "@components/ContentMessage";
 import Header from "@components/Header";
 import IconButton from "@components/IconButton";
-import PublisherCard from "@components/PublisherCard";
 import ResultCard from "@components/ResultCard";
 import SatButtons from "@components/SatButtons";
 import DualCurrencyField from "@components/form/DualCurrencyField";
@@ -114,34 +113,33 @@ function Keysend() {
           <form onSubmit={handleSubmit} className="h-full">
             <Container justifyBetween maxWidth="sm">
               <div>
-                {destination && <PublisherCard title={destination} />}
                 <ContentMessage
                   heading={t("receiver.label")}
                   content={destination}
                 />
-                <div className="p-4 shadow bg-white dark:bg-surface-02dp rounded-lg overflow-hidden">
-                  <DualCurrencyField
-                    id="amount"
-                    label={t("amount.label")}
-                    min={amountMin}
-                    onChange={(e) => setAmountSat(e.target.value)}
-                    value={amountSat}
-                    fiatValue={fiatAmount}
-                    hint={`${tCommon("balance")}: ${
-                      auth?.balancesDecorated?.accountBalance
-                    }`}
-                    amountExceeded={amountExceeded}
-                    rangeExceeded={rangeExceeded}
-                  />
-                  <SatButtons onClick={setAmountSat} />
-                </div>
+                <DualCurrencyField
+                  id="amount"
+                  label={t("amount.label")}
+                  min={1}
+                  onChange={(e) => setAmountSat(e.target.value)}
+                  value={amountSat}
+                  fiatValue={fiatAmount}
+                  hint={`${tCommon("balance")}: ${
+                    auth?.balancesDecorated?.accountBalance
+                  }`}
+                  amountExceeded={amountExceeded}
+                  rangeExceeded={rangeExceeded}
+                />
+                <SatButtons onClick={setAmountSat} />
               </div>
-              <ConfirmOrCancel
-                label={tCommon("actions.confirm")}
-                onCancel={reject}
-                loading={loading}
-                disabled={loading || rangeExceeded || amountExceeded}
-              />
+              <div className="mt-8">
+                <ConfirmOrCancel
+                  label={tCommon("actions.confirm")}
+                  onCancel={reject}
+                  loading={loading}
+                  disabled={loading || rangeExceeded || amountExceeded}
+                />
+              </div>
             </Container>
           </form>
         </>

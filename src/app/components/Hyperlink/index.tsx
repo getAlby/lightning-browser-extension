@@ -6,6 +6,7 @@ type Props = {
   onClick?: () => void;
   children: ReactNode;
   className?: string;
+  target?: "_blank" | undefined;
 };
 
 export default function Hyperlink({
@@ -13,6 +14,7 @@ export default function Hyperlink({
   children,
   href,
   className,
+  target,
 }: Props) {
   return (
     <a
@@ -22,6 +24,7 @@ export default function Hyperlink({
       )}
       href={href}
       onClick={onClick}
+      target={target}
     >
       {children}
     </a>

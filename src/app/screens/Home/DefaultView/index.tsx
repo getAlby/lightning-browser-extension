@@ -5,8 +5,8 @@ import {
 import Button from "@components/Button";
 import Hyperlink from "@components/Hyperlink";
 import Loading from "@components/Loading";
+import Tab from "@components/Tab";
 import TransactionsTable from "@components/TransactionsTable";
-import { Tab } from "@headlessui/react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { FC, useEffect, useState } from "react";
@@ -18,7 +18,6 @@ import { useAccount } from "~/app/context/AccountContext";
 import { useInvoices } from "~/app/hooks/useInvoices";
 import { useTransactions } from "~/app/hooks/useTransactions";
 import { PublisherLnData } from "~/app/screens/Home/PublisherLnData";
-import { classNames } from "~/app/utils/index";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
@@ -169,26 +168,12 @@ const DefaultView: FC<Props> = (props) => {
             </h2>
 
             <Tab.Group>
-              <Tab.List className="mb-2">
+              <Tab.List>
                 {[
                   tComponents("transaction_list.tabs.outgoing"),
                   tComponents("transaction_list.tabs.incoming"),
                 ].map((category) => (
-                  <Tab
-                    key={category}
-                    className={({ selected }) =>
-                      classNames(
-                        "w-1/2 rounded-lg py-2.5 font-bold transition duration-150",
-                        "focus:outline-none",
-                        "hover:text-gray-600 dark:hover:text-gray-300",
-                        selected
-                          ? "text-black dark:text-white"
-                          : "text-gray-400"
-                      )
-                    }
-                  >
-                    {category}
-                  </Tab>
+                  <Tab key={category} label={category} />
                 ))}
               </Tab.List>
 
