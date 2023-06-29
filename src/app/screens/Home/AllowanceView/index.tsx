@@ -1,10 +1,10 @@
 import { CaretLeftIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
-import AllowanceMenu from "@components/AllowanceMenu";
 import Header from "@components/Header";
 import IconButton from "@components/IconButton";
 import Loading from "@components/Loading";
 import Progressbar from "@components/Progressbar";
 import PublisherCard from "@components/PublisherCard";
+import SitePreferences from "@components/SitePreferences";
 import TransactionsTable from "@components/TransactionsTable";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -91,13 +91,21 @@ const AllowanceView: FC<Props> = (props) => {
       {props.lnDataFromCurrentTab?.length ? (
         <PublisherLnData lnData={props.lnDataFromCurrentTab[0]} />
       ) : (
-        <div className="mx-4">
+        <div className="relative mx-4">
           <PublisherCard
             title={props.allowance.name}
             image={props.allowance.imageURL}
             isCard={true}
             isSmall={false}
           />
+          <div className="absolute top-1.5 right-1.5">
+            <SitePreferences
+              launcherType="icon"
+              allowance={props.allowance}
+              onEdit={props.onEditComplete}
+              onDelete={props.onDeleteComplete}
+            />
+          </div>
         </div>
       )}
       <div className="px-4 pb-5">
@@ -119,17 +127,10 @@ const AllowanceView: FC<Props> = (props) => {
                 </div>
               </dd>
             </dl>
-
-            <div className="flex items-center">
-              <AllowanceMenu
-                allowance={props.allowance}
-                onEdit={props.onEditComplete}
-                onDelete={props.onDeleteComplete}
-              />
-            </div>
           </div>
         ) : (
-          <AllowanceMenu
+          <SitePreferences
+            launcherType="hyperlink"
             allowance={props.allowance}
             onEdit={props.onEditComplete}
             onDelete={props.onDeleteComplete}

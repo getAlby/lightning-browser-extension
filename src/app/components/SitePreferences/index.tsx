@@ -1,4 +1,3 @@
-import { GearIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import Hyperlink from "@components/Hyperlink";
 import Setting from "@components/Setting";
@@ -10,20 +9,23 @@ import Modal from "react-modal";
 import { toast } from "react-toastify";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
+import { PreferencesIcon } from "~/app/icons";
 import msg from "~/common/lib/msg";
 import type { Allowance, Permission } from "~/types";
 
 import Button from "../Button";
-import Menu from "../Menu";
 import DualCurrencyField from "../form/DualCurrencyField/index";
 
+type LauncherType = "hyperlink" | "button" | "icon";
+
 export type Props = {
+  launcherType: LauncherType;
   allowance: Pick<Allowance, "id" | "totalBudget" | "lnurlAuth">;
   onEdit?: () => void;
   onDelete?: () => void;
 };
 
-function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
+function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
   const {
     isLoading: isLoadingSettings,
     settings,
@@ -143,46 +145,32 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
     }
   }
 
-  const hasBudget = +allowance.totalBudget > 0;
-  return (
-    <>
-      {hasBudget ? (
-        <Menu as="div" className="relative">
-          <Menu.Button className="flex items-center text-gray-500 hover:text-black transition-color duration-200 dark:hover:text-white">
-            <GearIcon className="h-6 w-6" />
-          </Menu.Button>
-          <Menu.List position="right">
-            <Menu.ItemButton onClick={openModal}>
-              {tCommon("actions.edit")}
-            </Menu.ItemButton>
-            <Menu.ItemButton
-              danger
-              onClick={async () => {
-                if (window.confirm(t("confirm_delete"))) {
-                  try {
-                    await msg.request("deleteAllowance", {
-                      id: allowance.id,
-                    });
-                    onDelete && onDelete();
-                  } catch (e) {
-                    console.error(e);
-                    if (e instanceof Error) toast.error(`Error: ${e.message}`);
-                  }
-                }
-              }}
-            >
-              {tCommon("actions.delete")}
-            </Menu.ItemButton>
-          </Menu.List>
-        </Menu>
-      ) : (
+  const getLauncher = (launcherType: LauncherType) => {
+    if (launcherType === "button") {
+      return <PreferencesIcon className="h-6 w-6" onClick={openModal} />;
+    }
+    if (launcherType === "icon") {
+      return (
+        <PreferencesIcon
+          className="h-6 w-6 fill-gray-500 hover:fill-black"
+          onClick={openModal}
+        />
+      );
+    }
+    if (launcherType === "hyperlink") {
+      return (
         <div className="my-6 text-center">
           <Hyperlink onClick={openModal}>
             {t("new_budget.link_label")}
           </Hyperlink>
         </div>
-      )}
+      );
+    }
+  };
 
+  return (
+    <>
+      {getLauncher(launcherType)}
       <Modal
         ariaHideApp={false}
         closeTimeoutMS={200}
@@ -299,4 +287,4 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
   );
 }
 
-export default AllowanceMenu;
+export default SitePreferences;

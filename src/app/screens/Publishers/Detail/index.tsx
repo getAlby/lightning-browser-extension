@@ -1,7 +1,7 @@
-import AllowanceMenu from "@components/AllowanceMenu";
 import Container from "@components/Container";
 import Progressbar from "@components/Progressbar";
 import PublisherCard from "@components/PublisherCard";
+import SitePreferences from "@components/SitePreferences";
 import TransactionsTable from "@components/TransactionsTable";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -96,7 +96,8 @@ function PublisherDetail() {
               </dd>
             </dl>
 
-            <AllowanceMenu
+            <SitePreferences
+              launcherType="icon"
               allowance={allowance}
               onEdit={fetchData}
               onDelete={() => {

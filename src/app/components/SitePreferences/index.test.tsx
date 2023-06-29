@@ -4,7 +4,7 @@ import { MemoryRouter } from "react-router-dom";
 import { settingsFixture as mockSettings } from "~/../tests/fixtures/settings";
 
 import type { Props } from "./index";
-import AllowanceMenu from "./index";
+import SitePreferences from "./index";
 
 const mockGetFiatValue = jest.fn(() => Promise.resolve("$1,22"));
 
@@ -24,6 +24,7 @@ jest.mock("~/common/lib/msg");
 const mockOnEdit = jest.fn();
 
 const defaultProps: Props = {
+  launcherType: "icon",
   allowance: {
     id: 1,
     totalBudget: 2000,
@@ -32,7 +33,7 @@ const defaultProps: Props = {
   onEdit: mockOnEdit,
 };
 
-describe("AllowanceMenu", () => {
+describe("SitePreferences", () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
@@ -41,7 +42,7 @@ describe("AllowanceMenu", () => {
     await act(async () => {
       render(
         <MemoryRouter>
-          <AllowanceMenu {...defaultProps} {...props} />
+          <SitePreferences {...defaultProps} {...props} />
         </MemoryRouter>
       );
     });
