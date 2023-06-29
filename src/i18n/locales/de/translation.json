@@ -788,7 +788,8 @@
     },
     "confirm_add_account": {
       "title": "Konto hinzufügen",
-      "content": "Diese Website möchte ein Konto hinzufügen ({{connector}}):"
+      "content": "Diese Website möchte ein Konto hinzufügen ({{connector}}):",
+      "tor_info": "Um sich über das TOR-Netzwerk zu verbinden, musst du zunächst die Alby-Begleit-App installieren:"
     },
     "on_chain": {
       "title": "Empfangen über Bitcoin Adresse",
@@ -946,7 +947,8 @@
       "remember": "Denke an meine Wahl und frage nicht noch einmal",
       "receive_again": "Eine weitere Zahlung erhalten",
       "transactions": "Transaktionen",
-      "more": "Mehr"
+      "more": "Mehr",
+      "download": "Download"
     },
     "discover": "Entdecken",
     "errors": {
