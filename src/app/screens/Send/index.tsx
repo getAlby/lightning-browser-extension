@@ -14,6 +14,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { extractLightningTagData } from "~/app/utils";
 import lnurlLib from "~/common/lib/lnurl";
 import { isLNURLDetailsError } from "~/common/utils/typeHelpers";
 
@@ -113,23 +114,11 @@ function Send() {
     }
   }
 
-  function extractInvoiceFrom(data: string) {
-    const reqExp = /lightning=([^&|\b]+)/i;
-
-    const invoice = data.match(reqExp);
-
-    if (invoice) {
-      return invoice[1];
-    } else {
-      return data.replace(/^lightning:/i, "");
-    }
-  }
-
   if (qrIsOpen) {
     return (
       <div>
         <Header
-          title={t("qrcode.title")}
+          title={tCommon("qrcode.title")}
           headerRight={
             <IconButton
               onClick={() => setQrIsOpen(false)}
@@ -142,7 +131,7 @@ function Send() {
             qrbox={200}
             qrCodeSuccessCallback={(decodedText) => {
               if (invoice !== decodedText) {
-                setInvoice(extractInvoiceFrom(decodedText));
+                setInvoice(extractLightningTagData(decodedText));
                 setQrIsOpen(false);
               }
             }}
@@ -175,7 +164,7 @@ function Send() {
               disabled={loading}
               autoFocus
               onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                setInvoice(extractInvoiceFrom(event.target.value.trim()))
+                setInvoice(extractLightningTagData(event.target.value.trim()))
               }
               endAdornment={
                 <button

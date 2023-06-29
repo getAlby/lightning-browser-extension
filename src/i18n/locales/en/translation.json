@@ -644,9 +644,6 @@
     },
     "send": {
       "title": "Send",
-      "qrcode": {
-        "title": "Waiting to scan"
-      },
       "input": {
         "label": "Recipient",
         "hint": "Invoice, Lightning Address or LNURL"
@@ -704,8 +701,9 @@
       "actions": {
         "withdraw": "Withdraw"
       },
-      "qrcode": {
-        "title": "Waiting to scan"
+      "errors": {
+        "invalid_withdraw_request": "Invalid LNURL withdraw request",
+        "invalid_lnurl": "Invalid LNURL"
       }
     },
     "receive": {
@@ -959,6 +957,9 @@
       "between": "between {{min}} and {{max}}",
       "lessThanOrEqual": "≤ {{max}}",
       "greaterOrEqual": "≥ {{min}}"
+    },
+    "qrcode": {
+      "title": "Waiting to scan"
     }
   },
   "components": {

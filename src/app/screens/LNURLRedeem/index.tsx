@@ -13,13 +13,15 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { extractLightningTagData } from "~/app/utils";
 import lnurlLib from "~/common/lib/lnurl";
 import { isLNURLDetailsError } from "~/common/utils/typeHelpers";
 
 function LNURLRedeem() {
   const { t } = useTranslation("translation", { keyPrefix: "lnurlredeem" });
+  const { t: tCommon } = useTranslation("common");
 
-  const [invoice, setInvoice] = useState("");
+  const [lnurlwithdraw, setlnurlwithdraw] = useState("");
   const navigate = useNavigate();
   const [qrIsOpen, setQrIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -28,8 +30,7 @@ function LNURLRedeem() {
     event.preventDefault();
     try {
       setLoading(true);
-
-      const lnurl = lnurlLib.findLnurl(invoice);
+      const lnurl = lnurlLib.findLnurl(lnurlwithdraw);
 
       if (lnurl) {
         const lnurlDetails = await lnurlLib.getDetails(lnurl);
@@ -48,11 +49,11 @@ function LNURLRedeem() {
             },
           });
         } else {
-          toast.error("Not a lnurl-withdraw request");
+          toast.error(t("errors.invalid_withdraw_request"));
           return;
         }
       } else {
-        toast.error("Not a valid LNURL");
+        toast.error(t("errors.invalid_lnurl"));
         return;
       }
     } catch (e) {
@@ -64,23 +65,11 @@ function LNURLRedeem() {
     }
   }
 
-  function extractInvoiceFrom(data: string) {
-    const reqExp = /lightning=([^&|\b]+)/i;
-
-    const invoice = data.match(reqExp);
-
-    if (invoice) {
-      return invoice[1];
-    } else {
-      return data.replace(/^lightning:/i, "");
-    }
-  }
-
   if (qrIsOpen) {
     return (
       <div>
         <Header
-          title={t("qrcode.title")}
+          title={tCommon("qrcode.title")}
           headerRight={
             <IconButton
               onClick={() => setQrIsOpen(false)}
@@ -92,8 +81,8 @@ function LNURLRedeem() {
           <QrcodeScanner
             qrbox={200}
             qrCodeSuccessCallback={(decodedText) => {
-              if (invoice !== decodedText) {
-                setInvoice(extractInvoiceFrom(decodedText));
+              if (lnurlwithdraw !== decodedText) {
+                setlnurlwithdraw(extractLightningTagData(decodedText));
                 setQrIsOpen(false);
               }
             }}
@@ -121,12 +110,12 @@ function LNURLRedeem() {
             <TextField
               id="invoice"
               label={t("input.label")}
-              value={invoice}
+              value={lnurlwithdraw}
               placeholder={t("input.placeholder")}
               disabled={loading}
               autoFocus
               onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                setInvoice(extractInvoiceFrom(event.target.value.trim()))
+                setlnurlwithdraw(event.target.value.trim())
               }
               endAdornment={
                 <button
@@ -147,7 +136,7 @@ function LNURLRedeem() {
               primary
               fullWidth
               loading={loading}
-              disabled={invoice === "" || loading}
+              disabled={lnurlwithdraw === "" || loading}
             />
           </div>
         </Container>

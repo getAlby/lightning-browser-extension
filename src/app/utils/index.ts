@@ -78,3 +78,15 @@ export async function getAlbyWalletOptions() {
     console.error(e);
   }
 }
+
+export function extractLightningTagData(url: string) {
+  const reqExp = /lightning=([^&|\b]+)/i;
+
+  const data = url.match(reqExp);
+
+  if (data) {
+    return data[1];
+  } else {
+    return url.replace(/^lightning:/i, "");
+  }
+}
