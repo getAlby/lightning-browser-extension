@@ -186,20 +186,6 @@
           "placeholder": "http://localhost:8080"
         }
       },
-      "citadel": {
-        "title": "Citadel",
-        "page": {
-          "title": "連接 <0>Citadel</0> 節點",
-          "instructions": "如果啟用了 2FA，這目前不可用。"
-        },
-        "password": {
-          "label": "Citadel 密碼"
-        },
-        "url": {
-          "label": "Citadel URL",
-          "placeholder": "http://citadel.local"
-        }
-      },
       "umbrel": {
         "title": "Umbrel",
         "page": {
@@ -769,9 +755,6 @@
     "distributions": {
       "title": "連接 {{name}}",
       "description": "選擇你想連接的{{name}}應用程序",
-      "citadel": {
-        "name": "Citadel"
-      },
       "btcpay": {
         "name": "BTCPay"
       },
@@ -861,8 +844,6 @@
       "nativelnbits": "LNBits（通過 Tor）",
       "galoy": "Galoy",
       "eclair": "Eclair",
-      "citadel": "Citadel",
-      "nativecitadel": "Citadel（通過 Tor）",
       "commando": "Commando",
       "nativelndhub": "LNDHub（通過 Tor）"
     }

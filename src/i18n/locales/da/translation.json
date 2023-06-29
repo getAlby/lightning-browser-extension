@@ -180,20 +180,6 @@
           "placeholder": "http://localhost:8080"
         }
       },
-      "citadel": {
-        "title": "Citadel",
-        "page": {
-          "title": "Opret forbindelse til <0>Citadel</0> node",
-          "instructions": "Dette virker i øjeblikket ikke, hvis 2FA er slået til."
-        },
-        "password": {
-          "label": "Citadel adgangskode"
-        },
-        "url": {
-          "label": "Citadel URL",
-          "placeholder": "http://citadel.local"
-        }
-      },
       "umbrel": {
         "title": "Umbrel",
         "page": {

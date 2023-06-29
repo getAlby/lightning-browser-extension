@@ -123,20 +123,6 @@
         "title": "Umbrel"
       },
       "description": "Verbinden mit deinem externen Lightning Wallet oder Node",
-      "citadel": {
-        "page": {
-          "instructions": "Das funktioniert aktuell nicht, wenn 2FA ausgewählt ist.",
-          "title": "Verbinden mit <0>Citadel</0> Node"
-        },
-        "title": "Citadel",
-        "password": {
-          "label": "Citadel Kennwort"
-        },
-        "url": {
-          "label": "Citadel URL",
-          "placeholder": "http://citadel.local"
-        }
-      },
       "raspiblitz": {
         "page": {
           "instructions1": "Folge diese Schritte:<1/> 1. <0>SSH</0> in deinem <0>Raspiblitz</0><1/>2. Wähle <0>Connect Apps & Show Credentials</0> aus der Liste<1/><0/>3. Wähle <0>Connect Alby to this node</0><1/>4. Drücke <0>OK</0>, um die Verbindungsdaten anzuzeigen<1/><1/>Kopiere den <0>REST API-Host</0> oder die <0>.onion</0>-Adresse, um dich über Tor zu verbinden, und füge sie in das Feld darunter ein.",
@@ -770,9 +756,6 @@
       "umbrel": {
         "name": "Umbrel"
       },
-      "citadel": {
-        "name": "Citadel"
-      },
       "btcpay": {
         "name": "BTCPay"
       },
@@ -961,8 +944,6 @@
     "connectors": {
       "lnd": "LND",
       "nativelnd": "LND (über Tor)",
-      "citadel": "Citadel",
-      "nativecitadel": "Citadel (über Tor)",
       "commando": "Kommando",
       "lnbits": "LNBits",
       "lndhub": "LNDHub",

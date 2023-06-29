@@ -28,8 +28,8 @@ jest.mock("~/app/hooks/useNavigationState", () => {
     useNavigationState: jest.fn(() => ({
       origin: mockOrigin,
       args: {
-        connector: "nativecitadel",
-        name: "Your Citadel wallet",
+        connector: "nativelnd",
+        name: "Your LND wallet",
         config: { connectionString: "..." },
       },
     })),
@@ -48,9 +48,9 @@ describe("ConfirmAddAccount", () => {
 
     expect(
       await screen.findByText(
-        "This website wants to add an account (Citadel (over Tor)):"
+        "This website wants to add an account (LND (over Tor)):"
       )
     ).toBeInTheDocument();
-    expect(await screen.findByText("Your Citadel wallet")).toBeInTheDocument();
+    expect(await screen.findByText("Your LND wallet")).toBeInTheDocument();
   });
 });

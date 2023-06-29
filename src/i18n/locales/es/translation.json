@@ -81,20 +81,6 @@
           "placeholder": "http://localhost:8080"
         }
       },
-      "citadel": {
-        "title": "Cuenta de Citadel",
-        "password": {
-          "label": "Contraseña de Citadel"
-        },
-        "url": {
-          "label": "URL de Citadel",
-          "placeholder": "http://citadel.local"
-        },
-        "page": {
-          "title": "Conectar a nodo Citadel",
-          "instructions": "Esto actualmente no funciona si el 2FA está activado."
-        }
-      },
       "umbrel": {
         "title": "Cuenta de Umbrel",
         "page": {

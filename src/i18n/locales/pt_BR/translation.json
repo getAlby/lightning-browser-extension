@@ -87,20 +87,6 @@
           "label": "Senha Eclair"
         }
       },
-      "citadel": {
-        "title": "Citadel",
-        "page": {
-          "title": "Conecte-se no servidor <0>Citadel</0>",
-          "instructions": "Não funciona se o 2FA estiver ativado."
-        },
-        "password": {
-          "label": "Senha Citadel"
-        },
-        "url": {
-          "label": "URL Citadel",
-          "placeholder": "http://citadel.local"
-        }
-      },
       "umbrel": {
         "title": "Umbrel",
         "page": {
@@ -743,9 +729,6 @@
       "umbrel": {
         "name": "Umbrel"
       },
-      "citadel": {
-        "name": "Citadel"
-      },
       "btcpay": {
         "name": "BTCPay"
       },
@@ -834,9 +817,7 @@
       "lnbits": "LNBits",
       "nativelndhub": "LNDHub (usando Tor)",
       "commando": "Commando",
-      "citadel": "Citadel",
       "nativelnbits": "LNBits (usando Tor)",
-      "nativecitadel": "Citadel (usando Tor)",
       "nativelnd": "LND (usando Tor)"
     }
   },

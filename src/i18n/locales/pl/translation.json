@@ -180,20 +180,6 @@
           "placeholder": "http://localhost:8080"
         }
       },
-      "citadel": {
-        "title": "Citadel",
-        "page": {
-          "title": "Podłącz do węzła <0>Citadel</0>",
-          "instructions": "Ta funkcja nie działa jeśli 2FA jest włączone."
-        },
-        "password": {
-          "label": "Hasło Citadel"
-        },
-        "url": {
-          "label": "Adres URL Citadel",
-          "placeholder": "http://citadel.local"
-        }
-      },
       "umbrel": {
         "title": "Umbrel",
         "page": {

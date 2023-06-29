@@ -1,6 +1,5 @@
 import ChooseConnector from "@screens/connectors/ChooseConnector";
 import ConnectBtcpay from "@screens/connectors/ConnectBtcpay";
-import ConnectCitadel from "@screens/connectors/ConnectCitadel";
 import ConnectEclair from "@screens/connectors/ConnectEclair";
 import ConnectGaloy, { galoyUrls } from "@screens/connectors/ConnectGaloy";
 import ConnectKollider from "@screens/connectors/ConnectKollider";
@@ -17,7 +16,6 @@ import i18n from "~/i18n/i18nConfig";
 
 import ConnectCommando from "../screens/connectors/ConnectCommando";
 import btcpay from "/static/assets/icons/btcpay.svg";
-import citadel from "/static/assets/icons/citadel.png";
 import core_ln from "/static/assets/icons/core_ln.svg";
 import eclair from "/static/assets/icons/eclair.jpg";
 import galoyBitcoinBeach from "/static/assets/icons/galoy_bitcoin_beach.png";
@@ -131,12 +129,6 @@ const connectorMap: { [key: string]: ConnectorRoute } = {
     title: i18n.t("translation:choose_connector.lnbits.title"),
     logo: lnbits,
   },
-  citadel: {
-    path: "citadel",
-    element: <ConnectCitadel />,
-    title: i18n.t("translation:choose_connector.citadel.title"),
-    logo: citadel,
-  },
   "lnd-hub-go": {
     path: "lnd-hub-go",
     element: <ConnectLndHub lndHubType="lndhub_go" />,
@@ -204,15 +196,6 @@ function getDistribution(key: string): ConnectorRoute {
 
 const distributionMap: { [key: string]: { logo: string; children: Route[] } } =
   {
-    citadel: {
-      logo: citadel,
-      children: [
-        connectorMap["citadel"],
-        connectorMap["lnc"],
-        connectorMap["commando"],
-        connectorMap["lnbits"],
-      ],
-    },
     umbrel: {
       logo: umbrel,
       children: [
@@ -264,7 +247,6 @@ function getConnectorRoutes(): ConnectorRoute[] {
     connectorMap["btcpay"],
     connectorMap[galoyPaths.bitcoinBeach],
     connectorMap[galoyPaths.bitcoinJungle],
-    getDistribution("citadel"),
     getDistribution("umbrel"),
     getDistribution("mynode"),
     getDistribution("start9"),

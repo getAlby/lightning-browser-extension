@@ -188,20 +188,6 @@
           "placeholder": "http://localhost:8080"
         }
       },
-      "citadel": {
-        "title": "Citadel",
-        "page": {
-          "title": "Connect to <0>Citadel</0> node",
-          "instructions": "This currently doesn't work if 2FA is enabled."
-        },
-        "password": {
-          "label": "Citadel Password"
-        },
-        "url": {
-          "label": "Citadel URL",
-          "placeholder": "http://citadel.local"
-        }
-      },
       "umbrel": {
         "title": "Umbrel",
         "page": {
@@ -359,9 +345,6 @@
       "description": "Choose which {{name}} app you would like to connect with",
       "umbrel": {
         "name": "Umbrel"
-      },
-      "citadel": {
-        "name": "Citadel"
       },
       "btcpay": {
         "name": "BTCPay"
@@ -862,8 +845,6 @@
       "nativelnbits": "LNBits (over Tor)",
       "galoy": "Galoy",
       "eclair": "Eclair",
-      "citadel": "Citadel",
-      "nativecitadel": "Citadel (over Tor)",
       "commando": "Commando"
     },
     "errors": {

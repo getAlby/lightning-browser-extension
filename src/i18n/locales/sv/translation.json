@@ -115,20 +115,6 @@
           "placeholder": "http://localhost:8080"
         }
       },
-      "citadel": {
-        "title": "Citadel",
-        "page": {
-          "title": "Anslut <0>Citadel</0>-nod",
-          "instructions": "Detta fungerar för tillfället inte om 2FA är aktiverat."
-        },
-        "password": {
-          "label": "Citadel lösenord"
-        },
-        "url": {
-          "label": "Citadel URL",
-          "placeholder": "http://citadel.local"
-        }
-      },
       "umbrel": {
         "title": "Umbrel",
         "page": {
@@ -772,9 +758,6 @@
       "umbrel": {
         "name": "Umbrel"
       },
-      "citadel": {
-        "name": "Citadel"
-      },
       "btcpay": {
         "name": "BTCPay"
       },
@@ -859,12 +842,10 @@
       "nativelndhub": "LNDHub (över Tor)",
       "galoy": "Galoy",
       "eclair": "Eclair",
-      "nativecitadel": "Citadel (över Tor)",
       "commando": "Commando",
       "nativelnbits": "LNBits (över Tor)",
       "lndhub": "LNDHub",
-      "lnbits": "LNBits",
-      "citadel": "Citadel"
+      "lnbits": "LNBits"
     }
   },
   "components": {

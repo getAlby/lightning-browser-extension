@@ -75,20 +75,6 @@
         },
         "title": "Eclair"
       },
-      "citadel": {
-        "page": {
-          "title": "连接<0>Citadel</0>节点",
-          "instructions": "目前，如果启用了2FA，这就用不了了。"
-        },
-        "password": {
-          "label": "Citadel密码"
-        },
-        "url": {
-          "label": "Citadel URL",
-          "placeholder": "http://citadel.local"
-        },
-        "title": "Citadel"
-      },
       "galoy": {
         "token": {
           "label": "输入你的JWT令牌",
@@ -766,9 +752,6 @@
     "distributions": {
       "title": "连接 {{name}}",
       "description": "选择你想连接的{{name}}应用程序",
-      "citadel": {
-        "name": "Citadel"
-      },
       "btcpay": {
         "name": "BTCPay"
       },
@@ -859,8 +842,6 @@
       "nativelnbits": "LNBits（通过 Tor）",
       "galoy": "Galoy",
       "eclair": "Eclair",
-      "citadel": "Citadel",
-      "nativecitadel": "Citadel（通过 Tor）",
       "commando": "Commando"
     }
   },
