@@ -570,7 +570,8 @@
       "payment": {
         "waiting": "väntar på betalning...",
         "status": "Kontrollera betalningsstatus"
-      }
+      },
+      "receive_via_bitcoin_address": "Ta emot via bitcoin adress"
     },
     "publishers": {
       "publisher": {
@@ -789,7 +790,14 @@
     },
     "confirm_add_account": {
       "title": "Lägg till konto",
-      "content": "Den här webbplatsen vill lägga till ett konto ({{connector}}):"
+      "content": "Den här webbplatsen vill lägga till ett konto ({{connector}}):",
+      "tor_info": "För att kunna ansluta via TOR-nätverket måste du först installera Alby kompanion appen:"
+    },
+    "on_chain": {
+      "title": "Ta emot via bitcoin adress",
+      "instructions2": "Du hittar din bitcoin adress på <0>Ta emot</0> sidan.",
+      "go": "Gå till ditt Alby konto →",
+      "instructions1": "För att ta emot bitcoin via en bitcoin adress, logga in på ditt <0>Alby-konto</0> på getalby.com"
     }
   },
   "common": {
@@ -831,7 +839,8 @@
       "receive_again": "Ta emot en ny betalning",
       "remember": "Kom ihåg mitt val och fråga inte igen",
       "log_in": "Logga in",
-      "more": "Mer"
+      "more": "Mer",
+      "download": "Ladda ner"
     },
     "errors": {
       "connection_failed": "Anslutning misslyckades",
@@ -864,7 +873,8 @@
       "lndhub": "LNDHub",
       "lnbits": "LNBits",
       "citadel": "Citadel"
-    }
+    },
+    "or": "eller"
   },
   "components": {
     "allowance_menu": {
