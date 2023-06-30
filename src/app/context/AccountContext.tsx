@@ -61,16 +61,13 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
   const isSatsAccount = account?.currency === "BTC"; // show fiatValue only if the base currency is not already fiat
   const showFiat = !isLoadingSettings && settings.showFiat && isSatsAccount;
 
-  const unlock = async (password: string, callback: VoidFunction) => {
-    return api
-      .unlock(password)
-      .then((response) => {
-        return selectAccount(response.currentAccountId);
-      })
-      .then(() => {
-        // callback - e.g. navigate to the requested route after unlocking
-        callback();
-      });
+  const unlock = (password: string, callback: VoidFunction) => {
+    return api.unlock(password).then((response) => {
+      selectAccount(response.currentAccountId, true);
+
+      // callback - e.g. navigate to the requested route after unlocking
+      callback();
+    });
   };
 
   const lock = (callback: VoidFunction) => {
@@ -111,11 +108,16 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
     return { ...accountInfo, fiatBalance, accountBalance };
   };
 
-  const selectAccount = async (accountId: string) => {
+  const selectAccount = async (
+    accountId: string,
+    skipRequestSelectAccount = false
+  ) => {
     setAccountLoading(true);
 
     try {
-      await msg.request("selectAccount", { id: accountId });
+      if (!skipRequestSelectAccount) {
+        await msg.request("selectAccount", { id: accountId });
+      }
       setAccountId(accountId);
       await fetchAccountInfo({ accountId });
     } catch (e) {
@@ -140,7 +142,7 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
           if (response.configured && onWelcomePage) {
             utils.redirectPage("options.html");
           }
-          selectAccount(response.currentAccountId);
+          selectAccount(response.currentAccountId, true);
         } else {
           setAccount(null);
         }
