@@ -1,31 +1,22 @@
-import { default as liquid } from "~/common/lib/liquid";
 import msg from "~/common/lib/msg";
 import { default as nostr, default as nostrlib } from "~/common/lib/nostr";
 
-export async function savePrivateKey(
-  type: "nostr",
+export async function saveNostrPrivateKey(
   accountId: string,
   privateKey: string
 ) {
-  if (type === "nostr") {
-    privateKey = nostrlib.normalizeToHex(privateKey);
-  }
-
   if (privateKey) {
+    privateKey = nostrlib.normalizeToHex(privateKey);
     // Validate the private key before saving
-    if (type === "nostr") {
-      nostr.generatePublicKey(privateKey);
-      nostrlib.hexToNip19(privateKey, "nsec");
-    } else {
-      liquid.generatePublicKey(privateKey);
-    }
+    nostr.generatePublicKey(privateKey);
+    nostrlib.hexToNip19(privateKey, "nsec");
 
-    await msg.request(`${type}/setPrivateKey`, {
+    await msg.request("nostr/setPrivateKey", {
       id: accountId,
       privateKey,
     });
   } else {
-    await msg.request(`${type}/removePrivateKey`, {
+    await msg.request("nostr/removePrivateKey", {
       id: accountId,
     });
   }

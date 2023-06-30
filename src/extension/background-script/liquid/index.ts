@@ -1,10 +1,15 @@
 import * as secp256k1 from "@noble/secp256k1";
-import { address, bip341, crypto, networks } from "liquidjs-lib";
+import {
+  address,
+  bip341,
+  crypto as liquidjscrypto,
+  networks,
+} from "liquidjs-lib";
 import { SLIP77Factory, Slip77Interface } from "slip77";
 import * as tinysecp from "tiny-secp256k1";
 
 function tapTweakHash(pubkey: Buffer, h?: Buffer): Buffer {
-  return crypto.taggedHash(
+  return liquidjscrypto.taggedHash(
     "TapTweak/elements",
     Buffer.concat(h ? [pubkey, h] : [pubkey])
   );
@@ -38,6 +43,12 @@ class Liquid {
     masterBlindingKey: string,
     network: "liquid" | "testnet" | "regtest"
   ) {
+    // fix usages of window (unavailable in service worker)
+    globalThis.window ??= globalThis.window || {};
+    if (!globalThis.window.crypto) {
+      globalThis.window.crypto = crypto;
+    }
+
     this.network = networks[network];
     if (!this.network) throw new Error(`Invalid network: "${network}"`);
     this.slip77 =

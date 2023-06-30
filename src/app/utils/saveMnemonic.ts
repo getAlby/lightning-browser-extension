@@ -1,4 +1,4 @@
-import { savePrivateKey } from "~/app/utils/savePrivateKey";
+import { saveNostrPrivateKey } from "~/app/utils/savePrivateKey";
 import { deriveNostrPrivateKey } from "~/common/lib/mnemonic";
 import msg from "~/common/lib/msg";
 
@@ -16,6 +16,6 @@ export async function saveMnemonic(accountId: string, mnemonic: string) {
 
   if (!hasNostrPrivateKey) {
     const nostrPrivateKey = deriveNostrPrivateKey(mnemonic);
-    await savePrivateKey("nostr", accountId, nostrPrivateKey);
+    await saveNostrPrivateKey(accountId, nostrPrivateKey);
   }
 }

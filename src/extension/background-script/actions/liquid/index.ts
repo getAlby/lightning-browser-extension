@@ -1,4 +1,5 @@
 import getAddressOrPrompt from "./getAddressOrPrompt";
+import setIsLiquidEnable from "./setIsLiquidEnable";
 import signPset from "./signPset";
 import signPsetWithPrompt from "./signPsetWithPrompt";
 import signSchnorrOrPrompt from "./signSchnorrOrPrompt";
@@ -8,4 +9,5 @@ export {
   signSchnorrOrPrompt,
   signPsetWithPrompt,
   signPset,
+  setIsLiquidEnable,
 };

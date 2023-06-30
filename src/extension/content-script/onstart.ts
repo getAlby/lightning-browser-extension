@@ -5,6 +5,7 @@ import injectScript from "./injectScript";
 import shouldInject from "./shouldInject";
 
 async function onstart() {
+  // eslint-disable-next-line no-console
   const inject = await shouldInject();
   if (!inject) {
     return;
@@ -27,7 +28,8 @@ async function onstart() {
   injectScript(browser.runtime.getURL("js/inpageScriptAlby.bundle.js"));
 
   // window.liquid
-  if (accountDetails.liquidEnabled) {
+  // eslint-disable-next-line no-console
+  if (accountDetails.isLiquidEnabled) {
     injectScript(browser.runtime.getURL("js/inpageScriptLiquid.bundle.js"));
   }
 }

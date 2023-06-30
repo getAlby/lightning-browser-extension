@@ -18,6 +18,7 @@ export interface Account {
   name: string;
   nostrPrivateKey?: string | null;
   mnemonic?: string | null;
+  isLiquidEnabled?: boolean;
 }
 
 export interface Accounts {
@@ -554,12 +555,12 @@ export interface MessageSignPset extends MessageDefault {
   action: "signPset";
 }
 
-export interface MessageSetMasterBlindingKey extends MessageDefault {
+export interface MessageSetIsLiquidEnable extends MessageDefault {
   args: {
-    id: string;
-    masterBlindingKey: string;
+    id?: string;
+    enable: boolean;
   };
-  action: "setMasterBlindingKey";
+  action: "setIsLiquidEnable";
 }
 
 export interface LNURLChannelServiceResponse {

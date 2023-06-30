@@ -13,19 +13,13 @@ import InputCopyButton from "~/app/components/InputCopyButton";
 import TextField from "~/app/components/form/TextField";
 import { useAccount } from "~/app/context/AccountContext";
 import { KeyOrigin, getKeyOrigin } from "~/app/utils/getKeyOrigin";
-import { savePrivateKey } from "~/app/utils/savePrivateKey";
-import api, { GetAccountRes } from "~/common/lib/api";
-import { default as liquid } from "~/common/lib/liquid";
-import {
-  LIQUID_DERIVATION_PATH,
-  LIQUID_DERIVATION_PATH_REGTEST,
-  deriveNostrPrivateKey,
-  derivePrivateKey,
-} from "~/common/lib/mnemonic";
+import { saveNostrPrivateKey } from "~/app/utils/savePrivateKey";
+import { GetAccountRes } from "~/common/lib/api";
+import { deriveNostrPrivateKey } from "~/common/lib/mnemonic";
 import msg from "~/common/lib/msg";
 import { default as nostr, default as nostrlib } from "~/common/lib/nostr";
 
-function AdvancedKeySettings({ type }: { type: "nostr" | "liquid" }) {
+function AdvancedKeySettings({ type }: { type: "nostr" }) {
   const account = useAccount();
   const { t: tCommon } = useTranslation("common");
   const { t } = useTranslation("translation", {
@@ -57,23 +51,6 @@ function AdvancedKeySettings({ type }: { type: "nostr" | "liquid" }) {
           setMnemonic(accountMnemonic);
         }
 
-        if (type === "liquid") {
-          const settings = await api.getSettings();
-          if (settings.liquidEnabled) {
-            const derivationPath = settings
-              ? LIQUID_DERIVATION_PATH
-              : LIQUID_DERIVATION_PATH_REGTEST;
-
-            const privLiquid = derivePrivateKey(
-              accountMnemonic,
-              derivationPath
-            );
-            setCurrentPrivateKey(privLiquid);
-            setKeyOrigin("secret-key");
-          }
-          return;
-        }
-
         const priv = (await msg.request(`${type}/getPrivateKey`, {
           id,
         })) as string;
@@ -100,12 +77,11 @@ function AdvancedKeySettings({ type }: { type: "nostr" | "liquid" }) {
     (currentPrivateKey: string) => {
       try {
         setPublicKey(
-          currentPrivateKey
-            ? type === "nostr"
-              ? nostr.generatePublicKey(currentPrivateKey)
-              : liquid.generatePublicKey(currentPrivateKey)
+          currentPrivateKey && type === "nostr"
+            ? nostr.generatePublicKey(currentPrivateKey)
             : ""
         );
+
         type === "nostr"
           ? setPrivateKey(
               currentPrivateKey
@@ -136,8 +112,6 @@ function AdvancedKeySettings({ type }: { type: "nostr" | "liquid" }) {
   }
 
   async function handleDeriveKeyFromSecretKey() {
-    if (type === "liquid") return;
-
     if (!id) {
       throw new Error("No id set");
     }
@@ -151,8 +125,6 @@ function AdvancedKeySettings({ type }: { type: "nostr" | "liquid" }) {
   }
 
   async function handleSavePrivateKey(privateKey: string) {
-    if (type === "liquid") return; // skip for liquid
-
     if (!id) {
       throw new Error("No id set");
     }
@@ -170,7 +142,7 @@ function AdvancedKeySettings({ type }: { type: "nostr" | "liquid" }) {
     }
 
     try {
-      savePrivateKey(type, id, privateKey);
+      saveNostrPrivateKey(id, privateKey);
       toast.success(
         t(
           `${type}.${

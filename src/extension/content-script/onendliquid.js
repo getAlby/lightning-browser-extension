@@ -6,8 +6,8 @@ import shouldInject from "./shouldInject";
 // Liquid calls that can be executed from the Liquid Provider.
 // Update when new calls are added
 const liquidCalls = [
-  "liquid/getPublicKeyOrPrompt",
-  "liquid/signSchnorrOrPrompt",
+  "liquid/getAddressOrPrompt",
+  "liquid/signPsetWithPrompt",
   "liquid/enable",
 ];
 // calls that can be executed when liquid is not enabled for the current content page

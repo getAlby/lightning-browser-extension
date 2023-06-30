@@ -98,10 +98,6 @@ function Options() {
                 element={<ImportSecretKey />}
               />
               <Route
-                path=":id/liquid"
-                element={<AdvancedKeySettings type="liquid" />}
-              />
-              <Route
                 path=":id/nostr"
                 element={<AdvancedKeySettings type="nostr" />}
               />

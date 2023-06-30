@@ -18,6 +18,7 @@ const get = async (message: MessageAccountGet) => {
     id: account.id,
     connector: account.connector,
     name: account.name,
+    isLiquidEnabled: !!account.isLiquidEnabled,
     nostrEnabled: !!account.nostrPrivateKey,
   };
 

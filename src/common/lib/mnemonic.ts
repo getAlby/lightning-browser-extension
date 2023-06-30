@@ -16,6 +16,19 @@ export function deriveLiquidMasterBlindingKey(mnemonic: string): string {
     .masterKey.toString("hex");
 }
 
+export function deriveLiquidPrivateKey(
+  mnemonic: string,
+  bitcoinNetwork: "bitcoin" | "regtest"
+) {
+  const derivationPath =
+    bitcoinNetwork === "bitcoin"
+      ? LIQUID_DERIVATION_PATH
+      : LIQUID_DERIVATION_PATH_REGTEST;
+
+  const privLiquid = derivePrivateKey(mnemonic, derivationPath);
+  return privLiquid;
+}
+
 export function deriveNostrPrivateKey(mnemonic: string) {
   return derivePrivateKey(mnemonic, NOSTR_DERIVATION_PATH);
 }

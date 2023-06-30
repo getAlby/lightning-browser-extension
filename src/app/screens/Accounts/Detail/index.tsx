@@ -23,17 +23,12 @@ import Avatar from "~/app/components/Avatar";
 import Badge from "~/app/components/Badge";
 import InputCopyButton from "~/app/components/InputCopyButton";
 import MenuDivider from "~/app/components/Menu/MenuDivider";
+import Toggle from "~/app/components/form/Toggle";
 import { useAccount } from "~/app/context/AccountContext";
 import { useAccounts } from "~/app/context/AccountsContext";
 import { useSettings } from "~/app/context/SettingsContext";
 import { KeyOrigin, getKeyOrigin } from "~/app/utils/getKeyOrigin";
 import api, { GetAccountRes } from "~/common/lib/api";
-import liquid from "~/common/lib/liquid";
-import {
-  LIQUID_DERIVATION_PATH,
-  LIQUID_DERIVATION_PATH_REGTEST,
-  derivePrivateKey,
-} from "~/common/lib/mnemonic";
 import msg from "~/common/lib/msg";
 import nostr from "~/common/lib/nostr";
 import type { Account } from "~/types";
@@ -68,10 +63,7 @@ function AccountDetail() {
   const [nostrPrivateKey, setNostrPrivateKey] = useState("");
   const [nostrPublicKey, setNostrPublicKey] = useState("");
   const [nostrKeyOrigin, setNostrKeyOrigin] = useState<KeyOrigin>("unknown");
-  const [liquidPrivateKey, setLiquidPrivateKey] = useState("");
-  const [liquidPublicKey, setLiquidPublicKey] = useState("");
-  const [liquidKeyOrigin, setLiquidKeyOrigin] = useState<KeyOrigin>("unknown");
-
+  const [isLiquidEnable, setIsLiquidEnable] = useState<boolean>();
   const [exportLoading, setExportLoading] = useState(false);
   const [exportModalIsOpen, setExportModalIsOpen] = useState(false);
 
@@ -84,23 +76,13 @@ function AccountDetail() {
 
         setAccount(response);
         setAccountName(response.name);
+        setIsLiquidEnable(response.isLiquidEnabled);
 
         const accountMnemonic = (await msg.request("getMnemonic", {
           id,
         })) as string;
         if (accountMnemonic) {
           setMnemonic(accountMnemonic);
-        }
-
-        const settings = await api.getSettings();
-        if (settings.liquidEnabled) {
-          const derivationPath = settings
-            ? LIQUID_DERIVATION_PATH
-            : LIQUID_DERIVATION_PATH_REGTEST;
-
-          const privLiquid = derivePrivateKey(accountMnemonic, derivationPath);
-          setLiquidPrivateKey(privLiquid);
-          setLiquidKeyOrigin("secret-key");
         }
 
         const privNostr = (await msg.request("nostr/getPrivateKey", {
@@ -177,6 +159,7 @@ function AccountDetail() {
       toast.error(t("remove.error"));
     }
   }
+
   async function removeMnemonic({ id, name }: AccountAction) {
     if (
       window.prompt(t("remove_secretkey.confirm", { name }))?.toLowerCase() ==
@@ -193,6 +176,14 @@ function AccountDetail() {
     }
   }
 
+  async function setLiquidEnable(value: boolean) {
+    await msg.request("liquid/setIsLiquidEnable", {
+      id,
+      enable: value,
+    });
+    setIsLiquidEnable(value);
+  }
+
   useEffect(() => {
     // Run once.
     if (!isLoadingSettings && !hasFetchedData.current) {
@@ -200,23 +191,6 @@ function AccountDetail() {
       hasFetchedData.current = true;
     }
   }, [fetchData, isLoadingSettings]);
-
-  useEffect(() => {
-    try {
-      setLiquidPublicKey(
-        liquidPrivateKey ? liquid.generatePublicKey(liquidPrivateKey) : ""
-      );
-    } catch (e) {
-      if (e instanceof Error)
-        toast.error(
-          <p>
-            {t("liquid.errors.failed_to_load")}
-            <br />
-            {e.message}
-          </p>
-        );
-    }
-  }, [liquidPrivateKey, t]);
 
   useEffect(() => {
     try {
@@ -491,36 +465,30 @@ function AccountDetail() {
             </div>
             <MenuDivider />
             <div className="flex justify-between items-end">
-              <div className="w-7/12 flex items-center gap-2">
-                <TextField
-                  id="liquidPublicKey"
-                  label={t("liquid.public_key.label")}
-                  type="text"
-                  value={liquidPublicKey}
-                  disabled
-                  endAdornment={
-                    liquidPublicKey && (
-                      <InputCopyButton value={liquidPublicKey} />
-                    )
-                  }
-                />
-                {liquidPublicKey && liquidKeyOrigin !== "secret-key" && (
-                  <Badge
-                    label="imported"
-                    color="green-bitcoin"
-                    textColor="white"
-                  />
-                )}
+              <div className="w-7/12">
+                <p className="text-gray-900 dark:text-white font-medium">
+                  {t("liquid.enable.title")}
+                </p>
+                <p className="text-gray-500 text-sm dark:text-neutral-500">
+                  {t("liquid.enable.description")}
+                </p>
               </div>
 
-              <div className="w-1/5 flex-none">
-                <Link to="liquid">
-                  <Button
-                    label={t("advanced_settings.label")}
-                    primary
-                    fullWidth
-                  />
-                </Link>
+              <div className="w-1/5 flex align-middle justify-center">
+                <Toggle
+                  key="isLiquidEnable"
+                  checked={isLiquidEnable || false}
+                  onChange={() => {
+                    setLiquidEnable(!isLiquidEnable);
+                  }}
+                />
+                <span className="ml-4">
+                  {t(
+                    isLiquidEnable
+                      ? "liquid.enable.toggle.isEnable"
+                      : "liquid.enable.toggle.isDisable"
+                  )}
+                </span>
               </div>
             </div>
           </div>

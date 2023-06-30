@@ -20,14 +20,14 @@ export default class LiquidProvider {
     return await this.execute("enable");
   }
 
-  async getPublicKey() {
+  async getAddress() {
     await this.enable();
-    return await this.execute("getPublicKeyOrPrompt");
+    return await this.execute("getAddressOrPrompt");
   }
 
-  async signSchnorr(sigHash: Buffer) {
+  async signPset(pset: string) {
     await this.enable();
-    return this.execute("signSchnorrOrPrompt", { sigHash });
+    return this.execute("signPsetWithPrompt", { pset });
   }
 
   // NOTE: new call `action`s must be specified also in the content script

@@ -452,16 +452,13 @@
           }
         },
         "liquid": {
-          "private_key": {
-            "title": "Manage your Liquid private key",
-            "warning": "Please enter the name of the account to confirm the deletion of your liquid private key:",
-            "success": "Liquid private key encrypted & saved successfully.",
-            "failed_to_remove": "The entered account name didn't match, your old Liquid private key has been restored.",
-            "successfully_removed": "Liquid private key removed successfully.",
-            "label": "Liquid Private Key"
-          },
-          "public_key": {
-            "label": "Liquid Public Key"
+          "enable": {
+            "title": "Liquid Network",
+            "description": "Enable interactions with Liquid Network apps and protocols.",
+            "toggle": {
+              "isEnable": "Enabled",
+              "isDisable": "Disabled"
+            }
           },
           "errors": {
             "failed_to_load": "Failed to load the Liquid key. Is it a valid Liquid key?"
@@ -798,10 +795,9 @@
       "hide_addresses": "Hide addresses",
       "view_hex": "View PSET base64",
       "hide_hex": "Hide PSET base64",
-      "input": "Input",
+      "inputs": "Inputs",
       "outputs": "Outputs",
-      "amount": "{{amount}} sats",
-      "asset": "assetHash: {{asset}}"
+      "amount": "{{amount}} {{ticker}} sats"
     },
     "confirm_get_address": {
       "title": "Get Address",

@@ -13,8 +13,14 @@ import ScreenHeader from "~/app/components/ScreenHeader";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
+import { Esplora, EsploraAssetInfos } from "~/common/lib/esplora";
 import msg from "~/common/lib/msg";
-import { Address, PsetPreview, getPsetPreview } from "~/common/lib/pset";
+import {
+  Address,
+  PsetPreview,
+  fetchAssetRegistry,
+  getPsetPreview,
+} from "~/common/lib/pset";
 import type { OriginData } from "~/types";
 
 function toLiquidNetworkName(net: "bitcoin" | "regtest") {
@@ -34,6 +40,9 @@ function ConfirmSignPset() {
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [preview, setPreview] = useState<PsetPreview | undefined>(undefined);
+  const [assetRegistry, setAssetRegistry] = useState<
+    Record<string, EsploraAssetInfos>
+  >({});
   const [liquidNetwork, setLiquidNetwork] = useState<
     "liquid" | "testnet" | "regtest"
   >();
@@ -48,8 +57,18 @@ function ConfirmSignPset() {
       if (!settings.liquidEnabled) throw new Error("Liquid disabled");
 
       const liquidNetwork = toLiquidNetworkName(settings.bitcoinNetwork);
+      const preview = getPsetPreview(pset, liquidNetwork);
       setLiquidNetwork(liquidNetwork);
-      setPreview(getPsetPreview(pset));
+      setPreview(preview);
+
+      const esploraClient = Esplora.fromNetwork(liquidNetwork);
+      const registry = await fetchAssetRegistry(
+        esploraClient,
+        preview,
+        console.error // do not throw, just log errors
+      );
+
+      setAssetRegistry(registry);
     })();
   }, [pset]);
 
@@ -125,21 +144,37 @@ function ConfirmSignPset() {
               </div>
 
               {showAddresses && (
-                <div>
-                  <p className="font-medium dark:text-white">{t("input")}</p>
-                  <AddressPreview t={t} {...preview.inputs[0]} />
-                </div>
-              )}
-
-              {showAddresses && (
-                <div>
-                  <p className="font-medium dark:text-white">{t("outputs")}</p>
-                  <div className="flex flex-col gap-4">
-                    {preview.outputs.map((output) => (
-                      <AddressPreview key={output.address} t={t} {...output} />
-                    ))}
+                <>
+                  <div>
+                    <p className="font-medium dark:text-white">{t("inputs")}</p>
+                    <div className="flex flex-col gap-4">
+                      {preview.inputs.map((input, index) => (
+                        <AddressPreview
+                          key={index}
+                          assetInfos={assetRegistry[input.asset]}
+                          t={t}
+                          {...input}
+                        />
+                      ))}
+                    </div>
                   </div>
-                </div>
+
+                  <div>
+                    <p className="font-medium dark:text-white">
+                      {t("outputs")}
+                    </p>
+                    <div className="flex flex-col gap-4">
+                      {preview.outputs.map((output, index) => (
+                        <AddressPreview
+                          key={index}
+                          assetInfos={assetRegistry[output.asset]}
+                          t={t}
+                          {...output}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </>
               )}
             </div>
 
@@ -170,23 +205,26 @@ function ConfirmSignPset() {
   );
 }
 
-// TODO: asset ticker / name ?
 function AddressPreview({
   address,
   amount,
   asset,
+  assetInfos,
   t,
 }: Address & {
+  assetInfos?: EsploraAssetInfos;
   t: TFunction<"translation", "confirm_sign_pset", "translation">;
 }) {
+  // if assetInfos is not provided, we fallback to a custom ticker based on the asset hash
+  const ticker = assetInfos?.ticker ?? asset.slice(0, 5).toUpperCase();
+  const isUnknownTicker = !assetInfos?.ticker;
+
   return (
     <div>
       <p className="text-gray-500 dark:text-gray-400 break-all">{address}</p>
       <p className="font-medium text-sm text-gray-500 dark:text-gray-400">
-        {t("amount", { amount })}
-      </p>
-      <p className="font-medium text-sm text-gray-500 dark:text-gray-400">
-        {t("asset", { asset })}
+        {t("amount", { amount, ticker })}{" "}
+        {isUnknownTicker && " (unknown ticker)"}
       </p>
     </div>
   );

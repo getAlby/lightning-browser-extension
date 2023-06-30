@@ -35,9 +35,8 @@ export interface AccountInfoRes {
 }
 
 export interface GetAccountRes
-  extends Pick<Account, "id" | "connector" | "name"> {
+  extends Pick<Account, "id" | "connector" | "name" | "isLiquidEnabled"> {
   nostrEnabled: boolean;
-  liquidEnabled: boolean;
 }
 interface StatusRes {
   configured: boolean;

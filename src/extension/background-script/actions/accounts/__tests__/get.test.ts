@@ -26,7 +26,7 @@ const mockState = {
       id: "8b7f1dc6-ab87-4c6c-bca5-19fa8632731e",
       name: "Alby",
       nostrPrivateKey: "nostr-123-456",
-      liquidPrivateKey: "liquid-123-456",
+      isLiquidEnabled: true,
     },
     "1e1e8ea6-493e-480b-9855-303d37506e97": {
       config: "config-123-456",
@@ -57,7 +57,7 @@ describe("account info", () => {
       name: "Alby",
       connector: "lndhub",
       nostrEnabled: false,
-      liquidEnabled: false,
+      isLiquidEnabled: false,
     };
 
     expect(await getAccount(message)).toStrictEqual({
@@ -80,7 +80,7 @@ describe("account info", () => {
       name: "Alby",
       connector: "lndhub",
       nostrEnabled: true,
-      liquidEnabled: true,
+      isLiquidEnabled: true,
     };
 
     expect(await getAccount(message)).toStrictEqual({
