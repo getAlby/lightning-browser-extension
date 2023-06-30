@@ -62,7 +62,14 @@ function AccountMenu({ showOptions = true }: Props) {
       <Menu as="div">
         <Menu.Button className="h-full px-2 rounded-md hover:bg-gray-100 dark:hover:bg-white/10 transition-colors duration-200">
           <div className="flex items-center">
-            <Avatar size={24} name={authAccount?.id || ""} />
+            {accountLoading ? (
+              <SkeletonLoader
+                className="rounded-full w-6 h-6 overflow-hidden"
+                containerClassName="inline-flex"
+              />
+            ) : (
+              <Avatar size={24} name={authAccount?.id || ""} />
+            )}
             <div
               className={`flex-auto mx-2 py-3 overflow-hidden max-w-[14rem] text-left`}
             >
@@ -91,20 +98,24 @@ function AccountMenu({ showOptions = true }: Props) {
               <span className="text-xs text-gray-500 dark:text-neutral-300">
                 {tCommon("balance")}
               </span>
-              {!accountLoading ? (
-                <p className="flex justify-between">
-                  <span className="dark:text-white">
-                    {balancesDecorated.accountBalance}
-                  </span>
-                  {!!balancesDecorated.fiatBalance && (
-                    <span className="text-gray-500 dark:text-neutral-300">
-                      ~{balancesDecorated.fiatBalance}
-                    </span>
+              <p className="flex justify-between">
+                <span className="dark:text-white">
+                  {accountLoading ? (
+                    <SkeletonLoader className="w-16" />
+                  ) : (
+                    balancesDecorated.accountBalance
                   )}
-                </p>
-              ) : (
-                <SkeletonLoader />
-              )}
+                </span>
+                <span className="text-gray-500 dark:text-neutral-300">
+                  {accountLoading ? (
+                    <SkeletonLoader className="w-12" />
+                  ) : (
+                    balancesDecorated.fiatBalance && (
+                      <>~{balancesDecorated.fiatBalance}</>
+                    )
+                  )}
+                </span>
+              </p>
             </div>
           </Menu.Item>
           <Menu.ItemButton
