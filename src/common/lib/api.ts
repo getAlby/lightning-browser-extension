@@ -15,6 +15,7 @@ import type {
   DbPayment,
   Invoice,
   LnurlAuthResponse,
+  MessageAccountEdit,
   MessageInvoices,
   MessageLnurlAuth,
   MessageSettingsSet,
@@ -43,6 +44,7 @@ export interface GetAccountRes
   hasMnemonic: boolean;
   hasImportedNostrKey: boolean;
   bitcoinNetwork: BitcoinNetworkType;
+  useMnemonicForLnurlAuth: boolean;
 }
 interface StatusRes {
   configured: boolean;
@@ -112,6 +114,11 @@ export const getAccount = (id?: string) =>
 export const updateAllowance = () => msg.request<Accounts>("updateAllowance");
 export const selectAccount = (id: string) =>
   msg.request("selectAccount", { id });
+export const editAccount = (
+  id: string,
+  args: Omit<MessageAccountEdit["args"], "id">
+) => msg.request("editAccount", { id, ...args });
+
 export const getAllowance = (host: string) =>
   msg.request<Allowance>("getAllowance", { host });
 export const getPayments = (options?: { limit?: number }) =>
@@ -194,6 +201,7 @@ export default {
   getAccount,
   getAccountInfo,
   getAccounts,
+  editAccount,
   getInfo,
   selectAccount,
   getAllowance,

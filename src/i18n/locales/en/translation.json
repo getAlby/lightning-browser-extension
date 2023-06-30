@@ -423,12 +423,12 @@
           "existing_nostr_key_notice": "⚠️ This account already has a nostr private key set and will not be derived from this secret key. You can manage your nostr key from your account settings.",
           "generate": {
             "title": "Generate your Secret Key",
-            "button": "Generate Secret Key"
+            "button": "Generate Secret Key",
+            "confirm": "I've backed my account's Secret Key in a private and secure place",
+            "error_confirm": "Please confirm that you have backed up your secret key."
           },
           "backup": {
             "title": "Back up your Secret Key",
-            "confirm": "I've backed my account's Secret Key in a private and secure place",
-            "error_confirm": "Please confirm that you have backed up your secret key.",
             "save": "Save Secret Key",
             "button": "Backup Secret Key",
             "warning": "⚠️ Don't forget to backup your Secret Key! Not backing it up might result in permanently loosing access to your Nostr identity or assets you manage with this key.",
@@ -446,6 +446,10 @@
           },
           "inputs": {
             "title": "Your Secret Key"
+          },
+          "lnurl": {
+            "title": "LNURL Auth",
+            "use_mnemonic": "Use Secret Key for Login with Lightning (LNURL Auth)"
           }
         },
         "bitcoin": {

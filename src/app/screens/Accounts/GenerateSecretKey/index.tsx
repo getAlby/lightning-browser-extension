@@ -10,7 +10,9 @@ import { ContentBox } from "~/app/components/ContentBox";
 import Checkbox from "~/app/components/form/Checkbox";
 import MnemonicInputs from "~/app/components/mnemonic/MnemonicInputs";
 import SecretKeyDescription from "~/app/components/mnemonic/SecretKeyDescription";
+import { isAlbyAccount } from "~/app/utils";
 import api from "~/common/lib/api";
+import { ConnectorType } from "~/types";
 
 function GenerateSecretKey() {
   const navigate = useNavigate();
@@ -19,8 +21,10 @@ function GenerateSecretKey() {
     keyPrefix: "accounts.account_view.mnemonic",
   });
   const [hasConfirmedBackup, setHasConfirmedBackup] = useState(false);
+  const [useMnemonicForLnurlAuth, setUseMnemonicForLnurlAuth] = useState(true);
   useState(false);
   const [hasNostrPrivateKey, setHasNostrPrivateKey] = useState(false);
+  const [connector, setConnector] = useState<ConnectorType | undefined>();
 
   const { id } = useParams() as { id: string };
 
@@ -36,6 +40,7 @@ function GenerateSecretKey() {
         }
         const newMnemonic = await api.generateMnemonic();
         setMnemonic(newMnemonic);
+        setConnector(account.connector);
       } catch (e) {
         console.error(e);
         if (e instanceof Error) toast.error(`Error: ${e.message}`);
@@ -46,13 +51,17 @@ function GenerateSecretKey() {
   async function saveGeneratedSecretKey() {
     try {
       if (!hasConfirmedBackup) {
-        throw new Error(t("backup.error_confirm"));
+        throw new Error(t("generate.error_confirm"));
       }
       if (!mnemonic) {
         throw new Error("No mnemonic available");
       }
 
       await api.setMnemonic(id, mnemonic);
+
+      if (useMnemonicForLnurlAuth) {
+        await api.editAccount(id, { useMnemonicForLnurlAuth });
+      }
 
       toast.success(t("saved"));
       // go to account settings
@@ -89,9 +98,27 @@ function GenerateSecretKey() {
                   htmlFor="has_backed_up"
                   className="cursor-pointer ml-2 block text-sm text-gray-900 font-medium dark:text-white"
                 >
-                  {t("backup.confirm")}
+                  {t("generate.confirm")}
                 </label>
               </div>
+              {!isAlbyAccount(connector) && (
+                <div className="flex items-center">
+                  <Checkbox
+                    id="use_lnurl_auth"
+                    name="Use secret key for LNURL auth confirmation checkbox"
+                    checked={useMnemonicForLnurlAuth}
+                    onChange={(event) => {
+                      setUseMnemonicForLnurlAuth(event.target.checked);
+                    }}
+                  />
+                  <label
+                    htmlFor="use_lnurl_auth"
+                    className="cursor-pointer ml-2 block text-sm text-gray-900 font-medium dark:text-white"
+                  >
+                    {t("lnurl.use_mnemonic")}
+                  </label>
+                </div>
+              )}
             </>
           </MnemonicInputs>
           {hasNostrPrivateKey && (

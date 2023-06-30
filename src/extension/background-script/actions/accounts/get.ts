@@ -24,6 +24,7 @@ const get = async (message: MessageAccountGet) => {
     // Note: undefined (default for new accounts) it is also considered imported
     hasImportedNostrKey: account.hasImportedNostrKey !== false,
     bitcoinNetwork: account.bitcoinNetwork || "bitcoin",
+    useMnemonicForLnurlAuth: account.useMnemonicForLnurlAuth || false,
   };
 
   return {

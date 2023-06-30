@@ -42,10 +42,10 @@ export async function authFunction({
 
   let lnSignature: string;
 
-  // use secret key for LNURL auth
+  // use mnemonic for LNURL auth
   if (
-    account.connector ===
-    "alby" /* OR TODO: lnurl auth toggle is on for current account && mnemonic exists */
+    account.connector === "alby" ||
+    (account.mnemonic && account.useMnemonicForLnurlAuth)
   ) {
     if (!account.mnemonic) {
       throw new Error("Please set a secret key to use LNURL auth");

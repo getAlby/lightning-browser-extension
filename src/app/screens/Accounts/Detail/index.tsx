@@ -25,6 +25,7 @@ import Badge from "~/app/components/Badge";
 import InputCopyButton from "~/app/components/InputCopyButton";
 import MenuDivider from "~/app/components/Menu/MenuDivider";
 import Select from "~/app/components/form/Select";
+import Toggle from "~/app/components/form/Toggle";
 import { useAccount } from "~/app/context/AccountContext";
 import { useAccounts } from "~/app/context/AccountsContext";
 import { useSettings } from "~/app/context/SettingsContext";
@@ -47,7 +48,7 @@ function AccountDetail() {
 
   const hasFetchedData = useRef(false);
   const [account, setAccount] = useState<GetAccountRes | null>(null);
-  const { id } = useParams();
+  const { id } = useParams() as { id: string };
   const navigate = useNavigate();
 
   const [lndHubData, setLndHubData] = useState({
@@ -96,10 +97,7 @@ function AccountDetail() {
   }
 
   async function updateAccountName({ id, name }: AccountAction) {
-    await msg.request("editAccount", {
-      name,
-      id,
-    });
+    await api.editAccount(id, { name });
 
     auth.fetchAccountInfo(); // Update active account name
     getAccounts(); // update all accounts
@@ -444,9 +442,8 @@ function AccountDetail() {
                       ...account,
                       bitcoinNetwork: event.target.value as BitcoinNetworkType,
                     });
-                    await msg.request("editAccount", {
-                      id,
-                      bitcoinNetwork: event.target.value,
+                    await api.editAccount(id, {
+                      bitcoinNetwork: event.target.value as BitcoinNetworkType,
                     });
                   }}
                 >
@@ -462,6 +459,39 @@ function AccountDetail() {
                 </Select>
               </div>
             </div>
+            {account.connector !== "alby" && account.hasMnemonic && (
+              <>
+                <MenuDivider />
+                <div className="flex justify-between items-end">
+                  <div className="w-7/12 flex flex-col gap-2">
+                    <p className="text-gray-900 dark:text-white font-medium">
+                      {t("mnemonic.lnurl.title")}
+                    </p>
+                    <p className="text-gray-500 text-sm dark:text-neutral-500">
+                      {t("mnemonic.lnurl.use_mnemonic")}
+                    </p>
+                  </div>
+
+                  <div className="w-1/5 flex-none flex justify-center">
+                    <Toggle
+                      checked={account.useMnemonicForLnurlAuth}
+                      onChange={async () => {
+                        // update local value
+                        setAccount({
+                          ...account,
+                          useMnemonicForLnurlAuth:
+                            !account.useMnemonicForLnurlAuth,
+                        });
+                        await api.editAccount(id, {
+                          useMnemonicForLnurlAuth:
+                            !account.useMnemonicForLnurlAuth,
+                        });
+                      }}
+                    />
+                  </div>
+                </div>
+              </>
+            )}
           </div>
 
           <div className="relative flex py-5 mt-12 items-center">
