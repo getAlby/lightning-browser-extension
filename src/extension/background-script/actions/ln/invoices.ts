@@ -15,10 +15,6 @@ const invoices = async (message: MessageInvoices) => {
         const boostagram = utils.getBoostagramFromInvoiceCustomRecords(
           invoice.custom_records
         );
-        const type = invoice.type;
-        if (type !== "received") {
-          throw new Error("unexpected invoice type: " + type);
-        }
         return { ...invoice, boostagram };
       });
 
