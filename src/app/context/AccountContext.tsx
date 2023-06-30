@@ -60,13 +60,16 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
   const showFiat =
     !isLoadingSettings && settings.showFiat && !statusLoading && isSatsAccount;
 
-  const unlock = (password: string, callback: VoidFunction) => {
-    return api.unlock(password).then((response) => {
-      selectAccount(response.currentAccountId, true);
-
-      // callback - e.g. navigate to the requested route after unlocking
-      callback();
-    });
+  const unlock = async (password: string, callback: VoidFunction) => {
+    return api
+      .unlock(password)
+      .then((response) => {
+        return selectAccount(response.currentAccountId);
+      })
+      .then(() => {
+        // callback - e.g. navigate to the requested route after unlocking
+        callback();
+      });
   };
 
   const lock = (callback: VoidFunction) => {
@@ -107,16 +110,11 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
     return { ...accountInfo, fiatBalance, accountBalance };
   };
 
-  const selectAccount = async (
-    accountId: string,
-    shouldRequestSelectAccount = false
-  ) => {
+  const selectAccount = async (accountId: string) => {
     setAccountLoading(true);
 
     try {
-      if (!shouldRequestSelectAccount) {
-        await msg.request("selectAccount", { id: accountId });
-      }
+      await msg.request("selectAccount", { id: accountId });
       setAccountId(accountId);
       await fetchAccountInfo({ accountId });
     } catch (e) {
@@ -141,7 +139,7 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
           if (response.configured && onWelcomePage) {
             utils.redirectPage("options.html");
           }
-          selectAccount(response.currentAccountId, true);
+          selectAccount(response.currentAccountId);
         } else {
           setAccount(null);
         }
