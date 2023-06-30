@@ -13,7 +13,7 @@ jobs:
 
     name: build-prod
     env:
-      WALLET_CREATE_URL: "https://getalby.com/api/users"
+      WALLET_ROOT_URL: "https://getalby.com/"
 
     permissions:
       issues: write

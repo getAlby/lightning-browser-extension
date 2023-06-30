@@ -12,9 +12,7 @@ export default function Navbar({ children }: Props) {
         <div className="flex">
           <UserMenu />
           {children && (
-            <nav className="ml-5 space-x-4 lg:space-x-8 hidden lg:flex">
-              {children}
-            </nav>
+            <nav className="ml-8 space-x-8 hidden md:flex">{children}</nav>
           )}
         </div>
         <AccountMenu />

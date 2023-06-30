@@ -13,8 +13,8 @@ const BundleAnalyzerPlugin =
   require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
 // default value is set in the code where it is used
-if (!process.env.WALLET_CREATE_URL) {
-  process.env.WALLET_CREATE_URL = ""; // env variables are passed as string. empty strings are still falsy
+if (!process.env.WALLET_ROOT_URL) {
+  process.env.WALLET_ROOT_URL = ""; // env variables are passed as string. empty strings are still falsy
 }
 // default value is set in the code where it is used
 if (!process.env.BITCOIN_BEACH_GALOY_URL) {
@@ -29,6 +29,9 @@ if (!process.env.BITCOIN_JUNGLE_GALOY_URL) {
 // default value is set in the code where it is used
 if (!process.env.HMAC_VERIFY_HEADER_KEY) {
   process.env.HMAC_VERIFY_HEADER_KEY = ""; // env variables are passed as string. empty strings are still falsy
+}
+if (!process.env.VERSION) {
+  process.env.VERSION = require("./package.json").version;
 }
 
 const viewsPath = path.join(__dirname, "static", "views");
@@ -58,16 +61,17 @@ var options = {
   },
 
   mode: nodeEnv,
-
   entry: {
     manifest: "./src/manifest.json",
     background: "./src/extension/background-script/index.ts",
-    contentScriptOnEnd: "./src/extension/content-script/onend.js",
+    contentScriptOnEndWebLN: "./src/extension/content-script/onendwebln.js",
     contentScriptOnEndAlby: "./src/extension/content-script/onendalby.js",
     contentScriptOnEndNostr: "./src/extension/content-script/onendnostr.js",
+    contentScriptOnEndWebBTC: "./src/extension/content-script/onendwebbtc.js",
     contentScriptOnStart: "./src/extension/content-script/onstart.ts",
     inpageScript: "./src/extension/inpage-script/index.js",
     inpageScriptWebLN: "./src/extension/inpage-script/webln.js",
+    inpageScriptWebBTC: "./src/extension/inpage-script/webbtc.js",
     inpageScriptNostr: "./src/extension/inpage-script/nostr.js",
     inpageScriptAlby: "./src/extension/inpage-script/alby.js",
     popup: "./src/app/router/Popup/index.tsx",
@@ -156,7 +160,8 @@ var options = {
       "BITCOIN_JUNGLE_GALOY_URL",
       "NODE_ENV",
       "TARGET_BROWSER",
-      "WALLET_CREATE_URL",
+      "WALLET_ROOT_URL",
+      "VERSION",
       "HMAC_VERIFY_HEADER_KEY",
     ]),
     // delete previous build files
