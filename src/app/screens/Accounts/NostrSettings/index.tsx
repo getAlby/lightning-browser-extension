@@ -9,15 +9,15 @@ import { Trans, useTranslation } from "react-i18next";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Alert from "~/app/components/Alert";
+import Avatar from "~/app/components/Avatar";
 import Button from "~/app/components/Button";
+import { ContentBox } from "~/app/components/ContentBox";
 import InputCopyButton from "~/app/components/InputCopyButton";
 import TextField from "~/app/components/form/TextField";
-import { useAccount } from "~/app/context/AccountContext";
-import api from "~/common/lib/api";
+import api, { GetAccountRes } from "~/common/lib/api";
 import { default as nostr, default as nostrlib } from "~/common/lib/nostr";
 
 function NostrSettings() {
-  const account = useAccount();
   const { t: tCommon } = useTranslation("common");
   const { t } = useTranslation("translation", {
     keyPrefix: "accounts.account_view",
@@ -29,6 +29,7 @@ function NostrSettings() {
   const [nostrPrivateKeyVisible, setNostrPrivateKeyVisible] = useState(false);
   const [nostrPublicKey, setNostrPublicKey] = useState("");
   const [hasImportedNostrKey, setHasImportedNostrKey] = useState(false);
+  const [account, setAccount] = useState<GetAccountRes>();
   const { id } = useParams() as { id: string };
 
   const fetchData = useCallback(async () => {
@@ -41,6 +42,7 @@ function NostrSettings() {
       const accountResponse = await api.getAccount(id);
       setHasMnemonic(accountResponse.hasMnemonic);
       setHasImportedNostrKey(accountResponse.hasImportedNostrKey);
+      setAccount(accountResponse);
     }
   }, [id]);
 
@@ -74,6 +76,10 @@ function NostrSettings() {
     navigate(`/accounts/${id}`);
   }
 
+  function handleDeleteKeys() {
+    setNostrPrivateKey("");
+  }
+
   async function handleDeriveNostrKeyFromSecretKey() {
     if (!hasMnemonic) {
       throw new Error("No mnemonic exists");
@@ -92,7 +98,7 @@ function NostrSettings() {
     if (
       currentPrivateKey &&
       prompt(t("nostr.private_key.warning"))?.toLowerCase() !==
-        account?.account?.name?.toLowerCase()
+        account?.name?.toLowerCase()
     ) {
       toast.error(t("nostr.private_key.failed_to_remove"));
       return;
@@ -135,11 +141,17 @@ function NostrSettings() {
         }}
       >
         <Container maxWidth="sm">
-          <div className="mt-12 shadow bg-white sm:rounded-md sm:overflow-hidden p-10 divide-black/10 dark:divide-white/10 dark:bg-surface-02dp flex flex-col gap-4">
+          <ContentBox>
             <div>
               <h1 className="font-bold text-2xl dark:text-white">
                 {t("nostr.settings.title")}
               </h1>
+              <div className="flex gap-4 my-4 items-center">
+                <Avatar name={account.id} size={32} />
+                <p className="text-gray-500 dark:text-neutral-500">
+                  {account.name}
+                </p>
+              </div>
               <p className="text-gray-500 dark:text-neutral-500">
                 {t("nostr.settings.description")}
               </p>
@@ -197,34 +209,44 @@ function NostrSettings() {
                 disabled
                 endAdornment={<InputCopyButton value={nostrPublicKey} />}
               />
-              {hasImportedNostrKey && nostrPrivateKey === currentPrivateKey && (
-                <div className="mt-4">
-                  {hasMnemonic ? (
-                    <Button
-                      outline
-                      label={t("nostr.settings.derive")}
-                      onClick={handleDeriveNostrKeyFromSecretKey}
-                    />
-                  ) : (
-                    <Alert type="warn">
-                      <Trans
-                        i18nKey={"nostr.settings.no_secret_key"}
-                        t={t}
-                        components={[
-                          // eslint-disable-next-line react/jsx-key
-                          <Link
-                            to="../secret-key/generate"
-                            relative="path"
-                            className="underline"
-                          />,
-                        ]}
-                      />
-                    </Alert>
+              <div className="mt-4 flex gap-4 items-center">
+                {nostrPrivateKey && (
+                  <Button
+                    error
+                    label={t("nostr.settings.delete")}
+                    onClick={handleDeleteKeys}
+                  />
+                )}
+                {hasImportedNostrKey &&
+                  nostrPrivateKey === currentPrivateKey && (
+                    <>
+                      {hasMnemonic ? (
+                        <Button
+                          outline
+                          label={t("nostr.settings.derive")}
+                          onClick={handleDeriveNostrKeyFromSecretKey}
+                        />
+                      ) : (
+                        <Alert type="warn">
+                          <Trans
+                            i18nKey={"nostr.settings.no_secret_key"}
+                            t={t}
+                            components={[
+                              // eslint-disable-next-line react/jsx-key
+                              <Link
+                                to="../secret-key/generate"
+                                relative="path"
+                                className="underline"
+                              />,
+                            ]}
+                          />
+                        </Alert>
+                      )}
+                    </>
                   )}
-                </div>
-              )}
+              </div>
             </div>
-          </div>
+          </ContentBox>
           <div className="flex justify-center mt-8 mb-16 gap-4">
             <Button label={tCommon("actions.cancel")} onClick={onCancel} />
             <Button

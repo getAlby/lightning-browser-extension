@@ -469,6 +469,7 @@
             "imported_key_warning": "⚠️ You're currently using an imported or randomly generated Nostr key. Your Nostr private key cannot be restored by your Secret Key, so remember to back up your Nostr private key.",
             "can_restore": "✅ Nostr key derived from your secret key",
             "derive": "Derive Nostr keys from your Secret Key",
+            "delete": "Delete current keys",
             "no_secret_key": "💡 You don't have a secret key yet. <0>Click here</0></div> to create your secret key and derive your nostr keys."
           },
           "private_key": {
