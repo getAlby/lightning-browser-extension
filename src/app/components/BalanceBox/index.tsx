@@ -19,7 +19,7 @@ function BalanceBox({ className }: Props) {
     >
       <div className="text-2xl">
         {accountLoading ? (
-          <SkeletonLoader className="w-32" />
+          <SkeletonLoader containerClassName="inline-block" className="w-32" />
         ) : (
           <>
             <span className="font-medium">{balanceParts[0]}</span>
@@ -28,13 +28,15 @@ function BalanceBox({ className }: Props) {
         )}
       </div>
 
-      <span className="text-gray-500 mt-2">
-        {accountLoading ? (
-          <SkeletonLoader className="w-16 mt-4" />
-        ) : (
-          <>~{balancesDecorated.fiatBalance}</>
-        )}
-      </span>
+      {accountLoading ? (
+        <SkeletonLoader containerClassName="mt-2" className="w-16" />
+      ) : (
+        <div className="text-gray-500 mt-2">
+          {balancesDecorated.fiatBalance && (
+            <>~{balancesDecorated.fiatBalance}</>
+          )}
+        </div>
+      )}
     </div>
   );
 }

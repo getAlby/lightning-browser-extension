@@ -24,7 +24,9 @@ interface AccountContextType {
     fiatBalance: string;
     accountBalance: string;
   };
+  // True while the account is being initialized for the first time after a page load
   statusLoading: boolean;
+  // True while the account is being loaded (during account switches)
   accountLoading: boolean;
   unlock: (user: string, callback: VoidFunction) => Promise<void>;
   lock: (callback: VoidFunction) => void;
@@ -57,8 +59,7 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
   const [fiatBalance, setFiatBalance] = useState("");
 
   const isSatsAccount = account?.currency === "BTC"; // show fiatValue only if the base currency is not already fiat
-  const showFiat =
-    !isLoadingSettings && settings.showFiat && !statusLoading && isSatsAccount;
+  const showFiat = !isLoadingSettings && settings.showFiat && isSatsAccount;
 
   const unlock = async (password: string, callback: VoidFunction) => {
     return api
