@@ -59,8 +59,7 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
   const [fiatBalance, setFiatBalance] = useState("");
 
   const isSatsAccount = account?.currency === "BTC"; // show fiatValue only if the base currency is not already fiat
-  const showFiat =
-    !isLoadingSettings && settings.showFiat && !statusLoading && isSatsAccount;
+  const showFiat = !isLoadingSettings && settings.showFiat && isSatsAccount;
 
   const unlock = (password: string, callback: VoidFunction) => {
     return api.unlock(password).then((response) => {
