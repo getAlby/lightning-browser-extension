@@ -376,6 +376,35 @@
         "actions": {
           "remove_account": "Ta bort kontot",
           "export": "Exportera"
+        },
+        "mnemonic": {
+          "saved": "Hemlig nyckel krypterad och sparad framgångsrikt.",
+          "existing_nostr_key_notice": "⚠️ Detta konto har redan en nostr privat nyckeluppsättning och kommer inte att härledas från denna hemliga nyckel. Du kan hantera din nostr-nyckel från dina kontoinställningar.",
+          "generate": {
+            "title": "Generera din hemliga nyckel",
+            "button": "Generera hemlig nyckel"
+          },
+          "backup": {
+            "title": "Säkerhetskopiera din hemliga nyckel",
+            "confirm": "Jag har säkerhetskopierat mitt kontos hemliga nyckel på en privat och säker plats",
+            "error_confirm": "Bekräfta att du har säkerhetskopierat din hemliga nyckel.",
+            "save": "Spara hemlig nyckel",
+            "button": "Backa upp hemlig nyckel",
+            "description1": "Förutom Bitcoin Lightning Network låter Alby dig generera nycklar och interagera med andra protokoll som:",
+            "protocols": {
+              "nostr": "Nostr"
+            },
+            "warning": "⚠️ Glöm inte att säkerhetskopiera din hemliga nyckel! Att inte säkerhetskopiera det kan resultera i att du permanent förlorar åtkomst till din Nostr-identitet eller tillgångar som du hanterar med denna nyckel.",
+            "description2": "Din hemliga nyckel är en uppsättning av 12 ord som låter dig komma åt dina nycklar till dessa protokoll på en ny enhet eller om du förlorar åtkomsten till ditt konto. Se till att skriva ner det på ett papper och förvara det säkert:"
+          },
+          "import": {
+            "title": "Importera en hemlig nyckel",
+            "description": "Använd en befintlig hemlig nyckel för att återställa dina härledda nycklar.",
+            "button": "Importera hemlig nyckel"
+          },
+          "title": "Hemlig nyckel",
+          "description": "Din konto hemliga nyckel låter dig använda Alby för att interagera med protokoll som Nostr.",
+          "description2": "Din hemliga nyckel är en uppsättning av 12 ord som låter dig komma åt dina nycklar till protokoll som Nostr på en ny enhet eller om du förlorar åtkomsten till ditt konto."
         }
       }
     },
