@@ -1,9 +1,6 @@
 import { auth, Client } from "alby-js-sdk";
 import { RequestOptions } from "alby-js-sdk/dist/request";
 import { Invoice, Token } from "alby-js-sdk/dist/types";
-import type { Method } from "axios";
-import Base64 from "crypto-js/enc-base64";
-import hmacSHA256 from "crypto-js/hmac-sha256";
 import browser from "webextension-polyfill";
 import { decryptData, encryptData } from "~/common/lib/crypto";
 import { Account, OAuthToken } from "~/types";
@@ -33,8 +30,6 @@ interface Config {
   oAuthToken: OAuthToken | undefined;
 }
 
-const HMAC_VERIFY_HEADER_KEY =
-  process.env.HMAC_VERIFY_HEADER_KEY || "alby-extension"; // default is mainly that TS is happy
 export default class Alby implements Connector {
   private account: Account;
   private config: Config;
@@ -281,21 +276,6 @@ export default class Alby implements Connector {
     await authClient.requestAccessToken(authToken);
   }
 
-  generateHmacVerification(uri: string) {
-    const mac = hmacSHA256(uri, HMAC_VERIFY_HEADER_KEY).toString(Base64);
-    return encodeURIComponent(mac);
-  }
-
-  async request<Type>(
-    method: Method,
-    path: string,
-    args?: Record<string, unknown>
-  ): Promise<Type> {
-    throw new Error(
-      "Unsupported. Migrate to alby-js-sdk and remove this function"
-    );
-  }
-
   private async _getAlbyClient(): Promise<Client> {
     if (this._clientPromise) {
       return this._clientPromise;
@@ -365,13 +345,8 @@ export default class Alby implements Connector {
         // make sure we immediately persist the updated accounts
         await state.getState().saveToStorage();
       }
-      console.info(
-        "Updated account oauth token",
-        this.config.oAuthToken,
-        "Account ID: " + this.account.id
-      );
     } else {
-      console.error("Invalid token", newToken);
+      console.error("Invalid token");
       throw new Error("Invalid token");
     }
   }

@@ -16,9 +16,6 @@ const BundleAnalyzerPlugin =
 if (!process.env.ALBY_API_URL) {
   process.env.ALBY_API_URL = ""; // env variables are passed as string. empty strings are still falsy
 }
-if (!process.env.WALLET_ROOT_URL) {
-  process.env.WALLET_ROOT_URL = ""; // env variables are passed as string. empty strings are still falsy
-}
 
 // default value is set in the code where it is used
 if (!process.env.ALBY_OAUTH_AUTHORIZE_URL) {
@@ -169,7 +166,6 @@ var options = {
       "BITCOIN_JUNGLE_GALOY_URL",
       "NODE_ENV",
       "TARGET_BROWSER",
-      "WALLET_ROOT_URL",
       "VERSION",
       "HMAC_VERIFY_HEADER_KEY",
       "ALBY_OAUTH_CLIENT_ID",

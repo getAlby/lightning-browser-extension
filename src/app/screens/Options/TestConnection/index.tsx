@@ -11,7 +11,6 @@ import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import type { AccountInfo } from "~/types";
 
-// alais should be replaced with connector
 export default function TestConnection() {
   const { getFormattedInCurrency } = useSettings();
   const auth = useAccount();

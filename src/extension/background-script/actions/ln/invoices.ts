@@ -19,7 +19,7 @@ const invoices = async (message: MessageInvoices) => {
         if (type !== "received") {
           throw new Error("unexpected invoice type: " + type);
         }
-        return { ...invoice, boostagram, type };
+        return { ...invoice, boostagram };
       });
 
     if (limit) {

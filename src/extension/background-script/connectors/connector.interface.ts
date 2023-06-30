@@ -24,7 +24,7 @@ export interface ConnectorInvoice {
   settled: boolean;
   settleDate: number;
   totalAmount: string;
-  type: string;
+  type: "received";
 }
 
 export interface MakeInvoiceArgs {
