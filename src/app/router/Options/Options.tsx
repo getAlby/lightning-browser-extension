@@ -30,6 +30,7 @@ import GenerateSecretKey from "~/app/screens/Accounts/GenerateSecretKey";
 import ImportSecretKey from "~/app/screens/Accounts/ImportSecretKey";
 import NostrSettings from "~/app/screens/Accounts/NostrSettings";
 import Discover from "~/app/screens/Discover";
+import OnChainReceive from "~/app/screens/OnChainReceive";
 import AlbyWalletCreate from "~/app/screens/connectors/AlbyWallet/create";
 import AlbyWalletLogin from "~/app/screens/connectors/AlbyWallet/login";
 import ChooseConnector from "~/app/screens/connectors/ChooseConnector";
@@ -72,6 +73,7 @@ function Options() {
             <Route path="confirmPayment" element={<ConfirmPayment />} />
             <Route path="keysend" element={<Keysend />} />
             <Route path="receive" element={<Receive />} />
+            <Route path="onChainReceive" element={<OnChainReceive />} />
             <Route path="wallet" element={<DefaultView />} />
             <Route path="transactions">
               <Route
