@@ -518,6 +518,13 @@ export interface MessageDecryptGet extends MessageDefault {
   action: "decrypt";
 }
 
+export interface MessageSignPsbt extends MessageDefault {
+  args: {
+    psbt: string;
+  };
+  action: "signPsbt";
+}
+
 export interface MessageGetAddress extends MessageDefault {
   // eslint-disable-next-line @typescript-eslint/ban-types
   args: {};
