@@ -21,7 +21,7 @@
         "actions": {
           "delete_edit_account": "Ungültiges Konto löschen und erneut bearbeiten"
         },
-        "ready": "Großartig, du bist startklar!",
+        "ready": "Großartig, du bist bereit für den Einsatz!",
         "initializing": "Dein Konto wird initialisiert. Bitte warte, dies kann eine Minute dauern...",
         "connection_error": "Verbindungsfehler",
         "connection_taking_long": "Der Verbindungsversuch dauert länger als erwartet... Sind deine Angaben korrekt? Ist deine Node erreichbar?",
@@ -435,8 +435,8 @@
         "title2": "Konto bearbeiten",
         "title1": "Konto Informationen",
         "name": {
-          "title": "Name",
-          "placeholder": "Konto Name"
+          "title": "Name anzeigen",
+          "placeholder": "Konto Anzeigename"
         },
         "export": {
           "title": "Konto exportieren",
@@ -476,6 +476,11 @@
           "hint": "ist ein einfaches und offenes Protokoll, das darauf abzielt, zensurresistente soziale Netzwerke zu schaffen. Nostr arbeitet mit kryptographischen Schlüsseln. Um etwas zu veröffentlichen, signiere es mit deinem Schlüssel und senden es an mehrere Relays. Du kannst Alby verwenden, um seinen Nostr-Schlüssel zu verwalten. Viele Nostr-Anwendungen erlauben dir dann, einfach den Schlüssel aus der Alby-Erweiterung zu verwenden.",
           "errors": {
             "failed_to_load": "Der Nostr Schlüssel konnte nicht geladen werden. Ist es ein gültiger Nostr Schlüssel?"
+          },
+          "settings": {
+            "label": "Nostr Einstellungen",
+            "title": "Nostr Einstellungen",
+            "description": "Leite dein Nostr-Schlüssel von deinem geheimen Schlüssel ab oder importiere den vorhandenen privaten Schlüssel, indem du in das Feld \"Nostr Private Key\" einfügst."
           }
         },
         "remove": {
@@ -486,6 +491,50 @@
         "actions": {
           "remove_account": "Konto entfernen",
           "export": "Exportieren"
+        },
+        "mnemonic": {
+          "title": "Geheimer Schlüssel",
+          "backup": {
+            "protocols": {
+              "nostr": "Nostr"
+            },
+            "title": "Sichere deinen geheimen Schlüssel",
+            "error_confirm": "Bitte bestätige, dass du eine Sicherungskopie deines geheimen Schlüssels erstellt hast.",
+            "save": "Geheimschlüssel speichern",
+            "button": "Backup-Geheimschlüssel",
+            "warning": "⚠️ Vergesse nicht, deinen geheimen Schlüssel zu sichern! Wenn du ihn nicht sicherst, kann dies dazu führen, dass du den Zugang zu deiner Nostr-Identität oder zu den von dir mit diesem Schlüssel verwalteten Assets dauerhaft verlierst.",
+            "confirm": "Ich habe den geheimen Schlüssel meines Kontos an einem privaten und sicheren Ort aufbewahrt.",
+            "description1": "Zusätzlich zum Bitcoin Lightning Network ermöglicht Alby die Generierung von Schlüsseln und die Interaktion mit anderen Protokollen wie z.B.:",
+            "description2": "Dein Geheimschlüssel besteht aus 12 Wörtern, mit denen du auf einem neuen Gerät oder bei Verlust des Zugangs zu deinem Konto auf deine Schlüssel zu diesen Protokollen zugreifen kannst. Schreibe es auf ein Blatt Papier und bewahre es sicher auf:"
+          },
+          "description2": "Dein Geheimschlüssel besteht aus 12 Wörtern, mit denen du deine Schlüssel für Protokolle wie Nostr auf einem neuen Gerät abrufen kannst oder falls du den Zugang zu deinem Konto verlierst.",
+          "saved": "Geheimschlüssel verschlüsselt und erfolgreich gespeichert.",
+          "generate": {
+            "title": "Erzeuge einen geheimen Schlüssel",
+            "button": "Geheimen Schlüssel generieren"
+          },
+          "import": {
+            "title": "Importieren eines geheimen Schlüssels",
+            "description": "Verwende einen vorhandenen Geheimschlüssel, um deine abgeleiteten Schlüssel wiederherzustellen.",
+            "confirm_overwrite": "Du hast bereits einen geheimen Schlüssel, bist du sicher, dass du ihn überschreiben willst?",
+            "button": "Geheimen Schlüssel importieren"
+          },
+          "inputs": {
+            "title": "Dein geheimer Schlüssel"
+          },
+          "description": "Mit deinem geheimen Kontoschlüssel kannst du Alby verwenden, um mit Protokollen wie Nostr zu interagieren.",
+          "existing_nostr_key_notice": "⚠️ Für dieses Konto wurde bereits ein privater nostr-Schlüssel festgelegt und wird nicht von diesem geheimen Schlüssel abgeleitet. Du kannst deinen nostr-Schlüssel in deiner Kontoeinstellungen verwalten."
+        },
+        "bitcoin": {
+          "network": {
+            "title": "Bitcoin-Netzwerk",
+            "subtitle": "Wähle ein Netz zur Ableitung von Adressen und zur Entschlüsselung von Transaktionen",
+            "options": {
+              "bitcoin": "Mainnet",
+              "testnet": "Testnet",
+              "regtest": "Regtest"
+            }
+          }
         }
       }
     },
