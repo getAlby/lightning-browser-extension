@@ -333,8 +333,7 @@
             "title": "Administra tu clave",
             "subtitle": "Pega tu clave privada o genera una nueva. <0>Más información \"</0>",
             "warning": "Introduzca el nombre de la cuenta para confirmar la eliminación de la clave privada:",
-            "failed_to_remove": "El nombre de cuenta introducido no coincide, tu antiguo privado ha sido restaurado.",
-            "backup": "⚠️ ¡No olvides hacer una copia de seguridad de tu clave privada! Si no haces una copia de seguridad de tu clave puedes perder el acceso."
+            "failed_to_remove": "El nombre de cuenta introducido no coincide, tu antiguo privado ha sido restaurado."
           },
           "public_key": {
             "label": "Clave Pública"

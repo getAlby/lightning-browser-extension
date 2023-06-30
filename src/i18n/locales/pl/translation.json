@@ -376,7 +376,6 @@
             "success": "Klucz prywatny został zaszyfrowany i zapisany.",
             "successfully_removed": "Klucz prywatny usunięty.",
             "label": "Klucz prywatny",
-            "backup": "⚠️ Nie zapomnij zrobić kopii bezpieczeństwa Twojego klucza prywatnego! Brak kopii może doprowadzić do utraty dostępu.",
             "failed_to_remove": "Wprowadzona nazwa konta się nie zgadza, został odtworzony Twój stary klucz prywatny."
           },
           "public_key": {

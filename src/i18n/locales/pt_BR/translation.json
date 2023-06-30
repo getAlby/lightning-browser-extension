@@ -332,8 +332,7 @@
             "warning": "Digite o nome da conta para confirmar a exclusão da chave privada:",
             "subtitle": "Cole sua chave privada ou gere uma nova. <0>Saiba mais »</0>",
             "success": "Chave privada encriptada e salva com sucesso.",
-            "failed_to_remove": "O nome da conta inserido não está correto, sua chave privada antiga foi restaurada.",
-            "backup": "⚠️ Faça o backup da sua chave privada! Não fazer o backup da sua chave pode resultar na perda permanente de acesso."
+            "failed_to_remove": "O nome da conta inserido não está correto, sua chave privada antiga foi restaurada."
           },
           "public_key": {
             "label": "Chave pública"

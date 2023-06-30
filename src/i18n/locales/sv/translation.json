@@ -339,7 +339,6 @@
             "title": "Hantera dina nycklar",
             "successfully_removed": "Privat nyckel har tagits bort.",
             "label": "Privat Nyckel",
-            "backup": "⚠️ Glöm inte att säkerhetskopiera din privata nyckel! Att inte säkerhetskopiera din nyckel kan leda till att du förlorar åtkomst.",
             "warning": "Ange namnet på kontot för att bekräfta raderingen av den privata nyckeln:",
             "subtitle": "Klistra in din privata nyckel eller skapa en ny. <0>Läs mer »</0>",
             "success": "Privat nyckel krypterad och sparad.",

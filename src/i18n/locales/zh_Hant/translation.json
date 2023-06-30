@@ -403,8 +403,7 @@
             "success": "私鑰加密並成功保存。",
             "successfully_removed": "私鑰已成功刪除。",
             "label": "私鑰",
-            "failed_to_remove": "輸入的帳戶名稱不匹配，你的舊私鑰已恢復。",
-            "backup": "⚠️ 不要忘記備份你的私鑰！不備份私鑰可能會導致失去訪問權。"
+            "failed_to_remove": "輸入的帳戶名稱不匹配，你的舊私鑰已恢復。"
           },
           "public_key": {
             "label": "公鑰"

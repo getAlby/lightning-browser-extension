@@ -456,8 +456,7 @@
             "success": "Privater Schlüssel erfolgreich verschlüsselt und gespeichert.",
             "successfully_removed": "Privater Schlüssel erfolgreich entfernt.",
             "label": "Privater Schlüssel",
-            "failed_to_remove": "Der eingegebene Kontoname stimmt nicht überein, dein alter Privatname wurde wiederhergestellt.",
-            "backup": "Vergesse nicht, deinen privaten Schlüssel zu sichern! Wenn du deinen Schlüssel nicht sicherst, kannst du den Zugang verlieren."
+            "failed_to_remove": "Der eingegebene Kontoname stimmt nicht überein, dein alter Privatname wurde wiederhergestellt."
           },
           "public_key": {
             "label": "Öffentlicher Schlüssel"
