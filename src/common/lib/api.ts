@@ -10,6 +10,7 @@ import type {
   AccountInfo,
   Accounts,
   Allowance,
+  BitcoinNetworkType,
   ConnectorType,
   DbPayment,
   Invoice,
@@ -39,6 +40,9 @@ export interface AccountInfoRes {
 export interface GetAccountRes
   extends Pick<Account, "id" | "connector" | "name"> {
   nostrEnabled: boolean;
+  hasMnemonic: boolean;
+  hasImportedNostrKey: boolean;
+  bitcoinNetwork: BitcoinNetworkType;
 }
 interface StatusRes {
   configured: boolean;
@@ -101,7 +105,10 @@ export const swrGetAccountInfo = async (
   });
 };
 export const getAccounts = () => msg.request<Accounts>("getAccounts");
-export const getAccount = () => msg.request<GetAccountRes>("getAccount");
+export const getAccount = (id?: string) =>
+  msg.request<GetAccountRes>("getAccount", {
+    id,
+  });
 export const updateAllowance = () => msg.request<Accounts>("updateAllowance");
 export const selectAccount = (id: string) =>
   msg.request("selectAccount", { id });
@@ -143,6 +150,46 @@ export const lnurlAuth = (
 export const getCurrencyRate = async () =>
   msg.request<{ rate: number }>("getCurrencyRate");
 
+const getNostrPrivateKey = (id: string): Promise<string> =>
+  msg.request("nostr/getPrivateKey", {
+    id,
+  });
+
+const getNostrPublicKey = (id: string): Promise<string> =>
+  msg.request("nostr/getPublicKey", {
+    id,
+  });
+
+const generateNostrPrivateKey = (id: string): Promise<string> =>
+  msg.request("nostr/generatePrivateKey", {
+    id,
+  });
+
+const removeNostrPrivateKey = (id: string): Promise<void> =>
+  msg.request("nostr/removePrivateKey", {
+    id,
+  });
+
+const setNostrPrivateKey = (id: string, privateKey: string): Promise<void> =>
+  msg.request("nostr/setPrivateKey", {
+    id,
+    privateKey,
+  });
+
+const getMnemonic = (id: string): Promise<string> =>
+  msg.request("getMnemonic", {
+    id,
+  });
+
+const generateMnemonic = (): Promise<string> => msg.request("generateMnemonic");
+
+// TODO: consider adding removeMnemonic function, make mnemonic a string here
+const setMnemonic = (id: string, mnemonic: string | null): Promise<void> =>
+  msg.request("setMnemonic", {
+    id,
+    mnemonic,
+  });
+
 export default {
   getAccount,
   getAccountInfo,
@@ -167,4 +214,14 @@ export default {
   getInvoices,
   lnurlAuth,
   getCurrencyRate,
+  nostr: {
+    getPrivateKey: getNostrPrivateKey,
+    getPublicKey: getNostrPublicKey,
+    generatePrivateKey: generateNostrPrivateKey,
+    setPrivateKey: setNostrPrivateKey,
+    removePrivateKey: removeNostrPrivateKey,
+  },
+  getMnemonic,
+  setMnemonic,
+  generateMnemonic,
 };

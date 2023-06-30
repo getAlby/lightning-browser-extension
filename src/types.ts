@@ -11,6 +11,8 @@ import { Event } from "./extension/providers/nostr/types";
 
 export type ConnectorType = keyof typeof connectors;
 
+export type BitcoinNetworkType = "bitcoin" | "testnet" | "regtest";
+
 export interface Account {
   id: string;
   connector: ConnectorType;
@@ -18,6 +20,8 @@ export interface Account {
   name: string;
   nostrPrivateKey?: string | null;
   mnemonic?: string | null;
+  hasImportedNostrKey?: boolean;
+  bitcoinNetwork?: BitcoinNetworkType;
 }
 
 export interface Accounts {
@@ -153,10 +157,6 @@ export type NavigationState = {
       method: string;
       description: string;
     };
-    derivationPath?: string;
-    index?: number;
-    num?: number;
-    change?: boolean;
   };
   isPrompt?: true; // only passed via Prompt.tsx
   action: string;
@@ -203,7 +203,8 @@ export interface MessageAccountAdd extends MessageDefault {
 export interface MessageAccountEdit extends MessageDefault {
   args: {
     id: Account["id"];
-    name: Account["name"];
+    name?: Account["name"];
+    bitcoinNetwork?: BitcoinNetworkType;
   };
   action: "editAccount";
 }
@@ -431,29 +432,31 @@ export interface MessageCurrencyRateGet extends MessageDefault {
   action: "getCurrencyRate";
 }
 
-// TODO: add Nostr Prefix
-export interface MessagePublicKeyGet extends MessageDefault {
+export interface MessageNostrPublicKeyGetOrPrompt extends MessageDefault {
   action: "getPublicKeyOrPrompt";
 }
 
-// TODO: add Nostr Prefix
-export interface MessagePrivateKeyGet extends MessageDefault {
+export interface MessageNostrPublicKeyGet extends MessageDefault {
+  args: {
+    id: Account["id"];
+  };
+  action: "getPublicKey";
+}
+export interface MessageNostrPrivateKeyGet extends MessageDefault {
   args?: {
     id?: Account["id"];
   };
   action: "getPrivateKey";
 }
 
-// TODO: add Nostr Prefix
-export interface MessagePrivateKeyGenerate extends MessageDefault {
+export interface MessageNostrPrivateKeyGenerate extends MessageDefault {
   args?: {
-    type?: "random";
+    id?: Account["id"];
   };
   action: "generatePrivateKey";
 }
 
-// TODO: add Nostr Prefix
-export interface MessagePrivateKeySet extends MessageDefault {
+export interface MessageNostrPrivateKeySet extends MessageDefault {
   args: {
     id?: Account["id"];
     privateKey: string;
@@ -461,8 +464,7 @@ export interface MessagePrivateKeySet extends MessageDefault {
   action: "setPrivateKey";
 }
 
-// TODO: add Nostr Prefix
-export interface MessagePrivateKeyRemove extends MessageDefault {
+export interface MessageNostrPrivateKeyRemove extends MessageDefault {
   args: {
     id?: Account["id"];
   };
@@ -482,6 +484,9 @@ export interface MessageMnemonicGet extends MessageDefault {
     id?: Account["id"];
   };
   action: "getMnemonic";
+}
+export interface MessageMnemonicGenerate extends MessageDefault {
+  action: "generateMnemonic";
 }
 
 export interface MessageSignEvent extends MessageDefault {
@@ -748,7 +753,6 @@ export interface SettingsStorage {
   exchange: SupportedExchanges;
   nostrEnabled: boolean;
   closedTips: TIPS[];
-  bitcoinNetwork: "bitcoin" | "regtest";
 }
 
 export interface Badge {

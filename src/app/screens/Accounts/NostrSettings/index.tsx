@@ -6,58 +6,43 @@ import Container from "@components/Container";
 import Loading from "@components/Loading";
 import { FormEvent, useCallback, useEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Alert from "~/app/components/Alert";
+import Avatar from "~/app/components/Avatar";
 import Button from "~/app/components/Button";
+import { ContentBox } from "~/app/components/ContentBox";
 import InputCopyButton from "~/app/components/InputCopyButton";
 import TextField from "~/app/components/form/TextField";
-import { useAccount } from "~/app/context/AccountContext";
-import {
-  NostrKeyOrigin,
-  getNostrKeyOrigin,
-} from "~/app/utils/getNostrKeyOrigin";
-import { saveNostrPrivateKey } from "~/app/utils/saveNostrPrivateKey";
-import { deriveNostrPrivateKey } from "~/common/lib/mnemonic";
-import msg from "~/common/lib/msg";
+import api, { GetAccountRes } from "~/common/lib/api";
 import { default as nostr, default as nostrlib } from "~/common/lib/nostr";
 
-function NostrAdvancedSettings() {
-  const account = useAccount();
+function NostrSettings() {
   const { t: tCommon } = useTranslation("common");
   const { t } = useTranslation("translation", {
     keyPrefix: "accounts.account_view",
   });
-  // TODO: add hooks useMnemonic, useNostrPrivateKey, ...
-  const [mnemonic, setMnemonic] = useState("");
+  const navigate = useNavigate();
+  const [hasMnemonic, setHasMnemonic] = useState(false);
   const [currentPrivateKey, setCurrentPrivateKey] = useState("");
   const [nostrPrivateKey, setNostrPrivateKey] = useState("");
   const [nostrPrivateKeyVisible, setNostrPrivateKeyVisible] = useState(false);
   const [nostrPublicKey, setNostrPublicKey] = useState("");
-  const [nostrKeyOrigin, setNostrKeyOrigin] =
-    useState<NostrKeyOrigin>("unknown");
-  const { id } = useParams();
+  const [hasImportedNostrKey, setHasImportedNostrKey] = useState(false);
+  const [account, setAccount] = useState<GetAccountRes>();
+  const { id } = useParams() as { id: string };
 
   const fetchData = useCallback(async () => {
     if (id) {
-      const priv = (await msg.request("nostr/getPrivateKey", {
-        id,
-      })) as string;
+      const priv = await api.nostr.getPrivateKey(id);
       if (priv) {
         setCurrentPrivateKey(priv);
+        setNostrPrivateKey(priv);
       }
-
-      const accountMnemonic = (await msg.request("getMnemonic", {
-        id,
-      })) as string;
-      if (accountMnemonic) {
-        setMnemonic(accountMnemonic);
-      }
-
-      if (priv) {
-        const keyOrigin = await getNostrKeyOrigin(priv, accountMnemonic);
-        setNostrKeyOrigin(keyOrigin);
-      }
+      const accountResponse = await api.getAccount(id);
+      setHasMnemonic(accountResponse.hasMnemonic);
+      setHasImportedNostrKey(accountResponse.hasImportedNostrKey);
+      setAccount(accountResponse);
     }
   }, [id]);
 
@@ -67,11 +52,12 @@ function NostrAdvancedSettings() {
 
   useEffect(() => {
     try {
+      // TODO: is there a way this can be moved to the background script and use the Nostr object?
+      // NOTE: it is done this way to show the user the new public key before saving
       setNostrPublicKey(
-        currentPrivateKey ? nostr.generatePublicKey(currentPrivateKey) : ""
-      );
-      setNostrPrivateKey(
-        currentPrivateKey ? nostrlib.hexToNip19(currentPrivateKey, "nsec") : ""
+        nostrPrivateKey
+          ? nostr.derivePublicKey(nostr.normalizeToHex(nostrPrivateKey))
+          : ""
       );
     } catch (e) {
       if (e instanceof Error)
@@ -83,30 +69,28 @@ function NostrAdvancedSettings() {
           </p>
         );
     }
-  }, [currentPrivateKey, t]);
+  }, [nostrPrivateKey, t]);
 
   function onCancel() {
-    history.back();
+    // go to account settings
+    navigate(`/accounts/${id}`);
+  }
+
+  function handleDeleteKeys() {
+    setNostrPrivateKey("");
   }
 
   async function handleDeriveNostrKeyFromSecretKey() {
-    if (!id) {
-      throw new Error("No id set");
-    }
-
-    if (!mnemonic) {
+    if (!hasMnemonic) {
       throw new Error("No mnemonic exists");
     }
 
-    const nostrPrivateKey = await deriveNostrPrivateKey(mnemonic);
-
-    await handleSaveNostrPrivateKey(nostrPrivateKey);
+    const derivedNostrPrivateKey = await api.nostr.generatePrivateKey(id);
+    setNostrPrivateKey(derivedNostrPrivateKey);
   }
 
-  async function handleSaveNostrPrivateKey(nostrPrivateKey: string) {
-    if (!id) {
-      throw new Error("No id set");
-    }
+  // TODO: simplify this method - would be good to have a dedicated "remove nostr key" button
+  async function handleSaveNostrPrivateKey() {
     if (nostrPrivateKey === currentPrivateKey) {
       throw new Error("private key hasn't changed");
     }
@@ -114,14 +98,19 @@ function NostrAdvancedSettings() {
     if (
       currentPrivateKey &&
       prompt(t("nostr.private_key.warning"))?.toLowerCase() !==
-        account?.account?.name?.toLowerCase()
+        account?.name?.toLowerCase()
     ) {
       toast.error(t("nostr.private_key.failed_to_remove"));
       return;
     }
 
     try {
-      saveNostrPrivateKey(id, nostrPrivateKey);
+      if (nostrPrivateKey) {
+        await api.nostr.setPrivateKey(id, nostrPrivateKey);
+      } else {
+        await api.nostr.removePrivateKey(id);
+      }
+
       toast.success(
         t(
           nostrPrivateKey
@@ -135,7 +124,8 @@ function NostrAdvancedSettings() {
         toast.error(e.message);
       }
     }
-    history.back();
+    // go to account settings
+    navigate(`/accounts/${id}`);
   }
 
   return !account ? (
@@ -147,32 +137,36 @@ function NostrAdvancedSettings() {
       <form
         onSubmit={(e: FormEvent) => {
           e.preventDefault();
-          handleSaveNostrPrivateKey(nostrPrivateKey);
+          handleSaveNostrPrivateKey();
         }}
       >
         <Container maxWidth="sm">
-          <div className="mt-12 shadow bg-white sm:rounded-md sm:overflow-hidden p-10 divide-black/10 dark:divide-white/10 dark:bg-surface-02dp flex flex-col gap-4">
+          <ContentBox>
             <div>
               <h1 className="font-bold text-2xl dark:text-white">
-                {t("nostr.advanced_settings.title")}
+                {t("nostr.settings.title")}
               </h1>
+              <div className="flex gap-4 my-4 items-center">
+                <Avatar name={account.id} size={32} />
+                <p className="text-gray-500 dark:text-neutral-500">
+                  {account.name}
+                </p>
+              </div>
               <p className="text-gray-500 dark:text-neutral-500">
-                {t("nostr.advanced_settings.description")}
+                {t("nostr.settings.description")}
               </p>
             </div>
 
-            {currentPrivateKey && nostrKeyOrigin !== "secret-key" ? (
-              <Alert type="warn">
-                {t(
-                  nostrKeyOrigin === "unknown"
-                    ? "nostr.advanced_settings.imported_key_warning"
-                    : "nostr.advanced_settings.legacy_derived_key_warning"
-                )}
-              </Alert>
-            ) : nostrKeyOrigin === "secret-key" ? (
-              <Alert type="info">
-                {t("nostr.advanced_settings.can_restore")}
-              </Alert>
+            {hasMnemonic &&
+            currentPrivateKey &&
+            nostrPrivateKey === currentPrivateKey ? (
+              hasImportedNostrKey ? (
+                <Alert type="warn">
+                  {t("nostr.settings.imported_key_warning")}
+                </Alert>
+              ) : (
+                <Alert type="info">{t("nostr.settings.can_restore")}</Alert>
+              )
             ) : null}
 
             <div>
@@ -215,35 +209,44 @@ function NostrAdvancedSettings() {
                 disabled
                 endAdornment={<InputCopyButton value={nostrPublicKey} />}
               />
-              {nostrKeyOrigin !== "secret-key" &&
-                (mnemonic || !currentPrivateKey) && (
-                  <div className="mt-4">
-                    {mnemonic ? (
-                      <Button
-                        outline
-                        label={t("nostr.advanced_settings.derive")}
-                        onClick={handleDeriveNostrKeyFromSecretKey}
-                      />
-                    ) : (
-                      <Alert type="warn">
-                        <Trans
-                          i18nKey={"nostr.advanced_settings.no_secret_key"}
-                          t={t}
-                          components={[
-                            // eslint-disable-next-line react/jsx-key
-                            <Link
-                              to="../secret-key/backup"
-                              relative="path"
-                              className="underline"
-                            />,
-                          ]}
-                        />
-                      </Alert>
-                    )}
-                  </div>
+              <div className="mt-4 flex gap-4 items-center">
+                {nostrPrivateKey && (
+                  <Button
+                    error
+                    label={t("nostr.settings.delete")}
+                    onClick={handleDeleteKeys}
+                  />
                 )}
+                {hasImportedNostrKey &&
+                  nostrPrivateKey === currentPrivateKey && (
+                    <>
+                      {hasMnemonic ? (
+                        <Button
+                          outline
+                          label={t("nostr.settings.derive")}
+                          onClick={handleDeriveNostrKeyFromSecretKey}
+                        />
+                      ) : (
+                        <Alert type="warn">
+                          <Trans
+                            i18nKey={"nostr.settings.no_secret_key"}
+                            t={t}
+                            components={[
+                              // eslint-disable-next-line react/jsx-key
+                              <Link
+                                to="../secret-key/generate"
+                                relative="path"
+                                className="underline"
+                              />,
+                            ]}
+                          />
+                        </Alert>
+                      )}
+                    </>
+                  )}
+              </div>
             </div>
-          </div>
+          </ContentBox>
           <div className="flex justify-center mt-8 mb-16 gap-4">
             <Button label={tCommon("actions.cancel")} onClick={onCancel} />
             <Button
@@ -261,4 +264,4 @@ function NostrAdvancedSettings() {
   );
 }
 
-export default NostrAdvancedSettings;
+export default NostrSettings;

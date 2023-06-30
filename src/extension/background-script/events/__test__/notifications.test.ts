@@ -31,7 +31,6 @@ const settings: SettingsStorage = {
   websiteEnhancements: true,
   nostrEnabled: false,
   closedTips: [],
-  bitcoinNetwork: "bitcoin",
 };
 
 const mockState = {

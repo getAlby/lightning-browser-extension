@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import getOS from "~/common/utils/os";
 
 type Props = {
   hasTorCallback: (hasTor: boolean) => void;
@@ -10,14 +11,6 @@ function CompanionDownloadInfo({ hasTorCallback }: Props) {
   const { t } = useTranslation("components", {
     keyPrefix: "companion_download_info",
   });
-
-  function getOS() {
-    const userAgent = navigator.userAgent;
-    if (userAgent.indexOf("Win") !== -1) return "Windows";
-    if (userAgent.indexOf("Mac") !== -1) return "MacOS";
-    if (userAgent.indexOf("X11") !== -1) return "UNIX";
-    if (userAgent.indexOf("Linux") !== -1) return "Linux";
-  }
 
   function onChangeConnectionMode(isTor: boolean) {
     setIsTor(isTor);

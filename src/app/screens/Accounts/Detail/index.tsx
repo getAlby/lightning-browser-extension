@@ -24,19 +24,16 @@ import Avatar from "~/app/components/Avatar";
 import Badge from "~/app/components/Badge";
 import InputCopyButton from "~/app/components/InputCopyButton";
 import MenuDivider from "~/app/components/Menu/MenuDivider";
+import Select from "~/app/components/form/Select";
 import { useAccount } from "~/app/context/AccountContext";
 import { useAccounts } from "~/app/context/AccountsContext";
 import { useSettings } from "~/app/context/SettingsContext";
-import {
-  NostrKeyOrigin,
-  getNostrKeyOrigin,
-} from "~/app/utils/getNostrKeyOrigin";
 import api, { GetAccountRes } from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import nostr from "~/common/lib/nostr";
-import type { Account } from "~/types";
+import type { Account, BitcoinNetworkType } from "~/types";
 
-type AccountAction = Omit<Account, "connector" | "config" | "nostrPrivateKey">;
+type AccountAction = Pick<Account, "id" | "name">;
 dayjs.extend(relativeTime);
 
 function AccountDetail() {
@@ -61,12 +58,9 @@ function AccountDetail() {
   });
   const [accountName, setAccountName] = useState("");
 
-  // TODO: add hooks useMnemonic, useNostrPrivateKey, ...
-  const [mnemonic, setMnemonic] = useState("");
-  const [currentPrivateKey, setCurrentPrivateKey] = useState("");
+  const [hasMnemonic, setHasMnemonic] = useState(false);
   const [nostrPublicKey, setNostrPublicKey] = useState("");
-  const [nostrKeyOrigin, setNostrKeyOrigin] =
-    useState<NostrKeyOrigin>("unknown");
+  const [hasImportedNostrKey, setHasImportedNostrKey] = useState(false);
 
   const [exportLoading, setExportLoading] = useState(false);
   const [exportModalIsOpen, setExportModalIsOpen] = useState(false);
@@ -74,29 +68,21 @@ function AccountDetail() {
   const fetchData = useCallback(async () => {
     try {
       if (id) {
-        const response = await msg.request<GetAccountRes>("getAccount", {
-          id,
-        });
-
+        const response = await api.getAccount(id);
         setAccount(response);
         setAccountName(response.name);
+        setHasMnemonic(response.hasMnemonic);
+        setHasImportedNostrKey(response.hasImportedNostrKey);
 
-        const priv = (await msg.request("nostr/getPrivateKey", {
-          id,
-        })) as string;
-        if (priv) {
-          setCurrentPrivateKey(priv);
-        }
-
-        const accountMnemonic = (await msg.request("getMnemonic", {
-          id,
-        })) as string;
-        if (accountMnemonic) {
-          setMnemonic(accountMnemonic);
-        }
-        if (priv) {
-          const keyOrigin = await getNostrKeyOrigin(priv, accountMnemonic);
-          setNostrKeyOrigin(keyOrigin);
+        if (response.nostrEnabled) {
+          const nostrPublicKeyHex = await api.nostr.getPublicKey(id);
+          if (nostrPublicKeyHex) {
+            const nostrPublicKeyNpub = nostr.hexToNip19(
+              nostrPublicKeyHex,
+              "npub"
+            );
+            setNostrPublicKey(nostrPublicKeyNpub);
+          }
         }
       }
     } catch (e) {
@@ -167,11 +153,10 @@ function AccountDetail() {
       window.prompt(t("remove_secretkey.confirm", { name }))?.toLowerCase() ==
       accountName.toLowerCase()
     ) {
-      await msg.request("setMnemonic", {
-        id,
-        mnemonic: null,
-      });
-      setMnemonic("");
+      // TODO: consider adding removeMnemonic function
+      await api.setMnemonic(id, null);
+      setHasMnemonic(false);
+      setHasImportedNostrKey(true);
       toast.success(t("remove_secretkey.success"));
     } else {
       toast.error(t("remove.error"));
@@ -185,23 +170,6 @@ function AccountDetail() {
       hasFetchedData.current = true;
     }
   }, [fetchData, isLoadingSettings]);
-
-  useEffect(() => {
-    try {
-      setNostrPublicKey(
-        currentPrivateKey ? nostr.generatePublicKey(currentPrivateKey) : ""
-      );
-    } catch (e) {
-      if (e instanceof Error)
-        toast.error(
-          <p>
-            {t("nostr.errors.failed_to_load")}
-            <br />
-            {e.message}
-          </p>
-        );
-    }
-  }, [currentPrivateKey, t]);
 
   return !account ? (
     <div className="flex justify-center mt-5">
@@ -370,7 +338,7 @@ function AccountDetail() {
           </p>
 
           <div className="shadow bg-white sm:rounded-md sm:overflow-hidden p-6 dark:bg-surface-02dp flex flex-col gap-4">
-            {mnemonic && (
+            {hasMnemonic && (
               <Alert type="warn">{t("mnemonic.backup.warning")}</Alert>
             )}
 
@@ -378,7 +346,7 @@ function AccountDetail() {
               <div className="w-9/12">
                 <p className="text-gray-900 dark:text-white font-medium">
                   {t(
-                    mnemonic
+                    hasMnemonic
                       ? "mnemonic.backup.title"
                       : "mnemonic.generate.title"
                   )}
@@ -389,10 +357,10 @@ function AccountDetail() {
               </div>
 
               <div className="w-1/5 flex-none">
-                <Link to="secret-key/backup">
+                <Link to={`secret-key/${hasMnemonic ? "backup" : "generate"}`}>
                   <Button
                     label={t(
-                      mnemonic
+                      hasMnemonic
                         ? "mnemonic.backup.button"
                         : "mnemonic.generate.button"
                     )}
@@ -402,29 +370,33 @@ function AccountDetail() {
                 </Link>
               </div>
             </div>
+            {!hasMnemonic && (
+              <>
+                <MenuDivider />
+                <div className="flex justify-between items-end">
+                  <div className="w-7/12">
+                    <p className="text-gray-900 dark:text-white font-medium">
+                      {t("mnemonic.import.title")}
+                    </p>
+                    <p className="text-gray-500 text-sm dark:text-neutral-500">
+                      {t("mnemonic.import.description")}
+                    </p>
+                  </div>
+
+                  <div className="w-1/5 flex-none">
+                    <Link to="secret-key/import">
+                      <Button
+                        label={t("mnemonic.import.button")}
+                        primary
+                        fullWidth
+                      />
+                    </Link>
+                  </div>
+                </div>
+              </>
+            )}
             <MenuDivider />
             <div className="flex justify-between items-end">
-              <div className="w-7/12">
-                <p className="text-gray-900 dark:text-white font-medium">
-                  {t("mnemonic.import.title")}
-                </p>
-                <p className="text-gray-500 text-sm dark:text-neutral-500">
-                  {t("mnemonic.import.description")}
-                </p>
-              </div>
-
-              <div className="w-1/5 flex-none">
-                <Link to="secret-key/import">
-                  <Button
-                    label={t("mnemonic.import.button")}
-                    primary
-                    fullWidth
-                  />
-                </Link>
-              </div>
-            </div>
-            <MenuDivider />
-            <div className="mb-4 flex justify-between items-end">
               <div className="w-7/12 flex items-center gap-2">
                 <TextField
                   id="nostrPublicKey"
@@ -436,7 +408,7 @@ function AccountDetail() {
                     nostrPublicKey && <InputCopyButton value={nostrPublicKey} />
                   }
                 />
-                {nostrPublicKey && nostrKeyOrigin !== "secret-key" && (
+                {nostrPublicKey && hasImportedNostrKey && (
                   <Badge
                     label="imported"
                     color="green-bitcoin"
@@ -447,12 +419,47 @@ function AccountDetail() {
 
               <div className="w-1/5 flex-none">
                 <Link to="nostr">
-                  <Button
-                    label={t("nostr.advanced_settings.label")}
-                    primary
-                    fullWidth
-                  />
+                  <Button label={t("nostr.settings.label")} primary fullWidth />
                 </Link>
+              </div>
+            </div>
+            <MenuDivider />
+            <div className="flex justify-between items-end">
+              <div className="w-7/12 flex flex-col gap-2">
+                <p className="text-gray-900 dark:text-white font-medium">
+                  {t("bitcoin.network.title")}
+                </p>
+                <p className="text-gray-500 text-sm dark:text-neutral-500">
+                  {t("bitcoin.network.subtitle")}
+                </p>
+              </div>
+
+              <div className="w-1/5 flex-none">
+                <Select
+                  name="network"
+                  value={account.bitcoinNetwork}
+                  onChange={async (event) => {
+                    // update local value
+                    setAccount({
+                      ...account,
+                      bitcoinNetwork: event.target.value as BitcoinNetworkType,
+                    });
+                    await msg.request("editAccount", {
+                      id,
+                      bitcoinNetwork: event.target.value,
+                    });
+                  }}
+                >
+                  <option value="bitcoin">
+                    {t("bitcoin.network.options.bitcoin")}
+                  </option>
+                  <option value="testnet">
+                    {t("bitcoin.network.options.testnet")}
+                  </option>
+                  <option value="regtest">
+                    {t("bitcoin.network.options.regtest")}
+                  </option>
+                </Select>
               </div>
             </div>
           </div>
@@ -465,7 +472,7 @@ function AccountDetail() {
             <div className="flex-grow border-t border-gray-300 dark:border-gray-700"></div>
           </div>
           <div className="shadow bg-white sm:rounded-md sm:overflow-hidden mb-5 px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">
-            {mnemonic && (
+            {hasMnemonic && (
               <Setting
                 title={t("remove_secretkey.title")}
                 subtitle={t("remove_secretkey.subtitle")}

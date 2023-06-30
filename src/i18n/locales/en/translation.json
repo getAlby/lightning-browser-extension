@@ -110,7 +110,6 @@
         "macaroon": {
           "label": "Macaroon (HEX format)"
         },
-        "or": "OR",
         "drag_and_drop": "Drag and drop your macaroon here or <0>browse</0>",
         "errors": {
           "connection_failed": "Connection failed. Are your LND credentials correct?"
@@ -432,7 +431,7 @@
             "error_confirm": "Please confirm that you have backed up your secret key.",
             "save": "Save Secret Key",
             "button": "Backup Secret Key",
-            "warning": "⚠️ Backup your Secret Key! Not backing it up might result in permanently loosing access to your Nostr identity or purchased Ordinals.",
+            "warning": "⚠️ Don't forget to backup your Secret Key! Not backing it up might result in permanently loosing access to your Nostr identity or assets you manage with this key.",
             "description1": "In addition to the Bitcoin Lightning Network, Alby allows you to generate keys and interact with other protocols such as:",
             "description2": "Your Secret Key is a set of 12 words that will allow you to access your keys to those protocols on a new device or in case you loose access to your account. Make sure to write it down on a piece of paper and keep it safe:",
             "protocols": {
@@ -449,17 +448,28 @@
             "title": "Your Secret Key"
           }
         },
+        "bitcoin": {
+          "network": {
+            "title": "Bitcoin Network",
+            "subtitle": "Choose network to derive addresses and decode transactions",
+            "options": {
+              "bitcoin": "Mainnet",
+              "testnet": "Testnet",
+              "regtest": "Regtest"
+            }
+          }
+        },
         "nostr": {
           "title": "Nostr",
           "hint": "is a simple and open protocol that aims to create censorship-resistant social networks. Nostr works with cryptographic keys. To publish something you sign it with your key and send it to multiple relays. You can use Alby to manage your Nostr key. Many Nostr applications will then allow you to simply use the key from the Alby extension.",
-          "advanced_settings": {
-            "label": "Advanced Settings",
-            "title": "Advanced Nostr Settings",
+          "settings": {
+            "label": "Nostr Settings",
+            "title": "Nostr Settings",
             "description": "Derive Nostr keys from your Secret Key or import your existing private key by pasting it in the \"Nostr Private Key\" field.",
             "imported_key_warning": "⚠️ You're currently using an imported or randomly generated Nostr key. Your Nostr private key cannot be restored by your Secret Key, so remember to back up your Nostr private key.",
-            "legacy_derived_key_warning": "⚠️ You're currently using a Nostr key derived from your account (legacy). Your Nostr private key cannot be restored by your Secret Key, so remember to back up your Nostr private key.",
             "can_restore": "✅ Nostr key derived from your secret key",
             "derive": "Derive Nostr keys from your Secret Key",
+            "delete": "Delete current keys",
             "no_secret_key": "💡 You don't have a secret key yet. <0>Click here</0></div> to create your secret key and derive your nostr keys."
           },
           "private_key": {
@@ -574,18 +584,6 @@
           "dark": "Dark",
           "light": "Light",
           "system": "System"
-        }
-      },
-      "bitcoin": {
-        "title": "Bitcoin",
-        "hint": "Manage your Bitcoin settings for WebBTC-enabled apps",
-        "network": {
-          "title": "Network",
-          "subtitle": "Choose network to derive addresses and decode transactions",
-          "options": {
-            "bitcoin": "Mainnet",
-            "regtest": "Regtest"
-          }
         }
       },
       "show_fiat": {
@@ -714,7 +712,14 @@
       "payment": {
         "waiting": "waiting for payment...",
         "status": "Check payment status"
-      }
+      },
+      "receive_via_bitcoin_address": "Receive via bitcoin address"
+    },
+    "on_chain": {
+      "title": "Receive via bitcoin address",
+      "instructions1": "To receive bitcoin via a bitcoin address, login to your <0>Alby Account</0> on getalby.com",
+      "instructions2": "You can find your bitcoin address on the <0>Receive</0> page.",
+      "go": "Go to your Alby account →"
     },
     "discover": {
       "title": "Explore the Lightning ⚡️ Ecosystem",
@@ -811,7 +816,8 @@
     },
     "confirm_add_account": {
       "title": "Add account",
-      "content": "This website wants to add an account ({{connector}}):"
+      "content": "This website wants to add an account ({{connector}}):",
+      "tor_info": "In order to connect through the TOR network you need to first install the Alby companion app:"
     },
     "nostr": {
       "title": "Nostr",
@@ -886,6 +892,7 @@
     "message": "Message",
     "help": "Help",
     "balance": "Balance",
+    "or": "or",
     "actions": {
       "back": "Back",
       "delete": "Delete",
@@ -914,7 +921,8 @@
       "copy_invoice": "Copy Invoice",
       "log_in": "Log in",
       "remember": "Remember my choice and don't ask again",
-      "more": "More"
+      "more": "More",
+      "download": "Download"
     },
     "connectors": {
       "lnd": "LND",

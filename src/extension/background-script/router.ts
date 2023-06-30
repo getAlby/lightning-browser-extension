@@ -62,10 +62,12 @@ const routes = {
   getAddress: webbtc.getAddress,
   setMnemonic: mnemonic.setMnemonic,
   getMnemonic: mnemonic.getMnemonic,
+  generateMnemonic: mnemonic.generateMnemonic,
 
   nostr: {
     generatePrivateKey: nostr.generatePrivateKey,
     getPrivateKey: nostr.getPrivateKey,
+    getPublicKey: nostr.getPublicKey,
     removePrivateKey: nostr.removePrivateKey,
     setPrivateKey: nostr.setPrivateKey,
   },
@@ -122,4 +124,4 @@ const router = (path: FixMe) => {
   return route;
 };
 
-export { routes, router };
+export { router, routes };

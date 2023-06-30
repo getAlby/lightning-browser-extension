@@ -4,8 +4,6 @@ import Hex from "crypto-js/enc-hex";
 import hmacSHA256 from "crypto-js/hmac-sha256";
 import sha256 from "crypto-js/sha256";
 import PubSub from "pubsub-js";
-import { decryptData } from "~/common/lib/crypto";
-import { signMessage } from "~/common/lib/mnemonic";
 import utils from "~/common/lib/utils";
 import HashKeySigner from "~/common/utils/signer";
 import state from "~/extension/background-script/state";
@@ -52,12 +50,9 @@ export async function authFunction({
     if (!account.mnemonic) {
       throw new Error("Please set a secret key to use LNURL auth");
     }
-    const password = await state.getState().password();
-    if (!password) {
-      throw new Error("No password set");
-    }
-    const mnemonic = decryptData(account.mnemonic, password);
-    lnSignature = await signMessage(mnemonic, LNURLAUTH_CANONICAL_PHRASE);
+    const mnemonic = await state.getState().getMnemonic();
+
+    lnSignature = await mnemonic.signMessage(LNURLAUTH_CANONICAL_PHRASE);
   } else {
     const connector = await state.getState().getConnector();
 
