@@ -24,7 +24,9 @@ interface AccountContextType {
     fiatBalance: string;
     accountBalance: string;
   };
+  // True while the account is being initialized for the first time after a page load
   statusLoading: boolean;
+  // True while the account is being loaded (during account switches)
   accountLoading: boolean;
   unlock: (user: string, callback: VoidFunction) => Promise<void>;
   lock: (callback: VoidFunction) => void;
