@@ -111,7 +111,7 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
     return { ...accountInfo, fiatBalance, accountBalance };
   };
 
-  // Invoked only on on mount.
+  // Invoked only on mount.
   useEffect(() => {
     api
       .getStatus()
