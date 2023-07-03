@@ -77,7 +77,7 @@ export default class Alby implements Connector {
         custom_records: invoice.custom_records,
         id: `${invoice.payment_request}-${index}`,
         memo: invoice.memo,
-        preimage: "", // lndhub doesn't support preimage (yet)
+        preimage: "", // alby wallet api doesn't support preimage (yet)
         settled: invoice.settled,
         settleDate: new Date(invoice.settled_at).getTime(),
         totalAmount: `${invoice.amount}`,
