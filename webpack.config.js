@@ -15,6 +15,8 @@ const BundleAnalyzerPlugin =
 let network = "mainnet";
 if (!process.env.ALBY_API_URL) {
   process.env.ALBY_API_URL = "https://api.regtest.getalby.com";
+  process.env.ALBY_OAUTH_AUTHORIZE_URL =
+    "https://app.regtest.getalby.com/oauth";
   network = "testnet";
 }
 
