@@ -4,22 +4,19 @@
 
 - Install dependencies\
   `$ yarn install`
-- Create development .env file
-  `$ cp .env.example .env`
-- Set your desired .env settings to connect to either regtest or production for your specific browser.
 
 ### 💻 Load extension into browser
 
 - Start development build, which will automatically watch for file changes:
 
   - Chrome\
-    `$ dotenv yarn run dev:chrome`
+    `$ yarn run dev:chrome`
   - Firefox\
-    `$ dotenv yarn run dev:firefox`
+    `$ yarn run dev:firefox`
   - Opera\
-     `$ dotenv yarn run dev:opera`
+     `$ yarn run dev:opera`
 
-  **NOTE:** by default, the extension built this way will talk to the testnet API (which runs under [app.regtest.getalby.com](https://app.regtest.getalby.com/api)). In case you want to do manual tests against the mainnet API, update your .env file (see .env.example)
+  **NOTE:** by default, the extension built this way will talk to the testnet API (which runs under [app.regtest.getalby.com](https://app.regtest.getalby.com/api)). In case you want to do manual tests against the mainnet API, add the following `ALBY_API_URL` environment variable to your command: `$ ALBY_API_URL="https://getalby.com/api" yarn run dev:your-browser-of-choice`
 
 - **Chrome**
 

@@ -7,7 +7,7 @@ import { devices } from "@playwright/test";
  */
 // require('dotenv').config();
 
-if (process.env.ALBY_API_URL !== "https://api.regtest.getalby.com") {
+if (process.env.ALBY_API_URL === "https://getalby.com/api") {
   console.error(
     `
     ----

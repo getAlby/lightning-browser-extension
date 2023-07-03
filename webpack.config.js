@@ -12,10 +12,54 @@ const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 const BundleAnalyzerPlugin =
   require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
-// default value is set in the code where it is used
+let network = "mainnet";
 if (!process.env.ALBY_API_URL) {
-  process.env.ALBY_API_URL = ""; // env variables are passed as string. empty strings are still falsy
+  process.env.ALBY_API_URL = "https://api.regtest.getalby.com";
+  network = "testnet";
 }
+
+const oauthCredentials = {
+  development: {
+    testnet: {
+      chrome: {
+        id: "CLAp8AfS3W",
+        secret: "KwIxF0VbGX2ZHLbbbYgE",
+      },
+      firefox: {
+        id: "zWdxnF04Hd",
+        secret: "wY5uLJJDjNWrDlB6lAj8",
+      },
+    },
+    mainnet: {
+      chrome: {
+        id: "Zf7u3Zlyxl",
+        secret: "7wtcdVi61emqwzAH9Nm6",
+      },
+      firefox: {
+        id: "uQkyHFBkaC",
+        secret: "0agh0cKkGWQSXTGRz9oy",
+      },
+    },
+  },
+  production: {
+    mainnet: {
+      // TODO: add these
+    },
+  },
+};
+
+const oauthBrowser =
+  process.env.TARGET_BROWSER === "firefox" ? "firefox" : "chrome";
+
+// setup ALBY_OAUTH_CLIENT_ID
+const selectedOAuthCredentials =
+  oauthCredentials[process.env.NODE_ENV][network][oauthBrowser];
+if (!selectedOAuthCredentials) {
+  throw new Error("No OAuth credentials found for current configuration");
+}
+console.info("Set Alby OAuth credentials", selectedOAuthCredentials);
+process.env.ALBY_OAUTH_CLIENT_ID = selectedOAuthCredentials.id;
+process.env.ALBY_OAUTH_CLIENT_SECRET = selectedOAuthCredentials.secret;
 
 // default value is set in the code where it is used
 if (!process.env.ALBY_OAUTH_AUTHORIZE_URL) {

@@ -108,7 +108,6 @@
     "css-loader": "^6.7.4",
     "css-minimizer-webpack-plugin": "^5.0.0",
     "del-cli": "^5.0.0",
-    "dotenv-cli": "^7.2.1",
     "eslint": "^8.41.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-import": "^2.27.5",
