@@ -12,7 +12,7 @@ import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
 import type { AccountInfo } from "~/types";
 
-interface AccountContextType {
+export interface AccountContextType {
   account: {
     id: AccountInfo["id"];
     name?: AccountInfo["name"];

@@ -72,7 +72,7 @@ function AccountMenu({ showOptions = true }: Props) {
             >
               <div
                 title={title || ""}
-                className="flex items-center text-sm font-medium text-gray-700 dark:text-neutral-400 text-ellipsis overflow-hidden whitespace-nowrap"
+                className="flex items-center h-6 text-sm font-medium text-gray-700 dark:text-neutral-400 text-ellipsis overflow-hidden whitespace-nowrap"
               >
                 {accountLoading ? (
                   <SkeletonLoader className="w-20" />

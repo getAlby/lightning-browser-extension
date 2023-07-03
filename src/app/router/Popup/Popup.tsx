@@ -1,3 +1,4 @@
+import ConnectionError from "@components/ConnectionError";
 import Navbar from "@components/Navbar";
 import ConfirmPayment from "@screens/ConfirmPayment";
 import Home from "@screens/Home";
@@ -9,8 +10,10 @@ import LNURLWithdraw from "@screens/LNURLWithdraw";
 import Receive from "@screens/Receive";
 import Send from "@screens/Send";
 import Unlock from "@screens/Unlock";
+import { useEffect, useState } from "react";
 import { HashRouter, Outlet, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import { useAccount } from "~/app/context/AccountContext";
 import Providers from "~/app/context/Providers";
 import OnChainReceive from "~/app/screens/OnChainReceive";
 
@@ -56,12 +59,21 @@ function Popup() {
 }
 
 const Layout = () => {
+  const { account } = useAccount();
+  const [lastAccount, setLastAccount] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (Object.prototype.hasOwnProperty.call(account, "name")) {
+      setLastAccount(!!account?.error);
+    }
+  }, [setLastAccount, account]);
+
   return (
     <div className="flex flex-col h-full">
       <Navbar />
 
       <main className="flex flex-col grow min-h-0">
-        <Outlet />
+        {lastAccount || account?.error ? <ConnectionError /> : <Outlet />}
         <ToastContainer autoClose={10000} hideProgressBar={true} />
       </main>
     </div>

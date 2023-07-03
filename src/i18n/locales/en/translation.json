@@ -530,6 +530,9 @@
       "block_and_ignore": "Block and ignore {{host}}",
       "block_added": "Added {{host}} to the blocklist, please reload the website."
     },
+    "connection_error": {
+      "info": "Could not reach the node. Check your node status and try to reconnect or add it again as a new account."
+    },
     "unlock": {
       "unlock_to_continue": "Unlock to continue",
       "unlock_password": "Your unlock passcode",
@@ -922,7 +925,8 @@
       "log_in": "Log in",
       "remember": "Remember my choice and don't ask again",
       "more": "More",
-      "download": "Download"
+      "download": "Download",
+      "try_again": "Try again"
     },
     "connectors": {
       "lnd": "LND",
