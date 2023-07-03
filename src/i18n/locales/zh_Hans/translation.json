@@ -851,8 +851,7 @@
     "discover": "发现",
     "range": {
       "between": "在 {{min}} 和 {{max}} 之间",
-      "lessThanOrEqual": "≤ {{max}}",
-      "greaterThanOrEqual": "≥ {{min}}"
+      "lessThanOrEqual": "≤ {{max}}"
     },
     "balance": "余额",
     "wallet": "钱包",
