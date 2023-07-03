@@ -99,7 +99,6 @@ export default function PasswordForm<
           type={passwordView ? "text" : "password"}
           required
           onChange={handleChange}
-          tabIndex={0}
           minLength={minLength}
           pattern={minLength ? `.{${minLength},}` : undefined}
           title={
@@ -140,7 +139,6 @@ export default function PasswordForm<
             required
             onChange={handleChange}
             onBlur={validate}
-            tabIndex={1}
             endAdornment={
               <button
                 type="button"

@@ -1,3 +1,4 @@
+import SkeletonLoader from "@components/SkeletonLoader";
 import { useAccount } from "~/app/context/AccountContext";
 import { classNames } from "~/app/utils";
 
@@ -6,7 +7,7 @@ type Props = {
 };
 
 function BalanceBox({ className }: Props) {
-  const { balancesDecorated } = useAccount();
+  const { balancesDecorated, accountLoading } = useAccount();
   const balanceParts = balancesDecorated.accountBalance.split(" ");
 
   return (
@@ -16,17 +17,25 @@ function BalanceBox({ className }: Props) {
         className ?? ""
       )}
     >
-      {balancesDecorated.accountBalance && (
-        <div className="text-2xl">
-          <span className="font-medium">{balanceParts[0]}</span>
-          <span>&nbsp;{balanceParts[1]}</span>
-        </div>
-      )}
+      <div className="text-2xl">
+        {accountLoading ? (
+          <SkeletonLoader containerClassName="inline-block" className="w-32" />
+        ) : (
+          <>
+            <span className="font-medium">{balanceParts[0]}</span>
+            <span>&nbsp;{balanceParts[1]}</span>
+          </>
+        )}
+      </div>
 
-      {balancesDecorated.fiatBalance && (
-        <span className="text-gray-500 mt-2">
-          ~{balancesDecorated.fiatBalance}
-        </span>
+      {accountLoading ? (
+        <SkeletonLoader containerClassName="mt-2" className="w-16" />
+      ) : (
+        <div className="text-gray-500 mt-2">
+          {balancesDecorated.fiatBalance && (
+            <>~{balancesDecorated.fiatBalance}</>
+          )}
+        </div>
       )}
     </div>
   );

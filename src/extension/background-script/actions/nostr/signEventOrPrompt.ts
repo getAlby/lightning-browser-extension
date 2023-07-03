@@ -11,20 +11,17 @@ const signEventOrPrompt = async (message: MessageSignEvent) => {
   }
 
   const nostr = await state.getState().getNostr();
-
   // check event and add an ID and pubkey if not present
   const event = message.args.event;
-  if (!event.pubkey) event.pubkey = nostr.getPublicKey();
-  if (!event.id) event.id = nostr.getEventHash(event);
-
-  if (!validateEvent(event)) {
-    console.error("Invalid event");
-    return {
-      error: "Invalid event.",
-    };
-  }
 
   try {
+    if (!validateEvent(event)) {
+      console.error("Invalid event");
+      return {
+        error: "Invalid event.",
+      };
+    }
+
     const hasPermission = await hasPermissionFor(
       PermissionMethodNostr["NOSTR_SIGNMESSAGE"],
       message.origin.host
@@ -47,6 +44,8 @@ const signEventOrPrompt = async (message: MessageSignEvent) => {
       }
     }
 
+    if (!event.pubkey) event.pubkey = nostr.getPublicKey();
+    if (!event.id) event.id = nostr.getEventHash(event);
     const signedEvent = await nostr.signEvent(event);
 
     return { data: signedEvent };

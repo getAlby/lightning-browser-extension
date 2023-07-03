@@ -620,16 +620,11 @@
         "description": "Et par råd der får dig på vingerne🐝",
         "top_up_wallet": {
           "title": "⚡️ Fyld din wallet op",
-          "description": "Generer en lightning-faktura, send lidt bitcoin til dig selv og begynd at bruge Alby i lightnings økosystem",
-          "label2": "Køb Bitcoin"
+          "description": "Generer en lightning-faktura, send lidt bitcoin til dig selv og begynd at bruge Alby i lightnings økosystem"
         },
         "demo": {
           "title": "🕹️ Få en prøvetur med Alby",
           "description": "Se alle de ting, du kan med Alby på vores præsentationsside"
-        },
-        "address": {
-          "title": "⚡️ Få en lightning-adresse",
-          "label1": "Få den nu!"
         }
       }
     },
