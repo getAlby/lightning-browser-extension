@@ -531,7 +531,7 @@
       "block_added": "Added {{host}} to the blocklist, please reload the website."
     },
     "connection_error": {
-      "info": "Could not reach the node. Check your node status and try to reconnect or add it again as a new account."
+      "info": "⚠ Could not reach the node. Check your node status and try to reconnect or add it again as a new account."
     },
     "unlock": {
       "unlock_to_continue": "Unlock to continue",

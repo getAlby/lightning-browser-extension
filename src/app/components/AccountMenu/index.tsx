@@ -87,7 +87,7 @@ function AccountMenu({ showOptions = true }: Props) {
                 )}
                 {/* include this Icon into the else condition above */}
                 {!accountLoading && authAccount?.error && (
-                  <AlertIcon className="h-6 w-6 text-red-500" />
+                  <AlertIcon className="h-5 w-5  ml-2 text-red-500 border border-red-500 rounded-full" />
                 )}
               </div>
             </div>

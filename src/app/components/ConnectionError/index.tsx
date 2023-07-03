@@ -1,7 +1,4 @@
-import {
-  AlertIcon,
-  RefreshIcon,
-} from "@bitcoin-design/bitcoin-icons-react/filled";
+import { RefreshIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import Button from "@components/Button";
 import Container from "@components/Container";
 import { useEffect, useState } from "react";
@@ -36,7 +33,6 @@ function ConnectionError() {
         </div>
       </div>
       <div className="text-red-500 bg-red-50 dark:text-orange-400 dark:bg-orange-900 p-4 text-sm rounded-md">
-        <AlertIcon className="inline h-6 w-6 text-red-500 dark:text-orange-400 -ml-2" />
         {t("connection_error.info")}
       </div>
       <div className="grow"></div>
