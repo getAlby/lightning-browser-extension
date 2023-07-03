@@ -7,26 +7,39 @@ const info = async (message: MessageAccountInfo) => {
   const currentAccountId = state.getState().currentAccountId;
   const currentAccount = state.getState().getAccount();
 
-  const info = await connector.getInfo();
-  const balance = await connector.getBalance();
-
   if (!currentAccount || !currentAccountId) {
     return { error: "No current account set" };
   }
 
-  const result: AccountInfoRes = {
-    currentAccountId: currentAccountId,
-    name: currentAccount.name,
-    info: info.data,
-    balance: {
-      balance: balance.data.balance,
-      currency: balance.data.currency || "BTC", // set default currency for every account
-    },
-  };
+  try {
+    const info = await connector.getInfo();
+    const balance = await connector.getBalance();
 
-  return {
-    data: result,
-  };
+    const result: AccountInfoRes = {
+      currentAccountId: currentAccountId,
+      name: currentAccount.name,
+      info: info.data,
+      balance: {
+        balance: balance.data.balance,
+        currency: balance.data.currency || "BTC", // set default currency for every account
+      },
+    };
+
+    return {
+      data: result,
+    };
+  } catch (e) {
+    // return AccountInfo object, because "name" and "error" is used in UX
+    return {
+      data: {
+        currentAccountId,
+        name: currentAccount.name,
+        balance: null,
+        info: null,
+        error: "Connection error",
+      },
+    };
+  }
 };
 
 export default info;

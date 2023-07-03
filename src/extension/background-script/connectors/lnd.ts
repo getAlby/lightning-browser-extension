@@ -190,7 +190,8 @@ class Lnd implements Connector {
       alias: string;
       identity_pubkey: string;
       color: string;
-    }>("GET", "/v1/getinfo", undefined, {}).then((data) => {
+      // @Todo: replace debug url /v1/getinfoo
+    }>("GET", "/v1/getinfoo", undefined, {}).then((data) => {
       return {
         data: {
           alias: data.alias,
@@ -490,7 +491,7 @@ class Lnd implements Connector {
         errBody = await res.json();
         // Breaking change in v0.14.1, res.error became res.message. Simply
         // map it over for now.
-        if (errBody.message && !errBody.error) {
+        if (errBody.message && typeof errBody.error !== "string") {
           errBody.error = errBody.message;
           delete errBody.message;
         }
@@ -500,7 +501,7 @@ class Lnd implements Connector {
       } catch (err) {
         throw new Error(res.statusText);
       }
-      console.error(errBody);
+      console.error(errBody.error);
       throw new Error(errBody.error);
     }
     let data = await res.json();

@@ -33,6 +33,7 @@ export interface AccountInfoRes {
   currentAccountId: string;
   info: { alias: string; pubkey?: string };
   name: string;
+  error?: string;
 }
 
 export interface GetAccountRes
@@ -70,7 +71,8 @@ export const swrGetAccountInfo = async (
   const accountsCache = await getAccountsCache();
 
   return new Promise((resolve, reject) => {
-    if (accountsCache[id]) {
+    // don't apply cache for connectors that failed to connect
+    if (accountsCache[id] && !accountsCache[id].error) {
       if (callback) callback(accountsCache[id]);
       resolve(accountsCache[id]);
     }
@@ -78,18 +80,28 @@ export const swrGetAccountInfo = async (
     // Update account info with most recent data, save to cache.
     getAccountInfo()
       .then((response) => {
-        const { alias } = response.info;
-        const { balance: resBalance, currency } = response.balance;
-        const name = response.name;
-        const balance =
-          typeof resBalance === "number" ? resBalance : parseInt(resBalance); // TODO: handle amounts
-        const account = {
-          id,
-          name,
-          alias,
-          balance,
-          currency: currency || "BTC", // set default currency for every account
-        };
+        let account: AccountInfo;
+        if (response.error) {
+          account = {
+            id,
+            name: response.name,
+            error: response.error,
+          };
+        } else {
+          const { alias } = response.info;
+          const { balance: resBalance, currency } = response.balance;
+          const name = response.name;
+          const balance =
+            typeof resBalance === "number" ? resBalance : parseInt(resBalance); // TODO: handle amounts
+          account = {
+            id,
+            name,
+            alias,
+            balance,
+            currency: currency || "BTC",
+          };
+        }
+
         storeAccounts({
           ...accountsCache,
           [id]: account,
