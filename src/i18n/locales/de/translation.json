@@ -450,16 +450,16 @@
         "nostr": {
           "title": "Nostr",
           "private_key": {
-            "title": "Verwalten von deinen Schlüssel",
-            "subtitle": "Füge deinen privaten Schlüssel ein oder erzeuge einen neuen. <0>Mehr erfahren\"</0>",
-            "warning": "Bitte gebe den Namen des Kontos ein, um die Löschung des privaten Schlüssels zu bestätigen:",
-            "success": "Privater Schlüssel erfolgreich verschlüsselt und gespeichert.",
-            "successfully_removed": "Privater Schlüssel erfolgreich entfernt.",
-            "label": "Privater Schlüssel",
-            "failed_to_remove": "Der eingegebene Kontoname stimmt nicht überein, dein alter Privatname wurde wiederhergestellt."
+            "title": "Verwalte deinen privaten Nostr-Schlüssel",
+            "subtitle": "Füge deinen eigenen privaten Schlüssel ein oder erzeuge einen neuen. <0>Mehr erfahren\"</0>",
+            "warning": "Bitte gebe deinen Namen des Kontos ein, um die Löschung des privaten Schlüssels von nostr zu bestätigen:",
+            "success": "Der private Schlüssel von Nostr wurde erfolgreich verschlüsselt und gespeichert.",
+            "successfully_removed": "Der private Schlüssel von Nostr wurde erfolgreich entfernt.",
+            "label": "Nostr Privater Schlüssel",
+            "failed_to_remove": "Der eingegebene Kontoname stimmt nicht überein, dein alter privater Nostr-Schlüssel wurde wiederhergestellt."
           },
           "public_key": {
-            "label": "Öffentlicher Schlüssel"
+            "label": "Nostr Öffentlicher Schlüssel"
           },
           "generate_keys": {
             "title": "Erzeugen eines neuen Nostr Schlüssels",
@@ -480,17 +480,24 @@
           "settings": {
             "label": "Nostr Einstellungen",
             "title": "Nostr Einstellungen",
-            "description": "Leite dein Nostr-Schlüssel von deinem geheimen Schlüssel ab oder importiere den vorhandenen privaten Schlüssel, indem du in das Feld \"Nostr Private Key\" einfügst."
+            "description": "Leite dein Nostr-Schlüssel von deinem geheimen Schlüssel ab oder importiere den vorhandenen privaten Schlüssel, indem du in das Feld \"Nostr Private Key\" einfügst.",
+            "imported_key_warning": "⚠️ Du verwendest derzeit einen importierten oder zufällig generierten Nostr-Schlüssel. Dein privater Nostr-Schlüssel kann nicht durch deinem geheimen Schlüssel wiederhergestellt werden, denke also daran, deinen privaten Nostr-Schlüssel zu sichern.",
+            "can_restore": "✅ Nostr-Schlüssel, abgeleitet von deinem geheimen Schlüssel",
+            "derive": "Ableitung von Nostr-Schlüsseln aus deinem Geheimschlüssel",
+            "delete": "Aktuelle Tasten löschen",
+            "no_secret_key": "💡 Du hast noch keinen geheimen Schlüssel. <0>Klicken Sie hier</0></div>, um deinen geheimen Schlüssel zu erstellen und dein nostr Schlüssel abzuleiten."
           }
         },
         "remove": {
           "title": "Dieses Konto entfernen",
-          "subtitle": "Alle verknüpften Zertifikate werden gelöscht. Bitte sei dir sicher.",
-          "confirm": "Bist du sicher, dass du das Konto entfernen möchtest: {{name}}? \nDies kann nicht rückgängig gemacht werden. Wenn du dich mit diesem Konto bei Webseiten angemeldet hast, könntest du den Zugang zu diesen verlieren."
+          "subtitle": "Entfernt alle Zulagen, Zahlungsdaten und Schlüssel, die mit diesem Konto verbunden sind.",
+          "confirm": "Bist du sicher, dass du das Konto entfernen möchtest: {{name}}? \nDies kann nicht rückgängig gemacht werden. Wenn du dich mit diesem Konto bei Webseiten angemeldet hast, könntest du den Zugang zu diesen verlieren.",
+          "error": "Der eingegebene Kontoname stimmte nicht überein."
         },
         "actions": {
           "remove_account": "Konto entfernen",
-          "export": "Exportieren"
+          "export": "Exportieren",
+          "remove_secretkey": "Geheimen Schlüssel entfernen"
         },
         "mnemonic": {
           "title": "Geheimer Schlüssel",
@@ -535,6 +542,12 @@
               "regtest": "Regtest"
             }
           }
+        },
+        "remove_secretkey": {
+          "title": "Geheimen Schlüssel entfernen",
+          "subtitle": "Entfernt den geheimen Schlüssel von diesem Konto.",
+          "confirm": "Bitte gebe deinen Namen des Kontos ein, um die Löschung deines Geheimschlüssels zu bestätigen.",
+          "success": "Der geheime Schlüssel wurde erfolgreich entfernt."
         }
       }
     },
@@ -844,6 +857,11 @@
       "instructions2": "Du kannst deine Bitcoin-Adresse auf der Seite <0>Empfangen</0> finden.",
       "go": "Gehe zu deinem Alby Account →",
       "instructions1": "Um Bitcoin über eine Bitcoin-Adresse zu erhalten, melde dich bei deinem <0>Alby-Account</0> auf getalby.com an"
+    },
+    "confirm_get_address": {
+      "title": "Adresse abrufen",
+      "heading": "Diese Website bittet dich es zu lesen:",
+      "content": "Deine Bitcoin-Empfangsadresse"
     }
   },
   "components": {
@@ -853,7 +871,7 @@
           "add": "Füge einen neuen Account hinzu",
           "manage": "Konten verwalten",
           "account_settings": "Kontoeinstellungen",
-          "go_to_web_wallet": "Verwalte dein Alby-Konto"
+          "go_to_web_wallet": "Verwalte dein Web-Konto"
         }
       },
       "title": "Konto wechseln",
@@ -940,7 +958,8 @@
     "badge": {
       "label": {
         "active": "AKTIV",
-        "auth": "LOGIN"
+        "auth": "LOGIN",
+        "imported": "EINGEFÜHRT"
       }
     },
     "confirm_or_cancel": {
@@ -996,7 +1015,11 @@
       "receive_again": "Eine weitere Zahlung erhalten",
       "transactions": "Transaktionen",
       "more": "Mehr",
-      "download": "Download"
+      "download": "Download",
+      "import": "Importieren",
+      "copy_clipboard": "In die Zwischenablage kopieren",
+      "paste": "Einfügen",
+      "paste_clipboard": "Einfügen aus der Zwischenablage"
     },
     "discover": "Entdecken",
     "errors": {
@@ -1027,7 +1050,8 @@
       "galoy": "Galoy",
       "eclair": "Eclair"
     },
-    "or": "oder"
+    "or": "oder",
+    "pasted": "Eingefügt!"
   },
   "permissions": {
     "commando": {
