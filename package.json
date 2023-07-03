@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "@bitcoin-design/bitcoin-icons-react": "^0.1.9",
-    "@headlessui/react": "^1.7.14",
+    "@headlessui/react": "^1.7.15",
     "@lightninglabs/lnc-web": "^0.2.4-alpha",
     "@noble/secp256k1": "^1.7.1",
     "@scure/bip32": "^1.3.0",
