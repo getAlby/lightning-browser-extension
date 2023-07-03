@@ -67,12 +67,15 @@ const Button = forwardRef(
         onClick={onClick}
         disabled={disabled}
       >
-        {loading && (
-          <div className={direction === "row" ? "mr-2" : ""}>
-            <Loading color={primary ? "white" : "black"} />
+        {(loading || icon) && (
+          <div
+            className={classNames(
+              direction === "row" ? "mr-2 flex justify-center min-w-[24px]" : ""
+            )}
+          >
+            {loading ? <Loading color={primary ? "black" : "white"} /> : icon}
           </div>
         )}
-        {icon}
         {label}
       </button>
     );

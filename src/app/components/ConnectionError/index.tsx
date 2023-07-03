@@ -30,7 +30,7 @@ function ConnectionError() {
       <div>
         <Button
           label={tCommon("actions.try_again")}
-          icon={!accountLoading && <RefreshIcon className="w-6 mr-2" />}
+          icon={!accountLoading && <RefreshIcon className="w-6" />}
           fullWidth
           primary
           loading={accountLoading}
