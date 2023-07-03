@@ -329,7 +329,7 @@
             "title": "Gerenciar sua chave privada Nostr",
             "successfully_removed": "Chave privada Nostr removida com sucesso.",
             "label": "Chave privada Nostr",
-            "warning": "Digite o nome da conta para confirmar a exclusão da sua chave privada Nostr:",
+            "warning": "Digite o nome da conta para confirmar a exclusão de sua chave privada Nostr:",
             "subtitle": "Cole sua chave privada Nostr ou gere uma nova. <0>Saiba mais »</0>",
             "success": "Chave privada Nostr criptografada e salva com sucesso.",
             "failed_to_remove": "O nome da conta inserido não está correto, sua chave privada Nostr antiga foi restaurada."
