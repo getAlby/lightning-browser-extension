@@ -9,8 +9,9 @@ export const useInvoices = () => {
   const { settings, getFormattedFiat } = useSettings();
 
   const [isLoadingInvoices, setIsLoadingInvoices] = useState(false);
-  const [incomingTransactions, setIncomingTransactions] =
-    useState<Transaction[]>();
+  const [incomingTransactions, setIncomingTransactions] = useState<
+    Transaction[]
+  >([]);
 
   const loadInvoices = useCallback(
     async (limit?: number) => {

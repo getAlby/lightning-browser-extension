@@ -120,7 +120,7 @@ function AccountDetail() {
   async function selectAccount(accountId: string) {
     auth.setAccountId(accountId);
     await api.selectAccount(accountId);
-    auth.fetchAccountInfo({ accountId });
+    auth.fetchAccountInfo();
   }
 
   async function removeAccount({ id, name }: AccountAction) {

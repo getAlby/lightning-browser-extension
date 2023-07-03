@@ -13,7 +13,7 @@ import type { AccountInfo } from "~/types";
 
 export default function TestConnection() {
   const { getFormattedInCurrency } = useSettings();
-  const auth = useAccount();
+  const { setAccountId, fetchAccountInfo } = useAccount();
   const { getAccounts } = useAccounts();
 
   const [accountInfo, setAccountInfo] = useState<{
@@ -44,10 +44,8 @@ export default function TestConnection() {
     }, 45000);
     try {
       const { currentAccountId } = await api.getStatus();
-      auth.setAccountId(currentAccountId);
-      const accountInfo = await auth.fetchAccountInfo({
-        accountId: currentAccountId,
-      });
+      setAccountId(currentAccountId);
+      const accountInfo = await fetchAccountInfo();
       if (accountInfo) {
         setAccountInfo({
           alias: accountInfo.alias,
