@@ -4,17 +4,30 @@ import {
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import Button from "@components/Button";
 import Container from "@components/Container";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useAccount } from "~/app/context/AccountContext";
 
 function ConnectionError() {
   const { t: tCommon } = useTranslation("common");
   const { t } = useTranslation("translation");
-  const { account, selectAccount, accountLoading } = useAccount();
+  const { account, selectAccount } = useAccount();
+  const [loading, setLoading] = useState<boolean>(false);
 
   const reload = () => {
-    account && selectAccount(account.id);
+    if (account) {
+      setLoading(true);
+      selectAccount(account.id);
+    }
   };
+
+  useEffect(() => {
+    // account property "error" is only available when loading is finished
+    if (account?.error) {
+      setLoading(false);
+    }
+  }, [account]);
+
   return (
     <Container classNames="h-full flex flex-col">
       <div className="flex justify-center">
@@ -30,10 +43,10 @@ function ConnectionError() {
       <div>
         <Button
           label={tCommon("actions.try_again")}
-          icon={!accountLoading && <RefreshIcon className="w-6" />}
+          icon={!loading && <RefreshIcon className="w-6" />}
           fullWidth
           primary
-          loading={accountLoading}
+          loading={loading}
           onClick={() => {
             reload();
           }}
