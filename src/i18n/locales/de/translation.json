@@ -953,8 +953,8 @@
     "accounts": "Konten",
     "range": {
       "between": "zwischen {{min}} und {{max}}",
-      "lessThan": "< {{max}}",
-      "greaterThan": "> {{min}}"
+      "lessThanOrEqual": "≤ {{max}}",
+      "greaterOrEqual": "≥ {{min}}"
     },
     "balance": "Bilanz",
     "wallet": "Wallet",
