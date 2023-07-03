@@ -19,6 +19,7 @@ interface AccountContextType {
     alias?: AccountInfo["alias"];
     balance?: AccountInfo["balance"];
     currency?: AccountInfo["currency"];
+    error?: AccountInfo["error"];
   } | null;
   balancesDecorated: {
     fiatBalance: string;
@@ -88,10 +89,11 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
   );
 
   const updateAccountBalance = (
-    amount: number,
+    amount: number | undefined,
     currency?: AccountInfo["currency"]
   ) => {
-    const balance = getFormattedInCurrency(amount, currency);
+    const balance =
+      amount !== undefined ? getFormattedInCurrency(amount, currency) : "";
     setAccountBalance(balance);
   };
 

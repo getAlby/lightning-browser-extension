@@ -29,7 +29,16 @@ const info = async (message: MessageAccountInfo) => {
       data: result,
     };
   } catch (e) {
-    return { error: "Connection error" };
+    // return AccountInfo object, because "name" and "error" is used in UX
+    return {
+      data: {
+        currentAccountId,
+        name: currentAccount.name,
+        balance: null,
+        info: null,
+        error: "Connection error",
+      },
+    };
   }
 };
 

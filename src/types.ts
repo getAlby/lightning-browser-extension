@@ -18,6 +18,7 @@ export interface Account {
   connector: ConnectorType;
   config: string;
   name: string;
+  error?: string;
   nostrPrivateKey?: string | null;
   mnemonic?: string | null;
   hasImportedNostrKey?: boolean;
@@ -32,11 +33,12 @@ export interface NodeInfo {
   node: WebLNNode;
 }
 export interface AccountInfo {
-  alias: string;
-  balance: number;
   id: string;
-  name: string;
-  currency: ACCOUNT_CURRENCIES;
+  alias?: string;
+  balance?: number;
+  name?: string;
+  currency?: ACCOUNT_CURRENCIES;
+  error?: string;
 }
 
 export interface MetaData {
