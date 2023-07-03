@@ -71,8 +71,7 @@ export const swrGetAccountInfo = async (
   const accountsCache = await getAccountsCache();
 
   return new Promise((resolve, reject) => {
-    // don't apply cache for connectors that failed to connect
-    if (accountsCache[id] && !accountsCache[id].error) {
+    if (accountsCache[id]) {
       if (callback) callback(accountsCache[id]);
       resolve(accountsCache[id]);
     }
@@ -101,11 +100,14 @@ export const swrGetAccountInfo = async (
             currency: currency || "BTC",
           };
         }
+        // don't apply cache for connectors that failed to connect
+        if (!response.error) {
+          storeAccounts({
+            ...accountsCache,
+            [id]: account,
+          });
+        }
 
-        storeAccounts({
-          ...accountsCache,
-          [id]: account,
-        });
         if (callback) callback(account);
         return resolve(account);
       })
