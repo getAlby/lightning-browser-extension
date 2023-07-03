@@ -462,7 +462,7 @@ function AccountDetail() {
             {account.connector !== "alby" && account.hasMnemonic && (
               <>
                 <MenuDivider />
-                <div className="flex justify-between items-end">
+                <div className="flex justify-between items-center">
                   <div className="w-7/12 flex flex-col gap-2">
                     <p className="text-gray-900 dark:text-white font-medium">
                       {t("mnemonic.lnurl.title")}
@@ -472,7 +472,7 @@ function AccountDetail() {
                     </p>
                   </div>
 
-                  <div className="w-1/5 flex-none flex justify-center">
+                  <div className="w-1/5 flex-none flex justify-end items-center">
                     <Toggle
                       checked={account.useMnemonicForLnurlAuth}
                       onChange={async () => {
