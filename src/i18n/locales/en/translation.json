@@ -448,8 +448,8 @@
             "title": "Your Secret Key"
           },
           "lnurl": {
-            "title": "LNURL Auth",
-            "use_mnemonic": "Use Secret Key for Login with Lightning (LNURL Auth)"
+            "title": "Login with Lightning",
+            "use_mnemonic": "Use Secret Key for logging into lightning-powered apps (LNURL Auth)"
           }
         },
         "bitcoin": {
