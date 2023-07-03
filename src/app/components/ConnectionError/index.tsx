@@ -35,8 +35,8 @@ function ConnectionError() {
           <img src="assets/icons/alby-x-head.svg" className="w-full" />
         </div>
       </div>
-      <div className="text-red-500 bg-red-50 p-4 text-sm rounded-md">
-        <AlertIcon className="inline h-6 w-6 text-red-500 -ml-2" />
+      <div className="text-red-500 bg-red-50 dark:text-orange-400 dark:bg-orange-900 p-4 text-sm rounded-md">
+        <AlertIcon className="inline h-6 w-6 text-red-500 dark:text-orange-400 -ml-2" />
         {t("connection_error.info")}
       </div>
       <div className="grow"></div>
