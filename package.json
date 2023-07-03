@@ -129,8 +129,6 @@
     "prettier": "^2.8.8",
     "process": "^0.11.10",
     "puppeteer": "^20.5.0",
-    "sass": "^1.62.1",
-    "sass-loader": "^13.3.1",
     "stream-browserify": "^3.0.0",
     "swc-loader": "^0.2.3",
     "terser-webpack-plugin": "^5.3.9",
