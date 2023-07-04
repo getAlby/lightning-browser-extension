@@ -1,29 +1,25 @@
-import {
-  CaretLeftIcon,
-  CrossIcon,
-  QrCodeIcon,
-} from "@bitcoin-design/bitcoin-icons-react/filled";
+import { CaretLeftIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import Button from "@components/Button";
 import Container from "@components/Container";
 import Header from "@components/Header";
 import IconButton from "@components/IconButton";
-import QrcodeScanner from "@components/QrcodeScanner";
 import TextField from "@components/form/TextField";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { extractLightningTagData } from "~/app/utils";
+import QrcodeAdornment from "~/app/components/QrcodeAdornment";
 import lnurlLib from "~/common/lib/lnurl";
 import { isLNURLDetailsError } from "~/common/utils/typeHelpers";
 
 function LNURLRedeem() {
   const { t } = useTranslation("translation", { keyPrefix: "lnurlredeem" });
-  const { t: tCommon } = useTranslation("common");
+  const location = useLocation();
 
-  const [lnurlwithdraw, setlnurlwithdraw] = useState("");
+  const [lnurlwithdraw, setlnurlwithdraw] = useState(
+    location.state?.decodedText || ""
+  );
   const navigate = useNavigate();
-  const [qrIsOpen, setQrIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -65,34 +61,6 @@ function LNURLRedeem() {
     }
   }
 
-  if (qrIsOpen) {
-    return (
-      <div>
-        <Header
-          title={tCommon("qrcode.title")}
-          headerRight={
-            <IconButton
-              onClick={() => setQrIsOpen(false)}
-              icon={<CrossIcon className="w-4 h-4" />}
-            />
-          }
-        />
-        <Container maxWidth="sm">
-          <QrcodeScanner
-            qrbox={200}
-            qrCodeSuccessCallback={(decodedText) => {
-              if (lnurlwithdraw !== decodedText) {
-                setlnurlwithdraw(extractLightningTagData(decodedText));
-                setQrIsOpen(false);
-              }
-            }}
-            qrCodeErrorCallback={console.error}
-          />
-        </Container>
-      </div>
-    );
-  }
-
   return (
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <Header
@@ -117,16 +85,7 @@ function LNURLRedeem() {
               onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                 setlnurlwithdraw(event.target.value.trim())
               }
-              endAdornment={
-                <button
-                  aria-label="Scan QR"
-                  type="button"
-                  className="flex justify-center items-center w-10 h-8"
-                  onClick={() => setQrIsOpen(true)}
-                >
-                  <QrCodeIcon className="h-6 w-6 text-blue-600" />
-                </button>
-              }
+              endAdornment={<QrcodeAdornment />}
             />
           </div>
           <div className="my-4">

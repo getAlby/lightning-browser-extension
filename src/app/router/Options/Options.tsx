@@ -32,6 +32,7 @@ import NostrSettings from "~/app/screens/Accounts/NostrSettings";
 import Discover from "~/app/screens/Discover";
 import LNURLRedeem from "~/app/screens/LNURLRedeem";
 import OnChainReceive from "~/app/screens/OnChainReceive";
+import ScanQRCode from "~/app/screens/ScanQRCode";
 import AlbyWalletCreate from "~/app/screens/connectors/AlbyWallet/create";
 import AlbyWalletLogin from "~/app/screens/connectors/AlbyWallet/login";
 import ChooseConnector from "~/app/screens/connectors/ChooseConnector";
@@ -92,6 +93,7 @@ function Options() {
             <Route path="lnurlRedeem" element={<LNURLRedeem />} />
             <Route path="lnurlAuth" element={<LNURLAuth />} />
             <Route path="settings" element={<Settings />} />
+            <Route path="scanQRCode" element={<ScanQRCode />} />
             <Route path="accounts">
               <Route path=":id" element={<AccountDetail />} />
               <Route
