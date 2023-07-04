@@ -125,7 +125,7 @@ function AccountDetail() {
 
   async function removeAccount({ id, name }: AccountAction) {
     if (
-      window.prompt(t("remove.confirm", { name }))?.toLowerCase() ==
+      window.prompt(t("remove.confirm"))?.toLowerCase() ==
       accountName.toLowerCase()
     ) {
       let nextAccountId;
