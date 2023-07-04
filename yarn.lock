@@ -631,6 +631,11 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
+"@inlang/cli@^0.11.0":
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/@inlang/cli/-/cli-0.11.0.tgz#ecf79714ef0b1d4453b20d309957a1248c4b5d8c"
+  integrity sha512-1vsO8+5wr7og+9IGyW18/BmoBj/7/5kYmuZKbfOtMPFNaditioKdU8iU55YfLiMynHAsxXmc/WseIl2+wSgOGw==
+
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@istanbuljs/load-nyc-config/-/load-nyc-config-1.1.0.tgz#fd3db1d59ecf7cf121e80650bb86712f9b55eced"
