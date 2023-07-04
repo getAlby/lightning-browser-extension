@@ -12,6 +12,9 @@ export default function ConnectAlby() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { t: tCommon } = useTranslation("common");
+  const { t } = useTranslation("translation", {
+    keyPrefix: "choose_path.alby",
+  });
   async function connectAlby() {
     setLoading(true);
     const name = "Alby";
@@ -69,7 +72,7 @@ export default function ConnectAlby() {
   return (
     <Button
       type="button"
-      label="Connect With Alby"
+      label={t("connect")}
       loading={loading}
       disabled={loading}
       primary

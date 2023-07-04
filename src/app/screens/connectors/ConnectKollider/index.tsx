@@ -185,6 +185,7 @@ export default function ConnectKollidier({ variant }: Props) {
       </div>
       <div className="mb-6">
         <PasswordForm
+          // FIXME: do not use alby keys - move these keys somewhere else for all languages
           i18nKeyPrefix="alby.pre_connect.set_password"
           formData={formData}
           setFormData={setFormData}
