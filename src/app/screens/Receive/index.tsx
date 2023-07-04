@@ -18,6 +18,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
+import { isAlbyAccount } from "~/app/utils";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import { poll } from "~/common/utils/helpers";
@@ -51,6 +52,7 @@ function Receive() {
   const [paid, setPaid] = useState(false);
   const [pollingForPayment, setPollingForPayment] = useState(false);
   const mounted = useRef(false);
+  const isAlbyUser = isAlbyAccount(auth.account?.alias);
 
   useEffect(() => {
     mounted.current = true;
@@ -237,44 +239,70 @@ function Receive() {
       {invoice ? (
         <Container maxWidth="sm">{renderInvoice()}</Container>
       ) : (
-        <form onSubmit={handleSubmit} className="h-full">
-          <fieldset className="h-full" disabled={loading}>
-            <Container justifyBetween maxWidth="sm">
-              <div className="py-4">
+        <div className="pt-4">
+          <form onSubmit={handleSubmit}>
+            <fieldset disabled={loading}>
+              <Container justifyBetween maxWidth="sm">
+                <div className="py-4">
+                  <div className="mb-4">
+                    <DualCurrencyField
+                      id="amount"
+                      min={0}
+                      label={t("amount.label")}
+                      placeholder={t("amount.placeholder")}
+                      fiatValue={fiatAmount}
+                      onChange={handleChange}
+                      autoFocus
+                    />
+                  </div>
+
+                  <div className="mb-4">
+                    <TextField
+                      id="description"
+                      label={t("description.label")}
+                      placeholder={t("description.placeholder")}
+                      onChange={handleChange}
+                    />
+                  </div>
+                </div>
                 <div className="mb-4">
-                  <DualCurrencyField
-                    id="amount"
-                    min={0}
-                    label={t("amount.label")}
-                    placeholder={t("amount.placeholder")}
-                    fiatValue={fiatAmount}
-                    onChange={handleChange}
-                    autoFocus
+                  <Button
+                    type="submit"
+                    label={t("actions.create_invoice")}
+                    fullWidth
+                    primary
+                    loading={loading}
+                    disabled={loading}
                   />
+                </div>
+              </Container>
+            </fieldset>
+          </form>
+          {isAlbyUser && (
+            <div>
+              <Container justifyBetween maxWidth="sm">
+                <div className="relative flex  items-center mb-8">
+                  <div className="flex-grow border-t border-gray-300 dark:border-gray-700"></div>
+                  <span className="flex-shrink mx-4  text-gray-500 dark:text-gray-400 fw-bold">
+                    {tCommon("or")}
+                  </span>
+                  <div className="flex-grow border-t  border-gray-300 dark:border-gray-700"></div>
                 </div>
 
                 <div className="mb-4">
-                  <TextField
-                    id="description"
-                    label={t("description.label")}
-                    placeholder={t("description.placeholder")}
-                    onChange={handleChange}
+                  <Button
+                    type="button"
+                    label={t("receive_via_bitcoin_address")}
+                    fullWidth
+                    onClick={() => {
+                      navigate("/onChainReceive");
+                    }}
                   />
                 </div>
-              </div>
-              <div className="mb-4">
-                <Button
-                  type="submit"
-                  label={t("actions.create_invoice")}
-                  fullWidth
-                  primary
-                  loading={loading}
-                  disabled={loading}
-                />
-              </div>
-            </Container>
-          </fieldset>
-        </form>
+              </Container>
+            </div>
+          )}
+        </div>
       )}
     </div>
   );

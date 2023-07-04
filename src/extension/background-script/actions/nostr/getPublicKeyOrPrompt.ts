@@ -1,11 +1,13 @@
 import utils from "~/common/lib/utils";
-import type { MessagePublicKeyGet } from "~/types";
+import type { MessageNostrPublicKeyGetOrPrompt } from "~/types";
 import { PermissionMethodNostr } from "~/types";
 
 import state from "../../state";
 import { addPermissionFor, hasPermissionFor } from "./helpers";
 
-const getPublicKeyOrPrompt = async (message: MessagePublicKeyGet) => {
+const getPublicKeyOrPrompt = async (
+  message: MessageNostrPublicKeyGetOrPrompt
+) => {
   if (!("host" in message.origin)) {
     console.error("error", message.origin);
     return;

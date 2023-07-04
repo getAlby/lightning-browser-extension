@@ -7,12 +7,7 @@ import i18n from "~/i18n/i18nConfig";
 
 import alby from "/static/assets/icons/alby.png";
 
-type Props = {
-  title: string;
-  description: string;
-};
-
-export default function ChooseConnectorPath({ title, description }: Props) {
+export default function ChooseConnectorPath() {
   let connectorRoutes = getConnectorRoutes();
   i18n.on("languageChanged", () => {
     connectorRoutes = getConnectorRoutes();
@@ -22,18 +17,9 @@ export default function ChooseConnectorPath({ title, description }: Props) {
   });
   const { t: tCommon } = useTranslation("common");
   return (
-    <div className="relative mt-14 lg:grid lg:gap-8 text-center">
+    <div className="relative mt-10 lg:grid lg:gap-8 text-center">
       <div className="relative">
-        <div className="w-full flex flex-col justify-center items-center">
-          <h1 className="text-3xl font-bold dark:text-white">{title}</h1>
-          {description && (
-            <p className="text-gray-500 mt-10 dark:text-neutral-400 w-96 text-center">
-              {description}
-            </p>
-          )}
-        </div>
-
-        <div className="grid lg:grid-cols-2 gap-4 lg:gap-8 xl:gap-18 mt-8 mb-4 lg:mt-14 lg:mb-12">
+        <div className="grid lg:grid-cols-2 gap-10 mb-4">
           <ConnectorPath
             title={t("alby.title")}
             description={t("alby.description")}
@@ -43,10 +29,20 @@ export default function ChooseConnectorPath({ title, description }: Props) {
             actions={
               <>
                 <Link to="create" className="flex flex-1">
-                  <Button label={t("alby.create_new")} primary flex />
+                  <Button
+                    tabIndex={-1}
+                    label={t("alby.create_new")}
+                    primary
+                    flex
+                  />
                 </Link>
                 <Link to="login" className="flex flex-1">
-                  <Button label={tCommon("actions.log_in")} outline flex />
+                  <Button
+                    tabIndex={-1}
+                    label={tCommon("actions.log_in")}
+                    outline
+                    flex
+                  />
                 </Link>
               </>
             }
@@ -58,6 +54,7 @@ export default function ChooseConnectorPath({ title, description }: Props) {
               <Link
                 to="choose-connector"
                 className="flex flex-wrap gap-6 w-72 lg:w-80 mx-auto my-5 items-center"
+                tabIndex={-1}
               >
                 {connectorRoutes.slice(1, 8).map(({ path, title, logo }) => (
                   <img
@@ -75,7 +72,7 @@ export default function ChooseConnectorPath({ title, description }: Props) {
             }
             actions={
               <Link to="choose-connector" className="flex flex-1">
-                <Button label={t("other.connect")} primary flex />
+                <Button tabIndex={-1} label={t("other.connect")} primary flex />
               </Link>
             }
           />

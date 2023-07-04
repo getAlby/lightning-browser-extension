@@ -34,7 +34,7 @@ export default function DualCurrencyField({
 }: React.InputHTMLAttributes<HTMLInputElement> & Props) {
   const inputEl = useRef<HTMLInputElement>(null);
   const outerStyles =
-    "shadow-sm rounded-md border border-gray-300 dark:border-gray-800 bg-white dark:bg-black transition duration-300";
+    "rounded-md border border-gray-300 dark:border-gray-800 bg-white dark:bg-black transition duration-300";
 
   const inputNode = (
     <input
