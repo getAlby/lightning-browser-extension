@@ -33,6 +33,7 @@ export default function ConnectAlby() {
 
         const account = {
           ...initialAccount,
+          // legacy accounts may not have either an email address or lightning address
           name:
             accountInfo.email || accountInfo.lightning_address || "getalby.com",
           config: {
