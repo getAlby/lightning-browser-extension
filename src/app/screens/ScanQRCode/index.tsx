@@ -26,7 +26,11 @@ export default function ScanQRCode() {
           qrbox={200}
           qrCodeSuccessCallback={(decodedText) => {
             if (decodedText) {
-              navigate("/lnurlRedeem", { state: { decodedText: decodedText } });
+              navigate(
+                "/lnurlRedeem",
+
+                { state: { decodedText: decodedText }, replace: true }
+              );
             }
           }}
           qrCodeErrorCallback={console.error}

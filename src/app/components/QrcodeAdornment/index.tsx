@@ -9,7 +9,7 @@ export default function QrcodeAdornment() {
       type="button"
       className="flex justify-center items-center w-10 h-8"
       onClick={() => {
-        navigate("/scanQRCode");
+        navigate("/scanQRCode", { replace: true });
       }}
     >
       <QrCodeIcon className="h-6 w-6 text-blue-600" />
