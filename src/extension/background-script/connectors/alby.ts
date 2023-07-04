@@ -218,7 +218,6 @@ export default class Alby implements Connector {
       });
 
       if (this.config.oAuthToken) {
-        console.info("Requesting new oAuth token");
         try {
           if (authClient.isAccessTokenExpired()) {
             const token = await authClient.refreshAccessToken();
