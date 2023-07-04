@@ -273,7 +273,25 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
             )}
           </div>
 
-          <div className="flex justify-end p-5 dark:bg-surface-02dp">
+          <div className="flex justify-between items-center p-5 dark:bg-surface-02dp">
+            <Hyperlink
+              onClick={async () => {
+                if (window.confirm(t("confirm_delete"))) {
+                  try {
+                    await msg.request("deleteAllowance", {
+                      id: allowance.id,
+                    });
+                    onDelete && onDelete();
+                  } catch (e) {
+                    console.error(e);
+                    if (e instanceof Error) toast.error(`Error: ${e.message}`);
+                  }
+                }
+              }}
+              className="text-red-600"
+            >
+              {tCommon("actions.disconnect")}
+            </Hyperlink>
             <Button
               type="submit"
               label={tCommon("actions.save")}
