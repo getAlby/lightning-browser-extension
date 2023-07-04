@@ -418,7 +418,7 @@
         "mnemonic": {
           "title": "Secret Key",
           "description": "Your Account Secret Key allows you to use Alby to interact with protocols such as Nostr.",
-          "description2": "Your Secret Key is a set of 12 words that will allow you to access your keys to protocols such as Nostr on a new device or in case you loose access to your account.",
+          "description2": "Your Secret Key is a set of 12 words that will allow you to access your keys to protocols such as Nostr on a new device or in case you lose access to your account.",
           "saved": "Secret Key encrypted & saved successfully.",
           "existing_nostr_key_notice": "⚠️ This account already has a nostr private key set and will not be derived from this secret key. You can manage your nostr key from your account settings.",
           "generate": {
@@ -430,10 +430,10 @@
             "confirm": "I've backed my account's Secret Key in a private and secure place",
             "error_confirm": "Please confirm that you have backed up your secret key.",
             "save": "Save Secret Key",
-            "button": "Backup Secret Key",
-            "warning": "⚠️ Don't forget to backup your Secret Key! Not backing it up might result in permanently loosing access to your Nostr identity or assets you manage with this key.",
+            "button": "Back up Secret Key",
+            "warning": "⚠️ Don't forget to back up your Secret Key! Not backing it up might result in permanently losing access to your Nostr identity or assets you manage with this key.",
             "description1": "In addition to the Bitcoin Lightning Network, Alby allows you to generate keys and interact with other protocols such as:",
-            "description2": "Your Secret Key is a set of 12 words that will allow you to access your keys to those protocols on a new device or in case you loose access to your account. Make sure to write it down on a piece of paper and keep it safe:",
+            "description2": "Your Secret Key is a set of 12 words that will allow you to access your keys to those protocols on a new device or in case you lose access to your account. Make sure to write it down on a piece of paper and keep it safe:",
             "protocols": {
               "nostr": "Nostr"
             }
