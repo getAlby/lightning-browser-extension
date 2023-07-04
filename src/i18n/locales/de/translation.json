@@ -508,13 +508,13 @@
             "title": "Sichere deinen geheimen Schlüssel",
             "error_confirm": "Bitte bestätige, dass du eine Sicherungskopie deines geheimen Schlüssels erstellt hast.",
             "save": "Geheimschlüssel speichern",
-            "button": "Backup-Geheimschlüssel",
-            "warning": "⚠️ Vergesse nicht, deinen geheimen Schlüssel zu sichern! Wenn du ihn nicht sicherst, kann dies dazu führen, dass du den Zugang zu deiner Nostr-Identität oder zu den von dir mit diesem Schlüssel verwalteten Assets dauerhaft verlierst.",
+            "button": "Geheimschlüssel sichern",
+            "warning": "⚠️ Vergesse nicht, deinen geheimen Schlüssel zu sichern! Wenn du ihn nicht sicherst, kann dies dazu führen, dass du den Zugang zu deiner Nostr-Identität oder den von deinen mit diesem Schlüssel verwalteten Vermögenswerten dauerhaft verlierst.",
             "confirm": "Ich habe den geheimen Schlüssel meines Kontos an einem privaten und sicheren Ort aufbewahrt.",
             "description1": "Zusätzlich zum Bitcoin Lightning Network ermöglicht Alby die Generierung von Schlüsseln und die Interaktion mit anderen Protokollen wie z.B.:",
-            "description2": "Dein Geheimschlüssel besteht aus 12 Wörtern, mit denen du auf einem neuen Gerät oder bei Verlust des Zugangs zu deinem Konto auf deine Schlüssel zu diesen Protokollen zugreifen kannst. Schreibe es auf ein Blatt Papier und bewahre es sicher auf:"
+            "description2": "Dein Geheimschlüssel besteht aus 12 Wörtern, mit denen du auf einem neuen Gerät oder bei Verlust des Zugangs zu deinem Konto auf deine Schlüssel zu diesen Protokollen zugreifen kannst. Schreibe ihn auf ein Blatt Papier und bewahre ihn sicher auf:"
           },
-          "description2": "Dein Geheimschlüssel besteht aus 12 Wörtern, mit denen du deine Schlüssel für Protokolle wie Nostr auf einem neuen Gerät abrufen kannst oder falls du den Zugang zu deinem Konto verlierst.",
+          "description2": "Dein Geheimschlüssel besteht aus 12 Wörtern, die es dir ermöglichen, deine Schlüssel für Protokolle wie Nostr auf einem neuen Gerät abzurufen oder falls du den Zugang zu deinem Konto verlierst.",
           "saved": "Geheimschlüssel verschlüsselt und erfolgreich gespeichert.",
           "generate": {
             "title": "Erzeuge einen geheimen Schlüssel",
