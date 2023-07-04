@@ -27,10 +27,7 @@ function Welcome() {
           <Route path="/" element={<Layout />}>
             <Route index element={<SetPassword />} />
             <Route path="choose-path">
-              <Route
-                index={true}
-                element={<ChooseConnectorPath fromWelcome />}
-              ></Route>
+              <Route index={true} element={<ChooseConnectorPath />}></Route>
               <Route path="choose-connector">
                 <Route
                   index={true}

@@ -8,11 +8,7 @@ import i18n from "~/i18n/i18nConfig";
 
 import alby from "/static/assets/icons/alby.png";
 
-type Props = {
-  fromWelcome?: boolean;
-};
-
-export default function ChooseConnectorPath({ fromWelcome }: Props) {
+export default function ChooseConnectorPath() {
   let connectorRoutes = getConnectorRoutes();
 
   i18n.on("languageChanged", () => {
@@ -32,7 +28,7 @@ export default function ChooseConnectorPath({ fromWelcome }: Props) {
             content={
               <img src={alby} alt="logo" className="inline rounded-3xl w-32" />
             }
-            actions={<ConnectAlby fromWelcome={fromWelcome} />}
+            actions={<ConnectAlby />}
           />
           <ConnectorPath
             title={t("other.title")}

@@ -6,11 +6,7 @@ import Button from "~/app/components/Button";
 import msg from "~/common/lib/msg";
 import { WebLNNode } from "~/extension/background-script/connectors/connector.interface";
 
-type Props = {
-  fromWelcome?: boolean;
-};
-
-export default function ConnectAlby({ fromWelcome }: Props) {
+export default function ConnectAlby() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { t: tCommon } = useTranslation("common");
@@ -44,13 +40,7 @@ export default function ConnectAlby({ fromWelcome }: Props) {
           await msg.request("selectAccount", {
             id: addResult.accountId,
           });
-          if (fromWelcome) {
-            navigate("/pin-extension");
-          } else {
-            // NOTE: testing connection is not necessary but this screen will also update the account list and select the current account
-            // TODO: find a better way to do this
-            navigate("/test-connection");
-          }
+          navigate("/test-connection");
         } else {
           console.error("Failed to add account", addResult);
           throw new Error(addResult.error as string);
