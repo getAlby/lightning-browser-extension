@@ -13,7 +13,7 @@ import MenuDivider from "~/app/components/Menu/MenuDivider";
 import SkeletonLoader from "~/app/components/SkeletonLoader";
 import { useAccount } from "~/app/context/AccountContext";
 import { useAccounts } from "~/app/context/AccountsContext";
-import { isAlbyAccount, isAlbyLNDHubAccount } from "~/app/utils";
+import { isAlbyLNDHubAccount, isAlbyOAuthAccount } from "~/app/utils";
 import utils from "~/common/lib/utils";
 
 import Menu from "../Menu";
@@ -126,8 +126,8 @@ function AccountMenu({ showOptions = true }: Props) {
             <WalletIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
             {t("options.account.account_settings")}
           </Menu.ItemButton>
-          {(isAlbyLNDHubAccount(authAccount?.alias) ||
-            isAlbyAccount(authAccount?.connector)) && (
+          {(isAlbyLNDHubAccount(authAccount?.alias, authAccount?.connector) ||
+            isAlbyOAuthAccount(authAccount?.connector)) && (
             <Menu.ItemButton
               onClick={() => {
                 window.open(`https://getalby.com/user`, "_blank");
