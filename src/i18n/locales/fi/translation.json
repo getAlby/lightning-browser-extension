@@ -1,12 +1,6 @@
 {
   "translation": {
     "welcome": {
-      "nav": {
-        "welcome": "Tervetuloa",
-        "password": "Salasanasi",
-        "connect": "Lightning-tilisi",
-        "done": "Tehty"
-      },
       "set_password": {
         "title": "Aseta lukituksen avaussalasana",
         "description": "Lightning-tilisi tiedot on salattu turvallisesti salasanan avulla. Älä unohda tätä salasanaa! Tarvitset sitä avataksesi Alby-laajennuksen lukituksen (tässä selaimessa)",
@@ -192,20 +186,17 @@
         "sms_code": {
           "label": "Syötä tekstiviestivahvistuskoodisi"
         },
-        "jwt": {
+        "token": {
           "label": "Syötä JWT-tunnuksesi",
           "info": "Kirjautumistunnusta {{label}} päivitetään parhaillaan. Jos olet kokenut käyttäjä, voit napata JWT-tunnuksesi kirjautumalla sisään <0>Verkkolompakon (wallet.mainnet.galoy.io) kautta</0><1/><1/>JWT näyttää tältä: < 2>eyJhbG...</2><1/><1/>"
         },
         "actions": {
-          "login": "Kirjaudu sisään",
-          "request_sms_code": "Pyydä tekstiviestikoodi"
+          "login": "Kirjaudu sisään"
         },
         "errors": {
-          "failed_to_request_sms": "Tekstiviestikoodin pyytäminen epäonnistui",
-          "failed_to_login_sms": "Kirjautuminen SMS-koodilla epäonnistui",
           "setup_failed": "Määritys epäonnistui",
-          "missing_jwt": "JWT puuttuu, sisäänkirjautuminen ei onnistunut.",
-          "invalid_jwt": "virheellinen JWT välitetty"
+          "missing_token": "JWT puuttuu, sisäänkirjautuminen ei onnistunut.",
+          "invalid_token": "virheellinen JWT välitetty"
         }
       },
       "btcpay": {
@@ -261,12 +252,6 @@
         "enable_now": "Ota nyt käyttöön"
       },
       "recent_transactions": "Viimeaikaiset tapahtumat",
-      "transaction_list": {
-        "tabs": {
-          "outgoing": "Lähtevä",
-          "incoming": "Saapuva"
-        }
-      },
       "allowance_view": {
         "recent_transactions": "Viimeaikaiset tapahtumat",
         "allowance": "Korvaus",
@@ -275,7 +260,6 @@
       },
       "default_view": {
         "recent_transactions": "Viimeaikaiset tapahtumat",
-        "no_transactions": "Albyn kanssa, ei vielä tehty tapahtumia.",
         "is_blocked_hint": "Alby on tällä hetkellä poissa käytöstä {{host}}:lla"
       }
     },
@@ -366,17 +350,14 @@
       },
       "name": {
         "title": "Nimi",
-        "subtitle": "",
         "placeholder": "Syötä nimesi"
       },
       "email": {
         "title": "Sähköposti",
-        "subtitle": "",
         "placeholder": "Syötä sähköpostiosoitteesi"
       },
       "change_password": {
         "title": "Vaihda lukituksen avaussalasana",
-        "subtitle": "",
         "screen_reader": "Vaihda lukituksen avaussalasana",
         "choose_password": {
           "label": "Syötä uusi lukituksen avaussalasana:"
@@ -541,7 +522,6 @@
     "success": "Menestys",
     "error": "Virhe",
     "settings": "Asetukset",
-    "websites": "Verkkosivustot",
     "sats_one": "sat",
     "sats_other": "satia",
     "loading": "ladataan",

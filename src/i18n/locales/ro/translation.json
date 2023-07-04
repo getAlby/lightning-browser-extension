@@ -2,12 +2,6 @@
   "translation": {
     "welcome": {
       "title": "Bine ai venit la Alby",
-      "nav": {
-        "welcome": "Bine ai venit",
-        "password": "Parola ta",
-        "connect": "Contul tau de Lightning",
-        "done": "Gata"
-      },
       "set_password": {
         "title": "Seteaza o parola pentru deblocare",
         "description": "Aceasta parola este folosita pentru a proteja portofelul tau si pentru a permite accesul la extensia de browser. Aceasta parola nu poate fi resetata si este separata de parola contului Alby.",
@@ -36,8 +30,6 @@
       }
     },
     "choose_path": {
-      "title": "Conecteaza-te",
-      "description": "Pentru a incepe sa efectuezi plati online utilizand Alby, conecteaza portofelul Lightning la extensie.",
       "alby": {
         "title": "Alby",
         "description": "Inregistreaza-te sau foloseste un cont Alby deja existent pentru a incepe sa faci plati prin Lightning imediat.",
@@ -228,7 +220,7 @@
         "title": "Start9",
         "page": {
           "title": "Conectare la nodul tau <0>Embassy</0>",
-          "instructions": "<0>Nota:</0> Momentan exista suport doar pentru LND dar vom adauga suport pentru c-lightning in viitor!<1/>Pe tabloul de bord din Embassy apasa pe serviciul <0>lightning network Daemon</0>.<1/>Selecteaza tabul <0>Properties</0>.<1/>Acum copiaza <0>LND Connect REST URL.</0>"
+          "instructions": "<0>Nota:</0> Momentan exista suport doar pentru LND dar vom adauga suport pentru c-lightning in viitor!<1/>Pe tabloul de bord din Embassy apasa pe serviciul <0>Lightning Network Daemon</0>.<1/>Selecteaza tabul <0>Properties</0>.<1/>Acum copiaza <0>LND Connect REST URL.</0>"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -266,34 +258,24 @@
         "sms_code": {
           "label": "Introdu codul de verificare primit prin SMS"
         },
-        "jwt": {
+        "token": {
           "label": "Introdu tokenul tau JWT",
           "info": "Momentan {{eticheta}} de login este in curs de actualizare. Daca esti un utilizator avansat, poti sa iei tokenul tau JWT prin logare via <0>Web Wallet (wallet.mainnet.galoy.io)</0><1/><1/>Tokenul JWT este de tipul: <2>eyJhbG...</2><1/><1/>"
         },
         "actions": {
-          "login": "Login",
-          "request_sms_code": "Solicita cod prin SMS"
+          "login": "Login"
         },
         "errors": {
-          "failed_to_request_sms": "Solicitare pentru cod SMS esuata",
-          "failed_to_login_sms": "Logare prin cod SMS esuata",
           "setup_failed": "Setare esuata",
-          "missing_jwt": "Lipseste JWT, nu s-a putut efectua logarea.",
-          "invalid_jwt": "JWT invalid a trecut"
+          "missing_token": "Lipseste JWT, nu s-a putut efectua logarea.",
+          "invalid_token": "JWT invalid a trecut"
         }
       },
       "kollider": {
         "title": "Kollider",
         "description": "Logare la contul tau Kollider",
-        "page": {
-          "title": "Conectare la contul tau Kollider",
-          "description": "Nu ai inca un cont? <0>Inregistreaza-te</0> acum!"
-        },
         "username": {
           "label": "Introdu numele de utilizator Kollider"
-        },
-        "password": {
-          "label": "Introdu parola ta Kollider"
         },
         "currency": {
           "label": "Selecteaza contul de moneda"
@@ -355,12 +337,6 @@
         "enable_now": "Activeaza acum"
       },
       "recent_transactions": "Tranzactii recente",
-      "transaction_list": {
-        "tabs": {
-          "outgoing": "Trimitere",
-          "incoming": "Primire"
-        }
-      },
       "allowance_view": {
         "recent_transactions": "Tranzactii recente",
         "allowance": "Permisiuni",
@@ -369,7 +345,6 @@
       },
       "default_view": {
         "recent_transactions": "Tranzactii recente",
-        "no_transactions": "Nicio tranzactie efectuata cu Alby, momentan.",
         "is_blocked_hint": "Momentan, Alby este dezactivat pentru {{host}}",
         "block_removed": "{{host}} activat. Te rugam sa reincarci website-ul."
       }
@@ -635,7 +610,7 @@
       "list": {
         "trading": "",
         "gaming": "",
-        "entertaiment": "",
+        "entertainment": "",
         "shopping": "",
         "miscellaneous": "",
         "showcases": "",
@@ -646,25 +621,11 @@
         "description": "",
         "top_up_wallet": {
           "title": "",
-          "description": "",
-          "label1": "",
-          "label2": ""
-        },
-        "pin": {
-          "title": "",
-          "description1": "",
-          "description2": "",
-          "description3": ""
+          "description": ""
         },
         "demo": {
           "title": "",
-          "description": "",
-          "label1": ""
-        },
-        "address": {
-          "title": "",
-          "description": "",
-          "label1": ""
+          "description": ""
         }
       }
     },
@@ -744,7 +705,7 @@
     "settings": "",
     "accounts": "",
     "discover": "",
-    "websites": "",
+    "connected_sites": "",
     "sats_one": "",
     "sats_other": "",
     "loading": "",
@@ -777,6 +738,7 @@
       "export": "",
       "remove": "",
       "copy": "",
+      "copy_invoice": "",
       "log_in": "",
       "remember": ""
     },

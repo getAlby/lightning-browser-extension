@@ -2,12 +2,6 @@
   "translation": {
     "welcome": {
       "title": "Witaj w Alby",
-      "nav": {
-        "welcome": "Powitanie",
-        "password": "Twoje hasło",
-        "connect": "Twoje konto Lightning",
-        "done": "Koniec"
-      },
       "set_password": {
         "title": "Ustaw hasło blokady",
         "description": "To hasło zabezpiecza Twój portfel i umożliwia dostęp do rozszerzenia przeglądarki. Nie można go zresetować i jest odrębne od hasła do Twojego konta Alby.",
@@ -36,8 +30,6 @@
       }
     },
     "choose_path": {
-      "title": "Połącz",
-      "description": "Aby zacząć używać rozszerzenia Alby, połącz swój portfel lightning.",
       "alby": {
         "title": "Konto Alby",
         "description": "Zarejestruj się lub użyj istniejącego konta Alby aby zacząć z płatnościami lightning w mgnieniu oka.",
@@ -228,7 +220,7 @@
         "title": "Start9",
         "page": {
           "title": "Podłącz do węzła <0>Embassy</0>",
-          "instructions": "<0>Uwaga:</0>Obecnie wspieramy tylko LND, ale zamierzamy dodać obsługę c-lightning w przyszłości!<1/>Na pulpicie twojego Embassy kliknij na usługę <0>lightning network Daemon</0>.<1/>Wybierz zakładkę <0>Properties</0>.<1/>Następnie skopiuj <0>LND Connect REST URL.</0>"
+          "instructions": "<0>Uwaga:</0>Obecnie wspieramy tylko LND, ale zamierzamy dodać obsługę c-lightning w przyszłości!<1/>Na pulpicie twojego Embassy kliknij na usługę <0>Lightning Network Daemon</0>.<1/>Wybierz zakładkę <0>Properties</0>.<1/>Następnie skopiuj <0>LND Connect REST URL.</0>"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -266,34 +258,24 @@
         "sms_code": {
           "label": "Wprowadź pod weryfikujący SMS"
         },
-        "jwt": {
+        "token": {
           "label": "Wprowadź swój token JWT",
           "info": "Logowanie do {{label}} jest w trakcie aktualizacji. Jeśli jesteś zaawansowanym użytkownikiem, pobierz swój token JWT logując się przez <0>Portfel webowy (wallet.mainnet.galoy.io)</0><1/><1/>Token JWT wygląda tak: <2>eyJhbG...</2><1/><1/>"
         },
         "actions": {
-          "login": "Zaloguj",
-          "request_sms_code": "Wyślij kod SMS"
+          "login": "Zaloguj"
         },
         "errors": {
-          "failed_to_request_sms": "Nie udało się wysłać kodu SMS",
-          "failed_to_login_sms": "Logowanie z kodem SMS nie udało się",
           "setup_failed": "Konfiguracja nie powiodła się",
-          "missing_jwt": "Brakuje tokenu JWT, logowanie nieudane.",
-          "invalid_jwt": "podano nieprawidłowy token JWT"
+          "missing_token": "Brakuje tokenu JWT, logowanie nieudane.",
+          "invalid_token": "podano nieprawidłowy token JWT"
         }
       },
       "kollider": {
         "title": "Kollider",
         "description": "Zaloguj się do swojego konta Kollider",
-        "page": {
-          "title": "Podłącz do konta Kollider",
-          "description": "Nie masz jeszcze konta? <0>Zarejestruj się</0> teraz!"
-        },
         "username": {
           "label": "Wprowadź nazwę użytkownika Kollider"
-        },
-        "password": {
-          "label": "Wprowadź swoje hasło Kollider"
         },
         "currency": {
           "label": "Wybierz walutę swojego konta"
@@ -355,12 +337,6 @@
         "enable_now": "Włącz teraz"
       },
       "recent_transactions": "Ostatnie transakcje",
-      "transaction_list": {
-        "tabs": {
-          "outgoing": "Wychodzące",
-          "incoming": "Przychodzące"
-        }
-      },
       "allowance_view": {
         "recent_transactions": "Ostatnie transakcje",
         "allowance": "Limity",
@@ -369,7 +345,6 @@
       },
       "default_view": {
         "recent_transactions": "Ostatnie transakcje",
-        "no_transactions": "Jeszcze nie ma transakcji z użyciem Alby.",
         "is_blocked_hint": "Alby jest obecnie wyłączone na {{host}}",
         "block_removed": "Włączono {{host}}. Odśwież stronę."
       }
@@ -636,7 +611,7 @@
       "list": {
         "trading": "Handel",
         "gaming": "Gry",
-        "entertaiment": "Rozrywka",
+        "entertainment": "Rozrywka",
         "shopping": "Zakupy",
         "miscellaneous": "Różne",
         "showcases": "Prezentowane",
@@ -647,25 +622,11 @@
         "description": "Oto klika wskazówek na start 🐝",
         "top_up_wallet": {
           "title": "⚡️ Doładuj swój portfel",
-          "description": "Stwórz fakturę Lightning, wyślij sobie trochę bitcoinów i zacznij korzystać z Alby w ekosystemie Lightning",
-          "label1": "Otrzymaj Bitcoin",
-          "label2": "Kup Bitcoin"
-        },
-        "pin": {
-          "title": "📌 Przypnij rozszerzenie Alby",
-          "description1": "<0>Aby mieć łatwy dostęp do Alby, kliknij na ikonę rozszerzeń</0><1/> <2>w prawym górnym rogu przeglądarki</2>",
-          "description2": "Na liście rozszerzeń, odszukaj Alby i kliknij ikonę pinezki aby przypiąć do paska narzędzi",
-          "description3": "To wszystko! Aby używać Alby po prostu kliknij w ikonę"
+          "description": "Stwórz fakturę Lightning, wyślij sobie trochę bitcoinów i zacznij korzystać z Alby w ekosystemie Lightning"
         },
         "demo": {
           "title": "🕹️ Spróbuj demonstracyjnej wersji Alby",
-          "description": "Odkryj wszystkie możliwości, jakie daje Alby na naszej stronie demonstracyjnej",
-          "label1": "Wypróbuj"
-        },
-        "address": {
-          "title": "⚡️ Zdobądź adres lightning",
-          "description": "Stwórz swój własny adres lightning aby przyjmować płatności tak łatwo jak wysyłanie emaila",
-          "label1": "Zdobądź go!"
+          "description": "Odkryj wszystkie możliwości, jakie daje Alby na naszej stronie demonstracyjnej"
         }
       }
     },
@@ -766,7 +727,6 @@
       "view_details": "Pokaż szczegóły"
     },
     "transactions": {
-      "description": "Transakcje wychodzące ze wszystkich Twoich kont",
       "title": "Transakcje",
       "list_empty": "Brak dostępnych transakcji."
     }
@@ -780,7 +740,7 @@
     "settings": "Ustawienia",
     "accounts": "Konta",
     "discover": "Odkrywaj",
-    "websites": "Strony",
+    "connected_sites": "",
     "sats_one": "sat",
     "sats_other": "sats",
     "loading": "ładowanie",
@@ -814,6 +774,7 @@
       "export": "Eksport",
       "remove": "Usuń",
       "copy": "Kopiuj",
+      "copy_invoice": "",
       "log_in": "Zaloguj",
       "remember": "Pamiętaj mój wybór i więcej nie pytaj",
       "transactions": "Transakcje"
@@ -824,10 +785,9 @@
     },
     "range": {
       "between": "pomiędzy {{min}} a {{max}}",
-      "lessThan": "< {{max}}",
-      "greaterThan": "> {{min}}"
-    },
-    "transactions": "Transakcje"
+      "lessThanOrEqual": "≤ {{max}}",
+      "greaterOrEqual": "≥ {{min}}"
+    }
   },
   "components": {
     "allowance_menu": {
@@ -841,7 +801,7 @@
         "subtitle": "Automatycznie loguj się bez potwierdzenia gdy strona o to poprosi."
       },
       "edit_allowance": {
-        "title": "Edytuj limit",
+        "title": "Edytuj preferencje",
         "screen_reader": "Opcje limitu"
       },
       "edit_permissions": "Edytuj uprawnienia"

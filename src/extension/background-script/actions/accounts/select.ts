@@ -9,12 +9,15 @@ const select = async (message: MessageAccountSelect) => {
   if (account) {
     if (currentState.connector) {
       console.info("Unloading connector");
-      await currentState.connector.unload();
+      const connector = await currentState.connector;
+      await connector.unload();
     }
 
     state.setState({
       account,
       nostr: null, // reset memoized nostr instance
+      mnemonic: null, // reset memoized mnemonic instance
+      bitcoin: null, // reset memoized bitcoin instance
       connector: null, // reset memoized connector
       currentAccountId: accountId,
     });

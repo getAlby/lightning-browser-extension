@@ -2,12 +2,6 @@
   "translation": {
     "welcome": {
       "title": "Velkommen til Alby",
-      "nav": {
-        "welcome": "Velkommen",
-        "password": "Din adgangskode",
-        "connect": "Din Lightning-konto",
-        "done": "Færdig"
-      },
       "set_password": {
         "title": "Angiv en nøglekode",
         "description": "Dette kodeord bruges til at beskytte din wallet og giver adgang til browserudvidelsen. Det kan ikke nulstilles, og er ikke den samme som adgangskoden til din Alby-konto.",
@@ -36,8 +30,6 @@
       }
     },
     "choose_path": {
-      "title": "Opret forbindelse",
-      "description": "Opret forbindelse til udvidelsen fra din lightning-wallet for at bruge Alby til at betale online.",
       "alby": {
         "title": "Alby",
         "description": "Opret dig, eller brug din eksisterende Alby-konto til hurtigt at starte med at betale via lightning.",
@@ -228,7 +220,7 @@
         "title": "Start9",
         "page": {
           "title": "Opret forbindelse til din <0>Embassy</0> node",
-          "instructions": "<0>Note:</0> I øjeblikket understøtter vi kun LND, men vi vil fremover også tilføje support af c-lightning!<1/>I din Embassys indstillingsmenu klikker du på servicen <0>lightning network Daemon</0>.<1/>Vælg fanen <0>Properties</0>.<1/>Kopier så <0>LND Connect REST URL.</0>"
+          "instructions": "<0>Note:</0> I øjeblikket understøtter vi kun LND, men vi vil fremover også tilføje support af c-lightning!<1/>I din Embassys indstillingsmenu klikker du på servicen <0>Lightning Network Daemon</0>.<1/>Vælg fanen <0>Properties</0>.<1/>Kopier så <0>LND Connect REST URL.</0>"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -266,34 +258,24 @@
         "sms_code": {
           "label": "Indtast din SMS-bekræftelseskode"
         },
-        "jwt": {
+        "token": {
           "label": "Indtast din JWT-token",
           "info": "Log ind med {{label}} bliver i øjeblikketl opgraderet. Hvis du er en øvet bruger, kan du få din JWT-token ved at logge ind via <0>Web Wallet (wallet.mainnet.galoy.io)</0><1/><1/>JWT ser sådan ud: <2>eyJhbG...</2><1/><1/>"
         },
         "actions": {
-          "login": "Adgangsoplysninger",
-          "request_sms_code": "Anmod om SMS-kode"
+          "login": "Adgangsoplysninger"
         },
         "errors": {
-          "failed_to_request_sms": "Kunne ikke anmode om SMS-kode",
-          "failed_to_login_sms": "Kunne ikke logge ind med SMS-kode",
           "setup_failed": "Opsætning mislykkedes",
-          "missing_jwt": "JWT mangler, kunne ikke logge ind.",
-          "invalid_jwt": "ugyldig JWT givet"
+          "missing_token": "JWT mangler, kunne ikke logge ind.",
+          "invalid_token": "ugyldig JWT givet"
         }
       },
       "kollider": {
         "title": "Kollider",
         "description": "Log ind på din Kollider-konto",
-        "page": {
-          "title": "Opret forbindelse til din Kollider-konto",
-          "description": "Har du ikke en konto? <0>Opret en konto</0> nu!"
-        },
         "username": {
           "label": "Indtast dit Kollider-brugernavn"
-        },
-        "password": {
-          "label": "Indtast din Kollider adgangskode"
         },
         "currency": {
           "label": "Vælg din kontovaluta"
@@ -355,12 +337,6 @@
         "enable_now": "Aktiver nu"
       },
       "recent_transactions": "Seneste transaktioner",
-      "transaction_list": {
-        "tabs": {
-          "outgoing": "Udgående",
-          "incoming": "Indkommende"
-        }
-      },
       "allowance_view": {
         "recent_transactions": "Seneste transaktioner",
         "allowance": "Pulje",
@@ -369,7 +345,6 @@
       },
       "default_view": {
         "recent_transactions": "Seneste transaktioner",
-        "no_transactions": "Endnu ingen transaktioner udført med Alby.",
         "is_blocked_hint": "Alby er i øjeblikket deaktiveret på {{vært}}",
         "block_removed": "{{vært}} blev aktiveret. Indlæs hjemmesiden igen."
       }
@@ -634,7 +609,7 @@
       "list": {
         "trading": "Handel",
         "gaming": "Spil",
-        "entertaiment": "Underholdning",
+        "entertainment": "Underholdning",
         "shopping": "Indkøb",
         "miscellaneous": "Diverse",
         "showcases": "Eksempler",
@@ -645,25 +620,11 @@
         "description": "Et par råd der får dig på vingerne🐝",
         "top_up_wallet": {
           "title": "⚡️ Fyld din wallet op",
-          "description": "Generer en lightning-faktura, send lidt bitcoin til dig selv og begynd at bruge Alby i lightnings økosystem",
-          "label1": "Modtag Bitcoin",
-          "label2": "Køb Bitcoin"
-        },
-        "pin": {
-          "title": "📌 Fastgør din Alby-udvidelse",
-          "description1": "<0>Få nem adgang til Alby ved at klikke på udvidelsesikonet</0> <1/> <2>i din browsers øverste højre hjørne</2>",
-          "description2": "Find Alby i listen med udvidelser, og klik på tegnestift-ikonet for at fastgøre den til værktøjslinjen",
-          "description3": "Sådan! Et klik på Albys ikon åbner den"
+          "description": "Generer en lightning-faktura, send lidt bitcoin til dig selv og begynd at bruge Alby i lightnings økosystem"
         },
         "demo": {
           "title": "🕹️ Få en prøvetur med Alby",
-          "description": "Se alle de ting, du kan med Alby på vores præsentationsside",
-          "label1": "Kom igang"
-        },
-        "address": {
-          "title": "⚡️ Få en lightning-adresse",
-          "description": "Lav din egen lightning-adresse, og få betaling med lightning lige så let som når du sender en e-mail",
-          "label1": "Få den nu!"
+          "description": "Se alle de ting, du kan med Alby på vores præsentationsside"
         }
       }
     },
@@ -743,7 +704,7 @@
     "settings": "Indstillinger",
     "accounts": "Konti",
     "discover": "Opdag",
-    "websites": "Hjemmesider",
+    "connected_sites": "",
     "sats_one": "sat",
     "sats_other": "sat",
     "loading": "indlæser",
@@ -777,6 +738,7 @@
       "export": "Eksporter",
       "remove": "Fjern",
       "copy": "Kopier",
+      "copy_invoice": "",
       "log_in": "Log ind",
       "remember": "Husk mit valg, og spørg ikke igen"
     },

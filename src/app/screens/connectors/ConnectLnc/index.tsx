@@ -2,10 +2,12 @@ import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
 import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
 import { useState } from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import msg from "~/common/lib/msg";
+
+import logo from "/static/assets/icons/lnd.png";
 
 const initialFormData = Object.freeze({
   pairingPhrase: "",
@@ -69,12 +71,25 @@ export default function ConnectLnd() {
   return (
     <ConnectorForm
       title={t("page.title")}
-      description={t("page.description")}
+      description={
+        <Trans
+          i18nKey={"page.description"}
+          t={t}
+          components={[
+            // eslint-disable-next-line react/jsx-key
+            <strong></strong>,
+            // eslint-disable-next-line react/jsx-key
+            <br />,
+          ]}
+        />
+      }
+      logo={logo}
       submitLoading={loading}
       submitDisabled={formData.pairingPhrase === ""}
       onSubmit={handleSubmit}
+      image="https://cdn.getalby-assets.com/connector-guides/lnc.png"
     >
-      <div className="mb-6">
+      <div className="mt-6">
         <TextField
           id="pairingPhrase"
           type="password"
@@ -82,6 +97,7 @@ export default function ConnectLnd() {
           placeholder={t("pairing_phrase.placeholder")}
           onChange={handleChange}
           required
+          autoFocus={true}
         />
       </div>
     </ConnectorForm>

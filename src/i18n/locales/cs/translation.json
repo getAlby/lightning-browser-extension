@@ -1,12 +1,6 @@
 {
   "translation": {
     "welcome": {
-      "nav": {
-        "welcome": "Vítejte",
-        "password": "Vaše heslo",
-        "connect": "Váš Lightning účet",
-        "done": "Hotovo"
-      },
       "set_password": {
         "title": "Nastavte/Nastavit heslo pro odemčení účtu",
         "description": "Toto heslo je použito pro zabezpečení vaši peněženky a pokytuje přístup k doplňku prohlížeče. Již nemůže být resetováno a nijak nesouvisí s heslem k vašemu Alby účtu.",
@@ -155,7 +149,7 @@
         "title": "Start9",
         "page": {
           "title": "Připojení k vašemu uzlu <0>Embassy</0>",
-          "instructions": "<0>Pozn.:</0> Aktuálně podporujeme pouze LND, ale v budoucnu plánujeme přidávat podporu c-lightning!<1/>V dashboardu vašeho Embassy zvolte službu <0>lightning network daemon</0>.<1/>Vyberte záložku <0>Vlastnosti (Properties)</0>.<1/>Následně zkopírujte <0>LND Connect REST URL.</0>"
+          "instructions": "<0>Pozn.:</0> Aktuálně podporujeme pouze LND, ale v budoucnu plánujeme přidávat podporu c-lightning!<1/>V dashboardu vašeho Embassy zvolte službu <0>Lightning Network Daemon</0>.<1/>Vyberte záložku <0>Vlastnosti (Properties)</0>.<1/>Následně zkopírujte <0>LND Connect REST URL.</0>"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -193,20 +187,17 @@
         "sms_code": {
           "label": "Vlože verifikační kód ze SMS"
         },
-        "jwt": {
+        "token": {
           "label": "Vlože svůj JWT token",
           "info": "Přihlášení {{label}} je aktuálně aktualizováno. Pokud jste pokročilý uživatel, můžete svůj JWT token získat přihlášením přes <0>Webovou peněženku (wallet.mainnet.galoy.io)</0><1/><1/>JWT token vypadá podobně jako: <2>eyJhbG...</2><1/><1/>"
         },
         "actions": {
-          "login": "Přihlásit",
-          "request_sms_code": "Zažádat o SMS kód"
+          "login": "Přihlásit"
         },
         "errors": {
-          "failed_to_request_sms": "Nepodařilo se vyžádat SMS kód",
-          "failed_to_login_sms": "Nepodařilo se přihlášení s SMS kódem",
           "setup_failed": "Nastavení se nezdařilo",
-          "missing_jwt": "JWT chybí, přihlášení se nezdařilo.",
-          "invalid_jwt": "Vloženo nevalidní JWT"
+          "missing_token": "JWT chybí, přihlášení se nezdařilo.",
+          "invalid_token": "Vloženo nevalidní JWT"
         }
       },
       "btcpay": {
@@ -273,15 +264,8 @@
         "errors": {
           "connection_failed": "Připojení se nezdařilo. Jste si jisti, že jste zadali údaje k účtu správně?"
         },
-        "page": {
-          "title": "Připojení k vašemu účtu Kollider",
-          "description": "Nemáte ještě účet? <0>Vytvořte</0> ho!"
-        },
         "username": {
           "label": "Vložte vaše uživatelské jméno ke Kollider"
-        },
-        "password": {
-          "label": "Vložte vaše heslo ke Kollider"
         },
         "currency": {
           "label": "Zvolte měnu vašeho účtu"
@@ -294,12 +278,6 @@
         "enable_now": "Povolit nyní"
       },
       "recent_transactions": "Nedávné transakce",
-      "transaction_list": {
-        "tabs": {
-          "outgoing": "Odchozí",
-          "incoming": "Příchozí"
-        }
-      },
       "allowance_view": {
         "recent_transactions": "Nedávné transakce",
         "allowance": "Příspěvek",
@@ -308,7 +286,6 @@
       },
       "default_view": {
         "recent_transactions": "Nedávné transakce",
-        "no_transactions": "S Alby prozatím nebyly uskutečněny žádné transakce.",
         "is_blocked_hint": "Alby je v současnosti zakázaná na {host}}",
         "block_removed": "Povolen {{host}}. Prosím znovu načtěte webovou stránku."
       }
@@ -635,7 +612,6 @@
       "content": "Tato webová stránka vás žádá o podpis:"
     },
     "choose_path": {
-      "title": "Připojit",
       "other": {
         "title": "Jiné peněženky",
         "description": "Připojte svou existující lightning peněženku nebo svůj uzel pomocí různých konektorů.",
@@ -646,8 +622,7 @@
         "create_new": "Vytvoření účtu",
         "title": "Alby",
         "description": "Zaregistrujte se, nebo se přihlašte ke svému existujícímu Alby účtu a začněte využívat lightning platby."
-      },
-      "description": "Pro použití Alby pro online platby, připojte svou lightning peněženku k doplňku."
+      }
     },
     "alby": {
       "pre_connect": {
@@ -701,35 +676,21 @@
       "list": {
         "trading": "Obchodování",
         "gaming": "Hraní her",
-        "entertaiment": "Zábava",
+        "entertainment": "Zábava",
         "shopping": "Nakupování",
         "nostr": "Nostr",
         "miscellaneous": "Různé",
         "showcases": "Příklady užití"
       },
       "tips": {
-        "address": {
-          "description": "Vytvořte si svou vlastní lightning adresu pro příjímání lightning plateb tak jednoduše, jak kdybyste odesílali e-mail",
-          "label1": "Získat!",
-          "title": "⚡️ Získat lightning adresu"
-        },
         "title": "Vaše Alby peněženka je připravena",
         "description": "Pár tipů než začnete",
         "top_up_wallet": {
           "title": "⚡️ Dobít peněženku",
-          "description": "Vytvořte lightning fakturu, pošlete si bitcoiny a začněte používat Alby v ekosystému lightning",
-          "label1": "Přijmout Bitcoin",
-          "label2": "Koupit Bitcoin"
-        },
-        "pin": {
-          "title": "📌 Připnout váš doplněk Alby",
-          "description1": "<0>Pro jednoduchý přístup k Alby, klikněte na ikonu doplňku</0> <1/> <2>v pravém horním rohu vašeho prohlížeče</2>",
-          "description2": "V seznamu doplňků najděte Alby a klikněte na ikonu pro připnutí k vašemu panelu nástrojů",
-          "description3": "To je vše! Pro přístup k Alby pouze klikněte na ikonu Alby"
+          "description": "Vytvořte lightning fakturu, pošlete si bitcoiny a začněte používat Alby v ekosystému lightning"
         },
         "demo": {
           "description": "Objevte vše, co lze s Alby dělat, na naší demo stránce",
-          "label1": "Vyzkoušet",
           "title": "🕹️ Vyzkoušejte demo Alby"
         }
       }
@@ -741,7 +702,7 @@
     "success": "Úspěch",
     "error": "Chyba",
     "settings": "Nastavení",
-    "websites": "Webové stránky",
+    "connected_sites": "",
     "sats_one": "sat",
     "sats_other": "satů",
     "loading": "načítání",
@@ -774,6 +735,7 @@
       "export": "Exportovat",
       "remove": "Odstranit",
       "copy": "Zkopírovat",
+      "copy_invoice": "",
       "log_in": "Přihlásit se",
       "receive_again": "Přijmout další platbu",
       "remember": "Zapamatovat moji volbu a nikdy se už neptat"

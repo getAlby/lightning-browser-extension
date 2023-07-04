@@ -91,7 +91,7 @@ export default function PasswordForm<
 
   return (
     <>
-      <div className="w-full mb-6">
+      <div className="w-full">
         <TextField
           autoFocus={autoFocus}
           id="password"
@@ -99,7 +99,6 @@ export default function PasswordForm<
           type={passwordView ? "text" : "password"}
           required
           onChange={handleChange}
-          tabIndex={0}
           minLength={minLength}
           pattern={minLength ? `.{${minLength},}` : undefined}
           title={
@@ -132,7 +131,7 @@ export default function PasswordForm<
         )}
       </div>
       {confirm && (
-        <div className="w-full">
+        <div className="mt-6 w-full">
           <TextField
             id="passwordConfirmation"
             label={t("confirm_password.label")}
@@ -140,7 +139,6 @@ export default function PasswordForm<
             required
             onChange={handleChange}
             onBlur={validate}
-            tabIndex={1}
             endAdornment={
               <button
                 type="button"

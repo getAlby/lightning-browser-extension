@@ -2,12 +2,6 @@
   "translation": {
     "welcome": {
       "title": "Добро пожаловать в Alby",
-      "nav": {
-        "welcome": "Добро пожаловать",
-        "password": "Ваш Пароль",
-        "connect": "Ваш Лайтнинг Аккаунт",
-        "done": "Готово"
-      },
       "set_password": {
         "title": "Установите пароль разблокировки",
         "description": "Этот пароль нужен для защиты вашего кошелька, он предоставляет доступ к расширению браузера. Он не может быть восстановлен и не является паролем аккаунта Alby.",
@@ -36,8 +30,6 @@
       }
     },
     "choose_path": {
-      "title": "",
-      "description": "",
       "alby": {
         "title": "",
         "description": "",
@@ -266,33 +258,23 @@
         "sms_code": {
           "label": ""
         },
-        "jwt": {
+        "token": {
           "label": "",
           "info": ""
         },
         "actions": {
-          "login": "",
-          "request_sms_code": ""
+          "login": ""
         },
         "errors": {
-          "failed_to_request_sms": "",
-          "failed_to_login_sms": "",
           "setup_failed": "",
-          "missing_jwt": "",
-          "invalid_jwt": ""
+          "missing_token": "",
+          "invalid_token": ""
         }
       },
       "kollider": {
         "title": "",
         "description": "",
-        "page": {
-          "title": "",
-          "description": ""
-        },
         "username": {
-          "label": ""
-        },
-        "password": {
           "label": ""
         },
         "currency": {
@@ -355,12 +337,6 @@
         "enable_now": ""
       },
       "recent_transactions": "",
-      "transaction_list": {
-        "tabs": {
-          "outgoing": "",
-          "incoming": ""
-        }
-      },
       "allowance_view": {
         "recent_transactions": "",
         "allowance": "",
@@ -369,7 +345,6 @@
       },
       "default_view": {
         "recent_transactions": "",
-        "no_transactions": "",
         "is_blocked_hint": "",
         "block_removed": ""
       }
@@ -634,7 +609,7 @@
       "list": {
         "trading": "",
         "gaming": "",
-        "entertaiment": "",
+        "entertainment": "",
         "shopping": "",
         "miscellaneous": "",
         "showcases": "",
@@ -645,25 +620,11 @@
         "description": "",
         "top_up_wallet": {
           "title": "",
-          "description": "",
-          "label1": "",
-          "label2": ""
-        },
-        "pin": {
-          "title": "",
-          "description1": "",
-          "description2": "",
-          "description3": ""
+          "description": ""
         },
         "demo": {
           "title": "",
-          "description": "",
-          "label1": ""
-        },
-        "address": {
-          "title": "",
-          "description": "",
-          "label1": ""
+          "description": ""
         }
       }
     },
@@ -743,7 +704,7 @@
     "settings": "",
     "accounts": "",
     "discover": "",
-    "websites": "",
+    "connected_sites": "",
     "sats_one": "",
     "sats_other": "",
     "loading": "",
@@ -777,6 +738,7 @@
       "export": "",
       "remove": "",
       "copy": "",
+      "copy_invoice": "",
       "log_in": "",
       "remember": ""
     },

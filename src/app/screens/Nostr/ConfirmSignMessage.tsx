@@ -13,7 +13,7 @@ import ScreenHeader from "~/app/components/ScreenHeader";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
-import { Event } from "~/extension/ln/nostr/types";
+import { Event } from "~/extension/providers/nostr/types";
 import type { OriginData } from "~/types";
 
 function ConfirmSignMessage() {

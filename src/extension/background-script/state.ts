@@ -2,10 +2,12 @@ import merge from "lodash.merge";
 import pick from "lodash.pick";
 import browser from "webextension-polyfill";
 import createState from "zustand";
-import { DEFAULT_SETTINGS } from "~/common/constants";
 import { decryptData } from "~/common/lib/crypto";
+import { DEFAULT_SETTINGS } from "~/common/settings";
 import { isManifestV3 } from "~/common/utils/mv3";
+import Bitcoin from "~/extension/background-script/bitcoin";
 import { Migration } from "~/extension/background-script/migrations";
+import Mnemonic from "~/extension/background-script/mnemonic";
 import type { Account, Accounts, SettingsStorage } from "~/types";
 
 import connectors from "./connectors";
@@ -16,15 +18,19 @@ interface State {
   account: Account | null;
   accounts: Accounts;
   migrations: Migration[] | null;
-  connector: Connector | null;
+  connector: Promise<Connector> | null;
   currentAccountId: string | null;
   nostrPrivateKey: string | null;
   nostr: Nostr | null;
+  mnemonic: Mnemonic | null;
+  bitcoin: Bitcoin | null;
   mv2Password: string | null;
   password: (password?: string | null) => Promise<string | null>;
   getAccount: () => Account | null;
   getConnector: () => Promise<Connector>;
   getNostr: () => Promise<Nostr>;
+  getMnemonic: () => Promise<Mnemonic>;
+  getBitcoin: () => Promise<Bitcoin>;
   init: () => Promise<void>;
   isUnlocked: () => Promise<boolean>;
   lock: () => Promise<void>;
@@ -57,16 +63,26 @@ const browserStorageKeys = Object.keys(browserStorageDefaults) as Array<
 
 let storage: "sync" | "local" = "sync";
 
-const state = createState<State>((set, get) => ({
+const getFreshState = () => ({
   connector: null,
   account: null,
-  settings: DEFAULT_SETTINGS,
+  settings: { ...DEFAULT_SETTINGS },
   migrations: [],
   accounts: {},
   currentAccountId: null,
+  // TODO: move nostr object to account state and handle encryption/decryption there
   nostr: null,
+  // TODO: this should be deleted from storage and then can be removed (requires a migration)
   nostrPrivateKey: null,
+  // TODO: move mnemonic object to account state and handle encryption/decryption there
+  mnemonic: null,
+  // TODO: move bitcoin object to account state and handle encryption/decryption there
+  bitcoin: null,
   mv2Password: null,
+});
+
+const state = createState<State>((set, get) => ({
+  ...getFreshState(),
   password: async (password) => {
     if (isManifestV3) {
       if (password) {
@@ -96,24 +112,31 @@ const state = createState<State>((set, get) => ({
   },
   getConnector: async () => {
     if (get().connector) {
-      return get().connector as Connector;
+      const connector = (await get().connector) as Connector;
+      return connector;
     }
-    const currentAccountId = get().currentAccountId as string;
-    const account = get().accounts[currentAccountId];
-    const password = await get().password();
-    if (!password) throw new Error("Password is not set");
-    const config = decryptData(account.config as string, password);
+    // use a Promise to initialize the connector
+    // this makes sure we can immediatelly set the state and use the same promise for future calls
+    // we must make sure not two connections are initialized
+    const connectorPromise = (async () => {
+      const currentAccountId = get().currentAccountId as string;
+      const account = get().accounts[currentAccountId];
+      const password = await get().password();
+      if (!password) throw new Error("Password is not set");
+      const config = decryptData(account.config as string, password);
+      const connector = new connectors[account.connector](account, config);
+      await connector.init();
+      return connector;
+    })();
+    set({ connector: connectorPromise });
 
-    const connector = new connectors[account.connector](account, config);
-    await connector.init();
-
-    set({ connector: connector });
-
+    const connector = await connectorPromise;
     return connector;
   },
   getNostr: async () => {
-    if (get().nostr) {
-      return get().nostr as Nostr;
+    const currentNostr = get().nostr;
+    if (currentNostr) {
+      return currentNostr;
     }
     const currentAccountId = get().currentAccountId as string;
     const account = get().accounts[currentAccountId];
@@ -123,9 +146,41 @@ const state = createState<State>((set, get) => ({
     const privateKey = decryptData(account.nostrPrivateKey as string, password);
 
     const nostr = new Nostr(privateKey);
-    set({ nostr: nostr });
+    set({ nostr });
 
     return nostr;
+  },
+  getMnemonic: async () => {
+    const currentMnemonic = get().mnemonic;
+    if (currentMnemonic) {
+      return currentMnemonic;
+    }
+    const currentAccountId = get().currentAccountId as string;
+    const account = get().accounts[currentAccountId];
+
+    const password = await get().password();
+    if (!password) throw new Error("Password is not set");
+    const mnemonicString = decryptData(account.mnemonic as string, password);
+
+    const mnemonic = new Mnemonic(mnemonicString);
+    set({ mnemonic });
+
+    return mnemonic;
+  },
+  getBitcoin: async () => {
+    const currentBitcoin = get().bitcoin;
+    if (currentBitcoin) {
+      return currentBitcoin;
+    }
+    const mnemonic = await get().getMnemonic();
+    const currentAccountId = get().currentAccountId as string;
+    const account = get().accounts[currentAccountId];
+
+    const networkType = account.bitcoinNetwork || "bitcoin";
+    const bitcoin = new Bitcoin(mnemonic, networkType);
+    set({ bitcoin });
+
+    return bitcoin;
   },
   lock: async () => {
     if (isManifestV3) {
@@ -146,11 +201,17 @@ const state = createState<State>((set, get) => ({
 
     browser.tabs.remove(allTabIds);
 
-    const connector = get().connector;
-    if (connector) {
+    if (get().connector) {
+      const connector = (await get().connector) as Connector;
       await connector.unload();
     }
-    set({ connector: null, account: null, nostr: null });
+    set({
+      connector: null,
+      account: null,
+      nostr: null,
+      mnemonic: null,
+      bitcoin: null,
+    });
   },
   isUnlocked: async () => {
     const password = await await get().password();
@@ -178,8 +239,19 @@ const state = createState<State>((set, get) => ({
       });
   },
   reset: async () => {
-    set({ ...browserStorageDefaults });
-    get().saveToStorage();
+    try {
+      // @ts-ignore: https://github.com/mozilla/webextension-polyfill/issues/329
+      await browser.storage.session.clear();
+    } catch (error) {
+      console.error("Failed to clear session storage", error);
+    }
+    if (storage === "sync") {
+      await browser.storage.sync.clear();
+    } else {
+      await browser.storage.local.clear();
+    }
+    set({ ...getFreshState() });
+    await get().saveToStorage();
   },
   saveToStorage: () => {
     const current = get();

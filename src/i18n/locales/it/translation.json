@@ -1,12 +1,6 @@
 {
   "translation": {
     "welcome": {
-      "nav": {
-        "welcome": "Benvenuto",
-        "password": "La tua Password",
-        "connect": "Il tuo Account Lightning",
-        "done": "Fatto"
-      },
       "set_password": {
         "title": "Imposta una password di sblocco",
         "description": "Questa password serve a proteggere il tuo wallet e a fornirti l'accesso all'estensione del browser. Non può essere reimpostata ed è differente dalla password dell'account Alby.",
@@ -193,20 +187,17 @@
         "sms_code": {
           "label": "Inserisci il codice di verifica SMS"
         },
-        "jwt": {
+        "token": {
           "label": "Inserisci il tuo token JWT",
           "info": "Il login {{label}} è attualmente in fase di aggiornamento. Se sei un utente avanzato puoi recuperare il tuo token JWT effettuando il login via il <0>Web Wallet (wallet.mainnet.galoy.io)</0><1/><1/>Il token JWT assomiglia a: <2>eyJhbG...</2><1/><1/>"
         },
         "actions": {
-          "login": "Login",
-          "request_sms_code": "Richiedi codice SMS"
+          "login": "Login"
         },
         "errors": {
-          "failed_to_request_sms": "Problema durante la richiesta del codice SMS",
-          "failed_to_login_sms": "Impossibile accedere con il codice SMS",
           "setup_failed": "Setup non riuscito",
-          "missing_jwt": "JWT mancante, impossibile effettuare il login.",
-          "invalid_jwt": "passato JWT non valido"
+          "missing_token": "JWT mancante, impossibile effettuare il login.",
+          "invalid_token": "passato JWT non valido"
         }
       },
       "btcpay": {
@@ -225,15 +216,8 @@
       },
       "kollider": {
         "description": "Accedi al tuo account Kollider",
-        "page": {
-          "title": "Connettiti al tuo account Kollider",
-          "description": "Non hai ancora un account? <0>Registrati</0> ora!"
-        },
         "username": {
           "label": "Inserisci il tuo username Kollider"
-        },
-        "password": {
-          "label": "Inserisci la tua password Kollider"
         },
         "currency": {
           "label": "Seleziona la valuta del tuo account"
@@ -294,12 +278,6 @@
         "enable_now": "Attiva ora"
       },
       "recent_transactions": "Transazioni recenti",
-      "transaction_list": {
-        "tabs": {
-          "outgoing": "Uscite",
-          "incoming": "Entrate"
-        }
-      },
       "allowance_view": {
         "recent_transactions": "Transazioni recenti",
         "allowance": "Margine",
@@ -308,7 +286,6 @@
       },
       "default_view": {
         "recent_transactions": "Transazioni recenti",
-        "no_transactions": "Ancora nessuna transazione effettuata con Alby.",
         "is_blocked_hint": "Alby è attualmente disabilitato su {{host}}",
         "block_removed": "{{host}} abilitato. Si prega di ricaricare la pagina."
       }
@@ -675,8 +652,6 @@
       }
     },
     "choose_path": {
-      "title": "Connettiti",
-      "description": "Per iniziare a utilizzare Alby per effettuare pagamenti online, collega il tuo portafoglio lightning all'estensione.",
       "alby": {
         "title": "Alby",
         "description": "Registrati o utilizza il tuo account Alby per iniziare a pagare attraverso lightning in pochissimo tempo.",
@@ -698,7 +673,7 @@
       "list": {
         "trading": "Trading",
         "gaming": "Gaming",
-        "entertaiment": "Intrattenimento",
+        "entertainment": "Intrattenimento",
         "miscellaneous": "Altro",
         "showcases": "Vetrine",
         "nostr": "Nostr",
@@ -708,25 +683,11 @@
         "description": "Qualche suggerimento per iniziare a ronzare 🐝",
         "top_up_wallet": {
           "title": "⚡️ Ricarica il tuo wallet",
-          "label1": "Ricevi Bitcoin",
-          "label2": "Compra Bitcoin",
           "description": "Crea una fattura lightning, inviati qualche bitcoin e inizia ad usare Alby nell'ecosistema lightning"
-        },
-        "pin": {
-          "title": "📌 Aggiungi la tua estensione Alby",
-          "description3": "Ecco fatto! Per accedere ad Alby basta cliccare l'icona di Alby",
-          "description1": "<0>Per accedere facilmente ad Alby, clicca sull'icona dell'estensione</0> <1/> <2>in alto a destra del tuo browser</2>",
-          "description2": "Nella lista delle estensioni, trova Alby e clicca su aggiungi alla barra degli strumenti"
         },
         "demo": {
           "title": "🕹️ Prova la Demo di Alby",
-          "description": "Scopri tutto quello che puoi fare con Alby sul nostro sito demo",
-          "label1": "Prova"
-        },
-        "address": {
-          "description": "Crea il tuo indirizzo lightning personale e ricevi pagamenti lightning con la semplicità di una mail",
-          "label1": "Registrati ora!",
-          "title": "⚡️ Ottieni un indirizzo lightning"
+          "description": "Scopri tutto quello che puoi fare con Alby sul nostro sito demo"
         },
         "title": "Il tuo wallet Alby è pronto"
       },
@@ -739,7 +700,7 @@
     "success": "Successo",
     "error": "Errore",
     "settings": "Impostazioni",
-    "websites": "Siti web",
+    "connected_sites": "",
     "loading": "caricamento",
     "amount": "Importo",
     "optional": "Facoltativo",
@@ -768,6 +729,7 @@
       "export": "Esporta",
       "remove": "Rimuovi",
       "copy": "Copia",
+      "copy_invoice": "",
       "log_in": "Log in",
       "remember": "Ricorda la mia scelta e non chiederlo più",
       "receive_again": "Ricevi un altro pagamento"
