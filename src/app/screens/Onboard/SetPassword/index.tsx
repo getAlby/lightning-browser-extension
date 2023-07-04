@@ -36,7 +36,7 @@ export default function SetPassword() {
     <img
       src="assets/images/unlock_passcode.png"
       alt="Unlock screen"
-      className="w-96"
+      className="h-44"
     />
   );
 
