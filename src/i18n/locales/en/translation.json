@@ -897,7 +897,8 @@
       "log_in": "Log in",
       "remember": "Remember my choice and don't ask again",
       "more": "More",
-      "download": "Download"
+      "download": "Download",
+      "disconnect": "Disconnect"
     },
     "connectors": {
       "lnd": "LND",
@@ -925,9 +926,9 @@
   "components": {
     "allowance_menu": {
       "confirm_delete": "Are you sure you want to delete this website?",
-      "hint": "This will reset the current budget",
+      "hint": "Changing this will reset the current budget",
       "new_budget": {
-        "label": "New budget",
+        "label": "One-click payments budget",
         "link_label": "Set a budget for one-click payments"
       },
       "enable_login": {
@@ -935,7 +936,7 @@
         "subtitle": "Automatically log in without confirmation when the website requests."
       },
       "edit_allowance": {
-        "title": "Edit Preferences",
+        "title": "Site Settings",
         "screen_reader": "Allowance Options"
       },
       "edit_permissions": "Edit Permissions"
