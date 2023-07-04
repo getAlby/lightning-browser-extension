@@ -191,7 +191,6 @@ export default class Alby implements Connector {
   }
 
   private async authorize(): Promise<auth.OAuth2User> {
-    // console.info("this.config.oAuthToken", this.config.oAuthToken);
     try {
       const clientId = process.env.ALBY_OAUTH_CLIENT_ID;
       const clientSecret = process.env.ALBY_OAUTH_CLIENT_SECRET;
@@ -324,7 +323,6 @@ export default class Alby implements Connector {
   }
 
   private async _updateOAuthToken(newToken: Token) {
-    console.info("Updating account oauth token", newToken);
     const access_token = newToken.access_token;
     const refresh_token = newToken.refresh_token;
     const expires_at = newToken.expires_at;
