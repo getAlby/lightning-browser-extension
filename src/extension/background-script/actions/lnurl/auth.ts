@@ -40,7 +40,7 @@ export async function authFunction({
     throw new Error("LNURL-AUTH FAIL: no account selected");
   }
 
-  let lnSignature: string;
+  let keyMaterialForSignature: string;
 
   // use mnemonic for LNURL auth
   if (
@@ -52,7 +52,9 @@ export async function authFunction({
     }
     const mnemonic = await state.getState().getMnemonic();
 
-    lnSignature = await mnemonic.signMessage(LNURLAUTH_CANONICAL_PHRASE);
+    keyMaterialForSignature = await mnemonic.signMessage(
+      LNURLAUTH_CANONICAL_PHRASE
+    );
   } else {
     const connector = await state.getState().getConnector();
 
@@ -65,15 +67,15 @@ export async function authFunction({
       },
     });
 
-    lnSignature = signResponse.data.signature;
+    keyMaterialForSignature = signResponse.data.signature;
   }
 
   // make sure we got a signature
-  if (!lnSignature) {
+  if (!keyMaterialForSignature) {
     throw new Error("Invalid Signature");
   }
 
-  const hashingKey = sha256(lnSignature).toString(Hex);
+  const hashingKey = sha256(keyMaterialForSignature).toString(Hex);
   const url = new URL(lnurlDetails.url);
   if (!url.host || !hashingKey) {
     throw new Error("Invalid input");
