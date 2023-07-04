@@ -473,6 +473,7 @@ function AccountDetail() {
                 {/* We use a hidden field to hint Firefox's password manager
                     that this password field is for an account different
                     than the unlock passcode (no username)
+                    See: https://github.com/getAlby/lightning-browser-extension/issues/2489
                 */}
                 <input value={accountName} style={{ display: "none" }} />
                 <TextField
