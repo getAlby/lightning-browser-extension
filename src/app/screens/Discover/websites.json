@@ -97,16 +97,10 @@
         "url": "https://www.broadcstr.com/"
       },
       {
-        "title": "emon.chat",
-        "subtitle": "Instant messaging client with built in lightning payments",
-        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/emon_thumbnail.svg",
-        "url": "https://emon.chat/"
-      },
-      {
-        "title": "Hamstr",
-        "subtitle": "A twitter-style nostr web client",
-        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/hamstr-to.png",
-        "url": "https://hamstr.to/home"
+        "title": "Habla",
+        "subtitle": "Bitcoin news at your fingertips",
+        "logo": "https://user-images.githubusercontent.com/100958893/237170839-a523ec2c-e9ad-43c9-a547-366e9de6f35b.png",
+        "url": "https://habla.news/"
       },
       {
         "title": "Iris",
@@ -131,12 +125,6 @@
         "subtitle": "Fast nostr web client",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/snort_thumbnail.png",
         "url": "https://snort.social"
-      },
-      {
-        "title": "Yo, Sup?",
-        "subtitle": "The blue bird experience for Nostr",
-        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/yosup_thumbnail.svg",
-        "url": "https://yosup.app/"
       },
       {
         "title": "Satellite",
