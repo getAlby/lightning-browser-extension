@@ -287,6 +287,7 @@ export default class Alby implements Connector {
           resolve(new Client(this._authUser, this._getRequestOptions()));
         } catch (error) {
           reject(error);
+          this._clientPromise = undefined;
         }
       })();
     });
