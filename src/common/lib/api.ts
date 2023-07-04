@@ -38,6 +38,7 @@ export interface AccountInfoRes {
   currentAccountId: string;
   info: { alias: string; pubkey?: string };
   name: string;
+  avatarUrl?: string;
 }
 
 export interface GetAccountRes
@@ -97,6 +98,7 @@ export const swrGetAccountInfo = async (
           balance,
           connector,
           currency: currency || "BTC", // set default currency for every account
+          avatarUrl: (response.info as FixMe).avatar, // FIXME: this is only available in the Alby connector
         };
         storeAccounts({
           ...accountsCache,

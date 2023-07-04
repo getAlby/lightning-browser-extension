@@ -35,6 +35,7 @@ export default function ConnectAlby() {
           ...initialAccount,
           name:
             accountInfo.email || accountInfo.lightning_address || "getalby.com",
+          avatarUrl: accountInfo.avatar,
           config: {
             ...initialAccount.config,
             oAuthToken: validation.oAuthToken,
