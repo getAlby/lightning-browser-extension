@@ -4,11 +4,13 @@ import * as blocklist from "./actions/blocklist";
 import * as cache from "./actions/cache";
 import * as ln from "./actions/ln";
 import lnurl, { auth } from "./actions/lnurl";
+import * as mnemonic from "./actions/mnemonic";
 import * as nostr from "./actions/nostr";
 import * as payments from "./actions/payments";
 import * as permissions from "./actions/permissions";
 import * as settings from "./actions/settings";
 import * as setup from "./actions/setup";
+import * as webbtc from "./actions/webbtc";
 import * as webln from "./actions/webln";
 
 const routes = {
@@ -57,15 +59,26 @@ const routes = {
   lnurl: lnurl,
   lnurlAuth: auth,
   getCurrencyRate: cache.getCurrencyRate,
+  getAddress: webbtc.getAddress,
+  setMnemonic: mnemonic.setMnemonic,
+  getMnemonic: mnemonic.getMnemonic,
+  generateMnemonic: mnemonic.generateMnemonic,
+
   nostr: {
     generatePrivateKey: nostr.generatePrivateKey,
     getPrivateKey: nostr.getPrivateKey,
+    getPublicKey: nostr.getPublicKey,
     removePrivateKey: nostr.removePrivateKey,
     setPrivateKey: nostr.setPrivateKey,
   },
 
   // Public calls that are accessible from the inpage script (through the content script)
   public: {
+    webbtc: {
+      enable: allowances.enable,
+      getInfo: webbtc.getInfo,
+      getAddressWithPrompt: webbtc.getAddressWithPrompt,
+    },
     alby: {
       enable: allowances.enable,
       addAccount: accounts.promptAdd,
@@ -105,10 +118,10 @@ const router = (path: FixMe) => {
     console.warn(`Route not found: ${path}`);
     // return a function to keep the expected method signature
     return () => {
-      return Promise.reject({ error: `${path} not found}` });
+      return Promise.reject({ error: `${path} not found` });
     };
   }
   return route;
 };
 
-export { routes, router };
+export { router, routes };

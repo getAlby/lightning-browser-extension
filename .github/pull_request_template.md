@@ -25,6 +25,10 @@ _Please describe the tests that you ran to verify your changes. Provide instruct
 
 ### Checklist
 
-- [ ] My code follows the style guidelines of this project and performed a self-review of my own code
-- [ ] New and existing tests pass locally with my changes
-- [ ] I checked if I need to make corresponding changes to the documentation (and made those changes if needed)
+- [ ] Self-review of changed code
+- [ ] Manual testing
+- [ ] Added automated tests where applicable
+- [ ] Update Docs & Guides
+- For UI-related changes
+- [ ] Darkmode
+- [ ] Responsive layout

@@ -10,12 +10,17 @@ async function onstart() {
     return;
   }
 
+  const account = await api.getAccount();
   // window.webln
   injectScript(browser.runtime.getURL("js/inpageScriptWebLN.bundle.js"));
 
+  // window.webbtc
+  if (account.hasMnemonic) {
+    injectScript(browser.runtime.getURL("js/inpageScriptWebBTC.bundle.js"));
+  }
+
   // window.nostr
-  const nostrEnabled = (await api.getAccount()).nostrEnabled;
-  if (nostrEnabled) {
+  if (account.nostrEnabled) {
     injectScript(browser.runtime.getURL("js/inpageScriptNostr.bundle.js"));
   }
 

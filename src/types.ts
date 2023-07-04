@@ -12,12 +12,17 @@ import { Event } from "./extension/providers/nostr/types";
 
 export type ConnectorType = keyof typeof connectors;
 
+export type BitcoinNetworkType = "bitcoin" | "testnet" | "regtest";
+
 export interface Account {
   id: string;
   connector: ConnectorType;
   config: string;
   name: string;
   nostrPrivateKey?: string | null;
+  mnemonic?: string | null;
+  hasImportedNostrKey?: boolean;
+  bitcoinNetwork?: BitcoinNetworkType;
 }
 
 export interface Accounts {
@@ -207,7 +212,8 @@ export interface MessageAccountAdd extends MessageDefault {
 export interface MessageAccountEdit extends MessageDefault {
   args: {
     id: Account["id"];
-    name: Account["name"];
+    name?: Account["name"];
+    bitcoinNetwork?: BitcoinNetworkType;
   };
   action: "editAccount";
 }
@@ -435,25 +441,31 @@ export interface MessageCurrencyRateGet extends MessageDefault {
   action: "getCurrencyRate";
 }
 
-export interface MessagePublicKeyGet extends MessageDefault {
+export interface MessageNostrPublicKeyGetOrPrompt extends MessageDefault {
   action: "getPublicKeyOrPrompt";
 }
 
-export interface MessagePrivateKeyGet extends MessageDefault {
+export interface MessageNostrPublicKeyGet extends MessageDefault {
+  args: {
+    id: Account["id"];
+  };
+  action: "getPublicKey";
+}
+export interface MessageNostrPrivateKeyGet extends MessageDefault {
   args?: {
     id?: Account["id"];
   };
   action: "getPrivateKey";
 }
 
-export interface MessagePrivateKeyGenerate extends MessageDefault {
+export interface MessageNostrPrivateKeyGenerate extends MessageDefault {
   args?: {
-    type?: "random";
+    id?: Account["id"];
   };
   action: "generatePrivateKey";
 }
 
-export interface MessagePrivateKeySet extends MessageDefault {
+export interface MessageNostrPrivateKeySet extends MessageDefault {
   args: {
     id?: Account["id"];
     privateKey: string;
@@ -461,11 +473,29 @@ export interface MessagePrivateKeySet extends MessageDefault {
   action: "setPrivateKey";
 }
 
-export interface MessagePrivateKeyRemove extends MessageDefault {
+export interface MessageNostrPrivateKeyRemove extends MessageDefault {
   args: {
     id?: Account["id"];
   };
   action: "removePrivateKey";
+}
+
+export interface MessageMnemonicSet extends MessageDefault {
+  args: {
+    id?: Account["id"];
+    mnemonic: string;
+  };
+  action: "setMnemonic";
+}
+
+export interface MessageMnemonicGet extends MessageDefault {
+  args?: {
+    id?: Account["id"];
+  };
+  action: "getMnemonic";
+}
+export interface MessageMnemonicGenerate extends MessageDefault {
+  action: "generateMnemonic";
 }
 
 export interface MessageSignEvent extends MessageDefault {
@@ -496,6 +526,12 @@ export interface MessageDecryptGet extends MessageDefault {
     ciphertext: string;
   };
   action: "decrypt";
+}
+
+export interface MessageGetAddress extends MessageDefault {
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  args: {};
+  action: "getAddress";
 }
 
 export interface LNURLChannelServiceResponse {
@@ -790,3 +826,10 @@ export interface DeferredPromise {
 }
 
 export type Theme = "dark" | "light";
+
+export type BitcoinAddress = {
+  publicKey: string;
+  derivationPath: string;
+  index: number;
+  address: string;
+};

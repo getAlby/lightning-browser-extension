@@ -1,9 +1,9 @@
 import { decryptData } from "~/common/lib/crypto";
-import type { MessagePrivateKeyGet } from "~/types";
+import type { MessageNostrPrivateKeyGet } from "~/types";
 
 import state from "../../state";
 
-const getPrivateKey = async (message: MessagePrivateKeyGet) => {
+const getPrivateKey = async (message: MessageNostrPrivateKeyGet) => {
   const id = message?.args?.id;
 
   if (!id) {

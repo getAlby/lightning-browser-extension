@@ -14,12 +14,13 @@ import msg from "~/common/lib/msg";
 import logo from "/static/assets/icons/alby.png";
 import blueIcon from "/static/assets/icons/alby_icon_blue_stream_256x256.png";
 
-const walletCreateUrl =
-  process.env.WALLET_CREATE_URL || "https://app.regtest.getalby.com/api/users";
+const walletRootUrl =
+  process.env.WALLET_ROOT_URL || "https://app.regtest.getalby.com";
+const walletCreateUrl = `${walletRootUrl}/extension/users`;
+
 const HMAC_VERIFY_HEADER_KEY =
   process.env.HMAC_VERIFY_HEADER_KEY || "alby-extension"; // default is mainly that TS is happy
-
-const SIGNUP_DISABLED = true;
+const VERSION = process.env.VERSION || "unknown"; // default is mainly that TS is happy
 
 interface LNDHubCreateResponse {
   login: string;
@@ -28,10 +29,6 @@ interface LNDHubCreateResponse {
   lnAddress: string;
 }
 
-export type Props = {
-  variant: "login" | "create";
-};
-
 const initialFormData = {
   password: "",
   passwordConfirmation: "",
@@ -39,7 +36,11 @@ const initialFormData = {
   lnAddress: "",
 };
 
-export default function AlbyWallet({ variant }: Props) {
+type Props = {
+  options: Record<string, unknown>;
+};
+
+export default function AlbyWalletCreate({ options }: Props) {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { t } = useTranslation("translation", {
@@ -54,9 +55,10 @@ export default function AlbyWallet({ variant }: Props) {
 
     const headers = new Headers();
     headers.append("Accept", "application/json");
-    headers.append("Access-Control-Allow-Origin", "*");
     headers.append("Content-Type", "application/json");
     headers.append("X-User-Agent", "alby-extension");
+    headers.append("X-Alby-Version", VERSION);
+    headers.append("X-Session-Key", options.session_key as string);
 
     const timestamp = Math.floor(Date.now() / 1000);
     const body = JSON.stringify({
@@ -166,7 +168,7 @@ export default function AlbyWallet({ variant }: Props) {
     }
   }
 
-  if (variant === "create" && SIGNUP_DISABLED) {
+  if (options && options.signup_disabled) {
     return (
       <div className="max-w-xl space-y-4 mx-auto relative mt-14 bg-white dark:bg-surface-02dp p-10 shadow rounded-lg items-center flex flex-col text-center">
         <img src={blueIcon} alt="logo" className="inline w-64" />
@@ -199,7 +201,7 @@ export default function AlbyWallet({ variant }: Props) {
   return (
     <ConnectorForm
       title={t("pre_connect.title")}
-      description={t(`pre_connect.${variant}_account`)}
+      description={t(`pre_connect.create_account`)}
       logo={logo}
       submitLoading={loading}
       onSubmit={signup}
@@ -207,14 +209,13 @@ export default function AlbyWallet({ variant }: Props) {
         loading ||
         formData.password === "" ||
         formData.email === "" ||
-        (variant === "create" &&
-          formData.password !== formData.passwordConfirmation)
+        formData.password !== formData.passwordConfirmation
       }
     >
       <div className="mt-6">
         <TextField
           id="email"
-          label={t(`pre_connect.email.${variant}.label`)}
+          label={t(`pre_connect.email.create.label`)}
           type="email"
           required
           autoFocus
@@ -229,61 +230,47 @@ export default function AlbyWallet({ variant }: Props) {
           formData={formData}
           setFormData={setFormData}
           minLength={6}
-          confirm={variant === "create"}
+          confirm={true}
           autoFocus={false}
         />
       </div>
-      {variant === "login" && (
-        <p className="text-gray-700 dark:text-neutral-400">
+      <div className="mt-6">
+        <p className="mb-2 text-gray-700 dark:text-neutral-400">
+          {t("pre_connect.optional_lightning_note.part1")}{" "}
           <a
             className="underline"
+            href="https://lightningaddress.com/"
             target="_blank"
             rel="noreferrer noopener"
-            href="https://getalby.com/password_resets/new"
           >
-            {t("pre_connect.forgot_password")}
+            {t("pre_connect.optional_lightning_note.part2")}
           </a>
+          {t("pre_connect.optional_lightning_note.part3")} (
+          <a
+            className="underline"
+            href="https://lightningaddress.com/"
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            {t("pre_connect.optional_lightning_note.part4")}
+          </a>
+          )
         </p>
-      )}
-      {variant === "create" && (
-        <div className="mt-6">
-          <p className="mb-2 text-gray-700 dark:text-neutral-400">
-            {t("pre_connect.optional_lightning_note.part1")}{" "}
-            <a
-              className="underline"
-              href="https://lightningaddress.com/"
-              target="_blank"
-              rel="noreferrer noopener"
-            >
-              {t("pre_connect.optional_lightning_note.part2")}
-            </a>
-            {t("pre_connect.optional_lightning_note.part3")} (
-            <a
-              className="underline"
-              href="https://lightningaddress.com/"
-              target="_blank"
-              rel="noreferrer noopener"
-            >
-              {t("pre_connect.optional_lightning_note.part4")}
-            </a>
-            )
-          </p>
-          <div>
-            <TextField
-              id="lnAddress"
-              label={t("pre_connect.optional_lightning_address.label")}
-              suffix={t("pre_connect.optional_lightning_address.suffix")}
-              type="text"
-              pattern="[a-zA-Z0-9-]{4,}"
-              title={t("pre_connect.optional_lightning_address.title")}
-              onChange={(e) => {
-                const lnAddress = e.target.value.trim().split("@")[0]; // in case somebody enters a full address we simple remove the domain
-                setFormData({ ...formData, lnAddress });
-              }}
-            />
-          </div>
+        <div>
+          <TextField
+            id="lnAddress"
+            label={t("pre_connect.optional_lightning_address.label")}
+            suffix={t("pre_connect.optional_lightning_address.suffix")}
+            type="text"
+            pattern="[a-zA-Z0-9-]{4,}"
+            title={t("pre_connect.optional_lightning_address.title")}
+            onChange={(e) => {
+              const lnAddress = e.target.value.trim().split("@")[0]; // in case somebody enters a full address we simple remove the domain
+              setFormData({ ...formData, lnAddress });
+            }}
+          />
         </div>
-      )}
+      </div>
     </ConnectorForm>
   );
 }

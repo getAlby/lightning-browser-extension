@@ -5,7 +5,9 @@ import createState from "zustand";
 import { decryptData } from "~/common/lib/crypto";
 import { DEFAULT_SETTINGS } from "~/common/settings";
 import { isManifestV3 } from "~/common/utils/mv3";
+import Bitcoin from "~/extension/background-script/bitcoin";
 import { Migration } from "~/extension/background-script/migrations";
+import Mnemonic from "~/extension/background-script/mnemonic";
 import type { Account, Accounts, SettingsStorage } from "~/types";
 
 import connectors from "./connectors";
@@ -20,11 +22,15 @@ interface State {
   currentAccountId: string | null;
   nostrPrivateKey: string | null;
   nostr: Nostr | null;
+  mnemonic: Mnemonic | null;
+  bitcoin: Bitcoin | null;
   mv2Password: string | null;
   password: (password?: string | null) => Promise<string | null>;
   getAccount: () => Account | null;
   getConnector: () => Promise<Connector>;
   getNostr: () => Promise<Nostr>;
+  getMnemonic: () => Promise<Mnemonic>;
+  getBitcoin: () => Promise<Bitcoin>;
   init: () => Promise<void>;
   isUnlocked: () => Promise<boolean>;
   lock: () => Promise<void>;
@@ -64,8 +70,14 @@ const state = createState<State>((set, get) => ({
   migrations: [],
   accounts: {},
   currentAccountId: null,
+  // TODO: move nostr object to account state and handle encryption/decryption there
   nostr: null,
+  // TODO: this should be deleted from storage and then can be removed (requires a migration)
   nostrPrivateKey: null,
+  // TODO: move mnemonic object to account state and handle encryption/decryption there
+  mnemonic: null,
+  // TODO: move bitcoin object to account state and handle encryption/decryption there
+  bitcoin: null,
   mv2Password: null,
   password: async (password) => {
     if (isManifestV3) {
@@ -118,8 +130,9 @@ const state = createState<State>((set, get) => ({
     return connector;
   },
   getNostr: async () => {
-    if (get().nostr) {
-      return get().nostr as Nostr;
+    const currentNostr = get().nostr;
+    if (currentNostr) {
+      return currentNostr;
     }
     const currentAccountId = get().currentAccountId as string;
     const account = get().accounts[currentAccountId];
@@ -129,9 +142,41 @@ const state = createState<State>((set, get) => ({
     const privateKey = decryptData(account.nostrPrivateKey as string, password);
 
     const nostr = new Nostr(privateKey);
-    set({ nostr: nostr });
+    set({ nostr });
 
     return nostr;
+  },
+  getMnemonic: async () => {
+    const currentMnemonic = get().mnemonic;
+    if (currentMnemonic) {
+      return currentMnemonic;
+    }
+    const currentAccountId = get().currentAccountId as string;
+    const account = get().accounts[currentAccountId];
+
+    const password = await get().password();
+    if (!password) throw new Error("Password is not set");
+    const mnemonicString = decryptData(account.mnemonic as string, password);
+
+    const mnemonic = new Mnemonic(mnemonicString);
+    set({ mnemonic });
+
+    return mnemonic;
+  },
+  getBitcoin: async () => {
+    const currentBitcoin = get().bitcoin;
+    if (currentBitcoin) {
+      return currentBitcoin;
+    }
+    const mnemonic = await get().getMnemonic();
+    const currentAccountId = get().currentAccountId as string;
+    const account = get().accounts[currentAccountId];
+
+    const networkType = account.bitcoinNetwork || "bitcoin";
+    const bitcoin = new Bitcoin(mnemonic, networkType);
+    set({ bitcoin });
+
+    return bitcoin;
   },
   lock: async () => {
     if (isManifestV3) {
@@ -156,7 +201,13 @@ const state = createState<State>((set, get) => ({
       const connector = (await get().connector) as Connector;
       await connector.unload();
     }
-    set({ connector: null, account: null, nostr: null });
+    set({
+      connector: null,
+      account: null,
+      nostr: null,
+      mnemonic: null,
+      bitcoin: null,
+    });
   },
   isUnlocked: async () => {
     const password = await await get().password();

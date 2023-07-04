@@ -4,7 +4,7 @@ We welcome and appreciate new contributions.
 
 ### Testnet/testing-accounts for development use Alby testnet
 
-We set up our own internal testnet, which can be used for your development.
+We have setup some testnet nodes, which can be used for your development.
 If this is not reachable please let us know.
 
 - [Test-setup](https://github.com/getAlby/lightning-browser-extension/wiki/Test-setup) for different connectors (i.e. LND)

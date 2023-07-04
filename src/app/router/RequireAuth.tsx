@@ -5,7 +5,7 @@ function RequireAuth({ children }: { children: JSX.Element }) {
   const auth = useAccount();
   const location = useLocation();
 
-  if (auth.loading) {
+  if (auth.statusLoading) {
     return null;
   }
 
