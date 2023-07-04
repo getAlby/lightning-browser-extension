@@ -840,8 +840,8 @@
     },
     "range": {
       "between": "mellan {{min}} och {{max}}",
-      "lessThan": "< {{max}}",
-      "greaterThan": "> {{min}}"
+      "lessThanOrEqual": "≤ {{max}}",
+      "greaterOrEqual": "≥ {{min}}"
     },
     "sats_other": "sats",
     "sats_one": "sat",

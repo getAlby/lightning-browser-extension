@@ -63,10 +63,10 @@ const browserStorageKeys = Object.keys(browserStorageDefaults) as Array<
 
 let storage: "sync" | "local" = "sync";
 
-const state = createState<State>((set, get) => ({
+const getFreshState = () => ({
   connector: null,
   account: null,
-  settings: DEFAULT_SETTINGS,
+  settings: { ...DEFAULT_SETTINGS },
   migrations: [],
   accounts: {},
   currentAccountId: null,
@@ -79,6 +79,10 @@ const state = createState<State>((set, get) => ({
   // TODO: move bitcoin object to account state and handle encryption/decryption there
   bitcoin: null,
   mv2Password: null,
+});
+
+const state = createState<State>((set, get) => ({
+  ...getFreshState(),
   password: async (password) => {
     if (isManifestV3) {
       if (password) {
@@ -235,8 +239,19 @@ const state = createState<State>((set, get) => ({
       });
   },
   reset: async () => {
-    set({ ...browserStorageDefaults });
-    get().saveToStorage();
+    try {
+      // @ts-ignore: https://github.com/mozilla/webextension-polyfill/issues/329
+      await browser.storage.session.clear();
+    } catch (error) {
+      console.error("Failed to clear session storage", error);
+    }
+    if (storage === "sync") {
+      await browser.storage.sync.clear();
+    } else {
+      await browser.storage.local.clear();
+    }
+    set({ ...getFreshState() });
+    await get().saveToStorage();
   },
   saveToStorage: () => {
     const current = get();

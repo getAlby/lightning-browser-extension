@@ -37,7 +37,7 @@ const DefaultView: FC<Props> = (props) => {
 
   const navigate = useNavigate();
 
-  const { account, balancesDecorated } = useAccount();
+  const { account, balancesDecorated, accountLoading } = useAccount();
 
   const [isBlockedUrl, setIsBlockedUrl] = useState<boolean>(false);
 
@@ -47,8 +47,8 @@ const DefaultView: FC<Props> = (props) => {
   const { isLoadingInvoices, incomingTransactions, loadInvoices } =
     useInvoices();
 
-  const hasTransactions = !isLoadingTransactions && !!transactions?.length;
-  const hasInvoices = !isLoadingInvoices && !!incomingTransactions?.length;
+  const isLoadingOutgoing = accountLoading || isLoadingTransactions;
+  const isLoadingIncoming = accountLoading || isLoadingInvoices;
 
   const itemsLimit = 8;
 
@@ -179,9 +179,13 @@ const DefaultView: FC<Props> = (props) => {
 
               <Tab.Panels>
                 <Tab.Panel>
-                  {hasTransactions && (
-                    <>
-                      <TransactionsTable transactions={transactions} />
+                  <>
+                    <TransactionsTable
+                      transactions={transactions}
+                      loading={isLoadingOutgoing}
+                      noResultMsg={t("default_view.no_outgoing_transactions")}
+                    />
+                    {!isLoadingOutgoing && transactions.length > 0 && (
                       <div className="mt-5 text-center">
                         <Hyperlink
                           onClick={() =>
@@ -191,23 +195,17 @@ const DefaultView: FC<Props> = (props) => {
                           {t("default_view.all_transactions_link")}
                         </Hyperlink>
                       </div>
-                    </>
-                  )}
-                  {!isLoadingTransactions && !transactions?.length && (
-                    <p className="text-gray-500 dark:text-neutral-400">
-                      {t("default_view.no_outgoing_transactions")}
-                    </p>
-                  )}
+                    )}
+                  </>
                 </Tab.Panel>
                 <Tab.Panel>
-                  {isLoadingInvoices && (
-                    <div className="flex justify-center">
-                      <Loading />
-                    </div>
-                  )}
-                  {hasInvoices && (
-                    <>
-                      <TransactionsTable transactions={incomingTransactions} />
+                  <>
+                    <TransactionsTable
+                      transactions={incomingTransactions}
+                      loading={isLoadingIncoming}
+                      noResultMsg={t("default_view.no_incoming_transactions")}
+                    />
+                    {!isLoadingIncoming && incomingTransactions.length > 0 && (
                       <div className="mt-5 text-center">
                         <Hyperlink
                           onClick={() =>
@@ -217,13 +215,8 @@ const DefaultView: FC<Props> = (props) => {
                           {t("default_view.all_transactions_link")}
                         </Hyperlink>
                       </div>
-                    </>
-                  )}
-                  {!hasInvoices && (
-                    <p className="text-gray-500 dark:text-neutral-400">
-                      {t("default_view.no_incoming_transactions")}
-                    </p>
-                  )}
+                    )}
+                  </>
                 </Tab.Panel>
               </Tab.Panels>
             </Tab.Group>

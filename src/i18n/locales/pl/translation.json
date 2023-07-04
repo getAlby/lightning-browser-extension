@@ -785,8 +785,8 @@
     },
     "range": {
       "between": "pomiędzy {{min}} a {{max}}",
-      "lessThan": "< {{max}}",
-      "greaterThan": "> {{min}}"
+      "lessThanOrEqual": "≤ {{max}}",
+      "greaterOrEqual": "≥ {{min}}"
     }
   },
   "components": {

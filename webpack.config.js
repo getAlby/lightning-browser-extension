@@ -170,19 +170,13 @@ var options = {
         },
       },
       {
-        test: /\.(sa|sc|c)ss$/,
+        test: /\.css$/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader, // It creates a CSS file per JS file which contains CSS
           },
-          "css-loader", // Takes the CSS files and returns the CSS with imports and url(...) for Webpack
-          "postcss-loader",
-          {
-            loader: "sass-loader", // Takes the Sass/SCSS file and compiles to the CSS
-            options: {
-              sourceMap: true,
-            },
-          },
+          { loader: "css-loader", options: { sourceMap: true } },
+          { loader: "postcss-loader", options: { sourceMap: true } },
         ],
       },
       {
