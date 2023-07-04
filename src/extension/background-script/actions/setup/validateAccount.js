@@ -7,6 +7,7 @@ const validateAccount = async (message, sender) => {
 
   try {
     const info = await connector.getInfo();
+    await connector.unload();
 
     return {
       data: {
