@@ -43,13 +43,7 @@ export async function authFunction({
   let keyMaterialForSignature: string;
 
   // use mnemonic for LNURL auth
-  if (
-    account.connector === "alby" ||
-    (account.mnemonic && account.useMnemonicForLnurlAuth)
-  ) {
-    if (!account.mnemonic) {
-      throw new Error("Please set a secret key to use LNURL auth");
-    }
+  if (account.mnemonic && account.useMnemonicForLnurlAuth) {
     const mnemonic = await state.getState().getMnemonic();
 
     keyMaterialForSignature = await mnemonic.signMessage(
