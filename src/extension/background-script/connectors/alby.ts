@@ -91,18 +91,17 @@ export default class Alby implements Connector {
     };
   }
 
+  // FIXME: typings for this method
   async getInfo(): Promise<GetInfoResponse> {
     try {
       const info = await this._request((client) =>
         client.accountInformation({})
       );
-      const alias = info.lightning_address
-        ? info.lightning_address
-        : "🐝 getalby.com";
 
       return {
         data: {
-          alias: alias,
+          ...info,
+          alias: "🐝 getalby.com",
         },
       };
     } catch (error) {

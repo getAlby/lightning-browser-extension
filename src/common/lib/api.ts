@@ -16,11 +16,13 @@ import type {
   Invoice,
   LnurlAuthResponse,
   MessageAccountEdit,
+  MessageAccountValidate,
   MessageInvoices,
   MessageLnurlAuth,
   MessageSettingsSet,
   NodeInfo,
   SettingsStorage,
+  ValidateAccountResponse,
 } from "~/types";
 
 import {
@@ -111,6 +113,11 @@ export const getAccount = (id?: string) =>
   msg.request<GetAccountRes>("getAccount", {
     id,
   });
+
+const validateAccount = (
+  account: MessageAccountValidate["args"]
+): Promise<ValidateAccountResponse> => msg.request("validateAccount", account);
+
 export const updateAllowance = () => msg.request<Accounts>("updateAllowance");
 export const selectAccount = (id: string) =>
   msg.request("selectAccount", { id });
@@ -204,6 +211,7 @@ export default {
   editAccount,
   getInfo,
   selectAccount,
+  validateAccount,
   getAllowance,
   updateAllowance,
   getPayments,
