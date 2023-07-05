@@ -26,8 +26,8 @@ export const useTips = () => {
 
   const tips = filterTips(
     settings.closedTips,
-    isAlbyOAuthAccount(account?.connector),
-    isAlbyLNDHubAccount(account?.alias, account?.connector)
+    isAlbyOAuthAccount(account?.connectorType),
+    isAlbyLNDHubAccount(account?.alias, account?.connectorType)
   );
 
   const closeTip = (tip: TIPS) => {

@@ -126,8 +126,11 @@ function AccountMenu({ showOptions = true }: Props) {
             <WalletIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
             {t("options.account.account_settings")}
           </Menu.ItemButton>
-          {(isAlbyLNDHubAccount(authAccount?.alias, authAccount?.connector) ||
-            isAlbyOAuthAccount(authAccount?.connector)) && (
+          {(isAlbyLNDHubAccount(
+            authAccount?.alias,
+            authAccount?.connectorType
+          ) ||
+            isAlbyOAuthAccount(authAccount?.connectorType)) && (
             <Menu.ItemButton
               onClick={() => {
                 window.open(`https://getalby.com/user`, "_blank");

@@ -195,11 +195,11 @@ function AccountDetail() {
               {account.name}
             </h2>
             <div
-              title={account.connector}
+              title={account.connectorType}
               className="text-gray-500 dark:text-gray-400 mb-2 flex justify-center items-center"
             >
-              {account.connector}
-              {account.connector === "lndhub" && (
+              {account.connectorType}
+              {account.connectorType === "lndhub" && (
                 <>
                   <div className="mx-2 font-black text-sm">&middot;</div>
                   <div

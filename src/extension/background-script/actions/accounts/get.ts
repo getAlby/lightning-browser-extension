@@ -17,7 +17,7 @@ const get = async (message: MessageAccountGet) => {
 
   const result: GetAccountRes = {
     id: account.id,
-    connector: account.connector,
+    connectorType: account.connector,
     name: account.name,
     nostrEnabled: !!account.nostrPrivateKey,
     hasMnemonic: !!account.mnemonic,
