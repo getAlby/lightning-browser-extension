@@ -32,7 +32,7 @@ function ConnectionError() {
           <img src="assets/icons/alby-x-head.svg" className="w-full" />
         </div>
       </div>
-      <div className="text-red-500 bg-red-50 dark:text-orange-400 dark:bg-orange-900 p-4 text-sm rounded-md">
+      <div className="text-orange-700 bg-orange-50 dark:text-orange-300 dark:bg-orange-900 p-4 text-sm rounded-md">
         {t("connection_error.info")}
       </div>
       <div className="grow"></div>

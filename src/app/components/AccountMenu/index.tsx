@@ -79,7 +79,7 @@ function AccountMenu({ showOptions = true }: Props) {
                 ) : (
                   <span
                     className={classNames(
-                      !!authAccount?.error && "text-red-500"
+                      !!authAccount?.error && "text-red-700 dark:text-red-300"
                     )}
                   >
                     {title}
@@ -87,7 +87,7 @@ function AccountMenu({ showOptions = true }: Props) {
                 )}
                 {/* include this Icon into the else condition above */}
                 {!accountLoading && authAccount?.error && (
-                  <AlertIcon className="h-5 w-5  ml-2 text-red-500 border border-red-500 rounded-full" />
+                  <AlertIcon className="h-5 w-5  ml-2 text-red-700 dark:text-red-300 border border-red-700 dark:border-red-300 rounded-full" />
                 )}
               </div>
             </div>
