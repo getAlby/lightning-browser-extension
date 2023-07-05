@@ -3,7 +3,7 @@ import { RequestOptions } from "alby-js-sdk/dist/request";
 import { Invoice, Token } from "alby-js-sdk/dist/types";
 import browser from "webextension-polyfill";
 import { decryptData, encryptData } from "~/common/lib/crypto";
-import { Account, OAuthToken } from "~/types";
+import { Account, AlbyAccountInformation, OAuthToken } from "~/types";
 
 import state from "../state";
 import Connector, {
@@ -21,6 +21,7 @@ import Connector, {
   SendPaymentResponse,
   SignMessageArgs,
   SignMessageResponse,
+  WebLNNode,
 } from "./connector.interface";
 
 interface Config {
@@ -91,12 +92,25 @@ export default class Alby implements Connector {
     };
   }
 
-  // FIXME: typings for this method
-  async getInfo(): Promise<GetInfoResponse> {
+  async getInfo(): Promise<
+    GetInfoResponse<WebLNNode & AlbyAccountInformation>
+  > {
     try {
       const info = await this._request((client) =>
         client.accountInformation({})
       );
+
+      const accounts = state.getState().accounts;
+      if (this.account.id && this.account.id in accounts) {
+        // update the account info from backend
+        // legacy accounts may not have either an email address or lightning address
+        const accountName =
+          info.email || info.lightning_address || "getalby.com";
+        accounts[this.account.id].name = accountName;
+        state.setState({ accounts });
+        // make sure we immediately persist the updated accounts
+        await state.getState().saveToStorage();
+      }
 
       return {
         data: {

@@ -39,8 +39,8 @@ export type MakeInvoiceResponse = {
   };
 };
 
-export type GetInfoResponse = {
-  data: WebLNNode;
+export type GetInfoResponse<T extends WebLNNode = WebLNNode> = {
+  data: T;
 };
 
 export type GetBalanceResponse = {
