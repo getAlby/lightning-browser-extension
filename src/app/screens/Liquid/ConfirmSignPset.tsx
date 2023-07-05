@@ -215,12 +215,14 @@ function AddressPreview({
   // if assetInfos is not provided, we fallback to a custom ticker based on the asset hash
   const ticker = assetInfos?.ticker ?? asset.slice(0, 5).toUpperCase();
   const isUnknownTicker = !assetInfos?.ticker;
-
+  const precision =
+    assetInfos?.precision === undefined ? 8 : assetInfos.precision;
+  const decimalAmount = amount * 10 ** -precision;
   return (
     <div>
       <p className="text-gray-500 dark:text-gray-400 break-all">{address}</p>
       <p className="font-medium text-sm text-gray-500 dark:text-gray-400">
-        {t("amount", { amount, ticker })}{" "}
+        {t("amount", { amount: decimalAmount.toFixed(precision), ticker })}{" "}
         {isUnknownTicker && " (unknown ticker)"}
       </p>
     </div>

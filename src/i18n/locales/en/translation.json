@@ -797,7 +797,7 @@
       "hide_hex": "Hide PSET base64",
       "inputs": "Inputs",
       "outputs": "Outputs",
-      "amount": "{{amount}} {{ticker}} sats"
+      "amount": "{{amount}} {{ticker}}"
     },
     "confirm_get_address": {
       "title": "Get Address",
