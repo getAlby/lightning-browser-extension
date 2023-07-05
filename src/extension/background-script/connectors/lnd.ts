@@ -168,7 +168,7 @@ class Lnd implements Connector {
       "sendPayment",
       "signMessage",
       "getBalance",
-      ...Object.keys(methods),
+      ...Object.keys(methods).map((i) => `request.${i}`),
     ];
   }
 

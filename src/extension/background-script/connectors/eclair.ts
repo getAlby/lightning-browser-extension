@@ -48,7 +48,6 @@ class Eclair implements Connector {
       "makeInvoice",
       "sendPayment",
       "signMessage",
-      "listInvoices",
       "getBalance",
     ];
   }

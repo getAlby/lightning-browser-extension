@@ -149,7 +149,7 @@ export default class Commando implements Connector {
       "sendPayment",
       "signMessage",
       "getBalance",
-      ...supportedMethods,
+      ...supportedMethods.map((i) => `request.${i}`),
     ];
   }
 
