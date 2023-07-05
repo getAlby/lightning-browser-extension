@@ -351,12 +351,23 @@
             "generate": "Generera en ny nyckel"
           },
           "title": "Nostr",
-          "hint": "är ett enkelt och öppet protokoll som syftar till att skapa ett censur beskyddat sociala nätverk. Nostr fungerar med kryptografiska nycklar. För att publicera något signerar du det med din nyckel och skickar det till flera reläer. Du kan använda Alby för att hantera din Nostr-nyckel. Många Nostr-applikationer låter dig då helt enkelt använda nyckeln från Alby-tillägget."
+          "hint": "är ett enkelt och öppet protokoll som syftar till att skapa ett censur beskyddat sociala nätverk. Nostr fungerar med kryptografiska nycklar. För att publicera något signerar du det med din nyckel och skickar det till flera reläer. Du kan använda Alby för att hantera din Nostr-nyckel. Många Nostr-applikationer låter dig då helt enkelt använda nyckeln från Alby-tillägget.",
+          "settings": {
+            "label": "Nostr Inställningar",
+            "title": "Nostr Inställningar",
+            "imported_key_warning": "⚠️ Du använder för närvarande en importerad eller slumpmässigt genererad Nostr-nyckel. Din privata Nostr-nyckel kan inte återställas av din hemliga nyckel, så kom ihåg att säkerhetskopiera din privata Nostr-nyckel.",
+            "derive": "Få Nostr-nycklar från din hemliga nyckel",
+            "can_restore": "✅ Nostr-nyckel hämtad från din hemliga nyckel",
+            "description": "Hämta Nostr-nycklar från din hemliga nyckel eller importera din befintliga privata nyckel genom att klistra in den i fältet \"Nostr privat nyckel\".",
+            "delete": "Radera aktuella nycklar",
+            "no_secret_key": "💡 Du har ingen hemlig nyckel än. <0>Klicka här</0></div> för att skapa din hemliga nyckel och hämta dina nostr-nycklar."
+          }
         },
         "remove": {
           "title": "Ta bort detta konto",
           "subtitle": "Alla kopplade traktamenten kommer att raderas. Var säker på vad du gör.",
-          "confirm": "Är du säker på att du vill ta bort kontot: {{name}}? \nDetta kan inte ångras. Om du använde det här kontot för att logga in på webbplatser kan du förlora åtkomst till dessa."
+          "confirm": "Är du säker på att du vill ta bort kontot: {{name}}? \nDetta kan inte ångras. Om du använde det här kontot för att logga in på webbplatser kan du förlora åtkomst till dessa.",
+          "error": "Det angivna kontonamnet matchade inte."
         },
         "title1": "Konto information",
         "title2": "Redigera konto",
@@ -375,7 +386,8 @@
         },
         "actions": {
           "remove_account": "Ta bort kontot",
-          "export": "Exportera"
+          "export": "Exportera",
+          "remove_secretkey": "Ta bort hemlig nyckel"
         },
         "mnemonic": {
           "saved": "Hemlig nyckel krypterad och sparad framgångsrikt.",
@@ -400,11 +412,32 @@
           "import": {
             "title": "Importera en hemlig nyckel",
             "description": "Använd en befintlig hemlig nyckel för att återställa dina härledda nycklar.",
-            "button": "Importera hemlig nyckel"
+            "button": "Importera hemlig nyckel",
+            "confirm_overwrite": "Du har redan en hemlig nyckel, är du säker på att du vill skriva över den?"
           },
           "title": "Hemlig nyckel",
           "description": "Din konto hemliga nyckel låter dig använda Alby för att interagera med protokoll som Nostr.",
-          "description2": "Din hemliga nyckel är en uppsättning av 12 ord som låter dig komma åt dina nycklar till protokoll som Nostr på en ny enhet eller om du förlorar åtkomsten till ditt konto."
+          "description2": "Din hemliga nyckel är en uppsättning av 12 ord som låter dig komma åt dina nycklar till protokoll som Nostr på en ny enhet eller om du förlorar åtkomsten till ditt konto.",
+          "inputs": {
+            "title": "Din hemliga nyckel"
+          }
+        },
+        "bitcoin": {
+          "network": {
+            "title": "Bitcoin Nätverket",
+            "subtitle": "Välj nätverk för att härleda adresser och avkoda transaktioner",
+            "options": {
+              "bitcoin": "Mainnet",
+              "testnet": "Testnet",
+              "regtest": "Regtest"
+            }
+          }
+        },
+        "remove_secretkey": {
+          "title": "Ta bort hemlig nyckel",
+          "subtitle": "Tar bort den hemliga nyckeln från det här kontot.",
+          "confirm": "Ange namnet på kontot för att bekräfta raderingen av din hemliga nyckel.",
+          "success": "Den hemliga nyckeln har tagits bort."
         }
       }
     },
@@ -826,6 +859,11 @@
       "instructions2": "Du hittar din bitcoin adress på <0>Ta emot</0> sidan.",
       "go": "Gå till ditt Alby konto →",
       "instructions1": "För att ta emot bitcoin via en bitcoin adress, logga in på ditt <0>Alby-konto</0> på getalby.com"
+    },
+    "confirm_get_address": {
+      "title": "Få adress",
+      "heading": "Den här webbplatsen ber dig att läsa:",
+      "content": "Din Bitcoin-mottagningsadress"
     }
   },
   "common": {
@@ -868,7 +906,11 @@
       "remember": "Kom ihåg mitt val och fråga inte igen",
       "log_in": "Logga in",
       "more": "Mer",
-      "download": "Ladda ner"
+      "download": "Ladda ner",
+      "import": "Importera",
+      "copy_clipboard": "Kopiera till urklipp",
+      "paste": "Klistra in",
+      "paste_clipboard": "Klistra in från urklipp"
     },
     "errors": {
       "connection_failed": "Anslutning misslyckades",
@@ -902,7 +944,8 @@
       "lnbits": "LNBits",
       "citadel": "Citadel"
     },
-    "or": "eller"
+    "or": "eller",
+    "pasted": "Klistrat in!"
   },
   "components": {
     "allowance_menu": {
@@ -989,7 +1032,8 @@
     "badge": {
       "label": {
         "active": "AKTIV",
-        "auth": "LOGGA IN"
+        "auth": "LOGGA IN",
+        "imported": "IMPORTERAD"
       }
     },
     "companion_download_info": {
