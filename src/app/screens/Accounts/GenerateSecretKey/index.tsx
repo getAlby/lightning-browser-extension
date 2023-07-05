@@ -1,3 +1,4 @@
+import AccountDetailHeader from "@components/AccountDetailHeader";
 import Container from "@components/Container";
 import Loading from "@components/Loading";
 import { useEffect, useState } from "react";
@@ -10,17 +11,19 @@ import { ContentBox } from "~/app/components/ContentBox";
 import Checkbox from "~/app/components/form/Checkbox";
 import MnemonicInputs from "~/app/components/mnemonic/MnemonicInputs";
 import SecretKeyDescription from "~/app/components/mnemonic/SecretKeyDescription";
-import api from "~/common/lib/api";
+import api, { GetAccountRes } from "~/common/lib/api";
 
 function GenerateSecretKey() {
   const navigate = useNavigate();
-  const [mnemonic, setMnemonic] = useState<string | undefined>();
   const { t } = useTranslation("translation", {
     keyPrefix: "accounts.account_view.mnemonic",
   });
+  const { t: tCommon } = useTranslation("common");
+
   const [hasConfirmedBackup, setHasConfirmedBackup] = useState(false);
-  useState(false);
   const [hasNostrPrivateKey, setHasNostrPrivateKey] = useState(false);
+  const [mnemonic, setMnemonic] = useState<string | undefined>();
+  const [account, setAccount] = useState<GetAccountRes>();
 
   const { id } = useParams() as { id: string };
 
@@ -28,6 +31,7 @@ function GenerateSecretKey() {
     (async () => {
       try {
         const account = await api.getAccount(id);
+        setAccount(account);
         setHasNostrPrivateKey(account.nostrEnabled);
         if (account.hasMnemonic) {
           // do not allow user to generate a mnemonic if they already have one for the current account
@@ -62,12 +66,19 @@ function GenerateSecretKey() {
     }
   }
 
+  function cancelImport() {
+    // go to account settings
+    navigate(`/accounts/${id}`);
+  }
+
   return !mnemonic ? (
     <div className="flex justify-center mt-5">
       <Loading />
     </div>
   ) : (
     <div>
+      {account && <AccountDetailHeader account={account} />}
+
       <Container>
         <ContentBox>
           <h1 className="font-bold text-2xl dark:text-white">
@@ -98,7 +109,8 @@ function GenerateSecretKey() {
             <Alert type="warn">{t("existing_nostr_key_notice")}</Alert>
           )}
         </ContentBox>
-        <div className="flex justify-center mt-8 mb-16">
+        <div className="flex justify-center mt-8 mb-16 gap-4">
+          <Button label={tCommon("actions.cancel")} onClick={cancelImport} />
           <Button
             label={t("backup.save")}
             primary

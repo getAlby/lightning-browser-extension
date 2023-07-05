@@ -1,3 +1,4 @@
+import AccountDetailHeader from "@components/AccountDetailHeader";
 import Container from "@components/Container";
 import Loading from "@components/Loading";
 import * as bip39 from "@scure/bip39";
@@ -10,34 +11,40 @@ import Alert from "~/app/components/Alert";
 import Button from "~/app/components/Button";
 import { ContentBox } from "~/app/components/ContentBox";
 import MnemonicInputs from "~/app/components/mnemonic/MnemonicInputs";
-import api from "~/common/lib/api";
+import api, { GetAccountRes } from "~/common/lib/api";
 
 function ImportSecretKey() {
-  const [mnemonic, setMnemonic] = useState<string>("");
   const { t: tCommon } = useTranslation("common");
   const navigate = useNavigate();
   const { t } = useTranslation("translation", {
     keyPrefix: "accounts.account_view.mnemonic",
   });
 
-  const [hasFetchedData, setHasFetchedData] = useState(false);
+  const [mnemonic, setMnemonic] = useState<string>("");
+  const [account, setAccount] = useState<GetAccountRes>();
+  const [loading, setLoading] = useState<boolean>(true);
   const [hasNostrPrivateKey, setHasNostrPrivateKey] = useState(false);
+
   const { id } = useParams() as { id: string };
 
   useEffect(() => {
     (async () => {
       try {
+        setLoading(true);
+
         const account = await api.getAccount(id);
+        setAccount(account);
         setHasNostrPrivateKey(account.nostrEnabled);
         if (account.hasMnemonic) {
           // do not allow user to import a mnemonic if they already have one for the current account
           // go to account settings
           navigate(`/accounts/${id}`);
         }
-        setHasFetchedData(true);
       } catch (e) {
         console.error(e);
         if (e instanceof Error) toast.error(`Error: ${e.message}`);
+      } finally {
+        setLoading(false);
       }
     })();
   }, [id, navigate]);
@@ -65,12 +72,14 @@ function ImportSecretKey() {
     }
   }
 
-  return !hasFetchedData ? (
+  return loading ? (
     <div className="flex justify-center mt-5">
       <Loading />
     </div>
   ) : (
     <div>
+      {account && <AccountDetailHeader account={account} />}
+
       <Container>
         <ContentBox>
           <h1 className="font-bold text-2xl dark:text-white">

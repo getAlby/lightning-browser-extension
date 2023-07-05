@@ -2,6 +2,7 @@ import {
   HiddenIcon,
   VisibleIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
+import AccountDetailHeader from "@components/AccountDetailHeader";
 import Container from "@components/Container";
 import Loading from "@components/Loading";
 import { FormEvent, useCallback, useEffect, useState } from "react";
@@ -134,6 +135,8 @@ function NostrSettings() {
     </div>
   ) : (
     <div>
+      {account && <AccountDetailHeader account={account} />}
+
       <form
         onSubmit={(e: FormEvent) => {
           e.preventDefault();

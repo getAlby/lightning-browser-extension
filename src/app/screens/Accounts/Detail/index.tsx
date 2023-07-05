@@ -1,12 +1,7 @@
-import {
-  CaretLeftIcon,
-  ExportIcon,
-} from "@bitcoin-design/bitcoin-icons-react/filled";
 import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
+import AccountDetailHeader from "@components/AccountDetailHeader";
 import Button from "@components/Button";
 import Container from "@components/Container";
-import Header from "@components/Header";
-import IconButton from "@components/IconButton";
 import Loading from "@components/Loading";
 import Setting from "@components/Setting";
 import TextField from "@components/form/TextField";
@@ -20,7 +15,6 @@ import QRCode from "react-qr-code";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Alert from "~/app/components/Alert";
-import Avatar from "~/app/components/Avatar";
 import Badge from "~/app/components/Badge";
 import InputCopyButton from "~/app/components/InputCopyButton";
 import MenuDivider from "~/app/components/Menu/MenuDivider";
@@ -177,51 +171,10 @@ function AccountDetail() {
     </div>
   ) : (
     <div>
-      <Header
-        title={t("title1")}
-        headerLeft={
-          <IconButton
-            onClick={() => navigate("/accounts")}
-            icon={<CaretLeftIcon className="w-4 h-4" />}
-          />
-        }
+      <AccountDetailHeader
+        account={account}
+        exportAccount={(action: AccountAction) => exportAccount(action)}
       />
-      <div className="border-b border-gray-200 dark:border-neutral-500">
-        <div className="flex-col justify-center p-4 flex items-center bg-white dark:bg-surface-02dp">
-          <Avatar name={account.id} size={96} />
-          <div className="flex flex-col overflow-hidden w-full text-center">
-            <h2
-              title={account.name}
-              className="text-xl font-semibold dark:text-white overflow-hidden text-ellipsis whitespace-nowrap leading-1 my-2"
-            >
-              {account.name}
-            </h2>
-            <div
-              title={account.connector}
-              className="text-gray-500 dark:text-gray-400 mb-2 flex justify-center items-center"
-            >
-              {account.connector}
-              {account.connector === "lndhub" && (
-                <>
-                  <div className="mx-2 font-black text-sm">&middot;</div>
-                  <div
-                    className="text-sm font-medium flex items-center text-gray-500 hover:text-black transition-color duration-200 dark:hover:text-white cursor-pointer"
-                    onClick={() =>
-                      exportAccount({
-                        id: account.id,
-                        name: account.name,
-                      })
-                    }
-                  >
-                    <p>{t("actions.export")}</p>
-                    <ExportIcon className="h-6 w-6" />
-                  </div>
-                </>
-              )}
-            </div>
-          </div>
-        </div>
-      </div>
 
       <Container>
         <div className="flex justify-between items-center pt-8 pb-4">
