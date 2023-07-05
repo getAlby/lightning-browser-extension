@@ -18,7 +18,7 @@ const info = async (message: MessageAccountInfo) => {
     currentAccountId: currentAccountId,
     name: currentAccount.name,
     info: info.data,
-    connector: currentAccount.connector,
+    connectorType: currentAccount.connector,
     balance: {
       balance: balance.data.balance,
       currency: balance.data.currency || "BTC", // set default currency for every account

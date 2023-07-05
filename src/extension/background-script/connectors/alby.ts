@@ -3,7 +3,7 @@ import { RequestOptions } from "alby-js-sdk/dist/request";
 import { Invoice, Token } from "alby-js-sdk/dist/types";
 import browser from "webextension-polyfill";
 import { decryptData, encryptData } from "~/common/lib/crypto";
-import { Account, OAuthToken } from "~/types";
+import { Account, AlbyAccountInformation, OAuthToken } from "~/types";
 
 import state from "../state";
 import Connector, {
@@ -21,6 +21,7 @@ import Connector, {
   SendPaymentResponse,
   SignMessageArgs,
   SignMessageResponse,
+  WebLNNode,
 } from "./connector.interface";
 
 interface Config {
@@ -91,12 +92,26 @@ export default class Alby implements Connector {
     };
   }
 
-  // FIXME: typings for this method
-  async getInfo(): Promise<GetInfoResponse> {
+  async getInfo(): Promise<
+    GetInfoResponse<WebLNNode & AlbyAccountInformation>
+  > {
     try {
-      const info = await this._request((client) =>
+      const info = (await this._request((client) =>
         client.accountInformation({})
-      );
+      )) as AlbyAccountInformation; // TODO: remove type once alby-js-sdk is updated
+
+      const accounts = state.getState().accounts;
+      if (this.account.id && this.account.id in accounts) {
+        // update the account info from backend
+        // legacy accounts may not have either an email address or lightning address
+        const accountName =
+          info.email || info.lightning_address || "getalby.com";
+        accounts[this.account.id].name = accountName;
+        accounts[this.account.id].avatarUrl = info.avatar;
+        state.setState({ accounts });
+        // make sure we immediately persist the updated accounts
+        await state.getState().saveToStorage();
+      }
 
       return {
         data: {
@@ -170,7 +185,9 @@ export default class Alby implements Connector {
   signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {
     // signMessage requires proof of ownership of a non-custodial node
     // this is not the case in the Alby connector which connects to Lndhub
-    throw new Error("SignMessage is not supported by Alby accounts.");
+    throw new Error(
+      "SignMessage is not supported by Alby accounts. Generate a secret key to use LNURL auth."
+    );
   }
 
   async makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse> {
@@ -216,7 +233,6 @@ export default class Alby implements Connector {
       });
 
       if (this.config.oAuthToken) {
-        console.info("Requesting new oAuth token");
         try {
           if (authClient.isAccessTokenExpired()) {
             const token = await authClient.refreshAccessToken();
@@ -286,6 +302,7 @@ export default class Alby implements Connector {
           resolve(new Client(this._authUser, this._getRequestOptions()));
         } catch (error) {
           reject(error);
+          this._clientPromise = undefined;
         }
       })();
     });

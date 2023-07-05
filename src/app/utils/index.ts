@@ -50,9 +50,9 @@ export function getBrowserType(): BrowserType {
   return DEFAULT_BROWSER;
 }
 
-export function isAlbyLNDHubAccount(alias = "") {
-  return alias === "🐝 getalby.com";
+export function isAlbyLNDHubAccount(alias = "", connector = "") {
+  return alias === "🐝 getalby.com" && connector === "lndhub";
 }
-export function isAlbyAccount(connector = "") {
+export function isAlbyOAuthAccount(connector = "") {
   return connector === "alby";
 }

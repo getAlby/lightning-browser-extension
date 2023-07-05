@@ -19,17 +19,21 @@ interface AccountContextType {
     alias?: AccountInfo["alias"];
     balance?: AccountInfo["balance"];
     currency?: AccountInfo["currency"];
-    connector?: AccountInfo["connector"];
     avatarUrl?: AccountInfo["avatarUrl"];
+    connectorType?: AccountInfo["connectorType"];
   } | null;
   balancesDecorated: {
     fiatBalance: string;
     accountBalance: string;
   };
-  loading: boolean;
-  balanceLoading: boolean;
+  // True while the account is being initialized for the first time after a page load
+  statusLoading: boolean;
+  // True while the account is being loaded (during account switches)
+  accountLoading: boolean;
   unlock: (user: string, callback: VoidFunction) => Promise<void>;
   lock: (callback: VoidFunction) => void;
+  selectAccount: (accountId: string) => void;
+
   /**
    * Set new id and clears current info, which causes a loading indicator for the alias/balance
    */
@@ -37,9 +41,7 @@ interface AccountContextType {
   /**
    * Fetch the additional account info: alias/balance and update account
    */
-  fetchAccountInfo: (options?: {
-    accountId?: string;
-  }) => Promise<AccountInfo | undefined>;
+  fetchAccountInfo: () => Promise<AccountInfo | undefined>;
 }
 
 const AccountContext = createContext({} as AccountContextType);
@@ -53,19 +55,17 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
   } = useSettings();
 
   const [account, setAccount] = useState<AccountContextType["account"]>(null);
-  const [loading, setLoading] = useState(true);
-  const [balanceLoading, setBalanceLoading] = useState(true);
+  const [statusLoading, setStatusLoading] = useState(true);
+  const [accountLoading, setAccountLoading] = useState(true);
   const [accountBalance, setAccountBalance] = useState("");
   const [fiatBalance, setFiatBalance] = useState("");
 
   const isSatsAccount = account?.currency === "BTC"; // show fiatValue only if the base currency is not already fiat
-  const showFiat =
-    !isLoadingSettings && settings.showFiat && !loading && isSatsAccount;
+  const showFiat = !isLoadingSettings && settings.showFiat && isSatsAccount;
 
   const unlock = (password: string, callback: VoidFunction) => {
     return api.unlock(password).then((response) => {
-      setAccountId(response.currentAccountId);
-      fetchAccountInfo({ accountId: response.currentAccountId });
+      selectAccount(response.currentAccountId, true);
 
       // callback - e.g. navigate to the requested route after unlocking
       callback();
@@ -98,7 +98,6 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
   };
 
   const fetchAccountInfo = async (options?: { accountId?: string }) => {
-    setBalanceLoading(true);
     const id = options?.accountId || account?.id;
     if (!id) return;
 
@@ -108,9 +107,27 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
     };
 
     const accountInfo = await api.swr.getAccountInfo(id, callback);
-    setBalanceLoading(false);
-
     return { ...accountInfo, fiatBalance, accountBalance };
+  };
+
+  const selectAccount = async (
+    accountId: string,
+    skipRequestSelectAccount = false
+  ) => {
+    setAccountLoading(true);
+
+    try {
+      if (!skipRequestSelectAccount) {
+        await msg.request("selectAccount", { id: accountId });
+      }
+      setAccountId(accountId);
+      await fetchAccountInfo({ accountId });
+    } catch (e) {
+      console.error(e);
+      if (e instanceof Error) toast.error(`Error: ${e.message}`);
+    } finally {
+      setAccountLoading(false);
+    }
   };
 
   // Invoked only on on mount.
@@ -127,8 +144,7 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
           if (response.configured && onWelcomePage) {
             utils.redirectPage("options.html");
           }
-          setAccountId(response.currentAccountId);
-          fetchAccountInfo({ accountId: response.currentAccountId });
+          selectAccount(response.currentAccountId, true);
         } else {
           setAccount(null);
         }
@@ -140,7 +156,7 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
         );
       })
       .finally(() => {
-        setLoading(false);
+        setStatusLoading(false);
       });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -169,9 +185,10 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
       fiatBalance,
     },
     fetchAccountInfo,
-    loading,
-    balanceLoading,
+    statusLoading,
+    accountLoading,
     lock,
+    selectAccount,
     setAccountId,
     unlock,
   };

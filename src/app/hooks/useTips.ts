@@ -1,6 +1,6 @@
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
-import { isAlbyAccount, isAlbyLNDHubAccount } from "~/app/utils";
+import { isAlbyLNDHubAccount, isAlbyOAuthAccount } from "~/app/utils";
 import { TIPS } from "~/common/constants";
 
 const DEFAULT_TIPS = [TIPS.TOP_UP_WALLET, TIPS.MNEMONIC];
@@ -26,8 +26,8 @@ export const useTips = () => {
 
   const tips = filterTips(
     settings.closedTips,
-    isAlbyAccount(account?.connector),
-    isAlbyLNDHubAccount(account?.alias)
+    isAlbyOAuthAccount(account?.connectorType),
+    isAlbyLNDHubAccount(account?.alias, account?.connectorType)
   );
 
   const closeTip = (tip: TIPS) => {

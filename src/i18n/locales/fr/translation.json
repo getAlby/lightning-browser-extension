@@ -748,8 +748,8 @@
       "payment_failed": "Paiement échoué"
     },
     "range": {
-      "lessThan": "< {{max}}",
-      "greaterThan": "> {{min}}",
+      "lessThanOrEqual": "≤ {{max}}",
+      "greaterOrEqual": "≥ {{min}}",
       "between": "entre {{min}} et {{max}}"
     }
   },

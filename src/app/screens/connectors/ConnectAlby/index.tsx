@@ -5,13 +5,14 @@ import { toast } from "react-toastify";
 import Button from "~/app/components/Button";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
-import { WebLNNode } from "~/extension/background-script/connectors/connector.interface";
-import { AlbyAccountInformation } from "~/types";
 
 export default function ConnectAlby() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { t: tCommon } = useTranslation("common");
+  const { t } = useTranslation("translation", {
+    keyPrefix: "choose_path.alby",
+  });
   async function connectAlby() {
     setLoading(true);
     const name = "Alby";
@@ -28,14 +29,8 @@ export default function ConnectAlby() {
           throw new Error("No oAuthToken returned");
         }
 
-        const accountInfo = validation.info.data as WebLNNode &
-          AlbyAccountInformation;
-
         const account = {
           ...initialAccount,
-          name:
-            accountInfo.email || accountInfo.lightning_address || "getalby.com",
-          avatarUrl: accountInfo.avatar,
           config: {
             ...initialAccount.config,
             oAuthToken: validation.oAuthToken,
@@ -69,7 +64,7 @@ export default function ConnectAlby() {
   return (
     <Button
       type="button"
-      label="Connect With Alby"
+      label={t("connect")}
       loading={loading}
       disabled={loading}
       primary

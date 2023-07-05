@@ -663,8 +663,8 @@
     },
     "range": {
       "between": "{{min}} और {{max}} के बीच",
-      "lessThan": "< {{max}}",
-      "greaterThan": "> {{min}}"
+      "lessThanOrEqual": "≤ {{max}}",
+      "greaterOrEqual": "≥ {{min}}"
     }
   },
   "components": {

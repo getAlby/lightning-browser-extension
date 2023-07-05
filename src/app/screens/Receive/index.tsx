@@ -18,7 +18,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
-import { isAlbyAccount } from "~/app/utils";
+import { isAlbyOAuthAccount } from "~/app/utils";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import { poll } from "~/common/utils/helpers";
@@ -52,7 +52,7 @@ function Receive() {
   const [paid, setPaid] = useState(false);
   const [pollingForPayment, setPollingForPayment] = useState(false);
   const mounted = useRef(false);
-  const isAlbyUser = isAlbyAccount(auth.account?.alias);
+  const isAlbyUser = isAlbyOAuthAccount(auth.account?.alias);
 
   useEffect(() => {
     mounted.current = true;

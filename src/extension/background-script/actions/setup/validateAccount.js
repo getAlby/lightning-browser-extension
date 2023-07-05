@@ -7,7 +7,7 @@ const validateAccount = async (message, sender) => {
 
   try {
     const info = await connector.getInfo();
-    await connector.unload();
+    await connector.unload(); // unload the connector again, we just checked if it works but have no persistence
 
     return {
       data: {

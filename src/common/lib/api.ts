@@ -33,7 +33,7 @@ import {
 import msg from "./msg";
 
 export interface AccountInfoRes {
-  connector: ConnectorType;
+  connectorType: ConnectorType;
   balance: { balance: string | number; currency: ACCOUNT_CURRENCIES };
   currentAccountId: string;
   info: { alias: string; pubkey?: string };
@@ -41,8 +41,8 @@ export interface AccountInfoRes {
   avatarUrl?: string;
 }
 
-export interface GetAccountRes
-  extends Pick<Account, "id" | "connector" | "name"> {
+export interface GetAccountRes extends Pick<Account, "id" | "name"> {
+  connectorType: ConnectorType;
   nostrEnabled: boolean;
   hasMnemonic: boolean;
   hasImportedNostrKey: boolean;
@@ -88,7 +88,7 @@ export const swrGetAccountInfo = async (
         const { alias } = response.info;
         const { balance: resBalance, currency } = response.balance;
         const name = response.name;
-        const connector = response.connector;
+        const connectorType = response.connectorType;
         const balance =
           typeof resBalance === "number" ? resBalance : parseInt(resBalance); // TODO: handle amounts
         const account = {
@@ -96,7 +96,7 @@ export const swrGetAccountInfo = async (
           name,
           alias,
           balance,
-          connector,
+          connectorType,
           currency: currency || "BTC", // set default currency for every account
           avatarUrl: (response.info as FixMe).avatar, // FIXME: this is only available in the Alby connector
         };

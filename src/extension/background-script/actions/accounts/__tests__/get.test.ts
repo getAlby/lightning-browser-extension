@@ -58,7 +58,7 @@ describe("account info", () => {
     const result: GetAccountRes = {
       id: "1e1e8ea6-493e-480b-9855-303d37506e97",
       name: "Alby",
-      connector: "lndhub",
+      connectorType: "lndhub",
       nostrEnabled: false,
       hasMnemonic: false,
       hasImportedNostrKey: true,
@@ -84,7 +84,7 @@ describe("account info", () => {
     const result: GetAccountRes = {
       id: "8b7f1dc6-ab87-4c6c-bca5-19fa8632731e",
       name: "Alby",
-      connector: "lndhub",
+      connectorType: "lndhub",
       nostrEnabled: true,
       hasMnemonic: true,
       hasImportedNostrKey: true,
