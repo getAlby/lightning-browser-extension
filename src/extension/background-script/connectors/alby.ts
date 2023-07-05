@@ -2,6 +2,7 @@ import { auth, Client } from "alby-js-sdk";
 import { RequestOptions } from "alby-js-sdk/dist/request";
 import { Invoice, Token } from "alby-js-sdk/dist/types";
 import browser from "webextension-polyfill";
+import { getAlbyAccountName } from "~/app/utils";
 import { decryptData, encryptData } from "~/common/lib/crypto";
 import { Account, AlbyAccountInformation, OAuthToken } from "~/types";
 
@@ -103,9 +104,7 @@ export default class Alby implements Connector {
       const accounts = state.getState().accounts;
       if (this.account.id && this.account.id in accounts) {
         // update the account info from backend
-        // legacy accounts may not have either an email address or lightning address
-        const accountName =
-          info.email || info.lightning_address || "getalby.com";
+        const accountName = getAlbyAccountName(info);
         accounts[this.account.id].name = accountName;
         accounts[this.account.id].avatarUrl = info.avatar;
         state.setState({ accounts });

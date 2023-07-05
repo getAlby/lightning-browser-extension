@@ -91,6 +91,7 @@ export const swrGetAccountInfo = async (
         const connectorType = response.connectorType;
         const balance =
           typeof resBalance === "number" ? resBalance : parseInt(resBalance); // TODO: handle amounts
+        const avatarUrl = response.avatarUrl;
         const account = {
           id,
           name,
@@ -98,7 +99,7 @@ export const swrGetAccountInfo = async (
           balance,
           connectorType,
           currency: currency || "BTC", // set default currency for every account
-          avatarUrl: (response.info as FixMe).avatar, // FIXME: this is only available in the Alby connector
+          avatarUrl,
         };
         storeAccounts({
           ...accountsCache,
