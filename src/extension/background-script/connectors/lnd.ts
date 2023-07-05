@@ -373,19 +373,17 @@ class Lnd implements Connector {
   };
 
   getChannelsBalance = () => {
-    return this.request<{ balance: number; pending_open_balance: number }>(
+    return this.request<{ balance: string }>(
       "GET",
       "/v1/balance/channels",
       undefined,
       {
-        pending_open_balance: "0",
-        balance: "0",
+        balance: 0,
       }
     ).then((data) => {
       return {
         data: {
-          balance: data.balance,
-          pending_open_balance: data.pending_open_balance,
+          balance: +data.balance,
         },
       };
     });
