@@ -795,7 +795,6 @@ export interface SettingsStorage {
   currency: CURRENCIES;
   exchange: SupportedExchanges;
   nostrEnabled: boolean;
-  liquidEnabled: boolean;
   closedTips: TIPS[];
   bitcoinNetwork: "bitcoin" | "regtest";
 }

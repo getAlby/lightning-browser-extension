@@ -52,10 +52,7 @@ function ConfirmSignPset() {
   useEffect(() => {
     (async () => {
       if (!pset) throw new Error("pset is undefined");
-
       const settings = await api.getSettings();
-      if (!settings.liquidEnabled) throw new Error("Liquid disabled");
-
       const liquidNetwork = toLiquidNetworkName(settings.bitcoinNetwork);
       const preview = getPsetPreview(pset, liquidNetwork);
       setLiquidNetwork(liquidNetwork);
@@ -76,7 +73,7 @@ function ConfirmSignPset() {
     try {
       setLoading(true);
       const response = await msg.request(
-        "signPset",
+        "liquid/signPset",
         { pset: pset, network: liquidNetwork },
         { origin }
       );
