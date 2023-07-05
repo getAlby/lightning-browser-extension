@@ -85,7 +85,7 @@ function LNURLRedeem() {
               onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                 setlnurlwithdraw(event.target.value.trim())
               }
-              endAdornment={<QrcodeAdornment />}
+              endAdornment={<QrcodeAdornment route="lnurlRedeem" />}
             />
           </div>
           <div className="my-4">

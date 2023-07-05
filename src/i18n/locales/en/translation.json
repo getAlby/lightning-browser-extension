@@ -733,6 +733,9 @@
       "instructions2": "You can find your bitcoin address on the <0>Receive</0> page.",
       "go": "Go to your Alby account →"
     },
+    "scan_qrcode": {
+      "title": "Waiting to scan"
+    },
     "discover": {
       "title": "Explore the Lightning ⚡️ Ecosystem",
       "description": "Websites and webapps where you can use Alby",
@@ -957,9 +960,6 @@
       "between": "between {{min}} and {{max}}",
       "lessThanOrEqual": "≤ {{max}}",
       "greaterOrEqual": "≥ {{min}}"
-    },
-    "qrcode": {
-      "title": "Waiting to scan"
     }
   },
   "components": {

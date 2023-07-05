@@ -79,6 +79,7 @@ export async function getAlbyWalletOptions() {
   }
 }
 
+// to extract lightning data associated with the lightning tag within the URL. eg. LNBits QR codes
 export function extractLightningTagData(url: string) {
   const reqExp = /lightning=([^&|\b]+)/i;
 
