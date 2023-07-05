@@ -3,7 +3,7 @@
     "welcome": {
       "set_password": {
         "title": "Ange ett lösenord för upplåsning",
-        "description": "Ditt Lightning-konto är krypterat med ett lösenord för upplåsning. Glöm inte detta lösenord! Du behöver lösenordet för att kunna låsa upp Alby-tillägget (i denna webbläsare).",
+        "description": "Detta lösenord låter dig låsa upp Alby på den här enheten. Det kan inte återställas, men kan ändras senare.",
         "choose_password": {
           "label": "Välj ett lösenord för upplåsning:"
         },
@@ -27,7 +27,13 @@
           "delete_edit_account": "Radera ogiltigt konto och redigera igen"
         }
       },
-      "title": "Välkommen till Alby"
+      "title": "Välkommen till Alby",
+      "pin_extension": {
+        "title": "Fäst din Alby extension",
+        "description": "Du är nästan där. För att använda Alby bekvämt, kom ihåg att fästa ditt tillägg till webbläsarens verktygsfält:",
+        "explanation": "1. Klicka på <0/> i det övre högra hörnet av din webbläsare<1/>2. Hitta Alby och klicka för att fästa den i verktygsfältet<1/>3. Det är allt. För att komma åt Alby klickar du bara på ikonen <2/>",
+        "next_btn": "Börja surra {{icon}} med Alby"
+      }
     },
     "choose_connector": {
       "description": "Anslut till din externa lightning-plånbok eller node",
@@ -192,12 +198,9 @@
           "info": "Inloggning till {{label}} uppdateras. Om du är avancerad användare kan du hämta din JWT token genom att logga in via <0>Web Wallet (wallet.mainnet.galoy.io)</0><1/><1/> JWT ser ut som följer: <2>eyJhbG...</2><1/><1/>"
         },
         "actions": {
-          "login": "Logga in",
-          "request_sms_code": "Begär SMS-kod"
+          "login": "Logga in"
         },
         "errors": {
-          "failed_to_request_sms": "Begäran om SMS-kod misslyckades",
-          "failed_to_login_sms": "Inloggning med SMS-kod misslyckades",
           "setup_failed": "Konfiguration misslyckades",
           "missing_token": "JWT saknas, kunde inte logga in.",
           "invalid_token": "ogiltig JWT godkändes"
@@ -283,11 +286,14 @@
           "placeholder": "hemlig stack sats fras",
           "label": "Din parningsfras "
         },
-        "title": "LND med LNC",
+        "title": "Lightning Terminal (LNC)",
         "page": {
           "title": "Anslut till din LND node",
           "description": "1. Öppna Lightning Terminal och välj <0>Lightning Node Connect</0> från sidofältet.<1/> 2. Klicka på <0>Skapa en ny session</0><1/>3. Märk sessionen, välj önskade behörigheter och skicka in<1/>4. <0>Kopiera parningsfras</0> och klistra in den nedan."
         }
+      },
+      "umbrel_lightning_node": {
+        "title": "Lightning Node"
       }
     },
     "home": {
@@ -296,12 +302,6 @@
         "enable_now": "Aktivera Nu"
       },
       "recent_transactions": "Senaste Transaktioner",
-      "transaction_list": {
-        "tabs": {
-          "outgoing": "Utgående",
-          "incoming": "Inkommande"
-        }
-      },
       "allowance_view": {
         "recent_transactions": "Senaste Transaktioner",
         "allowance": "Beloppsgräns",
@@ -310,9 +310,11 @@
       },
       "default_view": {
         "recent_transactions": "Senaste Transaktioner",
-        "no_transactions": "Inga transaktioner genomförda med Alby.",
         "is_blocked_hint": "Alby är för tillfället avstängt hos {{host}}",
-        "block_removed": "Aktiverade {{host}}. Ladda om webbplatsen."
+        "block_removed": "Aktiverade {{host}}. Ladda om webbplatsen.",
+        "no_outgoing_transactions": "Inga utgående transaktioner för detta konto ännu.",
+        "all_transactions_link": "Se alla transaktioner",
+        "no_incoming_transactions": "Inga inkommande transaktioner för detta konto ännu."
       }
     },
     "accounts": {
@@ -736,20 +738,16 @@
         "title": "Din Alby plånbok är redo",
         "description": "Några tips för att få igång dig'🐝",
         "top_up_wallet": {
-          "title": "⚡️ Fyll på plånboken",
-          "label1": "Ta emot Bitcoin",
-          "description": "Skapa en lightning-faktura, skicka lite bitcoin till dig själv och börja använda Alby i lightnings ekosystem",
-          "label2": "Köp Bitcoin"
+          "title": "Köp Bitcoin",
+          "description": "Behöver du en påfyllning?\nVi hjälper dig!"
         },
         "demo": {
-          "label1": "Ge det ett försök",
-          "title": "🕹️ Testa Alby Demo",
-          "description": "Upptäck allt du kan göra med Alby på vår demowebbplats"
+          "title": "Alby Demo",
+          "description": "Upptäck Albys funktioner\npå vår demowebbplats"
         },
-        "address": {
-          "description": "Skapa din egen lightning-adress för att ta kunna emot lightning-betalningar med lätthet. Som att skicka ett e-postmeddelande",
-          "label1": "Hämta de nu!",
-          "title": "⚡️ Få en lightning-address"
+        "mnemonic": {
+          "title": "Nostr",
+          "description": "Planerar du att använda Nostr?\nSkapa dina nycklar nu."
         }
       },
       "title": "Utforska Lightnings ⚡️ Eco system",
@@ -762,8 +760,37 @@
     },
     "transactions": {
       "title": "Transaktion",
-      "description": "Utgående transaktioner på alla dina konton",
-      "list_empty": "Inga transaktioner tillgängliga ännu."
+      "list_empty": "Inga transaktioner tillgängliga ännu.",
+      "description": {
+        "incoming": "Inkommande transaktioner för detta konto",
+        "outgoing": "Utgående transaktioner för detta konto"
+      }
+    },
+    "distributions": {
+      "title": "Anslut till {{namn}}",
+      "description": "Välj vilket {{namn}} app du vill ansluta med",
+      "umbrel": {
+        "name": "Umbrel"
+      },
+      "citadel": {
+        "name": "Citadel"
+      },
+      "btcpay": {
+        "name": "BTCPay"
+      },
+      "raspiblitz": {
+        "name": "Raspiblitz"
+      },
+      "mynode": {
+        "name": "myNode"
+      },
+      "start9": {
+        "name": "Start9"
+      }
+    },
+    "confirm_add_account": {
+      "title": "Lägg till konto",
+      "content": "Den här webbplatsen vill lägga till ett konto ({{connector}}):"
     }
   },
   "common": {
@@ -800,7 +827,7 @@
       "export": "Exportera",
       "remove": "Tag bort",
       "copy": "Kopiera",
-      "copy_invoice": "",
+      "copy_invoice": "Kopiera faktura",
       "transactions": "Transaktioner",
       "receive_again": "Ta emot en ny betalning",
       "remember": "Kom ihåg mitt val och fråga inte igen",
@@ -813,19 +840,32 @@
     },
     "range": {
       "between": "mellan {{min}} och {{max}}",
-      "lessThan": "< {{max}}",
-      "greaterThan": "> {{min}}"
+      "lessThanOrEqual": "≤ {{max}}",
+      "greaterOrEqual": "≥ {{min}}"
     },
     "sats_other": "sats",
     "sats_one": "sat",
     "advanced": "Avancerat",
     "accounts": "Konton",
     "discover": "Upptäcka",
-    "transactions": "Transaktion",
     "success_message": "{{amount}}{{fiatAmount}} skickat till {{destination}}",
     "response": "Svar",
     "confirm_password": "Bekräfta Lösenord",
-    "balance": "Balans"
+    "balance": "Balans",
+    "wallet": "Plånbok",
+    "connectors": {
+      "lnd": "LND",
+      "nativelnd": "LND (över Tor)",
+      "nativelndhub": "LNDHub (över Tor)",
+      "galoy": "Galoy",
+      "eclair": "Eclair",
+      "nativecitadel": "Citadel (över Tor)",
+      "commando": "Commando",
+      "nativelnbits": "LNBits (över Tor)",
+      "lndhub": "LNDHub",
+      "lnbits": "LNBits",
+      "citadel": "Citadel"
+    }
   },
   "components": {
     "allowance_menu": {
@@ -839,7 +879,7 @@
         "subtitle": "Logga in automatiskt utan bekräftelse när webbplatsen begär det."
       },
       "edit_allowance": {
-        "title": "Redigera Beloppsgräns",
+        "title": "Redigera Inställningar",
         "screen_reader": "Alternativ för Beloppsgräns"
       },
       "edit_permissions": "Redigera behörigheter"
@@ -925,6 +965,12 @@
       "tor_native": {
         "title": "TOR (native)",
         "description": "Välj det här alternativet om den här webbläsaren redan är ansluten till TOR-nätverket."
+      }
+    },
+    "transaction_list": {
+      "tabs": {
+        "incoming": "Inkommande",
+        "outgoing": "Utgående"
       }
     }
   },

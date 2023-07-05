@@ -27,11 +27,19 @@ export default class AlbyProvider {
    * @param config The config to pass to the connector
    * @returns Nothing, throws if user rejects
    */
-  addAccount(name: string, connector: string, config: Record<string, unknown>) {
+  addAccount(params: {
+    name: string;
+    connector: string;
+    config: Record<string, unknown>;
+  }) {
     if (!this.enabled) {
       throw new Error("Provider must be enabled before calling addAccount");
     }
-    return this.execute("addAccount", { connector, name, config });
+    return this.execute("addAccount", {
+      name: params.name,
+      connector: params.connector,
+      config: params.config,
+    });
   }
 
   execute(

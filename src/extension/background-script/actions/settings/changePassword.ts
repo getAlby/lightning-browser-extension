@@ -16,6 +16,8 @@ const changePassword = async (message: Message) => {
       password
     );
     tmpAccounts[accountId].config = encryptData(accountConfig, newPassword);
+
+    // Re-encrypt nostr key with the new password
     if (accounts[accountId].nostrPrivateKey) {
       const accountNostrKey = decryptData(
         accounts[accountId].nostrPrivateKey as string,
@@ -23,6 +25,18 @@ const changePassword = async (message: Message) => {
       );
       tmpAccounts[accountId].nostrPrivateKey = encryptData(
         accountNostrKey,
+        newPassword
+      );
+    }
+
+    // Re-encrypt mnemonic with the new password
+    if (accounts[accountId].mnemonic) {
+      const accountMnemonic = decryptData(
+        accounts[accountId].mnemonic as string,
+        password
+      );
+      tmpAccounts[accountId].mnemonic = encryptData(
+        accountMnemonic,
         newPassword
       );
     }
