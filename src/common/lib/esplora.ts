@@ -1,3 +1,4 @@
+import fetchAdapter from "@vespaiach/axios-fetch-adapter";
 import axios, { AxiosInstance } from "axios";
 import { networks } from "liquidjs-lib";
 
@@ -18,6 +19,7 @@ export class Esplora implements EsploraAPI {
   private constructor(baseURL: string) {
     this.httpClient = axios.create({
       baseURL,
+      adapter: fetchAdapter,
     });
   }
 
