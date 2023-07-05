@@ -328,7 +328,7 @@
           },
           "title": "Nostr",
           "public_key": {
-            "label": "公钥"
+            "label": "Nostr 公钥"
           },
           "generate_keys": {
             "screen_reader": "为你的帐户生成一个新的Nostr密钥",
@@ -343,15 +343,19 @@
             "generate": "生成新密钥"
           },
           "private_key": {
-            "subtitle": "粘贴你的私钥或生成一个新的。<0>了解更多»</0>",
-            "title": "管理你的密钥",
-            "warning": "请输入帐户名称以确认删除私钥：",
-            "success": "私钥已加密并成功保存。",
-            "successfully_removed": "私钥成功删除。",
-            "label": "私钥",
-            "failed_to_remove": "输入的帐户名称不匹配，你的旧私钥已被恢复。"
+            "subtitle": "粘贴你的 Nostr 私钥或生成一个新的。<0>了解更多»</0>",
+            "title": "管理你的 Nostr 密钥",
+            "warning": "请输入帐户名称以确认删除 Nostr 私钥：",
+            "success": "Nostr 私钥已加密并成功保存。",
+            "successfully_removed": "Nostr 私钥已成功移除。",
+            "label": "Nostr 私钥",
+            "failed_to_remove": "输入的帐户名称不匹配，你的旧 Nostr 私钥已被恢复。"
           },
-          "hint": "是一个简单而开放的协议，旨在创建抗审查的社交网络。Nostr 使用加密密钥。你可以使用你的密钥对内容进行签署并将其发送到多个中继。你可以使用 Alby 来管理你的 Nostr 密钥。许多 Nostr 应用程序允许你轻松地使用 Alby 扩展中的密钥。"
+          "hint": "是一个简单而开放的协议，旨在创建抗审查的社交网络。Nostr 使用加密密钥。你可以使用你的密钥对内容进行签署并将其发送到多个中继。你可以使用 Alby 来管理你的 Nostr 密钥。许多 Nostr 应用程序允许你轻松地使用 Alby 扩展中的密钥。",
+          "settings": {
+            "label": "Nostr 设置",
+            "title": "Nostr 设置"
+          }
         },
         "title1": "帐户信息",
         "export": {
@@ -366,7 +370,8 @@
         "remove": {
           "title": "删除此帐户",
           "subtitle": "所有链接的配额都将被删除。请确定。",
-          "confirm": "是否确定要移除帐户：{{name}}？\n这是无法撤消的。如果你使用此帐户登录网站，则可能无法访问这些网站。"
+          "confirm": "是否确定要移除帐户：{{name}}？\n这是无法撤消的。如果你使用此帐户登录网站，则可能无法访问这些网站。",
+          "error": "输入的帐户名称不匹配。"
         },
         "actions": {
           "remove_account": "删除帐户",
@@ -376,6 +381,15 @@
         "name": {
           "title": "名称",
           "placeholder": "帐户名称"
+        },
+        "bitcoin": {
+          "network": {
+            "title": "比特币网络",
+            "options": {
+              "bitcoin": "主网",
+              "testnet": "测试网"
+            }
+          }
         }
       }
     },
@@ -793,6 +807,10 @@
       "go": "前往你的 Alby 帐户 →",
       "title": "通过比特币地址接收",
       "instructions2": "你可以在<0>收款</0>页面上找到你的比特币地址。"
+    },
+    "confirm_get_address": {
+      "title": "获取地址",
+      "content": "你的比特币收款地址"
     }
   },
   "common": {
@@ -821,7 +839,11 @@
       "remember": "记住我的选择，不要再问",
       "transactions": "交易",
       "more": "更多",
-      "download": "下载"
+      "download": "下载",
+      "import": "导入",
+      "copy_clipboard": "复制到剪切板",
+      "paste": "粘贴",
+      "paste_clipboard": "从剪切板粘贴"
     },
     "errors": {
       "connection_failed": "连接失败",
@@ -851,7 +873,8 @@
     "discover": "发现",
     "range": {
       "between": "在 {{min}} 和 {{max}} 之间",
-      "lessThanOrEqual": "≤ {{max}}"
+      "lessThanOrEqual": "≤ {{max}}",
+      "greaterOrEqual": "≥ {{min}}"
     },
     "balance": "余额",
     "wallet": "钱包",
@@ -868,7 +891,8 @@
       "nativecitadel": "Citadel（通过 Tor）",
       "commando": "Commando"
     },
-    "or": "或"
+    "or": "或",
+    "pasted": "已粘贴！"
   },
   "components": {
     "toasts": {
@@ -892,7 +916,7 @@
           "add": "添加新帐户",
           "manage": "管理帐户",
           "account_settings": "帐户设置",
-          "go_to_web_wallet": "管理你的 Alby 帐户"
+          "go_to_web_wallet": "管理你的网络帐户"
         }
       },
       "screen_reader": "切换下拉菜单"
@@ -951,7 +975,8 @@
     "badge": {
       "label": {
         "active": "活跃",
-        "auth": "登录"
+        "auth": "登录",
+        "imported": "已导入"
       }
     },
     "publishers_table": {
