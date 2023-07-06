@@ -68,7 +68,11 @@ function AccountMenu({ showOptions = true }: Props) {
                 containerClassName="inline-flex"
               />
             ) : (
-              <Avatar size={24} name={authAccount?.id || ""} />
+              <Avatar
+                size={24}
+                url={authAccount?.avatarUrl}
+                name={authAccount?.id || ""}
+              />
             )}
             <div
               className={`flex-auto mx-2 py-3 overflow-hidden max-w-[14rem] text-left`}
@@ -162,7 +166,11 @@ function AccountMenu({ showOptions = true }: Props) {
                     title={account.name}
                   >
                     <div className="shrink-0">
-                      <Avatar size={24} name={account.id} />
+                      <Avatar
+                        size={24}
+                        name={account.id}
+                        url={account.avatarUrl}
+                      />
                     </div>
                     <span className="overflow-hidden text-ellipsis whitespace-nowrap ml-2">
                       {account.name}&nbsp;

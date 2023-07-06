@@ -23,6 +23,7 @@ export interface Account {
   hasImportedNostrKey?: boolean;
   bitcoinNetwork?: BitcoinNetworkType;
   useMnemonicForLnurlAuth?: boolean;
+  avatarUrl?: string;
 }
 
 export interface Accounts {
@@ -39,6 +40,7 @@ export interface AccountInfo {
   name: string;
   connectorType: ConnectorType;
   currency: ACCOUNT_CURRENCIES;
+  avatarUrl?: string;
 }
 
 export interface MetaData {
