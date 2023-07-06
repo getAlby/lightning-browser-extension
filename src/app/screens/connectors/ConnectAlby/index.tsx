@@ -49,6 +49,7 @@ export default function ConnectAlby() {
 
         const addResult = await msg.request("addAccount", account);
         if (addResult.accountId) {
+          // TODO: update all connectors to use api instead of msg.request
           await msg.request("selectAccount", {
             id: addResult.accountId,
           });
