@@ -1,4 +1,3 @@
-import AccountDetailHeader from "@components/AccountDetailHeader";
 import Container from "@components/Container";
 import Loading from "@components/Loading";
 import * as bip39 from "@scure/bip39";
@@ -11,7 +10,7 @@ import Alert from "~/app/components/Alert";
 import Button from "~/app/components/Button";
 import { ContentBox } from "~/app/components/ContentBox";
 import MnemonicInputs from "~/app/components/mnemonic/MnemonicInputs";
-import api, { GetAccountRes } from "~/common/lib/api";
+import api from "~/common/lib/api";
 
 function ImportSecretKey() {
   const { t: tCommon } = useTranslation("common");
@@ -21,7 +20,6 @@ function ImportSecretKey() {
   });
 
   const [mnemonic, setMnemonic] = useState<string>("");
-  const [account, setAccount] = useState<GetAccountRes>();
   const [loading, setLoading] = useState<boolean>(true);
   const [hasNostrPrivateKey, setHasNostrPrivateKey] = useState(false);
 
@@ -33,7 +31,6 @@ function ImportSecretKey() {
         setLoading(true);
 
         const account = await api.getAccount(id);
-        setAccount(account);
         setHasNostrPrivateKey(account.nostrEnabled);
         if (account.hasMnemonic) {
           // do not allow user to import a mnemonic if they already have one for the current account
@@ -78,8 +75,6 @@ function ImportSecretKey() {
     </div>
   ) : (
     <div>
-      {account && <AccountDetailHeader account={account} />}
-
       <Container>
         <ContentBox>
           <h1 className="font-bold text-2xl dark:text-white">

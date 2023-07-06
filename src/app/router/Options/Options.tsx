@@ -21,6 +21,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { HashRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import AccountDetailLayout from "~/app/components/AccountDetailLayout";
 import ScrollToTop from "~/app/components/ScrollToTop";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
@@ -91,20 +92,18 @@ function Options() {
             <Route path="lnurlAuth" element={<LNURLAuth />} />
             <Route path="settings" element={<Settings />} />
             <Route path="accounts">
-              <Route path=":id" element={<AccountDetail />} />
-              <Route
-                path=":id/secret-key/backup"
-                element={<BackupSecretKey />}
-              />
-              <Route
-                path=":id/secret-key/generate"
-                element={<GenerateSecretKey />}
-              />
-              <Route
-                path=":id/secret-key/import"
-                element={<ImportSecretKey />}
-              />
-              <Route path=":id/nostr" element={<NostrSettings />} />
+              <Route index element={<Accounts />} />
+              <Route path=":id" element={<AccountDetailLayout />}>
+                <Route index element={<AccountDetail />} />
+                <Route path="secret-key/backup" element={<BackupSecretKey />} />
+                <Route
+                  path="secret-key/generate"
+                  element={<GenerateSecretKey />}
+                />
+                <Route path="secret-key/import" element={<ImportSecretKey />} />
+                <Route path="nostr" element={<NostrSettings />} />
+              </Route>
+
               <Route
                 path="new"
                 element={
@@ -138,7 +137,6 @@ function Options() {
                   {renderRoutes(connectorRoutes)}
                 </Route>
               </Route>
-              <Route index element={<Accounts />} />
             </Route>
             <Route
               path="test-connection"

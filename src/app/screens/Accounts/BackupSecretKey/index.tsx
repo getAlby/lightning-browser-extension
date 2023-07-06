@@ -1,4 +1,3 @@
-import AccountDetailHeader from "@components/AccountDetailHeader";
 import Container from "@components/Container";
 import Loading from "@components/Loading";
 import { useCallback, useEffect, useState } from "react";
@@ -8,7 +7,7 @@ import { toast } from "react-toastify";
 import { ContentBox } from "~/app/components/ContentBox";
 import MnemonicInputs from "~/app/components/mnemonic/MnemonicInputs";
 import SecretKeyDescription from "~/app/components/mnemonic/SecretKeyDescription";
-import api, { GetAccountRes } from "~/common/lib/api";
+import api from "~/common/lib/api";
 
 function BackupSecretKey() {
   const { t } = useTranslation("translation", {
@@ -16,7 +15,6 @@ function BackupSecretKey() {
   });
 
   const [mnemonic, setMnemonic] = useState<string | undefined>();
-  const [account, setAccount] = useState<GetAccountRes>();
   const [loading, setLoading] = useState<boolean>(true);
 
   const { id } = useParams();
@@ -24,9 +22,6 @@ function BackupSecretKey() {
   const fetchData = useCallback(async () => {
     try {
       setLoading(true);
-      const account = await api.getAccount(id);
-      setAccount(account);
-
       const accountMnemonic = await api.getMnemonic(id as string);
       setMnemonic(accountMnemonic);
     } catch (e) {
@@ -47,7 +42,6 @@ function BackupSecretKey() {
     </div>
   ) : (
     <div>
-      {account && <AccountDetailHeader account={account} />}
       <Container>
         <ContentBox>
           <h1 className="font-bold text-2xl dark:text-white">

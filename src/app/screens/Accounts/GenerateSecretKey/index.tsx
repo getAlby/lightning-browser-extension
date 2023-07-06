@@ -1,4 +1,3 @@
-import AccountDetailHeader from "@components/AccountDetailHeader";
 import Container from "@components/Container";
 import Loading from "@components/Loading";
 import { useEffect, useState } from "react";
@@ -11,10 +10,12 @@ import { ContentBox } from "~/app/components/ContentBox";
 import Checkbox from "~/app/components/form/Checkbox";
 import MnemonicInputs from "~/app/components/mnemonic/MnemonicInputs";
 import SecretKeyDescription from "~/app/components/mnemonic/SecretKeyDescription";
-import api, { GetAccountRes } from "~/common/lib/api";
+import api from "~/common/lib/api";
 
 function GenerateSecretKey() {
   const navigate = useNavigate();
+  const { id } = useParams() as { id: string };
+
   const { t } = useTranslation("translation", {
     keyPrefix: "accounts.account_view.mnemonic",
   });
@@ -23,15 +24,11 @@ function GenerateSecretKey() {
   const [hasConfirmedBackup, setHasConfirmedBackup] = useState(false);
   const [hasNostrPrivateKey, setHasNostrPrivateKey] = useState(false);
   const [mnemonic, setMnemonic] = useState<string | undefined>();
-  const [account, setAccount] = useState<GetAccountRes>();
-
-  const { id } = useParams() as { id: string };
 
   useEffect(() => {
     (async () => {
       try {
         const account = await api.getAccount(id);
-        setAccount(account);
         setHasNostrPrivateKey(account.nostrEnabled);
         if (account.hasMnemonic) {
           // do not allow user to generate a mnemonic if they already have one for the current account
@@ -77,8 +74,6 @@ function GenerateSecretKey() {
     </div>
   ) : (
     <div>
-      {account && <AccountDetailHeader account={account} />}
-
       <Container>
         <ContentBox>
           <h1 className="font-bold text-2xl dark:text-white">

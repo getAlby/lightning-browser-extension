@@ -2,7 +2,6 @@ import {
   HiddenIcon,
   VisibleIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
-import AccountDetailHeader from "@components/AccountDetailHeader";
 import Container from "@components/Container";
 import Loading from "@components/Loading";
 import { FormEvent, useCallback, useEffect, useState } from "react";
@@ -10,7 +9,6 @@ import { Trans, useTranslation } from "react-i18next";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Alert from "~/app/components/Alert";
-import Avatar from "~/app/components/Avatar";
 import Button from "~/app/components/Button";
 import { ContentBox } from "~/app/components/ContentBox";
 import InputCopyButton from "~/app/components/InputCopyButton";
@@ -135,8 +133,6 @@ function NostrSettings() {
     </div>
   ) : (
     <div>
-      {account && <AccountDetailHeader account={account} />}
-
       <form
         onSubmit={(e: FormEvent) => {
           e.preventDefault();
@@ -149,12 +145,6 @@ function NostrSettings() {
               <h1 className="font-bold text-2xl dark:text-white">
                 {t("nostr.settings.title")}
               </h1>
-              <div className="flex gap-4 my-4 items-center">
-                <Avatar name={account.id} size={32} />
-                <p className="text-gray-500 dark:text-neutral-500">
-                  {account.name}
-                </p>
-              </div>
               <p className="text-gray-500 dark:text-neutral-500">
                 {t("nostr.settings.description")}
               </p>

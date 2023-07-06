@@ -1,5 +1,3 @@
-import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
-import AccountDetailHeader from "@components/AccountDetailHeader";
 import Button from "@components/Button";
 import Container from "@components/Container";
 import Loading from "@components/Loading";
@@ -10,8 +8,6 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import type { FormEvent } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import Modal from "react-modal";
-import QRCode from "react-qr-code";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Alert from "~/app/components/Alert";
@@ -44,20 +40,11 @@ function AccountDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const [lndHubData, setLndHubData] = useState({
-    login: "",
-    password: "",
-    url: "",
-    lnAddress: "",
-  });
   const [accountName, setAccountName] = useState("");
 
   const [hasMnemonic, setHasMnemonic] = useState(false);
   const [nostrPublicKey, setNostrPublicKey] = useState("");
   const [hasImportedNostrKey, setHasImportedNostrKey] = useState(false);
-
-  const [exportLoading, setExportLoading] = useState(false);
-  const [exportModalIsOpen, setExportModalIsOpen] = useState(false);
 
   const fetchData = useCallback(async () => {
     try {
@@ -85,10 +72,6 @@ function AccountDetail() {
     }
   }, [id]);
 
-  function closeExportModal() {
-    setExportModalIsOpen(false);
-  }
-
   async function updateAccountName({ id, name }: AccountAction) {
     await msg.request("editAccount", {
       name,
@@ -97,18 +80,6 @@ function AccountDetail() {
 
     auth.fetchAccountInfo(); // Update active account name
     getAccounts(); // update all accounts
-  }
-
-  async function exportAccount({ id, name }: AccountAction) {
-    setExportLoading(true);
-    setExportModalIsOpen(true);
-    setLndHubData(
-      await msg.request("accountDecryptedDetails", {
-        name,
-        id,
-      })
-    );
-    setExportLoading(false);
   }
 
   async function selectAccount(accountId: string) {
@@ -171,76 +142,9 @@ function AccountDetail() {
     </div>
   ) : (
     <div>
-      <AccountDetailHeader
-        account={account}
-        exportAccount={(action: AccountAction) => exportAccount(action)}
-      />
-
       <Container>
         <div className="flex justify-between items-center pt-8 pb-4">
           <h2 className="text-2xl font-bold dark:text-white">{t("title2")}</h2>
-
-          <Modal
-            ariaHideApp={false}
-            closeTimeoutMS={200}
-            isOpen={exportModalIsOpen}
-            onRequestClose={closeExportModal}
-            contentLabel={t("export.screen_reader")}
-            overlayClassName="bg-black bg-opacity-25 fixed inset-0 flex justify-center items-center p-5"
-            className="rounded-lg bg-white w-full max-w-lg"
-          >
-            <div className="p-5 flex justify-between dark:bg-surface-02dp">
-              <h2 className="text-2xl font-bold dark:text-white">
-                {t("export.title")}
-              </h2>
-              <button onClick={closeExportModal}>
-                <CrossIcon className="w-6 h-6 dark:text-white" />
-              </button>
-            </div>
-
-            {exportLoading && (
-              <div className="p-5 flex justify-center items-center space-x-2 dark:text-white">
-                <Loading />
-                <span>{t("export.waiting")}</span>
-              </div>
-            )}
-            {!exportLoading && (
-              <div className="p-5 border-t border-b border-gray-200 dark:bg-surface-02dp dark:border-neutral-500">
-                {lndHubData.lnAddress && (
-                  <div className="dark:text-white mb-6">
-                    <p>
-                      <strong>{t("export.your_ln_address")}</strong>
-                    </p>
-                    {lndHubData.lnAddress && <p>{lndHubData.lnAddress}</p>}
-                  </div>
-                )}
-                <div className="flex justify-center space-x-3 items-center dark:text-white">
-                  <div className="flex-1">
-                    <p>
-                      <strong>{t("export.tip_mobile")}</strong>
-                    </p>
-                    <p>{t("export.scan_qr")}</p>
-                  </div>
-                  <div className="float-right">
-                    <QRCode
-                      value={`lndhub://${lndHubData.login}:${lndHubData.password}@${lndHubData.url}/`}
-                      level="M"
-                      size={130}
-                    />
-                  </div>
-                </div>
-                <div className="mt-6">
-                  <TextField
-                    id="uri"
-                    label={t("export.export_uri")}
-                    type="text"
-                    readOnly
-                    value={`lndhub://${lndHubData.login}:${lndHubData.password}@${lndHubData.url}/`}
-                  />
-                </div>
-              </div>
-            )}
-          </Modal>
         </div>
 
         <div>
