@@ -33,13 +33,18 @@ export default async function sendPayment(
     response = await connector.sendPayment({
       paymentRequest,
     });
+
+    if (!response.data.preimage) {
+      throw new Error("No preimage in payment");
+    }
   } catch (e) {
     let errorMessage;
 
     if (typeof e === "string") {
       errorMessage = e;
-    } else if (e instanceof Error) {
-      errorMessage = e.message;
+    } else if ((e as { message: string }).message) {
+      // TODO: change to e as Error once alby-js-sdk is updated
+      errorMessage = (e as { message: string }).message;
     } else {
       errorMessage = "Something went wrong";
     }
