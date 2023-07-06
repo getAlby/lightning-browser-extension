@@ -1,7 +1,7 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="/doc/logo-white.svg">
-    <img alt="Alby Logo" src="/doc/logo-black.svg">
+    <source srcset="/doc/logo-white.svg" media="(prefers-color-scheme: dark)" width="300">
+    <img alt="Alby Logo" src="/doc/logo-black.svg" width="300">
   </picture>
 </p>
 
