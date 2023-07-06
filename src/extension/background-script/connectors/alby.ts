@@ -171,12 +171,18 @@ export default class Alby implements Connector {
   }
 
   async checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {
-    const invoice = await this._request((client) =>
-      client.getInvoice(args.paymentHash)
-    );
+    let paid = false;
+    try {
+      const invoice = await this._request((client) =>
+        client.getInvoice(args.paymentHash)
+      );
+      paid = !!invoice?.settled;
+    } catch (error) {
+      console.error(error);
+    }
     return {
       data: {
-        paid: !!invoice?.settled,
+        paid,
       },
     };
   }
