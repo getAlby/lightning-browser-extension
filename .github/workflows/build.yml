@@ -30,13 +30,13 @@ jobs:
 
       - name: Build firefox
         run: yarn build:firefox
-        with:
+        env:
           ALBY_OAUTH_CLIENT_ID: ${{ secrets.ALBY_OAUTH_CLIENT_ID_FIREFOX }}
           ALBY_OAUTH_CLIENT_SECRET: ${{ secrets.ALBY_OAUTH_CLIENT_SECRET_FIREFOX }}
 
       - name: Build chrome
         run: yarn build:chrome
-        with:
+        env:
           ALBY_OAUTH_CLIENT_ID: ${{ secrets.ALBY_OAUTH_CLIENT_ID_CHROME }}
           ALBY_OAUTH_CLIENT_SECRET: ${{ secrets.ALBY_OAUTH_CLIENT_SECRET_CHROME }}
 
