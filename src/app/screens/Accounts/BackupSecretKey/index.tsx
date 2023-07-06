@@ -47,14 +47,8 @@ function BackupSecretKey() {
           <h1 className="font-bold text-2xl dark:text-white">
             {t("backup.title")}
           </h1>
-          {mnemonic ? (
-            <>
-              <SecretKeyDescription />
-              <MnemonicInputs mnemonic={mnemonic} readOnly />
-            </>
-          ) : (
-            <p>{t("backup.no_mnemonic_found")}</p>
-          )}
+          <SecretKeyDescription />
+          <MnemonicInputs mnemonic={mnemonic} readOnly />
         </ContentBox>
       </Container>
     </div>
