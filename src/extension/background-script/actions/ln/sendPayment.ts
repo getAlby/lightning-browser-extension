@@ -34,10 +34,6 @@ export default async function sendPayment(
       paymentRequest,
     });
 
-    if (response.data.payment_error) {
-      throw new Error(response.data.payment_error);
-    }
-
     if (!response.data.preimage) {
       throw new Error("No preimage in payment");
     }
@@ -47,6 +43,7 @@ export default async function sendPayment(
     if (typeof e === "string") {
       errorMessage = e;
     } else if ((e as { message: string }).message) {
+      // TODO: change to e as Error once alby-js-sdk is updated
       errorMessage = (e as { message: string }).message;
     } else {
       errorMessage = "Something went wrong";
