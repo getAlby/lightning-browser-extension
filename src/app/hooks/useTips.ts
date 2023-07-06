@@ -7,13 +7,17 @@ const DEFAULT_TIPS = [TIPS.TOP_UP_WALLET, TIPS.MNEMONIC];
 
 export const filterTips = (
   closedTips: TIPS[],
-  isAlbyAccount: boolean,
+  isAlbyOAuthAccount: boolean,
   isAlbyLNDHubAccount: boolean
 ) => {
   return DEFAULT_TIPS.filter((tip: TIPS) => {
     if (closedTips.includes(tip)) return false;
 
-    if (tip === TIPS.TOP_UP_WALLET && !isAlbyAccount && !isAlbyLNDHubAccount)
+    if (
+      tip === TIPS.TOP_UP_WALLET &&
+      !isAlbyOAuthAccount &&
+      !isAlbyLNDHubAccount
+    )
       return false;
 
     return true;
