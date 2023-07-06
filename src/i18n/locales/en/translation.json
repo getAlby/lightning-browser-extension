@@ -454,11 +454,7 @@
         "liquid": {
           "enable": {
             "title": "Liquid Network",
-            "description": "Enable interactions with Liquid Network apps and protocols.",
-            "toggle": {
-              "isEnable": "Enabled",
-              "isDisable": "Disabled"
-            }
+            "description": "Enable interactions with Liquid Network apps and protocols."
           },
           "errors": {
             "failed_to_load": "Failed to load the Liquid key. Is it a valid Liquid key?"

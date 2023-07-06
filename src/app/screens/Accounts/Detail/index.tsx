@@ -63,7 +63,7 @@ function AccountDetail() {
   const [nostrPrivateKey, setNostrPrivateKey] = useState("");
   const [nostrPublicKey, setNostrPublicKey] = useState("");
   const [nostrKeyOrigin, setNostrKeyOrigin] = useState<KeyOrigin>("unknown");
-  const [isLiquidEnable, setIsLiquidEnable] = useState<boolean>();
+  const [isLiquidEnabled, setLiquidEnabled] = useState<boolean>();
   const [exportLoading, setExportLoading] = useState(false);
   const [exportModalIsOpen, setExportModalIsOpen] = useState(false);
 
@@ -76,7 +76,7 @@ function AccountDetail() {
 
         setAccount(response);
         setAccountName(response.name);
-        setIsLiquidEnable(response.isLiquidEnabled);
+        setLiquidEnabled(response.isLiquidEnabled);
 
         const accountMnemonic = (await msg.request("getMnemonic", {
           id,
@@ -181,7 +181,7 @@ function AccountDetail() {
       id,
       enable: value,
     });
-    setIsLiquidEnable(value);
+    setLiquidEnabled(value);
   }
 
   useEffect(() => {
@@ -474,21 +474,14 @@ function AccountDetail() {
                 </p>
               </div>
 
-              <div className="w-1/5 flex align-middle justify-center">
+              <div className="w-1/5 flex justify-end align-middle">
                 <Toggle
-                  key="isLiquidEnable"
-                  checked={isLiquidEnable || false}
+                  key="isLiquidEnabled"
+                  checked={isLiquidEnabled || false}
                   onChange={() => {
-                    setLiquidEnable(!isLiquidEnable);
+                    setLiquidEnable(!isLiquidEnabled);
                   }}
                 />
-                <span className="ml-4">
-                  {t(
-                    isLiquidEnable
-                      ? "liquid.enable.toggle.isEnable"
-                      : "liquid.enable.toggle.isDisable"
-                  )}
-                </span>
               </div>
             </div>
           </div>
