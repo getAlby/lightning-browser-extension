@@ -189,20 +189,6 @@
           "placeholder": "http://localhost:8080"
         }
       },
-      "citadel": {
-        "title": "Citadel",
-        "page": {
-          "title": "به گره <0>Citadel</0> متصل شوید",
-          "instructions": "در حال حاضر در صورت فعال بودن تایید دو مرحله ای، این کار نمی کند."
-        },
-        "password": {
-          "label": "گذرواژه Citadel"
-        },
-        "url": {
-          "label": "آدرس اینترنتی Citadel",
-          "placeholder": "http://citadel.local"
-        }
-      },
       "umbrel": {
         "title": "Umbrel",
         "page": {
@@ -354,9 +340,6 @@
       "description": "انتخاب کنید می خواهید به کدام اپ {{name}}متصل شوید",
       "umbrel": {
         "name": "Umbrel"
-      },
-      "citadel": {
-        "name": "Citadel"
       },
       "btcpay": {
         "name": "BTCPay"

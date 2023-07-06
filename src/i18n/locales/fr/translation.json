@@ -180,20 +180,6 @@
           "placeholder": "http://localhost:8080"
         }
       },
-      "citadel": {
-        "title": "Citadelle",
-        "page": {
-          "title": "Connectez-vous au nœud <0>Citadelle</0>",
-          "instructions": "Cela ne fonctionne pas actuellement si 2FA est activé."
-        },
-        "password": {
-          "label": "Mot de passe Citadelle"
-        },
-        "url": {
-          "label": "URL de la Citadelle",
-          "placeholder": "http://citadel.local"
-        }
-      },
       "umbrel": {
         "title": "Parapluie",
         "page": {

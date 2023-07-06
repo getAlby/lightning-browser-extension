@@ -180,20 +180,6 @@
           "placeholder": "http://localhost:8080"
         }
       },
-      "citadel": {
-        "title": "Citadel",
-        "page": {
-          "title": "Conectare la <0>Citadel</0>",
-          "instructions": "Momentan nu functioneaza daca autentificarea in 2-factori (2FA) este activata."
-        },
-        "password": {
-          "label": "Parola Citadel"
-        },
-        "url": {
-          "label": "URL Citadel",
-          "placeholder": "http://citadel.local"
-        }
-      },
       "umbrel": {
         "title": "Umbrel",
         "page": {

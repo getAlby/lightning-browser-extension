@@ -180,20 +180,6 @@
           "placeholder": ""
         }
       },
-      "citadel": {
-        "title": "",
-        "page": {
-          "title": "",
-          "instructions": ""
-        },
-        "password": {
-          "label": ""
-        },
-        "url": {
-          "label": "",
-          "placeholder": ""
-        }
-      },
       "umbrel": {
         "title": "",
         "page": {

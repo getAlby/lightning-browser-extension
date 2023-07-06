@@ -1,4 +1,3 @@
-import Citadel from "./citadel";
 import Commando from "./commando";
 import Eclair from "./eclair";
 import Galoy from "./galoy";
@@ -7,7 +6,6 @@ import LnBits from "./lnbits";
 import Lnc from "./lnc";
 import Lnd from "./lnd";
 import LndHub from "./lndhub";
-import NativeCitadel from "./nativecitadel";
 import NativeLnBits from "./nativelnbits";
 import NativeLnd from "./nativelnd";
 import NativeLndHub from "./nativelndhub";
@@ -30,8 +28,6 @@ const connectors = {
   nativelnbits: NativeLnBits,
   galoy: Galoy,
   eclair: Eclair,
-  citadel: Citadel,
-  nativecitadel: NativeCitadel,
   commando: Commando,
   kollider: Kollider,
 };
