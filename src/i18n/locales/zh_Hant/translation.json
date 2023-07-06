@@ -18,7 +18,7 @@
         }
       },
       "test_connection": {
-        "ready": "太棒了，你已經準備好了！",
+        "ready": "太棒了，你已準備就緒！",
         "initializing": "正在初始化你的帳戶。請稍候，這可能需要一分鐘...",
         "connection_error": "連接錯誤",
         "review_connection_details": "請檢查你的連接詳細信息。",
@@ -381,7 +381,7 @@
         "title1": "帳戶信息",
         "title2": "編輯帳戶",
         "name": {
-          "title": "名字",
+          "title": "名稱",
           "placeholder": "帳戶名稱"
         },
         "export": {
@@ -397,16 +397,16 @@
           "title": "Nostr",
           "hint": "是一個簡單而開放的協議，旨在創建抗審查的社交網絡。Nostr 使用加密密鑰。你可以使用你的密鑰對內容進行簽署並將其發送到多個中繼。你可以使用 Alby 來管理你的 Nostr 密鑰。許多 Nostr 應用程序將允許你輕鬆地使用 Alby 擴充套件中的密鑰。",
           "private_key": {
-            "title": "管理你的私鑰",
-            "subtitle": "粘貼你的私鑰或生成一個新私鑰。<0>瞭解更多 »</0>",
-            "warning": "請輸入帳號名稱以確認刪除私鑰：",
-            "success": "私鑰加密並成功保存。",
-            "successfully_removed": "私鑰已成功刪除。",
-            "label": "私鑰",
-            "failed_to_remove": "輸入的帳戶名稱不匹配，你的舊私鑰已恢復。"
+            "title": "管理你的 Nostr 私鑰",
+            "subtitle": "粘貼你的 Nostr 私鑰或生成一個新私鑰。<0>瞭解更多 »</0>",
+            "warning": "請輸入帳號名稱以確認刪除 Nostr 私鑰：",
+            "success": "Nostr 私鑰已加密並成功保存。",
+            "successfully_removed": "Nostr 私鑰已成功刪除。",
+            "label": "Nostr 私鑰",
+            "failed_to_remove": "輸入的帳戶名稱不匹配，你的舊 Nostr 私鑰已被恢復。"
           },
           "public_key": {
-            "label": "公鑰"
+            "label": "Nostr 公鑰"
           },
           "generate_keys": {
             "title": "生成新的 Nostr 鑰匙",
@@ -422,16 +422,38 @@
           },
           "errors": {
             "failed_to_load": "無法載入 Nostr 鑰匙。它是有效的 Nostr 鑰匙嗎？"
+          },
+          "settings": {
+            "label": "Nostr 設置",
+            "title": "Nostr 設置",
+            "delete": "刪除當前的密鑰"
           }
         },
         "remove": {
           "title": "刪除此帳戶",
-          "subtitle": "所有關聯的限額都將被刪除。請確定。",
-          "confirm": "是否確實要刪除帳戶：{{名稱}}？\n這是無法撤銷的。如果你使用此帳戶登錄網站，則可能無法訪問這些網站。"
+          "subtitle": "所有與此帳號關聯的限額、支付信息和密鑰都將被清除。",
+          "confirm": "是否確實要刪除帳戶：{{名稱}}？\n這是無法撤銷的。如果你使用此帳戶登錄網站，則可能無法訪問這些網站。",
+          "error": "輸入的帳戶名稱不匹配。"
         },
         "actions": {
           "remove_account": "刪除帳戶",
           "export": "導出"
+        },
+        "mnemonic": {
+          "title": "",
+          "backup": {
+            "protocols": {
+              "nostr": "Nostr"
+            }
+          }
+        },
+        "bitcoin": {
+          "network": {
+            "options": {
+              "bitcoin": "主網",
+              "testnet": "測試網"
+            }
+          }
         }
       },
       "actions": {
@@ -796,6 +818,10 @@
       "instructions2": "你可以在<0>收款</0>頁面上找到你的比特幣地址。",
       "go": "前往你的 Alby 帳戶 →",
       "title": "通過比特幣地址接收"
+    },
+    "confirm_get_address": {
+      "content": "你的比特幣收款地址",
+      "title": "獲取地址"
     }
   },
   "common": {
@@ -846,7 +872,11 @@
       "remember": "記住我的選擇，不要再問了",
       "transactions": "交易",
       "more": "更多",
-      "download": "下載"
+      "download": "下載",
+      "import": "導入",
+      "copy_clipboard": "複製到剪切板",
+      "paste": "貼上",
+      "paste_clipboard": "從剪切板貼上"
     },
     "errors": {
       "connection_failed": "連接失敗",
@@ -872,7 +902,8 @@
       "commando": "Commando",
       "nativelndhub": "LNDHub（通過 Tor）"
     },
-    "or": "或"
+    "or": "或",
+    "pasted": "已貼上！"
   },
   "components": {
     "allowance_menu": {
@@ -948,7 +979,7 @@
           "add": "添加新帳戶",
           "manage": "管理帳戶",
           "account_settings": "帳戶設置",
-          "go_to_web_wallet": "管理你的 Alby 帳戶"
+          "go_to_web_wallet": "管理你的網路帳戶"
         }
       }
     },
@@ -959,7 +990,8 @@
     "badge": {
       "label": {
         "active": "活躍",
-        "auth": "登錄"
+        "auth": "登錄",
+        "imported": "已導入"
       }
     },
     "companion_download_info": {
