@@ -1,6 +1,6 @@
 import { useSettings } from "~/app/context/SettingsContext";
 import api from "~/common/lib/api";
-import { BrowserType, Theme } from "~/types";
+import { AlbyAccountInformation, BrowserType, Theme } from "~/types";
 
 export function classNames(...classes: (string | boolean)[]) {
   return classes.filter(Boolean).join(" ");
@@ -55,4 +55,9 @@ export function isAlbyLNDHubAccount(alias = "", connector = "") {
 }
 export function isAlbyOAuthAccount(connector = "") {
   return connector === "alby";
+}
+
+export function getAlbyAccountName(info: AlbyAccountInformation) {
+  // legacy accounts may not have either an email address or lightning address
+  return info.email || info.lightning_address || "getalby.com";
 }

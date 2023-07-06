@@ -38,6 +38,7 @@ export interface AccountInfoRes {
   currentAccountId: string;
   info: { alias: string; pubkey?: string };
   name: string;
+  avatarUrl?: string;
 }
 
 export interface GetAccountRes extends Pick<Account, "id" | "name"> {
@@ -90,6 +91,7 @@ export const swrGetAccountInfo = async (
         const connectorType = response.connectorType;
         const balance =
           typeof resBalance === "number" ? resBalance : parseInt(resBalance); // TODO: handle amounts
+        const avatarUrl = response.avatarUrl;
         const account = {
           id,
           name,
@@ -97,6 +99,7 @@ export const swrGetAccountInfo = async (
           balance,
           connectorType,
           currency: currency || "BTC", // set default currency for every account
+          avatarUrl,
         };
         storeAccounts({
           ...accountsCache,
