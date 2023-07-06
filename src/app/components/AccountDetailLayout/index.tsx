@@ -64,7 +64,7 @@ function AccountDetailLayout() {
         title={t("title1")}
         headerLeft={
           <IconButton
-            onClick={() => navigate("/accounts")}
+            onClick={() => navigate(-1)}
             icon={<CaretLeftIcon className="w-4 h-4" />}
           />
         }
