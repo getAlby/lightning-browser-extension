@@ -33,13 +33,21 @@ export default async function sendPayment(
     response = await connector.sendPayment({
       paymentRequest,
     });
+
+    if (response.data.payment_error) {
+      throw new Error(response.data.payment_error);
+    }
+
+    if (!response.data.preimage) {
+      throw new Error("No preimage in payment");
+    }
   } catch (e) {
     let errorMessage;
 
     if (typeof e === "string") {
       errorMessage = e;
-    } else if (e instanceof Error) {
-      errorMessage = e.message;
+    } else if ((e as { message: string }).message) {
+      errorMessage = (e as { message: string }).message;
     } else {
       errorMessage = "Something went wrong";
     }

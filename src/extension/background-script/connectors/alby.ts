@@ -325,6 +325,11 @@ export default class Alby implements Connector {
       result = await func(client);
     } catch (error) {
       console.error(error);
+      // handle AlbyResponseError in alby-js-sdk
+      // TODO: undo this change once AlbyResponseError `message` field is set.
+      if ((error as { error: Error }).error) {
+        throw (error as { error: Error }).error;
+      }
       throw error;
     } finally {
       const newToken = this._authUser.token;
