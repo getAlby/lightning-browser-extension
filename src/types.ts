@@ -468,7 +468,6 @@ export interface MessagePrivateKeySet extends MessageDefault {
   args: {
     id?: Account["id"];
     privateKey: string;
-    masterBlindingKey?: string; // only for liquid
   };
   action: "setPrivateKey";
 }
