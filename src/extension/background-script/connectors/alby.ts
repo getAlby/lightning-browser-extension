@@ -72,7 +72,6 @@ export default class Alby implements Connector {
     const incomingInvoices = (await this._request((client) =>
       client.incomingInvoices({})
     )) as Invoice[];
-    console.info("incomingInvoices", incomingInvoices);
 
     const invoices: ConnectorInvoice[] = incomingInvoices.map(
       (invoice, index): ConnectorInvoice => ({
