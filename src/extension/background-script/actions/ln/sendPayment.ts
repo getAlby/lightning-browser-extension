@@ -33,10 +33,6 @@ export default async function sendPayment(
     response = await connector.sendPayment({
       paymentRequest,
     });
-
-    if (!response.data.preimage) {
-      throw new Error("No preimage in payment");
-    }
   } catch (e) {
     let errorMessage;
 
