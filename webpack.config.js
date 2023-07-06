@@ -60,7 +60,7 @@ if (
   if (!selectedOAuthCredentials) {
     throw new Error("No OAuth credentials found for current configuration");
   }
-  console.info("Set Alby OAuth credentials", selectedOAuthCredentials);
+  console.info("Using OAuth credentials for", oauthBrowser, network);
   process.env.ALBY_OAUTH_CLIENT_ID = selectedOAuthCredentials.id;
   process.env.ALBY_OAUTH_CLIENT_SECRET = selectedOAuthCredentials.secret;
 }
