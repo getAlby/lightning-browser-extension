@@ -17,7 +17,7 @@ function LNURLRedeem() {
   const { t } = useTranslation("translation", { keyPrefix: "lnurlredeem" });
   const location = useLocation();
   // location.state used to access the decoded QR coming from ScanQRCode screen
-  const [lnurlwithdraw, setLnurlwithdraw] = useState(
+  const [lnurlWithdrawLink, setLnurlWithdrawLink] = useState(
     location.state?.decodedQR || ""
   );
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ function LNURLRedeem() {
     event.preventDefault();
     try {
       setLoading(true);
-      const lnurl = lnurlLib.findLnurl(lnurlwithdraw);
+      const lnurl = lnurlLib.findLnurl(lnurlWithdrawLink);
 
       if (lnurl) {
         const lnurlDetails = await lnurlLib.getDetails(lnurl);
@@ -79,12 +79,12 @@ function LNURLRedeem() {
             <TextField
               id="lnurlwithdraw"
               label={t("input.label")}
-              value={lnurlwithdraw}
+              value={lnurlWithdrawLink}
               placeholder={t("input.placeholder")}
               disabled={loading}
               autoFocus
               onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                setLnurlwithdraw(
+                setLnurlWithdrawLink(
                   extractLightningTagData(event.target.value.trim())
                 )
               }
@@ -98,7 +98,7 @@ function LNURLRedeem() {
               primary
               fullWidth
               loading={loading}
-              disabled={lnurlwithdraw === "" || loading}
+              disabled={lnurlWithdrawLink === "" || loading}
             />
           </div>
         </Container>
