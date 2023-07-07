@@ -50,18 +50,18 @@ export default function PublisherCard({
         />
       )}
       <div
-        className={
-          "flex flex-col overflow-hidden w-full " +
-          (isSmall ? "" : "text-center ") +
-          (isSmall && !image && "ml-1")
-        }
+        className={classNames(
+          "flex flex-col overflow-hidden w-full ",
+          isSmall ? "" : "text-center ",
+          isSmall && !image && "ml-1"
+        )}
       >
         <h2
           title={title}
-          className={
-            "font-semibold dark:text-white overflow-hidden text-ellipsis whitespace-nowrap leading-1" +
-            (isSmall ? " text-l" : " my-2 text-xl")
-          }
+          className={classNames(
+            "font-semibold dark:text-white overflow-hidden text-ellipsis whitespace-nowrap leading-1",
+            isSmall ? " text-l" : " my-2 text-xl"
+          )}
         >
           {title}
         </h2>
@@ -79,10 +79,10 @@ export default function PublisherCard({
         {!url && description && (
           <p
             title={description}
-            className={
-              "text-gray-500 dark:text-gray-400 line-clamp-2" +
-              (isSmall ? " -mt-1" : " mb-2")
-            }
+            className={classNames(
+              "text-gray-500 dark:text-gray-400 line-clamp-2",
+              isSmall ? " -mt-1" : " mb-2"
+            )}
           >
             {description}
           </p>
