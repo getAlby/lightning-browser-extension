@@ -22,6 +22,8 @@ export interface Account {
   mnemonic?: string | null;
   hasImportedNostrKey?: boolean;
   bitcoinNetwork?: BitcoinNetworkType;
+  useMnemonicForLnurlAuth?: boolean;
+  avatarUrl?: string;
 }
 
 export interface Accounts {
@@ -36,7 +38,9 @@ export interface AccountInfo {
   balance: number;
   id: string;
   name: string;
+  connectorType: ConnectorType;
   currency: ACCOUNT_CURRENCIES;
+  avatarUrl?: string;
 }
 
 export interface MetaData {
@@ -204,6 +208,7 @@ export interface MessageAccountEdit extends MessageDefault {
     id: Account["id"];
     name?: Account["name"];
     bitcoinNetwork?: BitcoinNetworkType;
+    useMnemonicForLnurlAuth?: boolean;
   };
   action: "editAccount";
 }
@@ -396,6 +401,13 @@ export interface MessageAccountValidate extends MessageDefault {
   };
   action: "validateAccount";
 }
+
+export type ValidateAccountResponse = {
+  valid: boolean;
+  info: { data: WebLNNode };
+  oAuthToken?: OAuthToken;
+  error?: unknown;
+};
 
 export interface MessageConnectPeer extends MessageDefault {
   args: { pubkey: string; host: string };
@@ -817,9 +829,28 @@ export interface DeferredPromise {
 
 export type Theme = "dark" | "light";
 
+export type OAuthToken = {
+  access_token: string;
+  refresh_token: string;
+  expires_at: number;
+};
+
 export type BitcoinAddress = {
   publicKey: string;
   derivationPath: string;
   index: number;
   address: string;
+};
+
+// TODO: take from alby-js-sdk
+export type AlbyAccountInformation = {
+  identifier: string;
+  email: string;
+  name?: string;
+  avatar?: string;
+  keysend_custom_key: string;
+  keysend_custom_value: string;
+  keysend_pubkey: string;
+  lightning_address?: string;
+  nostr_pubkey?: string;
 };

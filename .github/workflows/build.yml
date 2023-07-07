@@ -13,7 +13,7 @@ jobs:
 
     name: build-prod
     env:
-      WALLET_ROOT_URL: "https://getalby.com/"
+      ALBY_API_URL: "https://getalby.com/api"
 
     permissions:
       issues: write
@@ -28,8 +28,17 @@ jobs:
 
       - run: yarn install
 
-      - name: Build production
-        run: yarn build
+      - name: Build firefox
+        run: yarn build:firefox
+        env:
+          ALBY_OAUTH_CLIENT_ID: ${{ secrets.ALBY_OAUTH_CLIENT_ID_FIREFOX }}
+          ALBY_OAUTH_CLIENT_SECRET: ${{ secrets.ALBY_OAUTH_CLIENT_SECRET_FIREFOX }}
+
+      - name: Build chrome
+        run: yarn build:chrome
+        env:
+          ALBY_OAUTH_CLIENT_ID: ${{ secrets.ALBY_OAUTH_CLIENT_ID_CHROME }}
+          ALBY_OAUTH_CLIENT_SECRET: ${{ secrets.ALBY_OAUTH_CLIENT_SECRET_CHROME }}
 
       - name: Archive firefox production zip file
         uses: actions/upload-artifact@v3
@@ -42,9 +51,3 @@ jobs:
         with:
           name: chrome.zip
           path: dist/production/chrome.zip
-
-      - name: Archive opera production zip file
-        uses: actions/upload-artifact@v3
-        with:
-          name: opera.crx
-          path: dist/production/opera.crx

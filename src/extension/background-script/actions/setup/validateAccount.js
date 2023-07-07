@@ -9,7 +9,13 @@ const validateAccount = async (message, sender) => {
     const info = await connector.getInfo();
     await connector.unload(); // unload the connector again, we just checked if it works but have no persistence
 
-    return { data: { valid: true, info: info } };
+    return {
+      data: {
+        valid: true,
+        info: info,
+        oAuthToken: connector.getOAuthToken?.(),
+      },
+    };
   } catch (e) {
     console.error(e);
     return { data: { valid: false, error: e.message } };

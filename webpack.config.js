@@ -12,10 +12,66 @@ const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 const BundleAnalyzerPlugin =
   require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
-// default value is set in the code where it is used
-if (!process.env.WALLET_ROOT_URL) {
-  process.env.WALLET_ROOT_URL = ""; // env variables are passed as string. empty strings are still falsy
+console.info("OAuth Client ID", process.env.ALBY_OAUTH_CLIENT_ID);
+
+let network = "mainnet";
+if (!process.env.ALBY_API_URL) {
+  process.env.ALBY_API_URL = "https://api.regtest.getalby.com";
+  if (!process.env.ALBY_OAUTH_AUTHORIZE_URL) {
+    process.env.ALBY_OAUTH_AUTHORIZE_URL =
+      "https://app.regtest.getalby.com/oauth";
+  }
+  network = "testnet";
 }
+
+if (
+  !process.env.ALBY_OAUTH_CLIENT_ID &&
+  !process.env.ALBY_OAUTH_CLIENT_SECRET
+) {
+  const oauthCredentials = {
+    development: {
+      testnet: {
+        chrome: {
+          id: "CLAp8AfS3W",
+          secret: "KwIxF0VbGX2ZHLbbbYgE",
+        },
+        firefox: {
+          id: "zWdxnF04Hd",
+          secret: "wY5uLJJDjNWrDlB6lAj8",
+        },
+      },
+      mainnet: {
+        chrome: {
+          id: "Zf7u3Zlyxl",
+          secret: "7wtcdVi61emqwzAH9Nm6",
+        },
+        firefox: {
+          id: "uQkyHFBkaC",
+          secret: "0agh0cKkGWQSXTGRz9oy",
+        },
+      },
+    },
+  };
+
+  const oauthBrowser =
+    process.env.TARGET_BROWSER === "firefox" ? "firefox" : "chrome";
+
+  // setup ALBY_OAUTH_CLIENT_ID
+  const selectedOAuthCredentials =
+    oauthCredentials[process.env.NODE_ENV]?.[network]?.[oauthBrowser];
+  if (!selectedOAuthCredentials) {
+    throw new Error("No OAuth credentials found for current configuration");
+  }
+  console.info("Using OAuth credentials for", oauthBrowser, network);
+  process.env.ALBY_OAUTH_CLIENT_ID = selectedOAuthCredentials.id;
+  process.env.ALBY_OAUTH_CLIENT_SECRET = selectedOAuthCredentials.secret;
+}
+
+// default value is set in the code where it is used
+if (!process.env.ALBY_OAUTH_AUTHORIZE_URL) {
+  process.env.ALBY_OAUTH_AUTHORIZE_URL = ""; // env variables are passed as string. empty strings are still falsy
+}
+
 // default value is set in the code where it is used
 if (!process.env.BITCOIN_BEACH_GALOY_URL) {
   process.env.BITCOIN_BEACH_GALOY_URL = ""; // env variables are passed as string. empty strings are still falsy
@@ -154,9 +210,12 @@ var options = {
       "BITCOIN_JUNGLE_GALOY_URL",
       "NODE_ENV",
       "TARGET_BROWSER",
-      "WALLET_ROOT_URL",
       "VERSION",
       "HMAC_VERIFY_HEADER_KEY",
+      "ALBY_OAUTH_CLIENT_ID",
+      "ALBY_OAUTH_CLIENT_SECRET",
+      "ALBY_OAUTH_AUTHORIZE_URL",
+      "ALBY_API_URL",
     ]),
     // delete previous build files
     new CleanWebpackPlugin({
