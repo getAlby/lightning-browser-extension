@@ -74,11 +74,6 @@ const paymentFailedNotification = (
   if ("error" in paymentResponseData) {
     // general error
     error = paymentResponseData.error;
-  } else if (
-    // lnd payment error
-    paymentResponseData.data.payment_error
-  ) {
-    error = paymentResponseData.data.payment_error;
   }
 
   return notify({
@@ -116,8 +111,8 @@ const lnurlAuthFailedNotification = (
 };
 
 export {
-  paymentSuccessNotification,
-  paymentFailedNotification,
-  lnurlAuthSuccessNotification,
   lnurlAuthFailedNotification,
+  lnurlAuthSuccessNotification,
+  paymentFailedNotification,
+  paymentSuccessNotification,
 };

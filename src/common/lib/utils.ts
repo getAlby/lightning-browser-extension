@@ -2,10 +2,10 @@ import browser, { Runtime } from "webextension-polyfill";
 import { ABORT_PROMPT_ERROR } from "~/common/constants";
 import { getPosition as getWindowPosition } from "~/common/utils/window";
 import type {
+  DeferredPromise,
   Invoice,
   OriginData,
   OriginDataInternal,
-  DeferredPromise,
 } from "~/types";
 
 const utils = {
@@ -178,10 +178,11 @@ const utils = {
     custom_records: Invoice["custom_records"] | undefined
   ) => {
     try {
-      const hasBoostagram = custom_records && 7629169 in custom_records;
-      const boostagramDecoded = hasBoostagram
-        ? atob(custom_records[7629169])
-        : undefined;
+      let boostagramDecoded: string | undefined;
+      const boostagram = custom_records?.[7629169];
+      if (boostagram) {
+        boostagramDecoded = atob(boostagram);
+      }
       return boostagramDecoded ? JSON.parse(boostagramDecoded) : undefined;
     } catch (e) {
       console.error(e);

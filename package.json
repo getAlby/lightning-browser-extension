@@ -44,6 +44,7 @@
     "@scure/btc-signer": "^0.5.1",
     "@tailwindcss/forms": "^0.5.3",
     "@vespaiach/axios-fetch-adapter": "^0.3.0",
+    "alby-js-sdk": "^2.0.0",
     "axios": "^0.27.2",
     "bech32": "^2.0.0",
     "bolt11": "^1.4.1",
