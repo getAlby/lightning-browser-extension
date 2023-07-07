@@ -54,9 +54,6 @@
             "confirm_password": "कृपया अपने पासवर्ड की पुष्टि करें।",
             "mismatched_password": "पासवर्ड मेल नहीं खाते।"
           }
-        },
-        "errors": {
-          "create_wallet_error2": "यदि आपको सहायता चाहिए, तो कृपया support@getalby.com पर संपर्क करें"
         }
       }
     },

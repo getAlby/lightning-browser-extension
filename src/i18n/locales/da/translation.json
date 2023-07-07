@@ -55,9 +55,6 @@
             "confirm_password": "Bekræft din adgangskode.",
             "mismatched_password": "Adgangskoderne er forskellige."
           }
-        },
-        "errors": {
-          "create_wallet_error1": "Kunne ikke logge ind eller oprette en ny konto."
         }
       }
     },

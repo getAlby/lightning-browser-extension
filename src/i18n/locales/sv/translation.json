@@ -749,11 +749,6 @@
             "enter_password": "Vänligen ange ett lösenord.",
             "confirm_password": "Vänligen ange ditt lösenord."
           }
-        },
-        "email": {
-          "create": {
-            "label": "Email Address"
-          }
         }
       }
     },

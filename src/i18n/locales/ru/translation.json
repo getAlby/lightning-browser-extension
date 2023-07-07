@@ -55,9 +55,6 @@
             "confirm_password": "",
             "mismatched_password": ""
           }
-        },
-        "errors": {
-          "create_wallet_error1": ""
         }
       }
     },

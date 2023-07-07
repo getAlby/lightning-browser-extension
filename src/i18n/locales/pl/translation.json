@@ -55,9 +55,6 @@
             "confirm_password": "Proszę potwierdzić hasło.",
             "mismatched_password": "Hasła się nie zgadzają."
           }
-        },
-        "errors": {
-          "create_wallet_error1": "Błąd podczas logowanie lub tworzenia nowego konta."
         }
       }
     },

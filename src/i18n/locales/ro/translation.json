@@ -55,9 +55,6 @@
             "confirm_password": "Te rog sa confirmi parola.",
             "mismatched_password": "Parolele nu se potrivesc."
           }
-        },
-        "errors": {
-          "create_wallet_error1": "Logare sau creare de cont esuata."
         }
       }
     },

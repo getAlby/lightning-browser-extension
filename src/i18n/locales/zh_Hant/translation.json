@@ -61,9 +61,6 @@
             "confirm_password": "請確認你的密碼。",
             "mismatched_password": "密碼不匹配。"
           }
-        },
-        "errors": {
-          "create_wallet_error1": "無法登錄或創建新帳戶。"
         }
       }
     },

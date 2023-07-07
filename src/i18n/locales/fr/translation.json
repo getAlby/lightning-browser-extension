@@ -55,9 +55,6 @@
             "confirm_password": "Veuillez confirmer votre mot de passe.",
             "mismatched_password": "Les mots de passe ne correspondent pas."
           }
-        },
-        "errors": {
-          "create_wallet_error1": "Impossible de se connecter ou de créer un nouveau compte."
         }
       }
     },

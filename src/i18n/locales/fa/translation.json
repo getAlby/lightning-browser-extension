@@ -61,9 +61,6 @@
             "confirm_password": "لطفا گذرواژه خود را تایید کنید.",
             "mismatched_password": "گذرواژه مطابقت ندارد."
           }
-        },
-        "errors": {
-          "create_wallet_error1": "قادر به ورود یا ساخت حساب کاربری جدید نیست."
         }
       }
     },
