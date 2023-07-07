@@ -152,7 +152,6 @@ function AccountDetail() {
     const confirm = window
       .prompt(t("remove_secretkey.confirm", { name }))
       ?.toLowerCase();
-
     if (!confirm) return;
 
     if (confirm == accountName.toLowerCase()) {
@@ -161,7 +160,7 @@ function AccountDetail() {
       setHasMnemonic(false);
       setHasImportedNostrKey(true);
       toast.success(t("remove_secretkey.success"));
-    } else if (confirm) {
+    } else {
       toast.error(t("remove.error"));
     }
   }
