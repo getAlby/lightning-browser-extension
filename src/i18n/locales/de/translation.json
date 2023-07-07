@@ -506,11 +506,9 @@
               "nostr": "Nostr"
             },
             "title": "Sichere deinen geheimen Schlüssel",
-            "error_confirm": "Bitte bestätige, dass du eine Sicherungskopie deines geheimen Schlüssels erstellt hast.",
             "save": "Geheimschlüssel speichern",
             "button": "Geheimschlüssel sichern",
             "warning": "⚠️ Vergesse nicht, deinen geheimen Schlüssel zu sichern! Wenn du ihn nicht sicherst, kann dies dazu führen, dass du den Zugang zu deiner Nostr-Identität oder den von deinen mit diesem Schlüssel verwalteten Vermögenswerten dauerhaft verlierst.",
-            "confirm": "Ich habe den geheimen Schlüssel meines Kontos an einem privaten und sicheren Ort aufbewahrt.",
             "description1": "Zusätzlich zum Bitcoin Lightning Network ermöglicht Alby die Generierung von Schlüsseln und die Interaktion mit anderen Protokollen wie z.B.:",
             "description2": "Dein Geheimschlüssel besteht aus 12 Wörtern, mit denen du auf einem neuen Gerät oder bei Verlust des Zugangs zu deinem Konto auf deine Schlüssel zu diesen Protokollen zugreifen kannst. Schreibe ihn auf ein Blatt Papier und bewahre ihn sicher auf:"
           },
@@ -731,34 +729,23 @@
     "alby": {
       "pre_connect": {
         "email": {
-          "login": {
-            "label": "Email Adresse oder Lightning Adresse"
-          },
           "create": {
             "label": "Email Adresse"
           }
         },
-        "login_account": "Melde dich an, um dein bestehendes Alby-Konto zu verbinden.",
         "host_wallet": "Wir hosten die Lightning Wallet für dich!",
         "optional_lightning_note": {
-          "part3": ". Dies ist eine einfache Möglichkeit für jeden, dir Bitcoin über das Lightning-Netzwerk zu senden.",
           "part1": "Dein Alby-Konto enthält außerdem ein optionales",
-          "part2": "Lightning Adresse",
           "part4": "mehr erfahren"
         },
-        "create_account": "Erstelle ein neues Alby-Konto, um Bitcoin-Zahlungen zu senden und zu empfangen.",
         "optional_lightning_address": {
           "suffix": "@getalby.com",
-          "label": "Wähle deine Lightning-Adresse (optional)",
           "title": "Zahlen und Buchstaben, mindestens 4 Stellen"
         },
         "errors": {
-          "create_wallet_error": "Du konntest dich nicht anmelden oder ein neues Konto erstellen. Wenn du Hilfe benötigst, wende dich bitte an den support@getalby.com",
-          "create_wallet_error1": "Du konntest dich nicht anmelden oder ein neues Konto erstellen.",
-          "create_wallet_error2": "Wenn du Hilfe benötigst, wende dich bitte an support@getalby.com"
+          "create_wallet_error1": "Du konntest dich nicht anmelden oder ein neues Konto erstellen."
         },
         "forgot_password": "Kennwort vergessen?",
-        "title": "Dein Alby-Konto",
         "set_password": {
           "choose_password": {
             "label": "Kennwort"
@@ -783,8 +770,7 @@
       },
       "alby": {
         "title": "Alby Konto",
-        "description": "Melde dich an oder verwende dein bestehendes Alby-Konto, um im Handumdrehen mit Lightningzahlungen zu beginnen.",
-        "create_new": "Anmelden"
+        "description": "Melde dich an oder verwende dein bestehendes Alby-Konto, um im Handumdrehen mit Lightningzahlungen zu beginnen."
       }
     },
     "discover": {

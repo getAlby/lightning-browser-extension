@@ -32,8 +32,7 @@
     "choose_path": {
       "alby": {
         "title": "Alby",
-        "description": "Inscrivez-vous ou utilisez votre compte Alby existant pour commencer à utiliser les paiements éclair en un rien de temps.",
-        "create_new": "S'inscrire"
+        "description": "Inscrivez-vous ou utilisez votre compte Alby existant pour commencer à utiliser les paiements éclair en un rien de temps."
       },
       "other": {
         "title": "Autres portefeuilles",
@@ -57,34 +56,23 @@
             "mismatched_password": "Les mots de passe ne correspondent pas."
           }
         },
-        "forgot_password": "Mot de passe oublié?",
         "title": "Votre compte Alby",
-        "create_account": "Créez un nouveau compte Alby pour envoyer et recevoir des paiements en bitcoins.",
         "login_account": "Connectez-vous pour connecter votre compte Alby existant.",
-        "host_wallet": "Nous hébergeons un portefeuille Lightning pour vous !",
         "email": {
           "create": {
             "label": "Adresse e-mail"
-          },
-          "login": {
-            "label": "Adresse e-mail ou adresse Lightning"
           }
         },
         "optional_lightning_note": {
           "part1": "Votre compte Alby est également livré avec une option",
-          "part2": "adresse lightning",
-          "part3": ". C'est un moyen simple pour quiconque de vous envoyer des bitcoins sur le réseau Lightning.",
-          "part4": "apprendre encore plus"
+          "part3": ". C'est un moyen simple pour quiconque de vous envoyer des bitcoins sur le réseau Lightning."
         },
         "optional_lightning_address": {
           "label": "Choisissez votre adresse Lightning (facultatif)",
-          "suffix": "@getalby.com",
           "title": "chiffres et lettres, au moins 4 caractères"
         },
         "errors": {
-          "create_wallet_error": "Impossible de se connecter ou de créer un nouveau compte. Si vous avez besoin d'aide, veuillez contacter support@getalby.com",
-          "create_wallet_error1": "Impossible de se connecter ou de créer un nouveau compte.",
-          "create_wallet_error2": "Si vous avez besoin d'aide, veuillez contacter support@getalby.com"
+          "create_wallet_error1": "Impossible de se connecter ou de créer un nouveau compte."
         }
       }
     },

@@ -31,8 +31,7 @@
     "choose_path": {
       "alby": {
         "title": "Alby अकाउंट",
-        "description": "बिजली भुगतान के साथ जल्दी से आरंभ करने के लिए साइन अप करें या अपने मौजूदा Alby खाते का उपयोग करें.",
-        "create_new": "साइन अप करें"
+        "description": "बिजली भुगतान के साथ जल्दी से आरंभ करने के लिए साइन अप करें या अपने मौजूदा Alby खाते का उपयोग करें."
       },
       "other": {
         "title": "अन्य वॉलेट",
@@ -56,32 +55,22 @@
             "mismatched_password": "पासवर्ड मेल नहीं खाते।"
           }
         },
-        "forgot_password": "पासवर्ड भूल गए?",
         "create_account": "बिटकॉइन भुगतान भेजने और प्राप्त करने के लिए एक नया एल्बी खाता बनाएँ।",
-        "login_account": "अपने मौजूदा एल्बी खाते को जोड़ने के लिए प्रवेश करें।",
         "host_wallet": "हम आपके लिए एक Lightning वॉलेट होस्ट करते हैं!",
         "email": {
-          "create": {
-            "label": "ईमेल पता"
-          },
           "login": {
             "label": "ईमेल पता या Lightning पता"
           }
         },
         "optional_lightning_note": {
-          "part1": "आपका Alby खाता भी वैकल्पिक के साथ आता है",
           "part2": "Lightning का पता",
-          "part3": "। किसी के लिए Lightning नेटवर्क पर आपको बिटकॉइन भेजने का यह आसान तरीका है।",
           "part4": "और जानें"
         },
         "optional_lightning_address": {
-          "label": "अपना Lightning पता चुनें (वैकल्पिक)",
-          "suffix": "@getalby.com",
-          "title": "संख्याएं और अक्षर, कम से कम 4 वर्ण"
+          "suffix": "@getalby.com"
         },
         "errors": {
           "create_wallet_error": "लॉग इन करने या नया खाता बनाने में विफल। यदि आपको सहायता चाहिए, तो कृपया support@getalby.com पर संपर्क करें",
-          "create_wallet_error1": "लॉग इन करने या नया खाता बनाने में विफल।",
           "create_wallet_error2": "यदि आपको सहायता चाहिए, तो कृपया support@getalby.com पर संपर्क करें"
         }
       }

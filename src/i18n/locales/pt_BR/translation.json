@@ -388,7 +388,6 @@
             "button": "Gerar chave secreta"
           },
           "backup": {
-            "confirm": "Eu fiz o backup da minha chave secreta em um local privado e seguro",
             "save": "Salvar chave secreta",
             "button": "Fazer backup",
             "description1": "Além da rede Relâmpago do Bitcoin, a Alby permite gerar chaves e interagir com outros protocolos como:",
@@ -396,7 +395,6 @@
               "nostr": "Nostr"
             },
             "title": "Backup de sua chave secreta",
-            "error_confirm": "Por favor, confirme que você fez o backup de sua chave secreta.",
             "description2": "A chave secreta é um conjunto de 12 palavras que permitirão que você acesse suas chaves nesses protocolos em um novo dispositivo ou caso perca o acesso à sua conta. Certifique-se de anotá-la em um pedaço de papel e mantê-la segura:",
             "warning": "⚠️ Não se esqueça de fazer o backup de sua chave secreta! Não fazer o backup pode resultar na perda permanente do acesso à sua conta Nostr ou aos ativos que você gerencia com esta chave."
           },
@@ -737,7 +735,6 @@
     "choose_path": {
       "alby": {
         "description": "Crie uma conta Alby ou faça o login caso já possua uma conta conosco.",
-        "create_new": "Criar conta Alby",
         "title": "Conta Alby"
       },
       "other": {
@@ -749,7 +746,6 @@
     },
     "alby": {
       "pre_connect": {
-        "title": "Sua conta Alby",
         "set_password": {
           "errors": {
             "enter_password": "Insira uma senha.",
@@ -763,32 +759,22 @@
             "label": "Senha"
           }
         },
-        "login_account": "Acesse sua conta Alby.",
         "host_wallet": "A custódia dos seus bitcoins é por nossa conta!",
-        "create_account": "Crie uma nova conta Alby para enviar e receber pagamentos em bitcoin.",
         "email": {
           "create": {
             "label": "Endereço de e-mail"
-          },
-          "login": {
-            "label": "Endereço de E-mail ou Endereço Relâmpago"
           }
         },
         "forgot_password": "Esqueceu sua senha?",
         "optional_lightning_note": {
-          "part4": "saiba mais",
           "part3": ". É o jeito mais simples para você receber bitcoin na rede relâmpago.",
-          "part2": "endereço relâmpago",
           "part1": "Ao criar uma conta Alby, você pode escolher um"
         },
         "optional_lightning_address": {
-          "title": "números e letras, pelo menos 4 caracteres",
-          "suffix": "@getalby.com",
-          "label": "Escolha um Endereço Relâmpago (opcional)"
+          "suffix": "@getalby.com"
         },
         "errors": {
           "create_wallet_error": "Falha ao logar ou criar uma nova conta. Se precisar de ajuda, entre em contato com support@getalby.com",
-          "create_wallet_error2": "Se precisar de ajuda, entre em contato com support@getalby.com",
           "create_wallet_error1": "Falha ao fazer login ou criar uma nova conta."
         }
       }

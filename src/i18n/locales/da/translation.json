@@ -32,8 +32,7 @@
     "choose_path": {
       "alby": {
         "title": "Alby",
-        "description": "Opret dig, eller brug din eksisterende Alby-konto til hurtigt at starte med at betale via lightning.",
-        "create_new": "Opret en konto"
+        "description": "Opret dig, eller brug din eksisterende Alby-konto til hurtigt at starte med at betale via lightning."
       },
       "other": {
         "title": "Andre wallets",
@@ -57,34 +56,23 @@
             "mismatched_password": "Adgangskoderne er forskellige."
           }
         },
-        "forgot_password": "Glemt adgangskoden?",
         "title": "Din Alby-konto",
-        "create_account": "Opret en ny Alby-konto for at sende og modtage betaling med Bitcoin.",
         "login_account": "Log ind for at forbinde din eksisterende Alby-konto.",
-        "host_wallet": "Vi opretter en Lightning-wallet til dig!",
         "email": {
           "create": {
             "label": "E-mailadresse"
-          },
-          "login": {
-            "label": "E-mailadresse eller Lightning-adresse"
           }
         },
         "optional_lightning_note": {
           "part1": "Med din Alby-konto kommer muligheden for at få en",
-          "part2": "Lightning-adresse",
-          "part3": ". Dette gør det let for alle at sende dig Bitcoin via lightningnettet.",
-          "part4": "læs mere"
+          "part3": ". Dette gør det let for alle at sende dig Bitcoin via lightningnettet."
         },
         "optional_lightning_address": {
           "label": "Vælg din Lightning-adresse (valgfri)",
-          "suffix": "@getalby.com",
           "title": "tal og bogstaver, mindst 4 tegn"
         },
         "errors": {
-          "create_wallet_error": "Kunne ikke logge ind eller oprette en ny konto. Har du brug for hjælp, så kontakt support@getalby.com",
-          "create_wallet_error1": "Kunne ikke logge ind eller oprette en ny konto.",
-          "create_wallet_error2": "Har du brug for hjælp, så kontakt support@getalby.com"
+          "create_wallet_error1": "Kunne ikke logge ind eller oprette en ny konto."
         }
       }
     },

@@ -617,7 +617,6 @@
     "choose_path": {
       "alby": {
         "title": "Cuenta de Alby",
-        "create_new": "Regístrate",
         "description": "Regístrate o usa tú cuenta de Alby existente para empezar a realizar pagos relámpago en un abrir y cerrar de ojos."
       },
       "other": {
@@ -699,17 +698,12 @@
     "alby": {
       "pre_connect": {
         "errors": {
-          "create_wallet_error1": "Error al iniciar sesión o crear una cuenta nueva.",
-          "create_wallet_error2": "Si necesita ayuda, póngase en contacto con support@getalby.com",
-          "create_wallet_error": "Error al iniciar sesión o crear una cuenta nueva. Si necesita ayuda, por favor contacte support@getalby.com"
+          "create_wallet_error2": "Si necesita ayuda, póngase en contacto con support@getalby.com"
         },
         "forgot_password": "¿Olvidó su contraseña?",
-        "create_account": "Crea una nueva Cuenta de Alby para enviar y recibir pagos en bitcoin.",
         "login_account": "Inicia sesión para conectar tú cuenta de Alby existente.",
         "optional_lightning_note": {
-          "part2": "dirección lightning",
           "part4": "aprende más",
-          "part3": ". Este es un modo simple para que cualquiera te envie Bitcoin en la red lightning.",
           "part1": "Tú cuenta de Alby también viene con una opción"
         },
         "set_password": {
@@ -725,19 +719,13 @@
             "mismatched_password": "Las contraseñas no coinciden."
           }
         },
-        "title": "Tu cuenta de Alby",
         "optional_lightning_address": {
           "label": "Elige tu Dirección Lightning (opcional)",
-          "title": "números y letras, al menos 4 caracteres",
           "suffix": "@getalby.com"
         },
-        "host_wallet": "¡Nosotros alojamos una billetera Lightning por usted!",
         "email": {
           "create": {
             "label": "Dirección de Correo Electrónico"
-          },
-          "login": {
-            "label": "Dirección de Correo Electrónico o Dirección Lightning"
           }
         }
       }

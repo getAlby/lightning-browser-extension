@@ -398,7 +398,6 @@
           },
           "backup": {
             "title": "Säkerhetskopiera din hemliga nyckel",
-            "confirm": "Jag har säkerhetskopierat mitt kontos hemliga nyckel på en privat och säker plats",
             "error_confirm": "Bekräfta att du har säkerhetskopierat din hemliga nyckel.",
             "save": "Spara hemlig nyckel",
             "button": "Backa upp hemlig nyckel",
@@ -728,8 +727,7 @@
     "choose_path": {
       "alby": {
         "title": "Alby Konto",
-        "description": "Registrera dig eller använd ditt befintliga Alby-konto för att komma igång med lightning betalningar på nolltid.",
-        "create_new": "Registrera dig"
+        "description": "Registrera dig eller använd ditt befintliga Alby-konto för att komma igång med lightning betalningar på nolltid."
       },
       "other": {
         "title": "Annan Plånbok",
@@ -754,32 +752,21 @@
           }
         },
         "optional_lightning_address": {
-          "suffix": "@getalby.com",
-          "label": "Välj din lightning Address (frivilligt)",
-          "title": "siffror och bokstäver, minst 4 tecken"
+          "label": "Välj din lightning Address (frivilligt)"
         },
         "optional_lightning_note": {
           "part2": "lightning address",
-          "part3": ". Detta är ett enkelt sätt för vem som helst att skicka bitcoin till dig på lightning nätverket.",
-          "part4": "lär dig mer",
-          "part1": "Ditt Alby-konto kommer också med alternativ"
+          "part4": "lär dig mer"
         },
         "errors": {
           "create_wallet_error1": "Det gick inte att logga in eller skapa ett nytt konto.",
-          "create_wallet_error2": "Om du behöver hjälp, kontakta support@getalby.com",
           "create_wallet_error": "Det gick inte att logga in eller skapa ett nytt konto. Om du behöver hjälp, kontakta support@getalby.com"
         },
-        "forgot_password": "Glömt ditt lösenord?",
         "title": "Ditt Alby-konto",
-        "create_account": "Skapa ett nytt Alby-konto för att skicka och ta emot bitcoinbetalningar.",
         "login_account": "Logga in för att ansluta ditt befintliga Alby-konto.",
-        "host_wallet": "Vi tillhandahåller en Lightning Plånbok för dig!",
         "email": {
           "create": {
             "label": "Email Address"
-          },
-          "login": {
-            "label": "Email Address eller Lightning Address"
           }
         }
       }

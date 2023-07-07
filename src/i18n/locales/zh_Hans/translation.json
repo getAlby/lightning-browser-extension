@@ -681,7 +681,6 @@
       },
       "alby": {
         "description": "注册或使用你现有的Alby帐户，立即开始闪电支付。",
-        "create_new": "注册",
         "title": "Alby帐户"
       }
     },
@@ -717,20 +716,14 @@
     },
     "alby": {
       "pre_connect": {
-        "create_account": "创建一个新的Alby帐户以发送和接收比特币付款。",
         "title": "你的Alby帐户",
-        "login_account": "登录以连接你现有的Alby帐户。",
         "errors": {
           "create_wallet_error1": "登录或创建新帐户失败。",
-          "create_wallet_error2": "如果你需要帮助，请联系support@getalby.com",
           "create_wallet_error": "登录或创建新帐户失败。如果你需要帮助，请联系 support@getalby.com"
         },
-        "forgot_password": "忘记密码？",
         "host_wallet": "我们为你托管的闪电钱包！",
         "optional_lightning_address": {
-          "label": "选择你的闪电地址（可选）",
-          "suffix": "@getalby.com",
-          "title": "数字和字母，至少4个字符"
+          "suffix": "@getalby.com"
         },
         "set_password": {
           "choose_password": {
@@ -746,17 +739,12 @@
           }
         },
         "email": {
-          "create": {
-            "label": "电子邮箱"
-          },
           "login": {
             "label": "电子邮件地址或闪电地址"
           }
         },
         "optional_lightning_note": {
-          "part1": "你的Alby帐户还附带一个可选的",
           "part2": "闪电地址",
-          "part3": "。这是任何人都可以轻松地在闪电网络上向你发送比特币的一个方法。",
           "part4": "了解更多"
         }
       }

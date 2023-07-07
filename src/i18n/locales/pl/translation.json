@@ -32,8 +32,7 @@
     "choose_path": {
       "alby": {
         "title": "Konto Alby",
-        "description": "Zarejestruj się lub użyj istniejącego konta Alby aby zacząć z płatnościami lightning w mgnieniu oka.",
-        "create_new": "Zarejestruj się"
+        "description": "Zarejestruj się lub użyj istniejącego konta Alby aby zacząć z płatnościami lightning w mgnieniu oka."
       },
       "other": {
         "title": "Inne portfele",
@@ -57,34 +56,23 @@
             "mismatched_password": "Hasła się nie zgadzają."
           }
         },
-        "forgot_password": "Nie pamiętasz hasła?",
         "title": "Twoje konto Alby",
-        "create_account": "Utwórz nowe konto Alby aby wysyłać i otrzymywać płatności w bitcoinie.",
         "login_account": "Zaloguj się aby połączyć swoje konto Alby.",
-        "host_wallet": "Prowadzimy portfel Lightning dla Ciebie!",
         "email": {
           "create": {
             "label": "Adres email"
-          },
-          "login": {
-            "label": "Adres email lub adres Lightning"
           }
         },
         "optional_lightning_note": {
           "part1": "Twoje konto Alby zawiera opcjonalny",
-          "part2": "adres lightning",
-          "part3": ". Jest to prosty sposób aby każdy mógł wysłać Ci bitcoiny w sieci lightning.",
-          "part4": "dowiedz się więcej"
+          "part3": ". Jest to prosty sposób aby każdy mógł wysłać Ci bitcoiny w sieci lightning."
         },
         "optional_lightning_address": {
           "label": "Wybierz swój adres Lightning (opcjonalny)",
-          "suffix": "@getalby.com",
           "title": "cyfry i litery, co najmniej 4 znaki"
         },
         "errors": {
-          "create_wallet_error": "Błąd podczas logowanie lub tworzenia nowego konta. Jeśli potrzebujesz pomocy, skontaktuj się z support@getalby.com",
-          "create_wallet_error1": "Błąd podczas logowanie lub tworzenia nowego konta.",
-          "create_wallet_error2": "Jeśli potrzebujesz pomocy, skontaktuj się z support@getalby.com"
+          "create_wallet_error1": "Błąd podczas logowanie lub tworzenia nowego konta."
         }
       }
     },

@@ -32,8 +32,7 @@
     "choose_path": {
       "alby": {
         "title": "",
-        "description": "",
-        "create_new": ""
+        "description": ""
       },
       "other": {
         "title": "",
@@ -57,34 +56,23 @@
             "mismatched_password": ""
           }
         },
-        "forgot_password": "",
         "title": "",
-        "create_account": "",
         "login_account": "",
-        "host_wallet": "",
         "email": {
           "create": {
-            "label": ""
-          },
-          "login": {
             "label": ""
           }
         },
         "optional_lightning_note": {
           "part1": "",
-          "part2": "",
-          "part3": "",
-          "part4": ""
+          "part3": ""
         },
         "optional_lightning_address": {
           "label": "",
-          "suffix": "",
           "title": ""
         },
         "errors": {
-          "create_wallet_error": "",
-          "create_wallet_error1": "",
-          "create_wallet_error2": ""
+          "create_wallet_error1": ""
         }
       }
     },

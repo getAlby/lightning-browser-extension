@@ -38,8 +38,7 @@
     "choose_path": {
       "alby": {
         "title": "Alby帳戶",
-        "description": "註冊或使用你現有的 Alby 帳戶立即開始閃電支付。",
-        "create_new": "註冊"
+        "description": "註冊或使用你現有的 Alby 帳戶立即開始閃電支付。"
       },
       "other": {
         "title": "其他錢包",
@@ -63,34 +62,23 @@
             "mismatched_password": "密碼不匹配。"
           }
         },
-        "forgot_password": "忘記密碼？",
         "title": "你的Alby帳戶",
-        "create_account": "創建一個新的Alby帳戶來發送和接收比特幣付款。",
         "login_account": "登錄以連接你現有的Alby帳戶。",
-        "host_wallet": "我們為你託管閃電錢包！",
         "email": {
           "create": {
             "label": "電子郵件地址"
-          },
-          "login": {
-            "label": "電子郵件地址或閃電地址"
           }
         },
         "optional_lightning_note": {
           "part1": "你的 Alby 帳戶還附帶一個可選的",
-          "part2": "閃電地址",
-          "part3": "。這是任何人輕鬆地在閃電網路上向你發送比特幣的一個方法。",
-          "part4": "瞭解更多"
+          "part3": "。這是任何人輕鬆地在閃電網路上向你發送比特幣的一個方法。"
         },
         "optional_lightning_address": {
           "label": "選擇你的閃電位址（可選）",
-          "suffix": "@getalby.com",
           "title": "數字和字母，至少 4 個字符"
         },
         "errors": {
-          "create_wallet_error": "無法登錄或創建新帳戶。如果你需要幫助，請聯繫 support@getalby.com",
-          "create_wallet_error1": "無法登錄或創建新帳戶。",
-          "create_wallet_error2": "如果你需要幫助，請聯繫 support@getalby.com"
+          "create_wallet_error1": "無法登錄或創建新帳戶。"
         }
       }
     },

@@ -618,7 +618,6 @@
         "connect": "Připojit"
       },
       "alby": {
-        "create_new": "Vytvoření účtu",
         "title": "Alby",
         "description": "Zaregistrujte se, nebo se přihlašte ke svému existujícímu Alby účtu a začněte využívat lightning platby."
       }
@@ -626,24 +625,17 @@
     "alby": {
       "pre_connect": {
         "optional_lightning_note": {
-          "part4": "dozvědět se více",
           "part3": ". Jedná se o jednoduchý způsob jak vám kdokoliv může zaslat bitcoin přes síť lightning.",
-          "part1": "Váš Alby účet poskytuje také volitelnou",
           "part2": "lightning adresu"
         },
         "optional_lightning_address": {
-          "label": "Vyberte si svou Lightning adresu (volitelné)",
-          "suffix": "@getalby.com",
-          "title": "čísla a písmena, minimálně 4 znaky"
+          "suffix": "@getalby.com"
         },
         "errors": {
           "create_wallet_error1": "Přihlášení nebo vytvoření nového účtu se nezdařilo.",
-          "create_wallet_error2": "Pokud potřebujete pomoct, prosím kontaktujte support@getalby.com",
           "create_wallet_error": "Přihlášení nebo vytvoření nového účtu se nezdařilo. Pokud potřebujete pomoc, kontaktujte support@getalby.com"
         },
-        "forgot_password": "Zapomněli jste heslo?",
         "title": "Váš účet Alby",
-        "create_account": "Vytvořte nový Alby účet pro zasílání a příjímání bitcoin plateb.",
         "login_account": "Přihlašte se pro připojení k existujícímu učtu Alby.",
         "set_password": {
           "choose_password": {
@@ -658,13 +650,9 @@
             "mismatched_password": "Hesla se neshodují."
           }
         },
-        "host_wallet": "Provozujeme pro vás Lightning peněženku!",
         "email": {
           "create": {
             "label": "Emailová adresa"
-          },
-          "login": {
-            "label": "Emailová adresa nebo adresa Lightning"
           }
         }
       }
