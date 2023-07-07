@@ -18,8 +18,8 @@ function Send() {
   const { t } = useTranslation("translation", { keyPrefix: "send" });
   const { t: tCommon } = useTranslation("common");
   const location = useLocation();
-
-  const [invoice, setInvoice] = useState(location.state?.decodedText || "");
+  // location.state used to access the decoded QR coming from ScanQRCode screen
+  const [invoice, setInvoice] = useState(location.state?.decodedQR || "");
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 

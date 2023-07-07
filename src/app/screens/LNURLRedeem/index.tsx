@@ -9,15 +9,16 @@ import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import QrcodeAdornment from "~/app/components/QrcodeAdornment";
+import { extractLightningTagData } from "~/app/utils";
 import lnurlLib from "~/common/lib/lnurl";
 import { isLNURLDetailsError } from "~/common/utils/typeHelpers";
 
 function LNURLRedeem() {
   const { t } = useTranslation("translation", { keyPrefix: "lnurlredeem" });
   const location = useLocation();
-
-  const [lnurlwithdraw, setlnurlwithdraw] = useState(
-    location.state?.decodedText || ""
+  // location.state used to access the decoded QR coming from ScanQRCode screen
+  const [lnurlwithdraw, setLnurlwithdraw] = useState(
+    location.state?.decodedQR || ""
   );
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -76,14 +77,16 @@ function LNURLRedeem() {
         <Container justifyBetween maxWidth="sm">
           <div className="pt-4">
             <TextField
-              id="invoice"
+              id="lnurlwithdraw"
               label={t("input.label")}
               value={lnurlwithdraw}
               placeholder={t("input.placeholder")}
               disabled={loading}
               autoFocus
               onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                setlnurlwithdraw(event.target.value.trim())
+                setLnurlwithdraw(
+                  extractLightningTagData(event.target.value.trim())
+                )
               }
               endAdornment={<QrcodeAdornment route="lnurlRedeem" />}
             />

@@ -18,7 +18,13 @@ export default function ScanQRCode() {
         title={t("title")}
         headerRight={
           <IconButton
-            onClick={() => navigate(-1)}
+            onClick={() =>
+              navigate(
+                `/${route}`,
+
+                { replace: true }
+              )
+            }
             icon={<CrossIcon className="w-4 h-4" />}
           />
         }
@@ -31,7 +37,7 @@ export default function ScanQRCode() {
               navigate(
                 `/${route}`,
 
-                { state: { decodedText: decodedText }, replace: true }
+                { state: { decodedQR: decodedText }, replace: true }
               );
             }
           }}
