@@ -127,3 +127,7 @@ export default interface Connector {
     args: Record<string, unknown>
   ): Promise<{ data: unknown }>;
 }
+
+export function flattenRequestMethods(methods: string[]) {
+  return methods.map((method) => `request.${method}`);
+}

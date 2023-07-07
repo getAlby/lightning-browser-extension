@@ -12,6 +12,7 @@ import Connector, {
   ConnectorInvoice,
   ConnectPeerArgs,
   ConnectPeerResponse,
+  flattenRequestMethods,
   GetBalanceResponse,
   GetInfoResponse,
   GetInvoicesResponse,
@@ -168,7 +169,7 @@ class Lnd implements Connector {
       "sendPayment",
       "signMessage",
       "getBalance",
-      ...Object.keys(methods).map((i) => `request.${i}`),
+      ...flattenRequestMethods(Object.keys(methods)),
     ];
   }
 

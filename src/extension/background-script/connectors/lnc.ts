@@ -15,6 +15,7 @@ import Connector, {
   CheckPaymentResponse,
   ConnectorInvoice,
   ConnectPeerResponse,
+  flattenRequestMethods,
   GetBalanceResponse,
   GetInfoResponse,
   GetInvoicesResponse,
@@ -195,7 +196,7 @@ class Lnc implements Connector {
       "sendPayment",
       "signMessage",
       "getBalance",
-      ...Object.keys(methods).map((i) => `request.${i}`),
+      ...flattenRequestMethods(Object.keys(methods)),
     ];
   }
 
