@@ -624,9 +624,6 @@
     },
     "alby": {
       "pre_connect": {
-        "errors": {
-          "create_wallet_error1": "Přihlášení nebo vytvoření nového účtu se nezdařilo."
-        },
         "set_password": {
           "choose_password": {
             "label": "Heslo"

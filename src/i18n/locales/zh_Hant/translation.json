@@ -62,9 +62,6 @@
             "mismatched_password": "密碼不匹配。"
           }
         },
-        "optional_lightning_note": {
-          "part1": "你的 Alby 帳戶還附帶一個可選的"
-        },
         "errors": {
           "create_wallet_error1": "無法登錄或創建新帳戶。"
         }

@@ -62,9 +62,6 @@
             "mismatched_password": "گذرواژه مطابقت ندارد."
           }
         },
-        "optional_lightning_note": {
-          "part1": "همراه حساب کاربریتان یک آدرس لایتنینگ هم هست"
-        },
         "errors": {
           "create_wallet_error1": "قادر به ورود یا ساخت حساب کاربری جدید نیست."
         }

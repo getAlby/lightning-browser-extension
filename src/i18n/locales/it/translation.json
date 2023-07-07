@@ -606,7 +606,6 @@
     },
     "alby": {
       "pre_connect": {
-        "title": "Il tuo account Alby",
         "set_password": {
           "choose_password": {
             "label": "Password"

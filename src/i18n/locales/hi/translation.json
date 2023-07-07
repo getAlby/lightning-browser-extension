@@ -55,9 +55,6 @@
             "mismatched_password": "पासवर्ड मेल नहीं खाते।"
           }
         },
-        "optional_lightning_note": {
-          "part2": "Lightning का पता"
-        },
         "errors": {
           "create_wallet_error2": "यदि आपको सहायता चाहिए, तो कृपया support@getalby.com पर संपर्क करें"
         }

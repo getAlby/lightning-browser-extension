@@ -56,9 +56,6 @@
             "mismatched_password": "पासवर्ड जुळत नाहीत."
           }
         },
-        "optional_lightning_note": {
-          "part1": "आपले Alby खाते देखील वैकल्पिक सह येते"
-        },
         "errors": {
           "create_wallet_error1": "लॉग इन करण्यात किंवा नवीन खाते तयार करण्यात अपयशी ठरले."
         }

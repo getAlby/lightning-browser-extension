@@ -56,9 +56,6 @@
             "mismatched_password": "Hasła się nie zgadzają."
           }
         },
-        "optional_lightning_note": {
-          "part1": "Twoje konto Alby zawiera opcjonalny"
-        },
         "errors": {
           "create_wallet_error1": "Błąd podczas logowanie lub tworzenia nowego konta."
         }

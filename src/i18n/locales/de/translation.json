@@ -734,7 +734,6 @@
     },
     "alby": {
       "pre_connect": {
-        "forgot_password": "Kennwort vergessen?",
         "set_password": {
           "choose_password": {
             "label": "Kennwort"

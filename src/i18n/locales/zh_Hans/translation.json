@@ -716,7 +716,6 @@
     },
     "alby": {
       "pre_connect": {
-        "host_wallet": "我们为你托管的闪电钱包！",
         "set_password": {
           "choose_password": {
             "label": "密码"

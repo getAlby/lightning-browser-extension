@@ -697,9 +697,6 @@
     },
     "alby": {
       "pre_connect": {
-        "optional_lightning_note": {
-          "part4": "aprende más"
-        },
         "set_password": {
           "choose_password": {
             "label": "Contraseña"

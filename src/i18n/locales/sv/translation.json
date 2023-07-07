@@ -750,9 +750,6 @@
             "confirm_password": "Vänligen ange ditt lösenord."
           }
         },
-        "errors": {
-          "create_wallet_error1": "Det gick inte att logga in eller skapa ett nytt konto."
-        },
         "email": {
           "create": {
             "label": "Email Address"
