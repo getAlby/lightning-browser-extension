@@ -398,7 +398,6 @@
           },
           "backup": {
             "title": "Säkerhetskopiera din hemliga nyckel",
-            "error_confirm": "Bekräfta att du har säkerhetskopierat din hemliga nyckel.",
             "save": "Spara hemlig nyckel",
             "button": "Backa upp hemlig nyckel",
             "description1": "Förutom Bitcoin Lightning Network låter Alby dig generera nycklar och interagera med andra protokoll som:",
@@ -751,19 +750,13 @@
             "confirm_password": "Vänligen ange ditt lösenord."
           }
         },
-        "optional_lightning_address": {
-          "label": "Välj din lightning Address (frivilligt)"
-        },
         "optional_lightning_note": {
-          "part2": "lightning address",
-          "part4": "lär dig mer"
+          "part2": "lightning address"
         },
         "errors": {
-          "create_wallet_error1": "Det gick inte att logga in eller skapa ett nytt konto.",
-          "create_wallet_error": "Det gick inte att logga in eller skapa ett nytt konto. Om du behöver hjälp, kontakta support@getalby.com"
+          "create_wallet_error1": "Det gick inte att logga in eller skapa ett nytt konto."
         },
         "title": "Ditt Alby-konto",
-        "login_account": "Logga in för att ansluta ditt befintliga Alby-konto.",
         "email": {
           "create": {
             "label": "Email Address"

@@ -56,20 +56,12 @@
             "mismatched_password": "Les mots de passe ne correspondent pas."
           }
         },
-        "title": "Votre compte Alby",
         "login_account": "Connectez-vous pour connecter votre compte Alby existant.",
-        "email": {
-          "create": {
-            "label": "Adresse e-mail"
-          }
-        },
         "optional_lightning_note": {
-          "part1": "Votre compte Alby est également livré avec une option",
-          "part3": ". C'est un moyen simple pour quiconque de vous envoyer des bitcoins sur le réseau Lightning."
+          "part1": "Votre compte Alby est également livré avec une option"
         },
         "optional_lightning_address": {
-          "label": "Choisissez votre adresse Lightning (facultatif)",
-          "title": "chiffres et lettres, au moins 4 caractères"
+          "label": "Choisissez votre adresse Lightning (facultatif)"
         },
         "errors": {
           "create_wallet_error1": "Impossible de se connecter ou de créer un nouveau compte."

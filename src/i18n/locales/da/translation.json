@@ -56,20 +56,12 @@
             "mismatched_password": "Adgangskoderne er forskellige."
           }
         },
-        "title": "Din Alby-konto",
         "login_account": "Log ind for at forbinde din eksisterende Alby-konto.",
-        "email": {
-          "create": {
-            "label": "E-mailadresse"
-          }
-        },
         "optional_lightning_note": {
-          "part1": "Med din Alby-konto kommer muligheden for at få en",
-          "part3": ". Dette gør det let for alle at sende dig Bitcoin via lightningnettet."
+          "part1": "Med din Alby-konto kommer muligheden for at få en"
         },
         "optional_lightning_address": {
-          "label": "Vælg din Lightning-adresse (valgfri)",
-          "title": "tal og bogstaver, mindst 4 tegn"
+          "label": "Vælg din Lightning-adresse (valgfri)"
         },
         "errors": {
           "create_wallet_error1": "Kunne ikke logge ind eller oprette en ny konto."

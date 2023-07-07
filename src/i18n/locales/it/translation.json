@@ -606,17 +606,10 @@
     },
     "alby": {
       "pre_connect": {
-        "login_account": "Accedi per connettere il tuo account Alby esistente.",
         "optional_lightning_note": {
-          "part3": ". Si tratta di un semplice modo per fare in modo che chiunque possa inviarti bitcoin sulla rete lightning.",
-          "part2": "Indirizzo Lightning"
+          "part3": ". Si tratta di un semplice modo per fare in modo che chiunque possa inviarti bitcoin sulla rete lightning."
         },
         "title": "Il tuo account Alby",
-        "email": {
-          "create": {
-            "label": "Indirizzo email"
-          }
-        },
         "set_password": {
           "choose_password": {
             "label": "Password"
@@ -630,12 +623,8 @@
             "mismatched_password": "Le password non corrispondono."
           }
         },
-        "optional_lightning_address": {
-          "suffix": "@getalby.com"
-        },
         "errors": {
-          "create_wallet_error1": "Impossibile accedere o creare un nuovo account.",
-          "create_wallet_error": "Impossibile accedere o creare un nuovo account. Se hai bisogno di aiuto, contatta support@getalby.com"
+          "create_wallet_error1": "Impossibile accedere o creare un nuovo account."
         }
       }
     },

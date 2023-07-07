@@ -734,12 +734,8 @@
     },
     "alby": {
       "pre_connect": {
-        "host_wallet": "Wir hosten die Lightning Wallet für dich!",
         "optional_lightning_note": {
           "part4": "mehr erfahren"
-        },
-        "optional_lightning_address": {
-          "title": "Zahlen und Buchstaben, mindestens 4 Stellen"
         },
         "forgot_password": "Kennwort vergessen?",
         "set_password": {

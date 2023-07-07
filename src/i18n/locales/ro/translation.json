@@ -56,20 +56,12 @@
             "mismatched_password": "Parolele nu se potrivesc."
           }
         },
-        "title": "Contul tau Alby",
         "login_account": "Logheaza-te pentru a conecta contul tau Alby existent.",
-        "email": {
-          "create": {
-            "label": "Adresa de e-mail"
-          }
-        },
         "optional_lightning_note": {
-          "part1": "Contul tau Alby vine si cu o optiune",
-          "part3": ". Aceasta este o metoda simpla pentru ca oricine sa iti poata trimite bitcoin prin reteaua Lightning."
+          "part1": "Contul tau Alby vine si cu o optiune"
         },
         "optional_lightning_address": {
-          "label": "Alege adresa ta Lightning (optional)",
-          "title": "cifre si litere, minimum 4 caractere"
+          "label": "Alege adresa ta Lightning (optional)"
         },
         "errors": {
           "create_wallet_error1": "Logare sau creare de cont esuata."

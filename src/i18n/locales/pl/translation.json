@@ -56,20 +56,12 @@
             "mismatched_password": "Hasła się nie zgadzają."
           }
         },
-        "title": "Twoje konto Alby",
         "login_account": "Zaloguj się aby połączyć swoje konto Alby.",
-        "email": {
-          "create": {
-            "label": "Adres email"
-          }
-        },
         "optional_lightning_note": {
-          "part1": "Twoje konto Alby zawiera opcjonalny",
-          "part3": ". Jest to prosty sposób aby każdy mógł wysłać Ci bitcoiny w sieci lightning."
+          "part1": "Twoje konto Alby zawiera opcjonalny"
         },
         "optional_lightning_address": {
-          "label": "Wybierz swój adres Lightning (opcjonalny)",
-          "title": "cyfry i litery, co najmniej 4 znaki"
+          "label": "Wybierz swój adres Lightning (opcjonalny)"
         },
         "errors": {
           "create_wallet_error1": "Błąd podczas logowanie lub tworzenia nowego konta."

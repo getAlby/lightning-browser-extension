@@ -55,22 +55,14 @@
             "mismatched_password": "पासवर्ड मेल नहीं खाते।"
           }
         },
-        "create_account": "बिटकॉइन भुगतान भेजने और प्राप्त करने के लिए एक नया एल्बी खाता बनाएँ।",
         "host_wallet": "हम आपके लिए एक Lightning वॉलेट होस्ट करते हैं!",
-        "email": {
-          "login": {
-            "label": "ईमेल पता या Lightning पता"
-          }
-        },
         "optional_lightning_note": {
-          "part2": "Lightning का पता",
-          "part4": "और जानें"
+          "part2": "Lightning का पता"
         },
         "optional_lightning_address": {
           "suffix": "@getalby.com"
         },
         "errors": {
-          "create_wallet_error": "लॉग इन करने या नया खाता बनाने में विफल। यदि आपको सहायता चाहिए, तो कृपया support@getalby.com पर संपर्क करें",
           "create_wallet_error2": "यदि आपको सहायता चाहिए, तो कृपया support@getalby.com पर संपर्क करें"
         }
       }

@@ -625,18 +625,12 @@
     "alby": {
       "pre_connect": {
         "optional_lightning_note": {
-          "part3": ". Jedná se o jednoduchý způsob jak vám kdokoliv může zaslat bitcoin přes síť lightning.",
           "part2": "lightning adresu"
         },
-        "optional_lightning_address": {
-          "suffix": "@getalby.com"
-        },
         "errors": {
-          "create_wallet_error1": "Přihlášení nebo vytvoření nového účtu se nezdařilo.",
-          "create_wallet_error": "Přihlášení nebo vytvoření nového účtu se nezdařilo. Pokud potřebujete pomoc, kontaktujte support@getalby.com"
+          "create_wallet_error1": "Přihlášení nebo vytvoření nového účtu se nezdařilo."
         },
         "title": "Váš účet Alby",
-        "login_account": "Přihlašte se pro připojení k existujícímu učtu Alby.",
         "set_password": {
           "choose_password": {
             "label": "Heslo"
@@ -648,11 +642,6 @@
             "enter_password": "Prosím zadejte heslo.",
             "confirm_password": "Prosím potvrďte své heslo.",
             "mismatched_password": "Hesla se neshodují."
-          }
-        },
-        "email": {
-          "create": {
-            "label": "Emailová adresa"
           }
         }
       }

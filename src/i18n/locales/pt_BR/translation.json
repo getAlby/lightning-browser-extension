@@ -759,22 +759,18 @@
             "label": "Senha"
           }
         },
-        "host_wallet": "A custódia dos seus bitcoins é por nossa conta!",
         "email": {
           "create": {
             "label": "Endereço de e-mail"
           }
         },
-        "forgot_password": "Esqueceu sua senha?",
         "optional_lightning_note": {
-          "part3": ". É o jeito mais simples para você receber bitcoin na rede relâmpago.",
-          "part1": "Ao criar uma conta Alby, você pode escolher um"
+          "part3": ". É o jeito mais simples para você receber bitcoin na rede relâmpago."
         },
         "optional_lightning_address": {
           "suffix": "@getalby.com"
         },
         "errors": {
-          "create_wallet_error": "Falha ao logar ou criar uma nova conta. Se precisar de ajuda, entre em contato com support@getalby.com",
           "create_wallet_error1": "Falha ao fazer login ou criar uma nova conta."
         }
       }

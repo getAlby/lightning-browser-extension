@@ -697,14 +697,9 @@
     },
     "alby": {
       "pre_connect": {
-        "errors": {
-          "create_wallet_error2": "Si necesita ayuda, póngase en contacto con support@getalby.com"
-        },
         "forgot_password": "¿Olvidó su contraseña?",
-        "login_account": "Inicia sesión para conectar tú cuenta de Alby existente.",
         "optional_lightning_note": {
-          "part4": "aprende más",
-          "part1": "Tú cuenta de Alby también viene con una opción"
+          "part4": "aprende más"
         },
         "set_password": {
           "choose_password": {
@@ -720,13 +715,7 @@
           }
         },
         "optional_lightning_address": {
-          "label": "Elige tu Dirección Lightning (opcional)",
           "suffix": "@getalby.com"
-        },
-        "email": {
-          "create": {
-            "label": "Dirección de Correo Electrónico"
-          }
         }
       }
     },

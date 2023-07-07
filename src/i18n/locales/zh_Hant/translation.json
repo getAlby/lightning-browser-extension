@@ -62,20 +62,12 @@
             "mismatched_password": "密碼不匹配。"
           }
         },
-        "title": "你的Alby帳戶",
         "login_account": "登錄以連接你現有的Alby帳戶。",
-        "email": {
-          "create": {
-            "label": "電子郵件地址"
-          }
-        },
         "optional_lightning_note": {
-          "part1": "你的 Alby 帳戶還附帶一個可選的",
-          "part3": "。這是任何人輕鬆地在閃電網路上向你發送比特幣的一個方法。"
+          "part1": "你的 Alby 帳戶還附帶一個可選的"
         },
         "optional_lightning_address": {
-          "label": "選擇你的閃電位址（可選）",
-          "title": "數字和字母，至少 4 個字符"
+          "label": "選擇你的閃電位址（可選）"
         },
         "errors": {
           "create_wallet_error1": "無法登錄或創建新帳戶。"

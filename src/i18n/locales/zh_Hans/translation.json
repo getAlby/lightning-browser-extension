@@ -716,15 +716,10 @@
     },
     "alby": {
       "pre_connect": {
-        "title": "你的Alby帐户",
         "errors": {
-          "create_wallet_error1": "登录或创建新帐户失败。",
-          "create_wallet_error": "登录或创建新帐户失败。如果你需要帮助，请联系 support@getalby.com"
+          "create_wallet_error1": "登录或创建新帐户失败。"
         },
         "host_wallet": "我们为你托管的闪电钱包！",
-        "optional_lightning_address": {
-          "suffix": "@getalby.com"
-        },
         "set_password": {
           "choose_password": {
             "label": "密码"
@@ -738,14 +733,8 @@
             "mismatched_password": "密码不匹配。"
           }
         },
-        "email": {
-          "login": {
-            "label": "电子邮件地址或闪电地址"
-          }
-        },
         "optional_lightning_note": {
-          "part2": "闪电地址",
-          "part4": "了解更多"
+          "part2": "闪电地址"
         }
       }
     },
