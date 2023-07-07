@@ -606,9 +606,6 @@
     },
     "alby": {
       "pre_connect": {
-        "optional_lightning_note": {
-          "part3": ". Si tratta di un semplice modo per fare in modo che chiunque possa inviarti bitcoin sulla rete lightning."
-        },
         "title": "Il tuo account Alby",
         "set_password": {
           "choose_password": {
@@ -622,9 +619,6 @@
             "confirm_password": "Si prega di confermare la password.",
             "mismatched_password": "Le password non corrispondono."
           }
-        },
-        "errors": {
-          "create_wallet_error1": "Impossibile accedere o creare un nuovo account."
         }
       }
     },

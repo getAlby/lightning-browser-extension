@@ -56,12 +56,8 @@
             "mismatched_password": "Hasła się nie zgadzają."
           }
         },
-        "login_account": "Zaloguj się aby połączyć swoje konto Alby.",
         "optional_lightning_note": {
           "part1": "Twoje konto Alby zawiera opcjonalny"
-        },
-        "optional_lightning_address": {
-          "label": "Wybierz swój adres Lightning (opcjonalny)"
         },
         "errors": {
           "create_wallet_error1": "Błąd podczas logowanie lub tworzenia nowego konta."

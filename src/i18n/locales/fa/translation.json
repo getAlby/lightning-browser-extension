@@ -62,12 +62,8 @@
             "mismatched_password": "گذرواژه مطابقت ندارد."
           }
         },
-        "login_account": "برای اتصال به حساب کاربری البی موجود خود، وارد شوید.",
         "optional_lightning_note": {
           "part1": "همراه حساب کاربریتان یک آدرس لایتنینگ هم هست"
-        },
-        "optional_lightning_address": {
-          "label": "آدرس لایتنینگ خود را انتخاب کنید(اختیاری)"
         },
         "errors": {
           "create_wallet_error1": "قادر به ورود یا ساخت حساب کاربری جدید نیست."

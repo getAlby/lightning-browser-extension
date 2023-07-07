@@ -697,7 +697,6 @@
     },
     "alby": {
       "pre_connect": {
-        "forgot_password": "¿Olvidó su contraseña?",
         "optional_lightning_note": {
           "part4": "aprende más"
         },
@@ -713,9 +712,6 @@
             "confirm_password": "Por favor, confirme su contraseña.",
             "mismatched_password": "Las contraseñas no coinciden."
           }
-        },
-        "optional_lightning_address": {
-          "suffix": "@getalby.com"
         }
       }
     },

@@ -624,13 +624,9 @@
     },
     "alby": {
       "pre_connect": {
-        "optional_lightning_note": {
-          "part2": "lightning adresu"
-        },
         "errors": {
           "create_wallet_error1": "Přihlášení nebo vytvoření nového účtu se nezdařilo."
         },
-        "title": "Váš účet Alby",
         "set_password": {
           "choose_password": {
             "label": "Heslo"

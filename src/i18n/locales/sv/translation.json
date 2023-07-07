@@ -750,13 +750,9 @@
             "confirm_password": "Vänligen ange ditt lösenord."
           }
         },
-        "optional_lightning_note": {
-          "part2": "lightning address"
-        },
         "errors": {
           "create_wallet_error1": "Det gick inte att logga in eller skapa ett nytt konto."
         },
-        "title": "Ditt Alby-konto",
         "email": {
           "create": {
             "label": "Email Address"

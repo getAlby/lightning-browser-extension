@@ -56,12 +56,8 @@
             "mismatched_password": ""
           }
         },
-        "login_account": "",
         "optional_lightning_note": {
           "part1": ""
-        },
-        "optional_lightning_address": {
-          "label": ""
         },
         "errors": {
           "create_wallet_error1": ""

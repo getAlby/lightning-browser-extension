@@ -56,12 +56,8 @@
             "mismatched_password": "Adgangskoderne er forskellige."
           }
         },
-        "login_account": "Log ind for at forbinde din eksisterende Alby-konto.",
         "optional_lightning_note": {
           "part1": "Med din Alby-konto kommer muligheden for at få en"
-        },
-        "optional_lightning_address": {
-          "label": "Vælg din Lightning-adresse (valgfri)"
         },
         "errors": {
           "create_wallet_error1": "Kunne ikke logge ind eller oprette en ny konto."

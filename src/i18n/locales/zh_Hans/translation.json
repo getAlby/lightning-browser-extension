@@ -716,9 +716,6 @@
     },
     "alby": {
       "pre_connect": {
-        "errors": {
-          "create_wallet_error1": "登录或创建新帐户失败。"
-        },
         "host_wallet": "我们为你托管的闪电钱包！",
         "set_password": {
           "choose_password": {
@@ -732,9 +729,6 @@
             "confirm_password": "请确认你的密码。",
             "mismatched_password": "密码不匹配。"
           }
-        },
-        "optional_lightning_note": {
-          "part2": "闪电地址"
         }
       }
     },

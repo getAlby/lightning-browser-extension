@@ -62,12 +62,8 @@
             "mismatched_password": "密碼不匹配。"
           }
         },
-        "login_account": "登錄以連接你現有的Alby帳戶。",
         "optional_lightning_note": {
           "part1": "你的 Alby 帳戶還附帶一個可選的"
-        },
-        "optional_lightning_address": {
-          "label": "選擇你的閃電位址（可選）"
         },
         "errors": {
           "create_wallet_error1": "無法登錄或創建新帳戶。"

@@ -759,16 +759,8 @@
             "label": "Senha"
           }
         },
-        "email": {
-          "create": {
-            "label": "Endereço de e-mail"
-          }
-        },
         "optional_lightning_note": {
           "part3": ". É o jeito mais simples para você receber bitcoin na rede relâmpago."
-        },
-        "optional_lightning_address": {
-          "suffix": "@getalby.com"
         },
         "errors": {
           "create_wallet_error1": "Falha ao fazer login ou criar uma nova conta."
