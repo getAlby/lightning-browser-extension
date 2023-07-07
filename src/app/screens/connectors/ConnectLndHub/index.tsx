@@ -84,6 +84,9 @@ export default function ConnectLndHub({
             id: addResult.accountId,
           });
           navigate("/test-connection");
+        } else {
+          console.error("Failed to add account", addResult);
+          throw new Error(addResult.error as string);
         }
       } else {
         console.error(validation);

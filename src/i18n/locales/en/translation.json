@@ -39,7 +39,7 @@
       "alby": {
         "title": "Alby Account",
         "description": "Sign up or use your existing Alby Account to get started with lightning payments in no time.",
-        "create_new": "Sign up"
+        "connect": "Connect with Alby"
       },
       "other": {
         "title": "Other Wallets",
@@ -62,35 +62,6 @@
             "confirm_password": "Please confirm your password.",
             "mismatched_password": "Passwords don't match."
           }
-        },
-        "forgot_password": "Forgot password?",
-        "title": "Your Alby Account",
-        "create_account": "Create a new Alby Account to send and receive bitcoin payments.",
-        "login_account": "Log in to connect your existing Alby Account.",
-        "host_wallet": "We host a Lightning wallet for you!",
-        "email": {
-          "create": {
-            "label": "Email Address"
-          },
-          "login": {
-            "label": "Email Address or Lightning Address"
-          }
-        },
-        "optional_lightning_note": {
-          "part1": "Your Alby Account also comes with an optional",
-          "part2": "lightning address",
-          "part3": ". This is a simple way for anyone to send you bitcoin on the lightning network.",
-          "part4": "learn more"
-        },
-        "optional_lightning_address": {
-          "label": "Choose your Lightning Address (optional)",
-          "suffix": "@getalby.com",
-          "title": "numbers and letters, at least 4 characters"
-        },
-        "errors": {
-          "create_wallet_error": "Failed to log in or create a new account. If you need help, please contact support@getalby.com",
-          "create_wallet_error1": "Failed to log in or create a new account.",
-          "create_wallet_error2": "If you need help, please contact support@getalby.com"
         }
       }
     },
@@ -423,12 +394,12 @@
           "existing_nostr_key_notice": "⚠️ This account already has a nostr private key set and will not be derived from this secret key. You can manage your nostr key from your account settings.",
           "generate": {
             "title": "Generate your Secret Key",
-            "button": "Generate Secret Key"
+            "button": "Generate Secret Key",
+            "confirm": "I've backed my account's Secret Key in a private and secure place",
+            "error_confirm": "Please confirm that you have backed up your secret key."
           },
           "backup": {
             "title": "Back up your Secret Key",
-            "confirm": "I've backed my account's Secret Key in a private and secure place",
-            "error_confirm": "Please confirm that you have backed up your secret key.",
             "save": "Save Secret Key",
             "button": "Back up Secret Key",
             "warning": "⚠️ Don't forget to back up your Secret Key! Not backing it up might result in permanently losing access to your Nostr identity or assets you manage with this key.",
@@ -446,6 +417,10 @@
           },
           "inputs": {
             "title": "Your Secret Key"
+          },
+          "lnurl": {
+            "title": "Login with Lightning",
+            "use_mnemonic": "Use Secret Key for logging into lightning-powered apps (LNURL Auth)"
           }
         },
         "bitcoin": {
