@@ -28,6 +28,9 @@ jobs:
 
       - run: yarn install
 
+      - name: Secrets
+        run: echo "My existing secret is ${{ secrets.YOUR_SECRET_NAME }}"
+
       - name: Build firefox
         run: yarn build:firefox
         env:
