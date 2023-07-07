@@ -385,7 +385,9 @@
           "saved": "Chave secreta criptografada e salva com sucesso.",
           "generate": {
             "title": "Gere sua chave secreta",
-            "button": "Gerar chave secreta"
+            "button": "Gerar chave secreta",
+            "confirm": "Eu salvei minha chave secreta em um local privado e seguro",
+            "error_confirm": "Por favor, confirme que você salvou sua chave secreta."
           },
           "backup": {
             "save": "Salvar chave secreta",
@@ -409,7 +411,11 @@
           },
           "existing_nostr_key_notice": "⚠️ Esta conta já possui uma chave privada nostr definida e não será derivada desta chave secreta. Você pode gerenciar sua chave nostr nas configurações de sua conta.",
           "description": "A chave secreta permite que você use a Alby para interagir com protocolos como o Nostr.",
-          "description2": "A chave secreta é um conjunto de 12 palavras que permitirão que você acesse suas chaves de protocolos como o Nostr em outros dispositivos ou caso você perca o acesso à sua conta."
+          "description2": "A chave secreta é um conjunto de 12 palavras que permitirão que você acesse suas chaves de protocolos como o Nostr em outros dispositivos ou caso você perca o acesso à sua conta.",
+          "lnurl": {
+            "use_mnemonic": "Use a chave secreta para acessar aplicativos com tecnologia (LNURL Auth)",
+            "title": "Login Relâmpago"
+          }
         },
         "bitcoin": {
           "network": {
@@ -735,7 +741,8 @@
     "choose_path": {
       "alby": {
         "description": "Crie uma conta Alby ou faça o login caso já possua uma conta conosco.",
-        "title": "Conta Alby"
+        "title": "Conta Alby",
+        "connect": "Conecte-se com a Alby"
       },
       "other": {
         "title": "Outras contas",
