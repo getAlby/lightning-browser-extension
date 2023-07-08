@@ -2,13 +2,13 @@ import { getPublicKey, utils } from "@noble/secp256k1";
 import { mnemonicToSeedSync } from "@scure/bip39";
 import { address, bip341 } from "liquidjs-lib";
 import { SLIP77Factory } from "slip77";
-import * as ecc from "tiny-secp256k1";
 import {
   LIQUID_DERIVATION_PATH_REGTEST,
   derivePrivateKey,
 } from "~/common/lib/mnemonic";
 import getAddressOrPrompt from "~/extension/background-script/actions/liquid/getAddressOrPrompt";
 import Liquid from "~/extension/background-script/liquid";
+import * as ecc from "~/extension/background-script/liquid/secp256k1";
 import state from "~/extension/background-script/state";
 import { btcFixture } from "~/fixtures/btc";
 import { liquidFixtureSign } from "~/fixtures/liquid";
@@ -114,7 +114,7 @@ describe("getLiquidAddress", () => {
       Buffer.from(publicBlindKeyFromPrvKey).toString("hex")
     );
 
-    // scirpt pub key should be a taproot key-path using publicKey as internal key
+    // scriptPubKey should be a taproot key-path using publicKey as internal key
     const scriptPubKey = bip341
       .BIP341Factory(ecc)
       .taprootOutputScript(

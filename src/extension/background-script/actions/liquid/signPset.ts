@@ -1,4 +1,3 @@
-import { utils } from "@noble/secp256k1";
 import {
   BIP371SigningData,
   Pset,
@@ -8,7 +7,7 @@ import {
   bip341,
   networks,
 } from "liquidjs-lib";
-import * as tinysecp from "tiny-secp256k1";
+import * as secp256k1 from "~/extension/background-script/liquid/secp256k1";
 import state from "~/extension/background-script/state";
 import { MessageSignPset } from "~/types";
 
@@ -39,7 +38,7 @@ const signPset = async (message: MessageSignPset) => {
 
     const liquid = await state.getState().getLiquid();
     const liquidPublicKey = Buffer.from(
-      utils.hexToBytes(liquid.getPublicKey())
+      Buffer.from(liquid.getPublicKey(), "hex")
     ).subarray(1); // remove prefix  to get 32 bytes public key
 
     const signer = new Signer(pset);
@@ -57,11 +56,14 @@ const signPset = async (message: MessageSignPset) => {
           network.genesisBlockHash
         );
 
-        const signature = liquid.signSchnorr(utils.bytesToHex(sighash), true);
+        const signature = liquid.signSchnorr(
+          Buffer.from(sighash).toString("hex"),
+          true
+        );
 
         const partialSig: BIP371SigningData = {
           tapKeySig: serializeSchnnorrSig(
-            Buffer.from(utils.hexToBytes(signature)),
+            Buffer.from(signature, "hex"),
             sighashType
           ),
           genesisBlockHash: network.genesisBlockHash,
@@ -70,7 +72,7 @@ const signPset = async (message: MessageSignPset) => {
         signer.addSignature(
           inIndex,
           partialSig,
-          Pset.SchnorrSigValidator(tinysecp)
+          Pset.SchnorrSigValidator(secp256k1)
         );
 
         continue;
@@ -97,13 +99,13 @@ const signPset = async (message: MessageSignPset) => {
             leafHash
           );
 
-          const signature = liquid.signSchnorr(utils.bytesToHex(sighash));
+          const signature = liquid.signSchnorr(sighash.toString("hex"));
           const tapScriptSigs: TapScriptSig[] = [
             {
               leafHash,
               pubkey: liquidPublicKey,
               signature: serializeSchnnorrSig(
-                Buffer.from(utils.hexToBytes(signature)),
+                Buffer.from(signature, "hex"),
                 sighashType
               ),
             },
@@ -117,7 +119,7 @@ const signPset = async (message: MessageSignPset) => {
           signer.addSignature(
             inIndex,
             partialSig,
-            Pset.SchnorrSigValidator(tinysecp)
+            Pset.SchnorrSigValidator(secp256k1)
           );
         }
       }

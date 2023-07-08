@@ -1,4 +1,4 @@
-import * as secp256k1 from "@noble/secp256k1";
+import { secp256k1 } from "@noble/curves/secp256k1";
 import {
   address,
   bip341,
@@ -6,7 +6,8 @@ import {
   networks,
 } from "liquidjs-lib";
 import { SLIP77Factory, Slip77Interface } from "slip77";
-import * as tinysecp from "tiny-secp256k1";
+
+import * as tinysecp256k1Adapter from "./secp256k1";
 
 function tapTweakHash(pubkey: Buffer, h?: Buffer): Buffer {
   return liquidjscrypto.taggedHash(
@@ -19,10 +20,10 @@ function tweakPrivateKey(privKey: Buffer, tweak?: Buffer): Buffer {
   let privateKey = privKey;
   const publicKey = Buffer.from(secp256k1.getPublicKey(privateKey, true));
   if (publicKey[0] === 3) {
-    privateKey = Buffer.from(tinysecp.privateNegate(privKey));
+    privateKey = Buffer.from(tinysecp256k1Adapter.privateNegate(privKey));
   }
 
-  const tweakedPrivateKey = tinysecp.privateAdd(
+  const tweakedPrivateKey = tinysecp256k1Adapter.privateAdd(
     privateKey,
     tapTweakHash(publicKey.subarray(1), tweak)
   );
@@ -52,24 +53,24 @@ class Liquid {
     this.network = networks[network];
     if (!this.network) throw new Error(`Invalid network: "${network}"`);
     this.slip77 =
-      SLIP77Factory(tinysecp).fromMasterBlindingKey(masterBlindingKey);
+      SLIP77Factory(tinysecp256k1Adapter).fromMasterBlindingKey(
+        masterBlindingKey
+      );
   }
 
   getPublicKey() {
     const publicKey = secp256k1.getPublicKey(
-      secp256k1.utils.hexToBytes(this.privateKey),
+      Buffer.from(this.privateKey, "hex"),
       true
     );
-    return secp256k1.utils.bytesToHex(publicKey);
+    return Buffer.from(publicKey).toString("hex");
   }
 
   // getAddress returns the segwit v1 taproot address using the private key
   getAddress(): { address: string; blindingPrivateKey: string } {
     const scriptPubKey = bip341
-      .BIP341Factory(tinysecp)
-      .taprootOutputScript(
-        Buffer.from(secp256k1.utils.hexToBytes(this.getPublicKey()))
-      );
+      .BIP341Factory(tinysecp256k1Adapter)
+      .taprootOutputScript(Buffer.from(this.getPublicKey(), "hex"));
 
     const unconfidentialAddr = address.fromOutputScript(
       scriptPubKey,
@@ -88,21 +89,27 @@ class Liquid {
 
     return {
       address: confidentialAddr,
-      blindingPrivateKey: secp256k1.utils.bytesToHex(blindingKeys.privateKey),
+      blindingPrivateKey: blindingKeys.privateKey.toString("hex"),
     };
   }
 
+  /**
+   * make a schnorr signature using the Liquid private key
+   * @param sigHash message to sign using the private key
+   * @param keyPathOnly true if the signature has to be used for taproot key-path only inputs (will tweak the private key)
+   * @returns 64 bytes schnorr signature
+   */
   signSchnorr(sigHash: string, keyPathOnly = false): string {
-    let privKey = Buffer.from(secp256k1.utils.hexToBytes(this.privateKey));
+    let privKey = Buffer.from(this.privateKey, "hex");
     if (keyPathOnly) privKey = tweakPrivateKey(privKey);
 
-    const signature = tinysecp.signSchnorr(
-      Buffer.from(secp256k1.utils.hexToBytes(sigHash)),
+    const signature = tinysecp256k1Adapter.signSchnorr(
+      Buffer.from(sigHash, "hex"),
       privKey,
       Buffer.alloc(32)
     );
-    const signedHex = secp256k1.utils.bytesToHex(signature);
-    return signedHex;
+
+    return Buffer.from(signature).toString("hex");
   }
 }
 
