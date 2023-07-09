@@ -372,7 +372,7 @@
         "title1": "Konto information",
         "title2": "Redigera konto",
         "name": {
-          "title": "Namn",
+          "title": "Visnings Namn",
           "placeholder": "Konto visningsnamn"
         },
         "export": {
@@ -394,7 +394,9 @@
           "existing_nostr_key_notice": "⚠️ Detta konto har redan en nostr privat nyckeluppsättning och kommer inte att härledas från denna hemliga nyckel. Du kan hantera din nostr-nyckel från dina kontoinställningar.",
           "generate": {
             "title": "Generera din hemliga nyckel",
-            "button": "Generera hemlig nyckel"
+            "button": "Generera hemlig nyckel",
+            "confirm": "Jag har säkerhetskopierat mitt kontos hemliga nyckel på en privat och säker plats",
+            "error_confirm": "Bekräfta att du har säkerhetskopierat din hemliga nyckel."
           },
           "backup": {
             "title": "Säkerhetskopiera din hemliga nyckel",
@@ -418,6 +420,10 @@
           "description2": "Din hemliga nyckel är en uppsättning av 12 ord som låter dig komma åt dina nycklar till protokoll som Nostr på en ny enhet eller om du förlorar åtkomsten till ditt konto.",
           "inputs": {
             "title": "Din hemliga nyckel"
+          },
+          "lnurl": {
+            "title": "Logga in med Lightning",
+            "use_mnemonic": "Använd hemlig nyckel för att logga in i Lightning appar (LNURL Auth)"
           }
         },
         "bitcoin": {
@@ -726,7 +732,8 @@
     "choose_path": {
       "alby": {
         "title": "Alby Konto",
-        "description": "Registrera dig eller använd ditt befintliga Alby-konto för att komma igång med lightning betalningar på nolltid."
+        "description": "Registrera dig eller använd ditt befintliga Alby-konto för att komma igång med lightning betalningar på nolltid.",
+        "connect": "Anslut med Alby"
       },
       "other": {
         "title": "Annan Plånbok",
