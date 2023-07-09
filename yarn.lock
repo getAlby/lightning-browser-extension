@@ -2206,13 +2206,6 @@ ajv@^8.11.0:
     require-from-string "^2.0.2"
     uri-js "^4.2.2"
 
-alby-js-sdk@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/alby-js-sdk/-/alby-js-sdk-2.0.0.tgz#417957b8a089653a96f8d4808e98a48baf628d6d"
-  integrity sha512-VbBM4sTOvbiMi2sWF/jaoBer006fQ7hYIwzi7puYti9aprxWt3qb2GwL24ZFytUhwH3uuX9XPzJhkCWGR0JMAA==
-  dependencies:
-    crypto-js "^4.1.1"
-    nostr-tools "^1.10.0"
 ajv@^8.9.0:
   version "8.12.0"
   resolved "https://registry.yarnpkg.com/ajv/-/ajv-8.12.0.tgz#d1a0527323e22f53562c567c00991577dfbe19d1"
@@ -2222,6 +2215,14 @@ ajv@^8.9.0:
     json-schema-traverse "^1.0.0"
     require-from-string "^2.0.2"
     uri-js "^4.2.2"
+
+alby-js-sdk@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/alby-js-sdk/-/alby-js-sdk-2.0.0.tgz#417957b8a089653a96f8d4808e98a48baf628d6d"
+  integrity sha512-VbBM4sTOvbiMi2sWF/jaoBer006fQ7hYIwzi7puYti9aprxWt3qb2GwL24ZFytUhwH3uuX9XPzJhkCWGR0JMAA==
+  dependencies:
+    crypto-js "^4.1.1"
+    nostr-tools "^1.10.0"
 
 ansi-escapes@^4.2.1, ansi-escapes@^4.3.0:
   version "4.3.2"
@@ -3580,10 +3581,10 @@ data-urls@^3.0.2:
     whatwg-mimetype "^3.0.0"
     whatwg-url "^11.0.0"
 
-dayjs@^1.11.8:
-  version "1.11.8"
-  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.11.8.tgz#4282f139c8c19dd6d0c7bd571e30c2d0ba7698ea"
-  integrity sha512-LcgxzFoWMEPO7ggRv1Y2N31hUf2R0Vj7fuy/m+Bg1K8rr+KAs1AEy4y9jd5DXe8pbHgX+srkHNS7TH6Q6ZhYeQ==
+dayjs@^1.11.9:
+  version "1.11.9"
+  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.11.9.tgz#9ca491933fadd0a60a2c19f6c237c03517d71d1a"
+  integrity sha512-QvzAURSbQ0pKdIye2txOzNaHmxtUBXerpY0FJsFXUMKbIZeFm5ht1LS/jFsrncjnmtv8HsG0W2g6c0zUjZWmpA==
 
 debug@2.6.9:
   version "2.6.9"
