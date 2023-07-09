@@ -475,7 +475,7 @@ function AccountDetail() {
                     than the unlock passcode (no username)
                     See: https://github.com/getAlby/lightning-browser-extension/issues/2489
                 */}
-                <input value={accountName} style={{ display: "none" }} />
+                <input value={accountName} className="hidden" />
                 <TextField
                   id="nostrPrivateKey"
                   label={t("nostr.private_key.label")}
