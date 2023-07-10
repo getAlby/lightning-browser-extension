@@ -43,7 +43,6 @@
         "macaroon": {
           "label": ""
         },
-        "or": "",
         "drag_and_drop": "",
         "errors": {
           "connection_failed": ""

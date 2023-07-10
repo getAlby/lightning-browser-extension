@@ -79,6 +79,7 @@ function ConfirmPayment() {
 
     try {
       setLoading(true);
+      // TODO: move to api
       const response = await msg.request(
         "sendPayment",
         { paymentRequest: paymentRequest },
@@ -86,6 +87,10 @@ function ConfirmPayment() {
           origin: navState.origin,
         }
       );
+      if (response.error) {
+        throw new Error(response.error as string);
+      }
+
       auth.fetchAccountInfo(); // Update balance.
       msg.reply(response);
 

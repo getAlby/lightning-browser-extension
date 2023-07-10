@@ -46,13 +46,14 @@ function GenerateSecretKey() {
   async function saveGeneratedSecretKey() {
     try {
       if (!hasConfirmedBackup) {
-        throw new Error(t("backup.error_confirm"));
+        throw new Error(t("generate.error_confirm"));
       }
       if (!mnemonic) {
         throw new Error("No mnemonic available");
       }
 
       await api.setMnemonic(id, mnemonic);
+      await api.editAccount(id, { useMnemonicForLnurlAuth: true });
 
       toast.success(t("saved"));
       // go to account settings
@@ -89,7 +90,7 @@ function GenerateSecretKey() {
                   htmlFor="has_backed_up"
                   className="cursor-pointer ml-2 block text-sm text-gray-900 font-medium dark:text-white"
                 >
-                  {t("backup.confirm")}
+                  {t("generate.confirm")}
                 </label>
               </div>
             </>
