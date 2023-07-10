@@ -9,8 +9,8 @@ import HashKeySigner from "~/common/utils/signer";
 import state from "~/extension/background-script/state";
 import {
   AuthResponseObject,
-  LnurlAuthResponse,
   LNURLDetails,
+  LnurlAuthResponse,
   MessageLnurlAuth,
   OriginData,
 } from "~/types";
@@ -35,25 +35,41 @@ export async function authFunction({
       `LNURL-AUTH FAIL: incorrect tag: ${lnurlDetails.tag} was used`
     );
 
-  const connector = await state.getState().getConnector();
+  const account = await state.getState().getAccount();
+  if (!account) {
+    throw new Error("LNURL-AUTH FAIL: no account selected");
+  }
 
-  // Note: the signMessage call can fail / this is currently not caught.
-  const signResponse = await connector.signMessage({
-    message: LNURLAUTH_CANONICAL_PHRASE,
-    key_loc: {
-      key_family: 0,
-      key_index: 0,
-    },
-  });
+  let keyMaterialForSignature: string;
 
-  const lnSignature = signResponse.data.signature;
+  // use mnemonic for LNURL auth
+  if (account.mnemonic && account.useMnemonicForLnurlAuth) {
+    const mnemonic = await state.getState().getMnemonic();
+
+    keyMaterialForSignature = await mnemonic.signMessage(
+      LNURLAUTH_CANONICAL_PHRASE
+    );
+  } else {
+    const connector = await state.getState().getConnector();
+
+    // Note: the signMessage call can fail / this is currently not caught.
+    const signResponse = await connector.signMessage({
+      message: LNURLAUTH_CANONICAL_PHRASE,
+      key_loc: {
+        key_family: 0,
+        key_index: 0,
+      },
+    });
+
+    keyMaterialForSignature = signResponse.data.signature;
+  }
 
   // make sure we got a signature
-  if (!lnSignature) {
+  if (!keyMaterialForSignature) {
     throw new Error("Invalid Signature");
   }
 
-  const hashingKey = sha256(lnSignature).toString(Hex);
+  const hashingKey = sha256(keyMaterialForSignature).toString(Hex);
   const url = new URL(lnurlDetails.url);
   if (!url.host || !hashingKey) {
     throw new Error("Invalid input");

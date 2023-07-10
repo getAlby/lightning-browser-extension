@@ -11,12 +11,19 @@ import { Event } from "./extension/providers/nostr/types";
 
 export type ConnectorType = keyof typeof connectors;
 
+export type BitcoinNetworkType = "bitcoin" | "testnet" | "regtest";
+
 export interface Account {
   id: string;
   connector: ConnectorType;
   config: string;
   name: string;
   nostrPrivateKey?: string | null;
+  mnemonic?: string | null;
+  hasImportedNostrKey?: boolean;
+  bitcoinNetwork?: BitcoinNetworkType;
+  useMnemonicForLnurlAuth?: boolean;
+  avatarUrl?: string;
 }
 
 export interface Accounts {
@@ -31,7 +38,9 @@ export interface AccountInfo {
   balance: number;
   id: string;
   name: string;
+  connectorType: ConnectorType;
   currency: ACCOUNT_CURRENCIES;
+  avatarUrl?: string;
 }
 
 export interface MetaData {
@@ -139,6 +148,9 @@ export type NavigationState = {
     destination?: string;
     amount?: string;
     customRecords?: Record<string, string>;
+    connector?: string;
+    name?: string;
+    config?: unknown;
     message?: string;
     event?: Event;
     sigHash?: string;
@@ -194,7 +206,9 @@ export interface MessageAccountAdd extends MessageDefault {
 export interface MessageAccountEdit extends MessageDefault {
   args: {
     id: Account["id"];
-    name: Account["name"];
+    name?: Account["name"];
+    bitcoinNetwork?: BitcoinNetworkType;
+    useMnemonicForLnurlAuth?: boolean;
   };
   action: "editAccount";
 }
@@ -321,7 +335,7 @@ export interface MessageAllowanceEnable extends MessageDefault {
   args: {
     host: Allowance["host"];
   };
-  action: "public/webln/enable" | "public/nostr/enable";
+  action: "public/webln/enable" | "public/nostr/enable" | "public/alby/enable";
 }
 
 export interface MessageAllowanceDelete extends MessageDefault {
@@ -388,6 +402,13 @@ export interface MessageAccountValidate extends MessageDefault {
   action: "validateAccount";
 }
 
+export type ValidateAccountResponse = {
+  valid: boolean;
+  info: { data: WebLNNode };
+  oAuthToken?: OAuthToken;
+  error?: unknown;
+};
+
 export interface MessageConnectPeer extends MessageDefault {
   args: { pubkey: string; host: string };
   action: "connectPeer";
@@ -422,25 +443,31 @@ export interface MessageCurrencyRateGet extends MessageDefault {
   action: "getCurrencyRate";
 }
 
-export interface MessagePublicKeyGet extends MessageDefault {
+export interface MessageNostrPublicKeyGetOrPrompt extends MessageDefault {
   action: "getPublicKeyOrPrompt";
 }
 
-export interface MessagePrivateKeyGet extends MessageDefault {
+export interface MessageNostrPublicKeyGet extends MessageDefault {
+  args: {
+    id: Account["id"];
+  };
+  action: "getPublicKey";
+}
+export interface MessageNostrPrivateKeyGet extends MessageDefault {
   args?: {
     id?: Account["id"];
   };
   action: "getPrivateKey";
 }
 
-export interface MessagePrivateKeyGenerate extends MessageDefault {
+export interface MessageNostrPrivateKeyGenerate extends MessageDefault {
   args?: {
-    type?: "random";
+    id?: Account["id"];
   };
   action: "generatePrivateKey";
 }
 
-export interface MessagePrivateKeySet extends MessageDefault {
+export interface MessageNostrPrivateKeySet extends MessageDefault {
   args: {
     id?: Account["id"];
     privateKey: string;
@@ -448,11 +475,29 @@ export interface MessagePrivateKeySet extends MessageDefault {
   action: "setPrivateKey";
 }
 
-export interface MessagePrivateKeyRemove extends MessageDefault {
+export interface MessageNostrPrivateKeyRemove extends MessageDefault {
   args: {
     id?: Account["id"];
   };
   action: "removePrivateKey";
+}
+
+export interface MessageMnemonicSet extends MessageDefault {
+  args: {
+    id?: Account["id"];
+    mnemonic: string;
+  };
+  action: "setMnemonic";
+}
+
+export interface MessageMnemonicGet extends MessageDefault {
+  args?: {
+    id?: Account["id"];
+  };
+  action: "getMnemonic";
+}
+export interface MessageMnemonicGenerate extends MessageDefault {
+  action: "generateMnemonic";
 }
 
 export interface MessageSignEvent extends MessageDefault {
@@ -483,6 +528,12 @@ export interface MessageDecryptGet extends MessageDefault {
     ciphertext: string;
   };
   action: "decrypt";
+}
+
+export interface MessageGetAddress extends MessageDefault {
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  args: {};
+  action: "getAddress";
 }
 
 export interface LNURLChannelServiceResponse {
@@ -777,3 +828,29 @@ export interface DeferredPromise {
 }
 
 export type Theme = "dark" | "light";
+
+export type OAuthToken = {
+  access_token: string;
+  refresh_token: string;
+  expires_at: number;
+};
+
+export type BitcoinAddress = {
+  publicKey: string;
+  derivationPath: string;
+  index: number;
+  address: string;
+};
+
+// TODO: take from alby-js-sdk
+export type AlbyAccountInformation = {
+  identifier: string;
+  email: string;
+  name?: string;
+  avatar?: string;
+  keysend_custom_key: string;
+  keysend_custom_value: string;
+  keysend_pubkey: string;
+  lightning_address?: string;
+  nostr_pubkey?: string;
+};

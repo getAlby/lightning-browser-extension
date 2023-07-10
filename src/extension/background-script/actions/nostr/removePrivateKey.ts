@@ -1,8 +1,8 @@
-import type { MessagePrivateKeyRemove } from "~/types";
+import type { MessageNostrPrivateKeyRemove } from "~/types";
 
 import state from "../../state";
 
-const removePrivateKey = async (message: MessagePrivateKeyRemove) => {
+const removePrivateKey = async (message: MessageNostrPrivateKeyRemove) => {
   const id = message.args?.id || state.getState().currentAccountId;
 
   const accounts = state.getState().accounts;
@@ -10,8 +10,12 @@ const removePrivateKey = async (message: MessagePrivateKeyRemove) => {
   if (id && Object.keys(accounts).includes(id)) {
     const account = accounts[id];
     if (account.nostrPrivateKey) delete account.nostrPrivateKey;
+    account.hasImportedNostrKey = true;
     accounts[id] = account;
-    state.setState({ accounts });
+    state.setState({
+      accounts,
+      nostr: null, // reset memoized nostr instance
+    });
     await state.getState().saveToStorage();
     return {
       data: {

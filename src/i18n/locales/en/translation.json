@@ -3,22 +3,22 @@
     "welcome": {
       "title": "Welcome to Alby",
       "set_password": {
-        "title": "Set an unlock password",
-        "description": "This password is used to protect your wallet and provide access to the browser extension. It cannot be reset and is separate from your Alby Account password.",
+        "title": "Set an unlock passcode",
+        "description": "This passcode will allow you to unlock Alby on this device. It cannot be recovered, but may be changed later.",
         "choose_password": {
-          "label": "Choose an unlock password:"
+          "label": "Choose an unlock passcode:"
         },
         "confirm_password": {
           "label": "Let's confirm you typed it correct:"
         },
         "errors": {
-          "enter_password": "Please enter a password.",
-          "confirm_password": "Please confirm your password.",
-          "mismatched_password": "Passwords don't match."
+          "enter_password": "Please enter a passcode.",
+          "confirm_password": "Please confirm your passcode.",
+          "mismatched_password": "Passcodes don't match."
         }
       },
       "test_connection": {
-        "ready": "Awesome, you’re ready to go!",
+        "ready": "Awesome, you're ready to go!",
         "initializing": "Initializing your account. Please wait, this can take a minute...",
         "connection_error": "Connection Error",
         "review_connection_details": "Please review your connection details.",
@@ -39,7 +39,7 @@
       "alby": {
         "title": "Alby Account",
         "description": "Sign up or use your existing Alby Account to get started with lightning payments in no time.",
-        "create_new": "Sign up"
+        "connect": "Connect with Alby"
       },
       "other": {
         "title": "Other Wallets",
@@ -62,35 +62,6 @@
             "confirm_password": "Please confirm your password.",
             "mismatched_password": "Passwords don't match."
           }
-        },
-        "forgot_password": "Forgot password?",
-        "title": "Your Alby Account",
-        "create_account": "Create a new Alby Account to send and receive bitcoin payments.",
-        "login_account": "Log in to connect your existing Alby Account.",
-        "host_wallet": "We host a Lightning wallet for you!",
-        "email": {
-          "create": {
-            "label": "Email Address"
-          },
-          "login": {
-            "label": "Email Address or Lightning Address"
-          }
-        },
-        "optional_lightning_note": {
-          "part1": "Your Alby Account also comes with an optional",
-          "part2": "lightning address",
-          "part3": ". This is a simple way for anyone to send you bitcoin on the lightning network.",
-          "part4": "learn more"
-        },
-        "optional_lightning_address": {
-          "label": "Choose your Lightning Address (optional)",
-          "suffix": "@getalby.com",
-          "title": "numbers and letters, at least 4 characters"
-        },
-        "errors": {
-          "create_wallet_error": "Failed to log in or create a new account. If you need help, please contact support@getalby.com",
-          "create_wallet_error1": "Failed to log in or create a new account.",
-          "create_wallet_error2": "If you need help, please contact support@getalby.com"
         }
       }
     },
@@ -110,7 +81,6 @@
         "macaroon": {
           "label": "Macaroon (HEX format)"
         },
-        "or": "OR",
         "drag_and_drop": "Drag and drop your macaroon here or <0>browse</0>",
         "errors": {
           "connection_failed": "Connection failed. Are your LND credentials correct?"
@@ -267,20 +237,17 @@
         "sms_code": {
           "label": "Enter your SMS verification code"
         },
-        "jwt": {
-          "label": "Enter your JWT token",
-          "info": "The {{label}} login is currently being upgraded. If you are an advanced user, you can grab your JWT token by logging in via the <0>Web Wallet (wallet.mainnet.galoy.io)</0><1/><1/>The JWT looks like: <2>eyJhbG...</2><1/><1/>"
+        "token": {
+          "label": "Enter your Access token",
+          "info": "The {{label}} integration with Alby is in alpha and only recommended for advanced users.<br><br>You can grab your Access token by going into the mobile app, clicking on the settings icon, and then tapping 3 times on the build number to open the developer menu.<br><br>The access token can be copied from here.<br><br>"
         },
         "actions": {
-          "login": "Login",
-          "request_sms_code": "Request SMS Code"
+          "login": "Login"
         },
         "errors": {
-          "failed_to_request_sms": "Failed to request a SMS code",
-          "failed_to_login_sms": "Failed to login with SMS code",
           "setup_failed": "Setup failed",
-          "missing_jwt": "JWT missing, couldn't log in.",
-          "invalid_jwt": "invalid JWT passed"
+          "missing_token": "Access token missing, couldn't log in.",
+          "invalid_token": "invalid Access token passed"
         }
       },
       "kollider": {
@@ -386,12 +353,6 @@
         "enable_now": "Enable Now"
       },
       "recent_transactions": "Recent Transactions",
-      "transaction_list": {
-        "tabs": {
-          "outgoing": "Outgoing",
-          "incoming": "Incoming"
-        }
-      },
       "allowance_view": {
         "recent_transactions": "Recent Transactions",
         "allowance": "Allowance",
@@ -400,9 +361,11 @@
       },
       "default_view": {
         "recent_transactions": "Recent Transactions",
-        "no_transactions": "No transactions made with Alby, yet.",
         "is_blocked_hint": "Alby is currently disabled on {{host}}",
-        "block_removed": "Enabled {{host}}. Please reload the website."
+        "block_removed": "Enabled {{host}}. Please reload the website.",
+        "no_outgoing_transactions": "No outgoing transactions for this account yet.",
+        "no_incoming_transactions": "No incoming transactions for this account yet.",
+        "all_transactions_link": "See all transactions"
       }
     },
     "accounts": {
@@ -411,8 +374,8 @@
         "title1": "Account Information",
         "title2": "Edit Account",
         "name": {
-          "title": "Name",
-          "placeholder": "Account Name"
+          "title": "Display Name",
+          "placeholder": "Account Display Name"
         },
         "export": {
           "title": "Export Account",
@@ -423,21 +386,78 @@
           "export_uri": "LNDHub Credentials URI",
           "scan_qr": "Import this wallet into Zeus or BlueWallet by scanning the QRCode."
         },
+        "mnemonic": {
+          "title": "Secret Key",
+          "description": "Your Account Secret Key allows you to use Alby to interact with protocols such as Nostr.",
+          "description2": "Your Secret Key is a set of 12 words that will allow you to access your keys to protocols such as Nostr on a new device or in case you lose access to your account.",
+          "saved": "Secret Key encrypted & saved successfully.",
+          "existing_nostr_key_notice": "⚠️ This account already has a nostr private key set and will not be derived from this secret key. You can manage your nostr key from your account settings.",
+          "generate": {
+            "title": "Generate your Secret Key",
+            "button": "Generate Secret Key",
+            "confirm": "I've backed my account's Secret Key in a private and secure place",
+            "error_confirm": "Please confirm that you have backed up your secret key."
+          },
+          "backup": {
+            "title": "Back up your Secret Key",
+            "save": "Save Secret Key",
+            "button": "Back up Secret Key",
+            "warning": "⚠️ Don't forget to back up your Secret Key! Not backing it up might result in permanently losing access to your Nostr identity or assets you manage with this key.",
+            "description1": "In addition to the Bitcoin Lightning Network, Alby allows you to generate keys and interact with other protocols such as:",
+            "description2": "Your Secret Key is a set of 12 words that will allow you to access your keys to those protocols on a new device or in case you lose access to your account. Make sure to write it down on a piece of paper and keep it safe:",
+            "protocols": {
+              "nostr": "Nostr"
+            }
+          },
+          "import": {
+            "title": "Import a Secret Key",
+            "description": "Use an existing Secret Key to recover your derived keys.",
+            "button": "Import Secret Key",
+            "confirm_overwrite": "You already have a secret key, are you sure you want to overwrite it?"
+          },
+          "inputs": {
+            "title": "Your Secret Key"
+          },
+          "lnurl": {
+            "title": "Login with Lightning",
+            "use_mnemonic": "Use Secret Key for logging into lightning-powered apps (LNURL Auth)"
+          }
+        },
+        "bitcoin": {
+          "network": {
+            "title": "Bitcoin Network",
+            "subtitle": "Choose network to derive addresses and decode transactions",
+            "options": {
+              "bitcoin": "Mainnet",
+              "testnet": "Testnet",
+              "regtest": "Regtest"
+            }
+          }
+        },
         "nostr": {
           "title": "Nostr",
           "hint": "is a simple and open protocol that aims to create censorship-resistant social networks. Nostr works with cryptographic keys. To publish something you sign it with your key and send it to multiple relays. You can use Alby to manage your Nostr key. Many Nostr applications will then allow you to simply use the key from the Alby extension.",
+          "settings": {
+            "label": "Nostr Settings",
+            "title": "Nostr Settings",
+            "description": "Derive Nostr keys from your Secret Key or import your existing private key by pasting it in the \"Nostr Private Key\" field.",
+            "imported_key_warning": "⚠️ You're currently using an imported or randomly generated Nostr key. Your Nostr private key cannot be restored by your Secret Key, so remember to back up your Nostr private key.",
+            "can_restore": "✅ Nostr key derived from your secret key",
+            "derive": "Derive Nostr keys from your Secret Key",
+            "delete": "Delete current keys",
+            "no_secret_key": "💡 You don't have a secret key yet. <0>Click here</0></div> to create your secret key and derive your nostr keys."
+          },
           "private_key": {
-            "title": "Manage your key",
-            "subtitle": "Paste your private key or generate a new one. <0>Learn more »</0>",
-            "backup": "⚠️ Don't forget to back up your private key! Not backing up your key might result in losing access.",
-            "warning": "Please enter the name of the account to confirm the deletion of the private key:",
-            "success": "Private key encrypted & saved successfully.",
-            "failed_to_remove": "The entered account name didn't match, your old private has been restored.",
-            "successfully_removed": "Private key removed successfully.",
-            "label": "Private Key"
+            "title": "Manage your Nostr private key",
+            "subtitle": "Paste your nostr private key or generate a new one. <0>Learn more »</0>",
+            "warning": "Please enter the name of the account to confirm the deletion of your nostr private key:",
+            "success": "Nostr private key encrypted & saved successfully.",
+            "failed_to_remove": "The entered account name didn't match, your old Nostr private key has been restored.",
+            "successfully_removed": "Nostr private key removed successfully.",
+            "label": "Nostr Private Key"
           },
           "public_key": {
-            "label": "Public Key"
+            "label": "Nostr Public Key"
           },
           "generate_keys": {
             "title": "Generate a new Nostr key",
@@ -457,11 +477,19 @@
         },
         "remove": {
           "title": "Remove This Account",
-          "subtitle": "All the linked allowances will be deleted. Please be certain.",
-          "confirm": "Are you sure you want to remove account: {{name}}? \nThis can not be undone. If you used this account to login to websites you might lose access to those."
+          "subtitle": "Removes all allowances, payment data and keys associated with this account.",
+          "confirm": "Are you sure you want to remove account: {{name}}? \nThis can not be undone. If you used this account to login to websites you might lose access to those.",
+          "error": "The entered account name didn't match."
+        },
+        "remove_secretkey": {
+          "title": "Remove Secret Key",
+          "subtitle": "Removes the secret key from this account.",
+          "confirm": "Please enter the name of the account to confirm the deletion of your Secret Key.",
+          "success": "Successfully removed the Secret Key."
         },
         "actions": {
           "remove_account": "Remove account",
+          "remove_secretkey": "Remove Secret Key",
           "export": "Export"
         }
       },
@@ -479,17 +507,17 @@
     },
     "unlock": {
       "unlock_to_continue": "Unlock to continue",
-      "unlock_password": "Your unlock password",
+      "unlock_password": "Your unlock passcode",
       "help_contact": {
         "part1": "Need help? Contact",
         "part2": "Alby Support"
       },
       "unlock_error": {
-        "help": "Your account data is encrypted with your unlock password. If you really forgot your unlock password you have to reset and add your lightning account again.",
+        "help": "Your account data is encrypted with your unlock passcode. If you really forgot your unlock passcode you have to reset and add your lightning account again.",
         "link": "Reset now and add a new account"
       },
       "errors": {
-        "invalid_password": "Invalid password"
+        "invalid_password": "Invalid passcode"
       }
     },
     "settings": {
@@ -560,24 +588,24 @@
         "placeholder": "Enter your email address"
       },
       "change_password": {
-        "title": "Change unlock password",
+        "title": "Change unlock passcode",
         "subtitle": "",
-        "screen_reader": "Change unlock password",
+        "screen_reader": "Change unlock passcode",
         "choose_password": {
-          "label": "Enter a new unlock password:"
+          "label": "Enter a new unlock passcode:"
         },
         "confirm_password": {
-          "label": "Confirm new password:"
+          "label": "Confirm new passcode:"
         },
         "submit": {
           "label": "Change"
         },
         "errors": {
-          "enter_password": "Please enter a new unlock password.",
-          "confirm_password": "Please confirm your password.",
-          "mismatched_password": "Passwords don't match."
+          "enter_password": "Please enter a new unlock passcode.",
+          "confirm_password": "Please confirm your passcode.",
+          "mismatched_password": "Passcodes don't match."
         },
-        "success": "Password changed successfully"
+        "success": "Passcode changed successfully"
       },
       "nostr": {
         "title": "Nostr",
@@ -659,7 +687,14 @@
       "payment": {
         "waiting": "waiting for payment...",
         "status": "Check payment status"
-      }
+      },
+      "receive_via_bitcoin_address": "Receive via bitcoin address"
+    },
+    "on_chain": {
+      "title": "Receive via bitcoin address",
+      "instructions1": "To receive bitcoin via a bitcoin address, login to your <0>Alby Account</0> on getalby.com",
+      "instructions2": "You can find your bitcoin address on the <0>Receive</0> page.",
+      "go": "Go to your Alby account →"
     },
     "discover": {
       "title": "Explore the Lightning ⚡️ Ecosystem",
@@ -678,20 +713,16 @@
         "title": "Your Alby wallet is ready",
         "description": "A few tips to get you started buzzin'🐝",
         "top_up_wallet": {
-          "title": "⚡️ Top up your wallet",
-          "description": "Create a lightning invoice, send some bitcoin to yourself and start using Alby in the lightning ecosystem",
-          "label1": "Receive Bitcoin",
-          "label2": "Buy Bitcoin"
+          "title": "Buy Bitcoin",
+          "description": "Need a top up?\nWe got you!"
         },
         "demo": {
-          "title": "🕹️ Try out Alby Demo",
-          "description": "Discover all things you can do with Alby on our demo website",
-          "label1": "Give it a try"
+          "title": "Alby Demo",
+          "description": "Discover Alby's features\non our demo website"
         },
-        "address": {
-          "title": "⚡️ Get a lightning address",
-          "description": "Create your own lightning address and to receive lightning payments with ease of sending an e-mail",
-          "label1": "Get it now!"
+        "mnemonic": {
+          "title": "Nostr",
+          "description": "Planning to use Nostr?\nGenerate your keys now."
         }
       }
     },
@@ -724,6 +755,11 @@
       "title": "Sign",
       "content": "This website asks you to sign:"
     },
+    "confirm_get_address": {
+      "title": "Get Address",
+      "heading": "This website asks you to read:",
+      "content": "Your Bitcoin receive address"
+    },
     "confirm_keysend": {
       "title": "Approve Payment",
       "success": "Payment sent! Preimage: {{preimage}}",
@@ -752,6 +788,11 @@
       "title": "Approve Request",
       "allow": "Allow this website to execute:",
       "always_allow": "Remember my choice and don't ask again"
+    },
+    "confirm_add_account": {
+      "title": "Add account",
+      "content": "This website wants to add an account ({{connector}}):",
+      "tor_info": "In order to connect through the TOR network you need to first install the Alby companion app:"
     },
     "nostr": {
       "title": "Nostr",
@@ -793,7 +834,10 @@
     },
     "transactions": {
       "title": "Transactions",
-      "description": "Outgoing transactions across all of your accounts",
+      "description": {
+        "outgoing": "Outgoing transactions for this account",
+        "incoming": "Incoming transactions for this account"
+      },
       "list_empty": "No transactions available yet."
     }
   },
@@ -807,7 +851,7 @@
     "accounts": "Accounts",
     "discover": "Discover",
     "connected_sites": "Connected Sites",
-    "transactions": "Transactions",
+    "wallet": "Wallet",
     "sats_one": "sat",
     "sats_other": "sats",
     "loading": "loading",
@@ -815,6 +859,7 @@
     "optional": "Optional",
     "feedback": "Feedback",
     "copied": "Copied!",
+    "pasted": "Pasted!",
     "description": "Description",
     "description_full": "Full Description",
     "success_message": "{{amount}}{{fiatAmount}} sent to {{destination}}",
@@ -822,6 +867,7 @@
     "message": "Message",
     "help": "Help",
     "balance": "Balance",
+    "or": "or",
     "actions": {
       "back": "Back",
       "delete": "Delete",
@@ -836,6 +882,7 @@
       "unlock": "Unlock",
       "send": "Send",
       "save": "Save",
+      "import": "Import",
       "receive": "Receive",
       "receive_again": "Receive another payment",
       "transactions": "Transactions",
@@ -843,10 +890,27 @@
       "export": "Export",
       "remove": "Remove",
       "copy": "Copy",
+      "copy_clipboard": "Copy to clipboard",
+      "paste": "Paste",
+      "paste_clipboard": "Paste from clipboard",
       "copy_invoice": "Copy Invoice",
       "log_in": "Log in",
       "remember": "Remember my choice and don't ask again",
-      "more": "More"
+      "more": "More",
+      "download": "Download"
+    },
+    "connectors": {
+      "lnd": "LND",
+      "nativelnd": "LND (over Tor)",
+      "lndhub": "LNDHub",
+      "nativelndhub": "LNDHub (over Tor)",
+      "lnbits": "LNBits",
+      "nativelnbits": "LNBits (over Tor)",
+      "galoy": "Galoy",
+      "eclair": "Eclair",
+      "citadel": "Citadel",
+      "nativecitadel": "Citadel (over Tor)",
+      "commando": "Commando"
     },
     "errors": {
       "connection_failed": "Connection failed",
@@ -854,8 +918,8 @@
     },
     "range": {
       "between": "between {{min}} and {{max}}",
-      "lessThan": "< {{max}}",
-      "greaterThan": "> {{min}}"
+      "lessThanOrEqual": "≤ {{max}}",
+      "greaterOrEqual": "≥ {{min}}"
     }
   },
   "components": {
@@ -897,6 +961,12 @@
         "podcast": "Podcast"
       },
       "open_location": "Open website"
+    },
+    "transaction_list": {
+      "tabs": {
+        "outgoing": "Outgoing",
+        "incoming": "Incoming"
+      }
     },
     "confirm_or_cancel": {
       "only_trusted": "Only connect with sites you trust."
@@ -944,7 +1014,7 @@
           "add": "Add a new account",
           "manage": "Manage accounts",
           "account_settings": "Account settings",
-          "go_to_web_wallet": "Manage your Alby Account"
+          "go_to_web_wallet": "Manage your web account"
         }
       }
     },
@@ -955,7 +1025,8 @@
     "badge": {
       "label": {
         "active": "ACTIVE",
-        "auth": "LOGIN"
+        "auth": "LOGIN",
+        "imported": "IMPORTED"
       }
     }
   },

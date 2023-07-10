@@ -1,3 +1,4 @@
+import { GetAccountRes } from "~/common/lib/api";
 import state from "~/extension/background-script/state";
 import type { MessageAccountGet } from "~/types";
 
@@ -14,11 +15,16 @@ const get = async (message: MessageAccountGet) => {
 
   if (!account) return;
 
-  const result = {
+  const result: GetAccountRes = {
     id: account.id,
-    connector: account.connector,
+    connectorType: account.connector,
     name: account.name,
     nostrEnabled: !!account.nostrPrivateKey,
+    hasMnemonic: !!account.mnemonic,
+    // Note: undefined (default for new accounts) it is also considered imported
+    hasImportedNostrKey: account.hasImportedNostrKey !== false,
+    bitcoinNetwork: account.bitcoinNetwork || "bitcoin",
+    useMnemonicForLnurlAuth: account.useMnemonicForLnurlAuth || false,
   };
 
   return {

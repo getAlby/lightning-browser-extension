@@ -5,6 +5,7 @@ import edit from "./edit";
 import get from "./get";
 import info from "./info";
 import lock from "./lock";
+import promptAdd from "./promptAdd";
 import remove from "./remove";
 import select from "./select";
 import unlock from "./unlock";
@@ -18,6 +19,7 @@ export {
   select,
   info,
   remove,
-  get,
   decryptedDetails,
+  promptAdd,
+  get,
 };

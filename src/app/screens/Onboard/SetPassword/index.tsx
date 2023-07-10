@@ -34,9 +34,9 @@ export default function SetPassword() {
 
   const unlockScreenshot = (
     <img
-      src="assets/images/unlock_screenshot.png"
+      src="assets/images/unlock_passcode.png"
       alt="Unlock screen"
-      className="w-64"
+      className="w-96"
     />
   );
 

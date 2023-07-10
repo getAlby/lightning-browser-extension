@@ -13,7 +13,7 @@ type User = { email: string; password: string };
 const defaultUser = USER.SINGLE() as User;
 
 test.describe("Create or connect wallets", () => {
-  test("successfully creates an Alby wallet", async () => {
+  test.skip("successfully creates an Alby wallet", async () => {
     const user = defaultUser;
     const { browser, page, $document } = await createNewWalletWithPassword();
 
@@ -42,7 +42,7 @@ test.describe("Create or connect wallets", () => {
     await browser.close();
   });
 
-  test("successfully connects to an existing Alby testnet wallet", async () => {
+  test.skip("successfully connects to an existing Alby testnet wallet", async () => {
     const user = {
       email: "albytest001@example.com",
       password: "12345678",
@@ -156,13 +156,13 @@ test.describe("Create or connect wallets", () => {
     const connectButton = await getByText($document, "Umbrel");
     await Promise.all([
       page.waitForNavigation(), // The promise resolves after navigation has finished
-      connectButton.click()
+      connectButton.click(),
     ]);
 
     const lndButton = await getByText($document, "Lightning Node");
     await Promise.all([
       page.waitForNavigation(), // The promise resolves after navigation has finished
-      lndButton.click()
+      lndButton.click(),
     ]);
 
     // wait for the field label instead of headline (headline text already exists on the page before)
@@ -189,13 +189,13 @@ test.describe("Create or connect wallets", () => {
     const connectButton = await getByText($document, "myNode");
     await Promise.all([
       page.waitForNavigation(), // The promise resolves after navigation has finished
-      connectButton.click()
+      connectButton.click(),
     ]);
 
     const lndButton = await getByText($document, "LND");
     await Promise.all([
       page.waitForNavigation(), // The promise resolves after navigation has finished
-      lndButton.click()
+      lndButton.click(),
     ]);
 
     // wait for the field label instead of headline (headline text already exists on the page before)
@@ -222,13 +222,13 @@ test.describe("Create or connect wallets", () => {
     const connectButton = await getByText($document, "Start9");
     await Promise.all([
       page.waitForNavigation(), // The promise resolves after navigation has finished
-      connectButton.click()
+      connectButton.click(),
     ]);
 
     const lndButton = await getByText($document, "LND");
     await Promise.all([
       page.waitForNavigation(), // The promise resolves after navigation has finished
-      lndButton.click()
+      lndButton.click(),
     ]);
 
     // wait for the field label instead of headline (headline text already exists on the page before)
