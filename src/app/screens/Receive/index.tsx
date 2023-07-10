@@ -53,7 +53,7 @@ function Receive() {
   const [pollingForPayment, setPollingForPayment] = useState(false);
   const mounted = useRef(false);
   const isAlbyUser =
-    isAlbyOAuthAccount(auth.account?.alias) ||
+    isAlbyOAuthAccount(auth.account?.connectorType) ||
     isAlbyLNDHubAccount(auth.account?.alias, auth.account?.connectorType);
 
   useEffect(() => {
