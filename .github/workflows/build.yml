@@ -29,16 +29,16 @@ jobs:
       - run: yarn install
 
       - name: Build firefox
-        run: yarn build:firefox
-        with:
+        env:
           ALBY_OAUTH_CLIENT_ID: ${{ env.ALBY_OAUTH_CLIENT_ID_FIREFOX }}
           ALBY_OAUTH_CLIENT_SECRET: ${{ env.ALBY_OAUTH_CLIENT_SECRET_FIREFOX }}
+        run: yarn build:firefox
 
       - name: Build chrome
-        run: yarn build:chrome
-        with:
+        env:
           ALBY_OAUTH_CLIENT_ID: ${{ env.ALBY_OAUTH_CLIENT_ID_CHROME }}
           ALBY_OAUTH_CLIENT_SECRET: ${{ env.ALBY_OAUTH_CLIENT_SECRET_CHROME }}
+        run: yarn build:chrome
 
       - name: Archive firefox production zip file
         uses: actions/upload-artifact@v3
