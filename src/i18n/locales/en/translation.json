@@ -478,7 +478,7 @@
         "remove": {
           "title": "Remove This Account",
           "subtitle": "Removes all allowances, payment data and keys associated with this account.",
-          "confirm": "Are you sure you want to remove account: {{name}}? \nThis can not be undone. If you used this account to login to websites you might lose access to those.",
+          "confirm": "Please enter the name of the account to confirm the deletion of your account.\n\n ⚠️ All associated keys (Secret Key, Nostr, etc) will be deleted if you continue. Please make sure you have backed them up, there is no other way to restore them.",
           "error": "The entered account name didn't match."
         },
         "remove_secretkey": {

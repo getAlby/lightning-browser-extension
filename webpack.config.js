@@ -12,8 +12,6 @@ const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 const BundleAnalyzerPlugin =
   require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
-console.info("OAuth Client ID", process.env.ALBY_OAUTH_CLIENT_ID);
-
 let network = "mainnet";
 if (!process.env.ALBY_API_URL) {
   process.env.ALBY_API_URL = "https://api.regtest.getalby.com";

@@ -44,7 +44,6 @@
         "macaroon": {
           "label": "Macaroon (formato HEX)"
         },
-        "or": "O",
         "drag_and_drop": "Trascina e rilascia il tuo macaroon qui o<0>sfoglia</0>",
         "errors": {
           "connection_failed": "Connessione non riuscita. Le tue credenziali LND sono corrette?"
@@ -607,25 +606,6 @@
     },
     "alby": {
       "pre_connect": {
-        "create_account": "Crea un nuovo account Alby per inviare e ricevere pagamenti bitcoin.",
-        "login_account": "Accedi per connettere il tuo account Alby esistente.",
-        "optional_lightning_note": {
-          "part4": "Scopri di più",
-          "part3": ". Si tratta di un semplice modo per fare in modo che chiunque possa inviarti bitcoin sulla rete lightning.",
-          "part1": "Il tuo account Alby include anche un optional",
-          "part2": "Indirizzo Lightning"
-        },
-        "forgot_password": "Hai dimenticato la password?",
-        "title": "Il tuo account Alby",
-        "host_wallet": "Ospitiamo un wallet Lightning per te!",
-        "email": {
-          "create": {
-            "label": "Indirizzo email"
-          },
-          "login": {
-            "label": "Indirizzo email o indirizzo Lightning"
-          }
-        },
         "set_password": {
           "choose_password": {
             "label": "Password"
@@ -638,24 +618,13 @@
             "confirm_password": "Si prega di confermare la password.",
             "mismatched_password": "Le password non corrispondono."
           }
-        },
-        "optional_lightning_address": {
-          "label": "Scegli il tuo Indirizzo Lightning (opzionale)",
-          "suffix": "@getalby.com",
-          "title": "numeri e lettere, almeno 4 caratteri"
-        },
-        "errors": {
-          "create_wallet_error1": "Impossibile accedere o creare un nuovo account.",
-          "create_wallet_error2": "Se hai bisogno di aiuto, contatta support@getalby.com",
-          "create_wallet_error": "Impossibile accedere o creare un nuovo account. Se hai bisogno di aiuto, contatta support@getalby.com"
         }
       }
     },
     "choose_path": {
       "alby": {
         "title": "Alby",
-        "description": "Registrati o utilizza il tuo account Alby per iniziare a pagare attraverso lightning in pochissimo tempo.",
-        "create_new": "Iscriviti"
+        "description": "Registrati o utilizza il tuo account Alby per iniziare a pagare attraverso lightning in pochissimo tempo."
       },
       "other": {
         "title": "Altri Wallet",
