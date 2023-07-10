@@ -365,9 +365,10 @@
           }
         },
         "remove": {
-          "confirm": "Tem certeza de que deseja remover a conta: {{name}}? \nEsta ação não pode ser desfeita. Se você usou essa conta para logar em sites, poderá perder o acesso a eles.",
+          "confirm": "Digite o nome da conta para confirmar a exclusão.\n\n ⚠️ Ao prosseguir com a exclusão, todas as chaves associadas a esta conta (chave secreta, Nostr, etc) serão perdidas. Certifique-se de fazer o backup antes de continuar, caso precise restaurar a conta no futuro.",
           "title": "Remover esta conta",
-          "error": "O nome da conta inserido não corresponde."
+          "error": "O nome da conta inserido não corresponde.",
+          "subtitle": "Remove todos os limites de gastos, dados de pagamento e chaves associados a esta conta."
         },
         "actions": {
           "remove_account": "Remover conta",
