@@ -50,7 +50,6 @@
         "macaroon": {
           "label": "Macaroon (formato HEX)"
         },
-        "or": "OU",
         "drag_and_drop": "Arraste e solte o macaroon aqui ou clique em <0>procurar</0>",
         "errors": {
           "connection_failed": "Falha na conexão. As credenciais LND estão corretas?"
@@ -116,7 +115,7 @@
         "title": "myNode",
         "page": {
           "title": "Conecte-se no servidor <0>myNode</0>",
-          "instructions": "No myNode clique em <0>Wallet</0> botão para seu serviço <0>lightning</0>.<1/> Agora clique em <0>Pair Wallet</0> botão abaixo da tab <0>Status</0>. Insira sua senha quando solicitada.<1/> Selecione o menu suspenso e escolha uma opção de emparelhamento. Dependendo da sua configuração você pode escolher <0>Conexão lightning (REST + Local IP)</0> ou conexão <0>lightning (REST + Tor)</0>."
+          "instructions": "No myNode clique em <0>Wallet</0> botão para seu serviço <0>lightning</0>.<1/> Agora clique em <0>Pair Wallet</0> botão abaixo da tab <0>Status</0>. Insira sua senha quando solicitada.<1/> Selecione o menu suspenso e escolha uma opção de emparelhamento. Dependendo de sua configuração você pode escolher <0>Conexão lightning (REST + Local IP)</0> ou conexão <0>lightning (REST + Tor)</0>."
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -327,17 +326,16 @@
         "nostr": {
           "title": "Nostr",
           "private_key": {
-            "title": "Gerenciar sua chave",
-            "successfully_removed": "Chave privada removida com sucesso.",
-            "label": "Chave privada",
-            "warning": "Digite o nome da conta para confirmar a exclusão da chave privada:",
-            "subtitle": "Cole sua chave privada ou gere uma nova. <0>Saiba mais »</0>",
-            "success": "Chave privada encriptada e salva com sucesso.",
-            "failed_to_remove": "O nome da conta inserido não está correto, sua chave privada antiga foi restaurada.",
-            "backup": "⚠️ Faça o backup da sua chave privada! Não fazer o backup da sua chave pode resultar na perda permanente de acesso."
+            "title": "Gerenciar sua chave privada Nostr",
+            "successfully_removed": "Chave privada Nostr removida com sucesso.",
+            "label": "Chave privada Nostr",
+            "warning": "Digite o nome da conta para confirmar a exclusão de sua chave privada Nostr:",
+            "subtitle": "Cole sua chave privada Nostr ou gere uma nova. <0>Saiba mais »</0>",
+            "success": "Chave privada Nostr criptografada e salva com sucesso.",
+            "failed_to_remove": "O nome da conta inserido não está correto, sua chave privada Nostr antiga foi restaurada."
           },
           "public_key": {
-            "label": "Chave pública"
+            "label": "Chave pública Nostr"
           },
           "hint": "é um protocolo simples e aberto que visa criar redes sociais resistentes à censura. Os perfis na rede Nostr são chaves criptográficas. Para publicar algo, você assina com sua chave e a informação é enviada para servidores. Na Alby você pode usar e gerenciar seu perfil em diferentes aplicações que suportam esse recurso.",
           "generate_keys": {
@@ -354,22 +352,88 @@
           },
           "errors": {
             "failed_to_load": "Falha ao carregar a chave Nostr. Esta é uma chave Nostr válida?"
+          },
+          "settings": {
+            "label": "Configurações Nostr",
+            "title": "Configurações Nostr",
+            "derive": "Derive chaves Nostr de sua chave secreta",
+            "delete": "Excluir chaves existentes",
+            "can_restore": "✅ Chave Nostr derivada de sua chave secreta",
+            "description": "Derive chaves Nostr de sua chave secreta ou importe sua chave privada existente colando-a no campo \"Chave privada Nostr\".",
+            "no_secret_key": "💡 Você ainda não tem uma chave secreta. <0>Clique aqui</0></div> para criar sua chave secreta e derivar suas chaves nostr.",
+            "imported_key_warning": "⚠️ No momento, você está usando uma chave Nostr importada ou gerada aleatoriamente. Sua chave privada Nostr não pode ser restaurada por sua chave secreta, então lembre-se de fazer o backup de sua chave privada Nostr."
           }
         },
         "remove": {
           "confirm": "Tem certeza de que deseja remover a conta: {{name}}? \nEsta ação não pode ser desfeita. Se você usou essa conta para logar em sites, poderá perder o acesso a eles.",
-          "title": "Remover esta conta"
+          "title": "Remover esta conta",
+          "error": "O nome da conta inserido não corresponde."
         },
         "actions": {
           "remove_account": "Remover conta",
-          "export": "Exportar"
+          "export": "Exportar",
+          "remove_secretkey": "Remover chave secreta"
         },
         "name": {
           "title": "Nome",
           "placeholder": "Nome da conta"
         },
         "title2": "Editar conta",
-        "title1": "Configurações da conta"
+        "title1": "Configurações da conta",
+        "mnemonic": {
+          "title": "Chave secreta",
+          "saved": "Chave secreta criptografada e salva com sucesso.",
+          "generate": {
+            "title": "Gere sua chave secreta",
+            "button": "Gerar chave secreta",
+            "confirm": "Eu salvei minha chave secreta em um local privado e seguro",
+            "error_confirm": "Por favor, confirme que você salvou sua chave secreta."
+          },
+          "backup": {
+            "save": "Salvar chave secreta",
+            "button": "Fazer backup",
+            "description1": "Além da rede Relâmpago do Bitcoin, a Alby permite gerar chaves e interagir com outros protocolos como:",
+            "protocols": {
+              "nostr": "Nostr"
+            },
+            "title": "Backup de sua chave secreta",
+            "description2": "A chave secreta é um conjunto de 12 palavras que permitirão que você acesse suas chaves nesses protocolos em um novo dispositivo ou caso perca o acesso à sua conta. Certifique-se de anotá-la em um pedaço de papel e mantê-la segura:",
+            "warning": "⚠️ Não se esqueça de fazer o backup de sua chave secreta! Não fazer o backup pode resultar na perda permanente do acesso à sua conta Nostr ou aos ativos que você gerencia com esta chave."
+          },
+          "import": {
+            "title": "Importar uma chave secreta",
+            "description": "Use uma chave secreta existente para recuperar suas chaves derivadas.",
+            "button": "Importar chave secreta",
+            "confirm_overwrite": "Você já tem uma chave secreta, tem certeza de que deseja substituí-la?"
+          },
+          "inputs": {
+            "title": "Sua chave secreta"
+          },
+          "existing_nostr_key_notice": "⚠️ Esta conta já possui uma chave privada nostr definida e não será derivada desta chave secreta. Você pode gerenciar sua chave nostr nas configurações de sua conta.",
+          "description": "A chave secreta permite que você use a Alby para interagir com protocolos como o Nostr.",
+          "description2": "A chave secreta é um conjunto de 12 palavras que permitirão que você acesse suas chaves de protocolos como o Nostr em outros dispositivos ou caso você perca o acesso à sua conta.",
+          "lnurl": {
+            "use_mnemonic": "Use a chave secreta para acessar aplicativos com tecnologia (LNURL Auth)",
+            "title": "Login Relâmpago"
+          }
+        },
+        "bitcoin": {
+          "network": {
+            "title": "Rede Bitcoin",
+            "options": {
+              "bitcoin": "Rede principal",
+              "testnet": "Rede de testes",
+              "regtest": "Regtest"
+            },
+            "subtitle": "Escolha a rede para derivar endereços e decodificar transações"
+          }
+        },
+        "remove_secretkey": {
+          "title": "Remover chave secreta",
+          "confirm": "Digite o nome da conta para confirmar a exclusão de sua chave secreta.",
+          "success": "Chave secreta removida com sucesso.",
+          "subtitle": "Remove a chave secreta desta conta."
+        }
       }
     },
     "enable": {
@@ -534,7 +598,8 @@
       "payment": {
         "waiting": "aguardando pagamento...",
         "status": "Verificar status do pagamento"
-      }
+      },
+      "receive_via_bitcoin_address": "Receber via endereço bitcoin"
     },
     "publishers": {
       "publisher": {
@@ -634,7 +699,8 @@
         "4": "mensagens diretas criptografadas",
         "9735": "zap",
         "3": "contatos",
-        "1": "nota de texto curta"
+        "1": "nota de texto curta",
+        "7": "reação"
       },
       "no_content": "(Sem conteúdo)"
     },
@@ -675,8 +741,8 @@
     "choose_path": {
       "alby": {
         "description": "Crie uma conta Alby ou faça o login caso já possua uma conta conosco.",
-        "create_new": "Criar conta Alby",
-        "title": "Conta Alby"
+        "title": "Conta Alby",
+        "connect": "Conecte-se com a Alby"
       },
       "other": {
         "title": "Outras contas",
@@ -687,7 +753,6 @@
     },
     "alby": {
       "pre_connect": {
-        "title": "Sua conta Alby",
         "set_password": {
           "errors": {
             "enter_password": "Insira uma senha.",
@@ -700,34 +765,6 @@
           "choose_password": {
             "label": "Senha"
           }
-        },
-        "login_account": "Acesse sua conta Alby.",
-        "host_wallet": "A custódia dos seus bitcoins é por nossa conta!",
-        "create_account": "Crie uma nova conta Alby para enviar e receber pagamentos em bitcoin.",
-        "email": {
-          "create": {
-            "label": "Endereço de e-mail"
-          },
-          "login": {
-            "label": "Endereço de E-mail ou Endereço Relâmpago"
-          }
-        },
-        "forgot_password": "Esqueceu sua senha?",
-        "optional_lightning_note": {
-          "part4": "saiba mais",
-          "part3": ". É o jeito mais simples para você receber bitcoin na rede relâmpago.",
-          "part2": "endereço relâmpago",
-          "part1": "Ao criar uma conta Alby, você pode escolher um"
-        },
-        "optional_lightning_address": {
-          "title": "números e letras, pelo menos 4 caracteres",
-          "suffix": "@getalby.com",
-          "label": "Escolha um Endereço Relâmpago (opcional)"
-        },
-        "errors": {
-          "create_wallet_error": "Falha ao logar ou criar uma nova conta. Se precisar de ajuda, entre em contato com support@getalby.com",
-          "create_wallet_error2": "Se precisar de ajuda, entre em contato com support@getalby.com",
-          "create_wallet_error1": "Falha ao fazer login ou criar uma nova conta."
         }
       }
     },
@@ -763,7 +800,19 @@
     },
     "confirm_add_account": {
       "content": "Este site deseja adicionar uma conta ({{connector}}):",
-      "title": "Adicionar conta"
+      "title": "Adicionar conta",
+      "tor_info": "Para se conectar através da rede TOR, você precisa primeiro instalar o aplicativo Alby companion:"
+    },
+    "on_chain": {
+      "instructions1": "Para receber via endereço bitcoin, acesse sua <0>conta Alby</0> em getalby.com",
+      "go": "Ir para sua conta Alby na web →",
+      "title": "Receber via endereço bitcoin",
+      "instructions2": "Seu endereço bitcoin está na página <0>Receber</0>."
+    },
+    "confirm_get_address": {
+      "title": "Obter endereço",
+      "heading": "Este site solicita ler:",
+      "content": "Seu endereço de recebimento Bitcoin"
     }
   },
   "common": {
@@ -803,7 +852,12 @@
       "remember": "Lembrar minha escolha e não perguntar novamente",
       "receive_again": "Receber outro pagamento",
       "transactions": "Transações",
-      "more": "Mais"
+      "more": "Mais",
+      "import": "Importar",
+      "paste": "Colar",
+      "paste_clipboard": "Colar da área de transferência",
+      "download": "Baixar",
+      "copy_clipboard": "Copiar para área de transferência"
     },
     "errors": {
       "connection_failed": "Falha na conexão",
@@ -838,7 +892,9 @@
       "nativelnbits": "LNBits (usando Tor)",
       "nativecitadel": "Citadel (usando Tor)",
       "nativelnd": "LND (usando Tor)"
-    }
+    },
+    "pasted": "Colado!",
+    "or": "ou"
   },
   "components": {
     "allowance_menu": {
@@ -895,7 +951,7 @@
     "toasts": {
       "connection_error": {
         "what_you_can_do": "Aqui está o que você pode fazer:",
-        "double_check": "Verifique novamente os detalhes da sua conexão",
+        "double_check": "Verifique novamente os detalhes de sua conexão",
         "if_ssl_errors": "e se houver erros de SSL (por exemplo, ERR_CERT_AUTHORITY_INVALID), clique em \"avançado\" e prossiga para aceitar o certificado.",
         "visit_guides": "Acesse nossos tutoriais para obter mais ajuda"
       },
@@ -913,7 +969,7 @@
           "add": "Adicionar nova conta",
           "manage": "Gerenciar contas",
           "account_settings": "Configurações da conta",
-          "go_to_web_wallet": "Acessar conta Alby na web"
+          "go_to_web_wallet": "Acessar sua conta na web"
         }
       }
     },
