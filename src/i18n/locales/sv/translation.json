@@ -336,16 +336,16 @@
             "failed_to_load": "Det gick inte att ladda Nostr-nyckeln. Är det en giltig Nostr-nyckel?"
           },
           "private_key": {
-            "title": "Hantera dina nycklar",
-            "successfully_removed": "Privat nyckel har tagits bort.",
-            "label": "Privat Nyckel",
-            "warning": "Ange namnet på kontot för att bekräfta raderingen av den privata nyckeln:",
-            "subtitle": "Klistra in din privata nyckel eller skapa en ny. <0>Läs mer »</0>",
-            "success": "Privat nyckel krypterad och sparad.",
-            "failed_to_remove": "Det angivna kontonamnet matchade inte, din gamla privata har återställts."
+            "title": "Hantera dina Nostr privata nyckel",
+            "successfully_removed": "Nostr privat nyckel har tagits bort.",
+            "label": "Nostr Privat Nyckel",
+            "warning": "Ange namnet på kontot för att bekräfta raderingen av din nostr privata nyckel:",
+            "subtitle": "Klistra in din nostr privata nyckel eller skapa en ny. <0>Läs mer »</0>",
+            "success": "Nostr privat nyckel krypterad och sparad.",
+            "failed_to_remove": "Det angivna kontonamnet matchade inte, din gamla Nostr privata nyckel har återställts."
           },
           "public_key": {
-            "label": "Publik Nyckel"
+            "label": "Nostr Publik Nyckel"
           },
           "actions": {
             "generate": "Generera en ny nyckel"
@@ -365,7 +365,7 @@
         },
         "remove": {
           "title": "Ta bort detta konto",
-          "subtitle": "Alla kopplade traktamenten kommer att raderas. Var säker på vad du gör.",
+          "subtitle": "Tar bort alla traktamenten, betalningsdata och nycklar som är kopplade till detta konto.",
           "confirm": "Är du säker på att du vill ta bort kontot: {{name}}? \nDetta kan inte ångras. Om du använde det här kontot för att logga in på webbplatser kan du förlora åtkomst till dessa.",
           "error": "Det angivna kontonamnet matchade inte."
         },
@@ -373,7 +373,7 @@
         "title2": "Redigera konto",
         "name": {
           "title": "Namn",
-          "placeholder": "Namn på konto"
+          "placeholder": "Konto visningsnamn"
         },
         "export": {
           "title": "Exportera konto",
@@ -399,7 +399,7 @@
           "backup": {
             "title": "Säkerhetskopiera din hemliga nyckel",
             "save": "Spara hemlig nyckel",
-            "button": "Backa upp hemlig nyckel",
+            "button": "Säkerhetskopiera hemlig nyckel",
             "description1": "Förutom Bitcoin Lightning Network låter Alby dig generera nycklar och interagera med andra protokoll som:",
             "protocols": {
               "nostr": "Nostr"
@@ -989,7 +989,7 @@
           "add": "Lägg till nytt konto",
           "manage": "Hantera konton",
           "account_settings": "Konto inställningar",
-          "go_to_web_wallet": "Hantera ditt Alby Konto"
+          "go_to_web_wallet": "Hantera ditt webbkonto"
         }
       }
     },
