@@ -1,9 +1,8 @@
-import { Runtime } from "webextension-polyfill";
 import utils from "~/common/lib/utils";
 import db from "~/extension/background-script/db";
 import state from "~/extension/background-script/state";
 import { allowanceFixture } from "~/fixtures/allowances";
-import type { DbAllowance, MessageAllowanceEnable } from "~/types";
+import type { DbAllowance, MessageAllowanceEnable, Sender } from "~/types";
 
 import enableAllowance from "../enable";
 
@@ -50,7 +49,13 @@ describe("enable allowance", () => {
       },
     };
 
-    const sender: Runtime.MessageSender = {};
+    const sender: Sender = {
+      documentId: "ALBY123",
+      documentLifecycle: "active",
+      id: "alby",
+      origin: `https://lnmarkets.com`,
+      url: `https://lnmarkets.com/test`,
+    };
 
     await db.allowances.bulkAdd(mockAllowances);
 
@@ -85,8 +90,13 @@ describe("enable allowance", () => {
         host: "pro.kollider.xyz",
       },
     };
-
-    const sender: Runtime.MessageSender = {};
+    const sender: Sender = {
+      documentId: "ALBY123",
+      documentLifecycle: "active",
+      id: "alby",
+      origin: `https://pro.kollider.xyz`,
+      url: `https://pro.kollider.xyz/test`,
+    };
 
     expect(await enableAllowance(message, sender)).toStrictEqual({
       data: {
