@@ -41,7 +41,9 @@ interface AccountContextType {
   /**
    * Fetch the additional account info: alias/balance and update account
    */
-  fetchAccountInfo: () => Promise<AccountInfo | undefined>;
+  fetchAccountInfo: (options?: {
+    accountId?: string;
+  }) => Promise<AccountInfo | undefined>;
 }
 
 const AccountContext = createContext({} as AccountContextType);
