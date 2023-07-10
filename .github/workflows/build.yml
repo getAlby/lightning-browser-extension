@@ -1,4 +1,4 @@
-name: Build nightlies
+name: Build extension packages
 
 on:
   push:
