@@ -41,7 +41,7 @@ function AccountDetailLayout() {
       const account = await api.getAccount(id);
       setAccount(account);
     })();
-  }, [id, navigate]);
+  }, [id]);
 
   async function exportAccount({ id, name }: AccountAction) {
     setExportLoading(true);
@@ -81,11 +81,11 @@ function AccountDetailLayout() {
                 {account.name}
               </h2>
               <div
-                title={account.connector}
+                title={account.connectorType}
                 className="text-gray-500 dark:text-gray-400 mb-2 flex justify-center items-center"
               >
-                {account.connector}
-                {exportAccount && account.connector === "lndhub" && (
+                {account.connectorType}
+                {exportAccount && account.connectorType === "lndhub" && (
                   <>
                     <div className="mx-2 font-black text-sm">&middot;</div>
                     <div
