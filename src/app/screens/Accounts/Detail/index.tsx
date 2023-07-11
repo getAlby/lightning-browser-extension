@@ -20,7 +20,6 @@ import { useAccount } from "~/app/context/AccountContext";
 import { useAccounts } from "~/app/context/AccountsContext";
 import { useSettings } from "~/app/context/SettingsContext";
 import api, { GetAccountRes } from "~/common/lib/api";
-import msg from "~/common/lib/msg";
 import nostr from "~/common/lib/nostr";
 import type { Account, BitcoinNetworkType } from "~/types";
 

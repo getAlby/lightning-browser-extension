@@ -20,7 +20,7 @@ function ImportSecretKey() {
   });
 
   const [mnemonic, setMnemonic] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(true);
+  const [hasFetchedData, setHasFetchedData] = useState(false);
   const [hasNostrPrivateKey, setHasNostrPrivateKey] = useState(false);
 
   const { id } = useParams() as { id: string };
@@ -28,8 +28,6 @@ function ImportSecretKey() {
   useEffect(() => {
     (async () => {
       try {
-        setLoading(true);
-
         const account = await api.getAccount(id);
         setHasNostrPrivateKey(account.nostrEnabled);
         if (account.hasMnemonic) {
@@ -37,11 +35,10 @@ function ImportSecretKey() {
           // go to account settings
           navigate(`/accounts/${id}`);
         }
+        setHasFetchedData(true);
       } catch (e) {
         console.error(e);
         if (e instanceof Error) toast.error(`Error: ${e.message}`);
-      } finally {
-        setLoading(false);
       }
     })();
   }, [id, navigate]);
@@ -69,7 +66,7 @@ function ImportSecretKey() {
     }
   }
 
-  return loading ? (
+  return !hasFetchedData ? (
     <div className="flex justify-center mt-5">
       <Loading />
     </div>

@@ -64,7 +64,7 @@ function GenerateSecretKey() {
     }
   }
 
-  function cancelImport() {
+  function cancel() {
     // go to account settings
     navigate(`/accounts/${id}`);
   }
@@ -106,7 +106,7 @@ function GenerateSecretKey() {
           )}
         </ContentBox>
         <div className="flex justify-center mt-8 mb-16 gap-4">
-          <Button label={tCommon("actions.cancel")} onClick={cancelImport} />
+          <Button label={tCommon("actions.cancel")} onClick={cancel} />
           <Button
             label={t("backup.save")}
             primary
