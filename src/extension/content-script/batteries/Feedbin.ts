@@ -12,6 +12,8 @@ const battery = async (): Promise<void> => {
   const weburl =
     document.querySelector<HTMLAnchorElement>("#source_link")?.href ?? "";
 
+  if (!weburl) return;
+
   lightningData = await fetchWebPage(weburl);
 
   if (lightningData) setLightningData([lightningData]);
