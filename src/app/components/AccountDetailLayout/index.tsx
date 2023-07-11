@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Modal from "react-modal";
 import QRCode from "react-qr-code";
-import { Outlet, useNavigate, useParams } from "react-router-dom";
+import { Outlet, useMatch, useNavigate, useParams } from "react-router-dom";
 import Avatar from "~/app/components/Avatar";
 import Loading from "~/app/components/Loading";
 import TextField from "~/app/components/form/TextField";
@@ -21,6 +21,7 @@ type AccountAction = Pick<Account, "id" | "name">;
 
 function AccountDetailLayout() {
   const navigate = useNavigate();
+  const isRoot = useMatch("accounts/:id");
 
   const { t } = useTranslation("translation", {
     keyPrefix: "accounts.account_view",
@@ -58,13 +59,21 @@ function AccountDetailLayout() {
     setExportModalIsOpen(false);
   }
 
+  function back() {
+    if (isRoot) {
+      navigate("/accounts");
+    } else {
+      navigate(`/accounts/${id}`);
+    }
+  }
+
   return (
     <>
       <Header
         title={t("title1")}
         headerLeft={
           <IconButton
-            onClick={() => navigate(-1)}
+            onClick={back}
             icon={<CaretLeftIcon className="w-4 h-4" />}
           />
         }
