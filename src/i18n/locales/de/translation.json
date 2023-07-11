@@ -491,7 +491,7 @@
         "remove": {
           "title": "Dieses Konto entfernen",
           "subtitle": "Entfernt alle Zulagen, Zahlungsdaten und Schlüssel, die mit diesem Konto verbunden sind.",
-          "confirm": "Bist du sicher, dass du das Konto entfernen möchtest: {{name}}? \nDies kann nicht rückgängig gemacht werden. Wenn du dich mit diesem Konto bei Webseiten angemeldet hast, könntest du den Zugang zu diesen verlieren.",
+          "confirm": "Bitte gebe deinen den Namen des Kontos ein, um die Löschung deines Kontos zu bestätigen.\n\n⚠️ Alle zugehörigen Schlüssel (Geheimschlüssel, Nostr, usw.) werden gelöscht, wenn du fortfährst. Bitte vergewissere dich, dass du eine Sicherungskopie erstellt hast, denn es gibt keine andere Möglichkeit, sie wiederherzustellen.",
           "error": "Der eingegebene Kontoname stimmte nicht überein."
         },
         "actions": {
