@@ -366,7 +366,7 @@
         "remove": {
           "title": "Ta bort detta konto",
           "subtitle": "Tar bort alla traktamenten, betalningsdata och nycklar som är kopplade till detta konto.",
-          "confirm": "Är du säker på att du vill ta bort kontot: {{name}}? \nDetta kan inte ångras. Om du använde det här kontot för att logga in på webbplatser kan du förlora åtkomst till dessa.",
+          "confirm": "Ange namnet på kontot för att bekräfta raderingen av ditt konto.\n\n ⚠️ Alla associerade nycklar (hemlig nyckel, Nostr, etc) kommer att raderas om du fortsätter. Se till att du har säkerhetskopierat dem, det finns inget annat sätt att återställa dem.",
           "error": "Det angivna kontonamnet matchade inte."
         },
         "title1": "Konto information",
