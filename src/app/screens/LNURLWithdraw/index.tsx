@@ -105,7 +105,7 @@ function LNURLWithdraw() {
       );
     } else {
       return (
-        <div className="my-4 p-4 shadow bg-white dark:bg-surface-02dp rounded-lg overflow-hidden">
+        <div className="mt-2">
           <DualCurrencyField
             autoFocus
             id="amount"
