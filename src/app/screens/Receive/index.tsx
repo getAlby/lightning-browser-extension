@@ -153,6 +153,7 @@ function Receive() {
   useEffect(() => {
     getLightningAddress();
   }, []);
+
   function renderInvoice() {
     if (!invoice) return null;
     return (
