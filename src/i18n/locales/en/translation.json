@@ -355,8 +355,8 @@
       "recent_transactions": "Recent Transactions",
       "allowance_view": {
         "recent_transactions": "Recent Transactions",
-        "allowance": "Allowance",
-        "sats_used": "sats used",
+        "budget_spent": "Budget spent",
+        "sats": "sats",
         "no_transactions": "No transactions on <0>{{name}}</0> yet."
       },
       "default_view": {
