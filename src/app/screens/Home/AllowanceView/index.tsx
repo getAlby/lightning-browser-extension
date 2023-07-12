@@ -110,23 +110,21 @@ const AllowanceView: FC<Props> = (props) => {
       )}
       <div className="px-4 pb-5">
         {hasBudget ? (
-          <div className="flex justify-between items-center py-3">
-            <dl className="mb-0">
-              <dt className="text-xs text-gray-500 dark:text-neutral-400">
-                {t("allowance_view.allowance")}
+          <div className="flex flex-col py-3">
+            <dl className="mb-0 w-full flex place-content-between">
+              <dt className="text-base text-black font-medium dark:text-neutral-400 mb-2">
+                {t("allowance_view.budget_spent")}
               </dt>
-              <dd className="flex items-center mb-0 text-sm font-medium dark:text-neutral-400">
+              <dd className="text-sm text-gray-600">
                 {hasBudget
                   ? `${getFormattedNumber(
                       props.allowance.usedBudget
                     )} / ${getFormattedNumber(props.allowance.totalBudget)} `
                   : "0 / 0 "}
-                {t("allowance_view.sats_used")}
-                <div className="ml-3 w-24">
-                  <Progressbar percentage={props.allowance.percentage} />
-                </div>
+                {t("allowance_view.sats")}
               </dd>
             </dl>
+            <Progressbar percentage={props.allowance.percentage} />
           </div>
         ) : (
           <SitePreferences
