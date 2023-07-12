@@ -42,7 +42,6 @@ function Receive() {
     expiration: "",
   });
   const [loadingInvoice, setLoadingInvoice] = useState(false);
-  const [loadingLightningAddress, setLoadingLightningAddress] = useState(false);
   const [invoice, setInvoice] = useState<{
     paymentRequest: string;
     rHash: string;
@@ -53,6 +52,7 @@ function Receive() {
   const [copyLightningAddressLabel, setCopyLightningAddressLabel] = useState(
     t("actions.copy_lightning_address") as string
   );
+  const [lightningAddress, setLightningAddress] = useState("");
   const [paid, setPaid] = useState(false);
   const [pollingForPayment, setPollingForPayment] = useState(false);
   const mounted = useRef(false);
@@ -145,13 +145,14 @@ function Receive() {
   }
 
   async function getLightningAddress() {
-    setLoadingLightningAddress(true);
     const response = await api.getAccountInfo();
     const lightningAddress = response.info.lightning_address;
-    setLoadingLightningAddress(false);
-    return lightningAddress;
+    if (lightningAddress) setLightningAddress(lightningAddress);
   }
 
+  useEffect(() => {
+    getLightningAddress();
+  }, []);
   function renderInvoice() {
     if (!invoice) return null;
     return (
@@ -310,7 +311,6 @@ function Receive() {
                     fullWidth
                     onClick={async () => {
                       try {
-                        const lightningAddress = await getLightningAddress();
                         if (lightningAddress) {
                           navigator.clipboard.writeText(lightningAddress);
                           setCopyLightningAddressLabel(tCommon("copied"));
@@ -329,7 +329,6 @@ function Receive() {
                       }
                     }}
                     icon={<CopyIcon className="w-6 h-6 mr-2" />}
-                    loading={loadingLightningAddress}
                   />
                 </div>
 
