@@ -63,6 +63,7 @@ export function getAlbyAccountName(info: AlbyAccountInformation) {
 }
 
 // to extract lightning data associated with the lightning tag within the URL. eg. LNBits QR codes
+// look like this: https://lnbits.example.com?lightning=LNURL
 export function extractLightningTagData(url: string) {
   const reqExp = /lightning=([^&|\b]+)/i;
 
