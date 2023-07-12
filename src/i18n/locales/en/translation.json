@@ -673,7 +673,8 @@
     "receive": {
       "title": "Receive",
       "actions": {
-        "create_invoice": "Create Invoice"
+        "create_invoice": "Create Invoice",
+        "copy_lightning_address": "Copy Lightning Address"
       },
       "amount": {
         "label": "Amount",
@@ -688,7 +689,8 @@
         "waiting": "waiting for payment...",
         "status": "Check payment status"
       },
-      "receive_via_bitcoin_address": "Receive via bitcoin address"
+      "receive_via_bitcoin_address": "Receive via bitcoin address",
+      "get_lightning_address": "Get your lightning address at https://getalby.com/user"
     },
     "on_chain": {
       "title": "Receive via bitcoin address",

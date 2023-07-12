@@ -41,19 +41,23 @@ function Receive() {
     description: "",
     expiration: "",
   });
-  const [loading, setLoading] = useState(false);
+  const [loadingInvoice, setLoadingInvoice] = useState(false);
+  const [loadingLightningAddress, setLoadingLightningAddress] = useState(false);
   const [invoice, setInvoice] = useState<{
     paymentRequest: string;
     rHash: string;
   } | null>();
-  const [copyLabel, setCopyLabel] = useState(
+  const [copyInvoiceLabel, setCopyInvoiceLabel] = useState(
     tCommon("actions.copy_invoice") as string
+  );
+  const [copyLightningAddressLabel, setCopyLightningAddressLabel] = useState(
+    t("actions.copy_lightning_address") as string
   );
   const [paid, setPaid] = useState(false);
   const [pollingForPayment, setPollingForPayment] = useState(false);
   const mounted = useRef(false);
   const isAlbyUser =
-    isAlbyOAuthAccount(auth.account?.alias) ||
+    isAlbyOAuthAccount(auth.account?.connectorType) ||
     isAlbyLNDHubAccount(auth.account?.alias, auth.account?.connectorType);
 
   useEffect(() => {
@@ -119,7 +123,7 @@ function Receive() {
 
   async function createInvoice() {
     try {
-      setLoading(true);
+      setLoadingInvoice(true);
       const response = await api.makeInvoice({
         amount: formData.amount,
         memo: formData.description,
@@ -131,13 +135,21 @@ function Receive() {
         toast.error(e.message);
       }
     } finally {
-      setLoading(false);
+      setLoadingInvoice(false);
     }
   }
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     createInvoice();
+  }
+
+  async function getLightningAddress() {
+    setLoadingLightningAddress(true);
+    const response = await api.getAccountInfo();
+    const lightningAddress = response.info.lightning_address;
+    setLoadingLightningAddress(false);
+    return lightningAddress;
   }
 
   function renderInvoice() {
@@ -178,9 +190,9 @@ function Receive() {
                 onClick={async () => {
                   try {
                     navigator.clipboard.writeText(invoice.paymentRequest);
-                    setCopyLabel(tCommon("copied"));
+                    setCopyInvoiceLabel(tCommon("copied"));
                     setTimeout(() => {
-                      setCopyLabel(tCommon("actions.copy_invoice"));
+                      setCopyInvoiceLabel(tCommon("actions.copy_invoice"));
                     }, 1000);
                   } catch (e) {
                     if (e instanceof Error) {
@@ -189,7 +201,7 @@ function Receive() {
                   }
                 }}
                 icon={<CopyIcon className="w-6 h-6 mr-2" />}
-                label={copyLabel}
+                label={copyInvoiceLabel}
               />
             </div>
 
@@ -243,7 +255,7 @@ function Receive() {
       ) : (
         <div className="pt-4">
           <form onSubmit={handleSubmit}>
-            <fieldset disabled={loading}>
+            <fieldset disabled={loadingInvoice}>
               <Container justifyBetween maxWidth="sm">
                 <div className="py-4">
                   <div className="mb-4">
@@ -273,8 +285,8 @@ function Receive() {
                     label={t("actions.create_invoice")}
                     fullWidth
                     primary
-                    loading={loading}
-                    disabled={loading}
+                    loading={loadingInvoice}
+                    disabled={loadingInvoice}
                   />
                 </div>
               </Container>
@@ -289,6 +301,36 @@ function Receive() {
                     {tCommon("or")}
                   </span>
                   <div className="flex-grow border-t  border-gray-300 dark:border-gray-700"></div>
+                </div>
+
+                <div className="mb-4">
+                  <Button
+                    type="button"
+                    label={copyLightningAddressLabel}
+                    fullWidth
+                    onClick={async () => {
+                      try {
+                        const lightningAddress = await getLightningAddress();
+                        if (lightningAddress) {
+                          navigator.clipboard.writeText(lightningAddress);
+                          setCopyLightningAddressLabel(tCommon("copied"));
+                          setTimeout(() => {
+                            setCopyLightningAddressLabel(
+                              t("actions.copy_lightning_address")
+                            );
+                          }, 1000);
+                        } else {
+                          toast.info(t("get_lightning_address"));
+                        }
+                      } catch (e) {
+                        if (e instanceof Error) {
+                          toast.error(e.message);
+                        }
+                      }
+                    }}
+                    icon={<CopyIcon className="w-6 h-6 mr-2" />}
+                    loading={loadingLightningAddress}
+                  />
                 </div>
 
                 <div className="mb-4">
