@@ -125,6 +125,7 @@ function QrcodeScanner({
                 {t("title")}
               </h4>
               <Button
+                primary
                 label={t("actions.start_scanning")}
                 onClick={handleRequestCameraPermissions}
               />
