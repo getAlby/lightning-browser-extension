@@ -39,6 +39,9 @@ module.exports = {
         xxxs: ".5rem",
         xxs: ".625rem",
       },
+      screens: {
+        short: { raw: "(max-height: 800px)" },
+      },
       spacing: {
         18: "4.5rem",
       },
