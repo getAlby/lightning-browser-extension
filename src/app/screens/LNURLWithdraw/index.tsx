@@ -6,9 +6,10 @@ import PublisherCard from "@components/PublisherCard";
 import ResultCard from "@components/ResultCard";
 import DualCurrencyField from "@components/form/DualCurrencyField";
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import { useSettings } from "~/app/context/SettingsContext";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
@@ -40,7 +41,6 @@ function LNURLWithdraw() {
   );
   const [loadingConfirm, setLoadingConfirm] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
   const [fiatValue, setFiatValue] = useState("");
 
   useEffect(() => {
@@ -54,7 +54,6 @@ function LNURLWithdraw() {
 
   async function confirm() {
     try {
-      setErrorMessage("");
       setLoadingConfirm(true);
 
       const invoice = await api.makeInvoice({
@@ -84,12 +83,12 @@ function LNURLWithdraw() {
           msg.reply(response.data);
         }
       } else {
-        setErrorMessage(`Error: ${response.data.reason}`);
+        toast.error(`Error: ${response.data.reason}`);
       }
     } catch (e) {
       console.error(e);
       if (e instanceof Error) {
-        setErrorMessage(e.message);
+        toast.error(e.message);
       }
     } finally {
       setLoadingConfirm(false);
@@ -99,14 +98,10 @@ function LNURLWithdraw() {
   function renderAmount() {
     if (minWithdrawable === maxWithdrawable) {
       return (
-        <>
-          <ContentMessage
-            heading={t("content_message.heading")}
-            content={getFormattedSats(Math.floor(minWithdrawable / 1000))}
-          />
-
-          {errorMessage && <p className="mt-1 text-red-500">{errorMessage}</p>}
-        </>
+        <ContentMessage
+          heading={t("content_message.heading")}
+          content={getFormattedSats(Math.floor(minWithdrawable / 1000))}
+        />
       );
     } else {
       return (
@@ -121,8 +116,6 @@ function LNURLWithdraw() {
             onChange={(e) => setValueSat(e.target.value)}
             fiatValue={fiatValue}
           />
-
-          {errorMessage && <p className="mt-1 text-red-500">{errorMessage}</p>}
         </div>
       );
     }
