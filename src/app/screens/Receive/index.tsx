@@ -320,8 +320,6 @@ function Receive() {
                               t("actions.copy_lightning_address")
                             );
                           }, 1000);
-                        } else {
-                          toast.info(t("get_lightning_address"));
                         }
                       } catch (e) {
                         if (e instanceof Error) {
