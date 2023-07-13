@@ -32,7 +32,7 @@
         "title": "Alby拡張機能を固定",
         "description": "もうすぐです。Albyを便利に使うには、拡張機能をブラウザのツールバーに固定することを忘れないでください：",
         "explanation": "1. ブラウザの右上にある<0/>をクリックします<1/>2.Albyを見つけてクリックし、ツールバーに固定します<1/>3.以上です。Albyにアクセスするには、<2/>アイコンをクリックします",
-        "next_btn": "アルビーを始めよう！{{icon}}"
+        "next_btn": "Albyを始めよう！{{icon}}"
       }
     },
     "choose_path": {
@@ -95,7 +95,7 @@
         },
         "pairing_phrase": {
           "label": "あなたのペアリング・フレーズ ",
-          "placeholder": "secret stack sats phrase"
+          "placeholder": ""
         }
       },
       "lndhub_bluewallet": {
