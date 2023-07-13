@@ -146,7 +146,7 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
     await fetchAccountInfo({ skipCache: true });
   };
 
-  // Invoked only on on mount.
+  // Invoked only on mount.
   useEffect(() => {
     api
       .getStatus()
