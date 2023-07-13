@@ -92,7 +92,8 @@
           "description": "1. Lightning Terminalを開き、サイドバーから<0>Lightning Node Connect</0>を選択します。 <0>Create a new session</0>を選択します。<1/>3.セッションにラベルを付け、必要なパーミッションを選択し、送信します。<1/>4.<0>ペアリングフレーズをコピーし、以下に貼り付けます。"
         },
         "pairing_phrase": {
-          "label": "あなたのペアリング・フレーズ "
+          "label": "あなたのペアリング・フレーズ ",
+          "placeholder": "secret stack sats phrase"
         }
       },
       "lndhub_bluewallet": {
@@ -181,19 +182,25 @@
       },
       "mynode": {
         "page": {
-          "title": "<0>myNode</0>に接続"
+          "title": "<0>myNode</0>に接続",
+          "instructions": "myNode のホームページで<0>lightning</0>サービスの<0>Wallet</0>ボタンをクリックします。<1/>次に<0>Status</0>タブの下にある<0>Pair Wallet</0>ボタンをクリックします。パスワードを聞かれた場合は入力します。<1/>ドロップダウンメニューを選択し、ペアリングのオプションを選択します。<0>lightning（REST + ローカルIP）</0>接続、または<0>ライトニング（REST + Tor）</0>接続のいずれかを使用できます。"
         },
         "rest_url": {
           "label": "lndconnectのREST URL",
           "placeholder": "lndconnect://yournode:8080?..."
-        }
+        },
+        "title": "myNode"
       },
       "start9": {
         "rest_url": {
           "label": "lndconnectのREST URL",
           "placeholder": "lndconnect://yournode:8080?..."
         },
-        "title": "Start9"
+        "title": "Start9",
+        "page": {
+          "title": "<0>Start9サーバー</0>に接続",
+          "instructions": "Embassyダッシュボードで<0>Lightning Network Daemon</0>サービスをクリックします。<1/><0>Properties</0>タブを選択します。<1/>ここで<0>LND Connect REST URL</0>をコピーします。"
+        }
       },
       "raspiblitz": {
         "page": {
