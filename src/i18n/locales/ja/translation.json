@@ -206,10 +206,12 @@
       },
       "raspiblitz": {
         "page": {
-          "title": "<0>RaspiBlitz</0>ノードに接続"
+          "title": "<0>RaspiBlitz</0>ノードに接続",
+          "instructions2": "(管理) <0>マカロン</0> を下の入力にコピーする。"
         },
         "rest_api_host": {
-          "label": "REST APIのホスト"
+          "label": "REST APIのホスト",
+          "placeholder": "your-node-onion-address:port"
         },
         "title": "RaspiBlitz"
       },
@@ -222,7 +224,21 @@
       "title": "ライトニングウォレットを接続",
       "description": "外部のライトニングウォレットまたはノードに接続する",
       "bitcoin_jungle": {
-        "title": "Bitcoin Jungle Wallet"
+        "title": "Bitcoin Jungle Wallet",
+        "page": {
+          "title": "<0>Bitcoin Jungle Wallet</0>に接続"
+        }
+      },
+      "galoy": {
+        "phone_number": {
+          "label": "電話番号を入力"
+        },
+        "sms_code": {
+          "label": "SMS認証コードを入力"
+        },
+        "token": {
+          "label": "アクセストークンを入力"
+        }
       }
     }
   },
