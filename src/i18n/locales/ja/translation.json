@@ -250,7 +250,20 @@
         }
       },
       "kollider": {
-        "warning": "⚠️ 認証情報は必ずパスワードマネージャーに保存してください。認証情報を紛失した場合、アカウントを復旧することはできません。"
+        "warning": "⚠️ 認証情報は必ずパスワードマネージャーに保存してください。認証情報を紛失した場合、アカウントを復旧することはできません。",
+        "title": "Kollider",
+        "choose_path": {
+          "create_new": "新規登録",
+          "title": "Koliderウォレットに接続",
+          "description": "Koliderアカウントを作成してAlbyに接続するためにログインまたは新規登録する。"
+        },
+        "create": {
+          "title": "Koliderのアカウントを作成してAlbyと接続する"
+        },
+        "description": "Koliderアカウントにログインする",
+        "username": {
+          "label": "ユーザ名"
+        }
       }
     }
   },
