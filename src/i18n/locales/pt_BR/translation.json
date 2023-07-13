@@ -597,7 +597,8 @@
         "waiting": "aguardando pagamento...",
         "status": "Verificar status do pagamento"
       },
-      "receive_via_bitcoin_address": "Receber via endereço bitcoin"
+      "receive_via_bitcoin_address": "Receber via endereço bitcoin",
+      "redeem_lnurl": "Resgatar pagamento"
     },
     "publishers": {
       "publisher": {
@@ -811,6 +812,23 @@
       "title": "Obter endereço",
       "heading": "Este site solicita ler:",
       "content": "Seu endereço de recebimento Bitcoin"
+    },
+    "lnurlredeem": {
+      "title": "Resgatar bitcoin",
+      "input": {
+        "placeholder": "LNURL...",
+        "label": "Código LNURL"
+      },
+      "actions": {
+        "withdraw": "Resgatar"
+      },
+      "errors": {
+        "invalid_withdraw_request": "Solicitação LNURL inválida",
+        "invalid_lnurl": "LNURL inválido"
+      }
+    },
+    "scan_qrcode": {
+      "title": "Aguardando leitura"
     }
   },
   "common": {
