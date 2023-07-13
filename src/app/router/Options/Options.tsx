@@ -1,3 +1,4 @@
+import ConnectionError from "@components/ConnectionError";
 import Container from "@components/Container";
 import Navbar from "@components/Navbar";
 import Accounts from "@screens/Accounts";
@@ -22,6 +23,7 @@ import { HashRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import ScrollToTop from "~/app/components/ScrollToTop";
 import Providers from "~/app/context/Providers";
+import { useConnectionError } from "~/app/hooks/useConnectionError";
 import RequireAuth from "~/app/router/RequireAuth";
 import { getConnectorRoutes, renderRoutes } from "~/app/router/connectorRoutes";
 import BackupSecretKey from "~/app/screens/Accounts/BackupSecretKey";
@@ -153,6 +155,7 @@ function Options() {
 
 const Layout = () => {
   const { t: tCommon } = useTranslation("common");
+  const { connectionError } = useConnectionError();
 
   return (
     <div>
@@ -169,7 +172,7 @@ const Layout = () => {
         className="w-fit max-w-2xl"
       />
 
-      <Outlet />
+      {connectionError ? <ConnectionError /> : <Outlet />}
     </div>
   );
 };

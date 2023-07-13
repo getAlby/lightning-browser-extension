@@ -26,7 +26,7 @@ function ConnectionError() {
   }, [account]);
 
   return (
-    <Container classNames="h-full flex flex-col">
+    <Container maxWidth="sm" classNames="h-full flex flex-col">
       <div className="flex justify-center">
         <div className="w-32 dark:text-white">
           <img src="assets/icons/alby-x-head.svg" className="w-full" />
@@ -36,7 +36,7 @@ function ConnectionError() {
         {t("connection_error.info")}
       </div>
       <div className="grow"></div>
-      <div>
+      <div className="mt-6">
         <Button
           label={tCommon("actions.try_again")}
           icon={!loading && <RefreshIcon className="w-6" />}
