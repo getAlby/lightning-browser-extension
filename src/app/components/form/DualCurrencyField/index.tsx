@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { classNames } from "~/app/utils";
 
 import { RangeLabel } from "./rangeLabel";
@@ -9,6 +10,8 @@ export type Props = {
   fiatValue: string;
   label: string;
   hint?: string;
+  amountExceeded?: boolean;
+  rangeExceeded?: boolean;
 };
 
 export default function DualCurrencyField({
@@ -31,7 +34,10 @@ export default function DualCurrencyField({
   suffix,
   endAdornment,
   hint,
+  amountExceeded,
+  rangeExceeded,
 }: React.InputHTMLAttributes<HTMLInputElement> & Props) {
+  const { t: tCommon } = useTranslation("common");
   const inputEl = useRef<HTMLInputElement>(null);
   const outerStyles =
     "rounded-md border border-gray-300 dark:border-gray-800 bg-white dark:bg-black transition duration-300";
@@ -85,8 +91,13 @@ export default function DualCurrencyField({
           {label}
         </label>
         {(min || max) && (
-          <span className="text-xs text-gray-700 dark:text-neutral-400">
-            <RangeLabel min={min} max={max} /> sats
+          <span
+            className={classNames(
+              "text-xs text-gray-700 dark:text-neutral-400",
+              !!rangeExceeded && "text-red-500 dark:text-red-500"
+            )}
+          >
+            <RangeLabel min={min} max={max} /> {tCommon("sats_other")}
           </span>
         )}
       </div>
@@ -96,6 +107,8 @@ export default function DualCurrencyField({
           "flex items-center overflow-hidden field mt-1 px-3",
           "focus-within:ring-primary focus-within:border-primary focus-within:dark:border-primary focus-within:ring-1",
           !hint && "mb-2",
+          (!!amountExceeded || !!rangeExceeded) &&
+            "border-red-500 dark:border-red-500",
           outerStyles
         )}
       >
@@ -125,7 +138,12 @@ export default function DualCurrencyField({
         )}
       </div>
       {hint && (
-        <p className="my-1 text-xs text-gray-700 dark:text-neutral-400">
+        <p
+          className={classNames(
+            "my-1 text-xs text-gray-700 dark:text-neutral-400",
+            !!amountExceeded && "text-red-500 dark:text-red-500"
+          )}
+        >
           {hint}
         </p>
       )}

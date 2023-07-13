@@ -14,7 +14,11 @@ import MenuDivider from "~/app/components/Menu/MenuDivider";
 import SkeletonLoader from "~/app/components/SkeletonLoader";
 import { useAccount } from "~/app/context/AccountContext";
 import { useAccounts } from "~/app/context/AccountsContext";
-import { classNames, isAlbyAccount } from "~/app/utils";
+import {
+  classNames,
+  isAlbyLNDHubAccount,
+  isAlbyOAuthAccount,
+} from "~/app/utils";
 import utils from "~/common/lib/utils";
 
 import Menu from "../Menu";
@@ -65,7 +69,11 @@ function AccountMenu({ showOptions = true }: Props) {
                 containerClassName="inline-flex"
               />
             ) : (
-              <Avatar size={24} name={authAccount?.id || ""} />
+              <Avatar
+                size={24}
+                url={authAccount?.avatarUrl}
+                name={authAccount?.id || ""}
+              />
             )}
             <div
               className={`flex-auto mx-2 py-3 overflow-hidden max-w-[14rem] text-left`}
@@ -133,7 +141,11 @@ function AccountMenu({ showOptions = true }: Props) {
             <WalletIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
             {t("options.account.account_settings")}
           </Menu.ItemButton>
-          {isAlbyAccount(authAccount?.alias) && (
+          {(isAlbyLNDHubAccount(
+            authAccount?.alias,
+            authAccount?.connectorType
+          ) ||
+            isAlbyOAuthAccount(authAccount?.connectorType)) && (
             <Menu.ItemButton
               onClick={() => {
                 window.open(`https://getalby.com/user`, "_blank");
@@ -165,7 +177,11 @@ function AccountMenu({ showOptions = true }: Props) {
                     title={account.name}
                   >
                     <div className="shrink-0">
-                      <Avatar size={24} name={account.id} />
+                      <Avatar
+                        size={24}
+                        name={account.id}
+                        url={account.avatarUrl}
+                      />
                     </div>
                     <span className="overflow-hidden text-ellipsis whitespace-nowrap ml-2">
                       {account.name}&nbsp;

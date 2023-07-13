@@ -19,6 +19,8 @@ export interface AccountContextType {
     alias?: AccountInfo["alias"];
     balance?: AccountInfo["balance"];
     currency?: AccountInfo["currency"];
+    avatarUrl?: AccountInfo["avatarUrl"];
+    connectorType?: AccountInfo["connectorType"];
     error?: AccountInfo["error"];
   } | null;
   balancesDecorated: {
@@ -40,7 +42,9 @@ export interface AccountContextType {
   /**
    * Fetch the additional account info: alias/balance and update account
    */
-  fetchAccountInfo: () => Promise<AccountInfo | undefined>;
+  fetchAccountInfo: (options?: {
+    accountId?: string;
+  }) => Promise<AccountInfo | undefined>;
 }
 
 const AccountContext = createContext({} as AccountContextType);

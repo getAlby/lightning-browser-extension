@@ -15,6 +15,7 @@ import { HashRouter, Outlet, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { useAccount } from "~/app/context/AccountContext";
 import Providers from "~/app/context/Providers";
+import LNURLRedeem from "~/app/screens/LNURLRedeem";
 import OnChainReceive from "~/app/screens/OnChainReceive";
 
 import RequireAuth from "../RequireAuth";
@@ -39,6 +40,7 @@ function Popup() {
             <Route path="lnurlPay" element={<LNURLPay />} />
             <Route path="lnurlChannel" element={<LNURLChannel />} />
             <Route path="lnurlWithdraw" element={<LNURLWithdraw />} />
+            <Route path="lnurlRedeem" element={<LNURLRedeem />} />
             <Route path="keysend" element={<Keysend />} />
             <Route path="confirmPayment" element={<ConfirmPayment />} />
             <Route path="lnurlAuth" element={<LNURLAuth />} />

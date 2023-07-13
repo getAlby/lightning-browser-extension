@@ -16,7 +16,7 @@
   - Opera\
      `$ yarn run dev:opera`
 
-  **NOTE:** by default, the extension built this way will talk to the testnet API (which runs under [app.regtest.getalby.com](https://app.regtest.getalby.com/user)). In case you want to do manual tests against the mainnet API, add the following `WALLET_ROOT_URL` environment variable to your command: `$ WALLET_ROOT_URL="https://getalby.com" yarn run dev:your-browser-of-choice`
+  **NOTE:** by default, the extension built this way will talk to the testnet API (which runs under [app.regtest.getalby.com](https://app.regtest.getalby.com/api)). In case you want to do manual tests against the mainnet API, add the following `ALBY_API_URL` environment variable to your command: `$ ALBY_API_URL="https://getalby.com/api" yarn run dev:your-browser-of-choice`
 
 - **Chrome**
 

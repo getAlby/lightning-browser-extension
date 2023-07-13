@@ -18,7 +18,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
-import { isAlbyAccount } from "~/app/utils";
+import { isAlbyLNDHubAccount, isAlbyOAuthAccount } from "~/app/utils";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import { poll } from "~/common/utils/helpers";
@@ -52,7 +52,9 @@ function Receive() {
   const [paid, setPaid] = useState(false);
   const [pollingForPayment, setPollingForPayment] = useState(false);
   const mounted = useRef(false);
-  const isAlbyUser = isAlbyAccount(auth.account?.alias);
+  const isAlbyUser =
+    isAlbyOAuthAccount(auth.account?.connectorType) ||
+    isAlbyLNDHubAccount(auth.account?.alias, auth.account?.connectorType);
 
   useEffect(() => {
     mounted.current = true;
@@ -287,6 +289,16 @@ function Receive() {
                     {tCommon("or")}
                   </span>
                   <div className="flex-grow border-t  border-gray-300 dark:border-gray-700"></div>
+                </div>
+                <div className="mb-4">
+                  <Button
+                    type="button"
+                    label={t("redeem_lnurl")}
+                    fullWidth
+                    onClick={() => {
+                      navigate("/lnurlRedeem");
+                    }}
+                  />
                 </div>
 
                 <div className="mb-4">

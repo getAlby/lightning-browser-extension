@@ -16,6 +16,10 @@ const edit = async (message: MessageAccountEdit) => {
         bitcoin: null, // reset memoized bitcoin state
       });
     }
+    if (message.args.useMnemonicForLnurlAuth !== undefined) {
+      accounts[accountId].useMnemonicForLnurlAuth =
+        message.args.useMnemonicForLnurlAuth;
+    }
 
     state.setState({ accounts });
     // make sure we immediately persist the updated accounts

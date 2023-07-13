@@ -191,7 +191,7 @@ class Lnd implements Connector {
       identity_pubkey: string;
       color: string;
       // @Todo: replace debug url /v1/getinfoo
-    }>("GET", "/v1/getinfoo", undefined, {}).then((data) => {
+    }>("GET", "/v1/getinfoFAIL", undefined, {}).then((data) => {
       return {
         data: {
           alias: data.alias,

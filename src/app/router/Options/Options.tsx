@@ -17,7 +17,6 @@ import Send from "@screens/Send";
 import Settings from "@screens/Settings";
 import Transactions from "@screens/Transactions";
 import Unlock from "@screens/Unlock";
-import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { HashRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -30,23 +29,15 @@ import GenerateSecretKey from "~/app/screens/Accounts/GenerateSecretKey";
 import ImportSecretKey from "~/app/screens/Accounts/ImportSecretKey";
 import NostrSettings from "~/app/screens/Accounts/NostrSettings";
 import Discover from "~/app/screens/Discover";
+import LNURLRedeem from "~/app/screens/LNURLRedeem";
 import OnChainReceive from "~/app/screens/OnChainReceive";
-import AlbyWalletCreate from "~/app/screens/connectors/AlbyWallet/create";
-import AlbyWalletLogin from "~/app/screens/connectors/AlbyWallet/login";
+import ScanQRCode from "~/app/screens/ScanQRCode";
 import ChooseConnector from "~/app/screens/connectors/ChooseConnector";
 import ChooseConnectorPath from "~/app/screens/connectors/ChooseConnectorPath";
-import { getAlbyWalletOptions } from "~/app/utils";
 import i18n from "~/i18n/i18nConfig";
 
 function Options() {
   const connectorRoutes = getConnectorRoutes();
-  const [options, setOptions] = useState({ signup_disabled: false });
-
-  useEffect(() => {
-    getAlbyWalletOptions().then((options) => {
-      setOptions(options);
-    });
-  }, []);
 
   return (
     <Providers>
@@ -88,8 +79,10 @@ function Options() {
             <Route path="lnurlPay" element={<LNURLPay />} />
             <Route path="lnurlChannel" element={<LNURLChannel />} />
             <Route path="lnurlWithdraw" element={<LNURLWithdraw />} />
+            <Route path="lnurlRedeem" element={<LNURLRedeem />} />
             <Route path="lnurlAuth" element={<LNURLAuth />} />
             <Route path="settings" element={<Settings />} />
+            <Route path="scanQRCode" element={<ScanQRCode />} />
             <Route path="accounts">
               <Route path=":id" element={<AccountDetail />} />
               <Route
@@ -113,15 +106,9 @@ function Options() {
                   </Container>
                 }
               >
+                <Route index={true} element={<ChooseConnectorPath />}></Route>
                 <Route index element={<ChooseConnectorPath />} />
-                <Route
-                  path="create"
-                  element={<AlbyWalletCreate options={options} />}
-                />
-                <Route
-                  path="login"
-                  element={<AlbyWalletLogin options={options} />}
-                />
+
                 <Route path="choose-connector">
                   <Route
                     index
