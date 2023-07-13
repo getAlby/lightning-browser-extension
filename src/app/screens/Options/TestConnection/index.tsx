@@ -45,7 +45,11 @@ export default function TestConnection() {
     try {
       const { currentAccountId } = await api.getStatus();
       setAccountId(currentAccountId);
-      const accountInfo = await fetchAccountInfo();
+
+      const accountInfo = await fetchAccountInfo({
+        accountId: currentAccountId,
+      });
+
       if (accountInfo) {
         setAccountInfo({
           alias: accountInfo.alias,

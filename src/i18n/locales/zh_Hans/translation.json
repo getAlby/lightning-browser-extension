@@ -52,8 +52,7 @@
           "label": "Macaroon(HEX格式)"
         },
         "drag_and_drop": "将你的macaroon拖放到此处或<0>浏览</0>",
-        "title": "LND",
-        "or": "或"
+        "title": "LND"
       },
       "bitcoin_jungle": {
         "page": {
@@ -329,7 +328,7 @@
           },
           "title": "Nostr",
           "public_key": {
-            "label": "公钥"
+            "label": "Nostr 公钥"
           },
           "generate_keys": {
             "screen_reader": "为你的帐户生成一个新的Nostr密钥",
@@ -344,16 +343,19 @@
             "generate": "生成新密钥"
           },
           "private_key": {
-            "subtitle": "粘贴你的私钥或生成一个新的。<0>了解更多»</0>",
-            "title": "管理你的密钥",
-            "warning": "请输入帐户名称以确认删除私钥：",
-            "success": "私钥已加密并成功保存。",
-            "successfully_removed": "私钥成功删除。",
-            "label": "私钥",
-            "backup": "⚠️ 不要忘记备份你的私钥!不备份你的密钥可能会导致失去访问权。",
-            "failed_to_remove": "输入的帐户名称不匹配，你的旧私钥已被恢复。"
+            "subtitle": "粘贴你的 Nostr 私钥或生成一个新的。<0>了解更多»</0>",
+            "title": "管理你的 Nostr 密钥",
+            "warning": "请输入帐户名称以确认删除 Nostr 私钥：",
+            "success": "Nostr 私钥已加密并成功保存。",
+            "successfully_removed": "Nostr 私钥已成功移除。",
+            "label": "Nostr 私钥",
+            "failed_to_remove": "输入的帐户名称不匹配，你的旧 Nostr 私钥已被恢复。"
           },
-          "hint": "是一个简单而开放的协议，旨在创建抗审查的社交网络。Nostr 使用加密密钥。你可以使用你的密钥对内容进行签署并将其发送到多个中继。你可以使用 Alby 来管理你的 Nostr 密钥。许多 Nostr 应用程序允许你轻松地使用 Alby 扩展中的密钥。"
+          "hint": "是一个简单而开放的协议，旨在创建抗审查的社交网络。Nostr 使用加密密钥。你可以使用你的密钥对内容进行签署并将其发送到多个中继。你可以使用 Alby 来管理你的 Nostr 密钥。许多 Nostr 应用程序允许你轻松地使用 Alby 扩展中的密钥。",
+          "settings": {
+            "label": "Nostr 设置",
+            "title": "Nostr 设置"
+          }
         },
         "title1": "帐户信息",
         "export": {
@@ -368,7 +370,8 @@
         "remove": {
           "title": "删除此帐户",
           "subtitle": "所有链接的配额都将被删除。请确定。",
-          "confirm": "是否确定要移除帐户：{{name}}？\n这是无法撤消的。如果你使用此帐户登录网站，则可能无法访问这些网站。"
+          "confirm": "是否确定要移除帐户：{{name}}？\n这是无法撤消的。如果你使用此帐户登录网站，则可能无法访问这些网站。",
+          "error": "输入的帐户名称不匹配。"
         },
         "actions": {
           "remove_account": "删除帐户",
@@ -378,6 +381,15 @@
         "name": {
           "title": "名称",
           "placeholder": "帐户名称"
+        },
+        "bitcoin": {
+          "network": {
+            "title": "比特币网络",
+            "options": {
+              "bitcoin": "主网",
+              "testnet": "测试网"
+            }
+          }
         }
       }
     },
@@ -568,7 +580,8 @@
         "waiting": "等待付款...",
         "status": "检查付款状态"
       },
-      "title": "收款"
+      "title": "收款",
+      "receive_via_bitcoin_address": "通过比特币地址接收"
     },
     "make_invoice": {
       "memo": {
@@ -668,7 +681,6 @@
       },
       "alby": {
         "description": "注册或使用你现有的Alby帐户，立即开始闪电支付。",
-        "create_new": "注册",
         "title": "Alby帐户"
       }
     },
@@ -704,21 +716,6 @@
     },
     "alby": {
       "pre_connect": {
-        "create_account": "创建一个新的Alby帐户以发送和接收比特币付款。",
-        "title": "你的Alby帐户",
-        "login_account": "登录以连接你现有的Alby帐户。",
-        "errors": {
-          "create_wallet_error1": "登录或创建新帐户失败。",
-          "create_wallet_error2": "如果你需要帮助，请联系support@getalby.com",
-          "create_wallet_error": "登录或创建新帐户失败。如果你需要帮助，请联系 support@getalby.com"
-        },
-        "forgot_password": "忘记密码？",
-        "host_wallet": "我们为你托管的闪电钱包！",
-        "optional_lightning_address": {
-          "label": "选择你的闪电地址（可选）",
-          "suffix": "@getalby.com",
-          "title": "数字和字母，至少4个字符"
-        },
         "set_password": {
           "choose_password": {
             "label": "密码"
@@ -731,20 +728,6 @@
             "confirm_password": "请确认你的密码。",
             "mismatched_password": "密码不匹配。"
           }
-        },
-        "email": {
-          "create": {
-            "label": "电子邮箱"
-          },
-          "login": {
-            "label": "电子邮件地址或闪电地址"
-          }
-        },
-        "optional_lightning_note": {
-          "part1": "你的Alby帐户还附带一个可选的",
-          "part2": "闪电地址",
-          "part3": "。这是任何人都可以轻松地在闪电网络上向你发送比特币的一个方法。",
-          "part4": "了解更多"
         }
       }
     },
@@ -788,6 +771,16 @@
     "confirm_add_account": {
       "title": "添加帐户",
       "content": "此网站想要添加一个帐户（{{connector}}）："
+    },
+    "on_chain": {
+      "instructions1": "要通过比特币地址接收比特币，请在 getalby.com 上登录你的 <0>Alby 帐户</0>",
+      "go": "前往你的 Alby 帐户 →",
+      "title": "通过比特币地址接收",
+      "instructions2": "你可以在<0>收款</0>页面上找到你的比特币地址。"
+    },
+    "confirm_get_address": {
+      "title": "获取地址",
+      "content": "你的比特币收款地址"
     }
   },
   "common": {
@@ -815,7 +808,12 @@
       "receive_again": "接收另一笔付款",
       "remember": "记住我的选择，不要再问",
       "transactions": "交易",
-      "more": "更多"
+      "more": "更多",
+      "download": "下载",
+      "import": "导入",
+      "copy_clipboard": "复制到剪切板",
+      "paste": "粘贴",
+      "paste_clipboard": "从剪切板粘贴"
     },
     "errors": {
       "connection_failed": "连接失败",
@@ -846,7 +844,7 @@
     "range": {
       "between": "在 {{min}} 和 {{max}} 之间",
       "lessThanOrEqual": "≤ {{max}}",
-      "greaterThanOrEqual": "≥ {{min}}"
+      "greaterOrEqual": "≥ {{min}}"
     },
     "balance": "余额",
     "wallet": "钱包",
@@ -862,7 +860,9 @@
       "citadel": "Citadel",
       "nativecitadel": "Citadel（通过 Tor）",
       "commando": "Commando"
-    }
+    },
+    "or": "或",
+    "pasted": "已粘贴！"
   },
   "components": {
     "toasts": {
@@ -886,7 +886,7 @@
           "add": "添加新帐户",
           "manage": "管理帐户",
           "account_settings": "帐户设置",
-          "go_to_web_wallet": "管理你的 Alby 帐户"
+          "go_to_web_wallet": "管理你的网络帐户"
         }
       },
       "screen_reader": "切换下拉菜单"
@@ -945,7 +945,8 @@
     "badge": {
       "label": {
         "active": "活跃",
-        "auth": "登录"
+        "auth": "登录",
+        "imported": "已导入"
       }
     },
     "publishers_table": {

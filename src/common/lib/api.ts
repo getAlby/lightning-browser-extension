@@ -11,14 +11,18 @@ import type {
   Accounts,
   Allowance,
   BitcoinNetworkType,
+  ConnectorType,
   DbPayment,
   Invoice,
   LnurlAuthResponse,
+  MessageAccountEdit,
+  MessageAccountValidate,
   MessageInvoices,
   MessageLnurlAuth,
   MessageSettingsSet,
   NodeInfo,
   SettingsStorage,
+  ValidateAccountResponse,
 } from "~/types";
 
 import {
@@ -29,18 +33,21 @@ import {
 import msg from "./msg";
 
 export interface AccountInfoRes {
+  connectorType: ConnectorType;
   balance: { balance: string | number; currency: ACCOUNT_CURRENCIES };
   currentAccountId: string;
   info: { alias: string; pubkey?: string };
   name: string;
+  avatarUrl?: string;
 }
 
-export interface GetAccountRes
-  extends Pick<Account, "id" | "connector" | "name"> {
+export interface GetAccountRes extends Pick<Account, "id" | "name"> {
+  connectorType: ConnectorType;
   nostrEnabled: boolean;
   hasMnemonic: boolean;
   hasImportedNostrKey: boolean;
   bitcoinNetwork: BitcoinNetworkType;
+  useMnemonicForLnurlAuth: boolean;
 }
 interface StatusRes {
   configured: boolean;
@@ -81,14 +88,18 @@ export const swrGetAccountInfo = async (
         const { alias } = response.info;
         const { balance: resBalance, currency } = response.balance;
         const name = response.name;
+        const connectorType = response.connectorType;
         const balance =
           typeof resBalance === "number" ? resBalance : parseInt(resBalance); // TODO: handle amounts
+        const avatarUrl = response.avatarUrl;
         const account = {
           id,
           name,
           alias,
           balance,
+          connectorType,
           currency: currency || "BTC", // set default currency for every account
+          avatarUrl,
         };
         storeAccounts({
           ...accountsCache,
@@ -105,9 +116,19 @@ export const getAccount = (id?: string) =>
   msg.request<GetAccountRes>("getAccount", {
     id,
   });
+
+const validateAccount = (
+  account: MessageAccountValidate["args"]
+): Promise<ValidateAccountResponse> => msg.request("validateAccount", account);
+
 export const updateAllowance = () => msg.request<Accounts>("updateAllowance");
 export const selectAccount = (id: string) =>
   msg.request("selectAccount", { id });
+export const editAccount = (
+  id: string,
+  args: Omit<MessageAccountEdit["args"], "id">
+) => msg.request("editAccount", { id, ...args });
+
 export const getAllowance = (host: string) =>
   msg.request<Allowance>("getAllowance", { host });
 export const getPayments = (options?: { limit?: number }) =>
@@ -190,8 +211,10 @@ export default {
   getAccount,
   getAccountInfo,
   getAccounts,
+  editAccount,
   getInfo,
   selectAccount,
+  validateAccount,
   getAllowance,
   updateAllowance,
   getPayments,
