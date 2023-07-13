@@ -70,16 +70,16 @@
         "title": "LND",
         "page": {
           "title": "LNDノードに接続",
-          "description": "ノードのURLと、readとsendのパーミッションを持つマカロン（例：admin.macaroon）が必要です"
+          "description": "ノードのURLと、readとsendのパーミッションを持つmacaroon（例：admin.macaroon）が必要です"
         },
         "url": {
           "label": "REST APIのホストとポート",
           "placeholder": "https://ノードのURL:8080"
         },
         "macaroon": {
-          "label": "マカロン（HEX形式）"
+          "label": "macaroon（HEX形式）"
         },
-        "drag_and_drop": "マカロンをここにドラッグ・アンド・ドロップするか、<0>ファイルを選択</0>",
+        "drag_and_drop": "macaroonをここにドラッグ・アンド・ドロップするか、<0>ファイルを選択</0>",
         "errors": {
           "connection_failed": "接続に失敗しました。LNDの認証情報は正しいですか？"
         }
@@ -207,7 +207,7 @@
       "raspiblitz": {
         "page": {
           "title": "<0>RaspiBlitz</0>ノードに接続",
-          "instructions2": "(管理) <0>マカロン</0> を下の入力にコピーする。"
+          "instructions2": "(管理) <0>macaroon</0> を下の入力にコピーする。"
         },
         "rest_api_host": {
           "label": "REST APIのホスト",
@@ -248,6 +248,9 @@
           "missing_token": "アクセストークンが見つからないためログインできませんでした。",
           "invalid_token": "無効なアクセストークンが渡されました"
         }
+      },
+      "kollider": {
+        "warning": "⚠️ 認証情報は必ずパスワードマネージャーに保存してください。認証情報を紛失した場合、アカウントを復旧することはできません。"
       }
     }
   },
