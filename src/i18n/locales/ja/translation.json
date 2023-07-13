@@ -106,7 +106,8 @@
         },
         "uri": {
           "label": "BlueWalletのエクスポートURI"
-        }
+        },
+        "title": "BlueWallet"
       },
       "lndhub_go": {
         "title": "LNDHub",
@@ -136,7 +137,8 @@
         },
         "errors": {
           "connection_failed": "接続に失敗しました。正しいURLと管理キーを入力しましたか？"
-        }
+        },
+        "title": "LNbits"
       },
       "eclair": {
         "page": {
@@ -147,7 +149,8 @@
           "label": "Eclairのパスワード"
         },
         "url": {
-          "label": "EclairのURL"
+          "label": "EclairのURL",
+          "placeholder": "http://localhost:8080"
         },
         "title": "Eclair"
       },
@@ -160,8 +163,10 @@
           "label": "Citadelのパスワード"
         },
         "url": {
-          "label": "CitadelのURL"
-        }
+          "label": "CitadelのURL",
+          "placeholder": "http://citadel.local"
+        },
+        "title": "Citadel"
       },
       "umbrel": {
         "page": {
@@ -169,21 +174,26 @@
           "instructions": "1. Lightning Nodeのダッシュボードで<0>Connect wallet</0>をクリック<1/>2.<0>REST(Tor)</0>または<0>REST(Local Network)</0>モードを選択します<1/>3.<0>lndconnect URL</0>をコピーし、以下に貼り付けます"
         },
         "rest_url": {
-          "label": "lndconnectのREST URL"
-        }
+          "label": "lndconnectのREST URL",
+          "placeholder": "lndconnect://yournode:8080?..."
+        },
+        "title": "Umbrel"
       },
       "mynode": {
         "page": {
           "title": "<0>myNode</0>に接続"
         },
         "rest_url": {
-          "label": "lndconnectのREST URL"
+          "label": "lndconnectのREST URL",
+          "placeholder": "lndconnect://yournode:8080?..."
         }
       },
       "start9": {
         "rest_url": {
-          "label": "lndconnectのREST URL"
-        }
+          "label": "lndconnectのREST URL",
+          "placeholder": "lndconnect://yournode:8080?..."
+        },
+        "title": "Start9"
       },
       "raspiblitz": {
         "page": {
@@ -191,15 +201,20 @@
         },
         "rest_api_host": {
           "label": "REST APIのホスト"
-        }
+        },
+        "title": "RaspiBlitz"
       },
       "bitcoin_beach": {
         "page": {
           "title": "<0>Bitcoin Beach Wallet</0>に接続"
-        }
+        },
+        "title": "Bitcoin Beach Wallet"
       },
       "title": "ライトニングウォレットを接続",
-      "description": "外部のライトニングウォレットまたはノードに接続する"
+      "description": "外部のライトニングウォレットまたはノードに接続する",
+      "bitcoin_jungle": {
+        "title": "Bitcoin Jungle Wallet"
+      }
     }
   },
   "permissions": {
