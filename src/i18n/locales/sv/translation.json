@@ -633,7 +633,8 @@
         "waiting": "väntar på betalning...",
         "status": "Kontrollera betalningsstatus"
       },
-      "receive_via_bitcoin_address": "Ta emot via bitcoin adress"
+      "receive_via_bitcoin_address": "Ta emot via bitcoin adress",
+      "redeem_lnurl": "Lös in LNURL"
     },
     "publishers": {
       "publisher": {
@@ -836,6 +837,23 @@
       "title": "Få adress",
       "heading": "Den här webbplatsen ber dig att läsa:",
       "content": "Din Bitcoin-mottagningsadress"
+    },
+    "scan_qrcode": {
+      "title": "Väntar på att skanna"
+    },
+    "lnurlredeem": {
+      "input": {
+        "placeholder": "LNURL...",
+        "label": "LNURL-uttagskod"
+      },
+      "errors": {
+        "invalid_withdraw_request": "Ogiltig LNURL-utagningsbegäran",
+        "invalid_lnurl": "Ogiltig LNURL"
+      },
+      "title": "Lös in bitcoin",
+      "actions": {
+        "withdraw": "Ta ut"
+      }
     }
   },
   "common": {
