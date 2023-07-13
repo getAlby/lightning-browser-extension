@@ -689,8 +689,7 @@
         "waiting": "waiting for payment...",
         "status": "Check payment status"
       },
-      "receive_via_bitcoin_address": "Receive via bitcoin address",
-      "get_lightning_address": "Get your lightning address at https://getalby.com/user"
+      "receive_via_bitcoin_address": "Receive via bitcoin address"
     },
     "on_chain": {
       "title": "Receive via bitcoin address",
