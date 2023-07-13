@@ -8,13 +8,13 @@ import { useAccount } from "~/app/context/AccountContext";
 function ConnectionError() {
   const { t: tCommon } = useTranslation("common");
   const { t } = useTranslation("translation");
-  const { account, selectAccount } = useAccount();
+  const { account, reloadAccount } = useAccount();
   const [loading, setLoading] = useState<boolean>(false);
 
   const reload = () => {
     if (account) {
       setLoading(true);
-      selectAccount(account.id);
+      reloadAccount();
     }
   };
 

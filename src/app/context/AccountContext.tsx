@@ -34,6 +34,7 @@ export interface AccountContextType {
   unlock: (user: string, callback: VoidFunction) => Promise<void>;
   lock: (callback: VoidFunction) => void;
   selectAccount: (accountId: string) => void;
+  reloadAccount: () => void;
 
   /**
    * Set new id and clears current info, which causes a loading indicator for the alias/balance
@@ -101,7 +102,10 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
     setAccountBalance(balance);
   };
 
-  const fetchAccountInfo = async (options?: { accountId?: string }) => {
+  const fetchAccountInfo = async (options?: {
+    accountId?: string;
+    skipCache?: boolean;
+  }) => {
     const id = options?.accountId || account?.id;
     if (!id) return;
 
@@ -110,7 +114,11 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
       updateAccountBalance(accountRes.balance, accountRes.currency);
     };
 
-    const accountInfo = await api.swr.getAccountInfo(id, callback);
+    const accountInfo = await api.swr.getAccountInfo(
+      id,
+      callback,
+      options?.skipCache
+    );
     return { ...accountInfo, fiatBalance, accountBalance };
   };
 
@@ -132,6 +140,10 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
     } finally {
       setAccountLoading(false);
     }
+  };
+
+  const reloadAccount = async () => {
+    await fetchAccountInfo({ skipCache: true });
   };
 
   // Invoked only on on mount.
@@ -193,6 +205,7 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
     accountLoading,
     lock,
     selectAccount,
+    reloadAccount,
     setAccountId,
     unlock,
   };

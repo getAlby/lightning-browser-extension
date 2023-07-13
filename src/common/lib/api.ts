@@ -73,12 +73,14 @@ export const getAccountInfo = () => msg.request<AccountInfoRes>("accountInfo");
  */
 export const swrGetAccountInfo = async (
   id: string,
-  callback?: (account: AccountInfo) => void
+  callback: (account: AccountInfo) => void,
+  skipCache = false
 ): Promise<AccountInfo> => {
   const accountsCache = await getAccountsCache();
 
   return new Promise((resolve, reject) => {
-    if (accountsCache[id]) {
+    // skip cache for reloading in case of error
+    if (!skipCache && accountsCache[id]) {
       if (callback) callback(accountsCache[id]);
       resolve(accountsCache[id]);
     }
