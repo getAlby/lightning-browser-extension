@@ -260,7 +260,11 @@
       "queryroutes": "可能なルートを照会する。",
       "listpeers": "現在アクティブなピアの一覧を取得する。",
       "lookupinvoice": "インボイスの詳細を確認する。",
-      "verifymessage": "メッセージに対する署名を検証する。"
+      "verifymessage": "メッセージに対する署名を検証する。",
+      "getnodeinfo": "ノードのチャンネル情報を取得する。",
+      "listpayments": "支払いの一覧を取得する。",
+      "getnetworkinfo": "既知のチャンネルグラフの基本的な統計を取得する。",
+      "gettransactions": "ウォレットに関する全ての取引情報を取得する。"
     }
   }
 }
