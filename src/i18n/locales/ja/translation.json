@@ -1,1 +1,26 @@
-{}
+{
+  "translation": {
+    "welcome": {
+      "set_password": {
+        "choose_password": {
+          "label": "ロック解除パスコードを選択："
+        },
+        "confirm_password": {
+          "label": "正しく入力されているか確認："
+        },
+        "errors": {
+          "mismatched_password": "パスコードが一致しませんでした。",
+          "enter_password": "パスコードを入力してください。"
+        },
+        "title": "ロック解除パスコードの設定",
+        "description": "このパスコードは、このデバイスでAlbyのロックを解除することを可能にします。パスコードは復元できませんが、後で変更することができます。"
+      },
+      "test_connection": {
+        "ready": "すごいね、準備万端だ！",
+        "initializing": "アカウントを作成中です。少々お待ちください。",
+        "connection_error": "接続エラー",
+        "review_connection_details": "接続の詳細を確認してください。"
+      }
+    }
+  }
+}
