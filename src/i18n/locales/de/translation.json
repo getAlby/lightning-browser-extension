@@ -581,7 +581,8 @@
         "placeholder": "Zum Beispiel: Wer schickt diese Zahlung?"
       },
       "success": "Zahlung erhalten!",
-      "receive_via_bitcoin_address": "Empfangen über Bitcoin Adresse"
+      "receive_via_bitcoin_address": "Empfangen über Bitcoin Adresse",
+      "redeem_lnurl": "LNURL einlösen"
     },
     "publishers": {
       "publisher": {
@@ -834,6 +835,23 @@
       "title": "Adresse abrufen",
       "heading": "Diese Website bittet dich es zu lesen:",
       "content": "Deine Bitcoin-Empfangsadresse"
+    },
+    "lnurlredeem": {
+      "errors": {
+        "invalid_withdraw_request": "Ungültige LNURL-Abfrage",
+        "invalid_lnurl": "Ungültige LNURL"
+      },
+      "title": "Bitcoin einlösen",
+      "input": {
+        "label": "LNURL-Ziehungscode",
+        "placeholder": "LNURL..."
+      },
+      "actions": {
+        "withdraw": "Zurückziehen"
+      }
+    },
+    "scan_qrcode": {
+      "title": "Warten auf den Scan"
     }
   },
   "components": {
