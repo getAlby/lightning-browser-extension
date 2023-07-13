@@ -598,7 +598,7 @@
         "status": "Verificar status do pagamento"
       },
       "receive_via_bitcoin_address": "Receber via endereço bitcoin",
-      "redeem_lnurl": "Resgatar voucher LNURL"
+      "redeem_lnurl": "Resgatar vale-satoshi"
     },
     "publishers": {
       "publisher": {
