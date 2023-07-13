@@ -1,28 +1,44 @@
-import { CaretLeftIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
+import {
+  CaretLeftIcon,
+  ExportIcon,
+  InfoIcon,
+} from "@bitcoin-design/bitcoin-icons-react/filled";
 import Button from "@components/Button";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Header from "@components/Header";
 import IconButton from "@components/IconButton";
 import DualCurrencyField from "@components/form/DualCurrencyField";
+import fetchAdapter from "@vespaiach/axios-fetch-adapter";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import Skeleton from "react-loading-skeleton";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Alert from "~/app/components/Alert";
 import Container from "~/app/components/Container";
+import Hyperlink from "~/app/components/Hyperlink";
 import ResultCard from "~/app/components/ResultCard";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 
 const Dt = ({ children }: { children: React.ReactNode }) => (
-  <dt className="font-medium text-gray-800 dark:text-white">{children}</dt>
+  <dt className="text-sm text-gray-500 dark:text-neutral-500">{children}</dt>
 );
 
 const Dd = ({ children }: { children: React.ReactNode }) => (
-  <dd className="mb-4 text-gray-600 dark:text-neutral-500 break-all">
-    {children}
-  </dd>
+  <dd className="text-gray-700 dark:text-neutral-200">{children}</dd>
 );
+
+type ReviewData = {
+  address: string;
+  serviceFee: number;
+  networkFee: number;
+  amount: number;
+  total: number;
+  invoice: string;
+};
 
 function SendToBitcoinAddress() {
   const {
@@ -42,6 +58,17 @@ function SendToBitcoinAddress() {
   const [successMessage, setSuccessMessage] = useState("");
   const [fiatAmount, setFiatAmount] = useState("");
 
+  const [feesLoading, setFeesLoading] = useState(false);
+  const [serviceFee, setServiceFee] = useState("");
+  const [networkFee, setNetworkFee] = useState(0);
+  const [networkFeeFiat, setNetworkFeeFiat] = useState("");
+  const [serviceFeeFiat, setServiceFeeFiat] = useState("");
+  const [totalAmountFiat, setTotalAmountFiat] = useState("");
+  const [amountFiat, setAmountFiat] = useState("");
+
+  const [swapDataLoading, setSwapDataLoading] = useState(false);
+  const [swapData, setSwapData] = useState<ReviewData | undefined>();
+
   const { t } = useTranslation("translation", {
     keyPrefix: "send_to_bitcoin_address",
   });
@@ -56,11 +83,37 @@ function SendToBitcoinAddress() {
     })();
   }, [amountSat, showFiat, getFormattedFiat]);
 
+  useEffect(() => {
+    (async () => {
+      try {
+        setFeesLoading(true);
+        const result = await axios.get<{
+          serviceFee: string;
+          networkFee: number;
+        }>("http://localhost:3001/swaps/info", { adapter: fetchAdapter });
+
+        setServiceFee(result.data.serviceFee);
+        setNetworkFee(result.data.networkFee);
+
+        if (showFiat) {
+          const test = await getFormattedFiat(result.data.networkFee);
+          setNetworkFeeFiat(test);
+        }
+      } catch (e) {
+        console.error(e);
+        if (e instanceof Error) toast.error(e.message);
+      } finally {
+        setFeesLoading(false);
+      }
+    })();
+  }, [getFormattedFiat, showFiat]);
+
   async function confirm() {
     try {
       setLoading(true);
 
       // Do payment
+      await new Promise((r) => setTimeout(r, 2000));
 
       setStep("");
       setSuccessMessage("test");
@@ -106,8 +159,30 @@ function SendToBitcoinAddress() {
     navigate(-1);
   }
 
-  function handleReview(event: React.FormEvent<HTMLFormElement>) {
+  async function handleReview(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    try {
+      setSwapDataLoading(true);
+      const result = await axios.post<ReviewData>(
+        "http://localhost:3001/swaps/create",
+        { adapter: fetchAdapter }
+      );
+      setSwapData(result.data);
+
+      setAmountFiat(await getFormattedFiat(result.data.amount));
+      setNetworkFeeFiat(await getFormattedFiat(result.data.networkFee));
+      setServiceFeeFiat(await getFormattedFiat(result.data.serviceFee));
+      setTotalAmountFiat(await getFormattedFiat(result.data.total));
+    } catch (e) {
+      console.error(e);
+      if (e instanceof Error) {
+        toast.error(`Error: ${e.message}`);
+      }
+    } finally {
+      setSwapDataLoading(false);
+    }
+
     review();
   }
 
@@ -129,15 +204,18 @@ function SendToBitcoinAddress() {
       />
       <div className="h-full py-5">
         {step == "amount" && (
-          <form onSubmit={handleReview} className="h-full">
+          <form onSubmit={handleReview} className="h-full flex space-between">
             <Container justifyBetween maxWidth="sm">
-              <div>
-                <Dt>{t("recipient.label")}</Dt>
-                <Dd>{bitcoinAddress}</Dd>
+              <div className="flex flex-col gap-4 mb-4">
+                <div>
+                  <Dt>{t("recipient.label")}</Dt>
+                  <Dd>{bitcoinAddress}</Dd>
+                </div>
                 <DualCurrencyField
                   id="amount"
                   label={tCommon("amount")}
-                  min={1}
+                  min={10000}
+                  max={1000000}
                   onChange={(e) => setAmountSat(e.target.value)}
                   value={amountSat}
                   fiatValue={fiatAmount}
@@ -145,31 +223,107 @@ function SendToBitcoinAddress() {
                     auth?.balancesDecorated?.accountBalance
                   }`}
                 />
+                {/* TODO: Fix icon, noopener nofollow */}
+                <Alert type="info">
+                  <InfoIcon className="w-6 h-6 float-left rounded-full border border-1 border-blue-700  dark:border-blue-300 mr-2 " />
+                  Swaps are provided by{" "}
+                  <Hyperlink
+                    className="underline hover:text-blue-800 dark:hover:text-blue-200"
+                    href="https://deezy.io"
+                    target="_blank"
+                  >
+                    Deezy
+                  </Hyperlink>
+                </Alert>
+                <div>
+                  <Dt>Swap service fee</Dt>
+                  <Dd>
+                    {feesLoading ? <Skeleton className="w-8" /> : serviceFee}
+                  </Dd>
+                </div>
+                <div>
+                  <Dt>Network fee</Dt>
+                  <Dd>
+                    {feesLoading ? (
+                      <Skeleton className="w-12" />
+                    ) : (
+                      <div className="flex justify-between">
+                        <span>{getFormattedSats(networkFee)}</span>
+                        <span className="text-sm text-gray-500 dark:text-neutral-500">
+                          {networkFeeFiat}
+                        </span>
+                      </div>
+                    )}
+                  </Dd>
+                </div>
               </div>
               <ConfirmOrCancel
                 label={tCommon("actions.review")}
                 onCancel={reject}
-                loading={loading}
-                disabled={loading || !amountSat}
+                loading={loading || swapDataLoading}
+                disabled={loading || feesLoading || !amountSat}
               />
             </Container>
           </form>
         )}
-        {step == "review" && (
+        {step == "review" && swapData && (
           <form onSubmit={handleConfirm} className="h-full">
             <Container justifyBetween maxWidth="sm">
-              <div>
-                <Dt>{t("recipient.label")}</Dt>
-                <Dd>{bitcoinAddress}</Dd>
-                <Dt>{tCommon("amount")}</Dt>
-                <Dd>{amountSat}</Dd>
-                <Dt>{t("network_fee.label")}</Dt>
-                <Dd>3,060 sats (~0.83 USD)</Dd>
-                <Dt>{t("swap_fee.label")}</Dt>
-                <Dd>10,000 sats (~3.83 USD)</Dd>
+              <div className="flex flex-col gap-4 mb-4">
+                <div>
+                  <Dt>{t("recipient.label")}</Dt>
+                  <Dd>{swapData.address}</Dd>
+                </div>
+                <div>
+                  <Dt>{tCommon("amount")}</Dt>
+                  <Dd>
+                    {" "}
+                    <div className="flex justify-between">
+                      <span>{getFormattedSats(swapData.amount)}</span>
+                      <span className="text-sm text-gray-500 dark:text-neutral-500">
+                        {amountFiat}
+                      </span>
+                    </div>
+                  </Dd>
+                </div>
+                <div>
+                  <Dt>{t("network_fee.label")}</Dt>
+                  <Dd>
+                    <div className="flex justify-between">
+                      <span>{getFormattedSats(swapData.networkFee)}</span>
+                      <span className="text-sm text-gray-500 dark:text-neutral-500">
+                        {networkFeeFiat}
+                      </span>
+                    </div>
+                  </Dd>
+                </div>
+                <div>
+                  <Dt>{t("swap_fee.label")}</Dt>
+                  <Dd>
+                    <div className="flex justify-between">
+                      <span>{getFormattedSats(swapData.serviceFee)}</span>
+                      <span className="text-sm text-gray-500 dark:text-neutral-500">
+                        {serviceFeeFiat}
+                      </span>
+                    </div>
+                  </Dd>
+                </div>
                 <hr className="my-3 dark:border-white/10" />
-                <Dt>{t("total.label")}</Dt>
-                <Dd>113,060 sats (~35.83 USD)</Dd>
+                <div className="text-lg">
+                  <Dt>{t("total.label")}</Dt>
+                  <Dd>
+                    <div className="flex justify-between">
+                      <span>{getFormattedSats(swapData.total)}</span>
+                      <span className="text-gray-500 dark:text-neutral-500">
+                        {totalAmountFiat}
+                      </span>
+                    </div>
+                  </Dd>
+                </div>
+                <Alert type="info">
+                  <InfoIcon className="w-6 h-6 float-left rounded-full border border-1 border-blue-700  dark:border-blue-300 mr-2 " />
+                  Transactions usually arrive within 10-30 min.
+                </Alert>
               </div>
               <ConfirmOrCancel
                 label={tCommon("actions.confirm")}
@@ -193,6 +347,15 @@ function SendToBitcoinAddress() {
                 destination: bitcoinAddress,
               })}
             />
+            {/* TODO: rel="noopener nofollow" */}
+            <div className="text-center my-4">
+              <Hyperlink
+                href={`https://mempool.space/address/${bitcoinAddress}`}
+              >
+                View on blockchain explorer{" "}
+                <ExportIcon className="w-6 h-6 inline" />
+              </Hyperlink>
+            </div>
             <div className="my-4">
               <Button
                 onClick={close}
