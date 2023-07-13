@@ -2,6 +2,7 @@ import CompanionDownloadInfo from "@components/CompanionDownloadInfo";
 import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
 import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
+import fetchAdapter from "@vespaiach/axios-fetch-adapter";
 import axios from "axios";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -43,7 +44,7 @@ export default function ConnectBtcpay() {
     try {
       const response = await axios.get<{
         configurations: [{ uri: string; adminMacaroon: string }];
-      }>(configUrl.toString());
+      }>(configUrl.toString(), { adapter: fetchAdapter });
 
       if (response.data.configurations[0].uri) {
         setFormData({
