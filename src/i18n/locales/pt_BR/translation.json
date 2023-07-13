@@ -559,9 +559,6 @@
     },
     "send": {
       "title": "Enviar",
-      "qrcode": {
-        "title": "Aguardando leitura"
-      },
       "input": {
         "label": "Destinatário",
         "hint": "Fatura, Endereço Relâmpago ou LNURL"

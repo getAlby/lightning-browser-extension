@@ -474,9 +474,6 @@
     },
     "send": {
       "title": "Odeslat",
-      "qrcode": {
-        "title": "Čekám na oskenování"
-      },
       "input": {
         "label": "Příjemce",
         "hint": "Faktura, Lightning adresa nebo LNURL"

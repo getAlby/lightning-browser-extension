@@ -503,9 +503,6 @@
     },
     "send": {
       "title": "Envoyer",
-      "qrcode": {
-        "title": "En attente de numérisation"
-      },
       "input": {
         "label": "Destinataire",
         "hint": "Facture, adresse Lightning ou LNURL"

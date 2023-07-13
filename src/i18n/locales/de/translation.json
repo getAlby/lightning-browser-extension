@@ -600,10 +600,7 @@
         "label": "Rechnung, Lightning-Adresse oder LNURL",
         "hint": "Rechnung, Lightning-Adresse oder LNURL"
       },
-      "title": "Senden",
-      "qrcode": {
-        "title": "Warten auf den Scan"
-      }
+      "title": "Senden"
     },
     "make_invoice": {
       "errors": {

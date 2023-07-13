@@ -473,9 +473,6 @@
     },
     "send": {
       "title": "Invia",
-      "qrcode": {
-        "title": "In attesa di scansione"
-      },
       "input": {
         "label": "Destinatario",
         "hint": "Fattura, indirizzo Lightning o LNURL"

@@ -502,9 +502,6 @@
     },
     "send": {
       "title": "Send",
-      "qrcode": {
-        "title": "Venter på skanning"
-      },
       "input": {
         "label": "Modtager",
         "hint": "Faktura, lightningadresse eller LNURL"

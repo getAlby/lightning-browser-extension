@@ -501,9 +501,6 @@
     },
     "send": {
       "title": "Enviar",
-      "qrcode": {
-        "title": "Esperando para escanear"
-      },
       "input": {
         "label": "Destinatario",
         "hint": "Factura, Dirección Lightning o LNURL"

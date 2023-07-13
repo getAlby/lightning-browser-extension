@@ -552,9 +552,6 @@
     },
     "send": {
       "title": "發送",
-      "qrcode": {
-        "title": "等待掃描"
-      },
       "input": {
         "label": "接收者",
         "hint": "發票、閃電地址或 LNURL"

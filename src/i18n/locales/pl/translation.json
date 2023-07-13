@@ -503,9 +503,6 @@
     },
     "send": {
       "title": "Wyślij",
-      "qrcode": {
-        "title": "Oczekiwanie na skanowanie"
-      },
       "input": {
         "label": "Odbiorca",
         "hint": "Faktura, adres Lightning lub LNURL"

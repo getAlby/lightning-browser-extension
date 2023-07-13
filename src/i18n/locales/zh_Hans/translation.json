@@ -537,10 +537,7 @@
         "hint": "发票、闪电地址或LNURL",
         "label": "接收者"
       },
-      "title": "发送",
-      "qrcode": {
-        "title": "等待扫描"
-      }
+      "title": "发送"
     },
     "lnurlauth": {
       "submit": "登录",

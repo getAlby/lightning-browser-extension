@@ -567,9 +567,6 @@
     },
     "send": {
       "title": "Skicka",
-      "qrcode": {
-        "title": "Väntar på skanning"
-      },
       "input": {
         "label": "Mottagare",
         "hint": "Faktura, Lightning-adress eller LNURL"

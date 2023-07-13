@@ -498,9 +498,6 @@
     },
     "send": {
       "title": "Send",
-      "qrcode": {
-        "title": "स्कॅन करण्यासाठी प्रतीक्षा करत आहे"
-      },
       "input": {
         "label": "प्राप्तकर्ता",
         "hint": "चालन, Lightning address किंवा LNURL"

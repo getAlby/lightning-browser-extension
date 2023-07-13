@@ -385,9 +385,6 @@
     },
     "send": {
       "title": "Lähetä",
-      "qrcode": {
-        "title": "Odotetaan skannausta"
-      },
       "input": {
         "label": "Vastaanottaja",
         "hint": "Lasku, Lightningin osoite tai LNURL"
@@ -642,6 +639,5 @@
         "active": "TOIMIVA"
       }
     }
-  },
-  "permissions": {}
+  }
 }
