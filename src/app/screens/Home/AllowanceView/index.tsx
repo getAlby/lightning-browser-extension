@@ -127,12 +127,14 @@ const AllowanceView: FC<Props> = (props) => {
             <Progressbar percentage={props.allowance.percentage} />
           </div>
         ) : (
-          <SitePreferences
-            launcherType="hyperlink"
-            allowance={props.allowance}
-            onEdit={props.onEditComplete}
-            onDelete={props.onDeleteComplete}
-          />
+          <div className="my-6 text-center text-sm">
+            <SitePreferences
+              launcherType="hyperlink"
+              allowance={props.allowance}
+              onEdit={props.onEditComplete}
+              onDelete={props.onDeleteComplete}
+            />
+          </div>
         )}
         <h2 className="mb-2 text-lg text-gray-900 font-bold dark:text-white">
           {t("allowance_view.recent_transactions")}

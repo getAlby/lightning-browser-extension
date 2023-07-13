@@ -1,4 +1,5 @@
 import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
+import Button from "@components/Button";
 import Hyperlink from "@components/Hyperlink";
 import Setting from "@components/Setting";
 import Toggle from "@components/form/Toggle";
@@ -13,7 +14,6 @@ import { PreferencesIcon } from "~/app/icons";
 import msg from "~/common/lib/msg";
 import type { Allowance, Permission } from "~/types";
 
-import Button from "../Button";
 import DualCurrencyField from "../form/DualCurrencyField/index";
 
 type LauncherType = "hyperlink" | "button" | "icon";
@@ -147,7 +147,14 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
 
   const getLauncher = (launcherType: LauncherType) => {
     if (launcherType === "button") {
-      return <PreferencesIcon className="h-6 w-6" onClick={openModal} />;
+      return (
+        <Button
+          icon={<PreferencesIcon className="h-6 w-6 mr-2" />}
+          label={"Site Settings"}
+          onClick={openModal}
+          className="text-xs"
+        />
+      );
     }
     if (launcherType === "icon") {
       return (
@@ -159,11 +166,9 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
     }
     if (launcherType === "hyperlink") {
       return (
-        <div className="my-6 text-center">
-          <Hyperlink onClick={openModal}>
-            {t("new_budget.link_label")}
-          </Hyperlink>
-        </div>
+        <Hyperlink onClick={openModal}>
+          {t("new_budget.link_label")}
+        </Hyperlink>
       );
     }
   };

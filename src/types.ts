@@ -777,7 +777,7 @@ export interface SettingsStorage {
 }
 
 export interface Badge {
-  label: "active" | "auth";
+  label: "budget" | "auth" | "imported";
   color: string;
   textColor: string;
 }

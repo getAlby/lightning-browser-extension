@@ -20,6 +20,7 @@ export default function TransactionsTable({
   loading = false,
 }: Props) {
   const { getFormattedSats } = useSettings();
+  const { t } = useTranslation("translation", { keyPrefix: "home" });
   const { t: tComponents } = useTranslation("components");
 
   return loading ? (
@@ -29,6 +30,7 @@ export default function TransactionsTable({
   ) : !transactions?.length && noResultMsg ? (
     <p className="text-gray-500 dark:text-neutral-400">{noResultMsg}</p>
   ) : (
+    <>
     <div className="shadow overflow-hidden rounded-lg bg-white divide-y divide-gray-200 dark:divide-white/10 dark:bg-surface-02dp">
       {transactions?.map((tx) => (
         <div key={tx.id} className="px-3 py-2">
@@ -176,5 +178,6 @@ export default function TransactionsTable({
         </div>
       ))}
     </div>
+    </>
   );
 }

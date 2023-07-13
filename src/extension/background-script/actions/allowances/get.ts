@@ -24,8 +24,7 @@ const get = async (message: MessageAllowanceGet) => {
       dbAllowance.totalBudget - dbAllowance.remainingBudget;
 
     allowance.percentage = (
-      (allowance.usedBudget / dbAllowance.totalBudget) *
-      100
+      (allowance.usedBudget / dbAllowance.totalBudget || 0) * 100
     ).toFixed(0);
 
     allowance.paymentsCount = await db.payments

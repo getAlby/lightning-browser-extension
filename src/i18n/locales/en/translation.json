@@ -357,7 +357,10 @@
         "recent_transactions": "Recent Transactions",
         "budget_spent": "Budget spent",
         "sats": "sats",
-        "no_transactions": "No transactions on <0>{{name}}</0> yet."
+        "no_transactions": "No transactions on <0>{{name}}</0> yet.",
+        "total_spent": "Total spent",
+        "total_payments": "Total payments",
+        "permissions": "Permissions"
       },
       "default_view": {
         "recent_transactions": "Recent Transactions",
@@ -1063,13 +1066,16 @@
     },
     "publishers_table": {
       "payments": "payments",
-      "used": "used"
+      "used": "used",
+      "budget": "budget",
+      "total": "total"
     },
     "badge": {
       "label": {
         "active": "ACTIVE",
         "auth": "LOGIN",
-        "imported": "IMPORTED"
+        "imported": "IMPORTED",
+        "budget": "BUDGET"
       }
     }
   },
