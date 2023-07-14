@@ -372,7 +372,7 @@
       "title": "Accounts",
       "account_view": {
         "title1": "Account Information",
-        "title2": "Edit Account",
+        "title2": "Account",
         "name": {
           "title": "Display Name",
           "placeholder": "Account Display Name"
