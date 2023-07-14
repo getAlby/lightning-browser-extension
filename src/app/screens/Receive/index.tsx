@@ -310,17 +310,6 @@ function Receive() {
                 <div className="mb-4">
                   <Button
                     type="button"
-                    label={t("redeem_lnurl")}
-                    fullWidth
-                    onClick={() => {
-                      navigate("/lnurlRedeem");
-                    }}
-                  />
-                </div>
-
-                <div className="mb-4">
-                  <Button
-                    type="button"
                     label={copyLightningAddressLabel}
                     disabled={loadingLightningAddress}
                     fullWidth
@@ -345,6 +334,17 @@ function Receive() {
                       }
                     }}
                     icon={<CopyIcon className="w-6 h-6 mr-2" />}
+                  />
+                </div>
+
+                <div className="mb-4">
+                  <Button
+                    type="button"
+                    label={t("redeem_lnurl")}
+                    fullWidth
+                    onClick={() => {
+                      navigate("/lnurlRedeem");
+                    }}
                   />
                 </div>
 
