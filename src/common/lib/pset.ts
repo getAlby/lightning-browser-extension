@@ -40,10 +40,10 @@ export function getPsetPreview(
     const address = liquidaddress.fromOutputScript(witnessUtxo.script, network);
 
     const asset = getInputAsset(unsignedPset, inputIndex);
-    if (!asset) throw new Error(`No explicitAsset in input #${inputIndex}`);
+    if (!asset) continue;
 
     const amount = getInputAmount(unsignedPset, inputIndex);
-    if (!amount) throw new Error(`No explicitValue in input #${inputIndex}`);
+    if (!amount) continue;
 
     preview.inputs.push({
       address,
@@ -97,7 +97,8 @@ function getInputAsset(pset: Pset, inputIndex: number): string | undefined {
 
   if (
     input.witnessUtxo &&
-    !AssetHash.fromBytes(input.witnessUtxo.asset).isConfidential
+    !input.witnessUtxo.rangeProof &&
+    !input.witnessUtxo.surjectionProof
   ) {
     return AssetHash.fromBytes(input.witnessUtxo.asset).hex;
   }
