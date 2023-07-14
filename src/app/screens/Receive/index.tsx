@@ -53,7 +53,7 @@ function Receive() {
   const [pollingForPayment, setPollingForPayment] = useState(false);
   const mounted = useRef(false);
   const isAlbyUser =
-    isAlbyOAuthAccount(auth.account?.alias) ||
+    isAlbyOAuthAccount(auth.account?.connectorType) ||
     isAlbyLNDHubAccount(auth.account?.alias, auth.account?.connectorType);
 
   useEffect(() => {
@@ -289,6 +289,16 @@ function Receive() {
                     {tCommon("or")}
                   </span>
                   <div className="flex-grow border-t  border-gray-300 dark:border-gray-700"></div>
+                </div>
+                <div className="mb-4">
+                  <Button
+                    type="button"
+                    label={t("redeem_lnurl")}
+                    fullWidth
+                    onClick={() => {
+                      navigate("/lnurlRedeem");
+                    }}
+                  />
                 </div>
 
                 <div className="mb-4">
