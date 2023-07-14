@@ -53,7 +53,7 @@ async function notifyAccountSwitched() {
     });
 
     const currentUrl = tabs.length && tabs[0].url;
-    if (currentUrl && currentUrl.startsWith("http")) {
+    if (currentUrl && currentUrl.startsWith("https")) {
       browser.tabs.sendMessage(tabs[0].id as number, {
         action: "accountSwitched",
       });
