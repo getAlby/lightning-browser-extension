@@ -53,6 +53,7 @@
     "dayjs": "^1.11.9",
     "dexie": "^3.2.4",
     "elliptic": "^6.5.4",
+    "events": "^3.3.0",
     "html5-qrcode": "^2.3.8",
     "i18next": "^22.5.1",
     "i18next-browser-languagedetector": "^7.1.0",

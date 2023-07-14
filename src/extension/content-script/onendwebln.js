@@ -39,6 +39,7 @@ async function init() {
     }
     // forward account switched messages to the website
     else if (request.action === "accountSwitched") {
+      // TODO: emit the event using eventEmitter
       window.postMessage("accountSwitched", "*");
     }
   });

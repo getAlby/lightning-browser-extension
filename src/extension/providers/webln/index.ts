@@ -1,3 +1,5 @@
+import { EventEmitter } from "events";
+
 import { postMessage } from "../postMessage";
 
 declare global {
@@ -20,12 +22,13 @@ type KeysendArgs = {
   amount: string | number;
 };
 
-export default class WebLNProvider {
+export default class WebLNProvider extends EventEmitter {
   enabled: boolean;
   isEnabled: boolean;
   executing: boolean;
 
   constructor() {
+    super();
     this.enabled = false;
     this.isEnabled = false; // seems some webln implementations use webln.isEnabled and some use webln.enabled
     this.executing = false;
