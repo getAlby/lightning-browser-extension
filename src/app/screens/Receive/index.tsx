@@ -316,15 +316,18 @@ function Receive() {
                     fullWidth
                     onClick={async () => {
                       try {
-                        if (lightningAddress) {
-                          navigator.clipboard.writeText(lightningAddress);
-                          setCopyLightningAddressLabel(tCommon("copied"));
-                          setTimeout(() => {
-                            setCopyLightningAddressLabel(
-                              t("actions.copy_lightning_address")
-                            );
-                          }, 1000);
+                        if (!lightningAddress) {
+                          throw new Error(
+                            "User does not have a lightning address"
+                          );
                         }
+                        navigator.clipboard.writeText(lightningAddress);
+                        setCopyLightningAddressLabel(tCommon("copied"));
+                        setTimeout(() => {
+                          setCopyLightningAddressLabel(
+                            t("actions.copy_lightning_address")
+                          );
+                        }, 1000);
                       } catch (e) {
                         if (e instanceof Error) {
                           toast.error(e.message);
