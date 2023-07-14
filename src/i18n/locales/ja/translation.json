@@ -263,6 +263,37 @@
         "description": "Koliderアカウントにログインする",
         "username": {
           "label": "ユーザ名"
+        },
+        "errors": {
+          "user_already_exists": "ユーザー名は既に存在します",
+          "registration_limit_exceeded": "登録制限を超えました。しばらくしてからお試しください。"
+        }
+      },
+      "btcpay": {
+        "page": {
+          "title": "BTCPay LNDノードに接続",
+          "instructions": "BTCPayServerに移動し、管理者としてログインします。Server Settings > Services > LND Rest - See informationに進みます。次に\"See QR Code information\"をクリックし、QRコードデータをコピーします。下に貼り付けてください："
+        },
+        "config": {
+          "label": "コンフィグデータ"
+        },
+        "errors": {
+          "connection_failed": "接続に失敗しました。BTCPayの接続URLは正しく、アクセス可能ですか？"
+        }
+      },
+      "commando": {
+        "page": {
+          "title": "Core Lightningノードに接続",
+          "instructions": "Core Lightningのバージョンが0.12.0以降であること、commandoプラグインが動作していること、ノードがライトニングネットワーク経由でアクセス可能であることを確認してください。'lightning-cli commando-rune' を実行してルーンを作成します。"
+        },
+        "host": {
+          "label": "ホスト"
+        },
+        "config": {
+          "label": "コンフィグデータ"
+        },
+        "errors": {
+          "connection_failed": "接続に失敗しました。Core Lightningノードがオンラインであり、commandoプラグインを使用していますか？"
         }
       }
     }
@@ -308,14 +339,14 @@
       "getnodeinfo": "ノートのチャンネル情報を取得。",
       "getnetworkinfo": "既知のチャンネルグラフの基本的な統計を取得。",
       "getchaninfo": "特定のチャンネルのネットワークアナウンスを取得。",
-      "connectpeer": "リモートピアへの接続を確立。",
+      "connectpeer": "リモートピアとの接続を確立する。",
       "openchannel": "新しいチャンネルを開く。",
       "channelbalance": "開かれた全てのチャンネルの合計資金のレポートを取得。",
       "listchannels": "開いている全てのチャンネルの説明を取得。",
       "getinfo": "ノードの情報を取得。",
       "walletbalance": "未使用の取引出力(UTXO)を取得。",
       "listpayments": "全ての支払いの一覧を取得。",
-      "disconnectpeer": "リモートピアから切断。",
+      "disconnectpeer": "リモートピアから切断する。",
       "listinvoices": "全ての請求書の一覧を取得。"
     },
     "commando": {
