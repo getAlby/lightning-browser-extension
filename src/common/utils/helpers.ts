@@ -9,7 +9,7 @@ export function bech32Decode(str: string, encoding: BufferEncoding = "utf-8") {
 }
 
 export function bech32Encode(prefix: string, hex: string) {
-  const data = secp256k1.utils.hexToBytes(hex);
+  const data = secp256k1.etc.hexToBytes(hex);
   const words = bech32.toWords(data);
   return bech32.encode(prefix, words, 1000);
 }
