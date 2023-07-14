@@ -4,6 +4,7 @@ import {
   Pset,
   address as liquidaddress,
   networks,
+  script,
 } from "liquidjs-lib";
 import { EsploraAPI, EsploraAssetInfos } from "~/common/lib/esplora";
 
@@ -37,7 +38,12 @@ export function getPsetPreview(
       throw new Error(`No witnessUtxo in input #${inputIndex}`);
     }
 
-    const address = liquidaddress.fromOutputScript(witnessUtxo.script, network);
+    let address: string;
+    try {
+      address = liquidaddress.fromOutputScript(witnessUtxo.script, network);
+    } catch {
+      address = script.toASM(witnessUtxo.script);
+    }
 
     const asset = getInputAsset(unsignedPset, inputIndex);
     if (!asset) continue;
@@ -54,7 +60,13 @@ export function getPsetPreview(
 
   for (const [outputIndex, output] of unsignedPset.outputs.entries()) {
     if (!output.script || output.script.length === 0) continue; // skip fee output
-    const address = liquidaddress.fromOutputScript(output.script, network);
+
+    let address: string;
+    try {
+      address = liquidaddress.fromOutputScript(output.script, network);
+    } catch {
+      address = script.toASM(output.script);
+    }
 
     const asset = output.asset;
     if (!asset) throw new Error(`No asset in output #${outputIndex}`);
