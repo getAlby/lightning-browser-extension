@@ -42,6 +42,7 @@ function Receive() {
     expiration: "",
   });
   const [loadingInvoice, setLoadingInvoice] = useState(false);
+  const [loadingLightningAddress, setLoadingLightningAddress] = useState(false);
   const [invoice, setInvoice] = useState<{
     paymentRequest: string;
     rHash: string;
@@ -145,9 +146,11 @@ function Receive() {
   }
 
   async function getLightningAddress() {
+    setLoadingLightningAddress(true);
     const response = await api.getAccountInfo();
     const lightningAddress = response.info.lightning_address;
     if (lightningAddress) setLightningAddress(lightningAddress);
+    setLoadingLightningAddress(false);
   }
 
   useEffect(() => {
@@ -309,6 +312,7 @@ function Receive() {
                   <Button
                     type="button"
                     label={copyLightningAddressLabel}
+                    disabled={loadingLightningAddress}
                     fullWidth
                     onClick={async () => {
                       try {
