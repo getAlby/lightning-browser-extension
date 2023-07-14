@@ -1,6 +1,9 @@
+import * as secp256k1 from "@noble/secp256k1";
 import fetchAdapter from "@vespaiach/axios-fetch-adapter";
 import axios from "axios";
+import { Buffer } from "buffer";
 import Hex from "crypto-js/enc-hex";
+import Utf8 from "crypto-js/enc-utf8";
 import hmacSHA256 from "crypto-js/hmac-sha256";
 import sha256 from "crypto-js/sha256";
 import PubSub from "pubsub-js";
@@ -40,14 +43,35 @@ export async function authFunction({
     throw new Error("LNURL-AUTH FAIL: no account selected");
   }
 
-  let keyMaterialForSignature: string;
+  const url = new URL(lnurlDetails.url);
+  if (!url.host) {
+    throw new Error("Invalid input");
+  }
+
+  let linkingKeyPriv: string;
 
   // use mnemonic for LNURL auth
   if (account.mnemonic && account.useMnemonicForLnurlAuth) {
     const mnemonic = await state.getState().getMnemonic();
 
-    keyMaterialForSignature = await mnemonic.signMessage(
-      LNURLAUTH_CANONICAL_PHRASE
+    // See https://github.com/lnurl/luds/blob/luds/05.md
+    const hashingKey = mnemonic.deriveKey("m/138'/0");
+    const hashingPrivateKey = hashingKey.privateKey as Uint8Array;
+
+    const pathSuffix = getPathSuffix(
+      url.host,
+      secp256k1.utils.bytesToHex(hashingPrivateKey)
+    );
+
+    // Derive key manually (rather than using mnemonic.deriveKey with full path) due to
+    // https://github.com/paulmillr/scure-bip32/issues/8
+    let linkingKey = mnemonic.deriveKey("m/138'");
+    for (const index of pathSuffix) {
+      linkingKey = linkingKey.deriveChild(index);
+    }
+
+    linkingKeyPriv = secp256k1.utils.bytesToHex(
+      linkingKey.privateKey as Uint8Array
     );
   } else {
     const connector = await state.getState().getConnector();
@@ -61,31 +85,28 @@ export async function authFunction({
       },
     });
 
-    keyMaterialForSignature = signResponse.data.signature;
+    const keyMaterialForSignature = signResponse.data.signature;
+
+    // make sure we got a signature
+    if (!keyMaterialForSignature) {
+      throw new Error("Invalid Signature");
+    }
+
+    const hashingKey = sha256(keyMaterialForSignature).toString(Hex);
+
+    const { settings } = state.getState();
+    if (settings.isUsingLegacyLnurlAuthKey) {
+      linkingKeyPriv = hmacSHA256(url.host, hashingKey).toString(Hex);
+    } else {
+      linkingKeyPriv = hmacSHA256(url.host, Hex.parse(hashingKey)).toString(
+        Hex
+      );
+    }
   }
 
-  // make sure we got a signature
-  if (!keyMaterialForSignature) {
-    throw new Error("Invalid Signature");
-  }
-
-  const hashingKey = sha256(keyMaterialForSignature).toString(Hex);
-  const url = new URL(lnurlDetails.url);
-  if (!url.host || !hashingKey) {
-    throw new Error("Invalid input");
-  }
-
-  let linkingKeyPriv;
-  const { settings } = state.getState();
-  if (settings.isUsingLegacyLnurlAuthKey) {
-    linkingKeyPriv = hmacSHA256(url.host, hashingKey).toString(Hex);
-  } else {
-    linkingKeyPriv = hmacSHA256(url.host, Hex.parse(hashingKey)).toString(Hex);
-  }
-
-  // make sure we got a hashingKey and a linkingkey (just to be sure for whatever reason)
-  if (!hashingKey || !linkingKeyPriv) {
-    throw new Error("Invalid hashingKey/linkingKey");
+  // make sure we got a linkingkey (just to be sure for whatever reason)
+  if (!linkingKeyPriv) {
+    throw new Error("Invalid linkingKey");
   }
 
   const signer = new HashKeySigner(linkingKeyPriv);
@@ -151,9 +172,25 @@ export async function authFunction({
         origin,
       });
 
-      throw new Error(e.message);
+      throw e;
     }
   }
+}
+
+// see https://github.com/lnurl/luds/blob/luds/05.md
+export function getPathSuffix(domain: string, privateKeyHex: string) {
+  const derivationMaterial = hmacSHA256(
+    Utf8.parse(domain),
+    Hex.parse(privateKeyHex)
+  ).toString(Hex);
+
+  const buf = Buffer.from(derivationMaterial, "hex");
+
+  const pathSuffix = [];
+  for (let i = 0; i < 4; i++) {
+    pathSuffix.push(buf.readUint32BE(i * 4));
+  }
+  return pathSuffix;
 }
 
 const auth = async (message: MessageLnurlAuth) => {

@@ -307,6 +307,16 @@ function Receive() {
                   </span>
                   <div className="flex-grow border-t  border-gray-300 dark:border-gray-700"></div>
                 </div>
+                <div className="mb-4">
+                  <Button
+                    type="button"
+                    label={t("redeem_lnurl")}
+                    fullWidth
+                    onClick={() => {
+                      navigate("/lnurlRedeem");
+                    }}
+                  />
+                </div>
 
                 <div className="mb-4">
                   <Button

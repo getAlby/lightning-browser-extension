@@ -619,9 +619,6 @@
     },
     "send": {
       "title": "Send",
-      "qrcode": {
-        "title": "Waiting to scan"
-      },
       "input": {
         "label": "Recipient",
         "hint": "Invoice, Lightning Address or LNURL"
@@ -670,6 +667,20 @@
       },
       "success": "Withdraw request of {{amount}} sent successfully to {{sender}}"
     },
+    "lnurlredeem": {
+      "title": "Redeem bitcoin",
+      "input": {
+        "label": "LNURL-withdraw code",
+        "placeholder": "LNURL..."
+      },
+      "actions": {
+        "withdraw": "Withdraw"
+      },
+      "errors": {
+        "invalid_withdraw_request": "Invalid LNURL withdraw request",
+        "invalid_lnurl": "Invalid LNURL"
+      }
+    },
     "receive": {
       "title": "Receive",
       "actions": {
@@ -689,6 +700,7 @@
         "waiting": "waiting for payment...",
         "status": "Check payment status"
       },
+      "redeem_lnurl": "Redeem LNURL",
       "receive_via_bitcoin_address": "Receive via bitcoin address"
     },
     "on_chain": {
@@ -696,6 +708,9 @@
       "instructions1": "To receive bitcoin via a bitcoin address, login to your <0>Alby Account</0> on getalby.com",
       "instructions2": "You can find your bitcoin address on the <0>Receive</0> page.",
       "go": "Go to your Alby account →"
+    },
+    "scan_qrcode": {
+      "title": "Waiting to scan"
     },
     "discover": {
       "title": "Explore the Lightning ⚡️ Ecosystem",
