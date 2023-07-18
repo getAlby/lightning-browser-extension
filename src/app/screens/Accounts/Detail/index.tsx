@@ -167,10 +167,7 @@ function AccountDetail() {
   }
 
   async function setLiquidEnable(value: boolean) {
-    await msg.request("liquid/setIsLiquidEnable", {
-      id,
-      enable: value,
-    });
+    await api.liquid.setEnable(id, value);
     setLiquidEnabled(value);
   }
 

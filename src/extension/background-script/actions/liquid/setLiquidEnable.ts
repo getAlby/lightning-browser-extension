@@ -1,7 +1,7 @@
 import state from "~/extension/background-script/state";
-import { MessageSetIsLiquidEnable } from "~/types";
+import { MessageSetLiquidEnable } from "~/types";
 
-const setIsLiquidEnable = async (message: MessageSetIsLiquidEnable) => {
+const setLiquidEnable = async (message: MessageSetLiquidEnable) => {
   if (typeof message.args.enable !== "boolean") {
     return {
       error: "Invalid enable value.",
@@ -35,4 +35,4 @@ const setIsLiquidEnable = async (message: MessageSetIsLiquidEnable) => {
   };
 };
 
-export default setIsLiquidEnable;
+export default setLiquidEnable;

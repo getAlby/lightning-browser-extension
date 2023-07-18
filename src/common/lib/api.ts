@@ -194,6 +194,12 @@ const setNostrPrivateKey = (id: string, privateKey: string): Promise<void> =>
     privateKey,
   });
 
+const setLiquidEnable = (id: string, enable: boolean): Promise<void> =>
+  msg.request("liquid/setLiquidEnable", {
+    id,
+    enable,
+  });
+
 const getMnemonic = (id: string): Promise<string> =>
   msg.request("getMnemonic", {
     id,
@@ -240,6 +246,9 @@ export default {
     generatePrivateKey: generateNostrPrivateKey,
     setPrivateKey: setNostrPrivateKey,
     removePrivateKey: removeNostrPrivateKey,
+  },
+  liquid: {
+    setEnable: setLiquidEnable,
   },
   getMnemonic,
   setMnemonic,

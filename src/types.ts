@@ -575,12 +575,12 @@ export interface MessageSignPset extends MessageDefault {
   action: "signPset";
 }
 
-export interface MessageSetIsLiquidEnable extends MessageDefault {
+export interface MessageSetLiquidEnable extends MessageDefault {
   args: {
     id?: string;
     enable: boolean;
   };
-  action: "setIsLiquidEnable";
+  action: "setLiquidEnable";
 }
 
 export interface LNURLChannelServiceResponse {
