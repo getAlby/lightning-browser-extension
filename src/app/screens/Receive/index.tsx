@@ -284,7 +284,7 @@ function Receive() {
                     />
                   </div>
                 </div>
-                <div className="mb-4">
+                <div>
                   <Button
                     type="submit"
                     label={t("actions.create_invoice")}
@@ -299,7 +299,7 @@ function Receive() {
           </form>
           <div>
             <Container justifyBetween maxWidth="sm">
-              <div className="relative flex  items-center mb-8">
+              <div className="relative flex  items-center mb-4">
                 <div className="flex-grow border-t border-gray-300 dark:border-gray-700"></div>
                 <span className="flex-shrink mx-4  text-gray-500 dark:text-gray-400 fw-bold">
                   {tCommon("or")}
