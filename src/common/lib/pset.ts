@@ -8,9 +8,9 @@ import {
 } from "liquidjs-lib";
 import { EsploraAPI, EsploraAssetInfos } from "~/common/lib/esplora";
 
-import { Address as PsbtAddress } from "./psbt";
-
-export type Address = PsbtAddress & {
+export type Address = {
+  amount: number;
+  address: string;
   asset: string;
 };
 

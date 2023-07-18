@@ -6,6 +6,8 @@ import {
   networks,
 } from "liquidjs-lib";
 import { SLIP77Factory, Slip77Interface } from "slip77";
+import Mnemonic from "~/extension/background-script/mnemonic";
+import { LiquidNetworkType } from "~/types";
 
 import * as tinysecp256k1Adapter from "./secp256k1";
 
@@ -38,20 +40,19 @@ function tweakPrivateKey(privKey: Buffer, tweak?: Buffer): Buffer {
 class Liquid {
   private slip77: Slip77Interface;
   private network: networks.Network;
+  public privateKey: string;
 
-  constructor(
-    public privateKey: string,
-    masterBlindingKey: string,
-    network: "liquid" | "testnet" | "regtest"
-  ) {
+  constructor(mnemonic: Mnemonic, networkType: LiquidNetworkType) {
     // fix usages of window (unavailable in service worker)
     globalThis.window ??= globalThis.window || {};
     if (!globalThis.window.crypto) {
       globalThis.window.crypto = crypto;
     }
 
-    this.network = networks[network];
-    if (!this.network) throw new Error(`Invalid network: "${network}"`);
+    this.privateKey = mnemonic.deriveLiquidPrivateKeyHex(networkType);
+    this.network = networks[networkType];
+    if (!this.network) throw new Error(`Invalid network: "${networkType}"`);
+    const masterBlindingKey = mnemonic.deriveLiquidMasterBlindingKey();
     this.slip77 =
       SLIP77Factory(tinysecp256k1Adapter).fromMasterBlindingKey(
         masterBlindingKey

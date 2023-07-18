@@ -14,6 +14,8 @@ export type ConnectorType = keyof typeof connectors;
 
 export type BitcoinNetworkType = "bitcoin" | "testnet" | "regtest";
 
+export type LiquidNetworkType = "liquid" | "testnet" | "regtest";
+
 export interface Account {
   id: string;
   connector: ConnectorType;

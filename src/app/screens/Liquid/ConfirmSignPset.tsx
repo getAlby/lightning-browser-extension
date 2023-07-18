@@ -23,7 +23,7 @@ import {
 } from "~/common/lib/pset";
 import type { OriginData } from "~/types";
 
-function toLiquidNetworkName(net: "bitcoin" | "regtest") {
+function toLiquidNetworkName(net: "bitcoin" | "testnet" | "regtest") {
   return net === "bitcoin" ? "liquid" : "testnet"; // TODO: how do we handle regtest ?
 }
 
@@ -52,8 +52,8 @@ function ConfirmSignPset() {
   useEffect(() => {
     (async () => {
       if (!pset) throw new Error("pset is undefined");
-      const settings = await api.getSettings();
-      const liquidNetwork = toLiquidNetworkName(settings.bitcoinNetwork);
+      const account = await api.getAccount();
+      const liquidNetwork = toLiquidNetworkName(account.bitcoinNetwork);
       const preview = getPsetPreview(pset, liquidNetwork);
       setLiquidNetwork(liquidNetwork);
       setPreview(preview);

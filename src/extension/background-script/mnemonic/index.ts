@@ -3,7 +3,11 @@ import { HDKey } from "@scure/bip32";
 import * as bip39 from "@scure/bip39";
 import Hex from "crypto-js/enc-hex";
 import sha256 from "crypto-js/sha256";
+import { SLIP77Factory } from "slip77";
+import * as tinysecp from "tiny-secp256k1";
 
+export const LIQUID_DERIVATION_PATH = "m/84'/1776'/0'/0/0";
+export const LIQUID_DERIVATION_PATH_REGTEST = "m/84'/1'/0'/0/0";
 const NOSTR_DERIVATION_PATH = "m/44'/1237'/0'/0/0"; // NIP-06
 
 class Mnemonic {
@@ -14,6 +18,23 @@ class Mnemonic {
     this.mnemonic = mnemonic;
     const seed = bip39.mnemonicToSeedSync(mnemonic);
     this._hdkey = HDKey.fromMasterSeed(seed);
+  }
+
+  deriveLiquidMasterBlindingKey(): string {
+    return SLIP77Factory(tinysecp)
+      .fromSeed(Buffer.from(bip39.mnemonicToSeedSync(this.mnemonic)))
+      .masterKey.toString("hex");
+  }
+
+  deriveLiquidPrivateKeyHex(networkType: string) {
+    const derivationPath =
+      networkType === "liquid"
+        ? LIQUID_DERIVATION_PATH
+        : LIQUID_DERIVATION_PATH_REGTEST;
+
+    return secp256k1.etc.bytesToHex(
+      this.deriveKey(derivationPath).privateKey as Uint8Array
+    );
   }
 
   deriveNostrPrivateKeyHex() {
