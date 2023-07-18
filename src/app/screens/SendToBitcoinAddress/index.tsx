@@ -94,7 +94,7 @@ function SendToBitcoinAddress() {
           service_fee_percentage: number;
           network_fee: number;
           sats_per_vbyte: number;
-        }>(SWAP_API, { adapter: fetchAdapter });
+        }>(`${SWAP_API}/info`, { adapter: fetchAdapter });
 
         setServiceFeePercentage(result.data.service_fee_percentage);
         setNetworkFee(result.data.network_fee);
