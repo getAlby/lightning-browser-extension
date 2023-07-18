@@ -36,7 +36,7 @@ const TextField = ({
       {label}
     </label>
 
-    <div className="mt-1">
+    <div className="mt-1 flex flex-col flex-1">
       <Input
         autoComplete={autoComplete}
         autoFocus={autoFocus}

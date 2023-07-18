@@ -9,6 +9,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Alert from "~/app/components/Alert";
 import { ACCOUNT_CURRENCIES } from "~/common/constants";
 import msg from "~/common/lib/msg";
 
@@ -170,11 +171,7 @@ export default function ConnectKollidier({ variant }: Props) {
       }
       onSubmit={handleSubmit}
     >
-      {variant === "create" && (
-        <div className="rounded-md font-medium p-4 mb-8 text-orange-700 bg-orange-50 dark:text-orange-400 dark:bg-orange-900">
-          {t("warning")}
-        </div>
-      )}
+      {variant === "create" && <Alert type="warn">{t("warning")}</Alert>}
       <div className="mt-6 mb-6">
         <TextField
           id="username"
@@ -188,6 +185,7 @@ export default function ConnectKollidier({ variant }: Props) {
       </div>
       <div className="mb-6">
         <PasswordForm
+          // FIXME: do not use alby keys - move these keys somewhere else for all languages
           i18nKeyPrefix="alby.pre_connect.set_password"
           formData={formData}
           setFormData={setFormData}

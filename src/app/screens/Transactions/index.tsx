@@ -16,7 +16,7 @@ function Transactions({ type }: Props) {
     keyPrefix: "transactions",
   });
 
-  const { account, balancesDecorated } = useAccount();
+  const { account, balancesDecorated, accountLoading } = useAccount();
 
   const { transactions, isLoadingTransactions, loadTransactions } =
     useTransactions();
@@ -25,7 +25,8 @@ function Transactions({ type }: Props) {
     useInvoices();
 
   const isLoading =
-    type === "incoming" ? isLoadingInvoices : isLoadingTransactions;
+    accountLoading ||
+    (type === "incoming" ? isLoadingInvoices : isLoadingTransactions);
   const listItems = type === "incoming" ? incomingTransactions : transactions;
 
   useEffect(() => {

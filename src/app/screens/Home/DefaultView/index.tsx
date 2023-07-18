@@ -5,8 +5,8 @@ import {
 import Button from "@components/Button";
 import Hyperlink from "@components/Hyperlink";
 import Loading from "@components/Loading";
+import Tab from "@components/Tab";
 import TransactionsTable from "@components/TransactionsTable";
-import { Tab } from "@headlessui/react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { FC, useEffect, useState } from "react";
@@ -18,7 +18,6 @@ import { useAccount } from "~/app/context/AccountContext";
 import { useInvoices } from "~/app/hooks/useInvoices";
 import { useTransactions } from "~/app/hooks/useTransactions";
 import { PublisherLnData } from "~/app/screens/Home/PublisherLnData";
-import { classNames } from "~/app/utils/index";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
@@ -38,7 +37,7 @@ const DefaultView: FC<Props> = (props) => {
 
   const navigate = useNavigate();
 
-  const { account, balancesDecorated } = useAccount();
+  const { account, balancesDecorated, accountLoading } = useAccount();
 
   const [isBlockedUrl, setIsBlockedUrl] = useState<boolean>(false);
 
@@ -48,8 +47,8 @@ const DefaultView: FC<Props> = (props) => {
   const { isLoadingInvoices, incomingTransactions, loadInvoices } =
     useInvoices();
 
-  const hasTransactions = !isLoadingTransactions && !!transactions?.length;
-  const hasInvoices = !isLoadingInvoices && !!incomingTransactions?.length;
+  const isLoadingOutgoing = accountLoading || isLoadingTransactions;
+  const isLoadingIncoming = accountLoading || isLoadingInvoices;
 
   const itemsLimit = 8;
 
@@ -169,34 +168,24 @@ const DefaultView: FC<Props> = (props) => {
             </h2>
 
             <Tab.Group>
-              <Tab.List className="mb-2">
+              <Tab.List>
                 {[
                   tComponents("transaction_list.tabs.outgoing"),
                   tComponents("transaction_list.tabs.incoming"),
                 ].map((category) => (
-                  <Tab
-                    key={category}
-                    className={({ selected }) =>
-                      classNames(
-                        "w-1/2 rounded-lg py-2.5 font-bold transition duration-150",
-                        "focus:outline-none",
-                        "hover:text-gray-600 dark:hover:text-gray-300",
-                        selected
-                          ? "text-black dark:text-white"
-                          : "text-gray-400"
-                      )
-                    }
-                  >
-                    {category}
-                  </Tab>
+                  <Tab key={category} label={category} />
                 ))}
               </Tab.List>
 
               <Tab.Panels>
                 <Tab.Panel>
-                  {hasTransactions && (
-                    <>
-                      <TransactionsTable transactions={transactions} />
+                  <>
+                    <TransactionsTable
+                      transactions={transactions}
+                      loading={isLoadingOutgoing}
+                      noResultMsg={t("default_view.no_outgoing_transactions")}
+                    />
+                    {!isLoadingOutgoing && transactions.length > 0 && (
                       <div className="mt-5 text-center">
                         <Hyperlink
                           onClick={() =>
@@ -206,23 +195,17 @@ const DefaultView: FC<Props> = (props) => {
                           {t("default_view.all_transactions_link")}
                         </Hyperlink>
                       </div>
-                    </>
-                  )}
-                  {!isLoadingTransactions && !transactions?.length && (
-                    <p className="text-gray-500 dark:text-neutral-400">
-                      {t("default_view.no_outgoing_transactions")}
-                    </p>
-                  )}
+                    )}
+                  </>
                 </Tab.Panel>
                 <Tab.Panel>
-                  {isLoadingInvoices && (
-                    <div className="flex justify-center">
-                      <Loading />
-                    </div>
-                  )}
-                  {hasInvoices && (
-                    <>
-                      <TransactionsTable transactions={incomingTransactions} />
+                  <>
+                    <TransactionsTable
+                      transactions={incomingTransactions}
+                      loading={isLoadingIncoming}
+                      noResultMsg={t("default_view.no_incoming_transactions")}
+                    />
+                    {!isLoadingIncoming && incomingTransactions.length > 0 && (
                       <div className="mt-5 text-center">
                         <Hyperlink
                           onClick={() =>
@@ -232,13 +215,8 @@ const DefaultView: FC<Props> = (props) => {
                           {t("default_view.all_transactions_link")}
                         </Hyperlink>
                       </div>
-                    </>
-                  )}
-                  {!hasInvoices && (
-                    <p className="text-gray-500 dark:text-neutral-400">
-                      {t("default_view.no_incoming_transactions")}
-                    </p>
-                  )}
+                    )}
+                  </>
                 </Tab.Panel>
               </Tab.Panels>
             </Tab.Group>

@@ -3,19 +3,21 @@ import { Link } from "react-router-dom";
 import Button from "~/app/components/Button";
 import ConnectorPath from "~/app/components/ConnectorPath";
 import { getConnectorRoutes } from "~/app/router/connectorRoutes";
+import ConnectAlby from "~/app/screens/connectors/ConnectAlby";
 import i18n from "~/i18n/i18nConfig";
 
 import alby from "/static/assets/icons/alby.png";
 
 export default function ChooseConnectorPath() {
   let connectorRoutes = getConnectorRoutes();
+
   i18n.on("languageChanged", () => {
     connectorRoutes = getConnectorRoutes();
   });
   const { t } = useTranslation("translation", {
     keyPrefix: "choose_path",
   });
-  const { t: tCommon } = useTranslation("common");
+
   return (
     <div className="relative mt-10 lg:grid lg:gap-8 text-center">
       <div className="relative">
@@ -26,16 +28,7 @@ export default function ChooseConnectorPath() {
             content={
               <img src={alby} alt="logo" className="inline rounded-3xl w-32" />
             }
-            actions={
-              <>
-                <Link to="create" className="flex flex-1">
-                  <Button label={t("alby.create_new")} primary flex />
-                </Link>
-                <Link to="login" className="flex flex-1">
-                  <Button label={tCommon("actions.log_in")} outline flex />
-                </Link>
-              </>
-            }
+            actions={<ConnectAlby />}
           />
           <ConnectorPath
             title={t("other.title")}
@@ -44,6 +37,7 @@ export default function ChooseConnectorPath() {
               <Link
                 to="choose-connector"
                 className="flex flex-wrap gap-6 w-72 lg:w-80 mx-auto my-5 items-center"
+                tabIndex={-1}
               >
                 {connectorRoutes.slice(1, 8).map(({ path, title, logo }) => (
                   <img
@@ -61,7 +55,7 @@ export default function ChooseConnectorPath() {
             }
             actions={
               <Link to="choose-connector" className="flex flex-1">
-                <Button label={t("other.connect")} primary flex />
+                <Button tabIndex={-1} label={t("other.connect")} primary flex />
               </Link>
             }
           />
