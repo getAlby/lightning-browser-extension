@@ -83,6 +83,13 @@ function AccountDetail() {
         setAccountName(response.name);
         setLiquidEnabled(response.isLiquidEnabled);
 
+        const priv = (await msg.request("nostr/getPrivateKey", {
+          id,
+        })) as string;
+        if (priv) {
+          setCurrentPrivateKey(priv);
+        }
+
         const accountMnemonic = (await msg.request("getMnemonic", {
           id,
         })) as string;
@@ -90,12 +97,6 @@ function AccountDetail() {
           setMnemonic(accountMnemonic);
         }
 
-        const priv = (await msg.request("nostr/getPrivateKey", {
-          id,
-        })) as string;
-        if (priv) {
-          setCurrentPrivateKey(priv);
-        }
         if (priv) {
           const keyOrigin = await getNostrKeyOrigin(priv, accountMnemonic);
           setNostrKeyOrigin(keyOrigin);

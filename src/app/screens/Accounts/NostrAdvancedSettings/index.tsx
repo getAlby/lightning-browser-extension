@@ -216,7 +216,7 @@ function NostrAdvancedSettings() {
 
             <div>
               <TextField
-                id="nostrPrivateKey"
+                id="nostrPublicKey"
                 label={t("nostr.public_key.label")}
                 type="text"
                 value={nostrPublicKey}
