@@ -3,17 +3,18 @@ import { default as nostr, default as nostrlib } from "~/common/lib/nostr";
 
 export async function saveNostrPrivateKey(
   accountId: string,
-  privateKey: string
+  nostrPrivateKey: string
 ) {
-  if (privateKey) {
-    privateKey = nostrlib.normalizeToHex(privateKey);
+  nostrPrivateKey = nostrlib.normalizeToHex(nostrPrivateKey);
+
+  if (nostrPrivateKey) {
     // Validate the private key before saving
-    nostr.generatePublicKey(privateKey);
-    nostrlib.hexToNip19(privateKey, "nsec");
+    nostr.generatePublicKey(nostrPrivateKey);
+    nostrlib.hexToNip19(nostrPrivateKey, "nsec");
 
     await msg.request("nostr/setPrivateKey", {
       id: accountId,
-      privateKey,
+      privateKey: nostrPrivateKey,
     });
   } else {
     await msg.request("nostr/removePrivateKey", {

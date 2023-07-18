@@ -1,16 +1,19 @@
 import { deriveNostrPrivateKey } from "~/common/lib/mnemonic";
 import msg from "~/common/lib/msg";
 
-export type KeyOrigin = "legacy-account-derived" | "unknown" | "secret-key";
+export type NostrKeyOrigin =
+  | "legacy-account-derived"
+  | "unknown"
+  | "secret-key";
 
-export async function getKeyOrigin(
-  privateKey: string,
+export async function getNostrKeyOrigin(
+  nostrPrivateKey: string,
   mnemonic: string | null
-): Promise<KeyOrigin> {
+): Promise<NostrKeyOrigin> {
   if (mnemonic) {
     const mnemonicDerivedPrivateKey = deriveNostrPrivateKey(mnemonic);
 
-    if (mnemonicDerivedPrivateKey === privateKey) {
+    if (mnemonicDerivedPrivateKey === nostrPrivateKey) {
       return "secret-key";
     }
   }
@@ -20,7 +23,7 @@ export async function getKeyOrigin(
     await msg.request("nostr/generatePrivateKey")
   ).privateKey;
 
-  return legacyAccountDerivedPrivateKey === privateKey
+  return legacyAccountDerivedPrivateKey === nostrPrivateKey
     ? "legacy-account-derived"
     : "unknown";
 }

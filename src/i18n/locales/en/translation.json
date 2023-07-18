@@ -461,8 +461,21 @@
           }
         },
         "nostr": {
+          "title": "Nostr",
+          "hint": "is a simple and open protocol that aims to create censorship-resistant social networks. Nostr works with cryptographic keys. To publish something you sign it with your key and send it to multiple relays. You can use Alby to manage your Nostr key. Many Nostr applications will then allow you to simply use the key from the Alby extension.",
+          "advanced_settings": {
+            "label": "Advanced Settings",
+            "title": "Advanced Nostr Settings",
+            "description": "Derive Nostr keys from your Secret Key or import your existing private key by pasting it in the \"Nostr Private Key\" field.",
+            "imported_key_warning": "⚠️ You're currently using an imported or randomly generated Nostr key. Your Nostr private key cannot be restored by your Secret Key, so remember to back up your Nostr private key.",
+            "legacy_derived_key_warning": "⚠️ You're currently using a Nostr key derived from your account (legacy). Your Nostr private key cannot be restored by your Secret Key, so remember to back up your Nostr private key.",
+            "can_restore": "✅ Nostr key derived from your secret key",
+            "derive": "Derive Nostr keys from your Secret Key",
+            "no_secret_key": "💡 You don't have a secret key yet. <0>Click here</0></div> to create your secret key and derive your nostr keys."
+          },
           "private_key": {
             "title": "Manage your Nostr private key",
+            "subtitle": "Paste your nostr private key or generate a new one. <0>Learn more »</0>",
             "warning": "Please enter the name of the account to confirm the deletion of your nostr private key:",
             "success": "Nostr private key encrypted & saved successfully.",
             "failed_to_remove": "The entered account name didn't match, your old Nostr private key has been restored.",
@@ -472,19 +485,21 @@
           "public_key": {
             "label": "Nostr Public Key"
           },
+          "generate_keys": {
+            "title": "Generate a new Nostr key",
+            "screen_reader": "Generate a new Nostr key for your account",
+            "hint": "You can generate a random key or a derive key from this account details (using a signed canonical phrase). <0>Learn more »</0>",
+            "actions": {
+              "random_keys": "Generate a random key",
+              "derived_keys": "Derive a key from account"
+            }
+          },
+          "actions": {
+            "generate": "Generate a new key"
+          },
           "errors": {
             "failed_to_load": "Failed to load the Nostr key. Is it a valid Nostr key?"
           }
-        },
-        "advanced_settings": {
-          "label": "Advanced Settings",
-          "title": "Advanced {{type}} Settings",
-          "description": "Derive {{type}} keys from your Secret Key or import your existing private key by pasting it in the \"{{type}} Private Key\" field.",
-          "imported_key_warning": "⚠️ You're currently using an imported or randomly generated {{type}} key. Your {{type}} private key cannot be restored by your Secret Key, so remember to back up your {{type}} private key.",
-          "legacy_derived_key_warning": "⚠️ You're currently using a {{type}} key derived from your account (legacy). Your {{type}} private key cannot be restored by your Secret Key, so remember to back up your {{type}} private key.",
-          "can_restore": "✅ {{type}} key derived from your secret key",
-          "derive": "Derive {{type}} keys from your Secret Key",
-          "no_secret_key": "💡 You don't have a secret key yet. <0>Click here</0></div> to create your secret key and derive your {{type}} keys."
         },
         "remove": {
           "title": "Remove This Account",

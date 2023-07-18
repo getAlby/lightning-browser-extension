@@ -25,9 +25,9 @@ import ScrollToTop from "~/app/components/ScrollToTop";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
 import { getConnectorRoutes, renderRoutes } from "~/app/router/connectorRoutes";
-import AdvancedKeySettings from "~/app/screens/Accounts/AdvancedKeySettings";
 import BackupSecretKey from "~/app/screens/Accounts/BackupSecretKey";
 import ImportSecretKey from "~/app/screens/Accounts/ImportSecretKey";
+import NostrAdvancedSettings from "~/app/screens/Accounts/NostrAdvancedSettings";
 import Discover from "~/app/screens/Discover";
 import AlbyWalletCreate from "~/app/screens/connectors/AlbyWallet/create";
 import AlbyWalletLogin from "~/app/screens/connectors/AlbyWallet/login";
@@ -97,10 +97,7 @@ function Options() {
                 path=":id/secret-key/import"
                 element={<ImportSecretKey />}
               />
-              <Route
-                path=":id/nostr"
-                element={<AdvancedKeySettings type="nostr" />}
-              />
+              <Route path=":id/nostr" element={<NostrAdvancedSettings />} />
               <Route
                 path="new"
                 element={

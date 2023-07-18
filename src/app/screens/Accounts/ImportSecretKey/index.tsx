@@ -28,17 +28,17 @@ function ImportSecretKey() {
   const [hasFetchedData, setHasFetchedData] = useState(false);
   const [hasMnemonic, setHasMnemonic] = useState(false);
   // TODO: useNostrPrivateKey hook
-  const [currentNostrPrivateKey, setCurrentNostrPrivateKey] = useState("");
+  const [currentPrivateKey, setCurrentPrivateKey] = useState("");
   const { id } = useParams();
 
   const fetchData = useCallback(async () => {
     try {
       if (id) {
-        const nostrPriv = await msg.request<string>("nostr/getPrivateKey", {
+        const priv = await msg.request<string>("nostr/getPrivateKey", {
           id,
         });
-        if (nostrPriv) {
-          setCurrentNostrPrivateKey(nostrPriv);
+        if (priv) {
+          setCurrentPrivateKey(priv);
         }
 
         const accountMnemonic = await msg.request<string>("getMnemonic", {
@@ -129,7 +129,7 @@ function ImportSecretKey() {
               />
             </>
           </MnemonicInputs>
-          {currentNostrPrivateKey && (
+          {currentPrivateKey && (
             <div className="rounded-md font-medium p-4 text-orange-700 bg-orange-50 dark:text-orange-400 dark:bg-orange-900">
               {t("existing_nostr_key_notice")}
             </div>

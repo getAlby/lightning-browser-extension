@@ -27,7 +27,10 @@ import Toggle from "~/app/components/form/Toggle";
 import { useAccount } from "~/app/context/AccountContext";
 import { useAccounts } from "~/app/context/AccountsContext";
 import { useSettings } from "~/app/context/SettingsContext";
-import { KeyOrigin, getKeyOrigin } from "~/app/utils/getKeyOrigin";
+import {
+  NostrKeyOrigin,
+  getNostrKeyOrigin,
+} from "~/app/utils/getNostrKeyOrigin";
 import api, { GetAccountRes } from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import nostr from "~/common/lib/nostr";
@@ -60,9 +63,11 @@ function AccountDetail() {
 
   // TODO: add hooks useMnemonic, useNostrPrivateKey, ...
   const [mnemonic, setMnemonic] = useState("");
-  const [nostrPrivateKey, setNostrPrivateKey] = useState("");
+  const [currentPrivateKey, setCurrentPrivateKey] = useState("");
   const [nostrPublicKey, setNostrPublicKey] = useState("");
-  const [nostrKeyOrigin, setNostrKeyOrigin] = useState<KeyOrigin>("unknown");
+  const [nostrKeyOrigin, setNostrKeyOrigin] =
+    useState<NostrKeyOrigin>("unknown");
+
   const [isLiquidEnabled, setLiquidEnabled] = useState<boolean>();
   const [exportLoading, setExportLoading] = useState(false);
   const [exportModalIsOpen, setExportModalIsOpen] = useState(false);
@@ -85,14 +90,14 @@ function AccountDetail() {
           setMnemonic(accountMnemonic);
         }
 
-        const privNostr = (await msg.request("nostr/getPrivateKey", {
+        const priv = (await msg.request("nostr/getPrivateKey", {
           id,
         })) as string;
-        if (privNostr) {
-          setNostrPrivateKey(privNostr);
+        if (priv) {
+          setCurrentPrivateKey(priv);
         }
-        if (privNostr) {
-          const keyOrigin = await getKeyOrigin(privNostr, accountMnemonic);
+        if (priv) {
+          const keyOrigin = await getNostrKeyOrigin(priv, accountMnemonic);
           setNostrKeyOrigin(keyOrigin);
         }
       }
@@ -195,7 +200,7 @@ function AccountDetail() {
   useEffect(() => {
     try {
       setNostrPublicKey(
-        nostrPrivateKey ? nostr.generatePublicKey(nostrPrivateKey) : ""
+        currentPrivateKey ? nostr.generatePublicKey(currentPrivateKey) : ""
       );
     } catch (e) {
       if (e instanceof Error)
@@ -207,7 +212,7 @@ function AccountDetail() {
           </p>
         );
     }
-  }, [nostrPrivateKey, t]);
+  }, [currentPrivateKey, t]);
 
   return !account ? (
     <div className="flex justify-center mt-5">
@@ -456,7 +461,7 @@ function AccountDetail() {
               <div className="w-1/5 flex-none">
                 <Link to="nostr">
                   <Button
-                    label={t("advanced_settings.label")}
+                    label={t("nostr.advanced_settings.label")}
                     primary
                     fullWidth
                   />
