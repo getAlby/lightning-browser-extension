@@ -618,7 +618,8 @@
     "receive": {
       "title": "Tag emot",
       "actions": {
-        "create_invoice": "Skapa Faktura"
+        "create_invoice": "Skapa Faktura",
+        "copy_lightning_address": "Kopiera Lightning adress"
       },
       "amount": {
         "label": "Belopp",
