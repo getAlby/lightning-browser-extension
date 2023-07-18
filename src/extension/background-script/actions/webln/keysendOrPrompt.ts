@@ -1,12 +1,14 @@
 import utils from "~/common/lib/utils";
-import { Message } from "~/types";
+// TODO: move checkAllowance to some helpers/models?
+import { getHostFromSender } from "~/common/utils/helpers";
+import { Message, Sender } from "~/types";
 
 import keysend from "../ln/keysend";
-// TODO: move checkAllowance to some helpers/models?
 import { checkAllowance } from "./sendPaymentOrPrompt";
 
-const keysendOrPrompt = async (message: Message) => {
-  if (!("host" in message.origin)) return;
+const keysendOrPrompt = async (message: Message, sender: Sender) => {
+  const host = getHostFromSender(sender);
+  if (!host) return;
 
   const destination = message.args.destination;
   const amount = message.args.amount;
@@ -18,7 +20,7 @@ const keysendOrPrompt = async (message: Message) => {
       error: "Destination or amount missing.",
     };
   }
-  if (await checkAllowance(message.origin.host, parseInt(amount as string))) {
+  if (await checkAllowance(host, parseInt(amount as string))) {
     return keysendWithAllowance(message);
   } else {
     return keysendWithPrompt(message);

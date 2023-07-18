@@ -60,10 +60,10 @@ const routes = {
   lnurl: lnurl,
   lnurlAuth: auth,
   getCurrencyRate: cache.getCurrencyRate,
-  signPsbt: webbtc.signPsbt,
   getAddress: webbtc.getAddress,
   setMnemonic: mnemonic.setMnemonic,
   getMnemonic: mnemonic.getMnemonic,
+  generateMnemonic: mnemonic.generateMnemonic,
 
   liquid: {
     signPset: liquid.signPset,
@@ -73,6 +73,7 @@ const routes = {
   nostr: {
     generatePrivateKey: nostr.generatePrivateKey,
     getPrivateKey: nostr.getPrivateKey,
+    getPublicKey: nostr.getPublicKey,
     removePrivateKey: nostr.removePrivateKey,
     setPrivateKey: nostr.setPrivateKey,
   },
@@ -82,7 +83,6 @@ const routes = {
     webbtc: {
       enable: allowances.enable,
       getInfo: webbtc.getInfo,
-      signPsbtWithPrompt: webbtc.signPsbtWithPrompt,
       getAddressWithPrompt: webbtc.getAddressWithPrompt,
     },
     alby: {
@@ -136,4 +136,4 @@ const router = (path: FixMe) => {
   return route;
 };
 
-export { routes, router };
+export { router, routes };

@@ -1,14 +1,5 @@
-import getAddress from "~/extension/background-script/actions/webbtc/getAddress";
-import getAddressWithPrompt from "~/extension/background-script/actions/webbtc/getAddressWithPrompt";
-import signPsbt from "~/extension/background-script/actions/webbtc/signPsbt";
-
+import getAddress from "./getAddress";
+import getAddressWithPrompt from "./getAddressWithPrompt";
 import getInfo from "./getInfo";
-import signPsbtWithPrompt from "./signPsbtWithPrompt";
 
-export {
-  getInfo,
-  signPsbtWithPrompt,
-  signPsbt,
-  getAddressWithPrompt,
-  getAddress,
-};
+export { getAddress, getAddressWithPrompt, getInfo };

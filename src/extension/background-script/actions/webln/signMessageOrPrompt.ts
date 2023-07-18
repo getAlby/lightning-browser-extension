@@ -3,6 +3,7 @@ import { Message } from "~/types";
 
 //import db from "../../db";
 //import signMessage from "../ln/signMessage";
+//import { getHostFromSender } from "~/common/utils/helpers";
 
 const signMessageOrPrompt = async (message: Message) => {
   const messageToSign = message.args.message;
@@ -15,7 +16,9 @@ const signMessageOrPrompt = async (message: Message) => {
   return signWithPrompt(message);
 
   /*
-	const host = message.origin.host;
+  const host = getHostFromSender(sender);
+  if (!host) return;
+
 	const allowance = await db.allowances
 		.where("host")
 		.equalsIgnoreCase(host)

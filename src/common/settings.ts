@@ -10,12 +10,11 @@ export const DEFAULT_SETTINGS: SettingsStorage = {
   isUsingLegacyLnurlAuthKey: false,
   userName: "",
   userEmail: "",
-  locale: i18n.resolvedLanguage,
+  locale: i18n.resolvedLanguage ?? "en",
   theme: "system",
   showFiat: true,
   currency: CURRENCIES.USD,
   exchange: "alby",
   nostrEnabled: false,
   closedTips: [],
-  bitcoinNetwork: "bitcoin",
 };

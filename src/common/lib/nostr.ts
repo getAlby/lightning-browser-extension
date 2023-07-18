@@ -1,3 +1,4 @@
+import { schnorr } from "@noble/curves/secp256k1";
 import * as secp256k1 from "@noble/secp256k1";
 import nostrlib from "~/common/lib/nostr";
 
@@ -20,11 +21,11 @@ const nostr = {
   hexToNip19(hex: string, prefix = "nsec") {
     return bech32Encode(prefix, hex);
   },
-  generatePublicKey(privateKey: string) {
-    const publicKey = secp256k1.schnorr.getPublicKey(
-      secp256k1.utils.hexToBytes(privateKey)
+  derivePublicKey(privateKey: string) {
+    const publicKey = schnorr.getPublicKey(
+      secp256k1.etc.hexToBytes(privateKey)
     );
-    const publicKeyHex = secp256k1.utils.bytesToHex(publicKey);
+    const publicKeyHex = secp256k1.etc.bytesToHex(publicKey);
     return nostrlib.hexToNip19(publicKeyHex, "npub");
   },
 };

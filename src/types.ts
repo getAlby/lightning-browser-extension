@@ -1,4 +1,5 @@
 import { PaymentRequestObject } from "bolt11";
+import { Runtime } from "webextension-polyfill";
 import { ACCOUNT_CURRENCIES, CURRENCIES, TIPS } from "~/common/constants";
 import connectors from "~/extension/background-script/connectors";
 import {
@@ -11,6 +12,8 @@ import { Event } from "./extension/providers/nostr/types";
 
 export type ConnectorType = keyof typeof connectors;
 
+export type BitcoinNetworkType = "bitcoin" | "testnet" | "regtest";
+
 export interface Account {
   id: string;
   connector: ConnectorType;
@@ -19,6 +22,10 @@ export interface Account {
   nostrPrivateKey?: string | null;
   mnemonic?: string | null;
   isLiquidEnabled?: boolean;
+  hasImportedNostrKey?: boolean;
+  bitcoinNetwork?: BitcoinNetworkType;
+  useMnemonicForLnurlAuth?: boolean;
+  avatarUrl?: string;
 }
 
 export interface Accounts {
@@ -33,7 +40,9 @@ export interface AccountInfo {
   balance: number;
   id: string;
   name: string;
+  connectorType: ConnectorType;
   currency: ACCOUNT_CURRENCIES;
+  avatarUrl?: string;
 }
 
 export interface MetaData {
@@ -119,6 +128,15 @@ export interface Message {
   prompt?: boolean;
 }
 
+export interface Sender extends Runtime.MessageSender {
+  tlsChannelId?: string;
+  // only Chrome 80+
+  origin?: string;
+  // the below are not necessary
+  documentId?: string;
+  documentLifecycle?: string;
+  nativeApplication?: string;
+}
 // new message  type, please use this
 export interface MessageDefault {
   origin: OriginData | OriginDataInternal;
@@ -153,11 +171,6 @@ export type NavigationState = {
       method: string;
       description: string;
     };
-    psbt?: string;
-    derivationPath?: string;
-    index?: number;
-    num?: number;
-    change?: boolean;
     // liquid
     pset?: string;
   };
@@ -206,7 +219,9 @@ export interface MessageAccountAdd extends MessageDefault {
 export interface MessageAccountEdit extends MessageDefault {
   args: {
     id: Account["id"];
-    name: Account["name"];
+    name?: Account["name"];
+    bitcoinNetwork?: BitcoinNetworkType;
+    useMnemonicForLnurlAuth?: boolean;
   };
   action: "editAccount";
 }
@@ -404,6 +419,13 @@ export interface MessageAccountValidate extends MessageDefault {
   action: "validateAccount";
 }
 
+export type ValidateAccountResponse = {
+  valid: boolean;
+  info: { data: WebLNNode };
+  oAuthToken?: OAuthToken;
+  error?: unknown;
+};
+
 export interface MessageConnectPeer extends MessageDefault {
   args: { pubkey: string; host: string };
   action: "connectPeer";
@@ -442,29 +464,31 @@ export interface MessageGetLiquidAddress extends MessageDefault {
   action: "getLiquidAddress";
 }
 
-// TODO: add Nostr Prefix
-export interface MessagePublicKeyGet extends MessageDefault {
+export interface MessageNostrPublicKeyGetOrPrompt extends MessageDefault {
   action: "getPublicKeyOrPrompt";
 }
 
-// TODO: add Nostr Prefix
-export interface MessagePrivateKeyGet extends MessageDefault {
+export interface MessageNostrPublicKeyGet extends MessageDefault {
+  args: {
+    id: Account["id"];
+  };
+  action: "getPublicKey";
+}
+export interface MessageNostrPrivateKeyGet extends MessageDefault {
   args?: {
     id?: Account["id"];
   };
   action: "getPrivateKey";
 }
 
-// TODO: add Nostr Prefix
-export interface MessagePrivateKeyGenerate extends MessageDefault {
+export interface MessageNostrPrivateKeyGenerate extends MessageDefault {
   args?: {
-    type?: "random";
+    id?: Account["id"];
   };
   action: "generatePrivateKey";
 }
 
-// TODO: add Nostr Prefix
-export interface MessagePrivateKeySet extends MessageDefault {
+export interface MessageNostrPrivateKeySet extends MessageDefault {
   args: {
     id?: Account["id"];
     privateKey: string;
@@ -472,8 +496,7 @@ export interface MessagePrivateKeySet extends MessageDefault {
   action: "setPrivateKey";
 }
 
-// TODO: add Nostr Prefix
-export interface MessagePrivateKeyRemove extends MessageDefault {
+export interface MessageNostrPrivateKeyRemove extends MessageDefault {
   args: {
     id?: Account["id"];
   };
@@ -493,6 +516,9 @@ export interface MessageMnemonicGet extends MessageDefault {
     id?: Account["id"];
   };
   action: "getMnemonic";
+}
+export interface MessageMnemonicGenerate extends MessageDefault {
+  action: "generateMnemonic";
 }
 
 export interface MessageSignEvent extends MessageDefault {
@@ -523,13 +549,6 @@ export interface MessageDecryptGet extends MessageDefault {
     ciphertext: string;
   };
   action: "decrypt";
-}
-
-export interface MessageSignPsbt extends MessageDefault {
-  args: {
-    psbt: string;
-  };
-  action: "signPsbt";
 }
 
 export interface MessageGetAddress extends MessageDefault {
@@ -795,7 +814,6 @@ export interface SettingsStorage {
   exchange: SupportedExchanges;
   nostrEnabled: boolean;
   closedTips: TIPS[];
-  bitcoinNetwork: "bitcoin" | "regtest";
 }
 
 export interface Badge {
@@ -861,9 +879,28 @@ export interface DeferredPromise {
 
 export type Theme = "dark" | "light";
 
+export type OAuthToken = {
+  access_token: string;
+  refresh_token: string;
+  expires_at: number;
+};
+
 export type BitcoinAddress = {
   publicKey: string;
   derivationPath: string;
   index: number;
   address: string;
+};
+
+// TODO: take from alby-js-sdk
+export type AlbyAccountInformation = {
+  identifier: string;
+  email: string;
+  name?: string;
+  avatar?: string;
+  keysend_custom_key: string;
+  keysend_custom_value: string;
+  keysend_pubkey: string;
+  lightning_address?: string;
+  nostr_pubkey?: string;
 };

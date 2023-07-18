@@ -14,6 +14,7 @@ import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import type { OriginData } from "~/types";
 
+// TODO: rename this function to be specific to WebBTC
 function ConfirmGetAddress() {
   const navState = useNavigationState();
   const { t: tCommon } = useTranslation("common");

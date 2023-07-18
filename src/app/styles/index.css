@@ -63,6 +63,8 @@ input.dual-currency-field[type="number"] {
   -moz-appearance: textfield;
 }
 
+/* Removes an arrow on the datalist of word suggestions when you are typing a word in the import secret key page.
+   See https://stackoverflow.com/questions/20937475/remove-datalist-dropdown-arrow-in-chrome */
 input[type="text"]::-webkit-calendar-picker-indicator {
   display: none !important;
 }

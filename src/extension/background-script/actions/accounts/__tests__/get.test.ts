@@ -1,5 +1,6 @@
 import type { GetAccountRes } from "~/common/lib/api";
 import state from "~/extension/background-script/state";
+import { btcFixture } from "~/fixtures/btc";
 import type { MessageAccountGet } from "~/types";
 
 import getAccount from "../get";
@@ -27,6 +28,9 @@ const mockState = {
       name: "Alby",
       nostrPrivateKey: "nostr-123-456",
       isLiquidEnabled: true,
+      mnemonic: btcFixture.mnemnoic,
+      bitcoinNetwork: "regtest",
+      useMnemonicForLnurlAuth: true,
     },
     "1e1e8ea6-493e-480b-9855-303d37506e97": {
       config: "config-123-456",
@@ -55,9 +59,13 @@ describe("account info", () => {
     const result: GetAccountRes = {
       id: "1e1e8ea6-493e-480b-9855-303d37506e97",
       name: "Alby",
-      connector: "lndhub",
+      connectorType: "lndhub",
       nostrEnabled: false,
       isLiquidEnabled: false,
+      hasMnemonic: false,
+      hasImportedNostrKey: true,
+      bitcoinNetwork: "bitcoin",
+      useMnemonicForLnurlAuth: false,
     };
 
     expect(await getAccount(message)).toStrictEqual({
@@ -78,9 +86,13 @@ describe("account info", () => {
     const result: GetAccountRes = {
       id: "8b7f1dc6-ab87-4c6c-bca5-19fa8632731e",
       name: "Alby",
-      connector: "lndhub",
+      connectorType: "lndhub",
       nostrEnabled: true,
       isLiquidEnabled: true,
+      hasMnemonic: true,
+      hasImportedNostrKey: true,
+      bitcoinNetwork: "regtest",
+      useMnemonicForLnurlAuth: true,
     };
 
     expect(await getAccount(message)).toStrictEqual({

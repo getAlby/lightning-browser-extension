@@ -1,4 +1,6 @@
 import getAddress from "~/extension/background-script/actions/webbtc/getAddress";
+import Bitcoin from "~/extension/background-script/bitcoin";
+import Mnemonic from "~/extension/background-script/mnemonic";
 import state from "~/extension/background-script/state";
 import { btcFixture } from "~/fixtures/btc";
 import type { MessageGetAddress } from "~/types";
@@ -10,11 +12,11 @@ const mockState = {
   currentAccountId: "1e1e8ea6-493e-480b-9855-303d37506e97",
   getAccount: () => ({
     mnemonic: btcFixture.mnemnoic,
-  }),
-  getConnector: jest.fn(),
-  settings: {
     bitcoinNetwork: "regtest",
-  },
+  }),
+  getMnemonic: () => new Mnemonic(btcFixture.mnemnoic),
+  getBitcoin: () => new Bitcoin(new Mnemonic(btcFixture.mnemnoic), "regtest"),
+  getConnector: jest.fn(),
 };
 
 state.getState = jest.fn().mockReturnValue(mockState);

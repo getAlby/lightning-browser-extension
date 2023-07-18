@@ -10,17 +10,18 @@ async function onstart() {
   if (!inject) {
     return;
   }
-  const accountDetails = await api.getAccount();
 
+  const account = await api.getAccount();
   // window.webln
   injectScript(browser.runtime.getURL("js/inpageScriptWebLN.bundle.js"));
 
   // window.webbtc
-  // TODO: Add check if current account has keys
-  injectScript(browser.runtime.getURL("js/inpageScriptWebBTC.bundle.js"));
+  if (account.hasMnemonic) {
+    injectScript(browser.runtime.getURL("js/inpageScriptWebBTC.bundle.js"));
+  }
 
   // window.nostr
-  if (accountDetails.nostrEnabled) {
+  if (account.nostrEnabled) {
     injectScript(browser.runtime.getURL("js/inpageScriptNostr.bundle.js"));
   }
 
@@ -28,8 +29,7 @@ async function onstart() {
   injectScript(browser.runtime.getURL("js/inpageScriptAlby.bundle.js"));
 
   // window.liquid
-  // eslint-disable-next-line no-console
-  if (accountDetails.isLiquidEnabled) {
+  if (account.isLiquidEnabled) {
     injectScript(browser.runtime.getURL("js/inpageScriptLiquid.bundle.js"));
   }
 }
