@@ -23,6 +23,8 @@ import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 
+const SWAP_API = "http://localhost:3000/api/swaps";
+
 const Dt = ({ children }: { children: React.ReactNode }) => (
   <dt className="text-sm text-gray-500 dark:text-neutral-500">{children}</dt>
 );
@@ -33,8 +35,8 @@ const Dd = ({ children }: { children: React.ReactNode }) => (
 
 type ReviewData = {
   address: string;
-  serviceFee: number;
-  networkFee: number;
+  service_fee: number;
+  network_fee: number;
   amount: number;
   total: number;
   invoice: string;
@@ -58,11 +60,12 @@ function SendToBitcoinAddress() {
   const [successMessage, setSuccessMessage] = useState("");
   const [fiatAmount, setFiatAmount] = useState("");
 
+  const [serviceFeePercentage, setServiceFeePercentage] = useState(0);
   const [feesLoading, setFeesLoading] = useState(false);
-  const [serviceFee, setServiceFee] = useState("");
   const [networkFee, setNetworkFee] = useState(0);
   const [networkFeeFiat, setNetworkFeeFiat] = useState("");
   const [serviceFeeFiat, setServiceFeeFiat] = useState("");
+  const [satsPerVbyte, setSatsPerVbyte] = useState(0);
   const [totalAmountFiat, setTotalAmountFiat] = useState("");
   const [amountFiat, setAmountFiat] = useState("");
 
@@ -88,15 +91,17 @@ function SendToBitcoinAddress() {
       try {
         setFeesLoading(true);
         const result = await axios.get<{
-          serviceFee: string;
-          networkFee: number;
-        }>("http://localhost:3001/swaps/info", { adapter: fetchAdapter });
+          service_fee_percentage: number;
+          network_fee: number;
+          sats_per_vbyte: number;
+        }>(SWAP_API, { adapter: fetchAdapter });
 
-        setServiceFee(result.data.serviceFee);
-        setNetworkFee(result.data.networkFee);
+        setServiceFeePercentage(result.data.service_fee_percentage);
+        setNetworkFee(result.data.network_fee);
+        setSatsPerVbyte(result.data.sats_per_vbyte);
 
         if (showFiat) {
-          const test = await getFormattedFiat(result.data.networkFee);
+          const test = await getFormattedFiat(result.data.network_fee);
           setNetworkFeeFiat(test);
         }
       } catch (e) {
@@ -112,30 +117,11 @@ function SendToBitcoinAddress() {
     try {
       setLoading(true);
 
-      // Do payment
+      // TODO: Excute payment
       await new Promise((r) => setTimeout(r, 2000));
 
       setStep("");
       setSuccessMessage("test");
-
-      auth.fetchAccountInfo(); // Update balance.
-    } catch (e) {
-      console.error(e);
-      if (e instanceof Error) {
-        toast.error(`Error: ${e.message}`);
-      }
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  async function review() {
-    try {
-      setLoading(true);
-
-      // Fetch swap info
-
-      setStep("review");
 
       auth.fetchAccountInfo(); // Update balance.
     } catch (e) {
@@ -164,16 +150,26 @@ function SendToBitcoinAddress() {
 
     try {
       setSwapDataLoading(true);
+
       const result = await axios.post<ReviewData>(
-        "http://localhost:3001/swaps/create",
-        { adapter: fetchAdapter }
+        SWAP_API,
+        {
+          amount: amountSat,
+          address: bitcoinAddress,
+          sats_per_vbyte: satsPerVbyte,
+        },
+        {
+          adapter: fetchAdapter,
+        }
       );
       setSwapData(result.data);
 
       setAmountFiat(await getFormattedFiat(result.data.amount));
-      setNetworkFeeFiat(await getFormattedFiat(result.data.networkFee));
-      setServiceFeeFiat(await getFormattedFiat(result.data.serviceFee));
+      setNetworkFeeFiat(await getFormattedFiat(result.data.network_fee));
+      setServiceFeeFiat(await getFormattedFiat(result.data.service_fee));
       setTotalAmountFiat(await getFormattedFiat(result.data.total));
+
+      setStep("review");
     } catch (e) {
       console.error(e);
       if (e instanceof Error) {
@@ -182,8 +178,6 @@ function SendToBitcoinAddress() {
     } finally {
       setSwapDataLoading(false);
     }
-
-    review();
   }
 
   function handleConfirm(event: React.FormEvent<HTMLFormElement>) {
@@ -238,7 +232,11 @@ function SendToBitcoinAddress() {
                 <div>
                   <Dt>Swap service fee</Dt>
                   <Dd>
-                    {feesLoading ? <Skeleton className="w-8" /> : serviceFee}
+                    {feesLoading ? (
+                      <Skeleton className="w-8" />
+                    ) : (
+                      `${serviceFeePercentage} %`
+                    )}
                   </Dd>
                 </div>
                 <div>
@@ -248,7 +246,7 @@ function SendToBitcoinAddress() {
                       <Skeleton className="w-12" />
                     ) : (
                       <div className="flex justify-between">
-                        <span>{getFormattedSats(networkFee)}</span>
+                        <span>~{getFormattedSats(networkFee)}</span>
                         <span className="text-sm text-gray-500 dark:text-neutral-500">
                           {networkFeeFiat}
                         </span>
@@ -290,7 +288,7 @@ function SendToBitcoinAddress() {
                   <Dt>{t("network_fee.label")}</Dt>
                   <Dd>
                     <div className="flex justify-between">
-                      <span>{getFormattedSats(swapData.networkFee)}</span>
+                      <span>{getFormattedSats(swapData.network_fee)}</span>
                       <span className="text-sm text-gray-500 dark:text-neutral-500">
                         {networkFeeFiat}
                       </span>
@@ -301,7 +299,7 @@ function SendToBitcoinAddress() {
                   <Dt>{t("swap_fee.label")}</Dt>
                   <Dd>
                     <div className="flex justify-between">
-                      <span>{getFormattedSats(swapData.serviceFee)}</span>
+                      <span>{getFormattedSats(swapData.service_fee)}</span>
                       <span className="text-sm text-gray-500 dark:text-neutral-500">
                         {serviceFeeFiat}
                       </span>
