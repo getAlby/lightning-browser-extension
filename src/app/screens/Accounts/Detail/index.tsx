@@ -14,7 +14,7 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import type { FormEvent } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import Modal from "react-modal";
 import QRCode from "react-qr-code";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -63,7 +63,6 @@ function AccountDetail() {
   const [nostrPublicKey, setNostrPublicKey] = useState("");
   const [hasImportedNostrKey, setHasImportedNostrKey] = useState(false);
 
-  const [liquidEnabled, setLiquidEnabled] = useState<boolean>();
   const [exportLoading, setExportLoading] = useState(false);
   const [exportModalIsOpen, setExportModalIsOpen] = useState(false);
 
@@ -73,7 +72,6 @@ function AccountDetail() {
         const response = await api.getAccount(id);
         setAccount(response);
         setAccountName(response.name);
-        setLiquidEnabled(response.liquidEnabled);
         setHasMnemonic(response.hasMnemonic);
         setHasImportedNostrKey(response.hasImportedNostrKey);
 
@@ -164,11 +162,6 @@ function AccountDetail() {
     } else {
       toast.error(t("remove.error"));
     }
-  }
-
-  async function setLiquidEnable(value: boolean) {
-    await api.liquid.setEnable(id, value);
-    setLiquidEnabled(value);
   }
 
   useEffect(() => {
@@ -470,7 +463,27 @@ function AccountDetail() {
               </div>
             </div>
             <MenuDivider />
-            <div className="flex justify-between items-center">
+            {!hasMnemonic && (
+              <Alert type="warn">
+                <Trans
+                  i18nKey={"no_mnemonic_hint"}
+                  t={t}
+                  components={[
+                    // eslint-disable-next-line react/jsx-key
+                    <Link
+                      to="secret-key/generate"
+                      relative="path"
+                      className="underline"
+                    />,
+                  ]}
+                />
+              </Alert>
+            )}
+            <div
+              className={`flex justify-between items-end ${
+                !hasMnemonic && "opacity-30"
+              }`}
+            >
               <div className="w-7/12 flex flex-col gap-2">
                 <p className="text-gray-900 dark:text-white font-medium">
                   {t("mnemonic.lnurl.title")}
@@ -482,6 +495,7 @@ function AccountDetail() {
 
               <div className="w-1/5 flex-none flex justify-end items-center">
                 <Toggle
+                  disabled={!hasMnemonic}
                   checked={account.useMnemonicForLnurlAuth}
                   onChange={async () => {
                     // update local value
@@ -497,7 +511,11 @@ function AccountDetail() {
               </div>
             </div>
             <MenuDivider />
-            <div className="flex justify-between items-end">
+            <div
+              className={`flex justify-between items-end ${
+                !hasMnemonic && "opacity-30"
+              }`}
+            >
               <div className="w-7/12">
                 <p className="text-gray-900 dark:text-white font-medium">
                   {t("liquid.enable.title")}
@@ -509,10 +527,17 @@ function AccountDetail() {
 
               <div className="w-1/5 flex justify-end align-middle">
                 <Toggle
-                  key="liquidEnabled"
-                  checked={liquidEnabled || false}
-                  onChange={() => {
-                    setLiquidEnable(!liquidEnabled);
+                  disabled={!hasMnemonic}
+                  checked={account.liquidEnabled}
+                  onChange={async () => {
+                    // update local value
+                    setAccount({
+                      ...account,
+                      liquidEnabled: !account.liquidEnabled,
+                    });
+                    await api.editAccount(id, {
+                      liquidEnabled: !account.liquidEnabled,
+                    });
                   }}
                 />
               </div>

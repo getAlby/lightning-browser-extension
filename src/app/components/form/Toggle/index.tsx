@@ -3,12 +3,14 @@ import { classNames } from "~/app/utils/index";
 
 type Props = {
   checked: boolean;
+  disabled?: boolean;
   onChange: (checked: boolean) => void;
 };
 
-export default function Toggle({ checked, onChange }: Props) {
+export default function Toggle({ checked, disabled, onChange }: Props) {
   return (
     <Switch
+      disabled={disabled}
       checked={checked}
       onChange={onChange}
       className={classNames(

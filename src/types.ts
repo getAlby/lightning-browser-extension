@@ -224,6 +224,7 @@ export interface MessageAccountEdit extends MessageDefault {
     name?: Account["name"];
     bitcoinNetwork?: BitcoinNetworkType;
     useMnemonicForLnurlAuth?: boolean;
+    liquidEnabled?: boolean;
   };
   action: "editAccount";
 }
@@ -573,14 +574,6 @@ export interface MessageSignPset extends MessageDefault {
     network: "liquid" | "testnet" | "regtest";
   };
   action: "signPset";
-}
-
-export interface MessageSetLiquidEnable extends MessageDefault {
-  args: {
-    id?: string;
-    enable: boolean;
-  };
-  action: "setLiquidEnable";
 }
 
 export interface LNURLChannelServiceResponse {

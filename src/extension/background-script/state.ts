@@ -146,9 +146,6 @@ const state = createState<State>((set, get) => ({
     const currentAccountId = get().currentAccountId as string;
     const account = get().accounts[currentAccountId];
 
-    const password = await get().password();
-    if (!password) throw new Error("Password is not set");
-
     const isMainnet = account.bitcoinNetwork === "bitcoin";
 
     const liquid = new Liquid(mnemonic, isMainnet ? "liquid" : "testnet");

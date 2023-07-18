@@ -67,7 +67,6 @@ const routes = {
 
   liquid: {
     signPset: liquid.signPset,
-    setLiquidEnable: liquid.setLiquidEnable,
   },
 
   nostr: {
