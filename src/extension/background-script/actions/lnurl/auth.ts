@@ -60,7 +60,7 @@ export async function authFunction({
 
     const pathSuffix = getPathSuffix(
       url.host,
-      secp256k1.utils.bytesToHex(hashingPrivateKey)
+      secp256k1.etc.bytesToHex(hashingPrivateKey)
     );
 
     // Derive key manually (rather than using mnemonic.deriveKey with full path) due to
@@ -70,7 +70,7 @@ export async function authFunction({
       linkingKey = linkingKey.deriveChild(index);
     }
 
-    linkingKeyPriv = secp256k1.utils.bytesToHex(
+    linkingKeyPriv = secp256k1.etc.bytesToHex(
       linkingKey.privateKey as Uint8Array
     );
   } else {

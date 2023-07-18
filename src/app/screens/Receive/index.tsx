@@ -297,70 +297,70 @@ function Receive() {
               </Container>
             </fieldset>
           </form>
-          {isAlbyUser && (
-            <div>
-              <Container justifyBetween maxWidth="sm">
-                <div className="relative flex  items-center mb-8">
-                  <div className="flex-grow border-t border-gray-300 dark:border-gray-700"></div>
-                  <span className="flex-shrink mx-4  text-gray-500 dark:text-gray-400 fw-bold">
-                    {tCommon("or")}
-                  </span>
-                  <div className="flex-grow border-t  border-gray-300 dark:border-gray-700"></div>
-                </div>
-                <div className="mb-4">
-                  <Button
-                    type="button"
-                    label={copyLightningAddressLabel}
-                    disabled={loadingLightningAddress}
-                    fullWidth
-                    onClick={async () => {
-                      try {
-                        if (!lightningAddress) {
-                          throw new Error(
-                            "User does not have a lightning address"
-                          );
+          <div>
+            <Container justifyBetween maxWidth="sm">
+              <div className="relative flex  items-center mb-8">
+                <div className="flex-grow border-t border-gray-300 dark:border-gray-700"></div>
+                <span className="flex-shrink mx-4  text-gray-500 dark:text-gray-400 fw-bold">
+                  {tCommon("or")}
+                </span>
+                <div className="flex-grow border-t  border-gray-300 dark:border-gray-700"></div>
+              </div>
+              <div className="mb-4">
+                <Button
+                  type="button"
+                  label={t("redeem_lnurl")}
+                  fullWidth
+                  onClick={() => {
+                    navigate("/lnurlRedeem");
+                  }}
+                />
+              </div>
+              {isAlbyUser && (
+                <>
+                  <div className="mb-4">
+                    <Button
+                      type="button"
+                      label={copyLightningAddressLabel}
+                      disabled={loadingLightningAddress}
+                      fullWidth
+                      onClick={async () => {
+                        try {
+                          if (!lightningAddress) {
+                            throw new Error(
+                              "User does not have a lightning address"
+                            );
+                          }
+                          navigator.clipboard.writeText(lightningAddress);
+                          setCopyLightningAddressLabel(tCommon("copied"));
+                          setTimeout(() => {
+                            setCopyLightningAddressLabel(
+                              t("actions.copy_lightning_address")
+                            );
+                          }, 1000);
+                        } catch (e) {
+                          if (e instanceof Error) {
+                            toast.error(e.message);
+                          }
                         }
-                        navigator.clipboard.writeText(lightningAddress);
-                        setCopyLightningAddressLabel(tCommon("copied"));
-                        setTimeout(() => {
-                          setCopyLightningAddressLabel(
-                            t("actions.copy_lightning_address")
-                          );
-                        }, 1000);
-                      } catch (e) {
-                        if (e instanceof Error) {
-                          toast.error(e.message);
-                        }
-                      }
-                    }}
-                    icon={<CopyIcon className="w-6 h-6 mr-2" />}
-                  />
-                </div>
-
-                <div className="mb-4">
-                  <Button
-                    type="button"
-                    label={t("redeem_lnurl")}
-                    fullWidth
-                    onClick={() => {
-                      navigate("/lnurlRedeem");
-                    }}
-                  />
-                </div>
-
-                <div className="mb-4">
-                  <Button
-                    type="button"
-                    label={t("receive_via_bitcoin_address")}
-                    fullWidth
-                    onClick={() => {
-                      navigate("/onChainReceive");
-                    }}
-                  />
-                </div>
-              </Container>
-            </div>
-          )}
+                      }}
+                      icon={<CopyIcon className="w-6 h-6 mr-2" />}
+                    />
+                  </div>
+                  <div className="mb-4">
+                    <Button
+                      type="button"
+                      label={t("receive_via_bitcoin_address")}
+                      fullWidth
+                      onClick={() => {
+                        navigate("/onChainReceive");
+                      }}
+                    />
+                  </div>
+                </>
+              )}
+            </Container>
+          </div>
         </div>
       )}
     </div>
