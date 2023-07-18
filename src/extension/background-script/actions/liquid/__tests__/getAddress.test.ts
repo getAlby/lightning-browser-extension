@@ -1,27 +1,12 @@
-import { getPublicKey, utils } from "@noble/secp256k1";
-import { mnemonicToSeedSync } from "@scure/bip39";
+import { etc, getPublicKey } from "@noble/secp256k1";
 import { address, bip341 } from "liquidjs-lib";
-import { SLIP77Factory } from "slip77";
-import {
-  LIQUID_DERIVATION_PATH_REGTEST,
-  derivePrivateKey,
-} from "~/common/lib/mnemonic";
 import getAddressOrPrompt from "~/extension/background-script/actions/liquid/getAddressOrPrompt";
 import Liquid from "~/extension/background-script/liquid";
 import * as ecc from "~/extension/background-script/liquid/secp256k1";
+import Mnemonic from "~/extension/background-script/mnemonic";
 import state from "~/extension/background-script/state";
-import { btcFixture } from "~/fixtures/btc";
 import { liquidFixtureSign } from "~/fixtures/liquid";
 import type { MessageGetLiquidAddress } from "~/types";
-
-const masterBlindingKey = SLIP77Factory(ecc)
-  .fromSeed(Buffer.from(mnemonicToSeedSync(liquidFixtureSign.mnemonic)))
-  .masterKey.toString("hex");
-
-const liquidPrivateKey = derivePrivateKey(
-  liquidFixtureSign.mnemonic,
-  LIQUID_DERIVATION_PATH_REGTEST
-);
 
 const passwordMock = jest.fn;
 
@@ -29,14 +14,15 @@ const mockState = {
   password: passwordMock,
   currentAccountId: "1e1e8ea6-493e-480b-9855-303d37506e97",
   getAccount: () => ({
-    mnemonic: btcFixture.mnemnoic,
+    mnemonic: liquidFixtureSign.mnemonic,
+    bitcoinNetwork: "testnet",
   }),
-  getConnector: jest.fn(),
-  settings: {
-    bitcoinNetwork: "regtest",
-  },
+  getMnemonic: () => new Mnemonic(liquidFixtureSign.mnemonic),
   getLiquid: () =>
-    Promise.resolve(new Liquid(liquidPrivateKey, masterBlindingKey, "testnet")),
+    Promise.resolve(
+      new Liquid(new Mnemonic(liquidFixtureSign.mnemonic), "testnet")
+    ),
+  getConnector: jest.fn(),
 };
 
 state.getState = jest.fn().mockReturnValue(mockState);
@@ -117,9 +103,7 @@ describe("getLiquidAddress", () => {
     // scriptPubKey should be a taproot key-path using publicKey as internal key
     const scriptPubKey = bip341
       .BIP341Factory(ecc)
-      .taprootOutputScript(
-        Buffer.from(utils.hexToBytes(result.data.publicKey))
-      );
+      .taprootOutputScript(Buffer.from(etc.hexToBytes(result.data.publicKey)));
 
     expect(scriptPubKey.toString("hex")).toBe(
       address.toOutputScript(unconfidentialAddress).toString("hex")
