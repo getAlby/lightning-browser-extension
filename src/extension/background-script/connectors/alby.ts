@@ -15,6 +15,7 @@ import Connector, {
   GetBalanceResponse,
   GetInfoResponse,
   GetInvoicesResponse,
+  GetTransactionsResponse,
   KeysendArgs,
   MakeInvoiceArgs,
   MakeInvoiceResponse,
@@ -90,6 +91,14 @@ export default class Alby implements Connector {
         invoices,
       },
     };
+  }
+
+  // @Todo: implement function call
+  async getTransactions(): Promise<GetTransactionsResponse> {
+    console.error(
+      `${this.constructor.name} has not implementation for getTransactions yet`
+    );
+    throw new Error("Not yet implemented with the currently used connector.");
   }
 
   async getInfo(): Promise<
@@ -234,6 +243,7 @@ export default class Alby implements Connector {
           "transactions:read", // for outgoing invoice
         ],
         token: this.config.oAuthToken, // initialize with existing token
+        user_agent: "",
       });
 
       if (this.config.oAuthToken) {
