@@ -28,6 +28,7 @@ import Connector, {
   SendPaymentResponse,
   SignMessageArgs,
   SignMessageResponse,
+  TransactionCustomRecords,
 } from "./connector.interface";
 
 interface Config {
@@ -129,7 +130,7 @@ export default class LndHub implements Connector {
     // this connector endpoint has a fixed result set of 100 entries
     const data = await this.request<
       {
-        custom_records: Record<number, number>;
+        custom_records: TransactionCustomRecords;
         fee: number;
         keysend: boolean;
         memo: string;
@@ -143,7 +144,7 @@ export default class LndHub implements Connector {
           type: string;
         };
         timestamp: number;
-        type: string;
+        type: "sent";
         value: number;
       }[]
     >("GET", "/gettxs", undefined);
@@ -151,13 +152,16 @@ export default class LndHub implements Connector {
     const transactions: ConnectorTransaction[] = data.map(
       (p): ConnectorTransaction => ({
         custom_records: p.custom_records,
-        fee: p.fee,
+        totalFee: p.fee,
         keysend: p.keysend,
         memo: p.memo,
         preimage: p.payment_preimage,
         timestamp: p.timestamp,
         type: p.type,
-        value: p.value,
+        totalAmount: p.value + "",
+        // @Todo: verify these values
+        settled: true,
+        settleDate: p.timestamp,
       })
     );
 

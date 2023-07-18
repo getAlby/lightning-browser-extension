@@ -30,16 +30,13 @@ const list = async (message: MessagePaymentList) => {
           (p: DbPayment) => p.preimage === transaction.preimage
         );
 
-        // @Todo: map transactions correctly
-        // @Todo: how to we use/map "title" and "description" and "memo"
-
         // @Todo: this comes from convertPaymentToTransaction function - remove there if this is right
         const title = dbPayment ? dbPayment.name || dbPayment.description : "";
         return {
           ...(dbPayment ? dbPayment : {}),
           id: dbPayment?.id || "",
-          amount: transaction.value + "",
-          totalFees: transaction.fee,
+          totalAmount: transaction.totalAmount + "",
+          totalFees: transaction.totalFee,
           description: transaction.memo,
           // @Todo: can we use converPaymentToTransaction's date: dayjs(+payment.createdAt).fromNow(), here?
           date: "",

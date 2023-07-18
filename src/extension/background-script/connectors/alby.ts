@@ -11,6 +11,7 @@ import Connector, {
   CheckPaymentArgs,
   CheckPaymentResponse,
   ConnectorInvoice,
+  ConnectorTransaction,
   ConnectPeerResponse,
   GetBalanceResponse,
   GetInfoResponse,
@@ -93,12 +94,36 @@ export default class Alby implements Connector {
     };
   }
 
-  // @Todo: implement function call
   async getTransactions(): Promise<GetTransactionsResponse> {
-    console.error(
-      `${this.constructor.name} has not implementation for getTransactions yet`
+    // this connector endpoint has a fixed result set of 100 entries
+    const incomingInvoices = (await this._request((client) =>
+      client.outgoingInvoices({})
+    )) as Invoice[];
+
+    const transactions: ConnectorTransaction[] = incomingInvoices.map(
+      (p): ConnectorTransaction => ({
+        // @Todo: which value should I map this to?
+        totalFee: 0,
+        custom_records: p.custom_records,
+        // @Todo: which value should I map this to?
+        keysend: false,
+        memo: p.memo,
+        // @Todo: which value should I map this to?
+        preimage: "",
+        timestamp: parseInt(p.created_at),
+        type: p.type as "sent",
+        totalAmount: p.value + "",
+        // @Todo: verify these values
+        settled: p.settled,
+        settleDate: parseInt(p.settled_at),
+      })
     );
-    throw new Error("Not yet implemented with the currently used connector.");
+
+    return {
+      data: {
+        transactions,
+      },
+    };
   }
 
   async getInfo(): Promise<
@@ -243,6 +268,7 @@ export default class Alby implements Connector {
           "transactions:read", // for outgoing invoice
         ],
         token: this.config.oAuthToken, // initialize with existing token
+        // @Todo: I added this because the type requires it. I have no clue about the value?!
         user_agent: "",
       });
 

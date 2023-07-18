@@ -12,33 +12,31 @@ interface Route {
   total_fees: number;
 }
 
+export type TransactionCustomRecords = {
+  "696969"?: string;
+  "7629169"?: string;
+  "5482373484"?: string;
+} & Record<string, string>;
+
 export interface ITransaction {
+  totalAmount: string;
   memo: string;
   preimage: string;
+  settled: boolean;
+  settleDate: number;
+  custom_records?: TransactionCustomRecords;
 }
 
 export interface ConnectorInvoice extends ITransaction {
-  custom_records?: {
-    "696969"?: string;
-    "7629169"?: string;
-    "5482373484"?: string;
-  } & Record<string, string>;
   id: string;
-  settled: boolean;
-  settleDate: number;
-  totalAmount: string;
   type: "received";
 }
 
-// @Todo: extend missing properties accordingly
 export interface ConnectorTransaction extends ITransaction {
-  // @Todo: can this be the same custom type as in ConnectorInvoice above?
-  custom_records?: Record<number, number>;
-  fee: number;
+  totalFee: number;
   keysend: boolean;
   timestamp: number;
-  type: string;
-  value: number;
+  type: "sent";
 }
 
 export interface MakeInvoiceArgs {
