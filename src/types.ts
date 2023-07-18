@@ -23,7 +23,7 @@ export interface Account {
   name: string;
   nostrPrivateKey?: string | null;
   mnemonic?: string | null;
-  isLiquidEnabled?: boolean;
+  liquidEnabled?: boolean;
   hasImportedNostrKey?: boolean;
   bitcoinNetwork?: BitcoinNetworkType;
   useMnemonicForLnurlAuth?: boolean;

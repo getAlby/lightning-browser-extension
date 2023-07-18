@@ -142,19 +142,16 @@ const state = createState<State>((set, get) => ({
     if (currentLiquid) {
       return currentLiquid;
     }
+    const mnemonic = await get().getMnemonic();
     const currentAccountId = get().currentAccountId as string;
     const account = get().accounts[currentAccountId];
-
-    if (!account.mnemonic) throw new Error("Account mnemonic is not set");
 
     const password = await get().password();
     if (!password) throw new Error("Password is not set");
 
-    const mnemonicString = decryptData(account.mnemonic as string, password);
-
     const isMainnet = account.bitcoinNetwork === "bitcoin";
 
-    const liquid = new Liquid(mnemonicString, isMainnet ? "liquid" : "testnet");
+    const liquid = new Liquid(mnemonic, isMainnet ? "liquid" : "testnet");
     set({ liquid });
     return liquid;
   },

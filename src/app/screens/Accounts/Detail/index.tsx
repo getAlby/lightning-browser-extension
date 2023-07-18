@@ -63,7 +63,7 @@ function AccountDetail() {
   const [nostrPublicKey, setNostrPublicKey] = useState("");
   const [hasImportedNostrKey, setHasImportedNostrKey] = useState(false);
 
-  const [isLiquidEnabled, setLiquidEnabled] = useState<boolean>();
+  const [liquidEnabled, setLiquidEnabled] = useState<boolean>();
   const [exportLoading, setExportLoading] = useState(false);
   const [exportModalIsOpen, setExportModalIsOpen] = useState(false);
 
@@ -73,7 +73,7 @@ function AccountDetail() {
         const response = await api.getAccount(id);
         setAccount(response);
         setAccountName(response.name);
-        setLiquidEnabled(response.isLiquidEnabled);
+        setLiquidEnabled(response.liquidEnabled);
         setHasMnemonic(response.hasMnemonic);
         setHasImportedNostrKey(response.hasImportedNostrKey);
 
@@ -512,10 +512,10 @@ function AccountDetail() {
 
               <div className="w-1/5 flex justify-end align-middle">
                 <Toggle
-                  key="isLiquidEnabled"
-                  checked={isLiquidEnabled || false}
+                  key="liquidEnabled"
+                  checked={liquidEnabled || false}
                   onChange={() => {
-                    setLiquidEnable(!isLiquidEnabled);
+                    setLiquidEnable(!liquidEnabled);
                   }}
                 />
               </div>

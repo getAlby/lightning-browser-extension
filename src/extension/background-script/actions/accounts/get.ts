@@ -19,7 +19,7 @@ const get = async (message: MessageAccountGet) => {
     id: account.id,
     connectorType: account.connector,
     name: account.name,
-    isLiquidEnabled: !!account.isLiquidEnabled,
+    liquidEnabled: !!account.liquidEnabled,
     nostrEnabled: !!account.nostrPrivateKey,
     hasMnemonic: !!account.mnemonic,
     // Note: undefined (default for new accounts) it is also considered imported

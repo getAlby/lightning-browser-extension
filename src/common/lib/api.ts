@@ -43,7 +43,7 @@ export interface AccountInfoRes {
 
 export interface GetAccountRes extends Pick<Account, "id" | "name"> {
   connectorType: ConnectorType;
-  isLiquidEnabled: boolean;
+  liquidEnabled: boolean;
   nostrEnabled: boolean;
   hasMnemonic: boolean;
   hasImportedNostrKey: boolean;

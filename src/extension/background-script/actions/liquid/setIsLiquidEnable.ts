@@ -19,7 +19,7 @@ const setIsLiquidEnable = async (message: MessageSetIsLiquidEnable) => {
   const account = accounts[id];
 
   if (account) {
-    account.isLiquidEnabled = message.args.enable;
+    account.liquidEnabled = message.args.enable;
     state.setState({ accounts: { ...accounts, [id]: account } });
     await state.getState().saveToStorage();
 

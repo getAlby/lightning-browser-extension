@@ -4,7 +4,8 @@ import * as bip39 from "@scure/bip39";
 import Hex from "crypto-js/enc-hex";
 import sha256 from "crypto-js/sha256";
 import { SLIP77Factory } from "slip77";
-import * as tinysecp from "tiny-secp256k1";
+
+import * as tinysecp from "../liquid/secp256k1";
 
 export const LIQUID_DERIVATION_PATH = "m/84'/1776'/0'/0/0";
 export const LIQUID_DERIVATION_PATH_REGTEST = "m/84'/1'/0'/0/0";

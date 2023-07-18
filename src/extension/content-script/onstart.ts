@@ -15,6 +15,9 @@ async function onstart() {
   // window.webln
   injectScript(browser.runtime.getURL("js/inpageScriptWebLN.bundle.js"));
 
+  // window.alby
+  injectScript(browser.runtime.getURL("js/inpageScriptAlby.bundle.js"));
+
   // window.webbtc
   if (account.hasMnemonic) {
     injectScript(browser.runtime.getURL("js/inpageScriptWebBTC.bundle.js"));
@@ -25,11 +28,8 @@ async function onstart() {
     injectScript(browser.runtime.getURL("js/inpageScriptNostr.bundle.js"));
   }
 
-  // window.alby
-  injectScript(browser.runtime.getURL("js/inpageScriptAlby.bundle.js"));
-
   // window.liquid
-  if (account.isLiquidEnabled) {
+  if (account.liquidEnabled) {
     injectScript(browser.runtime.getURL("js/inpageScriptLiquid.bundle.js"));
   }
 }
