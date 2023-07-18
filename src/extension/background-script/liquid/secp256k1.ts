@@ -111,7 +111,7 @@ export function privateAdd(
   assertBytes("tweak", tweak, 32);
 
   let t = bytesToNumber(tweak);
-  if (t === 0n) {
+  if (t === BigInt(0)) {
     throw new Error("Tweak must not be zero");
   }
   if (t >= ORDER) {
@@ -121,7 +121,7 @@ export function privateAdd(
   if (t >= ORDER) {
     t -= ORDER;
   }
-  if (t === 0n) {
+  if (t === BigInt(0)) {
     throw new Error(
       "The tweak was out of range or the resulted private key is invalid"
     );
