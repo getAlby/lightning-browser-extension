@@ -11,7 +11,7 @@ import DualCurrencyField from "@components/form/DualCurrencyField";
 import fetchAdapter from "@vespaiach/axios-fetch-adapter";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import Skeleton from "react-loading-skeleton";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -57,7 +57,6 @@ function SendToBitcoinAddress() {
   const [amountSat, setAmountSat] = useState("");
   const [step, setStep] = useState("amount");
   const [loading, setLoading] = useState(false);
-  const [successMessage, setSuccessMessage] = useState("");
   const [fiatAmount, setFiatAmount] = useState("");
 
   const [serviceFeePercentage, setServiceFeePercentage] = useState(0);
@@ -120,10 +119,23 @@ function SendToBitcoinAddress() {
       // TODO: Excute payment
       await new Promise((r) => setTimeout(r, 2000));
 
-      setStep("");
-      setSuccessMessage("test");
+      // TODO: move to api
+      // const response = await msg.request(
+      //   "sendPayment",
+      //   { paymentRequest: swapData?.invoice },
+      //   {
+      //     origin: navState.origin,
+      //   }
+      // );
+
+      // if (response.error) {
+      //   throw new Error(response.error as string);
+      // }
 
       auth.fetchAccountInfo(); // Update balance.
+      // msg.reply(response);
+
+      setStep("");
     } catch (e) {
       console.error(e);
       if (e instanceof Error) {
@@ -169,7 +181,7 @@ function SendToBitcoinAddress() {
       setServiceFeeFiat(await getFormattedFiat(result.data.service_fee));
       setTotalAmountFiat(await getFormattedFiat(result.data.total));
 
-      setStep("review");
+      setStep("success");
     } catch (e) {
       console.error(e);
       if (e instanceof Error) {
@@ -220,17 +232,23 @@ function SendToBitcoinAddress() {
                 {/* TODO: Fix icon, noopener nofollow */}
                 <Alert type="info">
                   <InfoIcon className="w-6 h-6 float-left rounded-full border border-1 border-blue-700  dark:border-blue-300 mr-2 " />
-                  Swaps are provided by{" "}
-                  <Hyperlink
-                    className="underline hover:text-blue-800 dark:hover:text-blue-200"
-                    href="https://deezy.io"
-                    target="_blank"
-                  >
-                    Deezy
-                  </Hyperlink>
+                  <Trans
+                    i18nKey={"swaps_provided_by"}
+                    t={t}
+                    components={[
+                      // eslint-disable-next-line react/jsx-key
+                      <Hyperlink
+                        className="underline hover:text-blue-800 dark:hover:text-blue-200"
+                        href="https://deezy.io"
+                        target="_blank"
+                      >
+                        content
+                      </Hyperlink>,
+                    ]}
+                  />
                 </Alert>
                 <div>
-                  <Dt>Swap service fee</Dt>
+                  <Dt>{t("service_fee.label")}</Dt>
                   <Dd>
                     {feesLoading ? (
                       <Skeleton className="w-8" />
@@ -240,7 +258,7 @@ function SendToBitcoinAddress() {
                   </Dd>
                 </div>
                 <div>
-                  <Dt>Network fee</Dt>
+                  <Dt>{t("network_fee.label")}</Dt>
                   <Dd>
                     {feesLoading ? (
                       <Skeleton className="w-12" />
@@ -275,7 +293,6 @@ function SendToBitcoinAddress() {
                 <div>
                   <Dt>{tCommon("amount")}</Dt>
                   <Dd>
-                    {" "}
                     <div className="flex justify-between">
                       <span>{getFormattedSats(swapData.amount)}</span>
                       <span className="text-sm text-gray-500 dark:text-neutral-500">
@@ -296,7 +313,7 @@ function SendToBitcoinAddress() {
                   </Dd>
                 </div>
                 <div>
-                  <Dt>{t("swap_fee.label")}</Dt>
+                  <Dt>{t("service_fee.label")}</Dt>
                   <Dd>
                     <div className="flex justify-between">
                       <span>{getFormattedSats(swapData.service_fee)}</span>
@@ -320,7 +337,7 @@ function SendToBitcoinAddress() {
                 </div>
                 <Alert type="info">
                   <InfoIcon className="w-6 h-6 float-left rounded-full border border-1 border-blue-700  dark:border-blue-300 mr-2 " />
-                  Transactions usually arrive within 10-30 min.
+                  {t("time_estimate")}
                 </Alert>
               </div>
               <ConfirmOrCancel
@@ -333,9 +350,7 @@ function SendToBitcoinAddress() {
           </form>
         )}
 
-        {!successMessage ? (
-          <></>
-        ) : (
+        {step == "success" && (
           <Container justifyBetween maxWidth="sm">
             <ResultCard
               isSuccess
@@ -350,7 +365,7 @@ function SendToBitcoinAddress() {
               <Hyperlink
                 href={`https://mempool.space/address/${bitcoinAddress}`}
               >
-                View on blockchain explorer{" "}
+                {t("view_on_explorer")}
                 <ExportIcon className="w-6 h-6 inline" />
               </Hyperlink>
             </div>

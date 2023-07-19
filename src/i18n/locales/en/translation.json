@@ -788,12 +788,15 @@
       "network_fee": {
         "label": "Network fee"
       },
-      "swap_fee": {
-        "label": "Swap fee"
+      "service_fee": {
+        "label": "Service fee"
       },
       "total": {
         "label": "Total"
-      }
+      },
+      "view_on_explorer": "View on mempool explorer",
+      "swaps_provided_by": "Swaps are provided by <0>deezy.io</0>",
+      "time_estimate": "Transactions usually arrive within 10-30 min."
     },
     "confirm_payment": {
       "title": "Approve Payment",

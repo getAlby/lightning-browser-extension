@@ -14,6 +14,8 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useAccount } from "~/app/context/AccountContext";
+import { isAlbyOAuthAccount } from "~/app/utils";
 import lnurlLib from "~/common/lib/lnurl";
 import { isLNURLDetailsError } from "~/common/utils/typeHelpers";
 
@@ -25,6 +27,7 @@ function Send() {
   const navigate = useNavigate();
   const [qrIsOpen, setQrIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const auth = useAccount();
 
   function isPubKey(str: string) {
     return str.length == 66 && (str.startsWith("02") || str.startsWith("03"));
@@ -94,7 +97,10 @@ function Send() {
             },
           },
         });
-      } else if (invoice.startsWith("bc1")) {
+      } else if (
+        isAlbyOAuthAccount(auth.account?.connectorType) &&
+        invoice.startsWith("bc1")
+      ) {
         // TODO: Parse bitcoin addresses
         navigate("/sendToBitcoinAddress", {
           state: { args: { bitcoinAddress: invoice } },
