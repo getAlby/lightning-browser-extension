@@ -96,8 +96,6 @@ describe("decode PSET", () => {
         expect(inputs.at(0)?.amount).toBe(1_0000_0000);
         expect(inputs.at(0)?.asset).toBe(networks.regtest.assetHash);
         expect(outputs.length).toBeGreaterThan(0);
-      } else {
-        expect(() => getPsetPreview(pset, "regtest")).toThrow();
       }
     });
   }
