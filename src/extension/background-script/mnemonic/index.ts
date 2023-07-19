@@ -17,7 +17,7 @@ class Mnemonic {
   }
 
   deriveNostrPrivateKeyHex() {
-    return secp256k1.utils.bytesToHex(
+    return secp256k1.etc.bytesToHex(
       this.deriveKey(NOSTR_DERIVATION_PATH).privateKey as Uint8Array
     );
   }
@@ -28,11 +28,11 @@ class Mnemonic {
 
   async signMessage(message: string) {
     const messageHex = sha256(message).toString(Hex);
-    const signedMessageBytes = await secp256k1.sign(
+    const signedMessageBytes = await secp256k1.signAsync(
       messageHex,
       this._hdkey.privateKey as Uint8Array
     );
-    return secp256k1.utils.bytesToHex(signedMessageBytes);
+    return secp256k1.etc.bytesToHex(signedMessageBytes.toCompactRawBytes());
   }
 }
 

@@ -13,7 +13,7 @@ jobs:
 
     name: build-prod
     env:
-      ALBY_API_URL: "https://getalby.com/api"
+      ALBY_API_URL: "https://api.getalby.com"
 
     permissions:
       issues: write
