@@ -582,7 +582,8 @@
     "receive": {
       "title": "Receber",
       "actions": {
-        "create_invoice": "Gerar fatura"
+        "create_invoice": "Gerar fatura",
+        "copy_lightning_address": "Copiar endereço relâmpago"
       },
       "amount": {
         "label": "Quantia",
