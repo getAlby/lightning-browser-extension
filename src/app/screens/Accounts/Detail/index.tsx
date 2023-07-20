@@ -188,7 +188,7 @@ function AccountDetail() {
       />
       <div className="border-b border-gray-200 dark:border-neutral-500">
         <div className="flex-col justify-center p-4 flex items-center bg-white dark:bg-surface-02dp">
-          <Avatar name={account.id} size={96} />
+          <Avatar name={account.id} size={96} url={auth.account?.avatarUrl} />
           <div className="flex flex-col overflow-hidden w-full text-center">
             <h2
               title={account.name}
