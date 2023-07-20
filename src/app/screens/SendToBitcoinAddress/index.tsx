@@ -197,6 +197,12 @@ function SendToBitcoinAddress() {
     confirm();
   }
 
+  const amountMin = 10_000;
+  const amountMax = 10_000_000;
+
+  const amountExceeded = +amountSat > (auth?.account?.balance || 0);
+  const rangeExceeded = +amountSat > amountMax || +amountSat < amountMin;
+
   return (
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <Header
@@ -220,11 +226,13 @@ function SendToBitcoinAddress() {
                 <DualCurrencyField
                   id="amount"
                   label={tCommon("amount")}
-                  min={10000}
-                  max={1000000}
+                  min={amountMin}
+                  max={amountMax}
                   onChange={(e) => setAmountSat(e.target.value)}
                   value={amountSat}
                   fiatValue={fiatAmount}
+                  rangeExceeded={rangeExceeded}
+                  amountExceeded={amountExceeded}
                   hint={`${tCommon("balance")}: ${
                     auth?.balancesDecorated?.accountBalance
                   }`}
@@ -277,7 +285,13 @@ function SendToBitcoinAddress() {
                 label={tCommon("actions.review")}
                 onCancel={reject}
                 loading={loading || swapDataLoading}
-                disabled={loading || feesLoading || !amountSat}
+                disabled={
+                  loading ||
+                  feesLoading ||
+                  !amountSat ||
+                  rangeExceeded ||
+                  amountExceeded
+                }
               />
             </Container>
           </form>
