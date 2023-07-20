@@ -228,7 +228,7 @@ export default class Alby implements Connector {
         client_id: clientId,
         client_secret: clientSecret,
         callback: redirectURL,
-        user_agent: "lightning-browser-extension",
+        user_agent: `lightning-browser-extension:${process.env.VERSION}`,
         scopes: [
           "invoices:read",
           "account:read",
