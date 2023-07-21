@@ -16,13 +16,13 @@ import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
 import { Esplora, EsploraAssetInfos } from "~/common/lib/esplora";
 import msg from "~/common/lib/msg";
-import {
-  Address,
+import { fetchAssetRegistry } from "~/common/lib/pset";
+import type {
+  LiquidAddress,
+  LiquidNetworkType,
+  OriginData,
   PsetPreview,
-  fetchAssetRegistry,
-  getPsetPreview,
-} from "~/common/lib/pset";
-import type { LiquidNetworkType, OriginData } from "~/types";
+} from "~/types";
 
 function ConfirmSignPset() {
   const navState = useNavigationState();
@@ -49,7 +49,7 @@ function ConfirmSignPset() {
       if (!pset) throw new Error("pset is undefined");
       const account = await api.getAccount();
       const liquidNetwork = toLiquidNetworkName(account.bitcoinNetwork);
-      const preview = getPsetPreview(pset, liquidNetwork);
+      const preview = await api.liquid.getPsetPreview(pset, liquidNetwork);
       setLiquidNetwork(liquidNetwork);
       setPreview(preview);
 
@@ -203,7 +203,7 @@ function AddressPreview({
   asset,
   assetInfos,
   t,
-}: Address & {
+}: LiquidAddress & {
   assetInfos?: EsploraAssetInfos;
   t: TFunction<"translation", "confirm_sign_pset", "translation">;
 }) {

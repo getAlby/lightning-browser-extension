@@ -14,6 +14,7 @@ import type {
   ConnectorType,
   DbPayment,
   Invoice,
+  LiquidNetworkType,
   LnurlAuthResponse,
   MessageAccountEdit,
   MessageAccountValidate,
@@ -21,6 +22,7 @@ import type {
   MessageLnurlAuth,
   MessageSettingsSet,
   NodeInfo,
+  PsetPreview,
   SettingsStorage,
   ValidateAccountResponse,
 } from "~/types";
@@ -208,6 +210,15 @@ const setMnemonic = (id: string, mnemonic: string | null): Promise<void> =>
     mnemonic,
   });
 
+const getLiquidPsetPreview = (
+  pset: string,
+  networkType?: LiquidNetworkType
+): Promise<PsetPreview> =>
+  msg.request("liquid/getPsetPreview", {
+    pset,
+    networkType,
+  });
+
 export default {
   getAccount,
   getAccountInfo,
@@ -244,4 +255,7 @@ export default {
   getMnemonic,
   setMnemonic,
   generateMnemonic,
+  liquid: {
+    getPsetPreview: getLiquidPsetPreview,
+  },
 };
