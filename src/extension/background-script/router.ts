@@ -82,7 +82,7 @@ const routes = {
     webbtc: {
       enable: allowances.enable,
       getInfo: webbtc.getInfo,
-      getAddressWithPrompt: webbtc.getAddressWithPrompt,
+      getAddressOrPrompt: webbtc.getAddressOrPrompt,
     },
     alby: {
       enable: allowances.enable,

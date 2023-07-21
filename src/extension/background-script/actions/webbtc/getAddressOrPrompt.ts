@@ -1,11 +1,12 @@
 import utils from "~/common/lib/utils";
-import type { MessageGetLiquidAddress } from "~/types";
-import { PermissionMethodLiquid } from "~/types";
+import {
+  addPermissionFor,
+  hasPermissionFor,
+} from "~/extension/background-script/actions/nostr/helpers";
+import state from "~/extension/background-script/state";
+import { MessageGetAddress, PermissionMethodBitcoin } from "~/types";
 
-import state from "../../state";
-import { addPermissionFor, hasPermissionFor } from "../nostr/helpers";
-
-const getAddressOrPrompt = async (message: MessageGetLiquidAddress) => {
+const getAddressOrPrompt = async (message: MessageGetAddress) => {
   if (!("host" in message.origin)) {
     console.error("error", message.origin);
     return;
@@ -13,47 +14,38 @@ const getAddressOrPrompt = async (message: MessageGetLiquidAddress) => {
 
   try {
     const hasPermission = await hasPermissionFor(
-      PermissionMethodLiquid["LIQUID_GETADDRESS"],
+      PermissionMethodBitcoin["BITCOIN_GETADDRESS"],
       message.origin.host
     );
 
-    const liquid = await state.getState().getLiquid();
+    const bitcoin = await state.getState().getBitcoin();
 
     if (hasPermission) {
-      const publicKey = liquid.getPublicKey();
-      const address = liquid.getAddress();
+      const data = bitcoin.getTaprootAddress();
       return {
-        data: {
-          ...address,
-          publicKey,
-        },
+        data,
       };
     } else {
       const promptResponse = await utils.openPrompt<{
         confirm: boolean;
         rememberPermission: boolean;
       }>({
-        args: {},
         ...message,
-        action: "public/liquid/confirmGetAddress",
+        action: "public/webbtc/confirmGetAddress",
       });
+
       // add permission to db only if user decided to always allow this request
       if (promptResponse.data.rememberPermission) {
         await addPermissionFor(
-          PermissionMethodLiquid["LIQUID_GETADDRESS"],
+          PermissionMethodBitcoin["BITCOIN_GETADDRESS"],
           message.origin.host
         );
       }
 
       if (promptResponse.data.confirm) {
-        // Normally `openPrompt` would throw already, but to make sure we got a confirm from the user we check this here
-        const publicKey = liquid.getPublicKey();
-        const address = liquid.getAddress();
+        const data = bitcoin.getTaprootAddress();
         return {
-          data: {
-            ...address,
-            publicKey,
-          },
+          data,
         };
       } else {
         return { error: "User rejected" };

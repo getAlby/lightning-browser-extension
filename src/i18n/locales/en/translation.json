@@ -392,7 +392,6 @@
           "description": "Your Account Secret Key allows you to use Alby to interact with protocols such as Nostr.",
           "description2": "Your Secret Key is a set of 12 words that will allow you to access your keys to protocols such as Nostr on a new device or in case you lose access to your account.",
           "saved": "Secret Key encrypted & saved successfully.",
-          "existing_liquid_key_notice": "⚠️ This account already has a liquid private key set and will not be derived from this secret key. You can manage your liquid key from your account settings.",
           "existing_nostr_key_notice": "⚠️ This account already has a nostr private key set and will not be derived from this secret key. You can manage your nostr key from your account settings.",
           "generate": {
             "title": "Generate your Secret Key",
@@ -440,9 +439,6 @@
           "enable": {
             "title": "Liquid Network",
             "description": "Enable interactions with Liquid Network apps and protocols."
-          },
-          "errors": {
-            "failed_to_load": "Failed to load the Liquid key. Is it a valid Liquid key?"
           }
         },
         "nostr": {
@@ -782,18 +778,6 @@
       "title": "Sign",
       "content": "This website asks you to sign:"
     },
-    "confirm_sign_psbt": {
-      "warning": "⚠️ Signing a PSBT may result in loosing your funds or Ordinals. Sign only if you understand what you're doing and trust this transaction",
-      "title": "Sign PSBT",
-      "allow_sign": "This website asks you to sign a Partially Signed Bitcoin Transaction:",
-      "view_addresses": "View addresses",
-      "hide_addresses": "Hide addresses",
-      "view_hex": "View PSBT hex",
-      "hide_hex": "Hide PSBT hex",
-      "input": "Input",
-      "outputs": "Outputs",
-      "amount": "{{amount}} sats"
-    },
     "confirm_sign_pset": {
       "warning": "⚠️ Signing a PSET may result in loosing your funds or Ordinals. Sign only if you understand what you're doing and trust this transaction",
       "title": "Sign PSET",
@@ -806,10 +790,14 @@
       "outputs": "Outputs",
       "amount": "{{amount}} {{ticker}}"
     },
-    "confirm_get_address": {
-      "title": "Get Address",
-      "heading": "This website asks you to read:",
-      "content": "Your Bitcoin receive address"
+    "bitcoin": {
+      "confirm_get_address": {
+        "title": "Get Address"
+      },
+      "allow": "Allow this website to:",
+      "allow_sign": "Allow {{host}} to sign:",
+      "block_and_ignore": "Block and ignore {{host}}",
+      "block_added": "Added {{host}} to the blocklist, please reload the website."
     },
     "confirm_keysend": {
       "title": "Approve Payment",
@@ -1095,8 +1083,11 @@
       "nip04decrypt": "Decrypt data.",
       "signmessage": "Sign message with your key."
     },
+    "bitcoin": {
+      "getaddress": "Your Bitcoin receive address."
+    },
     "liquid": {
-      "getpublickey": "Read your public key.",
+      "getaddress": "Your Liquid receive address.",
       "signschnorr": "Sign message with your key."
     },
     "commando": {
