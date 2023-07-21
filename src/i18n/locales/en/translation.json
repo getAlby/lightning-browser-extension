@@ -1084,10 +1084,10 @@
       "signmessage": "Sign message with your key."
     },
     "bitcoin": {
-      "getaddress": "Your Bitcoin receive address."
+      "getaddress": "Read your Bitcoin receive address."
     },
     "liquid": {
-      "getaddress": "Your Liquid receive address.",
+      "getaddress": "Read your Liquid receive address.",
       "signschnorr": "Sign message with your key."
     },
     "commando": {
