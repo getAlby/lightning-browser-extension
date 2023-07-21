@@ -48,6 +48,7 @@ export default class Alby implements Connector {
       this._authUser = await this.authorize();
       this._client = new Client(this._authUser, this._getRequestOptions());
     } catch (error) {
+      console.error("Failed to initialize alby connector", error);
       this._authUser = undefined;
       this._client = undefined;
       await this.unload();
