@@ -43,7 +43,11 @@ function AccountsScreen() {
                 >
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
-                      <Avatar name={account.id} size={48} />
+                      <Avatar
+                        name={account.id}
+                        size={48}
+                        url={account.avatarUrl}
+                      />
 
                       <div className="ml-4">
                         <h3 className="font-bold text-gray-900 dark:text-white break-all whitespace-normal max-w-xs md:max-w-lg xl:max-w-2xl">
