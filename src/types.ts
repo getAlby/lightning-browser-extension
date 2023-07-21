@@ -583,6 +583,14 @@ export interface MessageSignPset extends MessageDefault {
   action: "signPset";
 }
 
+export interface MessageGetPSetPreview extends MessageDefault {
+  args: {
+    pset: string;
+    networkType: LiquidNetworkType;
+  };
+  action: "getPsetPreview";
+}
+
 export interface LNURLChannelServiceResponse {
   uri: string; // Remote node address of form node_key@ip_address:port_number
   callback: string; // a second-level URL which would initiate an OpenChannel message from target LN node
@@ -909,4 +917,15 @@ export type AlbyAccountInformation = {
   keysend_pubkey: string;
   lightning_address?: string;
   nostr_pubkey?: string;
+};
+
+export type LiquidAddress = {
+  amount: number;
+  address: string;
+  asset: string;
+};
+
+export type PsetPreview = {
+  inputs: LiquidAddress[];
+  outputs: LiquidAddress[];
 };

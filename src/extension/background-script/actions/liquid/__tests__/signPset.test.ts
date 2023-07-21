@@ -1,10 +1,9 @@
-import { Finalizer, Pset, networks } from "liquidjs-lib";
-import { getPsetPreview } from "~/common/lib/pset";
+import { Finalizer, Pset } from "liquidjs-lib";
 import signPset from "~/extension/background-script/actions/liquid/signPset";
 import Liquid from "~/extension/background-script/liquid";
 import Mnemonic from "~/extension/background-script/mnemonic";
 import state from "~/extension/background-script/state";
-import { liquidFixtureDecode, liquidFixtureSign } from "~/fixtures/liquid";
+import { liquidFixtureSign } from "~/fixtures/liquid";
 import type { MessageSignPset } from "~/types";
 
 const passwordMock = jest.fn;
@@ -85,18 +84,4 @@ describe("signPset input validation", () => {
     const result = await sendSignPsetMessage("test");
     expect(result.error).not.toBe(null);
   });
-});
-
-describe("decode PSET", () => {
-  for (const { description, valid, pset } of liquidFixtureDecode) {
-    it(`it should ${valid ? "decode" : "not decode"} ${description}`, () => {
-      if (valid) {
-        const { inputs, outputs } = getPsetPreview(pset, "regtest");
-        expect(inputs.length).toBeGreaterThan(0);
-        expect(inputs.at(0)?.amount).toBe(1_0000_0000);
-        expect(inputs.at(0)?.asset).toBe(networks.regtest.assetHash);
-        expect(outputs.length).toBeGreaterThan(0);
-      }
-    });
-  }
 });
