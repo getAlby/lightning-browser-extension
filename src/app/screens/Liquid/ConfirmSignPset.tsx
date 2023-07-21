@@ -11,6 +11,7 @@ import Hyperlink from "~/app/components/Hyperlink";
 import Loading from "~/app/components/Loading";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
+import { toLiquidNetworkName } from "~/app/utils";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
 import { Esplora, EsploraAssetInfos } from "~/common/lib/esplora";
@@ -21,11 +22,7 @@ import {
   fetchAssetRegistry,
   getPsetPreview,
 } from "~/common/lib/pset";
-import type { OriginData } from "~/types";
-
-function toLiquidNetworkName(net: "bitcoin" | "testnet" | "regtest") {
-  return net === "bitcoin" ? "liquid" : "testnet"; // TODO: how do we handle regtest ?
-}
+import type { LiquidNetworkType, OriginData } from "~/types";
 
 function ConfirmSignPset() {
   const navState = useNavigationState();
@@ -43,9 +40,7 @@ function ConfirmSignPset() {
   const [assetRegistry, setAssetRegistry] = useState<
     Record<string, EsploraAssetInfos>
   >({});
-  const [liquidNetwork, setLiquidNetwork] = useState<
-    "liquid" | "testnet" | "regtest"
-  >();
+  const [liquidNetwork, setLiquidNetwork] = useState<LiquidNetworkType>();
   const [showAddresses, setShowAddresses] = useState(false);
   const [showHex, setShowHex] = useState(false);
 

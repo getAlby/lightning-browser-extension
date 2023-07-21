@@ -571,7 +571,7 @@ export interface MessageSignPsetWithPrompt extends MessageDefault {
 export interface MessageSignPset extends MessageDefault {
   args: {
     pset: string;
-    network: "liquid" | "testnet" | "regtest";
+    network: LiquidNetworkType;
   };
   action: "signPset";
 }
