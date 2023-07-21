@@ -574,7 +574,8 @@
       },
       "title": "Empfangen",
       "actions": {
-        "create_invoice": "Rechnung erstellen"
+        "create_invoice": "Rechnung erstellen",
+        "copy_lightning_address": "Lightning Adresse kopieren"
       },
       "description": {
         "label": "Beschreibung",
