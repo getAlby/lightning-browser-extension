@@ -16,6 +16,7 @@ import Connector, {
   GetBalanceResponse,
   GetInfoResponse,
   GetInvoicesResponse,
+  GetTransactionsArgs,
   GetTransactionsResponse,
   KeysendArgs,
   MakeInvoiceArgs,
@@ -94,30 +95,37 @@ export default class Alby implements Connector {
     };
   }
 
-  async getTransactions(): Promise<GetTransactionsResponse> {
+  async getTransactions(
+    args: GetTransactionsArgs
+  ): Promise<GetTransactionsResponse> {
+    const limit = args?.limit || 100;
+
     // this connector endpoint has a fixed result set of 100 entries
-    const incomingInvoices = (await this._request((client) =>
+    // slice to "limit" for DefaultView, as long as pagination is not possible
+    const outgoingInvoices = (await this._request((client) =>
       client.outgoingInvoices({})
     )) as Invoice[];
 
-    const transactions: ConnectorTransaction[] = incomingInvoices.map(
-      (p): ConnectorTransaction => ({
-        // @Todo: which value should I map this to?
-        totalFee: 0,
-        custom_records: p.custom_records,
-        // @Todo: which value should I map this to?
-        keysend: false,
-        memo: p.memo,
-        // @Todo: which value should I map this to?
-        preimage: "",
-        timestamp: parseInt(p.created_at),
-        type: p.type as "sent",
-        totalAmount: p.value + "",
-        // @Todo: verify these values
-        settled: p.settled,
-        settleDate: parseInt(p.settled_at),
-      })
-    );
+    const transactions: ConnectorTransaction[] = outgoingInvoices
+      .map(
+        (p): ConnectorTransaction => ({
+          // @Todo: which value should I map this to?
+          totalFee: 0,
+          custom_records: p.custom_records,
+          // @Todo: which value should I map this to?
+          keysend: false,
+          memo: p.memo,
+          // @Todo: which value should I map this to?
+          preimage: "",
+          timestamp: parseInt(p.created_at),
+          type: p.type as "sent",
+          totalAmount: p.value + "",
+          // @Todo: verify these values
+          settled: p.settled,
+          settleDate: parseInt(p.settled_at),
+        })
+      )
+      .slice(0, limit);
 
     return {
       data: {

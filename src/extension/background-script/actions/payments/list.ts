@@ -21,7 +21,7 @@ const list = async (message: MessagePaymentList) => {
     .sortBy("createdAt");
 
   try {
-    const result = await connector.getTransactions();
+    const result = await connector.getTransactions({ limit });
 
     // map IndexDB payment data onto ConnectorTransaction
     const transactions: Transaction[] = result.data.transactions.map(

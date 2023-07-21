@@ -44,6 +44,10 @@ export interface MakeInvoiceArgs {
   memo: string;
 }
 
+export interface GetTransactionsArgs {
+  limit: number;
+}
+
 export type MakeInvoiceResponse = {
   data: {
     paymentRequest: string;
@@ -133,7 +137,7 @@ export default interface Connector {
   getInfo(): Promise<GetInfoResponse>;
   getBalance(): Promise<GetBalanceResponse>;
   getInvoices(): Promise<GetInvoicesResponse>;
-  getTransactions(): Promise<GetTransactionsResponse>;
+  getTransactions(args?: GetTransactionsArgs): Promise<GetTransactionsResponse>;
   makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse>;
   sendPayment(args: SendPaymentArgs): Promise<SendPaymentResponse>;
   keysend(args: KeysendArgs): Promise<SendPaymentResponse>;

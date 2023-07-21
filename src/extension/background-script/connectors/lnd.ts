@@ -10,11 +10,13 @@ import Connector, {
   CheckPaymentArgs,
   CheckPaymentResponse,
   ConnectorInvoice,
+  ConnectorTransaction,
   ConnectPeerArgs,
   ConnectPeerResponse,
   GetBalanceResponse,
   GetInfoResponse,
   GetInvoicesResponse,
+  GetTransactionsArgs,
   GetTransactionsResponse,
   KeysendArgs,
   MakeInvoiceArgs,
@@ -457,11 +459,56 @@ class Lnd implements Connector {
   }
 
   // @Todo: implement function call
-  async getTransactions(): Promise<GetTransactionsResponse> {
-    console.error(
-      `${this.constructor.name} has not implementation for getTransactions yet`
+  async getTransactions(
+    args: GetTransactionsArgs
+  ): Promise<GetTransactionsResponse> {
+    const limit = args?.limit || 100;
+    const data = await this.request<{
+      first_index_offset: string;
+      last_index_offset: string;
+      total_num_payments: string;
+      payments: {
+        creation_date: string;
+        creation_time_ns: string;
+        failure_reason: string;
+        fee: string;
+        fee_msat: string;
+        fee_sat: string;
+        htlcs: unknown[];
+        payment_hash: string;
+        payment_index: string;
+        payment_preimage: string;
+        payment_request: string;
+        status: string;
+        value: string;
+        value_msat: string;
+        value_sat: string;
+      }[];
+    }>("GET", "/v1/payments", { reversed: true, max_payments: limit });
+
+    const transactions: ConnectorTransaction[] = data.payments.map(
+      (p): ConnectorTransaction => ({
+        // @Todo: which value should I map this to?
+        totalFee: parseInt(p.fee_sat),
+        keysend: false,
+        // @Todo: memo is missing in response
+        memo: "",
+        // @Todo: which value should I map this to?
+        preimage: p.payment_preimage,
+        timestamp: parseInt(p.creation_date),
+        type: "sent",
+        totalAmount: p.value_sat,
+        // @Todo: verify these values
+        settled: p.status === "SUCCEEDED",
+        settleDate: parseInt(p.creation_date),
+      })
     );
-    throw new Error("Not yet implemented with the currently used connector.");
+
+    return {
+      data: {
+        transactions,
+      },
+    };
   }
 
   protected async request<Type>(

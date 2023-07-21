@@ -26,10 +26,11 @@ export const useTransactions = () => {
         }
 
         setTransactions(_transactions);
-        setIsLoadingTransactions(false);
       } catch (e) {
         console.error(e);
         if (e instanceof Error) toast.error(`Error: ${e.message}`);
+      } finally {
+        setIsLoadingTransactions(false);
       }
     },
     [settings, getFormattedFiat]
