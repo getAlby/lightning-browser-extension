@@ -14,9 +14,12 @@ import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { toLiquidNetworkName } from "~/app/utils";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
-import { Esplora, EsploraAssetInfos } from "~/common/lib/esplora";
+import {
+  Esplora,
+  EsploraAssetInfos,
+  fetchAssetRegistry,
+} from "~/common/lib/esplora";
 import msg from "~/common/lib/msg";
-import { fetchAssetRegistry } from "~/common/lib/pset";
 import type {
   LiquidAddress,
   LiquidNetworkType,
