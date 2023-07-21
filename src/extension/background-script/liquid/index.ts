@@ -1,4 +1,5 @@
-import { secp256k1 } from "@noble/curves/secp256k1";
+import * as secp256k1 from "@noble/secp256k1";
+import * as bip39 from "@scure/bip39";
 import {
   address,
   bip341,
@@ -9,7 +10,11 @@ import { SLIP77Factory, Slip77Interface } from "slip77";
 import Mnemonic from "~/extension/background-script/mnemonic";
 import { LiquidNetworkType } from "~/types";
 
+import * as tinysecp from "../liquid/secp256k1";
 import * as tinysecp256k1Adapter from "./secp256k1";
+
+const LIQUID_DERIVATION_PATH = "m/84'/1776'/0'/0/0";
+const LIQUID_DERIVATION_PATH_REGTEST = "m/84'/1'/0'/0/0";
 
 function tapTweakHash(pubkey: Buffer, h?: Buffer): Buffer {
   return liquidjscrypto.taggedHash(
@@ -40,6 +45,7 @@ function tweakPrivateKey(privKey: Buffer, tweak?: Buffer): Buffer {
 class Liquid {
   private slip77: Slip77Interface;
   private network: networks.Network;
+  private mnemonic: Mnemonic;
   public privateKey: string;
 
   constructor(mnemonic: Mnemonic, networkType: LiquidNetworkType) {
@@ -49,10 +55,11 @@ class Liquid {
       globalThis.window.crypto = crypto;
     }
 
-    this.privateKey = mnemonic.deriveLiquidPrivateKeyHex(networkType);
+    this.mnemonic = mnemonic;
+    this.privateKey = this.deriveLiquidPrivateKeyHex(networkType);
     this.network = networks[networkType];
     if (!this.network) throw new Error(`Invalid network: "${networkType}"`);
-    const masterBlindingKey = mnemonic.deriveLiquidMasterBlindingKey();
+    const masterBlindingKey = this.deriveLiquidMasterBlindingKey();
     this.slip77 =
       SLIP77Factory(tinysecp256k1Adapter).fromMasterBlindingKey(
         masterBlindingKey
@@ -111,6 +118,23 @@ class Liquid {
     );
 
     return Buffer.from(signature).toString("hex");
+  }
+
+  private deriveLiquidPrivateKeyHex(networkType: string) {
+    const derivationPath =
+      networkType === "liquid"
+        ? LIQUID_DERIVATION_PATH
+        : LIQUID_DERIVATION_PATH_REGTEST;
+
+    return secp256k1.etc.bytesToHex(
+      this.mnemonic.deriveKey(derivationPath).privateKey as Uint8Array
+    );
+  }
+
+  private deriveLiquidMasterBlindingKey(): string {
+    return SLIP77Factory(tinysecp)
+      .fromSeed(Buffer.from(bip39.mnemonicToSeedSync(this.mnemonic.mnemonic)))
+      .masterKey.toString("hex");
   }
 }
 
