@@ -37,10 +37,9 @@ async function init() {
     if (request.action === "extractLightningData") {
       extractLightningData();
     }
-    // forward account switched messages to the website
-    else if (request.action === "accountSwitched") {
-      // TODO: emit the event using eventEmitter
-      window.postMessage("accountSwitched", "*");
+    // forward account selected messages to the website
+    else if (request.action === "accountSelected") {
+      window.postMessage("accountSelected", "*");
     }
   });
 

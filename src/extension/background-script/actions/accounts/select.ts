@@ -53,9 +53,14 @@ async function notifyAccountSwitched() {
     });
 
     const currentUrl = tabs.length && tabs[0].url;
-    if (currentUrl && currentUrl.startsWith("https")) {
+    // http for localhost websites
+    let validTabUrl = null;
+    if (currentUrl)
+      validTabUrl =
+        currentUrl.startsWith("http") || currentUrl.startsWith("https");
+    if (validTabUrl) {
       browser.tabs.sendMessage(tabs[0].id as number, {
-        action: "accountSwitched",
+        action: "accountSelected",
       });
     } else {
       throw new Error("Unable to find active tab");

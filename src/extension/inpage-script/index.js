@@ -121,6 +121,13 @@ if (document) {
     },
     { capture: true }
   );
+  // Listen for webln events from the extension
+  // emit more events as received
+  window.addEventListener("message", (event) => {
+    if (event.source === window && event.data === "accountSelected") {
+      window.webln.emit("accountSelected");
+    }
+  });
 } else {
   console.warn("Failed to inject WebLN provider");
 }
