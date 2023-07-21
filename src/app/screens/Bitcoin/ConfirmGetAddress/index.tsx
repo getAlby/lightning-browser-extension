@@ -11,9 +11,9 @@ import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import { OriginData } from "~/types";
 
-function LiquidConfirmGetAddress() {
+function BitcoinConfirmGetAddress() {
   const { t } = useTranslation("translation", {
-    keyPrefix: "liquid",
+    keyPrefix: "bitcoin",
   });
   const { t: tCommon } = useTranslation("common");
   const { t: tPermissions } = useTranslation("permissions");
@@ -53,7 +53,7 @@ function LiquidConfirmGetAddress() {
 
   return (
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
-      <ScreenHeader title={t("title")} />
+      <ScreenHeader title={t("confirm_get_address.title")} />
       <Container justifyBetween maxWidth="sm">
         <div>
           <PublisherCard
@@ -68,7 +68,7 @@ function LiquidConfirmGetAddress() {
             <div className="mb-2 flex items-center">
               <CheckIcon className="w-5 h-5 mr-2" />
               <p className="dark:text-white">
-                {tPermissions("liquid.getaddress")}
+                {tPermissions("bitcoin.getaddress")}
               </p>
             </div>
           </div>
@@ -113,4 +113,4 @@ function LiquidConfirmGetAddress() {
   );
 }
 
-export default LiquidConfirmGetAddress;
+export default BitcoinConfirmGetAddress;

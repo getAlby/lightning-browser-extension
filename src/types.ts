@@ -568,6 +568,13 @@ export interface MessageSignPsetWithPrompt extends MessageDefault {
   action: "signPsetWithPrompt";
 }
 
+export interface MessageSignSchnorrOrPrompt extends MessageDefault {
+  args: {
+    pset: string;
+  };
+  action: "signSchnorrOrPrompt";
+}
+
 export interface MessageSignPset extends MessageDefault {
   args: {
     pset: string;
@@ -706,9 +713,13 @@ export interface Payment extends Omit<DbPayment, "id"> {
   id: number;
 }
 
+export enum PermissionMethodBitcoin {
+  BITCOIN_GETADDRESS = "bitcoin/getAddress",
+}
+
 export enum PermissionMethodLiquid {
   LIQUID_SIGNSCHNORR = "liquid/signSchnorr",
-  LIQUID_GETPUBLICKEY = "liquid/getPublicKey",
+  LIQUID_GETADDRESS = "liquid/getAddress",
 }
 
 export enum PermissionMethodNostr {
