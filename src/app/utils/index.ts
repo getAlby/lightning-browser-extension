@@ -82,5 +82,5 @@ export function extractLightningTagData(url: string) {
 }
 
 export function toLiquidNetworkName(net: BitcoinNetworkType) {
-  return net === "bitcoin" ? "liquid" : "testnet"; // TODO: how do we handle regtest ?
+  return net === "bitcoin" ? "liquid" : net;
 }
