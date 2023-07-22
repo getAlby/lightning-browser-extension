@@ -7,7 +7,7 @@ import { devices } from "@playwright/test";
  */
 // require('dotenv').config();
 
-if (process.env.WALLET_CREATE_URL === "https://getalby.com/api/users") {
+if (process.env.ALBY_API_URL === "https://api.getalby.com") {
   console.error(
     `
     ----

@@ -1,3 +1,4 @@
+import Alby from "./alby";
 import Citadel from "./citadel";
 import Commando from "./commando";
 import Eclair from "./eclair";
@@ -34,6 +35,7 @@ const connectors = {
   nativecitadel: NativeCitadel,
   commando: Commando,
   kollider: Kollider,
+  alby: Alby,
 };
 
 export default connectors;

@@ -86,6 +86,10 @@ export class DB extends Dexie {
     return true;
   }
 
+  async clearAllTables() {
+    return Promise.all(this.tables.map((table) => table.clear()));
+  }
+
   // Loads the data from the browser.storage and adds the data to the IndexedDB.
   // This is needed because the IndexedDB is not necessarily persistent,
   // BUT maybe there are already entries in the IndexedDB (that depends on the browser).

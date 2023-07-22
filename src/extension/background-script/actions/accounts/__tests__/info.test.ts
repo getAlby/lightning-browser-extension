@@ -17,6 +17,7 @@ const mockState = {
     connector: "lndhub",
     id: "1e1e8ea6-493e-480b-9855-303d37506e97",
     name: "Alby",
+    avatarUrl: "https://example.com/avatars/1.png",
   }),
   currentAccountId: "8b7f1dc6-ab87-4c6c-bca5-19fa8632731e",
 };
@@ -41,6 +42,8 @@ describe("account info", () => {
       name: "Alby",
       info: { alias: "getalby.com" },
       balance: { balance: 0, currency: "BTC" },
+      connectorType: "lndhub",
+      avatarUrl: "https://example.com/avatars/1.png",
     };
 
     expect(await infoAccount(message)).toStrictEqual({
