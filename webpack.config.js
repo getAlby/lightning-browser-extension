@@ -72,7 +72,11 @@ if (
   if (!selectedOAuthCredentials) {
     throw new Error("No OAuth credentials found for current configuration");
   }
-  console.info("Using OAuth credentials for", oauthBrowser, network);
+  console.info("Using OAuth credentials for", {
+    NODE_ENV: process.env.NODE_ENV,
+    NETWORK: network,
+    BROWSER: oauthBrowser,
+  });
   process.env.ALBY_OAUTH_CLIENT_ID = selectedOAuthCredentials.id;
   process.env.ALBY_OAUTH_CLIENT_SECRET = selectedOAuthCredentials.secret;
 }

@@ -8,8 +8,7 @@ import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Header from "@components/Header";
 import IconButton from "@components/IconButton";
 import DualCurrencyField from "@components/form/DualCurrencyField";
-import fetchAdapter from "@vespaiach/axios-fetch-adapter";
-import axios from "axios";
+import { CreateSwapResponse } from "alby-js-sdk/dist/types";
 import React, { useEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import Skeleton from "react-loading-skeleton";
@@ -22,8 +21,7 @@ import ResultCard from "~/app/components/ResultCard";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
-
-const SWAP_API = "http://localhost:3000/api/swaps";
+import api from "~/common/lib/api";
 
 const Dt = ({ children }: { children: React.ReactNode }) => (
   <dt className="text-sm text-gray-500 dark:text-neutral-500">{children}</dt>
@@ -32,15 +30,6 @@ const Dt = ({ children }: { children: React.ReactNode }) => (
 const Dd = ({ children }: { children: React.ReactNode }) => (
   <dd className="text-gray-700 dark:text-neutral-200">{children}</dd>
 );
-
-type ReviewData = {
-  address: string;
-  service_fee: number;
-  network_fee: number;
-  amount: number;
-  total: number;
-  invoice: string;
-};
 
 function SendToBitcoinAddress() {
   const {
@@ -69,7 +58,7 @@ function SendToBitcoinAddress() {
   const [amountFiat, setAmountFiat] = useState("");
 
   const [swapDataLoading, setSwapDataLoading] = useState(false);
-  const [swapData, setSwapData] = useState<ReviewData | undefined>();
+  const [swapData, setSwapData] = useState<CreateSwapResponse | undefined>();
 
   const { t } = useTranslation("translation", {
     keyPrefix: "send_to_bitcoin_address",
@@ -89,19 +78,15 @@ function SendToBitcoinAddress() {
     (async () => {
       try {
         setFeesLoading(true);
-        const result = await axios.get<{
-          service_fee_percentage: number;
-          network_fee: number;
-          sats_per_vbyte: number;
-        }>(`${SWAP_API}/info`, { adapter: fetchAdapter });
 
-        setServiceFeePercentage(result.data.service_fee_percentage);
-        setNetworkFee(result.data.network_fee);
-        setSatsPerVbyte(result.data.sats_per_vbyte);
+        // TODO: test with regtest APIs
+        const result = await api.getSwapInfo();
 
+        setServiceFeePercentage(result.service_fee_percentage);
+        setNetworkFee(result.network_fee);
+        setSatsPerVbyte(result.sats_per_vbyte);
         if (showFiat) {
-          const test = await getFormattedFiat(result.data.network_fee);
-          setNetworkFeeFiat(test);
+          setNetworkFeeFiat(await getFormattedFiat(result.network_fee));
         }
       } catch (e) {
         console.error(e);
@@ -135,7 +120,7 @@ function SendToBitcoinAddress() {
       auth.fetchAccountInfo(); // Update balance.
       // msg.reply(response);
 
-      setStep("");
+      setStep("success");
     } catch (e) {
       console.error(e);
       if (e instanceof Error) {
@@ -163,25 +148,17 @@ function SendToBitcoinAddress() {
     try {
       setSwapDataLoading(true);
 
-      const result = await axios.post<ReviewData>(
-        SWAP_API,
-        {
-          amount: amountSat,
-          address: bitcoinAddress,
-          sats_per_vbyte: satsPerVbyte,
-        },
-        {
-          adapter: fetchAdapter,
-        }
-      );
-      setSwapData(result.data);
+      const result = await api.createSwap({
+        amount: +amountSat,
+        address: bitcoinAddress,
+        sats_per_vbyte: satsPerVbyte,
+      });
 
-      setAmountFiat(await getFormattedFiat(result.data.amount));
-      setNetworkFeeFiat(await getFormattedFiat(result.data.network_fee));
-      setServiceFeeFiat(await getFormattedFiat(result.data.service_fee));
-      setTotalAmountFiat(await getFormattedFiat(result.data.total));
-
-      setStep("success");
+      setSwapData(result);
+      setAmountFiat(await getFormattedFiat(result.amount));
+      setNetworkFeeFiat(await getFormattedFiat(result.network_fee));
+      setServiceFeeFiat(await getFormattedFiat(result.service_fee));
+      setTotalAmountFiat(await getFormattedFiat(result.total));
     } catch (e) {
       console.error(e);
       if (e instanceof Error) {

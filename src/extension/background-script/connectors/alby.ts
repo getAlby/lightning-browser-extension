@@ -1,6 +1,13 @@
-import { auth, Client } from "alby-js-sdk";
-import { RequestOptions } from "alby-js-sdk/dist/request";
-import { Invoice, Token } from "alby-js-sdk/dist/types";
+import {
+  auth,
+  Client,
+  CreateSwapParams,
+  CreateSwapResponse,
+  Invoice,
+  RequestOptions,
+  SwapInfoResponse,
+  Token,
+} from "alby-js-sdk";
 import browser from "webextension-polyfill";
 import { getAlbyAccountName } from "~/app/utils";
 import { decryptData, encryptData } from "~/common/lib/crypto";
@@ -210,6 +217,16 @@ export default class Alby implements Connector {
     };
   }
 
+  async getSwapInfo(): Promise<SwapInfoResponse> {
+    const result = await this._request((client) => client.getSwapInfo());
+    return result;
+  }
+
+  async createSwap(params: CreateSwapParams): Promise<CreateSwapResponse> {
+    const result = await this._request((client) => client.createSwap(params));
+    return result;
+  }
+
   private async authorize(): Promise<auth.OAuth2User> {
     try {
       const clientId = process.env.ALBY_OAUTH_CLIENT_ID;
@@ -234,6 +251,7 @@ export default class Alby implements Connector {
           "transactions:read", // for outgoing invoice
         ],
         token: this.config.oAuthToken, // initialize with existing token
+        user_agent: "",
       });
 
       if (this.config.oAuthToken) {

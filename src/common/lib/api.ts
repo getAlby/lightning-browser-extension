@@ -1,3 +1,8 @@
+import {
+  CreateSwapParams,
+  CreateSwapResponse,
+  SwapInfoResponse,
+} from "alby-js-sdk/dist/types";
 import { ACCOUNT_CURRENCIES } from "~/common/constants";
 import {
   ConnectPeerArgs,
@@ -207,6 +212,11 @@ const setMnemonic = (id: string, mnemonic: string | null): Promise<void> =>
     mnemonic,
   });
 
+const getSwapInfo = (): Promise<SwapInfoResponse> => msg.request("getSwapInfo");
+// TODO: consider adding removeMnemonic function, make mnemonic a string here
+const createSwap = (params: CreateSwapParams): Promise<CreateSwapResponse> =>
+  msg.request("createSwap", params);
+
 export default {
   getAccount,
   getAccountInfo,
@@ -243,4 +253,6 @@ export default {
   getMnemonic,
   setMnemonic,
   generateMnemonic,
+  getSwapInfo,
+  createSwap,
 };

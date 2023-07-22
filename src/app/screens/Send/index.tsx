@@ -11,7 +11,11 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import QrcodeAdornment from "~/app/components/QrcodeAdornment";
 import { useAccount } from "~/app/context/AccountContext";
-import { extractLightningTagData, isAlbyOAuthAccount } from "~/app/utils";
+import {
+  extractLightningTagData,
+  isAlbyOAuthAccount,
+  isBitcoinAddress,
+} from "~/app/utils";
 import lnurlLib from "~/common/lib/lnurl";
 import { isLNURLDetailsError } from "~/common/utils/typeHelpers";
 
@@ -95,7 +99,7 @@ function Send() {
         });
       } else if (
         isAlbyOAuthAccount(auth.account?.connectorType) &&
-        invoice.startsWith("bc1")
+        isBitcoinAddress(invoice)
       ) {
         // TODO: Parse bitcoin addresses
         navigate("/sendToBitcoinAddress", {

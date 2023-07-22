@@ -62,6 +62,12 @@ export function getAlbyAccountName(info: AlbyAccountInformation) {
   return info.email || info.lightning_address || "getalby.com";
 }
 
+export function isBitcoinAddress(address: string) {
+  return /^(?:[13]{1}[a-km-zA-HJ-NP-Z1-9]{25,34}|bc1[a-z0-9]{39,59})$/i.test(
+    address
+  );
+}
+
 // to extract lightning data associated with the lightning tag within the URL. eg. LNBits QR codes
 // look like this: https://lnbits.example.com?lightning=LNURL
 export function extractLightningTagData(url: string) {

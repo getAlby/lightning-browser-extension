@@ -1,3 +1,4 @@
+import { CreateSwapParams } from "alby-js-sdk/dist/types";
 import { PaymentRequestObject } from "bolt11";
 import { Runtime } from "webextension-polyfill";
 import { ACCOUNT_CURRENCIES, CURRENCIES, TIPS } from "~/common/constants";
@@ -545,6 +546,18 @@ export interface MessageGetAddress extends MessageDefault {
   // eslint-disable-next-line @typescript-eslint/ban-types
   args: {};
   action: "getAddress";
+}
+
+export interface MessageGetSwapInfo extends MessageDefault {
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  args: {};
+  action: "getSwapInfo";
+}
+
+export interface MessageCreateSwap extends MessageDefault {
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  args: CreateSwapParams;
+  action: "getSwapInfo";
 }
 
 export interface LNURLChannelServiceResponse {
