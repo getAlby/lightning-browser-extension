@@ -49,6 +49,18 @@ if (
         },
       },
     },
+    production: {
+      mainnet: {
+        chrome: {
+          id: "R7lZBSqfQt",
+          secret: "W4yWprd5ib6OSfq27InN",
+        },
+        firefox: {
+          id: "V682entasX",
+          secret: "GhL3g37I3NAwzavCB3A5",
+        },
+      },
+    },
   };
 
   const oauthBrowser =
