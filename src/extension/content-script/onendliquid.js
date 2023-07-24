@@ -8,7 +8,6 @@ import shouldInject from "./shouldInject";
 const liquidCalls = [
   "liquid/getAddressOrPrompt",
   "liquid/signPsetWithPrompt",
-  "liquid/signSchnorrOrPrompt",
   "liquid/enable",
 ];
 // calls that can be executed when liquid is not enabled for the current content page

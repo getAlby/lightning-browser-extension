@@ -30,11 +30,6 @@ export default class LiquidProvider {
     return this.execute("signPsetWithPrompt", { pset });
   }
 
-  async signSchnorr(sigHash: string) {
-    await this.enable();
-    return this.execute("signSchnorrOrPrompt", { sigHash });
-  }
-
   // NOTE: new call `action`s must be specified also in the content script
   execute(
     action: string,
