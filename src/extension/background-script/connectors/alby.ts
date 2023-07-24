@@ -61,7 +61,7 @@ export default class Alby implements Connector {
   }
 
   get supportedMethods() {
-    return ["getInfo", "keysend", "makeInvoice", "sendPayment", "signMessage"];
+    return ["getInfo", "keysend", "makeInvoice", "sendPayment"];
   }
 
   // not yet implemented
