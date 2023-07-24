@@ -16,6 +16,9 @@ const weblnCalls = [
   "webln/makeInvoice",
   "webln/signMessageOrPrompt",
   "webln/request",
+  "webln/on",
+  "webln/emit",
+  "webln/off",
 ];
 // calls that can be executed when webln is not enabled for the current content page
 const disabledCalls = ["webln/enable"];
@@ -37,9 +40,9 @@ async function init() {
     if (request.action === "extractLightningData") {
       extractLightningData();
     }
-    // forward account selected messages to the website
-    else if (request.action === "accountSelected") {
-      window.postMessage("accountSelected", "*");
+    // forward account changed messaged to inpage script
+    else if (request.action === "accountChanged") {
+      window.postMessage({ action: "accountChanged", scope: "webln" }, "*");
     }
   });
 

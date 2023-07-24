@@ -28,7 +28,7 @@ const select = async (message: MessageAccountSelect) => {
     // save the current account id once the connector is loaded
     await state.getState().saveToStorage();
 
-    await notifyAccountSwitched();
+    await notifyAccountChanged();
 
     return {
       data: { unlocked: true },
@@ -45,7 +45,7 @@ export default select;
 
 // Send a notification message to the content script
 // which will then be posted to the window so websites can sync with the switched account
-async function notifyAccountSwitched() {
+async function notifyAccountChanged() {
   try {
     const tabs = await browser.tabs.query({
       active: true,
@@ -60,12 +60,12 @@ async function notifyAccountSwitched() {
         currentUrl.startsWith("http") || currentUrl.startsWith("https");
     if (validTabUrl) {
       browser.tabs.sendMessage(tabs[0].id as number, {
-        action: "accountSelected",
+        action: "accountChanged",
       });
     } else {
       throw new Error("Unable to find active tab");
     }
   } catch (error) {
-    console.error("Failed to notify account switched", error);
+    console.error("Failed to notify account changed", error);
   }
 }

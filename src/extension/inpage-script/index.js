@@ -122,12 +122,26 @@ if (document) {
     { capture: true }
   );
   // Listen for webln events from the extension
-  // emit more events as received
+  // emit events to the websites
   window.addEventListener("message", (event) => {
-    if (event.source === window && event.data === "accountSelected") {
-      window.webln.emit("accountSelected");
+    if (event.source === window && event.data.action === "accountChanged") {
+      if (
+        (window.webln && window.webln.enabled) ||
+        (window.nostr && window.nostr.enabled)
+      )
+        eventEmitter(event.data.action, event.data.scope);
     }
   });
 } else {
   console.warn("Failed to inject WebLN provider");
+}
+
+function eventEmitter(action, scope) {
+  if (scope == "nostr") {
+    window.nostr.emit(action);
+  } else if (scope == "webln") {
+    window.webln.emit(action);
+  } else {
+    return;
+  }
 }

@@ -1,3 +1,5 @@
+import EventEmitter from "events";
+
 import { postMessage } from "../postMessage";
 import { Event } from "./types";
 
@@ -10,14 +12,16 @@ declare global {
 export default class NostrProvider {
   nip04 = new Nip04(this);
   enabled: boolean;
+  private _eventEmitter: EventEmitter;
 
   constructor() {
     this.enabled = false;
+    this._eventEmitter = new EventEmitter();
   }
 
   async enable() {
     if (this.enabled) {
-      return { enabled: true };
+      return Promise.resolve({ enabled: true });
     }
     const result = await this.execute("enable");
     if (typeof result.enabled === "boolean") {
@@ -44,6 +48,21 @@ export default class NostrProvider {
   async getRelays() {
     await this.enable();
     return this.execute("getRelays");
+  }
+
+  //nostr events
+  async on(...args: Parameters<EventEmitter["on"]>) {
+    await this.enable();
+    return this._eventEmitter.on(...args);
+  }
+  async emit(...args: Parameters<EventEmitter["emit"]>) {
+    await this.enable();
+    return this._eventEmitter.emit(...args);
+  }
+
+  async off(...args: Parameters<EventEmitter["off"]>) {
+    await this.enable();
+    return this._eventEmitter.off(...args);
   }
 
   // NOTE: new call `action`s must be specified also in the content script

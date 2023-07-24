@@ -22,16 +22,17 @@ type KeysendArgs = {
   amount: string | number;
 };
 
-export default class WebLNProvider extends EventEmitter {
+export default class WebLNProvider {
   enabled: boolean;
   isEnabled: boolean;
   executing: boolean;
+  private _eventEmitter: EventEmitter;
 
   constructor() {
-    super();
     this.enabled = false;
     this.isEnabled = false; // seems some webln implementations use webln.isEnabled and some use webln.enabled
     this.executing = false;
+    this._eventEmitter = new EventEmitter();
   }
 
   async enable() {
@@ -109,6 +110,27 @@ export default class WebLNProvider extends EventEmitter {
       method,
       params,
     });
+  }
+
+  //webln events
+  on(...args: Parameters<EventEmitter["on"]>) {
+    if (!this.enabled) {
+      throw new Error("Provider must be enabled before calling on");
+    }
+    return this._eventEmitter.on(...args);
+  }
+  emit(...args: Parameters<EventEmitter["emit"]>) {
+    if (!this.enabled) {
+      throw new Error("Provider must be enabled before calling emit");
+    }
+    return this._eventEmitter.emit(...args);
+  }
+
+  off(...args: Parameters<EventEmitter["off"]>) {
+    if (!this.enabled) {
+      throw new Error("Provider must be enabled before calling off");
+    }
+    return this._eventEmitter.off(...args);
   }
 
   // NOTE: new call `action`s must be specified also in the content script
