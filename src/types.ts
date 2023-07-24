@@ -568,13 +568,6 @@ export interface MessageSignPsetWithPrompt extends MessageDefault {
   action: "signPsetWithPrompt";
 }
 
-export interface MessageSignSchnorrOrPrompt extends MessageDefault {
-  args: {
-    pset: string;
-  };
-  action: "signSchnorrOrPrompt";
-}
-
 export interface MessageSignPset extends MessageDefault {
   args: {
     pset: string;
@@ -726,7 +719,6 @@ export enum PermissionMethodBitcoin {
 }
 
 export enum PermissionMethodLiquid {
-  LIQUID_SIGNSCHNORR = "liquid/signSchnorr",
   LIQUID_GETADDRESS = "liquid/getAddress",
 }
 

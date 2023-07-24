@@ -11,7 +11,6 @@ import LNURLPay from "@screens/LNURLPay";
 import LNURLWithdraw from "@screens/LNURLWithdraw";
 import LiquidConfirmGetAddress from "@screens/Liquid/ConfirmGetAddress";
 import ConfirmSignPset from "@screens/Liquid/ConfirmSignPset";
-import LiquidConfirmSignSchnorr from "@screens/Liquid/ConfirmSignSchnorr";
 import MakeInvoice from "@screens/MakeInvoice";
 import NostrConfirm from "@screens/Nostr/Confirm";
 import NostrConfirmGetPublicKey from "@screens/Nostr/ConfirmGetPublicKey";
@@ -98,10 +97,6 @@ function Prompt() {
             <Route
               path="public/liquid/confirmGetAddress"
               element={<LiquidConfirmGetAddress />}
-            />
-            <Route
-              path="public/liquid/confirmSignSchnorr"
-              element={<LiquidConfirmSignSchnorr />}
             />
             <Route
               path="public/liquid/confirmSignPset"

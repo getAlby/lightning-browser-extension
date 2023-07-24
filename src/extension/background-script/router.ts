@@ -103,7 +103,6 @@ const routes = {
       enable: allowances.enable,
       getAddressOrPrompt: liquid.getAddressOrPrompt,
       signPsetWithPrompt: liquid.signPsetWithPrompt,
-      signSchnorrOrPrompt: liquid.signSchnorrOrPrompt,
     },
     nostr: {
       enable: allowances.enable,
