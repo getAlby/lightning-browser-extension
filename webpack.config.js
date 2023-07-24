@@ -80,16 +80,21 @@ if (clientId && clientSecret) {
   // setup ALBY_OAUTH_CLIENT_ID
   const selectedOAuthCredentials =
     oauthCredentials[process.env.NODE_ENV]?.[network]?.[oauthBrowser];
-  console.error("Using OAuth credentials for", oauthBrowser, network);
   if (!selectedOAuthCredentials) {
     throw new Error("No OAuth credentials found for current configuration");
   }
+  console.info(
+    "Using OAuth credentials for",
+    process.env.NODE_ENV,
+    oauthBrowser,
+    network
+  );
   process.env.ALBY_OAUTH_CLIENT_ID = selectedOAuthCredentials.id;
   process.env.ALBY_OAUTH_CLIENT_SECRET = selectedOAuthCredentials.secret;
 }
 
+// default value is set in the code where it is used
 if (!process.env.ALBY_OAUTH_AUTHORIZE_URL) {
-  // default value is set in the code where it is used
   process.env.ALBY_OAUTH_AUTHORIZE_URL = ""; // env variables are passed as string. empty strings are still falsy
 }
 
