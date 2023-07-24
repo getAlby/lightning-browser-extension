@@ -1,3 +1,4 @@
+import { schnorr } from "@noble/curves/secp256k1";
 import * as secp256k1 from "@noble/secp256k1";
 import Hex from "crypto-js/enc-hex";
 import sha256 from "crypto-js/sha256";
@@ -96,8 +97,8 @@ export function serializeEvent(evt: Event): string {
 }
 
 export async function signEvent(event: Event, key: string) {
-  const signedEvent = await secp256k1.schnorr.sign(getEventHash(event), key);
-  return secp256k1.utils.bytesToHex(signedEvent);
+  const signedEvent = await schnorr.sign(getEventHash(event), key);
+  return secp256k1.etc.bytesToHex(signedEvent);
 }
 
 export function getEventHash(event: Event): string {

@@ -4,7 +4,6 @@ import Container from "@components/Container";
 import Header from "@components/Header";
 import IconButton from "@components/IconButton";
 import TextField from "@components/form/TextField";
-import lightningPayReq from "bolt11";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -14,64 +13,28 @@ import { extractLightningTagData } from "~/app/utils";
 import lnurlLib from "~/common/lib/lnurl";
 import { isLNURLDetailsError } from "~/common/utils/typeHelpers";
 
-function Send() {
-  const { t } = useTranslation("translation", { keyPrefix: "send" });
-  const { t: tCommon } = useTranslation("common");
+function LNURLRedeem() {
+  const { t } = useTranslation("translation", { keyPrefix: "lnurlredeem" });
   const location = useLocation();
   // location.state used to access the decoded QR coming from ScanQRCode screen
-  const [invoice, setInvoice] = useState(location.state?.decodedQR || "");
+  const [lnurlWithdrawLink, setLnurlWithdrawLink] = useState(
+    location.state?.decodedQR || ""
+  );
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-
-  function isPubKey(str: string) {
-    return str.length == 66 && (str.startsWith("02") || str.startsWith("03"));
-  }
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     try {
       setLoading(true);
-
-      let lnurl = lnurlLib.findLnurl(invoice);
-      if (!lnurl && lnurlLib.isLightningAddress(invoice)) {
-        lnurl = invoice;
-      }
+      const lnurl = lnurlLib.findLnurl(lnurlWithdrawLink);
 
       if (lnurl) {
         const lnurlDetails = await lnurlLib.getDetails(lnurl);
+
         if (isLNURLDetailsError(lnurlDetails)) {
           toast.error(lnurlDetails.reason);
           return;
-        }
-
-        if (lnurlDetails.tag === "channelRequest") {
-          navigate("/lnurlChannel", {
-            state: {
-              args: {
-                lnurlDetails,
-              },
-            },
-          });
-        }
-
-        if (lnurlDetails.tag === "login") {
-          navigate("/lnurlAuth", {
-            state: {
-              args: {
-                lnurlDetails,
-              },
-            },
-          });
-        }
-
-        if (lnurlDetails.tag === "payRequest") {
-          navigate("/lnurlPay", {
-            state: {
-              args: {
-                lnurlDetails,
-              },
-            },
-          });
         }
 
         if (lnurlDetails.tag === "withdrawRequest") {
@@ -82,24 +45,13 @@ function Send() {
               },
             },
           });
+        } else {
+          toast.error(t("errors.invalid_withdraw_request"));
+          return;
         }
-      } else if (isPubKey(invoice)) {
-        navigate("/keysend", {
-          state: {
-            args: {
-              destination: invoice,
-            },
-          },
-        });
       } else {
-        lightningPayReq.decode(invoice); // throws if invalid.
-        navigate("/confirmPayment", {
-          state: {
-            args: {
-              paymentRequest: invoice,
-            },
-          },
-        });
+        toast.error(t("errors.invalid_lnurl"));
+        return;
       }
     } catch (e) {
       if (e instanceof Error) {
@@ -125,26 +77,28 @@ function Send() {
         <Container justifyBetween maxWidth="sm">
           <div className="pt-4">
             <TextField
-              id="invoice"
+              id="lnurlwithdraw"
               label={t("input.label")}
-              hint={t("input.hint")}
-              value={invoice}
+              value={lnurlWithdrawLink}
+              placeholder={t("input.placeholder")}
               disabled={loading}
               autoFocus
               onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                setInvoice(extractLightningTagData(event.target.value.trim()))
+                setLnurlWithdrawLink(
+                  extractLightningTagData(event.target.value.trim())
+                )
               }
-              endAdornment={<QrcodeAdornment route="send" />}
+              endAdornment={<QrcodeAdornment route="lnurlRedeem" />}
             />
           </div>
           <div className="my-4">
             <Button
               type="submit"
-              label={tCommon("actions.continue")}
+              label={t("actions.withdraw")}
               primary
               fullWidth
               loading={loading}
-              disabled={invoice === "" || loading}
+              disabled={lnurlWithdrawLink === "" || loading}
             />
           </div>
         </Container>
@@ -153,4 +107,4 @@ function Send() {
   );
 }
 
-export default Send;
+export default LNURLRedeem;

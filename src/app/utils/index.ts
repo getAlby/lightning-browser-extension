@@ -61,3 +61,17 @@ export function getAlbyAccountName(info: AlbyAccountInformation) {
   // legacy accounts may not have either an email address or lightning address
   return info.email || info.lightning_address || "getalby.com";
 }
+
+// to extract lightning data associated with the lightning tag within the URL. eg. LNBits QR codes
+// look like this: https://lnbits.example.com?lightning=LNURL
+export function extractLightningTagData(url: string) {
+  const reqExp = /lightning=([^&|\b]+)/i;
+
+  const data = url.match(reqExp);
+
+  if (data) {
+    return data[1];
+  } else {
+    return url.replace(/^lightning:/i, "");
+  }
+}
