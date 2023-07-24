@@ -341,7 +341,6 @@
           "export_uri": "LNDHub pověřovací URI",
           "waiting": "čekání na data z LndHub...",
           "your_ln_address": "Vaše Lightning adresa:",
-          "tip_mobile": "Tip: Použijte tuto peněženku s vaším mobilním zařízením",
           "scan_qr": "Importujte tuto peněženku do Zeus nebo BlueWallet naskenováním QR kódu."
         },
         "title1": "Informace o účtu",

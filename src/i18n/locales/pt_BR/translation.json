@@ -319,7 +319,6 @@
           "your_ln_address": "Seu Endereço Relâmpago:",
           "screen_reader": "Exportar detalhes da conta",
           "waiting": "aguardando dados LndHub...",
-          "tip_mobile": "Dica: Use esta carteira no seu dispositivo móvel",
           "export_uri": "Credenciais URI LNDHub",
           "scan_qr": "Leia o código QR para importar esta carteira na Zeus ou BlueWallet."
         },

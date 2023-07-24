@@ -366,7 +366,6 @@
         "title1": "帐户信息",
         "export": {
           "export_uri": "LNDHub凭证URI",
-          "tip_mobile": "提示：用你的移动设备使用这个钱包",
           "scan_qr": "通过扫描二维码将这个钱包导入Zeus或BlueWallet。",
           "title": "导出帐户",
           "screen_reader": "导出帐户详情",

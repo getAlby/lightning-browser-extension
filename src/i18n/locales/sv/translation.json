@@ -380,7 +380,6 @@
           "screen_reader": "Exportera konto detaljer",
           "waiting": "väntar på LndHub-data...",
           "your_ln_address": "Din Lightning Address:",
-          "tip_mobile": "Tips: Använd den här plånboken med din mobil",
           "export_uri": "LNDHub-inloggnings-URI",
           "scan_qr": "Importera denna plånbok till Zeus eller BlueWallet genom att skanna QR-koden."
         },

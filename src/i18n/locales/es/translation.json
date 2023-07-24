@@ -368,7 +368,6 @@
           "title": "Exportar Cuenta",
           "screen_reader": "Exportar los detalles de la cuenta",
           "your_ln_address": "Tu Dirección Lightning:",
-          "tip_mobile": "Consejo: Use esta billetera con su dispositivo móvil",
           "scan_qr": "Importe esta billetera a Zeus o BlueWallet escaneando el código QR.",
           "waiting": "esperando datos de LndHub...",
           "export_uri": "URI de credenciales de LNDHub"

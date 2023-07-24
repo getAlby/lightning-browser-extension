@@ -332,7 +332,6 @@
           "screen_reader": "Eksportuj dane konta",
           "waiting": "oczekiwanie na dane LndHub...",
           "your_ln_address": "Twój adres Lightning:",
-          "tip_mobile": "Wskazówka: Użyj tego portfela na swoim urządzeniu mobilnym",
           "export_uri": "Adres LNDHub",
           "scan_qr": "Zaimportuj ten portfel do Zeusa lub BlueWallet skanując kod QR."
         },

@@ -443,7 +443,6 @@
           "screen_reader": "Kontodaten exportieren",
           "waiting": "Warten auf LndHub Daten...",
           "your_ln_address": "Deine Lightning Adresse:",
-          "tip_mobile": "Tipp: Verwende diese Geldbörse mit deinem mobilen Gerät",
           "export_uri": "LNDHub Anmeldeinformationen URI",
           "scan_qr": "Importiere diese Wallet in Zeus oder BlueWallet, indem du den QRCode scannst."
         },

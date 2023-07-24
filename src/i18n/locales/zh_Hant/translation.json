@@ -360,7 +360,6 @@
           "screen_reader": "導出帳戶詳情",
           "waiting": "等待 LndHub 數據...",
           "your_ln_address": "你的閃電地址：",
-          "tip_mobile": "提示：將此錢包與你的行動裝置一起使用",
           "export_uri": "LNDHub 憑據 URI",
           "scan_qr": "通過掃描二維碼將此錢包導入Zeus或BlueWallet。"
         },
