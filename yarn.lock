@@ -1111,10 +1111,18 @@
     "@noble/hashes" "~1.3.1"
     "@scure/base" "~1.1.0"
 
-"@scure/bip39@1.2.0", "@scure/bip39@^1.2.0":
+"@scure/bip39@1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@scure/bip39/-/bip39-1.2.0.tgz#a207e2ef96de354de7d0002292ba1503538fc77b"
   integrity sha512-SX/uKq52cuxm4YFXWFaVByaSHJh2w3BnokVSeUJVCv6K7WulT9u2BuNRBhuFl8vAuYnzx9bEu9WgpcNYTrYieg==
+  dependencies:
+    "@noble/hashes" "~1.3.0"
+    "@scure/base" "~1.1.0"
+
+"@scure/bip39@^1.2.1":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@scure/bip39/-/bip39-1.2.1.tgz#5cee8978656b272a917b7871c981e0541ad6ac2a"
+  integrity sha512-Z3/Fsz1yr904dduJD0NpiyRHhRYHdcnyh73FZWiV+/qhWi83wNJ3NWolYqCEN+ZWsUz2TWwajJggcRE9r1zUYg==
   dependencies:
     "@noble/hashes" "~1.3.0"
     "@scure/base" "~1.1.0"
@@ -2237,10 +2245,10 @@ ajv@^8.9.0:
     require-from-string "^2.0.2"
     uri-js "^4.2.2"
 
-alby-js-sdk@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/alby-js-sdk/-/alby-js-sdk-2.0.0.tgz#417957b8a089653a96f8d4808e98a48baf628d6d"
-  integrity sha512-VbBM4sTOvbiMi2sWF/jaoBer006fQ7hYIwzi7puYti9aprxWt3qb2GwL24ZFytUhwH3uuX9XPzJhkCWGR0JMAA==
+alby-js-sdk@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/alby-js-sdk/-/alby-js-sdk-2.1.0.tgz#4c12dab8b3acfa927b0bd8789ee93bb9e80ede99"
+  integrity sha512-fpKDwT3vTkVgBmjTFVshw6yh3TITfEwMgYIT0f1l2EByJss7BcZ7CJjvrGYtIkhZMPWQm1g8dJuzpjAc6PKOlQ==
   dependencies:
     crypto-js "^4.1.1"
     nostr-tools "^1.10.0"
