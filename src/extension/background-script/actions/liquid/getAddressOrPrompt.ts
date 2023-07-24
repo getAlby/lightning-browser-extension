@@ -1,9 +1,12 @@
 import utils from "~/common/lib/utils";
+import {
+  addPermissionFor,
+  hasPermissionFor,
+} from "~/extension/background-script/permissions";
 import type { MessageGetLiquidAddress } from "~/types";
 import { PermissionMethodLiquid } from "~/types";
 
 import state from "../../state";
-import { addPermissionFor, hasPermissionFor } from "../nostr/helpers";
 
 const getAddressOrPrompt = async (message: MessageGetLiquidAddress) => {
   if (!("host" in message.origin)) {

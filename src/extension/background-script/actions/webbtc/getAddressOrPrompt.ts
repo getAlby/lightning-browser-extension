@@ -2,7 +2,7 @@ import utils from "~/common/lib/utils";
 import {
   addPermissionFor,
   hasPermissionFor,
-} from "~/extension/background-script/actions/nostr/helpers";
+} from "~/extension/background-script/permissions";
 import state from "~/extension/background-script/state";
 import { MessageGetAddress, PermissionMethodBitcoin } from "~/types";
 

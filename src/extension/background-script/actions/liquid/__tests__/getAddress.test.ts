@@ -35,7 +35,7 @@ jest.mock("~/common/lib/crypto", () => {
   };
 });
 
-jest.mock("~/extension/background-script/actions/nostr/helpers", () => {
+jest.mock("~/extension/background-script/permissions", () => {
   return {
     hasPermissionFor: jest.fn(() => true),
   };
