@@ -6,7 +6,6 @@ import {
   Token,
 } from "alby-js-sdk/dist/types";
 import browser from "webextension-polyfill";
-import { getAlbyAccountName } from "~/app/utils";
 import { decryptData, encryptData } from "~/common/lib/crypto";
 import { Account, OAuthToken } from "~/types";
 
@@ -113,13 +112,15 @@ export default class Alby implements Connector {
 
       const accounts = state.getState().accounts;
       if (this.account.id && this.account.id in accounts) {
-        // update the account info from backend
-        const accountName = getAlbyAccountName(info);
-        accounts[this.account.id].name = accountName;
-        accounts[this.account.id].avatarUrl = info.avatar;
-        state.setState({ accounts });
-        // make sure we immediately persist the updated accounts
-        await state.getState().saveToStorage();
+        // TODO: use static URLs based on user's lightning address,
+        // then this side effect to update the avatar can be removed
+        if (accounts[this.account.id].avatarUrl !== info.avatar) {
+          accounts[this.account.id].avatarUrl = info.avatar;
+
+          state.setState({ accounts });
+          // make sure we immediately persist the updated accounts
+          await state.getState().saveToStorage();
+        }
       }
 
       return {
