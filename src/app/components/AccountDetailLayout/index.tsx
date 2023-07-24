@@ -1,28 +1,19 @@
 import { CaretLeftIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import Header from "@components/Header";
 import IconButton from "@components/IconButton";
-import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Outlet, useMatch, useNavigate, useParams } from "react-router-dom";
 import Avatar from "~/app/components/Avatar";
-import api, { GetAccountRes } from "~/common/lib/api";
+import { useAccounts } from "~/app/context/AccountsContext";
 
 function AccountDetailLayout() {
   const navigate = useNavigate();
   const isRoot = useMatch("accounts/:id");
-
+  const { accounts } = useAccounts();
   const { t } = useTranslation("translation", {
     keyPrefix: "accounts.account_view",
   });
-  const [account, setAccount] = useState<GetAccountRes>();
   const { id } = useParams() as { id: string };
-
-  useEffect(() => {
-    (async () => {
-      const account = await api.getAccount(id);
-      setAccount(account);
-    })();
-  }, [id]);
 
   function back() {
     if (isRoot) {
@@ -31,6 +22,8 @@ function AccountDetailLayout() {
       navigate(`/accounts/${id}`);
     }
   }
+
+  const account = accounts[id];
 
   return (
     <>
@@ -46,7 +39,11 @@ function AccountDetailLayout() {
       {account && (
         <div className="border-b border-gray-200 dark:border-neutral-500 bg-white dark:bg-surface-02dp p-4">
           <div className="flex-row justify-center  space-x-2 flex items-center">
-            <Avatar name={account.id} size={32} />
+            <Avatar
+              size={32}
+              url={account?.avatarUrl}
+              name={account?.id || ""}
+            />
             <h2
               title={account.name}
               className="text-xl font-semibold dark:text-white overflow-hidden text-ellipsis whitespace-nowrap leading-1 my-2"
@@ -55,7 +52,7 @@ function AccountDetailLayout() {
             </h2>
           </div>
           <div className="flex-row justify-center flex items-center text-gray-500 text-sm dark:text-neutral-500">
-            {account.connectorType}
+            {account.connector}
           </div>
         </div>
       )}
