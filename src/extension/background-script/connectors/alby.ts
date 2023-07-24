@@ -1,10 +1,14 @@
 import { auth, Client } from "alby-js-sdk";
 import { RequestOptions } from "alby-js-sdk/dist/request";
-import { Invoice, Token } from "alby-js-sdk/dist/types";
+import {
+  GetAccountInformationResponse,
+  Invoice,
+  Token,
+} from "alby-js-sdk/dist/types";
 import browser from "webextension-polyfill";
 import { getAlbyAccountName } from "~/app/utils";
 import { decryptData, encryptData } from "~/common/lib/crypto";
-import { Account, AlbyAccountInformation, OAuthToken } from "~/types";
+import { Account, OAuthToken } from "~/types";
 
 import state from "../state";
 import Connector, {
@@ -62,7 +66,6 @@ export default class Alby implements Connector {
       "keysend",
       "makeInvoice",
       "sendPayment",
-      "signMessage",
       "getBalance",
     ];
   }
@@ -100,12 +103,12 @@ export default class Alby implements Connector {
   }
 
   async getInfo(): Promise<
-    GetInfoResponse<WebLNNode & AlbyAccountInformation>
+    GetInfoResponse<WebLNNode & GetAccountInformationResponse>
   > {
     try {
-      const info = (await this._request((client) =>
+      const info = await this._request((client) =>
         client.accountInformation({})
-      )) as AlbyAccountInformation; // TODO: remove type once alby-js-sdk is updated
+      );
 
       const accounts = state.getState().accounts;
       if (this.account.id && this.account.id in accounts) {
@@ -231,6 +234,7 @@ export default class Alby implements Connector {
         client_id: clientId,
         client_secret: clientSecret,
         callback: redirectURL,
+        user_agent: `lightning-browser-extension:${process.env.VERSION}`,
         scopes: [
           "invoices:read",
           "account:read",
@@ -331,11 +335,7 @@ export default class Alby implements Connector {
       result = await func(client);
     } catch (error) {
       console.error(error);
-      // handle AlbyResponseError in alby-js-sdk
-      // TODO: undo this change once AlbyResponseError `message` field is set.
-      if ((error as { error: Error }).error) {
-        throw (error as { error: Error }).error;
-      }
+
       throw error;
     } finally {
       const newToken = this._authUser.token;
