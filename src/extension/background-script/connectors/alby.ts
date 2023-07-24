@@ -39,7 +39,7 @@ interface Config {
 export default class Alby implements Connector {
   private account: Account;
   private config: Config;
-  private _clientPromise: Promise<Client> | undefined;
+  private _client: Client | undefined;
   private _authUser: auth.OAuth2User | undefined;
 
   constructor(account: Account, config: Config) {
@@ -48,8 +48,15 @@ export default class Alby implements Connector {
   }
 
   async init() {
-    // not needed - client is created when the first connector method is called
-    return;
+    try {
+      this._authUser = await this.authorize();
+      this._client = new Client(this._authUser, this._getRequestOptions());
+    } catch (error) {
+      console.error("Failed to initialize alby connector", error);
+      this._authUser = undefined;
+      this._client = undefined;
+      await this.unload();
+    }
   }
 
   getOAuthToken(): OAuthToken | undefined {
@@ -299,34 +306,14 @@ export default class Alby implements Connector {
     await authClient.requestAccessToken(authToken);
   }
 
-  private async _getAlbyClient(): Promise<Client> {
-    if (this._clientPromise) {
-      return this._clientPromise;
-    }
-
-    this._clientPromise = new Promise<Client>((resolve, reject) => {
-      (async () => {
-        try {
-          this._authUser = await this.authorize();
-          resolve(new Client(this._authUser, this._getRequestOptions()));
-        } catch (error) {
-          reject(error);
-          this._clientPromise = undefined;
-        }
-      })();
-    });
-    return this._clientPromise;
-  }
-
   private async _request<T>(func: (client: Client) => T) {
-    const client = await this._getAlbyClient();
-    if (!this._authUser) {
-      throw new Error("this._authUser was not created");
+    if (!this._authUser || !this._client) {
+      throw new Error("Alby client was not initialized");
     }
     const oldToken = this._authUser?.token;
     let result: T;
     try {
-      result = await func(client);
+      result = await func(this._client);
     } catch (error) {
       console.error(error);
 
