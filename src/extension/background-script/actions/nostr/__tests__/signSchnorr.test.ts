@@ -3,7 +3,7 @@ import db from "~/extension/background-script/db";
 import Nostr from "~/extension/background-script/nostr";
 import { allowanceFixture } from "~/fixtures/allowances";
 import { permissionsFixture } from "~/fixtures/permissions";
-import type { MessageSignSchnorr, OriginData } from "~/types";
+import type { MessageSignSchnorr, OriginData, Sender } from "~/types";
 
 import signSchnorr from "../signSchnorrOrPrompt";
 
@@ -41,6 +41,14 @@ const message: MessageSignSchnorr = {
   },
 };
 
+const sender: Sender = {
+  documentId: "ALBY123",
+  documentLifecycle: "active",
+  id: "alby",
+  origin: `https://${allowanceInDB.host}`,
+  url: `https://${allowanceInDB.host}/test`,
+};
+
 const requestResponse = { data: "" };
 const fullNostr = {
   signSchnorr: jest.fn(() => Promise.resolve(requestResponse.data)),
@@ -61,15 +69,15 @@ afterEach(async () => {
 describe("signSchnorr", () => {
   describe("throws error", () => {
     test("if the host's allowance does not exist", async () => {
-      const messageWithUndefinedAllowanceHost = {
-        ...message,
-        origin: {
-          ...message.origin,
-          host: "some-host",
-        },
+      const senderWithUndefinedAllowanceHost = {
+        ...sender,
+        origin: `https://some-host.com`,
       };
 
-      const result = await signSchnorr(messageWithUndefinedAllowanceHost);
+      const result = await signSchnorr(
+        message,
+        senderWithUndefinedAllowanceHost
+      );
 
       expect(console.error).toHaveBeenCalledTimes(1);
       expect(result).toStrictEqual({
@@ -86,7 +94,7 @@ describe("signSchnorr", () => {
         },
       } as unknown as MessageSignSchnorr;
 
-      const result = await signSchnorr(messageWithoutSigHash);
+      const result = await signSchnorr(messageWithoutSigHash, sender);
 
       expect(console.error).toHaveBeenCalledTimes(1);
       expect(result).toStrictEqual({
@@ -100,7 +108,7 @@ describe("signSchnorr", () => {
       // prepare DB with matching permission
       await db.permissions.bulkAdd([permissionInDB]);
 
-      const result = await signSchnorr(message);
+      const result = await signSchnorr(message, sender);
 
       expect(result).toStrictEqual(requestResponse);
       expect(nostr.signSchnorr).toHaveBeenCalledWith(message.args.sigHash);
@@ -120,7 +128,7 @@ describe("signSchnorr", () => {
       };
       await db.permissions.bulkAdd([otherPermission]);
 
-      const result = await signSchnorr(message);
+      const result = await signSchnorr(message, sender);
 
       expect(utils.openPrompt).toHaveBeenCalledWith({
         args: {
@@ -141,7 +149,7 @@ describe("signSchnorr", () => {
       };
       await db.permissions.bulkAdd([disabledPermission]);
 
-      const result = await signSchnorr(message);
+      const result = await signSchnorr(message, sender);
 
       expect(utils.openPrompt).toHaveBeenCalledWith({
         args: {
@@ -170,7 +178,7 @@ describe("signSchnorr", () => {
         await db.permissions.get({ method: "nostr/signSchnorr" })
       ).toBeUndefined();
 
-      const result = await signSchnorr(message);
+      const result = await signSchnorr(message, sender);
 
       expect(utils.openPrompt).toHaveBeenCalledTimes(1);
 
@@ -208,7 +216,7 @@ describe("signSchnorr", () => {
         await db.permissions.get({ method: "nostr/signSchnorr" })
       ).toBeUndefined();
 
-      const result = await signSchnorr(message);
+      const result = await signSchnorr(message, sender);
 
       expect(utils.openPrompt).toHaveBeenCalledTimes(1);
 
@@ -236,7 +244,7 @@ describe("signSchnorr", () => {
         await db.permissions.get({ method: "nostr/signSchnorr" })
       ).toBeUndefined();
 
-      const result = await signSchnorr(message);
+      const result = await signSchnorr(message, sender);
 
       expect(utils.openPrompt).toHaveBeenCalledTimes(1);
 

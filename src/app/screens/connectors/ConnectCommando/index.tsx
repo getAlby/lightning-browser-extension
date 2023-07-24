@@ -47,7 +47,7 @@ export default function ConnectCommando() {
 
   function generateCommandoPrivateKey(): string {
     const privKey = secp256k1.utils.randomPrivateKey();
-    return secp256k1.utils.bytesToHex(privKey);
+    return secp256k1.etc.bytesToHex(privKey);
   }
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {

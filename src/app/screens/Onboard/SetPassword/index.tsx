@@ -34,9 +34,9 @@ export default function SetPassword() {
 
   const unlockScreenshot = (
     <img
-      src="assets/images/unlock_screenshot.png"
+      src="assets/images/unlock_passcode.png"
       alt="Unlock screen"
-      className="w-64"
+      className="h-44"
     />
   );
 
@@ -48,10 +48,10 @@ export default function SetPassword() {
             {t("title")}
           </h1>
 
-          <p className="text-gray-500 mt-4 dark:text-gray-400">
+          <p className="text-gray-500 my-5 dark:text-gray-400">
             {t("description")}
           </p>
-          <div className="my-6 w-full flex justify-center">
+          <div className="w-full flex justify-center short:hidden my-5">
             {unlockScreenshot}
           </div>
           <div>

@@ -4,7 +4,6 @@ import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import ContentMessage from "@components/ContentMessage";
 import Header from "@components/Header";
 import IconButton from "@components/IconButton";
-import PublisherCard from "@components/PublisherCard";
 import ResultCard from "@components/ResultCard";
 import SatButtons from "@components/SatButtons";
 import DualCurrencyField from "@components/form/DualCurrencyField";
@@ -29,15 +28,19 @@ function Keysend() {
   const navState = useNavigationState();
   const navigate = useNavigate();
   const auth = useAccount();
-  const [amountSat, setAmountSat] = useState(navState.args?.amount || "");
-  const customRecords = navState.args?.customRecords;
-  const destination = navState.args?.destination as string;
+  const [amountSat, setAmountSat] = useState(navState?.args?.amount || "1");
+  const customRecords = navState?.args?.customRecords;
+  const destination = navState?.args?.destination as string;
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [fiatAmount, setFiatAmount] = useState("");
 
   const { t } = useTranslation("translation", { keyPrefix: "keysend" });
   const { t: tCommon } = useTranslation("common");
+
+  const amountMin = 1;
+  const amountExceeded = +amountSat > (auth?.account?.balance || 0);
+  const rangeExceeded = +amountSat < amountMin;
 
   useEffect(() => {
     (async () => {
@@ -110,29 +113,33 @@ function Keysend() {
           <form onSubmit={handleSubmit} className="h-full">
             <Container justifyBetween maxWidth="sm">
               <div>
-                {destination && <PublisherCard title={destination} />}
                 <ContentMessage
                   heading={t("receiver.label")}
                   content={destination}
                 />
-                <div className="p-4 shadow bg-white dark:bg-surface-02dp rounded-lg overflow-hidden">
-                  <DualCurrencyField
-                    id="amount"
-                    label={t("amount.label")}
-                    min={1}
-                    onChange={(e) => setAmountSat(e.target.value)}
-                    value={amountSat}
-                    fiatValue={fiatAmount}
-                  />
-                  <SatButtons onClick={setAmountSat} />
-                </div>
+                <DualCurrencyField
+                  id="amount"
+                  label={t("amount.label")}
+                  min={1}
+                  onChange={(e) => setAmountSat(e.target.value)}
+                  value={amountSat}
+                  fiatValue={fiatAmount}
+                  hint={`${tCommon("balance")}: ${
+                    auth?.balancesDecorated?.accountBalance
+                  }`}
+                  amountExceeded={amountExceeded}
+                  rangeExceeded={rangeExceeded}
+                />
+                <SatButtons onClick={setAmountSat} />
               </div>
-              <ConfirmOrCancel
-                label={tCommon("actions.confirm")}
-                onCancel={reject}
-                loading={loading}
-                disabled={loading || !amountSat}
-              />
+              <div className="mt-8">
+                <ConfirmOrCancel
+                  label={tCommon("actions.confirm")}
+                  onCancel={reject}
+                  loading={loading}
+                  disabled={loading || rangeExceeded || amountExceeded}
+                />
+              </div>
             </Container>
           </form>
         </>

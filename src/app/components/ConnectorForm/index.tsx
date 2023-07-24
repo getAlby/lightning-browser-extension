@@ -83,7 +83,7 @@ function ConnectorForm({
         <div>{children}</div>
       </div>
 
-      <div className="mb-4 mt-8 md:my-8 flex flex-col-reverse justify-center gap-4 md:flex-row">
+      <div className="mb-4 mt-8 flex justify-center">
         <Button
           type="submit"
           label={submitLabel}

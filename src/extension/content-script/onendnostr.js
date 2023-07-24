@@ -14,7 +14,7 @@ const nostrCalls = [
   "nostr/encryptOrPrompt",
   "nostr/decryptOrPrompt",
 ];
-// calls that can be executed when webln is not enabled for the current content page
+// calls that can be executed when nostr is not enabled for the current content page
 const disabledCalls = ["nostr/enable"];
 
 let isEnabled = false; // store if nostr is enabled for this content page
@@ -29,7 +29,7 @@ async function init() {
 
   // message listener to listen to inpage nostr calls
   // those calls get passed on to the background script
-  // (the inpage script can not do that directly, but only the inpage script can make webln available to the page)
+  // (the inpage script can not do that directly, but only the inpage script can make nostr available to the page)
   window.addEventListener("message", (ev) => {
     // Only accept messages from the current window
     if (

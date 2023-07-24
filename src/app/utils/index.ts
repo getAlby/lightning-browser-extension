@@ -1,3 +1,4 @@
+import { GetAccountInformationResponse } from "alby-js-sdk/dist/types";
 import { useSettings } from "~/app/context/SettingsContext";
 import api from "~/common/lib/api";
 import { BrowserType, Theme } from "~/types";
@@ -50,6 +51,28 @@ export function getBrowserType(): BrowserType {
   return DEFAULT_BROWSER;
 }
 
-export function isAlbyAccount(alias = "") {
-  return alias === "🐝 getalby.com";
+export function isAlbyLNDHubAccount(alias = "", connectorType = "") {
+  return alias === "🐝 getalby.com" && connectorType === "lndhub";
+}
+export function isAlbyOAuthAccount(connectorType = "") {
+  return connectorType === "alby";
+}
+
+export function getAlbyAccountName(info: GetAccountInformationResponse) {
+  // legacy accounts may not have either an email address or lightning address
+  return info.email || info.lightning_address || "getalby.com";
+}
+
+// to extract lightning data associated with the lightning tag within the URL. eg. LNBits QR codes
+// look like this: https://lnbits.example.com?lightning=LNURL
+export function extractLightningTagData(url: string) {
+  const reqExp = /lightning=([^&|\b]+)/i;
+
+  const data = url.match(reqExp);
+
+  if (data) {
+    return data[1];
+  } else {
+    return url.replace(/^lightning:/i, "");
+  }
 }

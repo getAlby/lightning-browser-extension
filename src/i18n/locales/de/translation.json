@@ -2,15 +2,15 @@
   "translation": {
     "welcome": {
       "set_password": {
-        "title": "Entsperrkennwort festlegen",
-        "description": "Dieses Kennwort wird verwendet, um deine Wallet zu schützen und den Zugriff auf die Browser-Erweiterung zu ermöglichen. Es kann nicht zurückgesetzt werden und ist unabhängig von deinem Alby-Konto-Kennwort.",
+        "title": "Einen Passcode zum Entsperren festlegen",
+        "description": "Mit diesem Passcode kannst du Alby auf diesem Gerät entsperren. Er kann nicht wiederhergestellt werden, kann aber später geändert werden.",
         "choose_password": {
-          "label": "Wähle ein Entsperrkennwort:"
+          "label": "Wähle einen Passcode zum Entsperren:"
         },
         "errors": {
-          "mismatched_password": "Kennwörter stimmen nicht überein.",
-          "enter_password": "Bitte gib ein Kennwort ein.",
-          "confirm_password": "Bitte bestätige dein Kennwort."
+          "mismatched_password": "Die Passwörter stimmen nicht überein.",
+          "enter_password": "Bitte gebe einen Passcode ein.",
+          "confirm_password": "Bitte bestätige deinen Passcode."
         },
         "confirm_password": {
           "label": "Vergewisse dich, dass du es richtig eingegeben hast:"
@@ -21,7 +21,7 @@
         "actions": {
           "delete_edit_account": "Ungültiges Konto löschen und erneut bearbeiten"
         },
-        "ready": "Großartig, du bist startklar!",
+        "ready": "Großartig, du bist bereit für den Einsatz!",
         "initializing": "Dein Konto wird initialisiert. Bitte warte, dies kann eine Minute dauern...",
         "connection_error": "Verbindungsfehler",
         "connection_taking_long": "Der Verbindungsversuch dauert länger als erwartet... Sind deine Angaben korrekt? Ist deine Node erreichbar?",
@@ -32,12 +32,11 @@
         "title": "Pin für die Alby Erweiterung",
         "description": "Du bist fast am Ziel. Um Alby bequem nutzen zu können, musst du deine Erweiterung an die Browser Symbolleiste anheften:",
         "next_btn": "Beginne mit Alby {{icon}}",
-        "explanation": "1. Klicke auf <0/> in der oberen rechten Ecke deines Browsers<1/>2. Suche Alby und klicke, um es an die Symbolleiste anzuheften<1/>3. Das war es. Um auf Alby zuzugreifen, klicke einfach auf das Symbol <2/>."
+        "explanation": "1. Klicke auf <0/> in der oberen rechten Ecke deines Browsers<1/>2. Suche das Symbol für Alby und klicke, um es an die Symbolleiste anzuheften<1/>3. Das war es. Um auf Alby zuzugreifen, klicke einfach auf das Symbol <2/>"
       }
     },
     "choose_connector": {
       "lnd": {
-        "or": "OR",
         "drag_and_drop": "Ziehe und lege deine Macaroon hier ab oder <0>durchsuche</0>",
         "errors": {
           "connection_failed": "Verbindung fehlgeschlagen. Sind deine LND-Anmeldeinformationen korrekt?"
@@ -193,20 +192,17 @@
         "sms_code": {
           "label": "Gib deinen SMS-Bestätigungscode ein"
         },
-        "jwt": {
+        "token": {
           "label": "Gebe deinen JWT Token ein",
           "info": "Das {{label}}-Login wird derzeit aktualisiert. Wenn du ein fortgeschrittener Benutzer bist, kannst du dir dein JWT-Token holen, indem du über <0>Web Wallet (wallet.mainnet.galoy.io)</0><1/><1/> anmeldest. Das JWT sieht so aus: < 2>eyJhbG...</2><1/><1/>"
         },
         "actions": {
-          "login": "Anmeldung",
-          "request_sms_code": "SMS-Code anfordern"
+          "login": "Anmeldung"
         },
         "errors": {
-          "failed_to_request_sms": "SMS-Code konnte nicht angefordert werden",
-          "failed_to_login_sms": "Anmeldung mit SMS Code fehlgeschlagen",
           "setup_failed": "Einrichtung fehlgeschlagen",
-          "missing_jwt": "JWT fehlt, Anmeldung nicht möglich.",
-          "invalid_jwt": "ungültige JWT übermittelt"
+          "missing_token": "JWT fehlt, Anmeldung nicht möglich.",
+          "invalid_token": "ungültige JWT übermittelt"
         }
       },
       "btcpay": {
@@ -302,17 +298,17 @@
     "unlock": {
       "unlock_error": {
         "link": "Zurücksetzen und neuen Account erstellen",
-        "help": "Deine Kontodaten werden mit deinem Entsperrkennwort verschlüsselt. Wenn du dein Entsperrkennwort wirklich vergessen hast, musst du dein Lightning-Konto zurücksetzen und erneut hinzufügen."
+        "help": "Deine Kontodaten werden mit deinem Freischalt-Passcode verschlüsselt. Wenn du deinen Freischaltcode wirklich vergessen hast, musst du dein Lightning Account zurücksetzen und erneut hinzufügen."
       },
       "errors": {
-        "invalid_password": "Ungültiges Kennwort"
+        "invalid_password": "Ungültiger Passcode"
       },
       "unlock_to_continue": "Freigeben zum Fortfahren",
       "help_contact": {
         "part1": "Brauchst du Hilfe? Kontaktiere uns",
         "part2": "Alby-Unterstützung"
       },
-      "unlock_password": "Dein Entsperrkennwort"
+      "unlock_password": "Ihr Entsperr-Passwort"
     },
     "settings": {
       "nostr": {
@@ -347,21 +343,21 @@
       "title": "Einstellungen",
       "change_password": {
         "choose_password": {
-          "label": "Gib ein neues Entsperrkennwort ein:"
+          "label": "Gebe einen neuen Passcode zum Entsperren ein:"
         },
         "submit": {
           "label": "Ändern"
         },
         "errors": {
-          "enter_password": "Bitte gib ein neues Entsperrkennwort ein.",
-          "confirm_password": "Bitte bestätige dein Kennwort.",
-          "mismatched_password": "Kennwörter stimmen nicht überein."
+          "enter_password": "Bitte gebe einen neuen Passcode zum Entsperren ein.",
+          "confirm_password": "Bitte bestätige dein Passcode.",
+          "mismatched_password": "Die Passwörter stimmen nicht überein."
         },
-        "success": "Kennwort erfolgreich geändert",
-        "title": "Entsperrkennwort ändern",
-        "screen_reader": "Entsperrkennwort ändern",
+        "success": "Passcode erfolgreich geändert",
+        "title": "Passcode zum Entsperren ändern",
+        "screen_reader": "Passcode zum Entsperren ändern",
         "confirm_password": {
-          "label": "Neues Kennwort bestätigen:"
+          "label": "Bestätige den neuen Passcode:"
         }
       },
       "theme": {
@@ -413,8 +409,10 @@
       "default_view": {
         "is_blocked_hint": "Alby ist derzeit auf dem {{host}} deaktiviert",
         "recent_transactions": "Jüngste Transaktionen",
-        "no_transactions": "Es wurden noch keine Transaktionen mit Alby getätigt.",
-        "block_removed": "{{host}} aktiviert. Bitte lade die Website neu."
+        "block_removed": "{{host}} aktiviert. Bitte lade die Website neu.",
+        "all_transactions_link": "Alle Transaktionen anzeigen",
+        "no_outgoing_transactions": "Noch keine ausgehenden Transaktionen für dieses Konto.",
+        "no_incoming_transactions": "Noch keine eingehenden Transaktionen für dieses Konto."
       },
       "allowance_view": {
         "sats_used": "verwendete Sats",
@@ -425,12 +423,6 @@
       "actions": {
         "send_satoshis": "⚡️ Satoshis senden ⚡️",
         "enable_now": "Jetzt aktivieren"
-      },
-      "transaction_list": {
-        "tabs": {
-          "outgoing": "Ausgehend",
-          "incoming": "Eingehend"
-        }
       },
       "recent_transactions": "Jüngste Transaktionen"
     },
@@ -443,8 +435,8 @@
         "title2": "Konto bearbeiten",
         "title1": "Konto Informationen",
         "name": {
-          "title": "Name",
-          "placeholder": "Konto Name"
+          "title": "Name anzeigen",
+          "placeholder": "Konto Anzeigename"
         },
         "export": {
           "title": "Konto exportieren",
@@ -458,17 +450,16 @@
         "nostr": {
           "title": "Nostr",
           "private_key": {
-            "title": "Verwalten von deinen Schlüssel",
-            "subtitle": "Füge deinen privaten Schlüssel ein oder erzeuge einen neuen. <0>Mehr erfahren\"</0>",
-            "warning": "Bitte gebe den Namen des Kontos ein, um die Löschung des privaten Schlüssels zu bestätigen:",
-            "success": "Privater Schlüssel erfolgreich verschlüsselt und gespeichert.",
-            "successfully_removed": "Privater Schlüssel erfolgreich entfernt.",
-            "label": "Privater Schlüssel",
-            "failed_to_remove": "Der eingegebene Kontoname stimmt nicht überein, dein alter Privatname wurde wiederhergestellt.",
-            "backup": "Vergesse nicht, deinen privaten Schlüssel zu sichern! Wenn du deinen Schlüssel nicht sicherst, kannst du den Zugang verlieren."
+            "title": "Verwalte deinen privaten Nostr-Schlüssel",
+            "subtitle": "Füge deinen eigenen privaten Schlüssel ein oder erzeuge einen neuen. <0>Mehr erfahren\"</0>",
+            "warning": "Bitte gebe deinen Namen des Kontos ein, um die Löschung des privaten Schlüssels von nostr zu bestätigen:",
+            "success": "Der private Schlüssel von Nostr wurde erfolgreich verschlüsselt und gespeichert.",
+            "successfully_removed": "Der private Schlüssel von Nostr wurde erfolgreich entfernt.",
+            "label": "Nostr Privater Schlüssel",
+            "failed_to_remove": "Der eingegebene Kontoname stimmt nicht überein, dein alter privater Nostr-Schlüssel wurde wiederhergestellt."
           },
           "public_key": {
-            "label": "Öffentlicher Schlüssel"
+            "label": "Nostr Öffentlicher Schlüssel"
           },
           "generate_keys": {
             "title": "Erzeugen eines neuen Nostr Schlüssels",
@@ -485,16 +476,82 @@
           "hint": "ist ein einfaches und offenes Protokoll, das darauf abzielt, zensurresistente soziale Netzwerke zu schaffen. Nostr arbeitet mit kryptographischen Schlüsseln. Um etwas zu veröffentlichen, signiere es mit deinem Schlüssel und senden es an mehrere Relays. Du kannst Alby verwenden, um seinen Nostr-Schlüssel zu verwalten. Viele Nostr-Anwendungen erlauben dir dann, einfach den Schlüssel aus der Alby-Erweiterung zu verwenden.",
           "errors": {
             "failed_to_load": "Der Nostr Schlüssel konnte nicht geladen werden. Ist es ein gültiger Nostr Schlüssel?"
+          },
+          "settings": {
+            "label": "Nostr Einstellungen",
+            "title": "Nostr Einstellungen",
+            "description": "Leite dein Nostr-Schlüssel von deinem geheimen Schlüssel ab oder importiere den vorhandenen privaten Schlüssel, indem du in das Feld \"Nostr Private Key\" einfügst.",
+            "imported_key_warning": "⚠️ Du verwendest derzeit einen importierten oder zufällig generierten Nostr-Schlüssel. Dein privater Nostr-Schlüssel kann nicht durch deinem geheimen Schlüssel wiederhergestellt werden, denke also daran, deinen privaten Nostr-Schlüssel zu sichern.",
+            "can_restore": "✅ Nostr-Schlüssel, abgeleitet von deinem geheimen Schlüssel",
+            "derive": "Ableitung von Nostr-Schlüsseln aus deinem Geheimschlüssel",
+            "delete": "Aktuelle Tasten löschen",
+            "no_secret_key": "💡 Du hast noch keinen geheimen Schlüssel. <0>Klicken Sie hier</0></div>, um deinen geheimen Schlüssel zu erstellen und dein nostr Schlüssel abzuleiten."
           }
         },
         "remove": {
           "title": "Dieses Konto entfernen",
-          "subtitle": "Alle verknüpften Zertifikate werden gelöscht. Bitte sei dir sicher.",
-          "confirm": "Bist du sicher, dass du das Konto entfernen möchtest: {{name}}? \nDies kann nicht rückgängig gemacht werden. Wenn du dich mit diesem Konto bei Webseiten angemeldet hast, könntest du den Zugang zu diesen verlieren."
+          "subtitle": "Entfernt alle Zulagen, Zahlungsdaten und Schlüssel, die mit diesem Konto verbunden sind.",
+          "confirm": "Bist du sicher, dass du das Konto entfernen möchtest: {{name}}? \nDies kann nicht rückgängig gemacht werden. Wenn du dich mit diesem Konto bei Webseiten angemeldet hast, könntest du den Zugang zu diesen verlieren.",
+          "error": "Der eingegebene Kontoname stimmte nicht überein."
         },
         "actions": {
           "remove_account": "Konto entfernen",
-          "export": "Exportieren"
+          "export": "Exportieren",
+          "remove_secretkey": "Geheimen Schlüssel entfernen"
+        },
+        "mnemonic": {
+          "title": "Geheimer Schlüssel",
+          "backup": {
+            "protocols": {
+              "nostr": "Nostr"
+            },
+            "title": "Sichere deinen geheimen Schlüssel",
+            "save": "Geheimschlüssel speichern",
+            "button": "Geheimschlüssel sichern",
+            "warning": "⚠️ Vergesse nicht, deinen geheimen Schlüssel zu sichern! Wenn du ihn nicht sicherst, kann dies dazu führen, dass du den Zugang zu deiner Nostr-Identität oder den von deinen mit diesem Schlüssel verwalteten Vermögenswerten dauerhaft verlierst.",
+            "description1": "Zusätzlich zum Bitcoin Lightning Network ermöglicht Alby die Generierung von Schlüsseln und die Interaktion mit anderen Protokollen wie z.B.:",
+            "description2": "Dein Geheimschlüssel besteht aus 12 Wörtern, mit denen du auf einem neuen Gerät oder bei Verlust des Zugangs zu deinem Konto auf deine Schlüssel zu diesen Protokollen zugreifen kannst. Schreibe ihn auf ein Blatt Papier und bewahre ihn sicher auf:"
+          },
+          "description2": "Dein Geheimschlüssel besteht aus 12 Wörtern, die es dir ermöglichen, deine Schlüssel für Protokolle wie Nostr auf einem neuen Gerät abzurufen oder falls du den Zugang zu deinem Konto verlierst.",
+          "saved": "Geheimschlüssel verschlüsselt und erfolgreich gespeichert.",
+          "generate": {
+            "title": "Erzeuge einen geheimen Schlüssel",
+            "button": "Geheimen Schlüssel generieren",
+            "confirm": "Ich habe den geheimen Schlüssel meines Kontos an einem privaten und sicheren Ort aufbewahrt.",
+            "error_confirm": "Bitte bestätige, dass du eine Sicherungskopie deines geheimen Schlüssels erstellt hast."
+          },
+          "import": {
+            "title": "Importieren eines geheimen Schlüssels",
+            "description": "Verwende einen vorhandenen Geheimschlüssel, um deine abgeleiteten Schlüssel wiederherzustellen.",
+            "confirm_overwrite": "Du hast bereits einen geheimen Schlüssel, bist du sicher, dass du ihn überschreiben willst?",
+            "button": "Geheimen Schlüssel importieren"
+          },
+          "inputs": {
+            "title": "Dein geheimer Schlüssel"
+          },
+          "description": "Mit deinem geheimen Kontoschlüssel kannst du Alby verwenden, um mit Protokollen wie Nostr zu interagieren.",
+          "existing_nostr_key_notice": "⚠️ Für dieses Konto wurde bereits ein privater nostr-Schlüssel festgelegt und wird nicht von diesem geheimen Schlüssel abgeleitet. Du kannst deinen nostr-Schlüssel in deiner Kontoeinstellungen verwalten.",
+          "lnurl": {
+            "title": "Anmeldung mit Lightning",
+            "use_mnemonic": "Verwende den geheimen Schlüssel für die Anmeldung bei Lightning-basierten Anwendungen (LNURL-Auth)"
+          }
+        },
+        "bitcoin": {
+          "network": {
+            "title": "Bitcoin-Netzwerk",
+            "subtitle": "Wähle ein Netz zur Ableitung von Adressen und zur Entschlüsselung von Transaktionen",
+            "options": {
+              "bitcoin": "Mainnet",
+              "testnet": "Testnet",
+              "regtest": "Regtest"
+            }
+          }
+        },
+        "remove_secretkey": {
+          "title": "Geheimen Schlüssel entfernen",
+          "subtitle": "Entfernt den geheimen Schlüssel von diesem Konto.",
+          "confirm": "Bitte gebe deinen Namen des Kontos ein, um die Löschung deines Geheimschlüssels zu bestätigen.",
+          "success": "Der geheime Schlüssel wurde erfolgreich entfernt."
         }
       }
     },
@@ -523,7 +580,8 @@
         "label": "Beschreibung",
         "placeholder": "Zum Beispiel: Wer schickt diese Zahlung?"
       },
-      "success": "Zahlung erhalten!"
+      "success": "Zahlung erhalten!",
+      "receive_via_bitcoin_address": "Empfangen über Bitcoin Adresse"
     },
     "publishers": {
       "publisher": {
@@ -676,35 +734,6 @@
     },
     "alby": {
       "pre_connect": {
-        "email": {
-          "login": {
-            "label": "Email Adresse oder Lightning Adresse"
-          },
-          "create": {
-            "label": "Email Adresse"
-          }
-        },
-        "login_account": "Melde dich an, um dein bestehendes Alby-Konto zu verbinden.",
-        "host_wallet": "Wir hosten die Lightning Wallet für dich!",
-        "optional_lightning_note": {
-          "part3": ". Dies ist eine einfache Möglichkeit für jeden, dir Bitcoin über das Lightning-Netzwerk zu senden.",
-          "part1": "Dein Alby-Konto enthält außerdem ein optionales",
-          "part2": "Lightning Adresse",
-          "part4": "mehr erfahren"
-        },
-        "create_account": "Erstelle ein neues Alby-Konto, um Bitcoin-Zahlungen zu senden und zu empfangen.",
-        "optional_lightning_address": {
-          "suffix": "@getalby.com",
-          "label": "Wähle deine Lightning-Adresse (optional)",
-          "title": "Zahlen und Buchstaben, mindestens 4 Stellen"
-        },
-        "errors": {
-          "create_wallet_error": "Du konntest dich nicht anmelden oder ein neues Konto erstellen. Wenn du Hilfe benötigst, wende dich bitte an den support@getalby.com",
-          "create_wallet_error1": "Du konntest dich nicht anmelden oder ein neues Konto erstellen.",
-          "create_wallet_error2": "Wenn du Hilfe benötigst, wende dich bitte an support@getalby.com"
-        },
-        "forgot_password": "Kennwort vergessen?",
-        "title": "Dein Alby-Konto",
         "set_password": {
           "choose_password": {
             "label": "Kennwort"
@@ -730,7 +759,7 @@
       "alby": {
         "title": "Alby Konto",
         "description": "Melde dich an oder verwende dein bestehendes Alby-Konto, um im Handumdrehen mit Lightningzahlungen zu beginnen.",
-        "create_new": "Anmelden"
+        "connect": "Mit Alby verbinden"
       }
     },
     "discover": {
@@ -749,28 +778,27 @@
       "tips": {
         "title": "Deine Alby-Wallet ist bereit",
         "top_up_wallet": {
-          "description": "Erstelle eine Lightning-Rechnung, sende dir selbst Bitcoin und nutze das Alby im Lightning-Ökosystem",
-          "title": "⚡️ Wallet aufladen",
-          "label1": "Bitcoin erhalten",
-          "label2": "Bitcoin kaufen"
+          "description": "Brauchst du eine Auffrischung?\nWir haben Sie!",
+          "title": "Bitcoin kaufen"
         },
         "demo": {
-          "description": "Entdecke alles, was du mit Alby tun könntest, auf unserer Demo-Website",
-          "title": "🕹️ Alby Demo ausprobieren",
-          "label1": "Probiere es aus"
+          "description": "Entdecke die Funktionen von Alby\nauf unserer Demo Website",
+          "title": "Alby Demo"
         },
-        "address": {
-          "description": "Erstelle eine eigene Lightningadresse und empfange Lightningzahlungen einfach per E-Mail",
-          "title": "Eine Lightning Adresse erhalten",
-          "label1": "Hole es dir jetzt!"
-        },
-        "description": "Ein paar Tipps für den Anfang 🐝"
+        "description": "Ein paar Tipps für den Anfang 🐝",
+        "mnemonic": {
+          "title": "Nostr",
+          "description": "Plane die Nutzung von Nostr?\nGeneriere jetzt deinen Schlüssel."
+        }
       }
     },
     "transactions": {
       "title": "Transaktionen",
-      "description": "Ausgehende Transaktionen über alle deine Konten",
-      "list_empty": "Noch keine Transaktionen verfügbar."
+      "list_empty": "Noch keine Transaktionen verfügbar.",
+      "description": {
+        "outgoing": "Ausgehende Transaktionen für dieses Konto",
+        "incoming": "Eingehende Transaktionen für dieses Konto"
+      }
     },
     "distributions": {
       "title": "Verbinden mit {{Name}}",
@@ -793,6 +821,22 @@
       "start9": {
         "name": "Start9"
       }
+    },
+    "confirm_add_account": {
+      "title": "Konto hinzufügen",
+      "content": "Diese Website möchte ein Konto hinzufügen ({{connector}}):",
+      "tor_info": "Um sich über das TOR-Netzwerk zu verbinden, musst du zunächst die Alby-Begleit-App installieren:"
+    },
+    "on_chain": {
+      "title": "Empfangen über Bitcoin Adresse",
+      "instructions2": "Du kannst deine Bitcoin-Adresse auf der Seite <0>Empfangen</0> finden.",
+      "go": "Gehe zu deinem Alby Account →",
+      "instructions1": "Um Bitcoin über eine Bitcoin-Adresse zu erhalten, melde dich bei deinem <0>Alby-Account</0> auf getalby.com an"
+    },
+    "confirm_get_address": {
+      "title": "Adresse abrufen",
+      "heading": "Diese Website bittet dich es zu lesen:",
+      "content": "Deine Bitcoin-Empfangsadresse"
     }
   },
   "components": {
@@ -802,7 +846,7 @@
           "add": "Füge einen neuen Account hinzu",
           "manage": "Konten verwalten",
           "account_settings": "Kontoeinstellungen",
-          "go_to_web_wallet": "Verwalte dein Alby-Konto"
+          "go_to_web_wallet": "Verwalte dein Web-Konto"
         }
       },
       "title": "Konto wechseln",
@@ -889,11 +933,18 @@
     "badge": {
       "label": {
         "active": "AKTIV",
-        "auth": "LOGIN"
+        "auth": "LOGIN",
+        "imported": "EINGEFÜHRT"
       }
     },
     "confirm_or_cancel": {
       "only_trusted": "Verbinde dich nur mit Websites, denen du vertraust."
+    },
+    "transaction_list": {
+      "tabs": {
+        "outgoing": "Ausgehend von",
+        "incoming": "Eingehend"
+      }
     }
   },
   "common": {
@@ -934,11 +985,16 @@
       "connect": "Verbinden",
       "save": "Speichern",
       "copy": "Kopieren",
-      "copy_invoice": "",
+      "copy_invoice": "Rechnung kopieren",
       "remember": "Denke an meine Wahl und frage nicht noch einmal",
       "receive_again": "Eine weitere Zahlung erhalten",
       "transactions": "Transaktionen",
-      "more": "Mehr"
+      "more": "Mehr",
+      "download": "Download",
+      "import": "Importieren",
+      "copy_clipboard": "In die Zwischenablage kopieren",
+      "paste": "Einfügen",
+      "paste_clipboard": "Einfügen aus der Zwischenablage"
     },
     "discover": "Entdecken",
     "errors": {
@@ -951,11 +1007,26 @@
     "accounts": "Konten",
     "range": {
       "between": "zwischen {{min}} und {{max}}",
-      "lessThan": "< {{max}}",
-      "greaterThan": "> {{min}}"
+      "lessThanOrEqual": "≤ {{max}}",
+      "greaterOrEqual": "≥ {{min}}"
     },
-    "transactions": "Transaktionen",
-    "balance": "Bilanz"
+    "balance": "Bilanz",
+    "wallet": "Wallet",
+    "connectors": {
+      "lnd": "LND",
+      "nativelnd": "LND (über Tor)",
+      "citadel": "Citadel",
+      "nativecitadel": "Citadel (über Tor)",
+      "commando": "Kommando",
+      "lnbits": "LNBits",
+      "lndhub": "LNDHub",
+      "nativelndhub": "LNDHub (über Tor)",
+      "nativelnbits": "LNBits (über Tor)",
+      "galoy": "Galoy",
+      "eclair": "Eclair"
+    },
+    "or": "oder",
+    "pasted": "Eingefügt!"
   },
   "permissions": {
     "commando": {

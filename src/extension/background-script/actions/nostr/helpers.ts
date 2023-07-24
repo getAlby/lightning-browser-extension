@@ -1,3 +1,4 @@
+import { schnorr } from "@noble/curves/secp256k1";
 import * as secp256k1 from "@noble/secp256k1";
 import Hex from "crypto-js/enc-hex";
 import sha256 from "crypto-js/sha256";
@@ -58,14 +59,14 @@ export async function addPermissionFor(method: string, host: string) {
   return !!permissionIsAdded && (await db.saveToStorage());
 }
 
-// from: https://github.com/nbd-wtf/nostr-tools/blob/160987472fd4922dd80c75648ca8939dd2d96cc0/event.ts#L61
+// based upon : https://github.com/nbd-wtf/nostr-tools/blob/b9a7f814aaa08a4b1cec705517b664390abd3f69/event.ts#L95
 // to avoid the additional dependency
 export function validateEvent(event: Event): boolean {
+  if (!(event instanceof Object)) return false;
+  if (typeof event.kind !== "number") return false;
   if (typeof event.content !== "string") return false;
   if (typeof event.created_at !== "number") return false;
-  // ignore these checks because if the pubkey is not set we add it to the event. same for the ID.
-  // if (typeof event.pubkey !== "string") return false;
-  // if (!event.pubkey.match(/^[a-f0-9]{64}$/)) return false;
+  // ignore pubkey checks because if the pubkey is not set we add it to the event. same for the ID.
 
   if (!Array.isArray(event.tags)) return false;
   for (let i = 0; i < event.tags.length; i++) {
@@ -96,8 +97,8 @@ export function serializeEvent(evt: Event): string {
 }
 
 export async function signEvent(event: Event, key: string) {
-  const signedEvent = await secp256k1.schnorr.sign(getEventHash(event), key);
-  return secp256k1.utils.bytesToHex(signedEvent);
+  const signedEvent = await schnorr.sign(getEventHash(event), key);
+  return secp256k1.etc.bytesToHex(signedEvent);
 }
 
 export function getEventHash(event: Event): string {

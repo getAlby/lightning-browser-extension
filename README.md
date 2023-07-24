@@ -1,5 +1,8 @@
 <p align="center">
-  <img width="300px" src="/doc/Alby-logo-figure-full.svg">
+  <picture>
+    <source srcset="/doc/logo-white.svg" media="(prefers-color-scheme: dark)" width="300">
+    <img alt="Alby Logo" src="/doc/logo-black.svg" width="300">
+  </picture>
 </p>
 
 <h1 align="center">Alby - Lightning Browser Extension</h1>
@@ -36,9 +39,9 @@ Alby is open-source and currently in alpha stage. Our goal is to create the best
 
 ## Join the conversation
 
-We have a channel on the [bitcoin.design](https://bitcoin.design/) Slack community [#lightning-browser-extension](https://bitcoindesign.slack.com/archives/C02591ADXM2) and a [Telegram group](https://t.me/getAlby). Come and join us!
-
-We also do a bi-weekly call on Thursday at [15:00 UTC](https://everytimezone.com/?t=642e0b80,ec4) on [Jitsi](https://meet.fulmo.org/AlbyCommunityCall)
+- [Discord](https://discord.gg/K7aQ5PErht) via [bitcoin.design](https://bitcoin.design/): Find us in the #alby channel
+- [Telegram](https://t.me/getAlby)
+- [Community calls](https://meet.fulmo.org/AlbyCommunityCall): bi-weekly on Thursday at [15:00 UTC](https://everytimezone.com/?t=642e0b80,ec4)
 
 ## Browser Support
 
