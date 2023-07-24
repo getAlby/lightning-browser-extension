@@ -109,20 +109,6 @@ export default class Alby implements Connector {
       const info = await this._request((client) =>
         client.accountInformation({})
       );
-
-      const accounts = state.getState().accounts;
-      if (this.account.id && this.account.id in accounts) {
-        // TODO: use static URLs based on user's lightning address,
-        // then this side effect to update the avatar can be removed
-        if (accounts[this.account.id].avatarUrl !== info.avatar) {
-          accounts[this.account.id].avatarUrl = info.avatar;
-
-          state.setState({ accounts });
-          // make sure we immediately persist the updated accounts
-          await state.getState().saveToStorage();
-        }
-      }
-
       return {
         data: {
           ...info,
