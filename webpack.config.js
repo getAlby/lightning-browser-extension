@@ -22,10 +22,24 @@ if (!process.env.ALBY_API_URL) {
   network = "testnet";
 }
 
-if (
-  !process.env.ALBY_OAUTH_CLIENT_ID &&
-  !process.env.ALBY_OAUTH_CLIENT_SECRET
-) {
+// release build (check for explicitly set env variables)
+const oauthBrowser =
+  process.env.TARGET_BROWSER === "firefox" ? "firefox" : "chrome";
+const clientId =
+  process.env[`ALBY_OAUTH_CLIENT_ID_${oauthBrowser.toUpperCase()}`];
+const clientSecret =
+  process.env[`ALBY_OAUTH_CLIENT_SECRET_${oauthBrowser.toUpperCase()}`];
+
+if (clientId && clientSecret) {
+  process.env.ALBY_OAUTH_CLIENT_ID = clientId;
+  process.env.ALBY_OAUTH_CLIENT_SECRET = clientSecret;
+
+  console.info(
+    "Using oAuth credentials from environment:",
+    clientId,
+    clientSecret
+  );
+} else {
   const oauthCredentials = {
     development: {
       testnet: {
@@ -63,16 +77,18 @@ if (
     },
   };
 
-  const oauthBrowser =
-    process.env.TARGET_BROWSER === "firefox" ? "firefox" : "chrome";
-
   // setup ALBY_OAUTH_CLIENT_ID
   const selectedOAuthCredentials =
     oauthCredentials[process.env.NODE_ENV]?.[network]?.[oauthBrowser];
   if (!selectedOAuthCredentials) {
     throw new Error("No OAuth credentials found for current configuration");
   }
-  console.info("Using OAuth credentials for", oauthBrowser, network);
+  console.info(
+    "Using OAuth credentials for",
+    process.env.NODE_ENV,
+    oauthBrowser,
+    network
+  );
   process.env.ALBY_OAUTH_CLIENT_ID = selectedOAuthCredentials.id;
   process.env.ALBY_OAUTH_CLIENT_SECRET = selectedOAuthCredentials.secret;
 }
