@@ -1,2 +1,4 @@
-export * from "~/extension/background-script/permissions/addPermissionFor";
-export * from "~/extension/background-script/permissions/hasPermissionFor";
+import { addPermissionFor } from "./addPermissionFor";
+import { hasPermissionFor } from "./hasPermissionFor";
+
+export { addPermissionFor, hasPermissionFor };
