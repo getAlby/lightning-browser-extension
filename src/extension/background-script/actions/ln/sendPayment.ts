@@ -38,9 +38,8 @@ export default async function sendPayment(
 
     if (typeof e === "string") {
       errorMessage = e;
-    } else if ((e as { message: string }).message) {
-      // TODO: change to e as Error once alby-js-sdk is updated
-      errorMessage = (e as { message: string }).message;
+    } else if ((e as Error).message) {
+      errorMessage = (e as Error).message;
     } else {
       errorMessage = "Something went wrong";
     }

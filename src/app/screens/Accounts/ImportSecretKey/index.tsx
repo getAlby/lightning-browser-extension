@@ -57,6 +57,7 @@ function ImportSecretKey() {
       }
 
       await api.setMnemonic(id, mnemonic);
+      await api.editAccount(id, { useMnemonicForLnurlAuth: true });
       toast.success(t("saved"));
       // go to account settings
       navigate(`/accounts/${id}`);

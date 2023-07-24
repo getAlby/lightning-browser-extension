@@ -1,4 +1,4 @@
-name: Build nightlies
+name: Build extension packages
 
 on:
   push:
@@ -13,7 +13,7 @@ jobs:
 
     name: build-prod
     env:
-      ALBY_API_URL: "https://getalby.com/api"
+      ALBY_API_URL: "https://api.getalby.com"
 
     permissions:
       issues: write
@@ -29,16 +29,16 @@ jobs:
       - run: yarn install
 
       - name: Build firefox
-        run: yarn build:firefox
         env:
-          ALBY_OAUTH_CLIENT_ID: ${{ secrets.ALBY_OAUTH_CLIENT_ID_FIREFOX }}
-          ALBY_OAUTH_CLIENT_SECRET: ${{ secrets.ALBY_OAUTH_CLIENT_SECRET_FIREFOX }}
+          ALBY_OAUTH_CLIENT_ID: ${{ vars.ALBY_OAUTH_CLIENT_ID_FIREFOX }}
+          ALBY_OAUTH_CLIENT_SECRET: ${{ vars.ALBY_OAUTH_CLIENT_SECRET_FIREFOX }}
+        run: yarn build:firefox
 
       - name: Build chrome
-        run: yarn build:chrome
         env:
-          ALBY_OAUTH_CLIENT_ID: ${{ secrets.ALBY_OAUTH_CLIENT_ID_CHROME }}
-          ALBY_OAUTH_CLIENT_SECRET: ${{ secrets.ALBY_OAUTH_CLIENT_SECRET_CHROME }}
+          ALBY_OAUTH_CLIENT_ID: ${{ vars.ALBY_OAUTH_CLIENT_ID_CHROME }}
+          ALBY_OAUTH_CLIENT_SECRET: ${{ vars.ALBY_OAUTH_CLIENT_SECRET_CHROME }}
+        run: yarn build:chrome
 
       - name: Archive firefox production zip file
         uses: actions/upload-artifact@v3

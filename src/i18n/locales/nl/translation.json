@@ -44,7 +44,6 @@
         "macaroon": {
           "label": "Macaroon (HEX formaat)"
         },
-        "or": "OF",
         "drag_and_drop": "Sleep en drop je macaroon here of <0>browse</0>",
         "errors": {
           "connection_failed": "Connectie gefaald. Zijn je LND credentials correct?"

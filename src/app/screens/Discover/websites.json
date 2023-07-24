@@ -109,6 +109,12 @@
         "url": "https://iris.to"
       },
       {
+        "title": "nostr.kiwi",
+        "subtitle": "Share notes and curate content in communities",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/nostrkiwi_thumbnail.png",
+        "url": "https://nostr.kiwi/"
+      },
+      {
         "title": "Notebin",
         "subtitle": "An online note sharing web client",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/notebin-logo.png",

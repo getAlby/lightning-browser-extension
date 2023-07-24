@@ -1,3 +1,4 @@
+import { schnorr } from "@noble/curves/secp256k1";
 import * as secp256k1 from "@noble/secp256k1";
 import { Buffer } from "buffer";
 import * as CryptoJS from "crypto-js";
@@ -17,10 +18,10 @@ class Nostr {
   }
 
   getPublicKey() {
-    const publicKey = secp256k1.schnorr.getPublicKey(
-      secp256k1.utils.hexToBytes(this.privateKey)
+    const publicKey = schnorr.getPublicKey(
+      secp256k1.etc.hexToBytes(this.privateKey)
     );
-    const publicKeyHex = secp256k1.utils.bytesToHex(publicKey);
+    const publicKeyHex = secp256k1.etc.bytesToHex(publicKey);
     return publicKeyHex;
   }
 
@@ -31,18 +32,18 @@ class Nostr {
   }
 
   async signSchnorr(sigHash: string): Promise<string> {
-    const signature = await secp256k1.schnorr.sign(
-      Buffer.from(secp256k1.utils.hexToBytes(sigHash)),
-      secp256k1.utils.hexToBytes(this.privateKey)
+    const signature = await schnorr.sign(
+      Buffer.from(secp256k1.etc.hexToBytes(sigHash)),
+      secp256k1.etc.hexToBytes(this.privateKey)
     );
-    const signedHex = secp256k1.utils.bytesToHex(signature);
+    const signedHex = secp256k1.etc.bytesToHex(signature);
     return signedHex;
   }
 
   encrypt(pubkey: string, text: string) {
     const key = secp256k1.getSharedSecret(this.privateKey, "02" + pubkey);
     const normalizedKey = Buffer.from(key.slice(1, 33));
-    const hexNormalizedKey = secp256k1.utils.bytesToHex(normalizedKey);
+    const hexNormalizedKey = secp256k1.etc.bytesToHex(normalizedKey);
     const hexKey = Hex.parse(hexNormalizedKey);
 
     const encrypted = AES.encrypt(text, hexKey, {
@@ -58,7 +59,7 @@ class Nostr {
     const [cip, iv] = ciphertext.split("?iv=");
     const key = secp256k1.getSharedSecret(this.privateKey, "02" + pubkey);
     const normalizedKey = Buffer.from(key.slice(1, 33));
-    const hexNormalizedKey = secp256k1.utils.bytesToHex(normalizedKey);
+    const hexNormalizedKey = secp256k1.etc.bytesToHex(normalizedKey);
     const hexKey = Hex.parse(hexNormalizedKey);
 
     const decrypted = AES.decrypt(cip, hexKey, {

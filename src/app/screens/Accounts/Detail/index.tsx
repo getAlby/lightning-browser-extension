@@ -122,10 +122,10 @@ function AccountDetail() {
   }
 
   async function removeAccount({ id, name }: AccountAction) {
-    if (
-      window.prompt(t("remove.confirm", { name }))?.toLowerCase() ==
-      accountName.toLowerCase()
-    ) {
+    const confirm = window.prompt(t("remove.confirm"))?.toLowerCase();
+    if (!confirm) return;
+
+    if (confirm == accountName.toLowerCase()) {
       let nextAccountId;
       let accountIds = Object.keys(accounts);
       if (auth.account?.id === id && accountIds.length > 1) {
@@ -147,10 +147,12 @@ function AccountDetail() {
     }
   }
   async function removeMnemonic({ id, name }: AccountAction) {
-    if (
-      window.prompt(t("remove_secretkey.confirm", { name }))?.toLowerCase() ==
-      accountName.toLowerCase()
-    ) {
+    const confirm = window
+      .prompt(t("remove_secretkey.confirm", { name }))
+      ?.toLowerCase();
+    if (!confirm) return;
+
+    if (confirm == accountName.toLowerCase()) {
       // TODO: consider adding removeMnemonic function
       await api.setMnemonic(id, null);
       setHasMnemonic(false);
@@ -186,7 +188,7 @@ function AccountDetail() {
       />
       <div className="border-b border-gray-200 dark:border-neutral-500">
         <div className="flex-col justify-center p-4 flex items-center bg-white dark:bg-surface-02dp">
-          <Avatar name={account.id} size={96} />
+          <Avatar name={account.id} size={96} url={auth.account?.avatarUrl} />
           <div className="flex flex-col overflow-hidden w-full text-center">
             <h2
               title={account.name}

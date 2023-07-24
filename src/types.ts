@@ -1,4 +1,5 @@
 import { PaymentRequestObject } from "bolt11";
+import { Runtime } from "webextension-polyfill";
 import { ACCOUNT_CURRENCIES, CURRENCIES, TIPS } from "~/common/constants";
 import connectors from "~/extension/background-script/connectors";
 import {
@@ -126,6 +127,15 @@ export interface Message {
   prompt?: boolean;
 }
 
+export interface Sender extends Runtime.MessageSender {
+  tlsChannelId?: string;
+  // only Chrome 80+
+  origin?: string;
+  // the below are not necessary
+  documentId?: string;
+  documentLifecycle?: string;
+  nativeApplication?: string;
+}
 // new message  type, please use this
 export interface MessageDefault {
   origin: OriginData | OriginDataInternal;
@@ -840,17 +850,4 @@ export type BitcoinAddress = {
   derivationPath: string;
   index: number;
   address: string;
-};
-
-// TODO: take from alby-js-sdk
-export type AlbyAccountInformation = {
-  identifier: string;
-  email: string;
-  name?: string;
-  avatar?: string;
-  keysend_custom_key: string;
-  keysend_custom_value: string;
-  keysend_pubkey: string;
-  lightning_address?: string;
-  nostr_pubkey?: string;
 };
