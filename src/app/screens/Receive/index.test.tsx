@@ -14,6 +14,9 @@ jest.mock("~/common/lib/api", () => {
     getSettings: jest.fn(() => Promise.resolve(mockSettings)),
     getCurrencyRate: jest.fn(() => Promise.resolve({ rate: 11 })),
     makeInvoice: jest.fn(),
+    getAccountInfo: jest.fn(() =>
+      Promise.resolve({ info: { lightning_address: "hello@getalby.com" } })
+    ),
   };
 });
 
