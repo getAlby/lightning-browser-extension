@@ -24,11 +24,10 @@ function BackupSecretKey() {
       setLoading(true);
       const accountMnemonic = await api.getMnemonic(id as string);
       setMnemonic(accountMnemonic);
+      setLoading(false);
     } catch (e) {
       console.error(e);
       if (e instanceof Error) toast.error(`Error: ${e.message}`);
-    } finally {
-      setLoading(false);
     }
   }, [id]);
 
