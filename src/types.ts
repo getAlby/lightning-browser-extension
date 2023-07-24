@@ -898,19 +898,6 @@ export type BitcoinAddress = {
   address: string;
 };
 
-// TODO: take from alby-js-sdk
-export type AlbyAccountInformation = {
-  identifier: string;
-  email: string;
-  name?: string;
-  avatar?: string;
-  keysend_custom_key: string;
-  keysend_custom_value: string;
-  keysend_pubkey: string;
-  lightning_address?: string;
-  nostr_pubkey?: string;
-};
-
 export type LiquidAddress = {
   amount: number;
   address: string;

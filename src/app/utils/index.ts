@@ -1,11 +1,7 @@
+import { GetAccountInformationResponse } from "alby-js-sdk/dist/types";
 import { useSettings } from "~/app/context/SettingsContext";
 import api from "~/common/lib/api";
-import {
-  AlbyAccountInformation,
-  BitcoinNetworkType,
-  BrowserType,
-  Theme,
-} from "~/types";
+import { BitcoinNetworkType, BrowserType, Theme } from "~/types";
 
 export function classNames(...classes: (string | boolean)[]) {
   return classes.filter(Boolean).join(" ");
@@ -62,7 +58,7 @@ export function isAlbyOAuthAccount(connectorType = "") {
   return connectorType === "alby";
 }
 
-export function getAlbyAccountName(info: AlbyAccountInformation) {
+export function getAlbyAccountName(info: GetAccountInformationResponse) {
   // legacy accounts may not have either an email address or lightning address
   return info.email || info.lightning_address || "getalby.com";
 }
