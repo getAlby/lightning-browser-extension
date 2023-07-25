@@ -9,12 +9,10 @@ import { Trans, useTranslation } from "react-i18next";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Alert from "~/app/components/Alert";
-import Avatar from "~/app/components/Avatar";
 import Button from "~/app/components/Button";
 import { ContentBox } from "~/app/components/ContentBox";
 import InputCopyButton from "~/app/components/InputCopyButton";
 import TextField from "~/app/components/form/TextField";
-import { useAccount } from "~/app/context/AccountContext";
 import api, { GetAccountRes } from "~/common/lib/api";
 import { default as nostr, default as nostrlib } from "~/common/lib/nostr";
 
@@ -23,7 +21,6 @@ function NostrSettings() {
   const { t } = useTranslation("translation", {
     keyPrefix: "accounts.account_view",
   });
-  const auth = useAccount();
   const navigate = useNavigate();
   const [hasMnemonic, setHasMnemonic] = useState(false);
   const [currentPrivateKey, setCurrentPrivateKey] = useState("");
@@ -148,16 +145,6 @@ function NostrSettings() {
               <h1 className="font-bold text-2xl dark:text-white">
                 {t("nostr.settings.title")}
               </h1>
-              <div className="flex gap-4 my-4 items-center">
-                <Avatar
-                  name={account.id}
-                  size={32}
-                  url={auth.account?.avatarUrl}
-                />
-                <p className="text-gray-500 dark:text-neutral-500">
-                  {account.name}
-                </p>
-              </div>
               <p className="text-gray-500 dark:text-neutral-500">
                 {t("nostr.settings.description")}
               </p>

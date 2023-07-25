@@ -25,6 +25,7 @@ const TextField = ({
   pattern,
   placeholder,
   required = false,
+  readOnly = false,
   suffix,
   title,
   type = "text",
@@ -59,6 +60,7 @@ const TextField = ({
         type={type}
         value={value}
         tabIndex={tabIndex}
+        readOnly={readOnly}
       />
 
       {hint && (

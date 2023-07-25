@@ -319,7 +319,6 @@
           "your_ln_address": "Seu Endereço Relâmpago:",
           "screen_reader": "Exportar detalhes da conta",
           "waiting": "aguardando dados LndHub...",
-          "tip_mobile": "Dica: Use esta carteira no seu dispositivo móvel",
           "export_uri": "Credenciais URI LNDHub",
           "scan_qr": "Leia o código QR para importar esta carteira na Zeus ou BlueWallet."
         },
@@ -559,9 +558,6 @@
     },
     "send": {
       "title": "Enviar",
-      "qrcode": {
-        "title": "Aguardando leitura"
-      },
       "input": {
         "label": "Destinatário",
         "hint": "Fatura, Endereço Relâmpago ou LNURL"
@@ -585,7 +581,8 @@
     "receive": {
       "title": "Receber",
       "actions": {
-        "create_invoice": "Gerar fatura"
+        "create_invoice": "Gerar fatura",
+        "copy_lightning_address": "Copiar endereço relâmpago"
       },
       "amount": {
         "label": "Quantia",
@@ -600,7 +597,8 @@
         "waiting": "aguardando pagamento...",
         "status": "Verificar status do pagamento"
       },
-      "receive_via_bitcoin_address": "Receber via endereço bitcoin"
+      "receive_via_bitcoin_address": "Receber via endereço bitcoin",
+      "redeem_lnurl": "Resgatar vale-satoshi"
     },
     "publishers": {
       "publisher": {
@@ -814,6 +812,23 @@
       "title": "Obter endereço",
       "heading": "Este site solicita ler:",
       "content": "Seu endereço de recebimento Bitcoin"
+    },
+    "lnurlredeem": {
+      "title": "Resgatar bitcoin",
+      "input": {
+        "placeholder": "LNURL...",
+        "label": "Código LNURL"
+      },
+      "actions": {
+        "withdraw": "Resgatar"
+      },
+      "errors": {
+        "invalid_withdraw_request": "Solicitação LNURL inválida",
+        "invalid_lnurl": "LNURL inválido"
+      }
+    },
+    "scan_qrcode": {
+      "title": "Aguardando leitura"
     }
   },
   "common": {

@@ -7,7 +7,7 @@ type Props = {
 
 export default function Navbar({ children }: Props) {
   return (
-    <div className="py-2 bg-white border-b border-gray-200 dark:bg-surface-01dp dark:border-white/10">
+    <div className="py-2 bg-white border-b border-gray-200 dark:bg-surface-01dp dark:border-neutral-700">
       <div className="max-w-screen-lg px-4 flex justify-between items-center mx-auto w-full">
         <div className="flex">
           <UserMenu />
