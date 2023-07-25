@@ -18,13 +18,13 @@ function NostrSetup() {
     keyPrefix: "accounts.account_view.nostr.setup",
   });
   const navigate = useNavigate();
-  const [step, setStep] = useState("start");
+  const [step, setStep] = useState<"start" | "import">("start");
 
   return (
     <div>
       <Container maxWidth="md">
         <ContentBox>
-          {step == "start" && (
+          {step === "start" && (
             <>
               <h1 className="font-bold text-2xl dark:text-white">
                 {t("title")}
@@ -52,7 +52,7 @@ function NostrSetup() {
               </RadioButtonGroup>
             </>
           )}
-          {step == "import" && (
+          {step === "import" && (
             <>
               <h1 className="font-bold text-2xl dark:text-white">
                 {t("import.title")}
