@@ -4,9 +4,10 @@ import { classNames } from "~/app/utils";
 type Props = {
   href?: string;
   onClick?: () => void;
-  children: ReactNode;
+  children?: ReactNode;
   className?: string;
   target?: "_blank" | undefined;
+  rel?: string;
 };
 
 export default function Hyperlink({
@@ -15,6 +16,7 @@ export default function Hyperlink({
   href,
   className,
   target,
+  rel,
 }: Props) {
   return (
     <a
@@ -25,6 +27,7 @@ export default function Hyperlink({
       href={href}
       onClick={onClick}
       target={target}
+      rel={rel}
     >
       {children}
     </a>

@@ -121,6 +121,12 @@
         "url": "https://notebin.org/"
       },
       {
+        "title": "Pinstr",
+        "subtitle": "Social network for curating and sharing your interests",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/pinstr.png",
+        "url": "https://pinstr.app/"
+      },
+      {
         "title": "Primal",
         "subtitle": "Lightning-fast UI for Nostr",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/primat-logo_fire-409917ad.svg",

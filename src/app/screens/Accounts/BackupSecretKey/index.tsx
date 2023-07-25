@@ -10,17 +10,21 @@ import SecretKeyDescription from "~/app/components/mnemonic/SecretKeyDescription
 import api from "~/common/lib/api";
 
 function BackupSecretKey() {
-  const [mnemonic, setMnemonic] = useState<string | undefined>();
   const { t } = useTranslation("translation", {
     keyPrefix: "accounts.account_view.mnemonic",
   });
+
+  const [mnemonic, setMnemonic] = useState<string | undefined>();
+  const [loading, setLoading] = useState<boolean>(true);
 
   const { id } = useParams();
 
   const fetchData = useCallback(async () => {
     try {
+      setLoading(true);
       const accountMnemonic = await api.getMnemonic(id as string);
       setMnemonic(accountMnemonic);
+      setLoading(false);
     } catch (e) {
       console.error(e);
       if (e instanceof Error) toast.error(`Error: ${e.message}`);
@@ -31,7 +35,7 @@ function BackupSecretKey() {
     fetchData();
   }, [fetchData]);
 
-  return !mnemonic ? (
+  return loading ? (
     <div className="flex justify-center mt-5">
       <Loading />
     </div>
@@ -43,7 +47,6 @@ function BackupSecretKey() {
             {t("backup.title")}
           </h1>
           <SecretKeyDescription />
-
           <MnemonicInputs mnemonic={mnemonic} readOnly />
         </ContentBox>
       </Container>

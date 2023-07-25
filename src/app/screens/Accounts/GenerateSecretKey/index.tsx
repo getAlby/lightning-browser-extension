@@ -14,15 +14,16 @@ import api from "~/common/lib/api";
 
 function GenerateSecretKey() {
   const navigate = useNavigate();
-  const [mnemonic, setMnemonic] = useState<string | undefined>();
+  const { id } = useParams() as { id: string };
+
   const { t } = useTranslation("translation", {
     keyPrefix: "accounts.account_view.mnemonic",
   });
-  const [hasConfirmedBackup, setHasConfirmedBackup] = useState(false);
-  useState(false);
-  const [hasNostrPrivateKey, setHasNostrPrivateKey] = useState(false);
+  const { t: tCommon } = useTranslation("common");
 
-  const { id } = useParams() as { id: string };
+  const [hasConfirmedBackup, setHasConfirmedBackup] = useState(false);
+  const [hasNostrPrivateKey, setHasNostrPrivateKey] = useState(false);
+  const [mnemonic, setMnemonic] = useState<string | undefined>();
 
   useEffect(() => {
     (async () => {
@@ -63,6 +64,11 @@ function GenerateSecretKey() {
     }
   }
 
+  function cancel() {
+    // go to account settings
+    navigate(`/accounts/${id}`);
+  }
+
   return !mnemonic ? (
     <div className="flex justify-center mt-5">
       <Loading />
@@ -99,7 +105,8 @@ function GenerateSecretKey() {
             <Alert type="warn">{t("existing_nostr_key_notice")}</Alert>
           )}
         </ContentBox>
-        <div className="flex justify-center mt-8 mb-16">
+        <div className="flex justify-center mt-8 mb-16 gap-4">
+          <Button label={tCommon("actions.cancel")} onClick={cancel} />
           <Button
             label={t("backup.save")}
             primary

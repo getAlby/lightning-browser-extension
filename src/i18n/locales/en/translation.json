@@ -372,17 +372,17 @@
       "title": "Accounts",
       "account_view": {
         "title1": "Account Information",
-        "title2": "Edit Account",
+        "title2": "Account",
         "name": {
           "title": "Display Name",
           "placeholder": "Account Display Name"
         },
         "export": {
-          "title": "Export Account",
+          "title": "Connect your mobile wallet",
+          "description": "Allows you to connect and use this account on mobile wallets like <0>Blue Wallet</0> and <0>Zeus</0>.",
           "screen_reader": "Export account details",
           "waiting": "waiting for LndHub data...",
           "your_ln_address": "Your Lightning Address:",
-          "tip_mobile": "Tip: Use this wallet with your mobile device",
           "export_uri": "LNDHub Credentials URI",
           "scan_qr": "Import this wallet into Zeus or BlueWallet by scanning the QRCode."
         },
