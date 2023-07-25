@@ -8,10 +8,10 @@ import Container from "@components/Container";
 import { useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import CardButton from "~/app/components/CardButton";
+import CardButtonGroup from "~/app/components/CardButton/Group";
 import { ContentBox } from "~/app/components/ContentBox";
 import Hyperlink from "~/app/components/Hyperlink";
-import RadioButton from "~/app/components/RadioButton";
-import RadioButtonGroup from "~/app/components/RadioButton/Group";
 
 function NostrSetup() {
   const { t } = useTranslation("translation", {
@@ -36,20 +36,20 @@ function NostrSetup() {
                 {t("description2")}
               </p>
 
-              <RadioButtonGroup>
-                <RadioButton
+              <CardButtonGroup>
+                <CardButton
                   title={t("new.label")}
                   description={t("new.description")}
                   icon={TwoKeysIcon}
                   onClick={() => navigate("../secret-key/generate")}
                 />
-                <RadioButton
+                <CardButton
                   title={t("import.label")}
                   description={t("import.description")}
                   icon={ReceiveIcon}
                   onClick={() => setStep("import")}
                 />
-              </RadioButtonGroup>
+              </CardButtonGroup>
             </>
           )}
           {step === "import" && (
@@ -58,20 +58,20 @@ function NostrSetup() {
                 {t("import.title")}
               </h1>
 
-              <RadioButtonGroup>
-                <RadioButton
+              <CardButtonGroup>
+                <CardButton
                   title={t("import.private_key.label")}
                   description={t("import.private_key.description")}
                   icon={KeyIcon}
                   onClick={() => navigate("../nostr/settings")}
                 />
-                <RadioButton
+                <CardButton
                   title={t("import.recovery_phrase.label")}
                   description={t("import.recovery_phrase.description")}
                   icon={MnemonicIcon}
                   onClick={() => navigate("../secret-key/import")}
                 />
-              </RadioButtonGroup>
+              </CardButtonGroup>
             </>
           )}
           <div className="text-center text-gray-500 dark:text-neutral-500">

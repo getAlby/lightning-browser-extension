@@ -13,7 +13,7 @@ interface IconTypeProps {
 
 type IconType = (props: IconTypeProps) => JSX.Element;
 
-export default function RadioButton({
+export default function CardButton({
   title,
   description,
   icon,
