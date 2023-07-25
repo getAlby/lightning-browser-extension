@@ -337,7 +337,6 @@
         "export": {
           "your_ln_address": "Il Tuo Indirizzo Lightning:",
           "waiting": "in attesa dei dati da LndHub...",
-          "tip_mobile": "Consiglio: utilizza questo wallet con il tuo dispositivo mobile",
           "export_uri": "URI delle credenziali di LNDHub",
           "scan_qr": "Importa questo wallet su Zeus o BlueWallet scansionando il QRCode.",
           "title": "Esporta Account",
@@ -473,9 +472,6 @@
     },
     "send": {
       "title": "Invia",
-      "qrcode": {
-        "title": "In attesa di scansione"
-      },
       "input": {
         "label": "Destinatario",
         "hint": "Fattura, indirizzo Lightning o LNURL"

@@ -332,7 +332,6 @@
           "screen_reader": "Eksporter kontooplysninger",
           "waiting": "venter på LndHub-data...",
           "your_ln_address": "Din lightningadresse:",
-          "tip_mobile": "Tip: Brug denne wallet på din mobile enhed",
           "export_uri": "URI til LNDHub-adgangsoplysninger",
           "scan_qr": "Importer denne wallet til Zeus eller BlueWallet ved at skanne QR-koden."
         },
@@ -502,9 +501,6 @@
     },
     "send": {
       "title": "Send",
-      "qrcode": {
-        "title": "Venter på skanning"
-      },
       "input": {
         "label": "Modtager",
         "hint": "Faktura, lightningadresse eller LNURL"

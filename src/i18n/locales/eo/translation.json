@@ -388,9 +388,6 @@
     },
     "send": {
       "title": "Sendi",
-      "qrcode": {
-        "title": ""
-      },
       "input": {
         "label": "Ricevanto",
         "hint": ""
