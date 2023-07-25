@@ -332,7 +332,6 @@
           "screen_reader": "Exporter les détails du compte",
           "waiting": "en attente des données LndHub...",
           "your_ln_address": "Votre adresse Lightning :",
-          "tip_mobile": "Astuce : Utilisez ce portefeuille avec votre appareil mobile",
           "export_uri": "URI des identifiants LNDHub",
           "scan_qr": "Importez ce portefeuille dans Zeus ou BlueWallet en scannant le QRCode."
         },
@@ -503,9 +502,6 @@
     },
     "send": {
       "title": "Envoyer",
-      "qrcode": {
-        "title": "En attente de numérisation"
-      },
       "input": {
         "label": "Destinataire",
         "hint": "Facture, adresse Lightning ou LNURL"
