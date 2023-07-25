@@ -37,7 +37,7 @@ function AccountDetailLayout() {
         }
       />
       {account && (
-        <div className="border-b border-gray-200 dark:border-neutral-500 bg-white dark:bg-surface-02dp p-4">
+        <div className="border-b border-gray-200 dark:border-neutral-700 bg-white dark:bg-surface-01dp p-4">
           <div className="flex-row justify-center  space-x-2 flex items-center">
             <Avatar
               size={32}
