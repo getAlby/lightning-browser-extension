@@ -33,7 +33,14 @@ function NostrSetup() {
                 {t("description")}
               </p>
               <p className="text-gray-500 dark:text-neutral-500">
-                {t("description2")}
+                <Trans
+                  i18nKey={"description2"}
+                  t={t}
+                  components={[
+                    // eslint-disable-next-line react/jsx-key
+                    <span className="font-bold"></span>,
+                  ]}
+                />
               </p>
 
               <CardButtonGroup>
