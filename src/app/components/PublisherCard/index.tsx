@@ -71,7 +71,7 @@ export default function PublisherCard({
             title={url}
             target="_blank"
             className={classNames(
-              "text-gray-500 dark:text-gray-400 overflow-hidden text-ellipsis whitespace-nowrap",
+              "text-gray-500 dark:text-neutral-500 overflow-hidden text-ellipsis whitespace-nowrap",
               isSmall && "text-xs"
             )}
             rel="noreferrer noopener"
@@ -83,7 +83,7 @@ export default function PublisherCard({
           <p
             title={description}
             className={classNames(
-              "text-gray-500 dark:text-gray-400 overflow-hidden text-ellipsis whitespace-nowrap",
+              "text-gray-500 dark:text-neutral-500 overflow-hidden text-ellipsis whitespace-nowrap",
               isSmall && "text-xs"
             )}
           >
