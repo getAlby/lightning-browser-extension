@@ -29,6 +29,7 @@ import BackupSecretKey from "~/app/screens/Accounts/BackupSecretKey";
 import GenerateSecretKey from "~/app/screens/Accounts/GenerateSecretKey";
 import ImportSecretKey from "~/app/screens/Accounts/ImportSecretKey";
 import NostrSettings from "~/app/screens/Accounts/NostrSettings";
+import NostrSetup from "~/app/screens/Accounts/NostrSetup/NostrSetup";
 import Discover from "~/app/screens/Discover";
 import LNURLRedeem from "~/app/screens/LNURLRedeem";
 import OnChainReceive from "~/app/screens/OnChainReceive";
@@ -94,7 +95,8 @@ function Options() {
                   element={<GenerateSecretKey />}
                 />
                 <Route path="secret-key/import" element={<ImportSecretKey />} />
-                <Route path="nostr" element={<NostrSettings />} />
+                <Route path="nostr/settings" element={<NostrSettings />} />
+                <Route path="nostr/setup" element={<NostrSetup />} />
               </Route>
 
               <Route

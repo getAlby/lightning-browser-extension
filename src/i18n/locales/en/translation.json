@@ -447,6 +447,29 @@
             "delete": "Delete current keys",
             "no_secret_key": "💡 You don't have a secret key yet. <0>Click here</0></div> to create your secret key and derive your nostr keys."
           },
+          "setup": {
+            "title": "Setup your Nostr keys",
+            "description": "Choose If you'd like to create a new Nostr account (a pair of private and public keys) or import an existing one.",
+            "description2": "Every Nostr account created in Alby comes with a <0>Recovery Phrase</0> – a set of 12 words that always allow you to regain access to your Nostr private keys.",
+            "new": {
+              "label": "Create a new Nostr account",
+              "description": "Generate a new pair of Nostr keys with Recovery Phrase"
+            },
+            "import": {
+              "label": "Import a Nostr account",
+              "description": "Import an existing Nostr key or derive from your Recovery Phrase",
+              "title": "How would you like to import your Nostr account?",
+              "private_key": {
+                "label": "Use Nostr private key",
+                "description": "Paste your account’s private key to import it to Alby"
+              },
+              "recovery_phrase": {
+                "label": "Use Recovery Phrase",
+                "description": "Derive Nostr keys from your Recovery Phrase"
+              }
+            },
+            "new_to_nostr": "New to Nostr? <0>Learn more</0>"
+          },
           "private_key": {
             "title": "Manage your Nostr private key",
             "subtitle": "Paste your nostr private key or generate a new one. <0>Learn more »</0>",
