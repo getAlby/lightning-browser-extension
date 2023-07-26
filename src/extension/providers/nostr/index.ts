@@ -19,7 +19,11 @@ export default class NostrProvider {
     if (this.enabled) {
       return { enabled: true };
     }
-    return await this.execute("enable");
+    const result = await this.execute("enable");
+    if (typeof result.enabled === "boolean") {
+      this.enabled = result.enabled;
+    }
+    return result;
   }
 
   async getPublicKey() {
