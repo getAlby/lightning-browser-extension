@@ -82,10 +82,10 @@ export default function PublisherCard({
         {!url && description && (
           <p
             title={description}
-            className={
-              "text-gray-500 dark:text-gray-400 line-clamp-2" +
-              (isSmall ? " -mt-1" : " mb-2")
-            }
+            className={classNames(
+              "text-gray-500 dark:text-gray-400 overflow-hidden text-ellipsis whitespace-nowrap",
+              isSmall && "text-xs"
+            )}
           >
             {description}
           </p>
