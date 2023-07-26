@@ -46,7 +46,7 @@ function AccountDetailLayout() {
             />
             <h2
               title={account.name}
-              className="text-xl font-semibold dark:text-white overflow-hidden text-ellipsis whitespace-nowrap leading-1 my-2"
+              className="text-xl font-semibold dark:text-white overflow-hidden text-ellipsis whitespace-nowrap my-2"
             >
               {account.name}
             </h2>
