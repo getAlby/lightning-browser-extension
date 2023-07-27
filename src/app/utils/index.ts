@@ -63,7 +63,7 @@ export function getAlbyAccountName(info: AlbyAccountInformation) {
 }
 
 export function isBitcoinAddress(address: string) {
-  return /^(?:[13]{1}[a-km-zA-HJ-NP-Z1-9]{25,34}|bc1[a-z0-9]{39,59})$/i.test(
+  return /^(?:[13]{1}[a-km-zA-HJ-NP-Z1-9]{25,34}|(bc1|tb1)[a-z0-9]{39,59})$/i.test(
     address
   );
 }
