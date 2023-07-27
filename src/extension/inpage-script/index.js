@@ -125,11 +125,7 @@ if (document) {
   // emit events to the websites
   window.addEventListener("message", (event) => {
     if (event.source === window && event.data.action === "accountChanged") {
-      if (
-        (window.webln && window.webln.enabled) ||
-        (window.nostr && window.nostr.enabled)
-      )
-        eventEmitter(event.data.action, event.data.scope);
+      eventEmitter(event.data.action, event.data.scope);
     }
   });
 } else {
@@ -137,10 +133,8 @@ if (document) {
 }
 
 function eventEmitter(action, scope) {
-  if (scope == "nostr") {
-    window.nostr.emit(action);
-  } else if (scope == "webln") {
-    window.webln.emit(action);
+  if (window[scope] && window[scope]._eventEmitter) {
+    window[scope].emit(action);
   } else {
     return;
   }
