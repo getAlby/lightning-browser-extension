@@ -284,15 +284,6 @@ export default class Alby implements Connector {
     return authResult;
   }
 
-  async getAccessToken(authResult: string, authClient: auth.OAuth2User) {
-    const authToken = new URL(authResult).searchParams.get("code");
-    if (!authToken) {
-      throw new Error("Authentication failed: missing token");
-    }
-
-    await authClient.requestAccessToken(authToken);
-  }
-
   private async _request<T>(func: (client: Client) => T) {
     if (!this._authUser || !this._client) {
       throw new Error("Alby client was not initialized");
