@@ -112,7 +112,6 @@ export default class WebLNProvider {
     });
   }
 
-  //webln events
   on(...args: Parameters<EventEmitter["on"]>) {
     if (!this.enabled) {
       throw new Error("Provider must be enabled before calling on");

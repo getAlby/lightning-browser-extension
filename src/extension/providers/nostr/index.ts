@@ -50,7 +50,6 @@ export default class NostrProvider {
     return this.execute("getRelays");
   }
 
-  //nostr events
   async on(...args: Parameters<EventEmitter["on"]>) {
     await this.enable();
     return this._eventEmitter.on(...args);
