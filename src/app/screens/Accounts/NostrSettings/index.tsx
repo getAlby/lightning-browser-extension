@@ -206,7 +206,7 @@ function NostrSettings() {
                 {nostrPrivateKey && (
                   <Button
                     error
-                    label={t("nostr.settings.delete")}
+                    label={t("nostr.settings.remove")}
                     onClick={handleDeleteKeys}
                   />
                 )}
