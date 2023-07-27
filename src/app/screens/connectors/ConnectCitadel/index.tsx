@@ -115,6 +115,7 @@ export default function ConnectCitadel() {
         <TextField
           label={t("password.label")}
           id="password"
+          autoComplete="new-password"
           type={passwordView ? "text" : "password"}
           autoFocus={true}
           required

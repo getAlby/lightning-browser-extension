@@ -182,6 +182,7 @@ export default function ConnectCommando() {
             id="commandoPrivateKey"
             label={t("privKey.label")}
             type={commandoPrivateKeyVisible ? "text" : "password"}
+            autoComplete="new-password"
             value={formData.privateKey}
             endAdornment={
               <button

@@ -98,6 +98,7 @@ export default function ConnectEclair() {
       <div className="mb-6">
         <TextField
           id="password"
+          autoComplete="new-password"
           label={t("password.label")}
           type={passwordView ? "text" : "password"}
           required

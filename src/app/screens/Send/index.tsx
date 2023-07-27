@@ -126,6 +126,7 @@ function Send() {
           <div className="pt-4">
             <TextField
               id="invoice"
+              type="text"
               label={t("input.label")}
               hint={t("input.hint")}
               value={invoice}

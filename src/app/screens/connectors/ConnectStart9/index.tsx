@@ -136,6 +136,7 @@ export default function ConnectStart9() {
       <div className="mt-6">
         <TextField
           id="lndconnect"
+          type="text"
           label={t("rest_url.label")}
           placeholder={t("rest_url.placeholder")}
           onChange={handleLndconnectUrl}
