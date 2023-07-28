@@ -484,7 +484,6 @@
             "imported_key_warning": "⚠️ Du verwendest derzeit einen importierten oder zufällig generierten Nostr-Schlüssel. Dein privater Nostr-Schlüssel kann nicht durch deinem geheimen Schlüssel wiederhergestellt werden, denke also daran, deinen privaten Nostr-Schlüssel zu sichern.",
             "can_restore": "✅ Nostr-Schlüssel, abgeleitet von deinem geheimen Schlüssel",
             "derive": "Ableitung von Nostr-Schlüsseln aus deinem Geheimschlüssel",
-            "delete": "Aktuelle Tasten löschen",
             "no_secret_key": "💡 Du hast noch keinen geheimen Schlüssel. <0>Klicken Sie hier</0></div>, um deinen geheimen Schlüssel zu erstellen und dein nostr Schlüssel abzuleiten."
           }
         },
@@ -508,11 +507,8 @@
             "title": "Sichere deinen geheimen Schlüssel",
             "save": "Geheimschlüssel speichern",
             "button": "Geheimschlüssel sichern",
-            "warning": "⚠️ Vergesse nicht, deinen geheimen Schlüssel zu sichern! Wenn du ihn nicht sicherst, kann dies dazu führen, dass du den Zugang zu deiner Nostr-Identität oder den von deinen mit diesem Schlüssel verwalteten Vermögenswerten dauerhaft verlierst.",
-            "description1": "Zusätzlich zum Bitcoin Lightning Network ermöglicht Alby die Generierung von Schlüsseln und die Interaktion mit anderen Protokollen wie z.B.:",
-            "description2": "Dein Geheimschlüssel besteht aus 12 Wörtern, mit denen du auf einem neuen Gerät oder bei Verlust des Zugangs zu deinem Konto auf deine Schlüssel zu diesen Protokollen zugreifen kannst. Schreibe ihn auf ein Blatt Papier und bewahre ihn sicher auf:"
+            "warning": "⚠️ Vergesse nicht, deinen geheimen Schlüssel zu sichern! Wenn du ihn nicht sicherst, kann dies dazu führen, dass du den Zugang zu deiner Nostr-Identität oder den von deinen mit diesem Schlüssel verwalteten Vermögenswerten dauerhaft verlierst."
           },
-          "description2": "Dein Geheimschlüssel besteht aus 12 Wörtern, die es dir ermöglichen, deine Schlüssel für Protokolle wie Nostr auf einem neuen Gerät abzurufen oder falls du den Zugang zu deinem Konto verlierst.",
           "saved": "Geheimschlüssel verschlüsselt und erfolgreich gespeichert.",
           "generate": {
             "title": "Erzeuge einen geheimen Schlüssel",
@@ -528,7 +524,6 @@
           "inputs": {
             "title": "Dein geheimer Schlüssel"
           },
-          "description": "Mit deinem geheimen Kontoschlüssel kannst du Alby verwenden, um mit Protokollen wie Nostr zu interagieren.",
           "existing_nostr_key_notice": "⚠️ Für dieses Konto wurde bereits ein privater nostr-Schlüssel festgelegt und wird nicht von diesem geheimen Schlüssel abgeleitet. Du kannst deinen nostr-Schlüssel in deiner Kontoeinstellungen verwalten.",
           "lnurl": {
             "title": "Anmeldung mit Lightning",
