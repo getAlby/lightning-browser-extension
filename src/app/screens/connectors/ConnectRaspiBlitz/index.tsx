@@ -164,6 +164,8 @@ export default function ConnectRaspiBlitz() {
         <div>
           <TextField
             id="macaroon"
+            type="password"
+            autoComplete="new-password"
             label="Macaroon (HEX format)"
             value={formData.macaroon}
             onChange={handleMacaroon}

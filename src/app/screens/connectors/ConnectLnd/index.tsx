@@ -175,6 +175,8 @@ export default function ConnectLnd() {
         <div>
           <TextField
             id="macaroon"
+            type="password"
+            autoComplete="new-password"
             label={t("macaroon.label")}
             value={formData.macaroon}
             onChange={handleChange}

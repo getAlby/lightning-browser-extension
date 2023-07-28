@@ -13,15 +13,16 @@ import MnemonicInputs from "~/app/components/mnemonic/MnemonicInputs";
 import api from "~/common/lib/api";
 
 function ImportSecretKey() {
-  const [mnemonic, setMnemonic] = useState<string>("");
   const { t: tCommon } = useTranslation("common");
   const navigate = useNavigate();
   const { t } = useTranslation("translation", {
     keyPrefix: "accounts.account_view.mnemonic",
   });
 
+  const [mnemonic, setMnemonic] = useState<string>("");
   const [hasFetchedData, setHasFetchedData] = useState(false);
   const [hasNostrPrivateKey, setHasNostrPrivateKey] = useState(false);
+
   const { id } = useParams() as { id: string };
 
   useEffect(() => {

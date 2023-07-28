@@ -92,6 +92,7 @@ export default function ConnectLnd() {
       <div className="mt-6">
         <TextField
           id="pairingPhrase"
+          autoComplete="new-password"
           type="password"
           label={t("pairing_phrase.label")}
           placeholder={t("pairing_phrase.placeholder")}

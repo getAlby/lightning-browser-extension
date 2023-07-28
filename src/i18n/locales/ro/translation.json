@@ -332,7 +332,6 @@
           "screen_reader": "Exporta date cont",
           "waiting": "in asteptarea datelor LNDHub...",
           "your_ln_address": "Adresa ta Lightning:",
-          "tip_mobile": "Sfat: Foloseste acest portofel cu dispozitivul tau mobil",
           "export_uri": "Credentialele URI pentru LNDHub",
           "scan_qr": "Importa acest portofel in Zeus sau BlueWallet prin scanarea codului QR."
         },
@@ -503,9 +502,6 @@
     },
     "send": {
       "title": "",
-      "qrcode": {
-        "title": ""
-      },
       "input": {
         "label": "",
         "hint": ""

@@ -1,5 +1,9 @@
+import {
+  MnemonicIcon,
+  PasswordIcon,
+  SafeIcon,
+} from "@bitcoin-design/bitcoin-icons-react/outline";
 import { useTranslation } from "react-i18next";
-import NostrIcon from "~/app/icons/NostrIcon";
 
 function SecretKeyDescription() {
   const { t } = useTranslation("translation", {
@@ -8,31 +12,28 @@ function SecretKeyDescription() {
 
   return (
     <>
-      <p className="text-gray-500 dark:text-neutral-500">
-        {t("backup.description1")}
-      </p>
       <div className="flex flex-col gap-4">
-        <ProtocolListItem
-          icon={<NostrIcon className="text-gray-500 dark:text-neutral-500" />}
-          title={t("backup.protocols.nostr")}
+        <ListItem
+          icon={<MnemonicIcon />}
+          title={t("backup.items.recovery_phrase")}
         />
+        <ListItem icon={<PasswordIcon />} title={t("backup.items.words")} />
+        <ListItem icon={<SafeIcon />} title={t("backup.items.storage")} />
       </div>
-
-      <p className="mb-8 text-gray-500 dark:text-neutral-500">
-        {t("backup.description2")}
-      </p>
     </>
   );
 }
 
 export default SecretKeyDescription;
 
-type ProtocolListItemProps = { icon: React.ReactNode; title: string };
+type ListItemProps = { icon: React.ReactNode; title: string };
 
-function ProtocolListItem({ icon, title }: ProtocolListItemProps) {
+function ListItem({ icon, title }: ListItemProps) {
   return (
-    <div className="flex gap-2">
-      {icon}
+    <div className="flex gap-2 items-center">
+      <div className="shrink-0 w-8 h-8 text-gray-500 dark:text-neutral-500">
+        {icon}
+      </div>
       <span className="text-gray-500 dark:text-neutral-500">{title}</span>
     </div>
   );

@@ -98,6 +98,7 @@ export default function ConnectEclair() {
       <div className="mb-6">
         <TextField
           id="password"
+          autoComplete="new-password"
           label={t("password.label")}
           type={passwordView ? "text" : "password"}
           required
@@ -121,7 +122,6 @@ export default function ConnectEclair() {
       <TextField
         id="url"
         label={t("url.label")}
-        type="text"
         placeholder={t("url.placeholder")}
         value={formData.url}
         required

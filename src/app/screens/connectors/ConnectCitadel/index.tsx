@@ -115,6 +115,7 @@ export default function ConnectCitadel() {
         <TextField
           label={t("password.label")}
           id="password"
+          autoComplete="new-password"
           type={passwordView ? "text" : "password"}
           autoFocus={true}
           required
@@ -138,7 +139,6 @@ export default function ConnectCitadel() {
         label={t("url.label")}
         id="url"
         placeholder={t("url.placeholder")}
-        type="text"
         value={formData.url}
         required
         onChange={handleChange}
