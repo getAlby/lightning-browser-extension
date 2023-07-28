@@ -109,7 +109,6 @@ export default function ConnectLnbits() {
           id="adminkey"
           label={t("admin_key.label")}
           placeholder={t("admin_key.placeholder")}
-          type="text"
           required
           onChange={handleChange}
           autoFocus={true}
@@ -118,7 +117,6 @@ export default function ConnectLnbits() {
       <TextField
         id="url"
         label={t("url.label")}
-        type="text"
         value={formData.url}
         required
         onChange={handleChange}

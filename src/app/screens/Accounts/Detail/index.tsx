@@ -193,7 +193,6 @@ function AccountDetail() {
                   id="name"
                   label={t("name.title")}
                   placeholder={t("name.placeholder")}
-                  type="text"
                   value={accountName}
                   onChange={(event) => {
                     setAccountName(event.target.value);
@@ -294,7 +293,6 @@ function AccountDetail() {
                             <TextField
                               id="uri"
                               label={t("export.export_uri")}
-                              type="text"
                               readOnly
                               value={`lndhub://${lndHubData.login}:${lndHubData.password}@${lndHubData.url}/`}
                             />
@@ -389,7 +387,6 @@ function AccountDetail() {
                 <TextField
                   id="nostrPublicKey"
                   label={t("nostr.public_key.label")}
-                  type="text"
                   value={nostrPublicKey}
                   disabled
                   endAdornment={
