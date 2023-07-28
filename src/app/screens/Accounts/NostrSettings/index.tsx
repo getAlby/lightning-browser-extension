@@ -150,6 +150,23 @@ function NostrSettings() {
               </p>
             </div>
 
+            {!hasMnemonic && !nostrPrivateKey && (
+              <Alert type="info">
+                <Trans
+                  i18nKey={"nostr.settings.no_secret_key"}
+                  t={t}
+                  components={[
+                    // eslint-disable-next-line react/jsx-key
+                    <Link
+                      to="../../secret-key/generate"
+                      relative="path"
+                      className="underline"
+                    />,
+                  ]}
+                />
+              </Alert>
+            )}
+
             {hasMnemonic &&
             currentPrivateKey &&
             nostrPrivateKey === currentPrivateKey ? (
@@ -213,27 +230,12 @@ function NostrSettings() {
                 {hasImportedNostrKey &&
                   nostrPrivateKey === currentPrivateKey && (
                     <>
-                      {hasMnemonic ? (
+                      {hasMnemonic && (
                         <Button
                           outline
                           label={t("nostr.settings.derive")}
                           onClick={handleDeriveNostrKeyFromSecretKey}
                         />
-                      ) : (
-                        <Alert type="warn">
-                          <Trans
-                            i18nKey={"nostr.settings.no_secret_key"}
-                            t={t}
-                            components={[
-                              // eslint-disable-next-line react/jsx-key
-                              <Link
-                                to="../secret-key/generate"
-                                relative="path"
-                                className="underline"
-                              />,
-                            ]}
-                          />
-                        </Alert>
                       )}
                     </>
                   )}

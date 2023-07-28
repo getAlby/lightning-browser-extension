@@ -411,8 +411,7 @@
           "import": {
             "title": "Importera en hemlig nyckel",
             "description": "Använd en befintlig hemlig nyckel för att återställa dina härledda nycklar.",
-            "button": "Importera hemlig nyckel",
-            "confirm_overwrite": "Du har redan en hemlig nyckel, är du säker på att du vill skriva över den?"
+            "button": "Importera hemlig nyckel"
           },
           "title": "Hemlig nyckel",
           "description": "Din konto hemliga nyckel låter dig använda Alby för att interagera med protokoll som Nostr.",

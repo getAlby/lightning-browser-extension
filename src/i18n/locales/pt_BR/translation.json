@@ -403,8 +403,7 @@
           "import": {
             "title": "Importar uma chave secreta",
             "description": "Use uma chave secreta existente para recuperar suas chaves derivadas.",
-            "button": "Importar chave secreta",
-            "confirm_overwrite": "Você já tem uma chave secreta, tem certeza de que deseja substituí-la?"
+            "button": "Importar chave secreta"
           },
           "inputs": {
             "title": "Sua chave secreta"

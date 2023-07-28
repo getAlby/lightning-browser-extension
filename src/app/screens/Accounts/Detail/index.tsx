@@ -337,7 +337,11 @@ function AccountDetail() {
                   )}
                 </p>
                 <p className="text-gray-500 text-sm dark:text-neutral-500">
-                  {t("mnemonic.description2")}
+                  {t(
+                    hasMnemonic
+                      ? "mnemonic.backup.description"
+                      : "mnemonic.generate.description"
+                  )}
                 </p>
               </div>
 
@@ -381,27 +385,34 @@ function AccountDetail() {
               </>
             )}
             <MenuDivider />
-            <div className="flex justify-between items-end">
-              <div className="w-7/12 flex items-center gap-2">
-                <TextField
-                  id="nostrPublicKey"
-                  label={t("nostr.public_key.label")}
-                  type="text"
-                  value={nostrPublicKey}
-                  disabled
-                  endAdornment={
-                    nostrPublicKey && <InputCopyButton value={nostrPublicKey} />
-                  }
-                />
-                {nostrPublicKey && hasImportedNostrKey && (
-                  <Badge
-                    label="imported"
-                    color="green-bitcoin"
-                    textColor="white"
+            <div className="flex justify-between items-center">
+              <div className="w-7/12">
+                <div className="flex flex-col">
+                  <TextField
+                    id="nostrPublicKey"
+                    label={t("nostr.public_key.label")}
+                    type="text"
+                    value={nostrPublicKey}
+                    disabled
+                    endAdornment={
+                      nostrPublicKey && (
+                        <InputCopyButton value={nostrPublicKey} />
+                      )
+                    }
                   />
+                </div>
+              </div>
+              <div>
+                {nostrPublicKey && hasImportedNostrKey && (
+                  <div className="">
+                    <Badge
+                      label="imported"
+                      color="green-bitcoin"
+                      textColor="white"
+                    />
+                  </div>
                 )}
               </div>
-
               <div className="w-1/5 flex-none">
                 <Link to="nostr/settings">
                   <Button label={t("nostr.settings.label")} primary fullWidth />
