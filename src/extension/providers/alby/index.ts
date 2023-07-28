@@ -7,16 +7,15 @@ export default class AlbyProvider {
     this.enabled = false;
   }
 
-  enable() {
+  async enable() {
     if (this.enabled) {
-      return Promise.resolve({ enabled: true });
+      return { enabled: true };
     }
-    return this.execute("enable").then((result) => {
-      if (typeof result.enabled === "boolean") {
-        this.enabled = result.enabled;
-      }
-      return result;
-    });
+    const result = await this.execute("enable");
+    if (typeof result.enabled === "boolean") {
+      this.enabled = result.enabled;
+    }
+    return result;
   }
 
   /**

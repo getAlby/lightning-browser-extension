@@ -133,6 +133,8 @@ export default function ConnectUmbrel() {
       <div className="mt-6">
         <TextField
           id="lndconnect"
+          type="password"
+          autoComplete="new-password"
           label={t("rest_url.label")}
           placeholder={t("rest_url.placeholder")}
           onChange={handleLndconnectUrl}

@@ -183,6 +183,7 @@ function NostrSettings() {
               <TextField
                 id="nostrPrivateKey"
                 label={t("nostr.private_key.label")}
+                autoComplete="new-password"
                 type={nostrPrivateKeyVisible ? "text" : "password"}
                 value={nostrPrivateKey}
                 onChange={(event) => {
@@ -214,7 +215,6 @@ function NostrSettings() {
               <TextField
                 id="nostrPublicKey"
                 label={t("nostr.public_key.label")}
-                type="text"
                 value={nostrPublicKey}
                 disabled
                 endAdornment={<InputCopyButton value={nostrPublicKey} />}
