@@ -432,19 +432,20 @@
         "add_account": "Konto hinzufügen"
       },
       "account_view": {
-        "title2": "Konto bearbeiten",
+        "title2": "Konto",
         "title1": "Konto Informationen",
         "name": {
           "title": "Name anzeigen",
           "placeholder": "Konto Anzeigename"
         },
         "export": {
-          "title": "Konto exportieren",
+          "title": "Verbinde deine mobile Wallet",
           "screen_reader": "Kontodaten exportieren",
           "waiting": "Warten auf LndHub Daten...",
           "your_ln_address": "Deine Lightning Adresse:",
           "export_uri": "LNDHub Anmeldeinformationen URI",
-          "scan_qr": "Importiere diese Wallet in Zeus oder BlueWallet, indem du den QRCode scannst."
+          "scan_qr": "Importiere diese Wallet in Zeus oder BlueWallet, indem du den QRCode scannst.",
+          "description": "Ermöglicht es dir, dieses Konto mit mobilen Wallets wie <0>Blue Wallet</0> und <0>Zeus</0> zu verbinden und zu verwenden."
         },
         "nostr": {
           "title": "Nostr",
