@@ -22,12 +22,10 @@ type KeysendArgs = {
 
 export default class WebLNProvider {
   enabled: boolean;
-  isEnabled: boolean;
   executing: boolean;
 
   constructor() {
     this.enabled = false;
-    this.isEnabled = false; // seems some webln implementations use webln.isEnabled and some use webln.enabled
     this.executing = false;
   }
 
@@ -38,7 +36,6 @@ export default class WebLNProvider {
     const result = await this.execute("enable");
     if (typeof result.enabled === "boolean") {
       this.enabled = result.enabled;
-      this.isEnabled = result.enabled;
     }
   }
 
