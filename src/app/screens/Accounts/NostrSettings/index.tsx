@@ -219,7 +219,7 @@ function NostrSettings() {
                 disabled
                 endAdornment={<InputCopyButton value={nostrPublicKey} />}
               />
-              <div className="mt-4 flex gap-4 items-center">
+              <div className="mt-4 flex gap-4 items-center justify-center">
                 {nostrPrivateKey && (
                   <Button
                     error
@@ -228,16 +228,13 @@ function NostrSettings() {
                   />
                 )}
                 {hasImportedNostrKey &&
-                  nostrPrivateKey === currentPrivateKey && (
-                    <>
-                      {hasMnemonic && (
-                        <Button
-                          outline
-                          label={t("nostr.settings.derive")}
-                          onClick={handleDeriveNostrKeyFromSecretKey}
-                        />
-                      )}
-                    </>
+                  nostrPrivateKey === currentPrivateKey &&
+                  hasMnemonic && (
+                    <Button
+                      outline
+                      label={t("nostr.settings.derive")}
+                      onClick={handleDeriveNostrKeyFromSecretKey}
+                    />
                   )}
               </div>
             </div>
