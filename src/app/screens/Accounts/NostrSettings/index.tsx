@@ -150,6 +150,23 @@ function NostrSettings() {
               </p>
             </div>
 
+            {!hasMnemonic && !nostrPrivateKey && (
+              <Alert type="info">
+                <Trans
+                  i18nKey={"nostr.settings.no_secret_key"}
+                  t={t}
+                  components={[
+                    // eslint-disable-next-line react/jsx-key
+                    <Link
+                      to="../../secret-key/generate"
+                      relative="path"
+                      className="underline"
+                    />,
+                  ]}
+                />
+              </Alert>
+            )}
+
             {hasMnemonic &&
             currentPrivateKey &&
             nostrPrivateKey === currentPrivateKey ? (
@@ -202,40 +219,22 @@ function NostrSettings() {
                 disabled
                 endAdornment={<InputCopyButton value={nostrPublicKey} />}
               />
-              <div className="mt-4 flex gap-4 items-center">
+              <div className="mt-4 flex gap-4 items-center justify-center">
                 {nostrPrivateKey && (
                   <Button
                     error
-                    label={t("nostr.settings.delete")}
+                    label={t("nostr.settings.remove")}
                     onClick={handleDeleteKeys}
                   />
                 )}
                 {hasImportedNostrKey &&
-                  nostrPrivateKey === currentPrivateKey && (
-                    <>
-                      {hasMnemonic ? (
-                        <Button
-                          outline
-                          label={t("nostr.settings.derive")}
-                          onClick={handleDeriveNostrKeyFromSecretKey}
-                        />
-                      ) : (
-                        <Alert type="warn">
-                          <Trans
-                            i18nKey={"nostr.settings.no_secret_key"}
-                            t={t}
-                            components={[
-                              // eslint-disable-next-line react/jsx-key
-                              <Link
-                                to="../secret-key/generate"
-                                relative="path"
-                                className="underline"
-                              />,
-                            ]}
-                          />
-                        </Alert>
-                      )}
-                    </>
+                  nostrPrivateKey === currentPrivateKey &&
+                  hasMnemonic && (
+                    <Button
+                      outline
+                      label={t("nostr.settings.derive")}
+                      onClick={handleDeriveNostrKeyFromSecretKey}
+                    />
                   )}
               </div>
             </div>

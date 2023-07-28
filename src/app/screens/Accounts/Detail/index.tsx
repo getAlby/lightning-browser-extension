@@ -316,12 +316,9 @@ function AccountDetail() {
             )}
           </div>
 
-          <h2 className="text-2xl mt-12 font-bold dark:text-white">
+          <h2 className="text-2xl mt-12 mb-6 font-bold dark:text-white">
             {t("mnemonic.title")}
           </h2>
-          <p className="mb-6 text-gray-500 dark:text-neutral-500 text-sm">
-            {t("mnemonic.description")}
-          </p>
 
           <div className="shadow bg-white sm:rounded-md sm:overflow-hidden p-6 dark:bg-surface-02dp flex flex-col gap-4">
             {hasMnemonic && (
@@ -338,7 +335,11 @@ function AccountDetail() {
                   )}
                 </p>
                 <p className="text-gray-500 text-sm dark:text-neutral-500">
-                  {t("mnemonic.description2")}
+                  {t(
+                    hasMnemonic
+                      ? "mnemonic.backup.description"
+                      : "mnemonic.generate.description"
+                  )}
                 </p>
               </div>
 
@@ -382,26 +383,33 @@ function AccountDetail() {
               </>
             )}
             <MenuDivider />
-            <div className="flex justify-between items-end">
-              <div className="w-7/12 flex items-center gap-2">
-                <TextField
-                  id="nostrPublicKey"
-                  label={t("nostr.public_key.label")}
-                  value={nostrPublicKey}
-                  disabled
-                  endAdornment={
-                    nostrPublicKey && <InputCopyButton value={nostrPublicKey} />
-                  }
-                />
-                {nostrPublicKey && hasImportedNostrKey && (
-                  <Badge
-                    label="imported"
-                    color="green-bitcoin"
-                    textColor="white"
+            <div className="flex justify-between items-center">
+              <div className="w-7/12">
+                <div className="flex flex-col">
+                  <TextField
+                    id="nostrPublicKey"
+                    label={t("nostr.public_key.label")}
+                    value={nostrPublicKey}
+                    disabled
+                    endAdornment={
+                      nostrPublicKey && (
+                        <InputCopyButton value={nostrPublicKey} />
+                      )
+                    }
                   />
+                </div>
+              </div>
+              <div>
+                {nostrPublicKey && hasImportedNostrKey && (
+                  <div className="">
+                    <Badge
+                      label="imported"
+                      color="green-bitcoin"
+                      textColor="white"
+                    />
+                  </div>
                 )}
               </div>
-
               <div className="w-1/5 flex-none">
                 <Link to="nostr/settings">
                   <Button label={t("nostr.settings.label")} primary fullWidth />

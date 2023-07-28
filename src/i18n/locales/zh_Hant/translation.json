@@ -443,7 +443,6 @@
           },
           "import": {
             "button": "導入秘密鑰匙",
-            "confirm_overwrite": "你已有秘密鑰匙，是否確定要覆蓋它？",
             "description": "使用現有的秘密鑰匙來恢復你的派生密鑰。",
             "title": "導入秘密鑰匙"
           },

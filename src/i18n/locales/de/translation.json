@@ -522,7 +522,6 @@
           "import": {
             "title": "Importieren eines geheimen Schlüssels",
             "description": "Verwende einen vorhandenen Geheimschlüssel, um deine abgeleiteten Schlüssel wiederherzustellen.",
-            "confirm_overwrite": "Du hast bereits einen geheimen Schlüssel, bist du sicher, dass du ihn überschreiben willst?",
             "button": "Geheimen Schlüssel importieren"
           },
           "inputs": {

@@ -425,8 +425,7 @@
           "import": {
             "title": "导入秘密钥匙",
             "description": "使用现有的秘密钥匙来恢复你的派生密钥。",
-            "button": "导入秘密钥匙",
-            "confirm_overwrite": "你已有秘密钥匙，是否确定要覆盖它？"
+            "button": "导入秘密钥匙"
           },
           "inputs": {
             "title": "你的秘密钥匙"
