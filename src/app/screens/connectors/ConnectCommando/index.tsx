@@ -1,7 +1,3 @@
-import {
-  HiddenIcon,
-  VisibleIcon,
-} from "@bitcoin-design/bitcoin-icons-react/outline";
 import Button from "@components/Button";
 import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
@@ -11,6 +7,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import PasswordViewAdornment from "~/app/components/PasswordViewAdornment";
 import msg from "~/common/lib/msg";
 
 import logo from "/static/assets/icons/core_ln.svg";
@@ -181,20 +178,11 @@ export default function ConnectCommando() {
             autoComplete="new-password"
             value={formData.privateKey}
             endAdornment={
-              <button
-                type="button"
-                tabIndex={-1}
-                className="flex justify-center items-center w-10 h-8"
-                onClick={() => {
-                  setCommandoPrivateKeyVisible(!commandoPrivateKeyVisible);
+              <PasswordViewAdornment
+                passwordViewSuccessCallback={(passwordView) => {
+                  setCommandoPrivateKeyVisible(passwordView);
                 }}
-              >
-                {commandoPrivateKeyVisible ? (
-                  <HiddenIcon className="h-6 w-6" />
-                ) : (
-                  <VisibleIcon className="h-6 w-6" />
-                )}
-              </button>
+              />
             }
           />
         </div>

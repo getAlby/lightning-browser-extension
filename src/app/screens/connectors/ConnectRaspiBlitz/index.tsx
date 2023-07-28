@@ -6,6 +6,7 @@ import { useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import PasswordViewAdornment from "~/app/components/PasswordViewAdornment";
 import msg from "~/common/lib/msg";
 
 import logo from "/static/assets/icons/raspiblitz.png";
@@ -23,6 +24,7 @@ export default function ConnectRaspiBlitz() {
   const [formData, setFormData] = useState(initialFormData);
   const [loading, setLoading] = useState(false);
   const [hasTorSupport, setHasTorSupport] = useState(false);
+  const [macaroonVisible, setMacaroonVisible] = useState(false);
 
   function handleUrl(event: React.ChangeEvent<HTMLInputElement>) {
     let url = event.target.value.trim();
@@ -164,12 +166,19 @@ export default function ConnectRaspiBlitz() {
         <div>
           <TextField
             id="macaroon"
-            type="password"
+            type={macaroonVisible ? "text" : "password"}
             autoComplete="new-password"
             label="Macaroon (HEX format)"
             value={formData.macaroon}
             onChange={handleMacaroon}
             required
+            endAdornment={
+              <PasswordViewAdornment
+                passwordViewSuccessCallback={(passwordView) => {
+                  setMacaroonVisible(passwordView);
+                }}
+              />
+            }
           />
         </div>
       </div>
