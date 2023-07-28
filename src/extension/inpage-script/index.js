@@ -133,9 +133,7 @@ if (document) {
 }
 
 function eventEmitter(action, scope) {
-  if (window[scope] && window[scope]._eventEmitter) {
+  if (window[scope] && window[scope].emit) {
     window[scope].emit(action);
-  } else {
-    return;
   }
 }

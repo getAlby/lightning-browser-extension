@@ -112,23 +112,17 @@ export default class WebLNProvider {
     });
   }
 
-  on(...args: Parameters<EventEmitter["on"]>) {
-    if (!this.enabled) {
-      throw new Error("Provider must be enabled before calling on");
-    }
+  async on(...args: Parameters<EventEmitter["on"]>) {
+    await this.enable();
     return this._eventEmitter.on(...args);
   }
-  emit(...args: Parameters<EventEmitter["emit"]>) {
-    if (!this.enabled) {
-      throw new Error("Provider must be enabled before calling emit");
-    }
+  async emit(...args: Parameters<EventEmitter["emit"]>) {
+    await this.enable();
     return this._eventEmitter.emit(...args);
   }
 
-  off(...args: Parameters<EventEmitter["off"]>) {
-    if (!this.enabled) {
-      throw new Error("Provider must be enabled before calling off");
-    }
+  async off(...args: Parameters<EventEmitter["off"]>) {
+    await this.enable();
     return this._eventEmitter.off(...args);
   }
 
