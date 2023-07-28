@@ -118,7 +118,6 @@ export default function ConnectLndHub({
         <TextField
           id="uri"
           label={t("uri.label")}
-          type="text"
           required
           placeholder="lndhub://..."
           pattern="lndhub://.+"
