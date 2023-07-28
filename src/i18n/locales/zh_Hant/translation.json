@@ -38,7 +38,8 @@
     "choose_path": {
       "alby": {
         "title": "Alby帳戶",
-        "description": "註冊或使用你現有的 Alby 帳戶立即開始閃電支付。"
+        "description": "註冊或使用你現有的 Alby 帳戶立即開始閃電支付。",
+        "connect": "使用 Alby 連接"
       },
       "other": {
         "title": "其他錢包",
@@ -359,7 +360,6 @@
           "screen_reader": "導出帳戶詳情",
           "waiting": "等待 LndHub 數據...",
           "your_ln_address": "你的閃電地址：",
-          "tip_mobile": "提示：將此錢包與你的行動裝置一起使用",
           "export_uri": "LNDHub 憑據 URI",
           "scan_qr": "通過掃描二維碼將此錢包導入Zeus或BlueWallet。"
         },
@@ -396,34 +396,77 @@
           "settings": {
             "label": "Nostr 設置",
             "title": "Nostr 設置",
-            "delete": "刪除當前的密鑰"
+            "delete": "刪除當前的密鑰",
+            "no_secret_key": "💡你還沒有秘密鑰匙。<0>點擊此處</0></div>創建你的秘密鑰匙並派生你的 nostr 密鑰。",
+            "derive": "從你的秘密鑰匙中派生你的 Nostr 密鑰",
+            "description": "從你的秘密鑰匙中派生你的 Nostr 密鑰，或通過將其粘貼到 “Nostr 私鑰”字段來導入現有的私鑰。",
+            "imported_key_warning": "⚠️ 你當前正在使用導入的或隨機生成的 Nostr 密鑰。你的 Nostr 私鑰無法通過你的秘密鑰匙恢復，因此請記住備份你的 Nostr 私鑰。"
           }
         },
         "remove": {
           "title": "刪除此帳戶",
           "subtitle": "所有與此帳號關聯的限額、支付信息和密鑰都將被清除。",
-          "confirm": "是否確實要刪除帳戶：{{名稱}}？\n這是無法撤銷的。如果你使用此帳戶登錄網站，則可能無法訪問這些網站。",
+          "confirm": "請輸入帳戶名稱以確認刪除你的帳戶。\n\n ⚠️如果繼續，所有關聯的密鑰（秘密鑰匙、Nostr等）都將被刪除。請確保你已將它們備份，沒有其他方法可以恢復它們。",
           "error": "輸入的帳戶名稱不匹配。"
         },
         "actions": {
           "remove_account": "刪除帳戶",
-          "export": "導出"
+          "export": "導出",
+          "remove_secretkey": "移除秘密鑰匙"
         },
         "mnemonic": {
-          "title": "",
+          "title": "秘密鑰匙",
           "backup": {
             "protocols": {
               "nostr": "Nostr"
-            }
-          }
+            },
+            "button": "備份秘密鑰匙",
+            "description2": "你的秘密鑰匙是一組12個單詞，可以讓你在新設備上或失去帳戶訪問的情況下訪問 Nostr 等協議。請務必將其在紙上記下並安全地保存：",
+            "description1": "除了比特幣閃電網絡之外，Alby 還允許你生成密鑰並與其他協議交互，例如：",
+            "warning": "⚠️別忘了將你的秘密鑰匙備份！不備份可能會導致永久失去對你的 Nostr 身份或使用此密鑰管理的資產的訪問權限。",
+            "save": "保存秘密鑰匙",
+            "title": "備份你的秘密鑰匙"
+          },
+          "description2": "你的秘密鑰匙是一組12個單詞，可以讓你在新設備上或失去帳戶訪問的情況下訪問 Nostr 等協議。",
+          "lnurl": {
+            "use_mnemonic": "使用秘密鑰匙登錄閃電驅動的應用程式（LNURL Auth）",
+            "title": "閃電登錄"
+          },
+          "inputs": {
+            "title": "你的秘密鑰匙"
+          },
+          "generate": {
+            "error_confirm": "請確認你已將你的秘密鑰匙備份。",
+            "confirm": "我已將我的帳戶秘密鑰匙保存在私密且安全的地方",
+            "button": "生成秘密鑰匙",
+            "title": "生成你的秘密鑰匙"
+          },
+          "import": {
+            "button": "導入秘密鑰匙",
+            "confirm_overwrite": "你已有秘密鑰匙，是否確定要覆蓋它？",
+            "description": "使用現有的秘密鑰匙來恢復你的派生密鑰。",
+            "title": "導入秘密鑰匙"
+          },
+          "existing_nostr_key_notice": "⚠️ 該帳戶已設置 nostr 私鑰，不會從此秘密鑰匙派生。你可以從你的帳戶設置管理你的 nostr 密鑰。",
+          "saved": "秘密鑰匙已加密並成功保存。",
+          "description": "你的帳戶秘密鑰匙允許你通過 Alby 與 Nostr 等協議交互。"
         },
         "bitcoin": {
           "network": {
             "options": {
               "bitcoin": "主網",
-              "testnet": "測試網"
-            }
+              "testnet": "測試網",
+              "regtest": "Regtest"
+            },
+            "subtitle": "選擇網絡來派生地址和解碼交易",
+            "title": "比特幣網絡"
           }
+        },
+        "remove_secretkey": {
+          "subtitle": "將從該帳戶移除秘密鑰匙。",
+          "title": "移除秘密鑰匙",
+          "success": "已成功移除秘密鑰匙。",
+          "confirm": "請輸入帳戶名稱以確認刪除你的秘密鑰匙。"
         }
       },
       "actions": {
@@ -552,9 +595,6 @@
     },
     "send": {
       "title": "發送",
-      "qrcode": {
-        "title": "等待掃描"
-      },
       "input": {
         "label": "接收者",
         "hint": "發票、閃電地址或 LNURL"
@@ -621,7 +661,8 @@
         "waiting": "等待付款...",
         "status": "查看付款狀態"
       },
-      "receive_via_bitcoin_address": "通過比特幣地址接收"
+      "receive_via_bitcoin_address": "通過比特幣地址接收",
+      "redeem_lnurl": "兌換 LNURL"
     },
     "discover": {
       "title": "探索閃電⚡️生態系統",
@@ -781,7 +822,8 @@
     },
     "confirm_add_account": {
       "content": "此網站想要添加一個帳戶（{{connector}}）：",
-      "title": "添加帳戶"
+      "title": "添加帳戶",
+      "tor_info": "為了通過 TOR 網絡進行連接，你需要先安裝 Alby 配套應用程式："
     },
     "on_chain": {
       "instructions1": "要通過比特幣地址接收比特幣，請在 getalby.com 上登錄你的 <0>Alby 帳戶</0>",
@@ -791,7 +833,25 @@
     },
     "confirm_get_address": {
       "content": "你的比特幣收款地址",
-      "title": "獲取地址"
+      "title": "獲取地址",
+      "heading": "該網站要求你讀取："
+    },
+    "lnurlredeem": {
+      "errors": {
+        "invalid_lnurl": "無效 LNURL",
+        "invalid_withdraw_request": "無效 LNURL 提款請求"
+      },
+      "title": "兌換比特幣",
+      "actions": {
+        "withdraw": "提款"
+      },
+      "input": {
+        "placeholder": "LNURL...",
+        "label": "LNURL-提款代碼"
+      }
+    },
+    "scan_qrcode": {
+      "title": "等待掃描"
     }
   },
   "common": {

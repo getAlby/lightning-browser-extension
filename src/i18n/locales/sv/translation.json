@@ -366,7 +366,7 @@
         "remove": {
           "title": "Ta bort detta konto",
           "subtitle": "Tar bort alla traktamenten, betalningsdata och nycklar som är kopplade till detta konto.",
-          "confirm": "Är du säker på att du vill ta bort kontot: {{name}}? \nDetta kan inte ångras. Om du använde det här kontot för att logga in på webbplatser kan du förlora åtkomst till dessa.",
+          "confirm": "Ange namnet på kontot för att bekräfta raderingen av ditt konto.\n\n ⚠️ Alla associerade nycklar (hemlig nyckel, Nostr, etc) kommer att raderas om du fortsätter. Se till att du har säkerhetskopierat dem, det finns inget annat sätt att återställa dem.",
           "error": "Det angivna kontonamnet matchade inte."
         },
         "title1": "Konto information",
@@ -380,7 +380,6 @@
           "screen_reader": "Exportera konto detaljer",
           "waiting": "väntar på LndHub-data...",
           "your_ln_address": "Din Lightning Address:",
-          "tip_mobile": "Tips: Använd den här plånboken med din mobil",
           "export_uri": "LNDHub-inloggnings-URI",
           "scan_qr": "Importera denna plånbok till Zeus eller BlueWallet genom att skanna QR-koden."
         },
@@ -567,9 +566,6 @@
     },
     "send": {
       "title": "Skicka",
-      "qrcode": {
-        "title": "Väntar på skanning"
-      },
       "input": {
         "label": "Mottagare",
         "hint": "Faktura, Lightning-adress eller LNURL"
@@ -621,7 +617,8 @@
     "receive": {
       "title": "Tag emot",
       "actions": {
-        "create_invoice": "Skapa Faktura"
+        "create_invoice": "Skapa Faktura",
+        "copy_lightning_address": "Kopiera Lightning adress"
       },
       "amount": {
         "label": "Belopp",
@@ -636,7 +633,8 @@
         "waiting": "väntar på betalning...",
         "status": "Kontrollera betalningsstatus"
       },
-      "receive_via_bitcoin_address": "Ta emot via bitcoin adress"
+      "receive_via_bitcoin_address": "Ta emot via bitcoin adress",
+      "redeem_lnurl": "Lös in LNURL"
     },
     "publishers": {
       "publisher": {
@@ -839,6 +837,23 @@
       "title": "Få adress",
       "heading": "Den här webbplatsen ber dig att läsa:",
       "content": "Din Bitcoin-mottagningsadress"
+    },
+    "scan_qrcode": {
+      "title": "Väntar på att skanna"
+    },
+    "lnurlredeem": {
+      "input": {
+        "placeholder": "LNURL...",
+        "label": "LNURL-uttagskod"
+      },
+      "errors": {
+        "invalid_withdraw_request": "Ogiltig LNURL-utagningsbegäran",
+        "invalid_lnurl": "Ogiltig LNURL"
+      },
+      "title": "Lös in bitcoin",
+      "actions": {
+        "withdraw": "Ta ut"
+      }
     }
   },
   "common": {
