@@ -356,7 +356,6 @@
             "label": "Configurações Nostr",
             "title": "Configurações Nostr",
             "derive": "Derive chaves Nostr de sua chave secreta",
-            "delete": "Excluir chaves existentes",
             "can_restore": "✅ Chave Nostr derivada de sua chave secreta",
             "description": "Derive chaves Nostr de sua chave secreta ou importe sua chave privada existente colando-a no campo \"Chave privada Nostr\".",
             "no_secret_key": "💡 Você ainda não tem uma chave secreta. <0>Clique aqui</0></div> para criar sua chave secreta e derivar suas chaves nostr.",
@@ -392,12 +391,10 @@
           "backup": {
             "save": "Salvar chave secreta",
             "button": "Fazer backup",
-            "description1": "Além da rede Relâmpago do Bitcoin, a Alby permite gerar chaves e interagir com outros protocolos como:",
             "protocols": {
               "nostr": "Nostr"
             },
             "title": "Backup de sua chave secreta",
-            "description2": "A chave secreta é um conjunto de 12 palavras que permitirão que você acesse suas chaves nesses protocolos em um novo dispositivo ou caso perca o acesso à sua conta. Certifique-se de anotá-la em um pedaço de papel e mantê-la segura:",
             "warning": "⚠️ Não se esqueça de fazer o backup de sua chave secreta! Não fazer o backup pode resultar na perda permanente do acesso à sua conta Nostr ou aos ativos que você gerencia com esta chave."
           },
           "import": {
@@ -409,8 +406,6 @@
             "title": "Sua chave secreta"
           },
           "existing_nostr_key_notice": "⚠️ Esta conta já possui uma chave privada nostr definida e não será derivada desta chave secreta. Você pode gerenciar sua chave nostr nas configurações de sua conta.",
-          "description": "A chave secreta permite que você use a Alby para interagir com protocolos como o Nostr.",
-          "description2": "A chave secreta é um conjunto de 12 palavras que permitirão que você acesse suas chaves de protocolos como o Nostr em outros dispositivos ou caso você perca o acesso à sua conta.",
           "lnurl": {
             "use_mnemonic": "Use a chave secreta para acessar aplicativos com tecnologia (LNURL Auth)",
             "title": "Login Relâmpago"

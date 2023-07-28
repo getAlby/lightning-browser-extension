@@ -359,7 +359,6 @@
             "derive": "Få Nostr-nycklar från din hemliga nyckel",
             "can_restore": "✅ Nostr-nyckel hämtad från din hemliga nyckel",
             "description": "Hämta Nostr-nycklar från din hemliga nyckel eller importera din befintliga privata nyckel genom att klistra in den i fältet \"Nostr privat nyckel\".",
-            "delete": "Radera aktuella nycklar",
             "no_secret_key": "💡 Du har ingen hemlig nyckel än. <0>Klicka här</0></div> för att skapa din hemliga nyckel och hämta dina nostr-nycklar."
           }
         },
@@ -401,12 +400,10 @@
             "title": "Säkerhetskopiera din hemliga nyckel",
             "save": "Spara hemlig nyckel",
             "button": "Säkerhetskopiera hemlig nyckel",
-            "description1": "Förutom Bitcoin Lightning Network låter Alby dig generera nycklar och interagera med andra protokoll som:",
             "protocols": {
               "nostr": "Nostr"
             },
-            "warning": "⚠️ Glöm inte att säkerhetskopiera din hemliga nyckel! Att inte säkerhetskopiera det kan resultera i att du permanent förlorar åtkomst till din Nostr-identitet eller tillgångar som du hanterar med denna nyckel.",
-            "description2": "Din hemliga nyckel är en uppsättning av 12 ord som låter dig komma åt dina nycklar till dessa protokoll på en ny enhet eller om du förlorar åtkomsten till ditt konto. Se till att skriva ner det på ett papper och förvara det säkert:"
+            "warning": "⚠️ Glöm inte att säkerhetskopiera din hemliga nyckel! Att inte säkerhetskopiera det kan resultera i att du permanent förlorar åtkomst till din Nostr-identitet eller tillgångar som du hanterar med denna nyckel."
           },
           "import": {
             "title": "Importera en hemlig nyckel",
@@ -414,8 +411,6 @@
             "button": "Importera hemlig nyckel"
           },
           "title": "Hemlig nyckel",
-          "description": "Din konto hemliga nyckel låter dig använda Alby för att interagera med protokoll som Nostr.",
-          "description2": "Din hemliga nyckel är en uppsättning av 12 ord som låter dig komma åt dina nycklar till protokoll som Nostr på en ny enhet eller om du förlorar åtkomsten till ditt konto.",
           "inputs": {
             "title": "Din hemliga nyckel"
           },
