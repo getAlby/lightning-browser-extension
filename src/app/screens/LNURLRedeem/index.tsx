@@ -78,7 +78,6 @@ function LNURLRedeem() {
           <div className="pt-4">
             <TextField
               id="lnurlwithdraw"
-              type="text"
               label={t("input.label")}
               value={lnurlWithdrawLink}
               placeholder={t("input.placeholder")}

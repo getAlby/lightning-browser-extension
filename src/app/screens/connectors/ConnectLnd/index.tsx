@@ -153,7 +153,6 @@ export default function ConnectLnd() {
       <div className="mb-6">
         <TextField
           id="url"
-          type="text"
           label={t("url.label")}
           placeholder={t("url.placeholder")}
           pattern="https?://.+"
@@ -176,7 +175,8 @@ export default function ConnectLnd() {
         <div>
           <TextField
             id="macaroon"
-            type="text"
+            type="password"
+            autoComplete="new-password"
             label={t("macaroon.label")}
             value={formData.macaroon}
             onChange={handleChange}

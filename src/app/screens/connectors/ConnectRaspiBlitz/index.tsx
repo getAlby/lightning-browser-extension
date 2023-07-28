@@ -134,7 +134,6 @@ export default function ConnectRaspiBlitz() {
       <div className="mt-6">
         <TextField
           id="url"
-          type="text"
           label={t("rest_api_host.label")}
           placeholder={t("rest_api_host.placeholder")}
           onChange={handleUrl}
@@ -165,7 +164,8 @@ export default function ConnectRaspiBlitz() {
         <div>
           <TextField
             id="macaroon"
-            type="text"
+            type="password"
+            autoComplete="new-password"
             label="Macaroon (HEX format)"
             value={formData.macaroon}
             onChange={handleMacaroon}

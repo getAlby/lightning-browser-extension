@@ -198,7 +198,6 @@ function NostrSettings() {
               <TextField
                 id="nostrPublicKey"
                 label={t("nostr.public_key.label")}
-                type="text"
                 value={nostrPublicKey}
                 disabled
                 endAdornment={<InputCopyButton value={nostrPublicKey} />}

@@ -133,8 +133,9 @@ export default function ConnectMyNode() {
       <div className="mt-6">
         <TextField
           id="lndconnect"
-          type="text"
           label={t("rest_url.label")}
+          type="password"
+          autoComplete="new-password"
           placeholder={t("rest_url.placeholder")}
           onChange={handleLndconnectUrl}
           required

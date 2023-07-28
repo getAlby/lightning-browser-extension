@@ -278,7 +278,6 @@ function Receive() {
                   <div className="mb-4">
                     <TextField
                       id="description"
-                      type="text"
                       label={t("description.label")}
                       placeholder={t("description.placeholder")}
                       onChange={handleChange}

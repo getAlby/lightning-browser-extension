@@ -122,7 +122,6 @@ export default function ConnectEclair() {
       <TextField
         id="url"
         label={t("url.label")}
-        type="text"
         placeholder={t("url.placeholder")}
         value={formData.url}
         required

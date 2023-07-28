@@ -469,7 +469,6 @@ function LNURLPay() {
                       <div className="mt-4">
                         <TextField
                           id="comment"
-                          type="text"
                           label={t("comment.label")}
                           placeholder={tCommon("optional")}
                           onChange={(e) => {
@@ -498,7 +497,6 @@ function LNURLPay() {
                           <div className="mt-4">
                             <TextField
                               id="name"
-                              type="text"
                               label={t("name.label")}
                               placeholder={tCommon("optional")}
                               value={userName}
@@ -512,7 +510,6 @@ function LNURLPay() {
                           <div className="mt-4">
                             <TextField
                               id="email"
-                              type="text"
                               label={t("email.label")}
                               placeholder={tCommon("optional")}
                               value={userEmail}

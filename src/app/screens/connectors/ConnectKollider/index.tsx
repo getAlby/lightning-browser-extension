@@ -176,7 +176,6 @@ export default function ConnectKollidier({ variant }: Props) {
         <TextField
           id="username"
           label={t(`username.label`)}
-          type="text"
           required
           value={formData.username}
           onChange={handleChange}

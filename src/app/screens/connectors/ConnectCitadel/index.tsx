@@ -139,7 +139,6 @@ export default function ConnectCitadel() {
         label={t("url.label")}
         id="url"
         placeholder={t("url.placeholder")}
-        type="text"
         value={formData.url}
         required
         onChange={handleChange}

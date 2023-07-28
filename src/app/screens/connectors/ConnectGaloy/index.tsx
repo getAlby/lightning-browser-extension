@@ -197,7 +197,6 @@ export default function ConnectGaloy(props: Props) {
             <Input
               id="jwt"
               name="jwt"
-              type="text"
               required
               onChange={handleJwtChange}
               autoFocus={true}

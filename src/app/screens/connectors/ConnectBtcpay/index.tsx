@@ -124,7 +124,6 @@ export default function ConnectBtcpay() {
     >
       <TextField
         id="btcpay-config"
-        type="text"
         label={t("config.label")}
         placeholder={t("config.placeholder")}
         onChange={handleChange}

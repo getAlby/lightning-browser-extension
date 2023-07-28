@@ -149,7 +149,6 @@ function MakeInvoice() {
                 {memoEditable ? (
                   <TextField
                     id="memo"
-                    type="text"
                     label={t("memo.label")}
                     value={memo}
                     placeholder={tCommon("optional")}
