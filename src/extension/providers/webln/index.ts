@@ -31,16 +31,15 @@ export default class WebLNProvider {
     this.executing = false;
   }
 
-  async enable() {
+  async enable(): Promise<void> {
     if (this.enabled) {
-      return { enabled: true };
+      return;
     }
     const result = await this.execute("enable");
     if (typeof result.enabled === "boolean") {
       this.enabled = result.enabled;
       this.isEnabled = result.enabled;
     }
-    return result;
   }
 
   getInfo() {
