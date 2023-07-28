@@ -22,11 +22,9 @@ type KeysendArgs = {
 
 export default class WebLNProvider {
   enabled: boolean;
-  executing: boolean;
 
   constructor() {
     this.enabled = false;
-    this.executing = false;
   }
 
   async enable(): Promise<void> {
