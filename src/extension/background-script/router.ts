@@ -65,7 +65,7 @@ const routes = {
   getMnemonic: mnemonic.getMnemonic,
   generateMnemonic: mnemonic.generateMnemonic,
   getSwapInfo: swaps.info,
-
+  createSwap: swaps.createSwap,
   nostr: {
     generatePrivateKey: nostr.generatePrivateKey,
     getPrivateKey: nostr.getPrivateKey,

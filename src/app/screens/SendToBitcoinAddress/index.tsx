@@ -22,6 +22,7 @@ import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import api from "~/common/lib/api";
+import msg from "~/common/lib/msg";
 
 const Dt = ({ children }: { children: React.ReactNode }) => (
   <dt className="text-sm text-gray-500 dark:text-neutral-500">{children}</dt>
@@ -100,18 +101,16 @@ function SendToBitcoinAddress() {
   async function confirm() {
     try {
       setLoading(true);
-
-      // TODO: Excute payment
-      await new Promise((r) => setTimeout(r, 2000));
-
       // TODO: move to api
-      // const response = await msg.request(
-      //   "sendPayment",
-      //   { paymentRequest: swapData?.invoice },
-      //   {
-      //     origin: navState.origin,
-      //   }
-      // );
+      const response = await msg.request(
+        "sendPayment",
+        {
+          paymentRequest: swapData.payment_request,
+        },
+        {
+          origin: navState.origin,
+        }
+      );
 
       // if (response.error) {
       //   throw new Error(response.error as string);
@@ -159,6 +158,7 @@ function SendToBitcoinAddress() {
       setNetworkFeeFiat(await getFormattedFiat(result.network_fee));
       setServiceFeeFiat(await getFormattedFiat(result.service_fee));
       setTotalAmountFiat(await getFormattedFiat(result.total));
+      setStep("review");
     } catch (e) {
       console.error(e);
       if (e instanceof Error) {
@@ -314,7 +314,7 @@ function SendToBitcoinAddress() {
                     </div>
                   </Dd>
                 </div>
-                <hr className="my-3 dark:border-white/10" />
+                <hr className="dark:border-white/10" />
                 <div className="text-lg">
                   <Dt>{t("total.label")}</Dt>
                   <Dd>

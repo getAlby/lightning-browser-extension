@@ -1,14 +1,11 @@
-import {
-  auth,
-  Client,
-  CreateSwapParams,
-  CreateSwapResponse,
-  SwapInfoResponse,
-} from "alby-js-sdk";
+import { auth, Client } from "alby-js-sdk";
 import { RequestOptions } from "alby-js-sdk/dist/request";
 import {
+  CreateSwapParams,
+  CreateSwapResponse,
   GetAccountInformationResponse,
   Invoice,
+  SwapInfoResponse,
   Token,
 } from "alby-js-sdk/dist/types";
 import browser from "webextension-polyfill";
@@ -249,7 +246,6 @@ export default class Alby implements Connector {
           "transactions:read", // for outgoing invoice
         ],
         token: this.config.oAuthToken, // initialize with existing token
-        user_agent: "",
       });
 
       if (this.config.oAuthToken) {
