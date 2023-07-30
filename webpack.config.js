@@ -12,6 +12,12 @@ const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 const BundleAnalyzerPlugin =
   require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
+const viewsPath = path.join(__dirname, "static", "views");
+const nodeEnv = process.env.NODE_ENV || "development";
+const destPath = path.join(__dirname, "dist", nodeEnv);
+
+const targetBrowser = process.env.TARGET_BROWSER;
+
 let network = "mainnet";
 if (!process.env.ALBY_API_URL) {
   process.env.ALBY_API_URL = "https://api.regtest.getalby.com";
@@ -116,11 +122,6 @@ if (!process.env.VERSION) {
   process.env.VERSION = require("./package.json").version;
 }
 
-const viewsPath = path.join(__dirname, "static", "views");
-const nodeEnv = process.env.NODE_ENV || "development";
-const destPath = path.join(__dirname, "dist", nodeEnv);
-
-const targetBrowser = process.env.TARGET_BROWSER;
 
 const getExtensionFileType = (browser) => {
   if (browser === "opera") {
