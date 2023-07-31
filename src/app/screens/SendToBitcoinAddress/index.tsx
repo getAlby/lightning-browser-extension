@@ -99,13 +99,15 @@ function SendToBitcoinAddress() {
   }, [getFormattedFiat, showFiat]);
 
   async function confirm() {
+    if (!swapData) return;
+
     try {
       setLoading(true);
 
       const response = await msg.request(
         "sendPayment",
         {
-          paymentRequest: swapData!.payment_request,
+          paymentRequest: swapData.payment_request,
         },
         {
           origin: navState.origin,
