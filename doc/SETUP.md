@@ -2,6 +2,8 @@
 
 ## 🚀 Quick Start
 
+> For Windows users, please use [WSL 2](https://learn.microsoft.com/en-us/windows/wsl/install).
+
 - Install dependencies\
   `$ yarn install`
 
