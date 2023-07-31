@@ -251,14 +251,9 @@ export default class Alby implements Connector {
 
       let authUrl = authClient.generateAuthURL({
         code_challenge_method: "S256",
+        authorizeUrl: process.env.ALBY_OAUTH_AUTHORIZE_URL,
       });
-      // TODO: make authorize URL in alby-js-sdk customizable
-      if (process.env.ALBY_OAUTH_AUTHORIZE_URL) {
-        authUrl = authUrl.replace(
-          "https://getalby.com/oauth",
-          process.env.ALBY_OAUTH_AUTHORIZE_URL
-        );
-      }
+
       authUrl += "&webln=false"; // stop getalby.com login modal launching lnurl auth
       const authResult = await this.launchWebAuthFlow(authUrl);
       const code = new URL(authResult).searchParams.get("code");

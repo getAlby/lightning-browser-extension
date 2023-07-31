@@ -12,6 +12,15 @@ const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 const BundleAnalyzerPlugin =
   require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
+if (!process.env.NODE_ENV) {
+  process.env.NODE_ENV = "development";
+}
+const nodeEnv = process.env.NODE_ENV;
+const viewsPath = path.join(__dirname, "static", "views");
+const destPath = path.join(__dirname, "dist", nodeEnv);
+
+const targetBrowser = process.env.TARGET_BROWSER;
+
 let network = "mainnet";
 if (!process.env.ALBY_API_URL) {
   process.env.ALBY_API_URL = "https://api.regtest.getalby.com";
@@ -79,13 +88,13 @@ if (clientId && clientSecret) {
 
   // setup ALBY_OAUTH_CLIENT_ID
   const selectedOAuthCredentials =
-    oauthCredentials[process.env.NODE_ENV]?.[network]?.[oauthBrowser];
+    oauthCredentials[nodeEnv]?.[network]?.[oauthBrowser];
   if (!selectedOAuthCredentials) {
-    throw new Error("No OAuth credentials found for current configuration");
+    throw new Error(`No OAuth credentials found for current configuration: NODE_ENV=${nodeEnv} network=${network} oauthBrowser=${oauthBrowser}`);
   }
   console.info(
     "Using OAuth credentials for",
-    process.env.NODE_ENV,
+    nodeEnv,
     oauthBrowser,
     network
   );
@@ -116,11 +125,6 @@ if (!process.env.VERSION) {
   process.env.VERSION = require("./package.json").version;
 }
 
-const viewsPath = path.join(__dirname, "static", "views");
-const nodeEnv = process.env.NODE_ENV || "development";
-const destPath = path.join(__dirname, "dist", nodeEnv);
-
-const targetBrowser = process.env.TARGET_BROWSER;
 
 const getExtensionFileType = (browser) => {
   if (browser === "opera") {
@@ -319,7 +323,8 @@ if (nodeEnv === "development") {
                 destination: `${path.join(
                   destPath,
                   targetBrowser
-                )}.${getExtensionFileType(targetBrowser)}`,
+                )
+                  }.${getExtensionFileType(targetBrowser)}`,
                 options: { zlib: { level: 6 } },
               },
             ],

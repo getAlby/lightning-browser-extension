@@ -356,7 +356,6 @@
             "label": "Nostr 设置",
             "title": "Nostr 设置",
             "imported_key_warning": "⚠️ 你当前正在使用导入的或随机生成的 Nostr 密钥。 你的Nostr私钥无法通过你的秘密钥匙恢复，因此请记住备份你的Nostr私钥。",
-            "delete": "删除当前密钥",
             "can_restore": "✅ Nostr 密钥已从你的秘密钥匙派生",
             "derive": "从你的秘密钥匙中派生 Nostr 密钥",
             "no_secret_key": "💡 你还没有秘密钥匙。 <0>单击此处</0></div>创建你的秘密钥匙并派生你的 nostr 密钥。",
@@ -400,22 +399,18 @@
           }
         },
         "mnemonic": {
-          "description2": "你的秘密钥匙是一组12个单词，可以让你在新设备上或失去帐户访问的情况下访问 Nostr 等协议。",
           "backup": {
             "button": "备份秘密钥匙",
             "warning": "⚠️ 别忘了将你的秘密钥匙备份！不备份可能会导致永久失去对你的 Nostr 身份或使用此密钥管理的资产的访问权限。",
             "title": "备份你的秘密钥匙",
             "save": "保存秘密钥匙",
-            "description1": "除了比特币闪电网络之外，Alby 还允许你生成密钥并与其他协议交互，例如：",
             "protocols": {
               "nostr": "Nostr"
-            },
-            "description2": "你的秘密钥匙是一组12个单词，可以让你在新设备上或失去帐户访问的情况下访问 Nostr 等协议。请务必将其在纸上记下并安全地保存："
+            }
           },
           "existing_nostr_key_notice": "⚠️ 该账户已设置 nostr 私钥，不会从此秘密钥匙派生。你可以从你的帐户设置管理你的 nostr 密钥。",
           "title": "秘密钥匙",
           "saved": "秘密钥匙已加密并成功保存。",
-          "description": "你的帐户秘密钥匙允许你通过 Alby 与 Nostr 等协议交互。",
           "generate": {
             "title": "生成你的秘密钥匙",
             "button": "生成秘密钥匙",
@@ -425,8 +420,7 @@
           "import": {
             "title": "导入秘密钥匙",
             "description": "使用现有的秘密钥匙来恢复你的派生密钥。",
-            "button": "导入秘密钥匙",
-            "confirm_overwrite": "你已有秘密钥匙，是否确定要覆盖它？"
+            "button": "导入秘密钥匙"
           },
           "inputs": {
             "title": "你的秘密钥匙"
