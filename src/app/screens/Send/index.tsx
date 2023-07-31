@@ -101,7 +101,6 @@ function Send() {
         isAlbyOAuthAccount(auth.account?.connectorType) &&
         isBitcoinAddress(invoice)
       ) {
-        // TODO: Parse bitcoin addresses
         navigate("/sendToBitcoinAddress", {
           state: { args: { bitcoinAddress: invoice } },
         });
