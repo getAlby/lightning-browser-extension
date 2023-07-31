@@ -80,12 +80,12 @@ function SendToBitcoinAddress() {
       try {
         setFeesLoading(true);
 
-        // TODO: test with regtest APIs
         const result = await api.getSwapInfo();
 
         setServiceFeePercentage(result.service_fee_percentage);
-        setNetworkFee(result.network_fee);
         setSatsPerVbyte(result.sats_per_vbyte);
+
+        setNetworkFee(result.network_fee);
         if (showFiat) {
           setNetworkFeeFiat(await getFormattedFiat(result.network_fee));
         }
@@ -101,23 +101,23 @@ function SendToBitcoinAddress() {
   async function confirm() {
     try {
       setLoading(true);
-      // TODO: move to api
+
       const response = await msg.request(
         "sendPayment",
         {
-          paymentRequest: swapData.payment_request,
+          paymentRequest: swapData!.payment_request,
         },
         {
           origin: navState.origin,
         }
       );
 
-      // if (response.error) {
-      //   throw new Error(response.error as string);
-      // }
+      if (response.error) {
+        throw new Error(response.error as string);
+      }
 
-      auth.fetchAccountInfo(); // Update balance.
-      // msg.reply(response);
+      // Update balance
+      auth.fetchAccountInfo();
 
       setStep("success");
     } catch (e) {
@@ -154,10 +154,12 @@ function SendToBitcoinAddress() {
       });
 
       setSwapData(result);
-      setAmountFiat(await getFormattedFiat(result.amount));
-      setNetworkFeeFiat(await getFormattedFiat(result.network_fee));
-      setServiceFeeFiat(await getFormattedFiat(result.service_fee));
-      setTotalAmountFiat(await getFormattedFiat(result.total));
+      if (showFiat) {
+        setAmountFiat(await getFormattedFiat(result.amount));
+        setNetworkFeeFiat(await getFormattedFiat(result.network_fee));
+        setServiceFeeFiat(await getFormattedFiat(result.service_fee));
+        setTotalAmountFiat(await getFormattedFiat(result.total));
+      }
       setStep("review");
     } catch (e) {
       console.error(e);
@@ -174,7 +176,7 @@ function SendToBitcoinAddress() {
     confirm();
   }
 
-  const amountMin = 10_000;
+  const amountMin = 100_000;
   const amountMax = 10_000_000;
 
   const amountExceeded = +amountSat > (auth?.account?.balance || 0);
@@ -214,7 +216,6 @@ function SendToBitcoinAddress() {
                     auth?.balancesDecorated?.accountBalance
                   }`}
                 />
-                {/* TODO: Fix icon, noopener nofollow */}
                 <Alert type="info">
                   <InfoIcon className="w-6 h-6 float-left rounded-full border border-1 border-blue-700  dark:border-blue-300 mr-2 " />
                   <Trans
@@ -226,9 +227,8 @@ function SendToBitcoinAddress() {
                         className="underline hover:text-blue-800 dark:hover:text-blue-200"
                         href="https://deezy.io"
                         target="_blank"
-                      >
-                        content
-                      </Hyperlink>,
+                        rel="noopener nofollow"
+                      ></Hyperlink>,
                     ]}
                   />
                 </Alert>
@@ -351,10 +351,10 @@ function SendToBitcoinAddress() {
                 destination: bitcoinAddress,
               })}
             />
-            {/* TODO: rel="noopener nofollow" */}
             <div className="text-center my-4">
               <Hyperlink
                 href={`https://mempool.space/address/${bitcoinAddress}`}
+                rel="noopener nofollow"
               >
                 {t("view_on_explorer")}
                 <ExportIcon className="w-6 h-6 inline" />
