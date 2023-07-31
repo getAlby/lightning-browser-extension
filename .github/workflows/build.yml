@@ -14,6 +14,7 @@ jobs:
     name: build-prod
     env:
       ALBY_API_URL: "https://api.getalby.com"
+      NODE_ENV: "production"
 
     permissions:
       issues: write
@@ -29,15 +30,9 @@ jobs:
       - run: yarn install
 
       - name: Build firefox
-        env:
-          ALBY_OAUTH_CLIENT_ID: ${{ vars.ALBY_OAUTH_CLIENT_ID_FIREFOX }}
-          ALBY_OAUTH_CLIENT_SECRET: ${{ vars.ALBY_OAUTH_CLIENT_SECRET_FIREFOX }}
         run: yarn build:firefox
 
       - name: Build chrome
-        env:
-          ALBY_OAUTH_CLIENT_ID: ${{ vars.ALBY_OAUTH_CLIENT_ID_CHROME }}
-          ALBY_OAUTH_CLIENT_SECRET: ${{ vars.ALBY_OAUTH_CLIENT_SECRET_CHROME }}
         run: yarn build:chrome
 
       - name: Archive firefox production zip file
