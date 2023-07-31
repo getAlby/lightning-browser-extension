@@ -988,14 +988,7 @@
     strict-event-emitter "^0.2.4"
     web-encoding "^1.1.5"
 
-"@noble/curves@1.0.0", "@noble/curves@~1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@noble/curves/-/curves-1.0.0.tgz#e40be8c7daf088aaf291887cbc73f43464a92932"
-  integrity sha512-2upgEu0iLiDVDZkNLeFV2+ht0BAVgQnEmCk6JsOch9Rp8xfkMCbvbAZlA2pBHQc73dbl+vFOXfqkf4uemdn0bw==
-  dependencies:
-    "@noble/hashes" "1.3.0"
-
-"@noble/curves@^1.1.0", "@noble/curves@~1.1.0":
+"@noble/curves@1.1.0", "@noble/curves@^1.1.0", "@noble/curves@~1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@noble/curves/-/curves-1.1.0.tgz#f13fc667c89184bc04cccb9b11e8e7bae27d8c3d"
   integrity sha512-091oBExgENk/kGj3AZmtBDMpxQPDtxQABR2B9lb1JbVTs6ytdzZNwvhxQ4MWasRNEzlbEH8jCWFCwhF/Obj5AA==
@@ -1093,16 +1086,7 @@
   resolved "https://registry.yarnpkg.com/@scure/base/-/base-1.1.1.tgz#ebb651ee52ff84f420097055f4bf46cfba403938"
   integrity sha512-ZxOhsSyxYwLJj3pLZCefNitxsj093tb2vq90mp2txoYeBqbcjDjqFhyM8eUjq/uFm6zJ+mUuqxlS2FkuSY1MTA==
 
-"@scure/bip32@1.3.0":
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/@scure/bip32/-/bip32-1.3.0.tgz#6c8d980ef3f290987736acd0ee2e0f0d50068d87"
-  integrity sha512-bcKpo1oj54hGholplGLpqPHRbIsnbixFtc06nwuNM5/dwSXOq/AAYoIBRsBmnZJSdfeNW5rnff7NTAz3ZCqR9Q==
-  dependencies:
-    "@noble/curves" "~1.0.0"
-    "@noble/hashes" "~1.3.0"
-    "@scure/base" "~1.1.0"
-
-"@scure/bip32@^1.3.1":
+"@scure/bip32@1.3.1", "@scure/bip32@^1.3.1":
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/@scure/bip32/-/bip32-1.3.1.tgz#7248aea723667f98160f593d621c47e208ccbb10"
   integrity sha512-osvveYtyzdEVbt3OfwwXFr4P2iVBL5u1Q3q4ONBfDY/UpOuXmOlbgwc1xECEboY8wIays8Yt6onaWMUdUbfl0A==
@@ -1111,15 +1095,7 @@
     "@noble/hashes" "~1.3.1"
     "@scure/base" "~1.1.0"
 
-"@scure/bip39@1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@scure/bip39/-/bip39-1.2.0.tgz#a207e2ef96de354de7d0002292ba1503538fc77b"
-  integrity sha512-SX/uKq52cuxm4YFXWFaVByaSHJh2w3BnokVSeUJVCv6K7WulT9u2BuNRBhuFl8vAuYnzx9bEu9WgpcNYTrYieg==
-  dependencies:
-    "@noble/hashes" "~1.3.0"
-    "@scure/base" "~1.1.0"
-
-"@scure/bip39@^1.2.1":
+"@scure/bip39@1.2.1", "@scure/bip39@^1.2.1":
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@scure/bip39/-/bip39-1.2.1.tgz#5cee8978656b272a917b7871c981e0541ad6ac2a"
   integrity sha512-Z3/Fsz1yr904dduJD0NpiyRHhRYHdcnyh73FZWiV+/qhWi83wNJ3NWolYqCEN+ZWsUz2TWwajJggcRE9r1zUYg==
@@ -2245,13 +2221,13 @@ ajv@^8.9.0:
     require-from-string "^2.0.2"
     uri-js "^4.2.2"
 
-alby-js-sdk@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/alby-js-sdk/-/alby-js-sdk-2.1.0.tgz#4c12dab8b3acfa927b0bd8789ee93bb9e80ede99"
-  integrity sha512-fpKDwT3vTkVgBmjTFVshw6yh3TITfEwMgYIT0f1l2EByJss7BcZ7CJjvrGYtIkhZMPWQm1g8dJuzpjAc6PKOlQ==
+alby-js-sdk@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/alby-js-sdk/-/alby-js-sdk-2.1.2.tgz#fc822832eb68f8dd08067d84924fc2bb8d9f74fd"
+  integrity sha512-dl3sKcfH14kZ3vPokSWp7u64hJx2WoKXA0PejKh+yiVC3bNkS2Os3NPB9bvX0Tlgcqsse4b8b0t1iQknHxOTQg==
   dependencies:
     crypto-js "^4.1.1"
-    nostr-tools "^1.10.0"
+    nostr-tools "^1.13.1"
 
 ansi-escapes@^4.2.1, ansi-escapes@^4.3.0:
   version "4.3.2"
@@ -7165,16 +7141,16 @@ normalize-range@^0.1.2:
   resolved "https://registry.yarnpkg.com/normalize-range/-/normalize-range-0.1.2.tgz#2d10c06bdfd312ea9777695a4d28439456b75942"
   integrity sha1-LRDAa9/TEuqXd2laTShDlFa3WUI=
 
-nostr-tools@^1.10.0:
-  version "1.11.1"
-  resolved "https://registry.yarnpkg.com/nostr-tools/-/nostr-tools-1.11.1.tgz#7f479f86dc25ef4625747a33f8430f464aa225e5"
-  integrity sha512-b8BpCiD3wxjBZwrn0wc+CkVj6/7s4sQxp+Az7UkCG80mJu7xTspZsOoUP/geBNwZVYETzEwj+CPBvW8WIP8mBQ==
+nostr-tools@^1.13.1:
+  version "1.13.1"
+  resolved "https://registry.yarnpkg.com/nostr-tools/-/nostr-tools-1.13.1.tgz#191298d85a977cc50790e1c1d1cb83b86d3a9656"
+  integrity sha512-DTwpbxTH1/ar+afWd4gmVdpHH8CF290kdaxi00Llra88SHE6e38XuyzlRABVTcrBaceLMnoDdHmV3x16MoEFJg==
   dependencies:
-    "@noble/curves" "1.0.0"
-    "@noble/hashes" "1.3.0"
+    "@noble/curves" "1.1.0"
+    "@noble/hashes" "1.3.1"
     "@scure/base" "1.1.1"
-    "@scure/bip32" "1.3.0"
-    "@scure/bip39" "1.2.0"
+    "@scure/bip32" "1.3.1"
+    "@scure/bip39" "1.2.1"
 
 npm-run-path@^4.0.1:
   version "4.0.1"
