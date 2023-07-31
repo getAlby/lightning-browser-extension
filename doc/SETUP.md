@@ -7,6 +7,8 @@
 
 ### 💻 Load extension into browser
 
+> **NOTE:** by default, the extension built this way will talk to the testnet API (which runs under [api.regtest.getalby.com](https://api.regtest.getalby.com)). The testnet API is **not as stable** as production but you can do transactions without using real money. In case you want to do manual tests against the mainnet API, add the following `ALBY_API_URL` environment variable to your command: `$ ALBY_API_URL="https://api.getalby.com" yarn run dev:your-browser-of-choice`
+
 - Start development build, which will automatically watch for file changes:
 
   - Chrome\
@@ -15,8 +17,6 @@
     `$ yarn run dev:firefox`
   - Opera\
      `$ yarn run dev:opera`
-
-  **NOTE:** by default, the extension built this way will talk to the testnet API (which runs under [api.regtest.getalby.com](https://api.regtest.getalby.com)). In case you want to do manual tests against the mainnet API, add the following `ALBY_API_URL` environment variable to your command: `$ ALBY_API_URL="https://api.getalby.com" yarn run dev:your-browser-of-choice`
 
 - **Chrome**
 
