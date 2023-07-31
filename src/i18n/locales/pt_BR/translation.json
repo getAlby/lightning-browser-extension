@@ -3,7 +3,7 @@
     "welcome": {
       "set_password": {
         "title": "Definir uma senha de desbloqueio",
-        "description": "Essa senha é usada para proteger sua carteira e fornecer acesso à extensão do navegador neste dispositivo. Não esqueça essa senha pois não é possível recuperá-la. Obs. Essa senha é diferente da senha da conta da Alby e você alterá-la quando quiser.",
+        "description": "Esta senha é usada para proteger sua carteira e fornecer acesso à extensão do navegador neste dispositivo. Não esqueça esta senha pois não é possível recuperá-la. Obs. Esta senha é diferente da senha da conta da Alby.",
         "choose_password": {
           "label": "Escolha uma senha de desbloqueio:"
         },
@@ -30,7 +30,7 @@
       "title": "Bem-vindo à Alby",
       "pin_extension": {
         "title": "Fixar extensão Alby",
-        "description": "Quase lá. Para facilitar seu acesso a Alby , lembre-se de fixar a extensão Alby na barra de ferramentas do navegador:",
+        "description": "Quase lá. Para facilitar seu acesso à Alby, lembre-se de fixar a extensão Alby na barra de ferramentas do navegador:",
         "explanation": "1. Clique em <0/> no canto superior direito do seu navegador<1/>2. Localize a Alby e clique no ícone de fixação para fixá-lo na barra de ferramentas do navegador<1/>3. É isso. Agora é só clicar no ícone da Alby <2/>",
         "next_btn": "Comece a usar a Alby {{icon}}"
       }
@@ -315,12 +315,13 @@
       },
       "account_view": {
         "export": {
-          "title": "Exportar conta",
+          "title": "Conectar sua carteira de celular",
           "your_ln_address": "Seu Endereço Relâmpago:",
           "screen_reader": "Exportar detalhes da conta",
           "waiting": "aguardando dados LndHub...",
           "export_uri": "Credenciais URI LNDHub",
-          "scan_qr": "Leia o código QR para importar esta carteira na Zeus ou BlueWallet."
+          "scan_qr": "Leia o código QR para importar esta carteira na Zeus ou BlueWallet.",
+          "description": "Permite conectar e usar esta conta em carteiras de celular como por ex a <0>Blue Wallet</0> e a <0>Zeus</0>."
         },
         "nostr": {
           "title": "Nostr",
@@ -342,9 +343,9 @@
             "screen_reader": "Gere uma nova chave Nostr para sua conta",
             "actions": {
               "random_keys": "Gerar uma chave aleatória",
-              "derived_keys": "Derivar uma chave da conta"
+              "derived_keys": "Gerar uma chave a partir da conta"
             },
-            "hint": "Você pode gerar uma chave aleatória ou uma chave derivada desta conta. <0>Saiba mais »</0>"
+            "hint": "Você pode gerar uma chave aleatória ou gerar uma nova a partir desta conta. <0>Saiba mais »</0>"
           },
           "actions": {
             "generate": "Gerar uma nova chave"
@@ -355,59 +356,90 @@
           "settings": {
             "label": "Configurações Nostr",
             "title": "Configurações Nostr",
-            "derive": "Derive chaves Nostr de sua chave secreta",
-            "can_restore": "✅ Chave Nostr derivada de sua chave secreta",
-            "description": "Derive chaves Nostr de sua chave secreta ou importe sua chave privada existente colando-a no campo \"Chave privada Nostr\".",
-            "no_secret_key": "💡 Você ainda não tem uma chave secreta. <0>Clique aqui</0></div> para criar sua chave secreta e derivar suas chaves nostr.",
-            "imported_key_warning": "⚠️ No momento, você está usando uma chave Nostr importada ou gerada aleatoriamente. Sua chave privada Nostr não pode ser restaurada por sua chave secreta, então lembre-se de fazer o backup de sua chave privada Nostr."
+            "derive": "Gere chaves Nostr a partir de sua chave mestra",
+            "can_restore": "✅ Chave Nostr gerada a partir de sua chave mestra",
+            "description": "Você pode gerar chaves Nostr a partir de sua chave mestra ou importar sua chave privada existente colando-a no campo \"Chave privada Nostr\".",
+            "no_secret_key": "💡 Você ainda não tem uma chave mestra. <0>Clique aqui</0></div> para gerar sua chave mestra e suas chaves Nostr.",
+            "imported_key_warning": "⚠️ No momento, você está usando uma chave Nostr importada ou gerada aleatoriamente. Sua chave privada Nostr não pode ser restaurada por sua frase de recuperação, então lembre-se de fazer o backup de sua chave privada Nostr separadamente.",
+            "remove": "Remover chaves existentes"
+          },
+          "setup": {
+            "title": "Configure suas chaves Nostr",
+            "new": {
+              "label": "Criar uma nova conta Nostr",
+              "description": "Gere uma chave mestra com um par de novas chaves Nostr."
+            },
+            "import": {
+              "label": "Importar uma conta Nostr",
+              "description": "Use uma chave privada Nostr existente ou gere uma a partir de sua chave mestra",
+              "title": "Como você gostaria de importar sua conta Nostr?",
+              "private_key": {
+                "label": "Usar chave privada Nostr",
+                "description": "Cole sua chave privada Nostr para importá-la para a Alby"
+              },
+              "recovery_phrase": {
+                "label": "Usar frase de recuperação",
+                "description": "Use a frase de recuperação da chave mestra para importar suas chaves Nostr"
+              }
+            },
+            "new_to_nostr": "Novo no Nostr? <0>Saiba mais</0>",
+            "description": "Escolha se você deseja criar uma nova conta Nostr (um par de chaves públicas e privadas) ou importar uma existente.",
+            "description2": "Toda conta Nostr criada na Alby vem com uma <0>Frase de recuperação</0> – um conjunto de 12 palavras que sempre permite que você recupere o acesso às suas chaves privadas Nostr."
           }
         },
         "remove": {
-          "confirm": "Digite o nome da conta para confirmar a exclusão.\n\n ⚠️ Ao prosseguir com a exclusão, todas as chaves associadas a esta conta (chave secreta, Nostr, etc) serão perdidas. Certifique-se de fazer o backup antes de continuar, caso precise restaurar a conta no futuro.",
+          "confirm": "Digite o nome da conta para confirmar a exclusão.\n\n ⚠️ Ao prosseguir com a exclusão, todas as chaves associadas a esta conta (chave mestra, Nostr, etc) serão perdidas. Certifique-se de fazer o backup antes de continuar, caso precise restaurar a conta no futuro.",
           "title": "Remover esta conta",
           "error": "O nome da conta inserido não corresponde.",
-          "subtitle": "Remove todos os limites de gastos, dados de pagamento e chaves associados a esta conta."
+          "subtitle": "Remove todos os limites de gastos, dados de pagamento e chaves associadas à esta conta."
         },
         "actions": {
           "remove_account": "Remover conta",
           "export": "Exportar",
-          "remove_secretkey": "Remover chave secreta"
+          "remove_secretkey": "Remover chave mestra"
         },
         "name": {
           "title": "Nome",
           "placeholder": "Nome da conta"
         },
-        "title2": "Editar conta",
+        "title2": "Conta",
         "title1": "Configurações da conta",
         "mnemonic": {
-          "title": "Chave secreta",
-          "saved": "Chave secreta criptografada e salva com sucesso.",
+          "title": "🔑 Gerenciamento de chaves",
+          "saved": "Chave mestra criptografada e salva com sucesso.",
           "generate": {
-            "title": "Gere sua chave secreta",
-            "button": "Gerar chave secreta",
-            "confirm": "Eu salvei minha chave secreta em um local privado e seguro",
-            "error_confirm": "Por favor, confirme que você salvou sua chave secreta."
+            "title": "Gere sua chave mestra",
+            "button": "Gerar chave mestra",
+            "confirm": "Eu salvei a frase de recuperação na minha chave mestra em um local privado e seguro.",
+            "error_confirm": "Por favor, confirme que você salvou a frase de recuperação.",
+            "description": "A chave mestra permite que você interaja com diferentes protocolos como: Nostr, rede principal do Bitcoin ou LNURL-Auth."
           },
           "backup": {
-            "save": "Salvar chave secreta",
-            "button": "Fazer backup",
+            "save": "Salvar chave mestra",
+            "button": "Ver frase de recuperação",
             "protocols": {
               "nostr": "Nostr"
             },
-            "title": "Backup de sua chave secreta",
-            "warning": "⚠️ Não se esqueça de fazer o backup de sua chave secreta! Não fazer o backup pode resultar na perda permanente do acesso à sua conta Nostr ou aos ativos que você gerencia com esta chave."
+            "title": "Backup de sua frase de recuperação",
+            "warning": "⚠️ Não se esqueça de fazer backup de sua frase de recuperação! Não fazer o backup pode resultar na perda permanente do acesso à sua chave mestra, identidade Nostr ou ativos que você gerencia com esta chave.",
+            "description": "Anote a frase de recuperação para poder restaurar sua chave mestra em um novo dispositivo ou caso perca o acesso à sua conta.",
+            "items": {
+              "recovery_phrase": "Você sempre pode acessar sua chave mestra usando sua frase de recuperação.",
+              "words": "A frase de recuperação é um conjunto de 12 palavras que funciona como uma senha, porém não pode ser alterada ou redefinida caso seja perdida.",
+              "storage": "Certifique-se de anotá-la em algum local seguro e privado!"
+            }
           },
           "import": {
-            "title": "Importar uma chave secreta",
-            "description": "Use uma chave secreta existente para recuperar suas chaves derivadas.",
-            "button": "Importar chave secreta"
+            "title": "Importar sua chave mestra",
+            "description": "Use a chave de recuperação para importar sua chave mestra na Alby.",
+            "button": "Importar chave mestra"
           },
           "inputs": {
-            "title": "Sua chave secreta"
+            "title": "Frase de recuperação"
           },
-          "existing_nostr_key_notice": "⚠️ Esta conta já possui uma chave privada nostr definida e não será derivada desta chave secreta. Você pode gerenciar sua chave nostr nas configurações de sua conta.",
+          "existing_nostr_key_notice": "⚠️ Esta conta já possui uma chave privada nostr, logo não será gerada uma nova a partir desta chave mestra. Você pode gerenciar sua chave Nostr nas configurações de sua conta.",
           "lnurl": {
-            "use_mnemonic": "Use a chave secreta para acessar aplicativos com tecnologia (LNURL Auth)",
+            "use_mnemonic": "Use a chave mestra para acessar aplicativos com tecnologia (LNURL Auth)",
             "title": "Login Relâmpago"
           }
         },
@@ -419,14 +451,14 @@
               "testnet": "Rede de testes",
               "regtest": "Regtest"
             },
-            "subtitle": "Escolha a rede para derivar endereços e decodificar transações"
+            "subtitle": "Escolha a rede para gerar endereços e decodificar transações"
           }
         },
         "remove_secretkey": {
-          "title": "Remover chave secreta",
-          "confirm": "Digite o nome da conta para confirmar a exclusão de sua chave secreta.",
-          "success": "Chave secreta removida com sucesso.",
-          "subtitle": "Remove a chave secreta desta conta."
+          "title": "Remover chave mestra",
+          "confirm": "Digite o nome da conta para confirmar a exclusão de sua chave mestra.",
+          "success": "Chave mestra removida com sucesso.",
+          "subtitle": "Remove a chave mestra desta conta."
         }
       }
     },
@@ -553,7 +585,7 @@
     "send": {
       "title": "Enviar",
       "input": {
-        "label": "Destinatário",
+        "label": "Dados para pagamento",
         "hint": "Fatura, Endereço Relâmpago ou LNURL"
       }
     },
@@ -726,7 +758,7 @@
         "title": "Sua carteira Alby está pronta",
         "description": "Algumas dicas para você começar a usar a Alby 🐝",
         "mnemonic": {
-          "description": "Planejando usar apps Nostr?\nGere suas chaves agora.",
+          "description": "Planejando usar apps Nostr?\nClique aqui para gerar suas chaves.",
           "title": "Nostr"
         }
       }
@@ -741,7 +773,7 @@
         "title": "Outras contas",
         "and_more": "& mais...",
         "description": "Conecte-se em sua carteira bitcoin ou em um dos vários servidores de carteira disponíveis.",
-        "connect": "Conectar"
+        "connect": "Conectar outras contas"
       }
     },
     "alby": {
@@ -990,7 +1022,8 @@
     "badge": {
       "label": {
         "active": "LIMITE DE GASTOS",
-        "auth": "LOGIN RELÂMPAGO"
+        "auth": "LOGIN RELÂMPAGO",
+        "imported": "IMPORTADA"
       }
     },
     "companion_download_info": {
