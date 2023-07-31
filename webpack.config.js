@@ -73,6 +73,16 @@ if (clientId && clientSecret) {
       },
     },
     production: {
+      testnet: {
+        chrome: {
+          id: "CLAp8AfS3W",
+          secret: "KwIxF0VbGX2ZHLbbbYgE",
+        },
+        firefox: {
+          id: "zWdxnF04Hd",
+          secret: "wY5uLJJDjNWrDlB6lAj8",
+        },
+      },
       mainnet: {
         chrome: {
           id: "R7lZBSqfQt",
@@ -90,14 +100,11 @@ if (clientId && clientSecret) {
   const selectedOAuthCredentials =
     oauthCredentials[nodeEnv]?.[network]?.[oauthBrowser];
   if (!selectedOAuthCredentials) {
-    throw new Error(`No OAuth credentials found for current configuration: NODE_ENV=${nodeEnv} network=${network} oauthBrowser=${oauthBrowser}`);
+    throw new Error(
+      `No OAuth credentials found for current configuration: NODE_ENV=${nodeEnv} network=${network} oauthBrowser=${oauthBrowser}`
+    );
   }
-  console.info(
-    "Using OAuth credentials for",
-    nodeEnv,
-    oauthBrowser,
-    network
-  );
+  console.info("Using OAuth credentials for", nodeEnv, oauthBrowser, network);
   process.env.ALBY_OAUTH_CLIENT_ID = selectedOAuthCredentials.id;
   process.env.ALBY_OAUTH_CLIENT_SECRET = selectedOAuthCredentials.secret;
 }
@@ -124,7 +131,6 @@ if (!process.env.HMAC_VERIFY_HEADER_KEY) {
 if (!process.env.VERSION) {
   process.env.VERSION = require("./package.json").version;
 }
-
 
 const getExtensionFileType = (browser) => {
   if (browser === "opera") {
@@ -323,8 +329,7 @@ if (nodeEnv === "development") {
                 destination: `${path.join(
                   destPath,
                   targetBrowser
-                )
-                  }.${getExtensionFileType(targetBrowser)}`,
+                )}.${getExtensionFileType(targetBrowser)}`,
                 options: { zlib: { level: 6 } },
               },
             ],

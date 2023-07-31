@@ -14,7 +14,6 @@ jobs:
     name: build-prod
     env:
       ALBY_API_URL: "https://api.getalby.com"
-      NODE_ENV: "production"
 
     permissions:
       issues: write
