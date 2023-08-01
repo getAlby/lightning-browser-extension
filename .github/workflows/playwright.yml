@@ -24,9 +24,6 @@ jobs:
 
       - name: Build chrome
         run: yarn build:chrome
-        env:
-          ALBY_OAUTH_CLIENT_ID: ${{ vars.ALBY_OAUTH_CLIENT_ID_CHROME }}
-          ALBY_OAUTH_CLIENT_SECRET: ${{ vars.ALBY_OAUTH_CLIENT_SECRET_CHROME }}
 
       - name: Test Code
         uses: mujo-code/puppeteer-headful@v2
