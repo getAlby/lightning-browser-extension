@@ -112,19 +112,25 @@ export const createNewWalletWithPassword = async (options?: {
   };
 };
 
-export const commonCreateWalletSuccessCheck = async ({ page, $document }) => {
-  // submit form
-  const continueButton = await findByText($document, "Continue");
-  continueButton.click();
-  // options.html
-  await Promise.all([
-    page.waitForNavigation(), // The promise resolves after navigation has finished
-  ]);
+export const commonCreateWalletSuccessCheck = async ({
+  page,
+  $document,
+  skipContinue = false,
+}) => {
+  if (!skipContinue) {
+    // submit form
+    const continueButton = await findByText($document, "Continue");
+    continueButton.click();
+    // options.html
+    await Promise.all([
+      page.waitForNavigation(), // The promise resolves after navigation has finished
+    ]);
 
-  // options.html#publishers
-  await Promise.all([
-    page.waitForNavigation(), // The promise resolves after navigation has finished
-  ]);
+    // options.html#publishers
+    await Promise.all([
+      page.waitForNavigation(), // The promise resolves after navigation has finished
+    ]);
+  }
 
   const $pinExtensionDocument = await getDocument(page);
   const discoverButton = await getByText(
@@ -149,23 +155,65 @@ export async function loginToExistingAlbyAccount(page: Page) {
     password: "12345678",
   };
 
-  const loginButton = await getByText($document, "Log in");
-  loginButton.click();
+  const connectButton = await getByText($document, "Connect with Alby");
+  connectButton.click();
 
-  await findByText($document, "Your Alby Account");
+  //check that the first page opened this new page:
+  const newTarget = await page
+    .browser()
+    .waitForTarget(
+      (target) => target.url().indexOf("app.regtest.getalby.com") > -1,
+      {
+        timeout: 10000,
+      }
+    );
+  //get the new page object:
+  const oauthPage = await newTarget.page();
+  if (!oauthPage) {
+    throw new Error("OAuth page not found");
+  }
+  const oauthDocument = await getDocument(oauthPage);
+
+  const oauthLoginButton = await getByText(oauthDocument, "Log in to connect");
+  oauthLoginButton.click();
+
+  await oauthPage.waitForNavigation();
+  const oauthDocument2 = await getDocument(oauthPage);
+
+  const oauthLoginPasswordButton = await getByText(
+    oauthDocument2,
+    "Log in with password"
+  );
+  oauthLoginPasswordButton.click();
+
+  await oauthPage.waitForNavigation();
+  const oauthDocument3 = await getDocument(oauthPage);
+
+  await new Promise((resolve) => setTimeout(resolve, 1000));
 
   // type user email
-  const emailField = await getByLabelText(
-    $document,
-    "Email Address or Lightning Address"
-  );
+  const emailField = await getByLabelText(oauthDocument3, "Email address");
   await emailField.type(user.email);
 
   // type user password and confirm password
-  const walletPasswordField = await getByLabelText($document, "Password");
+  const walletPasswordField = await getByLabelText(oauthDocument3, "Password");
   await walletPasswordField.type(user.password);
 
-  await commonCreateWalletSuccessCheck({ page, $document });
+  const oauthConfirmLoginButton = await getByText(oauthDocument3, "Log in");
+  oauthConfirmLoginButton.click();
+
+  await oauthPage.waitForNavigation();
+  const oauthDocument4 = await getDocument(oauthPage);
+
+  const oauthConfirmAuthButton = await getByText(
+    oauthDocument4,
+    "Connect with Alby Extension"
+  );
+  oauthConfirmAuthButton.click();
+
+  await new Promise((resolve) => setTimeout(resolve, 3000));
+
+  await commonCreateWalletSuccessCheck({ page, $document, skipContinue: true });
 }
 
 export function navigate(route: string, page: Page, extensionId: string) {
