@@ -121,6 +121,19 @@ if (document) {
     },
     { capture: true }
   );
+  // Listen for webln events from the extension
+  // emit events to the websites
+  window.addEventListener("message", (event) => {
+    if (event.source === window && event.data.action === "accountChanged") {
+      eventEmitter(event.data.action, event.data.scope);
+    }
+  });
 } else {
   console.warn("Failed to inject WebLN provider");
+}
+
+function eventEmitter(action, scope) {
+  if (window[scope] && window[scope].emit) {
+    window[scope].emit(action);
+  }
 }
