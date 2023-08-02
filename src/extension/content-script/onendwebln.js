@@ -16,6 +16,9 @@ const weblnCalls = [
   "webln/makeInvoice",
   "webln/signMessageOrPrompt",
   "webln/request",
+  "webln/on",
+  "webln/emit",
+  "webln/off",
 ];
 // calls that can be executed when webln is not enabled for the current content page
 const disabledCalls = ["webln/enable"];
@@ -32,10 +35,14 @@ async function init() {
 
   injectScript(browser.runtime.getURL("js/inpageScript.bundle.js")); // registers the DOM event listeners and checks webln again (which is also loaded onstart
 
-  // extract LN data from websites
   browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    // extract LN data from websites
     if (request.action === "extractLightningData") {
       extractLightningData();
+    }
+    // forward account changed messaged to inpage script
+    else if (request.action === "accountChanged") {
+      window.postMessage({ action: "accountChanged", scope: "webln" }, "*");
     }
   });
 

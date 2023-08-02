@@ -1,3 +1,5 @@
+import { EventEmitter } from "events";
+
 import { postMessage } from "../postMessage";
 
 declare global {
@@ -24,11 +26,13 @@ export default class WebLNProvider {
   enabled: boolean;
   isEnabled: boolean;
   executing: boolean;
+  private _eventEmitter: EventEmitter;
 
   constructor() {
     this.enabled = false;
     this.isEnabled = false; // seems some webln implementations use webln.isEnabled and some use webln.enabled
     this.executing = false;
+    this._eventEmitter = new EventEmitter();
   }
 
   async enable() {
@@ -106,6 +110,20 @@ export default class WebLNProvider {
       method,
       params,
     });
+  }
+
+  async on(...args: Parameters<EventEmitter["on"]>) {
+    await this.enable();
+    return this._eventEmitter.on(...args);
+  }
+  async emit(...args: Parameters<EventEmitter["emit"]>) {
+    await this.enable();
+    return this._eventEmitter.emit(...args);
+  }
+
+  async off(...args: Parameters<EventEmitter["off"]>) {
+    await this.enable();
+    return this._eventEmitter.off(...args);
   }
 
   // NOTE: new call `action`s must be specified also in the content script

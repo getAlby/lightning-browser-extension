@@ -1,3 +1,4 @@
+import browser from "webextension-polyfill";
 import state from "~/extension/background-script/state";
 import type { MessageAccountSelect } from "~/types";
 
@@ -27,6 +28,8 @@ const select = async (message: MessageAccountSelect) => {
     // save the current account id once the connector is loaded
     await state.getState().saveToStorage();
 
+    await notifyAccountChanged();
+
     return {
       data: { unlocked: true },
     };
@@ -39,3 +42,30 @@ const select = async (message: MessageAccountSelect) => {
 };
 
 export default select;
+
+// Send a notification message to the content script
+// which will then be posted to the window so websites can sync with the switched account
+async function notifyAccountChanged() {
+  try {
+    const tabs = await browser.tabs.query({
+      active: true,
+      currentWindow: true,
+    });
+
+    const currentUrl = tabs.length && tabs[0].url;
+    // http for localhost websites
+    let validTabUrl = null;
+    if (currentUrl)
+      validTabUrl =
+        currentUrl.startsWith("http") || currentUrl.startsWith("https");
+    if (validTabUrl) {
+      browser.tabs.sendMessage(tabs[0].id as number, {
+        action: "accountChanged",
+      });
+    } else {
+      throw new Error("Unable to find active tab");
+    }
+  } catch (error) {
+    console.error("Failed to notify account changed", error);
+  }
+}
