@@ -4,7 +4,6 @@ import BadgesList from "~/app/components/BadgesList";
 import { useSettings } from "~/app/context/SettingsContext";
 import { Allowance } from "~/types";
 
-
 type Props = {
   allowances: Allowance[];
   navigateToPublisher: (id: number) => void;

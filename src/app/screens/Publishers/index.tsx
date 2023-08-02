@@ -27,7 +27,9 @@ function Publishers() {
       const allowanceResponse = await msg.request<{
         allowances: Allowance[];
       }>("listAllowances");
-      const allowances = allowanceResponse.allowances.filter((a => (a.id && a.enabled)))
+      const allowances = allowanceResponse.allowances.filter(
+        (a) => a.id && a.enabled
+      );
       setAllowances(allowances);
     } catch (e) {
       console.error(e);

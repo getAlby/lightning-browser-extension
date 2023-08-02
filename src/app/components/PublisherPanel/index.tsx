@@ -3,6 +3,7 @@ import SitePreferences from "@components/SitePreferences";
 import { useTranslation } from "react-i18next";
 import BadgesList from "~/app/components/BadgesList";
 import { useSettings } from "~/app/context/SettingsContext";
+import { Allowance } from "~/types";
 
 // TODO: if no image set use image based on i.e. domain
 const DEFAULT_IMAGE =
@@ -11,7 +12,7 @@ const DEFAULT_IMAGE =
 export type Props = {
   onEdit: () => void;
   onDelete: () => void;
-  allowance: any;
+  allowance: Allowance;
   title?: string;
   image?: string;
   description?: string;

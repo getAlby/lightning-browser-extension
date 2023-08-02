@@ -166,9 +166,7 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
     }
     if (launcherType === "hyperlink") {
       return (
-        <Hyperlink onClick={openModal}>
-          {t("new_budget.link_label")}
-        </Hyperlink>
+        <Hyperlink onClick={openModal}>{t("new_budget.link_label")}</Hyperlink>
       );
     }
   };

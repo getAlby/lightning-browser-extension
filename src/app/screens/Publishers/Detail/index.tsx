@@ -16,16 +16,12 @@ dayjs.extend(relativeTime);
 
 function PublisherDetail() {
   const { t } = useTranslation("translation", {
-    keyPrefix: "publishers",
-  });
-  const { t: tHome } = useTranslation("translation", {
     keyPrefix: "home",
   });
   const {
     isLoading: isLoadingSettings,
     settings,
     getFormattedFiat,
-    getFormattedNumber,
   } = useSettings();
 
   const hasFetchedData = useRef(false);
@@ -90,15 +86,15 @@ function PublisherDetail() {
         <Container>
           <div>
             <h2 className="mt-[34px] mb-4 text-lg text-gray-900 font-bold dark:text-white">
-              {tHome("allowance_view.recent_transactions")}
+              {t("allowance_view.recent_transactions")}
             </h2>
             {transactions && transactions?.length > 0 ? (
-                <TransactionsTable transactions={transactions} />
-            ): (
+              <TransactionsTable transactions={transactions} />
+            ) : (
               <p className="text-gray-500 dark:text-neutral-400">
                 <Trans
                   i18nKey={"allowance_view.no_transactions"}
-                  t={tHome}
+                  t={t}
                   values={{ name: allowance.name }}
                   // eslint-disable-next-line react/jsx-key
                   components={[<strong></strong>]}

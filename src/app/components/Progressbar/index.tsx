@@ -11,7 +11,9 @@ export default function Progressbar({ percentage }: Props) {
           className="shadow-none flex flex-col h-2 text-center whitespace-nowrap text-white justify-center bg-primary-gradient"
         ></div>
       </div>
-      <div className="text-xs text-gray-700 font-medium dark:text-neutral-400">{percentage}%</div>
+      <div className="text-xs text-gray-700 font-medium dark:text-neutral-400">
+        {percentage}%
+      </div>
     </div>
   );
 }
