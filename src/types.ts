@@ -23,7 +23,6 @@ export interface Account {
   name: string;
   nostrPrivateKey?: string | null;
   mnemonic?: string | null;
-  liquidEnabled?: boolean;
   hasImportedNostrKey?: boolean;
   bitcoinNetwork?: BitcoinNetworkType;
   useMnemonicForLnurlAuth?: boolean;
@@ -224,7 +223,6 @@ export interface MessageAccountEdit extends MessageDefault {
     name?: Account["name"];
     bitcoinNetwork?: BitcoinNetworkType;
     useMnemonicForLnurlAuth?: boolean;
-    liquidEnabled?: boolean;
   };
   action: "editAccount";
 }

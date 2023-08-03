@@ -20,9 +20,6 @@ const edit = async (message: MessageAccountEdit) => {
       accounts[accountId].useMnemonicForLnurlAuth =
         message.args.useMnemonicForLnurlAuth;
     }
-    if (message.args.liquidEnabled !== undefined) {
-      accounts[accountId].liquidEnabled = message.args.liquidEnabled;
-    }
 
     state.setState({ accounts });
     // make sure we immediately persist the updated accounts

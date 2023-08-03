@@ -511,34 +511,6 @@ function AccountDetail() {
                   />
                 </div>
               </div>
-              <MenuDivider />
-              <div className="flex justify-between items-end">
-                <div className="w-7/12">
-                  <p className="text-gray-900 dark:text-white font-medium">
-                    {t("liquid.enable.title")}
-                  </p>
-                  <p className="text-gray-500 text-sm dark:text-neutral-500">
-                    {t("liquid.enable.description")}
-                  </p>
-                </div>
-
-                <div className="w-1/5 flex justify-end align-middle">
-                  <Toggle
-                    disabled={!hasMnemonic}
-                    checked={account.liquidEnabled}
-                    onChange={async () => {
-                      // update local value
-                      setAccount({
-                        ...account,
-                        liquidEnabled: !account.liquidEnabled,
-                      });
-                      await api.editAccount(id, {
-                        liquidEnabled: !account.liquidEnabled,
-                      });
-                    }}
-                  />
-                </div>
-              </div>
             </div>
           </div>
 
