@@ -26,7 +26,6 @@ const disabledCalls = ["webln/enable"];
 let isEnabled = false; // store if webln is enabled for this content page
 let isRejected = false; // store if the webln enable call failed. if so we do not prompt again
 let callActive = false; // store if a webln call is currently active. Used to prevent multiple calls in parallel
-
 async function init() {
   const inject = await shouldInject();
   if (!inject) {
@@ -41,7 +40,7 @@ async function init() {
       extractLightningData();
     }
     // forward account changed messaged to inpage script
-    else if (request.action === "accountChanged") {
+    else if (request.action === "accountChanged" && isEnabled) {
       window.postMessage({ action: "accountChanged", scope: "webln" }, "*");
     }
   });
