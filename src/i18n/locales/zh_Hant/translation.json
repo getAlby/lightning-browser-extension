@@ -396,7 +396,6 @@
           "settings": {
             "label": "Nostr 設置",
             "title": "Nostr 設置",
-            "delete": "刪除當前的密鑰",
             "no_secret_key": "💡你還沒有秘密鑰匙。<0>點擊此處</0></div>創建你的秘密鑰匙並派生你的 nostr 密鑰。",
             "derive": "從你的秘密鑰匙中派生你的 Nostr 密鑰",
             "description": "從你的秘密鑰匙中派生你的 Nostr 密鑰，或通過將其粘貼到 “Nostr 私鑰”字段來導入現有的私鑰。",
@@ -421,13 +420,10 @@
               "nostr": "Nostr"
             },
             "button": "備份秘密鑰匙",
-            "description2": "你的秘密鑰匙是一組12個單詞，可以讓你在新設備上或失去帳戶訪問的情況下訪問 Nostr 等協議。請務必將其在紙上記下並安全地保存：",
-            "description1": "除了比特幣閃電網絡之外，Alby 還允許你生成密鑰並與其他協議交互，例如：",
             "warning": "⚠️別忘了將你的秘密鑰匙備份！不備份可能會導致永久失去對你的 Nostr 身份或使用此密鑰管理的資產的訪問權限。",
             "save": "保存秘密鑰匙",
             "title": "備份你的秘密鑰匙"
           },
-          "description2": "你的秘密鑰匙是一組12個單詞，可以讓你在新設備上或失去帳戶訪問的情況下訪問 Nostr 等協議。",
           "lnurl": {
             "use_mnemonic": "使用秘密鑰匙登錄閃電驅動的應用程式（LNURL Auth）",
             "title": "閃電登錄"
@@ -443,13 +439,11 @@
           },
           "import": {
             "button": "導入秘密鑰匙",
-            "confirm_overwrite": "你已有秘密鑰匙，是否確定要覆蓋它？",
             "description": "使用現有的秘密鑰匙來恢復你的派生密鑰。",
             "title": "導入秘密鑰匙"
           },
           "existing_nostr_key_notice": "⚠️ 該帳戶已設置 nostr 私鑰，不會從此秘密鑰匙派生。你可以從你的帳戶設置管理你的 nostr 密鑰。",
-          "saved": "秘密鑰匙已加密並成功保存。",
-          "description": "你的帳戶秘密鑰匙允許你通過 Alby 與 Nostr 等協議交互。"
+          "saved": "秘密鑰匙已加密並成功保存。"
         },
         "bitcoin": {
           "network": {

@@ -1,3 +1,5 @@
+import { EventEmitter } from "events";
+
 import { postMessage } from "../postMessage";
 
 declare global {
@@ -22,9 +24,11 @@ type KeysendArgs = {
 
 export default class WebLNProvider {
   enabled: boolean;
+  private _eventEmitter: EventEmitter;
 
   constructor() {
     this.enabled = false;
+    this._eventEmitter = new EventEmitter();
   }
 
   async enable(): Promise<void> {
@@ -100,6 +104,20 @@ export default class WebLNProvider {
       method,
       params,
     });
+  }
+
+  async on(...args: Parameters<EventEmitter["on"]>) {
+    await this.enable();
+    return this._eventEmitter.on(...args);
+  }
+  async emit(...args: Parameters<EventEmitter["emit"]>) {
+    await this.enable();
+    return this._eventEmitter.emit(...args);
+  }
+
+  async off(...args: Parameters<EventEmitter["off"]>) {
+    await this.enable();
+    return this._eventEmitter.off(...args);
   }
 
   // NOTE: new call `action`s must be specified also in the content script

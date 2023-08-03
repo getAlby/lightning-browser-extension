@@ -20,11 +20,16 @@ const PaymentSummary: FC<Props> = ({
 
   return (
     <dl className="mb-0">
-      <dt className="font-medium dark:text-white">{tCommon("amount")}</dt>
-      <dd className="text-gray-500 dark:text-neutral-400">
-        {getFormattedSats(amount)}
+      <dt className="text-sm text-gray-500 dark:text-neutral-500">
+        {tCommon("amount")}
+      </dt>
+      <dd className="text-lg text-gray-700 dark:text-neutral-200 flex flex-row justify-between">
+        <div>{getFormattedSats(amount)}</div>
         {!!fiatAmount && (
-          <span className="text-gray-400" data-testid="fiat_amount">
+          <span
+            className="text-gray-500 dark:text-neutral-500"
+            data-testid="fiat_amount"
+          >
             {" "}
             (~{fiatAmount})
           </span>

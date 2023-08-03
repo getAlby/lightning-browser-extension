@@ -432,19 +432,20 @@
         "add_account": "Konto hinzufügen"
       },
       "account_view": {
-        "title2": "Konto bearbeiten",
+        "title2": "Konto",
         "title1": "Konto Informationen",
         "name": {
           "title": "Name anzeigen",
           "placeholder": "Konto Anzeigename"
         },
         "export": {
-          "title": "Konto exportieren",
+          "title": "Verbinde deine mobile Wallet",
           "screen_reader": "Kontodaten exportieren",
           "waiting": "Warten auf LndHub Daten...",
           "your_ln_address": "Deine Lightning Adresse:",
           "export_uri": "LNDHub Anmeldeinformationen URI",
-          "scan_qr": "Importiere diese Wallet in Zeus oder BlueWallet, indem du den QRCode scannst."
+          "scan_qr": "Importiere diese Wallet in Zeus oder BlueWallet, indem du den QRCode scannst.",
+          "description": "Ermöglicht es dir, dieses Konto mit mobilen Wallets wie <0>Blue Wallet</0> und <0>Zeus</0> zu verbinden und zu verwenden."
         },
         "nostr": {
           "title": "Nostr",
@@ -479,60 +480,85 @@
           "settings": {
             "label": "Nostr Einstellungen",
             "title": "Nostr Einstellungen",
-            "description": "Leite dein Nostr-Schlüssel von deinem geheimen Schlüssel ab oder importiere den vorhandenen privaten Schlüssel, indem du in das Feld \"Nostr Private Key\" einfügst.",
-            "imported_key_warning": "⚠️ Du verwendest derzeit einen importierten oder zufällig generierten Nostr-Schlüssel. Dein privater Nostr-Schlüssel kann nicht durch deinem geheimen Schlüssel wiederhergestellt werden, denke also daran, deinen privaten Nostr-Schlüssel zu sichern.",
-            "can_restore": "✅ Nostr-Schlüssel, abgeleitet von deinem geheimen Schlüssel",
-            "derive": "Ableitung von Nostr-Schlüsseln aus deinem Geheimschlüssel",
-            "delete": "Aktuelle Tasten löschen",
-            "no_secret_key": "💡 Du hast noch keinen geheimen Schlüssel. <0>Klicken Sie hier</0></div>, um deinen geheimen Schlüssel zu erstellen und dein nostr Schlüssel abzuleiten."
+            "description": "Leite deinen Nostr-Schlüssel von deinem Master Key ab oder importiere den bestehenden privaten Schlüssel, indem du ihn in das Feld \"Nostr Private Key\" einfügst.",
+            "imported_key_warning": "⚠️ Du verwendest derzeit einen importierten oder zufällig generierten Nostr-Schlüssel. Dein privater Nostr-Schlüssel kann nicht durch deine Wiederherstellungsphrase wiederhergestellt werden, also denke daran, deinen privaten Nostr-Schlüssel separat zu sichern.",
+            "can_restore": "✅ Nostr-Schlüssel, abgeleitet von Ihrem Hauptschlüssel",
+            "derive": "Vom Hauptschlüssel ableiten",
+            "no_secret_key": "💡Du hast noch keinen Hauptschlüssel. <0>Klicke hier</0></div>, um deinen Hauptschlüssel zu erstellen und deine Nostr-Schlüssel abzuleiten.",
+            "remove": "Aktuelle Schlüssel entfernen"
+          },
+          "setup": {
+            "title": "Einrichten der Nostr-Schlüssel",
+            "description": "Wähle, ob du ein neues Nostr-Konto (ein Paar privater und öffentlicher Schlüssel) erstellen oder ein bestehendes importieren möchtest.",
+            "new": {
+              "description": "Generiere einen Hauptschlüssel mit einem Paar neuer Nostr-Schlüssel.",
+              "label": "Ein neues Nostr-Konto erstellen"
+            },
+            "import": {
+              "label": "Ein Nostr-Konto importieren",
+              "description": "Verwende einen vorhandenen privaten Nostr-Schlüssel oder leite ihn von deinem Hauptschlüssel ab",
+              "private_key": {
+                "label": "Privaten Schlüssel von Nostr verwenden",
+                "description": "Füge deinen privaten Nostr-Schlüssel ein, um ihn in Alby zu importieren"
+              },
+              "recovery_phrase": {
+                "label": "Wiederherstellungsphrase verwenden",
+                "description": "Verwende die Phrase zur Wiederherstellung des Hauptschlüssels, um deinen Nostr-Schlüssel zu importieren"
+              },
+              "title": "Wie möchten dein Nostr-Konto importieren?"
+            },
+            "new_to_nostr": "Neu bei Nostr? <0>Mehr erfahren</0>",
+            "description2": "Jedes Nostr-Konto, das in Alby erstellt wird, wird mit einer <0>Recovery Phrase</0> geliefert - eine Reihe von 12 Wörtern, die es dir ermöglicht, jederzeit wieder Zugang zu deinen privaten Nostr-Schlüsseln zu erhalten."
           }
         },
         "remove": {
           "title": "Dieses Konto entfernen",
           "subtitle": "Entfernt alle Zulagen, Zahlungsdaten und Schlüssel, die mit diesem Konto verbunden sind.",
-          "confirm": "Bitte gebe deinen den Namen des Kontos ein, um die Löschung deines Kontos zu bestätigen.\n\n⚠️ Alle zugehörigen Schlüssel (Geheimschlüssel, Nostr, usw.) werden gelöscht, wenn du fortfährst. Bitte vergewissere dich, dass du eine Sicherungskopie erstellt hast, denn es gibt keine andere Möglichkeit, sie wiederherzustellen.",
+          "confirm": "Bitte gebe den Namen des Kontos ein, um die Löschung deines Kontos zu bestätigen.\n\n ⚠️ Wenn du fortfährst, werden alle zugehörigen Schlüssel (Master Key, Nostr, etc.) gelöscht. Bitte vergewisser dich, dass du eine Sicherungskopie erstellt hast, denn es gibt keine andere Möglichkeit, sie wiederherzustellen.",
           "error": "Der eingegebene Kontoname stimmte nicht überein."
         },
         "actions": {
           "remove_account": "Konto entfernen",
           "export": "Exportieren",
-          "remove_secretkey": "Geheimen Schlüssel entfernen"
+          "remove_secretkey": "Hauptschlüssel entfernen"
         },
         "mnemonic": {
-          "title": "Geheimer Schlüssel",
+          "title": "🔑 Schlüsselverwaltung",
           "backup": {
             "protocols": {
               "nostr": "Nostr"
             },
-            "title": "Sichere deinen geheimen Schlüssel",
-            "save": "Geheimschlüssel speichern",
-            "button": "Geheimschlüssel sichern",
-            "warning": "⚠️ Vergesse nicht, deinen geheimen Schlüssel zu sichern! Wenn du ihn nicht sicherst, kann dies dazu führen, dass du den Zugang zu deiner Nostr-Identität oder den von deinen mit diesem Schlüssel verwalteten Vermögenswerten dauerhaft verlierst.",
-            "description1": "Zusätzlich zum Bitcoin Lightning Network ermöglicht Alby die Generierung von Schlüsseln und die Interaktion mit anderen Protokollen wie z.B.:",
-            "description2": "Dein Geheimschlüssel besteht aus 12 Wörtern, mit denen du auf einem neuen Gerät oder bei Verlust des Zugangs zu deinem Konto auf deine Schlüssel zu diesen Protokollen zugreifen kannst. Schreibe ihn auf ein Blatt Papier und bewahre ihn sicher auf:"
+            "title": "Sichere deine Wiederherstellungsphrase",
+            "save": "Master Key speichern",
+            "button": "Ansicht Wiederherstellungsphrase",
+            "warning": "⚠️ Vergesse nicht, deine Wiederherstellungsphrase zu sichern! Wird sie nicht gesichert, kann dies dazu führen, dass du den Zugang zu deinem Master Key, dein Nostr-Identität oder den von dir mit diesem Schlüssel verwalteten Assets dauerhaft verlierst.",
+            "items": {
+              "recovery_phrase": "Du kannst jederzeit auf deinen Master Key zugreifen, indem du deine Wiederherstellungsphrase verwendest.",
+              "words": "Die Wiederherstellungsphrase besteht aus 12 Wörtern, die wie ein Passwort funktionieren, jedoch nicht geändert oder zurückgesetzt werden können, falls sie verloren gehen.",
+              "storage": "Schreibe sie an einem sicheren und privaten Ort auf!"
+            },
+            "description": "Notiere deine Wiederherstellungsphrase, um deinen Hauptschlüssel auf einem neuen Gerät wiederherstellen zu können oder für den Fall, dass du den Zugriff auf dein Konto verlierst."
           },
-          "description2": "Dein Geheimschlüssel besteht aus 12 Wörtern, die es dir ermöglichen, deine Schlüssel für Protokolle wie Nostr auf einem neuen Gerät abzurufen oder falls du den Zugang zu deinem Konto verlierst.",
-          "saved": "Geheimschlüssel verschlüsselt und erfolgreich gespeichert.",
+          "saved": "Master Key erfolgreich verschlüsselt und gespeichert.",
           "generate": {
-            "title": "Erzeuge einen geheimen Schlüssel",
-            "button": "Geheimen Schlüssel generieren",
-            "confirm": "Ich habe den geheimen Schlüssel meines Kontos an einem privaten und sicheren Ort aufbewahrt.",
-            "error_confirm": "Bitte bestätige, dass du eine Sicherungskopie deines geheimen Schlüssels erstellt hast."
+            "title": "Neuen Hauptschlüssel generieren",
+            "button": "Master Key generieren",
+            "confirm": "Ich habe die Wiederherstellungsphrase zu meinem Hauptschlüssel an einem privaten und sicheren Ort gesichert.",
+            "error_confirm": "Bitte vergewissere dich, dass du deine Sicherungskopie des Wiederherstellungssatzes erstellt hast.",
+            "description": "Master Key ermöglicht dir die Interaktion mit verschiedenen Protokollen wie z.B.: Nostr, Basisschicht von Bitcoin oder LNURL-Auth."
           },
           "import": {
-            "title": "Importieren eines geheimen Schlüssels",
-            "description": "Verwende einen vorhandenen Geheimschlüssel, um deine abgeleiteten Schlüssel wiederherzustellen.",
-            "confirm_overwrite": "Du hast bereits einen geheimen Schlüssel, bist du sicher, dass du ihn überschreiben willst?",
-            "button": "Geheimen Schlüssel importieren"
+            "title": "Importiere deinen Hauptschlüssel",
+            "description": "Verwende die Wiederherstellungsphrase, um Ihren Master Key in Alby zu importieren.",
+            "button": "Hauptschlüssel importieren"
           },
           "inputs": {
-            "title": "Dein geheimer Schlüssel"
+            "title": "Wiederherstellungsphrase"
           },
-          "description": "Mit deinem geheimen Kontoschlüssel kannst du Alby verwenden, um mit Protokollen wie Nostr zu interagieren.",
-          "existing_nostr_key_notice": "⚠️ Für dieses Konto wurde bereits ein privater nostr-Schlüssel festgelegt und wird nicht von diesem geheimen Schlüssel abgeleitet. Du kannst deinen nostr-Schlüssel in deiner Kontoeinstellungen verwalten.",
+          "existing_nostr_key_notice": "⚠️ Für dieses Konto ist bereits ein privater Nostr-Schlüssel festgelegt, der nicht von diesem Hauptschlüssel abgeleitet wird. Du kannst dein Nostr-Schlüssel über deine Kontoeinstellungen verwalten.",
           "lnurl": {
             "title": "Anmeldung mit Lightning",
-            "use_mnemonic": "Verwende den geheimen Schlüssel für die Anmeldung bei Lightning-basierten Anwendungen (LNURL-Auth)"
+            "use_mnemonic": "Master Key für die Anmeldung bei Lightning-Anwendungen verwenden (LNURL Auth)"
           }
         },
         "bitcoin": {
@@ -547,10 +573,10 @@
           }
         },
         "remove_secretkey": {
-          "title": "Geheimen Schlüssel entfernen",
-          "subtitle": "Entfernt den geheimen Schlüssel von diesem Konto.",
-          "confirm": "Bitte gebe deinen Namen des Kontos ein, um die Löschung deines Geheimschlüssels zu bestätigen.",
-          "success": "Der geheime Schlüssel wurde erfolgreich entfernt."
+          "title": "Hauptschlüssel entfernen",
+          "subtitle": "Entfernt den Hauptschlüssel von diesem Konto.",
+          "confirm": "Bitte gebe den Namen des Kontos ein, um die Löschung deines Hauptschlüssels zu bestätigen.",
+          "success": "Der Hauptschlüssel wurde erfolgreich entfernt."
         }
       }
     },

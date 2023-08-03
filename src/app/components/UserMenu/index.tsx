@@ -4,6 +4,7 @@ import {
   MagicWandIcon,
   MenuIcon,
   RocketIcon,
+  WalletIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -61,6 +62,14 @@ export default function UserMenu() {
           >
             <ConnectedSiteIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
             {tCommon("connected_sites")}
+          </Menu.ItemButton>
+          <Menu.ItemButton
+            onClick={() => {
+              openOptions("wallet");
+            }}
+          >
+            <WalletIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
+            {tCommon("wallet")}
           </Menu.ItemButton>
           <Menu.Divider />
         </div>
