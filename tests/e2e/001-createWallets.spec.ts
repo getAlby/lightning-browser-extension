@@ -44,7 +44,7 @@ test.describe("Create or connect wallets", () => {
     await browser.close();
   });
 
-  test.only("successfully connects to an existing Alby testnet wallet", async () => {
+  test("successfully connects to an existing Alby testnet wallet", async () => {
     const { page, browser } = await createNewWalletWithPassword();
     await loginToExistingAlbyAccount(page);
 
