@@ -164,9 +164,10 @@ export async function loginToExistingAlbyAccount(page: Page) {
     .waitForTarget(
       (target) => target.url().indexOf("app.regtest.getalby.com") > -1,
       {
-        timeout: 10000,
+        timeout: 20000,
       }
     );
+  console.info("Found target: " + newTarget.url());
   //get the new page object:
   const oauthPage = await newTarget.page();
   if (!oauthPage) {
