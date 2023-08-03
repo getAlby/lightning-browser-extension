@@ -49,12 +49,6 @@ class Liquid {
   public privateKey: string;
 
   constructor(mnemonic: Mnemonic, networkType: LiquidNetworkType) {
-    // fix usages of window (unavailable in service worker)
-    globalThis.window ??= globalThis.window || {};
-    if (!globalThis.window.crypto) {
-      globalThis.window.crypto = crypto;
-    }
-
     this.mnemonic = mnemonic;
     this.privateKey = this.deriveLiquidPrivateKeyHex(networkType);
     this.network = networks[networkType];
