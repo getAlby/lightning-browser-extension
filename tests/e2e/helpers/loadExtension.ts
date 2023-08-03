@@ -158,6 +158,9 @@ export async function loginToExistingAlbyAccount(page: Page) {
   const connectButton = await getByText($document, "Connect with Alby");
   connectButton.click();
 
+  const currentTarget = await page.target();
+  console.info("Current target: " + currentTarget.url());
+
   //check that the first page opened this new page:
   const newTarget = await page
     .browser()
@@ -212,7 +215,21 @@ export async function loginToExistingAlbyAccount(page: Page) {
   );
   oauthConfirmAuthButton.click();
 
-  await new Promise((resolve) => setTimeout(resolve, 3000));
+  let retries = 0;
+  const MAX_RETRIES = 20;
+  while (retries < MAX_RETRIES) {
+    console.info(
+      "Waiting for OAuth dialog to close (" + retries + "/" + MAX_RETRIES + ")"
+    );
+    if (page.target().url().indexOf("pin-extension") > -1) {
+      break;
+    }
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    retries++;
+  }
+  if (retries >= MAX_RETRIES) {
+    throw new Error("Did not navigate to pin extension page");
+  }
 
   await commonCreateWalletSuccessCheck({ page, $document, skipContinue: true });
 }
