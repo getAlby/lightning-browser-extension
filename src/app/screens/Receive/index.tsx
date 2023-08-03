@@ -57,9 +57,12 @@ function Receive() {
   const [paid, setPaid] = useState(false);
   const [pollingForPayment, setPollingForPayment] = useState(false);
   const mounted = useRef(false);
-  const isAlbyUser =
-    isAlbyOAuthAccount(auth.account?.connectorType) ||
-    isAlbyLNDHubAccount(auth.account?.alias, auth.account?.connectorType);
+  const isAlbyLNDHubUser = isAlbyLNDHubAccount(
+    auth.account?.alias,
+    auth.account?.connectorType
+  );
+  const isAlbyOAuthUser = isAlbyOAuthAccount(auth.account?.connectorType);
+  const isAlbyUser = isAlbyOAuthUser || isAlbyLNDHubUser;
 
   useEffect(() => {
     mounted.current = true;
@@ -316,48 +319,50 @@ function Receive() {
                   }}
                 />
               </div>
-              {isAlbyUser && (
-                <>
-                  <div className="mb-4">
-                    <Button
-                      type="button"
-                      label={copyLightningAddressLabel}
-                      disabled={loadingLightningAddress}
-                      fullWidth
-                      onClick={async () => {
-                        try {
-                          if (!lightningAddress) {
-                            throw new Error(
-                              "User does not have a lightning address"
-                            );
-                          }
-                          navigator.clipboard.writeText(lightningAddress);
-                          setCopyLightningAddressLabel(tCommon("copied"));
-                          setTimeout(() => {
-                            setCopyLightningAddressLabel(
-                              t("actions.copy_lightning_address")
-                            );
-                          }, 1000);
-                        } catch (e) {
-                          if (e instanceof Error) {
-                            toast.error(e.message);
-                          }
+
+              {isAlbyOAuthUser && (
+                <div className="mb-4">
+                  <Button
+                    type="button"
+                    label={copyLightningAddressLabel}
+                    disabled={loadingLightningAddress}
+                    fullWidth
+                    onClick={async () => {
+                      try {
+                        if (!lightningAddress) {
+                          throw new Error(
+                            "User does not have a lightning address"
+                          );
                         }
-                      }}
-                      icon={<CopyIcon className="w-6 h-6 mr-2" />}
-                    />
-                  </div>
-                  <div className="mb-4">
-                    <Button
-                      type="button"
-                      label={t("receive_via_bitcoin_address")}
-                      fullWidth
-                      onClick={() => {
-                        navigate("/onChainReceive");
-                      }}
-                    />
-                  </div>
-                </>
+                        navigator.clipboard.writeText(lightningAddress);
+                        setCopyLightningAddressLabel(tCommon("copied"));
+                        setTimeout(() => {
+                          setCopyLightningAddressLabel(
+                            t("actions.copy_lightning_address")
+                          );
+                        }, 1000);
+                      } catch (e) {
+                        if (e instanceof Error) {
+                          toast.error(e.message);
+                        }
+                      }
+                    }}
+                    icon={<CopyIcon className="w-6 h-6 mr-2" />}
+                  />
+                </div>
+              )}
+
+              {isAlbyUser && (
+                <div className="mb-4">
+                  <Button
+                    type="button"
+                    label={t("receive_via_bitcoin_address")}
+                    fullWidth
+                    onClick={() => {
+                      navigate("/onChainReceive");
+                    }}
+                  />
+                </div>
               )}
             </Container>
           </div>

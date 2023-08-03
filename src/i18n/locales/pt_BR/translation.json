@@ -431,7 +431,7 @@
           },
           "import": {
             "title": "Importar sua chave mestra",
-            "description": "Use a chave de recuperação para importar sua chave mestra na Alby.",
+            "description": "Use a frase de recuperação para importar sua chave mestra na Alby.",
             "button": "Importar chave mestra"
           },
           "inputs": {
@@ -611,7 +611,7 @@
         "copy_lightning_address": "Copiar endereço relâmpago"
       },
       "amount": {
-        "label": "Quantia",
+        "label": "Quantia a receber",
         "placeholder": "Quantia em Satoshi..."
       },
       "description": {
@@ -641,7 +641,7 @@
     "make_invoice": {
       "title": "Gerar fatura",
       "amount": {
-        "label": "Quantia"
+        "label": "Quantia (Satoshi)"
       },
       "memo": {
         "label": "Memo"
@@ -1005,7 +1005,7 @@
       }
     },
     "account_menu": {
-      "title": "Trocar conta",
+      "title": "Mudar de conta",
       "options": {
         "account": {
           "add": "Adicionar nova conta",
