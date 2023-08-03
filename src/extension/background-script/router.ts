@@ -68,6 +68,7 @@ const routes = {
   liquid: {
     signPset: liquid.signPset,
     getPsetPreview: liquid.getPsetPreview,
+    fetchAssetRegistry: liquid.fetchAssetRegistry,
   },
 
   nostr: {

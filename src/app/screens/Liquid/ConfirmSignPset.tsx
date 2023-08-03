@@ -11,18 +11,13 @@ import Hyperlink from "~/app/components/Hyperlink";
 import Loading from "~/app/components/Loading";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
-import { toLiquidNetworkName } from "~/app/utils";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
-import {
-  Esplora,
-  EsploraAssetInfos,
-  fetchAssetRegistry,
-} from "~/common/lib/esplora";
 import msg from "~/common/lib/msg";
 import type {
+  EsploraAssetInfos,
+  EsploraAssetRegistry,
   LiquidAddress,
-  LiquidNetworkType,
   OriginData,
   PsetPreview,
 } from "~/types";
@@ -40,41 +35,27 @@ function ConfirmSignPset() {
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [preview, setPreview] = useState<PsetPreview | undefined>(undefined);
-  const [assetRegistry, setAssetRegistry] = useState<
-    Record<string, EsploraAssetInfos>
-  >({});
-  const [liquidNetwork, setLiquidNetwork] = useState<LiquidNetworkType>();
+  const [assetRegistry, setAssetRegistry] = useState<EsploraAssetRegistry>({});
   const [showAddresses, setShowAddresses] = useState(false);
   const [showHex, setShowHex] = useState(false);
 
   useEffect(() => {
     (async () => {
       if (!pset) throw new Error("pset is undefined");
-      const account = await api.getAccount();
-      const liquidNetwork = toLiquidNetworkName(account.bitcoinNetwork);
-      const preview = await api.liquid.getPsetPreview(pset, liquidNetwork);
-      setLiquidNetwork(liquidNetwork);
+      const preview = await api.liquid.getPsetPreview(pset);
       setPreview(preview);
 
-      const esploraClient = Esplora.fromNetwork(liquidNetwork);
-      const registry = await fetchAssetRegistry(
-        esploraClient,
-        preview,
-        console.error // do not throw, just log errors
-      );
-
+      const registry = await api.liquid.fetchAssetRegistry(preview);
       setAssetRegistry(registry);
     })();
   }, [pset]);
 
   async function confirm() {
     try {
+      if (!pset) throw new Error("pset is undefined");
       setLoading(true);
-      const response = await msg.request(
-        "liquid/signPset",
-        { pset: pset, network: liquidNetwork },
-        { origin }
-      );
+      const response = await api.liquid.signPset(pset);
+
       msg.reply(response);
       setSuccessMessage(tCommon("success"));
     } catch (e) {

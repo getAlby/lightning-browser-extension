@@ -2,7 +2,6 @@ import merge from "lodash.merge";
 import pick from "lodash.pick";
 import browser from "webextension-polyfill";
 import createState from "zustand";
-import { toLiquidNetworkName } from "~/app/utils";
 import { decryptData } from "~/common/lib/crypto";
 import { DEFAULT_SETTINGS } from "~/common/settings";
 import { isManifestV3 } from "~/common/utils/mv3";
@@ -146,10 +145,11 @@ const state = createState<State>((set, get) => ({
     const mnemonic = await get().getMnemonic();
     const currentAccountId = get().currentAccountId as string;
     const account = get().accounts[currentAccountId];
+    const bitcoinNetwork = account.bitcoinNetwork || "bitcoin";
 
     const liquid = new Liquid(
       mnemonic,
-      toLiquidNetworkName(account.bitcoinNetwork || "bitcoin")
+      bitcoinNetwork === "bitcoin" ? "liquid" : bitcoinNetwork
     );
     set({ liquid });
     return liquid;

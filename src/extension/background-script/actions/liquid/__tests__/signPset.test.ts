@@ -13,12 +13,12 @@ const mockState = {
   currentAccountId: "1e1e8ea6-493e-480b-9855-303d37506e97",
   getAccount: () => ({
     mnemonic: liquidFixtureSign.mnemonic,
-    bitcoinNetwork: "regtest",
+    bitcoinNetwork: "testnet",
   }),
   getMnemonic: () => new Mnemonic(liquidFixtureSign.mnemonic),
   getLiquid: () =>
     Promise.resolve(
-      new Liquid(new Mnemonic(liquidFixtureSign.mnemonic), "regtest")
+      new Liquid(new Mnemonic(liquidFixtureSign.mnemonic), "testnet")
     ),
   getConnector: jest.fn(),
 };
@@ -47,7 +47,6 @@ function sendSignPsetMessage(pset: string) {
     },
     args: {
       pset,
-      network: "testnet",
     },
   };
 

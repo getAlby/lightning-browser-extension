@@ -1,16 +1,7 @@
 import fetchAdapter from "@vespaiach/axios-fetch-adapter";
 import axios, { AxiosInstance } from "axios";
 import { networks } from "liquidjs-lib";
-import { PsetPreview } from "~/types";
-
-// TODO: can this file be moved to the background script?
-
-export type EsploraAssetInfos = {
-  assetHash: string;
-  ticker: string;
-  name: string;
-  precision: number;
-};
+import { EsploraAssetInfos, EsploraAssetRegistry, PsetPreview } from "~/types";
 
 export interface EsploraAPI {
   getAsset(assetHash: string): Promise<EsploraAssetInfos>;
@@ -96,7 +87,7 @@ export async function fetchAssetRegistry(
   esplora: EsploraAPI,
   preview: PsetPreview,
   onError: (error: unknown) => void
-): Promise<Record<string, EsploraAssetInfos>> {
+): Promise<EsploraAssetRegistry> {
   const assets = new Set<string>();
   for (const input of preview.inputs) {
     assets.add(input.asset);

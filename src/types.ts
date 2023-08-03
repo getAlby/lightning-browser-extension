@@ -571,7 +571,6 @@ export interface MessageSignPsetWithPrompt extends MessageDefault {
 export interface MessageSignPset extends MessageDefault {
   args: {
     pset: string;
-    network: LiquidNetworkType;
   };
   action: "signPset";
 }
@@ -579,9 +578,15 @@ export interface MessageSignPset extends MessageDefault {
 export interface MessageGetPSetPreview extends MessageDefault {
   args: {
     pset: string;
-    networkType: LiquidNetworkType;
   };
   action: "getPsetPreview";
+}
+
+export interface MessageFetchAssetRegistry extends MessageDefault {
+  args: {
+    psetPreview: PsetPreview;
+  };
+  action: "fetchAssetRegistry";
 }
 
 export interface LNURLChannelServiceResponse {
@@ -908,3 +913,12 @@ export type PsetPreview = {
   inputs: LiquidAddress[];
   outputs: LiquidAddress[];
 };
+
+export type EsploraAssetInfos = {
+  assetHash: string;
+  ticker: string;
+  name: string;
+  precision: number;
+};
+
+export type EsploraAssetRegistry = Record<string, EsploraAssetInfos>;

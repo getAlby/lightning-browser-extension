@@ -1,7 +1,7 @@
 import { GetAccountInformationResponse } from "alby-js-sdk/dist/types";
 import { useSettings } from "~/app/context/SettingsContext";
 import api from "~/common/lib/api";
-import { BitcoinNetworkType, BrowserType, Theme } from "~/types";
+import { BrowserType, Theme } from "~/types";
 
 export function classNames(...classes: (string | boolean)[]) {
   return classes.filter(Boolean).join(" ");
@@ -75,8 +75,4 @@ export function extractLightningTagData(url: string) {
   } else {
     return url.replace(/^lightning:/i, "");
   }
-}
-
-export function toLiquidNetworkName(net: BitcoinNetworkType) {
-  return net === "bitcoin" ? "liquid" : net;
 }

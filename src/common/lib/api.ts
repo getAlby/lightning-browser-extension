@@ -13,8 +13,8 @@ import type {
   BitcoinNetworkType,
   ConnectorType,
   DbPayment,
+  EsploraAssetRegistry,
   Invoice,
-  LiquidNetworkType,
   LnurlAuthResponse,
   MessageAccountEdit,
   MessageAccountValidate,
@@ -210,13 +210,21 @@ const setMnemonic = (id: string, mnemonic: string | null): Promise<void> =>
     mnemonic,
   });
 
-const getLiquidPsetPreview = (
-  pset: string,
-  networkType?: LiquidNetworkType
-): Promise<PsetPreview> =>
+const getLiquidPsetPreview = (pset: string): Promise<PsetPreview> =>
   msg.request("liquid/getPsetPreview", {
     pset,
-    networkType,
+  });
+
+const fetchLiquidAssetRegistry = (
+  psetPreview: PsetPreview
+): Promise<EsploraAssetRegistry> =>
+  msg.request("liquid/fetchAssetRegistry", {
+    psetPreview,
+  });
+
+const signPset = (pset: string): Promise<string> =>
+  msg.request("liquid/signPset", {
+    pset,
   });
 
 export default {
@@ -257,5 +265,7 @@ export default {
   generateMnemonic,
   liquid: {
     getPsetPreview: getLiquidPsetPreview,
+    fetchAssetRegistry: fetchLiquidAssetRegistry,
+    signPset: signPset,
   },
 };
