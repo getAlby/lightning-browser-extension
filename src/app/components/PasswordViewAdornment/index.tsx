@@ -15,6 +15,7 @@ export default function PasswordViewAdornment({
   return (
     <button
       type="button"
+      tabIndex={-1}
       className="flex justify-center items-center w-10 h-8"
       onClick={() => {
         setPasswordView(!passwordView);
