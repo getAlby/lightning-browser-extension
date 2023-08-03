@@ -1,10 +1,7 @@
-import {
-  HiddenIcon,
-  VisibleIcon,
-} from "@bitcoin-design/bitcoin-icons-react/filled";
 import { wordlist } from "@scure/bip39/wordlists/english";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import PasswordViewAdornment from "~/app/components/PasswordViewAdornment";
 import Input from "~/app/components/form/Input";
 
 type MnemonicInputsProps = {
@@ -69,18 +66,13 @@ export default function MnemonicInputs({
                     );
                   }}
                   endAdornment={
-                    <button
-                      type="button"
-                      tabIndex={-1}
-                      className="mr-2"
-                      onClick={() => document.getElementById(inputId)?.focus()}
-                    >
-                      {isRevealed ? (
-                        <VisibleIcon className="h-6 w-6" />
-                      ) : (
-                        <HiddenIcon className="h-6 w-6" />
-                      )}
-                    </button>
+                    <PasswordViewAdornment
+                      passwordViewSuccessCallback={(passwordView) => {
+                        if (passwordView) {
+                          document.getElementById(inputId)?.focus();
+                        }
+                      }}
+                    />
                   }
                 />
               </div>
