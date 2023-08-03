@@ -426,15 +426,13 @@
             "use_mnemonic": "Use Master Key for logging into lightning-powered apps (LNURL Auth)"
           }
         },
-        "bitcoin": {
-          "network": {
-            "title": "Bitcoin Network",
-            "subtitle": "Choose network to derive addresses and decode transactions",
-            "options": {
-              "bitcoin": "Mainnet",
-              "testnet": "Testnet",
-              "regtest": "Regtest"
-            }
+        "network": {
+          "title": "Network",
+          "subtitle": "Choose network to derive addresses and decode bitcoin and liquid transactions",
+          "options": {
+            "bitcoin": "Mainnet",
+            "testnet": "Testnet",
+            "regtest": "Regtest"
           }
         },
         "liquid": {
