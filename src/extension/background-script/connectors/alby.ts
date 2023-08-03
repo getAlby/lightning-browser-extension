@@ -188,7 +188,7 @@ export default class Alby implements Connector {
     // signMessage requires proof of ownership of a non-custodial node
     // this is not the case in the Alby connector which connects to Lndhub
     throw new Error(
-      "SignMessage is not supported by Alby accounts. Generate a secret key to use LNURL auth."
+      "SignMessage is not supported by Alby accounts. Generate a Master Key to use LNURL auth."
     );
   }
 

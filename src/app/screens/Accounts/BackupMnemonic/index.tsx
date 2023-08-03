@@ -6,11 +6,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Button from "~/app/components/Button";
 import { ContentBox } from "~/app/components/ContentBox";
+import MnemonicDescription from "~/app/components/mnemonic/MnemonicDescription";
 import MnemonicInputs from "~/app/components/mnemonic/MnemonicInputs";
-import SecretKeyDescription from "~/app/components/mnemonic/SecretKeyDescription";
 import api from "~/common/lib/api";
 
-function BackupSecretKey() {
+function BackupMnemonic() {
   const { t: tCommon } = useTranslation("common");
   const { t } = useTranslation("translation", {
     keyPrefix: "accounts.account_view.mnemonic",
@@ -49,7 +49,7 @@ function BackupSecretKey() {
           <h1 className="font-bold text-2xl dark:text-white">
             {t("backup.title")}
           </h1>
-          <SecretKeyDescription />
+          <MnemonicDescription />
           <MnemonicInputs mnemonic={mnemonic} readOnly />
         </ContentBox>
         <div className="flex justify-center mt-8 mb-16 gap-4">
@@ -63,4 +63,4 @@ function BackupSecretKey() {
   );
 }
 
-export default BackupSecretKey;
+export default BackupMnemonic;

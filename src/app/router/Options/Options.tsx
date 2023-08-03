@@ -25,9 +25,9 @@ import ScrollToTop from "~/app/components/ScrollToTop";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
 import { getConnectorRoutes, renderRoutes } from "~/app/router/connectorRoutes";
-import BackupSecretKey from "~/app/screens/Accounts/BackupSecretKey";
-import GenerateSecretKey from "~/app/screens/Accounts/GenerateSecretKey";
-import ImportSecretKey from "~/app/screens/Accounts/ImportSecretKey";
+import BackupMnemonic from "~/app/screens/Accounts/BackupMnemonic";
+import GenerateMnemonic from "~/app/screens/Accounts/GenerateMnemonic";
+import ImportMnemonic from "~/app/screens/Accounts/ImportMnemonic";
 import NostrSettings from "~/app/screens/Accounts/NostrSettings";
 import NostrSetup from "~/app/screens/Accounts/NostrSetup/NostrSetup";
 import Discover from "~/app/screens/Discover";
@@ -89,12 +89,12 @@ function Options() {
               <Route index element={<Accounts />} />
               <Route path=":id" element={<AccountDetailLayout />}>
                 <Route index element={<AccountDetail />} />
-                <Route path="secret-key/backup" element={<BackupSecretKey />} />
+                <Route path="secret-key/backup" element={<BackupMnemonic />} />
                 <Route
                   path="secret-key/generate"
-                  element={<GenerateSecretKey />}
+                  element={<GenerateMnemonic />}
                 />
-                <Route path="secret-key/import" element={<ImportSecretKey />} />
+                <Route path="secret-key/import" element={<ImportMnemonic />} />
                 <Route path="nostr/settings" element={<NostrSettings />} />
                 <Route path="nostr/setup" element={<NostrSetup />} />
               </Route>

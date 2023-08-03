@@ -12,7 +12,7 @@ import { ContentBox } from "~/app/components/ContentBox";
 import MnemonicInputs from "~/app/components/mnemonic/MnemonicInputs";
 import api from "~/common/lib/api";
 
-function ImportSecretKey() {
+function ImportMnemonic() {
   const { t: tCommon } = useTranslation("common");
   const navigate = useNavigate();
   const { t } = useTranslation("translation", {
@@ -97,4 +97,4 @@ function ImportSecretKey() {
   );
 }
 
-export default ImportSecretKey;
+export default ImportMnemonic;
