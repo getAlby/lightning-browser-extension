@@ -12,15 +12,13 @@ export async function hasPermissionFor(method: string, host: string) {
     .first();
 
   if (!allowance?.id) {
-    return Promise.reject(
-      new Error("Could not find an allowance for this host")
-    );
+    throw new Error("Could not find an allowance for this host");
   }
 
   const accountId = state.getState().currentAccountId;
 
   if (!accountId) {
-    return Promise.reject(new Error("Account doesn't exist"));
+    throw new Error("Account doesn't exist");
   }
 
   const findPermission = await db.permissions.get({
