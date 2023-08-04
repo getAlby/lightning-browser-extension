@@ -159,7 +159,7 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
     if (launcherType === "icon") {
       return (
         <PreferencesIcon
-          className="h-6 w-6 fill-gray-500 hover:fill-black"
+          className="h-6 w-6 fill-gray-500 hover:fill-black cursor-pointer"
           onClick={openModal}
         />
       );
