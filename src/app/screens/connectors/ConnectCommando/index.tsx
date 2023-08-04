@@ -47,7 +47,7 @@ export default function ConnectCommando() {
 
   function generateCommandoPrivateKey(): string {
     const privKey = secp256k1.utils.randomPrivateKey();
-    return secp256k1.utils.bytesToHex(privKey);
+    return secp256k1.etc.bytesToHex(privKey);
   }
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -114,7 +114,6 @@ export default function ConnectCommando() {
         <TextField
           id="host"
           label={t("host.label")}
-          type="text"
           required
           placeholder="0.0.0.0"
           title="host"
@@ -127,7 +126,6 @@ export default function ConnectCommando() {
         <TextField
           id="pubkey"
           label={t("pubkey.label")}
-          type="text"
           required
           placeholder="02...."
           title="pubkey"
@@ -139,7 +137,6 @@ export default function ConnectCommando() {
         <TextField
           id="rune"
           label={t("rune.label")}
-          type="text"
           required
           placeholder=""
           title="rune"
@@ -170,7 +167,6 @@ export default function ConnectCommando() {
             <TextField
               id="proxy"
               label={t("proxy.label")}
-              type="text"
               placeholder="proxy"
               required
               title="proxy"
@@ -182,6 +178,7 @@ export default function ConnectCommando() {
             id="commandoPrivateKey"
             label={t("privKey.label")}
             type={commandoPrivateKeyVisible ? "text" : "password"}
+            autoComplete="new-password"
             value={formData.privateKey}
             endAdornment={
               <button

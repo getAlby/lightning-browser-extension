@@ -30,12 +30,9 @@
       }
     },
     "choose_path": {
-      "title": "Opret forbindelse",
-      "description": "Opret forbindelse til udvidelsen fra din lightning-wallet for at bruge Alby til at betale online.",
       "alby": {
         "title": "Alby",
-        "description": "Opret dig, eller brug din eksisterende Alby-konto til hurtigt at starte med at betale via lightning.",
-        "create_new": "Opret en konto"
+        "description": "Opret dig, eller brug din eksisterende Alby-konto til hurtigt at starte med at betale via lightning."
       },
       "other": {
         "title": "Andre wallets",
@@ -58,35 +55,6 @@
             "confirm_password": "Bekræft din adgangskode.",
             "mismatched_password": "Adgangskoderne er forskellige."
           }
-        },
-        "forgot_password": "Glemt adgangskoden?",
-        "title": "Din Alby-konto",
-        "create_account": "Opret en ny Alby-konto for at sende og modtage betaling med Bitcoin.",
-        "login_account": "Log ind for at forbinde din eksisterende Alby-konto.",
-        "host_wallet": "Vi opretter en Lightning-wallet til dig!",
-        "email": {
-          "create": {
-            "label": "E-mailadresse"
-          },
-          "login": {
-            "label": "E-mailadresse eller Lightning-adresse"
-          }
-        },
-        "optional_lightning_note": {
-          "part1": "Med din Alby-konto kommer muligheden for at få en",
-          "part2": "Lightning-adresse",
-          "part3": ". Dette gør det let for alle at sende dig Bitcoin via lightningnettet.",
-          "part4": "læs mere"
-        },
-        "optional_lightning_address": {
-          "label": "Vælg din Lightning-adresse (valgfri)",
-          "suffix": "@getalby.com",
-          "title": "tal og bogstaver, mindst 4 tegn"
-        },
-        "errors": {
-          "create_wallet_error": "Kunne ikke logge ind eller oprette en ny konto. Har du brug for hjælp, så kontakt support@getalby.com",
-          "create_wallet_error1": "Kunne ikke logge ind eller oprette en ny konto.",
-          "create_wallet_error2": "Har du brug for hjælp, så kontakt support@getalby.com"
         }
       }
     },
@@ -106,7 +74,6 @@
         "macaroon": {
           "label": "Macaroon (HEX-format)"
         },
-        "or": "ELLER",
         "drag_and_drop": "Træk din macaroon herhen eller <0>find den</0>",
         "errors": {
           "connection_failed": "Forbindelse kunne ikke oprettes. Er dine LND-oplysninger korrekte?"
@@ -260,20 +227,17 @@
         "sms_code": {
           "label": "Indtast din SMS-bekræftelseskode"
         },
-        "jwt": {
+        "token": {
           "label": "Indtast din JWT-token",
           "info": "Log ind med {{label}} bliver i øjeblikketl opgraderet. Hvis du er en øvet bruger, kan du få din JWT-token ved at logge ind via <0>Web Wallet (wallet.mainnet.galoy.io)</0><1/><1/>JWT ser sådan ud: <2>eyJhbG...</2><1/><1/>"
         },
         "actions": {
-          "login": "Adgangsoplysninger",
-          "request_sms_code": "Anmod om SMS-kode"
+          "login": "Adgangsoplysninger"
         },
         "errors": {
-          "failed_to_request_sms": "Kunne ikke anmode om SMS-kode",
-          "failed_to_login_sms": "Kunne ikke logge ind med SMS-kode",
           "setup_failed": "Opsætning mislykkedes",
-          "missing_jwt": "JWT mangler, kunne ikke logge ind.",
-          "invalid_jwt": "ugyldig JWT givet"
+          "missing_token": "JWT mangler, kunne ikke logge ind.",
+          "invalid_token": "ugyldig JWT givet"
         }
       },
       "kollider": {
@@ -342,12 +306,6 @@
         "enable_now": "Aktiver nu"
       },
       "recent_transactions": "Seneste transaktioner",
-      "transaction_list": {
-        "tabs": {
-          "outgoing": "Udgående",
-          "incoming": "Indkommende"
-        }
-      },
       "allowance_view": {
         "recent_transactions": "Seneste transaktioner",
         "allowance": "Pulje",
@@ -356,7 +314,6 @@
       },
       "default_view": {
         "recent_transactions": "Seneste transaktioner",
-        "no_transactions": "Endnu ingen transaktioner udført med Alby.",
         "is_blocked_hint": "Alby er i øjeblikket deaktiveret på {{vært}}",
         "block_removed": "{{vært}} blev aktiveret. Indlæs hjemmesiden igen."
       }
@@ -375,7 +332,6 @@
           "screen_reader": "Eksporter kontooplysninger",
           "waiting": "venter på LndHub-data...",
           "your_ln_address": "Din lightningadresse:",
-          "tip_mobile": "Tip: Brug denne wallet på din mobile enhed",
           "export_uri": "URI til LNDHub-adgangsoplysninger",
           "scan_qr": "Importer denne wallet til Zeus eller BlueWallet ved at skanne QR-koden."
         },
@@ -545,9 +501,6 @@
     },
     "send": {
       "title": "Send",
-      "qrcode": {
-        "title": "Venter på skanning"
-      },
       "input": {
         "label": "Modtager",
         "hint": "Faktura, lightningadresse eller LNURL"
@@ -632,19 +585,11 @@
         "description": "Et par råd der får dig på vingerne🐝",
         "top_up_wallet": {
           "title": "⚡️ Fyld din wallet op",
-          "description": "Generer en lightning-faktura, send lidt bitcoin til dig selv og begynd at bruge Alby i lightnings økosystem",
-          "label1": "Modtag Bitcoin",
-          "label2": "Køb Bitcoin"
+          "description": "Generer en lightning-faktura, send lidt bitcoin til dig selv og begynd at bruge Alby i lightnings økosystem"
         },
         "demo": {
           "title": "🕹️ Få en prøvetur med Alby",
-          "description": "Se alle de ting, du kan med Alby på vores præsentationsside",
-          "label1": "Kom igang"
-        },
-        "address": {
-          "title": "⚡️ Få en lightning-adresse",
-          "description": "Lav din egen lightning-adresse, og få betaling med lightning lige så let som når du sender en e-mail",
-          "label1": "Få den nu!"
+          "description": "Se alle de ting, du kan med Alby på vores præsentationsside"
         }
       }
     },

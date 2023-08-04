@@ -4,6 +4,7 @@ import "dayjs/locale/da";
 import "dayjs/locale/es";
 import "dayjs/locale/fi";
 import "dayjs/locale/fr";
+import "dayjs/locale/hi";
 import "dayjs/locale/it";
 import "dayjs/locale/mr";
 import "dayjs/locale/pl";
@@ -20,6 +21,7 @@ import en from "~/i18n/locales/en/translation.json";
 import es from "~/i18n/locales/es/translation.json";
 import fi from "~/i18n/locales/fi/translation.json";
 import fr from "~/i18n/locales/fr/translation.json";
+import hi from "~/i18n/locales/hi/translation.json";
 import it from "~/i18n/locales/it/translation.json";
 import mr from "~/i18n/locales/mr/translation.json";
 import pl from "~/i18n/locales/pl/translation.json";
@@ -72,6 +74,12 @@ export const resources = {
     components: it.components,
     permissions: it.permissions,
   },
+  hi: {
+    translation: hi.translation,
+    common: hi.common,
+    components: hi.components,
+    permissions: hi.permissions,
+  },
   mr: {
     translation: mr.translation,
     common: mr.common,
@@ -107,7 +115,7 @@ export const resources = {
 // needs to be aligned with `resources`
 export const supportedLocales = [
   { locale: "en", label: "English" },
-  { locale: "cs", label: "Čeština," },
+  { locale: "cs", label: "Čeština" },
   { locale: "da", label: "Dansk" },
   { locale: "es", label: "Español" },
   { locale: "fr", label: "Français" },
@@ -117,7 +125,8 @@ export const supportedLocales = [
   { locale: "fi", label: "Suomalainen" },
   { locale: "sv", label: "Svenska" },
   { locale: "zh-CN", label: "中文（简化字）" },
-  { locale: "mr", label: "मराठी (India)" },
+  { locale: "hi", label: "हिंदी" },
+  { locale: "mr", label: "मराठी" },
 ];
 
 i18n

@@ -1,4 +1,5 @@
 import AccountMenu from "@components/AccountMenu";
+import ConfirmAddAccount from "@screens/ConfirmAddAccount";
 import ConfirmKeysend from "@screens/ConfirmKeysend";
 import ConfirmPayment from "@screens/ConfirmPayment";
 import ConfirmRequestPermission from "@screens/ConfirmRequestPermission";
@@ -18,6 +19,7 @@ import { HashRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
+import ConfirmGetAddress from "~/app/screens/ConfirmGetAddress";
 import type { NavigationState, OriginData } from "~/types";
 
 // Parse out the parameters from the querystring.
@@ -67,11 +69,19 @@ function Prompt() {
               }
             />
             <Route
+              path="public/alby/enable"
+              element={<Enable origin={navigationState.origin as OriginData} />} // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
+            />
+            <Route
               path="public/webln/enable"
               element={<Enable origin={navigationState.origin as OriginData} />} // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
             />
             <Route
               path="public/nostr/enable"
+              element={<Enable origin={navigationState.origin as OriginData} />} // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
+            />
+            <Route
+              path="public/webbtc/enable"
               element={<Enable origin={navigationState.origin as OriginData} />} // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
             />
             <Route path="public/nostr/confirm" element={<NostrConfirm />} />
@@ -96,6 +106,8 @@ function Prompt() {
             <Route path="confirmPayment" element={<ConfirmPayment />} />
             <Route path="confirmKeysend" element={<ConfirmKeysend />} />
             <Route path="confirmSignMessage" element={<ConfirmSignMessage />} />
+            <Route path="confirmAddAccount" element={<ConfirmAddAccount />} />
+            <Route path="confirmGetAddress" element={<ConfirmGetAddress />} />
             <Route
               path="public/confirmRequestPermission"
               element={<ConfirmRequestPermission />}

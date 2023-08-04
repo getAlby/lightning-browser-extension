@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 
 type Props = {
-  label: "active" | "auth";
+  label: "active" | "auth" | "imported";
   color: string;
   textColor: string;
   small?: boolean;
@@ -14,8 +14,8 @@ export default function Badge({ label, color, textColor, small }: Props) {
 
   return (
     <span
-      className={`inline-block leading-none rounded font-medium mr-2 bg-${color} text-${textColor} ${
-        !small ? "p-1.5 text-xs" : "p-1 text-xxxs"
+      className={`inline-block leading-none rounded-full font-medium mr-2 py-1 bg-${color} text-${textColor} ${
+        !small ? "px-2 text-xs" : "px-1.5 text-xxxs"
       }`}
     >
       {tComponents(`label.${label}`)}

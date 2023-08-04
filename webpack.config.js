@@ -9,12 +9,111 @@ const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const WextManifestWebpackPlugin = require("wext-manifest-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const BundleAnalyzerPlugin =
+  require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+
+if (!process.env.NODE_ENV) {
+  process.env.NODE_ENV = "development";
+}
+const nodeEnv = process.env.NODE_ENV;
+const viewsPath = path.join(__dirname, "static", "views");
+const destPath = path.join(__dirname, "dist", nodeEnv);
+
+const targetBrowser = process.env.TARGET_BROWSER;
+
+let network = "mainnet";
+if (!process.env.ALBY_API_URL) {
+  process.env.ALBY_API_URL = "https://api.regtest.getalby.com";
+  if (!process.env.ALBY_OAUTH_AUTHORIZE_URL) {
+    process.env.ALBY_OAUTH_AUTHORIZE_URL =
+      "https://app.regtest.getalby.com/oauth";
+  }
+  network = "testnet";
+}
+
+// release build (check for explicitly set env variables)
+const oauthBrowser =
+  process.env.TARGET_BROWSER === "firefox" ? "firefox" : "chrome";
+const clientId =
+  process.env[`ALBY_OAUTH_CLIENT_ID_${oauthBrowser.toUpperCase()}`];
+const clientSecret =
+  process.env[`ALBY_OAUTH_CLIENT_SECRET_${oauthBrowser.toUpperCase()}`];
+
+if (clientId && clientSecret) {
+  process.env.ALBY_OAUTH_CLIENT_ID = clientId;
+  process.env.ALBY_OAUTH_CLIENT_SECRET = clientSecret;
+
+  console.info(
+    "Using oAuth credentials from environment:",
+    clientId,
+    clientSecret
+  );
+} else {
+  const oauthCredentials = {
+    development: {
+      testnet: {
+        chrome: {
+          id: "CLAp8AfS3W",
+          secret: "KwIxF0VbGX2ZHLbbbYgE",
+        },
+        firefox: {
+          id: "zWdxnF04Hd",
+          secret: "wY5uLJJDjNWrDlB6lAj8",
+        },
+      },
+      mainnet: {
+        chrome: {
+          id: "Zf7u3Zlyxl",
+          secret: "7wtcdVi61emqwzAH9Nm6",
+        },
+        firefox: {
+          id: "uQkyHFBkaC",
+          secret: "0agh0cKkGWQSXTGRz9oy",
+        },
+      },
+    },
+    production: {
+      testnet: {
+        chrome: {
+          id: "CLAp8AfS3W",
+          secret: "KwIxF0VbGX2ZHLbbbYgE",
+        },
+        firefox: {
+          id: "zWdxnF04Hd",
+          secret: "wY5uLJJDjNWrDlB6lAj8",
+        },
+      },
+      mainnet: {
+        chrome: {
+          id: "R7lZBSqfQt",
+          secret: "W4yWprd5ib6OSfq27InN",
+        },
+        firefox: {
+          id: "V682entasX",
+          secret: "GhL3g37I3NAwzavCB3A5",
+        },
+      },
+    },
+  };
+
+  // setup ALBY_OAUTH_CLIENT_ID
+  const selectedOAuthCredentials =
+    oauthCredentials[nodeEnv]?.[network]?.[oauthBrowser];
+  if (!selectedOAuthCredentials) {
+    throw new Error(
+      `No OAuth credentials found for current configuration: NODE_ENV=${nodeEnv} network=${network} oauthBrowser=${oauthBrowser}`
+    );
+  }
+  console.info("Using OAuth credentials for", nodeEnv, oauthBrowser, network);
+  process.env.ALBY_OAUTH_CLIENT_ID = selectedOAuthCredentials.id;
+  process.env.ALBY_OAUTH_CLIENT_SECRET = selectedOAuthCredentials.secret;
+}
 
 // default value is set in the code where it is used
-if (!process.env.WALLET_CREATE_URL) {
-  process.env.WALLET_CREATE_URL = ""; // env variables are passed as string. empty strings are still falsy
+if (!process.env.ALBY_OAUTH_AUTHORIZE_URL) {
+  process.env.ALBY_OAUTH_AUTHORIZE_URL = ""; // env variables are passed as string. empty strings are still falsy
 }
+
 // default value is set in the code where it is used
 if (!process.env.BITCOIN_BEACH_GALOY_URL) {
   process.env.BITCOIN_BEACH_GALOY_URL = ""; // env variables are passed as string. empty strings are still falsy
@@ -29,12 +128,9 @@ if (!process.env.BITCOIN_JUNGLE_GALOY_URL) {
 if (!process.env.HMAC_VERIFY_HEADER_KEY) {
   process.env.HMAC_VERIFY_HEADER_KEY = ""; // env variables are passed as string. empty strings are still falsy
 }
-
-const viewsPath = path.join(__dirname, "static", "views");
-const nodeEnv = process.env.NODE_ENV || "development";
-const destPath = path.join(__dirname, "dist", nodeEnv);
-
-const targetBrowser = process.env.TARGET_BROWSER;
+if (!process.env.VERSION) {
+  process.env.VERSION = require("./package.json").version;
+}
 
 const getExtensionFileType = (browser) => {
   if (browser === "opera") {
@@ -57,16 +153,19 @@ var options = {
   },
 
   mode: nodeEnv,
-
   entry: {
     manifest: "./src/manifest.json",
     background: "./src/extension/background-script/index.ts",
-    contentScriptOnEnd: "./src/extension/content-script/onend.js",
+    contentScriptOnEndWebLN: "./src/extension/content-script/onendwebln.js",
+    contentScriptOnEndAlby: "./src/extension/content-script/onendalby.js",
     contentScriptOnEndNostr: "./src/extension/content-script/onendnostr.js",
+    contentScriptOnEndWebBTC: "./src/extension/content-script/onendwebbtc.js",
     contentScriptOnStart: "./src/extension/content-script/onstart.ts",
     inpageScript: "./src/extension/inpage-script/index.js",
     inpageScriptWebLN: "./src/extension/inpage-script/webln.js",
+    inpageScriptWebBTC: "./src/extension/inpage-script/webbtc.js",
     inpageScriptNostr: "./src/extension/inpage-script/nostr.js",
+    inpageScriptAlby: "./src/extension/inpage-script/alby.js",
     popup: "./src/app/router/Popup/index.tsx",
     prompt: "./src/app/router/Prompt/index.tsx",
     options: "./src/app/router/Options/index.tsx",
@@ -111,19 +210,13 @@ var options = {
         },
       },
       {
-        test: /\.(sa|sc|c)ss$/,
+        test: /\.css$/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader, // It creates a CSS file per JS file which contains CSS
           },
-          "css-loader", // Takes the CSS files and returns the CSS with imports and url(...) for Webpack
-          "postcss-loader",
-          {
-            loader: "sass-loader", // Takes the Sass/SCSS file and compiles to the CSS
-            options: {
-              sourceMap: true,
-            },
-          },
+          { loader: "css-loader", options: { sourceMap: true } },
+          { loader: "postcss-loader", options: { sourceMap: true } },
         ],
       },
       {
@@ -153,8 +246,12 @@ var options = {
       "BITCOIN_JUNGLE_GALOY_URL",
       "NODE_ENV",
       "TARGET_BROWSER",
-      "WALLET_CREATE_URL",
+      "VERSION",
       "HMAC_VERIFY_HEADER_KEY",
+      "ALBY_OAUTH_CLIENT_ID",
+      "ALBY_OAUTH_CLIENT_SECRET",
+      "ALBY_OAUTH_AUTHORIZE_URL",
+      "ALBY_API_URL",
     ]),
     // delete previous build files
     new CleanWebpackPlugin({
@@ -205,10 +302,10 @@ var options = {
       patterns: [{ from: "static/assets", to: "assets" }],
     }),
     new BundleAnalyzerPlugin({
-      generateStatsFile: (nodeEnv !== "development" ? true : false),
-      analyzerMode: (nodeEnv !== "development" ? 'static' : 'disabled'),
-      reportFilename: '../bundle-report.html',
-      statsFilename: '../bundle-stats.json',
+      generateStatsFile: nodeEnv !== "development" ? true : false,
+      analyzerMode: nodeEnv !== "development" ? "static" : "disabled",
+      reportFilename: "../bundle-report.html",
+      statsFilename: "../bundle-stats.json",
       openAnalyzer: nodeEnv !== "development",
     }),
   ],

@@ -1,5 +1,4 @@
 import Button from "@components/Button";
-import Card from "@components/Card";
 import Loading from "@components/Loading";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -7,13 +6,14 @@ import { useNavigate } from "react-router-dom";
 import { useAccount } from "~/app/context/AccountContext";
 import { useAccounts } from "~/app/context/AccountsContext";
 import { useSettings } from "~/app/context/SettingsContext";
+import TestConnectionResultCard from "~/app/screens/Options/TestConnection/card";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import type { AccountInfo } from "~/types";
 
 export default function TestConnection() {
   const { getFormattedInCurrency } = useSettings();
-  const auth = useAccount();
+  const { setAccountId, fetchAccountInfo } = useAccount();
   const { getAccounts } = useAccounts();
 
   const [accountInfo, setAccountInfo] = useState<{
@@ -44,10 +44,12 @@ export default function TestConnection() {
     }, 45000);
     try {
       const { currentAccountId } = await api.getStatus();
-      auth.setAccountId(currentAccountId);
-      const accountInfo = await auth.fetchAccountInfo({
+      setAccountId(currentAccountId);
+
+      const accountInfo = await fetchAccountInfo({
         accountId: currentAccountId,
       });
+
       if (accountInfo) {
         setAccountInfo({
           alias: accountInfo.alias,
@@ -119,7 +121,7 @@ export default function TestConnection() {
                 <p className="mt-6 dark:text-neutral-400">{t("ready")}</p>
 
                 <div className="mt-6">
-                  <Card
+                  <TestConnectionResultCard
                     color="bg-gray-100"
                     alias={`${accountInfo.name} - ${accountInfo.alias}`}
                     satoshis={

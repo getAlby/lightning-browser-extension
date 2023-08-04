@@ -30,12 +30,9 @@
       }
     },
     "choose_path": {
-      "title": "Connecter",
-      "description": "Pour commencer à utiliser Alby pour effectuer des paiements en ligne, connectez votre Lightning wallet à l'extension.",
       "alby": {
         "title": "Alby",
-        "description": "Inscrivez-vous ou utilisez votre compte Alby existant pour commencer à utiliser les paiements éclair en un rien de temps.",
-        "create_new": "S'inscrire"
+        "description": "Inscrivez-vous ou utilisez votre compte Alby existant pour commencer à utiliser les paiements éclair en un rien de temps."
       },
       "other": {
         "title": "Autres portefeuilles",
@@ -58,35 +55,6 @@
             "confirm_password": "Veuillez confirmer votre mot de passe.",
             "mismatched_password": "Les mots de passe ne correspondent pas."
           }
-        },
-        "forgot_password": "Mot de passe oublié?",
-        "title": "Votre compte Alby",
-        "create_account": "Créez un nouveau compte Alby pour envoyer et recevoir des paiements en bitcoins.",
-        "login_account": "Connectez-vous pour connecter votre compte Alby existant.",
-        "host_wallet": "Nous hébergeons un portefeuille Lightning pour vous !",
-        "email": {
-          "create": {
-            "label": "Adresse e-mail"
-          },
-          "login": {
-            "label": "Adresse e-mail ou adresse Lightning"
-          }
-        },
-        "optional_lightning_note": {
-          "part1": "Votre compte Alby est également livré avec une option",
-          "part2": "adresse lightning",
-          "part3": ". C'est un moyen simple pour quiconque de vous envoyer des bitcoins sur le réseau Lightning.",
-          "part4": "apprendre encore plus"
-        },
-        "optional_lightning_address": {
-          "label": "Choisissez votre adresse Lightning (facultatif)",
-          "suffix": "@getalby.com",
-          "title": "chiffres et lettres, au moins 4 caractères"
-        },
-        "errors": {
-          "create_wallet_error": "Impossible de se connecter ou de créer un nouveau compte. Si vous avez besoin d'aide, veuillez contacter support@getalby.com",
-          "create_wallet_error1": "Impossible de se connecter ou de créer un nouveau compte.",
-          "create_wallet_error2": "Si vous avez besoin d'aide, veuillez contacter support@getalby.com"
         }
       }
     },
@@ -106,7 +74,6 @@
         "macaroon": {
           "label": "Macaroon (format HEX )"
         },
-        "or": "OR",
         "drag_and_drop": "Faites glisser et déposez votre macaroon ici ou <0>naviguez</0>",
         "errors": {
           "connection_failed": "La connexion a échoué. Vos informations d'identification LND sont-elles correctes ?"
@@ -260,20 +227,17 @@
         "sms_code": {
           "label": "Entrez votre code de vérification par SMS"
         },
-        "jwt": {
+        "token": {
           "label": "Entrez votre jeton JWT",
           "info": "La connexion {{label}} est en cours de mise à jour. Si vous êtes un utilisateur avancé, vous pouvez récupérer votre jeton JWT en vous connectant via le <0>Portefeuille Web (wallet.mainnet.galoy.io)</0><1/><1/>Le JWT ressemble : < 2>eyJhbG...</2><1/><1/>"
         },
         "actions": {
-          "login": "Connexion",
-          "request_sms_code": "Demander un code SMS"
+          "login": "Connexion"
         },
         "errors": {
-          "failed_to_request_sms": "Impossible de demander un code SMS",
-          "failed_to_login_sms": "Échec de la connexion avec le code SMS",
           "setup_failed": "La configuration a échoué",
-          "missing_jwt": "JWT manquant, impossible de se connecter.",
-          "invalid_jwt": "JWT invalide passé"
+          "missing_token": "JWT manquant, impossible de se connecter.",
+          "invalid_token": "JWT invalide passé"
         }
       },
       "kollider": {
@@ -342,12 +306,6 @@
         "enable_now": "Activer maintenant"
       },
       "recent_transactions": "transactions récentes",
-      "transaction_list": {
-        "tabs": {
-          "outgoing": "Sortant",
-          "incoming": "Entrant"
-        }
-      },
       "allowance_view": {
         "recent_transactions": "transactions récentes",
         "allowance": "Allocation",
@@ -356,7 +314,6 @@
       },
       "default_view": {
         "recent_transactions": "transactions récentes",
-        "no_transactions": "Aucune transaction effectuée avec Alby pour le moment.",
         "is_blocked_hint": "Alby est actuellement désactivé sur {{host}}",
         "block_removed": "{{hôte}} activé. Veuillez recharger le site Web."
       }
@@ -375,7 +332,6 @@
           "screen_reader": "Exporter les détails du compte",
           "waiting": "en attente des données LndHub...",
           "your_ln_address": "Votre adresse Lightning :",
-          "tip_mobile": "Astuce : Utilisez ce portefeuille avec votre appareil mobile",
           "export_uri": "URI des identifiants LNDHub",
           "scan_qr": "Importez ce portefeuille dans Zeus ou BlueWallet en scannant le QRCode."
         },
@@ -546,9 +502,6 @@
     },
     "send": {
       "title": "Envoyer",
-      "qrcode": {
-        "title": "En attente de numérisation"
-      },
       "input": {
         "label": "Destinataire",
         "hint": "Facture, adresse Lightning ou LNURL"
@@ -633,19 +586,11 @@
         "description": "Quelques conseils pour commencer à buzzer🐝",
         "top_up_wallet": {
           "title": "⚡️ Rechargez votre portefeuille",
-          "description": "Créez une facture Lightning, envoyez-vous des bitcoins et commencez à utiliser Alby dans l'écosystème Lightning",
-          "label1": "Recevez des bitcoins",
-          "label2": "Recevez des bitcoins"
+          "description": "Créez une facture Lightning, envoyez-vous des bitcoins et commencez à utiliser Alby dans l'écosystème Lightning"
         },
         "demo": {
           "title": "🕹️ Essayez la démo d'Alby",
-          "description": "Découvrez tout ce que vous pouvez faire avec Alby sur notre site de démonstration",
-          "label1": "Essaie"
-        },
-        "address": {
-          "title": "⚡️ Obtenez une adresse éclair",
-          "description": "Créez votre propre adresse éclair et recevez des paiements éclair en envoyant facilement un e-mail",
-          "label1": "Obtenez le maintenant!"
+          "description": "Découvrez tout ce que vous pouvez faire avec Alby sur notre site de démonstration"
         }
       }
     },
@@ -768,8 +713,8 @@
       "payment_failed": "Paiement échoué"
     },
     "range": {
-      "lessThan": "< {{max}}",
-      "greaterThan": "> {{min}}",
+      "lessThanOrEqual": "≤ {{max}}",
+      "greaterOrEqual": "≥ {{min}}",
       "between": "entre {{min}} et {{max}}"
     }
   },

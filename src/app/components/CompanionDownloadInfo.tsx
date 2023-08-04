@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import getOS from "~/common/utils/os";
 
 type Props = {
   hasTorCallback: (hasTor: boolean) => void;
@@ -10,14 +11,6 @@ function CompanionDownloadInfo({ hasTorCallback }: Props) {
   const { t } = useTranslation("components", {
     keyPrefix: "companion_download_info",
   });
-
-  function getOS() {
-    const userAgent = navigator.userAgent;
-    if (userAgent.indexOf("Win") !== -1) return "Windows";
-    if (userAgent.indexOf("Mac") !== -1) return "MacOS";
-    if (userAgent.indexOf("X11") !== -1) return "UNIX";
-    if (userAgent.indexOf("Linux") !== -1) return "Linux";
-  }
 
   function onChangeConnectionMode(isTor: boolean) {
     setIsTor(isTor);
@@ -43,7 +36,7 @@ function CompanionDownloadInfo({ hasTorCallback }: Props) {
           />
           <label
             htmlFor="mode-companion"
-            className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-primary peer-checked:border-primary peer-checked:text-primary hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+            className="inline-flex h-full justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-primary peer-checked:border-primary peer-checked:text-primary hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
           >
             <div className="block">
               <div className="text-md font-semibold mb-2">
@@ -75,7 +68,7 @@ function CompanionDownloadInfo({ hasTorCallback }: Props) {
           />
           <label
             htmlFor="mode-tor"
-            className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-primary peer-checked:border-primary peer-checked:text-primary hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+            className="inline-flex h-full justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-primary peer-checked:border-primary peer-checked:text-primary hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
           >
             <div className="block">
               <div className="w-full font-semibold mb-2">

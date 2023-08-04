@@ -1,4 +1,4 @@
-name: Build nightlies
+name: Build extension packages
 
 on:
   push:
@@ -13,7 +13,7 @@ jobs:
 
     name: build-prod
     env:
-      WALLET_CREATE_URL: "https://getalby.com/api/users"
+      ALBY_API_URL: "https://api.getalby.com"
 
     permissions:
       issues: write
@@ -28,8 +28,11 @@ jobs:
 
       - run: yarn install
 
-      - name: Build production
-        run: yarn build
+      - name: Build firefox
+        run: yarn build:firefox
+
+      - name: Build chrome
+        run: yarn build:chrome
 
       - name: Archive firefox production zip file
         uses: actions/upload-artifact@v3
@@ -42,9 +45,3 @@ jobs:
         with:
           name: chrome.zip
           path: dist/production/chrome.zip
-
-      - name: Archive opera production zip file
-        uses: actions/upload-artifact@v3
-        with:
-          name: opera.crx
-          path: dist/production/opera.crx

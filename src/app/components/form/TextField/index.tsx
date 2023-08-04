@@ -25,6 +25,7 @@ const TextField = ({
   pattern,
   placeholder,
   required = false,
+  readOnly = false,
   suffix,
   title,
   type = "text",
@@ -36,7 +37,7 @@ const TextField = ({
       {label}
     </label>
 
-    <div className="mt-1">
+    <div className="mt-1 flex flex-col flex-1">
       <Input
         autoComplete={autoComplete}
         autoFocus={autoFocus}
@@ -59,6 +60,7 @@ const TextField = ({
         type={type}
         value={value}
         tabIndex={tabIndex}
+        readOnly={readOnly}
       />
 
       {hint && (

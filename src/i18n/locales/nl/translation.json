@@ -44,7 +44,6 @@
         "macaroon": {
           "label": "Macaroon (HEX formaat)"
         },
-        "or": "OF",
         "drag_and_drop": "Sleep en drop je macaroon here of <0>browse</0>",
         "errors": {
           "connection_failed": "Connectie gefaald. Zijn je LND credentials correct?"
@@ -187,20 +186,17 @@
         "sms_code": {
           "label": ""
         },
-        "jwt": {
+        "token": {
           "label": "",
           "info": ""
         },
         "actions": {
-          "login": "",
-          "request_sms_code": ""
+          "login": ""
         },
         "errors": {
-          "failed_to_request_sms": "",
-          "failed_to_login_sms": "",
           "setup_failed": "",
-          "missing_jwt": "",
-          "invalid_jwt": ""
+          "missing_token": "",
+          "invalid_token": ""
         }
       },
       "btcpay": {
@@ -256,12 +252,6 @@
         "enable_now": ""
       },
       "recent_transactions": "",
-      "transaction_list": {
-        "tabs": {
-          "outgoing": "",
-          "incoming": ""
-        }
-      },
       "allowance_view": {
         "recent_transactions": "",
         "allowance": "",
@@ -270,7 +260,6 @@
       },
       "default_view": {
         "recent_transactions": "",
-        "no_transactions": "",
         "is_blocked_hint": "",
         "block_removed": ""
       }
@@ -402,9 +391,6 @@
     },
     "send": {
       "title": "",
-      "qrcode": {
-        "title": ""
-      },
       "input": {
         "label": "",
         "hint": ""
@@ -534,8 +520,6 @@
       "block_added": ""
     },
     "choose_path": {
-      "description": "Om Alby te gebruiken voor online betalingen, verbind je lightning wallet met de extensie.",
-      "title": "Verbinden",
       "alby": {
         "title": "Alby"
       }

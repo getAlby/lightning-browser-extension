@@ -3,10 +3,8 @@ import {
   LockIcon,
   MagicWandIcon,
   MenuIcon,
-  ReceiveIcon,
   RocketIcon,
-  SendIcon,
-  TransactionsIcon,
+  WalletIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -41,6 +39,7 @@ export default function UserMenu() {
       console.error(e);
     }
   }
+
   return (
     <Menu as="div" className="relative">
       <Menu.Button className="flex items-center text-gray-700 dark:text-white hover:text-black dark:hover:text-white transition-colors duration-200">
@@ -66,27 +65,11 @@ export default function UserMenu() {
           </Menu.ItemButton>
           <Menu.ItemButton
             onClick={() => {
-              navigate("/send");
+              openOptions("wallet");
             }}
           >
-            <SendIcon className="w-6 h-6 -ml-0.5 mr-2 text-gray-700 dark:text-neutral-300" />
-            {tCommon("actions.send")}
-          </Menu.ItemButton>
-          <Menu.ItemButton
-            onClick={() => {
-              navigate("/receive");
-            }}
-          >
-            <ReceiveIcon className="w-6 h-6 -ml-0.5 mr-2 text-gray-700 dark:text-neutral-300" />
-            {tCommon("actions.receive")}
-          </Menu.ItemButton>
-          <Menu.ItemButton
-            onClick={() => {
-              openOptions("transactions");
-            }}
-          >
-            <TransactionsIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
-            {tCommon("transactions")}
+            <WalletIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
+            {tCommon("wallet")}
           </Menu.ItemButton>
           <Menu.Divider />
         </div>

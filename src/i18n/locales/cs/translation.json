@@ -44,7 +44,6 @@
         "macaroon": {
           "label": "Macaroon (v hexadecimálním formátu)"
         },
-        "or": "NEBO",
         "drag_and_drop": "Přetáhněte svůj macaroon zde nebo ho <0>vyhledejte</0>",
         "errors": {
           "connection_failed": "Připojení se nezdařilo. Jsou vaše údaje pro LND zadány správně?"
@@ -187,20 +186,17 @@
         "sms_code": {
           "label": "Vlože verifikační kód ze SMS"
         },
-        "jwt": {
+        "token": {
           "label": "Vlože svůj JWT token",
           "info": "Přihlášení {{label}} je aktuálně aktualizováno. Pokud jste pokročilý uživatel, můžete svůj JWT token získat přihlášením přes <0>Webovou peněženku (wallet.mainnet.galoy.io)</0><1/><1/>JWT token vypadá podobně jako: <2>eyJhbG...</2><1/><1/>"
         },
         "actions": {
-          "login": "Přihlásit",
-          "request_sms_code": "Zažádat o SMS kód"
+          "login": "Přihlásit"
         },
         "errors": {
-          "failed_to_request_sms": "Nepodařilo se vyžádat SMS kód",
-          "failed_to_login_sms": "Nepodařilo se přihlášení s SMS kódem",
           "setup_failed": "Nastavení se nezdařilo",
-          "missing_jwt": "JWT chybí, přihlášení se nezdařilo.",
-          "invalid_jwt": "Vloženo nevalidní JWT"
+          "missing_token": "JWT chybí, přihlášení se nezdařilo.",
+          "invalid_token": "Vloženo nevalidní JWT"
         }
       },
       "btcpay": {
@@ -281,12 +277,6 @@
         "enable_now": "Povolit nyní"
       },
       "recent_transactions": "Nedávné transakce",
-      "transaction_list": {
-        "tabs": {
-          "outgoing": "Odchozí",
-          "incoming": "Příchozí"
-        }
-      },
       "allowance_view": {
         "recent_transactions": "Nedávné transakce",
         "allowance": "Příspěvek",
@@ -295,7 +285,6 @@
       },
       "default_view": {
         "recent_transactions": "Nedávné transakce",
-        "no_transactions": "S Alby prozatím nebyly uskutečněny žádné transakce.",
         "is_blocked_hint": "Alby je v současnosti zakázaná na {host}}",
         "block_removed": "Povolen {{host}}. Prosím znovu načtěte webovou stránku."
       }
@@ -352,7 +341,6 @@
           "export_uri": "LNDHub pověřovací URI",
           "waiting": "čekání na data z LndHub...",
           "your_ln_address": "Vaše Lightning adresa:",
-          "tip_mobile": "Tip: Použijte tuto peněženku s vaším mobilním zařízením",
           "scan_qr": "Importujte tuto peněženku do Zeus nebo BlueWallet naskenováním QR kódu."
         },
         "title1": "Informace o účtu",
@@ -485,9 +473,6 @@
     },
     "send": {
       "title": "Odeslat",
-      "qrcode": {
-        "title": "Čekám na oskenování"
-      },
       "input": {
         "label": "Příjemce",
         "hint": "Faktura, Lightning adresa nebo LNURL"
@@ -622,7 +607,6 @@
       "content": "Tato webová stránka vás žádá o podpis:"
     },
     "choose_path": {
-      "title": "Připojit",
       "other": {
         "title": "Jiné peněženky",
         "description": "Připojte svou existující lightning peněženku nebo svůj uzel pomocí různých konektorů.",
@@ -630,34 +614,12 @@
         "connect": "Připojit"
       },
       "alby": {
-        "create_new": "Vytvoření účtu",
         "title": "Alby",
         "description": "Zaregistrujte se, nebo se přihlašte ke svému existujícímu Alby účtu a začněte využívat lightning platby."
-      },
-      "description": "Pro použití Alby pro online platby, připojte svou lightning peněženku k doplňku."
+      }
     },
     "alby": {
       "pre_connect": {
-        "optional_lightning_note": {
-          "part4": "dozvědět se více",
-          "part3": ". Jedná se o jednoduchý způsob jak vám kdokoliv může zaslat bitcoin přes síť lightning.",
-          "part1": "Váš Alby účet poskytuje také volitelnou",
-          "part2": "lightning adresu"
-        },
-        "optional_lightning_address": {
-          "label": "Vyberte si svou Lightning adresu (volitelné)",
-          "suffix": "@getalby.com",
-          "title": "čísla a písmena, minimálně 4 znaky"
-        },
-        "errors": {
-          "create_wallet_error1": "Přihlášení nebo vytvoření nového účtu se nezdařilo.",
-          "create_wallet_error2": "Pokud potřebujete pomoct, prosím kontaktujte support@getalby.com",
-          "create_wallet_error": "Přihlášení nebo vytvoření nového účtu se nezdařilo. Pokud potřebujete pomoc, kontaktujte support@getalby.com"
-        },
-        "forgot_password": "Zapomněli jste heslo?",
-        "title": "Váš účet Alby",
-        "create_account": "Vytvořte nový Alby účet pro zasílání a příjímání bitcoin plateb.",
-        "login_account": "Přihlašte se pro připojení k existujícímu učtu Alby.",
         "set_password": {
           "choose_password": {
             "label": "Heslo"
@@ -669,15 +631,6 @@
             "enter_password": "Prosím zadejte heslo.",
             "confirm_password": "Prosím potvrďte své heslo.",
             "mismatched_password": "Hesla se neshodují."
-          }
-        },
-        "host_wallet": "Provozujeme pro vás Lightning peněženku!",
-        "email": {
-          "create": {
-            "label": "Emailová adresa"
-          },
-          "login": {
-            "label": "Emailová adresa nebo adresa Lightning"
           }
         }
       }
@@ -695,22 +648,14 @@
         "showcases": "Příklady užití"
       },
       "tips": {
-        "address": {
-          "description": "Vytvořte si svou vlastní lightning adresu pro příjímání lightning plateb tak jednoduše, jak kdybyste odesílali e-mail",
-          "label1": "Získat!",
-          "title": "⚡️ Získat lightning adresu"
-        },
         "title": "Vaše Alby peněženka je připravena",
         "description": "Pár tipů než začnete",
         "top_up_wallet": {
           "title": "⚡️ Dobít peněženku",
-          "description": "Vytvořte lightning fakturu, pošlete si bitcoiny a začněte používat Alby v ekosystému lightning",
-          "label1": "Přijmout Bitcoin",
-          "label2": "Koupit Bitcoin"
+          "description": "Vytvořte lightning fakturu, pošlete si bitcoiny a začněte používat Alby v ekosystému lightning"
         },
         "demo": {
           "description": "Objevte vše, co lze s Alby dělat, na naší demo stránce",
-          "label1": "Vyzkoušet",
           "title": "🕹️ Vyzkoušejte demo Alby"
         }
       }

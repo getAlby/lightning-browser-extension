@@ -38,8 +38,8 @@ export default async function sendPayment(
 
     if (typeof e === "string") {
       errorMessage = e;
-    } else if (e instanceof Error) {
-      errorMessage = e.message;
+    } else if ((e as Error).message) {
+      errorMessage = (e as Error).message;
     } else {
       errorMessage = "Something went wrong";
     }

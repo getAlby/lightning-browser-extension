@@ -30,12 +30,9 @@
       }
     },
     "choose_path": {
-      "title": "",
-      "description": "",
       "alby": {
         "title": "",
-        "description": "",
-        "create_new": ""
+        "description": ""
       },
       "other": {
         "title": "",
@@ -58,35 +55,6 @@
             "confirm_password": "",
             "mismatched_password": ""
           }
-        },
-        "forgot_password": "",
-        "title": "",
-        "create_account": "",
-        "login_account": "",
-        "host_wallet": "",
-        "email": {
-          "create": {
-            "label": ""
-          },
-          "login": {
-            "label": ""
-          }
-        },
-        "optional_lightning_note": {
-          "part1": "",
-          "part2": "",
-          "part3": "",
-          "part4": ""
-        },
-        "optional_lightning_address": {
-          "label": "",
-          "suffix": "",
-          "title": ""
-        },
-        "errors": {
-          "create_wallet_error": "",
-          "create_wallet_error1": "",
-          "create_wallet_error2": ""
         }
       }
     },
@@ -106,7 +74,6 @@
         "macaroon": {
           "label": ""
         },
-        "or": "",
         "drag_and_drop": "",
         "errors": {
           "connection_failed": ""
@@ -260,20 +227,17 @@
         "sms_code": {
           "label": ""
         },
-        "jwt": {
+        "token": {
           "label": "",
           "info": ""
         },
         "actions": {
-          "login": "",
-          "request_sms_code": ""
+          "login": ""
         },
         "errors": {
-          "failed_to_request_sms": "",
-          "failed_to_login_sms": "",
           "setup_failed": "",
-          "missing_jwt": "",
-          "invalid_jwt": ""
+          "missing_token": "",
+          "invalid_token": ""
         }
       },
       "kollider": {
@@ -342,12 +306,6 @@
         "enable_now": ""
       },
       "recent_transactions": "",
-      "transaction_list": {
-        "tabs": {
-          "outgoing": "",
-          "incoming": ""
-        }
-      },
       "allowance_view": {
         "recent_transactions": "",
         "allowance": "",
@@ -356,7 +314,6 @@
       },
       "default_view": {
         "recent_transactions": "",
-        "no_transactions": "",
         "is_blocked_hint": "",
         "block_removed": ""
       }
@@ -375,7 +332,6 @@
           "screen_reader": "",
           "waiting": "",
           "your_ln_address": "",
-          "tip_mobile": "",
           "export_uri": "",
           "scan_qr": ""
         },
@@ -545,9 +501,6 @@
     },
     "send": {
       "title": "",
-      "qrcode": {
-        "title": ""
-      },
       "input": {
         "label": "",
         "hint": ""
@@ -632,19 +585,11 @@
         "description": "",
         "top_up_wallet": {
           "title": "",
-          "description": "",
-          "label1": "",
-          "label2": ""
+          "description": ""
         },
         "demo": {
           "title": "",
-          "description": "",
-          "label1": ""
-        },
-        "address": {
-          "title": "",
-          "description": "",
-          "label1": ""
+          "description": ""
         }
       }
     },

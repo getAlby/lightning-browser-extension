@@ -22,6 +22,7 @@ export default function ConnectLnd() {
   const { t } = useTranslation("translation", {
     keyPrefix: "choose_connector.lnd",
   });
+  const { t: tCommon } = useTranslation("common");
   const [formData, setFormData] = useState(initialFormData);
   const [isDragging, setDragging] = useState(false);
   const hiddenFileInput = useRef<HTMLInputElement>(null);
@@ -174,13 +175,15 @@ export default function ConnectLnd() {
         <div>
           <TextField
             id="macaroon"
+            type="password"
+            autoComplete="new-password"
             label={t("macaroon.label")}
             value={formData.macaroon}
             onChange={handleChange}
             required
           />
         </div>
-        <p className="text-center my-6 dark:text-white">{t("or")}</p>
+        <p className="text-center my-6 dark:text-white">{tCommon("or")}</p>
         <div
           className={`cursor-pointer flex flex-col items-center dark:bg-surface-02dp p-4 py-3 border-dashed border-2 border-gray-300 bg-gray-50 rounded-md text-center transition duration-200 ${
             isDragging ? "border-blue-600 bg-blue-50" : ""

@@ -10,14 +10,19 @@ import type {
   AccountInfo,
   Accounts,
   Allowance,
+  BitcoinNetworkType,
+  ConnectorType,
   DbPayment,
   Invoice,
   LnurlAuthResponse,
+  MessageAccountEdit,
+  MessageAccountValidate,
   MessageInvoices,
   MessageLnurlAuth,
   MessageSettingsSet,
   NodeInfo,
   SettingsStorage,
+  ValidateAccountResponse,
 } from "~/types";
 
 import {
@@ -28,15 +33,21 @@ import {
 import msg from "./msg";
 
 export interface AccountInfoRes {
+  connectorType: ConnectorType;
   balance: { balance: string | number; currency: ACCOUNT_CURRENCIES };
   currentAccountId: string;
-  info: { alias: string; pubkey?: string };
+  info: { alias: string; pubkey?: string; lightning_address?: string };
   name: string;
+  avatarUrl?: string;
 }
 
-export interface GetAccountRes
-  extends Pick<Account, "id" | "connector" | "name"> {
+export interface GetAccountRes extends Pick<Account, "id" | "name"> {
+  connectorType: ConnectorType;
   nostrEnabled: boolean;
+  hasMnemonic: boolean;
+  hasImportedNostrKey: boolean;
+  bitcoinNetwork: BitcoinNetworkType;
+  useMnemonicForLnurlAuth: boolean;
 }
 interface StatusRes {
   configured: boolean;
@@ -77,14 +88,18 @@ export const swrGetAccountInfo = async (
         const { alias } = response.info;
         const { balance: resBalance, currency } = response.balance;
         const name = response.name;
+        const connectorType = response.connectorType;
         const balance =
           typeof resBalance === "number" ? resBalance : parseInt(resBalance); // TODO: handle amounts
+        const avatarUrl = response.avatarUrl;
         const account = {
           id,
           name,
           alias,
           balance,
+          connectorType,
           currency: currency || "BTC", // set default currency for every account
+          avatarUrl,
         };
         storeAccounts({
           ...accountsCache,
@@ -97,17 +112,30 @@ export const swrGetAccountInfo = async (
   });
 };
 export const getAccounts = () => msg.request<Accounts>("getAccounts");
-export const getAccount = () => msg.request<GetAccountRes>("getAccount");
+export const getAccount = (id?: string) =>
+  msg.request<GetAccountRes>("getAccount", {
+    id,
+  });
+
+const validateAccount = (
+  account: MessageAccountValidate["args"]
+): Promise<ValidateAccountResponse> => msg.request("validateAccount", account);
+
 export const updateAllowance = () => msg.request<Accounts>("updateAllowance");
 export const selectAccount = (id: string) =>
   msg.request("selectAccount", { id });
+export const editAccount = (
+  id: string,
+  args: Omit<MessageAccountEdit["args"], "id">
+) => msg.request("editAccount", { id, ...args });
+
 export const getAllowance = (host: string) =>
   msg.request<Allowance>("getAllowance", { host });
 export const getPayments = (options?: { limit?: number }) =>
   msg.request<{ payments: DbPayment[] }>("getPayments", options);
 export const getPaymentsByAccount = (options: {
   accountId: Account["id"];
-  limit: number;
+  limit?: number;
 }) => msg.request<{ payments: DbPayment[] }>("getPaymentsByAccount", options);
 export const getSettings = () => msg.request<SettingsStorage>("getSettings");
 export const getStatus = () => msg.request<StatusRes>("status");
@@ -139,15 +167,58 @@ export const lnurlAuth = (
 export const getCurrencyRate = async () =>
   msg.request<{ rate: number }>("getCurrencyRate");
 
+const getNostrPrivateKey = (id: string): Promise<string> =>
+  msg.request("nostr/getPrivateKey", {
+    id,
+  });
+
+const getNostrPublicKey = (id: string): Promise<string> =>
+  msg.request("nostr/getPublicKey", {
+    id,
+  });
+
+const generateNostrPrivateKey = (id: string): Promise<string> =>
+  msg.request("nostr/generatePrivateKey", {
+    id,
+  });
+
+const removeNostrPrivateKey = (id: string): Promise<void> =>
+  msg.request("nostr/removePrivateKey", {
+    id,
+  });
+
+const setNostrPrivateKey = (id: string, privateKey: string): Promise<void> =>
+  msg.request("nostr/setPrivateKey", {
+    id,
+    privateKey,
+  });
+
+const getMnemonic = (id: string): Promise<string> =>
+  msg.request("getMnemonic", {
+    id,
+  });
+
+const generateMnemonic = (): Promise<string> => msg.request("generateMnemonic");
+
+// TODO: consider adding removeMnemonic function, make mnemonic a string here
+const setMnemonic = (id: string, mnemonic: string | null): Promise<void> =>
+  msg.request("setMnemonic", {
+    id,
+    mnemonic,
+  });
+
 export default {
   getAccount,
   getAccountInfo,
   getAccounts,
+  editAccount,
   getInfo,
   selectAccount,
+  validateAccount,
   getAllowance,
   updateAllowance,
   getPayments,
+  getPaymentsByAccount,
   getSettings,
   getStatus,
   makeInvoice,
@@ -162,4 +233,14 @@ export default {
   getInvoices,
   lnurlAuth,
   getCurrencyRate,
+  nostr: {
+    getPrivateKey: getNostrPrivateKey,
+    getPublicKey: getNostrPublicKey,
+    generatePrivateKey: generateNostrPrivateKey,
+    setPrivateKey: setNostrPrivateKey,
+    removePrivateKey: removeNostrPrivateKey,
+  },
+  getMnemonic,
+  setMnemonic,
+  generateMnemonic,
 };

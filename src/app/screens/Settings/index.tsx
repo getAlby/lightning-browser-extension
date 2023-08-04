@@ -264,7 +264,6 @@ function Settings() {
             <div className="w-64">
               <Input
                 placeholder={t("name.placeholder")}
-                type="text"
                 value={settings.userName}
                 onChange={(event) => {
                   saveSetting({
@@ -368,7 +367,6 @@ function Settings() {
           </div>
         </Setting>
       </div>
-
       <div className="relative flex py-5 mt-5 items-center">
         <div className="flex-grow border-t border-gray-300 dark:border-gray-700"></div>
         <span className="flex-shrink mx-4 text-gray-500 dark:text-gray-400 fw-bold">

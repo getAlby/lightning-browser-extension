@@ -9,7 +9,7 @@ const listByAccount = async (message: MessagePaymentListByAccount) => {
 
   const payments = await db.payments
     .toCollection()
-    .and((p) => p.accountId === accountId)
+    .filter((p) => p.accountId === accountId)
     .limit(limit)
     .reverse()
     .sortBy("createdAt");

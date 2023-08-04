@@ -2,13 +2,13 @@
   "translation": {
     "welcome": {
       "set_password": {
-        "title": "",
-        "description": "",
+        "title": "Agordu malŝlosan pasvorton",
+        "description": "Ĉi tiu pasvorto estas uzata por protekti vian monujon kaj havigi aliron al la retumila etendo. Ĝi ne povas esti rekomencigita kaj estas aparta de la pasvorto de via Alby Account",
         "choose_password": {
-          "label": ""
+          "label": "Elektu malŝlosan pasvorton:"
         },
         "confirm_password": {
-          "label": ""
+          "label": "Ni konfirmu, ke vi tajpis ĝin ĝuste:"
         },
         "errors": {
           "enter_password": "Bonvolu tajpi pasvorton.",
@@ -18,13 +18,13 @@
       },
       "test_connection": {
         "ready": "Bonege, ĉio pretas!",
-        "initializing": "",
+        "initializing": "Inicializante vian konton. Bonvolu atendi, ĉi tio povas daŭri minuton...",
         "connection_error": "Konekta eraro",
-        "review_connection_details": "",
-        "connection_taking_long": "",
-        "contact_support": "",
+        "review_connection_details": "Bonvolu revizii viajn konektajn detalojn.",
+        "connection_taking_long": "Provi konektiĝi daŭras pli longe ol atendite... Ĉu viaj detaloj estas ĝustaj? Ĉu via nodo estas atingebla?",
+        "contact_support": "Se vi bezonas helpon bonvolu kontakti support@getalby.com",
         "actions": {
-          "delete_edit_account": ""
+          "delete_edit_account": "Forigu nevalidan konton kaj redaktu denove"
         }
       }
     },
@@ -43,7 +43,6 @@
         "macaroon": {
           "label": ""
         },
-        "or": "AŬ",
         "drag_and_drop": "",
         "errors": {
           "connection_failed": ""
@@ -186,20 +185,17 @@
         "sms_code": {
           "label": ""
         },
-        "jwt": {
+        "token": {
           "label": "",
           "info": ""
         },
         "actions": {
-          "login": "Saluti",
-          "request_sms_code": ""
+          "login": "Saluti"
         },
         "errors": {
-          "failed_to_request_sms": "",
-          "failed_to_login_sms": "",
           "setup_failed": "",
-          "missing_jwt": "",
-          "invalid_jwt": ""
+          "missing_token": "",
+          "invalid_token": ""
         }
       },
       "btcpay": {
@@ -255,12 +251,6 @@
         "enable_now": ""
       },
       "recent_transactions": "",
-      "transaction_list": {
-        "tabs": {
-          "outgoing": "Elspezo",
-          "incoming": "Enspezo"
-        }
-      },
       "allowance_view": {
         "recent_transactions": "",
         "allowance": "",
@@ -269,7 +259,6 @@
       },
       "default_view": {
         "recent_transactions": "",
-        "no_transactions": "",
         "is_blocked_hint": ""
       }
     },
@@ -399,9 +388,6 @@
     },
     "send": {
       "title": "Sendi",
-      "qrcode": {
-        "title": ""
-      },
       "input": {
         "label": "Ricevanto",
         "hint": ""

@@ -18,6 +18,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
+import { isAlbyLNDHubAccount, isAlbyOAuthAccount } from "~/app/utils";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import { poll } from "~/common/utils/helpers";
@@ -40,17 +41,28 @@ function Receive() {
     description: "",
     expiration: "",
   });
-  const [loading, setLoading] = useState(false);
+  const [loadingInvoice, setLoadingInvoice] = useState(false);
+  const [loadingLightningAddress, setLoadingLightningAddress] = useState(false);
   const [invoice, setInvoice] = useState<{
     paymentRequest: string;
     rHash: string;
   } | null>();
-  const [copyLabel, setCopyLabel] = useState(
+  const [copyInvoiceLabel, setCopyInvoiceLabel] = useState(
     tCommon("actions.copy_invoice") as string
   );
+  const [copyLightningAddressLabel, setCopyLightningAddressLabel] = useState(
+    t("actions.copy_lightning_address") as string
+  );
+  const [lightningAddress, setLightningAddress] = useState("");
   const [paid, setPaid] = useState(false);
   const [pollingForPayment, setPollingForPayment] = useState(false);
   const mounted = useRef(false);
+  const isAlbyLNDHubUser = isAlbyLNDHubAccount(
+    auth.account?.alias,
+    auth.account?.connectorType
+  );
+  const isAlbyOAuthUser = isAlbyOAuthAccount(auth.account?.connectorType);
+  const isAlbyUser = isAlbyOAuthUser || isAlbyLNDHubUser;
 
   useEffect(() => {
     mounted.current = true;
@@ -115,7 +127,7 @@ function Receive() {
 
   async function createInvoice() {
     try {
-      setLoading(true);
+      setLoadingInvoice(true);
       const response = await api.makeInvoice({
         amount: formData.amount,
         memo: formData.description,
@@ -127,7 +139,7 @@ function Receive() {
         toast.error(e.message);
       }
     } finally {
-      setLoading(false);
+      setLoadingInvoice(false);
     }
   }
 
@@ -135,6 +147,18 @@ function Receive() {
     event.preventDefault();
     createInvoice();
   }
+
+  async function getLightningAddress() {
+    setLoadingLightningAddress(true);
+    const response = await api.getAccountInfo();
+    const lightningAddress = response.info.lightning_address;
+    if (lightningAddress) setLightningAddress(lightningAddress);
+    setLoadingLightningAddress(false);
+  }
+
+  useEffect(() => {
+    getLightningAddress();
+  }, []);
 
   function renderInvoice() {
     if (!invoice) return null;
@@ -174,9 +198,9 @@ function Receive() {
                 onClick={async () => {
                   try {
                     navigator.clipboard.writeText(invoice.paymentRequest);
-                    setCopyLabel(tCommon("copied"));
+                    setCopyInvoiceLabel(tCommon("copied"));
                     setTimeout(() => {
-                      setCopyLabel(tCommon("actions.copy_invoice"));
+                      setCopyInvoiceLabel(tCommon("actions.copy_invoice"));
                     }, 1000);
                   } catch (e) {
                     if (e instanceof Error) {
@@ -185,7 +209,7 @@ function Receive() {
                   }
                 }}
                 icon={<CopyIcon className="w-6 h-6 mr-2" />}
-                label={copyLabel}
+                label={copyInvoiceLabel}
               />
             </div>
 
@@ -237,44 +261,112 @@ function Receive() {
       {invoice ? (
         <Container maxWidth="sm">{renderInvoice()}</Container>
       ) : (
-        <form onSubmit={handleSubmit} className="h-full">
-          <fieldset className="h-full" disabled={loading}>
-            <Container justifyBetween maxWidth="sm">
-              <div className="py-4">
-                <div className="mb-4">
-                  <DualCurrencyField
-                    id="amount"
-                    min={0}
-                    label={t("amount.label")}
-                    placeholder={t("amount.placeholder")}
-                    fiatValue={fiatAmount}
-                    onChange={handleChange}
-                    autoFocus
-                  />
-                </div>
+        <div className="pt-4">
+          <form onSubmit={handleSubmit}>
+            <fieldset disabled={loadingInvoice}>
+              <Container justifyBetween maxWidth="sm">
+                <div className="py-4">
+                  <div className="mb-4">
+                    <DualCurrencyField
+                      id="amount"
+                      min={0}
+                      label={t("amount.label")}
+                      placeholder={t("amount.placeholder")}
+                      fiatValue={fiatAmount}
+                      onChange={handleChange}
+                      autoFocus
+                    />
+                  </div>
 
-                <div className="mb-4">
-                  <TextField
-                    id="description"
-                    label={t("description.label")}
-                    placeholder={t("description.placeholder")}
-                    onChange={handleChange}
+                  <div className="mb-4">
+                    <TextField
+                      id="description"
+                      label={t("description.label")}
+                      placeholder={t("description.placeholder")}
+                      onChange={handleChange}
+                    />
+                  </div>
+                </div>
+                <div>
+                  <Button
+                    type="submit"
+                    label={t("actions.create_invoice")}
+                    fullWidth
+                    primary
+                    loading={loadingInvoice}
+                    disabled={loadingInvoice}
                   />
                 </div>
+              </Container>
+            </fieldset>
+          </form>
+          <div>
+            <Container justifyBetween maxWidth="sm">
+              <div className="relative flex  items-center mb-4">
+                <div className="flex-grow border-t border-gray-300 dark:border-gray-700"></div>
+                <span className="flex-shrink mx-4  text-gray-500 dark:text-gray-400 fw-bold">
+                  {tCommon("or")}
+                </span>
+                <div className="flex-grow border-t  border-gray-300 dark:border-gray-700"></div>
               </div>
               <div className="mb-4">
                 <Button
-                  type="submit"
-                  label={t("actions.create_invoice")}
+                  type="button"
+                  label={t("redeem_lnurl")}
                   fullWidth
-                  primary
-                  loading={loading}
-                  disabled={loading}
+                  onClick={() => {
+                    navigate("/lnurlRedeem");
+                  }}
                 />
               </div>
+
+              {isAlbyOAuthUser && (
+                <div className="mb-4">
+                  <Button
+                    type="button"
+                    label={copyLightningAddressLabel}
+                    disabled={loadingLightningAddress}
+                    fullWidth
+                    onClick={async () => {
+                      try {
+                        if (!lightningAddress) {
+                          throw new Error(
+                            "User does not have a lightning address"
+                          );
+                        }
+                        navigator.clipboard.writeText(lightningAddress);
+                        setCopyLightningAddressLabel(tCommon("copied"));
+                        setTimeout(() => {
+                          setCopyLightningAddressLabel(
+                            t("actions.copy_lightning_address")
+                          );
+                        }, 1000);
+                      } catch (e) {
+                        if (e instanceof Error) {
+                          toast.error(e.message);
+                        }
+                      }
+                    }}
+                    icon={<CopyIcon className="w-6 h-6 mr-2" />}
+                  />
+                </div>
+              )}
+
+              {isAlbyUser && (
+                <div className="mb-4">
+                  <Button
+                    type="button"
+                    label={t("receive_via_bitcoin_address")}
+                    fullWidth
+                    onClick={() => {
+                      navigate("/onChainReceive");
+                    }}
+                  />
+                </div>
+              )}
             </Container>
-          </fieldset>
-        </form>
+          </div>
+        </div>
       )}
     </div>
   );
