@@ -88,9 +88,7 @@ const AllowanceView: FC<Props> = (props) => {
           />
         }
       />
-      {props.lnDataFromCurrentTab?.length ? (
-        <PublisherLnData lnData={props.lnDataFromCurrentTab[0]} />
-      ) : (
+      {props.allowance ? (
         <div className="relative mx-4">
           <PublisherCard
             title={props.allowance.name}
@@ -107,12 +105,16 @@ const AllowanceView: FC<Props> = (props) => {
             />
           </div>
         </div>
+      ) : (
+        props.lnDataFromCurrentTab && (
+          <PublisherLnData lnData={props.lnDataFromCurrentTab[0]} />
+        )
       )}
       <div className="px-4 pb-5">
         {hasBudget ? (
-          <div className="flex flex-col py-3">
-            <dl className="mb-0 w-full flex place-content-between">
-              <dt className="text-base text-black font-medium dark:text-neutral-400 mb-2">
+          <div className="flex flex-col py-4">
+            <dl className="mb-1 flex justify-between items-center">
+              <dt className="text-black font-medium dark:text-neutral-400">
                 {t("allowance_view.budget_spent")}
               </dt>
               <dd className="text-sm text-gray-600">
