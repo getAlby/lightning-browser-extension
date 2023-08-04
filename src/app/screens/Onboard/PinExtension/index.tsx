@@ -28,7 +28,7 @@ export default function PinExtension() {
 
   return (
     <div className="flex flex-col items-center">
-      <div className="shadow-lg rounded-xl bg-white dark:bg-surface-02dp p-12 max-w-lg">
+      <div className="shadow-lg rounded-xl bg-white dark:bg-surface-02dp p-12 max-w-xl">
         <h1 className="text-2xl font-bold dark:text-white max-sm:text-center">
           {t("title")}
         </h1>
