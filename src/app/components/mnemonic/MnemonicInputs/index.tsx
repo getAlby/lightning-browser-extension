@@ -50,7 +50,7 @@ export default function MnemonicInputs({
                   onBlur={() => setRevealedIndex(undefined)}
                   readOnly={readOnly}
                   block={false}
-                  className="w-24 text-center"
+                  className="w-20 text-center"
                   list={readOnly ? undefined : "wordlist"}
                   value={isRevealed ? word : word.length ? "•••••" : ""}
                   onChange={(e) => {
@@ -67,6 +67,7 @@ export default function MnemonicInputs({
                   }}
                   endAdornment={
                     <PasswordViewAdornment
+                      isRevealed={isRevealed}
                       passwordViewSuccessCallback={(passwordView) => {
                         if (passwordView) {
                           document.getElementById(inputId)?.focus();
