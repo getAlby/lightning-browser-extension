@@ -1066,7 +1066,6 @@
     },
     "publishers_table": {
       "payments": "payments",
-      "used": "used",
       "budget": "budget",
       "total": "total"
     },
