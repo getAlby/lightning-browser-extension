@@ -45,7 +45,6 @@ export default class NativeLndHub extends NativeConnector {
   async authorize() {
     const headers = {
       Accept: "application/json",
-      "Access-Control-Allow-Origin": "*",
       "Content-Type": "application/json",
     };
     const url = new URL(this.config.url);
@@ -94,7 +93,6 @@ export default class NativeLndHub extends NativeConnector {
 
     const headers = {
       Accept: "application/json",
-      "Access-Control-Allow-Origin": "*",
       "Content-Type": "application/json",
       Authorization: `Bearer ${this.access_token}`,
     };
