@@ -45,7 +45,7 @@ export default function Tips() {
           backgroundIcon: <MnemonicTipCardIcon />,
           link: `/accounts/${accountId}/secret-key/generate`,
         },
-      } as const),
+      }) as const,
     [accountId]
   );
 
