@@ -371,7 +371,7 @@
     "accounts": {
       "title": "Accounts",
       "account_view": {
-        "title1": "Account Information",
+        "title1": "Account Settings",
         "title2": "Account",
         "name": {
           "title": "Display Name",
