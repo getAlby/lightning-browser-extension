@@ -6,7 +6,7 @@ type Props = {
   currency?: string;
 };
 
-export default function Card({
+export default function TestConnectionResultCard({
   alias,
   satoshis,
   fiat,

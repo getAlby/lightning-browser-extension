@@ -9,12 +9,10 @@ import { Trans, useTranslation } from "react-i18next";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Alert from "~/app/components/Alert";
-import Avatar from "~/app/components/Avatar";
 import Button from "~/app/components/Button";
 import { ContentBox } from "~/app/components/ContentBox";
 import InputCopyButton from "~/app/components/InputCopyButton";
 import TextField from "~/app/components/form/TextField";
-import { useAccount } from "~/app/context/AccountContext";
 import api, { GetAccountRes } from "~/common/lib/api";
 import { default as nostr, default as nostrlib } from "~/common/lib/nostr";
 
@@ -23,7 +21,6 @@ function NostrSettings() {
   const { t } = useTranslation("translation", {
     keyPrefix: "accounts.account_view",
   });
-  const auth = useAccount();
   const navigate = useNavigate();
   const [hasMnemonic, setHasMnemonic] = useState(false);
   const [currentPrivateKey, setCurrentPrivateKey] = useState("");
@@ -148,20 +145,27 @@ function NostrSettings() {
               <h1 className="font-bold text-2xl dark:text-white">
                 {t("nostr.settings.title")}
               </h1>
-              <div className="flex gap-4 my-4 items-center">
-                <Avatar
-                  name={account.id}
-                  size={32}
-                  url={auth.account?.avatarUrl}
-                />
-                <p className="text-gray-500 dark:text-neutral-500">
-                  {account.name}
-                </p>
-              </div>
               <p className="text-gray-500 dark:text-neutral-500">
                 {t("nostr.settings.description")}
               </p>
             </div>
+
+            {!hasMnemonic && !nostrPrivateKey && (
+              <Alert type="info">
+                <Trans
+                  i18nKey={"nostr.settings.no_secret_key"}
+                  t={t}
+                  components={[
+                    // eslint-disable-next-line react/jsx-key
+                    <Link
+                      to="../../secret-key/generate"
+                      relative="path"
+                      className="underline"
+                    />,
+                  ]}
+                />
+              </Alert>
+            )}
 
             {hasMnemonic &&
             currentPrivateKey &&
@@ -179,6 +183,7 @@ function NostrSettings() {
               <TextField
                 id="nostrPrivateKey"
                 label={t("nostr.private_key.label")}
+                autoComplete="new-password"
                 type={nostrPrivateKeyVisible ? "text" : "password"}
                 value={nostrPrivateKey}
                 onChange={(event) => {
@@ -210,45 +215,26 @@ function NostrSettings() {
               <TextField
                 id="nostrPublicKey"
                 label={t("nostr.public_key.label")}
-                type="text"
                 value={nostrPublicKey}
                 disabled
                 endAdornment={<InputCopyButton value={nostrPublicKey} />}
               />
-              <div className="mt-4 flex gap-4 items-center">
+              <div className="mt-4 flex gap-4 items-center justify-center">
                 {nostrPrivateKey && (
                   <Button
                     error
-                    label={t("nostr.settings.delete")}
+                    label={t("nostr.settings.remove")}
                     onClick={handleDeleteKeys}
                   />
                 )}
                 {hasImportedNostrKey &&
-                  nostrPrivateKey === currentPrivateKey && (
-                    <>
-                      {hasMnemonic ? (
-                        <Button
-                          outline
-                          label={t("nostr.settings.derive")}
-                          onClick={handleDeriveNostrKeyFromSecretKey}
-                        />
-                      ) : (
-                        <Alert type="warn">
-                          <Trans
-                            i18nKey={"nostr.settings.no_secret_key"}
-                            t={t}
-                            components={[
-                              // eslint-disable-next-line react/jsx-key
-                              <Link
-                                to="../secret-key/generate"
-                                relative="path"
-                                className="underline"
-                              />,
-                            ]}
-                          />
-                        </Alert>
-                      )}
-                    </>
+                  nostrPrivateKey === currentPrivateKey &&
+                  hasMnemonic && (
+                    <Button
+                      outline
+                      label={t("nostr.settings.derive")}
+                      onClick={handleDeriveNostrKeyFromSecretKey}
+                    />
                   )}
               </div>
             </div>

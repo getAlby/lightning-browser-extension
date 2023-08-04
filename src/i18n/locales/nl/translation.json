@@ -391,9 +391,6 @@
     },
     "send": {
       "title": "",
-      "qrcode": {
-        "title": ""
-      },
       "input": {
         "label": "",
         "hint": ""

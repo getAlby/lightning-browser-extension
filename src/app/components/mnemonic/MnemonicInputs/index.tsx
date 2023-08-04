@@ -32,8 +32,10 @@ export default function MnemonicInputs({
   }
 
   return (
-    <div className="border-[1px] border-gray-200 rounded-lg py-8 px-4 flex flex-col gap-8 items-center justify-center w-[580px] self-center">
-      <h3 className="font-semibold dark:text-white">{t("inputs.title")}</h3>
+    <div className="border border-gray-200 rounded-lg p-8 flex flex-col gap-8 items-center justify-center max-w-[580px] self-center">
+      <h3 className="text-lg font-semibold dark:text-white">
+        {t("inputs.title")}
+      </h3>
       <div className="flex flex-wrap gap-4 justify-center items-center">
         {words.map((word, i) => {
           const isRevealed = revealedIndex === i;

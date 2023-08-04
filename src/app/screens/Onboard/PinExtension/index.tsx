@@ -21,7 +21,7 @@ export default function PinExtension() {
       <img
         src={`assets/images/pin_your_alby_extension_${imageType}_${theme}.png`}
         alt="Pin your Alby extension"
-        className="w-full"
+        className="h-28"
       />
     );
   };

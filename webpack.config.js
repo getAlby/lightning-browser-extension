@@ -12,6 +12,15 @@ const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 const BundleAnalyzerPlugin =
   require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
+if (!process.env.NODE_ENV) {
+  process.env.NODE_ENV = "development";
+}
+const nodeEnv = process.env.NODE_ENV;
+const viewsPath = path.join(__dirname, "static", "views");
+const destPath = path.join(__dirname, "dist", nodeEnv);
+
+const targetBrowser = process.env.TARGET_BROWSER;
+
 let network = "mainnet";
 if (!process.env.ALBY_API_URL) {
   process.env.ALBY_API_URL = "https://api.regtest.getalby.com";
@@ -22,10 +31,24 @@ if (!process.env.ALBY_API_URL) {
   network = "testnet";
 }
 
-if (
-  !process.env.ALBY_OAUTH_CLIENT_ID &&
-  !process.env.ALBY_OAUTH_CLIENT_SECRET
-) {
+// release build (check for explicitly set env variables)
+const oauthBrowser =
+  process.env.TARGET_BROWSER === "firefox" ? "firefox" : "chrome";
+const clientId =
+  process.env[`ALBY_OAUTH_CLIENT_ID_${oauthBrowser.toUpperCase()}`];
+const clientSecret =
+  process.env[`ALBY_OAUTH_CLIENT_SECRET_${oauthBrowser.toUpperCase()}`];
+
+if (clientId && clientSecret) {
+  process.env.ALBY_OAUTH_CLIENT_ID = clientId;
+  process.env.ALBY_OAUTH_CLIENT_SECRET = clientSecret;
+
+  console.info(
+    "Using oAuth credentials from environment:",
+    clientId,
+    clientSecret
+  );
+} else {
   const oauthCredentials = {
     development: {
       testnet: {
@@ -50,6 +73,16 @@ if (
       },
     },
     production: {
+      testnet: {
+        chrome: {
+          id: "CLAp8AfS3W",
+          secret: "KwIxF0VbGX2ZHLbbbYgE",
+        },
+        firefox: {
+          id: "zWdxnF04Hd",
+          secret: "wY5uLJJDjNWrDlB6lAj8",
+        },
+      },
       mainnet: {
         chrome: {
           id: "R7lZBSqfQt",
@@ -63,16 +96,15 @@ if (
     },
   };
 
-  const oauthBrowser =
-    process.env.TARGET_BROWSER === "firefox" ? "firefox" : "chrome";
-
   // setup ALBY_OAUTH_CLIENT_ID
   const selectedOAuthCredentials =
-    oauthCredentials[process.env.NODE_ENV]?.[network]?.[oauthBrowser];
+    oauthCredentials[nodeEnv]?.[network]?.[oauthBrowser];
   if (!selectedOAuthCredentials) {
-    throw new Error("No OAuth credentials found for current configuration");
+    throw new Error(
+      `No OAuth credentials found for current configuration: NODE_ENV=${nodeEnv} network=${network} oauthBrowser=${oauthBrowser}`
+    );
   }
-  console.info("Using OAuth credentials for", oauthBrowser, network);
+  console.info("Using OAuth credentials for", nodeEnv, oauthBrowser, network);
   process.env.ALBY_OAUTH_CLIENT_ID = selectedOAuthCredentials.id;
   process.env.ALBY_OAUTH_CLIENT_SECRET = selectedOAuthCredentials.secret;
 }
@@ -99,12 +131,6 @@ if (!process.env.HMAC_VERIFY_HEADER_KEY) {
 if (!process.env.VERSION) {
   process.env.VERSION = require("./package.json").version;
 }
-
-const viewsPath = path.join(__dirname, "static", "views");
-const nodeEnv = process.env.NODE_ENV || "development";
-const destPath = path.join(__dirname, "dist", nodeEnv);
-
-const targetBrowser = process.env.TARGET_BROWSER;
 
 const getExtensionFileType = (browser) => {
   if (browser === "opera") {

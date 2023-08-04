@@ -20,6 +20,7 @@ import Unlock from "@screens/Unlock";
 import { useTranslation } from "react-i18next";
 import { HashRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import AccountDetailLayout from "~/app/components/AccountDetailLayout";
 import ScrollToTop from "~/app/components/ScrollToTop";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
@@ -28,6 +29,7 @@ import BackupSecretKey from "~/app/screens/Accounts/BackupSecretKey";
 import GenerateSecretKey from "~/app/screens/Accounts/GenerateSecretKey";
 import ImportSecretKey from "~/app/screens/Accounts/ImportSecretKey";
 import NostrSettings from "~/app/screens/Accounts/NostrSettings";
+import NostrSetup from "~/app/screens/Accounts/NostrSetup/NostrSetup";
 import Discover from "~/app/screens/Discover";
 import LNURLRedeem from "~/app/screens/LNURLRedeem";
 import OnChainReceive from "~/app/screens/OnChainReceive";
@@ -52,7 +54,7 @@ function Options() {
               </RequireAuth>
             }
           >
-            <Route index element={<Navigate to="/publishers" replace />} />
+            <Route index element={<Navigate to="/wallet" replace />} />
             <Route path="discover">
               <Route index element={<Discover />} />
             </Route>
@@ -84,20 +86,19 @@ function Options() {
             <Route path="settings" element={<Settings />} />
             <Route path="scanQRCode" element={<ScanQRCode />} />
             <Route path="accounts">
-              <Route path=":id" element={<AccountDetail />} />
-              <Route
-                path=":id/secret-key/backup"
-                element={<BackupSecretKey />}
-              />
-              <Route
-                path=":id/secret-key/generate"
-                element={<GenerateSecretKey />}
-              />
-              <Route
-                path=":id/secret-key/import"
-                element={<ImportSecretKey />}
-              />
-              <Route path=":id/nostr" element={<NostrSettings />} />
+              <Route index element={<Accounts />} />
+              <Route path=":id" element={<AccountDetailLayout />}>
+                <Route index element={<AccountDetail />} />
+                <Route path="secret-key/backup" element={<BackupSecretKey />} />
+                <Route
+                  path="secret-key/generate"
+                  element={<GenerateSecretKey />}
+                />
+                <Route path="secret-key/import" element={<ImportSecretKey />} />
+                <Route path="nostr/settings" element={<NostrSettings />} />
+                <Route path="nostr/setup" element={<NostrSetup />} />
+              </Route>
+
               <Route
                 path="new"
                 element={
@@ -125,7 +126,6 @@ function Options() {
                   {renderRoutes(connectorRoutes)}
                 </Route>
               </Route>
-              <Route index element={<Accounts />} />
             </Route>
             <Route
               path="test-connection"
