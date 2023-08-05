@@ -32,7 +32,7 @@
         "next_btn": "Mulai buzzin' {{icon}} dengan Alby",
         "explanation": "1. Klik pada <0/> di ujung kanan atas browser<1/>2. Cari Alby dan klik untuk mem-pin-nya pada toolbar<1/>3. Selesai. Untuk mengakses Alby, tinggal klik pada<2/> ikon"
       },
-      "title": "Selamat datang di Alby"
+      "title": "Selamat Datang di Alby"
     },
     "choose_path": {
       "other": {
@@ -158,7 +158,8 @@
       "citadel": {
         "title": "Citadel",
         "page": {
-          "title": "Sambungkan dengan node <0>Citadel</0>"
+          "title": "Sambungkan dengan node <0>Citadel</0>",
+          "instructions": "Saat ini tidak berfungsi jika 2FA diaktifkan."
         },
         "password": {
           "label": "Kata sandi Citadel"
@@ -379,7 +380,8 @@
           "waiting": "Menunggu data LndHub...",
           "your_ln_address": "Alamat Lightning kamu:",
           "export_uri": "LNDHub Credentials URI",
-          "scan_qr": "Impor wallet ini pada Zeus atau BlueWallet dengan memindai kode QR."
+          "scan_qr": "Impor wallet ini pada Zeus atau BlueWallet dengan memindai kode QR.",
+          "description": "Memungkinkan kamu untuk menghubungkan dan menggunakan akun ini di mobile wallet seperti <0>Blue Wallet</0> dan <0>Zeus</0>."
         },
         "mnemonic": {
           "saved": "Kunci Master terenkripsi & tersimpan dengan sukses.",
@@ -512,7 +514,7 @@
           "export": "Expor",
           "remove_account": "Hapus akun"
         },
-        "title1": "Informasi Akun"
+        "title1": "Pengaturan Akun"
       },
       "actions": {
         "add_account": "Tambah akun"
@@ -702,13 +704,15 @@
         "placeholder": "Jumlah dalam Satoshi..."
       },
       "description": {
-        "label": "Deskripsi"
+        "label": "Deskripsi",
+        "placeholder": "Untuk, misalnya, yang mengirimkan pembayaran ini?"
       },
       "success": "Pembayaran diterima!",
       "payment": {
         "waiting": "menunggu pembayaran...",
         "status": "Memeriksa status pembayaran"
-      }
+      },
+      "receive_via_bitcoin_address": "Terima melalui alamat bitcoin"
     },
     "scan_qrcode": {
       "title": "Menunggu pemindaian"
@@ -738,7 +742,8 @@
           "description": "Berencana menggunakan Nostr?\nBuat kunci kamu sekarang.",
           "title": "Nostr"
         },
-        "description": "Beberapa tips untuk memulai buzzin'🐝"
+        "description": "Beberapa tips untuk memulai buzzin'🐝",
+        "title": "Dompet Alby kamu sudah siap"
       }
     },
     "publishers": {
@@ -778,7 +783,8 @@
       }
     },
     "confirm_request_permission": {
-      "title": "Setujui Permintaan"
+      "title": "Setujui Permintaan",
+      "always_allow": "Ingat pilihan saya dan jangan tanyakan lagi"
     },
     "lnurlchannel": {
       "title": "Channel Request"
@@ -799,6 +805,227 @@
       "receiver": {
         "label": "Kirim pembayaran ke"
       }
+    },
+    "nostr": {
+      "title": "Nostr",
+      "hide_details": "Sembunyikan rincian",
+      "block_and_ignore": "Blok dan abaikan {{host}}",
+      "kinds": {
+        "22242": "autentikasi klien",
+        "42": "pesan channel",
+        "0": "metadata",
+        "2": "rekomendasi relay",
+        "3": "Kontak",
+        "4": "pesan langsung terenkripsi",
+        "5": "penghapusan event",
+        "7": "Reaksi",
+        "8": "lencana penghargaan",
+        "40": "pembuatan channel",
+        "41": "metadata channel",
+        "9734": "permintaan zap",
+        "9735": "zap",
+        "24133": "Sambungkan nostr",
+        "30009": "definisi lencana",
+        "30078": "data terkait aplikasi"
+      },
+      "allow": "Izinkan website ini untuk:",
+      "view_details": "Lihat rincian",
+      "no_content": "(Tidak ada konten)"
+    },
+    "on_chain": {
+      "title": "Terima melalui alamat bitcoin",
+      "instructions1": "Untuk menerima bitcoin melalui alamat bitcoin, login ke <0>Alby Account</0> di getalby.com",
+      "instructions2": "Kamu dapat menemukan alamat bitcoin kamu pada halaman <0>Terima</0>.",
+      "go": "Pergi ke akun Alby kamu →"
+    },
+    "confirm_sign_message": {
+      "title": "Masuk"
+    },
+    "confirm_add_account": {
+      "title": "Tambah akun",
+      "tor_info": "Untuk menghubungkan melalui jaringan TOR kamu perlu memasang aplikasi pendamping Alby:"
+    },
+    "transactions": {
+      "title": "Transaksi",
+      "description": {
+        "outgoing": "Transaksi keluar untuk akun ini",
+        "incoming": "Transaksi masuk untuk akun ini"
+      },
+      "list_empty": "Tidak ada transaksi."
+    }
+  },
+  "components": {
+    "toasts": {
+      "connection_error": {
+        "what_you_can_do": "Berikut hal-hal yang bisa kamu lakukan:",
+        "if_ssl_errors": "dan jika ada eror SSL (misalnya ERR_CERT_AUTHORITY_INVALID), klik \"advanced\" dan lanjutkan dengan menerima sertifikat.",
+        "visit_guides": "Kunjungi panduan kami untuk bantuan lebih lanjut",
+        "double_check": "Cek kembali detail koneksi kamu"
+      },
+      "login_failed": {
+        "password_reset": "Lupa kata sandi kamu? Klik di sini"
+      },
+      "errors": {
+        "invalid_credentials": "Kata sandi salah. Silakan cek kembali kata sandi dan alamat email kamu dan coba lagi."
+      }
+    },
+    "account_menu": {
+      "options": {
+        "account": {
+          "add": "Tambahkan akun baru",
+          "manage": "Kelola akun",
+          "account_settings": "Pengaturan Akun"
+        }
+      },
+      "screen_reader": "Toggle Dropdown",
+      "title": "Ganti akun"
+    },
+    "transactionsTable": {
+      "sent": "Terkirim",
+      "fee": "Biaya",
+      "preimage": "Preimage",
+      "received": "Diterima",
+      "boostagram": {
+        "sender": "Pengirim",
+        "message": "Pesan",
+        "app": "App",
+        "podcast": "Podcast"
+      },
+      "open_location": "Buka website"
+    },
+    "allowance_menu": {
+      "confirm_delete": "Apakah kamu yakin untuk menghapus situs web ini?"
+    },
+    "qrcode_scanner": {
+      "title": "Pindai kode QR",
+      "actions": {
+        "start_scanning": "Mulai pindai",
+        "stop_scanning": "Berhenti memindai"
+      },
+      "errors": {
+        "allow_camera_access": "Mohon izinkan akses kamera pada pengaturan"
+      }
+    },
+    "confirm_or_cancel": {
+      "only_trusted": "Hanya hubungkan dengan situs-situs yang kamu percayai."
+    },
+    "budget_control": {
+      "remember": {
+        "label": "Ingat dan atur budget"
+      },
+      "budget": {
+        "label": "Budget"
+      }
+    },
+    "companion_download_info": {
+      "heading": "Bagaimana kamu ingin terhubung ke jaringan TOR?",
+      "download": "Unduh",
+      "companion": {
+        "title": "Companion App"
+      },
+      "tor_native": {
+        "title": "TOR (native)"
+      }
+    },
+    "publishers_table": {
+      "payments": "Pembayaran",
+      "used": "Terpakai"
+    },
+    "badge": {
+      "label": {
+        "active": "AKTIF",
+        "auth": "MASUK",
+        "imported": "TERIMPOR"
+      }
+    }
+  },
+  "permissions": {
+    "nostr": {
+      "nip04decrypt": "Dekripsi data.",
+      "getpublickey": "Membaca kunci publik Anda.",
+      "nip04encrypt": "Enkripsi data."
+    },
+    "commando": {
+      "decode": "Decode teks bolt11/bolt12/rune."
+    },
+    "lnc": {
+      "addinvoice": "Buat invoice baru."
+    }
+  },
+  "common": {
+    "sats_other": "sats",
+    "pasted": "Tertempel!",
+    "success_message": "{{amount}}{{fiatAmount}} terkirim ke {{destination}}",
+    "actions": {
+      "paste": "Tempel",
+      "back": "Kembali",
+      "delete": "Hapus",
+      "edit": "Ubah",
+      "next": "Selanjutnya",
+      "open": "Buka",
+      "cancel": "Batalkan",
+      "confirm": "Konfirmasi",
+      "continue": "Lanjutkan",
+      "connect": "Sambungkan",
+      "lock": "Kunci",
+      "unlock": "Buka",
+      "send": "Kirim",
+      "save": "Simpan",
+      "receive": "Terima",
+      "receive_again": "Terima pembayaran lainnya",
+      "transactions": "Transaksi",
+      "close": "Tutup",
+      "export": "Expor",
+      "remove": "Hapus",
+      "copy": "Salin",
+      "copy_clipboard": "Salin ke clipboard",
+      "paste_clipboard": "Tempel dari clipboard",
+      "copy_invoice": "Salin Invoice",
+      "log_in": "Masuk",
+      "remember": "Ingat pilihan saya dan jangan tanyakan lagi",
+      "download": "Unduh",
+      "import": "Impor"
+    },
+    "connectors": {
+      "lnbits": "LNBits",
+      "commando": "Commando",
+      "nativecitadel": "Citadel (melalui Tor)",
+      "lnd": "LND",
+      "nativelnd": "LND (melalui Tor)",
+      "lndhub": "LNDHub",
+      "nativelndhub": "LNDHub (melalui Tor)",
+      "nativelnbits": "LNBits (melalui Tor)",
+      "galoy": "Galoy",
+      "eclair": "Eclair",
+      "citadel": "Citadel"
+    },
+    "range": {
+      "greaterOrEqual": "≥ {{min}}",
+      "between": "antara {{min}} dan {{max}}",
+      "lessThanOrEqual": "≤ {{max}}"
+    },
+    "password": "Kata sandi",
+    "confirm_password": "Konfirmasi Kata Sandi",
+    "success": "Sukses",
+    "error": "Eror",
+    "settings": "Pengaturan",
+    "accounts": "Akun-akun",
+    "connected_sites": "Situs Terhubung",
+    "wallet": "Dompet",
+    "sats_one": "sat",
+    "amount": "Jumlah",
+    "optional": "Opsional",
+    "feedback": "Umpan balik",
+    "copied": "Tersalin!",
+    "description": "Deskripsi",
+    "description_full": "Deskripsi Lengkap",
+    "response": "Respon",
+    "message": "Pesan",
+    "help": "Bantuan",
+    "balance": "Saldo",
+    "errors": {
+      "connection_failed": "Koneksi gagal",
+      "payment_failed": "Pembayaran Gagal"
     }
   }
 }
