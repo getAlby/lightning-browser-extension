@@ -113,16 +113,13 @@ export default class WebLNProvider {
   }
 
   async on(...args: Parameters<EventEmitter["on"]>) {
-    await this.enable();
     return this._eventEmitter.on(...args);
   }
   async emit(...args: Parameters<EventEmitter["emit"]>) {
-    await this.enable();
     return this._eventEmitter.emit(...args);
   }
 
   async off(...args: Parameters<EventEmitter["off"]>) {
-    await this.enable();
     return this._eventEmitter.off(...args);
   }
 

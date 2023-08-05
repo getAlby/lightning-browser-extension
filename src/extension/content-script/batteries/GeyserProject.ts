@@ -18,9 +18,8 @@ function handleProjectPage(name: string) {
     document.querySelector<HTMLElement>("#lightning-address")?.innerText;
   const title =
     document.querySelector<HTMLElement>("#project-title")?.innerText;
-  const icon = document.querySelector<HTMLImageElement>(
-    "#project-avatar img"
-  )?.src;
+  const icon = document.querySelector<HTMLImageElement>("#project-avatar img")
+    ?.src;
 
   if (address) {
     setLightningData([
