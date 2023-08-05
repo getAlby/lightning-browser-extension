@@ -1782,13 +1782,6 @@
   resolved "https://registry.yarnpkg.com/@types/webextension-polyfill/-/webextension-polyfill-0.10.1.tgz#63698f0ef78a069d2d307be3caaee5e70c12e09d"
   integrity sha512-Sdg+E2F5JUbhkE1qX15QUxpyhfMFKRGJqND9nb1C0gNN4NR7kCV31/1GvNbg6Xe+m/JElJ9/lG5kepMzjGPuQw==
 
-"@types/wif@^2.0.2":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@types/wif/-/wif-2.0.2.tgz#5bd845e29406bc7d49acca6d2a6c3230f3b53d3c"
-  integrity sha512-IiIuBeJzlh4LWJ7kVTrX0nwB60OG0vvGTaWC/SgSbVFw7uYUTF6gEuvDZ1goWkeirekJDD58Y8g7NljQh2fNkA==
-  dependencies:
-    "@types/node" "*"
-
 "@types/ws@^8.5.5":
   version "8.5.5"
   resolved "https://registry.yarnpkg.com/@types/ws/-/ws-8.5.5.tgz#af587964aa06682702ee6dcbc7be41a80e4b28eb"
@@ -2500,13 +2493,6 @@ available-typed-arrays@^1.0.5:
   resolved "https://registry.yarnpkg.com/available-typed-arrays/-/available-typed-arrays-1.0.5.tgz#92f95616501069d07d10edb2fc37d3e1c65123b7"
   integrity sha512-DMD0KiN46eipeziST1LPP/STfDU0sufISXmjSgvVsoU2tqxctQeASejWcfNtxYKqETM1UxQ8sp2OrSBWpHY6sw==
 
-axios@^0.21.1:
-  version "0.21.4"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-0.21.4.tgz#c67b90dc0568e5c1cf2b0b858c43ba28e2eda575"
-  integrity sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==
-  dependencies:
-    follow-redirects "^1.14.0"
-
 axios@^0.27.2:
   version "0.27.2"
   resolved "https://registry.yarnpkg.com/axios/-/axios-0.27.2.tgz#207658cc8621606e586c85db4b41a750e756d972"
@@ -2653,11 +2639,6 @@ bip66@^1.1.0:
   integrity sha512-nemMHz95EmS38a26XbbdxIYj5csHd3RMP3H5bwQknX0WYHF01qhpufP42mLOwVICuH2JmhIhXiWs89MfUGL7Xw==
   dependencies:
     safe-buffer "^5.0.1"
-
-bitcoin-ops@^1.4.0:
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/bitcoin-ops/-/bitcoin-ops-1.4.1.tgz#e45de620398e22fd4ca6023de43974ff42240278"
-  integrity sha512-pef6gxZFztEhaE9RY9HmWVmiIHqCb2OyS4HPKkpc6CIiiOa3Qmuoylxc5P2EkU3w+5eTSifI9SEZC88idAIGow==
 
 bitcoinjs-lib@^6.0.0:
   version "6.0.1"
@@ -4834,7 +4815,7 @@ follow-redirects@^1.0.0:
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.0.tgz#06441868281c86d0dda4ad8bdaead2d02dca89d4"
   integrity sha512-aExlJShTV4qOUOL7yF1U5tvLCB0xQuudbf6toyYA0E/acBNw71mvjFTnLaRp50aQaYocMR0a/RMMBIHeZnGyjQ==
 
-follow-redirects@^1.14.0, follow-redirects@^1.14.9:
+follow-redirects@^1.14.9:
   version "1.15.2"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.2.tgz#b460864144ba63f2681096f274c4e57026da2c13"
   integrity sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==
@@ -6611,18 +6592,15 @@ lint-staged@^13.2.3:
     string-argv "^0.3.1"
     yaml "^2.2.2"
 
-liquidjs-lib@^6.0.2-liquid.28:
-  version "6.0.2-liquid.28"
-  resolved "https://registry.yarnpkg.com/liquidjs-lib/-/liquidjs-lib-6.0.2-liquid.28.tgz#34ff5ee694e734cefa0086de3ac75e06a84bf9c5"
-  integrity sha512-xV8BvhgIRmx32zKz4oQUC6c/s6cYGf2PMKyDQcjMJxQ5diiPVBCs7STmI/saFxH0KjdVodhWm52KkemTF9M7hA==
+liquidjs-lib@^6.0.2-liquid.29:
+  version "6.0.2-liquid.29"
+  resolved "https://registry.yarnpkg.com/liquidjs-lib/-/liquidjs-lib-6.0.2-liquid.29.tgz#911b70fe7e652ba1d40ce8a0902f16c41fb3f036"
+  integrity sha512-+aQyPpnsP4FgCwTFs8ROPW/prMVXV7MQCrfb5HKXqjFOg8ISdaVOG/ZYwtQvc5d9zn/yTIo4qWE9bXvVTO20Mg==
   dependencies:
     "@types/randombytes" "^2.0.0"
-    "@types/wif" "^2.0.2"
-    axios "^0.21.1"
     bech32 "^2.0.0"
     bip174-liquid "^1.0.3"
     bip66 "^1.1.0"
-    bitcoin-ops "^1.4.0"
     bitcoinjs-lib "^6.0.2"
     bitset "^5.1.1"
     blech32 "^1.0.1"
@@ -6632,7 +6610,6 @@ liquidjs-lib@^6.0.2-liquid.28:
     slip77 "^0.2.0"
     typeforce "^1.11.3"
     varuint-bitcoin "^1.1.2"
-    wif "^2.0.1"
 
 listr2@^5.0.7:
   version "5.0.8"
