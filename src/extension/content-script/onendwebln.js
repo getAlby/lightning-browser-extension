@@ -41,7 +41,10 @@ async function init() {
     }
     // forward account changed messaged to inpage script
     else if (request.action === "accountChanged" && isEnabled) {
-      window.postMessage({ action: "accountChanged", scope: "webln" }, "*");
+      window.postMessage(
+        { action: "accountChanged", scope: "webln" },
+        window.location.origin
+      );
     }
   });
 
