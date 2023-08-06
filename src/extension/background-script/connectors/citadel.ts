@@ -53,7 +53,13 @@ class CitadelConnector implements Connector {
   }
 
   get supportedMethods() {
-    return ["makeInvoice", "sendPayment", "signMessage", "getInfo"];
+    return [
+      "makeInvoice",
+      "sendPayment",
+      "signMessage",
+      "getInfo",
+      "getBalance",
+    ];
   }
 
   async getInfo(): Promise<GetInfoResponse> {

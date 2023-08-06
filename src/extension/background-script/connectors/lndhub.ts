@@ -66,7 +66,14 @@ export default class LndHub implements Connector {
   }
 
   get supportedMethods() {
-    return ["getInfo", "keysend", "makeInvoice", "sendPayment", "signMessage"];
+    return [
+      "getInfo",
+      "keysend",
+      "makeInvoice",
+      "sendPayment",
+      "signMessage",
+      "getBalance",
+    ];
   }
 
   // not yet implemented
