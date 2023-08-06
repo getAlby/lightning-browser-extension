@@ -6,7 +6,6 @@ import {
   Token,
 } from "alby-js-sdk/dist/types";
 import browser from "webextension-polyfill";
-import { getAlbyAccountName } from "~/app/utils";
 import { decryptData, encryptData } from "~/common/lib/crypto";
 import { Account, OAuthToken } from "~/types";
 
@@ -39,7 +38,7 @@ interface Config {
 export default class Alby implements Connector {
   private account: Account;
   private config: Config;
-  private _clientPromise: Promise<Client> | undefined;
+  private _client: Client | undefined;
   private _authUser: auth.OAuth2User | undefined;
 
   constructor(account: Account, config: Config) {
@@ -48,8 +47,15 @@ export default class Alby implements Connector {
   }
 
   async init() {
-    // not needed - client is created when the first connector method is called
-    return;
+    try {
+      this._authUser = await this.authorize();
+      this._client = new Client(this._authUser, this._getRequestOptions());
+    } catch (error) {
+      console.error("Failed to initialize alby connector", error);
+      this._authUser = undefined;
+      this._client = undefined;
+      await this.unload();
+    }
   }
 
   getOAuthToken(): OAuthToken | undefined {
@@ -103,18 +109,6 @@ export default class Alby implements Connector {
       const info = await this._request((client) =>
         client.accountInformation({})
       );
-
-      const accounts = state.getState().accounts;
-      if (this.account.id && this.account.id in accounts) {
-        // update the account info from backend
-        const accountName = getAlbyAccountName(info);
-        accounts[this.account.id].name = accountName;
-        accounts[this.account.id].avatarUrl = info.avatar;
-        state.setState({ accounts });
-        // make sure we immediately persist the updated accounts
-        await state.getState().saveToStorage();
-      }
-
       return {
         data: {
           ...info,
@@ -257,14 +251,9 @@ export default class Alby implements Connector {
 
       let authUrl = authClient.generateAuthURL({
         code_challenge_method: "S256",
+        authorizeUrl: process.env.ALBY_OAUTH_AUTHORIZE_URL,
       });
-      // TODO: make authorize URL in alby-js-sdk customizable
-      if (process.env.ALBY_OAUTH_AUTHORIZE_URL) {
-        authUrl = authUrl.replace(
-          "https://getalby.com/oauth",
-          process.env.ALBY_OAUTH_AUTHORIZE_URL
-        );
-      }
+
       authUrl += "&webln=false"; // stop getalby.com login modal launching lnurl auth
       const authResult = await this.launchWebAuthFlow(authUrl);
       const code = new URL(authResult).searchParams.get("code");
@@ -290,43 +279,14 @@ export default class Alby implements Connector {
     return authResult;
   }
 
-  async getAccessToken(authResult: string, authClient: auth.OAuth2User) {
-    const authToken = new URL(authResult).searchParams.get("code");
-    if (!authToken) {
-      throw new Error("Authentication failed: missing token");
-    }
-
-    await authClient.requestAccessToken(authToken);
-  }
-
-  private async _getAlbyClient(): Promise<Client> {
-    if (this._clientPromise) {
-      return this._clientPromise;
-    }
-
-    this._clientPromise = new Promise<Client>((resolve, reject) => {
-      (async () => {
-        try {
-          this._authUser = await this.authorize();
-          resolve(new Client(this._authUser, this._getRequestOptions()));
-        } catch (error) {
-          reject(error);
-          this._clientPromise = undefined;
-        }
-      })();
-    });
-    return this._clientPromise;
-  }
-
   private async _request<T>(func: (client: Client) => T) {
-    const client = await this._getAlbyClient();
-    if (!this._authUser) {
-      throw new Error("this._authUser was not created");
+    if (!this._authUser || !this._client) {
+      throw new Error("Alby client was not initialized");
     }
     const oldToken = this._authUser?.token;
     let result: T;
     try {
-      result = await func(client);
+      result = await func(this._client);
     } catch (error) {
       console.error(error);
 

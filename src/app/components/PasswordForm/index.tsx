@@ -34,7 +34,7 @@ const initialErrors: Record<string, errorMessage> = {
 };
 
 export default function PasswordForm<
-  T extends PasswordFormData = PasswordFormData
+  T extends PasswordFormData = PasswordFormData,
 >({
   formData,
   setFormData,

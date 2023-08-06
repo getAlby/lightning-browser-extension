@@ -346,7 +346,6 @@ class Galoy implements Connector {
       responseType: "json",
       headers: {
         Accept: "application/json",
-        "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
         Authorization: `Bearer ${this.config.accessToken}`,
       },

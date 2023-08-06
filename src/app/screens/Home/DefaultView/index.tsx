@@ -28,6 +28,7 @@ dayjs.extend(relativeTime);
 export type Props = {
   lnDataFromCurrentTab?: Battery[];
   currentUrl?: URL | null;
+  renderPublisherWidget?: boolean;
 };
 
 const DefaultView: FC<Props> = (props) => {
@@ -110,7 +111,7 @@ const DefaultView: FC<Props> = (props) => {
 
   return (
     <div className="w-full max-w-screen-sm h-full mx-auto overflow-y-auto no-scrollbar">
-      {!!props.lnDataFromCurrentTab?.length && (
+      {props.renderPublisherWidget && !!props.lnDataFromCurrentTab?.length && (
         <PublisherLnData lnData={props.lnDataFromCurrentTab[0]} />
       )}
       <div className="p-4">

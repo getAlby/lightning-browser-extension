@@ -264,7 +264,6 @@ function Settings() {
             <div className="w-64">
               <Input
                 placeholder={t("name.placeholder")}
-                type="text"
                 value={settings.userName}
                 onChange={(event) => {
                   saveSetting({
