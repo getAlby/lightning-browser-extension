@@ -45,7 +45,7 @@ export default function Tips() {
           backgroundIcon: <MnemonicTipCardIcon />,
           link: `/accounts/${accountId}/nostr/setup`,
         },
-      } as const),
+      }) as const,
     [accountId]
   );
 
