@@ -826,7 +826,8 @@
         "9735": "zap",
         "24133": "Sambungkan nostr",
         "30009": "definisi lencana",
-        "30078": "data terkait aplikasi"
+        "30078": "data terkait aplikasi",
+        "10002": "daftar metadata relay"
       },
       "allow": "Izinkan website ini untuk:",
       "view_details": "Lihat rincian",
@@ -984,7 +985,8 @@
       "log_in": "Masuk",
       "remember": "Ingat pilihan saya dan jangan tanyakan lagi",
       "download": "Unduh",
-      "import": "Impor"
+      "import": "Impor",
+      "more": "Lebih lanjut"
     },
     "connectors": {
       "lnbits": "LNBits",
@@ -1026,6 +1028,10 @@
     "errors": {
       "connection_failed": "Koneksi gagal",
       "payment_failed": "Pembayaran Gagal"
-    }
+    },
+    "advanced": "Advanced",
+    "discover": "Temui",
+    "loading": "memuat",
+    "or": "atau"
   }
 }
