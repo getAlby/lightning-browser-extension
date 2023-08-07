@@ -108,7 +108,10 @@ function ConfirmSignPset() {
                 <h2 className="font-medium dark:text-white">
                   {t("allow_sign", { host: origin.host })}{" "}
                 </h2>
-                <Hyperlink href="https://medium.com/blockstream/pset-constructing-confidential-transactions-437109bb4ac5">
+                <Hyperlink
+                  href="https://medium.com/blockstream/pset-constructing-confidential-transactions-437109bb4ac5"
+                  target="_blank"
+                >
                   <div className="bg-blue-500 rounded-full">
                     <InfoIcon className="h-4 w-4 text-white" />
                   </div>
