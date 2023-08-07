@@ -17,6 +17,7 @@ import NostrConfirmSignSchnorr from "@screens/Nostr/ConfirmSignSchnorr";
 import Unlock from "@screens/Unlock";
 import { HashRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import AlbyLogo from "~/app/components/AlbyLogo";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
 import ConfirmGetAddress from "~/app/screens/ConfirmGetAddress";
@@ -132,16 +133,9 @@ const Layout = () => {
   return (
     <>
       <ToastContainer autoClose={10000} hideProgressBar={true} />
-      <div className="px-4 py-2 justify-between items-center bg-white flex border-b border-gray-200 dark:bg-surface-02dp dark:border-neutral-500">
+      <div className="px-4 py-2 justify-between items-center bg-white flex border-b border-gray-200 dark:bg-surface-02dp dark:border-neutral-500 gap-5">
         <div className="w-24 shrink-0 dark:text-white">
-          <img
-            src="assets/icons/alby-logo-text-light.svg"
-            className="dark:hidden"
-          />
-          <img
-            src="assets/icons/alby-logo-text-dark.svg"
-            className="hidden dark:inline"
-          />
+          <AlbyLogo />
         </div>
         <AccountMenu showOptions={false} />
       </div>
