@@ -31,7 +31,7 @@ const initialErrors: Record<string, errorMessage> = {
 };
 
 export default function PasswordForm<
-  T extends PasswordFormData = PasswordFormData,
+  T extends PasswordFormData = PasswordFormData
 >({
   formData,
   setFormData,
@@ -106,7 +106,7 @@ export default function PasswordForm<
           onBlur={validate}
           endAdornment={
             <PasswordViewAdornment
-              passwordViewSuccessCallback={(passwordView) => {
+              onChange={(passwordView) => {
                 setPasswordViewVisible(passwordView);
               }}
             />
@@ -129,7 +129,7 @@ export default function PasswordForm<
             onBlur={validate}
             endAdornment={
               <PasswordViewAdornment
-                passwordViewSuccessCallback={(passwordView) => {
+                onChange={(passwordView) => {
                   setPasswordConfirmationViewVisible(passwordView);
                 }}
               />

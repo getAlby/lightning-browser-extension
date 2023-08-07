@@ -1,3 +1,4 @@
+import logo from "/static/assets/icons/lnd.png";
 import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
 import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
@@ -7,8 +8,6 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import PasswordViewAdornment from "~/app/components/PasswordViewAdornment";
 import msg from "~/common/lib/msg";
-
-import logo from "/static/assets/icons/lnd.png";
 
 const initialFormData = Object.freeze({
   pairingPhrase: "",
@@ -103,7 +102,7 @@ export default function ConnectLnd() {
           autoFocus={true}
           endAdornment={
             <PasswordViewAdornment
-              passwordViewSuccessCallback={(passwordView) => {
+              onChange={(passwordView) => {
                 setPairingPhraseVisible(passwordView);
               }}
             />

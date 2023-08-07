@@ -1,3 +1,4 @@
+import logo from "/static/assets/icons/start9.png";
 import CompanionDownloadInfo from "@components/CompanionDownloadInfo";
 import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
@@ -9,8 +10,6 @@ import { toast } from "react-toastify";
 import PasswordViewAdornment from "~/app/components/PasswordViewAdornment";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
-
-import logo from "/static/assets/icons/start9.png";
 
 const initialFormData = {
   url: "",
@@ -147,7 +146,7 @@ export default function ConnectStart9() {
           autoFocus={true}
           endAdornment={
             <PasswordViewAdornment
-              passwordViewSuccessCallback={(passwordView) => {
+              onChange={(passwordView) => {
                 setLndconnectUrlVisible(passwordView);
               }}
             />

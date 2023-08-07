@@ -1,3 +1,4 @@
+import logo from "/static/assets/icons/raspiblitz.png";
 import CompanionDownloadInfo from "@components/CompanionDownloadInfo";
 import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
@@ -8,8 +9,6 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import PasswordViewAdornment from "~/app/components/PasswordViewAdornment";
 import msg from "~/common/lib/msg";
-
-import logo from "/static/assets/icons/raspiblitz.png";
 
 const initialFormData = Object.freeze({
   url: "",
@@ -174,7 +173,7 @@ export default function ConnectRaspiBlitz() {
             required
             endAdornment={
               <PasswordViewAdornment
-                passwordViewSuccessCallback={(passwordView) => {
+                onChange={(passwordView) => {
                   setMacaroonVisible(passwordView);
                 }}
               />

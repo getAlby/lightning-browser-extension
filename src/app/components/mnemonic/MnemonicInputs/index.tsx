@@ -39,7 +39,7 @@ export default function MnemonicInputs({
           const inputId = `mnemonic-word-${i}`;
           return (
             <div key={i} className="flex justify-center items-center">
-              <span className="w-7 text-gray-500 slashed-zero dark:text-neutral-500">
+              <span className="w-7 text-gray-500 slashed-zero dark:text-neutral-500 ml-1 -mr-1">
                 {i + 1}.
               </span>
               <div className="relative">
@@ -68,7 +68,7 @@ export default function MnemonicInputs({
                   endAdornment={
                     <PasswordViewAdornment
                       isRevealed={isRevealed}
-                      passwordViewSuccessCallback={(passwordView) => {
+                      onChange={(passwordView) => {
                         if (passwordView) {
                           document.getElementById(inputId)?.focus();
                         }

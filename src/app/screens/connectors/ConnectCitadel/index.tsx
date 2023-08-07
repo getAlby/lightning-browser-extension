@@ -1,3 +1,4 @@
+import logo from "/static/assets/icons/citadel.png";
 import CompanionDownloadInfo from "@components/CompanionDownloadInfo";
 import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
@@ -8,8 +9,6 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import PasswordViewAdornment from "~/app/components/PasswordViewAdornment";
 import msg from "~/common/lib/msg";
-
-import logo from "/static/assets/icons/citadel.png";
 
 export default function ConnectCitadel() {
   const navigate = useNavigate();
@@ -119,7 +118,7 @@ export default function ConnectCitadel() {
           onChange={handleChange}
           endAdornment={
             <PasswordViewAdornment
-              passwordViewSuccessCallback={(passwordView) => {
+              onChange={(passwordView) => {
                 setPasswordViewVisible(passwordView);
               }}
             />

@@ -1,3 +1,4 @@
+import logo from "/static/assets/icons/eclair.jpg";
 import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
 import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
@@ -7,8 +8,6 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import PasswordViewAdornment from "~/app/components/PasswordViewAdornment";
 import msg from "~/common/lib/msg";
-
-import logo from "/static/assets/icons/eclair.jpg";
 
 export default function ConnectEclair() {
   const navigate = useNavigate();
@@ -103,7 +102,7 @@ export default function ConnectEclair() {
           onChange={handleChange}
           endAdornment={
             <PasswordViewAdornment
-              passwordViewSuccessCallback={(passwordView) => {
+              onChange={(passwordView) => {
                 setPasswordViewVisible(passwordView);
               }}
             />

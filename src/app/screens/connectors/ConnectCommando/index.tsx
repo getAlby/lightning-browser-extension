@@ -1,3 +1,4 @@
+import logo from "/static/assets/icons/core_ln.svg";
 import Button from "@components/Button";
 import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
@@ -9,8 +10,6 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import PasswordViewAdornment from "~/app/components/PasswordViewAdornment";
 import msg from "~/common/lib/msg";
-
-import logo from "/static/assets/icons/core_ln.svg";
 
 export default function ConnectCommando() {
   const navigate = useNavigate();
@@ -179,7 +178,7 @@ export default function ConnectCommando() {
             value={formData.privateKey}
             endAdornment={
               <PasswordViewAdornment
-                passwordViewSuccessCallback={(passwordView) => {
+                onChange={(passwordView) => {
                   setCommandoPrivateKeyVisible(passwordView);
                 }}
               />

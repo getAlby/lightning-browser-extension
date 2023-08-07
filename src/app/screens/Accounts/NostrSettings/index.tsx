@@ -189,7 +189,7 @@ function NostrSettings() {
                 endAdornment={
                   <div className="flex items-center gap-1 px-2">
                     <PasswordViewAdornment
-                      passwordViewSuccessCallback={(passwordView) => {
+                      onChange={(passwordView) => {
                         setNostrPrivateKeyVisible(passwordView);
                       }}
                     />

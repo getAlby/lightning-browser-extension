@@ -75,7 +75,7 @@ function Unlock() {
               onChange={handlePasswordChange}
               endAdornment={
                 <PasswordViewAdornment
-                  passwordViewSuccessCallback={(passwordView) => {
+                  onChange={(passwordView) => {
                     setPasswordViewVisible(passwordView);
                   }}
                 />

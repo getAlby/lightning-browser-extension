@@ -1,3 +1,4 @@
+import logo from "/static/assets/icons/lnd.png";
 import { SendIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import CompanionDownloadInfo from "@components/CompanionDownloadInfo";
 import ConnectorForm from "@components/ConnectorForm";
@@ -10,8 +11,6 @@ import { toast } from "react-toastify";
 import PasswordViewAdornment from "~/app/components/PasswordViewAdornment";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
-
-import logo from "/static/assets/icons/lnd.png";
 
 const initialFormData = {
   url: "",
@@ -185,7 +184,7 @@ export default function ConnectLnd() {
             required
             endAdornment={
               <PasswordViewAdornment
-                passwordViewSuccessCallback={(passwordView) => {
+                onChange={(passwordView) => {
                   setMacaroonVisible(passwordView);
                 }}
               />
