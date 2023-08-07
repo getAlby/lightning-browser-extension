@@ -1,11 +1,8 @@
-import {
-  HiddenIcon,
-  VisibleIcon,
-} from "@bitcoin-design/bitcoin-icons-react/outline";
 import TextField from "@components/form/TextField";
 import type { KeyPrefix } from "i18next";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import PasswordViewAdornment from "~/app/components/PasswordViewAdornment";
 
 export type PasswordFormData = {
   password: string;
@@ -34,7 +31,7 @@ const initialErrors: Record<string, errorMessage> = {
 };
 
 export default function PasswordForm<
-  T extends PasswordFormData = PasswordFormData,
+  T extends PasswordFormData = PasswordFormData
 >({
   formData,
   setFormData,
@@ -44,8 +41,8 @@ export default function PasswordForm<
   autoFocus = true,
 }: Props<T>) {
   const [errors, setErrors] = useState(initialErrors);
-  const [passwordView, setPasswordView] = useState(false);
-  const [passwordConfirmationView, setPasswordConfirmationView] =
+  const [passwordViewVisible, setPasswordViewVisible] = useState(false);
+  const [passwordConfirmationViewVisible, setPasswordConfirmationViewVisible] =
     useState(false);
   const { t } = useTranslation("translation", {
     keyPrefix: i18nKeyPrefix,
@@ -96,7 +93,7 @@ export default function PasswordForm<
           autoFocus={autoFocus}
           id="password"
           label={t("choose_password.label")}
-          type={passwordView ? "text" : "password"}
+          type={passwordViewVisible ? "text" : "password"}
           required
           onChange={handleChange}
           minLength={minLength}
@@ -108,20 +105,11 @@ export default function PasswordForm<
           }
           onBlur={validate}
           endAdornment={
-            <button
-              type="button"
-              tabIndex={-1}
-              className="flex justify-center items-center w-10 h-8"
-              onClick={() => {
-                setPasswordView(!passwordView);
+            <PasswordViewAdornment
+              onChange={(passwordView) => {
+                setPasswordViewVisible(passwordView);
               }}
-            >
-              {passwordView ? (
-                <HiddenIcon className="h-6 w-6" />
-              ) : (
-                <VisibleIcon className="h-6 w-6" />
-              )}
-            </button>
+            />
           }
         />
         {errors.passwordErrorMessage && (
@@ -135,25 +123,16 @@ export default function PasswordForm<
           <TextField
             id="passwordConfirmation"
             label={t("confirm_password.label")}
-            type={passwordConfirmationView ? "text" : "password"}
+            type={passwordConfirmationViewVisible ? "text" : "password"}
             required
             onChange={handleChange}
             onBlur={validate}
             endAdornment={
-              <button
-                type="button"
-                className="flex justify-center items-center w-10 h-8"
-                tabIndex={-1}
-                onClick={() =>
-                  setPasswordConfirmationView(!passwordConfirmationView)
-                }
-              >
-                {passwordConfirmationView ? (
-                  <HiddenIcon className="h-6 w-6" />
-                ) : (
-                  <VisibleIcon className="h-6 w-6" />
-                )}
-              </button>
+              <PasswordViewAdornment
+                onChange={(passwordView) => {
+                  setPasswordConfirmationViewVisible(passwordView);
+                }}
+              />
             }
           />
           {errors.passwordConfirmationErrorMessage && (

@@ -1,10 +1,7 @@
-import {
-  HiddenIcon,
-  VisibleIcon,
-} from "@bitcoin-design/bitcoin-icons-react/filled";
 import { wordlist } from "@scure/bip39/wordlists/english";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import PasswordViewAdornment from "~/app/components/PasswordViewAdornment";
 import Input from "~/app/components/form/Input";
 
 type MnemonicInputsProps = {
@@ -42,7 +39,7 @@ export default function MnemonicInputs({
           const inputId = `mnemonic-word-${i}`;
           return (
             <div key={i} className="flex justify-center items-center">
-              <span className="w-7 text-gray-500 slashed-zero dark:text-neutral-500">
+              <span className="w-7 text-gray-500 slashed-zero dark:text-neutral-500 ml-1 -mr-1">
                 {i + 1}.
               </span>
               <div className="relative">
@@ -53,7 +50,7 @@ export default function MnemonicInputs({
                   onBlur={() => setRevealedIndex(undefined)}
                   readOnly={readOnly}
                   block={false}
-                  className="w-24 text-center"
+                  className="w-20 text-center"
                   list={readOnly ? undefined : "wordlist"}
                   value={isRevealed ? word : word.length ? "•••••" : ""}
                   onChange={(e) => {
@@ -69,18 +66,14 @@ export default function MnemonicInputs({
                     );
                   }}
                   endAdornment={
-                    <button
-                      type="button"
-                      tabIndex={-1}
-                      className="mr-2"
-                      onClick={() => document.getElementById(inputId)?.focus()}
-                    >
-                      {isRevealed ? (
-                        <VisibleIcon className="h-6 w-6" />
-                      ) : (
-                        <HiddenIcon className="h-6 w-6" />
-                      )}
-                    </button>
+                    <PasswordViewAdornment
+                      isRevealed={isRevealed}
+                      onChange={(passwordView) => {
+                        if (passwordView) {
+                          document.getElementById(inputId)?.focus();
+                        }
+                      }}
+                    />
                   }
                 />
               </div>
