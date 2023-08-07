@@ -91,6 +91,7 @@ const routes = {
       signMessageOrPrompt: webln.signMessageOrPrompt,
       lnurl: webln.lnurl,
       makeInvoice: webln.makeInvoiceOrPrompt,
+      getBalanceOrPrompt: webln.getBalanceOrPrompt,
       request: ln.request,
     },
     nostr: {

@@ -349,14 +349,14 @@
     "accounts": {
       "title": "帳戶",
       "account_view": {
-        "title1": "帳戶信息",
-        "title2": "編輯帳戶",
+        "title1": "帳戶設置",
+        "title2": "帳戶",
         "name": {
           "title": "名稱",
           "placeholder": "帳戶名稱"
         },
         "export": {
-          "title": "導出帳戶",
+          "title": "連接你的移動錢包",
           "screen_reader": "導出帳戶詳情",
           "waiting": "等待 LndHub 數據...",
           "your_ln_address": "你的閃電地址：",
@@ -396,54 +396,86 @@
           "settings": {
             "label": "Nostr 設置",
             "title": "Nostr 設置",
-            "no_secret_key": "💡你還沒有秘密鑰匙。<0>點擊此處</0></div>創建你的秘密鑰匙並派生你的 nostr 密鑰。",
-            "derive": "從你的秘密鑰匙中派生你的 Nostr 密鑰",
-            "description": "從你的秘密鑰匙中派生你的 Nostr 密鑰，或通過將其粘貼到 “Nostr 私鑰”字段來導入現有的私鑰。",
-            "imported_key_warning": "⚠️ 你當前正在使用導入的或隨機生成的 Nostr 密鑰。你的 Nostr 私鑰無法通過你的秘密鑰匙恢復，因此請記住備份你的 Nostr 私鑰。"
+            "no_secret_key": "💡你還沒有主密鑰。<0>點擊此處</0></div>創建你的主密鑰並派生你的 nostr 密鑰。",
+            "derive": "從你的主密鑰中派生你的 Nostr 密鑰",
+            "description": "從你的主密鑰中派生你的 Nostr 密鑰，或通過將其粘貼到 “Nostr 私鑰”字段來導入現有的私鑰。",
+            "imported_key_warning": "⚠️ 你當前正在使用導入的或隨機生成的 Nostr 密鑰。你的 Nostr 私鑰無法通過你的恢復短語恢復，因此請記住分別備份你的 Nostr 私鑰。",
+            "remove": "移除現有的密鑰",
+            "can_restore": "✅ Nostr 密鑰已從你的主密鑰派生"
+          },
+          "setup": {
+            "import": {
+              "recovery_phrase": {
+                "label": "使用恢復短語",
+                "description": "使用主密鑰恢復短語導入你的 nostr 密鑰"
+              },
+              "label": "導入 nostr 帳戶",
+              "description": "使用已有的 nostr 私鑰或從主密鑰中將其派生",
+              "title": "你想如何導入你的 nostr 帳戶？",
+              "private_key": {
+                "label": "使用 nostr 私鑰",
+                "description": "粘貼你的 nostr 私鑰將其導入 Alby"
+              }
+            },
+            "title": "設置你的 nostr 密鑰",
+            "description": "選擇是否要創建一個新的 nostr 帳戶（一對私鑰和公鑰）或導入現有帳戶。",
+            "description2": "在 Alby 中創建的每個 Nostr 帳戶都帶有<0>恢復短語</0>——一組12個單詞，始終保證重新獲得對你的 Nostr 私鑰的訪問。",
+            "new": {
+              "label": "創建新的 nostr 帳戶",
+              "description": "通過使用一對新的 nostr 密鑰生成主密鑰。"
+            },
+            "new_to_nostr": "Nostr 新手？<0>瞭解更多</0>"
           }
         },
         "remove": {
           "title": "刪除此帳戶",
           "subtitle": "所有與此帳號關聯的限額、支付信息和密鑰都將被清除。",
-          "confirm": "請輸入帳戶名稱以確認刪除你的帳戶。\n\n ⚠️如果繼續，所有關聯的密鑰（秘密鑰匙、Nostr等）都將被刪除。請確保你已將它們備份，沒有其他方法可以恢復它們。",
+          "confirm": "請輸入帳戶名稱以確認刪除你的帳戶。\n\n ⚠️如果繼續，所有關聯的密鑰（主密鑰、Nostr等）都將被刪除。請確保你已將它們備份，沒有其他方法可以恢復它們。",
           "error": "輸入的帳戶名稱不匹配。"
         },
         "actions": {
           "remove_account": "刪除帳戶",
           "export": "導出",
-          "remove_secretkey": "移除秘密鑰匙"
+          "remove_secretkey": "移除主密鑰"
         },
         "mnemonic": {
-          "title": "秘密鑰匙",
+          "title": "🔑 密鑰管理",
           "backup": {
             "protocols": {
               "nostr": "Nostr"
             },
-            "button": "備份秘密鑰匙",
-            "warning": "⚠️別忘了將你的秘密鑰匙備份！不備份可能會導致永久失去對你的 Nostr 身份或使用此密鑰管理的資產的訪問權限。",
-            "save": "保存秘密鑰匙",
-            "title": "備份你的秘密鑰匙"
+            "button": "備份恢復短語",
+            "warning": "⚠️別忘了將你的恢復短語備份！不備份可能會導致永久失去對你的主密鑰、 Nostr 身份或使用此密鑰管理的資產的訪問權限。",
+            "save": "保存主密鑰",
+            "title": "備份你的恢復短語",
+            "description": "請寫下恢復短語，以便能夠在新設備上恢復主密鑰，或以防失去帳戶訪問。",
+            "items": {
+              "recovery_phrase": "你將始終可以通過使用主密鑰的恢復短語來訪問它。",
+              "storage": "請確保在一個安全且私密的地方將它記下！",
+              "words": "恢復短語是一組12個單詞，它的工作方式類似於密碼，但是如果丟失，它不能被更改或重置。"
+            }
           },
           "lnurl": {
-            "use_mnemonic": "使用秘密鑰匙登錄閃電驅動的應用程式（LNURL Auth）",
+            "use_mnemonic": "使用主密鑰登錄閃電驅動的應用程式（LNURL Auth）",
             "title": "閃電登錄"
           },
           "inputs": {
-            "title": "你的秘密鑰匙"
+            "title": "恢復短語"
           },
           "generate": {
-            "error_confirm": "請確認你已將你的秘密鑰匙備份。",
-            "confirm": "我已將我的帳戶秘密鑰匙保存在私密且安全的地方",
-            "button": "生成秘密鑰匙",
-            "title": "生成你的秘密鑰匙"
+            "error_confirm": "請確認你已將你的恢復短語備份。",
+            "confirm": "我已將我的帳戶主密鑰的恢復短語保存到私密且安全的地方。",
+            "button": "生成主密鑰",
+            "title": "生成新的主密鑰",
+            "description": "主密鑰允許你與各種協議進行互動，例如：Nostr、基礎層比特幣或 LNURL-auth。"
           },
           "import": {
-            "button": "導入秘密鑰匙",
-            "description": "使用現有的秘密鑰匙來恢復你的派生密鑰。",
-            "title": "導入秘密鑰匙"
+            "button": "導入主密鑰",
+            "description": "通過使用恢復短語將主密鑰導入 Alby。",
+            "title": "導入主密鑰"
           },
-          "existing_nostr_key_notice": "⚠️ 該帳戶已設置 nostr 私鑰，不會從此秘密鑰匙派生。你可以從你的帳戶設置管理你的 nostr 密鑰。",
-          "saved": "秘密鑰匙已加密並成功保存。"
+          "existing_nostr_key_notice": "⚠️ 該帳戶已設置 nostr 私鑰，因此不會從此主密鑰派生。你可以通過你的帳戶設置管理你的 nostr 密鑰。",
+          "saved": "主密鑰已加密並成功保存。"
         },
         "bitcoin": {
           "network": {
@@ -457,10 +489,10 @@
           }
         },
         "remove_secretkey": {
-          "subtitle": "將從該帳戶移除秘密鑰匙。",
-          "title": "移除秘密鑰匙",
-          "success": "已成功移除秘密鑰匙。",
-          "confirm": "請輸入帳戶名稱以確認刪除你的秘密鑰匙。"
+          "subtitle": "將主密鑰從該帳戶移除。",
+          "title": "移除主密鑰",
+          "success": "已成功移除主密鑰。",
+          "confirm": "請輸入帳戶名稱以確認刪除你的主密鑰。"
         }
       },
       "actions": {
@@ -640,7 +672,8 @@
     "receive": {
       "title": "接收",
       "actions": {
-        "create_invoice": "創建發票"
+        "create_invoice": "創建發票",
+        "copy_lightning_address": "複製閃電地址"
       },
       "amount": {
         "label": "金額",

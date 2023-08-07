@@ -1072,6 +1072,9 @@
     }
   },
   "permissions": {
+    "webln": {
+      "getbalance": "Read the balance of your account."
+    },
     "nostr": {
       "getpublickey": "Read your public key.",
       "nip04encrypt": "Encrypt data.",

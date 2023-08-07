@@ -101,6 +101,13 @@ export default class WebLNProvider {
     throw new Error("Alby does not support `verifyMessage`");
   }
 
+  getBalance() {
+    if (!this.enabled) {
+      throw new Error("Provider must be enabled before calling getBalance");
+    }
+    return this.execute("getBalanceOrPrompt");
+  }
+
   request(method: string, params: Record<string, unknown>) {
     if (!this.enabled) {
       throw new Error("Provider must be enabled before calling request");
