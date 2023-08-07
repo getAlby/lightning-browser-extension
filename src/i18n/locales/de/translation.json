@@ -1156,6 +1156,9 @@
       "openchannel": "Öffne einen neuen Kanal.",
       "addholdinvoice": "Erstelle eine neue HODL-Rechnungen.",
       "settleinvoice": "Begleiche eine akzeptierte Rechnung."
+    },
+    "webln": {
+      "getbalance": "Lese den Saldo deines Kontos ab."
     }
   }
 }
