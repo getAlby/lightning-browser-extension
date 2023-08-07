@@ -796,13 +796,12 @@
       "content": "This website asks you to sign:"
     },
     "confirm_sign_pset": {
-      "warning": "⚠️ Signing a PSET may result in loosing your funds or Ordinals. Sign only if you understand what you're doing and trust this transaction",
-      "title": "Sign PSET",
-      "allow_sign": "This website asks you to sign a Partially Signed Elements (Liquid) Transaction:",
+      "title": "Sign",
+      "allow_sign": "This website asks you to sign a Liquid Transaction:",
       "view_addresses": "View addresses",
       "hide_addresses": "Hide addresses",
-      "view_hex": "View PSET base64",
-      "hide_hex": "Hide PSET base64",
+      "view_hex": "View base64",
+      "hide_hex": "Hide base64",
       "inputs": "Inputs",
       "outputs": "Outputs",
       "amount": "{{amount}} {{ticker}}"

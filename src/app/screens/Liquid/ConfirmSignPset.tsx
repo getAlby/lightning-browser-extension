@@ -1,3 +1,4 @@
+import { InfoIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
 import PublisherCard from "@components/PublisherCard";
@@ -102,13 +103,17 @@ function ConfirmSignPset() {
               image={origin.icon}
               url={origin.host}
             />
-            <div className="rounded-md font-medium p-4 text-sm text-orange-700 bg-orange-50 dark:text-orange-400 dark:bg-orange-900">
-              {t("warning")}
-            </div>
             <div className="p-4 shadow bg-white dark:bg-surface-02dp rounded-lg overflow-hidden flex flex-col gap-4">
-              <h2 className="font-medium dark:text-white">
-                {t("allow_sign", { host: origin.host })}
-              </h2>
+              <div className="flex justify-between items-start">
+                <h2 className="font-medium dark:text-white">
+                  {t("allow_sign", { host: origin.host })}{" "}
+                </h2>
+                <Hyperlink href="https://medium.com/blockstream/pset-constructing-confidential-transactions-437109bb4ac5">
+                  <div className="bg-blue-500 rounded-full">
+                    <InfoIcon className="h-4 w-4 text-white" />
+                  </div>
+                </Hyperlink>
+              </div>
               <div className="flex gap-2">
                 <Hyperlink onClick={toggleShowAddresses}>
                   {showAddresses ? t("hide_addresses") : t("view_addresses")}
