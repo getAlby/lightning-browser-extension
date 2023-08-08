@@ -258,7 +258,8 @@
           "description": "Koliderアカウントを作成してAlbyに接続するためにログインまたは新規登録する。"
         },
         "create": {
-          "title": "Koliderのアカウントを作成してAlbyと接続する"
+          "title": "Koliderアカウントを作成してAlbyと接続する",
+          "description": "新しいKolliderアカウントを作成し、ビットコインの送受金とトレードを始める。"
         },
         "description": "Koliderアカウントにログインする",
         "username": {

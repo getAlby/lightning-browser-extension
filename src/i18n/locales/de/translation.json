@@ -433,7 +433,7 @@
       },
       "account_view": {
         "title2": "Konto",
-        "title1": "Konto Informationen",
+        "title1": "Kontoeinstellungen",
         "name": {
           "title": "Name anzeigen",
           "placeholder": "Konto Anzeigename"

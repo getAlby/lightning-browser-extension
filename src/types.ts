@@ -540,6 +540,10 @@ export interface MessageDecryptGet extends MessageDefault {
   action: "decrypt";
 }
 
+export interface MessageBalanceGet extends MessageDefault {
+  action: "getBalance";
+}
+
 export interface MessageGetAddress extends MessageDefault {
   // eslint-disable-next-line @typescript-eslint/ban-types
   args: {};
