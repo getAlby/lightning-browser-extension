@@ -53,13 +53,14 @@ export default class NostrProvider {
     await this.enable();
     this._eventEmitter.on(...args);
   }
-  async emit(...args: Parameters<EventEmitter["emit"]>) {
-    this._eventEmitter.emit(...args);
-  }
 
   async off(...args: Parameters<EventEmitter["off"]>) {
     await this.enable();
     this._eventEmitter.off(...args);
+  }
+
+  emit(...args: Parameters<EventEmitter["emit"]>) {
+    this._eventEmitter.emit(...args);
   }
 
   // NOTE: new call `action`s must be specified also in the content script

@@ -126,15 +126,16 @@ export default class WebLNProvider {
 
     this._eventEmitter.on(...args);
   }
-  emit(...args: Parameters<EventEmitter["emit"]>) {
-    this._eventEmitter.emit(...args);
-  }
 
   off(...args: Parameters<EventEmitter["off"]>) {
     if (!this.enabled) {
       throw new Error("Provider must be enabled before calling off method");
     }
     this._eventEmitter.off(...args);
+  }
+
+  emit(...args: Parameters<EventEmitter["emit"]>) {
+    this._eventEmitter.emit(...args);
   }
 
   // NOTE: new call `action`s must be specified also in the content script
