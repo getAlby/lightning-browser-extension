@@ -1,7 +1,6 @@
-import EventEmitter from "events";
-
 import { postMessage } from "../postMessage";
 import { Event } from "./types";
+import EventEmitter from "events";
 
 declare global {
   interface Window {
@@ -52,16 +51,15 @@ export default class NostrProvider {
 
   async on(...args: Parameters<EventEmitter["on"]>) {
     await this.enable();
-    return this._eventEmitter.on(...args);
+    this._eventEmitter.on(...args);
   }
   async emit(...args: Parameters<EventEmitter["emit"]>) {
-    await this.enable();
-    return this._eventEmitter.emit(...args);
+    this._eventEmitter.emit(...args);
   }
 
   async off(...args: Parameters<EventEmitter["off"]>) {
     await this.enable();
-    return this._eventEmitter.off(...args);
+    this._eventEmitter.off(...args);
   }
 
   // NOTE: new call `action`s must be specified also in the content script

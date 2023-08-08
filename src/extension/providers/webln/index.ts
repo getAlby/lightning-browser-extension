@@ -119,15 +119,22 @@ export default class WebLNProvider {
     });
   }
 
-  async on(...args: Parameters<EventEmitter["on"]>) {
-    return this._eventEmitter.on(...args);
+  on(...args: Parameters<EventEmitter["on"]>) {
+    if (!this.enabled) {
+      throw new Error("Provider must be enabled before calling on method");
+    }
+
+    this._eventEmitter.on(...args);
   }
-  async emit(...args: Parameters<EventEmitter["emit"]>) {
-    return this._eventEmitter.emit(...args);
+  emit(...args: Parameters<EventEmitter["emit"]>) {
+    this._eventEmitter.emit(...args);
   }
 
-  async off(...args: Parameters<EventEmitter["off"]>) {
-    return this._eventEmitter.off(...args);
+  off(...args: Parameters<EventEmitter["off"]>) {
+    if (!this.enabled) {
+      throw new Error("Provider must be enabled before calling off method");
+    }
+    this._eventEmitter.off(...args);
   }
 
   // NOTE: new call `action`s must be specified also in the content script
