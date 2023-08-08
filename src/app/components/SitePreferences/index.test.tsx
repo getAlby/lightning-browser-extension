@@ -24,7 +24,7 @@ jest.mock("~/common/lib/msg");
 const mockOnEdit = jest.fn();
 
 const defaultProps: Props = {
-  launcherType: "icon",
+  launcherType: "button",
   allowance: {
     id: 1,
     totalBudget: 2000,
@@ -61,17 +61,10 @@ describe("SitePreferences", () => {
       user.click(settingsButton); // click settings-button
     });
 
-    expect(await screen.findByRole("menu")).toBeInTheDocument(); // allowance-menu opens
-
-    const editButton = await screen.findByRole("menuitem", {
-      name: "Edit",
+    await screen.findByText("Site Settings");
+    const saveButton = await screen.findByRole("button", {
+      name: "Save",
     });
-
-    await act(() => {
-      user.click(editButton);
-    });
-
-    await screen.findByText("Edit Preferences");
 
     // update fiat value when modal is open
     expect(mockGetFiatValue).toHaveBeenCalledWith(
@@ -80,19 +73,18 @@ describe("SitePreferences", () => {
     expect(mockGetFiatValue).toHaveBeenCalledTimes(1);
 
     await act(async () => {
-      await user.clear(screen.getByLabelText("New budget"));
-      await user.type(screen.getByLabelText("New budget"), "250");
+      await user.clear(screen.getByLabelText("One-click payments budget"));
+      await user.type(
+        screen.getByLabelText("One-click payments budget"),
+        "250"
+      );
     });
 
-    expect(screen.getByLabelText("New budget")).toHaveValue(250);
+    expect(screen.getByLabelText("One-click payments budget")).toHaveValue(250);
 
     // update fiat value
     expect(mockGetFiatValue).toHaveBeenCalledWith("250");
     expect(mockGetFiatValue).toHaveBeenCalledTimes(4); // plus 3 times for each input value 2, 5, 0
-
-    const saveButton = await screen.findByRole("button", {
-      name: "Save",
-    });
 
     await act(async () => {
       await user.click(saveButton);
@@ -111,26 +103,14 @@ describe("SitePreferences", () => {
       user.click(settingsButton); // click settings-button
     });
 
-    expect(await screen.findByRole("menu")).toBeInTheDocument(); // allowance-menu opens
-
-    const editButton = await screen.findByRole("menuitem", {
-      name: "Edit",
+    const saveButton = await screen.findByRole("button", {
+      name: "Save",
     });
-
-    await act(() => {
-      user.click(editButton);
-    });
-
-    await screen.findByText("Edit Preferences");
 
     const toggleButton = await screen.findByRole("switch");
 
     await act(async () => {
       await user.click(toggleButton);
-    });
-
-    const saveButton = await screen.findByRole("button", {
-      name: "Save",
     });
 
     await act(async () => {
