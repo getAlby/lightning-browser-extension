@@ -8,7 +8,7 @@ import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Header from "@components/Header";
 import IconButton from "@components/IconButton";
 import DualCurrencyField from "@components/form/DualCurrencyField";
-import { CreateSwapResponse } from "alby-js-sdk/dist/types";
+import { CreateSwapResponse } from "@getalby/sdk/dist/types";
 import React, { useEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import Skeleton from "react-loading-skeleton";

@@ -1,4 +1,4 @@
-import { GetAccountInformationResponse } from "alby-js-sdk/dist/types";
+import { GetAccountInformationResponse } from "@getalby/sdk/dist/types";
 import { useSettings } from "~/app/context/SettingsContext";
 import api from "~/common/lib/api";
 import { BrowserType, Theme } from "~/types";

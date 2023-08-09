@@ -1,5 +1,5 @@
-import { auth, Client } from "alby-js-sdk";
-import { RequestOptions } from "alby-js-sdk/dist/request";
+import { auth, Client } from "@getalby/sdk";
+import { RequestOptions } from "@getalby/sdk/dist/request";
 import {
   CreateSwapParams,
   CreateSwapResponse,
@@ -7,7 +7,7 @@ import {
   Invoice,
   SwapInfoResponse,
   Token,
-} from "alby-js-sdk/dist/types";
+} from "@getalby/sdk/dist/types";
 import browser from "webextension-polyfill";
 import { decryptData, encryptData } from "~/common/lib/crypto";
 import { Account, OAuthToken } from "~/types";

@@ -1,4 +1,4 @@
-import { CreateSwapParams } from "alby-js-sdk/dist/types";
+import { CreateSwapParams } from "@getalby/sdk/dist/types";
 import { PaymentRequestObject } from "bolt11";
 import { Runtime } from "webextension-polyfill";
 import { ACCOUNT_CURRENCIES, CURRENCIES, TIPS } from "~/common/constants";
