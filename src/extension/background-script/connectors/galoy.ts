@@ -1,8 +1,3 @@
-import fetchAdapter from "@vespaiach/axios-fetch-adapter";
-import axios, { AxiosRequestConfig } from "axios";
-import lightningPayReq from "bolt11";
-import { Account } from "~/types";
-
 import Connector, {
   CheckPaymentArgs,
   CheckPaymentResponse,
@@ -18,6 +13,10 @@ import Connector, {
   SignMessageArgs,
   SignMessageResponse,
 } from "./connector.interface";
+import fetchAdapter from "@vespaiach/axios-fetch-adapter";
+import axios, { AxiosRequestConfig } from "axios";
+import lightningPayReq from "bolt11";
+import { Account } from "~/types";
 
 interface Config {
   walletId: string;
@@ -43,7 +42,13 @@ class Galoy implements Connector {
   }
 
   get supportedMethods() {
-    return ["getInfo", "makeInvoice", "sendPayment", "signMessage"];
+    return [
+      "getInfo",
+      "makeInvoice",
+      "sendPayment",
+      "signMessage",
+      "getBalance",
+    ];
   }
 
   async getInfo(): Promise<GetInfoResponse> {
@@ -340,7 +345,6 @@ class Galoy implements Connector {
       responseType: "json",
       headers: {
         Accept: "application/json",
-        "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
         Authorization: `Bearer ${this.config.accessToken}`,
       },

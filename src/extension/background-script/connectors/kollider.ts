@@ -1,13 +1,3 @@
-import fetchAdapter from "@vespaiach/axios-fetch-adapter";
-import type { AxiosResponse } from "axios";
-import axios, { AxiosRequestConfig, Method } from "axios";
-import Hex from "crypto-js/enc-hex";
-import sha256 from "crypto-js/sha256";
-import { ACCOUNT_CURRENCIES } from "~/common/constants";
-import { getBTCToSats, getSatsToBTC } from "~/common/utils/currencyConvert";
-import HashKeySigner from "~/common/utils/signer";
-import { Account } from "~/types";
-
 import Connector, {
   CheckPaymentArgs,
   CheckPaymentResponse,
@@ -24,6 +14,15 @@ import Connector, {
   SignMessageArgs,
   SignMessageResponse,
 } from "./connector.interface";
+import fetchAdapter from "@vespaiach/axios-fetch-adapter";
+import type { AxiosResponse } from "axios";
+import axios, { AxiosRequestConfig, Method } from "axios";
+import Hex from "crypto-js/enc-hex";
+import sha256 from "crypto-js/sha256";
+import { ACCOUNT_CURRENCIES } from "~/common/constants";
+import { getBTCToSats, getSatsToBTC } from "~/common/utils/currencyConvert";
+import HashKeySigner from "~/common/utils/signer";
+import { Account } from "~/types";
 
 const API_URL = "https://kollider.me/api";
 
@@ -45,7 +44,6 @@ interface KolliderAccount {
 
 const defaultHeaders = {
   Accept: "application/json",
-  "Access-Control-Allow-Origin": "*",
   "Content-Type": "application/json",
 };
 

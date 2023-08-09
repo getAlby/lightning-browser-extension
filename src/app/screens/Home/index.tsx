@@ -1,16 +1,16 @@
-import { FC, useState, useEffect, useCallback } from "react";
+import AllowanceView from "./AllowanceView";
+import DefaultView from "./DefaultView";
+import { FC, useCallback, useEffect, useState } from "react";
 import browser from "webextension-polyfill";
 import api from "~/common/lib/api";
 import type { Allowance, Battery } from "~/types";
-
-import AllowanceView from "./AllowanceView";
-import DefaultView from "./DefaultView";
 
 const Home: FC = () => {
   const [allowance, setAllowance] = useState<Allowance | null>(null);
   const [currentUrl, setCurrentUrl] = useState<URL | null>(null);
   const [loadingAllowance, setLoadingAllowance] = useState(true);
   const [lnData, setLnData] = useState<Battery[]>([]);
+  const [renderDefaultView, setRenderDefaultView] = useState(false);
 
   const loadAllowance = useCallback(async () => {
     try {
@@ -84,19 +84,25 @@ const Home: FC = () => {
     return null;
   }
 
-  if (allowance) {
+  if (allowance && !renderDefaultView) {
     return (
       <AllowanceView
         allowance={allowance}
         lnDataFromCurrentTab={lnData}
-        onGoBack={() => setAllowance(null)}
+        onGoBack={() => setRenderDefaultView(true)}
         onEditComplete={loadAllowance}
         onDeleteComplete={() => setAllowance(null)}
       />
     );
   }
 
-  return <DefaultView currentUrl={currentUrl} lnDataFromCurrentTab={lnData} />;
+  return (
+    <DefaultView
+      renderPublisherWidget={!allowance}
+      currentUrl={currentUrl}
+      lnDataFromCurrentTab={lnData}
+    />
+  );
 };
 
 export default Home;

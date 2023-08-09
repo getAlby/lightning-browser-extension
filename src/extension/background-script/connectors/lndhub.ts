@@ -1,15 +1,3 @@
-import fetchAdapter from "@vespaiach/axios-fetch-adapter";
-import type { AxiosResponse } from "axios";
-import axios, { AxiosRequestConfig, Method } from "axios";
-import lightningPayReq from "bolt11";
-import Base64 from "crypto-js/enc-base64";
-import Hex from "crypto-js/enc-hex";
-import hmacSHA256 from "crypto-js/hmac-sha256";
-import sha256 from "crypto-js/sha256";
-import utils from "~/common/lib/utils";
-import HashKeySigner from "~/common/utils/signer";
-import { Account } from "~/types";
-
 import state from "../state";
 import Connector, {
   CheckPaymentArgs,
@@ -27,6 +15,17 @@ import Connector, {
   SignMessageArgs,
   SignMessageResponse,
 } from "./connector.interface";
+import fetchAdapter from "@vespaiach/axios-fetch-adapter";
+import type { AxiosResponse } from "axios";
+import axios, { AxiosRequestConfig, Method } from "axios";
+import lightningPayReq from "bolt11";
+import Base64 from "crypto-js/enc-base64";
+import Hex from "crypto-js/enc-hex";
+import hmacSHA256 from "crypto-js/hmac-sha256";
+import sha256 from "crypto-js/sha256";
+import utils from "~/common/lib/utils";
+import HashKeySigner from "~/common/utils/signer";
+import { Account } from "~/types";
 
 interface Config {
   login: string;
@@ -39,7 +38,6 @@ const HMAC_VERIFY_HEADER_KEY =
 
 const defaultHeaders = {
   Accept: "application/json",
-  "Access-Control-Allow-Origin": "*",
   "Content-Type": "application/json",
   "X-User-Agent": "alby-extension",
 };
@@ -67,7 +65,14 @@ export default class LndHub implements Connector {
   }
 
   get supportedMethods() {
-    return ["getInfo", "keysend", "makeInvoice", "sendPayment", "signMessage"];
+    return [
+      "getInfo",
+      "keysend",
+      "makeInvoice",
+      "sendPayment",
+      "signMessage",
+      "getBalance",
+    ];
   }
 
   // not yet implemented

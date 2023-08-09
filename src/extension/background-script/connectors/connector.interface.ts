@@ -128,3 +128,7 @@ export default interface Connector {
   ): Promise<{ data: unknown }>;
   getOAuthToken?(): OAuthToken | undefined;
 }
+
+export function flattenRequestMethods(methods: string[]) {
+  return methods.map((method) => `request.${method}`);
+}

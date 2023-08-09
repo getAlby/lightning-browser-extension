@@ -1,3 +1,4 @@
+import logo from "/static/assets/icons/kollider.png";
 import Button from "@components/Button";
 import ConnectorForm from "@components/ConnectorForm";
 import ConnectorPath from "@components/ConnectorPath";
@@ -12,8 +13,6 @@ import { toast } from "react-toastify";
 import Alert from "~/app/components/Alert";
 import { ACCOUNT_CURRENCIES } from "~/common/constants";
 import msg from "~/common/lib/msg";
-
-import logo from "/static/assets/icons/kollider.png";
 
 type Currency = {
   value: ACCOUNT_CURRENCIES;
@@ -79,7 +78,6 @@ export default function ConnectKollidier({ variant }: Props) {
       if (variant === "create") {
         const headers = new Headers();
         headers.append("Accept", "application/json");
-        headers.append("Access-Control-Allow-Origin", "*");
         headers.append("Content-Type", "application/json");
         headers.append("X-User-Agent", "alby-extension");
         const body = JSON.stringify({

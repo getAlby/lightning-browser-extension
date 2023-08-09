@@ -1,20 +1,10 @@
-import LNC from "@lightninglabs/lnc-web";
-import Base64 from "crypto-js/enc-base64";
-import Hex from "crypto-js/enc-hex";
-import UTF8 from "crypto-js/enc-utf8";
-import WordArray from "crypto-js/lib-typedarrays";
-import SHA256 from "crypto-js/sha256";
-import snakeCase from "lodash.snakecase";
-import { encryptData } from "~/common/lib/crypto";
-import utils from "~/common/lib/utils";
-import { Account } from "~/types";
-
 import state from "../state";
 import Connector, {
   CheckPaymentArgs,
   CheckPaymentResponse,
   ConnectorInvoice,
   ConnectPeerResponse,
+  flattenRequestMethods,
   GetBalanceResponse,
   GetInfoResponse,
   GetInvoicesResponse,
@@ -26,6 +16,16 @@ import Connector, {
   SignMessageArgs,
   SignMessageResponse,
 } from "./connector.interface";
+import LNC from "@lightninglabs/lnc-web";
+import Base64 from "crypto-js/enc-base64";
+import Hex from "crypto-js/enc-hex";
+import UTF8 from "crypto-js/enc-utf8";
+import WordArray from "crypto-js/lib-typedarrays";
+import SHA256 from "crypto-js/sha256";
+import snakeCase from "lodash.snakecase";
+import { encryptData } from "~/common/lib/crypto";
+import utils from "~/common/lib/utils";
+import { Account } from "~/types";
 
 interface Config {
   pairingPhrase: string;
@@ -188,7 +188,15 @@ class Lnc implements Connector {
   }
 
   get supportedMethods() {
-    return Object.keys(methods);
+    return [
+      "getInfo",
+      "keysend",
+      "makeInvoice",
+      "sendPayment",
+      "signMessage",
+      "getBalance",
+      ...flattenRequestMethods(Object.keys(methods)),
+    ];
   }
 
   async requestMethod(

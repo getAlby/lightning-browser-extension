@@ -17,7 +17,7 @@ export function postMessage<T>(
         scope: scope,
         args,
       },
-      "*" // TODO use origin
+      window.location.origin
     );
 
     function handleWindowMessage(messageEvent: MessageEvent) {

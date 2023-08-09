@@ -1,7 +1,6 @@
-import browser from "webextension-polyfill";
-
 import getOriginData from "./originData";
 import shouldInject from "./shouldInject";
+import browser from "webextension-polyfill";
 
 // Alby calls that can be executed from the AlbyProvider.
 // Update when new calls are added
@@ -97,7 +96,7 @@ function postMessage(ev, response) {
       data: response,
       scope: "alby",
     },
-    "*"
+    window.location.origin
   );
 }
 

@@ -1,15 +1,10 @@
-import Hex from "crypto-js/enc-hex";
-import UTF8 from "crypto-js/enc-utf8";
-import LnMessage from "lnmessage";
-import { v4 as uuidv4 } from "uuid";
-import { Account } from "~/types";
-
 import Connector, {
   CheckPaymentArgs,
   CheckPaymentResponse,
   ConnectorInvoice,
   ConnectPeerArgs,
   ConnectPeerResponse,
+  flattenRequestMethods,
   GetBalanceResponse,
   GetInfoResponse,
   GetInvoicesResponse,
@@ -21,6 +16,11 @@ import Connector, {
   SignMessageArgs,
   SignMessageResponse,
 } from "./connector.interface";
+import Hex from "crypto-js/enc-hex";
+import UTF8 from "crypto-js/enc-utf8";
+import LnMessage from "lnmessage";
+import { v4 as uuidv4 } from "uuid";
+import { Account } from "~/types";
 
 interface Config {
   host: string;
@@ -142,7 +142,15 @@ export default class Commando implements Connector {
   }
 
   get supportedMethods() {
-    return supportedMethods;
+    return [
+      "getInfo",
+      "keysend",
+      "makeInvoice",
+      "sendPayment",
+      "signMessage",
+      "getBalance",
+      ...flattenRequestMethods(supportedMethods),
+    ];
   }
 
   async requestMethod(

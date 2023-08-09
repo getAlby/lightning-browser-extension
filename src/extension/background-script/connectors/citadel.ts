@@ -1,5 +1,3 @@
-import { Account } from "~/types";
-
 import Connector, {
   CheckPaymentArgs,
   CheckPaymentResponse,
@@ -15,6 +13,7 @@ import Connector, {
   SignMessageArgs,
   SignMessageResponse,
 } from "./connector.interface";
+import { Account } from "~/types";
 
 interface Config {
   url: string;
@@ -53,7 +52,13 @@ class CitadelConnector implements Connector {
   }
 
   get supportedMethods() {
-    return ["makeInvoice", "sendPayment", "signMessage", "getInfo"];
+    return [
+      "makeInvoice",
+      "sendPayment",
+      "signMessage",
+      "getInfo",
+      "getBalance",
+    ];
   }
 
   async getInfo(): Promise<GetInfoResponse> {

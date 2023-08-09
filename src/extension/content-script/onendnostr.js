@@ -1,7 +1,6 @@
-import browser from "webextension-polyfill";
-
 import getOriginData from "./originData";
 import shouldInject from "./shouldInject";
+import browser from "webextension-polyfill";
 
 // Nostr calls that can be executed from the Nostr Provider.
 // Update when new calls are added
@@ -33,7 +32,10 @@ async function init() {
   browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
     // forward account changed messaged to inpage script
     if (request.action === "accountChanged") {
-      window.postMessage({ action: "accountChanged", scope: "nostr" }, "*");
+      window.postMessage(
+        { action: "accountChanged", scope: "nostr" },
+        window.location.origin
+      );
     }
   });
 
@@ -119,7 +121,7 @@ function postMessage(ev, response) {
       data: response,
       scope: "nostr",
     },
-    "*"
+    window.location.origin
   );
 }
 

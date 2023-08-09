@@ -1,3 +1,5 @@
+import galoyBitcoinBeach from "/static/assets/icons/galoy_bitcoin_beach.png";
+import galoyBitcoinJungle from "/static/assets/icons/galoy_bitcoin_jungle.png";
 import ConnectorForm from "@components/ConnectorForm";
 import Input from "@components/form/Input";
 import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
@@ -8,9 +10,6 @@ import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import msg from "~/common/lib/msg";
-
-import galoyBitcoinBeach from "/static/assets/icons/galoy_bitcoin_beach.png";
-import galoyBitcoinJungle from "/static/assets/icons/galoy_bitcoin_jungle.png";
 
 export const galoyUrls = {
   "galoy-bitcoin-beach": {
@@ -35,7 +34,6 @@ export const galoyUrls = {
 
 const defaultHeaders = {
   Accept: "application/json",
-  "Access-Control-Allow-Origin": "*",
   "Content-Type": "application/json",
 };
 

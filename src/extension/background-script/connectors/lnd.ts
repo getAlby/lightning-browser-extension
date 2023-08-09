@@ -1,17 +1,10 @@
-import Base64 from "crypto-js/enc-base64";
-import Hex from "crypto-js/enc-hex";
-import UTF8 from "crypto-js/enc-utf8";
-import WordArray from "crypto-js/lib-typedarrays";
-import SHA256 from "crypto-js/sha256";
-import utils from "~/common/lib/utils";
-import { Account } from "~/types";
-
 import Connector, {
   CheckPaymentArgs,
   CheckPaymentResponse,
   ConnectorInvoice,
   ConnectPeerArgs,
   ConnectPeerResponse,
+  flattenRequestMethods,
   GetBalanceResponse,
   GetInfoResponse,
   GetInvoicesResponse,
@@ -23,6 +16,13 @@ import Connector, {
   SignMessageArgs,
   SignMessageResponse,
 } from "./connector.interface";
+import Base64 from "crypto-js/enc-base64";
+import Hex from "crypto-js/enc-hex";
+import UTF8 from "crypto-js/enc-utf8";
+import WordArray from "crypto-js/lib-typedarrays";
+import SHA256 from "crypto-js/sha256";
+import utils from "~/common/lib/utils";
+import { Account } from "~/types";
 
 interface Config {
   macaroon: string;
@@ -161,7 +161,15 @@ class Lnd implements Connector {
   }
 
   get supportedMethods() {
-    return Object.keys(methods);
+    return [
+      "getInfo",
+      "keysend",
+      "makeInvoice",
+      "sendPayment",
+      "signMessage",
+      "getBalance",
+      ...flattenRequestMethods(Object.keys(methods)),
+    ];
   }
 
   async requestMethod(
@@ -365,19 +373,17 @@ class Lnd implements Connector {
   };
 
   getChannelsBalance = () => {
-    return this.request<{ balance: number; pending_open_balance: number }>(
+    return this.request<{ balance: string }>(
       "GET",
       "/v1/balance/channels",
       undefined,
       {
-        pending_open_balance: "0",
-        balance: "0",
+        balance: 0,
       }
     ).then((data) => {
       return {
         data: {
-          balance: data.balance,
-          pending_open_balance: data.pending_open_balance,
+          balance: +data.balance,
         },
       };
     });

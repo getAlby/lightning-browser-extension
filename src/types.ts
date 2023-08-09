@@ -1,3 +1,4 @@
+import { Event } from "./extension/providers/nostr/types";
 import { CreateSwapParams } from "@getalby/sdk/dist/types";
 import { PaymentRequestObject } from "bolt11";
 import { Runtime } from "webextension-polyfill";
@@ -8,8 +9,6 @@ import {
   SendPaymentResponse,
   WebLNNode,
 } from "~/extension/background-script/connectors/connector.interface";
-
-import { Event } from "./extension/providers/nostr/types";
 
 export type ConnectorType = keyof typeof connectors;
 
@@ -540,6 +539,10 @@ export interface MessageDecryptGet extends MessageDefault {
     ciphertext: string;
   };
   action: "decrypt";
+}
+
+export interface MessageBalanceGet extends MessageDefault {
+  action: "getBalance";
 }
 
 export interface MessageGetAddress extends MessageDefault {
