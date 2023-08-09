@@ -93,8 +93,9 @@ function NostrSettings() {
 
     if (
       currentPrivateKey &&
-      prompt(t("nostr.private_key.warning"))?.toLowerCase() !==
-        account?.name?.toLowerCase()
+      prompt(
+        t("nostr.private_key.warning", { name: account?.name })
+      )?.toLowerCase() !== account?.name?.toLowerCase()
     ) {
       toast.error(t("nostr.private_key.failed_to_remove"));
       return;
