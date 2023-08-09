@@ -1009,9 +1009,6 @@
         "incoming": "Incoming"
       }
     },
-    "confirm_or_cancel": {
-      "only_trusted": "Only connect with sites you trust."
-    },
     "budget_control": {
       "remember": {
         "label": "Remember and set a budget",
