@@ -835,6 +835,9 @@
       "total": {
         "label": "Total"
       },
+      "total_fee": {
+        "label": "Fee"
+      },
       "view_on_explorer": "View on mempool explorer",
       "swaps_provided_by": "Swaps are provided by <0>deezy.io</0>",
       "time_estimate": "Transactions usually arrive within 10-30 min."

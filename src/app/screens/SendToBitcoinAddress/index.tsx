@@ -48,6 +48,8 @@ function SendToBitcoinAddress() {
   const [step, setStep] = useState("amount");
   const [loading, setLoading] = useState(false);
   const [fiatAmount, setFiatAmount] = useState("");
+  const [predictedTotalFee, setPredictedTotalFee] = useState("0");
+  const [predictedTotalFeeFiat, setPredictedTotalFeeFiat] = useState("0");
 
   const [serviceFeePercentage, setServiceFeePercentage] = useState(0);
   const [feesLoading, setFeesLoading] = useState(false);
@@ -84,7 +86,6 @@ function SendToBitcoinAddress() {
 
         setServiceFeePercentage(result.service_fee_percentage);
         setSatsPerVbyte(result.sats_per_vbyte);
-
         setNetworkFee(result.network_fee);
         if (showFiat) {
           setNetworkFeeFiat(await getFormattedFiat(result.network_fee));
@@ -97,6 +98,30 @@ function SendToBitcoinAddress() {
       }
     })();
   }, [getFormattedFiat, showFiat]);
+
+  useEffect(() => {
+    if (!feesLoading) {
+      try {
+        const predictedTotalFee = Math.floor(
+          parseInt(amountSat || "0") * (serviceFeePercentage / 100) + networkFee
+        );
+        setPredictedTotalFee(getFormattedSats(predictedTotalFee));
+        (async () => {
+          setPredictedTotalFeeFiat(await getFormattedFiat(predictedTotalFee));
+        })();
+      } catch (error) {
+        setPredictedTotalFee("0");
+        setPredictedTotalFeeFiat("0");
+      }
+    }
+  }, [
+    getFormattedFiat,
+    amountSat,
+    feesLoading,
+    getFormattedSats,
+    serviceFeePercentage,
+    networkFee,
+  ]);
 
   async function confirm() {
     if (!swapData) return;
@@ -236,25 +261,15 @@ function SendToBitcoinAddress() {
                   />
                 </Alert>
                 <div>
-                  <Dt>{t("service_fee.label")}</Dt>
+                  <Dt>{t("total_fee.label")}</Dt>
                   <Dd>
                     {feesLoading ? (
                       <Skeleton className="w-8" />
                     ) : (
-                      `${serviceFeePercentage} %`
-                    )}
-                  </Dd>
-                </div>
-                <div>
-                  <Dt>{t("network_fee.label")}</Dt>
-                  <Dd>
-                    {feesLoading ? (
-                      <Skeleton className="w-12" />
-                    ) : (
                       <div className="flex justify-between">
-                        <span>~{getFormattedSats(networkFee)}</span>
+                        <span>~{predictedTotalFee}</span>
                         <span className="text-sm text-gray-500 dark:text-neutral-500">
-                          {networkFeeFiat}
+                          {predictedTotalFeeFiat}
                         </span>
                       </div>
                     )}
