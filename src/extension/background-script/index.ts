@@ -86,6 +86,13 @@ const handleInstalled = (details: { reason: string }) => {
     console.info("Alby was recently updated");
     isRecentlyUpdated = true;
   }
+
+  browser.contextMenus.create({
+    id: "test",
+    title: "Open on nostr",
+    type: "normal",
+    contexts: ["selection"],
+  });
 };
 
 // listen to calls from the content script and calls the actions through the router
@@ -138,7 +145,15 @@ browser.tabs.onUpdated.addListener(extractLightningData);
 // When we subscribe to that event asynchronously in the init() function it is too late and we miss the event.
 browser.runtime.onInstalled.addListener(handleInstalled);
 
-async function init() {
+browser.contextMenus.onClicked.addListener(function (info) {
+  // TODO check if npub
+  browser.tabs.create({
+    active: true,
+    url: `https://snort.social/${info.selectionText}`,
+  });
+});
+
+async function init(): Promise<void> {
   console.info("Loading background script");
 
   await state.getState().init();
