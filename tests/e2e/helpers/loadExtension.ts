@@ -228,6 +228,8 @@ export async function loginToExistingAlbyAccount(page: Page) {
     retries++;
   }
   if (retries >= MAX_RETRIES) {
+    console.info("oauthPage", oauthPage.content());
+    console.info("page", page.content());
     throw new Error("Did not navigate to pin extension page");
   }
 
