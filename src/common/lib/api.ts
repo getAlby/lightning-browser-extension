@@ -205,7 +205,7 @@ const getMnemonic = (id: string): Promise<string> =>
 
 const generateMnemonic = (): Promise<string> => msg.request("generateMnemonic");
 
-// TODO: consider adding removeMnemonic function, make mnemonic a string here
+// TODO: consider adding removeMnemonic function, make mnemonic a string here rather than optional (null = delete current mnemonic)
 const setMnemonic = (id: string, mnemonic: string | null): Promise<void> =>
   msg.request("setMnemonic", {
     id,
@@ -213,7 +213,6 @@ const setMnemonic = (id: string, mnemonic: string | null): Promise<void> =>
   });
 
 const getSwapInfo = (): Promise<SwapInfoResponse> => msg.request("getSwapInfo");
-// TODO: consider adding removeMnemonic function, make mnemonic a string here
 const createSwap = (params: CreateSwapParams): Promise<CreateSwapResponse> =>
   msg.request("createSwap", params);
 
