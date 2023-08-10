@@ -215,7 +215,7 @@ export async function loginToExistingAlbyAccount(page: Page) {
   );
   oauthConfirmAuthButton.click();
 
-  let retries = 0;
+  let retries = 1;
   const MAX_RETRIES = 20;
   while (retries < MAX_RETRIES) {
     console.info(
