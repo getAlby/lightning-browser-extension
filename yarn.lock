@@ -610,10 +610,10 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.44.0.tgz#961a5903c74139390478bdc808bcde3fc45ab7af"
   integrity sha512-Ag+9YM4ocKQx9AarydN0KY2j0ErMHNIocPDrVo8zAE44xLTjEtz81OdR68/cydGtk6m6jDb5Za3r2useMzYmSw==
 
-"@getalby/sdk@^2.2.0":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@getalby/sdk/-/sdk-2.2.0.tgz#1a3a4370dfc526a8416b57e79953435c0c430a1a"
-  integrity sha512-oVrNoby8oTtPrSWS4u7dbhTQsT0MA8RcpcA0kH7DKWqaeMhR2XmmHR/bg4C8wnLxCWvECIREC3GNsh4g9eDBsw==
+"@getalby/sdk@^2.2.1":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@getalby/sdk/-/sdk-2.2.1.tgz#0bdb964c892a697b252b107f7448875cdb6c38fa"
+  integrity sha512-IlSg7LKiq85Y6wTkPq2PwvLGm346et5RIVNmaw99uae/eak9nW9r5s1ixsWOvI4iz32H90oIHXL9httzPvO4+Q==
   dependencies:
     crypto-js "^4.1.1"
     nostr-tools "1.13.1"

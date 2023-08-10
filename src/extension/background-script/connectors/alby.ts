@@ -1,3 +1,16 @@
+import { auth, Client } from "@getalby/sdk";
+import {
+  CreateSwapParams,
+  CreateSwapResponse,
+  GetAccountInformationResponse,
+  Invoice,
+  RequestOptions,
+  SwapInfoResponse,
+  Token,
+} from "@getalby/sdk/dist/types";
+import browser from "webextension-polyfill";
+import { decryptData, encryptData } from "~/common/lib/crypto";
+import { Account, OAuthToken } from "~/types";
 import state from "../state";
 import Connector, {
   CheckPaymentArgs,
@@ -16,19 +29,6 @@ import Connector, {
   SignMessageResponse,
   WebLNNode,
 } from "./connector.interface";
-import { auth, Client } from "@getalby/sdk";
-import { RequestOptions } from "@getalby/sdk/dist/request";
-import {
-  CreateSwapParams,
-  CreateSwapResponse,
-  GetAccountInformationResponse,
-  Invoice,
-  SwapInfoResponse,
-  Token,
-} from "@getalby/sdk/dist/types";
-import browser from "webextension-polyfill";
-import { decryptData, encryptData } from "~/common/lib/crypto";
-import { Account, OAuthToken } from "~/types";
 
 interface Config {
   login: string;
