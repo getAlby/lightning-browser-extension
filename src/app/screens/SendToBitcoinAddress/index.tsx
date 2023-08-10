@@ -202,7 +202,9 @@ function SendToBitcoinAddress() {
               <div className="flex flex-col gap-4 mb-4">
                 <div>
                   <Dt>{t("recipient.label")}</Dt>
-                  <Dd>{bitcoinAddress}</Dd>
+                  <Dd>
+                    <BitcoinAddress address={bitcoinAddress} />
+                  </Dd>
                 </div>
                 <DualCurrencyField
                   id="amount"
@@ -214,9 +216,8 @@ function SendToBitcoinAddress() {
                   fiatValue={fiatAmount}
                   rangeExceeded={rangeExceeded}
                   amountExceeded={amountExceeded}
-                  hint={`${tCommon("balance")}: ${
-                    auth?.balancesDecorated?.accountBalance
-                  }`}
+                  hint={`${tCommon("balance")}: ${auth?.balancesDecorated
+                    ?.accountBalance}`}
                 />
                 <Alert type="info">
                   <InfoIcon className="w-6 h-6 float-left rounded-full border border-1 border-blue-700  dark:border-blue-300 mr-2 " />
@@ -281,7 +282,9 @@ function SendToBitcoinAddress() {
               <div className="flex flex-col gap-4 mb-4">
                 <div>
                   <Dt>{t("recipient.label")}</Dt>
-                  <Dd>{swapData.address}</Dd>
+                  <Dd>
+                    <BitcoinAddress address={swapData.address} />
+                  </Dd>
                 </div>
                 <div>
                   <Dt>{tCommon("amount")}</Dt>
@@ -377,3 +380,17 @@ function SendToBitcoinAddress() {
 }
 
 export default SendToBitcoinAddress;
+
+type BitcoinAddressProps = {
+  address: string;
+};
+
+function BitcoinAddress({ address }: BitcoinAddressProps) {
+  return (
+    <span title={address}>
+      {address.substring(0, 18) +
+        "..." +
+        address.substring(address.length - 18)}
+    </span>
+  );
+}
