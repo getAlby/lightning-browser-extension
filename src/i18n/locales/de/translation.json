@@ -1229,6 +1229,9 @@
     "nostr": {
       "getpublickey": "Lese deinen öffentlichen Schlüssel",
       "nip04decrypt": "Daten entschlüsseln",
+      "nip04encrypt": "Daten verschlüsseln",
+      "nip44decrypt": "Daten entschlüsseln",
+      "nip44encrypt": "Daten verschlüsseln",
       "signmessage": "Unterschreibe deine Nachricht mit deinem Schlüssel"
     },
     "lnc": {

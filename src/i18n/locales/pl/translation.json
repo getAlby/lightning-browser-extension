@@ -827,6 +827,9 @@
     "nostr": {
       "getpublickey": "Czytanie Twojego klucza publicznego.",
       "nip04decrypt": "Deszyfrowanie danych.",
+      "nip04encrypt": "Szyfrowanie danych.",
+      "nip44decrypt": "Deszyfrowanie danych.",
+      "nip44encrypt": "Szyfrowanie danych.",
       "signmessage": "Podpisywanie wiadomości Twoim kluczem."
     },
     "commando": {

@@ -18,7 +18,7 @@ const carol = {
   publicKey: "a8c7d70a7d2e2826ce519a0a490fb953464c9d130235c321282983cd73be333f",
 };
 
-describe("nostr", () => {
+describe("nostr.nip04", () => {
   test("encrypt & decrypt", async () => {
     const aliceNostr = new Nostr(alice.privateKey);
 
@@ -43,6 +43,39 @@ describe("nostr", () => {
     let decrypted;
     try {
       decrypted = await carolNostr.decrypt(alice.publicKey, encrypted);
+    } catch (e) {
+      decrypted = "error decrypting message";
+    }
+
+    expect(decrypted).not.toMatch(message);
+  });
+});
+
+describe("nostr.nip44", () => {
+  test("encrypt & decrypt", async () => {
+    const aliceNostr = new Nostr(alice.privateKey);
+
+    const message = "Secret message that is sent from Alice to Bob";
+    const encrypted = aliceNostr.nip44Encrypt(bob.publicKey, message);
+
+    const bobNostr = new Nostr(bob.privateKey);
+
+    const decrypted = await bobNostr.nip44Decrypt(alice.publicKey, encrypted);
+
+    expect(decrypted).toMatch(message);
+  });
+
+  test("Carol can't decrypt Alice's message for Bob", async () => {
+    const aliceNostr = new Nostr(alice.privateKey);
+
+    const message = "Secret message that is sent from Alice to Bob";
+    const encrypted = aliceNostr.nip44Encrypt(bob.publicKey, message);
+
+    const carolNostr = new Nostr(carol.privateKey);
+
+    let decrypted;
+    try {
+      decrypted = await carolNostr.nip44Decrypt(alice.publicKey, encrypted);
     } catch (e) {
       decrypted = "error decrypting message";
     }
