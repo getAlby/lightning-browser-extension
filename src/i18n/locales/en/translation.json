@@ -1166,17 +1166,20 @@
     "webln": {
       "getbalance": "Read the balance of your account"
     },
-    "nostr": {
-      "getpublickey": "Read your public key",
-      "signmessage": "Sign message with your key",
-      "nip04decrypt": "Decrypt data"
-    },
     "bitcoin": {
       "getaddress": "Read your Bitcoin receive address"
     },
     "liquid": {
       "getaddress": "Read your Liquid receive address",
       "signschnorr": "Sign message with your key"
+    },
+    "nostr": {
+      "getpublickey": "Read your public key.",
+      "nip04encrypt": "Encrypt data.",
+      "nip04decrypt": "Decrypt data.",
+      "nip44encrypt": "Encrypt data.",
+      "nip44decrypt": "Decrypt data.",
+      "signmessage": "Sign message with your key."
     },
     "commando": {
       "bkpr-listbalances": "List of all current and historical account balances",
