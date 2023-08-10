@@ -14,6 +14,7 @@ const getSwapInfo = async (message: MessageGetSwapInfo) => {
       data,
     };
   } catch (e) {
+    console.error(e);
     return {
       error: "getSwapInfo failed: " + e,
     };

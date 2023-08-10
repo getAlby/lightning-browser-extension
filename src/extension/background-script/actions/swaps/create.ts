@@ -14,6 +14,7 @@ const createSwap = async (message: MessageCreateSwap) => {
       data,
     };
   } catch (e) {
+    console.error(e);
     return {
       error: "Creating swap failed: " + e,
     };
