@@ -64,9 +64,8 @@ function getUserData(username: string) {
     if (element && imageUrl) {
       return {
         element,
-        name: `${
-          profileLinks[1].querySelector("span")?.textContent
-        } (@${username}) / Twitter`,
+        name: `${profileLinks[1].querySelector("span")
+          ?.textContent} (@${username}) / Twitter`,
         imageUrl,
       };
     }

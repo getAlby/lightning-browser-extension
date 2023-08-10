@@ -1,12 +1,14 @@
 import lightningPayReq from "bolt11";
 import utils from "~/common/lib/utils";
-import { Message } from "~/types";
+import { getHostFromSender } from "~/common/utils/helpers";
+import { Message, Sender } from "~/types";
 
 import db from "../../db";
 import sendPayment from "../ln/sendPayment";
 
-const sendPaymentOrPrompt = async (message: Message) => {
-  if (!("host" in message.origin)) return;
+const sendPaymentOrPrompt = async (message: Message, sender: Sender) => {
+  const host = getHostFromSender(sender);
+  if (!host) return;
 
   const paymentRequest = message.args.paymentRequest;
   if (typeof paymentRequest !== "string") {
@@ -16,12 +18,7 @@ const sendPaymentOrPrompt = async (message: Message) => {
   }
 
   const paymentRequestDetails = lightningPayReq.decode(paymentRequest);
-  if (
-    await checkAllowance(
-      message.origin.host,
-      paymentRequestDetails.satoshis || 0
-    )
-  ) {
+  if (await checkAllowance(host, paymentRequestDetails.satoshis || 0)) {
     return sendPaymentWithAllowance(message);
   } else {
     return payWithPrompt(message);

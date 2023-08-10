@@ -1,6 +1,6 @@
 import lnurlLib from "~/common/lib/lnurl";
 import { isLNURLDetailsError } from "~/common/utils/typeHelpers";
-import type { MessageWebLnLnurl } from "~/types";
+import type { MessageWebLnLnurl, Sender } from "~/types";
 
 import auth from "./auth";
 import authOrPrompt from "./authOrPrompt";
@@ -12,7 +12,7 @@ import withdrawWithPrompt from "./withdraw";
   Main entry point for LNURL calls
   returns a messagable response: an object with either a `data` or with an `error`
 */
-async function lnurl(message: MessageWebLnLnurl) {
+async function lnurl(message: MessageWebLnLnurl, sender: Sender) {
   if (typeof message.args.lnurlEncoded !== "string") return;
   let lnurlDetails;
   try {
@@ -28,7 +28,7 @@ async function lnurl(message: MessageWebLnLnurl) {
     case "channelRequest":
       return channelRequestWithPrompt(message, lnurlDetails);
     case "login":
-      return authOrPrompt(message, lnurlDetails);
+      return authOrPrompt(message, sender, lnurlDetails);
     case "payRequest":
       return payWithPrompt(message, lnurlDetails);
     case "withdrawRequest":

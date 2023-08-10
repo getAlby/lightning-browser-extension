@@ -38,7 +38,7 @@ class Bitcoin {
       address,
       derivationPath,
       index,
-      publicKey: secp256k1.utils.bytesToHex(derivedKey.publicKey as Uint8Array),
+      publicKey: secp256k1.etc.bytesToHex(derivedKey.publicKey as Uint8Array),
     };
   }
 }

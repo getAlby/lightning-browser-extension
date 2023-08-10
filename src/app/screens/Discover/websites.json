@@ -12,31 +12,31 @@
         "title": "Music Side Project",
         "subtitle": "Music web player",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/musicsideproject_thumbnail.png",
-        "url": "https://musicsideproject.com/"
+        "url": "https://musicsideproject.com"
       },
       {
         "title": "Podverse",
         "subtitle": "Podcast player with bitcoin payments",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/podverse_thumbnail.png",
-        "url": "https://podverse.fm/"
+        "url": "https://podverse.fm"
       },
       {
         "title": "Stacker.News",
         "subtitle": "Lightning powered Bitcoin news site",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/stacker-news_thumbnail.png",
-        "url": "https://stacker.news/"
+        "url": "https://stacker.news"
       },
       {
         "title": "Wavlake",
         "subtitle": "Lightning powered music player",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/wavlake.png",
-        "url": "https://www.wavlake.com/"
+        "url": "https://www.wavlake.com"
       },
       {
         "title": "Y'alls",
         "subtitle": "Articles about the Lightning Network",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/yalls.png",
-        "url": "https://yalls.org/"
+        "url": "https://yalls.org"
       }
     ]
   },
@@ -53,19 +53,19 @@
         "title": "BTC Map",
         "subtitle": "Easily find places to spend sats anywhere on the planet",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/btcmap-logo.svg",
-        "url": "https://btcmap.org/"
+        "url": "https://btcmap.org"
       },
       {
         "title": "Coincards",
         "subtitle": "Shop for gift cards, mobile top-ups & prepaid vouchers",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/coincards.png",
-        "url": "https://coincards.com/"
+        "url": "https://coincards.com"
       },
       {
         "title": "Lightning Network Stores",
         "subtitle": "Collection of stores and websites accepting bitcoin",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/lightning-network-stores_thumbnail.png",
-        "url": "https://lightningnetworkstores.com/"
+        "url": "https://lightningnetworkstores.com"
       }
     ]
   },
@@ -76,13 +76,13 @@
         "title": "Astral",
         "subtitle": "A Twitter-like client with chat and one-click payments",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/astral_thumbnail.png",
-        "url": "https://astral.ninja/"
+        "url": "https://astral.ninja"
       },
       {
         "title": "Blogstack",
         "subtitle": "A Medium-like blog sharing website",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/blockstack-logo.png",
-        "url": "https://blogstack.io/"
+        "url": "https://blogstack.io"
       },
       {
         "title": "Blowater",
@@ -94,13 +94,13 @@
         "title": "Broadcstr",
         "subtitle": "Social media that you control and define the boundaries",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/broadcstr.png",
-        "url": "https://www.broadcstr.com/"
+        "url": "https://www.broadcstr.com"
       },
       {
         "title": "Habla",
         "subtitle": "Bitcoin news at your fingertips",
         "logo": "https://user-images.githubusercontent.com/100958893/237170839-a523ec2c-e9ad-43c9-a547-366e9de6f35b.png",
-        "url": "https://habla.news/"
+        "url": "https://habla.news"
       },
       {
         "title": "Iris",
@@ -109,16 +109,28 @@
         "url": "https://iris.to"
       },
       {
+        "title": "nostr.kiwi",
+        "subtitle": "Share notes and curate content in communities",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/nostrkiwi_thumbnail.png",
+        "url": "https://nostr.kiwi/"
+      },
+      {
         "title": "Notebin",
         "subtitle": "An online note sharing web client",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/notebin-logo.png",
-        "url": "https://notebin.org/"
+        "url": "https://notebin.org"
+      },
+      {
+        "title": "Pinstr",
+        "subtitle": "Social network for curating and sharing your interests",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/pinstr.png",
+        "url": "https://pinstr.app/"
       },
       {
         "title": "Primal",
         "subtitle": "Lightning-fast UI for Nostr",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/primat-logo_fire-409917ad.svg",
-        "url": "https://primal.net/"
+        "url": "https://primal.net"
       },
       {
         "title": "Snort",
@@ -130,7 +142,13 @@
         "title": "Satellite",
         "subtitle": "Explore the Nostr Universe",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/satellite-earth.png",
-        "url": "https://satellite.earth/"
+        "url": "https://satellite.earth"
+      },
+      {
+        "title": "zapddit",
+        "subtitle": "A reddit-style nostr client",
+        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/zapddit.svg",
+        "url": "https://zapddit.com"
       }
     ]
   },
@@ -141,13 +159,13 @@
         "title": "Kollider",
         "subtitle": "Instant Bitcoin derivatives trading",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/kollider_thumbnail.png",
-        "url": "https://kollider.xyz/"
+        "url": "https://kollider.xyz"
       },
       {
         "title": "LNMarkets",
         "subtitle": "Instant Bitcoin derivatives trading",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/lnmarkets.png",
-        "url": "https://lnmarkets.com/"
+        "url": "https://lnmarkets.com"
       }
     ]
   },
@@ -158,25 +176,25 @@
         "title": "LNBlackJack",
         "subtitle": "Play Blackjack with Bitcoin",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/lnblackjack_thumbnail.png",
-        "url": "https://www.lnblackjack.com/"
+        "url": "https://www.lnblackjack.com"
       },
       {
         "title": "Lightning Poker",
         "subtitle": "Play Poker with Bitcoin",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/lightning-poker_thumbnail.png",
-        "url": "https://lightning-poker.com/"
+        "url": "https://lightning-poker.com"
       },
       {
         "title": "Lightning Roulette",
         "subtitle": "Play Roulette with Bitcoin",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/lightning-roulette_thumbnail.svg",
-        "url": "https://lightning-roulette.com/"
+        "url": "https://lightning-roulette.com"
       },
       {
         "title": "LNflip",
         "subtitle": "Play coin flip matches against other players",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/lnflip_thumbnail.png",
-        "url": "https://www.lnflip.com/"
+        "url": "https://www.lnflip.com"
       }
     ]
   },
@@ -187,19 +205,19 @@
         "title": "Amboss",
         "subtitle": "Lightning Network node explorer",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/amboss-space_thumbnail.png",
-        "url": "https://amboss.space/"
+        "url": "https://amboss.space"
       },
       {
         "title": "channel.ninja",
         "subtitle": "Get recommended channel partners for your lightning node",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/channelninja.png",
-        "url": "https://channel.ninja/"
+        "url": "https://channel.ninja"
       },
       {
         "title": "LNnodeinsight.com",
         "subtitle": "Develop your own data-driven Lightning Network insight",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/lnnodeinsight_thumbnail.svg",
-        "url": "https://lnnodeinsight.com/"
+        "url": "https://lnnodeinsight.com"
       }
     ]
   },
@@ -210,49 +228,49 @@
         "title": "BOLT.FUN",
         "subtitle": "A fun place for builders to learn about lightning",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/bolt-fun_thumbnail.svg",
-        "url": "https://makers.bolt.fun/"
+        "url": "https://makers.bolt.fun"
       },
       {
         "title": "Geyser",
         "subtitle": "Crowdfunding projects with Bitcoin Lightning",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/geyser_thumbnail.png",
-        "url": "https://geyser.fund/"
+        "url": "https://geyser.fund"
       },
       {
         "title": "Lightsats",
         "subtitle": "Onboard people to bitcoin by sending them tips",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/lightsats_thumbnail.png",
-        "url": "https://lightsats.com/"
+        "url": "https://lightsats.com"
       },
       {
         "title": "LNCal.com",
         "subtitle": "Get booked and paid in Bitcoin",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/lncal_thumbnail.svg",
-        "url": "https://lncal.com/"
+        "url": "https://lncal.com"
       },
       {
         "title": "Sats for Likes",
         "subtitle": "Earn sats for accomplishing tasks",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/sats4likes.png",
-        "url": "https://www.sats4likes.com/"
+        "url": "https://www.sats4likes.com"
       },
       {
         "title": "Vida",
         "subtitle": "Earn sats anytime someone wants to connect and chat",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/vida_thumbnail.png",
-        "url": "https://vida.page/"
+        "url": "https://vida.page"
       },
       {
         "title": "Vida Live",
         "subtitle": "Host live podcasts and earn sats",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/vida_thumbnail.png",
-        "url": "https://vida.live/"
+        "url": "https://vida.live"
       },
       {
         "title": "WebLN Experiments",
         "subtitle": "A collection of Lightning web widgets",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/twentyuno.svg",
-        "url": "https://webln.twentyuno.net/"
+        "url": "https://webln.twentyuno.net"
       }
     ]
   }

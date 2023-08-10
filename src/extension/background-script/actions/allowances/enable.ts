@@ -1,17 +1,16 @@
-import { Runtime } from "webextension-polyfill";
 import utils from "~/common/lib/utils";
+import { getHostFromSender } from "~/common/utils/helpers";
 import db from "~/extension/background-script/db";
-import type { MessageAllowanceEnable } from "~/types";
+import type { MessageAllowanceEnable, Sender } from "~/types";
 
 import state from "../../state";
-import { setIcon, ExtensionIcon } from "../setup/setIcon";
+import { ExtensionIcon, setIcon } from "../setup/setIcon";
 
-const enable = async (
-  message: MessageAllowanceEnable,
-  sender: Runtime.MessageSender
-) => {
+const enable = async (message: MessageAllowanceEnable, sender: Sender) => {
+  const host = getHostFromSender(sender);
+  if (!host) return;
+
   const isUnlocked = await state.getState().isUnlocked();
-  const host = message.origin.host || message.args.host;
   const allowance = await db.allowances
     .where("host")
     .equalsIgnoreCase(host)

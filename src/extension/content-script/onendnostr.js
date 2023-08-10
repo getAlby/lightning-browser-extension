@@ -13,6 +13,9 @@ const nostrCalls = [
   "nostr/enable",
   "nostr/encryptOrPrompt",
   "nostr/decryptOrPrompt",
+  "nostr/on",
+  "nostr/off",
+  "nostr/emit",
 ];
 // calls that can be executed when nostr is not enabled for the current content page
 const disabledCalls = ["nostr/enable"];
@@ -26,6 +29,16 @@ async function init() {
   if (!inject) {
     return;
   }
+
+  browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    // forward account changed messaged to inpage script
+    if (request.action === "accountChanged") {
+      window.postMessage(
+        { action: "accountChanged", scope: "nostr" },
+        window.location.origin
+      );
+    }
+  });
 
   // message listener to listen to inpage nostr calls
   // those calls get passed on to the background script
@@ -109,7 +122,7 @@ function postMessage(ev, response) {
       data: response,
       scope: "nostr",
     },
-    "*"
+    window.location.origin
   );
 }
 

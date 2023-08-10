@@ -161,6 +161,9 @@ function AccountMenu({ showOptions = true }: Props) {
                     key={accountId}
                     onClick={() => {
                       selectAccount(accountId);
+                      if (window.location.pathname !== "/prompt.html") {
+                        navigate("/");
+                      }
                     }}
                     disabled={accountLoading}
                     title={account.name}

@@ -1,7 +1,3 @@
-import {
-  HiddenIcon,
-  VisibleIcon,
-} from "@bitcoin-design/bitcoin-icons-react/filled";
 import Container from "@components/Container";
 import Loading from "@components/Loading";
 import { FormEvent, useCallback, useEffect, useState } from "react";
@@ -9,10 +5,10 @@ import { Trans, useTranslation } from "react-i18next";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Alert from "~/app/components/Alert";
-import Avatar from "~/app/components/Avatar";
 import Button from "~/app/components/Button";
 import { ContentBox } from "~/app/components/ContentBox";
 import InputCopyButton from "~/app/components/InputCopyButton";
+import PasswordViewAdornment from "~/app/components/PasswordViewAdornment";
 import TextField from "~/app/components/form/TextField";
 import api, { GetAccountRes } from "~/common/lib/api";
 import { default as nostr, default as nostrlib } from "~/common/lib/nostr";
@@ -146,16 +142,27 @@ function NostrSettings() {
               <h1 className="font-bold text-2xl dark:text-white">
                 {t("nostr.settings.title")}
               </h1>
-              <div className="flex gap-4 my-4 items-center">
-                <Avatar name={account.id} size={32} />
-                <p className="text-gray-500 dark:text-neutral-500">
-                  {account.name}
-                </p>
-              </div>
               <p className="text-gray-500 dark:text-neutral-500">
                 {t("nostr.settings.description")}
               </p>
             </div>
+
+            {!hasMnemonic && !nostrPrivateKey && (
+              <Alert type="info">
+                <Trans
+                  i18nKey={"nostr.settings.no_secret_key"}
+                  t={t}
+                  components={[
+                    // eslint-disable-next-line react/jsx-key
+                    <Link
+                      to="../../secret-key/generate"
+                      relative="path"
+                      className="underline"
+                    />,
+                  ]}
+                />
+              </Alert>
+            )}
 
             {hasMnemonic &&
             currentPrivateKey &&
@@ -173,6 +180,7 @@ function NostrSettings() {
               <TextField
                 id="nostrPrivateKey"
                 label={t("nostr.private_key.label")}
+                autoComplete="new-password"
                 type={nostrPrivateKeyVisible ? "text" : "password"}
                 value={nostrPrivateKey}
                 onChange={(event) => {
@@ -180,20 +188,11 @@ function NostrSettings() {
                 }}
                 endAdornment={
                   <div className="flex items-center gap-1 px-2">
-                    <button
-                      type="button"
-                      tabIndex={-1}
-                      className="flex justify-center items-center h-8"
-                      onClick={() => {
-                        setNostrPrivateKeyVisible(!nostrPrivateKeyVisible);
+                    <PasswordViewAdornment
+                      onChange={(passwordView) => {
+                        setNostrPrivateKeyVisible(passwordView);
                       }}
-                    >
-                      {nostrPrivateKeyVisible ? (
-                        <HiddenIcon className="h-6 w-6" />
-                      ) : (
-                        <VisibleIcon className="h-6 w-6" />
-                      )}
-                    </button>
+                    />
                     <InputCopyButton value={nostrPrivateKey} className="w-6" />
                   </div>
                 }
@@ -204,45 +203,26 @@ function NostrSettings() {
               <TextField
                 id="nostrPublicKey"
                 label={t("nostr.public_key.label")}
-                type="text"
                 value={nostrPublicKey}
                 disabled
                 endAdornment={<InputCopyButton value={nostrPublicKey} />}
               />
-              <div className="mt-4 flex gap-4 items-center">
+              <div className="mt-4 flex gap-4 items-center justify-center">
                 {nostrPrivateKey && (
                   <Button
                     error
-                    label={t("nostr.settings.delete")}
+                    label={t("nostr.settings.remove")}
                     onClick={handleDeleteKeys}
                   />
                 )}
                 {hasImportedNostrKey &&
-                  nostrPrivateKey === currentPrivateKey && (
-                    <>
-                      {hasMnemonic ? (
-                        <Button
-                          outline
-                          label={t("nostr.settings.derive")}
-                          onClick={handleDeriveNostrKeyFromSecretKey}
-                        />
-                      ) : (
-                        <Alert type="warn">
-                          <Trans
-                            i18nKey={"nostr.settings.no_secret_key"}
-                            t={t}
-                            components={[
-                              // eslint-disable-next-line react/jsx-key
-                              <Link
-                                to="../secret-key/generate"
-                                relative="path"
-                                className="underline"
-                              />,
-                            ]}
-                          />
-                        </Alert>
-                      )}
-                    </>
+                  nostrPrivateKey === currentPrivateKey &&
+                  hasMnemonic && (
+                    <Button
+                      outline
+                      label={t("nostr.settings.derive")}
+                      onClick={handleDeriveNostrKeyFromSecretKey}
+                    />
                   )}
               </div>
             </div>

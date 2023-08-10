@@ -15,7 +15,11 @@ const weblnCalls = [
   "webln/keysendOrPrompt",
   "webln/makeInvoice",
   "webln/signMessageOrPrompt",
+  "webln/getBalanceOrPrompt",
   "webln/request",
+  "webln/on",
+  "webln/emit",
+  "webln/off",
 ];
 // calls that can be executed when webln is not enabled for the current content page
 const disabledCalls = ["webln/enable"];
@@ -23,7 +27,6 @@ const disabledCalls = ["webln/enable"];
 let isEnabled = false; // store if webln is enabled for this content page
 let isRejected = false; // store if the webln enable call failed. if so we do not prompt again
 let callActive = false; // store if a webln call is currently active. Used to prevent multiple calls in parallel
-
 async function init() {
   const inject = await shouldInject();
   if (!inject) {
@@ -32,10 +35,17 @@ async function init() {
 
   injectScript(browser.runtime.getURL("js/inpageScript.bundle.js")); // registers the DOM event listeners and checks webln again (which is also loaded onstart
 
-  // extract LN data from websites
   browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    // extract LN data from websites
     if (request.action === "extractLightningData") {
       extractLightningData();
+    }
+    // forward account changed messaged to inpage script
+    else if (request.action === "accountChanged" && isEnabled) {
+      window.postMessage(
+        { action: "accountChanged", scope: "webln" },
+        window.location.origin
+      );
     }
   });
 
@@ -119,7 +129,7 @@ function postMessage(ev, response) {
       data: response,
       scope: "webln",
     },
-    "*"
+    window.location.origin
   );
 }
 

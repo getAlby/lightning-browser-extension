@@ -10,6 +10,7 @@ import Connector, {
   ConnectorInvoice,
   ConnectPeerArgs,
   ConnectPeerResponse,
+  flattenRequestMethods,
   GetBalanceResponse,
   GetInfoResponse,
   GetInvoicesResponse,
@@ -142,7 +143,15 @@ export default class Commando implements Connector {
   }
 
   get supportedMethods() {
-    return supportedMethods;
+    return [
+      "getInfo",
+      "keysend",
+      "makeInvoice",
+      "sendPayment",
+      "signMessage",
+      "getBalance",
+      ...flattenRequestMethods(supportedMethods),
+    ];
   }
 
   async requestMethod(
