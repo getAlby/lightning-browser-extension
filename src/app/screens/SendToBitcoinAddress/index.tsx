@@ -294,7 +294,7 @@ function SendToBitcoinAddress() {
         {step == "review" && swapData && (
           <form onSubmit={handleConfirm} className="h-full">
             <Container justifyBetween maxWidth="sm">
-              <div className="flex flex-col gap-4 mb-4">
+              <div className="flex flex-col gap-4">
                 <div>
                   <Dt>{t("recipient.label")}</Dt>
                   <Dd>
@@ -346,10 +346,12 @@ function SendToBitcoinAddress() {
                     </div>
                   </Dd>
                 </div>
-                <Alert type="info">
-                  <InfoIcon className="w-6 h-6 float-left rounded-full border border-1 border-blue-700  dark:border-blue-300 mr-2 " />
-                  {t("time_estimate")}
-                </Alert>
+                <div className="-mb-4">
+                  <Alert type="info">
+                    <InfoIcon className="w-6 h-6 float-left rounded-full border border-1 border-blue-700  dark:border-blue-300 mr-2 " />
+                    {t("time_estimate")}
+                  </Alert>
+                </div>
               </div>
               <ConfirmOrCancel
                 label={tCommon("actions.confirm")}
