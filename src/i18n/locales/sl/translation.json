@@ -630,9 +630,12 @@
       "getaddress": "Bere tvoj Liquid naslov za prejemanje"
     },
     "nostr": {
-      "signmessage": "Podpiši sporočilo s svojim ključem",
+      "getpublickey": "Bere tvoj javni ključ",
       "nip04decrypt": "Dekriptiraj podatke",
-      "getpublickey": "Bere tvoj javni ključ"
+      "nip04encrypt": "Kriptiraj podatke",
+      "nip44decrypt": "Dekriptiraj podatke",
+      "nip44encrypt": "Kriptiraj podatke",
+      "signmessage": "Podpiši sporočilo s svojim ključem"
     },
     "webln": {
       "getbalance": "Bere stanje tvojega računa"

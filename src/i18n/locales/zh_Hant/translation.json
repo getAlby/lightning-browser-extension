@@ -981,6 +981,9 @@
     "nostr": {
       "getpublickey": "讀取你的公鑰",
       "nip04decrypt": "解密數據",
+      "nip04encrypt": "加密數據",
+      "nip44decrypt": "解密數據",
+      "nip44encrypt": "加密數據",
       "signmessage": "用你的密鑰簽署消息"
     },
     "commando": {

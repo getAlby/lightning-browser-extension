@@ -699,6 +699,9 @@
     "nostr": {
       "getpublickey": "Læs din offentlige nøgle",
       "nip04decrypt": "De-krypter data",
+      "nip04encrypt": "Krypter data",
+      "nip44decrypt": "De-krypter data",
+      "nip44encrypt": "Krypter data",
       "signmessage": "Underskriv meddelelse med din nøgle"
     },
     "commando": {

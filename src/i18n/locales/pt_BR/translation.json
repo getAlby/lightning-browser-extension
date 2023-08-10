@@ -1104,8 +1104,11 @@
   "permissions": {
     "nostr": {
       "getpublickey": "Ler sua chave pública",
-      "signmessage": "Assinar mensagem com sua chave",
-      "nip04decrypt": "Descriptografar dados"
+      "nip04decrypt": "Descriptografar dados",
+      "nip04encrypt": "Criptografar dados",
+      "nip44decrypt": "Descriptografar dados",
+      "nip44encrypt": "Criptografar dados",
+      "signmessage": "Assinar mensagem com sua chave"
     },
     "lnc": {
       "openchannel": ""

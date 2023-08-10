@@ -1,20 +1,33 @@
 import { schnorr } from "@noble/curves/secp256k1";
 import * as secp256k1 from "@noble/secp256k1";
+import { nip44 } from "nostr-tools";
 import { Buffer } from "buffer";
 import * as CryptoJS from "crypto-js";
 import { AES } from "crypto-js";
 import Base64 from "crypto-js/enc-base64";
 import Hex from "crypto-js/enc-hex";
 import Utf8 from "crypto-js/enc-utf8";
+import { LRUCache } from "~/common/utils/lruCache";
 import { Event } from "~/extension/providers/nostr/types";
 
 import { getEventHash, signEvent } from "../actions/nostr/helpers";
 
 class Nostr {
-  privateKey: string;
+  nip44SharedSecretCache = new LRUCache<string, Uint8Array>(100);
 
-  constructor(privateKey: string) {
-    this.privateKey = privateKey;
+  constructor(readonly privateKey: string) {}
+
+  // Deriving shared secret is an expensive computation
+  getNip44SharedSecret(pk: string) {
+    let key = this.nip44SharedSecretCache.get(pk);
+
+    if (!key) {
+      key = nip44.v2.utils.getConversationKey(this.privateKey, pk);
+
+      this.nip44SharedSecretCache.set(pk, key);
+    }
+
+    return key;
   }
 
   getPublicKey() {
@@ -67,6 +80,14 @@ class Nostr {
     });
 
     return Utf8.stringify(decrypted);
+  }
+
+  nip44Encrypt(pubkey: string, text: string) {
+    return nip44.v2.encrypt(text, this.getNip44SharedSecret(pubkey));
+  }
+
+  nip44Decrypt(pubkey: string, payload: string) {
+    return nip44.v2.decrypt(payload, this.getNip44SharedSecret(pubkey));
   }
 
   getEventHash(event: Event) {

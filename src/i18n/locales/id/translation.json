@@ -797,6 +797,9 @@
   "permissions": {
     "nostr": {
       "nip04decrypt": "Dekripsi data",
+      "nip04encrypt": "Enkripsi data",
+      "nip44decrypt": "Dekripsi data",
+      "nip44encrypt": "Enkripsi data",
       "getpublickey": "Membaca kunci publik Anda"
     },
     "commando": {
