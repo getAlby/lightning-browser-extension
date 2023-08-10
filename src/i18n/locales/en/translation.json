@@ -927,7 +927,7 @@
     "pasted": "Pasted!",
     "description": "Description",
     "description_full": "Full Description",
-    "success_message": "{{amount}}{{fiatAmount}} sent to {{destination}}",
+    "success_message": "{{amount}}{{fiatAmount}} are on their way to {{destination}}",
     "response": "Response",
     "message": "Message",
     "help": "Help",

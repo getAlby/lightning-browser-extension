@@ -209,6 +209,13 @@ function SendToBitcoinAddress() {
   const amountExceeded = +amountSat > (auth?.account?.balance || 0);
   const rangeExceeded = +amountSat > amountMax || +amountSat < amountMin;
 
+  const timeEstimateAlert = (
+    <Alert type="info">
+      <InfoIcon className="w-6 h-6 float-left rounded-full border border-1 border-blue-700  dark:border-blue-300 mr-2 " />
+      {t("time_estimate")}
+    </Alert>
+  );
+
   return (
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <Header
@@ -346,12 +353,7 @@ function SendToBitcoinAddress() {
                     </div>
                   </Dd>
                 </div>
-                <div className="-mb-4">
-                  <Alert type="info">
-                    <InfoIcon className="w-6 h-6 float-left rounded-full border border-1 border-blue-700  dark:border-blue-300 mr-2 " />
-                    {t("time_estimate")}
-                  </Alert>
-                </div>
+                <div className="-mb-4">{timeEstimateAlert}</div>
               </div>
               <ConfirmOrCancel
                 label={tCommon("actions.confirm")}
@@ -370,10 +372,13 @@ function SendToBitcoinAddress() {
               message={tCommon("success_message", {
                 amount: getFormattedSats(amountSat),
                 fiatAmount: showFiat ? ` (${fiatAmount})` : ``,
-                destination: bitcoinAddress,
+                destination:
+                  bitcoinAddress.substring(0, 7) +
+                  "..." +
+                  bitcoinAddress.substring(bitcoinAddress.length - 7),
               })}
             />
-            <div className="text-center my-4">
+            <div className="text-center mt-4">
               <Hyperlink
                 href={`https://mempool.space/address/${bitcoinAddress}`}
                 rel="noopener nofollow"
@@ -383,6 +388,7 @@ function SendToBitcoinAddress() {
                 <ExportIcon className="w-6 h-6 inline" />
               </Hyperlink>
             </div>
+            <div className="">{timeEstimateAlert}</div>
             <div className="my-4">
               <Button
                 onClick={close}
