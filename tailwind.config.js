@@ -32,7 +32,7 @@ module.exports = {
         "spin-fast": "spin 0.7s linear infinite",
       },
       fontFamily: {
-        sans: ["Inter var", ...defaultTheme.fontFamily.sans],
+        sans: ["Open Runde", ...defaultTheme.fontFamily.sans],
         serif: ["Catamaran", ...defaultTheme.fontFamily.sans],
       },
       fontSize: {

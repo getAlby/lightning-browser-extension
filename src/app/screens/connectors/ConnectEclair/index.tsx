@@ -1,7 +1,4 @@
-import {
-  HiddenIcon,
-  VisibleIcon,
-} from "@bitcoin-design/bitcoin-icons-react/outline";
+import logo from "/static/assets/icons/eclair.jpg";
 import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
 import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
@@ -9,9 +6,8 @@ import { useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import PasswordViewAdornment from "~/app/components/PasswordViewAdornment";
 import msg from "~/common/lib/msg";
-
-import logo from "/static/assets/icons/eclair.jpg";
 
 export default function ConnectEclair() {
   const navigate = useNavigate();
@@ -23,7 +19,7 @@ export default function ConnectEclair() {
     url: "",
   });
   const [loading, setLoading] = useState(false);
-  const [passwordView, setPasswordView] = useState(false);
+  const [passwordViewVisible, setPasswordViewVisible] = useState(false);
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setFormData({
@@ -100,22 +96,16 @@ export default function ConnectEclair() {
           id="password"
           autoComplete="new-password"
           label={t("password.label")}
-          type={passwordView ? "text" : "password"}
+          type={passwordViewVisible ? "text" : "password"}
           required
           autoFocus={true}
           onChange={handleChange}
           endAdornment={
-            <button
-              type="button"
-              className="flex justify-center items-center w-10 h-8"
-              onClick={() => setPasswordView(!passwordView)}
-            >
-              {passwordView ? (
-                <HiddenIcon className="h-6 w-6" />
-              ) : (
-                <VisibleIcon className="h-6 w-6" />
-              )}
-            </button>
+            <PasswordViewAdornment
+              onChange={(passwordView) => {
+                setPasswordViewVisible(passwordView);
+              }}
+            />
           }
         />
       </div>

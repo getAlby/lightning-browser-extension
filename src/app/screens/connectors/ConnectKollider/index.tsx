@@ -79,7 +79,6 @@ export default function ConnectKollidier({ variant }: Props) {
       if (variant === "create") {
         const headers = new Headers();
         headers.append("Accept", "application/json");
-        headers.append("Access-Control-Allow-Origin", "*");
         headers.append("Content-Type", "application/json");
         headers.append("X-User-Agent", "alby-extension");
         const body = JSON.stringify({
