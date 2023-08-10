@@ -377,6 +377,7 @@ function SendToBitcoinAddress() {
               <Hyperlink
                 href={`https://mempool.space/address/${bitcoinAddress}`}
                 rel="noopener nofollow"
+                target="_blank"
               >
                 {t("view_on_explorer")}
                 <ExportIcon className="w-6 h-6 inline" />
