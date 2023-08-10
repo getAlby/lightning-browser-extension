@@ -1,12 +1,13 @@
-import Alby from "~/extension/background-script/connectors/alby";
 import state from "~/extension/background-script/state";
 import { MessageGetSwapInfo } from "~/types";
 
 const getSwapInfo = async (message: MessageGetSwapInfo) => {
   try {
-    const connector = (await state
-      .getState()
-      .getConnector()) as unknown as Alby;
+    const connector = await state.getState().getConnector();
+
+    if (!connector.getSwapInfo) {
+      throw new Error("This connector does not support createSwap");
+    }
 
     const data = await connector.getSwapInfo();
 
