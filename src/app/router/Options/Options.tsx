@@ -17,9 +17,10 @@ import Send from "@screens/Send";
 import Settings from "@screens/Settings";
 import Transactions from "@screens/Transactions";
 import Unlock from "@screens/Unlock";
+import { Toaster } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { HashRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+
 import AccountDetailLayout from "~/app/components/AccountDetailLayout";
 import ScrollToTop from "~/app/components/ScrollToTop";
 import Providers from "~/app/context/Providers";
@@ -37,7 +38,6 @@ import ScanQRCode from "~/app/screens/ScanQRCode";
 import ChooseConnector from "~/app/screens/connectors/ChooseConnector";
 import ChooseConnectorPath from "~/app/screens/connectors/ChooseConnectorPath";
 import i18n from "~/i18n/i18nConfig";
-
 function Options() {
   const connectorRoutes = getConnectorRoutes();
 
@@ -141,7 +141,7 @@ function Options() {
             element={
               <>
                 <Unlock />
-                <ToastContainer autoClose={10000} hideProgressBar={true} />
+                <Toaster position="bottom-center" />
               </>
             }
           />
@@ -163,12 +163,7 @@ const Layout = () => {
         </Navbar.Link>
         <Navbar.Link href="/wallet">{tCommon("wallet")}</Navbar.Link>
       </Navbar>
-      <ToastContainer
-        autoClose={15000}
-        hideProgressBar={true}
-        className="w-fit max-w-2xl"
-      />
-
+      <Toaster position="bottom-center" />
       <Outlet />
     </div>
   );

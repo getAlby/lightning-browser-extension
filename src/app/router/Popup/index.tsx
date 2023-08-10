@@ -1,6 +1,5 @@
 import { createRoot } from "react-dom/client";
 import "react-loading-skeleton/dist/skeleton.css";
-import "react-toastify/dist/ReactToastify.css";
 import "~/app/styles/index.css";
 import { setTheme } from "~/app/utils";
 import "~/i18n/i18nConfig";

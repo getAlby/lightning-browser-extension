@@ -1,15 +1,15 @@
-import logo from "/static/assets/icons/core_ln.svg";
 import Button from "@components/Button";
 import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
 import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
 import * as secp256k1 from "@noble/secp256k1";
 import { useState } from "react";
+import { toast } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import PasswordViewAdornment from "~/app/components/PasswordViewAdornment";
 import msg from "~/common/lib/msg";
+import logo from "/static/assets/icons/core_ln.svg";
 
 export default function ConnectCommando() {
   const navigate = useNavigate();

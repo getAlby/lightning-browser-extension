@@ -9,8 +9,8 @@ import LNURLWithdraw from "@screens/LNURLWithdraw";
 import Receive from "@screens/Receive";
 import Send from "@screens/Send";
 import Unlock from "@screens/Unlock";
+import { Toaster } from "react-hot-toast";
 import { HashRouter, Outlet, Route, Routes } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
 import Providers from "~/app/context/Providers";
 import LNURLRedeem from "~/app/screens/LNURLRedeem";
 import OnChainReceive from "~/app/screens/OnChainReceive";
@@ -47,7 +47,7 @@ function Popup() {
             element={
               <>
                 <Unlock />
-                <ToastContainer autoClose={10000} hideProgressBar={true} />
+                <Toaster position="bottom-center" />
               </>
             }
           />
@@ -64,7 +64,7 @@ const Layout = () => {
 
       <main className="flex flex-col grow min-h-0">
         <Outlet />
-        <ToastContainer autoClose={10000} hideProgressBar={true} />
+        <Toaster position="bottom-center" />
       </main>
     </div>
   );

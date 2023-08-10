@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { act } from "react-dom/test-utils";
+import { Toaster } from "react-hot-toast";
 import { MemoryRouter } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
 import { settingsFixture as mockSettings } from "~/../tests/fixtures/settings";
 import { SettingsProvider } from "~/app/context/SettingsContext";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
@@ -134,7 +134,7 @@ describe("LNURLWithdraw", () => {
     render(
       <MemoryRouter>
         <SettingsProvider>
-          <ToastContainer />
+          <Toaster />
           <LNURLWithdraw />
         </SettingsProvider>
       </MemoryRouter>

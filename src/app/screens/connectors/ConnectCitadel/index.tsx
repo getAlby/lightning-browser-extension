@@ -1,14 +1,14 @@
-import logo from "/static/assets/icons/citadel.png";
 import CompanionDownloadInfo from "@components/CompanionDownloadInfo";
 import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
 import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
 import { useState } from "react";
+import { toast } from "react-hot-toast";
 import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import PasswordViewAdornment from "~/app/components/PasswordViewAdornment";
 import msg from "~/common/lib/msg";
+import logo from "/static/assets/icons/citadel.png";
 
 export default function ConnectCitadel() {
   const navigate = useNavigate();

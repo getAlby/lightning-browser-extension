@@ -3,9 +3,9 @@ import SetPassword from "@screens/Onboard/SetPassword";
 import TestConnection from "@screens/Onboard/TestConnection";
 import ChooseConnector from "@screens/connectors/ChooseConnector";
 import { useState } from "react";
+import { Toaster } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { Outlet, Route, HashRouter as Router, Routes } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
 import Container from "~/app/components/Container";
 import { SettingsProvider } from "~/app/context/SettingsContext";
 import { getConnectorRoutes, renderRoutes } from "~/app/router/connectorRoutes";
@@ -18,11 +18,7 @@ function Welcome() {
   return (
     <SettingsProvider>
       <Router>
-        <ToastContainer
-          autoClose={15000}
-          hideProgressBar={true}
-          className="w-fit max-w-2xl"
-        />
+        <Toaster />
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<SetPassword />} />

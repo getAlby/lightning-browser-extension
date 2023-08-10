@@ -4,9 +4,9 @@ import QrcodeScanner from "@components/QrcodeScanner";
 import TextField from "@components/form/TextField";
 import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
 import { useState } from "react";
+import { toast } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import msg from "~/common/lib/msg";
 
 import lndhubBlueWallet from "/static/assets/icons/lndhub_bluewallet.png";

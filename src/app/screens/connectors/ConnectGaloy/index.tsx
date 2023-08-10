@@ -4,9 +4,9 @@ import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
 import fetchAdapter from "@vespaiach/axios-fetch-adapter";
 import axios from "axios";
 import { useState } from "react";
+import { toast } from "react-hot-toast";
 import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import msg from "~/common/lib/msg";
 
 import galoyBitcoinBeach from "/static/assets/icons/galoy_bitcoin_beach.png";

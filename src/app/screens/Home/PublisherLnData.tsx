@@ -1,9 +1,9 @@
 import Button from "@components/Button";
 import PublisherCard from "@components/PublisherCard";
 import { FC, useState } from "react";
+import { toast } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import lnurlLib from "~/common/lib/lnurl";
 import { isLNURLDetailsError } from "~/common/utils/typeHelpers";
 import type { Battery } from "~/types";

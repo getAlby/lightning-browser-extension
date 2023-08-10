@@ -1,9 +1,9 @@
 import Button from "@components/Button";
 import PasswordForm from "@components/PasswordForm";
 import React, { useState } from "react";
+import { toast } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import msg from "~/common/lib/msg";
 
 const initialFormData = {

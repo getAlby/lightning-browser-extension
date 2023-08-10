@@ -15,8 +15,8 @@ import NostrConfirmGetPublicKey from "@screens/Nostr/ConfirmGetPublicKey";
 import NostrConfirmSignMessage from "@screens/Nostr/ConfirmSignMessage";
 import NostrConfirmSignSchnorr from "@screens/Nostr/ConfirmSignSchnorr";
 import Unlock from "@screens/Unlock";
+import { Toaster } from "react-hot-toast";
 import { HashRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
 import ConfirmGetAddress from "~/app/screens/ConfirmGetAddress";
@@ -118,7 +118,7 @@ function Prompt() {
             element={
               <>
                 <Unlock />
-                <ToastContainer autoClose={10000} hideProgressBar={true} />
+                <Toaster position="bottom-center" />
               </>
             }
           />
@@ -131,7 +131,7 @@ function Prompt() {
 const Layout = () => {
   return (
     <>
-      <ToastContainer autoClose={10000} hideProgressBar={true} />
+      <Toaster position="bottom-center" />
       <div className="px-4 py-2 justify-end bg-white flex border-b border-gray-200 dark:bg-surface-02dp dark:border-neutral-500">
         <AccountMenu showOptions={false} />
       </div>

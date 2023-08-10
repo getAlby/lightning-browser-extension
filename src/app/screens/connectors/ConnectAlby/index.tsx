@@ -1,8 +1,8 @@
 import { GetAccountInformationResponse } from "alby-js-sdk/dist/types";
 import { useState } from "react";
+import { toast } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import Button from "~/app/components/Button";
 import { getAlbyAccountName } from "~/app/utils";
 import api from "~/common/lib/api";
