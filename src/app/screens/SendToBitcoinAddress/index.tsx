@@ -221,7 +221,7 @@ function SendToBitcoinAddress() {
           />
         }
       />
-      <div className="h-full py-5">
+      <div className="h-full pt-5">
         {step == "amount" && (
           <form onSubmit={handleReview} className="h-full flex space-between">
             <Container justifyBetween maxWidth="sm">
