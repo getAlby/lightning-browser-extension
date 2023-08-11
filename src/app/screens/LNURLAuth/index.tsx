@@ -125,7 +125,7 @@ function LNURLAuth() {
                 loading={loading}
               />
 
-              <p className="mb-4 text-center text-sm text-gray-400">
+              <p className="mt-4 text-center text-sm text-gray-400">
                 <em>{tComponents("only_trusted")}</em>
               </p>
             </div>

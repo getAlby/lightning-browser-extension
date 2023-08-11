@@ -163,7 +163,7 @@ function Receive() {
   function renderInvoice() {
     if (!invoice) return null;
     return (
-      <div className="py-4">
+      <>
         <div className="relative p-8 bg-white rounded-lg shadow-sm ring-1 ring-black ring-opacity-5 flex justify-center items-center overflow-hidden">
           <QRCode value={invoice.paymentRequest.toUpperCase()} level="M" />
           {paid && (
@@ -241,7 +241,7 @@ function Receive() {
             style={{ pointerEvents: "none" }}
           />
         )}
-      </div>
+      </>
     );
   }
 
@@ -265,7 +265,7 @@ function Receive() {
           <form onSubmit={handleSubmit}>
             <fieldset disabled={loadingInvoice}>
               <Container justifyBetween maxWidth="sm">
-                <div className="py-4">
+                <div>
                   <div className="mb-4">
                     <DualCurrencyField
                       id="amount"
@@ -287,16 +287,14 @@ function Receive() {
                     />
                   </div>
                 </div>
-                <div>
-                  <Button
-                    type="submit"
-                    label={t("actions.create_invoice")}
-                    fullWidth
-                    primary
-                    loading={loadingInvoice}
-                    disabled={loadingInvoice}
-                  />
-                </div>
+                <Button
+                  type="submit"
+                  label={t("actions.create_invoice")}
+                  fullWidth
+                  primary
+                  loading={loadingInvoice}
+                  disabled={loadingInvoice}
+                />
               </Container>
             </fieldset>
           </form>

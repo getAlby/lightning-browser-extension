@@ -1,7 +1,6 @@
 import {
   CaretLeftIcon,
   ExportIcon,
-  InfoIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import Button from "@components/Button";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
@@ -209,12 +208,7 @@ function SendToBitcoinAddress() {
   const amountExceeded = +amountSat > (auth?.account?.balance || 0);
   const rangeExceeded = +amountSat > amountMax || +amountSat < amountMin;
 
-  const timeEstimateAlert = (
-    <Alert type="info">
-      <InfoIcon className="w-6 h-6 float-left rounded-full border border-1 border-blue-700  dark:border-blue-300 mr-2 " />
-      {t("time_estimate")}
-    </Alert>
-  );
+  const timeEstimateAlert = <Alert type="info">{t("time_estimate")}</Alert>;
 
   return (
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
@@ -231,7 +225,7 @@ function SendToBitcoinAddress() {
         {step == "amount" && (
           <form onSubmit={handleReview} className="h-full flex space-between">
             <Container justifyBetween maxWidth="sm">
-              <div className="flex flex-col gap-4 mb-4">
+              <div className="flex flex-col gap-3 mb-4">
                 <div>
                   <Dt>{t("recipient.label")}</Dt>
                   <Dd>
@@ -252,7 +246,6 @@ function SendToBitcoinAddress() {
                     ?.accountBalance}`}
                 />
                 <Alert type="info">
-                  <InfoIcon className="w-6 h-6 float-left rounded-full border border-1 border-blue-700  dark:border-blue-300 mr-2 " />
                   <Trans
                     i18nKey={"swaps_provided_by"}
                     t={t}
@@ -301,7 +294,7 @@ function SendToBitcoinAddress() {
         {step == "review" && swapData && (
           <form onSubmit={handleConfirm} className="h-full">
             <Container justifyBetween maxWidth="sm">
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-3 mb-4">
                 <div>
                   <Dt>{t("recipient.label")}</Dt>
                   <Dd>
@@ -353,7 +346,7 @@ function SendToBitcoinAddress() {
                     </div>
                   </Dd>
                 </div>
-                <div className="-mb-4">{timeEstimateAlert}</div>
+                <div className="">{timeEstimateAlert}</div>
               </div>
               <ConfirmOrCancel
                 label={tCommon("actions.confirm")}
@@ -378,7 +371,7 @@ function SendToBitcoinAddress() {
                   bitcoinAddress.substring(bitcoinAddress.length - 7),
               })}
             />
-            <div className="text-center mt-4">
+            <div className="text-center my-4">
               <Hyperlink
                 href={`https://mempool.space/address/${bitcoinAddress}`}
                 rel="noopener nofollow"
@@ -388,8 +381,8 @@ function SendToBitcoinAddress() {
                 <ExportIcon className="w-6 h-6 inline" />
               </Hyperlink>
             </div>
-            <div className="">{timeEstimateAlert}</div>
-            <div className="my-4">
+            {timeEstimateAlert}
+            <div className="mt-4">
               <Button
                 onClick={close}
                 label={tCommon("actions.close")}
