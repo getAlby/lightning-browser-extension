@@ -32,8 +32,10 @@ async function init() {
   if (!inject) {
     return;
   }
-
-  injectScript(browser.runtime.getURL("js/inpageScript.bundle.js")); // registers the DOM event listeners and checks webln again (which is also loaded onstart
+  const INJECTED_WINDOW_PROVIDER_SOURCE = "@@@WINDOW_PROVIDER@@@";
+  console.log(INJECTED_WINDOW_PROVIDER_SOURCE);
+  // probably needd a addtional directive - unsafe-hashes and hash of script injected, but this doesn't support older browser. mv3 doesn't allow inline script execution
+  injectScript(INJECTED_WINDOW_PROVIDER_SOURCE); // registers the DOM event listeners and checks webln again (which is also loaded onstart
 
   browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
     // extract LN data from websites

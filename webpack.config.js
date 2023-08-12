@@ -11,7 +11,7 @@ const TerserPlugin = require("terser-webpack-plugin");
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 const BundleAnalyzerPlugin =
   require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
-
+const MyCustomPlugin = require("./build-utils/injectProvider");
 if (!process.env.NODE_ENV) {
   process.env.NODE_ENV = "development";
 }
@@ -231,6 +231,7 @@ var options = {
   },
 
   plugins: [
+    new MyCustomPlugin(),
     new webpack.ProvidePlugin({
       Buffer: ["buffer", "Buffer"],
       process: ["process"],
