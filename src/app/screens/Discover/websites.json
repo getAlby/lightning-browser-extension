@@ -145,6 +145,12 @@
         "url": "https://satellite.earth"
       },
       {
+        "title": "Swarmstr",
+        "subtitle": "Ask questions or provide answers on this Nostr client",
+        "logo": "assets//icons//swarmstr.png",
+        "url": "https://swarmstr.com/"
+      },
+      {
         "title": "zapddit",
         "subtitle": "A reddit-style nostr client",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/zapddit.svg",
