@@ -448,7 +448,17 @@
           "confirm": "Digite o nome da conta para confirmar a exclusão de sua chave mestra.",
           "success": "Chave mestra removida com sucesso.",
           "subtitle": "Remove a chave mestra desta conta."
-        }
+        },
+        "network": {
+          "title": "Rede",
+          "options": {
+            "bitcoin": "Rede principal",
+            "testnet": "Rede de testes",
+            "regtest": "Regtest"
+          },
+          "subtitle": "Escolha a rede para gerar endereços e decodificar transações bitcoin and liquid"
+        },
+        "no_mnemonic_hint": "💡 Você ainda não tem uma chave mestre. <0>Clique aqui</0></div> para criar sua chave mestre e desbloquear essas configurações."
       }
     },
     "enable": {
@@ -839,6 +849,33 @@
     },
     "scan_qrcode": {
       "title": "Aguardando leitura"
+    },
+    "confirm_sign_pset": {
+      "view_details": "Ver detalhes",
+      "hide_details": "Ocultar detalhes",
+      "view_raw_transaction": "Ver transação raw (Base64)",
+      "hide_raw_transaction": "Ocultar transação raw (Base64)",
+      "outputs": "Saídas",
+      "amount": "{{amount}} {{ticker}}",
+      "title": "Assinar",
+      "allow_sign": "Este site solicita que você assine uma transação Liquid:",
+      "inputs": "Entradas"
+    },
+    "bitcoin": {
+      "confirm_get_address": {
+        "title": "Obter endereço"
+      },
+      "allow": "Permitir este site:",
+      "allow_sign": "Permitir {{host}} assinar:",
+      "block_and_ignore": "Bloquear e ignorar {{host}}",
+      "block_added": "{{host}} adicionado na lista de bloqueios, recarregue o site."
+    },
+    "liquid": {
+      "title": "Liquid",
+      "block_added": "{{host}} adicionado na lista de bloqueios, recarregue o site.",
+      "allow": "Permitir este site:",
+      "allow_sign": "Permitir {{host}} assinar:",
+      "block_and_ignore": "Bloquear e ignorar {{host}}"
     }
   },
   "common": {
@@ -1034,6 +1071,16 @@
     },
     "lnc": {
       "openchannel": ""
+    },
+    "bitcoin": {
+      "getaddress": "Ler seu endereço de recebimento de Bitcoin."
+    },
+    "liquid": {
+      "signschnorr": "Assinar mensagem com sua chave.",
+      "getaddress": "Ler seu endereço de recebimento da Liquid."
+    },
+    "webln": {
+      "getbalance": "Ler o saldo da sua conta."
     }
   }
 }
