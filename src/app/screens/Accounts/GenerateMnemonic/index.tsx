@@ -8,11 +8,11 @@ import Alert from "~/app/components/Alert";
 import Button from "~/app/components/Button";
 import { ContentBox } from "~/app/components/ContentBox";
 import Checkbox from "~/app/components/form/Checkbox";
+import MnemonicDescription from "~/app/components/mnemonic/MnemonicDescription";
 import MnemonicInputs from "~/app/components/mnemonic/MnemonicInputs";
-import SecretKeyDescription from "~/app/components/mnemonic/SecretKeyDescription";
 import api from "~/common/lib/api";
 
-function GenerateSecretKey() {
+function GenerateMnemonic() {
   const navigate = useNavigate();
   const { id } = useParams() as { id: string };
 
@@ -80,7 +80,7 @@ function GenerateSecretKey() {
           <h1 className="font-bold text-2xl dark:text-white">
             {t("generate.title")}
           </h1>
-          <SecretKeyDescription />
+          <MnemonicDescription />
           <MnemonicInputs mnemonic={mnemonic} readOnly>
             <>
               <div className="flex items-center">
@@ -118,4 +118,4 @@ function GenerateSecretKey() {
   );
 }
 
-export default GenerateSecretKey;
+export default GenerateMnemonic;

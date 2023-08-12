@@ -5,7 +5,7 @@ import {
 } from "@bitcoin-design/bitcoin-icons-react/outline";
 import { useTranslation } from "react-i18next";
 
-function SecretKeyDescription() {
+function MnemonicDescription() {
   const { t } = useTranslation("translation", {
     keyPrefix: "accounts.account_view.mnemonic",
   });
@@ -24,7 +24,7 @@ function SecretKeyDescription() {
   );
 }
 
-export default SecretKeyDescription;
+export default MnemonicDescription;
 
 type ListItemProps = { icon: React.ReactNode; title: string };
 

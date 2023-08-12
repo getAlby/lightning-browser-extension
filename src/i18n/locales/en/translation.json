@@ -386,6 +386,7 @@
           "export_uri": "LNDHub Credentials URI",
           "scan_qr": "Import this wallet into Zeus or BlueWallet by scanning the QRCode."
         },
+        "no_mnemonic_hint": "💡 You don't have a Master Key yet. <0>Click here</0></div> to create your Master Key and unlock these settings.",
         "mnemonic": {
           "title": "🔑 Key Management",
           "saved": "Master Key encrypted & saved successfully.",
@@ -425,15 +426,13 @@
             "use_mnemonic": "Use Master Key for logging into lightning-powered apps (LNURL Auth)"
           }
         },
-        "bitcoin": {
-          "network": {
-            "title": "Bitcoin Network",
-            "subtitle": "Choose network to derive addresses and decode transactions",
-            "options": {
-              "bitcoin": "Mainnet",
-              "testnet": "Testnet",
-              "regtest": "Regtest"
-            }
+        "network": {
+          "title": "Network",
+          "subtitle": "Choose network to derive addresses and decode bitcoin and liquid transactions",
+          "options": {
+            "bitcoin": "Mainnet",
+            "testnet": "Testnet",
+            "regtest": "Regtest"
           }
         },
         "nostr": {
@@ -796,10 +795,25 @@
       "title": "Sign",
       "content": "This website asks you to sign:"
     },
-    "confirm_get_address": {
-      "title": "Get Address",
-      "heading": "This website asks you to read:",
-      "content": "Your Bitcoin receive address"
+    "confirm_sign_pset": {
+      "title": "Sign",
+      "allow_sign": "This website asks you to sign a Liquid Transaction:",
+      "view_details": "View details",
+      "hide_details": "Hide details",
+      "view_raw_transaction": "View raw transaction (Base64)",
+      "hide_raw_transaction": "Hide raw transaction (Base64)",
+      "inputs": "Inputs",
+      "outputs": "Outputs",
+      "amount": "{{amount}} {{ticker}}"
+    },
+    "bitcoin": {
+      "confirm_get_address": {
+        "title": "Get Address"
+      },
+      "allow": "Allow this website to:",
+      "allow_sign": "Allow {{host}} to sign:",
+      "block_and_ignore": "Block and ignore {{host}}",
+      "block_added": "Added {{host}} to the blocklist, please reload the website."
     },
     "confirm_keysend": {
       "title": "Approve Payment",
@@ -834,6 +848,13 @@
       "title": "Add account",
       "content": "This website wants to add an account ({{connector}}):",
       "tor_info": "In order to connect through the TOR network you need to first install the Alby companion app:"
+    },
+    "liquid": {
+      "title": "Liquid",
+      "allow": "Allow this website to:",
+      "allow_sign": "Allow {{host}} to sign:",
+      "block_and_ignore": "Block and ignore {{host}}",
+      "block_added": "Added {{host}} to the blocklist, please reload the website."
     },
     "nostr": {
       "title": "Nostr",
@@ -1080,6 +1101,13 @@
       "nip04encrypt": "Encrypt data.",
       "nip04decrypt": "Decrypt data.",
       "signmessage": "Sign message with your key."
+    },
+    "bitcoin": {
+      "getaddress": "Read your Bitcoin receive address."
+    },
+    "liquid": {
+      "getaddress": "Read your Liquid receive address.",
+      "signschnorr": "Sign message with your key."
     },
     "commando": {
       "bkpr-listbalances": "List of all current and historical account balances.",
