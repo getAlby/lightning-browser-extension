@@ -368,19 +368,20 @@
           "confirm": "Ange namnet på kontot för att bekräfta raderingen av ditt konto.\n\n ⚠️ Alla associerade nycklar (hemlig nyckel, Nostr, etc) kommer att raderas om du fortsätter. Se till att du har säkerhetskopierat dem, det finns inget annat sätt att återställa dem.",
           "error": "Det angivna kontonamnet matchade inte."
         },
-        "title1": "Konto information",
-        "title2": "Redigera konto",
+        "title1": "Konto inställningar",
+        "title2": "Konto",
         "name": {
           "title": "Visnings Namn",
           "placeholder": "Konto visningsnamn"
         },
         "export": {
-          "title": "Exportera konto",
+          "title": "Anslut din mobila plånbok",
           "screen_reader": "Exportera konto detaljer",
           "waiting": "väntar på LndHub-data...",
           "your_ln_address": "Din Lightning Address:",
           "export_uri": "LNDHub-inloggnings-URI",
-          "scan_qr": "Importera denna plånbok till Zeus eller BlueWallet genom att skanna QR-koden."
+          "scan_qr": "Importera denna plånbok till Zeus eller BlueWallet genom att skanna QR-koden.",
+          "description": "Låter dig ansluta och använda det här kontot på mobila plånböcker som <0>Blue Wallet</0> och <0>Zeus</0>."
         },
         "actions": {
           "remove_account": "Ta bort kontot",
@@ -388,29 +389,36 @@
           "remove_secretkey": "Ta bort hemlig nyckel"
         },
         "mnemonic": {
-          "saved": "Hemlig nyckel krypterad och sparad framgångsrikt.",
-          "existing_nostr_key_notice": "⚠️ Detta konto har redan en nostr privat nyckeluppsättning och kommer inte att härledas från denna hemliga nyckel. Du kan hantera din nostr-nyckel från dina kontoinställningar.",
+          "saved": "Huvudnyckeln krypterad och sparad.",
+          "existing_nostr_key_notice": "⚠️ Detta konto har redan en nostr privat nyckeluppsättning och kommer inte att härledas från denna huvudnyckel. Du kan hantera din Nostr-nyckel från dina kontoinställningar.",
           "generate": {
-            "title": "Generera din hemliga nyckel",
-            "button": "Generera hemlig nyckel",
-            "confirm": "Jag har säkerhetskopierat mitt kontos hemliga nyckel på en privat och säker plats",
-            "error_confirm": "Bekräfta att du har säkerhetskopierat din hemliga nyckel."
+            "title": "Generera ny huvudnyckel",
+            "button": "Generera huvudnyckel",
+            "confirm": "Jag har säkerhetskopierat återställningsfrasen till min huvudnyckel på en privat och säker plats.",
+            "error_confirm": "Bekräfta att du har säkerhetskopierat återställningsfrasen.",
+            "description": "Master Key låter dig interagera med olika protokoll som: Nostr, baslager av Bitcoin eller LNURL-Auth."
           },
           "backup": {
-            "title": "Säkerhetskopiera din hemliga nyckel",
-            "save": "Spara hemlig nyckel",
-            "button": "Säkerhetskopiera hemlig nyckel",
+            "title": "Säkerhetskopiera din återställningsfras",
+            "save": "Spara huvudnyckeln",
+            "button": "Visa återställningsfras",
             "protocols": {
               "nostr": "Nostr"
             },
-            "warning": "⚠️ Glöm inte att säkerhetskopiera din hemliga nyckel! Att inte säkerhetskopiera det kan resultera i att du permanent förlorar åtkomst till din Nostr-identitet eller tillgångar som du hanterar med denna nyckel."
+            "warning": "⚠️ Glöm inte att säkerhetskopiera din återställningsfras! Att inte säkerhetskopiera det kan leda till att du permanent förlorar åtkomst till din huvudnyckel, Nostr-identitet eller tillgångar som du hanterar med denna nyckel.",
+            "description": "Skriv ner återställningsfrasen för att kunna återställa din huvudnyckel på en ny enhet eller om du förlorar åtkomsten till ditt konto.",
+            "items": {
+              "recovery_phrase": "Du kan alltid komma åt din huvudnyckel genom att använda dess återställningsfras.",
+              "words": "Återställningsfrasen består av 12 ord som fungerar som ett lösenord, men det kan inte ändras eller återställas om det tappas bort.",
+              "storage": "Se till att skriva ner det någonstans säkert och privat!"
+            }
           },
           "import": {
             "title": "Importera en hemlig nyckel",
             "description": "Använd en befintlig hemlig nyckel för att återställa dina härledda nycklar.",
             "button": "Importera hemlig nyckel"
           },
-          "title": "Hemlig nyckel",
+          "title": "🔑 Nyckelhantering",
           "inputs": {
             "title": "Din hemliga nyckel"
           },
