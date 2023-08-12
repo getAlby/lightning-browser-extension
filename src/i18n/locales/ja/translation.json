@@ -215,11 +215,11 @@
         },
         "title": "RaspiBlitz"
       },
-      "bitcoin_beach": {
+      "blink": {
         "page": {
-          "title": "<0>Bitcoin Beach Wallet</0>に接続"
+          "title": "<0>Blink Wallet</0>に接続"
         },
-        "title": "Bitcoin Beach Wallet"
+        "title": "Blink Wallet"
       },
       "title": "ライトニングウォレットを接続",
       "description": "外部のライトニングウォレットまたはノードに接続する",

@@ -173,10 +173,10 @@
           "placeholder": "din-onion-nod-adress:port"
         }
       },
-      "bitcoin_beach": {
-        "title": "Bitcoin Beach plånbok",
+      "blink": {
+        "title": "Blink plånbok",
         "page": {
-          "title": "Anslut <0>Bitcoin Beach Wallet</0>"
+          "title": "Anslut <0>Blink Wallet</0>"
         }
       },
       "bitcoin_jungle": {

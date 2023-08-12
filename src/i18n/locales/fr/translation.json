@@ -208,10 +208,10 @@
           "placeholder": "adresse-de-votre-node-onion:port"
         }
       },
-      "bitcoin_beach": {
+      "blink": {
         "title": "Portefeuille de plage Bitcoin",
         "page": {
-          "title": "Connectez-vous à <0>Bitcoin Beach Wallet</0>"
+          "title": "Connectez-vous à <0>Bitcoin Blink Wallet</0>"
         }
       },
       "bitcoin_jungle": {

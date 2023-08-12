@@ -218,10 +218,10 @@
           "placeholder": "your-node-onion-address:port"
         }
       },
-      "bitcoin_beach": {
-        "title": "کیف پول Bitcoin Beach",
+      "blink": {
+        "title": "کیف پول Blink",
         "page": {
-          "title": "اتصال به <0>Bitcoin Beach Wallet</0>"
+          "title": "اتصال به <0>Blink Wallet</0>"
         }
       },
       "bitcoin_jungle": {

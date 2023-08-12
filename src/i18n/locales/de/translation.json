@@ -173,10 +173,10 @@
         },
         "title": "Start9"
       },
-      "bitcoin_beach": {
-        "title": "Bitcoin Beach Wallet",
+      "blink": {
+        "title": "Blink Wallet",
         "page": {
-          "title": "Verbinden mit <0>Bitcoin Beach Wallet</0>"
+          "title": "Verbinden mit <0>Blink Wallet</0>"
         }
       },
       "bitcoin_jungle": {

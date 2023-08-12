@@ -145,10 +145,10 @@
           "placeholder": "tu-nodo-direccion onion:puerto"
         }
       },
-      "bitcoin_beach": {
-        "title": "Billetera de Bitcoin Beach",
+      "blink": {
+        "title": "Billetera de Blink",
         "page": {
-          "title": "Conecta a <0>La cartera Bitcoin Beach</0>"
+          "title": "Conecta a <0>La cartera Blink</0>"
         }
       },
       "bitcoin_jungle": {

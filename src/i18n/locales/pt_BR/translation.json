@@ -145,10 +145,10 @@
           "placeholder": "seu-endereço-servidor-onion:porta"
         }
       },
-      "bitcoin_beach": {
-        "title": "Carteira Bitcoin Beach",
+      "blink": {
+        "title": "Carteira Blink",
         "page": {
-          "title": "Conecte-se na <0>Carteira Bitcoin Beach</0>"
+          "title": "Conecte-se na <0>Carteira Blink</0>"
         }
       },
       "bitcoin_jungle": {

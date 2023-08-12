@@ -167,10 +167,10 @@
           "placeholder": "onion-adresa-vaseho-uzlu:port"
         }
       },
-      "bitcoin_beach": {
-        "title": "Bitcoin Beach Wallet",
+      "blink": {
+        "title": "Blink",
         "page": {
-          "title": "Připojení k <0>Bitcoin Beach Wallet</0>"
+          "title": "Připojení k <0>Blink Wallet</0>"
         }
       },
       "bitcoin_jungle": {

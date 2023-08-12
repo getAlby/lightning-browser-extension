@@ -208,10 +208,10 @@
           "placeholder": "adresa-onion-a-nodului-tau:portul"
         }
       },
-      "bitcoin_beach": {
-        "title": "Bitcoin Beach Wallet",
+      "blink": {
+        "title": "Blink Wallet",
         "page": {
-          "title": "Conectare la <0>Bitcoin Beach Wallet</0>"
+          "title": "Conectare la <0>Blink Wallet</0>"
         }
       },
       "bitcoin_jungle": {

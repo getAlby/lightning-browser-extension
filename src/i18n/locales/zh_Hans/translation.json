@@ -122,11 +122,11 @@
           "placeholder": "config=http://your-btc-pay.org/lnd-config/212121/lnd.config"
         }
       },
-      "bitcoin_beach": {
+      "blink": {
         "page": {
-          "title": "连接<0>比特币海滩钱包</0>"
+          "title": "连接<0>眨眼钱包</0>"
         },
-        "title": "比特币海滩钱包"
+        "title": "眨眼钱包"
       },
       "commando": {
         "config": {
