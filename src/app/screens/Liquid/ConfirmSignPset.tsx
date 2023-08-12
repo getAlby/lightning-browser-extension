@@ -37,8 +37,8 @@ function ConfirmSignPset() {
   const [successMessage, setSuccessMessage] = useState("");
   const [preview, setPreview] = useState<PsetPreview | undefined>(undefined);
   const [assetRegistry, setAssetRegistry] = useState<EsploraAssetRegistry>({});
-  const [showAddresses, setShowAddresses] = useState(false);
-  const [showHex, setShowHex] = useState(false);
+  const [showDetails, setShowAddresses] = useState(false);
+  const [showRawTransaction, setShowHex] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -109,7 +109,7 @@ function ConfirmSignPset() {
                   {t("allow_sign", { host: origin.host })}{" "}
                 </h2>
                 <Hyperlink
-                  href="https://medium.com/blockstream/pset-constructing-confidential-transactions-437109bb4ac5"
+                  href="https://guides.getalby.com/overall-guide/alby-browser-extension/features/liquid"
                   target="_blank"
                 >
                   <div className="bg-blue-500 rounded-full">
@@ -119,15 +119,11 @@ function ConfirmSignPset() {
               </div>
               <div className="flex gap-2">
                 <Hyperlink onClick={toggleShowAddresses}>
-                  {showAddresses ? t("hide_addresses") : t("view_addresses")}
-                </Hyperlink>
-                <span>{"•"}</span>
-                <Hyperlink onClick={toggleShowHex}>
-                  {showHex ? t("hide_hex") : t("view_hex")}
+                  {showDetails ? t("hide_details") : t("view_details")}
                 </Hyperlink>
               </div>
 
-              {showAddresses && (
+              {showDetails && (
                 <>
                   <div>
                     <p className="font-medium dark:text-white">{t("inputs")}</p>
@@ -158,11 +154,17 @@ function ConfirmSignPset() {
                       ))}
                     </div>
                   </div>
+
+                  <Hyperlink onClick={toggleShowHex}>
+                    {showRawTransaction
+                      ? t("hide_raw_transaction")
+                      : t("view_raw_transaction")}
+                  </Hyperlink>
                 </>
               )}
             </div>
 
-            {showHex && (
+            {showRawTransaction && (
               <div className="break-all p-2 mb-4 shadow bg-white rounded-lg dark:bg-surface-02dp text-gray-500 dark:text-gray-400">
                 {pset}
               </div>

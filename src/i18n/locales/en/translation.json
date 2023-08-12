@@ -798,10 +798,10 @@
     "confirm_sign_pset": {
       "title": "Sign",
       "allow_sign": "This website asks you to sign a Liquid Transaction:",
-      "view_addresses": "View addresses",
-      "hide_addresses": "Hide addresses",
-      "view_hex": "View base64",
-      "hide_hex": "Hide base64",
+      "view_details": "View details",
+      "hide_details": "Hide details",
+      "view_raw_transaction": "View raw transaction (Base64)",
+      "hide_raw_transaction": "Hide raw transaction (Base64)",
       "inputs": "Inputs",
       "outputs": "Outputs",
       "amount": "{{amount}} {{ticker}}"
