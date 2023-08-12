@@ -1,7 +1,4 @@
-import {
-  HiddenIcon,
-  VisibleIcon,
-} from "@bitcoin-design/bitcoin-icons-react/outline";
+import logo from "/static/assets/icons/citadel.png";
 import CompanionDownloadInfo from "@components/CompanionDownloadInfo";
 import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
@@ -10,16 +7,15 @@ import { useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import PasswordViewAdornment from "~/app/components/PasswordViewAdornment";
 import msg from "~/common/lib/msg";
-
-import logo from "/static/assets/icons/citadel.png";
 
 export default function ConnectCitadel() {
   const navigate = useNavigate();
   const { t } = useTranslation("translation", {
     keyPrefix: "choose_connector.citadel",
   });
-  const [passwordView, setPasswordView] = useState(false);
+  const [passwordViewVisible, setPasswordViewVisible] = useState(false);
   const [formData, setFormData] = useState({
     password: "",
     url: "",
@@ -116,22 +112,16 @@ export default function ConnectCitadel() {
           label={t("password.label")}
           id="password"
           autoComplete="new-password"
-          type={passwordView ? "text" : "password"}
+          type={passwordViewVisible ? "text" : "password"}
           autoFocus={true}
           required
           onChange={handleChange}
           endAdornment={
-            <button
-              type="button"
-              className="flex justify-center items-center w-10 h-8"
-              onClick={() => setPasswordView(!passwordView)}
-            >
-              {passwordView ? (
-                <HiddenIcon className="h-6 w-6" />
-              ) : (
-                <VisibleIcon className="h-6 w-6" />
-              )}
-            </button>
+            <PasswordViewAdornment
+              onChange={(passwordView) => {
+                setPasswordViewVisible(passwordView);
+              }}
+            />
           }
         />
       </div>

@@ -355,14 +355,38 @@
           "settings": {
             "label": "Nostr 设置",
             "title": "Nostr 设置",
-            "imported_key_warning": "⚠️ 你当前正在使用导入的或随机生成的 Nostr 密钥。 你的Nostr私钥无法通过你的秘密钥匙恢复，因此请记住备份你的Nostr私钥。",
-            "can_restore": "✅ Nostr 密钥已从你的秘密钥匙派生",
-            "derive": "从你的秘密钥匙中派生 Nostr 密钥",
-            "no_secret_key": "💡 你还没有秘密钥匙。 <0>单击此处</0></div>创建你的秘密钥匙并派生你的 nostr 密钥。",
-            "description": "从你的秘密密钥中派生 Nostr 密钥，或通过将其粘贴到“Nostr 私钥”字段来导入现有的私钥。"
+            "imported_key_warning": "⚠️ 你当前正在使用导入的或随机生成的 Nostr 密钥。 你的 Nostr 私钥将无法通过你的恢复短语恢复，因此请记住分别备份你的 Nostr 私钥。",
+            "can_restore": "✅ Nostr 密钥已从你的主密钥派生",
+            "derive": "从主密钥中派生",
+            "no_secret_key": "💡 你还没有主密钥。 <0>单击此处</0></div>创建你的主密钥并派生你的 nostr 密钥。",
+            "description": "从你的主密钥中派生 Nostr 密钥，或通过将其粘贴到“Nostr 私钥”字段来导入现有的私钥。",
+            "remove": "移除现有的密钥"
+          },
+          "setup": {
+            "description2": "在 Alby 中创建的每个 Nostr 帐户都带有<0>恢复短语</0> —— 一组12个单词，始终保证重新获得对你的 Nostr 私钥的访问。",
+            "new_to_nostr": "Nostr 新手？<0>了解更多</0>",
+            "title": "设置你的 nostr 密钥",
+            "description": "选择是否要创建一个新的 nostr 帐户（一对私钥和公钥）或导入现有帐户。",
+            "new": {
+              "label": "创建新的 nostr 帐户",
+              "description": "通过使用一对新的 nostr 密钥生成主密钥。"
+            },
+            "import": {
+              "label": "导入 nostr 帐户",
+              "description": "使用已有的 nostr 私钥或从主密钥中将其派生",
+              "title": "你想如何导入你的 nostr 帐户？",
+              "private_key": {
+                "label": "使用 nostr 私钥",
+                "description": "粘贴你的 nostr 私钥将其导入 Alby"
+              },
+              "recovery_phrase": {
+                "label": "使用恢复短语",
+                "description": "使用主密钥恢复短语导入你的 nostr 密钥"
+              }
+            }
           }
         },
-        "title1": "帐户信息",
+        "title1": "帐户设置",
         "export": {
           "export_uri": "LNDHub凭证URI",
           "scan_qr": "通过扫描二维码将这个钱包导入Zeus或BlueWallet。",
@@ -375,13 +399,13 @@
         "remove": {
           "title": "删除此帐户",
           "subtitle": "将删除与此帐户关联的所有限额、付款数据和密钥。",
-          "confirm": "请输入帐户名称以确认删除你的帐户。\n\n ⚠️如果继续，所有关联的密钥（秘密钥匙、Nostr 等）都将被删除。 请确保你已将它们备份，没有其他方法可以恢复它们。",
+          "confirm": "请输入帐户名称以确认删除你的帐户。\n\n ⚠️如果继续，所有关联的密钥（主密钥、Nostr 等）都将被删除。 请确保你已将它们备份，没有其他方法可以恢复它们。",
           "error": "输入的帐户名称不匹配。"
         },
         "actions": {
           "remove_account": "删除帐户",
           "export": "导出",
-          "remove_secretkey": "移除秘密钥匙"
+          "remove_secretkey": "移除主密钥"
         },
         "title2": "帐户",
         "name": {
@@ -401,41 +425,48 @@
         },
         "mnemonic": {
           "backup": {
-            "button": "备份秘密钥匙",
-            "warning": "⚠️ 别忘了将你的秘密钥匙备份！不备份可能会导致永久失去对你的 Nostr 身份或使用此密钥管理的资产的访问权限。",
-            "title": "备份你的秘密钥匙",
-            "save": "保存秘密钥匙",
+            "button": "备份恢复短语",
+            "warning": "⚠️ 别忘了将你的恢复短语备份！不备份可能会导致永久失去对你的主密钥、Nostr 身份或使用此密钥管理的资产的访问权限。",
+            "title": "备份你的恢复短语",
+            "save": "保存主密钥",
             "protocols": {
               "nostr": "Nostr"
-            }
+            },
+            "items": {
+              "recovery_phrase": "你将始终可以通过使用主密钥的恢复短语来访问它。",
+              "storage": "请确保在一个安全且私密的地方将它记下！",
+              "words": "恢复短语是一组12个单词，它的工作方式类似于秘密，但是如果丢失，它不能被更改或重置。"
+            },
+            "description": "请写下恢复短语，以便能够在新设备上恢复主密钥，或以防失去帐户访问。"
           },
-          "existing_nostr_key_notice": "⚠️ 该账户已设置 nostr 私钥，不会从此秘密钥匙派生。你可以从你的帐户设置管理你的 nostr 密钥。",
+          "existing_nostr_key_notice": "⚠️ 该账户已设置 nostr 私钥，因此不会从此主密钥派生。你可以通过你的帐户设置管理你的 nostr 密钥。",
           "title": "🔑密钥管理",
-          "saved": "秘密钥匙已加密并成功保存。",
+          "saved": "主密钥已加密并成功保存。",
           "generate": {
-            "title": "生成你的秘密钥匙",
-            "button": "生成秘密钥匙",
-            "confirm": "我已将我帐户的秘密钥匙保存在私密且安全的地方",
-            "error_confirm": "请确认你已将你的秘密钥匙备份。"
+            "title": "生成新的主密钥",
+            "button": "生成主密钥",
+            "confirm": "我已将我的帐户主密钥的恢复短语保存到私密且安全的地方。",
+            "error_confirm": "请确认你已将你的恢复短语备份。",
+            "description": "主密钥允许你与各种协议进行互动，例如：Nostr、基础层比特币或 LNURL-auth。"
           },
           "import": {
-            "title": "导入秘密钥匙",
-            "description": "使用现有的秘密钥匙来恢复你的派生密钥。",
-            "button": "导入秘密钥匙"
+            "title": "导入你的主密钥",
+            "description": "通过使用恢复短语将主密钥导入 Alby。",
+            "button": "导入主密钥"
           },
           "inputs": {
-            "title": "你的秘密钥匙"
+            "title": "恢复短语"
           },
           "lnurl": {
             "title": "闪电登录",
-            "use_mnemonic": "使用秘密钥匙登录闪电驱动的应用程序（LNURL Auth）"
+            "use_mnemonic": "使用主密钥登录闪电驱动的应用程序（LNURL Auth）"
           }
         },
         "remove_secretkey": {
-          "confirm": "请输入帐户名称以确认删除你的秘密钥匙。",
-          "success": "已成功移除秘密钥匙。",
-          "title": "移除秘密钥匙",
-          "subtitle": "将秘密钥匙从该帐户移除。"
+          "confirm": "请输入帐户名称以确认删除你的主密钥。",
+          "success": "已成功移除主密钥。",
+          "title": "移除主密钥",
+          "subtitle": "将主密钥从该帐户移除。"
         }
       }
     },
@@ -608,7 +639,8 @@
     },
     "receive": {
       "actions": {
-        "create_invoice": "创建发票"
+        "create_invoice": "创建发票",
+        "copy_lightning_address": "复制闪电地址"
       },
       "amount": {
         "placeholder": "聪金额...",

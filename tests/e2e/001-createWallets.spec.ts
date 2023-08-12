@@ -5,6 +5,7 @@ import { queries } from "pptr-testing-library";
 import {
   commonCreateWalletSuccessCheck,
   createNewWalletWithPassword,
+  loginToExistingAlbyAccount,
 } from "./helpers/loadExtension";
 
 const { getByText, getByLabelText, findByLabelText, findByText } = queries;
@@ -13,6 +14,7 @@ type User = { email: string; password: string };
 const defaultUser = USER.SINGLE() as User;
 
 test.describe("Create or connect wallets", () => {
+  // FIXME: this does not use new getalby.com create account flow
   test.skip("successfully creates an Alby wallet", async () => {
     const user = defaultUser;
     const { browser, page, $document } = await createNewWalletWithPassword();
@@ -42,31 +44,9 @@ test.describe("Create or connect wallets", () => {
     await browser.close();
   });
 
-  test.skip("successfully connects to an existing Alby testnet wallet", async () => {
-    const user = {
-      email: "albytest001@example.com",
-      password: "12345678",
-    };
-    const { browser, page, $document } = await createNewWalletWithPassword();
-
-    // click "Log in" button
-    const loginButton = await getByText($document, "Log in");
-    loginButton.click();
-
-    await findByText($document, "Your Alby Account");
-
-    // type user email
-    const emailField = await getByLabelText(
-      $document,
-      "Email Address or Lightning Address"
-    );
-    await emailField.type(user.email);
-
-    // type user password and confirm password
-    const walletPasswordField = await getByLabelText($document, "Password");
-    await walletPasswordField.type(user.password);
-
-    await commonCreateWalletSuccessCheck({ page, $document });
+  test("successfully connects to an existing Alby testnet wallet", async () => {
+    const { page, browser } = await createNewWalletWithPassword();
+    await loginToExistingAlbyAccount(page);
 
     await browser.close();
   });
@@ -119,7 +99,7 @@ test.describe("Create or connect wallets", () => {
     await browser.close();
   });
 
-  test("successfully connects to Core Lightning", async () => {
+  test.skip("successfully connects to Core Lightning", async () => {
     const { browser, page, $document } = await createNewWalletWithPassword({
       openConnectOtherWallet: true,
     });

@@ -1,7 +1,3 @@
-import {
-  HiddenIcon,
-  VisibleIcon,
-} from "@bitcoin-design/bitcoin-icons-react/filled";
 import Container from "@components/Container";
 import Loading from "@components/Loading";
 import { FormEvent, useCallback, useEffect, useState } from "react";
@@ -12,6 +8,7 @@ import Alert from "~/app/components/Alert";
 import Button from "~/app/components/Button";
 import { ContentBox } from "~/app/components/ContentBox";
 import InputCopyButton from "~/app/components/InputCopyButton";
+import PasswordViewAdornment from "~/app/components/PasswordViewAdornment";
 import TextField from "~/app/components/form/TextField";
 import api, { GetAccountRes } from "~/common/lib/api";
 import { default as nostr, default as nostrlib } from "~/common/lib/nostr";
@@ -191,20 +188,11 @@ function NostrSettings() {
                 }}
                 endAdornment={
                   <div className="flex items-center gap-1 px-2">
-                    <button
-                      type="button"
-                      tabIndex={-1}
-                      className="flex justify-center items-center h-8"
-                      onClick={() => {
-                        setNostrPrivateKeyVisible(!nostrPrivateKeyVisible);
+                    <PasswordViewAdornment
+                      onChange={(passwordView) => {
+                        setNostrPrivateKeyVisible(passwordView);
                       }}
-                    >
-                      {nostrPrivateKeyVisible ? (
-                        <HiddenIcon className="h-6 w-6" />
-                      ) : (
-                        <VisibleIcon className="h-6 w-6" />
-                      )}
-                    </button>
+                    />
                     <InputCopyButton value={nostrPrivateKey} className="w-6" />
                   </div>
                 }

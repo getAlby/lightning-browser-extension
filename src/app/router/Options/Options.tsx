@@ -54,7 +54,7 @@ function Options() {
               </RequireAuth>
             }
           >
-            <Route index element={<Navigate to="/publishers" replace />} />
+            <Route index element={<Navigate to="/wallet" replace />} />
             <Route path="discover">
               <Route index element={<Discover />} />
             </Route>

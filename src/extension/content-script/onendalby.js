@@ -97,7 +97,7 @@ function postMessage(ev, response) {
       data: response,
       scope: "alby",
     },
-    "*"
+    window.location.origin
   );
 }
 
