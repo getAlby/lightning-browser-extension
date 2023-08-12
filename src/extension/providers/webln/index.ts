@@ -24,27 +24,21 @@ type KeysendArgs = {
 
 export default class WebLNProvider {
   enabled: boolean;
-  isEnabled: boolean;
-  executing: boolean;
   private _eventEmitter: EventEmitter;
 
   constructor() {
     this.enabled = false;
-    this.isEnabled = false; // seems some webln implementations use webln.isEnabled and some use webln.enabled
-    this.executing = false;
     this._eventEmitter = new EventEmitter();
   }
 
-  async enable() {
+  async enable(): Promise<void> {
     if (this.enabled) {
-      return { enabled: true };
+      return;
     }
     const result = await this.execute("enable");
     if (typeof result.enabled === "boolean") {
       this.enabled = result.enabled;
-      this.isEnabled = result.enabled;
     }
-    return result;
   }
 
   getInfo() {
