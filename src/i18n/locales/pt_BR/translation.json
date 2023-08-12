@@ -443,17 +443,6 @@
             "title": "Login Relâmpago"
           }
         },
-        "bitcoin": {
-          "network": {
-            "title": "Rede Bitcoin",
-            "options": {
-              "bitcoin": "Rede principal",
-              "testnet": "Rede de testes",
-              "regtest": "Regtest"
-            },
-            "subtitle": "Escolha a rede para gerar endereços e decodificar transações"
-          }
-        },
         "remove_secretkey": {
           "title": "Remover chave mestra",
           "confirm": "Digite o nome da conta para confirmar a exclusão de sua chave mestra.",
@@ -833,11 +822,6 @@
       "go": "Ir para sua conta Alby na web →",
       "title": "Receber via endereço bitcoin",
       "instructions2": "Seu endereço bitcoin está na página <0>Receber</0>."
-    },
-    "confirm_get_address": {
-      "title": "Obter endereço",
-      "heading": "Este site solicita ler:",
-      "content": "Seu endereço de recebimento Bitcoin"
     },
     "lnurlredeem": {
       "title": "Resgatar bitcoin",

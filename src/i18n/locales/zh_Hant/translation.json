@@ -477,17 +477,6 @@
           "existing_nostr_key_notice": "⚠️ 該帳戶已設置 nostr 私鑰，因此不會從此主密鑰派生。你可以通過你的帳戶設置管理你的 nostr 密鑰。",
           "saved": "主密鑰已加密並成功保存。"
         },
-        "bitcoin": {
-          "network": {
-            "options": {
-              "bitcoin": "主網",
-              "testnet": "測試網",
-              "regtest": "Regtest"
-            },
-            "subtitle": "選擇網絡來派生地址和解碼交易",
-            "title": "比特幣網絡"
-          }
-        },
         "remove_secretkey": {
           "subtitle": "將主密鑰從該帳戶移除。",
           "title": "移除主密鑰",
@@ -857,11 +846,6 @@
       "instructions2": "你可以在<0>收款</0>頁面上找到你的比特幣地址。",
       "go": "前往你的 Alby 帳戶 →",
       "title": "通過比特幣地址接收"
-    },
-    "confirm_get_address": {
-      "content": "你的比特幣收款地址",
-      "title": "獲取地址",
-      "heading": "該網站要求你讀取："
     },
     "lnurlredeem": {
       "errors": {

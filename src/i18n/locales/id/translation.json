@@ -422,17 +422,6 @@
           },
           "title": "🔑 Manajemen Kunci"
         },
-        "bitcoin": {
-          "network": {
-            "title": "Bitcoin Network",
-            "subtitle": "Pilih jaringan untuk menurunkan alamat-alamat dan membaca transaksi",
-            "options": {
-              "bitcoin": "Mainnet",
-              "testnet": "Testnet",
-              "regtest": "Regtest"
-            }
-          }
-        },
         "nostr": {
           "title": "Nostr",
           "settings": {
@@ -770,10 +759,6 @@
         "amount_too_small": "Jumlah kurang dari minimum",
         "amount_too_big": "Jumlah melebihi maksimum"
       }
-    },
-    "confirm_get_address": {
-      "title": "Dapatkan Alamat",
-      "content": "Alamat Bitcoin kamu"
     },
     "confirm_keysend": {
       "title": "Setujui Pembayaran",

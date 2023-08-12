@@ -412,17 +412,6 @@
           "title": "名称",
           "placeholder": "帐户名称"
         },
-        "bitcoin": {
-          "network": {
-            "title": "比特币网络",
-            "options": {
-              "bitcoin": "主网",
-              "testnet": "测试网",
-              "regtest": "Regtest"
-            },
-            "subtitle": "选择网络来派生地址和解码交易"
-          }
-        },
         "mnemonic": {
           "backup": {
             "button": "备份恢复短语",
@@ -855,11 +844,6 @@
       "go": "前往你的 Alby 帐户 →",
       "title": "通过比特币地址接收",
       "instructions2": "你可以在<0>收款</0>页面上找到你的比特币地址。"
-    },
-    "confirm_get_address": {
-      "title": "获取地址",
-      "content": "你的比特币收款地址",
-      "heading": "本网站要求你读取："
     },
     "lnurlredeem": {
       "title": "兑换比特币",

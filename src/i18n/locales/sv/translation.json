@@ -451,17 +451,6 @@
             "use_mnemonic": "Använd Master Key för att logga in på lightning appar (LNURL Auth)"
           }
         },
-        "bitcoin": {
-          "network": {
-            "title": "Bitcoin Nätverket",
-            "subtitle": "Välj nätverk för att härleda adresser och avkoda transaktioner",
-            "options": {
-              "bitcoin": "Mainnet",
-              "testnet": "Testnet",
-              "regtest": "Regtest"
-            }
-          }
-        },
         "remove_secretkey": {
           "title": "Ta bort huvudnyckeln",
           "subtitle": "Tar bort huvudnyckeln från det här kontot.",
@@ -858,11 +847,6 @@
       "instructions2": "Du hittar din bitcoin adress på <0>Ta emot</0> sidan.",
       "go": "Gå till ditt Alby konto →",
       "instructions1": "För att ta emot bitcoin via en bitcoin adress, logga in på ditt <0>Alby-konto</0> på getalby.com"
-    },
-    "confirm_get_address": {
-      "title": "Få adress",
-      "heading": "Den här webbplatsen ber dig att läsa:",
-      "content": "Din Bitcoin-mottagningsadress"
     },
     "scan_qrcode": {
       "title": "Väntar på att skanna"

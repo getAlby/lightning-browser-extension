@@ -561,17 +561,6 @@
             "use_mnemonic": "Master Key für die Anmeldung bei Lightning-Anwendungen verwenden (LNURL Auth)"
           }
         },
-        "bitcoin": {
-          "network": {
-            "title": "Bitcoin-Netzwerk",
-            "subtitle": "Wähle ein Netz zur Ableitung von Adressen und zur Entschlüsselung von Transaktionen",
-            "options": {
-              "bitcoin": "Mainnet",
-              "testnet": "Testnet",
-              "regtest": "Regtest"
-            }
-          }
-        },
         "remove_secretkey": {
           "title": "Hauptschlüssel entfernen",
           "subtitle": "Entfernt den Hauptschlüssel von diesem Konto.",
@@ -856,11 +845,6 @@
       "instructions2": "Du kannst deine Bitcoin-Adresse auf der Seite <0>Empfangen</0> finden.",
       "go": "Gehe zu deinem Alby Account →",
       "instructions1": "Um Bitcoin über eine Bitcoin-Adresse zu erhalten, melde dich bei deinem <0>Alby-Account</0> auf getalby.com an"
-    },
-    "confirm_get_address": {
-      "title": "Adresse abrufen",
-      "heading": "Diese Website bittet dich es zu lesen:",
-      "content": "Deine Bitcoin-Empfangsadresse"
     },
     "lnurlredeem": {
       "errors": {
