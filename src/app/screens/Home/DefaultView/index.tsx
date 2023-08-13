@@ -14,8 +14,10 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import BalanceBox from "~/app/components/BalanceBox";
+import Tips from "~/app/components/Tips";
 import { useAccount } from "~/app/context/AccountContext";
 import { useInvoices } from "~/app/hooks/useInvoices";
+import { useTips } from "~/app/hooks/useTips";
 import { useTransactions } from "~/app/hooks/useTransactions";
 import { PublisherLnData } from "~/app/screens/Home/PublisherLnData";
 import api from "~/common/lib/api";
@@ -61,6 +63,8 @@ const DefaultView: FC<Props> = (props) => {
     loadTransactions,
     itemsLimit,
   ]);
+
+  const { tips } = useTips();
 
   useEffect(() => {
     loadInvoices(itemsLimit);
@@ -114,6 +118,15 @@ const DefaultView: FC<Props> = (props) => {
       {props.renderPublisherWidget && !!props.lnDataFromCurrentTab?.length && (
         <PublisherLnData lnData={props.lnDataFromCurrentTab[0]} />
       )}
+      <div className="m-5 pb-5">
+        <div className="text-white mb-2 font-medium">
+          💡 Gettting started with Alby
+        </div>
+        <div className="grid grid-cols-2 space-x-3 items-stretch">
+          <Tips />
+        </div>
+      </div>
+
       <div className="p-4">
         <div className="flex space-x-4 mb-4">
           <BalanceBox />

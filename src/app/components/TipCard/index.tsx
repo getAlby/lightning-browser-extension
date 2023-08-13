@@ -25,7 +25,7 @@ export default function TipCard({
   return (
     <div
       className={classNames(
-        "shadow-md p-6 w-80 h-36 rounded-lg border relative",
+        "shadow-md p-6 rounded-lg border relative overflow-hidden",
         !!className && className
       )}
     >

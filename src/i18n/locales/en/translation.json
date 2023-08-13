@@ -762,7 +762,7 @@
         },
         "mnemonic": {
           "title": "Nostr",
-          "description": "Planning to use Nostr?\nGenerate your keys now."
+          "description": "Planning to use Nostr?"
         }
       }
     },
