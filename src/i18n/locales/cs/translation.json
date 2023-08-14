@@ -753,9 +753,6 @@
       },
       "open_location": "Otevřít webovou stránku"
     },
-    "confirm_or_cancel": {
-      "only_trusted": "Spojit pouze se stránkami, kterým důvěřujete."
-    },
     "budget_control": {
       "remember": {
         "label": "Zapamatovat a nastavit rozpočet",

@@ -999,9 +999,6 @@
         "imported": "EINGEFÜHRT"
       }
     },
-    "confirm_or_cancel": {
-      "only_trusted": "Verbinde dich nur mit Websites, denen du vertraust."
-    },
     "transaction_list": {
       "tabs": {
         "outgoing": "Ausgehend von",

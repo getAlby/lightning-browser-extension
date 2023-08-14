@@ -892,9 +892,6 @@
         "allow_camera_access": "Mohon izinkan akses kamera pada pengaturan"
       }
     },
-    "confirm_or_cancel": {
-      "only_trusted": "Hanya hubungkan dengan situs-situs yang kamu percayai."
-    },
     "budget_control": {
       "remember": {
         "label": "Ingat dan atur budget"

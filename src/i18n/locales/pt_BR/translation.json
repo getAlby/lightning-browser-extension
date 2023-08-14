@@ -999,9 +999,6 @@
       },
       "open_location": "Abrir link"
     },
-    "confirm_or_cancel": {
-      "only_trusted": "Conecte-se apenas nos sites em que você confia."
-    },
     "budget_control": {
       "remember": {
         "label": "Lembrar e definir um limite de gastos",
