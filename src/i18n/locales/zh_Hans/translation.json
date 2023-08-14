@@ -1000,9 +1000,6 @@
       "preimage": "原像",
       "open_location": "打开网站"
     },
-    "confirm_or_cancel": {
-      "only_trusted": "仅连接你信任的网站。"
-    },
     "budget_control": {
       "remember": {
         "label": "保存并设定预算",

@@ -986,9 +986,6 @@
       },
       "open_location": "打開網站"
     },
-    "confirm_or_cancel": {
-      "only_trusted": "僅連接你信任的網站。"
-    },
     "budget_control": {
       "remember": {
         "label": "保存並設定預算",

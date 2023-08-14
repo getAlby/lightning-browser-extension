@@ -594,9 +594,6 @@
         "podcast": "Podcast"
       }
     },
-    "confirm_or_cancel": {
-      "only_trusted": "Muodosta yhteys vain sellaisiin sivustoihin, joihin luotat."
-    },
     "budget_control": {
       "remember": {
         "label": "Muista ja aseta budjetti",
@@ -639,6 +636,5 @@
         "active": "TOIMIVA"
       }
     }
-  },
-  "permissions": {}
+  }
 }

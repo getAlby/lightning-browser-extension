@@ -704,9 +704,6 @@
       },
       "open_location": "Website खोलें"
     },
-    "confirm_or_cancel": {
-      "only_trusted": "केवल उन साइटों से जुड़ें जिन पर आप भरोसा करते हैं।"
-    },
     "budget_control": {
       "remember": {
         "label": "याद रखें और एक बजट निर्धारित करें",

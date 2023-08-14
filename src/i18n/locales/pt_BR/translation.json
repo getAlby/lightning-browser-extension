@@ -304,7 +304,7 @@
         "is_blocked_hint": "A Alby está desativada em {{host}}",
         "block_removed": "{{host}} ativado. Por favor, recarregue o site.",
         "no_outgoing_transactions": "Você ainda não realizou transações usando esta conta.",
-        "all_transactions_link": "Ver todas as transações",
+        "all_transactions_link": "Mostrar tudo",
         "no_incoming_transactions": "Você ainda não recebeu transações nesta conta."
       }
     },
@@ -456,9 +456,9 @@
             "testnet": "Rede de testes",
             "regtest": "Regtest"
           },
-          "subtitle": "Escolha a rede para gerar endereços e decodificar transações bitcoin and liquid"
+          "subtitle": "Escolha a rede para gerar endereços e decodificar transações bitcoin e liquid"
         },
-        "no_mnemonic_hint": "💡 Você ainda não tem uma chave mestre. <0>Clique aqui</0></div> para criar sua chave mestre e desbloquear essas configurações."
+        "no_mnemonic_hint": "💡 Você ainda não tem uma chave mestra. <0>Clique aqui</0></div> para criar sua chave mestra e desbloquear essas configurações."
       }
     },
     "enable": {
@@ -998,9 +998,6 @@
         "podcast": "Podcast"
       },
       "open_location": "Abrir link"
-    },
-    "confirm_or_cancel": {
-      "only_trusted": "Conecte-se apenas nos sites em que você confia."
     },
     "budget_control": {
       "remember": {
