@@ -566,7 +566,17 @@
           "subtitle": "Entfernt den Hauptschlüssel von diesem Konto.",
           "confirm": "Bitte gebe den Namen des Kontos ein, um die Löschung deines Hauptschlüssels zu bestätigen.",
           "success": "Der Hauptschlüssel wurde erfolgreich entfernt."
-        }
+        },
+        "network": {
+          "subtitle": "Wähle ein Netzwerk zur Ableitung von Adressen und zur Entschlüsselung von Bitcoin- und Liquid-Transaktionen",
+          "options": {
+            "bitcoin": "Mainnet",
+            "testnet": "Testnet",
+            "regtest": "Regtest"
+          },
+          "title": "Netzwerk"
+        },
+        "no_mnemonic_hint": "💡 Du hast noch keinen Hauptschlüssel. <0>Klicken Sie hier</0></div>, um deinen Hauptschlüssel zu erstellen und diese Einstellungen freizuschalten."
       }
     },
     "enable": {
@@ -862,6 +872,33 @@
     },
     "scan_qrcode": {
       "title": "Warten auf den Scan"
+    },
+    "confirm_sign_pset": {
+      "title": "Unterschrift",
+      "allow_sign": "Auf dieser Website wirst du aufgefordert, eine Liquid Transaktion zu unterzeichnen:",
+      "view_details": "Details anzeigen",
+      "hide_details": "Details ausblenden",
+      "view_raw_transaction": "Rohtransaktion anzeigen (Base64)",
+      "hide_raw_transaction": "Rohtransaktion ausblenden (Base64)",
+      "inputs": "Eingaben",
+      "outputs": "Ausgänge",
+      "amount": "{{Betrag}} {{ticker}}"
+    },
+    "bitcoin": {
+      "confirm_get_address": {
+        "title": "Adresse abrufen"
+      },
+      "allow": "Erlaube dieser Website:",
+      "allow_sign": "Erlaube {{host}} zu unterschreiben:",
+      "block_and_ignore": "Blockieren und Ignorieren von {{host}}",
+      "block_added": "{{host}} zur Blockliste hinzugefügt, bitte lade die Website neu."
+    },
+    "liquid": {
+      "title": "Flüssig",
+      "allow": "Erlaube dieser Website:",
+      "block_and_ignore": "Blockieren und Ignorieren von {{host}}",
+      "allow_sign": "Erlaube {{host}} zu unterschreiben:",
+      "block_added": "{{host}} zur Blockliste hinzugefügt, bitte lade die Website neu."
     }
   },
   "components": {
@@ -1143,6 +1180,13 @@
     },
     "webln": {
       "getbalance": "Lese den Saldo deines Kontos ab."
+    },
+    "liquid": {
+      "getaddress": "Lese deine Liquid-Empfangsadresse.",
+      "signschnorr": "Unterschreibe die Nachricht mit deinem Schlüssel."
+    },
+    "bitcoin": {
+      "getaddress": "Lese deine Bitcoin-Empfangsadresse."
     }
   }
 }
