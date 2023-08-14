@@ -2,6 +2,7 @@ import * as accounts from "./actions/accounts";
 import * as allowances from "./actions/allowances";
 import * as blocklist from "./actions/blocklist";
 import * as cache from "./actions/cache";
+import * as liquid from "./actions/liquid";
 import * as ln from "./actions/ln";
 import lnurl, { auth } from "./actions/lnurl";
 import * as mnemonic from "./actions/mnemonic";
@@ -66,6 +67,11 @@ const routes = {
   generateMnemonic: mnemonic.generateMnemonic,
   getSwapInfo: swaps.info,
   createSwap: swaps.createSwap,
+  liquid: {
+    signPset: liquid.signPset,
+    getPsetPreview: liquid.getPsetPreview,
+    fetchAssetRegistry: liquid.fetchAssetRegistry,
+  },
   nostr: {
     generatePrivateKey: nostr.generatePrivateKey,
     getPrivateKey: nostr.getPrivateKey,
@@ -79,7 +85,7 @@ const routes = {
     webbtc: {
       enable: allowances.enable,
       getInfo: webbtc.getInfo,
-      getAddressWithPrompt: webbtc.getAddressWithPrompt,
+      getAddressOrPrompt: webbtc.getAddressOrPrompt,
     },
     alby: {
       enable: allowances.enable,
@@ -95,6 +101,11 @@ const routes = {
       makeInvoice: webln.makeInvoiceOrPrompt,
       getBalanceOrPrompt: webln.getBalanceOrPrompt,
       request: ln.request,
+    },
+    liquid: {
+      enable: allowances.enable,
+      getAddressOrPrompt: liquid.getAddressOrPrompt,
+      signPsetWithPrompt: liquid.signPsetWithPrompt,
     },
     nostr: {
       enable: allowances.enable,

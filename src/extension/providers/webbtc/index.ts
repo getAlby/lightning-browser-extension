@@ -50,7 +50,7 @@ export default class WebBTCProvider {
     if (!this.enabled) {
       throw new Error("Provider must be enabled before calling getAddress");
     }
-    return this.execute("getAddressWithPrompt", {});
+    return this.execute("getAddressOrPrompt", {});
   }
 
   request(method: string, params: Record<string, unknown>) {

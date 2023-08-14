@@ -7,7 +7,7 @@ import browser from "webextension-polyfill";
 const webbtcCalls = [
   "webbtc/enable",
   "webbtc/getInfo",
-  "webbtc/getAddressWithPrompt",
+  "webbtc/getAddressOrPrompt",
 ];
 // calls that can be executed when `window.webbtc` is not enabled for the current content page
 const disabledCalls = ["webbtc/enable"];
