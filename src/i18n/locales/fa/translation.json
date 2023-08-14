@@ -955,9 +955,6 @@
       },
       "open_location": "بازکردن وبسایت"
     },
-    "confirm_or_cancel": {
-      "only_trusted": "فقط به سایت هایی که اعتماد دارید متصل شوید."
-    },
     "budget_control": {
       "remember": {
         "label": "بودجه ای تنظیم کرده و به یاد بسپارید",

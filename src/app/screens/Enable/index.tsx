@@ -86,7 +86,7 @@ function Enable(props: Props) {
             isSmall={false}
           />
 
-          <div className="dark:text-white pt-6 mb-4">
+          <div className="dark:text-white pt-6">
             <p className="mb-2">{t("allow")}</p>
 
             <div className="mb-2 flex items-center">

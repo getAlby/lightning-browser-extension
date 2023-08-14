@@ -987,9 +987,6 @@
       },
       "open_location": "Öppna websida"
     },
-    "confirm_or_cancel": {
-      "only_trusted": "Anslut endast till tillförlitliga webbplatser."
-    },
     "budget_control": {
       "remember": {
         "label": "Kom ihåg att ange en budget",

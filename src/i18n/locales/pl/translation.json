@@ -806,9 +806,6 @@
       },
       "open_location": "Otwórz stronę"
     },
-    "confirm_or_cancel": {
-      "only_trusted": "Łącz się tylko ze stronami, którym ufasz."
-    },
     "budget_control": {
       "remember": {
         "label": "Zapamiętaj i ustaw budżet",
