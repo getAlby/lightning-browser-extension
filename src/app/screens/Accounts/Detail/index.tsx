@@ -23,6 +23,7 @@ import Toggle from "~/app/components/form/Toggle";
 import { useAccount } from "~/app/context/AccountContext";
 import { useAccounts } from "~/app/context/AccountsContext";
 import { useSettings } from "~/app/context/SettingsContext";
+import { classNames } from "~/app/utils";
 import api, { GetAccountRes } from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import nostr from "~/common/lib/nostr";
@@ -137,6 +138,7 @@ function AccountDetail() {
       toast.error(t("remove.error"));
     }
   }
+
   async function removeMnemonic({ id, name }: AccountAction) {
     const confirm = window
       .prompt(t("remove_secretkey.confirm", { name }))
@@ -417,68 +419,97 @@ function AccountDetail() {
               </div>
             </div>
             <MenuDivider />
-            <div className="flex justify-between items-end">
-              <div className="w-7/12 flex flex-col gap-2">
-                <p className="text-gray-900 dark:text-white font-medium">
-                  {t("bitcoin.network.title")}
-                </p>
-                <p className="text-gray-500 text-sm dark:text-neutral-500">
-                  {t("bitcoin.network.subtitle")}
-                </p>
-              </div>
 
-              <div className="w-1/5 flex-none">
-                <Select
-                  name="network"
-                  value={account.bitcoinNetwork}
-                  onChange={async (event) => {
-                    // update local value
-                    setAccount({
-                      ...account,
-                      bitcoinNetwork: event.target.value as BitcoinNetworkType,
-                    });
-                    await api.editAccount(id, {
-                      bitcoinNetwork: event.target.value as BitcoinNetworkType,
-                    });
-                  }}
-                >
-                  <option value="bitcoin">
-                    {t("bitcoin.network.options.bitcoin")}
-                  </option>
-                  <option value="testnet">
-                    {t("bitcoin.network.options.testnet")}
-                  </option>
-                  <option value="regtest">
-                    {t("bitcoin.network.options.regtest")}
-                  </option>
-                </Select>
-              </div>
-            </div>
-            <MenuDivider />
-            <div className="flex justify-between items-center">
-              <div className="w-7/12 flex flex-col gap-2">
-                <p className="text-gray-900 dark:text-white font-medium">
-                  {t("mnemonic.lnurl.title")}
-                </p>
-                <p className="text-gray-500 text-sm dark:text-neutral-500">
-                  {t("mnemonic.lnurl.use_mnemonic")}
-                </p>
-              </div>
-
-              <div className="w-1/5 flex-none flex justify-end items-center">
-                <Toggle
-                  checked={account.useMnemonicForLnurlAuth}
-                  onChange={async () => {
-                    // update local value
-                    setAccount({
-                      ...account,
-                      useMnemonicForLnurlAuth: !account.useMnemonicForLnurlAuth,
-                    });
-                    await api.editAccount(id, {
-                      useMnemonicForLnurlAuth: !account.useMnemonicForLnurlAuth,
-                    });
-                  }}
+            {!hasMnemonic && (
+              <Alert type="warn">
+                <Trans
+                  i18nKey={"no_mnemonic_hint"}
+                  t={t}
+                  components={[
+                    // eslint-disable-next-line react/jsx-key
+                    <Link
+                      to="secret-key/generate"
+                      relative="path"
+                      className="underline"
+                    />,
+                  ]}
                 />
+              </Alert>
+            )}
+            <div
+              className={classNames(
+                "flex flex-col gap-4",
+                !hasMnemonic && "opacity-30"
+              )}
+            >
+              <div className="flex justify-between items-end">
+                <div className="w-7/12 flex flex-col gap-2">
+                  <p className="text-gray-900 dark:text-white font-medium">
+                    {t("network.title")}
+                  </p>
+                  <p className="text-gray-500 text-sm dark:text-neutral-500">
+                    {t("network.subtitle")}
+                  </p>
+                </div>
+
+                <div className="w-1/5 flex-none">
+                  <Select
+                    name="network"
+                    value={account.bitcoinNetwork}
+                    onChange={async (event) => {
+                      // update local value
+                      setAccount({
+                        ...account,
+                        bitcoinNetwork: event.target
+                          .value as BitcoinNetworkType,
+                      });
+                      await api.editAccount(id, {
+                        bitcoinNetwork: event.target
+                          .value as BitcoinNetworkType,
+                      });
+                    }}
+                  >
+                    <option value="bitcoin">
+                      {t("network.options.bitcoin")}
+                    </option>
+                    <option value="testnet">
+                      {t("network.options.testnet")}
+                    </option>
+                    <option value="regtest">
+                      {t("network.options.regtest")}
+                    </option>
+                  </Select>
+                </div>
+              </div>
+              <MenuDivider />
+              <div className="flex justify-between items-end">
+                <div className="w-7/12 flex flex-col gap-2">
+                  <p className="text-gray-900 dark:text-white font-medium">
+                    {t("mnemonic.lnurl.title")}
+                  </p>
+                  <p className="text-gray-500 text-sm dark:text-neutral-500">
+                    {t("mnemonic.lnurl.use_mnemonic")}
+                  </p>
+                </div>
+
+                <div className="w-1/5 flex-none flex justify-end items-center">
+                  <Toggle
+                    disabled={!hasMnemonic}
+                    checked={account.useMnemonicForLnurlAuth}
+                    onChange={async () => {
+                      // update local value
+                      setAccount({
+                        ...account,
+                        useMnemonicForLnurlAuth:
+                          !account.useMnemonicForLnurlAuth,
+                      });
+                      await api.editAccount(id, {
+                        useMnemonicForLnurlAuth:
+                          !account.useMnemonicForLnurlAuth,
+                      });
+                    }}
+                  />
+                </div>
               </div>
             </div>
           </div>
