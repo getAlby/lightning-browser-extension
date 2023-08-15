@@ -2254,13 +2254,13 @@ ajv@^8.9.0:
     require-from-string "^2.0.2"
     uri-js "^4.2.2"
 
-alby-js-sdk@^2.1.2:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/alby-js-sdk/-/alby-js-sdk-2.1.2.tgz#fc822832eb68f8dd08067d84924fc2bb8d9f74fd"
-  integrity sha512-dl3sKcfH14kZ3vPokSWp7u64hJx2WoKXA0PejKh+yiVC3bNkS2Os3NPB9bvX0Tlgcqsse4b8b0t1iQknHxOTQg==
+alby-js-sdk@^2.1.4:
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/alby-js-sdk/-/alby-js-sdk-2.1.4.tgz#61c859243122be002d5a5d9b3ee43ca4a1a56113"
+  integrity sha512-f1vB88Lr24ikVF6VlR4Y505a7n8hWUd0jFg0WVPArS+i5+nGg5B9VBHV1BqOT9/ZM9p7hAwbinpel6ZtgJBwPw==
   dependencies:
     crypto-js "^4.1.1"
-    nostr-tools "^1.13.1"
+    nostr-tools "1.13.1"
 
 ansi-escapes@^4.2.1, ansi-escapes@^4.3.0:
   version "4.3.2"
@@ -7451,7 +7451,7 @@ normalize-range@^0.1.2:
   resolved "https://registry.yarnpkg.com/normalize-range/-/normalize-range-0.1.2.tgz#2d10c06bdfd312ea9777695a4d28439456b75942"
   integrity sha1-LRDAa9/TEuqXd2laTShDlFa3WUI=
 
-nostr-tools@^1.13.1:
+nostr-tools@1.13.1:
   version "1.13.1"
   resolved "https://registry.yarnpkg.com/nostr-tools/-/nostr-tools-1.13.1.tgz#191298d85a977cc50790e1c1d1cb83b86d3a9656"
   integrity sha512-DTwpbxTH1/ar+afWd4gmVdpHH8CF290kdaxi00Llra88SHE6e38XuyzlRABVTcrBaceLMnoDdHmV3x16MoEFJg==
