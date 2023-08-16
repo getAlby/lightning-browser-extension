@@ -15,7 +15,7 @@ if (document) {
   // Intercept any `lightning:` requests
   window.addEventListener(
     "click",
-    (ev) => {
+    async (ev) => {
       // Use composedPath() for detecting links inside a Shadow DOM
       // https://developer.mozilla.org/en-US/docs/Web/API/Event/composedPath
       const target = ev.composedPath()[0];
@@ -68,56 +68,47 @@ if (document) {
         lnurl = paymentRequest.match(/(\S+@\S+)/)[1];
       }
 
-      window.webln.enable().then((response) => {
-        if (!response.enabled) {
-          return;
-        }
+      try {
+        await window.webln.enable();
+      } catch (e) {
+        console.error(e);
+      }
 
-        if (lnurl) {
-          return window.webln
-            .lnurl(lnurl)
-            .catch((e) => {
-              console.error(e);
-              if (
-                ![ABORT_PROMPT_ERROR, USER_REJECTED_ERROR].includes(e.message)
-              ) {
-                alert(`Error: ${e.message}`);
-              }
-            })
-            .then((response) => {
-              const responseEvent = new CustomEvent("lightning:success", {
-                bubbles: true,
-                detail: {
-                  lnurl,
-                  response,
-                },
-              });
-              link.dispatchEvent(responseEvent);
-            });
-        }
-
-        return window.webln
-          .sendPayment(paymentRequest)
-          .then((response) => {
-            console.info(response);
-            const responseEvent = new CustomEvent("lightning:success", {
-              bubbles: true,
-              detail: {
-                paymentRequest,
-                response,
-              },
-            });
-            link.dispatchEvent(responseEvent);
-          })
-          .catch((e) => {
-            console.error(e);
-            if (
-              ![ABORT_PROMPT_ERROR, USER_REJECTED_ERROR].includes(e.message)
-            ) {
-              alert(`Error: ${e.message}`);
-            }
+      if (lnurl) {
+        try {
+          const response = await window.webln.lnurl(lnurl);
+          const responseEvent = new CustomEvent("lightning:success", {
+            bubbles: true,
+            detail: {
+              lnurl,
+              response,
+            },
           });
-      });
+          link.dispatchEvent(responseEvent);
+        } catch (e) {
+          console.error(e);
+          if (![ABORT_PROMPT_ERROR, USER_REJECTED_ERROR].includes(e.message)) {
+            alert(`Error: ${e.message}`);
+          }
+        }
+      }
+
+      try {
+        const response = await window.webln.sendPayment(paymentRequest);
+        const responseEvent = new CustomEvent("lightning:success", {
+          bubbles: true,
+          detail: {
+            paymentRequest,
+            response,
+          },
+        });
+        link.dispatchEvent(responseEvent);
+      } catch (e) {
+        console.error(e);
+        if (![ABORT_PROMPT_ERROR, USER_REJECTED_ERROR].includes(e.message)) {
+          alert(`Error: ${e.message}`);
+        }
+      }
     },
     { capture: true }
   );
