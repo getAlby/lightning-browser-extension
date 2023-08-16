@@ -160,7 +160,6 @@ var options = {
     contentScriptOnEndWebBTC: "./src/extension/content-script/onendwebbtc.js",
     contentScriptOnStart: "./src/extension/content-script/onstart.ts",
     inpageScript: "./src/extension/inpage-script/index.js",
-    inpageScriptWebLN: "./src/extension/inpage-script/webln.js",
     inpageScriptWebBTC: "./src/extension/inpage-script/webbtc.js",
     inpageScriptLiquid: "./src/extension/inpage-script/liquid.js",
     inpageScriptNostr: "./src/extension/inpage-script/nostr.js",

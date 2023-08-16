@@ -15,7 +15,6 @@
   "homepage_url": "https://getAlby.com/",
   "web_accessible_resources": [
     "js/inpageScript.bundle.js",
-    "js/inpageScriptWebLN.bundle.js",
     "js/inpageScriptWebBTC.bundle.js",
     "js/inpageScriptLiquid.bundle.js",
     "js/inpageScriptNostr.bundle.js",
@@ -25,7 +24,6 @@
     {
       "resources": [
         "js/inpageScript.bundle.js",
-        "js/inpageScriptWebLN.bundle.js",
         "js/inpageScriptWebBTC.bundle.js",
         "js/inpageScriptLiquid.bundle.js",
         "js/inpageScriptNostr.bundle.js",
@@ -166,6 +164,13 @@
       "matches": ["*://*/*"],
       "run_at": "document_start",
       "js": ["js/contentScriptOnStart.bundle.js"]
+    },
+    {
+      "allFrames": true,
+      "matches": ["file://*/*", "http://*/*", "https://*/*"],
+      "runAt": "document_start",
+      "js": ["js/inpageScript.bundle.js"],
+      "world": "MAIN"
     }
   ]
 }
