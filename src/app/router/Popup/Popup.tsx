@@ -8,6 +8,7 @@ import LNURLPay from "@screens/LNURLPay";
 import LNURLWithdraw from "@screens/LNURLWithdraw";
 import Receive from "@screens/Receive";
 import Send from "@screens/Send";
+import ScanQRCode from "~/app/screens/ScanQRCode";
 import Unlock from "@screens/Unlock";
 import { HashRouter, Outlet, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -32,6 +33,7 @@ function Popup() {
           >
             <Route index element={<Home />} />
             <Route path="send" element={<Send />} />
+            <Route path="scanQRCode" element={<ScanQRCode />} />
             <Route path="receive" element={<Receive />} />
             <Route path="onChainReceive" element={<OnChainReceive />} />
             <Route path="lnurlPay" element={<LNURLPay />} />
