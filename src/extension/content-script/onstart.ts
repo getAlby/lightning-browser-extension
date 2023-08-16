@@ -12,9 +12,6 @@ async function onstart() {
   }
 
   const account = await api.getAccount();
-  // window.webln
-  injectScript(browser.runtime.getURL("js/inpageScriptWebLN.bundle.js"));
-
   // window.alby
   injectScript(browser.runtime.getURL("js/inpageScriptAlby.bundle.js"));
 

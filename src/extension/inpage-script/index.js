@@ -3,11 +3,8 @@ import { ABORT_PROMPT_ERROR, USER_REJECTED_ERROR } from "~/common/constants";
 import WebLNProvider from "../providers/webln";
 
 if (document) {
-  // window.webln is normally loaded onstart (see onstart.js)
-  // this is just to make double sure we load it
-  if (!window.webln) {
-    window.webln = new WebLNProvider();
-  }
+  // load webln
+  window.webln = new WebLNProvider();
 
   const readyEvent = new Event("webln:ready");
   window.dispatchEvent(readyEvent);
