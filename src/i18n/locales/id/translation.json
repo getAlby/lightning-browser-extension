@@ -860,7 +860,8 @@
         "account": {
           "add": "Tambahkan akun baru",
           "manage": "Kelola akun",
-          "account_settings": "Pengaturan Akun"
+          "account_settings": "Pengaturan Akun",
+          "go_to_web_wallet": "Atur akun web kamu"
         }
       },
       "screen_reader": "Toggle Dropdown",
@@ -907,7 +908,8 @@
         "title": "Companion App"
       },
       "tor_native": {
-        "title": "TOR (native)"
+        "title": "TOR (native)",
+        "description": "Pilih opsi ini jika browser sudah tersambung dengan jaringan Tor."
       }
     },
     "publishers_table": {
@@ -932,7 +934,15 @@
       "decode": "Decode teks bolt11/bolt12/rune."
     },
     "lnc": {
-      "addinvoice": "Buat invoice baru."
+      "addinvoice": "Buat invoice baru.",
+      "listinvoices": "Dapatkan daftar dari semua invoice.",
+      "openchannel": "Buka channel baru.",
+      "listchannels": "Dapatkan deskripsi dari semua channel yang terbuka.",
+      "getinfo": "Dapatkan informasi node."
+    },
+    "lnd": {
+      "addinvoice": "Buat invoice baru.",
+      "addholdinvoice": "Buat invoice HOLD baru."
     }
   },
   "common": {
