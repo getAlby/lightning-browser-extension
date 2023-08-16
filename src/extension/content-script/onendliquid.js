@@ -107,7 +107,7 @@ function postMessage(ev, response) {
       data: response,
       scope: SCOPE,
     },
-    "*"
+    window.location.origin
   );
 }
 
