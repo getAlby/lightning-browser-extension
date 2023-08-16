@@ -141,6 +141,24 @@ browser.runtime.onInstalled.addListener(handleInstalled);
 async function init() {
   console.info("Loading background script");
 
+  const registerInPageContentScript = async () => {
+    try {
+      await chrome.scripting.registerContentScripts([
+        {
+          id: "inpage",
+          matches: ["file://*/*", "http://*/*", "https://*/*"],
+          js: ["js/inpageScript.bundle.js"],
+          runAt: "document_start",
+          world: "MAIN",
+        },
+      ]);
+    } catch (err) {
+      console.warn(`Dropped attempt to register inpage content script. ${err}`);
+    }
+  };
+
+  registerInPageContentScript();
+
   await state.getState().init();
   console.info("State loaded");
 
