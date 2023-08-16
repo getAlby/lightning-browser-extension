@@ -15,7 +15,7 @@ const disabledCalls = ["liquid/enable"];
 
 let isEnabled = false; // store if liquid is enabled for this content page
 let isRejected = false; // store if the liquid enable call failed. if so we do not prompt again
-let callActive = false; // store if a lqiuid call is currently active. Used to prevent multiple calls in parallel
+let callActive = false; // store if a liquid call is currently active. Used to prevent multiple calls in parallel
 
 const SCOPE = "liquid";
 
@@ -25,9 +25,9 @@ async function init() {
     return;
   }
 
-  // message listener to listen to inpage webln calls
+  // message listener to listen to inpage liquid calls
   // those calls get passed on to the background script
-  // (the inpage script can not do that directly, but only the inpage script can make webln available to the page)
+  // (the inpage script can not do that directly, but only the inpage script can make liquid available to the page)
   window.addEventListener("message", (ev) => {
     // Only accept messages from the current window
     if (
