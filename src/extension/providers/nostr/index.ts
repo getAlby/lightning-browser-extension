@@ -1,6 +1,6 @@
+import EventEmitter from "events";
 import { postMessage } from "../postMessage";
 import { Event } from "./types";
-import EventEmitter from "events";
 
 declare global {
   interface Window {
@@ -8,14 +8,26 @@ declare global {
   }
 }
 
+class PromiseQueue {
+  private queue: Promise<unknown> = Promise.resolve(true);
+
+  add<T>(operation: () => Promise<T>): Promise<T> {
+    return new Promise<T>((resolve, reject) => {
+      this.queue = this.queue.then(operation).then(resolve).catch(reject);
+    });
+  }
+}
+
 export default class NostrProvider {
   nip04 = new Nip04(this);
   enabled: boolean;
   private _eventEmitter: EventEmitter;
+  queue: PromiseQueue;
 
   constructor() {
     this.enabled = false;
     this._eventEmitter = new EventEmitter();
+    this.queue = new PromiseQueue();
   }
 
   async enable() {
@@ -30,23 +42,31 @@ export default class NostrProvider {
   }
 
   async getPublicKey() {
-    await this.enable();
-    return await this.execute("getPublicKeyOrPrompt");
+    return this.queue.add(async () => {
+      await this.enable();
+      return await this.execute("getPublicKeyOrPrompt");
+    });
   }
 
   async signEvent(event: Event) {
-    await this.enable();
-    return this.execute("signEventOrPrompt", { event });
+    return this.queue.add(async () => {
+      await this.enable();
+      return this.execute("signEventOrPrompt", { event });
+    });
   }
 
   async signSchnorr(sigHash: string) {
-    await this.enable();
-    return this.execute("signSchnorrOrPrompt", { sigHash });
+    return this.queue.add(async () => {
+      await this.enable();
+      return this.execute("signSchnorrOrPrompt", { sigHash });
+    });
   }
 
   async getRelays() {
-    await this.enable();
-    return this.execute("getRelays");
+    return this.queue.add(async () => {
+      await this.enable();
+      return this.execute("getRelays");
+    });
   }
 
   async on(...args: Parameters<EventEmitter["on"]>) {
@@ -80,12 +100,16 @@ class Nip04 {
   }
 
   async encrypt(peer: string, plaintext: string) {
-    await this.provider.enable();
-    return this.provider.execute("encryptOrPrompt", { peer, plaintext });
+    return this.provider.queue.add(async () => {
+      await this.provider.enable();
+      return this.provider.execute("encryptOrPrompt", { peer, plaintext });
+    });
   }
 
   async decrypt(peer: string, ciphertext: string) {
-    await this.provider.enable();
-    return this.provider.execute("decryptOrPrompt", { peer, ciphertext });
+    return this.provider.queue.add(async () => {
+      await this.provider.enable();
+      return this.provider.execute("decryptOrPrompt", { peer, ciphertext });
+    });
   }
 }
