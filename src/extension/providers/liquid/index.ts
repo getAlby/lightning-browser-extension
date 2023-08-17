@@ -25,12 +25,10 @@ export default class LiquidProvider {
   }
 
   async getAddress() {
-    await this.enable();
     return await this.execute("getAddressOrPrompt");
   }
 
   async signPset(pset: string) {
-    await this.enable();
     return this.execute("signPsetWithPrompt", { pset });
   }
 
