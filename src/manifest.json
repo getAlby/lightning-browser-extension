@@ -152,7 +152,7 @@
     {
       "all_frames": true,
       "matches": ["*://*/*"],
-      "run_at": "document_end",
+      "run_at": "document_start",
       "js": [
         "js/contentScriptOnEndWebLN.bundle.js",
         "js/contentScriptOnEndAlby.bundle.js",
