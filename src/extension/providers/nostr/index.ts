@@ -71,9 +71,7 @@ export default class NostrProvider {
     action: string,
     args?: Record<string, unknown>
   ): Promise<Record<string, unknown>> {
-    return this._queue.add(async () => {
-      return postMessage("nostr", action, args);
-    });
+    return this._queue.add(() => postMessage("nostr", action, args));
   }
 }
 
