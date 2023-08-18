@@ -6,9 +6,38 @@
         "description": "ใช้รหัสนี้เพื่อเข้าสู่ Alby บนเครื่องนี้ รหัสผ่านนี้ไม่สามารถกู้คืนได้หากคุณลืมรหัสผ่านแต่คุณสามารถเปลี่ยนรหัสผ่านได้ภายหลัง",
         "choose_password": {
           "label": "ตั้งรหัสผ่านเข้าแอพ:"
+        },
+        "confirm_password": {
+          "label": "โปรดยืนยันว่าคุณพิมพ์ถูกต้อง:"
+        },
+        "errors": {
+          "confirm_password": "โปรดยืนยันรหัสผ่าน",
+          "mismatched_password": "รหัสผ่านไม่ถูกต้อง",
+          "enter_password": "โปรดใส่รหัสผ่าน"
         }
       },
-      "title": "ยินดีต้อนรับสู่ Alby วอลเล็ต"
+      "title": "ยินดีต้อนรับสู่ Alby",
+      "test_connection": {
+        "ready": "เยี่ยมมาก คุณพร้อมลุยแล้ว!",
+        "initializing": "กำลังสร้างบัญชีโปรดรอสักครู่ อาจใช้เวลาสักครู่…",
+        "connection_error": "เกิดข้อผิดพลาดในการเชื่อมต่อ",
+        "contact_support": "ถ้าคุณต้องการความช่วยเหลือ ติดต่อ support@getalby.com",
+        "review_connection_details": "กรุณาตรวจสอบรายละเอียดการเชื่อมต่อของคุณ"
+      }
+    },
+    "alby": {
+      "pre_connect": {
+        "set_password": {
+          "choose_password": {
+            "label": "รหัสผ่าน"
+          },
+          "errors": {
+            "enter_password": "ยืนยันรหัสผ่านอีกครั้ง",
+            "confirm_password": "โปรดยืนยันรหัสผ่านของคุณ",
+            "mismatched_password": "รหัสผ่านไม่ถูกต้อง"
+          }
+        }
+      }
     }
   }
 }
