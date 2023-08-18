@@ -26,7 +26,7 @@ const disabledCalls = ["webln/enable"];
 
 let isEnabled = false; // store if webln is enabled for this content page
 let isRejected = false; // store if the webln enable call failed. if so we do not prompt again
-let callActive = false; // store if a webln call is currently active. Used to prevent multiple calls in parallel
+
 async function init() {
   const inject = await shouldInject();
   if (!inject) {
@@ -71,11 +71,7 @@ async function init() {
         });
         return;
       }
-      // if a call is active we ignore the request
-      if (callActive) {
-        postMessage(ev, { error: "window.webln call already executing" });
-        return;
-      }
+
       // limit the calls that can be made from webln
       // only listed calls can be executed
       // if not enabled only enable can be called.
@@ -97,7 +93,6 @@ async function init() {
       };
 
       const replyFunction = (response) => {
-        callActive = false; // reset call is active
         // if it is the enable call we store if webln is enabled for this content script
         if (ev.data.action === "webln/enable") {
           isEnabled = response.data?.enabled;
@@ -109,7 +104,6 @@ async function init() {
         }
         postMessage(ev, response);
       };
-      callActive = true;
       return browser.runtime
         .sendMessage(messageWithOrigin)
         .then(replyFunction)
