@@ -1,6 +1,7 @@
 import browser from "webextension-polyfill";
 
 import extractLightningData from "./batteries";
+import injectScript from "./injectScript";
 import getOriginData from "./originData";
 import shouldInject from "./shouldInject";
 
@@ -32,7 +33,11 @@ async function init() {
     return;
   }
 
-  // injectScript(browser.runtime.getURL("js/inpageScript.bundle.js")); // registers the DOM event listeners and checks webln again (which is also loaded onstart
+  const providerScript = "@@@WINDOW_PROVIDER@@@";
+  const manifest = browser.runtime.getManifest();
+  const isMv3 = manifest.manifest_version === 3;
+
+  if (!isMv3) injectScript(providerScript); // registers the DOM event listeners and checks webln again (which is also loaded onstart
 
   browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
     // extract LN data from websites
