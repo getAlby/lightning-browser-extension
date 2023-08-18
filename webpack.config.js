@@ -319,7 +319,14 @@ if (nodeEnv === "development") {
   options.optimization = {
     minimize: true,
     minimizer: [
-      new TerserPlugin(),
+      new TerserPlugin({
+        terserOptions: {
+          ecma: 6,
+          mangle: {
+            reserved: ['Buffer', 'buffer']
+          },
+        },
+      }),
       new CssMinimizerPlugin(),
       new FilemanagerPlugin({
         events: {
