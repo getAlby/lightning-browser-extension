@@ -156,8 +156,10 @@ async function init() {
       console.warn(`Dropped attempt to register inpage content script. ${err}`);
     }
   };
+  const manifest = browser.runtime.getManifest();
+  const isMv3 = manifest.manifest_version === 3;
 
-  registerInPageContentScript();
+  if (isMv3) registerInPageContentScript();
 
   await state.getState().init();
   console.info("State loaded");

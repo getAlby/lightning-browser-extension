@@ -9,7 +9,12 @@ export default function injectScript(url: string) {
     const scriptEl = document.createElement("script");
     scriptEl.setAttribute("async", "false");
     scriptEl.setAttribute("type", "text/javascript");
-    scriptEl.setAttribute("src", url);
+    // for mv2 script content is inline so inject via textContent
+    if (url.endsWith(".bundle.js")) {
+      scriptEl.setAttribute("src", url);
+    } else {
+      scriptEl.textContent = url;
+    }
     container.insertBefore(scriptEl, container.children[0]);
     scriptEl.onload = () => {
       container.removeChild(scriptEl);
