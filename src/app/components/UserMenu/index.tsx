@@ -49,7 +49,7 @@ export default function UserMenu() {
         <div className="lg:hidden">
           <Menu.ItemButton
             onClick={() => {
-              openOptions("discover");
+              window.open("https://getalby.com/discover", "_blank");
             }}
           >
             <RocketIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />

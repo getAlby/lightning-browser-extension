@@ -115,7 +115,7 @@ function Publishers() {
           ) : (
             <>
               <p className="dark:text-white mb-4"> {t("no_info")}</p>
-              <Link to="/discover">
+              <Link to="https://getalby.com/discover">
                 <Button primary label={t("discover")} />
               </Link>
             </>
