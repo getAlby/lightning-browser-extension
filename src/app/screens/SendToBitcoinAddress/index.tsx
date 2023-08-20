@@ -235,7 +235,11 @@ function SendToBitcoinAddress() {
                 <div>
                   <Dt>{t("provider.label")}</Dt>
                   <Dd>
-                    <Hyperlink href="https://deezy.io" target="_blank">
+                    <Hyperlink
+                      href="https://deezy.io"
+                      target="_blank"
+                      rel="noopener nofollow"
+                    >
                       deezy.io
                     </Hyperlink>
                   </Dd>
