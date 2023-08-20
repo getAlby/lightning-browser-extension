@@ -124,8 +124,9 @@ function Keysend() {
                   onChange={(e) => setAmountSat(e.target.value)}
                   value={amountSat}
                   fiatValue={fiatAmount}
-                  hint={`${tCommon("balance")}: ${auth?.balancesDecorated
-                    ?.accountBalance}`}
+                  hint={`${tCommon("balance")}: ${
+                    auth?.balancesDecorated?.accountBalance
+                  }`}
                   amountExceeded={amountExceeded}
                   rangeExceeded={rangeExceeded}
                 />
