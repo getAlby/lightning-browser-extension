@@ -361,7 +361,8 @@
           "waiting": "等待 LndHub 數據...",
           "your_ln_address": "你的閃電地址：",
           "export_uri": "LNDHub 憑據 URI",
-          "scan_qr": "通過掃描二維碼將此錢包導入Zeus或BlueWallet。"
+          "scan_qr": "通過掃描二維碼將此錢包導入Zeus或BlueWallet。",
+          "description": "將允許你在移動錢包上連接並使用此帳戶，例如 <0>Blue Wallet</0> 和 <0>Zeus</0>。"
         },
         "nostr": {
           "title": "Nostr",
@@ -482,6 +483,16 @@
           "title": "移除主密鑰",
           "success": "已成功移除主密鑰。",
           "confirm": "請輸入帳戶名稱以確認刪除你的主密鑰。"
+        },
+        "no_mnemonic_hint": "💡你還沒有主密鑰。<0>點擊此處</0></div>來生成你的主密鑰並解鎖這些設置。",
+        "network": {
+          "title": "網絡",
+          "subtitle": "選擇網絡來派生地址並解碼比特幣和 Liquid 交易",
+          "options": {
+            "bitcoin": "主網",
+            "testnet": "測試網",
+            "regtest": "Regtest"
+          }
         }
       },
       "actions": {
@@ -863,6 +874,33 @@
     },
     "scan_qrcode": {
       "title": "等待掃描"
+    },
+    "confirm_sign_pset": {
+      "title": "簽署",
+      "allow_sign": "該網站要求你簽署一筆 Liquid 交易：",
+      "view_details": "查看詳情",
+      "hide_details": "隱藏詳情",
+      "inputs": "輸入",
+      "outputs": "輸出",
+      "amount": "{{amount}} {{ticker}}",
+      "view_raw_transaction": "查看原始交易（Base64）",
+      "hide_raw_transaction": "隱藏原始交易（Base64）"
+    },
+    "bitcoin": {
+      "confirm_get_address": {
+        "title": "獲取地址"
+      },
+      "allow": "允許該網站：",
+      "allow_sign": "允許{{host}}簽署：",
+      "block_and_ignore": "阻止並忽略{{host}}",
+      "block_added": "已將{{host}}添加到阻止列表，請重新加載網站。"
+    },
+    "liquid": {
+      "title": "Liquid",
+      "allow": "允許該網站：",
+      "allow_sign": "允許{{host}}簽署：",
+      "block_and_ignore": "阻止並忽略{{host}}",
+      "block_added": "已將{{host}}添加到阻止列表，請重新加載網站。"
     }
   },
   "common": {
@@ -1138,6 +1176,16 @@
       "addinvoice": "創建新發票。",
       "addholdinvoice": "創建新的 HODL 發票。",
       "settleinvoice": "結算已接受的發票。"
+    },
+    "webln": {
+      "getbalance": "讀取你的帳戶餘額。"
+    },
+    "bitcoin": {
+      "getaddress": "讀取你的比特幣收款地址。"
+    },
+    "liquid": {
+      "getaddress": "讀取你的 Liquid 收款地址。",
+      "signschnorr": "用你的密鑰簽署消息。"
     }
   }
 }
