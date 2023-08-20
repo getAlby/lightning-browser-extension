@@ -17,7 +17,8 @@ const getSwapInfo = async (message: MessageGetSwapInfo) => {
   } catch (e) {
     console.error(e);
     return {
-      error: "getSwapInfo failed: " + e,
+      error:
+        "Getting swap info failed: " + (e instanceof Error ? e.message : ""),
     };
   }
 };

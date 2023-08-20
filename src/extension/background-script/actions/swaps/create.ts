@@ -16,7 +16,7 @@ const createSwap = async (message: MessageCreateSwap) => {
   } catch (e) {
     console.error(e);
     return {
-      error: "Creating swap failed: " + e,
+      error: "Creating swap failed: " + (e instanceof Error ? e.message : ""),
     };
   }
 };
