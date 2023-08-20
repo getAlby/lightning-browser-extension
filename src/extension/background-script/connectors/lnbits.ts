@@ -1,3 +1,10 @@
+import lightningPayReq from "bolt11";
+import Hex from "crypto-js/enc-hex";
+import sha256 from "crypto-js/sha256";
+import utils from "~/common/lib/utils";
+import HashKeySigner from "~/common/utils/signer";
+import { Account } from "~/types";
+
 import state from "../state";
 import Connector, {
   CheckPaymentArgs,
@@ -15,12 +22,6 @@ import Connector, {
   SignMessageArgs,
   SignMessageResponse,
 } from "./connector.interface";
-import lightningPayReq from "bolt11";
-import Hex from "crypto-js/enc-hex";
-import sha256 from "crypto-js/sha256";
-import utils from "~/common/lib/utils";
-import HashKeySigner from "~/common/utils/signer";
-import { Account } from "~/types";
 
 interface Config {
   adminkey: string;

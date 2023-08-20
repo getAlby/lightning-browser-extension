@@ -1,3 +1,5 @@
+import { Account } from "~/types";
+
 import Connector, {
   CheckPaymentArgs,
   CheckPaymentResponse,
@@ -13,7 +15,6 @@ import Connector, {
   SignMessageArgs,
   SignMessageResponse,
 } from "./connector.interface";
-import { Account } from "~/types";
 
 interface Config {
   url: string;

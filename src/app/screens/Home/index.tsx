@@ -1,9 +1,10 @@
-import AllowanceView from "./AllowanceView";
-import DefaultView from "./DefaultView";
 import { FC, useCallback, useEffect, useState } from "react";
 import browser from "webextension-polyfill";
 import api from "~/common/lib/api";
 import type { Allowance, Battery } from "~/types";
+
+import AllowanceView from "./AllowanceView";
+import DefaultView from "./DefaultView";
 
 const Home: FC = () => {
   const [allowance, setAllowance] = useState<Allowance | null>(null);

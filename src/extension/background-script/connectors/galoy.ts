@@ -1,3 +1,8 @@
+import fetchAdapter from "@vespaiach/axios-fetch-adapter";
+import axios, { AxiosRequestConfig } from "axios";
+import lightningPayReq from "bolt11";
+import { Account } from "~/types";
+
 import Connector, {
   CheckPaymentArgs,
   CheckPaymentResponse,
@@ -13,10 +18,6 @@ import Connector, {
   SignMessageArgs,
   SignMessageResponse,
 } from "./connector.interface";
-import fetchAdapter from "@vespaiach/axios-fetch-adapter";
-import axios, { AxiosRequestConfig } from "axios";
-import lightningPayReq from "bolt11";
-import { Account } from "~/types";
 
 interface Config {
   walletId: string;

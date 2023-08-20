@@ -1,6 +1,7 @@
+import browser from "webextension-polyfill";
+
 import getOriginData from "./originData";
 import shouldInject from "./shouldInject";
-import browser from "webextension-polyfill";
 
 // WebBTC calls that can be executed from the WebBTC Provider.
 // Update when new calls are added

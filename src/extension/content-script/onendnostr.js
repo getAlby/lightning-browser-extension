@@ -1,6 +1,7 @@
+import browser from "webextension-polyfill";
+
 import getOriginData from "./originData";
 import shouldInject from "./shouldInject";
-import browser from "webextension-polyfill";
 
 // Nostr calls that can be executed from the Nostr Provider.
 // Update when new calls are added

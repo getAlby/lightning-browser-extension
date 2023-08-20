@@ -1,3 +1,7 @@
+import Base64 from "crypto-js/enc-base64";
+import UTF8 from "crypto-js/enc-utf8";
+import { Account } from "~/types";
+
 import Connector, {
   CheckPaymentArgs,
   CheckPaymentResponse,
@@ -14,9 +18,6 @@ import Connector, {
   SignMessageArgs,
   SignMessageResponse,
 } from "./connector.interface";
-import Base64 from "crypto-js/enc-base64";
-import UTF8 from "crypto-js/enc-utf8";
-import { Account } from "~/types";
 
 interface Config {
   url: string;

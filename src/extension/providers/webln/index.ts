@@ -1,5 +1,6 @@
-import { postMessage } from "../postMessage";
 import { EventEmitter } from "events";
+
+import { postMessage } from "../postMessage";
 
 declare global {
   interface Window {
