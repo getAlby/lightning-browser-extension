@@ -456,6 +456,16 @@
           "subtitle": "Tar bort huvudnyckeln från det här kontot.",
           "confirm": "Ange namnet på kontot för att bekräfta raderingen av din huvudnyckel.",
           "success": "Masternyckeln har tagits bort."
+        },
+        "no_mnemonic_hint": "💡 Du har ingen huvudnyckel än. <0>Klicka här</0></div> för att skapa din huvudnyckel och låsa upp dessa inställningar.",
+        "network": {
+          "title": "Nätverk",
+          "subtitle": "Välj nätverk för att härleda adresser och avkoda bitcoin och likvida transaktioner",
+          "options": {
+            "bitcoin": "Mainnet",
+            "testnet": "Testnet",
+            "regtest": "Regtest"
+          }
         }
       }
     },
@@ -864,6 +874,33 @@
       "actions": {
         "withdraw": "Ta ut"
       }
+    },
+    "confirm_sign_pset": {
+      "title": "Signera",
+      "allow_sign": "Denna webbplats ber dig att underteckna en Liquid transaktion:",
+      "view_details": "Visa detaljer",
+      "hide_details": "Dölj detaljer",
+      "view_raw_transaction": "Visa obearbetad transaktion (Base64)",
+      "hide_raw_transaction": "Göm obearbetad transaktion (Base64)",
+      "inputs": "Ingångar",
+      "outputs": "Utgångar",
+      "amount": "{{amount}} {{ticker}}"
+    },
+    "bitcoin": {
+      "confirm_get_address": {
+        "title": "Hämta Adress"
+      },
+      "allow": "Tillåt den här webbplatsen att:",
+      "allow_sign": "Tillåt {{host}} att signera:",
+      "block_and_ignore": "Blockera och ignorera {{host}}",
+      "block_added": "Lade till {{host}} till blockeringslistan, ladda om webbplatsen."
+    },
+    "liquid": {
+      "title": "Liquid",
+      "allow": "Tillåt den här webbplatsen att:",
+      "allow_sign": "Tillåt {{host}} att signera:",
+      "block_and_ignore": "Blockera och ignorera {{host}}",
+      "block_added": "Lade till {{host}} till blockeringslistan, ladda om webbplatsen."
     }
   },
   "common": {
@@ -1142,6 +1179,13 @@
     },
     "webln": {
       "getbalance": "Läs saldot på ditt konto."
+    },
+    "bitcoin": {
+      "getaddress": "Läs din Bitcoin-mottagningsadress."
+    },
+    "liquid": {
+      "getaddress": "Läs din Liquid-mottagningsadress.",
+      "signschnorr": "Skriv under meddelandet med din nyckel."
     }
   }
 }
