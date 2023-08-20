@@ -28,6 +28,9 @@ function Send() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const auth = useAccount();
+  const hint = !isAlbyOAuthAccount(auth.account?.connectorType)
+    ? t("input.hint")
+    : t("input.hint_with_bitcoin_address");
 
   function isPubKey(str: string) {
     return str.length == 66 && (str.startsWith("02") || str.startsWith("03"));
@@ -140,7 +143,7 @@ function Send() {
             <TextField
               id="invoice"
               label={t("input.label")}
-              hint={t("input.hint")}
+              hint={hint}
               value={invoice}
               disabled={loading}
               autoFocus

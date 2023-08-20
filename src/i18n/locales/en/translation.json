@@ -645,7 +645,8 @@
       "title": "Send",
       "input": {
         "label": "Recipient",
-        "hint": "Invoice, Lightning Address or LNURL"
+        "hint": "Invoice, Lightning Address, LNURL",
+        "hint_with_bitcoin_address": "Invoice, Lightning Address, LNURL or bitcoin address"
       }
     },
     "lnurlpay": {
@@ -852,8 +853,10 @@
       "total_fee": {
         "label": "Fee"
       },
+      "provider": {
+        "label": "Swap provider"
+      },
       "view_on_explorer": "View on mempool explorer",
-      "swaps_provided_by": "Swaps are provided by <0>deezy.io</0>",
       "time_estimate": "Transactions usually arrive within 10-30 min."
     },
     "confirm_payment": {

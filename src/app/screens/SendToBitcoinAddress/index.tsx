@@ -9,7 +9,7 @@ import IconButton from "@components/IconButton";
 import DualCurrencyField from "@components/form/DualCurrencyField";
 import { CreateSwapResponse } from "@getalby/sdk/dist/types";
 import React, { useEffect, useState } from "react";
-import { Trans, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import Skeleton from "react-loading-skeleton";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -232,6 +232,14 @@ function SendToBitcoinAddress() {
                     <BitcoinAddress address={bitcoinAddress} />
                   </Dd>
                 </div>
+                <div>
+                  <Dt>{t("provider.label")}</Dt>
+                  <Dd>
+                    <Hyperlink href="https://deezy.io" target="_blank">
+                      deezy.io
+                    </Hyperlink>
+                  </Dd>
+                </div>
                 <DualCurrencyField
                   id="amount"
                   label={tCommon("amount")}
@@ -245,21 +253,6 @@ function SendToBitcoinAddress() {
                   hint={`${tCommon("balance")}: ${auth?.balancesDecorated
                     ?.accountBalance}`}
                 />
-                <Alert type="info">
-                  <Trans
-                    i18nKey={"swaps_provided_by"}
-                    t={t}
-                    components={[
-                      // eslint-disable-next-line react/jsx-key
-                      <Hyperlink
-                        className="underline hover:text-blue-800 dark:hover:text-blue-200"
-                        href="https://deezy.io"
-                        target="_blank"
-                        rel="noopener nofollow"
-                      ></Hyperlink>,
-                    ]}
-                  />
-                </Alert>
                 <div>
                   <Dt>{t("total_fee.label")}</Dt>
                   <Dd>
