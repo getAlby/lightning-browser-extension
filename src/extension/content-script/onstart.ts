@@ -1,7 +1,8 @@
 import browser from "webextension-polyfill";
 import api from "~/common/lib/api";
 
-import injectScript from "./injectScript";
+import { isManifestV3 } from "~/common/utils/mv3";
+import injectScript from "~/extension/content-script/injectScript";
 import shouldInject from "./shouldInject";
 
 async function onstart() {
@@ -9,6 +10,11 @@ async function onstart() {
   const inject = await shouldInject();
   if (!inject) {
     return;
+  }
+
+  // Inject in-page scripts for MV2
+  if (!isManifestV3) {
+    injectScript("@@@WINDOW_PROVIDER@@@");
   }
 
   const account = await api.getAccount();
