@@ -1,14 +1,6 @@
 import { ABORT_PROMPT_ERROR, USER_REJECTED_ERROR } from "~/common/constants";
 
-import WebLNProvider from "../providers/webln";
-
 if (document) {
-  // load webln
-  window.webln = new WebLNProvider();
-
-  const readyEvent = new Event("webln:ready");
-  window.dispatchEvent(readyEvent);
-
   // Intercept any `lightning:` requests
   window.addEventListener(
     "click",
