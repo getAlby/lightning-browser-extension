@@ -2,7 +2,7 @@ const { sources } = require("webpack");
 
 const PLUGIN_NAME = "InjectWindowProvider";
 const WINDOW_PROVIDER_FILENAME = "js/inpageScript.bundle.js";
-const PROVIDER_BRIDGE_FILENAME = "js/contentScriptOnEndWebLN.bundle.js";
+const PROVIDER_BRIDGE_FILENAME = "js/contentScriptOnStart.bundle.js";
 // plugin to intercept webln bundle during built times and inline/attach provider to make it available immediately
 // works only on MV2 and designed specifically for firefox as main world execution is not supported for firefox
 class InjectWindowProvider {
