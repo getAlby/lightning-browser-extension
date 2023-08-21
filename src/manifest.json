@@ -134,18 +134,13 @@
       "matches": ["*://*/*"],
       "run_at": "document_start",
       "js": [
-        "js/contentScriptOnEndWebLN.bundle.js",
-        "js/contentScriptOnEndAlby.bundle.js",
-        "js/contentScriptOnEndLiquid.bundle.js",
-        "js/contentScriptOnEndNostr.bundle.js",
-        "js/contentScriptOnEndWebBTC.bundle.js"
+        "js/contentScriptOnStart.bundle.js",
+        "js/contentScriptWebLN.bundle.js",
+        "js/contentScriptAlby.bundle.js",
+        "js/contentScriptLiquid.bundle.js",
+        "js/contentScriptNostr.bundle.js",
+        "js/contentScriptWebBTC.bundle.js"
       ]
-    },
-    {
-      "all_frames": true,
-      "matches": ["*://*/*"],
-      "run_at": "document_start",
-      "js": ["js/contentScriptOnStart.bundle.js"]
     }
   ]
 }
