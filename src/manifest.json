@@ -15,6 +15,7 @@
   "homepage_url": "https://getAlby.com/",
   "web_accessible_resources": [
     "js/inpageScript.bundle.js",
+    "js/inpageScriptWebLN.bundle.js",
     "js/inpageScriptWebBTC.bundle.js",
     "js/inpageScriptLiquid.bundle.js",
     "js/inpageScriptNostr.bundle.js",
@@ -24,6 +25,7 @@
     {
       "resources": [
         "js/inpageScript.bundle.js",
+        "js/inpageScriptWebLN.bundle.js",
         "js/inpageScriptWebBTC.bundle.js",
         "js/inpageScriptLiquid.bundle.js",
         "js/inpageScriptNostr.bundle.js",

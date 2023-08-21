@@ -148,7 +148,7 @@ async function init() {
         {
           id: "inpage",
           matches: ["file://*/*", "http://*/*", "https://*/*"],
-          js: ["js/inpageScript.bundle.js"],
+          js: ["js/inpageScriptWebLN.bundle.js"],
           runAt: "document_start",
           world: "MAIN",
         },
