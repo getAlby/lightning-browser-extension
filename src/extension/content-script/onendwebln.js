@@ -1,5 +1,6 @@
 import browser from "webextension-polyfill";
 
+import { isManifestV3 } from "~/common/utils/mv3";
 import extractLightningData from "./batteries";
 import injectScript from "./injectScript";
 import getOriginData from "./originData";
@@ -33,10 +34,7 @@ async function init() {
     return;
   }
 
-  const manifest = browser.runtime.getManifest();
-  const isMv3 = manifest.manifest_version === 3;
-
-  if (!isMv3) {
+  if (!isManifestV3) {
     const providerScript = "@@@WINDOW_PROVIDER@@@";
     injectScript(providerScript);
   } // registers the DOM event listeners and checks webln again (which is also loaded onstart
