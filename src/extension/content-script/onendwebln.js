@@ -33,11 +33,13 @@ async function init() {
     return;
   }
 
-  const providerScript = "@@@WINDOW_PROVIDER@@@";
   const manifest = browser.runtime.getManifest();
   const isMv3 = manifest.manifest_version === 3;
 
-  if (!isMv3) injectScript(providerScript); // registers the DOM event listeners and checks webln again (which is also loaded onstart
+  if (!isMv3) {
+    const providerScript = "@@@WINDOW_PROVIDER@@@";
+    injectScript(providerScript);
+  } // registers the DOM event listeners and checks webln again (which is also loaded onstart
 
   browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
     // extract LN data from websites
