@@ -9,7 +9,7 @@ export default function Alert({ type, children }: Props) {
   return (
     <div
       className={classNames(
-        "rounded-md p-4",
+        "rounded-md p-3",
         type == "warn" &&
           "text-orange-700 bg-orange-50 dark:text-orange-200 dark:bg-orange-900",
         type == "info" &&
