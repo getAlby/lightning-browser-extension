@@ -14,6 +14,7 @@ const edit = async (message: MessageAccountEdit) => {
 
       state.setState({
         bitcoin: null, // reset memoized bitcoin state
+        liquid: null, // reset memoized liquid state
       });
     }
     if (message.args.useMnemonicForLnurlAuth !== undefined) {

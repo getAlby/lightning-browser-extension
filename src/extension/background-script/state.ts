@@ -12,6 +12,7 @@ import type { Account, Accounts, SettingsStorage } from "~/types";
 
 import connectors from "./connectors";
 import type Connector from "./connectors/connector.interface";
+import Liquid from "./liquid";
 import Nostr from "./nostr";
 
 interface State {
@@ -21,6 +22,7 @@ interface State {
   connector: Promise<Connector> | null;
   currentAccountId: string | null;
   nostrPrivateKey: string | null;
+  liquid: Liquid | null;
   nostr: Nostr | null;
   mnemonic: Mnemonic | null;
   bitcoin: Bitcoin | null;
@@ -28,6 +30,7 @@ interface State {
   password: (password?: string | null) => Promise<string | null>;
   getAccount: () => Account | null;
   getConnector: () => Promise<Connector>;
+  getLiquid: () => Promise<Liquid>;
   getNostr: () => Promise<Nostr>;
   getMnemonic: () => Promise<Mnemonic>;
   getBitcoin: () => Promise<Bitcoin>;
@@ -70,6 +73,7 @@ const getFreshState = () => ({
   migrations: [],
   accounts: {},
   currentAccountId: null,
+  liquid: null,
   // TODO: move nostr object to account state and handle encryption/decryption there
   nostr: null,
   // TODO: this should be deleted from storage and then can be removed (requires a migration)
@@ -132,6 +136,23 @@ const state = createState<State>((set, get) => ({
 
     const connector = await connectorPromise;
     return connector;
+  },
+  getLiquid: async () => {
+    const currentLiquid = get().liquid;
+    if (currentLiquid) {
+      return currentLiquid;
+    }
+    const mnemonic = await get().getMnemonic();
+    const currentAccountId = get().currentAccountId as string;
+    const account = get().accounts[currentAccountId];
+    const bitcoinNetwork = account.bitcoinNetwork || "bitcoin";
+
+    const liquid = new Liquid(
+      mnemonic,
+      bitcoinNetwork === "bitcoin" ? "liquid" : bitcoinNetwork
+    );
+    set({ liquid });
+    return liquid;
   },
   getNostr: async () => {
     const currentNostr = get().nostr;
@@ -208,6 +229,7 @@ const state = createState<State>((set, get) => ({
     set({
       connector: null,
       account: null,
+      liquid: null,
       nostr: null,
       mnemonic: null,
       bitcoin: null,

@@ -752,9 +752,6 @@
       },
       "open_location": "Åbn hjemmeside"
     },
-    "confirm_or_cancel": {
-      "only_trusted": "Opret kun forbindelse til sider, du har tillid til."
-    },
     "budget_control": {
       "remember": {
         "label": "Husk og fastlæg et budget",

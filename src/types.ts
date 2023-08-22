@@ -14,6 +14,8 @@ export type ConnectorType = keyof typeof connectors;
 
 export type BitcoinNetworkType = "bitcoin" | "testnet" | "regtest";
 
+export type LiquidNetworkType = "liquid" | "testnet" | "regtest";
+
 export interface Account {
   id: string;
   connector: ConnectorType;
@@ -170,6 +172,8 @@ export type NavigationState = {
       method: string;
       description: string;
     };
+    // liquid
+    pset?: string;
   };
   isPrompt?: true; // only passed via Prompt.tsx
   action: string;
@@ -345,7 +349,11 @@ export interface MessageAllowanceEnable extends MessageDefault {
   args: {
     host: Allowance["host"];
   };
-  action: "public/webln/enable" | "public/nostr/enable" | "public/alby/enable";
+  action:
+    | "public/webln/enable"
+    | "public/nostr/enable"
+    | "public/liquid/enable"
+    | "public/alby/enable";
 }
 
 export interface MessageAllowanceDelete extends MessageDefault {
@@ -453,6 +461,10 @@ export interface MessageCurrencyRateGet extends MessageDefault {
   action: "getCurrencyRate";
 }
 
+export interface MessageGetLiquidAddress extends MessageDefault {
+  action: "getLiquidAddress";
+}
+
 export interface MessageNostrPublicKeyGetOrPrompt extends MessageDefault {
   action: "getPublicKeyOrPrompt";
 }
@@ -548,6 +560,35 @@ export interface MessageGetAddress extends MessageDefault {
   // eslint-disable-next-line @typescript-eslint/ban-types
   args: {};
   action: "getAddress";
+}
+
+// Liquid
+export interface MessageSignPsetWithPrompt extends MessageDefault {
+  args: {
+    pset: string;
+  };
+  action: "signPsetWithPrompt";
+}
+
+export interface MessageSignPset extends MessageDefault {
+  args: {
+    pset: string;
+  };
+  action: "signPset";
+}
+
+export interface MessageGetPSetPreview extends MessageDefault {
+  args: {
+    pset: string;
+  };
+  action: "getPsetPreview";
+}
+
+export interface MessageFetchAssetRegistry extends MessageDefault {
+  args: {
+    psetPreview: PsetPreview;
+  };
+  action: "fetchAssetRegistry";
 }
 
 export interface LNURLChannelServiceResponse {
@@ -678,6 +719,14 @@ export interface DbPayment {
 
 export interface Payment extends Omit<DbPayment, "id"> {
   id: number;
+}
+
+export enum PermissionMethodBitcoin {
+  BITCOIN_GETADDRESS = "bitcoin/getAddress",
+}
+
+export enum PermissionMethodLiquid {
+  LIQUID_GETADDRESS = "liquid/getAddress",
 }
 
 export enum PermissionMethodNostr {
@@ -855,3 +904,23 @@ export type BitcoinAddress = {
   index: number;
   address: string;
 };
+
+export type LiquidAddress = {
+  amount: number;
+  address: string;
+  asset: string;
+};
+
+export type PsetPreview = {
+  inputs: LiquidAddress[];
+  outputs: LiquidAddress[];
+};
+
+export type EsploraAssetInfos = {
+  assetHash: string;
+  ticker: string;
+  name: string;
+  precision: number;
+};
+
+export type EsploraAssetRegistry = Record<string, EsploraAssetInfos>;

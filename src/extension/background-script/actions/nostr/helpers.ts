@@ -2,62 +2,7 @@ import { schnorr } from "@noble/curves/secp256k1";
 import * as secp256k1 from "@noble/secp256k1";
 import Hex from "crypto-js/enc-hex";
 import sha256 from "crypto-js/sha256";
-import db from "~/extension/background-script/db";
-import state from "~/extension/background-script/state";
 import { Event } from "~/extension/providers/nostr/types";
-
-export async function hasPermissionFor(method: string, host: string) {
-  if (!host) {
-    return false;
-  }
-
-  const allowance = await db.allowances
-    .where("host")
-    .equalsIgnoreCase(host)
-    .first();
-
-  if (!allowance?.id) {
-    return Promise.reject(
-      new Error("Could not find an allowance for this host")
-    );
-  }
-
-  const accountId = state.getState().currentAccountId;
-
-  if (!accountId) {
-    return Promise.reject(new Error("Account doesn't exist"));
-  }
-
-  const findPermission = await db.permissions.get({
-    host,
-    method,
-    accountId,
-  });
-
-  return !!findPermission?.enabled;
-}
-
-export async function addPermissionFor(method: string, host: string) {
-  const accountId = state.getState().currentAccountId;
-  const allowance = await db.allowances.get({
-    host,
-  });
-
-  if (!allowance?.id || !accountId) {
-    return false;
-  }
-  const permissionIsAdded = await db.permissions.add({
-    createdAt: Date.now().toString(),
-    accountId: accountId,
-    allowanceId: allowance.id,
-    host: host,
-    method: method,
-    enabled: true,
-    blocked: false,
-  });
-
-  return !!permissionIsAdded && (await db.saveToStorage());
-}
 
 // based upon : https://github.com/nbd-wtf/nostr-tools/blob/b9a7f814aaa08a4b1cec705517b664390abd3f69/event.ts#L95
 // to avoid the additional dependency

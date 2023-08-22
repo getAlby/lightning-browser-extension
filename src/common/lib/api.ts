@@ -13,6 +13,7 @@ import type {
   BitcoinNetworkType,
   ConnectorType,
   DbPayment,
+  EsploraAssetRegistry,
   Invoice,
   LnurlAuthResponse,
   MessageAccountEdit,
@@ -21,6 +22,7 @@ import type {
   MessageLnurlAuth,
   MessageSettingsSet,
   NodeInfo,
+  PsetPreview,
   SettingsStorage,
   ValidateAccountResponse,
 } from "~/types";
@@ -43,6 +45,7 @@ export interface AccountInfoRes {
 
 export interface GetAccountRes extends Pick<Account, "id" | "name"> {
   connectorType: ConnectorType;
+  liquidEnabled: boolean;
   nostrEnabled: boolean;
   hasMnemonic: boolean;
   hasImportedNostrKey: boolean;
@@ -207,6 +210,23 @@ const setMnemonic = (id: string, mnemonic: string | null): Promise<void> =>
     mnemonic,
   });
 
+const getLiquidPsetPreview = (pset: string): Promise<PsetPreview> =>
+  msg.request("liquid/getPsetPreview", {
+    pset,
+  });
+
+const fetchLiquidAssetRegistry = (
+  psetPreview: PsetPreview
+): Promise<EsploraAssetRegistry> =>
+  msg.request("liquid/fetchAssetRegistry", {
+    psetPreview,
+  });
+
+const signPset = (pset: string): Promise<string> =>
+  msg.request("liquid/signPset", {
+    pset,
+  });
+
 export default {
   getAccount,
   getAccountInfo,
@@ -243,4 +263,9 @@ export default {
   getMnemonic,
   setMnemonic,
   generateMnemonic,
+  liquid: {
+    getPsetPreview: getLiquidPsetPreview,
+    fetchAssetRegistry: fetchLiquidAssetRegistry,
+    signPset: signPset,
+  },
 };

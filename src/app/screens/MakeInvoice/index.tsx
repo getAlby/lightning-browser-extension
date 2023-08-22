@@ -41,7 +41,6 @@ function MakeInvoice() {
   const [fiatValue, setFiatValue] = useState("");
   const [memo, setMemo] = useState(invoiceAttributes.memo || "");
   const [error, setError] = useState("");
-  const { t: tComponents } = useTranslation("components");
   const { t: tCommon } = useTranslation("common");
   const { t } = useTranslation("translation", {
     keyPrefix: "make_invoice",
@@ -163,18 +162,11 @@ function MakeInvoice() {
               </div>
             </div>
           </div>
-
-          <div>
-            <ConfirmOrCancel
-              disabled={!valueSat || loading || Boolean(error)}
-              loading={loading}
-              onCancel={reject}
-            />
-
-            <p className="mb-4 text-center text-sm text-gray-400">
-              <em>{tComponents("confirm_or_cancel.only_trusted")}</em>
-            </p>
-          </div>
+          <ConfirmOrCancel
+            disabled={!valueSat || loading || Boolean(error)}
+            loading={loading}
+            onCancel={reject}
+          />
         </Container>
       </form>
     </div>

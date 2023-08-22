@@ -151,4 +151,4 @@ You can also contribute to our [bounty program](https://github.com/getAlby/light
 
 ## License
 
-MIT
+[MIT](./LICENSE)
