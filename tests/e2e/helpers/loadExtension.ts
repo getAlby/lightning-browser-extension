@@ -158,9 +158,6 @@ export async function loginToExistingAlbyAccount(page: Page) {
   const connectButton = await getByText($document, "Connect with Alby");
   connectButton.click();
 
-  // const currentTarget = await page.target();
-  // console.info("Current target: " + currentTarget.url());
-
   //check that the first page opened this new page:
   const newTarget = await page
     .browser()
@@ -170,7 +167,6 @@ export async function loginToExistingAlbyAccount(page: Page) {
         timeout: 20000,
       }
     );
-  // console.info("Found target: " + newTarget.url());
   //get the new page object:
   const oauthPage = await newTarget.page();
   if (!oauthPage) {
@@ -257,8 +253,6 @@ export async function loginToExistingAlbyAccount(page: Page) {
     retries++;
   }
   if (retries >= MAX_RETRIES) {
-    //console.info("oauthPage", await oauthPage.content());
-    //console.info("page", await page.content());
     throw new Error("Did not navigate to pin extension page");
   }
 
