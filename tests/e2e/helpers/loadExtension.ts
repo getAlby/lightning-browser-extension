@@ -1,7 +1,7 @@
 import { getDocument, queries } from "pptr-testing-library";
 import puppeteer, { Browser, ElementHandle, Page } from "puppeteer";
 
-const { getByText, findByText, getByLabelText, findAllByText } = queries;
+const { getByText, findByText, getByLabelText } = queries;
 
 const delay = async (time) => {
   return new Promise(function (resolve) {
@@ -158,8 +158,8 @@ export async function loginToExistingAlbyAccount(page: Page) {
   const connectButton = await getByText($document, "Connect with Alby");
   connectButton.click();
 
-  const currentTarget = await page.target();
-  console.info("Current target: " + currentTarget.url());
+  // const currentTarget = await page.target();
+  // console.info("Current target: " + currentTarget.url());
 
   //check that the first page opened this new page:
   const newTarget = await page
@@ -211,7 +211,9 @@ export async function loginToExistingAlbyAccount(page: Page) {
 
   const oauthConfirmAuthButton = await getByText(
     oauthDocument4,
-    "Connect with Alby Extension"
+    process.env.CI
+      ? "Connect with Alby Extension (Chrome, Nightly E2E)"
+      : "Connect with Alby Extension"
   );
   oauthConfirmAuthButton.click();
 
@@ -228,8 +230,8 @@ export async function loginToExistingAlbyAccount(page: Page) {
     retries++;
   }
   if (retries >= MAX_RETRIES) {
-    console.info("oauthPage", await oauthPage.content());
-    console.info("page", await page.content());
+    //console.info("oauthPage", await oauthPage.content());
+    //console.info("page", await page.content());
     throw new Error("Did not navigate to pin extension page");
   }
 
