@@ -242,6 +242,7 @@ function SendToBitcoinAddress() {
                     >
                       deezy.io
                     </Hyperlink>
+                    &nbsp; (support@deezy.io)
                   </Dd>
                 </div>
                 <DualCurrencyField
@@ -280,6 +281,7 @@ function SendToBitcoinAddress() {
                 disabled={
                   loading ||
                   feesLoading ||
+                  swapDataLoading ||
                   !amountSat ||
                   rangeExceeded ||
                   amountExceeded
