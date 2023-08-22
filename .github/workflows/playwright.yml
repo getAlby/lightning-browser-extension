@@ -26,7 +26,7 @@ jobs:
         run: yarn build:chrome
 
       - name: Test Code
-        uses: mujo-code/puppeteer-headful@v2
+        uses: mujo-code/puppeteer-headful@18.9.0
         env:
           CI: "true"
         with:

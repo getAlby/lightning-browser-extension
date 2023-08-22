@@ -74,13 +74,10 @@ if (clientId && clientSecret) {
     },
     production: {
       testnet: {
+        // only chrome is used for E2E tests
         chrome: {
-          id: "CLAp8AfS3W",
-          secret: "KwIxF0VbGX2ZHLbbbYgE",
-        },
-        firefox: {
-          id: "zWdxnF04Hd",
-          secret: "wY5uLJJDjNWrDlB6lAj8",
+          id: "mI5TEUKCwD",
+          secret: "47lxj2WNCJyVpxiy6vgq",
         },
       },
       mainnet: {
@@ -323,7 +320,7 @@ if (nodeEnv === "development") {
         terserOptions: {
           ecma: 6,
           mangle: {
-            reserved: ['Buffer', 'buffer']
+            reserved: ["Buffer", "buffer"],
           },
         },
       }),
