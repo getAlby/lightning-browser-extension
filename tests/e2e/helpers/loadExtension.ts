@@ -1,7 +1,7 @@
 import { getDocument, queries } from "pptr-testing-library";
 import puppeteer, { Browser, ElementHandle, Page } from "puppeteer";
 
-const { getByText, findByText, getByLabelText, findAllByText } = queries;
+const { getByText, findByText, getByLabelText } = queries;
 
 const delay = async (time) => {
   return new Promise(function (resolve) {
@@ -158,9 +158,6 @@ export async function loginToExistingAlbyAccount(page: Page) {
   const connectButton = await getByText($document, "Connect with Alby");
   connectButton.click();
 
-  const currentTarget = await page.target();
-  console.info("Current target: " + currentTarget.url());
-
   //check that the first page opened this new page:
   const newTarget = await page
     .browser()
@@ -170,7 +167,6 @@ export async function loginToExistingAlbyAccount(page: Page) {
         timeout: 20000,
       }
     );
-  console.info("Found target: " + newTarget.url());
   //get the new page object:
   const oauthPage = await newTarget.page();
   if (!oauthPage) {
@@ -178,40 +174,69 @@ export async function loginToExistingAlbyAccount(page: Page) {
   }
   const oauthDocument = await getDocument(oauthPage);
 
-  const oauthLoginButton = await getByText(oauthDocument, "Log in to connect");
-  oauthLoginButton.click();
+  const connectButtonText = process.env.CI
+    ? "Connect with Alby Extension (Chrome, Nightly E2E)"
+    : "Connect with Alby Extension";
 
-  await oauthPage.waitForNavigation();
-  const oauthDocument2 = await getDocument(oauthPage);
+  let alreadyLoggedInOauthConfirmAuthButton:
+    | Awaited<ReturnType<typeof getByText>>
+    | undefined;
 
-  const oauthLoginPasswordButton = await getByText(
-    oauthDocument2,
-    "Log in with password"
-  );
-  oauthLoginPasswordButton.click();
+  try {
+    alreadyLoggedInOauthConfirmAuthButton = await getByText(
+      oauthDocument,
+      connectButtonText
+    );
+  } catch (error) {
+    console.info("Not logged in yet");
+  }
 
-  await oauthPage.waitForNavigation();
-  const oauthDocument3 = await getDocument(oauthPage);
+  let oauthDocument4: ElementHandle<Element>;
+  if (!alreadyLoggedInOauthConfirmAuthButton) {
+    const oauthLoginButton = await getByText(
+      oauthDocument,
+      "Log in to connect"
+    );
+    oauthLoginButton.click();
 
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+    await oauthPage.waitForNavigation();
+    const oauthDocument2 = await getDocument(oauthPage);
 
-  // type user email
-  const emailField = await getByLabelText(oauthDocument3, "Email address");
-  await emailField.type(user.email);
+    const oauthLoginPasswordButton = await getByText(
+      oauthDocument2,
+      "Log in with password"
+    );
+    oauthLoginPasswordButton.click();
 
-  // type user password and confirm password
-  const walletPasswordField = await getByLabelText(oauthDocument3, "Password");
-  await walletPasswordField.type(user.password);
+    await oauthPage.waitForNavigation();
+    const oauthDocument3 = await getDocument(oauthPage);
 
-  const oauthConfirmLoginButton = await getByText(oauthDocument3, "Log in");
-  oauthConfirmLoginButton.click();
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
-  await oauthPage.waitForNavigation();
-  const oauthDocument4 = await getDocument(oauthPage);
+    // type user email
+    const emailField = await getByLabelText(oauthDocument3, "Email address");
+    await emailField.type(user.email);
+
+    // type user password and confirm password
+    const walletPasswordField = await getByLabelText(
+      oauthDocument3,
+      "Password"
+    );
+    await walletPasswordField.type(user.password);
+
+    const oauthConfirmLoginButton = await getByText(oauthDocument3, "Log in");
+    oauthConfirmLoginButton.click();
+
+    await oauthPage.waitForNavigation();
+    oauthDocument4 = await getDocument(oauthPage);
+  } else {
+    // already logged in
+    oauthDocument4 = oauthDocument;
+  }
 
   const oauthConfirmAuthButton = await getByText(
     oauthDocument4,
-    "Connect with Alby Extension"
+    connectButtonText
   );
   oauthConfirmAuthButton.click();
 
