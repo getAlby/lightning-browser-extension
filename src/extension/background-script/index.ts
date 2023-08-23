@@ -2,6 +2,7 @@ import browser, { Runtime, Tabs } from "webextension-polyfill";
 import utils from "~/common/lib/utils";
 
 import { isManifestV3 } from "~/common/utils/mv3";
+import { registerInPageContentScript } from "~/extension/background-script/registerContentScript";
 import { ExtensionIcon, setIcon } from "./actions/setup/setIcon";
 import { db, isIndexedDbAvailable } from "./db";
 import * as events from "./events";
@@ -141,22 +142,6 @@ browser.runtime.onInstalled.addListener(handleInstalled);
 
 async function init() {
   console.info("Loading background script");
-
-  const registerInPageContentScript = async () => {
-    try {
-      await chrome.scripting.registerContentScripts([
-        {
-          id: "inpage",
-          matches: ["file://*/*", "http://*/*", "https://*/*"],
-          js: ["js/inpageScript.bundle.js"],
-          runAt: "document_start",
-          world: "MAIN",
-        },
-      ]);
-    } catch (err) {
-      console.warn(`Dropped attempt to register inpage content script. ${err}`);
-    }
-  };
 
   if (isManifestV3) registerInPageContentScript();
 
