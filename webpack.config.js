@@ -9,7 +9,11 @@ const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const WextManifestWebpackPlugin = require("wext-manifest-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
+<<<<<<< HEAD
 const InjectWindowProvider = require("./build-utils/InjectWindowProvider");
+=======
+const ProviderInjectionPlugin = require("./build-utils/ProviderInjectionPlugin");
+>>>>>>> 0d559c96d653d02a80038955660bce340aae346d
 const BundleAnalyzerPlugin =
   require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
@@ -231,7 +235,11 @@ var options = {
   },
 
   plugins: [
+<<<<<<< HEAD
     new InjectWindowProvider(),
+=======
+    new ProviderInjectionPlugin(),
+>>>>>>> 0d559c96d653d02a80038955660bce340aae346d
     new webpack.ProvidePlugin({
       Buffer: ["buffer", "Buffer"],
       process: ["process"],
