@@ -9,11 +9,7 @@ const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const WextManifestWebpackPlugin = require("wext-manifest-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
-<<<<<<< HEAD
-const InjectWindowProvider = require("./build-utils/InjectWindowProvider");
-=======
 const ProviderInjectionPlugin = require("./build-utils/ProviderInjectionPlugin");
->>>>>>> 0d559c96d653d02a80038955660bce340aae346d
 const BundleAnalyzerPlugin =
   require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
@@ -165,11 +161,6 @@ var options = {
     contentScriptWebBTC: "./src/extension/content-script/webbtc.js",
     contentScriptOnStart: "./src/extension/content-script/onstart.ts",
     inpageScript: "./src/extension/inpage-script/index.js",
-    inpageScriptWebLN: "./src/extension/inpage-script/webln.js",
-    inpageScriptWebBTC: "./src/extension/inpage-script/webbtc.js",
-    inpageScriptLiquid: "./src/extension/inpage-script/liquid.js",
-    inpageScriptNostr: "./src/extension/inpage-script/nostr.js",
-    inpageScriptAlby: "./src/extension/inpage-script/alby.js",
     popup: "./src/app/router/Popup/index.tsx",
     prompt: "./src/app/router/Prompt/index.tsx",
     options: "./src/app/router/Options/index.tsx",
@@ -235,11 +226,7 @@ var options = {
   },
 
   plugins: [
-<<<<<<< HEAD
-    new InjectWindowProvider(),
-=======
     new ProviderInjectionPlugin(),
->>>>>>> 0d559c96d653d02a80038955660bce340aae346d
     new webpack.ProvidePlugin({
       Buffer: ["buffer", "Buffer"],
       process: ["process"],

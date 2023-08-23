@@ -1,7 +1,22 @@
 import { ABORT_PROMPT_ERROR, USER_REJECTED_ERROR } from "~/common/constants";
+import AlbyProvider from "~/extension/providers/alby";
+import LiquidProvider from "~/extension/providers/liquid";
+import NostrProvider from "~/extension/providers/nostr";
+import WebBTCProvider from "~/extension/providers/webbtc";
+import WebLNProvider from "~/extension/providers/webln";
 
 if (document) {
   // Intercept any `lightning:` requests
+
+  window.liquid = new LiquidProvider();
+  window.alby = new AlbyProvider();
+  window.nostr = new NostrProvider();
+  window.webbtc = new WebBTCProvider();
+  window.webln = new WebLNProvider();
+
+  const readyEvent = new Event("webln:ready");
+  window.dispatchEvent(readyEvent);
+
   window.addEventListener(
     "click",
     async (ev) => {
