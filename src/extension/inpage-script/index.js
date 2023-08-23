@@ -6,8 +6,6 @@ import WebBTCProvider from "~/extension/providers/webbtc";
 import WebLNProvider from "~/extension/providers/webln";
 
 if (document) {
-  // Intercept any `lightning:` requests
-
   window.liquid = new LiquidProvider();
   window.alby = new AlbyProvider();
   window.nostr = new NostrProvider();
@@ -16,7 +14,7 @@ if (document) {
 
   const readyEvent = new Event("webln:ready");
   window.dispatchEvent(readyEvent);
-
+  // Intercept any `lightning:` requests
   window.addEventListener(
     "click",
     async (ev) => {
