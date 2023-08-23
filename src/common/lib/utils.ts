@@ -112,15 +112,12 @@ const utils = {
             closeWindow = false; // we'll only remove the tab and not the window further down
           }
 
-          // this interval hightlights the popup in the taskbar
-          const focusInterval = setInterval(() => {
-            if (!window.id) {
-              return;
-            }
+          // Move focus to the current window
+          if (window.id) {
             browser.windows.update(window.id, {
-              drawAttention: true,
+              focused: true,
             });
-          }, 2100);
+          }
 
           const onMessageListener = (
             responseMessage: {
@@ -137,7 +134,6 @@ const utils = {
               sender.tab.id === tabId &&
               sender.tab.windowId
             ) {
-              clearInterval(focusInterval);
               browser.tabs.onRemoved.removeListener(onRemovedListener);
               // if the window was opened as tab we remove the tab
               // otherwise if a window was opened we have to remove the window.
@@ -162,7 +158,6 @@ const utils = {
           };
 
           const onRemovedListener = (tid: number) => {
-            clearInterval(focusInterval);
             if (tabId === tid) {
               browser.runtime.onMessage.removeListener(onMessageListener);
               reject(new Error(ABORT_PROMPT_ERROR));
