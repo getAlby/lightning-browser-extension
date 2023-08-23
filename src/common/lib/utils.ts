@@ -112,12 +112,15 @@ const utils = {
             closeWindow = false; // we'll only remove the tab and not the window further down
           }
 
-          // Move focus to the current window
-          if (window.id) {
+          // Re-focus the popup after 2 seconds to mitigate the problem of lost popups
+          // (e.g. when a user clicks the website)
+          setTimeout(() => {
+            if (!window.id) return;
+
             browser.windows.update(window.id, {
               focused: true,
             });
-          }
+          }, 2100);
 
           const onMessageListener = (
             responseMessage: {
