@@ -74,13 +74,10 @@ if (clientId && clientSecret) {
     },
     production: {
       testnet: {
+        // only chrome is used for E2E tests
         chrome: {
-          id: "CLAp8AfS3W",
-          secret: "KwIxF0VbGX2ZHLbbbYgE",
-        },
-        firefox: {
-          id: "zWdxnF04Hd",
-          secret: "wY5uLJJDjNWrDlB6lAj8",
+          id: "mI5TEUKCwD",
+          secret: "47lxj2WNCJyVpxiy6vgq",
         },
       },
       mainnet: {
@@ -158,12 +155,14 @@ var options = {
     background: "./src/extension/background-script/index.ts",
     contentScriptOnEndWebLN: "./src/extension/content-script/onendwebln.js",
     contentScriptOnEndAlby: "./src/extension/content-script/onendalby.js",
+    contentScriptOnEndLiquid: "./src/extension/content-script/onendliquid.js",
     contentScriptOnEndNostr: "./src/extension/content-script/onendnostr.js",
     contentScriptOnEndWebBTC: "./src/extension/content-script/onendwebbtc.js",
     contentScriptOnStart: "./src/extension/content-script/onstart.ts",
     inpageScript: "./src/extension/inpage-script/index.js",
     inpageScriptWebLN: "./src/extension/inpage-script/webln.js",
     inpageScriptWebBTC: "./src/extension/inpage-script/webbtc.js",
+    inpageScriptLiquid: "./src/extension/inpage-script/liquid.js",
     inpageScriptNostr: "./src/extension/inpage-script/nostr.js",
     inpageScriptAlby: "./src/extension/inpage-script/alby.js",
     popup: "./src/app/router/Popup/index.tsx",
@@ -317,7 +316,14 @@ if (nodeEnv === "development") {
   options.optimization = {
     minimize: true,
     minimizer: [
-      new TerserPlugin(),
+      new TerserPlugin({
+        terserOptions: {
+          ecma: 6,
+          mangle: {
+            reserved: ["Buffer", "buffer"],
+          },
+        },
+      }),
       new CssMinimizerPlugin(),
       new FilemanagerPlugin({
         events: {

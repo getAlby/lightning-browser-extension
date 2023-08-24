@@ -47,10 +47,10 @@ describe("ConfirmGetAddress", () => {
     });
 
     expect(
-      await screen.findByText("This website asks you to read:")
+      await screen.findByText("Allow this website to:")
     ).toBeInTheDocument();
     expect(
-      await screen.findByText("Your Bitcoin receive address")
+      await screen.findByText("Read your Bitcoin receive address.")
     ).toBeInTheDocument();
   });
 });

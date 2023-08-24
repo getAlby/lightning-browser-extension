@@ -1,5 +1,6 @@
 import { EventEmitter } from "events";
 
+import { PromiseQueue } from "~/extension/providers/promiseQueue";
 import { postMessage } from "../postMessage";
 
 declare global {
@@ -24,27 +25,23 @@ type KeysendArgs = {
 
 export default class WebLNProvider {
   enabled: boolean;
-  isEnabled: boolean;
-  executing: boolean;
   private _eventEmitter: EventEmitter;
+  private _queue: PromiseQueue;
 
   constructor() {
     this.enabled = false;
-    this.isEnabled = false; // seems some webln implementations use webln.isEnabled and some use webln.enabled
-    this.executing = false;
     this._eventEmitter = new EventEmitter();
+    this._queue = new PromiseQueue();
   }
 
-  async enable() {
+  async enable(): Promise<void> {
     if (this.enabled) {
-      return { enabled: true };
+      return;
     }
     const result = await this.execute("enable");
     if (typeof result.enabled === "boolean") {
       this.enabled = result.enabled;
-      this.isEnabled = result.enabled;
     }
-    return result;
   }
 
   getInfo() {
@@ -143,6 +140,6 @@ export default class WebLNProvider {
     action: string,
     args?: Record<string, unknown>
   ): Promise<Record<string, unknown>> {
-    return postMessage("webln", action, args);
+    return this._queue.add(() => postMessage("webln", action, args));
   }
 }

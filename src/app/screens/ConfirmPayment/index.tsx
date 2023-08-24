@@ -30,9 +30,6 @@ function ConfirmPayment() {
   const { t } = useTranslation("translation", {
     keyPrefix: "confirm_payment",
   });
-  const { t: tComponents } = useTranslation("components", {
-    keyPrefix: "confirm_or_cancel",
-  });
   const { t: tCommon } = useTranslation("common");
 
   const navState = useNavigationState();
@@ -184,9 +181,6 @@ function ConfirmPayment() {
                 onCancel={reject}
                 label={t("actions.pay_now")}
               />
-              <p className="mb-4 text-center text-sm text-gray-400">
-                <em>{tComponents("only_trusted")}</em>
-              </p>
             </div>
           </Container>
         </form>
