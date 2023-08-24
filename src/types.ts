@@ -1,3 +1,4 @@
+import { CreateSwapParams } from "@getalby/sdk/dist/types";
 import { PaymentRequestObject } from "bolt11";
 import { Runtime } from "webextension-polyfill";
 import { ACCOUNT_CURRENCIES, CURRENCIES, TIPS } from "~/common/constants";
@@ -7,7 +8,6 @@ import {
   SendPaymentResponse,
   WebLNNode,
 } from "~/extension/background-script/connectors/connector.interface";
-
 import { Event } from "./extension/providers/nostr/types";
 
 export type ConnectorType = keyof typeof connectors;
@@ -160,6 +160,7 @@ export type NavigationState = {
     destination?: string;
     amount?: string;
     customRecords?: Record<string, string>;
+    bitcoinAddress?: string;
     connector?: string;
     name?: string;
     config?: unknown;
@@ -560,6 +561,17 @@ export interface MessageGetAddress extends MessageDefault {
   // eslint-disable-next-line @typescript-eslint/ban-types
   args: {};
   action: "getAddress";
+}
+
+export interface MessageGetSwapInfo extends MessageDefault {
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  args: {};
+  action: "getSwapInfo";
+}
+
+export interface MessageCreateSwap extends MessageDefault {
+  args: CreateSwapParams;
+  action: "getSwapInfo";
 }
 
 // Liquid

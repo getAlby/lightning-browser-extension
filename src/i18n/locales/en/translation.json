@@ -645,7 +645,8 @@
       "title": "Send",
       "input": {
         "label": "Recipient",
-        "hint": "Invoice, Lightning Address or LNURL"
+        "hint": "Invoice, Lightning Address, LNURL",
+        "hint_with_bitcoin_address": "Invoice, Lightning Address, LNURL or bitcoin address"
       }
     },
     "lnurlpay": {
@@ -832,6 +833,33 @@
         "label": "Amount (Satoshi)"
       }
     },
+    "send_to_bitcoin_address": {
+      "title": "Send to bitcoin address",
+      "recipient": {
+        "label": "Recipient"
+      },
+      "amount": {
+        "label": "Amount (sats)"
+      },
+      "network_fee": {
+        "label": "Network fee"
+      },
+      "service_fee": {
+        "label": "Service fee"
+      },
+      "total": {
+        "label": "Total"
+      },
+      "total_fee": {
+        "label": "Fee"
+      },
+      "provider": {
+        "label": "Swap provider"
+      },
+      "view_on_explorer": "View on mempool explorer",
+      "time_estimate": "ℹ️ Transactions usually arrive within 10-30 minutes.",
+      "service_unavailable": "Service temporary not available, please try again in a few minutes."
+    },
     "confirm_payment": {
       "title": "Approve Payment",
       "success": "Payment of {{amount}} successful!",
@@ -924,7 +952,7 @@
     "pasted": "Pasted!",
     "description": "Description",
     "description_full": "Full Description",
-    "success_message": "{{amount}}{{fiatAmount}} sent to {{destination}}",
+    "success_message": "{{amount}}{{fiatAmount}} are on their way to {{destination}}",
     "response": "Response",
     "message": "Message",
     "help": "Help",
@@ -959,6 +987,7 @@
       "log_in": "Log in",
       "remember": "Remember my choice and don't ask again",
       "more": "More",
+      "review": "Review",
       "download": "Download"
     },
     "connectors": {

@@ -95,7 +95,7 @@ function NostrConfirm() {
               </label>
             </div>
           </div>
-          <div className="mb-4 text-center flex flex-col">
+          <div className="text-center flex flex-col">
             <ConfirmOrCancel
               disabled={loading}
               loading={loading}
@@ -103,7 +103,7 @@ function NostrConfirm() {
               onCancel={reject}
             />
             <a
-              className="underline text-sm text-gray-400 mx-4 overflow-hidden text-ellipsis whitespace-nowrap"
+              className="mt-4 underline text-sm text-gray-400 overflow-hidden text-ellipsis whitespace-nowrap"
               href="#"
               onClick={block}
             >

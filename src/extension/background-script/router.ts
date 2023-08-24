@@ -11,6 +11,7 @@ import * as payments from "./actions/payments";
 import * as permissions from "./actions/permissions";
 import * as settings from "./actions/settings";
 import * as setup from "./actions/setup";
+import * as swaps from "./actions/swaps";
 import * as webbtc from "./actions/webbtc";
 import * as webln from "./actions/webln";
 
@@ -64,13 +65,13 @@ const routes = {
   setMnemonic: mnemonic.setMnemonic,
   getMnemonic: mnemonic.getMnemonic,
   generateMnemonic: mnemonic.generateMnemonic,
-
+  getSwapInfo: swaps.info,
+  createSwap: swaps.createSwap,
   liquid: {
     signPset: liquid.signPset,
     getPsetPreview: liquid.getPsetPreview,
     fetchAssetRegistry: liquid.fetchAssetRegistry,
   },
-
   nostr: {
     generatePrivateKey: nostr.generatePrivateKey,
     getPrivateKey: nostr.getPrivateKey,
