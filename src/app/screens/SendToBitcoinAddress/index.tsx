@@ -282,6 +282,7 @@ function SendToBitcoinAddress() {
                   loading ||
                   feesLoading ||
                   swapDataLoading ||
+                  !networkFee || // Loading swap info failed
                   !amountSat ||
                   rangeExceeded ||
                   amountExceeded
