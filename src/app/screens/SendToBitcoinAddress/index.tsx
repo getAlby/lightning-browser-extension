@@ -91,12 +91,12 @@ function SendToBitcoinAddress() {
         }
       } catch (e) {
         console.error(e);
-        if (e instanceof Error) toast.error(e.message);
+        if (e instanceof Error) toast.error(t("service_unavailable"));
       } finally {
         setFeesLoading(false);
       }
     })();
-  }, [getFormattedFiat, showFiat]);
+  }, [getFormattedFiat, showFiat, t]);
 
   useEffect(() => {
     if (!feesLoading) {

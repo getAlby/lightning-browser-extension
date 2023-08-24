@@ -857,7 +857,8 @@
         "label": "Swap provider"
       },
       "view_on_explorer": "View on mempool explorer",
-      "time_estimate": "ℹ️ Transactions usually arrive within 10-30 minutes."
+      "time_estimate": "ℹ️ Transactions usually arrive within 10-30 minutes.",
+      "service_unavailable": "Service temporary not available, please try again in a few minutes."
     },
     "confirm_payment": {
       "title": "Approve Payment",
