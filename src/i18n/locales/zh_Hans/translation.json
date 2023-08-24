@@ -456,6 +456,16 @@
           "success": "已成功移除主密钥。",
           "title": "移除主密钥",
           "subtitle": "将主密钥从该帐户移除。"
+        },
+        "no_mnemonic_hint": "💡 你还没有主密钥。<0>点击此处e</0></div>来生成你的主密钥并解锁这些设置。",
+        "network": {
+          "title": "网络",
+          "subtitle": "选择网络来派生地址并解码比特币和 Liquid 交易",
+          "options": {
+            "bitcoin": "主网",
+            "testnet": "测试网",
+            "regtest": "Regtest"
+          }
         }
       }
     },
@@ -861,6 +871,33 @@
     },
     "scan_qrcode": {
       "title": "等待扫描"
+    },
+    "confirm_sign_pset": {
+      "title": "签署",
+      "view_details": "查看详情",
+      "inputs": "输入",
+      "allow_sign": "该网站要求你签署一笔 Liquid 交易：",
+      "view_raw_transaction": "查看原始交易（Base64）",
+      "hide_raw_transaction": "隐藏原始交易（Base64）",
+      "hide_details": "隐藏详情",
+      "outputs": "输出",
+      "amount": "{{amount}} {{ticker}}"
+    },
+    "bitcoin": {
+      "allow_sign": "允许{{host}}签署：",
+      "block_and_ignore": "阻止并忽略{{host}}",
+      "block_added": "已将 {{host}}添加到了阻止列表，请重新加载网站。",
+      "confirm_get_address": {
+        "title": "获取地址"
+      },
+      "allow": "允许该网站："
+    },
+    "liquid": {
+      "title": "Liquid",
+      "allow_sign": "允许{{host}}签署：",
+      "allow": "允许该网站：",
+      "block_and_ignore": "阻止并忽略{{host}}",
+      "block_added": "已将{{host}}加入阻止列表，请重新加载网站。"
     }
   },
   "common": {
@@ -1136,6 +1173,16 @@
       "openchannel": "开通新渠道。",
       "addholdinvoice": "创建新的 HODL 发票。",
       "settleinvoice": "结算已接受的发票。"
+    },
+    "webln": {
+      "getbalance": "读取你的帐户余额。"
+    },
+    "bitcoin": {
+      "getaddress": "读取你的比特币收款地址。"
+    },
+    "liquid": {
+      "getaddress": "读取你的 Liquid 收款地址。",
+      "signschnorr": "用你的密钥签署消息。"
     }
   }
 }
