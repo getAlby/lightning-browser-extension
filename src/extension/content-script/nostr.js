@@ -22,7 +22,6 @@ const disabledCalls = ["nostr/enable"];
 
 let isEnabled = false; // store if nostr is enabled for this content page
 let isRejected = false; // store if the nostr enable call failed. if so we do not prompt again
-let callActive = false; // store if a nostr call is currently active. Used to prevent multiple calls in parallel
 
 async function init() {
   const inject = await shouldInject();
@@ -63,12 +62,6 @@ async function init() {
         return;
       }
 
-      // if a call is active we ignore the request
-      if (callActive) {
-        postMessage(ev, { error: "window.nostr call already executing" });
-        return;
-      }
-
       // limit the calls that can be made from window.nostr
       // only listed calls can be executed
       // if not enabled only enable can be called.
@@ -90,8 +83,6 @@ async function init() {
       };
 
       const replyFunction = (response) => {
-        callActive = false; // reset call is active
-
         if (ev.data.action === "nostr/enable") {
           isEnabled = response.data?.enabled;
           if (response.error) {
@@ -104,7 +95,6 @@ async function init() {
         postMessage(ev, response);
       };
 
-      callActive = true;
       return browser.runtime
         .sendMessage(messageWithOrigin)
         .then(replyFunction)

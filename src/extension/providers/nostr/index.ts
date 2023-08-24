@@ -1,6 +1,7 @@
-import { postMessage } from "../postMessage";
-import { Event } from "./types";
 import EventEmitter from "events";
+import { postMessage } from "../postMessage";
+import { PromiseQueue } from "../promiseQueue";
+import { Event } from "./types";
 
 declare global {
   interface Window {
@@ -12,10 +13,12 @@ export default class NostrProvider {
   nip04 = new Nip04(this);
   enabled: boolean;
   private _eventEmitter: EventEmitter;
+  private _queue: PromiseQueue;
 
   constructor() {
     this.enabled = false;
     this._eventEmitter = new EventEmitter();
+    this._queue = new PromiseQueue();
   }
 
   async enable() {
@@ -68,7 +71,7 @@ export default class NostrProvider {
     action: string,
     args?: Record<string, unknown>
   ): Promise<Record<string, unknown>> {
-    return postMessage("nostr", action, args);
+    return this._queue.add(() => postMessage("nostr", action, args));
   }
 }
 

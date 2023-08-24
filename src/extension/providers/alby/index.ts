@@ -1,10 +1,13 @@
+import { PromiseQueue } from "~/extension/providers/promiseQueue";
 import { postMessage } from "../postMessage";
 
 export default class AlbyProvider {
   enabled: boolean;
+  private _queue: PromiseQueue;
 
   constructor() {
     this.enabled = false;
+    this._queue = new PromiseQueue();
   }
 
   async enable() {
@@ -45,6 +48,6 @@ export default class AlbyProvider {
     action: string,
     args?: Record<string, unknown>
   ): Promise<Record<string, unknown>> {
-    return postMessage("alby", action, args);
+    return this._queue.add(() => postMessage("alby", action, args));
   }
 }
