@@ -2,12 +2,6 @@ import { EventEmitter } from "events";
 
 import { postMessage } from "../postMessage";
 
-declare global {
-  interface Window {
-    webln: WebLNProvider;
-  }
-}
-
 type RequestInvoiceArgs = {
   amount?: string | number;
   defaultAmount?: string | number;
