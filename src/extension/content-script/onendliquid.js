@@ -15,7 +15,6 @@ const disabledCalls = ["liquid/enable"];
 
 let isEnabled = false; // store if liquid is enabled for this content page
 let isRejected = false; // store if the liquid enable call failed. if so we do not prompt again
-let callActive = false; // store if a liquid call is currently active. Used to prevent multiple calls in parallel
 
 const SCOPE = "liquid";
 
@@ -46,11 +45,6 @@ async function init() {
         );
         return;
       }
-      // if a call is active we ignore the request
-      if (callActive) {
-        console.error("liquid call already executing");
-        return;
-      }
 
       // limit the calls that can be made from window.liquid
       // only listed calls can be executed
@@ -73,8 +67,6 @@ async function init() {
       };
 
       const replyFunction = (response) => {
-        callActive = false; // reset call is active
-
         if (ev.data.action === `${SCOPE}/enable`) {
           isEnabled = response.data?.enabled;
           if (response.error) {
@@ -87,7 +79,6 @@ async function init() {
         postMessage(ev, response);
       };
 
-      callActive = true;
       return browser.runtime
         .sendMessage(messageWithOrigin)
         .then(replyFunction)
