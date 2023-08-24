@@ -1,8 +1,7 @@
 // Checks the doctype of the current document if it exists
 export function doctypeCheck() {
-  const doctype = window.document.doctype;
-  if (doctype) {
-    return doctype.name === "html";
+  if (window && window.document && window.document.doctype) {
+    return window.document.doctype.name === "html";
   } else {
     return true;
   }
