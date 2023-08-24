@@ -1,3 +1,4 @@
+import { PromiseQueue } from "~/extension/providers/promiseQueue";
 import { postMessage } from "../postMessage";
 
 declare global {
@@ -11,10 +12,13 @@ export default class WebBTCProvider {
   isEnabled: boolean;
   executing: boolean;
 
+  private _queue: PromiseQueue;
+
   constructor() {
     this.enabled = false;
     this.isEnabled = false;
     this.executing = false;
+    this._queue = new PromiseQueue();
   }
 
   enable() {
@@ -66,6 +70,6 @@ export default class WebBTCProvider {
     action: string,
     args?: Record<string, unknown>
   ): Promise<Record<string, unknown>> {
-    return postMessage("webbtc", action, args);
+    return this._queue.add(() => postMessage("webbtc", action, args));
   }
 }

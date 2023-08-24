@@ -1,3 +1,4 @@
+import { PromiseQueue } from "~/extension/providers/promiseQueue";
 import { postMessage } from "../postMessage";
 
 declare global {
@@ -8,9 +9,11 @@ declare global {
 
 export default class LiquidProvider {
   enabled: boolean;
+  private _queue: PromiseQueue;
 
   constructor() {
     this.enabled = false;
+    this._queue = new PromiseQueue();
   }
 
   async enable(): Promise<void> {
@@ -42,6 +45,6 @@ export default class LiquidProvider {
     action: string,
     args?: Record<string, unknown>
   ): Promise<Record<string, unknown>> {
-    return postMessage("liquid", action, args);
+    return this._queue.add(() => postMessage("liquid", action, args));
   }
 }
