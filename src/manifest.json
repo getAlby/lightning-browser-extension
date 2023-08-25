@@ -142,5 +142,6 @@
         "js/contentScriptWebBTC.bundle.js"
       ]
     }
-  ]
+  ],
+  "web_accessible_resources": ["js/inpageScript.bundle.js"]
 }

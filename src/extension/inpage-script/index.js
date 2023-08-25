@@ -14,7 +14,6 @@ function init() {
   window.nostr = new NostrProvider();
   window.webbtc = new WebBTCProvider();
   window.webln = new WebLNProvider();
-
   const readyEvent = new Event("webln:ready");
   window.dispatchEvent(readyEvent);
 
