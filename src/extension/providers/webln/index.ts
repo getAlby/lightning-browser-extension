@@ -1,7 +1,4 @@
-import { EventEmitter } from "events";
-
-import { PromiseQueue } from "~/extension/providers/promiseQueue";
-import { postMessage } from "../postMessage";
+import CommonProvider from "~/extension/providers/commonProvider";
 
 declare global {
   interface Window {
@@ -23,22 +20,12 @@ type KeysendArgs = {
   amount: string | number;
 };
 
-export default class WebLNProvider {
-  enabled: boolean;
-  private _eventEmitter: EventEmitter;
-  private _queue: PromiseQueue;
-
-  constructor() {
-    this.enabled = false;
-    this._eventEmitter = new EventEmitter();
-    this._queue = new PromiseQueue();
-  }
-
+export default class WebLNProvider extends CommonProvider {
   async enable(): Promise<void> {
     if (this.enabled) {
       return;
     }
-    const result = await this.execute("enable");
+    const result = await this.execute("webln", "enable");
     if (typeof result.enabled === "boolean") {
       this.enabled = result.enabled;
     }
@@ -48,28 +35,28 @@ export default class WebLNProvider {
     if (!this.enabled) {
       throw new Error("Provider must be enabled before calling getInfo");
     }
-    return this.execute("getInfo");
+    return this.execute("webln", "getInfo");
   }
 
   lnurl(lnurlEncoded: string) {
     if (!this.enabled) {
       throw new Error("Provider must be enabled before calling lnurl");
     }
-    return this.execute("lnurl", { lnurlEncoded });
+    return this.execute("webln", "lnurl", { lnurlEncoded });
   }
 
   sendPayment(paymentRequest: string) {
     if (!this.enabled) {
       throw new Error("Provider must be enabled before calling sendPayment");
     }
-    return this.execute("sendPaymentOrPrompt", { paymentRequest });
+    return this.execute("webln", "sendPaymentOrPrompt", { paymentRequest });
   }
 
   keysend(args: KeysendArgs) {
     if (!this.enabled) {
       throw new Error("Provider must be enabled before calling keysend");
     }
-    return this.execute("keysendOrPrompt", args);
+    return this.execute("webln", "keysendOrPrompt", args);
   }
 
   makeInvoice(args: string | number | RequestInvoiceArgs) {
@@ -80,7 +67,7 @@ export default class WebLNProvider {
       args = { amount: args };
     }
 
-    return this.execute("makeInvoice", args);
+    return this.execute("webln", "makeInvoice", args);
   }
 
   signMessage(message: string) {
@@ -88,7 +75,7 @@ export default class WebLNProvider {
       throw new Error("Provider must be enabled before calling signMessage");
     }
 
-    return this.execute("signMessageOrPrompt", { message });
+    return this.execute("webln", "signMessageOrPrompt", { message });
   }
 
   verifyMessage(signature: string, message: string) {
@@ -102,7 +89,7 @@ export default class WebLNProvider {
     if (!this.enabled) {
       throw new Error("Provider must be enabled before calling getBalance");
     }
-    return this.execute("getBalanceOrPrompt");
+    return this.execute("webln", "getBalanceOrPrompt");
   }
 
   request(method: string, params: Record<string, unknown>) {
@@ -110,36 +97,9 @@ export default class WebLNProvider {
       throw new Error("Provider must be enabled before calling request");
     }
 
-    return this.execute("request", {
+    return this.execute("webln", "request", {
       method,
       params,
     });
-  }
-
-  on(...args: Parameters<EventEmitter["on"]>) {
-    if (!this.enabled) {
-      throw new Error("Provider must be enabled before calling on method");
-    }
-
-    this._eventEmitter.on(...args);
-  }
-
-  off(...args: Parameters<EventEmitter["off"]>) {
-    if (!this.enabled) {
-      throw new Error("Provider must be enabled before calling off method");
-    }
-    this._eventEmitter.off(...args);
-  }
-
-  emit(...args: Parameters<EventEmitter["emit"]>) {
-    this._eventEmitter.emit(...args);
-  }
-
-  // NOTE: new call `action`s must be specified also in the content script
-  execute(
-    action: string,
-    args?: Record<string, unknown>
-  ): Promise<Record<string, unknown>> {
-    return this._queue.add(() => postMessage("webln", action, args));
   }
 }

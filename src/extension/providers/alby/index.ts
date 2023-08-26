@@ -1,20 +1,11 @@
-import { PromiseQueue } from "~/extension/providers/promiseQueue";
-import { postMessage } from "../postMessage";
+import CommonProvider from "~/extension/providers/commonProvider";
 
-export default class AlbyProvider {
-  enabled: boolean;
-  private _queue: PromiseQueue;
-
-  constructor() {
-    this.enabled = false;
-    this._queue = new PromiseQueue();
-  }
-
+export default class AlbyProvider extends CommonProvider {
   async enable() {
     if (this.enabled) {
       return { enabled: true };
     }
-    const result = await this.execute("enable");
+    const result = await this.execute("alby", "enable");
     if (typeof result.enabled === "boolean") {
       this.enabled = result.enabled;
     }
@@ -37,17 +28,10 @@ export default class AlbyProvider {
     if (!this.enabled) {
       throw new Error("Provider must be enabled before calling addAccount");
     }
-    return this.execute("addAccount", {
+    return this.execute("alby", "addAccount", {
       name: params.name,
       connector: params.connector,
       config: params.config,
     });
-  }
-
-  execute(
-    action: string,
-    args?: Record<string, unknown>
-  ): Promise<Record<string, unknown>> {
-    return this._queue.add(() => postMessage("alby", action, args));
   }
 }

@@ -1,5 +1,4 @@
-import { PromiseQueue } from "~/extension/providers/promiseQueue";
-import { postMessage } from "../postMessage";
+import CommonProvider from "~/extension/providers/commonProvider";
 
 declare global {
   interface Window {
@@ -7,25 +6,22 @@ declare global {
   }
 }
 
-export default class WebBTCProvider {
-  enabled: boolean;
+export default class WebBTCProvider extends CommonProvider {
   isEnabled: boolean;
   executing: boolean;
 
-  private _queue: PromiseQueue;
-
   constructor() {
-    this.enabled = false;
+    super(); // Call the constructor of the parent class
+
     this.isEnabled = false;
     this.executing = false;
-    this._queue = new PromiseQueue();
   }
 
   enable() {
     if (this.enabled) {
       return Promise.resolve({ enabled: true });
     }
-    return this.execute("enable").then((result) => {
+    return this.execute("webbtc", "enable").then((result) => {
       if (typeof result.enabled === "boolean") {
         this.enabled = result.enabled;
         this.isEnabled = result.enabled;
@@ -38,7 +34,7 @@ export default class WebBTCProvider {
     if (!this.enabled) {
       throw new Error("Provider must be enabled before calling getInfo");
     }
-    return this.execute("getInfo");
+    return this.execute("webbtc", "getInfo");
   }
 
   sendTransaction(address: string, amount: string) {
@@ -54,7 +50,7 @@ export default class WebBTCProvider {
     if (!this.enabled) {
       throw new Error("Provider must be enabled before calling getAddress");
     }
-    return this.execute("getAddressOrPrompt", {});
+    return this.execute("webbtc", "getAddressOrPrompt", {});
   }
 
   request(method: string, params: Record<string, unknown>) {
@@ -63,13 +59,5 @@ export default class WebBTCProvider {
     }
 
     throw new Error("Alby does not support `request`");
-  }
-
-  // NOTE: new call `action`s must be specified also in the content script
-  execute(
-    action: string,
-    args?: Record<string, unknown>
-  ): Promise<Record<string, unknown>> {
-    return this._queue.add(() => postMessage("webbtc", action, args));
   }
 }

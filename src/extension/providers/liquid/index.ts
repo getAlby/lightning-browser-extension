@@ -1,5 +1,4 @@
-import { PromiseQueue } from "~/extension/providers/promiseQueue";
-import { postMessage } from "../postMessage";
+import CommonProvider from "~/extension/providers/commonProvider";
 
 declare global {
   interface Window {
@@ -7,20 +6,12 @@ declare global {
   }
 }
 
-export default class LiquidProvider {
-  enabled: boolean;
-  private _queue: PromiseQueue;
-
-  constructor() {
-    this.enabled = false;
-    this._queue = new PromiseQueue();
-  }
-
+export default class LiquidProvider extends CommonProvider {
   async enable(): Promise<void> {
     if (this.enabled) {
       return;
     }
-    const result = await this.execute("enable");
+    const result = await this.execute("liquid", "enable");
     if (typeof result.enabled === "boolean") {
       this.enabled = result.enabled;
     }
@@ -30,21 +21,13 @@ export default class LiquidProvider {
     if (!this.enabled) {
       throw new Error("Provider must be enabled before calling getAddress");
     }
-    return await this.execute("getAddressOrPrompt");
+    return await this.execute("liquid", "getAddressOrPrompt");
   }
 
   async signPset(pset: string) {
     if (!this.enabled) {
       throw new Error("Provider must be enabled before calling signPset");
     }
-    return this.execute("signPsetWithPrompt", { pset });
-  }
-
-  // NOTE: new call `action`s must be specified also in the content script
-  execute(
-    action: string,
-    args?: Record<string, unknown>
-  ): Promise<Record<string, unknown>> {
-    return this._queue.add(() => postMessage("liquid", action, args));
+    return this.execute("liquid", "signPsetWithPrompt", { pset });
   }
 }

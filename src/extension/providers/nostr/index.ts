@@ -1,6 +1,4 @@
-import EventEmitter from "events";
-import { postMessage } from "../postMessage";
-import { PromiseQueue } from "../promiseQueue";
+import CommonProvider from "~/extension/providers/commonProvider";
 import { Event } from "./types";
 
 declare global {
@@ -9,23 +7,14 @@ declare global {
   }
 }
 
-export default class NostrProvider {
+export default class NostrProvider extends CommonProvider {
   nip04 = new Nip04(this);
-  enabled: boolean;
-  private _eventEmitter: EventEmitter;
-  private _queue: PromiseQueue;
-
-  constructor() {
-    this.enabled = false;
-    this._eventEmitter = new EventEmitter();
-    this._queue = new PromiseQueue();
-  }
 
   async enable() {
     if (this.enabled) {
       return Promise.resolve({ enabled: true });
     }
-    const result = await this.execute("enable");
+    const result = await this.execute("nostr", "enable");
     if (typeof result.enabled === "boolean") {
       this.enabled = result.enabled;
     }
@@ -34,44 +23,22 @@ export default class NostrProvider {
 
   async getPublicKey() {
     await this.enable();
-    return await this.execute("getPublicKeyOrPrompt");
+    return await this.execute("nostr", "getPublicKeyOrPrompt");
   }
 
   async signEvent(event: Event) {
     await this.enable();
-    return this.execute("signEventOrPrompt", { event });
+    return this.execute("nostr", "signEventOrPrompt", { event });
   }
 
   async signSchnorr(sigHash: string) {
     await this.enable();
-    return this.execute("signSchnorrOrPrompt", { sigHash });
+    return this.execute("nostr", "signSchnorrOrPrompt", { sigHash });
   }
 
   async getRelays() {
     await this.enable();
-    return this.execute("getRelays");
-  }
-
-  async on(...args: Parameters<EventEmitter["on"]>) {
-    await this.enable();
-    this._eventEmitter.on(...args);
-  }
-
-  async off(...args: Parameters<EventEmitter["off"]>) {
-    await this.enable();
-    this._eventEmitter.off(...args);
-  }
-
-  emit(...args: Parameters<EventEmitter["emit"]>) {
-    this._eventEmitter.emit(...args);
-  }
-
-  // NOTE: new call `action`s must be specified also in the content script
-  execute(
-    action: string,
-    args?: Record<string, unknown>
-  ): Promise<Record<string, unknown>> {
-    return this._queue.add(() => postMessage("nostr", action, args));
+    return this.execute("nostr", "getRelays");
   }
 }
 
@@ -84,11 +51,17 @@ class Nip04 {
 
   async encrypt(peer: string, plaintext: string) {
     await this.provider.enable();
-    return this.provider.execute("encryptOrPrompt", { peer, plaintext });
+    return this.provider.execute("nostr", "encryptOrPrompt", {
+      peer,
+      plaintext,
+    });
   }
 
   async decrypt(peer: string, ciphertext: string) {
     await this.provider.enable();
-    return this.provider.execute("decryptOrPrompt", { peer, ciphertext });
+    return this.provider.execute("nostr", "decryptOrPrompt", {
+      peer,
+      ciphertext,
+    });
   }
 }
