@@ -383,9 +383,25 @@
           "settings": {
             "description": "マスターキーからNostr秘密鍵を生成するか、すでにお持ちの秘密鍵を「Nostr秘密鍵」フィールドに貼り付けてインポートしてください。",
             "label": "Nostr設定",
-            "title": "Nostr設定"
+            "title": "Nostr設定",
+            "remove": "現在の鍵を削除する",
+            "no_secret_key": "💡マスターキーがまだありません。<0>ここをクリック</0></div>してマスターキーを作成し、Nostrキーを派生させてください。"
           },
-          "title": "Nostr"
+          "title": "Nostr",
+          "setup": {
+            "description2": "Albyで作成されたすべてのNostrアカウントには、<0>リカバリーフレーズ</0>が付属しています。これはNostrの秘密鍵を復旧するための12個の単語です。",
+            "new": {
+              "label": "新しいNostrアカウントを作成する",
+              "description": "新しいNostr鍵のペアでマスター鍵を生成する。"
+            },
+            "import": {
+              "label": "Nostrアカウントをインポートする",
+              "title": "Nostrアカウントをどのようにインポートしますか？",
+              "description": "既存のNostr秘密鍵を使用するか、マスターキーから導出する"
+            },
+            "title": "Nostrキーのセットアップ",
+            "description": "新しいNostrアカウント（秘密鍵と公開鍵のペア）を作成するか、既存のアカウントをインポートするかを選択します。"
+          }
         },
         "no_mnemonic_hint": "💡 マスターキーがまだありません。 <0>こちらをクリック</0></div>してマスターキーを作成し、これらの設定を解除してください。",
         "network": {
