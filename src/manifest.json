@@ -143,5 +143,5 @@
       ]
     }
   ],
-  "web_accessible_resources": ["js/inpageScript.bundle.js"]
+  "firefox__web_accessible_resources": ["js/inpageScript.bundle.js"]
 }
