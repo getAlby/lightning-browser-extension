@@ -13,27 +13,6 @@
   },
   "description": "The Bitcoin Lightning wallet for direct payments across the globe, Bitcoin Lightning applications and passwordless logins.",
   "homepage_url": "https://getAlby.com/",
-  "web_accessible_resources": [
-    "js/inpageScript.bundle.js",
-    "js/inpageScriptWebLN.bundle.js",
-    "js/inpageScriptWebBTC.bundle.js",
-    "js/inpageScriptLiquid.bundle.js",
-    "js/inpageScriptNostr.bundle.js",
-    "js/inpageScriptAlby.bundle.js"
-  ],
-  "__chrome__web_accessible_resources": [
-    {
-      "resources": [
-        "js/inpageScript.bundle.js",
-        "js/inpageScriptWebLN.bundle.js",
-        "js/inpageScriptWebBTC.bundle.js",
-        "js/inpageScriptLiquid.bundle.js",
-        "js/inpageScriptNostr.bundle.js",
-        "js/inpageScriptAlby.bundle.js"
-      ],
-      "matches": ["file://*/*", "http://*/*", "https://*/*"]
-    }
-  ],
   "permissions": [
     "activeTab",
     "nativeMessaging",
@@ -48,6 +27,7 @@
     "activeTab",
     "nativeMessaging",
     "notifications",
+    "scripting",
     "storage",
     "tabs",
     "unlimitedStorage",
@@ -152,20 +132,16 @@
     {
       "all_frames": true,
       "matches": ["*://*/*"],
-      "run_at": "document_end",
-      "js": [
-        "js/contentScriptOnEndWebLN.bundle.js",
-        "js/contentScriptOnEndAlby.bundle.js",
-        "js/contentScriptOnEndLiquid.bundle.js",
-        "js/contentScriptOnEndNostr.bundle.js",
-        "js/contentScriptOnEndWebBTC.bundle.js"
-      ]
-    },
-    {
-      "all_frames": true,
-      "matches": ["*://*/*"],
       "run_at": "document_start",
-      "js": ["js/contentScriptOnStart.bundle.js"]
+      "js": [
+        "js/contentScriptOnStart.bundle.js",
+        "js/contentScriptWebLN.bundle.js",
+        "js/contentScriptAlby.bundle.js",
+        "js/contentScriptLiquid.bundle.js",
+        "js/contentScriptNostr.bundle.js",
+        "js/contentScriptWebBTC.bundle.js"
+      ]
     }
-  ]
+  ],
+  "web_accessible_resources": ["js/inpageScript.bundle.js"]
 }
