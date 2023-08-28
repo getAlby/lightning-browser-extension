@@ -1,5 +1,6 @@
 import browser from "webextension-polyfill";
 
+import api from "~/common/lib/api";
 import getOriginData from "./originData";
 import shouldInject from "./shouldInject";
 
@@ -42,7 +43,7 @@ async function init() {
   // message listener to listen to inpage nostr calls
   // those calls get passed on to the background script
   // (the inpage script can not do that directly, but only the inpage script can make nostr available to the page)
-  window.addEventListener("message", (ev) => {
+  window.addEventListener("message", async (ev) => {
     // Only accept messages from the current window
     if (
       ev.source !== window ||
@@ -81,6 +82,10 @@ async function init() {
         prompt: true,
         origin: getOriginData(),
       };
+      const account = await api.getAccount();
+
+      if (ev.data.action === "nostr/enable" && !account.nostrEnabled)
+        messageWithOrigin.action = `public/nostr/providerOnboard`;
 
       const replyFunction = (response) => {
         if (ev.data.action === "nostr/enable") {

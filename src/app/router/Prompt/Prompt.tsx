@@ -22,6 +22,7 @@ import { ToastContainer } from "react-toastify";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
 import BitcoinConfirmGetAddress from "~/app/screens/Bitcoin/ConfirmGetAddress";
+import ProviderOnboard from "~/app/screens/ProviderOnboard";
 import type { NavigationState, OriginData } from "~/types";
 
 // Parse out the parameters from the querystring.
@@ -125,6 +126,10 @@ function Prompt() {
             <Route path="confirmKeysend" element={<ConfirmKeysend />} />
             <Route path="confirmSignMessage" element={<ConfirmSignMessage />} />
             <Route path="confirmAddAccount" element={<ConfirmAddAccount />} />
+            <Route
+              path="public/nostr/providerOnboard"
+              element={<ProviderOnboard action={navigationState.action} />}
+            />
             <Route
               path="public/confirmRequestPermission"
               element={<ConfirmRequestPermission />}
