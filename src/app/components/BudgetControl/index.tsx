@@ -26,7 +26,7 @@ function BudgetControl({
   const { t: tCommon } = useTranslation("common");
 
   return (
-    <div className="mb-6">
+    <div className="mb-4">
       <div className="flex items-center">
         <Checkbox
           id="remember_me"

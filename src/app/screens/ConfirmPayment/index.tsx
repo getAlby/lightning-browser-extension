@@ -161,20 +161,20 @@ function ConfirmPayment() {
                     description={invoice.tagsObject.description}
                   />
                 </div>
-                {navState.origin && (
-                  <BudgetControl
-                    fiatAmount={fiatBudgetAmount}
-                    remember={rememberMe}
-                    onRememberChange={(event) => {
-                      setRememberMe(event.target.checked);
-                    }}
-                    budget={budget}
-                    onBudgetChange={(event) => setBudget(event.target.value)}
-                  />
-                )}
               </div>
             </div>
             <div>
+              {navState.origin && (
+                <BudgetControl
+                  fiatAmount={fiatBudgetAmount}
+                  remember={rememberMe}
+                  onRememberChange={(event) => {
+                    setRememberMe(event.target.checked);
+                  }}
+                  budget={budget}
+                  onBudgetChange={(event) => setBudget(event.target.value)}
+                />
+              )}
               <ConfirmOrCancel
                 disabled={loading}
                 loading={loading}
