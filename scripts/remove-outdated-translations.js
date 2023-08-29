@@ -12,12 +12,14 @@ if (!keyToUpdate) {
 function updateNestedKey(obj, nestedKey) {
   const keys = nestedKey.split(".");
   let currentObj = obj;
+  let foundAndUpdated = false;
 
   for (let i = 0; i < keys.length; i++) {
     const key = keys[i];
 
-    if (i === keys.length - 1) {
+    if (i === keys.length - 1 && currentObj.hasOwnProperty(key)) {
       currentObj[key] = "";
+      foundAndUpdated = true;
     } else if (
       currentObj.hasOwnProperty(key) &&
       typeof currentObj[key] === "object"
@@ -28,6 +30,8 @@ function updateNestedKey(obj, nestedKey) {
       break;
     }
   }
+
+  return foundAndUpdated;
 }
 
 const startDirectory = path.join(__dirname, "..", "src", "i18n", "locales");
@@ -41,21 +45,21 @@ glob(filesPattern, (err, files) => {
   }
 
   files.forEach((filePath) => {
-    const language = filePath
-      .split(path.sep + "locales" + path.sep)[1]
-      .split(path.sep)[0];
-
-    const isEnglishFile = language === "en";
+    const isEnglishFile = filePath.includes(path.sep + "en" + path.sep); // Assuming 'en' is the English folder
     if (isEnglishFile) return;
 
     try {
       const data = fs.readFileSync(filePath, "utf8");
       const jsonData = JSON.parse(data);
 
-      updateNestedKey(jsonData, keyToUpdate);
+      const language = filePath
+        .split(path.sep + "locales" + path.sep)[1]
+        .split(path.sep)[0];
 
-      fs.writeFileSync(filePath, JSON.stringify(jsonData, null, 2));
-      console.log(`✅ ${language}`);
+      if (updateNestedKey(jsonData, keyToUpdate)) {
+        fs.writeFileSync(filePath, JSON.stringify(jsonData, null, 2));
+        console.log(`✅ ${language}`);
+      }
     } catch (error) {
       console.error(`Error processing ${filePath}: ${error}`);
     }
