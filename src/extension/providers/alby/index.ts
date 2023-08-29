@@ -1,15 +1,8 @@
-import CommonProvider from "~/extension/providers/commonProvider";
+import ProviderBase from "~/extension/providers/providerBase";
 
-export default class AlbyProvider extends CommonProvider {
-  async enable() {
-    if (this.enabled) {
-      return { enabled: true };
-    }
-    const result = await this.execute("alby", "enable");
-    if (typeof result.enabled === "boolean") {
-      this.enabled = result.enabled;
-    }
-    return result;
+export default class AlbyProvider extends ProviderBase {
+  constructor() {
+    super("alby");
   }
 
   /**
@@ -25,10 +18,8 @@ export default class AlbyProvider extends CommonProvider {
     connector: string;
     config: Record<string, unknown>;
   }) {
-    if (!this.enabled) {
-      throw new Error("Provider must be enabled before calling addAccount");
-    }
-    return this.execute("alby", "addAccount", {
+    this._checkEnabled("addAccount");
+    return this.execute("addAccount", {
       name: params.name,
       connector: params.connector,
       config: params.config,

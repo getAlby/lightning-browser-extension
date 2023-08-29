@@ -1,4 +1,4 @@
-import CommonProvider from "~/extension/providers/commonProvider";
+import ProviderBase from "~/extension/providers/providerBase";
 import { Event } from "./types";
 
 declare global {
@@ -7,38 +7,31 @@ declare global {
   }
 }
 
-export default class NostrProvider extends CommonProvider {
+export default class NostrProvider extends ProviderBase {
   nip04 = new Nip04(this);
 
-  async enable() {
-    if (this.enabled) {
-      return Promise.resolve({ enabled: true });
-    }
-    const result = await this.execute("nostr", "enable");
-    if (typeof result.enabled === "boolean") {
-      this.enabled = result.enabled;
-    }
-    return result;
+  constructor() {
+    super("nostr");
   }
 
   async getPublicKey() {
     await this.enable();
-    return await this.execute("nostr", "getPublicKeyOrPrompt");
+    return await this.execute("getPublicKeyOrPrompt");
   }
 
   async signEvent(event: Event) {
     await this.enable();
-    return this.execute("nostr", "signEventOrPrompt", { event });
+    return this.execute("signEventOrPrompt", { event });
   }
 
   async signSchnorr(sigHash: string) {
     await this.enable();
-    return this.execute("nostr", "signSchnorrOrPrompt", { sigHash });
+    return this.execute("signSchnorrOrPrompt", { sigHash });
   }
 
   async getRelays() {
     await this.enable();
-    return this.execute("nostr", "getRelays");
+    return this.execute("getRelays");
   }
 }
 
@@ -51,7 +44,7 @@ class Nip04 {
 
   async encrypt(peer: string, plaintext: string) {
     await this.provider.enable();
-    return this.provider.execute("nostr", "encryptOrPrompt", {
+    return this.provider.execute("encryptOrPrompt", {
       peer,
       plaintext,
     });
@@ -59,7 +52,7 @@ class Nip04 {
 
   async decrypt(peer: string, ciphertext: string) {
     await this.provider.enable();
-    return this.provider.execute("nostr", "decryptOrPrompt", {
+    return this.provider.execute("decryptOrPrompt", {
       peer,
       ciphertext,
     });

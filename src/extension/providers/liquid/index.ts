@@ -1,4 +1,4 @@
-import CommonProvider from "~/extension/providers/commonProvider";
+import ProviderBase from "~/extension/providers/providerBase";
 
 declare global {
   interface Window {
@@ -6,28 +6,18 @@ declare global {
   }
 }
 
-export default class LiquidProvider extends CommonProvider {
-  async enable(): Promise<void> {
-    if (this.enabled) {
-      return;
-    }
-    const result = await this.execute("liquid", "enable");
-    if (typeof result.enabled === "boolean") {
-      this.enabled = result.enabled;
-    }
+export default class LiquidProvider extends ProviderBase {
+  constructor() {
+    super("liquid");
   }
 
   async getAddress() {
-    if (!this.enabled) {
-      throw new Error("Provider must be enabled before calling getAddress");
-    }
-    return await this.execute("liquid", "getAddressOrPrompt");
+    this._checkEnabled("getAddress");
+    return await this.execute("getAddressOrPrompt");
   }
 
   async signPset(pset: string) {
-    if (!this.enabled) {
-      throw new Error("Provider must be enabled before calling signPset");
-    }
-    return this.execute("liquid", "signPsetWithPrompt", { pset });
+    this._checkEnabled("signPset");
+    return this.execute("signPsetWithPrompt", { pset });
   }
 }

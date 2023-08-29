@@ -1,4 +1,4 @@
-import CommonProvider from "~/extension/providers/commonProvider";
+import ProviderBase from "~/extension/providers/providerBase";
 
 declare global {
   interface Window {
@@ -20,84 +20,60 @@ type KeysendArgs = {
   amount: string | number;
 };
 
-export default class WebLNProvider extends CommonProvider {
-  async enable(): Promise<void> {
-    if (this.enabled) {
-      return;
-    }
-    const result = await this.execute("webln", "enable");
-    if (typeof result.enabled === "boolean") {
-      this.enabled = result.enabled;
-    }
+export default class WebLNProvider extends ProviderBase {
+  constructor() {
+    super("webln");
   }
 
   getInfo() {
-    if (!this.enabled) {
-      throw new Error("Provider must be enabled before calling getInfo");
-    }
-    return this.execute("webln", "getInfo");
+    this._checkEnabled("getInfo");
+    return this.execute("getInfo");
   }
 
   lnurl(lnurlEncoded: string) {
-    if (!this.enabled) {
-      throw new Error("Provider must be enabled before calling lnurl");
-    }
-    return this.execute("webln", "lnurl", { lnurlEncoded });
+    this._checkEnabled("lnurl");
+    return this.execute("lnurl", { lnurlEncoded });
   }
 
   sendPayment(paymentRequest: string) {
-    if (!this.enabled) {
-      throw new Error("Provider must be enabled before calling sendPayment");
-    }
-    return this.execute("webln", "sendPaymentOrPrompt", { paymentRequest });
+    this._checkEnabled("sendPayment");
+    return this.execute("sendPaymentOrPrompt", { paymentRequest });
   }
 
   keysend(args: KeysendArgs) {
-    if (!this.enabled) {
-      throw new Error("Provider must be enabled before calling keysend");
-    }
-    return this.execute("webln", "keysendOrPrompt", args);
+    this._checkEnabled("keysend");
+    return this.execute("keysendOrPrompt", args);
   }
 
   makeInvoice(args: string | number | RequestInvoiceArgs) {
-    if (!this.enabled) {
-      throw new Error("Provider must be enabled before calling makeInvoice");
-    }
+    this._checkEnabled("makeInvoice");
     if (typeof args !== "object") {
       args = { amount: args };
     }
 
-    return this.execute("webln", "makeInvoice", args);
+    return this.execute("makeInvoice", args);
   }
 
   signMessage(message: string) {
-    if (!this.enabled) {
-      throw new Error("Provider must be enabled before calling signMessage");
-    }
+    this._checkEnabled("signMessage");
 
-    return this.execute("webln", "signMessageOrPrompt", { message });
+    return this.execute("signMessageOrPrompt", { message });
   }
 
   verifyMessage(signature: string, message: string) {
-    if (!this.enabled) {
-      throw new Error("Provider must be enabled before calling verifyMessage");
-    }
+    this._checkEnabled("verifyMessage");
     throw new Error("Alby does not support `verifyMessage`");
   }
 
   getBalance() {
-    if (!this.enabled) {
-      throw new Error("Provider must be enabled before calling getBalance");
-    }
-    return this.execute("webln", "getBalanceOrPrompt");
+    this._checkEnabled("getBalance");
+    return this.execute("getBalanceOrPrompt");
   }
 
   request(method: string, params: Record<string, unknown>) {
-    if (!this.enabled) {
-      throw new Error("Provider must be enabled before calling request");
-    }
+    this._checkEnabled("request");
 
-    return this.execute("webln", "request", {
+    return this.execute("request", {
       method,
       params,
     });
