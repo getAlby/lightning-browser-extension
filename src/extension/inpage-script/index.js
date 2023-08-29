@@ -1,17 +1,33 @@
 import { ABORT_PROMPT_ERROR, USER_REJECTED_ERROR } from "~/common/constants";
+import AlbyProvider from "~/extension/providers/alby";
+import LiquidProvider from "~/extension/providers/liquid";
+import NostrProvider from "~/extension/providers/nostr";
+import WebBTCProvider from "~/extension/providers/webbtc";
+import WebLNProvider from "~/extension/providers/webln";
+import shouldInjectInpage from "./shouldInject";
 
-import WebLNProvider from "../providers/webln";
-
-if (document) {
-  // window.webln is normally loaded onstart (see onstart.js)
-  // this is just to make double sure we load it
-  if (!window.webln) {
-    window.webln = new WebLNProvider();
-  }
-
+function init() {
+  const inject = shouldInjectInpage();
+  if (!inject) return;
+  window.liquid = new LiquidProvider();
+  window.alby = new AlbyProvider();
+  window.nostr = new NostrProvider();
+  window.webbtc = new WebBTCProvider();
+  window.webln = new WebLNProvider();
   const readyEvent = new Event("webln:ready");
   window.dispatchEvent(readyEvent);
 
+  registerLightningLinkClickHandler();
+
+  // Listen for webln events from the extension
+  // emit events to the websites
+  window.addEventListener("message", (event) => {
+    if (event.source === window && event.data.action === "accountChanged") {
+      eventEmitter(event.data.action, event.data.scope);
+    }
+  });
+}
+function registerLightningLinkClickHandler() {
   // Intercept any `lightning:` requests
   window.addEventListener(
     "click",
@@ -112,19 +128,10 @@ if (document) {
     },
     { capture: true }
   );
-  // Listen for webln events from the extension
-  // emit events to the websites
-  window.addEventListener("message", (event) => {
-    if (event.source === window && event.data.action === "accountChanged") {
-      eventEmitter(event.data.action, event.data.scope);
-    }
-  });
-} else {
-  console.warn("Failed to inject WebLN provider");
 }
-
 function eventEmitter(action, scope) {
   if (window[scope] && window[scope].emit) {
     window[scope].emit(action);
   }
 }
+init();
