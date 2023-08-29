@@ -1,18 +1,22 @@
-import { CaretLeftIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import Header from "@components/Header";
-import { Trans, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import Button from "~/app/components/Button";
 import Container from "~/app/components/Container";
-import IconButton from "~/app/components/IconButton";
+import PublisherCard from "~/app/components/PublisherCard";
 import { useAccount } from "~/app/context/AccountContext";
+import { useNavigationState } from "~/app/hooks/useNavigationState";
 import utils from "~/common/lib/utils";
+import { OriginData } from "~/types";
 
 type Props = {
   action: string;
 };
 
 export default function ProviderOnboard(props: Props) {
+  const navState = useNavigationState();
+  const origin = navState.origin as OriginData;
+
   function openOptions(path: string) {
     // if we are in the popup
     if (window.location.pathname !== "/options.html") {
@@ -33,41 +37,29 @@ export default function ProviderOnboard(props: Props) {
 
   return (
     <div className=" flex flex-col overflow-y-auto no-scrollbar h-full">
-      <Header
-        title={t("title")}
-        headerLeft={
-          <IconButton
-            onClick={() => {
-              navigate(-1);
-            }}
-            icon={<CaretLeftIcon className="w-4 h-4" />}
-          />
-        }
-      />
-      <div className="mt-8 h-full">
+      <Header title={t("title")} />
+      <div className="h-full">
         <Container justifyBetween maxWidth="sm">
+          <PublisherCard
+            title={origin.name}
+            image={origin.icon}
+            url={origin.host}
+            isSmall={false}
+          />
           <div className="text-center dark:text-neutral-200 h-full flex flex-col justify-center items-center">
             <div className="mb-8">
-              <p>
-                <Trans
-                  i18nKey={"instructions1"}
-                  t={t}
-                  components={[<strong key="instruction2-strong"></strong>]}
-                />
-              </p>
+              <p>{t("instructions1")}</p>
             </div>
           </div>
-          <div className="mb-4">
-            <Button
-              type="submit"
-              label={t("go")}
-              fullWidth
-              primary
-              onClick={() =>
-                openOptions(`accounts/${authAccount?.id}/nostr/settings`)
-              }
-            />
-          </div>
+          <Button
+            type="submit"
+            label={t("go")}
+            fullWidth
+            primary
+            onClick={() =>
+              openOptions(`accounts/${authAccount?.id}/nostr/settings`)
+            }
+          />
         </Container>
       </div>
     </div>

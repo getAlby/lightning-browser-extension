@@ -931,9 +931,9 @@
       "list_empty": "No transactions available yet."
     },
     "provider_onboard": {
-      "title": "Setup your Nostr keys",
-      "instructions1": "To continue, kindly set up your Nostr key in your Alby account",
-      "go": "Setup your Nostr Key"
+      "title": "Setup your keys",
+      "instructions1": "This website is requesting to interact with your Nostr keys, but you don't have any keys setup yet.",
+      "go": "Continue with setup"
     }
   },
   "common": {
