@@ -20,7 +20,7 @@ function BitcoinConfirmGetAddress() {
   const navState = useNavigationState();
   const origin = navState.origin as OriginData;
   const [loading, setLoading] = useState(false);
-  const [rememberPermission, setRememberPermission] = useState(false);
+  const [rememberPermission, setRememberPermission] = useState(true);
 
   function confirm() {
     setLoading(true);

@@ -21,7 +21,7 @@ function NostrConfirm() {
   const description = navState.args?.description;
   const details = navState.args?.details;
   const [loading, setLoading] = useState(false);
-  const [rememberPermission, setRememberPermission] = useState(false);
+  const [rememberPermission, setRememberPermission] = useState(true);
 
   function confirm() {
     setLoading(true);
