@@ -1,14 +1,16 @@
-import { auth, Client } from "alby-js-sdk";
-import { RequestOptions } from "alby-js-sdk/dist/request";
+import { auth, Client } from "@getalby/sdk";
 import {
+  CreateSwapParams,
+  CreateSwapResponse,
   GetAccountInformationResponse,
   Invoice,
+  RequestOptions,
+  SwapInfoResponse,
   Token,
-} from "alby-js-sdk/dist/types";
+} from "@getalby/sdk/dist/types";
 import browser from "webextension-polyfill";
 import { decryptData, encryptData } from "~/common/lib/crypto";
 import { Account, OAuthToken } from "~/types";
-
 import state from "../state";
 import Connector, {
   CheckPaymentArgs,
@@ -206,6 +208,16 @@ export default class Alby implements Connector {
         rHash: data.payment_hash,
       },
     };
+  }
+
+  async getSwapInfo(): Promise<SwapInfoResponse> {
+    const result = await this._request((client) => client.getSwapInfo());
+    return result;
+  }
+
+  async createSwap(params: CreateSwapParams): Promise<CreateSwapResponse> {
+    const result = await this._request((client) => client.createSwap(params));
+    return result;
   }
 
   private async authorize(): Promise<auth.OAuth2User> {

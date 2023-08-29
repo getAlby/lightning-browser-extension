@@ -624,7 +624,8 @@
     "send": {
       "input": {
         "label": "Rechnung, Lightning-Adresse oder LNURL",
-        "hint": "Rechnung, Lightning-Adresse oder LNURL"
+        "hint": "Rechnung, Lightning-Adresse, LNURL",
+        "hint_with_bitcoin_address": "Rechnung, Lightning-Adresse, LNURL oder Bitcoin-Adresse"
       },
       "title": "Senden"
     },
@@ -899,6 +900,33 @@
       "block_and_ignore": "Blockieren und Ignorieren von {{host}}",
       "allow_sign": "Erlaube {{host}} zu unterschreiben:",
       "block_added": "{{host}} zur Blockliste hinzugefügt, bitte lade die Website neu."
+    },
+    "send_to_bitcoin_address": {
+      "time_estimate": "ℹ️ Transaktionen werden in der Regel innerhalb von 10-30 Minuten bearbeitet.",
+      "service_unavailable": "Der Dienst ist vorübergehend nicht verfügbar, bitte versuche es in ein paar Minuten erneut.",
+      "title": "An Bitcoin-Adresse senden",
+      "recipient": {
+        "label": "Empfänger"
+      },
+      "amount": {
+        "label": "Betrag (sats)"
+      },
+      "network_fee": {
+        "label": "Netzgebühr"
+      },
+      "service_fee": {
+        "label": "Servicegebühr"
+      },
+      "total": {
+        "label": "Insgesamt"
+      },
+      "total_fee": {
+        "label": "Gebühr"
+      },
+      "provider": {
+        "label": "Anbieter austauschen"
+      },
+      "view_on_explorer": "Ansicht auf mempool explorer"
     }
   },
   "components": {
@@ -1053,7 +1081,8 @@
       "import": "Importieren",
       "copy_clipboard": "In die Zwischenablage kopieren",
       "paste": "Einfügen",
-      "paste_clipboard": "Einfügen aus der Zwischenablage"
+      "paste_clipboard": "Einfügen aus der Zwischenablage",
+      "review": "Überprüfung"
     },
     "discover": "Entdecken",
     "errors": {
@@ -1062,7 +1091,7 @@
     },
     "message": "Nachricht",
     "response": "Antwort",
-    "success_message": "{{amount}}{{fiatAmount}} gesendet an {{destination}}",
+    "success_message": "{{Betrag}}{{fiatAmount}} sind auf dem Weg zum {{Ziel}}",
     "accounts": "Konten",
     "range": {
       "between": "zwischen {{min}} und {{max}}",

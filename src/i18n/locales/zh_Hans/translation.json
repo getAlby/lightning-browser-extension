@@ -610,8 +610,9 @@
     },
     "send": {
       "input": {
-        "hint": "发票、闪电地址或LNURL",
-        "label": "接收者"
+        "hint": "发票、闪电地址、LNURL",
+        "label": "接收者",
+        "hint_with_bitcoin_address": "发票、闪电地址、LNURL或比特币地址"
       },
       "title": "发送"
     },
@@ -898,6 +899,33 @@
       "allow": "允许该网站：",
       "block_and_ignore": "阻止并忽略{{host}}",
       "block_added": "已将{{host}}加入阻止列表，请重新加载网站。"
+    },
+    "send_to_bitcoin_address": {
+      "view_on_explorer": "在内存池浏览器上查看",
+      "title": "发送到比特币地址",
+      "recipient": {
+        "label": "收款方"
+      },
+      "network_fee": {
+        "label": "网络费"
+      },
+      "total": {
+        "label": "总额"
+      },
+      "service_fee": {
+        "label": "服务费"
+      },
+      "provider": {
+        "label": "交换提供方"
+      },
+      "service_unavailable": "服务暂时不可用，请几分钟后重试。",
+      "amount": {
+        "label": "金额（聪）"
+      },
+      "total_fee": {
+        "label": "费用"
+      },
+      "time_estimate": "ℹ️ 交易通常在10到30分钟内到达。"
     }
   },
   "common": {
@@ -930,7 +958,8 @@
       "import": "导入",
       "copy_clipboard": "复制到剪切板",
       "paste": "粘贴",
-      "paste_clipboard": "从剪切板粘贴"
+      "paste_clipboard": "从剪切板粘贴",
+      "review": "审查"
     },
     "errors": {
       "connection_failed": "连接失败",
@@ -948,7 +977,7 @@
     "message": "消息",
     "sats_one": "sat",
     "sats_other": "聪",
-    "success_message": "{{amount}}{{fiatAmount}}已发送至{{destination}}",
+    "success_message": "{{amount}}{{fiatAmount}}正在被发送至{{destination}}",
     "response": "答复",
     "help": "帮助",
     "copied": "已复制！",

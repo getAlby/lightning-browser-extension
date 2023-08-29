@@ -108,7 +108,7 @@ function Enable(props: Props) {
             onCancel={reject}
           />
           <a
-            className="underline text-sm text-gray-400 mx-4 overflow-hidden text-ellipsis whitespace-nowrap"
+            className="mt-4 underline text-sm text-gray-400 overflow-hidden text-ellipsis whitespace-nowrap"
             href="#"
             onClick={block}
           >

@@ -6,4 +6,4 @@ import getById from "./getById";
 import list from "./list";
 import updateAllowance from "./update";
 
-export { add, enable, get, getById, list, deleteAllowance, updateAllowance };
+export { add, deleteAllowance, enable, get, getById, list, updateAllowance };

@@ -1,4 +1,4 @@
-import { GetAccountInformationResponse } from "alby-js-sdk/dist/types";
+import { GetAccountInformationResponse } from "@getalby/sdk/dist/types";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";

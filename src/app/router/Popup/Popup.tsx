@@ -15,6 +15,7 @@ import { ToastContainer } from "react-toastify";
 import Providers from "~/app/context/Providers";
 import LNURLRedeem from "~/app/screens/LNURLRedeem";
 import OnChainReceive from "~/app/screens/OnChainReceive";
+import SendToBitcoinAddress from "~/app/screens/SendToBitcoinAddress";
 
 import RequireAuth from "../RequireAuth";
 
@@ -43,6 +44,10 @@ function Popup() {
             <Route path="keysend" element={<Keysend />} />
             <Route path="confirmPayment" element={<ConfirmPayment />} />
             <Route path="lnurlAuth" element={<LNURLAuth />} />
+            <Route
+              path="sendToBitcoinAddress"
+              element={<SendToBitcoinAddress />}
+            />
           </Route>
           <Route
             path="unlock"

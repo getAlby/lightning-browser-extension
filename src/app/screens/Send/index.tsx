@@ -10,7 +10,12 @@ import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import QrcodeAdornment from "~/app/components/QrcodeAdornment";
-import { extractLightningTagData } from "~/app/utils";
+import { useAccount } from "~/app/context/AccountContext";
+import {
+  extractLightningTagData,
+  isAlbyOAuthAccount,
+  isBitcoinAddress,
+} from "~/app/utils";
 import lnurlLib from "~/common/lib/lnurl";
 import { isLNURLDetailsError } from "~/common/utils/typeHelpers";
 
@@ -22,6 +27,10 @@ function Send() {
   const [invoice, setInvoice] = useState(location.state?.decodedQR || "");
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const auth = useAccount();
+  const hint = !isAlbyOAuthAccount(auth.account?.connectorType)
+    ? t("input.hint")
+    : t("input.hint_with_bitcoin_address");
 
   function isPubKey(str: string) {
     return str.length == 66 && (str.startsWith("02") || str.startsWith("03"));
@@ -91,6 +100,13 @@ function Send() {
             },
           },
         });
+      } else if (
+        isAlbyOAuthAccount(auth.account?.connectorType) &&
+        isBitcoinAddress(invoice)
+      ) {
+        navigate("/sendToBitcoinAddress", {
+          state: { args: { bitcoinAddress: invoice } },
+        });
       } else {
         lightningPayReq.decode(invoice); // throws if invalid.
         navigate("/confirmPayment", {
@@ -127,7 +143,7 @@ function Send() {
             <TextField
               id="invoice"
               label={t("input.label")}
-              hint={t("input.hint")}
+              hint={hint}
               value={invoice}
               disabled={loading}
               autoFocus

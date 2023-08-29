@@ -102,7 +102,9 @@ function ConfirmSignMessage() {
                   {JSON.stringify(event, null, 2)}
                 </div>
               )}
-              <div className="flex items-center">
+            </div>
+            <div>
+              <div className="flex items-center mb-4">
                 <Checkbox
                   id="remember_permission"
                   name="remember_permission"
@@ -118,12 +120,12 @@ function ConfirmSignMessage() {
                   {tCommon("actions.remember")}
                 </label>
               </div>
+              <ConfirmOrCancel
+                disabled={loading}
+                loading={loading}
+                onCancel={reject}
+              />
             </div>
-            <ConfirmOrCancel
-              disabled={loading}
-              loading={loading}
-              onCancel={reject}
-            />
           </Container>
         </form>
       ) : (
