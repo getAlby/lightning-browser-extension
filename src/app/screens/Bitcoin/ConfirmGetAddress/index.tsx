@@ -75,7 +75,7 @@ function BitcoinConfirmGetAddress() {
         </div>
 
         <form onSubmit={handleSubmit}>
-          <div className="flex items-center">
+          <div className="flex items-center mb-4">
             <Checkbox
               id="remember_permission"
               name="remember_permission"
@@ -92,7 +92,7 @@ function BitcoinConfirmGetAddress() {
             </label>
           </div>
 
-          <div className="mb-4 text-center flex flex-col">
+          <div className="text-center flex flex-col">
             <ConfirmOrCancel
               disabled={loading}
               loading={loading}
@@ -100,7 +100,7 @@ function BitcoinConfirmGetAddress() {
               onCancel={reject}
             />
             <a
-              className="underline text-sm text-gray-400 mx-4 overflow-hidden text-ellipsis whitespace-nowrap"
+              className="mt-4 underline text-sm text-gray-400 mx-4 overflow-hidden text-ellipsis whitespace-nowrap"
               href="#"
               onClick={block}
             >

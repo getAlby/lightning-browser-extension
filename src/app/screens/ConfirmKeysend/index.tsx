@@ -149,23 +149,24 @@ function ConfirmKeysend() {
                     })}
                   />
                 </div>
-
-                <BudgetControl
-                  fiatAmount={fiatBudgetAmount}
-                  remember={rememberMe}
-                  onRememberChange={(event) => {
-                    setRememberMe(event.target.checked);
-                  }}
-                  budget={budget}
-                  onBudgetChange={(event) => setBudget(event.target.value)}
-                />
               </div>
             </div>
-            <ConfirmOrCancel
-              disabled={loading}
-              loading={loading}
-              onCancel={reject}
-            />
+            <div>
+              <BudgetControl
+                fiatAmount={fiatBudgetAmount}
+                remember={rememberMe}
+                onRememberChange={(event) => {
+                  setRememberMe(event.target.checked);
+                }}
+                budget={budget}
+                onBudgetChange={(event) => setBudget(event.target.value)}
+              />
+              <ConfirmOrCancel
+                disabled={loading}
+                loading={loading}
+                onCancel={reject}
+              />
+            </div>
           </Container>
         </form>
       ) : (
