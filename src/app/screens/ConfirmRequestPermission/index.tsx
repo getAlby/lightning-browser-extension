@@ -82,7 +82,7 @@ const ConfirmRequestPermission: FC = () => {
               </div>
             </div>
           </div>
-          <div className="mb-4 text-center flex flex-col">
+          <div className="text-center flex flex-col">
             <ConfirmOrCancel
               label={tCommon("actions.confirm")}
               onCancel={reject}

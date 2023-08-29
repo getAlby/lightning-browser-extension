@@ -1,21 +1,37 @@
 import { ABORT_PROMPT_ERROR, USER_REJECTED_ERROR } from "~/common/constants";
+import AlbyProvider from "~/extension/providers/alby";
+import LiquidProvider from "~/extension/providers/liquid";
+import NostrProvider from "~/extension/providers/nostr";
+import WebBTCProvider from "~/extension/providers/webbtc";
+import WebLNProvider from "~/extension/providers/webln";
+import shouldInjectInpage from "./shouldInject";
 
-import WebLNProvider from "../providers/webln";
-
-if (document) {
-  // window.webln is normally loaded onstart (see onstart.js)
-  // this is just to make double sure we load it
-  if (!window.webln) {
-    window.webln = new WebLNProvider();
-  }
-
+function init() {
+  const inject = shouldInjectInpage();
+  if (!inject) return;
+  window.liquid = new LiquidProvider();
+  window.alby = new AlbyProvider();
+  window.nostr = new NostrProvider();
+  window.webbtc = new WebBTCProvider();
+  window.webln = new WebLNProvider();
   const readyEvent = new Event("webln:ready");
   window.dispatchEvent(readyEvent);
 
+  registerLightningLinkClickHandler();
+
+  // Listen for webln events from the extension
+  // emit events to the websites
+  window.addEventListener("message", (event) => {
+    if (event.source === window && event.data.action === "accountChanged") {
+      eventEmitter(event.data.action, event.data.scope);
+    }
+  });
+}
+function registerLightningLinkClickHandler() {
   // Intercept any `lightning:` requests
   window.addEventListener(
     "click",
-    (ev) => {
+    async (ev) => {
       // Use composedPath() for detecting links inside a Shadow DOM
       // https://developer.mozilla.org/en-US/docs/Web/API/Event/composedPath
       const target = ev.composedPath()[0];
@@ -68,72 +84,54 @@ if (document) {
         lnurl = paymentRequest.match(/(\S+@\S+)/)[1];
       }
 
-      window.webln.enable().then((response) => {
-        if (!response.enabled) {
-          return;
-        }
+      try {
+        await window.webln.enable();
+      } catch (e) {
+        console.error(e);
+      }
 
-        if (lnurl) {
-          return window.webln
-            .lnurl(lnurl)
-            .catch((e) => {
-              console.error(e);
-              if (
-                ![ABORT_PROMPT_ERROR, USER_REJECTED_ERROR].includes(e.message)
-              ) {
-                alert(`Error: ${e.message}`);
-              }
-            })
-            .then((response) => {
-              const responseEvent = new CustomEvent("lightning:success", {
-                bubbles: true,
-                detail: {
-                  lnurl,
-                  response,
-                },
-              });
-              link.dispatchEvent(responseEvent);
-            });
-        }
-
-        return window.webln
-          .sendPayment(paymentRequest)
-          .then((response) => {
-            console.info(response);
-            const responseEvent = new CustomEvent("lightning:success", {
-              bubbles: true,
-              detail: {
-                paymentRequest,
-                response,
-              },
-            });
-            link.dispatchEvent(responseEvent);
-          })
-          .catch((e) => {
-            console.error(e);
-            if (
-              ![ABORT_PROMPT_ERROR, USER_REJECTED_ERROR].includes(e.message)
-            ) {
-              alert(`Error: ${e.message}`);
-            }
+      if (lnurl) {
+        try {
+          const response = await window.webln.lnurl(lnurl);
+          const responseEvent = new CustomEvent("lightning:success", {
+            bubbles: true,
+            detail: {
+              lnurl,
+              response,
+            },
           });
-      });
+          link.dispatchEvent(responseEvent);
+        } catch (e) {
+          console.error(e);
+          if (![ABORT_PROMPT_ERROR, USER_REJECTED_ERROR].includes(e.message)) {
+            alert(`Error: ${e.message}`);
+          }
+        }
+      }
+
+      try {
+        const response = await window.webln.sendPayment(paymentRequest);
+        const responseEvent = new CustomEvent("lightning:success", {
+          bubbles: true,
+          detail: {
+            paymentRequest,
+            response,
+          },
+        });
+        link.dispatchEvent(responseEvent);
+      } catch (e) {
+        console.error(e);
+        if (![ABORT_PROMPT_ERROR, USER_REJECTED_ERROR].includes(e.message)) {
+          alert(`Error: ${e.message}`);
+        }
+      }
     },
     { capture: true }
   );
-  // Listen for webln events from the extension
-  // emit events to the websites
-  window.addEventListener("message", (event) => {
-    if (event.source === window && event.data.action === "accountChanged") {
-      eventEmitter(event.data.action, event.data.scope);
-    }
-  });
-} else {
-  console.warn("Failed to inject WebLN provider");
 }
-
 function eventEmitter(action, scope) {
   if (window[scope] && window[scope].emit) {
     window[scope].emit(action);
   }
 }
+init();

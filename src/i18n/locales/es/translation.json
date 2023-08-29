@@ -845,9 +845,6 @@
       },
       "open_location": "Abrir sitio web"
     },
-    "confirm_or_cancel": {
-      "only_trusted": "Conéctese solo con sitios en los que confíe."
-    },
     "budget_control": {
       "remember": {
         "label": "Recuerda y establece un presupuesto",

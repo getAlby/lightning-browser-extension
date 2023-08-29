@@ -172,9 +172,7 @@ function LNURLPay() {
 
       const isValidInvoice = lnurl.verifyInvoice({
         paymentInfo,
-        metadata: details.metadata,
         amount: parseInt(valueSat) * 1000,
-        payerdata,
       });
 
       if (!isValidInvoice) {

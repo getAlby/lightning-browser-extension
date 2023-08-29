@@ -1,9 +1,12 @@
 import utils from "~/common/lib/utils";
 import { getHostFromSender } from "~/common/utils/helpers";
+import {
+  addPermissionFor,
+  hasPermissionFor,
+} from "~/extension/background-script/permissions";
 import { MessageSignSchnorr, PermissionMethodNostr, Sender } from "~/types";
 
 import state from "../../state";
-import { addPermissionFor, hasPermissionFor } from "../nostr/helpers";
 
 const signSchnorrOrPrompt = async (
   message: MessageSignSchnorr,

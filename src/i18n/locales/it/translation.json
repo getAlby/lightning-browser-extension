@@ -752,9 +752,6 @@
       },
       "open_location": "Apri il sito"
     },
-    "confirm_or_cancel": {
-      "only_trusted": "Connettiti solo con siti attendibili."
-    },
     "budget_control": {
       "remember": {
         "label": "Imposta e ricorda un budget",

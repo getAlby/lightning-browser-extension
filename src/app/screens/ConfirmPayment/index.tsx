@@ -30,9 +30,6 @@ function ConfirmPayment() {
   const { t } = useTranslation("translation", {
     keyPrefix: "confirm_payment",
   });
-  const { t: tComponents } = useTranslation("components", {
-    keyPrefix: "confirm_or_cancel",
-  });
   const { t: tCommon } = useTranslation("common");
 
   const navState = useNavigationState();
@@ -164,29 +161,26 @@ function ConfirmPayment() {
                     description={invoice.tagsObject.description}
                   />
                 </div>
-                {navState.origin && (
-                  <BudgetControl
-                    fiatAmount={fiatBudgetAmount}
-                    remember={rememberMe}
-                    onRememberChange={(event) => {
-                      setRememberMe(event.target.checked);
-                    }}
-                    budget={budget}
-                    onBudgetChange={(event) => setBudget(event.target.value)}
-                  />
-                )}
               </div>
             </div>
             <div>
+              {navState.origin && (
+                <BudgetControl
+                  fiatAmount={fiatBudgetAmount}
+                  remember={rememberMe}
+                  onRememberChange={(event) => {
+                    setRememberMe(event.target.checked);
+                  }}
+                  budget={budget}
+                  onBudgetChange={(event) => setBudget(event.target.value)}
+                />
+              )}
               <ConfirmOrCancel
                 disabled={loading}
                 loading={loading}
                 onCancel={reject}
                 label={t("actions.pay_now")}
               />
-              <p className="mb-4 text-center text-sm text-gray-400">
-                <em>{tComponents("only_trusted")}</em>
-              </p>
             </div>
           </Container>
         </form>
