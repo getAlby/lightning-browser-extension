@@ -931,9 +931,13 @@
       "list_empty": "No transactions available yet."
     },
     "provider_onboard": {
-      "title": "Setup your keys",
-      "instructions1": "This website is requesting to interact with your Nostr keys, but you don't have any keys setup yet.",
-      "go": "Continue with setup"
+      "title": "Setup keys to continue",
+      "request1": "This website requests interaction with your keys",
+      "request2": "You have not set the keys yet",
+      "request3": "The setup takes about 5 minutes",
+      "actions": {
+        "start_setup": "Start Setup"
+      }
     }
   },
   "common": {

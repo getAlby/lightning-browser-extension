@@ -1,12 +1,14 @@
-import Header from "@components/Header";
+import {
+  ClockIcon,
+  TwoKeysIcon,
+} from "@bitcoin-design/bitcoin-icons-react/outline";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
-import Button from "~/app/components/Button";
+import ConfirmOrCancel from "~/app/components/ConfirmOrCancel";
 import Container from "~/app/components/Container";
 import PublisherCard from "~/app/components/PublisherCard";
-import { useAccount } from "~/app/context/AccountContext";
+import ScreenHeader from "~/app/components/ScreenHeader";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
-import utils from "~/common/lib/utils";
+import InfoCircleIcon from "~/app/icons/InfoCircleIcon";
 import { OriginData } from "~/types";
 
 type Props = {
@@ -17,51 +19,58 @@ export default function ProviderOnboard(props: Props) {
   const navState = useNavigationState();
   const origin = navState.origin as OriginData;
 
-  function openOptions(path: string) {
-    // if we are in the popup
-    if (window.location.pathname !== "/options.html") {
-      utils.openPage(`options.html#/${path}`);
-      // close the popup
-      window.close();
-    } else {
-      navigate(`/${path}`);
-    }
-  }
+  // function openOptions(path: string) {
+  //   // if we are in the popup
+  //   if (window.location.pathname !== "/options.html") {
+  //     utils.openPage(`options.html#/${path}`);
+  //     // close the popup
+  //     window.close();
+  //   } else {
+  //     navigate(`/${path}`);
+  //   }
+  // }
 
-  const { account: authAccount } = useAccount();
+  //const { account: authAccount } = useAccount();
 
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const { t } = useTranslation("translation", {
     keyPrefix: "provider_onboard",
   });
 
   return (
-    <div className=" flex flex-col overflow-y-auto no-scrollbar h-full">
-      <Header title={t("title")} />
-      <div className="h-full">
-        <Container justifyBetween maxWidth="sm">
+    <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
+      <ScreenHeader title={t("title")} />
+      <Container justifyBetween maxWidth="sm">
+        <div>
           <PublisherCard
             title={origin.name}
             image={origin.icon}
             url={origin.host}
             isSmall={false}
           />
-          <div className="text-center dark:text-neutral-200 h-full flex flex-col justify-center items-center">
-            <div className="mb-8">
-              <p>{t("instructions1")}</p>
+          <div className="dark:text-white pt-6">
+            <div className="mb-2 flex items-center">
+              <TwoKeysIcon className="w-7 h-7 mr-2" />
+              <p className="dark:text-white">{t("request1")}</p>
+            </div>
+            <div className="mb-2 flex items-center">
+              <InfoCircleIcon className="w-7 h-7 mr-2" />
+              <p className="dark:text-white">{t("request2")}</p>
+            </div>
+            <div className="mb-2 flex items-center">
+              <ClockIcon className="w-7 h-7 mr-2" />
+              <p className="dark:text-white">{t("request3")}</p>
             </div>
           </div>
-          <Button
-            type="submit"
-            label={t("go")}
-            fullWidth
-            primary
-            onClick={() =>
-              openOptions(`accounts/${authAccount?.id}/nostr/settings`)
-            }
+        </div>
+        <div className="text-center flex flex-col">
+          <ConfirmOrCancel
+            label={t("actions.start_setup")}
+            onConfirm={() => {}}
+            onCancel={() => {}}
           />
-        </Container>
-      </div>
+        </div>
+      </Container>
     </div>
   );
 }
