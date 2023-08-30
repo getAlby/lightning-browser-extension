@@ -821,7 +821,7 @@ export interface Allowance extends Omit<DbAllowance, "id"> {
   payments: Payment[];
   paymentsAmount: number;
   paymentsCount: number;
-  percentage: string;
+  percentage: number;
   usedBudget: number;
 }
 

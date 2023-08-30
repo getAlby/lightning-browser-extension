@@ -1,5 +1,5 @@
 type Props = {
-  percentage: string;
+  percentage: number;
 };
 
 export default function Progressbar({ percentage }: Props) {
@@ -12,7 +12,7 @@ export default function Progressbar({ percentage }: Props) {
         ></div>
       </div>
       <div className="text-xs text-gray-700 font-medium dark:text-neutral-400">
-        {percentage}%
+        {percentage.toFixed(0)}%
       </div>
     </div>
   );
