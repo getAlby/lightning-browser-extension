@@ -78,7 +78,7 @@ function PublisherDetail() {
             url={allowance?.host}
             isCard={false}
             isSmall={false}
-          ></PublisherPanel>
+          />
         )}
       </div>
 
