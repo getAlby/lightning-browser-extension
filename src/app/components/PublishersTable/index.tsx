@@ -68,13 +68,17 @@ export default function PublishersTable({
                           </span>
                         </>
                       )}
-                      <span>{"•"}</span>
-                      <span>
-                        {tComponents("budget")}{" "}
-                        {getFormattedNumber(publisher.usedBudget)} /{" "}
-                        {getFormattedNumber(publisher.totalBudget)}{" "}
-                        {tCommon("sats", { count: publisher.usedBudget })}
-                      </span>
+                      {publisher.totalBudget > 0 && (
+                        <>
+                          <span>{"•"}</span>
+                          <span>
+                            {tComponents("budget")}{" "}
+                            {getFormattedNumber(publisher.usedBudget)} /{" "}
+                            {getFormattedNumber(publisher.totalBudget)}{" "}
+                            {tCommon("sats", { count: publisher.usedBudget })}
+                          </span>
+                        </>
+                      )}
                     </div>
                   </div>
                 </div>

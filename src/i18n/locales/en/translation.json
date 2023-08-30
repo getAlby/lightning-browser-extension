@@ -1019,7 +1019,7 @@
   },
   "components": {
     "allowance_menu": {
-      "confirm_delete": "Are you sure you want to delete this website?",
+      "confirm_delete": "Are you sure you want to disconnect this website?",
       "hint": "Changing this will reset the current budget",
       "new_budget": {
         "label": "One-click payments budget",
@@ -1033,7 +1033,8 @@
         "title": "Site Settings",
         "screen_reader": "Allowance Options"
       },
-      "edit_permissions": "Edit Permissions"
+      "edit_permissions": "Edit Permissions",
+      "site_settings": "Site settings"
     },
     "qrcode_scanner": {
       "title": "Scan QR Code",

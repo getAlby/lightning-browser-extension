@@ -6,7 +6,6 @@ import Toggle from "@components/form/Toggle";
 import type { FormEvent } from "react";
 import { Fragment, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import Modal from "react-modal";
 import { toast } from "react-toastify";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
@@ -14,6 +13,7 @@ import { PreferencesIcon } from "~/app/icons";
 import msg from "~/common/lib/msg";
 import type { Allowance, Permission } from "~/types";
 
+import Modal from "~/app/components/Modal";
 import DualCurrencyField from "../form/DualCurrencyField/index";
 
 type LauncherType = "hyperlink" | "button" | "icon";
@@ -149,8 +149,11 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
     if (launcherType === "button") {
       return (
         <Button
-          icon={<PreferencesIcon className="h-6 w-6 mr-2" />}
-          label={"Site Settings"}
+          icon={
+            <PreferencesIcon className="h-6 w-6 mr-2 dark:fill-neutral-200" />
+          }
+          // TODO: Translate
+          label={t("site_settings")}
           onClick={openModal}
           className="text-xs"
         />
@@ -159,7 +162,7 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
     if (launcherType === "icon") {
       return (
         <PreferencesIcon
-          className="h-6 w-6 fill-gray-500 hover:fill-black cursor-pointer"
+          className="h-6 w-6 fill-gray-600 dark:fill-neutral-400 hover:bg-gray-100 dark:hover:bg-surface-02dp hover:fill-gray-700 dark:hover:fill-neutral-300 rounded-sm cursor-pointer"
           onClick={openModal}
         />
       );
@@ -175,14 +178,9 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
     <>
       {getLauncher(launcherType)}
       <Modal
-        ariaHideApp={false}
-        closeTimeoutMS={200}
         isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        contentLabel={t("edit_allowance.screen_reader")}
-        overlayClassName="bg-black bg-opacity-25 fixed inset-0 flex justify-center items-center p-5"
-        className="rounded-lg bg-white w-full max-w-lg"
-        style={{ content: { maxHeight: "90vh" } }}
+        close={closeModal}
+        title={t("edit_allowance.screen_reader")}
       >
         <div className="p-5 flex justify-between dark:bg-surface-02dp">
           <h2 className="text-2xl font-bold dark:text-white">
@@ -201,9 +199,9 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
         >
           <div
             style={{ maxHeight: "calc(90vh - 154px)", overflowY: "auto" }}
-            className="p-5 border-t border-b border-gray-200 dark:bg-surface-02dp dark:border-neutral-500"
+            className="p-5 border-t border-b border-gray-200 dark:bg-surface-02dp dark:border-neutral-700"
           >
-            <div className="pb-4 border-b border-gray-200 dark:border-neutral-500">
+            <div className="pb-4 border-b border-gray-200 dark:border-neutral-700">
               <DualCurrencyField
                 id="budget"
                 label={t("new_budget.label")}
@@ -216,13 +214,7 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
                 onChange={(e) => setBudget(e.target.value)}
               />
             </div>
-            <div
-              className={
-                hasPermissions
-                  ? "pb-4 border-b border-gray-200 dark:border-neutral-500"
-                  : ""
-              }
-            >
+            <div className={hasPermissions ? "pb-4" : ""}>
               <Setting
                 title={t("enable_login.title")}
                 subtitle={t("enable_login.subtitle")}
@@ -291,7 +283,7 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
                   }
                 }
               }}
-              className="text-red-600"
+              className="text-red-700 hover:text-red-800"
             >
               {tCommon("actions.disconnect")}
             </Hyperlink>

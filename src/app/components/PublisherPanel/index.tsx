@@ -43,12 +43,12 @@ export default function PublisherPanel({
 
   const hasBudget = +allowance.totalBudget > 0;
   return (
-    <div className="flex justify-center bg-white dark:bg-surface-02dp">
+    <div className="flex justify-center bg-white dark:bg-surface-01dp">
       <div className="flex flex-row max-w-screen-lg mx-auto w-full py-8 px-4 gap-8">
-        <div className="w-[356px] flex flex-col gap-4">
+        <div className="flex flex-col gap-4 w-full md:w-[356px]">
           <div className="flex flex-row gap-4">
-            <div>
-              {image && (
+            {image && (
+              <div className="shrink-0">
                 <img
                   className="rounded-md w-16 h-16"
                   src={image || DEFAULT_IMAGE}
@@ -59,8 +59,8 @@ export default function PublisherPanel({
                     target.src = DEFAULT_IMAGE;
                   }}
                 />
-              )}
-            </div>
+              </div>
+            )}
             <div className="flex flex-col overflow-hidden">
               <h2
                 title={title}
@@ -101,7 +101,7 @@ export default function PublisherPanel({
             />
           </div>
         </div>
-        <div className="flex-1 flex flex-col gap-3">
+        <div className="flex-1 flex-col gap-3 hidden md:flex">
           <div className="flex flex-row">
             <div className="flex-1">
               <dt className="text-sm text-gray-500">
