@@ -475,7 +475,7 @@
             "description": "通過使用恢復短語將主密鑰導入 Alby。",
             "title": "導入主密鑰"
           },
-          "existing_nostr_key_notice": "⚠️ 該帳戶已設置 nostr 私鑰，因此不會從此主密鑰派生。你可以通過你的帳戶設置管理你的 nostr 密鑰。",
+          "existing_nostr_key_notice": "ℹ️ 該帳戶已設置 nostr 私鑰，因此不會從此主密鑰派生。你可以通過你的帳戶設置管理你的 nostr 密鑰。",
           "saved": "主密鑰已加密並成功保存。"
         },
         "remove_secretkey": {

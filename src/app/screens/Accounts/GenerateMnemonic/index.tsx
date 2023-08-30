@@ -8,7 +8,6 @@ import Alert from "~/app/components/Alert";
 import Button from "~/app/components/Button";
 import { ContentBox } from "~/app/components/ContentBox";
 import Checkbox from "~/app/components/form/Checkbox";
-import MnemonicDescription from "~/app/components/mnemonic/MnemonicDescription";
 import MnemonicInputs from "~/app/components/mnemonic/MnemonicInputs";
 import api from "~/common/lib/api";
 
@@ -80,30 +79,27 @@ function GenerateMnemonic() {
           <h1 className="font-bold text-2xl dark:text-white">
             {t("generate.title")}
           </h1>
-          <MnemonicDescription />
-          <MnemonicInputs mnemonic={mnemonic} readOnly>
-            <>
-              <div className="flex items-center">
-                <Checkbox
-                  id="has_backed_up"
-                  name="Backup confirmation checkbox"
-                  checked={hasConfirmedBackup}
-                  onChange={(event) => {
-                    setHasConfirmedBackup(event.target.checked);
-                  }}
-                />
-                <label
-                  htmlFor="has_backed_up"
-                  className="cursor-pointer ml-2 block text-sm text-gray-900 font-medium dark:text-white"
-                >
-                  {t("generate.confirm")}
-                </label>
-              </div>
-            </>
-          </MnemonicInputs>
           {hasNostrPrivateKey && (
-            <Alert type="warn">{t("existing_nostr_key_notice")}</Alert>
+            <Alert type="info">{t("existing_nostr_key_notice")}</Alert>
           )}
+          <MnemonicInputs mnemonic={mnemonic} readOnly></MnemonicInputs>
+
+          <div className="flex items-center justify-center">
+            <Checkbox
+              id="has_backed_up"
+              name="Backup confirmation checkbox"
+              checked={hasConfirmedBackup}
+              onChange={(event) => {
+                setHasConfirmedBackup(event.target.checked);
+              }}
+            />
+            <label
+              htmlFor="has_backed_up"
+              className="cursor-pointer ml-2 block text-sm text-gray-900 font-medium dark:text-white"
+            >
+              {t("generate.confirm")}
+            </label>
+          </div>
         </ContentBox>
         <div className="flex justify-center mt-8 mb-16 gap-4">
           <Button label={tCommon("actions.cancel")} onClick={cancel} />

@@ -52,7 +52,7 @@ function BackupMnemonic() {
           <MnemonicDescription />
           <MnemonicInputs mnemonic={mnemonic} readOnly />
         </ContentBox>
-        <div className="flex justify-center mt-8 mb-16 gap-4">
+        <div className="flex justify-center my-6 gap-4">
           <Button
             label={tCommon("actions.back")}
             onClick={() => navigate(-1)}

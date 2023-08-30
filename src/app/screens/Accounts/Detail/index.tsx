@@ -346,7 +346,7 @@ function AccountDetail() {
               </div>
 
               <div className="w-1/5 flex-none">
-                <Link to={`secret-key/${hasMnemonic ? "backup" : "generate"}`}>
+                <Link to={`secret-key/${hasMnemonic ? "backup" : "new"}`}>
                   <Button
                     label={t(
                       hasMnemonic
@@ -421,14 +421,14 @@ function AccountDetail() {
             <MenuDivider />
 
             {!hasMnemonic && (
-              <Alert type="warn">
+              <Alert type="info">
                 <Trans
                   i18nKey={"no_mnemonic_hint"}
                   t={t}
                   components={[
                     // eslint-disable-next-line react/jsx-key
                     <Link
-                      to="secret-key/generate"
+                      to="secret-key/new"
                       relative="path"
                       className="underline"
                     />,
