@@ -1118,7 +1118,6 @@
     },
     "badge": {
       "label": {
-        "active": "ACTIVE",
         "auth": "LOGIN",
         "imported": "IMPORTED",
         "budget": "BUDGET"
