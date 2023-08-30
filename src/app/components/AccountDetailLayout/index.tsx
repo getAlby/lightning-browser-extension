@@ -28,15 +28,32 @@ function AccountDetailLayout() {
   return (
     <>
       <Header
-        title={t("title1")}
         headerLeft={
           <IconButton
             onClick={back}
             icon={<CaretLeftIcon className="w-4 h-4" />}
           />
         }
-      />
-      {account && (
+      >
+        {account && (
+          <div className="flex-row justify-center space-x-2 flex items-center">
+            <Avatar
+              size={24}
+              url={account?.avatarUrl}
+              name={account?.id || ""}
+            />
+            <h2
+              title={account.name}
+              className="text-xl font-semibold dark:text-white overflow-hidden text-ellipsis whitespace-nowrap my-2"
+            >
+              {account.name}
+            </h2>
+            <span>/</span>
+            <span>{t("title1")}</span>
+          </div>
+        )}
+      </Header>
+      {/* {account && (
         <div className="border-b border-gray-200 dark:border-neutral-700 bg-white dark:bg-surface-01dp p-4">
           <div className="flex-row justify-center  space-x-2 flex items-center">
             <Avatar
@@ -55,7 +72,7 @@ function AccountDetailLayout() {
             {account.connector}
           </div>
         </div>
-      )}
+      )} */}
       <Outlet />
     </>
   );

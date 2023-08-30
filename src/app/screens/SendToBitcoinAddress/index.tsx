@@ -213,14 +213,15 @@ function SendToBitcoinAddress() {
   return (
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <Header
-        title={t("title")}
         headerLeft={
           <IconButton
             onClick={() => navigate("/send")}
             icon={<CaretLeftIcon className="w-4 h-4" />}
           />
         }
-      />
+      >
+        {t("title")}
+      </Header>
       <div className="h-full pt-5">
         {step == "amount" && (
           <form onSubmit={handleReview} className="h-full flex space-between">
