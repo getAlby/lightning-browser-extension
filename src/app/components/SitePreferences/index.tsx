@@ -152,8 +152,7 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
           icon={
             <PreferencesIcon className="h-6 w-6 mr-2 dark:fill-neutral-200" />
           }
-          // TODO: Translate
-          label={t("site_settings")}
+          label={t("edit_allowance.title")}
           onClick={openModal}
           className="text-xs"
         />

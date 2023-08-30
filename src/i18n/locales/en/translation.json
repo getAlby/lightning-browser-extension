@@ -1030,11 +1030,10 @@
         "subtitle": "Automatically log in without confirmation when the website requests."
       },
       "edit_allowance": {
-        "title": "Site Settings",
+        "title": "Site settings",
         "screen_reader": "Allowance Options"
       },
-      "edit_permissions": "Edit Permissions",
-      "site_settings": "Site settings"
+      "edit_permissions": "Edit Permissions"
     },
     "qrcode_scanner": {
       "title": "Scan QR Code",

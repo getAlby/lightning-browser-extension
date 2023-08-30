@@ -61,7 +61,7 @@ describe("SitePreferences", () => {
       user.click(settingsButton); // click settings-button
     });
 
-    await screen.findByText("Site Settings");
+    await screen.findByText("Site settings");
     const saveButton = await screen.findByRole("button", {
       name: "Save",
     });
