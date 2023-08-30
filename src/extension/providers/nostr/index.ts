@@ -1,3 +1,4 @@
+import EventEmitter from "events";
 import ProviderBase from "~/extension/providers/providerBase";
 import { Event } from "./types";
 
@@ -32,6 +33,17 @@ export default class NostrProvider extends ProviderBase {
   async getRelays() {
     await this.enable();
     return this.execute("getRelays");
+  }
+
+  //override method from base class, we don't want to throw error if not enabled
+  async on(...args: Parameters<EventEmitter["on"]>) {
+    await this.enable();
+    this._eventEmitter.on(...args);
+  }
+
+  async off(...args: Parameters<EventEmitter["off"]>) {
+    await this.enable();
+    this._eventEmitter.off(...args);
   }
 }
 

@@ -4,7 +4,7 @@ import { PromiseQueue } from "~/extension/providers/promiseQueue";
 
 export default class ProviderBase {
   enabled: boolean;
-  private _eventEmitter: EventEmitter;
+  protected _eventEmitter: EventEmitter;
   private _queue: PromiseQueue;
   private _scope: string;
 
