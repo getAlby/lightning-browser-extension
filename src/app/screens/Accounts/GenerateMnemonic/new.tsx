@@ -27,7 +27,7 @@ function MnemonicExplanation() {
         <h1 className="font-bold text-2xl dark:text-white">{t("title")}</h1>
         <img
           src={`assets/images/master_key_${theme}.png`}
-          alt="Pin your Alby extension"
+          alt="Master Key"
           className="max-w-[412px] mx-auto"
         />
         <MnemonicDescription />
