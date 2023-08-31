@@ -151,7 +151,7 @@ const Layout = () => {
     <>
       <ToastContainer autoClose={10000} hideProgressBar={true} />
       <div className="px-4 py-2 justify-between items-center bg-white flex border-b border-gray-200 dark:bg-surface-02dp dark:border-neutral-500 gap-5">
-        <div className="w-24 shrink-0 dark:text-white">
+        <div className="w-24 shrink-0">
           <AlbyLogo />
         </div>
         <AccountMenu showOptions={false} />
