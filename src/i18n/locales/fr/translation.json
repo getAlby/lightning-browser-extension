@@ -758,9 +758,6 @@
       },
       "open_location": "Ouvrir le site Web"
     },
-    "confirm_or_cancel": {
-      "only_trusted": "Connectez-vous uniquement aux sites auxquels vous faites confiance."
-    },
     "budget_control": {
       "remember": {
         "label": "Rappelez-vous et établissez un budget",

@@ -773,9 +773,6 @@
       "sent": "पाठवले",
       "open_location": "वेबसाइट उघडा"
     },
-    "confirm_or_cancel": {
-      "only_trusted": "फक्त तुमचा विश्वास असलेल्या साइटशी कनेक्ट व्हा."
-    },
     "budget_control": {
       "remember": {
         "label": "लक्षात ठेवा आणि बजेट सेट करा",

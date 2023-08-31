@@ -39,7 +39,6 @@ const HMAC_VERIFY_HEADER_KEY =
 
 const defaultHeaders = {
   Accept: "application/json",
-  "Access-Control-Allow-Origin": "*",
   "Content-Type": "application/json",
   "X-User-Agent": "alby-extension",
 };
@@ -67,7 +66,14 @@ export default class LndHub implements Connector {
   }
 
   get supportedMethods() {
-    return ["getInfo", "keysend", "makeInvoice", "sendPayment", "signMessage"];
+    return [
+      "getInfo",
+      "keysend",
+      "makeInvoice",
+      "sendPayment",
+      "signMessage",
+      "getBalance",
+    ];
   }
 
   // not yet implemented

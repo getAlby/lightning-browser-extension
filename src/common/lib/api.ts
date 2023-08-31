@@ -1,3 +1,8 @@
+import {
+  CreateSwapParams,
+  CreateSwapResponse,
+  SwapInfoResponse,
+} from "@getalby/sdk/dist/types";
 import { ACCOUNT_CURRENCIES } from "~/common/constants";
 import {
   ConnectPeerArgs,
@@ -13,6 +18,7 @@ import type {
   BitcoinNetworkType,
   ConnectorType,
   DbPayment,
+  EsploraAssetRegistry,
   Invoice,
   LnurlAuthResponse,
   MessageAccountEdit,
@@ -21,6 +27,7 @@ import type {
   MessageLnurlAuth,
   MessageSettingsSet,
   NodeInfo,
+  PsetPreview,
   SettingsStorage,
   ValidateAccountResponse,
 } from "~/types";
@@ -43,6 +50,7 @@ export interface AccountInfoRes {
 
 export interface GetAccountRes extends Pick<Account, "id" | "name"> {
   connectorType: ConnectorType;
+  liquidEnabled: boolean;
   nostrEnabled: boolean;
   hasMnemonic: boolean;
   hasImportedNostrKey: boolean;
@@ -200,11 +208,31 @@ const getMnemonic = (id: string): Promise<string> =>
 
 const generateMnemonic = (): Promise<string> => msg.request("generateMnemonic");
 
-// TODO: consider adding removeMnemonic function, make mnemonic a string here
+// TODO: consider adding removeMnemonic function, make mnemonic a string here rather than optional (null = delete current mnemonic)
 const setMnemonic = (id: string, mnemonic: string | null): Promise<void> =>
   msg.request("setMnemonic", {
     id,
     mnemonic,
+  });
+
+const getSwapInfo = (): Promise<SwapInfoResponse> => msg.request("getSwapInfo");
+const createSwap = (params: CreateSwapParams): Promise<CreateSwapResponse> =>
+  msg.request("createSwap", params);
+const getLiquidPsetPreview = (pset: string): Promise<PsetPreview> =>
+  msg.request("liquid/getPsetPreview", {
+    pset,
+  });
+
+const fetchLiquidAssetRegistry = (
+  psetPreview: PsetPreview
+): Promise<EsploraAssetRegistry> =>
+  msg.request("liquid/fetchAssetRegistry", {
+    psetPreview,
+  });
+
+const signPset = (pset: string): Promise<string> =>
+  msg.request("liquid/signPset", {
+    pset,
   });
 
 export default {
@@ -243,4 +271,11 @@ export default {
   getMnemonic,
   setMnemonic,
   generateMnemonic,
+  getSwapInfo,
+  createSwap,
+  liquid: {
+    getPsetPreview: getLiquidPsetPreview,
+    fetchAssetRegistry: fetchLiquidAssetRegistry,
+    signPset: signPset,
+  },
 };

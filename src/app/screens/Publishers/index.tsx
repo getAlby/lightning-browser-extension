@@ -7,14 +7,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Button from "~/app/components/Button";
 import msg from "~/common/lib/msg";
-import { Allowance, Badge, Publisher } from "~/types";
+import { Allowance } from "~/types";
 
 function Publishers() {
   const { t } = useTranslation("translation", {
     keyPrefix: "publishers",
   });
 
-  const [publishers, setPublishers] = useState<Publisher[]>([]);
+  const [allowances, setAllowances] = useState<Allowance[]>([]);
   const [publishersLoading, setPublishersLoading] = useState<boolean>(true);
   const navigate = useNavigate();
 
@@ -27,58 +27,10 @@ function Publishers() {
       const allowanceResponse = await msg.request<{
         allowances: Allowance[];
       }>("listAllowances");
-
-      const allowances: Publisher[] = allowanceResponse.allowances.reduce<
-        Publisher[]
-      >((acc, allowance) => {
-        if (!allowance?.id || !allowance.enabled) return acc;
-
-        const {
-          id,
-          host,
-          imageURL,
-          name,
-          payments,
-          paymentsAmount,
-          paymentsCount,
-          percentage,
-          totalBudget,
-          usedBudget,
-        } = allowance;
-
-        const badges: Badge[] = [];
-        if (allowance.remainingBudget > 0) {
-          badges.push({
-            label: "active",
-            color: "green-bitcoin",
-            textColor: "white",
-          });
-        }
-        if (allowance.lnurlAuth) {
-          badges.push({
-            label: "auth",
-            color: "green-bitcoin",
-            textColor: "white",
-          });
-        }
-        acc.push({
-          id,
-          host,
-          imageURL,
-          name,
-          payments,
-          paymentsAmount,
-          paymentsCount,
-          percentage,
-          totalBudget,
-          usedBudget,
-          badges,
-        });
-
-        return acc;
-      }, []);
-
-      setPublishers(allowances);
+      const allowances = allowanceResponse.allowances.filter(
+        (a) => a.id && a.enabled
+      );
+      setAllowances(allowances);
     } catch (e) {
       console.error(e);
       if (e instanceof Error) toast.error(`Error: ${e.message}`);
@@ -107,9 +59,9 @@ function Publishers() {
         </div>
       ) : (
         <>
-          {publishers.length > 0 ? (
+          {allowances.length > 0 ? (
             <PublishersTable
-              publishers={publishers}
+              allowances={allowances}
               navigateToPublisher={navigateToPublisher}
             />
           ) : (

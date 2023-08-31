@@ -1,9 +1,13 @@
 import utils from "~/common/lib/utils";
 import { getHostFromSender } from "~/common/utils/helpers";
+import {
+  addPermissionFor,
+  hasPermissionFor,
+} from "~/extension/background-script/permissions";
 import { MessageSignEvent, PermissionMethodNostr, Sender } from "~/types";
 
 import state from "../../state";
-import { addPermissionFor, hasPermissionFor, validateEvent } from "./helpers";
+import { validateEvent } from "./helpers";
 
 const signEventOrPrompt = async (message: MessageSignEvent, sender: Sender) => {
   const host = getHostFromSender(sender);

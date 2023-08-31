@@ -1,3 +1,6 @@
+import { EventEmitter } from "events";
+
+import { PromiseQueue } from "~/extension/providers/promiseQueue";
 import { postMessage } from "../postMessage";
 
 declare global {
@@ -22,26 +25,23 @@ type KeysendArgs = {
 
 export default class WebLNProvider {
   enabled: boolean;
-  isEnabled: boolean;
-  executing: boolean;
+  private _eventEmitter: EventEmitter;
+  private _queue: PromiseQueue;
 
   constructor() {
     this.enabled = false;
-    this.isEnabled = false; // seems some webln implementations use webln.isEnabled and some use webln.enabled
-    this.executing = false;
+    this._eventEmitter = new EventEmitter();
+    this._queue = new PromiseQueue();
   }
 
-  enable() {
+  async enable(): Promise<void> {
     if (this.enabled) {
-      return Promise.resolve({ enabled: true });
+      return;
     }
-    return this.execute("enable").then((result) => {
-      if (typeof result.enabled === "boolean") {
-        this.enabled = result.enabled;
-        this.isEnabled = result.enabled;
-      }
-      return result;
-    });
+    const result = await this.execute("enable");
+    if (typeof result.enabled === "boolean") {
+      this.enabled = result.enabled;
+    }
   }
 
   getInfo() {
@@ -98,6 +98,13 @@ export default class WebLNProvider {
     throw new Error("Alby does not support `verifyMessage`");
   }
 
+  getBalance() {
+    if (!this.enabled) {
+      throw new Error("Provider must be enabled before calling getBalance");
+    }
+    return this.execute("getBalanceOrPrompt");
+  }
+
   request(method: string, params: Record<string, unknown>) {
     if (!this.enabled) {
       throw new Error("Provider must be enabled before calling request");
@@ -109,11 +116,30 @@ export default class WebLNProvider {
     });
   }
 
+  on(...args: Parameters<EventEmitter["on"]>) {
+    if (!this.enabled) {
+      throw new Error("Provider must be enabled before calling on method");
+    }
+
+    this._eventEmitter.on(...args);
+  }
+
+  off(...args: Parameters<EventEmitter["off"]>) {
+    if (!this.enabled) {
+      throw new Error("Provider must be enabled before calling off method");
+    }
+    this._eventEmitter.off(...args);
+  }
+
+  emit(...args: Parameters<EventEmitter["emit"]>) {
+    this._eventEmitter.emit(...args);
+  }
+
   // NOTE: new call `action`s must be specified also in the content script
   execute(
     action: string,
     args?: Record<string, unknown>
   ): Promise<Record<string, unknown>> {
-    return postMessage("webln", action, args);
+    return this._queue.add(() => postMessage("webln", action, args));
   }
 }

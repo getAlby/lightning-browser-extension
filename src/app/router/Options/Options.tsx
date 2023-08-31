@@ -25,15 +25,16 @@ import ScrollToTop from "~/app/components/ScrollToTop";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
 import { getConnectorRoutes, renderRoutes } from "~/app/router/connectorRoutes";
-import BackupSecretKey from "~/app/screens/Accounts/BackupSecretKey";
-import GenerateSecretKey from "~/app/screens/Accounts/GenerateSecretKey";
-import ImportSecretKey from "~/app/screens/Accounts/ImportSecretKey";
+import BackupMnemonic from "~/app/screens/Accounts/BackupMnemonic";
+import GenerateMnemonic from "~/app/screens/Accounts/GenerateMnemonic";
+import ImportMnemonic from "~/app/screens/Accounts/ImportMnemonic";
 import NostrSettings from "~/app/screens/Accounts/NostrSettings";
 import NostrSetup from "~/app/screens/Accounts/NostrSetup/NostrSetup";
 import Discover from "~/app/screens/Discover";
 import LNURLRedeem from "~/app/screens/LNURLRedeem";
 import OnChainReceive from "~/app/screens/OnChainReceive";
 import ScanQRCode from "~/app/screens/ScanQRCode";
+import SendToBitcoinAddress from "~/app/screens/SendToBitcoinAddress";
 import ChooseConnector from "~/app/screens/connectors/ChooseConnector";
 import ChooseConnectorPath from "~/app/screens/connectors/ChooseConnectorPath";
 import i18n from "~/i18n/i18nConfig";
@@ -54,7 +55,7 @@ function Options() {
               </RequireAuth>
             }
           >
-            <Route index element={<Navigate to="/publishers" replace />} />
+            <Route index element={<Navigate to="/wallet" replace />} />
             <Route path="discover">
               <Route index element={<Discover />} />
             </Route>
@@ -65,6 +66,10 @@ function Options() {
             <Route path="send" element={<Send />} />
             <Route path="confirmPayment" element={<ConfirmPayment />} />
             <Route path="keysend" element={<Keysend />} />
+            <Route
+              path="sendToBitcoinAddress"
+              element={<SendToBitcoinAddress />}
+            />
             <Route path="receive" element={<Receive />} />
             <Route path="onChainReceive" element={<OnChainReceive />} />
             <Route path="wallet" element={<DefaultView />} />
@@ -89,12 +94,12 @@ function Options() {
               <Route index element={<Accounts />} />
               <Route path=":id" element={<AccountDetailLayout />}>
                 <Route index element={<AccountDetail />} />
-                <Route path="secret-key/backup" element={<BackupSecretKey />} />
+                <Route path="secret-key/backup" element={<BackupMnemonic />} />
                 <Route
                   path="secret-key/generate"
-                  element={<GenerateSecretKey />}
+                  element={<GenerateMnemonic />}
                 />
-                <Route path="secret-key/import" element={<ImportSecretKey />} />
+                <Route path="secret-key/import" element={<ImportMnemonic />} />
                 <Route path="nostr/settings" element={<NostrSettings />} />
                 <Route path="nostr/setup" element={<NostrSetup />} />
               </Route>

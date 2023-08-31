@@ -57,9 +57,12 @@ function Receive() {
   const [paid, setPaid] = useState(false);
   const [pollingForPayment, setPollingForPayment] = useState(false);
   const mounted = useRef(false);
-  const isAlbyUser =
-    isAlbyOAuthAccount(auth.account?.connectorType) ||
-    isAlbyLNDHubAccount(auth.account?.alias, auth.account?.connectorType);
+  const isAlbyLNDHubUser = isAlbyLNDHubAccount(
+    auth.account?.alias,
+    auth.account?.connectorType
+  );
+  const isAlbyOAuthUser = isAlbyOAuthAccount(auth.account?.connectorType);
+  const isAlbyUser = isAlbyOAuthUser || isAlbyLNDHubUser;
 
   useEffect(() => {
     mounted.current = true;
@@ -160,7 +163,7 @@ function Receive() {
   function renderInvoice() {
     if (!invoice) return null;
     return (
-      <div className="py-4">
+      <>
         <div className="relative p-8 bg-white rounded-lg shadow-sm ring-1 ring-black ring-opacity-5 flex justify-center items-center overflow-hidden">
           <QRCode value={invoice.paymentRequest.toUpperCase()} level="M" />
           {paid && (
@@ -238,7 +241,7 @@ function Receive() {
             style={{ pointerEvents: "none" }}
           />
         )}
-      </div>
+      </>
     );
   }
 
@@ -262,7 +265,7 @@ function Receive() {
           <form onSubmit={handleSubmit}>
             <fieldset disabled={loadingInvoice}>
               <Container justifyBetween maxWidth="sm">
-                <div className="py-4">
+                <div>
                   <div className="mb-4">
                     <DualCurrencyField
                       id="amount"
@@ -284,16 +287,14 @@ function Receive() {
                     />
                   </div>
                 </div>
-                <div>
-                  <Button
-                    type="submit"
-                    label={t("actions.create_invoice")}
-                    fullWidth
-                    primary
-                    loading={loadingInvoice}
-                    disabled={loadingInvoice}
-                  />
-                </div>
+                <Button
+                  type="submit"
+                  label={t("actions.create_invoice")}
+                  fullWidth
+                  primary
+                  loading={loadingInvoice}
+                  disabled={loadingInvoice}
+                />
               </Container>
             </fieldset>
           </form>
@@ -316,48 +317,50 @@ function Receive() {
                   }}
                 />
               </div>
-              {isAlbyUser && (
-                <>
-                  <div className="mb-4">
-                    <Button
-                      type="button"
-                      label={copyLightningAddressLabel}
-                      disabled={loadingLightningAddress}
-                      fullWidth
-                      onClick={async () => {
-                        try {
-                          if (!lightningAddress) {
-                            throw new Error(
-                              "User does not have a lightning address"
-                            );
-                          }
-                          navigator.clipboard.writeText(lightningAddress);
-                          setCopyLightningAddressLabel(tCommon("copied"));
-                          setTimeout(() => {
-                            setCopyLightningAddressLabel(
-                              t("actions.copy_lightning_address")
-                            );
-                          }, 1000);
-                        } catch (e) {
-                          if (e instanceof Error) {
-                            toast.error(e.message);
-                          }
+
+              {isAlbyOAuthUser && (
+                <div className="mb-4">
+                  <Button
+                    type="button"
+                    label={copyLightningAddressLabel}
+                    disabled={loadingLightningAddress}
+                    fullWidth
+                    onClick={async () => {
+                      try {
+                        if (!lightningAddress) {
+                          throw new Error(
+                            "User does not have a lightning address"
+                          );
                         }
-                      }}
-                      icon={<CopyIcon className="w-6 h-6 mr-2" />}
-                    />
-                  </div>
-                  <div className="mb-4">
-                    <Button
-                      type="button"
-                      label={t("receive_via_bitcoin_address")}
-                      fullWidth
-                      onClick={() => {
-                        navigate("/onChainReceive");
-                      }}
-                    />
-                  </div>
-                </>
+                        navigator.clipboard.writeText(lightningAddress);
+                        setCopyLightningAddressLabel(tCommon("copied"));
+                        setTimeout(() => {
+                          setCopyLightningAddressLabel(
+                            t("actions.copy_lightning_address")
+                          );
+                        }, 1000);
+                      } catch (e) {
+                        if (e instanceof Error) {
+                          toast.error(e.message);
+                        }
+                      }
+                    }}
+                    icon={<CopyIcon className="w-6 h-6 mr-2" />}
+                  />
+                </div>
+              )}
+
+              {isAlbyUser && (
+                <div className="mb-4">
+                  <Button
+                    type="button"
+                    label={t("receive_via_bitcoin_address")}
+                    fullWidth
+                    onClick={() => {
+                      navigate("/onChainReceive");
+                    }}
+                  />
+                </div>
               )}
             </Container>
           </div>

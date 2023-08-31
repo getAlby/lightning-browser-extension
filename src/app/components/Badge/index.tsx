@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 
 type Props = {
-  label: "active" | "auth" | "imported";
+  label: "budget" | "auth" | "imported";
   color: string;
   textColor: string;
   small?: boolean;

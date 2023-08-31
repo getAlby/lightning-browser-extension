@@ -1,14 +1,16 @@
-import { auth, Client } from "alby-js-sdk";
-import { RequestOptions } from "alby-js-sdk/dist/request";
+import { auth, Client } from "@getalby/sdk";
 import {
+  CreateSwapParams,
+  CreateSwapResponse,
   GetAccountInformationResponse,
   Invoice,
+  RequestOptions,
+  SwapInfoResponse,
   Token,
-} from "alby-js-sdk/dist/types";
+} from "@getalby/sdk/dist/types";
 import browser from "webextension-polyfill";
 import { decryptData, encryptData } from "~/common/lib/crypto";
 import { Account, OAuthToken } from "~/types";
-
 import state from "../state";
 import Connector, {
   CheckPaymentArgs,
@@ -67,7 +69,7 @@ export default class Alby implements Connector {
   }
 
   get supportedMethods() {
-    return ["getInfo", "keysend", "makeInvoice", "sendPayment"];
+    return ["getInfo", "keysend", "makeInvoice", "sendPayment", "getBalance"];
   }
 
   // not yet implemented
@@ -188,7 +190,7 @@ export default class Alby implements Connector {
     // signMessage requires proof of ownership of a non-custodial node
     // this is not the case in the Alby connector which connects to Lndhub
     throw new Error(
-      "SignMessage is not supported by Alby accounts. Generate a secret key to use LNURL auth."
+      "SignMessage is not supported by Alby accounts. Generate a Master Key to use LNURL auth."
     );
   }
 
@@ -206,6 +208,16 @@ export default class Alby implements Connector {
         rHash: data.payment_hash,
       },
     };
+  }
+
+  async getSwapInfo(): Promise<SwapInfoResponse> {
+    const result = await this._request((client) => client.getSwapInfo());
+    return result;
+  }
+
+  async createSwap(params: CreateSwapParams): Promise<CreateSwapResponse> {
+    const result = await this._request((client) => client.createSwap(params));
+    return result;
   }
 
   private async authorize(): Promise<auth.OAuth2User> {
@@ -251,14 +263,9 @@ export default class Alby implements Connector {
 
       let authUrl = authClient.generateAuthURL({
         code_challenge_method: "S256",
+        authorizeUrl: process.env.ALBY_OAUTH_AUTHORIZE_URL,
       });
-      // TODO: make authorize URL in alby-js-sdk customizable
-      if (process.env.ALBY_OAUTH_AUTHORIZE_URL) {
-        authUrl = authUrl.replace(
-          "https://getalby.com/oauth",
-          process.env.ALBY_OAUTH_AUTHORIZE_URL
-        );
-      }
+
       authUrl += "&webln=false"; // stop getalby.com login modal launching lnurl auth
       const authResult = await this.launchWebAuthFlow(authUrl);
       const code = new URL(authResult).searchParams.get("code");
@@ -282,15 +289,6 @@ export default class Alby implements Connector {
     });
 
     return authResult;
-  }
-
-  async getAccessToken(authResult: string, authClient: auth.OAuth2User) {
-    const authToken = new URL(authResult).searchParams.get("code");
-    if (!authToken) {
-      throw new Error("Authentication failed: missing token");
-    }
-
-    await authClient.requestAccessToken(authToken);
   }
 
   private async _request<T>(func: (client: Client) => T) {

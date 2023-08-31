@@ -35,7 +35,7 @@ The extension can connect to different node implementations and supports custodi
 
 ## About Alby
 
-Alby is open-source and currently in alpha stage. Our goal is to create the best online experience to consume and reward content and services online
+Alby is open-source, our goal is to create the best online experience to consume and reward content and services online.
 
 ## Join the conversation
 
@@ -151,4 +151,4 @@ You can also contribute to our [bounty program](https://github.com/getAlby/light
 
 ## License
 
-MIT
+[MIT](./LICENSE)
