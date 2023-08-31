@@ -9,6 +9,8 @@ import LNURLAuth from "@screens/LNURLAuth";
 import LNURLChannel from "@screens/LNURLChannel";
 import LNURLPay from "@screens/LNURLPay";
 import LNURLWithdraw from "@screens/LNURLWithdraw";
+import LiquidConfirmGetAddress from "@screens/Liquid/ConfirmGetAddress";
+import ConfirmSignPset from "@screens/Liquid/ConfirmSignPset";
 import MakeInvoice from "@screens/MakeInvoice";
 import NostrConfirm from "@screens/Nostr/Confirm";
 import NostrConfirmGetPublicKey from "@screens/Nostr/ConfirmGetPublicKey";
@@ -20,7 +22,7 @@ import { ToastContainer } from "react-toastify";
 import AlbyLogo from "~/app/components/AlbyLogo";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
-import ConfirmGetAddress from "~/app/screens/ConfirmGetAddress";
+import BitcoinConfirmGetAddress from "~/app/screens/Bitcoin/ConfirmGetAddress";
 import type { NavigationState, OriginData } from "~/types";
 
 // Parse out the parameters from the querystring.
@@ -78,12 +80,28 @@ function Prompt() {
               element={<Enable origin={navigationState.origin as OriginData} />} // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
             />
             <Route
+              path="public/liquid/enable"
+              element={<Enable origin={navigationState.origin as OriginData} />} // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
+            />
+            <Route
               path="public/nostr/enable"
               element={<Enable origin={navigationState.origin as OriginData} />} // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
             />
             <Route
               path="public/webbtc/enable"
               element={<Enable origin={navigationState.origin as OriginData} />} // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
+            />
+            <Route
+              path="public/webbtc/confirmGetAddress"
+              element={<BitcoinConfirmGetAddress />}
+            />
+            <Route
+              path="public/liquid/confirmGetAddress"
+              element={<LiquidConfirmGetAddress />}
+            />
+            <Route
+              path="public/liquid/confirmSignPset"
+              element={<ConfirmSignPset />}
             />
             <Route path="public/nostr/confirm" element={<NostrConfirm />} />
             <Route
@@ -108,7 +126,6 @@ function Prompt() {
             <Route path="confirmKeysend" element={<ConfirmKeysend />} />
             <Route path="confirmSignMessage" element={<ConfirmSignMessage />} />
             <Route path="confirmAddAccount" element={<ConfirmAddAccount />} />
-            <Route path="confirmGetAddress" element={<ConfirmGetAddress />} />
             <Route
               path="public/confirmRequestPermission"
               element={<ConfirmRequestPermission />}

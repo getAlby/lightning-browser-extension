@@ -752,9 +752,6 @@
       },
       "open_location": ""
     },
-    "confirm_or_cancel": {
-      "only_trusted": ""
-    },
     "budget_control": {
       "remember": {
         "label": "",
