@@ -15,6 +15,8 @@ const Avatar = (props: Props) => {
   }
 };
 
+// Use object-cover to support non-square avatars that might be loaded by
+// different connectors
 const AvatarImage = (props: Props) => {
   return (
     <div
@@ -23,7 +25,10 @@ const AvatarImage = (props: Props) => {
         height: `${props.size}px`,
       }}
     >
-      <img className="rounded-full object-fill w-full h-full" src={props.url} />
+      <img
+        className="rounded-full object-cover w-full h-full"
+        src={props.url}
+      />
     </div>
   );
 };
