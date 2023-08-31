@@ -4,7 +4,7 @@ import { MemoryRouter } from "react-router-dom";
 import { settingsFixture as mockSettings } from "~/../tests/fixtures/settings";
 
 import type { Props } from "./index";
-import AllowanceMenu from "./index";
+import SitePreferences from "./index";
 
 const mockGetFiatValue = jest.fn(() => Promise.resolve("$1,22"));
 
@@ -24,6 +24,7 @@ jest.mock("~/common/lib/msg");
 const mockOnEdit = jest.fn();
 
 const defaultProps: Props = {
+  launcherType: "button",
   allowance: {
     id: 1,
     totalBudget: 2000,
@@ -32,7 +33,7 @@ const defaultProps: Props = {
   onEdit: mockOnEdit,
 };
 
-describe("AllowanceMenu", () => {
+describe("SitePreferences", () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
@@ -41,7 +42,7 @@ describe("AllowanceMenu", () => {
     await act(async () => {
       render(
         <MemoryRouter>
-          <AllowanceMenu {...defaultProps} {...props} />
+          <SitePreferences {...defaultProps} {...props} />
         </MemoryRouter>
       );
     });
@@ -60,17 +61,10 @@ describe("AllowanceMenu", () => {
       user.click(settingsButton); // click settings-button
     });
 
-    expect(await screen.findByRole("menu")).toBeInTheDocument(); // allowance-menu opens
-
-    const editButton = await screen.findByRole("menuitem", {
-      name: "Edit",
+    await screen.findByText("Site settings");
+    const saveButton = await screen.findByRole("button", {
+      name: "Save",
     });
-
-    await act(() => {
-      user.click(editButton);
-    });
-
-    await screen.findByText("Edit Preferences");
 
     // update fiat value when modal is open
     expect(mockGetFiatValue).toHaveBeenCalledWith(
@@ -79,19 +73,18 @@ describe("AllowanceMenu", () => {
     expect(mockGetFiatValue).toHaveBeenCalledTimes(1);
 
     await act(async () => {
-      await user.clear(screen.getByLabelText("New budget"));
-      await user.type(screen.getByLabelText("New budget"), "250");
+      await user.clear(screen.getByLabelText("One-click payments budget"));
+      await user.type(
+        screen.getByLabelText("One-click payments budget"),
+        "250"
+      );
     });
 
-    expect(screen.getByLabelText("New budget")).toHaveValue(250);
+    expect(screen.getByLabelText("One-click payments budget")).toHaveValue(250);
 
     // update fiat value
     expect(mockGetFiatValue).toHaveBeenCalledWith("250");
     expect(mockGetFiatValue).toHaveBeenCalledTimes(4); // plus 3 times for each input value 2, 5, 0
-
-    const saveButton = await screen.findByRole("button", {
-      name: "Save",
-    });
 
     await act(async () => {
       await user.click(saveButton);
@@ -110,26 +103,14 @@ describe("AllowanceMenu", () => {
       user.click(settingsButton); // click settings-button
     });
 
-    expect(await screen.findByRole("menu")).toBeInTheDocument(); // allowance-menu opens
-
-    const editButton = await screen.findByRole("menuitem", {
-      name: "Edit",
+    const saveButton = await screen.findByRole("button", {
+      name: "Save",
     });
-
-    await act(() => {
-      user.click(editButton);
-    });
-
-    await screen.findByText("Edit Preferences");
 
     const toggleButton = await screen.findByRole("switch");
 
     await act(async () => {
       await user.click(toggleButton);
-    });
-
-    const saveButton = await screen.findByRole("button", {
-      name: "Save",
     });
 
     await act(async () => {

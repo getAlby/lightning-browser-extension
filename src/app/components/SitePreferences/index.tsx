@@ -1,28 +1,31 @@
-import { GearIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
+import Button from "@components/Button";
+import Hyperlink from "@components/Hyperlink";
 import Setting from "@components/Setting";
 import Toggle from "@components/form/Toggle";
 import type { FormEvent } from "react";
 import { Fragment, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import Modal from "react-modal";
 import { toast } from "react-toastify";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
+import { PreferencesIcon } from "~/app/icons";
 import msg from "~/common/lib/msg";
 import type { Allowance, Permission } from "~/types";
 
-import Button from "../Button";
-import Menu from "../Menu";
+import Modal from "~/app/components/Modal";
 import DualCurrencyField from "../form/DualCurrencyField/index";
 
+type LauncherType = "hyperlink" | "button" | "icon";
+
 export type Props = {
+  launcherType: LauncherType;
   allowance: Pick<Allowance, "id" | "totalBudget" | "lnurlAuth">;
   onEdit?: () => void;
   onDelete?: () => void;
 };
 
-function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
+function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
   const {
     isLoading: isLoadingSettings,
     settings,
@@ -142,46 +145,41 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
     }
   }
 
+  const getLauncher = (launcherType: LauncherType) => {
+    if (launcherType === "button") {
+      return (
+        <Button
+          icon={
+            <PreferencesIcon className="h-6 w-6 mr-2 dark:fill-neutral-200" />
+          }
+          label={t("edit_allowance.title")}
+          onClick={openModal}
+          className="text-xs"
+        />
+      );
+    }
+    if (launcherType === "icon") {
+      return (
+        <PreferencesIcon
+          className="h-6 w-6 fill-gray-600 dark:fill-neutral-400 hover:bg-gray-100 dark:hover:bg-surface-02dp hover:fill-gray-700 dark:hover:fill-neutral-300 rounded-sm cursor-pointer"
+          onClick={openModal}
+        />
+      );
+    }
+    if (launcherType === "hyperlink") {
+      return (
+        <Hyperlink onClick={openModal}>{t("new_budget.link_label")}</Hyperlink>
+      );
+    }
+  };
+
   return (
     <>
-      <Menu as="div" className="relative">
-        <Menu.Button className="flex items-center text-gray-500 hover:text-black transition-color duration-200 dark:hover:text-white">
-          <GearIcon className="h-6 w-6" />
-        </Menu.Button>
-        <Menu.List position="right">
-          <Menu.ItemButton onClick={openModal}>
-            {tCommon("actions.edit")}
-          </Menu.ItemButton>
-          <Menu.ItemButton
-            danger
-            onClick={async () => {
-              if (window.confirm(t("confirm_delete"))) {
-                try {
-                  await msg.request("deleteAllowance", {
-                    id: allowance.id,
-                  });
-                  onDelete && onDelete();
-                } catch (e) {
-                  console.error(e);
-                  if (e instanceof Error) toast.error(`Error: ${e.message}`);
-                }
-              }
-            }}
-          >
-            {tCommon("actions.delete")}
-          </Menu.ItemButton>
-        </Menu.List>
-      </Menu>
-
+      {getLauncher(launcherType)}
       <Modal
-        ariaHideApp={false}
-        closeTimeoutMS={200}
         isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        contentLabel={t("edit_allowance.screen_reader")}
-        overlayClassName="bg-black bg-opacity-25 fixed inset-0 flex justify-center items-center p-5"
-        className="rounded-lg bg-white w-full max-w-lg"
-        style={{ content: { maxHeight: "90vh" } }}
+        close={closeModal}
+        title={t("edit_allowance.screen_reader")}
       >
         <div className="p-5 flex justify-between dark:bg-surface-02dp">
           <h2 className="text-2xl font-bold dark:text-white">
@@ -200,9 +198,9 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
         >
           <div
             style={{ maxHeight: "calc(90vh - 154px)", overflowY: "auto" }}
-            className="p-5 border-t border-b border-gray-200 dark:bg-surface-02dp dark:border-neutral-500"
+            className="p-5 border-t border-b border-gray-200 dark:bg-surface-02dp dark:border-neutral-700"
           >
-            <div className="pb-4 border-b border-gray-200 dark:border-neutral-500">
+            <div className="pb-4 border-b border-gray-200 dark:border-neutral-700">
               <DualCurrencyField
                 id="budget"
                 label={t("new_budget.label")}
@@ -215,13 +213,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
                 onChange={(e) => setBudget(e.target.value)}
               />
             </div>
-            <div
-              className={
-                hasPermissions
-                  ? "pb-4 border-b border-gray-200 dark:border-neutral-500"
-                  : ""
-              }
-            >
+            <div className={hasPermissions ? "pb-4" : ""}>
               <Setting
                 title={t("enable_login.title")}
                 subtitle={t("enable_login.subtitle")}
@@ -275,7 +267,25 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
             )}
           </div>
 
-          <div className="flex justify-end p-5 dark:bg-surface-02dp">
+          <div className="flex justify-between items-center p-5 dark:bg-surface-02dp">
+            <Hyperlink
+              onClick={async () => {
+                if (window.confirm(t("confirm_delete"))) {
+                  try {
+                    await msg.request("deleteAllowance", {
+                      id: allowance.id,
+                    });
+                    onDelete && onDelete();
+                  } catch (e) {
+                    console.error(e);
+                    if (e instanceof Error) toast.error(`Error: ${e.message}`);
+                  }
+                }
+              }}
+              className="text-red-700 hover:text-red-800"
+            >
+              {tCommon("actions.disconnect")}
+            </Hyperlink>
             <Button
               type="submit"
               label={tCommon("actions.save")}
@@ -289,4 +299,4 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
   );
 }
 
-export default AllowanceMenu;
+export default SitePreferences;

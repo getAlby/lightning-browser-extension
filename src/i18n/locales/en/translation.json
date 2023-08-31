@@ -355,9 +355,12 @@
       "recent_transactions": "Recent Transactions",
       "allowance_view": {
         "recent_transactions": "Recent Transactions",
-        "allowance": "Allowance",
-        "sats_used": "sats used",
-        "no_transactions": "No transactions on <0>{{name}}</0> yet."
+        "budget_spent": "Budget spent",
+        "sats": "sats",
+        "no_transactions": "No transactions on <0>{{name}}</0> yet.",
+        "total_spent": "Total spent",
+        "total_payments": "Total payments",
+        "permissions": "Permissions"
       },
       "default_view": {
         "recent_transactions": "Recent Transactions",
@@ -987,6 +990,7 @@
       "log_in": "Log in",
       "remember": "Remember my choice and don't ask again",
       "more": "More",
+      "disconnect": "Disconnect",
       "review": "Review",
       "download": "Download"
     },
@@ -1015,17 +1019,18 @@
   },
   "components": {
     "allowance_menu": {
-      "confirm_delete": "Are you sure you want to delete this website?",
-      "hint": "This will reset the current budget",
+      "confirm_delete": "Are you sure you want to disconnect this website?",
+      "hint": "Changing this will reset the current budget",
       "new_budget": {
-        "label": "New budget"
+        "label": "One-click payments budget",
+        "link_label": "Set a budget for one-click payments"
       },
       "enable_login": {
         "title": "Enable website login",
         "subtitle": "Automatically log in without confirmation when the website requests."
       },
       "edit_allowance": {
-        "title": "Edit Preferences",
+        "title": "Site settings",
         "screen_reader": "Allowance Options"
       },
       "edit_permissions": "Edit Permissions"
@@ -1108,13 +1113,14 @@
     },
     "publishers_table": {
       "payments": "payments",
-      "used": "used"
+      "budget": "budget",
+      "total": "total"
     },
     "badge": {
       "label": {
-        "active": "ACTIVE",
         "auth": "LOGIN",
-        "imported": "IMPORTED"
+        "imported": "IMPORTED",
+        "budget": "BUDGET"
       }
     }
   },
