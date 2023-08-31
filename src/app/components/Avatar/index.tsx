@@ -15,10 +15,8 @@ const Avatar = (props: Props) => {
   }
 };
 
-// NOTE: avatar images are all square since this commit from 26 July 2023:
-//   https://github.com/getAlby/getalby.com/commit/079710187ed4b09c405f23e6b35ec6a82a97759b
-//   Legacy avatars created before this commit can have non-square dimensions and have not
-//   been converted, that's why we need `object-cover` and not `object-fill`.
+// Use object-cover to support non-square avatars that might be loaded by
+// different connectors
 const AvatarImage = (props: Props) => {
   return (
     <div
