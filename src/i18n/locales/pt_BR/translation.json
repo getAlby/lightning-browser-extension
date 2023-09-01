@@ -437,7 +437,7 @@
           "inputs": {
             "title": "Frase de recuperação"
           },
-          "existing_nostr_key_notice": "⚠️ Esta conta já possui uma chave privada nostr, logo não será gerada uma nova a partir desta chave mestra. Você pode gerenciar sua chave Nostr nas configurações de sua conta.",
+          "existing_nostr_key_notice": "ℹ️ Esta conta já possui uma chave privada nostr, logo não será gerada uma nova a partir desta chave mestra. Você pode gerenciar sua chave Nostr nas configurações de sua conta.",
           "lnurl": {
             "use_mnemonic": "Use a chave mestra para acessar aplicativos com tecnologia (LNURL Auth)",
             "title": "Login Relâmpago"

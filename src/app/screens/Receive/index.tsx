@@ -248,7 +248,6 @@ function Receive() {
   return (
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <Header
-        title={t("title")}
         headerLeft={
           <IconButton
             onClick={() => {
@@ -257,7 +256,9 @@ function Receive() {
             icon={<CaretLeftIcon className="w-4 h-4" />}
           />
         }
-      />
+      >
+        {t("title")}
+      </Header>
       {invoice ? (
         <Container maxWidth="sm">{renderInvoice()}</Container>
       ) : (

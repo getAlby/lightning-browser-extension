@@ -393,7 +393,10 @@
         "mnemonic": {
           "title": "🔑 Key Management",
           "saved": "Master Key encrypted & saved successfully.",
-          "existing_nostr_key_notice": "⚠️ This account already has a nostr private key set and will not be derived from this Master Key. You can manage your Nostr key from your account settings.",
+          "existing_nostr_key_notice": "ℹ️ This account already has a nostr private key set and will not be derived from this Master Key. You can manage your Nostr key from your account settings.",
+          "new": {
+            "title": "What is a Master Key?"
+          },
           "generate": {
             "title": "Generate new Master Key",
             "description": "Master Key allows you to interact with various protocols such as: Nostr, base layer of Bitcoin or LNURL-Auth.",
@@ -408,6 +411,7 @@
             "warning": "⚠️ Don't forget to back up your recovery phrase! Not backing it up might result in permanently losing access to your Master Key, Nostr identity or assets you manage with this key.",
             "description": "Write down the recovery phrase to be able to restore your Master Key on a new device or in case you lose access to your account.",
             "items": {
+              "keys": "Master Key allows you to interact with various protocols such as: Nostr, Liquid or base layer of Bitcoin.",
               "recovery_phrase": "You can always access your Master Key by using it's recovery phrase.",
               "words": "Recovery phrase is set of 12 words that works like a password, however it can't be changed or reset in case it's lost.",
               "storage": "Make sure to write it down somewhere safe and private!"

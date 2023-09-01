@@ -15,7 +15,6 @@ export default function OnChainReceive() {
   return (
     <div className=" flex flex-col overflow-y-auto no-scrollbar h-full">
       <Header
-        title={t("title")}
         headerLeft={
           <IconButton
             onClick={() => {
@@ -24,7 +23,9 @@ export default function OnChainReceive() {
             icon={<CaretLeftIcon className="w-4 h-4" />}
           />
         }
-      />
+      >
+        {t("title")}
+      </Header>
       <div className="mt-8 h-full">
         <Container justifyBetween maxWidth="sm">
           <div className="text-center dark:text-neutral-200 h-full flex flex-col justify-center items-center">

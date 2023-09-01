@@ -48,7 +48,7 @@ function NostrSetup() {
                   title={t("new.label")}
                   description={t("new.description")}
                   icon={TwoKeysIcon}
-                  onClick={() => navigate("../secret-key/generate")}
+                  onClick={() => navigate("../secret-key/new")}
                 />
                 <CardButton
                   title={t("import.label")}

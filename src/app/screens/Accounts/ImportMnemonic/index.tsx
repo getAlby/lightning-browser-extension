@@ -81,14 +81,13 @@ function ImportMnemonic() {
           <p className="text-gray-500 dark:text-neutral-500 -mt-2 mb-4">
             {t("import.description")}
           </p>
-
-          <MnemonicInputs mnemonic={mnemonic} setMnemonic={setMnemonic} />
           {hasNostrPrivateKey && (
-            <Alert type="warn">{t("existing_nostr_key_notice")}</Alert>
+            <Alert type="info">{t("existing_nostr_key_notice")}</Alert>
           )}
+          <MnemonicInputs mnemonic={mnemonic} setMnemonic={setMnemonic} />
         </ContentBox>
 
-        <div className="flex justify-center mt-8 mb-16 gap-4">
+        <div className="flex justify-center my-6 gap-4">
           <Button label={tCommon("actions.cancel")} onClick={cancelImport} />
           <Button label={t("import.button")} primary onClick={importKey} />
         </div>

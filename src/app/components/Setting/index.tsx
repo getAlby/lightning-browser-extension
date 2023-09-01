@@ -8,10 +8,8 @@ function Setting({ title, subtitle, children }: Props) {
   return (
     <div className="py-4 flex justify-between items-center">
       <div>
-        <span className="text-gray-900 dark:text-white font-medium">
-          {title}
-        </span>
-        <p className="text-gray-500 mr-1 dark:text-neutral-500 text-sm">
+        <span className="text-black dark:text-white font-medium">{title}</span>
+        <p className="text-gray-600 mr-1 dark:text-neutral-400 text-sm">
           {subtitle}
         </p>
       </div>

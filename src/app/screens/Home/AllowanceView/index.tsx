@@ -80,14 +80,15 @@ const AllowanceView: FC<Props> = (props) => {
   return (
     <div className="overflow-y-auto no-scrollbar h-full">
       <Header
-        title={props.allowance.host}
         headerLeft={
           <IconButton
             onClick={props.onGoBack}
             icon={<CaretLeftIcon className="w-4 h-4" />}
           />
         }
-      />
+      >
+        {props.allowance.host}
+      </Header>
       {props.allowance ? (
         <div className="relative mx-4">
           <PublisherCard

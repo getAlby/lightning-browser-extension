@@ -65,14 +65,15 @@ function LNURLRedeem() {
   return (
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <Header
-        title={t("title")}
         headerLeft={
           <IconButton
             onClick={() => navigate(-1)}
             icon={<CaretLeftIcon className="w-4 h-4" />}
           />
         }
-      />
+      >
+        {t("title")}
+      </Header>
       <form onSubmit={handleSubmit} className="h-full">
         <Container justifyBetween maxWidth="sm">
           <div className="pt-4">
