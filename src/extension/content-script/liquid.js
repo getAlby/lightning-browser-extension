@@ -1,5 +1,6 @@
 import browser from "webextension-polyfill";
 
+import api from "~/common/lib/api";
 import getOriginData from "./originData";
 import shouldInject from "./shouldInject";
 
@@ -23,6 +24,8 @@ async function init() {
   if (!inject) {
     return;
   }
+
+  const account = await api.getAccount();
 
   // message listener to listen to inpage liquid calls
   // those calls get passed on to the background script
@@ -65,6 +68,10 @@ async function init() {
         prompt: true,
         origin: getOriginData(),
       };
+
+      if (!account.hasMnemonic) {
+        messageWithOrigin.action = `public/liquid/providerOnboard`;
+      }
 
       const replyFunction = (response) => {
         if (ev.data.action === `${SCOPE}/enable`) {

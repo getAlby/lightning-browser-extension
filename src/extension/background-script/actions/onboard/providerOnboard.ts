@@ -10,17 +10,7 @@ const providerOnboard = async (
   if (!host) return;
 
   try {
-    const response = await utils.openPrompt<{
-      enabled: boolean;
-      remember: boolean;
-    }>(message);
-
-    return {
-      data: {
-        enabled: response.data.enabled,
-        remember: response.data.remember,
-      },
-    };
+    await utils.openPrompt(message);
   } catch (e) {
     console.error(e);
     if (e instanceof Error) {

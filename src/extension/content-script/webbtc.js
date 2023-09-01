@@ -1,8 +1,8 @@
 import browser from "webextension-polyfill";
 
+import api from "~/common/lib/api";
 import getOriginData from "./originData";
 import shouldInject from "./shouldInject";
-
 // WebBTC calls that can be executed from the WebBTC Provider.
 // Update when new calls are added
 const webbtcCalls = [
@@ -23,6 +23,8 @@ async function init() {
   if (!inject) {
     return;
   }
+
+  const account = await api.getAccount();
 
   // message listener to listen to inpage webbtc calls
   // those calls get passed on to the background script
@@ -53,6 +55,10 @@ async function init() {
       if (!availableCalls.includes(ev.data.action)) {
         console.error("Function not available.");
         return;
+      }
+
+      if (!account.hasMnemonic) {
+        messageWithOrigin.action = `public/webbtc/providerOnboard`;
       }
 
       const messageWithOrigin = {

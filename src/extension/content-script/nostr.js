@@ -30,6 +30,8 @@ async function init() {
     return;
   }
 
+  const account = await api.getAccount();
+
   browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
     // forward account changed messaged to inpage script
     if (request.action === "accountChanged") {
@@ -43,7 +45,7 @@ async function init() {
   // message listener to listen to inpage nostr calls
   // those calls get passed on to the background script
   // (the inpage script can not do that directly, but only the inpage script can make nostr available to the page)
-  window.addEventListener("message", async (ev) => {
+  window.addEventListener("message", (ev) => {
     // Only accept messages from the current window
     if (
       ev.source !== window ||
@@ -82,10 +84,10 @@ async function init() {
         prompt: true,
         origin: getOriginData(),
       };
-      const account = await api.getAccount();
 
-      if (ev.data.action === "nostr/enable" && !account.nostrEnabled)
+      if (!account.nostrEnabled) {
         messageWithOrigin.action = `public/nostr/providerOnboard`;
+      }
 
       const replyFunction = (response) => {
         if (ev.data.action === "nostr/enable") {

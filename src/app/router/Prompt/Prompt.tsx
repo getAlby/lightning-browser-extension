@@ -128,7 +128,15 @@ function Prompt() {
             <Route path="confirmAddAccount" element={<ConfirmAddAccount />} />
             <Route
               path="public/nostr/providerOnboard"
-              element={<ProviderOnboard action={navigationState.action} />}
+              element={<ProviderOnboard />}
+            />
+            <Route
+              path="public/liquid/providerOnboard"
+              element={<ProviderOnboard />}
+            />
+            <Route
+              path="public/webbtc/providerOnboard"
+              element={<ProviderOnboard />}
             />
             <Route
               path="public/confirmRequestPermission"
