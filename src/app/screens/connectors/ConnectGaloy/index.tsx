@@ -20,7 +20,7 @@ export const galoyUrls = {
     logo: galoyBitcoinBeach,
     url:
       process.env.BITCOIN_BEACH_GALOY_URL ||
-      "https://api.mainnet.galoy.io/graphql/",
+      "https://api.mainnet.galoy.io/graphql",
   },
   "galoy-bitcoin-jungle": {
     i18nPrefix: "bitcoin_jungle",
