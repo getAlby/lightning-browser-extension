@@ -1,4 +1,4 @@
-import { MessageAllowanceGetById, Allowance, Payment } from "../../../../types";
+import { Allowance, MessageAllowanceGetById, Payment } from "../../../../types";
 import db from "../../db";
 
 const getById = async (message: MessageAllowanceGetById) => {
@@ -12,17 +12,16 @@ const getById = async (message: MessageAllowanceGetById) => {
       payments: [],
       paymentsAmount: 0,
       paymentsCount: 0,
-      percentage: "0",
+      percentage: 0,
       usedBudget: 0,
     };
 
     allowance.usedBudget =
       dbAllowance.totalBudget - dbAllowance.remainingBudget;
 
-    allowance.percentage = (
-      (allowance.usedBudget / dbAllowance.totalBudget) *
-      100
-    ).toFixed(0);
+    allowance.percentage = dbAllowance.totalBudget
+      ? (allowance.usedBudget / dbAllowance.totalBudget) * 100
+      : 0;
 
     allowance.paymentsCount = await db.payments
       .where("host")
