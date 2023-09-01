@@ -13,9 +13,9 @@ import TextField from "@components/form/TextField";
 import { useEffect, useRef, useState } from "react";
 import Confetti from "react-confetti";
 import { useTranslation } from "react-i18next";
-import QRCode from "react-qr-code";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import QRCode from "~/app/components/QRCode";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
 import { isAlbyLNDHubAccount, isAlbyOAuthAccount } from "~/app/utils";
@@ -164,8 +164,8 @@ function Receive() {
     if (!invoice) return null;
     return (
       <>
-        <div className="relative p-8 bg-white rounded-lg shadow-sm ring-1 ring-black ring-opacity-5 flex justify-center items-center overflow-hidden">
-          <QRCode value={invoice.paymentRequest.toUpperCase()} level="M" />
+        <div className="relative p-8 bg-white dark:bg-surface-01dp rounded-lg shadow-sm ring-1 ring-black ring-opacity-5 flex justify-center items-center overflow-hidden">
+          <QRCode value={invoice.paymentRequest.toUpperCase()} />
           {paid && (
             <div className="absolute inset-0 flex justify-center items-center bg-white/90">
               <div className="text-center">
@@ -259,7 +259,9 @@ function Receive() {
         }
       />
       {invoice ? (
-        <Container maxWidth="sm">{renderInvoice()}</Container>
+        <Container maxWidth="sm">
+          <div className="pt-4">{renderInvoice()}</div>
+        </Container>
       ) : (
         <div className="pt-4">
           <form onSubmit={handleSubmit}>
