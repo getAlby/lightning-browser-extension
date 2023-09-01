@@ -38,12 +38,12 @@ export default class NostrProvider extends ProviderBase {
   //override method from base class, we don't want to throw error if not enabled
   async on(...args: Parameters<EventEmitter["on"]>) {
     await this.enable();
-    this._eventEmitter.on(...args);
+    super.on(...args);
   }
 
   async off(...args: Parameters<EventEmitter["off"]>) {
     await this.enable();
-    this._eventEmitter.off(...args);
+    super.off(...args);
   }
 }
 
