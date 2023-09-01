@@ -5,7 +5,7 @@
 
 export const ABORT_PROMPT_ERROR = "Prompt was closed";
 export const USER_REJECTED_ERROR = "User rejected";
-export const NO_KEYS_ERROR = "Onboarding started but no keys available yet";
+export const NO_KEYS_ERROR = "No keys available";
 
 // Currently only relevant for connector Kollider
 // all other connectors fall back to BTC
