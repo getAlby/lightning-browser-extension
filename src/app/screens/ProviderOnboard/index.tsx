@@ -36,7 +36,7 @@ export default function ProviderOnboard() {
     if (action === "public/nostr/providerOnboard" && account.hasMnemonic) {
       openOptions(`accounts/${authAccount?.id}/nostr/settings`);
     } else {
-      openOptions(`accounts/${authAccount?.id}/secret-key/generate`);
+      openOptions(`accounts/${authAccount?.id}/secret-key/new`);
     }
 
     await msg.error(NO_KEYS_ERROR);
