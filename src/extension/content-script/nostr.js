@@ -30,8 +30,6 @@ async function init() {
     return;
   }
 
-  const account = await api.getAccount();
-
   browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
     // forward account changed messaged to inpage script
     if (request.action === "accountChanged") {
@@ -45,7 +43,7 @@ async function init() {
   // message listener to listen to inpage nostr calls
   // those calls get passed on to the background script
   // (the inpage script can not do that directly, but only the inpage script can make nostr available to the page)
-  window.addEventListener("message", (ev) => {
+  window.addEventListener("message", async (ev) => {
     // Only accept messages from the current window
     if (
       ev.source !== window ||
@@ -85,8 +83,11 @@ async function init() {
         origin: getOriginData(),
       };
 
+      const account = await api.getAccount();
       if (!account.nostrEnabled) {
-        messageWithOrigin.action = `public/nostr/providerOnboard`;
+        // Override the action as no keys available yet
+        messageWithOrigin.action =
+          ev.data.action = `public/nostr/providerOnboard`;
       }
 
       const replyFunction = (response) => {
@@ -94,7 +95,7 @@ async function init() {
           isEnabled = response.data?.enabled;
           if (response.error) {
             console.error(response.error);
-            console.info("Enable was rejected ignoring further nostr calls");
+            console.info("User rejected, ignoring further nostr calls");
             isRejected = true;
           }
         }
