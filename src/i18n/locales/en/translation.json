@@ -931,10 +931,10 @@
       "list_empty": "No transactions available yet."
     },
     "provider_onboard": {
-      "title": "Setup keys to continue",
-      "request1": "This website requests interaction with your keys",
-      "request2": "You have not set the keys yet",
-      "request3": "The setup takes about 5 minutes",
+      "title": "Setup your Master Key to continue",
+      "request1": "This website requires key interaction",
+      "request2": "You haven't setup your keys yet",
+      "request3": "Setup is quick and easy",
       "actions": {
         "start_setup": "Start Setup"
       }

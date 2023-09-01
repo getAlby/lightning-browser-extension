@@ -61,15 +61,15 @@ export default function ProviderOnboard() {
           <div className="dark:text-white pt-6">
             <div className="mb-2 flex items-center">
               <TwoKeysIcon className="w-7 h-7 mr-2" />
-              <p className="dark:text-white">{t("request1")}</p>
+              <p className="">{t("request1")}</p>
             </div>
             <div className="mb-2 flex items-center">
               <InfoCircleIcon className="w-7 h-7 mr-2" />
-              <p className="dark:text-white">{t("request2")}</p>
+              <p className="">{t("request2")}</p>
             </div>
             <div className="mb-2 flex items-center">
               <ClockIcon className="w-7 h-7 mr-2" />
-              <p className="dark:text-white">{t("request3")}</p>
+              <p>{t("request3")}</p>
             </div>
           </div>
         </div>

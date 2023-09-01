@@ -1,6 +1,6 @@
 import { SVGProps } from "react";
 
-export default function Info(props: SVGProps<SVGSVGElement>) {
+export default function InfoCircleIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       width="30"
