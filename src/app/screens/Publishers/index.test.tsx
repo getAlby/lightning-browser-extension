@@ -56,12 +56,12 @@ describe("Publishers", () => {
 
     expect(await screen.findByText("Your ⚡ Websites")).toBeInTheDocument();
     expect(await screen.findByText("DALL·E 2")).toBeInTheDocument();
-    expect(await screen.findByText("ACTIVE")).toBeInTheDocument();
+    expect(await screen.findByText("BUDGET")).toBeInTheDocument();
     expect(await screen.findByText("LOGIN")).toBeInTheDocument();
     expect(
-      await screen.findByText("100 / 98,756 sats used")
+      await screen.findByText("budget 100 / 98,756 sats")
     ).toBeInTheDocument();
-    expect(await screen.findByText("3,000 sats")).toBeInTheDocument();
+    expect(await screen.findByText("total 3,000 sats")).toBeInTheDocument();
   });
 
   test("no publishers shows discover button", async () => {

@@ -71,7 +71,7 @@ describe("Update Allowances", () => {
         lastPaymentAt: 1487076708000,
         paymentsAmount: 0,
         paymentsCount: 0,
-        percentage: "10",
+        percentage: 10,
         remainingBudget: 450,
         usedBudget: 50,
       },

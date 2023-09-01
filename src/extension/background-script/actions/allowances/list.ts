@@ -1,5 +1,5 @@
 import db from "~/extension/background-script/db";
-import type { MessageAllowanceList, Allowance } from "~/types";
+import type { Allowance, MessageAllowanceList } from "~/types";
 
 const list = async (message: MessageAllowanceList) => {
   const dbAllowances = await db.allowances
@@ -18,17 +18,16 @@ const list = async (message: MessageAllowanceList) => {
         payments: [],
         paymentsAmount: 0,
         paymentsCount: 0,
-        percentage: "0",
+        percentage: 0,
         usedBudget: 0,
       };
 
       tmpAllowance.usedBudget =
         tmpAllowance.totalBudget - tmpAllowance.remainingBudget;
 
-      tmpAllowance.percentage = (
-        (tmpAllowance.usedBudget / tmpAllowance.totalBudget) *
-        100
-      ).toFixed(0);
+      tmpAllowance.percentage = tmpAllowance.totalBudget
+        ? (tmpAllowance.usedBudget / tmpAllowance.totalBudget) * 100
+        : 0;
 
       tmpAllowance.paymentsCount = await db.payments
         .where("host")

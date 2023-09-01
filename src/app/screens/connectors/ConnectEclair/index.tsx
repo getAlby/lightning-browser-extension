@@ -1,4 +1,3 @@
-import logo from "/static/assets/icons/eclair.jpg";
 import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
 import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
@@ -8,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import PasswordViewAdornment from "~/app/components/PasswordViewAdornment";
 import msg from "~/common/lib/msg";
+import logo from "/static/assets/icons/eclair.jpg";
 
 export default function ConnectEclair() {
   const navigate = useNavigate();
@@ -93,29 +93,29 @@ export default function ConnectEclair() {
     >
       <div className="mb-6">
         <TextField
-          id="password"
-          autoComplete="new-password"
-          label={t("password.label")}
-          type={passwordViewVisible ? "text" : "password"}
+          id="url"
+          label={t("url.label")}
+          placeholder={t("url.placeholder")}
+          value={formData.url}
           required
-          autoFocus={true}
           onChange={handleChange}
-          endAdornment={
-            <PasswordViewAdornment
-              onChange={(passwordView) => {
-                setPasswordViewVisible(passwordView);
-              }}
-            />
-          }
         />
       </div>
       <TextField
-        id="url"
-        label={t("url.label")}
-        placeholder={t("url.placeholder")}
-        value={formData.url}
+        id="password"
+        autoComplete="new-password"
+        label={t("password.label")}
+        type={passwordViewVisible ? "text" : "password"}
         required
+        autoFocus={true}
         onChange={handleChange}
+        endAdornment={
+          <PasswordViewAdornment
+            onChange={(passwordView) => {
+              setPasswordViewVisible(passwordView);
+            }}
+          />
+        }
       />
     </ConnectorForm>
   );

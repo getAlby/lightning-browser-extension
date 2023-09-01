@@ -9,7 +9,6 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import type { FormEvent } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
-import Modal from "react-modal";
 import QRCode from "react-qr-code";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -18,6 +17,7 @@ import Badge from "~/app/components/Badge";
 import Hyperlink from "~/app/components/Hyperlink";
 import InputCopyButton from "~/app/components/InputCopyButton";
 import MenuDivider from "~/app/components/Menu/MenuDivider";
+import Modal from "~/app/components/Modal";
 import Select from "~/app/components/form/Select";
 import Toggle from "~/app/components/form/Toggle";
 import { useAccount } from "~/app/context/AccountContext";
@@ -259,13 +259,9 @@ function AccountDetail() {
                     )}
                   </div>
                   <Modal
-                    ariaHideApp={false}
-                    closeTimeoutMS={200}
                     isOpen={exportModalIsOpen}
-                    onRequestClose={closeExportModal}
-                    contentLabel={t("export.screen_reader")}
-                    overlayClassName="bg-black bg-opacity-50 fixed inset-0 flex justify-center items-center p-5"
-                    className="rounded-lg bg-white dark:bg-surface-02dp w-full max-w-md overflow-hidden"
+                    close={closeExportModal}
+                    title={t("export.screen_reader")}
                   >
                     <div className="p-5 flex justify-between">
                       <h2 className="text-2xl font-bold dark:text-white">

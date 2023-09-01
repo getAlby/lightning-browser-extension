@@ -21,7 +21,7 @@ const resultAllowances: Allowance[] = [
     payments: [],
     paymentsAmount: 0,
     paymentsCount: 0,
-    percentage: "0",
+    percentage: 0,
     usedBudget: 0,
   },
   {
@@ -30,7 +30,7 @@ const resultAllowances: Allowance[] = [
     payments: [],
     paymentsAmount: 3000,
     paymentsCount: 2,
-    percentage: "0",
+    percentage: 0,
     usedBudget: 0,
   },
 ];
