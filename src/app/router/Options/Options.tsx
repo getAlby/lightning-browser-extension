@@ -27,6 +27,7 @@ import RequireAuth from "~/app/router/RequireAuth";
 import { getConnectorRoutes, renderRoutes } from "~/app/router/connectorRoutes";
 import BackupMnemonic from "~/app/screens/Accounts/BackupMnemonic";
 import GenerateMnemonic from "~/app/screens/Accounts/GenerateMnemonic";
+import NewMnemonic from "~/app/screens/Accounts/GenerateMnemonic/new";
 import ImportMnemonic from "~/app/screens/Accounts/ImportMnemonic";
 import NostrSettings from "~/app/screens/Accounts/NostrSettings";
 import NostrSetup from "~/app/screens/Accounts/NostrSetup/NostrSetup";
@@ -99,6 +100,7 @@ function Options() {
                   path="secret-key/generate"
                   element={<GenerateMnemonic />}
                 />
+                <Route path="secret-key/new" element={<NewMnemonic />} />
                 <Route path="secret-key/import" element={<ImportMnemonic />} />
                 <Route path="nostr/settings" element={<NostrSettings />} />
                 <Route path="nostr/setup" element={<NostrSetup />} />

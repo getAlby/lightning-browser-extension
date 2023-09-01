@@ -155,7 +155,7 @@ function NostrSettings() {
                   components={[
                     // eslint-disable-next-line react/jsx-key
                     <Link
-                      to="../../secret-key/generate"
+                      to="../../secret-key/new"
                       relative="path"
                       className="underline"
                     />,
@@ -227,7 +227,7 @@ function NostrSettings() {
               </div>
             </div>
           </ContentBox>
-          <div className="flex justify-center mt-8 mb-16 gap-4">
+          <div className="flex justify-center my-6 gap-4">
             <Button label={tCommon("actions.cancel")} onClick={onCancel} />
             <Button
               type="submit"

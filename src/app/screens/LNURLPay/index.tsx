@@ -387,16 +387,15 @@ function LNURLPay() {
       <div className="flex flex-col grow overflow-hidden">
         {!navState.isPrompt ? (
           <Header
-            title={
-              !successAction ? tCommon("actions.send") : tCommon("success")
-            }
             headerLeft={
               <IconButton
                 onClick={() => navigate(-1)}
                 icon={<CaretLeftIcon className="w-4 h-4" />}
               />
             }
-          />
+          >
+            {!successAction ? tCommon("actions.send") : tCommon("success")}
+          </Header>
         ) : (
           <ScreenHeader
             title={

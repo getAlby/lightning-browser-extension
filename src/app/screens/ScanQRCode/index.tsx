@@ -15,7 +15,6 @@ export default function ScanQRCode() {
   return (
     <div>
       <Header
-        title={t("title")}
         headerRight={
           <IconButton
             onClick={() =>
@@ -28,7 +27,9 @@ export default function ScanQRCode() {
             icon={<CrossIcon className="w-4 h-4" />}
           />
         }
-      />
+      >
+        {t("title")}
+      </Header>
       <Container maxWidth="sm">
         <QrcodeScanner
           qrbox={200}

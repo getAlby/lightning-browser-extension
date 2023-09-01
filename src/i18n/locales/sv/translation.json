@@ -414,7 +414,7 @@
         },
         "mnemonic": {
           "saved": "Huvudnyckeln krypterad och sparad.",
-          "existing_nostr_key_notice": "⚠️ Detta konto har redan en nostr privat nyckeluppsättning och kommer inte att härledas från denna huvudnyckel. Du kan hantera din Nostr-nyckel från dina kontoinställningar.",
+          "existing_nostr_key_notice": "ℹ️ Detta konto har redan en nostr privat nyckeluppsättning och kommer inte att härledas från denna huvudnyckel. Du kan hantera din Nostr-nyckel från dina kontoinställningar.",
           "generate": {
             "title": "Generera ny huvudnyckel",
             "button": "Generera huvudnyckel",
