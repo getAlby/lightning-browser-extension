@@ -1,1 +1,455 @@
-{}
+{
+  "translation": {
+    "alby": {
+      "pre_connect": {
+        "set_password": {
+          "errors": {
+            "mismatched_password": "Gesli se ne ujemata.",
+            "enter_password": "Prosim vpiši geslo.",
+            "confirm_password": "Prosim potrdi geslo."
+          },
+          "choose_password": {
+            "label": "Geslo"
+          },
+          "confirm_password": {
+            "label": "Potrdi geslo"
+          }
+        }
+      }
+    },
+    "choose_connector": {
+      "title": "Poveži Lightning denarnico",
+      "description": "Poveži se s svojo zunanjo lightning denarnico ali vozliščem",
+      "lnd": {
+        "title": "LND",
+        "page": {
+          "title": "Poveži se s svojim LND vozliščem",
+          "description": "Potrebuješ svoj URL vozlišča in macaroon z dovoljenjem branja in pisanja (npr. admin.macaroon)"
+        },
+        "url": {
+          "label": "REST API strežnik in vrata",
+          "placeholder": "https://url-streznika:8080"
+        },
+        "macaroon": {
+          "label": "Macaroon (HEX format)"
+        },
+        "drag_and_drop": "Povleci in spusti svoj macaroon tukaj ali <0>brskaj</0>",
+        "errors": {
+          "connection_failed": "Neuspešna povezana. Je tvoj LND dostop pravilni?"
+        }
+      },
+      "umbrel_lightning_node": {
+        "title": "Lightning vozlišče"
+      },
+      "mynode": {
+        "title": "myNode",
+        "rest_url": {
+          "label": "lndconnect REST URL",
+          "placeholder": "lndconnect://yournode:8080?..."
+        },
+        "page": {
+          "title": "Poveži z <0>myNode</0>",
+          "instructions": "Na myNode domači strani klikni na <0>Wallet</0> gumb na tvojem <0>lightning</0> servisu.<1/> Klikni na <0>Pair Wallet</0> gumb pod <0>Status</0> zavihkom. Vnesi geslo, ko je to zahtevano.<1/> Izberi spustni meni in izberi možnost povezave. Glede na konfiguracijo lahko uporabiš <0>lightning (REST + Local IP)</0> povezavo ali <0>lightning (REST + Tor)</0> povezavo."
+        }
+      },
+      "start9": {
+        "page": {
+          "instructions": "V Embassy nadzorni plošči klikni na <0>Lightning Network Daemon</0> servis.<1/>Izberi <0>Properties</0> zavihek.<1/>Kopiraj <0>LND Connect REST URL.</0>",
+          "title": "Poveži z <0>Start9 Server</0>"
+        },
+        "title": "Start9",
+        "rest_url": {
+          "label": "lndconnect REST URL",
+          "placeholder": "lndconnect://yournode:8080?..."
+        }
+      },
+      "raspiblitz": {
+        "page": {
+          "instructions2": "Kopiraj (admin) <0>macaroon</0> v spodnje vnosno polje.",
+          "title": "Poveži s svojim <0>RaspiBlitz</0> vozliščem"
+        },
+        "rest_api_host": {
+          "label": "REST API host",
+          "placeholder": "your-node-onion-address:port"
+        },
+        "title": "RaspiBlitz"
+      },
+      "bitcoin_jungle": {
+        "title": "Bitcoin Jungle Wallet",
+        "page": {
+          "title": "Poveži na <0>Bitcoin Jungle Wallet</0>"
+        }
+      },
+      "galoy": {
+        "actions": {
+          "login": "Prijava"
+        },
+        "phone_number": {
+          "label": "Vnesi svojo telefonsko številko"
+        },
+        "sms_code": {
+          "label": "Vnesi SMS potrditveno kodo"
+        },
+        "token": {
+          "label": "Vnesi svoj dostopni žeton"
+        },
+        "errors": {
+          "setup_failed": "Namestitev ni bila uspešna",
+          "invalid_token": "Neveljaven dostopni žeton je potekel",
+          "missing_token": "Manjka dostopni žeton, ne moreš se prijaviti."
+        }
+      },
+      "kollider": {
+        "description": "Prijava v Kollider račun",
+        "username": {
+          "label": "Uporabniško ime"
+        },
+        "errors": {
+          "registration_limit_exceeded": "Preseženo število registracij, poskusi čez nekaj časa.",
+          "connection_failed": "Povezava ni uspela. Si prepičan, da so podatki pravilni?",
+          "user_already_exists": "Uporabniško ime že obstaja"
+        },
+        "title": "Kollider",
+        "choose_path": {
+          "title": "Poveži v Kollider Wallet",
+          "description": "Prijavi ali se registriraj v nov Kollider račun in se poveži v Alby.",
+          "create_new": "Registracija"
+        },
+        "create": {
+          "title": "Ustvari svoj Kollider račun se poveži v Alby",
+          "description": "Ustvari nov Kollider račun za pošiljanje, sprejemanje in menjavo Bitcoin-ov."
+        },
+        "login": {
+          "title": "Poveži se z Kollider računom"
+        },
+        "currency": {
+          "label": "Izberi valuto računa"
+        }
+      },
+      "btcpay": {
+        "config": {
+          "label": "Podatki o konfiguraciji",
+          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
+        },
+        "title": "BTCPay Server",
+        "page": {
+          "title": "Poveži z BTCPay LND node"
+        },
+        "errors": {
+          "connection_failed": "Neuspešna povezava. Je BTCPay URL povezava pravilna in dostopna?"
+        }
+      },
+      "commando": {
+        "title": "Core Lightning",
+        "page": {
+          "title": "Poveži z Core Lightning vozliščem"
+        },
+        "host": {
+          "label": "Strežnik"
+        },
+        "pubkey": {
+          "label": "Javni ključ"
+        },
+        "rune": {
+          "label": "Rune"
+        },
+        "port": {
+          "label": "Vrata"
+        },
+        "proxy": {
+          "label": "Websocket proxy"
+        },
+        "config": {
+          "label": "Konfiguracijski podatki",
+          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
+        },
+        "privKey": {
+          "label": "Lokalni zasebni ključ (samodejno generiran)"
+        }
+      },
+      "lnc": {
+        "title": "Terminal Lightning (LNC)",
+        "page": {
+          "title": "Poveži s svojim LND vozliščem",
+          "description": "1. Odpri Lightning Terminal in izberi <0>Lightning Node Connect</0> iz stranske vrstice.<1/> 2. Klikni <0>Ustvari novo sejo</0><1/>3. Označi povezavo, izberi dovoljenje in potrdi<1/>4. <0>Kopiraj frazo za spajanje</0> in jo prilepi spodaj."
+        },
+        "pairing_phrase": {
+          "label": "Tvoja fraza za spajanje ",
+          "placeholder": "skrivna fraza za stack sats"
+        }
+      },
+      "lndhub_bluewallet": {
+        "title": "Bluewallet",
+        "page": {
+          "title": "Poveži z BlueWallet",
+          "description": "V BlueWallet izberi denarnico, ki jo želiš povezati, jo odpri, klikni na \"...\", klikni na Izvozi/Varnostno kopiraj za prikaz QR kode, ki jo skeniraš s svojo kamero."
+        },
+        "errors": {
+          "invalid_uri": "Nepravilen BlueWallet URI",
+          "connection_failed": "Povezava ni bila uspešna. Je tvoj BlueWallet URI pravilen?"
+        },
+        "uri": {
+          "label": "BlueWallet izvozni URI"
+        }
+      },
+      "lnbits": {
+        "page": {
+          "title": "Poveži z <0>LNbits</0>",
+          "instructions": "V LNbits izberi denarnico, ki jo želiš povezati, jo odpri, klikni na API info in kopiraj Skrbniški ključ. Prilepi ga spodaj:"
+        },
+        "admin_key": {
+          "label": "LNbits Skrbniški ključ",
+          "placeholder": "Tvoj 32 številčni Skrbniški ključ"
+        },
+        "url": {
+          "label": "LNbits URL"
+        },
+        "errors": {
+          "connection_failed": "Povezava ni bila uspešna. Imaš pravilni URL in Skrbniški ključ?"
+        },
+        "title": "LNbits"
+      },
+      "eclair": {
+        "page": {
+          "title": "Poveži z <0>Eclair</0>",
+          "instructions": "Potrebuješ Eclair URL in geslo."
+        },
+        "title": "Eclair",
+        "password": {
+          "label": "Eclair geslo"
+        },
+        "url": {
+          "label": "Eclair URL",
+          "placeholder": "http://localhost:8080"
+        }
+      },
+      "citadel": {
+        "title": "Citadel",
+        "page": {
+          "title": "Poveži <0>Citadel</0> vozlišče",
+          "instructions": "Tole trenutno ne deluje, če je vklopljen 2FA."
+        },
+        "url": {
+          "placeholder": "http://citadel.local",
+          "label": "Citadel URL"
+        },
+        "password": {
+          "label": "Citadel geslo"
+        }
+      },
+      "umbrel": {
+        "title": "Umbrel",
+        "page": {
+          "title": "Poveži <0>Umbrel</0> vozlišče"
+        },
+        "rest_url": {
+          "label": "lndconnect REST URL",
+          "placeholder": "lndconnect://yournode:8080?..."
+        }
+      },
+      "lndhub_go": {
+        "title": "LNDHub",
+        "page": {
+          "title": "Poveži z LNDHub",
+          "description": "Tukaj vstavi svojo LNDHub URI poverilnico ali skeniraj QR s svojo kamero."
+        },
+        "uri": {
+          "label": "Izvozini LNDHub URI"
+        },
+        "errors": {
+          "invalid_uri": "Nepravilni LNDHub URI",
+          "connection_failed": "Povezava ni bila uspešna. Je tvoj LNDHub URI pravilen?"
+        }
+      },
+      "bitcoin_beach": {
+        "title": "Bitcoin Beach Wallet",
+        "page": {
+          "title": "Poveži na <0>Bitcoin Beach Wallet</0>"
+        }
+      }
+    },
+    "welcome": {
+      "title": "Dobrodošli v Alby",
+      "set_password": {
+        "title": "Nastavi kodo za odklepanje",
+        "errors": {
+          "enter_password": "Prosim vpiši kodo.",
+          "mismatched_password": "Gesli se ne ujemata.",
+          "confirm_password": "Prosim potrdi svoje geslo."
+        },
+        "description": "Ta koda omogoča odklep Alby na tej napravi. Kode ne moreš resetirati, zato si jo zapomni, lahko pa jo kasneje spremeniš.",
+        "choose_password": {
+          "label": "Izberi kodo za odklepanje:"
+        },
+        "confirm_password": {
+          "label": "Potrdi, da si napisal pravilno:"
+        }
+      },
+      "test_connection": {
+        "connection_error": "Napaka pri povezavi",
+        "initializing": "Pripravljamo račun. Prosim počakaj, to lahko traja nekaj minut...",
+        "connection_taking_long": "Čas povezovanja je daljši od pričakovanega... Ali so podrobnosti pravilne? Je vozlišče dosegljivo?",
+        "review_connection_details": "Prosim preglej podrobnosti povezave.",
+        "contact_support": "Za pomoč piši na support@getalby.com",
+        "actions": {
+          "delete_edit_account": "Izbriši neveljavni račun in ponovno uredi"
+        },
+        "ready": "Super, pripravljeni ste na začetek!"
+      },
+      "pin_extension": {
+        "title": "Pripni Alby vtičnik",
+        "description": "Si skoraj na koncu. Za priročno uporabo Alby, pripni razširitev v orodno vrstico:",
+        "explanation": "1. Klik na <0/> v zgornjem desnem kotu brskalnika<1/>2. Najdi Alby in klikni za pripenjanje v orodno vrstico<1/>3. To je to. Za dostop do Alby klikni na <2/> ikona",
+        "next_btn": "Prični brenčati {{icon}} z Alby"
+      }
+    },
+    "choose_path": {
+      "alby": {
+        "title": "Alby račun",
+        "connect": "Poveži z Alby",
+        "description": "Registriraj se ali uporabi obstoječi Alby račun za takojšnji začetek z lightning plačili."
+      },
+      "other": {
+        "title": "Ostale denarnice",
+        "description": "Poveži z obstoječo lightning denarnico ali vozliščem in izberi med različnimi priključki.",
+        "connect": "Poveži",
+        "and_more": "& več..."
+      }
+    },
+    "distributions": {
+      "title": "Poveži na {{name}}",
+      "umbrel": {
+        "name": "Umbrel"
+      },
+      "citadel": {
+        "name": "Citadel"
+      },
+      "start9": {
+        "name": "Start9"
+      },
+      "description": "Izberi s katero {{name}} aplikacijo bi se rad povezal",
+      "btcpay": {
+        "name": "BTCPay"
+      },
+      "raspiblitz": {
+        "name": "Raspiblitz"
+      },
+      "mynode": {
+        "name": "myNode"
+      }
+    },
+    "home": {
+      "actions": {
+        "send_satoshis": "⚡️ Pošlji Satoshis ⚡️",
+        "enable_now": "Dovoli zdaj"
+      },
+      "recent_transactions": "Pretekle transakcije",
+      "allowance_view": {
+        "recent_transactions": "Pretekle transakcije",
+        "no_transactions": "NA <0>{{name}}</0> še ni transakcij."
+      },
+      "default_view": {
+        "recent_transactions": "Pretekle transakcije",
+        "is_blocked_hint": "Alby je trenutno na {{host}} onemogočen",
+        "all_transactions_link": "Poglej vse transakcije"
+      }
+    },
+    "accounts": {
+      "title": "Računi",
+      "account_view": {
+        "title2": "Račun",
+        "export": {
+          "title": "Poveži svojo mobilno denarnico",
+          "screen_reader": "Izvozi podrobnosti računa",
+          "your_ln_address": "Tvoj Lightning naslov:",
+          "waiting": "čakanje na LndHub podatke...",
+          "export_uri": "LNDHub URI poverilnice"
+        },
+        "name": {
+          "title": "Prikazno ime",
+          "placeholder": "Prikazno ime računa"
+        },
+        "mnemonic": {
+          "title": "🔑 Upravljanje ključa",
+          "saved": "Glavni ključ kriptiran in uspešno shranjen.",
+          "generate": {
+            "title": "Generiraj nov Glavni ključ",
+            "button": "Generiraj Glavni ključ"
+          },
+          "backup": {
+            "title": "Varnostno kopiraj obnovitveno frazo",
+            "save": "Shrani Glavni ključ",
+            "button": "Poglej obnovitveno frazo",
+            "items": {
+              "words": "Obnovitvena fraza je sestavljena iz 12 besed, ki delujejo kot geslo, a se ne more spremeniti ali obnoviti če se izgubi.",
+              "storage": "Bodi prepričan, da je zapisano na varnem in skrivnem mestu!",
+              "recovery_phrase": "Do Glavnega ključa lahko dostopaš z uporabo obnovitvene fraze."
+            },
+            "protocols": {
+              "nostr": "Nostr"
+            }
+          },
+          "import": {
+            "title": "Uvozi Glavni ključ",
+            "description": "Uporabi obnovitveno frazo za uvoz Gladvnega ključa v Alby.",
+            "button": "Uvozi Glavni ključ"
+          },
+          "inputs": {
+            "title": "Obnovitvena fraza"
+          },
+          "lnurl": {
+            "title": "Prijava z Lightning"
+          }
+        },
+        "network": {
+          "title": "Omrežje",
+          "options": {
+            "bitcoin": "Mainnet",
+            "testnet": "Testnet",
+            "regtest": "Regtest"
+          }
+        },
+        "nostr": {
+          "settings": {
+            "label": "Nostr nastavitve",
+            "remove": "Odstrani trenutne ključe",
+            "title": "Nostr nastavitve"
+          },
+          "setup": {
+            "title": "Konfiguriraj Nostr ključe",
+            "import": {
+              "label": "Uvozi Nostr račun",
+              "private_key": {
+                "description": "Prilepi Nostr zasebni ključ za uvoz v Alby",
+                "label": "Uporabi Nostr zasebni ključ"
+              }
+            },
+            "new": {
+              "label": "Ustvari nov Nostr račun"
+            }
+          },
+          "title": "Nostr"
+        },
+        "title1": "Nastavitve računa"
+      }
+    }
+  },
+  "permissions": {
+    "lnc": {
+      "listinvoices": "Pridobi seznam vseh računov.",
+      "openchannel": "Odpri nov kanal.",
+      "getinfo": "Pridobi informacije vozlišča.",
+      "lookupinvoice": "Pridobi podrobnosti računa.",
+      "addinvoice": "Kreiraj nove račune.",
+      "addholdinvoice": "Kreiraj nov eHODL račune."
+    },
+    "commando": {
+      "offer": "Oblikuj ponudbo.",
+      "pay": "Pošlji plačilo na BOLT11 račun."
+    },
+    "lnd": {
+      "addinvoice": "Kreiraj nove račune.",
+      "addholdinvoice": "Kreiraj nove HODL račune."
+    }
+  }
+}

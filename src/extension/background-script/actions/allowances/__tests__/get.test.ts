@@ -36,7 +36,7 @@ describe("get allowance", () => {
         payments: mockPayments.reverse(),
         paymentsAmount: 3000,
         paymentsCount: 2,
-        percentage: "0",
+        percentage: 0,
         usedBudget: 0,
       },
     });

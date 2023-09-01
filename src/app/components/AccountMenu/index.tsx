@@ -75,7 +75,7 @@ function AccountMenu({ showOptions = true }: Props) {
               />
             )}
             <div
-              className={`flex-auto mx-2 py-3 overflow-hidden max-w-[14rem] text-left`}
+              className={`flex-auto mx-2 py-3 overflow-hidden max-w-[10rem] text-left`}
             >
               <div
                 title={title || ""}

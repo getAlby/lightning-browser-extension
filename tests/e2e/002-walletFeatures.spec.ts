@@ -84,7 +84,7 @@ test.describe("Wallet features", () => {
     await (await findByText($document, "Send")).click();
     const invoiceInput = await findByText(
       $document,
-      "Invoice, Lightning Address or LNURL"
+      "Invoice, Lightning Address, LNURL or bitcoin address"
     );
     await invoiceInput.type("bumi@getalby.com");
     await (await getByText($document, "Continue")).click();
@@ -107,7 +107,7 @@ test.describe("Wallet features", () => {
     await (await findByText($document, "Send")).click();
     const invoiceInput = await findByText(
       $document,
-      "Invoice, Lightning Address or LNURL"
+      "Invoice, Lightning Address, LNURL or bitcoin address"
     );
     await invoiceInput.type(
       "lightning:lnurl1dp68gurn8ghj7efjv46x2um59enk2azpd338jtnrdakj7mrww4excttvdankjm3lw3skw0tvdankjm3xdvcn6vpe8yenwc3s8p3rsdtrxcmnxvnrx4nrvd3hxgenzvenv4jryde5x5unxvf58q6ngepsxgekyetr8yuxyvnx8ymxgefev5urqdnzvgeq5kwl8d"

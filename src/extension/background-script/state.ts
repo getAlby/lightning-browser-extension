@@ -94,9 +94,8 @@ const state = createState<State>((set, get) => ({
         await browser.storage.session.set({ password });
       }
       // @ts-ignore: https://github.com/mozilla/webextension-polyfill/issues/329
-      const storageSessionPassword = await browser.storage.session.get(
-        "password"
-      );
+      const storageSessionPassword =
+        await browser.storage.session.get("password");
 
       return storageSessionPassword.password;
     } else {
