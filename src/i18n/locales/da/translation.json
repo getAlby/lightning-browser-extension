@@ -32,8 +32,7 @@
     "choose_path": {
       "alby": {
         "title": "Alby",
-        "description": "Opret dig, eller brug din eksisterende Alby-konto til hurtigt at starte med at betale via lightning.",
-        "create_new": "Opret en konto"
+        "description": "Opret dig, eller brug din eksisterende Alby-konto til hurtigt at starte med at betale via lightning."
       },
       "other": {
         "title": "Andre wallets",
@@ -56,35 +55,6 @@
             "confirm_password": "Bekræft din adgangskode.",
             "mismatched_password": "Adgangskoderne er forskellige."
           }
-        },
-        "forgot_password": "Glemt adgangskoden?",
-        "title": "Din Alby-konto",
-        "create_account": "Opret en ny Alby-konto for at sende og modtage betaling med Bitcoin.",
-        "login_account": "Log ind for at forbinde din eksisterende Alby-konto.",
-        "host_wallet": "Vi opretter en Lightning-wallet til dig!",
-        "email": {
-          "create": {
-            "label": "E-mailadresse"
-          },
-          "login": {
-            "label": "E-mailadresse eller Lightning-adresse"
-          }
-        },
-        "optional_lightning_note": {
-          "part1": "Med din Alby-konto kommer muligheden for at få en",
-          "part2": "Lightning-adresse",
-          "part3": ". Dette gør det let for alle at sende dig Bitcoin via lightningnettet.",
-          "part4": "læs mere"
-        },
-        "optional_lightning_address": {
-          "label": "Vælg din Lightning-adresse (valgfri)",
-          "suffix": "@getalby.com",
-          "title": "tal og bogstaver, mindst 4 tegn"
-        },
-        "errors": {
-          "create_wallet_error": "Kunne ikke logge ind eller oprette en ny konto. Har du brug for hjælp, så kontakt support@getalby.com",
-          "create_wallet_error1": "Kunne ikke logge ind eller oprette en ny konto.",
-          "create_wallet_error2": "Har du brug for hjælp, så kontakt support@getalby.com"
         }
       }
     },
@@ -104,7 +74,6 @@
         "macaroon": {
           "label": "Macaroon (HEX-format)"
         },
-        "or": "ELLER",
         "drag_and_drop": "Træk din macaroon herhen eller <0>find den</0>",
         "errors": {
           "connection_failed": "Forbindelse kunne ikke oprettes. Er dine LND-oplysninger korrekte?"
@@ -363,7 +332,6 @@
           "screen_reader": "Eksporter kontooplysninger",
           "waiting": "venter på LndHub-data...",
           "your_ln_address": "Din lightningadresse:",
-          "tip_mobile": "Tip: Brug denne wallet på din mobile enhed",
           "export_uri": "URI til LNDHub-adgangsoplysninger",
           "scan_qr": "Importer denne wallet til Zeus eller BlueWallet ved at skanne QR-koden."
         },
@@ -533,9 +501,6 @@
     },
     "send": {
       "title": "Send",
-      "qrcode": {
-        "title": "Venter på skanning"
-      },
       "input": {
         "label": "Modtager",
         "hint": "Faktura, lightningadresse eller LNURL"
@@ -786,9 +751,6 @@
         "podcast": "Podcast"
       },
       "open_location": "Åbn hjemmeside"
-    },
-    "confirm_or_cancel": {
-      "only_trusted": "Opret kun forbindelse til sider, du har tillid til."
     },
     "budget_control": {
       "remember": {

@@ -32,8 +32,7 @@
     "choose_path": {
       "alby": {
         "title": "Alby",
-        "description": "Inregistreaza-te sau foloseste un cont Alby deja existent pentru a incepe sa faci plati prin Lightning imediat.",
-        "create_new": "Inregistreaza-te"
+        "description": "Inregistreaza-te sau foloseste un cont Alby deja existent pentru a incepe sa faci plati prin Lightning imediat."
       },
       "other": {
         "title": "Alte portofele",
@@ -56,35 +55,6 @@
             "confirm_password": "Te rog sa confirmi parola.",
             "mismatched_password": "Parolele nu se potrivesc."
           }
-        },
-        "forgot_password": "Ai uitat parola?",
-        "title": "Contul tau Alby",
-        "create_account": "Creeaza un nou cont Alby pentru a trimite si primi plati in bitcoin.",
-        "login_account": "Logheaza-te pentru a conecta contul tau Alby existent.",
-        "host_wallet": "Noi gazduim un portofel Lightning pentru tine!",
-        "email": {
-          "create": {
-            "label": "Adresa de e-mail"
-          },
-          "login": {
-            "label": "Adresa de e-mail sau adresa Lightning"
-          }
-        },
-        "optional_lightning_note": {
-          "part1": "Contul tau Alby vine si cu o optiune",
-          "part2": "adresa Lightning",
-          "part3": ". Aceasta este o metoda simpla pentru ca oricine sa iti poata trimite bitcoin prin reteaua Lightning.",
-          "part4": "Invata mai mult"
-        },
-        "optional_lightning_address": {
-          "label": "Alege adresa ta Lightning (optional)",
-          "suffix": "@getalby.com",
-          "title": "cifre si litere, minimum 4 caractere"
-        },
-        "errors": {
-          "create_wallet_error": "Logare sau creare de cont esuata. Daca ai nevoie de ajutor te rugam sa contactezi support@getalby.com",
-          "create_wallet_error1": "Logare sau creare de cont esuata.",
-          "create_wallet_error2": "Daca ai nevoie de ajutor te rugam sa contactezi support@getalby.com"
         }
       }
     },
@@ -104,7 +74,6 @@
         "macaroon": {
           "label": "Macaroon (format HEX)"
         },
-        "or": "SAU",
         "drag_and_drop": "Trage si plaseaza macaroon aici sau <0>browse</0>",
         "errors": {
           "connection_failed": "Conexiune esuata. Credentialele tale LND sunt corecte?"
@@ -363,7 +332,6 @@
           "screen_reader": "Exporta date cont",
           "waiting": "in asteptarea datelor LNDHub...",
           "your_ln_address": "Adresa ta Lightning:",
-          "tip_mobile": "Sfat: Foloseste acest portofel cu dispozitivul tau mobil",
           "export_uri": "Credentialele URI pentru LNDHub",
           "scan_qr": "Importa acest portofel in Zeus sau BlueWallet prin scanarea codului QR."
         },
@@ -534,9 +502,6 @@
     },
     "send": {
       "title": "",
-      "qrcode": {
-        "title": ""
-      },
       "input": {
         "label": "",
         "hint": ""
@@ -786,9 +751,6 @@
         "podcast": ""
       },
       "open_location": ""
-    },
-    "confirm_or_cancel": {
-      "only_trusted": ""
     },
     "budget_control": {
       "remember": {

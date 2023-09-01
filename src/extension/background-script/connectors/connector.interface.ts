@@ -1,3 +1,8 @@
+import {
+  CreateSwapParams,
+  CreateSwapResponse,
+  SwapInfoResponse,
+} from "@getalby/sdk/dist/types";
 import { ACCOUNT_CURRENCIES } from "~/common/constants";
 import { OAuthToken } from "~/types";
 
@@ -127,4 +132,10 @@ export default interface Connector {
     args: Record<string, unknown>
   ): Promise<{ data: unknown }>;
   getOAuthToken?(): OAuthToken | undefined;
+  getSwapInfo?(): Promise<SwapInfoResponse>;
+  createSwap?(params: CreateSwapParams): Promise<CreateSwapResponse>;
+}
+
+export function flattenRequestMethods(methods: string[]) {
+  return methods.map((method) => `request.${method}`);
 }

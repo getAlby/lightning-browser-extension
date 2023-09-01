@@ -172,9 +172,7 @@ function LNURLPay() {
 
       const isValidInvoice = lnurl.verifyInvoice({
         paymentInfo,
-        metadata: details.metadata,
         amount: parseInt(valueSat) * 1000,
-        payerdata,
       });
 
       if (!isValidInvoice) {
@@ -451,9 +449,8 @@ function LNURLPay() {
                           value={valueSat}
                           onChange={(e) => setValueSat(e.target.value)}
                           fiatValue={fiatValue}
-                          hint={`${tCommon("balance")}: ${
-                            auth?.balancesDecorated?.accountBalance
-                          }`}
+                          hint={`${tCommon("balance")}: ${auth
+                            ?.balancesDecorated?.accountBalance}`}
                           amountExceeded={amountExceeded}
                         />
                         <SatButtons

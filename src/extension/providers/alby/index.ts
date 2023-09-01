@@ -1,22 +1,24 @@
+import { PromiseQueue } from "~/extension/providers/promiseQueue";
 import { postMessage } from "../postMessage";
 
 export default class AlbyProvider {
   enabled: boolean;
+  private _queue: PromiseQueue;
 
   constructor() {
     this.enabled = false;
+    this._queue = new PromiseQueue();
   }
 
-  enable() {
+  async enable() {
     if (this.enabled) {
-      return Promise.resolve({ enabled: true });
+      return { enabled: true };
     }
-    return this.execute("enable").then((result) => {
-      if (typeof result.enabled === "boolean") {
-        this.enabled = result.enabled;
-      }
-      return result;
-    });
+    const result = await this.execute("enable");
+    if (typeof result.enabled === "boolean") {
+      this.enabled = result.enabled;
+    }
+    return result;
   }
 
   /**
@@ -46,6 +48,6 @@ export default class AlbyProvider {
     action: string,
     args?: Record<string, unknown>
   ): Promise<Record<string, unknown>> {
-    return postMessage("alby", action, args);
+    return this._queue.add(() => postMessage("alby", action, args));
   }
 }

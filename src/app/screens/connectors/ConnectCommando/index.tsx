@@ -1,7 +1,4 @@
-import {
-  HiddenIcon,
-  VisibleIcon,
-} from "@bitcoin-design/bitcoin-icons-react/outline";
+import logo from "/static/assets/icons/core_ln.svg";
 import Button from "@components/Button";
 import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
@@ -11,9 +8,8 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import PasswordViewAdornment from "~/app/components/PasswordViewAdornment";
 import msg from "~/common/lib/msg";
-
-import logo from "/static/assets/icons/core_ln.svg";
 
 export default function ConnectCommando() {
   const navigate = useNavigate();
@@ -47,7 +43,7 @@ export default function ConnectCommando() {
 
   function generateCommandoPrivateKey(): string {
     const privKey = secp256k1.utils.randomPrivateKey();
-    return secp256k1.utils.bytesToHex(privKey);
+    return secp256k1.etc.bytesToHex(privKey);
   }
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -114,7 +110,6 @@ export default function ConnectCommando() {
         <TextField
           id="host"
           label={t("host.label")}
-          type="text"
           required
           placeholder="0.0.0.0"
           title="host"
@@ -127,7 +122,6 @@ export default function ConnectCommando() {
         <TextField
           id="pubkey"
           label={t("pubkey.label")}
-          type="text"
           required
           placeholder="02...."
           title="pubkey"
@@ -139,7 +133,6 @@ export default function ConnectCommando() {
         <TextField
           id="rune"
           label={t("rune.label")}
-          type="text"
           required
           placeholder=""
           title="rune"
@@ -170,7 +163,6 @@ export default function ConnectCommando() {
             <TextField
               id="proxy"
               label={t("proxy.label")}
-              type="text"
               placeholder="proxy"
               required
               title="proxy"
@@ -182,22 +174,14 @@ export default function ConnectCommando() {
             id="commandoPrivateKey"
             label={t("privKey.label")}
             type={commandoPrivateKeyVisible ? "text" : "password"}
+            autoComplete="new-password"
             value={formData.privateKey}
             endAdornment={
-              <button
-                type="button"
-                tabIndex={-1}
-                className="flex justify-center items-center w-10 h-8"
-                onClick={() => {
-                  setCommandoPrivateKeyVisible(!commandoPrivateKeyVisible);
+              <PasswordViewAdornment
+                onChange={(passwordView) => {
+                  setCommandoPrivateKeyVisible(passwordView);
                 }}
-              >
-                {commandoPrivateKeyVisible ? (
-                  <HiddenIcon className="h-6 w-6" />
-                ) : (
-                  <VisibleIcon className="h-6 w-6" />
-                )}
-              </button>
+              />
             }
           />
         </div>

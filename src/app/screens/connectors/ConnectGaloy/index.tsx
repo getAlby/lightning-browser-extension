@@ -20,7 +20,7 @@ export const galoyUrls = {
     logo: galoyBitcoinBeach,
     url:
       process.env.BITCOIN_BEACH_GALOY_URL ||
-      "https://api.mainnet.galoy.io/graphql/",
+      "https://api.mainnet.galoy.io/graphql",
   },
   "galoy-bitcoin-jungle": {
     i18nPrefix: "bitcoin_jungle",
@@ -35,7 +35,6 @@ export const galoyUrls = {
 
 const defaultHeaders = {
   Accept: "application/json",
-  "Access-Control-Allow-Origin": "*",
   "Content-Type": "application/json",
 };
 
@@ -197,7 +196,6 @@ export default function ConnectGaloy(props: Props) {
             <Input
               id="jwt"
               name="jwt"
-              type="text"
               required
               onChange={handleJwtChange}
               autoFocus={true}

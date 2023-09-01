@@ -2,6 +2,7 @@ import * as accounts from "./actions/accounts";
 import * as allowances from "./actions/allowances";
 import * as blocklist from "./actions/blocklist";
 import * as cache from "./actions/cache";
+import * as liquid from "./actions/liquid";
 import * as ln from "./actions/ln";
 import lnurl, { auth } from "./actions/lnurl";
 import * as mnemonic from "./actions/mnemonic";
@@ -10,6 +11,7 @@ import * as payments from "./actions/payments";
 import * as permissions from "./actions/permissions";
 import * as settings from "./actions/settings";
 import * as setup from "./actions/setup";
+import * as swaps from "./actions/swaps";
 import * as webbtc from "./actions/webbtc";
 import * as webln from "./actions/webln";
 
@@ -63,7 +65,13 @@ const routes = {
   setMnemonic: mnemonic.setMnemonic,
   getMnemonic: mnemonic.getMnemonic,
   generateMnemonic: mnemonic.generateMnemonic,
-
+  getSwapInfo: swaps.info,
+  createSwap: swaps.createSwap,
+  liquid: {
+    signPset: liquid.signPset,
+    getPsetPreview: liquid.getPsetPreview,
+    fetchAssetRegistry: liquid.fetchAssetRegistry,
+  },
   nostr: {
     generatePrivateKey: nostr.generatePrivateKey,
     getPrivateKey: nostr.getPrivateKey,
@@ -77,7 +85,7 @@ const routes = {
     webbtc: {
       enable: allowances.enable,
       getInfo: webbtc.getInfo,
-      getAddressWithPrompt: webbtc.getAddressWithPrompt,
+      getAddressOrPrompt: webbtc.getAddressOrPrompt,
     },
     alby: {
       enable: allowances.enable,
@@ -91,7 +99,13 @@ const routes = {
       signMessageOrPrompt: webln.signMessageOrPrompt,
       lnurl: webln.lnurl,
       makeInvoice: webln.makeInvoiceOrPrompt,
+      getBalanceOrPrompt: webln.getBalanceOrPrompt,
       request: ln.request,
+    },
+    liquid: {
+      enable: allowances.enable,
+      getAddressOrPrompt: liquid.getAddressOrPrompt,
+      signPsetWithPrompt: liquid.signPsetWithPrompt,
     },
     nostr: {
       enable: allowances.enable,

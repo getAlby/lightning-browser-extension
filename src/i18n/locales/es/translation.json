@@ -2,18 +2,18 @@
   "translation": {
     "welcome": {
       "set_password": {
-        "title": "Proteja su billetera",
-        "description": "Esta contraseña se utiliza para proteger su monedero y proporcionar acceso a la extensión del navegador. No se puede restablecer y es independiente de la contraseña de su cuenta de Alby.",
+        "title": "Establecer un código de desbloqueo",
+        "description": "Este código te permitirá desbloquear Alby en este dispositivo. No se puede recuperar, pero se puede cambiar más tarde.",
         "choose_password": {
-          "label": "Elige una contraseña:"
+          "label": "Elige un código de desbloqueo:"
         },
         "confirm_password": {
           "label": "Confirme que lo escribió correctamente:"
         },
         "errors": {
-          "enter_password": "Por favor, introduzca una contraseña.",
-          "confirm_password": "Por favor, confirme su contraseña.",
-          "mismatched_password": "Las contraseñas no coinciden."
+          "enter_password": "Por favor, introduce un código de acceso.",
+          "confirm_password": "Por favor, confirma tu código de acceso.",
+          "mismatched_password": "Los códigos no coinciden."
         }
       },
       "test_connection": {
@@ -27,7 +27,13 @@
           "delete_edit_account": "Eliminar una cuenta no válida y volver a editarla"
         }
       },
-      "title": "Bienvenido a Alby"
+      "title": "Bienvenido a Alby",
+      "pin_extension": {
+        "title": "Fija tu extensión Alby",
+        "description": "Ya casi lo has conseguido. Para utilizar Alby cómodamente, recuerda anclar tu extensión a la barra de herramientas del navegador:",
+        "explanation": "1. Haz clic en <0/> en la esquina superior derecha de tu navegador<1/>2. Busca Alby y haz clic para anclarlo a la barra de herramientas<1/>3. Eso es todo. Para acceder a Alby sólo tienes que hacer clic en el icono <2/>",
+        "next_btn": "Empieza a hablar {{icon}} con Alby"
+      }
     },
     "choose_connector": {
       "description": "Conecta tu billetera lightning externa o nodo",
@@ -44,7 +50,6 @@
         "macaroon": {
           "label": "Frase macarrón (formato HEX)"
         },
-        "or": "O",
         "drag_and_drop": "Arrastra y suelta tu frase macarrón aquí o <0>navegar</0>",
         "errors": {
           "connection_failed": "Error de conexión. ¿Son correctas sus credenciales de LND?"
@@ -279,13 +284,16 @@
           "title": "Conecta tu nodo LND",
           "description": "1. Abra tu Lightning Terminal y selecciona <0>Lightning Node Connect</0> en la barra lateral.<1/> 2. Haz clic en <0>Crear una nueva sesión</0><1/>3. Etiqueta la sesión, luego elige el permiso que deseas y envía<1/>4. <0>Copia la frase de emparejamiento</0> y pégala a continuación."
         },
-        "title": "LND con LNC",
+        "title": "Lightning Terminal (LNC)",
         "pairing_phrase": {
           "label": "Tu frase vinculada. ",
           "placeholder": "frase de pila secreta de sats"
         }
       },
-      "title": "Conecta la Billetera Lightning"
+      "title": "Conecta la Billetera Lightning",
+      "umbrel_lightning_node": {
+        "title": "Lightning Node"
+      }
     },
     "home": {
       "actions": {
@@ -302,7 +310,10 @@
       "default_view": {
         "recent_transactions": "Transacciones Recientes",
         "is_blocked_hint": "Alby está actualmente deshabilitado en {{host}}",
-        "block_removed": "{{host}} habilitado. Vuelva a cargar el sitio web."
+        "block_removed": "{{host}} habilitado. Vuelva a cargar el sitio web.",
+        "no_outgoing_transactions": "Aún no hay transacciones salientes para esta cuenta.",
+        "no_incoming_transactions": "Aún no hay transacciones entrantes para esta cuenta.",
+        "all_transactions_link": "Ver todas las transacciones"
       }
     },
     "accounts": {
@@ -322,8 +333,7 @@
             "title": "Administra tu clave",
             "subtitle": "Pega tu clave privada o genera una nueva. <0>Más información \"</0>",
             "warning": "Introduzca el nombre de la cuenta para confirmar la eliminación de la clave privada:",
-            "failed_to_remove": "El nombre de cuenta introducido no coincide, tu antiguo privado ha sido restaurado.",
-            "backup": "⚠️ ¡No olvides hacer una copia de seguridad de tu clave privada! Si no haces una copia de seguridad de tu clave puedes perder el acceso."
+            "failed_to_remove": "El nombre de cuenta introducido no coincide, tu antiguo privado ha sido restaurado."
           },
           "public_key": {
             "label": "Clave Pública"
@@ -358,7 +368,6 @@
           "title": "Exportar Cuenta",
           "screen_reader": "Exportar los detalles de la cuenta",
           "your_ln_address": "Tu Dirección Lightning:",
-          "tip_mobile": "Consejo: Use esta billetera con su dispositivo móvil",
           "scan_qr": "Importe esta billetera a Zeus o BlueWallet escaneando el código QR.",
           "waiting": "esperando datos de LndHub...",
           "export_uri": "URI de credenciales de LNDHub"
@@ -384,10 +393,10 @@
         "part2": "Soporte de Alby"
       },
       "unlock_error": {
-        "help": "Los datos de tu cuenta están encriptados con tu contraseña de desbloqueo. Si realmente olvidaste tu contraseña de desbloqueo, tienes que restablecer y añadir tu cuenta relámpago de nuevo.",
+        "help": "Los datos de tu cuenta están encriptados con tu código de desbloqueo. Si realmente olvidaste tu código de desbloqueo, tienes que restablecer y añadir tu cuenta lightning de nuevo.",
         "link": "Restablecer ahora y agregar una nueva cuenta"
       },
-      "unlock_password": "Tu contraseña de desbloqueo",
+      "unlock_password": "Tu código de desbloqueo",
       "errors": {
         "invalid_password": "Contraseña no válida"
       }
@@ -491,9 +500,6 @@
     },
     "send": {
       "title": "Enviar",
-      "qrcode": {
-        "title": "Esperando para escanear"
-      },
       "input": {
         "label": "Destinatario",
         "hint": "Factura, Dirección Lightning o LNURL"
@@ -607,7 +613,6 @@
     "choose_path": {
       "alby": {
         "title": "Cuenta de Alby",
-        "create_new": "Regístrate",
         "description": "Regístrate o usa tú cuenta de Alby existente para empezar a realizar pagos relámpago en un abrir y cerrar de ojos."
       },
       "other": {
@@ -688,20 +693,6 @@
     },
     "alby": {
       "pre_connect": {
-        "errors": {
-          "create_wallet_error1": "Error al iniciar sesión o crear una cuenta nueva.",
-          "create_wallet_error2": "Si necesita ayuda, póngase en contacto con support@getalby.com",
-          "create_wallet_error": "Error al iniciar sesión o crear una cuenta nueva. Si necesita ayuda, por favor contacte support@getalby.com"
-        },
-        "forgot_password": "¿Olvidó su contraseña?",
-        "create_account": "Crea una nueva Cuenta de Alby para enviar y recibir pagos en bitcoin.",
-        "login_account": "Inicia sesión para conectar tú cuenta de Alby existente.",
-        "optional_lightning_note": {
-          "part2": "dirección lightning",
-          "part4": "aprende más",
-          "part3": ". Este es un modo simple para que cualquiera te envie Bitcoin en la red lightning.",
-          "part1": "Tú cuenta de Alby también viene con una opción"
-        },
         "set_password": {
           "choose_password": {
             "label": "Contraseña"
@@ -713,21 +704,6 @@
             "enter_password": "Por favor introduzca una contraseña.",
             "confirm_password": "Por favor, confirme su contraseña.",
             "mismatched_password": "Las contraseñas no coinciden."
-          }
-        },
-        "title": "Tu cuenta de Alby",
-        "optional_lightning_address": {
-          "label": "Elige tu Dirección Lightning (opcional)",
-          "title": "números y letras, al menos 4 caracteres",
-          "suffix": "@getalby.com"
-        },
-        "host_wallet": "¡Nosotros alojamos una billetera Lightning por usted!",
-        "email": {
-          "create": {
-            "label": "Dirección de Correo Electrónico"
-          },
-          "login": {
-            "label": "Dirección de Correo Electrónico o Dirección Lightning"
           }
         }
       }
@@ -745,6 +721,28 @@
     "transactions": {
       "title": "Transacciones",
       "list_empty": "Todavía no hay transacciones disponibles."
+    },
+    "distributions": {
+      "umbrel": {
+        "name": "Umbrel"
+      },
+      "start9": {
+        "name": "Start9"
+      },
+      "raspiblitz": {
+        "name": "Raspiblitz"
+      },
+      "mynode": {
+        "name": "myNode"
+      },
+      "title": "Conectarse a {{name}}",
+      "description": "Elige la aplicación {{name}} con la que deseas conectarse",
+      "citadel": {
+        "name": "Citadel"
+      },
+      "btcpay": {
+        "name": "BTCPay"
+      }
     }
   },
   "common": {
@@ -846,9 +844,6 @@
         "podcast": "Podcasts"
       },
       "open_location": "Abrir sitio web"
-    },
-    "confirm_or_cancel": {
-      "only_trusted": "Conéctese solo con sitios en los que confíe."
     },
     "budget_control": {
       "remember": {

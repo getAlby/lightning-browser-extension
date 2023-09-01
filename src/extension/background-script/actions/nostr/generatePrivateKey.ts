@@ -18,7 +18,7 @@ const generatePrivateKey = async (message: MessageNostrPrivateKeyGenerate) => {
     const account = accounts[id];
     if (!account.mnemonic) {
       return {
-        error: "Secret key is missing.",
+        error: "Master Key is missing.",
       };
     }
     const mnemonic = new Mnemonic(decryptData(account.mnemonic, password));

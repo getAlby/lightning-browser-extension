@@ -21,7 +21,7 @@
         "actions": {
           "delete_edit_account": "Ungültiges Konto löschen und erneut bearbeiten"
         },
-        "ready": "Großartig, du bist startklar!",
+        "ready": "Großartig, du bist bereit für den Einsatz!",
         "initializing": "Dein Konto wird initialisiert. Bitte warte, dies kann eine Minute dauern...",
         "connection_error": "Verbindungsfehler",
         "connection_taking_long": "Der Verbindungsversuch dauert länger als erwartet... Sind deine Angaben korrekt? Ist deine Node erreichbar?",
@@ -37,7 +37,6 @@
     },
     "choose_connector": {
       "lnd": {
-        "or": "OR",
         "drag_and_drop": "Ziehe und lege deine Macaroon hier ab oder <0>durchsuche</0>",
         "errors": {
           "connection_failed": "Verbindung fehlgeschlagen. Sind deine LND-Anmeldeinformationen korrekt?"
@@ -433,35 +432,34 @@
         "add_account": "Konto hinzufügen"
       },
       "account_view": {
-        "title2": "Konto bearbeiten",
-        "title1": "Konto Informationen",
+        "title2": "Konto",
+        "title1": "Kontoeinstellungen",
         "name": {
-          "title": "Name",
-          "placeholder": "Konto Name"
+          "title": "Name anzeigen",
+          "placeholder": "Konto Anzeigename"
         },
         "export": {
-          "title": "Konto exportieren",
+          "title": "Verbinde deine mobile Wallet",
           "screen_reader": "Kontodaten exportieren",
           "waiting": "Warten auf LndHub Daten...",
           "your_ln_address": "Deine Lightning Adresse:",
-          "tip_mobile": "Tipp: Verwende diese Geldbörse mit deinem mobilen Gerät",
           "export_uri": "LNDHub Anmeldeinformationen URI",
-          "scan_qr": "Importiere diese Wallet in Zeus oder BlueWallet, indem du den QRCode scannst."
+          "scan_qr": "Importiere diese Wallet in Zeus oder BlueWallet, indem du den QRCode scannst.",
+          "description": "Ermöglicht es dir, dieses Konto mit mobilen Wallets wie <0>Blue Wallet</0> und <0>Zeus</0> zu verbinden und zu verwenden."
         },
         "nostr": {
           "title": "Nostr",
           "private_key": {
-            "title": "Verwalten von deinen Schlüssel",
-            "subtitle": "Füge deinen privaten Schlüssel ein oder erzeuge einen neuen. <0>Mehr erfahren\"</0>",
-            "warning": "Bitte gebe den Namen des Kontos ein, um die Löschung des privaten Schlüssels zu bestätigen:",
-            "success": "Privater Schlüssel erfolgreich verschlüsselt und gespeichert.",
-            "successfully_removed": "Privater Schlüssel erfolgreich entfernt.",
-            "label": "Privater Schlüssel",
-            "failed_to_remove": "Der eingegebene Kontoname stimmt nicht überein, dein alter Privatname wurde wiederhergestellt.",
-            "backup": "Vergesse nicht, deinen privaten Schlüssel zu sichern! Wenn du deinen Schlüssel nicht sicherst, kannst du den Zugang verlieren."
+            "title": "Verwalte deinen privaten Nostr-Schlüssel",
+            "subtitle": "Füge deinen eigenen privaten Schlüssel ein oder erzeuge einen neuen. <0>Mehr erfahren\"</0>",
+            "warning": "Bitte gebe deinen Namen des Kontos ein, um die Löschung des privaten Schlüssels von nostr zu bestätigen:",
+            "success": "Der private Schlüssel von Nostr wurde erfolgreich verschlüsselt und gespeichert.",
+            "successfully_removed": "Der private Schlüssel von Nostr wurde erfolgreich entfernt.",
+            "label": "Nostr Privater Schlüssel",
+            "failed_to_remove": "Der eingegebene Kontoname stimmt nicht überein, dein alter privater Nostr-Schlüssel wurde wiederhergestellt."
           },
           "public_key": {
-            "label": "Öffentlicher Schlüssel"
+            "label": "Nostr Öffentlicher Schlüssel"
           },
           "generate_keys": {
             "title": "Erzeugen eines neuen Nostr Schlüssels",
@@ -478,17 +476,107 @@
           "hint": "ist ein einfaches und offenes Protokoll, das darauf abzielt, zensurresistente soziale Netzwerke zu schaffen. Nostr arbeitet mit kryptographischen Schlüsseln. Um etwas zu veröffentlichen, signiere es mit deinem Schlüssel und senden es an mehrere Relays. Du kannst Alby verwenden, um seinen Nostr-Schlüssel zu verwalten. Viele Nostr-Anwendungen erlauben dir dann, einfach den Schlüssel aus der Alby-Erweiterung zu verwenden.",
           "errors": {
             "failed_to_load": "Der Nostr Schlüssel konnte nicht geladen werden. Ist es ein gültiger Nostr Schlüssel?"
+          },
+          "settings": {
+            "label": "Nostr Einstellungen",
+            "title": "Nostr Einstellungen",
+            "description": "Leite deinen Nostr-Schlüssel von deinem Master Key ab oder importiere den bestehenden privaten Schlüssel, indem du ihn in das Feld \"Nostr Private Key\" einfügst.",
+            "imported_key_warning": "⚠️ Du verwendest derzeit einen importierten oder zufällig generierten Nostr-Schlüssel. Dein privater Nostr-Schlüssel kann nicht durch deine Wiederherstellungsphrase wiederhergestellt werden, also denke daran, deinen privaten Nostr-Schlüssel separat zu sichern.",
+            "can_restore": "✅ Nostr-Schlüssel, abgeleitet von Ihrem Hauptschlüssel",
+            "derive": "Vom Hauptschlüssel ableiten",
+            "no_secret_key": "💡Du hast noch keinen Hauptschlüssel. <0>Klicke hier</0></div>, um deinen Hauptschlüssel zu erstellen und deine Nostr-Schlüssel abzuleiten.",
+            "remove": "Aktuelle Schlüssel entfernen"
+          },
+          "setup": {
+            "title": "Einrichten der Nostr-Schlüssel",
+            "description": "Wähle, ob du ein neues Nostr-Konto (ein Paar privater und öffentlicher Schlüssel) erstellen oder ein bestehendes importieren möchtest.",
+            "new": {
+              "description": "Generiere einen Hauptschlüssel mit einem Paar neuer Nostr-Schlüssel.",
+              "label": "Ein neues Nostr-Konto erstellen"
+            },
+            "import": {
+              "label": "Ein Nostr-Konto importieren",
+              "description": "Verwende einen vorhandenen privaten Nostr-Schlüssel oder leite ihn von deinem Hauptschlüssel ab",
+              "private_key": {
+                "label": "Privaten Schlüssel von Nostr verwenden",
+                "description": "Füge deinen privaten Nostr-Schlüssel ein, um ihn in Alby zu importieren"
+              },
+              "recovery_phrase": {
+                "label": "Wiederherstellungsphrase verwenden",
+                "description": "Verwende die Phrase zur Wiederherstellung des Hauptschlüssels, um deinen Nostr-Schlüssel zu importieren"
+              },
+              "title": "Wie möchten dein Nostr-Konto importieren?"
+            },
+            "new_to_nostr": "Neu bei Nostr? <0>Mehr erfahren</0>",
+            "description2": "Jedes Nostr-Konto, das in Alby erstellt wird, wird mit einer <0>Recovery Phrase</0> geliefert - eine Reihe von 12 Wörtern, die es dir ermöglicht, jederzeit wieder Zugang zu deinen privaten Nostr-Schlüsseln zu erhalten."
           }
         },
         "remove": {
           "title": "Dieses Konto entfernen",
-          "subtitle": "Alle verknüpften Zertifikate werden gelöscht. Bitte sei dir sicher.",
-          "confirm": "Bist du sicher, dass du das Konto entfernen möchtest: {{name}}? \nDies kann nicht rückgängig gemacht werden. Wenn du dich mit diesem Konto bei Webseiten angemeldet hast, könntest du den Zugang zu diesen verlieren."
+          "subtitle": "Entfernt alle Zulagen, Zahlungsdaten und Schlüssel, die mit diesem Konto verbunden sind.",
+          "confirm": "Bitte gebe den Namen des Kontos ein, um die Löschung deines Kontos zu bestätigen.\n\n ⚠️ Wenn du fortfährst, werden alle zugehörigen Schlüssel (Master Key, Nostr, etc.) gelöscht. Bitte vergewisser dich, dass du eine Sicherungskopie erstellt hast, denn es gibt keine andere Möglichkeit, sie wiederherzustellen.",
+          "error": "Der eingegebene Kontoname stimmte nicht überein."
         },
         "actions": {
           "remove_account": "Konto entfernen",
-          "export": "Exportieren"
-        }
+          "export": "Exportieren",
+          "remove_secretkey": "Hauptschlüssel entfernen"
+        },
+        "mnemonic": {
+          "title": "🔑 Schlüsselverwaltung",
+          "backup": {
+            "protocols": {
+              "nostr": "Nostr"
+            },
+            "title": "Sichere deine Wiederherstellungsphrase",
+            "save": "Master Key speichern",
+            "button": "Ansicht Wiederherstellungsphrase",
+            "warning": "⚠️ Vergesse nicht, deine Wiederherstellungsphrase zu sichern! Wird sie nicht gesichert, kann dies dazu führen, dass du den Zugang zu deinem Master Key, dein Nostr-Identität oder den von dir mit diesem Schlüssel verwalteten Assets dauerhaft verlierst.",
+            "items": {
+              "recovery_phrase": "Du kannst jederzeit auf deinen Master Key zugreifen, indem du deine Wiederherstellungsphrase verwendest.",
+              "words": "Die Wiederherstellungsphrase besteht aus 12 Wörtern, die wie ein Passwort funktionieren, jedoch nicht geändert oder zurückgesetzt werden können, falls sie verloren gehen.",
+              "storage": "Schreibe sie an einem sicheren und privaten Ort auf!"
+            },
+            "description": "Notiere deine Wiederherstellungsphrase, um deinen Hauptschlüssel auf einem neuen Gerät wiederherstellen zu können oder für den Fall, dass du den Zugriff auf dein Konto verlierst."
+          },
+          "saved": "Master Key erfolgreich verschlüsselt und gespeichert.",
+          "generate": {
+            "title": "Neuen Hauptschlüssel generieren",
+            "button": "Master Key generieren",
+            "confirm": "Ich habe die Wiederherstellungsphrase zu meinem Hauptschlüssel an einem privaten und sicheren Ort gesichert.",
+            "error_confirm": "Bitte vergewissere dich, dass du deine Sicherungskopie des Wiederherstellungssatzes erstellt hast.",
+            "description": "Master Key ermöglicht dir die Interaktion mit verschiedenen Protokollen wie z.B.: Nostr, Basisschicht von Bitcoin oder LNURL-Auth."
+          },
+          "import": {
+            "title": "Importiere deinen Hauptschlüssel",
+            "description": "Verwende die Wiederherstellungsphrase, um Ihren Master Key in Alby zu importieren.",
+            "button": "Hauptschlüssel importieren"
+          },
+          "inputs": {
+            "title": "Wiederherstellungsphrase"
+          },
+          "existing_nostr_key_notice": "⚠️ Für dieses Konto ist bereits ein privater Nostr-Schlüssel festgelegt, der nicht von diesem Hauptschlüssel abgeleitet wird. Du kannst dein Nostr-Schlüssel über deine Kontoeinstellungen verwalten.",
+          "lnurl": {
+            "title": "Anmeldung mit Lightning",
+            "use_mnemonic": "Master Key für die Anmeldung bei Lightning-Anwendungen verwenden (LNURL Auth)"
+          }
+        },
+        "remove_secretkey": {
+          "title": "Hauptschlüssel entfernen",
+          "subtitle": "Entfernt den Hauptschlüssel von diesem Konto.",
+          "confirm": "Bitte gebe den Namen des Kontos ein, um die Löschung deines Hauptschlüssels zu bestätigen.",
+          "success": "Der Hauptschlüssel wurde erfolgreich entfernt."
+        },
+        "network": {
+          "subtitle": "Wähle ein Netzwerk zur Ableitung von Adressen und zur Entschlüsselung von Bitcoin- und Liquid-Transaktionen",
+          "options": {
+            "bitcoin": "Mainnet",
+            "testnet": "Testnet",
+            "regtest": "Regtest"
+          },
+          "title": "Netzwerk"
+        },
+        "no_mnemonic_hint": "💡 Du hast noch keinen Hauptschlüssel. <0>Klicken Sie hier</0></div>, um deinen Hauptschlüssel zu erstellen und diese Einstellungen freizuschalten."
       }
     },
     "enable": {
@@ -510,13 +598,16 @@
       },
       "title": "Empfangen",
       "actions": {
-        "create_invoice": "Rechnung erstellen"
+        "create_invoice": "Rechnung erstellen",
+        "copy_lightning_address": "Lightning Adresse kopieren"
       },
       "description": {
         "label": "Beschreibung",
         "placeholder": "Zum Beispiel: Wer schickt diese Zahlung?"
       },
-      "success": "Zahlung erhalten!"
+      "success": "Zahlung erhalten!",
+      "receive_via_bitcoin_address": "Empfangen über Bitcoin Adresse",
+      "redeem_lnurl": "LNURL einlösen"
     },
     "publishers": {
       "publisher": {
@@ -533,12 +624,10 @@
     "send": {
       "input": {
         "label": "Rechnung, Lightning-Adresse oder LNURL",
-        "hint": "Rechnung, Lightning-Adresse oder LNURL"
+        "hint": "Rechnung, Lightning-Adresse, LNURL",
+        "hint_with_bitcoin_address": "Rechnung, Lightning-Adresse, LNURL oder Bitcoin-Adresse"
       },
-      "title": "Senden",
-      "qrcode": {
-        "title": "Warten auf den Scan"
-      }
+      "title": "Senden"
     },
     "make_invoice": {
       "errors": {
@@ -669,35 +758,6 @@
     },
     "alby": {
       "pre_connect": {
-        "email": {
-          "login": {
-            "label": "Email Adresse oder Lightning Adresse"
-          },
-          "create": {
-            "label": "Email Adresse"
-          }
-        },
-        "login_account": "Melde dich an, um dein bestehendes Alby-Konto zu verbinden.",
-        "host_wallet": "Wir hosten die Lightning Wallet für dich!",
-        "optional_lightning_note": {
-          "part3": ". Dies ist eine einfache Möglichkeit für jeden, dir Bitcoin über das Lightning-Netzwerk zu senden.",
-          "part1": "Dein Alby-Konto enthält außerdem ein optionales",
-          "part2": "Lightning Adresse",
-          "part4": "mehr erfahren"
-        },
-        "create_account": "Erstelle ein neues Alby-Konto, um Bitcoin-Zahlungen zu senden und zu empfangen.",
-        "optional_lightning_address": {
-          "suffix": "@getalby.com",
-          "label": "Wähle deine Lightning-Adresse (optional)",
-          "title": "Zahlen und Buchstaben, mindestens 4 Stellen"
-        },
-        "errors": {
-          "create_wallet_error": "Du konntest dich nicht anmelden oder ein neues Konto erstellen. Wenn du Hilfe benötigst, wende dich bitte an den support@getalby.com",
-          "create_wallet_error1": "Du konntest dich nicht anmelden oder ein neues Konto erstellen.",
-          "create_wallet_error2": "Wenn du Hilfe benötigst, wende dich bitte an support@getalby.com"
-        },
-        "forgot_password": "Kennwort vergessen?",
-        "title": "Dein Alby-Konto",
         "set_password": {
           "choose_password": {
             "label": "Kennwort"
@@ -723,7 +783,7 @@
       "alby": {
         "title": "Alby Konto",
         "description": "Melde dich an oder verwende dein bestehendes Alby-Konto, um im Handumdrehen mit Lightningzahlungen zu beginnen.",
-        "create_new": "Anmelden"
+        "connect": "Mit Alby verbinden"
       }
     },
     "discover": {
@@ -788,7 +848,85 @@
     },
     "confirm_add_account": {
       "title": "Konto hinzufügen",
-      "content": "Diese Website möchte ein Konto hinzufügen ({{connector}}):"
+      "content": "Diese Website möchte ein Konto hinzufügen ({{connector}}):",
+      "tor_info": "Um sich über das TOR-Netzwerk zu verbinden, musst du zunächst die Alby-Begleit-App installieren:"
+    },
+    "on_chain": {
+      "title": "Empfangen über Bitcoin Adresse",
+      "instructions2": "Du kannst deine Bitcoin-Adresse auf der Seite <0>Empfangen</0> finden.",
+      "go": "Gehe zu deinem Alby Account →",
+      "instructions1": "Um Bitcoin über eine Bitcoin-Adresse zu erhalten, melde dich bei deinem <0>Alby-Account</0> auf getalby.com an"
+    },
+    "lnurlredeem": {
+      "errors": {
+        "invalid_withdraw_request": "Ungültige LNURL-Abfrage",
+        "invalid_lnurl": "Ungültige LNURL"
+      },
+      "title": "Bitcoin einlösen",
+      "input": {
+        "label": "LNURL-Ziehungscode",
+        "placeholder": "LNURL..."
+      },
+      "actions": {
+        "withdraw": "Zurückziehen"
+      }
+    },
+    "scan_qrcode": {
+      "title": "Warten auf den Scan"
+    },
+    "confirm_sign_pset": {
+      "title": "Unterschrift",
+      "allow_sign": "Auf dieser Website wirst du aufgefordert, eine Liquid Transaktion zu unterzeichnen:",
+      "view_details": "Details anzeigen",
+      "hide_details": "Details ausblenden",
+      "view_raw_transaction": "Rohtransaktion anzeigen (Base64)",
+      "hide_raw_transaction": "Rohtransaktion ausblenden (Base64)",
+      "inputs": "Eingaben",
+      "outputs": "Ausgänge",
+      "amount": "{{Betrag}} {{ticker}}"
+    },
+    "bitcoin": {
+      "confirm_get_address": {
+        "title": "Adresse abrufen"
+      },
+      "allow": "Erlaube dieser Website:",
+      "allow_sign": "Erlaube {{host}} zu unterschreiben:",
+      "block_and_ignore": "Blockieren und Ignorieren von {{host}}",
+      "block_added": "{{host}} zur Blockliste hinzugefügt, bitte lade die Website neu."
+    },
+    "liquid": {
+      "title": "Flüssig",
+      "allow": "Erlaube dieser Website:",
+      "block_and_ignore": "Blockieren und Ignorieren von {{host}}",
+      "allow_sign": "Erlaube {{host}} zu unterschreiben:",
+      "block_added": "{{host}} zur Blockliste hinzugefügt, bitte lade die Website neu."
+    },
+    "send_to_bitcoin_address": {
+      "time_estimate": "ℹ️ Transaktionen werden in der Regel innerhalb von 10-30 Minuten bearbeitet.",
+      "service_unavailable": "Der Dienst ist vorübergehend nicht verfügbar, bitte versuche es in ein paar Minuten erneut.",
+      "title": "An Bitcoin-Adresse senden",
+      "recipient": {
+        "label": "Empfänger"
+      },
+      "amount": {
+        "label": "Betrag (sats)"
+      },
+      "network_fee": {
+        "label": "Netzgebühr"
+      },
+      "service_fee": {
+        "label": "Servicegebühr"
+      },
+      "total": {
+        "label": "Insgesamt"
+      },
+      "total_fee": {
+        "label": "Gebühr"
+      },
+      "provider": {
+        "label": "Anbieter austauschen"
+      },
+      "view_on_explorer": "Ansicht auf mempool explorer"
     }
   },
   "components": {
@@ -798,7 +936,7 @@
           "add": "Füge einen neuen Account hinzu",
           "manage": "Konten verwalten",
           "account_settings": "Kontoeinstellungen",
-          "go_to_web_wallet": "Verwalte dein Alby-Konto"
+          "go_to_web_wallet": "Verwalte dein Web-Konto"
         }
       },
       "title": "Konto wechseln",
@@ -885,11 +1023,9 @@
     "badge": {
       "label": {
         "active": "AKTIV",
-        "auth": "LOGIN"
+        "auth": "LOGIN",
+        "imported": "EINGEFÜHRT"
       }
-    },
-    "confirm_or_cancel": {
-      "only_trusted": "Verbinde dich nur mit Websites, denen du vertraust."
     },
     "transaction_list": {
       "tabs": {
@@ -940,7 +1076,13 @@
       "remember": "Denke an meine Wahl und frage nicht noch einmal",
       "receive_again": "Eine weitere Zahlung erhalten",
       "transactions": "Transaktionen",
-      "more": "Mehr"
+      "more": "Mehr",
+      "download": "Download",
+      "import": "Importieren",
+      "copy_clipboard": "In die Zwischenablage kopieren",
+      "paste": "Einfügen",
+      "paste_clipboard": "Einfügen aus der Zwischenablage",
+      "review": "Überprüfung"
     },
     "discover": "Entdecken",
     "errors": {
@@ -949,7 +1091,7 @@
     },
     "message": "Nachricht",
     "response": "Antwort",
-    "success_message": "{{amount}}{{fiatAmount}} gesendet an {{destination}}",
+    "success_message": "{{Betrag}}{{fiatAmount}} sind auf dem Weg zum {{Ziel}}",
     "accounts": "Konten",
     "range": {
       "between": "zwischen {{min}} und {{max}}",
@@ -970,7 +1112,9 @@
       "nativelnbits": "LNBits (über Tor)",
       "galoy": "Galoy",
       "eclair": "Eclair"
-    }
+    },
+    "or": "oder",
+    "pasted": "Eingefügt!"
   },
   "permissions": {
     "commando": {
@@ -1059,6 +1203,16 @@
       "openchannel": "Öffne einen neuen Kanal.",
       "addholdinvoice": "Erstelle eine neue HODL-Rechnungen.",
       "settleinvoice": "Begleiche eine akzeptierte Rechnung."
+    },
+    "webln": {
+      "getbalance": "Lese den Saldo deines Kontos ab."
+    },
+    "liquid": {
+      "getaddress": "Lese deine Liquid-Empfangsadresse.",
+      "signschnorr": "Unterschreibe die Nachricht mit deinem Schlüssel."
+    },
+    "bitcoin": {
+      "getaddress": "Lese deine Bitcoin-Empfangsadresse."
     }
   }
 }

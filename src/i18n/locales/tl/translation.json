@@ -43,7 +43,6 @@
         "macaroon": {
           "label": ""
         },
-        "or": "",
         "drag_and_drop": "",
         "errors": {
           "connection_failed": ""
@@ -349,9 +348,6 @@
     },
     "send": {
       "title": "",
-      "qrcode": {
-        "title": ""
-      },
       "input": {
         "label": ""
       }
@@ -548,9 +544,6 @@
         "app": "",
         "podcast": ""
       }
-    },
-    "confirm_or_cancel": {
-      "only_trusted": ""
     },
     "budget_control": {
       "remember": {

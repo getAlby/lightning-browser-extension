@@ -58,7 +58,7 @@ const ConfirmRequestPermission: FC = () => {
               <div className="mb-6 center dark:text-white">
                 <p className="font-semibold">{requestMethod}</p>
                 {description && (
-                  <p className="text-sm text-gray-700">
+                  <p className="text-sm text-gray-700 dark:text-neutral-500">
                     {tPermissions(
                       description as unknown as TemplateStringsArray
                     )}
@@ -82,7 +82,7 @@ const ConfirmRequestPermission: FC = () => {
               </div>
             </div>
           </div>
-          <div className="mb-4 text-center flex flex-col">
+          <div className="text-center flex flex-col">
             <ConfirmOrCancel
               label={tCommon("actions.confirm")}
               onCancel={reject}

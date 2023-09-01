@@ -63,27 +63,29 @@ function Layout() {
   });
 
   return (
-    <div>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center font-serif font-medium text-2xl my-10 dark:text-white">
-          <p>
-            {t("welcome.title")}
-            <img
-              src="assets/icons/alby_icon_yellow.svg"
-              alt="Alby"
-              className="dark:hidden inline align-middle w-6 ml-2"
-            />
-            <img
-              src="assets/icons/alby_icon_yellow_dark.svg"
-              alt="Alby"
-              className="hidden dark:inline align-middle w-6 ml-2"
-            />
-          </p>
+    <div className="flex justify-center items-center min-h-screen">
+      <div className="w-full">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center font-serif font-medium text-2xl mt-8 dark:text-white">
+            <p>
+              {t("welcome.title")}
+              <img
+                src="assets/icons/alby_icon_yellow.svg"
+                alt="Alby"
+                className="dark:hidden inline align-middle w-6 ml-2"
+              />
+              <img
+                src="assets/icons/alby_icon_yellow_dark.svg"
+                alt="Alby"
+                className="hidden dark:inline align-middle w-6 ml-2"
+              />
+            </p>
+          </div>
         </div>
+        <Container maxWidth="xl">
+          <Outlet />
+        </Container>
       </div>
-      <Container maxWidth="xl">
-        <Outlet />
-      </Container>
     </div>
   );
 }

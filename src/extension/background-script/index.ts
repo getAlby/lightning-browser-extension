@@ -1,6 +1,8 @@
 import browser, { Runtime, Tabs } from "webextension-polyfill";
 import utils from "~/common/lib/utils";
 
+import { isManifestV3 } from "~/common/utils/mv3";
+import { registerInPageContentScript } from "~/extension/background-script/registerContentScript";
 import { ExtensionIcon, setIcon } from "./actions/setup/setIcon";
 import { db, isIndexedDbAvailable } from "./db";
 import * as events from "./events";
@@ -140,6 +142,8 @@ browser.runtime.onInstalled.addListener(handleInstalled);
 
 async function init() {
   console.info("Loading background script");
+
+  if (isManifestV3) registerInPageContentScript();
 
   await state.getState().init();
   console.info("State loaded");

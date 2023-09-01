@@ -4,6 +4,7 @@ import "dayjs/locale/da";
 import "dayjs/locale/es";
 import "dayjs/locale/fi";
 import "dayjs/locale/fr";
+import "dayjs/locale/hi";
 import "dayjs/locale/it";
 import "dayjs/locale/mr";
 import "dayjs/locale/pl";
@@ -20,11 +21,13 @@ import en from "~/i18n/locales/en/translation.json";
 import es from "~/i18n/locales/es/translation.json";
 import fi from "~/i18n/locales/fi/translation.json";
 import fr from "~/i18n/locales/fr/translation.json";
+import hi from "~/i18n/locales/hi/translation.json";
 import it from "~/i18n/locales/it/translation.json";
 import mr from "~/i18n/locales/mr/translation.json";
 import pl from "~/i18n/locales/pl/translation.json";
 import pt_BR from "~/i18n/locales/pt_BR/translation.json";
 import sv from "~/i18n/locales/sv/translation.json";
+import th from "~/i18n/locales/th/translation.json";
 import zh_Hans from "~/i18n/locales/zh_Hans/translation.json";
 
 export const defaultNS = "translation";
@@ -72,6 +75,12 @@ export const resources = {
     components: it.components,
     permissions: it.permissions,
   },
+  hi: {
+    translation: hi.translation,
+    common: hi.common,
+    components: hi.components,
+    permissions: hi.permissions,
+  },
   mr: {
     translation: mr.translation,
     common: mr.common,
@@ -96,6 +105,12 @@ export const resources = {
     components: sv.components,
     permissions: sv.permissions,
   },
+  th: {
+    translation: th.translation,
+    common: th.common,
+    components: th.components,
+    permissions: th.permissions,
+  },
   "zh-CN": {
     translation: zh_Hans.translation,
     common: zh_Hans.common,
@@ -117,7 +132,9 @@ export const supportedLocales = [
   { locale: "fi", label: "Suomalainen" },
   { locale: "sv", label: "Svenska" },
   { locale: "zh-CN", label: "中文（简化字）" },
-  { locale: "mr", label: "मराठी (India)" },
+  { locale: "hi", label: "हिंदी" },
+  { locale: "mr", label: "मराठी" },
+  { locale: "th", label: "ไทย" },
 ];
 
 i18n
