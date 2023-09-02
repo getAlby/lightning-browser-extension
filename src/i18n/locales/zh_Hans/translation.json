@@ -299,9 +299,7 @@
       "recent_transactions": "近期交易",
       "allowance_view": {
         "recent_transactions": "近期交易",
-        "no_transactions": "<0>{{name}}</0>还没有交易。",
-        "sats_used": "已使用的聪",
-        "allowance": "限额"
+        "no_transactions": "<0>{{name}}</0>还没有交易。"
       },
       "default_view": {
         "is_blocked_hint": "Alby 目前在 {{host}} 上被禁用",
@@ -1087,13 +1085,11 @@
     },
     "badge": {
       "label": {
-        "active": "活跃",
         "auth": "登录",
         "imported": "已导入"
       }
     },
     "publishers_table": {
-      "used": "已使用",
       "payments": "付款"
     },
     "companion_download_info": {
