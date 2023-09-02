@@ -755,8 +755,6 @@
       "recent_transactions": "ธุรกรรมทั้งหมด",
       "allowance_view": {
         "recent_transactions": "ธุรกรรมทั้งหมด",
-        "allowance": "การยินยอม",
-        "sats_used": "ซาโตชิที่ใช้ไป",
         "no_transactions": "ยังไม่มีธุรกรรมบน <0>{{name}}</0>"
       },
       "default_view": {
@@ -1174,12 +1172,10 @@
       }
     },
     "publishers_table": {
-      "payments": "การชำระเงิน",
-      "used": "ใช้"
+      "payments": "การชำระเงิน"
     },
     "badge": {
       "label": {
-        "active": "ใช้งานอยู่",
         "auth": "เข้าสู่ระบบ",
         "imported": "นำเข้า"
       }
