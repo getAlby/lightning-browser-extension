@@ -29,17 +29,17 @@ export default function MnemonicInputs({
   }
 
   return (
-    <div className="border border-gray-200 rounded-lg p-8 flex flex-col gap-8 items-center justify-center max-w-[580px] self-center">
+    <div className="border border-gray-200 dark:border-neutral-700 rounded-lg p-6 flex flex-col gap-4 items-center justify-center">
       <h3 className="text-lg font-semibold dark:text-white">
         {t("inputs.title")}
       </h3>
-      <div className="flex flex-wrap gap-4 justify-center items-center">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-5 justify-center">
         {words.map((word, i) => {
           const isRevealed = revealedIndex === i;
           const inputId = `mnemonic-word-${i}`;
           return (
-            <div key={i} className="flex justify-center items-center">
-              <span className="w-7 text-gray-500 slashed-zero dark:text-neutral-500 ml-1 -mr-1">
+            <div key={i} className="flex justify-center items-center gap-2">
+              <span className="text-gray-600 dark:text-neutral-400 text-right">
                 {i + 1}.
               </span>
               <div className="relative">
@@ -50,7 +50,7 @@ export default function MnemonicInputs({
                   onBlur={() => setRevealedIndex(undefined)}
                   readOnly={readOnly}
                   block={false}
-                  className="w-20 text-center"
+                  className="w-32 text-center"
                   list={readOnly ? undefined : "wordlist"}
                   value={isRevealed ? word : word.length ? "•••••" : ""}
                   onChange={(e) => {

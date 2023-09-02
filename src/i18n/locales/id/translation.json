@@ -385,7 +385,7 @@
         },
         "mnemonic": {
           "saved": "Kunci Master terenkripsi & tersimpan dengan sukses.",
-          "existing_nostr_key_notice": "⚠️ Akun ini sudah memiliki kunci privat nostr dan tidak akan diambil dari Master Key. Kamu bisa mengatur kunci Nostr pada pengaturan akun.",
+          "existing_nostr_key_notice": "ℹ️ Akun ini sudah memiliki kunci privat nostr dan tidak akan diambil dari Master Key. Kamu bisa mengatur kunci Nostr pada pengaturan akun.",
           "generate": {
             "title": "Buat Master Key baru",
             "description": "Master Key membuat kamu dapat berinteraksi dengan berbagai protokol seperti, Nostr, layer utama dari Bitcoin atau LNURL-Auth.",

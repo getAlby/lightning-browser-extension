@@ -1,7 +1,7 @@
 import db from "~/extension/background-script/db";
 import { allowanceFixture } from "~/fixtures/allowances";
 import { paymentsFixture } from "~/fixtures/payment";
-import type { MessageAllowanceGetById, DbAllowance, DbPayment } from "~/types";
+import type { DbAllowance, DbPayment, MessageAllowanceGetById } from "~/types";
 
 import getAllowanceById from "../getById";
 
@@ -36,7 +36,7 @@ describe("get allowance by id", () => {
         payments: mockPayments.reverse(),
         paymentsAmount: 3000,
         paymentsCount: 2,
-        percentage: "0",
+        percentage: 0,
         usedBudget: 0,
       },
     });
