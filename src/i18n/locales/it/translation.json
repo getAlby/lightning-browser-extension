@@ -279,8 +279,6 @@
       "recent_transactions": "Transazioni recenti",
       "allowance_view": {
         "recent_transactions": "Transazioni recenti",
-        "allowance": "Margine",
-        "sats_used": "sats utilizzati",
         "no_transactions": "Non ci sono ancora transazioni su <0>{{name}}</0>."
       },
       "default_view": {
@@ -786,12 +784,10 @@
       }
     },
     "publishers_table": {
-      "payments": "pagamenti",
-      "used": "usati"
+      "payments": "pagamenti"
     },
     "badge": {
       "label": {
-        "active": "ATTIVO",
         "auth": "LOGIN"
       }
     }
