@@ -452,7 +452,6 @@
           "private_key": {
             "title": "Verwalte deinen privaten Nostr-Schlüssel",
             "subtitle": "Füge deinen eigenen privaten Schlüssel ein oder erzeuge einen neuen. <0>Mehr erfahren\"</0>",
-            "warning": "",
             "success": "Der private Schlüssel von Nostr wurde erfolgreich verschlüsselt und gespeichert.",
             "successfully_removed": "Der private Schlüssel von Nostr wurde erfolgreich entfernt.",
             "label": "Nostr Privater Schlüssel",
@@ -514,7 +513,6 @@
         "remove": {
           "title": "Dieses Konto entfernen",
           "subtitle": "Entfernt alle Zulagen, Zahlungsdaten und Schlüssel, die mit diesem Konto verbunden sind.",
-          "confirm": "",
           "error": "Der eingegebene Kontoname stimmte nicht überein."
         },
         "actions": {
@@ -564,7 +562,6 @@
         "remove_secretkey": {
           "title": "Hauptschlüssel entfernen",
           "subtitle": "Entfernt den Hauptschlüssel von diesem Konto.",
-          "confirm": "",
           "success": "Der Hauptschlüssel wurde erfolgreich entfernt."
         },
         "network": {

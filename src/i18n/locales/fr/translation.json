@@ -341,7 +341,6 @@
           "private_key": {
             "title": "Gérez votre clé",
             "subtitle": "Collez votre clé privée ou générez-en une nouvelle. Assurez-vous de sauvegarder votre clé privée avant d'en générer une nouvelle. <0>En savoir plus »</0>",
-            "warning": "",
             "success": "Clé privée cryptée et enregistrée avec succès.",
             "successfully_removed": "Clé privée supprimée avec succès.",
             "label": "Clé privée",
@@ -368,8 +367,7 @@
         },
         "remove": {
           "title": "Supprimer ce compte",
-          "subtitle": "Tous les quotas liés seront supprimés. S'il vous plaît soyez certain.",
-          "confirm": ""
+          "subtitle": "Tous les quotas liés seront supprimés. S'il vous plaît soyez certain."
         },
         "actions": {
           "remove_account": "Supprimer le compte",

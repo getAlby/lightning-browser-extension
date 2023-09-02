@@ -339,7 +339,6 @@
             "title": "Hantera dina Nostr privata nyckel",
             "successfully_removed": "Nostr privat nyckel har tagits bort.",
             "label": "Nostr Privat Nyckel",
-            "warning": "",
             "subtitle": "Klistra in din nostr privata nyckel eller skapa en ny. <0>Läs mer »</0>",
             "success": "Nostr privat nyckel krypterad och sparad.",
             "failed_to_remove": "Det angivna kontonamnet matchade inte, din gamla Nostr privata nyckel har återställts."
@@ -389,7 +388,6 @@
         "remove": {
           "title": "Ta bort detta konto",
           "subtitle": "Tar bort alla traktamenten, betalningsdata och nycklar som är kopplade till detta konto.",
-          "confirm": "",
           "error": "Det angivna kontonamnet matchade inte."
         },
         "title1": "Konto inställningar",
@@ -454,7 +452,6 @@
         "remove_secretkey": {
           "title": "Ta bort huvudnyckeln",
           "subtitle": "Tar bort huvudnyckeln från det här kontot.",
-          "confirm": "",
           "success": "Masternyckeln har tagits bort."
         },
         "no_mnemonic_hint": "💡 Du har ingen huvudnyckel än. <0>Klicka här</0></div> för att skapa din huvudnyckel och låsa upp dessa inställningar.",

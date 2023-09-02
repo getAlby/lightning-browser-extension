@@ -354,7 +354,6 @@
           "private_key": {
             "title": "Zarządzaj swoim kluczem",
             "subtitle": "Wklej swój klucz prywatny lub wygeneruj nowy. <0>Dowiedz się więcej »</o>",
-            "warning": "",
             "success": "Klucz prywatny został zaszyfrowany i zapisany.",
             "successfully_removed": "Klucz prywatny usunięty.",
             "label": "Klucz prywatny",
@@ -381,8 +380,7 @@
         },
         "remove": {
           "title": "Usuń konto",
-          "subtitle": "Wszystkie powiązane limity zostaną usunięte. Proszę się upewnić.",
-          "confirm": ""
+          "subtitle": "Wszystkie powiązane limity zostaną usunięte. Proszę się upewnić."
         },
         "actions": {
           "remove_account": "Usuń konto",

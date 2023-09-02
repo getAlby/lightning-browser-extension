@@ -345,7 +345,6 @@
           "private_key": {
             "subtitle": "粘贴你的 Nostr 私钥或生成一个新的。<0>了解更多»</0>",
             "title": "管理你的 Nostr 密钥",
-            "warning": "",
             "success": "Nostr 私钥已加密并成功保存。",
             "successfully_removed": "Nostr 私钥已成功移除。",
             "label": "Nostr 私钥",
@@ -399,7 +398,6 @@
         "remove": {
           "title": "删除此帐户",
           "subtitle": "将删除与此帐户关联的所有限额、付款数据和密钥。",
-          "confirm": "",
           "error": "输入的帐户名称不匹配。"
         },
         "actions": {
@@ -452,7 +450,6 @@
           }
         },
         "remove_secretkey": {
-          "confirm": "",
           "success": "已成功移除主密钥。",
           "title": "移除主密钥",
           "subtitle": "将主密钥从该帐户移除。"

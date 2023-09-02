@@ -459,7 +459,6 @@
           },
           "private_key": {
             "subtitle": "Tempel kunci privat nostr atau buat baru. <0>Pelajari lebih lanjut »</0>",
-            "warning": "",
             "failed_to_remove": "Nama akun yang dimasukkan tidak sama, kunci privat Nostr yang dahulu telah dikembalikan.",
             "successfully_removed": "Kunci privat Nostr terhapus dengan sukses.",
             "label": "Kunci privat Nostr",
@@ -489,13 +488,11 @@
         "remove": {
           "title": "Hapus Akun Ini",
           "subtitle": "Hapus semua allowances, data pembayaran, dan kunci-kunci yang terasosiasi dengan akun ini.",
-          "error": "Nama akun yang dimasukkan tidak sama.",
-          "confirm": ""
+          "error": "Nama akun yang dimasukkan tidak sama."
         },
         "remove_secretkey": {
           "title": "Hapus Master Key",
           "subtitle": "Hapus Master Key dari akun ini.",
-          "confirm": "",
           "success": "Master Key telah terhapus."
         },
         "actions": {

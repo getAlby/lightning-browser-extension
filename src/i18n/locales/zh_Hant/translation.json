@@ -370,7 +370,6 @@
           "private_key": {
             "title": "管理你的 Nostr 私鑰",
             "subtitle": "粘貼你的 Nostr 私鑰或生成一個新私鑰。<0>瞭解更多 »</0>",
-            "warning": "",
             "success": "Nostr 私鑰已加密並成功保存。",
             "successfully_removed": "Nostr 私鑰已成功刪除。",
             "label": "Nostr 私鑰",
@@ -431,7 +430,6 @@
         "remove": {
           "title": "刪除此帳戶",
           "subtitle": "所有與此帳號關聯的限額、支付信息和密鑰都將被清除。",
-          "confirm": "",
           "error": "輸入的帳戶名稱不匹配。"
         },
         "actions": {
@@ -481,8 +479,7 @@
         "remove_secretkey": {
           "subtitle": "將主密鑰從該帳戶移除。",
           "title": "移除主密鑰",
-          "success": "已成功移除主密鑰。",
-          "confirm": ""
+          "success": "已成功移除主密鑰。"
         },
         "no_mnemonic_hint": "💡你還沒有主密鑰。<0>點擊此處</0></div>來生成你的主密鑰並解鎖這些設置。",
         "network": {

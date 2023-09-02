@@ -141,7 +141,6 @@
             "label": "Nostr Private Key",
             "title": "จัดการ Nostr private key ของคุณ",
             "subtitle": "วาง Nostr private key ของคุณ หรือ สร้างอันใหม่ <0>Learn more »</0>",
-            "warning": "",
             "success": "Nostr private key ถูกเข้ารหัส และ บันทึกเรียบร้อยแล้ว",
             "failed_to_remove": "ชื่อบัญชีที่ป้อนไม่ตรงกัน Nostr private key เก่าของคุณได้รับการคืนค่าแล้ว",
             "successfully_removed": "ลบ Nostr private key เรียบร้อยแล้ว"
@@ -170,13 +169,11 @@
         "remove": {
           "title": "ลบบัญชีนี้",
           "subtitle": "ลบการอนุญาต ข้อมูลการชำระเงิน และข้อมูลประจำตัวที่เชื่อมโยงกับบัญชีนี้ทั้งหมด",
-          "confirm": "",
           "error": "ชื่อบัญชีที่ป้อนไม่ตรงกัน"
         },
         "remove_secretkey": {
           "title": "ลบ Master Key",
           "subtitle": "ลบ Master Key ออกจากบัญชีนี้",
-          "confirm": "",
           "success": "การลบ Master Key เสร็จสมบูรณ์"
         },
         "actions": {

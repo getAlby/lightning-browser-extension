@@ -329,7 +329,6 @@
             "title": "Gerenciar sua chave privada Nostr",
             "successfully_removed": "Chave privada Nostr removida com sucesso.",
             "label": "Chave privada Nostr",
-            "warning": "",
             "subtitle": "Cole sua chave privada Nostr ou gere uma nova. <0>Saiba mais »</0>",
             "success": "Chave privada Nostr criptografada e salva com sucesso.",
             "failed_to_remove": "O nome da conta inserido não está correto, sua chave privada Nostr antiga foi restaurada."
@@ -388,7 +387,6 @@
           }
         },
         "remove": {
-          "confirm": "",
           "title": "Remover esta conta",
           "error": "O nome da conta inserido não corresponde.",
           "subtitle": "Remove todos os limites de gastos, dados de pagamento e chaves associadas à esta conta."
@@ -445,7 +443,6 @@
         },
         "remove_secretkey": {
           "title": "Remover chave mestra",
-          "confirm": "",
           "success": "Chave mestra removida com sucesso.",
           "subtitle": "Remove a chave mestra desta conta."
         },
