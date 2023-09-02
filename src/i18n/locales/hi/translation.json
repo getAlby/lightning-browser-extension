@@ -750,12 +750,10 @@
       }
     },
     "publishers_table": {
-      "payments": "भुगतान",
-      "used": "इस्तेमाल किया"
+      "payments": "भुगतान"
     },
     "badge": {
       "label": {
-        "active": "ACTIVE",
         "auth": "LOGIN"
       }
     }
