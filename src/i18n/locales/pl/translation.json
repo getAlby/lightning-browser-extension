@@ -321,8 +321,6 @@
       "recent_transactions": "Ostatnie transakcje",
       "allowance_view": {
         "recent_transactions": "Ostatnie transakcje",
-        "allowance": "Limity",
-        "sats_used": "wydanych satoshi",
         "no_transactions": "Jeszcze nie ma transakcji na koncie <0>{{name}}</0>."
       },
       "default_view": {
@@ -840,12 +838,10 @@
       }
     },
     "publishers_table": {
-      "payments": "płatności",
-      "used": "użyto"
+      "payments": "płatności"
     },
     "badge": {
       "label": {
-        "active": "AKTYWNA",
         "auth": "LOGOWANIE"
       }
     },
