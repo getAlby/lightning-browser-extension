@@ -303,8 +303,6 @@
       "recent_transactions": "Senaste Transaktioner",
       "allowance_view": {
         "recent_transactions": "Senaste Transaktioner",
-        "allowance": "Beloppsgräns",
-        "sats_used": "spenderade sats",
         "no_transactions": "Inga transaktioner för <0>{{name}}</0> ännu."
       },
       "default_view": {
@@ -593,7 +591,8 @@
       "title": "Skicka",
       "input": {
         "label": "Mottagare",
-        "hint": "Faktura, Lightning-adress eller LNURL"
+        "hint": "Faktura, Lightning-adress eller LNURL",
+        "hint_with_bitcoin_address": "Faktura, Lightning-adress , LNURL eller bitcoin adress"
       }
     },
     "lnurlpay": {
@@ -901,6 +900,33 @@
       "allow_sign": "Tillåt {{host}} att signera:",
       "block_and_ignore": "Blockera och ignorera {{host}}",
       "block_added": "Lade till {{host}} till blockeringslistan, ladda om webbplatsen."
+    },
+    "send_to_bitcoin_address": {
+      "service_unavailable": "Tjänsten är för tillfällig inte tillgänglig, försök igen om några minuter.",
+      "amount": {
+        "label": "Belopp (sats)"
+      },
+      "title": "Skicka till bitcoin-adress",
+      "recipient": {
+        "label": "Mottagare"
+      },
+      "network_fee": {
+        "label": "Nätverksavgift"
+      },
+      "service_fee": {
+        "label": "Serviceavgift"
+      },
+      "total": {
+        "label": "Total"
+      },
+      "total_fee": {
+        "label": "Avgift"
+      },
+      "provider": {
+        "label": "Byt leverantör"
+      },
+      "view_on_explorer": "Visa på mempool explorer",
+      "time_estimate": "ℹ️ Transaktioner kommer vanligtvis inom 10-30 minuter."
     }
   },
   "common": {
@@ -947,7 +973,8 @@
       "import": "Importera",
       "copy_clipboard": "Kopiera till urklipp",
       "paste": "Klistra in",
-      "paste_clipboard": "Klistra in från urklipp"
+      "paste_clipboard": "Klistra in från urklipp",
+      "review": "Recension"
     },
     "errors": {
       "connection_failed": "Anslutning misslyckades",
@@ -1060,12 +1087,10 @@
       }
     },
     "publishers_table": {
-      "payments": "betalningar",
-      "used": "utnyttjat"
+      "payments": "betalningar"
     },
     "badge": {
       "label": {
-        "active": "AKTIV",
         "auth": "LOGGA IN",
         "imported": "IMPORTERAD"
       }
