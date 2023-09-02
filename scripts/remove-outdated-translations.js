@@ -9,7 +9,7 @@ if (!keyToUpdate) {
   process.exit(1);
 }
 
-function updateNestedKey(obj, nestedKey) {
+function deleteKey(obj, nestedKey) {
   const keys = nestedKey.split(".");
   let currentObj = obj;
   let foundAndUpdated = false;
@@ -18,7 +18,7 @@ function updateNestedKey(obj, nestedKey) {
     const key = keys[i];
 
     if (i === keys.length - 1 && currentObj.hasOwnProperty(key)) {
-      currentObj[key] = "";
+      delete currentObj[key];
       foundAndUpdated = true;
     } else if (
       currentObj.hasOwnProperty(key) &&
@@ -56,7 +56,7 @@ glob(filesPattern, (err, files) => {
         .split(path.sep + "locales" + path.sep)[1]
         .split(path.sep)[0];
 
-      if (updateNestedKey(jsonData, keyToUpdate)) {
+      if (deleteKey(jsonData, keyToUpdate)) {
         fs.writeFileSync(filePath, JSON.stringify(jsonData, null, 2));
         console.log(`✅ ${language}`);
       }

@@ -9,7 +9,8 @@ on:
       - synchronize
 
 jobs:
-  check_translation_changes:
+  check_source_translation_file:
+    name: Check source translation file for changes
     runs-on: ubuntu-latest
 
     steps:
@@ -20,7 +21,7 @@ jobs:
 
       - uses: actions/setup-node@v3
 
-      - name: Check for Translation Changes
+      - name: Check source translation file for changes
         run: |
           file_path="src/i18n/locales/en/translation.json"
           branch_name=${{ github.base_ref }}
