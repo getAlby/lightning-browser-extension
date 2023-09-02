@@ -295,8 +295,6 @@
       "recent_transactions": "Transações recentes",
       "allowance_view": {
         "recent_transactions": "Transações recentes",
-        "allowance": "Limite de gastos",
-        "sats_used": "sats usados",
         "no_transactions": "Sem transações em <0>{{name}}</0>."
       },
       "default_view": {
@@ -585,7 +583,7 @@
       "title": "Enviar",
       "input": {
         "label": "Dados para pagamento",
-        "hint": "Fatura, Endereço Relâmpago ou LNURL"
+        "hint": "Fatura, Endereço Relâmpago, LNURL"
       }
     },
     "lnurlpay": {
@@ -961,7 +959,7 @@
   },
   "components": {
     "allowance_menu": {
-      "confirm_delete": "Tem certeza de que deseja remover este site?",
+      "confirm_delete": "Tem certeza de que deseja desconectar este site?",
       "hint": "O limite atual será redefinido",
       "new_budget": {
         "label": "Novo limite"
@@ -1034,12 +1032,10 @@
       }
     },
     "publishers_table": {
-      "payments": "pagamentos",
-      "used": "usados"
+      "payments": "pagamentos"
     },
     "badge": {
       "label": {
-        "active": "LIMITE DE GASTOS",
         "auth": "LOGIN RELÂMPAGO",
         "imported": "IMPORTADA"
       }
