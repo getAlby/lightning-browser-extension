@@ -308,8 +308,6 @@
       "recent_transactions": "Tranzactii recente",
       "allowance_view": {
         "recent_transactions": "Tranzactii recente",
-        "allowance": "Permisiuni",
-        "sats_used": "sats utilizati",
         "no_transactions": "Nicio tranzactie pentru <0>{{nume}}</0> inca."
       },
       "default_view": {
@@ -786,12 +784,10 @@
       }
     },
     "publishers_table": {
-      "payments": "",
-      "used": ""
+      "payments": ""
     },
     "badge": {
       "label": {
-        "active": "",
         "auth": ""
       }
     }
