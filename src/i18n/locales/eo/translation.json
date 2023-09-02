@@ -253,8 +253,6 @@
       "recent_transactions": "",
       "allowance_view": {
         "recent_transactions": "",
-        "allowance": "",
-        "sats_used": "satoŝioj uzitaj",
         "no_transactions": ""
       },
       "default_view": {
@@ -633,12 +631,10 @@
       }
     },
     "publishers_table": {
-      "payments": "pagoj",
-      "used": "uzita"
+      "payments": "pagoj"
     },
     "badge": {
       "label": {
-        "active": "AKTIVA",
         "auth": "SALUTI"
       }
     }
