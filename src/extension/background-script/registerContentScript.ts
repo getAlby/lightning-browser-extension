@@ -7,6 +7,7 @@ export const registerInPageContentScript = async () => {
         js: ["js/inpageScript.bundle.js"],
         runAt: "document_start",
         world: "MAIN",
+        allFrames: true,
       },
     ]);
   } catch (err) {
