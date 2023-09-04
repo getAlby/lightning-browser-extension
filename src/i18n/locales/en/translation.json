@@ -936,6 +936,15 @@
         "incoming": "Incoming transactions for this account"
       },
       "list_empty": "No transactions available yet."
+    },
+    "onboard": {
+      "title": "Setup your keys",
+      "request1": "This website requires key interaction",
+      "request2": "You haven't setup your keys yet",
+      "request3": "Setup is quick and easy",
+      "actions": {
+        "start_setup": "Start Setup"
+      }
     }
   },
   "common": {

@@ -1,5 +1,6 @@
 import browser from "webextension-polyfill";
 
+import api from "~/common/lib/api";
 import getOriginData from "./originData";
 import shouldInject from "./shouldInject";
 
@@ -15,6 +16,7 @@ const disabledCalls = ["liquid/enable"];
 
 let isEnabled = false; // store if liquid is enabled for this content page
 let isRejected = false; // store if the liquid enable call failed. if so we do not prompt again
+let account = null;
 
 const SCOPE = "liquid";
 
@@ -27,7 +29,7 @@ async function init() {
   // message listener to listen to inpage liquid calls
   // those calls get passed on to the background script
   // (the inpage script can not do that directly, but only the inpage script can make liquid available to the page)
-  window.addEventListener("message", (ev) => {
+  window.addEventListener("message", async (ev) => {
     // Only accept messages from the current window
     if (
       ev.source !== window ||
@@ -65,6 +67,14 @@ async function init() {
         prompt: true,
         origin: getOriginData(),
       };
+
+      // Overrides the enable action so the user can go through onboarding to setup their keys
+      if (!account) {
+        account = await api.getAccount();
+        if (!account.hasMnemonic) {
+          messageWithOrigin.action = `public/liquid/onboard`;
+        }
+      }
 
       const replyFunction = (response) => {
         if (ev.data.action === `${SCOPE}/enable`) {
