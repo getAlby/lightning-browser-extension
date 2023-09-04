@@ -16,7 +16,7 @@ import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
 import { OriginData } from "~/types";
 
-export default function ProviderOnboardingPrompt() {
+export default function Onboard() {
   const navState = useNavigationState();
   const origin = navState.origin as OriginData;
   const action = navState.action as string;
@@ -24,7 +24,7 @@ export default function ProviderOnboardingPrompt() {
   const { account: authAccount } = useAccount();
 
   const { t } = useTranslation("translation", {
-    keyPrefix: "provider_onboard",
+    keyPrefix: "onboard",
   });
 
   function openOptions(path: string) {

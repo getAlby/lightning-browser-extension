@@ -23,7 +23,7 @@ import AlbyLogo from "~/app/components/AlbyLogo";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
 import BitcoinConfirmGetAddress from "~/app/screens/Bitcoin/ConfirmGetAddress";
-import ProviderOnboardingPrompt from "~/app/screens/ProviderOnboardingPrompt";
+import Onboard from "~/app/screens/Onboard/Onboard";
 import type { NavigationState, OriginData } from "~/types";
 
 // Parse out the parameters from the querystring.
@@ -127,18 +127,9 @@ function Prompt() {
             <Route path="confirmKeysend" element={<ConfirmKeysend />} />
             <Route path="confirmSignMessage" element={<ConfirmSignMessage />} />
             <Route path="confirmAddAccount" element={<ConfirmAddAccount />} />
-            <Route
-              path="public/nostr/providerOnboardingPrompt"
-              element={<ProviderOnboardingPrompt />}
-            />
-            <Route
-              path="public/liquid/providerOnboardingPrompt"
-              element={<ProviderOnboardingPrompt />}
-            />
-            <Route
-              path="public/webbtc/providerOnboardingPrompt"
-              element={<ProviderOnboardingPrompt />}
-            />
+            <Route path="public/nostr/onboard" element={<Onboard />} />
+            <Route path="public/liquid/onboard" element={<Onboard />} />
+            <Route path="public/webbtc/onboard" element={<Onboard />} />
             <Route
               path="public/confirmRequestPermission"
               element={<ConfirmRequestPermission />}

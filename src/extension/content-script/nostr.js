@@ -87,8 +87,7 @@ async function init() {
       // it overrides the enable action so the user can go through onboarding to setup their nostr key.
       if (!account.nostrEnabled) {
         // Override the action as no keys available yet
-        messageWithOrigin.action =
-          ev.data.action = `public/nostr/providerOnboardingPrompt`;
+        messageWithOrigin.action = ev.data.action = `public/nostr/onboard`;
       }
 
       const replyFunction = (response) => {

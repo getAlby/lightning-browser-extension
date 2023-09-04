@@ -69,7 +69,7 @@ async function init() {
       const account = await api.getAccount();
       // it overrides the enable action so the user can go through onboarding to setup their master key.
       if (!account.hasMnemonic) {
-        messageWithOrigin.action = `public/webbtc/providerOnboardingPrompt`;
+        messageWithOrigin.action = `public/webbtc/onboard`;
       }
 
       const replyFunction = (response) => {

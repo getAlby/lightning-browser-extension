@@ -937,7 +937,7 @@
       },
       "list_empty": "No transactions available yet."
     },
-    "provider_onboard": {
+    "onboard": {
       "title": "Setup your Master Key to continue",
       "request1": "This website requires key interaction",
       "request2": "You haven't setup your keys yet",

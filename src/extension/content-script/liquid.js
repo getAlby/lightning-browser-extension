@@ -69,7 +69,7 @@ async function init() {
       const account = await api.getAccount();
       // it overrides the enable action so the user can go through onboarding to setup their master key.
       if (!account.hasMnemonic) {
-        messageWithOrigin.action = `public/liquid/providerOnboardingPrompt`;
+        messageWithOrigin.action = `public/liquid/onboard`;
       }
 
       const replyFunction = (response) => {
