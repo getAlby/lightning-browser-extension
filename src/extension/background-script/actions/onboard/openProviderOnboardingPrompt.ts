@@ -2,7 +2,7 @@ import utils from "~/common/lib/utils";
 import { getHostFromSender } from "~/common/utils/helpers";
 import type { MessageAllowanceEnable, Sender } from "~/types";
 
-const providerOnboard = async (
+const openProviderOnboardingPrompt = async (
   message: MessageAllowanceEnable,
   sender: Sender
 ) => {
@@ -19,4 +19,4 @@ const providerOnboard = async (
   }
 };
 
-export default providerOnboard;
+export default openProviderOnboardingPrompt;

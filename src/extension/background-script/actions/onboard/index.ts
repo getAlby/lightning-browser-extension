@@ -1,3 +1,3 @@
-import providerOnboard from "~/extension/background-script/actions/onboard/providerOnboard";
+import openProviderOnboardingPrompt from "~/extension/background-script/actions/onboard/openProviderOnboardingPrompt";
 
-export { providerOnboard };
+export { openProviderOnboardingPrompt };

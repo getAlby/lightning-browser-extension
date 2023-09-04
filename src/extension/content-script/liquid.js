@@ -25,12 +25,10 @@ async function init() {
     return;
   }
 
-  const account = await api.getAccount();
-
   // message listener to listen to inpage liquid calls
   // those calls get passed on to the background script
   // (the inpage script can not do that directly, but only the inpage script can make liquid available to the page)
-  window.addEventListener("message", (ev) => {
+  window.addEventListener("message", async (ev) => {
     // Only accept messages from the current window
     if (
       ev.source !== window ||
@@ -68,9 +66,10 @@ async function init() {
         prompt: true,
         origin: getOriginData(),
       };
-
+      const account = await api.getAccount();
+      // it overrides the enable action so the user can go through onboarding to setup their master key.
       if (!account.hasMnemonic) {
-        messageWithOrigin.action = `public/liquid/providerOnboard`;
+        messageWithOrigin.action = `public/liquid/providerOnboardingPrompt`;
       }
 
       const replyFunction = (response) => {

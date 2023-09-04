@@ -16,7 +16,7 @@ import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
 import { OriginData } from "~/types";
 
-export default function ProviderOnboard() {
+export default function ProviderOnboardingPrompt() {
   const navState = useNavigationState();
   const origin = navState.origin as OriginData;
   const action = navState.action as string;
@@ -33,7 +33,10 @@ export default function ProviderOnboard() {
 
   async function keySetup() {
     const account = await api.getAccount(authAccount?.id);
-    if (action === "public/nostr/providerOnboard" && account.hasMnemonic) {
+    if (
+      action === "public/nostr/providerOnboardingPrompt" &&
+      account.hasMnemonic
+    ) {
       openOptions(`accounts/${authAccount?.id}/nostr/settings`);
     } else {
       openOptions(`accounts/${authAccount?.id}/secret-key/new`);

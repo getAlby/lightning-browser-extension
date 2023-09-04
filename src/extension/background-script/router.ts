@@ -84,7 +84,7 @@ const routes = {
   // Public calls that are accessible from the inpage script (through the content script)
   public: {
     webbtc: {
-      providerOnboard: onboard.providerOnboard,
+      providerOnboardingPrompt: onboard.openProviderOnboardingPrompt,
       enable: allowances.enable,
       getInfo: webbtc.getInfo,
       getAddressOrPrompt: webbtc.getAddressOrPrompt,
@@ -105,13 +105,13 @@ const routes = {
       request: ln.request,
     },
     liquid: {
-      providerOnboard: onboard.providerOnboard,
+      providerOnboardingPrompt: onboard.openProviderOnboardingPrompt,
       enable: allowances.enable,
       getAddressOrPrompt: liquid.getAddressOrPrompt,
       signPsetWithPrompt: liquid.signPsetWithPrompt,
     },
     nostr: {
-      providerOnboard: onboard.providerOnboard,
+      providerOnboardingPrompt: onboard.openProviderOnboardingPrompt,
       enable: allowances.enable,
       getPublicKeyOrPrompt: nostr.getPublicKeyOrPrompt,
       signEventOrPrompt: nostr.signEventOrPrompt,

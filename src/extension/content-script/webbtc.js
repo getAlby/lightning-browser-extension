@@ -24,12 +24,10 @@ async function init() {
     return;
   }
 
-  const account = await api.getAccount();
-
   // message listener to listen to inpage webbtc calls
   // those calls get passed on to the background script
   // (the inpage script can not do that directly, but only the inpage script can make webln available to the page)
-  window.addEventListener("message", (ev) => {
+  window.addEventListener("message", async (ev) => {
     // Only accept messages from the current window
     if (
       ev.source !== window ||
@@ -57,10 +55,6 @@ async function init() {
         return;
       }
 
-      if (!account.hasMnemonic) {
-        messageWithOrigin.action = `public/webbtc/providerOnboard`;
-      }
-
       const messageWithOrigin = {
         // every call call is scoped in `public`
         // this prevents websites from accessing internal actions
@@ -71,6 +65,12 @@ async function init() {
         prompt: true,
         origin: getOriginData(),
       };
+
+      const account = await api.getAccount();
+      // it overrides the enable action so the user can go through onboarding to setup their master key.
+      if (!account.hasMnemonic) {
+        messageWithOrigin.action = `public/webbtc/providerOnboardingPrompt`;
+      }
 
       const replyFunction = (response) => {
         if (ev.data.action === `${SCOPE}/enable`) {
