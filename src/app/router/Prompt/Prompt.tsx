@@ -23,7 +23,7 @@ import AlbyLogo from "~/app/components/AlbyLogo";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
 import BitcoinConfirmGetAddress from "~/app/screens/Bitcoin/ConfirmGetAddress";
-import Onboard from "~/app/screens/Onboard/Onboard";
+import Onboard from "~/app/screens/Onboard/Prompt";
 import type { NavigationState, OriginData } from "~/types";
 
 // Parse out the parameters from the querystring.

@@ -2,7 +2,7 @@ import utils from "~/common/lib/utils";
 import { getHostFromSender } from "~/common/utils/helpers";
 import type { MessageAllowanceEnable, Sender } from "~/types";
 
-const onboard = async (message: MessageAllowanceEnable, sender: Sender) => {
+const prompt = async (message: MessageAllowanceEnable, sender: Sender) => {
   const host = getHostFromSender(sender);
   if (!host) return;
 
@@ -16,4 +16,4 @@ const onboard = async (message: MessageAllowanceEnable, sender: Sender) => {
   }
 };
 
-export default onboard;
+export default prompt;
