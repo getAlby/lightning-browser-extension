@@ -329,7 +329,6 @@
             "title": "Gerenciar sua chave privada Nostr",
             "successfully_removed": "Chave privada Nostr removida com sucesso.",
             "label": "Chave privada Nostr",
-            "warning": "Digite o nome da conta para confirmar a exclusão de sua chave privada Nostr:",
             "subtitle": "Cole sua chave privada Nostr ou gere uma nova. <0>Saiba mais »</0>",
             "success": "Chave privada Nostr criptografada e salva com sucesso.",
             "failed_to_remove": "O nome da conta inserido não está correto, sua chave privada Nostr antiga foi restaurada."
@@ -388,7 +387,6 @@
           }
         },
         "remove": {
-          "confirm": "Digite o nome da conta para confirmar a exclusão.\n\n ⚠️ Ao prosseguir com a exclusão, todas as chaves associadas a esta conta (chave mestra, Nostr, etc) serão perdidas. Certifique-se de fazer o backup antes de continuar, caso precise restaurar a conta no futuro.",
           "title": "Remover esta conta",
           "error": "O nome da conta inserido não corresponde.",
           "subtitle": "Remove todos os limites de gastos, dados de pagamento e chaves associadas à esta conta."
@@ -445,7 +443,6 @@
         },
         "remove_secretkey": {
           "title": "Remover chave mestra",
-          "confirm": "Digite o nome da conta para confirmar a exclusão de sua chave mestra.",
           "success": "Chave mestra removida com sucesso.",
           "subtitle": "Remove a chave mestra desta conta."
         },
@@ -717,14 +714,14 @@
       "allow_sign_event": "Permitir {{host}} assinar {{kind}}:",
       "hide_details": "Ocultar detalhes",
       "kinds": {
-        "unknown": "evento nostr do tipo {{kind}}",
         "0": "metadados",
-        "5": "exclusão de evento",
-        "4": "mensagens diretas criptografadas",
-        "9735": "zap",
-        "3": "contatos",
         "1": "nota de texto curta",
-        "7": "reação"
+        "3": "contatos",
+        "4": "mensagens diretas criptografadas",
+        "5": "exclusão de evento",
+        "7": "reação",
+        "9735": "zap",
+        "unknown": "evento nostr do tipo {{kind}}"
       },
       "no_content": "(Sem conteúdo)"
     },
