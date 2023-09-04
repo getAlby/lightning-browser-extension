@@ -16,6 +16,7 @@ const disabledCalls = ["liquid/enable"];
 
 let isEnabled = false; // store if liquid is enabled for this content page
 let isRejected = false; // store if the liquid enable call failed. if so we do not prompt again
+let account = null;
 
 const SCOPE = "liquid";
 
@@ -66,10 +67,13 @@ async function init() {
         prompt: true,
         origin: getOriginData(),
       };
-      const account = await api.getAccount();
-      // it overrides the enable action so the user can go through onboarding to setup their master key.
-      if (!account.hasMnemonic) {
-        messageWithOrigin.action = `public/liquid/onboard`;
+
+      // Overrides the enable action so the user can go through onboarding to setup their keys
+      if (!account) {
+        account = await api.getAccount();
+        if (!account.hasMnemonic) {
+          messageWithOrigin.action = `public/liquid/onboard`;
+        }
       }
 
       const replyFunction = (response) => {
