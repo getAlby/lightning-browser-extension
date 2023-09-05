@@ -92,7 +92,7 @@ function LNURLRedeem() {
               endAdornment={<QrcodeAdornment route="lnurlRedeem" />}
             />
           </div>
-          <div className="my-4">
+          <div className="mt-4">
             <Button
               type="submit"
               label={t("actions.withdraw")}

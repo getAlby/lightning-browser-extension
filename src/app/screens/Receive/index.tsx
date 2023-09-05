@@ -73,11 +73,14 @@ function Receive() {
               <div className="bg-white dark:bg-surface-01dp border-gray-200 dark:border-neutral-700 rounded border p-4 flex flex-col justify-center items-center gap-1 text-gray-800 dark:text-neutral-200">
                 <>
                   <div className="relative flex flex-grid">
-                    <div className="w-30 h-30">
+                    <div
+                      className="w-30 h-30"
+                      onClick={() => {
+                        setLoadingLightningAddress(true);
+                      }}
+                    >
                       {loadingLightningAddress ? (
-                        <>
-                          <SkeletonLoader className="w-30 h-30 relative -top-1 " />
-                        </>
+                        <SkeletonLoader className="w-30 h-30 relative -top-1 " />
                       ) : (
                         <QRCode
                           value={`lightning:${lightningAddress}`}
@@ -104,14 +107,14 @@ function Receive() {
                     <SkeletonLoader className="w-32" />
                   ) : (
                     <a
-                      className="flex flex-row items-center cursor-pointer font-medium text-sm leading-4"
+                      className="mt-1 flex flex-row items-center cursor-pointer font-medium text-xs leading-4"
                       onClick={() => {
                         navigator.clipboard.writeText(lightningAddress);
                         toast.success(tCommon("copied"));
                       }}
                     >
                       {lightningAddress}
-                      <CopyIcon className="w-6 h-6" />
+                      <CopyIcon className="w-4 h-4" />
                     </a>
                   )}
                 </>
@@ -178,7 +181,7 @@ function IconLinkCard({
         </div>
       </div>
       <div className="flex-shrink-0 flex justify-end ">
-        <CaretRightIcon className="w-10" />
+        <CaretRightIcon className="w-8" />
       </div>
     </div>
   );

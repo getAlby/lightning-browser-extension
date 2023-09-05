@@ -156,7 +156,7 @@ function ReceiveInvoice() {
           )}
         </div>
         {paid && (
-          <div className="my-4">
+          <div className="mt-4">
             <Button
               type="submit"
               label={tCommon("actions.receive_again")}

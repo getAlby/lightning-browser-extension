@@ -198,7 +198,7 @@ function ConfirmPayment() {
                   })
             }
           />
-          <div className="my-4">
+          <div className="mt-4">
             <Button
               onClick={close}
               label={tCommon("actions.close")}
