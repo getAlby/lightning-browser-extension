@@ -4,16 +4,18 @@ import LiquidProvider from "~/extension/providers/liquid";
 import NostrProvider from "~/extension/providers/nostr";
 import WebBTCProvider from "~/extension/providers/webbtc";
 import WebLNProvider from "~/extension/providers/webln";
+import { PromiseQueue } from "../providers/promiseQueue";
 import shouldInjectInpage from "./shouldInject";
 
 function init() {
   const inject = shouldInjectInpage();
   if (!inject) return;
-  window.liquid = new LiquidProvider();
-  window.alby = new AlbyProvider();
-  window.nostr = new NostrProvider();
-  window.webbtc = new WebBTCProvider();
-  window.webln = new WebLNProvider();
+  const queue = new PromiseQueue();
+  window.liquid = new LiquidProvider(queue);
+  window.alby = new AlbyProvider(queue);
+  window.nostr = new NostrProvider(queue);
+  window.webbtc = new WebBTCProvider(queue);
+  window.webln = new WebLNProvider(queue);
   const readyEvent = new Event("webln:ready");
   window.dispatchEvent(readyEvent);
 

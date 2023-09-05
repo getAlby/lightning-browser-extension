@@ -1,8 +1,9 @@
+import { PromiseQueue } from "~/extension/providers/promiseQueue";
 import ProviderBase from "~/extension/providers/providerBase";
 
 export default class AlbyProvider extends ProviderBase {
-  constructor() {
-    super("alby");
+  constructor(queue: PromiseQueue) {
+    super("alby", queue);
   }
 
   /**

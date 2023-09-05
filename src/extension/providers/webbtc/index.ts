@@ -1,3 +1,4 @@
+import { PromiseQueue } from "~/extension/providers/promiseQueue";
 import ProviderBase from "~/extension/providers/providerBase";
 
 declare global {
@@ -10,8 +11,8 @@ export default class WebBTCProvider extends ProviderBase {
   isEnabled: boolean;
   executing: boolean;
 
-  constructor() {
-    super("webbtc");
+  constructor(queue: PromiseQueue) {
+    super("webbtc", queue);
     this.isEnabled = false;
     this.executing = false;
   }

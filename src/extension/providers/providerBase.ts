@@ -8,10 +8,10 @@ export default class ProviderBase {
   private _queue: PromiseQueue;
   private _scope: string;
 
-  constructor(scope: string) {
+  constructor(scope: string, queue: PromiseQueue) {
     this.enabled = false;
     this._eventEmitter = new EventEmitter();
-    this._queue = new PromiseQueue();
+    this._queue = queue;
     this._scope = scope;
   }
 

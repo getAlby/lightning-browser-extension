@@ -1,3 +1,4 @@
+import { PromiseQueue } from "~/extension/providers/promiseQueue";
 import ProviderBase from "~/extension/providers/providerBase";
 
 declare global {
@@ -7,8 +8,8 @@ declare global {
 }
 
 export default class LiquidProvider extends ProviderBase {
-  constructor() {
-    super("liquid");
+  constructor(queue: PromiseQueue) {
+    super("liquid", queue);
   }
 
   async getAddress() {
