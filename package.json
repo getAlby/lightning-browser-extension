@@ -36,6 +36,7 @@
   },
   "dependencies": {
     "@bitcoin-design/bitcoin-icons-react": "^0.1.9",
+    "@bitcoinerlab/secp256k1": "^1.0.5",
     "@getalby/sdk": "^2.2.3",
     "@headlessui/react": "^1.7.16",
     "@lightninglabs/lnc-web": "^0.2.4-alpha",
@@ -51,9 +52,9 @@
     "bitcoinjs-lib": "^6.1.0",
     "bolt11": "^1.4.1",
     "crypto-js": "^4.1.1",
-    "ecpair": "^2.1.0",
     "dayjs": "^1.11.9",
     "dexie": "^3.2.4",
+    "ecpair": "^2.1.0",
     "elliptic": "^6.5.4",
     "events": "^3.3.0",
     "html5-qrcode": "^2.3.8",

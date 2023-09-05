@@ -2,6 +2,8 @@ import { hex } from "@scure/base";
 import * as btc from "@scure/btc-signer";
 import { getPsbtPreview } from "~/common/lib/psbt";
 import signPsbt from "~/extension/background-script/actions/webbtc/signPsbt";
+import Bitcoin from "~/extension/background-script/bitcoin";
+import Mnemonic from "~/extension/background-script/mnemonic";
 import state from "~/extension/background-script/state";
 import { btcFixture } from "~/fixtures/btc";
 import type { MessageSignPsbt } from "~/types";
@@ -12,12 +14,12 @@ const mockState = {
   password: passwordMock,
   currentAccountId: "1e1e8ea6-493e-480b-9855-303d37506e97",
   getAccount: () => ({
-    mnemonic: btcFixture.mnemnoic,
-  }),
-  getConnector: jest.fn(),
-  settings: {
+    mnemonic: btcFixture.mnemonic,
     bitcoinNetwork: "regtest",
-  },
+  }),
+  getMnemonic: () => new Mnemonic(btcFixture.mnemonic),
+  getBitcoin: () => new Bitcoin(new Mnemonic(btcFixture.mnemonic), "regtest"),
+  getConnector: jest.fn(),
 };
 
 state.getState = jest.fn().mockReturnValue(mockState);
