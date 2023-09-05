@@ -42,7 +42,7 @@ function ConfirmSignPsbt() {
   async function confirm() {
     try {
       setLoading(true);
-      const response = await msg.request("signPsbt", { psbt }, { origin });
+      const response = await api.bitcoin.signPsbt(psbt);
       msg.reply(response);
       setSuccessMessage(tCommon("success"));
     } catch (e) {

@@ -240,6 +240,10 @@ const getPsbtPreview = (psbt: string): Promise<PsbtPreview> =>
   msg.request("webbtc/getPsbtPreview", {
     psbt,
   });
+const signPsbt = (psbt: string): Promise<string> =>
+  msg.request("webbtc/signPsbt", {
+    psbt,
+  });
 
 export default {
   getAccount,
@@ -286,5 +290,6 @@ export default {
   },
   bitcoin: {
     getPsbtPreview,
+    signPsbt,
   },
 };

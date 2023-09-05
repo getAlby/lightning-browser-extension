@@ -12,7 +12,7 @@ const signPsbtWithPrompt = async (message: Message) => {
   try {
     const response = await utils.openPrompt({
       ...message,
-      action: "confirmSignPsbt",
+      action: "webbtc/confirmSignPsbt",
     });
     return response;
   } catch (e) {
