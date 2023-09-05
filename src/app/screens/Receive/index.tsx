@@ -73,23 +73,16 @@ function Receive() {
               <div className="bg-white dark:bg-surface-01dp border-gray-200 dark:border-neutral-700 rounded border p-4 flex flex-col justify-center items-center gap-1 text-gray-800 dark:text-neutral-200">
                 <>
                   <div className="relative flex flex-grid">
-                    <div
-                      className="w-32 h-32"
-                      onClick={() => {
-                        setLoadingLightningAddress(true);
-                      }}
-                    >
+                    <div className="w-32 h-32">
                       {loadingLightningAddress ? (
-                        <>
-                          <SkeletonLoader className="w-32 h-32 relative -top-1" />
-                        </>
+                        <SkeletonLoader className="w-32 h-32 relative -top-1" />
                       ) : (
                         <QRCode
                           value={`lightning:${lightningAddress}`}
                           size={128}
                         />
                       )}
-                      {auth.account ? (
+                      {!auth.accountLoading && auth.account ? (
                         <Avatar
                           size={32}
                           className="border-[3px] border-white rounded-full absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10"
@@ -97,11 +90,13 @@ function Receive() {
                           name={auth.account.id}
                         />
                       ) : (
-                        <SkeletonLoader
-                          circle
-                          opaque={false}
-                          className="w-[32px] h-[32px] border-[3px] border-white rounded-full absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 opacity-100"
-                        />
+                        auth.accountLoading && (
+                          <SkeletonLoader
+                            circle
+                            opaque={false}
+                            className="w-[32px] h-[32px] border-[3px] border-white rounded-full absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 opacity-100"
+                          />
+                        )
                       )}
                     </div>
                   </div>
