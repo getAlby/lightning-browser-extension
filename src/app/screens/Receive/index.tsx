@@ -74,13 +74,15 @@ function Receive() {
                 <>
                   <div className="relative flex flex-grid">
                     <div
-                      className="w-30 h-30"
+                      className="w-32 h-32"
                       onClick={() => {
                         setLoadingLightningAddress(true);
                       }}
                     >
                       {loadingLightningAddress ? (
-                        <SkeletonLoader className="w-30 h-30 relative -top-1 " />
+                        <>
+                          <SkeletonLoader className="w-32 h-32 relative -top-1" />
+                        </>
                       ) : (
                         <QRCode
                           value={`lightning:${lightningAddress}`}
@@ -103,20 +105,22 @@ function Receive() {
                       )}
                     </div>
                   </div>
-                  {loadingLightningAddress ? (
-                    <SkeletonLoader className="w-32" />
-                  ) : (
-                    <a
-                      className="mt-1 flex flex-row items-center cursor-pointer font-medium text-xs leading-4"
-                      onClick={() => {
-                        navigator.clipboard.writeText(lightningAddress);
-                        toast.success(tCommon("copied"));
-                      }}
-                    >
-                      {lightningAddress}
-                      <CopyIcon className="w-4 h-4" />
-                    </a>
-                  )}
+                  <div className="mt-1 text-xs leading-4 font-medium">
+                    {loadingLightningAddress ? (
+                      <SkeletonLoader className="w-40 relative" />
+                    ) : (
+                      <a
+                        className="flex flex-row items-center cursor-pointer"
+                        onClick={() => {
+                          navigator.clipboard.writeText(lightningAddress);
+                          toast.success(tCommon("copied"));
+                        }}
+                      >
+                        {lightningAddress}
+                        <CopyIcon className="w-4 h-4" />
+                      </a>
+                    )}
+                  </div>
                 </>
               </div>
             )}
