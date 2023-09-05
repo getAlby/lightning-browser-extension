@@ -7,6 +7,7 @@ import { useSettings } from "~/app/context/SettingsContext";
 import { Transaction } from "~/types";
 
 import Badge from "../Badge";
+import discover from "/static/assets/illustrations/flash.png";
 
 export type Props = {
   transactions: Transaction[] | null | undefined;
@@ -27,7 +28,11 @@ export default function TransactionsTable({
       <Loading />
     </div>
   ) : !transactions?.length && noResultMsg ? (
-    <p className="text-gray-500 dark:text-neutral-400">{noResultMsg}</p>
+    <div className="mt-5 text-gray-500 dark:text-neutral-400 flex flex-col items-center justify-center">
+      <img src={discover} className="w-32" />
+      <p className="w-64 text-center mb-2">No transactions yet.</p>
+      <Button primary label={"Discover apps"}></Button>
+    </div>
   ) : (
     <>
       <div className="shadow overflow-hidden rounded-lg bg-white divide-y divide-gray-200 dark:divide-white/10 dark:bg-surface-02dp">
