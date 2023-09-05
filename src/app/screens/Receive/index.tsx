@@ -1,8 +1,11 @@
 import {
+  BitcoinCircleIcon,
   CaretLeftIcon,
+  CaretRightIcon,
   CheckIcon,
-} from "@bitcoin-design/bitcoin-icons-react/filled";
-import { CopyIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
+  CopyIcon,
+  LightningIcon,
+} from "@bitcoin-design/bitcoin-icons-react/outline";
 import Button from "@components/Button";
 import Container from "@components/Container";
 import Header from "@components/Header";
@@ -18,6 +21,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
+import RedeemIcon from "~/app/icons/RedeemIcon";
 import { isAlbyLNDHubAccount, isAlbyOAuthAccount } from "~/app/utils";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
@@ -49,9 +53,6 @@ function Receive() {
   } | null>();
   const [copyInvoiceLabel, setCopyInvoiceLabel] = useState(
     tCommon("actions.copy_invoice") as string
-  );
-  const [copyLightningAddressLabel, setCopyLightningAddressLabel] = useState(
-    t("actions.copy_lightning_address") as string
   );
   const [lightningAddress, setLightningAddress] = useState("");
   const [paid, setPaid] = useState(false);
@@ -263,106 +264,112 @@ function Receive() {
         <Container maxWidth="sm">{renderInvoice()}</Container>
       ) : (
         <div className="pt-4">
-          <form onSubmit={handleSubmit}>
-            <fieldset disabled={loadingInvoice}>
-              <Container justifyBetween maxWidth="sm">
-                <div>
-                  <div className="mb-4">
-                    <DualCurrencyField
-                      id="amount"
-                      min={0}
-                      label={t("amount.label")}
-                      placeholder={t("amount.placeholder")}
-                      fiatValue={fiatAmount}
-                      onChange={handleChange}
-                      autoFocus
-                    />
-                  </div>
+          {!isAlbyOAuthUser && (
+            <>
+              <form onSubmit={handleSubmit}>
+                <fieldset disabled={loadingInvoice}>
+                  <Container justifyBetween maxWidth="sm">
+                    <div>
+                      <div className="mb-4">
+                        <DualCurrencyField
+                          id="amount"
+                          min={0}
+                          label={t("amount.label")}
+                          placeholder={t("amount.placeholder")}
+                          fiatValue={fiatAmount}
+                          onChange={handleChange}
+                          autoFocus
+                        />
+                      </div>
 
-                  <div className="mb-4">
-                    <TextField
-                      id="description"
-                      label={t("description.label")}
-                      placeholder={t("description.placeholder")}
-                      onChange={handleChange}
+                      <div className="mb-4">
+                        <TextField
+                          id="description"
+                          label={t("description.label")}
+                          placeholder={t("description.placeholder")}
+                          onChange={handleChange}
+                        />
+                      </div>
+                    </div>
+                    <Button
+                      type="submit"
+                      label={t("actions.create_invoice")}
+                      fullWidth
+                      primary
+                      loading={loadingInvoice}
+                      disabled={loadingInvoice}
                     />
-                  </div>
-                </div>
-                <Button
-                  type="submit"
-                  label={t("actions.create_invoice")}
-                  fullWidth
-                  primary
-                  loading={loadingInvoice}
-                  disabled={loadingInvoice}
-                />
-              </Container>
-            </fieldset>
-          </form>
+                    <div className="flex items-center mt-8 mb-5">
+                      <div className="flex-grow border-t border-gray-300 dark:border-gray-700"></div>
+                      <span className="flex-shrink mx-4  text-gray-500 dark:text-gray-400 fw-bold">
+                        {tCommon("or")}
+                      </span>
+                      <div className="flex-grow border-t  border-gray-300 dark:border-gray-700"></div>
+                    </div>
+                  </Container>
+                </fieldset>
+              </form>
+            </>
+          )}
           <div>
             <Container justifyBetween maxWidth="sm">
-              <div className="relative flex  items-center mb-4">
-                <div className="flex-grow border-t border-gray-300 dark:border-gray-700"></div>
-                <span className="flex-shrink mx-4  text-gray-500 dark:text-gray-400 fw-bold">
-                  {tCommon("or")}
-                </span>
-                <div className="flex-grow border-t  border-gray-300 dark:border-gray-700"></div>
-              </div>
-              <div className="mb-4">
-                <Button
-                  type="button"
-                  label={t("redeem_lnurl")}
-                  fullWidth
+              {isAlbyOAuthUser && (
+                <div className="bg-white dark:bg-surface-01dp border-gray-200 dark:border-neutral-700 rounded border p-5 flex flex-col justify-center items-center mb-4 gap-2 text-gray-800 dark:text-neutral-200">
+                  {loadingLightningAddress && <Loading />}
+                  {!loadingLightningAddress && (
+                    <>
+                      <div className="relative">
+                        <QRCode value={lightningAddress} level="M" />
+                        <img
+                          className="border-[6px] border-white rounded-full w-18 absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10"
+                          src="https://uploads.getalby-assets.com/uploads/lightning_address/avatar/178/thumb_07e22939e7672b38c56615068c4c715f.jpeg"
+                          alt="Avatar"
+                        />
+                      </div>
+                      <a
+                        className="flex flex-row items-center cursor-pointer font-medium"
+                        onClick={() => {
+                          navigator.clipboard.writeText(lightningAddress);
+                          toast.success(tCommon("copied"));
+                        }}
+                      >
+                        {lightningAddress}
+                        <CopyIcon className="w-6 h-6" />
+                      </a>
+                    </>
+                  )}
+                </div>
+              )}
+              {isAlbyOAuthUser && (
+                <IconLinkCard
+                  title={"Lightning invoice"}
+                  description={"Request instant and specific amount payments"}
+                  icon={<LightningIcon className="w-8" />}
                   onClick={() => {
                     navigate("/lnurlRedeem");
                   }}
                 />
-              </div>
-
-              {isAlbyOAuthUser && (
-                <div className="mb-4">
-                  <Button
-                    type="button"
-                    label={copyLightningAddressLabel}
-                    disabled={loadingLightningAddress}
-                    fullWidth
-                    onClick={async () => {
-                      try {
-                        if (!lightningAddress) {
-                          throw new Error(
-                            "User does not have a lightning address"
-                          );
-                        }
-                        navigator.clipboard.writeText(lightningAddress);
-                        setCopyLightningAddressLabel(tCommon("copied"));
-                        setTimeout(() => {
-                          setCopyLightningAddressLabel(
-                            t("actions.copy_lightning_address")
-                          );
-                        }, 1000);
-                      } catch (e) {
-                        if (e instanceof Error) {
-                          toast.error(e.message);
-                        }
-                      }
-                    }}
-                    icon={<CopyIcon className="w-6 h-6 mr-2" />}
-                  />
-                </div>
               )}
-
               {isAlbyUser && (
-                <div className="mb-4">
-                  <Button
-                    type="button"
-                    label={t("receive_via_bitcoin_address")}
-                    fullWidth
-                    onClick={() => {
-                      navigate("/onChainReceive");
-                    }}
-                  />
-                </div>
+                <IconLinkCard
+                  title={"Bitcoin address"}
+                  description={
+                    "Receive via bitcoin address using a swap service"
+                  }
+                  icon={<BitcoinCircleIcon className="w-8" />}
+                  onClick={() => {
+                    navigate("/onChainReceive");
+                  }}
+                />
               )}
+              <IconLinkCard
+                title={"Redeem"}
+                description={"Withdraw bitcoin from an LNURL code"}
+                icon={<RedeemIcon className="w-8" />}
+                onClick={() => {
+                  navigate("/lnurlRedeem");
+                }}
+              />
             </Container>
           </div>
         </div>
@@ -372,3 +379,32 @@ function Receive() {
 }
 
 export default Receive;
+
+type IconLinkCardProps = {
+  title: string;
+  description: string;
+  icon: React.ReactNode;
+  onClick: () => void;
+};
+function IconLinkCard({
+  icon,
+  title,
+  description,
+  onClick,
+}: IconLinkCardProps) {
+  return (
+    <div
+      className="shadow rounded-md p-5 bg-white dark:bg-surface-01dp hover:bg-gray-50 dark:hover:bg-surface-02dp text-gray-800 dark:text-neutral-200 cursor-pointer flex flex-row items-center mb-4 gap-4"
+      onClick={onClick}
+    >
+      <div className="flex-shrink-0 flex justify-center">{icon}</div>
+      <div className="flex-grow">
+        <div className="font-medium text-lg">{title}</div>
+        <div className="text-gray-600 dark:text-neutral-400">{description}</div>
+      </div>
+      <div className="flex-shrink-0 flex justify-end ">
+        <CaretRightIcon className="w-10" />
+      </div>
+    </div>
+  );
+}
