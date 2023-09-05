@@ -8,15 +8,16 @@ import LNURLPay from "@screens/LNURLPay";
 import LNURLWithdraw from "@screens/LNURLWithdraw";
 import Receive from "@screens/Receive";
 import Send from "@screens/Send";
-import ScanQRCode from "~/app/screens/ScanQRCode";
 import Unlock from "@screens/Unlock";
 import { HashRouter, Outlet, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Providers from "~/app/context/Providers";
 import LNURLRedeem from "~/app/screens/LNURLRedeem";
 import OnChainReceive from "~/app/screens/OnChainReceive";
+import ScanQRCode from "~/app/screens/ScanQRCode";
 import SendToBitcoinAddress from "~/app/screens/SendToBitcoinAddress";
 
+import ReceiveInvoice from "~/app/screens/ReceiveInvoice";
 import RequireAuth from "../RequireAuth";
 
 function Popup() {
@@ -37,6 +38,7 @@ function Popup() {
             <Route path="scanQRCode" element={<ScanQRCode />} />
             <Route path="receive" element={<Receive />} />
             <Route path="onChainReceive" element={<OnChainReceive />} />
+            <Route path="receive/invoice" element={<ReceiveInvoice />} />
             <Route path="lnurlPay" element={<LNURLPay />} />
             <Route path="lnurlChannel" element={<LNURLChannel />} />
             <Route path="lnurlWithdraw" element={<LNURLWithdraw />} />
