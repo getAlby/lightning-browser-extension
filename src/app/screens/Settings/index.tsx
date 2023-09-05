@@ -10,11 +10,11 @@ import Toggle from "@components/form/Toggle";
 import { Html5Qrcode } from "html5-qrcode";
 import type { FormEvent } from "react";
 import { useState } from "react";
-import { toast } from "react-hot-toast";
 import { Trans, useTranslation } from "react-i18next";
 import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
 import { useSettings } from "~/app/context/SettingsContext";
+import { useToast } from "~/app/hooks/useToast";
 import { CURRENCIES } from "~/common/constants";
 import msg from "~/common/lib/msg";
 
@@ -27,6 +27,7 @@ function Settings() {
   const { t } = useTranslation("translation", { keyPrefix: "settings" });
   const { isLoading, settings, updateSetting } = useSettings();
   const navigate = useNavigate();
+  const toast = useToast();
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [formData, setFormData] = useState(initialFormData);

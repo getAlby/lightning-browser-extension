@@ -3,9 +3,9 @@ import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
 import PublisherCard from "@components/PublisherCard";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { toast } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import ScreenHeader from "~/app/components/ScreenHeader";
+import { useToast } from "~/app/hooks/useToast";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import type { OriginData } from "~/types";
@@ -21,6 +21,7 @@ function Enable(props: Props) {
     keyPrefix: "enable",
   });
   const { t: tCommon } = useTranslation("common");
+  const toast = useToast();
 
   const enable = useCallback(() => {
     try {
@@ -35,7 +36,7 @@ function Enable(props: Props) {
     } finally {
       setLoading(false);
     }
-  }, [tCommon]);
+  }, [tCommon, toast]);
 
   function reject(event: React.MouseEvent<HTMLAnchorElement>) {
     event.preventDefault();

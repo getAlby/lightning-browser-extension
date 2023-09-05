@@ -7,13 +7,13 @@ import PublisherCard from "@components/PublisherCard";
 import ResultCard from "@components/ResultCard";
 import lightningPayReq from "bolt11";
 import { useEffect, useState } from "react";
-import { toast } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
+import { useToast } from "~/app/hooks/useToast";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
 
@@ -33,6 +33,7 @@ function ConfirmPayment() {
   const { t: tCommon } = useTranslation("common");
 
   const navState = useNavigationState();
+  const toast = useToast();
   const paymentRequest = navState.args?.paymentRequest as string;
   const invoice = lightningPayReq.decode(paymentRequest);
 

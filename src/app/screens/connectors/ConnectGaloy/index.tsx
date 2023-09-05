@@ -4,11 +4,11 @@ import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
 import fetchAdapter from "@vespaiach/axios-fetch-adapter";
 import axios from "axios";
 import { useState } from "react";
-import { toast } from "react-hot-toast";
 import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import msg from "~/common/lib/msg";
 
+import { useToast } from "~/app/hooks/useToast";
 import galoyBitcoinBeach from "/static/assets/icons/galoy_bitcoin_beach.png";
 import galoyBitcoinJungle from "/static/assets/icons/galoy_bitcoin_jungle.png";
 
@@ -47,6 +47,7 @@ export default function ConnectGaloy(props: Props) {
   const { url, label, website, i18nPrefix, logo } = galoyUrls[instance];
 
   const navigate = useNavigate();
+  const toast = useToast();
   const { t } = useTranslation("translation", {
     keyPrefix: "choose_connector",
   });

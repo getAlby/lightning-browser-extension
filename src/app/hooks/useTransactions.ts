@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
-import { toast } from "react-hot-toast";
 import { useSettings } from "~/app/context/SettingsContext";
+import { useToast } from "~/app/hooks/useToast";
 import { convertPaymentsToTransactions } from "~/app/utils/payments";
 import api from "~/common/lib/api";
 import { Transaction } from "~/types";
@@ -9,6 +9,7 @@ export const useTransactions = () => {
   const { settings, getFormattedFiat } = useSettings();
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [isLoadingTransactions, setIsLoadingTransactions] = useState(true);
+  const toast = useToast();
 
   const loadTransactions = useCallback(
     async (accountId: string, limit?: number) => {
@@ -33,7 +34,7 @@ export const useTransactions = () => {
         if (e instanceof Error) toast.error(`Error: ${e.message}`);
       }
     },
-    [settings, getFormattedFiat]
+    [settings, getFormattedFiat, toast]
   );
 
   return {

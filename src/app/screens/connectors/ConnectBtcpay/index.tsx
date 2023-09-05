@@ -5,11 +5,11 @@ import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
 import fetchAdapter from "@vespaiach/axios-fetch-adapter";
 import axios from "axios";
 import { useState } from "react";
-import { toast } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import msg from "~/common/lib/msg";
 
+import { useToast } from "~/app/hooks/useToast";
 import logo from "/static/assets/icons/btcpay.svg";
 
 const initialFormData = {
@@ -20,6 +20,7 @@ const initialFormData = {
 
 export default function ConnectBtcpay() {
   const navigate = useNavigate();
+  const toast = useToast();
   const { t } = useTranslation("translation", {
     keyPrefix: "choose_connector.btcpay",
   });

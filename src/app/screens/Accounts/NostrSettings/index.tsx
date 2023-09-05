@@ -1,7 +1,6 @@
 import Container from "@components/Container";
 import Loading from "@components/Loading";
 import { FormEvent, useCallback, useEffect, useState } from "react";
-import { toast } from "react-hot-toast";
 import { Trans, useTranslation } from "react-i18next";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Alert from "~/app/components/Alert";
@@ -10,6 +9,7 @@ import { ContentBox } from "~/app/components/ContentBox";
 import InputCopyButton from "~/app/components/InputCopyButton";
 import PasswordViewAdornment from "~/app/components/PasswordViewAdornment";
 import TextField from "~/app/components/form/TextField";
+import { useToast } from "~/app/hooks/useToast";
 import api, { GetAccountRes } from "~/common/lib/api";
 import { default as nostr, default as nostrlib } from "~/common/lib/nostr";
 
@@ -19,6 +19,8 @@ function NostrSettings() {
     keyPrefix: "accounts.account_view",
   });
   const navigate = useNavigate();
+  const toast = useToast();
+
   const [hasMnemonic, setHasMnemonic] = useState(false);
   const [currentPrivateKey, setCurrentPrivateKey] = useState("");
   const [nostrPrivateKey, setNostrPrivateKey] = useState("");
@@ -65,7 +67,7 @@ function NostrSettings() {
           </p>
         );
     }
-  }, [nostrPrivateKey, t]);
+  }, [nostrPrivateKey, t, toast]);
 
   function onCancel() {
     // go to account settings

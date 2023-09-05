@@ -1,9 +1,9 @@
 import { GetAccountInformationResponse } from "alby-js-sdk/dist/types";
 import { useState } from "react";
-import { toast } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import Button from "~/app/components/Button";
+import { useToast } from "~/app/hooks/useToast";
 import { getAlbyAccountName } from "~/app/utils";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
@@ -12,6 +12,7 @@ import { WebLNNode } from "~/extension/background-script/connectors/connector.in
 export default function ConnectAlby() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const toast = useToast();
   const { t: tCommon } = useTranslation("common");
   const { t } = useTranslation("translation", {
     keyPrefix: "choose_path.alby",

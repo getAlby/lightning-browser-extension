@@ -1,13 +1,13 @@
 import Container from "@components/Container";
 import Loading from "@components/Loading";
 import { useCallback, useEffect, useState } from "react";
-import { toast } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "~/app/components/Button";
 import { ContentBox } from "~/app/components/ContentBox";
 import MnemonicDescription from "~/app/components/mnemonic/MnemonicDescription";
 import MnemonicInputs from "~/app/components/mnemonic/MnemonicInputs";
+import { useToast } from "~/app/hooks/useToast";
 import api from "~/common/lib/api";
 
 function BackupMnemonic() {
@@ -16,6 +16,7 @@ function BackupMnemonic() {
     keyPrefix: "accounts.account_view.mnemonic",
   });
   const navigate = useNavigate();
+  const toast = useToast();
 
   const [mnemonic, setMnemonic] = useState<string | undefined>();
   const [loading, setLoading] = useState<boolean>(true);
@@ -32,7 +33,7 @@ function BackupMnemonic() {
       console.error(e);
       if (e instanceof Error) toast.error(`Error: ${e.message}`);
     }
-  }, [id]);
+  }, [id, toast]);
 
   useEffect(() => {
     fetchData();

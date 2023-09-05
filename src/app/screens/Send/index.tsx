@@ -6,10 +6,10 @@ import IconButton from "@components/IconButton";
 import TextField from "@components/form/TextField";
 import lightningPayReq from "bolt11";
 import { useState } from "react";
-import { toast } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 import QrcodeAdornment from "~/app/components/QrcodeAdornment";
+import { useToast } from "~/app/hooks/useToast";
 import { extractLightningTagData } from "~/app/utils";
 import lnurlLib from "~/common/lib/lnurl";
 import { isLNURLDetailsError } from "~/common/utils/typeHelpers";
@@ -18,6 +18,8 @@ function Send() {
   const { t } = useTranslation("translation", { keyPrefix: "send" });
   const { t: tCommon } = useTranslation("common");
   const location = useLocation();
+  const toast = useToast();
+
   // location.state used to access the decoded QR coming from ScanQRCode screen
   const [invoice, setInvoice] = useState(location.state?.decodedQR || "");
   const navigate = useNavigate();

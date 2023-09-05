@@ -7,11 +7,11 @@ import { TFunction } from "i18next";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import Hyperlink from "~/app/components/Hyperlink";
 import Loading from "~/app/components/Loading";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
+import { useToast } from "~/app/hooks/useToast";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
@@ -25,6 +25,7 @@ import type {
 
 function ConfirmSignPset() {
   const navState = useNavigationState();
+  const toast = useToast();
   const { t: tCommon } = useTranslation("common");
   const { t } = useTranslation("translation", {
     keyPrefix: "confirm_sign_pset",

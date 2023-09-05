@@ -10,12 +10,13 @@ import TransactionsTable from "@components/TransactionsTable";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { FC, useEffect, useState } from "react";
-import { toast } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import BalanceBox from "~/app/components/BalanceBox";
+import ConnectionErrorToast from "~/app/components/toasts/ConnectionErrorToast";
 import { useAccount } from "~/app/context/AccountContext";
 import { useInvoices } from "~/app/hooks/useInvoices";
+import { useToast } from "~/app/hooks/useToast";
 import { useTransactions } from "~/app/hooks/useTransactions";
 import { PublisherLnData } from "~/app/screens/Home/PublisherLnData";
 import api from "~/common/lib/api";
@@ -32,6 +33,7 @@ export type Props = {
 };
 
 const DefaultView: FC<Props> = (props) => {
+  const toast = useToast();
   const { t } = useTranslation("translation", { keyPrefix: "home" });
   const { t: tCommon } = useTranslation("common");
   const { t: tComponents } = useTranslation("components");
@@ -136,6 +138,7 @@ const DefaultView: FC<Props> = (props) => {
             direction="column"
             onClick={() => {
               navigate("/send");
+              toast.custom(<ConnectionErrorToast message="sdf" />);
             }}
           />
         </div>

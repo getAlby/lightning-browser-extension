@@ -5,17 +5,18 @@ import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
 import Checkbox from "@components/form/Checkbox";
 import { useState } from "react";
-import { toast } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
+import { useToast } from "~/app/hooks/useToast";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import type { OriginData } from "~/types";
 
 function ConfirmSignSchnorr() {
   const navState = useNavigationState();
+  const toast = useToast();
   const { t: tCommon } = useTranslation("common");
   const { t } = useTranslation("translation", {
     keyPrefix: "nostr",

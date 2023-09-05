@@ -3,10 +3,10 @@ import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
 import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
 import { useState } from "react";
-import { toast } from "react-hot-toast";
 import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import PasswordViewAdornment from "~/app/components/PasswordViewAdornment";
+import { useToast } from "~/app/hooks/useToast";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
 import logo from "/static/assets/icons/start9.png";
@@ -18,6 +18,7 @@ const initialFormData = {
 
 export default function ConnectStart9() {
   const navigate = useNavigate();
+  const toast = useToast();
   const { t } = useTranslation("translation", {
     keyPrefix: "choose_connector.start9",
   });

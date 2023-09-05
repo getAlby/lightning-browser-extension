@@ -1,12 +1,13 @@
 import dayjs from "dayjs";
 import { useCallback, useState } from "react";
-import { toast } from "react-hot-toast";
 import { useSettings } from "~/app/context/SettingsContext";
+import { useToast } from "~/app/hooks/useToast";
 import api from "~/common/lib/api";
 import { Transaction } from "~/types";
 
 export const useInvoices = () => {
   const { settings, getFormattedFiat } = useSettings();
+  const toast = useToast();
 
   const [isLoadingInvoices, setIsLoadingInvoices] = useState(false);
   const [incomingTransactions, setIncomingTransactions] = useState<
@@ -41,7 +42,7 @@ export const useInvoices = () => {
       setIncomingTransactions(invoices);
       setIsLoadingInvoices(false);
     },
-    [getFormattedFiat, settings.showFiat]
+    [getFormattedFiat, settings.showFiat, toast]
   );
 
   return {

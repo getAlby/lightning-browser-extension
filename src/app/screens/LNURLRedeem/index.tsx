@@ -5,10 +5,10 @@ import Header from "@components/Header";
 import IconButton from "@components/IconButton";
 import TextField from "@components/form/TextField";
 import { useState } from "react";
-import { toast } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 import QrcodeAdornment from "~/app/components/QrcodeAdornment";
+import { useToast } from "~/app/hooks/useToast";
 import { extractLightningTagData } from "~/app/utils";
 import lnurlLib from "~/common/lib/lnurl";
 import { isLNURLDetailsError } from "~/common/utils/typeHelpers";
@@ -16,6 +16,7 @@ import { isLNURLDetailsError } from "~/common/utils/typeHelpers";
 function LNURLRedeem() {
   const { t } = useTranslation("translation", { keyPrefix: "lnurlredeem" });
   const location = useLocation();
+  const toast = useToast();
   // location.state used to access the decoded QR coming from ScanQRCode screen
   const [lnurlWithdrawLink, setLnurlWithdrawLink] = useState(
     location.state?.decodedQR || ""

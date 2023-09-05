@@ -1,9 +1,9 @@
 import Button from "@components/Button";
 import PublisherCard from "@components/PublisherCard";
 import { FC, useState } from "react";
-import { toast } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { useToast } from "~/app/hooks/useToast";
 import lnurlLib from "~/common/lib/lnurl";
 import { isLNURLDetailsError } from "~/common/utils/typeHelpers";
 import type { Battery } from "~/types";
@@ -16,6 +16,7 @@ export const PublisherLnData: FC<Props> = ({ lnData }) => {
   const [loadingSendSats, setLoadingSendSats] = useState(false);
 
   const navigate = useNavigate();
+  const toast = useToast();
 
   const { t } = useTranslation("translation", { keyPrefix: "home" });
 

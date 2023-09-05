@@ -4,11 +4,11 @@ import QrcodeScanner from "@components/QrcodeScanner";
 import TextField from "@components/form/TextField";
 import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
 import { useState } from "react";
-import { toast } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import msg from "~/common/lib/msg";
 
+import { useToast } from "~/app/hooks/useToast";
 import lndhubBlueWallet from "/static/assets/icons/lndhub_bluewallet.png";
 import lndhubGo from "/static/assets/icons/lndhub_go.png";
 
@@ -20,6 +20,7 @@ export default function ConnectLndHub({
   lndHubType = "lndhub_bluewallet",
 }: Props) {
   const navigate = useNavigate();
+  const toast = useToast();
   const logo = lndHubType === "lndhub_bluewallet" ? lndhubBlueWallet : lndhubGo;
 
   const { t } = useTranslation("translation", {

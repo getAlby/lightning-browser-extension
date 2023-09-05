@@ -4,7 +4,6 @@ import Setting from "@components/Setting";
 import Toggle from "@components/form/Toggle";
 import type { FormEvent } from "react";
 import { Fragment, useEffect, useState } from "react";
-import { toast } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import Modal from "react-modal";
 import { useAccount } from "~/app/context/AccountContext";
@@ -12,6 +11,7 @@ import { useSettings } from "~/app/context/SettingsContext";
 import msg from "~/common/lib/msg";
 import type { Allowance, Permission } from "~/types";
 
+import { useToast } from "~/app/hooks/useToast";
 import Button from "../Button";
 import Menu from "../Menu";
 import DualCurrencyField from "../form/DualCurrencyField/index";
@@ -30,6 +30,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
   } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
   const { account } = useAccount();
+  const toast = useToast();
   const [modalIsOpen, setIsOpen] = useState(false);
   const [budget, setBudget] = useState("");
   const [lnurlAuth, setLnurlAuth] = useState(false);
@@ -75,7 +76,7 @@ function AllowanceMenu({ allowance, onEdit, onDelete }: Props) {
     };
 
     fetchPermissions();
-  }, [account?.id, allowance.id]);
+  }, [account?.id, allowance.id, toast]);
 
   useEffect(() => {
     if (budget !== "" && showFiat) {

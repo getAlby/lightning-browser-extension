@@ -3,11 +3,11 @@ import Container from "@components/Container";
 import ContentMessage from "@components/ContentMessage";
 import PublisherCard from "@components/PublisherCard";
 import { useState } from "react";
-import { toast } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import Hyperlink from "~/app/components/Hyperlink";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
+import { useToast } from "~/app/hooks/useToast";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import getOS from "~/common/utils/os";
@@ -19,6 +19,7 @@ function ConfirmAddAccount() {
   const { t } = useTranslation("translation", {
     keyPrefix: "confirm_add_account",
   });
+  const toast = useToast();
 
   const name = navState.args?.name as string;
   const connector = navState.args?.connector as string;

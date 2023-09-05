@@ -7,12 +7,12 @@ import ResultCard from "@components/ResultCard";
 import DualCurrencyField from "@components/form/DualCurrencyField";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { toast } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import { useSettings } from "~/app/context/SettingsContext";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
+import { useToast } from "~/app/hooks/useToast";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
@@ -22,6 +22,7 @@ function LNURLWithdraw() {
   const { t } = useTranslation("translation", { keyPrefix: "lnurlwithdraw" });
   const { t: tCommon } = useTranslation("common");
 
+  const toast = useToast();
   const navigate = useNavigate();
   const navState = useNavigationState();
   const {

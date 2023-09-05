@@ -1,7 +1,6 @@
 import Container from "@components/Container";
 import Loading from "@components/Loading";
 import { useEffect, useState } from "react";
-import { toast } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import Alert from "~/app/components/Alert";
@@ -10,6 +9,7 @@ import { ContentBox } from "~/app/components/ContentBox";
 import Checkbox from "~/app/components/form/Checkbox";
 import MnemonicDescription from "~/app/components/mnemonic/MnemonicDescription";
 import MnemonicInputs from "~/app/components/mnemonic/MnemonicInputs";
+import { useToast } from "~/app/hooks/useToast";
 import api from "~/common/lib/api";
 
 function GenerateMnemonic() {
@@ -20,6 +20,7 @@ function GenerateMnemonic() {
     keyPrefix: "accounts.account_view.mnemonic",
   });
   const { t: tCommon } = useTranslation("common");
+  const toast = useToast();
 
   const [hasConfirmedBackup, setHasConfirmedBackup] = useState(false);
   const [hasNostrPrivateKey, setHasNostrPrivateKey] = useState(false);
@@ -42,7 +43,7 @@ function GenerateMnemonic() {
         if (e instanceof Error) toast.error(`Error: ${e.message}`);
       }
     })();
-  }, [id, navigate]);
+  }, [id, navigate, toast]);
 
   async function saveGeneratedSecretKey() {
     try {

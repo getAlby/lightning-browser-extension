@@ -1,9 +1,9 @@
 import Button from "@components/Button";
 import PasswordForm from "@components/PasswordForm";
 import React, { useState } from "react";
-import { toast } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { useToast } from "~/app/hooks/useToast";
 import msg from "~/common/lib/msg";
 
 const initialFormData = {
@@ -13,6 +13,7 @@ const initialFormData = {
 
 export default function SetPassword() {
   const navigate = useNavigate();
+  const toast = useToast();
   const [formData, setFormData] = useState(initialFormData);
   const { t } = useTranslation("translation", {
     keyPrefix: "welcome.set_password",

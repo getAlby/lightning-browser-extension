@@ -5,11 +5,11 @@ import ContentMessage from "@components/ContentMessage";
 import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
 import { useState } from "react";
-import { toast } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
+import { useToast } from "~/app/hooks/useToast";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import type { OriginData } from "~/types";
@@ -21,6 +21,7 @@ function ConfirmSignMessage() {
     keyPrefix: "confirm_sign_message",
   });
   const navigate = useNavigate();
+  const toast = useToast();
 
   const message = navState.args?.message as string;
   const origin = navState.origin as OriginData;

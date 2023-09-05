@@ -8,13 +8,13 @@ import ResultCard from "@components/ResultCard";
 import SatButtons from "@components/SatButtons";
 import DualCurrencyField from "@components/form/DualCurrencyField";
 import React, { useEffect, useState } from "react";
-import { toast } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import Container from "~/app/components/Container";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
+import { useToast } from "~/app/hooks/useToast";
 import msg from "~/common/lib/msg";
 
 function Keysend() {
@@ -24,6 +24,7 @@ function Keysend() {
     getFormattedFiat,
     getFormattedSats,
   } = useSettings();
+  const toast = useToast();
   const showFiat = !isLoadingSettings && settings.showFiat;
   const navState = useNavigationState();
   const navigate = useNavigate();

@@ -1,9 +1,9 @@
 import { QrCodeIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { Html5Qrcode, Html5QrcodeScannerState } from "html5-qrcode";
 import { useEffect, useRef, useState } from "react";
-import { toast } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 
+import { useToast } from "~/app/hooks/useToast";
 import Button from "../Button";
 
 interface CameraDevice {
@@ -31,6 +31,7 @@ function QrcodeScanner({
   const { t } = useTranslation("components", {
     keyPrefix: "qrcode_scanner",
   });
+  const toast = useToast();
 
   useEffect(() => {
     return () => {

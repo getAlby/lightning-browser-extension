@@ -6,10 +6,10 @@ import TransactionsTable from "@components/TransactionsTable";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { toast } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSettings } from "~/app/context/SettingsContext";
+import { useToast } from "~/app/hooks/useToast";
 import { convertPaymentsToTransactions } from "~/app/utils/payments";
 import msg from "~/common/lib/msg";
 import type { Allowance, Transaction } from "~/types";
@@ -26,6 +26,7 @@ function PublisherDetail() {
     getFormattedFiat,
     getFormattedNumber,
   } = useSettings();
+  const toast = useToast();
 
   const hasFetchedData = useRef(false);
   const [allowance, setAllowance] = useState<Allowance | undefined>();
@@ -56,7 +57,7 @@ function PublisherDetail() {
       console.error(e);
       if (e instanceof Error) toast.error(`Error: ${e.message}`);
     }
-  }, [id, settings.showFiat, getFormattedFiat]);
+  }, [id, settings.showFiat, getFormattedFiat, toast]);
 
   useEffect(() => {
     // Run once.

@@ -1,11 +1,11 @@
 import Container from "@components/Container";
 import Loading from "@components/Loading";
 import PublishersTable from "@components/PublishersTable";
-import { useEffect, useState } from "react";
-import { toast } from "react-hot-toast";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "~/app/components/Button";
+import { useToast } from "~/app/hooks/useToast";
 import msg from "~/common/lib/msg";
 import { Allowance, Badge, Publisher } from "~/types";
 
@@ -17,12 +17,13 @@ function Publishers() {
   const [publishers, setPublishers] = useState<Publisher[]>([]);
   const [publishersLoading, setPublishersLoading] = useState<boolean>(true);
   const navigate = useNavigate();
+  const toast = useToast();
 
   function navigateToPublisher(id: number) {
     navigate(`/publishers/${id}`);
   }
 
-  async function fetchData() {
+  const fetchData = useCallback(async () => {
     try {
       const allowanceResponse = await msg.request<{
         allowances: Allowance[];
@@ -85,11 +86,11 @@ function Publishers() {
     } finally {
       setPublishersLoading(false);
     }
-  }
+  }, [toast]);
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   return (
     <Container>

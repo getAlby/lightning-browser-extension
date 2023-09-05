@@ -12,12 +12,12 @@ import DualCurrencyField from "@components/form/DualCurrencyField";
 import TextField from "@components/form/TextField";
 import { useEffect, useRef, useState } from "react";
 import Confetti from "react-confetti";
-import { toast } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import QRCode from "react-qr-code";
 import { useNavigate } from "react-router-dom";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
+import { useToast } from "~/app/hooks/useToast";
 import { isAlbyLNDHubAccount, isAlbyOAuthAccount } from "~/app/utils";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
@@ -26,6 +26,7 @@ import { poll } from "~/common/utils/helpers";
 function Receive() {
   const { t } = useTranslation("translation", { keyPrefix: "receive" });
   const { t: tCommon } = useTranslation("common");
+  const toast = useToast();
 
   const auth = useAccount();
   const {

@@ -6,13 +6,13 @@ import Select from "@components/form/Select";
 import TextField from "@components/form/TextField";
 import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
 import { useState } from "react";
-import { toast } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import Alert from "~/app/components/Alert";
 import { ACCOUNT_CURRENCIES } from "~/common/constants";
 import msg from "~/common/lib/msg";
 
+import { useToast } from "~/app/hooks/useToast";
 import logo from "/static/assets/icons/kollider.png";
 
 type Currency = {
@@ -41,6 +41,7 @@ const supportedCurrencies: Currency[] = [
 
 export default function ConnectKollidier({ variant }: Props) {
   const navigate = useNavigate();
+  const toast = useToast();
   const { t } = useTranslation("translation", {
     keyPrefix: `choose_connector.kollider`,
   });

@@ -4,15 +4,16 @@ import TextField from "@components/form/TextField";
 import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
 import * as secp256k1 from "@noble/secp256k1";
 import { useState } from "react";
-import { toast } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import PasswordViewAdornment from "~/app/components/PasswordViewAdornment";
+import { useToast } from "~/app/hooks/useToast";
 import msg from "~/common/lib/msg";
 import logo from "/static/assets/icons/core_ln.svg";
 
 export default function ConnectCommando() {
   const navigate = useNavigate();
+  const toast = useToast();
   const { t } = useTranslation("translation", {
     keyPrefix: `choose_connector.commando`,
   });

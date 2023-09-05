@@ -9,9 +9,9 @@ import TransactionsTable from "@components/TransactionsTable";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { FC, useEffect, useState } from "react";
-import { toast } from "react-hot-toast";
 import { Trans, useTranslation } from "react-i18next";
 import { useSettings } from "~/app/context/SettingsContext";
+import { useToast } from "~/app/hooks/useToast";
 import { PublisherLnData } from "~/app/screens/Home/PublisherLnData";
 import { convertPaymentsToTransactions } from "~/app/utils/payments";
 import type { Allowance, Battery, Transaction } from "~/types";
@@ -33,6 +33,7 @@ const AllowanceView: FC<Props> = (props) => {
     getFormattedFiat,
     getFormattedNumber,
   } = useSettings();
+  const toast = useToast();
 
   const [transactions, setTransactions] = useState<Transaction[] | null>(null);
   const [isLoadingTransactions, setIsLoadingTransactions] = useState(true);
@@ -74,6 +75,7 @@ const AllowanceView: FC<Props> = (props) => {
     transactions,
     getFormattedFiat,
     showFiat,
+    toast,
   ]);
 
   return (

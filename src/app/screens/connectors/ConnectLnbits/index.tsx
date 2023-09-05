@@ -3,15 +3,16 @@ import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
 import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
 import { useState } from "react";
-import { toast } from "react-hot-toast";
 import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import msg from "~/common/lib/msg";
 
+import { useToast } from "~/app/hooks/useToast";
 import logo from "/static/assets/icons/lnbits.png";
 
 export default function ConnectLnbits() {
   const navigate = useNavigate();
+  const toast = useToast();
   const { t } = useTranslation("translation", {
     keyPrefix: "choose_connector.lnbits",
   });

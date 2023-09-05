@@ -5,8 +5,8 @@ import {
   useEffect,
   useState,
 } from "react";
-import { toast } from "react-hot-toast";
 import { useSettings } from "~/app/context/SettingsContext";
+import { useToast } from "~/app/hooks/useToast";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
@@ -55,6 +55,7 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
     getFormattedFiat,
     getFormattedInCurrency,
   } = useSettings();
+  const toast = useToast();
 
   const [account, setAccount] = useState<AccountContextType["account"]>(null);
   const [statusLoading, setStatusLoading] = useState(true);

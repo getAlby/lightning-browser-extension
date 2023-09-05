@@ -15,7 +15,6 @@ import TextField from "@components/form/TextField";
 import fetchAdapter from "@vespaiach/axios-fetch-adapter";
 import axios from "axios";
 import React, { Fragment, useEffect, useState } from "react";
-import { toast } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import Header from "~/app/components/Header";
@@ -24,6 +23,7 @@ import ScreenHeader from "~/app/components/ScreenHeader";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
+import { useToast } from "~/app/hooks/useToast";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import lnurl from "~/common/lib/lnurl";
 import msg from "~/common/lib/msg";
@@ -49,6 +49,7 @@ const Dd = ({ children }: { children: React.ReactNode }) => (
 function LNURLPay() {
   const navState = useNavigationState();
   const details = navState.args?.lnurlDetails as LNURLPayServiceResponse;
+  const toast = useToast();
 
   const {
     isLoading: isLoadingSettings,
