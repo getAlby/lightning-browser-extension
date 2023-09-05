@@ -33,10 +33,7 @@ export default function Onboard() {
 
   async function keySetup() {
     const account = await api.getAccount(authAccount?.id);
-    if (
-      action === "public/nostr/providerOnboardingPrompt" &&
-      account.hasMnemonic
-    ) {
+    if (action === "public/nostr/onboard" && account.hasMnemonic) {
       openOptions(`accounts/${authAccount?.id}/nostr/settings`);
     } else {
       openOptions(`accounts/${authAccount?.id}/secret-key/new`);
