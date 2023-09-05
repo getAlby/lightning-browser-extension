@@ -19,6 +19,8 @@ import { useTranslation } from "react-i18next";
 import QRCode from "react-qr-code";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Avatar from "~/app/components/Avatar";
+import SkeletonLoader from "~/app/components/SkeletonLoader";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
 import RedeemIcon from "~/app/icons/RedeemIcon";
@@ -40,6 +42,8 @@ function Receive() {
   const showFiat = !isLoadingSettings && settings.showFiat;
 
   const navigate = useNavigate();
+  const { account: authAccount } = useAccount();
+
   const [formData, setFormData] = useState({
     amount: "0",
     description: "",
@@ -54,6 +58,7 @@ function Receive() {
   const [copyInvoiceLabel, setCopyInvoiceLabel] = useState(
     tCommon("actions.copy_invoice") as string
   );
+
   const [lightningAddress, setLightningAddress] = useState("");
   const [paid, setPaid] = useState(false);
   const [pollingForPayment, setPollingForPayment] = useState(false);
@@ -151,8 +156,9 @@ function Receive() {
 
   async function getLightningAddress() {
     setLoadingLightningAddress(true);
-    const response = await api.getAccountInfo();
-    const lightningAddress = response.info.lightning_address;
+    const accountInfo = await api.getAccountInfo();
+    const lightningAddress = accountInfo.info.lightning_address;
+
     if (lightningAddress) setLightningAddress(lightningAddress);
     setLoadingLightningAddress(false);
   }
@@ -314,18 +320,45 @@ function Receive() {
           <div>
             <Container justifyBetween maxWidth="sm">
               {isAlbyOAuthUser && (
-                <div className="bg-white dark:bg-surface-01dp border-gray-200 dark:border-neutral-700 rounded border p-5 flex flex-col justify-center items-center mb-4 gap-2 text-gray-800 dark:text-neutral-200">
-                  {loadingLightningAddress && <Loading />}
-                  {!loadingLightningAddress && (
-                    <>
-                      <div className="relative">
-                        <QRCode value={lightningAddress} level="M" />
-                        <img
-                          className="border-[6px] border-white rounded-full w-18 absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10"
-                          src="https://uploads.getalby-assets.com/uploads/lightning_address/avatar/178/thumb_07e22939e7672b38c56615068c4c715f.jpeg"
-                          alt="Avatar"
-                        />
+                <div
+                  className="bg-white dark:bg-surface-01dp border-gray-200 dark:border-neutral-700 rounded border p-5 flex flex-col justify-center items-center mb-4 gap-2 text-gray-800 dark:text-neutral-200"
+                  onClick={() => {
+                    setLoadingLightningAddress(!loadingLightningAddress);
+                  }}
+                >
+                  <>
+                    <div className="relative flex flex-grid">
+                      <div className="w-[256px] h-[256px]">
+                        {loadingLightningAddress ? (
+                          <>
+                            <SkeletonLoader className="w-[256px] h-[256px] relative -top-1 " />
+                          </>
+                        ) : (
+                          <QRCode
+                            value={`lightning:${lightningAddress}`}
+                            level="M"
+                            className="rounded"
+                          />
+                        )}
+                        {authAccount ? (
+                          <Avatar
+                            size={72}
+                            className="border-[7px] border-white rounded-full absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10"
+                            url={authAccount.avatarUrl}
+                            name={authAccount.id}
+                          />
+                        ) : (
+                          <SkeletonLoader
+                            circle
+                            opaque={false}
+                            className="w-[72px] h-[72px] border-[7px] border-white rounded-full absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 opacity-100"
+                          />
+                        )}
                       </div>
+                    </div>
+                    {loadingLightningAddress ? (
+                      <SkeletonLoader className="w-32" />
+                    ) : (
                       <a
                         className="flex flex-row items-center cursor-pointer font-medium"
                         onClick={() => {
@@ -336,8 +369,8 @@ function Receive() {
                         {lightningAddress}
                         <CopyIcon className="w-6 h-6" />
                       </a>
-                    </>
-                  )}
+                    )}
+                  </>
                 </div>
               )}
               {isAlbyOAuthUser && (

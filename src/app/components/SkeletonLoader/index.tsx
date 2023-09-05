@@ -2,17 +2,25 @@ import Skeleton from "react-loading-skeleton";
 import { classNames } from "~/app/utils";
 
 export type Props = {
+  circle?: boolean;
   className?: string;
   containerClassName?: string;
+  opaque?: boolean;
 };
 
-function SkeletonLoader({ className, containerClassName }: Props) {
+function SkeletonLoader({
+  className,
+  containerClassName,
+  circle,
+  opaque = true,
+}: Props) {
   return (
     <Skeleton
-      className={classNames(className ?? "", "opacity-20")}
-      containerClassName={containerClassName}
       baseColor="#AAA"
       highlightColor="#FFF"
+      className={classNames(opaque ? "opacity-20" : "", className ?? "")}
+      containerClassName={containerClassName}
+      circle={circle}
     />
   );
 }
