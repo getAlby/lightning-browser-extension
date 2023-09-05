@@ -403,7 +403,7 @@
           "your_ln_address": "Din Lightning Address:",
           "export_uri": "LNDHub-inloggnings-URI",
           "scan_qr": "Importera denna plånbok till Zeus eller BlueWallet genom att skanna QR-koden.",
-          "description": "Låter dig ansluta och använda det här kontot på mobila plånböcker som <0>Blue Wallet</0> och <0>Zeus</0>."
+          "description": "Låter dig ansluta och använda det här kontot på mobila plånböcker som <0>Blue Wallet</0> och <1>Zeus</1>."
         },
         "actions": {
           "remove_account": "Ta bort kontot",

@@ -321,7 +321,7 @@
           "waiting": "aguardando dados LndHub...",
           "export_uri": "Credenciais URI LNDHub",
           "scan_qr": "Leia o código QR para importar esta carteira na Zeus ou BlueWallet.",
-          "description": "Permite conectar e usar esta conta em carteiras de celular como por ex a <0>Blue Wallet</0> e a <0>Zeus</0>."
+          "description": "Permite conectar e usar esta conta em carteiras de celular como por ex a <0>Blue Wallet</0> e a <1>Zeus</1>."
         },
         "nostr": {
           "title": "Nostr",
