@@ -61,3 +61,7 @@ export async function poll<T>({
 
   return new Promise(executePoll);
 }
+
+export function delay(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}

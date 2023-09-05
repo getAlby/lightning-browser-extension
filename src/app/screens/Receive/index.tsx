@@ -16,10 +16,10 @@ import TextField from "@components/form/TextField";
 import { useEffect, useRef, useState } from "react";
 import Confetti from "react-confetti";
 import { useTranslation } from "react-i18next";
-import QRCode from "react-qr-code";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Avatar from "~/app/components/Avatar";
+import QRCode from "~/app/components/QRCode";
 import SkeletonLoader from "~/app/components/SkeletonLoader";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
@@ -27,7 +27,7 @@ import RedeemIcon from "~/app/icons/RedeemIcon";
 import { isAlbyLNDHubAccount, isAlbyOAuthAccount } from "~/app/utils";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
-import { poll } from "~/common/utils/helpers";
+import { delay, poll } from "~/common/utils/helpers";
 
 function Receive() {
   const { t } = useTranslation("translation", { keyPrefix: "receive" });
@@ -42,7 +42,6 @@ function Receive() {
   const showFiat = !isLoadingSettings && settings.showFiat;
 
   const navigate = useNavigate();
-  const { account: authAccount } = useAccount();
 
   const [formData, setFormData] = useState({
     amount: "0",
@@ -50,7 +49,7 @@ function Receive() {
     expiration: "",
   });
   const [loadingInvoice, setLoadingInvoice] = useState(false);
-  const [loadingLightningAddress, setLoadingLightningAddress] = useState(false);
+  const [loadingLightningAddress, setLoadingLightningAddress] = useState(true);
   const [invoice, setInvoice] = useState<{
     paymentRequest: string;
     rHash: string;
@@ -155,11 +154,12 @@ function Receive() {
   }
 
   async function getLightningAddress() {
-    setLoadingLightningAddress(true);
-    const accountInfo = await api.getAccountInfo();
-    const lightningAddress = accountInfo.info.lightning_address;
+    // Wait for a minimum delay to prevent flickering
+    const [accountInfo] = await Promise.all([api.getAccountInfo(), delay(250)]);
 
+    const lightningAddress = accountInfo.info.lightning_address;
     if (lightningAddress) setLightningAddress(lightningAddress);
+
     setLoadingLightningAddress(false);
   }
 
@@ -172,7 +172,7 @@ function Receive() {
     return (
       <>
         <div className="relative p-8 bg-white rounded-lg shadow-sm ring-1 ring-black ring-opacity-5 flex justify-center items-center overflow-hidden">
-          <QRCode value={invoice.paymentRequest.toUpperCase()} level="M" />
+          <QRCode value={invoice.paymentRequest.toUpperCase()} />
           {paid && (
             <div className="absolute inset-0 flex justify-center items-center bg-white/90">
               <div className="text-center">
@@ -319,90 +319,86 @@ function Receive() {
           )}
           <div>
             <Container justifyBetween maxWidth="sm">
-              {isAlbyOAuthUser && (
-                <div
-                  className="bg-white dark:bg-surface-01dp border-gray-200 dark:border-neutral-700 rounded border p-5 flex flex-col justify-center items-center mb-4 gap-2 text-gray-800 dark:text-neutral-200"
-                  onClick={() => {
-                    setLoadingLightningAddress(!loadingLightningAddress);
-                  }}
-                >
-                  <>
-                    <div className="relative flex flex-grid">
-                      <div className="w-[256px] h-[256px]">
-                        {loadingLightningAddress ? (
-                          <>
-                            <SkeletonLoader className="w-[256px] h-[256px] relative -top-1 " />
-                          </>
-                        ) : (
-                          <QRCode
-                            value={`lightning:${lightningAddress}`}
-                            level="M"
-                            className="rounded"
-                          />
-                        )}
-                        {authAccount ? (
-                          <Avatar
-                            size={72}
-                            className="border-[7px] border-white rounded-full absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10"
-                            url={authAccount.avatarUrl}
-                            name={authAccount.id}
-                          />
-                        ) : (
-                          <SkeletonLoader
-                            circle
-                            opaque={false}
-                            className="w-[72px] h-[72px] border-[7px] border-white rounded-full absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 opacity-100"
-                          />
-                        )}
+              <div className="flex flex-col gap-2">
+                {isAlbyOAuthUser && (
+                  <div className="bg-white dark:bg-surface-01dp border-gray-200 dark:border-neutral-700 rounded border p-4 flex flex-col justify-center items-center gap-2 text-gray-800 dark:text-neutral-200 space-y-2">
+                    <>
+                      <div className="relative flex flex-grid">
+                        <div className="w-56 h-56">
+                          {loadingLightningAddress ? (
+                            <>
+                              <SkeletonLoader className="w-56 h-56 relative -top-1 " />
+                            </>
+                          ) : (
+                            <QRCode
+                              value={`lightning:${lightningAddress}`}
+                              size={224}
+                            />
+                          )}
+                          {auth.account ? (
+                            <Avatar
+                              size={56}
+                              className="border-[4px] border-white rounded-full absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10"
+                              url={auth.account.avatarUrl}
+                              name={auth.account.id}
+                            />
+                          ) : (
+                            <SkeletonLoader
+                              circle
+                              opaque={false}
+                              className="w-[56px] h-[56px] border-[4px] border-white rounded-full absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 opacity-100"
+                            />
+                          )}
+                        </div>
                       </div>
-                    </div>
-                    {loadingLightningAddress ? (
-                      <SkeletonLoader className="w-32" />
-                    ) : (
-                      <a
-                        className="flex flex-row items-center cursor-pointer font-medium"
-                        onClick={() => {
-                          navigator.clipboard.writeText(lightningAddress);
-                          toast.success(tCommon("copied"));
-                        }}
-                      >
-                        {lightningAddress}
-                        <CopyIcon className="w-6 h-6" />
-                      </a>
-                    )}
-                  </>
-                </div>
-              )}
-              {isAlbyOAuthUser && (
+                      {loadingLightningAddress ? (
+                        <SkeletonLoader className="w-32" />
+                      ) : (
+                        <a
+                          className="flex flex-row items-center cursor-pointer font-medium"
+                          onClick={() => {
+                            navigator.clipboard.writeText(lightningAddress);
+                            toast.success(tCommon("copied"));
+                          }}
+                        >
+                          {lightningAddress}
+                          <CopyIcon className="w-6 h-6" />
+                        </a>
+                      )}
+                    </>
+                  </div>
+                )}
+                {isAlbyOAuthUser && (
+                  <IconLinkCard
+                    title={"Lightning invoice"}
+                    description={"Request instant and specific amount payments"}
+                    icon={<LightningIcon className="w-8" />}
+                    onClick={() => {
+                      navigate("/lnurlRedeem");
+                    }}
+                  />
+                )}
+                {isAlbyUser && (
+                  <IconLinkCard
+                    title={"Bitcoin address"}
+                    description={
+                      "Receive via bitcoin address using a swap service"
+                    }
+                    icon={<BitcoinCircleIcon className="w-8" />}
+                    onClick={() => {
+                      navigate("/onChainReceive");
+                    }}
+                  />
+                )}
                 <IconLinkCard
-                  title={"Lightning invoice"}
-                  description={"Request instant and specific amount payments"}
-                  icon={<LightningIcon className="w-8" />}
+                  title={"Redeem"}
+                  description={"Withdraw bitcoin from an LNURL code"}
+                  icon={<RedeemIcon className="w-8" />}
                   onClick={() => {
                     navigate("/lnurlRedeem");
                   }}
                 />
-              )}
-              {isAlbyUser && (
-                <IconLinkCard
-                  title={"Bitcoin address"}
-                  description={
-                    "Receive via bitcoin address using a swap service"
-                  }
-                  icon={<BitcoinCircleIcon className="w-8" />}
-                  onClick={() => {
-                    navigate("/onChainReceive");
-                  }}
-                />
-              )}
-              <IconLinkCard
-                title={"Redeem"}
-                description={"Withdraw bitcoin from an LNURL code"}
-                icon={<RedeemIcon className="w-8" />}
-                onClick={() => {
-                  navigate("/lnurlRedeem");
-                }}
-              />
+              </div>
             </Container>
           </div>
         </div>
@@ -427,12 +423,12 @@ function IconLinkCard({
 }: IconLinkCardProps) {
   return (
     <div
-      className="shadow rounded-md p-5 bg-white dark:bg-surface-01dp hover:bg-gray-50 dark:hover:bg-surface-02dp text-gray-800 dark:text-neutral-200 cursor-pointer flex flex-row items-center mb-4 gap-4"
+      className="shadow rounded-md p-4 bg-white dark:bg-surface-01dp hover:bg-gray-50 dark:hover:bg-surface-02dp text-gray-800 dark:text-neutral-200 cursor-pointer flex flex-row items-center gap-3"
       onClick={onClick}
     >
       <div className="flex-shrink-0 flex justify-center">{icon}</div>
       <div className="flex-grow">
-        <div className="font-medium text-lg">{title}</div>
+        <div className="font-medium">{title}</div>
         <div className="text-gray-600 dark:text-neutral-400">{description}</div>
       </div>
       <div className="flex-shrink-0 flex justify-end ">
