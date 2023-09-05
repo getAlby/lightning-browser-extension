@@ -1,4 +1,5 @@
 import { CaretDownIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
+import Loading from "@components/Loading";
 import { Disclosure } from "@headlessui/react";
 import { useTranslation } from "react-i18next";
 import Button from "~/app/components/Button";
@@ -8,17 +9,29 @@ import { Transaction } from "~/types";
 import Badge from "../Badge";
 
 export type Props = {
-  transactions: Transaction[];
+  transactions: Transaction[] | null | undefined;
+  loading?: boolean;
+  noResultMsg?: string;
 };
 
-export default function TransactionsTable({ transactions }: Props) {
+export default function TransactionsTable({
+  transactions,
+  noResultMsg,
+  loading = false,
+}: Props) {
   const { getFormattedSats } = useSettings();
-  const { t: tComponents } = useTranslation("components");
+  const { t } = useTranslation("components");
 
-  return (
-    <div className="shadow overflow-hidden rounded-lg">
-      <div className="bg-white divide-y divide-gray-200 dark:divide-white/10 dark:bg-surface-02dp">
-        {transactions.map((tx) => (
+  return loading ? (
+    <div className="w-full flex flex-col items-center mt-4">
+      <Loading />
+    </div>
+  ) : !transactions?.length && noResultMsg ? (
+    <p className="text-gray-500 dark:text-neutral-400">{noResultMsg}</p>
+  ) : (
+    <>
+      <div className="shadow overflow-hidden rounded-lg bg-white divide-y divide-gray-200 dark:divide-white/10 dark:bg-surface-02dp">
+        {transactions?.map((tx) => (
           <div key={tx.id} className="px-3 py-2">
             <Disclosure>
               {({ open }) => (
@@ -27,7 +40,7 @@ export default function TransactionsTable({ transactions }: Props) {
                     <div className="overflow-hidden mr-3">
                       <div
                         className="
-                      text-sm font-medium text-gray-900 truncate dark:text-white"
+                  text-sm font-medium text-gray-900 truncate dark:text-white"
                       >
                         <p className="truncate">
                           {tx.publisherLink && tx.title ? (
@@ -92,28 +105,20 @@ export default function TransactionsTable({ transactions }: Props) {
                           {tx.boostagram && (
                             <ul>
                               <li>
-                                {tComponents(
-                                  "transactionsTable.boostagram.sender"
-                                )}
-                                : {tx.boostagram.sender_name}
+                                {t("transactionsTable.boostagram.sender")}:{" "}
+                                {tx.boostagram.sender_name}
                               </li>
                               <li>
-                                {tComponents(
-                                  "transactionsTable.boostagram.message"
-                                )}
-                                : {tx.boostagram.message}
+                                {t("transactionsTable.boostagram.message")}:{" "}
+                                {tx.boostagram.message}
                               </li>
                               <li>
-                                {tComponents(
-                                  "transactionsTable.boostagram.app"
-                                )}
-                                : {tx.boostagram.app_name}
+                                {t("transactionsTable.boostagram.app")}:{" "}
+                                {tx.boostagram.app_name}
                               </li>
                               <li>
-                                {tComponents(
-                                  "transactionsTable.boostagram.podcast"
-                                )}
-                                : {tx.boostagram.podcast}
+                                {t("transactionsTable.boostagram.podcast")}:{" "}
+                                {tx.boostagram.podcast}
                               </li>
                             </ul>
                           )}
@@ -124,7 +129,7 @@ export default function TransactionsTable({ transactions }: Props) {
                           {tx.totalFees !== undefined && (
                             <p className="float-left">
                               <span className="font-bold">
-                                {tComponents("transactionsTable.fee")}
+                                {t("transactionsTable.fee")}
                               </span>
                               <br />
                               {getFormattedSats(tx.totalFees)}
@@ -139,9 +144,7 @@ export default function TransactionsTable({ transactions }: Props) {
                             >
                               <Button
                                 primary
-                                label={tComponents(
-                                  "transactionsTable.open_location"
-                                )}
+                                label={t("transactionsTable.open_location")}
                               />
                             </a>
                           )}
@@ -151,7 +154,7 @@ export default function TransactionsTable({ transactions }: Props) {
                         <div className="my-2 flow-root">
                           <p className="float-left break-all">
                             <span className="font-bold">
-                              {tComponents("transactionsTable.preimage")}
+                              {t("transactionsTable.preimage")}
                             </span>
                             <br />
                             {tx.preimage}
@@ -166,6 +169,6 @@ export default function TransactionsTable({ transactions }: Props) {
           </div>
         ))}
       </div>
-    </div>
+    </>
   );
 }

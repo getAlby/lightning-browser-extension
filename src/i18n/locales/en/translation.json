@@ -39,7 +39,7 @@
       "alby": {
         "title": "Alby Account",
         "description": "Sign up or use your existing Alby Account to get started with lightning payments in no time.",
-        "create_new": "Sign up"
+        "connect": "Connect with Alby"
       },
       "other": {
         "title": "Other Wallets",
@@ -62,35 +62,6 @@
             "confirm_password": "Please confirm your password.",
             "mismatched_password": "Passwords don't match."
           }
-        },
-        "forgot_password": "Forgot password?",
-        "title": "Your Alby Account",
-        "create_account": "Create a new Alby Account to send and receive bitcoin payments.",
-        "login_account": "Log in to connect your existing Alby Account.",
-        "host_wallet": "We host a Lightning wallet for you!",
-        "email": {
-          "create": {
-            "label": "Email Address"
-          },
-          "login": {
-            "label": "Email Address or Lightning Address"
-          }
-        },
-        "optional_lightning_note": {
-          "part1": "Your Alby Account also comes with an optional",
-          "part2": "lightning address",
-          "part3": ". This is a simple way for anyone to send you bitcoin on the lightning network.",
-          "part4": "learn more"
-        },
-        "optional_lightning_address": {
-          "label": "Choose your Lightning Address (optional)",
-          "suffix": "@getalby.com",
-          "title": "numbers and letters, at least 4 characters"
-        },
-        "errors": {
-          "create_wallet_error": "Failed to log in or create a new account. If you need help, please contact support@getalby.com",
-          "create_wallet_error1": "Failed to log in or create a new account.",
-          "create_wallet_error2": "If you need help, please contact support@getalby.com"
         }
       }
     },
@@ -384,9 +355,12 @@
       "recent_transactions": "Recent Transactions",
       "allowance_view": {
         "recent_transactions": "Recent Transactions",
-        "allowance": "Allowance",
-        "sats_used": "sats used",
-        "no_transactions": "No transactions on <0>{{name}}</0> yet."
+        "budget_spent": "Budget spent",
+        "sats": "sats",
+        "no_transactions": "No transactions on <0>{{name}}</0> yet.",
+        "total_spent": "Total spent",
+        "total_payments": "Total payments",
+        "permissions": "Permissions"
       },
       "default_view": {
         "recent_transactions": "Recent Transactions",
@@ -400,63 +374,72 @@
     "accounts": {
       "title": "Accounts",
       "account_view": {
-        "title1": "Account Information",
-        "title2": "Edit Account",
+        "title1": "Account Settings",
+        "title2": "Account",
         "name": {
           "title": "Display Name",
           "placeholder": "Account Display Name"
         },
         "export": {
-          "title": "Export Account",
+          "title": "Connect your mobile wallet",
+          "description": "Allows you to connect and use this account on mobile wallets like <0>Blue Wallet</0> and <0>Zeus</0>.",
           "screen_reader": "Export account details",
           "waiting": "waiting for LndHub data...",
           "your_ln_address": "Your Lightning Address:",
-          "tip_mobile": "Tip: Use this wallet with your mobile device",
           "export_uri": "LNDHub Credentials URI",
           "scan_qr": "Import this wallet into Zeus or BlueWallet by scanning the QRCode."
         },
+        "no_mnemonic_hint": "💡 You don't have a Master Key yet. <0>Click here</0></div> to create your Master Key and unlock these settings.",
         "mnemonic": {
-          "title": "Secret Key",
-          "description": "Your Account Secret Key allows you to use Alby to interact with protocols such as Nostr.",
-          "description2": "Your Secret Key is a set of 12 words that will allow you to access your keys to protocols such as Nostr on a new device or in case you loose access to your account.",
-          "saved": "Secret Key encrypted & saved successfully.",
-          "existing_nostr_key_notice": "⚠️ This account already has a nostr private key set and will not be derived from this secret key. You can manage your nostr key from your account settings.",
+          "title": "🔑 Key Management",
+          "saved": "Master Key encrypted & saved successfully.",
+          "existing_nostr_key_notice": "ℹ️ This account already has a nostr private key set and will not be derived from this Master Key. You can manage your Nostr key from your account settings.",
+          "new": {
+            "title": "What is a Master Key?"
+          },
           "generate": {
-            "title": "Generate your Secret Key",
-            "button": "Generate Secret Key"
+            "title": "Generate new Master Key",
+            "description": "Master Key allows you to interact with various protocols such as: Nostr, base layer of Bitcoin or LNURL-Auth.",
+            "button": "Generate Master Key",
+            "confirm": "I've backed up the recovery phrase to my Master Key in a private and secure place.",
+            "error_confirm": "Please confirm that you have backed up the recovery phrase."
           },
           "backup": {
-            "title": "Back up your Secret Key",
-            "confirm": "I've backed my account's Secret Key in a private and secure place",
-            "error_confirm": "Please confirm that you have backed up your secret key.",
-            "save": "Save Secret Key",
-            "button": "Backup Secret Key",
-            "warning": "⚠️ Don't forget to backup your Secret Key! Not backing it up might result in permanently loosing access to your Nostr identity or assets you manage with this key.",
-            "description1": "In addition to the Bitcoin Lightning Network, Alby allows you to generate keys and interact with other protocols such as:",
-            "description2": "Your Secret Key is a set of 12 words that will allow you to access your keys to those protocols on a new device or in case you loose access to your account. Make sure to write it down on a piece of paper and keep it safe:",
+            "title": "Back up your recovery phrase",
+            "save": "Save Master Key",
+            "button": "View recovery phrase",
+            "warning": "⚠️ Don't forget to back up your recovery phrase! Not backing it up might result in permanently losing access to your Master Key, Nostr identity or assets you manage with this key.",
+            "description": "Write down the recovery phrase to be able to restore your Master Key on a new device or in case you lose access to your account.",
+            "items": {
+              "keys": "Master Key allows you to interact with various protocols such as: Nostr, Liquid or base layer of Bitcoin.",
+              "recovery_phrase": "You can always access your Master Key by using it's recovery phrase.",
+              "words": "Recovery phrase is set of 12 words that works like a password, however it can't be changed or reset in case it's lost.",
+              "storage": "Make sure to write it down somewhere safe and private!"
+            },
             "protocols": {
               "nostr": "Nostr"
             }
           },
           "import": {
-            "title": "Import a Secret Key",
-            "description": "Use an existing Secret Key to recover your derived keys.",
-            "button": "Import Secret Key",
-            "confirm_overwrite": "You already have a secret key, are you sure you want to overwrite it?"
+            "title": "Import your Master Key",
+            "description": "Use the recovery phrase to import your Master Key into Alby.",
+            "button": "Import Master Key"
           },
           "inputs": {
-            "title": "Your Secret Key"
+            "title": "Recovery Phrase"
+          },
+          "lnurl": {
+            "title": "Login with Lightning",
+            "use_mnemonic": "Use Master Key for logging into lightning-powered apps (LNURL Auth)"
           }
         },
-        "bitcoin": {
-          "network": {
-            "title": "Bitcoin Network",
-            "subtitle": "Choose network to derive addresses and decode transactions",
-            "options": {
-              "bitcoin": "Mainnet",
-              "testnet": "Testnet",
-              "regtest": "Regtest"
-            }
+        "network": {
+          "title": "Network",
+          "subtitle": "Choose network to derive addresses and decode bitcoin and liquid transactions",
+          "options": {
+            "bitcoin": "Mainnet",
+            "testnet": "Testnet",
+            "regtest": "Regtest"
           }
         },
         "nostr": {
@@ -465,17 +448,40 @@
           "settings": {
             "label": "Nostr Settings",
             "title": "Nostr Settings",
-            "description": "Derive Nostr keys from your Secret Key or import your existing private key by pasting it in the \"Nostr Private Key\" field.",
-            "imported_key_warning": "⚠️ You're currently using an imported or randomly generated Nostr key. Your Nostr private key cannot be restored by your Secret Key, so remember to back up your Nostr private key.",
-            "can_restore": "✅ Nostr key derived from your secret key",
-            "derive": "Derive Nostr keys from your Secret Key",
-            "delete": "Delete current keys",
-            "no_secret_key": "💡 You don't have a secret key yet. <0>Click here</0></div> to create your secret key and derive your nostr keys."
+            "description": "Derive Nostr keys from your Master Key or import your existing private key by pasting it in the \"Nostr Private Key\" field.",
+            "imported_key_warning": "⚠️ You're currently using an imported or randomly generated Nostr key. Your Nostr private key cannot be restored by your recovery phrase, so remember to back up your Nostr private key separately.",
+            "can_restore": "✅ Nostr key derived from your Master Key",
+            "derive": "Derive from Master Key",
+            "remove": "Remove current keys",
+            "no_secret_key": "💡 You don't have a Master Key yet. <0>Click here</0></div> to create your Master Key and derive your Nostr keys."
+          },
+          "setup": {
+            "title": "Setup your Nostr keys",
+            "description": "Choose If you'd like to create a new Nostr account (a pair of private and public keys) or import an existing one.",
+            "description2": "Every Nostr account created in Alby comes with a <0>Recovery Phrase</0> – a set of 12 words that always allow you to regain access to your Nostr private keys.",
+            "new": {
+              "label": "Create a new Nostr account",
+              "description": "Generate a Master Key with a pair of new Nostr keys."
+            },
+            "import": {
+              "label": "Import a Nostr account",
+              "description": "Use an existing Nostr private key or derive it from your Master Key",
+              "title": "How would you like to import your Nostr account?",
+              "private_key": {
+                "label": "Use Nostr private key",
+                "description": "Paste your Nostr private key to import it to Alby"
+              },
+              "recovery_phrase": {
+                "label": "Use recovery phrase",
+                "description": "Use Master key recovery phrase to import your Nostr keys"
+              }
+            },
+            "new_to_nostr": "New to Nostr? <0>Learn more</0>"
           },
           "private_key": {
             "title": "Manage your Nostr private key",
             "subtitle": "Paste your nostr private key or generate a new one. <0>Learn more »</0>",
-            "warning": "Please enter the name of the account to confirm the deletion of your nostr private key:",
+            "warning": "Please enter the name of the account to confirm the deletion of your nostr private key:\n\n{{ name }}",
             "success": "Nostr private key encrypted & saved successfully.",
             "failed_to_remove": "The entered account name didn't match, your old Nostr private key has been restored.",
             "successfully_removed": "Nostr private key removed successfully.",
@@ -503,18 +509,18 @@
         "remove": {
           "title": "Remove This Account",
           "subtitle": "Removes all allowances, payment data and keys associated with this account.",
-          "confirm": "Are you sure you want to remove account: {{name}}? \nThis can not be undone. If you used this account to login to websites you might lose access to those.",
+          "confirm": "Please enter the name of the account to confirm the deletion of your account:\n\n{{ name }}\n\n ⚠️ All associated keys (Master Key, Nostr, etc) will be deleted if you continue. Please make sure you have backed them up, there is no other way to restore them.",
           "error": "The entered account name didn't match."
         },
         "remove_secretkey": {
-          "title": "Remove Secret Key",
-          "subtitle": "Removes the secret key from this account.",
-          "confirm": "Please enter the name of the account to confirm the deletion of your Secret Key.",
-          "success": "Successfully removed the Secret Key."
+          "title": "Remove Master Key",
+          "subtitle": "Removes the Master Key from this account.",
+          "confirm": "Please enter the name of the account to confirm the deletion of your Master Key:\n\n{{ name }}",
+          "success": "Successfully removed the Master Key."
         },
         "actions": {
           "remove_account": "Remove account",
-          "remove_secretkey": "Remove Secret Key",
+          "remove_secretkey": "Remove Master Key",
           "export": "Export"
         }
       },
@@ -644,12 +650,10 @@
     },
     "send": {
       "title": "Send",
-      "qrcode": {
-        "title": "Waiting to scan"
-      },
       "input": {
         "label": "Recipient",
-        "hint": "Invoice, Lightning Address or LNURL"
+        "hint": "Invoice, Lightning Address, LNURL",
+        "hint_with_bitcoin_address": "Invoice, Lightning Address, LNURL or bitcoin address"
       }
     },
     "lnurlpay": {
@@ -695,10 +699,25 @@
       },
       "success": "Withdraw request of {{amount}} sent successfully to {{sender}}"
     },
+    "lnurlredeem": {
+      "title": "Redeem bitcoin",
+      "input": {
+        "label": "LNURL-withdraw code",
+        "placeholder": "LNURL..."
+      },
+      "actions": {
+        "withdraw": "Withdraw"
+      },
+      "errors": {
+        "invalid_withdraw_request": "Invalid LNURL withdraw request",
+        "invalid_lnurl": "Invalid LNURL"
+      }
+    },
     "receive": {
       "title": "Receive",
       "actions": {
-        "create_invoice": "Create Invoice"
+        "create_invoice": "Create Invoice",
+        "copy_lightning_address": "Copy Lightning Address"
       },
       "amount": {
         "label": "Amount",
@@ -713,6 +732,7 @@
         "waiting": "waiting for payment...",
         "status": "Check payment status"
       },
+      "redeem_lnurl": "Redeem LNURL",
       "receive_via_bitcoin_address": "Receive via bitcoin address"
     },
     "on_chain": {
@@ -720,6 +740,9 @@
       "instructions1": "To receive bitcoin via a bitcoin address, login to your <0>Alby Account</0> on getalby.com",
       "instructions2": "You can find your bitcoin address on the <0>Receive</0> page.",
       "go": "Go to your Alby account →"
+    },
+    "scan_qrcode": {
+      "title": "Waiting to scan"
     },
     "discover": {
       "title": "Explore the Lightning ⚡️ Ecosystem",
@@ -780,10 +803,25 @@
       "title": "Sign",
       "content": "This website asks you to sign:"
     },
-    "confirm_get_address": {
-      "title": "Get Address",
-      "heading": "This website asks you to read:",
-      "content": "Your Bitcoin receive address"
+    "confirm_sign_pset": {
+      "title": "Sign",
+      "allow_sign": "This website asks you to sign a Liquid Transaction:",
+      "view_details": "View details",
+      "hide_details": "Hide details",
+      "view_raw_transaction": "View raw transaction (Base64)",
+      "hide_raw_transaction": "Hide raw transaction (Base64)",
+      "inputs": "Inputs",
+      "outputs": "Outputs",
+      "amount": "{{amount}} {{ticker}}"
+    },
+    "bitcoin": {
+      "confirm_get_address": {
+        "title": "Get Address"
+      },
+      "allow": "Allow this website to:",
+      "allow_sign": "Allow {{host}} to sign:",
+      "block_and_ignore": "Block and ignore {{host}}",
+      "block_added": "Added {{host}} to the blocklist, please reload the website."
     },
     "confirm_keysend": {
       "title": "Approve Payment",
@@ -802,6 +840,33 @@
         "label": "Amount (Satoshi)"
       }
     },
+    "send_to_bitcoin_address": {
+      "title": "Send to bitcoin address",
+      "recipient": {
+        "label": "Recipient"
+      },
+      "amount": {
+        "label": "Amount (sats)"
+      },
+      "network_fee": {
+        "label": "Network fee"
+      },
+      "service_fee": {
+        "label": "Service fee"
+      },
+      "total": {
+        "label": "Total"
+      },
+      "total_fee": {
+        "label": "Fee"
+      },
+      "provider": {
+        "label": "Swap provider"
+      },
+      "view_on_explorer": "View on mempool explorer",
+      "time_estimate": "ℹ️ Transactions usually arrive within 10-30 minutes.",
+      "service_unavailable": "Service temporary not available, please try again in a few minutes."
+    },
     "confirm_payment": {
       "title": "Approve Payment",
       "success": "Payment of {{amount}} successful!",
@@ -818,6 +883,13 @@
       "title": "Add account",
       "content": "This website wants to add an account ({{connector}}):",
       "tor_info": "In order to connect through the TOR network you need to first install the Alby companion app:"
+    },
+    "liquid": {
+      "title": "Liquid",
+      "allow": "Allow this website to:",
+      "allow_sign": "Allow {{host}} to sign:",
+      "block_and_ignore": "Block and ignore {{host}}",
+      "block_added": "Added {{host}} to the blocklist, please reload the website."
     },
     "nostr": {
       "title": "Nostr",
@@ -864,6 +936,15 @@
         "incoming": "Incoming transactions for this account"
       },
       "list_empty": "No transactions available yet."
+    },
+    "onboard": {
+      "title": "Setup your keys",
+      "request1": "This website requires key interaction",
+      "request2": "You haven't setup your keys yet",
+      "request3": "Setup is quick and easy",
+      "actions": {
+        "start_setup": "Start Setup"
+      }
     }
   },
   "common": {
@@ -887,7 +968,7 @@
     "pasted": "Pasted!",
     "description": "Description",
     "description_full": "Full Description",
-    "success_message": "{{amount}}{{fiatAmount}} sent to {{destination}}",
+    "success_message": "{{amount}}{{fiatAmount}} are on their way to {{destination}}",
     "response": "Response",
     "message": "Message",
     "help": "Help",
@@ -922,6 +1003,8 @@
       "log_in": "Log in",
       "remember": "Remember my choice and don't ask again",
       "more": "More",
+      "disconnect": "Disconnect",
+      "review": "Review",
       "download": "Download"
     },
     "connectors": {
@@ -943,23 +1026,24 @@
     },
     "range": {
       "between": "between {{min}} and {{max}}",
-      "lessThan": "< {{max}}",
-      "greaterThan": "> {{min}}"
+      "lessThanOrEqual": "≤ {{max}}",
+      "greaterOrEqual": "≥ {{min}}"
     }
   },
   "components": {
     "allowance_menu": {
-      "confirm_delete": "Are you sure you want to delete this website?",
-      "hint": "This will reset the current budget",
+      "confirm_delete": "Are you sure you want to disconnect this website?",
+      "hint": "Changing this will reset the current budget",
       "new_budget": {
-        "label": "New budget"
+        "label": "One-click payments budget",
+        "link_label": "Set a budget for one-click payments"
       },
       "enable_login": {
         "title": "Enable website login",
         "subtitle": "Automatically log in without confirmation when the website requests."
       },
       "edit_allowance": {
-        "title": "Edit Preferences",
+        "title": "Site settings",
         "screen_reader": "Allowance Options"
       },
       "edit_permissions": "Edit Permissions"
@@ -992,9 +1076,6 @@
         "outgoing": "Outgoing",
         "incoming": "Incoming"
       }
-    },
-    "confirm_or_cancel": {
-      "only_trusted": "Only connect with sites you trust."
     },
     "budget_control": {
       "remember": {
@@ -1045,22 +1126,33 @@
     },
     "publishers_table": {
       "payments": "payments",
-      "used": "used"
+      "budget": "budget",
+      "total": "total"
     },
     "badge": {
       "label": {
-        "active": "ACTIVE",
         "auth": "LOGIN",
-        "imported": "IMPORTED"
+        "imported": "IMPORTED",
+        "budget": "BUDGET"
       }
     }
   },
   "permissions": {
+    "webln": {
+      "getbalance": "Read the balance of your account."
+    },
     "nostr": {
       "getpublickey": "Read your public key.",
       "nip04encrypt": "Encrypt data.",
       "nip04decrypt": "Decrypt data.",
       "signmessage": "Sign message with your key."
+    },
+    "bitcoin": {
+      "getaddress": "Read your Bitcoin receive address."
+    },
+    "liquid": {
+      "getaddress": "Read your Liquid receive address.",
+      "signschnorr": "Sign message with your key."
     },
     "commando": {
       "bkpr-listbalances": "List of all current and historical account balances.",

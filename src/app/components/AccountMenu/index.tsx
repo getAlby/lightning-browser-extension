@@ -5,17 +5,15 @@ import {
   PlusIcon,
   WalletIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import Avatar from "~/app/components/Avatar";
 import MenuDivider from "~/app/components/Menu/MenuDivider";
 import SkeletonLoader from "~/app/components/SkeletonLoader";
 import { useAccount } from "~/app/context/AccountContext";
 import { useAccounts } from "~/app/context/AccountsContext";
-import { isAlbyAccount } from "~/app/utils";
-import msg from "~/common/lib/msg";
+import { isAlbyLNDHubAccount, isAlbyOAuthAccount } from "~/app/utils";
 import utils from "~/common/lib/utils";
 
 import Menu from "../Menu";
@@ -29,14 +27,13 @@ function AccountMenu({ showOptions = true }: Props) {
   const { t: tCommon } = useTranslation("common");
 
   const {
-    setAccountId,
-    fetchAccountInfo,
+    selectAccount,
     account: authAccount,
     balancesDecorated,
+    accountLoading,
   } = useAccount();
   const navigate = useNavigate();
   const { accounts, getAccounts } = useAccounts();
-  const [loading, setLoading] = useState(false);
 
   // update title
   const title =
@@ -48,22 +45,6 @@ function AccountMenu({ showOptions = true }: Props) {
     getAccounts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  async function selectAccount(accountId: string) {
-    setLoading(true);
-    try {
-      await msg.request("selectAccount", {
-        id: accountId,
-      });
-      setAccountId(accountId);
-      await fetchAccountInfo({ accountId });
-    } catch (e) {
-      console.error(e);
-      if (e instanceof Error) toast.error(`Error: ${e.message}`);
-    } finally {
-      setLoading(false);
-    }
-  }
 
   function openOptions(path: string) {
     // if we are in the popup
@@ -81,15 +62,30 @@ function AccountMenu({ showOptions = true }: Props) {
       <Menu as="div">
         <Menu.Button className="h-full px-2 rounded-md hover:bg-gray-100 dark:hover:bg-white/10 transition-colors duration-200">
           <div className="flex items-center">
-            <Avatar size={24} name={authAccount?.id || ""} />
+            {accountLoading ? (
+              <SkeletonLoader
+                className="rounded-full w-6 h-6 overflow-hidden"
+                containerClassName="inline-flex"
+              />
+            ) : (
+              <Avatar
+                size={24}
+                url={authAccount?.avatarUrl}
+                name={authAccount?.id || ""}
+              />
+            )}
             <div
-              className={`flex-auto mx-2 py-3 overflow-hidden max-w-[14rem] text-left`}
+              className={`flex-auto mx-2 py-3 overflow-hidden max-w-[10rem] text-left`}
             >
               <div
                 title={title || ""}
                 className="text-sm font-medium text-gray-700 dark:text-neutral-400 text-ellipsis overflow-hidden whitespace-nowrap"
               >
-                {loading ? <SkeletonLoader className="w-20" /> : title || "⚠️"}
+                {accountLoading ? (
+                  <SkeletonLoader className="w-20" />
+                ) : (
+                  title || "⚠️"
+                )}
               </div>
             </div>
             <CaretDownIcon className="h-4 w-4 dark:text-white" />
@@ -106,20 +102,24 @@ function AccountMenu({ showOptions = true }: Props) {
               <span className="text-xs text-gray-500 dark:text-neutral-300">
                 {tCommon("balance")}
               </span>
-              {balancesDecorated.accountBalance ? (
-                <p className="flex justify-between">
-                  <span className="dark:text-white">
-                    {balancesDecorated.accountBalance}
-                  </span>
-                  {!!balancesDecorated.fiatBalance && (
-                    <span className="text-gray-500 dark:text-neutral-300">
-                      ~{balancesDecorated.fiatBalance}
-                    </span>
+              <p className="flex justify-between">
+                <span className="dark:text-white">
+                  {accountLoading ? (
+                    <SkeletonLoader className="w-16" />
+                  ) : (
+                    balancesDecorated.accountBalance
                   )}
-                </p>
-              ) : (
-                <SkeletonLoader />
-              )}
+                </span>
+                <span className="text-gray-500 dark:text-neutral-300">
+                  {accountLoading ? (
+                    <SkeletonLoader className="w-12" />
+                  ) : (
+                    balancesDecorated.fiatBalance && (
+                      <>~{balancesDecorated.fiatBalance}</>
+                    )
+                  )}
+                </span>
+              </p>
             </div>
           </Menu.Item>
           <Menu.ItemButton
@@ -130,7 +130,11 @@ function AccountMenu({ showOptions = true }: Props) {
             <WalletIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
             {t("options.account.account_settings")}
           </Menu.ItemButton>
-          {isAlbyAccount(authAccount?.alias) && (
+          {(isAlbyLNDHubAccount(
+            authAccount?.alias,
+            authAccount?.connectorType
+          ) ||
+            isAlbyOAuthAccount(authAccount?.connectorType)) && (
             <Menu.ItemButton
               onClick={() => {
                 window.open(`https://getalby.com/user`, "_blank");
@@ -157,12 +161,19 @@ function AccountMenu({ showOptions = true }: Props) {
                     key={accountId}
                     onClick={() => {
                       selectAccount(accountId);
+                      if (window.location.pathname !== "/prompt.html") {
+                        navigate("/");
+                      }
                     }}
-                    disabled={loading}
+                    disabled={accountLoading}
                     title={account.name}
                   >
                     <div className="shrink-0">
-                      <Avatar size={24} name={account.id} />
+                      <Avatar
+                        size={24}
+                        name={account.id}
+                        url={account.avatarUrl}
+                      />
                     </div>
                     <span className="overflow-hidden text-ellipsis whitespace-nowrap ml-2">
                       {account.name}&nbsp;

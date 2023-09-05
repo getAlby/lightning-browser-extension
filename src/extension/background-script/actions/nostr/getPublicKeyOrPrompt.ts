@@ -1,22 +1,25 @@
 import utils from "~/common/lib/utils";
-import type { MessageNostrPublicKeyGetOrPrompt } from "~/types";
+import { getHostFromSender } from "~/common/utils/helpers";
+import {
+  addPermissionFor,
+  hasPermissionFor,
+} from "~/extension/background-script/permissions";
+import type { MessageNostrPublicKeyGetOrPrompt, Sender } from "~/types";
 import { PermissionMethodNostr } from "~/types";
 
 import state from "../../state";
-import { addPermissionFor, hasPermissionFor } from "./helpers";
 
 const getPublicKeyOrPrompt = async (
-  message: MessageNostrPublicKeyGetOrPrompt
+  message: MessageNostrPublicKeyGetOrPrompt,
+  sender: Sender
 ) => {
-  if (!("host" in message.origin)) {
-    console.error("error", message.origin);
-    return;
-  }
+  const host = getHostFromSender(sender);
+  if (!host) return;
 
   try {
     const hasPermission = await hasPermissionFor(
       PermissionMethodNostr["NOSTR_GETPUBLICKEY"],
-      message.origin.host
+      host
     );
 
     if (hasPermission) {
@@ -35,7 +38,7 @@ const getPublicKeyOrPrompt = async (
       if (promptResponse.data.rememberPermission) {
         await addPermissionFor(
           PermissionMethodNostr["NOSTR_GETPUBLICKEY"],
-          message.origin.host
+          host
         );
       }
 

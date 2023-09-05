@@ -79,7 +79,6 @@ export default function ConnectKollidier({ variant }: Props) {
       if (variant === "create") {
         const headers = new Headers();
         headers.append("Accept", "application/json");
-        headers.append("Access-Control-Allow-Origin", "*");
         headers.append("Content-Type", "application/json");
         headers.append("X-User-Agent", "alby-extension");
         const body = JSON.stringify({
@@ -176,7 +175,6 @@ export default function ConnectKollidier({ variant }: Props) {
         <TextField
           id="username"
           label={t(`username.label`)}
-          type="text"
           required
           value={formData.username}
           onChange={handleChange}
@@ -185,6 +183,7 @@ export default function ConnectKollidier({ variant }: Props) {
       </div>
       <div className="mb-6">
         <PasswordForm
+          // FIXME: do not use alby keys - move these keys somewhere else for all languages
           i18nKeyPrefix="alby.pre_connect.set_password"
           formData={formData}
           setFormData={setFormData}

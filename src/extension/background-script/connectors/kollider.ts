@@ -45,7 +45,6 @@ interface KolliderAccount {
 
 const defaultHeaders = {
   Accept: "application/json",
-  "Access-Control-Allow-Origin": "*",
   "Content-Type": "application/json",
 };
 
@@ -116,7 +115,7 @@ export default class Kollider implements Connector {
         (invoice, index): ConnectorInvoice => ({
           id: `${invoice.payment_hash}-${index}`,
           memo: invoice.reference,
-          preimage: "", // lndhub doesn't support preimage (yet)
+          preimage: "", // kollider doesn't support preimage (yet)
           settled: invoice.settled,
           settleDate: invoice.settled_date,
           totalAmount: `${invoice.value}`,

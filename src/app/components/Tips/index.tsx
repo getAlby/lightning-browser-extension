@@ -43,9 +43,9 @@ export default function Tips() {
           border: "border-purple-500",
           arrow: "text-purple-500",
           backgroundIcon: <MnemonicTipCardIcon />,
-          link: `/accounts/${accountId}/secret-key/generate`,
+          link: `/accounts/${accountId}/nostr/setup`,
         },
-      } as const),
+      }) as const,
     [accountId]
   );
 

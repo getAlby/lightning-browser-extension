@@ -1,3 +1,8 @@
+import {
+  CreateSwapParams,
+  CreateSwapResponse,
+  SwapInfoResponse,
+} from "@getalby/sdk/dist/types";
 import { ACCOUNT_CURRENCIES } from "~/common/constants";
 import {
   ConnectPeerArgs,
@@ -11,14 +16,20 @@ import type {
   Accounts,
   Allowance,
   BitcoinNetworkType,
+  ConnectorType,
   DbPayment,
+  EsploraAssetRegistry,
   Invoice,
   LnurlAuthResponse,
+  MessageAccountEdit,
+  MessageAccountValidate,
   MessageInvoices,
   MessageLnurlAuth,
   MessageSettingsSet,
   NodeInfo,
+  PsetPreview,
   SettingsStorage,
+  ValidateAccountResponse,
 } from "~/types";
 
 import {
@@ -29,18 +40,22 @@ import {
 import msg from "./msg";
 
 export interface AccountInfoRes {
+  connectorType: ConnectorType;
   balance: { balance: string | number; currency: ACCOUNT_CURRENCIES };
   currentAccountId: string;
-  info: { alias: string; pubkey?: string };
+  info: { alias: string; pubkey?: string; lightning_address?: string };
   name: string;
+  avatarUrl?: string;
 }
 
-export interface GetAccountRes
-  extends Pick<Account, "id" | "connector" | "name"> {
+export interface GetAccountRes extends Pick<Account, "id" | "name"> {
+  connectorType: ConnectorType;
+  liquidEnabled: boolean;
   nostrEnabled: boolean;
   hasMnemonic: boolean;
   hasImportedNostrKey: boolean;
   bitcoinNetwork: BitcoinNetworkType;
+  useMnemonicForLnurlAuth: boolean;
 }
 interface StatusRes {
   configured: boolean;
@@ -81,14 +96,18 @@ export const swrGetAccountInfo = async (
         const { alias } = response.info;
         const { balance: resBalance, currency } = response.balance;
         const name = response.name;
+        const connectorType = response.connectorType;
         const balance =
           typeof resBalance === "number" ? resBalance : parseInt(resBalance); // TODO: handle amounts
+        const avatarUrl = response.avatarUrl;
         const account = {
           id,
           name,
           alias,
           balance,
+          connectorType,
           currency: currency || "BTC", // set default currency for every account
+          avatarUrl,
         };
         storeAccounts({
           ...accountsCache,
@@ -105,9 +124,19 @@ export const getAccount = (id?: string) =>
   msg.request<GetAccountRes>("getAccount", {
     id,
   });
+
+const validateAccount = (
+  account: MessageAccountValidate["args"]
+): Promise<ValidateAccountResponse> => msg.request("validateAccount", account);
+
 export const updateAllowance = () => msg.request<Accounts>("updateAllowance");
 export const selectAccount = (id: string) =>
   msg.request("selectAccount", { id });
+export const editAccount = (
+  id: string,
+  args: Omit<MessageAccountEdit["args"], "id">
+) => msg.request("editAccount", { id, ...args });
+
 export const getAllowance = (host: string) =>
   msg.request<Allowance>("getAllowance", { host });
 export const getPayments = (options?: { limit?: number }) =>
@@ -179,19 +208,41 @@ const getMnemonic = (id: string): Promise<string> =>
 
 const generateMnemonic = (): Promise<string> => msg.request("generateMnemonic");
 
-// TODO: consider adding removeMnemonic function, make mnemonic a string here
+// TODO: consider adding removeMnemonic function, make mnemonic a string here rather than optional (null = delete current mnemonic)
 const setMnemonic = (id: string, mnemonic: string | null): Promise<void> =>
   msg.request("setMnemonic", {
     id,
     mnemonic,
   });
 
+const getSwapInfo = (): Promise<SwapInfoResponse> => msg.request("getSwapInfo");
+const createSwap = (params: CreateSwapParams): Promise<CreateSwapResponse> =>
+  msg.request("createSwap", params);
+const getLiquidPsetPreview = (pset: string): Promise<PsetPreview> =>
+  msg.request("liquid/getPsetPreview", {
+    pset,
+  });
+
+const fetchLiquidAssetRegistry = (
+  psetPreview: PsetPreview
+): Promise<EsploraAssetRegistry> =>
+  msg.request("liquid/fetchAssetRegistry", {
+    psetPreview,
+  });
+
+const signPset = (pset: string): Promise<string> =>
+  msg.request("liquid/signPset", {
+    pset,
+  });
+
 export default {
   getAccount,
   getAccountInfo,
   getAccounts,
+  editAccount,
   getInfo,
   selectAccount,
+  validateAccount,
   getAllowance,
   updateAllowance,
   getPayments,
@@ -220,4 +271,11 @@ export default {
   getMnemonic,
   setMnemonic,
   generateMnemonic,
+  getSwapInfo,
+  createSwap,
+  liquid: {
+    getPsetPreview: getLiquidPsetPreview,
+    fetchAssetRegistry: fetchLiquidAssetRegistry,
+    signPset: signPset,
+  },
 };

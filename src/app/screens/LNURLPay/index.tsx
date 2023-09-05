@@ -49,6 +49,7 @@ const Dd = ({ children }: { children: React.ReactNode }) => (
 function LNURLPay() {
   const navState = useNavigationState();
   const details = navState.args?.lnurlDetails as LNURLPayServiceResponse;
+
   const {
     isLoading: isLoadingSettings,
     settings,
@@ -67,6 +68,11 @@ function LNURLPay() {
       Math.floor(+details?.minSendable / 1000).toString()) ||
       ""
   );
+
+  const amountMin = Math.floor(+details.minSendable / 1000);
+  const amountMax = Math.floor(+details.maxSendable / 1000);
+  const amountExceeded = +valueSat > (auth?.account?.balance || 0);
+  const rangeExceeded = +valueSat > amountMax || +valueSat < amountMin;
 
   const [showMoreFields, setShowMoreFields] = useState(false);
   const [fiatValue, setFiatValue] = useState("");
@@ -166,9 +172,7 @@ function LNURLPay() {
 
       const isValidInvoice = lnurl.verifyInvoice({
         paymentInfo,
-        metadata: details.metadata,
         amount: parseInt(valueSat) * 1000,
-        payerdata,
       });
 
       if (!isValidInvoice) {
@@ -383,16 +387,15 @@ function LNURLPay() {
       <div className="flex flex-col grow overflow-hidden">
         {!navState.isPrompt ? (
           <Header
-            title={
-              !successAction ? tCommon("actions.send") : tCommon("success")
-            }
             headerLeft={
               <IconButton
                 onClick={() => navigate(-1)}
                 icon={<CaretLeftIcon className="w-4 h-4" />}
               />
             }
-          />
+          >
+            {!successAction ? tCommon("actions.send") : tCommon("success")}
+          </Header>
         ) : (
           <ScreenHeader
             title={
@@ -439,18 +442,19 @@ function LNURLPay() {
                           autoFocus
                           id="amount"
                           label={t("amount.label")}
-                          min={Math.floor(+details.minSendable / 1000)}
-                          max={Math.floor(+details.maxSendable / 1000)}
+                          min={amountMin}
+                          max={amountMax}
+                          rangeExceeded={rangeExceeded}
                           value={valueSat}
                           onChange={(e) => setValueSat(e.target.value)}
                           fiatValue={fiatValue}
-                          hint={`${tCommon("balance")}: ${
-                            auth?.balancesDecorated?.accountBalance
-                          }`}
+                          hint={`${tCommon("balance")}: ${auth
+                            ?.balancesDecorated?.accountBalance}`}
+                          amountExceeded={amountExceeded}
                         />
                         <SatButtons
-                          min={Math.floor(+details.minSendable / 1000)}
-                          max={Math.floor(+details.maxSendable / 1000)}
+                          min={amountMin}
+                          max={amountMax}
                           onClick={setValueSat}
                           disabled={loadingConfirm}
                         />
@@ -518,7 +522,9 @@ function LNURLPay() {
                         isFocused={false}
                         label={tCommon("actions.confirm")}
                         loading={loadingConfirm}
-                        disabled={loadingConfirm || !valueSat}
+                        disabled={
+                          loadingConfirm || amountExceeded || rangeExceeded
+                        }
                         onCancel={reject}
                       />
                     </div>

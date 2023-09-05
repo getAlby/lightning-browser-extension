@@ -1,3 +1,4 @@
+import logo from "/static/assets/icons/umbrel.png";
 import CompanionDownloadInfo from "@components/CompanionDownloadInfo";
 import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
@@ -6,10 +7,9 @@ import { useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import PasswordViewAdornment from "~/app/components/PasswordViewAdornment";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
-
-import logo from "/static/assets/icons/umbrel.png";
 
 const initialFormData = {
   url: "",
@@ -24,6 +24,7 @@ export default function ConnectUmbrel() {
   const [formData, setFormData] = useState(initialFormData);
   const [loading, setLoading] = useState(false);
   const [hasTorSupport, setHasTorSupport] = useState(false);
+  const [lndconnectUrlVisible, setLndconnectUrlVisible] = useState(false);
 
   function handleLndconnectUrl(event: React.ChangeEvent<HTMLInputElement>) {
     try {
@@ -133,11 +134,20 @@ export default function ConnectUmbrel() {
       <div className="mt-6">
         <TextField
           id="lndconnect"
+          type={lndconnectUrlVisible ? "text" : "password"}
+          autoComplete="new-password"
           label={t("rest_url.label")}
           placeholder={t("rest_url.placeholder")}
           onChange={handleLndconnectUrl}
           required
           autoFocus={true}
+          endAdornment={
+            <PasswordViewAdornment
+              onChange={(passwordView) => {
+                setLndconnectUrlVisible(passwordView);
+              }}
+            />
+          }
         />
       </div>
       {formData.url.match(/\.onion/i) && (

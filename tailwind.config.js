@@ -32,12 +32,15 @@ module.exports = {
         "spin-fast": "spin 0.7s linear infinite",
       },
       fontFamily: {
-        sans: ["Inter var", ...defaultTheme.fontFamily.sans],
+        sans: ["Open Runde", ...defaultTheme.fontFamily.sans],
         serif: ["Catamaran", ...defaultTheme.fontFamily.sans],
       },
       fontSize: {
         xxxs: ".5rem",
         xxs: ".625rem",
+      },
+      screens: {
+        short: { raw: "(max-height: 800px)" },
       },
       spacing: {
         18: "4.5rem",

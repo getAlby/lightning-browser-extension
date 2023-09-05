@@ -17,36 +17,31 @@ import Send from "@screens/Send";
 import Settings from "@screens/Settings";
 import Transactions from "@screens/Transactions";
 import Unlock from "@screens/Unlock";
-import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { HashRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import AccountDetailLayout from "~/app/components/AccountDetailLayout";
 import ScrollToTop from "~/app/components/ScrollToTop";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
 import { getConnectorRoutes, renderRoutes } from "~/app/router/connectorRoutes";
-import BackupSecretKey from "~/app/screens/Accounts/BackupSecretKey";
-import GenerateSecretKey from "~/app/screens/Accounts/GenerateSecretKey";
-import ImportSecretKey from "~/app/screens/Accounts/ImportSecretKey";
+import BackupMnemonic from "~/app/screens/Accounts/BackupMnemonic";
+import GenerateMnemonic from "~/app/screens/Accounts/GenerateMnemonic";
+import NewMnemonic from "~/app/screens/Accounts/GenerateMnemonic/new";
+import ImportMnemonic from "~/app/screens/Accounts/ImportMnemonic";
 import NostrSettings from "~/app/screens/Accounts/NostrSettings";
+import NostrSetup from "~/app/screens/Accounts/NostrSetup/NostrSetup";
 import Discover from "~/app/screens/Discover";
+import LNURLRedeem from "~/app/screens/LNURLRedeem";
 import OnChainReceive from "~/app/screens/OnChainReceive";
-import AlbyWalletCreate from "~/app/screens/connectors/AlbyWallet/create";
-import AlbyWalletLogin from "~/app/screens/connectors/AlbyWallet/login";
+import ScanQRCode from "~/app/screens/ScanQRCode";
+import SendToBitcoinAddress from "~/app/screens/SendToBitcoinAddress";
 import ChooseConnector from "~/app/screens/connectors/ChooseConnector";
 import ChooseConnectorPath from "~/app/screens/connectors/ChooseConnectorPath";
-import { getAlbyWalletOptions } from "~/app/utils";
 import i18n from "~/i18n/i18nConfig";
 
 function Options() {
   const connectorRoutes = getConnectorRoutes();
-  const [options, setOptions] = useState({ signup_disabled: false });
-
-  useEffect(() => {
-    getAlbyWalletOptions().then((options) => {
-      setOptions(options);
-    });
-  }, []);
 
   return (
     <Providers>
@@ -61,7 +56,7 @@ function Options() {
               </RequireAuth>
             }
           >
-            <Route index element={<Navigate to="/publishers" replace />} />
+            <Route index element={<Navigate to="/wallet" replace />} />
             <Route path="discover">
               <Route index element={<Discover />} />
             </Route>
@@ -72,6 +67,10 @@ function Options() {
             <Route path="send" element={<Send />} />
             <Route path="confirmPayment" element={<ConfirmPayment />} />
             <Route path="keysend" element={<Keysend />} />
+            <Route
+              path="sendToBitcoinAddress"
+              element={<SendToBitcoinAddress />}
+            />
             <Route path="receive" element={<Receive />} />
             <Route path="onChainReceive" element={<OnChainReceive />} />
             <Route path="wallet" element={<DefaultView />} />
@@ -88,23 +87,25 @@ function Options() {
             <Route path="lnurlPay" element={<LNURLPay />} />
             <Route path="lnurlChannel" element={<LNURLChannel />} />
             <Route path="lnurlWithdraw" element={<LNURLWithdraw />} />
+            <Route path="lnurlRedeem" element={<LNURLRedeem />} />
             <Route path="lnurlAuth" element={<LNURLAuth />} />
             <Route path="settings" element={<Settings />} />
+            <Route path="scanQRCode" element={<ScanQRCode />} />
             <Route path="accounts">
-              <Route path=":id" element={<AccountDetail />} />
-              <Route
-                path=":id/secret-key/backup"
-                element={<BackupSecretKey />}
-              />
-              <Route
-                path=":id/secret-key/generate"
-                element={<GenerateSecretKey />}
-              />
-              <Route
-                path=":id/secret-key/import"
-                element={<ImportSecretKey />}
-              />
-              <Route path=":id/nostr" element={<NostrSettings />} />
+              <Route index element={<Accounts />} />
+              <Route path=":id" element={<AccountDetailLayout />}>
+                <Route index element={<AccountDetail />} />
+                <Route path="secret-key/backup" element={<BackupMnemonic />} />
+                <Route
+                  path="secret-key/generate"
+                  element={<GenerateMnemonic />}
+                />
+                <Route path="secret-key/new" element={<NewMnemonic />} />
+                <Route path="secret-key/import" element={<ImportMnemonic />} />
+                <Route path="nostr/settings" element={<NostrSettings />} />
+                <Route path="nostr/setup" element={<NostrSetup />} />
+              </Route>
+
               <Route
                 path="new"
                 element={
@@ -113,15 +114,9 @@ function Options() {
                   </Container>
                 }
               >
+                <Route index={true} element={<ChooseConnectorPath />}></Route>
                 <Route index element={<ChooseConnectorPath />} />
-                <Route
-                  path="create"
-                  element={<AlbyWalletCreate options={options} />}
-                />
-                <Route
-                  path="login"
-                  element={<AlbyWalletLogin options={options} />}
-                />
+
                 <Route path="choose-connector">
                   <Route
                     index
@@ -138,7 +133,6 @@ function Options() {
                   {renderRoutes(connectorRoutes)}
                 </Route>
               </Route>
-              <Route index element={<Accounts />} />
             </Route>
             <Route
               path="test-connection"

@@ -1,7 +1,3 @@
-import {
-  HiddenIcon,
-  VisibleIcon,
-} from "@bitcoin-design/bitcoin-icons-react/outline";
 import AlbyLogo from "@components/AlbyLogo";
 import Button from "@components/Button";
 import Container from "@components/Container";
@@ -10,13 +6,14 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 import Hyperlink from "~/app/components/Hyperlink";
+import PasswordViewAdornment from "~/app/components/PasswordViewAdornment";
 import { useAccount } from "~/app/context/AccountContext";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
 
 function Unlock() {
   const [password, setPassword] = useState("");
-  const [passwordView, setPasswordView] = useState(false);
+  const [passwordViewVisible, setPasswordViewVisible] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -72,24 +69,16 @@ function Unlock() {
           <div className="mb-5">
             <Input
               placeholder={t("unlock_password")}
-              type={passwordView ? "text" : "password"}
+              type={passwordViewVisible ? "text" : "password"}
               autoFocus
               value={password}
               onChange={handlePasswordChange}
               endAdornment={
-                <button
-                  type="button"
-                  className="flex justify-center items-center w-10 h-8"
-                  onClick={() => {
-                    setPasswordView(!passwordView);
+                <PasswordViewAdornment
+                  onChange={(passwordView) => {
+                    setPasswordViewVisible(passwordView);
                   }}
-                >
-                  {passwordView ? (
-                    <HiddenIcon className="h-6 w-6" />
-                  ) : (
-                    <VisibleIcon className="h-6 w-6" />
-                  )}
-                </button>
+                />
               }
             />
             {error && (

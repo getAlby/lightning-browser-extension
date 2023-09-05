@@ -4,9 +4,35 @@ import { generateSvgGAvatar } from "~/app/components/Avatar/generator";
 type Props = {
   name: string;
   size: number;
+  url?: string;
 };
 
 const Avatar = (props: Props) => {
+  if (props.url) {
+    return <AvatarImage {...props} />;
+  } else {
+    return <AvatarSVG {...props} />;
+  }
+};
+
+// Use object-cover to support non-square avatars that might be loaded by
+// different connectors
+const AvatarImage = (props: Props) => {
+  return (
+    <div
+      style={{
+        width: `${props.size}px`,
+        height: `${props.size}px`,
+      }}
+    >
+      <img
+        className="rounded-full object-cover w-full h-full"
+        src={props.url}
+      />
+    </div>
+  );
+};
+const AvatarSVG = (props: Omit<Props, "url">) => {
   const svgRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => {

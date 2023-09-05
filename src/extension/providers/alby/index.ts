@@ -1,22 +1,8 @@
-import { postMessage } from "../postMessage";
+import ProviderBase from "~/extension/providers/providerBase";
 
-export default class AlbyProvider {
-  enabled: boolean;
-
+export default class AlbyProvider extends ProviderBase {
   constructor() {
-    this.enabled = false;
-  }
-
-  enable() {
-    if (this.enabled) {
-      return Promise.resolve({ enabled: true });
-    }
-    return this.execute("enable").then((result) => {
-      if (typeof result.enabled === "boolean") {
-        this.enabled = result.enabled;
-      }
-      return result;
-    });
+    super("alby");
   }
 
   /**
@@ -32,20 +18,11 @@ export default class AlbyProvider {
     connector: string;
     config: Record<string, unknown>;
   }) {
-    if (!this.enabled) {
-      throw new Error("Provider must be enabled before calling addAccount");
-    }
+    this._checkEnabled("addAccount");
     return this.execute("addAccount", {
       name: params.name,
       connector: params.connector,
       config: params.config,
     });
-  }
-
-  execute(
-    action: string,
-    args?: Record<string, unknown>
-  ): Promise<Record<string, unknown>> {
-    return postMessage("alby", action, args);
   }
 }

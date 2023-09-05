@@ -1,4 +1,8 @@
 import utils from "~/common/lib/utils";
+import {
+  addPermissionFor,
+  hasPermissionFor,
+} from "~/extension/background-script/permissions";
 import { MessageGenericRequest } from "~/types";
 
 import db from "../../db";
@@ -53,18 +57,10 @@ const request = async (
     // prefix method with webln to prevent potential naming conflicts (e.g. with nostr calls that also use the permissions)
     const weblnMethod = `${WEBLN_PREFIX}${connectorName}/${methodInLowerCase}`;
 
-    const permission = await db.permissions
-      .where("host")
-      .equalsIgnoreCase(origin.host)
-      .and((p) => p.accountId === accountId && p.method === weblnMethod)
-      .first();
+    const hasPermission = await hasPermissionFor(weblnMethod, origin.host);
 
     // request method is allowed to be called
-    if (
-      permission &&
-      permission.enabled &&
-      supportedMethods.includes(methodInLowerCase)
-    ) {
+    if (hasPermission && supportedMethods.includes(methodInLowerCase)) {
       const response = await connector.requestMethod(
         methodInLowerCase,
         args.params
@@ -93,17 +89,7 @@ const request = async (
 
       // add permission to db only if user decided to always allow this request
       if (promptResponse.data.enabled) {
-        const permissionIsAdded = await db.permissions.add({
-          createdAt: Date.now().toString(),
-          accountId: accountId,
-          allowanceId: allowance.id,
-          host: origin.host,
-          method: weblnMethod, // ensure to store the prefixed method string
-          enabled: promptResponse.data.enabled,
-          blocked: promptResponse.data.blocked,
-        });
-
-        !!permissionIsAdded && (await db.saveToStorage());
+        await addPermissionFor(weblnMethod, origin.host);
       }
 
       return response;

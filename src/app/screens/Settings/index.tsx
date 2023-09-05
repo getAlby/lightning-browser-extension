@@ -11,9 +11,9 @@ import { Html5Qrcode } from "html5-qrcode";
 import type { FormEvent } from "react";
 import { useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
-import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Modal from "~/app/components/Modal";
 import { useSettings } from "~/app/context/SettingsContext";
 import { CURRENCIES } from "~/common/constants";
 import msg from "~/common/lib/msg";
@@ -264,7 +264,6 @@ function Settings() {
             <div className="w-64">
               <Input
                 placeholder={t("name.placeholder")}
-                type="text"
                 value={settings.userName}
                 onChange={(event) => {
                   saveSetting({
@@ -294,12 +293,9 @@ function Settings() {
         </Setting>
 
         <Modal
-          closeTimeoutMS={200}
           isOpen={modalIsOpen}
-          onRequestClose={closeModal}
-          contentLabel={t("change_password.screen_reader")}
-          overlayClassName="bg-black bg-opacity-25 fixed inset-0 flex justify-center items-center p-5"
-          className="rounded-lg bg-white w-full max-w-lg"
+          close={closeModal}
+          title={t("change_password.screen_reader")}
         >
           <div className="p-5 flex justify-between dark:bg-surface-02dp">
             <h2 className="text-2xl font-bold dark:text-white">

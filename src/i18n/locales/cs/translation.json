@@ -44,7 +44,6 @@
         "macaroon": {
           "label": "Macaroon (v hexadecimálním formátu)"
         },
-        "or": "NEBO",
         "drag_and_drop": "Přetáhněte svůj macaroon zde nebo ho <0>vyhledejte</0>",
         "errors": {
           "connection_failed": "Připojení se nezdařilo. Jsou vaše údaje pro LND zadány správně?"
@@ -297,7 +296,6 @@
       },
       "account_view": {
         "remove": {
-          "confirm": "Jste si jisti, že chcete odstranit účet: {{name}}? \nTato operace nelze vzít zpět. Pokud jste tento účet používali k přihlašovaní k webovým stránkam, můžete k nim ztratit přístup.",
           "title": "Odstranit tento účet",
           "subtitle": "Všechny propojené příspěvky budou smazány. Buďte si jisti, že akci chcete opravdu provést."
         },
@@ -317,7 +315,6 @@
           "private_key": {
             "title": "Správa vašeho klíče",
             "subtitle": "Vložte svůj privátní klíč nebo si vygenerujte nový. Předtím, než budete generovat nový klíč, ujistěte se, že máte svůj klíč zazalohovaný. <0>Dozvědět se více »</0>",
-            "warning": "Prosím vložte jméno vašeho účtu pro potvrzení smazání privátního klíče:",
             "success": "Privátní klíč byl úspěšně zašifrován a uložen.",
             "successfully_removed": "Privátní klíč byl odstraněn.",
             "label": "Privátní klíč",
@@ -342,7 +339,6 @@
           "export_uri": "LNDHub pověřovací URI",
           "waiting": "čekání na data z LndHub...",
           "your_ln_address": "Vaše Lightning adresa:",
-          "tip_mobile": "Tip: Použijte tuto peněženku s vaším mobilním zařízením",
           "scan_qr": "Importujte tuto peněženku do Zeus nebo BlueWallet naskenováním QR kódu."
         },
         "title1": "Informace o účtu",
@@ -475,9 +471,6 @@
     },
     "send": {
       "title": "Odeslat",
-      "qrcode": {
-        "title": "Čekám na oskenování"
-      },
       "input": {
         "label": "Příjemce",
         "hint": "Faktura, Lightning adresa nebo LNURL"
@@ -619,33 +612,12 @@
         "connect": "Připojit"
       },
       "alby": {
-        "create_new": "Vytvoření účtu",
         "title": "Alby",
         "description": "Zaregistrujte se, nebo se přihlašte ke svému existujícímu Alby účtu a začněte využívat lightning platby."
       }
     },
     "alby": {
       "pre_connect": {
-        "optional_lightning_note": {
-          "part4": "dozvědět se více",
-          "part3": ". Jedná se o jednoduchý způsob jak vám kdokoliv může zaslat bitcoin přes síť lightning.",
-          "part1": "Váš Alby účet poskytuje také volitelnou",
-          "part2": "lightning adresu"
-        },
-        "optional_lightning_address": {
-          "label": "Vyberte si svou Lightning adresu (volitelné)",
-          "suffix": "@getalby.com",
-          "title": "čísla a písmena, minimálně 4 znaky"
-        },
-        "errors": {
-          "create_wallet_error1": "Přihlášení nebo vytvoření nového účtu se nezdařilo.",
-          "create_wallet_error2": "Pokud potřebujete pomoct, prosím kontaktujte support@getalby.com",
-          "create_wallet_error": "Přihlášení nebo vytvoření nového účtu se nezdařilo. Pokud potřebujete pomoc, kontaktujte support@getalby.com"
-        },
-        "forgot_password": "Zapomněli jste heslo?",
-        "title": "Váš účet Alby",
-        "create_account": "Vytvořte nový Alby účet pro zasílání a příjímání bitcoin plateb.",
-        "login_account": "Přihlašte se pro připojení k existujícímu učtu Alby.",
         "set_password": {
           "choose_password": {
             "label": "Heslo"
@@ -657,15 +629,6 @@
             "enter_password": "Prosím zadejte heslo.",
             "confirm_password": "Prosím potvrďte své heslo.",
             "mismatched_password": "Hesla se neshodují."
-          }
-        },
-        "host_wallet": "Provozujeme pro vás Lightning peněženku!",
-        "email": {
-          "create": {
-            "label": "Emailová adresa"
-          },
-          "login": {
-            "label": "Emailová adresa nebo adresa Lightning"
           }
         }
       }
@@ -787,9 +750,6 @@
         "podcast": "Podcast"
       },
       "open_location": "Otevřít webovou stránku"
-    },
-    "confirm_or_cancel": {
-      "only_trusted": "Spojit pouze se stránkami, kterým důvěřujete."
     },
     "budget_control": {
       "remember": {

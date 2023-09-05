@@ -12,6 +12,7 @@ import type { Account, Accounts, SettingsStorage } from "~/types";
 
 import connectors from "./connectors";
 import type Connector from "./connectors/connector.interface";
+import Liquid from "./liquid";
 import Nostr from "./nostr";
 
 interface State {
@@ -21,6 +22,7 @@ interface State {
   connector: Promise<Connector> | null;
   currentAccountId: string | null;
   nostrPrivateKey: string | null;
+  liquid: Liquid | null;
   nostr: Nostr | null;
   mnemonic: Mnemonic | null;
   bitcoin: Bitcoin | null;
@@ -28,6 +30,7 @@ interface State {
   password: (password?: string | null) => Promise<string | null>;
   getAccount: () => Account | null;
   getConnector: () => Promise<Connector>;
+  getLiquid: () => Promise<Liquid>;
   getNostr: () => Promise<Nostr>;
   getMnemonic: () => Promise<Mnemonic>;
   getBitcoin: () => Promise<Bitcoin>;
@@ -63,13 +66,14 @@ const browserStorageKeys = Object.keys(browserStorageDefaults) as Array<
 
 let storage: "sync" | "local" = "sync";
 
-const state = createState<State>((set, get) => ({
+const getFreshState = () => ({
   connector: null,
   account: null,
-  settings: DEFAULT_SETTINGS,
+  settings: { ...DEFAULT_SETTINGS },
   migrations: [],
   accounts: {},
   currentAccountId: null,
+  liquid: null,
   // TODO: move nostr object to account state and handle encryption/decryption there
   nostr: null,
   // TODO: this should be deleted from storage and then can be removed (requires a migration)
@@ -79,6 +83,10 @@ const state = createState<State>((set, get) => ({
   // TODO: move bitcoin object to account state and handle encryption/decryption there
   bitcoin: null,
   mv2Password: null,
+});
+
+const state = createState<State>((set, get) => ({
+  ...getFreshState(),
   password: async (password) => {
     if (isManifestV3) {
       if (password) {
@@ -86,9 +94,8 @@ const state = createState<State>((set, get) => ({
         await browser.storage.session.set({ password });
       }
       // @ts-ignore: https://github.com/mozilla/webextension-polyfill/issues/329
-      const storageSessionPassword = await browser.storage.session.get(
-        "password"
-      );
+      const storageSessionPassword =
+        await browser.storage.session.get("password");
 
       return storageSessionPassword.password;
     } else {
@@ -128,6 +135,23 @@ const state = createState<State>((set, get) => ({
 
     const connector = await connectorPromise;
     return connector;
+  },
+  getLiquid: async () => {
+    const currentLiquid = get().liquid;
+    if (currentLiquid) {
+      return currentLiquid;
+    }
+    const mnemonic = await get().getMnemonic();
+    const currentAccountId = get().currentAccountId as string;
+    const account = get().accounts[currentAccountId];
+    const bitcoinNetwork = account.bitcoinNetwork || "bitcoin";
+
+    const liquid = new Liquid(
+      mnemonic,
+      bitcoinNetwork === "bitcoin" ? "liquid" : bitcoinNetwork
+    );
+    set({ liquid });
+    return liquid;
   },
   getNostr: async () => {
     const currentNostr = get().nostr;
@@ -204,6 +228,7 @@ const state = createState<State>((set, get) => ({
     set({
       connector: null,
       account: null,
+      liquid: null,
       nostr: null,
       mnemonic: null,
       bitcoin: null,
@@ -235,8 +260,19 @@ const state = createState<State>((set, get) => ({
       });
   },
   reset: async () => {
-    set({ ...browserStorageDefaults });
-    get().saveToStorage();
+    try {
+      // @ts-ignore: https://github.com/mozilla/webextension-polyfill/issues/329
+      await browser.storage.session.clear();
+    } catch (error) {
+      console.error("Failed to clear session storage", error);
+    }
+    if (storage === "sync") {
+      await browser.storage.sync.clear();
+    } else {
+      await browser.storage.local.clear();
+    }
+    set({ ...getFreshState() });
+    await get().saveToStorage();
   },
   saveToStorage: () => {
     const current = get();

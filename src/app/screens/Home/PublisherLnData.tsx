@@ -73,7 +73,7 @@ export const PublisherLnData: FC<Props> = ({ lnData }) => {
   };
 
   return (
-    <div className="border-b border-gray-200 dark:border-neutral-500">
+    <div className="border-b border-gray-200 dark:border-neutral-700">
       <PublisherCard
         title={lnData.name}
         description={lnData.description}

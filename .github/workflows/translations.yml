@@ -1,0 +1,30 @@
+name: Check Translation Changes
+
+on:
+  pull_request:
+    paths:
+      - "src/i18n/locales/en/translation.json"
+    types:
+      - opened
+      - synchronize
+
+jobs:
+  check_source_translation_file:
+    name: Check source translation file for changes
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2 # Fetch the base commit as well
+
+      - uses: actions/setup-node@v3
+
+      - name: Check source translation file for changes
+        run: |
+          file_path="src/i18n/locales/en/translation.json"
+          branch_name=${{ github.base_ref }}
+          url="https://api.github.com/repos/${{ github.repository }}/contents/${file_path}?ref=${branch_name}"
+          BASE_CONTENT=$(curl -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" $url | jq -c -r .content | base64 -d | jq -c .)
+          node scripts/check-changed-translations.js "$BASE_CONTENT"

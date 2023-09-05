@@ -2,10 +2,10 @@ import browser, { Runtime } from "webextension-polyfill";
 import { ABORT_PROMPT_ERROR } from "~/common/constants";
 import { getPosition as getWindowPosition } from "~/common/utils/window";
 import type {
+  DeferredPromise,
   Invoice,
   OriginData,
   OriginDataInternal,
-  DeferredPromise,
 } from "~/types";
 
 const utils = {
@@ -112,13 +112,13 @@ const utils = {
             closeWindow = false; // we'll only remove the tab and not the window further down
           }
 
-          // this interval hightlights the popup in the taskbar
-          const focusInterval = setInterval(() => {
-            if (!window.id) {
-              return;
-            }
+          // Re-focus the popup after 2 seconds to mitigate the problem of lost popups
+          // (e.g. when a user clicks the website)
+          setTimeout(() => {
+            if (!window.id) return;
+
             browser.windows.update(window.id, {
-              drawAttention: true,
+              focused: true,
             });
           }, 2100);
 
@@ -137,7 +137,6 @@ const utils = {
               sender.tab.id === tabId &&
               sender.tab.windowId
             ) {
-              clearInterval(focusInterval);
               browser.tabs.onRemoved.removeListener(onRemovedListener);
               // if the window was opened as tab we remove the tab
               // otherwise if a window was opened we have to remove the window.
@@ -162,7 +161,6 @@ const utils = {
           };
 
           const onRemovedListener = (tid: number) => {
-            clearInterval(focusInterval);
             if (tabId === tid) {
               browser.runtime.onMessage.removeListener(onMessageListener);
               reject(new Error(ABORT_PROMPT_ERROR));
@@ -178,10 +176,11 @@ const utils = {
     custom_records: Invoice["custom_records"] | undefined
   ) => {
     try {
-      const hasBoostagram = custom_records && 7629169 in custom_records;
-      const boostagramDecoded = hasBoostagram
-        ? atob(custom_records[7629169])
-        : undefined;
+      let boostagramDecoded: string | undefined;
+      const boostagram = custom_records?.[7629169];
+      if (boostagram) {
+        boostagramDecoded = atob(boostagram);
+      }
       return boostagramDecoded ? JSON.parse(boostagramDecoded) : undefined;
     } catch (e) {
       console.error(e);

@@ -17,13 +17,15 @@ const get = async (message: MessageAccountGet) => {
 
   const result: GetAccountRes = {
     id: account.id,
-    connector: account.connector,
+    connectorType: account.connector,
     name: account.name,
+    liquidEnabled: !!account.mnemonic,
     nostrEnabled: !!account.nostrPrivateKey,
     hasMnemonic: !!account.mnemonic,
     // Note: undefined (default for new accounts) it is also considered imported
     hasImportedNostrKey: account.hasImportedNostrKey !== false,
     bitcoinNetwork: account.bitcoinNetwork || "bitcoin",
+    useMnemonicForLnurlAuth: account.useMnemonicForLnurlAuth || false,
   };
 
   return {
