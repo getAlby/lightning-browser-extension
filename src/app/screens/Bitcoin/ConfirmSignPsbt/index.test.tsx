@@ -6,6 +6,8 @@ import state from "~/extension/background-script/state";
 import { btcFixture } from "~/fixtures/btc";
 import type { OriginData } from "~/types";
 
+import Bitcoin from "~/extension/background-script/bitcoin";
+import Mnemonic from "~/extension/background-script/mnemonic";
 import ConfirmSignPsbt from "./index";
 
 const mockOrigin: OriginData = {
@@ -44,19 +46,26 @@ const mockState = {
   password: passwordMock,
   currentAccountId: "1e1e8ea6-493e-480b-9855-303d37506e97",
   getAccount: () => ({
+    mnemonic: btcFixture.mnemonic,
     bitcoinNetwork: "regtest",
   }),
+  getMnemonic: () => new Mnemonic(btcFixture.mnemonic),
+  getBitcoin: () => new Bitcoin(new Mnemonic(btcFixture.mnemonic), "regtest"),
   getConnector: jest.fn(),
 };
 
 state.getState = jest.fn().mockReturnValue(mockState);
 
 // mock get settings
-msg.request = jest.fn().mockReturnValue({
-  bitcoinNetwork: "regtest",
-});
+msg.request = jest
+  .fn()
+  .mockReturnValue(
+    new Bitcoin(new Mnemonic(btcFixture.mnemonic), "regtest").getPsbtPreview(
+      btcFixture.regtestTaprootPsbt
+    )
+  );
 
-describe("ConfirmSignMessage", () => {
+describe("ConfirmSignPsbt", () => {
   test("render", async () => {
     await act(async () => {
       render(
@@ -69,25 +78,17 @@ describe("ConfirmSignMessage", () => {
     const user = userEvent.setup();
 
     await act(async () => {
-      await user.click(screen.getByText("View addresses"));
-    });
-    await act(async () => {
-      await user.click(screen.getByText("View PSBT hex"));
+      await user.click(screen.getByText("View details"));
     });
 
-    // TODO: update copy
     expect(
       await screen.findByText(
-        "This website asks you to sign a Partially Signed Bitcoin Transaction:"
+        "This website asks you to sign a Bitcoin Transaction:"
       )
     ).toBeInTheDocument();
 
-    expect(
-      await screen.findByText(btcFixture.regtestTaprootPsbt)
-    ).toBeInTheDocument();
-
     // Check inputs
-    const inputsContainer = (await screen.getByText("Input")
+    const inputsContainer = (await screen.getByText("Inputs")
       .parentElement) as HTMLElement;
     expect(inputsContainer).toBeInTheDocument();
     const inputsRef = within(inputsContainer);
@@ -113,6 +114,13 @@ describe("ConfirmSignMessage", () => {
       await outputsRef.findByText(
         "bcrt1p90h6z3p36n9hrzy7580h5l429uwchyg8uc9sz4jwzhdtuhqdl5eqkcyx0f"
       )
+    ).toBeInTheDocument();
+
+    await act(async () => {
+      await user.click(screen.getByText("View raw transaction (Hex)"));
+    });
+    expect(
+      await screen.findByText(btcFixture.regtestTaprootPsbt)
     ).toBeInTheDocument();
   });
 });

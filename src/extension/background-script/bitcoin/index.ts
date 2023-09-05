@@ -44,12 +44,6 @@ class Bitcoin {
       network: this.network,
     });
 
-    // // fix usages of window (unavailable in service worker)
-    // globalThis.window ??= globalThis.window || {};
-    // if (!globalThis.window.crypto) {
-    //   globalThis.window.crypto = crypto;
-    // }
-
     bitcoin.initEccLib(ecc);
     const ECPair: ECPairAPI = ECPairFactory(ecc);
 
