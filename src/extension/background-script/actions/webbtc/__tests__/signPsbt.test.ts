@@ -1,12 +1,16 @@
 import { hex } from "@scure/base";
 import * as btc from "@scure/btc-signer";
-import { getPsbtPreview } from "~/common/lib/psbt";
+import getPsbtPreview from "~/extension/background-script/actions/webbtc/getPsbtPreview";
 import signPsbt from "~/extension/background-script/actions/webbtc/signPsbt";
 import Bitcoin from "~/extension/background-script/bitcoin";
 import Mnemonic from "~/extension/background-script/mnemonic";
 import state from "~/extension/background-script/state";
 import { btcFixture } from "~/fixtures/btc";
-import type { MessageSignPsbt } from "~/types";
+import type {
+  MessageGetPsbtPreview,
+  MessageSignPsbt,
+  PsbtPreview,
+} from "~/types";
 
 const passwordMock = jest.fn;
 
@@ -40,7 +44,7 @@ afterEach(() => {
   jest.clearAllMocks();
 });
 
-async function sendPsbtMessage(psbt: string, derivationPath?: string) {
+async function sendPsbtMessage(psbt: string) {
   const message: MessageSignPsbt = {
     application: "LBE",
     prompt: true,
@@ -54,6 +58,22 @@ async function sendPsbtMessage(psbt: string, derivationPath?: string) {
   };
 
   return await signPsbt(message);
+}
+
+async function sendGetPsbtPreviewMessage(psbt: string) {
+  const message: MessageGetPsbtPreview = {
+    application: "LBE",
+    prompt: true,
+    action: "getPsbtPreview",
+    origin: {
+      internal: true,
+    },
+    args: {
+      psbt,
+    },
+  };
+
+  return await getPsbtPreview(message);
 }
 
 describe("signPsbt", () => {
@@ -82,7 +102,10 @@ describe("signPsbt input validation", () => {
 
 describe("decode psbt", () => {
   test("get taproot transaction preview", async () => {
-    const preview = getPsbtPreview(btcFixture.regtestTaprootPsbt, "regtest");
+    const previewResponse = await sendGetPsbtPreviewMessage(
+      btcFixture.regtestTaprootPsbt
+    );
+    const preview = previewResponse.data as PsbtPreview;
     expect(preview.inputs.length).toBe(1);
     expect(preview.inputs[0].address).toBe(
       "bcrt1p8wpt9v4frpf3tkn0srd97pksgsxc5hs52lafxwru9kgeephvs7rqjeprhg"

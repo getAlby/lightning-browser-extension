@@ -14,7 +14,7 @@ import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
-import type { OriginData, PsbtPreview } from "~/types";
+import type { Address, OriginData, PsbtPreview } from "~/types";
 
 function ConfirmSignPsbt() {
   const navState = useNavigationState();
@@ -154,7 +154,7 @@ function AddressPreview({
   amount,
   t,
 }: Address & {
-  t: TFunction<"translation", "confirm_sign_psbt", "translation">;
+  t: TFunction<"translation", "bitcoin.confirm_sign_psbt", "translation">;
 }) {
   return (
     <div>
