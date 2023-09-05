@@ -7,7 +7,12 @@ import {
   networks,
 } from "~/extension/background-script/bitcoin/networks";
 import Mnemonic from "~/extension/background-script/mnemonic";
-import { BitcoinAddress, BitcoinNetworkType } from "~/types";
+import {
+  Address,
+  BitcoinAddress,
+  BitcoinNetworkType,
+  PsbtPreview,
+} from "~/types";
 
 const BTC_TAPROOT_DERIVATION_PATH = "m/86'/0'/0'/0";
 const BTC_TAPROOT_DERIVATION_PATH_REGTEST = "m/86'/1'/0'/0";
@@ -95,6 +100,68 @@ class Bitcoin {
       index,
       publicKey: secp256k1.etc.bytesToHex(derivedKey.publicKey as Uint8Array),
     };
+  }
+
+  getPsbtPreview(psbt: string): PsbtPreview {
+    const unsignedPsbt = bitcoin.Psbt.fromHex(psbt, {
+      network: this.network,
+    });
+
+    const preview: PsbtPreview = {
+      inputs: [],
+      outputs: [],
+    };
+
+    for (let i = 0; i < unsignedPsbt.data.inputs.length; i++) {
+      if (i > 0) {
+        throw new Error("Multiple inputs currently unsupported");
+      }
+
+      const tapBip32Derivation = unsignedPsbt.data.inputs[i].tapBip32Derivation;
+      if (!tapBip32Derivation) {
+        throw new Error("No bip32Derivation in input " + i);
+      }
+      const address = btc.p2tr(
+        tapBip32Derivation[0].pubkey,
+        undefined,
+        this.network
+      ).address;
+
+      if (!address) {
+        throw new Error("No address found in input " + i);
+      }
+      const witnessUtxo = unsignedPsbt.data.inputs[i].witnessUtxo;
+      if (!witnessUtxo) {
+        throw new Error("No witnessUtxo in input " + i);
+      }
+
+      preview.inputs.push({
+        amount: witnessUtxo.value,
+        address,
+      });
+    }
+    for (let i = 0; i < unsignedPsbt.data.outputs.length; i++) {
+      const txOutput = unsignedPsbt.txOutputs[i];
+      const output = unsignedPsbt.data.outputs[i];
+      if (!output.tapBip32Derivation) {
+        throw new Error("No tapBip32Derivation in output");
+      }
+      const address = btc.p2tr(
+        output.tapBip32Derivation[0].pubkey,
+        undefined,
+        this.network
+      ).address;
+      if (!address) {
+        throw new Error("No address found in output " + i);
+      }
+
+      const previewOutput: Address = {
+        amount: txOutput.value,
+        address,
+      };
+      preview.outputs.push(previewOutput);
+    }
+    return preview;
   }
 }
 

@@ -818,6 +818,17 @@
       "confirm_get_address": {
         "title": "Get Address"
       },
+      "confirm_sign_psbt": {
+        "title": "Sign",
+        "allow_sign": "This website asks you to sign a Bitcoin Transaction:",
+        "view_details": "View details",
+        "hide_details": "Hide details",
+        "view_raw_transaction": "View raw transaction (Hex)",
+        "hide_raw_transaction": "Hide raw transaction (Hex)",
+        "inputs": "Inputs",
+        "outputs": "Outputs",
+        "amount": "{{amount}} sats"
+      },
       "allow": "Allow this website to:",
       "allow_sign": "Allow {{host}} to sign:",
       "block_and_ignore": "Block and ignore {{host}}",

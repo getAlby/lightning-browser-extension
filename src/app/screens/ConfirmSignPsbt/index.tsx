@@ -14,14 +14,13 @@ import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
-import { Address, PsbtPreview, getPsbtPreview } from "~/common/lib/psbt";
-import type { OriginData } from "~/types";
+import type { OriginData, PsbtPreview } from "~/types";
 
 function ConfirmSignPsbt() {
   const navState = useNavigationState();
   const { t: tCommon } = useTranslation("common");
   const { t } = useTranslation("translation", {
-    keyPrefix: "confirm_sign_psbt",
+    keyPrefix: "bitcoin.confirm_sign_psbt",
   });
   const navigate = useNavigate();
 
@@ -35,8 +34,8 @@ function ConfirmSignPsbt() {
 
   useEffect(() => {
     (async () => {
-      const settings = await api.getSettings();
-      setPreview(getPsbtPreview(psbt, settings.bitcoinNetwork));
+      const preview = await api.bitcoin.getPsbtPreview(psbt);
+      setPreview(preview);
     })();
   }, [origin, psbt]);
 
@@ -90,39 +89,36 @@ function ConfirmSignPsbt() {
               image={origin.icon}
               url={origin.host}
             />
-            <div className="rounded-md font-medium p-4 text-sm text-orange-700 bg-orange-50 dark:text-orange-400 dark:bg-orange-900">
-              {t("warning")}
-            </div>
             <div className="p-4 shadow bg-white dark:bg-surface-02dp rounded-lg overflow-hidden flex flex-col gap-4">
               <h2 className="font-medium dark:text-white">
                 {t("allow_sign", { host: origin.host })}
               </h2>
               <div className="flex gap-2">
                 <Hyperlink onClick={toggleShowAddresses}>
-                  {showAddresses ? t("hide_addresses") : t("view_addresses")}
-                </Hyperlink>
-                <span>{"•"}</span>
-                <Hyperlink onClick={toggleShowHex}>
-                  {showHex ? t("hide_hex") : t("view_hex")}
+                  {showAddresses ? t("hide_details") : t("view_details")}
                 </Hyperlink>
               </div>
 
               {showAddresses && (
-                <div>
-                  <p className="font-medium dark:text-white">{t("input")}</p>
-                  <AddressPreview t={t} {...preview.inputs[0]} />
-                </div>
-              )}
-
-              {showAddresses && (
-                <div>
+                <>
+                  <p className="font-medium dark:text-white">{t("inputs")}</p>
+                  <div className="flex flex-col gap-4">
+                    {preview.inputs.map((input) => (
+                      <AddressPreview key={input.address} t={t} {...input} />
+                    ))}
+                  </div>
                   <p className="font-medium dark:text-white">{t("outputs")}</p>
                   <div className="flex flex-col gap-4">
                     {preview.outputs.map((output) => (
                       <AddressPreview key={output.address} t={t} {...output} />
                     ))}
                   </div>
-                </div>
+                  <Hyperlink onClick={toggleShowHex}>
+                    {showHex
+                      ? t("hide_raw_transaction")
+                      : t("view_raw_transaction")}
+                  </Hyperlink>
+                </>
               )}
             </div>
 

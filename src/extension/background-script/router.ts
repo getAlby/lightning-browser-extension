@@ -81,6 +81,9 @@ const routes = {
     removePrivateKey: nostr.removePrivateKey,
     setPrivateKey: nostr.setPrivateKey,
   },
+  webbtc: {
+    getPsbtPreview: webbtc.getPsbtPreview,
+  },
 
   // Public calls that are accessible from the inpage script (through the content script)
   public: {
