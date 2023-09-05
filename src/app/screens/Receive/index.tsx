@@ -120,8 +120,8 @@ function Receive() {
               </div>
             )}
             <IconLinkCard
-              title={"Lightning invoice"}
-              description={"Request instant and specific amount payments"}
+              title={t("actions.invoice.title")}
+              description={t("actions.invoice.description")}
               icon={<LightningIcon className="w-8" />}
               onClick={() => {
                 navigate("/receive/invoice");
@@ -129,8 +129,8 @@ function Receive() {
             />
             {isAlbyUser && (
               <IconLinkCard
-                title={"Bitcoin address"}
-                description={"Receive via bitcoin address using a swap service"}
+                title={t("actions.bitcoin_address.title")}
+                description={t("actions.bitcoin_address.description")}
                 icon={<BitcoinCircleIcon className="w-8" />}
                 onClick={() => {
                   navigate("/onChainReceive");
@@ -138,8 +138,8 @@ function Receive() {
               />
             )}
             <IconLinkCard
-              title={"Redeem"}
-              description={"Withdraw a bitcoin voucher via LNURL code"}
+              title={t("actions.redeem.title")}
+              description={t("actions.redeem.description")}
               icon={<RedeemIcon className="w-8" />}
               onClick={() => {
                 navigate("/lnurlRedeem");
