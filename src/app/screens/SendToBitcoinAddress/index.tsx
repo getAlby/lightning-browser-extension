@@ -16,6 +16,7 @@ import { toast } from "react-toastify";
 import Alert from "~/app/components/Alert";
 import Container from "~/app/components/Container";
 import Hyperlink from "~/app/components/Hyperlink";
+import PublisherCard from "~/app/components/PublisherCard";
 import ResultCard from "~/app/components/ResultCard";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
@@ -227,12 +228,10 @@ function SendToBitcoinAddress() {
           <form onSubmit={handleReview} className="h-full flex space-between">
             <Container justifyBetween maxWidth="sm">
               <div className="flex flex-col gap-3 mb-4">
-                <div>
-                  <Dt>{t("recipient.label")}</Dt>
-                  <Dd>
-                    <BitcoinAddress address={bitcoinAddress} />
-                  </Dd>
-                </div>
+                <PublisherCard
+                  description={"bc1ped8jyrs5c...6h3zsf0ktxj"}
+                  image={""}
+                />
                 <div>
                   <Dt>{t("provider.label")}</Dt>
                   <Dd>

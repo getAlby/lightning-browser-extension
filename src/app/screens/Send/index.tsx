@@ -140,20 +140,18 @@ function Send() {
       </Header>
       <form onSubmit={handleSubmit} className="h-full">
         <Container justifyBetween maxWidth="sm">
-          <div className="pt-4">
-            <TextField
-              id="invoice"
-              label={t("input.label")}
-              hint={hint}
-              value={invoice}
-              disabled={loading}
-              autoFocus
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                setInvoice(extractLightningTagData(event.target.value.trim()))
-              }
-              endAdornment={<QrcodeAdornment route="send" />}
-            />
-          </div>
+          <TextField
+            id="invoice"
+            label={t("input.label")}
+            hint={hint}
+            value={invoice}
+            disabled={loading}
+            autoFocus
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+              setInvoice(extractLightningTagData(event.target.value.trim()))
+            }
+            endAdornment={<QrcodeAdornment route="send" />}
+          />
           <div className="my-4">
             <Button
               type="submit"

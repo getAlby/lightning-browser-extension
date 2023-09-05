@@ -118,7 +118,6 @@ function MakeInvoice() {
               image={origin.icon}
               url={origin.host}
             />
-
             <div className="pt-4">
               <div>
                 {amountEditable ? (
