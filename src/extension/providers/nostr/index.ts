@@ -1,5 +1,4 @@
 import EventEmitter from "events";
-import { PromiseQueue } from "~/extension/providers/promiseQueue";
 import ProviderBase from "~/extension/providers/providerBase";
 import { Event } from "./types";
 
@@ -12,7 +11,7 @@ declare global {
 export default class NostrProvider extends ProviderBase {
   nip04 = new Nip04(this);
 
-  constructor(queue: PromiseQueue) {
+  constructor() {
     super("nostr");
   }
 
