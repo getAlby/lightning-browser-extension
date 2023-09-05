@@ -8,10 +8,10 @@ export default class ProviderBase {
   private _queue: PromiseQueue;
   private _scope: string;
 
-  constructor(scope: string, queue: PromiseQueue) {
+  constructor(scope: string) {
     this.enabled = false;
     this._eventEmitter = new EventEmitter();
-    this._queue = queue;
+    this._queue = new PromiseQueue();
     this._scope = scope;
   }
 
@@ -50,6 +50,6 @@ export default class ProviderBase {
     action: string,
     args?: Record<string, unknown>
   ): Promise<Record<string, unknown>> {
-    return this._queue.add(() => postMessage(this._scope, action, args));
+    return postMessage(this._scope, action, args);
   }
 }

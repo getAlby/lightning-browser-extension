@@ -13,7 +13,7 @@ export default class NostrProvider extends ProviderBase {
   nip04 = new Nip04(this);
 
   constructor(queue: PromiseQueue) {
-    super("nostr", queue);
+    super("nostr");
   }
 
   async getPublicKey() {

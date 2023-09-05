@@ -9,7 +9,7 @@ declare global {
 
 export default class LiquidProvider extends ProviderBase {
   constructor(queue: PromiseQueue) {
-    super("liquid", queue);
+    super("liquid");
   }
 
   async getAddress() {

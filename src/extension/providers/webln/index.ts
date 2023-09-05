@@ -1,4 +1,3 @@
-import { PromiseQueue } from "~/extension/providers/promiseQueue";
 import ProviderBase from "~/extension/providers/providerBase";
 
 declare global {
@@ -22,8 +21,8 @@ type KeysendArgs = {
 };
 
 export default class WebLNProvider extends ProviderBase {
-  constructor(queue: PromiseQueue) {
-    super("webln", queue);
+  constructor() {
+    super("webln");
   }
 
   getInfo() {
