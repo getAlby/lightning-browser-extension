@@ -16,6 +16,8 @@ import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
 import { OriginData } from "~/types";
 
+import icon from "static/assets/illustrations/keychain.png";
+
 export default function Onboard() {
   const navState = useNavigationState();
   const origin = navState.origin as OriginData;
@@ -56,9 +58,10 @@ export default function Onboard() {
             title={origin.name}
             image={origin.icon}
             url={origin.host}
-            isSmall={false}
+            isSmall={true}
           />
           <div className="dark:text-white pt-6">
+            <img src={icon} className="w-48 mx-auto" />
             <div className="mb-2 flex items-center">
               <TwoKeysIcon className="w-7 h-7 mr-2" />
               <p>{t("request1")}</p>
