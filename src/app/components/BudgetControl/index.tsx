@@ -10,6 +10,7 @@ type Props = {
   budget: string;
   onBudgetChange: ChangeEventHandler<HTMLInputElement>;
   fiatAmount: string;
+  disabled?: boolean;
 };
 
 function BudgetControl({
@@ -18,6 +19,7 @@ function BudgetControl({
   budget,
   onBudgetChange,
   fiatAmount,
+  disabled,
 }: Props) {
   const { t } = useTranslation("components", {
     keyPrefix: "budget_control",
@@ -27,12 +29,17 @@ function BudgetControl({
 
   return (
     <div className="mb-4">
-      <div className="flex items-center">
+      <div
+        className={`flex items-center ${
+          disabled && "blur-[2px] pointer-events-none select-none"
+        }`}
+      >
         <Checkbox
           id="remember_me"
           name="remember_me"
           checked={remember}
           onChange={onRememberChange}
+          disabled={disabled ? disabled : false}
         />
         <label
           htmlFor="remember_me"

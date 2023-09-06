@@ -173,6 +173,7 @@ function ConfirmPayment() {
                   }}
                   budget={budget}
                   onBudgetChange={(event) => setBudget(event.target.value)}
+                  disabled={true}
                 />
               )}
               <ConfirmOrCancel
