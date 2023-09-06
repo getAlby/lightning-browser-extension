@@ -1,5 +1,6 @@
 import browser from "webextension-polyfill";
 
+import api from "~/common/lib/api";
 import getOriginData from "./originData";
 import shouldInject from "./shouldInject";
 
@@ -22,6 +23,7 @@ const disabledCalls = ["nostr/enable"];
 
 let isEnabled = false; // store if nostr is enabled for this content page
 let isRejected = false; // store if the nostr enable call failed. if so we do not prompt again
+let account = null;
 
 async function init() {
   const inject = await shouldInject();
@@ -42,7 +44,7 @@ async function init() {
   // message listener to listen to inpage nostr calls
   // those calls get passed on to the background script
   // (the inpage script can not do that directly, but only the inpage script can make nostr available to the page)
-  window.addEventListener("message", (ev) => {
+  window.addEventListener("message", async (ev) => {
     // Only accept messages from the current window
     if (
       ev.source !== window ||
@@ -82,12 +84,20 @@ async function init() {
         origin: getOriginData(),
       };
 
+      // Overrides the enable action so the user can go through onboarding to setup their keys
+      if (!account) {
+        account = await api.getAccount();
+        if (!account.nostrEnabled) {
+          messageWithOrigin.action = ev.data.action = `public/nostr/onboard`;
+        }
+      }
+
       const replyFunction = (response) => {
         if (ev.data.action === "nostr/enable") {
           isEnabled = response.data?.enabled;
           if (response.error) {
             console.error(response.error);
-            console.info("Enable was rejected ignoring further nostr calls");
+            console.info("User rejected, ignoring further nostr calls");
             isRejected = true;
           }
         }

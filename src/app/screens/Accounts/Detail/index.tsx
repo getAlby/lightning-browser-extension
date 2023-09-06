@@ -114,7 +114,9 @@ function AccountDetail() {
   }
 
   async function removeAccount({ id, name }: AccountAction) {
-    const confirm = window.prompt(t("remove.confirm"))?.toLowerCase();
+    const confirm = window
+      .prompt(t("remove.confirm", { name: accountName }))
+      ?.toLowerCase();
     if (!confirm) return;
 
     if (confirm == accountName.toLowerCase()) {

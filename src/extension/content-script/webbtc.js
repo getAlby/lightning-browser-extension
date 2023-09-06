@@ -1,8 +1,8 @@
 import browser from "webextension-polyfill";
 
+import api from "~/common/lib/api";
 import getOriginData from "./originData";
 import shouldInject from "./shouldInject";
-
 // WebBTC calls that can be executed from the WebBTC Provider.
 // Update when new calls are added
 const webbtcCalls = [
@@ -15,7 +15,7 @@ const disabledCalls = ["webbtc/enable"];
 
 let isEnabled = false; // store if webbtc is enabled for this content page
 let isRejected = false; // store if the webbtc enable call failed. if so we do not prompt again
-
+let account = null;
 const SCOPE = "webbtc";
 
 async function init() {
@@ -27,7 +27,7 @@ async function init() {
   // message listener to listen to inpage webbtc calls
   // those calls get passed on to the background script
   // (the inpage script can not do that directly, but only the inpage script can make webln available to the page)
-  window.addEventListener("message", (ev) => {
+  window.addEventListener("message", async (ev) => {
     // Only accept messages from the current window
     if (
       ev.source !== window ||
@@ -65,6 +65,14 @@ async function init() {
         prompt: true,
         origin: getOriginData(),
       };
+
+      // Overrides the enable action so the user can go through onboarding to setup their keys
+      if (!account) {
+        account = await api.getAccount();
+        if (!account.hasMnemonic) {
+          messageWithOrigin.action = `public/webbtc/onboard`;
+        }
+      }
 
       const replyFunction = (response) => {
         if (ev.data.action === `${SCOPE}/enable`) {
