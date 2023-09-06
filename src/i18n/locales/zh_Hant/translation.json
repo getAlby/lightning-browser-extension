@@ -362,7 +362,7 @@
           "your_ln_address": "你的閃電地址：",
           "export_uri": "LNDHub 憑據 URI",
           "scan_qr": "通過掃描二維碼將此錢包導入Zeus或BlueWallet。",
-          "description": "將允許你在移動錢包上連接並使用此帳戶，例如 <0>Blue Wallet</0> 和 <0>Zeus</0>。"
+          "description": "將允許你在移動錢包上連接並使用此帳戶，例如 <0>Blue Wallet</0> 和 <1>Zeus</1>。"
         },
         "nostr": {
           "title": "Nostr",

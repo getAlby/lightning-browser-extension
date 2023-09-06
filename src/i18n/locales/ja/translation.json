@@ -327,7 +327,7 @@
         "export": {
           "waiting": "LndHubデータを取得中...",
           "your_ln_address": "あなたのライトニング・アドレス：",
-          "description": "このアカウントを<0>Blue Wallet</0>や<0>Zeus</0>のようなモバイルウォレットに接続して使用できるようにする。",
+          "description": "このアカウントを<0>Blue Wallet</0>や<1>Zeus</1>のようなモバイルウォレットに接続して使用できるようにする。",
           "screen_reader": "アカウント情報をエクスポート",
           "export_uri": "LNDHubの認証URl",
           "title": "モバイルウォレットを接続",

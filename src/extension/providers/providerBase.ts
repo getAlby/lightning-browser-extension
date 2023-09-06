@@ -50,6 +50,6 @@ export default class ProviderBase {
     action: string,
     args?: Record<string, unknown>
   ): Promise<Record<string, unknown>> {
-    return this._queue.add(() => postMessage(this._scope, action, args));
+    return postMessage(this._scope, action, args);
   }
 }
