@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 import i18n from "i18next";
 import { createContext, useContext, useEffect, useRef, useState } from "react";
-import { useToast } from "~/app/hooks/useToast";
+import toast from "~/app/hooks/useToast";
 import { setTheme } from "~/app/utils";
 import { ACCOUNT_CURRENCIES, CURRENCIES } from "~/common/constants";
 import api from "~/common/lib/api";
@@ -36,7 +36,6 @@ export const SettingsProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const toast = useToast();
   const [settings, setSettings] =
     useState<SettingsContextType["settings"]>(DEFAULT_SETTINGS);
   const [isLoading, setIsLoading] = useState(true);
@@ -71,7 +70,7 @@ export const SettingsProvider = ({
       .finally(() => {
         setIsLoading(false);
       });
-  }, [toast]);
+  }, []);
 
   const getCurrencyRate = async (): Promise<number> => {
     // ensure to get the correct rate for current currency in state

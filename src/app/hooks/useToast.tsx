@@ -1,36 +1,31 @@
 import { ReactNode } from "react";
-import { toast as hotToast } from "react-hot-toast";
-import { useTheme } from "~/app/utils";
+import { ToastOptions, toast as hotToast } from "react-hot-toast";
 
 interface ToastMethods {
   success: (message: string) => void;
   error: (message: string) => void;
-  custom: (children: ReactNode) => void;
+  custom: (children: ReactNode, options?: ToastOptions) => void;
 }
 
-export const useToast = () => {
-  const theme = useTheme();
-
-  const bgColor = theme === "light" ? "white" : "#1F1F1F";
-  const textColor = theme === "light" ? "black" : "white";
-
-  const toast: ToastMethods = {
-    success: (message: string) => {
-      hotToast.success(message, {
-        style: { backgroundColor: bgColor, color: textColor },
-      });
-    },
-    error: (message: string) => {
-      hotToast.error(message, {
-        style: { backgroundColor: bgColor, color: textColor },
-      });
-    },
-    custom: (children: ReactNode) => {
-      hotToast.custom((t) => <div>{children}</div>, {
-        style: { backgroundColor: bgColor, color: textColor },
-      });
-    },
-  };
-
-  return toast;
+const toast: ToastMethods = {
+  success: (message: string) => {
+    toast.custom(message);
+  },
+  error: (message: string) => {
+    toast.custom(<>test</>);
+  },
+  custom: (children: ReactNode, options?: ToastOptions) => {
+    hotToast.custom(
+      (t: ToastOptions) => (
+        <span className="bg-red-500 dark:bg-green-500">
+          Custom and <b>bold</b>
+          {children}
+          <button onClick={() => hotToast.dismiss(t.id)}>Dismiss</button>
+        </span>
+      ),
+      options
+    );
+  },
 };
+
+export default toast;
