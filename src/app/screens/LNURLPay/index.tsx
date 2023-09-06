@@ -17,10 +17,10 @@ import axios from "axios";
 import React, { Fragment, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import Header from "~/app/components/Header";
 import IconButton from "~/app/components/IconButton";
 import ScreenHeader from "~/app/components/ScreenHeader";
+import toast from "~/app/components/Toast";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
@@ -158,7 +158,7 @@ function LNURLPay() {
         };
 
         if (!isSuccessResponse(response.data)) {
-          toast.warn(response.data.reason);
+          toast.error(response.data.reason);
           return;
         }
       } catch (e) {
@@ -176,7 +176,7 @@ function LNURLPay() {
       });
 
       if (!isValidInvoice) {
-        toast.warn("Payment aborted: Invalid invoice.");
+        toast.error("Payment aborted: Invalid invoice.");
         return;
       }
 
@@ -202,7 +202,7 @@ function LNURLPay() {
             break;
           case "aes": // TODO: For aes, LN WALLET must attempt to decrypt a ciphertext with payment preimage
           default:
-            toast.warn(
+            toast.error(
               `Not implemented yet. Please submit an issue to support success action: ${paymentInfo.successAction.tag}`
             );
             break;

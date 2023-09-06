@@ -15,7 +15,7 @@ import Confetti from "react-confetti";
 import { useTranslation } from "react-i18next";
 import QRCode from "react-qr-code";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import toast from "~/app/components/Toast";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
 import { isAlbyLNDHubAccount, isAlbyOAuthAccount } from "~/app/utils";

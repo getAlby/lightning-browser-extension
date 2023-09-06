@@ -1,4 +1,3 @@
-import logo from "/static/assets/icons/start9.png";
 import CompanionDownloadInfo from "@components/CompanionDownloadInfo";
 import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
@@ -6,10 +5,11 @@ import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
 import { useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import PasswordViewAdornment from "~/app/components/PasswordViewAdornment";
+import toast from "~/app/components/Toast";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
+import logo from "/static/assets/icons/start9.png";
 
 const initialFormData = {
   url: "",
