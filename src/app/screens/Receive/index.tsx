@@ -65,24 +65,32 @@ function Receive() {
 
       <div className="pt-4">
         <Container justifyBetween maxWidth="sm">
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2 md:gap-3">
             {isAlbyOAuthUser && (
               <div className="bg-white dark:bg-surface-01dp border-gray-200 dark:border-neutral-700 rounded border p-4 flex flex-col justify-center items-center gap-1 text-gray-800 dark:text-neutral-200">
                 <>
                   <div className="relative flex flex-grid">
-                    <div className="w-32 h-32">
+                    <div className="w-32 h-32 md:w-48 md:h-48">
                       {loadingLightningAddress ? (
                         <SkeletonLoader className="w-32 h-32 relative -top-1" />
                       ) : (
-                        <QRCode
-                          value={`lightning:${lightningAddress}`}
-                          size={128}
-                        />
+                        <>
+                          <QRCode
+                            className="block md:hidden"
+                            value={`lightning:${lightningAddress}`}
+                            size={128}
+                          />
+                          <QRCode
+                            className="hidden md:block"
+                            value={`lightning:${lightningAddress}`}
+                            size={192}
+                          />
+                        </>
                       )}
                       {!auth.accountLoading && auth.account ? (
                         <Avatar
-                          size={32}
-                          className="border-[3px] border-white rounded-full absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10"
+                          size={40}
+                          className="border-4 border-white rounded-full absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10"
                           url={auth.account.avatarUrl}
                           name={auth.account.id}
                         />
@@ -91,13 +99,13 @@ function Receive() {
                           <SkeletonLoader
                             circle
                             opaque={false}
-                            className="w-[32px] h-[32px] border-[3px] border-white rounded-full absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 opacity-100"
+                            className="w-[40px] h-[40px] border-4 border-white rounded-full absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 opacity-100"
                           />
                         )
                       )}
                     </div>
                   </div>
-                  <div className="mt-1 text-xs leading-4 font-medium">
+                  <div className="mt-1 text-xs md:text-sm leading-4 font-medium">
                     {loadingLightningAddress ? (
                       <SkeletonLoader className="w-40 relative" />
                     ) : (

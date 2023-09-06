@@ -20,8 +20,10 @@ export function IconLinkCard({
     >
       <div className="flex-shrink-0 flex justify-center">{icon}</div>
       <div className="flex-grow">
-        <div className="font-medium leading-5 text-sm">{title}</div>
-        <div className="text-gray-600 dark:text-neutral-400 text-xs leading-4">
+        <div className="font-medium leading-5 text-sm md:text-base">
+          {title}
+        </div>
+        <div className="text-gray-600 dark:text-neutral-400 text-xs leading-4 md:text-sm">
           {description}
         </div>
       </div>
