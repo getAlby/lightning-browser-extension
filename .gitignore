@@ -152,6 +152,3 @@ dist/
 
 # swc
 .swc/*
-
-# remove package.lock.json
-package.lock.json
