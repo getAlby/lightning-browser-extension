@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "@bitcoin-design/bitcoin-icons-react": "^0.1.9",
-    "@getalby/sdk": "^2.2.3",
+    "@getalby/sdk": "^2.4.0",
     "@headlessui/react": "^1.7.16",
     "@lightninglabs/lnc-web": "^0.2.4-alpha",
     "@noble/curves": "^1.1.0",

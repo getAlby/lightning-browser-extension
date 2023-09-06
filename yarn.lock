@@ -610,12 +610,13 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.48.0.tgz#642633964e217905436033a2bd08bf322849b7fb"
   integrity sha512-ZSjtmelB7IJfWD2Fvb7+Z+ChTIKWq6kjda95fLcQKNS5aheVHn4IkfgRQE3sIIzTcSLwLcLZUD9UBt+V7+h+Pw==
 
-"@getalby/sdk@^2.2.3":
-  version "2.2.3"
-  resolved "https://registry.yarnpkg.com/@getalby/sdk/-/sdk-2.2.3.tgz#fda6de0bc241b59e7ed813204067c4d14b794668"
-  integrity sha512-8NvzGtpyne8EmRlCcg/sF3kUZWeHRXqZwS1HNuP1ytNNfmKFUZpo3GOauwzEpFFmaD+Fht5bjT3Y/XLk0QtFSw==
+"@getalby/sdk@^2.4.0":
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/@getalby/sdk/-/sdk-2.4.0.tgz#fd3a6b24585e3dc32462da97c4b13a70294c7dee"
+  integrity sha512-aIGNwLRF9coj6koxfq7P4GtFZbFjQbnIheix39x9176PwFw4dXOdGXHPXnqioJTmeq80y+vX1yd+u/f03YGoeg==
   dependencies:
     crypto-js "^4.1.1"
+    events "^3.3.0"
     nostr-tools "1.13.1"
 
 "@headlessui/react@^1.7.16":
