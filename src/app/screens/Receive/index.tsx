@@ -1,7 +1,6 @@
 import {
   BitcoinCircleIcon,
   CaretLeftIcon,
-  CaretRightIcon,
   CopyIcon,
   LightningIcon,
 } from "@bitcoin-design/bitcoin-icons-react/outline";
@@ -19,7 +18,7 @@ import { useAccount } from "~/app/context/AccountContext";
 import RedeemIcon from "~/app/icons/RedeemIcon";
 import { isAlbyLNDHubAccount, isAlbyOAuthAccount } from "~/app/utils";
 import api from "~/common/lib/api";
-import { delay } from "~/common/utils/helpers";
+import { IconLinkCard } from "../../components/IconLinkCard/IconLinkCard";
 
 function Receive() {
   const auth = useAccount();
@@ -37,19 +36,17 @@ function Receive() {
   const isAlbyOAuthUser = isAlbyOAuthAccount(auth.account?.connectorType);
   const isAlbyUser = isAlbyOAuthUser || isAlbyLNDHubUser;
 
-  async function getLightningAddress() {
-    // Wait for a minimum delay to prevent flickering
-    const [accountInfo] = await Promise.all([api.getAccountInfo(), delay(250)]);
-
-    const lightningAddress = accountInfo.info.lightning_address;
-    if (lightningAddress) setLightningAddress(lightningAddress);
-
-    setLoadingLightningAddress(false);
-  }
-
   useEffect(() => {
-    getLightningAddress();
-  }, []);
+    (async () => {
+      if (!auth.account) return;
+      const accountInfo = await api.swr.getAccountInfo(auth.account.id);
+
+      const lightningAddress = accountInfo.lightningAddress;
+      if (lightningAddress) setLightningAddress(lightningAddress);
+
+      setLoadingLightningAddress(false);
+    })();
+  }, [auth.account]);
 
   return (
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
@@ -153,35 +150,3 @@ function Receive() {
 }
 
 export default Receive;
-
-type IconLinkCardProps = {
-  title: string;
-  description: string;
-  icon: React.ReactNode;
-  onClick: () => void;
-};
-
-function IconLinkCard({
-  icon,
-  title,
-  description,
-  onClick,
-}: IconLinkCardProps) {
-  return (
-    <div
-      className="shadow rounded-md p-4 bg-white dark:bg-surface-01dp hover:bg-gray-50 dark:hover:bg-surface-02dp text-gray-800 dark:text-neutral-200 cursor-pointer flex flex-row items-center gap-3"
-      onClick={onClick}
-    >
-      <div className="flex-shrink-0 flex justify-center">{icon}</div>
-      <div className="flex-grow">
-        <div className="font-medium leading-5 text-sm">{title}</div>
-        <div className="text-gray-600 dark:text-neutral-400 text-xs leading-4">
-          {description}
-        </div>
-      </div>
-      <div className="flex-shrink-0 flex justify-end ">
-        <CaretRightIcon className="w-8" />
-      </div>
-    </div>
-  );
-}

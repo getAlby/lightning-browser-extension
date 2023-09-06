@@ -723,7 +723,7 @@
         },
         "bitcoin_address": {
           "title": "Bitcoin address",
-          "description": "Request instant and specific amount payments"
+          "description": "Receive via bitcoin address using a swap service"
         },
         "redeem": {
           "title": "Redeem",
