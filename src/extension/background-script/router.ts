@@ -94,6 +94,7 @@ const routes = {
       addAccount: accounts.promptAdd,
     },
     webln: {
+      onboard: onboard.prompt,
       enable: allowances.enable,
       getInfo: ln.getInfo,
       sendPaymentOrPrompt: webln.sendPaymentOrPrompt,

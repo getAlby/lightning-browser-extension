@@ -1,5 +1,6 @@
 import browser from "webextension-polyfill";
 
+import api from "~/common/lib/api";
 import extractLightningData from "./batteries";
 import getOriginData from "./originData";
 import shouldInject from "./shouldInject";
@@ -49,7 +50,7 @@ async function init() {
   // message listener to listen to inpage webln/webbtc calls
   // those calls get passed on to the background script
   // (the inpage script can not do that directly, but only the inpage script can make webln available to the page)
-  window.addEventListener("message", (ev) => {
+  window.addEventListener("message", async (ev) => {
     // Only accept messages from the current window
     if (
       ev.source !== window ||
@@ -88,6 +89,13 @@ async function init() {
         prompt: true,
         origin: getOriginData(),
       };
+
+      // Overrides the enable action so the user can go through onboarding to setup their keys
+
+      const account = await api.getAccount();
+      if (ev.data.action === "webln/lnurl" && !account.hasMnemonic) {
+        messageWithOrigin.action = ev.data.action = `public/webln/onboard`;
+      }
 
       const replyFunction = (response) => {
         // if it is the enable call we store if webln is enabled for this content script
