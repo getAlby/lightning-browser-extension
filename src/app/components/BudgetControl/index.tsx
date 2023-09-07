@@ -19,7 +19,7 @@ function BudgetControl({
   budget,
   onBudgetChange,
   fiatAmount,
-  disabled,
+  disabled = false,
 }: Props) {
   const { t } = useTranslation("components", {
     keyPrefix: "budget_control",
@@ -29,17 +29,13 @@ function BudgetControl({
 
   return (
     <div className="mb-4">
-      <div
-        className={`flex items-center ${
-          disabled && "blur-[2px] pointer-events-none select-none"
-        }`}
-      >
+      <div className={`flex items-center`}>
         <Checkbox
           id="remember_me"
           name="remember_me"
           checked={remember}
           onChange={onRememberChange}
-          disabled={disabled ? disabled : false}
+          disabled={disabled}
         />
         <label
           htmlFor="remember_me"
