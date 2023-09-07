@@ -22,6 +22,10 @@ function Enable(props: Props) {
   });
   const { t: tCommon } = useTranslation("common");
 
+  // Fetch acount and check for keys if this is a call that requires keys
+  // Render onboarding prompt (instead of enable screen)
+  // Remove all content script changes introduced with the previous PR
+
   const enable = useCallback(() => {
     try {
       setLoading(true);
