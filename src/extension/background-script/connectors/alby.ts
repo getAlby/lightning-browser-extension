@@ -251,6 +251,10 @@ export default class Alby implements Connector {
         await this._updateOAuthToken(token);
       });
 
+      authClient.on("tokenRefreshFailed", async (error: Error) => {
+        console.error("Failed to Refresh token", error);
+      });
+
       if (this.config.oAuthToken) {
         try {
           if (authClient.isAccessTokenExpired()) {
