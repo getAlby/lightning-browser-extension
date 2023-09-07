@@ -2,6 +2,7 @@ import {
   ReceiveIcon,
   SendIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
+import { CopyIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import Button from "@components/Button";
 import Hyperlink from "@components/Hyperlink";
 import Loading from "@components/Loading";
@@ -13,6 +14,7 @@ import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import BalanceBox from "~/app/components/BalanceBox";
+import SkeletonLoader from "~/app/components/SkeletonLoader";
 import toast from "~/app/components/Toast";
 import { useAccount } from "~/app/context/AccountContext";
 import { useInvoices } from "~/app/hooks/useInvoices";
@@ -35,6 +37,8 @@ const DefaultView: FC<Props> = (props) => {
   const { t } = useTranslation("translation", { keyPrefix: "home" });
   const { t: tCommon } = useTranslation("common");
   const { t: tComponents } = useTranslation("components");
+  const [lightningAddress, setLightningAddress] = useState("");
+  const [loadingLightningAddress, setLoadingLightningAddress] = useState(true);
 
   const navigate = useNavigate();
 
@@ -52,6 +56,18 @@ const DefaultView: FC<Props> = (props) => {
   const isLoadingIncoming = accountLoading || isLoadingInvoices;
 
   const itemsLimit = 8;
+
+  async function getLightningAddress() {
+    setLoadingLightningAddress(true);
+    const response = await api.getAccountInfo();
+    const lightningAddress = response.info.lightning_address;
+    if (lightningAddress) setLightningAddress(lightningAddress);
+    setLoadingLightningAddress(false);
+  }
+
+  useEffect(() => {
+    getLightningAddress();
+  }, []);
 
   useEffect(() => {
     if (account?.id) loadTransactions(account.id, itemsLimit);
@@ -115,9 +131,32 @@ const DefaultView: FC<Props> = (props) => {
         <PublisherLnData lnData={props.lnDataFromCurrentTab[0]} />
       )}
       <div className="p-4">
-        <div className="flex space-x-4 mb-4">
-          <BalanceBox />
-        </div>
+        <BalanceBox />
+        {(loadingLightningAddress || lightningAddress) && (
+          <div className="flex justify-center">
+            <a
+              className="cursor-pointer flex flex-row items-center mb-6 px-3 py-2 bg-white dark:bg-surface-01dp border border-gray-200 dark:border-neutral-700 text-gray-800 dark:text-white rounded-full text-xs font-medium hover:border-primary hover:bg-yellow-50 hover:dark:bg-yellow-50 hover:color-"
+              title="Click to copy"
+              onClick={() => {
+                navigator.clipboard.writeText(lightningAddress);
+                toast.success("Copied to clipboard");
+              }}
+            >
+              {loadingLightningAddress && (
+                <>
+                  ⚡️&nbsp;
+                  <SkeletonLoader className="w-32" />
+                </>
+              )}
+              {!loadingLightningAddress && (
+                <>
+                  <span>⚡️ {lightningAddress}</span>
+                  <CopyIcon className="w-4 h-4" />
+                </>
+              )}
+            </a>
+          </div>
+        )}
         <div className="flex mb-6 lg:mb-12 space-x-4">
           <Button
             fullWidth
