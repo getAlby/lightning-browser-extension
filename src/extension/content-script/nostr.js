@@ -23,7 +23,6 @@ const disabledCalls = ["nostr/enable"];
 
 let isEnabled = false; // store if nostr is enabled for this content page
 let isRejected = false; // store if the nostr enable call failed. if so we do not prompt again
-let account = null;
 
 async function init() {
   const inject = await shouldInject();
@@ -85,11 +84,10 @@ async function init() {
       };
 
       // Overrides the enable action so the user can go through onboarding to setup their keys
-      if (!account) {
-        account = await api.getAccount();
-        if (!account.nostrEnabled) {
-          messageWithOrigin.action = ev.data.action = `public/nostr/onboard`;
-        }
+
+      const account = await api.getAccount();
+      if (!account.nostrEnabled) {
+        messageWithOrigin.action = ev.data.action = `public/nostr/onboard`;
       }
 
       const replyFunction = (response) => {
