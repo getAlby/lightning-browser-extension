@@ -4,8 +4,8 @@ import PublishersTable from "@components/PublishersTable";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import Button from "~/app/components/Button";
+import toast from "~/app/components/Toast";
 import msg from "~/common/lib/msg";
 import { Allowance } from "~/types";
 
