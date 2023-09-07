@@ -3,7 +3,7 @@ import Container from "@components/Container";
 import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
 import { TFunction } from "i18next";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -31,13 +31,22 @@ function ConfirmSignPsbt() {
   const [preview, setPreview] = useState<PsbtPreview | undefined>(undefined);
   const [showAddresses, setShowAddresses] = useState(false);
   const [showHex, setShowHex] = useState(false);
+  const [error, setError] = useState<string | undefined>();
 
   useEffect(() => {
     (async () => {
-      const preview = await api.bitcoin.getPsbtPreview(psbt);
-      setPreview(preview);
+      try {
+        const preview = await api.bitcoin.getPsbtPreview(psbt);
+        setPreview(preview);
+      } catch (e) {
+        console.error(e);
+        const error = e as { message: string };
+        const errorMessage = error.message || "Unknown error";
+        setError(errorMessage);
+        toast.error(`${tCommon("error")}: ${errorMessage}`);
+      }
     })();
-  }, [origin, psbt]);
+  }, [origin, psbt, tCommon]);
 
   async function confirm() {
     try {
@@ -47,7 +56,10 @@ function ConfirmSignPsbt() {
       setSuccessMessage(tCommon("success"));
     } catch (e) {
       console.error(e);
-      if (e instanceof Error) toast.error(`${tCommon("error")}: ${e.message}`);
+      const error = e as { message: string };
+      const errorMessage = error.message || "Unknown error";
+      setError(errorMessage);
+      toast.error(`${tCommon("error")}: ${errorMessage}`);
     } finally {
       setLoading(false);
     }
@@ -72,6 +84,10 @@ function ConfirmSignPsbt() {
   }
   function toggleShowHex() {
     setShowHex((current) => !current);
+  }
+
+  if (error) {
+    return <p className="dark:text-white">{error}</p>;
   }
 
   if (!preview) {

@@ -122,4 +122,20 @@ describe("decode psbt", () => {
     );
     expect(preview.outputs[1].amount).toBe(5_000_000);
   });
+
+  test("get taproot transaction preview 2", async () => {
+    const previewResponse = await sendGetPsbtPreviewMessage(
+      btcFixture.testnetTaprootPsbt
+    );
+    const preview = previewResponse.data as PsbtPreview;
+    expect(preview.inputs.length).toBe(1);
+    expect(preview.inputs[0].address).toBe(
+      "bcrt1p8wpt9v4frpf3tkn0srd97pksgsxc5hs52lafxwru9kgeephvs7rqjeprhg"
+    );
+    expect(preview.inputs[0].amount).toBe(5000);
+    expect(preview.outputs.length).toBe(1);
+
+    expect(preview.outputs[0].address).toBe("UNKNOWN");
+    expect(preview.outputs[0].amount).toBe(100);
+  });
 });

@@ -111,15 +111,13 @@ class Bitcoin {
         throw new Error("Multiple inputs currently unsupported");
       }
 
-      const tapBip32Derivation = unsignedPsbt.data.inputs[i].tapBip32Derivation;
-      if (!tapBip32Derivation) {
-        throw new Error("No bip32Derivation in input " + i);
+      const pubkey: Buffer | undefined =
+        unsignedPsbt.data.inputs[i].tapInternalKey ||
+        unsignedPsbt.data.inputs[i].tapBip32Derivation?.[0]?.pubkey;
+      if (!pubkey) {
+        throw new Error("No pubkey found in input " + i);
       }
-      const address = btc.p2tr(
-        tapBip32Derivation[0].pubkey,
-        undefined,
-        this.network
-      ).address;
+      const address = btc.p2tr(pubkey, undefined, this.network).address;
 
       if (!address) {
         throw new Error("No address found in input " + i);
@@ -137,14 +135,12 @@ class Bitcoin {
     for (let i = 0; i < unsignedPsbt.data.outputs.length; i++) {
       const txOutput = unsignedPsbt.txOutputs[i];
       const output = unsignedPsbt.data.outputs[i];
-      if (!output.tapBip32Derivation) {
-        throw new Error("No tapBip32Derivation in output");
-      }
-      const address = btc.p2tr(
-        output.tapBip32Derivation[0].pubkey,
-        undefined,
-        this.network
-      ).address;
+
+      const pubkey = output.tapBip32Derivation?.[0].pubkey || txOutput.address;
+
+      const address = pubkey
+        ? btc.p2tr(pubkey, undefined, this.network).address
+        : "UNKNOWN";
       if (!address) {
         throw new Error("No address found in output " + i);
       }

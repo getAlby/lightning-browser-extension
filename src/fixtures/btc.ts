@@ -12,4 +12,8 @@ export const btcFixture = {
 
   mnemonic:
     "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about",
+
+  // made with bitcoinjs-lib, only has one output
+  testnetTaprootPsbt:
+    "70736274ff01005e020000000135e316e6c54d3ef6b56394ef8fdb3addec3098b932820fbaf2818df0a1a6b3ca0100000000ffffffff016400000000000000225120da002fb251b6270e999364e434ed56219562b5a909eab26ae6797ca408f44223000000000001012b88130000000000002251203b82b2b2a9185315da6f80da5f06d0440d8a5e1457fa93387c2d919c86ec878601172055355ca83c973f1d97ce0e3843c85d78905af16b4dc531bc488e57212d2301160000",
 };
