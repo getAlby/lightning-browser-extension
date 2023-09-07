@@ -393,7 +393,7 @@
           "screen_reader": "导出帐户详情",
           "waiting": "等待LndHub的数据...",
           "your_ln_address": "你的闪电地址：",
-          "description": "将允许你在移动钱包上连接并使用此帐户，例如 <0>BlueWallet</0> 和 <0>Zeus</0>。"
+          "description": "将允许你在移动钱包上连接并使用此帐户，例如 <0>BlueWallet</0> 和 <1>Zeus</1>。"
         },
         "remove": {
           "title": "删除此帐户",

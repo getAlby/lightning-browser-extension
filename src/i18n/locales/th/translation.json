@@ -188,7 +188,7 @@
         },
         "export": {
           "title": "เชื่อมต่อกับ moblie wallet",
-          "description": "อณุญาติให้คุณสามารถเชื่อมต่อและใช้งานบัญชีนี้กับ mobile wallets เช่น <0>Blue Wallet</0> t และ <0>Zeus</0>",
+          "description": "อณุญาติให้คุณสามารถเชื่อมต่อและใช้งานบัญชีนี้กับ mobile wallets เช่น <0>Blue Wallet</0> t และ <1>Zeus</1>",
           "screen_reader": "ส่งออกรายละเอียดบัญชี",
           "waiting": "รอช้อมูลจาก LNDHub…",
           "your_ln_address": "Lightning Address ของคุณ:",

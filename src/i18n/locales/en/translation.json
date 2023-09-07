@@ -382,7 +382,7 @@
         },
         "export": {
           "title": "Connect your mobile wallet",
-          "description": "Allows you to connect and use this account on mobile wallets like <0>Blue Wallet</0> and <0>Zeus</0>.",
+          "description": "Allows you to connect and use this account on mobile wallets like <0>Blue Wallet</0> and <1>Zeus</1>.",
           "screen_reader": "Export account details",
           "waiting": "waiting for LndHub data...",
           "your_ln_address": "Your Lightning Address:",
