@@ -406,14 +406,17 @@ function LNURLPay() {
         {!successAction ? (
           <>
             <div className="grow overflow-y-auto no-scrollbar">
-              <Container maxWidth="sm">
+              <Container justifyBetween maxWidth="sm">
                 <PublisherCard
                   title={navState.origin?.name}
                   description={getRecipient()}
                   image={navState.origin?.icon || getImage()}
                 />
-                <form onSubmit={handleSubmit}>
-                  <fieldset disabled={loadingConfirm}>
+                <form onSubmit={handleSubmit} className="h-full">
+                  <fieldset
+                    disabled={loadingConfirm}
+                    className="h-full relative"
+                  >
                     <dl className="mt-4 overflow-hidden">
                       <>
                         {formattedMetadata(details.metadata).map(
@@ -517,7 +520,7 @@ function LNURLPay() {
                         )}
                       </div>
                     )}
-                    <div className="mt-2 dark:border-white/10">
+                    <div className="absolute bottom-0 w-full dark:border-white/10">
                       <ConfirmOrCancel
                         isFocused={false}
                         label={tCommon("actions.confirm")}
