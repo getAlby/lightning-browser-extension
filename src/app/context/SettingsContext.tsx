@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 import i18n from "i18next";
 import { createContext, useContext, useEffect, useRef, useState } from "react";
-import { toast } from "react-toastify";
+import toast from "~/app/components/Toast";
 import { setTheme } from "~/app/utils";
 import { ACCOUNT_CURRENCIES, CURRENCIES } from "~/common/constants";
 import api from "~/common/lib/api";

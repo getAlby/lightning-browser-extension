@@ -1,7 +1,7 @@
 import { CopyIcon as CopyFilledIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { CopyIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import { useState } from "react";
-import { toast } from "react-toastify";
+import toast from "~/app/components/Toast";
 import { classNames } from "~/app/utils";
 
 type Props = {
