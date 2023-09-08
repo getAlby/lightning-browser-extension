@@ -18,6 +18,7 @@ import SkeletonLoader from "~/app/components/SkeletonLoader";
 import toast from "~/app/components/Toast";
 import { useAccount } from "~/app/context/AccountContext";
 import { useInvoices } from "~/app/hooks/useInvoices";
+import { useLightningAddress } from "~/app/hooks/useLightningAddress";
 import { useTransactions } from "~/app/hooks/useTransactions";
 import { PublisherLnData } from "~/app/screens/Home/PublisherLnData";
 import api from "~/common/lib/api";
@@ -37,9 +38,7 @@ const DefaultView: FC<Props> = (props) => {
   const { t } = useTranslation("translation", { keyPrefix: "home" });
   const { t: tCommon } = useTranslation("common");
   const { t: tComponents } = useTranslation("components");
-  const [lightningAddress, setLightningAddress] = useState("");
-  const [loadingLightningAddress, setLoadingLightningAddress] = useState(true);
-
+  const { loadingLightningAddress, lightningAddress } = useLightningAddress();
   const navigate = useNavigate();
 
   const { account, balancesDecorated, accountLoading } = useAccount();
@@ -56,18 +55,6 @@ const DefaultView: FC<Props> = (props) => {
   const isLoadingIncoming = accountLoading || isLoadingInvoices;
 
   const itemsLimit = 8;
-
-  async function getLightningAddress() {
-    setLoadingLightningAddress(true);
-    const response = await api.getAccountInfo();
-    const lightningAddress = response.info.lightning_address;
-    if (lightningAddress) setLightningAddress(lightningAddress);
-    setLoadingLightningAddress(false);
-  }
-
-  useEffect(() => {
-    getLightningAddress();
-  }, []);
 
   useEffect(() => {
     if (account?.id) loadTransactions(account.id, itemsLimit);
