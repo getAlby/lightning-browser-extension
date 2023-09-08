@@ -107,17 +107,12 @@ class Bitcoin {
     };
 
     for (let i = 0; i < unsignedPsbt.data.inputs.length; i++) {
-      if (i > 0) {
-        throw new Error("Multiple inputs currently unsupported");
-      }
-
       const pubkey: Buffer | undefined =
         unsignedPsbt.data.inputs[i].tapInternalKey ||
         unsignedPsbt.data.inputs[i].tapBip32Derivation?.[0]?.pubkey;
-      if (!pubkey) {
-        throw new Error("No pubkey found in input " + i);
-      }
-      const address = btc.p2tr(pubkey, undefined, this.network).address;
+      const address = pubkey
+        ? btc.p2tr(pubkey, undefined, this.network).address
+        : "UNKNOWN";
 
       if (!address) {
         throw new Error("No address found in input " + i);
@@ -136,7 +131,21 @@ class Bitcoin {
       const txOutput = unsignedPsbt.txOutputs[i];
       const output = unsignedPsbt.data.outputs[i];
 
-      const pubkey = output.tapBip32Derivation?.[0].pubkey || txOutput.address;
+      const pubkey =
+        output.tapBip32Derivation?.[0].pubkey ||
+        txOutput.address ||
+        (txOutput.script &&
+          (() => {
+            try {
+              return bitcoin.address.fromOutputScript(
+                txOutput.script,
+                this.network
+              );
+            } catch (error) {
+              console.error(error);
+            }
+            return undefined;
+          })());
 
       const address = pubkey
         ? btc.p2tr(pubkey, undefined, this.network).address

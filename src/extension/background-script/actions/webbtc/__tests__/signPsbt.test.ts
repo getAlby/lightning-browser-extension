@@ -19,10 +19,10 @@ const mockState = {
   currentAccountId: "1e1e8ea6-493e-480b-9855-303d37506e97",
   getAccount: () => ({
     mnemonic: btcFixture.mnemonic,
-    bitcoinNetwork: "regtest",
+    bitcoinNetwork: "testnet",
   }),
   getMnemonic: () => new Mnemonic(btcFixture.mnemonic),
-  getBitcoin: () => new Bitcoin(new Mnemonic(btcFixture.mnemonic), "regtest"),
+  getBitcoin: () => new Bitcoin(new Mnemonic(btcFixture.mnemonic), "testnet"),
   getConnector: jest.fn(),
 };
 
@@ -125,17 +125,28 @@ describe("decode psbt", () => {
 
   test("get taproot transaction preview 2", async () => {
     const previewResponse = await sendGetPsbtPreviewMessage(
-      btcFixture.testnetTaprootPsbt
+      btcFixture.taprootPsbt2
     );
     const preview = previewResponse.data as PsbtPreview;
     expect(preview.inputs.length).toBe(1);
+    // first address from mnemonic 1
     expect(preview.inputs[0].address).toBe(
+      "tb1p8wpt9v4frpf3tkn0srd97pksgsxc5hs52lafxwru9kgeephvs7rqlqt9zj"
+    );
+    expect(preview.inputs[0].amount).toBe(2700);
+    expect(preview.outputs.length).toBe(2);
+
+    // first address from mnemonic 2
+    // FIXME:
+    expect(preview.outputs[0].address).toBe(
+      "tb1pmgqzlvj3kcnsaxvnvnjrfm2kyx2k9ddfp84ty6hx0972gz85gg3slq3j59"
+    );
+    expect(preview.outputs[0].amount).toBe(100);
+
+    // change sent back to original address
+    expect(preview.outputs[1].address).toBe(
       "bcrt1p8wpt9v4frpf3tkn0srd97pksgsxc5hs52lafxwru9kgeephvs7rqjeprhg"
     );
-    expect(preview.inputs[0].amount).toBe(5000);
-    expect(preview.outputs.length).toBe(1);
-
-    expect(preview.outputs[0].address).toBe("UNKNOWN");
-    expect(preview.outputs[0].amount).toBe(100);
+    expect(preview.outputs[1].amount).toBe(900);
   });
 });
