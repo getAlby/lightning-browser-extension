@@ -19,9 +19,9 @@ import Transactions from "@screens/Transactions";
 import Unlock from "@screens/Unlock";
 import { useTranslation } from "react-i18next";
 import { HashRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
 import AccountDetailLayout from "~/app/components/AccountDetailLayout";
 import ScrollToTop from "~/app/components/ScrollToTop";
+import Toaster from "~/app/components/Toast/Toaster";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
 import { getConnectorRoutes, renderRoutes } from "~/app/router/connectorRoutes";
@@ -148,7 +148,7 @@ function Options() {
             element={
               <>
                 <Unlock />
-                <ToastContainer autoClose={10000} hideProgressBar={true} />
+                <Toaster />
               </>
             }
           />
@@ -170,12 +170,7 @@ const Layout = () => {
         </Navbar.Link>
         <Navbar.Link href="/wallet">{tCommon("wallet")}</Navbar.Link>
       </Navbar>
-      <ToastContainer
-        autoClose={15000}
-        hideProgressBar={true}
-        className="w-fit max-w-2xl"
-      />
-
+      <Toaster />
       <Outlet />
     </div>
   );
