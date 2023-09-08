@@ -2,7 +2,6 @@ import {
   ReceiveIcon,
   SendIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
-import { CopyIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import Button from "@components/Button";
 import Hyperlink from "@components/Hyperlink";
 import Loading from "@components/Loading";
@@ -122,7 +121,7 @@ const DefaultView: FC<Props> = (props) => {
         {(loadingLightningAddress || lightningAddress) && (
           <div className="flex justify-center">
             <a
-              className="cursor-pointer flex flex-row items-center mb-6 px-2 py-1 bg-white dark:bg-surface-01dp border border-gray-200 dark:border-neutral-700 text-gray-800 dark:text-white rounded-full text-xs font-medium hover:border-primary hover:bg-yellow-50 hover:dark:bg-yellow-50 transition-all duration-500 select-none"
+              className="cursor-pointer flex flex-row items-center mb-6 px-3 py-1 bg-white dark:bg-surface-01dp border border-gray-200 dark:border-neutral-700 text-gray-800 dark:text-white rounded-full text-xs font-medium hover:border-primary hover:bg-yellow-50 dark:hover:border-primary transition-all duration-250 select-none"
               onClick={() => {
                 navigator.clipboard.writeText(lightningAddress);
                 toast.success(tCommon("actions.copied_to_clipboard"));
@@ -137,7 +136,6 @@ const DefaultView: FC<Props> = (props) => {
               {!loadingLightningAddress && (
                 <>
                   <span>⚡️ {lightningAddress}</span>
-                  <CopyIcon className="w-4 h-4" />
                 </>
               )}
             </a>
