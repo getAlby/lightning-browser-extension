@@ -4,7 +4,6 @@ import {
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import Loading from "@components/Loading";
 import { useTranslation } from "react-i18next";
-import Badge from "~/app/components/Badge";
 import { useSettings } from "~/app/context/SettingsContext";
 import { classNames } from "~/app/utils";
 import { Transaction } from "~/types";
@@ -78,18 +77,6 @@ export default function TransactionsTable({
                   {tx.date}
                 </p>
               </div>
-              {tx.badges && (
-                <div className="ml-6 space-x-3">
-                  {tx.badges.map((badge) => (
-                    <Badge
-                      key={badge.label}
-                      label={badge.label}
-                      color={badge.color}
-                      textColor={badge.textColor}
-                    />
-                  ))}
-                </div>
-              )}
               <div className="flex ml-auto text-right space-x-3 shrink-0 dark:text-white">
                 <div>
                   <p

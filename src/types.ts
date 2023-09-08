@@ -694,7 +694,6 @@ export interface RequestInvoiceArgs {
 export type Transaction = {
   amount?: string;
   boostagram?: Invoice["boostagram"];
-  badges?: Badge[];
   createdAt?: string;
   currency?: string;
   date: string;
