@@ -25,6 +25,7 @@ const request = async (
     }
 
     const methodInLowerCase = args.method.toLowerCase();
+    const requestMethodName = `request.${methodInLowerCase}`;
 
     // Check if the current connector support the call
     // connectors maybe do not support `requestMethod` at all
@@ -34,9 +35,9 @@ const request = async (
     const supportedMethods = connector.supportedMethods || []; // allow the connector to control which methods can be called
     if (
       !connector.requestMethod ||
-      !supportedMethods.includes(methodInLowerCase)
+      !supportedMethods.includes(requestMethodName)
     ) {
-      throw new Error(`${methodInLowerCase} is not supported by your account`);
+      throw new Error(`${requestMethodName} is not supported by your account`);
     }
 
     const allowance = await db.allowances
