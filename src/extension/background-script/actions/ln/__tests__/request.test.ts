@@ -172,13 +172,6 @@ describe("ln request", () => {
 
   describe("directly calls requestMethod of Connector with method and params", () => {
     test("if permission for this request exists and is enabled", async () => {
-      (utils.openPrompt as jest.Mock).mockResolvedValueOnce({
-        data: { enabled: true, blocked: false },
-      });
-
-      connector = {
-        ...fullConnector,
-      };
       // prepare DB with matching permission
       await db.permissions.bulkAdd([permissionInDB]);
 
