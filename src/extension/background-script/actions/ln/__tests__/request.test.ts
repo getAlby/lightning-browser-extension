@@ -68,9 +68,9 @@ const fullConnector = {
   requestMethod: jest.fn(() => Promise.resolve(requestResponse)),
   supportedMethods: [
     // saved and compared in lowercase
-    "getinfo",
-    "makeinvoice",
-    "sendpayment",
+    "request.getinfo",
+    "request.makeinvoice",
+    "request.sendpayment",
   ],
 } as unknown as Connector;
 
@@ -91,7 +91,7 @@ describe("ln request", () => {
     test("if connector does not support requestMethod", async () => {
       connector = {
         ...fullConnector,
-        supportedMethods: ["getinfo"],
+        supportedMethods: ["request.getinfo"],
       };
 
       const result = await request(message);
@@ -172,6 +172,13 @@ describe("ln request", () => {
 
   describe("directly calls requestMethod of Connector with method and params", () => {
     test("if permission for this request exists and is enabled", async () => {
+      (utils.openPrompt as jest.Mock).mockResolvedValueOnce({
+        data: { enabled: true, blocked: false },
+      });
+
+      connector = {
+        ...fullConnector,
+      };
       // prepare DB with matching permission
       await db.permissions.bulkAdd([permissionInDB]);
 

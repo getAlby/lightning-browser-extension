@@ -37,7 +37,7 @@ const request = async (
       !connector.requestMethod ||
       !supportedMethods.includes(requestMethodName)
     ) {
-      throw new Error(`${requestMethodName} is not supported by your account`);
+      throw new Error(`${methodInLowerCase} is not supported by your account`);
     }
 
     const allowance = await db.allowances
@@ -61,7 +61,7 @@ const request = async (
     const hasPermission = await hasPermissionFor(weblnMethod, origin.host);
 
     // request method is allowed to be called
-    if (hasPermission && supportedMethods.includes(methodInLowerCase)) {
+    if (hasPermission) {
       const response = await connector.requestMethod(
         methodInLowerCase,
         args.params
