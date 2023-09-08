@@ -121,7 +121,7 @@ const DefaultView: FC<Props> = (props) => {
         {(loadingLightningAddress || lightningAddress) && (
           <div className="flex justify-center">
             <a
-              className="cursor-pointer flex flex-row items-center mb-6 px-3 py-1 bg-white dark:bg-surface-01dp border border-gray-200 dark:border-neutral-700 text-gray-800 dark:text-white rounded-full text-xs font-medium hover:border-primary hover:bg-yellow-50 dark:hover:border-primary transition-all duration-250 select-none"
+              className="cursor-pointer flex flex-row items-center mb-6 px-3 py-1 bg-white dark:bg-surface-01dp border border-gray-200 dark:border-neutral-700 text-gray-800 dark:text-white rounded-full text-xs font-medium hover:border-primary hover:bg-yellow-50 dark:hover:border-primary dark:hover:dark:bg-surface-16dp transition-all duration-250 select-none"
               onClick={() => {
                 navigator.clipboard.writeText(lightningAddress);
                 toast.success(tCommon("actions.copied_to_clipboard"));
