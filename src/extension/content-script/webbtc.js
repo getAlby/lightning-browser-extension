@@ -25,6 +25,16 @@ async function init() {
     return;
   }
 
+  browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    // forward account changed messaged to inpage script
+    if (request.action === "accountChanged") {
+      window.postMessage(
+        { action: "accountChanged", scope: "webbtc" },
+        window.location.origin
+      );
+    }
+  });
+
   // message listener to listen to inpage webbtc calls
   // those calls get passed on to the background script
   // (the inpage script can not do that directly, but only the inpage script can make webln available to the page)
