@@ -28,6 +28,7 @@ class Bitcoin {
     this.mnemonic = mnemonic;
     this.networkType = networkType;
     this.network = networks[this.networkType];
+    bitcoin.initEccLib(ecc);
   }
 
   signPsbt(psbt: string) {
@@ -44,7 +45,6 @@ class Bitcoin {
       network: this.network,
     });
 
-    bitcoin.initEccLib(ecc);
     const ECPair: ECPairAPI = ECPairFactory(ecc);
 
     const keyPair = tweakSigner(
@@ -104,6 +104,7 @@ class Bitcoin {
     const preview: PsbtPreview = {
       inputs: [],
       outputs: [],
+      fee: 0,
     };
 
     for (let i = 0; i < unsignedPsbt.data.inputs.length; i++) {
@@ -129,10 +130,8 @@ class Bitcoin {
     }
     for (let i = 0; i < unsignedPsbt.data.outputs.length; i++) {
       const txOutput = unsignedPsbt.txOutputs[i];
-      const output = unsignedPsbt.data.outputs[i];
 
-      const pubkey =
-        output.tapBip32Derivation?.[0].pubkey ||
+      const address =
         txOutput.address ||
         (txOutput.script &&
           (() => {
@@ -145,14 +144,8 @@ class Bitcoin {
               console.error(error);
             }
             return undefined;
-          })());
-
-      const address = pubkey
-        ? btc.p2tr(pubkey, undefined, this.network).address
-        : "UNKNOWN";
-      if (!address) {
-        throw new Error("No address found in output " + i);
-      }
+          })()) ||
+        "UNKNOWN";
 
       const previewOutput: Address = {
         amount: txOutput.value,
@@ -160,6 +153,14 @@ class Bitcoin {
       };
       preview.outputs.push(previewOutput);
     }
+
+    for (const input of preview.inputs) {
+      preview.fee += input.amount;
+    }
+    for (const output of preview.outputs) {
+      preview.fee -= output.amount;
+    }
+
     return preview;
   }
 }

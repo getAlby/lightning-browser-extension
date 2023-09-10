@@ -957,4 +957,5 @@ export type Address = { amount: number; address: string };
 export type PsbtPreview = {
   inputs: Address[];
   outputs: Address[];
+  fee: number;
 };

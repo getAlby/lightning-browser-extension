@@ -7,6 +7,7 @@ import Mnemonic from "~/extension/background-script/mnemonic";
 import state from "~/extension/background-script/state";
 import { btcFixture } from "~/fixtures/btc";
 import type {
+  BitcoinNetworkType,
   MessageGetPsbtPreview,
   MessageSignPsbt,
   PsbtPreview,
@@ -14,19 +15,21 @@ import type {
 
 const passwordMock = jest.fn;
 
-const mockState = {
-  password: passwordMock,
-  currentAccountId: "1e1e8ea6-493e-480b-9855-303d37506e97",
-  getAccount: () => ({
-    mnemonic: btcFixture.mnemonic,
-    bitcoinNetwork: "testnet",
-  }),
-  getMnemonic: () => new Mnemonic(btcFixture.mnemonic),
-  getBitcoin: () => new Bitcoin(new Mnemonic(btcFixture.mnemonic), "testnet"),
-  getConnector: jest.fn(),
-};
+function mockSettings(network: BitcoinNetworkType) {
+  const mockState = {
+    password: passwordMock,
+    currentAccountId: "1e1e8ea6-493e-480b-9855-303d37506e97",
+    getAccount: () => ({
+      mnemonic: btcFixture.mnemonic,
+      bitcoinNetwork: network,
+    }),
+    getMnemonic: () => new Mnemonic(btcFixture.mnemonic),
+    getBitcoin: () => new Bitcoin(new Mnemonic(btcFixture.mnemonic), network),
+    getConnector: jest.fn(),
+  };
 
-state.getState = jest.fn().mockReturnValue(mockState);
+  state.getState = jest.fn().mockReturnValue(mockState);
+}
 
 jest.mock("~/common/lib/crypto", () => {
   return {
@@ -78,6 +81,7 @@ async function sendGetPsbtPreviewMessage(psbt: string) {
 
 describe("signPsbt", () => {
   test("1 input, taproot, regtest", async () => {
+    mockSettings("regtest");
     const result = await sendPsbtMessage(btcFixture.regtestTaprootPsbt);
     if (!result.data) {
       throw new Error("Result should have data");
@@ -95,6 +99,7 @@ describe("signPsbt", () => {
 
 describe("signPsbt input validation", () => {
   test("invalid psbt", async () => {
+    mockSettings("regtest");
     const result = await sendPsbtMessage("test");
     expect(result.error).not.toBe(null);
   });
@@ -102,6 +107,7 @@ describe("signPsbt input validation", () => {
 
 describe("decode psbt", () => {
   test("get taproot transaction preview", async () => {
+    mockSettings("regtest");
     const previewResponse = await sendGetPsbtPreviewMessage(
       btcFixture.regtestTaprootPsbt
     );
@@ -121,9 +127,12 @@ describe("decode psbt", () => {
       "bcrt1p90h6z3p36n9hrzy7580h5l429uwchyg8uc9sz4jwzhdtuhqdl5eqkcyx0f"
     );
     expect(preview.outputs[1].amount).toBe(5_000_000);
+
+    expect(preview.fee).toBe(155);
   });
 
   test("get taproot transaction preview 2", async () => {
+    mockSettings("testnet");
     const previewResponse = await sendGetPsbtPreviewMessage(
       btcFixture.taprootPsbt2
     );
@@ -137,7 +146,6 @@ describe("decode psbt", () => {
     expect(preview.outputs.length).toBe(2);
 
     // first address from mnemonic 2
-    // FIXME:
     expect(preview.outputs[0].address).toBe(
       "tb1pmgqzlvj3kcnsaxvnvnjrfm2kyx2k9ddfp84ty6hx0972gz85gg3slq3j59"
     );
@@ -145,8 +153,10 @@ describe("decode psbt", () => {
 
     // change sent back to original address
     expect(preview.outputs[1].address).toBe(
-      "bcrt1p8wpt9v4frpf3tkn0srd97pksgsxc5hs52lafxwru9kgeephvs7rqjeprhg"
+      "tb1p8wpt9v4frpf3tkn0srd97pksgsxc5hs52lafxwru9kgeephvs7rqlqt9zj"
     );
-    expect(preview.outputs[1].amount).toBe(900);
+    expect(preview.outputs[1].amount).toBe(1600);
+
+    expect(preview.fee).toBe(1000);
   });
 });

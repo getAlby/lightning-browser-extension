@@ -129,6 +129,11 @@ function ConfirmSignPsbt() {
                       <AddressPreview key={output.address} t={t} {...output} />
                     ))}
                   </div>
+                  <p className="font-medium dark:text-white">{t("fee")}</p>
+                  <p className="font-medium text-sm text-gray-500 dark:text-gray-400">
+                    {t("amount", { amount: preview.fee })}
+                  </p>
+
                   <Hyperlink onClick={toggleShowHex}>
                     {showHex
                       ? t("hide_raw_transaction")

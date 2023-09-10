@@ -116,6 +116,13 @@ describe("ConfirmSignPsbt", () => {
       )
     ).toBeInTheDocument();
 
+    // Check fee
+    const feeContainer = screen.getByText("Fee").parentElement as HTMLElement;
+    expect(feeContainer).toBeInTheDocument();
+
+    const feeRef = within(feeContainer);
+    expect(await feeRef.findByText("155 sats")).toBeInTheDocument();
+
     await act(async () => {
       await user.click(screen.getByText("View raw transaction (Hex)"));
     });
