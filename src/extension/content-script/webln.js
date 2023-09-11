@@ -97,7 +97,7 @@ async function init() {
       if (!account || !account.hasMnemonic) {
         const account = await api.getAccount();
         if (!account.hasMnemonic) {
-          messageWithOrigin.action = `public/webln/onboard`;
+          messageWithOrigin.action = ev.data.action = `public/webln/onboard`;
         }
       }
 
