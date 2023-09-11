@@ -161,6 +161,8 @@ const Layout = () => {
           <AlbyLogo />
         </div>
       </div>
+      {/* maybe just remove accounts from the prompt and use previous method, in this way we acheive no need of reloading as well and don't reject original promise
+      what is the use of doing account switching in the prompt? */}
 
       <main className="flex flex-col grow min-h-0">
         <Outlet />
