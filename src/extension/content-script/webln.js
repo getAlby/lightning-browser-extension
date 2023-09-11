@@ -26,6 +26,7 @@ const disabledCalls = ["webln/enable"];
 
 let isEnabled = false; // store if webln is enabled for this content page
 let isRejected = false; // store if the webln enable call failed. if so we do not prompt again
+let account;
 
 async function init() {
   const inject = await shouldInject();
@@ -92,9 +93,12 @@ async function init() {
 
       // Overrides the enable action so the user can go through onboarding to setup their keys
 
-      const account = await api.getAccount();
-      if (ev.data.action === "webln/lnurl" && !account.hasMnemonic) {
-        messageWithOrigin.action = ev.data.action = `public/webln/onboard`;
+      // Overrides the enable action so the user can go through onboarding to setup their keys
+      if (!account || !account.hasMnemonic) {
+        const account = await api.getAccount();
+        if (!account.hasMnemonic) {
+          messageWithOrigin.action = `public/webln/onboard`;
+        }
       }
 
       const replyFunction = (response) => {
