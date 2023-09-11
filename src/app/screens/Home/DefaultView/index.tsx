@@ -12,8 +12,8 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import BalanceBox from "~/app/components/BalanceBox";
+import toast from "~/app/components/Toast";
 import { useAccount } from "~/app/context/AccountContext";
 import { useInvoices } from "~/app/hooks/useInvoices";
 import { useTransactions } from "~/app/hooks/useTransactions";
@@ -89,7 +89,7 @@ const DefaultView: FC<Props> = (props) => {
         await msg.request("deleteBlocklist", {
           host: props.currentUrl.host,
         });
-        toast.info(
+        toast.success(
           t("default_view.block_removed", { host: props.currentUrl.host })
         );
       }
