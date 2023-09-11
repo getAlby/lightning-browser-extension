@@ -5,10 +5,10 @@ import { wordlist } from "@scure/bip39/wordlists/english";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
-import { toast } from "react-toastify";
 import Alert from "~/app/components/Alert";
 import Button from "~/app/components/Button";
 import { ContentBox } from "~/app/components/ContentBox";
+import toast from "~/app/components/Toast";
 import MnemonicInputs from "~/app/components/mnemonic/MnemonicInputs";
 import api from "~/common/lib/api";
 

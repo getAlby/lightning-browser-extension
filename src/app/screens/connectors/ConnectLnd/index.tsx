@@ -1,4 +1,3 @@
-import logo from "/static/assets/icons/lnd.png";
 import { SendIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import CompanionDownloadInfo from "@components/CompanionDownloadInfo";
 import ConnectorForm from "@components/ConnectorForm";
@@ -7,10 +6,11 @@ import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
 import { useRef, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import PasswordViewAdornment from "~/app/components/PasswordViewAdornment";
+import toast from "~/app/components/Toast";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
+import logo from "/static/assets/icons/lnd.png";
 
 const initialFormData = {
   url: "",
@@ -81,7 +81,8 @@ export default function ConnectLnd() {
             message={validation.error as string}
             link={formData.url}
           />,
-          { autoClose: false }
+          // Don't auto-close
+          { duration: 100_000 }
         );
       }
     } catch (e) {

@@ -8,15 +8,15 @@ import LNURLPay from "@screens/LNURLPay";
 import LNURLWithdraw from "@screens/LNURLWithdraw";
 import Receive from "@screens/Receive";
 import Send from "@screens/Send";
-import ScanQRCode from "~/app/screens/ScanQRCode";
 import Unlock from "@screens/Unlock";
 import { HashRouter, Outlet, Route, Routes } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
 import Providers from "~/app/context/Providers";
 import LNURLRedeem from "~/app/screens/LNURLRedeem";
 import OnChainReceive from "~/app/screens/OnChainReceive";
+import ScanQRCode from "~/app/screens/ScanQRCode";
 import SendToBitcoinAddress from "~/app/screens/SendToBitcoinAddress";
 
+import Toaster from "~/app/components/Toast/Toaster";
 import RequireAuth from "../RequireAuth";
 
 function Popup() {
@@ -54,7 +54,7 @@ function Popup() {
             element={
               <>
                 <Unlock />
-                <ToastContainer autoClose={10000} hideProgressBar={true} />
+                <Toaster />
               </>
             }
           />
@@ -71,7 +71,7 @@ const Layout = () => {
 
       <main className="flex flex-col grow min-h-0">
         <Outlet />
-        <ToastContainer autoClose={10000} hideProgressBar={true} />
+        <Toaster />
       </main>
     </div>
   );

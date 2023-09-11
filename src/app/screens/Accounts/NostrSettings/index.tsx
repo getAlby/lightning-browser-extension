@@ -3,15 +3,15 @@ import Loading from "@components/Loading";
 import { FormEvent, useCallback, useEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { toast } from "react-toastify";
 import Alert from "~/app/components/Alert";
 import Button from "~/app/components/Button";
 import { ContentBox } from "~/app/components/ContentBox";
 import InputCopyButton from "~/app/components/InputCopyButton";
 import PasswordViewAdornment from "~/app/components/PasswordViewAdornment";
+import toast from "~/app/components/Toast";
 import TextField from "~/app/components/form/TextField";
 import api, { GetAccountRes } from "~/common/lib/api";
-import { default as nostr, default as nostrlib } from "~/common/lib/nostr";
+import { default as nostr } from "~/common/lib/nostr";
 
 function NostrSettings() {
   const { t: tCommon } = useTranslation("common");
@@ -33,7 +33,8 @@ function NostrSettings() {
       const priv = await api.nostr.getPrivateKey(id);
       if (priv) {
         setCurrentPrivateKey(priv);
-        setNostrPrivateKey(priv);
+        const nsec = nostr.hexToNip19(priv);
+        setNostrPrivateKey(nsec);
       }
       const accountResponse = await api.getAccount(id);
       setHasMnemonic(accountResponse.hasMnemonic);
@@ -82,15 +83,11 @@ function NostrSettings() {
     }
 
     const derivedNostrPrivateKey = await api.nostr.generatePrivateKey(id);
-    setNostrPrivateKey(derivedNostrPrivateKey);
+    setNostrPrivateKey(nostr.hexToNip19(derivedNostrPrivateKey));
   }
 
   // TODO: simplify this method - would be good to have a dedicated "remove nostr key" button
   async function handleSaveNostrPrivateKey() {
-    if (nostrPrivateKey === currentPrivateKey) {
-      throw new Error("private key hasn't changed");
-    }
-
     if (
       currentPrivateKey &&
       prompt(
@@ -165,9 +162,7 @@ function NostrSettings() {
               </Alert>
             )}
 
-            {hasMnemonic &&
-            currentPrivateKey &&
-            nostrPrivateKey === currentPrivateKey ? (
+            {hasMnemonic && currentPrivateKey ? (
               hasImportedNostrKey ? (
                 <Alert type="warn">
                   {t("nostr.settings.imported_key_warning")}
@@ -216,28 +211,19 @@ function NostrSettings() {
                     onClick={handleDeleteKeys}
                   />
                 )}
-                {hasImportedNostrKey &&
-                  nostrPrivateKey === currentPrivateKey &&
-                  hasMnemonic && (
-                    <Button
-                      outline
-                      label={t("nostr.settings.derive")}
-                      onClick={handleDeriveNostrKeyFromSecretKey}
-                    />
-                  )}
+                {hasImportedNostrKey && hasMnemonic && (
+                  <Button
+                    outline
+                    label={t("nostr.settings.derive")}
+                    onClick={handleDeriveNostrKeyFromSecretKey}
+                  />
+                )}
               </div>
             </div>
           </ContentBox>
           <div className="flex justify-center my-6 gap-4">
             <Button label={tCommon("actions.cancel")} onClick={onCancel} />
-            <Button
-              type="submit"
-              label={tCommon("actions.save")}
-              disabled={
-                nostrlib.normalizeToHex(nostrPrivateKey) === currentPrivateKey
-              }
-              primary
-            />
+            <Button type="submit" label={tCommon("actions.save")} primary />
           </div>
         </Container>
       </form>

@@ -101,6 +101,8 @@ async function init() {
         // if it is the enable call we store if webln is enabled for this content script
         if (ev.data.action === "webln/enable") {
           isEnabled = response.data?.enabled;
+          const enabledEvent = new Event("webln:enabled");
+          window.dispatchEvent(enabledEvent);
           if (response.error) {
             console.error(response.error);
             console.info("Enable was rejected ignoring further webln calls");
