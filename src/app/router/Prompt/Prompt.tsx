@@ -1,4 +1,3 @@
-import AccountMenu from "@components/AccountMenu";
 import ConfirmAddAccount from "@screens/ConfirmAddAccount";
 import ConfirmKeysend from "@screens/ConfirmKeysend";
 import ConfirmPayment from "@screens/ConfirmPayment";
@@ -23,6 +22,7 @@ import Toaster from "~/app/components/Toast/Toaster";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
 import BitcoinConfirmGetAddress from "~/app/screens/Bitcoin/ConfirmGetAddress";
+import NostrEnable from "~/app/screens/Enable/NostrEnable";
 import Onboard from "~/app/screens/Onboard/Prompt";
 import type { NavigationState, OriginData } from "~/types";
 
@@ -86,7 +86,9 @@ function Prompt() {
             />
             <Route
               path="public/nostr/enable"
-              element={<Enable origin={navigationState.origin as OriginData} />} // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
+              element={
+                <NostrEnable origin={navigationState.origin as OriginData} />
+              } // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
             />
             <Route
               path="public/webbtc/enable"
@@ -158,7 +160,6 @@ const Layout = () => {
         <div className="w-24 shrink-0">
           <AlbyLogo />
         </div>
-        <AccountMenu showOptions={false} />
       </div>
 
       <main className="flex flex-col grow min-h-0">

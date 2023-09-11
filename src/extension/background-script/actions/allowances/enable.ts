@@ -15,7 +15,9 @@ const enable = async (message: MessageAllowanceEnable, sender: Sender) => {
     .where("host")
     .equalsIgnoreCase(host)
     .first();
-
+  // remove this? cause next time the allowance is set and enable is called we directly return from here.hence onboarding will work only once
+  // i suggest to not remove it. as if we go to the screen everytime. for other providers. it will be a flickering glitch.
+  // screen will popup for a second and close automatically as allowance is set but we are returning from the screen if we remove it.
   if (isUnlocked && allowance && allowance.enabled) {
     return {
       data: { enabled: true },

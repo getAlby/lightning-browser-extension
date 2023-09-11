@@ -13,7 +13,6 @@ import type { OriginData } from "~/types";
 type Props = {
   origin: OriginData;
 };
-
 function Enable(props: Props) {
   const hasFetchedData = useRef(false);
   const [loading, setLoading] = useState(false);
