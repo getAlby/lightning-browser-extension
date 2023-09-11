@@ -1,17 +1,15 @@
 import { EventEmitter } from "events";
 import { postMessage } from "~/extension/providers/postMessage";
-import { PromiseQueue } from "~/extension/providers/promiseQueue";
 
 export default class ProviderBase {
   enabled: boolean;
   private _eventEmitter: EventEmitter;
-  private _queue: PromiseQueue;
+
   private _scope: string;
 
   constructor(scope: string) {
     this.enabled = false;
     this._eventEmitter = new EventEmitter();
-    this._queue = new PromiseQueue();
     this._scope = scope;
   }
 

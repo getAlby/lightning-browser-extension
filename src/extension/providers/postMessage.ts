@@ -30,6 +30,7 @@ export function postMessage<T>(
           // check if it is a relevant message
           // there are some other events happening
           if (
+            messageEvent.origin !== window.location.origin ||
             !messageEvent.data ||
             !messageEvent.data.response ||
             messageEvent.data.application !== "LBE" ||
