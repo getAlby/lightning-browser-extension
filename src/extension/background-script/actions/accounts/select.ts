@@ -49,18 +49,20 @@ export default select;
 async function notifyAccountChanged() {
   const tabs = await browser.tabs.query({});
   // Send message to tabs with URLs starting with "http" or "https"
-  const validTabs = tabs.filter((tab) => {
-    const currentUrl = tab.url || "";
-    return currentUrl.startsWith("http") || currentUrl.startsWith("https");
-  });
+  if (tabs) {
+    const validTabs = tabs.filter((tab) => {
+      const currentUrl = tab.url || "";
+      return currentUrl.startsWith("http") || currentUrl.startsWith("https");
+    });
 
-  for (const tab of validTabs) {
-    try {
-      if (tab.id) {
-        await browser.tabs.sendMessage(tab.id, { action: "accountChanged" });
+    for (const tab of validTabs) {
+      try {
+        if (tab.id) {
+          await browser.tabs.sendMessage(tab.id, { action: "accountChanged" });
+        }
+      } catch (error) {
+        console.error("Failed to notify account changed", error);
       }
-    } catch (error) {
-      console.error("Failed to notify account changed", error);
     }
   }
 }
