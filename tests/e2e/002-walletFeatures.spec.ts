@@ -12,7 +12,7 @@ const { getByText, getByLabelText, findByText, findAllByText } = queries;
 test.describe("Wallet features", () => {
   // this test runs first to change the password and the following
   // tests use the new password thereby verifying the change
-  test.only("change password", async () => {
+  test("change password", async () => {
     const { page, browser, extensionId } = await createNewWalletWithPassword();
     await loginToExistingAlbyAccount(page);
     await navigate("settings", page, extensionId);
