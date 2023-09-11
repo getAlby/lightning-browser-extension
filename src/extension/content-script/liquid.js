@@ -70,9 +70,9 @@ async function init() {
 
       // Overrides the enable action so the user can go through onboarding to setup their keys
       if (!account || !account.hasMnemonic) {
-        const account = await api.getAccount();
+        account = await api.getAccount();
         if (!account.hasMnemonic) {
-          messageWithOrigin.action = `public/liquid/onboard`;
+          messageWithOrigin.action = ev.data.action = `public/liquid/onboard`;
         }
       }
 
