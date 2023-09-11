@@ -130,6 +130,7 @@ function Prompt() {
             <Route path="public/nostr/onboard" element={<Onboard />} />
             <Route path="public/liquid/onboard" element={<Onboard />} />
             <Route path="public/webbtc/onboard" element={<Onboard />} />
+            <Route path="public/webln/onboard" element={<Onboard />} />
             <Route
               path="public/confirmRequestPermission"
               element={<ConfirmRequestPermission />}
