@@ -21,7 +21,6 @@ function NostrSettings() {
   const navigate = useNavigate();
   const [hasMnemonic, setHasMnemonic] = useState(false);
   const [currentPrivateKey, setCurrentPrivateKey] = useState("");
-  const [currentNsec, setCurrentNsec] = useState("");
   const [nostrPrivateKey, setNostrPrivateKey] = useState("");
   const [nostrPrivateKeyVisible, setNostrPrivateKeyVisible] = useState(false);
   const [nostrPublicKey, setNostrPublicKey] = useState("");
@@ -35,7 +34,6 @@ function NostrSettings() {
       if (priv) {
         setCurrentPrivateKey(priv);
         const nsec = nostr.hexToNip19(priv);
-        setCurrentNsec(nsec);
         setNostrPrivateKey(nsec);
       }
       const accountResponse = await api.getAccount(id);
@@ -88,15 +86,8 @@ function NostrSettings() {
     setNostrPrivateKey(nostr.hexToNip19(derivedNostrPrivateKey));
   }
 
-  const keyUnchanged =
-    nostrPrivateKey === currentPrivateKey || nostrPrivateKey === currentNsec;
-
   // TODO: simplify this method - would be good to have a dedicated "remove nostr key" button
   async function handleSaveNostrPrivateKey() {
-    if (keyUnchanged) {
-      throw new Error("private key hasn't changed");
-    }
-
     if (
       currentPrivateKey &&
       prompt(
@@ -171,7 +162,7 @@ function NostrSettings() {
               </Alert>
             )}
 
-            {hasMnemonic && currentPrivateKey && keyUnchanged ? (
+            {hasMnemonic && currentPrivateKey ? (
               hasImportedNostrKey ? (
                 <Alert type="warn">
                   {t("nostr.settings.imported_key_warning")}
@@ -220,7 +211,7 @@ function NostrSettings() {
                     onClick={handleDeleteKeys}
                   />
                 )}
-                {hasImportedNostrKey && keyUnchanged && hasMnemonic && (
+                {hasImportedNostrKey && hasMnemonic && (
                   <Button
                     outline
                     label={t("nostr.settings.derive")}
@@ -232,12 +223,7 @@ function NostrSettings() {
           </ContentBox>
           <div className="flex justify-center my-6 gap-4">
             <Button label={tCommon("actions.cancel")} onClick={onCancel} />
-            <Button
-              type="submit"
-              label={tCommon("actions.save")}
-              disabled={keyUnchanged}
-              primary
-            />
+            <Button type="submit" label={tCommon("actions.save")} primary />
           </div>
         </Container>
       </form>
