@@ -1,5 +1,4 @@
 import * as secp256k1 from "@noble/secp256k1";
-import * as btc from "@scure/btc-signer";
 import * as bitcoin from "bitcoinjs-lib";
 import ECPairFactory, { ECPairAPI } from "ecpair";
 import {
@@ -80,11 +79,10 @@ class Bitcoin {
     const derivationPath = `${derivationPathWithoutIndex}/${index}`;
     const derivedKey = this.mnemonic.deriveKey(derivationPath);
 
-    const address = btc.getAddress(
-      "tr",
-      derivedKey.privateKey as Uint8Array,
-      this.network
-    );
+    const { address } = bitcoin.payments.p2tr({
+      internalPubkey: toXOnly(Buffer.from(derivedKey.publicKey as Uint8Array)),
+      network: this.network,
+    });
     if (!address) {
       throw new Error("No taproot address found from private key");
     }
@@ -111,12 +109,16 @@ class Bitcoin {
       const pubkey: Buffer | undefined =
         unsignedPsbt.data.inputs[i].tapInternalKey ||
         unsignedPsbt.data.inputs[i].tapBip32Derivation?.[0]?.pubkey;
-      const address = pubkey
-        ? btc.p2tr(pubkey, undefined, this.network).address
-        : "UNKNOWN";
 
-      if (!address) {
-        throw new Error("No address found in input " + i);
+      let address = "UNKNOWN";
+      if (pubkey) {
+        const pubkeyAddress = bitcoin.payments.p2tr({
+          internalPubkey: pubkey,
+          network: this.network,
+        }).address;
+        if (pubkeyAddress) {
+          address = pubkeyAddress;
+        }
       }
       const witnessUtxo = unsignedPsbt.data.inputs[i].witnessUtxo;
       if (!witnessUtxo) {
@@ -124,7 +126,7 @@ class Bitcoin {
       }
 
       preview.inputs.push({
-        amount: witnessUtxo.value,
+        amount: unsignedPsbt.data.inputs[i].witnessUtxo?.value || 0,
         address,
       });
     }

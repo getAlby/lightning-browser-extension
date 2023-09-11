@@ -1,5 +1,3 @@
-import { hex } from "@scure/base";
-import * as btc from "@scure/btc-signer";
 import getPsbtPreview from "~/extension/background-script/actions/webbtc/getPsbtPreview";
 import signPsbt from "~/extension/background-script/actions/webbtc/signPsbt";
 import Bitcoin from "~/extension/background-script/bitcoin";
@@ -91,8 +89,6 @@ describe("signPsbt", () => {
     expect(result.data?.signed).not.toBe(undefined);
     expect(result.error).toBe(undefined);
 
-    const checkTx = btc.Transaction.fromRaw(hex.decode(result.data.signed));
-    expect(checkTx.isFinal).toBe(true);
     expect(result.data?.signed).toBe(btcFixture.regtestTaprootSignedPsbt);
   });
 });
