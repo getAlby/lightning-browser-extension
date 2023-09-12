@@ -25,6 +25,7 @@ const request = async (
     }
 
     const methodInLowerCase = args.method.toLowerCase();
+    const requestMethodName = `request.${methodInLowerCase}`;
 
     // Check if the current connector support the call
     // connectors maybe do not support `requestMethod` at all
@@ -34,7 +35,7 @@ const request = async (
     const supportedMethods = connector.supportedMethods || []; // allow the connector to control which methods can be called
     if (
       !connector.requestMethod ||
-      !supportedMethods.includes(methodInLowerCase)
+      !supportedMethods.includes(requestMethodName)
     ) {
       throw new Error(`${methodInLowerCase} is not supported by your account`);
     }
@@ -60,7 +61,7 @@ const request = async (
     const hasPermission = await hasPermissionFor(weblnMethod, origin.host);
 
     // request method is allowed to be called
-    if (hasPermission && supportedMethods.includes(methodInLowerCase)) {
+    if (hasPermission) {
       const response = await connector.requestMethod(
         methodInLowerCase,
         args.params

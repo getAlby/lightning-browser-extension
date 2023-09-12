@@ -15,7 +15,7 @@ const disabledCalls = ["webbtc/enable"];
 
 let isEnabled = false; // store if webbtc is enabled for this content page
 let isRejected = false; // store if the webbtc enable call failed. if so we do not prompt again
-let account = null;
+let account;
 const SCOPE = "webbtc";
 
 async function init() {
@@ -67,10 +67,10 @@ async function init() {
       };
 
       // Overrides the enable action so the user can go through onboarding to setup their keys
-      if (!account) {
+      if (!account || !account.hasMnemonic) {
         account = await api.getAccount();
         if (!account.hasMnemonic) {
-          messageWithOrigin.action = `public/webbtc/onboard`;
+          messageWithOrigin.action = ev.data.action = `public/webbtc/onboard`;
         }
       }
 
