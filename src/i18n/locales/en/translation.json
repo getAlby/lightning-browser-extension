@@ -1006,6 +1006,7 @@
       "remove": "Remove",
       "copy": "Copy",
       "copy_clipboard": "Copy to clipboard",
+      "copied_to_clipboard": "Copied to clipboard",
       "paste": "Paste",
       "paste_clipboard": "Paste from clipboard",
       "copy_invoice": "Copy Invoice",
