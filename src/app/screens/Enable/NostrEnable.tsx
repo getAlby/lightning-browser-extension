@@ -59,6 +59,7 @@ function NostrEnable(props: Props) {
 
   useEffect(() => {
     // Fetch account data and set the component to render based on the result
+
     async function fetchAccountAndSetComponent() {
       try {
         const account = await api.getAccount();

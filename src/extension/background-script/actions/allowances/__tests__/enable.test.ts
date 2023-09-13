@@ -4,7 +4,7 @@ import state from "~/extension/background-script/state";
 import { allowanceFixture } from "~/fixtures/allowances";
 import type { DbAllowance, MessageAllowanceEnable, Sender } from "~/types";
 
-import enableAllowance from "../enable";
+import enableAllowance from "../enable/enable";
 
 jest.mock("~/extension/background-script/state");
 

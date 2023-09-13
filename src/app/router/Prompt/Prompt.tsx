@@ -17,6 +17,7 @@ import NostrConfirmSignMessage from "@screens/Nostr/ConfirmSignMessage";
 import NostrConfirmSignSchnorr from "@screens/Nostr/ConfirmSignSchnorr";
 import Unlock from "@screens/Unlock";
 import { HashRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
+import AccountMenu from "~/app/components/AccountMenu";
 import AlbyLogo from "~/app/components/AlbyLogo";
 import Toaster from "~/app/components/Toast/Toaster";
 import Providers from "~/app/context/Providers";
@@ -160,10 +161,8 @@ const Layout = () => {
         <div className="w-24 shrink-0">
           <AlbyLogo />
         </div>
+        <AccountMenu showOptions={false} />
       </div>
-      {/* maybe just remove accounts from the prompt and use previous method, in this way we acheive no need of reloading as well and don't reject original promise
-      what is the use of doing account switching in the prompt? */}
-
       <main className="flex flex-col grow min-h-0">
         <Outlet />
       </main>

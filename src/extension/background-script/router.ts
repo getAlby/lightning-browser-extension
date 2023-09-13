@@ -85,7 +85,7 @@ const routes = {
   public: {
     webbtc: {
       onboard: onboard.prompt,
-      enable: allowances.enable,
+      enable: allowances.mnemonicEnable,
       getInfo: webbtc.getInfo,
       getAddressOrPrompt: webbtc.getAddressOrPrompt,
     },
@@ -106,13 +106,13 @@ const routes = {
     },
     liquid: {
       onboard: onboard.prompt,
-      enable: allowances.enable,
+      enable: allowances.mnemonicEnable,
       getAddressOrPrompt: liquid.getAddressOrPrompt,
       signPsetWithPrompt: liquid.signPsetWithPrompt,
     },
     nostr: {
       onboard: onboard.prompt,
-      enable: allowances.enable,
+      enable: allowances.nostrEnable,
       getPublicKeyOrPrompt: nostr.getPublicKeyOrPrompt,
       signEventOrPrompt: nostr.signEventOrPrompt,
       signSchnorrOrPrompt: nostr.signSchnorrOrPrompt,
