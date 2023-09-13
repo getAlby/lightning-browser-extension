@@ -34,7 +34,7 @@ test.describe("Wallet features", () => {
     await confirmPasswordInput.type("g3tal6y");
 
     await (await findByText($document, "Change")).click();
-    await page.waitForSelector(".Toastify");
+    await findByText($document, "Passcode changed successfully");
 
     await browser.close();
   });

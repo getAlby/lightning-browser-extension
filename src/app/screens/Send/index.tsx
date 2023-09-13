@@ -8,8 +8,8 @@ import lightningPayReq from "bolt11";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import QrcodeAdornment from "~/app/components/QrcodeAdornment";
+import toast from "~/app/components/Toast";
 import { useAccount } from "~/app/context/AccountContext";
 import {
   extractLightningTagData,

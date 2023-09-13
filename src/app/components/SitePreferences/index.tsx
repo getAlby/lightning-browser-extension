@@ -6,7 +6,7 @@ import Toggle from "@components/form/Toggle";
 import type { FormEvent } from "react";
 import { Fragment, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { toast } from "react-toastify";
+import toast from "~/app/components/Toast";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
 import { PreferencesIcon } from "~/app/icons";

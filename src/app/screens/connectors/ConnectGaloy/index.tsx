@@ -6,7 +6,7 @@ import axios from "axios";
 import { useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import toast from "~/app/components/Toast";
 import msg from "~/common/lib/msg";
 
 import galoyBitcoinBeach from "/static/assets/icons/galoy_bitcoin_beach.png";
