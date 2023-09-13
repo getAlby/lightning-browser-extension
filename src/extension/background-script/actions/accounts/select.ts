@@ -47,20 +47,22 @@ export default select;
 // Send a notification message to the content script
 // which will then be posted to the window so websites can sync with the switched account
 async function notifyAccountChanged() {
-  try {
-    const tabs = await browser.tabs.query({});
-    // Send message to tabs with URLs starting with "http" or "https"
+  const tabs = await browser.tabs.query({});
+  // Send message to tabs with URLs starting with "http" or "https"
+  if (tabs) {
     const validTabs = tabs.filter((tab) => {
       const currentUrl = tab.url || "";
       return currentUrl.startsWith("http") || currentUrl.startsWith("https");
     });
 
     for (const tab of validTabs) {
-      if (tab.id) {
-        await browser.tabs.sendMessage(tab.id, { action: "accountChanged" });
+      try {
+        if (tab.id) {
+          await browser.tabs.sendMessage(tab.id, { action: "accountChanged" });
+        }
+      } catch (error) {
+        console.error("Failed to notify account changed", error);
       }
     }
-  } catch (error) {
-    console.error("Failed to notify account changed", error);
   }
 }

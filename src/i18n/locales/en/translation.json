@@ -717,7 +717,18 @@
       "title": "Receive",
       "actions": {
         "create_invoice": "Create Invoice",
-        "copy_lightning_address": "Copy Lightning Address"
+        "invoice": {
+          "title": "Lightning invoice",
+          "description": "Request instant and specific amount payments"
+        },
+        "bitcoin_address": {
+          "title": "Bitcoin address",
+          "description": "Receive via bitcoin address using a swap service"
+        },
+        "redeem": {
+          "title": "Redeem",
+          "description": "Withdraw a bitcoin voucher via LNURL code"
+        }
       },
       "amount": {
         "label": "Amount",
@@ -731,9 +742,7 @@
       "payment": {
         "waiting": "waiting for payment...",
         "status": "Check payment status"
-      },
-      "redeem_lnurl": "Redeem LNURL",
-      "receive_via_bitcoin_address": "Receive via bitcoin address"
+      }
     },
     "on_chain": {
       "title": "Receive via bitcoin address",
