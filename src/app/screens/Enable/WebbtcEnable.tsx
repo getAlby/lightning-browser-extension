@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import WebbtcEnableComponent from "~/app/components/Enable/WebbtcEnable";
+import { useEffect, useState } from "react";
+import LiquidEnableComponent from "~/app/components/Enable/LiquidEnable";
 import Onboard from "~/app/components/onboard";
 import { useAccount } from "~/app/context/AccountContext";
 import api from "~/common/lib/api";
@@ -10,10 +10,8 @@ type Props = {
 };
 
 export default function WebbtcEnable(props: Props) {
-  const [accountComponent, setAccountComponent] =
-    useState<React.ReactNode | null>(null); // State to store the component to render
-
   const { account } = useAccount();
+  const [hasMnemonic, setHasMnemonic] = useState(false);
 
   useEffect(() => {
     async function fetchAccountAndSetComponent() {
@@ -21,9 +19,9 @@ export default function WebbtcEnable(props: Props) {
         const fetchedAccount = await api.getAccount();
 
         if (fetchedAccount.hasMnemonic) {
-          setAccountComponent(<WebbtcEnableComponent origin={props.origin} />);
+          setHasMnemonic(true);
         } else {
-          setAccountComponent(<Onboard />);
+          setHasMnemonic(false);
         }
       } catch (e) {
         console.error(e);
@@ -33,5 +31,13 @@ export default function WebbtcEnable(props: Props) {
     fetchAccountAndSetComponent();
   }, [props.origin, account]);
 
-  return <div>{accountComponent}</div>;
+  return (
+    <div>
+      {hasMnemonic ? (
+        <LiquidEnableComponent origin={props.origin} />
+      ) : (
+        <Onboard />
+      )}
+    </div>
+  );
 }

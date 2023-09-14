@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import NostrEnableComponent from "~/app/components/Enable/NostrEnable";
 import Onboard from "~/app/components/onboard";
 import { useAccount } from "~/app/context/AccountContext";
@@ -10,10 +10,8 @@ type Props = {
 };
 
 export default function NostrEnable(props: Props) {
-  const [accountComponent, setAccountComponent] =
-    useState<React.ReactNode | null>(null); // State to store the component to render
-
   const { account } = useAccount();
+  const [hasNostrKeys, setHasNostrkeys] = useState(false);
 
   useEffect(() => {
     async function fetchAccountAndSetComponent() {
@@ -21,9 +19,9 @@ export default function NostrEnable(props: Props) {
         const fetchedAccount = await api.getAccount();
 
         if (fetchedAccount.nostrEnabled) {
-          setAccountComponent(<NostrEnableComponent origin={props.origin} />);
+          setHasNostrkeys(true);
         } else {
-          setAccountComponent(<Onboard />);
+          setHasNostrkeys(false);
         }
       } catch (e) {
         console.error(e);
@@ -33,5 +31,13 @@ export default function NostrEnable(props: Props) {
     fetchAccountAndSetComponent();
   }, [props.origin, account]);
 
-  return <div>{accountComponent}</div>;
+  return (
+    <div>
+      {hasNostrKeys ? (
+        <NostrEnableComponent origin={props.origin} />
+      ) : (
+        <Onboard />
+      )}
+    </div>
+  );
 }
