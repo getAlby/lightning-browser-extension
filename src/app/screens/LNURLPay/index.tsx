@@ -406,117 +406,123 @@ function LNURLPay() {
         {!successAction ? (
           <>
             <div className="grow overflow-y-auto no-scrollbar">
-              <Container maxWidth="sm">
+              <Container justifyBetween maxWidth="sm">
                 <PublisherCard
                   title={navState.origin?.name}
                   description={getRecipient()}
                   image={navState.origin?.icon || getImage()}
                 />
-                <form onSubmit={handleSubmit}>
-                  <fieldset disabled={loadingConfirm}>
-                    <dl className="mt-4 overflow-hidden">
-                      <>
-                        {formattedMetadata(details.metadata).map(
-                          ([dt, dd], i) => (
-                            <Fragment key={`element-${i}`}>
-                              <Dt>{dt}</Dt>
-                              <Dd>{dd}</Dd>
-                            </Fragment>
-                          )
-                        )}
-                        {details.minSendable === details.maxSendable && (
-                          <>
-                            <Dt>{t("amount.label")}</Dt>
-                            <Dd>
-                              {getFormattedSats(
-                                Math.floor(+details.minSendable / 1000)
-                              )}
-                            </Dd>
-                          </>
-                        )}
-                      </>
-                    </dl>
-                    {details && details.minSendable !== details.maxSendable && (
-                      <div>
-                        <DualCurrencyField
-                          autoFocus
-                          id="amount"
-                          label={t("amount.label")}
-                          min={amountMin}
-                          max={amountMax}
-                          rangeExceeded={rangeExceeded}
-                          value={valueSat}
-                          onChange={(e) => setValueSat(e.target.value)}
-                          fiatValue={fiatValue}
-                          hint={`${tCommon("balance")}: ${auth
-                            ?.balancesDecorated?.accountBalance}`}
-                          amountExceeded={amountExceeded}
-                        />
-                        <SatButtons
-                          min={amountMin}
-                          max={amountMax}
-                          onClick={setValueSat}
-                          disabled={loadingConfirm}
-                        />
-                      </div>
-                    )}
-
-                    {showCommentField() && (
-                      <div className="mt-4">
-                        <TextField
-                          id="comment"
-                          label={t("comment.label")}
-                          placeholder={tCommon("optional")}
-                          onChange={(e) => {
-                            setComment(e.target.value);
-                          }}
-                        />
-                      </div>
-                    )}
-
-                    {(showNameField() || showEmailField()) && (
-                      <div className="flex justify-center mt-4">
-                        <Hyperlink onClick={toggleShowMoreFields}>
-                          {tCommon("actions.more")}{" "}
-                          {showMoreFields ? (
-                            <CaretUpIcon className="h-4 w-4 inline-flex" />
-                          ) : (
-                            <CaretDownIcon className="h-4 w-4 inline-flex" />
+                <form onSubmit={handleSubmit} className="h-full">
+                  <fieldset
+                    disabled={loadingConfirm}
+                    className="h-full flex flex-col justify-between"
+                  >
+                    <div>
+                      <dl className="mt-4 overflow-hidden">
+                        <>
+                          {formattedMetadata(details.metadata).map(
+                            ([dt, dd], i) => (
+                              <Fragment key={`element-${i}`}>
+                                <Dt>{dt}</Dt>
+                                <Dd>{dd}</Dd>
+                              </Fragment>
+                            )
                           )}
-                        </Hyperlink>
-                      </div>
-                    )}
+                          {details.minSendable === details.maxSendable && (
+                            <>
+                              <Dt>{t("amount.label")}</Dt>
+                              <Dd>
+                                {getFormattedSats(
+                                  Math.floor(+details.minSendable / 1000)
+                                )}
+                              </Dd>
+                            </>
+                          )}
+                        </>
+                      </dl>
+                      {details &&
+                        details.minSendable !== details.maxSendable && (
+                          <div>
+                            <DualCurrencyField
+                              autoFocus
+                              id="amount"
+                              label={t("amount.label")}
+                              min={amountMin}
+                              max={amountMax}
+                              rangeExceeded={rangeExceeded}
+                              value={valueSat}
+                              onChange={(e) => setValueSat(e.target.value)}
+                              fiatValue={fiatValue}
+                              hint={`${tCommon("balance")}: ${auth
+                                ?.balancesDecorated?.accountBalance}`}
+                              amountExceeded={amountExceeded}
+                            />
+                            <SatButtons
+                              min={amountMin}
+                              max={amountMax}
+                              onClick={setValueSat}
+                              disabled={loadingConfirm}
+                            />
+                          </div>
+                        )}
 
-                    {showMoreFields && (
-                      <div className="mb-4">
-                        {showNameField() && (
-                          <div className="mt-4">
-                            <TextField
-                              id="name"
-                              label={t("name.label")}
-                              placeholder={tCommon("optional")}
-                              value={userName}
-                              onChange={(e) => {
-                                setUserName(e.target.value);
-                              }}
-                            />
-                          </div>
-                        )}
-                        {showEmailField() && (
-                          <div className="mt-4">
-                            <TextField
-                              id="email"
-                              label={t("email.label")}
-                              placeholder={tCommon("optional")}
-                              value={userEmail}
-                              onChange={(e) => {
-                                setUserEmail(e.target.value);
-                              }}
-                            />
-                          </div>
-                        )}
-                      </div>
-                    )}
+                      {showCommentField() && (
+                        <div className="mt-4">
+                          <TextField
+                            id="comment"
+                            label={t("comment.label")}
+                            placeholder={tCommon("optional")}
+                            onChange={(e) => {
+                              setComment(e.target.value);
+                            }}
+                          />
+                        </div>
+                      )}
+
+                      {(showNameField() || showEmailField()) && (
+                        <div className="flex justify-center mt-4">
+                          <Hyperlink onClick={toggleShowMoreFields}>
+                            {tCommon("actions.more")}{" "}
+                            {showMoreFields ? (
+                              <CaretUpIcon className="h-4 w-4 inline-flex" />
+                            ) : (
+                              <CaretDownIcon className="h-4 w-4 inline-flex" />
+                            )}
+                          </Hyperlink>
+                        </div>
+                      )}
+
+                      {showMoreFields && (
+                        <div className="mb-4">
+                          {showNameField() && (
+                            <div className="mt-4">
+                              <TextField
+                                id="name"
+                                label={t("name.label")}
+                                placeholder={tCommon("optional")}
+                                value={userName}
+                                onChange={(e) => {
+                                  setUserName(e.target.value);
+                                }}
+                              />
+                            </div>
+                          )}
+                          {showEmailField() && (
+                            <div className="mt-4">
+                              <TextField
+                                id="email"
+                                label={t("email.label")}
+                                placeholder={tCommon("optional")}
+                                value={userEmail}
+                                onChange={(e) => {
+                                  setUserEmail(e.target.value);
+                                }}
+                              />
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </div>
                     <div className="mt-2 dark:border-white/10">
                       <ConfirmOrCancel
                         isFocused={false}

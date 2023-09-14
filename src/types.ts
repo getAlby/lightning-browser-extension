@@ -44,6 +44,7 @@ export interface AccountInfo {
   connectorType: ConnectorType;
   currency: ACCOUNT_CURRENCIES;
   avatarUrl?: string;
+  lightningAddress?: string;
 }
 
 export interface MetaData {
