@@ -1,4 +1,4 @@
-import Enable from "~/app/components/Enable";
+import WeblnEnableComponent from "~/app/components/Enable/WeblnEnable";
 import { OriginData } from "~/types";
 
 type Props = {
@@ -6,5 +6,5 @@ type Props = {
 };
 
 export default function WeblnEnable(props: Props) {
-  return <Enable origin={props.origin} />;
+  return <WeblnEnableComponent origin={props.origin} />;
 }

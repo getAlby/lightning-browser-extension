@@ -1,4 +1,5 @@
 import * as accounts from "./actions/accounts";
+import * as alby from "./actions/alby";
 import * as allowances from "./actions/allowances";
 import * as blocklist from "./actions/blocklist";
 import * as cache from "./actions/cache";
@@ -84,18 +85,17 @@ const routes = {
   // Public calls that are accessible from the inpage script (through the content script)
   public: {
     webbtc: {
-      onboard: onboard.prompt,
-      enable: allowances.mnemonicEnable,
+      enable: webbtc.enable,
       getInfo: webbtc.getInfo,
       getAddressOrPrompt: webbtc.getAddressOrPrompt,
     },
     alby: {
-      enable: allowances.enable,
+      enable: alby.enable,
       addAccount: accounts.promptAdd,
     },
     webln: {
       onboard: onboard.prompt,
-      enable: allowances.enable,
+      enable: webln.enable,
       getInfo: ln.getInfo,
       sendPaymentOrPrompt: webln.sendPaymentOrPrompt,
       keysendOrPrompt: webln.keysendOrPrompt,
@@ -106,14 +106,12 @@ const routes = {
       request: ln.request,
     },
     liquid: {
-      onboard: onboard.prompt,
-      enable: allowances.mnemonicEnable,
+      enable: liquid.enable,
       getAddressOrPrompt: liquid.getAddressOrPrompt,
       signPsetWithPrompt: liquid.signPsetWithPrompt,
     },
     nostr: {
-      onboard: onboard.prompt,
-      enable: allowances.nostrEnable,
+      enable: nostr.enable,
       getPublicKeyOrPrompt: nostr.getPublicKeyOrPrompt,
       signEventOrPrompt: nostr.signEventOrPrompt,
       signSchnorrOrPrompt: nostr.signSchnorrOrPrompt,

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Enable from "~/app/components/Enable";
+import WebbtcEnableComponent from "~/app/components/Enable/WebbtcEnable";
 import Onboard from "~/app/components/onboard";
 import { useAccount } from "~/app/context/AccountContext";
 import api from "~/common/lib/api";
@@ -21,7 +21,7 @@ export default function WebbtcEnable(props: Props) {
         const fetchedAccount = await api.getAccount();
 
         if (fetchedAccount.hasMnemonic) {
-          setAccountComponent(<Enable origin={props.origin} />);
+          setAccountComponent(<WebbtcEnableComponent origin={props.origin} />);
         } else {
           setAccountComponent(<Onboard />);
         }

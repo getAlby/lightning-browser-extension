@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Enable from "~/app/components/Enable";
+import LiquidEnableComponent from "~/app/components/Enable/LiquidEnable";
+
 import Onboard from "~/app/components/onboard";
 import { useAccount } from "~/app/context/AccountContext";
 import api from "~/common/lib/api";
@@ -21,7 +22,7 @@ export default function LiquidEnable(props: Props) {
         const fetchedAccount = await api.getAccount();
 
         if (fetchedAccount.hasMnemonic) {
-          setAccountComponent(<Enable origin={props.origin} />);
+          setAccountComponent(<LiquidEnableComponent origin={props.origin} />);
         } else {
           setAccountComponent(<Onboard />);
         }

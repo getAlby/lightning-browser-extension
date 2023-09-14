@@ -13,7 +13,7 @@ import type { OriginData } from "~/types";
 type Props = {
   origin: OriginData;
 };
-function Enable(props: Props) {
+function NostrEnableComponent(props: Props) {
   const hasFetchedData = useRef(false);
   const [loading, setLoading] = useState(false);
   const { t } = useTranslation("translation", {
@@ -119,4 +119,4 @@ function Enable(props: Props) {
   );
 }
 
-export default Enable;
+export default NostrEnableComponent;

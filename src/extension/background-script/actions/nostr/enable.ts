@@ -3,10 +3,10 @@ import { getHostFromSender } from "~/common/utils/helpers";
 import db from "~/extension/background-script/db";
 import type { MessageAllowanceEnable, Sender } from "~/types";
 
-import state from "../../../state";
-import { ExtensionIcon, setIcon } from "../../setup/setIcon";
+import state from "../../state";
+import { ExtensionIcon, setIcon } from "../setup/setIcon";
 
-const nostrEnable = async (message: MessageAllowanceEnable, sender: Sender) => {
+const enable = async (message: MessageAllowanceEnable, sender: Sender) => {
   const host = getHostFromSender(sender);
   if (!host) return;
 
@@ -83,4 +83,4 @@ const nostrEnable = async (message: MessageAllowanceEnable, sender: Sender) => {
   }
 };
 
-export default nostrEnable;
+export default enable;

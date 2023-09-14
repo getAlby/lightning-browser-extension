@@ -1,4 +1,4 @@
-import Enable from "~/app/components/Enable";
+import AlbyEnableComponent from "~/app/components/Enable/AlbyEnable";
 import { OriginData } from "~/types";
 
 type Props = {
@@ -6,5 +6,5 @@ type Props = {
 };
 
 export default function AlbyEnable(props: Props) {
-  return <Enable origin={props.origin} />;
+  return <AlbyEnableComponent origin={props.origin} />;
 }

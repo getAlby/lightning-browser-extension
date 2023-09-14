@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Enable from "~/app/components/Enable";
+import NostrEnableComponent from "~/app/components/Enable/NostrEnable";
 import Onboard from "~/app/components/onboard";
 import { useAccount } from "~/app/context/AccountContext";
 import api from "~/common/lib/api";
@@ -21,7 +21,7 @@ export default function NostrEnable(props: Props) {
         const fetchedAccount = await api.getAccount();
 
         if (fetchedAccount.nostrEnabled) {
-          setAccountComponent(<Enable origin={props.origin} />);
+          setAccountComponent(<NostrEnableComponent origin={props.origin} />);
         } else {
           setAccountComponent(<Onboard />);
         }
