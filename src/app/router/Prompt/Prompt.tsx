@@ -19,6 +19,7 @@ import Unlock from "@screens/Unlock";
 import { HashRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
 import AlbyLogo from "~/app/components/AlbyLogo";
 import Toaster from "~/app/components/Toast/Toaster";
+import Onboard from "~/app/components/onboard";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
 import BitcoinConfirmGetAddress from "~/app/screens/Bitcoin/ConfirmGetAddress";
@@ -27,7 +28,6 @@ import LiquidEnable from "~/app/screens/Enable/LiquidEnable";
 import NostrEnable from "~/app/screens/Enable/NostrEnable";
 import WebbtcEnable from "~/app/screens/Enable/WebbtcEnable";
 import WeblnEnable from "~/app/screens/Enable/WeblnEnable";
-import Onboard from "~/app/screens/Onboard/Prompt";
 import type { NavigationState, OriginData } from "~/types";
 
 // Parse out the parameters from the querystring.

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Enable from "~/app/components/Enable";
+import Onboard from "~/app/components/onboard";
 import { useAccount } from "~/app/context/AccountContext";
-import Onboard from "~/app/screens/Onboard/Prompt";
 import api from "~/common/lib/api";
 import type { OriginData } from "~/types";
 
