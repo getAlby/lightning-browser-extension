@@ -94,7 +94,10 @@ async function init() {
       // Overrides the enable action so the user can go through onboarding to setup their keys
 
       // Overrides the enable action so the user can go through onboarding to setup their keys
-      if (!account || !account.hasMnemonic) {
+      if (
+        ev.data.action === "webln/lnurl" &&
+        (!account || !account.hasMnemonic)
+      ) {
         account = await api.getAccount();
         if (!account.hasMnemonic) {
           messageWithOrigin.action = ev.data.action = `public/webln/onboard`;
