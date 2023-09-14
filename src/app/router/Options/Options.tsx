@@ -34,6 +34,7 @@ import NostrSetup from "~/app/screens/Accounts/NostrSetup/NostrSetup";
 import Discover from "~/app/screens/Discover";
 import LNURLRedeem from "~/app/screens/LNURLRedeem";
 import OnChainReceive from "~/app/screens/OnChainReceive";
+import ReceiveInvoice from "~/app/screens/ReceiveInvoice";
 import ScanQRCode from "~/app/screens/ScanQRCode";
 import SendToBitcoinAddress from "~/app/screens/SendToBitcoinAddress";
 import ChooseConnector from "~/app/screens/connectors/ChooseConnector";
@@ -72,6 +73,7 @@ function Options() {
               element={<SendToBitcoinAddress />}
             />
             <Route path="receive" element={<Receive />} />
+            <Route path="receive/invoice" element={<ReceiveInvoice />} />
             <Route path="onChainReceive" element={<OnChainReceive />} />
             <Route path="wallet" element={<DefaultView />} />
             <Route path="transactions">

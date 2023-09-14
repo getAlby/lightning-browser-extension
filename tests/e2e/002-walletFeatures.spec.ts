@@ -56,8 +56,12 @@ test.describe("Wallet features", () => {
 
     await (await findByText($document, "Wallet")).click();
     page.waitForSelector("button");
-    // create invoice
+
+    // goto: receive
     await (await findByText($document, "Receive")).click();
+
+    // goto: receive via lightning invoice
+    await (await findByText($document, "Lightning invoice")).click();
 
     const amountField = await getByLabelText($document, "Amount");
     await amountField.type("888");
