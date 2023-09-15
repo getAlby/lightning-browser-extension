@@ -8,9 +8,18 @@ export default class ProviderBase {
   private _scope: string;
 
   constructor(scope: string) {
-    this.enabled = false;
+    this.enabled = this.loadEnabledState();
     this._eventEmitter = new EventEmitter();
     this._scope = scope;
+  }
+
+  private loadEnabledState(): boolean {
+    const storedEnabled = localStorage.getItem("enabled");
+    return storedEnabled === "true";
+  }
+
+  private saveEnabledState(enabled: boolean): void {
+    localStorage.setItem("enabled", enabled.toString());
   }
 
   protected _checkEnabled(methodName: string): void {
@@ -26,6 +35,7 @@ export default class ProviderBase {
     const result = await this.execute("enable");
     if (typeof result.enabled === "boolean") {
       this.enabled = result.enabled;
+      this.saveEnabledState(this.enabled);
     }
   }
 
