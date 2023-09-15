@@ -29,7 +29,7 @@ export default function LiquidEnable(props: Props) {
     }
 
     fetchAccountAndSetComponent();
-  }, [props.origin, account]);
+  }, [account]);
 
   return (
     <div>
