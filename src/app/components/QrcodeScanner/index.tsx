@@ -2,7 +2,7 @@ import { QrCodeIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { Html5Qrcode, Html5QrcodeScannerState } from "html5-qrcode";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { toast } from "react-toastify";
+import toast from "~/app/components/Toast";
 
 import Button from "../Button";
 

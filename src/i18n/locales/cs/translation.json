@@ -299,7 +299,6 @@
       },
       "account_view": {
         "remove": {
-          "confirm": "Jste si jisti, že chcete odstranit účet: {{name}}? \nTato operace nelze vzít zpět. Pokud jste tento účet používali k přihlašovaní k webovým stránkam, můžete k nim ztratit přístup.",
           "title": "Odstranit tento účet",
           "subtitle": "Všechny propojené příspěvky budou smazány. Buďte si jisti, že akci chcete opravdu provést."
         },
@@ -319,7 +318,6 @@
           "private_key": {
             "title": "Správa vašeho klíče",
             "subtitle": "Vložte svůj privátní klíč nebo si vygenerujte nový. Předtím, než budete generovat nový klíč, ujistěte se, že máte svůj klíč zazalohovaný. <0>Dozvědět se více »</0>",
-            "warning": "Prosím vložte jméno vašeho účtu pro potvrzení smazání privátního klíče:",
             "success": "Privátní klíč byl úspěšně zašifrován a uložen.",
             "successfully_removed": "Privátní klíč byl odstraněn.",
             "label": "Privátní klíč",

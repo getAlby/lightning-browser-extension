@@ -10,7 +10,7 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { FC, useEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
-import { toast } from "react-toastify";
+import toast from "~/app/components/Toast";
 import { useSettings } from "~/app/context/SettingsContext";
 import { PublisherLnData } from "~/app/screens/Home/PublisherLnData";
 import { convertPaymentsToTransactions } from "~/app/utils/payments";

@@ -379,7 +379,7 @@
           "your_ln_address": "Alamat Lightning kamu:",
           "export_uri": "LNDHub Credentials URI",
           "scan_qr": "Impor wallet ini pada Zeus atau BlueWallet dengan memindai kode QR.",
-          "description": "Memungkinkan kamu untuk menghubungkan dan menggunakan akun ini di mobile wallet seperti <0>Blue Wallet</0> dan <0>Zeus</0>."
+          "description": "Memungkinkan kamu untuk menghubungkan dan menggunakan akun ini di mobile wallet seperti <0>Blue Wallet</0> dan <1>Zeus</1>."
         },
         "mnemonic": {
           "saved": "Kunci Master terenkripsi & tersimpan dengan sukses.",
@@ -457,7 +457,6 @@
           },
           "private_key": {
             "subtitle": "Tempel kunci privat nostr atau buat baru. <0>Pelajari lebih lanjut »</0>",
-            "warning": "Silakan masukan nama akun untuk mengkonfirmasi penghapusan kunci privat nostr:",
             "failed_to_remove": "Nama akun yang dimasukkan tidak sama, kunci privat Nostr yang dahulu telah dikembalikan.",
             "successfully_removed": "Kunci privat Nostr terhapus dengan sukses.",
             "label": "Kunci privat Nostr",
@@ -487,13 +486,11 @@
         "remove": {
           "title": "Hapus Akun Ini",
           "subtitle": "Hapus semua allowances, data pembayaran, dan kunci-kunci yang terasosiasi dengan akun ini.",
-          "error": "Nama akun yang dimasukkan tidak sama.",
-          "confirm": "Silakan masukkan nama akun untuk mengkonfirmasi penghapusan akun kamu.\n\n⚠️ Semua kunci-kunci(Master Key, Nostr, dll) yang terasosiasi akan terhapus jika kamu melanjutkannya. Pastikan kamu telah mencadangkannya, tidak ada cara lain untuk memulihkannya."
+          "error": "Nama akun yang dimasukkan tidak sama."
         },
         "remove_secretkey": {
           "title": "Hapus Master Key",
           "subtitle": "Hapus Master Key dari akun ini.",
-          "confirm": "SIlakan masukkan nama akun untuk mengkonfirmasi penghapusan Master Key kamu.",
           "success": "Master Key telah terhapus."
         },
         "actions": {
@@ -794,8 +791,6 @@
       "hide_details": "Sembunyikan rincian",
       "block_and_ignore": "Blok dan abaikan {{host}}",
       "kinds": {
-        "22242": "autentikasi klien",
-        "42": "pesan channel",
         "0": "metadata",
         "2": "rekomendasi relay",
         "3": "Kontak",
@@ -805,12 +800,14 @@
         "8": "lencana penghargaan",
         "40": "pembuatan channel",
         "41": "metadata channel",
+        "42": "pesan channel",
         "9734": "permintaan zap",
         "9735": "zap",
+        "10002": "daftar metadata relay",
+        "22242": "autentikasi klien",
         "24133": "Sambungkan nostr",
         "30009": "definisi lencana",
-        "30078": "data terkait aplikasi",
-        "10002": "daftar metadata relay"
+        "30078": "data terkait aplikasi"
       },
       "allow": "Izinkan website ini untuk:",
       "view_details": "Lihat rincian",

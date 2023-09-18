@@ -448,14 +448,13 @@
           "your_ln_address": "Deine Lightning Adresse:",
           "export_uri": "LNDHub Anmeldeinformationen URI",
           "scan_qr": "Importiere diese Wallet in Zeus oder BlueWallet, indem du den QRCode scannst.",
-          "description": "Ermöglicht es dir, dieses Konto mit mobilen Wallets wie <0>Blue Wallet</0> und <0>Zeus</0> zu verbinden und zu verwenden."
+          "description": "Ermöglicht es dir, dieses Konto mit mobilen Wallets wie <0>Blue Wallet</0> und <1>Zeus</1> zu verbinden und zu verwenden."
         },
         "nostr": {
           "title": "Nostr",
           "private_key": {
             "title": "Verwalte deinen privaten Nostr-Schlüssel",
             "subtitle": "Füge deinen eigenen privaten Schlüssel ein oder erzeuge einen neuen. <0>Mehr erfahren\"</0>",
-            "warning": "Bitte gebe deinen Namen des Kontos ein, um die Löschung des privaten Schlüssels von nostr zu bestätigen:",
             "success": "Der private Schlüssel von Nostr wurde erfolgreich verschlüsselt und gespeichert.",
             "successfully_removed": "Der private Schlüssel von Nostr wurde erfolgreich entfernt.",
             "label": "Nostr Privater Schlüssel",
@@ -517,7 +516,6 @@
         "remove": {
           "title": "Dieses Konto entfernen",
           "subtitle": "Entfernt alle Zulagen, Zahlungsdaten und Schlüssel, die mit diesem Konto verbunden sind.",
-          "confirm": "Bitte gebe den Namen des Kontos ein, um die Löschung deines Kontos zu bestätigen.\n\n ⚠️ Wenn du fortfährst, werden alle zugehörigen Schlüssel (Master Key, Nostr, etc.) gelöscht. Bitte vergewisser dich, dass du eine Sicherungskopie erstellt hast, denn es gibt keine andere Möglichkeit, sie wiederherzustellen.",
           "error": "Der eingegebene Kontoname stimmte nicht überein."
         },
         "actions": {
@@ -571,7 +569,6 @@
         "remove_secretkey": {
           "title": "Hauptschlüssel entfernen",
           "subtitle": "Entfernt den Hauptschlüssel von diesem Konto.",
-          "confirm": "Bitte gebe den Namen des Kontos ein, um die Löschung deines Hauptschlüssels zu bestätigen.",
           "success": "Der Hauptschlüssel wurde erfolgreich entfernt."
         },
         "network": {
@@ -670,30 +667,30 @@
       "hide_details": "Details ausblenden",
       "no_content": "(Ohne Inhalt)",
       "kinds": {
-        "unknown": "nostr Ereignis der Art {{kind}}",
         "0": "Metadaten",
+        "1": "kurze Textnotiz",
+        "2": "Relais empfehlen",
+        "3": "Kontakte",
+        "4": "verschlüsselte Direktnachrichten",
         "5": "Ereignislöschung",
+        "7": "Reaktion",
+        "8": "Abzeichenverleihung",
         "40": "Kanalbildung",
         "41": "Kanal Metadaten",
         "42": "Kanalmeldung",
         "43": "Kanal verstecke Nachrichten",
         "44": "Kanal stummschalten Benutzer",
-        "10002": "Metadaten der Relaisliste",
-        "30078": "anwendungsspezifische Daten",
-        "22242": "Client Authentifizierung",
-        "7": "Reaktion",
+        "1984": "Berichterstattung",
         "9734": "Zappanfrage",
         "9735": "zap",
-        "2": "Relais empfehlen",
-        "1": "kurze Textnotiz",
-        "3": "Kontakte",
-        "4": "verschlüsselte Direktnachrichten",
-        "8": "Abzeichenverleihung",
-        "1984": "Berichterstattung",
+        "10002": "Metadaten der Relaisliste",
+        "22242": "Client Authentifizierung",
         "24133": "nostr verbinden",
         "30008": "Profilabzeichen",
         "30009": "Ausweisdefinition",
-        "30023": "Langform Inhalte"
+        "30023": "Langform Inhalte",
+        "30078": "anwendungsspezifische Daten",
+        "unknown": "nostr Ereignis der Art {{kind}}"
       },
       "allow_sign_event": "Erlaube {{host}}, eine {{kind}} zu unterzeichnen:"
     },

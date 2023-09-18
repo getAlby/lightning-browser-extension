@@ -7,8 +7,8 @@ import TextField from "@components/form/TextField";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import QrcodeAdornment from "~/app/components/QrcodeAdornment";
+import toast from "~/app/components/Toast";
 import { extractLightningTagData } from "~/app/utils";
 import lnurlLib from "~/common/lib/lnurl";
 import { isLNURLDetailsError } from "~/common/utils/typeHelpers";
@@ -92,7 +92,7 @@ function LNURLRedeem() {
               endAdornment={<QrcodeAdornment route="lnurlRedeem" />}
             />
           </div>
-          <div className="my-4">
+          <div className="mt-4">
             <Button
               type="submit"
               label={t("actions.withdraw")}

@@ -339,7 +339,6 @@
           "private_key": {
             "title": "Opbevar din nøgle",
             "subtitle": "Indsæt din private nøgle eller generer en ny. Husk at tage en sikkerhedskopi af din private nøgle, før du genererer en ny. <0>Læs mere »</0>",
-            "warning": "Dette vil slette din gamle private nøgle. Er du sikker?",
             "success": "Den private nøgle blev krypteret & gemt.",
             "successfully_removed": "Den private nøgle blev fjernet.",
             "label": "Privat nøgle"
@@ -365,8 +364,7 @@
         },
         "remove": {
           "title": "Fjern denne konto",
-          "subtitle": "Alle de tilknyttede puljer bliver slettet. Du skal være helt sikker.",
-          "confirm": "Er du sikker på, at du vil fjerne kontoen: {{navn}}?\nDette kan ikke fortrydes. Hvis du brugte denne konto til at logge på hjemmesider, kan du miste adgangen til disse."
+          "subtitle": "Alle de tilknyttede puljer bliver slettet. Du skal være helt sikker."
         },
         "actions": {
           "remove_account": "Fjern konto",

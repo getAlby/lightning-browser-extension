@@ -10,8 +10,8 @@ import DualCurrencyField from "@components/form/DualCurrencyField";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import Container from "~/app/components/Container";
+import toast from "~/app/components/Toast";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
@@ -157,7 +157,7 @@ function Keysend() {
                   })
             }
           />
-          <div className="my-4">
+          <div className="mt-4">
             <Button
               onClick={close}
               label={tCommon("actions.close")}

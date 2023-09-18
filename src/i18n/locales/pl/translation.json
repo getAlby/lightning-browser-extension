@@ -352,7 +352,6 @@
           "private_key": {
             "title": "Zarządzaj swoim kluczem",
             "subtitle": "Wklej swój klucz prywatny lub wygeneruj nowy. <0>Dowiedz się więcej »</o>",
-            "warning": "Podaj proszę nazwę konta aby potwierdzić usunięcie prywatnego klucza:",
             "success": "Klucz prywatny został zaszyfrowany i zapisany.",
             "successfully_removed": "Klucz prywatny usunięty.",
             "label": "Klucz prywatny",
@@ -379,8 +378,7 @@
         },
         "remove": {
           "title": "Usuń konto",
-          "subtitle": "Wszystkie powiązane limity zostaną usunięte. Proszę się upewnić.",
-          "confirm": "Na pewno usunąć konto: {{name}}? \nNie można tego cofnąć. Jeśli tego konta użyto do logowania do innych stron, możesz stracić do nich dostęp."
+          "subtitle": "Wszystkie powiązane limity zostaną usunięte. Proszę się upewnić."
         },
         "actions": {
           "remove_account": "Usuń konto",
@@ -673,30 +671,30 @@
       "hide_details": "Ukryj szczegóły",
       "no_content": "(brak treści)",
       "kinds": {
-        "3": "kontakty",
-        "5": "usunięcie zdarzenia",
-        "8": "nadanie odznaki",
-        "42": "wiadomość kanału",
-        "43": "ukrycie wiadomości w kanale",
-        "9734": "prośba o zap",
-        "30008": "odznaki profile",
-        "30009": "definicja odznaki",
-        "unknown": "zdarzenia nostr typu {{kind}}",
         "0": "metadane",
         "1": "krótka wiadomość tekstowa",
         "2": "rekomendacja przekaźnika",
+        "3": "kontakty",
         "4": "zaszyfrowane wiadomości prywatne",
+        "5": "usunięcie zdarzenia",
         "7": "reakcja",
+        "8": "nadanie odznaki",
         "40": "utworzenie kanału",
         "41": "metadane kanału",
-        "1984": "zgłoszenie",
+        "42": "wiadomość kanału",
+        "43": "ukrycie wiadomości w kanale",
         "44": "ignorowanie użytkownika w kanale",
+        "1984": "zgłoszenie",
+        "9734": "prośba o zap",
         "9735": "zap",
         "10002": "metadane listy przekaźników",
         "22242": "uwierzytelnienie klienta",
         "24133": "połączenie nostr",
+        "30008": "odznaki profile",
+        "30009": "definicja odznaki",
         "30023": "treść długiego formatu",
-        "30078": "dane specyficzne dla aplikacji"
+        "30078": "dane specyficzne dla aplikacji",
+        "unknown": "zdarzenia nostr typu {{kind}}"
       },
       "allow_sign_event": "Pozwól {{host}} na podpisywanie {{kind}}:",
       "view_details": "Pokaż szczegóły"

@@ -108,6 +108,7 @@ export const swrGetAccountInfo = async (
           connectorType,
           currency: currency || "BTC", // set default currency for every account
           avatarUrl,
+          lightningAddress: response.info.lightning_address,
         };
         storeAccounts({
           ...accountsCache,

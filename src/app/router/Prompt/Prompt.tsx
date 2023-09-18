@@ -18,11 +18,12 @@ import NostrConfirmSignMessage from "@screens/Nostr/ConfirmSignMessage";
 import NostrConfirmSignSchnorr from "@screens/Nostr/ConfirmSignSchnorr";
 import Unlock from "@screens/Unlock";
 import { HashRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
 import AlbyLogo from "~/app/components/AlbyLogo";
+import Toaster from "~/app/components/Toast/Toaster";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
 import BitcoinConfirmGetAddress from "~/app/screens/Bitcoin/ConfirmGetAddress";
+import Onboard from "~/app/screens/Onboard/Prompt";
 import type { NavigationState, OriginData } from "~/types";
 
 // Parse out the parameters from the querystring.
@@ -126,6 +127,10 @@ function Prompt() {
             <Route path="confirmKeysend" element={<ConfirmKeysend />} />
             <Route path="confirmSignMessage" element={<ConfirmSignMessage />} />
             <Route path="confirmAddAccount" element={<ConfirmAddAccount />} />
+            <Route path="public/nostr/onboard" element={<Onboard />} />
+            <Route path="public/liquid/onboard" element={<Onboard />} />
+            <Route path="public/webbtc/onboard" element={<Onboard />} />
+            <Route path="public/webln/onboard" element={<Onboard />} />
             <Route
               path="public/confirmRequestPermission"
               element={<ConfirmRequestPermission />}
@@ -136,7 +141,7 @@ function Prompt() {
             element={
               <>
                 <Unlock />
-                <ToastContainer autoClose={10000} hideProgressBar={true} />
+                <Toaster />
               </>
             }
           />
@@ -149,7 +154,7 @@ function Prompt() {
 const Layout = () => {
   return (
     <>
-      <ToastContainer autoClose={10000} hideProgressBar={true} />
+      <Toaster />
       <div className="px-4 py-2 justify-between items-center bg-white flex border-b border-gray-200 dark:bg-surface-02dp dark:border-neutral-500 gap-5">
         <div className="w-24 shrink-0">
           <AlbyLogo />

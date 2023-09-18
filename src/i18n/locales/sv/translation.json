@@ -337,7 +337,6 @@
             "title": "Hantera dina Nostr privata nyckel",
             "successfully_removed": "Nostr privat nyckel har tagits bort.",
             "label": "Nostr Privat Nyckel",
-            "warning": "Ange namnet på kontot för att bekräfta raderingen av din nostr privata nyckel:",
             "subtitle": "Klistra in din nostr privata nyckel eller skapa en ny. <0>Läs mer »</0>",
             "success": "Nostr privat nyckel krypterad och sparad.",
             "failed_to_remove": "Det angivna kontonamnet matchade inte, din gamla Nostr privata nyckel har återställts."
@@ -387,7 +386,6 @@
         "remove": {
           "title": "Ta bort detta konto",
           "subtitle": "Tar bort alla traktamenten, betalningsdata och nycklar som är kopplade till detta konto.",
-          "confirm": "Ange namnet på kontot för att bekräfta raderingen av ditt konto.\n\n ⚠️ Alla associerade nycklar (Master Key, Nostr, etc) kommer att raderas om du fortsätter. Se till att du har säkerhetskopierat dem, det finns inget annat sätt att återställa dem.",
           "error": "Det angivna kontonamnet matchade inte."
         },
         "title1": "Konto inställningar",
@@ -403,7 +401,7 @@
           "your_ln_address": "Din Lightning Address:",
           "export_uri": "LNDHub-inloggnings-URI",
           "scan_qr": "Importera denna plånbok till Zeus eller BlueWallet genom att skanna QR-koden.",
-          "description": "Låter dig ansluta och använda det här kontot på mobila plånböcker som <0>Blue Wallet</0> och <0>Zeus</0>."
+          "description": "Låter dig ansluta och använda det här kontot på mobila plånböcker som <0>Blue Wallet</0> och <1>Zeus</1>."
         },
         "actions": {
           "remove_account": "Ta bort kontot",
@@ -452,7 +450,6 @@
         "remove_secretkey": {
           "title": "Ta bort huvudnyckeln",
           "subtitle": "Tar bort huvudnyckeln från det här kontot.",
-          "confirm": "Ange namnet på kontot för att bekräfta raderingen av din huvudnyckel.",
           "success": "Masternyckeln har tagits bort."
         },
         "no_mnemonic_hint": "💡 Du har ingen huvudnyckel än. <0>Klicka här</0></div> för att skapa din huvudnyckel och låsa upp dessa inställningar.",
@@ -718,16 +715,11 @@
       "allow": "Tillåt den här webbplatsen att:",
       "block_and_ignore": "Blockera och ignorera {{host}}",
       "kinds": {
-        "9734": "zap förfrågan",
-        "9735": "zap",
-        "10002": "relä listans metadata",
-        "22242": "klient autentisering",
-        "4": "krypterade direktmeddelanden",
-        "unknown": "nostr event av sort {{kind}}",
         "0": "metadata",
         "1": "kort textanteckning",
         "2": "rekommenderade relä",
         "3": "kontakter",
+        "4": "krypterade direktmeddelanden",
         "5": "radering av händelse",
         "7": "reaktion",
         "8": "badge utmärkelse",
@@ -737,11 +729,16 @@
         "43": "kanal gömda meddelande",
         "44": "kanal tysta användare",
         "1984": "anmäla",
+        "9734": "zap förfrågan",
+        "9735": "zap",
+        "10002": "relä listans metadata",
+        "22242": "klient autentisering",
         "24133": "nostr ansluta",
         "30008": "profil badges",
         "30009": "badge definition",
         "30023": "långformigt innehåll",
-        "30078": "applikationsspecifika data"
+        "30078": "applikationsspecifika data",
+        "unknown": "nostr event av sort {{kind}}"
       },
       "view_details": "Visa detaljer",
       "hide_details": "Göm detaljer",

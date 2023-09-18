@@ -19,9 +19,9 @@ import Transactions from "@screens/Transactions";
 import Unlock from "@screens/Unlock";
 import { useTranslation } from "react-i18next";
 import { HashRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
 import AccountDetailLayout from "~/app/components/AccountDetailLayout";
 import ScrollToTop from "~/app/components/ScrollToTop";
+import Toaster from "~/app/components/Toast/Toaster";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
 import { getConnectorRoutes, renderRoutes } from "~/app/router/connectorRoutes";
@@ -34,6 +34,7 @@ import NostrSetup from "~/app/screens/Accounts/NostrSetup/NostrSetup";
 import Discover from "~/app/screens/Discover";
 import LNURLRedeem from "~/app/screens/LNURLRedeem";
 import OnChainReceive from "~/app/screens/OnChainReceive";
+import ReceiveInvoice from "~/app/screens/ReceiveInvoice";
 import ScanQRCode from "~/app/screens/ScanQRCode";
 import SendToBitcoinAddress from "~/app/screens/SendToBitcoinAddress";
 import ChooseConnector from "~/app/screens/connectors/ChooseConnector";
@@ -72,6 +73,7 @@ function Options() {
               element={<SendToBitcoinAddress />}
             />
             <Route path="receive" element={<Receive />} />
+            <Route path="receive/invoice" element={<ReceiveInvoice />} />
             <Route path="onChainReceive" element={<OnChainReceive />} />
             <Route path="wallet" element={<DefaultView />} />
             <Route path="transactions">
@@ -148,7 +150,7 @@ function Options() {
             element={
               <>
                 <Unlock />
-                <ToastContainer autoClose={10000} hideProgressBar={true} />
+                <Toaster />
               </>
             }
           />
@@ -170,12 +172,7 @@ const Layout = () => {
         </Navbar.Link>
         <Navbar.Link href="/wallet">{tCommon("wallet")}</Navbar.Link>
       </Navbar>
-      <ToastContainer
-        autoClose={15000}
-        hideProgressBar={true}
-        className="w-fit max-w-2xl"
-      />
-
+      <Toaster />
       <Outlet />
     </div>
   );

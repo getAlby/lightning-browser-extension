@@ -9,15 +9,15 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import type { FormEvent } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
-import QRCode from "react-qr-code";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { toast } from "react-toastify";
 import Alert from "~/app/components/Alert";
 import Badge from "~/app/components/Badge";
 import Hyperlink from "~/app/components/Hyperlink";
 import InputCopyButton from "~/app/components/InputCopyButton";
 import MenuDivider from "~/app/components/Menu/MenuDivider";
 import Modal from "~/app/components/Modal";
+import QRCode from "~/app/components/QRCode";
+import toast from "~/app/components/Toast";
 import Select from "~/app/components/form/Select";
 import Toggle from "~/app/components/form/Toggle";
 import { useAccount } from "~/app/context/AccountContext";
@@ -114,7 +114,9 @@ function AccountDetail() {
   }
 
   async function removeAccount({ id, name }: AccountAction) {
-    const confirm = window.prompt(t("remove.confirm"))?.toLowerCase();
+    const confirm = window
+      .prompt(t("remove.confirm", { name: accountName }))
+      ?.toLowerCase();
     if (!confirm) return;
 
     if (confirm == accountName.toLowerCase()) {
@@ -284,7 +286,6 @@ function AccountDetail() {
                           <p>{t("export.scan_qr")}</p>
                           <QRCode
                             value={`lndhub://${lndHubData.login}:${lndHubData.password}@${lndHubData.url}/`}
-                            level="M"
                             size={256}
                           />
                           <div className="w-full">

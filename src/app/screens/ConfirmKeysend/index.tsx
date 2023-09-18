@@ -7,8 +7,8 @@ import SuccessMessage from "@components/SuccessMessage";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import ScreenHeader from "~/app/components/ScreenHeader";
+import toast from "~/app/components/Toast";
 import { useSettings } from "~/app/context/SettingsContext";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
@@ -160,6 +160,7 @@ function ConfirmKeysend() {
                 }}
                 budget={budget}
                 onBudgetChange={(event) => setBudget(event.target.value)}
+                disabled={loading}
               />
               <ConfirmOrCancel
                 disabled={loading}
