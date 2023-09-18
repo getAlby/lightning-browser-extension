@@ -374,14 +374,6 @@
         }
       }
     },
-    "enable": {
-      "allow": "Permitir que este sitio web:",
-      "request1": "Solicitar aprobación de transacciones",
-      "request2": "Solicitar facturas e información sobre Lightning",
-      "block_and_ignore": "Bloquear e ignorar {{host}}",
-      "title": "Conectar",
-      "block_added": "Se agregó {{host}} a la lista de bloqueados, vuelva a cargar la página."
-    },
     "unlock": {
       "unlock_to_continue": "Desbloquear para continuar",
       "help_contact": {

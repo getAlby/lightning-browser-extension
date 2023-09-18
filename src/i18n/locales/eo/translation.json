@@ -266,13 +266,6 @@
         "add_account": ""
       }
     },
-    "enable": {
-      "title": "Konekti",
-      "allow": "",
-      "request1": "",
-      "request2": "",
-      "block_and_ignore": ""
-    },
     "unlock": {
       "unlock_to_continue": "",
       "unlock_password": "",

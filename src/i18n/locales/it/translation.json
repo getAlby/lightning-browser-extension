@@ -346,14 +346,6 @@
         }
       }
     },
-    "enable": {
-      "title": "Connettiti",
-      "allow": "Consenti a questo sito di:",
-      "request1": "Richiedi l'approvazione per le transazioni",
-      "request2": "Richiedi fatture e informazioni lightning",
-      "block_and_ignore": "Blocca e ignora {{host}}",
-      "block_added": "{{host}} aggiunto alla blocklist, si prega di ricaricare la pagina."
-    },
     "unlock": {
       "unlock_to_continue": "Sblocca per continuare",
       "unlock_password": "La tua password di sblocco",

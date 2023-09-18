@@ -494,14 +494,6 @@
         "add_account": "添加帳戶"
       }
     },
-    "enable": {
-      "title": "連接",
-      "allow": "允許本網站：",
-      "request1": "請求批准交易",
-      "request2": "索取發票和閃電信息",
-      "block_and_ignore": "阻止並忽略 {{host}}",
-      "block_added": "已將{{host}}添加到阻止列表，請重新載入網站。"
-    },
     "unlock": {
       "unlock_to_continue": "解鎖以繼續",
       "unlock_password": "你的解鎖密碼",
@@ -668,8 +660,7 @@
     "receive": {
       "title": "接收",
       "actions": {
-        "create_invoice": "創建發票",
-        "copy_lightning_address": "複製閃電地址"
+        "create_invoice": "創建發票"
       },
       "amount": {
         "label": "金額",
@@ -683,9 +674,7 @@
       "payment": {
         "waiting": "等待付款...",
         "status": "查看付款狀態"
-      },
-      "receive_via_bitcoin_address": "通過比特幣地址接收",
-      "redeem_lnurl": "兌換 LNURL"
+      }
     },
     "discover": {
       "title": "探索閃電⚡️生態系統",

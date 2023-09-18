@@ -389,14 +389,6 @@
         "add_account": "Dodaj konto"
       }
     },
-    "enable": {
-      "title": "Połącz",
-      "allow": "Pozwól tej stronie na:",
-      "request1": "Poproś o zatwierdzenie transakcji",
-      "request2": "Poproś o faktury i informacje o sieci Lightning",
-      "block_and_ignore": "Zablokuj i ignoruj {{host}}",
-      "block_added": "Dodano {{host}} do listy zablokowanych, odśwież stronę."
-    },
     "unlock": {
       "unlock_to_continue": "Odblokuj aby kontynuować",
       "unlock_password": "Twoje hasło blokady",

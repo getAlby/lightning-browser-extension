@@ -375,14 +375,6 @@
         "add_account": "Tilføj konto"
       }
     },
-    "enable": {
-      "title": "Opret forbindelse",
-      "allow": "Tillad denne hjemmeside at:",
-      "request1": "Anmod om godkendelse af transaktioner",
-      "request2": "Anmod om faktura- og lightningoplysninger",
-      "block_and_ignore": "Bloker og ignorer {{vært}}",
-      "block_added": "Føjet {{vært}} til blokeringslisten, indlæs hjemmesiden igen."
-    },
     "unlock": {
       "unlock_to_continue": "Lås op for at fortsætte",
       "unlock_password": "Din nøglekode",
