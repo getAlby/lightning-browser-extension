@@ -32,12 +32,12 @@ export default function NostrEnable(props: Props) {
   }, [props.origin, account]);
 
   return (
-    <div>
+    <>
       {hasNostrKeys ? (
         <NostrEnableComponent origin={props.origin} />
       ) : (
         <Onboard />
       )}
-    </div>
+    </>
   );
 }

@@ -32,12 +32,12 @@ export default function WebbtcEnable(props: Props) {
   }, [props.origin, account]);
 
   return (
-    <div>
+    <>
       {hasMnemonic ? (
         <LiquidEnableComponent origin={props.origin} />
       ) : (
         <Onboard />
       )}
-    </div>
+    </>
   );
 }
