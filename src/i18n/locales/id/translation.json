@@ -505,14 +505,6 @@
       },
       "title": "Akun-akun"
     },
-    "enable": {
-      "title": "Sambungkan",
-      "allow": "Izinkan website ini untuk:",
-      "request1": "Meminta persetujuan untuk transaksi",
-      "request2": "Meminta invoices dan informasi lightning",
-      "block_and_ignore": "Blok dan abaikan {{host}}",
-      "block_added": "Menambahkan {{host}} ke daftar blok, silakan muat ulang website."
-    },
     "unlock": {
       "unlock_to_continue": "Buka untuk melanjutkan",
       "unlock_password": "Kode sandi pembuka",
@@ -680,8 +672,7 @@
     "receive": {
       "title": "Terima",
       "actions": {
-        "create_invoice": "Buat Invoice",
-        "copy_lightning_address": "Salin Lightning Address"
+        "create_invoice": "Buat Invoice"
       },
       "amount": {
         "label": "Jumlah",
@@ -695,8 +686,7 @@
       "payment": {
         "waiting": "menunggu pembayaran...",
         "status": "Memeriksa status pembayaran"
-      },
-      "receive_via_bitcoin_address": "Terima melalui alamat bitcoin"
+      }
     },
     "scan_qrcode": {
       "title": "Menunggu pemindaian"
