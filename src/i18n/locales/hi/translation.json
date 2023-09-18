@@ -215,10 +215,10 @@
           "placeholder": "your-node-onion-address:port"
         }
       },
-      "bitcoin_beach": {
-        "title": "Bitcoin Beach Wallet",
+      "blink": {
+        "title": "Blink Wallet",
         "page": {
-          "title": "<0>Bitcoin Beach Wallet</0 से कनेक्ट करें>"
+          "title": "<0>Blink Wallet</0 से कनेक्ट करें>"
         }
       },
       "bitcoin_jungle": {

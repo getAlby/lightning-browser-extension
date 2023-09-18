@@ -166,10 +166,10 @@
           "placeholder": "solmusi-sipuli-osoite:portti"
         }
       },
-      "bitcoin_beach": {
-        "title": "Bitcoin Beach -lompakko",
+      "blink": {
+        "title": "Bitcoin Blink -lompakko",
         "page": {
-          "title": "Yhdistä <0>Bitcoin Beach -lompakkoon</0>"
+          "title": "Yhdistä <0>Blink -lompakkoon</0>"
         }
       },
       "bitcoin_jungle": {
