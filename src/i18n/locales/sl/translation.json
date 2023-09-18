@@ -260,12 +260,6 @@
           "invalid_uri": "Nepravilni LNDHub URI",
           "connection_failed": "Povezava ni bila uspešna. Je tvoj LNDHub URI pravilen?"
         }
-      },
-      "bitcoin_beach": {
-        "title": "Bitcoin Beach Wallet",
-        "page": {
-          "title": "Poveži na <0>Bitcoin Beach Wallet</0>"
-        }
       }
     },
     "welcome": {
@@ -471,12 +465,6 @@
       "actions": {
         "add_account": "Dodaj račun"
       }
-    },
-    "enable": {
-      "allow": "Dovoli tej strani:",
-      "request1": "Zaprosi za dovoljenje transakcije",
-      "block_and_ignore": "Blokiraj in ignoriraj {{host}}",
-      "title": "Poveži"
     },
     "unlock": {
       "help_contact": {
