@@ -266,13 +266,6 @@
         "add_account": "Lisää tili"
       }
     },
-    "enable": {
-      "title": "Yhdistä",
-      "allow": "Salli {{host}} tähän:",
-      "request1": "Pyydä hyväksyntää tapahtumille",
-      "request2": "Pyydä laskuja ja Lightning-tietoja",
-      "block_and_ignore": "Estä ja jätä huomioimatta {{host}}"
-    },
     "unlock": {
       "unlock_to_continue": "Avaa lukitus jatkaaksesi",
       "unlock_password": "Avaussalasanasi",
@@ -628,6 +621,5 @@
     "publishers_table": {
       "payments": "maksut"
     }
-  },
-  "permissions": {}
+  }
 }
