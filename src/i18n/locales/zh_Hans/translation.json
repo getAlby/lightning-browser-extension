@@ -595,14 +595,6 @@
       },
       "title": "发送"
     },
-    "enable": {
-      "block_and_ignore": "阻止并忽略 {{host}}",
-      "title": "连接",
-      "allow": "允许本网站：",
-      "request2": "索取发票和闪电信息",
-      "request1": "要求批准交易",
-      "block_added": "已将{{host}}添加到屏蔽列表，请重新加载网站。"
-    },
     "send": {
       "input": {
         "hint": "发票、闪电地址、LNURL",
@@ -634,8 +626,7 @@
     },
     "receive": {
       "actions": {
-        "create_invoice": "创建发票",
-        "copy_lightning_address": "复制闪电地址"
+        "create_invoice": "创建发票"
       },
       "amount": {
         "placeholder": "聪金额...",
@@ -650,9 +641,7 @@
         "waiting": "等待付款...",
         "status": "检查付款状态"
       },
-      "title": "收款",
-      "receive_via_bitcoin_address": "通过比特币地址接收",
-      "redeem_lnurl": "兑换 LNURL"
+      "title": "收款"
     },
     "make_invoice": {
       "memo": {
