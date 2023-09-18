@@ -1,6 +1,5 @@
 import browser from "webextension-polyfill";
 
-import api from "~/common/lib/api";
 import getOriginData from "./originData";
 import shouldInject from "./shouldInject";
 
@@ -23,7 +22,6 @@ const disabledCalls = ["nostr/enable"];
 
 let isEnabled = false; // store if nostr is enabled for this content page
 let isRejected = false; // store if the nostr enable call failed. if so we do not prompt again
-let account;
 
 async function init() {
   const inject = await shouldInject();
@@ -84,14 +82,7 @@ async function init() {
         origin: getOriginData(),
       };
 
-      // Overrides the enable action so the user can go through onboarding to setup their keys
-      if (!account || !account.nostrEnabled) {
-        account = await api.getAccount();
-        if (!account.nostrEnabled) {
-          messageWithOrigin.action = ev.data.action = `public/nostr/onboard`;
-        }
-      }
-
+      // we don't handle onboard in content script. hence we will be resolving original call nostr/enable with an error hence we need reload the next time we execute the call
       const replyFunction = (response) => {
         if (ev.data.action === "nostr/enable") {
           isEnabled = response.data?.enabled;
