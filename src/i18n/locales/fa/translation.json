@@ -519,14 +519,6 @@
         "add_account": "افزودن جساب کاربری"
       }
     },
-    "enable": {
-      "title": "اتصال",
-      "allow": "به این وبسایت اجازه بدهید:",
-      "request1": "دخواست تایید تراکنش ها",
-      "request2": "درخواست اطلاعات لایتنینگ و صورتحساب ها",
-      "block_and_ignore": "مسدود کردن و نادیده گرفتن {{host}}",
-      "block_added": "افزودن {{host}} به لیست مسدودی ها، لطفا دوباره وبسایت را بارگیری کنید."
-    },
     "unlock": {
       "unlock_to_continue": "رفع مسدودی برای ادامه",
       "unlock_password": "گذرواژه برای باز کردن",
@@ -693,8 +685,7 @@
     "receive": {
       "title": "دریافت",
       "actions": {
-        "create_invoice": "ساخت صورتحساب",
-        "copy_lightning_address": "کپی آدرس لایتنینگ"
+        "create_invoice": "ساخت صورتحساب"
       },
       "amount": {
         "label": "مبلغ",
@@ -708,9 +699,7 @@
       "payment": {
         "waiting": "در انتظار پرداخت...",
         "status": "بررسی وضعیت پرداخت"
-      },
-      "receive_via_bitcoin_address": "دریافت از طریق آدرس بیتکوین",
-      "redeem_lnurl": "بازیابی LNURL"
+      }
     },
     "discover": {
       "title": "در اکوسیستم لایتنینگ ⚡️ کاوش کنید",
