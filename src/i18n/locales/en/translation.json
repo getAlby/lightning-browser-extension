@@ -539,8 +539,8 @@
     },
     "nostr_enable": {
       "title": "Connect to Nostr",
-      "request1": "Request approval to read your Nostr public key",
-      "request2": "sign events using your Nostr private key"
+      "request1": "Request to read your Nostr public key",
+      "request2": "Sign events using your Nostr private key"
     },
     "liquid_enable": {
       "title": "Connect to Liquid",
