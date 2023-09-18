@@ -46,7 +46,7 @@ function NostrEnableComponent(props: Props) {
       domain: props.origin.domain,
       host: props.origin.host,
     });
-    alert(tCommon("block_added", { host: props.origin.host }));
+    alert(tCommon("enable.block_added", { host: props.origin.host }));
     msg.error(USER_REJECTED_ERROR);
   }
 
@@ -63,7 +63,7 @@ function NostrEnableComponent(props: Props) {
           />
 
           <div className="dark:text-white pt-6">
-            <p className="mb-2">{tCommon("allow")}</p>
+            <p className="mb-2">{tCommon("enable.allow")}</p>
 
             <div className="mb-2 flex items-center">
               <CheckIcon className="w-5 h-5 mr-2" />
@@ -88,7 +88,7 @@ function NostrEnableComponent(props: Props) {
             href="#"
             onClick={block}
           >
-            {tCommon("actions.block_and_ignore", { host: props.origin.host })}
+            {tCommon("enable.block_and_ignore", { host: props.origin.host })}
           </a>
         </div>
       </Container>

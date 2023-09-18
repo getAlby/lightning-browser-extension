@@ -971,7 +971,6 @@
     }
   },
   "common": {
-    "allow": "Allow this website to:",
     "password": "Password",
     "confirm_password": "Confirm Password",
     "advanced": "Advanced",
@@ -998,8 +997,6 @@
     "help": "Help",
     "balance": "Balance",
     "or": "or",
-    "block_added": "Added {{host}} to the blocklist, please reload the website.",
-    "request_transaction_approval": "Request approval for transactions",
     "actions": {
       "back": "Back",
       "delete": "Delete",
@@ -1032,8 +1029,7 @@
       "more": "More",
       "disconnect": "Disconnect",
       "review": "Review",
-      "download": "Download",
-      "block_and_ignore": "Block and ignore {{host}}"
+      "download": "Download"
     },
     "connectors": {
       "lnd": "LND",
@@ -1056,6 +1052,12 @@
       "between": "between {{min}} and {{max}}",
       "lessThanOrEqual": "≤ {{max}}",
       "greaterOrEqual": "≥ {{min}}"
+    },
+    "enable": {
+      "allow": "Allow this website to:",
+      "block_added": "Added {{host}} to the blocklist, please reload the website.",
+      "request1": "Request approval for transactions",
+      "block_and_ignore": "Block and ignore {{host}}"
     }
   },
   "components": {
