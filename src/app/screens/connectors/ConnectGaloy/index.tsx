@@ -170,26 +170,31 @@ export default function ConnectGaloy(props: Props) {
       submitLabel={t("galoy.actions.login")}
       submitLoading={loading}
       onSubmit={loginWithJwt}
+      description={
+        <Trans
+          i18nKey={"galoy.token.info"}
+          t={t}
+          values={{ label }}
+          components={[
+            // eslint-disable-next-line react/jsx-key
+            <a
+              href="https://wallet.mainnet.galoy.io"
+              className="underline"
+            ></a>,
+            // eslint-disable-next-line react/jsx-key
+            <br />,
+            // eslint-disable-next-line react/jsx-key
+            <b></b>,
+          ]}
+        />
+      }
     >
       {
         <div className="mt-6">
-          <Trans
-            i18nKey={"galoy.token.info"}
-            t={t}
-            values={{ label }}
-            components={[
-              // eslint-disable-next-line react/jsx-key
-              <a
-                href="https://wallet.mainnet.galoy.io"
-                className="underline"
-              ></a>,
-              // eslint-disable-next-line react/jsx-key
-              <br />,
-              // eslint-disable-next-line react/jsx-key
-              <b></b>,
-            ]}
-          />
-          <label htmlFor="jwt" className="block font-medium text-gray-700">
+          <label
+            htmlFor="jwt"
+            className="block font-medium text-gray-800 dark:text-white"
+          >
             {t("galoy.token.label")}
           </label>
           <div className="mt-1">

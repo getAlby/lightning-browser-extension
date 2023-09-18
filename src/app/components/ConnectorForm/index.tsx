@@ -56,7 +56,7 @@ function ConnectorForm({
 
   return (
     <form onSubmit={onSubmit}>
-      <div className="max-w-xl mx-auto mt-6 relative bg-white dark:bg-surface-02dp p-7 shadow rounded-lg">
+      <div className="max-w-xl mx-auto mt-6 relative bg-white dark:bg-transparent dark:bg-surface-02dp p-7 shadow rounded-lg">
         <div className="flex items-center mb-4">
           {logo && <img src={logo} className="w-16 mr-4 rounded-lg" />}
           {/*
@@ -72,7 +72,7 @@ function ConnectorForm({
         </div>
         {media}
         {description && (
-          <div className="text-gray-500 dark:text-neutral-400 whitespace-pre-line">
+          <div className="text-gray-500 dark:text-white whitespace-pre-line">
             {typeof description === "string" ? (
               <p className="mb-6">{description}</p>
             ) : (
