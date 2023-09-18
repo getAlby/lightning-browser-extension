@@ -45,7 +45,7 @@ const permissionInDB = {
   allowanceId: allowanceInDB.id,
   createdAt: "1487076708000",
   host: allowanceInDB.host,
-  method: "webln/lnd/makeinvoice",
+  method: "webln/lnd/listchannels",
   blocked: false,
   enabled: true,
 };
@@ -54,7 +54,7 @@ const message: MessageGenericRequest = {
   action: "request",
   origin: { host: allowanceInDB.host } as OriginData,
   args: {
-    method: "makeInvoice",
+    method: "listchannels",
     params: {},
   },
 };
@@ -68,9 +68,8 @@ const fullConnector = {
   requestMethod: jest.fn(() => Promise.resolve(requestResponse)),
   supportedMethods: [
     // saved and compared in lowercase
-    "getinfo",
-    "makeinvoice",
-    "sendpayment",
+    "request.listchannels",
+    "request.listpeers",
   ],
 } as unknown as Connector;
 
@@ -91,14 +90,14 @@ describe("ln request", () => {
     test("if connector does not support requestMethod", async () => {
       connector = {
         ...fullConnector,
-        supportedMethods: ["getinfo"],
+        supportedMethods: ["request.routermc"],
       };
 
       const result = await request(message);
 
       expect(console.error).toHaveBeenCalledTimes(1);
       expect(result).toStrictEqual({
-        error: "makeinvoice is not supported by your account",
+        error: "listchannels is not supported by your account",
       });
     });
 
@@ -203,7 +202,7 @@ describe("ln request", () => {
         args: {
           requestPermission: {
             method: message.args.method.toLowerCase(),
-            description: "lnd.makeinvoice",
+            description: "lnd.listchannels",
           },
         },
         origin: message.origin,
@@ -230,7 +229,7 @@ describe("ln request", () => {
         args: {
           requestPermission: {
             method: message.args.method.toLowerCase(),
-            description: "lnd.makeinvoice",
+            description: "lnd.listchannels",
           },
         },
         origin: message.origin,
@@ -252,36 +251,36 @@ describe("ln request", () => {
       // prepare DB with a permission
       await db.permissions.bulkAdd([permissionInDB]);
 
-      const messageWithGetInfo = {
+      const listPeersMessage = {
         ...message,
         args: {
           ...message.args,
-          method: "getInfo",
+          method: "listpeers",
         },
       };
 
       expect(await db.permissions.toArray()).toHaveLength(1);
       expect(
-        await db.permissions.get({ method: "webln/lnd/getinfo" })
+        await db.permissions.get({ method: "webln/lnd/listpeers" })
       ).toBeUndefined();
 
-      const result = await request(messageWithGetInfo);
+      const result = await request(listPeersMessage);
 
       expect(utils.openPrompt).toHaveBeenCalledTimes(1);
 
       expect(connector.requestMethod).toHaveBeenCalledWith(
-        messageWithGetInfo.args.method.toLowerCase(),
-        messageWithGetInfo.args.params
+        listPeersMessage.args.method.toLowerCase(),
+        listPeersMessage.args.params
       );
 
       expect(await db.permissions.toArray()).toHaveLength(2);
 
       const addedPermission = await db.permissions.get({
-        method: "webln/lnd/getinfo",
+        method: "webln/lnd/listchannels",
       });
       expect(addedPermission).toEqual(
         expect.objectContaining({
-          method: "webln/lnd/getinfo",
+          method: "webln/lnd/listchannels",
           enabled: true,
           allowanceId: allowanceInDB.id,
           host: allowanceInDB.host,
@@ -303,13 +302,13 @@ describe("ln request", () => {
         ...message,
         args: {
           ...message.args,
-          method: "sendPayment",
+          method: "listpeers",
         },
       };
 
       expect(await db.permissions.toArray()).toHaveLength(1);
       expect(
-        await db.permissions.get({ method: "webln/lnd/sendpayment" })
+        await db.permissions.get({ method: "webln/lnd/listpeers" })
       ).toBeUndefined();
 
       const result = await request(messageWithOtherPermission);
@@ -320,7 +319,7 @@ describe("ln request", () => {
 
       expect(await db.permissions.toArray()).toHaveLength(1);
       expect(
-        await db.permissions.get({ method: "webln/lnd/sendpayment" })
+        await db.permissions.get({ method: "webln/lnd/listpeers" })
       ).toBeUndefined();
 
       expect(result).toHaveProperty("error");
@@ -333,31 +332,31 @@ describe("ln request", () => {
       // prepare DB with a permission
       await db.permissions.bulkAdd([permissionInDB]);
 
-      const messageWithOtherPermission = {
+      const listPeersMessage = {
         ...message,
         args: {
           ...message.args,
-          method: "sendPayment",
+          method: "listpeers",
         },
       };
 
       expect(await db.permissions.toArray()).toHaveLength(1);
       expect(
-        await db.permissions.get({ method: "webln/lnd/sendpayment" })
+        await db.permissions.get({ method: "webln/lnd/listpeers" })
       ).toBeUndefined();
 
-      const result = await request(messageWithOtherPermission);
+      const result = await request(listPeersMessage);
 
       expect(utils.openPrompt).toHaveBeenCalledTimes(1);
 
       expect(connector.requestMethod).toHaveBeenCalledWith(
-        messageWithOtherPermission.args.method.toLowerCase(),
-        messageWithOtherPermission.args.params
+        listPeersMessage.args.method.toLowerCase(),
+        listPeersMessage.args.params
       );
 
       expect(await db.permissions.toArray()).toHaveLength(1);
       expect(
-        await db.permissions.get({ method: "webln/lnd/sendpayment" })
+        await db.permissions.get({ method: "webln/lnd/listpeers" })
       ).toBeUndefined();
 
       expect(result).toStrictEqual(requestResponse);

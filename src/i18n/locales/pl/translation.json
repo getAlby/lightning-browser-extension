@@ -214,10 +214,10 @@
           "placeholder": "adres-onion-twojego-wezla:port"
         }
       },
-      "bitcoin_beach": {
-        "title": "Portfel Bitcoin Beach",
+      "blink": {
+        "title": "Portfel Blink",
         "page": {
-          "title": "Podłącz do <0>Bitcoin Beach Wallet</0>"
+          "title": "Podłącz do <0>Blink Wallet</0>"
         }
       },
       "bitcoin_jungle": {

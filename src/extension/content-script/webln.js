@@ -49,7 +49,7 @@ async function init() {
   // message listener to listen to inpage webln/webbtc calls
   // those calls get passed on to the background script
   // (the inpage script can not do that directly, but only the inpage script can make webln available to the page)
-  window.addEventListener("message", (ev) => {
+  window.addEventListener("message", async (ev) => {
     // Only accept messages from the current window
     if (
       ev.source !== window ||
@@ -93,6 +93,8 @@ async function init() {
         // if it is the enable call we store if webln is enabled for this content script
         if (ev.data.action === "webln/enable") {
           isEnabled = response.data?.enabled;
+          const enabledEvent = new Event("webln:enabled");
+          window.dispatchEvent(enabledEvent);
           if (response.error) {
             console.error(response.error);
             console.info("Enable was rejected ignoring further webln calls");

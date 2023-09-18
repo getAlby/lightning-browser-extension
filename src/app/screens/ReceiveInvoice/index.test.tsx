@@ -5,7 +5,7 @@ import { settingsFixture as mockSettings } from "~/../tests/fixtures/settings";
 import { SettingsProvider } from "~/app/context/SettingsContext";
 import api from "~/common/lib/api";
 
-import Receive from "./index";
+import ReceiveInvoice from "../ReceiveInvoice";
 
 jest.mock("~/common/lib/api", () => {
   const original = jest.requireActual("~/common/lib/api");
@@ -31,7 +31,7 @@ describe("Receive", () => {
       render(
         <MemoryRouter>
           <SettingsProvider>
-            <Receive />
+            <ReceiveInvoice />
           </SettingsProvider>
         </MemoryRouter>
       );

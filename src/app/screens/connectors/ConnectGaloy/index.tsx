@@ -9,18 +9,16 @@ import { useNavigate } from "react-router-dom";
 import toast from "~/app/components/Toast";
 import msg from "~/common/lib/msg";
 
-import galoyBitcoinBeach from "/static/assets/icons/galoy_bitcoin_beach.png";
 import galoyBitcoinJungle from "/static/assets/icons/galoy_bitcoin_jungle.png";
+import galoyBlink from "/static/assets/icons/galoy_blink.png";
 
 export const galoyUrls = {
-  "galoy-bitcoin-beach": {
-    i18nPrefix: "bitcoin_beach",
-    label: "Bitcoin Beach Wallet",
-    website: "https://galoy.io/bitcoin-beach-wallet/",
-    logo: galoyBitcoinBeach,
-    url:
-      process.env.BITCOIN_BEACH_GALOY_URL ||
-      "https://api.mainnet.galoy.io/graphql",
+  "galoy-blink": {
+    i18nPrefix: "blink",
+    label: "Blink Wallet",
+    website: "https://www.blink.sv/",
+    logo: galoyBlink,
+    url: process.env.BLINK_GALOY_URL || "https://api.mainnet.galoy.io/graphql",
   },
   "galoy-bitcoin-jungle": {
     i18nPrefix: "bitcoin_jungle",
