@@ -352,14 +352,6 @@
         }
       }
     },
-    "enable": {
-      "title": "Připojit",
-      "allow": "Povolit této webové stránce:",
-      "request1": "Žádat povolení pro transakce",
-      "request2": "Žádat faktury a informace o lightning",
-      "block_and_ignore": "Blokovat a ignorovat {{host}}",
-      "block_added": "{{host}} byl přidán do listu blokovaných, prosím znovu načtěte stránku."
-    },
     "unlock": {
       "unlock_to_continue": "Odemknout pro pokračování",
       "unlock_password": "Vaše heslo pro odemčení",
