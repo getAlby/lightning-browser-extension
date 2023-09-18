@@ -376,14 +376,6 @@
         "add_account": "Ajouter un compte"
       }
     },
-    "enable": {
-      "title": "Connecter",
-      "allow": "Autoriser ce site Web à :",
-      "request1": "Demander l'approbation des transactions",
-      "request2": "Demander des factures et des informations sur la foudre",
-      "block_and_ignore": "Bloquer et ignorer {{host}}",
-      "block_added": "{{host}} a été ajouté à la liste de blocage, veuillez recharger le site Web."
-    },
     "unlock": {
       "unlock_to_continue": "Déverrouiller pour continuer",
       "unlock_password": "Votre mot de passe de déverrouillage",
