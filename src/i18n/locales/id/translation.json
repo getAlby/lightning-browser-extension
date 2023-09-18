@@ -353,8 +353,6 @@
       },
       "recent_transactions": "Transaksi terbaru",
       "allowance_view": {
-        "allowance": "Allowance",
-        "sats_used": "sats terpakai",
         "no_transactions": "Tidak ada transaksi pada <0>{{name}}</0>.",
         "recent_transactions": "Transaksi Terbaru"
       },
@@ -910,12 +908,10 @@
       }
     },
     "publishers_table": {
-      "payments": "Pembayaran",
-      "used": "Terpakai"
+      "payments": "Pembayaran"
     },
     "badge": {
       "label": {
-        "active": "AKTIF",
         "auth": "MASUK",
         "imported": "TERIMPOR"
       }

@@ -303,8 +303,6 @@
       "recent_transactions": "Transacciones Recientes",
       "allowance_view": {
         "recent_transactions": "Transacciones Recientes",
-        "allowance": "Subsidio",
-        "sats_used": "sats utilizados",
         "no_transactions": "No hay transacciones en <0>{{name}}</0> todavía."
       },
       "default_view": {
@@ -879,12 +877,10 @@
       "screen_reader": "Alternar menú desplegable"
     },
     "publishers_table": {
-      "used": "usado",
       "payments": "pagos"
     },
     "badge": {
       "label": {
-        "active": "ACTIVO",
         "auth": "INICIAR SESIÓN"
       }
     },

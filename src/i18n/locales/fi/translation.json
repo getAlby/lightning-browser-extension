@@ -253,8 +253,6 @@
       "recent_transactions": "Viimeaikaiset tapahtumat",
       "allowance_view": {
         "recent_transactions": "Viimeaikaiset tapahtumat",
-        "allowance": "Korvaus",
-        "sats_used": "sats käytetty",
         "no_transactions": "Ei vielä tapahtumia <0>{{name}}</0>:lla."
       },
       "default_view": {
@@ -628,13 +626,7 @@
       }
     },
     "publishers_table": {
-      "payments": "maksut",
-      "used": "käytetty"
-    },
-    "badge": {
-      "label": {
-        "active": "TOIMIVA"
-      }
+      "payments": "maksut"
     }
   },
   "permissions": {}

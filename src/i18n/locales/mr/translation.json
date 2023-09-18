@@ -308,8 +308,6 @@
       "recent_transactions": "अलीकडचे व्यवहार",
       "allowance_view": {
         "recent_transactions": "अलीकडचे व्यवहार",
-        "allowance": "भत्ता",
-        "sats_used": "sats वापरले",
         "no_transactions": "अद्याप <0>{{name}}</0> वर कोणतेही व्यवहार नाहीत."
       },
       "default_view": {

@@ -308,8 +308,6 @@
       "recent_transactions": "transactions récentes",
       "allowance_view": {
         "recent_transactions": "transactions récentes",
-        "allowance": "Allocation",
-        "sats_used": "sats utilisés",
         "no_transactions": "Aucune transaction sur <0>{{name}}</0> pour le moment."
       },
       "default_view": {
@@ -790,12 +788,10 @@
       }
     },
     "publishers_table": {
-      "payments": "Paiements",
-      "used": "utilisé"
+      "payments": "Paiements"
     },
     "badge": {
       "label": {
-        "active": "ACTIF",
         "auth": "CONNEXION"
       }
     }

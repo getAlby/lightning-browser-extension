@@ -308,8 +308,6 @@
       "recent_transactions": "Seneste transaktioner",
       "allowance_view": {
         "recent_transactions": "Seneste transaktioner",
-        "allowance": "Pulje",
-        "sats_used": "brugte sats",
         "no_transactions": "Endnu ingen transaktioner på <0>{{navn}}</0>."
       },
       "default_view": {
@@ -784,12 +782,10 @@
       }
     },
     "publishers_table": {
-      "payments": "betalinger",
-      "used": "brugt"
+      "payments": "betalinger"
     },
     "badge": {
       "label": {
-        "active": "AKTIV",
         "auth": "LOG IND"
       }
     }
