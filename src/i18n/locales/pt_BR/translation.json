@@ -304,7 +304,7 @@
         "is_blocked_hint": "A Alby está desativada em {{host}}",
         "block_removed": "{{host}} ativado. Por favor, recarregue o site.",
         "no_outgoing_transactions": "Você ainda não realizou transações usando esta conta.",
-        "all_transactions_link": "Ver todas as transações",
+        "all_transactions_link": "Mostrar tudo",
         "no_incoming_transactions": "Você ainda não recebeu transações nesta conta."
       }
     },
@@ -321,7 +321,7 @@
           "waiting": "aguardando dados LndHub...",
           "export_uri": "Credenciais URI LNDHub",
           "scan_qr": "Leia o código QR para importar esta carteira na Zeus ou BlueWallet.",
-          "description": "Permite conectar e usar esta conta em carteiras de celular como por ex a <0>Blue Wallet</0> e a <0>Zeus</0>."
+          "description": "Permite conectar e usar esta conta em carteiras de celular como por ex a <0>Blue Wallet</0> e a <1>Zeus</1>."
         },
         "nostr": {
           "title": "Nostr",
@@ -329,7 +329,6 @@
             "title": "Gerenciar sua chave privada Nostr",
             "successfully_removed": "Chave privada Nostr removida com sucesso.",
             "label": "Chave privada Nostr",
-            "warning": "Digite o nome da conta para confirmar a exclusão de sua chave privada Nostr:",
             "subtitle": "Cole sua chave privada Nostr ou gere uma nova. <0>Saiba mais »</0>",
             "success": "Chave privada Nostr criptografada e salva com sucesso.",
             "failed_to_remove": "O nome da conta inserido não está correto, sua chave privada Nostr antiga foi restaurada."
@@ -388,7 +387,6 @@
           }
         },
         "remove": {
-          "confirm": "Digite o nome da conta para confirmar a exclusão.\n\n ⚠️ Ao prosseguir com a exclusão, todas as chaves associadas a esta conta (chave mestra, Nostr, etc) serão perdidas. Certifique-se de fazer o backup antes de continuar, caso precise restaurar a conta no futuro.",
           "title": "Remover esta conta",
           "error": "O nome da conta inserido não corresponde.",
           "subtitle": "Remove todos os limites de gastos, dados de pagamento e chaves associadas à esta conta."
@@ -410,7 +408,7 @@
           "generate": {
             "title": "Gere sua chave mestra",
             "button": "Gerar chave mestra",
-            "confirm": "Eu salvei a frase de recuperação na minha chave mestra em um local privado e seguro.",
+            "confirm": "Eu salvei a frase de recuperação em um local privado e seguro.",
             "error_confirm": "Por favor, confirme que você salvou a frase de recuperação.",
             "description": "A chave mestra permite que você interaja com diferentes protocolos como: Nostr, rede principal do Bitcoin ou LNURL-Auth."
           },
@@ -437,29 +435,27 @@
           "inputs": {
             "title": "Frase de recuperação"
           },
-          "existing_nostr_key_notice": "⚠️ Esta conta já possui uma chave privada nostr, logo não será gerada uma nova a partir desta chave mestra. Você pode gerenciar sua chave Nostr nas configurações de sua conta.",
+          "existing_nostr_key_notice": "ℹ️ Esta conta já possui uma chave privada nostr, logo não será gerada uma nova a partir desta chave mestra. Você pode gerenciar sua chave Nostr nas configurações de sua conta.",
           "lnurl": {
             "use_mnemonic": "Use a chave mestra para acessar aplicativos com tecnologia (LNURL Auth)",
             "title": "Login Relâmpago"
           }
         },
-        "bitcoin": {
-          "network": {
-            "title": "Rede Bitcoin",
-            "options": {
-              "bitcoin": "Rede principal",
-              "testnet": "Rede de testes",
-              "regtest": "Regtest"
-            },
-            "subtitle": "Escolha a rede para gerar endereços e decodificar transações"
-          }
-        },
         "remove_secretkey": {
           "title": "Remover chave mestra",
-          "confirm": "Digite o nome da conta para confirmar a exclusão de sua chave mestra.",
           "success": "Chave mestra removida com sucesso.",
           "subtitle": "Remove a chave mestra desta conta."
-        }
+        },
+        "network": {
+          "title": "Rede",
+          "options": {
+            "bitcoin": "Rede principal",
+            "testnet": "Rede de testes",
+            "regtest": "Regtest"
+          },
+          "subtitle": "Escolha a rede para gerar endereços e decodificar transações bitcoin e liquid"
+        },
+        "no_mnemonic_hint": "💡 Você ainda não tem uma chave mestra. <0>Clique aqui</0></div> para criar sua chave mestra e desbloquear essas configurações."
       }
     },
     "enable": {
@@ -718,14 +714,14 @@
       "allow_sign_event": "Permitir {{host}} assinar {{kind}}:",
       "hide_details": "Ocultar detalhes",
       "kinds": {
-        "unknown": "evento nostr do tipo {{kind}}",
         "0": "metadados",
-        "5": "exclusão de evento",
-        "4": "mensagens diretas criptografadas",
-        "9735": "zap",
-        "3": "contatos",
         "1": "nota de texto curta",
-        "7": "reação"
+        "3": "contatos",
+        "4": "mensagens diretas criptografadas",
+        "5": "exclusão de evento",
+        "7": "reação",
+        "9735": "zap",
+        "unknown": "evento nostr do tipo {{kind}}"
       },
       "no_content": "(Sem conteúdo)"
     },
@@ -834,11 +830,6 @@
       "title": "Receber via endereço bitcoin",
       "instructions2": "Seu endereço bitcoin está na página <0>Receber</0>."
     },
-    "confirm_get_address": {
-      "title": "Obter endereço",
-      "heading": "Este site solicita ler:",
-      "content": "Seu endereço de recebimento Bitcoin"
-    },
     "lnurlredeem": {
       "title": "Resgatar bitcoin",
       "input": {
@@ -855,6 +846,33 @@
     },
     "scan_qrcode": {
       "title": "Aguardando leitura"
+    },
+    "confirm_sign_pset": {
+      "view_details": "Ver detalhes",
+      "hide_details": "Ocultar detalhes",
+      "view_raw_transaction": "Ver transação raw (Base64)",
+      "hide_raw_transaction": "Ocultar transação raw (Base64)",
+      "outputs": "Saídas",
+      "amount": "{{amount}} {{ticker}}",
+      "title": "Assinar",
+      "allow_sign": "Este site solicita que você assine uma transação Liquid:",
+      "inputs": "Entradas"
+    },
+    "bitcoin": {
+      "confirm_get_address": {
+        "title": "Obter endereço"
+      },
+      "allow": "Permitir este site:",
+      "allow_sign": "Permitir {{host}} assinar:",
+      "block_and_ignore": "Bloquear e ignorar {{host}}",
+      "block_added": "{{host}} adicionado na lista de bloqueios, recarregue o site."
+    },
+    "liquid": {
+      "title": "Liquid",
+      "block_added": "{{host}} adicionado na lista de bloqueios, recarregue o site.",
+      "allow": "Permitir este site:",
+      "allow_sign": "Permitir {{host}} assinar:",
+      "block_and_ignore": "Bloquear e ignorar {{host}}"
     }
   },
   "common": {
@@ -978,9 +996,6 @@
       },
       "open_location": "Abrir link"
     },
-    "confirm_or_cancel": {
-      "only_trusted": "Conecte-se apenas nos sites em que você confia."
-    },
     "budget_control": {
       "remember": {
         "label": "Lembrar e definir um limite de gastos",
@@ -1050,6 +1065,16 @@
     },
     "lnc": {
       "openchannel": ""
+    },
+    "bitcoin": {
+      "getaddress": "Ler seu endereço de recebimento de Bitcoin."
+    },
+    "liquid": {
+      "signschnorr": "Assinar mensagem com sua chave.",
+      "getaddress": "Ler seu endereço de recebimento da Liquid."
+    },
+    "webln": {
+      "getbalance": "Ler o saldo da sua conta."
     }
   }
 }

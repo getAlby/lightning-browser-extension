@@ -16,9 +16,6 @@ import type { LNURLAuthServiceResponse } from "~/types";
 
 function LNURLAuth() {
   const { t } = useTranslation("translation", { keyPrefix: "lnurlauth" });
-  const { t: tComponents } = useTranslation("components", {
-    keyPrefix: "confirm_or_cancel",
-  });
   const { t: tCommon } = useTranslation("common");
 
   const navigate = useNavigate();
@@ -115,26 +112,19 @@ function LNURLAuth() {
                 <p className="my-2 mx-5 text-red-500">{errorMessage}</p>
               )}
             </div>
-
-            <div>
-              <ConfirmOrCancel
-                label={t("submit")}
-                onConfirm={confirm}
-                onCancel={reject}
-                disabled={loading}
-                loading={loading}
-              />
-
-              <p className="mb-4 text-center text-sm text-gray-400">
-                <em>{tComponents("only_trusted")}</em>
-              </p>
-            </div>
+            <ConfirmOrCancel
+              label={t("submit")}
+              onConfirm={confirm}
+              onCancel={reject}
+              disabled={loading}
+              loading={loading}
+            />
           </Container>
         </>
       ) : (
         <Container justifyBetween maxWidth="sm">
           <ResultCard isSuccess message={successMessage} />
-          <div className="my-4">
+          <div className="mt-4">
             <Button
               onClick={close}
               label={tCommon("actions.close")}

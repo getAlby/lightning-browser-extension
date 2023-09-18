@@ -1,14 +1,16 @@
-import { auth, Client } from "alby-js-sdk";
-import { RequestOptions } from "alby-js-sdk/dist/request";
+import { auth, Client } from "@getalby/sdk";
 import {
+  CreateSwapParams,
+  CreateSwapResponse,
   GetAccountInformationResponse,
   Invoice,
+  RequestOptions,
+  SwapInfoResponse,
   Token,
-} from "alby-js-sdk/dist/types";
+} from "@getalby/sdk/dist/types";
 import browser from "webextension-polyfill";
 import { decryptData, encryptData } from "~/common/lib/crypto";
 import { Account, OAuthToken } from "~/types";
-
 import state from "../state";
 import Connector, {
   CheckPaymentArgs,
@@ -87,7 +89,7 @@ export default class Alby implements Connector {
       (invoice, index): ConnectorInvoice => ({
         custom_records: invoice.custom_records,
         id: `${invoice.payment_request}-${index}`,
-        memo: invoice.memo,
+        memo: invoice.comment || invoice.memo,
         preimage: "", // alby wallet api doesn't support preimage (yet)
         settled: invoice.settled,
         settleDate: new Date(invoice.settled_at).getTime(),
@@ -188,7 +190,7 @@ export default class Alby implements Connector {
     // signMessage requires proof of ownership of a non-custodial node
     // this is not the case in the Alby connector which connects to Lndhub
     throw new Error(
-      "SignMessage is not supported by Alby accounts. Generate a secret key to use LNURL auth."
+      "SignMessage is not supported by Alby accounts. Generate a Master Key to use LNURL auth."
     );
   }
 
@@ -206,6 +208,16 @@ export default class Alby implements Connector {
         rHash: data.payment_hash,
       },
     };
+  }
+
+  async getSwapInfo(): Promise<SwapInfoResponse> {
+    const result = await this._request((client) => client.getSwapInfo());
+    return result;
+  }
+
+  async createSwap(params: CreateSwapParams): Promise<CreateSwapResponse> {
+    const result = await this._request((client) => client.createSwap(params));
+    return result;
   }
 
   private async authorize(): Promise<auth.OAuth2User> {

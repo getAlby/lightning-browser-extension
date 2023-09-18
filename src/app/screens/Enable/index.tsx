@@ -2,10 +2,10 @@ import { CheckIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
 import PublisherCard from "@components/PublisherCard";
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { toast } from "react-toastify";
 import ScreenHeader from "~/app/components/ScreenHeader";
+import toast from "~/app/components/Toast";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import type { OriginData } from "~/types";
@@ -86,7 +86,7 @@ function Enable(props: Props) {
             isSmall={false}
           />
 
-          <div className="dark:text-white pt-6 mb-4">
+          <div className="dark:text-white pt-6">
             <p className="mb-2">{t("allow")}</p>
 
             <div className="mb-2 flex items-center">
@@ -99,7 +99,7 @@ function Enable(props: Props) {
             </div>
           </div>
         </div>
-        <div className="mb-4 text-center flex flex-col">
+        <div className="text-center flex flex-col">
           <ConfirmOrCancel
             disabled={loading}
             loading={loading}
@@ -108,7 +108,7 @@ function Enable(props: Props) {
             onCancel={reject}
           />
           <a
-            className="underline text-sm text-gray-400 mx-4 overflow-hidden text-ellipsis whitespace-nowrap"
+            className="mt-4 underline text-sm text-gray-400 overflow-hidden text-ellipsis whitespace-nowrap"
             href="#"
             onClick={block}
           >

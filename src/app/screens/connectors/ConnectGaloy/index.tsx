@@ -6,7 +6,7 @@ import axios from "axios";
 import { useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import toast from "~/app/components/Toast";
 import msg from "~/common/lib/msg";
 
 import galoyBitcoinJungle from "/static/assets/icons/galoy_bitcoin_jungle.png";
@@ -18,7 +18,7 @@ export const galoyUrls = {
     label: "Blink Wallet",
     website: "https://www.blink.sv/",
     logo: galoyBlink,
-    url: process.env.BLINK_GALOY_URL || "https://api.mainnet.galoy.io/graphql/",
+    url: process.env.BLINK_GALOY_URL || "https://api.mainnet.galoy.io/graphql",
   },
   "galoy-bitcoin-jungle": {
     i18nPrefix: "bitcoin_jungle",

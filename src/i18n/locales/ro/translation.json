@@ -341,7 +341,6 @@
           "private_key": {
             "title": "Gestionarea cheii tale",
             "subtitle": "Insereaza cheia ta privata sau genereaza una noua. Inainte sa generezi o noua cheie asigura-te ca ai salvat cheia privata. <0>Mai multe »</0>",
-            "warning": "Te rugam sa introduci numele contului pentru a confirma stergerea cheii private:",
             "success": "Cheia privata a fost criptata si salvata cu succes.",
             "successfully_removed": "Cheia privata a fost indepartata cu succes.",
             "label": "Cheia privata",
@@ -368,8 +367,7 @@
         },
         "remove": {
           "title": "",
-          "subtitle": "",
-          "confirm": ""
+          "subtitle": ""
         },
         "actions": {
           "remove_account": "",
@@ -751,9 +749,6 @@
         "podcast": ""
       },
       "open_location": ""
-    },
-    "confirm_or_cancel": {
-      "only_trusted": ""
     },
     "budget_control": {
       "remember": {

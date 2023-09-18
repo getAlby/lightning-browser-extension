@@ -4,7 +4,7 @@
       "title": "Witaj w Alby",
       "set_password": {
         "title": "Ustaw hasło blokady",
-        "description": "To hasło zabezpiecza Twój portfel i umożliwia dostęp do rozszerzenia przeglądarki. Nie można go zresetować i jest odrębne od hasła do Twojego konta Alby.",
+        "description": "To hasło pozwoli odblokować rozszerzenie Alby na tym urządzeniu. Nie można go odzyskać ale może być zmienione później.",
         "choose_password": {
           "label": "Wybierz hasło blokady:"
         },
@@ -27,12 +27,18 @@
         "actions": {
           "delete_edit_account": "Skasuj niepoprawne konto i wyedytuj ponownie"
         }
+      },
+      "pin_extension": {
+        "explanation": "1. Kliknij <0/> w prawym górnym rogu przeglądarki <1/>2. Znajdź Alby i kliknij, aby przypiąć je do paska narzędzi<1/>3. Gotowe. Aby uzyskać dostęp do Alby, kliknij ikonę <2/>",
+        "title": "Przypnij swoje rozszerzenie Alby",
+        "description": "Prawie skończone. Aby wygodnie korzystać z Alby, pamiętaj o przypięciu rozszerzenia do paska narzędzi przeglądarki:"
       }
     },
     "choose_path": {
       "alby": {
         "title": "Konto Alby",
-        "description": "Zarejestruj się lub użyj istniejącego konta Alby aby zacząć z płatnościami lightning w mgnieniu oka."
+        "description": "Zarejestruj się lub użyj istniejącego konta Alby aby zacząć z płatnościami lightning w mgnieniu oka.",
+        "connect": "Połącz się z Alby"
       },
       "other": {
         "title": "Inne portfele",
@@ -80,7 +86,7 @@
         }
       },
       "lnc": {
-        "title": "LND z LNC",
+        "title": "Lightning Terminal (LNC)",
         "page": {
           "title": "Podłącz się do swojego węzła LND",
           "description": "Stwórz nową sesję w terminalu (litd) aby uzyskać nową frazę parowania i wpisz ją tutaj"
@@ -188,7 +194,7 @@
       "start9": {
         "title": "Start9",
         "page": {
-          "title": "Podłącz do węzła <0>Embassy</0>",
+          "title": "Połącz ze swoim <0>serwerem Start9</0>",
           "instructions": "<0>Uwaga:</0>Obecnie wspieramy tylko LND, ale zamierzamy dodać obsługę c-lightning w przyszłości!<1/>Na pulpicie twojego Embassy kliknij na usługę <0>Lightning Network Daemon</0>.<1/>Wybierz zakładkę <0>Properties</0>.<1/>Następnie skopiuj <0>LND Connect REST URL.</0>"
         },
         "rest_url": {
@@ -251,6 +257,10 @@
         },
         "errors": {
           "connection_failed": "Połączenie nieudane. Czy na pewno podane dane są poprawne?"
+        },
+        "warning": "⚠️ Upewnij się, że bezpiecznie przechowujesz swoje dane uwierzytelniające w menedżerze haseł. Bez tych poświadczeń Twoje konto nie będzie możliwe do odzyskania.",
+        "choose_path": {
+          "title": "Połącz ze swoim portfelem Kollider"
         }
       },
       "btcpay": {
@@ -298,6 +308,9 @@
         "errors": {
           "connection_failed": "Połączenie nieudane. Czy Twój węzeł Core Lightning jest online i korzysta z wtyczki commando?"
         }
+      },
+      "umbrel_lightning_node": {
+        "title": "Węzeł Lightning"
       }
     },
     "home": {
@@ -341,7 +354,6 @@
           "private_key": {
             "title": "Zarządzaj swoim kluczem",
             "subtitle": "Wklej swój klucz prywatny lub wygeneruj nowy. <0>Dowiedz się więcej »</o>",
-            "warning": "Podaj proszę nazwę konta aby potwierdzić usunięcie prywatnego klucza:",
             "success": "Klucz prywatny został zaszyfrowany i zapisany.",
             "successfully_removed": "Klucz prywatny usunięty.",
             "label": "Klucz prywatny",
@@ -368,8 +380,7 @@
         },
         "remove": {
           "title": "Usuń konto",
-          "subtitle": "Wszystkie powiązane limity zostaną usunięte. Proszę się upewnić.",
-          "confirm": "Na pewno usunąć konto: {{name}}? \nNie można tego cofnąć. Jeśli tego konta użyto do logowania do innych stron, możesz stracić do nich dostęp."
+          "subtitle": "Wszystkie powiązane limity zostaną usunięte. Proszę się upewnić."
         },
         "actions": {
           "remove_account": "Usuń konto",
@@ -662,30 +673,30 @@
       "hide_details": "Ukryj szczegóły",
       "no_content": "(brak treści)",
       "kinds": {
-        "3": "kontakty",
-        "5": "usunięcie zdarzenia",
-        "8": "nadanie odznaki",
-        "42": "wiadomość kanału",
-        "43": "ukrycie wiadomości w kanale",
-        "9734": "prośba o zap",
-        "30008": "odznaki profile",
-        "30009": "definicja odznaki",
-        "unknown": "zdarzenia nostr typu {{kind}}",
         "0": "metadane",
         "1": "krótka wiadomość tekstowa",
         "2": "rekomendacja przekaźnika",
+        "3": "kontakty",
         "4": "zaszyfrowane wiadomości prywatne",
+        "5": "usunięcie zdarzenia",
         "7": "reakcja",
+        "8": "nadanie odznaki",
         "40": "utworzenie kanału",
         "41": "metadane kanału",
-        "1984": "zgłoszenie",
+        "42": "wiadomość kanału",
+        "43": "ukrycie wiadomości w kanale",
         "44": "ignorowanie użytkownika w kanale",
+        "1984": "zgłoszenie",
+        "9734": "prośba o zap",
         "9735": "zap",
         "10002": "metadane listy przekaźników",
         "22242": "uwierzytelnienie klienta",
         "24133": "połączenie nostr",
+        "30008": "odznaki profile",
+        "30009": "definicja odznaki",
         "30023": "treść długiego formatu",
-        "30078": "dane specyficzne dla aplikacji"
+        "30078": "dane specyficzne dla aplikacji",
+        "unknown": "zdarzenia nostr typu {{kind}}"
       },
       "allow_sign_event": "Pozwól {{host}} na podpisywanie {{kind}}:",
       "view_details": "Pokaż szczegóły"
@@ -792,9 +803,6 @@
         "podcast": "Podcast"
       },
       "open_location": "Otwórz stronę"
-    },
-    "confirm_or_cancel": {
-      "only_trusted": "Łącz się tylko ze stronami, którym ufasz."
     },
     "budget_control": {
       "remember": {

@@ -7,8 +7,8 @@ import SuccessMessage from "@components/SuccessMessage";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import ScreenHeader from "~/app/components/ScreenHeader";
+import toast from "~/app/components/Toast";
 import { useSettings } from "~/app/context/SettingsContext";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
@@ -149,23 +149,25 @@ function ConfirmKeysend() {
                     })}
                   />
                 </div>
-
-                <BudgetControl
-                  fiatAmount={fiatBudgetAmount}
-                  remember={rememberMe}
-                  onRememberChange={(event) => {
-                    setRememberMe(event.target.checked);
-                  }}
-                  budget={budget}
-                  onBudgetChange={(event) => setBudget(event.target.value)}
-                />
               </div>
             </div>
-            <ConfirmOrCancel
-              disabled={loading}
-              loading={loading}
-              onCancel={reject}
-            />
+            <div>
+              <BudgetControl
+                fiatAmount={fiatBudgetAmount}
+                remember={rememberMe}
+                onRememberChange={(event) => {
+                  setRememberMe(event.target.checked);
+                }}
+                budget={budget}
+                onBudgetChange={(event) => setBudget(event.target.value)}
+                disabled={loading}
+              />
+              <ConfirmOrCancel
+                disabled={loading}
+                loading={loading}
+                onCancel={reject}
+              />
+            </div>
           </Container>
         </form>
       ) : (

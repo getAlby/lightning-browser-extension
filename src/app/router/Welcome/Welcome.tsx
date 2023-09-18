@@ -5,8 +5,8 @@ import ChooseConnector from "@screens/connectors/ChooseConnector";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Outlet, Route, HashRouter as Router, Routes } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
 import Container from "~/app/components/Container";
+import Toaster from "~/app/components/Toast/Toaster";
 import { SettingsProvider } from "~/app/context/SettingsContext";
 import { getConnectorRoutes, renderRoutes } from "~/app/router/connectorRoutes";
 import ChooseConnectorPath from "~/app/screens/connectors/ChooseConnectorPath";
@@ -18,11 +18,7 @@ function Welcome() {
   return (
     <SettingsProvider>
       <Router>
-        <ToastContainer
-          autoClose={15000}
-          hideProgressBar={true}
-          className="w-fit max-w-2xl"
-        />
+        <Toaster />
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<SetPassword />} />
@@ -66,7 +62,7 @@ function Layout() {
     <div className="flex justify-center items-center min-h-screen">
       <div className="w-full">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center font-serif font-medium text-2xl my-5 dark:text-white">
+          <div className="text-center font-serif font-medium text-2xl mt-8 dark:text-white">
             <p>
               {t("welcome.title")}
               <img

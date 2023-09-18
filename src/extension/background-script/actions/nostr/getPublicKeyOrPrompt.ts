@@ -1,10 +1,13 @@
 import utils from "~/common/lib/utils";
 import { getHostFromSender } from "~/common/utils/helpers";
+import {
+  addPermissionFor,
+  hasPermissionFor,
+} from "~/extension/background-script/permissions";
 import type { MessageNostrPublicKeyGetOrPrompt, Sender } from "~/types";
 import { PermissionMethodNostr } from "~/types";
 
 import state from "../../state";
-import { addPermissionFor, hasPermissionFor } from "./helpers";
 
 const getPublicKeyOrPrompt = async (
   message: MessageNostrPublicKeyGetOrPrompt,

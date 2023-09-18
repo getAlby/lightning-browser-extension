@@ -9,20 +9,21 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import type { FormEvent } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
-import Modal from "react-modal";
-import QRCode from "react-qr-code";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { toast } from "react-toastify";
 import Alert from "~/app/components/Alert";
 import Badge from "~/app/components/Badge";
 import Hyperlink from "~/app/components/Hyperlink";
 import InputCopyButton from "~/app/components/InputCopyButton";
 import MenuDivider from "~/app/components/Menu/MenuDivider";
+import Modal from "~/app/components/Modal";
+import QRCode from "~/app/components/QRCode";
+import toast from "~/app/components/Toast";
 import Select from "~/app/components/form/Select";
 import Toggle from "~/app/components/form/Toggle";
 import { useAccount } from "~/app/context/AccountContext";
 import { useAccounts } from "~/app/context/AccountsContext";
 import { useSettings } from "~/app/context/SettingsContext";
+import { classNames } from "~/app/utils";
 import api, { GetAccountRes } from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import nostr from "~/common/lib/nostr";
@@ -113,7 +114,9 @@ function AccountDetail() {
   }
 
   async function removeAccount({ id, name }: AccountAction) {
-    const confirm = window.prompt(t("remove.confirm"))?.toLowerCase();
+    const confirm = window
+      .prompt(t("remove.confirm", { name: accountName }))
+      ?.toLowerCase();
     if (!confirm) return;
 
     if (confirm == accountName.toLowerCase()) {
@@ -137,6 +140,7 @@ function AccountDetail() {
       toast.error(t("remove.error"));
     }
   }
+
   async function removeMnemonic({ id, name }: AccountAction) {
     const confirm = window
       .prompt(t("remove_secretkey.confirm", { name }))
@@ -174,7 +178,7 @@ function AccountDetail() {
         </div>
 
         <div>
-          <div className="shadow bg-white sm:rounded-md sm:overflow-hidden p-6 dark:bg-surface-02dp flex flex-col gap-4">
+          <div className="shadow bg-white sm:rounded-md sm:overflow-hidden p-6 dark:bg-surface-01dp flex flex-col gap-4">
             <form
               onSubmit={(e: FormEvent) => {
                 e.preventDefault();
@@ -215,10 +219,10 @@ function AccountDetail() {
                 <MenuDivider />
                 <div className="flex justify-between items-end">
                   <div className="w-9/12">
-                    <p className="text-gray-900 dark:text-white font-medium">
+                    <p className="text-black dark:text-white font-medium">
                       {t("export.title")}
                     </p>
-                    <p className="text-gray-500 text-sm dark:text-neutral-500">
+                    <p className="text-gray-600 text-sm dark:text-neutral-400">
                       <Trans
                         i18nKey={"export.description"}
                         t={t}
@@ -257,13 +261,9 @@ function AccountDetail() {
                     )}
                   </div>
                   <Modal
-                    ariaHideApp={false}
-                    closeTimeoutMS={200}
                     isOpen={exportModalIsOpen}
-                    onRequestClose={closeExportModal}
-                    contentLabel={t("export.screen_reader")}
-                    overlayClassName="bg-black bg-opacity-50 fixed inset-0 flex justify-center items-center p-5"
-                    className="rounded-lg bg-white dark:bg-surface-02dp w-full max-w-md overflow-hidden"
+                    close={closeExportModal}
+                    title={t("export.screen_reader")}
                   >
                     <div className="p-5 flex justify-between">
                       <h2 className="text-2xl font-bold dark:text-white">
@@ -286,7 +286,6 @@ function AccountDetail() {
                           <p>{t("export.scan_qr")}</p>
                           <QRCode
                             value={`lndhub://${lndHubData.login}:${lndHubData.password}@${lndHubData.url}/`}
-                            level="M"
                             size={256}
                           />
                           <div className="w-full">
@@ -320,21 +319,21 @@ function AccountDetail() {
             {t("mnemonic.title")}
           </h2>
 
-          <div className="shadow bg-white sm:rounded-md sm:overflow-hidden p-6 dark:bg-surface-02dp flex flex-col gap-4">
+          <div className="shadow bg-white sm:rounded-md sm:overflow-hidden p-6 dark:bg-surface-01dp flex flex-col gap-4">
             {hasMnemonic && (
               <Alert type="warn">{t("mnemonic.backup.warning")}</Alert>
             )}
 
             <div className="flex justify-between items-end">
               <div className="w-9/12">
-                <p className="text-gray-900 dark:text-white font-medium">
+                <p className="text-black dark:text-white font-medium">
                   {t(
                     hasMnemonic
                       ? "mnemonic.backup.title"
                       : "mnemonic.generate.title"
                   )}
                 </p>
-                <p className="text-gray-500 text-sm dark:text-neutral-500">
+                <p className="text-gray-600 text-sm dark:text-neutral-400">
                   {t(
                     hasMnemonic
                       ? "mnemonic.backup.description"
@@ -344,7 +343,7 @@ function AccountDetail() {
               </div>
 
               <div className="w-1/5 flex-none">
-                <Link to={`secret-key/${hasMnemonic ? "backup" : "generate"}`}>
+                <Link to={`secret-key/${hasMnemonic ? "backup" : "new"}`}>
                   <Button
                     label={t(
                       hasMnemonic
@@ -362,10 +361,10 @@ function AccountDetail() {
                 <MenuDivider />
                 <div className="flex justify-between items-end">
                   <div className="w-7/12">
-                    <p className="text-gray-900 dark:text-white font-medium">
+                    <p className="text-black dark:text-white font-medium">
                       {t("mnemonic.import.title")}
                     </p>
-                    <p className="text-gray-500 text-sm dark:text-neutral-500">
+                    <p className="text-gray-600 text-sm dark:text-neutral-400">
                       {t("mnemonic.import.description")}
                     </p>
                   </div>
@@ -417,80 +416,109 @@ function AccountDetail() {
               </div>
             </div>
             <MenuDivider />
-            <div className="flex justify-between items-end">
-              <div className="w-7/12 flex flex-col gap-2">
-                <p className="text-gray-900 dark:text-white font-medium">
-                  {t("bitcoin.network.title")}
-                </p>
-                <p className="text-gray-500 text-sm dark:text-neutral-500">
-                  {t("bitcoin.network.subtitle")}
-                </p>
-              </div>
 
-              <div className="w-1/5 flex-none">
-                <Select
-                  name="network"
-                  value={account.bitcoinNetwork}
-                  onChange={async (event) => {
-                    // update local value
-                    setAccount({
-                      ...account,
-                      bitcoinNetwork: event.target.value as BitcoinNetworkType,
-                    });
-                    await api.editAccount(id, {
-                      bitcoinNetwork: event.target.value as BitcoinNetworkType,
-                    });
-                  }}
-                >
-                  <option value="bitcoin">
-                    {t("bitcoin.network.options.bitcoin")}
-                  </option>
-                  <option value="testnet">
-                    {t("bitcoin.network.options.testnet")}
-                  </option>
-                  <option value="regtest">
-                    {t("bitcoin.network.options.regtest")}
-                  </option>
-                </Select>
-              </div>
-            </div>
-            <MenuDivider />
-            <div className="flex justify-between items-center">
-              <div className="w-7/12 flex flex-col gap-2">
-                <p className="text-gray-900 dark:text-white font-medium">
-                  {t("mnemonic.lnurl.title")}
-                </p>
-                <p className="text-gray-500 text-sm dark:text-neutral-500">
-                  {t("mnemonic.lnurl.use_mnemonic")}
-                </p>
-              </div>
-
-              <div className="w-1/5 flex-none flex justify-end items-center">
-                <Toggle
-                  checked={account.useMnemonicForLnurlAuth}
-                  onChange={async () => {
-                    // update local value
-                    setAccount({
-                      ...account,
-                      useMnemonicForLnurlAuth: !account.useMnemonicForLnurlAuth,
-                    });
-                    await api.editAccount(id, {
-                      useMnemonicForLnurlAuth: !account.useMnemonicForLnurlAuth,
-                    });
-                  }}
+            {!hasMnemonic && (
+              <Alert type="info">
+                <Trans
+                  i18nKey={"no_mnemonic_hint"}
+                  t={t}
+                  components={[
+                    // eslint-disable-next-line react/jsx-key
+                    <Link
+                      to="secret-key/new"
+                      relative="path"
+                      className="underline"
+                    />,
+                  ]}
                 />
+              </Alert>
+            )}
+            <div
+              className={classNames(
+                "flex flex-col gap-4",
+                !hasMnemonic && "opacity-30"
+              )}
+            >
+              <div className="flex justify-between items-end">
+                <div className="w-7/12 flex flex-col gap-2">
+                  <p className="text-black dark:text-white font-medium">
+                    {t("network.title")}
+                  </p>
+                  <p className="text-gray-600 text-sm dark:text-neutral-400">
+                    {t("network.subtitle")}
+                  </p>
+                </div>
+
+                <div className="w-1/5 flex-none">
+                  <Select
+                    name="network"
+                    value={account.bitcoinNetwork}
+                    onChange={async (event) => {
+                      // update local value
+                      setAccount({
+                        ...account,
+                        bitcoinNetwork: event.target
+                          .value as BitcoinNetworkType,
+                      });
+                      await api.editAccount(id, {
+                        bitcoinNetwork: event.target
+                          .value as BitcoinNetworkType,
+                      });
+                    }}
+                  >
+                    <option value="bitcoin">
+                      {t("network.options.bitcoin")}
+                    </option>
+                    <option value="testnet">
+                      {t("network.options.testnet")}
+                    </option>
+                    <option value="regtest">
+                      {t("network.options.regtest")}
+                    </option>
+                  </Select>
+                </div>
+              </div>
+              <MenuDivider />
+              <div className="flex justify-between items-end">
+                <div className="w-7/12 flex flex-col gap-2">
+                  <p className="text-black dark:text-white font-medium">
+                    {t("mnemonic.lnurl.title")}
+                  </p>
+                  <p className="text-gray-600 text-sm dark:text-neutral-400">
+                    {t("mnemonic.lnurl.use_mnemonic")}
+                  </p>
+                </div>
+
+                <div className="w-1/5 flex-none flex justify-end items-center">
+                  <Toggle
+                    disabled={!hasMnemonic}
+                    checked={account.useMnemonicForLnurlAuth}
+                    onChange={async () => {
+                      // update local value
+                      setAccount({
+                        ...account,
+                        useMnemonicForLnurlAuth:
+                          !account.useMnemonicForLnurlAuth,
+                      });
+                      await api.editAccount(id, {
+                        useMnemonicForLnurlAuth:
+                          !account.useMnemonicForLnurlAuth,
+                      });
+                    }}
+                  />
+                </div>
               </div>
             </div>
           </div>
 
           <div className="relative flex py-5 mt-12 items-center">
             <div className="flex-grow border-t border-gray-300 dark:border-gray-700"></div>
-            <span className="flex-shrink mx-4 text-gray-500 dark:text-gray-400 fw-bold">
+            <span className="flex-shrink mx-4 text-gray-600 dark:text-gray-400 fw-bold">
               ⛔️ Danger Zone
             </span>
             <div className="flex-grow border-t border-gray-300 dark:border-gray-700"></div>
           </div>
-          <div className="shadow bg-white sm:rounded-md sm:overflow-hidden mb-5 px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">
+          <div className="shadow bg-white sm:rounded-md sm:overflow-hidden mb-5 px-6 py-2 divide-y divide-gray-200 dark:divide-neutral-700 dark:bg-surface-01dp">
             {hasMnemonic && (
               <Setting
                 title={t("remove_secretkey.title")}

@@ -74,7 +74,7 @@ Alby uses [Weblate](https://weblate.org/en/) to manage translations for differen
 1. **Common**\
    All the common words and actions (Confirm, Delete, Edit...)
 1. **Components**\
-   The i18n strings which exist within the components (AllowanceMenu, QRCodeScanner, PublisherCard...)
+   The i18n strings which exist within the components (SitePreferences, QRCodeScanner, PublisherCard...)
 
 #### Use underscores instead of camelCase
 

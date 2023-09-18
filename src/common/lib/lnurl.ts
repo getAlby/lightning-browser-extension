@@ -1,8 +1,6 @@
 import fetchAdapter from "@vespaiach/axios-fetch-adapter";
 import axios from "axios";
 import lightningPayReq from "bolt11";
-import Hex from "crypto-js/enc-hex";
-import sha256 from "crypto-js/sha256";
 import { isLNURLDetailsError } from "~/common/utils/typeHelpers";
 import {
   LNURLDetails,
@@ -118,33 +116,13 @@ const lnurl = {
 
   verifyInvoice({
     paymentInfo,
-    payerdata,
-    metadata,
     amount,
   }: {
     paymentInfo: LNURLPaymentInfo;
-    payerdata:
-      | undefined
-      | {
-          name?: string;
-          email?: string;
-        };
-    metadata: string;
     amount: number;
   }) {
     const paymentRequestDetails = lightningPayReq.decode(paymentInfo.pr);
-    let metadataHash = "";
-    try {
-      const dataToHash = payerdata
-        ? metadata + JSON.stringify(payerdata)
-        : metadata;
-      metadataHash = sha256(dataToHash).toString(Hex);
-    } catch (e) {
-      console.error();
-    }
     switch (true) {
-      case paymentRequestDetails.tagsObject.purpose_commit_hash !==
-        metadataHash: // LN WALLET Verifies that h tag (description_hash) in provided invoice is a hash of metadata string converted to byte array in UTF-8 encoding
       case paymentRequestDetails.millisatoshis !== String(amount): // LN WALLET Verifies that amount in provided invoice equals an amount previously specified by user
       case paymentInfo.successAction &&
         !["url", "message", "aes"].includes(paymentInfo.successAction.tag): // If successAction is not null: LN WALLET makes sure that tag value of is of supported type, aborts a payment otherwise

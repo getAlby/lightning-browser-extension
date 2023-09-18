@@ -3,7 +3,7 @@ import PublisherCard from "@components/PublisherCard";
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import toast from "~/app/components/Toast";
 import lnurlLib from "~/common/lib/lnurl";
 import { isLNURLDetailsError } from "~/common/utils/typeHelpers";
 import type { Battery } from "~/types";
@@ -73,7 +73,7 @@ export const PublisherLnData: FC<Props> = ({ lnData }) => {
   };
 
   return (
-    <div className="border-b border-gray-200 dark:border-neutral-500">
+    <div className="border-b border-gray-200 dark:border-neutral-700">
       <PublisherCard
         title={lnData.name}
         description={lnData.description}

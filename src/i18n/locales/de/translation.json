@@ -445,14 +445,13 @@
           "your_ln_address": "Deine Lightning Adresse:",
           "export_uri": "LNDHub Anmeldeinformationen URI",
           "scan_qr": "Importiere diese Wallet in Zeus oder BlueWallet, indem du den QRCode scannst.",
-          "description": "Ermöglicht es dir, dieses Konto mit mobilen Wallets wie <0>Blue Wallet</0> und <0>Zeus</0> zu verbinden und zu verwenden."
+          "description": "Ermöglicht es dir, dieses Konto mit mobilen Wallets wie <0>Blue Wallet</0> und <1>Zeus</1> zu verbinden und zu verwenden."
         },
         "nostr": {
           "title": "Nostr",
           "private_key": {
             "title": "Verwalte deinen privaten Nostr-Schlüssel",
             "subtitle": "Füge deinen eigenen privaten Schlüssel ein oder erzeuge einen neuen. <0>Mehr erfahren\"</0>",
-            "warning": "Bitte gebe deinen Namen des Kontos ein, um die Löschung des privaten Schlüssels von nostr zu bestätigen:",
             "success": "Der private Schlüssel von Nostr wurde erfolgreich verschlüsselt und gespeichert.",
             "successfully_removed": "Der private Schlüssel von Nostr wurde erfolgreich entfernt.",
             "label": "Nostr Privater Schlüssel",
@@ -514,7 +513,6 @@
         "remove": {
           "title": "Dieses Konto entfernen",
           "subtitle": "Entfernt alle Zulagen, Zahlungsdaten und Schlüssel, die mit diesem Konto verbunden sind.",
-          "confirm": "Bitte gebe den Namen des Kontos ein, um die Löschung deines Kontos zu bestätigen.\n\n ⚠️ Wenn du fortfährst, werden alle zugehörigen Schlüssel (Master Key, Nostr, etc.) gelöscht. Bitte vergewisser dich, dass du eine Sicherungskopie erstellt hast, denn es gibt keine andere Möglichkeit, sie wiederherzustellen.",
           "error": "Der eingegebene Kontoname stimmte nicht überein."
         },
         "actions": {
@@ -555,29 +553,27 @@
           "inputs": {
             "title": "Wiederherstellungsphrase"
           },
-          "existing_nostr_key_notice": "⚠️ Für dieses Konto ist bereits ein privater Nostr-Schlüssel festgelegt, der nicht von diesem Hauptschlüssel abgeleitet wird. Du kannst dein Nostr-Schlüssel über deine Kontoeinstellungen verwalten.",
+          "existing_nostr_key_notice": "ℹ️ Für dieses Konto ist bereits ein privater Nostr-Schlüssel festgelegt, der nicht von diesem Hauptschlüssel abgeleitet wird. Du kannst dein Nostr-Schlüssel über deine Kontoeinstellungen verwalten.",
           "lnurl": {
             "title": "Anmeldung mit Lightning",
             "use_mnemonic": "Master Key für die Anmeldung bei Lightning-Anwendungen verwenden (LNURL Auth)"
           }
         },
-        "bitcoin": {
-          "network": {
-            "title": "Bitcoin-Netzwerk",
-            "subtitle": "Wähle ein Netz zur Ableitung von Adressen und zur Entschlüsselung von Transaktionen",
-            "options": {
-              "bitcoin": "Mainnet",
-              "testnet": "Testnet",
-              "regtest": "Regtest"
-            }
-          }
-        },
         "remove_secretkey": {
           "title": "Hauptschlüssel entfernen",
           "subtitle": "Entfernt den Hauptschlüssel von diesem Konto.",
-          "confirm": "Bitte gebe den Namen des Kontos ein, um die Löschung deines Hauptschlüssels zu bestätigen.",
           "success": "Der Hauptschlüssel wurde erfolgreich entfernt."
-        }
+        },
+        "network": {
+          "subtitle": "Wähle ein Netzwerk zur Ableitung von Adressen und zur Entschlüsselung von Bitcoin- und Liquid-Transaktionen",
+          "options": {
+            "bitcoin": "Mainnet",
+            "testnet": "Testnet",
+            "regtest": "Regtest"
+          },
+          "title": "Netzwerk"
+        },
+        "no_mnemonic_hint": "💡 Du hast noch keinen Hauptschlüssel. <0>Klicken Sie hier</0></div>, um deinen Hauptschlüssel zu erstellen und diese Einstellungen freizuschalten."
       }
     },
     "enable": {
@@ -625,7 +621,8 @@
     "send": {
       "input": {
         "label": "Rechnung, Lightning-Adresse oder LNURL",
-        "hint": "Rechnung, Lightning-Adresse oder LNURL"
+        "hint": "Rechnung, Lightning-Adresse, LNURL",
+        "hint_with_bitcoin_address": "Rechnung, Lightning-Adresse, LNURL oder Bitcoin-Adresse"
       },
       "title": "Senden"
     },
@@ -663,30 +660,30 @@
       "hide_details": "Details ausblenden",
       "no_content": "(Ohne Inhalt)",
       "kinds": {
-        "unknown": "nostr Ereignis der Art {{kind}}",
         "0": "Metadaten",
+        "1": "kurze Textnotiz",
+        "2": "Relais empfehlen",
+        "3": "Kontakte",
+        "4": "verschlüsselte Direktnachrichten",
         "5": "Ereignislöschung",
+        "7": "Reaktion",
+        "8": "Abzeichenverleihung",
         "40": "Kanalbildung",
         "41": "Kanal Metadaten",
         "42": "Kanalmeldung",
         "43": "Kanal verstecke Nachrichten",
         "44": "Kanal stummschalten Benutzer",
-        "10002": "Metadaten der Relaisliste",
-        "30078": "anwendungsspezifische Daten",
-        "22242": "Client Authentifizierung",
-        "7": "Reaktion",
+        "1984": "Berichterstattung",
         "9734": "Zappanfrage",
         "9735": "zap",
-        "2": "Relais empfehlen",
-        "1": "kurze Textnotiz",
-        "3": "Kontakte",
-        "4": "verschlüsselte Direktnachrichten",
-        "8": "Abzeichenverleihung",
-        "1984": "Berichterstattung",
+        "10002": "Metadaten der Relaisliste",
+        "22242": "Client Authentifizierung",
         "24133": "nostr verbinden",
         "30008": "Profilabzeichen",
         "30009": "Ausweisdefinition",
-        "30023": "Langform Inhalte"
+        "30023": "Langform Inhalte",
+        "30078": "anwendungsspezifische Daten",
+        "unknown": "nostr Ereignis der Art {{kind}}"
       },
       "allow_sign_event": "Erlaube {{host}}, eine {{kind}} zu unterzeichnen:"
     },
@@ -857,11 +854,6 @@
       "go": "Gehe zu deinem Alby Account →",
       "instructions1": "Um Bitcoin über eine Bitcoin-Adresse zu erhalten, melde dich bei deinem <0>Alby-Account</0> auf getalby.com an"
     },
-    "confirm_get_address": {
-      "title": "Adresse abrufen",
-      "heading": "Diese Website bittet dich es zu lesen:",
-      "content": "Deine Bitcoin-Empfangsadresse"
-    },
     "lnurlredeem": {
       "errors": {
         "invalid_withdraw_request": "Ungültige LNURL-Abfrage",
@@ -878,6 +870,60 @@
     },
     "scan_qrcode": {
       "title": "Warten auf den Scan"
+    },
+    "confirm_sign_pset": {
+      "title": "Unterschrift",
+      "allow_sign": "Auf dieser Website wirst du aufgefordert, eine Liquid Transaktion zu unterzeichnen:",
+      "view_details": "Details anzeigen",
+      "hide_details": "Details ausblenden",
+      "view_raw_transaction": "Rohtransaktion anzeigen (Base64)",
+      "hide_raw_transaction": "Rohtransaktion ausblenden (Base64)",
+      "inputs": "Eingaben",
+      "outputs": "Ausgänge",
+      "amount": "{{Betrag}} {{ticker}}"
+    },
+    "bitcoin": {
+      "confirm_get_address": {
+        "title": "Adresse abrufen"
+      },
+      "allow": "Erlaube dieser Website:",
+      "allow_sign": "Erlaube {{host}} zu unterschreiben:",
+      "block_and_ignore": "Blockieren und Ignorieren von {{host}}",
+      "block_added": "{{host}} zur Blockliste hinzugefügt, bitte lade die Website neu."
+    },
+    "liquid": {
+      "title": "Flüssig",
+      "allow": "Erlaube dieser Website:",
+      "block_and_ignore": "Blockieren und Ignorieren von {{host}}",
+      "allow_sign": "Erlaube {{host}} zu unterschreiben:",
+      "block_added": "{{host}} zur Blockliste hinzugefügt, bitte lade die Website neu."
+    },
+    "send_to_bitcoin_address": {
+      "time_estimate": "ℹ️ Transaktionen werden in der Regel innerhalb von 10-30 Minuten bearbeitet.",
+      "service_unavailable": "Der Dienst ist vorübergehend nicht verfügbar, bitte versuche es in ein paar Minuten erneut.",
+      "title": "An Bitcoin-Adresse senden",
+      "recipient": {
+        "label": "Empfänger"
+      },
+      "amount": {
+        "label": "Betrag (sats)"
+      },
+      "network_fee": {
+        "label": "Netzgebühr"
+      },
+      "service_fee": {
+        "label": "Servicegebühr"
+      },
+      "total": {
+        "label": "Insgesamt"
+      },
+      "total_fee": {
+        "label": "Gebühr"
+      },
+      "provider": {
+        "label": "Anbieter austauschen"
+      },
+      "view_on_explorer": "Ansicht auf mempool explorer"
     }
   },
   "components": {
@@ -978,9 +1024,6 @@
         "imported": "EINGEFÜHRT"
       }
     },
-    "confirm_or_cancel": {
-      "only_trusted": "Verbinde dich nur mit Websites, denen du vertraust."
-    },
     "transaction_list": {
       "tabs": {
         "outgoing": "Ausgehend von",
@@ -1035,7 +1078,8 @@
       "import": "Importieren",
       "copy_clipboard": "In die Zwischenablage kopieren",
       "paste": "Einfügen",
-      "paste_clipboard": "Einfügen aus der Zwischenablage"
+      "paste_clipboard": "Einfügen aus der Zwischenablage",
+      "review": "Überprüfung"
     },
     "discover": "Entdecken",
     "errors": {
@@ -1044,7 +1088,7 @@
     },
     "message": "Nachricht",
     "response": "Antwort",
-    "success_message": "{{amount}}{{fiatAmount}} gesendet an {{destination}}",
+    "success_message": "{{Betrag}}{{fiatAmount}} sind auf dem Weg zum {{Ziel}}",
     "accounts": "Konten",
     "range": {
       "between": "zwischen {{min}} und {{max}}",
@@ -1156,6 +1200,16 @@
       "openchannel": "Öffne einen neuen Kanal.",
       "addholdinvoice": "Erstelle eine neue HODL-Rechnungen.",
       "settleinvoice": "Begleiche eine akzeptierte Rechnung."
+    },
+    "webln": {
+      "getbalance": "Lese den Saldo deines Kontos ab."
+    },
+    "liquid": {
+      "getaddress": "Lese deine Liquid-Empfangsadresse.",
+      "signschnorr": "Unterschreibe die Nachricht mit deinem Schlüssel."
+    },
+    "bitcoin": {
+      "getaddress": "Lese deine Bitcoin-Empfangsadresse."
     }
   }
 }

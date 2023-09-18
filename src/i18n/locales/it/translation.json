@@ -305,7 +305,6 @@
             "success": "Chiave privata criptata & salvata con successo.",
             "successfully_removed": "Chiave privata rimossa con successo.",
             "subtitle": "Incolla la tua chiave privata o generane una nuova. Assicurati di fare un backup della vostra chiave privata prima di generarne una nuova. <0>Per saperne di più »</0>",
-            "warning": "In questo modo si eliminerà la vecchia chiave privata. Sei sicuro?",
             "label": "Chiave Privata"
           },
           "actions": {
@@ -326,7 +325,6 @@
           }
         },
         "remove": {
-          "confirm": "Sei sicuro di voler rimuovere il tuo accout: {{name}}?\nNon è possibile annullare questa operazione. Se hai usato questo account per accedere a siti web, potresti perderne l'accesso.",
           "title": "Rimuovi Questo Account",
           "subtitle": "Tutte i permessi collegati saranno cancellati. Si prega di esserne certi."
         },
@@ -751,9 +749,6 @@
         "podcast": "Podcast"
       },
       "open_location": "Apri il sito"
-    },
-    "confirm_or_cancel": {
-      "only_trusted": "Connettiti solo con siti attendibili."
     },
     "budget_control": {
       "remember": {

@@ -1,14 +1,12 @@
-import AllowanceMenu from "@components/AllowanceMenu";
 import Container from "@components/Container";
-import Progressbar from "@components/Progressbar";
-import PublisherCard from "@components/PublisherCard";
+import PublisherPanel from "@components/PublisherPanel";
 import TransactionsTable from "@components/TransactionsTable";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
-import { toast } from "react-toastify";
+import toast from "~/app/components/Toast";
 import { useSettings } from "~/app/context/SettingsContext";
 import { convertPaymentsToTransactions } from "~/app/utils/payments";
 import msg from "~/common/lib/msg";
@@ -18,13 +16,12 @@ dayjs.extend(relativeTime);
 
 function PublisherDetail() {
   const { t } = useTranslation("translation", {
-    keyPrefix: "publishers",
+    keyPrefix: "home",
   });
   const {
     isLoading: isLoadingSettings,
     settings,
     getFormattedFiat,
-    getFormattedNumber,
   } = useSettings();
 
   const hasFetchedData = useRef(false);
@@ -68,46 +65,41 @@ function PublisherDetail() {
 
   return (
     <div>
-      <div className="border-b border-gray-200 dark:border-neutral-500">
-        <PublisherCard
-          title={allowance?.name || ""}
-          image={allowance?.imageURL || ""}
-          url={allowance?.host}
-          isCard={false}
-          isSmall={false}
-        />
+      <div className="border-b border-gray-200 dark:border-neutral-700">
+        {allowance && (
+          <PublisherPanel
+            allowance={allowance}
+            onEdit={fetchData}
+            onDelete={() => {
+              navigate("/publishers", { replace: true });
+            }}
+            title={allowance?.name || ""}
+            image={allowance?.imageURL || ""}
+            url={allowance?.host}
+            isCard={false}
+            isSmall={false}
+          />
+        )}
       </div>
 
       {allowance && (
         <Container>
-          <div className="flex justify-between items-center pt-8 pb-4">
-            <dl>
-              <dt className="text-sm font-medium text-gray-500">
-                {t("publisher.allowance.title")}
-              </dt>
-
-              <dd className="flex items-center font-bold text-xl dark:text-neutral-400">
-                {getFormattedNumber(allowance.usedBudget)} /{" "}
-                {getFormattedNumber(allowance.totalBudget)}{" "}
-                {t("publisher.allowance.used_budget")}
-                <div className="ml-3 w-24">
-                  <Progressbar percentage={allowance.percentage} />
-                </div>
-              </dd>
-            </dl>
-
-            <AllowanceMenu
-              allowance={allowance}
-              onEdit={fetchData}
-              onDelete={() => {
-                navigate("/publishers", { replace: true });
-              }}
-            />
-          </div>
-
           <div>
-            {transactions && transactions?.length > 0 && (
+            <h2 className="mt-[34px] mb-4 text-lg text-gray-900 font-bold dark:text-white">
+              {t("allowance_view.recent_transactions")}
+            </h2>
+            {transactions && transactions?.length > 0 ? (
               <TransactionsTable transactions={transactions} />
+            ) : (
+              <p className="text-gray-500 dark:text-neutral-400">
+                <Trans
+                  i18nKey={"allowance_view.no_transactions"}
+                  t={t}
+                  values={{ name: allowance.name }}
+                  // eslint-disable-next-line react/jsx-key
+                  components={[<strong></strong>]}
+                />
+              </p>
             )}
           </div>
         </Container>

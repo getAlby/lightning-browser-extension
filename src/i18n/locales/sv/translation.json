@@ -339,7 +339,6 @@
             "title": "Hantera dina Nostr privata nyckel",
             "successfully_removed": "Nostr privat nyckel har tagits bort.",
             "label": "Nostr Privat Nyckel",
-            "warning": "Ange namnet på kontot för att bekräfta raderingen av din nostr privata nyckel:",
             "subtitle": "Klistra in din nostr privata nyckel eller skapa en ny. <0>Läs mer »</0>",
             "success": "Nostr privat nyckel krypterad och sparad.",
             "failed_to_remove": "Det angivna kontonamnet matchade inte, din gamla Nostr privata nyckel har återställts."
@@ -355,86 +354,115 @@
           "settings": {
             "label": "Nostr Inställningar",
             "title": "Nostr Inställningar",
-            "imported_key_warning": "⚠️ Du använder för närvarande en importerad eller slumpmässigt genererad Nostr-nyckel. Din privata Nostr-nyckel kan inte återställas av din hemliga nyckel, så kom ihåg att säkerhetskopiera din privata Nostr-nyckel.",
-            "derive": "Få Nostr-nycklar från din hemliga nyckel",
-            "can_restore": "✅ Nostr-nyckel hämtad från din hemliga nyckel",
-            "description": "Hämta Nostr-nycklar från din hemliga nyckel eller importera din befintliga privata nyckel genom att klistra in den i fältet \"Nostr privat nyckel\".",
-            "no_secret_key": "💡 Du har ingen hemlig nyckel än. <0>Klicka här</0></div> för att skapa din hemliga nyckel och hämta dina nostr-nycklar."
+            "imported_key_warning": "⚠️ Du använder för närvarande en importerad eller slumpmässigt genererad Nostr-nyckel. Din privata Nostr-nyckel kan inte återställas av din återställningsfras, så kom ihåg att säkerhetskopiera din privata Nostr-nyckel separat.",
+            "derive": "Härled från huvudnyckel",
+            "can_restore": "✅ Nostr-nyckel härledd från din huvudnyckel",
+            "description": "Härled Nostr-nycklar från din huvudnyckel eller importera din befintliga privata nyckel genom att klistra in den i fältet \"Nostr privat nyckel\".",
+            "no_secret_key": "💡 Du har ingen huvudnyckel än. <0>Klicka här</0></div> för att skapa din huvudnyckel och härleda dina Nostr-nycklar.",
+            "remove": "Ta bort nuvarande nycklar"
+          },
+          "setup": {
+            "description": "Välj Om du vill skapa ett nytt Nostr-konto (ett par privata och offentliga nycklar) eller importera ett befintligt.",
+            "description2": "Varje Nostr-konto som skapas i Alby kommer med en <0>Återställningsfras</0> – en uppsättning av 12 ord som alltid låter dig återfå åtkomst till dina privata Nostr-nycklar.",
+            "title": "Ställ in dina Nostr-nycklar",
+            "new": {
+              "label": "Skapa ett nytt Nostr-konto",
+              "description": "Generera en huvudnyckel med ett par nya Nostr-nycklar."
+            },
+            "import": {
+              "label": "Importera ett Nostr-konto",
+              "description": "Använd en befintlig privat Nostr-nyckel eller härled den från din huvudnyckel",
+              "recovery_phrase": {
+                "label": "Använd återställningsfras",
+                "description": "Använd huvudnyckelåterställningsfrasen för att importera dina Nostr-nycklar"
+              },
+              "private_key": {
+                "description": "Klistra in din privata Nostr-nyckel för att importera den till Alby",
+                "label": "Använd Nostr privat nyckel"
+              },
+              "title": "Hur skulle du vilja importera ditt Nostr-konto?"
+            },
+            "new_to_nostr": "Ny på Nostr? <0>Läs mer</0>"
           }
         },
         "remove": {
           "title": "Ta bort detta konto",
           "subtitle": "Tar bort alla traktamenten, betalningsdata och nycklar som är kopplade till detta konto.",
-          "confirm": "Ange namnet på kontot för att bekräfta raderingen av ditt konto.\n\n ⚠️ Alla associerade nycklar (hemlig nyckel, Nostr, etc) kommer att raderas om du fortsätter. Se till att du har säkerhetskopierat dem, det finns inget annat sätt att återställa dem.",
           "error": "Det angivna kontonamnet matchade inte."
         },
-        "title1": "Konto information",
-        "title2": "Redigera konto",
+        "title1": "Konto inställningar",
+        "title2": "Konto",
         "name": {
           "title": "Visnings Namn",
           "placeholder": "Konto visningsnamn"
         },
         "export": {
-          "title": "Exportera konto",
+          "title": "Anslut din mobila plånbok",
           "screen_reader": "Exportera konto detaljer",
           "waiting": "väntar på LndHub-data...",
           "your_ln_address": "Din Lightning Address:",
           "export_uri": "LNDHub-inloggnings-URI",
-          "scan_qr": "Importera denna plånbok till Zeus eller BlueWallet genom att skanna QR-koden."
+          "scan_qr": "Importera denna plånbok till Zeus eller BlueWallet genom att skanna QR-koden.",
+          "description": "Låter dig ansluta och använda det här kontot på mobila plånböcker som <0>Blue Wallet</0> och <1>Zeus</1>."
         },
         "actions": {
           "remove_account": "Ta bort kontot",
           "export": "Exportera",
-          "remove_secretkey": "Ta bort hemlig nyckel"
+          "remove_secretkey": "Ta bort huvudnyckeln"
         },
         "mnemonic": {
-          "saved": "Hemlig nyckel krypterad och sparad framgångsrikt.",
-          "existing_nostr_key_notice": "⚠️ Detta konto har redan en nostr privat nyckeluppsättning och kommer inte att härledas från denna hemliga nyckel. Du kan hantera din nostr-nyckel från dina kontoinställningar.",
+          "saved": "Huvudnyckeln krypterad och sparad.",
+          "existing_nostr_key_notice": "ℹ️ Detta konto har redan en nostr privat nyckeluppsättning och kommer inte att härledas från denna huvudnyckel. Du kan hantera din Nostr-nyckel från dina kontoinställningar.",
           "generate": {
-            "title": "Generera din hemliga nyckel",
-            "button": "Generera hemlig nyckel",
-            "confirm": "Jag har säkerhetskopierat mitt kontos hemliga nyckel på en privat och säker plats",
-            "error_confirm": "Bekräfta att du har säkerhetskopierat din hemliga nyckel."
+            "title": "Generera ny huvudnyckel",
+            "button": "Generera huvudnyckel",
+            "confirm": "Jag har säkerhetskopierat återställningsfrasen till min huvudnyckel på en privat och säker plats.",
+            "error_confirm": "Bekräfta att du har säkerhetskopierat återställningsfrasen.",
+            "description": "Master Key låter dig interagera med olika protokoll som: Nostr, baslager av Bitcoin eller LNURL-Auth."
           },
           "backup": {
-            "title": "Säkerhetskopiera din hemliga nyckel",
-            "save": "Spara hemlig nyckel",
-            "button": "Säkerhetskopiera hemlig nyckel",
+            "title": "Säkerhetskopiera din återställningsfras",
+            "save": "Spara huvudnyckeln",
+            "button": "Visa återställningsfras",
             "protocols": {
               "nostr": "Nostr"
             },
-            "warning": "⚠️ Glöm inte att säkerhetskopiera din hemliga nyckel! Att inte säkerhetskopiera det kan resultera i att du permanent förlorar åtkomst till din Nostr-identitet eller tillgångar som du hanterar med denna nyckel."
+            "warning": "⚠️ Glöm inte att säkerhetskopiera din återställningsfras! Att inte säkerhetskopiera det kan leda till att du permanent förlorar åtkomst till din huvudnyckel, Nostr-identitet eller tillgångar som du hanterar med denna nyckel.",
+            "description": "Skriv ner återställningsfrasen för att kunna återställa din huvudnyckel på en ny enhet eller om du förlorar åtkomsten till ditt konto.",
+            "items": {
+              "recovery_phrase": "Du kan alltid komma åt din huvudnyckel genom att använda dess återställningsfras.",
+              "words": "Återställningsfrasen består av 12 ord som fungerar som ett lösenord, men det kan inte ändras eller återställas om det tappas bort.",
+              "storage": "Se till att skriva ner det någonstans säkert och privat!"
+            }
           },
           "import": {
-            "title": "Importera en hemlig nyckel",
-            "description": "Använd en befintlig hemlig nyckel för att återställa dina härledda nycklar.",
-            "button": "Importera hemlig nyckel"
+            "title": "Importera din huvudnyckel",
+            "description": "Använd återställningsfrasen för att importera din huvudnyckel till Alby.",
+            "button": "Importera huvudnyckel"
           },
-          "title": "Hemlig nyckel",
+          "title": "🔑 Nyckelhantering",
           "inputs": {
-            "title": "Din hemliga nyckel"
+            "title": "Återställningsfras"
           },
           "lnurl": {
             "title": "Logga in med Lightning",
-            "use_mnemonic": "Använd hemlig nyckel för att logga in i Lightning appar (LNURL Auth)"
-          }
-        },
-        "bitcoin": {
-          "network": {
-            "title": "Bitcoin Nätverket",
-            "subtitle": "Välj nätverk för att härleda adresser och avkoda transaktioner",
-            "options": {
-              "bitcoin": "Mainnet",
-              "testnet": "Testnet",
-              "regtest": "Regtest"
-            }
+            "use_mnemonic": "Använd Master Key för att logga in på lightning appar (LNURL Auth)"
           }
         },
         "remove_secretkey": {
-          "title": "Ta bort hemlig nyckel",
-          "subtitle": "Tar bort den hemliga nyckeln från det här kontot.",
-          "confirm": "Ange namnet på kontot för att bekräfta raderingen av din hemliga nyckel.",
-          "success": "Den hemliga nyckeln har tagits bort."
+          "title": "Ta bort huvudnyckeln",
+          "subtitle": "Tar bort huvudnyckeln från det här kontot.",
+          "success": "Masternyckeln har tagits bort."
+        },
+        "no_mnemonic_hint": "💡 Du har ingen huvudnyckel än. <0>Klicka här</0></div> för att skapa din huvudnyckel och låsa upp dessa inställningar.",
+        "network": {
+          "title": "Nätverk",
+          "subtitle": "Välj nätverk för att härleda adresser och avkoda bitcoin och likvida transaktioner",
+          "options": {
+            "bitcoin": "Mainnet",
+            "testnet": "Testnet",
+            "regtest": "Regtest"
+          }
         }
       }
     },
@@ -688,16 +716,11 @@
       "allow": "Tillåt den här webbplatsen att:",
       "block_and_ignore": "Blockera och ignorera {{host}}",
       "kinds": {
-        "9734": "zap förfrågan",
-        "9735": "zap",
-        "10002": "relä listans metadata",
-        "22242": "klient autentisering",
-        "4": "krypterade direktmeddelanden",
-        "unknown": "nostr event av sort {{kind}}",
         "0": "metadata",
         "1": "kort textanteckning",
         "2": "rekommenderade relä",
         "3": "kontakter",
+        "4": "krypterade direktmeddelanden",
         "5": "radering av händelse",
         "7": "reaktion",
         "8": "badge utmärkelse",
@@ -707,11 +730,16 @@
         "43": "kanal gömda meddelande",
         "44": "kanal tysta användare",
         "1984": "anmäla",
+        "9734": "zap förfrågan",
+        "9735": "zap",
+        "10002": "relä listans metadata",
+        "22242": "klient autentisering",
         "24133": "nostr ansluta",
         "30008": "profil badges",
         "30009": "badge definition",
         "30023": "långformigt innehåll",
-        "30078": "applikationsspecifika data"
+        "30078": "applikationsspecifika data",
+        "unknown": "nostr event av sort {{kind}}"
       },
       "view_details": "Visa detaljer",
       "hide_details": "Göm detaljer",
@@ -827,11 +855,6 @@
       "go": "Gå till ditt Alby konto →",
       "instructions1": "För att ta emot bitcoin via en bitcoin adress, logga in på ditt <0>Alby-konto</0> på getalby.com"
     },
-    "confirm_get_address": {
-      "title": "Få adress",
-      "heading": "Den här webbplatsen ber dig att läsa:",
-      "content": "Din Bitcoin-mottagningsadress"
-    },
     "scan_qrcode": {
       "title": "Väntar på att skanna"
     },
@@ -848,6 +871,33 @@
       "actions": {
         "withdraw": "Ta ut"
       }
+    },
+    "confirm_sign_pset": {
+      "title": "Signera",
+      "allow_sign": "Denna webbplats ber dig att underteckna en Liquid transaktion:",
+      "view_details": "Visa detaljer",
+      "hide_details": "Dölj detaljer",
+      "view_raw_transaction": "Visa obearbetad transaktion (Base64)",
+      "hide_raw_transaction": "Göm obearbetad transaktion (Base64)",
+      "inputs": "Ingångar",
+      "outputs": "Utgångar",
+      "amount": "{{amount}} {{ticker}}"
+    },
+    "bitcoin": {
+      "confirm_get_address": {
+        "title": "Hämta Adress"
+      },
+      "allow": "Tillåt den här webbplatsen att:",
+      "allow_sign": "Tillåt {{host}} att signera:",
+      "block_and_ignore": "Blockera och ignorera {{host}}",
+      "block_added": "Lade till {{host}} till blockeringslistan, ladda om webbplatsen."
+    },
+    "liquid": {
+      "title": "Liquid",
+      "allow": "Tillåt den här webbplatsen att:",
+      "allow_sign": "Tillåt {{host}} att signera:",
+      "block_and_ignore": "Blockera och ignorera {{host}}",
+      "block_added": "Lade till {{host}} till blockeringslistan, ladda om webbplatsen."
     }
   },
   "common": {
@@ -970,9 +1020,6 @@
         "podcast": "Podcast"
       },
       "open_location": "Öppna websida"
-    },
-    "confirm_or_cancel": {
-      "only_trusted": "Anslut endast till tillförlitliga webbplatser."
     },
     "budget_control": {
       "remember": {
@@ -1126,6 +1173,16 @@
       "keysend": "Skicka en betalning till en annan nod.",
       "checkmessage": "Verifiera att signaturen genererades av en given nod.",
       "listforwards": "Lista alla htlcs som har försökt vidarebefordras."
+    },
+    "webln": {
+      "getbalance": "Läs saldot på ditt konto."
+    },
+    "bitcoin": {
+      "getaddress": "Läs din Bitcoin-mottagningsadress."
+    },
+    "liquid": {
+      "getaddress": "Läs din Liquid-mottagningsadress.",
+      "signschnorr": "Skriv under meddelandet med din nyckel."
     }
   }
 }

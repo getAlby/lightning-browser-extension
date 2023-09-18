@@ -273,11 +273,11 @@ function getConnectorRoutes(): ConnectorRoute[] {
 }
 
 function renderRoutes(routes: (ChildRoute | ConnectorRoute)[]) {
-  return routes.map((route: ChildRoute | ConnectorRoute) => {
+  return routes.map((route: ChildRoute | ConnectorRoute, index: number) => {
     if ("children" in route && route.children) {
       if ("element" in route && route.element) {
         return (
-          <Route key={route.path} path={route.path}>
+          <Route key={`${route.path}-${index}`} path={route.path}>
             <Route index element={route.element} />
             {renderRoutes(route.children)}
           </Route>
@@ -291,7 +291,7 @@ function renderRoutes(routes: (ChildRoute | ConnectorRoute)[]) {
         if (indexRouteIndex !== -1) {
           indexRoute = route.children.splice(indexRouteIndex, 1)[0];
           return (
-            <Route key={route.path} path={route.path}>
+            <Route key={`${route.path}-${index}`} path={route.path}>
               <Route index element={indexRoute.element} />
               {renderRoutes(route.children)}
             </Route>
@@ -300,7 +300,11 @@ function renderRoutes(routes: (ChildRoute | ConnectorRoute)[]) {
       }
     } else {
       return (
-        <Route key={route.path} path={route.path} element={route.element} />
+        <Route
+          key={`${route.path}-${index}`}
+          path={route.path}
+          element={route.element}
+        />
       );
     }
   });

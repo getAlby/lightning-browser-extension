@@ -341,7 +341,6 @@
           "private_key": {
             "title": "Gérez votre clé",
             "subtitle": "Collez votre clé privée ou générez-en une nouvelle. Assurez-vous de sauvegarder votre clé privée avant d'en générer une nouvelle. <0>En savoir plus »</0>",
-            "warning": "Veuillez entrer le nom du compte pour confirmer la suppression de la clé privée :",
             "success": "Clé privée cryptée et enregistrée avec succès.",
             "successfully_removed": "Clé privée supprimée avec succès.",
             "label": "Clé privée",
@@ -368,8 +367,7 @@
         },
         "remove": {
           "title": "Supprimer ce compte",
-          "subtitle": "Tous les quotas liés seront supprimés. S'il vous plaît soyez certain.",
-          "confirm": "Voulez-vous vraiment supprimer le compte : {{name}} ?\nÇa ne peut pas être annulé. Si vous avez utilisé ce compte pour vous connecter à des sites Web, vous risquez de perdre l'accès à ceux-ci."
+          "subtitle": "Tous les quotas liés seront supprimés. S'il vous plaît soyez certain."
         },
         "actions": {
           "remove_account": "Supprimer le compte",
@@ -757,9 +755,6 @@
         "podcast": "Podcast"
       },
       "open_location": "Ouvrir le site Web"
-    },
-    "confirm_or_cancel": {
-      "only_trusted": "Connectez-vous uniquement aux sites auxquels vous faites confiance."
     },
     "budget_control": {
       "remember": {

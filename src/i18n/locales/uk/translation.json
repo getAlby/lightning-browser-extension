@@ -341,7 +341,6 @@
           "private_key": {
             "title": "",
             "subtitle": "",
-            "warning": "",
             "success": "",
             "successfully_removed": "",
             "label": ""
@@ -367,8 +366,7 @@
         },
         "remove": {
           "title": "",
-          "subtitle": "",
-          "confirm": ""
+          "subtitle": ""
         },
         "actions": {
           "remove_account": "",
@@ -751,9 +749,6 @@
         "podcast": ""
       },
       "open_location": ""
-    },
-    "confirm_or_cancel": {
-      "only_trusted": ""
     },
     "budget_control": {
       "remember": {

@@ -9,6 +9,8 @@ import LNURLAuth from "@screens/LNURLAuth";
 import LNURLChannel from "@screens/LNURLChannel";
 import LNURLPay from "@screens/LNURLPay";
 import LNURLWithdraw from "@screens/LNURLWithdraw";
+import LiquidConfirmGetAddress from "@screens/Liquid/ConfirmGetAddress";
+import ConfirmSignPset from "@screens/Liquid/ConfirmSignPset";
 import MakeInvoice from "@screens/MakeInvoice";
 import NostrConfirm from "@screens/Nostr/Confirm";
 import NostrConfirmGetPublicKey from "@screens/Nostr/ConfirmGetPublicKey";
@@ -16,10 +18,12 @@ import NostrConfirmSignMessage from "@screens/Nostr/ConfirmSignMessage";
 import NostrConfirmSignSchnorr from "@screens/Nostr/ConfirmSignSchnorr";
 import Unlock from "@screens/Unlock";
 import { HashRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+import AlbyLogo from "~/app/components/AlbyLogo";
+import Toaster from "~/app/components/Toast/Toaster";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
-import ConfirmGetAddress from "~/app/screens/ConfirmGetAddress";
+import BitcoinConfirmGetAddress from "~/app/screens/Bitcoin/ConfirmGetAddress";
+import Onboard from "~/app/screens/Onboard/Prompt";
 import type { NavigationState, OriginData } from "~/types";
 
 // Parse out the parameters from the querystring.
@@ -77,12 +81,28 @@ function Prompt() {
               element={<Enable origin={navigationState.origin as OriginData} />} // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
             />
             <Route
+              path="public/liquid/enable"
+              element={<Enable origin={navigationState.origin as OriginData} />} // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
+            />
+            <Route
               path="public/nostr/enable"
               element={<Enable origin={navigationState.origin as OriginData} />} // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
             />
             <Route
               path="public/webbtc/enable"
               element={<Enable origin={navigationState.origin as OriginData} />} // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
+            />
+            <Route
+              path="public/webbtc/confirmGetAddress"
+              element={<BitcoinConfirmGetAddress />}
+            />
+            <Route
+              path="public/liquid/confirmGetAddress"
+              element={<LiquidConfirmGetAddress />}
+            />
+            <Route
+              path="public/liquid/confirmSignPset"
+              element={<ConfirmSignPset />}
             />
             <Route path="public/nostr/confirm" element={<NostrConfirm />} />
             <Route
@@ -107,7 +127,10 @@ function Prompt() {
             <Route path="confirmKeysend" element={<ConfirmKeysend />} />
             <Route path="confirmSignMessage" element={<ConfirmSignMessage />} />
             <Route path="confirmAddAccount" element={<ConfirmAddAccount />} />
-            <Route path="confirmGetAddress" element={<ConfirmGetAddress />} />
+            <Route path="public/nostr/onboard" element={<Onboard />} />
+            <Route path="public/liquid/onboard" element={<Onboard />} />
+            <Route path="public/webbtc/onboard" element={<Onboard />} />
+            <Route path="public/webln/onboard" element={<Onboard />} />
             <Route
               path="public/confirmRequestPermission"
               element={<ConfirmRequestPermission />}
@@ -118,7 +141,7 @@ function Prompt() {
             element={
               <>
                 <Unlock />
-                <ToastContainer autoClose={10000} hideProgressBar={true} />
+                <Toaster />
               </>
             }
           />
@@ -131,8 +154,11 @@ function Prompt() {
 const Layout = () => {
   return (
     <>
-      <ToastContainer autoClose={10000} hideProgressBar={true} />
-      <div className="px-4 py-2 justify-end bg-white flex border-b border-gray-200 dark:bg-surface-02dp dark:border-neutral-500">
+      <Toaster />
+      <div className="px-4 py-2 justify-between items-center bg-white flex border-b border-gray-200 dark:bg-surface-02dp dark:border-neutral-500 gap-5">
+        <div className="w-24 shrink-0">
+          <AlbyLogo />
+        </div>
         <AccountMenu showOptions={false} />
       </div>
 
