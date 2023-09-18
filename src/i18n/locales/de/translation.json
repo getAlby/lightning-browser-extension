@@ -583,14 +583,6 @@
         "no_mnemonic_hint": "💡 Du hast noch keinen Hauptschlüssel. <0>Klicken Sie hier</0></div>, um deinen Hauptschlüssel zu erstellen und diese Einstellungen freizuschalten."
       }
     },
-    "enable": {
-      "allow": "Erlaube diese Webseite zu:",
-      "title": "Verbinden",
-      "request1": "Genehmigung für Transaktionen anfordern",
-      "request2": "Fordere deine Rechnungen und Lightning Informationen an",
-      "block_and_ignore": "Blockieren und Ignorieren von {{host}}",
-      "block_added": "Hinzugefügt {{host}} zur Blocklist, bitte Website neu laden."
-    },
     "receive": {
       "amount": {
         "placeholder": "Betrag in Satoshi...",
@@ -602,16 +594,13 @@
       },
       "title": "Empfangen",
       "actions": {
-        "create_invoice": "Rechnung erstellen",
-        "copy_lightning_address": "Lightning Adresse kopieren"
+        "create_invoice": "Rechnung erstellen"
       },
       "description": {
         "label": "Beschreibung",
         "placeholder": "Zum Beispiel: Wer schickt diese Zahlung?"
       },
-      "success": "Zahlung erhalten!",
-      "receive_via_bitcoin_address": "Empfangen über Bitcoin Adresse",
-      "redeem_lnurl": "LNURL einlösen"
+      "success": "Zahlung erhalten!"
     },
     "publishers": {
       "publisher": {
