@@ -202,14 +202,6 @@
       },
       "title": "บัญชี"
     },
-    "enable": {
-      "allow": "อณุญาติเว็บไซต์นี้เพื่อ:",
-      "request1": "ขออนุมัติการทำธุรกรรม",
-      "request2": "ขอ invoices และข้อมูล lightning",
-      "block_and_ignore": "บล็อกและเพิกเฉยต่อ {{host}}",
-      "block_added": "เพื่ม {{host}} เข้าสู่แบล็คลิส โปรดรีเฟรชหน้าเว็บใหม่",
-      "title": "เชื่อมต่อ"
-    },
     "unlock": {
       "unlock_to_continue": "ปลดล็อคเพื่อไปต่อ",
       "unlock_password": "รหัสผ่านปลดล็อคของคุณ",
@@ -374,16 +366,13 @@
       }
     },
     "receive": {
-      "receive_via_bitcoin_address": "รับด้วย address บิตคอยน์",
       "payment": {
         "status": "ตรวจสถานะการชำระเงิน",
         "waiting": "กำลังรอการชำระเงิน…"
       },
-      "redeem_lnurl": "รับด้วย LNURL",
       "title": "รับ",
       "actions": {
-        "create_invoice": "สร้าง Invoice",
-        "copy_lightning_address": "คัดลอก Lightning Address"
+        "create_invoice": "สร้าง Invoice"
       },
       "amount": {
         "label": "จำนวน",
@@ -713,12 +702,6 @@
         "rest_url": {
           "label": "lndconnect REST URL",
           "placeholder": "lndconnect://yournode:8080?..."
-        }
-      },
-      "bitcoin_beach": {
-        "title": "Bitcoin Beach Wallet",
-        "page": {
-          "title": "เชื่อมต่อกับ <0>Bitcoin Beach Wallet</0>"
         }
       }
     },
