@@ -376,14 +376,6 @@
         "add_account": ""
       }
     },
-    "enable": {
-      "title": "",
-      "allow": "",
-      "request1": "",
-      "request2": "",
-      "block_and_ignore": "",
-      "block_added": ""
-    },
     "unlock": {
       "unlock_to_continue": "",
       "unlock_password": "",
