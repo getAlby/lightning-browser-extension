@@ -1,6 +1,7 @@
 import getPublicKey from "~/extension/background-script/actions/nostr/getPublicKey";
 
 import decryptOrPrompt from "./decryptOrPrompt";
+import enable from "./enable";
 import encryptOrPrompt from "./encryptOrPrompt";
 import generatePrivateKey from "./generatePrivateKey";
 import getPrivateKey from "./getPrivateKey";
@@ -13,6 +14,7 @@ import signSchnorrOrPrompt from "./signSchnorrOrPrompt";
 
 export {
   decryptOrPrompt,
+  enable,
   encryptOrPrompt,
   generatePrivateKey,
   getPrivateKey,

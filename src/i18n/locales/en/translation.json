@@ -218,10 +218,10 @@
           "placeholder": "your-node-onion-address:port"
         }
       },
-      "bitcoin_beach": {
-        "title": "Bitcoin Beach Wallet",
+      "blink": {
+        "title": "Blink Wallet",
         "page": {
-          "title": "Connect to <0>Bitcoin Beach Wallet</0>"
+          "title": "Connect to <0>Blink Wallet</0>"
         }
       },
       "bitcoin_jungle": {
@@ -528,13 +528,27 @@
         "add_account": "Add account"
       }
     },
-    "enable": {
-      "title": "Connect",
-      "allow": "Allow this website to:",
-      "request1": "Request approval for transactions",
-      "request2": "Request invoices and lightning information",
-      "block_and_ignore": "Block and ignore {{host}}",
-      "block_added": "Added {{host}} to the blocklist, please reload the website."
+    "webln_enable": {
+      "title": "Connect to WebLN",
+
+      "request2": "Request invoices and lightning information"
+    },
+    "alby_enable": {
+      "title": "Connect to Alby",
+      "request2": "Request invoices and alby information"
+    },
+    "nostr_enable": {
+      "title": "Connect to Nostr",
+      "request1": "Request to read your Nostr public key",
+      "request2": "Sign events using your Nostr private key"
+    },
+    "liquid_enable": {
+      "title": "Connect to Liquid",
+      "request2": "Request invoices and liquid information"
+    },
+    "webbtc_enable": {
+      "title": "Connect to WebBTC",
+      "request2": "Request invoices and liquid information"
     },
     "unlock": {
       "unlock_to_continue": "Unlock to continue",
@@ -1038,6 +1052,12 @@
       "between": "between {{min}} and {{max}}",
       "lessThanOrEqual": "≤ {{max}}",
       "greaterOrEqual": "≥ {{min}}"
+    },
+    "enable": {
+      "allow": "Allow this website to:",
+      "block_added": "Added {{host}} to the blocklist, please reload the website.",
+      "request1": "Request approval for transactions",
+      "block_and_ignore": "Block and ignore {{host}}"
     }
   },
   "components": {
