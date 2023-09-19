@@ -90,7 +90,7 @@ function Receive() {
                       {!auth.accountLoading && auth.account ? (
                         <Avatar
                           size={40}
-                          className="border-4 border-white rounded-full absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10"
+                          className="border-4 border-white rounded-full absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 bg-white"
                           url={auth.account.avatarUrl}
                           name={auth.account.id}
                         />
