@@ -308,8 +308,6 @@
       "recent_transactions": "Seneste transaktioner",
       "allowance_view": {
         "recent_transactions": "Seneste transaktioner",
-        "allowance": "Pulje",
-        "sats_used": "brugte sats",
         "no_transactions": "Endnu ingen transaktioner på <0>{{navn}}</0>."
       },
       "default_view": {
@@ -376,14 +374,6 @@
       "actions": {
         "add_account": "Tilføj konto"
       }
-    },
-    "enable": {
-      "title": "Opret forbindelse",
-      "allow": "Tillad denne hjemmeside at:",
-      "request1": "Anmod om godkendelse af transaktioner",
-      "request2": "Anmod om faktura- og lightningoplysninger",
-      "block_and_ignore": "Bloker og ignorer {{vært}}",
-      "block_added": "Føjet {{vært}} til blokeringslisten, indlæs hjemmesiden igen."
     },
     "unlock": {
       "unlock_to_continue": "Lås op for at fortsætte",
@@ -784,12 +774,10 @@
       }
     },
     "publishers_table": {
-      "payments": "betalinger",
-      "used": "brugt"
+      "payments": "betalinger"
     },
     "badge": {
       "label": {
-        "active": "AKTIV",
         "auth": "LOG IND"
       }
     }

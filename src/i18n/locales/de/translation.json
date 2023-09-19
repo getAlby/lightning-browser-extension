@@ -415,10 +415,13 @@
         "no_incoming_transactions": "Noch keine eingehenden Transaktionen für dieses Konto."
       },
       "allowance_view": {
-        "sats_used": "verwendete Sats",
         "no_transactions": "Noch keine Transaktionen auf <0>{{name}}</0>.",
         "recent_transactions": "Jüngste Transaktionen",
-        "allowance": "Erlaubnis"
+        "sats": "sats",
+        "budget_spent": "Verwendete Mittel",
+        "total_spent": "Insgesamt ausgegeben",
+        "total_payments": "Zahlungen insgesamt",
+        "permissions": "Berechtigungen"
       },
       "actions": {
         "send_satoshis": "⚡️ Satoshis senden ⚡️",
@@ -533,7 +536,8 @@
             "items": {
               "recovery_phrase": "Du kannst jederzeit auf deinen Master Key zugreifen, indem du deine Wiederherstellungsphrase verwendest.",
               "words": "Die Wiederherstellungsphrase besteht aus 12 Wörtern, die wie ein Passwort funktionieren, jedoch nicht geändert oder zurückgesetzt werden können, falls sie verloren gehen.",
-              "storage": "Schreibe sie an einem sicheren und privaten Ort auf!"
+              "storage": "Schreibe sie an einem sicheren und privaten Ort auf!",
+              "keys": "Master Key ermöglicht dir die Interaktion mit verschiedenen Protokollen wie z.B.: Nostr, Liquid oder Basisschicht von Bitcoin."
             },
             "description": "Notiere deine Wiederherstellungsphrase, um deinen Hauptschlüssel auf einem neuen Gerät wiederherstellen zu können oder für den Fall, dass du den Zugriff auf dein Konto verlierst."
           },
@@ -557,6 +561,9 @@
           "lnurl": {
             "title": "Anmeldung mit Lightning",
             "use_mnemonic": "Master Key für die Anmeldung bei Lightning-Anwendungen verwenden (LNURL Auth)"
+          },
+          "new": {
+            "title": "Was ist ein Hauptschlüssel?"
           }
         },
         "remove_secretkey": {
@@ -576,14 +583,6 @@
         "no_mnemonic_hint": "💡 Du hast noch keinen Hauptschlüssel. <0>Klicken Sie hier</0></div>, um deinen Hauptschlüssel zu erstellen und diese Einstellungen freizuschalten."
       }
     },
-    "enable": {
-      "allow": "Erlaube diese Webseite zu:",
-      "title": "Verbinden",
-      "request1": "Genehmigung für Transaktionen anfordern",
-      "request2": "Fordere deine Rechnungen und Lightning Informationen an",
-      "block_and_ignore": "Blockieren und Ignorieren von {{host}}",
-      "block_added": "Hinzugefügt {{host}} zur Blocklist, bitte Website neu laden."
-    },
     "receive": {
       "amount": {
         "placeholder": "Betrag in Satoshi...",
@@ -595,16 +594,13 @@
       },
       "title": "Empfangen",
       "actions": {
-        "create_invoice": "Rechnung erstellen",
-        "copy_lightning_address": "Lightning Adresse kopieren"
+        "create_invoice": "Rechnung erstellen"
       },
       "description": {
         "label": "Beschreibung",
         "placeholder": "Zum Beispiel: Wer schickt diese Zahlung?"
       },
-      "success": "Zahlung erhalten!",
-      "receive_via_bitcoin_address": "Empfangen über Bitcoin Adresse",
-      "redeem_lnurl": "LNURL einlösen"
+      "success": "Zahlung erhalten!"
     },
     "publishers": {
       "publisher": {
@@ -941,7 +937,8 @@
     },
     "publishers_table": {
       "payments": "Zahlungen",
-      "used": "gebraucht"
+      "budget": "Haushalt",
+      "total": "insgesamt"
     },
     "toasts": {
       "connection_error": {
@@ -971,7 +968,7 @@
     },
     "allowance_menu": {
       "edit_allowance": {
-        "title": "Präferenzen bearbeiten",
+        "title": "Einstellungen der Website",
         "screen_reader": "Zulässigkeitsoptionen"
       },
       "enable_login": {
@@ -979,11 +976,12 @@
         "subtitle": "Automatisches Einloggen ohne Bestätigung, wenn die Website dazu auffordert."
       },
       "edit_permissions": "Berechtigungen bearbeiten",
-      "hint": "Dadurch wird das aktuelle Budget zurückgesetzt",
+      "hint": "Die Änderung dieser Einstellung setzt das aktuelle Budget zurück.",
       "new_budget": {
-        "label": "Neues Budget"
+        "label": "Budget für Ein-Klick-Zahlungen",
+        "link_label": "Festlegen eines Budgets für One-Click-Zahlungen"
       },
-      "confirm_delete": "Bist du dir sicher, dass du diese Website löschen willst?"
+      "confirm_delete": "Bist du dir sicher, dass du die Verbindung zu dieser Website unterbrechen willst?"
     },
     "qrcode_scanner": {
       "actions": {
@@ -1019,9 +1017,9 @@
     },
     "badge": {
       "label": {
-        "active": "AKTIV",
         "auth": "LOGIN",
-        "imported": "EINGEFÜHRT"
+        "imported": "EINGEFÜHRT",
+        "budget": "BUDGET"
       }
     },
     "transaction_list": {
@@ -1079,7 +1077,8 @@
       "copy_clipboard": "In die Zwischenablage kopieren",
       "paste": "Einfügen",
       "paste_clipboard": "Einfügen aus der Zwischenablage",
-      "review": "Überprüfung"
+      "review": "Überprüfung",
+      "disconnect": "Trenne die Verbindung"
     },
     "discover": "Entdecken",
     "errors": {

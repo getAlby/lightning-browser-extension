@@ -253,8 +253,6 @@
       "recent_transactions": "Viimeaikaiset tapahtumat",
       "allowance_view": {
         "recent_transactions": "Viimeaikaiset tapahtumat",
-        "allowance": "Korvaus",
-        "sats_used": "sats käytetty",
         "no_transactions": "Ei vielä tapahtumia <0>{{name}}</0>:lla."
       },
       "default_view": {
@@ -267,13 +265,6 @@
       "actions": {
         "add_account": "Lisää tili"
       }
-    },
-    "enable": {
-      "title": "Yhdistä",
-      "allow": "Salli {{host}} tähän:",
-      "request1": "Pyydä hyväksyntää tapahtumille",
-      "request2": "Pyydä laskuja ja Lightning-tietoja",
-      "block_and_ignore": "Estä ja jätä huomioimatta {{host}}"
     },
     "unlock": {
       "unlock_to_continue": "Avaa lukitus jatkaaksesi",
@@ -628,13 +619,7 @@
       }
     },
     "publishers_table": {
-      "payments": "maksut",
-      "used": "käytetty"
-    },
-    "badge": {
-      "label": {
-        "active": "TOIMIVA"
-      }
+      "payments": "maksut"
     }
   },
   "permissions": {}

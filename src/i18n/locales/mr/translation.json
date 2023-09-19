@@ -308,8 +308,6 @@
       "recent_transactions": "अलीकडचे व्यवहार",
       "allowance_view": {
         "recent_transactions": "अलीकडचे व्यवहार",
-        "allowance": "भत्ता",
-        "sats_used": "sats वापरले",
         "no_transactions": "अद्याप <0>{{name}}</0> वर कोणतेही व्यवहार नाहीत."
       },
       "default_view": {
@@ -372,14 +370,6 @@
       "actions": {
         "add_account": "खाते जोडा"
       }
-    },
-    "enable": {
-      "title": "जोडणे",
-      "allow": "या वेबसाइटला परवानगी द्या:",
-      "request1": "व्यवहारांना मंजुरीची विनंती करा",
-      "request2": "इंव्हॉइस आणि Lightning माहितीची विनंती करा",
-      "block_and_ignore": "{{host}} ला अवरोधित करा आणि दुर्लक्ष करा",
-      "block_added": "ब्लॉकलिस्टमध्ये {{होस्ट}} जोडले, कृपया वेबसाइट रीलोड करा."
     },
     "unlock": {
       "unlock_to_continue": "चालू ठेवण्यासाठी अनलॉक करा",
