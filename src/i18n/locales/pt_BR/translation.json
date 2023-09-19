@@ -334,7 +334,8 @@
             "label": "Chave privada Nostr",
             "subtitle": "Cole sua chave privada Nostr ou gere uma nova. <0>Saiba mais »</0>",
             "success": "Chave privada Nostr criptografada e salva com sucesso.",
-            "failed_to_remove": "O nome da conta inserido não está correto, sua chave privada Nostr antiga foi restaurada."
+            "failed_to_remove": "O nome da conta inserido não está correto, sua chave privada Nostr antiga foi restaurada.",
+            "warning": "Por favor, insira o nome da conta para confirmar a exclusão de sua chave privada nostr:\n\n{{ name }}"
           },
           "public_key": {
             "label": "Chave pública Nostr"
@@ -392,7 +393,8 @@
         "remove": {
           "title": "Remover esta conta",
           "error": "O nome da conta inserido não corresponde.",
-          "subtitle": "Remove todos os limites de gastos, dados de pagamento e chaves associadas à esta conta."
+          "subtitle": "Remove todos os limites de gastos, dados de pagamento e chaves associadas à esta conta.",
+          "confirm": "Por favor, insira o nome da conta para confirmar a exclusão:\n\n{{ name }}\n\n ⚠️ Por favor, insira o nome da conta para confirmar a exclusão. Todas as chaves associadas (Chave mestra, Nostr, etc) serão excluídas se você continuar. Certifique-se de ter feito backup das chaves, não há outra maneira de restaurá-las."
         },
         "actions": {
           "remove_account": "Remover conta",
@@ -451,7 +453,8 @@
         "remove_secretkey": {
           "title": "Remover chave mestra",
           "success": "Chave mestra removida com sucesso.",
-          "subtitle": "Remove a chave mestra desta conta."
+          "subtitle": "Remove a chave mestra desta conta.",
+          "confirm": "Por favor, insira o nome da conta para confirmar a exclusão de sua chave mestra:\n\n{{ name }}"
         },
         "network": {
           "title": "Rede",
@@ -603,7 +606,19 @@
     "receive": {
       "title": "Receber",
       "actions": {
-        "create_invoice": "Gerar fatura"
+        "create_invoice": "Gerar fatura",
+        "redeem": {
+          "description": "Receba bitcoin usando um código LNURL",
+          "title": "Resgatar"
+        },
+        "invoice": {
+          "title": "Fatura relâmpago",
+          "description": "Solicite pagamentos instantâneos e de valores específicos"
+        },
+        "bitcoin_address": {
+          "description": "Receba via endereço bitcoin usando um serviço de trocas",
+          "title": "Endereço bitcoin"
+        }
       },
       "amount": {
         "label": "Quantia a receber",
@@ -888,7 +903,23 @@
       "amount": {
         "label": "Quantia (sats)"
       },
-      "service_unavailable": "Serviço temporariamente indisponível. Tente novamente em alguns minutos."
+      "service_unavailable": "Serviço temporariamente indisponível. Tente novamente em alguns minutos.",
+      "provider": {
+        "label": "Serviço provedor de trocas"
+      },
+      "time_estimate": "ℹ️ As transações geralmente são recebidas dentro de 10 a 30 minutos."
+    },
+    "onboard": {
+      "request2": "Você ainda não configurou suas chaves",
+      "request3": "A configuração é rápida e fácil",
+      "title": "Configure suas chaves",
+      "actions": {
+        "start_setup": "Iniciar configuração"
+      }
+    },
+    "nostr_enable": {
+      "request2": "Assinar eventos usando sua chave privada Nostr",
+      "request1": "Solicitar a leitura de sua chave pública Nostr"
     }
   },
   "common": {
@@ -934,7 +965,8 @@
       "paste_clipboard": "Colar da área de transferência",
       "download": "Baixar",
       "copy_clipboard": "Copiar para área de transferência",
-      "disconnect": "Desconectar"
+      "disconnect": "Desconectar",
+      "copied_to_clipboard": "Copiado para a área de transferência"
     },
     "errors": {
       "connection_failed": "Falha na conexão",
@@ -971,7 +1003,13 @@
       "nativelnd": "LND (usando Tor)"
     },
     "pasted": "Colado!",
-    "or": "ou"
+    "or": "ou",
+    "enable": {
+      "block_added": "{{host}} adicionado à lista de bloqueio, recarregue o site.",
+      "request1": "Solicitar aprovação para transações",
+      "allow": "Permitir este site:",
+      "block_and_ignore": "Bloquear e ignorar {{host}}"
+    }
   },
   "components": {
     "allowance_menu": {
