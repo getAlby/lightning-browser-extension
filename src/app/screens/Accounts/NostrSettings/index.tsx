@@ -57,7 +57,7 @@ function NostrSettings() {
           : ""
       );
     } catch (e) {
-      if (e instanceof Error) console.error(e.message);
+      console.error(e);
     }
   }, [nostrPrivateKey, t]);
 
