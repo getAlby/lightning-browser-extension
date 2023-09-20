@@ -21,6 +21,7 @@ interface AccountContextType {
     currency?: AccountInfo["currency"];
     avatarUrl?: AccountInfo["avatarUrl"];
     connectorType?: AccountInfo["connectorType"];
+    lightningAddress?: AccountInfo["lightningAddress"];
   } | null;
   balancesDecorated: {
     fiatBalance: string;
