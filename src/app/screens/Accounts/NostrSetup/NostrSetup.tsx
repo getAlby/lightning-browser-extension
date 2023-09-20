@@ -5,13 +5,15 @@ import {
   TwoKeysIcon,
 } from "@bitcoin-design/bitcoin-icons-react/outline";
 import Container from "@components/Container";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import CardButton from "~/app/components/CardButton";
 import CardButtonGroup from "~/app/components/CardButton/Group";
 import { ContentBox } from "~/app/components/ContentBox";
 import Hyperlink from "~/app/components/Hyperlink";
+import toast from "~/app/components/Toast";
+import api from "~/common/lib/api";
 
 function NostrSetup() {
   const { t } = useTranslation("translation", {
@@ -19,6 +21,22 @@ function NostrSetup() {
   });
   const navigate = useNavigate();
   const [step, setStep] = useState<"start" | "import">("start");
+  const { id } = useParams() as { id: string };
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const account = await api.getAccount(id);
+        if (account.nostrEnabled) {
+          // do not allow user to setup nostr if they already have a key
+          navigate(`/accounts/${id}`);
+        }
+      } catch (e) {
+        console.error(e);
+        if (e instanceof Error) toast.error(`Error: ${e.message}`);
+      }
+    })();
+  }, [id, navigate]);
 
   return (
     <div>

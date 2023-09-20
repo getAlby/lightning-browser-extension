@@ -733,7 +733,7 @@
         "create_invoice": "Create Invoice",
         "invoice": {
           "title": "Lightning invoice",
-          "description": "Request instant and specific amount payments"
+          "description": "Request instant and specific amount bitcoin payments"
         },
         "bitcoin_address": {
           "title": "Bitcoin address",
@@ -741,7 +741,7 @@
         },
         "redeem": {
           "title": "Redeem",
-          "description": "Withdraw a bitcoin voucher via LNURL code"
+          "description": "Withdraw a bitcoin voucher instantly via an LNURL code"
         }
       },
       "amount": {
