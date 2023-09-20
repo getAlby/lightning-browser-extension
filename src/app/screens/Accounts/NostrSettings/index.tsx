@@ -47,27 +47,6 @@ function NostrSettings() {
     fetchData();
   }, [fetchData]);
 
-  useEffect(() => {
-    try {
-      // TODO: is there a way this can be moved to the background script and use the Nostr object?
-      // NOTE: it is done this way to show the user the new public key before saving
-      setNostrPublicKey(
-        nostrPrivateKey
-          ? nostr.derivePublicKey(nostr.normalizeToHex(nostrPrivateKey))
-          : ""
-      );
-    } catch (e) {
-      if (e instanceof Error)
-        toast.error(
-          <p>
-            {t("nostr.errors.failed_to_load")}
-            <br />
-            {e.message}
-          </p>
-        );
-    }
-  }, [nostrPrivateKey, t]);
-
   function onCancel() {
     // go to account settings
     navigate(`/accounts/${id}`);
@@ -88,38 +67,56 @@ function NostrSettings() {
 
   // TODO: simplify this method - would be good to have a dedicated "remove nostr key" button
   async function handleSaveNostrPrivateKey() {
-    if (
-      currentPrivateKey &&
-      prompt(
-        t("nostr.private_key.warning", { name: account?.name })
-      )?.toLowerCase() !== account?.name?.toLowerCase()
-    ) {
-      toast.error(t("nostr.private_key.failed_to_remove"));
-      return;
-    }
-
     try {
-      if (nostrPrivateKey) {
-        await api.nostr.setPrivateKey(id, nostrPrivateKey);
-      } else {
-        await api.nostr.removePrivateKey(id);
+      // TODO: is there a way this can be moved to the background script and use the Nostr object?
+      // NOTE: it is done this way to show the user the new public key before saving
+      setNostrPublicKey(
+        nostrPrivateKey
+          ? nostr.derivePublicKey(nostr.normalizeToHex(nostrPrivateKey))
+          : ""
+      );
+      if (
+        currentPrivateKey &&
+        prompt(
+          t("nostr.private_key.warning", { name: account?.name })
+        )?.toLowerCase() !== account?.name?.toLowerCase()
+      ) {
+        toast.error(t("nostr.private_key.failed_to_remove"));
+        return;
       }
 
-      toast.success(
-        t(
-          nostrPrivateKey
-            ? "nostr.private_key.success"
-            : "nostr.private_key.successfully_removed"
-        )
-      );
-    } catch (e) {
-      console.error(e);
-      if (e instanceof Error) {
-        toast.error(e.message);
+      try {
+        if (nostrPrivateKey) {
+          await api.nostr.setPrivateKey(id, nostrPrivateKey);
+        } else {
+          await api.nostr.removePrivateKey(id);
+        }
+
+        toast.success(
+          t(
+            nostrPrivateKey
+              ? "nostr.private_key.success"
+              : "nostr.private_key.successfully_removed"
+          )
+        );
+      } catch (e) {
+        console.error(e);
+        if (e instanceof Error) {
+          toast.error(e.message);
+        }
       }
+      // go to account settings
+      navigate(`/accounts/${id}`);
+    } catch (e) {
+      if (e instanceof Error)
+        toast.error(
+          <p>
+            {t("nostr.errors.failed_to_load")}
+            <br />
+            {e.message}
+          </p>
+        );
     }
-    // go to account settings
-    navigate(`/accounts/${id}`);
   }
 
   return !account ? (
