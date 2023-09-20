@@ -17,7 +17,6 @@ import SkeletonLoader from "~/app/components/SkeletonLoader";
 import toast from "~/app/components/Toast";
 import { useAccount } from "~/app/context/AccountContext";
 import { useInvoices } from "~/app/hooks/useInvoices";
-import { useLightningAddress } from "~/app/hooks/useLightningAddress";
 import { useTransactions } from "~/app/hooks/useTransactions";
 import { PublisherLnData } from "~/app/screens/Home/PublisherLnData";
 import api from "~/common/lib/api";
@@ -37,10 +36,12 @@ const DefaultView: FC<Props> = (props) => {
   const { t } = useTranslation("translation", { keyPrefix: "home" });
   const { t: tCommon } = useTranslation("common");
   const { t: tComponents } = useTranslation("components");
-  const { loadingLightningAddress, lightningAddress } = useLightningAddress();
+
   const navigate = useNavigate();
 
   const { account, balancesDecorated, accountLoading } = useAccount();
+
+  const lightningAddress = account?.lightningAddress || "";
 
   const [isBlockedUrl, setIsBlockedUrl] = useState<boolean>(false);
 
@@ -118,7 +119,7 @@ const DefaultView: FC<Props> = (props) => {
       )}
       <div className="p-4">
         <BalanceBox />
-        {(loadingLightningAddress || lightningAddress) && (
+        {(accountLoading || lightningAddress) && (
           <div className="flex justify-center">
             <a
               className="cursor-pointer flex flex-row items-center mb-6 px-3 py-1 bg-white dark:bg-surface-01dp border border-gray-200 dark:border-neutral-700 text-gray-800 dark:text-white rounded-full text-xs font-medium hover:border-primary hover:bg-yellow-50 dark:hover:border-primary dark:hover:dark:bg-surface-16dp transition-all duration-250 select-none"
@@ -127,13 +128,13 @@ const DefaultView: FC<Props> = (props) => {
                 toast.success(tCommon("actions.copied_to_clipboard"));
               }}
             >
-              {loadingLightningAddress && (
+              {accountLoading && (
                 <>
                   ⚡️&nbsp;
                   <SkeletonLoader className="w-32" />
                 </>
               )}
-              {!loadingLightningAddress && (
+              {!accountLoading && (
                 <>
                   <span>⚡️ {lightningAddress}</span>
                 </>
