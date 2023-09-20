@@ -458,7 +458,8 @@
             "success": "Der private Schlüssel von Nostr wurde erfolgreich verschlüsselt und gespeichert.",
             "successfully_removed": "Der private Schlüssel von Nostr wurde erfolgreich entfernt.",
             "label": "Nostr Privater Schlüssel",
-            "failed_to_remove": "Der eingegebene Kontoname stimmt nicht überein, dein alter privater Nostr-Schlüssel wurde wiederhergestellt."
+            "failed_to_remove": "Der eingegebene Kontoname stimmt nicht überein, dein alter privater Nostr-Schlüssel wurde wiederhergestellt.",
+            "warning": "Bitte gebe den Namen des Kontos ein, um die Löschung des privaten Schlüssels von nostr zu bestätigen:\n\n{{ Name }}"
           },
           "public_key": {
             "label": "Nostr Öffentlicher Schlüssel"
@@ -516,7 +517,8 @@
         "remove": {
           "title": "Dieses Konto entfernen",
           "subtitle": "Entfernt alle Zulagen, Zahlungsdaten und Schlüssel, die mit diesem Konto verbunden sind.",
-          "error": "Der eingegebene Kontoname stimmte nicht überein."
+          "error": "Der eingegebene Kontoname stimmte nicht überein.",
+          "confirm": "Bitte gebe den Namen des Kontos ein, um die Löschung deines Kontos zu bestätigen:\n\n{{ Name }}\n\n⚠️ Wenn du fortfährst, werden alle zugehörigen Schlüssel (Master Key, Nostr, etc.) gelöscht. Bitte vergewissern dich, dass du eine Sicherungskopie erstellt hast, denn es gibt keine andere Möglichkeit, sie wiederherzustellen."
         },
         "actions": {
           "remove_account": "Konto entfernen",
@@ -569,7 +571,8 @@
         "remove_secretkey": {
           "title": "Hauptschlüssel entfernen",
           "subtitle": "Entfernt den Hauptschlüssel von diesem Konto.",
-          "success": "Der Hauptschlüssel wurde erfolgreich entfernt."
+          "success": "Der Hauptschlüssel wurde erfolgreich entfernt.",
+          "confirm": "Bitte gebe den Namen des Kontos ein, um die Löschung deines Hauptschlüssels zu bestätigen:\n\n{{ Name }}"
         },
         "network": {
           "subtitle": "Wähle ein Netzwerk zur Ableitung von Adressen und zur Entschlüsselung von Bitcoin- und Liquid-Transaktionen",
@@ -594,7 +597,19 @@
       },
       "title": "Empfangen",
       "actions": {
-        "create_invoice": "Rechnung erstellen"
+        "create_invoice": "Rechnung erstellen",
+        "redeem": {
+          "description": "Einen Bitcoin-Gutschein über den LNURL-Code abheben",
+          "title": "Einlösen"
+        },
+        "invoice": {
+          "title": "Lightning Rechnung",
+          "description": "Anforderung von Sofortzahlungen und bestimmten Beträgen"
+        },
+        "bitcoin_address": {
+          "description": "Empfang über eine Bitcoin-Adresse mit Hilfe eines Tauschdienstes",
+          "title": "Bitcoin-Adresse"
+        }
       },
       "description": {
         "label": "Beschreibung",
@@ -920,6 +935,36 @@
         "label": "Anbieter austauschen"
       },
       "view_on_explorer": "Ansicht auf mempool explorer"
+    },
+    "webln_enable": {
+      "title": "Mit WebLN verbinden",
+      "request2": "Rechnungen und Lightning Informationen anfordern"
+    },
+    "onboard": {
+      "request2": "Du hast deinen Schlüssel noch nicht eingerichtet",
+      "request1": "Diese Website erfordert eine wichtige Interaktion",
+      "request3": "Die Einrichtung ist schnell und einfach",
+      "title": "Einrichten Ihrer Keys",
+      "actions": {
+        "start_setup": "Start Setup"
+      }
+    },
+    "liquid_enable": {
+      "request2": "Rechnungen von Liquid anfordern",
+      "title": "Mit Liquid verbinden"
+    },
+    "nostr_enable": {
+      "title": "Mit Nostr verbinden",
+      "request2": "Signiere deine Ereignisse mit deinem privaten Nostr-Schlüssel",
+      "request1": "Anfrage zum Lesen deines öffentlichen Nostr-Schlüssels"
+    },
+    "webbtc_enable": {
+      "request2": "Rechnungen und Liquidinformationen anfordern",
+      "title": "Mit WebBTC verbinden"
+    },
+    "alby_enable": {
+      "title": "Mit Alby verbinden",
+      "request2": "Rechnungen und Alby Informationen anfordern"
     }
   },
   "components": {
@@ -1078,7 +1123,8 @@
       "paste": "Einfügen",
       "paste_clipboard": "Einfügen aus der Zwischenablage",
       "review": "Überprüfung",
-      "disconnect": "Trenne die Verbindung"
+      "disconnect": "Trenne die Verbindung",
+      "copied_to_clipboard": "In die Zwischenablage kopiert"
     },
     "discover": "Entdecken",
     "errors": {
@@ -1110,7 +1156,13 @@
       "eclair": "Eclair"
     },
     "or": "oder",
-    "pasted": "Eingefügt!"
+    "pasted": "Eingefügt!",
+    "enable": {
+      "block_added": "{{host}} zur Blockliste hinzugefügt, bitte lade die Website neu.",
+      "request1": "Genehmigung von Transaktionen beantragen",
+      "allow": "Erlaube dieser Website,:",
+      "block_and_ignore": "Blockieren und Ignorieren von {{host}}"
+    }
   },
   "permissions": {
     "commando": {
