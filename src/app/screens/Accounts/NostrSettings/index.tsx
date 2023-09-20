@@ -49,15 +49,15 @@ function NostrSettings() {
 
   useEffect(() => {
     try {
+      // TODO: is there a way this can be moved to the background script and use the Nostr object?
+      // NOTE: it is done this way to show the user the new public key before saving
       setNostrPublicKey(
         nostrPrivateKey
           ? nostr.derivePublicKey(nostr.normalizeToHex(nostrPrivateKey))
           : ""
       );
     } catch (e) {
-      if (e instanceof Error) {
-        setNostrPublicKey("");
-      }
+      if (e instanceof Error) console.error(e.message);
     }
   }, [nostrPrivateKey, t]);
 
@@ -91,27 +91,26 @@ function NostrSettings() {
       return;
     }
 
-    if (nostr)
-      try {
-        if (nostrPrivateKey) {
-          await api.nostr.setPrivateKey(id, nostrPrivateKey);
-        } else {
-          await api.nostr.removePrivateKey(id);
-        }
-
-        toast.success(
-          t(
-            nostrPrivateKey
-              ? "nostr.private_key.success"
-              : "nostr.private_key.successfully_removed"
-          )
-        );
-      } catch (e) {
-        console.error(e);
-        if (e instanceof Error) {
-          toast.error(e.message);
-        }
+    try {
+      if (nostrPrivateKey) {
+        await api.nostr.setPrivateKey(id, nostrPrivateKey);
+      } else {
+        await api.nostr.removePrivateKey(id);
       }
+
+      toast.success(
+        t(
+          nostrPrivateKey
+            ? "nostr.private_key.success"
+            : "nostr.private_key.successfully_removed"
+        )
+      );
+    } catch (e) {
+      console.error(e);
+      if (e instanceof Error) {
+        toast.error(e.message);
+      }
+    }
     // go to account settings
     navigate(`/accounts/${id}`);
   }
@@ -125,11 +124,7 @@ function NostrSettings() {
       <form
         onSubmit={(e: FormEvent) => {
           e.preventDefault();
-          if (!nostrPublicKey && nostrPrivateKey) {
-            toast.error(<p>{t("nostr.errors.failed_to_load")}</p>);
-          } else {
-            handleSaveNostrPrivateKey();
-          }
+          handleSaveNostrPrivateKey();
         }}
       >
         <Container maxWidth="sm">
