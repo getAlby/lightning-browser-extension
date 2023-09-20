@@ -139,8 +139,8 @@ const AllowanceView: FC<Props> = (props) => {
             />
           </div>
         )}
-        <h2 className="mb-2 text-lg text-gray-900 font-bold dark:text-white">
-          {t("allowance_view.recent_transactions")}
+        <h2 className="mb-2 text-lg text-gray-900 font-bold dark:text-white text-center">
+          {t("allowance_view.latest_transactions")}
         </h2>
 
         {isLoadingTransactions && (

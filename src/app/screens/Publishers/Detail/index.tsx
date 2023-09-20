@@ -85,8 +85,8 @@ function PublisherDetail() {
       {allowance && (
         <Container>
           <div>
-            <h2 className="mt-[34px] mb-4 text-lg text-gray-900 font-bold dark:text-white">
-              {t("allowance_view.recent_transactions")}
+            <h2 className="mt-[34px] mb-4 text-lg text-gray-900 font-bold dark:text-white text-center">
+              {t("allowance_view.latest_transactions")}
             </h2>
             {transactions && transactions?.length > 0 ? (
               <TransactionsTable transactions={transactions} />

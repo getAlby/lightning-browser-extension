@@ -188,8 +188,8 @@ const DefaultView: FC<Props> = (props) => {
 
         {!isLoadingTransactions && (
           <div>
-            <h2 className="mb-2 text-lg lg:text-xl text-gray-900 font-bold dark:text-white">
-              {t("default_view.recent_transactions")}
+            <h2 className="mb-2 text-lg lg:text-xl text-gray-900 font-bold dark:text-white text-center">
+              {t("default_view.latest_transactions")}
             </h2>
 
             <Tab.Group>
