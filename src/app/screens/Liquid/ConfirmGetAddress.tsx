@@ -55,57 +55,58 @@ function LiquidConfirmGetAddress() {
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <ScreenHeader title={t("title")} />
       <Container justifyBetween maxWidth="sm">
-        <form onSubmit={handleSubmit}>
-          <div>
-            <PublisherCard
-              title={origin.name}
-              image={origin.icon}
-              url={origin.host}
-              isSmall={false}
-            />
+        <div>
+          <PublisherCard
+            title={origin.name}
+            image={origin.icon}
+            url={origin.host}
+            isSmall={false}
+          />
 
-            <div className="dark:text-white pt-6 mb-4">
-              <p className="mb-2">{t("allow")}</p>
-              <div className="mb-2 flex items-center">
-                <CheckIcon className="w-5 h-5 mr-2" />
-                <p className="dark:text-white">
-                  {tPermissions("liquid.getaddress")}
-                </p>
-              </div>
+          <div className="dark:text-white pt-6 mb-4">
+            <p className="mb-2">{t("allow")}</p>
+            <div className="mb-2 flex items-center">
+              <CheckIcon className="w-5 h-5 mr-2" />
+              <p className="dark:text-white">
+                {tPermissions("liquid.getaddress")}
+              </p>
             </div>
           </div>
-        </form>
-        <div className="text-center flex flex-col">
-          <div className="flex items-center mb-4">
-            <Checkbox
-              id="remember_permission"
-              name="remember_permission"
-              checked={rememberPermission}
-              onChange={(event) => {
-                setRememberPermission(event.target.checked);
-              }}
-            />
-            <label
-              htmlFor="remember_permission"
-              className="cursor-pointer ml-2 block text-sm text-gray-900 font-medium dark:text-white"
-            >
-              {tCommon("actions.remember")}
-            </label>
-          </div>
-          <ConfirmOrCancel
-            disabled={loading}
-            loading={loading}
-            label={tCommon("actions.confirm")}
-            onCancel={reject}
-          />
-          <a
-            className="mt-4 underline text-sm text-gray-400 mx-4 overflow-hidden text-ellipsis whitespace-nowrap"
-            href="#"
-            onClick={block}
-          >
-            {t("block_and_ignore", { host: origin.host })}
-          </a>
         </div>
+
+        <form onSubmit={handleSubmit}>
+          <div className="text-center flex flex-col">
+            <div className="flex items-center mb-4">
+              <Checkbox
+                id="remember_permission"
+                name="remember_permission"
+                checked={rememberPermission}
+                onChange={(event) => {
+                  setRememberPermission(event.target.checked);
+                }}
+              />
+              <label
+                htmlFor="remember_permission"
+                className="cursor-pointer ml-2 block text-sm text-gray-900 font-medium dark:text-white"
+              >
+                {tCommon("actions.remember")}
+              </label>
+            </div>
+            <ConfirmOrCancel
+              disabled={loading}
+              loading={loading}
+              label={tCommon("actions.confirm")}
+              onCancel={reject}
+            />
+            <a
+              className="mt-4 underline text-sm text-gray-400 mx-4 overflow-hidden text-ellipsis whitespace-nowrap"
+              href="#"
+              onClick={block}
+            >
+              {t("block_and_ignore", { host: origin.host })}
+            </a>
+          </div>
+        </form>
       </Container>
     </div>
   );
