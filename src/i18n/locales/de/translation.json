@@ -599,12 +599,12 @@
       "actions": {
         "create_invoice": "Rechnung erstellen",
         "redeem": {
-          "description": "Einen Bitcoin-Gutschein über den LNURL-Code abheben",
+          "description": "Einen Bitcoin-Gutschein sofort über einen LNURL-Code abheben",
           "title": "Einlösen"
         },
         "invoice": {
           "title": "Lightning Rechnung",
-          "description": "Anforderung von Sofortzahlungen und bestimmten Beträgen"
+          "description": "Sofortige Bitcoin Zahlungen mit einem bestimmten Betrag anfordern"
         },
         "bitcoin_address": {
           "description": "Empfang über eine Bitcoin-Adresse mit Hilfe eines Tauschdienstes",
