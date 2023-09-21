@@ -4,14 +4,9 @@ import TransactionsTable from "@components/TransactionsTable";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useAccount } from "~/app/context/AccountContext";
-import { useInvoices } from "~/app/hooks/useInvoices";
 import { useTransactions } from "~/app/hooks/useTransactions";
 
-type Props = {
-  type: "incoming" | "outgoing";
-};
-
-function Transactions({ type }: Props) {
+function Transactions() {
   const { t } = useTranslation("translation", {
     keyPrefix: "transactions",
   });
@@ -21,27 +16,12 @@ function Transactions({ type }: Props) {
   const { transactions, isLoadingTransactions, loadTransactions } =
     useTransactions();
 
-  const { isLoadingInvoices, incomingTransactions, loadInvoices } =
-    useInvoices();
-
-  const isLoading =
-    accountLoading ||
-    (type === "incoming" ? isLoadingInvoices : isLoadingTransactions);
-  const listItems = type === "incoming" ? incomingTransactions : transactions;
+  const isLoading = accountLoading || isLoadingTransactions;
+  const listItems = transactions;
 
   useEffect(() => {
-    if (type === "incoming") {
-      loadInvoices();
-    } else {
-      if (account?.id) loadTransactions(account.id);
-    }
-  }, [
-    type,
-    account?.id,
-    balancesDecorated?.accountBalance,
-    loadTransactions,
-    loadInvoices,
-  ]);
+    if (account?.id) loadTransactions(account.id);
+  }, [account?.id, balancesDecorated?.accountBalance, loadTransactions]);
 
   return (
     <Container>
@@ -50,7 +30,7 @@ function Transactions({ type }: Props) {
       </h2>
 
       <p className="mb-6 text-gray-500 dark:text-neutral-500">
-        {t(`description.${type}`)}
+        {t("description")}
       </p>
 
       {isLoading ? (

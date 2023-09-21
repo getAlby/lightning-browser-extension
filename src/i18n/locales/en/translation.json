@@ -366,8 +366,8 @@
         "latest_transactions": "Latest Transactions",
         "is_blocked_hint": "Alby is currently disabled on {{host}}",
         "block_removed": "Enabled {{host}}. Please reload the website.",
-        "no_outgoing_transactions": "No outgoing transactions for this account yet.",
-        "no_incoming_transactions": "No incoming transactions for this account yet.",
+        "no_transactions": "No transactions for this account yet.",
+
         "all_transactions_link": "See all transactions"
       }
     },
@@ -954,10 +954,8 @@
     },
     "transactions": {
       "title": "Transactions",
-      "description": {
-        "outgoing": "Outgoing transactions for this account",
-        "incoming": "Incoming transactions for this account"
-      },
+      "description": "Transactions for this account",
+
       "list_empty": "No transactions available yet."
     },
     "onboard": {

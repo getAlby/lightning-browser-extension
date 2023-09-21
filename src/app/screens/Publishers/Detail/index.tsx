@@ -91,7 +91,7 @@ function PublisherDetail() {
             {transactions && transactions?.length > 0 ? (
               <TransactionsTable transactions={transactions} />
             ) : (
-              <p className="text-gray-500 dark:text-neutral-400">
+              <p className="text-gray-500 dark:text-neutral-400 text-center">
                 <Trans
                   i18nKey={"allowance_view.no_transactions"}
                   t={t}

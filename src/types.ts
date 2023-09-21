@@ -692,6 +692,7 @@ export interface RequestInvoiceArgs {
 }
 
 export type Transaction = {
+  timestamp: number;
   amount?: string;
   boostagram?: Invoice["boostagram"];
   createdAt?: string;

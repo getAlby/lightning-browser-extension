@@ -11,6 +11,7 @@ export const convertPaymentToTransaction = (
   date: dayjs(+payment.createdAt).fromNow(),
   title: payment.name || payment.description,
   publisherLink: publisherLink || payment.location,
+  timestamp: parseInt(payment.createdAt),
 });
 
 export const convertPaymentsToTransactions = (

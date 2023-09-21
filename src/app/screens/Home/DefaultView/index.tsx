@@ -5,7 +5,6 @@ import {
 import Button from "@components/Button";
 import Hyperlink from "@components/Hyperlink";
 import Loading from "@components/Loading";
-import Tab from "@components/Tab";
 import TransactionsTable from "@components/TransactionsTable";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -16,7 +15,7 @@ import BalanceBox from "~/app/components/BalanceBox";
 import SkeletonLoader from "~/app/components/SkeletonLoader";
 import toast from "~/app/components/Toast";
 import { useAccount } from "~/app/context/AccountContext";
-import { useInvoices } from "~/app/hooks/useInvoices";
+
 import { useTransactions } from "~/app/hooks/useTransactions";
 import { PublisherLnData } from "~/app/screens/Home/PublisherLnData";
 import api from "~/common/lib/api";
@@ -35,7 +34,7 @@ export type Props = {
 const DefaultView: FC<Props> = (props) => {
   const { t } = useTranslation("translation", { keyPrefix: "home" });
   const { t: tCommon } = useTranslation("common");
-  const { t: tComponents } = useTranslation("components");
+
 
   const navigate = useNavigate();
 
@@ -48,12 +47,7 @@ const DefaultView: FC<Props> = (props) => {
   const { transactions, isLoadingTransactions, loadTransactions } =
     useTransactions();
 
-  const { isLoadingInvoices, incomingTransactions, loadInvoices } =
-    useInvoices();
-
-  const isLoadingOutgoing = accountLoading || isLoadingTransactions;
-  const isLoadingIncoming = accountLoading || isLoadingInvoices;
-
+  const isLoading = accountLoading || isLoadingTransactions;
   const itemsLimit = 8;
 
   useEffect(() => {
@@ -62,15 +56,6 @@ const DefaultView: FC<Props> = (props) => {
     account?.id,
     balancesDecorated?.accountBalance,
     loadTransactions,
-    itemsLimit,
-  ]);
-
-  useEffect(() => {
-    loadInvoices(itemsLimit);
-  }, [
-    account?.id,
-    balancesDecorated?.accountBalance,
-    loadInvoices,
     itemsLimit,
   ]);
 
@@ -180,71 +165,30 @@ const DefaultView: FC<Props> = (props) => {
           </div>
         )}
 
-        {isLoadingTransactions && (
+        {isLoading && (
           <div className="flex justify-center">
             <Loading />
           </div>
         )}
 
-        {!isLoadingTransactions && (
+        {!isLoading && (
           <div>
             <h2 className="mb-2 text-lg lg:text-xl text-gray-900 font-bold dark:text-white text-center">
               {t("default_view.latest_transactions")}
             </h2>
 
-            <Tab.Group>
-              <Tab.List>
-                {[
-                  tComponents("transaction_list.tabs.outgoing"),
-                  tComponents("transaction_list.tabs.incoming"),
-                ].map((category) => (
-                  <Tab key={category} label={category} />
-                ))}
-              </Tab.List>
-
-              <Tab.Panels>
-                <Tab.Panel>
-                  <>
-                    <TransactionsTable
-                      transactions={transactions}
-                      loading={isLoadingOutgoing}
-                      noResultMsg={t("default_view.no_outgoing_transactions")}
-                    />
-                    {!isLoadingOutgoing && transactions.length > 0 && (
-                      <div className="mt-5 text-center">
-                        <Hyperlink
-                          onClick={() =>
-                            handleViewAllLink("/transactions/outgoing")
-                          }
-                        >
-                          {t("default_view.all_transactions_link")}
-                        </Hyperlink>
-                      </div>
-                    )}
-                  </>
-                </Tab.Panel>
-                <Tab.Panel>
-                  <>
-                    <TransactionsTable
-                      transactions={incomingTransactions}
-                      loading={isLoadingIncoming}
-                      noResultMsg={t("default_view.no_incoming_transactions")}
-                    />
-                    {!isLoadingIncoming && incomingTransactions.length > 0 && (
-                      <div className="mt-5 text-center">
-                        <Hyperlink
-                          onClick={() =>
-                            handleViewAllLink("/transactions/incoming")
-                          }
-                        >
-                          {t("default_view.all_transactions_link")}
-                        </Hyperlink>
-                      </div>
-                    )}
-                  </>
-                </Tab.Panel>
-              </Tab.Panels>
-            </Tab.Group>
+            <TransactionsTable
+              transactions={transactions}
+              loading={isLoading}
+              noResultMsg={t("default_view.no_transactions")}
+            />
+            {!isLoading && transactions.length > 0 && (
+              <div className="mt-5 text-center">
+                <Hyperlink onClick={() => handleViewAllLink("/transactions")}>
+                  {t("default_view.all_transactions_link")}
+                </Hyperlink>
+              </div>
+            )}
           </div>
         )}
       </div>

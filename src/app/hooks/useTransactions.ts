@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { useCallback, useState } from "react";
 import toast from "~/app/components/Toast";
 import { useSettings } from "~/app/context/SettingsContext";
@@ -17,16 +18,38 @@ export const useTransactions = () => {
           accountId,
           limit,
         });
+        const fetchInvoice = await api.getInvoices({ isSettled: true, limit });
+
+        const invoices: Transaction[] = fetchInvoice.invoices.map(
+          (invoice) => ({
+            ...invoice,
+            title: invoice.memo,
+            description: invoice.memo,
+            date: dayjs(invoice.settleDate).fromNow(),
+            timestamp: invoice.settleDate,
+          })
+        );
+
         const _transactions: Transaction[] =
           await convertPaymentsToTransactions(payments);
 
-        for (const transaction of _transactions) {
+        const finalList: Transaction[] = [..._transactions, ...invoices];
+
+        for (const transaction of finalList) {
           transaction.totalAmountFiat = settings.showFiat
             ? await getFormattedFiat(transaction.totalAmount)
             : "";
         }
 
-        setTransactions(_transactions);
+        // Sort the final list by date in descending order.
+        finalList.sort((a, b) => {
+          const dateA = a.timestamp;
+          const dateB = b.timestamp;
+          return dateB - dateA;
+        });
+
+        setTransactions(finalList);
+
         setIsLoadingTransactions(false);
       } catch (e) {
         console.error(e);
