@@ -1,9 +1,8 @@
 /**
  * Highly inspired by: https://github.com/AryanJ-NYC/bitcoin-conversion
  */
-import i18n from "~/i18n/i18nConfig";
 
-import type { CURRENCIES, ACCOUNT_CURRENCIES } from "../constants";
+import type { ACCOUNT_CURRENCIES, CURRENCIES } from "../constants";
 
 export const numSatsInBtc = 100_000_000;
 
@@ -49,7 +48,5 @@ export const getFormattedSats = (params: {
 }) => {
   const formattedNumber = getFormattedNumber(params);
 
-  return `${formattedNumber} ${i18n.t("common:sats", {
-    count: Number(params.amount),
-  })}`;
+  return `${formattedNumber}`;
 };

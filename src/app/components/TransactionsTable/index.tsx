@@ -22,9 +22,9 @@ export default function TransactionsTable({
   loading = false,
 }: Props) {
   const { getFormattedSats } = useSettings();
-  const { t } = useTranslation("components");
   const [modalOpen, setModalOpen] = useState(false);
   const [transaction, setTransaction] = useState<Transaction | undefined>();
+  const { t: tCommon } = useTranslation("common");
 
   function openDetails(transaction: Transaction) {
     setTransaction(transaction);
@@ -99,14 +99,20 @@ export default function TransactionsTable({
                         "text-sm font-medium",
                         type == "incoming"
                           ? "text-green-600 dark:color-green-400"
-                          : ""
+                          : "text-orange-600 dark:color-orange-400",
+                        "inline"
                       )}
                     >
-                      {type == "outgoing" ? "-" : "+"}
-                      {getFormattedSats(tx.totalAmount)}
+                      {type == "outgoing" ? "-" : "+"}{" "}
+                      {getFormattedSats(tx.totalAmount)}{" "}
+                    </p>
+                    <p className="inline text-gray-600 dark:text-neutral-400">
+                      {tCommon("sats", {
+                        count: Number(tx.totalAmount),
+                      })}
                     </p>
                     {!!tx.totalAmountFiat && (
-                      <p className="text-xs text-gray-600 dark:text-neutral-400">
+                      <p className="text-xs text-gray-400 dark:text-neutral-600">
                         ~{tx.totalAmountFiat}
                       </p>
                     )}
