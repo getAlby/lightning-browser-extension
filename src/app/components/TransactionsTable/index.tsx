@@ -3,6 +3,7 @@ import {
   ArrowUpIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import Loading from "@components/Loading";
+import dayjs from "dayjs";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import Modal from "~/app/components/Modal";
@@ -99,18 +100,18 @@ export default function TransactionsTable({
                         "text-sm font-medium",
                         type == "incoming"
                           ? "text-green-600 dark:color-green-400"
-                          : "text-orange-600 dark:color-orange-400",
-                        "inline"
+                          : "text-orange-600 dark:color-orange-400"
                       )}
                     >
                       {type == "outgoing" ? "-" : "+"}{" "}
-                      {getFormattedSats(tx.totalAmount)}{" "}
+                      {getFormattedSats(tx.totalAmount).replace(/sats?/g, " ")}
+                      <span className=" text-gray-800 dark:text-neutral-400">
+                        {tCommon("sats", {
+                          count: Number(tx.totalAmount),
+                        })}
+                      </span>
                     </p>
-                    <p className="inline text-gray-600 dark:text-neutral-400">
-                      {tCommon("sats", {
-                        count: Number(tx.totalAmount),
-                      })}
-                    </p>
+
                     {!!tx.totalAmountFiat && (
                       <p className="text-xs text-gray-400 dark:text-neutral-600">
                         ~{tx.totalAmountFiat}
@@ -126,7 +127,7 @@ export default function TransactionsTable({
       <Modal
         isOpen={modalOpen}
         close={() => setModalOpen(false)}
-        title={"test"}
+        title={"Transactions"}
       >
         {transaction && (
           <div className="p-3 flex flex-col gap-4 justify-center ">
@@ -134,16 +135,90 @@ export default function TransactionsTable({
               <div className="flex items-center justify-center">
                 {getTransactionType(transaction) == "outgoing" ? (
                   <div className="flex justify-center items-center bg-orange-100 rounded-full p-8">
-                    <ArrowUpIcon className="w-12 h-12 text-orange-400" />
+                    <ArrowUpIcon className="w-8 h-8 text-orange-400" />
                   </div>
                 ) : (
                   <div className="flex justify-center items-center bg-green-100 rounded-full p-8">
-                    <ArrowDownIcon className="w-12 h-12 text-green-400" />
+                    <ArrowDownIcon className="w-8 h-8 text-green-400" />
                   </div>
                 )}
               </div>
+              <h2 className="mt-4 text-md text-gray-900 font-bold dark:text-white text-center">
+                {transaction.type == "received" ? "Received" : "Sent"}
+              </h2>
             </div>
-            <div>details</div>
+            <div className="flex items-center text-center justify-center dark:text-white">
+              <div>
+                <p
+                  className={classNames(
+                    "text-lg font-medium",
+                    transaction.type == "received"
+                      ? "text-green-600 dark:color-green-400"
+                      : "text-orange-600 dark:color-orange-400",
+                    "inline"
+                  )}
+                >
+                  {transaction.type == "sent" ? "-" : "+"}{" "}
+                  {getFormattedSats(transaction.totalAmount).replace(
+                    /sats?/g,
+                    " "
+                  )}
+                  <span className=" text-gray-800 dark:text-neutral-400">
+                    {tCommon("sats", {
+                      count: Number(transaction.amount),
+                    })}
+                  </span>
+                </p>
+
+                {!!transaction.totalAmountFiat && (
+                  <p className="text-sm mt-1 text-gray-400 dark:text-neutral-600">
+                    ~{transaction.totalAmountFiat}
+                  </p>
+                )}
+              </div>
+            </div>
+            <div>
+              <div>
+                <div className="mt-6">
+                  <dl>
+                    <div className="grid grid-cols-3 gap-2 px-0">
+                      <dt className="text-md font-medium leading-6 text-gray-400 dark:text-neutral-600 text-right">
+                        Date & Time
+                      </dt>
+                      <dd className="text-md leading-6  text-gray-900 dark:text-white col-span-2 mt-0 break-all">
+                        {dayjs(transaction.timestamp).format(
+                          "D MMMM YYYY, HH:mm"
+                        )}
+                      </dd>
+                    </div>
+                    <div className="grid grid-cols-3 gap-2 px-0">
+                      <dt className="text-md text-right font-medium leading-6 text-gray-400 dark:text-neutral-600">
+                        Fees
+                      </dt>
+                      <dd className=" text-md leading-6  text-gray-900 dark:text-white col-span-2 mt-0 break-all">
+                        {transaction.totalFees} Sats
+                      </dd>
+                    </div>
+                    <div className="grid grid-cols-3 gap-2 px-0">
+                      <dt className="text-md text-right font-medium leading-6 text-gray-400 dark:text-neutral-600">
+                        Description
+                      </dt>
+                      <dd className=" text-md leading-6  text-gray-900 dark:text-white col-span-2 mt-0 break-all">
+                        {transaction.description}
+                      </dd>
+                    </div>
+                    <div className="grid grid-cols-3 gap-2 px-0">
+                      <dt className="text-md text-right font-medium leading-6 text-gray-400 dark:text-neutral-600">
+                        Preimage
+                      </dt>
+                      <dd className=" text-md leading-6  text-gray-900 dark:text-white col-span-2 mt-0 break-all">
+                        {transaction.preimage}
+                      </dd>
+                    </div>
+                  </dl>
+                </div>
+              </div>
+            </div>
           </div>
         )}
       </Modal>

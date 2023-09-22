@@ -110,19 +110,19 @@ describe("Currency coversion utils", () => {
     test("formats correctly for english", async () => {
       const result = getFormattedSats({ amount: 123456789, locale: "en" });
 
-      expect(result).toBe("123,456,789");
+      expect(result).toBe("123,456,789 sats");
     });
 
     test("formats correctly for spanish", async () => {
       const result = getFormattedSats({ amount: 123456789, locale: "es" });
 
-      expect(result).toBe("123.456.789");
+      expect(result).toBe("123.456.789 sats");
     });
 
     test("falls back to english", async () => {
       const result = getFormattedSats({ amount: 123456789, locale: "" });
 
-      expect(result).toBe("123,456,789");
+      expect(result).toBe("123,456,789 sats");
     });
   });
 });
