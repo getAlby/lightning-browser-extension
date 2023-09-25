@@ -151,7 +151,7 @@ export default function TransactionsTable({
               <div>
                 <p
                   className={classNames(
-                    "text-lg font-medium",
+                    "text-3xl font-medium",
                     transaction.type == "received"
                       ? "text-green-600 dark:color-green-400"
                       : "text-orange-600 dark:color-orange-400",
@@ -171,7 +171,7 @@ export default function TransactionsTable({
                 </p>
 
                 {!!transaction.totalAmountFiat && (
-                  <p className="text-sm mt-1 text-gray-400 dark:text-neutral-600">
+                  <p className="text-md mt-1 text-gray-400 dark:text-neutral-600">
                     ~{transaction.totalAmountFiat}
                   </p>
                 )}
@@ -181,7 +181,7 @@ export default function TransactionsTable({
               <div>
                 <div className="mt-6">
                   <dl>
-                    <div className="grid grid-cols-3 gap-2 px-0">
+                    <div className="grid grid-cols-3 gap-2 p-1">
                       <dt className="text-md font-medium leading-6 text-gray-400 dark:text-neutral-600 text-right">
                         Date & Time
                       </dt>
@@ -191,30 +191,46 @@ export default function TransactionsTable({
                         )}
                       </dd>
                     </div>
-                    <div className="grid grid-cols-3 gap-2 px-0">
-                      <dt className="text-md text-right font-medium leading-6 text-gray-400 dark:text-neutral-600">
-                        Fees
-                      </dt>
-                      <dd className=" text-md leading-6  text-gray-900 dark:text-white col-span-2 mt-0 break-all">
-                        {transaction.totalFees} Sats
-                      </dd>
-                    </div>
-                    <div className="grid grid-cols-3 gap-2 px-0">
-                      <dt className="text-md text-right font-medium leading-6 text-gray-400 dark:text-neutral-600">
-                        Description
-                      </dt>
-                      <dd className=" text-md leading-6  text-gray-900 dark:text-white col-span-2 mt-0 break-all">
-                        {transaction.description}
-                      </dd>
-                    </div>
-                    <div className="grid grid-cols-3 gap-2 px-0">
-                      <dt className="text-md text-right font-medium leading-6 text-gray-400 dark:text-neutral-600">
-                        Preimage
-                      </dt>
-                      <dd className=" text-md leading-6  text-gray-900 dark:text-white col-span-2 mt-0 break-all">
-                        {transaction.preimage}
-                      </dd>
-                    </div>
+                    {transaction.totalFees !== undefined && (
+                      <div className="grid grid-cols-3 gap-2 px-0 p-1">
+                        <dt className="text-md text-right font-medium leading-6 text-gray-400 dark:text-neutral-600">
+                          Fee
+                        </dt>
+                        <dd className=" text-md leading-6  text-gray-900 dark:text-white col-span-2 mt-0 break-all">
+                          {transaction.totalFees} Sats
+                        </dd>
+                      </div>
+                    )}
+                    {transaction.description !== undefined && (
+                      <div className="grid grid-cols-3 gap-2 px-0 p-1">
+                        <dt className="text-md text-right font-medium leading-6 text-gray-400 dark:text-neutral-600">
+                          Description
+                        </dt>
+                        <dd className=" text-md leading-6  text-gray-900 dark:text-white col-span-2 mt-0 break-all">
+                          {transaction.description}
+                        </dd>
+                      </div>
+                    )}
+                    {transaction.type == "sent" && (
+                      <div className="grid grid-cols-3 gap-2 px-0 p-1">
+                        <dt className="text-md text-right font-medium leading-6 text-gray-400 dark:text-neutral-600">
+                          Preimage
+                        </dt>
+                        <dd className=" text-md leading-6  text-gray-900 dark:text-white col-span-2 mt-0 break-all">
+                          {transaction.preimage}
+                        </dd>
+                      </div>
+                    )}
+                    {transaction.type == "sent" && (
+                      <div className="grid grid-cols-3 gap-2 px-0 p-1">
+                        <dt className="text-md text-right font-medium leading-6 text-gray-400 dark:text-neutral-600">
+                          Hash
+                        </dt>
+                        <dd className=" text-md leading-6  text-gray-900 dark:text-white col-span-2 mt-0 break-all">
+                          {transaction.paymentHash}
+                        </dd>
+                      </div>
+                    )}
                   </dl>
                 </div>
               </div>

@@ -698,6 +698,7 @@ export type Transaction = {
   createdAt?: string;
   currency?: string;
   date: string;
+  paymentHash?: string;
   description?: string;
   host?: string;
   id: string;
