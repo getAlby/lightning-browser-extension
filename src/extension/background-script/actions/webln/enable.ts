@@ -16,7 +16,12 @@ const enable = async (message: MessageAllowanceEnable, sender: Sender) => {
     .equalsIgnoreCase(host)
     .first();
 
-  if (isUnlocked && allowance && allowance.enabled) {
+  if (
+    isUnlocked &&
+    allowance &&
+    allowance.enabled &&
+    allowance.enabledFor?.includes("webln")
+  ) {
     return {
       data: { enabled: true },
     };
@@ -38,17 +43,24 @@ const enable = async (message: MessageAllowanceEnable, sender: Sender) => {
           if (!allowance.id) {
             return { data: { error: "id is missing" } };
           }
-          await db.allowances.update(allowance.id, {
-            enabled: true,
-            name: message.origin.name,
-            imageURL: message.origin.icon,
-          });
+          if (allowance.enabledFor) {
+            const updatedEnabledFor = allowance.enabledFor.includes("webln")
+              ? [...allowance.enabledFor]
+              : [...allowance.enabledFor, "webln"];
+            await db.allowances.update(allowance.id, {
+              enabled: true,
+              enabledFor: updatedEnabledFor,
+              name: message.origin.name,
+              imageURL: message.origin.icon,
+            });
+          }
         } else {
           await db.allowances.add({
             host: host,
             name: message.origin.name,
             imageURL: message.origin.icon,
             enabled: true,
+            enabledFor: ["webln"],
             lastPaymentAt: 0,
             totalBudget: 0,
             remainingBudget: 0,

@@ -17,7 +17,13 @@ const enable = async (message: MessageAllowanceEnable, sender: Sender) => {
     .equalsIgnoreCase(host)
     .first();
 
-  if (isUnlocked && allowance && allowance.enabled && account?.mnemonic) {
+  if (
+    isUnlocked &&
+    allowance &&
+    allowance.enabled &&
+    account?.mnemonic &&
+    allowance.enabledFor?.includes("webbtc")
+  ) {
     return {
       data: { enabled: true },
     };
@@ -39,17 +45,24 @@ const enable = async (message: MessageAllowanceEnable, sender: Sender) => {
           if (!allowance.id) {
             return { data: { error: "id is missing" } };
           }
-          await db.allowances.update(allowance.id, {
-            enabled: true,
-            name: message.origin.name,
-            imageURL: message.origin.icon,
-          });
+          if (allowance.enabledFor) {
+            const updatedEnabledFor = allowance.enabledFor.includes("webbtc")
+              ? [...allowance.enabledFor]
+              : [...allowance.enabledFor, "webbtc"];
+            await db.allowances.update(allowance.id, {
+              enabled: true,
+              enabledFor: updatedEnabledFor,
+              name: message.origin.name,
+              imageURL: message.origin.icon,
+            });
+          }
         } else {
           await db.allowances.add({
             host: host,
             name: message.origin.name,
             imageURL: message.origin.icon,
             enabled: true,
+            enabledFor: ["webbtc"],
             lastPaymentAt: 0,
             totalBudget: 0,
             remainingBudget: 0,
