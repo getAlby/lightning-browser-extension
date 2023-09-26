@@ -209,6 +209,26 @@ export default function TransactionsTable({
                         </dd>
                       </div>
                     )}
+                    {transaction.boostagram?.podcast !== undefined && (
+                      <div className="grid grid-cols-3 gap-2 px-0 p-1">
+                        <dt className="text-md text-right font-medium leading-6 text-gray-400 dark:text-neutral-600">
+                          Podcast
+                        </dt>
+                        <dd className=" text-md leading-6  text-gray-900 dark:text-white col-span-2 mt-0 break-all">
+                          {transaction.boostagram?.podcast}
+                        </dd>
+                      </div>
+                    )}
+                    {transaction.boostagram?.episode !== undefined && (
+                      <div className="grid grid-cols-3 gap-2 px-0 p-1">
+                        <dt className="text-md text-right font-medium leading-6 text-gray-400 dark:text-neutral-600">
+                          Episode
+                        </dt>
+                        <dd className=" text-md leading-6  text-gray-900 dark:text-white col-span-2 mt-0 break-all">
+                          {transaction.boostagram.episode}
+                        </dd>
+                      </div>
+                    )}
                     {transaction.description !== undefined && (
                       <div className="grid grid-cols-3 gap-2 px-0 p-1">
                         <dt className="text-md text-right font-medium leading-6 text-gray-400 dark:text-neutral-600">
