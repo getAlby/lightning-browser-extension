@@ -1,11 +1,14 @@
 import {
   ArrowDownIcon,
   ArrowUpIcon,
+  CaretDownIcon,
+  CaretUpIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import Loading from "@components/Loading";
 import dayjs from "dayjs";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import Hyperlink from "~/app/components/Hyperlink";
 import Modal from "~/app/components/Modal";
 import { useSettings } from "~/app/context/SettingsContext";
 import { classNames } from "~/app/utils";
@@ -26,6 +29,7 @@ export default function TransactionsTable({
   const [modalOpen, setModalOpen] = useState(false);
   const [transaction, setTransaction] = useState<Transaction | undefined>();
   const { t: tCommon } = useTranslation("common");
+  const [showMoreFields, setShowMoreFields] = useState(false);
 
   function openDetails(transaction: Transaction) {
     setTransaction(transaction);
@@ -36,6 +40,10 @@ export default function TransactionsTable({
     return [tx.type && "sent", "sending"].includes(tx.type)
       ? "outgoing"
       : "incoming";
+  }
+
+  function toggleShowMoreFields() {
+    setShowMoreFields(!showMoreFields);
   }
 
   return loading ? (
@@ -80,7 +88,7 @@ export default function TransactionsTable({
                           href={tx.publisherLink}
                           rel="noopener noreferrer"
                         >
-                          {tx.title}
+                          {transactionTitle(tx)}
                         </a>
                       ) : (
                         tx.title ||
@@ -211,7 +219,17 @@ export default function TransactionsTable({
                         </dd>
                       </div>
                     )}
-                    {transaction.type == "sent" && (
+                    <div className="flex justify-center mt-4">
+                      <Hyperlink onClick={toggleShowMoreFields}>
+                        {tCommon("actions.more")}{" "}
+                        {showMoreFields ? (
+                          <CaretUpIcon className="h-4 w-4 inline-flex" />
+                        ) : (
+                          <CaretDownIcon className="h-4 w-4 inline-flex" />
+                        )}
+                      </Hyperlink>
+                    </div>
+                    {showMoreFields && transaction.type == "sent" && (
                       <div className="grid grid-cols-3 gap-2 px-0 p-1">
                         <dt className="text-md text-right font-medium leading-6 text-gray-400 dark:text-neutral-600">
                           Preimage
@@ -221,7 +239,7 @@ export default function TransactionsTable({
                         </dd>
                       </div>
                     )}
-                    {transaction.type == "sent" && (
+                    {showMoreFields && transaction.type == "sent" && (
                       <div className="grid grid-cols-3 gap-2 px-0 p-1">
                         <dt className="text-md text-right font-medium leading-6 text-gray-400 dark:text-neutral-600">
                           Hash
@@ -240,4 +258,10 @@ export default function TransactionsTable({
       </Modal>
     </>
   );
+}
+
+function transactionTitle(tx: Transaction) {
+  const title = tx.title;
+
+  if (title) return title;
 }
