@@ -118,7 +118,7 @@ describe("TransactionsTable", () => {
 
     expect(screen.getByText("Alby")).toBeInTheDocument();
     expect(screen.getByText(/5 days ago/)).toBeInTheDocument();
-    expect(await screen.findByText(/- 1,234,000/)).toBeInTheDocument();
+    expect(await screen.findByText(/- 1,234,000 sats/)).toBeInTheDocument();
     expect(await screen.findByText(/~\$241.02/)).toBeInTheDocument();
   });
 
@@ -135,7 +135,7 @@ describe("TransactionsTable", () => {
 
     expect(await screen.findByText("lambo lambo")).toBeInTheDocument();
     expect(await screen.findByText(/4 days ago/)).toBeInTheDocument();
-    expect(await screen.findByText(/\+ 66,666/)).toBeInTheDocument();
+    expect(await screen.findByText(/\+ 66,666 sats/)).toBeInTheDocument();
     expect(await screen.findByText(/~\$13.02/)).toBeInTheDocument();
 
     const disclosureButtons = screen.queryByRole("button");
@@ -155,7 +155,7 @@ describe("TransactionsTable", () => {
 
     expect(screen.getByText("dumplings")).toBeInTheDocument();
     expect(screen.getByText(/5 days ago/)).toBeInTheDocument();
-    expect(await screen.findByText(/\+ 88,888/)).toBeInTheDocument();
+    expect(await screen.findByText(/\+ 88,888 sats/)).toBeInTheDocument();
     expect(await screen.findByText(/~\$17.36/)).toBeInTheDocument();
   });
 });

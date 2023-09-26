@@ -33,22 +33,22 @@ export const useTransactions = () => {
         const _transactions: Transaction[] =
           await convertPaymentsToTransactions(payments);
 
-        const finalList: Transaction[] = [..._transactions, ...invoices];
+        const transactionList: Transaction[] = [..._transactions, ...invoices];
 
-        for (const transaction of finalList) {
+        for (const transaction of transactionList) {
           transaction.totalAmountFiat = settings.showFiat
             ? await getFormattedFiat(transaction.totalAmount)
             : "";
         }
 
         // Sort the final list by date in descending order.
-        finalList.sort((a, b) => {
+        transactionList.sort((a, b) => {
           const dateA = a.timestamp;
           const dateB = b.timestamp;
           return dateB - dateA;
         });
 
-        setTransactions(finalList);
+        setTransactions(transactionList);
 
         setIsLoadingTransactions(false);
       } catch (e) {

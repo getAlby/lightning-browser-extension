@@ -88,7 +88,7 @@ export default function TransactionsTable({
                           href={tx.publisherLink}
                           rel="noopener noreferrer"
                         >
-                          {transactionTitle(tx)}
+                          {tx.title}
                         </a>
                       ) : (
                         tx.title ||
@@ -112,12 +112,7 @@ export default function TransactionsTable({
                       )}
                     >
                       {type == "outgoing" ? "-" : "+"}{" "}
-                      {getFormattedSats(tx.totalAmount).replace(/sats?/g, " ")}
-                      <span className=" text-gray-800 dark:text-neutral-400">
-                        {tCommon("sats", {
-                          count: Number(tx.totalAmount),
-                        })}
-                      </span>
+                      {getFormattedSats(tx.totalAmount)}
                     </p>
 
                     {!!tx.totalAmountFiat && (
@@ -167,15 +162,7 @@ export default function TransactionsTable({
                   )}
                 >
                   {transaction.type == "sent" ? "-" : "+"}{" "}
-                  {getFormattedSats(transaction.totalAmount).replace(
-                    /sats?/g,
-                    " "
-                  )}
-                  <span className=" text-gray-800 dark:text-neutral-400">
-                    {tCommon("sats", {
-                      count: Number(transaction.amount),
-                    })}
-                  </span>
+                  {getFormattedSats(transaction.totalAmount)}
                 </p>
 
                 {!!transaction.totalAmountFiat && (
@@ -278,10 +265,4 @@ export default function TransactionsTable({
       </Modal>
     </>
   );
-}
-
-function transactionTitle(tx: Transaction) {
-  const title = tx.title;
-
-  if (title) return title;
 }
