@@ -15,7 +15,6 @@ import BalanceBox from "~/app/components/BalanceBox";
 import SkeletonLoader from "~/app/components/SkeletonLoader";
 import toast from "~/app/components/Toast";
 import { useAccount } from "~/app/context/AccountContext";
-
 import { useTransactions } from "~/app/hooks/useTransactions";
 import { PublisherLnData } from "~/app/screens/Home/PublisherLnData";
 import api from "~/common/lib/api";
@@ -34,7 +33,6 @@ export type Props = {
 const DefaultView: FC<Props> = (props) => {
   const { t } = useTranslation("translation", { keyPrefix: "home" });
   const { t: tCommon } = useTranslation("common");
-
 
   const navigate = useNavigate();
 
