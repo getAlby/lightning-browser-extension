@@ -18,9 +18,12 @@ export const useTransactions = () => {
           accountId,
           limit,
         });
-        const fetchInvoice = await api.getInvoices({ isSettled: true, limit });
+        const getInvoicesResponse = await api.getInvoices({
+          isSettled: true,
+          limit,
+        });
 
-        const invoices: Transaction[] = fetchInvoice.invoices.map(
+        const invoices: Transaction[] = getInvoicesResponse.invoices.map(
           (invoice) => ({
             ...invoice,
             title: invoice.memo,
