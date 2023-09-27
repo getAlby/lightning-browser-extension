@@ -53,7 +53,7 @@ export class DB extends Dexie {
     });
     this.version(6).stores({
       allowances:
-        "++id,&host,name,imageURL,tag,enabled,&enabledFor,totalBudget,remainingBudget,lastPaymentAt,lnurlAuth,createdAt",
+        "++id,&host,name,imageURL,tag,enabled,*enabledFor,totalBudget,remainingBudget,lastPaymentAt,lnurlAuth,createdAt",
     });
 
     this.on("ready", this.loadFromStorage.bind(this));
