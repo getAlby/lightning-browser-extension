@@ -465,7 +465,7 @@
           },
           "subtitle": "Escolha a rede para gerar endereços e decodificar transações bitcoin e liquid"
         },
-        "no_mnemonic_hint": "💡 Você ainda não tem uma chave mestra. <0>Clique aqui</0></div> para criar sua chave mestra e desbloquear essas configurações."
+        "no_mnemonic_hint": "💡 Você ainda não tem uma chave mestra. <0>Clique aqui</0></div> para gerar sua chave mestra e desbloquear essas configurações."
       }
     },
     "unlock": {
@@ -609,7 +609,7 @@
         "create_invoice": "Gerar fatura",
         "redeem": {
           "description": "Receba bitcoin usando um código LNURL",
-          "title": "Resgatar"
+          "title": "Vale-satoshi"
         },
         "invoice": {
           "title": "Fatura relâmpago",
@@ -843,7 +843,7 @@
       "instructions2": "Seu endereço bitcoin está na página <0>Receber</0>."
     },
     "lnurlredeem": {
-      "title": "Resgatar bitcoin",
+      "title": "Resgatar vale-satoshi",
       "input": {
         "placeholder": "LNURL...",
         "label": "Código LNURL"
