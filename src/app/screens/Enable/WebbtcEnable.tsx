@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import LiquidEnableComponent from "~/app/components/Enable/LiquidEnable";
+import WebbtcEnableComponent from "~/app/components/Enable/WebbtcEnable";
 import Onboard from "~/app/components/onboard";
 import { useAccount } from "~/app/context/AccountContext";
 import api from "~/common/lib/api";
@@ -34,7 +34,7 @@ export default function WebbtcEnable(props: Props) {
   return (
     <>
       {hasMnemonic ? (
-        <LiquidEnableComponent origin={props.origin} />
+        <WebbtcEnableComponent origin={props.origin} />
       ) : (
         <Onboard />
       )}
