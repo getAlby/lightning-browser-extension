@@ -2,18 +2,22 @@ import { useEffect, useState } from "react";
 import LNURLAuthComponent from "~/app/components/LNURLAuth";
 import Onboard from "~/app/components/onboard";
 import { useAccount } from "~/app/context/AccountContext";
+import { isAlbyOAuthAccount } from "~/app/utils";
 import api from "~/common/lib/api";
 
 export default function LNURLAuth() {
   const { account } = useAccount();
   const [hasMnemonic, setHasMnemonic] = useState(false);
+  const [albyOAuthAccount, setAlbyOAuthAccount] = useState(false);
 
   useEffect(() => {
-    async function fetchAccountAndSetComponent() {
+    async function fetchAccountInfo() {
       try {
         const fetchedAccount = await api.getAccount();
+        const connectorType = isAlbyOAuthAccount(fetchedAccount.connectorType);
+        setAlbyOAuthAccount(connectorType);
 
-        if (fetchedAccount.nostrEnabled) {
+        if (fetchedAccount.hasMnemonic) {
           setHasMnemonic(true);
         } else {
           setHasMnemonic(false);
@@ -23,8 +27,12 @@ export default function LNURLAuth() {
       }
     }
 
-    fetchAccountAndSetComponent();
+    fetchAccountInfo();
   }, [account]);
 
-  return <div>{hasMnemonic ? <LNURLAuthComponent /> : <Onboard />}</div>;
+  return (
+    <>
+      {albyOAuthAccount && !hasMnemonic ? <Onboard /> : <LNURLAuthComponent />}
+    </>
+  );
 }

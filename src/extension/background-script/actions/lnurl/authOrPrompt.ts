@@ -10,6 +10,7 @@ import type {
   Sender,
 } from "~/types";
 
+import { isAlbyOAuthAccount } from "~/app/utils";
 import { authFunction } from "./auth";
 
 async function authOrPrompt(
@@ -34,18 +35,24 @@ async function authOrPrompt(
   // If it is locked we must show a prompt to unlock
   const isUnlocked = await state.getState().isUnlocked();
   const account = await state.getState().getAccount();
+  const isAlbyOAuthConnector = isAlbyOAuthAccount(account?.connector);
 
   // check if there is a publisher and lnurlAuth is enabled,
   // otherwise we we prompt the user
-  if (
-    isUnlocked &&
-    allowance &&
-    allowance.enabled &&
-    allowance.lnurlAuth &&
-    account?.mnemonic
-  ) {
-    return await authFunction({ lnurlDetails, origin: message.origin });
+
+  if (isUnlocked && allowance && allowance.enabled && allowance.lnurlAuth) {
+    if (!isAlbyOAuthConnector) {
+      return await authFunction({ lnurlDetails, origin: message.origin });
+    } else if (account?.mnemonic) {
+      return await authFunction({ lnurlDetails, origin: message.origin });
+    } else {
+      authPrompt();
+    }
   } else {
+    authPrompt();
+  }
+
+  async function authPrompt() {
     try {
       const promptMessage = {
         ...message,
