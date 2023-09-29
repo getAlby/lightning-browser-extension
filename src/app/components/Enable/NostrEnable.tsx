@@ -2,7 +2,7 @@ import { CheckIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
 import PublisherCard from "@components/PublisherCard";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import toast from "~/app/components/Toast";
@@ -14,14 +14,13 @@ type Props = {
   origin: OriginData;
 };
 function NostrEnableComponent(props: Props) {
-  const hasFetchedData = useRef(false);
   const [loading, setLoading] = useState(false);
   const { t } = useTranslation("translation", {
-    keyPrefix: "enable",
+    keyPrefix: "nostr_enable",
   });
   const { t: tCommon } = useTranslation("common");
 
-  const enable = useCallback(() => {
+  const enable = () => {
     try {
       setLoading(true);
       msg.reply({
@@ -34,7 +33,7 @@ function NostrEnableComponent(props: Props) {
     } finally {
       setLoading(false);
     }
-  }, [tCommon]);
+  };
 
   function reject(event: React.MouseEvent<HTMLAnchorElement>) {
     event.preventDefault();
@@ -47,31 +46,9 @@ function NostrEnableComponent(props: Props) {
       domain: props.origin.domain,
       host: props.origin.host,
     });
-    alert(t("block_added", { host: props.origin.host }));
+    alert(tCommon("enable.block_added", { host: props.origin.host }));
     msg.error(USER_REJECTED_ERROR);
   }
-
-  useEffect(() => {
-    async function getAllowance() {
-      try {
-        const allowance = await msg.request("getAllowance", {
-          domain: props.origin.domain,
-          host: props.origin.host,
-        });
-        if (allowance && allowance.enabled) {
-          enable();
-        }
-      } catch (e) {
-        if (e instanceof Error) console.error(e.message);
-      }
-    }
-
-    // Run once.
-    if (!hasFetchedData.current) {
-      getAllowance();
-      hasFetchedData.current = true;
-    }
-  }, [enable, props.origin.domain, props.origin.host]);
 
   return (
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
@@ -86,7 +63,7 @@ function NostrEnableComponent(props: Props) {
           />
 
           <div className="dark:text-white pt-6">
-            <p className="mb-2">{t("allow")}</p>
+            <p className="mb-2">{tCommon("enable.allow")}</p>
 
             <div className="mb-2 flex items-center">
               <CheckIcon className="w-5 h-5 mr-2" />
@@ -111,7 +88,7 @@ function NostrEnableComponent(props: Props) {
             href="#"
             onClick={block}
           >
-            {t("block_and_ignore", { host: props.origin.host })}
+            {tCommon("enable.block_and_ignore", { host: props.origin.host })}
           </a>
         </div>
       </Container>

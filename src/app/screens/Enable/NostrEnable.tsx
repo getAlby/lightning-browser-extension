@@ -11,33 +11,33 @@ type Props = {
 
 export default function NostrEnable(props: Props) {
   const { account } = useAccount();
-  const [hasNostrKeys, setHasNostrkeys] = useState(false);
+  const [hasNostrKeys, setHasNostrKeys] = useState(false);
 
   useEffect(() => {
-    async function fetchAccountAndSetComponent() {
+    async function fetchAccountInfo() {
       try {
         const fetchedAccount = await api.getAccount();
 
         if (fetchedAccount.nostrEnabled) {
-          setHasNostrkeys(true);
+          setHasNostrKeys(true);
         } else {
-          setHasNostrkeys(false);
+          setHasNostrKeys(false);
         }
       } catch (e) {
         console.error(e);
       }
     }
 
-    fetchAccountAndSetComponent();
-  }, [account]);
+    fetchAccountInfo();
+  }, [props.origin, account]);
 
   return (
-    <div>
+    <>
       {hasNostrKeys ? (
         <NostrEnableComponent origin={props.origin} />
       ) : (
         <Onboard />
       )}
-    </div>
+    </>
   );
 }

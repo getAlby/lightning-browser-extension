@@ -145,10 +145,10 @@
           "placeholder": "seu-endereço-servidor-onion:porta"
         }
       },
-      "bitcoin_beach": {
-        "title": "Carteira Bitcoin Beach",
+      "blink": {
+        "title": "Carteira Blink",
         "page": {
-          "title": "Conecte-se na <0>Carteira Bitcoin Beach</0>"
+          "title": "Conecte-se na <0>Carteira Blink</0>"
         }
       },
       "bitcoin_jungle": {
@@ -295,9 +295,12 @@
       "recent_transactions": "Transações recentes",
       "allowance_view": {
         "recent_transactions": "Transações recentes",
-        "allowance": "Limite de gastos",
-        "sats_used": "sats usados",
-        "no_transactions": "Sem transações em <0>{{name}}</0>."
+        "no_transactions": "Sem transações em <0>{{name}}</0>.",
+        "sats": "sats",
+        "budget_spent": "Limite de gastos",
+        "total_spent": "Total gasto",
+        "total_payments": "Pagamentos realizados",
+        "permissions": "Permissões"
       },
       "default_view": {
         "recent_transactions": "Transações recentes",
@@ -316,7 +319,7 @@
       "account_view": {
         "export": {
           "title": "Conectar sua carteira de celular",
-          "your_ln_address": "Seu Endereço Relâmpago:",
+          "your_ln_address": "Seu endereço relâmpago:",
           "screen_reader": "Exportar detalhes da conta",
           "waiting": "aguardando dados LndHub...",
           "export_uri": "Credenciais URI LNDHub",
@@ -331,7 +334,8 @@
             "label": "Chave privada Nostr",
             "subtitle": "Cole sua chave privada Nostr ou gere uma nova. <0>Saiba mais »</0>",
             "success": "Chave privada Nostr criptografada e salva com sucesso.",
-            "failed_to_remove": "O nome da conta inserido não está correto, sua chave privada Nostr antiga foi restaurada."
+            "failed_to_remove": "O nome da conta inserido não está correto, sua chave privada Nostr antiga foi restaurada.",
+            "warning": "Por favor, insira o nome da conta para confirmar a exclusão de sua chave privada nostr:\n\n{{ name }}"
           },
           "public_key": {
             "label": "Chave pública Nostr"
@@ -389,7 +393,8 @@
         "remove": {
           "title": "Remover esta conta",
           "error": "O nome da conta inserido não corresponde.",
-          "subtitle": "Remove todos os limites de gastos, dados de pagamento e chaves associadas à esta conta."
+          "subtitle": "Remove todos os limites de gastos, dados de pagamento e chaves associadas à esta conta.",
+          "confirm": "Por favor, insira o nome da conta para confirmar a exclusão:\n\n{{ name }}\n\n ⚠️ Por favor, insira o nome da conta para confirmar a exclusão. Todas as chaves associadas (Chave mestra, Nostr, etc) serão excluídas se você continuar. Certifique-se de ter feito backup das chaves, não há outra maneira de restaurá-las."
         },
         "actions": {
           "remove_account": "Remover conta",
@@ -424,7 +429,8 @@
             "items": {
               "recovery_phrase": "Você sempre pode acessar sua chave mestra usando sua frase de recuperação.",
               "words": "A frase de recuperação é um conjunto de 12 palavras que funciona como uma senha, porém não pode ser alterada ou redefinida caso seja perdida.",
-              "storage": "Certifique-se de anotá-la em algum local seguro e privado!"
+              "storage": "Certifique-se de anotá-la em algum local seguro e privado!",
+              "keys": "A chave mestra permite interagir com diferentes protocolos como: Nostr, Liquid ou a camada base do Bitcoin."
             }
           },
           "import": {
@@ -438,13 +444,17 @@
           "existing_nostr_key_notice": "ℹ️ Esta conta já possui uma chave privada nostr, logo não será gerada uma nova a partir desta chave mestra. Você pode gerenciar sua chave Nostr nas configurações de sua conta.",
           "lnurl": {
             "use_mnemonic": "Use a chave mestra para acessar aplicativos com tecnologia (LNURL Auth)",
-            "title": "Login Relâmpago"
+            "title": "Login relâmpago"
+          },
+          "new": {
+            "title": "O que é uma chave mestra?"
           }
         },
         "remove_secretkey": {
           "title": "Remover chave mestra",
           "success": "Chave mestra removida com sucesso.",
-          "subtitle": "Remove a chave mestra desta conta."
+          "subtitle": "Remove a chave mestra desta conta.",
+          "confirm": "Por favor, insira o nome da conta para confirmar a exclusão de sua chave mestra:\n\n{{ name }}"
         },
         "network": {
           "title": "Rede",
@@ -455,16 +465,8 @@
           },
           "subtitle": "Escolha a rede para gerar endereços e decodificar transações bitcoin e liquid"
         },
-        "no_mnemonic_hint": "💡 Você ainda não tem uma chave mestra. <0>Clique aqui</0></div> para criar sua chave mestra e desbloquear essas configurações."
+        "no_mnemonic_hint": "💡 Você ainda não tem uma chave mestra. <0>Clique aqui</0></div> para gerar sua chave mestra e desbloquear essas configurações."
       }
-    },
-    "enable": {
-      "allow": "Permitir este site:",
-      "request1": "Solicitar aprovação para transações",
-      "request2": "Gerar faturas e solicitar informações do servidor",
-      "block_and_ignore": "Bloquear e ignorar {{host}}",
-      "title": "Conectar",
-      "block_added": "{{host}} adicionado na lista de bloqueio, por favor recarregue o site."
     },
     "unlock": {
       "unlock_to_continue": "Desbloqueie para continuar",
@@ -485,7 +487,7 @@
       "title": "Configurações",
       "website_enhancements": {
         "title": "Pagamentos em redes sociais",
-        "subtitle": "Reconhece automaticamente Endereços Relâmpago em perfis do Twitter, Youtube, etc, facilitando o envio de pagamentos."
+        "subtitle": "Reconhece automaticamente endereços relâmpago em perfis do Twitter, Youtube, etc, facilitando o envio de pagamentos."
       },
       "lnurl_auth": {
         "title": "LNURL-Auth",
@@ -582,7 +584,8 @@
       "title": "Enviar",
       "input": {
         "label": "Dados para pagamento",
-        "hint": "Fatura, Endereço Relâmpago ou LNURL"
+        "hint": "Fatura, endereço relâmpago, LNURL",
+        "hint_with_bitcoin_address": "Fatura, endereço relâmpago, LNURL ou endereço bitcoin"
       }
     },
     "lnurlpay": {
@@ -604,7 +607,18 @@
       "title": "Receber",
       "actions": {
         "create_invoice": "Gerar fatura",
-        "copy_lightning_address": "Copiar endereço relâmpago"
+        "redeem": {
+          "description": "Receba bitcoin usando um código LNURL",
+          "title": "Vale-satoshi"
+        },
+        "invoice": {
+          "title": "Fatura relâmpago",
+          "description": "Solicite pagamentos instantâneos e de valores específicos"
+        },
+        "bitcoin_address": {
+          "description": "Receba via endereço bitcoin usando um serviço de trocas",
+          "title": "Endereço bitcoin"
+        }
       },
       "amount": {
         "label": "Quantia a receber",
@@ -618,9 +632,7 @@
       "payment": {
         "waiting": "aguardando pagamento...",
         "status": "Verificar status do pagamento"
-      },
-      "receive_via_bitcoin_address": "Receber via endereço bitcoin",
-      "redeem_lnurl": "Resgatar vale-satoshi"
+      }
     },
     "publishers": {
       "publisher": {
@@ -831,7 +843,7 @@
       "instructions2": "Seu endereço bitcoin está na página <0>Receber</0>."
     },
     "lnurlredeem": {
-      "title": "Resgatar bitcoin",
+      "title": "Resgatar vale-satoshi",
       "input": {
         "placeholder": "LNURL...",
         "label": "Código LNURL"
@@ -873,6 +885,41 @@
       "allow": "Permitir este site:",
       "allow_sign": "Permitir {{host}} assinar:",
       "block_and_ignore": "Bloquear e ignorar {{host}}"
+    },
+    "send_to_bitcoin_address": {
+      "total_fee": {
+        "label": "Taxa"
+      },
+      "view_on_explorer": "Ver no explorer mempool",
+      "network_fee": {
+        "label": "Taxa de rede"
+      },
+      "total": {
+        "label": "Total"
+      },
+      "service_fee": {
+        "label": "Taxa de serviço"
+      },
+      "amount": {
+        "label": "Quantia (sats)"
+      },
+      "service_unavailable": "Serviço temporariamente indisponível. Tente novamente em alguns minutos.",
+      "provider": {
+        "label": "Serviço provedor de trocas"
+      },
+      "time_estimate": "ℹ️ As transações geralmente são recebidas dentro de 10 a 30 minutos."
+    },
+    "onboard": {
+      "request2": "Você ainda não configurou suas chaves",
+      "request3": "A configuração é rápida e fácil",
+      "title": "Configure suas chaves",
+      "actions": {
+        "start_setup": "Iniciar configuração"
+      }
+    },
+    "nostr_enable": {
+      "request2": "Assinar eventos usando sua chave privada Nostr",
+      "request1": "Solicitar a leitura de sua chave pública Nostr"
     }
   },
   "common": {
@@ -917,7 +964,9 @@
       "paste": "Colar",
       "paste_clipboard": "Colar da área de transferência",
       "download": "Baixar",
-      "copy_clipboard": "Copiar para área de transferência"
+      "copy_clipboard": "Copiar para área de transferência",
+      "disconnect": "Desconectar",
+      "copied_to_clipboard": "Copiado para a área de transferência"
     },
     "errors": {
       "connection_failed": "Falha na conexão",
@@ -928,7 +977,7 @@
     "message": "Mensagem",
     "help": "Ajuda",
     "response": "Resposta",
-    "success_message": "{{amount}}{{fiatAmount}} enviados para {{destination}}",
+    "success_message": "{{amount}}{{fiatAmount}} estão a caminho de {{destination}}",
     "advanced": "Avançado",
     "discover": "Explorar",
     "confirm_password": "Confirmar senha",
@@ -954,21 +1003,28 @@
       "nativelnd": "LND (usando Tor)"
     },
     "pasted": "Colado!",
-    "or": "ou"
+    "or": "ou",
+    "enable": {
+      "block_added": "{{host}} adicionado à lista de bloqueio, recarregue o site.",
+      "request1": "Solicitar aprovação para transações",
+      "allow": "Permitir este site:",
+      "block_and_ignore": "Bloquear e ignorar {{host}}"
+    }
   },
   "components": {
     "allowance_menu": {
-      "confirm_delete": "Tem certeza de que deseja remover este site?",
+      "confirm_delete": "Tem certeza de que deseja desconectar este site?",
       "hint": "O limite atual será redefinido",
       "new_budget": {
-        "label": "Novo limite"
+        "label": "Novo limite",
+        "link_label": "Defina um limite para pagamentos com um clique"
       },
       "edit_allowance": {
-        "title": "Editar preferências",
+        "title": "Preferências",
         "screen_reader": "Opções limite de gastos"
       },
       "enable_login": {
-        "title": "Login Relâmpago",
+        "title": "Login relâmpago",
         "subtitle": "O login é realizado de forma automática, sem necessidade de confirmação."
       },
       "edit_permissions": "Permissões"
@@ -1032,13 +1088,14 @@
     },
     "publishers_table": {
       "payments": "pagamentos",
-      "used": "usados"
+      "total": "total",
+      "budget": "limite de gastos"
     },
     "badge": {
       "label": {
-        "active": "LIMITE DE GASTOS",
         "auth": "LOGIN RELÂMPAGO",
-        "imported": "IMPORTADA"
+        "imported": "IMPORTADA",
+        "budget": "LIMITE DE GASTOS"
       }
     },
     "companion_download_info": {

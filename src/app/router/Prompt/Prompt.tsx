@@ -19,7 +19,6 @@ import Unlock from "@screens/Unlock";
 import { HashRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
 import AlbyLogo from "~/app/components/AlbyLogo";
 import Toaster from "~/app/components/Toast/Toaster";
-import Onboard from "~/app/components/onboard";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
 import BitcoinConfirmGetAddress from "~/app/screens/Bitcoin/ConfirmGetAddress";
@@ -141,10 +140,6 @@ function Prompt() {
             <Route path="confirmKeysend" element={<ConfirmKeysend />} />
             <Route path="confirmSignMessage" element={<ConfirmSignMessage />} />
             <Route path="confirmAddAccount" element={<ConfirmAddAccount />} />
-            <Route path="public/nostr/onboard" element={<Onboard />} />
-            <Route path="public/liquid/onboard" element={<Onboard />} />
-            <Route path="public/webbtc/onboard" element={<Onboard />} />
-            <Route path="public/webln/onboard" element={<Onboard />} />
             <Route
               path="public/confirmRequestPermission"
               element={<ConfirmRequestPermission />}

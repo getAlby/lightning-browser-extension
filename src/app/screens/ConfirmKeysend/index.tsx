@@ -160,6 +160,7 @@ function ConfirmKeysend() {
                 }}
                 budget={budget}
                 onBudgetChange={(event) => setBudget(event.target.value)}
+                disabled={loading}
               />
               <ConfirmOrCancel
                 disabled={loading}

@@ -14,7 +14,7 @@ export default function LiquidEnable(props: Props) {
   const [hasMnemonic, setHasMnemonic] = useState(false);
 
   useEffect(() => {
-    async function fetchAccountAndSetComponent() {
+    async function fetchAccountInfo() {
       try {
         const fetchedAccount = await api.getAccount();
 
@@ -28,16 +28,16 @@ export default function LiquidEnable(props: Props) {
       }
     }
 
-    fetchAccountAndSetComponent();
-  }, [account]);
+    fetchAccountInfo();
+  }, [props.origin, account]);
 
   return (
-    <div>
+    <>
       {hasMnemonic ? (
         <LiquidEnableComponent origin={props.origin} />
       ) : (
         <Onboard />
       )}
-    </div>
+    </>
   );
 }

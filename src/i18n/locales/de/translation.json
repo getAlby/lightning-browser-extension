@@ -173,10 +173,10 @@
         },
         "title": "Start9"
       },
-      "bitcoin_beach": {
-        "title": "Bitcoin Beach Wallet",
+      "blink": {
+        "title": "Blink Wallet",
         "page": {
-          "title": "Verbinden mit <0>Bitcoin Beach Wallet</0>"
+          "title": "Verbinden mit <0>Blink Wallet</0>"
         }
       },
       "bitcoin_jungle": {
@@ -415,10 +415,13 @@
         "no_incoming_transactions": "Noch keine eingehenden Transaktionen für dieses Konto."
       },
       "allowance_view": {
-        "sats_used": "verwendete Sats",
         "no_transactions": "Noch keine Transaktionen auf <0>{{name}}</0>.",
         "recent_transactions": "Jüngste Transaktionen",
-        "allowance": "Erlaubnis"
+        "sats": "sats",
+        "budget_spent": "Verwendete Mittel",
+        "total_spent": "Insgesamt ausgegeben",
+        "total_payments": "Zahlungen insgesamt",
+        "permissions": "Berechtigungen"
       },
       "actions": {
         "send_satoshis": "⚡️ Satoshis senden ⚡️",
@@ -455,7 +458,8 @@
             "success": "Der private Schlüssel von Nostr wurde erfolgreich verschlüsselt und gespeichert.",
             "successfully_removed": "Der private Schlüssel von Nostr wurde erfolgreich entfernt.",
             "label": "Nostr Privater Schlüssel",
-            "failed_to_remove": "Der eingegebene Kontoname stimmt nicht überein, dein alter privater Nostr-Schlüssel wurde wiederhergestellt."
+            "failed_to_remove": "Der eingegebene Kontoname stimmt nicht überein, dein alter privater Nostr-Schlüssel wurde wiederhergestellt.",
+            "warning": "Bitte gebe den Namen des Kontos ein, um die Löschung des privaten Schlüssels von nostr zu bestätigen:\n\n{{ Name }}"
           },
           "public_key": {
             "label": "Nostr Öffentlicher Schlüssel"
@@ -513,7 +517,8 @@
         "remove": {
           "title": "Dieses Konto entfernen",
           "subtitle": "Entfernt alle Zulagen, Zahlungsdaten und Schlüssel, die mit diesem Konto verbunden sind.",
-          "error": "Der eingegebene Kontoname stimmte nicht überein."
+          "error": "Der eingegebene Kontoname stimmte nicht überein.",
+          "confirm": "Bitte gebe den Namen des Kontos ein, um die Löschung deines Kontos zu bestätigen:\n\n{{ Name }}\n\n⚠️ Wenn du fortfährst, werden alle zugehörigen Schlüssel (Master Key, Nostr, etc.) gelöscht. Bitte vergewissern dich, dass du eine Sicherungskopie erstellt hast, denn es gibt keine andere Möglichkeit, sie wiederherzustellen."
         },
         "actions": {
           "remove_account": "Konto entfernen",
@@ -533,7 +538,8 @@
             "items": {
               "recovery_phrase": "Du kannst jederzeit auf deinen Master Key zugreifen, indem du deine Wiederherstellungsphrase verwendest.",
               "words": "Die Wiederherstellungsphrase besteht aus 12 Wörtern, die wie ein Passwort funktionieren, jedoch nicht geändert oder zurückgesetzt werden können, falls sie verloren gehen.",
-              "storage": "Schreibe sie an einem sicheren und privaten Ort auf!"
+              "storage": "Schreibe sie an einem sicheren und privaten Ort auf!",
+              "keys": "Master Key ermöglicht dir die Interaktion mit verschiedenen Protokollen wie z.B.: Nostr, Liquid oder Basisschicht von Bitcoin."
             },
             "description": "Notiere deine Wiederherstellungsphrase, um deinen Hauptschlüssel auf einem neuen Gerät wiederherstellen zu können oder für den Fall, dass du den Zugriff auf dein Konto verlierst."
           },
@@ -557,12 +563,16 @@
           "lnurl": {
             "title": "Anmeldung mit Lightning",
             "use_mnemonic": "Master Key für die Anmeldung bei Lightning-Anwendungen verwenden (LNURL Auth)"
+          },
+          "new": {
+            "title": "Was ist ein Hauptschlüssel?"
           }
         },
         "remove_secretkey": {
           "title": "Hauptschlüssel entfernen",
           "subtitle": "Entfernt den Hauptschlüssel von diesem Konto.",
-          "success": "Der Hauptschlüssel wurde erfolgreich entfernt."
+          "success": "Der Hauptschlüssel wurde erfolgreich entfernt.",
+          "confirm": "Bitte gebe den Namen des Kontos ein, um die Löschung deines Hauptschlüssels zu bestätigen:\n\n{{ Name }}"
         },
         "network": {
           "subtitle": "Wähle ein Netzwerk zur Ableitung von Adressen und zur Entschlüsselung von Bitcoin- und Liquid-Transaktionen",
@@ -576,14 +586,6 @@
         "no_mnemonic_hint": "💡 Du hast noch keinen Hauptschlüssel. <0>Klicken Sie hier</0></div>, um deinen Hauptschlüssel zu erstellen und diese Einstellungen freizuschalten."
       }
     },
-    "enable": {
-      "allow": "Erlaube diese Webseite zu:",
-      "title": "Verbinden",
-      "request1": "Genehmigung für Transaktionen anfordern",
-      "request2": "Fordere deine Rechnungen und Lightning Informationen an",
-      "block_and_ignore": "Blockieren und Ignorieren von {{host}}",
-      "block_added": "Hinzugefügt {{host}} zur Blocklist, bitte Website neu laden."
-    },
     "receive": {
       "amount": {
         "placeholder": "Betrag in Satoshi...",
@@ -596,15 +598,24 @@
       "title": "Empfangen",
       "actions": {
         "create_invoice": "Rechnung erstellen",
-        "copy_lightning_address": "Lightning Adresse kopieren"
+        "redeem": {
+          "description": "Einen Bitcoin-Gutschein sofort über einen LNURL-Code abheben",
+          "title": "Einlösen"
+        },
+        "invoice": {
+          "title": "Lightning Rechnung",
+          "description": "Sofortige Bitcoin Zahlungen mit einem bestimmten Betrag anfordern"
+        },
+        "bitcoin_address": {
+          "description": "Empfang über eine Bitcoin-Adresse mit Hilfe eines Tauschdienstes",
+          "title": "Bitcoin-Adresse"
+        }
       },
       "description": {
         "label": "Beschreibung",
         "placeholder": "Zum Beispiel: Wer schickt diese Zahlung?"
       },
-      "success": "Zahlung erhalten!",
-      "receive_via_bitcoin_address": "Empfangen über Bitcoin Adresse",
-      "redeem_lnurl": "LNURL einlösen"
+      "success": "Zahlung erhalten!"
     },
     "publishers": {
       "publisher": {
@@ -924,6 +935,36 @@
         "label": "Anbieter austauschen"
       },
       "view_on_explorer": "Ansicht auf mempool explorer"
+    },
+    "webln_enable": {
+      "title": "Mit WebLN verbinden",
+      "request2": "Rechnungen und Lightning Informationen anfordern"
+    },
+    "onboard": {
+      "request2": "Du hast deinen Schlüssel noch nicht eingerichtet",
+      "request1": "Diese Website erfordert eine wichtige Interaktion",
+      "request3": "Die Einrichtung ist schnell und einfach",
+      "title": "Einrichten Ihrer Keys",
+      "actions": {
+        "start_setup": "Start Setup"
+      }
+    },
+    "liquid_enable": {
+      "request2": "Rechnungen von Liquid anfordern",
+      "title": "Mit Liquid verbinden"
+    },
+    "nostr_enable": {
+      "title": "Mit Nostr verbinden",
+      "request2": "Signiere deine Ereignisse mit deinem privaten Nostr-Schlüssel",
+      "request1": "Anfrage zum Lesen deines öffentlichen Nostr-Schlüssels"
+    },
+    "webbtc_enable": {
+      "request2": "Rechnungen und Liquidinformationen anfordern",
+      "title": "Mit WebBTC verbinden"
+    },
+    "alby_enable": {
+      "title": "Mit Alby verbinden",
+      "request2": "Rechnungen und Alby Informationen anfordern"
     }
   },
   "components": {
@@ -941,7 +982,8 @@
     },
     "publishers_table": {
       "payments": "Zahlungen",
-      "used": "gebraucht"
+      "budget": "Haushalt",
+      "total": "insgesamt"
     },
     "toasts": {
       "connection_error": {
@@ -971,7 +1013,7 @@
     },
     "allowance_menu": {
       "edit_allowance": {
-        "title": "Präferenzen bearbeiten",
+        "title": "Einstellungen der Website",
         "screen_reader": "Zulässigkeitsoptionen"
       },
       "enable_login": {
@@ -979,11 +1021,12 @@
         "subtitle": "Automatisches Einloggen ohne Bestätigung, wenn die Website dazu auffordert."
       },
       "edit_permissions": "Berechtigungen bearbeiten",
-      "hint": "Dadurch wird das aktuelle Budget zurückgesetzt",
+      "hint": "Die Änderung dieser Einstellung setzt das aktuelle Budget zurück.",
       "new_budget": {
-        "label": "Neues Budget"
+        "label": "Budget für Ein-Klick-Zahlungen",
+        "link_label": "Festlegen eines Budgets für One-Click-Zahlungen"
       },
-      "confirm_delete": "Bist du dir sicher, dass du diese Website löschen willst?"
+      "confirm_delete": "Bist du dir sicher, dass du die Verbindung zu dieser Website unterbrechen willst?"
     },
     "qrcode_scanner": {
       "actions": {
@@ -1019,9 +1062,9 @@
     },
     "badge": {
       "label": {
-        "active": "AKTIV",
         "auth": "LOGIN",
-        "imported": "EINGEFÜHRT"
+        "imported": "EINGEFÜHRT",
+        "budget": "BUDGET"
       }
     },
     "transaction_list": {
@@ -1079,7 +1122,9 @@
       "copy_clipboard": "In die Zwischenablage kopieren",
       "paste": "Einfügen",
       "paste_clipboard": "Einfügen aus der Zwischenablage",
-      "review": "Überprüfung"
+      "review": "Überprüfung",
+      "disconnect": "Trenne die Verbindung",
+      "copied_to_clipboard": "In die Zwischenablage kopiert"
     },
     "discover": "Entdecken",
     "errors": {
@@ -1111,7 +1156,13 @@
       "eclair": "Eclair"
     },
     "or": "oder",
-    "pasted": "Eingefügt!"
+    "pasted": "Eingefügt!",
+    "enable": {
+      "block_added": "{{host}} zur Blockliste hinzugefügt, bitte lade die Website neu.",
+      "request1": "Genehmigung von Transaktionen beantragen",
+      "allow": "Erlaube dieser Website,:",
+      "block_and_ignore": "Blockieren und Ignorieren von {{host}}"
+    }
   },
   "permissions": {
     "commando": {

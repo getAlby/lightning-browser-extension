@@ -145,10 +145,10 @@
           "placeholder": "tu-nodo-direccion onion:puerto"
         }
       },
-      "bitcoin_beach": {
-        "title": "Billetera de Bitcoin Beach",
+      "blink": {
+        "title": "Billetera de Blink",
         "page": {
-          "title": "Conecta a <0>La cartera Bitcoin Beach</0>"
+          "title": "Conecta a <0>La cartera Blink</0>"
         }
       },
       "bitcoin_jungle": {
@@ -303,8 +303,6 @@
       "recent_transactions": "Transacciones Recientes",
       "allowance_view": {
         "recent_transactions": "Transacciones Recientes",
-        "allowance": "Subsidio",
-        "sats_used": "sats utilizados",
         "no_transactions": "No hay transacciones en <0>{{name}}</0> todavía."
       },
       "default_view": {
@@ -375,14 +373,6 @@
           "export": "Exportar"
         }
       }
-    },
-    "enable": {
-      "allow": "Permitir que este sitio web:",
-      "request1": "Solicitar aprobación de transacciones",
-      "request2": "Solicitar facturas e información sobre Lightning",
-      "block_and_ignore": "Bloquear e ignorar {{host}}",
-      "title": "Conectar",
-      "block_added": "Se agregó {{host}} a la lista de bloqueados, vuelva a cargar la página."
     },
     "unlock": {
       "unlock_to_continue": "Desbloquear para continuar",
@@ -879,12 +869,10 @@
       "screen_reader": "Alternar menú desplegable"
     },
     "publishers_table": {
-      "used": "usado",
       "payments": "pagos"
     },
     "badge": {
       "label": {
-        "active": "ACTIVO",
         "auth": "INICIAR SESIÓN"
       }
     },
