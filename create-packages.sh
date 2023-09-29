@@ -2,6 +2,7 @@
 
 # Extract version from package.json
 VERSION=$(node -pe "require('./package.json').version")
+NODE_ENV=production
 
 if [ -z ${ALBY_OAUTH_CLIENT_ID_CHROME+x} ];
 then
