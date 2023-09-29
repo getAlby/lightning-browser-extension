@@ -1166,7 +1166,7 @@
   dependencies:
     tslib "^2.4.0"
 
-"@swc/jest@^0.2.29":
+"@swc/jest@^0.2.27":
   version "0.2.29"
   resolved "https://registry.yarnpkg.com/@swc/jest/-/jest-0.2.29.tgz#b27d647ec430c909f9bb567d1df2a47eaa3841f4"
   integrity sha512-8reh5RvHBsSikDC3WGCd5ZTd2BXKkyOdK7QwynrCH58jk2cQFhhHhFBg/jvnWZehUQe/EoOImLENc9/DwbBFow==
