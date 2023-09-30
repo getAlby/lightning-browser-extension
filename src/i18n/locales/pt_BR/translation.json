@@ -3,7 +3,7 @@
     "welcome": {
       "set_password": {
         "title": "Definir uma senha de desbloqueio",
-        "description": "Essa senha é usada para proteger sua carteira e fornecer acesso à extensão do navegador neste dispositivo. Não esqueça essa senha pois não é possível recuperá-la. Obs. Essa senha é diferente da senha da conta da Alby e você alterá-la quando quiser.",
+        "description": "Esta senha é usada para proteger sua carteira e fornecer acesso à extensão do navegador neste dispositivo. Não esqueça esta senha pois não é possível recuperá-la. Obs. Esta senha é diferente da senha da conta da Alby.",
         "choose_password": {
           "label": "Escolha uma senha de desbloqueio:"
         },
@@ -30,7 +30,7 @@
       "title": "Bem-vindo à Alby",
       "pin_extension": {
         "title": "Fixar extensão Alby",
-        "description": "Quase lá. Para facilitar seu acesso a Alby , lembre-se de fixar a extensão Alby na barra de ferramentas do navegador:",
+        "description": "Quase lá. Para facilitar seu acesso à Alby, lembre-se de fixar a extensão Alby na barra de ferramentas do navegador:",
         "explanation": "1. Clique em <0/> no canto superior direito do seu navegador<1/>2. Localize a Alby e clique no ícone de fixação para fixá-lo na barra de ferramentas do navegador<1/>3. É isso. Agora é só clicar no ícone da Alby <2/>",
         "next_btn": "Comece a usar a Alby {{icon}}"
       }
@@ -145,10 +145,10 @@
           "placeholder": "seu-endereço-servidor-onion:porta"
         }
       },
-      "bitcoin_beach": {
-        "title": "Carteira Bitcoin Beach",
+      "blink": {
+        "title": "Carteira Blink",
         "page": {
-          "title": "Conecte-se na <0>Carteira Bitcoin Beach</0>"
+          "title": "Conecte-se na <0>Carteira Blink</0>"
         }
       },
       "bitcoin_jungle": {
@@ -295,16 +295,19 @@
       "recent_transactions": "Transações recentes",
       "allowance_view": {
         "recent_transactions": "Transações recentes",
-        "allowance": "Limite de gastos",
-        "sats_used": "sats usados",
-        "no_transactions": "Sem transações em <0>{{name}}</0>."
+        "no_transactions": "Sem transações em <0>{{name}}</0>.",
+        "sats": "sats",
+        "budget_spent": "Limite de gastos",
+        "total_spent": "Total gasto",
+        "total_payments": "Pagamentos realizados",
+        "permissions": "Permissões"
       },
       "default_view": {
         "recent_transactions": "Transações recentes",
         "is_blocked_hint": "A Alby está desativada em {{host}}",
         "block_removed": "{{host}} ativado. Por favor, recarregue o site.",
         "no_outgoing_transactions": "Você ainda não realizou transações usando esta conta.",
-        "all_transactions_link": "Ver todas as transações",
+        "all_transactions_link": "Mostrar tudo",
         "no_incoming_transactions": "Você ainda não recebeu transações nesta conta."
       }
     },
@@ -315,13 +318,13 @@
       },
       "account_view": {
         "export": {
-          "title": "Exportar conta",
-          "your_ln_address": "Seu Endereço Relâmpago:",
+          "title": "Conectar sua carteira de celular",
+          "your_ln_address": "Seu endereço relâmpago:",
           "screen_reader": "Exportar detalhes da conta",
           "waiting": "aguardando dados LndHub...",
-          "tip_mobile": "Dica: Use esta carteira no seu dispositivo móvel",
           "export_uri": "Credenciais URI LNDHub",
-          "scan_qr": "Leia o código QR para importar esta carteira na Zeus ou BlueWallet."
+          "scan_qr": "Leia o código QR para importar esta carteira na Zeus ou BlueWallet.",
+          "description": "Permite conectar e usar esta conta em carteiras de celular como por ex a <0>Blue Wallet</0> e a <1>Zeus</1>."
         },
         "nostr": {
           "title": "Nostr",
@@ -329,10 +332,10 @@
             "title": "Gerenciar sua chave privada Nostr",
             "successfully_removed": "Chave privada Nostr removida com sucesso.",
             "label": "Chave privada Nostr",
-            "warning": "Digite o nome da conta para confirmar a exclusão de sua chave privada Nostr:",
             "subtitle": "Cole sua chave privada Nostr ou gere uma nova. <0>Saiba mais »</0>",
             "success": "Chave privada Nostr criptografada e salva com sucesso.",
-            "failed_to_remove": "O nome da conta inserido não está correto, sua chave privada Nostr antiga foi restaurada."
+            "failed_to_remove": "O nome da conta inserido não está correto, sua chave privada Nostr antiga foi restaurada.",
+            "warning": "Por favor, insira o nome da conta para confirmar a exclusão de sua chave privada nostr:\n\n{{ name }}"
           },
           "public_key": {
             "label": "Chave pública Nostr"
@@ -343,9 +346,9 @@
             "screen_reader": "Gere uma nova chave Nostr para sua conta",
             "actions": {
               "random_keys": "Gerar uma chave aleatória",
-              "derived_keys": "Derivar uma chave da conta"
+              "derived_keys": "Gerar uma chave a partir da conta"
             },
-            "hint": "Você pode gerar uma chave aleatória ou uma chave derivada desta conta. <0>Saiba mais »</0>"
+            "hint": "Você pode gerar uma chave aleatória ou gerar uma nova a partir desta conta. <0>Saiba mais »</0>"
           },
           "actions": {
             "generate": "Gerar uma nova chave"
@@ -356,94 +359,114 @@
           "settings": {
             "label": "Configurações Nostr",
             "title": "Configurações Nostr",
-            "derive": "Derive chaves Nostr de sua chave secreta",
-            "delete": "Excluir chaves existentes",
-            "can_restore": "✅ Chave Nostr derivada de sua chave secreta",
-            "description": "Derive chaves Nostr de sua chave secreta ou importe sua chave privada existente colando-a no campo \"Chave privada Nostr\".",
-            "no_secret_key": "💡 Você ainda não tem uma chave secreta. <0>Clique aqui</0></div> para criar sua chave secreta e derivar suas chaves nostr.",
-            "imported_key_warning": "⚠️ No momento, você está usando uma chave Nostr importada ou gerada aleatoriamente. Sua chave privada Nostr não pode ser restaurada por sua chave secreta, então lembre-se de fazer o backup de sua chave privada Nostr."
+            "derive": "Gere chaves Nostr a partir de sua chave mestra",
+            "can_restore": "✅ Chave Nostr gerada a partir de sua chave mestra",
+            "description": "Você pode gerar chaves Nostr a partir de sua chave mestra ou importar sua chave privada existente colando-a no campo \"Chave privada Nostr\".",
+            "no_secret_key": "💡 Você ainda não tem uma chave mestra. <0>Clique aqui</0></div> para gerar sua chave mestra e suas chaves Nostr.",
+            "imported_key_warning": "⚠️ No momento, você está usando uma chave Nostr importada ou gerada aleatoriamente. Sua chave privada Nostr não pode ser restaurada por sua frase de recuperação, então lembre-se de fazer o backup de sua chave privada Nostr separadamente.",
+            "remove": "Remover chaves existentes"
+          },
+          "setup": {
+            "title": "Configure suas chaves Nostr",
+            "new": {
+              "label": "Criar uma nova conta Nostr",
+              "description": "Gere uma chave mestra com um par de novas chaves Nostr."
+            },
+            "import": {
+              "label": "Importar uma conta Nostr",
+              "description": "Use uma chave privada Nostr existente ou gere uma a partir de sua chave mestra",
+              "title": "Como você gostaria de importar sua conta Nostr?",
+              "private_key": {
+                "label": "Usar chave privada Nostr",
+                "description": "Cole sua chave privada Nostr para importá-la para a Alby"
+              },
+              "recovery_phrase": {
+                "label": "Usar frase de recuperação",
+                "description": "Use a frase de recuperação da chave mestra para importar suas chaves Nostr"
+              }
+            },
+            "new_to_nostr": "Novo no Nostr? <0>Saiba mais</0>",
+            "description": "Escolha se você deseja criar uma nova conta Nostr (um par de chaves públicas e privadas) ou importar uma existente.",
+            "description2": "Toda conta Nostr criada na Alby vem com uma <0>Frase de recuperação</0> – um conjunto de 12 palavras que sempre permite que você recupere o acesso às suas chaves privadas Nostr."
           }
         },
         "remove": {
-          "confirm": "Digite o nome da conta para confirmar a exclusão.\n\n ⚠️ Ao prosseguir com a exclusão, todas as chaves associadas a esta conta (chave secreta, Nostr, etc) serão perdidas. Certifique-se de fazer o backup antes de continuar, caso precise restaurar a conta no futuro.",
           "title": "Remover esta conta",
           "error": "O nome da conta inserido não corresponde.",
-          "subtitle": "Remove todos os limites de gastos, dados de pagamento e chaves associados a esta conta."
+          "subtitle": "Remove todos os limites de gastos, dados de pagamento e chaves associadas à esta conta.",
+          "confirm": "Por favor, insira o nome da conta para confirmar a exclusão:\n\n{{ name }}\n\n ⚠️ Por favor, insira o nome da conta para confirmar a exclusão. Todas as chaves associadas (Chave mestra, Nostr, etc) serão excluídas se você continuar. Certifique-se de ter feito backup das chaves, não há outra maneira de restaurá-las."
         },
         "actions": {
           "remove_account": "Remover conta",
           "export": "Exportar",
-          "remove_secretkey": "Remover chave secreta"
+          "remove_secretkey": "Remover chave mestra"
         },
         "name": {
           "title": "Nome",
           "placeholder": "Nome da conta"
         },
-        "title2": "Editar conta",
+        "title2": "Conta",
         "title1": "Configurações da conta",
         "mnemonic": {
-          "title": "Chave secreta",
-          "saved": "Chave secreta criptografada e salva com sucesso.",
+          "title": "🔑 Gerenciamento de chaves",
+          "saved": "Chave mestra criptografada e salva com sucesso.",
           "generate": {
-            "title": "Gere sua chave secreta",
-            "button": "Gerar chave secreta",
-            "confirm": "Eu salvei minha chave secreta em um local privado e seguro",
-            "error_confirm": "Por favor, confirme que você salvou sua chave secreta."
+            "title": "Gere sua chave mestra",
+            "button": "Gerar chave mestra",
+            "confirm": "Eu salvei a frase de recuperação em um local privado e seguro.",
+            "error_confirm": "Por favor, confirme que você salvou a frase de recuperação.",
+            "description": "A chave mestra permite que você interaja com diferentes protocolos como: Nostr, rede principal do Bitcoin ou LNURL-Auth."
           },
           "backup": {
-            "save": "Salvar chave secreta",
-            "button": "Fazer backup",
-            "description1": "Além da rede Relâmpago do Bitcoin, a Alby permite gerar chaves e interagir com outros protocolos como:",
+            "save": "Salvar chave mestra",
+            "button": "Ver frase de recuperação",
             "protocols": {
               "nostr": "Nostr"
             },
-            "title": "Backup de sua chave secreta",
-            "description2": "A chave secreta é um conjunto de 12 palavras que permitirão que você acesse suas chaves nesses protocolos em um novo dispositivo ou caso perca o acesso à sua conta. Certifique-se de anotá-la em um pedaço de papel e mantê-la segura:",
-            "warning": "⚠️ Não se esqueça de fazer o backup de sua chave secreta! Não fazer o backup pode resultar na perda permanente do acesso à sua conta Nostr ou aos ativos que você gerencia com esta chave."
+            "title": "Backup de sua frase de recuperação",
+            "warning": "⚠️ Não se esqueça de fazer backup de sua frase de recuperação! Não fazer o backup pode resultar na perda permanente do acesso à sua chave mestra, identidade Nostr ou ativos que você gerencia com esta chave.",
+            "description": "Anote a frase de recuperação para poder restaurar sua chave mestra em um novo dispositivo ou caso perca o acesso à sua conta.",
+            "items": {
+              "recovery_phrase": "Você sempre pode acessar sua chave mestra usando sua frase de recuperação.",
+              "words": "A frase de recuperação é um conjunto de 12 palavras que funciona como uma senha, porém não pode ser alterada ou redefinida caso seja perdida.",
+              "storage": "Certifique-se de anotá-la em algum local seguro e privado!",
+              "keys": "A chave mestra permite interagir com diferentes protocolos como: Nostr, Liquid ou a camada base do Bitcoin."
+            }
           },
           "import": {
-            "title": "Importar uma chave secreta",
-            "description": "Use uma chave secreta existente para recuperar suas chaves derivadas.",
-            "button": "Importar chave secreta",
-            "confirm_overwrite": "Você já tem uma chave secreta, tem certeza de que deseja substituí-la?"
+            "title": "Importar sua chave mestra",
+            "description": "Use a frase de recuperação para importar sua chave mestra na Alby.",
+            "button": "Importar chave mestra"
           },
           "inputs": {
-            "title": "Sua chave secreta"
+            "title": "Frase de recuperação"
           },
-          "existing_nostr_key_notice": "⚠️ Esta conta já possui uma chave privada nostr definida e não será derivada desta chave secreta. Você pode gerenciar sua chave nostr nas configurações de sua conta.",
-          "description": "A chave secreta permite que você use a Alby para interagir com protocolos como o Nostr.",
-          "description2": "A chave secreta é um conjunto de 12 palavras que permitirão que você acesse suas chaves de protocolos como o Nostr em outros dispositivos ou caso você perca o acesso à sua conta.",
+          "existing_nostr_key_notice": "ℹ️ Esta conta já possui uma chave privada nostr, logo não será gerada uma nova a partir desta chave mestra. Você pode gerenciar sua chave Nostr nas configurações de sua conta.",
           "lnurl": {
-            "use_mnemonic": "Use a chave secreta para acessar aplicativos com tecnologia (LNURL Auth)",
-            "title": "Login Relâmpago"
-          }
-        },
-        "bitcoin": {
-          "network": {
-            "title": "Rede Bitcoin",
-            "options": {
-              "bitcoin": "Rede principal",
-              "testnet": "Rede de testes",
-              "regtest": "Regtest"
-            },
-            "subtitle": "Escolha a rede para derivar endereços e decodificar transações"
+            "use_mnemonic": "Use a chave mestra para acessar aplicativos com tecnologia (LNURL Auth)",
+            "title": "Login relâmpago"
+          },
+          "new": {
+            "title": "O que é uma chave mestra?"
           }
         },
         "remove_secretkey": {
-          "title": "Remover chave secreta",
-          "confirm": "Digite o nome da conta para confirmar a exclusão de sua chave secreta.",
-          "success": "Chave secreta removida com sucesso.",
-          "subtitle": "Remove a chave secreta desta conta."
-        }
+          "title": "Remover chave mestra",
+          "success": "Chave mestra removida com sucesso.",
+          "subtitle": "Remove a chave mestra desta conta.",
+          "confirm": "Por favor, insira o nome da conta para confirmar a exclusão de sua chave mestra:\n\n{{ name }}"
+        },
+        "network": {
+          "title": "Rede",
+          "options": {
+            "bitcoin": "Rede principal",
+            "testnet": "Rede de testes",
+            "regtest": "Regtest"
+          },
+          "subtitle": "Escolha a rede para gerar endereços e decodificar transações bitcoin e liquid"
+        },
+        "no_mnemonic_hint": "💡 Você ainda não tem uma chave mestra. <0>Clique aqui</0></div> para gerar sua chave mestra e desbloquear essas configurações."
       }
-    },
-    "enable": {
-      "allow": "Permitir este site:",
-      "request1": "Solicitar aprovação para transações",
-      "request2": "Gerar faturas e solicitar informações do servidor",
-      "block_and_ignore": "Bloquear e ignorar {{host}}",
-      "title": "Conectar",
-      "block_added": "{{host}} adicionado na lista de bloqueio, por favor recarregue o site."
     },
     "unlock": {
       "unlock_to_continue": "Desbloqueie para continuar",
@@ -464,7 +487,7 @@
       "title": "Configurações",
       "website_enhancements": {
         "title": "Pagamentos em redes sociais",
-        "subtitle": "Reconhece automaticamente Endereços Relâmpago em perfis do Twitter, Youtube, etc, facilitando o envio de pagamentos."
+        "subtitle": "Reconhece automaticamente endereços relâmpago em perfis do Twitter, Youtube, etc, facilitando o envio de pagamentos."
       },
       "lnurl_auth": {
         "title": "LNURL-Auth",
@@ -559,12 +582,10 @@
     },
     "send": {
       "title": "Enviar",
-      "qrcode": {
-        "title": "Aguardando leitura"
-      },
       "input": {
-        "label": "Destinatário",
-        "hint": "Fatura, Endereço Relâmpago ou LNURL"
+        "label": "Dados para pagamento",
+        "hint": "Fatura, endereço relâmpago, LNURL",
+        "hint_with_bitcoin_address": "Fatura, endereço relâmpago, LNURL ou endereço bitcoin"
       }
     },
     "lnurlpay": {
@@ -585,10 +606,22 @@
     "receive": {
       "title": "Receber",
       "actions": {
-        "create_invoice": "Gerar fatura"
+        "create_invoice": "Gerar fatura",
+        "redeem": {
+          "description": "Receba bitcoin usando um código LNURL",
+          "title": "Vale-satoshi"
+        },
+        "invoice": {
+          "title": "Fatura relâmpago",
+          "description": "Solicite pagamentos instantâneos e de valores específicos"
+        },
+        "bitcoin_address": {
+          "description": "Receba via endereço bitcoin usando um serviço de trocas",
+          "title": "Endereço bitcoin"
+        }
       },
       "amount": {
-        "label": "Quantia",
+        "label": "Quantia a receber",
         "placeholder": "Quantia em Satoshi..."
       },
       "description": {
@@ -599,8 +632,7 @@
       "payment": {
         "waiting": "aguardando pagamento...",
         "status": "Verificar status do pagamento"
-      },
-      "receive_via_bitcoin_address": "Receber via endereço bitcoin"
+      }
     },
     "publishers": {
       "publisher": {
@@ -617,7 +649,7 @@
     "make_invoice": {
       "title": "Gerar fatura",
       "amount": {
-        "label": "Quantia"
+        "label": "Quantia (Satoshi)"
       },
       "memo": {
         "label": "Memo"
@@ -694,14 +726,14 @@
       "allow_sign_event": "Permitir {{host}} assinar {{kind}}:",
       "hide_details": "Ocultar detalhes",
       "kinds": {
-        "unknown": "evento nostr do tipo {{kind}}",
         "0": "metadados",
-        "5": "exclusão de evento",
-        "4": "mensagens diretas criptografadas",
-        "9735": "zap",
-        "3": "contatos",
         "1": "nota de texto curta",
-        "7": "reação"
+        "3": "contatos",
+        "4": "mensagens diretas criptografadas",
+        "5": "exclusão de evento",
+        "7": "reação",
+        "9735": "zap",
+        "unknown": "evento nostr do tipo {{kind}}"
       },
       "no_content": "(Sem conteúdo)"
     },
@@ -734,7 +766,7 @@
         "title": "Sua carteira Alby está pronta",
         "description": "Algumas dicas para você começar a usar a Alby 🐝",
         "mnemonic": {
-          "description": "Planejando usar apps Nostr?\nGere suas chaves agora.",
+          "description": "Planejando usar apps Nostr?\nClique aqui para gerar suas chaves.",
           "title": "Nostr"
         }
       }
@@ -749,7 +781,7 @@
         "title": "Outras contas",
         "and_more": "& mais...",
         "description": "Conecte-se em sua carteira bitcoin ou em um dos vários servidores de carteira disponíveis.",
-        "connect": "Conectar"
+        "connect": "Conectar outras contas"
       }
     },
     "alby": {
@@ -810,10 +842,84 @@
       "title": "Receber via endereço bitcoin",
       "instructions2": "Seu endereço bitcoin está na página <0>Receber</0>."
     },
-    "confirm_get_address": {
-      "title": "Obter endereço",
-      "heading": "Este site solicita ler:",
-      "content": "Seu endereço de recebimento Bitcoin"
+    "lnurlredeem": {
+      "title": "Resgatar vale-satoshi",
+      "input": {
+        "placeholder": "LNURL...",
+        "label": "Código LNURL"
+      },
+      "actions": {
+        "withdraw": "Resgatar"
+      },
+      "errors": {
+        "invalid_withdraw_request": "Solicitação LNURL inválida",
+        "invalid_lnurl": "LNURL inválido"
+      }
+    },
+    "scan_qrcode": {
+      "title": "Aguardando leitura"
+    },
+    "confirm_sign_pset": {
+      "view_details": "Ver detalhes",
+      "hide_details": "Ocultar detalhes",
+      "view_raw_transaction": "Ver transação raw (Base64)",
+      "hide_raw_transaction": "Ocultar transação raw (Base64)",
+      "outputs": "Saídas",
+      "amount": "{{amount}} {{ticker}}",
+      "title": "Assinar",
+      "allow_sign": "Este site solicita que você assine uma transação Liquid:",
+      "inputs": "Entradas"
+    },
+    "bitcoin": {
+      "confirm_get_address": {
+        "title": "Obter endereço"
+      },
+      "allow": "Permitir este site:",
+      "allow_sign": "Permitir {{host}} assinar:",
+      "block_and_ignore": "Bloquear e ignorar {{host}}",
+      "block_added": "{{host}} adicionado na lista de bloqueios, recarregue o site."
+    },
+    "liquid": {
+      "title": "Liquid",
+      "block_added": "{{host}} adicionado na lista de bloqueios, recarregue o site.",
+      "allow": "Permitir este site:",
+      "allow_sign": "Permitir {{host}} assinar:",
+      "block_and_ignore": "Bloquear e ignorar {{host}}"
+    },
+    "send_to_bitcoin_address": {
+      "total_fee": {
+        "label": "Taxa"
+      },
+      "view_on_explorer": "Ver no explorer mempool",
+      "network_fee": {
+        "label": "Taxa de rede"
+      },
+      "total": {
+        "label": "Total"
+      },
+      "service_fee": {
+        "label": "Taxa de serviço"
+      },
+      "amount": {
+        "label": "Quantia (sats)"
+      },
+      "service_unavailable": "Serviço temporariamente indisponível. Tente novamente em alguns minutos.",
+      "provider": {
+        "label": "Serviço provedor de trocas"
+      },
+      "time_estimate": "ℹ️ As transações geralmente são recebidas dentro de 10 a 30 minutos."
+    },
+    "onboard": {
+      "request2": "Você ainda não configurou suas chaves",
+      "request3": "A configuração é rápida e fácil",
+      "title": "Configure suas chaves",
+      "actions": {
+        "start_setup": "Iniciar configuração"
+      }
+    },
+    "nostr_enable": {
+      "request2": "Assinar eventos usando sua chave privada Nostr",
+      "request1": "Solicitar a leitura de sua chave pública Nostr"
     }
   },
   "common": {
@@ -858,7 +964,9 @@
       "paste": "Colar",
       "paste_clipboard": "Colar da área de transferência",
       "download": "Baixar",
-      "copy_clipboard": "Copiar para área de transferência"
+      "copy_clipboard": "Copiar para área de transferência",
+      "disconnect": "Desconectar",
+      "copied_to_clipboard": "Copiado para a área de transferência"
     },
     "errors": {
       "connection_failed": "Falha na conexão",
@@ -869,7 +977,7 @@
     "message": "Mensagem",
     "help": "Ajuda",
     "response": "Resposta",
-    "success_message": "{{amount}}{{fiatAmount}} enviados para {{destination}}",
+    "success_message": "{{amount}}{{fiatAmount}} estão a caminho de {{destination}}",
     "advanced": "Avançado",
     "discover": "Explorar",
     "confirm_password": "Confirmar senha",
@@ -895,21 +1003,28 @@
       "nativelnd": "LND (usando Tor)"
     },
     "pasted": "Colado!",
-    "or": "ou"
+    "or": "ou",
+    "enable": {
+      "block_added": "{{host}} adicionado à lista de bloqueio, recarregue o site.",
+      "request1": "Solicitar aprovação para transações",
+      "allow": "Permitir este site:",
+      "block_and_ignore": "Bloquear e ignorar {{host}}"
+    }
   },
   "components": {
     "allowance_menu": {
-      "confirm_delete": "Tem certeza de que deseja remover este site?",
+      "confirm_delete": "Tem certeza de que deseja desconectar este site?",
       "hint": "O limite atual será redefinido",
       "new_budget": {
-        "label": "Novo limite"
+        "label": "Novo limite",
+        "link_label": "Defina um limite para pagamentos com um clique"
       },
       "edit_allowance": {
-        "title": "Editar preferências",
+        "title": "Preferências",
         "screen_reader": "Opções limite de gastos"
       },
       "enable_login": {
-        "title": "Login Relâmpago",
+        "title": "Login relâmpago",
         "subtitle": "O login é realizado de forma automática, sem necessidade de confirmação."
       },
       "edit_permissions": "Permissões"
@@ -937,9 +1052,6 @@
       },
       "open_location": "Abrir link"
     },
-    "confirm_or_cancel": {
-      "only_trusted": "Conecte-se apenas nos sites em que você confia."
-    },
     "budget_control": {
       "remember": {
         "label": "Lembrar e definir um limite de gastos",
@@ -964,7 +1076,7 @@
       }
     },
     "account_menu": {
-      "title": "Trocar conta",
+      "title": "Mudar de conta",
       "options": {
         "account": {
           "add": "Adicionar nova conta",
@@ -976,12 +1088,14 @@
     },
     "publishers_table": {
       "payments": "pagamentos",
-      "used": "usados"
+      "total": "total",
+      "budget": "limite de gastos"
     },
     "badge": {
       "label": {
-        "active": "LIMITE DE GASTOS",
-        "auth": "LOGIN RELÂMPAGO"
+        "auth": "LOGIN RELÂMPAGO",
+        "imported": "IMPORTADA",
+        "budget": "LIMITE DE GASTOS"
       }
     },
     "companion_download_info": {
@@ -1008,6 +1122,16 @@
     },
     "lnc": {
       "openchannel": ""
+    },
+    "bitcoin": {
+      "getaddress": "Ler seu endereço de recebimento de Bitcoin."
+    },
+    "liquid": {
+      "signschnorr": "Assinar mensagem com sua chave.",
+      "getaddress": "Ler seu endereço de recebimento da Liquid."
+    },
+    "webln": {
+      "getbalance": "Ler o saldo da sua conta."
     }
   }
 }

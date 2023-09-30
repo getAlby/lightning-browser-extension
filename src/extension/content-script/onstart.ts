@@ -1,31 +1,19 @@
 import browser from "webextension-polyfill";
-import api from "~/common/lib/api";
 
-import injectScript from "./injectScript";
-import shouldInject from "./shouldInject";
+import { isManifestV3 } from "~/common/utils/mv3";
+import {
+  injectScript,
+  injectScriptByUrl,
+} from "~/extension/content-script/injectScript";
 
 async function onstart() {
-  const inject = await shouldInject();
-  if (!inject) {
-    return;
+  // Inject in-page scripts for MV2
+  if (!isManifestV3) {
+    // Try to inject inline
+    injectScript("@@@WINDOW_PROVIDER@@@");
+    // Fallback if inline script is blocked via CSP
+    injectScriptByUrl(browser.runtime.getURL("js/inpageScript.bundle.js"));
   }
-
-  const account = await api.getAccount();
-  // window.webln
-  injectScript(browser.runtime.getURL("js/inpageScriptWebLN.bundle.js"));
-
-  // window.webbtc
-  if (account.hasMnemonic) {
-    injectScript(browser.runtime.getURL("js/inpageScriptWebBTC.bundle.js"));
-  }
-
-  // window.nostr
-  if (account.nostrEnabled) {
-    injectScript(browser.runtime.getURL("js/inpageScriptNostr.bundle.js"));
-  }
-
-  // window.alby
-  injectScript(browser.runtime.getURL("js/inpageScriptAlby.bundle.js"));
 }
 
 onstart();

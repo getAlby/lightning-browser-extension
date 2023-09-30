@@ -166,7 +166,7 @@
           "placeholder": ""
         }
       },
-      "bitcoin_beach": {
+      "blink": {
         "title": "",
         "page": {
           "title": ""
@@ -221,8 +221,6 @@
       "recent_transactions": "",
       "allowance_view": {
         "recent_transactions": "",
-        "allowance": "",
-        "sats_used": "",
         "no_transactions": ""
       },
       "default_view": {
@@ -235,13 +233,6 @@
       "actions": {
         "add_account": ""
       }
-    },
-    "enable": {
-      "title": "",
-      "allow": "",
-      "request1": "",
-      "request2": "",
-      "block_and_ignore": ""
     },
     "unlock": {
       "unlock_to_continue": "",
@@ -348,9 +339,6 @@
     },
     "send": {
       "title": "",
-      "qrcode": {
-        "title": ""
-      },
       "input": {
         "label": ""
       }
@@ -548,9 +536,6 @@
         "podcast": ""
       }
     },
-    "confirm_or_cancel": {
-      "only_trusted": ""
-    },
     "budget_control": {
       "remember": {
         "label": "",
@@ -585,13 +570,7 @@
       }
     },
     "publishers_table": {
-      "payments": "",
-      "used": ""
-    },
-    "badge": {
-      "label": {
-        "active": ""
-      }
+      "payments": ""
     }
   }
 }

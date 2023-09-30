@@ -4,7 +4,6 @@ import { MemoryRouter } from "react-router-dom";
 import { settingsFixture as mockSettings } from "~/../tests/fixtures/settings";
 import i18n from "~/../tests/unit/helpers/i18n";
 import { BatteryFixture } from "~/fixtures/battery";
-
 import { AccountsProvider } from "../../../context/AccountsContext";
 import DefaultView from "./index";
 
@@ -12,6 +11,20 @@ jest.mock("~/common/lib/api", () => ({
   getPayments: () => {
     return {
       payments: [],
+    };
+  },
+  getAccountInfo: () => {
+    return {
+      connectorType: "alby",
+      balance: { balance: 0, currency: "BTC" },
+      currentAccountId: "1234",
+      info: {
+        alias: "🐝 getalby.com",
+        pubkey: undefined,
+        lightning_address: "hello@getalby.com",
+      },
+      name: "hello",
+      avatarUrl: undefined,
     };
   },
   getBlocklist: () => {
@@ -66,7 +79,7 @@ describe("DefaultView", () => {
     expect(await screen.findByText("Send")).toBeInTheDocument();
     expect(await screen.findByText("Receive")).toBeInTheDocument();
   });
-  test("render DefaultView with battery", async () => {
+  test("render DefaultView with publisher widget if enabled", async () => {
     const battery = BatteryFixture[0];
     render(
       <AccountsProvider>
@@ -74,6 +87,7 @@ describe("DefaultView", () => {
           <MemoryRouter>
             <DefaultView
               currentUrl={new URL("https://github.com/")}
+              renderPublisherWidget={true}
               lnDataFromCurrentTab={[battery]}
             />
           </MemoryRouter>
@@ -86,5 +100,30 @@ describe("DefaultView", () => {
     ).toBeInTheDocument();
     expect(await screen.findByText(battery.name)).toBeInTheDocument();
     expect(await screen.findByText(battery.description)).toBeInTheDocument();
+  });
+
+  test("render DefaultView without PublisherWidget if disabled", async () => {
+    const battery = BatteryFixture[0];
+    render(
+      <AccountsProvider>
+        <I18nextProvider i18n={i18n}>
+          <MemoryRouter>
+            <DefaultView
+              currentUrl={new URL("https://github.com/")}
+              renderPublisherWidget={false}
+              lnDataFromCurrentTab={[battery]}
+            />
+          </MemoryRouter>
+        </I18nextProvider>
+      </AccountsProvider>
+    );
+
+    expect(
+      await screen.queryByText("⚡️ Send Satoshis ⚡️")
+    ).not.toBeInTheDocument();
+    expect(await screen.queryByText(battery.name)).not.toBeInTheDocument();
+    expect(
+      await screen.queryByText(battery.description)
+    ).not.toBeInTheDocument();
   });
 });

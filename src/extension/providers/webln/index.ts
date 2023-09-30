@@ -1,4 +1,4 @@
-import { postMessage } from "../postMessage";
+import ProviderBase from "~/extension/providers/providerBase";
 
 declare global {
   interface Window {
@@ -20,62 +20,33 @@ type KeysendArgs = {
   amount: string | number;
 };
 
-export default class WebLNProvider {
-  enabled: boolean;
-  isEnabled: boolean;
-  executing: boolean;
-
+export default class WebLNProvider extends ProviderBase {
   constructor() {
-    this.enabled = false;
-    this.isEnabled = false; // seems some webln implementations use webln.isEnabled and some use webln.enabled
-    this.executing = false;
-  }
-
-  enable() {
-    if (this.enabled) {
-      return Promise.resolve({ enabled: true });
-    }
-    return this.execute("enable").then((result) => {
-      if (typeof result.enabled === "boolean") {
-        this.enabled = result.enabled;
-        this.isEnabled = result.enabled;
-      }
-      return result;
-    });
+    super("webln");
   }
 
   getInfo() {
-    if (!this.enabled) {
-      throw new Error("Provider must be enabled before calling getInfo");
-    }
+    this._checkEnabled("getInfo");
     return this.execute("getInfo");
   }
 
   lnurl(lnurlEncoded: string) {
-    if (!this.enabled) {
-      throw new Error("Provider must be enabled before calling lnurl");
-    }
+    this._checkEnabled("lnurl");
     return this.execute("lnurl", { lnurlEncoded });
   }
 
   sendPayment(paymentRequest: string) {
-    if (!this.enabled) {
-      throw new Error("Provider must be enabled before calling sendPayment");
-    }
+    this._checkEnabled("sendPayment");
     return this.execute("sendPaymentOrPrompt", { paymentRequest });
   }
 
   keysend(args: KeysendArgs) {
-    if (!this.enabled) {
-      throw new Error("Provider must be enabled before calling keysend");
-    }
+    this._checkEnabled("keysend");
     return this.execute("keysendOrPrompt", args);
   }
 
   makeInvoice(args: string | number | RequestInvoiceArgs) {
-    if (!this.enabled) {
-      throw new Error("Provider must be enabled before calling makeInvoice");
-    }
+    this._checkEnabled("makeInvoice");
     if (typeof args !== "object") {
       args = { amount: args };
     }
@@ -84,36 +55,27 @@ export default class WebLNProvider {
   }
 
   signMessage(message: string) {
-    if (!this.enabled) {
-      throw new Error("Provider must be enabled before calling signMessage");
-    }
+    this._checkEnabled("signMessage");
 
     return this.execute("signMessageOrPrompt", { message });
   }
 
   verifyMessage(signature: string, message: string) {
-    if (!this.enabled) {
-      throw new Error("Provider must be enabled before calling verifyMessage");
-    }
+    this._checkEnabled("verifyMessage");
     throw new Error("Alby does not support `verifyMessage`");
   }
 
+  getBalance() {
+    this._checkEnabled("getBalance");
+    return this.execute("getBalanceOrPrompt");
+  }
+
   request(method: string, params: Record<string, unknown>) {
-    if (!this.enabled) {
-      throw new Error("Provider must be enabled before calling request");
-    }
+    this._checkEnabled("request");
 
     return this.execute("request", {
       method,
       params,
     });
-  }
-
-  // NOTE: new call `action`s must be specified also in the content script
-  execute(
-    action: string,
-    args?: Record<string, unknown>
-  ): Promise<Record<string, unknown>> {
-    return postMessage("webln", action, args);
   }
 }

@@ -1,11 +1,13 @@
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import utils from "~/common/lib/utils";
 import { getHostFromSender } from "~/common/utils/helpers";
+import {
+  addPermissionFor,
+  hasPermissionFor,
+} from "~/extension/background-script/permissions";
 import state from "~/extension/background-script/state";
 import i18n from "~/i18n/i18nConfig";
 import { MessageEncryptGet, PermissionMethodNostr, Sender } from "~/types";
-
-import { addPermissionFor, hasPermissionFor } from "./helpers";
 
 const encryptOrPrompt = async (message: MessageEncryptGet, sender: Sender) => {
   const host = getHostFromSender(sender);

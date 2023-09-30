@@ -1,13 +1,13 @@
+import { GetAccountInformationResponse } from "@getalby/sdk/dist/types";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import Button from "~/app/components/Button";
+import toast from "~/app/components/Toast";
 import { getAlbyAccountName } from "~/app/utils";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import { WebLNNode } from "~/extension/background-script/connectors/connector.interface";
-import { AlbyAccountInformation } from "~/types";
 
 export default function ConnectAlby() {
   const [loading, setLoading] = useState(false);
@@ -33,7 +33,7 @@ export default function ConnectAlby() {
         }
 
         const accountInfo = validation.info.data as WebLNNode &
-          AlbyAccountInformation;
+          GetAccountInformationResponse;
 
         const account = {
           ...initialAccount,

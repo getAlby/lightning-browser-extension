@@ -4,9 +4,9 @@ import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
 import { useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import PasswordViewAdornment from "~/app/components/PasswordViewAdornment";
+import toast from "~/app/components/Toast";
 import msg from "~/common/lib/msg";
-
 import logo from "/static/assets/icons/lnd.png";
 
 const initialFormData = Object.freeze({
@@ -20,6 +20,7 @@ export default function ConnectLnd() {
   });
   const [formData, setFormData] = useState(initialFormData);
   const [loading, setLoading] = useState(false);
+  const [pairingPhraseVisible, setPairingPhraseVisible] = useState(false);
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setFormData({
@@ -92,12 +93,20 @@ export default function ConnectLnd() {
       <div className="mt-6">
         <TextField
           id="pairingPhrase"
-          type="password"
+          autoComplete="new-password"
+          type={pairingPhraseVisible ? "text" : "password"}
           label={t("pairing_phrase.label")}
           placeholder={t("pairing_phrase.placeholder")}
           onChange={handleChange}
           required
           autoFocus={true}
+          endAdornment={
+            <PasswordViewAdornment
+              onChange={(passwordView) => {
+                setPairingPhraseVisible(passwordView);
+              }}
+            />
+          }
         />
       </div>
     </ConnectorForm>

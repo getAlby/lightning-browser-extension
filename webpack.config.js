@@ -9,8 +9,18 @@ const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const WextManifestWebpackPlugin = require("wext-manifest-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
+const ProviderInjectionPlugin = require("./build-utils/ProviderInjectionPlugin");
 const BundleAnalyzerPlugin =
   require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+
+if (!process.env.NODE_ENV) {
+  process.env.NODE_ENV = "development";
+}
+const nodeEnv = process.env.NODE_ENV;
+const viewsPath = path.join(__dirname, "static", "views");
+const destPath = path.join(__dirname, "dist", nodeEnv);
+
+const targetBrowser = process.env.TARGET_BROWSER;
 
 let network = "mainnet";
 if (!process.env.ALBY_API_URL) {
@@ -22,10 +32,24 @@ if (!process.env.ALBY_API_URL) {
   network = "testnet";
 }
 
-if (
-  !process.env.ALBY_OAUTH_CLIENT_ID &&
-  !process.env.ALBY_OAUTH_CLIENT_SECRET
-) {
+// release build (check for explicitly set env variables)
+const oauthBrowser =
+  process.env.TARGET_BROWSER === "firefox" ? "firefox" : "chrome";
+const clientId =
+  process.env[`ALBY_OAUTH_CLIENT_ID_${oauthBrowser.toUpperCase()}`];
+const clientSecret =
+  process.env[`ALBY_OAUTH_CLIENT_SECRET_${oauthBrowser.toUpperCase()}`];
+
+if (clientId && clientSecret) {
+  process.env.ALBY_OAUTH_CLIENT_ID = clientId;
+  process.env.ALBY_OAUTH_CLIENT_SECRET = clientSecret;
+
+  console.info(
+    "Using oAuth credentials from environment:",
+    clientId,
+    clientSecret
+  );
+} else {
   const oauthCredentials = {
     development: {
       testnet: {
@@ -49,18 +73,36 @@ if (
         },
       },
     },
+    production: {
+      testnet: {
+        // only chrome is used for E2E tests
+        chrome: {
+          id: "mI5TEUKCwD",
+          secret: "47lxj2WNCJyVpxiy6vgq",
+        },
+      },
+      mainnet: {
+        chrome: {
+          id: "R7lZBSqfQt",
+          secret: "W4yWprd5ib6OSfq27InN",
+        },
+        firefox: {
+          id: "V682entasX",
+          secret: "GhL3g37I3NAwzavCB3A5",
+        },
+      },
+    },
   };
-
-  const oauthBrowser =
-    process.env.TARGET_BROWSER === "firefox" ? "firefox" : "chrome";
 
   // setup ALBY_OAUTH_CLIENT_ID
   const selectedOAuthCredentials =
-    oauthCredentials[process.env.NODE_ENV]?.[network]?.[oauthBrowser];
+    oauthCredentials[nodeEnv]?.[network]?.[oauthBrowser];
   if (!selectedOAuthCredentials) {
-    throw new Error("No OAuth credentials found for current configuration");
+    throw new Error(
+      `No OAuth credentials found for current configuration: NODE_ENV=${nodeEnv} network=${network} oauthBrowser=${oauthBrowser}`
+    );
   }
-  console.info("Using OAuth credentials for", oauthBrowser, network);
+  console.info("Using OAuth credentials for", nodeEnv, oauthBrowser, network);
   process.env.ALBY_OAUTH_CLIENT_ID = selectedOAuthCredentials.id;
   process.env.ALBY_OAUTH_CLIENT_SECRET = selectedOAuthCredentials.secret;
 }
@@ -71,8 +113,8 @@ if (!process.env.ALBY_OAUTH_AUTHORIZE_URL) {
 }
 
 // default value is set in the code where it is used
-if (!process.env.BITCOIN_BEACH_GALOY_URL) {
-  process.env.BITCOIN_BEACH_GALOY_URL = ""; // env variables are passed as string. empty strings are still falsy
+if (!process.env.BLINK_GALOY_URL) {
+  process.env.BLINK_GALOY_URL = ""; // env variables are passed as string. empty strings are still falsy
 }
 
 // default value is set in the code where it is used
@@ -87,12 +129,6 @@ if (!process.env.HMAC_VERIFY_HEADER_KEY) {
 if (!process.env.VERSION) {
   process.env.VERSION = require("./package.json").version;
 }
-
-const viewsPath = path.join(__dirname, "static", "views");
-const nodeEnv = process.env.NODE_ENV || "development";
-const destPath = path.join(__dirname, "dist", nodeEnv);
-
-const targetBrowser = process.env.TARGET_BROWSER;
 
 const getExtensionFileType = (browser) => {
   if (browser === "opera") {
@@ -118,16 +154,13 @@ var options = {
   entry: {
     manifest: "./src/manifest.json",
     background: "./src/extension/background-script/index.ts",
-    contentScriptOnEndWebLN: "./src/extension/content-script/onendwebln.js",
-    contentScriptOnEndAlby: "./src/extension/content-script/onendalby.js",
-    contentScriptOnEndNostr: "./src/extension/content-script/onendnostr.js",
-    contentScriptOnEndWebBTC: "./src/extension/content-script/onendwebbtc.js",
+    contentScriptWebLN: "./src/extension/content-script/webln.js",
+    contentScriptAlby: "./src/extension/content-script/alby.js",
+    contentScriptLiquid: "./src/extension/content-script/liquid.js",
+    contentScriptNostr: "./src/extension/content-script/nostr.js",
+    contentScriptWebBTC: "./src/extension/content-script/webbtc.js",
     contentScriptOnStart: "./src/extension/content-script/onstart.ts",
     inpageScript: "./src/extension/inpage-script/index.js",
-    inpageScriptWebLN: "./src/extension/inpage-script/webln.js",
-    inpageScriptWebBTC: "./src/extension/inpage-script/webbtc.js",
-    inpageScriptNostr: "./src/extension/inpage-script/nostr.js",
-    inpageScriptAlby: "./src/extension/inpage-script/alby.js",
     popup: "./src/app/router/Popup/index.tsx",
     prompt: "./src/app/router/Prompt/index.tsx",
     options: "./src/app/router/Options/index.tsx",
@@ -193,6 +226,7 @@ var options = {
   },
 
   plugins: [
+    new ProviderInjectionPlugin(),
     new webpack.ProvidePlugin({
       Buffer: ["buffer", "Buffer"],
       process: ["process"],
@@ -204,7 +238,7 @@ var options = {
     // new webpack.SourceMapDevToolPlugin({ filename: false }),
     // environmental variables
     new webpack.EnvironmentPlugin([
-      "BITCOIN_BEACH_GALOY_URL",
+      "BLINK_GALOY_URL",
       "BITCOIN_JUNGLE_GALOY_URL",
       "NODE_ENV",
       "TARGET_BROWSER",
@@ -279,7 +313,14 @@ if (nodeEnv === "development") {
   options.optimization = {
     minimize: true,
     minimizer: [
-      new TerserPlugin(),
+      new TerserPlugin({
+        terserOptions: {
+          ecma: 6,
+          mangle: {
+            reserved: ["Buffer", "buffer"],
+          },
+        },
+      }),
       new CssMinimizerPlugin(),
       new FilemanagerPlugin({
         events: {

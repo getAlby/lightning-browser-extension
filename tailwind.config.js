@@ -25,14 +25,14 @@ const surfaceColor = "#121212";
 module.exports = {
   darkMode: "class",
   content: ["./static/views/**/*.html", "./src/app/**/*.{js,ts,jsx,tsx}"],
-  plugins: [require("@tailwindcss/forms")],
+  plugins: [require("tailwindcss-3d"), require("@tailwindcss/forms")],
   theme: {
     extend: {
       animation: {
         "spin-fast": "spin 0.7s linear infinite",
       },
       fontFamily: {
-        sans: ["Inter var", ...defaultTheme.fontFamily.sans],
+        sans: ["Open Runde", ...defaultTheme.fontFamily.sans],
         serif: ["Catamaran", ...defaultTheme.fontFamily.sans],
       },
       fontSize: {

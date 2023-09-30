@@ -1,4 +1,5 @@
-import { postMessage } from "../postMessage";
+import EventEmitter from "events";
+import ProviderBase from "~/extension/providers/providerBase";
 import { Event } from "./types";
 
 declare global {
@@ -7,19 +8,11 @@ declare global {
   }
 }
 
-export default class NostrProvider {
+export default class NostrProvider extends ProviderBase {
   nip04 = new Nip04(this);
-  enabled: boolean;
 
   constructor() {
-    this.enabled = false;
-  }
-
-  async enable() {
-    if (this.enabled) {
-      return { enabled: true };
-    }
-    return await this.execute("enable");
+    super("nostr");
   }
 
   async getPublicKey() {
@@ -42,12 +35,15 @@ export default class NostrProvider {
     return this.execute("getRelays");
   }
 
-  // NOTE: new call `action`s must be specified also in the content script
-  execute(
-    action: string,
-    args?: Record<string, unknown>
-  ): Promise<Record<string, unknown>> {
-    return postMessage("nostr", action, args);
+  //override method from base class, we don't want to throw error if not enabled
+  async on(...args: Parameters<EventEmitter["on"]>) {
+    await this.enable();
+    super.on(...args);
+  }
+
+  async off(...args: Parameters<EventEmitter["off"]>) {
+    await this.enable();
+    super.off(...args);
   }
 }
 
@@ -60,11 +56,17 @@ class Nip04 {
 
   async encrypt(peer: string, plaintext: string) {
     await this.provider.enable();
-    return this.provider.execute("encryptOrPrompt", { peer, plaintext });
+    return this.provider.execute("encryptOrPrompt", {
+      peer,
+      plaintext,
+    });
   }
 
   async decrypt(peer: string, ciphertext: string) {
     await this.provider.enable();
-    return this.provider.execute("decryptOrPrompt", { peer, ciphertext });
+    return this.provider.execute("decryptOrPrompt", {
+      peer,
+      ciphertext,
+    });
   }
 }

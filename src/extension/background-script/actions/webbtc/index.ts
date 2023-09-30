@@ -1,5 +1,6 @@
+import enable from "./enable";
 import getAddress from "./getAddress";
-import getAddressWithPrompt from "./getAddressWithPrompt";
+import getAddressOrPrompt from "./getAddressOrPrompt";
 import getInfo from "./getInfo";
 
-export { getAddress, getAddressWithPrompt, getInfo };
+export { enable, getAddress, getAddressOrPrompt, getInfo };

@@ -8,8 +8,8 @@ import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import Alert from "~/app/components/Alert";
+import toast from "~/app/components/Toast";
 import { ACCOUNT_CURRENCIES } from "~/common/constants";
 import msg from "~/common/lib/msg";
 
@@ -79,7 +79,6 @@ export default function ConnectKollidier({ variant }: Props) {
       if (variant === "create") {
         const headers = new Headers();
         headers.append("Accept", "application/json");
-        headers.append("Access-Control-Allow-Origin", "*");
         headers.append("Content-Type", "application/json");
         headers.append("X-User-Agent", "alby-extension");
         const body = JSON.stringify({
@@ -176,7 +175,6 @@ export default function ConnectKollidier({ variant }: Props) {
         <TextField
           id="username"
           label={t(`username.label`)}
-          type="text"
           required
           value={formData.username}
           onChange={handleChange}

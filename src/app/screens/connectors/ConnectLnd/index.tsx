@@ -6,10 +6,10 @@ import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
 import { useRef, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import PasswordViewAdornment from "~/app/components/PasswordViewAdornment";
+import toast from "~/app/components/Toast";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
-
 import logo from "/static/assets/icons/lnd.png";
 
 const initialFormData = {
@@ -28,6 +28,7 @@ export default function ConnectLnd() {
   const hiddenFileInput = useRef<HTMLInputElement>(null);
   const [loading, setLoading] = useState(false);
   const [hasTorSupport, setHasTorSupport] = useState(false);
+  const [macaroonVisible, setMacaroonVisible] = useState(false);
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setFormData({
@@ -80,7 +81,8 @@ export default function ConnectLnd() {
             message={validation.error as string}
             link={formData.url}
           />,
-          { autoClose: false }
+          // Don't auto-close
+          { duration: 100_000 }
         );
       }
     } catch (e) {
@@ -175,10 +177,19 @@ export default function ConnectLnd() {
         <div>
           <TextField
             id="macaroon"
+            type={macaroonVisible ? "text" : "password"}
+            autoComplete="new-password"
             label={t("macaroon.label")}
             value={formData.macaroon}
             onChange={handleChange}
             required
+            endAdornment={
+              <PasswordViewAdornment
+                onChange={(passwordView) => {
+                  setMacaroonVisible(passwordView);
+                }}
+              />
+            }
           />
         </div>
         <p className="text-center my-6 dark:text-white">{tCommon("or")}</p>

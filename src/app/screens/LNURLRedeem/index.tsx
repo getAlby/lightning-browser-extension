@@ -7,8 +7,8 @@ import TextField from "@components/form/TextField";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import QrcodeAdornment from "~/app/components/QrcodeAdornment";
+import toast from "~/app/components/Toast";
 import { extractLightningTagData } from "~/app/utils";
 import lnurlLib from "~/common/lib/lnurl";
 import { isLNURLDetailsError } from "~/common/utils/typeHelpers";
@@ -65,14 +65,15 @@ function LNURLRedeem() {
   return (
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <Header
-        title={t("title")}
         headerLeft={
           <IconButton
             onClick={() => navigate(-1)}
             icon={<CaretLeftIcon className="w-4 h-4" />}
           />
         }
-      />
+      >
+        {t("title")}
+      </Header>
       <form onSubmit={handleSubmit} className="h-full">
         <Container justifyBetween maxWidth="sm">
           <div className="pt-4">
@@ -91,7 +92,7 @@ function LNURLRedeem() {
               endAdornment={<QrcodeAdornment route="lnurlRedeem" />}
             />
           </div>
-          <div className="my-4">
+          <div className="mt-4">
             <Button
               type="submit"
               label={t("actions.withdraw")}

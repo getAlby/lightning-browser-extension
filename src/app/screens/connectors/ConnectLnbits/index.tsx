@@ -5,7 +5,7 @@ import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
 import { useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import toast from "~/app/components/Toast";
 import msg from "~/common/lib/msg";
 
 import logo from "/static/assets/icons/lnbits.png";
@@ -109,7 +109,6 @@ export default function ConnectLnbits() {
           id="adminkey"
           label={t("admin_key.label")}
           placeholder={t("admin_key.placeholder")}
-          type="text"
           required
           onChange={handleChange}
           autoFocus={true}
@@ -118,7 +117,6 @@ export default function ConnectLnbits() {
       <TextField
         id="url"
         label={t("url.label")}
-        type="text"
         value={formData.url}
         required
         onChange={handleChange}

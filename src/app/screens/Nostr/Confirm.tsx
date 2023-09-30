@@ -2,10 +2,10 @@ import { CheckIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
 import PublisherCard from "@components/PublisherCard";
-import Checkbox from "@components/form/Checkbox";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import ScreenHeader from "~/app/components/ScreenHeader";
+import Checkbox from "~/app/components/form/Checkbox";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
@@ -21,7 +21,7 @@ function NostrConfirm() {
   const description = navState.args?.description;
   const details = navState.args?.details;
   const [loading, setLoading] = useState(false);
-  const [rememberPermission, setRememberPermission] = useState(false);
+  const [rememberPermission, setRememberPermission] = useState(true);
 
   function confirm() {
     setLoading(true);
@@ -77,8 +77,9 @@ function NostrConfirm() {
                 )}
               </p>
             </div>
-
-            <div className="flex items-center">
+          </div>
+          <div className="text-center flex flex-col">
+            <div className="flex items-center mb-4">
               <Checkbox
                 id="remember_permission"
                 name="remember_permission"
@@ -94,8 +95,6 @@ function NostrConfirm() {
                 {tCommon("actions.remember")}
               </label>
             </div>
-          </div>
-          <div className="mb-4 text-center flex flex-col">
             <ConfirmOrCancel
               disabled={loading}
               loading={loading}
@@ -103,7 +102,7 @@ function NostrConfirm() {
               onCancel={reject}
             />
             <a
-              className="underline text-sm text-gray-400 mx-4 overflow-hidden text-ellipsis whitespace-nowrap"
+              className="mt-4 underline text-sm text-gray-400 overflow-hidden text-ellipsis whitespace-nowrap"
               href="#"
               onClick={block}
             >

@@ -5,10 +5,10 @@ import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
 import { useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import PasswordViewAdornment from "~/app/components/PasswordViewAdornment";
+import toast from "~/app/components/Toast";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
-
 import logo from "/static/assets/icons/start9.png";
 
 const initialFormData = {
@@ -24,6 +24,7 @@ export default function ConnectStart9() {
   const [formData, setFormData] = useState(initialFormData);
   const [loading, setLoading] = useState(false);
   const [hasTorSupport, setHasTorSupport] = useState(false);
+  const [lndconnectUrlVisible, setLndconnectUrlVisible] = useState(false);
 
   function handleLndconnectUrl(event: React.ChangeEvent<HTMLInputElement>) {
     try {
@@ -136,11 +137,20 @@ export default function ConnectStart9() {
       <div className="mt-6">
         <TextField
           id="lndconnect"
+          type={lndconnectUrlVisible ? "text" : "password"}
+          autoComplete="new-password"
           label={t("rest_url.label")}
           placeholder={t("rest_url.placeholder")}
           onChange={handleLndconnectUrl}
           required
           autoFocus={true}
+          endAdornment={
+            <PasswordViewAdornment
+              onChange={(passwordView) => {
+                setLndconnectUrlVisible(passwordView);
+              }}
+            />
+          }
         />
       </div>
       {formData.url.match(/\.onion/i) && (

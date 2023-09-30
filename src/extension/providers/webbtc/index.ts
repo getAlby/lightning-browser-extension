@@ -1,4 +1,4 @@
-import { postMessage } from "../postMessage";
+import ProviderBase from "~/extension/providers/providerBase";
 
 declare global {
   interface Window {
@@ -6,66 +6,34 @@ declare global {
   }
 }
 
-export default class WebBTCProvider {
-  enabled: boolean;
+export default class WebBTCProvider extends ProviderBase {
   isEnabled: boolean;
   executing: boolean;
 
   constructor() {
-    this.enabled = false;
+    super("webbtc");
     this.isEnabled = false;
     this.executing = false;
   }
 
-  enable() {
-    if (this.enabled) {
-      return Promise.resolve({ enabled: true });
-    }
-    return this.execute("enable").then((result) => {
-      if (typeof result.enabled === "boolean") {
-        this.enabled = result.enabled;
-        this.isEnabled = result.enabled;
-      }
-      return result;
-    });
-  }
-
   getInfo() {
-    if (!this.enabled) {
-      throw new Error("Provider must be enabled before calling getInfo");
-    }
+    this._checkEnabled("getInfo");
     return this.execute("getInfo");
   }
 
   sendTransaction(address: string, amount: string) {
-    if (!this.enabled) {
-      throw new Error(
-        "Provider must be enabled before calling sendTransaction"
-      );
-    }
+    this._checkEnabled("sendTransaction");
     throw new Error("Alby does not support `sendTransaction`");
   }
 
   getAddress() {
-    if (!this.enabled) {
-      throw new Error("Provider must be enabled before calling getAddress");
-    }
-    return this.execute("getAddressWithPrompt", {});
+    this._checkEnabled("getAddress");
+    return this.execute("getAddressOrPrompt", {});
   }
 
   request(method: string, params: Record<string, unknown>) {
-    if (!this.enabled) {
-      throw new Error("Provider must be enabled before calling request");
-    }
+    this._checkEnabled("request");
 
     throw new Error("Alby does not support `request`");
-  }
-
-  // NOTE: new call `action`s must be specified also in the content script
-  execute(
-    action: string,
-    args?: Record<string, unknown>
-  ): Promise<Record<string, unknown>> {
-    return postMessage("webbtc", action, args);
   }
 }
