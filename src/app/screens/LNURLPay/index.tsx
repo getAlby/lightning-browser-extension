@@ -523,7 +523,11 @@ function LNURLPay() {
                         </div>
                       )}
                     </div>
-                    <div className="mt-2 dark:border-white/10">
+                    <div
+                      className={`mt-2 dark:border-white/10 ${
+                        showMoreFields && "pb-4"
+                      }`}
+                    >
                       <ConfirmOrCancel
                         isFocused={false}
                         label={tCommon("actions.confirm")}
