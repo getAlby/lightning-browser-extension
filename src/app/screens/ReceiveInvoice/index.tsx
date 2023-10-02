@@ -143,7 +143,14 @@ function ReceiveInvoice() {
     return (
       <>
         <div className="mt-4 relative p-8 bg-white rounded-lg shadow-sm ring-1 ring-black ring-opacity-5 flex justify-center items-center overflow-hidden">
-          <QRCode value={invoice.paymentRequest.toUpperCase()} />
+          <div className="relative flex flex-grid w-fit h-fit">
+            <QRCode value={invoice.paymentRequest.toUpperCase()} />
+            <img
+              className="w-[64px] h-[64px] absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10"
+              src="assets/icons/alby_icon_qr.svg"
+              alt="Alby logo"
+            />
+          </div>
           {paid && (
             <div className="absolute inset-0 flex justify-center items-center bg-white/90">
               <div className="text-center">
