@@ -766,7 +766,7 @@
         "title": "Sua carteira Alby está pronta",
         "description": "Algumas dicas para você começar a usar a Alby 🐝",
         "mnemonic": {
-          "description": "Planejando usar apps Nostr?\nClique aqui para gerar suas chaves.",
+          "description": "Planejando usar apps Nostr?\nClique aqui para configurar suas chaves.",
           "title": "Nostr"
         }
       }
@@ -907,19 +907,37 @@
       "provider": {
         "label": "Serviço provedor de trocas"
       },
-      "time_estimate": "ℹ️ As transações geralmente são recebidas dentro de 10 a 30 minutos."
+      "time_estimate": "ℹ️ As transações geralmente são recebidas dentro de 10 a 30 minutos.",
+      "title": "Enviar para um endereço bitcoin",
+      "recipient": {
+        "label": "Endereço"
+      }
     },
     "onboard": {
       "request2": "Você ainda não configurou suas chaves",
       "request3": "A configuração é rápida e fácil",
       "title": "Configure suas chaves",
       "actions": {
-        "start_setup": "Iniciar configuração"
-      }
+        "start_setup": "Configurar"
+      },
+      "request1": "Interagir com este site exige configurar uma chave"
     },
     "nostr_enable": {
       "request2": "Assinar eventos usando sua chave privada Nostr",
-      "request1": "Solicitar a leitura de sua chave pública Nostr"
+      "request1": "Solicitar a leitura de sua chave pública Nostr",
+      "title": "Conectar no Nostr"
+    },
+    "webln_enable": {
+      "title": "Conectar no WebLN"
+    },
+    "webbtc_enable": {
+      "title": "Conectar no WebBTC"
+    },
+    "liquid_enable": {
+      "title": "Conectar na Liquid"
+    },
+    "alby_enable": {
+      "title": "Conectar na Alby"
     }
   },
   "common": {
@@ -966,7 +984,8 @@
       "download": "Baixar",
       "copy_clipboard": "Copiar para área de transferência",
       "disconnect": "Desconectar",
-      "copied_to_clipboard": "Copiado para a área de transferência"
+      "copied_to_clipboard": "Copiado para a área de transferência",
+      "review": "Revisar"
     },
     "errors": {
       "connection_failed": "Falha na conexão",
