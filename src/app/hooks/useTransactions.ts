@@ -33,16 +33,33 @@ export const useTransactions = () => {
           })
         );
 
-        // const getalltrans = await api.getTransactions({
-        //   isSettled: true,
-        //   limit,
-        // });
-        // console.log(getalltrans);
+        let allTransactions = undefined;
+
+        const getAllTransactionsResponse = await api.getTransactions({
+          isSettled: true,
+          limit,
+        });
+
+        try {
+          allTransactions = getAllTransactionsResponse.transactions.map(
+            (transaction) => ({
+              ...transaction,
+              title: transaction.memo,
+              description: transaction.memo,
+              date: dayjs(transaction.settleDate).fromNow(),
+              timestamp: transaction.settleDate,
+            })
+          );
+        } catch (e) {
+          console.error(e);
+        }
 
         const _transactions: Transaction[] =
           await convertPaymentsToTransactions(payments);
 
-        const transactionList: Transaction[] = [..._transactions, ...invoices];
+        const transactionList: Transaction[] = allTransactions
+          ? allTransactions
+          : [..._transactions, ...invoices];
 
         for (const transaction of transactionList) {
           transaction.totalAmountFiat = settings.showFiat

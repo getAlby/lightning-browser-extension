@@ -8,23 +8,30 @@ const transactions = async (message: MessageTransactions) => {
 
   const connector = await state.getState().getConnector();
   try {
+    const supportedMethods = connector.supportedMethods || [];
+    if (!supportedMethods.includes("getTransactions")) {
+      return "not supported";
+    }
     const result = await connector.getTransactions();
-    let invoices: Invoice[] = result.data.transactions
-      .filter((invoice) => (isSettled ? invoice.settled : !invoice.settled))
-      .map((invoice) => {
+
+    let transactions: Invoice[] = result.data.transactions
+      .filter((transaction) =>
+        isSettled ? transaction.settled : !transaction.settled
+      )
+      .map((transaction) => {
         const boostagram = utils.getBoostagramFromInvoiceCustomRecords(
-          invoice.custom_records
+          transaction.custom_records
         );
-        return { ...invoice, boostagram };
+        return { ...transaction, boostagram };
       });
 
     if (limit) {
-      invoices = invoices.slice(0, limit);
+      transactions = transactions.slice(0, limit);
     }
 
     return {
       data: {
-        invoices,
+        transactions,
       },
     };
   } catch (e) {
