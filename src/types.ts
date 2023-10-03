@@ -806,6 +806,7 @@ export interface Blocklist extends DbBlocklist {}
 
 export interface DbAllowance {
   createdAt: string;
+  enabledFor?: string[];
   enabled: boolean;
   host: string;
   id?: number;
