@@ -19,7 +19,7 @@ export default function QRCode({ value, size, className }: Props) {
       className={classNames("rounded-md", className ?? "")}
       fgColor={fgColor}
       bgColor={bgColor}
-      level="M"
+      level="Q"
     />
   );
 }
