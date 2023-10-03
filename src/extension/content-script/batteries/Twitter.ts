@@ -109,10 +109,10 @@ function battery(): void {
         for (const zapElement of zapElements) {
           if (
             (match = (zapElement.nextSibling?.textContent || "").match(
-              /(\S+@\S+)/
+              /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b/
             ))
           ) {
-            recipient = match[1];
+            recipient = match[0];
             break;
           }
         }
