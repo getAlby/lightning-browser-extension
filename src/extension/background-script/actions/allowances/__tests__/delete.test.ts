@@ -78,6 +78,7 @@ describe("delete allowance", () => {
         id: 1,
         imageURL: "https://pro.kollider.xyz/favicon.ico",
         lastPaymentAt: 0,
+        enabledFor: ["webln"],
         lnurlAuth: true,
         name: "pro kollider",
         remainingBudget: 500,

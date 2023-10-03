@@ -303,7 +303,12 @@
       "recent_transactions": "Senaste Transaktioner",
       "allowance_view": {
         "recent_transactions": "Senaste Transaktioner",
-        "no_transactions": "Inga transaktioner för <0>{{name}}</0> ännu."
+        "no_transactions": "Inga transaktioner för <0>{{name}}</0> ännu.",
+        "sats": "sats",
+        "budget_spent": "Budget förbrukad",
+        "total_spent": "Totalt spenderat",
+        "total_payments": "Totala betalningar",
+        "permissions": "Behörigheter"
       },
       "default_view": {
         "recent_transactions": "Senaste Transaktioner",
@@ -339,7 +344,8 @@
             "label": "Nostr Privat Nyckel",
             "subtitle": "Klistra in din nostr privata nyckel eller skapa en ny. <0>Läs mer »</0>",
             "success": "Nostr privat nyckel krypterad och sparad.",
-            "failed_to_remove": "Det angivna kontonamnet matchade inte, din gamla Nostr privata nyckel har återställts."
+            "failed_to_remove": "Det angivna kontonamnet matchade inte, din gamla Nostr privata nyckel har återställts.",
+            "warning": "Vänligen ange namnet på kontot för att bekräfta raderingen av din nostr privata nyckel:\n\n{{ name }}"
           },
           "public_key": {
             "label": "Nostr Publik Nyckel"
@@ -386,7 +392,8 @@
         "remove": {
           "title": "Ta bort detta konto",
           "subtitle": "Tar bort alla traktamenten, betalningsdata och nycklar som är kopplade till detta konto.",
-          "error": "Det angivna kontonamnet matchade inte."
+          "error": "Det angivna kontonamnet matchade inte.",
+          "confirm": "Ange namnet på kontot för att bekräfta raderingen av ditt konto.\n\n{{ name }}\n\n ⚠️ Alla associerade nycklar (Master Key, Nostr, etc) kommer att raderas om du fortsätter. Se till att du har säkerhetskopierat dem, det finns inget annat sätt att återställa dem."
         },
         "title1": "Konto inställningar",
         "title2": "Konto",
@@ -430,7 +437,8 @@
             "items": {
               "recovery_phrase": "Du kan alltid komma åt din huvudnyckel genom att använda dess återställningsfras.",
               "words": "Återställningsfrasen består av 12 ord som fungerar som ett lösenord, men det kan inte ändras eller återställas om det tappas bort.",
-              "storage": "Se till att skriva ner det någonstans säkert och privat!"
+              "storage": "Se till att skriva ner det någonstans säkert och privat!",
+              "keys": "Master Key låter dig interagera med olika protokoll som: Nostr, Liquid eller baslager av Bitcoin."
             }
           },
           "import": {
@@ -445,12 +453,16 @@
           "lnurl": {
             "title": "Logga in med Lightning",
             "use_mnemonic": "Använd Master Key för att logga in på lightning appar (LNURL Auth)"
+          },
+          "new": {
+            "title": "Vad är en Master Key?"
           }
         },
         "remove_secretkey": {
           "title": "Ta bort huvudnyckeln",
           "subtitle": "Tar bort huvudnyckeln från det här kontot.",
-          "success": "Masternyckeln har tagits bort."
+          "success": "Masternyckeln har tagits bort.",
+          "confirm": "Ange namnet på kontot för att bekräfta raderingen av din huvudnyckel.\n{{ name }}"
         },
         "no_mnemonic_hint": "💡 Du har ingen huvudnyckel än. <0>Klicka här</0></div> för att skapa din huvudnyckel och låsa upp dessa inställningar.",
         "network": {
@@ -913,6 +925,10 @@
       },
       "view_on_explorer": "Visa på mempool explorer",
       "time_estimate": "ℹ️ Transaktioner kommer vanligtvis inom 10-30 minuter."
+    },
+    "webln_enable": {
+      "title": "Anslut till WebLN",
+      "request2": "Begär fakturor och lightning information"
     }
   },
   "common": {
