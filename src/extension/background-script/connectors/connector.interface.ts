@@ -29,7 +29,7 @@ export interface ConnectorInvoice {
   settled: boolean;
   settleDate: number;
   totalAmount: string;
-  type: "received";
+  type: "received" | "sent";
 }
 
 export interface MakeInvoiceArgs {
@@ -61,6 +61,11 @@ export type GetInvoicesResponse = {
   };
 };
 
+export type GetTransactionsResponse = {
+  data: {
+    transactions: ConnectorInvoice[];
+  };
+};
 export type SendPaymentResponse = {
   data: {
     preimage: string;
@@ -120,6 +125,7 @@ export default interface Connector {
   getInfo(): Promise<GetInfoResponse>;
   getBalance(): Promise<GetBalanceResponse>;
   getInvoices(): Promise<GetInvoicesResponse>;
+  getTransactions(): Promise<GetTransactionsResponse>;
   makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse>;
   sendPayment(args: SendPaymentArgs): Promise<SendPaymentResponse>;
   keysend(args: KeysendArgs): Promise<SendPaymentResponse>;

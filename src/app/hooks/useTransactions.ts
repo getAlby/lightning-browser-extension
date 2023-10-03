@@ -33,6 +33,12 @@ export const useTransactions = () => {
           })
         );
 
+        // const getalltrans = await api.getTransactions({
+        //   isSettled: true,
+        //   limit,
+        // });
+        // console.log(getalltrans);
+
         const _transactions: Transaction[] =
           await convertPaymentsToTransactions(payments);
 

@@ -20,6 +20,7 @@ import Connector, {
   GetBalanceResponse,
   GetInfoResponse,
   GetInvoicesResponse,
+  GetTransactionsResponse,
   KeysendArgs,
   MakeInvoiceArgs,
   MakeInvoiceResponse,
@@ -69,7 +70,14 @@ export default class Alby implements Connector {
   }
 
   get supportedMethods() {
-    return ["getInfo", "keysend", "makeInvoice", "sendPayment", "getBalance"];
+    return [
+      "getInfo",
+      "keysend",
+      "makeInvoice",
+      "sendPayment",
+      "getBalance",
+      "getTransactions",
+    ];
   }
 
   // not yet implemented
@@ -100,6 +108,37 @@ export default class Alby implements Connector {
     return {
       data: {
         invoices,
+      },
+    };
+  }
+
+  async getTransactions(): Promise<GetTransactionsResponse> {
+    const incomingInvoices = (await this._request((client) =>
+      client.incomingInvoices({})
+    )) as Invoice[];
+
+    const outgoingInvoices = (await this._request((client) =>
+      client.outgoingInvoices({})
+    )) as Invoice[];
+
+    const transactions: ConnectorInvoice[] = [
+      ...incomingInvoices,
+      ...outgoingInvoices,
+    ].map(
+      (invoice, index): ConnectorInvoice => ({
+        custom_records: invoice.custom_records,
+        id: `${invoice.payment_request}-${index}`,
+        memo: invoice.comment || invoice.memo,
+        preimage: "", // alby wallet api doesn't support preimage (yet)
+        settled: invoice.settled,
+        settleDate: new Date(invoice.settled_at).getTime(),
+        totalAmount: `${invoice.amount}`,
+        type: invoice.type == "incoming" ? "received" : "sent",
+      })
+    );
+    return {
+      data: {
+        transactions,
       },
     };
   }

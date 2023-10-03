@@ -7,6 +7,7 @@ import Connector, {
   GetBalanceResponse,
   GetInfoResponse,
   GetInvoicesResponse,
+  GetTransactionsResponse,
   KeysendArgs,
   MakeInvoiceArgs,
   MakeInvoiceResponse,
@@ -82,6 +83,15 @@ class CitadelConnector implements Connector {
     );
     throw new Error(
       `${this.constructor.name}: "getInvoices" is not yet supported. Contact us if you need it.`
+    );
+  }
+
+  getTransactions(): Promise<GetTransactionsResponse> {
+    console.error(
+      `Not yet supported with the currently used account: ${this.constructor.name}`
+    );
+    throw new Error(
+      `${this.constructor.name}: "getTransactions" is not yet supported. Contact us if you need it.`
     );
   }
 

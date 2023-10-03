@@ -7,6 +7,7 @@ import makeInvoice from "./makeInvoice";
 import request from "./request";
 import sendPayment from "./sendPayment";
 import signMessage from "./signMessage";
+import transactions from "./transactions";
 
 export {
   checkPayment,
@@ -15,7 +16,8 @@ export {
   invoices,
   keysend,
   makeInvoice,
+  request,
   sendPayment,
   signMessage,
-  request,
+  transactions,
 };

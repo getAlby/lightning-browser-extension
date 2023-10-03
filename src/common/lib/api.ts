@@ -26,6 +26,7 @@ import type {
   MessageInvoices,
   MessageLnurlAuth,
   MessageSettingsSet,
+  MessageTransactions,
   NodeInfo,
   PsetPreview,
   SettingsStorage,
@@ -168,6 +169,8 @@ export const getBlocklist = (host: string) =>
   msg.request<BlocklistRes>("getBlocklist", { host });
 export const getInvoices = (options?: MessageInvoices["args"]) =>
   msg.request<{ invoices: Invoice[] }>("getInvoices", options);
+export const getTransactions = (options?: MessageTransactions["args"]) =>
+  msg.request<{ transactions: Invoice[] }>("getTransactions", options);
 export const lnurlAuth = (
   options: MessageLnurlAuth["args"]
 ): Promise<LnurlAuthResponse> =>
@@ -260,6 +263,7 @@ export default {
   unlock,
   getBlocklist,
   getInvoices,
+  getTransactions,
   lnurlAuth,
   getCurrencyRate,
   nostr: {

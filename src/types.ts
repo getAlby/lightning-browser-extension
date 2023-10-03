@@ -345,6 +345,10 @@ export interface MessageInvoices extends Omit<MessageDefault, "args"> {
   args: { limit?: number; isSettled?: boolean };
   action: "getInvoices";
 }
+export interface MessageTransactions extends Omit<MessageDefault, "args"> {
+  args: { limit?: number; isSettled?: boolean };
+  action: "getTransactions";
+}
 
 export interface MessageAllowanceEnable extends MessageDefault {
   origin: OriginData;
@@ -872,7 +876,7 @@ export type SupportedExchanges = "alby" | "coindesk" | "yadio";
 export interface Invoice {
   id: string;
   memo: string;
-  type: "received";
+  type: "received" | "sent";
   settled: boolean;
   settleDate: number;
   totalAmount: string;

@@ -16,6 +16,7 @@ import Connector, {
   GetBalanceResponse,
   GetInfoResponse,
   GetInvoicesResponse,
+  GetTransactionsResponse,
   KeysendArgs,
   MakeInvoiceArgs,
   MakeInvoiceResponse,
@@ -460,6 +461,15 @@ class Lnd implements Connector {
         invoices,
       },
     };
+  }
+
+  getTransactions(): Promise<GetTransactionsResponse> {
+    console.error(
+      `Not yet supported with the currently used account: ${this.constructor.name}`
+    );
+    throw new Error(
+      `${this.constructor.name}: "getTransactions" is not yet supported. Contact us if you need it.`
+    );
   }
 
   protected async request<Type>(
