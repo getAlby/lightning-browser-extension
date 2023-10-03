@@ -41,9 +41,7 @@ const enable = async (message: MessageAllowanceEnable, sender: Sender) => {
             return { data: { error: "id is missing" } };
           }
 
-          if (!enabledFor.has("alby")) {
-            enabledFor.add("alby");
-          }
+          enabledFor.add("alby");
 
           await db.allowances.update(allowance.id, {
             enabled: true,

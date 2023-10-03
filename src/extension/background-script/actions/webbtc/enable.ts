@@ -48,9 +48,8 @@ const enable = async (message: MessageAllowanceEnable, sender: Sender) => {
             return { data: { error: "id is missing" } };
           }
 
-          if (!enabledFor.has("webbtc")) {
-            enabledFor.add("webbtc");
-          }
+          enabledFor.add("webbtc");
+
           await db.allowances.update(allowance.id, {
             enabled: true,
             enabledFor,
