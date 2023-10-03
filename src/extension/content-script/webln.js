@@ -11,6 +11,7 @@ const weblnCalls = [
   "webln/getInfo",
   "webln/lnurl",
   "webln/sendPaymentOrPrompt",
+  "webln/sendPaymentAsyncWithPrompt",
   "webln/keysendOrPrompt",
   "webln/makeInvoice",
   "webln/signMessageOrPrompt",

@@ -22,6 +22,7 @@ import Toaster from "~/app/components/Toast/Toaster";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
 import BitcoinConfirmGetAddress from "~/app/screens/Bitcoin/ConfirmGetAddress";
+import ConfirmPaymentAsync from "~/app/screens/ConfirmPaymentAsync";
 import AlbyEnable from "~/app/screens/Enable/AlbyEnable";
 import LiquidEnable from "~/app/screens/Enable/LiquidEnable";
 import NostrEnable from "~/app/screens/Enable/NostrEnable";
@@ -137,6 +138,10 @@ function Prompt() {
             <Route path="lnurlChannel" element={<LNURLChannel />} />
             <Route path="makeInvoice" element={<MakeInvoice />} />
             <Route path="confirmPayment" element={<ConfirmPayment />} />
+            <Route
+              path="confirmPaymentAsync"
+              element={<ConfirmPaymentAsync />}
+            />
             <Route path="confirmKeysend" element={<ConfirmKeysend />} />
             <Route path="confirmSignMessage" element={<ConfirmSignMessage />} />
             <Route path="confirmAddAccount" element={<ConfirmAddAccount />} />
