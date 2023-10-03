@@ -530,7 +530,6 @@
     },
     "webln_enable": {
       "title": "Connect to WebLN",
-
       "request2": "Request invoices and lightning information"
     },
     "alby_enable": {
@@ -548,7 +547,7 @@
     },
     "webbtc_enable": {
       "title": "Connect to WebBTC",
-      "request2": "Request invoices and liquid information"
+      "request2": "Request invoices and Webbtc information"
     },
     "unlock": {
       "unlock_to_continue": "Unlock to continue",
