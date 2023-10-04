@@ -241,9 +241,9 @@ function ReceiveInvoice() {
       {invoice ? (
         <Container maxWidth="sm">{renderInvoice()}</Container>
       ) : (
-        <div className="pt-4">
-          <form onSubmit={handleSubmit}>
-            <fieldset disabled={loadingInvoice}>
+        <div className="pt-4 h-full">
+          <form onSubmit={handleSubmit} className="h-full">
+            <fieldset disabled={loadingInvoice} className="h-full">
               <Container justifyBetween maxWidth="sm">
                 <div>
                   <div className="mb-4">
