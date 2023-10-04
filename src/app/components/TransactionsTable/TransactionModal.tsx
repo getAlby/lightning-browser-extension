@@ -21,6 +21,31 @@ type Props = {
   isOpen: boolean;
 };
 
+const Dt = ({ children }: { children: React.ReactNode }) => (
+  <dt className="text-sm leading-5 text-gray-400 dark:text-neutral-500 text-right">
+    {children}
+  </dt>
+);
+
+const Dd = ({ children }: { children: React.ReactNode }) => (
+  <dd className="text-sm leading-5 text-gray-800 dark:text-neutral-200 col-span-2 break-all">
+    {children}
+  </dd>
+);
+
+const TransactionDetailRow = ({
+  title,
+  content,
+}: {
+  title: React.ReactNode;
+  content: React.ReactNode;
+}) => (
+  <div className="grid grid-cols-3 gap-2 p-1">
+    <Dt>{title}</Dt>
+    <Dd>{content}</Dd>
+  </div>
+);
+
 export default function TransactionModal({
   transaction,
   isOpen,
@@ -97,111 +122,78 @@ export default function TransactionModal({
               )}
             </div>
           </div>
-          <div>
-            <div>
-              <div className="mt-6">
-                <dl>
-                  <div className="grid grid-cols-3 gap-2 p-1">
-                    <dt className="text-md font-medium leading-6 text-gray-400 dark:text-neutral-600 text-right">
-                      Date & Time
-                    </dt>
-                    <dd className="text-md leading-6  text-gray-900 dark:text-white col-span-2 mt-0 break-all">
-                      {dayjs(transaction.timestamp).format(
-                        "D MMMM YYYY, HH:mm"
-                      )}
-                    </dd>
-                  </div>
-                  {transaction.totalFees?.toString && (
-                    <div className="grid grid-cols-3 gap-2 px-0 p-1">
-                      <dt className="text-md text-right font-medium leading-6 text-gray-400 dark:text-neutral-600">
-                        Fee
-                      </dt>
-                      <dd className=" text-md leading-6  text-gray-900 dark:text-white col-span-2 mt-0 break-all">
-                        {getFormattedSats(transaction.totalFees)}
-                      </dd>
-                    </div>
-                  )}
-                  {transaction.publisherLink && transaction.title && (
-                    <div className="grid grid-cols-3 gap-2 px-0 p-1">
-                      <dt className="text-md text-right font-medium leading-6 text-gray-400 dark:text-neutral-600">
-                        Website
-                      </dt>
-                      <dd className=" text-md leading-6 col-span-2 mt-0 break-all">
-                        <a
-                          className="cursor-pointer text-blue-600 hover:text-blue-700"
-                          target="_blank"
-                          href={transaction.publisherLink}
-                          rel="noopener noreferrer"
-                        >
-                          {transaction.title}
-                        </a>
-                      </dd>
-                    </div>
-                  )}
-
-                  {transaction.boostagram?.podcast && (
-                    <div className="grid grid-cols-3 gap-2 px-0 p-1">
-                      <dt className="text-md text-right font-medium leading-6 text-gray-400 dark:text-neutral-600">
-                        Podcast
-                      </dt>
-                      <dd className=" text-md leading-6  text-gray-900 dark:text-white col-span-2 mt-0 break-all">
-                        {transaction.boostagram?.podcast}
-                      </dd>
-                    </div>
-                  )}
-                  {transaction.boostagram?.episode && (
-                    <div className="grid grid-cols-3 gap-2 px-0 p-1">
-                      <dt className="text-md text-right font-medium leading-6 text-gray-400 dark:text-neutral-600">
-                        Episode
-                      </dt>
-                      <dd className=" text-md leading-6  text-gray-900 dark:text-white col-span-2 mt-0 break-all">
-                        {transaction.boostagram.episode}
-                      </dd>
-                    </div>
-                  )}
-                  {transaction.description && (
-                    <div className="grid grid-cols-3 gap-2 px-0 p-1">
-                      <dt className="text-md text-right font-medium leading-6 text-gray-400 dark:text-neutral-600">
-                        Description
-                      </dt>
-                      <dd className=" text-md leading-6  text-gray-900 dark:text-white col-span-2 mt-0 break-all">
-                        {transaction.description}
-                      </dd>
-                    </div>
-                  )}
-                  <div className="flex justify-center mt-4">
-                    <Hyperlink onClick={toggleShowMoreFields}>
-                      {tCommon("actions.more")}{" "}
-                      {showMoreFields ? (
-                        <CaretUpIcon className="h-4 w-4 inline-flex" />
-                      ) : (
-                        <CaretDownIcon className="h-4 w-4 inline-flex" />
-                      )}
-                    </Hyperlink>
-                  </div>
-                  {showMoreFields && transaction.type == "sent" && (
-                    <div className="grid grid-cols-3 gap-2 px-0 p-1">
-                      <dt className="text-md text-right font-medium leading-6 text-gray-400 dark:text-neutral-600">
-                        Preimage
-                      </dt>
-                      <dd className=" text-md leading-6  text-gray-900 dark:text-white col-span-2 mt-0 break-all">
-                        {transaction.preimage}
-                      </dd>
-                    </div>
-                  )}
-                  {showMoreFields && transaction.type == "sent" && (
-                    <div className="grid grid-cols-3 gap-2 px-0 p-1">
-                      <dt className="text-md text-right font-medium leading-6 text-gray-400 dark:text-neutral-600">
-                        Hash
-                      </dt>
-                      <dd className=" text-md leading-6  text-gray-900 dark:text-white col-span-2 mt-0 break-all">
-                        {transaction.paymentHash}
-                      </dd>
-                    </div>
-                  )}
-                </dl>
-              </div>
+          {/* List */}
+          <div className="mt-6">
+            <TransactionDetailRow
+              title="Date & Time"
+              content={dayjs(transaction.timestamp).format(
+                "D MMMM YYYY, HH:mm"
+              )}
+            />
+            {transaction.totalFees?.toString && (
+              <TransactionDetailRow
+                title="Fee"
+                content={getFormattedSats(transaction.totalFees)}
+              />
+            )}
+            {transaction.publisherLink && transaction.title && (
+              <TransactionDetailRow
+                title="Website"
+                content={
+                  <Hyperlink
+                    target="_blank"
+                    href={transaction.publisherLink}
+                    rel="noopener noreferrer"
+                  >
+                    {transaction.title}
+                  </Hyperlink>
+                }
+              />
+            )}
+            {transaction.boostagram?.podcast && (
+              <TransactionDetailRow
+                title="Podcast"
+                content={transaction.boostagram?.podcast}
+              />
+            )}
+            {transaction.boostagram?.episode && (
+              <TransactionDetailRow
+                title="Episode"
+                content={transaction.boostagram.episode}
+              />
+            )}
+            {transaction.description && (
+              <TransactionDetailRow
+                title="Description"
+                content={transaction.description}
+              />
+            )}
+            <div className="flex justify-center mt-4">
+              <Hyperlink onClick={toggleShowMoreFields}>
+                {tCommon("actions.more")}{" "}
+                {showMoreFields ? (
+                  <CaretUpIcon className="h-4 w-4 inline-flex" />
+                ) : (
+                  <CaretDownIcon className="h-4 w-4 inline-flex" />
+                )}
+              </Hyperlink>
             </div>
+            {showMoreFields && (
+              <>
+                {transaction.preimage && (
+                  <TransactionDetailRow
+                    title="Preimage"
+                    content={transaction.preimage}
+                  />
+                )}
+                {transaction.paymentHash && (
+                  <TransactionDetailRow
+                    title="Payment hash"
+                    content={transaction.paymentHash}
+                  />
+                )}
+              </>
+            )}
           </div>
         </div>
       )}

@@ -78,7 +78,7 @@ export default function TransactionsTable({
                         (type == "incoming" ? "Received" : "Sent")}
                     </p>
                   </div>
-                  <p className="text-xs text-gray-600 dark:text-neutral-400">
+                  <p className="text-xs text-gray-400 dark:text-neutral-500">
                     {tx.date}
                   </p>
                 </div>

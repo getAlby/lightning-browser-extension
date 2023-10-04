@@ -1,9 +1,9 @@
 import {
+  ArrowRightIcon,
   ReceiveIcon,
   SendIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import Button from "@components/Button";
-import Hyperlink from "@components/Hyperlink";
 import Loading from "@components/Loading";
 import TransactionsTable from "@components/TransactionsTable";
 import dayjs from "dayjs";
@@ -12,6 +12,7 @@ import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import BalanceBox from "~/app/components/BalanceBox";
+import Hyperlink from "~/app/components/Hyperlink";
 import SkeletonLoader from "~/app/components/SkeletonLoader";
 import toast from "~/app/components/Toast";
 import { useAccount } from "~/app/context/AccountContext";
@@ -171,22 +172,27 @@ const DefaultView: FC<Props> = (props) => {
 
         {!isLoading && (
           <div>
-            <h2 className="mb-2 text-lg lg:text-xl text-gray-900 font-bold dark:text-white text-center">
-              {t("default_view.latest_transactions")}
-            </h2>
+            <div className="flex justify-between items-center mb-2">
+              <h2 className="text-lg lg:text-xl font-semibold dark:text-white text-center">
+                {t("default_view.latest_transactions")}
+              </h2>
+
+              {!isLoading && transactions.length > 0 && (
+                <Hyperlink
+                  onClick={() => handleViewAllLink("/transactions")}
+                  className="flex justify-between items-center"
+                >
+                  {t("default_view.see_all")}
+                  <ArrowRightIcon className="w-4 h-4" />
+                </Hyperlink>
+              )}
+            </div>
 
             <TransactionsTable
               transactions={transactions}
               loading={isLoading}
               noResultMsg={t("default_view.no_transactions")}
             />
-            {!isLoading && transactions.length > 0 && (
-              <div className="mt-5 text-center">
-                <Hyperlink onClick={() => handleViewAllLink("/transactions")}>
-                  {t("default_view.all_transactions_link")}
-                </Hyperlink>
-              </div>
-            )}
           </div>
         )}
       </div>

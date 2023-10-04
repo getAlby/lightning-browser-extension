@@ -367,8 +367,7 @@
         "is_blocked_hint": "Alby is currently disabled on {{host}}",
         "block_removed": "Enabled {{host}}. Please reload the website.",
         "no_transactions": "No transactions for this account yet.",
-
-        "all_transactions_link": "See all transactions"
+        "see_all": "See all"
       }
     },
     "accounts": {
@@ -954,7 +953,6 @@
     "transactions": {
       "title": "Transactions",
       "description": "Transactions for this account",
-
       "list_empty": "No transactions available yet."
     },
     "onboard": {
