@@ -8,10 +8,6 @@ const transactions = async (message: MessageTransactions) => {
 
   const connector = await state.getState().getConnector();
   try {
-    const supportedMethods = connector.supportedMethods || [];
-    if (!supportedMethods.includes("getTransactions")) {
-      return "not supported";
-    }
     const result = await connector.getTransactions();
 
     let transactions: Invoice[] = result.data.transactions

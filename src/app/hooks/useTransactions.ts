@@ -33,14 +33,13 @@ export const useTransactions = () => {
           })
         );
 
-        let allTransactions = undefined;
-
-        const getAllTransactionsResponse = await api.getTransactions({
-          isSettled: true,
-          limit,
-        });
+        let allTransactions;
 
         try {
+          const getAllTransactionsResponse = await api.getTransactions({
+            isSettled: true,
+            limit,
+          });
           allTransactions = getAllTransactionsResponse.transactions.map(
             (transaction) => ({
               ...transaction,
