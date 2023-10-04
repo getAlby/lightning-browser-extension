@@ -43,13 +43,11 @@ async function authOrPrompt(
   if (isUnlocked && allowance && allowance.enabled && allowance.lnurlAuth) {
     if (!isAlbyOAuthConnector) {
       return await authFunction({ lnurlDetails, origin: message.origin });
-    } else if (account?.mnemonic) {
-      return await authFunction({ lnurlDetails, origin: message.origin });
     } else {
-      authPrompt();
+      return await authPrompt();
     }
   } else {
-    authPrompt();
+    return await authPrompt();
   }
 
   async function authPrompt() {
@@ -63,7 +61,8 @@ async function authOrPrompt(
         },
       };
 
-      return await utils.openPrompt<LnurlAuthResponse>(promptMessage);
+      const response = await utils.openPrompt<LnurlAuthResponse>(promptMessage);
+      return response;
     } catch (e) {
       // user rejected
       return { error: e instanceof Error ? e.message : e };
