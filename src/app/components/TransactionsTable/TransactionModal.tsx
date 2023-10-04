@@ -1,9 +1,11 @@
 import {
-  ArrowDownIcon,
-  ArrowUpIcon,
   CaretDownIcon,
   CaretUpIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
+import {
+  ArrowDownIcon,
+  ArrowUpIcon,
+} from "@bitcoin-design/bitcoin-icons-react/outline";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -61,11 +63,11 @@ export default function TransactionModal({
             <div className="flex items-center justify-center">
               {getTransactionType(transaction) == "outgoing" ? (
                 <div className="flex justify-center items-center bg-orange-100 rounded-full p-8">
-                  <ArrowUpIcon className="w-8 h-8 text-orange-400" />
+                  <ArrowUpIcon className="w-8 h-8 text-orange-400 stroke-[5px]" />
                 </div>
               ) : (
                 <div className="flex justify-center items-center bg-green-100 rounded-full p-8">
-                  <ArrowDownIcon className="w-8 h-8 text-green-400" />
+                  <ArrowDownIcon className="w-8 h-8 text-green-400 stroke-[5px]" />
                 </div>
               )}
             </div>

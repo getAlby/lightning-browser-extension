@@ -1,7 +1,7 @@
 import {
   ArrowDownIcon,
   ArrowUpIcon,
-} from "@bitcoin-design/bitcoin-icons-react/filled";
+} from "@bitcoin-design/bitcoin-icons-react/outline";
 import Loading from "@components/Loading";
 
 import { useState } from "react";
@@ -59,11 +59,11 @@ export default function TransactionsTable({
                 <div className="flex items-center">
                   {type == "outgoing" ? (
                     <div className="flex justify-center items-center bg-orange-100 rounded-full w-8 h-8">
-                      <ArrowUpIcon className="w-6 h-6 text-orange-400" />
+                      <ArrowUpIcon className="w-6 h-6 text-orange-400 stroke-[4px]" />
                     </div>
                   ) : (
                     <div className="flex justify-center items-center bg-green-100 rounded-full w-8 h-8">
-                      <ArrowDownIcon className="w-6 h-6 text-green-400" />
+                      <ArrowDownIcon className="w-6 h-6 text-green-400 stroke-[4px]" />
                     </div>
                   )}
                 </div>
