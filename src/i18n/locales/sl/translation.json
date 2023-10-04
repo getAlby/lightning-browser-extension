@@ -260,12 +260,6 @@
           "invalid_uri": "Nepravilni LNDHub URI",
           "connection_failed": "Povezava ni bila uspešna. Je tvoj LNDHub URI pravilen?"
         }
-      },
-      "bitcoin_beach": {
-        "title": "Bitcoin Beach Wallet",
-        "page": {
-          "title": "Poveži na <0>Bitcoin Beach Wallet</0>"
-        }
       }
     },
     "welcome": {
@@ -351,7 +345,10 @@
       "default_view": {
         "recent_transactions": "Pretekle transakcije",
         "is_blocked_hint": "Alby je trenutno na {{host}} onemogočen",
-        "all_transactions_link": "Poglej vse transakcije"
+        "all_transactions_link": "Poglej vse transakcije",
+        "block_removed": "Omogoči {{host}}. Ponovno naloži stran.",
+        "no_outgoing_transactions": "Na tem računu ni odlivov.",
+        "no_incoming_transactions": "Na tem računu ni prihodkov."
       }
     },
     "accounts": {
@@ -422,16 +419,72 @@
               "private_key": {
                 "description": "Prilepi Nostr zasebni ključ za uvoz v Alby",
                 "label": "Uporabi Nostr zasebni ključ"
+              },
+              "recovery_phrase": {
+                "label": "Uporabi obnovitveno frazo"
               }
             },
             "new": {
               "label": "Ustvari nov Nostr račun"
             }
           },
-          "title": "Nostr"
+          "title": "Nostr",
+          "public_key": {
+            "label": "Javni ključ Nostr"
+          },
+          "generate_keys": {
+            "screen_reader": "Generiraj nov Nostr ključ za svoj račun",
+            "title": "Generiraj nov Nostr ključ",
+            "actions": {
+              "random_keys": "Generiraj naključni ključ"
+            }
+          },
+          "private_key": {
+            "label": "Zasebni ključ Nostr"
+          },
+          "actions": {
+            "generate": "Generiraj nov ključ"
+          }
         },
-        "title1": "Nastavitve računa"
+        "title1": "Nastavitve računa",
+        "remove": {
+          "title": "Odstrani ta račun",
+          "error": "Vnešeno ime računa se ne ujema."
+        },
+        "remove_secretkey": {
+          "subtitle": "Odstrani Glavni ključ iz tega računa.",
+          "title": "Odstrani Glavni ključ",
+          "success": "Glavni ključ je uspešno odstranjen."
+        },
+        "actions": {
+          "export": "Izvoz",
+          "remove_account": "Odstrani račun",
+          "remove_secretkey": "Odstrani Glavni ključ"
+        }
+      },
+      "actions": {
+        "add_account": "Dodaj račun"
       }
+    },
+    "unlock": {
+      "help_contact": {
+        "part1": "Potrebuješ pomoč? Kontakt",
+        "part2": "Alby podpora"
+      },
+      "errors": {
+        "invalid_password": "Neveljavno geslo"
+      },
+      "unlock_to_continue": "Odkleni za nadaljevanje",
+      "unlock_password": "Odkleni svoje geslo",
+      "unlock_error": {
+        "link": "Obnovi in dodaj nov račun"
+      }
+    },
+    "settings": {
+      "browser_notifications": {
+        "title": "Obvestila brskalnika"
+      },
+      "title": "Nastavitve"
     }
   },
   "permissions": {
@@ -441,7 +494,17 @@
       "getinfo": "Pridobi informacije vozlišča.",
       "lookupinvoice": "Pridobi podrobnosti računa.",
       "addinvoice": "Kreiraj nove račune.",
-      "addholdinvoice": "Kreiraj nov eHODL račune."
+      "addholdinvoice": "Kreiraj nov eHODL račune.",
+      "listchannels": "Pridobi opis vseh odprtih kanalov.",
+      "connectpeer": "Vzpostavi povezavo z oddaljenim strežnikom.",
+      "disconnectpeer": "Odjavi iz oddaljenega strežnika.",
+      "queryroutes": "Poišči možno pot.",
+      "listpeers": "Pridobi seznam trenutno aktivnih strežnikov.",
+      "getnodeinfo": "Prodobi kanalne informacije o vozlišču.",
+      "decodepayreq": "Dekodiraj niz plačilne zahteve.",
+      "sendtoroute": "Izvedi plačilo preko določene poti.",
+      "verifymessage": "Overi podpis preko sporočila.",
+      "settleinvoice": "Poravnaj prejeti račun."
     },
     "commando": {
       "offer": "Oblikuj ponudbo.",
@@ -449,7 +512,19 @@
     },
     "lnd": {
       "addinvoice": "Kreiraj nove račune.",
-      "addholdinvoice": "Kreiraj nove HODL račune."
+      "addholdinvoice": "Kreiraj nove HODL račune.",
+      "openchannel": "Odpri nov kanal.",
+      "listpeers": "Pridobi seznam trenutno aktivnih strežnikov.",
+      "listchannels": "Pridobi opis vseh odprtih kanalov.",
+      "disconnectpeer": "Odjava iz oddaljenega strežnika.",
+      "connectpeer": "Vzpostavi povezavo z oddaljenim strežnikom.",
+      "listinvoices": "Pridobi seznam vseh računov.",
+      "getnodeinfo": "Pridobi kanalne informacije o vozlišču.",
+      "verifymessage": "Preveri podpis preko sporočila.",
+      "queryroutes": "Poišči možno pot.",
+      "lookupinvoice": "Preglej podrobnosti računa.",
+      "settleinvoice": "Poravnaj sprejete račune.",
+      "sendtoroute": "Izvedi plačilo preko določene poti."
     }
   }
 }

@@ -1,6 +1,5 @@
 import browser from "webextension-polyfill";
 
-import api from "~/common/lib/api";
 import extractLightningData from "./batteries";
 import getOriginData from "./originData";
 import shouldInject from "./shouldInject";
@@ -31,7 +30,6 @@ function loadEnabledState() {
 
 let isEnabled = loadEnabledState(); // store if webln is enabled for this content page
 let isRejected = false; // store if the webln enable call failed. if so we do not prompt again
-let account;
 
 async function init() {
   const inject = await shouldInject();
@@ -95,16 +93,6 @@ async function init() {
         prompt: true,
         origin: getOriginData(),
       };
-
-      // Overrides the enable action so the user can go through onboarding to setup their keys
-
-      // Overrides the enable action so the user can go through onboarding to setup their keys
-      if (!account || !account.hasMnemonic) {
-        account = await api.getAccount();
-        if (!account.hasMnemonic) {
-          messageWithOrigin.action = ev.data.action = `public/webln/onboard`;
-        }
-      }
 
       const replyFunction = (response) => {
         // if it is the enable call we store if webln is enabled for this content script

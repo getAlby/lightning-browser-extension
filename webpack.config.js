@@ -113,8 +113,8 @@ if (!process.env.ALBY_OAUTH_AUTHORIZE_URL) {
 }
 
 // default value is set in the code where it is used
-if (!process.env.BITCOIN_BEACH_GALOY_URL) {
-  process.env.BITCOIN_BEACH_GALOY_URL = ""; // env variables are passed as string. empty strings are still falsy
+if (!process.env.BLINK_GALOY_URL) {
+  process.env.BLINK_GALOY_URL = ""; // env variables are passed as string. empty strings are still falsy
 }
 
 // default value is set in the code where it is used
@@ -238,7 +238,7 @@ var options = {
     // new webpack.SourceMapDevToolPlugin({ filename: false }),
     // environmental variables
     new webpack.EnvironmentPlugin([
-      "BITCOIN_BEACH_GALOY_URL",
+      "BLINK_GALOY_URL",
       "BITCOIN_JUNGLE_GALOY_URL",
       "NODE_ENV",
       "TARGET_BROWSER",

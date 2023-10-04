@@ -22,7 +22,7 @@ const Avatar = (props: Props) => {
 const AvatarImage = (props: Props) => {
   return (
     <div
-      className={classNames("translate-z-0 bg-white", props.className ?? "")}
+      className={classNames("translate-z-0", props.className ?? "")}
       style={{
         width: `${props.size}px`,
         height: `${props.size}px`,

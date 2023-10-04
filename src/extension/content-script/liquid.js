@@ -1,6 +1,5 @@
 import browser from "webextension-polyfill";
 
-import api from "~/common/lib/api";
 import getOriginData from "./originData";
 import shouldInject from "./shouldInject";
 
@@ -16,7 +15,6 @@ const disabledCalls = ["liquid/enable"];
 
 let isEnabled = false; // store if liquid is enabled for this content page
 let isRejected = false; // store if the liquid enable call failed. if so we do not prompt again
-let account;
 
 const SCOPE = "liquid";
 
@@ -67,14 +65,6 @@ async function init() {
         prompt: true,
         origin: getOriginData(),
       };
-
-      // Overrides the enable action so the user can go through onboarding to setup their keys
-      if (!account || !account.hasMnemonic) {
-        account = await api.getAccount();
-        if (!account.hasMnemonic) {
-          messageWithOrigin.action = ev.data.action = `public/liquid/onboard`;
-        }
-      }
 
       const replyFunction = (response) => {
         if (ev.data.action === `${SCOPE}/enable`) {

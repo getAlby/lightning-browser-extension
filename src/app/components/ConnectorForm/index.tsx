@@ -72,7 +72,7 @@ function ConnectorForm({
         </div>
         {media}
         {description && (
-          <div className="text-gray-500 dark:text-neutral-400 whitespace-pre-line">
+          <div className="text-gray-500 dark:text-white whitespace-pre-line">
             {typeof description === "string" ? (
               <p className="mb-6">{description}</p>
             ) : (
