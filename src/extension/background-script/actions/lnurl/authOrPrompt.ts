@@ -41,9 +41,7 @@ async function authOrPrompt(
   // otherwise we we prompt the user
 
   if (isUnlocked && allowance && allowance.enabled && allowance.lnurlAuth) {
-    if (!isAlbyOAuthConnector) {
-      return await authFunction({ lnurlDetails, origin: message.origin });
-    } else if (account?.mnemonic) {
+    if (!isAlbyOAuthConnector || account?.mnemonic) {
       return await authFunction({ lnurlDetails, origin: message.origin });
     } else {
       return await authPrompt();
