@@ -21,7 +21,7 @@
     "build:firefox": "NODE_ENV=production TARGET_BROWSER=firefox webpack",
     "build:opera": "NODE_ENV=production TARGET_BROWSER=opera webpack",
     "build": "yarn build:chrome && yarn build:firefox && yarn build:opera",
-    "package": "yarn build && ./create-packages.sh",
+    "package": "./create-packages.sh",
     "lint": "yarn lint:js && yarn tsc:compile && yarn format:fix",
     "lint:js": "eslint src --ext .js,.jsx,.ts,.tsx --max-warnings 0",
     "lint:js:fix": "eslint src --ext .js,.jsx,.ts,.tsx --fix",

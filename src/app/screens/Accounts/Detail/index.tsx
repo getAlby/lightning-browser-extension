@@ -201,6 +201,7 @@ function AccountDetail() {
                   onChange={(event) => {
                     setAccountName(event.target.value);
                   }}
+                  required
                 />
               </div>
               <div className="w-1/5 flex-none mx-4 d-none"></div>
