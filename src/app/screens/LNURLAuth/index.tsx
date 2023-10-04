@@ -14,8 +14,8 @@ export default function LNURLAuth() {
     async function fetchAccountInfo() {
       try {
         const fetchedAccount = await api.getAccount();
-        const connectorType = isAlbyOAuthAccount(fetchedAccount.connectorType);
-        setAlbyOAuthAccount(connectorType);
+        const isOAuthAccount = isAlbyOAuthAccount(fetchedAccount.connectorType);
+        setAlbyOAuthAccount(isOAuthAccount);
 
         if (fetchedAccount.hasMnemonic) {
           setHasMnemonic(true);
