@@ -40,12 +40,14 @@ async function authOrPrompt(
   // check if there is a publisher and lnurlAuth is enabled,
   // otherwise we we prompt the user
 
-  if (isUnlocked && allowance && allowance.enabled && allowance.lnurlAuth) {
-    if (!isAlbyOAuthConnector || account?.mnemonic) {
-      return await authFunction({ lnurlDetails, origin: message.origin });
-    } else {
-      return await authPrompt();
-    }
+  if (
+    isUnlocked &&
+    allowance &&
+    allowance.enabled &&
+    allowance.lnurlAuth &&
+    (!isAlbyOAuthConnector || account?.mnemonic)
+  ) {
+    return await authFunction({ lnurlDetails, origin: message.origin });
   } else {
     return await authPrompt();
   }
