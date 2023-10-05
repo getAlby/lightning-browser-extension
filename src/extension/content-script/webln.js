@@ -19,16 +19,12 @@ const weblnCalls = [
   "webln/on",
   "webln/emit",
   "webln/off",
+  "webln/isEnabled",
 ];
 // calls that can be executed when webln is not enabled for the current content page
-const disabledCalls = ["webln/enable"];
+const disabledCalls = ["webln/enable", "webln/isEnabled"];
 
-function loadEnabledState() {
-  const storedEnabled = localStorage.getItem("enabled");
-  return storedEnabled === "true";
-}
-
-let isEnabled = loadEnabledState(); // store if webln is enabled for this content page
+let isEnabled = false; // store if webln is enabled for this content page
 let isRejected = false; // store if the webln enable call failed. if so we do not prompt again
 
 async function init() {
@@ -105,6 +101,10 @@ async function init() {
             console.info("Enable was rejected ignoring further webln calls");
             isRejected = true;
           }
+        }
+
+        if (ev.data.action === "webln/isEnabled") {
+          isEnabled = response.data?.isEnabled;
         }
         postMessage(ev, response);
       };

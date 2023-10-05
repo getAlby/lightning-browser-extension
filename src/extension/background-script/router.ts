@@ -96,6 +96,7 @@ const routes = {
     webln: {
       onboard: onboard.prompt,
       enable: webln.enable,
+      isEnabled: webln.isEnabled,
       getInfo: ln.getInfo,
       sendPaymentOrPrompt: webln.sendPaymentOrPrompt,
       keysendOrPrompt: webln.keysendOrPrompt,

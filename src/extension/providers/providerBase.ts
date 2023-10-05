@@ -8,18 +8,10 @@ export default class ProviderBase {
   private _scope: string;
 
   constructor(scope: string) {
-    this.enabled = this.loadEnabledState();
+    this._scope = scope;
+    this.enabled = false;
     this._eventEmitter = new EventEmitter();
     this._scope = scope;
-  }
-
-  private loadEnabledState(): boolean {
-    const storedEnabled = localStorage.getItem("enabled");
-    return storedEnabled === "true";
-  }
-
-  private saveEnabledState(enabled: boolean): void {
-    localStorage.setItem("enabled", enabled.toString());
   }
 
   protected _checkEnabled(methodName: string): void {
@@ -35,7 +27,6 @@ export default class ProviderBase {
     const result = await this.execute("enable");
     if (typeof result.enabled === "boolean") {
       this.enabled = result.enabled;
-      this.saveEnabledState(this.enabled);
     }
   }
 
@@ -51,6 +42,17 @@ export default class ProviderBase {
 
   emit(...args: Parameters<EventEmitter["emit"]>) {
     this._eventEmitter.emit(...args);
+  }
+
+  async isProviderEnabled(): Promise<boolean> {
+    if (this.enabled) {
+      return true;
+    }
+    const result = await this.execute("isEnabled");
+    if (typeof result.isEnabled === "boolean") {
+      this.enabled = result.isEnabled;
+    }
+    return this.enabled;
   }
 
   // NOTE: new call `action`s must be specified also in the content script
