@@ -8,7 +8,6 @@ import * as ln from "./actions/ln";
 import lnurl, { auth } from "./actions/lnurl";
 import * as mnemonic from "./actions/mnemonic";
 import * as nostr from "./actions/nostr";
-import * as onboard from "./actions/onboard";
 import * as payments from "./actions/payments";
 import * as permissions from "./actions/permissions";
 import * as settings from "./actions/settings";
@@ -96,7 +95,6 @@ const routes = {
       addAccount: accounts.promptAdd,
     },
     webln: {
-      onboard: onboard.prompt,
       enable: webln.enable,
       isEnabled: webln.isEnabled,
       getInfo: ln.getInfo,

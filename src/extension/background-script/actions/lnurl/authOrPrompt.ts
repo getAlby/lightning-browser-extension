@@ -33,12 +33,9 @@ async function authOrPrompt(
   // we have the check the unlock status manually. The account can still be locked
   // If it is locked we must show a prompt to unlock
   const isUnlocked = await state.getState().isUnlocked();
+  const account = await state.getState().getAccount();
 
-  // check if there is a publisher and lnurlAuth is enabled,
-  // otherwise we we prompt the user
-  if (isUnlocked && allowance && allowance.enabled && allowance.lnurlAuth) {
-    return await authFunction({ lnurlDetails, origin: message.origin });
-  } else {
+  async function authPrompt() {
     try {
       const promptMessage = {
         ...message,
@@ -49,12 +46,28 @@ async function authOrPrompt(
         },
       };
 
-      return await utils.openPrompt<LnurlAuthResponse>(promptMessage);
+      const response = await utils.openPrompt<LnurlAuthResponse>(promptMessage);
+      return response;
     } catch (e) {
       // user rejected
       return { error: e instanceof Error ? e.message : e };
     }
   }
+
+  // check if there is a publisher and lnurlAuth is enabled,
+  // otherwise we we prompt the user
+
+  if (
+    isUnlocked &&
+    allowance &&
+    allowance.enabled &&
+    allowance.lnurlAuth &&
+    (!account?.useMnemonicForLnurlAuth || account?.mnemonic)
+  ) {
+    return await authFunction({ lnurlDetails, origin: message.origin });
+  }
+
+  return await authPrompt();
 }
 
 export default authOrPrompt;
