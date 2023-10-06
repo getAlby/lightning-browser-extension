@@ -44,7 +44,7 @@ export default class ProviderBase {
     this._eventEmitter.emit(...args);
   }
 
-  async isProviderEnabled(): Promise<boolean> {
+  async isEnabled(): Promise<boolean> {
     if (this.enabled) {
       return true;
     }

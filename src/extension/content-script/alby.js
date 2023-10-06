@@ -5,9 +5,9 @@ import shouldInject from "./shouldInject";
 
 // Alby calls that can be executed from the AlbyProvider.
 // Update when new calls are added
-const albyCalls = ["alby/enable", "alby/addAccount"];
+const albyCalls = ["alby/enable", "alby/addAccount", "alby/isEnabled"];
 // calls that can be executed when alby is not enabled for the current content page
-const disabledCalls = ["alby/enable"];
+const disabledCalls = ["alby/enable", "alby/isEnabled"];
 
 let isEnabled = false; // store if alby is enabled for this content page
 let isRejected = false; // store if the alby enable call failed. if so we do not prompt again
@@ -69,6 +69,9 @@ async function init() {
             console.info("Enable was rejected ignoring further alby calls");
             isRejected = true;
           }
+        }
+        if (ev.data.action === "alby/isEnabled") {
+          isEnabled = response.data?.isEnabled;
         }
         postMessage(ev, response);
       };

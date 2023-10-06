@@ -8,9 +8,10 @@ const webbtcCalls = [
   "webbtc/enable",
   "webbtc/getInfo",
   "webbtc/getAddressOrPrompt",
+  "webbtc/isEnabled",
 ];
 // calls that can be executed when `window.webbtc` is not enabled for the current content page
-const disabledCalls = ["webbtc/enable"];
+const disabledCalls = ["webbtc/enable", "webbtc/isEnabled"];
 
 let isEnabled = false; // store if webbtc is enabled for this content page
 let isRejected = false; // store if the webbtc enable call failed. if so we do not prompt again
@@ -73,6 +74,10 @@ async function init() {
             console.info("Enable was rejected ignoring further webbtc calls");
             isRejected = true;
           }
+        }
+
+        if (ev.data.action === `${SCOPE}/isEnabled`) {
+          isEnabled = response.data?.isEnabled;
         }
 
         postMessage(ev, response);
