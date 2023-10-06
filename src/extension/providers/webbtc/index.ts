@@ -7,13 +7,8 @@ declare global {
 }
 
 export default class WebBTCProvider extends ProviderBase {
-  isWebBTCEnabled: boolean;
-  executing: boolean;
-
   constructor() {
     super("webbtc");
-    this.isWebBTCEnabled = false;
-    this.executing = false;
   }
 
   getInfo() {
