@@ -9,9 +9,10 @@ const liquidCalls = [
   "liquid/getAddressOrPrompt",
   "liquid/signPsetWithPrompt",
   "liquid/enable",
+  "liquid/isEnabled",
 ];
 // calls that can be executed when liquid is not enabled for the current content page
-const disabledCalls = ["liquid/enable"];
+const disabledCalls = ["liquid/enable", "liquid/isEnabled"];
 
 let isEnabled = false; // store if liquid is enabled for this content page
 let isRejected = false; // store if the liquid enable call failed. if so we do not prompt again
@@ -74,6 +75,10 @@ async function init() {
             console.info("Enable was rejected ignoring further liquid calls");
             isRejected = true;
           }
+        }
+
+        if (ev.data.action === `${SCOPE}/isEnabled`) {
+          isEnabled = response.data?.isEnabled;
         }
 
         postMessage(ev, response);

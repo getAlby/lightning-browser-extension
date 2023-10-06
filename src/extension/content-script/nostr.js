@@ -16,9 +16,10 @@ const nostrCalls = [
   "nostr/on",
   "nostr/off",
   "nostr/emit",
+  "nostr/isEnabled",
 ];
 // calls that can be executed when nostr is not enabled for the current content page
-const disabledCalls = ["nostr/enable"];
+const disabledCalls = ["nostr/enable", "nostr/isEnabled"];
 
 let isEnabled = false; // store if nostr is enabled for this content page
 let isRejected = false; // store if the nostr enable call failed. if so we do not prompt again
@@ -91,6 +92,9 @@ async function init() {
             console.info("User rejected, ignoring further nostr calls");
             isRejected = true;
           }
+        }
+        if (ev.data.action === "nostr/isEnabled") {
+          isEnabled = response.data?.isEnabled;
         }
 
         postMessage(ev, response);
