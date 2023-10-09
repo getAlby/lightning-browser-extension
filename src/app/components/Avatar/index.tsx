@@ -1,10 +1,12 @@
 import { useEffect, useRef } from "react";
 import { generateSvgGAvatar } from "~/app/components/Avatar/generator";
+import { classNames } from "~/app/utils";
 
 type Props = {
   name: string;
   size: number;
   url?: string;
+  className?: string;
 };
 
 const Avatar = (props: Props) => {
@@ -20,6 +22,7 @@ const Avatar = (props: Props) => {
 const AvatarImage = (props: Props) => {
   return (
     <div
+      className={classNames("translate-z-0", props.className ?? "")}
       style={{
         width: `${props.size}px`,
         height: `${props.size}px`,
@@ -48,11 +51,10 @@ const AvatarSVG = (props: Omit<Props, "url">) => {
 
   return (
     <svg
-      className="rounded-full overflow-hidden"
-      style={{
-        transform:
-          "translateZ(0)" /* Forced GPU render to avoid ugly borders when switching accounts */,
-      }}
+      className={classNames(
+        "rounded-full overflow-hidden translate-z-0",
+        props.className ?? ""
+      )}
       ref={svgRef}
       width={props.size}
       height={props.size}

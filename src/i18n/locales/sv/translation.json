@@ -173,10 +173,10 @@
           "placeholder": "din-onion-nod-adress:port"
         }
       },
-      "bitcoin_beach": {
-        "title": "Bitcoin Beach plånbok",
+      "blink": {
+        "title": "Blink plånbok",
         "page": {
-          "title": "Anslut <0>Bitcoin Beach Wallet</0>"
+          "title": "Anslut <0>Blink Wallet</0>"
         }
       },
       "bitcoin_jungle": {
@@ -303,9 +303,12 @@
       "recent_transactions": "Senaste Transaktioner",
       "allowance_view": {
         "recent_transactions": "Senaste Transaktioner",
-        "allowance": "Beloppsgräns",
-        "sats_used": "spenderade sats",
-        "no_transactions": "Inga transaktioner för <0>{{name}}</0> ännu."
+        "no_transactions": "Inga transaktioner för <0>{{name}}</0> ännu.",
+        "sats": "sats",
+        "budget_spent": "Budget förbrukad",
+        "total_spent": "Totalt spenderat",
+        "total_payments": "Totala betalningar",
+        "permissions": "Behörigheter"
       },
       "default_view": {
         "recent_transactions": "Senaste Transaktioner",
@@ -341,7 +344,8 @@
             "label": "Nostr Privat Nyckel",
             "subtitle": "Klistra in din nostr privata nyckel eller skapa en ny. <0>Läs mer »</0>",
             "success": "Nostr privat nyckel krypterad och sparad.",
-            "failed_to_remove": "Det angivna kontonamnet matchade inte, din gamla Nostr privata nyckel har återställts."
+            "failed_to_remove": "Det angivna kontonamnet matchade inte, din gamla Nostr privata nyckel har återställts.",
+            "warning": "Vänligen ange namnet på kontot för att bekräfta raderingen av din nostr privata nyckel:\n\n{{ name }}"
           },
           "public_key": {
             "label": "Nostr Publik Nyckel"
@@ -388,7 +392,8 @@
         "remove": {
           "title": "Ta bort detta konto",
           "subtitle": "Tar bort alla traktamenten, betalningsdata och nycklar som är kopplade till detta konto.",
-          "error": "Det angivna kontonamnet matchade inte."
+          "error": "Det angivna kontonamnet matchade inte.",
+          "confirm": "Ange namnet på kontot för att bekräfta raderingen av ditt konto.\n\n{{ name }}\n\n ⚠️ Alla associerade nycklar (Master Key, Nostr, etc) kommer att raderas om du fortsätter. Se till att du har säkerhetskopierat dem, det finns inget annat sätt att återställa dem."
         },
         "title1": "Konto inställningar",
         "title2": "Konto",
@@ -432,7 +437,8 @@
             "items": {
               "recovery_phrase": "Du kan alltid komma åt din huvudnyckel genom att använda dess återställningsfras.",
               "words": "Återställningsfrasen består av 12 ord som fungerar som ett lösenord, men det kan inte ändras eller återställas om det tappas bort.",
-              "storage": "Se till att skriva ner det någonstans säkert och privat!"
+              "storage": "Se till att skriva ner det någonstans säkert och privat!",
+              "keys": "Master Key låter dig interagera med olika protokoll som: Nostr, Liquid eller baslager av Bitcoin."
             }
           },
           "import": {
@@ -447,12 +453,16 @@
           "lnurl": {
             "title": "Logga in med Lightning",
             "use_mnemonic": "Använd Master Key för att logga in på lightning appar (LNURL Auth)"
+          },
+          "new": {
+            "title": "Vad är en Master Key?"
           }
         },
         "remove_secretkey": {
           "title": "Ta bort huvudnyckeln",
           "subtitle": "Tar bort huvudnyckeln från det här kontot.",
-          "success": "Masternyckeln har tagits bort."
+          "success": "Masternyckeln har tagits bort.",
+          "confirm": "Ange namnet på kontot för att bekräfta raderingen av din huvudnyckel.\n{{ name }}"
         },
         "no_mnemonic_hint": "💡 Du har ingen huvudnyckel än. <0>Klicka här</0></div> för att skapa din huvudnyckel och låsa upp dessa inställningar.",
         "network": {
@@ -465,14 +475,6 @@
           }
         }
       }
-    },
-    "enable": {
-      "title": "Anslut",
-      "allow": "Tillåt den här webbplatsen att:",
-      "request1": "Begär tillåtelse för transaktioner",
-      "request2": "Begär faktura och lightning-information",
-      "block_and_ignore": "Blockera och ignorera {{host}}",
-      "block_added": "Lade till {{host}} till blockeringslistan, ladda om webbplatsen."
     },
     "unlock": {
       "unlock_to_continue": "Lås upp för att fortsätta",
@@ -590,7 +592,8 @@
       "title": "Skicka",
       "input": {
         "label": "Mottagare",
-        "hint": "Faktura, Lightning-adress eller LNURL"
+        "hint": "Faktura, Lightning-adress eller LNURL",
+        "hint_with_bitcoin_address": "Faktura, Lightning-adress , LNURL eller bitcoin adress"
       }
     },
     "lnurlpay": {
@@ -639,8 +642,7 @@
     "receive": {
       "title": "Tag emot",
       "actions": {
-        "create_invoice": "Skapa Faktura",
-        "copy_lightning_address": "Kopiera Lightning adress"
+        "create_invoice": "Skapa Faktura"
       },
       "amount": {
         "label": "Belopp",
@@ -654,9 +656,7 @@
       "payment": {
         "waiting": "väntar på betalning...",
         "status": "Kontrollera betalningsstatus"
-      },
-      "receive_via_bitcoin_address": "Ta emot via bitcoin adress",
-      "redeem_lnurl": "Lös in LNURL"
+      }
     },
     "publishers": {
       "publisher": {
@@ -898,6 +898,37 @@
       "allow_sign": "Tillåt {{host}} att signera:",
       "block_and_ignore": "Blockera och ignorera {{host}}",
       "block_added": "Lade till {{host}} till blockeringslistan, ladda om webbplatsen."
+    },
+    "send_to_bitcoin_address": {
+      "service_unavailable": "Tjänsten är för tillfällig inte tillgänglig, försök igen om några minuter.",
+      "amount": {
+        "label": "Belopp (sats)"
+      },
+      "title": "Skicka till bitcoin-adress",
+      "recipient": {
+        "label": "Mottagare"
+      },
+      "network_fee": {
+        "label": "Nätverksavgift"
+      },
+      "service_fee": {
+        "label": "Serviceavgift"
+      },
+      "total": {
+        "label": "Total"
+      },
+      "total_fee": {
+        "label": "Avgift"
+      },
+      "provider": {
+        "label": "Byt leverantör"
+      },
+      "view_on_explorer": "Visa på mempool explorer",
+      "time_estimate": "ℹ️ Transaktioner kommer vanligtvis inom 10-30 minuter."
+    },
+    "webln_enable": {
+      "title": "Anslut till WebLN",
+      "request2": "Begär fakturor och lightning information"
     }
   },
   "common": {
@@ -944,7 +975,8 @@
       "import": "Importera",
       "copy_clipboard": "Kopiera till urklipp",
       "paste": "Klistra in",
-      "paste_clipboard": "Klistra in från urklipp"
+      "paste_clipboard": "Klistra in från urklipp",
+      "review": "Recension"
     },
     "errors": {
       "connection_failed": "Anslutning misslyckades",
@@ -1057,12 +1089,10 @@
       }
     },
     "publishers_table": {
-      "payments": "betalningar",
-      "used": "utnyttjat"
+      "payments": "betalningar"
     },
     "badge": {
       "label": {
-        "active": "AKTIV",
         "auth": "LOGGA IN",
         "imported": "IMPORTERAD"
       }

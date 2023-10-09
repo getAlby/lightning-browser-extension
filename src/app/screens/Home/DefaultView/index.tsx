@@ -13,6 +13,7 @@ import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import BalanceBox from "~/app/components/BalanceBox";
+import SkeletonLoader from "~/app/components/SkeletonLoader";
 import toast from "~/app/components/Toast";
 import { useAccount } from "~/app/context/AccountContext";
 import { useInvoices } from "~/app/hooks/useInvoices";
@@ -39,6 +40,8 @@ const DefaultView: FC<Props> = (props) => {
   const navigate = useNavigate();
 
   const { account, balancesDecorated, accountLoading } = useAccount();
+
+  const lightningAddress = account?.lightningAddress || "";
 
   const [isBlockedUrl, setIsBlockedUrl] = useState<boolean>(false);
 
@@ -115,9 +118,30 @@ const DefaultView: FC<Props> = (props) => {
         <PublisherLnData lnData={props.lnDataFromCurrentTab[0]} />
       )}
       <div className="p-4">
-        <div className="flex space-x-4 mb-4">
-          <BalanceBox />
-        </div>
+        <BalanceBox />
+        {(accountLoading || lightningAddress) && (
+          <div className="flex justify-center">
+            <a
+              className="cursor-pointer flex flex-row items-center mb-6 px-3 py-1 bg-white dark:bg-surface-01dp border border-gray-200 dark:border-neutral-700 text-gray-800 dark:text-white rounded-full text-xs font-medium hover:border-primary hover:bg-yellow-50 dark:hover:border-primary dark:hover:dark:bg-surface-16dp transition-all duration-250 select-none"
+              onClick={() => {
+                navigator.clipboard.writeText(lightningAddress);
+                toast.success(tCommon("actions.copied_to_clipboard"));
+              }}
+            >
+              {accountLoading && (
+                <>
+                  ⚡️&nbsp;
+                  <SkeletonLoader className="w-32" />
+                </>
+              )}
+              {!accountLoading && (
+                <>
+                  <span>⚡️ {lightningAddress}</span>
+                </>
+              )}
+            </a>
+          </div>
+        )}
         <div className="flex mb-6 lg:mb-12 space-x-4">
           <Button
             fullWidth

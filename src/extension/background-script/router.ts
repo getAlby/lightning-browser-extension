@@ -1,4 +1,5 @@
 import * as accounts from "./actions/accounts";
+import * as alby from "./actions/alby";
 import * as allowances from "./actions/allowances";
 import * as blocklist from "./actions/blocklist";
 import * as cache from "./actions/cache";
@@ -7,7 +8,6 @@ import * as ln from "./actions/ln";
 import lnurl, { auth } from "./actions/lnurl";
 import * as mnemonic from "./actions/mnemonic";
 import * as nostr from "./actions/nostr";
-import * as onboard from "./actions/onboard";
 import * as payments from "./actions/payments";
 import * as permissions from "./actions/permissions";
 import * as settings from "./actions/settings";
@@ -88,18 +88,20 @@ const routes = {
   // Public calls that are accessible from the inpage script (through the content script)
   public: {
     webbtc: {
-      onboard: onboard.prompt,
-      enable: allowances.enable,
+      isEnabled: webbtc.isEnabled,
+      enable: webbtc.enable,
       getInfo: webbtc.getInfo,
       signPsbtWithPrompt: webbtc.signPsbtWithPrompt,
       getAddressOrPrompt: webbtc.getAddressOrPrompt,
     },
     alby: {
-      enable: allowances.enable,
+      isEnabled: alby.isEnabled,
+      enable: alby.enable,
       addAccount: accounts.promptAdd,
     },
     webln: {
-      enable: allowances.enable,
+      enable: webln.enable,
+      isEnabled: webln.isEnabled,
       getInfo: ln.getInfo,
       sendPaymentOrPrompt: webln.sendPaymentOrPrompt,
       keysendOrPrompt: webln.keysendOrPrompt,
@@ -110,14 +112,14 @@ const routes = {
       request: ln.request,
     },
     liquid: {
-      onboard: onboard.prompt,
-      enable: allowances.enable,
+      isEnabled: liquid.isEnabled,
+      enable: liquid.enable,
       getAddressOrPrompt: liquid.getAddressOrPrompt,
       signPsetWithPrompt: liquid.signPsetWithPrompt,
     },
     nostr: {
-      onboard: onboard.prompt,
-      enable: allowances.enable,
+      isEnabled: nostr.isEnabled,
+      enable: nostr.enable,
       getPublicKeyOrPrompt: nostr.getPublicKeyOrPrompt,
       signEventOrPrompt: nostr.signEventOrPrompt,
       signSchnorrOrPrompt: nostr.signSchnorrOrPrompt,

@@ -167,10 +167,10 @@
           "placeholder": "indirizzo-onion-del-tuo-nodo:porta"
         }
       },
-      "bitcoin_beach": {
-        "title": "Bitcoin Beach Wallet",
+      "blink": {
+        "title": "Blink Wallet",
         "page": {
-          "title": "Connetti il tuo <0>Bitcoin Beach Wallet</0>"
+          "title": "Connetti il tuo <0>Blink Wallet</0>"
         }
       },
       "bitcoin_jungle": {
@@ -279,8 +279,6 @@
       "recent_transactions": "Transazioni recenti",
       "allowance_view": {
         "recent_transactions": "Transazioni recenti",
-        "allowance": "Margine",
-        "sats_used": "sats utilizzati",
         "no_transactions": "Non ci sono ancora transazioni su <0>{{name}}</0>."
       },
       "default_view": {
@@ -347,14 +345,6 @@
           "placeholder": "Nome Account"
         }
       }
-    },
-    "enable": {
-      "title": "Connettiti",
-      "allow": "Consenti a questo sito di:",
-      "request1": "Richiedi l'approvazione per le transazioni",
-      "request2": "Richiedi fatture e informazioni lightning",
-      "block_and_ignore": "Blocca e ignora {{host}}",
-      "block_added": "{{host}} aggiunto alla blocklist, si prega di ricaricare la pagina."
     },
     "unlock": {
       "unlock_to_continue": "Sblocca per continuare",
@@ -784,12 +774,10 @@
       }
     },
     "publishers_table": {
-      "payments": "pagamenti",
-      "used": "usati"
+      "payments": "pagamenti"
     },
     "badge": {
       "label": {
-        "active": "ATTIVO",
         "auth": "LOGIN"
       }
     }

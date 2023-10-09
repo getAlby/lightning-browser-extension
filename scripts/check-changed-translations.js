@@ -18,7 +18,7 @@ function compareObjects(obj1, obj2, parentPath = "") {
           obj2[key],
           parentPath ? `${parentPath}.${key}` : key
         );
-      } else if (obj1[key] !== obj2[key]) {
+      } else if (obj1[key] !== obj2[key] && obj2[key] !== undefined) {
         const title = `Translation source ${parentPath}.${key} has changed`;
         const message = `Consider running \`node scripts/remove-outdated-translations.js ${parentPath}.${key}\` to reset existing translations.`;
         console.log(

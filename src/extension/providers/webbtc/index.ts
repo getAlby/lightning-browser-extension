@@ -7,13 +7,8 @@ declare global {
 }
 
 export default class WebBTCProvider extends ProviderBase {
-  isEnabled: boolean;
-  executing: boolean;
-
   constructor() {
     super("webbtc");
-    this.isEnabled = false;
-    this.executing = false;
   }
 
   getInfo() {
@@ -22,9 +17,7 @@ export default class WebBTCProvider extends ProviderBase {
   }
 
   signPsbt(psbt: string) {
-    if (!this.enabled) {
-      throw new Error("Provider must be enabled before calling signPsbt");
-    }
+    this._checkEnabled("signPsbt");
 
     return this.execute("signPsbtWithPrompt", { psbt });
   }

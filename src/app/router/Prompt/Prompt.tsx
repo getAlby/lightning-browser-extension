@@ -4,7 +4,6 @@ import ConfirmKeysend from "@screens/ConfirmKeysend";
 import ConfirmPayment from "@screens/ConfirmPayment";
 import ConfirmRequestPermission from "@screens/ConfirmRequestPermission";
 import ConfirmSignMessage from "@screens/ConfirmSignMessage";
-import Enable from "@screens/Enable";
 import LNURLAuth from "@screens/LNURLAuth";
 import LNURLChannel from "@screens/LNURLChannel";
 import LNURLPay from "@screens/LNURLPay";
@@ -24,7 +23,11 @@ import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
 import BitcoinConfirmGetAddress from "~/app/screens/Bitcoin/ConfirmGetAddress";
 import ConfirmSignPsbt from "~/app/screens/Bitcoin/ConfirmSignPsbt";
-import Onboard from "~/app/screens/Onboard/Prompt";
+import AlbyEnable from "~/app/screens/Enable/AlbyEnable";
+import LiquidEnable from "~/app/screens/Enable/LiquidEnable";
+import NostrEnable from "~/app/screens/Enable/NostrEnable";
+import WebbtcEnable from "~/app/screens/Enable/WebbtcEnable";
+import WeblnEnable from "~/app/screens/Enable/WeblnEnable";
 import type { NavigationState, OriginData } from "~/types";
 
 // Parse out the parameters from the querystring.
@@ -75,23 +78,33 @@ function Prompt() {
             />
             <Route
               path="public/alby/enable"
-              element={<Enable origin={navigationState.origin as OriginData} />} // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
+              element={
+                <AlbyEnable origin={navigationState.origin as OriginData} />
+              } // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
             />
             <Route
               path="public/webln/enable"
-              element={<Enable origin={navigationState.origin as OriginData} />} // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
+              element={
+                <WeblnEnable origin={navigationState.origin as OriginData} />
+              } // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
             />
             <Route
               path="public/liquid/enable"
-              element={<Enable origin={navigationState.origin as OriginData} />} // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
+              element={
+                <LiquidEnable origin={navigationState.origin as OriginData} />
+              } // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
             />
             <Route
               path="public/nostr/enable"
-              element={<Enable origin={navigationState.origin as OriginData} />} // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
+              element={
+                <NostrEnable origin={navigationState.origin as OriginData} />
+              } // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
             />
             <Route
               path="public/webbtc/enable"
-              element={<Enable origin={navigationState.origin as OriginData} />} // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
+              element={
+                <WebbtcEnable origin={navigationState.origin as OriginData} />
+              } // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
             />
             <Route
               path="public/webbtc/confirmGetAddress"
@@ -132,9 +145,6 @@ function Prompt() {
             <Route path="confirmKeysend" element={<ConfirmKeysend />} />
             <Route path="confirmSignMessage" element={<ConfirmSignMessage />} />
             <Route path="confirmAddAccount" element={<ConfirmAddAccount />} />
-            <Route path="public/nostr/onboard" element={<Onboard />} />
-            <Route path="public/liquid/onboard" element={<Onboard />} />
-            <Route path="public/webbtc/onboard" element={<Onboard />} />
             <Route
               path="public/confirmRequestPermission"
               element={<ConfirmRequestPermission />}
@@ -165,7 +175,6 @@ const Layout = () => {
         </div>
         <AccountMenu showOptions={false} />
       </div>
-
       <main className="flex flex-col grow min-h-0">
         <Outlet />
       </main>

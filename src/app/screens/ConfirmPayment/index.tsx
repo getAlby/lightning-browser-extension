@@ -173,6 +173,7 @@ function ConfirmPayment() {
                   }}
                   budget={budget}
                   onBudgetChange={(event) => setBudget(event.target.value)}
+                  disabled={loading}
                 />
               )}
               <ConfirmOrCancel
@@ -198,7 +199,7 @@ function ConfirmPayment() {
                   })
             }
           />
-          <div className="my-4">
+          <div className="mt-4">
             <Button
               onClick={close}
               label={tCommon("actions.close")}

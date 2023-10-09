@@ -57,14 +57,7 @@ function NostrSettings() {
           : ""
       );
     } catch (e) {
-      if (e instanceof Error)
-        toast.error(
-          <p>
-            {t("nostr.errors.failed_to_load")}
-            <br />
-            {e.message}
-          </p>
-        );
+      console.error(e);
     }
   }, [nostrPrivateKey, t]);
 

@@ -1,16 +1,30 @@
-import { AccountsProvider } from "../../../context/AccountsContext";
-import DefaultView from "./index";
 import { render, screen } from "@testing-library/react";
 import { I18nextProvider } from "react-i18next";
 import { MemoryRouter } from "react-router-dom";
 import { settingsFixture as mockSettings } from "~/../tests/fixtures/settings";
 import i18n from "~/../tests/unit/helpers/i18n";
 import { BatteryFixture } from "~/fixtures/battery";
+import { AccountsProvider } from "../../../context/AccountsContext";
+import DefaultView from "./index";
 
 jest.mock("~/common/lib/api", () => ({
   getPayments: () => {
     return {
       payments: [],
+    };
+  },
+  getAccountInfo: () => {
+    return {
+      connectorType: "alby",
+      balance: { balance: 0, currency: "BTC" },
+      currentAccountId: "1234",
+      info: {
+        alias: "🐝 getalby.com",
+        pubkey: undefined,
+        lightning_address: "hello@getalby.com",
+      },
+      name: "hello",
+      avatarUrl: undefined,
     };
   },
   getBlocklist: () => {

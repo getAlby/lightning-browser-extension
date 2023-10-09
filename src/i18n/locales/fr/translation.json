@@ -208,10 +208,10 @@
           "placeholder": "adresse-de-votre-node-onion:port"
         }
       },
-      "bitcoin_beach": {
+      "blink": {
         "title": "Portefeuille de plage Bitcoin",
         "page": {
-          "title": "Connectez-vous à <0>Bitcoin Beach Wallet</0>"
+          "title": "Connectez-vous à <0>Bitcoin Blink Wallet</0>"
         }
       },
       "bitcoin_jungle": {
@@ -308,8 +308,6 @@
       "recent_transactions": "transactions récentes",
       "allowance_view": {
         "recent_transactions": "transactions récentes",
-        "allowance": "Allocation",
-        "sats_used": "sats utilisés",
         "no_transactions": "Aucune transaction sur <0>{{name}}</0> pour le moment."
       },
       "default_view": {
@@ -377,14 +375,6 @@
       "actions": {
         "add_account": "Ajouter un compte"
       }
-    },
-    "enable": {
-      "title": "Connecter",
-      "allow": "Autoriser ce site Web à :",
-      "request1": "Demander l'approbation des transactions",
-      "request2": "Demander des factures et des informations sur la foudre",
-      "block_and_ignore": "Bloquer et ignorer {{host}}",
-      "block_added": "{{host}} a été ajouté à la liste de blocage, veuillez recharger le site Web."
     },
     "unlock": {
       "unlock_to_continue": "Déverrouiller pour continuer",
@@ -790,12 +780,10 @@
       }
     },
     "publishers_table": {
-      "payments": "Paiements",
-      "used": "utilisé"
+      "payments": "Paiements"
     },
     "badge": {
       "label": {
-        "active": "ACTIF",
         "auth": "CONNEXION"
       }
     }

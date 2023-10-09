@@ -1,6 +1,5 @@
 import browser from "webextension-polyfill";
 
-import api from "~/common/lib/api";
 import getOriginData from "./originData";
 import shouldInject from "./shouldInject";
 // WebBTC calls that can be executed from the WebBTC Provider.
@@ -10,13 +9,14 @@ const webbtcCalls = [
   "webbtc/getInfo",
   "webbtc/signPsbtWithPrompt",
   "webbtc/getAddressOrPrompt",
+  "webbtc/isEnabled",
 ];
 // calls that can be executed when `window.webbtc` is not enabled for the current content page
-const disabledCalls = ["webbtc/enable"];
+const disabledCalls = ["webbtc/enable", "webbtc/isEnabled"];
 
 let isEnabled = false; // store if webbtc is enabled for this content page
 let isRejected = false; // store if the webbtc enable call failed. if so we do not prompt again
-let account;
+
 const SCOPE = "webbtc";
 
 async function init() {
@@ -77,14 +77,6 @@ async function init() {
         origin: getOriginData(),
       };
 
-      // Overrides the enable action so the user can go through onboarding to setup their keys
-      if (!account || !account.hasMnemonic) {
-        const account = await api.getAccount();
-        if (!account.hasMnemonic) {
-          messageWithOrigin.action = `public/webbtc/onboard`;
-        }
-      }
-
       const replyFunction = (response) => {
         if (ev.data.action === `${SCOPE}/enable`) {
           isEnabled = response.data?.enabled;
@@ -93,6 +85,10 @@ async function init() {
             console.info("Enable was rejected ignoring further webbtc calls");
             isRejected = true;
           }
+        }
+
+        if (ev.data.action === `${SCOPE}/isEnabled`) {
+          isEnabled = response.data?.isEnabled;
         }
 
         postMessage(ev, response);

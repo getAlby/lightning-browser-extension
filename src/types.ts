@@ -44,6 +44,7 @@ export interface AccountInfo {
   connectorType: ConnectorType;
   currency: ACCOUNT_CURRENCIES;
   avatarUrl?: string;
+  lightningAddress?: string;
 }
 
 export interface MetaData {
@@ -820,6 +821,7 @@ export interface Blocklist extends DbBlocklist {}
 
 export interface DbAllowance {
   createdAt: string;
+  enabledFor?: string[];
   enabled: boolean;
   host: string;
   id?: number;

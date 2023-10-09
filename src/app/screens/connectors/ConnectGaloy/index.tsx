@@ -9,18 +9,16 @@ import { useNavigate } from "react-router-dom";
 import toast from "~/app/components/Toast";
 import msg from "~/common/lib/msg";
 
-import galoyBitcoinBeach from "/static/assets/icons/galoy_bitcoin_beach.png";
 import galoyBitcoinJungle from "/static/assets/icons/galoy_bitcoin_jungle.png";
+import galoyBlink from "/static/assets/icons/galoy_blink.png";
 
 export const galoyUrls = {
-  "galoy-bitcoin-beach": {
-    i18nPrefix: "bitcoin_beach",
-    label: "Bitcoin Beach Wallet",
-    website: "https://galoy.io/bitcoin-beach-wallet/",
-    logo: galoyBitcoinBeach,
-    url:
-      process.env.BITCOIN_BEACH_GALOY_URL ||
-      "https://api.mainnet.galoy.io/graphql",
+  "galoy-blink": {
+    i18nPrefix: "blink",
+    label: "Blink Wallet",
+    website: "https://www.blink.sv/",
+    logo: galoyBlink,
+    url: process.env.BLINK_GALOY_URL || "https://api.mainnet.galoy.io/graphql",
   },
   "galoy-bitcoin-jungle": {
     i18nPrefix: "bitcoin_jungle",
@@ -170,26 +168,31 @@ export default function ConnectGaloy(props: Props) {
       submitLabel={t("galoy.actions.login")}
       submitLoading={loading}
       onSubmit={loginWithJwt}
+      description={
+        <Trans
+          i18nKey={"galoy.token.info"}
+          t={t}
+          values={{ label }}
+          components={[
+            // eslint-disable-next-line react/jsx-key
+            <a
+              href="https://wallet.mainnet.galoy.io"
+              className="underline"
+            ></a>,
+            // eslint-disable-next-line react/jsx-key
+            <br />,
+            // eslint-disable-next-line react/jsx-key
+            <b></b>,
+          ]}
+        />
+      }
     >
       {
         <div className="mt-6">
-          <Trans
-            i18nKey={"galoy.token.info"}
-            t={t}
-            values={{ label }}
-            components={[
-              // eslint-disable-next-line react/jsx-key
-              <a
-                href="https://wallet.mainnet.galoy.io"
-                className="underline"
-              ></a>,
-              // eslint-disable-next-line react/jsx-key
-              <br />,
-              // eslint-disable-next-line react/jsx-key
-              <b></b>,
-            ]}
-          />
-          <label htmlFor="jwt" className="block font-medium text-gray-700">
+          <label
+            htmlFor="jwt"
+            className="block font-medium text-gray-800 dark:text-white"
+          >
             {t("galoy.token.label")}
           </label>
           <div className="mt-1">

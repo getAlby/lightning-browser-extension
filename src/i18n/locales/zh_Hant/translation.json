@@ -215,10 +215,10 @@
           "placeholder": "your-node-onion-address:port"
         }
       },
-      "bitcoin_beach": {
-        "title": "Bitcoin Beach Wallet",
+      "blink": {
+        "title": "Blink Wallet",
         "page": {
-          "title": "連接<0>Bitcoin Beach Wallet</0>"
+          "title": "連接<0>Blink Wallet</0>"
         }
       },
       "bitcoin_jungle": {
@@ -333,8 +333,6 @@
       "recent_transactions": "近期交易",
       "allowance_view": {
         "recent_transactions": "近期交易",
-        "allowance": "限額",
-        "sats_used": "以使用的聰",
         "no_transactions": "<0>{{name}}</0> 上還沒有交易。"
       },
       "default_view": {
@@ -495,14 +493,6 @@
       "actions": {
         "add_account": "添加帳戶"
       }
-    },
-    "enable": {
-      "title": "連接",
-      "allow": "允許本網站：",
-      "request1": "請求批准交易",
-      "request2": "索取發票和閃電信息",
-      "block_and_ignore": "阻止並忽略 {{host}}",
-      "block_added": "已將{{host}}添加到阻止列表，請重新載入網站。"
     },
     "unlock": {
       "unlock_to_continue": "解鎖以繼續",
@@ -670,8 +660,7 @@
     "receive": {
       "title": "接收",
       "actions": {
-        "create_invoice": "創建發票",
-        "copy_lightning_address": "複製閃電地址"
+        "create_invoice": "創建發票"
       },
       "amount": {
         "label": "金額",
@@ -685,9 +674,7 @@
       "payment": {
         "waiting": "等待付款...",
         "status": "查看付款狀態"
-      },
-      "receive_via_bitcoin_address": "通過比特幣地址接收",
-      "redeem_lnurl": "兌換 LNURL"
+      }
     },
     "discover": {
       "title": "探索閃電⚡️生態系統",
@@ -1086,12 +1073,10 @@
       }
     },
     "publishers_table": {
-      "payments": "付款",
-      "used": "已使用"
+      "payments": "付款"
     },
     "badge": {
       "label": {
-        "active": "活躍",
         "auth": "登錄",
         "imported": "已導入"
       }
