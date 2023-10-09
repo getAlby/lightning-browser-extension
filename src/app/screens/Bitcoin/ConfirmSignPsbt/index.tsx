@@ -58,7 +58,6 @@ function ConfirmSignPsbt() {
       console.error(e);
       const error = e as { message: string };
       const errorMessage = error.message || "Unknown error";
-      setError(errorMessage);
       toast.error(`${tCommon("error")}: ${errorMessage}`);
     } finally {
       setLoading(false);
