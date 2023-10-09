@@ -849,8 +849,7 @@
         "hide_raw_transaction": "Hide raw transaction (Hex)",
         "inputs": "Inputs",
         "outputs": "Outputs",
-        "fee": "Fee",
-        "amount": "{{amount}} sats"
+        "fee": "Fee"
       },
       "allow": "Allow this website to:",
       "allow_sign": "Allow {{host}} to sign:",

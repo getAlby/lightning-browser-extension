@@ -10,6 +10,7 @@ import Hyperlink from "~/app/components/Hyperlink";
 import Loading from "~/app/components/Loading";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import toast from "~/app/components/Toast";
+import { useSettings } from "~/app/context/SettingsContext";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
@@ -23,6 +24,7 @@ function ConfirmSignPsbt() {
     keyPrefix: "bitcoin.confirm_sign_psbt",
   });
   const navigate = useNavigate();
+  const { getFormattedSats } = useSettings();
 
   const psbt = navState.args?.psbt as string;
   const origin = navState.origin as OriginData;
@@ -129,7 +131,7 @@ function ConfirmSignPsbt() {
                   </div>
                   <p className="font-medium dark:text-white">{t("fee")}</p>
                   <p className="font-medium text-sm text-gray-500 dark:text-gray-400">
-                    {t("amount", { amount: preview.fee })}
+                    {getFormattedSats(preview.fee)}
                   </p>
 
                   <Hyperlink onClick={toggleShowHex}>
@@ -175,11 +177,12 @@ function AddressPreview({
 }: Address & {
   t: TFunction<"translation", "bitcoin.confirm_sign_psbt", "translation">;
 }) {
+  const { getFormattedSats } = useSettings();
   return (
     <div>
       <p className="text-gray-500 dark:text-gray-400 break-all">{address}</p>
       <p className="font-medium text-sm text-gray-500 dark:text-gray-400">
-        {t("amount", { amount })}
+        {getFormattedSats(amount)}
       </p>
     </div>
   );
