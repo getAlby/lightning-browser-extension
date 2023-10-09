@@ -6,6 +6,7 @@ import state from "~/extension/background-script/state";
 import { btcFixture } from "~/fixtures/btc";
 import type { OriginData } from "~/types";
 
+import { getFormattedSats } from "~/common/utils/currencyConvert";
 import Bitcoin from "~/extension/background-script/bitcoin";
 import Mnemonic from "~/extension/background-script/mnemonic";
 import ConfirmSignPsbt from "./index";
@@ -56,7 +57,17 @@ const mockState = {
 
 state.getState = jest.fn().mockReturnValue(mockState);
 
-// mock get settings
+jest.mock("~/app/context/SettingsContext", () => ({
+  useSettings: () => ({
+    getFormattedSats: (amount: number) =>
+      getFormattedSats({
+        amount,
+        locale: "en",
+      }),
+  }),
+}));
+
+// mock getPsbtPreview request
 msg.request = jest
   .fn()
   .mockReturnValue(
@@ -83,7 +94,7 @@ describe("ConfirmSignPsbt", () => {
 
     expect(
       await screen.findByText(
-        "This website asks you to sign a Bitcoin Transaction:"
+        "This website asks you to sign a bitcoin transaction"
       )
     ).toBeInTheDocument();
 
