@@ -53,7 +53,6 @@
     "crypto-js": "^4.1.1",
     "dayjs": "^1.11.9",
     "dexie": "^3.2.4",
-    "ecpair": "^2.1.0",
     "elliptic": "^6.5.4",
     "events": "^3.3.0",
     "html5-qrcode": "^2.3.8",
