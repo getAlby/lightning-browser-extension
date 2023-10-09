@@ -26,6 +26,16 @@ async function init() {
     return;
   }
 
+  browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    // forward account changed messaged to inpage script
+    if (request.action === "accountChanged" && isEnabled) {
+      window.postMessage(
+        { action: "accountChanged", scope: "liquid" },
+        window.location.origin
+      );
+    }
+  });
+
   // message listener to listen to inpage liquid calls
   // those calls get passed on to the background script
   // (the inpage script can not do that directly, but only the inpage script can make liquid available to the page)
