@@ -77,7 +77,7 @@ function Receive() {
                         <>
                           <QRCode
                             className="rounded-md"
-                            value={`lightning:${lightningAddress}`}
+                            value={lightningAddress}
                             size={192}
                             level="Q"
                           />
