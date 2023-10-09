@@ -33,7 +33,7 @@ async function init() {
 
   browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
     // forward account changed messaged to inpage script
-    if (request.action === "accountChanged") {
+    if (request.action === "accountChanged" && isEnabled) {
       window.postMessage(
         { action: "accountChanged", scope: "nostr" },
         window.location.origin
