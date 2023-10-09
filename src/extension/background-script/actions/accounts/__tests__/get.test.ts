@@ -27,7 +27,7 @@ const mockState = {
       id: "8b7f1dc6-ab87-4c6c-bca5-19fa8632731e",
       name: "Alby",
       nostrPrivateKey: "nostr-123-456",
-      mnemonic: btcFixture.mnemnoic,
+      mnemonic: btcFixture.mnemonic,
       bitcoinNetwork: "regtest",
       useMnemonicForLnurlAuth: true,
     },

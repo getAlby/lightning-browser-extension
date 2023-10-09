@@ -170,6 +170,7 @@ export type NavigationState = {
     sigHash?: string;
     description?: string;
     details?: string;
+    psbt?: string;
     requestPermission: {
       method: string;
       description: string;
@@ -552,6 +553,20 @@ export interface MessageDecryptGet extends MessageDefault {
     ciphertext: string;
   };
   action: "decrypt";
+}
+
+export interface MessageSignPsbt extends MessageDefault {
+  args: {
+    psbt: string;
+  };
+  action: "signPsbt";
+}
+
+export interface MessageGetPsbtPreview extends MessageDefault {
+  args: {
+    psbt: string;
+  };
+  action: "getPsbtPreview";
 }
 
 export interface MessageBalanceGet extends MessageDefault {
@@ -938,3 +953,11 @@ export type EsploraAssetInfos = {
 };
 
 export type EsploraAssetRegistry = Record<string, EsploraAssetInfos>;
+
+export type Address = { amount: number; address: string };
+
+export type PsbtPreview = {
+  inputs: Address[];
+  outputs: Address[];
+  fee: number;
+};

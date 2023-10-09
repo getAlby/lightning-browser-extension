@@ -62,7 +62,6 @@ const routes = {
   lnurl: lnurl,
   lnurlAuth: auth,
   getCurrencyRate: cache.getCurrencyRate,
-  getAddress: webbtc.getAddress,
   setMnemonic: mnemonic.setMnemonic,
   getMnemonic: mnemonic.getMnemonic,
   generateMnemonic: mnemonic.generateMnemonic,
@@ -80,6 +79,11 @@ const routes = {
     removePrivateKey: nostr.removePrivateKey,
     setPrivateKey: nostr.setPrivateKey,
   },
+  webbtc: {
+    getPsbtPreview: webbtc.getPsbtPreview,
+    signPsbt: webbtc.signPsbt,
+    getAddress: webbtc.getAddress,
+  },
 
   // Public calls that are accessible from the inpage script (through the content script)
   public: {
@@ -87,6 +91,7 @@ const routes = {
       isEnabled: webbtc.isEnabled,
       enable: webbtc.enable,
       getInfo: webbtc.getInfo,
+      signPsbtWithPrompt: webbtc.signPsbtWithPrompt,
       getAddressOrPrompt: webbtc.getAddressOrPrompt,
     },
     alby: {
