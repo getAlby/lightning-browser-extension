@@ -5,9 +5,12 @@ export type Props = {
   value: string;
   size?: number;
   className?: string;
+
+  // set the level to Q if there are overlays
+  level?: string;
 };
 
-export default function QRCode({ value, size, className }: Props) {
+export default function QRCode({ value, size, level, className }: Props) {
   const theme = useTheme();
   const fgColor = theme === "dark" ? "#FFFFFF" : "#000000";
   const bgColor = theme === "dark" ? "#000000" : "#FFFFFF";
@@ -16,10 +19,10 @@ export default function QRCode({ value, size, className }: Props) {
     <ReactQRCode
       value={value}
       size={size}
-      className={classNames("rounded-md", className ?? "")}
       fgColor={fgColor}
       bgColor={bgColor}
-      level="Q"
+      className={classNames("w-full h-auto", className ?? "")}
+      level={level}
     />
   );
 }
