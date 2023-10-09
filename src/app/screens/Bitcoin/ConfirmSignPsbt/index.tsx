@@ -26,23 +26,22 @@ function ConfirmSignPsbt() {
 
   const psbt = navState.args?.psbt as string;
   const origin = navState.origin as OriginData;
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [successMessage, setSuccessMessage] = useState("");
   const [preview, setPreview] = useState<PsbtPreview | undefined>(undefined);
   const [showAddresses, setShowAddresses] = useState(false);
   const [showHex, setShowHex] = useState(false);
-  const [error, setError] = useState<string | undefined>();
 
   useEffect(() => {
     (async () => {
       try {
         const preview = await api.bitcoin.getPsbtPreview(psbt);
         setPreview(preview);
+        setLoading(false);
       } catch (e) {
         console.error(e);
         const error = e as { message: string };
         const errorMessage = error.message || "Unknown error";
-        setError(errorMessage);
         toast.error(`${tCommon("error")}: ${errorMessage}`);
       }
     })();
@@ -85,12 +84,12 @@ function ConfirmSignPsbt() {
     setShowHex((current) => !current);
   }
 
-  if (error) {
-    return <p className="dark:text-white">{error}</p>;
-  }
-
   if (!preview) {
-    return <Loading />;
+    return (
+      <div className="flex w-full h-full justify-center items-center">
+        <Loading />
+      </div>
+    );
   }
 
   return (
