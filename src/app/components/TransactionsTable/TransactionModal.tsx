@@ -116,13 +116,12 @@ export default function TransactionModal({
               </p>
 
               {!!transaction.totalAmountFiat && (
-                <p className="text-md mt-1 text-gray-400 dark:text-neutral-600">
+                <p className="text-md mt-1 text-gray-400 dark:text-neutral-500">
                   ~{transaction.totalAmountFiat}
                 </p>
               )}
             </div>
           </div>
-          {/* List */}
           <div className="mt-6">
             <TransactionDetailRow
               title="Date & Time"
@@ -168,29 +167,33 @@ export default function TransactionModal({
                 content={transaction.description}
               />
             )}
-            <div className="flex justify-center mt-4">
-              <Hyperlink onClick={toggleShowMoreFields}>
-                {tCommon("actions.more")}{" "}
-                {showMoreFields ? (
-                  <CaretUpIcon className="h-4 w-4 inline-flex" />
-                ) : (
-                  <CaretDownIcon className="h-4 w-4 inline-flex" />
-                )}
-              </Hyperlink>
-            </div>
-            {showMoreFields && (
+            {(transaction.preimage || transaction.paymentHash) && (
               <>
-                {transaction.preimage && (
-                  <TransactionDetailRow
-                    title="Preimage"
-                    content={transaction.preimage}
-                  />
-                )}
-                {transaction.paymentHash && (
-                  <TransactionDetailRow
-                    title="Payment hash"
-                    content={transaction.paymentHash}
-                  />
+                <div className="flex justify-center mt-4">
+                  <Hyperlink onClick={toggleShowMoreFields}>
+                    {tCommon("actions.more")}{" "}
+                    {showMoreFields ? (
+                      <CaretUpIcon className="h-4 w-4 inline-flex" />
+                    ) : (
+                      <CaretDownIcon className="h-4 w-4 inline-flex" />
+                    )}
+                  </Hyperlink>
+                </div>
+                {showMoreFields && (
+                  <>
+                    {transaction.preimage && (
+                      <TransactionDetailRow
+                        title="Preimage"
+                        content={transaction.preimage}
+                      />
+                    )}
+                    {transaction.paymentHash && (
+                      <TransactionDetailRow
+                        title="Payment hash"
+                        content={transaction.paymentHash}
+                      />
+                    )}
+                  </>
                 )}
               </>
             )}
