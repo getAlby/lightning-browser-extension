@@ -827,7 +827,7 @@
     },
     "confirm_sign_pset": {
       "title": "Sign",
-      "allow_sign": "This website asks you to sign a liquid transaction",
+      "allow_sign": "This website asks you to sign a Liquid transaction",
       "view_details": "View details",
       "hide_details": "Hide details",
       "view_raw_transaction": "View raw transaction (Base64)",
