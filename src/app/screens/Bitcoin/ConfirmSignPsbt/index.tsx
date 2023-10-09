@@ -109,14 +109,16 @@ function ConfirmSignPsbt() {
               <h2 className="font-medium dark:text-white">
                 {t("allow_sign", { host: origin.host })}
               </h2>
-              <div className="flex gap-2">
-                <Hyperlink onClick={toggleShowAddresses}>
-                  {showAddresses ? t("hide_details") : t("view_details")}
-                </Hyperlink>
-              </div>
+            </div>
+            <div className="flex w-full justify-center">
+              <Hyperlink onClick={toggleShowAddresses}>
+                {showAddresses ? t("hide_details") : t("view_details")}
+              </Hyperlink>
+            </div>
 
-              {showAddresses && (
-                <>
+            {showAddresses && (
+              <>
+                <div className="p-4 shadow bg-white dark:bg-surface-02dp rounded-lg overflow-hidden flex flex-col gap-4">
                   <p className="font-medium dark:text-white">{t("inputs")}</p>
                   <div className="flex flex-col gap-4">
                     {preview.inputs.map((input) => (
@@ -133,15 +135,16 @@ function ConfirmSignPsbt() {
                   <p className="font-medium text-sm text-gray-500 dark:text-gray-400">
                     {getFormattedSats(preview.fee)}
                   </p>
-
+                </div>
+                <div className="flex w-full justify-center">
                   <Hyperlink onClick={toggleShowHex}>
                     {showHex
                       ? t("hide_raw_transaction")
                       : t("view_raw_transaction")}
                   </Hyperlink>
-                </>
-              )}
-            </div>
+                </div>
+              </>
+            )}
 
             {showHex && (
               <div className="break-all p-2 mb-4 shadow bg-white rounded-lg dark:bg-surface-02dp text-gray-500 dark:text-gray-400">
