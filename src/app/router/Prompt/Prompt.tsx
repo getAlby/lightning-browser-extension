@@ -22,6 +22,7 @@ import Toaster from "~/app/components/Toast/Toaster";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
 import BitcoinConfirmGetAddress from "~/app/screens/Bitcoin/ConfirmGetAddress";
+import ConfirmSignPsbt from "~/app/screens/Bitcoin/ConfirmSignPsbt";
 import AlbyEnable from "~/app/screens/Enable/AlbyEnable";
 import LiquidEnable from "~/app/screens/Enable/LiquidEnable";
 import NostrEnable from "~/app/screens/Enable/NostrEnable";
@@ -108,6 +109,10 @@ function Prompt() {
             <Route
               path="public/webbtc/confirmGetAddress"
               element={<BitcoinConfirmGetAddress />}
+            />
+            <Route
+              path="webbtc/confirmSignPsbt"
+              element={<ConfirmSignPsbt />}
             />
             <Route
               path="public/liquid/confirmGetAddress"

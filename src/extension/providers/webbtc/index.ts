@@ -16,6 +16,12 @@ export default class WebBTCProvider extends ProviderBase {
     return this.execute("getInfo");
   }
 
+  signPsbt(psbt: string) {
+    this._checkEnabled("signPsbt");
+
+    return this.execute("signPsbtWithPrompt", { psbt });
+  }
+
   sendTransaction(address: string, amount: string) {
     this._checkEnabled("sendTransaction");
     throw new Error("Alby does not support `sendTransaction`");

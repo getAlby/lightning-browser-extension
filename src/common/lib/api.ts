@@ -27,6 +27,7 @@ import type {
   MessageLnurlAuth,
   MessageSettingsSet,
   NodeInfo,
+  PsbtPreview,
   PsetPreview,
   SettingsStorage,
   ValidateAccountResponse,
@@ -236,6 +237,15 @@ const signPset = (pset: string): Promise<string> =>
     pset,
   });
 
+const getPsbtPreview = (psbt: string): Promise<PsbtPreview> =>
+  msg.request("webbtc/getPsbtPreview", {
+    psbt,
+  });
+const signPsbt = (psbt: string): Promise<string> =>
+  msg.request("webbtc/signPsbt", {
+    psbt,
+  });
+
 export default {
   getAccount,
   getAccountInfo,
@@ -278,5 +288,9 @@ export default {
     getPsetPreview: getLiquidPsetPreview,
     fetchAssetRegistry: fetchLiquidAssetRegistry,
     signPset: signPset,
+  },
+  bitcoin: {
+    getPsbtPreview,
+    signPsbt,
   },
 };
