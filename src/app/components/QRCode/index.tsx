@@ -21,7 +21,7 @@ export default function QRCode({ value, size, level, className }: Props) {
       size={size}
       fgColor={fgColor}
       bgColor={bgColor}
-      className={classNames("w-full h-auto", className ?? "")}
+      className={classNames("w-full h-auto rounded-md", className ?? "")}
       level={level}
     />
   );
