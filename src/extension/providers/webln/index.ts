@@ -39,6 +39,10 @@ export default class WebLNProvider extends ProviderBase {
     this._checkEnabled("sendPayment");
     return this.execute("sendPaymentOrPrompt", { paymentRequest });
   }
+  sendPaymentAsync(paymentRequest: string) {
+    this._checkEnabled("sendPaymentAsync");
+    return this.execute("sendPaymentAsyncWithPrompt", { paymentRequest });
+  }
 
   keysend(args: KeysendArgs) {
     this._checkEnabled("keysend");

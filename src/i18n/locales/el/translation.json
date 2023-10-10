@@ -37,6 +37,9 @@
       "other": {
         "title": "Άλλα πορτοφόλια",
         "connect": "Σύνδεση"
+      },
+      "alby": {
+        "title": "Λογαριασμός Alby"
       }
     },
     "alby": {
@@ -44,13 +47,24 @@
         "set_password": {
           "choose_password": {
             "label": "Κωδικός"
+          },
+          "errors": {
+            "mismatched_password": "Οι κωδικοί δεν ταιριάζουν.",
+            "enter_password": "Παρακαλώ εισάγετε έναν κωδικό.",
+            "confirm_password": "Παρακαλώ επιβεβαιώστε τον κωδικός σας."
+          },
+          "confirm_password": {
+            "label": "Επιβεβαίωση κωδικού πρόσβασης"
           }
         }
       }
     },
     "choose_connector": {
       "lndhub_bluewallet": {
-        "title": "Bluewallet"
+        "title": "Bluewallet",
+        "page": {
+          "title": "Σύνδεση σε BlueWallet"
+        }
       },
       "lnbits": {
         "title": "LNbits"
@@ -59,7 +73,17 @@
         "title": "LNDHub"
       },
       "citadel": {
-        "title": "Citadel"
+        "title": "Citadel",
+        "url": {
+          "label": "Citadel URL",
+          "placeholder": "http://citadel.local"
+        },
+        "page": {
+          "title": "Σύνδεση σε κόμβο <0>Citadel</0>"
+        },
+        "password": {
+          "label": "Κωδικός Citadel"
+        }
       },
       "start9": {
         "title": "Start9"
@@ -73,7 +97,11 @@
       "eclair": {
         "title": "Eclair",
         "url": {
-          "placeholder": "http://localhost:8080"
+          "placeholder": "http://localhost:8080",
+          "label": "Eclair URL"
+        },
+        "password": {
+          "label": "Κωδικός Eclair"
         }
       },
       "kollider": {
@@ -85,6 +113,14 @@
         "port": {
           "label": "Θύρα"
         }
+      },
+      "title": "Σύνδεση με πορτοφόλι Lightning",
+      "description": "Σύνδεση σε εξωτερικό πορτοφόλι lightning ή σε κόμβο",
+      "umbrel": {
+        "page": {
+          "title": "Σύνδεση σε κόμβο <0>Umbrel</0>"
+        },
+        "title": "Umbrel"
       }
     },
     "distributions": {

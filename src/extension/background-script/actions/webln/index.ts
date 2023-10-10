@@ -4,6 +4,7 @@ import isEnabled from "./isEnabled";
 import keysendOrPrompt from "./keysendOrPrompt";
 import lnurl from "./lnurl";
 import makeInvoiceOrPrompt from "./makeInvoiceOrPrompt";
+import { sendPaymentAsyncWithPrompt } from "./sendPaymentAsyncWithPrompt";
 import { sendPaymentOrPrompt } from "./sendPaymentOrPrompt";
 import signMessageOrPrompt from "./signMessageOrPrompt";
 
@@ -14,6 +15,7 @@ export {
   keysendOrPrompt,
   lnurl,
   makeInvoiceOrPrompt,
+  sendPaymentAsyncWithPrompt,
   sendPaymentOrPrompt,
   signMessageOrPrompt,
 };

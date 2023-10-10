@@ -7,6 +7,7 @@ import shouldInject from "./shouldInject";
 const webbtcCalls = [
   "webbtc/enable",
   "webbtc/getInfo",
+  "webbtc/signPsbtWithPrompt",
   "webbtc/getAddressOrPrompt",
   "webbtc/isEnabled",
 ];
@@ -23,6 +24,16 @@ async function init() {
   if (!inject) {
     return;
   }
+
+  browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    // forward account changed messaged to inpage script
+    if (request.action === "accountChanged" && isEnabled) {
+      window.postMessage(
+        { action: "accountChanged", scope: "webbtc" },
+        window.location.origin
+      );
+    }
+  });
 
   // message listener to listen to inpage webbtc calls
   // those calls get passed on to the background script
