@@ -8,7 +8,6 @@ import * as ln from "./actions/ln";
 import lnurl, { auth } from "./actions/lnurl";
 import * as mnemonic from "./actions/mnemonic";
 import * as nostr from "./actions/nostr";
-import * as onboard from "./actions/onboard";
 import * as payments from "./actions/payments";
 import * as permissions from "./actions/permissions";
 import * as settings from "./actions/settings";
@@ -64,7 +63,6 @@ const routes = {
   lnurl: lnurl,
   lnurlAuth: auth,
   getCurrencyRate: cache.getCurrencyRate,
-  getAddress: webbtc.getAddress,
   setMnemonic: mnemonic.setMnemonic,
   getMnemonic: mnemonic.getMnemonic,
   generateMnemonic: mnemonic.generateMnemonic,
@@ -82,21 +80,29 @@ const routes = {
     removePrivateKey: nostr.removePrivateKey,
     setPrivateKey: nostr.setPrivateKey,
   },
+  webbtc: {
+    getPsbtPreview: webbtc.getPsbtPreview,
+    signPsbt: webbtc.signPsbt,
+    getAddress: webbtc.getAddress,
+  },
 
   // Public calls that are accessible from the inpage script (through the content script)
   public: {
     webbtc: {
+      isEnabled: webbtc.isEnabled,
       enable: webbtc.enable,
       getInfo: webbtc.getInfo,
+      signPsbtWithPrompt: webbtc.signPsbtWithPrompt,
       getAddressOrPrompt: webbtc.getAddressOrPrompt,
     },
     alby: {
+      isEnabled: alby.isEnabled,
       enable: alby.enable,
       addAccount: accounts.promptAdd,
     },
     webln: {
-      onboard: onboard.prompt,
       enable: webln.enable,
+      isEnabled: webln.isEnabled,
       getInfo: ln.getInfo,
       sendPaymentOrPrompt: webln.sendPaymentOrPrompt,
       sendPaymentAsyncWithPrompt: webln.sendPaymentAsyncWithPrompt,
@@ -108,11 +114,13 @@ const routes = {
       request: ln.request,
     },
     liquid: {
+      isEnabled: liquid.isEnabled,
       enable: liquid.enable,
       getAddressOrPrompt: liquid.getAddressOrPrompt,
       signPsetWithPrompt: liquid.signPsetWithPrompt,
     },
     nostr: {
+      isEnabled: nostr.isEnabled,
       enable: nostr.enable,
       getPublicKeyOrPrompt: nostr.getPublicKeyOrPrompt,
       signEventOrPrompt: nostr.signEventOrPrompt,

@@ -530,7 +530,6 @@
     },
     "webln_enable": {
       "title": "Connect to WebLN",
-
       "request2": "Request invoices and lightning information"
     },
     "alby_enable": {
@@ -548,7 +547,7 @@
     },
     "webbtc_enable": {
       "title": "Connect to WebBTC",
-      "request2": "Request invoices and liquid information"
+      "request2": "Request invoices and Webbtc information"
     },
     "unlock": {
       "unlock_to_continue": "Unlock to continue",
@@ -828,7 +827,7 @@
     },
     "confirm_sign_pset": {
       "title": "Sign",
-      "allow_sign": "This website asks you to sign a Liquid Transaction:",
+      "allow_sign": "This website asks you to sign a Liquid transaction",
       "view_details": "View details",
       "hide_details": "Hide details",
       "view_raw_transaction": "View raw transaction (Base64)",
@@ -840,6 +839,17 @@
     "bitcoin": {
       "confirm_get_address": {
         "title": "Get Address"
+      },
+      "confirm_sign_psbt": {
+        "title": "Sign",
+        "allow_sign": "This website asks you to sign a bitcoin transaction",
+        "view_details": "View details",
+        "hide_details": "Hide details",
+        "view_raw_transaction": "View raw transaction (Hex)",
+        "hide_raw_transaction": "Hide raw transaction (Hex)",
+        "inputs": "Inputs",
+        "outputs": "Outputs",
+        "fee": "Fee"
       },
       "allow": "Allow this website to:",
       "allow_sign": "Allow {{host}} to sign:",

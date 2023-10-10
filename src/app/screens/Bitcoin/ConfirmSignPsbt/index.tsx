@@ -1,67 +1,65 @@
-import { InfoIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
 import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
 import { TFunction } from "i18next";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import Hyperlink from "~/app/components/Hyperlink";
 import Loading from "~/app/components/Loading";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import toast from "~/app/components/Toast";
+import { useSettings } from "~/app/context/SettingsContext";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
-import type {
-  EsploraAssetInfos,
-  EsploraAssetRegistry,
-  LiquidAddress,
-  OriginData,
-  PsetPreview,
-} from "~/types";
+import type { Address, OriginData, PsbtPreview } from "~/types";
 
-function ConfirmSignPset() {
+function ConfirmSignPsbt() {
   const navState = useNavigationState();
   const { t: tCommon } = useTranslation("common");
   const { t } = useTranslation("translation", {
-    keyPrefix: "confirm_sign_pset",
+    keyPrefix: "bitcoin.confirm_sign_psbt",
   });
   const navigate = useNavigate();
+  const { getFormattedSats } = useSettings();
 
-  const pset = navState.args?.pset;
+  const psbt = navState.args?.psbt as string;
   const origin = navState.origin as OriginData;
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [successMessage, setSuccessMessage] = useState("");
-  const [preview, setPreview] = useState<PsetPreview | undefined>(undefined);
-  const [assetRegistry, setAssetRegistry] = useState<EsploraAssetRegistry>({});
-  const [showDetails, setShowAddresses] = useState(false);
-  const [showRawTransaction, setShowHex] = useState(false);
+  const [preview, setPreview] = useState<PsbtPreview | undefined>(undefined);
+  const [showAddresses, setShowAddresses] = useState(false);
+  const [showHex, setShowHex] = useState(false);
 
   useEffect(() => {
     (async () => {
-      if (!pset) throw new Error("pset is undefined");
-      const preview = await api.liquid.getPsetPreview(pset);
-      setPreview(preview);
-
-      const registry = await api.liquid.fetchAssetRegistry(preview);
-      setAssetRegistry(registry);
+      try {
+        const preview = await api.bitcoin.getPsbtPreview(psbt);
+        setPreview(preview);
+        setLoading(false);
+      } catch (e) {
+        console.error(e);
+        const error = e as { message: string };
+        const errorMessage = error.message || "Unknown error";
+        toast.error(`${tCommon("error")}: ${errorMessage}`);
+      }
     })();
-  }, [pset]);
+  }, [origin, psbt, tCommon]);
 
   async function confirm() {
     try {
-      if (!pset) throw new Error("pset is undefined");
       setLoading(true);
-      const response = await api.liquid.signPset(pset);
-
+      const response = await api.bitcoin.signPsbt(psbt);
       msg.reply(response);
       setSuccessMessage(tCommon("success"));
     } catch (e) {
       console.error(e);
-      if (e instanceof Error) toast.error(`${tCommon("error")}: ${e.message}`);
+      const error = e as { message: string };
+      const errorMessage = error.message || "Unknown error";
+      toast.error(`${tCommon("error")}: ${errorMessage}`);
     } finally {
       setLoading(false);
     }
@@ -89,7 +87,11 @@ function ConfirmSignPset() {
   }
 
   if (!preview) {
-    return <Loading />;
+    return (
+      <div className="flex w-full h-full justify-center items-center">
+        <Loading />
+      </div>
+    );
   }
 
   return (
@@ -104,63 +106,39 @@ function ConfirmSignPset() {
               url={origin.host}
             />
             <div className="p-4 shadow bg-white dark:bg-surface-02dp rounded-lg overflow-hidden flex flex-col gap-4">
-              <div className="flex justify-between items-start">
-                <h2 className="font-medium dark:text-white">
-                  {t("allow_sign", { host: origin.host })}{" "}
-                </h2>
-                <Hyperlink
-                  href="https://guides.getalby.com/overall-guide/alby-browser-extension/features/liquid"
-                  target="_blank"
-                >
-                  <div className="bg-blue-500 rounded-full">
-                    <InfoIcon className="h-4 w-4 text-white" />
-                  </div>
-                </Hyperlink>
-              </div>
+              <h2 className="font-medium dark:text-white">
+                {t("allow_sign", { host: origin.host })}
+              </h2>
             </div>
             <div className="flex w-full justify-center">
               <Hyperlink onClick={toggleShowAddresses}>
-                {showDetails ? t("hide_details") : t("view_details")}
+                {showAddresses ? t("hide_details") : t("view_details")}
               </Hyperlink>
             </div>
 
-            {showDetails && (
+            {showAddresses && (
               <>
                 <div className="p-4 shadow bg-white dark:bg-surface-02dp rounded-lg overflow-hidden flex flex-col gap-4">
-                  <div>
-                    <p className="font-medium dark:text-white">{t("inputs")}</p>
-                    <div className="flex flex-col gap-4">
-                      {preview.inputs.map((input, index) => (
-                        <AddressPreview
-                          key={index}
-                          assetInfos={assetRegistry[input.asset]}
-                          t={t}
-                          {...input}
-                        />
-                      ))}
-                    </div>
+                  <p className="font-medium dark:text-white">{t("inputs")}</p>
+                  <div className="flex flex-col gap-4">
+                    {preview.inputs.map((input) => (
+                      <AddressPreview key={input.address} t={t} {...input} />
+                    ))}
                   </div>
-
-                  <div>
-                    <p className="font-medium dark:text-white">
-                      {t("outputs")}
-                    </p>
-                    <div className="flex flex-col gap-4">
-                      {preview.outputs.map((output, index) => (
-                        <AddressPreview
-                          key={index}
-                          assetInfos={assetRegistry[output.asset]}
-                          t={t}
-                          {...output}
-                        />
-                      ))}
-                    </div>
+                  <p className="font-medium dark:text-white">{t("outputs")}</p>
+                  <div className="flex flex-col gap-4">
+                    {preview.outputs.map((output) => (
+                      <AddressPreview key={output.address} t={t} {...output} />
+                    ))}
                   </div>
+                  <p className="font-medium dark:text-white">{t("fee")}</p>
+                  <p className="font-medium text-sm text-gray-500 dark:text-gray-400">
+                    {getFormattedSats(preview.fee)}
+                  </p>
                 </div>
-
                 <div className="flex w-full justify-center">
                   <Hyperlink onClick={toggleShowHex}>
-                    {showRawTransaction
+                    {showHex
                       ? t("hide_raw_transaction")
                       : t("view_raw_transaction")}
                   </Hyperlink>
@@ -168,9 +146,9 @@ function ConfirmSignPset() {
               </>
             )}
 
-            {showRawTransaction && (
+            {showHex && (
               <div className="break-all p-2 mb-4 shadow bg-white rounded-lg dark:bg-surface-02dp text-gray-500 dark:text-gray-400">
-                {pset}
+                {psbt}
               </div>
             )}
           </div>
@@ -198,28 +176,19 @@ function ConfirmSignPset() {
 function AddressPreview({
   address,
   amount,
-  asset,
-  assetInfos,
   t,
-}: LiquidAddress & {
-  assetInfos?: EsploraAssetInfos;
-  t: TFunction<"translation", "confirm_sign_pset", "translation">;
+}: Address & {
+  t: TFunction<"translation", "bitcoin.confirm_sign_psbt", "translation">;
 }) {
-  // if assetInfos is not provided, we fallback to a custom ticker based on the asset hash
-  const ticker = assetInfos?.ticker ?? asset.slice(0, 5).toUpperCase();
-  const isUnknownTicker = !assetInfos?.ticker;
-  const precision =
-    assetInfos?.precision === undefined ? 8 : assetInfos.precision;
-  const decimalAmount = amount * 10 ** -precision;
+  const { getFormattedSats } = useSettings();
   return (
     <div>
       <p className="text-gray-500 dark:text-gray-400 break-all">{address}</p>
       <p className="font-medium text-sm text-gray-500 dark:text-gray-400">
-        {t("amount", { amount: decimalAmount.toFixed(precision), ticker })}{" "}
-        {isUnknownTicker && " (unknown ticker)"}
+        {getFormattedSats(amount)}
       </p>
     </div>
   );
 }
 
-export default ConfirmSignPset;
+export default ConfirmSignPsbt;
