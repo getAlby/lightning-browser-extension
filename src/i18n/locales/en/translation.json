@@ -900,6 +900,13 @@
       "time_estimate": "ℹ️ Transactions usually arrive within 10-30 minutes.",
       "service_unavailable": "Service temporary not available, please try again in a few minutes."
     },
+    "confirm_payment_async": {
+      "title": "Approve Payment",
+      "description": "This is a HOLD invoice. <0>Learn more »</0>",
+      "actions": {
+        "pay_now": "Pay now"
+      }
+    },
     "confirm_payment": {
       "title": "Approve Payment",
       "success": "Payment of {{amount}} successful!",

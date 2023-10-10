@@ -194,6 +194,7 @@ class Lnc implements Connector {
       "keysend",
       "makeInvoice",
       "sendPayment",
+      "sendPaymentAsync",
       "signMessage",
       "getBalance",
       ...flattenRequestMethods(Object.keys(methods)),

@@ -9,6 +9,8 @@ import {
   ConnectPeerResponse,
   MakeInvoiceArgs,
   MakeInvoiceResponse,
+  SendPaymentAsyncResponse,
+  SendPaymentResponse,
 } from "~/extension/background-script/connectors/connector.interface";
 import type {
   Account,
@@ -27,6 +29,7 @@ import type {
   MessageLnurlAuth,
   MessageSettingsSet,
   NodeInfo,
+  OriginData,
   PsbtPreview,
   PsetPreview,
   SettingsStorage,
@@ -174,6 +177,29 @@ export const lnurlAuth = (
 ): Promise<LnurlAuthResponse> =>
   msg.request<LnurlAuthResponse>("lnurlAuth", options);
 
+export const sendPayment = (
+  paymentRequest: string,
+  origin: OriginData | undefined
+) =>
+  msg.request<SendPaymentResponse["data"] | { error: string }>(
+    "sendPayment",
+    { paymentRequest },
+    {
+      origin,
+    }
+  );
+export const sendPaymentAsync = (
+  paymentRequest: string,
+  origin: OriginData | undefined
+) =>
+  msg.request<SendPaymentAsyncResponse["data"] | { error: string }>(
+    "sendPaymentAsync",
+    { paymentRequest },
+    {
+      origin,
+    }
+  );
+
 export const getCurrencyRate = async () =>
   msg.request<{ rate: number }>("getCurrencyRate");
 
@@ -272,6 +298,8 @@ export default {
   getInvoices,
   lnurlAuth,
   getCurrencyRate,
+  sendPayment,
+  sendPaymentAsync,
   nostr: {
     getPrivateKey: getNostrPrivateKey,
     getPublicKey: getNostrPublicKey,
