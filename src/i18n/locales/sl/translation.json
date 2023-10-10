@@ -165,6 +165,9 @@
         },
         "privKey": {
           "label": "Lokalni zasebni ključ (samodejno generiran)"
+        },
+        "errors": {
+          "connection_failed": "Neuspešna povezava. Je tvoje Core Lightning vozlišče povezano in uporablja commando vtičnik?"
         }
       },
       "lnc": {
@@ -240,7 +243,8 @@
       "umbrel": {
         "title": "Umbrel",
         "page": {
-          "title": "Poveži <0>Umbrel</0> vozlišče"
+          "title": "Poveži <0>Umbrel</0> vozlišče",
+          "instructions": "1. V tvoji nadzorni plošči Lightning vozliška pojdi na <0>Poveži denarnico</0><1/>2. Izberi <0>REST (Tor)</0> ali <0>REST (Local Network)</0> način<1/>3. Skopiraj <0>lndconnect URL</0> in ga prilepi spodaj"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -260,6 +264,12 @@
           "invalid_uri": "Nepravilni LNDHub URI",
           "connection_failed": "Povezava ni bila uspešna. Je tvoj LNDHub URI pravilen?"
         }
+      },
+      "blink": {
+        "page": {
+          "title": "Poveži z <0>Blink denarnico</0>"
+        },
+        "title": "Blink denarnica"
       }
     },
     "welcome": {
@@ -340,7 +350,12 @@
       "recent_transactions": "Pretekle transakcije",
       "allowance_view": {
         "recent_transactions": "Pretekle transakcije",
-        "no_transactions": "NA <0>{{name}}</0> še ni transakcij."
+        "no_transactions": "NA <0>{{name}}</0> še ni transakcij.",
+        "sats": "sats",
+        "budget_spent": "Porabljen proračun",
+        "total_spent": "Porabljeno skupaj",
+        "total_payments": "Skupaj plačila",
+        "permissions": "Pravice"
       },
       "default_view": {
         "recent_transactions": "Pretekle transakcije",
@@ -360,7 +375,8 @@
           "screen_reader": "Izvozi podrobnosti računa",
           "your_ln_address": "Tvoj Lightning naslov:",
           "waiting": "čakanje na LndHub podatke...",
-          "export_uri": "LNDHub URI poverilnice"
+          "export_uri": "LNDHub URI poverilnice",
+          "scan_qr": "Uvozi to denarnico v Zeus ali BlueWallet s skeniranjem QR kode."
         },
         "name": {
           "title": "Prikazno ime",
@@ -371,7 +387,10 @@
           "saved": "Glavni ključ kriptiran in uspešno shranjen.",
           "generate": {
             "title": "Generiraj nov Glavni ključ",
-            "button": "Generiraj Glavni ključ"
+            "button": "Generiraj Glavni ključ",
+            "confirm": "Naredil sem varnostno kopijo fraze in shranil na varno mesto.",
+            "description": "Glavni ključ ti omogoča interakcijo z različnimi protokoli, kot so: Nostr, Bitcoin omrežje ali LNURL-Auth.",
+            "error_confirm": "Prosim potrdi, da si naredil varnostno kopijo obnovitvene fraze."
           },
           "backup": {
             "title": "Varnostno kopiraj obnovitveno frazo",
@@ -395,7 +414,11 @@
             "title": "Obnovitvena fraza"
           },
           "lnurl": {
-            "title": "Prijava z Lightning"
+            "title": "Prijava z Lightning",
+            "use_mnemonic": "Uporabi Glavni ključ za prijavo v Lightning omogočene aplikacije (LNURL Auth)"
+          },
+          "new": {
+            "title": "Kaj je Glavni ključ?"
           }
         },
         "network": {
@@ -410,7 +433,9 @@
           "settings": {
             "label": "Nostr nastavitve",
             "remove": "Odstrani trenutne ključe",
-            "title": "Nostr nastavitve"
+            "title": "Nostr nastavitve",
+            "can_restore": "✅ Nostr ključ, izpeljan iz vašega glavnega ključa",
+            "derive": "Izpelji iz glavnega ključa"
           },
           "setup": {
             "title": "Konfiguriraj Nostr ključe",
@@ -421,12 +446,17 @@
                 "label": "Uporabi Nostr zasebni ključ"
               },
               "recovery_phrase": {
-                "label": "Uporabi obnovitveno frazo"
-              }
+                "label": "Uporabi obnovitveno frazo",
+                "description": "Za uvoz ključev Nostr uporabite frazo za obnovitev glavnega ključa"
+              },
+              "description": "Uporabite obstoječi zasebni ključ Nostr ali ga izpeljite iz svojega glavnega ključa",
+              "title": "Kako želite uvoziti svoj račun Nostr?"
             },
             "new": {
-              "label": "Ustvari nov Nostr račun"
-            }
+              "label": "Ustvari nov Nostr račun",
+              "description": "Ustvarite glavni ključ s parom novih ključev Nostr."
+            },
+            "new_to_nostr": "Ste novi pri Nostru? <0>Preverite več</0>"
           },
           "title": "Nostr",
           "public_key": {
@@ -436,20 +466,26 @@
             "screen_reader": "Generiraj nov Nostr ključ za svoj račun",
             "title": "Generiraj nov Nostr ključ",
             "actions": {
-              "random_keys": "Generiraj naključni ključ"
+              "random_keys": "Generiraj naključni ključ",
+              "derived_keys": "Izpelji ključ iz računa"
             }
           },
           "private_key": {
-            "label": "Zasebni ključ Nostr"
+            "label": "Zasebni ključ Nostr",
+            "title": "Upravljajte svoj zasebni ključ Nostr"
           },
           "actions": {
             "generate": "Generiraj nov ključ"
+          },
+          "errors": {
+            "failed_to_load": "Nalaganje ključa Nostr ni uspelo. Je to veljaven ključ Nostr?"
           }
         },
         "title1": "Nastavitve računa",
         "remove": {
           "title": "Odstrani ta račun",
-          "error": "Vnešeno ime računa se ne ujema."
+          "error": "Vnešeno ime računa se ne ujema.",
+          "subtitle": "Odstrani vse odobritve, podatke o plačilih in ključe, povezane s tem računom."
         },
         "remove_secretkey": {
           "subtitle": "Odstrani Glavni ključ iz tega računa.",
@@ -484,7 +520,153 @@
       "browser_notifications": {
         "title": "Obvestila brskalnika"
       },
-      "title": "Nastavitve"
+      "title": "Nastavitve",
+      "personal_data": {
+        "title": "Osebni podatki"
+      },
+      "camera_access": {
+        "allow": "Omogoči dostop do kamere",
+        "subtitle": "Za skeniranje QR kod",
+        "title": "Dostop do kamere",
+        "granted": "Dovoljenje omogočeno"
+      },
+      "lnurl_auth": {
+        "legacy_lnurl_auth": {
+          "title": "Starerjša verzija podpisovanja za LNDhub in LNbits"
+        },
+        "title": "LNURL-Auth",
+        "legacy_lnurl_auth_202207": {
+          "title": "Stara verzija LNURL-Auth"
+        }
+      },
+      "currency": {
+        "title": "Valuta",
+        "subtitle": "Zneske dodatno prikaži v tej valuti"
+      },
+      "exchange": {
+        "subtitle": "Vir menjalnih tečajev bitcoinov",
+        "title": "Vir tečaja"
+      },
+      "show_fiat": {
+        "title": "Sats v Fiat",
+        "subtitle": "Vedno pretvori v izbrano valuto iz izbrane menjalnice"
+      },
+      "language": {
+        "title": "Jezik",
+        "subtitle": "Prevodi še niso 100% dokončani. <0>Pomagajte nam prevesti Alby v vaš jezik!</0>"
+      },
+      "theme": {
+        "title": "Tema",
+        "options": {
+          "system": "Sistem",
+          "dark": "Temna",
+          "light": "Svetla"
+        },
+        "subtitle": "Uporabi Alby v temnem ali svetlem načinu"
+      },
+      "website_enhancements": {
+        "subtitle": "Izboljšave napitnin za Twitter, YouTube itd.",
+        "title": "Izboljšave spletne strani"
+      }
+    },
+    "webln_enable": {
+      "title": "Poveži se z WebLN",
+      "request2": "Zahtevaj račune in Lightning informacije"
+    },
+    "make_invoice": {
+      "title": "Ustvari račun",
+      "amount": {
+        "label": "Znesek (Satoshi)"
+      },
+      "errors": {
+        "amount_too_small": "Znesek je manjši on minimalne vrednosti",
+        "amount_too_big": "Znesek je višji od maksimalne vrednosti"
+      },
+      "memo": {
+        "label": "Beležka"
+      }
+    },
+    "on_chain": {
+      "go": "Pojdi na svoj račun Alby →",
+      "title": "Prejmi preko bitcoin naslova",
+      "instructions1": "Če želiš prejemati bitcoin prek naslova bitcoin, se prijavi v svoj <0>Alby račun</0> na getalby.com",
+      "instructions2": "Svoj bitcoin naslov najdete na strani <0>Prejmi</0>."
+    },
+    "confirm_sign_pset": {
+      "allow_sign": "To spletno mesto zahteva, da podpišeš Liquid transakcijo",
+      "hide_details": "Skrij podrobnosti",
+      "view_details": "Poglej podrobnosti",
+      "title": "Podpiši"
+    },
+    "publishers": {
+      "description": "Spletna mesta, kjer si že uporabljal Alby",
+      "discover": "Okdrij spletna mesta",
+      "publisher": {
+        "allowance": {
+          "used_budget": "porabljeni satoshiji",
+          "title": "Odobritev"
+        }
+      },
+      "no_info": "Videti je, da Albyja še nisi uporabljal na nobenem spletnem mestu.",
+      "title": "Tvoja ⚡ spletna stran"
+    },
+    "discover": {
+      "tips": {
+        "demo": {
+          "title": "Alby demo",
+          "description": "Odkrijte Albyjeve lastnosti\nna naši predstavitveni spletni strani"
+        },
+        "mnemonic": {
+          "title": "Nostr"
+        },
+        "top_up_wallet": {
+          "description": "Potrebuješ polnitev?\nSkupaj zmoremo!",
+          "title": "Kupi Bitcoin"
+        },
+        "description": "Nekaj nasvetov, da začneš brneti🐝",
+        "title": "Tvoja denarnica Alby je pripravljena"
+      },
+      "list": {
+        "gaming": "Igre",
+        "trading": "Trgovanje",
+        "nostr": "Nostr",
+        "shopping": "Nakupovanje",
+        "nodeManagement": "Upravljanje vozlišča",
+        "showcases": "Primeri",
+        "miscellaneous": "Razno",
+        "entertainment": "Zabava"
+      },
+      "description": "Spletna mesta in spletne aplikacije, kjer lahko uporabljaš Alby",
+      "title": "Razišči ekosistem Lightning ⚡️"
+    },
+    "receive": {
+      "payment": {
+        "status": "Preveri status plačila"
+      }
+    },
+    "confirm_sign_message": {
+      "title": "Podpiši",
+      "content": "To spletno mesto te prosi, da podpišeš:"
+    },
+    "liquid_enable": {
+      "request2": "Pridobi račune in podatke o liquid",
+      "title": "Poveži se z Liquid"
+    },
+    "nostr_enable": {
+      "title": "Povežite se z Nostr",
+      "request2": "Podpiše dogodke s tvojim zasebnim ključem Nostr",
+      "request1": "Zahteva dostop do javnega ključa Nostr"
+    },
+    "webbtc_enable": {
+      "request2": "Pridobi račune in podatke o Webbtc",
+      "title": "Poveži se z WebBTC"
+    },
+    "alby_enable": {
+      "title": "Poveži se z Albyjem",
+      "request2": "Zahtevajte račune in podatke o albi"
+    },
+    "scan_qrcode": {
+      "title": "Čakam na skeniranje"
     }
   },
   "permissions": {
