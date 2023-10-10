@@ -4,9 +4,10 @@ import PaymentSummary from "@components/PaymentSummary";
 import PublisherCard from "@components/PublisherCard";
 import lightningPayReq from "bolt11";
 import { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import Alert from "~/app/components/Alert";
+import Hyperlink from "~/app/components/Hyperlink";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import toast from "~/app/components/Toast";
 import { useSettings } from "~/app/context/SettingsContext";
@@ -105,7 +106,21 @@ function ConfirmPaymentAsync() {
               </div>
             </div>
             <div className="my-4">
-              <Alert type="info">{t("description")}</Alert>
+              <Alert type="info">
+                <Trans
+                  i18nKey={"description"}
+                  t={t}
+                  components={[
+                    // eslint-disable-next-line react/jsx-key
+                    <Hyperlink
+                      href="https://guides.getalby.com/alby-guides/alby-browser-extension/features/hold-payments"
+                      target="_blank"
+                      rel="noopener nofollow"
+                      className="dark:text-white underline font-medium"
+                    />,
+                  ]}
+                />
+              </Alert>
             </div>
           </div>
           <div>

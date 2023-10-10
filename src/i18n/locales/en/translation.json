@@ -901,8 +901,8 @@
       "service_unavailable": "Service temporary not available, please try again in a few minutes."
     },
     "confirm_payment_async": {
-      "title": "Approve Delayed / Conditional Payment",
-      "description": "This payment may stay unsettled for a day or longer. The receiver can choose to settle or cancel the payment by leaving it to expire.",
+      "title": "Approve Payment",
+      "description": "This is a HOLD invoice. <0>Learn more »</0>",
       "actions": {
         "pay_now": "Pay now"
       }
