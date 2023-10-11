@@ -733,7 +733,7 @@
         "allow_camera_access": "Veuillez autoriser l'accès à la caméra dans l'écran des paramètres."
       }
     },
-    "transactionsTable": {
+    "transactions_table": {
       "fee": "Frais",
       "preimage": "Préimage",
       "received": "Reçu",

@@ -727,7 +727,7 @@
         "allow_camera_access": "Giv adgang til kameraet i indstillingsvinduet."
       }
     },
-    "transactionsTable": {
+    "transactions_table": {
       "fee": "Betaling",
       "preimage": "Præ-visning",
       "received": "Modtaget",

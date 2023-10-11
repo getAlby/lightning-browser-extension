@@ -820,7 +820,7 @@
         "allow_camera_access": "Prosím povolte přístup kamery ve svém nastavení."
       }
     },
-    "transactionsTable": {
+    "transactions_table": {
       "fee": "Poplatek",
       "preimage": "Preimage",
       "received": "Přijato",

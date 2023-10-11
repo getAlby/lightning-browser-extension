@@ -1027,7 +1027,7 @@
         "allow_camera_access": "لطفا در صفحه تنظیمات اجازه دسترسی به دوربین بدهید."
       }
     },
-    "transactionsTable": {
+    "transactions_table": {
       "fee": "کارمزد",
       "preimage": "پیش نمایش",
       "received": "دریافت شد",

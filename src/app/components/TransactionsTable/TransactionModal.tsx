@@ -22,13 +22,13 @@ type Props = {
 };
 
 const Dt = ({ children }: { children: React.ReactNode }) => (
-  <dt className="text-sm leading-5 text-gray-400 dark:text-neutral-500 text-right">
+  <dt className="basis-28 text-gray-400 dark:text-neutral-500 text-right">
     {children}
   </dt>
 );
 
 const Dd = ({ children }: { children: React.ReactNode }) => (
-  <dd className="text-sm leading-5 text-gray-800 dark:text-neutral-200 col-span-2 break-all">
+  <dd className="flex-1 text-gray-800 dark:text-neutral-200 break-all">
     {children}
   </dd>
 );
@@ -37,10 +37,10 @@ const TransactionDetailRow = ({
   title,
   content,
 }: {
-  title: React.ReactNode;
-  content: React.ReactNode;
+  title: React.ReactNode | string;
+  content: React.ReactNode | string;
 }) => (
-  <div className="grid grid-cols-3 gap-2 p-1">
+  <div className="flex p-1 text-sm leading-5 space-x-3">
     <Dt>{title}</Dt>
     <Dd>{content}</Dd>
   </div>
@@ -52,6 +52,9 @@ export default function TransactionModal({
   onModelClose,
 }: Props) {
   const { t: tCommon } = useTranslation("common");
+  const { t } = useTranslation("components", {
+    keyPrefix: "transactions_table",
+  });
   const [showMoreFields, setShowMoreFields] = useState(false);
   const { getFormattedSats } = useSettings();
   const [_isRevealed, setRevealed] = useState(false);
@@ -97,7 +100,7 @@ export default function TransactionModal({
               )}
             </div>
             <h2 className="mt-4 text-md text-gray-900 font-bold dark:text-white text-center">
-              {transaction.type == "received" ? "Received" : "Sent"}
+              {transaction.type == "received" ? t("received") : t("sent")}
             </h2>
           </div>
           <div className="flex items-center text-center justify-center dark:text-white">
@@ -107,8 +110,7 @@ export default function TransactionModal({
                   "text-3xl font-medium",
                   transaction.type == "received"
                     ? "text-green-600 dark:color-green-400"
-                    : "text-orange-600 dark:color-orange-400",
-                  "inline"
+                    : "text-orange-600 dark:color-orange-400"
                 )}
               >
                 {transaction.type == "sent" ? "-" : "+"}{" "}
@@ -137,15 +139,17 @@ export default function TransactionModal({
             )}
             {transaction.publisherLink && transaction.title && (
               <TransactionDetailRow
-                title="Website"
+                title={tCommon("website")}
                 content={
-                  <Hyperlink
-                    target="_blank"
-                    href={transaction.publisherLink}
-                    rel="noopener noreferrer"
-                  >
-                    {transaction.title}
-                  </Hyperlink>
+                  <>
+                    <Hyperlink
+                      target="_blank"
+                      href={transaction.publisherLink}
+                      rel="noopener noreferrer"
+                    >
+                      {transaction.title}
+                    </Hyperlink>
+                  </>
                 }
               />
             )}
@@ -171,29 +175,34 @@ export default function TransactionModal({
               <>
                 <div className="flex justify-center mt-4">
                   <Hyperlink onClick={toggleShowMoreFields}>
-                    {tCommon("actions.more")}{" "}
                     {showMoreFields ? (
-                      <CaretUpIcon className="h-4 w-4 inline-flex" />
+                      <>
+                        {tCommon("actions.hide")}
+                        <CaretUpIcon className="h-4 w-4 inline-flex" />
+                      </>
                     ) : (
-                      <CaretDownIcon className="h-4 w-4 inline-flex" />
+                      <>
+                        {tCommon("actions.more")}
+                        <CaretDownIcon className="h-4 w-4 inline-flex" />
+                      </>
                     )}
                   </Hyperlink>
                 </div>
                 {showMoreFields && (
-                  <>
+                  <div className="mt-4">
                     {transaction.preimage && (
                       <TransactionDetailRow
-                        title="Preimage"
+                        title={t("preimage")}
                         content={transaction.preimage}
                       />
                     )}
                     {transaction.paymentHash && (
                       <TransactionDetailRow
-                        title="Payment hash"
+                        title={t("payment_hash")}
                         content={transaction.paymentHash}
                       />
                     )}
-                  </>
+                  </div>
                 )}
               </>
             )}

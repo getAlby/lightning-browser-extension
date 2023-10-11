@@ -1120,7 +1120,7 @@
         "invalid_credentials": "รหัสผ่านไม่ถูกต้อง โปรดเช็ครหัสผ่านและอีเมลของคุณ และลองอีกครั้ง"
       }
     },
-    "transactionsTable": {
+    "transactions_table": {
       "fee": "ค่าทำเนียม",
       "preimage": "Preimage",
       "received": "ได้รับ",

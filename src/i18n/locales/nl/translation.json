@@ -587,7 +587,7 @@
         "allow_camera_access": ""
       }
     },
-    "transactionsTable": {
+    "transactions_table": {
       "fee": "",
       "preimage": "",
       "received": "",

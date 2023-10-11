@@ -852,7 +852,7 @@
       "screen_reader": "Toggle Dropdown",
       "title": "Ganti akun"
     },
-    "transactionsTable": {
+    "transactions_table": {
       "sent": "Terkirim",
       "fee": "Biaya",
       "preimage": "Preimage",

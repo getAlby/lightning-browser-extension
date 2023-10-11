@@ -992,6 +992,7 @@
     "help": "Help",
     "balance": "Balance",
     "or": "or",
+    "website": "Website",
     "actions": {
       "back": "Back",
       "delete": "Delete",
@@ -1022,6 +1023,7 @@
       "log_in": "Log in",
       "remember": "Remember my choice and don't ask again",
       "more": "More",
+      "hide": "Hide",
       "disconnect": "Disconnect",
       "review": "Review",
       "download": "Download"
@@ -1083,9 +1085,10 @@
         "allow_camera_access": "Please allow camera access in the settings screen."
       }
     },
-    "transactionsTable": {
+    "transactions_table": {
       "fee": "Fee",
       "preimage": "Preimage",
+      "payment_hash": "Payment hash",
       "received": "Received",
       "sent": "Sent",
       "boostagram": {
@@ -1095,12 +1098,6 @@
         "podcast": "Podcast"
       },
       "open_location": "Open website"
-    },
-    "transaction_list": {
-      "tabs": {
-        "outgoing": "Outgoing",
-        "incoming": "Incoming"
-      }
     },
     "budget_control": {
       "remember": {

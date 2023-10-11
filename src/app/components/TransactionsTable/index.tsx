@@ -5,6 +5,7 @@ import {
 import Loading from "@components/Loading";
 
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import TransactionModal from "~/app/components/TransactionsTable/TransactionModal";
 import { useSettings } from "~/app/context/SettingsContext";
@@ -25,6 +26,9 @@ export default function TransactionsTable({
   const { getFormattedSats } = useSettings();
   const [modalOpen, setModalOpen] = useState(false);
   const [transaction, setTransaction] = useState<Transaction | undefined>();
+  const { t } = useTranslation("components", {
+    keyPrefix: "transactions_table",
+  });
 
   function openDetails(transaction: Transaction) {
     setTransaction(transaction);
@@ -72,7 +76,7 @@ export default function TransactionsTable({
                     <p className="truncate">
                       {tx.title ||
                         tx.boostagram?.message ||
-                        (type == "incoming" ? "Received" : "Sent")}
+                        (type == "incoming" ? t("received") : t("sent"))}
                     </p>
                   </div>
                   <p className="text-xs text-gray-400 dark:text-neutral-500">

@@ -727,7 +727,7 @@
         "allow_camera_access": "Si prega di consentire l'accesso alla fotocamera nella schermata delle impostazioni."
       }
     },
-    "transactionsTable": {
+    "transactions_table": {
       "fee": "Tassa",
       "preimage": "Preimmagine",
       "received": "Ricevuto",
