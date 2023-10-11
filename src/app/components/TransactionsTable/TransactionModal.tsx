@@ -126,14 +126,14 @@ export default function TransactionModal({
           </div>
           <div className="mt-6">
             <TransactionDetailRow
-              title="Date & Time"
+              title={t("date_time")}
               content={dayjs(transaction.timestamp).format(
                 "D MMMM YYYY, HH:mm"
               )}
             />
             {transaction.totalFees?.toString && (
               <TransactionDetailRow
-                title="Fee"
+                title={t("fee")}
                 content={getFormattedSats(transaction.totalFees)}
               />
             )}
@@ -155,19 +155,19 @@ export default function TransactionModal({
             )}
             {transaction.boostagram?.podcast && (
               <TransactionDetailRow
-                title="Podcast"
+                title={t("boostagram.podcast")}
                 content={transaction.boostagram?.podcast}
               />
             )}
             {transaction.boostagram?.episode && (
               <TransactionDetailRow
-                title="Episode"
+                title={t("boostagram.episode")}
                 content={transaction.boostagram.episode}
               />
             )}
             {transaction.description && (
               <TransactionDetailRow
-                title="Description"
+                title={tCommon("description")}
                 content={transaction.description}
               />
             )}

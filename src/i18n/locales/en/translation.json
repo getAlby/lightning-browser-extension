@@ -1091,11 +1091,13 @@
       "payment_hash": "Payment hash",
       "received": "Received",
       "sent": "Sent",
+      "date_time": "Date & Time",
       "boostagram": {
         "sender": "Sender",
         "message": "Message",
         "app": "App",
-        "podcast": "Podcast"
+        "podcast": "Podcast",
+        "episode": "Episode"
       },
       "open_location": "Open website"
     },
