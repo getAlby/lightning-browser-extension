@@ -1,4 +1,3 @@
-import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import Button from "@components/Button";
 import Container from "@components/Container";
 import LocaleSwitcher from "@components/LocaleSwitcher/LocaleSwitcher";
@@ -295,32 +294,22 @@ function Settings() {
         <Modal
           isOpen={modalIsOpen}
           close={closeModal}
-          title={t("change_password.screen_reader")}
+          contentLabel={t("change_password.screen_reader")}
+          title={t("change_password.title")}
         >
-          <div className="p-5 flex justify-between dark:bg-surface-02dp">
-            <h2 className="text-2xl font-bold dark:text-white">
-              {t("change_password.title")}
-            </h2>
-            <button onClick={closeModal}>
-              <CrossIcon className="w-6 h-6 dark:text-white" />
-            </button>
-          </div>
-
           <form
             onSubmit={(e: FormEvent) => {
               e.preventDefault();
               updateAccountPassword(formData.password);
             }}
           >
-            <div className="p-5 border-t border-b border-gray-200 dark:bg-surface-02dp dark:border-neutral-500">
-              <PasswordForm
-                i18nKeyPrefix="settings.change_password"
-                formData={formData}
-                setFormData={setFormData}
-              />
-            </div>
+            <PasswordForm
+              i18nKeyPrefix="settings.change_password"
+              formData={formData}
+              setFormData={setFormData}
+            />
 
-            <div className="flex justify-end p-5 dark:bg-surface-02dp">
+            <div className="flex justify-center mt-6">
               <Button
                 label={t("change_password.submit.label")}
                 type="submit"

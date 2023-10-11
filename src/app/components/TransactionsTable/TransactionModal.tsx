@@ -83,7 +83,7 @@ export default function TransactionModal({
         onModelClose();
         setShowMoreFields(false);
       }}
-      title={"Transactions"}
+      contentLabel={"Transactions"}
     >
       {_isRevealed && transaction && (
         <div className="p-3 flex flex-col gap-4 justify-center ">

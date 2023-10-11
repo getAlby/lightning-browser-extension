@@ -126,7 +126,7 @@ const DefaultView: FC<Props> = (props) => {
             </a>
           </div>
         )}
-        <div className="flex mb-6 lg:mb-12 space-x-4">
+        <div className="flex mb-4 space-x-4">
           <Button
             fullWidth
             icon={<ReceiveIcon className="w-6 h-6" />}
@@ -172,27 +172,23 @@ const DefaultView: FC<Props> = (props) => {
 
         {!isLoading && (
           <div>
-            <div className="flex justify-between items-center mb-2">
-              <h2 className="text-lg lg:text-xl font-semibold dark:text-white text-center">
-                {t("default_view.latest_transactions")}
-              </h2>
-
-              {!isLoading && transactions.length > 0 && (
-                <Hyperlink
-                  onClick={() => handleViewAllLink("/transactions")}
-                  className="flex justify-between items-center"
-                >
-                  {t("default_view.see_all")}
-                  <ArrowRightIcon className="w-4 h-4" />
-                </Hyperlink>
-              )}
-            </div>
-
             <TransactionsTable
               transactions={transactions}
               loading={isLoading}
               noResultMsg={t("default_view.no_transactions")}
             />
+
+            {!isLoading && transactions.length > 0 && (
+              <div className="text-center">
+                <Hyperlink
+                  onClick={() => handleViewAllLink("/transactions")}
+                  className="flex justify-center items-center mt-2"
+                >
+                  {t("default_view.see_all")}
+                  <ArrowRightIcon className="ml-2 w-4 h-4" />
+                </Hyperlink>
+              </div>
+            )}
           </div>
         )}
       </div>

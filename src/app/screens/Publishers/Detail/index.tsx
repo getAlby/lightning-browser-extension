@@ -64,34 +64,29 @@ function PublisherDetail() {
   }, [fetchData, isLoadingSettings]);
 
   return (
-    <div>
-      <div className="border-b border-gray-200 dark:border-neutral-700">
-        {allowance && (
-          <PublisherPanel
-            allowance={allowance}
-            onEdit={fetchData}
-            onDelete={() => {
-              navigate("/publishers", { replace: true });
-            }}
-            title={allowance?.name || ""}
-            image={allowance?.imageURL || ""}
-            url={allowance?.host}
-            isCard={false}
-            isSmall={false}
-          />
-        )}
-      </div>
+    <>
+      {allowance && (
+        <PublisherPanel
+          allowance={allowance}
+          onEdit={fetchData}
+          onDelete={() => {
+            navigate("/publishers", { replace: true });
+          }}
+          title={allowance?.name || ""}
+          image={allowance?.imageURL || ""}
+          url={allowance?.host}
+          isCard={false}
+          isSmall={false}
+        />
+      )}
 
       {allowance && (
         <Container>
-          <div>
-            <h2 className="mt-[34px] mb-4 text-lg text-gray-900 font-bold dark:text-white text-center">
-              {t("allowance_view.latest_transactions")}
-            </h2>
+          <div className="mt-5">
             {transactions && transactions?.length > 0 ? (
               <TransactionsTable transactions={transactions} />
             ) : (
-              <p className="text-gray-500 dark:text-neutral-400 text-center">
+              <p className="text-gray-500 dark:text-neutral-400">
                 <Trans
                   i18nKey={"allowance_view.no_transactions"}
                   t={t}
@@ -104,7 +99,7 @@ function PublisherDetail() {
           </div>
         </Container>
       )}
-    </div>
+    </>
   );
 }
 

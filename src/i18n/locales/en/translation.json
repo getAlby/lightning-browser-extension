@@ -352,9 +352,7 @@
         "send_satoshis": "⚡️ Send Satoshis ⚡️",
         "enable_now": "Enable Now"
       },
-      "latest_transactions": "Latest Transactions",
       "allowance_view": {
-        "latest_transactions": "Latest Transactions",
         "budget_spent": "Budget spent",
         "sats": "sats",
         "no_transactions": "No transactions on <0>{{name}}</0> yet.",
@@ -363,7 +361,6 @@
         "permissions": "Permissions"
       },
       "default_view": {
-        "latest_transactions": "Latest Transactions",
         "is_blocked_hint": "Alby is currently disabled on {{host}}",
         "block_removed": "Enabled {{host}}. Please reload the website.",
         "no_transactions": "No transactions for this account yet.",
