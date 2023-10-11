@@ -75,6 +75,7 @@ export default class Alby implements Connector {
       "keysend",
       "makeInvoice",
       "sendPayment",
+      "sendPaymentAsync",
       "getBalance",
       "getTransactions",
     ];

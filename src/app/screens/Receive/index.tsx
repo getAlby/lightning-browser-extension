@@ -76,14 +76,10 @@ function Receive() {
                       ) : (
                         <>
                           <QRCode
-                            className="block md:hidden"
-                            value={`lightning:${lightningAddress}`}
-                            size={128}
-                          />
-                          <QRCode
-                            className="hidden md:block"
-                            value={`lightning:${lightningAddress}`}
+                            className="rounded-md"
+                            value={lightningAddress}
                             size={192}
+                            level="Q"
                           />
                         </>
                       )}

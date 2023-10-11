@@ -39,4 +39,4 @@ async function lnurl(message: MessageWebLnLnurl, sender: Sender) {
 }
 
 export default lnurl;
-export { authOrPrompt, payWithPrompt, withdrawWithPrompt, auth };
+export { auth, authOrPrompt, payWithPrompt, withdrawWithPrompt };

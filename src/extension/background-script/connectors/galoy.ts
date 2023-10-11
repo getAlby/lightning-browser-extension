@@ -48,6 +48,7 @@ class Galoy implements Connector {
       "getInfo",
       "makeInvoice",
       "sendPayment",
+      "sendPaymentAsync",
       "signMessage",
       "getBalance",
     ];
