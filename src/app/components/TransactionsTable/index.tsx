@@ -109,13 +109,15 @@ export default function TransactionsTable({
           );
         })}
       </div>
-      <TransactionModal
-        transaction={transaction}
-        isOpen={modalOpen}
-        onClose={() => {
-          setModalOpen(false);
-        }}
-      />
+      {transaction && (
+        <TransactionModal
+          transaction={transaction}
+          isOpen={modalOpen}
+          onClose={() => {
+            setModalOpen(false);
+          }}
+        />
+      )}
     </>
   );
 }
