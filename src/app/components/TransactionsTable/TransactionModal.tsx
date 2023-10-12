@@ -17,7 +17,7 @@ import { Transaction } from "~/types";
 
 type Props = {
   transaction: Transaction | undefined;
-  onModelClose: () => void;
+  onClose: () => void;
   isOpen: boolean;
 };
 
@@ -49,7 +49,7 @@ const TransactionDetailRow = ({
 export default function TransactionModal({
   transaction,
   isOpen,
-  onModelClose,
+  onClose,
 }: Props) {
   const { t: tCommon } = useTranslation("common");
   const { t } = useTranslation("components", {
@@ -80,7 +80,7 @@ export default function TransactionModal({
       isOpen={_isRevealed}
       close={() => {
         setRevealed(false);
-        onModelClose();
+        onClose();
         setShowMoreFields(false);
       }}
       contentLabel={"Transactions"}
@@ -90,11 +90,11 @@ export default function TransactionModal({
           <div>
             <div className="flex items-center justify-center">
               {getTransactionType(transaction) == "outgoing" ? (
-                <div className="flex justify-center items-center bg-orange-100 rounded-full p-8">
+                <div className="flex justify-center items-center bg-orange-100 dark:bg-[#261911] rounded-full p-8">
                   <ArrowUpIcon className="w-8 h-8 text-orange-400 stroke-[5px]" />
                 </div>
               ) : (
-                <div className="flex justify-center items-center bg-green-100 rounded-full p-8">
+                <div className="flex justify-center items-center bg-green-100 dark:bg-[#0F1E1A] rounded-full p-8">
                   <ArrowDownIcon className="w-8 h-8 text-green-400 stroke-[5px]" />
                 </div>
               )}

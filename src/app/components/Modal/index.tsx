@@ -13,7 +13,8 @@ export default function Modal({
   children,
   isOpen,
   close: closeModal,
-  contentLabel: title,
+  contentLabel,
+  title,
 }: Props) {
   return (
     <ReactModal
@@ -22,7 +23,7 @@ export default function Modal({
       shouldFocusAfterRender={false}
       isOpen={isOpen}
       onRequestClose={closeModal}
-      contentLabel={title}
+      contentLabel={contentLabel}
       overlayClassName="bg-black bg-opacity-50 fixed inset-0 flex justify-center items-center cursor-pointer"
       className="rounded-lg shadow-xl bg-white dark:bg-surface-02dp w-full max-w-md overflow-hidden relative p-5 cursor-auto mx-5"
       style={{ content: { maxHeight: "90vh" } }}
