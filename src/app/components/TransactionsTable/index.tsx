@@ -6,8 +6,6 @@ import Button from "~/app/components/Button";
 import { useSettings } from "~/app/context/SettingsContext";
 import { Transaction } from "~/types";
 
-import Badge from "../Badge";
-
 export type Props = {
   transactions: Transaction[] | null | undefined;
   loading?: boolean;
@@ -60,18 +58,6 @@ export default function TransactionsTable({
                         {tx.date}
                       </p>
                     </div>
-                    {tx.badges && (
-                      <div className="ml-6 space-x-3">
-                        {tx.badges.map((badge) => (
-                          <Badge
-                            key={badge.label}
-                            label={badge.label}
-                            color={badge.color}
-                            textColor={badge.textColor}
-                          />
-                        ))}
-                      </div>
-                    )}
                     <div className="flex ml-auto text-right space-x-3 shrink-0">
                       <div>
                         <p className="text-sm font-medium dark:text-white">

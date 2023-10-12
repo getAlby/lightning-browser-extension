@@ -404,8 +404,7 @@ function AccountDetail() {
                   <div className="">
                     <Badge
                       label="imported"
-                      color="green-bitcoin"
-                      textColor="white"
+                      className="bg-green-bitcoin text-white"
                     />
                   </div>
                 )}
