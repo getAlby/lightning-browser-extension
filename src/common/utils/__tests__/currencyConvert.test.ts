@@ -6,7 +6,7 @@ import {
   getFormattedSats,
 } from "../currencyConvert";
 
-describe("Currency coversion utils", () => {
+describe("Currency conversion utils", () => {
   describe("getFormattedFiat", () => {
     test("formats correctly for USD in english language", () => {
       const result = getFormattedFiat({
@@ -41,7 +41,7 @@ describe("Currency coversion utils", () => {
       expect(result).toBe("37\xa0026,96\xa0€"); // Intl.NumberFormat uses a non-breaking space
     });
 
-    test("formats correctly for EUR in brazilian portugese language", () => {
+    test("formats correctly for EUR in brazilian portuguese language", () => {
       const result = getFormattedFiat({
         amount: 123456789,
         rate: 0.00029991836,
