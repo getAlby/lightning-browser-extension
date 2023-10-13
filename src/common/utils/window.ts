@@ -18,8 +18,8 @@ export async function getPosition(
     ) {
       // Position window in the center of the lastFocused window
       // Rounding for integer values (px)
-      top = Math.round(lastFocused.top + (lastFocused.height - height) / 2);
-      left = Math.round(lastFocused.left + (lastFocused.width - width) / 2);
+      top = lastFocused.top;
+      left = lastFocused.left + (lastFocused.width - width);
     }
   } catch (_) {
     // The following properties are more than likely 0, due to being
