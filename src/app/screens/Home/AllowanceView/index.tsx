@@ -15,6 +15,8 @@ import { useSettings } from "~/app/context/SettingsContext";
 import { PublisherLnData } from "~/app/screens/Home/PublisherLnData";
 import { convertPaymentsToTransactions } from "~/app/utils/payments";
 import type { Allowance, Battery, Transaction } from "~/types";
+import Hyperlink from "@components/Hyperlink";
+import { useNavigate } from "react-router-dom";
 
 dayjs.extend(relativeTime);
 
@@ -33,6 +35,8 @@ const AllowanceView: FC<Props> = (props) => {
     getFormattedFiat,
     getFormattedNumber,
   } = useSettings();
+
+  const navigate = useNavigate();
 
   const [transactions, setTransactions] = useState<Transaction[] | null>(null);
   const [isLoadingTransactions, setIsLoadingTransactions] = useState(true);
@@ -130,14 +134,25 @@ const AllowanceView: FC<Props> = (props) => {
             <Progressbar percentage={props.allowance.percentage} />
           </div>
         ) : (
-          <div className="my-6 text-center text-sm">
-            <SitePreferences
-              launcherType="hyperlink"
-              allowance={props.allowance}
-              onEdit={props.onEditComplete}
-              onDelete={props.onDeleteComplete}
-            />
-          </div>
+          <>
+            <div className="mt-6 text-center text-sm">
+              <SitePreferences
+                launcherType="hyperlink"
+                allowance={props.allowance}
+                onEdit={props.onEditComplete}
+                onDelete={props.onDeleteComplete}
+              />
+            </div>
+            <div className="mt-2 mb-6 text-center text-sm">
+              <Hyperlink
+                onClick={() => {
+                  navigate("/send");
+                }}
+              >
+                Send payment
+              </Hyperlink>
+            </div>
+          </>
         )}
         <h2 className="mb-2 text-lg text-gray-900 font-bold dark:text-white">
           {t("allowance_view.recent_transactions")}

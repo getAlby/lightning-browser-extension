@@ -5,7 +5,7 @@ import Header from "@components/Header";
 import IconButton from "@components/IconButton";
 import TextField from "@components/form/TextField";
 import lightningPayReq from "bolt11";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 import QrcodeAdornment from "~/app/components/QrcodeAdornment";
@@ -31,6 +31,20 @@ function Send() {
   const hint = !isAlbyOAuthAccount(auth.account?.connectorType)
     ? t("input.hint")
     : t("input.hint_with_bitcoin_address");
+
+  useEffect(() => {
+    const getCopyVal = async () => {
+      try {
+        const copyVal = await navigator.clipboard.readText();
+        setInvoice(copyVal);
+      } catch (e) {
+        console.error(e);
+      }
+    };
+    setTimeout(() => {
+      getCopyVal();
+    }, 2000);
+  }, []);
 
   function isPubKey(str: string) {
     return str.length == 66 && (str.startsWith("02") || str.startsWith("03"));
