@@ -10,6 +10,8 @@ const liquidCalls = [
   "liquid/signPsetWithPrompt",
   "liquid/enable",
   "liquid/isEnabled",
+  "liquid/on",
+  "liquid/off",
 ];
 // calls that can be executed when liquid is not enabled for the current content page
 const disabledCalls = ["liquid/enable", "liquid/isEnabled"];

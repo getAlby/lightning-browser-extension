@@ -10,6 +10,8 @@ const webbtcCalls = [
   "webbtc/signPsbtWithPrompt",
   "webbtc/getAddressOrPrompt",
   "webbtc/isEnabled",
+  "webbtc/on",
+  "webbtc/off",
 ];
 // calls that can be executed when `window.webbtc` is not enabled for the current content page
 const disabledCalls = ["webbtc/enable", "webbtc/isEnabled"];
