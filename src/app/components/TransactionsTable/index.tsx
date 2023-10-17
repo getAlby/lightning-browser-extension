@@ -62,11 +62,11 @@ export default function TransactionsTable({
               <div className="flex gap-4">
                 <div className="flex items-center">
                   {type == "outgoing" ? (
-                    <div className="flex justify-center items-center bg-orange-100 rounded-full w-8 h-8">
+                    <div className="flex justify-center items-center bg-orange-100 dark:bg-[#261911] rounded-full w-8 h-8">
                       <ArrowUpIcon className="w-4 h-4 text-orange-400 stroke-[4px]" />
                     </div>
                   ) : (
-                    <div className="flex justify-center items-center bg-green-100 rounded-full w-8 h-8">
+                    <div className="flex justify-center items-center bg-green-100 dark:bg-[#0F1E1A] rounded-full w-8 h-8">
                       <ArrowDownIcon className="w-4 h-4 text-green-400 stroke-[4px]" />
                     </div>
                   )}
@@ -109,14 +109,15 @@ export default function TransactionsTable({
           );
         })}
       </div>
-
-      <TransactionModal
-        transaction={transaction}
-        isOpen={modalOpen}
-        onModelClose={() => {
-          setModalOpen(false);
-        }}
-      />
+      {transaction && (
+        <TransactionModal
+          transaction={transaction}
+          isOpen={modalOpen}
+          onClose={() => {
+            setModalOpen(false);
+          }}
+        />
+      )}
     </>
   );
 }
