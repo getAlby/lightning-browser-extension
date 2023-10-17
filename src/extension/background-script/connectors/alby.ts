@@ -114,18 +114,11 @@ export default class Alby implements Connector {
   }
 
   async getTransactions(): Promise<GetTransactionsResponse> {
-    const incomingInvoices = (await this._request((client) =>
-      client.incomingInvoices({})
+    const invoicesResponse = (await this._request((client) =>
+      client.invoices({})
     )) as Invoice[];
 
-    const outgoingInvoices = (await this._request((client) =>
-      client.outgoingInvoices({})
-    )) as Invoice[];
-
-    const transactions: ConnectorInvoice[] = [
-      ...incomingInvoices,
-      ...outgoingInvoices,
-    ].map(
+    const transactions: ConnectorInvoice[] = invoicesResponse.map(
       (invoice, index): ConnectorInvoice => ({
         custom_records: invoice.custom_records,
         id: `${invoice.payment_request}-${index}`,
