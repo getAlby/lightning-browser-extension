@@ -354,10 +354,10 @@
   resolved "https://registry.npmjs.org/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@bitcoin-design/bitcoin-icons-react@^0.1.9":
-  version "0.1.9"
-  resolved "https://registry.npmjs.org/@bitcoin-design/bitcoin-icons-react/-/bitcoin-icons-react-0.1.9.tgz"
-  integrity sha512-nJvTD1+zG/ffHdMeGQ39vdsmEFo9WcCIP1RlR7ZpZoP2H+IgKwzwow8VSY6ebroLoCT7WWtUPJQSbgQwgWYrFg==
+"@bitcoin-design/bitcoin-icons-react@^0.1.10":
+  version "0.1.10"
+  resolved "https://registry.yarnpkg.com/@bitcoin-design/bitcoin-icons-react/-/bitcoin-icons-react-0.1.10.tgz#11acf1d386c1094d3eff673ca236345860762f64"
+  integrity sha512-f7GSutKHa4EK4LWI/phnGCJsN8fzFbVAVQ4F1MYxiza34LVmXmbgHUmdP/BR8ZeQSIbZLt19inpJZDBtQvYe4Q==
 
 "@bitcoinerlab/secp256k1@^1.0.5":
   version "1.0.5"
