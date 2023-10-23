@@ -10,7 +10,7 @@ export default function BadgesList({ allowance }: Props) {
   if (allowance.remainingBudget > 0) {
     badges.push({
       label: "budget",
-      className: "bg-green-bitcoin text-white",
+      className: "bg-blue-500 text-white",
     });
   }
   if (allowance.lnurlAuth) {
