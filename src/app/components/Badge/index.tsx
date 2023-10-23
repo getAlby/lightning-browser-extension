@@ -4,10 +4,9 @@ import { classNames } from "~/app/utils";
 type Props = {
   label: "budget" | "auth" | "imported";
   className: string;
-  small?: boolean;
 };
 
-export default function Badge({ label, className, small }: Props) {
+export default function Badge({ label, className }: Props) {
   const { t: tComponents } = useTranslation("components", {
     keyPrefix: "badge",
   });
