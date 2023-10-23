@@ -35,7 +35,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@bitcoin-design/bitcoin-icons-react": "^0.1.9",
+    "@bitcoin-design/bitcoin-icons-react": "^0.1.10",
     "@bitcoinerlab/secp256k1": "^1.0.5",
     "@getalby/sdk": "^2.2.3",
     "@headlessui/react": "^1.7.16",
