@@ -145,10 +145,10 @@
           "placeholder": "tu-nodo-direccion onion:puerto"
         }
       },
-      "bitcoin_beach": {
-        "title": "Billetera de Bitcoin Beach",
+      "blink": {
+        "title": "Billetera de Blink",
         "page": {
-          "title": "Conecta a <0>La cartera Bitcoin Beach</0>"
+          "title": "Conecta a <0>La cartera Blink</0>"
         }
       },
       "bitcoin_jungle": {
@@ -303,8 +303,6 @@
       "recent_transactions": "Transacciones Recientes",
       "allowance_view": {
         "recent_transactions": "Transacciones Recientes",
-        "allowance": "Subsidio",
-        "sats_used": "sats utilizados",
         "no_transactions": "No hay transacciones en <0>{{name}}</0> todavía."
       },
       "default_view": {
@@ -332,7 +330,6 @@
             "label": "Clave Privada",
             "title": "Administra tu clave",
             "subtitle": "Pega tu clave privada o genera una nueva. <0>Más información \"</0>",
-            "warning": "Introduzca el nombre de la cuenta para confirmar la eliminación de la clave privada:",
             "failed_to_remove": "El nombre de cuenta introducido no coincide, tu antiguo privado ha sido restaurado."
           },
           "public_key": {
@@ -355,7 +352,6 @@
         },
         "remove": {
           "title": "Eliminar Esta Cuenta",
-          "confirm": "¿Está seguro de que desea eliminar la cuenta: {{name}}?\nEsto no se puede deshacer. Si usó esta cuenta para iniciar sesión en sitios web, es posible que pierda el acceso a ellos.",
           "subtitle": "Se eliminarán todos los enlaces vinculados. Por favor, asegúrese de querer hacerlo."
         },
         "title1": "Información de la Cuenta",
@@ -377,14 +373,6 @@
           "export": "Exportar"
         }
       }
-    },
-    "enable": {
-      "allow": "Permitir que este sitio web:",
-      "request1": "Solicitar aprobación de transacciones",
-      "request2": "Solicitar facturas e información sobre Lightning",
-      "block_and_ignore": "Bloquear e ignorar {{host}}",
-      "title": "Conectar",
-      "block_added": "Se agregó {{host}} a la lista de bloqueados, vuelva a cargar la página."
     },
     "unlock": {
       "unlock_to_continue": "Desbloquear para continuar",
@@ -634,11 +622,12 @@
       "hide_details": "Ocultar los detalles",
       "no_content": "(Sin contenido)",
       "kinds": {
-        "unknown": "nostr evento del tipo {{kind}}",
         "0": "metadatos",
         "1": "nota corta de texto",
         "2": "Recomendar un relé",
         "3": "contactos",
+        "4": "mensajes directos cifrados",
+        "5": "borrado de eventos",
         "7": "reacción",
         "8": "concesión de distintivo",
         "40": "creación del canal",
@@ -646,18 +635,17 @@
         "42": "mensaje del canal",
         "43": "ocultar mensaje del canal",
         "44": "silenciar a un usuario del canal",
+        "1984": "reportando",
         "9734": "solicitud de eliminación",
         "9735": "borrar",
         "10002": "metadatos de la lista de relés",
         "22242": "autenticación del cliente",
         "24133": "conectarse a nostr",
         "30008": "distintivos del perfil",
+        "30009": "definición del distintivo",
         "30023": "contenidos largos",
         "30078": "datos específicos de la aplicación",
-        "5": "borrado de eventos",
-        "4": "mensajes directos cifrados",
-        "1984": "reportando",
-        "30009": "definición del distintivo"
+        "unknown": "nostr evento del tipo {{kind}}"
       }
     },
     "discover": {
@@ -881,12 +869,10 @@
       "screen_reader": "Alternar menú desplegable"
     },
     "publishers_table": {
-      "used": "usado",
       "payments": "pagos"
     },
     "badge": {
       "label": {
-        "active": "ACTIVO",
         "auth": "INICIAR SESIÓN"
       }
     },

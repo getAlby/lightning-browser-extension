@@ -1,4 +1,5 @@
 import {
+  KeyIcon,
   MnemonicIcon,
   PasswordIcon,
   SafeIcon,
@@ -12,7 +13,8 @@ function MnemonicDescription() {
 
   return (
     <>
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-2">
+        <ListItem icon={<KeyIcon />} title={t("backup.items.keys")} />
         <ListItem
           icon={<MnemonicIcon />}
           title={t("backup.items.recovery_phrase")}
@@ -31,10 +33,10 @@ type ListItemProps = { icon: React.ReactNode; title: string };
 function ListItem({ icon, title }: ListItemProps) {
   return (
     <div className="flex gap-2 items-center">
-      <div className="shrink-0 w-8 h-8 text-gray-500 dark:text-neutral-500">
+      <div className="shrink-0 w-8 h-8 text-gray-600 dark:text-neutral-400">
         {icon}
       </div>
-      <span className="text-gray-500 dark:text-neutral-500">{title}</span>
+      <span className="text-gray-600 dark:text-neutral-400">{title}</span>
     </div>
   );
 }

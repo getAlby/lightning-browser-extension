@@ -208,10 +208,10 @@
           "placeholder": "adresa-onion-a-nodului-tau:portul"
         }
       },
-      "bitcoin_beach": {
-        "title": "Bitcoin Beach Wallet",
+      "blink": {
+        "title": "Blink Wallet",
         "page": {
-          "title": "Conectare la <0>Bitcoin Beach Wallet</0>"
+          "title": "Conectare la <0>Blink Wallet</0>"
         }
       },
       "bitcoin_jungle": {
@@ -308,8 +308,6 @@
       "recent_transactions": "Tranzactii recente",
       "allowance_view": {
         "recent_transactions": "Tranzactii recente",
-        "allowance": "Permisiuni",
-        "sats_used": "sats utilizati",
         "no_transactions": "Nicio tranzactie pentru <0>{{nume}}</0> inca."
       },
       "default_view": {
@@ -341,7 +339,6 @@
           "private_key": {
             "title": "Gestionarea cheii tale",
             "subtitle": "Insereaza cheia ta privata sau genereaza una noua. Inainte sa generezi o noua cheie asigura-te ca ai salvat cheia privata. <0>Mai multe »</0>",
-            "warning": "Te rugam sa introduci numele contului pentru a confirma stergerea cheii private:",
             "success": "Cheia privata a fost criptata si salvata cu succes.",
             "successfully_removed": "Cheia privata a fost indepartata cu succes.",
             "label": "Cheia privata",
@@ -368,8 +365,7 @@
         },
         "remove": {
           "title": "",
-          "subtitle": "",
-          "confirm": ""
+          "subtitle": ""
         },
         "actions": {
           "remove_account": "",
@@ -379,14 +375,6 @@
       "actions": {
         "add_account": ""
       }
-    },
-    "enable": {
-      "title": "",
-      "allow": "",
-      "request1": "",
-      "request2": "",
-      "block_and_ignore": "",
-      "block_added": ""
     },
     "unlock": {
       "unlock_to_continue": "",
@@ -786,12 +774,10 @@
       }
     },
     "publishers_table": {
-      "payments": "",
-      "used": ""
+      "payments": ""
     },
     "badge": {
       "label": {
-        "active": "",
         "auth": ""
       }
     }

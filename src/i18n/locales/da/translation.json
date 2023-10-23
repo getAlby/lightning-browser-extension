@@ -208,10 +208,10 @@
           "placeholder": "din-nodes-onion-adresse:port"
         }
       },
-      "bitcoin_beach": {
-        "title": "Bitcoin Beach Wallet",
+      "blink": {
+        "title": "Blink Wallet",
         "page": {
-          "title": "Opret forbindelse til <0>Bitcoin Beach Wallet</0>"
+          "title": "Opret forbindelse til <0>Blink Wallet</0>"
         }
       },
       "bitcoin_jungle": {
@@ -308,8 +308,6 @@
       "recent_transactions": "Seneste transaktioner",
       "allowance_view": {
         "recent_transactions": "Seneste transaktioner",
-        "allowance": "Pulje",
-        "sats_used": "brugte sats",
         "no_transactions": "Endnu ingen transaktioner på <0>{{navn}}</0>."
       },
       "default_view": {
@@ -341,7 +339,6 @@
           "private_key": {
             "title": "Opbevar din nøgle",
             "subtitle": "Indsæt din private nøgle eller generer en ny. Husk at tage en sikkerhedskopi af din private nøgle, før du genererer en ny. <0>Læs mere »</0>",
-            "warning": "Dette vil slette din gamle private nøgle. Er du sikker?",
             "success": "Den private nøgle blev krypteret & gemt.",
             "successfully_removed": "Den private nøgle blev fjernet.",
             "label": "Privat nøgle"
@@ -367,8 +364,7 @@
         },
         "remove": {
           "title": "Fjern denne konto",
-          "subtitle": "Alle de tilknyttede puljer bliver slettet. Du skal være helt sikker.",
-          "confirm": "Er du sikker på, at du vil fjerne kontoen: {{navn}}?\nDette kan ikke fortrydes. Hvis du brugte denne konto til at logge på hjemmesider, kan du miste adgangen til disse."
+          "subtitle": "Alle de tilknyttede puljer bliver slettet. Du skal være helt sikker."
         },
         "actions": {
           "remove_account": "Fjern konto",
@@ -378,14 +374,6 @@
       "actions": {
         "add_account": "Tilføj konto"
       }
-    },
-    "enable": {
-      "title": "Opret forbindelse",
-      "allow": "Tillad denne hjemmeside at:",
-      "request1": "Anmod om godkendelse af transaktioner",
-      "request2": "Anmod om faktura- og lightningoplysninger",
-      "block_and_ignore": "Bloker og ignorer {{vært}}",
-      "block_added": "Føjet {{vært}} til blokeringslisten, indlæs hjemmesiden igen."
     },
     "unlock": {
       "unlock_to_continue": "Lås op for at fortsætte",
@@ -786,12 +774,10 @@
       }
     },
     "publishers_table": {
-      "payments": "betalinger",
-      "used": "brugt"
+      "payments": "betalinger"
     },
     "badge": {
       "label": {
-        "active": "AKTIV",
         "auth": "LOG IND"
       }
     }

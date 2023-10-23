@@ -5,7 +5,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import { toast } from "react-toastify";
+import toast from "~/app/components/Toast";
 import { useSettings } from "~/app/context/SettingsContext";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
@@ -21,6 +21,7 @@ interface AccountContextType {
     currency?: AccountInfo["currency"];
     avatarUrl?: AccountInfo["avatarUrl"];
     connectorType?: AccountInfo["connectorType"];
+    lightningAddress?: AccountInfo["lightningAddress"];
   } | null;
   balancesDecorated: {
     fiatBalance: string;

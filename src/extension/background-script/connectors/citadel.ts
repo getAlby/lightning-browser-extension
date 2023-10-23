@@ -56,6 +56,7 @@ class CitadelConnector implements Connector {
     return [
       "makeInvoice",
       "sendPayment",
+      "sendPaymentAsync",
       "signMessage",
       "getInfo",
       "getBalance",

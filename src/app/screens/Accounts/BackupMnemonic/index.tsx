@@ -3,9 +3,9 @@ import Loading from "@components/Loading";
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
-import { toast } from "react-toastify";
 import Button from "~/app/components/Button";
 import { ContentBox } from "~/app/components/ContentBox";
+import toast from "~/app/components/Toast";
 import MnemonicDescription from "~/app/components/mnemonic/MnemonicDescription";
 import MnemonicInputs from "~/app/components/mnemonic/MnemonicInputs";
 import api from "~/common/lib/api";
@@ -52,7 +52,7 @@ function BackupMnemonic() {
           <MnemonicDescription />
           <MnemonicInputs mnemonic={mnemonic} readOnly />
         </ContentBox>
-        <div className="flex justify-center mt-8 mb-16 gap-4">
+        <div className="flex justify-center my-6 gap-4">
           <Button
             label={tCommon("actions.back")}
             onClick={() => navigate(-1)}

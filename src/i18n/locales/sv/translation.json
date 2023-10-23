@@ -173,10 +173,10 @@
           "placeholder": "din-onion-nod-adress:port"
         }
       },
-      "bitcoin_beach": {
-        "title": "Bitcoin Beach plånbok",
+      "blink": {
+        "title": "Blink plånbok",
         "page": {
-          "title": "Anslut <0>Bitcoin Beach Wallet</0>"
+          "title": "Anslut <0>Blink Wallet</0>"
         }
       },
       "bitcoin_jungle": {
@@ -303,9 +303,12 @@
       "recent_transactions": "Senaste Transaktioner",
       "allowance_view": {
         "recent_transactions": "Senaste Transaktioner",
-        "allowance": "Beloppsgräns",
-        "sats_used": "spenderade sats",
-        "no_transactions": "Inga transaktioner för <0>{{name}}</0> ännu."
+        "no_transactions": "Inga transaktioner för <0>{{name}}</0> ännu.",
+        "sats": "sats",
+        "budget_spent": "Budget förbrukad",
+        "total_spent": "Totalt spenderat",
+        "total_payments": "Totala betalningar",
+        "permissions": "Behörigheter"
       },
       "default_view": {
         "recent_transactions": "Senaste Transaktioner",
@@ -339,10 +342,10 @@
             "title": "Hantera dina Nostr privata nyckel",
             "successfully_removed": "Nostr privat nyckel har tagits bort.",
             "label": "Nostr Privat Nyckel",
-            "warning": "Ange namnet på kontot för att bekräfta raderingen av din nostr privata nyckel:",
             "subtitle": "Klistra in din nostr privata nyckel eller skapa en ny. <0>Läs mer »</0>",
             "success": "Nostr privat nyckel krypterad och sparad.",
-            "failed_to_remove": "Det angivna kontonamnet matchade inte, din gamla Nostr privata nyckel har återställts."
+            "failed_to_remove": "Det angivna kontonamnet matchade inte, din gamla Nostr privata nyckel har återställts.",
+            "warning": "Vänligen ange namnet på kontot för att bekräfta raderingen av din nostr privata nyckel:\n\n{{ name }}"
           },
           "public_key": {
             "label": "Nostr Publik Nyckel"
@@ -389,8 +392,8 @@
         "remove": {
           "title": "Ta bort detta konto",
           "subtitle": "Tar bort alla traktamenten, betalningsdata och nycklar som är kopplade till detta konto.",
-          "confirm": "Ange namnet på kontot för att bekräfta raderingen av ditt konto.\n\n ⚠️ Alla associerade nycklar (Master Key, Nostr, etc) kommer att raderas om du fortsätter. Se till att du har säkerhetskopierat dem, det finns inget annat sätt att återställa dem.",
-          "error": "Det angivna kontonamnet matchade inte."
+          "error": "Det angivna kontonamnet matchade inte.",
+          "confirm": "Ange namnet på kontot för att bekräfta raderingen av ditt konto.\n\n{{ name }}\n\n ⚠️ Alla associerade nycklar (Master Key, Nostr, etc) kommer att raderas om du fortsätter. Se till att du har säkerhetskopierat dem, det finns inget annat sätt att återställa dem."
         },
         "title1": "Konto inställningar",
         "title2": "Konto",
@@ -405,7 +408,7 @@
           "your_ln_address": "Din Lightning Address:",
           "export_uri": "LNDHub-inloggnings-URI",
           "scan_qr": "Importera denna plånbok till Zeus eller BlueWallet genom att skanna QR-koden.",
-          "description": "Låter dig ansluta och använda det här kontot på mobila plånböcker som <0>Blue Wallet</0> och <0>Zeus</0>."
+          "description": "Låter dig ansluta och använda det här kontot på mobila plånböcker som <0>Blue Wallet</0> och <1>Zeus</1>."
         },
         "actions": {
           "remove_account": "Ta bort kontot",
@@ -414,7 +417,7 @@
         },
         "mnemonic": {
           "saved": "Huvudnyckeln krypterad och sparad.",
-          "existing_nostr_key_notice": "⚠️ Detta konto har redan en nostr privat nyckeluppsättning och kommer inte att härledas från denna huvudnyckel. Du kan hantera din Nostr-nyckel från dina kontoinställningar.",
+          "existing_nostr_key_notice": "ℹ️ Detta konto har redan en nostr privat nyckeluppsättning och kommer inte att härledas från denna huvudnyckel. Du kan hantera din Nostr-nyckel från dina kontoinställningar.",
           "generate": {
             "title": "Generera ny huvudnyckel",
             "button": "Generera huvudnyckel",
@@ -434,7 +437,8 @@
             "items": {
               "recovery_phrase": "Du kan alltid komma åt din huvudnyckel genom att använda dess återställningsfras.",
               "words": "Återställningsfrasen består av 12 ord som fungerar som ett lösenord, men det kan inte ändras eller återställas om det tappas bort.",
-              "storage": "Se till att skriva ner det någonstans säkert och privat!"
+              "storage": "Se till att skriva ner det någonstans säkert och privat!",
+              "keys": "Master Key låter dig interagera med olika protokoll som: Nostr, Liquid eller baslager av Bitcoin."
             }
           },
           "import": {
@@ -449,13 +453,16 @@
           "lnurl": {
             "title": "Logga in med Lightning",
             "use_mnemonic": "Använd Master Key för att logga in på lightning appar (LNURL Auth)"
+          },
+          "new": {
+            "title": "Vad är en Master Key?"
           }
         },
         "remove_secretkey": {
           "title": "Ta bort huvudnyckeln",
           "subtitle": "Tar bort huvudnyckeln från det här kontot.",
-          "confirm": "Ange namnet på kontot för att bekräfta raderingen av din huvudnyckel.",
-          "success": "Masternyckeln har tagits bort."
+          "success": "Masternyckeln har tagits bort.",
+          "confirm": "Ange namnet på kontot för att bekräfta raderingen av din huvudnyckel.\n\n{{ name }}"
         },
         "no_mnemonic_hint": "💡 Du har ingen huvudnyckel än. <0>Klicka här</0></div> för att skapa din huvudnyckel och låsa upp dessa inställningar.",
         "network": {
@@ -468,14 +475,6 @@
           }
         }
       }
-    },
-    "enable": {
-      "title": "Anslut",
-      "allow": "Tillåt den här webbplatsen att:",
-      "request1": "Begär tillåtelse för transaktioner",
-      "request2": "Begär faktura och lightning-information",
-      "block_and_ignore": "Blockera och ignorera {{host}}",
-      "block_added": "Lade till {{host}} till blockeringslistan, ladda om webbplatsen."
     },
     "unlock": {
       "unlock_to_continue": "Lås upp för att fortsätta",
@@ -593,7 +592,8 @@
       "title": "Skicka",
       "input": {
         "label": "Mottagare",
-        "hint": "Faktura, Lightning-adress eller LNURL"
+        "hint": "Faktura, Lightning-adress eller LNURL",
+        "hint_with_bitcoin_address": "Faktura, Lightning-adress , LNURL eller bitcoin adress"
       }
     },
     "lnurlpay": {
@@ -643,7 +643,18 @@
       "title": "Tag emot",
       "actions": {
         "create_invoice": "Skapa Faktura",
-        "copy_lightning_address": "Kopiera Lightning adress"
+        "redeem": {
+          "description": "Ta ut en bitcoin-kupong direkt via en LNURL-kod",
+          "title": "Lösa in"
+        },
+        "invoice": {
+          "title": "Lightning faktura",
+          "description": "Begär omedelbara och specifika belopp bitcoinbetalningar"
+        },
+        "bitcoin_address": {
+          "description": "Ta emot via bitcoin-adress med en bytestjänst",
+          "title": "Bitcoin adress"
+        }
       },
       "amount": {
         "label": "Belopp",
@@ -657,9 +668,7 @@
       "payment": {
         "waiting": "väntar på betalning...",
         "status": "Kontrollera betalningsstatus"
-      },
-      "receive_via_bitcoin_address": "Ta emot via bitcoin adress",
-      "redeem_lnurl": "Lös in LNURL"
+      }
     },
     "publishers": {
       "publisher": {
@@ -719,16 +728,11 @@
       "allow": "Tillåt den här webbplatsen att:",
       "block_and_ignore": "Blockera och ignorera {{host}}",
       "kinds": {
-        "9734": "zap förfrågan",
-        "9735": "zap",
-        "10002": "relä listans metadata",
-        "22242": "klient autentisering",
-        "4": "krypterade direktmeddelanden",
-        "unknown": "nostr event av sort {{kind}}",
         "0": "metadata",
         "1": "kort textanteckning",
         "2": "rekommenderade relä",
         "3": "kontakter",
+        "4": "krypterade direktmeddelanden",
         "5": "radering av händelse",
         "7": "reaktion",
         "8": "badge utmärkelse",
@@ -738,11 +742,16 @@
         "43": "kanal gömda meddelande",
         "44": "kanal tysta användare",
         "1984": "anmäla",
+        "9734": "zap förfrågan",
+        "9735": "zap",
+        "10002": "relä listans metadata",
+        "22242": "klient autentisering",
         "24133": "nostr ansluta",
         "30008": "profil badges",
         "30009": "badge definition",
         "30023": "långformigt innehåll",
-        "30078": "applikationsspecifika data"
+        "30078": "applikationsspecifika data",
+        "unknown": "nostr event av sort {{kind}}"
       },
       "view_details": "Visa detaljer",
       "hide_details": "Göm detaljer",
@@ -893,7 +902,18 @@
       "allow": "Tillåt den här webbplatsen att:",
       "allow_sign": "Tillåt {{host}} att signera:",
       "block_and_ignore": "Blockera och ignorera {{host}}",
-      "block_added": "Lade till {{host}} till blockeringslistan, ladda om webbplatsen."
+      "block_added": "Lade till {{host}} till blockeringslistan, ladda om webbplatsen.",
+      "confirm_sign_psbt": {
+        "title": "Signera",
+        "hide_raw_transaction": "Göm råtransaktion (hexadecimal)",
+        "view_raw_transaction": "Visa råtransaktion (hexadecimal)",
+        "inputs": "Ingångar",
+        "fee": "Avgift",
+        "hide_details": "Göm detaljer",
+        "allow_sign": "Den här webbplatsen ber dig att underteckna en bitcoin-transaktion",
+        "view_details": "Visa detaljer",
+        "outputs": "Utgångar"
+      }
     },
     "liquid": {
       "title": "Liquid",
@@ -901,6 +921,70 @@
       "allow_sign": "Tillåt {{host}} att signera:",
       "block_and_ignore": "Blockera och ignorera {{host}}",
       "block_added": "Lade till {{host}} till blockeringslistan, ladda om webbplatsen."
+    },
+    "send_to_bitcoin_address": {
+      "service_unavailable": "Tjänsten är för tillfällig inte tillgänglig, försök igen om några minuter.",
+      "amount": {
+        "label": "Belopp (sats)"
+      },
+      "title": "Skicka till bitcoin-adress",
+      "recipient": {
+        "label": "Mottagare"
+      },
+      "network_fee": {
+        "label": "Nätverksavgift"
+      },
+      "service_fee": {
+        "label": "Serviceavgift"
+      },
+      "total": {
+        "label": "Total"
+      },
+      "total_fee": {
+        "label": "Avgift"
+      },
+      "provider": {
+        "label": "Byt leverantör"
+      },
+      "view_on_explorer": "Visa på mempool explorer",
+      "time_estimate": "ℹ️ Transaktioner kommer vanligtvis inom 10-30 minuter."
+    },
+    "webln_enable": {
+      "title": "Anslut till WebLN",
+      "request2": "Begär fakturor och lightning information"
+    },
+    "onboard": {
+      "request2": "Du har inte konfigurerat dina nycklar än",
+      "request1": "Denna webbplats kräver nyckelinteraktion",
+      "request3": "Installationen är snabb och enkel",
+      "title": "Ställ in dina nycklar",
+      "actions": {
+        "start_setup": "Starta installationen"
+      }
+    },
+    "liquid_enable": {
+      "request2": "Begär fakturor och likvida uppgifter",
+      "title": "Anslut till Liquid"
+    },
+    "nostr_enable": {
+      "title": "Anslut till Nostr",
+      "request2": "Signera händelser med din privata Nostr-nyckel",
+      "request1": "Begär att läsa din publika Nostr-nyckel"
+    },
+    "webbtc_enable": {
+      "request2": "Begär fakturor och Webbtc-information",
+      "title": "Anslut till WebBTC"
+    },
+    "alby_enable": {
+      "title": "Anslut till Alby",
+      "request2": "Begär fakturor och albyinformation"
+    },
+    "confirm_payment_async": {
+      "title": "Godkänn betalning",
+      "description": "Detta är en HOLD-faktura. <0>Läs mer »</0>",
+      "actions": {
+        "pay_now": "Betala nu"
+      }
     }
   },
   "common": {
@@ -947,7 +1031,10 @@
       "import": "Importera",
       "copy_clipboard": "Kopiera till urklipp",
       "paste": "Klistra in",
-      "paste_clipboard": "Klistra in från urklipp"
+      "paste_clipboard": "Klistra in från urklipp",
+      "review": "Recension",
+      "copied_to_clipboard": "Kopierade till urklipp",
+      "disconnect": "Koppla ifrån"
     },
     "errors": {
       "connection_failed": "Anslutning misslyckades",
@@ -982,21 +1069,28 @@
       "citadel": "Citadel"
     },
     "or": "eller",
-    "pasted": "Klistrat in!"
+    "pasted": "Klistrat in!",
+    "enable": {
+      "block_added": "Lade till {{host}} till blockeringslistan, ladda om webbplatsen.",
+      "request1": "Begär godkännande för transaktioner",
+      "allow": "Tillåt den här webbplatsen att:",
+      "block_and_ignore": "Blockera och ignorera {{host}}"
+    }
   },
   "components": {
     "allowance_menu": {
-      "confirm_delete": "Är du säker på att du vill radera webbplatsen?",
-      "hint": "Detta nollställer nuvarande budget",
+      "confirm_delete": "Är du säker på att du vill koppla bort den här webbplatsen?",
+      "hint": "Om du ändrar detta återställs den nuvarande budgeten",
       "new_budget": {
-        "label": "Ny budget"
+        "label": "Betalningsbudget med ett klick",
+        "link_label": "Ställ in en budget för betalningar med ett klick"
       },
       "enable_login": {
         "title": "Aktivera webbplatsinloggning",
         "subtitle": "Logga in automatiskt utan bekräftelse när webbplatsen begär det."
       },
       "edit_allowance": {
-        "title": "Redigera Inställningar",
+        "title": "Webbplatsinställningar",
         "screen_reader": "Alternativ för Beloppsgräns"
       },
       "edit_permissions": "Redigera behörigheter"
@@ -1061,13 +1155,14 @@
     },
     "publishers_table": {
       "payments": "betalningar",
-      "used": "utnyttjat"
+      "total": "totalt",
+      "budget": "budget"
     },
     "badge": {
       "label": {
-        "active": "AKTIV",
         "auth": "LOGGA IN",
-        "imported": "IMPORTERAD"
+        "imported": "IMPORTERAD",
+        "budget": "BUDGET"
       }
     },
     "companion_download_info": {

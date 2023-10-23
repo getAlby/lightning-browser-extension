@@ -29,9 +29,9 @@ function BalanceBox({ className }: Props) {
       </div>
 
       {accountLoading ? (
-        <SkeletonLoader containerClassName="mt-2" className="w-16" />
+        <SkeletonLoader containerClassName="mt-1" className="w-16" />
       ) : (
-        <div className="text-gray-500 mt-2">
+        <div className="text-gray-500 mt-1">
           {balancesDecorated.fiatBalance && (
             <>~{balancesDecorated.fiatBalance}</>
           )}

@@ -9,12 +9,13 @@ import lightningPayReq from "bolt11";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import ScreenHeader from "~/app/components/ScreenHeader";
+import toast from "~/app/components/Toast";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
+import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 
 function ConfirmPayment() {
@@ -76,16 +77,9 @@ function ConfirmPayment() {
 
     try {
       setLoading(true);
-      // TODO: move to api
-      const response = await msg.request(
-        "sendPayment",
-        { paymentRequest: paymentRequest },
-        {
-          origin: navState.origin,
-        }
-      );
-      if (response.error) {
-        throw new Error(response.error as string);
+      const response = await api.sendPayment(paymentRequest, navState.origin);
+      if ("error" in response) {
+        throw new Error(response.error);
       }
 
       auth.fetchAccountInfo(); // Update balance.
@@ -156,7 +150,7 @@ function ConfirmPayment() {
               <div className="my-4">
                 <div className="mb-4 p-4 shadow bg-white dark:bg-surface-02dp rounded-lg">
                   <PaymentSummary
-                    amount={invoice.satoshis || "0"} // how come that sathoshis can be undefined, bolt11?
+                    amount={invoice.satoshis || "0"} // TODO: allow entering amount or do not allow zero-amount invoices
                     fiatAmount={fiatAmount}
                     description={invoice.tagsObject.description}
                   />
@@ -173,6 +167,7 @@ function ConfirmPayment() {
                   }}
                   budget={budget}
                   onBudgetChange={(event) => setBudget(event.target.value)}
+                  disabled={loading}
                 />
               )}
               <ConfirmOrCancel
@@ -198,7 +193,7 @@ function ConfirmPayment() {
                   })
             }
           />
-          <div className="my-4">
+          <div className="mt-4">
             <Button
               onClick={close}
               label={tCommon("actions.close")}

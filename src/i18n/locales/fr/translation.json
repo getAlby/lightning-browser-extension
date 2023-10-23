@@ -208,10 +208,10 @@
           "placeholder": "adresse-de-votre-node-onion:port"
         }
       },
-      "bitcoin_beach": {
+      "blink": {
         "title": "Portefeuille de plage Bitcoin",
         "page": {
-          "title": "Connectez-vous à <0>Bitcoin Beach Wallet</0>"
+          "title": "Connectez-vous à <0>Bitcoin Blink Wallet</0>"
         }
       },
       "bitcoin_jungle": {
@@ -308,8 +308,6 @@
       "recent_transactions": "transactions récentes",
       "allowance_view": {
         "recent_transactions": "transactions récentes",
-        "allowance": "Allocation",
-        "sats_used": "sats utilisés",
         "no_transactions": "Aucune transaction sur <0>{{name}}</0> pour le moment."
       },
       "default_view": {
@@ -341,7 +339,6 @@
           "private_key": {
             "title": "Gérez votre clé",
             "subtitle": "Collez votre clé privée ou générez-en une nouvelle. Assurez-vous de sauvegarder votre clé privée avant d'en générer une nouvelle. <0>En savoir plus »</0>",
-            "warning": "Veuillez entrer le nom du compte pour confirmer la suppression de la clé privée :",
             "success": "Clé privée cryptée et enregistrée avec succès.",
             "successfully_removed": "Clé privée supprimée avec succès.",
             "label": "Clé privée",
@@ -368,8 +365,7 @@
         },
         "remove": {
           "title": "Supprimer ce compte",
-          "subtitle": "Tous les quotas liés seront supprimés. S'il vous plaît soyez certain.",
-          "confirm": "Voulez-vous vraiment supprimer le compte : {{name}} ?\nÇa ne peut pas être annulé. Si vous avez utilisé ce compte pour vous connecter à des sites Web, vous risquez de perdre l'accès à ceux-ci."
+          "subtitle": "Tous les quotas liés seront supprimés. S'il vous plaît soyez certain."
         },
         "actions": {
           "remove_account": "Supprimer le compte",
@@ -379,14 +375,6 @@
       "actions": {
         "add_account": "Ajouter un compte"
       }
-    },
-    "enable": {
-      "title": "Connecter",
-      "allow": "Autoriser ce site Web à :",
-      "request1": "Demander l'approbation des transactions",
-      "request2": "Demander des factures et des informations sur la foudre",
-      "block_and_ignore": "Bloquer et ignorer {{host}}",
-      "block_added": "{{host}} a été ajouté à la liste de blocage, veuillez recharger le site Web."
     },
     "unlock": {
       "unlock_to_continue": "Déverrouiller pour continuer",
@@ -792,12 +780,10 @@
       }
     },
     "publishers_table": {
-      "payments": "Paiements",
-      "used": "utilisé"
+      "payments": "Paiements"
     },
     "badge": {
       "label": {
-        "active": "ACTIF",
         "auth": "CONNEXION"
       }
     }

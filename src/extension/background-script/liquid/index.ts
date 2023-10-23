@@ -20,7 +20,6 @@ import { getPsetPreview } from "~/extension/background-script/liquid/pset";
 import Mnemonic from "~/extension/background-script/mnemonic";
 import { LiquidNetworkType, PsetPreview } from "~/types";
 
-import * as tinysecp from "../liquid/secp256k1";
 import * as tinysecp256k1Adapter from "./secp256k1";
 
 const LIQUID_DERIVATION_PATH = "m/84'/1776'/0'/0/0";
@@ -174,7 +173,7 @@ class Liquid {
         signer.addSignature(
           inIndex,
           partialSig,
-          Pset.SchnorrSigValidator(tinysecp)
+          Pset.SchnorrSigValidator(tinysecp256k1Adapter)
         );
 
         continue;
@@ -221,7 +220,7 @@ class Liquid {
           signer.addSignature(
             inIndex,
             partialSig,
-            Pset.SchnorrSigValidator(tinysecp)
+            Pset.SchnorrSigValidator(tinysecp256k1Adapter)
           );
         }
       }
@@ -241,7 +240,7 @@ class Liquid {
   }
 
   private deriveLiquidMasterBlindingKey(): string {
-    return SLIP77Factory(tinysecp)
+    return SLIP77Factory(tinysecp256k1Adapter)
       .fromSeed(Buffer.from(bip39.mnemonicToSeedSync(this.mnemonic.mnemonic)))
       .masterKey.toString("hex");
   }

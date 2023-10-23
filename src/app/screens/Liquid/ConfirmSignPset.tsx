@@ -7,10 +7,10 @@ import { TFunction } from "i18next";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import Hyperlink from "~/app/components/Hyperlink";
 import Loading from "~/app/components/Loading";
 import ScreenHeader from "~/app/components/ScreenHeader";
+import toast from "~/app/components/Toast";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
@@ -117,14 +117,16 @@ function ConfirmSignPset() {
                   </div>
                 </Hyperlink>
               </div>
-              <div className="flex gap-2">
-                <Hyperlink onClick={toggleShowAddresses}>
-                  {showDetails ? t("hide_details") : t("view_details")}
-                </Hyperlink>
-              </div>
+            </div>
+            <div className="flex w-full justify-center">
+              <Hyperlink onClick={toggleShowAddresses}>
+                {showDetails ? t("hide_details") : t("view_details")}
+              </Hyperlink>
+            </div>
 
-              {showDetails && (
-                <>
+            {showDetails && (
+              <>
+                <div className="p-4 shadow bg-white dark:bg-surface-02dp rounded-lg overflow-hidden flex flex-col gap-4">
                   <div>
                     <p className="font-medium dark:text-white">{t("inputs")}</p>
                     <div className="flex flex-col gap-4">
@@ -154,15 +156,17 @@ function ConfirmSignPset() {
                       ))}
                     </div>
                   </div>
+                </div>
 
+                <div className="flex w-full justify-center">
                   <Hyperlink onClick={toggleShowHex}>
                     {showRawTransaction
                       ? t("hide_raw_transaction")
                       : t("view_raw_transaction")}
                   </Hyperlink>
-                </>
-              )}
-            </div>
+                </div>
+              </>
+            )}
 
             {showRawTransaction && (
               <div className="break-all p-2 mb-4 shadow bg-white rounded-lg dark:bg-surface-02dp text-gray-500 dark:text-gray-400">

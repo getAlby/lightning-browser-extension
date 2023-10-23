@@ -6,7 +6,7 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
-import { toast } from "react-toastify";
+import toast from "~/app/components/Toast";
 import { useSettings } from "~/app/context/SettingsContext";
 import { convertPaymentsToTransactions } from "~/app/utils/payments";
 import msg from "~/common/lib/msg";

@@ -12,11 +12,11 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Skeleton from "react-loading-skeleton";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import Alert from "~/app/components/Alert";
 import Container from "~/app/components/Container";
 import Hyperlink from "~/app/components/Hyperlink";
 import ResultCard from "~/app/components/ResultCard";
+import toast from "~/app/components/Toast";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
@@ -213,14 +213,15 @@ function SendToBitcoinAddress() {
   return (
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <Header
-        title={t("title")}
         headerLeft={
           <IconButton
             onClick={() => navigate("/send")}
             icon={<CaretLeftIcon className="w-4 h-4" />}
           />
         }
-      />
+      >
+        {t("title")}
+      </Header>
       <div className="h-full pt-5">
         {step == "amount" && (
           <form onSubmit={handleReview} className="h-full flex space-between">

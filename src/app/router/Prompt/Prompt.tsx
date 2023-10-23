@@ -4,7 +4,6 @@ import ConfirmKeysend from "@screens/ConfirmKeysend";
 import ConfirmPayment from "@screens/ConfirmPayment";
 import ConfirmRequestPermission from "@screens/ConfirmRequestPermission";
 import ConfirmSignMessage from "@screens/ConfirmSignMessage";
-import Enable from "@screens/Enable";
 import LNURLAuth from "@screens/LNURLAuth";
 import LNURLChannel from "@screens/LNURLChannel";
 import LNURLPay from "@screens/LNURLPay";
@@ -18,11 +17,18 @@ import NostrConfirmSignMessage from "@screens/Nostr/ConfirmSignMessage";
 import NostrConfirmSignSchnorr from "@screens/Nostr/ConfirmSignSchnorr";
 import Unlock from "@screens/Unlock";
 import { HashRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
 import AlbyLogo from "~/app/components/AlbyLogo";
+import Toaster from "~/app/components/Toast/Toaster";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
 import BitcoinConfirmGetAddress from "~/app/screens/Bitcoin/ConfirmGetAddress";
+import ConfirmSignPsbt from "~/app/screens/Bitcoin/ConfirmSignPsbt";
+import ConfirmPaymentAsync from "~/app/screens/ConfirmPaymentAsync";
+import AlbyEnable from "~/app/screens/Enable/AlbyEnable";
+import LiquidEnable from "~/app/screens/Enable/LiquidEnable";
+import NostrEnable from "~/app/screens/Enable/NostrEnable";
+import WebbtcEnable from "~/app/screens/Enable/WebbtcEnable";
+import WeblnEnable from "~/app/screens/Enable/WeblnEnable";
 import type { NavigationState, OriginData } from "~/types";
 
 // Parse out the parameters from the querystring.
@@ -73,27 +79,41 @@ function Prompt() {
             />
             <Route
               path="public/alby/enable"
-              element={<Enable origin={navigationState.origin as OriginData} />} // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
+              element={
+                <AlbyEnable origin={navigationState.origin as OriginData} />
+              } // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
             />
             <Route
               path="public/webln/enable"
-              element={<Enable origin={navigationState.origin as OriginData} />} // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
+              element={
+                <WeblnEnable origin={navigationState.origin as OriginData} />
+              } // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
             />
             <Route
               path="public/liquid/enable"
-              element={<Enable origin={navigationState.origin as OriginData} />} // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
+              element={
+                <LiquidEnable origin={navigationState.origin as OriginData} />
+              } // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
             />
             <Route
               path="public/nostr/enable"
-              element={<Enable origin={navigationState.origin as OriginData} />} // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
+              element={
+                <NostrEnable origin={navigationState.origin as OriginData} />
+              } // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
             />
             <Route
               path="public/webbtc/enable"
-              element={<Enable origin={navigationState.origin as OriginData} />} // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
+              element={
+                <WebbtcEnable origin={navigationState.origin as OriginData} />
+              } // prompt will always have an `origin` set, just the type is optional to support usage via PopUp
             />
             <Route
               path="public/webbtc/confirmGetAddress"
               element={<BitcoinConfirmGetAddress />}
+            />
+            <Route
+              path="webbtc/confirmSignPsbt"
+              element={<ConfirmSignPsbt />}
             />
             <Route
               path="public/liquid/confirmGetAddress"
@@ -123,6 +143,10 @@ function Prompt() {
             <Route path="lnurlChannel" element={<LNURLChannel />} />
             <Route path="makeInvoice" element={<MakeInvoice />} />
             <Route path="confirmPayment" element={<ConfirmPayment />} />
+            <Route
+              path="confirmPaymentAsync"
+              element={<ConfirmPaymentAsync />}
+            />
             <Route path="confirmKeysend" element={<ConfirmKeysend />} />
             <Route path="confirmSignMessage" element={<ConfirmSignMessage />} />
             <Route path="confirmAddAccount" element={<ConfirmAddAccount />} />
@@ -136,7 +160,7 @@ function Prompt() {
             element={
               <>
                 <Unlock />
-                <ToastContainer autoClose={10000} hideProgressBar={true} />
+                <Toaster />
               </>
             }
           />
@@ -149,14 +173,13 @@ function Prompt() {
 const Layout = () => {
   return (
     <>
-      <ToastContainer autoClose={10000} hideProgressBar={true} />
+      <Toaster />
       <div className="px-4 py-2 justify-between items-center bg-white flex border-b border-gray-200 dark:bg-surface-02dp dark:border-neutral-500 gap-5">
         <div className="w-24 shrink-0">
           <AlbyLogo />
         </div>
         <AccountMenu showOptions={false} />
       </div>
-
       <main className="flex flex-col grow min-h-0">
         <Outlet />
       </main>

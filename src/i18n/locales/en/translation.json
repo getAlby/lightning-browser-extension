@@ -218,10 +218,10 @@
           "placeholder": "your-node-onion-address:port"
         }
       },
-      "bitcoin_beach": {
-        "title": "Bitcoin Beach Wallet",
+      "blink": {
+        "title": "Blink Wallet",
         "page": {
-          "title": "Connect to <0>Bitcoin Beach Wallet</0>"
+          "title": "Connect to <0>Blink Wallet</0>"
         }
       },
       "bitcoin_jungle": {
@@ -382,7 +382,7 @@
         },
         "export": {
           "title": "Connect your mobile wallet",
-          "description": "Allows you to connect and use this account on mobile wallets like <0>Blue Wallet</0> and <0>Zeus</0>.",
+          "description": "Allows you to connect and use this account on mobile wallets like <0>Blue Wallet</0> and <1>Zeus</1>.",
           "screen_reader": "Export account details",
           "waiting": "waiting for LndHub data...",
           "your_ln_address": "Your Lightning Address:",
@@ -393,7 +393,10 @@
         "mnemonic": {
           "title": "🔑 Key Management",
           "saved": "Master Key encrypted & saved successfully.",
-          "existing_nostr_key_notice": "⚠️ This account already has a nostr private key set and will not be derived from this Master Key. You can manage your Nostr key from your account settings.",
+          "existing_nostr_key_notice": "ℹ️ This account already has a nostr private key set and will not be derived from this Master Key. You can manage your Nostr key from your account settings.",
+          "new": {
+            "title": "What is a Master Key?"
+          },
           "generate": {
             "title": "Generate new Master Key",
             "description": "Master Key allows you to interact with various protocols such as: Nostr, base layer of Bitcoin or LNURL-Auth.",
@@ -408,6 +411,7 @@
             "warning": "⚠️ Don't forget to back up your recovery phrase! Not backing it up might result in permanently losing access to your Master Key, Nostr identity or assets you manage with this key.",
             "description": "Write down the recovery phrase to be able to restore your Master Key on a new device or in case you lose access to your account.",
             "items": {
+              "keys": "Master Key allows you to interact with various protocols such as: Nostr, Liquid or base layer of Bitcoin.",
               "recovery_phrase": "You can always access your Master Key by using it's recovery phrase.",
               "words": "Recovery phrase is set of 12 words that works like a password, however it can't be changed or reset in case it's lost.",
               "storage": "Make sure to write it down somewhere safe and private!"
@@ -477,7 +481,7 @@
           "private_key": {
             "title": "Manage your Nostr private key",
             "subtitle": "Paste your nostr private key or generate a new one. <0>Learn more »</0>",
-            "warning": "Please enter the name of the account to confirm the deletion of your nostr private key:",
+            "warning": "Please enter the name of the account to confirm the deletion of your nostr private key:\n\n{{ name }}",
             "success": "Nostr private key encrypted & saved successfully.",
             "failed_to_remove": "The entered account name didn't match, your old Nostr private key has been restored.",
             "successfully_removed": "Nostr private key removed successfully.",
@@ -505,13 +509,13 @@
         "remove": {
           "title": "Remove This Account",
           "subtitle": "Removes all allowances, payment data and keys associated with this account.",
-          "confirm": "Please enter the name of the account to confirm the deletion of your account.\n\n ⚠️ All associated keys (Master Key, Nostr, etc) will be deleted if you continue. Please make sure you have backed them up, there is no other way to restore them.",
+          "confirm": "Please enter the name of the account to confirm the deletion of your account:\n\n{{ name }}\n\n ⚠️ All associated keys (Master Key, Nostr, etc) will be deleted if you continue. Please make sure you have backed them up, there is no other way to restore them.",
           "error": "The entered account name didn't match."
         },
         "remove_secretkey": {
           "title": "Remove Master Key",
           "subtitle": "Removes the Master Key from this account.",
-          "confirm": "Please enter the name of the account to confirm the deletion of your Master Key.",
+          "confirm": "Please enter the name of the account to confirm the deletion of your Master Key:\n\n{{ name }}",
           "success": "Successfully removed the Master Key."
         },
         "actions": {
@@ -524,13 +528,26 @@
         "add_account": "Add account"
       }
     },
-    "enable": {
-      "title": "Connect",
-      "allow": "Allow this website to:",
-      "request1": "Request approval for transactions",
-      "request2": "Request invoices and lightning information",
-      "block_and_ignore": "Block and ignore {{host}}",
-      "block_added": "Added {{host}} to the blocklist, please reload the website."
+    "webln_enable": {
+      "title": "Connect to WebLN",
+      "request2": "Request invoices and lightning information"
+    },
+    "alby_enable": {
+      "title": "Connect to Alby",
+      "request2": "Request invoices and alby information"
+    },
+    "nostr_enable": {
+      "title": "Connect to Nostr",
+      "request1": "Request to read your Nostr public key",
+      "request2": "Sign events using your Nostr private key"
+    },
+    "liquid_enable": {
+      "title": "Connect to Liquid",
+      "request2": "Request invoices and liquid information"
+    },
+    "webbtc_enable": {
+      "title": "Connect to WebBTC",
+      "request2": "Request invoices and Webbtc information"
     },
     "unlock": {
       "unlock_to_continue": "Unlock to continue",
@@ -713,7 +730,18 @@
       "title": "Receive",
       "actions": {
         "create_invoice": "Create Invoice",
-        "copy_lightning_address": "Copy Lightning Address"
+        "invoice": {
+          "title": "Lightning invoice",
+          "description": "Request instant and specific amount bitcoin payments"
+        },
+        "bitcoin_address": {
+          "title": "Bitcoin address",
+          "description": "Receive via bitcoin address using a swap service"
+        },
+        "redeem": {
+          "title": "Redeem",
+          "description": "Withdraw a bitcoin voucher instantly via an LNURL code"
+        }
       },
       "amount": {
         "label": "Amount",
@@ -727,9 +755,7 @@
       "payment": {
         "waiting": "waiting for payment...",
         "status": "Check payment status"
-      },
-      "redeem_lnurl": "Redeem LNURL",
-      "receive_via_bitcoin_address": "Receive via bitcoin address"
+      }
     },
     "on_chain": {
       "title": "Receive via bitcoin address",
@@ -801,7 +827,7 @@
     },
     "confirm_sign_pset": {
       "title": "Sign",
-      "allow_sign": "This website asks you to sign a Liquid Transaction:",
+      "allow_sign": "This website asks you to sign a Liquid transaction",
       "view_details": "View details",
       "hide_details": "Hide details",
       "view_raw_transaction": "View raw transaction (Base64)",
@@ -813,6 +839,17 @@
     "bitcoin": {
       "confirm_get_address": {
         "title": "Get Address"
+      },
+      "confirm_sign_psbt": {
+        "title": "Sign",
+        "allow_sign": "This website asks you to sign a bitcoin transaction",
+        "view_details": "View details",
+        "hide_details": "Hide details",
+        "view_raw_transaction": "View raw transaction (Hex)",
+        "hide_raw_transaction": "Hide raw transaction (Hex)",
+        "inputs": "Inputs",
+        "outputs": "Outputs",
+        "fee": "Fee"
       },
       "allow": "Allow this website to:",
       "allow_sign": "Allow {{host}} to sign:",
@@ -862,6 +899,13 @@
       "view_on_explorer": "View on mempool explorer",
       "time_estimate": "ℹ️ Transactions usually arrive within 10-30 minutes.",
       "service_unavailable": "Service temporary not available, please try again in a few minutes."
+    },
+    "confirm_payment_async": {
+      "title": "Approve Payment",
+      "description": "This is a HOLD invoice. <0>Learn more »</0>",
+      "actions": {
+        "pay_now": "Pay now"
+      }
     },
     "confirm_payment": {
       "title": "Approve Payment",
@@ -932,6 +976,15 @@
         "incoming": "Incoming transactions for this account"
       },
       "list_empty": "No transactions available yet."
+    },
+    "onboard": {
+      "title": "Setup your keys",
+      "request1": "This website requires key interaction",
+      "request2": "You haven't setup your keys yet",
+      "request3": "Setup is quick and easy",
+      "actions": {
+        "start_setup": "Start Setup"
+      }
     }
   },
   "common": {
@@ -984,6 +1037,7 @@
       "remove": "Remove",
       "copy": "Copy",
       "copy_clipboard": "Copy to clipboard",
+      "copied_to_clipboard": "Copied to clipboard",
       "paste": "Paste",
       "paste_clipboard": "Paste from clipboard",
       "copy_invoice": "Copy Invoice",
@@ -1015,6 +1069,12 @@
       "between": "between {{min}} and {{max}}",
       "lessThanOrEqual": "≤ {{max}}",
       "greaterOrEqual": "≥ {{min}}"
+    },
+    "enable": {
+      "allow": "Allow this website to:",
+      "block_added": "Added {{host}} to the blocklist, please reload the website.",
+      "request1": "Request approval for transactions",
+      "block_and_ignore": "Block and ignore {{host}}"
     }
   },
   "components": {

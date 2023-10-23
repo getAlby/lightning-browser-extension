@@ -10,7 +10,7 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { FC, useEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
-import { toast } from "react-toastify";
+import toast from "~/app/components/Toast";
 import { useSettings } from "~/app/context/SettingsContext";
 import { PublisherLnData } from "~/app/screens/Home/PublisherLnData";
 import { convertPaymentsToTransactions } from "~/app/utils/payments";
@@ -80,14 +80,15 @@ const AllowanceView: FC<Props> = (props) => {
   return (
     <div className="overflow-y-auto no-scrollbar h-full">
       <Header
-        title={props.allowance.host}
         headerLeft={
           <IconButton
             onClick={props.onGoBack}
             icon={<CaretLeftIcon className="w-4 h-4" />}
           />
         }
-      />
+      >
+        {props.allowance.host}
+      </Header>
       {props.allowance ? (
         <div className="relative mx-4">
           <PublisherCard

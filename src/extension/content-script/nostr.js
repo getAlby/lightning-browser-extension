@@ -16,9 +16,10 @@ const nostrCalls = [
   "nostr/on",
   "nostr/off",
   "nostr/emit",
+  "nostr/isEnabled",
 ];
 // calls that can be executed when nostr is not enabled for the current content page
-const disabledCalls = ["nostr/enable"];
+const disabledCalls = ["nostr/enable", "nostr/isEnabled"];
 
 let isEnabled = false; // store if nostr is enabled for this content page
 let isRejected = false; // store if the nostr enable call failed. if so we do not prompt again
@@ -31,7 +32,7 @@ async function init() {
 
   browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
     // forward account changed messaged to inpage script
-    if (request.action === "accountChanged") {
+    if (request.action === "accountChanged" && isEnabled) {
       window.postMessage(
         { action: "accountChanged", scope: "nostr" },
         window.location.origin
@@ -42,7 +43,7 @@ async function init() {
   // message listener to listen to inpage nostr calls
   // those calls get passed on to the background script
   // (the inpage script can not do that directly, but only the inpage script can make nostr available to the page)
-  window.addEventListener("message", (ev) => {
+  window.addEventListener("message", async (ev) => {
     // Only accept messages from the current window
     if (
       ev.source !== window ||
@@ -82,14 +83,18 @@ async function init() {
         origin: getOriginData(),
       };
 
+      // we don't handle onboard in content script. hence we will be resolving original call nostr/enable with an error hence we need reload the next time we execute the call
       const replyFunction = (response) => {
         if (ev.data.action === "nostr/enable") {
           isEnabled = response.data?.enabled;
           if (response.error) {
             console.error(response.error);
-            console.info("Enable was rejected ignoring further nostr calls");
+            console.info("User rejected, ignoring further nostr calls");
             isRejected = true;
           }
+        }
+        if (ev.data.action === "nostr/isEnabled") {
+          isEnabled = response.data?.isEnabled;
         }
 
         postMessage(ev, response);
