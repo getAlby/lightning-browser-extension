@@ -254,11 +254,18 @@ export default class Alby implements Connector {
         token: this.config.oAuthToken, // initialize with existing token
       });
 
+      authClient.on("tokenRefreshed", async (token: Token) => {
+        await this._updateOAuthToken(token);
+      });
+
+      authClient.on("tokenRefreshFailed", async (error: Error) => {
+        console.error("Failed to Refresh token", error);
+      });
+
       if (this.config.oAuthToken) {
         try {
           if (authClient.isAccessTokenExpired()) {
-            const token = await authClient.refreshAccessToken();
-            await this._updateOAuthToken(token.token);
+            await authClient.refreshAccessToken();
           }
           return authClient;
         } catch (error) {
@@ -302,7 +309,6 @@ export default class Alby implements Connector {
     if (!this._authUser || !this._client) {
       throw new Error("Alby client was not initialized");
     }
-    const oldToken = this._authUser?.token;
     let result: T;
     try {
       result = await func(this._client);
@@ -311,10 +317,9 @@ export default class Alby implements Connector {
 
       throw error;
     } finally {
-      const newToken = this._authUser.token;
-      if (newToken && newToken !== oldToken) {
-        await this._updateOAuthToken(newToken);
-      }
+      this._authUser.on("tokenRefreshed", async (token: Token) => {
+        await this._updateOAuthToken(token);
+      });
     }
     return result;
   }
