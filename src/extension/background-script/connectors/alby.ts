@@ -316,10 +316,6 @@ export default class Alby implements Connector {
       console.error(error);
 
       throw error;
-    } finally {
-      this._authUser.on("tokenRefreshed", async (token: Token) => {
-        await this._updateOAuthToken(token);
-      });
     }
     return result;
   }
