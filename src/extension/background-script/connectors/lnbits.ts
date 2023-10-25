@@ -148,11 +148,48 @@ class LnBits implements Connector {
   }
 
   getTransactions(): Promise<GetTransactionsResponse> {
-    console.error(
-      `Not yet supported with the currently used account: ${this.constructor.name}`
-    );
-    throw new Error(
-      `${this.constructor.name}: "getTransactions" is not yet supported. Contact us if you need it.`
+    return this.request(
+      "GET",
+      "/api/v1/payments",
+      this.config.adminkey,
+      undefined
+    ).then(
+      (
+        data: {
+          checking_id: string;
+          pending: boolean;
+          amount: number;
+          fee: number;
+          memo: string;
+          time: number;
+          bolt11: string;
+          preimage: string;
+          payment_hash: string;
+          wallet_id: string;
+          webhook: string;
+          webhook_status: string;
+        }[]
+      ) => {
+        const transactions: ConnectorInvoice[] = data.map(
+          (transaction, index): ConnectorInvoice => {
+            return {
+              id: `${transaction.checking_id}-${index}`,
+              memo: transaction.memo,
+              preimage: transaction.preimage,
+              settled: !transaction.pending,
+              settleDate: transaction.time * 1000,
+              totalAmount: `${Math.abs(Math.floor(transaction.amount / 1000))}`,
+              type: transaction.amount > 0 ? "received" : "sent",
+            };
+          }
+        );
+
+        return {
+          data: {
+            transactions,
+          },
+        };
+      }
     );
   }
 
