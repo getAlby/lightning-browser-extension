@@ -50,7 +50,7 @@
     "bech32": "^2.0.0",
     "bitcoinjs-lib": "^6.1.0",
     "bolt11": "^1.4.1",
-    "crypto-js": "^4.1.1",
+    "crypto-js": "^4.2.0",
     "dayjs": "^1.11.9",
     "dexie": "^3.2.4",
     "elliptic": "^6.5.4",
