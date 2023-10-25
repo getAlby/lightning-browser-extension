@@ -18,6 +18,7 @@ export const useTransactions = () => {
           accountId,
           limit,
         });
+
         const getInvoicesResponse = await api.getInvoices({
           isSettled: true,
           limit,

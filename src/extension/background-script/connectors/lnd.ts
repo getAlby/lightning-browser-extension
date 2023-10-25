@@ -1,3 +1,4 @@
+import lightningPayReq from "bolt11";
 import Base64 from "crypto-js/enc-base64";
 import Hex from "crypto-js/enc-hex";
 import UTF8 from "crypto-js/enc-utf8";
@@ -464,13 +465,69 @@ class Lnd implements Connector {
     };
   }
 
-  getTransactions(): Promise<GetTransactionsResponse> {
-    console.error(
-      `Not yet supported with the currently used account: ${this.constructor.name}`
-    );
-    throw new Error(
-      `${this.constructor.name}: "getTransactions" is not yet supported. Contact us if you need it.`
-    );
+  async getTransactions(): Promise<GetTransactionsResponse> {
+    let index = 100;
+    // incoming invoices return 0-99 entries by default
+    const incomingInvoices = await this.getInvoices();
+
+    const outgoingInvoicesResponse = await this.request<{
+      payments: {
+        payment_hash: string;
+        payment_preimage: string;
+        value_sat: string;
+        value_msat: string;
+        payment_request: string;
+        status: string;
+        fee_sat: string;
+        fee_msat: string;
+        creation_time_ns: string;
+        creation_date: string;
+        htlcs: Array<string>;
+        payment_index: string;
+        failure_reason: string;
+      }[];
+      last_index_offset: string;
+      first_index_offset: string;
+      total_num_payments: string;
+    }>("GET", "/v1/payments", {
+      reversed: true,
+      max_payments: 100,
+      include_incomplete: false,
+    });
+
+    const outgoingInvoices: ConnectorInvoice[] =
+      outgoingInvoicesResponse.payments.map((payment, _): ConnectorInvoice => {
+        let memo = "Sent";
+        if (payment.payment_request) {
+          memo = (
+            lightningPayReq
+              .decode(payment.payment_request)
+              .tags.find((tag) => tag.tagName === "description")?.data || "Sent"
+          ).toString();
+        }
+        return {
+          id: `${payment.payment_request}-${index++}`,
+          memo: memo,
+          preimage: payment.payment_preimage,
+          settled: true,
+          settleDate: parseInt(payment.creation_date) * 1000,
+          totalAmount: payment.value_sat,
+          type: "sent",
+        };
+      });
+
+    const transactions: ConnectorInvoice[] = [
+      ...incomingInvoices.data.invoices,
+      ...outgoingInvoices,
+    ].sort((a, b) => {
+      return b.settleDate - a.settleDate;
+    });
+
+    return {
+      data: {
+        transactions,
+      },
+    };
   }
 
   protected async request<Type>(

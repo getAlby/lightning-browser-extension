@@ -131,13 +131,51 @@ export default class LndHub implements Connector {
     };
   }
 
-  getTransactions(): Promise<GetTransactionsResponse> {
-    console.error(
-      `Not yet supported with the currently used account: ${this.constructor.name}`
+  async getTransactions(): Promise<GetTransactionsResponse> {
+    const incomingInvoices = await this.getInvoices();
+    const outgoingInvoicesResponse = await this.request<
+      {
+        custom_records: ConnectorInvoice["custom_records"];
+        fee: string;
+        keysend: boolean;
+        memo: string;
+        payment_hash: string;
+        payment_preimage: string;
+        r_hash: {
+          type: "Buffer";
+          data: number[];
+        };
+        timestamp: number;
+        type: "paid_invoice";
+        value: number;
+      }[]
+    >("GET", "/gettxs", { limit: 100 });
+
+    // /gettxs endpoint returns successfull outgoing  transactions bydefault
+    const outgoingInvoices: ConnectorInvoice[] = outgoingInvoicesResponse.map(
+      (transaction, index): ConnectorInvoice => ({
+        id: `${index}`,
+        memo: transaction.memo,
+        preimage: transaction.payment_preimage,
+        settled: true,
+        settleDate: transaction.timestamp * 1000,
+        totalAmount: `${transaction.value}`,
+        type: "sent",
+      })
     );
-    throw new Error(
-      `${this.constructor.name}: "getTransactions" is not yet supported. Contact us if you need it.`
-    );
+
+    const transactions: ConnectorInvoice[] = [
+      ...incomingInvoices.data.invoices,
+      ...outgoingInvoices,
+    ].sort((a, b) => {
+      return b.settleDate - a.settleDate;
+    });
+
+    return {
+      data: {
+        transactions,
+      },
+    };
   }
 
   async getInfo(): Promise<GetInfoResponse> {

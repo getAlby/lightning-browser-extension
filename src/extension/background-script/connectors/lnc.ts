@@ -1,4 +1,5 @@
 import LNC from "@lightninglabs/lnc-web";
+import lightningPayReq from "bolt11";
 import Base64 from "crypto-js/enc-base64";
 import Hex from "crypto-js/enc-hex";
 import UTF8 from "crypto-js/enc-utf8";
@@ -272,13 +273,52 @@ class Lnc implements Connector {
     };
   }
 
-  getTransactions(): Promise<GetTransactionsResponse> {
-    console.error(
-      `Not yet supported with the currently used account: ${this.constructor.name}`
-    );
-    throw new Error(
-      `${this.constructor.name}: "getTransactions" is not yet supported. Contact us if you need it.`
-    );
+  async getTransactions(): Promise<GetTransactionsResponse> {
+    let index = 100;
+    const incomingInvoices = await this.getInvoices();
+
+    const outgoingInvoicesResponse = await this.lnc.lnd.lightning.ListPayments({
+      reversed: true,
+      max_payments: 100,
+      include_incomplete: false,
+    });
+
+    const outgoingInvoices: ConnectorInvoice[] =
+      outgoingInvoicesResponse.payments.map(
+        (payment: FixMe, arrayIndex: number): ConnectorInvoice => {
+          let memo = "Sent";
+          if (payment.payment_request) {
+            memo = (
+              lightningPayReq
+                .decode(payment.payment_request)
+                .tags.find((tag) => tag.tagName === "description")?.data ||
+              "Sent"
+            ).toString();
+          }
+          return {
+            id: `${payment.payment_request}-${index++}`,
+            memo: memo,
+            preimage: payment.payment_preimage,
+            settled: true,
+            settleDate: parseInt(payment.creation_date) * 1000,
+            totalAmount: payment.value_sat,
+            type: "sent",
+          };
+        }
+      );
+
+    const transactions: ConnectorInvoice[] = [
+      ...incomingInvoices.data.invoices,
+      ...outgoingInvoices,
+    ].sort((a, b) => {
+      return b.settleDate - a.settleDate;
+    });
+
+    return {
+      data: {
+        transactions,
+      },
+    };
   }
 
   // not yet implemented

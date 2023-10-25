@@ -61,6 +61,11 @@ type CommandoListFundsResponse = {
 type CommandoListInvoicesResponse = {
   invoices: CommandoInvoice[];
 };
+
+type CommandoListSendPaysResponse = {
+  payments: CommandoPayment[];
+};
+
 type CommandoPayInvoiceResponse = {
   payment_preimage: string;
   payment_hash: string;
@@ -80,6 +85,24 @@ type CommandoInvoice = {
   payment_preimage: string;
   paid_at: number;
   payment_hash: string;
+};
+
+type CommandoPayment = {
+  id: number;
+  partid?: number;
+  groupid: number;
+  created_at: number;
+  label?: string;
+  status: string;
+  description?: string;
+  amount_sent_msat: number;
+  amount_msat?: number;
+  bolt11?: string;
+  bolt12?: string;
+  payment_preimage: string;
+  payment_hash: string;
+  destination: string;
+  erroronion?: string;
 };
 
 const supportedMethods: string[] = [
@@ -223,13 +246,47 @@ export default class Commando implements Connector {
       });
   }
 
-  getTransactions(): Promise<GetTransactionsResponse> {
-    console.error(
-      `Not yet supported with the currently used account: ${this.constructor.name}`
-    );
-    throw new Error(
-      `${this.constructor.name}: "getTransactions" is not yet supported. Contact us if you need it.`
-    );
+  async getTransactions(): Promise<GetTransactionsResponse> {
+    const incomingInvoicesResponse = await this.getInvoices();
+    const outgoingInvoicesResponse = await this.ln
+      .commando({
+        method: "listsendpays",
+        params: {},
+        rune: this.config.rune,
+      })
+      .then((resp) => {
+        const parsed = resp as CommandoListSendPaysResponse;
+        return {
+          data: {
+            payments: parsed.payments
+              .map(
+                (payment, index): ConnectorInvoice => ({
+                  id: `${payment.id}`,
+                  memo: payment.description || "Sent",
+                  settled: payment.status === "complete",
+                  preimage: payment.payment_preimage,
+                  settleDate: payment.created_at * 1000,
+                  type: "sent",
+                  totalAmount: (payment.amount_sent_msat / 1000).toString(),
+                })
+              )
+              .filter((payment) => payment.settled),
+          },
+        };
+      });
+
+    const transactions: ConnectorInvoice[] = [
+      ...incomingInvoicesResponse.data.invoices,
+      ...outgoingInvoicesResponse.data.payments,
+    ].sort((a, b) => {
+      return b.settleDate - a.settleDate;
+    });
+
+    return {
+      data: {
+        transactions,
+      },
+    };
   }
 
   async getInfo(): Promise<GetInfoResponse> {

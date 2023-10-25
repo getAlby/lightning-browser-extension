@@ -134,13 +134,11 @@ export default class Kollider implements Connector {
     };
   }
 
-  getTransactions(): Promise<GetTransactionsResponse> {
+  async getTransactions(): Promise<GetTransactionsResponse> {
     console.error(
       `Not yet supported with the currently used account: ${this.constructor.name}`
     );
-    throw new Error(
-      `${this.constructor.name}: "getTransactions" is not yet supported. Contact us if you need it.`
-    );
+    return { data: { transactions: [] } };
   }
 
   async getInfo(): Promise<GetInfoResponse> {
