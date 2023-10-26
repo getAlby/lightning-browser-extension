@@ -20,7 +20,7 @@ function Transactions() {
   const listItems = transactions;
 
   useEffect(() => {
-    if (account?.id) loadTransactions(account.id);
+    if (account?.id) loadTransactions();
   }, [account?.id, balancesDecorated?.accountBalance, loadTransactions]);
 
   return (
