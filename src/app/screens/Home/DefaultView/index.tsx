@@ -50,13 +50,8 @@ const DefaultView: FC<Props> = (props) => {
   const itemsLimit = 8;
 
   useEffect(() => {
-    if (account?.id) loadTransactions(itemsLimit);
-  }, [
-    account?.id,
-    balancesDecorated?.accountBalance,
-    loadTransactions,
-    itemsLimit,
-  ]);
+    loadTransactions(itemsLimit);
+  }, [balancesDecorated?.accountBalance, loadTransactions, itemsLimit]);
 
   // check if currentURL is blocked
   useEffect(() => {

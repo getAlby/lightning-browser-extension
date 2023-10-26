@@ -11,7 +11,7 @@ function Transactions() {
     keyPrefix: "transactions",
   });
 
-  const { account, balancesDecorated, accountLoading } = useAccount();
+  const { balancesDecorated, accountLoading } = useAccount();
 
   const { transactions, isLoadingTransactions, loadTransactions } =
     useTransactions();
@@ -20,8 +20,8 @@ function Transactions() {
   const listItems = transactions;
 
   useEffect(() => {
-    if (account?.id) loadTransactions();
-  }, [account?.id, balancesDecorated?.accountBalance, loadTransactions]);
+    loadTransactions();
+  }, [balancesDecorated?.accountBalance, loadTransactions]);
 
   return (
     <Container>
