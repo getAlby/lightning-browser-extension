@@ -865,8 +865,7 @@ export interface SettingsStorage {
 
 export interface Badge {
   label: "budget" | "auth" | "imported";
-  color: string;
-  textColor: string;
+  className: string;
 }
 
 export interface Publisher
