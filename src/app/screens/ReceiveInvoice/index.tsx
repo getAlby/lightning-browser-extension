@@ -264,7 +264,11 @@ function ReceiveInvoice() {
                   fullWidth
                   primary
                   loading={loadingInvoice}
-                  disabled={loadingInvoice}
+                  disabled={
+                    loadingInvoice ||
+                    !formData.amount ||
+                    formData.amount === "0"
+                  }
                 />
               </Container>
             </fieldset>
