@@ -50,6 +50,7 @@ export interface AccountInfoRes {
   info: { alias: string; pubkey?: string; lightning_address?: string };
   name: string;
   avatarUrl?: string;
+  error?: string;
 }
 
 export interface GetAccountRes extends Pick<Account, "id" | "name"> {
@@ -84,12 +85,14 @@ export const getAccountInfo = () => msg.request<AccountInfoRes>("accountInfo");
  */
 export const swrGetAccountInfo = async (
   id: string,
-  callback?: (account: AccountInfo) => void
+  callback?: (account: AccountInfo) => void,
+  skipCache = false
 ): Promise<AccountInfo> => {
   const accountsCache = await getAccountsCache();
 
   return new Promise((resolve, reject) => {
-    if (accountsCache[id]) {
+    // skip cache for reloading in case of error
+    if (!skipCache && accountsCache[id]) {
       if (callback) callback(accountsCache[id]);
       resolve(accountsCache[id]);
     }
@@ -97,27 +100,39 @@ export const swrGetAccountInfo = async (
     // Update account info with most recent data, save to cache.
     getAccountInfo()
       .then((response) => {
-        const { alias } = response.info;
-        const { balance: resBalance, currency } = response.balance;
-        const name = response.name;
-        const connectorType = response.connectorType;
-        const balance =
-          typeof resBalance === "number" ? resBalance : parseInt(resBalance); // TODO: handle amounts
-        const avatarUrl = response.avatarUrl;
-        const account = {
-          id,
-          name,
-          alias,
-          balance,
-          connectorType,
-          currency: currency || "BTC", // set default currency for every account
-          avatarUrl,
-          lightningAddress: response.info.lightning_address,
-        };
-        storeAccounts({
-          ...accountsCache,
-          [id]: account,
-        });
+        let account: AccountInfo;
+        if (response.error) {
+          account = {
+            id,
+            name: response.name,
+            connectorType: response.connectorType,
+            error: response.error,
+          };
+        } else {
+          const { alias } = response.info;
+          const { balance: resBalance, currency } = response.balance;
+          const name = response.name;
+          const balance =
+            typeof resBalance === "number" ? resBalance : parseInt(resBalance); // TODO: handle amounts
+          account = {
+            id,
+            name,
+            connectorType: response.connectorType,
+            alias,
+            balance,
+            currency: currency || "BTC",
+            avatarUrl: response.avatarUrl,
+            lightningAddress: response.info.lightning_address,
+          };
+        }
+        // don't apply cache for connectors that failed to connect
+        if (!response.error) {
+          storeAccounts({
+            ...accountsCache,
+            [id]: account,
+          });
+        }
+
         if (callback) callback(account);
         return resolve(account);
       })

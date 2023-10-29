@@ -1,3 +1,4 @@
+import ConnectionError from "@components/ConnectionError";
 import Container from "@components/Container";
 import Navbar from "@components/Navbar";
 import Accounts from "@screens/Accounts";
@@ -23,6 +24,7 @@ import AccountDetailLayout from "~/app/components/AccountDetailLayout";
 import ScrollToTop from "~/app/components/ScrollToTop";
 import Toaster from "~/app/components/Toast/Toaster";
 import Providers from "~/app/context/Providers";
+import { useConnectionError } from "~/app/hooks/useConnectionError";
 import RequireAuth from "~/app/router/RequireAuth";
 import { getConnectorRoutes, renderRoutes } from "~/app/router/connectorRoutes";
 import BackupMnemonic from "~/app/screens/Accounts/BackupMnemonic";
@@ -162,6 +164,7 @@ function Options() {
 
 const Layout = () => {
   const { t: tCommon } = useTranslation("common");
+  const { connectionError } = useConnectionError();
 
   return (
     <div>
@@ -173,7 +176,7 @@ const Layout = () => {
         <Navbar.Link href="/wallet">{tCommon("wallet")}</Navbar.Link>
       </Navbar>
       <Toaster />
-      <Outlet />
+      {connectionError ? <ConnectionError /> : <Outlet />}
     </div>
   );
 };

@@ -12,7 +12,7 @@ import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
 import type { AccountInfo } from "~/types";
 
-interface AccountContextType {
+export interface AccountContextType {
   account: {
     id: AccountInfo["id"];
     name?: AccountInfo["name"];
@@ -22,6 +22,7 @@ interface AccountContextType {
     avatarUrl?: AccountInfo["avatarUrl"];
     connectorType?: AccountInfo["connectorType"];
     lightningAddress?: AccountInfo["lightningAddress"];
+    error?: AccountInfo["error"];
   } | null;
   balancesDecorated: {
     fiatBalance: string;
@@ -34,6 +35,7 @@ interface AccountContextType {
   unlock: (user: string, callback: VoidFunction) => Promise<void>;
   lock: (callback: VoidFunction) => void;
   selectAccount: (accountId: string) => void;
+  reloadAccount: () => void;
 
   /**
    * Set new id and clears current info, which causes a loading indicator for the alias/balance
@@ -93,14 +95,18 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
   );
 
   const updateAccountBalance = (
-    amount: number,
+    amount: number | undefined,
     currency?: AccountInfo["currency"]
   ) => {
-    const balance = getFormattedInCurrency(amount, currency);
+    const balance =
+      amount !== undefined ? getFormattedInCurrency(amount, currency) : "";
     setAccountBalance(balance);
   };
 
-  const fetchAccountInfo = async (options?: { accountId?: string }) => {
+  const fetchAccountInfo = async (options?: {
+    accountId?: string;
+    skipCache?: boolean;
+  }) => {
     const id = options?.accountId || account?.id;
     if (!id) return;
 
@@ -109,7 +115,11 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
       updateAccountBalance(accountRes.balance, accountRes.currency);
     };
 
-    const accountInfo = await api.swr.getAccountInfo(id, callback);
+    const accountInfo = await api.swr.getAccountInfo(
+      id,
+      callback,
+      options?.skipCache
+    );
     return { ...accountInfo, fiatBalance, accountBalance };
   };
 
@@ -133,7 +143,11 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  // Invoked only on on mount.
+  const reloadAccount = async () => {
+    await fetchAccountInfo({ skipCache: true });
+  };
+
+  // Invoked only on mount.
   useEffect(() => {
     api
       .getStatus()
@@ -192,6 +206,7 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
     accountLoading,
     lock,
     selectAccount,
+    reloadAccount,
     setAccountId,
     unlock,
   };

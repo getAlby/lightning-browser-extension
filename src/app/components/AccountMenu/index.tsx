@@ -4,6 +4,7 @@ import {
   GlobeIcon,
   PlusIcon,
   WalletIcon,
+  AlertIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
@@ -13,7 +14,11 @@ import MenuDivider from "~/app/components/Menu/MenuDivider";
 import SkeletonLoader from "~/app/components/SkeletonLoader";
 import { useAccount } from "~/app/context/AccountContext";
 import { useAccounts } from "~/app/context/AccountsContext";
-import { isAlbyLNDHubAccount, isAlbyOAuthAccount } from "~/app/utils";
+import {
+  classNames,
+  isAlbyLNDHubAccount,
+  isAlbyOAuthAccount,
+} from "~/app/utils";
 import utils from "~/common/lib/utils";
 
 import Menu from "../Menu";
@@ -35,11 +40,7 @@ function AccountMenu({ showOptions = true }: Props) {
   const navigate = useNavigate();
   const { accounts, getAccounts } = useAccounts();
 
-  // update title
-  const title =
-    !!authAccount?.name &&
-    typeof authAccount?.name === "string" &&
-    `${authAccount?.name}`;
+  const title = authAccount?.name || "";
 
   useEffect(() => {
     getAccounts();
@@ -79,12 +80,22 @@ function AccountMenu({ showOptions = true }: Props) {
             >
               <div
                 title={title || ""}
-                className="text-sm font-medium text-gray-700 dark:text-neutral-400 text-ellipsis overflow-hidden whitespace-nowrap"
+                className="flex items-center h-6 text-sm font-medium text-gray-700 dark:text-neutral-400 text-ellipsis overflow-hidden whitespace-nowrap"
               >
                 {accountLoading ? (
                   <SkeletonLoader className="w-20" />
                 ) : (
-                  title || "⚠️"
+                  <span
+                    className={classNames(
+                      !!authAccount?.error && "text-red-700 dark:text-red-300"
+                    )}
+                  >
+                    {title}
+                  </span>
+                )}
+                {/* include this Icon into the else condition above */}
+                {!accountLoading && authAccount?.error && (
+                  <AlertIcon className="h-5 w-5  ml-2 text-red-700 dark:text-red-300 border border-red-700 dark:border-red-300 rounded-full" />
                 )}
               </div>
             </div>

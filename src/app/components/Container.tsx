@@ -1,15 +1,19 @@
+import { classNames as _classNames } from "~/app/utils";
+
 type MaxWidth = "sm" | "md" | "lg" | "xl" | "2xl";
 
 type Props = {
   children: React.ReactNode;
   justifyBetween?: boolean;
   maxWidth?: MaxWidth;
+  classNames?: string;
 };
 
 function Container({
   children,
   justifyBetween = false,
   maxWidth = "lg",
+  classNames = "",
 }: Props) {
   // Avoid dynamically created class strings as PurgeCSS doesn't understand this.
   const getMaxWidthClass = (maxWidth: MaxWidth) => {
@@ -29,11 +33,12 @@ function Container({
 
   return (
     <div
-      className={`container mx-auto px-4 pb-4 ${getMaxWidthClass(maxWidth)} ${
-        justifyBetween
-          ? "h-full flex flex-col justify-between no-scrollbar"
-          : ""
-      }`}
+      className={_classNames(
+        "container mx-auto px-4 pb-4",
+        getMaxWidthClass(maxWidth),
+        justifyBetween && "h-full flex flex-col justify-between no-scrollbar",
+        classNames
+      )}
     >
       {children}
     </div>

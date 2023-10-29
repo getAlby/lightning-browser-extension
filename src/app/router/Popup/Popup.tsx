@@ -1,3 +1,4 @@
+import ConnectionError from "@components/ConnectionError";
 import Navbar from "@components/Navbar";
 import ConfirmPayment from "@screens/ConfirmPayment";
 import Home from "@screens/Home";
@@ -12,6 +13,7 @@ import Unlock from "@screens/Unlock";
 import { HashRouter, Outlet, Route, Routes } from "react-router-dom";
 import Toaster from "~/app/components/Toast/Toaster";
 import Providers from "~/app/context/Providers";
+import { useConnectionError } from "~/app/hooks/useConnectionError";
 import LNURLRedeem from "~/app/screens/LNURLRedeem";
 import OnChainReceive from "~/app/screens/OnChainReceive";
 import ReceiveInvoice from "~/app/screens/ReceiveInvoice";
@@ -66,12 +68,14 @@ function Popup() {
 }
 
 const Layout = () => {
+  const { connectionError } = useConnectionError();
+
   return (
     <div className="flex flex-col h-full">
       <Navbar />
 
       <main className="flex flex-col grow min-h-0">
-        <Outlet />
+        {connectionError ? <ConnectionError /> : <Outlet />}
         <Toaster />
       </main>
     </div>
