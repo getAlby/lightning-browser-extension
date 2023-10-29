@@ -20,7 +20,8 @@
     "tabs",
     "unlimitedStorage",
     "*://*/*",
-    "identity"
+    "identity",
+    "contextMenus"
   ],
   "__chrome__permissions": [
     "nativeMessaging",
@@ -29,7 +30,8 @@
     "storage",
     "tabs",
     "unlimitedStorage",
-    "identity"
+    "identity",
+    "contextMenus"
   ],
   "__chrome__host_permissions": ["*://*/*"],
   "content_security_policy": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'",
