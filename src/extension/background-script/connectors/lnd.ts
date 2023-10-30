@@ -167,6 +167,7 @@ class Lnd implements Connector {
       "keysend",
       "makeInvoice",
       "sendPayment",
+      "sendPaymentAsync",
       "signMessage",
       "getBalance",
       ...flattenRequestMethods(Object.keys(methods)),

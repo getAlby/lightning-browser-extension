@@ -50,6 +50,7 @@ class LnBits implements Connector {
       "getInfo",
       "makeInvoice",
       "sendPayment",
+      "sendPaymentAsync",
       "signMessage",
       "getBalance",
     ];

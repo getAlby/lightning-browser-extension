@@ -18,11 +18,14 @@ const enable = async (message: MessageAllowanceEnable, sender: Sender) => {
     .equalsIgnoreCase(host)
     .first();
 
+  const enabledFor = new Set(allowance?.enabledFor);
+
   if (
     isUnlocked &&
     allowance &&
     allowance.enabled &&
-    account?.nostrPrivateKey
+    account?.nostrPrivateKey &&
+    enabledFor.has("nostr")
   ) {
     return {
       data: { enabled: true },
@@ -45,8 +48,12 @@ const enable = async (message: MessageAllowanceEnable, sender: Sender) => {
           if (!allowance.id) {
             return { data: { error: "id is missing" } };
           }
+
+          enabledFor.add("nostr");
+
           await db.allowances.update(allowance.id, {
             enabled: true,
+            enabledFor,
             name: message.origin.name,
             imageURL: message.origin.icon,
           });
@@ -55,6 +62,7 @@ const enable = async (message: MessageAllowanceEnable, sender: Sender) => {
             host: host,
             name: message.origin.name,
             imageURL: message.origin.icon,
+            enabledFor: ["nostr"],
             enabled: true,
             lastPaymentAt: 0,
             totalBudget: 0,

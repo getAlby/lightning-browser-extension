@@ -959,7 +959,7 @@
       "request1": "Anfrage zum Lesen deines öffentlichen Nostr-Schlüssels"
     },
     "webbtc_enable": {
-      "request2": "Rechnungen und Liquidinformationen anfordern",
+      "request2": "Rechnungen und Webbtc-Informationen anfordern",
       "title": "Mit WebBTC verbinden"
     },
     "alby_enable": {
