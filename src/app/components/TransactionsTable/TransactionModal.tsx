@@ -183,7 +183,7 @@ const Dt = ({ children }: { children: React.ReactNode }) => (
 );
 
 const Dd = ({ children }: { children: React.ReactNode }) => (
-  <dd className="flex-1 text-gray-800 dark:text-neutral-200 break-all">
+  <dd className="flex-1 text-gray-800 dark:text-neutral-200 break-all whitespace-pre-wrap">
     {children}
   </dd>
 );
