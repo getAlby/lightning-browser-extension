@@ -709,7 +709,6 @@ export interface RequestInvoiceArgs {
 export type Transaction = {
   amount?: string;
   boostagram?: Invoice["boostagram"];
-  badges?: Badge[];
   createdAt?: string;
   currency?: string;
   date: string;
@@ -860,8 +859,7 @@ export interface SettingsStorage {
 
 export interface Badge {
   label: "budget" | "auth" | "imported";
-  color: string;
-  textColor: string;
+  className: string;
 }
 
 export interface Publisher
