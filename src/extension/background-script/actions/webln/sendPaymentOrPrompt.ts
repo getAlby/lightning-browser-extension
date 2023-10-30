@@ -61,9 +61,4 @@ async function payWithPrompt(message: Message) {
   }
 }
 
-export {
-  sendPaymentOrPrompt,
-  payWithPrompt,
-  checkAllowance,
-  sendPaymentWithAllowance,
-};
+export { sendPaymentOrPrompt, payWithPrompt, checkAllowance };

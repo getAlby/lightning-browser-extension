@@ -41,7 +41,7 @@ const PaymentSummary: FC<Props> = ({
           <dt className="mt-4 font-medium dark:text-white">
             {tCommon("description")}
           </dt>
-          <dd className="text-gray-500 dark:text-neutral-400 break-all">
+          <dd className="text-gray-500 dark:text-neutral-400 break-words whitespace-pre-wrap overflow-y-auto max-h-36">
             {description}
           </dd>
         </>

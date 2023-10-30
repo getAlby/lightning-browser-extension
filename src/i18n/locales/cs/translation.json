@@ -252,7 +252,7 @@
       },
       "title": "Připojte Lightning peněženku",
       "lnc": {
-        "title": "LND s LNC",
+        "title": "Lightning terminál (LNC)",
         "page": {
           "title": "Připojit k vašemu LND uzlu",
           "description": "Vytvořte nové sezení v terminálu (litd) pro získání nové párovací fráze a vložte ji zde"
@@ -266,14 +266,28 @@
         "description": "Přihlášení k vašemu účtu Kollider",
         "title": "Kollider",
         "errors": {
-          "connection_failed": "Připojení se nezdařilo. Jste si jisti, že jste zadali údaje k účtu správně?"
+          "connection_failed": "Připojení se nezdařilo. Jste si jisti, že jste zadali údaje k účtu správně?",
+          "user_already_exists": "Uživatelské jméno již existuje",
+          "registration_limit_exceeded": "Limit registrací byl překročen, zkuste to znovu později."
         },
         "username": {
           "label": "Vložte vaše uživatelské jméno ke Kollider"
         },
         "currency": {
           "label": "Zvolte měnu vašeho účtu"
+        },
+        "choose_path": {
+          "create_new": "Přihlásit se",
+          "title": "Připojení k peněžence Kollider",
+          "description": "Přihlašte se nebo si vytvořte nový Kollider účet a propojte ho s Alby."
+        },
+        "warning": "⚠️ Prosím ujistěte se, že máte své přihlašovací údaje uložené bezpečně ve svém správci hesel. Bez těchto údajů nepůjde váš účet obnovit.",
+        "create": {
+          "title": "Vytvořte si svůj Kollider účet a propojte ho s Alby"
         }
+      },
+      "umbrel_lightning_node": {
+        "title": "Lightning uzel"
       }
     },
     "home": {
@@ -284,12 +298,19 @@
       "recent_transactions": "Nedávné transakce",
       "allowance_view": {
         "recent_transactions": "Nedávné transakce",
-        "no_transactions": "Prozatím žádné transakce na <0>{{name}}</0>."
+        "no_transactions": "Prozatím žádné transakce na <0>{{name}}</0>.",
+        "sats": "satů",
+        "total_spent": "Cekově utraceno",
+        "total_payments": "Platby celkem",
+        "permissions": "Oprávnění"
       },
       "default_view": {
         "recent_transactions": "Nedávné transakce",
         "is_blocked_hint": "Alby je v současnosti zakázaná na {host}}",
-        "block_removed": "Povolen {{host}}. Prosím znovu načtěte webovou stránku."
+        "block_removed": "Povolen {{host}}. Prosím znovu načtěte webovou stránku.",
+        "no_outgoing_transactions": "Zatím z tohoto účtu neproběhla žádná odchozí transakce.",
+        "all_transactions_link": "Zobrazit všechny transakce",
+        "no_incoming_transactions": "Zatím na tento účet neproběhla žádná příchozí transakce."
       }
     },
     "accounts": {
@@ -330,6 +351,11 @@
           "title": "Nostr",
           "public_key": {
             "label": "Veřejný klíč"
+          },
+          "settings": {
+            "label": "Nastavení Nostru",
+            "remove": "Odstranit současné klíče",
+            "title": "Nastavení Nostru"
           }
         },
         "actions": {
@@ -349,6 +375,45 @@
         "name": {
           "title": "Jméno",
           "placeholder": "Jméno účtu"
+        },
+        "mnemonic": {
+          "new": {
+            "title": "Co je to Master klíč?"
+          },
+          "generate": {
+            "button": "Vygenerovat Master klíč",
+            "confirm": "Zazálohoval jsem svou záložní (recovery) frázi k mému Master klíči na soukromém bezpečném místě.",
+            "title": "Vygenerování nového Master klíče",
+            "error_confirm": "Prosím potvrďte, že jste zazálohovali svou záložní frázi."
+          },
+          "inputs": {
+            "title": "Záložní fráze"
+          },
+          "saved": "Master klíč byl zašifrován a úspěšně uložen.",
+          "lnurl": {
+            "use_mnemonic": "Používat Master klíč pro přihlašování do aplikací podporujících autentizaci přes Lightning (LNURL Auth)",
+            "title": "Přihlášení přes Lightning"
+          },
+          "backup": {
+            "protocols": {
+              "nostr": "Nostr"
+            },
+            "save": "Uložit Master klíč",
+            "button": "Zobrazit záložní frázi"
+          },
+          "title": "🔑 Správa klíčů",
+          "import": {
+            "button": "Importovat Master klíč",
+            "title": "Import Master klíče"
+          }
+        },
+        "network": {
+          "options": {
+            "testnet": "Testnet",
+            "bitcoin": "Mainnet",
+            "regtest": "Regtest"
+          },
+          "title": "Síť"
         }
       }
     },
@@ -608,7 +673,8 @@
       },
       "alby": {
         "title": "Alby",
-        "description": "Zaregistrujte se, nebo se přihlašte ke svému existujícímu Alby účtu a začněte využívat lightning platby."
+        "description": "Zaregistrujte se, nebo se přihlašte ke svému existujícímu Alby účtu a začněte využívat lightning platby.",
+        "connect": "Připojit se s Alby"
       }
     },
     "alby": {
@@ -651,6 +717,27 @@
           "description": "Objevte vše, co lze s Alby dělat, na naší demo stránce",
           "title": "🕹️ Vyzkoušejte demo Alby"
         }
+      }
+    },
+    "distributions": {
+      "title": "Připojit k {{name}}",
+      "raspiblitz": {
+        "name": "Raspiblitz"
+      },
+      "mynode": {
+        "name": "myNode"
+      },
+      "btcpay": {
+        "name": "BTCPay"
+      },
+      "start9": {
+        "name": "Start9"
+      },
+      "umbrel": {
+        "name": "Umbrel"
+      },
+      "citadel": {
+        "name": "Citadel"
       }
     }
   },

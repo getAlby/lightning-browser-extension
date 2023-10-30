@@ -170,6 +170,7 @@ export type NavigationState = {
     sigHash?: string;
     description?: string;
     details?: string;
+    psbt?: string;
     requestPermission: {
       method: string;
       description: string;
@@ -554,6 +555,20 @@ export interface MessageDecryptGet extends MessageDefault {
   action: "decrypt";
 }
 
+export interface MessageSignPsbt extends MessageDefault {
+  args: {
+    psbt: string;
+  };
+  action: "signPsbt";
+}
+
+export interface MessageGetPsbtPreview extends MessageDefault {
+  args: {
+    psbt: string;
+  };
+  action: "getPsbtPreview";
+}
+
 export interface MessageBalanceGet extends MessageDefault {
   action: "getBalance";
 }
@@ -694,7 +709,6 @@ export interface RequestInvoiceArgs {
 export type Transaction = {
   amount?: string;
   boostagram?: Invoice["boostagram"];
-  badges?: Badge[];
   createdAt?: string;
   currency?: string;
   date: string;
@@ -806,6 +820,7 @@ export interface Blocklist extends DbBlocklist {}
 
 export interface DbAllowance {
   createdAt: string;
+  enabledFor?: string[];
   enabled: boolean;
   host: string;
   id?: number;
@@ -844,8 +859,7 @@ export interface SettingsStorage {
 
 export interface Badge {
   label: "budget" | "auth" | "imported";
-  color: string;
-  textColor: string;
+  className: string;
 }
 
 export interface Publisher
@@ -937,3 +951,11 @@ export type EsploraAssetInfos = {
 };
 
 export type EsploraAssetRegistry = Record<string, EsploraAssetInfos>;
+
+export type Address = { amount: number; address: string };
+
+export type PsbtPreview = {
+  inputs: Address[];
+  outputs: Address[];
+  fee: number;
+};

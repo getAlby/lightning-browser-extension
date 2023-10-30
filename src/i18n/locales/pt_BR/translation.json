@@ -465,7 +465,7 @@
           },
           "subtitle": "Escolha a rede para gerar endereços e decodificar transações bitcoin e liquid"
         },
-        "no_mnemonic_hint": "💡 Você ainda não tem uma chave mestra. <0>Clique aqui</0></div> para criar sua chave mestra e desbloquear essas configurações."
+        "no_mnemonic_hint": "💡 Você ainda não tem uma chave mestra. <0>Clique aqui</0></div> para gerar sua chave mestra e desbloquear essas configurações."
       }
     },
     "unlock": {
@@ -608,12 +608,12 @@
       "actions": {
         "create_invoice": "Gerar fatura",
         "redeem": {
-          "description": "Receba bitcoin usando um código LNURL",
-          "title": "Resgatar"
+          "description": "Receba bitcoin de forma instantânea usando um código LNURL",
+          "title": "Vale-satoshi"
         },
         "invoice": {
           "title": "Fatura relâmpago",
-          "description": "Solicite pagamentos instantâneos e de valores específicos"
+          "description": "Receba pagamentos bitcoin de valores específicos e de forma instantânea"
         },
         "bitcoin_address": {
           "description": "Receba via endereço bitcoin usando um serviço de trocas",
@@ -740,7 +740,7 @@
     "confirm_request_permission": {
       "title": "Aprovar solicitação",
       "allow": "Permitir este site executar:",
-      "always_allow": "Lembrar minha escolha e não perguntar novamente"
+      "always_allow": "Lembrar e não perguntar novamente"
     },
     "discover": {
       "title": "Explore o ecossistema ⚡️",
@@ -766,7 +766,7 @@
         "title": "Sua carteira Alby está pronta",
         "description": "Algumas dicas para você começar a usar a Alby 🐝",
         "mnemonic": {
-          "description": "Planejando usar apps Nostr?\nClique aqui para gerar suas chaves.",
+          "description": "Planejando usar apps Nostr?\nClique aqui para configurar suas chaves.",
           "title": "Nostr"
         }
       }
@@ -843,7 +843,7 @@
       "instructions2": "Seu endereço bitcoin está na página <0>Receber</0>."
     },
     "lnurlredeem": {
-      "title": "Resgatar bitcoin",
+      "title": "Resgatar vale-satoshi",
       "input": {
         "placeholder": "LNURL...",
         "label": "Código LNURL"
@@ -867,7 +867,7 @@
       "outputs": "Saídas",
       "amount": "{{amount}} {{ticker}}",
       "title": "Assinar",
-      "allow_sign": "Este site solicita que você assine uma transação Liquid:",
+      "allow_sign": "Este site solicita que você assine uma transação liquid",
       "inputs": "Entradas"
     },
     "bitcoin": {
@@ -877,7 +877,18 @@
       "allow": "Permitir este site:",
       "allow_sign": "Permitir {{host}} assinar:",
       "block_and_ignore": "Bloquear e ignorar {{host}}",
-      "block_added": "{{host}} adicionado na lista de bloqueios, recarregue o site."
+      "block_added": "{{host}} adicionado na lista de bloqueios, recarregue o site.",
+      "confirm_sign_psbt": {
+        "title": "Assinar",
+        "hide_raw_transaction": "Ocultar transação bruta (Hex)",
+        "view_raw_transaction": "Ver transação bruta (Hex)",
+        "inputs": "Entradas",
+        "fee": "Taxa",
+        "hide_details": "Ocultar detalhes",
+        "allow_sign": "Este site solicita que você assine uma transação de bitcoin",
+        "view_details": "Ver detalhes",
+        "outputs": "Saídas"
+      }
     },
     "liquid": {
       "title": "Liquid",
@@ -907,19 +918,48 @@
       "provider": {
         "label": "Serviço provedor de trocas"
       },
-      "time_estimate": "ℹ️ As transações geralmente são recebidas dentro de 10 a 30 minutos."
+      "time_estimate": "ℹ️ As transações geralmente são recebidas no prazo de 10 a 30 minutos.",
+      "title": "Enviar para um endereço bitcoin",
+      "recipient": {
+        "label": "Endereço"
+      }
     },
     "onboard": {
       "request2": "Você ainda não configurou suas chaves",
       "request3": "A configuração é rápida e fácil",
       "title": "Configure suas chaves",
       "actions": {
-        "start_setup": "Iniciar configuração"
-      }
+        "start_setup": "Configurar"
+      },
+      "request1": "Interagir com este site exige configurar uma chave"
     },
     "nostr_enable": {
       "request2": "Assinar eventos usando sua chave privada Nostr",
-      "request1": "Solicitar a leitura de sua chave pública Nostr"
+      "request1": "Solicitar a leitura de sua chave pública Nostr",
+      "title": "Conectar no Nostr"
+    },
+    "webln_enable": {
+      "title": "Conectar no WebLN",
+      "request2": "Solicitar faturas e informações da rede relâmpago"
+    },
+    "webbtc_enable": {
+      "title": "Conectar no WebBTC",
+      "request2": "Solicitar faturas e informações Webbtc"
+    },
+    "liquid_enable": {
+      "title": "Conectar na Liquid",
+      "request2": "Solicitar faturas e informações da liquid"
+    },
+    "alby_enable": {
+      "title": "Conectar na Alby",
+      "request2": "Solicitar faturas e informações da alby"
+    },
+    "confirm_payment_async": {
+      "title": "Aprovar pagamento",
+      "description": "Esta é uma fatura do tipo HOLD. <0>Saiba mais »</0>",
+      "actions": {
+        "pay_now": "Pagar agora"
+      }
     }
   },
   "common": {
@@ -956,7 +996,7 @@
       "copy_invoice": "Copiar código",
       "back": "Voltar",
       "log_in": "Fazer login",
-      "remember": "Lembrar minha escolha e não perguntar novamente",
+      "remember": "Lembrar e não perguntar novamente",
       "receive_again": "Receber outro pagamento",
       "transactions": "Transações",
       "more": "Mais",
@@ -966,7 +1006,8 @@
       "download": "Baixar",
       "copy_clipboard": "Copiar para área de transferência",
       "disconnect": "Desconectar",
-      "copied_to_clipboard": "Copiado para a área de transferência"
+      "copied_to_clipboard": "Copiado para a área de transferência",
+      "review": "Revisar"
     },
     "errors": {
       "connection_failed": "Falha na conexão",
@@ -977,7 +1018,7 @@
     "message": "Mensagem",
     "help": "Ajuda",
     "response": "Resposta",
-    "success_message": "{{amount}}{{fiatAmount}} estão a caminho de {{destination}}",
+    "success_message": "{{amount}}{{fiatAmount}} enviados para {{destination}}",
     "advanced": "Avançado",
     "discover": "Explorar",
     "confirm_password": "Confirmar senha",
@@ -1024,7 +1065,7 @@
         "screen_reader": "Opções limite de gastos"
       },
       "enable_login": {
-        "title": "Login relâmpago",
+        "title": "Login",
         "subtitle": "O login é realizado de forma automática, sem necessidade de confirmação."
       },
       "edit_permissions": "Permissões"
@@ -1093,7 +1134,7 @@
     },
     "badge": {
       "label": {
-        "auth": "LOGIN RELÂMPAGO",
+        "auth": "LOGIN",
         "imported": "IMPORTADA",
         "budget": "LIMITE DE GASTOS"
       }
