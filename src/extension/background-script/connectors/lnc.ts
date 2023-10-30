@@ -14,7 +14,7 @@ import state from "../state";
 import Connector, {
   CheckPaymentArgs,
   CheckPaymentResponse,
-  ConnectorInvoice,
+  ConnectorTransaction,
   ConnectPeerResponse,
   flattenRequestMethods,
   GetBalanceResponse,
@@ -248,8 +248,8 @@ class Lnc implements Connector {
     this.checkConnection();
     const data = await this.lnc.lnd.lightning.ListInvoices({ reversed: true });
 
-    const invoices: ConnectorInvoice[] = data.invoices
-      .map((invoice: FixMe, index: number): ConnectorInvoice => {
+    const invoices: ConnectorTransaction[] = data.invoices
+      .map((invoice: FixMe, index: number): ConnectorTransaction => {
         const custom_records =
           invoice.htlcs[0] && invoice.htlcs[0].customRecords;
 
@@ -274,40 +274,10 @@ class Lnc implements Connector {
   }
 
   async getTransactions(): Promise<GetTransactionsResponse> {
-    let index = 100;
     const incomingInvoices = await this.getInvoices();
+    const outgoingInvoices = await this.getPayments();
 
-    const outgoingInvoicesResponse = await this.lnc.lnd.lightning.ListPayments({
-      reversed: true,
-      max_payments: 100,
-      include_incomplete: false,
-    });
-
-    const outgoingInvoices: ConnectorInvoice[] =
-      outgoingInvoicesResponse.payments.map(
-        (payment: FixMe, arrayIndex: number): ConnectorInvoice => {
-          let memo = "Sent";
-          if (payment.payment_request) {
-            memo = (
-              lightningPayReq
-                .decode(payment.payment_request)
-                .tags.find((tag) => tag.tagName === "description")?.data ||
-              "Sent"
-            ).toString();
-          }
-          return {
-            id: `${payment.payment_request}-${index++}`,
-            memo: memo,
-            preimage: payment.payment_preimage,
-            settled: true,
-            settleDate: parseInt(payment.creation_date) * 1000,
-            totalAmount: payment.value_sat,
-            type: "sent",
-          };
-        }
-      );
-
-    const transactions: ConnectorInvoice[] = [
+    const transactions: ConnectorTransaction[] = [
       ...incomingInvoices.data.invoices,
       ...outgoingInvoices,
     ].sort((a, b) => {
@@ -319,6 +289,39 @@ class Lnc implements Connector {
         transactions,
       },
     };
+  }
+
+  private async getPayments() {
+    const outgoingInvoicesResponse = await this.lnc.lnd.lightning.ListPayments({
+      reversed: true,
+      max_payments: 100,
+      include_incomplete: false,
+    });
+
+    const outgoingInvoices: ConnectorTransaction[] =
+      outgoingInvoicesResponse.payments.map(
+        (payment: FixMe, index: number): ConnectorTransaction => {
+          let memo = "Sent";
+          if (payment.payment_request) {
+            memo = (
+              lightningPayReq
+                .decode(payment.payment_request)
+                .tags.find((tag) => tag.tagName === "description")?.data ||
+              "Sent"
+            ).toString();
+          }
+          return {
+            id: `${payment.payment_request}-${index}`,
+            memo: memo,
+            preimage: payment.payment_preimage,
+            settled: true,
+            settleDate: parseInt(payment.creation_date) * 1000,
+            totalAmount: payment.value_sat,
+            type: "sent",
+          };
+        }
+      );
+    return outgoingInvoices;
   }
 
   // not yet implemented

@@ -9,7 +9,7 @@ import state from "../state";
 import Connector, {
   CheckPaymentArgs,
   CheckPaymentResponse,
-  ConnectorInvoice,
+  ConnectorTransaction,
   ConnectPeerResponse,
   GetBalanceResponse,
   GetInfoResponse,
@@ -124,16 +124,17 @@ class LnBits implements Connector {
           webhook_status: string;
         }[]
       ) => {
-        const invoices: ConnectorInvoice[] = data
+        const invoices: ConnectorTransaction[] = data
           .filter((invoice) => invoice.amount > 0)
-          .map((invoice, index): ConnectorInvoice => {
+          .map((invoice, index): ConnectorTransaction => {
             return {
               id: `${invoice.checking_id}-${index}`,
               memo: invoice.memo,
               preimage: invoice.preimage,
+              payment_hash: invoice.payment_hash,
               settled: !invoice.pending,
               settleDate: invoice.time * 1000,
-              totalAmount: `${Math.floor(invoice.amount / 1000)}`,
+              totalAmount: Math.floor(invoice.amount / 1000),
               type: "received",
             };
           });
@@ -170,15 +171,20 @@ class LnBits implements Connector {
           webhook_status: string;
         }[]
       ) => {
-        const transactions: ConnectorInvoice[] = data.map(
-          (transaction, index): ConnectorInvoice => {
+        const transactions: ConnectorTransaction[] = data.map(
+          (transaction, index): ConnectorTransaction => {
             return {
               id: `${transaction.checking_id}-${index}`,
               memo: transaction.memo,
-              preimage: transaction.preimage,
+              preimage:
+                transaction.preimage !=
+                "0000000000000000000000000000000000000000000000000000000000000000"
+                  ? transaction.preimage
+                  : "",
+              payment_hash: transaction.payment_hash,
               settled: !transaction.pending,
               settleDate: transaction.time * 1000,
-              totalAmount: `${Math.abs(Math.floor(transaction.amount / 1000))}`,
+              totalAmount: Math.abs(Math.floor(transaction.amount / 1000)),
               type: transaction.amount > 0 ? "received" : "sent",
             };
           }

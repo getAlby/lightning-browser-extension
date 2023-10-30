@@ -32,12 +32,14 @@ export type Props = {
 };
 
 const DefaultView: FC<Props> = (props) => {
+  const itemsLimit = 8;
+
   const { t } = useTranslation("translation", { keyPrefix: "home" });
   const { t: tCommon } = useTranslation("common");
 
   const navigate = useNavigate();
 
-  const { account, balancesDecorated, accountLoading } = useAccount();
+  const { account, accountLoading } = useAccount();
 
   const lightningAddress = account?.lightningAddress || "";
 
@@ -47,11 +49,10 @@ const DefaultView: FC<Props> = (props) => {
     useTransactions();
 
   const isLoading = accountLoading || isLoadingTransactions;
-  const itemsLimit = 8;
 
   useEffect(() => {
     loadTransactions(itemsLimit);
-  }, [balancesDecorated?.accountBalance, loadTransactions, itemsLimit]);
+  }, [loadTransactions, itemsLimit]);
 
   // check if currentURL is blocked
   useEffect(() => {

@@ -14,7 +14,7 @@ import state from "../state";
 import Connector, {
   CheckPaymentArgs,
   CheckPaymentResponse,
-  ConnectorInvoice,
+  ConnectorTransaction,
   ConnectPeerResponse,
   GetBalanceResponse,
   GetInfoResponse,
@@ -94,7 +94,7 @@ export default class LndHub implements Connector {
           data: number[];
         };
         amt: number;
-        custom_records: ConnectorInvoice["custom_records"];
+        custom_records: ConnectorTransaction["custom_records"];
         description: string;
         expire_time: number;
         ispaid: boolean;
@@ -107,16 +107,17 @@ export default class LndHub implements Connector {
       }[]
     >("GET", "/getuserinvoices", undefined);
 
-    const invoices: ConnectorInvoice[] = data
+    const invoices: ConnectorTransaction[] = data
       .map(
-        (invoice, index): ConnectorInvoice => ({
+        (invoice, index): ConnectorTransaction => ({
           custom_records: invoice.custom_records,
           id: `${invoice.payment_request}-${index}`,
           memo: invoice.description,
           preimage: "", // lndhub doesn't support preimage (yet)
+          payment_hash: invoice.payment_hash,
           settled: invoice.ispaid,
           settleDate: invoice.timestamp * 1000,
-          totalAmount: `${invoice.amt}`,
+          totalAmount: invoice.amt,
           type: "received",
         })
       )
@@ -133,9 +134,26 @@ export default class LndHub implements Connector {
 
   async getTransactions(): Promise<GetTransactionsResponse> {
     const incomingInvoices = await this.getInvoices();
-    const outgoingInvoicesResponse = await this.request<
+    const outgoingInvoices = await this.getPayments();
+
+    const transactions: ConnectorTransaction[] = [
+      ...incomingInvoices.data.invoices,
+      ...outgoingInvoices,
+    ].sort((a, b) => {
+      return b.settleDate - a.settleDate;
+    });
+
+    return {
+      data: {
+        transactions,
+      },
+    };
+  }
+
+  private async getPayments(): Promise<ConnectorTransaction[]> {
+    const lndhubPayments = await this.request<
       {
-        custom_records: ConnectorInvoice["custom_records"];
+        custom_records: ConnectorTransaction["custom_records"];
         fee: string;
         keysend: boolean;
         memo: string;
@@ -151,31 +169,20 @@ export default class LndHub implements Connector {
       }[]
     >("GET", "/gettxs", { limit: 100 });
 
-    // /gettxs endpoint returns successfull outgoing  transactions bydefault
-    const outgoingInvoices: ConnectorInvoice[] = outgoingInvoicesResponse.map(
-      (transaction, index): ConnectorInvoice => ({
+    // gettxs endpoint returns successfull outgoing  transactions by default
+    const payments: ConnectorTransaction[] = lndhubPayments.map(
+      (transaction, index): ConnectorTransaction => ({
         id: `${index}`,
         memo: transaction.memo,
         preimage: transaction.payment_preimage,
+        payment_hash: transaction.payment_hash,
         settled: true,
         settleDate: transaction.timestamp * 1000,
-        totalAmount: `${transaction.value}`,
+        totalAmount: transaction.value,
         type: "sent",
       })
     );
-
-    const transactions: ConnectorInvoice[] = [
-      ...incomingInvoices.data.invoices,
-      ...outgoingInvoices,
-    ].sort((a, b) => {
-      return b.settleDate - a.settleDate;
-    });
-
-    return {
-      data: {
-        transactions,
-      },
-    };
+    return payments;
   }
 
   async getInfo(): Promise<GetInfoResponse> {

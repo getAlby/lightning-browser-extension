@@ -17,6 +17,7 @@ export const useTransactions = () => {
           isSettled: true,
           limit,
         });
+
         const transactions = getTransactionsResponse.transactions.map(
           (transaction) => ({
             ...transaction,

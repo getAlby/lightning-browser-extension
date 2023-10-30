@@ -93,14 +93,14 @@ class Galoy implements Connector {
   // not yet implemented
   async getInvoices(): Promise<GetInvoicesResponse> {
     console.error(
-      `Not yet supported with the currently used account: ${this.constructor.name}`
+      `getInvoices() is not yet supported with the currently used account: ${this.constructor.name}`
     );
     return { data: { invoices: [] } };
   }
 
   async getTransactions(): Promise<GetTransactionsResponse> {
     console.error(
-      `Not yet supported with the currently used account: ${this.constructor.name}`
+      `getTransactions() is not yet supported with the currently used account: ${this.constructor.name}`
     );
     return { data: { transactions: [] } };
   }

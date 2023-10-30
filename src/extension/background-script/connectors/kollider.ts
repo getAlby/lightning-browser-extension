@@ -11,7 +11,7 @@ import { Account } from "~/types";
 import Connector, {
   CheckPaymentArgs,
   CheckPaymentResponse,
-  ConnectorInvoice,
+  ConnectorTransaction,
   ConnectPeerResponse,
   GetBalanceResponse,
   GetInfoResponse,
@@ -109,17 +109,18 @@ export default class Kollider implements Connector {
       }[]
     >("GET", "/getuserinvoices", undefined);
 
-    const invoices: ConnectorInvoice[] = data
+    const invoices: ConnectorTransaction[] = data
       .filter((i) => i.incoming)
       .filter((i) => i.account_id === this.currentAccountId)
       .map(
-        (invoice, index): ConnectorInvoice => ({
+        (invoice, index): ConnectorTransaction => ({
           id: `${invoice.payment_hash}-${index}`,
+          payment_hash: invoice.payment_hash,
           memo: invoice.reference,
           preimage: "", // kollider doesn't support preimage (yet)
           settled: invoice.settled,
           settleDate: invoice.settled_date,
-          totalAmount: `${invoice.value}`,
+          totalAmount: invoice.value,
           type: "received",
         })
       )
@@ -136,7 +137,7 @@ export default class Kollider implements Connector {
 
   async getTransactions(): Promise<GetTransactionsResponse> {
     console.error(
-      `Not yet supported with the currently used account: ${this.constructor.name}`
+      `getTransactions() is not yet supported with the currently used account: ${this.constructor.name}`
     );
     return { data: { transactions: [] } };
   }

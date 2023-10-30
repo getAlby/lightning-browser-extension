@@ -18,7 +18,11 @@ const transactions = async (message: MessageTransactions) => {
         const boostagram = utils.getBoostagramFromInvoiceCustomRecords(
           transaction.custom_records
         );
-        return { ...transaction, boostagram };
+        return {
+          ...transaction,
+          boostagram,
+          paymentHash: transaction.payment_hash,
+        };
       });
 
     if (limit) {
