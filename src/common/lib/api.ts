@@ -1,9 +1,16 @@
+import {
+  CreateSwapParams,
+  CreateSwapResponse,
+  SwapInfoResponse,
+} from "@getalby/sdk/dist/types";
 import { ACCOUNT_CURRENCIES } from "~/common/constants";
 import {
   ConnectPeerArgs,
   ConnectPeerResponse,
   MakeInvoiceArgs,
   MakeInvoiceResponse,
+  SendPaymentAsyncResponse,
+  SendPaymentResponse,
 } from "~/extension/background-script/connectors/connector.interface";
 import type {
   Account,
@@ -13,6 +20,7 @@ import type {
   BitcoinNetworkType,
   ConnectorType,
   DbPayment,
+  EsploraAssetRegistry,
   Invoice,
   LnurlAuthResponse,
   MessageAccountEdit,
@@ -21,6 +29,9 @@ import type {
   MessageLnurlAuth,
   MessageSettingsSet,
   NodeInfo,
+  OriginData,
+  PsbtPreview,
+  PsetPreview,
   SettingsStorage,
   ValidateAccountResponse,
 } from "~/types";
@@ -43,6 +54,7 @@ export interface AccountInfoRes {
 
 export interface GetAccountRes extends Pick<Account, "id" | "name"> {
   connectorType: ConnectorType;
+  liquidEnabled: boolean;
   nostrEnabled: boolean;
   hasMnemonic: boolean;
   hasImportedNostrKey: boolean;
@@ -100,6 +112,7 @@ export const swrGetAccountInfo = async (
           connectorType,
           currency: currency || "BTC", // set default currency for every account
           avatarUrl,
+          lightningAddress: response.info.lightning_address,
         };
         storeAccounts({
           ...accountsCache,
@@ -164,6 +177,29 @@ export const lnurlAuth = (
 ): Promise<LnurlAuthResponse> =>
   msg.request<LnurlAuthResponse>("lnurlAuth", options);
 
+export const sendPayment = (
+  paymentRequest: string,
+  origin: OriginData | undefined
+) =>
+  msg.request<SendPaymentResponse["data"] | { error: string }>(
+    "sendPayment",
+    { paymentRequest },
+    {
+      origin,
+    }
+  );
+export const sendPaymentAsync = (
+  paymentRequest: string,
+  origin: OriginData | undefined
+) =>
+  msg.request<SendPaymentAsyncResponse["data"] | { error: string }>(
+    "sendPaymentAsync",
+    { paymentRequest },
+    {
+      origin,
+    }
+  );
+
 export const getCurrencyRate = async () =>
   msg.request<{ rate: number }>("getCurrencyRate");
 
@@ -200,11 +236,40 @@ const getMnemonic = (id: string): Promise<string> =>
 
 const generateMnemonic = (): Promise<string> => msg.request("generateMnemonic");
 
-// TODO: consider adding removeMnemonic function, make mnemonic a string here
+// TODO: consider adding removeMnemonic function, make mnemonic a string here rather than optional (null = delete current mnemonic)
 const setMnemonic = (id: string, mnemonic: string | null): Promise<void> =>
   msg.request("setMnemonic", {
     id,
     mnemonic,
+  });
+
+const getSwapInfo = (): Promise<SwapInfoResponse> => msg.request("getSwapInfo");
+const createSwap = (params: CreateSwapParams): Promise<CreateSwapResponse> =>
+  msg.request("createSwap", params);
+const getLiquidPsetPreview = (pset: string): Promise<PsetPreview> =>
+  msg.request("liquid/getPsetPreview", {
+    pset,
+  });
+
+const fetchLiquidAssetRegistry = (
+  psetPreview: PsetPreview
+): Promise<EsploraAssetRegistry> =>
+  msg.request("liquid/fetchAssetRegistry", {
+    psetPreview,
+  });
+
+const signPset = (pset: string): Promise<string> =>
+  msg.request("liquid/signPset", {
+    pset,
+  });
+
+const getPsbtPreview = (psbt: string): Promise<PsbtPreview> =>
+  msg.request("webbtc/getPsbtPreview", {
+    psbt,
+  });
+const signPsbt = (psbt: string): Promise<string> =>
+  msg.request("webbtc/signPsbt", {
+    psbt,
   });
 
 export default {
@@ -233,6 +298,8 @@ export default {
   getInvoices,
   lnurlAuth,
   getCurrencyRate,
+  sendPayment,
+  sendPaymentAsync,
   nostr: {
     getPrivateKey: getNostrPrivateKey,
     getPublicKey: getNostrPublicKey,
@@ -243,4 +310,15 @@ export default {
   getMnemonic,
   setMnemonic,
   generateMnemonic,
+  getSwapInfo,
+  createSwap,
+  liquid: {
+    getPsetPreview: getLiquidPsetPreview,
+    fetchAssetRegistry: fetchLiquidAssetRegistry,
+    signPset: signPset,
+  },
+  bitcoin: {
+    getPsbtPreview,
+    signPsbt,
+  },
 };

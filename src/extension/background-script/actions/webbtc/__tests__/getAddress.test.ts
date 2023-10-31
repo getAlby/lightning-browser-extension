@@ -11,11 +11,11 @@ const mockState = {
   password: passwordMock,
   currentAccountId: "1e1e8ea6-493e-480b-9855-303d37506e97",
   getAccount: () => ({
-    mnemonic: btcFixture.mnemnoic,
+    mnemonic: btcFixture.mnemonic,
     bitcoinNetwork: "regtest",
   }),
-  getMnemonic: () => new Mnemonic(btcFixture.mnemnoic),
-  getBitcoin: () => new Bitcoin(new Mnemonic(btcFixture.mnemnoic), "regtest"),
+  getMnemonic: () => new Mnemonic(btcFixture.mnemonic),
+  getBitcoin: () => new Bitcoin(new Mnemonic(btcFixture.mnemonic), "regtest"),
   getConnector: jest.fn(),
 };
 

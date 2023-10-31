@@ -7,9 +7,9 @@ import Checkbox from "@components/form/Checkbox";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import Hyperlink from "~/app/components/Hyperlink";
 import ScreenHeader from "~/app/components/ScreenHeader";
+import toast from "~/app/components/Toast";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
@@ -102,7 +102,9 @@ function ConfirmSignMessage() {
                   {JSON.stringify(event, null, 2)}
                 </div>
               )}
-              <div className="flex items-center">
+            </div>
+            <div>
+              <div className="flex items-center mb-4">
                 <Checkbox
                   id="remember_permission"
                   name="remember_permission"
@@ -118,12 +120,12 @@ function ConfirmSignMessage() {
                   {tCommon("actions.remember")}
                 </label>
               </div>
+              <ConfirmOrCancel
+                disabled={loading}
+                loading={loading}
+                onCancel={reject}
+              />
             </div>
-            <ConfirmOrCancel
-              disabled={loading}
-              loading={loading}
-              onCancel={reject}
-            />
           </Container>
         </form>
       ) : (

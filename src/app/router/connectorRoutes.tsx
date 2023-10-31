@@ -20,8 +20,8 @@ import btcpay from "/static/assets/icons/btcpay.svg";
 import citadel from "/static/assets/icons/citadel.png";
 import core_ln from "/static/assets/icons/core_ln.svg";
 import eclair from "/static/assets/icons/eclair.jpg";
-import galoyBitcoinBeach from "/static/assets/icons/galoy_bitcoin_beach.png";
 import galoyBitcoinJungle from "/static/assets/icons/galoy_bitcoin_jungle.png";
+import galoyBlink from "/static/assets/icons/galoy_blink.png";
 import kolliderLogo from "/static/assets/icons/kollider.png";
 import lightning_node from "/static/assets/icons/lightning_node.png";
 import lightning_terminal from "/static/assets/icons/lightning_terminal.png";
@@ -63,7 +63,7 @@ interface ConnectorRoute extends Route {
 }
 
 const galoyPaths: { [key: string]: keyof typeof galoyUrls } = {
-  bitcoinBeach: "galoy-bitcoin-beach",
+  blink: "galoy-blink",
   bitcoinJungle: "galoy-bitcoin-jungle",
 };
 
@@ -163,11 +163,11 @@ const connectorMap: { [key: string]: ConnectorRoute } = {
     logo: kolliderLogo,
     children: kolliderConnectorRoutes,
   },
-  [galoyPaths.bitcoinBeach]: {
-    path: galoyPaths.bitcoinBeach,
-    element: <ConnectGaloy instance={galoyPaths.bitcoinBeach} />,
-    title: i18n.t("translation:choose_connector.bitcoin_beach.title"),
-    logo: galoyBitcoinBeach,
+  [galoyPaths.blink]: {
+    path: galoyPaths.blink,
+    element: <ConnectGaloy instance={galoyPaths.blink} />,
+    title: i18n.t("translation:choose_connector.blink.title"),
+    logo: galoyBlink,
   },
   [galoyPaths.bitcoinJungle]: {
     path: galoyPaths.bitcoinJungle,
@@ -262,7 +262,7 @@ function getConnectorRoutes(): ConnectorRoute[] {
     connectorMap["lnd-hub-bluewallet"],
     connectorMap["eclair"],
     connectorMap["btcpay"],
-    connectorMap[galoyPaths.bitcoinBeach],
+    connectorMap[galoyPaths.blink],
     connectorMap[galoyPaths.bitcoinJungle],
     getDistribution("citadel"),
     getDistribution("umbrel"),
@@ -273,11 +273,11 @@ function getConnectorRoutes(): ConnectorRoute[] {
 }
 
 function renderRoutes(routes: (ChildRoute | ConnectorRoute)[]) {
-  return routes.map((route: ChildRoute | ConnectorRoute) => {
+  return routes.map((route: ChildRoute | ConnectorRoute, index: number) => {
     if ("children" in route && route.children) {
       if ("element" in route && route.element) {
         return (
-          <Route key={route.path} path={route.path}>
+          <Route key={`${route.path}-${index}`} path={route.path}>
             <Route index element={route.element} />
             {renderRoutes(route.children)}
           </Route>
@@ -291,7 +291,7 @@ function renderRoutes(routes: (ChildRoute | ConnectorRoute)[]) {
         if (indexRouteIndex !== -1) {
           indexRoute = route.children.splice(indexRouteIndex, 1)[0];
           return (
-            <Route key={route.path} path={route.path}>
+            <Route key={`${route.path}-${index}`} path={route.path}>
               <Route index element={indexRoute.element} />
               {renderRoutes(route.children)}
             </Route>
@@ -300,10 +300,14 @@ function renderRoutes(routes: (ChildRoute | ConnectorRoute)[]) {
       }
     } else {
       return (
-        <Route key={route.path} path={route.path} element={route.element} />
+        <Route
+          key={`${route.path}-${index}`}
+          path={route.path}
+          element={route.element}
+        />
       );
     }
   });
 }
 
-export { getConnectorRoutes, ConnectorRoute, renderRoutes };
+export { ConnectorRoute, getConnectorRoutes, renderRoutes };

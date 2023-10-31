@@ -10,11 +10,13 @@ import Receive from "@screens/Receive";
 import Send from "@screens/Send";
 import Unlock from "@screens/Unlock";
 import { HashRouter, Outlet, Route, Routes } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+import Toaster from "~/app/components/Toast/Toaster";
 import Providers from "~/app/context/Providers";
 import LNURLRedeem from "~/app/screens/LNURLRedeem";
 import OnChainReceive from "~/app/screens/OnChainReceive";
-
+import ReceiveInvoice from "~/app/screens/ReceiveInvoice";
+import ScanQRCode from "~/app/screens/ScanQRCode";
+import SendToBitcoinAddress from "~/app/screens/SendToBitcoinAddress";
 import RequireAuth from "../RequireAuth";
 
 function Popup() {
@@ -32,8 +34,10 @@ function Popup() {
           >
             <Route index element={<Home />} />
             <Route path="send" element={<Send />} />
+            <Route path="scanQRCode" element={<ScanQRCode />} />
             <Route path="receive" element={<Receive />} />
             <Route path="onChainReceive" element={<OnChainReceive />} />
+            <Route path="receive/invoice" element={<ReceiveInvoice />} />
             <Route path="lnurlPay" element={<LNURLPay />} />
             <Route path="lnurlChannel" element={<LNURLChannel />} />
             <Route path="lnurlWithdraw" element={<LNURLWithdraw />} />
@@ -41,13 +45,17 @@ function Popup() {
             <Route path="keysend" element={<Keysend />} />
             <Route path="confirmPayment" element={<ConfirmPayment />} />
             <Route path="lnurlAuth" element={<LNURLAuth />} />
+            <Route
+              path="sendToBitcoinAddress"
+              element={<SendToBitcoinAddress />}
+            />
           </Route>
           <Route
             path="unlock"
             element={
               <>
                 <Unlock />
-                <ToastContainer autoClose={10000} hideProgressBar={true} />
+                <Toaster />
               </>
             }
           />
@@ -64,7 +72,7 @@ const Layout = () => {
 
       <main className="flex flex-col grow min-h-0">
         <Outlet />
-        <ToastContainer autoClose={10000} hideProgressBar={true} />
+        <Toaster />
       </main>
     </div>
   );

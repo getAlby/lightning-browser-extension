@@ -19,21 +19,24 @@ import Transactions from "@screens/Transactions";
 import Unlock from "@screens/Unlock";
 import { useTranslation } from "react-i18next";
 import { HashRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
 import AccountDetailLayout from "~/app/components/AccountDetailLayout";
 import ScrollToTop from "~/app/components/ScrollToTop";
+import Toaster from "~/app/components/Toast/Toaster";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
 import { getConnectorRoutes, renderRoutes } from "~/app/router/connectorRoutes";
-import BackupSecretKey from "~/app/screens/Accounts/BackupSecretKey";
-import GenerateSecretKey from "~/app/screens/Accounts/GenerateSecretKey";
-import ImportSecretKey from "~/app/screens/Accounts/ImportSecretKey";
+import BackupMnemonic from "~/app/screens/Accounts/BackupMnemonic";
+import GenerateMnemonic from "~/app/screens/Accounts/GenerateMnemonic";
+import NewMnemonic from "~/app/screens/Accounts/GenerateMnemonic/new";
+import ImportMnemonic from "~/app/screens/Accounts/ImportMnemonic";
 import NostrSettings from "~/app/screens/Accounts/NostrSettings";
 import NostrSetup from "~/app/screens/Accounts/NostrSetup/NostrSetup";
 import Discover from "~/app/screens/Discover";
 import LNURLRedeem from "~/app/screens/LNURLRedeem";
 import OnChainReceive from "~/app/screens/OnChainReceive";
+import ReceiveInvoice from "~/app/screens/ReceiveInvoice";
 import ScanQRCode from "~/app/screens/ScanQRCode";
+import SendToBitcoinAddress from "~/app/screens/SendToBitcoinAddress";
 import ChooseConnector from "~/app/screens/connectors/ChooseConnector";
 import ChooseConnectorPath from "~/app/screens/connectors/ChooseConnectorPath";
 import i18n from "~/i18n/i18nConfig";
@@ -65,7 +68,12 @@ function Options() {
             <Route path="send" element={<Send />} />
             <Route path="confirmPayment" element={<ConfirmPayment />} />
             <Route path="keysend" element={<Keysend />} />
+            <Route
+              path="sendToBitcoinAddress"
+              element={<SendToBitcoinAddress />}
+            />
             <Route path="receive" element={<Receive />} />
+            <Route path="receive/invoice" element={<ReceiveInvoice />} />
             <Route path="onChainReceive" element={<OnChainReceive />} />
             <Route path="wallet" element={<DefaultView />} />
             <Route path="transactions">
@@ -89,12 +97,13 @@ function Options() {
               <Route index element={<Accounts />} />
               <Route path=":id" element={<AccountDetailLayout />}>
                 <Route index element={<AccountDetail />} />
-                <Route path="secret-key/backup" element={<BackupSecretKey />} />
+                <Route path="secret-key/backup" element={<BackupMnemonic />} />
                 <Route
                   path="secret-key/generate"
-                  element={<GenerateSecretKey />}
+                  element={<GenerateMnemonic />}
                 />
-                <Route path="secret-key/import" element={<ImportSecretKey />} />
+                <Route path="secret-key/new" element={<NewMnemonic />} />
+                <Route path="secret-key/import" element={<ImportMnemonic />} />
                 <Route path="nostr/settings" element={<NostrSettings />} />
                 <Route path="nostr/setup" element={<NostrSetup />} />
               </Route>
@@ -141,7 +150,7 @@ function Options() {
             element={
               <>
                 <Unlock />
-                <ToastContainer autoClose={10000} hideProgressBar={true} />
+                <Toaster />
               </>
             }
           />
@@ -163,12 +172,7 @@ const Layout = () => {
         </Navbar.Link>
         <Navbar.Link href="/wallet">{tCommon("wallet")}</Navbar.Link>
       </Navbar>
-      <ToastContainer
-        autoClose={15000}
-        hideProgressBar={true}
-        className="w-fit max-w-2xl"
-      />
-
+      <Toaster />
       <Outlet />
     </div>
   );

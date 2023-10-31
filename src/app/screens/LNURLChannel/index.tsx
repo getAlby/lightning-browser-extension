@@ -9,8 +9,8 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import ScreenHeader from "~/app/components/ScreenHeader";
+import toast from "~/app/components/Toast";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
@@ -19,9 +19,6 @@ import type { LNURLChannelServiceResponse } from "~/types";
 
 function LNURLChannel() {
   const { t } = useTranslation("translation", { keyPrefix: "lnurlchannel" });
-  const { t: tComponents } = useTranslation("components", {
-    keyPrefix: "confirm_or_cancel",
-  });
   const { t: tCommon } = useTranslation("common");
 
   const navigate = useNavigate();
@@ -118,24 +115,17 @@ function LNURLChannel() {
               content={uri}
             />
           </div>
-
-          <div>
-            <ConfirmOrCancel
-              disabled={loadingConfirm || !uri}
-              loading={loadingConfirm}
-              onConfirm={confirm}
-              onCancel={reject}
-            />
-
-            <p className="mb-4 text-center text-sm text-gray-400">
-              <em>{tComponents("only_trusted")}</em>
-            </p>
-          </div>
+          <ConfirmOrCancel
+            disabled={loadingConfirm || !uri}
+            loading={loadingConfirm}
+            onConfirm={confirm}
+            onCancel={reject}
+          />
         </Container>
       ) : (
         <Container justifyBetween maxWidth="sm">
           <ResultCard isSuccess message={successMessage} />
-          <div className="my-4">
+          <div className="mt-4">
             <Button
               onClick={close}
               label={tCommon("actions.close")}

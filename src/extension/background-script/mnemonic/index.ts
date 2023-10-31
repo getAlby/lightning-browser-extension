@@ -4,6 +4,7 @@ import * as bip39 from "@scure/bip39";
 import Hex from "crypto-js/enc-hex";
 import sha256 from "crypto-js/sha256";
 
+// TODO: move into nostr class
 const NOSTR_DERIVATION_PATH = "m/44'/1237'/0'/0/0"; // NIP-06
 
 class Mnemonic {

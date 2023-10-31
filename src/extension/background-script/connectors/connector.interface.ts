@@ -1,3 +1,8 @@
+import {
+  CreateSwapParams,
+  CreateSwapResponse,
+  SwapInfoResponse,
+} from "@getalby/sdk/dist/types";
 import { ACCOUNT_CURRENCIES } from "~/common/constants";
 import { OAuthToken } from "~/types";
 
@@ -64,6 +69,11 @@ export type SendPaymentResponse = {
   };
 };
 
+export type SendPaymentAsyncResponse = {
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  data: {};
+};
+
 export interface SendPaymentArgs {
   paymentRequest: string;
 }
@@ -127,6 +137,8 @@ export default interface Connector {
     args: Record<string, unknown>
   ): Promise<{ data: unknown }>;
   getOAuthToken?(): OAuthToken | undefined;
+  getSwapInfo?(): Promise<SwapInfoResponse>;
+  createSwap?(params: CreateSwapParams): Promise<CreateSwapResponse>;
 }
 
 export function flattenRequestMethods(methods: string[]) {

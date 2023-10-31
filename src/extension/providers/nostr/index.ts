@@ -1,6 +1,6 @@
-import { postMessage } from "../postMessage";
-import { Event } from "./types";
 import EventEmitter from "events";
+import ProviderBase from "~/extension/providers/providerBase";
+import { Event } from "./types";
 
 declare global {
   interface Window {
@@ -8,25 +8,11 @@ declare global {
   }
 }
 
-export default class NostrProvider {
+export default class NostrProvider extends ProviderBase {
   nip04 = new Nip04(this);
-  enabled: boolean;
-  private _eventEmitter: EventEmitter;
 
   constructor() {
-    this.enabled = false;
-    this._eventEmitter = new EventEmitter();
-  }
-
-  async enable() {
-    if (this.enabled) {
-      return Promise.resolve({ enabled: true });
-    }
-    const result = await this.execute("enable");
-    if (typeof result.enabled === "boolean") {
-      this.enabled = result.enabled;
-    }
-    return result;
+    super("nostr");
   }
 
   async getPublicKey() {
@@ -49,26 +35,15 @@ export default class NostrProvider {
     return this.execute("getRelays");
   }
 
+  //override method from base class, we don't want to throw error if not enabled
   async on(...args: Parameters<EventEmitter["on"]>) {
     await this.enable();
-    this._eventEmitter.on(...args);
+    super.on(...args);
   }
 
   async off(...args: Parameters<EventEmitter["off"]>) {
     await this.enable();
-    this._eventEmitter.off(...args);
-  }
-
-  emit(...args: Parameters<EventEmitter["emit"]>) {
-    this._eventEmitter.emit(...args);
-  }
-
-  // NOTE: new call `action`s must be specified also in the content script
-  execute(
-    action: string,
-    args?: Record<string, unknown>
-  ): Promise<Record<string, unknown>> {
-    return postMessage("nostr", action, args);
+    super.off(...args);
   }
 }
 
@@ -81,11 +56,17 @@ class Nip04 {
 
   async encrypt(peer: string, plaintext: string) {
     await this.provider.enable();
-    return this.provider.execute("encryptOrPrompt", { peer, plaintext });
+    return this.provider.execute("encryptOrPrompt", {
+      peer,
+      plaintext,
+    });
   }
 
   async decrypt(peer: string, ciphertext: string) {
     await this.provider.enable();
-    return this.provider.execute("decryptOrPrompt", { peer, ciphertext });
+    return this.provider.execute("decryptOrPrompt", {
+      peer,
+      ciphertext,
+    });
   }
 }

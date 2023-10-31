@@ -1,16 +1,16 @@
 import { CaretLeftIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
-import AllowanceMenu from "@components/AllowanceMenu";
 import Header from "@components/Header";
 import IconButton from "@components/IconButton";
 import Loading from "@components/Loading";
 import Progressbar from "@components/Progressbar";
 import PublisherCard from "@components/PublisherCard";
+import SitePreferences from "@components/SitePreferences";
 import TransactionsTable from "@components/TransactionsTable";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { FC, useEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
-import { toast } from "react-toastify";
+import toast from "~/app/components/Toast";
 import { useSettings } from "~/app/context/SettingsContext";
 import { PublisherLnData } from "~/app/screens/Home/PublisherLnData";
 import { convertPaymentsToTransactions } from "~/app/utils/payments";
@@ -76,57 +76,69 @@ const AllowanceView: FC<Props> = (props) => {
     showFiat,
   ]);
 
+  const hasBudget = +props.allowance.totalBudget > 0;
   return (
     <div className="overflow-y-auto no-scrollbar h-full">
       <Header
-        title={props.allowance.host}
         headerLeft={
           <IconButton
             onClick={props.onGoBack}
             icon={<CaretLeftIcon className="w-4 h-4" />}
           />
         }
-      />
-      {props.lnDataFromCurrentTab?.length ? (
-        <PublisherLnData lnData={props.lnDataFromCurrentTab[0]} />
-      ) : (
-        <div className="mx-4">
+      >
+        {props.allowance.host}
+      </Header>
+      {props.allowance ? (
+        <div className="relative mx-4">
           <PublisherCard
             title={props.allowance.name}
             image={props.allowance.imageURL}
             isCard={true}
             isSmall={false}
           />
-        </div>
-      )}
-      <div className="px-4 pb-5">
-        <div className="flex justify-between items-center py-3">
-          <dl className="mb-0">
-            <dt className="text-xs text-gray-500 dark:text-neutral-400">
-              {t("allowance_view.allowance")}
-            </dt>
-            <dd className="flex items-center mb-0 text-sm font-medium dark:text-neutral-400">
-              {+props.allowance.totalBudget > 0
-                ? `${getFormattedNumber(
-                    props.allowance.usedBudget
-                  )} / ${getFormattedNumber(props.allowance.totalBudget)} `
-                : "0 / 0 "}
-              {t("allowance_view.sats_used")}
-              <div className="ml-3 w-24">
-                <Progressbar percentage={props.allowance.percentage} />
-              </div>
-            </dd>
-          </dl>
-
-          <div className="flex items-center">
-            <AllowanceMenu
+          <div className="absolute top-1.5 right-1.5">
+            <SitePreferences
+              launcherType="icon"
               allowance={props.allowance}
               onEdit={props.onEditComplete}
               onDelete={props.onDeleteComplete}
             />
           </div>
         </div>
-
+      ) : (
+        props.lnDataFromCurrentTab && (
+          <PublisherLnData lnData={props.lnDataFromCurrentTab[0]} />
+        )
+      )}
+      <div className="px-4 pb-5">
+        {hasBudget ? (
+          <div className="flex flex-col py-4">
+            <dl className="mb-1 flex justify-between items-center">
+              <dt className="text-black font-medium dark:text-neutral-400">
+                {t("allowance_view.budget_spent")}
+              </dt>
+              <dd className="text-sm text-gray-600">
+                {hasBudget
+                  ? `${getFormattedNumber(
+                      props.allowance.usedBudget
+                    )} / ${getFormattedNumber(props.allowance.totalBudget)} `
+                  : "0 / 0 "}
+                {t("allowance_view.sats")}
+              </dd>
+            </dl>
+            <Progressbar percentage={props.allowance.percentage} />
+          </div>
+        ) : (
+          <div className="my-6 text-center text-sm">
+            <SitePreferences
+              launcherType="hyperlink"
+              allowance={props.allowance}
+              onEdit={props.onEditComplete}
+              onDelete={props.onDeleteComplete}
+            />
+          </div>
+        )}
         <h2 className="mb-2 text-lg text-gray-900 font-bold dark:text-white">
           {t("allowance_view.recent_transactions")}
         </h2>

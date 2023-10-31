@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 import { useCallback, useState } from "react";
-import { toast } from "react-toastify";
+import toast from "~/app/components/Toast";
 import { useSettings } from "~/app/context/SettingsContext";
 import api from "~/common/lib/api";
 import { Transaction } from "~/types";

@@ -7,8 +7,8 @@ import SuccessMessage from "@components/SuccessMessage";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import ScreenHeader from "~/app/components/ScreenHeader";
+import toast from "~/app/components/Toast";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
@@ -24,15 +24,10 @@ function ConfirmSignMessage() {
 
   const message = navState.args?.message as string;
   const origin = navState.origin as OriginData;
-  //const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
 
   async function confirm() {
-    //if (rememberMe) {
-    //  await autoSign();
-    //}
-
     try {
       setLoading(true);
       const response = await msg.request(
@@ -49,10 +44,6 @@ function ConfirmSignMessage() {
       setLoading(false);
     }
   }
-
-  //function autoSign() {
-  // TODO
-  //}
 
   function reject(e: React.MouseEvent<HTMLAnchorElement>) {
     e.preventDefault();
@@ -83,26 +74,6 @@ function ConfirmSignMessage() {
               heading={t("content", { host: origin.host })}
               content={message}
             />
-            {/*
-              <div className="mb-8">
-                <div className="flex items-center">
-                  <Checkbox
-                    id="remember_me"
-                    name="remember_me"
-                    checked={rememberMe}
-                    onChange={(event) => {
-                      setRememberMe(event.target.checked);
-                    }}
-                  />
-                  <label
-                    htmlFor="remember_me"
-                    className="ml-2 block text-sm text-gray-900 font-medium dark:text-white"
-                  >
-                    Remember and auto sign in the future
-                  </label>
-                </div>
-              </div>
-            */}
           </div>
           <ConfirmOrCancel
             disabled={loading}

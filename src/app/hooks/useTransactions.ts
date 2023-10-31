@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { toast } from "react-toastify";
+import toast from "~/app/components/Toast";
 import { useSettings } from "~/app/context/SettingsContext";
 import { convertPaymentsToTransactions } from "~/app/utils/payments";
 import api from "~/common/lib/api";
