@@ -80,7 +80,7 @@ class CitadelConnector implements Connector {
   // not yet implemented
   async getInvoices(): Promise<GetInvoicesResponse> {
     console.error(
-      `Not yet supported with the currently used account: ${this.constructor.name}`
+      `getInvoices() is not yet supported with the currently used account: ${this.constructor.name}`
     );
     throw new Error(
       `${this.constructor.name}: "getInvoices" is not yet supported. Contact us if you need it.`
@@ -89,7 +89,7 @@ class CitadelConnector implements Connector {
 
   async getTransactions(): Promise<GetTransactionsResponse> {
     console.error(
-      `Not yet supported with the currently used account: ${this.constructor.name}`
+      `getTransactions() is not yet supported with the currently used account: ${this.constructor.name}`
     );
     return { data: { transactions: [] } };
   }

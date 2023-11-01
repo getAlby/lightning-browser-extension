@@ -4,7 +4,7 @@ import { Runtime } from "webextension-polyfill";
 import { ACCOUNT_CURRENCIES, CURRENCIES, TIPS } from "~/common/constants";
 import connectors from "~/extension/background-script/connectors";
 import {
-  ConnectorInvoice,
+  ConnectorTransaction,
   SendPaymentResponse,
   WebLNNode,
 } from "~/extension/background-script/connectors/connector.interface";
@@ -890,14 +890,15 @@ export type SupportedExchanges = "alby" | "coindesk" | "yadio";
 
 export interface Invoice {
   id: string;
-  memo: string;
+  memo?: string;
   type: "received" | "sent";
   settled: boolean;
   settleDate: number;
-  totalAmount: string;
+  totalAmount: number;
   totalAmountFiat?: string;
   preimage: string;
-  custom_records?: ConnectorInvoice["custom_records"];
+  paymentHash?: string;
+  custom_records?: ConnectorTransaction["custom_records"];
   boostagram?: {
     app_name: string;
     name: string;

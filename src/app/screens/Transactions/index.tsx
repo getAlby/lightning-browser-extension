@@ -11,17 +11,15 @@ function Transactions() {
     keyPrefix: "transactions",
   });
 
-  const { balancesDecorated, accountLoading } = useAccount();
-
+  const { accountLoading } = useAccount();
   const { transactions, isLoadingTransactions, loadTransactions } =
     useTransactions();
 
   const isLoading = accountLoading || isLoadingTransactions;
-  const listItems = transactions;
 
   useEffect(() => {
     loadTransactions();
-  }, [balancesDecorated?.accountBalance, loadTransactions]);
+  }, [loadTransactions]);
 
   return (
     <Container>
@@ -39,8 +37,8 @@ function Transactions() {
         </div>
       ) : (
         <div>
-          {listItems && listItems.length > 0 && (
-            <TransactionsTable transactions={listItems} />
+          {transactions && transactions.length > 0 && (
+            <TransactionsTable transactions={transactions} />
           )}
         </div>
       )}

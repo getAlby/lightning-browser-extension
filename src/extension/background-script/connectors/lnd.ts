@@ -10,7 +10,7 @@ import { Account } from "~/types";
 import Connector, {
   CheckPaymentArgs,
   CheckPaymentResponse,
-  ConnectorInvoice,
+  ConnectorTransaction,
   ConnectPeerArgs,
   ConnectPeerResponse,
   flattenRequestMethods,
@@ -415,7 +415,7 @@ class Lnd implements Connector {
           resolve_time: string;
           expiry_height: number;
           state: "SETTLED";
-          custom_records: ConnectorInvoice["custom_records"];
+          custom_records: ConnectorTransaction["custom_records"];
           mpp_total_amt_msat: string;
           amp?: unknown;
         }[];
@@ -438,20 +438,20 @@ class Lnd implements Connector {
       first_index_offset: string;
     }>("GET", "/v1/invoices", { reversed: true });
 
-    const invoices: ConnectorInvoice[] = data.invoices
-      .map((invoice, index): ConnectorInvoice => {
+    const invoices: ConnectorTransaction[] = data.invoices
+      .map((invoice, index): ConnectorTransaction => {
         const custom_records =
           invoice.htlcs[0] && invoice.htlcs[0].custom_records;
 
         return {
-          custom_records,
           id: `${invoice.payment_request}-${index}`,
           memo: invoice.memo,
           preimage: invoice.r_preimage,
           settled: invoice.settled,
           settleDate: parseInt(invoice.settle_date) * 1000,
-          totalAmount: invoice.value,
+          totalAmount: parseInt(invoice.value),
           type: "received",
+          custom_records,
         };
       })
       .sort((a, b) => {
@@ -466,16 +466,30 @@ class Lnd implements Connector {
   }
 
   async getTransactions(): Promise<GetTransactionsResponse> {
-    let index = 100;
-    // incoming invoices return 0-99 entries by default
-    const incomingInvoices = await this.getInvoices();
+    const invoices = await this.getInvoices();
+    const payments = await this.getPayments();
 
-    const outgoingInvoicesResponse = await this.request<{
+    const transactions: ConnectorTransaction[] = [
+      ...invoices.data.invoices,
+      ...payments,
+    ].sort((a, b) => {
+      return b.settleDate - a.settleDate;
+    });
+
+    return {
+      data: {
+        transactions,
+      },
+    };
+  }
+
+  private async getPayments() {
+    const lndPayments = await this.request<{
       payments: {
         payment_hash: string;
         payment_preimage: string;
-        value_sat: string;
-        value_msat: string;
+        value_sat: number;
+        value_msat: number;
         payment_request: string;
         status: string;
         fee_sat: string;
@@ -495,39 +509,30 @@ class Lnd implements Connector {
       include_incomplete: false,
     });
 
-    const outgoingInvoices: ConnectorInvoice[] =
-      outgoingInvoicesResponse.payments.map((payment, _): ConnectorInvoice => {
-        let memo = "Sent";
+    const payments: ConnectorTransaction[] = lndPayments.payments.map(
+      (payment, index): ConnectorTransaction => {
+        let description: string | undefined;
         if (payment.payment_request) {
-          memo = (
-            lightningPayReq
-              .decode(payment.payment_request)
-              .tags.find((tag) => tag.tagName === "description")?.data || "Sent"
-          ).toString();
+          description = lightningPayReq
+            .decode(payment.payment_request)
+            .tags.find((tag) => tag.tagName === "description")
+            ?.data.toString();
         }
+
         return {
           id: `${payment.payment_request}-${index++}`,
-          memo: memo,
+          memo: description,
           preimage: payment.payment_preimage,
+          payment_hash: payment.payment_hash,
           settled: true,
           settleDate: parseInt(payment.creation_date) * 1000,
           totalAmount: payment.value_sat,
           type: "sent",
         };
-      });
+      }
+    );
 
-    const transactions: ConnectorInvoice[] = [
-      ...incomingInvoices.data.invoices,
-      ...outgoingInvoices,
-    ].sort((a, b) => {
-      return b.settleDate - a.settleDate;
-    });
-
-    return {
-      data: {
-        transactions,
-      },
-    };
+    return payments;
   }
 
   protected async request<Type>(

@@ -5,7 +5,7 @@ import { Account } from "~/types";
 import Connector, {
   CheckPaymentArgs,
   CheckPaymentResponse,
-  ConnectorInvoice,
+  ConnectorTransaction,
   ConnectPeerResponse,
   GetBalanceResponse,
   GetInfoResponse,
@@ -76,7 +76,7 @@ class Eclair implements Connector {
 
   async getInvoices(): Promise<GetInvoicesResponse> {
     const response = await this.request("/listinvoices");
-    const invoices: ConnectorInvoice[] = response
+    const invoices: ConnectorTransaction[] = response
       .map(
         (invoice: {
           paymentHash: string;
@@ -85,6 +85,7 @@ class Eclair implements Connector {
           amount: number;
         }) => ({
           id: invoice.paymentHash,
+          payment_hash: invoice.paymentHash,
           memo: invoice.description,
           settled: true,
           settleDate: invoice.timestamp * 1000,
@@ -92,7 +93,7 @@ class Eclair implements Connector {
           type: "received",
         })
       )
-      .sort((a: ConnectorInvoice, b: ConnectorInvoice) => {
+      .sort((a: ConnectorTransaction, b: ConnectorTransaction) => {
         return b.settleDate - a.settleDate;
       });
     return {
@@ -104,7 +105,7 @@ class Eclair implements Connector {
 
   async getTransactions(): Promise<GetTransactionsResponse> {
     console.error(
-      `Not yet supported with the currently used account: ${this.constructor.name}`
+      `getTransactions() is not yet supported with the currently used account: ${this.constructor.name}`
     );
     return { data: { transactions: [] } };
   }

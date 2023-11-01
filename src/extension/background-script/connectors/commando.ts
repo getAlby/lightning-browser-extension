@@ -7,7 +7,7 @@ import { Account } from "~/types";
 import Connector, {
   CheckPaymentArgs,
   CheckPaymentResponse,
-  ConnectorInvoice,
+  ConnectorTransaction,
   ConnectPeerArgs,
   ConnectPeerResponse,
   flattenRequestMethods,
@@ -227,14 +227,15 @@ export default class Commando implements Connector {
           data: {
             invoices: parsed.invoices
               .map(
-                (invoice, index): ConnectorInvoice => ({
+                (invoice, index): ConnectorTransaction => ({
                   id: invoice.label,
                   memo: invoice.description,
                   settled: invoice.status === "paid",
                   preimage: invoice.payment_preimage,
+                  payment_hash: invoice.payment_hash,
                   settleDate: invoice.paid_at * 1000,
                   type: "received",
-                  totalAmount: (invoice.msatoshi / 1000).toString(),
+                  totalAmount: Math.floor(invoice.msatoshi / 1000),
                 })
               )
               .filter((invoice) => invoice.settled)
@@ -248,34 +249,9 @@ export default class Commando implements Connector {
 
   async getTransactions(): Promise<GetTransactionsResponse> {
     const incomingInvoicesResponse = await this.getInvoices();
-    const outgoingInvoicesResponse = await this.ln
-      .commando({
-        method: "listsendpays",
-        params: {},
-        rune: this.config.rune,
-      })
-      .then((resp) => {
-        const parsed = resp as CommandoListSendPaysResponse;
-        return {
-          data: {
-            payments: parsed.payments
-              .map(
-                (payment, index): ConnectorInvoice => ({
-                  id: `${payment.id}`,
-                  memo: payment.description || "Sent",
-                  settled: payment.status === "complete",
-                  preimage: payment.payment_preimage,
-                  settleDate: payment.created_at * 1000,
-                  type: "sent",
-                  totalAmount: (payment.amount_sent_msat / 1000).toString(),
-                })
-              )
-              .filter((payment) => payment.settled),
-          },
-        };
-      });
+    const outgoingInvoicesResponse = await this.getPayments();
 
-    const transactions: ConnectorInvoice[] = [
+    const transactions: ConnectorTransaction[] = [
       ...incomingInvoicesResponse.data.invoices,
       ...outgoingInvoicesResponse.data.payments,
     ].sort((a, b) => {
@@ -287,6 +263,36 @@ export default class Commando implements Connector {
         transactions,
       },
     };
+  }
+
+  private async getPayments() {
+    return await this.ln
+      .commando({
+        method: "listsendpays",
+        params: {},
+        rune: this.config.rune,
+      })
+      .then((resp) => {
+        const parsed = resp as CommandoListSendPaysResponse;
+        return {
+          data: {
+            payments: parsed.payments
+              .map(
+                (payment, index): ConnectorTransaction => ({
+                  id: `${payment.id}`,
+                  memo: payment.description ?? "",
+                  settled: payment.status === "complete",
+                  preimage: payment.payment_preimage,
+                  payment_hash: payment.payment_hash,
+                  settleDate: payment.created_at * 1000,
+                  type: "sent",
+                  totalAmount: payment.amount_sent_msat / 1000,
+                })
+              )
+              .filter((payment) => payment.settled),
+          },
+        };
+      });
   }
 
   async getInfo(): Promise<GetInfoResponse> {

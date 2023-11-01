@@ -17,6 +17,7 @@ export const useTransactions = () => {
           isSettled: true,
           limit,
         });
+
         const transactions = getTransactionsResponse.transactions.map(
           (transaction) => ({
             ...transaction,
@@ -33,15 +34,7 @@ export const useTransactions = () => {
             : "";
         }
 
-        // Sort the final list by date in descending order.
-        transactions.sort((a, b) => {
-          const dateA = a.timestamp;
-          const dateB = b.timestamp;
-          return dateB - dateA;
-        });
-
         setTransactions(transactions);
-
         setIsLoadingTransactions(false);
       } catch (e) {
         console.error(e);

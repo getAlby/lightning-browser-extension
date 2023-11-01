@@ -15,7 +15,7 @@ import state from "../state";
 import Connector, {
   CheckPaymentArgs,
   CheckPaymentResponse,
-  ConnectorInvoice,
+  ConnectorTransaction,
   ConnectPeerResponse,
   GetBalanceResponse,
   GetInfoResponse,
@@ -94,15 +94,16 @@ export default class Alby implements Connector {
       client.incomingInvoices({})
     )) as Invoice[];
 
-    const invoices: ConnectorInvoice[] = incomingInvoices.map(
-      (invoice, index): ConnectorInvoice => ({
+    const invoices: ConnectorTransaction[] = incomingInvoices.map(
+      (invoice, index): ConnectorTransaction => ({
         custom_records: invoice.custom_records,
         id: `${invoice.payment_request}-${index}`,
+        payment_hash: invoice.payment_hash,
         memo: invoice.comment || invoice.memo,
         preimage: "", // alby wallet api doesn't support preimage (yet)
         settled: invoice.settled,
         settleDate: new Date(invoice.settled_at).getTime(),
-        totalAmount: `${invoice.amount}`,
+        totalAmount: invoice.amount,
         type: "received",
       })
     );
@@ -118,15 +119,16 @@ export default class Alby implements Connector {
       client.invoices({})
     )) as Invoice[];
 
-    const transactions: ConnectorInvoice[] = invoicesResponse.map(
-      (invoice, index): ConnectorInvoice => ({
+    const transactions: ConnectorTransaction[] = invoicesResponse.map(
+      (invoice, index): ConnectorTransaction => ({
         custom_records: invoice.custom_records,
         id: `${invoice.payment_request}-${index}`,
         memo: invoice.comment || invoice.memo,
         preimage: "", // alby wallet api doesn't support preimage (yet)
+        payment_hash: invoice.payment_hash,
         settled: invoice.settled,
         settleDate: new Date(invoice.settled_at).getTime(),
-        totalAmount: `${invoice.amount}`,
+        totalAmount: invoice.amount,
         type: invoice.type == "incoming" ? "received" : "sent",
       })
     );

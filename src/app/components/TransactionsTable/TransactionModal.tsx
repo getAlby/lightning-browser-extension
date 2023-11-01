@@ -7,7 +7,7 @@ import {
   ArrowUpIcon,
 } from "@bitcoin-design/bitcoin-icons-react/outline";
 import dayjs from "dayjs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Hyperlink from "~/app/components/Hyperlink";
 import Modal from "~/app/components/Modal";
@@ -37,6 +37,10 @@ export default function TransactionModal({
     setShowMoreFields(!showMoreFields);
   }
 
+  useEffect(() => {
+    setShowMoreFields(false);
+  }, [transaction]);
+
   function getTransactionType(tx: Transaction): "incoming" | "outgoing" {
     return [tx.type && "sent", "sending"].includes(tx.type)
       ? "outgoing"
@@ -48,7 +52,6 @@ export default function TransactionModal({
       isOpen={isOpen}
       close={() => {
         onClose();
-        setShowMoreFields(false);
       }}
       contentLabel={"Transactions"}
     >
@@ -183,7 +186,7 @@ const Dt = ({ children }: { children: React.ReactNode }) => (
 );
 
 const Dd = ({ children }: { children: React.ReactNode }) => (
-  <dd className="flex-1 text-gray-800 dark:text-neutral-200 break-all">
+  <dd className="flex-1 text-gray-800 dark:text-neutral-200 break-all whitespace-pre-wrap">
     {children}
   </dd>
 );

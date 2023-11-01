@@ -17,18 +17,19 @@ interface Route {
   total_fees: number;
 }
 
-export interface ConnectorInvoice {
+export interface ConnectorTransaction {
   custom_records?: {
     "696969"?: string;
     "7629169"?: string;
     "5482373484"?: string;
   } & Record<string, string>;
   id: string;
-  memo: string;
+  memo?: string;
   preimage: string;
+  payment_hash?: string;
   settled: boolean;
   settleDate: number;
-  totalAmount: string;
+  totalAmount: number;
   type: "received" | "sent";
 }
 
@@ -57,15 +58,22 @@ export type GetBalanceResponse = {
 
 export type GetInvoicesResponse = {
   data: {
-    invoices: ConnectorInvoice[];
+    invoices: ConnectorTransaction[];
   };
 };
 
 export type GetTransactionsResponse = {
   data: {
-    transactions: ConnectorInvoice[];
+    transactions: ConnectorTransaction[];
   };
 };
+
+export type GetPaymentsResponse = {
+  data: {
+    payments: ConnectorTransaction[];
+  };
+};
+
 export type SendPaymentResponse = {
   data: {
     preimage: string;
