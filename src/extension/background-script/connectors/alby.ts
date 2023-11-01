@@ -89,7 +89,7 @@ export default class Alby implements Connector {
 
   async getInvoices(): Promise<GetInvoicesResponse> {
     const incomingInvoices = (await this._request((client) =>
-      client.incomingInvoices({})
+      client.incomingInvoices({}, this._getRequestOptions())
     )) as Invoice[];
 
     const invoices: ConnectorInvoice[] = incomingInvoices.map(
@@ -116,7 +116,7 @@ export default class Alby implements Connector {
   > {
     try {
       const info = await this._request((client) =>
-        client.accountInformation({})
+        client.accountInformation({}, this._getRequestOptions())
       );
       return {
         data: {
@@ -132,7 +132,7 @@ export default class Alby implements Connector {
 
   async getBalance(): Promise<GetBalanceResponse> {
     const { balance } = await this._request((client) =>
-      client.accountBalance({})
+      client.accountBalance({}, this._getRequestOptions())
     );
 
     return {
@@ -144,9 +144,12 @@ export default class Alby implements Connector {
 
   async sendPayment(args: SendPaymentArgs): Promise<SendPaymentResponse> {
     const data = await this._request((client) =>
-      client.sendPayment({
-        invoice: args.paymentRequest,
-      })
+      client.sendPayment(
+        {
+          invoice: args.paymentRequest,
+        },
+        this._getRequestOptions()
+      )
     );
 
     return {
@@ -160,11 +163,14 @@ export default class Alby implements Connector {
 
   async keysend(args: KeysendArgs): Promise<SendPaymentResponse> {
     const data = await this._request((client) =>
-      client.keysend({
-        destination: args.pubkey,
-        amount: args.amount,
-        customRecords: args.customRecords,
-      })
+      client.keysend(
+        {
+          destination: args.pubkey,
+          amount: args.amount,
+          customRecords: args.customRecords,
+        },
+        this._getRequestOptions()
+      )
     );
 
     return {
@@ -180,7 +186,7 @@ export default class Alby implements Connector {
     let paid = false;
     try {
       const invoice = await this._request((client) =>
-        client.getInvoice(args.paymentHash)
+        client.getInvoice(args.paymentHash, this._getRequestOptions())
       );
       paid = !!invoice?.settled;
     } catch (error) {
@@ -203,10 +209,13 @@ export default class Alby implements Connector {
 
   async makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse> {
     const data = await this._request((client) =>
-      client.createInvoice({
-        amount: parseInt(args.amount.toString()),
-        description: args.memo,
-      })
+      client.createInvoice(
+        {
+          amount: parseInt(args.amount.toString()),
+          description: args.memo,
+        },
+        this._getRequestOptions()
+      )
     );
 
     return {
@@ -218,12 +227,16 @@ export default class Alby implements Connector {
   }
 
   async getSwapInfo(): Promise<SwapInfoResponse> {
-    const result = await this._request((client) => client.getSwapInfo());
+    const result = await this._request((client) =>
+      client.getSwapInfo(this._getRequestOptions())
+    );
     return result;
   }
 
   async createSwap(params: CreateSwapParams): Promise<CreateSwapResponse> {
-    const result = await this._request((client) => client.createSwap(params));
+    const result = await this._request((client) =>
+      client.createSwap(params, this._getRequestOptions())
+    );
     return result;
   }
 
