@@ -36,9 +36,7 @@ export default function TransactionsTable({
   }
 
   function getTransactionType(tx: Transaction): "incoming" | "outgoing" {
-    return [tx.type && "sent", "sending"].includes(tx.type)
-      ? "outgoing"
-      : "incoming";
+    return [tx.type && "sent"].includes(tx.type) ? "outgoing" : "incoming";
   }
 
   return (

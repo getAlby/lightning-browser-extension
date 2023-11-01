@@ -42,9 +42,7 @@ export default function TransactionModal({
   }, [transaction]);
 
   function getTransactionType(tx: Transaction): "incoming" | "outgoing" {
-    return [tx.type && "sent", "sending"].includes(tx.type)
-      ? "outgoing"
-      : "incoming";
+    return [tx.type && "sent"].includes(tx.type) ? "outgoing" : "incoming";
   }
 
   return (
@@ -130,12 +128,6 @@ export default function TransactionModal({
             <TransactionDetailRow
               title={t("boostagram.episode")}
               content={transaction.boostagram.episode}
-            />
-          )}
-          {transaction.description && (
-            <TransactionDetailRow
-              title={tCommon("description")}
-              content={transaction.description}
             />
           )}
           {(transaction.preimage || transaction.paymentHash) && (

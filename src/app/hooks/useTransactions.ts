@@ -22,7 +22,6 @@ export const useTransactions = () => {
           (transaction) => ({
             ...transaction,
             title: transaction.memo,
-            description: transaction.memo,
             date: dayjs(transaction.settleDate).fromNow(),
             timestamp: transaction.settleDate,
           })
