@@ -1,12 +1,8 @@
 import browser, { Runtime } from "webextension-polyfill";
 import { ABORT_PROMPT_ERROR } from "~/common/constants";
 import { getPosition as getWindowPosition } from "~/common/utils/window";
-import type {
-  DeferredPromise,
-  Invoice,
-  OriginData,
-  OriginDataInternal,
-} from "~/types";
+import { ConnectorTransaction } from "~/extension/background-script/connectors/connector.interface";
+import type { DeferredPromise, OriginData, OriginDataInternal } from "~/types";
 
 const utils = {
   base64ToHex: (str: string) => {
@@ -173,7 +169,7 @@ const utils = {
     });
   },
   getBoostagramFromInvoiceCustomRecords: (
-    custom_records: Invoice["custom_records"] | undefined
+    custom_records: ConnectorTransaction["custom_records"] | undefined
   ) => {
     try {
       let boostagramDecoded: string | undefined;

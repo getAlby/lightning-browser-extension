@@ -1,6 +1,7 @@
 import utils from "~/common/lib/utils";
+import { ConnectorTransaction } from "~/extension/background-script/connectors/connector.interface";
 import state from "~/extension/background-script/state";
-import type { Invoice, MessageTransactions } from "~/types";
+import type { MessageTransactions } from "~/types";
 
 const transactions = async (message: MessageTransactions) => {
   const isSettled = message.args.isSettled;
@@ -10,7 +11,7 @@ const transactions = async (message: MessageTransactions) => {
   try {
     const result = await connector.getTransactions();
 
-    let transactions: Invoice[] = result.data.transactions
+    let transactions: ConnectorTransaction[] = result.data.transactions
       .filter((transaction) =>
         isSettled ? transaction.settled : !transaction.settled
       )

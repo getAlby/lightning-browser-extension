@@ -157,7 +157,10 @@ export default class LndHub implements Connector {
         fee: string;
         keysend: boolean;
         memo: string;
-        payment_hash: string;
+        payment_hash: {
+          type: string;
+          data: ArrayBuffer;
+        };
         payment_preimage: string;
         r_hash: {
           type: "Buffer";
@@ -175,7 +178,9 @@ export default class LndHub implements Connector {
         id: `${index}`,
         memo: transaction.memo,
         preimage: transaction.payment_preimage,
-        payment_hash: transaction.payment_hash,
+        payment_hash: Buffer.from(transaction.payment_hash.data).toString(
+          "hex"
+        ),
         settled: true,
         settleDate: transaction.timestamp * 1000,
         totalAmount: transaction.value,
