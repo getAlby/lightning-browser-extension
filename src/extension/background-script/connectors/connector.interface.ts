@@ -69,6 +69,11 @@ export type SendPaymentResponse = {
   };
 };
 
+export type SendPaymentAsyncResponse = {
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  data: {};
+};
+
 export interface SendPaymentArgs {
   paymentRequest: string;
 }

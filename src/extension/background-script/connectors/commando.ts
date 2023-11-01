@@ -148,6 +148,7 @@ export default class Commando implements Connector {
       "keysend",
       "makeInvoice",
       "sendPayment",
+      "sendPaymentAsync",
       "signMessage",
       "getBalance",
       ...flattenRequestMethods(supportedMethods),

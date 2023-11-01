@@ -2,6 +2,39 @@
 
 # Extract version from package.json
 VERSION=$(node -pe "require('./package.json').version")
+NODE_ENV=production
+
+if [ -z ${ALBY_OAUTH_CLIENT_ID_CHROME+x} ];
+then
+    echo "OAuth client id for Chrome:"
+    read ALBY_OAUTH_CLIENT_ID_CHROME
+fi
+
+if [ -z ${ALBY_OAUTH_CLIENT_SECRET_CHROME+x} ];
+then
+    echo "OAuth client secret for Chrome:"
+    read ALBY_OAUTH_CLIENT_SECRET_CHROME
+fi
+
+if [ -z ${ALBY_OAUTH_CLIENT_ID_FIREFOX+x} ];
+then
+    echo "OAuth client id for Firefox:"
+    read ALBY_OAUTH_CLIENT_ID_FIREFOX
+fi
+
+if [ -z ${ALBY_OAUTH_CLIENT_SECRET_FIREFOX+x} ];
+then
+    echo "OAuth client secret for Firefox:"
+    read ALBY_OAUTH_CLIENT_SECRET_FIREFOX
+fi
+
+if [ -z ${ALBY_API_URL+x} ];
+then
+    ALBY_API_URL="https://api.getalby.com"
+fi
+
+echo "Creating the build for v$VERSION"
+yarn build
 
 echo "Creating zip packages for v$VERSION"
 cd dist/production

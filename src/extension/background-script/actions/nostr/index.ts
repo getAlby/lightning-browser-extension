@@ -7,6 +7,7 @@ import generatePrivateKey from "./generatePrivateKey";
 import getPrivateKey from "./getPrivateKey";
 import getPublicKeyOrPrompt from "./getPublicKeyOrPrompt";
 import getRelays from "./getRelays";
+import isEnabled from "./isEnabled";
 import removePrivateKey from "./removePrivateKey";
 import setPrivateKey from "./setPrivateKey";
 import signEventOrPrompt from "./signEventOrPrompt";
@@ -21,6 +22,7 @@ export {
   getPublicKey,
   getPublicKeyOrPrompt,
   getRelays,
+  isEnabled,
   removePrivateKey,
   setPrivateKey,
   signEventOrPrompt,
