@@ -616,34 +616,6 @@
         },
         "title": "Bitcoin Jungle Wallet"
       },
-      "kollider": {
-        "title": "Kollider",
-        "description": "เข้าสู่ระบบ บัญชี Kollider ของคุณ",
-        "warning": "⚠️ โปรดตรวจสอบให้แน่ใจว่าคุณจัดเก็บข้อมูล credentials ของคุณอย่างปลอดภัยใน password manager หากไม่มี credentials บัญชีของคุณจะไม่สามารถกู้คืนได้",
-        "errors": {
-          "registration_limit_exceeded": "การลงทะเบียนถึงขีดจำกัด โปรดลองอีกครั้งในภายหลัง",
-          "connection_failed": "เกิดข้อผิดพลาดในการเชื่อมต่อ โปรดตรวจสอบข้อมูลบัญชีของคุณว่าถูกต้องหรือไม่ ?",
-          "user_already_exists": "มีชื่อผู้ใช้นี้อยู่แล้ว"
-        },
-        "choose_path": {
-          "title": "เชื่อมต่อกับ Kollider Wallet ของคุณ",
-          "description": "เข้าสู่ระบบ หรือ สมัครบัญชี Kollider เพื่อเชื่อมต่อกับ Alby",
-          "create_new": "สมัครใช้งาน"
-        },
-        "create": {
-          "title": "สร้างบัญชี Kollider และเชื่อมต่อกับ Alby",
-          "description": "สร้างบัญชี Kollider เพื่อ ส่ง, รับ และแลกเปลี่ยน Bitcoin"
-        },
-        "login": {
-          "title": "เชื่อมต่อกับบัญชี Kollider ของคุณ"
-        },
-        "username": {
-          "label": "ชื่อผู้ใช้"
-        },
-        "currency": {
-          "label": "เลือกสกุลเงินในบัญชีของคุณ"
-        }
-      },
       "btcpay": {
         "page": {
           "instructions": "ไปที่ BTCPayServer ของคุณและลงชื่อเข้าใช้ในฐานะผู้ดูแลระบบ ไปที่ Server Settings > Services > LND Rest - ดูข้อมูล จากนั้นคลิก \"See QR code information\" และ คัดลอก QR Code มาวางไว้ด้านล่าง:",

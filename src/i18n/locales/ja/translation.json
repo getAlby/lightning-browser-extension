@@ -250,34 +250,6 @@
           "invalid_token": "無効なアクセストークンです"
         }
       },
-      "kollider": {
-        "warning": "⚠️ 認証情報は必ずパスワードマネージャーに保存してください。認証情報を紛失した場合、アカウントを復元することはできません。",
-        "title": "Kollider",
-        "choose_path": {
-          "create_new": "新規登録",
-          "title": "Koliderウォレットに接続",
-          "description": "ログインまたはKoliderアカウントを新規作成して、Albyに接続してください。"
-        },
-        "create": {
-          "title": "Koliderアカウントを作成してAlbyと接続",
-          "description": "新しいKolliderアカウントを作成し、ビットコインの送受金と取引を始める。"
-        },
-        "description": "Koliderアカウントにログイン",
-        "username": {
-          "label": "ユーザ名"
-        },
-        "errors": {
-          "user_already_exists": "ユーザー名は既に存在します",
-          "registration_limit_exceeded": "登録制限を超えました。しばらくしてからお試しください。",
-          "connection_failed": "接続に失敗しました。アカウントデータは正しいですか？"
-        },
-        "login": {
-          "title": "Kolliderアカウントに接続"
-        },
-        "currency": {
-          "label": "通貨アカウントを選択"
-        }
-      },
       "btcpay": {
         "page": {
           "title": "BTCPay LNDノードに接続",

@@ -20,7 +20,7 @@ describe("get blocked site", () => {
         internal: true,
       },
       args: {
-        host: "pro.kollider.xyz",
+        host: "getalby.com",
       },
     };
 

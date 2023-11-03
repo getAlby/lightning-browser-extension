@@ -250,34 +250,6 @@
           "invalid_token": "invalid Access token passed"
         }
       },
-      "kollider": {
-        "title": "Kollider",
-        "description": "Login to your Kollider account",
-        "warning": "⚠️ Please make sure you store your credentials securely in a password manager. Without these credentials your account will not be recoverable.",
-        "choose_path": {
-          "title": "Connect to your Kollider Wallet",
-          "description": "Login or sign up for a new Kollider account and connect to Alby.",
-          "create_new": "Sign up"
-        },
-        "create": {
-          "title": "Create your Kollider account and connect to Alby",
-          "description": "Create a new Kollider account to send, receive and trade Bitcoin."
-        },
-        "login": {
-          "title": "Connect to your Kollider account"
-        },
-        "username": {
-          "label": "Username"
-        },
-        "currency": {
-          "label": "Select your currency account"
-        },
-        "errors": {
-          "connection_failed": "Connection failed. Are you sure the account data is correct?",
-          "user_already_exists": "Username already exists",
-          "registration_limit_exceeded": "Registration limit exceeded, try after sometime."
-        }
-      },
       "btcpay": {
         "title": "BTCPay Server",
         "page": {

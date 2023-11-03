@@ -261,38 +261,6 @@
           "placeholder": "秘密的堆聪短语",
           "label": "你的配对短语 "
         }
-      },
-      "kollider": {
-        "title": "Kollider",
-        "description": "登录你的Kollider帐户",
-        "username": {
-          "label": "用户名"
-        },
-        "currency": {
-          "label": "选择你的货币帐户"
-        },
-        "errors": {
-          "connection_failed": "连接失败。你确定帐户数据是正确的吗？",
-          "user_already_exists": "用户名已存在",
-          "registration_limit_exceeded": "超过了注册限制，请稍后再试。"
-        },
-        "choose_path": {
-          "create_new": "注册",
-          "description": "登录或注册一个新的Kollider帐户并连接到Alby。",
-          "title": "连接到你的Kollider钱包"
-        },
-        "create": {
-          "title": "创建你的Kollider帐户并连接到Alby",
-          "description": "创建一个新的Kollider帐户来发送、接收和交易比特币。"
-        },
-        "login": {
-          "title": "连接到你的Kollider帐户"
-        },
-        "warning": "⚠️ 请确保你将你的凭证安全地保存在密码管理器中。没有这些凭证，你的帐户将无法恢复。"
-      },
-      "title": "连接闪电钱包",
-      "umbrel_lightning_node": {
-        "title": "闪电节点"
       }
     },
     "home": {
