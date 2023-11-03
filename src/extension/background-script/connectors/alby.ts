@@ -254,11 +254,15 @@ export default class Alby implements Connector {
         token: this.config.oAuthToken, // initialize with existing token
       });
 
-      authClient.on("tokenRefreshed", async (token: Token) => {
-        await this._updateOAuthToken(token);
+      //// Currently the JS SDK guarantees request of a new refresh token is done synchronously.
+      // The only way a refresh should fail is if the refresh token has expired, which is handled when the connector is initialized.
+      // If a token refresh fails after init then the connector will be unusable, but we will still log errors here so that this can be debugged if it does ever happen.
+
+      authClient.on("tokenRefreshed", (token: Token) => {
+        this._updateOAuthToken(token);
       });
 
-      authClient.on("tokenRefreshFailed", async (error: Error) => {
+      authClient.on("tokenRefreshFailed", (error: Error) => {
         console.error("Failed to Refresh token", error);
       });
 
