@@ -13,7 +13,6 @@ import Connector, {
   ConnectPeerResponse,
   GetBalanceResponse,
   GetInfoResponse,
-  GetInvoicesResponse,
   GetTransactionsResponse,
   KeysendArgs,
   MakeInvoiceArgs,
@@ -101,52 +100,6 @@ class LnBits implements Connector {
       }
     ]
   */
-  async getInvoices(): Promise<GetInvoicesResponse> {
-    return this.request(
-      "GET",
-      "/api/v1/payments",
-      this.config.adminkey,
-      undefined
-    ).then(
-      (
-        data: {
-          checking_id: string;
-          pending: boolean;
-          amount: number;
-          fee: number;
-          memo: string;
-          time: number;
-          bolt11: string;
-          preimage: string;
-          payment_hash: string;
-          wallet_id: string;
-          webhook: string;
-          webhook_status: string;
-        }[]
-      ) => {
-        const invoices: ConnectorTransaction[] = data
-          .filter((invoice) => invoice.amount > 0)
-          .map((invoice, index): ConnectorTransaction => {
-            return {
-              id: `${invoice.checking_id}-${index}`,
-              memo: invoice.memo,
-              preimage: invoice.preimage,
-              payment_hash: invoice.payment_hash,
-              settled: !invoice.pending,
-              settleDate: invoice.time * 1000,
-              totalAmount: Math.floor(invoice.amount / 1000),
-              type: "received",
-            };
-          });
-
-        return {
-          data: {
-            invoices,
-          },
-        };
-      }
-    );
-  }
 
   getTransactions(): Promise<GetTransactionsResponse> {
     return this.request(

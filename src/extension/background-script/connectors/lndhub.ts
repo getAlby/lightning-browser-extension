@@ -10,6 +10,7 @@ import utils from "~/common/lib/utils";
 import HashKeySigner from "~/common/utils/signer";
 import { Account } from "~/types";
 
+import { mergeTransactions } from "~/common/utils/helpers";
 import state from "../state";
 import Connector, {
   CheckPaymentArgs,
@@ -18,7 +19,6 @@ import Connector, {
   ConnectPeerResponse,
   GetBalanceResponse,
   GetInfoResponse,
-  GetInvoicesResponse,
   GetTransactionsResponse,
   KeysendArgs,
   MakeInvoiceArgs,
@@ -86,7 +86,7 @@ export default class LndHub implements Connector {
     throw new Error("Not yet supported with the currently used account.");
   }
 
-  async getInvoices(): Promise<GetInvoicesResponse> {
+  private async getInvoices(): Promise<ConnectorTransaction[]> {
     const data = await this.request<
       {
         r_hash: {
@@ -125,23 +125,17 @@ export default class LndHub implements Connector {
         return b.settleDate - a.settleDate;
       });
 
-    return {
-      data: {
-        invoices,
-      },
-    };
+    return invoices;
   }
 
   async getTransactions(): Promise<GetTransactionsResponse> {
     const incomingInvoices = await this.getInvoices();
     const outgoingInvoices = await this.getPayments();
 
-    const transactions: ConnectorTransaction[] = [
-      ...incomingInvoices.data.invoices,
-      ...outgoingInvoices,
-    ].sort((a, b) => {
-      return b.settleDate - a.settleDate;
-    });
+    const transactions: ConnectorTransaction[] = mergeTransactions(
+      incomingInvoices,
+      outgoingInvoices
+    );
 
     return {
       data: {

@@ -19,7 +19,6 @@ import Connector, {
   ConnectPeerResponse,
   GetBalanceResponse,
   GetInfoResponse,
-  GetInvoicesResponse,
   GetTransactionsResponse,
   KeysendArgs,
   MakeInvoiceArgs,
@@ -87,31 +86,6 @@ export default class Alby implements Connector {
       `${this.constructor.name} does not implement the connectPeer call`
     );
     throw new Error("Not yet supported with the currently used account.");
-  }
-
-  async getInvoices(): Promise<GetInvoicesResponse> {
-    const incomingInvoices = (await this._request((client) =>
-      client.incomingInvoices({})
-    )) as Invoice[];
-
-    const invoices: ConnectorTransaction[] = incomingInvoices.map(
-      (invoice, index): ConnectorTransaction => ({
-        custom_records: invoice.custom_records,
-        id: `${invoice.payment_request}-${index}`,
-        payment_hash: invoice.payment_hash,
-        memo: invoice.comment || invoice.memo,
-        preimage: "", // alby wallet api doesn't support preimage (yet)
-        settled: invoice.settled,
-        settleDate: new Date(invoice.settled_at).getTime(),
-        totalAmount: invoice.amount,
-        type: "received",
-      })
-    );
-    return {
-      data: {
-        invoices,
-      },
-    };
   }
 
   async getTransactions(): Promise<GetTransactionsResponse> {

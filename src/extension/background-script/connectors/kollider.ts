@@ -11,11 +11,9 @@ import { Account } from "~/types";
 import Connector, {
   CheckPaymentArgs,
   CheckPaymentResponse,
-  ConnectorTransaction,
   ConnectPeerResponse,
   GetBalanceResponse,
   GetInfoResponse,
-  GetInvoicesResponse,
   GetTransactionsResponse,
   KeysendArgs,
   MakeInvoiceArgs,
@@ -84,55 +82,6 @@ export default class Kollider implements Connector {
       `${this.constructor.name} does not implement the connectPeer call`
     );
     throw new Error("Not yet supported with the currently used account.");
-  }
-
-  async getInvoices(): Promise<GetInvoicesResponse> {
-    const data = await this.request<
-      {
-        account_id: string;
-        add_index: number;
-        created_at: number;
-        currency: KolliderCurrencies;
-        expiry: number;
-        fees: null; // FIXME! Why is this null?
-        incoming: boolean;
-        owner: number;
-        payment_hash: string;
-        payment_request: string;
-        reference: string;
-        settled: boolean;
-        settled_date: number;
-        target_account_currency: KolliderCurrencies;
-        uid: number;
-        value: number;
-        value_msat: number;
-      }[]
-    >("GET", "/getuserinvoices", undefined);
-
-    const invoices: ConnectorTransaction[] = data
-      .filter((i) => i.incoming)
-      .filter((i) => i.account_id === this.currentAccountId)
-      .map(
-        (invoice, index): ConnectorTransaction => ({
-          id: `${invoice.payment_hash}-${index}`,
-          payment_hash: invoice.payment_hash,
-          memo: invoice.reference,
-          preimage: "", // kollider doesn't support preimage (yet)
-          settled: invoice.settled,
-          settleDate: invoice.settled_date,
-          totalAmount: invoice.value,
-          type: "received",
-        })
-      )
-      .sort((a, b) => {
-        return b.settleDate - a.settleDate;
-      });
-
-    return {
-      data: {
-        invoices,
-      },
-    };
   }
 
   async getTransactions(): Promise<GetTransactionsResponse> {

@@ -56,12 +56,6 @@ export type GetBalanceResponse = {
   };
 };
 
-export type GetInvoicesResponse = {
-  data: {
-    invoices: ConnectorTransaction[];
-  };
-};
-
 export type GetTransactionsResponse = {
   data: {
     transactions: ConnectorTransaction[];

@@ -10,6 +10,7 @@ import { encryptData } from "~/common/lib/crypto";
 import utils from "~/common/lib/utils";
 import { Account } from "~/types";
 
+import { mergeTransactions } from "~/common/utils/helpers";
 import state from "../state";
 import Connector, {
   CheckPaymentArgs,
@@ -19,7 +20,6 @@ import Connector, {
   flattenRequestMethods,
   GetBalanceResponse,
   GetInfoResponse,
-  GetInvoicesResponse,
   GetTransactionsResponse,
   KeysendArgs,
   MakeInvoiceArgs,
@@ -244,7 +244,7 @@ class Lnc implements Connector {
     });
   }
 
-  async getInvoices(): Promise<GetInvoicesResponse> {
+  private async getInvoices(): Promise<ConnectorTransaction[]> {
     this.checkConnection();
     const data = await this.lnc.lnd.lightning.ListInvoices({ reversed: true });
 
@@ -266,23 +266,17 @@ class Lnc implements Connector {
       })
       .reverse();
 
-    return {
-      data: {
-        invoices,
-      },
-    };
+    return invoices;
   }
 
   async getTransactions(): Promise<GetTransactionsResponse> {
     const incomingInvoices = await this.getInvoices();
     const outgoingInvoices = await this.getPayments();
 
-    const transactions: ConnectorTransaction[] = [
-      ...incomingInvoices.data.invoices,
-      ...outgoingInvoices,
-    ].sort((a, b) => {
-      return b.settleDate - a.settleDate;
-    });
+    const transactions: ConnectorTransaction[] = mergeTransactions(
+      incomingInvoices,
+      outgoingInvoices
+    );
 
     return {
       data: {
@@ -291,7 +285,7 @@ class Lnc implements Connector {
     };
   }
 
-  private async getPayments() {
+  private async getPayments(): Promise<ConnectorTransaction[]> {
     const outgoingInvoicesResponse = await this.lnc.lnd.lightning.ListPayments({
       reversed: true,
       max_payments: 100,

@@ -9,7 +9,6 @@ import Connector, {
   ConnectPeerResponse,
   GetBalanceResponse,
   GetInfoResponse,
-  GetInvoicesResponse,
   GetTransactionsResponse,
   KeysendArgs,
   MakeInvoiceArgs,
@@ -88,14 +87,6 @@ class Galoy implements Connector {
       `${this.constructor.name} does not implement the getInvoices call`
     );
     throw new Error("Not yet supported with the currently used account.");
-  }
-
-  // not yet implemented
-  async getInvoices(): Promise<GetInvoicesResponse> {
-    console.error(
-      `getInvoices() is not yet supported with the currently used account: ${this.constructor.name}`
-    );
-    return { data: { invoices: [] } };
   }
 
   async getTransactions(): Promise<GetTransactionsResponse> {

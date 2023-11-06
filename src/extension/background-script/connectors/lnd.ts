@@ -7,6 +7,7 @@ import SHA256 from "crypto-js/sha256";
 import utils from "~/common/lib/utils";
 import { Account } from "~/types";
 
+import { mergeTransactions } from "~/common/utils/helpers";
 import Connector, {
   CheckPaymentArgs,
   CheckPaymentResponse,
@@ -16,7 +17,6 @@ import Connector, {
   flattenRequestMethods,
   GetBalanceResponse,
   GetInfoResponse,
-  GetInvoicesResponse,
   GetTransactionsResponse,
   KeysendArgs,
   MakeInvoiceArgs,
@@ -393,8 +393,8 @@ class Lnd implements Connector {
     });
   };
 
-  async getInvoices(): Promise<GetInvoicesResponse> {
-    const data = await this.request<{
+  private async getInvoices(): Promise<ConnectorTransaction[]> {
+    const lndInvoices = await this.request<{
       invoices: {
         add_index: string;
         amt_paid_msat: string;
@@ -438,8 +438,8 @@ class Lnd implements Connector {
       first_index_offset: string;
     }>("GET", "/v1/invoices", { reversed: true });
 
-    const invoices: ConnectorTransaction[] = data.invoices
-      .map((invoice, index): ConnectorTransaction => {
+    const invoices: ConnectorTransaction[] = lndInvoices.invoices.map(
+      (invoice, index): ConnectorTransaction => {
         const custom_records =
           invoice.htlcs[0] && invoice.htlcs[0].custom_records;
 
@@ -453,28 +453,20 @@ class Lnd implements Connector {
           type: "received",
           custom_records,
         };
-      })
-      .sort((a, b) => {
-        return b.settleDate - a.settleDate;
-      });
+      }
+    );
 
-    return {
-      data: {
-        invoices,
-      },
-    };
+    return invoices;
   }
 
   async getTransactions(): Promise<GetTransactionsResponse> {
     const invoices = await this.getInvoices();
     const payments = await this.getPayments();
 
-    const transactions: ConnectorTransaction[] = [
-      ...invoices.data.invoices,
-      ...payments,
-    ].sort((a, b) => {
-      return b.settleDate - a.settleDate;
-    });
+    const transactions: ConnectorTransaction[] = mergeTransactions(
+      invoices,
+      payments
+    );
 
     return {
       data: {
@@ -483,7 +475,7 @@ class Lnd implements Connector {
     };
   }
 
-  private async getPayments() {
+  private async getPayments(): Promise<ConnectorTransaction[]> {
     const lndPayments = await this.request<{
       payments: {
         payment_hash: string;

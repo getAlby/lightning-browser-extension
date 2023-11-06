@@ -5,11 +5,9 @@ import { Account } from "~/types";
 import Connector, {
   CheckPaymentArgs,
   CheckPaymentResponse,
-  ConnectorTransaction,
   ConnectPeerResponse,
   GetBalanceResponse,
   GetInfoResponse,
-  GetInvoicesResponse,
   GetTransactionsResponse,
   KeysendArgs,
   MakeInvoiceArgs,
@@ -72,35 +70,6 @@ class Eclair implements Connector {
       `${this.constructor.name} does not implement the getInvoices call`
     );
     throw new Error("Not yet supported with the currently used account.");
-  }
-
-  async getInvoices(): Promise<GetInvoicesResponse> {
-    const response = await this.request("/listinvoices");
-    const invoices: ConnectorTransaction[] = response
-      .map(
-        (invoice: {
-          paymentHash: string;
-          description: string;
-          timestamp: number;
-          amount: number;
-        }) => ({
-          id: invoice.paymentHash,
-          payment_hash: invoice.paymentHash,
-          memo: invoice.description,
-          settled: true,
-          settleDate: invoice.timestamp * 1000,
-          totalAmount: invoice.amount / 1000,
-          type: "received",
-        })
-      )
-      .sort((a: ConnectorTransaction, b: ConnectorTransaction) => {
-        return b.settleDate - a.settleDate;
-      });
-    return {
-      data: {
-        invoices: invoices,
-      },
-    };
   }
 
   async getTransactions(): Promise<GetTransactionsResponse> {
