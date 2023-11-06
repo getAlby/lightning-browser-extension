@@ -25,9 +25,9 @@ import type {
   LnurlAuthResponse,
   MessageAccountEdit,
   MessageAccountValidate,
+  MessageGetTransactions,
   MessageLnurlAuth,
   MessageSettingsSet,
-  MessageTransactions,
   NodeInfo,
   OriginData,
   PsbtPreview,
@@ -170,7 +170,7 @@ export const unlock = (password: string) =>
   msg.request<UnlockRes>("unlock", { password });
 export const getBlocklist = (host: string) =>
   msg.request<BlocklistRes>("getBlocklist", { host });
-export const getTransactions = (options?: MessageTransactions["args"]) =>
+export const getTransactions = (options?: MessageGetTransactions["args"]) =>
   msg.request<{ transactions: Invoice[] }>("getTransactions", options);
 export const lnurlAuth = (
   options: MessageLnurlAuth["args"]

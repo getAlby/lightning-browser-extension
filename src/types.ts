@@ -342,7 +342,7 @@ export interface MessageAllowanceList extends MessageDefault {
   action: "listAllowances";
 }
 
-export interface MessageTransactions extends Omit<MessageDefault, "args"> {
+export interface MessageGetTransactions extends Omit<MessageDefault, "args"> {
   args: { limit?: number; isSettled?: boolean };
   action: "getTransactions";
 }

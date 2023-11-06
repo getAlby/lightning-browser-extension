@@ -1,9 +1,9 @@
 import utils from "~/common/lib/utils";
 import { ConnectorTransaction } from "~/extension/background-script/connectors/connector.interface";
 import state from "~/extension/background-script/state";
-import type { MessageTransactions } from "~/types";
+import { MessageGetTransactions } from "~/types";
 
-const transactions = async (message: MessageTransactions) => {
+const getTransactions = async (message: MessageGetTransactions) => {
   const isSettled = message.args.isSettled;
   const limit = message.args.limit;
 
@@ -43,4 +43,4 @@ const transactions = async (message: MessageTransactions) => {
   }
 };
 
-export default transactions;
+export default getTransactions;

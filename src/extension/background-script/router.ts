@@ -30,7 +30,7 @@ const routes = {
   lock: accounts.lock,
   unlock: accounts.unlock,
   getInfo: ln.getInfo,
-  getTransactions: ln.transactions,
+  getTransactions: ln.getTransactions,
   sendPayment: ln.sendPayment,
   sendPaymentAsync: ln.sendPaymentAsync,
   keysend: ln.keysend,
