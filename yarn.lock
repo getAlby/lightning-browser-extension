@@ -666,12 +666,13 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.51.0.tgz#6d419c240cfb2b66da37df230f7e7eef801c32fa"
   integrity sha512-HxjQ8Qn+4SI3/AFv6sOrDB+g6PpUTDwSJiQqOrnneEk8L71161srI9gjzzZvYVbzHiVg/BvcH95+cK/zfIt4pg==
 
-"@getalby/sdk@^2.2.3":
-  version "2.2.3"
-  resolved "https://registry.npmjs.org/@getalby/sdk/-/sdk-2.2.3.tgz"
-  integrity sha512-8NvzGtpyne8EmRlCcg/sF3kUZWeHRXqZwS1HNuP1ytNNfmKFUZpo3GOauwzEpFFmaD+Fht5bjT3Y/XLk0QtFSw==
+"@getalby/sdk@^2.5.0":
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/@getalby/sdk/-/sdk-2.5.0.tgz#d1b0a22cbcf986755c4b684096d97f52ed0b469d"
+  integrity sha512-MRLgI6WxCCLgrar+qDqm/UhKs+V6yXzNm4y1bJRAuN72nkKT+TjTJHCmk9GjTngR3FrOfLbeMsPwBxCmbvfrLQ==
   dependencies:
     crypto-js "^4.1.1"
+    events "^3.3.0"
     nostr-tools "1.13.1"
 
 "@headlessui/react@^1.7.16":
