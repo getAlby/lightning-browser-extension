@@ -4,7 +4,6 @@ import state from "~/extension/background-script/state";
 import { MessageGetTransactions } from "~/types";
 
 const getTransactions = async (message: MessageGetTransactions) => {
-  const isSettled = message.args.isSettled;
   const limit = message.args.limit;
 
   const connector = await state.getState().getConnector();
@@ -12,9 +11,7 @@ const getTransactions = async (message: MessageGetTransactions) => {
     const result = await connector.getTransactions();
 
     let transactions: ConnectorTransaction[] = result.data.transactions
-      .filter((transaction) =>
-        isSettled ? transaction.settled : !transaction.settled
-      )
+      .filter((transaction) => transaction.settled)
       .map((transaction) => {
         const boostagram = utils.getBoostagramFromInvoiceCustomRecords(
           transaction.custom_records

@@ -14,7 +14,6 @@ export const useTransactions = () => {
     async (limit?: number) => {
       try {
         const getTransactionsResponse = await api.getTransactions({
-          isSettled: true,
           limit,
         });
 
