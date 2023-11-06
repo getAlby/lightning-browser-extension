@@ -1018,17 +1018,17 @@
   resolved "https://registry.npmjs.org/@leichtgewicht/ip-codec/-/ip-codec-2.0.3.tgz"
   integrity sha512-nkalE/f1RvRGChwBnEIoBfSEYOXnCRdleKuv6+lePbMDrMZXeDQnqak5XDOeBgrPPyPfAdcCu/B5z+v3VhplGg==
 
-"@lightninglabs/lnc-core@0.2.4-alpha":
-  version "0.2.4-alpha"
-  resolved "https://registry.npmjs.org/@lightninglabs/lnc-core/-/lnc-core-0.2.4-alpha.tgz"
-  integrity sha512-vZQJzMB5tWW/GFxUFyxrfDAGM8Q4jz55vjO4IJyp9Pk8fxBeYEyYJYF8+cJ9/9CKZ7fgX9MPp8m08oOVjJVlhQ==
+"@lightninglabs/lnc-core@0.2.8-alpha":
+  version "0.2.8-alpha"
+  resolved "https://registry.yarnpkg.com/@lightninglabs/lnc-core/-/lnc-core-0.2.8-alpha.tgz#78272c04a5ec95a9ccb830f75ab9b5ca227f0801"
+  integrity sha512-2tHzmklIiQhJiK1aabX0R2AbbWi0mizWgniCUOb573XToYQN7L61Phh+hWUCxIFfAhHCkp2mnSmX+7eT/ikxOg==
 
-"@lightninglabs/lnc-web@^0.2.4-alpha":
-  version "0.2.4-alpha"
-  resolved "https://registry.npmjs.org/@lightninglabs/lnc-web/-/lnc-web-0.2.4-alpha.tgz"
-  integrity sha512-qfoP5I8md/M08MqM6APyzjFF7xm7q6YTy6y64CVXvVkeE16NQHvPy4FK+hvxrE2ZOv6q7BSeWKaLMMA80bX6BA==
+"@lightninglabs/lnc-web@^0.2.8-alpha":
+  version "0.2.8-alpha"
+  resolved "https://registry.yarnpkg.com/@lightninglabs/lnc-web/-/lnc-web-0.2.8-alpha.tgz#454f6d68bcd8d766761f326846467000fc9c251c"
+  integrity sha512-Pe0Moupd7mglbvbVZk7GqPNxa/4lFFWWsnYtiSahzjhNCmTaoQkk/gUY8kk1u5mHaqUmrL1YgLCLsmbGbWPV/g==
   dependencies:
-    "@lightninglabs/lnc-core" "0.2.4-alpha"
+    "@lightninglabs/lnc-core" "0.2.8-alpha"
     crypto-js "4.1.1"
 
 "@mswjs/cookies@^0.2.2":
