@@ -321,12 +321,12 @@ export default class Alby implements Connector {
 
   private _getRequestOptions(): Partial<RequestOptions> {
     return {
+      user_agent: `lightning-browser-extension:${process.env.VERSION}`,
       ...(process.env.ALBY_API_URL
         ? {
             base_url: process.env.ALBY_API_URL,
-            user_agent: `lightning-browser-extension:${process.env.VERSION}`,
           }
-        : { user_agent: `lightning-browser-extension:${process.env.VERSION}` }),
+        : {}),
     };
   }
 
