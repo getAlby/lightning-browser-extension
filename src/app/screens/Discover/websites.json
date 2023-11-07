@@ -189,6 +189,12 @@
         "subtitle": "Play coin flip matches against other players",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/lnflip_thumbnail.png",
         "url": "https://www.lnflip.com"
+      },
+      {
+        "title": "Lightning tic-tac-toe",
+        "subtitle": "Earn Bitcoin satoshis playing multiplayer tic-tac-toe. Lightning network fast.",
+        "logo": "https://lntictactoe.com/logo.png",
+        "url": "https://lntictactoe.com"
       }
     ]
   },
