@@ -17,6 +17,7 @@ import { initReactI18next } from "react-i18next";
 // import our translations
 import cs from "~/i18n/locales/cs/translation.json";
 import da from "~/i18n/locales/da/translation.json";
+import de from "~/i18n/locales/de/translation.json";
 import en from "~/i18n/locales/en/translation.json";
 import es from "~/i18n/locales/es/translation.json";
 import fi from "~/i18n/locales/fi/translation.json";
@@ -50,6 +51,12 @@ export const resources = {
     common: da.common,
     components: da.components,
     permissions: da.permissions,
+  },
+  de: {
+    translation: de.translation,
+    common: de.common,
+    components: de.components,
+    permissions: de.permissions,
   },
   es: {
     translation: es.translation,
