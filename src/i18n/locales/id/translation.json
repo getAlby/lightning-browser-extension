@@ -351,18 +351,12 @@
         "send_satoshis": "⚡️ Kirim Satoshis ⚡️",
         "enable_now": "Aktifkan Sekarang"
       },
-      "recent_transactions": "Transaksi terbaru",
       "allowance_view": {
-        "no_transactions": "Tidak ada transaksi pada <0>{{name}}</0>.",
-        "recent_transactions": "Transaksi Terbaru"
+        "no_transactions": "Tidak ada transaksi pada <0>{{name}}</0>."
       },
       "default_view": {
         "is_blocked_hint": "Alby sedang tidak aktif pada {{host}}",
-        "block_removed": "Aktifkan {{host}}. Silakan muat ulang website.",
-        "no_outgoing_transactions": "Tidak ada transaksi keluar untuk akun ini.",
-        "no_incoming_transactions": "Tidak ada transaksi masuk untuk akun ini.",
-        "all_transactions_link": "Lihat semua transaksi",
-        "recent_transactions": "Transaksi Terbaru"
+        "block_removed": "Aktifkan {{host}}. Silakan muat ulang website."
       }
     },
     "accounts": {
@@ -818,10 +812,6 @@
     },
     "transactions": {
       "title": "Transaksi",
-      "description": {
-        "outgoing": "Transaksi keluar untuk akun ini",
-        "incoming": "Transaksi masuk untuk akun ini"
-      },
       "list_empty": "Tidak ada transaksi."
     }
   },
