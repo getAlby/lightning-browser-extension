@@ -352,18 +352,12 @@
         "send_satoshis": "⚡️ ارسال ساتوشی ⚡️",
         "enable_now": "اکنون فعال کن"
       },
-      "recent_transactions": "تراکنش های اخیر",
       "allowance_view": {
-        "recent_transactions": "تراکنش های اخیر",
         "no_transactions": "هنوز تراکنشی در <0>{{name}}</0> نیست."
       },
       "default_view": {
-        "recent_transactions": "تراکنش های اخیر",
         "is_blocked_hint": "البی در حال حاضر در {{host}} غیرفعال شده است",
-        "block_removed": "{{host}} فعال شد. لطفا دوباره بارگیری کنید.",
-        "all_transactions_link": "دیدن همه تراکنش ها",
-        "no_incoming_transactions": "این حساب هنوز هیچ تراکنش ورودی نداشته است.",
-        "no_outgoing_transactions": "این حساب هنوز هیچ تراکنش خروجی نداشته است."
+        "block_removed": "{{host}} فعال شد. لطفا دوباره بارگیری کنید."
       }
     },
     "accounts": {
@@ -829,11 +823,7 @@
     },
     "transactions": {
       "title": "تراکنش ها",
-      "list_empty": "هنوز هیچ تراکنشی موجود نیست.",
-      "description": {
-        "incoming": "تراکنش های ورودی این حساب",
-        "outgoing": "تراکنش های خروجی این حساب"
-      }
+      "list_empty": "هنوز هیچ تراکنشی موجود نیست."
     },
     "on_chain": {
       "instructions1": "برای دریافت بیتکوین از طریق آدرس بیتکوین، وارد <0>حساب البی</0> خود در getalby.com شوید",
@@ -1094,12 +1084,6 @@
       "label": {
         "auth": "ورود",
         "imported": "وارد شده"
-      }
-    },
-    "transaction_list": {
-      "tabs": {
-        "outgoing": "خروجی",
-        "incoming": "ورودی"
       }
     }
   },
