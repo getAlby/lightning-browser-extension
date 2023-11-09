@@ -808,7 +808,7 @@
         "nodeManagement": "Node-Verwaltung"
       },
       "tips": {
-        "title": "Deine Alby-Wallet ist bereit",
+        "title": "Deine Alby Wallet ist bereit",
         "top_up_wallet": {
           "description": "Du möchtest deine Wallet aufladen?",
           "title": "Bitcoin kaufen"
@@ -817,7 +817,7 @@
           "description": "Entdecke die Funktionen von Alby\nauf unserer Demo Webseite",
           "title": "Alby Demo"
         },
-        "description": "Ein paar Tipps für den Anfang 🐝",
+        "description": "Hier ein paar Tipps für den Anfang 🐝",
         "mnemonic": {
           "title": "Nostr",
           "description": "Generiere jetzt \n deinen Schlüssel."
