@@ -250,13 +250,10 @@
         "send_satoshis": "⚡️ Sendi Bitmonon ⚡️",
         "enable_now": ""
       },
-      "recent_transactions": "",
       "allowance_view": {
-        "recent_transactions": "",
         "no_transactions": ""
       },
       "default_view": {
-        "recent_transactions": "",
         "is_blocked_hint": ""
       }
     },
