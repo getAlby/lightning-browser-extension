@@ -446,7 +446,8 @@ class Lnd implements Connector {
         return {
           id: `${invoice.payment_request}-${index}`,
           memo: invoice.memo,
-          preimage: invoice.r_preimage,
+          preimage: utils.base64ToHex(invoice.r_preimage),
+          payment_hash: utils.base64ToHex(invoice.r_hash),
           settled: invoice.settled,
           settleDate: parseInt(invoice.settle_date) * 1000,
           totalAmount: parseInt(invoice.value),
