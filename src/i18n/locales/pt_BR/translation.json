@@ -617,7 +617,7 @@
         },
         "bitcoin_address": {
           "description": "Receba via endereço bitcoin usando um serviço de trocas",
-          "title": "Endereço bitcoin"
+          "title": "Serviço de trocas"
         }
       },
       "amount": {
@@ -626,7 +626,7 @@
       },
       "description": {
         "label": "Descrição",
-        "placeholder": "Ex. Quem está enviando este pagamento?"
+        "placeholder": "Opcional"
       },
       "success": "Pagamento recebido!",
       "payment": {
