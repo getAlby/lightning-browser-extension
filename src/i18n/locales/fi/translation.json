@@ -573,7 +573,7 @@
         "allow_camera_access": "Salli kameran käyttöoikeus asetusruudussa."
       }
     },
-    "transactionsTable": {
+    "transactions_table": {
       "fee": "Kustannus",
       "preimage": "Esikuva",
       "received": "Vastaanotettu",

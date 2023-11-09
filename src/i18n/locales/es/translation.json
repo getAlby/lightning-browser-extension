@@ -820,7 +820,7 @@
         "allow_camera_access": "Permita el acceso a la cámara en la pantalla de configuración."
       }
     },
-    "transactionsTable": {
+    "transactions_table": {
       "fee": "Comisión",
       "preimage": "Preimagen",
       "received": "Recibido",

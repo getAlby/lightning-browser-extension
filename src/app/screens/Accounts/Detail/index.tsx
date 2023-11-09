@@ -1,4 +1,3 @@
-import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import Button from "@components/Button";
 import Container from "@components/Container";
 import Loading from "@components/Loading";
@@ -264,50 +263,42 @@ function AccountDetail() {
                   <Modal
                     isOpen={exportModalIsOpen}
                     close={closeExportModal}
-                    title={t("export.screen_reader")}
+                    contentLabel={t("export.screen_reader")}
+                    title={t("export.title")}
                   >
-                    <div className="p-5 flex justify-between">
-                      <h2 className="text-2xl font-bold dark:text-white">
-                        {t("export.title")}
-                      </h2>
-                      <button onClick={closeExportModal}>
-                        <CrossIcon className="w-6 h-6 dark:text-white" />
-                      </button>
-                    </div>
-
                     {exportLoading && (
-                      <div className="p-5 flex justify-center items-center space-x-2 dark:text-white">
+                      <div className="flex justify-center items-center space-x-2 dark:text-white">
                         <Loading />
                         <span>{t("export.waiting")}</span>
                       </div>
                     )}
                     {!exportLoading && (
-                      <div className="p-5">
-                        <div className="flex flex-col gap-4 justify-center items-center dark:text-white">
-                          <p>{t("export.scan_qr")}</p>
+                      <div className="flex flex-col gap-4 justify-center items-center dark:text-white">
+                        <p>{t("export.scan_qr")}</p>
+                        <div className="p-5">
                           <QRCode
                             value={`lndhub://${lndHubData.login}:${lndHubData.password}@${lndHubData.url}/`}
                             size={256}
                           />
-                          <div className="w-full">
-                            <TextField
-                              id="uri"
-                              label={t("export.export_uri")}
-                              readOnly
-                              value={`lndhub://${lndHubData.login}:${lndHubData.password}@${lndHubData.url}/`}
-                            />
-                          </div>
-                          {lndHubData.lnAddress && (
-                            <div className="w-full dark:text-white">
-                              <p className="font-medium">
-                                {t("export.your_ln_address")}
-                              </p>
-                              {lndHubData.lnAddress && (
-                                <p>{lndHubData.lnAddress}</p>
-                              )}
-                            </div>
-                          )}
                         </div>
+                        <div className="w-full">
+                          <TextField
+                            id="uri"
+                            label={t("export.export_uri")}
+                            readOnly
+                            value={`lndhub://${lndHubData.login}:${lndHubData.password}@${lndHubData.url}/`}
+                          />
+                        </div>
+                        {lndHubData.lnAddress && (
+                          <div className="w-full dark:text-white">
+                            <p className="font-medium">
+                              {t("export.your_ln_address")}
+                            </p>
+                            {lndHubData.lnAddress && (
+                              <p>{lndHubData.lnAddress}</p>
+                            )}
+                          </div>
+                        )}
                       </div>
                     )}
                   </Modal>

@@ -1,7 +1,7 @@
+import dayjs from "dayjs";
 import { useCallback, useState } from "react";
 import toast from "~/app/components/Toast";
 import { useSettings } from "~/app/context/SettingsContext";
-import { convertPaymentsToTransactions } from "~/app/utils/payments";
 import api from "~/common/lib/api";
 import { Transaction } from "~/types";
 
@@ -11,22 +11,28 @@ export const useTransactions = () => {
   const [isLoadingTransactions, setIsLoadingTransactions] = useState(true);
 
   const loadTransactions = useCallback(
-    async (accountId: string, limit?: number) => {
+    async (limit?: number) => {
       try {
-        const { payments } = await api.getPaymentsByAccount({
-          accountId,
+        const getTransactionsResponse = await api.getTransactions({
           limit,
         });
-        const _transactions: Transaction[] =
-          await convertPaymentsToTransactions(payments);
 
-        for (const transaction of _transactions) {
+        const transactions = getTransactionsResponse.transactions.map(
+          (transaction) => ({
+            ...transaction,
+            title: transaction.memo,
+            date: dayjs(transaction.settleDate).fromNow(),
+            timestamp: transaction.settleDate,
+          })
+        );
+
+        for (const transaction of transactions) {
           transaction.totalAmountFiat = settings.showFiat
             ? await getFormattedFiat(transaction.totalAmount)
             : "";
         }
 
-        setTransactions(_transactions);
+        setTransactions(transactions);
         setIsLoadingTransactions(false);
       } catch (e) {
         console.error(e);

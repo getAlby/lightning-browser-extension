@@ -781,7 +781,7 @@
         "allow_camera_access": "Proszę pozwolić na dostęp do kamery w ekranie ustawień."
       }
     },
-    "transactionsTable": {
+    "transactions_table": {
       "fee": "Opłata",
       "preimage": "Obraz pierwotny (preimage)",
       "received": "Otrzymano",

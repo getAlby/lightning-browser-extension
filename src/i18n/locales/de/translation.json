@@ -1056,7 +1056,7 @@
       },
       "title": "QR-Code scannen"
     },
-    "transactionsTable": {
+    "transactions_table": {
       "sent": "Gesendet",
       "boostagram": {
         "sender": "Sender",
