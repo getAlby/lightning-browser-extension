@@ -347,9 +347,7 @@
         "send_satoshis": "⚡️ Pošlji Satoshis ⚡️",
         "enable_now": "Dovoli zdaj"
       },
-      "recent_transactions": "Pretekle transakcije",
       "allowance_view": {
-        "recent_transactions": "Pretekle transakcije",
         "no_transactions": "NA <0>{{name}}</0> še ni transakcij.",
         "sats": "sats",
         "budget_spent": "Porabljen proračun",
@@ -358,12 +356,8 @@
         "permissions": "Pravice"
       },
       "default_view": {
-        "recent_transactions": "Pretekle transakcije",
         "is_blocked_hint": "Alby je trenutno na {{host}} onemogočen",
-        "all_transactions_link": "Poglej vse transakcije",
-        "block_removed": "Omogoči {{host}}. Ponovno naloži stran.",
-        "no_outgoing_transactions": "Na tem računu ni odlivov.",
-        "no_incoming_transactions": "Na tem računu ni prihodkov."
+        "block_removed": "Omogoči {{host}}. Ponovno naloži stran."
       }
     },
     "accounts": {
@@ -752,19 +746,6 @@
         "budget": "PRORAČUN"
       }
     },
-    "transactionsTable": {
-      "received": "Prejeto",
-      "boostagram": {
-        "sender": "Pošiljatelj",
-        "podcast": "Podcast",
-        "app": "Aplikacija",
-        "message": "Sporočilo"
-      },
-      "sent": "Poslano",
-      "fee": "Provizija",
-      "open_location": "Odpri spletno mesto",
-      "preimage": "Preimage"
-    },
     "budget_control": {
       "remember": {
         "description": "Stanje lahko nastavite tako, da ne boste pozvani k potrditvi plačil, dokler ni porabljeno.",
@@ -830,12 +811,6 @@
       },
       "login_failed": {
         "password_reset": "Si pozabil geslo? Klikni tukaj"
-      }
-    },
-    "transaction_list": {
-      "tabs": {
-        "incoming": "Dohodni",
-        "outgoing": "Odhodni"
       }
     }
   },
