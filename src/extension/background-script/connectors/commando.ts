@@ -4,16 +4,17 @@ import LnMessage from "lnmessage";
 import { v4 as uuidv4 } from "uuid";
 import { Account } from "~/types";
 
+import { mergeTransactions } from "~/common/utils/helpers";
 import Connector, {
   CheckPaymentArgs,
   CheckPaymentResponse,
-  ConnectorInvoice,
+  ConnectorTransaction,
   ConnectPeerArgs,
   ConnectPeerResponse,
   flattenRequestMethods,
   GetBalanceResponse,
   GetInfoResponse,
-  GetInvoicesResponse,
+  GetTransactionsResponse,
   KeysendArgs,
   MakeInvoiceArgs,
   MakeInvoiceResponse,
@@ -60,6 +61,11 @@ type CommandoListFundsResponse = {
 type CommandoListInvoicesResponse = {
   invoices: CommandoInvoice[];
 };
+
+type CommandoListSendPaysResponse = {
+  payments: CommandoPayment[];
+};
+
 type CommandoPayInvoiceResponse = {
   payment_preimage: string;
   payment_hash: string;
@@ -79,6 +85,24 @@ type CommandoInvoice = {
   payment_preimage: string;
   paid_at: number;
   payment_hash: string;
+};
+
+type CommandoPayment = {
+  id: number;
+  partid?: number;
+  groupid: number;
+  created_at: number;
+  label?: string;
+  status: string;
+  description?: string;
+  amount_sent_msat: number;
+  amount_msat?: number;
+  bolt11?: string;
+  bolt12?: string;
+  payment_preimage: string;
+  payment_hash: string;
+  destination: string;
+  erroronion?: string;
 };
 
 const supportedMethods: string[] = [
@@ -190,7 +214,7 @@ export default class Commando implements Connector {
       });
   }
 
-  async getInvoices(): Promise<GetInvoicesResponse> {
+  private async getInvoices(): Promise<ConnectorTransaction[]> {
     return this.ln
       .commando({
         method: "listinvoices",
@@ -199,26 +223,62 @@ export default class Commando implements Connector {
       })
       .then((resp) => {
         const parsed = resp as CommandoListInvoicesResponse;
-        return {
-          data: {
-            invoices: parsed.invoices
-              .map(
-                (invoice, index): ConnectorInvoice => ({
-                  id: invoice.label,
-                  memo: invoice.description,
-                  settled: invoice.status === "paid",
-                  preimage: invoice.payment_preimage,
-                  settleDate: invoice.paid_at * 1000,
-                  type: "received",
-                  totalAmount: (invoice.msatoshi / 1000).toString(),
-                })
-              )
-              .filter((invoice) => invoice.settled)
-              .sort((a, b) => {
-                return b.settleDate - a.settleDate;
-              }),
-          },
-        };
+        return parsed.invoices
+          .map(
+            (invoice, index): ConnectorTransaction => ({
+              id: invoice.label,
+              memo: invoice.description,
+              settled: invoice.status === "paid",
+              preimage: invoice.payment_preimage,
+              payment_hash: invoice.payment_hash,
+              settleDate: invoice.paid_at * 1000,
+              type: "received",
+              totalAmount: Math.floor(invoice.msatoshi / 1000),
+            })
+          )
+          .filter((invoice) => invoice.settled);
+      });
+  }
+
+  async getTransactions(): Promise<GetTransactionsResponse> {
+    const incomingInvoicesResponse = await this.getInvoices();
+    const outgoingInvoicesResponse = await this.getPayments();
+
+    const transactions: ConnectorTransaction[] = mergeTransactions(
+      incomingInvoicesResponse,
+      outgoingInvoicesResponse
+    );
+
+    return {
+      data: {
+        transactions,
+      },
+    };
+  }
+
+  private async getPayments(): Promise<ConnectorTransaction[]> {
+    return await this.ln
+      .commando({
+        method: "listsendpays",
+        params: {},
+        rune: this.config.rune,
+      })
+      .then((resp) => {
+        const parsed = resp as CommandoListSendPaysResponse;
+        return parsed.payments
+          .map(
+            (payment, index): ConnectorTransaction => ({
+              id: `${payment.id}`,
+              memo: payment.description ?? "",
+              settled: payment.status === "complete",
+              preimage: payment.payment_preimage,
+              payment_hash: payment.payment_hash,
+              settleDate: payment.created_at * 1000,
+              type: "sent",
+              totalAmount: payment.amount_sent_msat / 1000,
+            })
+          )
+          .filter((payment) => payment.settled);
       });
   }
 

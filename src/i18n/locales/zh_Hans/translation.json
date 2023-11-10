@@ -1037,7 +1037,7 @@
       },
       "edit_permissions": "编辑权限"
     },
-    "transactionsTable": {
+    "transactions_table": {
       "boostagram": {
         "podcast": "播客",
         "message": "消息",

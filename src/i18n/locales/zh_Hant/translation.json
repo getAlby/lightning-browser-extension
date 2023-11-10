@@ -1024,7 +1024,7 @@
         "allow_camera_access": "請在設置屏幕中允許攝像頭訪問。"
       }
     },
-    "transactionsTable": {
+    "transactions_table": {
       "fee": "費用",
       "preimage": "原像",
       "received": "已收到",

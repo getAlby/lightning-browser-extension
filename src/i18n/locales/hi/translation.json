@@ -691,7 +691,7 @@
         "allow_camera_access": "कृपया सेटिंग स्क्रीन में कैमरा एक्सेस की अनुमति दें।"
       }
     },
-    "transactionsTable": {
+    "transactions_table": {
       "fee": "शुल्क",
       "preimage": "Preimage",
       "received": "प्राप्त",

@@ -25,7 +25,7 @@ import type {
   LnurlAuthResponse,
   MessageAccountEdit,
   MessageAccountValidate,
-  MessageInvoices,
+  MessageGetTransactions,
   MessageLnurlAuth,
   MessageSettingsSet,
   NodeInfo,
@@ -170,8 +170,8 @@ export const unlock = (password: string) =>
   msg.request<UnlockRes>("unlock", { password });
 export const getBlocklist = (host: string) =>
   msg.request<BlocklistRes>("getBlocklist", { host });
-export const getInvoices = (options?: MessageInvoices["args"]) =>
-  msg.request<{ invoices: Invoice[] }>("getInvoices", options);
+export const getTransactions = (options?: MessageGetTransactions["args"]) =>
+  msg.request<{ transactions: Invoice[] }>("getTransactions", options);
 export const lnurlAuth = (
   options: MessageLnurlAuth["args"]
 ): Promise<LnurlAuthResponse> =>
@@ -295,7 +295,7 @@ export default {
   removeAccount,
   unlock,
   getBlocklist,
-  getInvoices,
+  getTransactions,
   lnurlAuth,
   getCurrencyRate,
   sendPayment,

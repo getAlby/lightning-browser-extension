@@ -1,11 +1,10 @@
 import {
+  ArrowRightIcon,
   ReceiveIcon,
   SendIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
 import Button from "@components/Button";
-import Hyperlink from "@components/Hyperlink";
 import Loading from "@components/Loading";
-import Tab from "@components/Tab";
 import TransactionsTable from "@components/TransactionsTable";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -13,10 +12,10 @@ import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import BalanceBox from "~/app/components/BalanceBox";
+import Hyperlink from "~/app/components/Hyperlink";
 import SkeletonLoader from "~/app/components/SkeletonLoader";
 import toast from "~/app/components/Toast";
 import { useAccount } from "~/app/context/AccountContext";
-import { useInvoices } from "~/app/hooks/useInvoices";
 import { useTransactions } from "~/app/hooks/useTransactions";
 import { PublisherLnData } from "~/app/screens/Home/PublisherLnData";
 import api from "~/common/lib/api";
@@ -33,13 +32,14 @@ export type Props = {
 };
 
 const DefaultView: FC<Props> = (props) => {
+  const itemsLimit = 8;
+
   const { t } = useTranslation("translation", { keyPrefix: "home" });
   const { t: tCommon } = useTranslation("common");
-  const { t: tComponents } = useTranslation("components");
 
   const navigate = useNavigate();
 
-  const { account, balancesDecorated, accountLoading } = useAccount();
+  const { account, accountLoading } = useAccount();
 
   const lightningAddress = account?.lightningAddress || "";
 
@@ -48,31 +48,11 @@ const DefaultView: FC<Props> = (props) => {
   const { transactions, isLoadingTransactions, loadTransactions } =
     useTransactions();
 
-  const { isLoadingInvoices, incomingTransactions, loadInvoices } =
-    useInvoices();
-
-  const isLoadingOutgoing = accountLoading || isLoadingTransactions;
-  const isLoadingIncoming = accountLoading || isLoadingInvoices;
-
-  const itemsLimit = 8;
+  const isLoading = accountLoading || isLoadingTransactions;
 
   useEffect(() => {
-    if (account?.id) loadTransactions(account.id, itemsLimit);
-  }, [
-    account?.id,
-    balancesDecorated?.accountBalance,
-    loadTransactions,
-    itemsLimit,
-  ]);
-
-  useEffect(() => {
-    loadInvoices(itemsLimit);
-  }, [
-    account?.id,
-    balancesDecorated?.accountBalance,
-    loadInvoices,
-    itemsLimit,
-  ]);
+    loadTransactions(itemsLimit);
+  }, [loadTransactions, itemsLimit]);
 
   // check if currentURL is blocked
   useEffect(() => {
@@ -142,7 +122,7 @@ const DefaultView: FC<Props> = (props) => {
             </a>
           </div>
         )}
-        <div className="flex mb-6 lg:mb-12 space-x-4">
+        <div className="flex mb-4 space-x-4">
           <Button
             fullWidth
             icon={<ReceiveIcon className="w-6 h-6" />}
@@ -180,71 +160,31 @@ const DefaultView: FC<Props> = (props) => {
           </div>
         )}
 
-        {isLoadingTransactions && (
+        {isLoading && (
           <div className="flex justify-center">
             <Loading />
           </div>
         )}
 
-        {!isLoadingTransactions && (
+        {!isLoading && (
           <div>
-            <h2 className="mb-2 text-lg lg:text-xl text-gray-900 font-bold dark:text-white">
-              {t("default_view.recent_transactions")}
-            </h2>
+            <TransactionsTable
+              transactions={transactions}
+              loading={isLoading}
+              noResultMsg={t("default_view.no_transactions")}
+            />
 
-            <Tab.Group>
-              <Tab.List>
-                {[
-                  tComponents("transaction_list.tabs.outgoing"),
-                  tComponents("transaction_list.tabs.incoming"),
-                ].map((category) => (
-                  <Tab key={category} label={category} />
-                ))}
-              </Tab.List>
-
-              <Tab.Panels>
-                <Tab.Panel>
-                  <>
-                    <TransactionsTable
-                      transactions={transactions}
-                      loading={isLoadingOutgoing}
-                      noResultMsg={t("default_view.no_outgoing_transactions")}
-                    />
-                    {!isLoadingOutgoing && transactions.length > 0 && (
-                      <div className="mt-5 text-center">
-                        <Hyperlink
-                          onClick={() =>
-                            handleViewAllLink("/transactions/outgoing")
-                          }
-                        >
-                          {t("default_view.all_transactions_link")}
-                        </Hyperlink>
-                      </div>
-                    )}
-                  </>
-                </Tab.Panel>
-                <Tab.Panel>
-                  <>
-                    <TransactionsTable
-                      transactions={incomingTransactions}
-                      loading={isLoadingIncoming}
-                      noResultMsg={t("default_view.no_incoming_transactions")}
-                    />
-                    {!isLoadingIncoming && incomingTransactions.length > 0 && (
-                      <div className="mt-5 text-center">
-                        <Hyperlink
-                          onClick={() =>
-                            handleViewAllLink("/transactions/incoming")
-                          }
-                        >
-                          {t("default_view.all_transactions_link")}
-                        </Hyperlink>
-                      </div>
-                    )}
-                  </>
-                </Tab.Panel>
-              </Tab.Panels>
-            </Tab.Group>
+            {!isLoading && transactions.length > 0 && (
+              <div className="text-center">
+                <Hyperlink
+                  onClick={() => handleViewAllLink("/transactions")}
+                  className="flex justify-center items-center mt-2"
+                >
+                  {t("default_view.see_all")}
+                  <ArrowRightIcon className="ml-2 w-4 h-4" />
+                </Hyperlink>
+              </div>
+            )}
           </div>
         )}
       </div>
