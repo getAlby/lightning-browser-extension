@@ -20,7 +20,6 @@ import da from "~/i18n/locales/da/translation.json";
 import de from "~/i18n/locales/de/translation.json";
 import en from "~/i18n/locales/en/translation.json";
 import es from "~/i18n/locales/es/translation.json";
-import fi from "~/i18n/locales/fi/translation.json";
 import fr from "~/i18n/locales/fr/translation.json";
 import hi from "~/i18n/locales/hi/translation.json";
 import it from "~/i18n/locales/it/translation.json";
@@ -63,12 +62,6 @@ export const resources = {
     common: es.common,
     components: es.components,
     permissions: es.permissions,
-  },
-  fi: {
-    translation: fi.translation,
-    common: fi.common,
-    components: fi.components,
-    permissions: fi.permissions,
   },
   fr: {
     translation: fr.translation,

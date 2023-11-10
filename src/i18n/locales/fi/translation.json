@@ -618,5 +618,6 @@
     "publishers_table": {
       "payments": "maksut"
     }
-  }
+  },
+  "permissions": {}
 }
