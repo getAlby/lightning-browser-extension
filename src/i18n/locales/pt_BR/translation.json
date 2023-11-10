@@ -292,9 +292,7 @@
         "send_satoshis": "⚡️ Enviar Satoshis ⚡️",
         "enable_now": "Ativar"
       },
-      "recent_transactions": "Transações recentes",
       "allowance_view": {
-        "recent_transactions": "Transações recentes",
         "no_transactions": "Sem transações em <0>{{name}}</0>.",
         "sats": "sats",
         "budget_spent": "Limite de gastos",
@@ -303,12 +301,8 @@
         "permissions": "Permissões"
       },
       "default_view": {
-        "recent_transactions": "Transações recentes",
         "is_blocked_hint": "A Alby está desativada em {{host}}",
-        "block_removed": "{{host}} ativado. Por favor, recarregue o site.",
-        "no_outgoing_transactions": "Você ainda não realizou transações usando esta conta.",
-        "all_transactions_link": "Mostrar tudo",
-        "no_incoming_transactions": "Você ainda não recebeu transações nesta conta."
+        "block_removed": "{{host}} ativado. Por favor, recarregue o site."
       }
     },
     "accounts": {
@@ -803,10 +797,6 @@
     },
     "transactions": {
       "title": "Transações",
-      "description": {
-        "outgoing": "Transações enviadas usando esta conta",
-        "incoming": "Transações recebidas nesta conta"
-      },
       "list_empty": "Sem transações."
     },
     "distributions": {
@@ -1146,12 +1136,6 @@
       },
       "heading": "Como você deseja se conectar à rede TOR?",
       "download": "Baixar"
-    },
-    "transaction_list": {
-      "tabs": {
-        "outgoing": "Enviadas",
-        "incoming": "Recebidas"
-      }
     }
   },
   "permissions": {

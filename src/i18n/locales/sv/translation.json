@@ -300,9 +300,7 @@
         "send_satoshis": "⚡️ Skicka Satoshis ⚡️",
         "enable_now": "Aktivera Nu"
       },
-      "recent_transactions": "Senaste Transaktioner",
       "allowance_view": {
-        "recent_transactions": "Senaste Transaktioner",
         "no_transactions": "Inga transaktioner för <0>{{name}}</0> ännu.",
         "sats": "sats",
         "budget_spent": "Budget förbrukad",
@@ -311,12 +309,8 @@
         "permissions": "Behörigheter"
       },
       "default_view": {
-        "recent_transactions": "Senaste Transaktioner",
         "is_blocked_hint": "Alby är för tillfället avstängt hos {{host}}",
-        "block_removed": "Aktiverade {{host}}. Ladda om webbplatsen.",
-        "no_outgoing_transactions": "Inga utgående transaktioner för detta konto ännu.",
-        "all_transactions_link": "Se alla transaktioner",
-        "no_incoming_transactions": "Inga inkommande transaktioner för detta konto ännu."
+        "block_removed": "Aktiverade {{host}}. Ladda om webbplatsen."
       }
     },
     "accounts": {
@@ -828,11 +822,7 @@
     },
     "transactions": {
       "title": "Transaktion",
-      "list_empty": "Inga transaktioner tillgängliga ännu.",
-      "description": {
-        "incoming": "Inkommande transaktioner för detta konto",
-        "outgoing": "Utgående transaktioner för detta konto"
-      }
+      "list_empty": "Inga transaktioner tillgängliga ännu."
     },
     "distributions": {
       "title": "Anslut till {{namn}}",
@@ -1175,12 +1165,6 @@
       "tor_native": {
         "title": "TOR (native)",
         "description": "Välj det här alternativet om den här webbläsaren redan är ansluten till TOR-nätverket."
-      }
-    },
-    "transaction_list": {
-      "tabs": {
-        "incoming": "Inkommande",
-        "outgoing": "Utgående"
       }
     }
   },

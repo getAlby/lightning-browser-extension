@@ -330,18 +330,12 @@
         "send_satoshis": "⚡️ 發送聰 ⚡️",
         "enable_now": "立即啟用"
       },
-      "recent_transactions": "近期交易",
       "allowance_view": {
-        "recent_transactions": "近期交易",
         "no_transactions": "<0>{{name}}</0> 上還沒有交易。"
       },
       "default_view": {
-        "recent_transactions": "近期交易",
         "is_blocked_hint": "Alby目前在 {{host}} 上被禁用",
-        "block_removed": "已啟用 {{host}}。請重新載入網站。",
-        "no_outgoing_transactions": "此帳戶尚無傳出交易。",
-        "no_incoming_transactions": "此帳戶尚無傳入交易。",
-        "all_transactions_link": "查看所有交易"
+        "block_removed": "已啟用 {{host}}。請重新載入網站。"
       }
     },
     "accounts": {
@@ -804,11 +798,7 @@
     },
     "transactions": {
       "title": "交易",
-      "list_empty": "尚無可用交易。",
-      "description": {
-        "outgoing": "此帳戶的傳出交易",
-        "incoming": "此帳戶的傳入交易"
-      }
+      "list_empty": "尚無可用交易。"
     },
     "distributions": {
       "title": "連接 {{name}}",
@@ -1092,12 +1082,6 @@
         "description": "如果該瀏覽器已經連線 TOR 網絡，請選擇該選項。"
       },
       "heading": "你想如何連接到 TOR 網絡？"
-    },
-    "transaction_list": {
-      "tabs": {
-        "outgoing": "傳出",
-        "incoming": "傳入"
-      }
     }
   },
   "permissions": {
