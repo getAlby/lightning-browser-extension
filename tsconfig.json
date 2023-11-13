@@ -12,6 +12,8 @@
       "@components/*": ["./src/app/components/*"],
       "@screens/*": ["./src/app/screens/*"]
     },
+
+    "types": ["@testing-library/jest-dom", "@types/chrome"],
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "resolveJsonModule": true,
