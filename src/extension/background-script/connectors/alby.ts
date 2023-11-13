@@ -15,11 +15,11 @@ import state from "../state";
 import Connector, {
   CheckPaymentArgs,
   CheckPaymentResponse,
-  ConnectorInvoice,
+  ConnectorTransaction,
   ConnectPeerResponse,
   GetBalanceResponse,
   GetInfoResponse,
-  GetInvoicesResponse,
+  GetTransactionsResponse,
   KeysendArgs,
   MakeInvoiceArgs,
   MakeInvoiceResponse,
@@ -76,6 +76,7 @@ export default class Alby implements Connector {
       "sendPayment",
       "sendPaymentAsync",
       "getBalance",
+      "getTransactions",
     ];
   }
 
@@ -87,26 +88,27 @@ export default class Alby implements Connector {
     throw new Error("Not yet supported with the currently used account.");
   }
 
-  async getInvoices(): Promise<GetInvoicesResponse> {
-    const incomingInvoices = (await this._request((client) =>
-      client.incomingInvoices({})
+  async getTransactions(): Promise<GetTransactionsResponse> {
+    const invoicesResponse = (await this._request((client) =>
+      client.invoices({})
     )) as Invoice[];
 
-    const invoices: ConnectorInvoice[] = incomingInvoices.map(
-      (invoice, index): ConnectorInvoice => ({
+    const transactions: ConnectorTransaction[] = invoicesResponse.map(
+      (invoice, index): ConnectorTransaction => ({
         custom_records: invoice.custom_records,
         id: `${invoice.payment_request}-${index}`,
         memo: invoice.comment || invoice.memo,
         preimage: "", // alby wallet api doesn't support preimage (yet)
+        payment_hash: invoice.payment_hash,
         settled: invoice.settled,
         settleDate: new Date(invoice.settled_at).getTime(),
-        totalAmount: `${invoice.amount}`,
-        type: "received",
+        totalAmount: invoice.amount,
+        type: invoice.type == "incoming" ? "received" : "sent",
       })
     );
     return {
       data: {
-        invoices,
+        transactions,
       },
     };
   }
@@ -254,11 +256,20 @@ export default class Alby implements Connector {
         token: this.config.oAuthToken, // initialize with existing token
       });
 
+      authClient.on("tokenRefreshed", (token: Token) => {
+        this._updateOAuthToken(token);
+      });
+      // Currently the JS SDK guarantees request of a new refresh token is done synchronously.
+      // The only way a refresh should fail is if the refresh token has expired, which is handled when the connector is initialized.
+      // If a token refresh fails after init then the connector will be unusable, but we will still log errors here so that this can be debugged if it does ever happen.
+      authClient.on("tokenRefreshFailed", (error: Error) => {
+        console.error("Failed to Refresh token", error);
+      });
+
       if (this.config.oAuthToken) {
         try {
           if (authClient.isAccessTokenExpired()) {
-            const token = await authClient.refreshAccessToken();
-            await this._updateOAuthToken(token.token);
+            await authClient.refreshAccessToken();
           }
           return authClient;
         } catch (error) {
@@ -302,7 +313,6 @@ export default class Alby implements Connector {
     if (!this._authUser || !this._client) {
       throw new Error("Alby client was not initialized");
     }
-    const oldToken = this._authUser?.token;
     let result: T;
     try {
       result = await func(this._client);
@@ -310,19 +320,17 @@ export default class Alby implements Connector {
       console.error(error);
 
       throw error;
-    } finally {
-      const newToken = this._authUser.token;
-      if (newToken && newToken !== oldToken) {
-        await this._updateOAuthToken(newToken);
-      }
     }
     return result;
   }
 
   private _getRequestOptions(): Partial<RequestOptions> {
     return {
+      user_agent: `lightning-browser-extension:${process.env.VERSION}`,
       ...(process.env.ALBY_API_URL
-        ? { base_url: process.env.ALBY_API_URL }
+        ? {
+            base_url: process.env.ALBY_API_URL,
+          }
         : {}),
     };
   }

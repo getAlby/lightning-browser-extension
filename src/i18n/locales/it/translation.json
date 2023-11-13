@@ -276,13 +276,10 @@
         "send_satoshis": "⚡️ Invia Satoshis ⚡️",
         "enable_now": "Attiva ora"
       },
-      "recent_transactions": "Transazioni recenti",
       "allowance_view": {
-        "recent_transactions": "Transazioni recenti",
         "no_transactions": "Non ci sono ancora transazioni su <0>{{name}}</0>."
       },
       "default_view": {
-        "recent_transactions": "Transazioni recenti",
         "is_blocked_hint": "Alby è attualmente disabilitato su {{host}}",
         "block_removed": "{{host}} abilitato. Si prega di ricaricare la pagina."
       }
@@ -727,7 +724,7 @@
         "allow_camera_access": "Si prega di consentire l'accesso alla fotocamera nella schermata delle impostazioni."
       }
     },
-    "transactionsTable": {
+    "transactions_table": {
       "fee": "Tassa",
       "preimage": "Preimmagine",
       "received": "Ricevuto",

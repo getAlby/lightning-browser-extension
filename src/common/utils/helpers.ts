@@ -1,5 +1,6 @@
 import * as secp256k1 from "@noble/secp256k1";
 import { bech32 } from "bech32";
+import { ConnectorTransaction } from "~/extension/background-script/connectors/connector.interface";
 import { Sender } from "~/types";
 
 export function bech32Decode(str: string, encoding: BufferEncoding = "utf-8") {
@@ -60,4 +61,15 @@ export async function poll<T>({
   };
 
   return new Promise(executePoll);
+}
+
+export function mergeTransactions(
+  invoices: ConnectorTransaction[],
+  payments: ConnectorTransaction[]
+): ConnectorTransaction[] {
+  const mergedTransactions = [...invoices, ...payments].sort((a, b) => {
+    return b.settleDate - a.settleDate;
+  });
+
+  return mergedTransactions;
 }

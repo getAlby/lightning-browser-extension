@@ -251,13 +251,10 @@
         "send_satoshis": "",
         "enable_now": ""
       },
-      "recent_transactions": "",
       "allowance_view": {
-        "recent_transactions": "",
         "no_transactions": ""
       },
       "default_view": {
-        "recent_transactions": "",
         "is_blocked_hint": "",
         "block_removed": ""
       }
@@ -587,7 +584,7 @@
         "allow_camera_access": ""
       }
     },
-    "transactionsTable": {
+    "transactions_table": {
       "fee": "",
       "preimage": "",
       "received": "",

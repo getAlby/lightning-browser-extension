@@ -76,16 +76,7 @@ function Options() {
             <Route path="receive/invoice" element={<ReceiveInvoice />} />
             <Route path="onChainReceive" element={<OnChainReceive />} />
             <Route path="wallet" element={<DefaultView />} />
-            <Route path="transactions">
-              <Route
-                path="outgoing"
-                element={<Transactions type="outgoing" />}
-              />
-              <Route
-                path="incoming"
-                element={<Transactions type="incoming" />}
-              />
-            </Route>
+            <Route path="transactions" element={<Transactions />} />
             <Route path="lnurlPay" element={<LNURLPay />} />
             <Route path="lnurlChannel" element={<LNURLChannel />} />
             <Route path="lnurlWithdraw" element={<LNURLWithdraw />} />
