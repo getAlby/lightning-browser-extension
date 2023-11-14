@@ -102,6 +102,12 @@ export default function TransactionModal({
               content={getFormattedSats(transaction.totalFees)}
             />
           )}
+          {transaction.title && (
+            <TransactionDetailRow
+              title={tCommon("description")}
+              content={transaction.title}
+            />
+          )}
           {transaction.publisherLink && transaction.title && (
             <TransactionDetailRow
               title={tCommon("website")}
@@ -172,13 +178,13 @@ export default function TransactionModal({
 }
 
 const Dt = ({ children }: { children: React.ReactNode }) => (
-  <dt className="basis-28 text-gray-400 dark:text-neutral-500 text-right">
+  <dt className="w-28 text-gray-400 dark:text-neutral-500 text-right">
     {children}
   </dt>
 );
 
 const Dd = ({ children }: { children: React.ReactNode }) => (
-  <dd className="flex-1 text-gray-800 dark:text-neutral-200 break-all whitespace-pre-wrap">
+  <dd className="text-gray-800 dark:text-neutral-200 break-words whitespace-pre-wrap overflow-hidden">
     {children}
   </dd>
 );
@@ -190,7 +196,7 @@ const TransactionDetailRow = ({
   title: React.ReactNode | string;
   content: React.ReactNode | string;
 }) => (
-  <div className="flex p-1 text-sm leading-5 space-x-3">
+  <div className="grid grid-cols-[auto,1fr] p-1 text-sm leading-5 space-x-3">
     <Dt>{title}</Dt>
     <Dd>{content}</Dd>
   </div>
