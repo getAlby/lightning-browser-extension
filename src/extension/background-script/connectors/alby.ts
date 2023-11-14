@@ -42,6 +42,7 @@ export default class Alby implements Connector {
   private config: Config;
   private _client: Client | undefined;
   private _authUser: auth.OAuth2User | undefined;
+  private _cache = new Map<string, object>();
 
   constructor(account: Account, config: Config) {
     this.account = account;
@@ -116,16 +117,26 @@ export default class Alby implements Connector {
   async getInfo(): Promise<
     GetInfoResponse<WebLNNode & GetAccountInformationResponse>
   > {
+    const cacheValue = this._cache.get("getInfo");
+    if (cacheValue) {
+      return cacheValue as GetInfoResponse<
+        WebLNNode & GetAccountInformationResponse
+      >;
+    }
+
     try {
       const info = await this._request((client) =>
         client.accountInformation({})
       );
-      return {
+      const returnValue = {
         data: {
           ...info,
           alias: "🐝 getalby.com",
         },
       };
+      this._cache.set("getInfo", returnValue);
+
+      return returnValue;
     } catch (error) {
       console.error(error);
       throw error;
