@@ -477,7 +477,7 @@ function LNURLPay() {
                       )}
 
                       {(showNameField() || showEmailField()) && (
-                        <div className="flex justify-center mt-4">
+                        <div className="flex justify-center mt-4 caret-transparent">
                           <Hyperlink onClick={toggleShowMoreFields}>
                             {tCommon("actions.more")}{" "}
                             {showMoreFields ? (
