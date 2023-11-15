@@ -121,7 +121,7 @@ export default class Alby implements Connector {
     const cacheValue = this._cache.get(cacheKey) as GetInfoResponse<
       WebLNNode & GetAccountInformationResponse
     >;
-    if (cacheValue !== null) {
+    if (cacheValue) {
       return cacheValue;
     }
 
