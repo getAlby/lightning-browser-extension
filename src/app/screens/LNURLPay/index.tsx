@@ -412,12 +412,9 @@ function LNURLPay() {
                   description={getRecipient()}
                   image={navState.origin?.icon || getImage()}
                 />
-                <form onSubmit={handleSubmit} className="h-full">
-                  <fieldset
-                    disabled={loadingConfirm}
-                    className="h-full flex flex-col justify-between"
-                  >
-                    <div>
+                <form onSubmit={handleSubmit} className="grow flex">
+                  <div className="grow flex flex-col justify-between">
+                    <fieldset disabled={loadingConfirm}>
                       <dl className="mt-4 overflow-hidden">
                         <>
                           {formattedMetadata(details.metadata).map(
@@ -522,12 +519,8 @@ function LNURLPay() {
                           )}
                         </div>
                       )}
-                    </div>
-                    <div
-                      className={`mt-2 dark:border-white/10 ${
-                        showMoreFields && "pb-4"
-                      }`}
-                    >
+                    </fieldset>
+                    <div className="mt-2 dark:border-white/10">
                       <ConfirmOrCancel
                         isFocused={false}
                         label={tCommon("actions.confirm")}
@@ -538,7 +531,7 @@ function LNURLPay() {
                         onCancel={reject}
                       />
                     </div>
-                  </fieldset>
+                  </div>
                 </form>
               </Container>
             </div>
