@@ -93,12 +93,14 @@ export default class Alby implements Connector {
       client.invoices({})
     )) as Invoice[];
 
+    console.log(invoicesResponse);
+
     const transactions: ConnectorTransaction[] = invoicesResponse.map(
       (invoice, index): ConnectorTransaction => ({
         custom_records: invoice.custom_records,
         id: `${invoice.payment_request}-${index}`,
         memo: invoice.comment || invoice.memo,
-        preimage: "", // alby wallet api doesn't support preimage (yet)
+        preimage: invoice.preimage,
         payment_hash: invoice.payment_hash,
         settled: invoice.settled,
         settleDate: new Date(invoice.settled_at).getTime(),
@@ -106,6 +108,7 @@ export default class Alby implements Connector {
         type: invoice.type == "incoming" ? "received" : "sent",
       })
     );
+
     return {
       data: {
         transactions,
