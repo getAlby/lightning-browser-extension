@@ -117,11 +117,12 @@ export default class Alby implements Connector {
   async getInfo(): Promise<
     GetInfoResponse<WebLNNode & GetAccountInformationResponse>
   > {
-    const cacheValue = this._cache.get("getInfo");
-    if (cacheValue) {
-      return cacheValue as GetInfoResponse<
-        WebLNNode & GetAccountInformationResponse
-      >;
+    const cacheKey = "getInfo";
+    const cacheValue = this._cache.get(cacheKey) as GetInfoResponse<
+      WebLNNode & GetAccountInformationResponse
+    >;
+    if (cacheValue !== null) {
+      return cacheValue;
     }
 
     try {
@@ -134,7 +135,7 @@ export default class Alby implements Connector {
           alias: "🐝 getalby.com",
         },
       };
-      this._cache.set("getInfo", returnValue);
+      this._cache.set(cacheKey, returnValue);
 
       return returnValue;
     } catch (error) {
