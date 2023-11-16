@@ -282,8 +282,6 @@ export default class Alby implements Connector {
         authorizeUrl: process.env.ALBY_OAUTH_AUTHORIZE_URL,
       });
 
-      console.log(authUrl);
-
       authUrl += "&webln=false"; // stop getalby.com login modal launching lnurl auth
 
       // Use the tabs API to create a new tab with the authorization URL
@@ -296,17 +294,8 @@ export default class Alby implements Connector {
           changeInfo: browser.Tabs.OnUpdatedChangeInfoType,
           tab: browser.Tabs.Tab
         ) => {
-          console.log(changeInfo.status);
           if (changeInfo.status === "complete" && tabId === createTab.id) {
-            // The tab has finished loading, you can check the tab URL for the authorization code
-            // Extract the code from the URL and proceed with token exchange
-
-            // Note: You might need to handle errors and corner cases depending on the authorization flow.
             const authorizationCode = this.extractCodeFromTabUrl(tab.url);
-
-            console.log(changeInfo);
-
-            console.log(authorizationCode);
 
             if (authorizationCode) {
               authClient
@@ -320,6 +309,7 @@ export default class Alby implements Connector {
                   reject(error);
                 })
                 .finally(() => {
+                  browser.tabs.remove(tabId);
                   // Remove the event listener once the code is received
                   browser.tabs.onUpdated.removeListener(handleUpdated);
                 });
