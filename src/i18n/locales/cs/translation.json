@@ -295,9 +295,7 @@
         "send_satoshis": "⚡️ Odeslat satoshi ⚡️",
         "enable_now": "Povolit nyní"
       },
-      "recent_transactions": "Nedávné transakce",
       "allowance_view": {
-        "recent_transactions": "Nedávné transakce",
         "no_transactions": "Prozatím žádné transakce na <0>{{name}}</0>.",
         "sats": "satů",
         "total_spent": "Cekově utraceno",
@@ -305,12 +303,8 @@
         "permissions": "Oprávnění"
       },
       "default_view": {
-        "recent_transactions": "Nedávné transakce",
         "is_blocked_hint": "Alby je v současnosti zakázaná na {host}}",
-        "block_removed": "Povolen {{host}}. Prosím znovu načtěte webovou stránku.",
-        "no_outgoing_transactions": "Zatím z tohoto účtu neproběhla žádná odchozí transakce.",
-        "all_transactions_link": "Zobrazit všechny transakce",
-        "no_incoming_transactions": "Zatím na tento účet neproběhla žádná příchozí transakce."
+        "block_removed": "Povolen {{host}}. Prosím znovu načtěte webovou stránku."
       }
     },
     "accounts": {
@@ -820,7 +814,7 @@
         "allow_camera_access": "Prosím povolte přístup kamery ve svém nastavení."
       }
     },
-    "transactionsTable": {
+    "transactions_table": {
       "fee": "Poplatek",
       "preimage": "Preimage",
       "received": "Přijato",

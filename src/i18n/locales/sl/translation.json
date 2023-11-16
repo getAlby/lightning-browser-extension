@@ -347,9 +347,7 @@
         "send_satoshis": "⚡️ Pošlji Satoshis ⚡️",
         "enable_now": "Dovoli zdaj"
       },
-      "recent_transactions": "Pretekle transakcije",
       "allowance_view": {
-        "recent_transactions": "Pretekle transakcije",
         "no_transactions": "NA <0>{{name}}</0> še ni transakcij.",
         "sats": "sats",
         "budget_spent": "Porabljen proračun",
@@ -358,12 +356,8 @@
         "permissions": "Pravice"
       },
       "default_view": {
-        "recent_transactions": "Pretekle transakcije",
         "is_blocked_hint": "Alby je trenutno na {{host}} onemogočen",
-        "all_transactions_link": "Poglej vse transakcije",
-        "block_removed": "Omogoči {{host}}. Ponovno naloži stran.",
-        "no_outgoing_transactions": "Na tem računu ni odlivov.",
-        "no_incoming_transactions": "Na tem računu ni prihodkov."
+        "block_removed": "Omogoči {{host}}. Ponovno naloži stran."
       }
     },
     "accounts": {
@@ -690,7 +684,14 @@
     },
     "commando": {
       "offer": "Oblikuj ponudbo.",
-      "pay": "Pošlji plačilo na BOLT11 račun."
+      "pay": "Pošlji plačilo na BOLT11 račun.",
+      "connect": "Vzpostavi novo povezavo z drugim vozliščem.",
+      "disconnect": "Zapri obstoječo povezavo s sosednjim vozliščem.",
+      "feerates": "Vrni feerates, ki jih bo uporabil CLN.",
+      "decode": "Dekodiraj niz bolt11/bolt12/rune.",
+      "decodepay": "Preverite in razčlenite niz bolt11.",
+      "checkmessage": "Preveri, ali je podpis ustvarilo dano vozlišče.",
+      "bkpr-listbalances": "Bere seznam vseh tekočih in preteklih stanj računa."
     },
     "lnd": {
       "addinvoice": "Kreiraj nove račune.",
@@ -707,6 +708,192 @@
       "lookupinvoice": "Preglej podrobnosti računa.",
       "settleinvoice": "Poravnaj sprejete račune.",
       "sendtoroute": "Izvedi plačilo preko določene poti."
+    },
+    "liquid": {
+      "signschnorr": "Podpiše sporočilo s tvojim ključem.",
+      "getaddress": "Bere tvoj Liquid naslov za prejemanje."
+    },
+    "nostr": {
+      "nip04encrypt": "Kriptiraj podatke.",
+      "signmessage": "Podpiši sporočilo s svojim ključem.",
+      "nip04decrypt": "Dekriptiraj podatke.",
+      "getpublickey": "Bere tvoj javni ključ."
+    },
+    "webln": {
+      "getbalance": "Bere stanje tvojega računa."
+    },
+    "bitcoin": {
+      "getaddress": "Bere tvoj Bitcoin naslov za prejemanje."
     }
+  },
+  "components": {
+    "companion_download_info": {
+      "heading": "Kako se želiš povezati z omrežjem TOR?",
+      "download": "Prenos",
+      "tor_native": {
+        "title": "TOR (native)",
+        "description": "Izberi to možnost, če je ta brskalnik že povezan z omrežjem TOR."
+      },
+      "companion": {
+        "title": "Spremljevalna aplikacija",
+        "description": "Aplikacija, ki tvoj brskalnik poveže z omrežjem TOR."
+      }
+    },
+    "badge": {
+      "label": {
+        "imported": "Uvožen",
+        "auth": "Prijava",
+        "budget": "PRORAČUN"
+      }
+    },
+    "budget_control": {
+      "remember": {
+        "description": "Stanje lahko nastavite tako, da ne boste pozvani k potrditvi plačil, dokler ni porabljeno.",
+        "label": "Zapomni in določi proračun"
+      },
+      "budget": {
+        "label": "Proračun"
+      }
+    },
+    "account_menu": {
+      "options": {
+        "account": {
+          "manage": "Upravljanje računov",
+          "account_settings": "Nastavitve računa",
+          "add": "Dodaj nov račun",
+          "go_to_web_wallet": "Upravljaj svoj spletni račun"
+        }
+      },
+      "screen_reader": "Preklopi spustni meni",
+      "title": "Preklopi račun"
+    },
+    "publishers_table": {
+      "payments": "plačila",
+      "total": "skupaj",
+      "budget": "proračun"
+    },
+    "allowance_menu": {
+      "enable_login": {
+        "title": "Omogoči prijavo na spletna mesta",
+        "subtitle": "Samodejna prijava brez potrditve, ko to zahteva spletno mesto."
+      },
+      "hint": "Če to spremeniš, boš ponastavili trenutni proračun",
+      "edit_allowance": {
+        "title": "Nastavitve spletnega mesta",
+        "screen_reader": "Nastavitve proračunskega zneska"
+      },
+      "confirm_delete": "Ali si prepričan, da želiš prekiniti povezavo s tem spletnim mestom?",
+      "edit_permissions": "Uredi pravice",
+      "new_budget": {
+        "label": "Proračun plačil z enim klikom",
+        "link_label": "Nastavi proračun za plačila z enim klikom"
+      }
+    },
+    "qrcode_scanner": {
+      "actions": {
+        "stop_scanning": "Končaj skeniranje",
+        "start_scanning": "Začni skenirati"
+      },
+      "errors": {
+        "allow_camera_access": "Prosim dovoli dostop do kamere v nastavitvah."
+      },
+      "title": "Skeniraj QR kodo"
+    },
+    "toasts": {
+      "connection_error": {
+        "double_check": "Preveri podrobnosti povezave",
+        "if_ssl_errors": "in če so napake SSL (npr. ERR_CERT_AUTHORITY_INVALID), klikni \"napredno\" in nadaljuj s sprejemom potrdila.",
+        "what_you_can_do": "Narediš lahko naslednje:",
+        "visit_guides": "Za več pomoči obišči naše vodnike"
+      },
+      "errors": {
+        "invalid_credentials": "Neveljavno geslo. Preveri svoje geslo in e-poštni naslov ter poskusi znova."
+      },
+      "login_failed": {
+        "password_reset": "Si pozabil geslo? Klikni tukaj"
+      }
+    }
+  },
+  "common": {
+    "enable": {
+      "block_added": "Strežnik {{host}} dodan na črno list, prosim ozveži spletno stran.",
+      "request1": "odobritev transakcij",
+      "allow": "Dovoli spletnemu mestu:",
+      "block_and_ignore": "Blokiraj in ignoriraj {{host}}"
+    },
+    "range": {
+      "greaterOrEqual": "≥ {{min}}",
+      "between": "med {{min}} in {{max}}",
+      "lessThanOrEqual": "≤ {{max}}"
+    },
+    "actions": {
+      "edit": "Uredi",
+      "download": "Prenesi",
+      "receive_again": "Prejmi naslednje plačilo",
+      "send": "Pošlji",
+      "review": "Preglej",
+      "log_in": "Prijava",
+      "delete": "Izbriši",
+      "back": "Nazaj",
+      "import": "Uvozi",
+      "continue": "Nadaljuj",
+      "save": "Shrani",
+      "remember": "Zapomni si mojo izbiro in ne sprašuj več",
+      "receive": "Prejmi",
+      "cancel": "Prkeliči",
+      "remove": "Odstrani",
+      "paste": "Prilepi",
+      "more": "Več",
+      "copied_to_clipboard": "Kopirano v odložišče",
+      "copy_clipboard": "Kopiraj v odložišče",
+      "next": "Naslednji",
+      "confirm": "Potrdi",
+      "copy_invoice": "Kopiraj račun",
+      "lock": "Zakleni",
+      "connect": "Poveži",
+      "transactions": "Transakcije",
+      "export": "Izvozi",
+      "disconnect": "Prekini povezavo",
+      "paste_clipboard": "Prilepljeno iz odložišča",
+      "open": "Odpri",
+      "unlock": "Odkleni",
+      "copy": "Kopiraj",
+      "close": "Zapri"
+    },
+    "connectors": {
+      "nativelnd": "LND (preko Tor)",
+      "commando": "Commando",
+      "citadel": "Citadel",
+      "nativelndhub": "LNDHub (preko Tor)",
+      "lnbits": "LNBits",
+      "nativelnbits": "LNBits (preko Tor)",
+      "nativecitadel": "Citadel (preko Tor)",
+      "lnd": "LND",
+      "lndhub": "LNDHub",
+      "eclair": "Eclair",
+      "galoy": "Galoy"
+    },
+    "message": "Sporočilo",
+    "help": "Pomoč",
+    "description": "Opis",
+    "optional": "Neobvezno",
+    "feedback": "Povratne informacije",
+    "wallet": "Denarnica",
+    "sats_one": "sat",
+    "amount": "Znesek",
+    "copied": "Skopirano!",
+    "response": "Odgovor",
+    "pasted": "Prilepljeno!",
+    "errors": {
+      "connection_failed": "Neuspešna povezava",
+      "payment_failed": "Neuspešno plačilo"
+    },
+    "balance": "Stanje",
+    "or": "ali",
+    "sats_other": "sats",
+    "description_full": "Polni opis",
+    "connected_sites": "Povezana spletna mesta",
+    "loading": "nalagam",
+    "success_message": "{{amount}}{{fiatAmount}} je na poti do {{destination}}"
   }
 }

@@ -305,13 +305,10 @@
         "send_satoshis": "⚡️  Satoshis पाठवा ⚡️",
         "enable_now": "आता सुरू करा"
       },
-      "recent_transactions": "अलीकडचे व्यवहार",
       "allowance_view": {
-        "recent_transactions": "अलीकडचे व्यवहार",
         "no_transactions": "अद्याप <0>{{name}}</0> वर कोणतेही व्यवहार नाहीत."
       },
       "default_view": {
-        "recent_transactions": "अलीकडचे व्यवहार",
         "is_blocked_hint": "Alby सध्या {{host}} वर अक्षम आहे",
         "block_removed": "{{host}} सक्षम केले. कृपया वेबसाइट रीलोड करा."
       }
@@ -754,7 +751,7 @@
         "allow_camera_access": "कृपया सेटिंग्ज स्क्रीनमध्ये कॅमेरा प्रवेशास अनुमती द्या."
       }
     },
-    "transactionsTable": {
+    "transactions_table": {
       "fee": "शुल्क",
       "preimage": "प्रीइमेज",
       "received": "प्राप्त",

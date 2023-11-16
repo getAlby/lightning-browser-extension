@@ -250,13 +250,10 @@
         "send_satoshis": "⚡️ Lähetä Satoshis ⚡️",
         "enable_now": "Ota nyt käyttöön"
       },
-      "recent_transactions": "Viimeaikaiset tapahtumat",
       "allowance_view": {
-        "recent_transactions": "Viimeaikaiset tapahtumat",
         "no_transactions": "Ei vielä tapahtumia <0>{{name}}</0>:lla."
       },
       "default_view": {
-        "recent_transactions": "Viimeaikaiset tapahtumat",
         "is_blocked_hint": "Alby on tällä hetkellä poissa käytöstä {{host}}:lla"
       }
     },
@@ -573,7 +570,7 @@
         "allow_camera_access": "Salli kameran käyttöoikeus asetusruudussa."
       }
     },
-    "transactionsTable": {
+    "transactions_table": {
       "fee": "Kustannus",
       "preimage": "Esikuva",
       "received": "Vastaanotettu",

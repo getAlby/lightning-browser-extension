@@ -1,7 +1,8 @@
 import checkPayment from "./checkPayment";
 import connectPeer from "./connectPeer";
 import getInfo from "./getInfo";
-import invoices from "./invoices";
+
+import getTransactions from "./getTransactions";
 import keysend from "./keysend";
 import makeInvoice from "./makeInvoice";
 import request from "./request";
@@ -13,7 +14,7 @@ export {
   checkPayment,
   connectPeer,
   getInfo,
-  invoices,
+  getTransactions,
   keysend,
   makeInvoice,
   request,

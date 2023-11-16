@@ -732,18 +732,12 @@
         "send_satoshis": "⚡️ส่งซาโตชิ⚡️",
         "enable_now": "เปิดใช้งานเดี๋ยวนี้"
       },
-      "recent_transactions": "ธุรกรรมทั้งหมด",
       "allowance_view": {
-        "recent_transactions": "ธุรกรรมทั้งหมด",
         "no_transactions": "ยังไม่มีธุรกรรมบน <0>{{name}}</0>"
       },
       "default_view": {
-        "recent_transactions": "ธุรกรรมทั้งหมด",
         "is_blocked_hint": "Alby ถูกปิดใช้งานบน {{host}}",
-        "block_removed": "เปิดใช้งาน {{host}} โปรด รีเฟรชหน้าเว็บไซต์",
-        "no_outgoing_transactions": "ไม่มีธุรกรรมออกจากบัญชีนี้",
-        "no_incoming_transactions": "ไม่มีธุรกกรมเข้ามาที่บัญชีนี้",
-        "all_transactions_link": "ดูธุรกรรมทั้งหมด"
+        "block_removed": "เปิดใช้งาน {{host}} โปรด รีเฟรชหน้าเว็บไซต์"
       }
     },
     "lnurlwithdraw": {
@@ -871,10 +865,6 @@
     },
     "transactions": {
       "title": "การทำธุรกรรม",
-      "description": {
-        "outgoing": "ธุรกรรมขาออกสำหรับบัญชีนี้",
-        "incoming": "ธุรกรรมขาเข้าสำหรับบัญชีนี้"
-      },
       "list_empty": "ยังไม่มีการทำธุรกรรม"
     }
   },
@@ -1120,7 +1110,7 @@
         "invalid_credentials": "รหัสผ่านไม่ถูกต้อง โปรดเช็ครหัสผ่านและอีเมลของคุณ และลองอีกครั้ง"
       }
     },
-    "transactionsTable": {
+    "transactions_table": {
       "fee": "ค่าทำเนียม",
       "preimage": "Preimage",
       "received": "ได้รับ",
@@ -1132,12 +1122,6 @@
         "podcast": "พอดคาสต์"
       },
       "open_location": "เปิดเว็บไซต์"
-    },
-    "transaction_list": {
-      "tabs": {
-        "outgoing": "ขาออก",
-        "incoming": "ขาเข้า"
-      }
     },
     "account_menu": {
       "screen_reader": "เมนูแบบเลื่อนลง",

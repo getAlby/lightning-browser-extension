@@ -11,11 +11,10 @@ import { Account } from "~/types";
 import Connector, {
   CheckPaymentArgs,
   CheckPaymentResponse,
-  ConnectorInvoice,
   ConnectPeerResponse,
   GetBalanceResponse,
   GetInfoResponse,
-  GetInvoicesResponse,
+  GetTransactionsResponse,
   KeysendArgs,
   MakeInvoiceArgs,
   MakeInvoiceResponse,
@@ -85,52 +84,11 @@ export default class Kollider implements Connector {
     throw new Error("Not yet supported with the currently used account.");
   }
 
-  async getInvoices(): Promise<GetInvoicesResponse> {
-    const data = await this.request<
-      {
-        account_id: string;
-        add_index: number;
-        created_at: number;
-        currency: KolliderCurrencies;
-        expiry: number;
-        fees: null; // FIXME! Why is this null?
-        incoming: boolean;
-        owner: number;
-        payment_hash: string;
-        payment_request: string;
-        reference: string;
-        settled: boolean;
-        settled_date: number;
-        target_account_currency: KolliderCurrencies;
-        uid: number;
-        value: number;
-        value_msat: number;
-      }[]
-    >("GET", "/getuserinvoices", undefined);
-
-    const invoices: ConnectorInvoice[] = data
-      .filter((i) => i.incoming)
-      .filter((i) => i.account_id === this.currentAccountId)
-      .map(
-        (invoice, index): ConnectorInvoice => ({
-          id: `${invoice.payment_hash}-${index}`,
-          memo: invoice.reference,
-          preimage: "", // kollider doesn't support preimage (yet)
-          settled: invoice.settled,
-          settleDate: invoice.settled_date,
-          totalAmount: `${invoice.value}`,
-          type: "received",
-        })
-      )
-      .sort((a, b) => {
-        return b.settleDate - a.settleDate;
-      });
-
-    return {
-      data: {
-        invoices,
-      },
-    };
+  async getTransactions(): Promise<GetTransactionsResponse> {
+    console.error(
+      `getTransactions() is not yet supported with the currently used account: ${this.constructor.name}`
+    );
+    return { data: { transactions: [] } };
   }
 
   async getInfo(): Promise<GetInfoResponse> {

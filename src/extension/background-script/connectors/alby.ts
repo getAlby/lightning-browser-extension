@@ -15,11 +15,11 @@ import state from "../state";
 import Connector, {
   CheckPaymentArgs,
   CheckPaymentResponse,
-  ConnectorInvoice,
+  ConnectorTransaction,
   ConnectPeerResponse,
   GetBalanceResponse,
   GetInfoResponse,
-  GetInvoicesResponse,
+  GetTransactionsResponse,
   KeysendArgs,
   MakeInvoiceArgs,
   MakeInvoiceResponse,
@@ -76,6 +76,7 @@ export default class Alby implements Connector {
       "sendPayment",
       "sendPaymentAsync",
       "getBalance",
+      "getTransactions",
     ];
   }
 
@@ -87,26 +88,27 @@ export default class Alby implements Connector {
     throw new Error("Not yet supported with the currently used account.");
   }
 
-  async getInvoices(): Promise<GetInvoicesResponse> {
-    const incomingInvoices = (await this._request((client) =>
-      client.incomingInvoices({})
+  async getTransactions(): Promise<GetTransactionsResponse> {
+    const invoicesResponse = (await this._request((client) =>
+      client.invoices({})
     )) as Invoice[];
 
-    const invoices: ConnectorInvoice[] = incomingInvoices.map(
-      (invoice, index): ConnectorInvoice => ({
+    const transactions: ConnectorTransaction[] = invoicesResponse.map(
+      (invoice, index): ConnectorTransaction => ({
         custom_records: invoice.custom_records,
         id: `${invoice.payment_request}-${index}`,
         memo: invoice.comment || invoice.memo,
         preimage: "", // alby wallet api doesn't support preimage (yet)
+        payment_hash: invoice.payment_hash,
         settled: invoice.settled,
         settleDate: new Date(invoice.settled_at).getTime(),
-        totalAmount: `${invoice.amount}`,
-        type: "received",
+        totalAmount: invoice.amount,
+        type: invoice.type == "incoming" ? "received" : "sent",
       })
     );
     return {
       data: {
-        invoices,
+        transactions,
       },
     };
   }

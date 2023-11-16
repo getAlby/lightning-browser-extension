@@ -318,13 +318,10 @@
         "send_satoshis": "⚡️ Wyślij Satoshi ⚡️",
         "enable_now": "Włącz teraz"
       },
-      "recent_transactions": "Ostatnie transakcje",
       "allowance_view": {
-        "recent_transactions": "Ostatnie transakcje",
         "no_transactions": "Jeszcze nie ma transakcji na koncie <0>{{name}}</0>."
       },
       "default_view": {
-        "recent_transactions": "Ostatnie transakcje",
         "is_blocked_hint": "Alby jest obecnie wyłączone na {{host}}",
         "block_removed": "Włączono {{host}}. Odśwież stronę."
       }
@@ -781,7 +778,7 @@
         "allow_camera_access": "Proszę pozwolić na dostęp do kamery w ekranie ustawień."
       }
     },
-    "transactionsTable": {
+    "transactions_table": {
       "fee": "Opłata",
       "preimage": "Obraz pierwotny (preimage)",
       "received": "Otrzymano",

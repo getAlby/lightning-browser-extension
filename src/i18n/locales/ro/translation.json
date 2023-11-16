@@ -305,13 +305,10 @@
         "send_satoshis": "⚡️ Trimite Satoshi ⚡️",
         "enable_now": "Activeaza acum"
       },
-      "recent_transactions": "Tranzactii recente",
       "allowance_view": {
-        "recent_transactions": "Tranzactii recente",
         "no_transactions": "Nicio tranzactie pentru <0>{{nume}}</0> inca."
       },
       "default_view": {
-        "recent_transactions": "Tranzactii recente",
         "is_blocked_hint": "Momentan, Alby este dezactivat pentru {{host}}",
         "block_removed": "{{host}} activat. Te rugam sa reincarci website-ul."
       }
@@ -727,7 +724,7 @@
         "allow_camera_access": ""
       }
     },
-    "transactionsTable": {
+    "transactions_table": {
       "fee": "",
       "preimage": "",
       "received": "",
