@@ -98,20 +98,6 @@
           "placeholder": "シークレット・stack sats・フレーズ"
         }
       },
-      "lndhub_bluewallet": {
-        "page": {
-          "title": "BlueWalletに接続",
-          "description": "BlueWalletで、接続したいウォレットを開き、\"... \"をクリックします。エクスポート/バックアップをクリックしてQRコードを表示し、ウェブカメラでスキャンします。"
-        },
-        "errors": {
-          "invalid_uri": "無効なBlueWalletのURI",
-          "connection_failed": "接続に失敗しました。BlueWalletのURIは正しいですか？"
-        },
-        "uri": {
-          "label": "BlueWalletのエクスポートURI"
-        },
-        "title": "BlueWallet"
-      },
       "lndhub_go": {
         "title": "LNDHub",
         "page": {

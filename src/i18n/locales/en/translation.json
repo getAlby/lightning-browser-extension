@@ -100,20 +100,6 @@
           "placeholder": "secret stack sats phrase"
         }
       },
-      "lndhub_bluewallet": {
-        "title": "Bluewallet",
-        "page": {
-          "title": "Connect to BlueWallet",
-          "description": "In BlueWallet, choose the wallet you want to connect, open it, click on \"...\", click on Export/Backup to display the QR code and scan it with your webcam."
-        },
-        "uri": {
-          "label": "BlueWallet Export URI"
-        },
-        "errors": {
-          "invalid_uri": "Invalid BlueWallet URI",
-          "connection_failed": "Connection failed. Is your BlueWallet URI correct?"
-        }
-      },
       "lndhub_go": {
         "title": "LNDHub",
         "page": {

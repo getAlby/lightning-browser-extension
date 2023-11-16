@@ -189,20 +189,6 @@
           "missing_token": "JWT ausente, não foi possível fazer login."
         }
       },
-      "lndhub_bluewallet": {
-        "title": "Bluewallet",
-        "page": {
-          "title": "Conecte-se na BlueWallet",
-          "description": "Na BlueWallet, escolha a carteira que você deseja conectar, abra ela, clique em \"...\", clique em Exportar/Backup para exibir o código QR e leia o código com sua webcam."
-        },
-        "uri": {
-          "label": "Exportar URI BlueWallet"
-        },
-        "errors": {
-          "invalid_uri": "URI BlueWallet inválida",
-          "connection_failed": "Falha na conexão. A URI BlueWallet está correta?"
-        }
-      },
       "lndhub_go": {
         "title": "LNDHub",
         "page": {

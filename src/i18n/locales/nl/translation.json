@@ -49,20 +49,6 @@
           "connection_failed": "Connectie gefaald. Zijn je LND credentials correct?"
         }
       },
-      "lndhub_bluewallet": {
-        "title": "Bluewallet",
-        "page": {
-          "title": "Verbind met BlueWallet",
-          "description": "Kies in BlueWallet de Lightning wallet waarmee je wilt verbinden, open deze, klik op \"...\", klik op Exporteren/Back-up om de QR-code weer te geven en scan deze."
-        },
-        "uri": {
-          "label": "BlueWallet Export URI"
-        },
-        "errors": {
-          "invalid_uri": "BlueWallet URI invalide",
-          "connection_failed": "Connectie gefaald. Is je BlueWallet URI correct?"
-        }
-      },
       "lndhub_go": {
         "title": "LNDHub",
         "page": {

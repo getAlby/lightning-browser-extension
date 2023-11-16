@@ -181,20 +181,6 @@
           "placeholder": "skrivna fraza za stack sats"
         }
       },
-      "lndhub_bluewallet": {
-        "title": "Bluewallet",
-        "page": {
-          "title": "Poveži z BlueWallet",
-          "description": "V BlueWallet izberi denarnico, ki jo želiš povezati, jo odpri, klikni na \"...\", klikni na Izvozi/Varnostno kopiraj za prikaz QR kode, ki jo skeniraš s svojo kamero."
-        },
-        "errors": {
-          "invalid_uri": "Nepravilen BlueWallet URI",
-          "connection_failed": "Povezava ni bila uspešna. Je tvoj BlueWallet URI pravilen?"
-        },
-        "uri": {
-          "label": "BlueWallet izvozni URI"
-        }
-      },
       "lnbits": {
         "page": {
           "title": "Poveži z <0>LNbits</0>",

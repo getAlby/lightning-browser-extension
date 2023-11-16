@@ -97,20 +97,6 @@
           "placeholder": "secret stack sats phrase"
         }
       },
-      "lndhub_bluewallet": {
-        "title": "Bluewallet",
-        "page": {
-          "title": "連接 BlueWallet",
-          "description": "在BlueWallet中，選擇要連接的錢包，打開它，點擊“...”，點擊導出/備份以顯示二維碼並使用攝像頭掃描。"
-        },
-        "uri": {
-          "label": "BlueWallet 導出 URI"
-        },
-        "errors": {
-          "invalid_uri": "BlueWallet URI無效",
-          "connection_failed": "連接失敗。你的 BlueWallet URI 是否正確？"
-        }
-      },
       "lndhub_go": {
         "title": "LNDHub",
         "page": {

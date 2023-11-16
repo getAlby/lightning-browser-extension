@@ -90,20 +90,6 @@
           "placeholder": "fraza ta secreta pentru acumulare de sats"
         }
       },
-      "lndhub_bluewallet": {
-        "title": "BlueWallet",
-        "page": {
-          "title": "Conecteaza-te la BlueWallet",
-          "description": "In BlueWallet, alegere portofelul pe care vrei sa il conectezi, deschide-l, apasa pe \"...\", apoi pe Export/Backup pentru a afisa codul QR si scaneaza-l cu camera ta."
-        },
-        "uri": {
-          "label": "BlueWallet Export URI"
-        },
-        "errors": {
-          "invalid_uri": "BlueWallet URI invalid",
-          "connection_failed": "Conexiune esuata. BlueWallet URI este corect?"
-        }
-      },
       "lndhub_go": {
         "title": "LNDHub",
         "page": {

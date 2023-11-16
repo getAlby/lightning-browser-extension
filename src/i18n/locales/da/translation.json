@@ -90,20 +90,6 @@
           "placeholder": "hemmelig kode til sats-samlingen"
         }
       },
-      "lndhub_bluewallet": {
-        "title": "Bluewallet",
-        "page": {
-          "title": "Opet forbindelse til Bluewallet",
-          "description": "Vælg den wallet du vil oprette forbindelse til i Bluewallet, åbn den, klik på \"...\", klik på Export/Backup for at se QR-koden og aflæs den med dit webkamera."
-        },
-        "uri": {
-          "label": "BlueWallet export URI"
-        },
-        "errors": {
-          "invalid_uri": "Ugyldig BlueWallet URI",
-          "connection_failed": "Forbindelse kunne ikke oprettes. Er din BlueWallet URI korrekt?"
-        }
-      },
       "lndhub_go": {
         "title": "LNDHub",
         "page": {

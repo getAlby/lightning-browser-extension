@@ -27,7 +27,6 @@ import lightning_node from "/static/assets/icons/lightning_node.png";
 import lightning_terminal from "/static/assets/icons/lightning_terminal.png";
 import lnbits from "/static/assets/icons/lnbits.png";
 import lnd from "/static/assets/icons/lnd.png";
-import lndhubBlueWallet from "/static/assets/icons/lndhub_bluewallet.png";
 import lndhubGo from "/static/assets/icons/lndhub_go.png";
 import mynode from "/static/assets/icons/mynode.png";
 import raspiblitz from "/static/assets/icons/raspiblitz.png";
@@ -139,15 +138,9 @@ const connectorMap: { [key: string]: ConnectorRoute } = {
   },
   "lnd-hub-go": {
     path: "lnd-hub-go",
-    element: <ConnectLndHub lndHubType="lndhub_go" />,
+    element: <ConnectLndHub />,
     title: i18n.t("translation:choose_connector.lndhub_go.title"),
     logo: lndhubGo,
-  },
-  "lnd-hub-bluewallet": {
-    path: "lnd-hub-bluewallet",
-    element: <ConnectLndHub />,
-    title: i18n.t("translation:choose_connector.lndhub_bluewallet.title"),
-    logo: lndhubBlueWallet,
   },
   eclair: {
     path: "eclair",
@@ -259,7 +252,6 @@ function getConnectorRoutes(): ConnectorRoute[] {
     connectorMap["lnbits"],
     connectorMap["lnd-hub-go"],
     connectorMap["kollider"],
-    connectorMap["lnd-hub-bluewallet"],
     connectorMap["eclair"],
     connectorMap["btcpay"],
     connectorMap[galoyPaths.blink],
