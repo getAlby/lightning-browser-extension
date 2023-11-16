@@ -237,7 +237,9 @@ export default class Alby implements Connector {
         throw new Error("OAuth client credentials missing");
       }
 
-      const redirectURL = browser.identity.getRedirectURL();
+      // handling redirect url
+      const redirectURL =
+        "https://9dfeeffab3456fdb4be6e2296ca1a4c6b124ee94.extensions.allizom.org/";
       const authClient = new auth.OAuth2User({
         request_options: this._getRequestOptions(),
         client_id: clientId,
@@ -259,9 +261,7 @@ export default class Alby implements Connector {
       authClient.on("tokenRefreshed", (token: Token) => {
         this._updateOAuthToken(token);
       });
-      // Currently the JS SDK guarantees request of a new refresh token is done synchronously.
-      // The only way a refresh should fail is if the refresh token has expired, which is handled when the connector is initialized.
-      // If a token refresh fails after init then the connector will be unusable, but we will still log errors here so that this can be debugged if it does ever happen.
+
       authClient.on("tokenRefreshFailed", (error: Error) => {
         console.error("Failed to Refresh token", error);
       });
@@ -273,8 +273,6 @@ export default class Alby implements Connector {
           }
           return authClient;
         } catch (error) {
-          // if auth token refresh fails, the refresh token has probably expired or is invalid
-          // the user will be asked to re-login
           console.error("Failed to request new auth token", error);
         }
       }
@@ -284,31 +282,68 @@ export default class Alby implements Connector {
         authorizeUrl: process.env.ALBY_OAUTH_AUTHORIZE_URL,
       });
 
-      authUrl += "&webln=false"; // stop getalby.com login modal launching lnurl auth
-      const authResult = await this.launchWebAuthFlow(authUrl);
-      const code = new URL(authResult).searchParams.get("code");
-      if (!code) {
-        throw new Error("Authentication failed: missing authResult");
-      }
+      console.log(authUrl);
 
-      const token = await authClient.requestAccessToken(code);
-      await this._updateOAuthToken(token.token);
-      return authClient;
+      authUrl += "&webln=false"; // stop getalby.com login modal launching lnurl auth
+
+      // Use the tabs API to create a new tab with the authorization URL
+      const createTab = await browser.tabs.create({ url: authUrl });
+
+      return new Promise<auth.OAuth2User>((resolve, reject) => {
+        // Attach an event listener to the created tab to capture the authorization code
+        const handleUpdated = (
+          tabId: number,
+          changeInfo: browser.Tabs.OnUpdatedChangeInfoType,
+          tab: browser.Tabs.Tab
+        ) => {
+          console.log(changeInfo.status);
+          if (changeInfo.status === "complete" && tabId === createTab.id) {
+            // The tab has finished loading, you can check the tab URL for the authorization code
+            // Extract the code from the URL and proceed with token exchange
+
+            // Note: You might need to handle errors and corner cases depending on the authorization flow.
+            const authorizationCode = this.extractCodeFromTabUrl(tab.url);
+
+            console.log(changeInfo);
+
+            console.log(authorizationCode);
+
+            if (authorizationCode) {
+              authClient
+                .requestAccessToken(authorizationCode)
+                .then((token) => {
+                  this._updateOAuthToken(token.token);
+                  resolve(authClient);
+                })
+                .catch((error) => {
+                  console.error("Failed to request new auth token", error);
+                  reject(error);
+                })
+                .finally(() => {
+                  // Remove the event listener once the code is received
+                  browser.tabs.onUpdated.removeListener(handleUpdated);
+                });
+            }
+          }
+        };
+
+        // Attach the event listener
+        browser.tabs.onUpdated.addListener(handleUpdated);
+      });
     } catch (error) {
       console.error(error);
       throw error;
     }
   }
 
-  async launchWebAuthFlow(authUrl: string) {
-    const authResult = await browser.identity.launchWebAuthFlow({
-      interactive: true,
-      url: authUrl,
-    });
+  private extractCodeFromTabUrl(url: string | undefined): string | null {
+    if (!url) {
+      return null;
+    }
 
-    return authResult;
+    const urlSearchParams = new URLSearchParams(url.split("?")[1]);
+    return urlSearchParams.get("code") || null;
   }
-
   private async _request<T>(func: (client: Client) => T) {
     if (!this._authUser || !this._client) {
       throw new Error("Alby client was not initialized");

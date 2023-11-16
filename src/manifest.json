@@ -14,7 +14,6 @@
   "description": "Your Bitcoin Lightning wallet and companion for accessing Bitcoin and Nostr apps, payments across the globe and passwordless logins.",
   "homepage_url": "https://getAlby.com/",
   "permissions": [
-    "nativeMessaging",
     "notifications",
     "storage",
     "tabs",
