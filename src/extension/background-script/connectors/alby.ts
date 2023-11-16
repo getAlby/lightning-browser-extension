@@ -93,8 +93,6 @@ export default class Alby implements Connector {
       client.invoices({})
     )) as Invoice[];
 
-    console.log(invoicesResponse);
-
     const transactions: ConnectorTransaction[] = invoicesResponse.map(
       (invoice, index): ConnectorTransaction => ({
         custom_records: invoice.custom_records,
