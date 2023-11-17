@@ -237,9 +237,9 @@ export default class Alby implements Connector {
         throw new Error("OAuth client credentials missing");
       }
 
-      // handling redirect url
       const redirectURL =
         "https://9dfeeffab3456fdb4be6e2296ca1a4c6b124ee94.extensions.allizom.org/";
+
       const authClient = new auth.OAuth2User({
         request_options: this._getRequestOptions(),
         client_id: clientId,
@@ -284,17 +284,15 @@ export default class Alby implements Connector {
 
       authUrl += "&webln=false"; // stop getalby.com login modal launching lnurl auth
 
-      // Use the tabs API to create a new tab with the authorization URL
-      const createTab = await browser.tabs.create({ url: authUrl });
+      const oAuthTab = await browser.tabs.create({ url: authUrl });
 
       return new Promise<auth.OAuth2User>((resolve, reject) => {
-        // Attach an event listener to the created tab to capture the authorization code
         const handleUpdated = (
           tabId: number,
           changeInfo: browser.Tabs.OnUpdatedChangeInfoType,
           tab: browser.Tabs.Tab
         ) => {
-          if (changeInfo.status === "complete" && tabId === createTab.id) {
+          if (changeInfo.status === "complete" && tabId === oAuthTab.id) {
             const authorizationCode = this.extractCodeFromTabUrl(tab.url);
 
             if (authorizationCode) {
@@ -310,15 +308,22 @@ export default class Alby implements Connector {
                 })
                 .finally(() => {
                   browser.tabs.remove(tabId);
-                  // Remove the event listener once the code is received
                   browser.tabs.onUpdated.removeListener(handleUpdated);
                 });
             }
           }
         };
+        const handleRemoved = (tabId: number) => {
+          if (tabId === oAuthTab.id) {
+            // The user closed the authentication tab without completing the flow
+            const error = new Error("OAuth authentication canceled by user");
+            reject(error);
+            browser.tabs.onRemoved.removeListener(handleRemoved);
+          }
+        };
 
-        // Attach the event listener
         browser.tabs.onUpdated.addListener(handleUpdated);
+        browser.tabs.onRemoved.addListener(handleRemoved);
       });
     } catch (error) {
       console.error(error);
@@ -330,10 +335,10 @@ export default class Alby implements Connector {
     if (!url) {
       return null;
     }
-
     const urlSearchParams = new URLSearchParams(url.split("?")[1]);
     return urlSearchParams.get("code") || null;
   }
+
   private async _request<T>(func: (client: Client) => T) {
     if (!this._authUser || !this._client) {
       throw new Error("Alby client was not initialized");
