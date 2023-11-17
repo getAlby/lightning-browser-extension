@@ -261,7 +261,9 @@ export default class Alby implements Connector {
       authClient.on("tokenRefreshed", (token: Token) => {
         this._updateOAuthToken(token);
       });
-
+      // Currently the JS SDK guarantees request of a new refresh token is done synchronously.
+      // The only way a refresh should fail is if the refresh token has expired, which is handled when the connector is initialized.
+      // If a token refresh fails after init then the connector will be unusable, but we will still log errors here so that this can be debugged if it does ever happen.
       authClient.on("tokenRefreshFailed", (error: Error) => {
         console.error("Failed to Refresh token", error);
       });
@@ -287,7 +289,7 @@ export default class Alby implements Connector {
       const oAuthTab = await browser.tabs.create({ url: authUrl });
 
       return new Promise<auth.OAuth2User>((resolve, reject) => {
-        const handleUpdated = (
+        const handleTabUpdated = (
           tabId: number,
           changeInfo: browser.Tabs.OnUpdatedChangeInfoType,
           tab: browser.Tabs.Tab
@@ -295,35 +297,37 @@ export default class Alby implements Connector {
           if (changeInfo.status === "complete" && tabId === oAuthTab.id) {
             const authorizationCode = this.extractCodeFromTabUrl(tab.url);
 
-            if (authorizationCode) {
-              authClient
-                .requestAccessToken(authorizationCode)
-                .then((token) => {
-                  this._updateOAuthToken(token.token);
-                  resolve(authClient);
-                })
-                .catch((error) => {
-                  console.error("Failed to request new auth token", error);
-                  reject(error);
-                })
-                .finally(() => {
-                  browser.tabs.remove(tabId);
-                  browser.tabs.onUpdated.removeListener(handleUpdated);
-                });
+            if (!authorizationCode) {
+              throw new Error("no authorization code");
             }
+
+            authClient
+              .requestAccessToken(authorizationCode)
+              .then((token) => {
+                this._updateOAuthToken(token.token);
+                resolve(authClient);
+              })
+              .catch((error) => {
+                console.error("Failed to request new auth token", error);
+                reject(error);
+              })
+              .finally(() => {
+                browser.tabs.remove(tabId);
+                browser.tabs.onUpdated.removeListener(handleTabUpdated);
+              });
           }
         };
-        const handleRemoved = (tabId: number) => {
+        const handleTabRemoved = (tabId: number) => {
           if (tabId === oAuthTab.id) {
             // The user closed the authentication tab without completing the flow
             const error = new Error("OAuth authentication canceled by user");
             reject(error);
-            browser.tabs.onRemoved.removeListener(handleRemoved);
+            browser.tabs.onRemoved.removeListener(handleTabRemoved);
           }
         };
 
-        browser.tabs.onUpdated.addListener(handleUpdated);
-        browser.tabs.onRemoved.addListener(handleRemoved);
+        browser.tabs.onUpdated.addListener(handleTabUpdated);
+        browser.tabs.onRemoved.addListener(handleTabRemoved);
       });
     } catch (error) {
       console.error(error);
