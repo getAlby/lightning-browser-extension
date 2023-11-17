@@ -237,8 +237,7 @@ export default class Alby implements Connector {
         throw new Error("OAuth client credentials missing");
       }
 
-      const redirectURL =
-        "https://9dfeeffab3456fdb4be6e2296ca1a4c6b124ee94.extensions.allizom.org/";
+      const redirectURL = "https://getalby.com/extension/connect";
 
       const authClient = new auth.OAuth2User({
         request_options: this._getRequestOptions(),
