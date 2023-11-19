@@ -383,7 +383,7 @@
         }
       },
       "actions": {
-        "add_account": "Dodaj konto"
+        "connect_a_wallet": "Dodaj konto"
       }
     },
     "unlock": {
@@ -699,7 +699,7 @@
     "advanced": "Zaawansowane",
     "success": "Sukces",
     "error": "Błąd",
-    "settings": "Ustawienia",
+    "extension_settings": "Ustawienia",
     "accounts": "Konta",
     "discover": "Odkrywaj",
     "connected_sites": "",
@@ -819,8 +819,8 @@
       "title": "Zmień konto",
       "options": {
         "account": {
-          "add": "Dodaj nowe konto",
-          "manage": "Zarządzaj kontami"
+          "connect_a_wallet": "Dodaj nowe konto",
+          "manage_wallets": "Zarządzaj kontami"
         }
       }
     },

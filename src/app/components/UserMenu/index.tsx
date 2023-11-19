@@ -79,7 +79,7 @@ export default function UserMenu() {
           }}
         >
           <GearIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
-          {tCommon("settings")}
+          {tCommon("extension_settings")}
         </Menu.ItemButton>
         <Menu.ItemButton
           onClick={() => {

@@ -370,7 +370,7 @@
         }
       },
       "actions": {
-        "add_account": "Ajouter un compte"
+        "connect_a_wallet": "Ajouter un compte"
       }
     },
     "unlock": {
@@ -652,7 +652,7 @@
     "advanced": "Avancé",
     "success": "Succès",
     "error": "Erreur",
-    "settings": "Paramètres",
+    "extension_settings": "Paramètres",
     "accounts": "Comptes",
     "discover": "Découvrir",
     "connected_sites": "",
@@ -771,8 +771,8 @@
       "title": "Changer de compte",
       "options": {
         "account": {
-          "add": "Ajouter un nouveau compte",
-          "manage": "Gérer les comptes"
+          "connect_a_wallet": "Ajouter un nouveau compte",
+          "manage_wallets": "Gérer les comptes"
         }
       }
     },

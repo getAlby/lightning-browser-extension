@@ -365,7 +365,7 @@
         }
       },
       "actions": {
-        "add_account": "खाते जोडा"
+        "connect_a_wallet": "खाते जोडा"
       }
     },
     "unlock": {
@@ -674,7 +674,7 @@
     "confirm_password": "पासवर्डची पुष्टी करा",
     "advanced": "पुढे",
     "success": "यश",
-    "settings": "सेटिंग्ज",
+    "extension_settings": "सेटिंग्ज",
     "accounts": "खाते",
     "discover": "शोध",
     "connected_sites": "",
@@ -798,8 +798,8 @@
       "title": "खाते बदला",
       "options": {
         "account": {
-          "add": "नवीन खाते जोडा",
-          "manage": "खाती व्यवस्थापित करा"
+          "connect_a_wallet": "नवीन खाते जोडा",
+          "manage_wallets": "खाती व्यवस्थापित करा"
         }
       }
     }

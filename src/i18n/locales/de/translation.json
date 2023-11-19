@@ -426,7 +426,7 @@
     "accounts": {
       "title": "Konten",
       "actions": {
-        "add_account": "Konto hinzufügen"
+        "connect_a_wallet": "Konto hinzufügen"
       },
       "account_view": {
         "title2": "Konto",
@@ -979,8 +979,8 @@
     "account_menu": {
       "options": {
         "account": {
-          "add": "Neues Konto hinzufügen",
-          "manage": "Konten verwalten",
+          "connect_a_wallet": "Neues Konto hinzufügen",
+          "manage_wallets": "Konten verwalten",
           "account_settings": "Kontoeinstellungen",
           "go_to_web_wallet": "Verwalte dein Web-Konto"
         }

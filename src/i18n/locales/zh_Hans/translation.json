@@ -311,7 +311,7 @@
     "accounts": {
       "title": "帐户",
       "actions": {
-        "add_account": "添加帐户"
+        "connect_a_wallet": "添加帐户"
       },
       "account_view": {
         "nostr": {
@@ -943,7 +943,7 @@
     "success": "成功",
     "description_full": "详细描述",
     "password": "密码",
-    "settings": "设置",
+    "extension_settings": "设置",
     "connected_sites": "已连接的网站",
     "amount": "金额",
     "optional": "可选",
@@ -1003,8 +1003,8 @@
       "title": "切换帐户",
       "options": {
         "account": {
-          "add": "添加新帐户",
-          "manage": "管理帐户",
+          "connect_a_wallet": "添加新帐户",
+          "manage_wallets": "管理帐户",
           "account_settings": "帐户设置",
           "go_to_web_wallet": "管理你的网络帐户"
         }

@@ -228,7 +228,7 @@
     "accounts": {
       "title": "",
       "actions": {
-        "add_account": ""
+        "connect_a_wallet": ""
       }
     },
     "unlock": {
@@ -456,7 +456,7 @@
     "password": "",
     "success": "",
     "error": "",
-    "settings": "",
+    "extension_settings": "",
     "connected_sites": "",
     "sats_one": "sat",
     "sats_other": "sats",
@@ -561,8 +561,8 @@
       "title": "",
       "options": {
         "account": {
-          "add": "",
-          "manage": ""
+          "connect_a_wallet": "",
+          "manage_wallets": ""
         }
       }
     },

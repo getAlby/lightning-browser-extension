@@ -311,7 +311,7 @@
     "accounts": {
       "title": "Cuentas",
       "actions": {
-        "add_account": "Agregar Cuenta"
+        "connect_a_wallet": "Agregar Cuenta"
       },
       "account_view": {
         "nostr": {
@@ -731,7 +731,7 @@
     "password": "Contraseña",
     "success": "Exitoso",
     "error": "Error",
-    "settings": "Ajustes",
+    "extension_settings": "Ajustes",
     "connected_sites": "Sitios conectados",
     "sats_one": "sat",
     "sats_other": "sats",
@@ -854,8 +854,8 @@
       "title": "Cambiar de cuenta",
       "options": {
         "account": {
-          "add": "Agregar una nueva cuenta",
-          "manage": "Administrar cuentas",
+          "connect_a_wallet": "Agregar una nueva cuenta",
+          "manage_wallets": "Administrar cuentas",
           "account_settings": "Configuraciones de la cuenta",
           "go_to_web_wallet": "Administra tu cuenta de Alby"
         }

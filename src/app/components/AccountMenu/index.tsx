@@ -128,7 +128,7 @@ function AccountMenu({ showOptions = true }: Props) {
             }}
           >
             <WalletIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
-            {t("options.account.account_settings")}
+            {t("options.account.wallet_settings")}
           </Menu.ItemButton>
           {(isAlbyLNDHubAccount(
             authAccount?.alias,
@@ -193,7 +193,7 @@ function AccountMenu({ showOptions = true }: Props) {
                 }}
               >
                 <PlusIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
-                {t("options.account.add")}
+                {t("options.account.connect_a_wallet")}
               </Menu.ItemButton>
               <Menu.ItemButton
                 onClick={() => {
@@ -201,7 +201,7 @@ function AccountMenu({ showOptions = true }: Props) {
                 }}
               >
                 <AddressBookIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
-                {t("options.account.manage")}
+                {t("options.account.manage_wallets")}
               </Menu.ItemButton>
             </>
           )}

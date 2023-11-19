@@ -493,7 +493,7 @@
         }
       },
       "actions": {
-        "add_account": "Dodaj račun"
+        "connect_a_wallet": "Dodaj račun"
       }
     },
     "unlock": {
@@ -758,9 +758,9 @@
     "account_menu": {
       "options": {
         "account": {
-          "manage": "Upravljanje računov",
+          "manage_wallets": "Upravljanje računov",
           "account_settings": "Nastavitve računa",
-          "add": "Dodaj nov račun",
+          "connect_a_wallet": "Dodaj nov račun",
           "go_to_web_wallet": "Upravljaj svoj spletni račun"
         }
       },

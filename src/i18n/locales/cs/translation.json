@@ -310,7 +310,7 @@
     "accounts": {
       "title": "Účty",
       "actions": {
-        "add_account": "Přidat účet"
+        "connect_a_wallet": "Přidat účet"
       },
       "account_view": {
         "remove": {
@@ -740,7 +740,7 @@
     "advanced": "Pokročilé",
     "success": "Úspěch",
     "error": "Chyba",
-    "settings": "Nastavení",
+    "extension_settings": "Nastavení",
     "connected_sites": "",
     "sats_one": "sat",
     "sats_other": "satů",
@@ -855,8 +855,8 @@
       "title": "Změnit účet",
       "options": {
         "account": {
-          "add": "Přidat nový účet",
-          "manage": "Spravovat účty"
+          "connect_a_wallet": "Přidat nový účet",
+          "manage_wallets": "Spravovat účty"
         }
       }
     },

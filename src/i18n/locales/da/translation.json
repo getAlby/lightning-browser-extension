@@ -369,7 +369,7 @@
         }
       },
       "actions": {
-        "add_account": "Tilføj konto"
+        "connect_a_wallet": "Tilføj konto"
       }
     },
     "unlock": {
@@ -651,7 +651,7 @@
     "advanced": "Avanceret",
     "success": "Succes",
     "error": "Fejl",
-    "settings": "Indstillinger",
+    "extension_settings": "Indstillinger",
     "accounts": "Konti",
     "discover": "Opdag",
     "connected_sites": "",
@@ -765,8 +765,8 @@
       "title": "Skift konto",
       "options": {
         "account": {
-          "add": "Tilføj en ny konto",
-          "manage": "Administrer konti"
+          "connect_a_wallet": "Tilføj en ny konto",
+          "manage_wallets": "Administrer konti"
         }
       }
     },

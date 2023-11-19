@@ -495,7 +495,7 @@
         "title1": "Pengaturan Akun"
       },
       "actions": {
-        "add_account": "Tambah akun"
+        "connect_a_wallet": "Tambah akun"
       },
       "title": "Akun-akun"
     },
@@ -833,8 +833,8 @@
     "account_menu": {
       "options": {
         "account": {
-          "add": "Tambahkan akun baru",
-          "manage": "Kelola akun",
+          "connect_a_wallet": "Tambahkan akun baru",
+          "manage_wallets": "Kelola akun",
           "account_settings": "Pengaturan Akun",
           "go_to_web_wallet": "Atur akun web kamu"
         }
@@ -975,7 +975,7 @@
     "confirm_password": "Konfirmasi Kata Sandi",
     "success": "Sukses",
     "error": "Eror",
-    "settings": "Pengaturan",
+    "extension_settings": "Pengaturan",
     "accounts": "Akun-akun",
     "connected_sites": "Situs Terhubung",
     "wallet": "Dompet",
