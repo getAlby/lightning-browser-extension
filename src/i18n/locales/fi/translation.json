@@ -260,7 +260,7 @@
     "accounts": {
       "title": "Tilit",
       "actions": {
-        "add_account": "Lisää tili"
+        "connect_a_wallet": "Lisää tili"
       }
     },
     "unlock": {
@@ -505,7 +505,7 @@
     "advanced": "Edistynyt",
     "success": "Menestys",
     "error": "Virhe",
-    "settings": "Asetukset",
+    "extension_settings": "Asetukset",
     "sats_one": "sat",
     "sats_other": "satia",
     "loading": "ladataan",
@@ -610,8 +610,8 @@
       "title": "Vaihda tili",
       "options": {
         "account": {
-          "add": "Lisää uusi tili",
-          "manage": "Hallitse tilejä"
+          "connect_a_wallet": "Lisää uusi tili",
+          "manage_wallets": "Hallitse tilejä"
         }
       }
     },

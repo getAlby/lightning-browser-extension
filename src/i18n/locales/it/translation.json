@@ -287,7 +287,7 @@
     "accounts": {
       "title": "Accounts",
       "actions": {
-        "add_account": "Aggiungi account"
+        "connect_a_wallet": "Aggiungi account"
       },
       "account_view": {
         "nostr": {
@@ -649,7 +649,7 @@
     "password": "Password",
     "success": "Successo",
     "error": "Errore",
-    "settings": "Impostazioni",
+    "extension_settings": "Impostazioni",
     "connected_sites": "",
     "loading": "caricamento",
     "amount": "Importo",
@@ -765,8 +765,8 @@
       "title": "Cambia account",
       "options": {
         "account": {
-          "add": "Aggiungi un nuovo account",
-          "manage": "Gestisci gli account"
+          "connect_a_wallet": "Aggiungi un nuovo account",
+          "manage_wallets": "Gestisci gli account"
         }
       }
     },

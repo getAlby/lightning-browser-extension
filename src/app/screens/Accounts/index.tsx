@@ -24,7 +24,7 @@ function AccountsScreen() {
         <div>
           <Button
             icon={<PlusIcon className="w-5 h-5 mr-2" />}
-            label={t("actions.add_account")}
+            label={t("actions.connect_a_wallet")}
             primary
             onClick={() => navigate(`/accounts/new`)}
           />

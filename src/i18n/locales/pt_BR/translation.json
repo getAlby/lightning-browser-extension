@@ -308,7 +308,7 @@
     "accounts": {
       "title": "Minhas contas",
       "actions": {
-        "add_account": "Adicionar conta"
+        "connect_a_wallet": "Adicionar conta"
       },
       "account_view": {
         "export": {
@@ -956,7 +956,7 @@
     "password": "Senha",
     "success": "Sucesso",
     "error": "Erro",
-    "settings": "Configurações",
+    "extension_settings": "Configurações",
     "connected_sites": "Sites conectados",
     "sats_one": "sat",
     "sats_other": "sats",
@@ -1110,8 +1110,8 @@
       "title": "Mudar de conta",
       "options": {
         "account": {
-          "add": "Adicionar nova conta",
-          "manage": "Gerenciar contas",
+          "connect_a_wallet": "Adicionar nova conta",
+          "manage_wallets": "Gerenciar contas",
           "account_settings": "Configurações da conta",
           "go_to_web_wallet": "Acessar sua conta na web"
         }

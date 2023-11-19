@@ -262,7 +262,7 @@
     "accounts": {
       "title": "",
       "actions": {
-        "add_account": ""
+        "connect_a_wallet": ""
       }
     },
     "unlock": {
@@ -517,7 +517,7 @@
     "advanced": "",
     "success": "",
     "error": "",
-    "settings": "",
+    "extension_settings": "",
     "connected_sites": "",
     "sats_one": "",
     "sats_other": "",
@@ -625,8 +625,8 @@
       "title": "",
       "options": {
         "account": {
-          "add": "",
-          "manage": ""
+          "connect_a_wallet": "",
+          "manage_wallets": ""
         }
       }
     },

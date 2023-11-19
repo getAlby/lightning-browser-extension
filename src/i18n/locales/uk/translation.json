@@ -369,7 +369,7 @@
         }
       },
       "actions": {
-        "add_account": ""
+        "connect_a_wallet": ""
       }
     },
     "unlock": {
@@ -651,7 +651,7 @@
     "advanced": "",
     "success": "",
     "error": "",
-    "settings": "",
+    "extension_settings": "",
     "accounts": "",
     "discover": "",
     "connected_sites": "",
@@ -765,8 +765,8 @@
       "title": "",
       "options": {
         "account": {
-          "add": "",
-          "manage": ""
+          "connect_a_wallet": "",
+          "manage_wallets": ""
         }
       }
     },

@@ -260,7 +260,7 @@
     "accounts": {
       "title": "Kontoj",
       "actions": {
-        "add_account": ""
+        "connect_a_wallet": ""
       }
     },
     "unlock": {
@@ -508,7 +508,7 @@
     "advanced": "Altnivelaj",
     "success": "Sukceso",
     "error": "Eraro",
-    "settings": "Agordoj",
+    "extension_settings": "Agordoj",
     "connected_sites": "",
     "sats_one": "satoŝio",
     "sats_other": "satoŝioj",
@@ -615,8 +615,8 @@
       "title": "",
       "options": {
         "account": {
-          "add": "",
-          "manage": "Administri kontojn"
+          "connect_a_wallet": "",
+          "manage_wallets": "Administri kontojn"
         }
       }
     },

@@ -368,7 +368,7 @@
       }
     },
     "accounts": {
-      "title": "Accounts",
+      "title": "Wallets",
       "account_view": {
         "title1": "Account Settings",
         "title2": "Account",
@@ -521,7 +521,7 @@
         }
       },
       "actions": {
-        "add_account": "Add account"
+        "connect_a_wallet": "Connect a Wallet"
       }
     },
     "webln_enable": {
@@ -986,7 +986,7 @@
     "advanced": "Advanced",
     "success": "Success",
     "error": "Error",
-    "settings": "Settings",
+    "extension_settings": "Extension Settings",
     "accounts": "Accounts",
     "discover": "Discover",
     "connected_sites": "Connected Sites",
@@ -1153,12 +1153,12 @@
     },
     "account_menu": {
       "screen_reader": "Toggle Dropdown",
-      "title": "Switch account",
+      "title": "Switch Wallet",
       "options": {
         "account": {
-          "add": "Add a new account",
-          "manage": "Manage accounts",
-          "account_settings": "Account settings",
+          "connect_a_wallet": "Connect a Wallet",
+          "manage_wallets": "Manage Wallets",
+          "wallet_settings": "Wallet settings",
           "go_to_web_wallet": "Manage your web account"
         }
       }

@@ -485,7 +485,7 @@
         }
       },
       "actions": {
-        "add_account": "添加帳戶"
+        "connect_a_wallet": "添加帳戶"
       }
     },
     "unlock": {
@@ -911,7 +911,7 @@
     "advanced": "高級",
     "success": "成功",
     "error": "錯誤",
-    "settings": "設置",
+    "extension_settings": "設置",
     "accounts": "帳戶",
     "discover": "發現",
     "connected_sites": "已連接的網站",
@@ -1055,8 +1055,8 @@
       "title": "切換帳戶",
       "options": {
         "account": {
-          "add": "添加新帳戶",
-          "manage": "管理帳戶",
+          "connect_a_wallet": "添加新帳戶",
+          "manage_wallets": "管理帳戶",
           "account_settings": "帳戶設置",
           "go_to_web_wallet": "管理你的網路帳戶"
         }

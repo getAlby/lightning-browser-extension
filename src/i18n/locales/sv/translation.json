@@ -316,7 +316,7 @@
     "accounts": {
       "title": "Konton",
       "actions": {
-        "add_account": "Lägg till konto"
+        "connect_a_wallet": "Lägg till konto"
       },
       "account_view": {
         "nostr": {
@@ -981,7 +981,7 @@
     "password": "Lösenord",
     "success": "Genomfört",
     "error": "Misslyckades",
-    "settings": "Inställningar",
+    "extension_settings": "Inställningar",
     "connected_sites": "Anslutna webbplatser",
     "loading": "laddar",
     "amount": "Belopp",
@@ -1136,8 +1136,8 @@
       "title": "Växla konto",
       "options": {
         "account": {
-          "add": "Lägg till nytt konto",
-          "manage": "Hantera konton",
+          "connect_a_wallet": "Lägg till nytt konto",
+          "manage_wallets": "Hantera konton",
           "account_settings": "Konto inställningar",
           "go_to_web_wallet": "Hantera ditt webbkonto"
         }
