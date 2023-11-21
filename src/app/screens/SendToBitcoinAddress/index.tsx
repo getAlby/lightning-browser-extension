@@ -410,13 +410,13 @@ function SendToBitcoinAddress() {
               description="Swap instantly between lightning and on-chain bitcoin"
             />
             <ExchangeLink
-              href="https://fixedfloat.com"
+              href="https://fixedfloat.com/BTCLN/BTC/?ref=qnnjvywb"
               imageSrc="/assets/icons/swap/fixedfloat.png"
               title="FixedFloat"
               description="Instant cryptocurrency exchange"
             />
             <ExchangeLink
-              href="https://sideshift.ai"
+              href="https://sideshift.ai/ln/btc"
               imageSrc="/assets/icons/swap/sideshift.svg"
               title="sideshift.ai"
               description="No sign-up crypto exchange"
