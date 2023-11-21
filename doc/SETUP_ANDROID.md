@@ -12,7 +12,7 @@ b. **Setup Android Device**
 2.  Enable [Android USB debugging](https://developer.android.com/studio/debug/dev-options) on the device.
 3.  Attach your device to the development computer using a USB cable. When prompted, allow USB debugging for the connection.
 4.  In the settings view for Firefox for Android Nightly, enable "Remote debugging via USB."
-5.  Run `$ adb devices` in the command shell to get the device code
+5.  Run `$ adb devices` in the command shell to get the device ID
 
 c. **Install and run extension**
 
