@@ -54,20 +54,6 @@
         },
         "title": "LND"
       },
-      "lndhub_bluewallet": {
-        "uri": {
-          "label": "BlueWallet Export URI"
-        },
-        "errors": {
-          "invalid_uri": "Ungültige BlueWallet-URI",
-          "connection_failed": "Verbindung nicht erfolgreich. Ist deine BlueWallet URI richtig?"
-        },
-        "title": "BlueWallet",
-        "page": {
-          "title": "Verbinden mit BlueWallet",
-          "description": "Wähle in der BlueWallet die Wallet, die du verbinden willst, öffne sie, klicke auf \"...\", klicke auf Export/Backup, um den QR Code anzuzeigen. Scanne ihn dann mit deiner Webcam."
-        }
-      },
       "lndhub_go": {
         "title": "LNDHub",
         "uri": {

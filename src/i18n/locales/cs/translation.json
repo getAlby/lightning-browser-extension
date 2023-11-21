@@ -54,20 +54,6 @@
           "connection_failed": "Připojení se nezdařilo. Jsou vaše údaje pro LND zadány správně?"
         }
       },
-      "lndhub_bluewallet": {
-        "title": "Bluewallet",
-        "page": {
-          "title": "Připojit k BlueWallet",
-          "description": "V BlueWallet vyberte peněženku, kterou chcete připojit, otevřete ji, klikněte na ¨...¨, klikněte na Exportovat/Záloha pro zobrazení QR kódu a tento kód naskenujte svou webkamerou."
-        },
-        "uri": {
-          "label": "BlueWallet Export URI"
-        },
-        "errors": {
-          "invalid_uri": "Nevalidní BlueWallet URI",
-          "connection_failed": "Připojení se nezdařilo. Je vaše BlueWallet URI správné?"
-        }
-      },
       "lndhub_go": {
         "title": "LNDHub",
         "page": {

@@ -90,20 +90,6 @@
           "placeholder": "गुप्त स्टॅक सॅट्स वाक्यांश"
         }
       },
-      "lndhub_bluewallet": {
-        "title": "Bluewallet",
-        "page": {
-          "title": "Connect to BlueWallet",
-          "description": "ब्लूवॉलेटमध्ये, आपण कनेक्ट करू इच्छित वॉलेट निवडा, ते उघडा, \"...\"वर क्लिक करा, QR कोड प्रदर्शित करण्यासाठी एक्सपोर्ट / बॅकअपवर क्लिक करा आणि आपल्या वेबकॅमसह ते स्कॅन करा."
-        },
-        "uri": {
-          "label": "BlueWallet Export URI"
-        },
-        "errors": {
-          "invalid_uri": "अवैध BlueWallet URI",
-          "connection_failed": "कनेक्शन निकामी झाले. तुमची ब्लूवॉलेट URI योग्य आहे का?"
-        }
-      },
       "lndhub_go": {
         "title": "LNDHub",
         "page": {

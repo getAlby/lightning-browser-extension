@@ -55,20 +55,6 @@
           "connection_failed": "Koppling misslyckades. Är dina LND-uppgifter korrekta?"
         }
       },
-      "lndhub_bluewallet": {
-        "title": "Bluewallet",
-        "page": {
-          "title": "Anslut Bluewallet",
-          "description": "I Bluwallet, välj den plånbok du vill koppla till, öppna den och klicka på \"...\", därefter Export/Backup för att visa QR-koden och scanna den med webb-kameran."
-        },
-        "uri": {
-          "label": "BlueWallet Export URI"
-        },
-        "errors": {
-          "invalid_uri": "Ogiltig BlueWallet URI",
-          "connection_failed": "Anslutningen misslyckades. Är din BlueWallet URI korrekt?"
-        }
-      },
       "lndhub_go": {
         "title": "LNDHub",
         "page": {

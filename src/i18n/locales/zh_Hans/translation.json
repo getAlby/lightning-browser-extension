@@ -183,20 +183,6 @@
         },
         "title": "RaspiBlitz"
       },
-      "lndhub_bluewallet": {
-        "title": "Bluewallet",
-        "page": {
-          "title": "连接BlueWallet",
-          "description": "在BlueWallet中，选择你要连接的钱包，打开它，点击\"...\"，点击导出/备份，显示二维码并使用摄像头扫描。"
-        },
-        "uri": {
-          "label": "BlueWallet导出URI"
-        },
-        "errors": {
-          "invalid_uri": "BlueWallet URI无效",
-          "connection_failed": "连接失败。你的BlueWallet URI是否正确？"
-        }
-      },
       "lndhub_go": {
         "title": "LNDHub",
         "page": {
