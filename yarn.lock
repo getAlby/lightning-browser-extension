@@ -666,10 +666,10 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.52.0.tgz#78fe5f117840f69dc4a353adf9b9cd926353378c"
   integrity sha512-mjZVbpaeMZludF2fsWLD0Z9gCref1Tk4i9+wddjRvpUNqqcndPkBD09N/Mapey0b3jaXbLm2kICwFv2E64QinA==
 
-"@getalby/sdk@^2.5.0":
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/@getalby/sdk/-/sdk-2.5.0.tgz#d1b0a22cbcf986755c4b684096d97f52ed0b469d"
-  integrity sha512-MRLgI6WxCCLgrar+qDqm/UhKs+V6yXzNm4y1bJRAuN72nkKT+TjTJHCmk9GjTngR3FrOfLbeMsPwBxCmbvfrLQ==
+"@getalby/sdk@^2.6.0":
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/@getalby/sdk/-/sdk-2.6.0.tgz#51508c7833b0580575055f15b8fe21567b76288a"
+  integrity sha512-klD1FrpGY39QldPf00KtzIveWj0dXtgGdZH6nLWdJ0Ness7FAqy2RkgSF7JQfKJeJSFek7Ip3AL/KCT5/lZgww==
   dependencies:
     crypto-js "^4.1.1"
     events "^3.3.0"
