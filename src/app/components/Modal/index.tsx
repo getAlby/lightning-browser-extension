@@ -25,7 +25,7 @@ export default function Modal({
       onRequestClose={closeModal}
       contentLabel={contentLabel}
       overlayClassName="bg-black bg-opacity-50 fixed inset-0 flex justify-center items-center cursor-pointer"
-      className="rounded-lg shadow-xl bg-white dark:bg-surface-02dp w-full max-w-md overflow-hidden relative p-5 cursor-auto mx-5"
+      className="rounded-lg shadow-xl bg-white dark:bg-surface-02dp w-full max-w-md overflow-x-hidden relative p-5 cursor-auto mx-5"
       style={{ content: { maxHeight: "90vh" } }}
     >
       {title && (

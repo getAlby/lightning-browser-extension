@@ -178,7 +178,7 @@ export default function TransactionModal({
 }
 
 const Dt = ({ children }: { children: React.ReactNode }) => (
-  <dt className="w-28 text-gray-400 dark:text-neutral-500 text-right">
+  <dt className="w-24 text-gray-400 dark:text-neutral-500 text-right">
     {children}
   </dt>
 );
