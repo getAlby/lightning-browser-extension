@@ -329,31 +329,37 @@ function LNURLPay() {
     }
 
     return (
-      <Container justifyBetween maxWidth="sm">
-        <div>
-          <ResultCard
-            isSuccess
-            message={tCommon("success_message", {
-              amount: getFormattedSats(valueSat),
-              fiatAmount: showFiat ? ` (${fiatValue})` : ``,
-              destination: navState.origin?.name || getRecipient(),
-            })}
-          />
-          {isMessage && (
-            <dl className="shadow bg-white dark:bg-surface-02dp mt-4 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
-              {descriptionList.map(([dt, dd]) => (
-                <>
-                  <Dt>{dt}</Dt>
-                  <Dd>{dd}</Dd>
-                </>
-              ))}
-            </dl>
-          )}
-        </div>
-        <div className="mb-4">
-          <Button onClick={close} label={tCommon("actions.close")} fullWidth />
-        </div>
-      </Container>
+      <div className="grow">
+        <Container justifyBetween maxWidth="sm">
+          <div>
+            <ResultCard
+              isSuccess
+              message={tCommon("success_message", {
+                amount: getFormattedSats(valueSat),
+                fiatAmount: showFiat ? ` (${fiatValue})` : ``,
+                destination: navState.origin?.name || getRecipient(),
+              })}
+            />
+            {isMessage && (
+              <dl className="shadow bg-white dark:bg-surface-02dp mt-4 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
+                {descriptionList.map(([dt, dd]) => (
+                  <>
+                    <Dt>{dt}</Dt>
+                    <Dd>{dd}</Dd>
+                  </>
+                ))}
+              </dl>
+            )}
+          </div>
+          <div>
+            <Button
+              onClick={close}
+              label={tCommon("actions.close")}
+              fullWidth
+            />
+          </div>
+        </Container>
+      </div>
     );
   }
 
@@ -412,12 +418,9 @@ function LNURLPay() {
                   description={getRecipient()}
                   image={navState.origin?.icon || getImage()}
                 />
-                <form onSubmit={handleSubmit} className="h-full">
-                  <fieldset
-                    disabled={loadingConfirm}
-                    className="h-full flex flex-col justify-between"
-                  >
-                    <div>
+                <form onSubmit={handleSubmit} className="grow flex">
+                  <div className="grow flex flex-col justify-between">
+                    <fieldset disabled={loadingConfirm}>
                       <dl className="mt-4 overflow-hidden">
                         <>
                           {formattedMetadata(details.metadata).map(
@@ -480,7 +483,7 @@ function LNURLPay() {
                       )}
 
                       {(showNameField() || showEmailField()) && (
-                        <div className="flex justify-center mt-4">
+                        <div className="flex justify-center mt-4 caret-transparent">
                           <Hyperlink onClick={toggleShowMoreFields}>
                             {tCommon("actions.more")}{" "}
                             {showMoreFields ? (
@@ -522,7 +525,7 @@ function LNURLPay() {
                           )}
                         </div>
                       )}
-                    </div>
+                    </fieldset>
                     <div className="mt-2 dark:border-white/10">
                       <ConfirmOrCancel
                         isFocused={false}
@@ -534,7 +537,7 @@ function LNURLPay() {
                         onCancel={reject}
                       />
                     </div>
-                  </fieldset>
+                  </div>
                 </form>
               </Container>
             </div>

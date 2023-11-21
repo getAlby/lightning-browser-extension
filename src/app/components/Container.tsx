@@ -31,7 +31,7 @@ function Container({
     <div
       className={`container mx-auto px-4 pb-4 ${getMaxWidthClass(maxWidth)} ${
         justifyBetween
-          ? "h-full flex flex-col justify-between no-scrollbar"
+          ? "min-h-full flex flex-col justify-between no-scrollbar"
           : ""
       }`}
     >
