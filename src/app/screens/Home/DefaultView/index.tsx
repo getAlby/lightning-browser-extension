@@ -52,7 +52,7 @@ const DefaultView: FC<Props> = (props) => {
 
   useEffect(() => {
     loadTransactions(itemsLimit);
-  }, [loadTransactions, itemsLimit]);
+  }, [loadTransactions, itemsLimit, account?.id]);
 
   // check if currentURL is blocked
   useEffect(() => {
