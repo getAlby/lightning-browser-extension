@@ -1,32 +1,14 @@
 import { v4 as uuidv4 } from "uuid";
 import { encryptData } from "~/common/lib/crypto";
 import state from "~/extension/background-script/state";
-import type { Account, MessageAccountAdd } from "~/types";
+import type { MessageAccountAdd } from "~/types";
+import { getUniqueAccountName } from '~/common/utils/validations';
 
 const add = async (message: MessageAccountAdd) => {
   const newAccount = message.args;
-  let name = newAccount.name;
   const accounts = state.getState().accounts;
+  const name = getUniqueAccountName(newAccount.name, accounts);
   const tmpAccounts = { ...accounts };
-
-  // get all accounts names to avoid duplicate names
-  const accountNames = Object.values(accounts).map((el: Account) => el.name);
-
-  // increase nameSuffix number recursively
-  while (accountNames.includes(name)) {
-    // get number in between (1) and increase by 1
-    const bracketsValue = +name.substring(name.indexOf("(") + 1, name.lastIndexOf(")"));
-    const accountNameCount = typeof bracketsValue === 'number' ? bracketsValue + 1 : 0;
-    const nameContainsSuffix = name.match(/\(\d\)/);
-    // if name already contains a suffix, remove it to add the increased
-    if (nameContainsSuffix) {
-      const suffixIndex = name.lastIndexOf('(');
-      name = name.substring(0, suffixIndex);
-    }
-    const nameSuffix = ` (${accountNameCount})`;
-    name = `${name}${nameSuffix}`;
-  }
-
 
   // TODO: add validations
   // TODO: make sure a password is set
