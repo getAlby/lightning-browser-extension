@@ -171,20 +171,6 @@
           "connection_failed": "La conexión falló. ¿Es la URL de conexión de BTCPay correcta y accesible?"
         }
       },
-      "lndhub_bluewallet": {
-        "title": "Bluewallet",
-        "page": {
-          "title": "Conecta a BlueWallet",
-          "description": "En BlueWallet, elija el monedero que desea conectar, ábralo, haga clic en \"...\", haga clic en Exportar/Copia de seguridad para mostrar el código QR y escanéelo con su cámara web."
-        },
-        "uri": {
-          "label": "URI de Exportación BlueWallet"
-        },
-        "errors": {
-          "invalid_uri": "URI de BlueWallet inválido",
-          "connection_failed": "Error de conexión. ¿Es correcto el URI de BlueWallet?"
-        }
-      },
       "lndhub_go": {
         "title": "LNDHub",
         "page": {

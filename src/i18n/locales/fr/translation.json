@@ -90,20 +90,6 @@
           "placeholder": "phrase de sats de pile secrète"
         }
       },
-      "lndhub_bluewallet": {
-        "title": "Bluewallet",
-        "page": {
-          "title": "Connectez-vous à BlueWallet",
-          "description": "Dans BlueWallet, choisissez le wallet que vous souhaitez connecter, ouvrez-le, cliquez sur \"...\", cliquez sur Export/Backup pour afficher le QR code et scannez-le avec votre webcam."
-        },
-        "uri": {
-          "label": "URI d'exportation BlueWallet"
-        },
-        "errors": {
-          "invalid_uri": "URI BlueWallet non valide",
-          "connection_failed": "La connexion a échoué. Votre URI BlueWallet est-il correct ?"
-        }
-      },
       "lndhub_go": {
         "title": "LNDHub",
         "page": {

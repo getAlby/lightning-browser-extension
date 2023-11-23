@@ -49,20 +49,6 @@
           "connection_failed": "Connessione non riuscita. Le tue credenziali LND sono corrette?"
         }
       },
-      "lndhub_bluewallet": {
-        "title": "Bluewallet",
-        "page": {
-          "title": "Connettiti a BlueWallet",
-          "description": "Nell'app BlueWallet, scegli il portafoglio che vuoi connettere, aprilo, clicca su \"...\", clicca su Export/Backup per mostrare il codice QR e scansionalo con la tua webcam."
-        },
-        "uri": {
-          "label": "URI di esportazione BlueWallet"
-        },
-        "errors": {
-          "invalid_uri": "URI di BlueWallet non valido",
-          "connection_failed": "Connessione non riuscita. L'URI BlueWallet è corretto?"
-        }
-      },
       "lndhub_go": {
         "title": "LNDHub",
         "page": {

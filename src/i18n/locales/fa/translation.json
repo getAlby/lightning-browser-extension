@@ -100,20 +100,6 @@
           "placeholder": "عبارت مخفی انباشتن ساتوشی"
         }
       },
-      "lndhub_bluewallet": {
-        "title": "Bluewallet",
-        "page": {
-          "title": "اتصال به BlueWallet",
-          "description": "درBlueWallet کیف پولی که می خواهید به آن متصل شوید را انتخاب کرده، روی\"...\" کلیک کنید، روی Export/Backup کلیک کنید تا کدQR نمایش داده شود و با دوربین وب آن را اسکن کنید."
-        },
-        "uri": {
-          "label": "استخراج آدرس BlueWallet"
-        },
-        "errors": {
-          "invalid_uri": "آدرس بلووالت نامعتبر",
-          "connection_failed": "اتصال ناموفق. آدرس بلووالت شما درست است؟"
-        }
-      },
       "lndhub_go": {
         "title": "LNDHub",
         "page": {

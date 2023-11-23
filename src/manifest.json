@@ -11,7 +11,7 @@
     "48": "assets/icons/alby_icon_yellow_48x48.png",
     "128": "assets/icons/alby_icon_yellow_128x128.png"
   },
-  "description": "Your Bitcoin Lightning wallet and companion for accessing Bitcoin and Nostr apps, payments across the globe and passwordless logins.",
+  "description": "Your Bitcoin Lightning wallet and companion for accessing Bitcoin and Nostr apps, digital payments and passwordless logins.",
   "homepage_url": "https://getAlby.com/",
   "permissions": [
     "nativeMessaging",

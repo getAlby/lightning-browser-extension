@@ -96,20 +96,6 @@
           "placeholder": "secret stack sats phrase"
         }
       },
-      "lndhub_bluewallet": {
-        "title": "Bluewallet",
-        "page": {
-          "title": "Sambungkan dengan Bluewallet",
-          "description": "Pada Bluewallet, pilih wallet yang kamu ingin sambungkan, buka, lalu klik pada \"...\", klik pada Export/Backup untuk menampilkan kode QR dan pindai dengan webcam kamu."
-        },
-        "uri": {
-          "label": "BlueWallet Export URI"
-        },
-        "errors": {
-          "invalid_uri": "BlueWallet URI Salah",
-          "connection_failed": "Koneksi gagal. Apakah BlueWallet URI kamu benar?"
-        }
-      },
       "lndhub_go": {
         "page": {
           "title": "Sambungkan dengan LNDHub",

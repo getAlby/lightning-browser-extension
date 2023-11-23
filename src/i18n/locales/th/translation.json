@@ -483,20 +483,6 @@
           "description": "1. เปิด Lightning Terminal และเลือก <0> เชื่อมต่อ Lightning Node </0> จากแถบด้านข้าง </1> 2. คลิก <0> สร้างเซสชันใหม่ </0><1/> 3. ตั้งชื่อเซสชัน เลือกสิทธิ์ที่ต้องการและกดยืนยัน <1/>4. <0> คัดลอก pairing phrase </0> และวางมันข้างล่าง"
         }
       },
-      "lndhub_bluewallet": {
-        "title": "Bluewallet",
-        "page": {
-          "title": "เชื่อมต่อกับ BlueWallet",
-          "description": "ใน BlueWallet เลือกกระเป๋าที่คุณต้องการเชื่อมต่อ, เปิดมันขึ้น , คลิกที่ “…” , คลิกที่ ส่งออก/สำรองข้แมูล จากนั้นแสกน QR code ด้วย webcam ของคุณ"
-        },
-        "errors": {
-          "invalid_uri": "BlueWallet URI ไม่ถูกต้อง",
-          "connection_failed": "เกิดข้อผิดพลาดในการเชื่อมต่อ โปรดตรวจสอบ BlueWallet URI ของคุณถูกต้องหรือไม่ ?"
-        },
-        "uri": {
-          "label": "ส่งออก URI จาก BlueWallet"
-        }
-      },
       "lndhub_go": {
         "title": "LNDHub",
         "page": {
