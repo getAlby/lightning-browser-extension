@@ -88,26 +88,6 @@
         },
         "title": "Citadel"
       },
-      "galoy": {
-        "token": {
-          "label": "输入你的JWT令牌",
-          "info": "目前{{label}}登录正在升级中。如果你是高级用户，你可以通过<0>网络钱包（wallet.mainnet.galoy.io）</0><1/><1/>登录来获取你的JWT令牌，JWT看起来像：<2>eyJhbG...</2><1/><1/>"
-        },
-        "actions": {
-          "login": "登录"
-        },
-        "errors": {
-          "setup_failed": "设置失败",
-          "missing_token": "JWT不存在，无法登录。",
-          "invalid_token": "传递了无效的JWT"
-        },
-        "sms_code": {
-          "label": "输入你的短信验证码"
-        },
-        "phone_number": {
-          "label": "输入你的电话号码"
-        }
-      },
       "btcpay": {
         "page": {
           "instructions": "导航到你的BTCPayServer并以管理员身份登录。转到服务器设置 > 服务 > LND Rest - 查看信息。然后点击 \"查看二维码信息 \"并复制二维码数据。把它粘贴在下面：",

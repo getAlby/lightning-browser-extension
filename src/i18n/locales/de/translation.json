@@ -171,26 +171,6 @@
           "title": "Verbinden mit <0>Bitcoin Jungle Wallet</0>"
         }
       },
-      "galoy": {
-        "phone_number": {
-          "label": "Trage deine Telefonnummer ein"
-        },
-        "sms_code": {
-          "label": "Gib deinen SMS-Bestätigungscode ein"
-        },
-        "token": {
-          "label": "Gebe deinen JWT Token ein",
-          "info": "Das {{label}}-Login wird derzeit aktualisiert. Wenn du ein fortgeschrittener Benutzer bist, kannst du dir dein JWT-Token holen, indem du über <0>Web Wallet (wallet.mainnet.galoy.io)</0><1/><1/> anmeldest. Das JWT sieht so aus: < 2>eyJhbG...</2><1/><1/>"
-        },
-        "actions": {
-          "login": "Anmeldung"
-        },
-        "errors": {
-          "setup_failed": "Einrichtung fehlgeschlagen",
-          "missing_token": "JWT fehlt, Anmeldung nicht möglich.",
-          "invalid_token": "ungültige JWT übermittelt"
-        }
-      },
       "btcpay": {
         "title": "BTCPay Server",
         "page": {
