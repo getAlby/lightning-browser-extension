@@ -52,16 +52,17 @@ export default function TransactionModal({
         onClose();
       }}
       contentLabel={"Transactions"}
+      position="top"
     >
       <div className="p-3 flex flex-col gap-4 justify-center ">
         <div>
           <div className="flex items-center justify-center">
             {getTransactionType(transaction) == "outgoing" ? (
-              <div className="flex justify-center items-center bg-orange-100 dark:bg-[#261911] rounded-full p-8">
+              <div className="flex justify-center items-center bg-orange-100 dark:bg-[#261911] rounded-full p-4">
                 <ArrowUpIcon className="w-8 h-8 text-orange-400 stroke-[5px]" />
               </div>
             ) : (
-              <div className="flex justify-center items-center bg-green-100 dark:bg-[#0F1E1A] rounded-full p-8">
+              <div className="flex justify-center items-center bg-green-100 dark:bg-[#0F1E1A] rounded-full p-4">
                 <ArrowDownIcon className="w-8 h-8 text-green-400 stroke-[5px]" />
               </div>
             )}

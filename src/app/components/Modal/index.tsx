@@ -1,5 +1,6 @@
 import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import ReactModal from "react-modal";
+import { classNames } from "~/app/utils";
 
 type Props = {
   children?: React.ReactNode;
@@ -7,6 +8,7 @@ type Props = {
   close: () => void;
   contentLabel: string;
   title?: string;
+  position?: "top" | "center";
 };
 
 export default function Modal({
@@ -15,6 +17,7 @@ export default function Modal({
   close: closeModal,
   contentLabel,
   title,
+  position = "center",
 }: Props) {
   return (
     <ReactModal
@@ -24,7 +27,11 @@ export default function Modal({
       isOpen={isOpen}
       onRequestClose={closeModal}
       contentLabel={contentLabel}
-      overlayClassName="bg-black bg-opacity-50 fixed inset-0 flex justify-center items-center cursor-pointer"
+      overlayClassName={classNames(
+        "bg-black bg-opacity-50 fixed inset-0 flex justify-center cursor-pointer",
+        position == "center" && "items-center",
+        position == "top" && "items-start pt-20"
+      )}
       className="rounded-lg shadow-xl bg-white dark:bg-surface-02dp w-full max-w-md overflow-x-hidden relative p-5 cursor-auto mx-5"
       style={{ content: { maxHeight: "90vh" } }}
     >
