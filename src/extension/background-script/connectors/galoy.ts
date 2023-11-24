@@ -354,9 +354,14 @@ class Galoy implements Connector {
       headers.Authorization = `Bearer ${this.config.accessToken}`;
     }
 
+    let dynamicUrl = this.config.url;
+    if (this.config.accessToken.startsWith("galoy_staging_")) {
+      dynamicUrl = "https://api.staging.galoy.io/graphql";
+    }
+
     const reqConfig: AxiosRequestConfig = {
       method: "POST",
-      url: this.config.url,
+      url: dynamicUrl,
       responseType: "json",
       headers: headers,
       adapter: fetchAdapter,

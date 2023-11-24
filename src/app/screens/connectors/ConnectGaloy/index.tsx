@@ -78,16 +78,24 @@ export default function ConnectGaloy(props: Props) {
         const errorMsg = `${t("galoy.errors.missing_token")}`;
         throw new Error(errorMsg);
       }
+
+      let dynamicUrl = url;
+      if (authToken.startsWith("galoy_staging_")) {
+        dynamicUrl = "https://api.staging.galoy.io/graphql";
+      }
+
       const headers: Headers = { ...defaultHeaders };
       if (instance === "galoy-blink") {
         headers["X-API-KEY"] = authToken;
       } else if (instance === "galoy-bitcoin-jungle") {
         headers.Authorization = `Bearer ${authToken}`;
       }
-      const { data: meData } = await axios.post(url, meQuery, {
+
+      const { data: meData } = await axios.post(dynamicUrl, meQuery, {
         headers: headers,
         adapter: fetchAdapter,
       });
+
       if (meData.error || meData.errors) {
         const error = meData.error || meData.errors;
         console.error(error);
@@ -120,8 +128,12 @@ export default function ConnectGaloy(props: Props) {
   async function saveAccount(config: { authToken: string; walletId: string }) {
     setLoading(true);
 
+    const dynamicLabel = authToken?.startsWith("galoy_staging_")
+      ? "Galoy Staging"
+      : label;
+
     const account = {
-      name: label,
+      name: dynamicLabel,
       config: {
         url,
         accessToken: config.authToken,
