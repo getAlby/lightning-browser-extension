@@ -31,7 +31,11 @@ export const galoyUrls = {
   },
 } as const;
 
-const defaultHeaders = {
+type Headers = {
+  [key: string]: string;
+};
+
+const defaultHeaders: Headers = {
   Accept: "application/json",
   "Content-Type": "application/json",
 };
@@ -49,13 +53,13 @@ export default function ConnectGaloy(props: Props) {
     keyPrefix: "choose_connector",
   });
   const [loading, setLoading] = useState(false);
-  const [jwt, setJwt] = useState<string | undefined>();
+  const [authToken, setAuthToken] = useState<string | undefined>();
 
-  function handleJwtChange(event: React.ChangeEvent<HTMLInputElement>) {
-    setJwt(event.target.value.trim());
+  function handleAuthTokenChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setAuthToken(event.target.value.trim());
   }
 
-  async function loginWithJwt(event: React.FormEvent<HTMLFormElement>) {
+  async function loginWithAuthToken(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setLoading(true);
     const meQuery = {
@@ -70,20 +74,19 @@ export default function ConnectGaloy(props: Props) {
         `,
     };
     try {
-      if (!jwt) {
+      if (!authToken) {
         const errorMsg = `${t("galoy.errors.missing_token")}`;
         throw new Error(errorMsg);
       }
-      const authToken = jwt;
-      let headers = { ...defaultHeaders };
-      if (instance === 'galoy-blink') {
-        headers['X-API-KEY'] = authToken;
-      } else if (instance === 'galoy-bitcoin-jungle') {
+      const headers: Headers = { ...defaultHeaders };
+      if (instance === "galoy-blink") {
+        headers["X-API-KEY"] = authToken;
+      } else if (instance === "galoy-bitcoin-jungle") {
         headers.Authorization = `Bearer ${authToken}`;
       }
       const { data: meData } = await axios.post(url, meQuery, {
-          headers: headers,
-          adapter: fetchAdapter,
+        headers: headers,
+        adapter: fetchAdapter,
       });
       if (meData.error || meData.errors) {
         const error = meData.error || meData.errors;
@@ -169,29 +172,44 @@ export default function ConnectGaloy(props: Props) {
       logo={logo}
       submitLabel={t("galoy.actions.login")}
       submitLoading={loading}
-      onSubmit={loginWithJwt}
+      onSubmit={loginWithAuthToken}
       description={
-        <Trans
-          i18nKey={"galoy.token.info"}
-          t={t}
-          values={{ label }}
-        />
+        instance === "galoy-blink" ? (
+          <Trans
+            i18nKey="galoy.api_key.info"
+            t={t}
+            values={{ label }}
+            components={[
+              <a
+                href="https://dashboard.blink.sv"
+                className="underline"
+                target="_blank"
+                rel="noopener noreferrer"
+                key="Blink Dashboard"
+              ></a>,
+            ]}
+          />
+        ) : (
+          <Trans i18nKey="galoy.token.info" t={t} values={{ label }} />
+        )
       }
     >
       {
         <div className="mt-6">
           <label
-            htmlFor="jwt"
+            htmlFor="authToken"
             className="block font-medium text-gray-800 dark:text-white"
           >
-            {t("galoy.token.label")}
+            {instance === "galoy-blink"
+              ? t("galoy.api_key.label")
+              : t("galoy.token.label")}
           </label>
           <div className="mt-1">
             <Input
-              id="jwt"
-              name="jwt"
+              id="authToken"
+              name="authToken"
               required
-              onChange={handleJwtChange}
+              onChange={handleAuthTokenChange}
               autoFocus={true}
             />
           </div>
