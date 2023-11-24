@@ -340,15 +340,25 @@ class Galoy implements Connector {
   }
 
   async request(query: { query: string }) {
+    const headers: Headers = {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    };
+
+    if (
+      this.config.accessToken.startsWith("blink_") ||
+      this.config.accessToken.startsWith("galoy_staging_")
+    ) {
+      headers["X-API-KEY"] = this.config.accessToken;
+    } else {
+      headers.Authorization = `Bearer ${this.config.accessToken}`;
+    }
+
     const reqConfig: AxiosRequestConfig = {
       method: "POST",
       url: this.config.url,
       responseType: "json",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${this.config.accessToken}`,
-      },
+      headers: headers,
       adapter: fetchAdapter,
     };
     reqConfig.data = query;
@@ -363,6 +373,10 @@ class Galoy implements Connector {
     return data;
   }
 }
+
+type Headers = {
+  [key: string]: string;
+};
 
 type GaloyDefaultAccount = {
   defaultWalletId: string;
