@@ -18,7 +18,7 @@ export const galoyUrls = {
     label: "Blink Wallet",
     website: "https://www.blink.sv/",
     logo: galoyBlink,
-    url: process.env.BLINK_GALOY_URL || "https://api.mainnet.galoy.io/graphql",
+    url: process.env.BLINK_GALOY_URL || "https://api.blink.sv/graphql",
   },
   "galoy-bitcoin-jungle": {
     i18nPrefix: "bitcoin_jungle",
@@ -75,13 +75,15 @@ export default function ConnectGaloy(props: Props) {
         throw new Error(errorMsg);
       }
       const authToken = jwt;
-
+      let headers = { ...defaultHeaders };
+      if (instance === 'galoy-blink') {
+        headers['X-API-KEY'] = authToken;
+      } else if (instance === 'galoy-bitcoin-jungle') {
+        headers.Authorization = `Bearer ${authToken}`;
+      }
       const { data: meData } = await axios.post(url, meQuery, {
-        headers: {
-          ...defaultHeaders,
-          Authorization: `Bearer ${authToken}`,
-        },
-        adapter: fetchAdapter,
+          headers: headers,
+          adapter: fetchAdapter,
       });
       if (meData.error || meData.errors) {
         const error = meData.error || meData.errors;
@@ -173,17 +175,6 @@ export default function ConnectGaloy(props: Props) {
           i18nKey={"galoy.token.info"}
           t={t}
           values={{ label }}
-          components={[
-            // eslint-disable-next-line react/jsx-key
-            <a
-              href="https://wallet.mainnet.galoy.io"
-              className="underline"
-            ></a>,
-            // eslint-disable-next-line react/jsx-key
-            <br />,
-            // eslint-disable-next-line react/jsx-key
-            <b></b>,
-          ]}
         />
       }
     >
