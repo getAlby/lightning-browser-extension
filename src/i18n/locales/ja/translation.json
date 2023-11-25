@@ -98,20 +98,6 @@
           "placeholder": "シークレット・stack sats・フレーズ"
         }
       },
-      "lndhub_bluewallet": {
-        "page": {
-          "title": "BlueWalletに接続",
-          "description": "BlueWalletで、接続したいウォレットを開き、\"... \"をクリックします。エクスポート/バックアップをクリックしてQRコードを表示し、ウェブカメラでスキャンします。"
-        },
-        "errors": {
-          "invalid_uri": "無効なBlueWalletのURI",
-          "connection_failed": "接続に失敗しました。BlueWalletのURIは正しいですか？"
-        },
-        "uri": {
-          "label": "BlueWalletのエクスポートURI"
-        },
-        "title": "BlueWallet"
-      },
       "lndhub_go": {
         "title": "LNDHub",
         "page": {
@@ -436,19 +422,13 @@
     "home": {
       "default_view": {
         "is_blocked_hint": "Alby は現在{{host}}で無効になっています",
-        "block_removed": "{{host}}を有効にしました。ウェブサイトを再度読み込んでください。",
-        "recent_transactions": "最近のトランザクション",
-        "no_outgoing_transactions": "このアカウントにはまだ送金トランザクションがありません。",
-        "no_incoming_transactions": "このアカウントにはまだ受金トランザクションがありません。",
-        "all_transactions_link": "すべてのトランザクションを見る"
+        "block_removed": "{{host}}を有効にしました。ウェブサイトを再度読み込んでください。"
       },
       "actions": {
         "send_satoshis": "⚡️ サトシを送る ⚡️",
         "enable_now": "今すぐ有効化"
       },
-      "recent_transactions": "最近のトランザクション",
       "allowance_view": {
-        "recent_transactions": "最近のトランザクション",
         "no_transactions": "<0>{{name}}</0>宛てのトランザクションはまだありません。"
       }
     },

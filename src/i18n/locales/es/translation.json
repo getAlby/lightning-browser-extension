@@ -171,20 +171,6 @@
           "connection_failed": "La conexión falló. ¿Es la URL de conexión de BTCPay correcta y accesible?"
         }
       },
-      "lndhub_bluewallet": {
-        "title": "Bluewallet",
-        "page": {
-          "title": "Conecta a BlueWallet",
-          "description": "En BlueWallet, elija el monedero que desea conectar, ábralo, haga clic en \"...\", haga clic en Exportar/Copia de seguridad para mostrar el código QR y escanéelo con su cámara web."
-        },
-        "uri": {
-          "label": "URI de Exportación BlueWallet"
-        },
-        "errors": {
-          "invalid_uri": "URI de BlueWallet inválido",
-          "connection_failed": "Error de conexión. ¿Es correcto el URI de BlueWallet?"
-        }
-      },
       "lndhub_go": {
         "title": "LNDHub",
         "page": {
@@ -272,18 +258,12 @@
         "send_satoshis": "⚡️ Enviar Satoshis ⚡️",
         "enable_now": "Habilitar ahora"
       },
-      "recent_transactions": "Transacciones Recientes",
       "allowance_view": {
-        "recent_transactions": "Transacciones Recientes",
         "no_transactions": "No hay transacciones en <0>{{name}}</0> todavía."
       },
       "default_view": {
-        "recent_transactions": "Transacciones Recientes",
         "is_blocked_hint": "Alby está actualmente deshabilitado en {{host}}",
-        "block_removed": "{{host}} habilitado. Vuelva a cargar el sitio web.",
-        "no_outgoing_transactions": "Aún no hay transacciones salientes para esta cuenta.",
-        "no_incoming_transactions": "Aún no hay transacciones entrantes para esta cuenta.",
-        "all_transactions_link": "Ver todas las transacciones"
+        "block_removed": "{{host}} habilitado. Vuelva a cargar el sitio web."
       }
     },
     "accounts": {
@@ -792,7 +772,7 @@
         "allow_camera_access": "Permita el acceso a la cámara en la pantalla de configuración."
       }
     },
-    "transactionsTable": {
+    "transactions_table": {
       "fee": "Comisión",
       "preimage": "Preimagen",
       "received": "Recibido",

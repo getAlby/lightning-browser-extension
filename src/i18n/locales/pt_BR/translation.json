@@ -189,20 +189,6 @@
           "missing_token": "JWT ausente, não foi possível fazer login."
         }
       },
-      "lndhub_bluewallet": {
-        "title": "Bluewallet",
-        "page": {
-          "title": "Conecte-se na BlueWallet",
-          "description": "Na BlueWallet, escolha a carteira que você deseja conectar, abra ela, clique em \"...\", clique em Exportar/Backup para exibir o código QR e leia o código com sua webcam."
-        },
-        "uri": {
-          "label": "Exportar URI BlueWallet"
-        },
-        "errors": {
-          "invalid_uri": "URI BlueWallet inválida",
-          "connection_failed": "Falha na conexão. A URI BlueWallet está correta?"
-        }
-      },
       "lndhub_go": {
         "title": "LNDHub",
         "page": {
@@ -266,9 +252,7 @@
         "send_satoshis": "⚡️ Enviar Satoshis ⚡️",
         "enable_now": "Ativar"
       },
-      "recent_transactions": "Transações recentes",
       "allowance_view": {
-        "recent_transactions": "Transações recentes",
         "no_transactions": "Sem transações em <0>{{name}}</0>.",
         "sats": "sats",
         "budget_spent": "Limite de gastos",
@@ -277,12 +261,8 @@
         "permissions": "Permissões"
       },
       "default_view": {
-        "recent_transactions": "Transações recentes",
         "is_blocked_hint": "A Alby está desativada em {{host}}",
-        "block_removed": "{{host}} ativado. Por favor, recarregue o site.",
-        "no_outgoing_transactions": "Você ainda não realizou transações usando esta conta.",
-        "all_transactions_link": "Mostrar tudo",
-        "no_incoming_transactions": "Você ainda não recebeu transações nesta conta."
+        "block_removed": "{{host}} ativado. Por favor, recarregue o site."
       }
     },
     "accounts": {
@@ -591,7 +571,7 @@
         },
         "bitcoin_address": {
           "description": "Receba via endereço bitcoin usando um serviço de trocas",
-          "title": "Endereço bitcoin"
+          "title": "Serviço de trocas"
         }
       },
       "amount": {
@@ -600,7 +580,7 @@
       },
       "description": {
         "label": "Descrição",
-        "placeholder": "Ex. Quem está enviando este pagamento?"
+        "placeholder": "Opcional"
       },
       "success": "Pagamento recebido!",
       "payment": {
@@ -777,10 +757,6 @@
     },
     "transactions": {
       "title": "Transações",
-      "description": {
-        "outgoing": "Transações enviadas usando esta conta",
-        "incoming": "Transações recebidas nesta conta"
-      },
       "list_empty": "Sem transações."
     },
     "distributions": {
@@ -1054,7 +1030,7 @@
         "allow_camera_access": "Permita o acesso à câmera na tela configurações."
       }
     },
-    "transactionsTable": {
+    "transactions_table": {
       "fee": "Taxa",
       "preimage": "Pré-imagem",
       "received": "Recebida",
@@ -1120,12 +1096,6 @@
       },
       "heading": "Como você deseja se conectar à rede TOR?",
       "download": "Baixar"
-    },
-    "transaction_list": {
-      "tabs": {
-        "outgoing": "Enviadas",
-        "incoming": "Recebidas"
-      }
     }
   },
   "permissions": {

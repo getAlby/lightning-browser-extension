@@ -9,8 +9,9 @@ export const convertPaymentToTransaction = (
   id: `${payment.id}`,
   type: "sent",
   date: dayjs(+payment.createdAt).fromNow(),
-  title: payment.name || payment.description,
+  title: payment.description || payment.name,
   publisherLink: publisherLink || payment.location,
+  timestamp: parseInt(payment.createdAt),
 });
 
 export const convertPaymentsToTransactions = (

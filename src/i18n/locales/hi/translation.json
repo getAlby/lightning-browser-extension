@@ -97,20 +97,6 @@
           "placeholder": "गुप्त stack sats वाक्यांश"
         }
       },
-      "lndhub_bluewallet": {
-        "title": "Bluewallet",
-        "page": {
-          "title": "BlueWallet  से कनेक्ट करें",
-          "description": "ब्लू वॉलेट में, वह वॉलेट चुनें जिसे आप कनेक्ट करना चाहते हैं, इसे खोलें, \"...\" पर क्लिक करें, क्यूआर कोड प्रदर्शित करने के लिए निर्यात/बैकअप पर क्लिक करें और इसे अपने वेबकैम से स्कैन करें।"
-        },
-        "uri": {
-          "label": "BlueWallet Export URI"
-        },
-        "errors": {
-          "invalid_uri": "अवैध BlueWallet URI",
-          "connection_failed": "कनेक्शन विफल रहा। क्या आपका BlueWallet URI सही है?"
-        }
-      },
       "lndhub_go": {
         "title": "LNDHub",
         "page": {
@@ -663,7 +649,7 @@
         "allow_camera_access": "कृपया सेटिंग स्क्रीन में कैमरा एक्सेस की अनुमति दें।"
       }
     },
-    "transactionsTable": {
+    "transactions_table": {
       "fee": "शुल्क",
       "preimage": "Preimage",
       "received": "प्राप्त",

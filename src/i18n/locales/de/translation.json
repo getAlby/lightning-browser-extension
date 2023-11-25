@@ -8,7 +8,7 @@
           "label": "Wähle einen Passcode zum Entsperren:"
         },
         "errors": {
-          "mismatched_password": "Die Passwörter stimmen nicht überein.",
+          "mismatched_password": "Die Passcodes stimmen nicht überein.",
           "enter_password": "Bitte gebe einen Passcode ein.",
           "confirm_password": "Bitte bestätige deinen Passcode."
         },
@@ -21,7 +21,7 @@
         "actions": {
           "delete_edit_account": "Ungültiges Konto löschen und erneut bearbeiten"
         },
-        "ready": "Großartig, du bist bereit für den Einsatz!",
+        "ready": "Großartig, du kannst jetzt loslegen!",
         "initializing": "Dein Konto wird initialisiert. Bitte warte, dies kann eine Minute dauern...",
         "connection_error": "Verbindungsfehler",
         "connection_taking_long": "Der Verbindungsversuch dauert länger als erwartet... Sind deine Angaben korrekt? Ist deine Node erreichbar?",
@@ -29,8 +29,8 @@
       },
       "title": "Willkommen bei Alby",
       "pin_extension": {
-        "title": "Pin für die Alby Erweiterung",
-        "description": "Du bist fast am Ziel. Um Alby bequem nutzen zu können, musst du deine Erweiterung an die Browser Symbolleiste anheften:",
+        "title": "Die Alby Erweiterung anpinnen",
+        "description": "Fast fertig. Damit du Alby bequem nutzen kannst, musst du die Erweiterung an die Browser Symbolleiste anheften:",
         "next_btn": "Beginne mit Alby {{icon}}",
         "explanation": "1. Klicke auf <0/> in der oberen rechten Ecke deines Browsers<1/>2. Suche das Symbol für Alby und klicke, um es an die Symbolleiste anzuheften<1/>3. Das war es. Um auf Alby zuzugreifen, klicke einfach auf das Symbol <2/>"
       }
@@ -53,20 +53,6 @@
           "title": "Verbinden mit deiner LND Node"
         },
         "title": "LND"
-      },
-      "lndhub_bluewallet": {
-        "uri": {
-          "label": "BlueWallet Export URI"
-        },
-        "errors": {
-          "invalid_uri": "Ungültige BlueWallet-URI",
-          "connection_failed": "Verbindung nicht erfolgreich. Ist deine BlueWallet URI richtig?"
-        },
-        "title": "BlueWallet",
-        "page": {
-          "title": "Verbinden mit BlueWallet",
-          "description": "Wähle in der BlueWallet die Wallet, die du verbinden willst, öffne sie, klicke auf \"...\", klicke auf Export/Backup, um den QR Code anzuzeigen. Scanne ihn dann mit deiner Webcam."
-        }
       },
       "lndhub_go": {
         "title": "LNDHub",
@@ -256,11 +242,11 @@
         "title": "Lightning Terminal (LNC)",
         "page": {
           "title": "Verbinden mit deiner LND Node",
-          "description": "1. Öffne dein Lightning Terminal und wähle <0>Lightning Node Connect</0> in der Seitenleiste.<1/> 2. Klicke auf <0>Erstelle eine neue Sitzung</0><1/>3. Beschrifte die Sitzung, wähle dann die gewünschte Berechtigung und sende sie ab<1/>4. <0>Kopiere die Pairing-Phrase</0> und füge sie hier unten ein."
+          "description": "1. Öffne Lightning Terminal und wähle <0>Lightning Node Connect</0> in der Seitenleiste.<1/> 2. Klicke auf <0>Erstelle eine neue Sitzung</0><1/>3. Beschrifte die Sitzung, wähle dann die gewünschte Berechtigung und sende sie ab<1/>4. <0>Kopiere die Pairing-Phrase</0> und füge sie hier unten ein."
         },
         "pairing_phrase": {
-          "label": "Dein Paarungssatz ",
-          "placeholder": "geheimer stapel sats phrase"
+          "label": "Deine pairing phrase ",
+          "placeholder": "geheimer stack sats phrase"
         }
       },
       "umbrel_lightning_node": {
@@ -269,25 +255,25 @@
     },
     "unlock": {
       "unlock_error": {
-        "link": "Zurücksetzen und neuen Account erstellen",
-        "help": "Deine Kontodaten werden mit deinem Freischalt-Passcode verschlüsselt. Wenn du deinen Freischaltcode wirklich vergessen hast, musst du dein Lightning Account zurücksetzen und erneut hinzufügen."
+        "link": "Jetzt zurücksetzen und ein neues Konto hinzufügen",
+        "help": "Deine Kontodaten werden mit deinem Entsperr-Passcode verschlüsselt. Wenn du deinen Entsperr-Passcode wirklich vergessen hast, musst du dein Lightning Account zurücksetzen und erneut hinzufügen."
       },
       "errors": {
         "invalid_password": "Ungültiger Passcode"
       },
-      "unlock_to_continue": "Freigeben zum Fortfahren",
+      "unlock_to_continue": "Entsperren um fortzufahren",
       "help_contact": {
-        "part1": "Brauchst du Hilfe? Kontaktiere uns",
-        "part2": "Alby-Unterstützung"
+        "part1": "Brauchst du Hilfe? Kontaktiere uns unter",
+        "part2": "Alby Support"
       },
-      "unlock_password": "Ihr Entsperr-Passwort"
+      "unlock_password": "Dein Entsperr-Passcode"
     },
     "settings": {
       "nostr": {
         "private_key": {
           "title": "Privater Schlüssel",
           "subtitle": "Dieser Abschnitt wurde auf die Kontenseite verschoben, da die Schlüssel jetzt kontenspezifisch sind.",
-          "go_to": "Gehe zu deinem Konto"
+          "go_to": "Gehe zu deinen Konten"
         },
         "hint": "Es ist ein einfaches und offenes Protokoll, das darauf abzielt, zensurresistente soziale Netzwerke zu schaffen. Nostr arbeitet mit kryptographischen Schlüsseln. Um etwas zu veröffentlichen, signiere es mit deinem Schlüssel und senden es an mehrere Relays. Du kannst Alby verwenden, um deinen Nostr-Schlüssel zu verwalten. Viele Nostr-Anwendungen erlauben dann, einfach den Schlüssel aus der Alby-Erweiterung zu verwenden.",
         "title": "Nostr"
@@ -309,8 +295,8 @@
         "title": "Browser Benachrichtigungen"
       },
       "website_enhancements": {
-        "title": "Erweiterungen der Website",
-        "subtitle": "Verbesserungen für Twitter, YouTube, etc."
+        "title": "Erweiterungen der Webseite",
+        "subtitle": "Verbesserungen für X, YouTube, etc."
       },
       "title": "Einstellungen",
       "change_password": {
@@ -334,15 +320,15 @@
       },
       "theme": {
         "options": {
-          "dark": "Dunkelheit",
-          "light": "Licht",
-          "system": "System"
+          "dark": "Dunkel",
+          "light": "Hell",
+          "system": "System-Einstellungen verwenden"
         },
-        "title": "Thema",
+        "title": "Design",
         "subtitle": "Alby im dunklen oder hellen Modus verwenden"
       },
       "exchange": {
-        "title": "Austausch Quelle",
+        "title": "Quelle für den Wechselkurs",
         "subtitle": "Quelle für Bitcoin Wechselkurse"
       },
       "language": {
@@ -360,8 +346,8 @@
         "granted": "Erlaubnis erteilt"
       },
       "show_fiat": {
-        "title": "Sats an Fiat",
-        "subtitle": "Immer in die gewählte Währung vom gewählten Wechselkurs umrechnen"
+        "title": "Sats in Fiat",
+        "subtitle": "Beträge in die ausgewählte Währung umrechnen (z.B.: EUR)"
       },
       "personal_data": {
         "title": "Persönliche Daten",
@@ -380,26 +366,20 @@
     "home": {
       "default_view": {
         "is_blocked_hint": "Alby ist derzeit auf dem {{host}} deaktiviert",
-        "recent_transactions": "Jüngste Transaktionen",
-        "block_removed": "{{host}} aktiviert. Bitte lade die Website neu.",
-        "all_transactions_link": "Alle Transaktionen anzeigen",
-        "no_outgoing_transactions": "Noch keine ausgehenden Transaktionen für dieses Konto.",
-        "no_incoming_transactions": "Noch keine eingehenden Transaktionen für dieses Konto."
+        "block_removed": "{{host}} aktiviert. Bitte lade die Webseite neu."
       },
       "allowance_view": {
-        "no_transactions": "Noch keine Transaktionen auf <0>{{name}}</0>.",
-        "recent_transactions": "Jüngste Transaktionen",
+        "no_transactions": "Noch keine Transaktionen auf <0>{{Name}}</0>.",
         "sats": "sats",
-        "budget_spent": "Verwendete Mittel",
+        "budget_spent": "Budget",
         "total_spent": "Insgesamt ausgegeben",
-        "total_payments": "Zahlungen insgesamt",
+        "total_payments": "Anzahl Zahlungen",
         "permissions": "Berechtigungen"
       },
       "actions": {
         "send_satoshis": "⚡️ Satoshis senden ⚡️",
         "enable_now": "Jetzt aktivieren"
-      },
-      "recent_transactions": "Jüngste Transaktionen"
+      }
     },
     "accounts": {
       "title": "Konten",
@@ -438,7 +418,7 @@
           },
           "generate_keys": {
             "title": "Erzeugen eines neuen Nostr Schlüssels",
-            "screen_reader": "Erzeuge einen neuen nNostr Schlüssel für dein Konto",
+            "screen_reader": "Erzeuge einen neuen Nostr-Schlüssel für dein Konto",
             "hint": "Du kannst einen zufälligen Satz von Nostr Schlüsseln generieren oder Schlüssel aus diesen Kontodaten ableiten (unter Verwendung einer signierten kanonischen Phrase). <0>Mehr erfahren\"</0>",
             "actions": {
               "random_keys": "Generieren eines Zufallsschlüssels",
@@ -455,7 +435,7 @@
           "settings": {
             "label": "Nostr Einstellungen",
             "title": "Nostr Einstellungen",
-            "description": "Leite deinen Nostr-Schlüssel von deinem Master Key ab oder importiere den bestehenden privaten Schlüssel, indem du ihn in das Feld \"Nostr Private Key\" einfügst.",
+            "description": "Leite deinen Nostr-Schlüssel von deinem Hauptschlüssel ab oder importiere den bestehenden privaten Schlüssel, indem du ihn in das Feld \"Nostr Private Key\" einfügst.",
             "imported_key_warning": "⚠️ Du verwendest derzeit einen importierten oder zufällig generierten Nostr-Schlüssel. Dein privater Nostr-Schlüssel kann nicht durch deine Wiederherstellungsphrase wiederhergestellt werden, also denke daran, deinen privaten Nostr-Schlüssel separat zu sichern.",
             "can_restore": "✅ Nostr-Schlüssel, abgeleitet von Ihrem Hauptschlüssel",
             "derive": "Vom Hauptschlüssel ableiten",
@@ -488,9 +468,9 @@
         },
         "remove": {
           "title": "Dieses Konto entfernen",
-          "subtitle": "Entfernt alle Zulagen, Zahlungsdaten und Schlüssel, die mit diesem Konto verbunden sind.",
+          "subtitle": "Entfernt alle Zugangsdaten, Zahlungsdaten und Schlüssel, die mit diesem Konto verbunden sind.",
           "error": "Der eingegebene Kontoname stimmte nicht überein.",
-          "confirm": "Bitte gebe den Namen des Kontos ein, um die Löschung deines Kontos zu bestätigen:\n\n{{ Name }}\n\n⚠️ Wenn du fortfährst, werden alle zugehörigen Schlüssel (Master Key, Nostr, etc.) gelöscht. Bitte vergewissern dich, dass du eine Sicherungskopie erstellt hast, denn es gibt keine andere Möglichkeit, sie wiederherzustellen."
+          "confirm": "Bitte gebe den Namen des Kontos ein, um die Löschung deines Kontos zu bestätigen:\n\n{{ Name }}\n\n⚠️ Wenn du fortfährst, werden alle zugehörigen Schlüssel (Hauptschlüssel, Nostr, etc.) gelöscht. Bitte vergewissern dich, dass du eine Sicherungskopie erstellt hast, denn es gibt keine andere Möglichkeit, sie wiederherzustellen."
         },
         "actions": {
           "remove_account": "Konto entfernen",
@@ -504,28 +484,28 @@
               "nostr": "Nostr"
             },
             "title": "Sichere deine Wiederherstellungsphrase",
-            "save": "Master Key speichern",
-            "button": "Ansicht Wiederherstellungsphrase",
-            "warning": "⚠️ Vergesse nicht, deine Wiederherstellungsphrase zu sichern! Wird sie nicht gesichert, kann dies dazu führen, dass du den Zugang zu deinem Master Key, dein Nostr-Identität oder den von dir mit diesem Schlüssel verwalteten Assets dauerhaft verlierst.",
+            "save": "Hauptschlüssel speichern",
+            "button": "Zeige Wiederherstellungsphrase",
+            "warning": "⚠️ Vergesse nicht, deine Wiederherstellungsphrase zu sichern! Wird sie nicht gesichert, kann dies dazu führen, dass du den Zugang zu deinem Hauptschlüssel, dein Nostr-Identität oder den von dir mit diesem Schlüssel verwalteten Assets dauerhaft verlierst.",
             "items": {
-              "recovery_phrase": "Du kannst jederzeit auf deinen Master Key zugreifen, indem du deine Wiederherstellungsphrase verwendest.",
+              "recovery_phrase": "Du kannst jederzeit auf deinen Hauptschlüssel zugreifen, indem du deine Wiederherstellungsphrase verwendest.",
               "words": "Die Wiederherstellungsphrase besteht aus 12 Wörtern, die wie ein Passwort funktionieren, jedoch nicht geändert oder zurückgesetzt werden können, falls sie verloren gehen.",
               "storage": "Schreibe sie an einem sicheren und privaten Ort auf!",
-              "keys": "Master Key ermöglicht dir die Interaktion mit verschiedenen Protokollen wie z.B.: Nostr, Liquid oder Basisschicht von Bitcoin."
+              "keys": "Der Hauptschlüssel ermöglicht dir die Interaktion mit verschiedenen Protokollen wie z.B.: Nostr, Liquid oder Basisschicht von Bitcoin."
             },
             "description": "Notiere deine Wiederherstellungsphrase, um deinen Hauptschlüssel auf einem neuen Gerät wiederherstellen zu können oder für den Fall, dass du den Zugriff auf dein Konto verlierst."
           },
-          "saved": "Master Key erfolgreich verschlüsselt und gespeichert.",
+          "saved": "Hauptschlüssel erfolgreich verschlüsselt und gespeichert.",
           "generate": {
             "title": "Neuen Hauptschlüssel generieren",
-            "button": "Master Key generieren",
+            "button": "Hauptschlüssel generieren",
             "confirm": "Ich habe die Wiederherstellungsphrase zu meinem Hauptschlüssel an einem privaten und sicheren Ort gesichert.",
             "error_confirm": "Bitte vergewissere dich, dass du deine Sicherungskopie des Wiederherstellungssatzes erstellt hast.",
-            "description": "Master Key ermöglicht dir die Interaktion mit verschiedenen Protokollen wie z.B.: Nostr, Basisschicht von Bitcoin oder LNURL-Auth."
+            "description": "Hauptschlüssel ermöglicht dir die Interaktion mit verschiedenen Protokollen wie z.B.: Nostr, Basisschicht von Bitcoin oder LNURL-Auth."
           },
           "import": {
             "title": "Importiere deinen Hauptschlüssel",
-            "description": "Verwende die Wiederherstellungsphrase, um Ihren Master Key in Alby zu importieren.",
+            "description": "Verwende die Wiederherstellungsphrase, um deinen Hauptschlüssel in Alby zu importieren.",
             "button": "Hauptschlüssel importieren"
           },
           "inputs": {
@@ -534,7 +514,7 @@
           "existing_nostr_key_notice": "ℹ️ Für dieses Konto ist bereits ein privater Nostr-Schlüssel festgelegt, der nicht von diesem Hauptschlüssel abgeleitet wird. Du kannst dein Nostr-Schlüssel über deine Kontoeinstellungen verwalten.",
           "lnurl": {
             "title": "Anmeldung mit Lightning",
-            "use_mnemonic": "Master Key für die Anmeldung bei Lightning-Anwendungen verwenden (LNURL Auth)"
+            "use_mnemonic": "Hauptschlüssel für die Anmeldung bei Lightning-Anwendungen verwenden (LNURL Auth)"
           },
           "new": {
             "title": "Was ist ein Hauptschlüssel?"
@@ -542,7 +522,7 @@
         },
         "remove_secretkey": {
           "title": "Hauptschlüssel entfernen",
-          "subtitle": "Entfernt den Hauptschlüssel von diesem Konto.",
+          "subtitle": "Entfernt den Hauptschlüssel aus diesem Konto.",
           "success": "Der Hauptschlüssel wurde erfolgreich entfernt.",
           "confirm": "Bitte gebe den Namen des Kontos ein, um die Löschung deines Hauptschlüssels zu bestätigen:\n\n{{ Name }}"
         },
@@ -560,7 +540,7 @@
     },
     "receive": {
       "amount": {
-        "placeholder": "Betrag in Satoshi...",
+        "placeholder": "Betrag in Satoshis...",
         "label": "Betrag"
       },
       "payment": {
@@ -571,7 +551,7 @@
       "actions": {
         "create_invoice": "Rechnung erstellen",
         "redeem": {
-          "description": "Einen Bitcoin-Gutschein sofort über einen LNURL-Code abheben",
+          "description": "Einen Bitcoin-Gutschein über einen LNURL-Code empfangen",
           "title": "Einlösen"
         },
         "invoice": {
@@ -579,7 +559,7 @@
           "description": "Sofortige Bitcoin Zahlungen mit einem bestimmten Betrag anfordern"
         },
         "bitcoin_address": {
-          "description": "Empfang über eine Bitcoin-Adresse mit Hilfe eines Tauschdienstes",
+          "description": "Empfang über eine Bitcoin-Adresse mit Hilfe eines Wechseldienstes",
           "title": "Bitcoin-Adresse"
         }
       },
@@ -593,13 +573,13 @@
       "publisher": {
         "allowance": {
           "title": "Erlaubnis",
-          "used_budget": "sats verwendet"
+          "used_budget": "verwendete Sats"
         }
       },
-      "title": "Deine ⚡ Website",
-      "description": "Websites, auf denen du Alby bereits verwendet hast",
-      "no_info": "Es sieht so aus, als hättest du Alby noch in keiner Website verwendet.",
-      "discover": "Websites entdecken"
+      "title": "Deine ⚡ Webseiten",
+      "description": "Webseiten, auf denen du Alby bereits verwendet hast",
+      "no_info": "Es sieht so aus, als hättest du Alby noch auf keiner Webseite verwendet.",
+      "discover": "Webseiten entdecken"
     },
     "send": {
       "input": {
@@ -630,14 +610,14 @@
         "label": "Betrag"
       },
       "success": "Abbuchungsauftrag von {{amount}} erfolgreich an {{sender}} gesendet",
-      "title": "Zurückziehen"
+      "title": "Abheben"
     },
     "nostr": {
       "title": "Nostr",
-      "allow": "Erlaube dieser Website:",
-      "content": "Auf dieser Website wirst du aufgefordert zu signieren:",
+      "allow": "Erlaube dieser Webseite:",
+      "content": "Auf dieser Webseite wirst du aufgefordert zu signieren:",
       "block_and_ignore": "Blockieren und Ignorieren von {{host}}",
-      "block_added": "{{host}} zur Blockliste hinzugefügt, bitte lade deine Website neu.",
+      "block_added": "{{host}} zur Blockliste hinzugefügt, bitte lade deine Webseite neu.",
       "allow_sign": "Erlaube dein {{host}} zu unterschreiben:",
       "view_details": "Details anzeigen",
       "hide_details": "Details ausblenden",
@@ -650,10 +630,10 @@
         "4": "verschlüsselte Direktnachrichten",
         "5": "Ereignislöschung",
         "7": "Reaktion",
-        "8": "Abzeichenverleihung",
-        "40": "Kanalbildung",
+        "8": "Badge Award",
+        "40": "Kanal Erstellung",
         "41": "Kanal Metadaten",
-        "42": "Kanalmeldung",
+        "42": "Kanalnachricht",
         "43": "Kanal verstecke Nachrichten",
         "44": "Kanal stummschalten Benutzer",
         "1984": "Berichterstattung",
@@ -663,7 +643,7 @@
         "22242": "Client Authentifizierung",
         "24133": "nostr verbinden",
         "30008": "Profilabzeichen",
-        "30009": "Ausweisdefinition",
+        "30009": "Badge Beschreibung",
         "30023": "Langform Inhalte",
         "30078": "anwendungsspezifische Daten",
         "unknown": "nostr Ereignis der Art {{kind}}"
@@ -672,8 +652,8 @@
     },
     "confirm_request_permission": {
       "title": "Antrag genehmigen",
-      "allow": "Erlaube die Ausführung dieser Website:",
-      "always_allow": "Denke an meine Wahl und frage nicht noch einmal"
+      "allow": "Erlaube die Ausführung dieser Webseite:",
+      "always_allow": "Meine Wahl merken und nicht erneut nachfragen"
     },
     "lnurlauth": {
       "submit": "Anmeldung",
@@ -690,7 +670,7 @@
       "amount": {
         "label": "Betrag (Satoshi)"
       },
-      "success": "Zahlung gesendet! Vorschaubild: {{preimage}}",
+      "success": "Zahlung gesendet! Preimage: {{preimage}}",
       "title": "Senden",
       "receiver": {
         "label": "Sende die Zahlung an"
@@ -698,11 +678,11 @@
     },
     "confirm_sign_message": {
       "title": "Unterschrift",
-      "content": "Auf dieser Website wirst du aufgefordert, zu signieren:"
+      "content": "Auf dieser Webseite wirst du aufgefordert, zu signieren:"
     },
     "confirm_keysend": {
       "title": "Zahlung genehmigen",
-      "success": "Zahlung gesendet! Vorschaubild: {{preimage}}",
+      "success": "Zahlung gesendet! Preimage: {{preimage}}",
       "payment_summary": {
         "description": "Sende Zahlung an: {{destination}}"
       }
@@ -727,7 +707,7 @@
       "email": {
         "label": "E-Mail"
       },
-      "success": "Erfolgreich, Zahlung gesendet!"
+      "success": "Zahlung erfolgreich gesendet!"
     },
     "lnurlchannel": {
       "title": "Kanal-Anfrage",
@@ -767,10 +747,10 @@
       }
     },
     "discover": {
-      "description": "Websites und Webapplikationen, auf denen du Alby verwenden kannst",
+      "description": "Webseiten und Webapplikationen, auf denen du Alby verwenden kannst",
       "title": "Erkunde das Ökosystem von Lightning ⚡️",
       "list": {
-        "gaming": "Spielen",
+        "gaming": "Spiele",
         "trading": "Handel",
         "entertainment": "Unterhaltung",
         "shopping": "Einkaufen",
@@ -780,29 +760,25 @@
         "nodeManagement": "Node-Verwaltung"
       },
       "tips": {
-        "title": "Deine Alby-Wallet ist bereit",
+        "title": "Deine Alby Wallet ist bereit",
         "top_up_wallet": {
-          "description": "Brauchst du eine Auffrischung?\nWir haben Sie!",
+          "description": "Du möchtest deine Wallet aufladen?",
           "title": "Bitcoin kaufen"
         },
         "demo": {
-          "description": "Entdecke die Funktionen von Alby\nauf unserer Demo Website",
+          "description": "Entdecke die Funktionen von Alby\nauf unserer Demo Webseite",
           "title": "Alby Demo"
         },
-        "description": "Ein paar Tipps für den Anfang 🐝",
+        "description": "Hier ein paar Tipps für den Anfang 🐝",
         "mnemonic": {
           "title": "Nostr",
-          "description": "Plane die Nutzung von Nostr?\nGeneriere jetzt deinen Schlüssel."
+          "description": "Generiere jetzt \n deinen Schlüssel."
         }
       }
     },
     "transactions": {
       "title": "Transaktionen",
-      "list_empty": "Noch keine Transaktionen verfügbar.",
-      "description": {
-        "outgoing": "Ausgehende Transaktionen für dieses Konto",
-        "incoming": "Eingehende Transaktionen für dieses Konto"
-      }
+      "list_empty": "Noch keine Transaktionen verfügbar."
     },
     "distributions": {
       "title": "Verbinden mit {{Name}}",
@@ -828,7 +804,7 @@
     },
     "confirm_add_account": {
       "title": "Konto hinzufügen",
-      "content": "Diese Website möchte ein Konto hinzufügen ({{connector}}):",
+      "content": "Diese Webseite möchte ein Konto hinzufügen ({{connector}}):",
       "tor_info": "Um sich über das TOR-Netzwerk zu verbinden, musst du zunächst die Alby-Begleit-App installieren:"
     },
     "on_chain": {
@@ -844,11 +820,11 @@
       },
       "title": "Bitcoin einlösen",
       "input": {
-        "label": "LNURL-Ziehungscode",
+        "label": "LNURL-Code",
         "placeholder": "LNURL..."
       },
       "actions": {
-        "withdraw": "Zurückziehen"
+        "withdraw": "Abheben"
       }
     },
     "scan_qrcode": {
@@ -856,7 +832,7 @@
     },
     "confirm_sign_pset": {
       "title": "Unterschrift",
-      "allow_sign": "Auf dieser Website wirst du aufgefordert, eine Liquid Transaktion zu unterzeichnen:",
+      "allow_sign": "Auf dieser Webseite wirst du aufgefordert, eine Liquid-Transaktion zu unterzeichnen",
       "view_details": "Details anzeigen",
       "hide_details": "Details ausblenden",
       "view_raw_transaction": "Rohtransaktion anzeigen (Base64)",
@@ -869,17 +845,28 @@
       "confirm_get_address": {
         "title": "Adresse abrufen"
       },
-      "allow": "Erlaube dieser Website:",
+      "allow": "Erlaube dieser Webseite:",
       "allow_sign": "Erlaube {{host}} zu unterschreiben:",
       "block_and_ignore": "Blockieren und Ignorieren von {{host}}",
-      "block_added": "{{host}} zur Blockliste hinzugefügt, bitte lade die Website neu."
+      "block_added": "{{host}} zur Blockliste hinzugefügt, bitte lade die Webseite neu.",
+      "confirm_sign_psbt": {
+        "title": "Unterschrift",
+        "hide_raw_transaction": "Rohtransaktion ausblenden (Hex)",
+        "view_raw_transaction": "Rohtransaktion anzeigen (Hex)",
+        "inputs": "Eingaben",
+        "fee": "Gebühr",
+        "hide_details": "Details ausblenden",
+        "allow_sign": "Diese Webseite fordert dich auf, eine Bitcoin-Transaktion zu unterzeichnen",
+        "view_details": "Details anzeigen",
+        "outputs": "Ausgänge"
+      }
     },
     "liquid": {
-      "title": "Flüssig",
-      "allow": "Erlaube dieser Website:",
+      "title": "Liquid",
+      "allow": "Erlaube dieser Webseite:",
       "block_and_ignore": "Blockieren und Ignorieren von {{host}}",
       "allow_sign": "Erlaube {{host}} zu unterschreiben:",
-      "block_added": "{{host}} zur Blockliste hinzugefügt, bitte lade die Website neu."
+      "block_added": "{{host}} zur Blockliste hinzugefügt, bitte lade die Webseite neu."
     },
     "send_to_bitcoin_address": {
       "time_estimate": "ℹ️ Transaktionen werden in der Regel innerhalb von 10-30 Minuten bearbeitet.",
@@ -904,7 +891,7 @@
         "label": "Gebühr"
       },
       "provider": {
-        "label": "Anbieter austauschen"
+        "label": "Wechseldienst"
       },
       "view_on_explorer": "Ansicht auf mempool explorer"
     },
@@ -914,11 +901,11 @@
     },
     "onboard": {
       "request2": "Du hast deinen Schlüssel noch nicht eingerichtet",
-      "request1": "Diese Website erfordert eine wichtige Interaktion",
+      "request1": "Diese Webseite erfordert eine wichtige Interaktion",
       "request3": "Die Einrichtung ist schnell und einfach",
-      "title": "Einrichten Ihrer Keys",
+      "title": "Deine Schlüssel einrichten",
       "actions": {
-        "start_setup": "Start Setup"
+        "start_setup": "Einrichtung starten"
       }
     },
     "liquid_enable": {
@@ -937,13 +924,20 @@
     "alby_enable": {
       "title": "Mit Alby verbinden",
       "request2": "Rechnungen und Alby Informationen anfordern"
+    },
+    "confirm_payment_async": {
+      "title": "Zahlung genehmigen",
+      "description": "Dies ist eine HOLD-Rechnung. <0>Mehr erfahren\"</0>",
+      "actions": {
+        "pay_now": "Jetzt bezahlen"
+      }
     }
   },
   "components": {
     "account_menu": {
       "options": {
         "account": {
-          "add": "Füge einen neuen Account hinzu",
+          "add": "Neues Konto hinzufügen",
           "manage": "Konten verwalten",
           "account_settings": "Kontoeinstellungen",
           "go_to_web_wallet": "Verwalte dein Web-Konto"
@@ -954,7 +948,7 @@
     },
     "publishers_table": {
       "payments": "Zahlungen",
-      "budget": "Haushalt",
+      "budget": "Budget",
       "total": "insgesamt"
     },
     "toasts": {
@@ -985,20 +979,20 @@
     },
     "allowance_menu": {
       "edit_allowance": {
-        "title": "Einstellungen der Website",
+        "title": "Einstellungen",
         "screen_reader": "Zulässigkeitsoptionen"
       },
       "enable_login": {
-        "title": "Anmeldung auf der Website aktivieren",
-        "subtitle": "Automatisches Einloggen ohne Bestätigung, wenn die Website dazu auffordert."
+        "title": "Anmeldung auf der Webseite aktivieren",
+        "subtitle": "Automatisches Einloggen ohne Bestätigung, wenn die Webseite dazu auffordert."
       },
       "edit_permissions": "Berechtigungen bearbeiten",
-      "hint": "Die Änderung dieser Einstellung setzt das aktuelle Budget zurück.",
+      "hint": "Die Änderung dieser Einstellung setzt das aktuelle Budget zurück",
       "new_budget": {
         "label": "Budget für Ein-Klick-Zahlungen",
-        "link_label": "Festlegen eines Budgets für One-Click-Zahlungen"
+        "link_label": "Festlegen eines Budgets für Ein-Klick-Zahlungen"
       },
-      "confirm_delete": "Bist du dir sicher, dass du die Verbindung zu dieser Website unterbrechen willst?"
+      "confirm_delete": "Bist du dir sicher, dass du die Verbindung zu dieser Webseite unterbrechen willst?"
     },
     "qrcode_scanner": {
       "actions": {
@@ -1006,11 +1000,11 @@
         "start_scanning": "Scannen starten"
       },
       "errors": {
-        "allow_camera_access": "Bitte erlaube deinen Kamerazugriff in den Einstellungen."
+        "allow_camera_access": "Bitte erlaube den Kamerazugriff in den Einstellungen."
       },
-      "title": "QR Code scannen"
+      "title": "QR-Code scannen"
     },
-    "transactionsTable": {
+    "transactions_table": {
       "sent": "Gesendet",
       "boostagram": {
         "sender": "Sender",
@@ -1018,10 +1012,10 @@
         "podcast": "Podcast",
         "message": "Nachricht"
       },
-      "preimage": "Vorschaubild",
+      "preimage": "Preimage",
       "received": "Empfangen",
       "fee": "Gebühr",
-      "open_location": "Website öffnen"
+      "open_location": "Webseite öffnen"
     },
     "budget_control": {
       "remember": {
@@ -1035,22 +1029,16 @@
     "badge": {
       "label": {
         "auth": "LOGIN",
-        "imported": "EINGEFÜHRT",
+        "imported": "IMPORTIERT",
         "budget": "BUDGET"
-      }
-    },
-    "transaction_list": {
-      "tabs": {
-        "outgoing": "Ausgehend von",
-        "incoming": "Eingehend"
       }
     }
   },
   "common": {
     "optional": "Optional",
-    "feedback": "Rückmeldung",
+    "feedback": "Feedback",
     "error": "Fehler",
-    "connected_sites": "Verbundene Standorte",
+    "connected_sites": "Verbundene Webseiten",
     "loading": "Laden",
     "sats_one": "sat",
     "success": "Erfolgreich",
@@ -1070,7 +1058,7 @@
       "cancel": "Abbrechen",
       "confirm": "Bestätigen",
       "send": "Senden",
-      "unlock": "Freischalten",
+      "unlock": "Entsperren",
       "receive": "Empfangen",
       "delete": "Löschen",
       "edit": "Bearbeiten",
@@ -1080,7 +1068,7 @@
       "close": "Schließen",
       "remove": "entfernen",
       "continue": "Weiter",
-      "lock": "Schloss",
+      "lock": "Sperren",
       "connect": "Verbinden",
       "save": "Speichern",
       "copy": "Kopieren",
@@ -1095,7 +1083,7 @@
       "paste": "Einfügen",
       "paste_clipboard": "Einfügen aus der Zwischenablage",
       "review": "Überprüfung",
-      "disconnect": "Trenne die Verbindung",
+      "disconnect": "Verbindung trennen",
       "copied_to_clipboard": "In die Zwischenablage kopiert"
     },
     "discover": "Entdecken",
@@ -1112,7 +1100,7 @@
       "lessThanOrEqual": "≤ {{max}}",
       "greaterOrEqual": "≥ {{min}}"
     },
-    "balance": "Bilanz",
+    "balance": "Kontostand",
     "wallet": "Wallet",
     "connectors": {
       "lnd": "LND",
@@ -1130,15 +1118,15 @@
     "or": "oder",
     "pasted": "Eingefügt!",
     "enable": {
-      "block_added": "{{host}} zur Blockliste hinzugefügt, bitte lade die Website neu.",
+      "block_added": "{{host}} zur Blockliste hinzugefügt, bitte lade die Webseite neu.",
       "request1": "Genehmigung von Transaktionen beantragen",
-      "allow": "Erlaube dieser Website,:",
+      "allow": "Erlaube dieser Webseite:",
       "block_and_ignore": "Blockieren und Ignorieren von {{host}}"
     }
   },
   "permissions": {
     "commando": {
-      "bkpr-listbalances": "Liste aller aktuellen und historischen Kontosalden.",
+      "bkpr-listbalances": "Liste aller aktuellen und historischen Kontostände.",
       "checkmessage": "Überprüfe, ob die Signatur von einem bestimmten Node erstellt wurde.",
       "fundchannel": "Öffne einen Zahlungskanal mit einem Peer, indem du eine Finanzierungstransaktion durchführst.",
       "getroute": "Finde die beste Route für die Zahlung an eine Lightning Node.",
@@ -1210,7 +1198,7 @@
       "listpeers": "Ermittelt eine Liste aller derzeit aktiven Peers.",
       "sendtoroute": "Nehme eine Zahlung über die angegebene Route vor.",
       "decodepayreq": "Dekodierung einer Zahlungsanforderungszeichenfolge.",
-      "addinvoice": "Erstelle eine neue Rechnungen.",
+      "addinvoice": "Neue Rechnungen erstellen.",
       "routermc": "Lese den internen Status der Missionskontrolle.",
       "gettransactions": "Abrufen einer Liste aller für die Wallet relevanten Transaktionen.",
       "getnetworkinfo": "Abrufen grundlegender Statistiken über die bekannte Kanalkurve.",
@@ -1219,13 +1207,13 @@
       "listchannels": "Erhalte eine Beschreibung aller offenen Kanäle.",
       "listinvoices": "Erhalte eine Liste aller Rechnungen.",
       "channelbalance": "Erhalte einen Bericht über den Gesamtbetrag der Mittel für alle offenen Kanäle.",
-      "walletbalance": "Ermittel die gesamten nicht verbrauchten Ausgaben deiner Wallet.",
+      "walletbalance": "Ermittle die gesamten nicht verbrauchten Ausgaben deiner Wallet.",
       "openchannel": "Öffne einen neuen Kanal.",
-      "addholdinvoice": "Erstelle eine neue HODL-Rechnungen.",
+      "addholdinvoice": "Neue HODL-Rechnungen erstellen.",
       "settleinvoice": "Begleiche eine akzeptierte Rechnung."
     },
     "webln": {
-      "getbalance": "Lese den Saldo deines Kontos ab."
+      "getbalance": "Den Kontostand abfragen."
     },
     "liquid": {
       "getaddress": "Lese deine Liquid-Empfangsadresse.",

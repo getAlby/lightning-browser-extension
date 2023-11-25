@@ -100,20 +100,6 @@
           "placeholder": "secret stack sats phrase"
         }
       },
-      "lndhub_bluewallet": {
-        "title": "Bluewallet",
-        "page": {
-          "title": "Connect to BlueWallet",
-          "description": "In BlueWallet, choose the wallet you want to connect, open it, click on \"...\", click on Export/Backup to display the QR code and scan it with your webcam."
-        },
-        "uri": {
-          "label": "BlueWallet Export URI"
-        },
-        "errors": {
-          "invalid_uri": "Invalid BlueWallet URI",
-          "connection_failed": "Connection failed. Is your BlueWallet URI correct?"
-        }
-      },
       "lndhub_go": {
         "title": "LNDHub",
         "page": {
@@ -324,9 +310,7 @@
         "send_satoshis": "⚡️ Send Satoshis ⚡️",
         "enable_now": "Enable Now"
       },
-      "recent_transactions": "Recent Transactions",
       "allowance_view": {
-        "recent_transactions": "Recent Transactions",
         "budget_spent": "Budget spent",
         "sats": "sats",
         "no_transactions": "No transactions on <0>{{name}}</0> yet.",
@@ -335,12 +319,10 @@
         "permissions": "Permissions"
       },
       "default_view": {
-        "recent_transactions": "Recent Transactions",
         "is_blocked_hint": "Alby is currently disabled on {{host}}",
         "block_removed": "Enabled {{host}}. Please reload the website.",
-        "no_outgoing_transactions": "No outgoing transactions for this account yet.",
-        "no_incoming_transactions": "No incoming transactions for this account yet.",
-        "all_transactions_link": "See all transactions"
+        "no_transactions": "No transactions for this account yet.",
+        "see_all": "See all"
       }
     },
     "accounts": {
@@ -943,10 +925,7 @@
     },
     "transactions": {
       "title": "Transactions",
-      "description": {
-        "outgoing": "Outgoing transactions for this account",
-        "incoming": "Incoming transactions for this account"
-      },
+      "description": "Transactions for this account",
       "list_empty": "No transactions available yet."
     },
     "onboard": {
@@ -986,6 +965,7 @@
     "help": "Help",
     "balance": "Balance",
     "or": "or",
+    "website": "Website",
     "actions": {
       "back": "Back",
       "delete": "Delete",
@@ -1016,6 +996,7 @@
       "log_in": "Log in",
       "remember": "Remember my choice and don't ask again",
       "more": "More",
+      "hide": "Hide",
       "disconnect": "Disconnect",
       "review": "Review",
       "download": "Download"
@@ -1077,24 +1058,21 @@
         "allow_camera_access": "Please allow camera access in the settings screen."
       }
     },
-    "transactionsTable": {
+    "transactions_table": {
       "fee": "Fee",
       "preimage": "Preimage",
+      "payment_hash": "Payment hash",
       "received": "Received",
       "sent": "Sent",
+      "date_time": "Date & Time",
       "boostagram": {
         "sender": "Sender",
         "message": "Message",
         "app": "App",
-        "podcast": "Podcast"
+        "podcast": "Podcast",
+        "episode": "Episode"
       },
       "open_location": "Open website"
-    },
-    "transaction_list": {
-      "tabs": {
-        "outgoing": "Outgoing",
-        "incoming": "Incoming"
-      }
     },
     "budget_control": {
       "remember": {

@@ -90,20 +90,6 @@
           "placeholder": "hemmelig kode til sats-samlingen"
         }
       },
-      "lndhub_bluewallet": {
-        "title": "Bluewallet",
-        "page": {
-          "title": "Opet forbindelse til Bluewallet",
-          "description": "Vælg den wallet du vil oprette forbindelse til i Bluewallet, åbn den, klik på \"...\", klik på Export/Backup for at se QR-koden og aflæs den med dit webkamera."
-        },
-        "uri": {
-          "label": "BlueWallet export URI"
-        },
-        "errors": {
-          "invalid_uri": "Ugyldig BlueWallet URI",
-          "connection_failed": "Forbindelse kunne ikke oprettes. Er din BlueWallet URI korrekt?"
-        }
-      },
       "lndhub_go": {
         "title": "LNDHub",
         "page": {
@@ -292,13 +278,10 @@
         "send_satoshis": "⚡️ Send Satoshi ⚡️",
         "enable_now": "Aktiver nu"
       },
-      "recent_transactions": "Seneste transaktioner",
       "allowance_view": {
-        "recent_transactions": "Seneste transaktioner",
         "no_transactions": "Endnu ingen transaktioner på <0>{{navn}}</0>."
       },
       "default_view": {
-        "recent_transactions": "Seneste transaktioner",
         "is_blocked_hint": "Alby er i øjeblikket deaktiveret på {{vært}}",
         "block_removed": "{{vært}} blev aktiveret. Indlæs hjemmesiden igen."
       }
@@ -714,7 +697,7 @@
         "allow_camera_access": "Giv adgang til kameraet i indstillingsvinduet."
       }
     },
-    "transactionsTable": {
+    "transactions_table": {
       "fee": "Betaling",
       "preimage": "Præ-visning",
       "received": "Modtaget",

@@ -56,7 +56,7 @@ export default function OnChainReceive() {
               fullWidth
               primary
               onClick={() =>
-                window.open("https://getalby.com/node/receive", "_blank")
+                window.open("https://getalby.com/onchain_addresses", "_blank")
               }
             />
           </div>

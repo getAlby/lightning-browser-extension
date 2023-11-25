@@ -49,20 +49,6 @@
           "connection_failed": "Connessione non riuscita. Le tue credenziali LND sono corrette?"
         }
       },
-      "lndhub_bluewallet": {
-        "title": "Bluewallet",
-        "page": {
-          "title": "Connettiti a BlueWallet",
-          "description": "Nell'app BlueWallet, scegli il portafoglio che vuoi connettere, aprilo, clicca su \"...\", clicca su Export/Backup per mostrare il codice QR e scansionalo con la tua webcam."
-        },
-        "uri": {
-          "label": "URI di esportazione BlueWallet"
-        },
-        "errors": {
-          "invalid_uri": "URI di BlueWallet non valido",
-          "connection_failed": "Connessione non riuscita. L'URI BlueWallet è corretto?"
-        }
-      },
       "lndhub_go": {
         "title": "LNDHub",
         "page": {
@@ -263,13 +249,10 @@
         "send_satoshis": "⚡️ Invia Satoshis ⚡️",
         "enable_now": "Attiva ora"
       },
-      "recent_transactions": "Transazioni recenti",
       "allowance_view": {
-        "recent_transactions": "Transazioni recenti",
         "no_transactions": "Non ci sono ancora transazioni su <0>{{name}}</0>."
       },
       "default_view": {
-        "recent_transactions": "Transazioni recenti",
         "is_blocked_hint": "Alby è attualmente disabilitato su {{host}}",
         "block_removed": "{{host}} abilitato. Si prega di ricaricare la pagina."
       }
@@ -714,7 +697,7 @@
         "allow_camera_access": "Si prega di consentire l'accesso alla fotocamera nella schermata delle impostazioni."
       }
     },
-    "transactionsTable": {
+    "transactions_table": {
       "fee": "Tassa",
       "preimage": "Preimmagine",
       "received": "Ricevuto",

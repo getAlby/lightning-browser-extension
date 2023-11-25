@@ -183,20 +183,6 @@
         },
         "title": "RaspiBlitz"
       },
-      "lndhub_bluewallet": {
-        "title": "Bluewallet",
-        "page": {
-          "title": "连接BlueWallet",
-          "description": "在BlueWallet中，选择你要连接的钱包，打开它，点击\"...\"，点击导出/备份，显示二维码并使用摄像头扫描。"
-        },
-        "uri": {
-          "label": "BlueWallet导出URI"
-        },
-        "errors": {
-          "invalid_uri": "BlueWallet URI无效",
-          "connection_failed": "连接失败。你的BlueWallet URI是否正确？"
-        }
-      },
       "lndhub_go": {
         "title": "LNDHub",
         "page": {
@@ -264,18 +250,12 @@
       }
     },
     "home": {
-      "recent_transactions": "近期交易",
       "allowance_view": {
-        "recent_transactions": "近期交易",
         "no_transactions": "<0>{{name}}</0>还没有交易。"
       },
       "default_view": {
         "is_blocked_hint": "Alby 目前在 {{host}} 上被禁用",
-        "recent_transactions": "近期交易",
-        "block_removed": "启用了{{host}}。请重新加载网站。",
-        "all_transactions_link": "查看所有交易",
-        "no_incoming_transactions": "此帐户尚无传入交易。",
-        "no_outgoing_transactions": "此帐户尚无传出交易。"
+        "block_removed": "启用了{{host}}。请重新加载网站。"
       },
       "actions": {
         "send_satoshis": "⚡️ 发送聪 ⚡️",
@@ -769,11 +749,7 @@
     },
     "transactions": {
       "list_empty": "尚无交易。",
-      "title": "交易",
-      "description": {
-        "incoming": "此帐户的传入交易",
-        "outgoing": "此帐户的传出交易"
-      }
+      "title": "交易"
     },
     "distributions": {
       "title": "连接 {{name}}",
@@ -1005,7 +981,7 @@
       },
       "edit_permissions": "编辑权限"
     },
-    "transactionsTable": {
+    "transactions_table": {
       "boostagram": {
         "podcast": "播客",
         "message": "消息",
@@ -1056,12 +1032,6 @@
       "companion": {
         "title": "配套应用",
         "description": "将浏览器连接到 TOR 网络的轻量级应用程序。"
-      }
-    },
-    "transaction_list": {
-      "tabs": {
-        "incoming": "传入",
-        "outgoing": "传出"
       }
     }
   },

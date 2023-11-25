@@ -100,20 +100,6 @@
           "placeholder": "عبارت مخفی انباشتن ساتوشی"
         }
       },
-      "lndhub_bluewallet": {
-        "title": "Bluewallet",
-        "page": {
-          "title": "اتصال به BlueWallet",
-          "description": "درBlueWallet کیف پولی که می خواهید به آن متصل شوید را انتخاب کرده، روی\"...\" کلیک کنید، روی Export/Backup کلیک کنید تا کدQR نمایش داده شود و با دوربین وب آن را اسکن کنید."
-        },
-        "uri": {
-          "label": "استخراج آدرس BlueWallet"
-        },
-        "errors": {
-          "invalid_uri": "آدرس بلووالت نامعتبر",
-          "connection_failed": "اتصال ناموفق. آدرس بلووالت شما درست است؟"
-        }
-      },
       "lndhub_go": {
         "title": "LNDHub",
         "page": {
@@ -324,18 +310,12 @@
         "send_satoshis": "⚡️ ارسال ساتوشی ⚡️",
         "enable_now": "اکنون فعال کن"
       },
-      "recent_transactions": "تراکنش های اخیر",
       "allowance_view": {
-        "recent_transactions": "تراکنش های اخیر",
         "no_transactions": "هنوز تراکنشی در <0>{{name}}</0> نیست."
       },
       "default_view": {
-        "recent_transactions": "تراکنش های اخیر",
         "is_blocked_hint": "البی در حال حاضر در {{host}} غیرفعال شده است",
-        "block_removed": "{{host}} فعال شد. لطفا دوباره بارگیری کنید.",
-        "all_transactions_link": "دیدن همه تراکنش ها",
-        "no_incoming_transactions": "این حساب هنوز هیچ تراکنش ورودی نداشته است.",
-        "no_outgoing_transactions": "این حساب هنوز هیچ تراکنش خروجی نداشته است."
+        "block_removed": "{{host}} فعال شد. لطفا دوباره بارگیری کنید."
       }
     },
     "accounts": {
@@ -801,11 +781,7 @@
     },
     "transactions": {
       "title": "تراکنش ها",
-      "list_empty": "هنوز هیچ تراکنشی موجود نیست.",
-      "description": {
-        "incoming": "تراکنش های ورودی این حساب",
-        "outgoing": "تراکنش های خروجی این حساب"
-      }
+      "list_empty": "هنوز هیچ تراکنشی موجود نیست."
     },
     "on_chain": {
       "instructions1": "برای دریافت بیتکوین از طریق آدرس بیتکوین، وارد <0>حساب البی</0> خود در getalby.com شوید",
@@ -999,7 +975,7 @@
         "allow_camera_access": "لطفا در صفحه تنظیمات اجازه دسترسی به دوربین بدهید."
       }
     },
-    "transactionsTable": {
+    "transactions_table": {
       "fee": "کارمزد",
       "preimage": "پیش نمایش",
       "received": "دریافت شد",
@@ -1066,12 +1042,6 @@
       "label": {
         "auth": "ورود",
         "imported": "وارد شده"
-      }
-    },
-    "transaction_list": {
-      "tabs": {
-        "outgoing": "خروجی",
-        "incoming": "ورودی"
       }
     }
   },
