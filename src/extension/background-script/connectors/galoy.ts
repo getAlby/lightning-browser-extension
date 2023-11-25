@@ -190,8 +190,6 @@ class Galoy implements Connector {
   }
 
   async checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {
-    const TRANSACTIONS_PER_PAGE = 20;
-
     const query = {
       query: `
         query transactionsList($first: Int, $after: String) {
@@ -202,9 +200,6 @@ class Galoy implements Connector {
                 id
                 walletCurrency
                 transactions(first: $first, after: $after) {
-                  pageInfo {
-                      hasNextPage
-                  }
                   edges {
                     cursor
                     node {
@@ -216,7 +211,7 @@ class Galoy implements Connector {
                       }
                       settlementVia {
                         ... on SettlementViaLn {
-                            paymentSecret
+                            preImage
                         }
                         ... on SettlementViaIntraLedger {
                           __typename
@@ -232,17 +227,10 @@ class Galoy implements Connector {
           }
         }
       `,
-      variables: "",
     };
 
-    let lastSeenCursor = null;
     let result: true | CheckPaymentResponse = true;
     while (result === true) {
-      query.variables = JSON.stringify({
-        first: TRANSACTIONS_PER_PAGE,
-        after: lastSeenCursor,
-      });
-
       result = await this.request(query).then(({ data, errors }) => {
         const errs = errors || data.me.errors;
         if (errs && errs.length) {
@@ -259,10 +247,6 @@ class Galoy implements Connector {
           throw new Error("Bad data received.");
         }
 
-        if (wallet.walletCurrency !== "BTC") {
-          throw new Error("Non-BTC wallets not implemented yet.");
-        }
-
         const txEdges = wallet.transactions.edges;
         const tx = txEdges.find(
           (tx) => tx.node.initiationVia.paymentHash === args.paymentHash
@@ -273,18 +257,11 @@ class Galoy implements Connector {
               paid: tx.node.status === "SUCCESS",
               preimage: tx.node.settlementVia.__typename
                 ? "Payment executed internally"
-                : tx.node.settlementVia.paymentSecret || "No preimage received",
+                : tx.node.settlementVia.preImage || "No preimage received",
             },
           };
         }
 
-        if (!wallet.transactions.pageInfo.hasNextPage) {
-          throw new Error(
-            `Transaction not found for payment hash: ${args.paymentHash}`
-          );
-        }
-
-        lastSeenCursor = txEdges[txEdges.length - 1].cursor;
         return true;
       });
     }
@@ -400,9 +377,6 @@ type GaloyWallet = {
   id: string;
   walletCurrency: string;
   transactions: {
-    pageInfo: {
-      hasNextPage: boolean;
-    };
     edges: {
       cursor: string;
       node: {
@@ -413,7 +387,7 @@ type GaloyWallet = {
         settlementVia:
           | {
               __typename: undefined;
-              paymentSecret: string;
+              preImage: string;
             }
           | {
               __typename: "SettlementViaIntraledger";
