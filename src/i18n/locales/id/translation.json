@@ -232,34 +232,6 @@
           "login": "Login"
         }
       },
-      "kollider": {
-        "title": "Kollider",
-        "description": "Masuk pada akun Kollider",
-        "warning": "⚠️ Mohon pastikan kamu menyimpan kredensial di aplikasi password manager secara aman. Jika tidak ada kredensial tersebut, akun kamu tidak dapat dipulihkan.",
-        "choose_path": {
-          "title": "Sambungkan dengan Kollider Wallet",
-          "description": "Login atau daftar akun Kollider dan sambungkan dengan Alby.",
-          "create_new": "Daftar"
-        },
-        "create": {
-          "title": "Buat akun Kollider dan sambungkan dengan Alby",
-          "description": "Buat akun Kollider untuk mengirim, menerima, dan menukar Bitcoin."
-        },
-        "login": {
-          "title": "Sambungkan akun Kollider kamu"
-        },
-        "username": {
-          "label": "Username"
-        },
-        "currency": {
-          "label": "Pilih mata uang akun kamu"
-        },
-        "errors": {
-          "connection_failed": "Koneksi gagal. Apakah kamu yakin data akun sudah benar?",
-          "user_already_exists": "Username sudah terpakai",
-          "registration_limit_exceeded": "Limit pendaftaran sudah maksimal, coba lagi dalam beberapa saat."
-        }
-      },
       "btcpay": {
         "page": {
           "title": "Sambungkan dengan node BTCPay LND",

@@ -240,19 +240,6 @@
           "invalid_token": ""
         }
       },
-      "kollider": {
-        "title": "",
-        "description": "",
-        "username": {
-          "label": ""
-        },
-        "currency": {
-          "label": ""
-        },
-        "errors": {
-          "connection_failed": ""
-        }
-      },
       "btcpay": {
         "title": "",
         "page": {

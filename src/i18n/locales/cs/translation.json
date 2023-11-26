@@ -248,30 +248,6 @@
           "placeholder": "tajná fráze"
         }
       },
-      "kollider": {
-        "description": "Přihlášení k vašemu účtu Kollider",
-        "title": "Kollider",
-        "errors": {
-          "connection_failed": "Připojení se nezdařilo. Jste si jisti, že jste zadali údaje k účtu správně?",
-          "user_already_exists": "Uživatelské jméno již existuje",
-          "registration_limit_exceeded": "Limit registrací byl překročen, zkuste to znovu později."
-        },
-        "username": {
-          "label": "Vložte vaše uživatelské jméno ke Kollider"
-        },
-        "currency": {
-          "label": "Zvolte měnu vašeho účtu"
-        },
-        "choose_path": {
-          "create_new": "Přihlásit se",
-          "title": "Připojení k peněžence Kollider",
-          "description": "Přihlašte se nebo si vytvořte nový Kollider účet a propojte ho s Alby."
-        },
-        "warning": "⚠️ Prosím ujistěte se, že máte své přihlašovací údaje uložené bezpečně ve svém správci hesel. Bez těchto údajů nepůjde váš účet obnovit.",
-        "create": {
-          "title": "Vytvořte si svůj Kollider účet a propojte ho s Alby"
-        }
-      },
       "umbrel_lightning_node": {
         "title": "Lightning uzel"
       }

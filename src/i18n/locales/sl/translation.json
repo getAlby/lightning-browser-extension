@@ -99,33 +99,6 @@
           "missing_token": "Manjka dostopni žeton, ne moreš se prijaviti."
         }
       },
-      "kollider": {
-        "description": "Prijava v Kollider račun",
-        "username": {
-          "label": "Uporabniško ime"
-        },
-        "errors": {
-          "registration_limit_exceeded": "Preseženo število registracij, poskusi čez nekaj časa.",
-          "connection_failed": "Povezava ni uspela. Si prepičan, da so podatki pravilni?",
-          "user_already_exists": "Uporabniško ime že obstaja"
-        },
-        "title": "Kollider",
-        "choose_path": {
-          "title": "Poveži v Kollider Wallet",
-          "description": "Prijavi ali se registriraj v nov Kollider račun in se poveži v Alby.",
-          "create_new": "Registracija"
-        },
-        "create": {
-          "title": "Ustvari svoj Kollider račun se poveži v Alby",
-          "description": "Ustvari nov Kollider račun za pošiljanje, sprejemanje in menjavo Bitcoin-ov."
-        },
-        "login": {
-          "title": "Poveži se z Kollider računom"
-        },
-        "currency": {
-          "label": "Izberi valuto računa"
-        }
-      },
       "btcpay": {
         "config": {
           "label": "Podatki o konfiguraciji",

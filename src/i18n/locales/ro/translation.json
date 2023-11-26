@@ -226,19 +226,6 @@
           "invalid_token": "JWT invalid a trecut"
         }
       },
-      "kollider": {
-        "title": "Kollider",
-        "description": "Logare la contul tau Kollider",
-        "username": {
-          "label": "Introdu numele de utilizator Kollider"
-        },
-        "currency": {
-          "label": "Selecteaza contul de moneda"
-        },
-        "errors": {
-          "connection_failed": "Conexiune esuata. Esti sigur ca datele contului sunt corecte?"
-        }
-      },
       "btcpay": {
         "title": "Serverul BTCPay",
         "page": {

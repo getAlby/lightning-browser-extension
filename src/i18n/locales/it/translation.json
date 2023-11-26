@@ -199,19 +199,6 @@
           "connection_failed": "Connessione fallita. L'URL di connessione a BTCPay è corretto e accessibile?"
         }
       },
-      "kollider": {
-        "description": "Accedi al tuo account Kollider",
-        "username": {
-          "label": "Inserisci il tuo username Kollider"
-        },
-        "currency": {
-          "label": "Seleziona la valuta del tuo account"
-        },
-        "errors": {
-          "connection_failed": "Connessione fallita. Sei sicuro che i dati dell'account siano corretti?"
-        },
-        "title": "Kollider"
-      },
       "commando": {
         "port": {
           "label": "Porta"

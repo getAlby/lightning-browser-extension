@@ -226,19 +226,6 @@
           "invalid_token": "JWT invalide passé"
         }
       },
-      "kollider": {
-        "title": "Kollider",
-        "description": "Connectez-vous à votre compte Kollider",
-        "username": {
-          "label": "Saisissez votre nom d'utilisateur pour Kollider"
-        },
-        "currency": {
-          "label": "Sélectionnez votre compte en devise"
-        },
-        "errors": {
-          "connection_failed": "La connexion a échoué. Êtes-vous sûr que les données du compte sont correctes ?"
-        }
-      },
       "btcpay": {
         "title": "Serveur BTCPay",
         "page": {

@@ -205,34 +205,6 @@
           "connection_failed": "Anslutning misslyckades. Är URL till BTCPay-anslutningen korrekt och tillgänglig?"
         }
       },
-      "kollider": {
-        "title": "Kollider",
-        "currency": {
-          "label": "Välj ditt valutakonto"
-        },
-        "errors": {
-          "connection_failed": "Anslutningen misslyckades. Är du säker på att kontouppgifterna är korrekta?",
-          "user_already_exists": "Användarnamnet finns redan",
-          "registration_limit_exceeded": "Registreringsgränsen har överskridits, försök efter en stund."
-        },
-        "description": "Logga in på ditt Kollider-konto",
-        "username": {
-          "label": "Användarnamn"
-        },
-        "warning": "⚠️ Se till att du sparar dina uppgifter säkert i en lösenordshanterare. Utan dessa inloggningsuppgifter kommer ditt konto inte att kunna återställas.",
-        "choose_path": {
-          "title": "Anslut till din Kollider Wallet",
-          "description": "Logga in eller registrera dig för ett nytt Kollider-konto och anslut till Alby.",
-          "create_new": "Registrera"
-        },
-        "create": {
-          "title": "Skapa ditt Kollider-konto och anslut till Alby",
-          "description": "Skapa ett nytt Kollider-konto för att skicka, ta emot och handla Bitcoin."
-        },
-        "login": {
-          "title": "Anslut till ditt Kollider-konto"
-        }
-      },
       "commando": {
         "port": {
           "label": "Port"

@@ -26,6 +26,7 @@ const connectors = {
   nativelnd: NativeLnd,
   lndhub: LndHub,
   nativelndhub: NativeLndHub,
+  kollider: Kollider,
   lnbits: LnBits,
   lnc: Lnc,
   nativelnbits: NativeLnBits,
@@ -34,7 +35,6 @@ const connectors = {
   citadel: Citadel,
   nativecitadel: NativeCitadel,
   commando: Commando,
-  kollider: Kollider,
   alby: Alby,
 };
 

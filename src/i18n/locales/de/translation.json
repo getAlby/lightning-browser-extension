@@ -237,34 +237,6 @@
           "connection_failed": "Verbindung fehlgeschlagen. Ist deine Core Lightning Node online und verwendet diese das Commando Plugin?"
         }
       },
-      "kollider": {
-        "title": "Kollider",
-        "description": "Anmeldung bei deinem Kollider Konto",
-        "currency": {
-          "label": "Wähle dein Währungskonto"
-        },
-        "errors": {
-          "connection_failed": "Verbindung fehlgeschlagen. Bist du dir sicher, dass die Kontodaten korrekt sind?",
-          "registration_limit_exceeded": "Registrierungslimit überschritten, versuche es später noch einmal.",
-          "user_already_exists": "Benutzername existiert bereits"
-        },
-        "username": {
-          "label": "Benutzername"
-        },
-        "choose_path": {
-          "title": "Verbinden mit deiner Kollider-Wallet",
-          "description": "Melde dich an oder registriere dich für ein neues Kollider-Konto und stelle eine Verbindung zu Alby her.",
-          "create_new": "Registriere dich"
-        },
-        "create": {
-          "description": "Erstelle ein neues Kollider-Konto, um Bitcoin zu senden, zu empfangen und zu handeln.",
-          "title": "Erstelle dein Kollider-Konto und verbinde dich mit Alby"
-        },
-        "login": {
-          "title": "Verbinden mit deinem Kollider-Konto"
-        },
-        "warning": "⚠️ Bitte stelle sicher, dass du deine Zugangsdaten sicher in einem Passwort-Manager speicherst. Ohne diese Zugangsdaten kann dein Konto nicht wiederhergestellt werden."
-      },
       "title": "Verbinde Lightning Wallet",
       "lnc": {
         "title": "Lightning Terminal (LNC)",

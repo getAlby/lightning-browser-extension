@@ -236,32 +236,6 @@
         }
       },
       "title": "Conectar Carteira Bitcoin",
-      "kollider": {
-        "title": "Kollider",
-        "warning": "⚠️ Certifique-se de armazenar suas credenciais com segurança em um gerenciador de senhas. Sem essas credenciais, não poderemos recuperar sua conta.",
-        "choose_path": {
-          "create_new": "Criar conta Kollider",
-          "description": "Crie uma conta Kollider ou faça o login caso já possua uma conta.",
-          "title": "Conecte-se na sua carteira Kollider"
-        },
-        "create": {
-          "title": "Crie sua conta na Kollider e conecte-se na Alby",
-          "description": "Crie uma nova conta Kollider para enviar, receber e negociar Bitcoin."
-        },
-        "login": {
-          "title": "Conecte-se na sua conta Kollider"
-        },
-        "username": {
-          "label": "Nome de usuário"
-        },
-        "errors": {
-          "user_already_exists": "Esse nome de usuário já existe",
-          "connection_failed": "Falha na conexão. Você tem certeza de que os dados da conta estão corretos?"
-        },
-        "currency": {
-          "label": "Escolha a moeda da conta"
-        }
-      },
       "lnc": {
         "page": {
           "title": "Conecte-se no servidor LND usando LNC",

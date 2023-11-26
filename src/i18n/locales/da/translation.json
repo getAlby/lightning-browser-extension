@@ -226,19 +226,6 @@
           "invalid_token": "ugyldig JWT givet"
         }
       },
-      "kollider": {
-        "title": "Kollider",
-        "description": "Log ind på din Kollider-konto",
-        "username": {
-          "label": "Indtast dit Kollider-brugernavn"
-        },
-        "currency": {
-          "label": "Vælg din kontovaluta"
-        },
-        "errors": {
-          "connection_failed": "Forbindelsen kunne ikke oprettes. Er du sikker på at kontooplysningerne er korrekte?"
-        }
-      },
       "btcpay": {
         "title": "BTCPay Server",
         "page": {

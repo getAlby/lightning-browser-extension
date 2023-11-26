@@ -232,23 +232,6 @@
           "invalid_token": "podano nieprawidłowy token JWT"
         }
       },
-      "kollider": {
-        "title": "Kollider",
-        "description": "Zaloguj się do swojego konta Kollider",
-        "username": {
-          "label": "Wprowadź nazwę użytkownika Kollider"
-        },
-        "currency": {
-          "label": "Wybierz walutę swojego konta"
-        },
-        "errors": {
-          "connection_failed": "Połączenie nieudane. Czy na pewno podane dane są poprawne?"
-        },
-        "warning": "⚠️ Upewnij się, że bezpiecznie przechowujesz swoje dane uwierzytelniające w menedżerze haseł. Bez tych poświadczeń Twoje konto nie będzie możliwe do odzyskania.",
-        "choose_path": {
-          "title": "Połącz ze swoim portfelem Kollider"
-        }
-      },
       "btcpay": {
         "title": "BTCPay Server",
         "page": {
