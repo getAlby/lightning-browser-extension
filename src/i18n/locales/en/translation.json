@@ -1089,7 +1089,7 @@
     "transactions_table": {
       "fee": "Fee",
       "preimage": "Preimage",
-      "payment_hash": "Payment hash",
+      "payment_hash": "Payment Hash",
       "received": "Received",
       "sent": "Sent",
       "date_time": "Date & Time",
