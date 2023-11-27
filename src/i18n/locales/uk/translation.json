@@ -31,12 +31,10 @@
     },
     "choose_path": {
       "alby": {
-        "title": "Alby",
-        "description": "Зареєструйтеся або скористайтеся наявним обліковим записом Alby, щоб миттєво розпочати роботу з lightning платежами."
+        "title": "Alby"
       },
       "other": {
         "title": "Інші гаманці",
-        "description": "",
         "and_more": "",
         "connect": ""
       }

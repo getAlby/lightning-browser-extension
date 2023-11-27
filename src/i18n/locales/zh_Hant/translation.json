@@ -38,12 +38,10 @@
     "choose_path": {
       "alby": {
         "title": "Alby帳戶",
-        "description": "註冊或使用你現有的 Alby 帳戶立即開始閃電支付。",
         "connect": "使用 Alby 連接"
       },
       "other": {
         "title": "其他錢包",
-        "description": "連接到你現有的閃電錢包或節點，可從各種連接器中選擇。",
         "and_more": "等等...",
         "connect": "連接"
       }

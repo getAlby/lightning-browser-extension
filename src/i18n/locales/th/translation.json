@@ -441,13 +441,11 @@
     "choose_path": {
       "other": {
         "title": "wallets อื่น ๆ",
-        "description": "เชื่อมต่อกับ Lightning wallet หรือ โหนดของคุณ และจากตัวเชื่อมต่อต่างๆ",
         "connect": "เชื่อมต่อ",
         "and_more": "& อื่น ๆ …"
       },
       "alby": {
         "title": "บัญชี Alby",
-        "description": "ทำการสมัครหรือใช้บัญชี Alby ที่มีอยู่ของคุณเพื่อเริ่มต้นใช้งานการชำระเงินด้วย Lightning ได้อย่างรวดเร็ว",
         "connect": "เชื่อมต่อกับ Alby"
       }
     },
