@@ -48,20 +48,6 @@
           "connection_failed": "Yhteys epäonnistui. Ovatko LND-tunnuksesi oikein?"
         }
       },
-      "lndhub_bluewallet": {
-        "title": "Sinilompakko",
-        "page": {
-          "title": "Yhdistä sinilompakkoosi",
-          "description": "Valitse sinilompakossa lompakko, jonka haluat yhdistää, avaa se, napsauta \"...\", napsauta Vie/Varmuuskopioi näyttääksesi QR-koodin ja skannaa se webbikamerallasi."
-        },
-        "uri": {
-          "label": "Sinilompakon vienti-URI"
-        },
-        "errors": {
-          "invalid_uri": "Virheellinen sinilompakon URI",
-          "connection_failed": "Yhteys epäonnistui. Onko sinilompakon URI oikein?"
-        }
-      },
       "lndhub_go": {
         "title": "LNDHub",
         "page": {
@@ -618,6 +604,5 @@
     "publishers_table": {
       "payments": "maksut"
     }
-  },
-  "permissions": {}
+  }
 }
