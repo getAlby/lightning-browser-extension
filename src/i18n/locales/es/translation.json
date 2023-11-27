@@ -17,7 +17,7 @@
         }
       },
       "test_connection": {
-        "ready": "¡Genial, estás listo para comenzar!",
+        "ready": "Genial, ¡ya estás listo!",
         "initializing": "Accediendo a su cuenta. Por favor, espere, esto puede tardar un minuto...",
         "connection_error": "Error de Conexión",
         "review_connection_details": "Revise los detalles de su conexión.",
@@ -259,11 +259,16 @@
         "enable_now": "Habilitar ahora"
       },
       "allowance_view": {
-        "no_transactions": "No hay transacciones en <0>{{name}}</0> todavía."
+        "no_transactions": "No hay transacciones en <0>{{name}}</0> todavía.",
+        "sats": "sats",
+        "budget_spent": "Presupuesto gastado",
+        "total_spent": "Gastos totales"
       },
       "default_view": {
         "is_blocked_hint": "Alby está actualmente deshabilitado en {{host}}",
-        "block_removed": "{{host}} habilitado. Vuelva a cargar el sitio web."
+        "block_removed": "{{host}} habilitado. Vuelva a cargar el sitio web.",
+        "see_all": "Ver todo",
+        "no_transactions": "Aún no hay transacciones en esta cuenta."
       }
     },
     "accounts": {
@@ -553,7 +558,8 @@
     "choose_path": {
       "alby": {
         "title": "Cuenta de Alby",
-        "description": "Regístrate o usa tú cuenta de Alby existente para empezar a realizar pagos relámpago en un abrir y cerrar de ojos."
+        "description": "Regístrate o usa tú cuenta de Alby existente para empezar a realizar pagos relámpago en un abrir y cerrar de ojos.",
+        "connect": "Conectar con Alby"
       },
       "other": {
         "title": "Otras Billeteras",
@@ -660,7 +666,8 @@
     },
     "transactions": {
       "title": "Transacciones",
-      "list_empty": "Todavía no hay transacciones disponibles."
+      "list_empty": "Todavía no hay transacciones disponibles.",
+      "description": "Transacciones para esta cuenta"
     },
     "distributions": {
       "umbrel": {
@@ -722,7 +729,11 @@
       "log_in": "Iniciar Sesión",
       "remember": "Recordar mi elección y no preguntar nuevamente",
       "transactions": "Transacciones",
-      "more": "Más"
+      "more": "Más",
+      "download": "Descargar",
+      "review": "Revisar",
+      "hide": "Ocultar",
+      "disconnect": "Desconectar"
     },
     "errors": {
       "connection_failed": "Error de conexión",
@@ -743,7 +754,12 @@
       "lessThanOrEqual": "≤ {{max}}",
       "greaterOrEqual": "≥ {{min}}"
     },
-    "balance": "Balance"
+    "balance": "Balance",
+    "connectors": {
+      "nativelnd": "LND (en Tor)",
+      "lnd": "LND"
+    },
+    "website": "Página web"
   },
   "components": {
     "allowance_menu": {
@@ -781,9 +797,12 @@
         "sender": "Remitente",
         "message": "Mensaje",
         "app": "Aplicación",
-        "podcast": "Podcasts"
+        "podcast": "Podcasts",
+        "episode": "Episodio"
       },
-      "open_location": "Abrir sitio web"
+      "open_location": "Abrir la página web",
+      "payment_hash": "Hash del pago",
+      "date_time": "Fecha y hora"
     },
     "budget_control": {
       "remember": {
