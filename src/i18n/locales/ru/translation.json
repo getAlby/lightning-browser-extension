@@ -90,20 +90,6 @@
           "placeholder": ""
         }
       },
-      "lndhub_bluewallet": {
-        "title": "",
-        "page": {
-          "title": "",
-          "description": ""
-        },
-        "uri": {
-          "label": ""
-        },
-        "errors": {
-          "invalid_uri": "",
-          "connection_failed": ""
-        }
-      },
       "lndhub_go": {
         "title": "",
         "page": {
