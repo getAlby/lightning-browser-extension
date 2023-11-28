@@ -86,30 +86,27 @@ const utils = {
     const { top, left } = await getWindowPosition(windowWidth, windowHeight);
 
     return new Promise((resolve, reject) => {
-      const createPopup = (options: browser.Windows.CreateCreateDataType) => {
-        return browser.windows.create(options);
+      const createPopup = () => {
+        const popupOptions: browser.Windows.CreateCreateDataType = {
+          url: url,
+          type: "popup",
+          width: windowWidth,
+          height: windowHeight,
+          top: top,
+          left: left,
+        };
+        return browser.windows.create(popupOptions);
       };
 
-      const createTab = (options: browser.Tabs.CreateCreatePropertiesType) => {
-        return browser.tabs.create(options);
+      const createTab = () => {
+        const tabOptions: browser.Tabs.CreateCreatePropertiesType = {
+          url: url,
+        };
+
+        return browser.tabs.create(tabOptions);
       };
 
-      const optionsPopup: browser.Windows.CreateCreateDataType = {
-        url: url,
-        type: "popup",
-        width: windowWidth,
-        height: windowHeight,
-        top: top,
-        left: left,
-      };
-
-      const optionsTab: browser.Tabs.CreateCreatePropertiesType = {
-        url: url,
-      };
-
-      const createPromise = browser.windows
-        ? createPopup(optionsPopup)
-        : createTab(optionsTab);
+      const createPromise = browser.windows ? createPopup() : createTab();
 
       return createPromise.then(async (windowOrTab) => {
         let tabId: number | undefined;
