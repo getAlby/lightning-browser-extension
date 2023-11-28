@@ -493,7 +493,7 @@
     "nostr_enable": {
       "title": "Connect to Nostr",
       "request1": "Request to read your Nostr public key",
-      "request2": "Sign events using your Nostr private key"
+      "request2": "Request to sign events using your private key"
     },
     "liquid_enable": {
       "title": "Connect to Liquid",
