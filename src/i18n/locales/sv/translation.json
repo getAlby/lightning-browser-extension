@@ -716,14 +716,12 @@
     "choose_path": {
       "alby": {
         "title": "Alby Konto",
-        "description": "Registrera dig eller använd ditt befintliga Alby-konto för att komma igång med lightning betalningar på nolltid.",
         "connect": "Anslut med Alby"
       },
       "other": {
         "title": "Annan Plånbok",
         "connect": "Anslut",
-        "and_more": "& mer...",
-        "description": "Anslut till din befintliga lightning Plånbok eller Node och välj från olika kontakter."
+        "and_more": "& mer..."
       }
     },
     "alby": {

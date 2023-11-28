@@ -577,12 +577,10 @@
     },
     "choose_path": {
       "alby": {
-        "title": "Alby",
-        "description": "Registrati o utilizza il tuo account Alby per iniziare a pagare attraverso lightning in pochissimo tempo."
+        "title": "Alby"
       },
       "other": {
         "title": "Altri Wallet",
-        "description": "Collegati al tuo portafoglio o nodo Lightning e scegli tra vari connettori.",
         "and_more": "& altro...",
         "connect": "Connettiti"
       }
