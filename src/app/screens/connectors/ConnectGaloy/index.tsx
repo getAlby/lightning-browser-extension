@@ -31,17 +31,9 @@ export const galoyUrls = {
   },
 } as const;
 
-type Headers = {
-  [key: string]: string;
-};
-
 const defaultHeaders: Headers = {
   Accept: "application/json",
   "Content-Type": "application/json",
-};
-
-type Props = {
-  instance: keyof typeof galoyUrls;
 };
 
 export default function ConnectGaloy(props: Props) {
@@ -67,7 +59,10 @@ export default function ConnectGaloy(props: Props) {
           query getinfo {
             me {
               defaultAccount {
-                defaultWalletId
+                wallets {
+                  walletCurrency
+                  id
+                }
               }
             }
           }
@@ -105,7 +100,11 @@ export default function ConnectGaloy(props: Props) {
         }`;
         toast.error(alertMsg);
       } else {
-        const walletId = meData.data.me.defaultAccount.defaultWalletId;
+        // Find the BTC wallet and get its ID
+        const btcWallet = meData.data.me.defaultAccount.wallets.find(
+          (w: Wallet) => w.walletCurrency === "BTC"
+        );
+        const walletId = btcWallet.id;
         saveAccount({ authToken, walletId });
       }
     } catch (e: unknown) {
@@ -230,3 +229,16 @@ export default function ConnectGaloy(props: Props) {
     </ConnectorForm>
   );
 }
+
+type Headers = {
+  [key: string]: string;
+};
+
+type Props = {
+  instance: keyof typeof galoyUrls;
+};
+
+type Wallet = {
+  walletCurrency: string;
+  id: string;
+};

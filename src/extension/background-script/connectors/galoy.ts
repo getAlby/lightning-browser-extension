@@ -10,6 +10,7 @@ import Connector, {
   GetBalanceResponse,
   GetInfoResponse,
   GetTransactionsResponse,
+  ConnectorTransaction,
   KeysendArgs,
   MakeInvoiceArgs,
   MakeInvoiceResponse,
@@ -90,10 +91,120 @@ class Galoy implements Connector {
   }
 
   async getTransactions(): Promise<GetTransactionsResponse> {
-    console.error(
-      `getTransactions() is not yet supported with the currently used account: ${this.constructor.name}`
-    );
-    return { data: { transactions: [] } };
+    const transactionsPerPage = 20;
+    let pageCount = 0;
+    let lastSeenCursor: string | null = null;
+    let hasNextPage = true;
+    const transactions: ConnectorTransaction[] = [];
+
+    // list max 5 pages of transactions
+    while (hasNextPage && pageCount < 5) {
+      const variablesObj: TransactionListVariables = {
+        first: transactionsPerPage,
+      };
+      if (lastSeenCursor !== null) {
+        variablesObj.after = lastSeenCursor;
+      }
+
+      const query = {
+        query: `
+          query transactionsList($first: Int, $after: String) {
+            me {
+              defaultAccount {
+                defaultWalletId
+                wallets {
+                  id
+                  walletCurrency
+                  transactions(first: $first, after: $after) {
+                    pageInfo {
+                      hasNextPage
+                    }
+                    edges {
+                      cursor
+                      node {
+                        status
+                        createdAt
+                        settlementAmount
+                        memo
+                        initiationVia {
+                          ... on InitiationViaLn {
+                            paymentHash
+                          }
+                        }
+                        settlementVia {
+                          ... on SettlementViaLn {
+                            preImage
+                          }
+                          ... on SettlementViaIntraLedger {
+                            __typename
+                            counterPartyWalletId
+                            counterPartyUsername
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        `,
+        variables: variablesObj,
+      };
+
+      const response = await this.request(query);
+      const errs = response.errors || response.data.me.errors;
+      if (errs && errs.length) {
+        throw new Error(errs[0].message || JSON.stringify(errs));
+      }
+
+      const wallets: GaloyWallet[] = response.data.me.defaultAccount.wallets;
+      const targetWallet = wallets.find((w) => w.id === this.config.walletId);
+
+      if (targetWallet) {
+        if (targetWallet.walletCurrency === "USD") {
+          throw new Error("USD currency support is not yet implemented.");
+        }
+
+        targetWallet.transactions.edges.forEach(
+          (edge: { cursor: string; node: TransactionNode }) => {
+            const tx = edge.node;
+
+            // Determine transaction type
+            let transactionType: "received" | "sent";
+            if (tx.settlementAmount >= 0) {
+              transactionType = "received";
+            } else {
+              transactionType = "sent";
+            }
+
+            // Do not display a double negative if sent
+            const absSettlementAmount = Math.abs(tx.settlementAmount);
+            // Convert createdAt from UNIX timestamp to Date
+            const createdAtDate = new Date(tx.createdAt * 1000);
+
+            transactions.push({
+              id: edge.cursor,
+              memo: tx.memo,
+              preimage: tx.settlementVia.preImage || "",
+              payment_hash: tx.initiationVia.paymentHash || "",
+              settled: tx.status === "SUCCESS",
+              settleDate: createdAtDate.getTime(),
+              totalAmount: absSettlementAmount, // Assuming this is in the correct unit
+              type: transactionType,
+            });
+          }
+        );
+      }
+
+      hasNextPage = targetWallet?.transactions.pageInfo.hasNextPage || false;
+      lastSeenCursor =
+        targetWallet?.transactions.edges.slice(-1)[0]?.cursor || null;
+
+      pageCount++;
+    }
+
+    return { data: { transactions } };
   }
 
   async getBalance(): Promise<GetBalanceResponse> {
@@ -102,10 +213,10 @@ class Galoy implements Connector {
         query getinfo {
           me {
             defaultAccount {
-              defaultWalletId
               wallets {
                 id
                 balance
+                walletCurrency
               }
             }
           }
@@ -118,13 +229,16 @@ class Galoy implements Connector {
         throw new Error(errs[0].message || JSON.stringify(errs));
       }
 
-      const { defaultWalletId, wallets }: GaloyDefaultAccount =
-        data.me.defaultAccount;
-      const defaultWallet = wallets.find((w) => w.id === defaultWalletId);
-      if (defaultWallet) {
+      const targetWallet = data.me.defaultAccount.wallets.find(
+        (w: GaloyWallet) => w.id === this.config.walletId
+      );
+      if (targetWallet) {
+        if (targetWallet.walletCurrency === "USD") {
+          throw new Error("USD currency support is not yet implemented.");
+        }
         return {
           data: {
-            balance: defaultWallet.balance,
+            balance: targetWallet.balance,
           },
         };
       } else {
@@ -360,12 +474,9 @@ type Headers = {
   [key: string]: string;
 };
 
-type GaloyDefaultAccount = {
-  defaultWalletId: string;
-  wallets: {
-    id: string;
-    balance: number;
-  }[];
+type TransactionListVariables = {
+  first: number;
+  after?: string;
 };
 
 type GaloyTransactionsAccount = {
@@ -373,28 +484,32 @@ type GaloyTransactionsAccount = {
   wallets: GaloyWallet[];
 };
 
+type TransactionNode = {
+  status: string;
+  createdAt: number;
+  settlementAmount: number;
+  memo: string;
+  initiationVia: {
+    paymentHash?: string;
+  };
+  settlementVia: {
+    preImage?: string;
+    __typename?: string;
+    counterPartyWalletId?: string;
+    counterPartyUsername?: string;
+  };
+};
+
 type GaloyWallet = {
   id: string;
   walletCurrency: string;
   transactions: {
+    pageInfo: {
+      hasNextPage: boolean;
+    };
     edges: {
       cursor: string;
-      node: {
-        status: "FAILURE" | "PENDING" | "SUCCESS";
-        initiationVia: {
-          paymentHash: string;
-        };
-        settlementVia:
-          | {
-              __typename: undefined;
-              preImage: string;
-            }
-          | {
-              __typename: "SettlementViaIntraledger";
-              counterPartyWalletId: string;
-              counterPartyUsername: string;
-            };
-      };
+      node: TransactionNode;
     }[];
   };
 };
