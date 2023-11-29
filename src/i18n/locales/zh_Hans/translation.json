@@ -265,7 +265,7 @@
     "accounts": {
       "title": "帐户",
       "actions": {
-        "add_account": "添加帐户"
+        "connect_wallet": ""
       },
       "account_view": {
         "nostr": {

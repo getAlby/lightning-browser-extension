@@ -443,7 +443,7 @@
         }
       },
       "actions": {
-        "add_account": "添加帳戶"
+        "connect_wallet": ""
       }
     },
     "unlock": {

@@ -338,7 +338,7 @@
         }
       },
       "actions": {
-        "add_account": "खाते जोडा"
+        "connect_wallet": ""
       }
     },
     "unlock": {

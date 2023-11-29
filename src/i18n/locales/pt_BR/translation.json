@@ -268,7 +268,7 @@
     "accounts": {
       "title": "Minhas contas",
       "actions": {
-        "add_account": "Adicionar conta"
+        "connect_wallet": ""
       },
       "account_view": {
         "export": {

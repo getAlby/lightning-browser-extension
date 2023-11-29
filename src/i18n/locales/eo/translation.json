@@ -246,7 +246,7 @@
     "accounts": {
       "title": "Kontoj",
       "actions": {
-        "add_account": ""
+        "connect_wallet": ""
       }
     },
     "unlock": {

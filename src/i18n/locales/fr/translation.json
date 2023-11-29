@@ -343,7 +343,7 @@
         }
       },
       "actions": {
-        "add_account": "Ajouter un compte"
+        "connect_wallet": ""
       }
     },
     "unlock": {

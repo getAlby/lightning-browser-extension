@@ -214,7 +214,7 @@
     "accounts": {
       "title": "",
       "actions": {
-        "add_account": ""
+        "connect_wallet": ""
       }
     },
     "unlock": {

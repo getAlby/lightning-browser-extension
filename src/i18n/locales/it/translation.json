@@ -260,7 +260,7 @@
     "accounts": {
       "title": "Accounts",
       "actions": {
-        "add_account": "Aggiungi account"
+        "connect_wallet": ""
       },
       "account_view": {
         "nostr": {

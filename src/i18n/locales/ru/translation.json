@@ -356,7 +356,7 @@
         }
       },
       "actions": {
-        "add_account": ""
+        "connect_wallet": ""
       }
     },
     "unlock": {

@@ -269,7 +269,7 @@
     "accounts": {
       "title": "Cuentas",
       "actions": {
-        "add_account": "Agregar Cuenta"
+        "connect_wallet": ""
       },
       "account_view": {
         "nostr": {

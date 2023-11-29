@@ -272,7 +272,7 @@
     "accounts": {
       "title": "Účty",
       "actions": {
-        "add_account": "Přidat účet"
+        "connect_wallet": ""
       },
       "account_view": {
         "remove": {

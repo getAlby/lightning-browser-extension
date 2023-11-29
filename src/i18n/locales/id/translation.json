@@ -453,7 +453,7 @@
         "title1": "Pengaturan Akun"
       },
       "actions": {
-        "add_account": "Tambah akun"
+        "connect_wallet": ""
       },
       "title": "Akun-akun"
     },

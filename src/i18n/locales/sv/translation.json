@@ -274,7 +274,7 @@
     "accounts": {
       "title": "Konton",
       "actions": {
-        "add_account": "Lägg till konto"
+        "connect_wallet": ""
       },
       "account_view": {
         "nostr": {

@@ -326,7 +326,7 @@
       }
     },
     "accounts": {
-      "title": "Accounts",
+      "title": "Wallets",
       "account_view": {
         "title1": "Account Settings",
         "title2": "Account",
@@ -479,7 +479,7 @@
         }
       },
       "actions": {
-        "add_account": "Add account"
+        "connect_wallet": "Connect a wallet"
       }
     },
     "webln_enable": {

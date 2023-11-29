@@ -260,7 +260,7 @@
     "accounts": {
       "title": "Tilit",
       "actions": {
-        "add_account": "Lisää tili"
+        "connect_wallet": ""
       }
     },
     "unlock": {

@@ -198,7 +198,7 @@
         "title1": "การตั้งค่าบัญชี"
       },
       "actions": {
-        "add_account": "เพิ่มบัญชี"
+        "connect_wallet": ""
       },
       "title": "บัญชี"
     },

@@ -342,7 +342,7 @@
         }
       },
       "actions": {
-        "add_account": "Tilføj konto"
+        "connect_wallet": ""
       }
     },
     "unlock": {

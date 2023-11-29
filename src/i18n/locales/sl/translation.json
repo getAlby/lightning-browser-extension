@@ -452,7 +452,7 @@
         }
       },
       "actions": {
-        "add_account": "Dodaj račun"
+        "connect_wallet": ""
       }
     },
     "unlock": {

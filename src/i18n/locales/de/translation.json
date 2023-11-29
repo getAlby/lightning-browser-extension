@@ -384,7 +384,7 @@
     "accounts": {
       "title": "Konten",
       "actions": {
-        "add_account": "Konto hinzufügen"
+        "connect_wallet": ""
       },
       "account_view": {
         "title2": "Konto",
