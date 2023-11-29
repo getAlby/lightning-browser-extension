@@ -23,7 +23,8 @@ import Connector, {
 interface Config {
   walletId: string;
   url: string;
-  accessToken: string;
+  headers: Headers;
+  apiCompatibilityMode: boolean;
 }
 
 class Galoy implements Connector {
@@ -133,7 +134,11 @@ class Galoy implements Connector {
                         }
                         settlementVia {
                           ... on SettlementViaLn {
-                            preImage
+                            ${
+                              this.config.apiCompatibilityMode
+                                ? "paymentSecret"
+                                : "preImage"
+                            }
                           }
                           ... on SettlementViaIntraLedger {
                             __typename
@@ -325,7 +330,11 @@ class Galoy implements Connector {
                       }
                       settlementVia {
                         ... on SettlementViaLn {
-                            preImage
+                          ${
+                            this.config.apiCompatibilityMode
+                              ? "paymentSecret"
+                              : "preImage"
+                          }
                         }
                         ... on SettlementViaIntraLedger {
                           __typename
@@ -431,30 +440,11 @@ class Galoy implements Connector {
   }
 
   async request(query: { query: string }) {
-    const headers: Headers = {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    };
-
-    if (
-      this.config.accessToken.startsWith("blink_") ||
-      this.config.accessToken.startsWith("galoy_staging_")
-    ) {
-      headers["X-API-KEY"] = this.config.accessToken;
-    } else {
-      headers.Authorization = `Bearer ${this.config.accessToken}`;
-    }
-
-    let dynamicUrl = this.config.url;
-    if (this.config.accessToken.startsWith("galoy_staging_")) {
-      dynamicUrl = "https://api.staging.galoy.io/graphql";
-    }
-
     const reqConfig: AxiosRequestConfig = {
       method: "POST",
-      url: dynamicUrl,
+      url: this.config.url,
       responseType: "json",
-      headers: headers,
+      headers: this.config.headers,
       adapter: fetchAdapter,
     };
     reqConfig.data = query;

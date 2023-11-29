@@ -19,6 +19,12 @@ export const galoyUrls = {
     website: "https://www.blink.sv/",
     logo: galoyBlink,
     url: process.env.BLINK_GALOY_URL || "https://api.blink.sv/graphql",
+    getHeaders: (authToken: string) => ({
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "X-API-KEY": authToken,
+    }),
+    apiCompatibilityMode: false,
   },
   "galoy-bitcoin-jungle": {
     i18nPrefix: "bitcoin_jungle",
@@ -28,17 +34,19 @@ export const galoyUrls = {
     url:
       process.env.BITCOIN_JUNGLE_GALOY_URL ||
       "https://api.mainnet.bitcoinjungle.app/graphql",
+    getHeaders: (authToken: string) => ({
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${authToken}`,
+    }),
+    apiCompatibilityMode: true,
   },
 } as const;
 
-const defaultHeaders: Headers = {
-  Accept: "application/json",
-  "Content-Type": "application/json",
-};
-
 export default function ConnectGaloy(props: Props) {
   const { instance } = props;
-  const { url, label, website, i18nPrefix, logo } = galoyUrls[instance];
+  const { url, label, website, i18nPrefix, logo, apiCompatibilityMode } =
+    galoyUrls[instance];
 
   const navigate = useNavigate();
   const { t } = useTranslation("translation", {
@@ -74,19 +82,9 @@ export default function ConnectGaloy(props: Props) {
         throw new Error(errorMsg);
       }
 
-      let dynamicUrl = url;
-      if (authToken.startsWith("galoy_staging_")) {
-        dynamicUrl = "https://api.staging.galoy.io/graphql";
-      }
+      const headers = galoyUrls[instance].getHeaders(authToken);
 
-      const headers: Headers = { ...defaultHeaders };
-      if (instance === "galoy-blink") {
-        headers["X-API-KEY"] = authToken;
-      } else if (instance === "galoy-bitcoin-jungle") {
-        headers.Authorization = `Bearer ${authToken}`;
-      }
-
-      const { data: meData } = await axios.post(dynamicUrl, meQuery, {
+      const { data: meData } = await axios.post(url, meQuery, {
         headers: headers,
         adapter: fetchAdapter,
       });
@@ -105,7 +103,7 @@ export default function ConnectGaloy(props: Props) {
           (w: Wallet) => w.walletCurrency === "BTC"
         );
         const walletId = btcWallet.id;
-        saveAccount({ authToken, walletId });
+        saveAccount({ headers, walletId });
       }
     } catch (e: unknown) {
       console.error(e);
@@ -124,19 +122,16 @@ export default function ConnectGaloy(props: Props) {
     }
   }
 
-  async function saveAccount(config: { authToken: string; walletId: string }) {
+  async function saveAccount(config: { headers: Headers; walletId: string }) {
     setLoading(true);
 
-    const dynamicLabel = authToken?.startsWith("galoy_staging_")
-      ? "Galoy Staging"
-      : label;
-
     const account = {
-      name: dynamicLabel,
+      name: label,
       config: {
         url,
-        accessToken: config.authToken,
+        headers: config.headers,
         walletId: config.walletId,
+        apiCompatibilityMode,
       },
       connector: "galoy",
     };
@@ -185,24 +180,20 @@ export default function ConnectGaloy(props: Props) {
       submitLoading={loading}
       onSubmit={loginWithAuthToken}
       description={
-        instance === "galoy-blink" ? (
-          <Trans
-            i18nKey="galoy.api_key.info"
-            t={t}
-            values={{ label }}
-            components={[
-              <a
-                href="https://dashboard.blink.sv"
-                className="underline"
-                target="_blank"
-                rel="noopener noreferrer"
-                key="Blink Dashboard"
-              ></a>,
-            ]}
-          />
-        ) : (
-          <Trans i18nKey="galoy.token.info" t={t} values={{ label }} />
-        )
+        <Trans
+          i18nKey={`${i18nPrefix}.token.info`}
+          t={t}
+          values={{ label }}
+          components={[
+            <a
+              href="https://dashboard.blink.sv"
+              className="underline"
+              target="_blank"
+              rel="noopener noreferrer"
+              key="Blink Dashboard"
+            ></a>,
+          ]}
+        />
       }
     >
       {
@@ -211,9 +202,7 @@ export default function ConnectGaloy(props: Props) {
             htmlFor="authToken"
             className="block font-medium text-gray-800 dark:text-white"
           >
-            {instance === "galoy-blink"
-              ? t("galoy.api_key.label")
-              : t("galoy.token.label")}
+            {t(`${i18nPrefix}.token.label`)}
           </label>
           <div className="mt-1">
             <Input
