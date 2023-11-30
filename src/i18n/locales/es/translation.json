@@ -267,7 +267,7 @@
       }
     },
     "accounts": {
-      "title": "Cuentas",
+      "title": "",
       "actions": {
         "connect_wallet": ""
       },

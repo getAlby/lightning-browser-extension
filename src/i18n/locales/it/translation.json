@@ -258,7 +258,7 @@
       }
     },
     "accounts": {
-      "title": "Accounts",
+      "title": "",
       "actions": {
         "connect_wallet": ""
       },

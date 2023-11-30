@@ -270,7 +270,7 @@
       }
     },
     "accounts": {
-      "title": "Účty",
+      "title": "",
       "actions": {
         "connect_wallet": ""
       },

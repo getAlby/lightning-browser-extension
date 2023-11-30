@@ -258,7 +258,7 @@
       }
     },
     "accounts": {
-      "title": "Tilit",
+      "title": "",
       "actions": {
         "connect_wallet": ""
       }

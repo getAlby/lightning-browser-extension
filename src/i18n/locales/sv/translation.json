@@ -272,7 +272,7 @@
       }
     },
     "accounts": {
-      "title": "Konton",
+      "title": "",
       "actions": {
         "connect_wallet": ""
       },

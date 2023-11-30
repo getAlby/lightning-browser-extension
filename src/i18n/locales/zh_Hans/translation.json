@@ -263,7 +263,7 @@
       }
     },
     "accounts": {
-      "title": "帐户",
+      "title": "",
       "actions": {
         "connect_wallet": ""
       },

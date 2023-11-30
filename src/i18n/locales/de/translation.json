@@ -382,7 +382,7 @@
       }
     },
     "accounts": {
-      "title": "Konten",
+      "title": "",
       "actions": {
         "connect_wallet": ""
       },

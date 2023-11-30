@@ -244,7 +244,7 @@
       }
     },
     "accounts": {
-      "title": "Kontoj",
+      "title": "",
       "actions": {
         "connect_wallet": ""
       }
