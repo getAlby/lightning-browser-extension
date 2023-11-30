@@ -24,7 +24,6 @@ const encryptOrPrompt = async (message: MessageEncryptGet, sender: Sender) => {
         message.args.peer,
         message.args.plaintext
       );
-
       return { data: response };
     } else {
       const promptResponse = await utils.openPrompt<{
@@ -34,7 +33,11 @@ const encryptOrPrompt = async (message: MessageEncryptGet, sender: Sender) => {
         ...message,
         action: "public/nostr/confirm",
         args: {
-          description: i18n.t("permissions:nostr.nip04encrypt"),
+          description: {
+            action: i18n.t("permissions:nostr.nip04encrypt"),
+            peer: message.args.peer,
+            plaintext: message.args.plaintext,
+          },
         },
       });
 

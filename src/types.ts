@@ -168,7 +168,8 @@ export type NavigationState = {
     message?: string;
     event?: Event;
     sigHash?: string;
-    description?: string;
+    description?: { action?: string; peer?: string; plaintext?: string };
+
     details?: string;
     psbt?: string;
     requestPermission: {
