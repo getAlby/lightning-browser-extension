@@ -727,14 +727,12 @@
     },
     "choose_path": {
       "alby": {
-        "description": "Crie uma conta Alby ou faça o login caso já possua uma conta conosco.",
         "title": "Conta Alby",
         "connect": "Conecte-se com a Alby"
       },
       "other": {
         "title": "Outras contas",
         "and_more": "& mais...",
-        "description": "Conecte-se em sua carteira bitcoin ou em um dos vários servidores de carteira disponíveis.",
         "connect": "Conectar outras contas"
       }
     },

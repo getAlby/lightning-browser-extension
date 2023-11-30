@@ -269,12 +269,10 @@
     "choose_path": {
       "alby": {
         "title": "Alby račun",
-        "connect": "Poveži z Alby",
-        "description": "Registriraj se ali uporabi obstoječi Alby račun za takojšnji začetek z lightning plačili."
+        "connect": "Poveži z Alby"
       },
       "other": {
         "title": "Ostale denarnice",
-        "description": "Poveži z obstoječo lightning denarnico ali vozliščem in izberi med različnimi priključki.",
         "connect": "Poveži",
         "and_more": "& več..."
       }

@@ -38,12 +38,12 @@
     "choose_path": {
       "alby": {
         "title": "Alby Account",
-        "description": "Sign up or use your existing Alby Account to get started with lightning payments in no time.",
+        "description": "Sign up or use your existing Alby Account. Great to quickly get started and for small amounts.",
         "connect": "Connect with Alby"
       },
       "other": {
         "title": "Other Wallets",
-        "description": "Connect to your existing lightning wallet or node and choose from various connectors.",
+        "description": "Connect to your existing lightning wallet or node and choose from various connectors. Great for full flexibility. Run your own node.",
         "and_more": "& more...",
         "connect": "Connect"
       }

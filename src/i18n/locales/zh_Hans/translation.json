@@ -683,12 +683,10 @@
     "choose_path": {
       "other": {
         "title": "其他钱包",
-        "description": "连接到你现有的闪电钱包或节点，可从各种连接器中选择。",
         "and_more": "等等...",
         "connect": "连接"
       },
       "alby": {
-        "description": "注册或使用你现有的Alby帐户，立即开始闪电支付。",
         "title": "Alby帐户",
         "connect": "使用 Alby 连接"
       }

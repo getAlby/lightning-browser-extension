@@ -737,12 +737,10 @@
       "other": {
         "and_more": "& mehr...",
         "title": "Andere Wallets",
-        "description": "Verbinde dich mit deiner bestehenden Lightning Wallet oder Node und wähle aus verschiedenen Anschlüssen.",
         "connect": "Verbinden"
       },
       "alby": {
         "title": "Alby Konto",
-        "description": "Melde dich an oder verwende dein bestehendes Alby-Konto, um im Handumdrehen mit Lightningzahlungen zu beginnen.",
         "connect": "Mit Alby verbinden"
       }
     },

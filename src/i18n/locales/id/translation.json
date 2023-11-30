@@ -36,14 +36,12 @@
     },
     "choose_path": {
       "other": {
-        "description": "Sambungkan dengan wallet lightning atau node yang sudah ada dan sesuaikan pada berbagai konektor.",
         "and_more": "& lainnya...",
         "connect": "Sambung",
         "title": "Wallets Lainnya"
       },
       "alby": {
         "title": "Akun Alby",
-        "description": "Daftar atau gunakan akun Alby yang sudah ada untuk memulai pembayaran dengan lightning secara cepat.",
         "connect": "Koneksi dengan Alby"
       }
     },

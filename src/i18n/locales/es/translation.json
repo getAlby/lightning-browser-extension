@@ -552,14 +552,12 @@
     },
     "choose_path": {
       "alby": {
-        "title": "Cuenta de Alby",
-        "description": "Regístrate o usa tú cuenta de Alby existente para empezar a realizar pagos relámpago en un abrir y cerrar de ojos."
+        "title": "Cuenta de Alby"
       },
       "other": {
         "title": "Otras Billeteras",
         "and_more": "Y más...",
-        "connect": "Conectar",
-        "description": "Conecta con tu billetera lightning existente o nodo y elige entre varios conectores."
+        "connect": "Conectar"
       }
     },
     "nostr": {

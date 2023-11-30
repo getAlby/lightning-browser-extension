@@ -31,12 +31,10 @@
     },
     "choose_path": {
       "alby": {
-        "title": "Alby",
-        "description": "Inregistreaza-te sau foloseste un cont Alby deja existent pentru a incepe sa faci plati prin Lightning imediat."
+        "title": "Alby"
       },
       "other": {
         "title": "Alte portofele",
-        "description": "Conecteaza-te la portofelul tau Lightning deja existent sau la un nod si alege dintre diversi conectori.",
         "and_more": "& mai multe...",
         "connect": "Conecteaza-te"
       }
