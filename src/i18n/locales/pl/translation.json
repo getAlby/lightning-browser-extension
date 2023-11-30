@@ -296,7 +296,7 @@
       }
     },
     "accounts": {
-      "title": "Konta",
+      "title": "",
       "account_view": {
         "title1": "Informacje o koncie",
         "title2": "Edytuj konto",

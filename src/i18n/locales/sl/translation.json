@@ -320,7 +320,7 @@
       }
     },
     "accounts": {
-      "title": "Računi",
+      "title": "",
       "account_view": {
         "title2": "Račun",
         "export": {
