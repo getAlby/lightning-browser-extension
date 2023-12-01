@@ -196,6 +196,7 @@ const distributionMap: { [key: string]: { logo: string; children: Route[] } } =
         connectorMap["lnc"],
         connectorMap["commando"],
         connectorMap["lnbits"],
+        connectorMap["nwc"],
       ],
     },
     mynode: {
