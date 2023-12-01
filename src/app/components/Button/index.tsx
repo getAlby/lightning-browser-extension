@@ -49,12 +49,12 @@ const Button = forwardRef(
           halfWidth && "w-1/2 first:mr-2 last:ml-2",
           fullWidth || halfWidth ? "px-0 py-2" : "px-7 py-2",
           primary
-            ? "bg-primary-gradient border-2 border-transparent text-black"
+            ? "bg-primary-gradient border-2 border-transparent text-black break-words"
             : outline
-            ? "bg-white text-gray-700 border-2 border-primary dark:text-primary dark:bg-surface-02dp"
+            ? "bg-white text-gray-700 border-2 border-primary dark:text-primary dark:bg-surface-02dp break-words"
             : error
-            ? "bg-white text-red-500 border-2 border-red-500 dark:text-red-500 dark:bg-surface-02dp"
-            : `bg-white text-gray-700 dark:bg-surface-02dp dark:text-neutral-200 dark:border-neutral-800`,
+            ? "bg-white text-red-500 border-2 border-red-500 dark:text-red-500 dark:bg-surface-02dp break-words"
+            : `bg-white text-gray-700 dark:bg-surface-02dp dark:text-neutral-200 dark:border-neutral-800 break-words`,
           primary && !disabled && "hover:bg-primary-gradient-hover",
           !primary &&
             !disabled &&
