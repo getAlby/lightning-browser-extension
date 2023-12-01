@@ -262,7 +262,9 @@
       },
       "default_view": {
         "is_blocked_hint": "A Alby está desativada em {{host}}",
-        "block_removed": "{{host}} ativado. Por favor, recarregue o site."
+        "block_removed": "{{host}} ativado. Por favor, recarregue o site.",
+        "see_all": "Mostrar tudo",
+        "no_transactions": "Sem transações nesta conta ainda."
       }
     },
     "accounts": {
@@ -755,7 +757,8 @@
     },
     "transactions": {
       "title": "Transações",
-      "list_empty": "Sem transações."
+      "list_empty": "Sem transações.",
+      "description": "Transações nesta conta"
     },
     "distributions": {
       "umbrel": {
@@ -955,7 +958,8 @@
       "copy_clipboard": "Copiar para área de transferência",
       "disconnect": "Desconectar",
       "copied_to_clipboard": "Copiado para a área de transferência",
-      "review": "Revisar"
+      "review": "Revisar",
+      "hide": "Ocultar"
     },
     "errors": {
       "connection_failed": "Falha na conexão",
@@ -998,7 +1002,8 @@
       "request1": "Solicitar aprovação para transações",
       "allow": "Permitir este site:",
       "block_and_ignore": "Bloquear e ignorar {{host}}"
-    }
+    },
+    "website": "Site"
   },
   "components": {
     "allowance_menu": {
@@ -1037,9 +1042,12 @@
         "sender": "Enviado por",
         "message": "Mensagem",
         "app": "App",
-        "podcast": "Podcast"
+        "podcast": "Podcast",
+        "episode": "Episódio"
       },
-      "open_location": "Abrir link"
+      "open_location": "Abrir link",
+      "payment_hash": "Hash do pagamento",
+      "date_time": "Data & Hora"
     },
     "budget_control": {
       "remember": {
