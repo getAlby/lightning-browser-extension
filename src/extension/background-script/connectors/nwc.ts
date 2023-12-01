@@ -19,7 +19,7 @@ import Connector, {
 } from "./connector.interface";
 
 interface Config {
-  connectionString: string;
+  nostrWalletConnectUrl: string;
 }
 
 class NWCConnector implements Connector {
@@ -40,7 +40,7 @@ class NWCConnector implements Connector {
   constructor(account: Account, config: Config) {
     this.config = config;
     this.nwc = new webln.NostrWebLNProvider({
-      nostrWalletConnectUrl: this.config.connectionString,
+      nostrWalletConnectUrl: this.config.nostrWalletConnectUrl,
     });
   }
 
@@ -49,7 +49,7 @@ class NWCConnector implements Connector {
   }
 
   async unload() {
-    return this.nwc.close();
+    this.nwc.close();
   }
 
   async getInfo(): Promise<GetInfoResponse> {
@@ -73,20 +73,43 @@ class NWCConnector implements Connector {
     };
   }
 
-  makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse> {
-    throw new Error("Method not implemented.");
+  async makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse> {
+    const invoice = await this.nwc.makeInvoice({
+      amount: args.amount,
+      defaultMemo: args.memo,
+    });
+
+    return {
+      data: {
+        paymentRequest: invoice.paymentRequest,
+        // TODO: payment hash is missing in the make_invoice response?
+        rHash: "",
+      },
+    };
   }
 
-  sendPayment(args: SendPaymentArgs): Promise<SendPaymentResponse> {
-    throw new Error("Method not implemented.");
+  async sendPayment(args: SendPaymentArgs): Promise<SendPaymentResponse> {
+    const response = await this.nwc.sendPayment(args.paymentRequest);
+    return {
+      data: {
+        preimage: response.preimage,
+        paymentHash: response.paymentHash,
+        // TODO: How to get fees via NWC?
+        route: { total_amt: 1, total_fees: 1 },
+      },
+    };
   }
 
   keysend(args: KeysendArgs): Promise<SendPaymentResponse> {
     throw new Error("Method not implemented.");
   }
 
-  checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {
-    throw new Error("Method not implemented.");
+  async checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {
+    const invoice = await this.nwc.lookupInvoice({
+      payment_hash: args.paymentHash,
+    });
+
+    return invoice.paid;
   }
 
   signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {
