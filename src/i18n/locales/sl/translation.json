@@ -605,7 +605,6 @@
     },
     "nostr_enable": {
       "title": "Povežite se z Nostr",
-      "request2": "Podpiše dogodke s tvojim zasebnim ključem Nostr",
       "request1": "Zahteva dostop do javnega ključa Nostr"
     },
     "webbtc_enable": {

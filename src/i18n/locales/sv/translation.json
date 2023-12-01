@@ -917,7 +917,6 @@
     },
     "nostr_enable": {
       "title": "Anslut till Nostr",
-      "request2": "Signera händelser med din privata Nostr-nyckel",
       "request1": "Begär att läsa din publika Nostr-nyckel"
     },
     "webbtc_enable": {

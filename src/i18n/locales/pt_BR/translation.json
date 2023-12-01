@@ -885,7 +885,6 @@
       "request1": "Interagir com este site exige configurar uma chave"
     },
     "nostr_enable": {
-      "request2": "Assinar eventos usando sua chave privada Nostr",
       "request1": "Solicitar a leitura de sua chave pública Nostr",
       "title": "Conectar no Nostr"
     },

@@ -915,7 +915,6 @@
     },
     "nostr_enable": {
       "title": "Mit Nostr verbinden",
-      "request2": "Signiere deine Ereignisse mit deinem privaten Nostr-Schlüssel",
       "request1": "Anfrage zum Lesen deines öffentlichen Nostr-Schlüssels"
     },
     "webbtc_enable": {
