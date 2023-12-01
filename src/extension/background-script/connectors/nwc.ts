@@ -45,10 +45,12 @@ class NWCConnector implements Connector {
   }
 
   async init() {
-    await this.nwc.enable();
+    return this.nwc.enable();
   }
 
-  async unload() {}
+  async unload() {
+    return this.nwc.close();
+  }
 
   async getInfo(): Promise<GetInfoResponse> {
     // TODO: Load via NWC
