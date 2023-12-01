@@ -9,6 +9,7 @@ import { useSettings } from "~/app/context/SettingsContext";
 import TestConnectionResultCard from "~/app/screens/Options/TestConnection/card";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
+import utils from "~/common/lib/utils";
 import type { AccountInfo } from "~/types";
 
 export default function TestConnection() {
@@ -35,6 +36,10 @@ export default function TestConnection() {
     await msg.request("removeAccount");
     navigate(-1);
   }
+
+  const onNext = () => {
+    utils.redirectPage("options.html#/discover");
+  };
 
   async function loadAccountInfo() {
     setLoading(true);
@@ -133,6 +138,13 @@ export default function TestConnection() {
                         : ""
                     }
                   />
+                  <div className="mt-4 flex justify-start">
+                    <Button
+                      label={"Stat with alby buzz"}
+                      primary
+                      onClick={onNext}
+                    />
+                  </div>
                 </div>
               </div>
             )}
