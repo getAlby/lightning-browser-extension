@@ -37,12 +37,10 @@
     "choose_path": {
       "alby": {
         "title": "Konto Alby",
-        "description": "Zarejestruj się lub użyj istniejącego konta Alby aby zacząć z płatnościami lightning w mgnieniu oka.",
         "connect": "Połącz się z Alby"
       },
       "other": {
         "title": "Inne portfele",
-        "description": "Połącz się z Twoim istniejącym portfelem lightning lub węzłem i wybierz dostępne integracje.",
         "and_more": "i więcej...",
         "connect": "Połącz"
       }

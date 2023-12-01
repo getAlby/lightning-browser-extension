@@ -623,13 +623,11 @@
     "choose_path": {
       "other": {
         "title": "Jiné peněženky",
-        "description": "Připojte svou existující lightning peněženku nebo svůj uzel pomocí různých konektorů.",
         "and_more": "a více...",
         "connect": "Připojit"
       },
       "alby": {
         "title": "Alby",
-        "description": "Zaregistrujte se, nebo se přihlašte ke svému existujícímu Alby účtu a začněte využívat lightning platby.",
         "connect": "Připojit se s Alby"
       }
     },

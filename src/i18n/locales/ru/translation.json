@@ -31,12 +31,10 @@
     },
     "choose_path": {
       "alby": {
-        "title": "",
-        "description": ""
+        "title": ""
       },
       "other": {
         "title": "",
-        "description": "",
         "and_more": "",
         "connect": ""
       }

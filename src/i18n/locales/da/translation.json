@@ -31,12 +31,10 @@
     },
     "choose_path": {
       "alby": {
-        "title": "Alby",
-        "description": "Opret dig, eller brug din eksisterende Alby-konto til hurtigt at starte med at betale via lightning."
+        "title": "Alby"
       },
       "other": {
         "title": "Andre wallets",
-        "description": "Opret forbindelse til din eksisterende wallet eller node, og vælg mellem flere forbindelser.",
         "and_more": "med mere...",
         "connect": "Opret forbindelse"
       }

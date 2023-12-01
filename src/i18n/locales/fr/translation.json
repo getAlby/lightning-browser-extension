@@ -31,12 +31,10 @@
     },
     "choose_path": {
       "alby": {
-        "title": "Alby",
-        "description": "Inscrivez-vous ou utilisez votre compte Alby existant pour commencer à utiliser les paiements éclair en un rien de temps."
+        "title": "Alby"
       },
       "other": {
         "title": "Autres portefeuilles",
-        "description": "Connectez-vous à votre portefeuille ou nœud Lightning et choisissez parmi différents connecteurs.",
         "and_more": "& plus...",
         "connect": "Connecter"
       }
