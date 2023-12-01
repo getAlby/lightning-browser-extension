@@ -366,7 +366,9 @@
     "home": {
       "default_view": {
         "is_blocked_hint": "Alby ist derzeit auf dem {{host}} deaktiviert",
-        "block_removed": "{{host}} aktiviert. Bitte lade die Webseite neu."
+        "block_removed": "{{host}} aktiviert. Bitte lade die Webseite neu.",
+        "see_all": "Alle sehen",
+        "no_transactions": "Noch keine Transaktionen für dieses Konto."
       },
       "allowance_view": {
         "no_transactions": "Noch keine Transaktionen auf <0>{{Name}}</0>.",
@@ -776,7 +778,8 @@
     },
     "transactions": {
       "title": "Transaktionen",
-      "list_empty": "Noch keine Transaktionen verfügbar."
+      "list_empty": "Noch keine Transaktionen verfügbar.",
+      "description": "Buchungen für dieses Konto"
     },
     "distributions": {
       "title": "Verbinden mit {{Name}}",
@@ -1008,12 +1011,15 @@
         "sender": "Sender",
         "app": "App",
         "podcast": "Podcast",
-        "message": "Nachricht"
+        "message": "Nachricht",
+        "episode": "Folge"
       },
       "preimage": "Preimage",
       "received": "Empfangen",
       "fee": "Gebühr",
-      "open_location": "Webseite öffnen"
+      "open_location": "Webseite öffnen",
+      "payment_hash": "Zahlung hHash",
+      "date_time": "Datum & Uhrzeit"
     },
     "budget_control": {
       "remember": {
@@ -1082,7 +1088,8 @@
       "paste_clipboard": "Einfügen aus der Zwischenablage",
       "review": "Überprüfung",
       "disconnect": "Verbindung trennen",
-      "copied_to_clipboard": "In die Zwischenablage kopiert"
+      "copied_to_clipboard": "In die Zwischenablage kopiert",
+      "hide": "Ausblenden"
     },
     "discover": "Entdecken",
     "errors": {
@@ -1120,7 +1127,8 @@
       "request1": "Genehmigung von Transaktionen beantragen",
       "allow": "Erlaube dieser Webseite:",
       "block_and_ignore": "Blockieren und Ignorieren von {{host}}"
-    }
+    },
+    "website": "Website"
   },
   "permissions": {
     "commando": {

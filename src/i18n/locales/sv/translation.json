@@ -268,7 +268,9 @@
       },
       "default_view": {
         "is_blocked_hint": "Alby är för tillfället avstängt hos {{host}}",
-        "block_removed": "Aktiverade {{host}}. Ladda om webbplatsen."
+        "block_removed": "Aktiverade {{host}}. Ladda om webbplatsen.",
+        "see_all": "Se alla",
+        "no_transactions": "Inga transaktioner för detta konto ännu."
       }
     },
     "accounts": {
@@ -778,7 +780,8 @@
     },
     "transactions": {
       "title": "Transaktion",
-      "list_empty": "Inga transaktioner tillgängliga ännu."
+      "list_empty": "Inga transaktioner tillgängliga ännu.",
+      "description": "Transaktioner för detta konto"
     },
     "distributions": {
       "title": "Anslut till {{namn}}",
@@ -980,7 +983,8 @@
       "paste_clipboard": "Klistra in från urklipp",
       "review": "Recension",
       "copied_to_clipboard": "Kopierade till urklipp",
-      "disconnect": "Koppla ifrån"
+      "disconnect": "Koppla ifrån",
+      "hide": "Dölj"
     },
     "errors": {
       "connection_failed": "Anslutning misslyckades",
@@ -1021,7 +1025,8 @@
       "request1": "Begär godkännande för transaktioner",
       "allow": "Tillåt den här webbplatsen att:",
       "block_and_ignore": "Blockera och ignorera {{host}}"
-    }
+    },
+    "website": "Webbsida"
   },
   "components": {
     "allowance_menu": {
@@ -1060,9 +1065,12 @@
         "sender": "Avsändare",
         "message": "Meddelande",
         "app": "App",
-        "podcast": "Podcast"
+        "podcast": "Podcast",
+        "episode": "Avsnitt"
       },
-      "open_location": "Öppna websida"
+      "open_location": "Öppna websida",
+      "payment_hash": "Betalningshash",
+      "date_time": "Datum & tid"
     },
     "budget_control": {
       "remember": {
