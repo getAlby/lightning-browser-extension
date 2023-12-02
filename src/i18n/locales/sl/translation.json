@@ -716,7 +716,7 @@
       "options": {
         "account": {
           "manage": "Upravljanje računov",
-          "account_settings": "Nastavitve računa",
+          "wallet_settings": "",
           "add": "Dodaj nov račun",
           "go_to_web_wallet": "Upravljaj svoj spletni račun"
         }

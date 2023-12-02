@@ -1094,7 +1094,7 @@
         "account": {
           "add": "Lägg till nytt konto",
           "manage": "Hantera konton",
-          "account_settings": "Konto inställningar",
+          "wallet_settings": "",
           "go_to_web_wallet": "Hantera ditt webbkonto"
         }
       }

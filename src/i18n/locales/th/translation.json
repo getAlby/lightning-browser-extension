@@ -1086,7 +1086,7 @@
         "account": {
           "add": "เพิ่มบัญชีใหม่",
           "manage": "การจัดการบัญชี",
-          "account_settings": "การตั้งค่าบัญชี",
+          "wallet_settings": "",
           "go_to_web_wallet": "จัดการเว็บไซต์บนบัญชีของคุณ"
         }
       }

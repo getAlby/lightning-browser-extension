@@ -328,7 +328,7 @@
     "accounts": {
       "title": "Wallets",
       "account_view": {
-        "title1": "Account Settings",
+        "title1": "Wallet Settings",
         "title2": "Account",
         "name": {
           "title": "Display Name",
@@ -1116,7 +1116,7 @@
         "account": {
           "add": "Add a new account",
           "manage": "Manage accounts",
-          "account_settings": "Account settings",
+          "wallet_settings": "Wallet settings",
           "go_to_web_wallet": "Manage your web account"
         }
       }

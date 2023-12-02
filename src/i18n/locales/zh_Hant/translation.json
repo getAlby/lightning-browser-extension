@@ -1013,7 +1013,7 @@
         "account": {
           "add": "添加新帳戶",
           "manage": "管理帳戶",
-          "account_settings": "帳戶設置",
+          "wallet_settings": "",
           "go_to_web_wallet": "管理你的網路帳戶"
         }
       }

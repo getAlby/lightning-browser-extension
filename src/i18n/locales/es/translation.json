@@ -812,7 +812,7 @@
         "account": {
           "add": "Agregar una nueva cuenta",
           "manage": "Administrar cuentas",
-          "account_settings": "Configuraciones de la cuenta",
+          "wallet_settings": "",
           "go_to_web_wallet": "Administra tu cuenta de Alby"
         }
       },

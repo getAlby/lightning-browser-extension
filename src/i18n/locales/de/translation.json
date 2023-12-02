@@ -937,7 +937,7 @@
         "account": {
           "add": "Neues Konto hinzufügen",
           "manage": "Konten verwalten",
-          "account_settings": "Kontoeinstellungen",
+          "wallet_settings": "",
           "go_to_web_wallet": "Verwalte dein Web-Konto"
         }
       },
