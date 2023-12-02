@@ -519,7 +519,7 @@
       }
     },
     "settings": {
-      "title": "Settings",
+      "title": "Extension Settings",
       "browser_notifications": {
         "title": "Browser notifications",
         "subtitle": "Payment and authentication related notifications."
@@ -944,7 +944,7 @@
     "advanced": "Advanced",
     "success": "Success",
     "error": "Error",
-    "settings": "Settings",
+    "settings": "Extension Settings",
     "accounts": "Accounts",
     "discover": "Discover",
     "connected_sites": "Connected Sites",
