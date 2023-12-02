@@ -1065,11 +1065,11 @@
       }
     },
     "account_menu": {
-      "title": "Mudar de conta",
+      "title": "",
       "options": {
         "account": {
           "add": "Adicionar nova conta",
-          "manage": "Gerenciar contas",
+          "manage": "",
           "wallet_settings": "",
           "go_to_web_wallet": "Acessar sua conta na web"
         }

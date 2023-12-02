@@ -1089,11 +1089,11 @@
     },
     "account_menu": {
       "screen_reader": "Öppna droppmeny",
-      "title": "Växla konto",
+      "title": "",
       "options": {
         "account": {
           "add": "Lägg till nytt konto",
-          "manage": "Hantera konton",
+          "manage": "",
           "wallet_settings": "",
           "go_to_web_wallet": "Hantera ditt webbkonto"
         }

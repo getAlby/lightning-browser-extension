@@ -812,11 +812,11 @@
     },
     "account_menu": {
       "screen_reader": "Přepnout rozbalovací nabídku",
-      "title": "Změnit účet",
+      "title": "",
       "options": {
         "account": {
           "add": "Přidat nový účet",
-          "manage": "Spravovat účty"
+          "manage": ""
         }
       }
     },

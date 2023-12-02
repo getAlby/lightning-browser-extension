@@ -739,11 +739,11 @@
     },
     "account_menu": {
       "screen_reader": "Basculer la liste déroulante",
-      "title": "Changer de compte",
+      "title": "",
       "options": {
         "account": {
           "add": "Ajouter un nouveau compte",
-          "manage": "Gérer les comptes"
+          "manage": ""
         }
       }
     },

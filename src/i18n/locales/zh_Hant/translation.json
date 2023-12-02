@@ -1008,11 +1008,11 @@
     },
     "account_menu": {
       "screen_reader": "切換下拉菜單",
-      "title": "切換帳戶",
+      "title": "",
       "options": {
         "account": {
           "add": "添加新帳戶",
-          "manage": "管理帳戶",
+          "manage": "",
           "wallet_settings": "",
           "go_to_web_wallet": "管理你的網路帳戶"
         }

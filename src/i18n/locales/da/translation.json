@@ -733,11 +733,11 @@
     },
     "account_menu": {
       "screen_reader": "Skift drop-down",
-      "title": "Skift konto",
+      "title": "",
       "options": {
         "account": {
           "add": "Tilføj en ny konto",
-          "manage": "Administrer konti"
+          "manage": ""
         }
       }
     },

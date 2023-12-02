@@ -807,11 +807,11 @@
       }
     },
     "account_menu": {
-      "title": "Cambiar de cuenta",
+      "title": "",
       "options": {
         "account": {
           "add": "Agregar una nueva cuenta",
-          "manage": "Administrar cuentas",
+          "manage": "",
           "wallet_settings": "",
           "go_to_web_wallet": "Administra tu cuenta de Alby"
         }

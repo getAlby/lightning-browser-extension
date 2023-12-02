@@ -607,11 +607,11 @@
     },
     "account_menu": {
       "screen_reader": "Vaihda pudotusvalikko",
-      "title": "Vaihda tili",
+      "title": "",
       "options": {
         "account": {
           "add": "Lisää uusi tili",
-          "manage": "Hallitse tilejä"
+          "manage": ""
         }
       }
     },

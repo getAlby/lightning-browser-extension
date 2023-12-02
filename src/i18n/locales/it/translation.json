@@ -733,11 +733,11 @@
     },
     "account_menu": {
       "screen_reader": "Attiva/disattiva menu a tendina",
-      "title": "Cambia account",
+      "title": "",
       "options": {
         "account": {
           "add": "Aggiungi un nuovo account",
-          "manage": "Gestisci gli account"
+          "manage": ""
         }
       }
     },

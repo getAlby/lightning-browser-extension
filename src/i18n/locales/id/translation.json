@@ -790,7 +790,7 @@
       "options": {
         "account": {
           "add": "Tambahkan akun baru",
-          "manage": "Kelola akun",
+          "manage": "",
           "wallet_settings": "",
           "go_to_web_wallet": "Atur akun web kamu"
         }

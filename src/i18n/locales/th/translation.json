@@ -1081,11 +1081,11 @@
     },
     "account_menu": {
       "screen_reader": "เมนูแบบเลื่อนลง",
-      "title": "สลับบัญชี",
+      "title": "",
       "options": {
         "account": {
           "add": "เพิ่มบัญชีใหม่",
-          "manage": "การจัดการบัญชี",
+          "manage": "",
           "wallet_settings": "",
           "go_to_web_wallet": "จัดการเว็บไซต์บนบัญชีของคุณ"
         }

@@ -783,11 +783,11 @@
     },
     "account_menu": {
       "screen_reader": "Przełącznik rozwijany",
-      "title": "Zmień konto",
+      "title": "",
       "options": {
         "account": {
           "add": "Dodaj nowe konto",
-          "manage": "Zarządzaj kontami"
+          "manage": ""
         }
       }
     },

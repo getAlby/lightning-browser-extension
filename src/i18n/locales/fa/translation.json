@@ -1023,11 +1023,11 @@
     },
     "account_menu": {
       "screen_reader": "منوی تعویض",
-      "title": "تعویض حساب کاربری",
+      "title": "",
       "options": {
         "account": {
           "add": "افزودن حساب کاربری جدید",
-          "manage": "مدیریت حساب های کاربری",
+          "manage": "",
           "wallet_settings": "",
           "go_to_web_wallet": "حساب کاربری وب خود را مدیریت کنید"
         }

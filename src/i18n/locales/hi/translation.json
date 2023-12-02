@@ -697,11 +697,11 @@
     },
     "account_menu": {
       "screen_reader": "Toggle Dropdown",
-      "title": "खाता बदलें",
+      "title": "",
       "options": {
         "account": {
           "add": "एक नया खाता जोड़ें",
-          "manage": "खाते प्रबंधित करें"
+          "manage": ""
         }
       }
     },
