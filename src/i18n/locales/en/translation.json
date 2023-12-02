@@ -1111,11 +1111,11 @@
     },
     "account_menu": {
       "screen_reader": "Toggle Dropdown",
-      "title": "Switch account",
+      "title": "Switch Wallet",
       "options": {
         "account": {
           "add": "Add a new account",
-          "manage": "Manage accounts",
+          "manage": "Manage Wallets",
           "wallet_settings": "Wallet settings",
           "go_to_web_wallet": "Manage your web account"
         }
