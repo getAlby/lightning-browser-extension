@@ -31,12 +31,10 @@
     },
     "choose_path": {
       "alby": {
-        "title": "Alby",
-        "description": "Inregistreaza-te sau foloseste un cont Alby deja existent pentru a incepe sa faci plati prin Lightning imediat."
+        "title": "Alby"
       },
       "other": {
         "title": "Alte portofele",
-        "description": "Conecteaza-te la portofelul tau Lightning deja existent sau la un nod si alege dintre diversi conectori.",
         "and_more": "& mai multe...",
         "connect": "Conecteaza-te"
       }
@@ -224,19 +222,6 @@
           "setup_failed": "Setare esuata",
           "missing_token": "Lipseste JWT, nu s-a putut efectua logarea.",
           "invalid_token": "JWT invalid a trecut"
-        }
-      },
-      "kollider": {
-        "title": "Kollider",
-        "description": "Logare la contul tau Kollider",
-        "username": {
-          "label": "Introdu numele de utilizator Kollider"
-        },
-        "currency": {
-          "label": "Selecteaza contul de moneda"
-        },
-        "errors": {
-          "connection_failed": "Conexiune esuata. Esti sigur ca datele contului sunt corecte?"
         }
       },
       "btcpay": {

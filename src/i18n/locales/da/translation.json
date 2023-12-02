@@ -31,12 +31,10 @@
     },
     "choose_path": {
       "alby": {
-        "title": "Alby",
-        "description": "Opret dig, eller brug din eksisterende Alby-konto til hurtigt at starte med at betale via lightning."
+        "title": "Alby"
       },
       "other": {
         "title": "Andre wallets",
-        "description": "Opret forbindelse til din eksisterende wallet eller node, og vælg mellem flere forbindelser.",
         "and_more": "med mere...",
         "connect": "Opret forbindelse"
       }
@@ -224,19 +222,6 @@
           "setup_failed": "Opsætning mislykkedes",
           "missing_token": "JWT mangler, kunne ikke logge ind.",
           "invalid_token": "ugyldig JWT givet"
-        }
-      },
-      "kollider": {
-        "title": "Kollider",
-        "description": "Log ind på din Kollider-konto",
-        "username": {
-          "label": "Indtast dit Kollider-brugernavn"
-        },
-        "currency": {
-          "label": "Vælg din kontovaluta"
-        },
-        "errors": {
-          "connection_failed": "Forbindelsen kunne ikke oprettes. Er du sikker på at kontooplysningerne er korrekte?"
         }
       },
       "btcpay": {

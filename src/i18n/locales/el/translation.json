@@ -98,11 +98,6 @@
           "label": "Κωδικός Eclair"
         }
       },
-      "kollider": {
-        "username": {
-          "label": "Όνομα χρήστη"
-        }
-      },
       "commando": {
         "port": {
           "label": "Θύρα"

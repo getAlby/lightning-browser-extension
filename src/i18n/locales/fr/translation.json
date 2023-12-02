@@ -31,12 +31,10 @@
     },
     "choose_path": {
       "alby": {
-        "title": "Alby",
-        "description": "Inscrivez-vous ou utilisez votre compte Alby existant pour commencer à utiliser les paiements éclair en un rien de temps."
+        "title": "Alby"
       },
       "other": {
         "title": "Autres portefeuilles",
-        "description": "Connectez-vous à votre portefeuille ou nœud Lightning et choisissez parmi différents connecteurs.",
         "and_more": "& plus...",
         "connect": "Connecter"
       }
@@ -224,19 +222,6 @@
           "setup_failed": "La configuration a échoué",
           "missing_token": "JWT manquant, impossible de se connecter.",
           "invalid_token": "JWT invalide passé"
-        }
-      },
-      "kollider": {
-        "title": "Kollider",
-        "description": "Connectez-vous à votre compte Kollider",
-        "username": {
-          "label": "Saisissez votre nom d'utilisateur pour Kollider"
-        },
-        "currency": {
-          "label": "Sélectionnez votre compte en devise"
-        },
-        "errors": {
-          "connection_failed": "La connexion a échoué. Êtes-vous sûr que les données du compte sont correctes ?"
         }
       },
       "btcpay": {

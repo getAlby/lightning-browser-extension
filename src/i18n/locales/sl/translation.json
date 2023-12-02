@@ -99,33 +99,6 @@
           "missing_token": "Manjka dostopni žeton, ne moreš se prijaviti."
         }
       },
-      "kollider": {
-        "description": "Prijava v Kollider račun",
-        "username": {
-          "label": "Uporabniško ime"
-        },
-        "errors": {
-          "registration_limit_exceeded": "Preseženo število registracij, poskusi čez nekaj časa.",
-          "connection_failed": "Povezava ni uspela. Si prepičan, da so podatki pravilni?",
-          "user_already_exists": "Uporabniško ime že obstaja"
-        },
-        "title": "Kollider",
-        "choose_path": {
-          "title": "Poveži v Kollider Wallet",
-          "description": "Prijavi ali se registriraj v nov Kollider račun in se poveži v Alby.",
-          "create_new": "Registracija"
-        },
-        "create": {
-          "title": "Ustvari svoj Kollider račun se poveži v Alby",
-          "description": "Ustvari nov Kollider račun za pošiljanje, sprejemanje in menjavo Bitcoin-ov."
-        },
-        "login": {
-          "title": "Poveži se z Kollider računom"
-        },
-        "currency": {
-          "label": "Izberi valuto računa"
-        }
-      },
       "btcpay": {
         "config": {
           "label": "Podatki o konfiguraciji",
@@ -296,12 +269,10 @@
     "choose_path": {
       "alby": {
         "title": "Alby račun",
-        "connect": "Poveži z Alby",
-        "description": "Registriraj se ali uporabi obstoječi Alby račun za takojšnji začetek z lightning plačili."
+        "connect": "Poveži z Alby"
       },
       "other": {
         "title": "Ostale denarnice",
-        "description": "Poveži z obstoječo lightning denarnico ali vozliščem in izberi med različnimi priključki.",
         "connect": "Poveži",
         "and_more": "& več..."
       }
@@ -634,7 +605,6 @@
     },
     "nostr_enable": {
       "title": "Povežite se z Nostr",
-      "request2": "Podpiše dogodke s tvojim zasebnim ključem Nostr",
       "request1": "Zahteva dostop do javnega ključa Nostr"
     },
     "webbtc_enable": {

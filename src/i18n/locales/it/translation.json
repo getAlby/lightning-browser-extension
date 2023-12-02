@@ -199,19 +199,6 @@
           "connection_failed": "Connessione fallita. L'URL di connessione a BTCPay è corretto e accessibile?"
         }
       },
-      "kollider": {
-        "description": "Accedi al tuo account Kollider",
-        "username": {
-          "label": "Inserisci il tuo username Kollider"
-        },
-        "currency": {
-          "label": "Seleziona la valuta del tuo account"
-        },
-        "errors": {
-          "connection_failed": "Connessione fallita. Sei sicuro che i dati dell'account siano corretti?"
-        },
-        "title": "Kollider"
-      },
       "commando": {
         "port": {
           "label": "Porta"
@@ -590,12 +577,10 @@
     },
     "choose_path": {
       "alby": {
-        "title": "Alby",
-        "description": "Registrati o utilizza il tuo account Alby per iniziare a pagare attraverso lightning in pochissimo tempo."
+        "title": "Alby"
       },
       "other": {
         "title": "Altri Wallet",
-        "description": "Collegati al tuo portafoglio o nodo Lightning e scegli tra vari connettori.",
         "and_more": "& altro...",
         "connect": "Connettiti"
       }
