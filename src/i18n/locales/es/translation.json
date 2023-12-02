@@ -342,7 +342,7 @@
       }
     },
     "settings": {
-      "title": "Configuración",
+      "title": "",
       "website_enhancements": {
         "title": "Mejoras del sitio web",
         "subtitle": "Mejoras de propinas para Twitter, YouTube, etc."
@@ -687,7 +687,7 @@
     "password": "Contraseña",
     "success": "Exitoso",
     "error": "Error",
-    "settings": "Ajustes",
+    "settings": "",
     "connected_sites": "Sitios conectados",
     "sats_one": "sat",
     "sats_other": "sats",

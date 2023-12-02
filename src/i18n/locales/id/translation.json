@@ -471,7 +471,7 @@
       }
     },
     "settings": {
-      "title": "Pengaturan",
+      "title": "",
       "browser_notifications": {
         "title": "Notifikasi peramban",
         "subtitle": "Notifikasi terkait pembayaran dan autentikasi."
@@ -931,7 +931,7 @@
     "confirm_password": "Konfirmasi Kata Sandi",
     "success": "Sukses",
     "error": "Eror",
-    "settings": "Pengaturan",
+    "settings": "",
     "accounts": "Akun-akun",
     "connected_sites": "Situs Terhubung",
     "wallet": "Dompet",

@@ -444,7 +444,7 @@
       }
     },
     "settings": {
-      "title": "Inställningar",
+      "title": "",
       "browser_notifications": {
         "title": "Webbläsarnotiser",
         "subtitle": "Betalnings- och autentiseringsrelaterade notiser."
@@ -937,7 +937,7 @@
     "password": "Lösenord",
     "success": "Genomfört",
     "error": "Misslyckades",
-    "settings": "Inställningar",
+    "settings": "",
     "connected_sites": "Anslutna webbplatser",
     "loading": "laddar",
     "amount": "Belopp",

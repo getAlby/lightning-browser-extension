@@ -369,7 +369,7 @@
       }
     },
     "settings": {
-      "title": "Ustawienia",
+      "title": "",
       "browser_notifications": {
         "title": "Powiadomienia w przeglądarce",
         "subtitle": "Powiadomienia związane z płatnościami i uwierzytelnianiem."
@@ -666,7 +666,7 @@
     "advanced": "Zaawansowane",
     "success": "Sukces",
     "error": "Błąd",
-    "settings": "Ustawienia",
+    "settings": "",
     "accounts": "Konta",
     "discover": "Odkrywaj",
     "connected_sites": "",

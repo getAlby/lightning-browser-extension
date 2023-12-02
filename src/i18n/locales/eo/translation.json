@@ -265,7 +265,7 @@
       }
     },
     "settings": {
-      "title": "Agordoj",
+      "title": "",
       "browser_notifications": {
         "title": "",
         "subtitle": ""
@@ -494,7 +494,7 @@
     "advanced": "Altnivelaj",
     "success": "Sukceso",
     "error": "Eraro",
-    "settings": "Agordoj",
+    "settings": "",
     "connected_sites": "",
     "sats_one": "satoŝio",
     "sats_other": "satoŝioj",

@@ -485,7 +485,7 @@
       }
     },
     "settings": {
-      "title": "تنظیمات",
+      "title": "",
       "browser_notifications": {
         "title": "اعلان های مرورگر",
         "subtitle": "اعلان های مربوط به پرداخت و احراز هویت."
@@ -870,7 +870,7 @@
     "advanced": "پیشرفته",
     "success": "موفقیت",
     "error": "خطا",
-    "settings": "تنظیمات",
+    "settings": "",
     "accounts": "حساب های کاربری",
     "discover": "کشف کنید",
     "connected_sites": "سایت های متصل",

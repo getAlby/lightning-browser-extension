@@ -359,7 +359,7 @@
       }
     },
     "settings": {
-      "title": "Indstillinger",
+      "title": "",
       "browser_notifications": {
         "title": "Browsermeddelelser",
         "subtitle": "Meddelelser om betaling og godkendelser."
@@ -622,7 +622,7 @@
     "advanced": "Avanceret",
     "success": "Succes",
     "error": "Fejl",
-    "settings": "Indstillinger",
+    "settings": "",
     "accounts": "Konti",
     "discover": "Opdag",
     "connected_sites": "",

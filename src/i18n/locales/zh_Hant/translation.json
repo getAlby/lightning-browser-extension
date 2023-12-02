@@ -460,7 +460,7 @@
       }
     },
     "settings": {
-      "title": "設置",
+      "title": "",
       "browser_notifications": {
         "title": "瀏覽器通知",
         "subtitle": "付款和認證相關通知。"
@@ -867,7 +867,7 @@
     "advanced": "高級",
     "success": "成功",
     "error": "錯誤",
-    "settings": "設置",
+    "settings": "",
     "accounts": "帳戶",
     "discover": "發現",
     "connected_sites": "已連接的網站",

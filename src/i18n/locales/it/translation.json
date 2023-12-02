@@ -332,7 +332,7 @@
       }
     },
     "settings": {
-      "title": "Impostazioni",
+      "title": "",
       "browser_notifications": {
         "title": "Notifiche del browser",
         "subtitle": "Notifiche relative ai pagamenti e all'autenticazione."
@@ -620,7 +620,7 @@
     "password": "Password",
     "success": "Successo",
     "error": "Errore",
-    "settings": "Impostazioni",
+    "settings": "",
     "connected_sites": "",
     "loading": "caricamento",
     "amount": "Importo",

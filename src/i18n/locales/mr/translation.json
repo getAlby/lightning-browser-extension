@@ -355,7 +355,7 @@
       }
     },
     "settings": {
-      "title": "सेटिंग्ज",
+      "title": "",
       "browser_notifications": {
         "title": "ब्राउझरकडून सूचना",
         "subtitle": "पेमेंट आणि प्रमाणीकरण संबंधित सूचना."
@@ -645,7 +645,7 @@
     "confirm_password": "पासवर्डची पुष्टी करा",
     "advanced": "पुढे",
     "success": "यश",
-    "settings": "सेटिंग्ज",
+    "settings": "",
     "accounts": "खाते",
     "discover": "शोध",
     "connected_sites": "",

@@ -438,7 +438,7 @@
       }
     },
     "settings": {
-      "title": "Configurações",
+      "title": "",
       "website_enhancements": {
         "title": "Pagamentos em redes sociais",
         "subtitle": "Reconhece automaticamente endereços relâmpago em perfis do Twitter, Youtube, etc, facilitando o envio de pagamentos."
@@ -914,7 +914,7 @@
     "password": "Senha",
     "success": "Sucesso",
     "error": "Erro",
-    "settings": "Configurações",
+    "settings": "",
     "connected_sites": "Sites conectados",
     "sats_one": "sat",
     "sats_other": "sats",

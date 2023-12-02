@@ -389,7 +389,7 @@
       }
     },
     "settings": {
-      "title": "Nastavení",
+      "title": "",
       "browser_notifications": {
         "title": "Upozornění prohlížeče",
         "subtitle": "Platební notifikace a notifikace týkající se autentizace."
@@ -700,7 +700,7 @@
     "advanced": "Pokročilé",
     "success": "Úspěch",
     "error": "Chyba",
-    "settings": "Nastavení",
+    "settings": "",
     "connected_sites": "",
     "sats_one": "sat",
     "sats_other": "satů",

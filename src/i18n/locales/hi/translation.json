@@ -282,7 +282,7 @@
       }
     },
     "settings": {
-      "title": "सेटिंग्ज",
+      "title": "",
       "browser_notifications": {
         "title": "ब्राउझर सूचना",
         "subtitle": "भुगतान और प्रमाणीकरण संबंधी सूचनाएँ।"
@@ -572,7 +572,7 @@
     "advanced": "उन्नत",
     "success": "सफलता",
     "error": "त्रुटि",
-    "settings": "सेटिंग्स",
+    "settings": "",
     "accounts": "खाते",
     "discover": "खोजें",
     "sats_one": "sat",
