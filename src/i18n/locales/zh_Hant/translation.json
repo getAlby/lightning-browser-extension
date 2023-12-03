@@ -435,9 +435,7 @@
           }
         }
       },
-      "actions": {
-        "connect_wallet": ""
-      }
+      "actions": {}
     },
     "unlock": {
       "unlock_to_continue": "解鎖以繼續",
@@ -1003,7 +1001,6 @@
       "screen_reader": "切換下拉菜單",
       "options": {
         "account": {
-          "wallet_settings": "",
           "go_to_web_wallet": "管理你的網路帳戶"
         }
       }

@@ -244,9 +244,7 @@
       }
     },
     "accounts": {
-      "actions": {
-        "connect_wallet": ""
-      }
+      "actions": {}
     },
     "unlock": {
       "unlock_to_continue": "Avaa lukitus jatkaaksesi",

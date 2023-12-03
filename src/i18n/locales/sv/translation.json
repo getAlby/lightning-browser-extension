@@ -274,9 +274,7 @@
       }
     },
     "accounts": {
-      "actions": {
-        "connect_wallet": ""
-      },
+      "actions": {},
       "account_view": {
         "nostr": {
           "generate_keys": {
@@ -1091,7 +1089,6 @@
       "screen_reader": "Öppna droppmeny",
       "options": {
         "account": {
-          "wallet_settings": "",
           "go_to_web_wallet": "Hantera ditt webbkonto"
         }
       }

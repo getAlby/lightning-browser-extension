@@ -258,9 +258,7 @@
       }
     },
     "accounts": {
-      "actions": {
-        "connect_wallet": ""
-      },
+      "actions": {},
       "account_view": {
         "nostr": {
           "errors": {

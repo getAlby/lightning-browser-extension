@@ -446,9 +446,7 @@
           "export": "Expor"
         }
       },
-      "actions": {
-        "connect_wallet": ""
-      }
+      "actions": {}
     },
     "unlock": {
       "unlock_to_continue": "Buka untuk melanjutkan",
@@ -783,7 +781,6 @@
     "account_menu": {
       "options": {
         "account": {
-          "wallet_settings": "",
           "go_to_web_wallet": "Atur akun web kamu"
         }
       },

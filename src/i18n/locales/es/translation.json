@@ -272,9 +272,7 @@
       }
     },
     "accounts": {
-      "actions": {
-        "connect_wallet": ""
-      },
+      "actions": {},
       "account_view": {
         "nostr": {
           "errors": {
@@ -820,7 +818,6 @@
     "account_menu": {
       "options": {
         "account": {
-          "wallet_settings": "",
           "go_to_web_wallet": "Administra tu cuenta de Alby"
         }
       },

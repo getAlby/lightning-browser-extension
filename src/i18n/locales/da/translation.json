@@ -333,9 +333,7 @@
           "export": "Eksporter"
         }
       },
-      "actions": {
-        "connect_wallet": ""
-      }
+      "actions": {}
     },
     "unlock": {
       "unlock_to_continue": "Lås op for at fortsætte",

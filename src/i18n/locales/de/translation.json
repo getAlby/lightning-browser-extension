@@ -383,9 +383,7 @@
       }
     },
     "accounts": {
-      "actions": {
-        "connect_wallet": ""
-      },
+      "actions": {},
       "account_view": {
         "title2": "Konto",
         "name": {
@@ -931,7 +929,6 @@
     "account_menu": {
       "options": {
         "account": {
-          "wallet_settings": "",
           "go_to_web_wallet": "Verwalte dein Web-Konto"
         }
       },

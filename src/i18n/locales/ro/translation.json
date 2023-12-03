@@ -334,9 +334,7 @@
           "export": ""
         }
       },
-      "actions": {
-        "connect_wallet": ""
-      }
+      "actions": {}
     },
     "unlock": {
       "unlock_to_continue": "",

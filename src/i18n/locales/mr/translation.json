@@ -328,9 +328,7 @@
         "remove": {},
         "actions": {}
       },
-      "actions": {
-        "connect_wallet": ""
-      }
+      "actions": {}
     },
     "unlock": {
       "unlock_to_continue": "चालू ठेवण्यासाठी अनलॉक करा",

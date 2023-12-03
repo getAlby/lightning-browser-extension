@@ -193,9 +193,7 @@
           "scan_qr": "นำกระเป๋านี้เข้าสู่ Zeus หรือ BlueWallet โดยการแสกน QRCode"
         }
       },
-      "actions": {
-        "connect_wallet": ""
-      }
+      "actions": {}
     },
     "unlock": {
       "unlock_to_continue": "ปลดล็อคเพื่อไปต่อ",
@@ -1076,7 +1074,6 @@
       "screen_reader": "เมนูแบบเลื่อนลง",
       "options": {
         "account": {
-          "wallet_settings": "",
           "go_to_web_wallet": "จัดการเว็บไซต์บนบัญชีของคุณ"
         }
       }

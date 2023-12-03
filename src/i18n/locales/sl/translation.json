@@ -444,9 +444,7 @@
           "remove_secretkey": "Odstrani Glavni ključ"
         }
       },
-      "actions": {
-        "connect_wallet": ""
-      }
+      "actions": {}
     },
     "unlock": {
       "help_contact": {
@@ -708,7 +706,6 @@
     "account_menu": {
       "options": {
         "account": {
-          "wallet_settings": "",
           "go_to_web_wallet": "Upravljaj svoj spletni račun"
         }
       },

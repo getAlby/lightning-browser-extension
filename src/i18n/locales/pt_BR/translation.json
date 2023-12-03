@@ -268,9 +268,7 @@
       }
     },
     "accounts": {
-      "actions": {
-        "connect_wallet": ""
-      },
+      "actions": {},
       "account_view": {
         "export": {
           "title": "Conectar sua carteira de celular",
@@ -1067,7 +1065,6 @@
     "account_menu": {
       "options": {
         "account": {
-          "wallet_settings": "",
           "go_to_web_wallet": "Acessar sua conta na web"
         }
       }
