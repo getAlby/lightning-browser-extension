@@ -338,7 +338,6 @@
             "failed_to_load": "Nie udało się władować klucza Nostr. Czy to poprawny klucz?"
           }
         },
-        "remove": {},
         "actions": {
           "export": "Eksport"
         }

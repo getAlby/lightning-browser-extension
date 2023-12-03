@@ -324,8 +324,7 @@
           "errors": {
             "failed_to_load": "Nostr की लोड करण्यात अयशस्वी. ती वैध Nostr key आहे का?"
           }
-        },
-        "remove": {}
+        }
       }
     },
     "unlock": {

@@ -409,8 +409,7 @@
           },
           "title": "Network",
           "subtitle": "アドレス導出やトランザクションをデコードするBitcoinやliquidのネットワークを選んでください。"
-        },
-        "remove": {}
+        }
       }
     },
     "home": {

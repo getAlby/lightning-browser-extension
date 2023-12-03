@@ -258,7 +258,6 @@
       }
     },
     "accounts": {
-      "actions": {},
       "account_view": {
         "nostr": {
           "errors": {
@@ -289,7 +288,6 @@
             "label": "Chiave Pubblica"
           }
         },
-        "remove": {},
         "actions": {
           "export": "Esporta"
         },
@@ -722,10 +720,7 @@
       }
     },
     "account_menu": {
-      "screen_reader": "Attiva/disattiva menu a tendina",
-      "options": {
-        "account": {}
-      }
+      "screen_reader": "Attiva/disattiva menu a tendina"
     },
     "publishers_table": {
       "payments": "pagamenti"
