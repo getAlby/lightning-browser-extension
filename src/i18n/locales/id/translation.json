@@ -434,8 +434,6 @@
           "hint": "adalah protokol simpel dan terbuka yang bertujuan untuk membuat jaringan sosial anti penyensoran. Nostr bekerja dengan menggunakan kunci kriptografi. Untuk menerbitkan sesuatu, kamu dapat gunakan kunci dan mengirimnya ke berbagai relay. Kamu dapat menggunakan Alby untuk mengatur kunci Nostr. Berbagai aplikasi Nostr akan dapat menggunakan kunci dari ekstensi Alby."
         },
         "remove": {
-          "title": "Hapus Akun Ini",
-          "subtitle": "Hapus semua allowances, data pembayaran, dan kunci-kunci yang terasosiasi dengan akun ini.",
           "error": "Nama akun yang dimasukkan tidak sama."
         },
         "remove_secretkey": {
@@ -445,8 +443,7 @@
         },
         "actions": {
           "remove_secretkey": "Hapus Master Key",
-          "export": "Expor",
-          "remove_account": "Hapus akun"
+          "export": "Expor"
         }
       },
       "actions": {

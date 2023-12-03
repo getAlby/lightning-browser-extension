@@ -374,12 +374,9 @@
           }
         },
         "remove": {
-          "title": "刪除此帳戶",
-          "subtitle": "所有與此帳號關聯的限額、支付信息和密鑰都將被清除。",
           "error": "輸入的帳戶名稱不匹配。"
         },
         "actions": {
-          "remove_account": "刪除帳戶",
           "export": "導出",
           "remove_secretkey": "移除主密鑰"
         },

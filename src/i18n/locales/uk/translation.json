@@ -328,12 +328,8 @@
             "failed_to_load": ""
           }
         },
-        "remove": {
-          "title": "",
-          "subtitle": ""
-        },
+        "remove": {},
         "actions": {
-          "remove_account": "",
           "export": ""
         }
       },

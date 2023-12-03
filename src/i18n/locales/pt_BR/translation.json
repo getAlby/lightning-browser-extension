@@ -344,13 +344,10 @@
           }
         },
         "remove": {
-          "title": "Remover esta conta",
           "error": "O nome da conta inserido não corresponde.",
-          "subtitle": "Remove todos os limites de gastos, dados de pagamento e chaves associadas à esta conta.",
           "confirm": "Por favor, insira o nome da conta para confirmar a exclusão:\n\n{{ name }}\n\n ⚠️ Por favor, insira o nome da conta para confirmar a exclusão. Todas as chaves associadas (Chave mestra, Nostr, etc) serão excluídas se você continuar. Certifique-se de ter feito backup das chaves, não há outra maneira de restaurá-las."
         },
         "actions": {
-          "remove_account": "Remover conta",
           "export": "Exportar",
           "remove_secretkey": "Remover chave mestra"
         },

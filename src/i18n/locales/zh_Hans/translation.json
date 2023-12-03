@@ -340,12 +340,9 @@
           "description": "将允许你在移动钱包上连接并使用此帐户，例如 <0>BlueWallet</0> 和 <1>Zeus</1>。"
         },
         "remove": {
-          "title": "删除此帐户",
-          "subtitle": "将删除与此帐户关联的所有限额、付款数据和密钥。",
           "error": "输入的帐户名称不匹配。"
         },
         "actions": {
-          "remove_account": "删除帐户",
           "export": "导出",
           "remove_secretkey": "移除主密钥"
         },

@@ -410,9 +410,7 @@
           "title": "Network",
           "subtitle": "アドレス導出やトランザクションをデコードするBitcoinやliquidのネットワークを選んでください。"
         },
-        "remove": {
-          "title": "このアカウントを削除"
-        }
+        "remove": {}
       }
     },
     "home": {

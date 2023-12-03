@@ -338,12 +338,8 @@
             "failed_to_load": "Nie udało się władować klucza Nostr. Czy to poprawny klucz?"
           }
         },
-        "remove": {
-          "title": "Usuń konto",
-          "subtitle": "Wszystkie powiązane limity zostaną usunięte. Proszę się upewnić."
-        },
+        "remove": {},
         "actions": {
-          "remove_account": "Usuń konto",
           "export": "Eksport"
         }
       },

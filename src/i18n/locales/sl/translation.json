@@ -432,9 +432,7 @@
           }
         },
         "remove": {
-          "title": "Odstrani ta račun",
-          "error": "Vnešeno ime računa se ne ujema.",
-          "subtitle": "Odstrani vse odobritve, podatke o plačilih in ključe, povezane s tem računom."
+          "error": "Vnešeno ime računa se ne ujema."
         },
         "remove_secretkey": {
           "subtitle": "Odstrani Glavni ključ iz tega računa.",
@@ -443,7 +441,6 @@
         },
         "actions": {
           "export": "Izvoz",
-          "remove_account": "Odstrani račun",
           "remove_secretkey": "Odstrani Glavni ključ"
         }
       },

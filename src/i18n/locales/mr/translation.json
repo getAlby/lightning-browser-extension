@@ -325,13 +325,8 @@
             "failed_to_load": "Nostr की लोड करण्यात अयशस्वी. ती वैध Nostr key आहे का?"
           }
         },
-        "remove": {
-          "title": "Remove this account",
-          "subtitle": "सर्व लिंक केलेले भत्ते हटवले जातील. कृपया खात्री बाळगा."
-        },
-        "actions": {
-          "remove_account": "खाते काढा"
-        }
+        "remove": {},
+        "actions": {}
       },
       "actions": {
         "connect_wallet": ""

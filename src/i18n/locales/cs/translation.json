@@ -274,10 +274,7 @@
         "connect_wallet": ""
       },
       "account_view": {
-        "remove": {
-          "title": "Odstranit tento účet",
-          "subtitle": "Všechny propojené příspěvky budou smazány. Buďte si jisti, že akci chcete opravdu provést."
-        },
+        "remove": {},
         "nostr": {
           "errors": {
             "failed_to_load": "Nepodařilo se načíst Nostr klíč. Zadali jste validní Nostr klíč?"
@@ -314,7 +311,6 @@
           }
         },
         "actions": {
-          "remove_account": "Odstranit účet",
           "export": "Export"
         },
         "export": {

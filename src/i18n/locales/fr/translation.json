@@ -329,12 +329,8 @@
             "failed_to_load": "Échec du chargement de la clé Nostr. Est-ce une clé Nostr valide ?"
           }
         },
-        "remove": {
-          "title": "Supprimer ce compte",
-          "subtitle": "Tous les quotas liés seront supprimés. S'il vous plaît soyez certain."
-        },
+        "remove": {},
         "actions": {
-          "remove_account": "Supprimer le compte",
           "export": "Exporter"
         }
       },

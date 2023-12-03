@@ -328,12 +328,8 @@
             "failed_to_load": "Nostr-nøglen kunne ikke anvendes. Er det en gyldig Nostr-nøgle?"
           }
         },
-        "remove": {
-          "title": "Fjern denne konto",
-          "subtitle": "Alle de tilknyttede puljer bliver slettet. Du skal være helt sikker."
-        },
+        "remove": {},
         "actions": {
-          "remove_account": "Fjern konto",
           "export": "Eksporter"
         }
       },
