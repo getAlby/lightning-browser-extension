@@ -434,8 +434,7 @@
             "regtest": "Regtest"
           }
         }
-      },
-      "actions": {}
+      }
     },
     "unlock": {
       "unlock_to_continue": "解鎖以繼續",

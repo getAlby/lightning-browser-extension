@@ -270,9 +270,7 @@
       }
     },
     "accounts": {
-      "actions": {},
       "account_view": {
-        "remove": {},
         "nostr": {
           "errors": {
             "failed_to_load": "Nepodařilo se načíst Nostr klíč. Zadali jste validní Nostr klíč?"
@@ -801,10 +799,7 @@
       }
     },
     "account_menu": {
-      "screen_reader": "Přepnout rozbalovací nabídku",
-      "options": {
-        "account": {}
-      }
+      "screen_reader": "Přepnout rozbalovací nabídku"
     },
     "publishers_table": {
       "payments": "platby"

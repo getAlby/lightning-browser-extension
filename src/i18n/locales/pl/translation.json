@@ -342,8 +342,7 @@
         "actions": {
           "export": "Eksport"
         }
-      },
-      "actions": {}
+      }
     },
     "unlock": {
       "unlock_to_continue": "Odblokuj aby kontynuować",
@@ -772,10 +771,7 @@
       }
     },
     "account_menu": {
-      "screen_reader": "Przełącznik rozwijany",
-      "options": {
-        "account": {}
-      }
+      "screen_reader": "Przełącznik rozwijany"
     },
     "publishers_table": {
       "payments": "płatności"

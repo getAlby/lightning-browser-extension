@@ -443,8 +443,7 @@
           "export": "Izvoz",
           "remove_secretkey": "Odstrani Glavni ključ"
         }
-      },
-      "actions": {}
+      }
     },
     "unlock": {
       "help_contact": {

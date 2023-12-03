@@ -694,10 +694,7 @@
       }
     },
     "account_menu": {
-      "screen_reader": "Toggle Dropdown",
-      "options": {
-        "account": {}
-      }
+      "screen_reader": "Toggle Dropdown"
     },
     "publishers_table": {
       "payments": "भुगतान"
