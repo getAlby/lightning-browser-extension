@@ -1003,7 +1003,6 @@
       "screen_reader": "切換下拉菜單",
       "options": {
         "account": {
-          "add": "添加新帳戶",
           "wallet_settings": "",
           "go_to_web_wallet": "管理你的網路帳戶"
         }

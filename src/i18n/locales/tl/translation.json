@@ -542,9 +542,7 @@
     "account_menu": {
       "screen_reader": "",
       "options": {
-        "account": {
-          "add": ""
-        }
+        "account": {}
       }
     },
     "publishers_table": {

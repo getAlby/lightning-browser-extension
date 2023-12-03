@@ -1067,7 +1067,6 @@
     "account_menu": {
       "options": {
         "account": {
-          "add": "Adicionar nova conta",
           "wallet_settings": "",
           "go_to_web_wallet": "Acessar sua conta na web"
         }

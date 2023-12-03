@@ -758,9 +758,7 @@
     "account_menu": {
       "screen_reader": "टॉगल ड्रॉपडाउन",
       "options": {
-        "account": {
-          "add": "नवीन खाते जोडा"
-        }
+        "account": {}
       }
     }
   },

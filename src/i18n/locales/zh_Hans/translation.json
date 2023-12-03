@@ -947,7 +947,6 @@
     "account_menu": {
       "options": {
         "account": {
-          "add": "添加新帐户",
           "wallet_settings": "",
           "go_to_web_wallet": "管理你的网络帐户"
         }

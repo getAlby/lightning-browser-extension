@@ -1091,7 +1091,6 @@
       "screen_reader": "Öppna droppmeny",
       "options": {
         "account": {
-          "add": "Lägg till nytt konto",
           "wallet_settings": "",
           "go_to_web_wallet": "Hantera ditt webbkonto"
         }

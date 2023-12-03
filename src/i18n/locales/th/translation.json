@@ -1076,7 +1076,6 @@
       "screen_reader": "เมนูแบบเลื่อนลง",
       "options": {
         "account": {
-          "add": "เพิ่มบัญชีใหม่",
           "wallet_settings": "",
           "go_to_web_wallet": "จัดการเว็บไซต์บนบัญชีของคุณ"
         }

@@ -1018,7 +1018,6 @@
       "screen_reader": "منوی تعویض",
       "options": {
         "account": {
-          "add": "افزودن حساب کاربری جدید",
           "wallet_settings": "",
           "go_to_web_wallet": "حساب کاربری وب خود را مدیریت کنید"
         }

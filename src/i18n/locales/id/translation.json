@@ -783,7 +783,6 @@
     "account_menu": {
       "options": {
         "account": {
-          "add": "Tambahkan akun baru",
           "wallet_settings": "",
           "go_to_web_wallet": "Atur akun web kamu"
         }

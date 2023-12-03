@@ -726,9 +726,7 @@
     "account_menu": {
       "screen_reader": "Attiva/disattiva menu a tendina",
       "options": {
-        "account": {
-          "add": "Aggiungi un nuovo account"
-        }
+        "account": {}
       }
     },
     "publishers_table": {

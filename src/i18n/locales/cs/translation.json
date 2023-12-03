@@ -805,9 +805,7 @@
     "account_menu": {
       "screen_reader": "Přepnout rozbalovací nabídku",
       "options": {
-        "account": {
-          "add": "Přidat nový účet"
-        }
+        "account": {}
       }
     },
     "publishers_table": {

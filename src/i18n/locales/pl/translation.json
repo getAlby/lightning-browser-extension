@@ -776,9 +776,7 @@
     "account_menu": {
       "screen_reader": "Przełącznik rozwijany",
       "options": {
-        "account": {
-          "add": "Dodaj nowe konto"
-        }
+        "account": {}
       }
     },
     "publishers_table": {

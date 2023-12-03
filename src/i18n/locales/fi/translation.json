@@ -591,9 +591,7 @@
     "account_menu": {
       "screen_reader": "Vaihda pudotusvalikko",
       "options": {
-        "account": {
-          "add": "Lisää uusi tili"
-        }
+        "account": {}
       }
     },
     "publishers_table": {
@@ -601,4 +599,3 @@
     }
   }
 }
-

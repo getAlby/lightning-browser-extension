@@ -820,7 +820,6 @@
     "account_menu": {
       "options": {
         "account": {
-          "add": "Agregar una nueva cuenta",
           "wallet_settings": "",
           "go_to_web_wallet": "Administra tu cuenta de Alby"
         }

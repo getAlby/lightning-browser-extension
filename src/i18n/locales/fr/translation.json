@@ -732,9 +732,7 @@
     "account_menu": {
       "screen_reader": "Basculer la liste déroulante",
       "options": {
-        "account": {
-          "add": "Ajouter un nouveau compte"
-        }
+        "account": {}
       }
     },
     "publishers_table": {

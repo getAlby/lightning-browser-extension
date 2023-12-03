@@ -726,9 +726,7 @@
     "account_menu": {
       "screen_reader": "Skift drop-down",
       "options": {
-        "account": {
-          "add": "Tilføj en ny konto"
-        }
+        "account": {}
       }
     },
     "publishers_table": {

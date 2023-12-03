@@ -931,7 +931,6 @@
     "account_menu": {
       "options": {
         "account": {
-          "add": "Neues Konto hinzufügen",
           "wallet_settings": "",
           "go_to_web_wallet": "Verwalte dein Web-Konto"
         }

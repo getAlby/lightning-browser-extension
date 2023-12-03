@@ -696,9 +696,7 @@
     "account_menu": {
       "screen_reader": "Toggle Dropdown",
       "options": {
-        "account": {
-          "add": "एक नया खाता जोड़ें"
-        }
+        "account": {}
       }
     },
     "publishers_table": {
