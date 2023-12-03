@@ -211,9 +211,6 @@
         "is_blocked_hint": ""
       }
     },
-    "accounts": {
-      "actions": {}
-    },
     "unlock": {
       "unlock_to_continue": "",
       "unlock_password": "",
@@ -538,10 +535,7 @@
       }
     },
     "account_menu": {
-      "screen_reader": "",
-      "options": {
-        "account": {}
-      }
+      "screen_reader": ""
     },
     "publishers_table": {
       "payments": ""

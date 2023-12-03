@@ -333,8 +333,7 @@
         "actions": {
           "export": ""
         }
-      },
-      "actions": {}
+      }
     },
     "unlock": {
       "unlock_to_continue": "",
@@ -722,10 +721,7 @@
       }
     },
     "account_menu": {
-      "screen_reader": "",
-      "options": {
-        "account": {}
-      }
+      "screen_reader": ""
     },
     "publishers_table": {
       "payments": ""

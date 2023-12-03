@@ -445,8 +445,7 @@
           "remove_secretkey": "Hapus Master Key",
           "export": "Expor"
         }
-      },
-      "actions": {}
+      }
     },
     "unlock": {
       "unlock_to_continue": "Buka untuk melanjutkan",

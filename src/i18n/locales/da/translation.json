@@ -328,12 +328,10 @@
             "failed_to_load": "Nostr-nøglen kunne ikke anvendes. Er det en gyldig Nostr-nøgle?"
           }
         },
-        "remove": {},
         "actions": {
           "export": "Eksporter"
         }
-      },
-      "actions": {}
+      }
     },
     "unlock": {
       "unlock_to_continue": "Lås op for at fortsætte",
@@ -722,10 +720,7 @@
       }
     },
     "account_menu": {
-      "screen_reader": "Skift drop-down",
-      "options": {
-        "account": {}
-      }
+      "screen_reader": "Skift drop-down"
     },
     "publishers_table": {
       "payments": "betalinger"
