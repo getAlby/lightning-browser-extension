@@ -274,6 +274,7 @@
       }
     },
     "accounts": {
+      "actions": {},
       "account_view": {
         "nostr": {
           "generate_keys": {

@@ -245,6 +245,9 @@
         "block_removed": ""
       }
     },
+    "accounts": {
+      "actions": {}
+    },
     "unlock": {
       "unlock_to_continue": "",
       "unlock_password": "",
@@ -599,7 +602,10 @@
       }
     },
     "account_menu": {
-      "screen_reader": ""
+      "screen_reader": "",
+      "options": {
+        "account": {}
+      }
     },
     "publishers_table": {
       "payments": ""

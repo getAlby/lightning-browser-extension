@@ -192,7 +192,8 @@
           "export_uri": "LNDHub Credentials URI",
           "scan_qr": "นำกระเป๋านี้เข้าสู่ Zeus หรือ BlueWallet โดยการแสกน QRCode"
         }
-      }
+      },
+      "actions": {}
     },
     "unlock": {
       "unlock_to_continue": "ปลดล็อคเพื่อไปต่อ",

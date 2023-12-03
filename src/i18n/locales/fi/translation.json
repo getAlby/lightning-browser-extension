@@ -243,6 +243,9 @@
         "is_blocked_hint": "Alby on tällä hetkellä poissa käytöstä {{host}}:lla"
       }
     },
+    "accounts": {
+      "actions": {}
+    },
     "unlock": {
       "unlock_to_continue": "Avaa lukitus jatkaaksesi",
       "unlock_password": "Avaussalasanasi",
@@ -584,7 +587,10 @@
       }
     },
     "account_menu": {
-      "screen_reader": "Vaihda pudotusvalikko"
+      "screen_reader": "Vaihda pudotusvalikko",
+      "options": {
+        "account": {}
+      }
     },
     "publishers_table": {
       "payments": "maksut"

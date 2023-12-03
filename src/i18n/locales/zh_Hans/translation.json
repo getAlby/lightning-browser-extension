@@ -263,6 +263,7 @@
       }
     },
     "accounts": {
+      "actions": {},
       "account_view": {
         "nostr": {
           "errors": {

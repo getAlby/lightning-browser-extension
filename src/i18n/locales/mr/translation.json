@@ -325,8 +325,10 @@
             "failed_to_load": "Nostr की लोड करण्यात अयशस्वी. ती वैध Nostr key आहे का?"
           }
         },
-        "remove": {}
-      }
+        "remove": {},
+        "actions": {}
+      },
+      "actions": {}
     },
     "unlock": {
       "unlock_to_continue": "चालू ठेवण्यासाठी अनलॉक करा",
@@ -752,7 +754,10 @@
       }
     },
     "account_menu": {
-      "screen_reader": "टॉगल ड्रॉपडाउन"
+      "screen_reader": "टॉगल ड्रॉपडाउन",
+      "options": {
+        "account": {}
+      }
     }
   },
   "permissions": {

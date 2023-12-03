@@ -329,10 +329,12 @@
             "failed_to_load": "Échec du chargement de la clé Nostr. Est-ce une clé Nostr valide ?"
           }
         },
+        "remove": {},
         "actions": {
           "export": "Exporter"
         }
-      }
+      },
+      "actions": {}
     },
     "unlock": {
       "unlock_to_continue": "Déverrouiller pour continuer",
@@ -726,7 +728,10 @@
       }
     },
     "account_menu": {
-      "screen_reader": "Basculer la liste déroulante"
+      "screen_reader": "Basculer la liste déroulante",
+      "options": {
+        "account": {}
+      }
     },
     "publishers_table": {
       "payments": "Paiements"
