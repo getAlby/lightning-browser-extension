@@ -295,9 +295,7 @@
       }
     },
     "accounts": {
-      "title": "",
       "account_view": {
-        "title1": "帳戶設置",
         "title2": "帳戶",
         "name": {
           "title": "名稱",
@@ -460,7 +458,6 @@
       }
     },
     "settings": {
-      "title": "",
       "browser_notifications": {
         "title": "瀏覽器通知",
         "subtitle": "付款和認證相關通知。"
@@ -867,7 +864,6 @@
     "advanced": "高級",
     "success": "成功",
     "error": "錯誤",
-    "settings": "",
     "accounts": "帳戶",
     "discover": "發現",
     "connected_sites": "已連接的網站",
@@ -1008,11 +1004,9 @@
     },
     "account_menu": {
       "screen_reader": "切換下拉菜單",
-      "title": "",
       "options": {
         "account": {
           "add": "添加新帳戶",
-          "manage": "",
           "wallet_settings": "",
           "go_to_web_wallet": "管理你的網路帳戶"
         }

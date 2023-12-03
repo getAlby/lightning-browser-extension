@@ -258,7 +258,6 @@
       }
     },
     "accounts": {
-      "title": "",
       "actions": {
         "connect_wallet": ""
       }
@@ -279,7 +278,6 @@
       }
     },
     "settings": {
-      "title": "",
       "browser_notifications": {
         "title": "Selaimen ilmoitukset",
         "subtitle": "Maksuihin ja todentamiseen liittyvät ilmoitukset."
@@ -505,7 +503,6 @@
     "advanced": "Edistynyt",
     "success": "Menestys",
     "error": "Virhe",
-    "settings": "",
     "sats_one": "sat",
     "sats_other": "satia",
     "loading": "ladataan",
@@ -607,11 +604,9 @@
     },
     "account_menu": {
       "screen_reader": "Vaihda pudotusvalikko",
-      "title": "",
       "options": {
         "account": {
-          "add": "Lisää uusi tili",
-          "manage": ""
+          "add": "Lisää uusi tili"
         }
       }
     },

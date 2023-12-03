@@ -294,9 +294,7 @@
       }
     },
     "accounts": {
-      "title": "",
       "account_view": {
-        "title1": "Informacje o koncie",
         "title2": "Edytuj konto",
         "name": {
           "title": "Nazwa",
@@ -369,7 +367,6 @@
       }
     },
     "settings": {
-      "title": "",
       "browser_notifications": {
         "title": "Powiadomienia w przeglądarce",
         "subtitle": "Powiadomienia związane z płatnościami i uwierzytelnianiem."
@@ -666,7 +663,6 @@
     "advanced": "Zaawansowane",
     "success": "Sukces",
     "error": "Błąd",
-    "settings": "",
     "accounts": "Konta",
     "discover": "Odkrywaj",
     "connected_sites": "",
@@ -783,11 +779,9 @@
     },
     "account_menu": {
       "screen_reader": "Przełącznik rozwijany",
-      "title": "",
       "options": {
         "account": {
-          "add": "Dodaj nowe konto",
-          "manage": ""
+          "add": "Dodaj nowe konto"
         }
       }
     },

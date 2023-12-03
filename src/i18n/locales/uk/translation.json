@@ -285,9 +285,7 @@
       }
     },
     "accounts": {
-      "title": "",
       "account_view": {
-        "title1": "",
         "title2": "",
         "name": {
           "title": "",
@@ -359,7 +357,6 @@
       }
     },
     "settings": {
-      "title": "",
       "browser_notifications": {
         "title": "",
         "subtitle": ""
@@ -622,7 +619,6 @@
     "advanced": "",
     "success": "",
     "error": "",
-    "settings": "",
     "accounts": "",
     "discover": "",
     "connected_sites": "",
@@ -733,11 +729,9 @@
     },
     "account_menu": {
       "screen_reader": "",
-      "title": "",
       "options": {
         "account": {
-          "add": "",
-          "manage": ""
+          "add": ""
         }
       }
     },

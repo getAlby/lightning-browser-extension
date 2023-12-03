@@ -285,9 +285,7 @@
       }
     },
     "accounts": {
-      "title": "",
       "account_view": {
-        "title1": "Kontooplysninger",
         "title2": "Rediger konto",
         "name": {
           "title": "Navn",
@@ -359,7 +357,6 @@
       }
     },
     "settings": {
-      "title": "",
       "browser_notifications": {
         "title": "Browsermeddelelser",
         "subtitle": "Meddelelser om betaling og godkendelser."
@@ -622,7 +619,6 @@
     "advanced": "Avanceret",
     "success": "Succes",
     "error": "Fejl",
-    "settings": "",
     "accounts": "Konti",
     "discover": "Opdag",
     "connected_sites": "",
@@ -733,11 +729,9 @@
     },
     "account_menu": {
       "screen_reader": "Skift drop-down",
-      "title": "",
       "options": {
         "account": {
-          "add": "Tilføj en ny konto",
-          "manage": ""
+          "add": "Tilføj en ny konto"
         }
       }
     },

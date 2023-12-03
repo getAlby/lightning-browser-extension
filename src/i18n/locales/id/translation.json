@@ -447,13 +447,11 @@
           "remove_secretkey": "Hapus Master Key",
           "export": "Expor",
           "remove_account": "Hapus akun"
-        },
-        "title1": "Pengaturan Akun"
+        }
       },
       "actions": {
         "connect_wallet": ""
-      },
-      "title": "Akun-akun"
+      }
     },
     "unlock": {
       "unlock_to_continue": "Buka untuk melanjutkan",
@@ -471,7 +469,6 @@
       }
     },
     "settings": {
-      "title": "",
       "browser_notifications": {
         "title": "Notifikasi peramban",
         "subtitle": "Notifikasi terkait pembayaran dan autentikasi."
@@ -790,13 +787,11 @@
       "options": {
         "account": {
           "add": "Tambahkan akun baru",
-          "manage": "",
           "wallet_settings": "",
           "go_to_web_wallet": "Atur akun web kamu"
         }
       },
-      "screen_reader": "Toggle Dropdown",
-      "title": "Ganti akun"
+      "screen_reader": "Toggle Dropdown"
     },
     "transactions_table": {
       "sent": "Terkirim",
@@ -931,7 +926,6 @@
     "confirm_password": "Konfirmasi Kata Sandi",
     "success": "Sukses",
     "error": "Eror",
-    "settings": "",
     "accounts": "Akun-akun",
     "connected_sites": "Situs Terhubung",
     "wallet": "Dompet",

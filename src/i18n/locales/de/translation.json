@@ -298,7 +298,6 @@
         "title": "Erweiterungen der Webseite",
         "subtitle": "Verbesserungen für X, YouTube, etc."
       },
-      "title": "Einstellungen",
       "change_password": {
         "choose_password": {
           "label": "Gebe einen neuen Passcode zum Entsperren ein:"
@@ -382,13 +381,11 @@
       }
     },
     "accounts": {
-      "title": "",
       "actions": {
         "connect_wallet": ""
       },
       "account_view": {
         "title2": "Konto",
-        "title1": "Kontoeinstellungen",
         "name": {
           "title": "Name anzeigen",
           "placeholder": "Konto Anzeigename"
@@ -936,12 +933,10 @@
       "options": {
         "account": {
           "add": "Neues Konto hinzufügen",
-          "manage": "",
           "wallet_settings": "",
           "go_to_web_wallet": "Verwalte dein Web-Konto"
         }
       },
-      "title": "Konto wechseln",
       "screen_reader": "Dropdown umschalten"
     },
     "publishers_table": {
@@ -1046,7 +1041,6 @@
     "amount": "Betrag",
     "copied": "Kopiert!",
     "description": "Beschreibung",
-    "settings": "",
     "sats_other": "sats",
     "confirm_password": "Kennwort bestätigen",
     "help": "Hilfe",

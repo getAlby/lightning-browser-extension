@@ -244,7 +244,6 @@
       }
     },
     "accounts": {
-      "title": "",
       "actions": {
         "connect_wallet": ""
       }
@@ -265,7 +264,6 @@
       }
     },
     "settings": {
-      "title": "",
       "browser_notifications": {
         "title": "",
         "subtitle": ""
@@ -494,7 +492,6 @@
     "advanced": "Altnivelaj",
     "success": "Sukceso",
     "error": "Eraro",
-    "settings": "",
     "connected_sites": "",
     "sats_one": "satoŝio",
     "sats_other": "satoŝioj",
@@ -598,11 +595,9 @@
     },
     "account_menu": {
       "screen_reader": "",
-      "title": "",
       "options": {
         "account": {
-          "add": "",
-          "manage": ""
+          "add": ""
         }
       }
     },

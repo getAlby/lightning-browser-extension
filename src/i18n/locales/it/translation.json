@@ -258,7 +258,6 @@
       }
     },
     "accounts": {
-      "title": "",
       "actions": {
         "connect_wallet": ""
       },
@@ -308,7 +307,6 @@
           "title": "Esporta Account",
           "screen_reader": "Esporta i dettagli dell'account"
         },
-        "title1": "Informazioni account",
         "title2": "Modifica Account",
         "name": {
           "title": "Nome",
@@ -332,7 +330,6 @@
       }
     },
     "settings": {
-      "title": "",
       "browser_notifications": {
         "title": "Notifiche del browser",
         "subtitle": "Notifiche relative ai pagamenti e all'autenticazione."
@@ -620,7 +617,6 @@
     "password": "Password",
     "success": "Successo",
     "error": "Errore",
-    "settings": "",
     "connected_sites": "",
     "loading": "caricamento",
     "amount": "Importo",
@@ -733,11 +729,9 @@
     },
     "account_menu": {
       "screen_reader": "Attiva/disattiva menu a tendina",
-      "title": "",
       "options": {
         "account": {
-          "add": "Aggiungi un nuovo account",
-          "manage": ""
+          "add": "Aggiungi un nuovo account"
         }
       }
     },

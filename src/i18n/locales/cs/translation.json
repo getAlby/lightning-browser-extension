@@ -270,7 +270,6 @@
       }
     },
     "accounts": {
-      "title": "",
       "actions": {
         "connect_wallet": ""
       },
@@ -326,7 +325,6 @@
           "your_ln_address": "Vaše Lightning adresa:",
           "scan_qr": "Importujte tuto peněženku do Zeus nebo BlueWallet naskenováním QR kódu."
         },
-        "title1": "Informace o účtu",
         "title2": "Upravit účet",
         "name": {
           "title": "Jméno",
@@ -389,7 +387,6 @@
       }
     },
     "settings": {
-      "title": "",
       "browser_notifications": {
         "title": "Upozornění prohlížeče",
         "subtitle": "Platební notifikace a notifikace týkající se autentizace."
@@ -700,7 +697,6 @@
     "advanced": "Pokročilé",
     "success": "Úspěch",
     "error": "Chyba",
-    "settings": "",
     "connected_sites": "",
     "sats_one": "sat",
     "sats_other": "satů",
@@ -812,11 +808,9 @@
     },
     "account_menu": {
       "screen_reader": "Přepnout rozbalovací nabídku",
-      "title": "",
       "options": {
         "account": {
-          "add": "Přidat nový účet",
-          "manage": ""
+          "add": "Přidat nový účet"
         }
       }
     },

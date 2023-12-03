@@ -318,7 +318,6 @@
       }
     },
     "accounts": {
-      "title": "",
       "account_view": {
         "title2": "Račun",
         "export": {
@@ -432,7 +431,6 @@
             "failed_to_load": "Nalaganje ključa Nostr ni uspelo. Je to veljaven ključ Nostr?"
           }
         },
-        "title1": "Nastavitve računa",
         "remove": {
           "title": "Odstrani ta račun",
           "error": "Vnešeno ime računa se ne ujema.",
@@ -471,7 +469,6 @@
       "browser_notifications": {
         "title": "Obvestila brskalnika"
       },
-      "title": "",
       "personal_data": {
         "title": "Osebni podatki"
       },
@@ -715,14 +712,12 @@
     "account_menu": {
       "options": {
         "account": {
-          "manage": "",
           "wallet_settings": "",
           "add": "Dodaj nov račun",
           "go_to_web_wallet": "Upravljaj svoj spletni račun"
         }
       },
-      "screen_reader": "Preklopi spustni meni",
-      "title": "Preklopi račun"
+      "screen_reader": "Preklopi spustni meni"
     },
     "publishers_table": {
       "payments": "plačila",

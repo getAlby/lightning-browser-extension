@@ -282,7 +282,6 @@
       }
     },
     "settings": {
-      "title": "",
       "browser_notifications": {
         "title": "ब्राउझर सूचना",
         "subtitle": "भुगतान और प्रमाणीकरण संबंधी सूचनाएँ।"
@@ -572,7 +571,6 @@
     "advanced": "उन्नत",
     "success": "सफलता",
     "error": "त्रुटि",
-    "settings": "",
     "accounts": "खाते",
     "discover": "खोजें",
     "sats_one": "sat",
@@ -697,11 +695,9 @@
     },
     "account_menu": {
       "screen_reader": "Toggle Dropdown",
-      "title": "",
       "options": {
         "account": {
-          "add": "एक नया खाता जोड़ें",
-          "manage": ""
+          "add": "एक नया खाता जोड़ें"
         }
       }
     },

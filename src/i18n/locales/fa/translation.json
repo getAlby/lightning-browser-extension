@@ -317,9 +317,7 @@
       }
     },
     "accounts": {
-      "title": "",
       "account_view": {
-        "title1": "تنظیمات حساب کاربری",
         "title2": "حساب کاربری",
         "name": {
           "title": "نام نمایشی",
@@ -485,7 +483,6 @@
       }
     },
     "settings": {
-      "title": "",
       "browser_notifications": {
         "title": "اعلان های مرورگر",
         "subtitle": "اعلان های مربوط به پرداخت و احراز هویت."
@@ -870,7 +867,6 @@
     "advanced": "پیشرفته",
     "success": "موفقیت",
     "error": "خطا",
-    "settings": "",
     "accounts": "حساب های کاربری",
     "discover": "کشف کنید",
     "connected_sites": "سایت های متصل",
@@ -1023,11 +1019,9 @@
     },
     "account_menu": {
       "screen_reader": "منوی تعویض",
-      "title": "",
       "options": {
         "account": {
           "add": "افزودن حساب کاربری جدید",
-          "manage": "",
           "wallet_settings": "",
           "go_to_web_wallet": "حساب کاربری وب خود را مدیریت کنید"
         }

@@ -285,9 +285,7 @@
       }
     },
     "accounts": {
-      "title": "",
       "account_view": {
-        "title1": "खात्याची माहिती",
         "title2": "खाते संपादित करा",
         "name": {
           "title": "नाव",
@@ -355,7 +353,6 @@
       }
     },
     "settings": {
-      "title": "",
       "browser_notifications": {
         "title": "ब्राउझरकडून सूचना",
         "subtitle": "पेमेंट आणि प्रमाणीकरण संबंधित सूचना."
@@ -645,7 +642,6 @@
     "confirm_password": "पासवर्डची पुष्टी करा",
     "advanced": "पुढे",
     "success": "यश",
-    "settings": "",
     "accounts": "खाते",
     "discover": "शोध",
     "connected_sites": "",
@@ -766,11 +762,9 @@
     },
     "account_menu": {
       "screen_reader": "टॉगल ड्रॉपडाउन",
-      "title": "खाते बदला",
       "options": {
         "account": {
-          "add": "नवीन खाते जोडा",
-          "manage": ""
+          "add": "नवीन खाते जोडा"
         }
       }
     }

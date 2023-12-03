@@ -266,7 +266,6 @@
       }
     },
     "accounts": {
-      "title": "",
       "actions": {
         "connect_wallet": ""
       },
@@ -360,7 +359,6 @@
           "placeholder": "Nome da conta"
         },
         "title2": "Conta",
-        "title1": "Configurações da conta",
         "mnemonic": {
           "title": "🔑 Gerenciamento de chaves",
           "saved": "Chave mestra criptografada e salva com sucesso.",
@@ -438,7 +436,6 @@
       }
     },
     "settings": {
-      "title": "",
       "website_enhancements": {
         "title": "Pagamentos em redes sociais",
         "subtitle": "Reconhece automaticamente endereços relâmpago em perfis do Twitter, Youtube, etc, facilitando o envio de pagamentos."
@@ -914,7 +911,6 @@
     "password": "Senha",
     "success": "Sucesso",
     "error": "Erro",
-    "settings": "",
     "connected_sites": "Sites conectados",
     "sats_one": "sat",
     "sats_other": "sats",
@@ -1065,11 +1061,9 @@
       }
     },
     "account_menu": {
-      "title": "",
       "options": {
         "account": {
           "add": "Adicionar nova conta",
-          "manage": "",
           "wallet_settings": "",
           "go_to_web_wallet": "Acessar sua conta na web"
         }

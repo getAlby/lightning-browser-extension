@@ -267,7 +267,6 @@
       }
     },
     "accounts": {
-      "title": "",
       "actions": {
         "connect_wallet": ""
       },
@@ -306,7 +305,6 @@
           "title": "Eliminar Esta Cuenta",
           "subtitle": "Se eliminarán todos los enlaces vinculados. Por favor, asegúrese de querer hacerlo."
         },
-        "title1": "Información de la Cuenta",
         "title2": "Editar Cuenta",
         "name": {
           "title": "Nombre",
@@ -342,7 +340,6 @@
       }
     },
     "settings": {
-      "title": "",
       "website_enhancements": {
         "title": "Mejoras del sitio web",
         "subtitle": "Mejoras de propinas para Twitter, YouTube, etc."
@@ -687,7 +684,6 @@
     "password": "Contraseña",
     "success": "Exitoso",
     "error": "Error",
-    "settings": "",
     "connected_sites": "Sitios conectados",
     "sats_one": "sat",
     "sats_other": "sats",
@@ -807,11 +803,9 @@
       }
     },
     "account_menu": {
-      "title": "",
       "options": {
         "account": {
           "add": "Agregar una nueva cuenta",
-          "manage": "",
           "wallet_settings": "",
           "go_to_web_wallet": "Administra tu cuenta de Alby"
         }
