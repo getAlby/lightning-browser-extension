@@ -253,7 +253,7 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
             </div>
           )}
 
-          <div className="mt-6 flex justify-between items-center dark:bg-surface-02dp">
+          <div className="mt-6 flex justify-between items-center">
             <Hyperlink
               onClick={async () => {
                 if (window.confirm(t("confirm_delete"))) {
