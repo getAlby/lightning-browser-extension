@@ -1,9 +1,10 @@
-import { CheckIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
 import PublisherCard from "@components/PublisherCard";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import ContentMessage from "~/app/components/ContentMessage";
+import Hyperlink from "~/app/components/Hyperlink";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import Checkbox from "~/app/components/form/Checkbox";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
@@ -16,14 +17,16 @@ function NostrConfirm() {
     keyPrefix: "nostr",
   });
   const { t: tCommon } = useTranslation("common");
+  const { t: tPermissions } = useTranslation("permissions");
   const navState = useNavigationState();
   const origin = navState.origin as OriginData;
   const action = navState.args?.description?.action;
   const peer = navState.args?.description?.peer;
-  const plainText = navState.args?.description?.plaintext;
+  const message = navState.args?.description?.message;
 
-  const details = navState.args?.details;
   const [loading, setLoading] = useState(false);
+  const [showDetails, setShowDetails] = useState(false);
+
   const [rememberPermission, setRememberPermission] = useState(true);
 
   function confirm() {
@@ -50,6 +53,10 @@ function NostrConfirm() {
     msg.error(USER_REJECTED_ERROR);
   }
 
+  function toggleShowDetails() {
+    setShowDetails((current) => !current);
+  }
+
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     confirm();
@@ -68,32 +75,26 @@ function NostrConfirm() {
               isSmall={false}
             />
 
-            {plainText && peer && (
-              <div className="my-4">
-                <div className="shadow mb-4 bg-white dark:bg-surface-02dp p-4 rounded-lg">
-                  <p className="dark:text-white break-words">
-                    <b>Message:</b> {plainText}
-                  </p>
-                  <p className="dark:text-white break-all">
-                    <b>Key:</b> {peer}
-                  </p>
-                </div>
+            {message && (
+              <ContentMessage
+                heading={tPermissions("nostr.nip04Action", {
+                  host: origin.host,
+                  action: action,
+                  defaultValue: "",
+                })}
+                content={message}
+              />
+            )}
+            <div className="flex justify-center mb-4 gap-4">
+              <Hyperlink onClick={toggleShowDetails}>
+                {showDetails ? t("hide_details") : t("view_details")}
+              </Hyperlink>
+            </div>
+            {showDetails && (
+              <div className="whitespace-pre-wrap break-words p-2 mb-4 shadow bg-white rounded-lg dark:bg-surface-02dp text-gray-500 dark:text-gray-400">
+                {`key: ${peer}`}
               </div>
             )}
-
-            <div className="dark:text-white pt-6 mb-4">
-              <p className="mb-2">{t("allow", { host: origin.host })}</p>
-              <p className="dark:text-white">
-                <CheckIcon className="w-5 h-5 mr-2 inline" />
-                {action}
-                {details && (
-                  <>
-                    <br />
-                    <i className="ml-7">{details}</i>
-                  </>
-                )}
-              </p>
-            </div>
           </div>
           <div className="text-center flex flex-col">
             <div className="flex items-center mb-4">

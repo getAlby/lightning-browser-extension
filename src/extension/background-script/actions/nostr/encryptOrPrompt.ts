@@ -36,7 +36,7 @@ const encryptOrPrompt = async (message: MessageEncryptGet, sender: Sender) => {
           description: {
             action: i18n.t("permissions:nostr.nip04encrypt"),
             peer: message.args.peer,
-            plaintext: message.args.plaintext,
+            message: message.args.plaintext,
           },
         },
       });

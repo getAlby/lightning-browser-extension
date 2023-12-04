@@ -35,7 +35,11 @@ const decryptOrPrompt = async (message: MessageDecryptGet, sender: Sender) => {
         ...message,
         action: "public/nostr/confirm",
         args: {
-          description: { action: i18n.t("permissions:nostr.nip04decrypt") },
+          description: {
+            action: i18n.t("permissions:nostr.nip04decrypt"),
+            peer: message.args.peer,
+            message: message.args.ciphertext,
+          },
         },
       });
 
