@@ -1,8 +1,4 @@
-import {
-  ArrowRightIcon,
-  ReceiveIcon,
-  SendIcon,
-} from "@bitcoin-design/bitcoin-icons-react/filled";
+import { ArrowRightIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import Button from "@components/Button";
 import Loading from "@components/Loading";
 import TransactionsTable from "@components/TransactionsTable";
@@ -122,8 +118,12 @@ const DefaultView: FC<Props> = (props) => {
             </a>
           </div>
         )}
-        <div className="flex mb-4 space-x-4">
-          <Button
+        <div className="mb-4 gap-2 grid grid-cols-4">
+          <HomeButton text={tCommon("actions.receive")} />
+          <HomeButton text={tCommon("actions.send")} />
+          <HomeButton text={"Apps"} />
+          <HomeButton text={"Buy"} />
+          {/* <Button
             fullWidth
             icon={<ReceiveIcon className="w-6 h-6" />}
             label={tCommon("actions.receive")}
@@ -141,7 +141,7 @@ const DefaultView: FC<Props> = (props) => {
             onClick={() => {
               navigate("/send");
             }}
-          />
+          /> */}
         </div>
 
         {isBlockedUrl && (
@@ -193,3 +193,10 @@ const DefaultView: FC<Props> = (props) => {
 };
 
 export default DefaultView;
+
+const HomeButton = ({ text }: { text: React.ReactNode }) => (
+  <button className="rounded-xl space-y-2 text-xs font-medium p-4 flex flex-col items-center bg-white dark:bg-surface-06dp hover:bg-gray-50 dark:hover:bg-surface-08dp text-gray-800 dark:text-neutral-200 border border-gray-200 dark:border-gray-700">
+    <ArrowRightIcon className="w-6 h-6 text-primary" />
+    <span>{text}</span>
+  </button>
+);
