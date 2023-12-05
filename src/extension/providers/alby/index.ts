@@ -5,13 +5,22 @@ import WebBTCProvider from "~/extension/providers/webbtc";
 import WebLNProvider from "~/extension/providers/webln";
 
 export default class AlbyProvider extends ProviderBase {
-  webln = new WebLNProvider();
-  nostr = new NostrProvider();
-  webbtc = new WebBTCProvider();
-  liquid = new LiquidProvider();
+  liquid: LiquidProvider;
+  nostr: NostrProvider;
+  webbtc: WebBTCProvider;
+  webln: WebLNProvider;
 
-  constructor() {
+  constructor(
+    liquid: LiquidProvider,
+    nostr: NostrProvider,
+    webbtc: WebBTCProvider,
+    webln: WebLNProvider
+  ) {
     super("alby");
+    this.liquid = liquid;
+    this.nostr = nostr;
+    this.webbtc = webbtc;
+    this.webln = webln;
   }
 
   /**
