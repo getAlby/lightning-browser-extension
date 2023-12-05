@@ -1,5 +1,5 @@
-import { Accounts } from '~/types';
-import { getUniqueAccountName } from '~/common/utils/validations';
+import { Accounts } from "~/types";
+import { getUniqueAccountName } from "~/common/utils/validations";
 
 function getMockAccounts(names: string[]): Accounts {
   const accounts: Accounts = {};
@@ -54,5 +54,4 @@ describe("getUniqueAccountName", () => {
 
     expect(result).toBe("Lnd (1)");
   });
-
 });

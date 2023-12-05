@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from "uuid";
 import { encryptData } from "~/common/lib/crypto";
 import state from "~/extension/background-script/state";
 import type { MessageAccountAdd } from "~/types";
-import { getUniqueAccountName } from '~/common/utils/validations';
+import { getUniqueAccountName } from "~/common/utils/validations";
 
 const add = async (message: MessageAccountAdd) => {
   const newAccount = message.args;
