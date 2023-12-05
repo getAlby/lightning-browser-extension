@@ -1,4 +1,4 @@
-import { Account, Accounts } from '~/types';
+import { Account, Accounts } from "~/types";
 
 export const validate = (formData: Record<string, string>) => {
   let password = "";
@@ -18,23 +18,22 @@ export const validate = (formData: Record<string, string>) => {
 };
 
 export function getUniqueAccountName(name: string, accounts: Accounts): string {
-  // get all accounts names to avoid duplicate names
   const accountNames = Object.values(accounts).map((el: Account) => el.name);
 
-  // increase nameSuffix number recursively
-  while (accountNames.includes(name)) {
-    // get number in between (1) and increase by 1
-    const bracketsValue = +name.substring(name.indexOf("(") + 1, name.lastIndexOf(")"));
-    const accountNameCount = bracketsValue + 1;
-    const nameContainsSuffix = name.match(/\(\d\)/);
-    // if name already contains a suffix, remove it to add the increased
-    if (nameContainsSuffix) {
-      const suffixIndex = name.lastIndexOf('(');
-      name = name.substring(0, suffixIndex);
+  let count = 1;
+  let uniqueName = name;
+
+  while (accountNames.includes(uniqueName)) {
+    const match = uniqueName.match(/\((\d+)\)$/);
+
+    if (match) {
+      const currentCount = parseInt(match[1]);
+      count = currentCount + 1;
+      uniqueName = uniqueName.replace(/\(\d+\)$/, `(${count})`);
+    } else {
+      uniqueName = `${name} (${count})`;
     }
-    const nameSuffix = ` (${accountNameCount})`;
-    name = `${name}${nameSuffix}`;
-    name = name.replace("  ", " ");
   }
-  return name;
+
+  return uniqueName;
 }
