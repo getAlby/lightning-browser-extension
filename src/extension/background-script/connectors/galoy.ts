@@ -23,8 +23,9 @@ import Connector, {
 interface Config {
   walletId: string;
   url: string;
-  headers: Headers;
-  apiCompatibilityMode: boolean;
+  headers?: Headers; // optional for backward compatibility
+  apiCompatibilityMode?: boolean; // optional for backward compatibility
+  accessToken?: string; // only present in old connectors
 }
 
 class Galoy implements Connector {
@@ -33,7 +34,24 @@ class Galoy implements Connector {
 
   constructor(account: Account, config: Config) {
     this.account = account;
-    this.config = config;
+    // assuming that if there is an accessToken left over, headers are not stored
+    const accessToken = config.accessToken;
+    this.config = {
+      ...config,
+      headers: config.headers || this.getLegacyHeaders(accessToken || ""),
+      apiCompatibilityMode:
+        config.apiCompatibilityMode !== undefined
+          ? config.apiCompatibilityMode
+          : true,
+    };
+  }
+
+  getLegacyHeaders(accessToken: string): Headers {
+    return {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${accessToken}`,
+    };
   }
 
   init() {
@@ -98,7 +116,7 @@ class Galoy implements Connector {
     let hasNextPage = true;
     const transactions: ConnectorTransaction[] = [];
 
-    // list max 5 pages of transactions
+    // list a maximum of 5 pages of transactions
     while (hasNextPage && pageCount < 5) {
       const variablesObj: TransactionListVariables = {
         first: transactionsPerPage,
@@ -112,7 +130,6 @@ class Galoy implements Connector {
           query transactionsList($first: Int, $after: String) {
             me {
               defaultAccount {
-                defaultWalletId
                 wallets {
                   id
                   walletCurrency
@@ -127,6 +144,7 @@ class Galoy implements Connector {
                         createdAt
                         settlementAmount
                         memo
+                        direction
                         initiationVia {
                           ... on InitiationViaLn {
                             paymentHash
@@ -174,15 +192,9 @@ class Galoy implements Connector {
         targetWallet.transactions.edges.forEach(
           (edge: { cursor: string; node: TransactionNode }) => {
             const tx = edge.node;
-
-            // Determine transaction type
-            let transactionType: "received" | "sent";
-            if (tx.settlementAmount >= 0) {
-              transactionType = "received";
-            } else {
-              transactionType = "sent";
-            }
-
+            // Determine transaction type based on the direction field
+            const transactionType: "received" | "sent" =
+              tx.direction === "RECEIVE" ? "received" : "sent";
             // Do not display a double negative if sent
             const absSettlementAmount = Math.abs(tx.settlementAmount);
             // Convert createdAt from UNIX timestamp to Date
@@ -314,7 +326,6 @@ class Galoy implements Connector {
         query transactionsList($first: Int, $after: String) {
           me {
             defaultAccount {
-              defaultWalletId
               wallets {
                 id
                 walletCurrency
@@ -362,12 +373,13 @@ class Galoy implements Connector {
 
         const account: GaloyTransactionsAccount = data.me.defaultAccount;
         const wallet = account.wallets.find(
-          (w) => w.id === account.defaultWalletId
+          (w) => w.id === this.config.walletId
         );
-
-        // There should always be a wallet that corresponds to 'defaultWalletId'
         if (wallet === undefined) {
           throw new Error("Bad data received.");
+        }
+        if (wallet.walletCurrency === "USD") {
+          throw new Error("USD currency support is not yet implemented.");
         }
 
         const txEdges = wallet.transactions.edges;
@@ -479,6 +491,7 @@ type TransactionNode = {
   createdAt: number;
   settlementAmount: number;
   memo: string;
+  direction: string;
   initiationVia: {
     paymentHash?: string;
   };
