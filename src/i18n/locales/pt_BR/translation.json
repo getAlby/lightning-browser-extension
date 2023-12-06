@@ -1105,23 +1105,23 @@
   },
   "permissions": {
     "nostr": {
-      "getpublickey": "Ler sua chave pública.",
-      "signmessage": "Assinar mensagem com sua chave.",
-      "nip04decrypt": "Descriptografar dados.",
-      "nip04encrypt": "Criptografar dados."
+      "getpublickey": "Ler sua chave pública",
+      "signmessage": "Assinar mensagem com sua chave",
+      "nip04decrypt": "Descriptografar dados",
+      "nip04encrypt": "Criptografar dados"
     },
     "lnc": {
       "openchannel": ""
     },
     "bitcoin": {
-      "getaddress": "Ler seu endereço de recebimento de Bitcoin."
+      "getaddress": "Ler seu endereço de recebimento de Bitcoin"
     },
     "liquid": {
-      "signschnorr": "Assinar mensagem com sua chave.",
-      "getaddress": "Ler seu endereço de recebimento da Liquid."
+      "signschnorr": "Assinar mensagem com sua chave",
+      "getaddress": "Ler seu endereço de recebimento da Liquid"
     },
     "webln": {
-      "getbalance": "Ler o saldo da sua conta."
+      "getbalance": "Ler o saldo da sua conta"
     }
   }
 }

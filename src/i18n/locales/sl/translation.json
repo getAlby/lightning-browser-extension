@@ -621,65 +621,65 @@
   },
   "permissions": {
     "lnc": {
-      "listinvoices": "Pridobi seznam vseh računov.",
-      "openchannel": "Odpri nov kanal.",
-      "getinfo": "Pridobi informacije vozlišča.",
-      "lookupinvoice": "Pridobi podrobnosti računa.",
-      "addinvoice": "Kreiraj nove račune.",
-      "addholdinvoice": "Kreiraj nov eHODL račune.",
-      "listchannels": "Pridobi opis vseh odprtih kanalov.",
-      "connectpeer": "Vzpostavi povezavo z oddaljenim strežnikom.",
-      "disconnectpeer": "Odjavi iz oddaljenega strežnika.",
-      "queryroutes": "Poišči možno pot.",
-      "listpeers": "Pridobi seznam trenutno aktivnih strežnikov.",
-      "getnodeinfo": "Prodobi kanalne informacije o vozlišču.",
-      "decodepayreq": "Dekodiraj niz plačilne zahteve.",
-      "sendtoroute": "Izvedi plačilo preko določene poti.",
-      "verifymessage": "Overi podpis preko sporočila.",
-      "settleinvoice": "Poravnaj prejeti račun."
+      "listinvoices": "Pridobi seznam vseh računov",
+      "openchannel": "Odpri nov kanal",
+      "getinfo": "Pridobi informacije vozlišča",
+      "lookupinvoice": "Pridobi podrobnosti računa",
+      "addinvoice": "Kreiraj nove račune",
+      "addholdinvoice": "Kreiraj nov eHODL račune",
+      "listchannels": "Pridobi opis vseh odprtih kanalov",
+      "connectpeer": "Vzpostavi povezavo z oddaljenim strežnikom",
+      "disconnectpeer": "Odjavi iz oddaljenega strežnika",
+      "queryroutes": "Poišči možno pot",
+      "listpeers": "Pridobi seznam trenutno aktivnih strežnikov",
+      "getnodeinfo": "Prodobi kanalne informacije o vozlišču",
+      "decodepayreq": "Dekodiraj niz plačilne zahteve",
+      "sendtoroute": "Izvedi plačilo preko določene poti",
+      "verifymessage": "Overi podpis preko sporočila",
+      "settleinvoice": "Poravnaj prejeti račun"
     },
     "commando": {
-      "offer": "Oblikuj ponudbo.",
-      "pay": "Pošlji plačilo na BOLT11 račun.",
-      "connect": "Vzpostavi novo povezavo z drugim vozliščem.",
-      "disconnect": "Zapri obstoječo povezavo s sosednjim vozliščem.",
-      "feerates": "Vrni feerates, ki jih bo uporabil CLN.",
-      "decode": "Dekodiraj niz bolt11/bolt12/rune.",
-      "decodepay": "Preverite in razčlenite niz bolt11.",
-      "checkmessage": "Preveri, ali je podpis ustvarilo dano vozlišče.",
-      "bkpr-listbalances": "Bere seznam vseh tekočih in preteklih stanj računa."
+      "offer": "Oblikuj ponudbo",
+      "pay": "Pošlji plačilo na BOLT11 račun",
+      "connect": "Vzpostavi novo povezavo z drugim vozliščem",
+      "disconnect": "Zapri obstoječo povezavo s sosednjim vozliščem",
+      "feerates": "Vrni feerates, ki jih bo uporabil CLN",
+      "decode": "Dekodiraj niz bolt11/bolt12/rune",
+      "decodepay": "Preverite in razčlenite niz bolt11",
+      "checkmessage": "Preveri, ali je podpis ustvarilo dano vozlišče",
+      "bkpr-listbalances": "Bere seznam vseh tekočih in preteklih stanj računa"
     },
     "lnd": {
-      "addinvoice": "Kreiraj nove račune.",
-      "addholdinvoice": "Kreiraj nove HODL račune.",
-      "openchannel": "Odpri nov kanal.",
-      "listpeers": "Pridobi seznam trenutno aktivnih strežnikov.",
-      "listchannels": "Pridobi opis vseh odprtih kanalov.",
-      "disconnectpeer": "Odjava iz oddaljenega strežnika.",
-      "connectpeer": "Vzpostavi povezavo z oddaljenim strežnikom.",
-      "listinvoices": "Pridobi seznam vseh računov.",
-      "getnodeinfo": "Pridobi kanalne informacije o vozlišču.",
-      "verifymessage": "Preveri podpis preko sporočila.",
-      "queryroutes": "Poišči možno pot.",
-      "lookupinvoice": "Preglej podrobnosti računa.",
-      "settleinvoice": "Poravnaj sprejete račune.",
-      "sendtoroute": "Izvedi plačilo preko določene poti."
+      "addinvoice": "Kreiraj nove račune",
+      "addholdinvoice": "Kreiraj nove HODL račune",
+      "openchannel": "Odpri nov kanal",
+      "listpeers": "Pridobi seznam trenutno aktivnih strežnikov",
+      "listchannels": "Pridobi opis vseh odprtih kanalov",
+      "disconnectpeer": "Odjava iz oddaljenega strežnika",
+      "connectpeer": "Vzpostavi povezavo z oddaljenim strežnikom",
+      "listinvoices": "Pridobi seznam vseh računov",
+      "getnodeinfo": "Pridobi kanalne informacije o vozlišču",
+      "verifymessage": "Preveri podpis preko sporočila",
+      "queryroutes": "Poišči možno pot",
+      "lookupinvoice": "Preglej podrobnosti računa",
+      "settleinvoice": "Poravnaj sprejete račune",
+      "sendtoroute": "Izvedi plačilo preko določene poti"
     },
     "liquid": {
-      "signschnorr": "Podpiše sporočilo s tvojim ključem.",
-      "getaddress": "Bere tvoj Liquid naslov za prejemanje."
+      "signschnorr": "Podpiše sporočilo s tvojim ključem",
+      "getaddress": "Bere tvoj Liquid naslov za prejemanje"
     },
     "nostr": {
-      "nip04encrypt": "Kriptiraj podatke.",
-      "signmessage": "Podpiši sporočilo s svojim ključem.",
-      "nip04decrypt": "Dekriptiraj podatke.",
-      "getpublickey": "Bere tvoj javni ključ."
+      "nip04encrypt": "Kriptiraj podatke",
+      "signmessage": "Podpiši sporočilo s svojim ključem",
+      "nip04decrypt": "Dekriptiraj podatke",
+      "getpublickey": "Bere tvoj javni ključ"
     },
     "webln": {
-      "getbalance": "Bere stanje tvojega računa."
+      "getbalance": "Bere stanje tvojega računa"
     },
     "bitcoin": {
-      "getaddress": "Bere tvoj Bitcoin naslov za prejemanje."
+      "getaddress": "Bere tvoj Bitcoin naslov za prejemanje"
     }
   },
   "components": {
