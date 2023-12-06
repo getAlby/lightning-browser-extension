@@ -51,36 +51,24 @@ if (clientId && clientSecret) {
   );
 } else {
   const oauthCredentials = {
-    development: {
-      testnet: {
-        id: "TliTCTtJ49",
-        secret: "35RixI2gv0xloVYA0Iq3",
-      },
-      mainnet: {
-        id: "NT8bFB23Sk",
-        secret: "wWp7BPpYOm1H0GwSVVpY",
-      },
+    testnet: {
+      id: "TliTCTtJ49",
+      secret: "35RixI2gv0xloVYA0Iq3",
     },
-    production: {
-      testnet: {
-        id: "TliTCTtJ49",
-        secret: "35RixI2gv0xloVYA0Iq3",
-      },
-      mainnet: {
-        id: "NT8bFB23Sk",
-        secret: "wWp7BPpYOm1H0GwSVVpY",
-      },
+    mainnet: {
+      id: "NT8bFB23Sk",
+      secret: "wWp7BPpYOm1H0GwSVVpY",
     },
   };
 
   // setup ALBY_OAUTH_CLIENT_ID
-  const selectedOAuthCredentials = oauthCredentials[nodeEnv]?.[network];
+  const selectedOAuthCredentials = oauthCredentials[network];
   if (!selectedOAuthCredentials) {
     throw new Error(
-      `No OAuth credentials found for current configuration: NODE_ENV=${nodeEnv} network=${network} oauthBrowser=${oauthBrowser}`
+      `No OAuth credentials found for current configuration: network=${network}`
     );
   }
-  console.info("Using OAuth credentials for", nodeEnv, oauthBrowser, network);
+  console.info("Using OAuth credentials for", network);
   process.env.ALBY_OAUTH_CLIENT_ID = selectedOAuthCredentials.id;
   process.env.ALBY_OAUTH_CLIENT_SECRET = selectedOAuthCredentials.secret;
 }
