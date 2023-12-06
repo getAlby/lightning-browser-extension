@@ -54,12 +54,6 @@
         "drag_and_drop": "将你的macaroon拖放到此处或<0>浏览</0>",
         "title": "LND"
       },
-      "bitcoin_jungle": {
-        "page": {
-          "title": "连接<0>比特币丛林钱包</0>"
-        },
-        "title": "比特币丛林钱包"
-      },
       "eclair": {
         "url": {
           "label": "Eclair URL",
@@ -88,6 +82,18 @@
         },
         "title": "Citadel"
       },
+      "blink": {
+        "title": "眨眼钱包",
+        "page": {
+          "title": "连接<0>眨眼钱包</0>"
+        }
+      },
+      "bitcoin_jungle": {
+        "title": "比特币丛林钱包",
+        "page": {
+          "title": "连接<0>比特币丛林钱包</0>"
+        }
+      },
       "btcpay": {
         "page": {
           "instructions": "导航到你的BTCPayServer并以管理员身份登录。转到服务器设置 > 服务 > LND Rest - 查看信息。然后点击 \"查看二维码信息 \"并复制二维码数据。把它粘贴在下面：",
@@ -101,12 +107,6 @@
           "label": "配置数据",
           "placeholder": "config=http://your-btc-pay.org/lnd-config/212121/lnd.config"
         }
-      },
-      "blink": {
-        "page": {
-          "title": "连接<0>眨眼钱包</0>"
-        },
-        "title": "眨眼钱包"
       },
       "commando": {
         "config": {

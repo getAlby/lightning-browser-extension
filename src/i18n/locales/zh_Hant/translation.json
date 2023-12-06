@@ -211,26 +211,6 @@
           "title": "連接<0>Bitcoin Jungle Wallet</0>"
         }
       },
-      "galoy": {
-        "phone_number": {
-          "label": "輸入你的電話號碼"
-        },
-        "sms_code": {
-          "label": "輸入你的短信驗證碼"
-        },
-        "token": {
-          "label": "輸入你的 JWT 令牌",
-          "info": "當前正在升級 {{label}} 登錄名。如果你是高級使用者，你可以通過<0>網絡錢包（wallet.mainnet.galoy.io）</0><1/><1/>登錄來獲取你的JWT令牌，JWT看起來像：<2>eyJhbG...</2><1/><1/>"
-        },
-        "actions": {
-          "login": "登錄"
-        },
-        "errors": {
-          "setup_failed": "設置失敗",
-          "missing_token": "JWT不存在，無法登陸。",
-          "invalid_token": "傳遞了無效的JWT"
-        }
-      },
       "btcpay": {
         "title": "BTCPay Server",
         "page": {
