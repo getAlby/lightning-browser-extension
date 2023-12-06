@@ -339,7 +339,7 @@ export default class Alby implements Connector {
       return null;
     }
     const urlSearchParams = new URLSearchParams(url.split("?")[1]);
-    return urlSearchParams.get("code") || null;
+    return urlSearchParams.get("code");
   }
 
   private async _request<T>(func: (client: Client) => T) {
