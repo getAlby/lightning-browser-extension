@@ -3,7 +3,6 @@ import ConnectBtcpay from "@screens/connectors/ConnectBtcpay";
 import ConnectCitadel from "@screens/connectors/ConnectCitadel";
 import ConnectEclair from "@screens/connectors/ConnectEclair";
 import ConnectGaloy, { galoyUrls } from "@screens/connectors/ConnectGaloy";
-import ConnectKollider from "@screens/connectors/ConnectKollider";
 import ConnectLnbits from "@screens/connectors/ConnectLnbits";
 import ConnectLnc from "@screens/connectors/ConnectLnc";
 import ConnectLnd from "@screens/connectors/ConnectLnd";
@@ -22,12 +21,10 @@ import core_ln from "/static/assets/icons/core_ln.svg";
 import eclair from "/static/assets/icons/eclair.jpg";
 import galoyBitcoinJungle from "/static/assets/icons/galoy_bitcoin_jungle.png";
 import galoyBlink from "/static/assets/icons/galoy_blink.png";
-import kolliderLogo from "/static/assets/icons/kollider.png";
 import lightning_node from "/static/assets/icons/lightning_node.png";
 import lightning_terminal from "/static/assets/icons/lightning_terminal.png";
 import lnbits from "/static/assets/icons/lnbits.png";
 import lnd from "/static/assets/icons/lnd.png";
-import lndhubBlueWallet from "/static/assets/icons/lndhub_bluewallet.png";
 import lndhubGo from "/static/assets/icons/lndhub_go.png";
 import mynode from "/static/assets/icons/mynode.png";
 import raspiblitz from "/static/assets/icons/raspiblitz.png";
@@ -66,21 +63,6 @@ const galoyPaths: { [key: string]: keyof typeof galoyUrls } = {
   blink: "galoy-blink",
   bitcoinJungle: "galoy-bitcoin-jungle",
 };
-
-const kolliderConnectorRoutes: ChildRoute[] = [
-  {
-    index: true,
-    element: <ConnectKollider variant="select" />,
-  },
-  {
-    path: "create",
-    element: <ConnectKollider variant="create" />,
-  },
-  {
-    path: "login",
-    element: <ConnectKollider variant="login" />,
-  },
-];
 
 const connectorMap: { [key: string]: ConnectorRoute } = {
   lnd: {
@@ -139,29 +121,15 @@ const connectorMap: { [key: string]: ConnectorRoute } = {
   },
   "lnd-hub-go": {
     path: "lnd-hub-go",
-    element: <ConnectLndHub lndHubType="lndhub_go" />,
+    element: <ConnectLndHub />,
     title: i18n.t("translation:choose_connector.lndhub_go.title"),
     logo: lndhubGo,
-  },
-  "lnd-hub-bluewallet": {
-    path: "lnd-hub-bluewallet",
-    element: <ConnectLndHub />,
-    title: i18n.t("translation:choose_connector.lndhub_bluewallet.title"),
-    logo: lndhubBlueWallet,
   },
   eclair: {
     path: "eclair",
     element: <ConnectEclair />,
     title: i18n.t("translation:choose_connector.eclair.title"),
     logo: eclair,
-  },
-  kollider: {
-    path: "kollider",
-    element: <ConnectKollider variant="select" />,
-    title: i18n.t("translation:choose_connector.kollider.title"),
-    description: i18n.t("translation:choose_connector.kollider.description"),
-    logo: kolliderLogo,
-    children: kolliderConnectorRoutes,
   },
   [galoyPaths.blink]: {
     path: galoyPaths.blink,
@@ -258,8 +226,6 @@ function getConnectorRoutes(): ConnectorRoute[] {
     connectorMap["commando"],
     connectorMap["lnbits"],
     connectorMap["lnd-hub-go"],
-    connectorMap["kollider"],
-    connectorMap["lnd-hub-bluewallet"],
     connectorMap["eclair"],
     connectorMap["btcpay"],
     connectorMap[galoyPaths.blink],

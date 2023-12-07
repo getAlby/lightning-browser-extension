@@ -52,16 +52,17 @@ export default function TransactionModal({
         onClose();
       }}
       contentLabel={"Transactions"}
+      position="top"
     >
       <div className="p-3 flex flex-col gap-4 justify-center ">
         <div>
           <div className="flex items-center justify-center">
             {getTransactionType(transaction) == "outgoing" ? (
-              <div className="flex justify-center items-center bg-orange-100 dark:bg-[#261911] rounded-full p-8">
+              <div className="flex justify-center items-center bg-orange-100 dark:bg-[#261911] rounded-full p-4">
                 <ArrowUpIcon className="w-8 h-8 text-orange-400 stroke-[5px]" />
               </div>
             ) : (
-              <div className="flex justify-center items-center bg-green-100 dark:bg-[#0F1E1A] rounded-full p-8">
+              <div className="flex justify-center items-center bg-green-100 dark:bg-[#0F1E1A] rounded-full p-4">
                 <ArrowDownIcon className="w-8 h-8 text-green-400 stroke-[5px]" />
               </div>
             )}
@@ -100,6 +101,12 @@ export default function TransactionModal({
             <TransactionDetailRow
               title={t("fee")}
               content={getFormattedSats(transaction.totalFees)}
+            />
+          )}
+          {transaction.title && (
+            <TransactionDetailRow
+              title={tCommon("description")}
+              content={transaction.title}
             />
           )}
           {transaction.publisherLink && transaction.title && (
@@ -172,13 +179,13 @@ export default function TransactionModal({
 }
 
 const Dt = ({ children }: { children: React.ReactNode }) => (
-  <dt className="basis-28 text-gray-400 dark:text-neutral-500 text-right">
+  <dt className="w-24 text-gray-400 dark:text-neutral-500 text-right">
     {children}
   </dt>
 );
 
 const Dd = ({ children }: { children: React.ReactNode }) => (
-  <dd className="flex-1 text-gray-800 dark:text-neutral-200 break-all whitespace-pre-wrap">
+  <dd className="text-gray-800 dark:text-neutral-200 break-words whitespace-pre-wrap overflow-hidden">
     {children}
   </dd>
 );
@@ -190,7 +197,7 @@ const TransactionDetailRow = ({
   title: React.ReactNode | string;
   content: React.ReactNode | string;
 }) => (
-  <div className="flex p-1 text-sm leading-5 space-x-3">
+  <div className="grid grid-cols-[auto,1fr] p-1 text-sm leading-5 space-x-3">
     <Dt>{title}</Dt>
     <Dd>{content}</Dd>
   </div>

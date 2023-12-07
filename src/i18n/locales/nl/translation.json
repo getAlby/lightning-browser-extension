@@ -49,20 +49,6 @@
           "connection_failed": "Connectie gefaald. Zijn je LND credentials correct?"
         }
       },
-      "lndhub_bluewallet": {
-        "title": "Bluewallet",
-        "page": {
-          "title": "Verbind met BlueWallet",
-          "description": "Kies in BlueWallet de Lightning wallet waarmee je wilt verbinden, open deze, klik op \"...\", klik op Exporteren/Back-up om de QR-code weer te geven en scan deze."
-        },
-        "uri": {
-          "label": "BlueWallet Export URI"
-        },
-        "errors": {
-          "invalid_uri": "BlueWallet URI invalide",
-          "connection_failed": "Connectie gefaald. Is je BlueWallet URI correct?"
-        }
-      },
       "lndhub_go": {
         "title": "LNDHub",
         "page": {
@@ -637,60 +623,6 @@
       "label": {
         "auth": ""
       }
-    }
-  },
-  "permissions": {
-    "commando": {
-      "bkpr-listbalances": "",
-      "checkmessage": "",
-      "connect": "",
-      "decode": "",
-      "decodepay": "",
-      "disconnect": "",
-      "feerates": "",
-      "fundchannel": "",
-      "getinfo": "",
-      "getroute": "",
-      "invoice": "",
-      "keysend": "",
-      "listforwards": "",
-      "listfunds": "",
-      "listinvoices": "",
-      "listnodes": "",
-      "listoffers": "",
-      "listpays": "",
-      "listpeers": "",
-      "listsendpays": "",
-      "listtransactions": "",
-      "multifundchannel": "",
-      "offer": "",
-      "pay": "",
-      "sendpay": "",
-      "setchannel": "",
-      "signmessage": ""
-    },
-    "lnd": {
-      "getinfo": "",
-      "listchannels": "",
-      "listinvoices": "",
-      "channelbalance": "",
-      "walletbalance": "",
-      "openchannel": "",
-      "connectpeer": "",
-      "disconnectpeer": "",
-      "estimatefee": "",
-      "getchaninfo": "",
-      "getnetworkinfo": "",
-      "getnodeinfo": "",
-      "gettransactions": "",
-      "listpayments": "",
-      "listpeers": "",
-      "lookupinvoice": "",
-      "queryroutes": "",
-      "verifymessage": "",
-      "sendtoroute": "",
-      "decodepayreq": "",
-      "routermc": ""
     }
   }
 }

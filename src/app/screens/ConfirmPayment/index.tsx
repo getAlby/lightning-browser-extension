@@ -137,7 +137,7 @@ function ConfirmPayment() {
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <ScreenHeader title={!successMessage ? t("title") : tCommon("success")} />
       {!successMessage ? (
-        <form onSubmit={handleSubmit} className="h-full">
+        <form onSubmit={handleSubmit} className="grow flex">
           <Container justifyBetween maxWidth="sm">
             <div>
               {navState.origin && (
@@ -180,27 +180,29 @@ function ConfirmPayment() {
           </Container>
         </form>
       ) : (
-        <Container justifyBetween maxWidth="sm">
-          <ResultCard
-            isSuccess
-            message={
-              !navState.origin
-                ? successMessage
-                : tCommon("success_message", {
-                    amount: formattedInvoiceSats,
-                    fiatAmount: showFiat ? ` (${fiatAmount})` : ``,
-                    destination: navState.origin.name,
-                  })
-            }
-          />
-          <div className="mt-4">
-            <Button
-              onClick={close}
-              label={tCommon("actions.close")}
-              fullWidth
+        <div className="grow">
+          <Container justifyBetween maxWidth="sm">
+            <ResultCard
+              isSuccess
+              message={
+                !navState.origin
+                  ? successMessage
+                  : tCommon("success_message", {
+                      amount: formattedInvoiceSats,
+                      fiatAmount: showFiat ? ` (${fiatAmount})` : ``,
+                      destination: navState.origin.name,
+                    })
+              }
             />
-          </div>
-        </Container>
+            <div className="mt-4">
+              <Button
+                onClick={close}
+                label={tCommon("actions.close")}
+                fullWidth
+              />
+            </div>
+          </Container>
+        </div>
       )}
     </div>
   );

@@ -36,14 +36,12 @@
     },
     "choose_path": {
       "other": {
-        "description": "Sambungkan dengan wallet lightning atau node yang sudah ada dan sesuaikan pada berbagai konektor.",
         "and_more": "& lainnya...",
         "connect": "Sambung",
         "title": "Wallets Lainnya"
       },
       "alby": {
         "title": "Akun Alby",
-        "description": "Daftar atau gunakan akun Alby yang sudah ada untuk memulai pembayaran dengan lightning secara cepat.",
         "connect": "Koneksi dengan Alby"
       }
     },
@@ -94,20 +92,6 @@
         "pairing_phrase": {
           "label": "Pairing phrase kamu: ",
           "placeholder": "secret stack sats phrase"
-        }
-      },
-      "lndhub_bluewallet": {
-        "title": "Bluewallet",
-        "page": {
-          "title": "Sambungkan dengan Bluewallet",
-          "description": "Pada Bluewallet, pilih wallet yang kamu ingin sambungkan, buka, lalu klik pada \"...\", klik pada Export/Backup untuk menampilkan kode QR dan pindai dengan webcam kamu."
-        },
-        "uri": {
-          "label": "BlueWallet Export URI"
-        },
-        "errors": {
-          "invalid_uri": "BlueWallet URI Salah",
-          "connection_failed": "Koneksi gagal. Apakah BlueWallet URI kamu benar?"
         }
       },
       "lndhub_go": {
@@ -244,34 +228,6 @@
         },
         "actions": {
           "login": "Login"
-        }
-      },
-      "kollider": {
-        "title": "Kollider",
-        "description": "Masuk pada akun Kollider",
-        "warning": "⚠️ Mohon pastikan kamu menyimpan kredensial di aplikasi password manager secara aman. Jika tidak ada kredensial tersebut, akun kamu tidak dapat dipulihkan.",
-        "choose_path": {
-          "title": "Sambungkan dengan Kollider Wallet",
-          "description": "Login atau daftar akun Kollider dan sambungkan dengan Alby.",
-          "create_new": "Daftar"
-        },
-        "create": {
-          "title": "Buat akun Kollider dan sambungkan dengan Alby",
-          "description": "Buat akun Kollider untuk mengirim, menerima, dan menukar Bitcoin."
-        },
-        "login": {
-          "title": "Sambungkan akun Kollider kamu"
-        },
-        "username": {
-          "label": "Username"
-        },
-        "currency": {
-          "label": "Pilih mata uang akun kamu"
-        },
-        "errors": {
-          "connection_failed": "Koneksi gagal. Apakah kamu yakin data akun sudah benar?",
-          "user_already_exists": "Username sudah terpakai",
-          "registration_limit_exceeded": "Limit pendaftaran sudah maksimal, coba lagi dalam beberapa saat."
         }
       },
       "btcpay": {
@@ -899,23 +855,23 @@
   },
   "permissions": {
     "nostr": {
-      "nip04decrypt": "Dekripsi data.",
-      "getpublickey": "Membaca kunci publik Anda.",
-      "nip04encrypt": "Enkripsi data."
+      "nip04decrypt": "Dekripsi data",
+      "getpublickey": "Membaca kunci publik Anda",
+      "nip04encrypt": "Enkripsi data"
     },
     "commando": {
-      "decode": "Decode teks bolt11/bolt12/rune."
+      "decode": "Decode teks bolt11/bolt12/rune"
     },
     "lnc": {
-      "addinvoice": "Buat invoice baru.",
-      "listinvoices": "Dapatkan daftar dari semua invoice.",
-      "openchannel": "Buka channel baru.",
-      "listchannels": "Dapatkan deskripsi dari semua channel yang terbuka.",
-      "getinfo": "Dapatkan informasi node."
+      "addinvoice": "Buat invoice baru",
+      "listinvoices": "Dapatkan daftar dari semua invoice",
+      "openchannel": "Buka channel baru",
+      "listchannels": "Dapatkan deskripsi dari semua channel yang terbuka",
+      "getinfo": "Dapatkan informasi node"
     },
     "lnd": {
-      "addinvoice": "Buat invoice baru.",
-      "addholdinvoice": "Buat invoice HOLD baru."
+      "addinvoice": "Buat invoice baru",
+      "addholdinvoice": "Buat invoice HOLD baru"
     }
   },
   "common": {

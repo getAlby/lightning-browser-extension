@@ -60,12 +60,6 @@
       }
     },
     "choose_connector": {
-      "lndhub_bluewallet": {
-        "title": "Bluewallet",
-        "page": {
-          "title": "Σύνδεση σε BlueWallet"
-        }
-      },
       "lnbits": {
         "title": "LNbits"
       },
@@ -102,11 +96,6 @@
         },
         "password": {
           "label": "Κωδικός Eclair"
-        }
-      },
-      "kollider": {
-        "username": {
-          "label": "Όνομα χρήστη"
         }
       },
       "commando": {
