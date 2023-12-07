@@ -1070,7 +1070,10 @@
         "message": "Message",
         "app": "App",
         "podcast": "Podcast",
-        "episode": "Episode"
+        "episode": "Episode",
+        "action": "Action",
+        "timestamp": "Timestamp",
+        "totalAmount": "Total amount"
       },
       "open_location": "Open website"
     },
