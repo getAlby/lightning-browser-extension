@@ -71,7 +71,7 @@ describe("AccountMenu", () => {
     expect(screen.getByText("Balance")).toBeInTheDocument();
     expect(screen.getByText("LND account")).toBeInTheDocument();
     expect(screen.getByText("Galoy account")).toBeInTheDocument();
-    expect(screen.getByText("Add a new account")).toBeInTheDocument();
-    expect(screen.getByText("Manage accounts")).toBeInTheDocument();
+    expect(screen.getByText("Connect a Wallet")).toBeInTheDocument();
+    expect(screen.getByText("Manage Wallets")).toBeInTheDocument();
   });
 });
