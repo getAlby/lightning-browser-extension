@@ -177,7 +177,7 @@ function AccountDetail() {
         </div>
 
         <div>
-          <div className="shadow bg-white sm:rounded-md sm:overflow-hidden p-6 dark:bg-surface-01dp flex flex-col gap-4">
+          <div className="shadow bg-white rounded-md sm:overflow-hidden p-6 dark:bg-surface-01dp flex flex-col gap-4">
             <form
               onSubmit={(e: FormEvent) => {
                 e.preventDefault();
@@ -311,7 +311,7 @@ function AccountDetail() {
             {t("mnemonic.title")}
           </h2>
 
-          <div className="shadow bg-white sm:rounded-md sm:overflow-hidden p-6 dark:bg-surface-01dp flex flex-col gap-4">
+          <div className="shadow bg-white rounded-md sm:overflow-hidden p-6 dark:bg-surface-01dp flex flex-col gap-4">
             {hasMnemonic && (
               <Alert type="warn">{t("mnemonic.backup.warning")}</Alert>
             )}
@@ -509,7 +509,7 @@ function AccountDetail() {
             </span>
             <div className="flex-grow border-t border-gray-300 dark:border-gray-700"></div>
           </div>
-          <div className="shadow bg-white sm:rounded-md sm:overflow-hidden mb-5 px-6 py-2 divide-y divide-gray-200 dark:divide-neutral-700 dark:bg-surface-01dp">
+          <div className="shadow bg-white rounded-md sm:overflow-hidden mb-5 px-6 py-2 divide-y divide-gray-200 dark:divide-neutral-700 dark:bg-surface-01dp">
             {hasMnemonic && (
               <Setting
                 title={t("remove_secretkey.title")}
