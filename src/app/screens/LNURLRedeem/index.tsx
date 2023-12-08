@@ -74,7 +74,7 @@ function LNURLRedeem() {
       >
         {t("title")}
       </Header>
-      <form onSubmit={handleSubmit} className="h-full">
+      <form onSubmit={handleSubmit} className="flex grow">
         <Container justifyBetween maxWidth="sm">
           <div className="pt-4">
             <TextField

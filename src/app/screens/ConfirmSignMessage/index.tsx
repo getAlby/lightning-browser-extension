@@ -63,34 +63,38 @@ function ConfirmSignMessage() {
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <ScreenHeader title={t("title")} />
       {!successMessage ? (
-        <Container justifyBetween maxWidth="sm">
-          <div>
+        <div className="grow">
+          <Container justifyBetween maxWidth="sm">
+            <div>
+              <PublisherCard
+                title={origin.name}
+                image={origin.icon}
+                url={origin.host}
+              />
+              <ContentMessage
+                heading={t("content", { host: origin.host })}
+                content={message}
+              />
+            </div>
+            <ConfirmOrCancel
+              disabled={loading}
+              loading={loading}
+              onConfirm={confirm}
+              onCancel={reject}
+            />
+          </Container>
+        </div>
+      ) : (
+        <div className="grow">
+          <Container maxWidth="sm">
             <PublisherCard
               title={origin.name}
               image={origin.icon}
               url={origin.host}
             />
-            <ContentMessage
-              heading={t("content", { host: origin.host })}
-              content={message}
-            />
-          </div>
-          <ConfirmOrCancel
-            disabled={loading}
-            loading={loading}
-            onConfirm={confirm}
-            onCancel={reject}
-          />
-        </Container>
-      ) : (
-        <Container maxWidth="sm">
-          <PublisherCard
-            title={origin.name}
-            image={origin.icon}
-            url={origin.host}
-          />
-          <SuccessMessage message={successMessage} onClose={close} />
-        </Container>
+            <SuccessMessage message={successMessage} onClose={close} />
+          </Container>
+        </div>
       )}
     </div>
   );

@@ -98,76 +98,86 @@ function ConfirmSignPsbt() {
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <ScreenHeader title={t("title")} />
       {!successMessage ? (
-        <Container justifyBetween maxWidth="sm">
-          <div className="flex flex-col gap-4 mb-4">
+        <div className="grow">
+          <Container justifyBetween maxWidth="sm">
+            <div className="flex flex-col gap-4 mb-4">
+              <PublisherCard
+                title={origin.name}
+                image={origin.icon}
+                url={origin.host}
+              />
+              <div className="p-4 shadow bg-white dark:bg-surface-02dp rounded-lg overflow-hidden flex flex-col gap-4">
+                <h2 className="font-medium dark:text-white">
+                  {t("allow_sign", { host: origin.host })}
+                </h2>
+              </div>
+              <div className="flex w-full justify-center">
+                <Hyperlink onClick={toggleShowAddresses}>
+                  {showAddresses ? t("hide_details") : t("view_details")}
+                </Hyperlink>
+              </div>
+
+              {showAddresses && (
+                <>
+                  <div className="p-4 shadow bg-white dark:bg-surface-02dp rounded-lg overflow-hidden flex flex-col gap-4">
+                    <p className="font-medium dark:text-white">{t("inputs")}</p>
+                    <div className="flex flex-col gap-4">
+                      {preview.inputs.map((input) => (
+                        <AddressPreview key={input.address} t={t} {...input} />
+                      ))}
+                    </div>
+                    <p className="font-medium dark:text-white">
+                      {t("outputs")}
+                    </p>
+                    <div className="flex flex-col gap-4">
+                      {preview.outputs.map((output) => (
+                        <AddressPreview
+                          key={output.address}
+                          t={t}
+                          {...output}
+                        />
+                      ))}
+                    </div>
+                    <p className="font-medium dark:text-white">{t("fee")}</p>
+                    <p className="font-medium text-sm text-gray-500 dark:text-gray-400">
+                      {getFormattedSats(preview.fee)}
+                    </p>
+                  </div>
+                  <div className="flex w-full justify-center">
+                    <Hyperlink onClick={toggleShowHex}>
+                      {showHex
+                        ? t("hide_raw_transaction")
+                        : t("view_raw_transaction")}
+                    </Hyperlink>
+                  </div>
+                </>
+              )}
+
+              {showHex && (
+                <div className="break-all p-2 mb-4 shadow bg-white rounded-lg dark:bg-surface-02dp text-gray-500 dark:text-gray-400">
+                  {psbt}
+                </div>
+              )}
+            </div>
+            <ConfirmOrCancel
+              disabled={loading}
+              loading={loading}
+              onConfirm={confirm}
+              onCancel={reject}
+            />
+          </Container>
+        </div>
+      ) : (
+        <div className="grow">
+          <Container maxWidth="sm">
             <PublisherCard
               title={origin.name}
               image={origin.icon}
               url={origin.host}
             />
-            <div className="p-4 shadow bg-white dark:bg-surface-02dp rounded-lg overflow-hidden flex flex-col gap-4">
-              <h2 className="font-medium dark:text-white">
-                {t("allow_sign", { host: origin.host })}
-              </h2>
-            </div>
-            <div className="flex w-full justify-center">
-              <Hyperlink onClick={toggleShowAddresses}>
-                {showAddresses ? t("hide_details") : t("view_details")}
-              </Hyperlink>
-            </div>
-
-            {showAddresses && (
-              <>
-                <div className="p-4 shadow bg-white dark:bg-surface-02dp rounded-lg overflow-hidden flex flex-col gap-4">
-                  <p className="font-medium dark:text-white">{t("inputs")}</p>
-                  <div className="flex flex-col gap-4">
-                    {preview.inputs.map((input) => (
-                      <AddressPreview key={input.address} t={t} {...input} />
-                    ))}
-                  </div>
-                  <p className="font-medium dark:text-white">{t("outputs")}</p>
-                  <div className="flex flex-col gap-4">
-                    {preview.outputs.map((output) => (
-                      <AddressPreview key={output.address} t={t} {...output} />
-                    ))}
-                  </div>
-                  <p className="font-medium dark:text-white">{t("fee")}</p>
-                  <p className="font-medium text-sm text-gray-500 dark:text-gray-400">
-                    {getFormattedSats(preview.fee)}
-                  </p>
-                </div>
-                <div className="flex w-full justify-center">
-                  <Hyperlink onClick={toggleShowHex}>
-                    {showHex
-                      ? t("hide_raw_transaction")
-                      : t("view_raw_transaction")}
-                  </Hyperlink>
-                </div>
-              </>
-            )}
-
-            {showHex && (
-              <div className="break-all p-2 mb-4 shadow bg-white rounded-lg dark:bg-surface-02dp text-gray-500 dark:text-gray-400">
-                {psbt}
-              </div>
-            )}
-          </div>
-          <ConfirmOrCancel
-            disabled={loading}
-            loading={loading}
-            onConfirm={confirm}
-            onCancel={reject}
-          />
-        </Container>
-      ) : (
-        <Container maxWidth="sm">
-          <PublisherCard
-            title={origin.name}
-            image={origin.icon}
-            url={origin.host}
-          />
-          <SuccessMessage message={successMessage} onClose={close} />
-        </Container>
+            <SuccessMessage message={successMessage} onClose={close} />
+          </Container>
+        </div>
       )}
     </div>
   );

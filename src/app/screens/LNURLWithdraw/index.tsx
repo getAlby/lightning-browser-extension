@@ -140,38 +140,42 @@ function LNURLWithdraw() {
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <ScreenHeader title={t("title")} />
       {!successMessage ? (
-        <Container justifyBetween maxWidth="sm">
-          <div>
-            {origin ? (
-              <PublisherCard
-                title={origin.name}
-                image={origin.icon}
-                url={details.domain}
-              />
-            ) : (
-              <PublisherCard title={details.domain} />
-            )}
-            {renderAmount()}
-          </div>
+        <div className="grow">
+          <Container justifyBetween maxWidth="sm">
+            <div>
+              {origin ? (
+                <PublisherCard
+                  title={origin.name}
+                  image={origin.icon}
+                  url={details.domain}
+                />
+              ) : (
+                <PublisherCard title={details.domain} />
+              )}
+              {renderAmount()}
+            </div>
 
-          <ConfirmOrCancel
-            disabled={loadingConfirm || !valueSat}
-            loading={loadingConfirm}
-            onConfirm={confirm}
-            onCancel={reject}
-          />
-        </Container>
-      ) : (
-        <Container justifyBetween maxWidth="sm">
-          <ResultCard isSuccess message={successMessage} />
-          <div className="mt-4">
-            <Button
-              onClick={close}
-              label={tCommon("actions.close")}
-              fullWidth
+            <ConfirmOrCancel
+              disabled={loadingConfirm || !valueSat}
+              loading={loadingConfirm}
+              onConfirm={confirm}
+              onCancel={reject}
             />
-          </div>
-        </Container>
+          </Container>
+        </div>
+      ) : (
+        <div className="grow">
+          <Container justifyBetween maxWidth="sm">
+            <ResultCard isSuccess message={successMessage} />
+            <div className="mt-4">
+              <Button
+                onClick={close}
+                label={tCommon("actions.close")}
+                fullWidth
+              />
+            </div>
+          </Container>
+        </div>
       )}
     </div>
   );

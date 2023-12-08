@@ -110,7 +110,7 @@ function MakeInvoice() {
   return (
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <ScreenHeader title={t("title")} />
-      <form onSubmit={handleSubmit} className="h-full">
+      <form onSubmit={handleSubmit} className="flex grow">
         <Container justifyBetween maxWidth="sm">
           <div>
             <PublisherCard

@@ -96,100 +96,106 @@ function ConfirmSignPset() {
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <ScreenHeader title={t("title")} />
       {!successMessage ? (
-        <Container justifyBetween maxWidth="sm">
-          <div className="flex flex-col gap-4 mb-4">
+        <div className="grow">
+          <Container justifyBetween maxWidth="sm">
+            <div className="flex flex-col gap-4 mb-4">
+              <PublisherCard
+                title={origin.name}
+                image={origin.icon}
+                url={origin.host}
+              />
+              <div className="p-4 shadow bg-white dark:bg-surface-02dp rounded-lg overflow-hidden flex flex-col gap-4">
+                <div className="flex justify-between items-start">
+                  <h2 className="font-medium dark:text-white">
+                    {t("allow_sign", { host: origin.host })}{" "}
+                  </h2>
+                  <Hyperlink
+                    href="https://guides.getalby.com/user-guide/v/alby-account-and-browser-extension/alby-browser-extension/features/liquid"
+                    target="_blank"
+                  >
+                    <div className="bg-blue-500 rounded-full">
+                      <InfoIcon className="h-4 w-4 text-white" />
+                    </div>
+                  </Hyperlink>
+                </div>
+              </div>
+              <div className="flex w-full justify-center">
+                <Hyperlink onClick={toggleShowAddresses}>
+                  {showDetails ? t("hide_details") : t("view_details")}
+                </Hyperlink>
+              </div>
+
+              {showDetails && (
+                <>
+                  <div className="p-4 shadow bg-white dark:bg-surface-02dp rounded-lg overflow-hidden flex flex-col gap-4">
+                    <div>
+                      <p className="font-medium dark:text-white">
+                        {t("inputs")}
+                      </p>
+                      <div className="flex flex-col gap-4">
+                        {preview.inputs.map((input, index) => (
+                          <AddressPreview
+                            key={index}
+                            assetInfos={assetRegistry[input.asset]}
+                            t={t}
+                            {...input}
+                          />
+                        ))}
+                      </div>
+                    </div>
+
+                    <div>
+                      <p className="font-medium dark:text-white">
+                        {t("outputs")}
+                      </p>
+                      <div className="flex flex-col gap-4">
+                        {preview.outputs.map((output, index) => (
+                          <AddressPreview
+                            key={index}
+                            assetInfos={assetRegistry[output.asset]}
+                            t={t}
+                            {...output}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex w-full justify-center">
+                    <Hyperlink onClick={toggleShowHex}>
+                      {showRawTransaction
+                        ? t("hide_raw_transaction")
+                        : t("view_raw_transaction")}
+                    </Hyperlink>
+                  </div>
+                </>
+              )}
+
+              {showRawTransaction && (
+                <div className="break-all p-2 mb-4 shadow bg-white rounded-lg dark:bg-surface-02dp text-gray-500 dark:text-gray-400">
+                  {pset}
+                </div>
+              )}
+            </div>
+            <ConfirmOrCancel
+              disabled={loading}
+              loading={loading}
+              onConfirm={confirm}
+              onCancel={reject}
+            />
+          </Container>
+        </div>
+      ) : (
+        <div className="grow">
+          <Container maxWidth="sm">
             <PublisherCard
               title={origin.name}
               image={origin.icon}
               url={origin.host}
             />
-            <div className="p-4 shadow bg-white dark:bg-surface-02dp rounded-lg overflow-hidden flex flex-col gap-4">
-              <div className="flex justify-between items-start">
-                <h2 className="font-medium dark:text-white">
-                  {t("allow_sign", { host: origin.host })}{" "}
-                </h2>
-                <Hyperlink
-                  href="https://guides.getalby.com/user-guide/v/alby-account-and-browser-extension/alby-browser-extension/features/liquid"
-                  target="_blank"
-                >
-                  <div className="bg-blue-500 rounded-full">
-                    <InfoIcon className="h-4 w-4 text-white" />
-                  </div>
-                </Hyperlink>
-              </div>
-            </div>
-            <div className="flex w-full justify-center">
-              <Hyperlink onClick={toggleShowAddresses}>
-                {showDetails ? t("hide_details") : t("view_details")}
-              </Hyperlink>
-            </div>
-
-            {showDetails && (
-              <>
-                <div className="p-4 shadow bg-white dark:bg-surface-02dp rounded-lg overflow-hidden flex flex-col gap-4">
-                  <div>
-                    <p className="font-medium dark:text-white">{t("inputs")}</p>
-                    <div className="flex flex-col gap-4">
-                      {preview.inputs.map((input, index) => (
-                        <AddressPreview
-                          key={index}
-                          assetInfos={assetRegistry[input.asset]}
-                          t={t}
-                          {...input}
-                        />
-                      ))}
-                    </div>
-                  </div>
-
-                  <div>
-                    <p className="font-medium dark:text-white">
-                      {t("outputs")}
-                    </p>
-                    <div className="flex flex-col gap-4">
-                      {preview.outputs.map((output, index) => (
-                        <AddressPreview
-                          key={index}
-                          assetInfos={assetRegistry[output.asset]}
-                          t={t}
-                          {...output}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex w-full justify-center">
-                  <Hyperlink onClick={toggleShowHex}>
-                    {showRawTransaction
-                      ? t("hide_raw_transaction")
-                      : t("view_raw_transaction")}
-                  </Hyperlink>
-                </div>
-              </>
-            )}
-
-            {showRawTransaction && (
-              <div className="break-all p-2 mb-4 shadow bg-white rounded-lg dark:bg-surface-02dp text-gray-500 dark:text-gray-400">
-                {pset}
-              </div>
-            )}
-          </div>
-          <ConfirmOrCancel
-            disabled={loading}
-            loading={loading}
-            onConfirm={confirm}
-            onCancel={reject}
-          />
-        </Container>
-      ) : (
-        <Container maxWidth="sm">
-          <PublisherCard
-            title={origin.name}
-            image={origin.icon}
-            url={origin.host}
-          />
-          <SuccessMessage message={successMessage} onClose={close} />
-        </Container>
+            <SuccessMessage message={successMessage} onClose={close} />
+          </Container>
+        </div>
       )}
     </div>
   );

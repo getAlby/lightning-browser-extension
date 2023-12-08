@@ -88,7 +88,7 @@ function LNURLAuthComponent() {
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <ScreenHeader title={t("title")} />
       {!successMessage ? (
-        <>
+        <div className="grow">
           <Container justifyBetween maxWidth="sm">
             <div>
               {origin ? (
@@ -120,18 +120,20 @@ function LNURLAuthComponent() {
               loading={loading}
             />
           </Container>
-        </>
+        </div>
       ) : (
-        <Container justifyBetween maxWidth="sm">
-          <ResultCard isSuccess message={successMessage} />
-          <div className="mt-4">
-            <Button
-              onClick={close}
-              label={tCommon("actions.close")}
-              fullWidth
-            />
-          </div>
-        </Container>
+        <div className="grow">
+          <Container justifyBetween maxWidth="sm">
+            <ResultCard isSuccess message={successMessage} />
+            <div className="mt-4">
+              <Button
+                onClick={close}
+                label={tCommon("actions.close")}
+                fullWidth
+              />
+            </div>
+          </Container>
+        </div>
       )}
     </div>
   );

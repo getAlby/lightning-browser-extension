@@ -99,40 +99,44 @@ function LNURLChannel() {
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <ScreenHeader title={t("title")} />
       {!successMessage ? (
-        <Container justifyBetween maxWidth="sm">
-          <div>
-            {origin ? (
-              <PublisherCard
-                title={origin.name}
-                image={origin.icon}
-                url={details.domain}
+        <div className="grow">
+          <Container justifyBetween maxWidth="sm">
+            <div>
+              {origin ? (
+                <PublisherCard
+                  title={origin.name}
+                  image={origin.icon}
+                  url={details.domain}
+                />
+              ) : (
+                <PublisherCard title={details.domain} />
+              )}
+              <ContentMessage
+                heading={`${t("content_message.heading")}:`}
+                content={uri}
               />
-            ) : (
-              <PublisherCard title={details.domain} />
-            )}
-            <ContentMessage
-              heading={`${t("content_message.heading")}:`}
-              content={uri}
+            </div>
+            <ConfirmOrCancel
+              disabled={loadingConfirm || !uri}
+              loading={loadingConfirm}
+              onConfirm={confirm}
+              onCancel={reject}
             />
-          </div>
-          <ConfirmOrCancel
-            disabled={loadingConfirm || !uri}
-            loading={loadingConfirm}
-            onConfirm={confirm}
-            onCancel={reject}
-          />
-        </Container>
+          </Container>
+        </div>
       ) : (
-        <Container justifyBetween maxWidth="sm">
-          <ResultCard isSuccess message={successMessage} />
-          <div className="mt-4">
-            <Button
-              onClick={close}
-              label={tCommon("actions.close")}
-              fullWidth
-            />
-          </div>
-        </Container>
+        <div className="grow">
+          <Container justifyBetween maxWidth="sm">
+            <ResultCard isSuccess message={successMessage} />
+            <div className="mt-4">
+              <Button
+                onClick={close}
+                label={tCommon("actions.close")}
+                fullWidth
+              />
+            </div>
+          </Container>
+        </div>
       )}
     </div>
   );

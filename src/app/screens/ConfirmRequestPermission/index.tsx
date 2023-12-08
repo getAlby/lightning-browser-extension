@@ -44,7 +44,7 @@ const ConfirmRequestPermission: FC = () => {
   return (
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <ScreenHeader title={t("title")} />
-      <form onSubmit={handleSubmit} className="h-full">
+      <form onSubmit={handleSubmit} className="grow flex">
         <Container justifyBetween maxWidth="sm">
           <div>
             <PublisherCard

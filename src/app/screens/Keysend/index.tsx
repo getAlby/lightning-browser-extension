@@ -111,7 +111,7 @@ function Keysend() {
       </Header>
       {!successMessage ? (
         <>
-          <form onSubmit={handleSubmit} className="h-full">
+          <form onSubmit={handleSubmit} className="grow flex">
             <Container justifyBetween maxWidth="sm">
               <div>
                 <ContentMessage
@@ -144,27 +144,29 @@ function Keysend() {
           </form>
         </>
       ) : (
-        <Container justifyBetween maxWidth="sm">
-          <ResultCard
-            isSuccess
-            message={
-              !destination
-                ? successMessage
-                : tCommon("success_message", {
-                    amount: getFormattedSats(amountSat),
-                    fiatAmount: showFiat ? ` (${fiatAmount})` : ``,
-                    destination,
-                  })
-            }
-          />
-          <div className="mt-4">
-            <Button
-              onClick={close}
-              label={tCommon("actions.close")}
-              fullWidth
+        <div className="grow">
+          <Container justifyBetween maxWidth="sm">
+            <ResultCard
+              isSuccess
+              message={
+                !destination
+                  ? successMessage
+                  : tCommon("success_message", {
+                      amount: getFormattedSats(amountSat),
+                      fiatAmount: showFiat ? ` (${fiatAmount})` : ``,
+                      destination,
+                    })
+              }
             />
-          </div>
-        </Container>
+            <div className="mt-4">
+              <Button
+                onClick={close}
+                label={tCommon("actions.close")}
+                fullWidth
+              />
+            </div>
+          </Container>
+        </div>
       )}
     </div>
   );

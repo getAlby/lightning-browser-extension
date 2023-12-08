@@ -52,45 +52,47 @@ function ConfirmAddAccount() {
   return (
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <ScreenHeader title={t("title")} />
-      <Container justifyBetween maxWidth="sm">
-        <div>
-          <PublisherCard
-            title={origin.name}
-            image={origin.icon}
-            url={origin.host}
+      <div className="grow">
+        <Container justifyBetween maxWidth="sm">
+          <div>
+            <PublisherCard
+              title={origin.name}
+              image={origin.icon}
+              url={origin.host}
+            />
+            {/* TODO: Replace with Alert component */}
+            {isTor && (
+              <div className="mt-4 rounded-md font-medium p-4 text-blue-700 bg-blue-50 dark:text-blue-200 dark:bg-blue-900">
+                <p>
+                  {t("tor_info")}
+                  <br />
+                  <br />
+                  <Hyperlink
+                    className="text-white hover:text-gray-300"
+                    href={`https://getalby.com/install/companion/${getOS()}`}
+                  >
+                    ⬇️ {tCommon("actions.download")}
+                  </Hyperlink>
+                </p>
+              </div>
+            )}
+            <ContentMessage
+              heading={t("content", {
+                connector: tCommon(
+                  `connectors.${connector as "lndhub"}` /* Type hack */
+                ),
+              })}
+              content={name}
+            />
+          </div>
+          <ConfirmOrCancel
+            disabled={loading}
+            loading={loading}
+            onConfirm={confirm}
+            onCancel={reject}
           />
-          {/* TODO: Replace with Alert component */}
-          {isTor && (
-            <div className="mt-4 rounded-md font-medium p-4 text-blue-700 bg-blue-50 dark:text-blue-200 dark:bg-blue-900">
-              <p>
-                {t("tor_info")}
-                <br />
-                <br />
-                <Hyperlink
-                  className="text-white hover:text-gray-300"
-                  href={`https://getalby.com/install/companion/${getOS()}`}
-                >
-                  ⬇️ {tCommon("actions.download")}
-                </Hyperlink>
-              </p>
-            </div>
-          )}
-          <ContentMessage
-            heading={t("content", {
-              connector: tCommon(
-                `connectors.${connector as "lndhub"}` /* Type hack */
-              ),
-            })}
-            content={name}
-          />
-        </div>
-        <ConfirmOrCancel
-          disabled={loading}
-          loading={loading}
-          onConfirm={confirm}
-          onCancel={reject}
-        />
-      </Container>
+        </Container>
+      </div>
     </div>
   );
 }

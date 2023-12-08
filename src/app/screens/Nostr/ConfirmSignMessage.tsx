@@ -75,7 +75,7 @@ function ConfirmSignMessage() {
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <ScreenHeader title={t("title")} />
       {!successMessage ? (
-        <form onSubmit={handleSubmit} className="h-full">
+        <form onSubmit={handleSubmit} className="flex grow">
           <Container justifyBetween maxWidth="sm">
             <div>
               <PublisherCard
@@ -129,14 +129,16 @@ function ConfirmSignMessage() {
           </Container>
         </form>
       ) : (
-        <Container maxWidth="sm">
-          <PublisherCard
-            title={origin.name}
-            image={origin.icon}
-            url={origin.host}
-          />
-          <SuccessMessage message={successMessage} onClose={close} />
-        </Container>
+        <div className="grow">
+          <Container maxWidth="sm">
+            <PublisherCard
+              title={origin.name}
+              image={origin.icon}
+              url={origin.host}
+            />
+            <SuccessMessage message={successMessage} onClose={close} />
+          </Container>
+        </div>
       )}
     </div>
   );

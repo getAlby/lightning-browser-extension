@@ -131,7 +131,7 @@ function ConfirmKeysend() {
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <ScreenHeader title={t("title")} />
       {!successMessage ? (
-        <form onSubmit={handleSubmit} className="h-full">
+        <form onSubmit={handleSubmit} className="grow flex">
           <Container justifyBetween maxWidth="sm">
             <div>
               <PublisherCard
@@ -171,16 +171,18 @@ function ConfirmKeysend() {
           </Container>
         </form>
       ) : (
-        <Container maxWidth="sm">
-          <PublisherCard
-            title={origin.name}
-            image={origin.icon}
-            url={origin.host}
-          />
-          <div className="my-4">
-            <SuccessMessage message={successMessage} onClose={close} />
-          </div>
-        </Container>
+        <div className="grow">
+          <Container maxWidth="sm">
+            <PublisherCard
+              title={origin.name}
+              image={origin.icon}
+              url={origin.host}
+            />
+            <div className="my-4">
+              <SuccessMessage message={successMessage} onClose={close} />
+            </div>
+          </Container>
+        </div>
       )}
     </div>
   );
