@@ -362,7 +362,6 @@
           "placeholder": "Nome da conta"
         },
         "title2": "Conta",
-        "title1": "Configurações da conta",
         "mnemonic": {
           "title": "🔑 Gerenciamento de chaves",
           "saved": "Chave mestra criptografada e salva com sucesso.",
@@ -784,7 +783,6 @@
     },
     "confirm_add_account": {
       "content": "Este site deseja adicionar uma conta ({{connector}}):",
-      "title": "Adicionar conta",
       "tor_info": "Para se conectar através da rede TOR, você precisa primeiro instalar o aplicativo Alby companion:"
     },
     "on_chain": {

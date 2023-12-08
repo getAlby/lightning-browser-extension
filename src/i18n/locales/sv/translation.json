@@ -349,7 +349,6 @@
           "error": "Det angivna kontonamnet matchade inte.",
           "confirm": "Ange namnet på kontot för att bekräfta raderingen av ditt konto.\n\n{{ name }}\n\n ⚠️ Alla associerade nycklar (Master Key, Nostr, etc) kommer att raderas om du fortsätter. Se till att du har säkerhetskopierat dem, det finns inget annat sätt att återställa dem."
         },
-        "title1": "Konto inställningar",
         "title2": "Konto",
         "name": {
           "title": "Visnings Namn",
@@ -806,7 +805,6 @@
       }
     },
     "confirm_add_account": {
-      "title": "Lägg till konto",
       "content": "Den här webbplatsen vill lägga till ett konto ({{connector}}):",
       "tor_info": "För att kunna ansluta via TOR-nätverket måste du först installera Alby kompanion appen:"
     },

@@ -287,7 +287,6 @@
     "accounts": {
       "title": "Konti",
       "account_view": {
-        "title1": "Kontooplysninger",
         "title2": "Rediger konto",
         "name": {
           "title": "Navn",

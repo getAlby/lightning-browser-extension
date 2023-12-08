@@ -297,7 +297,6 @@
     "accounts": {
       "title": "帳戶",
       "account_view": {
-        "title1": "帳戶設置",
         "title2": "帳戶",
         "name": {
           "title": "名稱",
@@ -780,7 +779,6 @@
     },
     "confirm_add_account": {
       "content": "此網站想要添加一個帳戶（{{connector}}）：",
-      "title": "添加帳戶",
       "tor_info": "為了通過 TOR 網絡進行連接，你需要先安裝 Alby 配套應用程式："
     },
     "on_chain": {

@@ -432,7 +432,6 @@
             "failed_to_load": "Nalaganje ključa Nostr ni uspelo. Je to veljaven ključ Nostr?"
           }
         },
-        "title1": "Nastavitve računa",
         "remove": {
           "title": "Odstrani ta račun",
           "error": "Vnešeno ime računa se ne ujema.",

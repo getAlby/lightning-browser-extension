@@ -447,8 +447,7 @@
           "remove_secretkey": "Hapus Master Key",
           "export": "Expor",
           "remove_account": "Hapus akun"
-        },
-        "title1": "Pengaturan Akun"
+        }
       },
       "actions": {
         "add_account": "Tambah akun"
@@ -763,7 +762,6 @@
       "title": "Masuk"
     },
     "confirm_add_account": {
-      "title": "Tambah akun",
       "tor_info": "Untuk menghubungkan melalui jaringan TOR kamu perlu memasang aplikasi pendamping Alby:"
     },
     "transactions": {

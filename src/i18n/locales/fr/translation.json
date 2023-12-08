@@ -287,7 +287,6 @@
     "accounts": {
       "title": "Comptes",
       "account_view": {
-        "title1": "Information sur le compte",
         "title2": "Modifier le compte",
         "name": {
           "title": "Nom",

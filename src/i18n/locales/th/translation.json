@@ -194,8 +194,7 @@
           "your_ln_address": "Lightning Address ของคุณ:",
           "export_uri": "LNDHub Credentials URI",
           "scan_qr": "นำกระเป๋านี้เข้าสู่ Zeus หรือ BlueWallet โดยการแสกน QRCode"
-        },
-        "title1": "การตั้งค่าบัญชี"
+        }
       },
       "actions": {
         "add_account": "เพิ่มบัญชี"
@@ -815,7 +814,6 @@
       "always_allow": "จำตัวเลือกของฉันและอย่าถามอีก"
     },
     "confirm_add_account": {
-      "title": "เพื่มบัญชี",
       "content": "เว็บไซต์นี้ต้องการเพิ่มบัญชี ({{connector}}):",
       "tor_info": "ในการเชื่อมต่อผ่านเครือข่าย TOR คุณต้องติดตั้ง Alby companion app เสียก่อน:"
     },

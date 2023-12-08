@@ -390,7 +390,6 @@
       },
       "account_view": {
         "title2": "Konto",
-        "title1": "Kontoeinstellungen",
         "name": {
           "title": "Name anzeigen",
           "placeholder": "Konto Anzeigename"
@@ -804,7 +803,6 @@
       }
     },
     "confirm_add_account": {
-      "title": "Konto hinzufügen",
       "content": "Diese Webseite möchte ein Konto hinzufügen ({{connector}}):",
       "tor_info": "Um sich über das TOR-Netzwerk zu verbinden, musst du zunächst die Alby-Begleit-App installieren:"
     },
