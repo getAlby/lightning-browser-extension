@@ -1,8 +1,8 @@
 import browser, { Runtime } from "webextension-polyfill";
 import { ABORT_PROMPT_ERROR } from "~/common/constants";
-import { getPosition as getWindowPosition } from "~/common/utils/window";
 import { ConnectorTransaction } from "~/extension/background-script/connectors/connector.interface";
 import type { DeferredPromise, OriginData, OriginDataInternal } from "~/types";
+import { createPromptTab, createPromptWindow } from "../utils/window";
 
 const utils = {
   base64ToHex: (str: string) => {
@@ -58,7 +58,6 @@ const utils = {
   openUrl: (url: string) => {
     browser.tabs.create({ url });
   },
-
   openPrompt: async <Type>(message: {
     args: Record<string, unknown>;
     origin: OriginData | OriginDataInternal;
@@ -80,101 +79,54 @@ const utils = {
       "prompt.html"
     )}?${urlParams.toString()}`;
 
-    const windowWidth = 400;
-    const windowHeight = 600;
+    // Window APIs might not be available on mobile browsers
+    const useWindow = !!browser.windows;
 
-    const { top, left } = await getWindowPosition(windowWidth, windowHeight);
+    // Either API yields a tabId
+    const tabId = useWindow
+      ? await createPromptWindow(url)
+      : await createPromptTab(url);
 
     return new Promise((resolve, reject) => {
-      const createPopup = () => {
-        const popupOptions: browser.Windows.CreateCreateDataType = {
-          url: url,
-          type: "popup",
-          width: windowWidth,
-          height: windowHeight,
-          top: top,
-          left: left,
-        };
-        return browser.windows.create(popupOptions);
-      };
+      const onMessageListener = (
+        responseMessage: {
+          response?: unknown;
+          error?: string;
+          data: Type;
+        },
+        sender: Runtime.MessageSender
+      ) => {
+        if (
+          responseMessage &&
+          responseMessage.response &&
+          sender.tab &&
+          sender.tab.id === tabId &&
+          sender.tab.windowId
+        ) {
+          // Remove the event listener as we are about to close the tab
+          browser.tabs.onRemoved.removeListener(onRemovedListener);
 
-      const createTab = () => {
-        const tabOptions: browser.Tabs.CreateCreatePropertiesType = {
-          url: url,
-        };
-
-        return browser.tabs.create(tabOptions);
-      };
-
-      const createPromise = browser.windows ? createPopup() : createTab();
-
-      return createPromise.then(async (windowOrTab) => {
-        let tabId: number | undefined;
-
-        if (windowOrTab && "tabs" in windowOrTab && windowOrTab.tabs) {
-          tabId = windowOrTab.tabs[0].id;
-        } else {
-          const tabs = await browser.tabs.query({
-            active: true,
-            currentWindow: true,
-          });
-          tabId = tabs[0].id;
-        }
-
-        // Re-focus the popup after 2 seconds to mitigate the problem of lost popups
-        // (e.g. when a user clicks the website)
-
-        const onMessageListener = (
-          responseMessage: {
-            response?: unknown;
-            error?: string;
-            data: Type;
-          },
-          sender: Runtime.MessageSender
-        ) => {
-          responseMessage && responseMessage.response;
-
-          if (
-            responseMessage &&
-            responseMessage.response &&
-            sender.tab &&
-            sender.tab.id === tabId &&
-            sender.tab.windowId
-          ) {
-            browser.tabs.onRemoved.removeListener(onRemovedListener);
-            // if the window was opened as tab we remove the tab
-            // otherwise if a window was opened we have to remove the window.
-            // Opera fails to close the window with tabs.remove - it fails with: "Tabs cannot be edited right now (user may be dragging a tab)"
-
-            let closePromise;
-            if (browser.windows !== undefined) {
-              closePromise = browser.windows.remove(sender.tab.windowId);
+          return browser.tabs.remove(tabId).then(() => {
+            // in the future actual "remove" (closing prompt) will be moved to component for i.e. budget flow
+            // https://github.com/getAlby/lightning-browser-extension/issues/1197
+            if (responseMessage.error) {
+              return reject(new Error(responseMessage.error));
             } else {
-              closePromise = browser.tabs.remove(sender.tab.id as number); // as number only for TS - we check for sender.tab.id in the if above
+              return resolve(responseMessage);
             }
+          });
+        }
+      };
 
-            return closePromise.then(() => {
-              // in the future actual "remove" (closing prompt) will be moved to component for i.e. budget flow
-              // https://github.com/getAlby/lightning-browser-extension/issues/1197
-              if (responseMessage.error) {
-                return reject(new Error(responseMessage.error));
-              } else {
-                return resolve(responseMessage);
-              }
-            });
-          }
-        };
+      const onRemovedListener = (tid: number) => {
+        if (tabId === tid) {
+          browser.runtime.onMessage.removeListener(onMessageListener);
+          reject(new Error(ABORT_PROMPT_ERROR));
+        }
+      };
 
-        const onRemovedListener = (tid: number) => {
-          if (tabId === tid) {
-            browser.runtime.onMessage.removeListener(onMessageListener);
-            reject(new Error(ABORT_PROMPT_ERROR));
-          }
-        };
-
-        browser.runtime.onMessage.addListener(onMessageListener);
-        browser.tabs.onRemoved.addListener(onRemovedListener);
-      });
+      browser.runtime.onMessage.addListener(onMessageListener);
+      browser.tabs.onRemoved.addListener(onRemovedListener);
     });
   },
 
