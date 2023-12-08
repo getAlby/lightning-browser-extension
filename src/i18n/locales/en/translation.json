@@ -874,7 +874,7 @@
       "always_allow": "Remember my choice and don't ask again"
     },
     "confirm_add_account": {
-      "title": "Add account",
+      "title": "Add accounta",
       "content": "This website wants to add an account ({{connector}}):",
       "tor_info": "In order to connect through the TOR network you need to first install the Alby companion app:"
     },
