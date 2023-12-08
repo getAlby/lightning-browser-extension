@@ -50,7 +50,7 @@ describe("ConfirmGetAddress", () => {
       await screen.findByText("Allow this website to:")
     ).toBeInTheDocument();
     expect(
-      await screen.findByText("Read your Bitcoin receive address.")
+      await screen.findByText("Read your Bitcoin receive address")
     ).toBeInTheDocument();
   });
 });

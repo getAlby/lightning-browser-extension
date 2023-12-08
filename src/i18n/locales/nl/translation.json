@@ -624,59 +624,5 @@
         "auth": ""
       }
     }
-  },
-  "permissions": {
-    "commando": {
-      "bkpr-listbalances": "",
-      "checkmessage": "",
-      "connect": "",
-      "decode": "",
-      "decodepay": "",
-      "disconnect": "",
-      "feerates": "",
-      "fundchannel": "",
-      "getinfo": "",
-      "getroute": "",
-      "invoice": "",
-      "keysend": "",
-      "listforwards": "",
-      "listfunds": "",
-      "listinvoices": "",
-      "listnodes": "",
-      "listoffers": "",
-      "listpays": "",
-      "listpeers": "",
-      "listsendpays": "",
-      "listtransactions": "",
-      "multifundchannel": "",
-      "offer": "",
-      "pay": "",
-      "sendpay": "",
-      "setchannel": "",
-      "signmessage": ""
-    },
-    "lnd": {
-      "getinfo": "",
-      "listchannels": "",
-      "listinvoices": "",
-      "channelbalance": "",
-      "walletbalance": "",
-      "openchannel": "",
-      "connectpeer": "",
-      "disconnectpeer": "",
-      "estimatefee": "",
-      "getchaninfo": "",
-      "getnetworkinfo": "",
-      "getnodeinfo": "",
-      "gettransactions": "",
-      "listpayments": "",
-      "listpeers": "",
-      "lookupinvoice": "",
-      "queryroutes": "",
-      "verifymessage": "",
-      "sendtoroute": "",
-      "decodepayreq": "",
-      "routermc": ""
-    }
   }
 }

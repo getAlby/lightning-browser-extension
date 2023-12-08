@@ -855,23 +855,23 @@
   },
   "permissions": {
     "nostr": {
-      "nip04decrypt": "Dekripsi data.",
-      "getpublickey": "Membaca kunci publik Anda.",
-      "nip04encrypt": "Enkripsi data."
+      "nip04decrypt": "Dekripsi data",
+      "getpublickey": "Membaca kunci publik Anda",
+      "nip04encrypt": "Enkripsi data"
     },
     "commando": {
-      "decode": "Decode teks bolt11/bolt12/rune."
+      "decode": "Decode teks bolt11/bolt12/rune"
     },
     "lnc": {
-      "addinvoice": "Buat invoice baru.",
-      "listinvoices": "Dapatkan daftar dari semua invoice.",
-      "openchannel": "Buka channel baru.",
-      "listchannels": "Dapatkan deskripsi dari semua channel yang terbuka.",
-      "getinfo": "Dapatkan informasi node."
+      "addinvoice": "Buat invoice baru",
+      "listinvoices": "Dapatkan daftar dari semua invoice",
+      "openchannel": "Buka channel baru",
+      "listchannels": "Dapatkan deskripsi dari semua channel yang terbuka",
+      "getinfo": "Dapatkan informasi node"
     },
     "lnd": {
-      "addinvoice": "Buat invoice baru.",
-      "addholdinvoice": "Buat invoice HOLD baru."
+      "addinvoice": "Buat invoice baru",
+      "addholdinvoice": "Buat invoice HOLD baru"
     }
   },
   "common": {

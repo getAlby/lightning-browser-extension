@@ -64,7 +64,7 @@ function Settings() {
       <h2 className="mt-12 mb-6 text-2xl font-bold dark:text-white">
         {t("title")}
       </h2>
-      <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-gray-200 dark:divide-white/10 dark:bg-surface-02dp">
+      <div className="shadow bg-white rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-gray-200 dark:divide-white/10 dark:bg-surface-02dp">
         <Setting
           title={t("browser_notifications.title")}
           subtitle={t("browser_notifications.subtitle")}
@@ -257,7 +257,7 @@ function Settings() {
         {t("personal_data.description")}
       </p>
 
-      <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">
+      <div className="shadow bg-white rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">
         <Setting title={t("name.title")} subtitle={t("name.subtitle")}>
           {!isLoading && (
             <div className="w-64">
@@ -338,7 +338,7 @@ function Settings() {
         </a>{" "}
         {t("nostr.hint")}
       </p>
-      <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">
+      <div className="shadow bg-white rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">
         <Setting
           title={t("nostr.private_key.title")}
           subtitle={t("nostr.private_key.subtitle")}
@@ -379,7 +379,7 @@ function Settings() {
           components={[<strong></strong>]}
         />
       </p>
-      <div className="shadow bg-white sm:rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">
+      <div className="shadow bg-white rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">
         <Setting
           title={t("lnurl_auth.legacy_lnurl_auth_202207.title")}
           subtitle={t("lnurl_auth.legacy_lnurl_auth_202207.subtitle")}
