@@ -164,26 +164,6 @@
           "title": ""
         }
       },
-      "galoy": {
-        "phone_number": {
-          "label": ""
-        },
-        "sms_code": {
-          "label": ""
-        },
-        "token": {
-          "label": "",
-          "info": ""
-        },
-        "actions": {
-          "login": ""
-        },
-        "errors": {
-          "setup_failed": "",
-          "missing_token": "",
-          "invalid_token": ""
-        }
-      },
       "btcpay": {
         "title": "",
         "page": {
