@@ -137,6 +137,38 @@ export default function TransactionModal({
               content={transaction.boostagram.episode}
             />
           )}
+          {transaction.boostagram?.action && (
+            <TransactionDetailRow
+              title={t("boostagram.action")}
+              content={transaction.boostagram.action}
+            />
+          )}
+          {transaction.boostagram?.ts && (
+            <TransactionDetailRow
+              title={t("boostagram.timestamp")}
+              content={transaction.boostagram.ts}
+            />
+          )}
+          {transaction.boostagram?.value_msat_total && (
+            <TransactionDetailRow
+              title={t("boostagram.totalAmount")}
+              content={Math.floor(
+                transaction.boostagram.value_msat_total / 1000
+              )}
+            />
+          )}
+          {transaction.boostagram?.sender_name && (
+            <TransactionDetailRow
+              title={t("boostagram.sender")}
+              content={transaction.boostagram.sender_name}
+            />
+          )}
+          {transaction.boostagram?.app_name && (
+            <TransactionDetailRow
+              title={t("boostagram.app")}
+              content={transaction.boostagram.app_name}
+            />
+          )}
           {(transaction.preimage || transaction.paymentHash) && (
             <>
               <div className="flex justify-center mt-4">

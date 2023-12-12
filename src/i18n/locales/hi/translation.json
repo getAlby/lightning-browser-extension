@@ -211,26 +211,6 @@
           "title": "<0>Bitcoin Jungle Wallet</0 से कनेक्ट करें>"
         }
       },
-      "galoy": {
-        "phone_number": {
-          "label": "अपना फोन नंबर दर्ज करें"
-        },
-        "sms_code": {
-          "label": "अपना SMS सत्यापन कोड दर्ज करें"
-        },
-        "token": {
-          "label": "अपना JWT token दर्ज करें",
-          "info": "{{label}} लॉगिन वर्तमान में अपग्रेड किया जा रहा है। यदि आप एक उन्नत उपयोगकर्ता हैं, तो आप <0>वेब वॉलेट (wallet.mainnet.galoy.io)< के माध्यम से लॉग इन करके अपना JWT टोकन प्राप्त कर सकते हैं। /0><1/><1/>JWT ऐसा दिखता है: <2>eyJhbG...</2><1/><1/>"
-        },
-        "actions": {
-          "login": "लॉग इन"
-        },
-        "errors": {
-          "setup_failed": "स्थापना विफल",
-          "missing_token": "JWT गायब, लॉग इन नहीं हो सका।",
-          "invalid_token": "अवैध JWT उत्तीर्ण"
-        }
-      },
       "btcpay": {
         "title": "BTCPay Server",
         "page": {
