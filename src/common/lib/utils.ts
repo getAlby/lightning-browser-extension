@@ -106,7 +106,16 @@ const utils = {
           // Remove the event listener as we are about to close the tab
           browser.tabs.onRemoved.removeListener(onRemovedListener);
 
-          return browser.tabs.remove(tabId).then(() => {
+          // Use window APIs for removing the window as Opera doesn't
+          // close the window if you remove the last tab (e.g. in popups)
+          let closePromise;
+          if (useWindow) {
+            closePromise = browser.windows.remove(sender.tab.windowId);
+          } else {
+            closePromise = browser.tabs.remove(tabId);
+          }
+
+          return closePromise.then(() => {
             // in the future actual "remove" (closing prompt) will be moved to component for i.e. budget flow
             // https://github.com/getAlby/lightning-browser-extension/issues/1197
             if (responseMessage.error) {
