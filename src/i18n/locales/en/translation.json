@@ -250,6 +250,19 @@
           "connection_failed": "Connection failed. Is the BTCPay connection URL correct and accessible?"
         }
       },
+      "lawallet": {
+        "title": "LaWallet.io",
+        "page": {
+          "title": "Connect to your LaWallet Stack",
+          "instructions": "Set your LaWallet credentials below"
+        },
+        "private_key": "Private Key",
+        "api_endpoint": "API Endpoint",
+        "identity_endpoint": "Identity Endpoint",
+        "ledger_public_key": "Ledger Public key",
+        "urlx_public_key": "URLx Public key",
+        "relay_url": "Relay URL"
+      },
       "commando": {
         "title": "Core Lightning",
         "page": {

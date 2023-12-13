@@ -185,6 +185,19 @@
           "connection_failed": "La conexión falló. ¿Es correcto el URI de LNDHub?"
         }
       },
+      "lawallet": {
+        "title": "LaWallet.io",
+        "page": {
+          "title": "Conectar con el stack de LaWallet.io",
+          "instructions": "Ingresá los datos de LaWallet.io a continuación."
+        },
+        "private_key": "Llave privada",
+        "api_endpoint": "API Endpoint",
+        "identity_endpoint": "Identity Endpoint",
+        "ledger_public_key": "Ledger Public key",
+        "urlx_public_key": "URLx Public key",
+        "relay_url": "Relay URL"
+      },
       "commando": {
         "pubkey": {
           "label": "Clave Pública"
