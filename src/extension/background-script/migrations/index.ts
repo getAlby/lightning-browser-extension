@@ -1,9 +1,7 @@
-// import db from "../db";
-// import state from "../state";
+import db from "~/extension/background-script/db";
+import state from "../state";
 
 export type Migration = keyof typeof migrations;
-
-/*
 
 // TS does not want unused code.
 // we need this for the next migration again
@@ -30,19 +28,28 @@ const setMigrated = (name: Migration): Promise<void> => {
   return state.getState().saveToStorage();
 };
 
-*/
+const migrations = {
+  migrateAllowanceDomainProtocol: async () => {
+    const allowances = await db.allowances.toArray();
 
-const migrations = {};
+    allowances.forEach(async (allowances) => {
+      allowances.id &&
+        (await db.allowances.update(allowances.id, {
+          host: `https://${allowances.host}`,
+        }));
+    });
+  },
+};
 
 const migrate = async () => {
   // going forward we can iterate through the the migrations object above and DRY this up:
   // Object.keys(migrations).forEach((name: string) => {
   // example:
-  //if (shouldMigrate("migratePermissionsWithoutAccountId")) {
-  //  console.info("Running migration for: migratePermissionsWithoutAccountId");
-  //  await migrations["migratePermissionsWithoutAccountId"]();
-  //  await setMigrated("migratePermissionsWithoutAccountId");
-  //}
+  if (shouldMigrate("migrateAllowanceDomainProtocol")) {
+    console.info("Running migration for: migrateAllowanceDomainProtocol");
+    await migrations["migrateAllowanceDomainProtocol"]();
+    await setMigrated("migrateAllowanceDomainProtocol");
+  }
 };
 
 export default migrate;
