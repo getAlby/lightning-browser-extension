@@ -1,21 +1,18 @@
 import { schnorr } from "@noble/curves/secp256k1";
+import * as secp256k1 from "@noble/secp256k1";
 import fetchAdapter from "@vespaiach/axios-fetch-adapter";
 import type { AxiosResponse, ResponseType } from "axios";
 import axios, { AxiosRequestConfig, Method } from "axios";
 import lightningPayReq from "bolt11";
 import Hex from "crypto-js/enc-hex";
 import sha256 from "crypto-js/sha256";
-import {
-  SimplePool,
-  finishEvent,
-  getPublicKey,
-  nip57,
-  type Event,
-  type EventTemplate,
-} from "nostr-tools";
+import { relayInit, type Relay } from "nostr-tools";
+import { Event, EventKind } from "~/extension/providers/nostr/types";
 import { Account } from "~/types";
 
 import toast from "~/app/components/Toast";
+import { getEventHash } from "~/extension/background-script/actions/nostr/helpers";
+import Nostr from "~/extension/background-script/nostr";
 import Connector, {
   CheckPaymentArgs,
   CheckPaymentResponse,
@@ -40,6 +37,7 @@ interface Config {
   ledgerPublicKey: string;
   urlxPublicKey: string;
   relayList: string[];
+  relayUrl: string;
 }
 
 const defaultHeaders = {
@@ -51,7 +49,7 @@ const defaultHeaders = {
 export default class LaWallet implements Connector {
   account: Account;
   config: Config;
-  relay_pool: SimplePool;
+  relay: Relay;
   public_key: string;
   access_token?: string;
   access_token_created?: number;
@@ -65,17 +63,17 @@ export default class LaWallet implements Connector {
   constructor(account: Account, config: Config) {
     this.account = account;
     this.config = config;
-    this.public_key = getPublicKey(config.privateKey);
-    this.relay_pool = new SimplePool();
-    this.relay_pool.ensureRelay(this.config.relayList[0]);
+    this.public_key = new Nostr(config.privateKey).getPublicKey();
+    this.relay = relayInit(config.relayUrl);
   }
 
   async init() {
+    this.relay.connect();
     return Promise.resolve();
   }
 
   unload() {
-    this.relay_pool.close(this.config.relayList);
+    this.relay.close();
     return Promise.resolve();
   }
 
@@ -107,7 +105,7 @@ export default class LaWallet implements Connector {
   }
 
   async getTransactions(): Promise<GetTransactionsResponse> {
-    const transactions = await this.relay_pool.list(this.config.relayList, [
+    const _transactions = await this.relay.list([
       {
         authors: [this.config.ledgerPublicKey],
         kinds: [1112],
@@ -116,6 +114,13 @@ export default class LaWallet implements Connector {
         "#p": [this.public_key],
       },
     ]);
+
+    const transactions = _transactions.map((event) => {
+      return {
+        ...event,
+        kind: event.kind as EventKind,
+      };
+    }) as Event[];
 
     return {
       data: {
@@ -157,7 +162,7 @@ export default class LaWallet implements Connector {
   }
 
   async getBalance(): Promise<GetBalanceResponse> {
-    const balanceEvent = await this.relay_pool.get(this.config.relayList, {
+    const balanceEvent = await this.relay.get({
       authors: [this.config.ledgerPublicKey],
       kinds: [31111],
       "#d": [`balance:BTC:${this.public_key}`],
@@ -179,8 +184,8 @@ export default class LaWallet implements Connector {
   async sendPayment(args: SendPaymentArgs): Promise<SendPaymentResponse> {
     const paymentRequestDetails = lightningPayReq.decode(args.paymentRequest);
 
-    const unsignedEvent: EventTemplate = {
-      kind: 1112,
+    const unsignedEvent: Event = {
+      kind: 1112 as EventKind,
       created_at: Math.floor(Date.now() / 1000),
       tags: [
         ["t", "internal-transaction-start"],
@@ -233,10 +238,10 @@ export default class LaWallet implements Connector {
     const payment_route = { total_amt: amountInSats, total_fees: 0 };
 
     return new Promise((resolve, reject) => {
-      const sub = this.relay_pool.sub(this.config.relayList, [
+      const sub = this.relay.sub([
         {
           authors: [this.config.ledgerPublicKey, this.config.urlxPublicKey],
-          "#e": [event.id],
+          "#e": [event.id!],
           "#t": [
             "internal-transaction-error",
             "internal-transaction-ok",
@@ -297,7 +302,7 @@ export default class LaWallet implements Connector {
   }
 
   async makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse> {
-    const unsignedZapEvent = nip57.makeZapRequest({
+    const unsignedZapEvent = makeZapRequest({
       profile: this.public_key,
       event: null,
       amount: (args.amount as number) * 1000,
@@ -335,7 +340,7 @@ export default class LaWallet implements Connector {
     limit: number = 10,
     since: number = 0
   ): Promise<Event[]> {
-    const zapEvents = await this.relay_pool.list(this.config.relayList, [
+    const zapEvents = await this.relay.list([
       {
         authors: [this.config.urlxPublicKey],
         kinds: [9735],
@@ -407,12 +412,14 @@ interface InvoiceCache {
   [paymentHash: string]: boolean; // paid
 }
 
-function parseTransaction(
+/** Utils Functions **/
+
+export function parseTransaction(
   userPubkey: string,
   event: Event
 ): ConnectorTransaction {
   return {
-    id: event.id,
+    id: event.id!,
     preimage: "",
     settled: true,
     settleDate: event.created_at * 1000,
@@ -423,4 +430,50 @@ function parseTransaction(
     memo: "",
     payment_hash: "",
   };
+}
+
+export function makeZapRequest({
+  profile,
+  event,
+  amount,
+  relays,
+  comment = "",
+}: {
+  profile: string;
+  event: string | null;
+  amount: number;
+  comment: string;
+  relays: string[];
+}): Event {
+  if (!amount) throw new Error("amount not given");
+  if (!profile) throw new Error("profile not given");
+
+  const zr: Event = {
+    kind: 9734,
+    created_at: Math.round(Date.now() / 1000),
+    content: comment,
+    tags: [
+      ["p", profile],
+      ["amount", amount.toString()],
+      ["relays", ...relays],
+    ],
+  };
+
+  if (event) {
+    zr.tags.push(["e", event]);
+  }
+
+  return zr;
+}
+
+export function finishEvent(event: Event, privateKey: string): Event {
+  event.pubkey = new Nostr(privateKey).getPublicKey();
+  event.id = getEventHash(event);
+  event.sig = signEvent(event, privateKey);
+  return event;
+}
+
+export function signEvent(event: Event, key: string) {
+  const signedEvent = schnorr.sign(getEventHash(event), key);
+  return secp256k1.etc.bytesToHex(signedEvent);
 }

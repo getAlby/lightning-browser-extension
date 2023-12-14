@@ -7,9 +7,9 @@ import { useNavigate } from "react-router-dom";
 import toast from "~/app/components/Toast";
 import msg from "~/common/lib/msg";
 
-import { getPublicKey } from "nostr-tools";
 import Button from "~/app/components/Button";
 import LaWallet from "~/extension/background-script/connectors/lawallet";
+import Nostr from "~/extension/background-script/nostr";
 import { ConnectorType } from "~/types";
 import logo from "/static/assets/icons/lawallet.png";
 
@@ -57,7 +57,7 @@ export default function ConnectLaWallet() {
       relay_url,
     } = formData;
 
-    const publicKey = getPublicKey(private_key);
+    const publicKey = new Nostr(private_key).getPublicKey();
     const domain = identity_endpoint.replace(/https?:\/\//, "");
 
     const { username } = await LaWallet.request<{ username: string }>(
@@ -75,7 +75,7 @@ export default function ConnectLaWallet() {
         identityEndpoint: identity_endpoint,
         ledgerPublicKey: ledger_public_key,
         urlxPublicKey: urlx_public_key,
-        relayList: [relay_url],
+        relayUrl: relay_url,
       },
       connector: getConnectorType(),
     };
