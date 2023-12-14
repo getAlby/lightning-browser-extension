@@ -15,4 +15,6 @@ export enum EventKind {
   Contacts = 3,
   DM = 4,
   Deleted = 5,
+  ZapRequest = 9734,
+  ZapReceipt = 9735,
 }
