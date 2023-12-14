@@ -9,6 +9,7 @@ import {
   SimplePool,
   finishEvent,
   getPublicKey,
+  nip57,
   type Event,
   type EventTemplate,
 } from "nostr-tools";
@@ -57,6 +58,9 @@ export default class LaWallet implements Connector {
   refresh_token?: string;
   refresh_token_created?: number;
   noRetry?: boolean;
+
+  invoices_paid: InvoiceCache = {};
+  last_invoice_check: number = 0;
 
   constructor(account: Account, config: Config) {
     this.account = account;
@@ -184,16 +188,7 @@ export default class LaWallet implements Connector {
 
     try {
       await this.requestApi("POST", "/nostr/publish", { body: event }, "blob");
-
-      const amountInSats = paymentRequestDetails.satoshis || 0;
-      const payment_route = { total_amt: amountInSats, total_fees: 0 };
-      return {
-        data: {
-          preimage: "",
-          paymentHash: paymentRequestDetails.paymentRequest as string,
-          route: payment_route,
-        },
-      };
+      return this.getPaymentStatus(event);
     } catch (e) {
       console.error(e);
       console.error(e);
@@ -209,26 +204,63 @@ export default class LaWallet implements Connector {
     throw new Error("Keysend not yet supported.");
   }
 
-  // Needs implementation on server side
+  private onZapReceipt(event: Event) {
+    const pr = event.tags.find((tag) => tag[0] === "bolt11")?.[1] as string;
+    const paymentHash = lightningPayReq.decode(pr).tagsObject.payment_hash!;
+    this.invoices_paid[paymentHash] = true;
+  }
+
+  private async getPaymentStatus(event: Event): Promise<SendPaymentResponse> {
+    const paymentRequestDetails = lightningPayReq.decode(
+      event.tags.find((tag) => tag[0] === "bolt11")?.[1] as string
+    );
+    const amountInSats = paymentRequestDetails.satoshis || 0;
+    const payment_route = { total_amt: amountInSats, total_fees: 0 };
+
+    return new Promise((resolve, reject) => {
+      const sub = this.relay_pool.sub(this.config.relayList, [
+        {
+          authors: [this.config.ledgerPublicKey, this.config.urlxPublicKey],
+          "#e": [event.id],
+          "#t": [
+            "internal-transaction-error",
+            "internal-transaction-ok",
+            "outbound-transaction-ok",
+          ],
+        },
+      ]);
+
+      sub.on("event", (event) => {
+        const tag = event.tags.find((tag) => tag[0] === "t")![1];
+        const content = JSON.parse(event.content);
+        switch (tag) {
+          case "internal-transaction-ok": // Refund
+            if (event.tags[1][1] === this.public_key && !!content.memo) {
+              return reject(new Error(content.memo));
+            }
+            break;
+          case "internal-transaction-error": // No funds or ledger error
+            return reject(new Error(content.messages[0]));
+          case "outbound-transaction-ok": // Payment done
+            return resolve({
+              data: {
+                preimage: "",
+                paymentHash: paymentRequestDetails.paymentRequest as string,
+                route: payment_route,
+              },
+            });
+        }
+      });
+    });
+  }
   async checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {
-    try {
-      await this.requestApi<{ paid: boolean }>(
-        "GET",
-        `/urlx/${args.paymentHash}`,
-        undefined
-      );
-      return {
-        data: {
-          paid: true,
-        },
-      };
-    } catch (e) {
-      return {
-        data: {
-          paid: false,
-        },
-      };
-    }
+    const zapReceipts = await this.getZapReceipts(10, this.last_invoice_check);
+    zapReceipts.forEach(this.onZapReceipt.bind(this));
+    return {
+      data: {
+        paid: !!this.invoices_paid[args.paymentHash],
+      },
+    };
   }
 
   signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {
@@ -250,17 +282,36 @@ export default class LaWallet implements Connector {
   }
 
   async makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse> {
+    const unsignedZapEvent = nip57.makeZapRequest({
+      profile: this.public_key,
+      event: null,
+      amount: (args.amount as number) * 1000,
+      comment: args.memo,
+      relays: this.config.relayList,
+    });
+
+    const zapEvent: Event = finishEvent(
+      unsignedZapEvent,
+      this.config.privateKey
+    );
+
     const data = await this.requestApi<{
       pr: string;
     }>("GET", `/lnurlp/${this.public_key}/callback`, {
       amount: (args.amount as number) * 1000,
       comment: args.memo,
+      nostr: zapEvent,
+      lnurl: this.public_key,
     });
+
+    const paymentRequestDetails = lightningPayReq.decode(data.pr);
+
+    this.last_invoice_check = Math.floor(Date.now() / 1000);
 
     return {
       data: {
         paymentRequest: data.pr,
-        rHash: Buffer.from(data.pr).toString("hex"),
+        rHash: paymentRequestDetails.tagsObject.payment_hash!,
       },
     };
   }
@@ -343,10 +394,31 @@ export default class LaWallet implements Connector {
 
     return data;
   }
+
+  private async getZapReceipts(
+    limit: number = 10,
+    since: number = 0
+  ): Promise<Event[]> {
+    const zapEvents = await this.relay_pool.list(this.config.relayList, [
+      {
+        authors: [this.config.urlxPublicKey],
+        kinds: [9735],
+        since,
+        limit,
+        "#p": [this.public_key],
+      },
+    ]);
+
+    return zapEvents;
+  }
 }
 
 interface TransactionEventContent {
   tokens: { BTC: number };
+}
+
+interface InvoiceCache {
+  [paymentHash: string]: boolean; // paid
 }
 
 function parseTransaction(
