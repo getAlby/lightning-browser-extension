@@ -171,24 +171,6 @@
           "connection_failed": "Falha na conexão. A URL de conexão do servidor BTCPay está correta e acessível?"
         }
       },
-      "galoy": {
-        "phone_number": {
-          "label": "Insira seu número de telefone"
-        },
-        "sms_code": {
-          "label": "Insira o código de verificação SMS"
-        },
-        "token": {
-          "label": "Insira o token JWT"
-        },
-        "actions": {
-          "login": "Login"
-        },
-        "errors": {
-          "setup_failed": "Falha na configuração",
-          "missing_token": "JWT ausente, não foi possível fazer login."
-        }
-      },
       "lndhub_go": {
         "title": "LNDHub",
         "page": {

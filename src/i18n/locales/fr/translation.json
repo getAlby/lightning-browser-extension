@@ -204,26 +204,6 @@
           "title": "Connectez-vous au <0>portefeuille Bitcoin Jungle</0>"
         }
       },
-      "galoy": {
-        "phone_number": {
-          "label": "Entrez votre numéro de téléphone"
-        },
-        "sms_code": {
-          "label": "Entrez votre code de vérification par SMS"
-        },
-        "token": {
-          "label": "Entrez votre jeton JWT",
-          "info": "La connexion {{label}} est en cours de mise à jour. Si vous êtes un utilisateur avancé, vous pouvez récupérer votre jeton JWT en vous connectant via le <0>Portefeuille Web (wallet.mainnet.galoy.io)</0><1/><1/>Le JWT ressemble : < 2>eyJhbG...</2><1/><1/>"
-        },
-        "actions": {
-          "login": "Connexion"
-        },
-        "errors": {
-          "setup_failed": "La configuration a échoué",
-          "missing_token": "JWT manquant, impossible de se connecter.",
-          "invalid_token": "JWT invalide passé"
-        }
-      },
       "btcpay": {
         "title": "Serveur BTCPay",
         "page": {

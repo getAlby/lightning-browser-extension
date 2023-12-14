@@ -164,26 +164,6 @@
           "title": "Yhdistä <0>Bitcoin Jungle -lompakkoon</0>"
         }
       },
-      "galoy": {
-        "phone_number": {
-          "label": "Syötä puhelinnumerosi"
-        },
-        "sms_code": {
-          "label": "Syötä tekstiviestivahvistuskoodisi"
-        },
-        "token": {
-          "label": "Syötä JWT-tunnuksesi",
-          "info": "Kirjautumistunnusta {{label}} päivitetään parhaillaan. Jos olet kokenut käyttäjä, voit napata JWT-tunnuksesi kirjautumalla sisään <0>Verkkolompakon (wallet.mainnet.galoy.io) kautta</0><1/><1/>JWT näyttää tältä: < 2>eyJhbG...</2><1/><1/>"
-        },
-        "actions": {
-          "login": "Kirjaudu sisään"
-        },
-        "errors": {
-          "setup_failed": "Määritys epäonnistui",
-          "missing_token": "JWT puuttuu, sisäänkirjautuminen ei onnistunut.",
-          "invalid_token": "virheellinen JWT välitetty"
-        }
-      },
       "btcpay": {
         "title": "BTCPay-palvelin",
         "page": {
