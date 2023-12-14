@@ -7,7 +7,10 @@ import { useNavigate } from "react-router-dom";
 import toast from "~/app/components/Toast";
 import msg from "~/common/lib/msg";
 
+import { getPublicKey } from "nostr-tools";
 import Button from "~/app/components/Button";
+import LaWallet from "~/extension/background-script/connectors/lawallet";
+import { ConnectorType } from "~/types";
 import logo from "/static/assets/icons/lawallet.png";
 
 const initialFormData = {
@@ -31,7 +34,7 @@ export default function ConnectLaWallet() {
   const [loading, setLoading] = useState(false);
   const [showAdvanced, setShowAdvanced] = useState(false);
 
-  function getConnectorType() {
+  function getConnectorType(): ConnectorType {
     return "lawallet";
   }
 
@@ -54,8 +57,18 @@ export default function ConnectLaWallet() {
       relay_url,
     } = formData;
 
+    const publicKey = getPublicKey(private_key);
+    const domain = identity_endpoint.replace(/https?:\/\//, "");
+
+    const { username } = await LaWallet.request<{ username: string }>(
+      identity_endpoint,
+      "GET",
+      `/api/pubkey/${publicKey}`,
+      undefined
+    );
+
     const account = {
-      name: "lawallet",
+      name: `${username}@${domain}`,
       config: {
         privateKey: private_key,
         apiEndpoint: api_endpoint,

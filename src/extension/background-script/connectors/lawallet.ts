@@ -133,16 +133,25 @@ export default class LaWallet implements Connector {
     return transactions.filter((transaction) => transaction.type === "sent");
   }
 
-  async getInfo(): Promise<GetInfoResponse> {
-    const { username } = await this.requestIdentity<{ username: string }>(
+  async getInfo(): Promise<
+    GetInfoResponse<{
+      alias: string;
+      pubkey: string;
+      lightning_address: string;
+    }>
+  > {
+    const { username } = await LaWallet.request<{ username: string }>(
+      this.config.identityEndpoint,
       "GET",
       `/api/pubkey/${this.public_key}`,
       undefined
     );
+    const domain = this.config.identityEndpoint.replace("https://", "");
     return {
       data: {
         alias: username,
         pubkey: this.public_key,
+        lightning_address: `${username}@${domain}`,
       },
     };
   }
@@ -187,7 +196,13 @@ export default class LaWallet implements Connector {
     const event: Event = finishEvent(unsignedEvent, this.config.privateKey);
 
     try {
-      await this.requestApi("POST", "/nostr/publish", { body: event }, "blob");
+      await LaWallet.request(
+        this.config.apiEndpoint,
+        "POST",
+        "/nostr/publish",
+        { body: event },
+        "blob"
+      );
       return this.getPaymentStatus(event);
     } catch (e) {
       console.error(e);
@@ -295,9 +310,9 @@ export default class LaWallet implements Connector {
       this.config.privateKey
     );
 
-    const data = await this.requestApi<{
+    const data = await LaWallet.request<{
       pr: string;
-    }>("GET", `/lnurlp/${this.public_key}/callback`, {
+    }>(this.config.apiEndpoint, "GET", `/lnurlp/${this.public_key}/callback`, {
       amount: (args.amount as number) * 1000,
       comment: args.memo,
       nostr: zapEvent,
@@ -316,37 +331,25 @@ export default class LaWallet implements Connector {
     };
   }
 
-  async requestApi<Type>(
-    method: Method,
-    path: string,
-    args?: Record<string, unknown>,
-    responseType?: ResponseType
-  ): Promise<Type> {
-    return this.request<Type>(
-      this.config.apiEndpoint,
-      method,
-      path,
-      args,
-      responseType
-    );
+  private async getZapReceipts(
+    limit: number = 10,
+    since: number = 0
+  ): Promise<Event[]> {
+    const zapEvents = await this.relay_pool.list(this.config.relayList, [
+      {
+        authors: [this.config.urlxPublicKey],
+        kinds: [9735],
+        since,
+        limit,
+        "#p": [this.public_key],
+      },
+    ]);
+
+    return zapEvents;
   }
 
-  async requestIdentity<Type>(
-    method: Method,
-    path: string,
-    args?: Record<string, unknown>,
-    responseType?: ResponseType
-  ): Promise<Type> {
-    return this.request<Type>(
-      this.config.identityEndpoint,
-      method,
-      path,
-      args,
-      responseType
-    );
-  }
-
-  async request<Type>(
+  // Static Methods
+  static async request<Type>(
     url: string,
     method: Method,
     path: string,
@@ -393,23 +396,6 @@ export default class LaWallet implements Connector {
     }
 
     return data;
-  }
-
-  private async getZapReceipts(
-    limit: number = 10,
-    since: number = 0
-  ): Promise<Event[]> {
-    const zapEvents = await this.relay_pool.list(this.config.relayList, [
-      {
-        authors: [this.config.urlxPublicKey],
-        kinds: [9735],
-        since,
-        limit,
-        "#p": [this.public_key],
-      },
-    ]);
-
-    return zapEvents;
   }
 }
 
