@@ -171,26 +171,6 @@
           "title": "Anslut en <0>Bitcoin Jungle Wallet</0>"
         }
       },
-      "galoy": {
-        "phone_number": {
-          "label": "Fyll i ditt telefonnummer"
-        },
-        "sms_code": {
-          "label": "Fyll i verifieringskoden du fick via SMS"
-        },
-        "token": {
-          "label": "Fyll i din JWT-token",
-          "info": "Inloggning till {{label}} uppdateras. Om du är avancerad användare kan du hämta din JWT token genom att logga in via <0>Web Wallet (wallet.mainnet.galoy.io)</0><1/><1/> JWT ser ut som följer: <2>eyJhbG...</2><1/><1/>"
-        },
-        "actions": {
-          "login": "Logga in"
-        },
-        "errors": {
-          "setup_failed": "Konfiguration misslyckades",
-          "missing_token": "JWT saknas, kunde inte logga in.",
-          "invalid_token": "ogiltig JWT godkändes"
-        }
-      },
       "btcpay": {
         "title": "BTCPay Server",
         "page": {

@@ -18,7 +18,13 @@ export const galoyUrls = {
     label: "Blink Wallet",
     website: "https://www.blink.sv/",
     logo: galoyBlink,
-    url: process.env.BLINK_GALOY_URL || "https://api.mainnet.galoy.io/graphql",
+    url: process.env.BLINK_GALOY_URL || "https://api.blink.sv/graphql",
+    getHeaders: (authToken: string) => ({
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "X-API-KEY": authToken,
+    }),
+    apiCompatibilityMode: false,
   },
   "galoy-bitcoin-jungle": {
     i18nPrefix: "bitcoin_jungle",
@@ -28,34 +34,32 @@ export const galoyUrls = {
     url:
       process.env.BITCOIN_JUNGLE_GALOY_URL ||
       "https://api.mainnet.bitcoinjungle.app/graphql",
+    getHeaders: (authToken: string) => ({
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${authToken}`,
+    }),
+    apiCompatibilityMode: true,
   },
 } as const;
 
-const defaultHeaders = {
-  Accept: "application/json",
-  "Content-Type": "application/json",
-};
-
-type Props = {
-  instance: keyof typeof galoyUrls;
-};
-
 export default function ConnectGaloy(props: Props) {
   const { instance } = props;
-  const { url, label, website, i18nPrefix, logo } = galoyUrls[instance];
+  const { url, label, website, i18nPrefix, logo, apiCompatibilityMode } =
+    galoyUrls[instance];
 
   const navigate = useNavigate();
   const { t } = useTranslation("translation", {
     keyPrefix: "choose_connector",
   });
   const [loading, setLoading] = useState(false);
-  const [jwt, setJwt] = useState<string | undefined>();
+  const [authToken, setAuthToken] = useState<string | undefined>();
 
-  function handleJwtChange(event: React.ChangeEvent<HTMLInputElement>) {
-    setJwt(event.target.value.trim());
+  function handleAuthTokenChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setAuthToken(event.target.value.trim());
   }
 
-  async function loginWithJwt(event: React.FormEvent<HTMLFormElement>) {
+  async function loginWithAuthToken(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setLoading(true);
     const meQuery = {
@@ -63,26 +67,28 @@ export default function ConnectGaloy(props: Props) {
           query getinfo {
             me {
               defaultAccount {
-                defaultWalletId
+                wallets {
+                  walletCurrency
+                  id
+                }
               }
             }
           }
         `,
     };
     try {
-      if (!jwt) {
+      if (!authToken) {
         const errorMsg = `${t("galoy.errors.missing_token")}`;
         throw new Error(errorMsg);
       }
-      const authToken = jwt;
+
+      const headers = galoyUrls[instance].getHeaders(authToken);
 
       const { data: meData } = await axios.post(url, meQuery, {
-        headers: {
-          ...defaultHeaders,
-          Authorization: `Bearer ${authToken}`,
-        },
+        headers: headers,
         adapter: fetchAdapter,
       });
+
       if (meData.error || meData.errors) {
         const error = meData.error || meData.errors;
         console.error(error);
@@ -92,8 +98,12 @@ export default function ConnectGaloy(props: Props) {
         }`;
         toast.error(alertMsg);
       } else {
-        const walletId = meData.data.me.defaultAccount.defaultWalletId;
-        saveAccount({ authToken, walletId });
+        // Find the BTC wallet and get its ID
+        const btcWallet = meData.data.me.defaultAccount.wallets.find(
+          (w: Wallet) => w.walletCurrency === "BTC"
+        );
+        const walletId = btcWallet.id;
+        saveAccount({ headers, walletId });
       }
     } catch (e: unknown) {
       console.error(e);
@@ -112,15 +122,16 @@ export default function ConnectGaloy(props: Props) {
     }
   }
 
-  async function saveAccount(config: { authToken: string; walletId: string }) {
+  async function saveAccount(config: { headers: Headers; walletId: string }) {
     setLoading(true);
 
     const account = {
       name: label,
       config: {
         url,
-        accessToken: config.authToken,
+        headers: config.headers,
         walletId: config.walletId,
+        apiCompatibilityMode,
       },
       connector: "galoy",
     };
@@ -167,22 +178,20 @@ export default function ConnectGaloy(props: Props) {
       logo={logo}
       submitLabel={t("galoy.actions.login")}
       submitLoading={loading}
-      onSubmit={loginWithJwt}
+      onSubmit={loginWithAuthToken}
       description={
         <Trans
-          i18nKey={"galoy.token.info"}
+          i18nKey={`${i18nPrefix}.token.info`}
           t={t}
           values={{ label }}
           components={[
-            // eslint-disable-next-line react/jsx-key
             <a
-              href="https://wallet.mainnet.galoy.io"
+              href="https://dashboard.blink.sv"
               className="underline"
+              target="_blank"
+              rel="noopener noreferrer"
+              key="Blink Dashboard"
             ></a>,
-            // eslint-disable-next-line react/jsx-key
-            <br />,
-            // eslint-disable-next-line react/jsx-key
-            <b></b>,
           ]}
         />
       }
@@ -190,17 +199,17 @@ export default function ConnectGaloy(props: Props) {
       {
         <div className="mt-6">
           <label
-            htmlFor="jwt"
+            htmlFor="authToken"
             className="block font-medium text-gray-800 dark:text-white"
           >
-            {t("galoy.token.label")}
+            {t(`${i18nPrefix}.token.label`)}
           </label>
           <div className="mt-1">
             <Input
-              id="jwt"
-              name="jwt"
+              id="authToken"
+              name="authToken"
               required
-              onChange={handleJwtChange}
+              onChange={handleAuthTokenChange}
               autoFocus={true}
             />
           </div>
@@ -209,3 +218,16 @@ export default function ConnectGaloy(props: Props) {
     </ConnectorForm>
   );
 }
+
+type Headers = {
+  [key: string]: string;
+};
+
+type Props = {
+  instance: keyof typeof galoyUrls;
+};
+
+type Wallet = {
+  walletCurrency: string;
+  id: string;
+};
