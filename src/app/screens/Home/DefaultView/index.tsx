@@ -116,25 +116,28 @@ const DefaultView: FC<Props> = (props) => {
         <div className="flex mb-4 space-x-3 justify-between">
           <HomeButton
             icon={<img src="assets/icons/popicons/receive.svg" />}
-            title={tCommon("actions.receive")}
             onClick={() => {
               navigate("/receive");
             }}
-          ></HomeButton>
+          >
+            {tCommon("actions.receive")}
+          </HomeButton>
           <HomeButton
             icon={<img src="assets/icons/popicons/send.svg" />}
-            title={tCommon("actions.send")}
             onClick={() => {
               navigate("/send");
             }}
-          ></HomeButton>
+          >
+            {tCommon("actions.send")}
+          </HomeButton>
           <HomeButton
             icon={<img src="assets/icons/popicons/apps.svg" />}
-            title={tCommon("apps")}
             onClick={() => {
               window.open(`https://getalby.com/discover`, "_blank");
             }}
-          ></HomeButton>
+          >
+            {tCommon("apps")}
+          </HomeButton>
         </div>
 
         {isBlockedUrl && (
@@ -186,20 +189,20 @@ const DefaultView: FC<Props> = (props) => {
 };
 
 const HomeButton = ({
-  title,
   icon,
   onClick,
+  children,
 }: {
-  title: string;
   icon: React.ReactNode;
+  children: React.ReactNode;
   onClick: () => void;
 }) => (
   <button
-    className="bg-white dark:bg-surface-01dp hover:bg-amber-50 text-gray-800 dark:text-primary rounded-xl border border-gray-300 dark:border-neutral-800 hover:border-primary dark:hover:border-primary flex flex-col flex-1 justify-center items-center pt-[18px] pb-3 px-[14px] text-xs font-medium gap-2"
+    className="bg-white dark:bg-surface-01dp hover:bg-amber-50 dark:hover:bg-surface-02dp text-gray-800 dark:text-primary rounded-xl border border-gray-300 dark:border-neutral-800 hover:border-primary dark:hover:border-primary flex flex-col flex-1 justify-center items-center pt-[18px] pb-3 px-[14px] text-xs font-medium gap-2"
     onClick={onClick}
   >
     {icon}
-    {title}
+    {children}
   </button>
 );
 
