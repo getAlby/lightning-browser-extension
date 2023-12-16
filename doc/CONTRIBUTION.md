@@ -168,7 +168,7 @@ Correct way for this would be:
 ```json
 {
   "actions": {
-    "add_account": "Add account"
+    "connect_wallet": "Connect a wallet"
   }
 }
 ```
