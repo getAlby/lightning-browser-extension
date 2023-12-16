@@ -204,26 +204,6 @@
           "title": "Conectare la <0>Bitcoin Jungle Wallet</0>"
         }
       },
-      "galoy": {
-        "phone_number": {
-          "label": "Introdu numarul tau de telefon"
-        },
-        "sms_code": {
-          "label": "Introdu codul de verificare primit prin SMS"
-        },
-        "token": {
-          "label": "Introdu tokenul tau JWT",
-          "info": "Momentan {{eticheta}} de login este in curs de actualizare. Daca esti un utilizator avansat, poti sa iei tokenul tau JWT prin logare via <0>Web Wallet (wallet.mainnet.galoy.io)</0><1/><1/>Tokenul JWT este de tipul: <2>eyJhbG...</2><1/><1/>"
-        },
-        "actions": {
-          "login": "Login"
-        },
-        "errors": {
-          "setup_failed": "Setare esuata",
-          "missing_token": "Lipseste JWT, nu s-a putut efectua logarea.",
-          "invalid_token": "JWT invalid a trecut"
-        }
-      },
       "btcpay": {
         "title": "Serverul BTCPay",
         "page": {

@@ -205,16 +205,6 @@
         }
       },
       "galoy": {
-        "phone_number": {
-          "label": ""
-        },
-        "sms_code": {
-          "label": ""
-        },
-        "token": {
-          "label": "",
-          "info": ""
-        },
         "actions": {
           "login": ""
         },

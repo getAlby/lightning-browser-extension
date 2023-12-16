@@ -54,12 +54,6 @@
         "drag_and_drop": "将你的macaroon拖放到此处或<0>浏览</0>",
         "title": "LND"
       },
-      "bitcoin_jungle": {
-        "page": {
-          "title": "连接<0>比特币丛林钱包</0>"
-        },
-        "title": "比特币丛林钱包"
-      },
       "eclair": {
         "url": {
           "label": "Eclair URL",
@@ -88,24 +82,16 @@
         },
         "title": "Citadel"
       },
-      "galoy": {
-        "token": {
-          "label": "输入你的JWT令牌",
-          "info": "目前{{label}}登录正在升级中。如果你是高级用户，你可以通过<0>网络钱包（wallet.mainnet.galoy.io）</0><1/><1/>登录来获取你的JWT令牌，JWT看起来像：<2>eyJhbG...</2><1/><1/>"
-        },
-        "actions": {
-          "login": "登录"
-        },
-        "errors": {
-          "setup_failed": "设置失败",
-          "missing_token": "JWT不存在，无法登录。",
-          "invalid_token": "传递了无效的JWT"
-        },
-        "sms_code": {
-          "label": "输入你的短信验证码"
-        },
-        "phone_number": {
-          "label": "输入你的电话号码"
+      "blink": {
+        "title": "眨眼钱包",
+        "page": {
+          "title": "连接<0>眨眼钱包</0>"
+        }
+      },
+      "bitcoin_jungle": {
+        "title": "比特币丛林钱包",
+        "page": {
+          "title": "连接<0>比特币丛林钱包</0>"
         }
       },
       "btcpay": {
@@ -121,12 +107,6 @@
           "label": "配置数据",
           "placeholder": "config=http://your-btc-pay.org/lnd-config/212121/lnd.config"
         }
-      },
-      "blink": {
-        "page": {
-          "title": "连接<0>眨眼钱包</0>"
-        },
-        "title": "眨眼钱包"
       },
       "commando": {
         "config": {

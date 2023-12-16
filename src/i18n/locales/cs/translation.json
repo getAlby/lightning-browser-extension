@@ -170,26 +170,6 @@
           "title": "Připojení k <0>Bitcoin Jungle Wallet</0>"
         }
       },
-      "galoy": {
-        "phone_number": {
-          "label": "Vložte své telefonní číslo"
-        },
-        "sms_code": {
-          "label": "Vlože verifikační kód ze SMS"
-        },
-        "token": {
-          "label": "Vlože svůj JWT token",
-          "info": "Přihlášení {{label}} je aktuálně aktualizováno. Pokud jste pokročilý uživatel, můžete svůj JWT token získat přihlášením přes <0>Webovou peněženku (wallet.mainnet.galoy.io)</0><1/><1/>JWT token vypadá podobně jako: <2>eyJhbG...</2><1/><1/>"
-        },
-        "actions": {
-          "login": "Přihlásit"
-        },
-        "errors": {
-          "setup_failed": "Nastavení se nezdařilo",
-          "missing_token": "JWT chybí, přihlášení se nezdařilo.",
-          "invalid_token": "Vloženo nevalidní JWT"
-        }
-      },
       "btcpay": {
         "title": "BTCPay Server",
         "page": {

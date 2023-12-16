@@ -214,26 +214,6 @@
           "title": "<0>Bitcoin Jungle Wallet</0>に接続"
         }
       },
-      "galoy": {
-        "phone_number": {
-          "label": "電話番号を入力"
-        },
-        "sms_code": {
-          "label": "SMS認証コードを入力"
-        },
-        "token": {
-          "label": "アクセストークンを入力",
-          "info": "Albyと{{label}}の連携は現在アルファ版のため、上級者のみに推奨されます。<br><br>アクセストークンは、モバイルアプリで設定アイコンをクリックし、ビルド番号を3回タップして開発者メニューを開くことで入手できます。<br><br>アクセストークンはここからコピーできます。<br><br>"
-        },
-        "actions": {
-          "login": "ログイン"
-        },
-        "errors": {
-          "setup_failed": "セットアップに失敗しました",
-          "missing_token": "アクセストークンが見つからないためログインできませんでした。",
-          "invalid_token": "無効なアクセストークンです"
-        }
-      },
       "btcpay": {
         "page": {
           "title": "BTCPay LNDノードに接続",

@@ -210,26 +210,6 @@
           "title": "Sambungkan dengan <0>Bitcoin Jungle Wallet</0>"
         }
       },
-      "galoy": {
-        "phone_number": {
-          "label": "Masukkan nomor telepon kamu"
-        },
-        "sms_code": {
-          "label": "Masukkan kode verifikasi SMS"
-        },
-        "token": {
-          "label": "Masukkan token Access",
-          "info": "{{label}} integrasi dengan Alby masih berstatus alpha dan hanya disarankan untuk pengguna yang berpengalaman.<br><br>Kamu bisa mengambil token Access pada aplikasi mobile, klik pada ikon pengaturan, dan sentuh 3 kali pada build number untuk membukan developer menu.<br><br>kemudian, token akses akan bisa disalin.<br><br>"
-        },
-        "errors": {
-          "setup_failed": "Persiapan gagal",
-          "missing_token": "Token akses tidak ada, tidak dapat masuk.",
-          "invalid_token": "Token akses salah"
-        },
-        "actions": {
-          "login": "Login"
-        }
-      },
       "btcpay": {
         "page": {
           "title": "Sambungkan dengan node BTCPay LND",
