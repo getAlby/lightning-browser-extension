@@ -72,7 +72,7 @@ function NostrConfirm() {
               title={origin.name}
               image={origin.icon}
               url={origin.host}
-              isSmall={false}
+              isSmall={true}
             />
 
             {message && (
@@ -92,7 +92,7 @@ function NostrConfirm() {
             </div>
             {showDetails && (
               <div className="whitespace-pre-wrap break-words p-2 mb-4 shadow bg-white rounded-lg dark:bg-surface-02dp text-gray-500 dark:text-gray-400">
-                {`key: ${peer}`}
+                {tPermissions("nostr.peer")}: {peer}
               </div>
             )}
           </div>
