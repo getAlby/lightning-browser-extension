@@ -19,9 +19,9 @@ function NostrConfirmEncryptOrDecrypt() {
   const { t: tCommon } = useTranslation("common");
   const navState = useNavigationState();
   const origin = navState.origin as OriginData;
-  const action = navState.args?.description?.action;
-  const peer = navState.args?.description?.peer;
-  const message = navState.args?.description?.message;
+  const action = navState.args?.encryptOrDecrypt?.action;
+  const peer = navState.args?.encryptOrDecrypt?.peer;
+  const message = navState.args?.encryptOrDecrypt?.message;
 
   const [loading, setLoading] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
