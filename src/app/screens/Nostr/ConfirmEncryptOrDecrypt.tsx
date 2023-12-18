@@ -79,7 +79,6 @@ function NostrConfirmEncryptOrDecrypt() {
               <ContentMessage
                 heading={tPermissions("nostr.nip04Action", {
                   action: action,
-                  defaultValue: "",
                 })}
                 content={message}
               />
