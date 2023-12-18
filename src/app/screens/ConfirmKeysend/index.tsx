@@ -116,7 +116,7 @@ function ConfirmKeysend() {
     if (!budget) return;
     return msg.request("addAllowance", {
       totalBudget: parseInt(budget),
-      host: origin.host,
+      host: origin.domain,
       name: origin.name,
       imageURL: origin.icon,
     });
