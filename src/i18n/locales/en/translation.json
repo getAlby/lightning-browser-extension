@@ -904,7 +904,7 @@
       "block_added": "Added {{host}} to the blocklist, please reload the website.",
       "peer": "Peer",
       "kinds": {
-        "unknown": "nostr event of kind {{kind}}",
+        "unknown": "kind {{kind}}",
         "0": "metadata",
         "1": "short text note",
         "2": "recommend relay",
