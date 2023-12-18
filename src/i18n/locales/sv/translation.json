@@ -684,13 +684,11 @@
         "30008": "profil badges",
         "30009": "badge definition",
         "30023": "långformigt innehåll",
-        "30078": "applikationsspecifika data",
-        "unknown": "nostr event av sort {{kind}}"
+        "30078": "applikationsspecifika data"
       },
       "view_details": "Visa detaljer",
       "hide_details": "Göm detaljer",
       "block_added": "Lade till {{host}} till blockeringslistan, ladda om webbplatsen.",
-      "allow_sign_event": "Tillåt {{host}} att signera en {{kind}}:",
       "no_content": "(Inget innehåll)",
       "allow_sign": "Tillåt {{host}} att signera:",
       "content": "Den här webbplatsen ber dig att signera:"

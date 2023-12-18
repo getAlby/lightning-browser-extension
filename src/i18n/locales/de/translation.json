@@ -627,10 +627,8 @@
         "30008": "Profilabzeichen",
         "30009": "Badge Beschreibung",
         "30023": "Langform Inhalte",
-        "30078": "anwendungsspezifische Daten",
-        "unknown": "nostr Ereignis der Art {{kind}}"
-      },
-      "allow_sign_event": "Erlaube {{host}}, eine {{kind}} zu unterzeichnen:"
+        "30078": "anwendungsspezifische Daten"
+      }
     },
     "confirm_request_permission": {
       "title": "Antrag genehmigen",

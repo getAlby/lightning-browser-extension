@@ -629,10 +629,8 @@
         "30008": "odznaki profile",
         "30009": "definicja odznaki",
         "30023": "treść długiego formatu",
-        "30078": "dane specyficzne dla aplikacji",
-        "unknown": "zdarzenia nostr typu {{kind}}"
+        "30078": "dane specyficzne dla aplikacji"
       },
-      "allow_sign_event": "Pozwól {{host}} na podpisywanie {{kind}}:",
       "view_details": "Pokaż szczegóły"
     },
     "transactions": {

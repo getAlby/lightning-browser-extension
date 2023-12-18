@@ -894,14 +894,16 @@
       "allow": "Allow this website to:",
       "content": "This website asks you to sign:",
       "allow_sign": "Allow {{host}} to sign:",
-      "allow_sign_event": "Allow {{host}} to sign a {{kind}}:",
+      "allow_sign_event": "Allow {{host}} to sign a {{kind}} event",
+      "allow_encrypt": "Allow {{host}} to encrypt the message:",
+      "allow_decrypt": "Allow {{host}} to decrypt the message:",
       "view_details": "View details",
       "hide_details": "Hide details",
-      "no_content": "(No content)",
       "block_and_ignore": "Block and ignore {{host}}",
       "block_added": "Added {{host}} to the blocklist, please reload the website.",
+      "peer": "Peer",
       "kinds": {
-        "unknown": "nostr event of kind {{kind}}",
+        "unknown": "kind {{kind}}",
         "0": "metadata",
         "1": "short text note",
         "2": "recommend relay",
@@ -1148,9 +1150,9 @@
     },
     "nostr": {
       "getpublickey": "Read your public key",
+      "signmessage": "Sign message with your key",
       "nip04encrypt": "Encrypt data",
-      "nip04decrypt": "Decrypt data",
-      "signmessage": "Sign message with your key"
+      "nip04decrypt": "Decrypt data"
     },
     "bitcoin": {
       "getaddress": "Read your Bitcoin receive address"

@@ -90,7 +90,7 @@ function ConfirmSignMessage() {
                     defaultValue: t("kinds.unknown", { kind: event.kind }),
                   }),
                 })}
-                content={event.content || t("no_content")}
+                content={event.content || ""}
               />
               <div className="flex justify-center mb-4 gap-4">
                 <Hyperlink onClick={toggleShowJSON}>
