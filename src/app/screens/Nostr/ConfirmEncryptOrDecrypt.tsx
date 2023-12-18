@@ -12,7 +12,7 @@ import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import { OriginData } from "~/types";
 
-function NostrConfirm() {
+function NostrConfirmEncryptOrDecrypt() {
   const { t } = useTranslation("translation", {
     keyPrefix: "nostr",
   });
@@ -133,4 +133,4 @@ function NostrConfirm() {
   );
 }
 
-export default NostrConfirm;
+export default NostrConfirmEncryptOrDecrypt;
