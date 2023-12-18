@@ -553,7 +553,6 @@
       "allow_sign": "Permitir que {{host}} firme:",
       "block_and_ignore": "Bloquear e ignorar {{host}}",
       "block_added": "Se agregó {{host}} a la lista de bloqueados, vuelva a cargar el sitio web.",
-      "allow_sign_event": "Permitir que {{host}} firme un {{kind}}:",
       "view_details": "Más información",
       "hide_details": "Ocultar los detalles",
       "no_content": "(Sin contenido)",
@@ -580,8 +579,7 @@
         "30008": "distintivos del perfil",
         "30009": "definición del distintivo",
         "30023": "contenidos largos",
-        "30078": "datos específicos de la aplicación",
-        "unknown": "nostr evento del tipo {{kind}}"
+        "30078": "datos específicos de la aplicación"
       }
     },
     "discover": {

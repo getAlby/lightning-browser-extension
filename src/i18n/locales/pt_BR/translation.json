@@ -661,7 +661,6 @@
       "block_added": "{{host}} adicionado na lista de bloqueio, por favor recarregue o site.",
       "allow_sign": "Permitir {{host}} assinar:",
       "view_details": "Ver detalhes",
-      "allow_sign_event": "Permitir {{host}} assinar {{kind}}:",
       "hide_details": "Ocultar detalhes",
       "kinds": {
         "0": "metadados",
@@ -670,8 +669,7 @@
         "4": "mensagens diretas criptografadas",
         "5": "exclusão de evento",
         "7": "reação",
-        "9735": "zap",
-        "unknown": "evento nostr do tipo {{kind}}"
+        "9735": "zap"
       },
       "no_content": "(Sem conteúdo)"
     },
