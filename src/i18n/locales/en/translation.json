@@ -894,7 +894,7 @@
       "allow": "Allow this website to:",
       "content": "This website asks you to sign:",
       "allow_sign": "Allow {{host}} to sign:",
-      "allow_sign_event": "Allow {{host}} to sign a {{kind}}:",
+      "allow_sign_event": "Allow {{host}} to sign a {{kind}} event:",
       "allow_encrypt": "Allow {{host}} to encrypt the message:",
       "allow_decrypt": "Allow {{host}} to decrypt the message:",
       "view_details": "View details",
