@@ -1148,7 +1148,7 @@
     "nostr": {
       "getpublickey": "Read your public key",
       "signmessage": "Sign message with your key",
-      "nip04Action": "Allow {{host}} to {{action}} the message:",
+      "nip04Action": "Allow this website to {{action}} the message:",
       "nip04encrypt": "encrypt",
       "nip04decrypt": "decrypt",
       "peer": "Peer"

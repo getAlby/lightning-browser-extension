@@ -78,7 +78,6 @@ function NostrConfirmEncryptOrDecrypt() {
             {message && (
               <ContentMessage
                 heading={tPermissions("nostr.nip04Action", {
-                  host: origin.host,
                   action: action,
                   defaultValue: "",
                 })}
