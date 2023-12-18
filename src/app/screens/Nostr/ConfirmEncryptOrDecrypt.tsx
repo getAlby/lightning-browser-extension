@@ -17,7 +17,6 @@ function NostrConfirmEncryptOrDecrypt() {
     keyPrefix: "nostr",
   });
   const { t: tCommon } = useTranslation("common");
-  const { t: tPermissions } = useTranslation("permissions");
   const navState = useNavigationState();
   const origin = navState.origin as OriginData;
   const action = navState.args?.description?.action;
@@ -74,12 +73,14 @@ function NostrConfirmEncryptOrDecrypt() {
               url={origin.host}
               isSmall={true}
             />
-
             {message && (
               <ContentMessage
-                heading={tPermissions("nostr.nip04Action", {
-                  action: action,
-                })}
+                heading={t(
+                  action == "encrypt" ? "allow_encrypt" : "allow_decrypt",
+                  {
+                    host: origin.host,
+                  }
+                )}
                 content={message}
               />
             )}
@@ -90,7 +91,7 @@ function NostrConfirmEncryptOrDecrypt() {
             </div>
             {showDetails && (
               <div className="whitespace-pre-wrap break-words p-2 mb-4 shadow bg-white rounded-lg dark:bg-surface-02dp text-gray-500 dark:text-gray-400">
-                {tPermissions("nostr.peer")}: {peer}
+                {t("peer")}: {peer}
               </div>
             )}
           </div>

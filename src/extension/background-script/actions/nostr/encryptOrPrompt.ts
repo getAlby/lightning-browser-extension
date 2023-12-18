@@ -6,7 +6,6 @@ import {
   hasPermissionFor,
 } from "~/extension/background-script/permissions";
 import state from "~/extension/background-script/state";
-import i18n from "~/i18n/i18nConfig";
 import { MessageEncryptGet, PermissionMethodNostr, Sender } from "~/types";
 
 const encryptOrPrompt = async (message: MessageEncryptGet, sender: Sender) => {
@@ -34,7 +33,7 @@ const encryptOrPrompt = async (message: MessageEncryptGet, sender: Sender) => {
         action: "public/nostr/confirmEncryptOrDecrypt",
         args: {
           description: {
-            action: i18n.t("permissions:nostr.nip04encrypt"),
+            action: "encrypt",
             peer: message.args.peer,
             message: message.args.plaintext,
           },
