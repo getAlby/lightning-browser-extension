@@ -99,7 +99,7 @@ export default class Alby implements Connector {
         custom_records: invoice.custom_records,
         id: `${invoice.payment_request}-${index}`,
         memo: invoice.comment || invoice.memo,
-        preimage: invoice.preimage,
+        preimage: invoice.preimage ?? "",
         payment_hash: invoice.payment_hash,
         settled: invoice.settled,
         settleDate: new Date(invoice.settled_at).getTime(),
@@ -291,7 +291,7 @@ export default class Alby implements Connector {
         }
       }
 
-      let authUrl = authClient.generateAuthURL({
+      let authUrl = await authClient.generateAuthURL({
         code_challenge_method: "S256",
         authorizeUrl: process.env.ALBY_OAUTH_AUTHORIZE_URL,
       });
