@@ -129,6 +129,22 @@ const methods: Record<string, Record<string, string>> = {
     path: "/v2/invoices/settle",
     httpMethod: "POST",
   },
+  newaddress: {
+    path: "/v1/newaddress",
+    httpMethod: "GET",
+  },
+  nextaddr: {
+    path: "/v2/wallet/address/next",
+    httpMethod: "POST",
+  },
+  listaddresses: {
+    path: "/v2/wallet/addresses",
+    httpMethod: "GET",
+  },
+  listunspent: {
+    path: "/v2/wallet/utxos",
+    httpMethod: "POST",
+  },
 };
 
 const pathTemplateParser = (
