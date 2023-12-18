@@ -24,7 +24,7 @@ const updatedPayments: DbPayment[] = [
     createdAt: "1487076708000",
     description: "A red bird?!",
     destination: "Space",
-    host: "getalby.com",
+    host: "https://getalby.com",
     id: 6,
     location: "test",
     name: "Alby",
@@ -73,7 +73,7 @@ const data: PaymentNotificationData = {
   origin: {
     location: "test",
     domain: "",
-    host: "getalby.com",
+    host: "https://getalby.com",
     pathname: "test",
     name: "Alby",
     description: "test",
