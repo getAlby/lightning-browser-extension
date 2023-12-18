@@ -62,6 +62,10 @@ const methods: Record<string, string> = {
   sendtoroute: "lnd.lightning.SendToRouteSync",
   verifymessage: "lnd.lightning.VerifyMessage",
   walletbalance: "lnd.lightning.WalletBalance",
+  newaddress: "lnd.lightning.NewAddress",
+  nextaddr: "lnd.walletKit.nextAddr",
+  listaddresses: "lnd.walletKit.ListAddresses",
+  listunspent: "lnd.walletKit.ListUnspent",
 };
 
 const DEFAULT_SERVER_HOST = "mailbox.terminal.lightning.today:443";
