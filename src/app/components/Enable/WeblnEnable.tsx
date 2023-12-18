@@ -67,7 +67,7 @@ function WeblnEnableComponent(props: Props) {
           <div className="pt-3">
             {hasHttp && (
               <Alert type="warn">
-                ⚠️ you are connecting to a unsecure domain
+                {tCommon("enable.insecure_domain_warn")}
               </Alert>
             )}
           </div>
