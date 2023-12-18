@@ -1211,7 +1211,11 @@
       "routermc": "Read the internal mission control state",
       "addinvoice": "Create new invoices",
       "addholdinvoice": "Create new HODL invoices",
-      "settleinvoice": "Settle an accepted invoice"
+      "settleinvoice": "Settle an accepted invoice",
+      "newaddress": "Get a new onchain address",
+      "nextaddr": "Get the next unused address within the wallet",
+      "listaddresses": "Get all the addresses along with their balance",
+      "listunspent": "Get a list of all utxos spendable by the wallet"
     },
     "lnc": {
       "getinfo": "Get the node information",
@@ -1237,7 +1241,11 @@
       "routermc": "Read the internal mission control state",
       "addinvoice": "Create new invoices",
       "addholdinvoice": "Create new HODL invoices",
-      "settleinvoice": "Settle an accepted invoice"
+      "settleinvoice": "Settle an accepted invoice",
+      "newaddress": "Get a new onchain address",
+      "nextaddr": "Get the next unused onchain address within the wallet",
+      "listaddresses": "Get all the onchain addresses along with their balance",
+      "listunspent": "Get a list of all utxos spendable by the wallet"
     }
   }
 }
