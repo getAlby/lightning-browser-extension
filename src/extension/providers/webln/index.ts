@@ -1,5 +1,11 @@
 import ProviderBase from "~/extension/providers/providerBase";
 
+declare global {
+  interface Window {
+    webln: WebLNProvider;
+  }
+}
+
 type RequestInvoiceArgs = {
   amount?: string | number;
   defaultAmount?: string | number;

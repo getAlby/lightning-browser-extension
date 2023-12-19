@@ -37,7 +37,7 @@
   "dependencies": {
     "@bitcoin-design/bitcoin-icons-react": "^0.1.10",
     "@bitcoinerlab/secp256k1": "^1.0.5",
-    "@getalby/sdk": "^3.2.1",
+    "@getalby/sdk": "^3.2.0",
     "@headlessui/react": "^1.7.16",
     "@lightninglabs/lnc-web": "^0.2.4-alpha",
     "@noble/curves": "^1.1.0",
@@ -104,7 +104,6 @@
     "@types/webextension-polyfill": "^0.10.5",
     "@typescript-eslint/eslint-plugin": "^6.8.0",
     "@typescript-eslint/parser": "^6.8.0",
-    "@webbtc/webln-types": "^3.0.0",
     "autoprefixer": "^10.4.16",
     "buffer": "^6.0.3",
     "clean-webpack-plugin": "^4.0.0",
