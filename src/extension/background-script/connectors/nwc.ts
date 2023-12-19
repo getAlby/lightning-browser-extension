@@ -71,6 +71,7 @@ class NWCConnector implements Connector {
   async getTransactions(): Promise<GetTransactionsResponse> {
     const listTransactionsResponse = await this.nwc.listTransactions({
       unpaid: false,
+      limit: 50, // restricted by relay max event payload size
     });
 
     const transactions: ConnectorTransaction[] =
