@@ -1,5 +1,8 @@
 import { webln } from "@getalby/sdk";
 import { NostrWebLNProvider } from "@getalby/sdk/dist/webln";
+import lightningPayReq from "bolt11";
+import Hex from "crypto-js/enc-hex";
+import SHA256 from "crypto-js/sha256";
 import { Account } from "~/types";
 import Connector, {
   CheckPaymentArgs,
@@ -99,23 +102,42 @@ class NWCConnector implements Connector {
       defaultMemo: args.memo,
     });
 
+    const decodedInvoice = lightningPayReq.decode(invoice.paymentRequest);
+    const paymentHash = decodedInvoice.tags.find(
+      (tag) => tag.tagName === "payment_hash"
+    )?.data as string | undefined;
+    if (!paymentHash) {
+      throw new Error("Could not find payment hash in invoice");
+    }
+
     return {
       data: {
         paymentRequest: invoice.paymentRequest,
-        // TODO: payment hash is missing in the make_invoice response?
-        rHash: "",
+        rHash: paymentHash,
       },
     };
   }
 
   async sendPayment(args: SendPaymentArgs): Promise<SendPaymentResponse> {
+    const invoice = lightningPayReq.decode(args.paymentRequest);
+    const paymentHash = invoice.tags.find(
+      (tag) => tag.tagName === "payment_hash"
+    )?.data as string | undefined;
+    if (!paymentHash) {
+      throw new Error("Could not find payment hash in invoice");
+    }
+
     const response = await this.nwc.sendPayment(args.paymentRequest);
     return {
       data: {
         preimage: response.preimage,
-        paymentHash: response.paymentHash,
-        // TODO: How to get fees via NWC?
-        route: { total_amt: 1, total_fees: 1 },
+        paymentHash,
+        route: {
+          // TODO: how to get amount paid for zero-amount invoices?
+          total_amt: parseInt(invoice.millisatoshis || "0") / 1000,
+          // TODO: How to get fees from WebLN?
+          total_fees: 0,
+        },
       },
     };
   }
@@ -127,21 +149,34 @@ class NWCConnector implements Connector {
       customRecords: args.customRecords,
     });
 
+    const paymentHash = SHA256(data.preimage).toString(Hex);
+
     return {
       data: {
-        preimage: data.payment_preimage,
-        paymentHash: data.payment_hash,
-        route: { total_amt: data.amount, total_fees: data.fee },
+        preimage: data.preimage,
+        paymentHash,
+
+        route: {
+          total_amt: args.amount,
+          // TODO: How to get fees from WebLN?
+          total_fees: 0,
+        },
       },
     };
   }
 
   async checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {
-    const invoice = await this.nwc.lookupInvoice({
-      payment_hash: args.paymentHash,
+    // TODO: update WebLN types package
+    const response = await this.nwc.lookupInvoice({
+      paymentHash: args.paymentHash,
     });
 
-    return invoice.paid;
+    return {
+      data: {
+        paid: response.paid,
+        preimage: response.preimage,
+      },
+    };
   }
 
   signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {
