@@ -666,10 +666,10 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.52.0.tgz#78fe5f117840f69dc4a353adf9b9cd926353378c"
   integrity sha512-mjZVbpaeMZludF2fsWLD0Z9gCref1Tk4i9+wddjRvpUNqqcndPkBD09N/Mapey0b3jaXbLm2kICwFv2E64QinA==
 
-"@getalby/sdk@^3.2.0":
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/@getalby/sdk/-/sdk-3.2.0.tgz#fec967f741116d0f3ac06db8b27b9d225849fabe"
-  integrity sha512-gHWGeAcvaynSlV8sZ/DouakgJeNiiPDk3JeZvIYlkAN6A9XUE3n5QV6Flw1kmz8kKoVmv9Cqr0mHN/PFSV1YWw==
+"@getalby/sdk@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@getalby/sdk/-/sdk-3.1.0.tgz#49a6d7b292f3c6ab1c37e72422aa0f0ec8f43226"
+  integrity sha512-1WwwMfrCRtlUv3BnT/rqYiE5giztH5ZxfT1fDwhaJGeC8EJXxGjFBbaUhE0Wq98Fcs/hKoGM4gSmp3UHFDuQxg==
   dependencies:
     events "^3.3.0"
     nostr-tools "^1.17.0"
