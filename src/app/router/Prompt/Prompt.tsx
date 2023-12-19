@@ -183,7 +183,7 @@ const Layout = () => {
         </div>
         <AccountMenu showOptions={false} />
       </div>
-      <main className="flex flex-col grow min-h-0">
+      <main className="flex flex-col grow">
         <Outlet />
       </main>
     </>

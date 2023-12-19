@@ -33,7 +33,7 @@ export default function Modal({
         position == "top" && "items-start pt-20"
       )}
       className="rounded-lg shadow-xl bg-white dark:bg-surface-01dp w-full max-w-md overflow-x-hidden relative p-5 cursor-auto mx-5"
-      style={{ content: { maxHeight: "90vh" } }}
+      style={{ content: { maxHeight: "80vh" } }}
     >
       {title && (
         <h2 className="text-2xl font-bold dark:text-white mb-6">{title}</h2>
