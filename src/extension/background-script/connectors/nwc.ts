@@ -166,6 +166,7 @@ class NWCConnector implements Connector {
   }
 
   async checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {
+    // TODO: update WebLN types package
     const response = await this.nwc.lookupInvoice({
       paymentHash: args.paymentHash,
     });
