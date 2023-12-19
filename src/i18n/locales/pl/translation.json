@@ -19,7 +19,7 @@
       },
       "test_connection": {
         "ready": "Świetnie, wszystko gotowe!",
-        "initializing": "Tworzenie Twojego konta. Poczekaj proszę, to może zająć chwilę...",
+        "initializing": "Tworzenie Twojego konta. Poczekaj proszę, to może chwilę zająć...",
         "connection_error": "Błąd połączenia",
         "review_connection_details": "Sprawdź proszę dane do połączenia.",
         "connection_taking_long": "Próba połączenia trwa dłużej niż oczekiwano... Czy dane do połączenia są poprawne? Czy Twój węzeł jest osiągalny?",
@@ -31,18 +31,21 @@
       "pin_extension": {
         "explanation": "1. Kliknij <0/> w prawym górnym rogu przeglądarki <1/>2. Znajdź Alby i kliknij, aby przypiąć je do paska narzędzi<1/>3. Gotowe. Aby uzyskać dostęp do Alby, kliknij ikonę <2/>",
         "title": "Przypnij swoje rozszerzenie Alby",
-        "description": "Prawie skończone. Aby wygodnie korzystać z Alby, pamiętaj o przypięciu rozszerzenia do paska narzędzi przeglądarki:"
+        "description": "Prawie gotowe. Aby wygodnie korzystać z Alby, pamiętaj o przypięciu rozszerzenia do paska narzędzi przeglądarki:",
+        "next_btn": "Zzzzacznij przygodę {{icon}} z Alby!"
       }
     },
     "choose_path": {
       "alby": {
         "title": "Konto Alby",
-        "connect": "Połącz się z Alby"
+        "connect": "Połącz się z Alby",
+        "description": "Zarejestruj się lub użyj istniejącego konta Alby, aby zacząć z płatnościami lightning w mgnieniu oka."
       },
       "other": {
         "title": "Inne portfele",
         "and_more": "i więcej...",
-        "connect": "Połącz"
+        "connect": "Połącz",
+        "description": "Połącz się z istniejącym portfelem lub węzłem Lightning i wybierz spośród różnych konektorów. Doskonałe rozwiązanie dla pełnej elastyczności. Zarządzaj własnym węzłem."
       }
     },
     "alby": {
@@ -87,7 +90,7 @@
         "title": "Lightning Terminal (LNC)",
         "page": {
           "title": "Podłącz się do swojego węzła LND",
-          "description": "Stwórz nową sesję w terminalu (litd) aby uzyskać nową frazę parowania i wpisz ją tutaj"
+          "description": "1. Otwórz Lightning Terminal i wybierz <0>Lightning Node Connect</0> z paska bocznego.<1/> 2. Kliknij <0>Create a new session</0><1/>3. Nadaj etykietę sesji, wybierz żądane uprawnienia i zatwierdź<1/>4. <0>Skopiuj frazę parującą</0> i wklej ją poniżej."
         },
         "pairing_phrase": {
           "label": "Twoja fraza parująca ",
@@ -202,12 +205,18 @@
         "title": "Portfel Blink",
         "page": {
           "title": "Podłącz do <0>Blink Wallet</0>"
+        },
+        "token": {
+          "label": "Wprowadź swój klucz API"
         }
       },
       "bitcoin_jungle": {
         "title": "Portfel Bitcoin Jungle",
         "page": {
           "title": "Podłącz do <0>Portfela Bitcoin Jungle</0>"
+        },
+        "token": {
+          "label": "Wprowadź swój token dostępu"
         }
       },
       "btcpay": {
@@ -258,6 +267,22 @@
       },
       "umbrel_lightning_node": {
         "title": "Węzeł Lightning"
+      },
+      "galoy": {
+        "sms_code": {
+          "label": "Wprowadź kod weryfikacyjny SMS"
+        },
+        "actions": {
+          "login": "Zaloguj się"
+        },
+        "phone_number": {
+          "label": "Wprowadź swój numer telefon"
+        },
+        "errors": {
+          "setup_failed": "Konfiguracja nie powiodła się",
+          "invalid_token": "Autoryzacja nie powiodła się. Sprawdź swój klucz API i spróbuj ponownie.",
+          "missing_token": "Brak tokenu dostępu, logowanie nieudane."
+        }
       }
     },
     "home": {
@@ -266,29 +291,35 @@
         "enable_now": "Włącz teraz"
       },
       "allowance_view": {
-        "no_transactions": "Jeszcze nie ma transakcji na koncie <0>{{name}}</0>."
+        "no_transactions": "Jeszcze nie ma transakcji na koncie <0>{{name}}</0>.",
+        "sats": "sats",
+        "budget_spent": "Wykorzystany budżet",
+        "permissions": "Uprawnienia"
       },
       "default_view": {
         "is_blocked_hint": "Alby jest obecnie wyłączone na {{host}}",
-        "block_removed": "Włączono {{host}}. Odśwież stronę."
+        "block_removed": "Włączono {{host}}. Odśwież stronę.",
+        "see_all": "Zobacz wszystko",
+        "no_transactions": "Jeszcze nie ma transakcji na tym koncie."
       }
     },
     "accounts": {
       "title": "Konta",
       "account_view": {
-        "title1": "Informacje o koncie",
-        "title2": "Edytuj konto",
+        "title1": "Ustawienia konta",
+        "title2": "Konto",
         "name": {
-          "title": "Nazwa",
-          "placeholder": "Nazwa konta"
+          "title": "Wyświetlana nazwa",
+          "placeholder": "Nazwa wyświetlana konta"
         },
         "export": {
-          "title": "Eksport konta",
+          "title": "Podłącz swój portfel mobilny",
           "screen_reader": "Eksportuj dane konta",
           "waiting": "oczekiwanie na dane LndHub...",
           "your_ln_address": "Twój adres Lightning:",
           "export_uri": "Adres LNDHub",
-          "scan_qr": "Zaimportuj ten portfel do Zeusa lub BlueWallet skanując kod QR."
+          "scan_qr": "Zaimportuj ten portfel do Zeusa lub BlueWallet skanując kod QR.",
+          "description": "Pozwala na połączenie i korzystanie z tego konta w mobilnych portfelach takich jak <0>Blue Wallet</0> i <1>Zeus</1>."
         },
         "nostr": {
           "title": "Nostr",
@@ -318,6 +349,10 @@
           },
           "errors": {
             "failed_to_load": "Nie udało się władować klucza Nostr. Czy to poprawny klucz?"
+          },
+          "settings": {
+            "label": "Ustawienia Nostr",
+            "title": "Ustawienia Nostr"
           }
         },
         "remove": {
@@ -327,6 +362,42 @@
         "actions": {
           "remove_account": "Usuń konto",
           "export": "Eksport"
+        },
+        "mnemonic": {
+          "saved": "Klucz Główny został zaszyfrowany i zapisany pomyślnie.",
+          "title": "🔑 Zarządzanie kluczami",
+          "backup": {
+            "items": {
+              "words": "Fraza odzyskiwania to zestaw 12 słów, który działa jak hasło, jednak nie można go zmienić ani zresetować w przypadku jego utraty.",
+              "recovery_phrase": "Zawsze możesz uzyskać dostęp do swojego Klucza Głównego, korzystając z jego frazy odzyskiwania.",
+              "storage": "Upewnij się, że zapiszesz ją w bezpiecznym i prywatnym miejscu!"
+            },
+            "protocols": {
+              "nostr": "Nostr"
+            }
+          },
+          "inputs": {
+            "title": "Fraza odzyskiwania"
+          },
+          "import": {
+            "description": "Użyj frazy odzyskiwania, aby zaimportować swój Klucz Główny do Alby.",
+            "button": "Zaimportuj Klucz Główny",
+            "title": "Zaimportuj swój Klucz Główny"
+          },
+          "lnurl": {
+            "use_mnemonic": "Użyj Klucza Głównego do logowania się do aplikacji zasilanych przez Lightning (LNURL Auth)",
+            "title": "Zaloguj się za pomocą Lightning"
+          }
+        },
+        "no_mnemonic_hint": "💡 Nie masz jeszcze Klucza Głównego. <0>Kliknij tutaj</0></div>, aby utworzyć swój Klucz Główny i odblokować te ustawienia.",
+        "network": {
+          "subtitle": "Wybierz sieć, aby wygenerować adresy i odczytać transakcje bitcoinowe oraz w sieci Liquid",
+          "options": {
+            "testnet": "Testnet (sieć testowa)",
+            "bitcoin": "Mainnet (sieć główna)",
+            "regtest": "Regtest (sieć testów regresji)"
+          },
+          "title": "Sieć"
         }
       },
       "actions": {
@@ -605,7 +676,6 @@
       "block_and_ignore": "Zablokuj i ignoruj {{host}}",
       "block_added": "Dodano {{host}} do listy zablokowanych, odśwież stronę.",
       "hide_details": "Ukryj szczegóły",
-      "no_content": "(brak treści)",
       "kinds": {
         "0": "metadane",
         "1": "krótka wiadomość tekstowa",
@@ -636,6 +706,28 @@
     "transactions": {
       "title": "Transakcje",
       "list_empty": "Brak dostępnych transakcji."
+    },
+    "distributions": {
+      "description": "Wybierz z którą aplikacją {{name}} chcesz się połączyć",
+      "title": "Podłącz do {{name}}",
+      "raspiblitz": {
+        "name": "Raspiblitz"
+      },
+      "mynode": {
+        "name": "myNode"
+      },
+      "btcpay": {
+        "name": "BTCPay"
+      },
+      "start9": {
+        "name": "Start9"
+      },
+      "umbrel": {
+        "name": "Umbrel"
+      },
+      "citadel": {
+        "name": "Citadel"
+      }
     }
   },
   "common": {
@@ -868,15 +960,15 @@
       "gettransactions": "Pobieranie listy wszystkich transakcji dotyczących portfela.",
       "listpayments": "Pobieranie listy wszystkich wychodzących płatności.",
       "listpeers": "Pobieranie listy wszystkich aktywnych peerów.",
-      "lookupinvoice": "Uzyskiwanie szczegółowych informacji o fakturach.",
-      "queryroutes": "Zapytanie o możliwą trasę.",
-      "verifymessage": "Weryfikowanie podpisu dla wiadomości.",
-      "sendtoroute": "Dokonywanie płatności poprzez podaną trasę.",
-      "decodepayreq": "Dekodowanie ciągu żądania płatności.",
-      "routermc": "Odczytanie wewnętrznego stanu mission control.",
-      "addinvoice": "Tworzenie nowych faktur.",
-      "addholdinvoice": "Tworzenie nowych faktur typu HODL.",
-      "settleinvoice": "Rozliczenie przyjętej faktury."
+      "lookupinvoice": "Uzyskiwanie szczegółowych informacji o fakturach",
+      "queryroutes": "Zapytanie o możliwą trasę",
+      "verifymessage": "Weryfikowanie podpisu dla wiadomości",
+      "sendtoroute": "Dokonywanie płatności poprzez podaną trasę",
+      "decodepayreq": "Dekodowanie ciągu żądania płatności",
+      "routermc": "Odczytanie wewnętrznego stanu mission control",
+      "addinvoice": "Tworzenie nowych faktur",
+      "addholdinvoice": "Tworzenie nowych faktur typu HODL",
+      "settleinvoice": "Rozliczenie przyjętej faktury"
     }
   }
 }
