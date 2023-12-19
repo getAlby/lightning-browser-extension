@@ -33,6 +33,7 @@ class NWCConnector implements Connector {
       "makeInvoice",
       "sendPayment",
       "sendPaymentAsync",
+      "signMessage",
       "getBalance",
       "keysend",
     ];
