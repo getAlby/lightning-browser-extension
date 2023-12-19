@@ -10,10 +10,15 @@ function init() {
   const inject = shouldInjectInpage();
   if (!inject) return;
   window.liquid = new LiquidProvider();
-  window.alby = new AlbyProvider();
   window.nostr = new NostrProvider();
   window.webbtc = new WebBTCProvider();
   window.webln = new WebLNProvider();
+  window.alby = new AlbyProvider(
+    window.liquid,
+    window.nostr,
+    window.webbtc,
+    window.webln
+  );
   const readyEvent = new Event("webln:ready");
   window.dispatchEvent(readyEvent);
 

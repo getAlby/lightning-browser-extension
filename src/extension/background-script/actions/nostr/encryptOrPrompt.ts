@@ -6,7 +6,6 @@ import {
   hasPermissionFor,
 } from "~/extension/background-script/permissions";
 import state from "~/extension/background-script/state";
-import i18n from "~/i18n/i18nConfig";
 import { MessageEncryptGet, PermissionMethodNostr, Sender } from "~/types";
 
 const encryptOrPrompt = async (message: MessageEncryptGet, sender: Sender) => {
@@ -24,7 +23,6 @@ const encryptOrPrompt = async (message: MessageEncryptGet, sender: Sender) => {
         message.args.peer,
         message.args.plaintext
       );
-
       return { data: response };
     } else {
       const promptResponse = await utils.openPrompt<{
@@ -32,9 +30,13 @@ const encryptOrPrompt = async (message: MessageEncryptGet, sender: Sender) => {
         rememberPermission: boolean;
       }>({
         ...message,
-        action: "public/nostr/confirm",
+        action: "public/nostr/confirmEncryptOrDecrypt",
         args: {
-          description: i18n.t("permissions:nostr.nip04encrypt"),
+          encryptOrDecrypt: {
+            action: "encrypt",
+            peer: message.args.peer,
+            message: message.args.plaintext,
+          },
         },
       });
 

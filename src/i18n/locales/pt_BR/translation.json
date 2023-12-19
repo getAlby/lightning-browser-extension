@@ -171,24 +171,6 @@
           "connection_failed": "Falha na conexão. A URL de conexão do servidor BTCPay está correta e acessível?"
         }
       },
-      "galoy": {
-        "phone_number": {
-          "label": "Insira seu número de telefone"
-        },
-        "sms_code": {
-          "label": "Insira o código de verificação SMS"
-        },
-        "token": {
-          "label": "Insira o token JWT"
-        },
-        "actions": {
-          "login": "Login"
-        },
-        "errors": {
-          "setup_failed": "Falha na configuração",
-          "missing_token": "JWT ausente, não foi possível fazer login."
-        }
-      },
       "lndhub_go": {
         "title": "LNDHub",
         "page": {
@@ -262,7 +244,9 @@
       },
       "default_view": {
         "is_blocked_hint": "A Alby está desativada em {{host}}",
-        "block_removed": "{{host}} ativado. Por favor, recarregue o site."
+        "block_removed": "{{host}} ativado. Por favor, recarregue o site.",
+        "see_all": "Mostrar tudo",
+        "no_transactions": "Sem transações nesta conta ainda."
       }
     },
     "accounts": {
@@ -677,7 +661,6 @@
       "block_added": "{{host}} adicionado na lista de bloqueio, por favor recarregue o site.",
       "allow_sign": "Permitir {{host}} assinar:",
       "view_details": "Ver detalhes",
-      "allow_sign_event": "Permitir {{host}} assinar {{kind}}:",
       "hide_details": "Ocultar detalhes",
       "kinds": {
         "0": "metadados",
@@ -686,8 +669,7 @@
         "4": "mensagens diretas criptografadas",
         "5": "exclusão de evento",
         "7": "reação",
-        "9735": "zap",
-        "unknown": "evento nostr do tipo {{kind}}"
+        "9735": "zap"
       },
       "no_content": "(Sem conteúdo)"
     },
@@ -755,7 +737,8 @@
     },
     "transactions": {
       "title": "Transações",
-      "list_empty": "Sem transações."
+      "list_empty": "Sem transações.",
+      "description": "Transações nesta conta"
     },
     "distributions": {
       "umbrel": {
@@ -882,7 +865,6 @@
       "request1": "Interagir com este site exige configurar uma chave"
     },
     "nostr_enable": {
-      "request2": "Assinar eventos usando sua chave privada Nostr",
       "request1": "Solicitar a leitura de sua chave pública Nostr",
       "title": "Conectar no Nostr"
     },
@@ -955,7 +937,8 @@
       "copy_clipboard": "Copiar para área de transferência",
       "disconnect": "Desconectar",
       "copied_to_clipboard": "Copiado para a área de transferência",
-      "review": "Revisar"
+      "review": "Revisar",
+      "hide": "Ocultar"
     },
     "errors": {
       "connection_failed": "Falha na conexão",
@@ -998,7 +981,8 @@
       "request1": "Solicitar aprovação para transações",
       "allow": "Permitir este site:",
       "block_and_ignore": "Bloquear e ignorar {{host}}"
-    }
+    },
+    "website": "Site"
   },
   "components": {
     "allowance_menu": {
@@ -1037,9 +1021,12 @@
         "sender": "Enviado por",
         "message": "Mensagem",
         "app": "App",
-        "podcast": "Podcast"
+        "podcast": "Podcast",
+        "episode": "Episódio"
       },
-      "open_location": "Abrir link"
+      "open_location": "Abrir link",
+      "payment_hash": "Hash do pagamento",
+      "date_time": "Data & Hora"
     },
     "budget_control": {
       "remember": {
@@ -1098,23 +1085,23 @@
   },
   "permissions": {
     "nostr": {
-      "getpublickey": "Ler sua chave pública.",
-      "signmessage": "Assinar mensagem com sua chave.",
-      "nip04decrypt": "Descriptografar dados.",
-      "nip04encrypt": "Criptografar dados."
+      "getpublickey": "Ler sua chave pública",
+      "signmessage": "Assinar mensagem com sua chave",
+      "nip04decrypt": "Descriptografar dados",
+      "nip04encrypt": "Criptografar dados"
     },
     "lnc": {
       "openchannel": ""
     },
     "bitcoin": {
-      "getaddress": "Ler seu endereço de recebimento de Bitcoin."
+      "getaddress": "Ler seu endereço de recebimento de Bitcoin"
     },
     "liquid": {
-      "signschnorr": "Assinar mensagem com sua chave.",
-      "getaddress": "Ler seu endereço de recebimento da Liquid."
+      "signschnorr": "Assinar mensagem com sua chave",
+      "getaddress": "Ler seu endereço de recebimento da Liquid"
     },
     "webln": {
-      "getbalance": "Ler o saldo da sua conta."
+      "getbalance": "Ler o saldo da sua conta"
     }
   }
 }

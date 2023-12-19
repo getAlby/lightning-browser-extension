@@ -425,8 +425,7 @@
         "30008": "โปรไฟล์เหรียญตรา",
         "30009": "คำจำกัดความของเหรียญตรา",
         "30023": "เนื้อหาแบบยาว",
-        "30078": "ข้อมูลเฉพาะแอปพลิเคชัน",
-        "unknown": "ประเภทของ nostr event {{kind}}"
+        "30078": "ข้อมูลเฉพาะแอปพลิเคชัน"
       },
       "title": "Nostr",
       "block_added": "เพื่ม {{host}} เข้าสู่แบล็คลิส โปรดรีเฟรชหน้าเว็บใหม่",
@@ -435,8 +434,7 @@
       "view_details": "ดูรายละเอียด",
       "hide_details": "ซ่อนรายละเอียด",
       "no_content": "(ไม่มีเนื้อหา)",
-      "allow_sign": "อนุญาตให้ {{host}} ลงนาม:",
-      "allow_sign_event": "อนุญาตให้ {{host}} ลงนามใน {{kind}}:"
+      "allow_sign": "อนุญาตให้ {{host}} ลงนาม:"
     },
     "choose_path": {
       "other": {
@@ -574,31 +572,17 @@
           "placeholder": "your-node-onion-address:port"
         }
       },
-      "galoy": {
-        "token": {
-          "info": "การรวม {{label}} กับ Alby อยู่ในรุ่นเบต้าและแนะนำสำหรับ advanced users.<br><br> คุณสามารถรับโทเค็นการเข้าถึงของคุณได้โดยไปที่แอปมือถือ คลิกที่ไอคอนการตั้งค่า จากนั้นแตะ 3 ครั้งบนหมายเลขบิวด์เพื่อเปิดเมนูสำหรับนักพัฒนา<br><br>โทเค็นการเข้าถึงสามารถคัดลอกได้จากที่นี่<br><br>",
-          "label": "โปรดใส่ Access token"
-        },
-        "errors": {
-          "missing_token": "Access token สูญหาย ไม่สามารถเข้าสู่ระบบได้",
-          "setup_failed": "การตั้งค่าล้มเหลว",
-          "invalid_token": "Access token ไม่ถูกต้อง"
-        },
-        "actions": {
-          "login": "เข้าสู่ระบบ"
-        },
-        "phone_number": {
-          "label": "ใส่เบอร์โทรศัพท์มือถือของคุณ"
-        },
-        "sms_code": {
-          "label": "โปรดใส่ SMS verification code"
+      "blink": {
+        "title": "Blink plånbok",
+        "page": {
+          "title": "Anslut <0>Blink Wallet</0>"
         }
       },
       "bitcoin_jungle": {
+        "title": "Bitcoin Jungle Wallet",
         "page": {
           "title": "เชื่อมต่อกับ <0>Bitcoin Jungle Wallet</0>"
-        },
-        "title": "Bitcoin Jungle Wallet"
+        }
       },
       "btcpay": {
         "page": {
