@@ -38,6 +38,7 @@ class NWCConnector implements Connector {
       "sendPaymentAsync",
       "getBalance",
       "keysend",
+      "getTransactions",
     ];
   }
 
