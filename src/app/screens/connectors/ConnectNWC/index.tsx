@@ -76,13 +76,41 @@ export default function ConnectNWC() {
           <Trans i18nKey={"title"} t={t} />
         </h1>
       }
-      description={t("page.instructions")}
+      description={
+        <Trans
+          i18nKey={"page.instructions"}
+          t={t}
+          components={[
+            // eslint-disable-next-line react/jsx-key
+            <a
+              target="_blank"
+              rel="noreferrer"
+              className="underline"
+              href="https://nwc.getalby.com"
+            ></a>,
+            // eslint-disable-next-line react/jsx-key
+            <a
+              target="_blank"
+              rel="noreferrer"
+              className="underline"
+              href="https://apps.umbrel.com/app/alby-nostr-wallet-connect"
+            ></a>,
+            // eslint-disable-next-line react/jsx-key
+            <a
+              target="_blank"
+              rel="noreferrer"
+              className="underline"
+              href="https://www.mutinywallet.com"
+            ></a>,
+          ]}
+        />
+      }
       logo={logo}
       submitLoading={loading}
       submitDisabled={formData.nostrWalletConnectUrl === ""}
       onSubmit={handleSubmit}
     >
-      <div className="mb-6">
+      <div className="mt-4 mb-6">
         <TextField
           id="nostrWalletConnectUrl"
           label={t("page.url.label")}
