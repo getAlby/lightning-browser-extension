@@ -650,8 +650,13 @@
         "30008": "Profilabzeichen",
         "30009": "Badge Beschreibung",
         "30023": "Langform Inhalte",
-        "30078": "anwendungsspezifische Daten"
-      }
+        "30078": "anwendungsspezifische Daten",
+        "unknown": "kind {{kind}}"
+      },
+      "peer": "Peer",
+      "allow_sign_event": "Erlaube {{Gastgeber}}, ein {{kind}} Ereignis zu unterzeichnen",
+      "allow_encrypt": "Erlaube {{host}}, die Nachricht zu verschlüsseln:",
+      "allow_decrypt": "Erlaube {{host}}, die Nachricht zu entschlüsseln:"
     },
     "confirm_request_permission": {
       "title": "Antrag genehmigen",
@@ -1134,7 +1139,8 @@
       "allow": "Erlaube dieser Webseite:",
       "block_and_ignore": "Blockieren und Ignorieren von {{host}}"
     },
-    "website": "Website"
+    "website": "Website",
+    "apps": "Apps"
   },
   "permissions": {
     "commando": {
@@ -1190,7 +1196,11 @@
       "listpayments": "Erhalte eine Liste aller ausgehenden Zahlungen",
       "verifymessage": "Überprüfe eine Signatur über eine Nachricht",
       "addholdinvoice": "Erstelle eine neue HODL-Rechnungen",
-      "settleinvoice": "Begleiche eine akzeptierte Rechnung"
+      "settleinvoice": "Begleiche eine akzeptierte Rechnung",
+      "listunspent": "Liste aller utxos, die von der Brieftasche ausgegeben werden können",
+      "listaddresses": "Erhalte alle Adressen zusammen mit deinem Guthaben",
+      "newaddress": "Abrufen einer neuen Onchain-Adresse",
+      "nextaddr": "Abrufen der nächsten unbenutzten Adresse in der Wallet"
     },
     "nostr": {
       "getpublickey": "Lese deinen öffentlichen Schlüssel",
@@ -1222,7 +1232,11 @@
       "walletbalance": "Ermittle die gesamten nicht verbrauchten Ausgaben deiner Wallet",
       "openchannel": "Öffne einen neuen Kanal",
       "addholdinvoice": "Neue HODL-Rechnungen erstellen",
-      "settleinvoice": "Begleiche eine akzeptierte Rechnung"
+      "settleinvoice": "Begleiche eine akzeptierte Rechnung",
+      "listunspent": "Liste aller utxos, die von der Wallet ausgegeben werden können",
+      "nextaddr": "Abrufen der nächsten unbenutzten Onchain-Adresse innerhalb der Wallet",
+      "listaddresses": "Alle Onchain-Adressen zusammen mit ihrem Guthaben abrufen",
+      "newaddress": "Abrufen einer neuen Onchain-Adresse"
     },
     "webln": {
       "getbalance": "Den Kontostand abfragen"
