@@ -34,6 +34,7 @@ class NWCConnector implements Connector {
       "sendPaymentAsync",
       "signMessage",
       "getBalance",
+      "keysend",
     ];
   }
 
@@ -53,9 +54,9 @@ class NWCConnector implements Connector {
   }
 
   async getInfo(): Promise<GetInfoResponse> {
-    // TODO: Load via NWC
+    const info = await this.nwc.getInfo();
     return {
-      data: { alias: "NWC" },
+      data: { ...info, alias: "NWC" },
     };
   }
 
@@ -100,8 +101,20 @@ class NWCConnector implements Connector {
     };
   }
 
-  keysend(args: KeysendArgs): Promise<SendPaymentResponse> {
-    throw new Error("Method not implemented.");
+  async keysend(args: KeysendArgs): Promise<SendPaymentResponse> {
+    const data = await this.nwc.keysend({
+      destination: args.pubkey,
+      amount: args.amount,
+      customRecords: args.customRecords,
+    });
+
+    return {
+      data: {
+        preimage: data.payment_preimage,
+        paymentHash: data.payment_hash,
+        route: { total_amt: data.amount, total_fees: data.fee },
+      },
+    };
   }
 
   async checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {
