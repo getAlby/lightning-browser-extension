@@ -12,7 +12,6 @@ import NativeCitadel from "./nativecitadel";
 import NativeLnBits from "./nativelnbits";
 import NativeLnd from "./nativelnd";
 import NativeLndHub from "./nativelndhub";
-import NWC from "./nwc";
 
 /*
 const initialize = (account, password) => {
@@ -37,7 +36,6 @@ const connectors = {
   nativecitadel: NativeCitadel,
   commando: Commando,
   alby: Alby,
-  nwc: NWC,
 };
 
 export default connectors;

@@ -285,19 +285,6 @@
         "errors": {
           "connection_failed": "Connection failed. Is your Core Lightning node online and using the commando plugin?"
         }
-      },
-      "nwc": {
-        "title": "Nostr Wallet Connect",
-        "page": {
-          "instructions": "TBD",
-          "url": {
-            "label": "Nostr Wallet Connect URL",
-            "placeholder": "nostr+walletconnect://69effe..."
-          },
-          "errors": {
-            "connection_failed": "Connection failed. Is your Core Lightning node online and using the commando plugin?"
-          }
-        }
       }
     },
     "distributions": {
