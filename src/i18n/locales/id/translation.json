@@ -730,8 +730,7 @@
         "30078": "data terkait aplikasi"
       },
       "allow": "Izinkan website ini untuk:",
-      "view_details": "Lihat rincian",
-      "no_content": "(Tidak ada konten)"
+      "view_details": "Lihat rincian"
     },
     "on_chain": {
       "title": "Terima melalui alamat bitcoin",
