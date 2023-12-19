@@ -57,7 +57,7 @@ class NWCConnector implements Connector {
   async getInfo(): Promise<GetInfoResponse> {
     const info = await this.nwc.getInfo();
     return {
-      data: info.node,
+      data: info,
     };
   }
 
