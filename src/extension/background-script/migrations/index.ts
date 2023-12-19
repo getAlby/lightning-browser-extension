@@ -39,6 +39,17 @@ const migrations = {
         }));
     });
   },
+
+  migrateHostInPayments: async () => {
+    const payments = await db.payments.toArray();
+
+    payments.forEach(async (payments) => {
+      payments.id &&
+        (await db.payments.update(payments.id, {
+          host: `https://${payments.host}`,
+        }));
+    });
+  },
 };
 
 const migrate = async () => {
@@ -49,6 +60,12 @@ const migrate = async () => {
     console.info("Running migration for: migrateAllowanceDomainProtocol");
     await migrations["migrateAllowanceDomainProtocol"]();
     await setMigrated("migrateAllowanceDomainProtocol");
+  }
+
+  if (shouldMigrate("migrateHostInPayments")) {
+    console.info("Running migration for: migrateHostInPayments");
+    await migrations["migrateHostInPayments"]();
+    await setMigrated("migrateHostInPayments");
   }
 };
 
