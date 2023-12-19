@@ -208,12 +208,20 @@
         "title": "Blink Wallet",
         "page": {
           "title": "Connect to <0>Blink Wallet</0>"
+        },
+        "token": {
+          "label": "Enter your API key",
+          "info": "To connect your wallet generate an API key in the <0>Blink Dashboard (dashboard.blink.sv)</0>:<br>- log in with email or phone number if you are using Blink already<br>- if you have no account yet can create a new one by logging in with a phone number<br>- create a new key on the API Keys tab<br>- give it a Name and choose the Read and Write Scope<br>- leave the default no expiry or choose a long timeframe to avoid needing to reconnect your wallet periodically<br>- copy the key (starting with blink_ ) and paste it to the textbox below.<br><br>The integration currently only supports using the BTC wallet.<br>"
         }
       },
       "bitcoin_jungle": {
         "title": "Bitcoin Jungle Wallet",
         "page": {
           "title": "Connect to <0>Bitcoin Jungle Wallet</0>"
+        },
+        "token": {
+          "label": "Enter your Access token",
+          "info": "The {{label}} integration with Alby is in alpha and only recommended for advanced users.<br><br>You can grab your Access token by going into the mobile app, clicking on the settings icon, and then tapping 3 times on the build number to open the developer menu.<br><br>The access token can be copied from here.<br><br>"
         }
       },
       "galoy": {
@@ -223,17 +231,13 @@
         "sms_code": {
           "label": "Enter your SMS verification code"
         },
-        "token": {
-          "label": "Enter your Access token",
-          "info": "The {{label}} integration with Alby is in alpha and only recommended for advanced users.<br><br>You can grab your Access token by going into the mobile app, clicking on the settings icon, and then tapping 3 times on the build number to open the developer menu.<br><br>The access token can be copied from here.<br><br>"
-        },
         "actions": {
           "login": "Login"
         },
         "errors": {
           "setup_failed": "Setup failed",
           "missing_token": "Access token missing, couldn't log in.",
-          "invalid_token": "invalid Access token passed"
+          "invalid_token": "Authorization failed. Please check your API key and try again."
         }
       },
       "btcpay": {
@@ -506,7 +510,7 @@
     "nostr_enable": {
       "title": "Connect to Nostr",
       "request1": "Request to read your Nostr public key",
-      "request2": "Sign events using your Nostr private key"
+      "request2": "Request to sign events using your private key"
     },
     "liquid_enable": {
       "title": "Connect to Liquid",
@@ -903,14 +907,16 @@
       "allow": "Allow this website to:",
       "content": "This website asks you to sign:",
       "allow_sign": "Allow {{host}} to sign:",
-      "allow_sign_event": "Allow {{host}} to sign a {{kind}}:",
+      "allow_sign_event": "Allow {{host}} to sign a {{kind}} event",
+      "allow_encrypt": "Allow {{host}} to encrypt the message:",
+      "allow_decrypt": "Allow {{host}} to decrypt the message:",
       "view_details": "View details",
       "hide_details": "Hide details",
-      "no_content": "(No content)",
       "block_and_ignore": "Block and ignore {{host}}",
       "block_added": "Added {{host}} to the blocklist, please reload the website.",
+      "peer": "Peer",
       "kinds": {
-        "unknown": "nostr event of kind {{kind}}",
+        "unknown": "kind {{kind}}",
         "0": "metadata",
         "1": "short text note",
         "2": "recommend relay",
@@ -979,6 +985,7 @@
     "balance": "Balance",
     "or": "or",
     "website": "Website",
+    "apps": "Apps",
     "actions": {
       "back": "Back",
       "delete": "Delete",
@@ -1083,7 +1090,10 @@
         "message": "Message",
         "app": "App",
         "podcast": "Podcast",
-        "episode": "Episode"
+        "episode": "Episode",
+        "action": "Action",
+        "timestamp": "Timestamp",
+        "totalAmount": "Total amount"
       },
       "open_location": "Open website"
     },
@@ -1149,101 +1159,109 @@
   },
   "permissions": {
     "webln": {
-      "getbalance": "Read the balance of your account."
+      "getbalance": "Read the balance of your account"
     },
     "nostr": {
-      "getpublickey": "Read your public key.",
-      "nip04encrypt": "Encrypt data.",
-      "nip04decrypt": "Decrypt data.",
-      "signmessage": "Sign message with your key."
+      "getpublickey": "Read your public key",
+      "signmessage": "Sign message with your key",
+      "nip04encrypt": "Encrypt data",
+      "nip04decrypt": "Decrypt data"
     },
     "bitcoin": {
-      "getaddress": "Read your Bitcoin receive address."
+      "getaddress": "Read your Bitcoin receive address"
     },
     "liquid": {
-      "getaddress": "Read your Liquid receive address.",
-      "signschnorr": "Sign message with your key."
+      "getaddress": "Read your Liquid receive address",
+      "signschnorr": "Sign message with your key"
     },
     "commando": {
-      "bkpr-listbalances": "List of all current and historical account balances.",
-      "checkmessage": "Verify that the signature was generated by a given node.",
-      "connect": "Establish a new connection with another node.",
-      "decode": "Decode a bolt11/bolt12/rune string.",
-      "decodepay": "Check and parse a bolt11 string.",
-      "disconnect": "Close an existing connection to a peer.",
-      "feerates": "Return the feerates that CLN will use.",
-      "fundchannel": "Open a payment channel with a peer by committing a funding transaction.",
-      "getinfo": "Get the summary of the node.",
-      "getroute": "Find the best route for the payment to a lightning node.",
-      "invoice": "Create the expectation of a payment.",
-      "keysend": "Send a payment to another node.",
-      "listforwards": "List all htlcs that have been attempted to be forwarded.",
-      "listfunds": "List all funds available.",
-      "listinvoices": "Get the status of all invoices.",
-      "listnodes": "List nodes the node has learned about via gossip messages.",
-      "listoffers": "List all offers or get a specific offer.",
-      "listpays": "Gets the status of all pay commands.",
-      "listpeers": "List nodes that are connected or have open channels with this node.",
-      "listsendpays": "Gets the status of all sendpay commands.",
-      "listtransactions": "List transactions tracked in the wallet.",
-      "multifundchannel": "Open multiple payment channels with nodes by committing a single funding transaction.",
-      "offer": "Create an offer.",
-      "pay": "Send a payment to a BOLT11 invoice.",
-      "sendpay": "Send a payment via a route.",
-      "setchannel": "Configure fees / htlc range advertized for a channel.",
-      "signmessage": "Create a signature from this node."
+      "bkpr-listbalances": "List of all current and historical account balances",
+      "checkmessage": "Verify that the signature was generated by a given node",
+      "connect": "Establish a new connection with another node",
+      "decode": "Decode a bolt11/bolt12/rune string",
+      "decodepay": "Check and parse a bolt11 string",
+      "disconnect": "Close an existing connection to a peer",
+      "feerates": "Return the feerates that CLN will use",
+      "fundchannel": "Open a payment channel with a peer by committing a funding transaction",
+      "getinfo": "Get the summary of the node",
+      "getroute": "Find the best route for the payment to a lightning node",
+      "invoice": "Create the expectation of a payment",
+      "keysend": "Send a payment to another node",
+      "listforwards": "List all htlcs that have been attempted to be forwarded",
+      "listfunds": "List all funds available",
+      "listinvoices": "Get the status of all invoices",
+      "listnodes": "List nodes the node has learned about via gossip messages",
+      "listoffers": "List all offers or get a specific offer",
+      "listpays": "Gets the status of all pay commands",
+      "listpeers": "List nodes that are connected or have open channels with this node",
+      "listsendpays": "Gets the status of all sendpay commands",
+      "listtransactions": "List transactions tracked in the wallet",
+      "multifundchannel": "Open multiple payment channels with nodes by committing a single funding transaction",
+      "offer": "Create an offer",
+      "pay": "Send a payment to a BOLT11 invoice",
+      "sendpay": "Send a payment via a route",
+      "setchannel": "Configure fees / htlc range advertized for a channel",
+      "signmessage": "Create a signature from this node"
     },
     "lnd": {
-      "getinfo": "Get the node information.",
-      "listchannels": "Get a description of all the open channels.",
-      "listinvoices": "Get a list of all invoices.",
-      "channelbalance": "Get a report on the total funds across all open channels.",
-      "walletbalance": "Get the total unspent outputs of the wallet.",
-      "openchannel": "Open a new channel.",
-      "connectpeer": "Establish a connection to a remote peer.",
-      "disconnectpeer": "Disconnect from a remote peer.",
-      "estimatefee": "Estimate the fee rate and total fees for a transaction.",
-      "getchaninfo": "Get the network announcement for the given channel.",
-      "getnetworkinfo": "Get basic stats about the known channel graph.",
-      "getnodeinfo": "Get the channel information for a node.",
-      "gettransactions": "Get a list of all transactions relevant to the wallet.",
-      "listpayments": "Get a list of all outgoing payments.",
-      "listpeers": "Get a list all currently active peers.",
-      "lookupinvoice": "Look up invoice details.",
-      "queryroutes": "Query for a possible route.",
-      "verifymessage": "Verify a signature over a msg.",
-      "sendtoroute": "Make a payment via the specified route.",
-      "decodepayreq": "Decode a payment request string.",
-      "routermc": "Read the internal mission control state.",
-      "addinvoice": "Create new invoices.",
-      "addholdinvoice": "Create new HODL invoices.",
-      "settleinvoice": "Settle an accepted invoice."
+      "getinfo": "Get the node information",
+      "listchannels": "Get a description of all the open channels",
+      "listinvoices": "Get a list of all invoices",
+      "channelbalance": "Get a report on the total funds across all open channels",
+      "walletbalance": "Get the total unspent outputs of the wallet",
+      "openchannel": "Open a new channel",
+      "connectpeer": "Establish a connection to a remote peer",
+      "disconnectpeer": "Disconnect from a remote peer",
+      "estimatefee": "Estimate the fee rate and total fees for a transaction",
+      "getchaninfo": "Get the network announcement for the given channel",
+      "getnetworkinfo": "Get basic stats about the known channel graph",
+      "getnodeinfo": "Get the channel information for a node",
+      "gettransactions": "Get a list of all transactions relevant to the wallet",
+      "listpayments": "Get a list of all outgoing payments",
+      "listpeers": "Get a list all currently active peers",
+      "lookupinvoice": "Look up invoice details",
+      "queryroutes": "Query for a possible route",
+      "verifymessage": "Verify a signature over a msg",
+      "sendtoroute": "Make a payment via the specified route",
+      "decodepayreq": "Decode a payment request string",
+      "routermc": "Read the internal mission control state",
+      "addinvoice": "Create new invoices",
+      "addholdinvoice": "Create new HODL invoices",
+      "settleinvoice": "Settle an accepted invoice",
+      "newaddress": "Get a new onchain address",
+      "nextaddr": "Get the next unused address within the wallet",
+      "listaddresses": "Get all the addresses along with their balance",
+      "listunspent": "Get a list of all utxos spendable by the wallet"
     },
     "lnc": {
-      "getinfo": "Get the node information.",
-      "listchannels": "Get a description of all the open channels.",
-      "listinvoices": "Get a list of all invoices.",
-      "channelbalance": "Get a report on the total funds across all open channels.",
-      "walletbalance": "Get the total unspent outputs of the wallet.",
-      "openchannel": "Open a new channel.",
-      "connectpeer": "Establish a connection to a remote peer.",
-      "disconnectpeer": "Disconnect from a remote peer.",
-      "estimatefee": "Estimate the fee rate and total fees for a transaction.",
-      "getchaninfo": "Get the network announcement for the given channel.",
-      "getnetworkinfo": "Get basic stats about the known channel graph.",
-      "getnodeinfo": "Get the channel information for a node.",
-      "gettransactions": "Get a list of all transactions relevant to the wallet.",
-      "listpayments": "Get a list of all outgoing payments.",
-      "listpeers": "Get a list all currently active peers.",
-      "lookupinvoice": "Look up invoice details.",
-      "queryroutes": "Query for a possible route.",
-      "verifymessage": "Verify a signature over a msg.",
-      "sendtoroute": "Make a payment via the specified route.",
-      "decodepayreq": "Decode a payment request string.",
-      "routermc": "Read the internal mission control state.",
-      "addinvoice": "Create new invoices.",
-      "addholdinvoice": "Create new HODL invoices.",
-      "settleinvoice": "Settle an accepted invoice."
+      "getinfo": "Get the node information",
+      "listchannels": "Get a description of all the open channels",
+      "listinvoices": "Get a list of all invoices",
+      "channelbalance": "Get a report on the total funds across all open channels",
+      "walletbalance": "Get the total unspent outputs of the wallet",
+      "openchannel": "Open a new channel",
+      "connectpeer": "Establish a connection to a remote peer",
+      "disconnectpeer": "Disconnect from a remote peer",
+      "estimatefee": "Estimate the fee rate and total fees for a transaction",
+      "getchaninfo": "Get the network announcement for the given channel",
+      "getnetworkinfo": "Get basic stats about the known channel graph",
+      "getnodeinfo": "Get the channel information for a node",
+      "gettransactions": "Get a list of all transactions relevant to the wallet",
+      "listpayments": "Get a list of all outgoing payments",
+      "listpeers": "Get a list all currently active peers",
+      "lookupinvoice": "Look up invoice details",
+      "queryroutes": "Query for a possible route",
+      "verifymessage": "Verify a signature over a msg",
+      "sendtoroute": "Make a payment via the specified route",
+      "decodepayreq": "Decode a payment request string",
+      "routermc": "Read the internal mission control state",
+      "addinvoice": "Create new invoices",
+      "addholdinvoice": "Create new HODL invoices",
+      "settleinvoice": "Settle an accepted invoice",
+      "newaddress": "Get a new onchain address",
+      "nextaddr": "Get the next unused onchain address within the wallet",
+      "listaddresses": "Get all the onchain addresses along with their balance",
+      "listunspent": "Get a list of all utxos spendable by the wallet"
     }
   }
 }
