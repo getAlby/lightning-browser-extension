@@ -6,6 +6,7 @@ import Connector, {
   CheckPaymentResponse,
   ConnectPeerArgs,
   ConnectPeerResponse,
+  ConnectorTransaction,
   GetBalanceResponse,
   GetInfoResponse,
   GetTransactionsResponse,
@@ -56,7 +57,7 @@ class NWCConnector implements Connector {
   async getInfo(): Promise<GetInfoResponse> {
     const info = await this.nwc.getInfo();
     return {
-      data: { ...info, alias: "NWC" },
+      data: info,
     };
   }
 
@@ -68,9 +69,27 @@ class NWCConnector implements Connector {
   }
 
   async getTransactions(): Promise<GetTransactionsResponse> {
-    // TODO: Load via NWC
+    const listTransactionsResponse = await this.nwc.listTransactions({
+      unpaid: false,
+    });
+
+    const transactions: ConnectorTransaction[] =
+      listTransactionsResponse.transactions.map(
+        (transaction, index): ConnectorTransaction => ({
+          id: `${index}`,
+          memo: transaction.description,
+          preimage: transaction.preimage,
+          payment_hash: transaction.payment_hash,
+          settled: true,
+          settleDate: new Date(transaction.settled_at).getTime(),
+          totalAmount: transaction.amount,
+          type: transaction.type == "incoming" ? "received" : "sent",
+        })
+      );
     return {
-      data: { transactions: [] },
+      data: {
+        transactions,
+      },
     };
   }
 
