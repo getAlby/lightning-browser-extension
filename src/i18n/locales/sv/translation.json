@@ -163,6 +163,9 @@
         "title": "Blink plånbok",
         "page": {
           "title": "Anslut <0>Blink Wallet</0>"
+        },
+        "token": {
+          "label": "Ange din API-nyckel"
         }
       },
       "bitcoin_jungle": {
@@ -684,26 +687,25 @@
         "30008": "profil badges",
         "30009": "badge definition",
         "30023": "långformigt innehåll",
-        "30078": "applikationsspecifika data",
-        "unknown": "nostr event av sort {{kind}}"
+        "30078": "applikationsspecifika data"
       },
       "view_details": "Visa detaljer",
       "hide_details": "Göm detaljer",
       "block_added": "Lade till {{host}} till blockeringslistan, ladda om webbplatsen.",
-      "allow_sign_event": "Tillåt {{host}} att signera en {{kind}}:",
-      "no_content": "(Inget innehåll)",
       "allow_sign": "Tillåt {{host}} att signera:",
       "content": "Den här webbplatsen ber dig att signera:"
     },
     "choose_path": {
       "alby": {
         "title": "Alby Konto",
-        "connect": "Anslut med Alby"
+        "connect": "Anslut med Alby",
+        "description": "Registrera dig eller använd ditt befintliga Alby konto. Perfekt att snabbt komma igång och för små belopp."
       },
       "other": {
         "title": "Annan Plånbok",
         "connect": "Anslut",
-        "and_more": "& mer..."
+        "and_more": "& mer...",
+        "description": "Anslut till din befintliga lightning plånbok eller nod och välj bland olika kontakter. Perfekt för full flexibilitet. Kör din egen nod."
       }
     },
     "alby": {
@@ -897,7 +899,8 @@
     },
     "nostr_enable": {
       "title": "Anslut till Nostr",
-      "request1": "Begär att läsa din publika Nostr-nyckel"
+      "request1": "Begär att läsa din publika Nostr-nyckel",
+      "request2": "Begäran att signera händelser med din privata nyckel"
     },
     "webbtc_enable": {
       "request2": "Begär fakturor och Webbtc-information",
@@ -1045,7 +1048,10 @@
         "message": "Meddelande",
         "app": "App",
         "podcast": "Podcast",
-        "episode": "Avsnitt"
+        "episode": "Avsnitt",
+        "action": "Åtgärd",
+        "totalAmount": "Totalt belopp",
+        "timestamp": "Tidsstämpel"
       },
       "open_location": "Öppna websida",
       "payment_hash": "Betalningshash",

@@ -227,6 +227,21 @@
         "pairing_phrase": {
           "label": "Frase de pareamento "
         }
+      },
+      "galoy": {
+        "sms_code": {
+          "label": "Insira o código de verificação SMS"
+        },
+        "actions": {
+          "login": "Login"
+        },
+        "phone_number": {
+          "label": "Insira seu número de telefone"
+        },
+        "errors": {
+          "setup_failed": "Falha na configuração",
+          "invalid_token": "Falha na autorização. Verifique sua chave API e tente novamente."
+        }
       }
     },
     "home": {
@@ -661,7 +676,6 @@
       "block_added": "{{host}} adicionado na lista de bloqueio, por favor recarregue o site.",
       "allow_sign": "Permitir {{host}} assinar:",
       "view_details": "Ver detalhes",
-      "allow_sign_event": "Permitir {{host}} assinar {{kind}}:",
       "hide_details": "Ocultar detalhes",
       "kinds": {
         "0": "metadados",
@@ -671,9 +685,11 @@
         "5": "exclusão de evento",
         "7": "reação",
         "9735": "zap",
-        "unknown": "evento nostr do tipo {{kind}}"
+        "unknown": "tipo {{kind}}"
       },
-      "no_content": "(Sem conteúdo)"
+      "allow_sign_event": "Permitir {{host}} assinar um evento {{kind}}",
+      "allow_encrypt": "Permitir {{host}} criptografar a mensagem:",
+      "allow_decrypt": "Permitir {{host}} descriptografar a mensagem:"
     },
     "confirm_request_permission": {
       "title": "Aprovar solicitação",
@@ -712,12 +728,14 @@
     "choose_path": {
       "alby": {
         "title": "Conta Alby",
-        "connect": "Conecte-se com a Alby"
+        "connect": "Conecte-se com a Alby",
+        "description": "Crie uma conta Alby ou faça o login caso já possua uma conta conosco."
       },
       "other": {
         "title": "Outras contas",
         "and_more": "& mais...",
-        "connect": "Conectar outras contas"
+        "connect": "Conectar outras contas",
+        "description": "Conecte-se em sua carteira bitcoin ou em um dos vários servidores de carteira disponíveis."
       }
     },
     "alby": {
@@ -740,7 +758,7 @@
     "transactions": {
       "title": "Transações",
       "list_empty": "Sem transações.",
-      "description": "Transações nesta conta"
+      "description": "Extrato de transações desta conta"
     },
     "distributions": {
       "umbrel": {
@@ -868,7 +886,8 @@
     },
     "nostr_enable": {
       "request1": "Solicitar a leitura de sua chave pública Nostr",
-      "title": "Conectar no Nostr"
+      "title": "Conectar no Nostr",
+      "request2": "Solicitar assinar eventos usando sua chave privada"
     },
     "webln_enable": {
       "title": "Conectar no WebLN",
@@ -984,7 +1003,8 @@
       "allow": "Permitir este site:",
       "block_and_ignore": "Bloquear e ignorar {{host}}"
     },
-    "website": "Site"
+    "website": "Site",
+    "apps": "Apps"
   },
   "components": {
     "allowance_menu": {
@@ -1024,7 +1044,9 @@
         "message": "Mensagem",
         "app": "App",
         "podcast": "Podcast",
-        "episode": "Episódio"
+        "episode": "Episódio",
+        "action": "Ação",
+        "totalAmount": "Quantia total"
       },
       "open_location": "Abrir link",
       "payment_hash": "Hash do pagamento",

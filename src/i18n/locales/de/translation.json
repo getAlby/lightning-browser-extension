@@ -163,12 +163,20 @@
         "title": "Blink Wallet",
         "page": {
           "title": "Verbinden mit <0>Blink Wallet</0>"
+        },
+        "token": {
+          "info": "Um deine Brieftasche zu verbinden, generiere einen API-Schlüssel im <0>Blink Dashboard (dashboard.blink.sv)</0>:<br>- logge dich mit deiner E-Mail oder Telefonnummer ein, wenn du Blink bereits nutzt<br>- wenn du noch keinen Account hast, kannst du einen neuen erstellen, indem du dich mit einer Telefonnummer einloggst<br>- erstelle einen neuen Key auf der Registerkarte API Keys<br>- gib ihm einen Namen und wähle den Lese- und Schreibbereich<br>- belasse die Standardeinstellung ohne Ablaufdatum oder wähle einen langen Zeitraum, um zu vermeiden, dass du deine Wallet regelmäßig neu verbinden musst<br>- kopiere den Key (beginnend mit blink_ ) und füge ihn in die Textbox unten ein.<br><br>Die Integration unterstützt derzeit nur die Verwendung der BTC-Wallet.<br>",
+          "label": "Gebe deinen API-Schlüssel ein"
         }
       },
       "bitcoin_jungle": {
         "title": "Bitcoin Jungle Wallet",
         "page": {
           "title": "Verbinden mit <0>Bitcoin Jungle Wallet</0>"
+        },
+        "token": {
+          "info": "Die {{label}}-Integration mit Alby befindet sich in der Alpha-Phase und wird nur für fortgeschrittene Benutzer empfohlen.<br><br>du kannst deinen Zugriffstoken abrufen, indem du die mobile App aufrufst, auf das Einstellungssymbol klicken und dann dreimal auf die Build-Nummer tippen, um das Entwicklermenü zu öffnen.<br><br>Das Zugriffstoken kann von hier kopiert werden.<br><br>",
+          "label": "Gebe deien Access-Token ein"
         }
       },
       "btcpay": {
@@ -231,6 +239,22 @@
       },
       "umbrel_lightning_node": {
         "title": "Lightning Node"
+      },
+      "galoy": {
+        "sms_code": {
+          "label": "Gebe deinen SMS-Verifizierungscode ein"
+        },
+        "actions": {
+          "login": "Anmeldung"
+        },
+        "phone_number": {
+          "label": "Gebe deine Rufnummer ein"
+        },
+        "errors": {
+          "setup_failed": "Einrichtung fehlgeschlagen",
+          "invalid_token": "Autorisierung fehlgeschlagen. Bitte überprüfe deinen API-Schlüssel und versuche es erneut.",
+          "missing_token": "Zugriffstoken fehlt, konnte sich nicht anmelden."
+        }
       }
     },
     "unlock": {
@@ -278,7 +302,7 @@
         "title": "Erweiterungen der Webseite",
         "subtitle": "Verbesserungen für X, YouTube, etc."
       },
-      "title": "Einstellungen",
+      "title": "Einstellung",
       "change_password": {
         "choose_password": {
           "label": "Gebe einen neuen Passcode zum Entsperren ein:"
@@ -370,7 +394,7 @@
       },
       "account_view": {
         "title2": "Konto",
-        "title1": "Kontoeinstellungen",
+        "title1": "Kontoeinstellung",
         "name": {
           "title": "Name anzeigen",
           "placeholder": "Konto Anzeigename"
@@ -603,7 +627,6 @@
       "allow_sign": "Erlaube dein {{host}} zu unterschreiben:",
       "view_details": "Details anzeigen",
       "hide_details": "Details ausblenden",
-      "no_content": "(Ohne Inhalt)",
       "kinds": {
         "0": "Metadaten",
         "1": "kurze Textnotiz",
@@ -628,9 +651,12 @@
         "30009": "Badge Beschreibung",
         "30023": "Langform Inhalte",
         "30078": "anwendungsspezifische Daten",
-        "unknown": "nostr Ereignis der Art {{kind}}"
+        "unknown": "kind {{kind}}"
       },
-      "allow_sign_event": "Erlaube {{host}}, eine {{kind}} zu unterzeichnen:"
+      "peer": "Peer",
+      "allow_sign_event": "Erlaube {{Gastgeber}}, ein {{kind}} Ereignis zu unterzeichnen",
+      "allow_encrypt": "Erlaube {{host}}, die Nachricht zu verschlüsseln:",
+      "allow_decrypt": "Erlaube {{host}}, die Nachricht zu entschlüsseln:"
     },
     "confirm_request_permission": {
       "title": "Antrag genehmigen",
@@ -719,11 +745,13 @@
       "other": {
         "and_more": "& mehr...",
         "title": "Andere Wallets",
-        "connect": "Verbinden"
+        "connect": "Verbinden",
+        "description": "Schließe deine vorhandene Lightning Wallet oder Node an und wähle aus verschiedenen Anschlüssen. Großartig für volle Flexibilität. Betreibe deinen eigenen Knotenpunkt."
       },
       "alby": {
         "title": "Alby Konto",
-        "connect": "Mit Alby verbinden"
+        "connect": "Mit Alby verbinden",
+        "description": "Melde dich an oder nutze dein bestehendes Alby-Konto. Ideal für den schnellen Einstieg und für kleine Beträge."
       }
     },
     "discover": {
@@ -742,7 +770,7 @@
       "tips": {
         "title": "Deine Alby Wallet ist bereit",
         "top_up_wallet": {
-          "description": "Du möchtest deine Wallet aufladen?",
+          "description": "Du möchtest deine Wallet aufladen?\nWir haben es für dich!",
           "title": "Bitcoin kaufen"
         },
         "demo": {
@@ -895,7 +923,8 @@
     },
     "nostr_enable": {
       "title": "Mit Nostr verbinden",
-      "request1": "Anfrage zum Lesen deines öffentlichen Nostr-Schlüssels"
+      "request1": "Anfrage zum Lesen deines öffentlichen Nostr-Schlüssels",
+      "request2": "Anfrage zum Signieren von Ereignissen mit deinem privaten Schlüssel"
     },
     "webbtc_enable": {
       "request2": "Rechnungen und Webbtc-Informationen anfordern",
@@ -959,7 +988,7 @@
     },
     "allowance_menu": {
       "edit_allowance": {
-        "title": "Einstellungen",
+        "title": "Seiten Einstellung",
         "screen_reader": "Zulässigkeitsoptionen"
       },
       "enable_login": {
@@ -987,14 +1016,17 @@
     "transactions_table": {
       "sent": "Gesendet",
       "boostagram": {
-        "sender": "Sender",
-        "app": "App",
+        "sender": "Sende",
+        "app": "App's",
         "podcast": "Podcast",
         "message": "Nachricht",
-        "episode": "Folge"
+        "episode": "Folge",
+        "action": "Aktion",
+        "totalAmount": "Gesamtbetrag",
+        "timestamp": "Zeitstempel"
       },
-      "preimage": "Preimage",
-      "received": "Empfangen",
+      "preimage": "Vorschaubild",
+      "received": "Empfang",
       "fee": "Gebühr",
       "open_location": "Webseite öffnen",
       "payment_hash": "Zahlung hHash",
@@ -1019,7 +1051,7 @@
   },
   "common": {
     "optional": "Optional",
-    "feedback": "Feedback",
+    "feedback": "Rückmeldung",
     "error": "Fehler",
     "connected_sites": "Verbundene Webseiten",
     "loading": "Laden",
@@ -1031,7 +1063,7 @@
     "amount": "Betrag",
     "copied": "Kopiert!",
     "description": "Beschreibung",
-    "settings": "Einstellungen",
+    "settings": "Einstellung",
     "sats_other": "sats",
     "confirm_password": "Kennwort bestätigen",
     "help": "Hilfe",
@@ -1107,7 +1139,8 @@
       "allow": "Erlaube dieser Webseite:",
       "block_and_ignore": "Blockieren und Ignorieren von {{host}}"
     },
-    "website": "Website"
+    "website": "Website",
+    "apps": "Apps"
   },
   "permissions": {
     "commando": {
@@ -1163,7 +1196,11 @@
       "listpayments": "Erhalte eine Liste aller ausgehenden Zahlungen",
       "verifymessage": "Überprüfe eine Signatur über eine Nachricht",
       "addholdinvoice": "Erstelle eine neue HODL-Rechnungen",
-      "settleinvoice": "Begleiche eine akzeptierte Rechnung"
+      "settleinvoice": "Begleiche eine akzeptierte Rechnung",
+      "listunspent": "Liste aller utxos, die von der Brieftasche ausgegeben werden können",
+      "listaddresses": "Erhalte alle Adressen zusammen mit deinem Guthaben",
+      "newaddress": "Abrufen einer neuen Onchain-Adresse",
+      "nextaddr": "Abrufen der nächsten unbenutzten Adresse in der Wallet"
     },
     "nostr": {
       "getpublickey": "Lese deinen öffentlichen Schlüssel",
@@ -1195,7 +1232,11 @@
       "walletbalance": "Ermittle die gesamten nicht verbrauchten Ausgaben deiner Wallet",
       "openchannel": "Öffne einen neuen Kanal",
       "addholdinvoice": "Neue HODL-Rechnungen erstellen",
-      "settleinvoice": "Begleiche eine akzeptierte Rechnung"
+      "settleinvoice": "Begleiche eine akzeptierte Rechnung",
+      "listunspent": "Liste aller utxos, die von der Wallet ausgegeben werden können",
+      "nextaddr": "Abrufen der nächsten unbenutzten Onchain-Adresse innerhalb der Wallet",
+      "listaddresses": "Alle Onchain-Adressen zusammen mit ihrem Guthaben abrufen",
+      "newaddress": "Abrufen einer neuen Onchain-Adresse"
     },
     "webln": {
       "getbalance": "Den Kontostand abfragen"

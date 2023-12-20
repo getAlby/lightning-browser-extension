@@ -90,9 +90,6 @@
         "sms_code": {
           "label": "Vnesi SMS potrditveno kodo"
         },
-        "token": {
-          "label": "Vnesi svoj dostopni žeton"
-        },
         "errors": {
           "setup_failed": "Namestitev ni bila uspešna",
           "invalid_token": "Neveljaven dostopni žeton je potekel",
