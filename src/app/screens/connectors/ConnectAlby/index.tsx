@@ -80,7 +80,6 @@ export default function ConnectAlby() {
       disabled={loading}
       flex
       outline
-      className="w-64"
       onClick={connectAlby}
     />
   );
