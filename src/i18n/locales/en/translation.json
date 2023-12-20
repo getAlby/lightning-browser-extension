@@ -1034,7 +1034,8 @@
       "allow": "Allow this website to:",
       "block_added": "Added {{host}} to the blocklist, please reload the website.",
       "request1": "Request approval for transactions",
-      "block_and_ignore": "Block and ignore {{host}}"
+      "block_and_ignore": "Block and ignore {{host}}",
+      "insecure_domain_warn": "⚠️ You are connecting to an insecure domain."
     }
   },
   "components": {
