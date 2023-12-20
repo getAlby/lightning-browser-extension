@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import Button from "~/app/components/Button";
 import ConnectorPath from "~/app/components/ConnectorPath";
+import ConnectAlby from "~/app/screens/connectors/ConnectAlby";
 
 export default function ChooseConnectorPath() {
   const { t } = useTranslation("translation", {
@@ -66,11 +67,16 @@ export default function ChooseConnectorPath() {
                 <FeatureItem type="success">{t("voltage.point1")}</FeatureItem>
                 <FeatureItem type="success">{t("voltage.point2")}</FeatureItem>
                 <FeatureItem type="success">{t("voltage.point3")}</FeatureItem>
-                <FeatureItem type="disabled">{t("voltage.point4")}</FeatureItem>
+                <FeatureItem type="success">{t("voltage.point4")}</FeatureItem>
               </>
             }
             actions={
-              <Link to="choose-connector" className="flex flex-1">
+              <Link
+                to="https://info.getalby.com/voltage"
+                target="_blank"
+                rel="noreferrer noopener"
+                className="flex flex-1"
+              >
                 <Button
                   tabIndex={-1}
                   label={t("voltage.connect")}
@@ -97,11 +103,7 @@ export default function ChooseConnectorPath() {
                 <FeatureItem type="success">{t("alby.point4")}</FeatureItem>
               </>
             }
-            actions={
-              <Link to="choose-connector" className="flex flex-1">
-                <Button tabIndex={-1} label={t("alby.connect")} flex outline />
-              </Link>
-            }
+            actions={<ConnectAlby />}
           />
         </div>
       </div>
