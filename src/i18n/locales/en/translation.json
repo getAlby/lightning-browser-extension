@@ -48,7 +48,7 @@
       },
       "voltage": {
         "title": "Voltage Cloud Node",
-        "description": "Great If you don’t mind paying for a lightning node cloud service.",
+        "description": "Great if you don't mind paying for a lightning node cloud service.",
         "connect": "See Setup Guide",
         "point1": "Start instantly, no waiting for an invite",
         "point2": "No transaction or volume limits",
@@ -59,7 +59,7 @@
         "title": "Alby Account",
         "description": "Ideal for beginners or anyone looking for a great daily spending wallet.",
         "connect": "Connect with Alby",
-        "point1": "You need to wait for an invite code",
+        "point1": "New signups require an invite code",
         "point2": "Transaction volume limits apply",
         "point3": "Set up and login with your email",
         "point4": "Unique lightning and nostr address"
