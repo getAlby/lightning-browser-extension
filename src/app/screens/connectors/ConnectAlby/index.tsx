@@ -78,8 +78,8 @@ export default function ConnectAlby() {
       label={t("connect")}
       loading={loading}
       disabled={loading}
-      primary
       flex
+      outline
       className="w-64"
       onClick={connectAlby}
     />

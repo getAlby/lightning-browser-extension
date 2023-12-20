@@ -53,7 +53,7 @@
         "point1": "Start instantly, no waiting for an invite",
         "point2": "No transaction or volume limits",
         "point3": "Full self-custody and higher privacy",
-        "point4": "No lightning and nostr address"
+        "point4": "Unique lightning and nostr address"
       },
       "alby": {
         "title": "Alby Account",
