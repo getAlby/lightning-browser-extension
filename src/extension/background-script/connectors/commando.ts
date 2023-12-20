@@ -304,7 +304,8 @@ export default class Commando implements Connector {
       rune: this.config.rune,
     })) as CommandoListFundsResponse;
     const lnBalance = response.channels.reduce(
-      (balance, channel) => balance + channel.channel_sat,
+      (balance, channel) =>
+        balance + (channel.channel_sat ? channel.channel_sat : 0),
       0
     );
     return {
