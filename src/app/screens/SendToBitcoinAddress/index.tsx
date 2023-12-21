@@ -82,6 +82,9 @@ function SendToBitcoinAddress() {
         setFeesLoading(true);
 
         const result = await api.getSwapInfo();
+        if (!result.available) {
+          throw new Error("Swaps currently not available");
+        }
 
         setServiceFeePercentage(result.service_fee_percentage);
         setSatsPerVbyte(result.sats_per_vbyte);

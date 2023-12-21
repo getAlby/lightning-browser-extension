@@ -125,6 +125,12 @@ export default function TransactionModal({
               }
             />
           )}
+          {transaction.boostagram?.message && (
+            <TransactionDetailRow
+              title={t("boostagram.message")}
+              content={transaction.boostagram?.podcast}
+            />
+          )}
           {transaction.boostagram?.podcast && (
             <TransactionDetailRow
               title={t("boostagram.podcast")}

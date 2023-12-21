@@ -168,8 +168,14 @@ export type NavigationState = {
     message?: string;
     event?: Event;
     sigHash?: string;
-    description?: string;
-    details?: string;
+
+    // nostr
+    encryptOrDecrypt?: {
+      action: "encrypt" | "decrypt";
+      peer: string;
+      message: string;
+    };
+
     psbt?: string;
     requestPermission: {
       method: string;

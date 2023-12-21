@@ -329,37 +329,31 @@ function LNURLPay() {
     }
 
     return (
-      <div className="grow">
-        <Container justifyBetween maxWidth="sm">
-          <div>
-            <ResultCard
-              isSuccess
-              message={tCommon("success_message", {
-                amount: getFormattedSats(valueSat),
-                fiatAmount: showFiat ? ` (${fiatValue})` : ``,
-                destination: navState.origin?.name || getRecipient(),
-              })}
-            />
-            {isMessage && (
-              <dl className="shadow bg-white dark:bg-surface-02dp mt-4 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
-                {descriptionList.map(([dt, dd]) => (
-                  <>
-                    <Dt>{dt}</Dt>
-                    <Dd>{dd}</Dd>
-                  </>
-                ))}
-              </dl>
-            )}
-          </div>
-          <div>
-            <Button
-              onClick={close}
-              label={tCommon("actions.close")}
-              fullWidth
-            />
-          </div>
-        </Container>
-      </div>
+      <Container justifyBetween maxWidth="sm">
+        <div>
+          <ResultCard
+            isSuccess
+            message={tCommon("success_message", {
+              amount: getFormattedSats(valueSat),
+              fiatAmount: showFiat ? ` (${fiatValue})` : ``,
+              destination: navState.origin?.name || getRecipient(),
+            })}
+          />
+          {isMessage && (
+            <dl className="shadow bg-white dark:bg-surface-02dp mt-4 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
+              {descriptionList.map(([dt, dd]) => (
+                <>
+                  <Dt>{dt}</Dt>
+                  <Dd>{dd}</Dd>
+                </>
+              ))}
+            </dl>
+          )}
+        </div>
+        <div>
+          <Button onClick={close} label={tCommon("actions.close")} fullWidth />
+        </div>
+      </Container>
     );
   }
 
@@ -418,7 +412,7 @@ function LNURLPay() {
                   description={getRecipient()}
                   image={navState.origin?.icon || getImage()}
                 />
-                <form onSubmit={handleSubmit} className="grow flex">
+                <form onSubmit={handleSubmit} className="flex grow">
                   <div className="grow flex flex-col justify-between">
                     <fieldset disabled={loadingConfirm}>
                       <dl className="mt-4 overflow-hidden">
