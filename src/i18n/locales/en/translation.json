@@ -466,7 +466,7 @@
         },
         "remove": {
           "title": "Disconnect This Wallet",
-          "subtitle": "All the linked allowances will be deleted. Please be certain.",
+          "subtitle": "Removes all allowances, payment data and keys associated with this wallet.",
           "confirm": "Please enter the name of the account to confirm the deletion of your account:\n\n{{ name }}\n\n ⚠️ All associated keys (Master Key, Nostr, etc) will be deleted if you continue. Please make sure you have backed them up, there is no other way to restore them.",
           "error": "The entered account name didn't match."
         },
@@ -483,7 +483,7 @@
         }
       },
       "actions": {
-        "connect_wallet": "Connect a wallet"
+        "connect_a_wallet": "Connect a wallet"
       }
     },
     "webln_enable": {
