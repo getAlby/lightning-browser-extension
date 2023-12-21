@@ -306,6 +306,7 @@ export default class Commando implements Connector {
       params: {},
       rune: this.config.rune,
     })) as CommandoListFundsResponse;
+    // https://github.com/ElementsProject/cln-application/blob/main/apps/frontend/src/store/AppContext.tsx#L139
     const lnBalance = response.channels
       .filter((x) => x.connected && x.state == "CHANNELD_NORMAL")
       .reduce(
