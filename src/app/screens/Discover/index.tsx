@@ -19,7 +19,7 @@ function Discover() {
           <p className="mb-6 text-gray-500 dark:text-neutral-500">
             {t("discover.tips.description")}
           </p>
-          <div className="mb-6 flex gap-4">
+          <div className="mb-6 flex sm:flex-row flex-col gap-4">
             <Tips />
           </div>
         </>
