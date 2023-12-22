@@ -80,7 +80,6 @@ export default function ConnectAlby() {
       disabled={loading}
       primary
       flex
-      className="w-64"
       onClick={connectAlby}
     />
   );
