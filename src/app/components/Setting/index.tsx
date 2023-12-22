@@ -6,7 +6,7 @@ type Props = {
 
 function Setting({ title, subtitle, children }: Props) {
   return (
-    <div className="py-4 flex justify-between items-center">
+    <div className="flex flex-col sm:flex-row justify-between items-center py-4">
       <div>
         <span className="text-black dark:text-white font-medium">{title}</span>
         <p className="text-gray-600 mr-1 dark:text-neutral-400 text-sm">
