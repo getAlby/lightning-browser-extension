@@ -555,7 +555,6 @@
       "block_added": "Se agregó {{host}} a la lista de bloqueados, vuelva a cargar el sitio web.",
       "view_details": "Más información",
       "hide_details": "Ocultar los detalles",
-      "no_content": "(Sin contenido)",
       "kinds": {
         "0": "metadatos",
         "1": "nota corta de texto",
@@ -666,6 +665,9 @@
       "btcpay": {
         "name": "BTCPay"
       }
+    },
+    "nostr_enable": {
+      "request2": "Solicitud para firmar eventos utilizando su clave privada"
     }
   },
   "common": {

@@ -1,4 +1,4 @@
-import { render, screen, act } from "@testing-library/react";
+import { act, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router-dom";
 import { settingsFixture as mockSettings } from "~/../tests/fixtures/settings";
@@ -86,7 +86,7 @@ describe("ConfirmKeysend", () => {
     });
 
     expect(screen.getByText("21 sats")).toBeInTheDocument();
-    expect(screen.getByText("(~$0.01)")).toBeInTheDocument();
+    expect(screen.getByText("~$0.01")).toBeInTheDocument();
     expect(screen.queryByText("~$0.05")).not.toBeInTheDocument();
 
     await act(() => {

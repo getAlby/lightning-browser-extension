@@ -602,7 +602,6 @@
       "block_added": "已将{{host}}添加到屏蔽列表，请重新加载网站。",
       "view_details": "查看详情",
       "hide_details": "隐藏详情",
-      "no_content": "(无内容)",
       "kinds": {
         "0": "元数据",
         "1": "短文笔记",
