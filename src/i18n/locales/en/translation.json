@@ -710,6 +710,7 @@
         "placeholder": "For e.g. who is sending this payment?"
       },
       "success": "Payment received!",
+      "qrcode_invoice": "QR code with invoice",
       "payment": {
         "waiting": "waiting for payment...",
         "status": "Check payment status"
