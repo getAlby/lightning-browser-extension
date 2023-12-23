@@ -149,12 +149,18 @@
         "title": "Carteira Blink",
         "page": {
           "title": "Conecte-se na <0>Carteira Blink</0>"
+        },
+        "token": {
+          "label": "Insira a chave API"
         }
       },
       "bitcoin_jungle": {
         "title": "Carteira Bitcoin Jungle",
         "page": {
           "title": "Conecte-se na <0>Carteira Bitcoin Jungle</0>"
+        },
+        "token": {
+          "label": "Insira o token de acesso"
         }
       },
       "btcpay": {
@@ -317,7 +323,7 @@
             "description": "Você pode gerar chaves Nostr a partir de sua chave mestra ou importar sua chave privada existente colando-a no campo \"Chave privada Nostr\".",
             "no_secret_key": "💡 Você ainda não tem uma chave mestra. <0>Clique aqui</0></div> para gerar sua chave mestra e suas chaves Nostr.",
             "imported_key_warning": "⚠️ No momento, você está usando uma chave Nostr importada ou gerada aleatoriamente. Sua chave privada Nostr não pode ser restaurada por sua frase de recuperação, então lembre-se de fazer o backup de sua chave privada Nostr separadamente.",
-            "remove": "Remover chaves existentes"
+            "remove": "Remover esta chave"
           },
           "setup": {
             "title": "Configure suas chaves Nostr",
@@ -372,7 +378,7 @@
           },
           "backup": {
             "save": "Salvar chave mestra",
-            "button": "Ver frase de recuperação",
+            "button": "Frase de recuperação",
             "protocols": {
               "nostr": "Nostr"
             },
@@ -1001,7 +1007,8 @@
       "block_added": "{{host}} adicionado à lista de bloqueio, recarregue o site.",
       "request1": "Solicitar aprovação para transações",
       "allow": "Permitir este site:",
-      "block_and_ignore": "Bloquear e ignorar {{host}}"
+      "block_and_ignore": "Bloquear e ignorar {{host}}",
+      "insecure_domain_warn": "⚠️ Você está se conectando a um domínio inseguro."
     },
     "website": "Site",
     "apps": "Apps"
