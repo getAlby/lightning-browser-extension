@@ -89,7 +89,7 @@ const DefaultView: FC<Props> = (props) => {
   }
 
   return (
-    <div className="w-full max-w-screen-sm h-full mx-auto overflow-y-auto no-scrollbar">
+    <div className="w-full max-w-screen-sm h-full mx-auto overflow-y-auto no-scrollbar caret-transparent">
       {props.renderPublisherWidget && !!props.lnDataFromCurrentTab?.length && (
         <PublisherLnData lnData={props.lnDataFromCurrentTab[0]} />
       )}

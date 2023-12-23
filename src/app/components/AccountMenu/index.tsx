@@ -58,7 +58,7 @@ function AccountMenu({ showOptions = true }: Props) {
   }
 
   return (
-    <div className="relative pl-2 flex justify-end w-72">
+    <div className="relative pl-2 flex justify-end w-72 caret-transparent">
       <Menu as="div">
         <Menu.Button className="h-full px-2 rounded-md hover:bg-gray-100 dark:hover:bg-white/10 transition-colors duration-200">
           <div className="flex items-center">
