@@ -54,6 +54,7 @@ export default function TransactionsTable({
 
             return (
               <div
+                tabIndex={0}
                 key={tx.id}
                 className="-mx-2 px-2 py-2 hover:bg-gray-100 dark:hover:bg-surface-02dp cursor-pointer rounded-md"
                 onClick={() => openDetails(tx)}
