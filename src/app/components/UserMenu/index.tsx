@@ -46,6 +46,9 @@ export default function UserMenu() {
         <MenuIcon className="h-6 w-6" />
       </Menu.Button>
       <Menu.List position="left">
+        <Menu.Item>
+          <span className="sr-only">{tCommon("arrowkeys")}</span>
+        </Menu.Item>
         <div className="lg:hidden">
           <Menu.ItemButton
             onClick={() => {
