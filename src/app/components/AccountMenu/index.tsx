@@ -94,7 +94,11 @@ function AccountMenu({ showOptions = true }: Props) {
         </Menu.Button>
         <Menu.List position="right" fullWidth>
           <Menu.Item>
+            <span className="sr-only">{tCommon("arrowkeys")}</span>
+          </Menu.Item>
+          <Menu.Item>
             <div
+              tabIndex={0}
               className={`flex-auto px-4 py-2 overflow-hidden ${
                 !title && !balancesDecorated ? "w-28" : ""
               }`}

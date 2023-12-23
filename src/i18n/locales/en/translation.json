@@ -974,6 +974,7 @@
     "or": "or",
     "website": "Website",
     "apps": "Apps",
+    "arrowkeys": "Use arrowkeys to traverse items",
     "actions": {
       "back": "Back",
       "delete": "Delete",
