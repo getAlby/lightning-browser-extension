@@ -4,7 +4,7 @@ import Loading from "@components/Loading";
 import TransactionsTable from "@components/TransactionsTable";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { FC, useEffect, useState } from "react";
+import { FC, KeyboardEvent, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import BalanceBox from "~/app/components/BalanceBox";
@@ -171,7 +171,15 @@ const DefaultView: FC<Props> = (props) => {
             />
 
             {!isLoading && transactions.length > 0 && (
-              <div className="text-center">
+              <div
+                tabIndex={0}
+                className="text-center"
+                onKeyDown={(e: KeyboardEvent) => {
+                  if (e.key === "Enter") {
+                    handleViewAllLink("/transactions");
+                  }
+                }}
+              >
                 <Hyperlink
                   onClick={() => handleViewAllLink("/transactions")}
                   className="flex justify-center items-center mt-2"
