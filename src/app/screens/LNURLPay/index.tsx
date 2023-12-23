@@ -340,7 +340,10 @@ function LNURLPay() {
             })}
           />
           {isMessage && (
-            <dl className="shadow bg-white dark:bg-surface-02dp mt-4 pt-4 px-4 rounded-lg mb-6 overflow-hidden">
+            <dl
+              tabIndex={0}
+              className="shadow bg-white dark:bg-surface-02dp mt-4 pt-4 px-4 rounded-lg mb-6 overflow-hidden"
+            >
               {descriptionList.map(([dt, dd]) => (
                 <>
                   <Dt>{dt}</Dt>
