@@ -1127,6 +1127,11 @@
   resolved "https://registry.npmjs.org/@polka/url/-/url-1.0.0-next.21.tgz"
   integrity sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==
 
+"@popicons/react@^0.0.8":
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@popicons/react/-/react-0.0.8.tgz#b329abf0f0f12da76e6eb1a1824f075cac23eb2d"
+  integrity sha512-/WyuFuSAThK9zCHiIY7N+jxAWnqu4C8kkhXIkj5PcPlBYGKw9T93UheWz+KkSLnAQIUI+jovVrSMV/AZuPROqg==
+
 "@puppeteer/browsers@1.8.0":
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/@puppeteer/browsers/-/browsers-1.8.0.tgz#fb6ee61de15e7f0e67737aea9f9bab1512dbd7d8"
