@@ -40,7 +40,7 @@ export default function ConnectVoltage() {
     setLoading(true);
     const { url, macaroon } = formData;
     const account = {
-      name: "LND",
+      name: "Voltage",
       config: {
         macaroon,
         url,
