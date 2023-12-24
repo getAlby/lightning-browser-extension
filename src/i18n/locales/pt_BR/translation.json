@@ -739,7 +739,6 @@
       },
       "other": {
         "title": "Outras contas",
-        "and_more": "& mais...",
         "connect": "Conectar outras contas",
         "description": "Conecte-se em sua carteira bitcoin ou em um dos vários servidores de carteira disponíveis."
       }
