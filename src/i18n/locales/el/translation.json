@@ -36,8 +36,7 @@
     "choose_path": {
       "other": {
         "title": "Άλλα πορτοφόλια",
-        "connect": "Σύνδεση",
-        "and_more": "& περισσότερα..."
+        "connect": "Σύνδεση"
       },
       "alby": {
         "title": "Λογαριασμός Alby",
