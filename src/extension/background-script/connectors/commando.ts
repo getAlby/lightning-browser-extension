@@ -47,13 +47,16 @@ type CommandoMakeInvoiceResponse = {
   payment_secret: string;
 };
 type CommandoChannel = {
-  peer_id: string;
-  channel_sat: number;
-  amount_msat: number;
-  funding_txid: string;
-  funding_output: number;
-  connected: boolean;
-  state: string;
+  peer_id?: string;
+  funding_txid?: string;
+  funding_output?: string;
+  connected?: boolean;
+  state?: string;
+  short_channel_id?: string;
+  our_amount_msat?: number;
+  channel_sat?: number;
+  channel_total_sat?: number;
+  amount_msat?: number;
 };
 type CommandoListFundsResponse = {
   channels: CommandoChannel[];
@@ -80,7 +83,7 @@ type CommandoInvoice = {
   label: string;
   status: string;
   description: string;
-  msatoshi: number;
+  amount_msat: number;
   bolt11: string;
   payment_preimage: string;
   paid_at: number;
@@ -233,7 +236,7 @@ export default class Commando implements Connector {
               payment_hash: invoice.payment_hash,
               settleDate: invoice.paid_at * 1000,
               type: "received",
-              totalAmount: Math.floor(invoice.msatoshi / 1000),
+              totalAmount: Math.floor(invoice.amount_msat / 1000),
             })
           )
           .filter((invoice) => invoice.settled);
@@ -303,10 +306,17 @@ export default class Commando implements Connector {
       params: {},
       rune: this.config.rune,
     })) as CommandoListFundsResponse;
-    const lnBalance = response.channels.reduce(
-      (balance, channel) => balance + channel.channel_sat,
-      0
-    );
+    // https://github.com/ElementsProject/cln-application/blob/main/apps/frontend/src/store/AppContext.tsx#L139
+    const lnBalance = response.channels
+      .filter((x) => x.connected && x.state == "CHANNELD_NORMAL")
+      .reduce(
+        (balance, channel) =>
+          balance +
+          Math.floor(
+            channel.channel_sat || (channel.our_amount_msat || 0) / 1000
+          ),
+        0
+      );
     return {
       data: {
         balance: lnBalance,
