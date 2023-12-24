@@ -49,7 +49,7 @@
       "voltage": {
         "title": "Voltage Cloud Node",
         "description": "Great if you don't mind paying for a lightning node cloud service.",
-        "connect": "See Setup Guide",
+        "connect": "Connect",
         "point1": "Start instantly, no waiting for an invite",
         "point2": "No transaction or volume limits",
         "point3": "Full self-custody and higher privacy",
@@ -301,6 +301,23 @@
         },
         "errors": {
           "connection_failed": "Connection failed. Is your Core Lightning node online and using the commando plugin?"
+        }
+      },
+      "voltage": {
+        "title": "Voltage",
+        "page": {
+          "title": "Connect to your Voltage node",
+          "description": "Enterprise-grade lightning node hosting. Get on Lightning Network faster than ever. Total control with zero management. <0>Learn more</0>"
+        },
+        "url": {
+          "label": "Node URL",
+          "placeholder": "https://your-node.m.voltageapp.io:8080"
+        },
+        "macaroon": {
+          "label": "Admin Macaroon (hex)"
+        },
+        "errors": {
+          "connection_failed": "Connection failed. Are your credentials correct?"
         }
       }
     },

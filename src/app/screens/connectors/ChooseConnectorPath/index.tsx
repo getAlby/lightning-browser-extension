@@ -72,8 +72,7 @@ export default function ChooseConnectorPath() {
             }
             actions={
               <Link
-                to="https://getalby.com/voltage"
-                target="_blank"
+                to="/accounts/new/choose-connector/voltage"
                 rel="noreferrer noopener"
                 className="flex flex-1"
               >

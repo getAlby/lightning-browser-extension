@@ -14,6 +14,7 @@ import ConnectUmbrel from "@screens/connectors/ConnectUmbrel";
 import { Route } from "react-router-dom";
 import i18n from "~/i18n/i18nConfig";
 
+import ConnectVoltage from "~/app/screens/connectors/ConnectVoltage";
 import ConnectCommando from "../screens/connectors/ConnectCommando";
 import btcpay from "/static/assets/icons/btcpay.svg";
 import citadel from "/static/assets/icons/citadel.png";
@@ -30,6 +31,7 @@ import mynode from "/static/assets/icons/mynode.png";
 import raspiblitz from "/static/assets/icons/raspiblitz.png";
 import start9 from "/static/assets/icons/start9.png";
 import umbrel from "/static/assets/icons/umbrel.png";
+import voltage from "/static/assets/icons/voltage.png";
 
 export const normalizeKey = (key: string) =>
   key as unknown as TemplateStringsArray;
@@ -95,6 +97,12 @@ const connectorMap: { [key: string]: ConnectorRoute } = {
     title: i18n.t("translation:choose_connector.lnd.title"),
     logo: lnd,
   },
+  "voltage-lnd": {
+    path: "lnd",
+    element: <ConnectVoltage />,
+    title: i18n.t("translation:choose_connector.lnd.title"),
+    logo: lnd,
+  },
   lnc: {
     path: "lnc",
     element: <ConnectLnc />,
@@ -148,6 +156,12 @@ const connectorMap: { [key: string]: ConnectorRoute } = {
     element: <ConnectBtcpay />,
     title: i18n.t("translation:choose_connector.btcpay.title"),
     logo: btcpay,
+  },
+  voltage: {
+    path: "voltage",
+    element: <ConnectVoltage />,
+    title: i18n.t("translation:choose_connector.voltage.title"),
+    logo: voltage,
   },
 };
 
@@ -228,6 +242,7 @@ function getConnectorRoutes(): ConnectorRoute[] {
     connectorMap["lnd-hub-go"],
     connectorMap["eclair"],
     connectorMap["btcpay"],
+    connectorMap["voltage"],
     connectorMap[galoyPaths.blink],
     connectorMap[galoyPaths.bitcoinJungle],
     getDistribution("citadel"),
