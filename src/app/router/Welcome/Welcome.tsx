@@ -64,7 +64,7 @@ function Layout() {
   return (
     <div className="flex justify-center items-center min-h-screen">
       <div className="w-full">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-4">
           <div className="text-center font-serif font-medium text-2xl mt-8 dark:text-white">
             <p>
               {t("welcome.title")}
