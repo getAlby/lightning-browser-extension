@@ -438,8 +438,7 @@
     "choose_path": {
       "other": {
         "title": "wallets อื่น ๆ",
-        "connect": "เชื่อมต่อ",
-        "and_more": "& อื่น ๆ …"
+        "connect": "เชื่อมต่อ"
       },
       "alby": {
         "title": "บัญชี Alby",
