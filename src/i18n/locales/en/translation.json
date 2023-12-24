@@ -285,6 +285,19 @@
         "errors": {
           "connection_failed": "Connection failed. Is your Core Lightning node online and using the commando plugin?"
         }
+      },
+      "nwc": {
+        "title": "Nostr Wallet Connect",
+        "page": {
+          "instructions": "Paste a NWC connection string from <0>Alby Nostr Wallet Connect</0>, <1>Umbrel Nostr Wallet Connect</1>, or <2>Mutiny Wallet</2>",
+          "url": {
+            "label": "Nostr Wallet Connect URL",
+            "placeholder": "nostr+walletconnect://69effe..."
+          },
+          "errors": {
+            "connection_failed": "Connection failed. Is your Core Lightning node online and using the commando plugin?"
+          }
+        }
       }
     },
     "distributions": {
