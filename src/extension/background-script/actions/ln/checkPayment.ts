@@ -3,7 +3,10 @@ import { Message } from "~/types";
 import state from "../../state";
 
 const checkPayment = async (message: Message) => {
-  if (typeof message.args.paymentHash !== "string") {
+  if (
+    typeof message.args.paymentHash !== "string" ||
+    !message.args.paymentHash
+  ) {
     return {
       error: "Payment hash missing.",
     };
