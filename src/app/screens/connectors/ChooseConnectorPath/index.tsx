@@ -120,13 +120,22 @@ const FeatureItem = ({
   <div className="flex flex-row items-center space-2">
     <div className="mr-2">
       {type == "success" && (
-        <PopiconsCircleCheckLine className="text-green-600 dark:text-green-400 w-6 h-6" />
+        <PopiconsCircleCheckLine
+          key="success"
+          className="text-green-600 dark:text-green-400 w-6 h-6"
+        />
       )}
       {type == "disabled" && (
-        <PopiconsCircleXLine className="text-gray-400 dark:text-neutral-500 w-6 h-6" />
+        <PopiconsCircleXLine
+          key="disabled"
+          className="text-gray-400 dark:text-neutral-500 w-6 h-6"
+        />
       )}
       {type == "warning" && (
-        <PopiconsCircleExclamationLine className="text-orange-500 w-6 h-6" />
+        <PopiconsCircleExclamationLine
+          key="warning"
+          className="text-orange-500 w-6 h-6"
+        />
       )}
     </div>
     <div className="grow">{children}</div>
