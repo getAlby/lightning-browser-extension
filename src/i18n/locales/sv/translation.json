@@ -704,7 +704,6 @@
       "other": {
         "title": "Annan Plånbok",
         "connect": "Anslut",
-        "and_more": "& mer...",
         "description": "Anslut till din befintliga lightning plånbok eller nod och välj bland olika kontakter. Perfekt för full flexibilitet. Kör din egen nod."
       }
     },

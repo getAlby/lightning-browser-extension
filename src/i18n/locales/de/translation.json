@@ -743,7 +743,6 @@
     },
     "choose_path": {
       "other": {
-        "and_more": "& mehr...",
         "title": "Andere Wallets",
         "connect": "Verbinden",
         "description": "Schließe deine vorhandene Lightning Wallet oder Node an und wähle aus verschiedenen Anschlüssen. Großartig für volle Flexibilität. Betreibe deinen eigenen Knotenpunkt."
