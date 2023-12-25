@@ -52,7 +52,7 @@
         "connect": "Connect",
         "point1": "Start instantly, no waiting for an invite",
         "point2": "No transaction or volume limits",
-        "point3": "Full self-custody and higher privacy",
+        "point3": "Paid cloud service",
         "point4": "Unique lightning and nostr address"
       },
       "alby": {
@@ -307,7 +307,7 @@
         "title": "Voltage",
         "page": {
           "title": "Connect to your Voltage node",
-          "description": "Enterprise-grade lightning node hosting. Get on Lightning Network faster than ever. Total control with zero management. <0>Learn more</0>"
+          "description": "Enterprise-grade lightning node hosting. Get on Lightning Network faster than ever. Total control with zero management. <0>Learn more in our setup guide</0>"
         },
         "url": {
           "label": "Node URL",
