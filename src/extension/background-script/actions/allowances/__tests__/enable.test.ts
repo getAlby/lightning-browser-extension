@@ -78,24 +78,24 @@ describe("enable allowance", () => {
       origin: {
         location: "test",
         domain: "",
-        host: "pro.kollider.xyz",
+        host: "getalby.com",
         pathname: "test",
-        name: "pro kollider",
+        name: "Alby: Your Bitcoin & Nostr companion for the web",
         description: "test",
         icon: "",
         metaData: {},
         external: true,
       },
       args: {
-        host: "pro.kollider.xyz",
+        host: "getalby.com",
       },
     };
     const sender: Sender = {
       documentId: "ALBY123",
       documentLifecycle: "active",
       id: "alby",
-      origin: `https://pro.kollider.xyz`,
-      url: `https://pro.kollider.xyz/test`,
+      origin: `https://getalby.com`,
+      url: `https://getalby.com/test`,
     };
 
     expect(await enableAllowance(message, sender)).toStrictEqual({

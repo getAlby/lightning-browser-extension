@@ -31,13 +31,10 @@
     },
     "choose_path": {
       "alby": {
-        "title": "Alby",
-        "description": "Inscrivez-vous ou utilisez votre compte Alby existant pour commencer à utiliser les paiements éclair en un rien de temps."
+        "title": "Alby"
       },
       "other": {
         "title": "Autres portefeuilles",
-        "description": "Connectez-vous à votre portefeuille ou nœud Lightning et choisissez parmi différents connecteurs.",
-        "and_more": "& plus...",
         "connect": "Connecter"
       }
     },
@@ -88,20 +85,6 @@
         "pairing_phrase": {
           "label": "Votre phrase d'appariement ",
           "placeholder": "phrase de sats de pile secrète"
-        }
-      },
-      "lndhub_bluewallet": {
-        "title": "Bluewallet",
-        "page": {
-          "title": "Connectez-vous à BlueWallet",
-          "description": "Dans BlueWallet, choisissez le wallet que vous souhaitez connecter, ouvrez-le, cliquez sur \"...\", cliquez sur Export/Backup pour afficher le QR code et scannez-le avec votre webcam."
-        },
-        "uri": {
-          "label": "URI d'exportation BlueWallet"
-        },
-        "errors": {
-          "invalid_uri": "URI BlueWallet non valide",
-          "connection_failed": "La connexion a échoué. Votre URI BlueWallet est-il correct ?"
         }
       },
       "lndhub_go": {
@@ -220,39 +203,6 @@
           "title": "Connectez-vous au <0>portefeuille Bitcoin Jungle</0>"
         }
       },
-      "galoy": {
-        "phone_number": {
-          "label": "Entrez votre numéro de téléphone"
-        },
-        "sms_code": {
-          "label": "Entrez votre code de vérification par SMS"
-        },
-        "token": {
-          "label": "Entrez votre jeton JWT",
-          "info": "La connexion {{label}} est en cours de mise à jour. Si vous êtes un utilisateur avancé, vous pouvez récupérer votre jeton JWT en vous connectant via le <0>Portefeuille Web (wallet.mainnet.galoy.io)</0><1/><1/>Le JWT ressemble : < 2>eyJhbG...</2><1/><1/>"
-        },
-        "actions": {
-          "login": "Connexion"
-        },
-        "errors": {
-          "setup_failed": "La configuration a échoué",
-          "missing_token": "JWT manquant, impossible de se connecter.",
-          "invalid_token": "JWT invalide passé"
-        }
-      },
-      "kollider": {
-        "title": "Kollider",
-        "description": "Connectez-vous à votre compte Kollider",
-        "username": {
-          "label": "Saisissez votre nom d'utilisateur pour Kollider"
-        },
-        "currency": {
-          "label": "Sélectionnez votre compte en devise"
-        },
-        "errors": {
-          "connection_failed": "La connexion a échoué. Êtes-vous sûr que les données du compte sont correctes ?"
-        }
-      },
       "btcpay": {
         "title": "Serveur BTCPay",
         "page": {
@@ -305,13 +255,10 @@
         "send_satoshis": "⚡️ Envoyez des Satoshis ⚡️",
         "enable_now": "Activer maintenant"
       },
-      "recent_transactions": "transactions récentes",
       "allowance_view": {
-        "recent_transactions": "transactions récentes",
         "no_transactions": "Aucune transaction sur <0>{{name}}</0> pour le moment."
       },
       "default_view": {
-        "recent_transactions": "transactions récentes",
         "is_blocked_hint": "Alby est actuellement désactivé sur {{host}}",
         "block_removed": "{{hôte}} activé. Veuillez recharger le site Web."
       }
@@ -733,7 +680,7 @@
         "allow_camera_access": "Veuillez autoriser l'accès à la caméra dans l'écran des paramètres."
       }
     },
-    "transactionsTable": {
+    "transactions_table": {
       "fee": "Frais",
       "preimage": "Préimage",
       "received": "Reçu",
@@ -790,87 +737,87 @@
   },
   "permissions": {
     "nostr": {
-      "getpublickey": "Lisez votre clé publique.",
-      "nip04encrypt": "Crypter les données.",
-      "nip04decrypt": "Déchiffrer les données.",
-      "signmessage": "Signez le message avec votre clé."
+      "getpublickey": "Lisez votre clé publique",
+      "nip04encrypt": "Crypter les données",
+      "nip04decrypt": "Déchiffrer les données",
+      "signmessage": "Signez le message avec votre clé"
     },
     "commando": {
-      "bkpr-listbalances": "Liste de tous les soldes de compte actuels et historiques.",
-      "checkmessage": "Vérifiez que la signature a été générée par un nœud donné.",
-      "connect": "Établissez une nouvelle connexion avec un autre nœud.",
-      "decode": "Décode une chaîne bolt11/bolt12/ rune chaîne.",
-      "decodepay": "Vérifier et analyser une chaîne bolt11.",
-      "disconnect": "Fermez une connexion existante à un pair.",
-      "feerates": "Renvoie les frais que CLN utilisera.",
-      "fundchannel": "Ouvrez un canal de paiement avec un pair en engageant une transaction de financement.",
-      "getinfo": "Obtenez le résumé du nœud.",
-      "getroute": "Trouvez le meilleur itinéraire pour le paiement vers un nœud Lightning.",
-      "invoice": "Créer l'attente d'un paiement.",
-      "keysend": "Envoyez un paiement à un autre nœud.",
-      "listforwards": "Répertorier tous les htlcs qui ont été tentés d'être transférés.",
-      "listfunds": "Dressez la liste de tous les fonds disponibles.",
-      "listinvoices": "Obtenez le statut de toutes les factures.",
-      "listnodes": "Listez les nœuds dont le nœud a eu connaissance via des messages de potins.",
-      "listoffers": "Listez toutes les offres ou obtenez une offre spécifique.",
-      "listpays": "Obtient le statut de toutes les commandes de paiement.",
-      "listpeers": "Répertorier les nœuds connectés ou ayant des canaux ouverts avec ce nœud.",
-      "listsendpays": "Obtient le statut de toutes les commandes sendpay.",
-      "listtransactions": "Répertorier les transactions suivies dans le portefeuille.",
-      "multifundchannel": "Ouvrez plusieurs canaux de paiement avec des nœuds en effectuant une seule transaction de financement.",
-      "offer": "Créer une offre.",
-      "pay": "Envoyez un paiement à une facture BOLT11.",
-      "sendpay": "Envoyer un paiement via un itinéraire.",
-      "setchannel": "Configurez les frais / la gamme htlc annoncée pour un canal.",
-      "signmessage": "Créez une signature à partir de ce nœud."
+      "bkpr-listbalances": "Liste de tous les soldes de compte actuels et historiques",
+      "checkmessage": "Vérifiez que la signature a été générée par un nœud donné",
+      "connect": "Établissez une nouvelle connexion avec un autre nœud",
+      "decode": "Décode une chaîne bolt11/bolt12/ rune chaîne",
+      "decodepay": "Vérifier et analyser une chaîne bolt11",
+      "disconnect": "Fermez une connexion existante à un pair",
+      "feerates": "Renvoie les frais que CLN utilisera",
+      "fundchannel": "Ouvrez un canal de paiement avec un pair en engageant une transaction de financement",
+      "getinfo": "Obtenez le résumé du nœud",
+      "getroute": "Trouvez le meilleur itinéraire pour le paiement vers un nœud Lightning",
+      "invoice": "Créer l'attente d'un paiement",
+      "keysend": "Envoyez un paiement à un autre nœud",
+      "listforwards": "Répertorier tous les htlcs qui ont été tentés d'être transférés",
+      "listfunds": "Dressez la liste de tous les fonds disponibles",
+      "listinvoices": "Obtenez le statut de toutes les factures",
+      "listnodes": "Listez les nœuds dont le nœud a eu connaissance via des messages de potins",
+      "listoffers": "Listez toutes les offres ou obtenez une offre spécifique",
+      "listpays": "Obtient le statut de toutes les commandes de paiement",
+      "listpeers": "Répertorier les nœuds connectés ou ayant des canaux ouverts avec ce nœud",
+      "listsendpays": "Obtient le statut de toutes les commandes sendpay",
+      "listtransactions": "Répertorier les transactions suivies dans le portefeuille",
+      "multifundchannel": "Ouvrez plusieurs canaux de paiement avec des nœuds en effectuant une seule transaction de financement",
+      "offer": "Créer une offre",
+      "pay": "Envoyez un paiement à une facture BOLT11",
+      "sendpay": "Envoyer un paiement via un itinéraire",
+      "setchannel": "Configurez les frais / la gamme htlc annoncée pour un canal",
+      "signmessage": "Créez une signature à partir de ce nœud"
     },
     "lnd": {
-      "getinfo": "Obtenez les informations sur le nœud.",
-      "listchannels": "Obtenez une description de tous les canaux ouverts.",
-      "listinvoices": "Obtenez une liste de toutes les factures.",
-      "channelbalance": "Obtenez un rapport sur le total des fonds sur tous les canaux ouverts.",
-      "walletbalance": "Obtenez le total des sorties non dépensées du portefeuille.",
-      "openchannel": "Ouvrez une nouvelle chaîne.",
-      "connectpeer": "Établissez une connexion à un pair distant.",
-      "disconnectpeer": "Déconnectez-vous d'un pair distant.",
-      "estimatefee": "Estimez le taux de frais et les frais totaux pour une transaction.",
-      "getchaninfo": "Obtenez l'annonce du réseau pour la chaîne donnée.",
-      "getnetworkinfo": "Obtenez des statistiques de base sur le graphique des canaux connus.",
-      "getnodeinfo": "Obtenir les informations de canal pour un nœud.",
-      "gettransactions": "Obtenez une liste de toutes les transactions pertinentes pour le portefeuille.",
-      "listpayments": "Obtenez une liste de tous les paiements sortants.",
-      "listpeers": "Obtenez une liste de tous les pairs actuellement actifs.",
-      "lookupinvoice": "Consulter les détails de la facture.",
-      "queryroutes": "Requête pour un itinéraire possible.",
-      "verifymessage": "Vérifier une signature sur un msg.",
-      "sendtoroute": "Effectuez un paiement via l'itinéraire spécifié.",
-      "decodepayreq": "Décoder une chaîne de demande de paiement.",
-      "routermc": "Lire l'état du contrôle de mission interne.",
-      "addinvoice": "Créer de nouvelles factures."
+      "getinfo": "Obtenez les informations sur le nœud",
+      "listchannels": "Obtenez une description de tous les canaux ouverts",
+      "listinvoices": "Obtenez une liste de toutes les factures",
+      "channelbalance": "Obtenez un rapport sur le total des fonds sur tous les canaux ouverts",
+      "walletbalance": "Obtenez le total des sorties non dépensées du portefeuille",
+      "openchannel": "Ouvrez une nouvelle chaîne",
+      "connectpeer": "Établissez une connexion à un pair distant",
+      "disconnectpeer": "Déconnectez-vous d'un pair distant",
+      "estimatefee": "Estimez le taux de frais et les frais totaux pour une transaction",
+      "getchaninfo": "Obtenez l'annonce du réseau pour la chaîne donnée",
+      "getnetworkinfo": "Obtenez des statistiques de base sur le graphique des canaux connus",
+      "getnodeinfo": "Obtenir les informations de canal pour un nœud",
+      "gettransactions": "Obtenez une liste de toutes les transactions pertinentes pour le portefeuille",
+      "listpayments": "Obtenez une liste de tous les paiements sortants",
+      "listpeers": "Obtenez une liste de tous les pairs actuellement actifs",
+      "lookupinvoice": "Consulter les détails de la facture",
+      "queryroutes": "Requête pour un itinéraire possible",
+      "verifymessage": "Vérifier une signature sur un msg",
+      "sendtoroute": "Effectuez un paiement via l'itinéraire spécifié",
+      "decodepayreq": "Décoder une chaîne de demande de paiement",
+      "routermc": "Lire l'état du contrôle de mission interne",
+      "addinvoice": "Créer de nouvelles factures"
     },
     "lnc": {
-      "getinfo": "Obtenez les informations sur le nœud.",
-      "listchannels": "Obtenez une description de tous les canaux ouverts.",
-      "listinvoices": "Obtenez une liste de toutes les factures.",
-      "channelbalance": "Obtenez un rapport sur le total des fonds sur tous les canaux ouverts.",
-      "walletbalance": "Obtenez le total des sorties non dépensées du portefeuille.",
-      "openchannel": "Ouvrez une nouvelle chaîne.",
-      "connectpeer": "Établissez une connexion à un pair distant.",
-      "disconnectpeer": "Déconnectez-vous d'un pair distant.",
-      "estimatefee": "Estimez le taux de frais et les frais totaux pour une transaction.",
-      "getchaninfo": "Obtenez l'annonce du réseau pour la chaîne donnée.",
-      "getnetworkinfo": "Obtenez des statistiques de base sur le graphique des canaux connus.",
-      "getnodeinfo": "Obtenir les informations de canal pour un nœud.",
-      "gettransactions": "Obtenez une liste de toutes les transactions pertinentes pour le portefeuille.",
-      "listpayments": "Obtenez une liste de tous les paiements sortants.",
-      "listpeers": "Obtenez une liste de tous les pairs actuellement actifs.",
-      "lookupinvoice": "Consulter les détails de la facture.",
-      "queryroutes": "Requête pour un itinéraire possible.",
-      "verifymessage": "Vérifier une signature sur un msg.",
-      "sendtoroute": "Effectuez un paiement via l'itinéraire spécifié.",
-      "decodepayreq": "Décoder une chaîne de demande de paiement.",
-      "routermc": "Lire l'état du contrôle de mission interne.",
-      "addinvoice": "Créer de nouvelles factures."
+      "getinfo": "Obtenez les informations sur le nœud",
+      "listchannels": "Obtenez une description de tous les canaux ouverts",
+      "listinvoices": "Obtenez une liste de toutes les factures",
+      "channelbalance": "Obtenez un rapport sur le total des fonds sur tous les canaux ouverts",
+      "walletbalance": "Obtenez le total des sorties non dépensées du portefeuille",
+      "openchannel": "Ouvrez une nouvelle chaîne",
+      "connectpeer": "Établissez une connexion à un pair distant",
+      "disconnectpeer": "Déconnectez-vous d'un pair distant",
+      "estimatefee": "Estimez le taux de frais et les frais totaux pour une transaction",
+      "getchaninfo": "Obtenez l'annonce du réseau pour la chaîne donnée",
+      "getnetworkinfo": "Obtenez des statistiques de base sur le graphique des canaux connus",
+      "getnodeinfo": "Obtenir les informations de canal pour un nœud",
+      "gettransactions": "Obtenez une liste de toutes les transactions pertinentes pour le portefeuille",
+      "listpayments": "Obtenez une liste de tous les paiements sortants",
+      "listpeers": "Obtenez une liste de tous les pairs actuellement actifs",
+      "lookupinvoice": "Consulter les détails de la facture",
+      "queryroutes": "Requête pour un itinéraire possible",
+      "verifymessage": "Vérifier une signature sur un msg",
+      "sendtoroute": "Effectuez un paiement via l'itinéraire spécifié",
+      "decodepayreq": "Décoder une chaîne de demande de paiement",
+      "routermc": "Lire l'état du contrôle de mission interne",
+      "addinvoice": "Créer de nouvelles factures"
     }
   }
 }

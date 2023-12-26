@@ -54,20 +54,6 @@
           "connection_failed": "Připojení se nezdařilo. Jsou vaše údaje pro LND zadány správně?"
         }
       },
-      "lndhub_bluewallet": {
-        "title": "Bluewallet",
-        "page": {
-          "title": "Připojit k BlueWallet",
-          "description": "V BlueWallet vyberte peněženku, kterou chcete připojit, otevřete ji, klikněte na ¨...¨, klikněte na Exportovat/Záloha pro zobrazení QR kódu a tento kód naskenujte svou webkamerou."
-        },
-        "uri": {
-          "label": "BlueWallet Export URI"
-        },
-        "errors": {
-          "invalid_uri": "Nevalidní BlueWallet URI",
-          "connection_failed": "Připojení se nezdařilo. Je vaše BlueWallet URI správné?"
-        }
-      },
       "lndhub_go": {
         "title": "LNDHub",
         "page": {
@@ -184,26 +170,6 @@
           "title": "Připojení k <0>Bitcoin Jungle Wallet</0>"
         }
       },
-      "galoy": {
-        "phone_number": {
-          "label": "Vložte své telefonní číslo"
-        },
-        "sms_code": {
-          "label": "Vlože verifikační kód ze SMS"
-        },
-        "token": {
-          "label": "Vlože svůj JWT token",
-          "info": "Přihlášení {{label}} je aktuálně aktualizováno. Pokud jste pokročilý uživatel, můžete svůj JWT token získat přihlášením přes <0>Webovou peněženku (wallet.mainnet.galoy.io)</0><1/><1/>JWT token vypadá podobně jako: <2>eyJhbG...</2><1/><1/>"
-        },
-        "actions": {
-          "login": "Přihlásit"
-        },
-        "errors": {
-          "setup_failed": "Nastavení se nezdařilo",
-          "missing_token": "JWT chybí, přihlášení se nezdařilo.",
-          "invalid_token": "Vloženo nevalidní JWT"
-        }
-      },
       "btcpay": {
         "title": "BTCPay Server",
         "page": {
@@ -262,30 +228,6 @@
           "placeholder": "tajná fráze"
         }
       },
-      "kollider": {
-        "description": "Přihlášení k vašemu účtu Kollider",
-        "title": "Kollider",
-        "errors": {
-          "connection_failed": "Připojení se nezdařilo. Jste si jisti, že jste zadali údaje k účtu správně?",
-          "user_already_exists": "Uživatelské jméno již existuje",
-          "registration_limit_exceeded": "Limit registrací byl překročen, zkuste to znovu později."
-        },
-        "username": {
-          "label": "Vložte vaše uživatelské jméno ke Kollider"
-        },
-        "currency": {
-          "label": "Zvolte měnu vašeho účtu"
-        },
-        "choose_path": {
-          "create_new": "Přihlásit se",
-          "title": "Připojení k peněžence Kollider",
-          "description": "Přihlašte se nebo si vytvořte nový Kollider účet a propojte ho s Alby."
-        },
-        "warning": "⚠️ Prosím ujistěte se, že máte své přihlašovací údaje uložené bezpečně ve svém správci hesel. Bez těchto údajů nepůjde váš účet obnovit.",
-        "create": {
-          "title": "Vytvořte si svůj Kollider účet a propojte ho s Alby"
-        }
-      },
       "umbrel_lightning_node": {
         "title": "Lightning uzel"
       }
@@ -295,9 +237,7 @@
         "send_satoshis": "⚡️ Odeslat satoshi ⚡️",
         "enable_now": "Povolit nyní"
       },
-      "recent_transactions": "Nedávné transakce",
       "allowance_view": {
-        "recent_transactions": "Nedávné transakce",
         "no_transactions": "Prozatím žádné transakce na <0>{{name}}</0>.",
         "sats": "satů",
         "total_spent": "Cekově utraceno",
@@ -305,12 +245,8 @@
         "permissions": "Oprávnění"
       },
       "default_view": {
-        "recent_transactions": "Nedávné transakce",
         "is_blocked_hint": "Alby je v současnosti zakázaná na {host}}",
-        "block_removed": "Povolen {{host}}. Prosím znovu načtěte webovou stránku.",
-        "no_outgoing_transactions": "Zatím z tohoto účtu neproběhla žádná odchozí transakce.",
-        "all_transactions_link": "Zobrazit všechny transakce",
-        "no_incoming_transactions": "Zatím na tento účet neproběhla žádná příchozí transakce."
+        "block_removed": "Povolen {{host}}. Prosím znovu načtěte webovou stránku."
       }
     },
     "accounts": {
@@ -667,13 +603,10 @@
     "choose_path": {
       "other": {
         "title": "Jiné peněženky",
-        "description": "Připojte svou existující lightning peněženku nebo svůj uzel pomocí různých konektorů.",
-        "and_more": "a více...",
         "connect": "Připojit"
       },
       "alby": {
         "title": "Alby",
-        "description": "Zaregistrujte se, nebo se přihlašte ke svému existujícímu Alby účtu a začněte využívat lightning platby.",
         "connect": "Připojit se s Alby"
       }
     },
@@ -820,7 +753,7 @@
         "allow_camera_access": "Prosím povolte přístup kamery ve svém nastavení."
       }
     },
-    "transactionsTable": {
+    "transactions_table": {
       "fee": "Poplatek",
       "preimage": "Preimage",
       "received": "Přijato",
@@ -877,87 +810,87 @@
   },
   "permissions": {
     "lnd": {
-      "lookupinvoice": "Vyhledat detaily o faktuře.",
-      "getinfo": "Získat informace o uzlu.",
-      "disconnectpeer": "Odpojit se od vzdáleného uzlu.",
-      "listpeers": "Získat seznam všech aktuálně aktivních peerů.",
-      "connectpeer": "Navázet spojení se vzdáleným uzlem.",
-      "listchannels": "Získat popis všech otevřených kanálů.",
-      "estimatefee": "Odhadnout sazbu poplatku a celkové poplatky za transakci.",
-      "listinvoices": "Získat seznam všech faktur.",
-      "channelbalance": "Získat přehled o celkových prostředcích napříč všemi otevřenými kanály.",
-      "walletbalance": "Získat celkové neutracené výstupy (UTXO) peněženky.",
-      "getnetworkinfo": "Získat základní statistiky o známém grafu kanálů.",
-      "openchannel": "Otevřít nový kanál.",
-      "listpayments": "Získat seznam všech odchozích plateb.",
-      "verifymessage": "Verifikovat podpis zprávy.",
-      "sendtoroute": "Provést platbu přes zadanou cestu.",
-      "addinvoice": "Vytvořit nové faktury.",
-      "routermc": "Přečíst vnitřní kontrolní stav.",
-      "getchaninfo": "Získat oznámení sítě pro daný kanál.",
-      "getnodeinfo": "Získat informace o kanálu pro daný uzel.",
-      "queryroutes": "Vyhledat možné cesty.",
-      "gettransactions": "Získat seznam všech transakcí týkajících se dané peněženky.",
-      "decodepayreq": "Dekódovat řetězec žádosti o platbu."
+      "lookupinvoice": "Vyhledat detaily o faktuře",
+      "getinfo": "Získat informace o uzlu",
+      "disconnectpeer": "Odpojit se od vzdáleného uzlu",
+      "listpeers": "Získat seznam všech aktuálně aktivních peerů",
+      "connectpeer": "Navázet spojení se vzdáleným uzlem",
+      "listchannels": "Získat popis všech otevřených kanálů",
+      "estimatefee": "Odhadnout sazbu poplatku a celkové poplatky za transakci",
+      "listinvoices": "Získat seznam všech faktur",
+      "channelbalance": "Získat přehled o celkových prostředcích napříč všemi otevřenými kanály",
+      "walletbalance": "Získat celkové neutracené výstupy (UTXO) peněženky",
+      "getnetworkinfo": "Získat základní statistiky o známém grafu kanálů",
+      "openchannel": "Otevřít nový kanál",
+      "listpayments": "Získat seznam všech odchozích plateb",
+      "verifymessage": "Verifikovat podpis zprávy",
+      "sendtoroute": "Provést platbu přes zadanou cestu",
+      "addinvoice": "Vytvořit nové faktury",
+      "routermc": "Přečíst vnitřní kontrolní stav",
+      "getchaninfo": "Získat oznámení sítě pro daný kanál",
+      "getnodeinfo": "Získat informace o kanálu pro daný uzel",
+      "queryroutes": "Vyhledat možné cesty",
+      "gettransactions": "Získat seznam všech transakcí týkajících se dané peněženky",
+      "decodepayreq": "Dekódovat řetězec žádosti o platbu"
     },
     "commando": {
-      "setchannel": "Konfigurace poplatků / rozsahu htlc oznamovaného pro kanál.",
-      "disconnect": "Uzavřít existující spojení s uzlem.",
-      "connect": "Navázat nové spojení s jiným uzlem.",
-      "bkpr-listbalances": "Seznam všech současných i minulých zůstatků účtu.",
-      "checkmessage": "Zkontrolovat, že byl podpis vygenerován zadaným uzlem.",
-      "decode": "Dekódovat řetězec bolt11/bolt12/runu.",
-      "decodepay": "Zkontrolovat a zparsovat řetězec bolt11.",
-      "feerates": "Vrátit sazby poplatků, které CLN použije.",
-      "fundchannel": "Otevřít platební kanál s uzlem provedením tzv. funding transakce.",
-      "getinfo": "Získat souhrn o uzlu.",
-      "offer": "Vytvořit nabídku.",
-      "sendpay": "Odeslat platbu přes danou cestu.",
-      "listpeers": "Zobrazit uzly, které jsou připojeny nebo mají otevřený kanál s tímto uzlem.",
-      "listsendpays": "Získá stav všech sendpay příkazů.",
-      "listpays": "Získá stav všech platebních příkazů.",
-      "listtransactions": "Seznam transakcí sledovaných v peněžence.",
-      "pay": "Odeslat platbu na BOLT11 fakturu.",
-      "keysend": "Odeslat platbu na jiný uzel.",
-      "listinvoices": "Získat status všech faktur.",
-      "listnodes": "Vypsat uzly, o kterých se uzel dozvěděl prostřednictvím gossip zpráv.",
-      "listoffers": "Vypsat všechy nabídky nebo získat konkrétní nabídku.",
-      "multifundchannel": "Otevřít více platebních kanálů s uzly provedením jedné (funding) transakce.",
-      "signmessage": "Vytvořit podpis z tohoto uzlu.",
-      "getroute": "Najít nejlepší cestu pro platbu na lightning uzel.",
-      "listfunds": "Vypsat seznam všech dostupných prostředků.",
-      "listforwards": "Zobrazit seznam všech htlc, které se uzel pokusil předat dále.",
-      "invoice": "Vytvořit novou platební fakturu."
+      "setchannel": "Konfigurace poplatků / rozsahu htlc oznamovaného pro kanál",
+      "disconnect": "Uzavřít existující spojení s uzlem",
+      "connect": "Navázat nové spojení s jiným uzlem",
+      "bkpr-listbalances": "Seznam všech současných i minulých zůstatků účtu",
+      "checkmessage": "Zkontrolovat, že byl podpis vygenerován zadaným uzlem",
+      "decode": "Dekódovat řetězec bolt11/bolt12/runu",
+      "decodepay": "Zkontrolovat a zparsovat řetězec bolt11",
+      "feerates": "Vrátit sazby poplatků, které CLN použije",
+      "fundchannel": "Otevřít platební kanál s uzlem provedením tzv. funding transakce",
+      "getinfo": "Získat souhrn o uzlu",
+      "offer": "Vytvořit nabídku",
+      "sendpay": "Odeslat platbu přes danou cestu",
+      "listpeers": "Zobrazit uzly, které jsou připojeny nebo mají otevřený kanál s tímto uzlem",
+      "listsendpays": "Získá stav všech sendpay příkazů",
+      "listpays": "Získá stav všech platebních příkazů",
+      "listtransactions": "Seznam transakcí sledovaných v peněžence",
+      "pay": "Odeslat platbu na BOLT11 fakturu",
+      "keysend": "Odeslat platbu na jiný uzel",
+      "listinvoices": "Získat status všech faktur",
+      "listnodes": "Vypsat uzly, o kterých se uzel dozvěděl prostřednictvím gossip zpráv",
+      "listoffers": "Vypsat všechy nabídky nebo získat konkrétní nabídku",
+      "multifundchannel": "Otevřít více platebních kanálů s uzly provedením jedné (funding) transakce",
+      "signmessage": "Vytvořit podpis z tohoto uzlu",
+      "getroute": "Najít nejlepší cestu pro platbu na lightning uzel",
+      "listfunds": "Vypsat seznam všech dostupných prostředků",
+      "listforwards": "Zobrazit seznam všech htlc, které se uzel pokusil předat dále",
+      "invoice": "Vytvořit novou platební fakturu"
     },
     "nostr": {
-      "nip04encrypt": "Zašifrovat data.",
-      "getpublickey": "Přečíst svůj veřejný klíč.",
-      "nip04decrypt": "Dešifrovat data.",
-      "signmessage": "Podepsat zprávu klíčem."
+      "nip04encrypt": "Zašifrovat data",
+      "getpublickey": "Přečíst svůj veřejný klíč",
+      "nip04decrypt": "Dešifrovat data",
+      "signmessage": "Podepsat zprávu klíčem"
     },
     "lnc": {
-      "estimatefee": "Odhadnout sazbu poplatku a celkové poplatky za transakci.",
-      "lookupinvoice": "Vyhledat detaily o faktuře.",
-      "queryroutes": "Vyhledat možné cesty.",
-      "verifymessage": "Verifikovat podpis zprávy.",
-      "sendtoroute": "Provést platbu přes zadanou cestu.",
-      "decodepayreq": "Dekódovat řetězec žádosti o platbu.",
-      "routermc": "Přečíst vnitřní kontrolní stav.",
-      "getinfo": "Získat informace o uzlu.",
-      "walletbalance": "Získat celkové neutracené výstupy (UTXO) peněženky.",
-      "listpeers": "Získat seznam všech aktuálně aktivních peerů.",
-      "addinvoice": "Vytvořit nové faktury.",
-      "listchannels": "Získat popis všech otevřených kanálů.",
-      "listinvoices": "Získat seznam všech faktur.",
-      "channelbalance": "Získat přehled o celkových prostředcích napříč všemi otevřenými kanály.",
-      "openchannel": "Otevřít nový kanál.",
-      "disconnectpeer": "Odpojit se od vzdáleného uzlu.",
-      "getchaninfo": "Získat oznámení sítě pro daný kanál.",
-      "getnetworkinfo": "Získat základní statistiky o známém grafu kanálů.",
-      "getnodeinfo": "Získat informace o kanálu pro daný uzel.",
-      "gettransactions": "Získat seznam všech transakcí týkajících se dané peněženky.",
-      "listpayments": "Získat seznam všech odchozích plateb.",
-      "connectpeer": "Navázet spojení se vzdáleným uzlem."
+      "estimatefee": "Odhadnout sazbu poplatku a celkové poplatky za transakci",
+      "lookupinvoice": "Vyhledat detaily o faktuře",
+      "queryroutes": "Vyhledat možné cesty",
+      "verifymessage": "Verifikovat podpis zprávy",
+      "sendtoroute": "Provést platbu přes zadanou cestu",
+      "decodepayreq": "Dekódovat řetězec žádosti o platbu",
+      "routermc": "Přečíst vnitřní kontrolní stav",
+      "getinfo": "Získat informace o uzlu",
+      "walletbalance": "Získat celkové neutracené výstupy (UTXO) peněženky",
+      "listpeers": "Získat seznam všech aktuálně aktivních peerů",
+      "addinvoice": "Vytvořit nové faktury",
+      "listchannels": "Získat popis všech otevřených kanálů",
+      "listinvoices": "Získat seznam všech faktur",
+      "channelbalance": "Získat přehled o celkových prostředcích napříč všemi otevřenými kanály",
+      "openchannel": "Otevřít nový kanál",
+      "disconnectpeer": "Odpojit se od vzdáleného uzlu",
+      "getchaninfo": "Získat oznámení sítě pro daný kanál",
+      "getnetworkinfo": "Získat základní statistiky o známém grafu kanálů",
+      "getnodeinfo": "Získat informace o kanálu pro daný uzel",
+      "gettransactions": "Získat seznam všech transakcí týkajících se dané peněženky",
+      "listpayments": "Získat seznam všech odchozích plateb",
+      "connectpeer": "Navázet spojení se vzdáleným uzlem"
     }
   }
 }

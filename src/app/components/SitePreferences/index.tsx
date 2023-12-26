@@ -1,4 +1,3 @@
-import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import Button from "@components/Button";
 import Hyperlink from "@components/Hyperlink";
 import Setting from "@components/Setting";
@@ -179,95 +178,82 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
       <Modal
         isOpen={modalIsOpen}
         close={closeModal}
-        title={t("edit_allowance.screen_reader")}
+        contentLabel={t("edit_allowance.screen_reader")}
+        title={t("edit_allowance.title")}
       >
-        <div className="p-5 flex justify-between dark:bg-surface-02dp">
-          <h2 className="text-2xl font-bold dark:text-white">
-            {t("edit_allowance.title")}
-          </h2>
-          <button onClick={closeModal}>
-            <CrossIcon className="w-6 h-6 dark:text-white" />
-          </button>
-        </div>
-
         <form
           onSubmit={(e: FormEvent) => {
             e.preventDefault();
             updateAllowance();
           }}
         >
-          <div
-            style={{ maxHeight: "calc(90vh - 154px)", overflowY: "auto" }}
-            className="p-5 border-t border-b border-gray-200 dark:bg-surface-02dp dark:border-neutral-700"
-          >
-            <div className="pb-4 border-b border-gray-200 dark:border-neutral-700">
-              <DualCurrencyField
-                id="budget"
-                label={t("new_budget.label")}
-                min={0}
-                autoFocus
-                placeholder={tCommon("sats", { count: 0 })}
-                value={budget}
-                hint={t("hint")}
-                fiatValue={fiatAmount}
-                onChange={(e) => setBudget(e.target.value)}
+          <div className="pb-4 border-b border-gray-200 dark:border-neutral-700">
+            <DualCurrencyField
+              id="budget"
+              label={t("new_budget.label")}
+              min={0}
+              autoFocus
+              placeholder={tCommon("sats", { count: 0 })}
+              value={budget}
+              hint={t("hint")}
+              fiatValue={fiatAmount}
+              onChange={(e) => setBudget(e.target.value)}
+            />
+          </div>
+          <div className={hasPermissions ? "pb-4" : ""}>
+            <Setting
+              title={t("enable_login.title")}
+              subtitle={t("enable_login.subtitle")}
+            >
+              <Toggle
+                checked={lnurlAuth}
+                onChange={() => setLnurlAuth(!lnurlAuth)}
               />
-            </div>
-            <div className={hasPermissions ? "pb-4" : ""}>
-              <Setting
-                title={t("enable_login.title")}
-                subtitle={t("enable_login.subtitle")}
-              >
-                <Toggle
-                  checked={lnurlAuth}
-                  onChange={() => setLnurlAuth(!lnurlAuth)}
-                />
-              </Setting>
-            </div>
+            </Setting>
+          </div>
 
-            {hasPermissions && (
+          {hasPermissions && (
+            <div>
+              <h2 className="pt-4 text-lg text-gray-900 font-bold dark:text-white">
+                {t("edit_permissions")}
+              </h2>
               <div>
-                <h2 className="pt-4 text-lg text-gray-900 font-bold dark:text-white">
-                  {t("edit_permissions")}
-                </h2>
-                <div>
-                  {permissions.map((permission) => (
-                    <Fragment key={permission.id}>
-                      <Setting
-                        title={permission.method}
-                        subtitle={tPermissions(
-                          permission.method
-                            .toLowerCase()
-                            .split("/")
-                            .slice(-2)
-                            .join(".") as unknown as TemplateStringsArray
-                        )}
-                        /* split the method at "/", take the last two items in
+                {permissions.map((permission) => (
+                  <Fragment key={permission.id}>
+                    <Setting
+                      title={permission.method}
+                      subtitle={tPermissions(
+                        permission.method
+                          .toLowerCase()
+                          .split("/")
+                          .slice(-2)
+                          .join(".") as unknown as TemplateStringsArray
+                      )}
+                      /* split the method at "/", take the last two items in
                         the array and join them with "." to get the i18n string
                         webln/lnd/getinfo -> lnd.getinfo
                         nostr/nip04decrypt --> nostr.nip04decrypt */
-                      >
-                        <Toggle
-                          checked={permission.enabled}
-                          onChange={() => {
-                            setPermissions(
-                              permissions.map((prm) =>
-                                prm.id === permission.id
-                                  ? { ...prm, enabled: !prm.enabled }
-                                  : prm
-                              )
-                            );
-                          }}
-                        />
-                      </Setting>
-                    </Fragment>
-                  ))}
-                </div>
+                    >
+                      <Toggle
+                        checked={permission.enabled}
+                        onChange={() => {
+                          setPermissions(
+                            permissions.map((prm) =>
+                              prm.id === permission.id
+                                ? { ...prm, enabled: !prm.enabled }
+                                : prm
+                            )
+                          );
+                        }}
+                      />
+                    </Setting>
+                  </Fragment>
+                ))}
               </div>
-            )}
-          </div>
+            </div>
+          )}
 
-          <div className="flex justify-between items-center p-5 dark:bg-surface-02dp">
+          <div className="mt-6 flex justify-between items-center">
             <Hyperlink
               onClick={async () => {
                 if (window.confirm(t("confirm_delete"))) {

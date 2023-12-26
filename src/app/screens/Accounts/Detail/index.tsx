@@ -1,4 +1,3 @@
-import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import Button from "@components/Button";
 import Container from "@components/Container";
 import Loading from "@components/Loading";
@@ -178,7 +177,7 @@ function AccountDetail() {
         </div>
 
         <div>
-          <div className="shadow bg-white sm:rounded-md sm:overflow-hidden p-6 dark:bg-surface-01dp flex flex-col gap-4">
+          <div className="shadow bg-white rounded-md sm:overflow-hidden p-6 dark:bg-surface-01dp flex flex-col gap-4">
             <form
               onSubmit={(e: FormEvent) => {
                 e.preventDefault();
@@ -264,50 +263,42 @@ function AccountDetail() {
                   <Modal
                     isOpen={exportModalIsOpen}
                     close={closeExportModal}
-                    title={t("export.screen_reader")}
+                    contentLabel={t("export.screen_reader")}
+                    title={t("export.title")}
                   >
-                    <div className="p-5 flex justify-between">
-                      <h2 className="text-2xl font-bold dark:text-white">
-                        {t("export.title")}
-                      </h2>
-                      <button onClick={closeExportModal}>
-                        <CrossIcon className="w-6 h-6 dark:text-white" />
-                      </button>
-                    </div>
-
                     {exportLoading && (
-                      <div className="p-5 flex justify-center items-center space-x-2 dark:text-white">
+                      <div className="flex justify-center items-center space-x-2 dark:text-white">
                         <Loading />
                         <span>{t("export.waiting")}</span>
                       </div>
                     )}
                     {!exportLoading && (
-                      <div className="p-5">
-                        <div className="flex flex-col gap-4 justify-center items-center dark:text-white">
-                          <p>{t("export.scan_qr")}</p>
+                      <div className="flex flex-col gap-4 justify-center items-center dark:text-white">
+                        <p>{t("export.scan_qr")}</p>
+                        <div className="p-5">
                           <QRCode
                             value={`lndhub://${lndHubData.login}:${lndHubData.password}@${lndHubData.url}/`}
                             size={256}
                           />
-                          <div className="w-full">
-                            <TextField
-                              id="uri"
-                              label={t("export.export_uri")}
-                              readOnly
-                              value={`lndhub://${lndHubData.login}:${lndHubData.password}@${lndHubData.url}/`}
-                            />
-                          </div>
-                          {lndHubData.lnAddress && (
-                            <div className="w-full dark:text-white">
-                              <p className="font-medium">
-                                {t("export.your_ln_address")}
-                              </p>
-                              {lndHubData.lnAddress && (
-                                <p>{lndHubData.lnAddress}</p>
-                              )}
-                            </div>
-                          )}
                         </div>
+                        <div className="w-full">
+                          <TextField
+                            id="uri"
+                            label={t("export.export_uri")}
+                            readOnly
+                            value={`lndhub://${lndHubData.login}:${lndHubData.password}@${lndHubData.url}/`}
+                          />
+                        </div>
+                        {lndHubData.lnAddress && (
+                          <div className="w-full dark:text-white">
+                            <p className="font-medium">
+                              {t("export.your_ln_address")}
+                            </p>
+                            {lndHubData.lnAddress && (
+                              <p>{lndHubData.lnAddress}</p>
+                            )}
+                          </div>
+                        )}
                       </div>
                     )}
                   </Modal>
@@ -320,7 +311,7 @@ function AccountDetail() {
             {t("mnemonic.title")}
           </h2>
 
-          <div className="shadow bg-white sm:rounded-md sm:overflow-hidden p-6 dark:bg-surface-01dp flex flex-col gap-4">
+          <div className="shadow bg-white rounded-md sm:overflow-hidden p-6 dark:bg-surface-01dp flex flex-col gap-4">
             {hasMnemonic && (
               <Alert type="warn">{t("mnemonic.backup.warning")}</Alert>
             )}
@@ -518,7 +509,7 @@ function AccountDetail() {
             </span>
             <div className="flex-grow border-t border-gray-300 dark:border-gray-700"></div>
           </div>
-          <div className="shadow bg-white sm:rounded-md sm:overflow-hidden mb-5 px-6 py-2 divide-y divide-gray-200 dark:divide-neutral-700 dark:bg-surface-01dp">
+          <div className="shadow bg-white rounded-md sm:overflow-hidden mb-5 px-6 py-2 divide-y divide-gray-200 dark:divide-neutral-700 dark:bg-surface-01dp">
             {hasMnemonic && (
               <Setting
                 title={t("remove_secretkey.title")}

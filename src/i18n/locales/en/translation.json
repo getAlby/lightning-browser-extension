@@ -36,16 +36,33 @@
       }
     },
     "choose_path": {
+      "title": "Connect Wallet to Alby Extension",
+      "other": {
+        "title": "Bring Your Own Wallet",
+        "description": "Best if you already have a wallet or need to do high-volume payments.",
+        "connect": "Connect",
+        "point1": "Start instantly, no waiting for an invite",
+        "point2": "No transaction or volume limits",
+        "point3": "Both self-custody and custodial options",
+        "point4": "No lightning and nostr address"
+      },
+      "voltage": {
+        "title": "Voltage Cloud Node",
+        "description": "Great if you don't mind paying for a lightning node cloud service.",
+        "connect": "Connect",
+        "point1": "Start instantly, no waiting for an invite",
+        "point2": "No transaction or volume limits",
+        "point3": "Full self-custody and higher privacy",
+        "point4": "Unique lightning and nostr address"
+      },
       "alby": {
         "title": "Alby Account",
-        "description": "Sign up or use your existing Alby Account to get started with lightning payments in no time.",
-        "connect": "Connect with Alby"
-      },
-      "other": {
-        "title": "Other Wallets",
-        "description": "Connect to your existing lightning wallet or node and choose from various connectors.",
-        "and_more": "& more...",
-        "connect": "Connect"
+        "description": "Ideal for beginners or anyone looking for a great daily spending wallet.",
+        "connect": "Connect with Alby",
+        "point1": "New signups require an invite code",
+        "point2": "Transaction volume limits apply",
+        "point3": "Set up and login with your email",
+        "point4": "Unique lightning and nostr address"
       }
     },
     "alby": {
@@ -98,20 +115,6 @@
         "pairing_phrase": {
           "label": "Your pairing phrase ",
           "placeholder": "secret stack sats phrase"
-        }
-      },
-      "lndhub_bluewallet": {
-        "title": "Bluewallet",
-        "page": {
-          "title": "Connect to BlueWallet",
-          "description": "In BlueWallet, choose the wallet you want to connect, open it, click on \"...\", click on Export/Backup to display the QR code and scan it with your webcam."
-        },
-        "uri": {
-          "label": "BlueWallet Export URI"
-        },
-        "errors": {
-          "invalid_uri": "Invalid BlueWallet URI",
-          "connection_failed": "Connection failed. Is your BlueWallet URI correct?"
         }
       },
       "lndhub_go": {
@@ -222,12 +225,20 @@
         "title": "Blink Wallet",
         "page": {
           "title": "Connect to <0>Blink Wallet</0>"
+        },
+        "token": {
+          "label": "Enter your API key",
+          "info": "To connect your wallet generate an API key in the <0>Blink Dashboard (dashboard.blink.sv)</0>:<br>- log in with email or phone number if you are using Blink already<br>- if you have no account yet can create a new one by logging in with a phone number<br>- create a new key on the API Keys tab<br>- give it a Name and choose the Read and Write Scope<br>- leave the default no expiry or choose a long timeframe to avoid needing to reconnect your wallet periodically<br>- copy the key (starting with blink_ ) and paste it to the textbox below.<br><br>The integration currently only supports using the BTC wallet.<br>"
         }
       },
       "bitcoin_jungle": {
         "title": "Bitcoin Jungle Wallet",
         "page": {
           "title": "Connect to <0>Bitcoin Jungle Wallet</0>"
+        },
+        "token": {
+          "label": "Enter your Access token",
+          "info": "The {{label}} integration with Alby is in alpha and only recommended for advanced users.<br><br>You can grab your Access token by going into the mobile app, clicking on the settings icon, and then tapping 3 times on the build number to open the developer menu.<br><br>The access token can be copied from here.<br><br>"
         }
       },
       "galoy": {
@@ -237,45 +248,13 @@
         "sms_code": {
           "label": "Enter your SMS verification code"
         },
-        "token": {
-          "label": "Enter your Access token",
-          "info": "The {{label}} integration with Alby is in alpha and only recommended for advanced users.<br><br>You can grab your Access token by going into the mobile app, clicking on the settings icon, and then tapping 3 times on the build number to open the developer menu.<br><br>The access token can be copied from here.<br><br>"
-        },
         "actions": {
           "login": "Login"
         },
         "errors": {
           "setup_failed": "Setup failed",
           "missing_token": "Access token missing, couldn't log in.",
-          "invalid_token": "invalid Access token passed"
-        }
-      },
-      "kollider": {
-        "title": "Kollider",
-        "description": "Login to your Kollider account",
-        "warning": "⚠️ Please make sure you store your credentials securely in a password manager. Without these credentials your account will not be recoverable.",
-        "choose_path": {
-          "title": "Connect to your Kollider Wallet",
-          "description": "Login or sign up for a new Kollider account and connect to Alby.",
-          "create_new": "Sign up"
-        },
-        "create": {
-          "title": "Create your Kollider account and connect to Alby",
-          "description": "Create a new Kollider account to send, receive and trade Bitcoin."
-        },
-        "login": {
-          "title": "Connect to your Kollider account"
-        },
-        "username": {
-          "label": "Username"
-        },
-        "currency": {
-          "label": "Select your currency account"
-        },
-        "errors": {
-          "connection_failed": "Connection failed. Are you sure the account data is correct?",
-          "user_already_exists": "Username already exists",
-          "registration_limit_exceeded": "Registration limit exceeded, try after sometime."
+          "invalid_token": "Authorization failed. Please check your API key and try again."
         }
       },
       "btcpay": {
@@ -323,6 +302,36 @@
         "errors": {
           "connection_failed": "Connection failed. Is your Core Lightning node online and using the commando plugin?"
         }
+      },
+      "voltage": {
+        "title": "Voltage",
+        "page": {
+          "title": "Connect to your Voltage node",
+          "description": "Enterprise-grade lightning node hosting. Get on Lightning Network faster than ever. Total control with zero management. <0>Learn more</0>"
+        },
+        "url": {
+          "label": "Node URL",
+          "placeholder": "https://your-node.m.voltageapp.io:8080"
+        },
+        "macaroon": {
+          "label": "Admin Macaroon (hex)"
+        },
+        "errors": {
+          "connection_failed": "Connection failed. Are your credentials correct?"
+        }
+      },
+      "nwc": {
+        "title": "Nostr Wallet Connect",
+        "page": {
+          "instructions": "Paste a NWC connection string from <0>Alby Nostr Wallet Connect</0>, <1>Umbrel Nostr Wallet Connect</1>, or <2>Mutiny Wallet</2>",
+          "url": {
+            "label": "Nostr Wallet Connect URL",
+            "placeholder": "nostr+walletconnect://69effe..."
+          },
+          "errors": {
+            "connection_failed": "Connection failed. Is your Core Lightning node online and using the commando plugin?"
+          }
+        }
       }
     },
     "distributions": {
@@ -352,9 +361,7 @@
         "send_satoshis": "⚡️ Send Satoshis ⚡️",
         "enable_now": "Enable Now"
       },
-      "recent_transactions": "Recent Transactions",
       "allowance_view": {
-        "recent_transactions": "Recent Transactions",
         "budget_spent": "Budget spent",
         "sats": "sats",
         "no_transactions": "No transactions on <0>{{name}}</0> yet.",
@@ -363,12 +370,10 @@
         "permissions": "Permissions"
       },
       "default_view": {
-        "recent_transactions": "Recent Transactions",
         "is_blocked_hint": "Alby is currently disabled on {{host}}",
         "block_removed": "Enabled {{host}}. Please reload the website.",
-        "no_outgoing_transactions": "No outgoing transactions for this account yet.",
-        "no_incoming_transactions": "No incoming transactions for this account yet.",
-        "all_transactions_link": "See all transactions"
+        "no_transactions": "No transactions for this account yet.",
+        "see_all": "See all"
       }
     },
     "accounts": {
@@ -539,7 +544,7 @@
     "nostr_enable": {
       "title": "Connect to Nostr",
       "request1": "Request to read your Nostr public key",
-      "request2": "Sign events using your Nostr private key"
+      "request2": "Request to sign events using your private key"
     },
     "liquid_enable": {
       "title": "Connect to Liquid",
@@ -936,14 +941,16 @@
       "allow": "Allow this website to:",
       "content": "This website asks you to sign:",
       "allow_sign": "Allow {{host}} to sign:",
-      "allow_sign_event": "Allow {{host}} to sign a {{kind}}:",
+      "allow_sign_event": "Allow {{host}} to sign a {{kind}} event",
+      "allow_encrypt": "Allow {{host}} to encrypt the message:",
+      "allow_decrypt": "Allow {{host}} to decrypt the message:",
       "view_details": "View details",
       "hide_details": "Hide details",
-      "no_content": "(No content)",
       "block_and_ignore": "Block and ignore {{host}}",
       "block_added": "Added {{host}} to the blocklist, please reload the website.",
+      "peer": "Peer",
       "kinds": {
-        "unknown": "nostr event of kind {{kind}}",
+        "unknown": "kind {{kind}}",
         "0": "metadata",
         "1": "short text note",
         "2": "recommend relay",
@@ -971,10 +978,7 @@
     },
     "transactions": {
       "title": "Transactions",
-      "description": {
-        "outgoing": "Outgoing transactions for this account",
-        "incoming": "Incoming transactions for this account"
-      },
+      "description": "Transactions for this account",
       "list_empty": "No transactions available yet."
     },
     "onboard": {
@@ -1014,6 +1018,8 @@
     "help": "Help",
     "balance": "Balance",
     "or": "or",
+    "website": "Website",
+    "apps": "Apps",
     "actions": {
       "back": "Back",
       "delete": "Delete",
@@ -1044,6 +1050,7 @@
       "log_in": "Log in",
       "remember": "Remember my choice and don't ask again",
       "more": "More",
+      "hide": "Hide",
       "disconnect": "Disconnect",
       "review": "Review",
       "download": "Download"
@@ -1074,7 +1081,8 @@
       "allow": "Allow this website to:",
       "block_added": "Added {{host}} to the blocklist, please reload the website.",
       "request1": "Request approval for transactions",
-      "block_and_ignore": "Block and ignore {{host}}"
+      "block_and_ignore": "Block and ignore {{host}}",
+      "insecure_domain_warn": "⚠️ You are connecting to an insecure domain."
     }
   },
   "components": {
@@ -1105,24 +1113,24 @@
         "allow_camera_access": "Please allow camera access in the settings screen."
       }
     },
-    "transactionsTable": {
+    "transactions_table": {
       "fee": "Fee",
       "preimage": "Preimage",
+      "payment_hash": "Payment Hash",
       "received": "Received",
       "sent": "Sent",
+      "date_time": "Date & Time",
       "boostagram": {
         "sender": "Sender",
         "message": "Message",
         "app": "App",
-        "podcast": "Podcast"
+        "podcast": "Podcast",
+        "episode": "Episode",
+        "action": "Action",
+        "timestamp": "Timestamp",
+        "totalAmount": "Total amount"
       },
       "open_location": "Open website"
-    },
-    "transaction_list": {
-      "tabs": {
-        "outgoing": "Outgoing",
-        "incoming": "Incoming"
-      }
     },
     "budget_control": {
       "remember": {
@@ -1186,101 +1194,109 @@
   },
   "permissions": {
     "webln": {
-      "getbalance": "Read the balance of your account."
+      "getbalance": "Read the balance of your account"
     },
     "nostr": {
-      "getpublickey": "Read your public key.",
-      "nip04encrypt": "Encrypt data.",
-      "nip04decrypt": "Decrypt data.",
-      "signmessage": "Sign message with your key."
+      "getpublickey": "Read your public key",
+      "signmessage": "Sign message with your key",
+      "nip04encrypt": "Encrypt data",
+      "nip04decrypt": "Decrypt data"
     },
     "bitcoin": {
-      "getaddress": "Read your Bitcoin receive address."
+      "getaddress": "Read your Bitcoin receive address"
     },
     "liquid": {
-      "getaddress": "Read your Liquid receive address.",
-      "signschnorr": "Sign message with your key."
+      "getaddress": "Read your Liquid receive address",
+      "signschnorr": "Sign message with your key"
     },
     "commando": {
-      "bkpr-listbalances": "List of all current and historical account balances.",
-      "checkmessage": "Verify that the signature was generated by a given node.",
-      "connect": "Establish a new connection with another node.",
-      "decode": "Decode a bolt11/bolt12/rune string.",
-      "decodepay": "Check and parse a bolt11 string.",
-      "disconnect": "Close an existing connection to a peer.",
-      "feerates": "Return the feerates that CLN will use.",
-      "fundchannel": "Open a payment channel with a peer by committing a funding transaction.",
-      "getinfo": "Get the summary of the node.",
-      "getroute": "Find the best route for the payment to a lightning node.",
-      "invoice": "Create the expectation of a payment.",
-      "keysend": "Send a payment to another node.",
-      "listforwards": "List all htlcs that have been attempted to be forwarded.",
-      "listfunds": "List all funds available.",
-      "listinvoices": "Get the status of all invoices.",
-      "listnodes": "List nodes the node has learned about via gossip messages.",
-      "listoffers": "List all offers or get a specific offer.",
-      "listpays": "Gets the status of all pay commands.",
-      "listpeers": "List nodes that are connected or have open channels with this node.",
-      "listsendpays": "Gets the status of all sendpay commands.",
-      "listtransactions": "List transactions tracked in the wallet.",
-      "multifundchannel": "Open multiple payment channels with nodes by committing a single funding transaction.",
-      "offer": "Create an offer.",
-      "pay": "Send a payment to a BOLT11 invoice.",
-      "sendpay": "Send a payment via a route.",
-      "setchannel": "Configure fees / htlc range advertized for a channel.",
-      "signmessage": "Create a signature from this node."
+      "bkpr-listbalances": "List of all current and historical account balances",
+      "checkmessage": "Verify that the signature was generated by a given node",
+      "connect": "Establish a new connection with another node",
+      "decode": "Decode a bolt11/bolt12/rune string",
+      "decodepay": "Check and parse a bolt11 string",
+      "disconnect": "Close an existing connection to a peer",
+      "feerates": "Return the feerates that CLN will use",
+      "fundchannel": "Open a payment channel with a peer by committing a funding transaction",
+      "getinfo": "Get the summary of the node",
+      "getroute": "Find the best route for the payment to a lightning node",
+      "invoice": "Create the expectation of a payment",
+      "keysend": "Send a payment to another node",
+      "listforwards": "List all htlcs that have been attempted to be forwarded",
+      "listfunds": "List all funds available",
+      "listinvoices": "Get the status of all invoices",
+      "listnodes": "List nodes the node has learned about via gossip messages",
+      "listoffers": "List all offers or get a specific offer",
+      "listpays": "Gets the status of all pay commands",
+      "listpeers": "List nodes that are connected or have open channels with this node",
+      "listsendpays": "Gets the status of all sendpay commands",
+      "listtransactions": "List transactions tracked in the wallet",
+      "multifundchannel": "Open multiple payment channels with nodes by committing a single funding transaction",
+      "offer": "Create an offer",
+      "pay": "Send a payment to a BOLT11 invoice",
+      "sendpay": "Send a payment via a route",
+      "setchannel": "Configure fees / htlc range advertized for a channel",
+      "signmessage": "Create a signature from this node"
     },
     "lnd": {
-      "getinfo": "Get the node information.",
-      "listchannels": "Get a description of all the open channels.",
-      "listinvoices": "Get a list of all invoices.",
-      "channelbalance": "Get a report on the total funds across all open channels.",
-      "walletbalance": "Get the total unspent outputs of the wallet.",
-      "openchannel": "Open a new channel.",
-      "connectpeer": "Establish a connection to a remote peer.",
-      "disconnectpeer": "Disconnect from a remote peer.",
-      "estimatefee": "Estimate the fee rate and total fees for a transaction.",
-      "getchaninfo": "Get the network announcement for the given channel.",
-      "getnetworkinfo": "Get basic stats about the known channel graph.",
-      "getnodeinfo": "Get the channel information for a node.",
-      "gettransactions": "Get a list of all transactions relevant to the wallet.",
-      "listpayments": "Get a list of all outgoing payments.",
-      "listpeers": "Get a list all currently active peers.",
-      "lookupinvoice": "Look up invoice details.",
-      "queryroutes": "Query for a possible route.",
-      "verifymessage": "Verify a signature over a msg.",
-      "sendtoroute": "Make a payment via the specified route.",
-      "decodepayreq": "Decode a payment request string.",
-      "routermc": "Read the internal mission control state.",
-      "addinvoice": "Create new invoices.",
-      "addholdinvoice": "Create new HODL invoices.",
-      "settleinvoice": "Settle an accepted invoice."
+      "getinfo": "Get the node information",
+      "listchannels": "Get a description of all the open channels",
+      "listinvoices": "Get a list of all invoices",
+      "channelbalance": "Get a report on the total funds across all open channels",
+      "walletbalance": "Get the total unspent outputs of the wallet",
+      "openchannel": "Open a new channel",
+      "connectpeer": "Establish a connection to a remote peer",
+      "disconnectpeer": "Disconnect from a remote peer",
+      "estimatefee": "Estimate the fee rate and total fees for a transaction",
+      "getchaninfo": "Get the network announcement for the given channel",
+      "getnetworkinfo": "Get basic stats about the known channel graph",
+      "getnodeinfo": "Get the channel information for a node",
+      "gettransactions": "Get a list of all transactions relevant to the wallet",
+      "listpayments": "Get a list of all outgoing payments",
+      "listpeers": "Get a list all currently active peers",
+      "lookupinvoice": "Look up invoice details",
+      "queryroutes": "Query for a possible route",
+      "verifymessage": "Verify a signature over a msg",
+      "sendtoroute": "Make a payment via the specified route",
+      "decodepayreq": "Decode a payment request string",
+      "routermc": "Read the internal mission control state",
+      "addinvoice": "Create new invoices",
+      "addholdinvoice": "Create new HODL invoices",
+      "settleinvoice": "Settle an accepted invoice",
+      "newaddress": "Get a new onchain address",
+      "nextaddr": "Get the next unused address within the wallet",
+      "listaddresses": "Get all the addresses along with their balance",
+      "listunspent": "Get a list of all utxos spendable by the wallet"
     },
     "lnc": {
-      "getinfo": "Get the node information.",
-      "listchannels": "Get a description of all the open channels.",
-      "listinvoices": "Get a list of all invoices.",
-      "channelbalance": "Get a report on the total funds across all open channels.",
-      "walletbalance": "Get the total unspent outputs of the wallet.",
-      "openchannel": "Open a new channel.",
-      "connectpeer": "Establish a connection to a remote peer.",
-      "disconnectpeer": "Disconnect from a remote peer.",
-      "estimatefee": "Estimate the fee rate and total fees for a transaction.",
-      "getchaninfo": "Get the network announcement for the given channel.",
-      "getnetworkinfo": "Get basic stats about the known channel graph.",
-      "getnodeinfo": "Get the channel information for a node.",
-      "gettransactions": "Get a list of all transactions relevant to the wallet.",
-      "listpayments": "Get a list of all outgoing payments.",
-      "listpeers": "Get a list all currently active peers.",
-      "lookupinvoice": "Look up invoice details.",
-      "queryroutes": "Query for a possible route.",
-      "verifymessage": "Verify a signature over a msg.",
-      "sendtoroute": "Make a payment via the specified route.",
-      "decodepayreq": "Decode a payment request string.",
-      "routermc": "Read the internal mission control state.",
-      "addinvoice": "Create new invoices.",
-      "addholdinvoice": "Create new HODL invoices.",
-      "settleinvoice": "Settle an accepted invoice."
+      "getinfo": "Get the node information",
+      "listchannels": "Get a description of all the open channels",
+      "listinvoices": "Get a list of all invoices",
+      "channelbalance": "Get a report on the total funds across all open channels",
+      "walletbalance": "Get the total unspent outputs of the wallet",
+      "openchannel": "Open a new channel",
+      "connectpeer": "Establish a connection to a remote peer",
+      "disconnectpeer": "Disconnect from a remote peer",
+      "estimatefee": "Estimate the fee rate and total fees for a transaction",
+      "getchaninfo": "Get the network announcement for the given channel",
+      "getnetworkinfo": "Get basic stats about the known channel graph",
+      "getnodeinfo": "Get the channel information for a node",
+      "gettransactions": "Get a list of all transactions relevant to the wallet",
+      "listpayments": "Get a list of all outgoing payments",
+      "listpeers": "Get a list all currently active peers",
+      "lookupinvoice": "Look up invoice details",
+      "queryroutes": "Query for a possible route",
+      "verifymessage": "Verify a signature over a msg",
+      "sendtoroute": "Make a payment via the specified route",
+      "decodepayreq": "Decode a payment request string",
+      "routermc": "Read the internal mission control state",
+      "addinvoice": "Create new invoices",
+      "addholdinvoice": "Create new HODL invoices",
+      "settleinvoice": "Settle an accepted invoice",
+      "newaddress": "Get a new onchain address",
+      "nextaddr": "Get the next unused onchain address within the wallet",
+      "listaddresses": "Get all the onchain addresses along with their balance",
+      "listunspent": "Get a list of all utxos spendable by the wallet"
     }
   }
 }
