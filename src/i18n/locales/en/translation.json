@@ -36,16 +36,33 @@
       }
     },
     "choose_path": {
+      "title": "Connect Wallet to Alby Extension",
+      "other": {
+        "title": "Bring Your Own Wallet",
+        "description": "Best if you already have a wallet or need to do high-volume payments.",
+        "connect": "Connect",
+        "point1": "Start instantly, no waiting for an invite",
+        "point2": "No transaction or volume limits",
+        "point3": "Both self-custody and custodial options",
+        "point4": "No lightning and nostr address"
+      },
+      "voltage": {
+        "title": "Voltage Cloud Node",
+        "description": "Great if you don't mind paying for a lightning node cloud service.",
+        "connect": "Connect",
+        "point1": "Start instantly, no waiting for an invite",
+        "point2": "No transaction or volume limits",
+        "point3": "Full self-custody and higher privacy",
+        "point4": "Unique lightning and nostr address"
+      },
       "alby": {
         "title": "Alby Account",
-        "description": "Sign up or use your existing Alby Account. Great to quickly get started and for small amounts.",
-        "connect": "Connect with Alby"
-      },
-      "other": {
-        "title": "Other Wallets",
-        "description": "Connect to your existing lightning wallet or node and choose from various connectors. Great for full flexibility. Run your own node.",
-        "and_more": "& more...",
-        "connect": "Connect"
+        "description": "Ideal for beginners or anyone looking for a great daily spending wallet.",
+        "connect": "Connect with Alby",
+        "point1": "New signups require an invite code",
+        "point2": "Transaction volume limits apply",
+        "point3": "Set up and login with your email",
+        "point4": "Unique lightning and nostr address"
       }
     },
     "alby": {
@@ -297,6 +314,36 @@
         },
         "errors": {
           "connection_failed": "Connection failed. Is your Core Lightning node online and using the commando plugin?"
+        }
+      },
+      "voltage": {
+        "title": "Voltage",
+        "page": {
+          "title": "Connect to your Voltage node",
+          "description": "Enterprise-grade lightning node hosting. Get on Lightning Network faster than ever. Total control with zero management. <0>Learn more</0>"
+        },
+        "url": {
+          "label": "Node URL",
+          "placeholder": "https://your-node.m.voltageapp.io:8080"
+        },
+        "macaroon": {
+          "label": "Admin Macaroon (hex)"
+        },
+        "errors": {
+          "connection_failed": "Connection failed. Are your credentials correct?"
+        }
+      },
+      "nwc": {
+        "title": "Nostr Wallet Connect",
+        "page": {
+          "instructions": "Paste a NWC connection string from <0>Alby Nostr Wallet Connect</0>, <1>Umbrel Nostr Wallet Connect</1>, or <2>Mutiny Wallet</2>",
+          "url": {
+            "label": "Nostr Wallet Connect URL",
+            "placeholder": "nostr+walletconnect://69effe..."
+          },
+          "errors": {
+            "connection_failed": "Connection failed. Is your Core Lightning node online and using the commando plugin?"
+          }
         }
       }
     },
@@ -907,14 +954,16 @@
       "allow": "Allow this website to:",
       "content": "This website asks you to sign:",
       "allow_sign": "Allow {{host}} to sign:",
-      "allow_sign_event": "Allow {{host}} to sign a {{kind}}:",
+      "allow_sign_event": "Allow {{host}} to sign a {{kind}} event",
+      "allow_encrypt": "Allow {{host}} to encrypt the message:",
+      "allow_decrypt": "Allow {{host}} to decrypt the message:",
       "view_details": "View details",
       "hide_details": "Hide details",
-      "no_content": "(No content)",
       "block_and_ignore": "Block and ignore {{host}}",
       "block_added": "Added {{host}} to the blocklist, please reload the website.",
+      "peer": "Peer",
       "kinds": {
-        "unknown": "nostr event of kind {{kind}}",
+        "unknown": "kind {{kind}}",
         "0": "metadata",
         "1": "short text note",
         "2": "recommend relay",
@@ -983,6 +1032,7 @@
     "balance": "Balance",
     "or": "or",
     "website": "Website",
+    "apps": "Apps",
     "actions": {
       "back": "Back",
       "delete": "Delete",
@@ -1044,7 +1094,8 @@
       "allow": "Allow this website to:",
       "block_added": "Added {{host}} to the blocklist, please reload the website.",
       "request1": "Request approval for transactions",
-      "block_and_ignore": "Block and ignore {{host}}"
+      "block_and_ignore": "Block and ignore {{host}}",
+      "insecure_domain_warn": "⚠️ You are connecting to an insecure domain."
     }
   },
   "components": {
@@ -1160,9 +1211,9 @@
     },
     "nostr": {
       "getpublickey": "Read your public key",
+      "signmessage": "Sign message with your key",
       "nip04encrypt": "Encrypt data",
-      "nip04decrypt": "Decrypt data",
-      "signmessage": "Sign message with your key"
+      "nip04decrypt": "Decrypt data"
     },
     "bitcoin": {
       "getaddress": "Read your Bitcoin receive address"
@@ -1224,7 +1275,11 @@
       "routermc": "Read the internal mission control state",
       "addinvoice": "Create new invoices",
       "addholdinvoice": "Create new HODL invoices",
-      "settleinvoice": "Settle an accepted invoice"
+      "settleinvoice": "Settle an accepted invoice",
+      "newaddress": "Get a new onchain address",
+      "nextaddr": "Get the next unused address within the wallet",
+      "listaddresses": "Get all the addresses along with their balance",
+      "listunspent": "Get a list of all utxos spendable by the wallet"
     },
     "lnc": {
       "getinfo": "Get the node information",
@@ -1250,7 +1305,11 @@
       "routermc": "Read the internal mission control state",
       "addinvoice": "Create new invoices",
       "addholdinvoice": "Create new HODL invoices",
-      "settleinvoice": "Settle an accepted invoice"
+      "settleinvoice": "Settle an accepted invoice",
+      "newaddress": "Get a new onchain address",
+      "nextaddr": "Get the next unused onchain address within the wallet",
+      "listaddresses": "Get all the onchain addresses along with their balance",
+      "listunspent": "Get a list of all utxos spendable by the wallet"
     }
   }
 }
