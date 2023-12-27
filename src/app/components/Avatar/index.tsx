@@ -26,6 +26,7 @@ const AvatarImage = (props: Props) => {
       style={{
         width: `${props.size}px`,
         height: `${props.size}px`,
+        flexShrink: 0,
       }}
     >
       <img
@@ -52,7 +53,7 @@ const AvatarSVG = (props: Omit<Props, "url">) => {
   return (
     <svg
       className={classNames(
-        "rounded-full overflow-hidden translate-z-0",
+        "rounded-full overflow-hidden translate-z-0 flex-shrink-0",
         props.className ?? ""
       )}
       ref={svgRef}
