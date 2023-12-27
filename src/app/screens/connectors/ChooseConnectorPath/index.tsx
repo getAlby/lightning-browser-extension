@@ -66,7 +66,7 @@ export default function ChooseConnectorPath() {
               <>
                 <FeatureItem type="success">{t("voltage.point1")}</FeatureItem>
                 <FeatureItem type="success">{t("voltage.point2")}</FeatureItem>
-                <FeatureItem type="success">{t("voltage.point3")}</FeatureItem>
+                <FeatureItem type="disabled">{t("voltage.point3")}</FeatureItem>
                 <FeatureItem type="success">{t("voltage.point4")}</FeatureItem>
               </>
             }
