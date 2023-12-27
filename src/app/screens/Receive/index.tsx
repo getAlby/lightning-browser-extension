@@ -70,7 +70,7 @@ function Receive() {
               <div className="bg-white dark:bg-surface-01dp border-gray-200 dark:border-neutral-700 rounded border p-4 flex flex-col justify-center items-center gap-1 text-gray-800 dark:text-neutral-200">
                 <>
                   <div className="relative flex flex-grid">
-                    <div className="w-32 h-32 md:w-48 md:h-48">
+                    <div tabIndex={0} className="w-32 h-32 md:w-48 md:h-48">
                       {loadingLightningAddress ? (
                         <SkeletonLoader className="w-32 h-32 relative -top-1" />
                       ) : (

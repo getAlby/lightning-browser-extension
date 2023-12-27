@@ -1,4 +1,5 @@
 import SkeletonLoader from "@components/SkeletonLoader";
+import { useTranslation } from "react-i18next";
 import { useAccount } from "~/app/context/AccountContext";
 import { classNames } from "~/app/utils";
 
@@ -9,11 +10,13 @@ type Props = {
 function BalanceBox({ className }: Props) {
   const { balancesDecorated, accountLoading } = useAccount();
   const balanceParts = balancesDecorated.accountBalance.split(" ");
+  const { t: tCommon } = useTranslation("common");
 
   return (
     <div
+      tabIndex={0}
       className={classNames(
-        "w-full flex flex-col items-center justify-center dark:text-white p-4",
+        "w-full flex flex-col items-center justify-center dark:text-white p-4 caret-transparent",
         className ?? ""
       )}
     >
@@ -22,6 +25,7 @@ function BalanceBox({ className }: Props) {
           <SkeletonLoader containerClassName="inline-block" className="w-32" />
         ) : (
           <>
+            <span className="sr-only">{tCommon("balance")}</span>
             <span className="font-medium">{balanceParts[0]}</span>
             <span>&nbsp;{balanceParts[1]}</span>
           </>

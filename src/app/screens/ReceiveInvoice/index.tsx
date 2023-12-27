@@ -142,7 +142,11 @@ function ReceiveInvoice() {
         {!paid && (
           <>
             <div className="mt-4 flex justify-center items-center">
-              <div className="bg-white dark:bg-surface-01dp border-gray-200 dark:border-neutral-700  p-4 rounded-md border max-w-md">
+              <div
+                tabIndex={0}
+                className="bg-white dark:bg-surface-01dp border-gray-200 dark:border-neutral-700  p-4 rounded-md border max-w-md"
+              >
+                <span className="sr-only">{t("qrcode_invoice")}</span>
                 <QRCode
                   value={invoice.paymentRequest.toUpperCase()}
                   size={512}

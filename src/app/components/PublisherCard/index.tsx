@@ -29,6 +29,7 @@ export default function PublisherCard({
   }
   return (
     <div
+      tabIndex={0}
       className={classNames(
         isSmall ? "p-2" : "flex-col justify-center p-4",
         isCard && "drop-shadow rounded-lg mt-4",

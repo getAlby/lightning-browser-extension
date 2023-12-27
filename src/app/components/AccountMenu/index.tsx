@@ -58,7 +58,7 @@ function AccountMenu({ showOptions = true }: Props) {
   }
 
   return (
-    <div className="relative pl-2 flex justify-end w-72">
+    <div className="relative pl-2 flex justify-end w-72 caret-transparent">
       <Menu as="div">
         <Menu.Button className="h-full px-2 rounded-md hover:bg-gray-100 dark:hover:bg-white/10 transition-colors duration-200">
           <div className="flex items-center">
@@ -94,7 +94,11 @@ function AccountMenu({ showOptions = true }: Props) {
         </Menu.Button>
         <Menu.List position="right" fullWidth>
           <Menu.Item>
+            <span className="sr-only">{tCommon("arrowkeys")}</span>
+          </Menu.Item>
+          <Menu.Item>
             <div
+              tabIndex={0}
               className={`flex-auto px-4 py-2 overflow-hidden ${
                 !title && !balancesDecorated ? "w-28" : ""
               }`}

@@ -757,6 +757,7 @@
         "placeholder": "For e.g. who is sending this payment?"
       },
       "success": "Payment received!",
+      "qrcode_invoice": "QR code with invoice",
       "payment": {
         "waiting": "waiting for payment...",
         "status": "Check payment status"
@@ -1020,6 +1021,7 @@
     "or": "or",
     "website": "Website",
     "apps": "Apps",
+    "arrowkeys": "Use arrowkeys to traverse items",
     "actions": {
       "back": "Back",
       "delete": "Delete",
