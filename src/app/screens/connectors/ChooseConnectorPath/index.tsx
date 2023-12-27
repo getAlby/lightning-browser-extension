@@ -72,7 +72,7 @@ export default function ChooseConnectorPath() {
             }
             actions={
               <Link
-                to="/accounts/new/choose-connector/voltage"
+                to="choose-connector/voltage"
                 rel="noreferrer noopener"
                 className="flex flex-1"
               >
