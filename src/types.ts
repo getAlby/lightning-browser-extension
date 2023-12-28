@@ -170,8 +170,7 @@ export type NavigationState = {
     sigHash?: string;
 
     // nostr
-    encryptOrDecrypt?: {
-      action: "encrypt" | "decrypt";
+    encrypt: {
       peer: string;
       message: string;
     };

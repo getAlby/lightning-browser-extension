@@ -943,7 +943,6 @@
       "allow_sign": "Allow {{host}} to sign:",
       "allow_sign_event": "Allow {{host}} to sign a {{kind}} event",
       "allow_encrypt": "Allow {{host}} to encrypt the message:",
-      "allow_decrypt": "Allow {{host}} to decrypt the message:",
       "view_details": "View details",
       "hide_details": "Hide details",
       "block_and_ignore": "Block and ignore {{host}}",
@@ -1199,7 +1198,6 @@
     "nostr": {
       "getpublickey": "Read your public key",
       "signmessage": "Sign message with your key",
-      "nip04encrypt": "Encrypt data",
       "nip04decrypt": "Decrypt data"
     },
     "bitcoin": {
