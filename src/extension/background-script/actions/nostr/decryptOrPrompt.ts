@@ -32,7 +32,7 @@ const decryptOrPrompt = async (message: MessageDecryptGet, sender: Sender) => {
         rememberPermission: boolean;
       }>({
         ...message,
-        action: "public/nostr/confirmEncryptOrDecrypt",
+        action: "public/nostr/confirmDecrypt",
         args: {
           encryptOrDecrypt: {
             action: "decrypt",
