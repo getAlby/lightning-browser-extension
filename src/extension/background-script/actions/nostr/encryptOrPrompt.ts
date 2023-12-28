@@ -32,8 +32,7 @@ const encryptOrPrompt = async (message: MessageEncryptGet, sender: Sender) => {
         ...message,
         action: "public/nostr/confirmEncrypt",
         args: {
-          encryptOrDecrypt: {
-            action: "encrypt",
+          encrypt: {
             peer: message.args.peer,
             message: message.args.plaintext,
           },
