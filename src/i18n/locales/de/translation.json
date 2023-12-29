@@ -54,20 +54,6 @@
         },
         "title": "LND"
       },
-      "lndhub_bluewallet": {
-        "uri": {
-          "label": "BlueWallet Export URI"
-        },
-        "errors": {
-          "invalid_uri": "Ungültige BlueWallet-URI",
-          "connection_failed": "Verbindung nicht erfolgreich. Ist deine BlueWallet URI richtig?"
-        },
-        "title": "BlueWallet",
-        "page": {
-          "title": "Verbinden mit BlueWallet",
-          "description": "Wähle in der BlueWallet die Wallet, die du verbinden willst, öffne sie, klicke auf \"...\", klicke auf Export/Backup, um den QR Code anzuzeigen. Scanne ihn dann mit deiner Webcam."
-        }
-      },
       "lndhub_go": {
         "title": "LNDHub",
         "uri": {
@@ -177,32 +163,20 @@
         "title": "Blink Wallet",
         "page": {
           "title": "Verbinden mit <0>Blink Wallet</0>"
+        },
+        "token": {
+          "info": "Um deine Brieftasche zu verbinden, generiere einen API-Schlüssel im <0>Blink Dashboard (dashboard.blink.sv)</0>:<br>- logge dich mit deiner E-Mail oder Telefonnummer ein, wenn du Blink bereits nutzt<br>- wenn du noch keinen Account hast, kannst du einen neuen erstellen, indem du dich mit einer Telefonnummer einloggst<br>- erstelle einen neuen Key auf der Registerkarte API Keys<br>- gib ihm einen Namen und wähle den Lese- und Schreibbereich<br>- belasse die Standardeinstellung ohne Ablaufdatum oder wähle einen langen Zeitraum, um zu vermeiden, dass du deine Wallet regelmäßig neu verbinden musst<br>- kopiere den Key (beginnend mit blink_ ) und füge ihn in die Textbox unten ein.<br><br>Die Integration unterstützt derzeit nur die Verwendung der BTC-Wallet.<br>",
+          "label": "Gebe deinen API-Schlüssel ein"
         }
       },
       "bitcoin_jungle": {
         "title": "Bitcoin Jungle Wallet",
         "page": {
           "title": "Verbinden mit <0>Bitcoin Jungle Wallet</0>"
-        }
-      },
-      "galoy": {
-        "phone_number": {
-          "label": "Trage deine Telefonnummer ein"
-        },
-        "sms_code": {
-          "label": "Gib deinen SMS-Bestätigungscode ein"
         },
         "token": {
-          "label": "Gebe deinen JWT Token ein",
-          "info": "Das {{label}}-Login wird derzeit aktualisiert. Wenn du ein fortgeschrittener Benutzer bist, kannst du dir dein JWT-Token holen, indem du über <0>Web Wallet (wallet.mainnet.galoy.io)</0><1/><1/> anmeldest. Das JWT sieht so aus: < 2>eyJhbG...</2><1/><1/>"
-        },
-        "actions": {
-          "login": "Anmeldung"
-        },
-        "errors": {
-          "setup_failed": "Einrichtung fehlgeschlagen",
-          "missing_token": "JWT fehlt, Anmeldung nicht möglich.",
-          "invalid_token": "ungültige JWT übermittelt"
+          "info": "Die {{label}}-Integration mit Alby befindet sich in der Alpha-Phase und wird nur für fortgeschrittene Benutzer empfohlen.<br><br>du kannst deinen Zugriffstoken abrufen, indem du die mobile App aufrufst, auf das Einstellungssymbol klicken und dann dreimal auf die Build-Nummer tippen, um das Entwicklermenü zu öffnen.<br><br>Das Zugriffstoken kann von hier kopiert werden.<br><br>",
+          "label": "Gebe deien Access-Token ein"
         }
       },
       "btcpay": {
@@ -251,34 +225,6 @@
           "connection_failed": "Verbindung fehlgeschlagen. Ist deine Core Lightning Node online und verwendet diese das Commando Plugin?"
         }
       },
-      "kollider": {
-        "title": "Kollider",
-        "description": "Anmeldung bei deinem Kollider Konto",
-        "currency": {
-          "label": "Wähle dein Währungskonto"
-        },
-        "errors": {
-          "connection_failed": "Verbindung fehlgeschlagen. Bist du dir sicher, dass die Kontodaten korrekt sind?",
-          "registration_limit_exceeded": "Registrierungslimit überschritten, versuche es später noch einmal.",
-          "user_already_exists": "Benutzername existiert bereits"
-        },
-        "username": {
-          "label": "Benutzername"
-        },
-        "choose_path": {
-          "title": "Verbinden mit deiner Kollider-Wallet",
-          "description": "Melde dich an oder registriere dich für ein neues Kollider-Konto und stelle eine Verbindung zu Alby her.",
-          "create_new": "Registriere dich"
-        },
-        "create": {
-          "description": "Erstelle ein neues Kollider-Konto, um Bitcoin zu senden, zu empfangen und zu handeln.",
-          "title": "Erstelle dein Kollider-Konto und verbinde dich mit Alby"
-        },
-        "login": {
-          "title": "Verbinden mit deinem Kollider-Konto"
-        },
-        "warning": "⚠️ Bitte stelle sicher, dass du deine Zugangsdaten sicher in einem Passwort-Manager speicherst. Ohne diese Zugangsdaten kann dein Konto nicht wiederhergestellt werden."
-      },
       "title": "Verbinde Lightning Wallet",
       "lnc": {
         "title": "Lightning Terminal (LNC)",
@@ -293,6 +239,22 @@
       },
       "umbrel_lightning_node": {
         "title": "Lightning Node"
+      },
+      "galoy": {
+        "sms_code": {
+          "label": "Gebe deinen SMS-Verifizierungscode ein"
+        },
+        "actions": {
+          "login": "Anmeldung"
+        },
+        "phone_number": {
+          "label": "Gebe deine Rufnummer ein"
+        },
+        "errors": {
+          "setup_failed": "Einrichtung fehlgeschlagen",
+          "invalid_token": "Autorisierung fehlgeschlagen. Bitte überprüfe deinen API-Schlüssel und versuche es erneut.",
+          "missing_token": "Zugriffstoken fehlt, konnte sich nicht anmelden."
+        }
       }
     },
     "unlock": {
@@ -340,7 +302,7 @@
         "title": "Erweiterungen der Webseite",
         "subtitle": "Verbesserungen für X, YouTube, etc."
       },
-      "title": "Einstellungen",
+      "title": "Einstellung",
       "change_password": {
         "choose_password": {
           "label": "Gebe einen neuen Passcode zum Entsperren ein:"
@@ -408,15 +370,12 @@
     "home": {
       "default_view": {
         "is_blocked_hint": "Alby ist derzeit auf dem {{host}} deaktiviert",
-        "recent_transactions": "Letzte Transaktionen",
         "block_removed": "{{host}} aktiviert. Bitte lade die Webseite neu.",
-        "all_transactions_link": "Alle Transaktionen anzeigen",
-        "no_outgoing_transactions": "Noch keine ausgehenden Transaktionen für dieses Konto.",
-        "no_incoming_transactions": "Noch keine eingehenden Transaktionen für dieses Konto."
+        "see_all": "Alle sehen",
+        "no_transactions": "Noch keine Transaktionen für dieses Konto."
       },
       "allowance_view": {
         "no_transactions": "Noch keine Transaktionen auf <0>{{Name}}</0>.",
-        "recent_transactions": "Letzte Transaktionen",
         "sats": "sats",
         "budget_spent": "Budget",
         "total_spent": "Insgesamt ausgegeben",
@@ -426,8 +385,7 @@
       "actions": {
         "send_satoshis": "⚡️ Satoshis senden ⚡️",
         "enable_now": "Jetzt aktivieren"
-      },
-      "recent_transactions": "Letzte Transaktionen"
+      }
     },
     "accounts": {
       "title": "Konten",
@@ -436,7 +394,7 @@
       },
       "account_view": {
         "title2": "Konto",
-        "title1": "Kontoeinstellungen",
+        "title1": "Kontoeinstellung",
         "name": {
           "title": "Name anzeigen",
           "placeholder": "Konto Anzeigename"
@@ -669,7 +627,6 @@
       "allow_sign": "Erlaube dein {{host}} zu unterschreiben:",
       "view_details": "Details anzeigen",
       "hide_details": "Details ausblenden",
-      "no_content": "(Ohne Inhalt)",
       "kinds": {
         "0": "Metadaten",
         "1": "kurze Textnotiz",
@@ -694,9 +651,12 @@
         "30009": "Badge Beschreibung",
         "30023": "Langform Inhalte",
         "30078": "anwendungsspezifische Daten",
-        "unknown": "nostr Ereignis der Art {{kind}}"
+        "unknown": "kind {{kind}}"
       },
-      "allow_sign_event": "Erlaube {{host}}, eine {{kind}} zu unterzeichnen:"
+      "peer": "Peer",
+      "allow_sign_event": "Erlaube {{Gastgeber}}, ein {{kind}} Ereignis zu unterzeichnen",
+      "allow_encrypt": "Erlaube {{host}}, die Nachricht zu verschlüsseln:",
+      "allow_decrypt": "Erlaube {{host}}, die Nachricht zu entschlüsseln:"
     },
     "confirm_request_permission": {
       "title": "Antrag genehmigen",
@@ -783,15 +743,14 @@
     },
     "choose_path": {
       "other": {
-        "and_more": "& mehr...",
         "title": "Andere Wallets",
-        "description": "Verbinde dich mit deiner bestehenden Lightning Wallet oder Node und wähle aus verschiedenen Anschlüssen.",
-        "connect": "Verbinden"
+        "connect": "Verbinden",
+        "description": "Schließe deine vorhandene Lightning Wallet oder Node an und wähle aus verschiedenen Anschlüssen. Großartig für volle Flexibilität. Betreibe deinen eigenen Knotenpunkt."
       },
       "alby": {
         "title": "Alby Konto",
-        "description": "Melde dich an oder verwende dein bestehendes Alby-Konto, um im Handumdrehen mit Lightningzahlungen zu beginnen.",
-        "connect": "Mit Alby verbinden"
+        "connect": "Mit Alby verbinden",
+        "description": "Melde dich an oder nutze dein bestehendes Alby-Konto. Ideal für den schnellen Einstieg und für kleine Beträge."
       }
     },
     "discover": {
@@ -810,7 +769,7 @@
       "tips": {
         "title": "Deine Alby Wallet ist bereit",
         "top_up_wallet": {
-          "description": "Du möchtest deine Wallet aufladen?",
+          "description": "Du möchtest deine Wallet aufladen?\nWir haben es für dich!",
           "title": "Bitcoin kaufen"
         },
         "demo": {
@@ -827,10 +786,7 @@
     "transactions": {
       "title": "Transaktionen",
       "list_empty": "Noch keine Transaktionen verfügbar.",
-      "description": {
-        "outgoing": "Ausgehende Transaktionen für dieses Konto",
-        "incoming": "Eingehende Transaktionen für dieses Konto"
-      }
+      "description": "Buchungen für dieses Konto"
     },
     "distributions": {
       "title": "Verbinden mit {{Name}}",
@@ -966,8 +922,8 @@
     },
     "nostr_enable": {
       "title": "Mit Nostr verbinden",
-      "request2": "Signiere deine Ereignisse mit deinem privaten Nostr-Schlüssel",
-      "request1": "Anfrage zum Lesen deines öffentlichen Nostr-Schlüssels"
+      "request1": "Anfrage zum Lesen deines öffentlichen Nostr-Schlüssels",
+      "request2": "Anfrage zum Signieren von Ereignissen mit deinem privaten Schlüssel"
     },
     "webbtc_enable": {
       "request2": "Rechnungen und Webbtc-Informationen anfordern",
@@ -1031,7 +987,7 @@
     },
     "allowance_menu": {
       "edit_allowance": {
-        "title": "Einstellungen",
+        "title": "Seiten Einstellung",
         "screen_reader": "Zulässigkeitsoptionen"
       },
       "enable_login": {
@@ -1059,15 +1015,21 @@
     "transactions_table": {
       "sent": "Gesendet",
       "boostagram": {
-        "sender": "Sender",
-        "app": "App",
+        "sender": "Sende",
+        "app": "App's",
         "podcast": "Podcast",
-        "message": "Nachricht"
+        "message": "Nachricht",
+        "episode": "Folge",
+        "action": "Aktion",
+        "totalAmount": "Gesamtbetrag",
+        "timestamp": "Zeitstempel"
       },
-      "preimage": "Preimage",
-      "received": "Empfangen",
+      "preimage": "Vorschaubild",
+      "received": "Empfang",
       "fee": "Gebühr",
-      "open_location": "Webseite öffnen"
+      "open_location": "Webseite öffnen",
+      "payment_hash": "Zahlung hHash",
+      "date_time": "Datum & Uhrzeit"
     },
     "budget_control": {
       "remember": {
@@ -1084,17 +1046,11 @@
         "imported": "IMPORTIERT",
         "budget": "BUDGET"
       }
-    },
-    "transaction_list": {
-      "tabs": {
-        "outgoing": "Ausgehend",
-        "incoming": "Eingehend"
-      }
     }
   },
   "common": {
     "optional": "Optional",
-    "feedback": "Feedback",
+    "feedback": "Rückmeldung",
     "error": "Fehler",
     "connected_sites": "Verbundene Webseiten",
     "loading": "Laden",
@@ -1106,7 +1062,7 @@
     "amount": "Betrag",
     "copied": "Kopiert!",
     "description": "Beschreibung",
-    "settings": "Einstellungen",
+    "settings": "Einstellung",
     "sats_other": "sats",
     "confirm_password": "Kennwort bestätigen",
     "help": "Hilfe",
@@ -1142,7 +1098,8 @@
       "paste_clipboard": "Einfügen aus der Zwischenablage",
       "review": "Überprüfung",
       "disconnect": "Verbindung trennen",
-      "copied_to_clipboard": "In die Zwischenablage kopiert"
+      "copied_to_clipboard": "In die Zwischenablage kopiert",
+      "hide": "Ausblenden"
     },
     "discover": "Entdecken",
     "errors": {
@@ -1179,106 +1136,117 @@
       "block_added": "{{host}} zur Blockliste hinzugefügt, bitte lade die Webseite neu.",
       "request1": "Genehmigung von Transaktionen beantragen",
       "allow": "Erlaube dieser Webseite:",
-      "block_and_ignore": "Blockieren und Ignorieren von {{host}}"
-    }
+      "block_and_ignore": "Blockieren und Ignorieren von {{host}}",
+      "insecure_domain_warn": "⚠️ Du stellst eine Verbindung zu einer unsicheren Domäne her."
+    },
+    "website": "Website",
+    "apps": "Apps"
   },
   "permissions": {
     "commando": {
-      "bkpr-listbalances": "Liste aller aktuellen und historischen Kontostände.",
-      "checkmessage": "Überprüfe, ob die Signatur von einem bestimmten Node erstellt wurde.",
-      "fundchannel": "Öffne einen Zahlungskanal mit einem Peer, indem du eine Finanzierungstransaktion durchführst.",
-      "getroute": "Finde die beste Route für die Zahlung an eine Lightning Node.",
-      "invoice": "Schaffe die Erwartung einer Zahlung.",
-      "keysend": "Sende eine Zahlung an eine andere Node.",
-      "listoffers": "Alle Angebote auflisten oder ein bestimmtes Angebot erhalten.",
-      "listpays": "Ruft den Status aller Zahlungsbefehle ab.",
-      "signmessage": "Erstellen Sie eine Signatur von dieser Node.",
-      "feerates": "Rückgabe der Fee Rate, die bei CLN verwenden wird.",
-      "listforwards": "Auflistung aller versuchten Übermittlungsversuche.",
-      "listfunds": "Listet alle verfügbaren Mittel auf.",
-      "listinvoices": "Abrufen des Status aller Rechnungen.",
-      "sendpay": "Sende eine Zahlung über eine Route.",
-      "multifundchannel": "Öffne mehrere Zahlungskanäle mit Nodes, indem du eine einzige Finanzierungstransaktion durchführst.",
-      "disconnect": "Schließen einer bestehenden Verbindung zu einem Peer.",
-      "decodepay": "Prüfe und analysiere einen Bolt11-String.",
-      "getinfo": "Abrufen der Zusammenfassung der Node.",
-      "listtransactions": "Liste der in der Wallet verfolgten Transaktionen.",
-      "offer": "Erstelle ein Angebot.",
-      "connect": "Stellen Sie eine neue Verbindung mit einer anderen Node her.",
-      "decode": "Dekodiere eine Bolt11/Bolt12/Rune-Kette.",
-      "listpeers": "Liste der Nodes, die mit dieser Node verbunden sind oder offene Kanäle haben.",
-      "listsendpays": "Ruft den Status aller sendpay-Befehle ab.",
-      "pay": "Sende eine Zahlung an eine BOLT11-Rechnung.",
-      "setchannel": "Konfiguriere die für einen Kanal beworbenen Gebühren / htlc-Bereiche.",
-      "listnodes": "Auflistung von Nodes, von denen der Node durch Gossip-Nachrichten erfahren hat."
+      "bkpr-listbalances": "Liste aller aktuellen und historischen Kontostände",
+      "checkmessage": "Überprüfe, ob die Signatur von einem bestimmten Node erstellt wurde",
+      "fundchannel": "Öffne einen Zahlungskanal mit einem Peer, indem du eine Finanzierungstransaktion durchführst",
+      "getroute": "Finde die beste Route für die Zahlung an eine Lightning Node",
+      "invoice": "Schaffe die Erwartung einer Zahlung",
+      "keysend": "Sende eine Zahlung an eine andere Node",
+      "listoffers": "Alle Angebote auflisten oder ein bestimmtes Angebot erhalten",
+      "listpays": "Ruft den Status aller Zahlungsbefehle ab",
+      "signmessage": "Erstellen Sie eine Signatur von dieser Node",
+      "feerates": "Rückgabe der Fee Rate, die bei CLN verwenden wird",
+      "listforwards": "Auflistung aller versuchten Übermittlungsversuche",
+      "listfunds": "Listet alle verfügbaren Mittel auf",
+      "listinvoices": "Abrufen des Status aller Rechnungen",
+      "sendpay": "Sende eine Zahlung über eine Route",
+      "multifundchannel": "Öffne mehrere Zahlungskanäle mit Nodes, indem du eine einzige Finanzierungstransaktion durchführst",
+      "disconnect": "Schließen einer bestehenden Verbindung zu einem Peer",
+      "decodepay": "Prüfe und analysiere einen Bolt11-String",
+      "getinfo": "Abrufen der Zusammenfassung der Node",
+      "listtransactions": "Liste der in der Wallet verfolgten Transaktionen",
+      "offer": "Erstelle ein Angebot",
+      "connect": "Stellen Sie eine neue Verbindung mit einer anderen Node her",
+      "decode": "Dekodiere eine Bolt11/Bolt12/Rune-Kette",
+      "listpeers": "Liste der Nodes, die mit dieser Node verbunden sind oder offene Kanäle haben",
+      "listsendpays": "Ruft den Status aller sendpay-Befehle ab",
+      "pay": "Sende eine Zahlung an eine BOLT11-Rechnung",
+      "setchannel": "Konfiguriere die für einen Kanal beworbenen Gebühren / htlc-Bereiche",
+      "listnodes": "Auflistung von Nodes, von denen der Node durch Gossip-Nachrichten erfahren hat"
     },
     "lnd": {
-      "channelbalance": "Du erhältst einen Bericht über den Gesamtbetrag der Mittel für alle offenen Kanäle.",
-      "walletbalance": "Ermittel die gesamten nicht verbrauchten Ausgaben der Wallet.",
-      "listchannels": "Erhalte eine Beschreibung aller offenen Kanäle.",
-      "openchannel": "Öffne einen neuen Kanal.",
-      "estimatefee": "Schätze den Gebührensatz und die Gesamtgebühren für eine Transaktion.",
-      "getchaninfo": "Ermittelt die Netzansage für den angegebenen Kanal.",
-      "getinfo": "Abrufen der Node-Informationen.",
-      "listinvoices": "Erhalte eine Liste aller Rechnungen.",
-      "connectpeer": "Stelle eine Verbindung zu einer entfernten Gegenstelle her.",
-      "disconnectpeer": "Trenne die Verbindung zu einer entfernten Gegenstelle.",
-      "getnetworkinfo": "Abrufen grundlegender Statistiken über die bekannte Kanalkurve.",
-      "getnodeinfo": "Abrufen der Kanalinformationen für einen Node.",
-      "gettransactions": "Abrufen einer Liste aller für die Wallets relevanten Transaktionen.",
-      "listpeers": "Erhalte eine Liste aller derzeit aktiven Peers.",
-      "lookupinvoice": "Rechnungsdetails nachschlagen.",
-      "queryroutes": "Abfrage nach einer möglichen Route.",
-      "sendtoroute": "Führe eine Zahlung über die angegebene Route durch.",
-      "routermc": "Lese den internen Status der Missionskontrolle.",
-      "decodepayreq": "Entschlüssel eine Zahlungsanforderungszeichenfolge.",
-      "addinvoice": "Erstelle neue Rechnungen.",
-      "listpayments": "Erhalte eine Liste aller ausgehenden Zahlungen.",
-      "verifymessage": "Überprüfe eine Signatur über eine Nachricht.",
-      "addholdinvoice": "Erstelle eine neue HODL-Rechnungen.",
-      "settleinvoice": "Begleiche eine akzeptierte Rechnung."
+      "channelbalance": "Du erhältst einen Bericht über den Gesamtbetrag der Mittel für alle offenen Kanäle",
+      "walletbalance": "Ermittel die gesamten nicht verbrauchten Ausgaben der Wallet",
+      "listchannels": "Erhalte eine Beschreibung aller offenen Kanäle",
+      "openchannel": "Öffne einen neuen Kanal",
+      "estimatefee": "Schätze den Gebührensatz und die Gesamtgebühren für eine Transaktion",
+      "getchaninfo": "Ermittelt die Netzansage für den angegebenen Kanal",
+      "getinfo": "Abrufen der Node-Informationen",
+      "listinvoices": "Erhalte eine Liste aller Rechnungen",
+      "connectpeer": "Stelle eine Verbindung zu einer entfernten Gegenstelle her",
+      "disconnectpeer": "Trenne die Verbindung zu einer entfernten Gegenstelle",
+      "getnetworkinfo": "Abrufen grundlegender Statistiken über die bekannte Kanalkurve",
+      "getnodeinfo": "Abrufen der Kanalinformationen für einen Node",
+      "gettransactions": "Abrufen einer Liste aller für die Wallets relevanten Transaktionen",
+      "listpeers": "Erhalte eine Liste aller derzeit aktiven Peers",
+      "lookupinvoice": "Rechnungsdetails nachschlagen",
+      "queryroutes": "Abfrage nach einer möglichen Route",
+      "sendtoroute": "Führe eine Zahlung über die angegebene Route durch",
+      "routermc": "Lese den internen Status der Missionskontrolle",
+      "decodepayreq": "Entschlüssel eine Zahlungsanforderungszeichenfolge",
+      "addinvoice": "Erstelle neue Rechnungen",
+      "listpayments": "Erhalte eine Liste aller ausgehenden Zahlungen",
+      "verifymessage": "Überprüfe eine Signatur über eine Nachricht",
+      "addholdinvoice": "Erstelle eine neue HODL-Rechnungen",
+      "settleinvoice": "Begleiche eine akzeptierte Rechnung",
+      "listunspent": "Liste aller utxos, die von der Brieftasche ausgegeben werden können",
+      "listaddresses": "Erhalte alle Adressen zusammen mit deinem Guthaben",
+      "newaddress": "Abrufen einer neuen Onchain-Adresse",
+      "nextaddr": "Abrufen der nächsten unbenutzten Adresse in der Wallet"
     },
     "nostr": {
-      "getpublickey": "Lese deinen öffentlichen Schlüssel.",
-      "nip04decrypt": "Daten entschlüsseln.",
-      "nip04encrypt": "Daten verschlüsseln.",
-      "signmessage": "Unterschreibe deine Nachricht mit deinem Schlüssel."
+      "getpublickey": "Lese deinen öffentlichen Schlüssel",
+      "nip04decrypt": "Daten entschlüsseln",
+      "nip04encrypt": "Daten verschlüsseln",
+      "signmessage": "Unterschreibe deine Nachricht mit deinem Schlüssel"
     },
     "lnc": {
-      "connectpeer": "Stelle eine Verbindung zu einer Gegenstelle her.",
-      "disconnectpeer": "Trenne die Verbindung zu einer entfernten Gegenstelle.",
-      "estimatefee": "Schätze den Gebührensatz und die Gesamtgebühren für eine Transaktion.",
-      "getnodeinfo": "Abrufen der Kanalinformationen für eine Node.",
-      "getchaninfo": "Ermittelt die Netzansage für den angegebenen Kanal.",
-      "listpayments": "Erhalte eine Liste aller ausgehenden Zahlungen.",
-      "queryroutes": "Abfrage nach einer möglichen Route.",
-      "verifymessage": "Überprüfung einer Signatur über eine Nachricht.",
-      "listpeers": "Ermittelt eine Liste aller derzeit aktiven Peers.",
-      "sendtoroute": "Nehme eine Zahlung über die angegebene Route vor.",
-      "decodepayreq": "Dekodierung einer Zahlungsanforderungszeichenfolge.",
-      "addinvoice": "Neue Rechnungen erstellen.",
-      "routermc": "Lese den internen Status der Missionskontrolle.",
-      "gettransactions": "Abrufen einer Liste aller für die Wallet relevanten Transaktionen.",
-      "getnetworkinfo": "Abrufen grundlegender Statistiken über die bekannte Kanalkurve.",
-      "lookupinvoice": "Rechnungsdetails nachschlagen.",
-      "getinfo": "Abrufen der Node-Informationen.",
-      "listchannels": "Erhalte eine Beschreibung aller offenen Kanäle.",
-      "listinvoices": "Erhalte eine Liste aller Rechnungen.",
-      "channelbalance": "Erhalte einen Bericht über den Gesamtbetrag der Mittel für alle offenen Kanäle.",
-      "walletbalance": "Ermittle die gesamten nicht verbrauchten Ausgaben deiner Wallet.",
-      "openchannel": "Öffne einen neuen Kanal.",
-      "addholdinvoice": "Neue HODL-Rechnungen erstellen.",
-      "settleinvoice": "Begleiche eine akzeptierte Rechnung."
+      "connectpeer": "Stelle eine Verbindung zu einer Gegenstelle her",
+      "disconnectpeer": "Trenne die Verbindung zu einer entfernten Gegenstelle",
+      "estimatefee": "Schätze den Gebührensatz und die Gesamtgebühren für eine Transaktion",
+      "getnodeinfo": "Abrufen der Kanalinformationen für eine Node",
+      "getchaninfo": "Ermittelt die Netzansage für den angegebenen Kanal",
+      "listpayments": "Erhalte eine Liste aller ausgehenden Zahlungen",
+      "queryroutes": "Abfrage nach einer möglichen Route",
+      "verifymessage": "Überprüfung einer Signatur über eine Nachricht",
+      "listpeers": "Ermittelt eine Liste aller derzeit aktiven Peers",
+      "sendtoroute": "Nehme eine Zahlung über die angegebene Route vor",
+      "decodepayreq": "Dekodierung einer Zahlungsanforderungszeichenfolge",
+      "addinvoice": "Neue Rechnungen erstellen",
+      "routermc": "Lese den internen Status der Missionskontrolle",
+      "gettransactions": "Abrufen einer Liste aller für die Wallet relevanten Transaktionen",
+      "getnetworkinfo": "Abrufen grundlegender Statistiken über die bekannte Kanalkurve",
+      "lookupinvoice": "Rechnungsdetails nachschlagen",
+      "getinfo": "Abrufen der Node-Informationen",
+      "listchannels": "Erhalte eine Beschreibung aller offenen Kanäle",
+      "listinvoices": "Erhalte eine Liste aller Rechnungen",
+      "channelbalance": "Erhalte einen Bericht über den Gesamtbetrag der Mittel für alle offenen Kanäle",
+      "walletbalance": "Ermittle die gesamten nicht verbrauchten Ausgaben deiner Wallet",
+      "openchannel": "Öffne einen neuen Kanal",
+      "addholdinvoice": "Neue HODL-Rechnungen erstellen",
+      "settleinvoice": "Begleiche eine akzeptierte Rechnung",
+      "listunspent": "Liste aller utxos, die von der Wallet ausgegeben werden können",
+      "nextaddr": "Abrufen der nächsten unbenutzten Onchain-Adresse innerhalb der Wallet",
+      "listaddresses": "Alle Onchain-Adressen zusammen mit ihrem Guthaben abrufen",
+      "newaddress": "Abrufen einer neuen Onchain-Adresse"
     },
     "webln": {
-      "getbalance": "Den Kontostand abfragen."
+      "getbalance": "Den Kontostand abfragen"
     },
     "liquid": {
-      "getaddress": "Lese deine Liquid-Empfangsadresse.",
-      "signschnorr": "Unterschreibe die Nachricht mit deinem Schlüssel."
+      "getaddress": "Lese deine Liquid-Empfangsadresse",
+      "signschnorr": "Unterschreibe die Nachricht mit deinem Schlüssel"
     },
     "bitcoin": {
-      "getaddress": "Lese deine Bitcoin-Empfangsadresse."
+      "getaddress": "Lese deine Bitcoin-Empfangsadresse"
     }
   }
 }

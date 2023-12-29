@@ -48,20 +48,6 @@
           "connection_failed": ""
         }
       },
-      "lndhub_bluewallet": {
-        "title": "Bluewallet",
-        "page": {
-          "title": "Konekti al BlueWallet",
-          "description": ""
-        },
-        "uri": {
-          "label": ""
-        },
-        "errors": {
-          "invalid_uri": "",
-          "connection_failed": ""
-        }
-      },
       "lndhub_go": {
         "title": "LNDHub",
         "page": {
@@ -179,23 +165,8 @@
         }
       },
       "galoy": {
-        "phone_number": {
-          "label": ""
-        },
-        "sms_code": {
-          "label": ""
-        },
-        "token": {
-          "label": "",
-          "info": ""
-        },
         "actions": {
           "login": "Saluti"
-        },
-        "errors": {
-          "setup_failed": "",
-          "missing_token": "",
-          "invalid_token": ""
         }
       },
       "btcpay": {
@@ -250,13 +221,10 @@
         "send_satoshis": "⚡️ Sendi Bitmonon ⚡️",
         "enable_now": ""
       },
-      "recent_transactions": "",
       "allowance_view": {
-        "recent_transactions": "",
         "no_transactions": ""
       },
       "default_view": {
-        "recent_transactions": "",
         "is_blocked_hint": ""
       }
     },

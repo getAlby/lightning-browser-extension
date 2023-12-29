@@ -425,8 +425,7 @@
         "30008": "โปรไฟล์เหรียญตรา",
         "30009": "คำจำกัดความของเหรียญตรา",
         "30023": "เนื้อหาแบบยาว",
-        "30078": "ข้อมูลเฉพาะแอปพลิเคชัน",
-        "unknown": "ประเภทของ nostr event {{kind}}"
+        "30078": "ข้อมูลเฉพาะแอปพลิเคชัน"
       },
       "title": "Nostr",
       "block_added": "เพื่ม {{host}} เข้าสู่แบล็คลิส โปรดรีเฟรชหน้าเว็บใหม่",
@@ -434,20 +433,15 @@
       "content": "เว็บไซต์นี้ขอให้คุณลงชื่อ:",
       "view_details": "ดูรายละเอียด",
       "hide_details": "ซ่อนรายละเอียด",
-      "no_content": "(ไม่มีเนื้อหา)",
-      "allow_sign": "อนุญาตให้ {{host}} ลงนาม:",
-      "allow_sign_event": "อนุญาตให้ {{host}} ลงนามใน {{kind}}:"
+      "allow_sign": "อนุญาตให้ {{host}} ลงนาม:"
     },
     "choose_path": {
       "other": {
         "title": "wallets อื่น ๆ",
-        "description": "เชื่อมต่อกับ Lightning wallet หรือ โหนดของคุณ และจากตัวเชื่อมต่อต่างๆ",
-        "connect": "เชื่อมต่อ",
-        "and_more": "& อื่น ๆ …"
+        "connect": "เชื่อมต่อ"
       },
       "alby": {
         "title": "บัญชี Alby",
-        "description": "ทำการสมัครหรือใช้บัญชี Alby ที่มีอยู่ของคุณเพื่อเริ่มต้นใช้งานการชำระเงินด้วย Lightning ได้อย่างรวดเร็ว",
         "connect": "เชื่อมต่อกับ Alby"
       }
     },
@@ -481,20 +475,6 @@
         "page": {
           "title": "เชื่อมต่อกับ LND node ของคุณ",
           "description": "1. เปิด Lightning Terminal และเลือก <0> เชื่อมต่อ Lightning Node </0> จากแถบด้านข้าง </1> 2. คลิก <0> สร้างเซสชันใหม่ </0><1/> 3. ตั้งชื่อเซสชัน เลือกสิทธิ์ที่ต้องการและกดยืนยัน <1/>4. <0> คัดลอก pairing phrase </0> และวางมันข้างล่าง"
-        }
-      },
-      "lndhub_bluewallet": {
-        "title": "Bluewallet",
-        "page": {
-          "title": "เชื่อมต่อกับ BlueWallet",
-          "description": "ใน BlueWallet เลือกกระเป๋าที่คุณต้องการเชื่อมต่อ, เปิดมันขึ้น , คลิกที่ “…” , คลิกที่ ส่งออก/สำรองข้แมูล จากนั้นแสกน QR code ด้วย webcam ของคุณ"
-        },
-        "errors": {
-          "invalid_uri": "BlueWallet URI ไม่ถูกต้อง",
-          "connection_failed": "เกิดข้อผิดพลาดในการเชื่อมต่อ โปรดตรวจสอบ BlueWallet URI ของคุณถูกต้องหรือไม่ ?"
-        },
-        "uri": {
-          "label": "ส่งออก URI จาก BlueWallet"
         }
       },
       "lndhub_go": {
@@ -590,58 +570,16 @@
           "placeholder": "your-node-onion-address:port"
         }
       },
-      "galoy": {
-        "token": {
-          "info": "การรวม {{label}} กับ Alby อยู่ในรุ่นเบต้าและแนะนำสำหรับ advanced users.<br><br> คุณสามารถรับโทเค็นการเข้าถึงของคุณได้โดยไปที่แอปมือถือ คลิกที่ไอคอนการตั้งค่า จากนั้นแตะ 3 ครั้งบนหมายเลขบิวด์เพื่อเปิดเมนูสำหรับนักพัฒนา<br><br>โทเค็นการเข้าถึงสามารถคัดลอกได้จากที่นี่<br><br>",
-          "label": "โปรดใส่ Access token"
-        },
-        "errors": {
-          "missing_token": "Access token สูญหาย ไม่สามารถเข้าสู่ระบบได้",
-          "setup_failed": "การตั้งค่าล้มเหลว",
-          "invalid_token": "Access token ไม่ถูกต้อง"
-        },
-        "actions": {
-          "login": "เข้าสู่ระบบ"
-        },
-        "phone_number": {
-          "label": "ใส่เบอร์โทรศัพท์มือถือของคุณ"
-        },
-        "sms_code": {
-          "label": "โปรดใส่ SMS verification code"
+      "blink": {
+        "title": "Blink plånbok",
+        "page": {
+          "title": "Anslut <0>Blink Wallet</0>"
         }
       },
       "bitcoin_jungle": {
+        "title": "Bitcoin Jungle Wallet",
         "page": {
           "title": "เชื่อมต่อกับ <0>Bitcoin Jungle Wallet</0>"
-        },
-        "title": "Bitcoin Jungle Wallet"
-      },
-      "kollider": {
-        "title": "Kollider",
-        "description": "เข้าสู่ระบบ บัญชี Kollider ของคุณ",
-        "warning": "⚠️ โปรดตรวจสอบให้แน่ใจว่าคุณจัดเก็บข้อมูล credentials ของคุณอย่างปลอดภัยใน password manager หากไม่มี credentials บัญชีของคุณจะไม่สามารถกู้คืนได้",
-        "errors": {
-          "registration_limit_exceeded": "การลงทะเบียนถึงขีดจำกัด โปรดลองอีกครั้งในภายหลัง",
-          "connection_failed": "เกิดข้อผิดพลาดในการเชื่อมต่อ โปรดตรวจสอบข้อมูลบัญชีของคุณว่าถูกต้องหรือไม่ ?",
-          "user_already_exists": "มีชื่อผู้ใช้นี้อยู่แล้ว"
-        },
-        "choose_path": {
-          "title": "เชื่อมต่อกับ Kollider Wallet ของคุณ",
-          "description": "เข้าสู่ระบบ หรือ สมัครบัญชี Kollider เพื่อเชื่อมต่อกับ Alby",
-          "create_new": "สมัครใช้งาน"
-        },
-        "create": {
-          "title": "สร้างบัญชี Kollider และเชื่อมต่อกับ Alby",
-          "description": "สร้างบัญชี Kollider เพื่อ ส่ง, รับ และแลกเปลี่ยน Bitcoin"
-        },
-        "login": {
-          "title": "เชื่อมต่อกับบัญชี Kollider ของคุณ"
-        },
-        "username": {
-          "label": "ชื่อผู้ใช้"
-        },
-        "currency": {
-          "label": "เลือกสกุลเงินในบัญชีของคุณ"
         }
       },
       "btcpay": {
@@ -732,18 +670,12 @@
         "send_satoshis": "⚡️ส่งซาโตชิ⚡️",
         "enable_now": "เปิดใช้งานเดี๋ยวนี้"
       },
-      "recent_transactions": "ธุรกรรมทั้งหมด",
       "allowance_view": {
-        "recent_transactions": "ธุรกรรมทั้งหมด",
         "no_transactions": "ยังไม่มีธุรกรรมบน <0>{{name}}</0>"
       },
       "default_view": {
-        "recent_transactions": "ธุรกรรมทั้งหมด",
         "is_blocked_hint": "Alby ถูกปิดใช้งานบน {{host}}",
-        "block_removed": "เปิดใช้งาน {{host}} โปรด รีเฟรชหน้าเว็บไซต์",
-        "no_outgoing_transactions": "ไม่มีธุรกรรมออกจากบัญชีนี้",
-        "no_incoming_transactions": "ไม่มีธุรกกรมเข้ามาที่บัญชีนี้",
-        "all_transactions_link": "ดูธุรกรรมทั้งหมด"
+        "block_removed": "เปิดใช้งาน {{host}} โปรด รีเฟรชหน้าเว็บไซต์"
       }
     },
     "lnurlwithdraw": {
@@ -871,10 +803,6 @@
     },
     "transactions": {
       "title": "การทำธุรกรรม",
-      "description": {
-        "outgoing": "ธุรกรรมขาออกสำหรับบัญชีนี้",
-        "incoming": "ธุรกรรมขาเข้าสำหรับบัญชีนี้"
-      },
       "list_empty": "ยังไม่มีการทำธุรกรรม"
     }
   },
@@ -1132,12 +1060,6 @@
         "podcast": "พอดคาสต์"
       },
       "open_location": "เปิดเว็บไซต์"
-    },
-    "transaction_list": {
-      "tabs": {
-        "outgoing": "ขาออก",
-        "incoming": "ขาเข้า"
-      }
     },
     "account_menu": {
       "screen_reader": "เมนูแบบเลื่อนลง",

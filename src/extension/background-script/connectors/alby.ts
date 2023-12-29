@@ -42,6 +42,7 @@ export default class Alby implements Connector {
   private config: Config;
   private _client: Client | undefined;
   private _authUser: auth.OAuth2User | undefined;
+  private _cache = new Map<string, object>();
 
   constructor(account: Account, config: Config) {
     this.account = account;
@@ -98,7 +99,7 @@ export default class Alby implements Connector {
         custom_records: invoice.custom_records,
         id: `${invoice.payment_request}-${index}`,
         memo: invoice.comment || invoice.memo,
-        preimage: "", // alby wallet api doesn't support preimage (yet)
+        preimage: invoice.preimage ?? "",
         payment_hash: invoice.payment_hash,
         settled: invoice.settled,
         settleDate: new Date(invoice.settled_at).getTime(),
@@ -106,6 +107,7 @@ export default class Alby implements Connector {
         type: invoice.type == "incoming" ? "received" : "sent",
       })
     );
+
     return {
       data: {
         transactions,
@@ -116,16 +118,27 @@ export default class Alby implements Connector {
   async getInfo(): Promise<
     GetInfoResponse<WebLNNode & GetAccountInformationResponse>
   > {
+    const cacheKey = "getInfo";
+    const cacheValue = this._cache.get(cacheKey) as GetInfoResponse<
+      WebLNNode & GetAccountInformationResponse
+    >;
+    if (cacheValue) {
+      return cacheValue;
+    }
+
     try {
       const info = await this._request((client) =>
         client.accountInformation({})
       );
-      return {
+      const returnValue = {
         data: {
           ...info,
           alias: "🐝 getalby.com",
         },
       };
+      this._cache.set(cacheKey, returnValue);
+
+      return returnValue;
     } catch (error) {
       console.error(error);
       throw error;
@@ -237,7 +250,8 @@ export default class Alby implements Connector {
         throw new Error("OAuth client credentials missing");
       }
 
-      const redirectURL = browser.identity.getRedirectURL();
+      const redirectURL = "https://getalby.com/extension/connect";
+
       const authClient = new auth.OAuth2User({
         request_options: this._getRequestOptions(),
         client_id: clientId,
@@ -273,40 +287,72 @@ export default class Alby implements Connector {
           }
           return authClient;
         } catch (error) {
-          // if auth token refresh fails, the refresh token has probably expired or is invalid
-          // the user will be asked to re-login
           console.error("Failed to request new auth token", error);
         }
       }
 
-      let authUrl = authClient.generateAuthURL({
+      let authUrl = await authClient.generateAuthURL({
         code_challenge_method: "S256",
         authorizeUrl: process.env.ALBY_OAUTH_AUTHORIZE_URL,
       });
 
       authUrl += "&webln=false"; // stop getalby.com login modal launching lnurl auth
-      const authResult = await this.launchWebAuthFlow(authUrl);
-      const code = new URL(authResult).searchParams.get("code");
-      if (!code) {
-        throw new Error("Authentication failed: missing authResult");
-      }
 
-      const token = await authClient.requestAccessToken(code);
-      await this._updateOAuthToken(token.token);
-      return authClient;
+      const oAuthTab = await browser.tabs.create({ url: authUrl });
+
+      return new Promise<auth.OAuth2User>((resolve, reject) => {
+        const handleTabUpdated = (
+          tabId: number,
+          changeInfo: browser.Tabs.OnUpdatedChangeInfoType,
+          tab: browser.Tabs.Tab
+        ) => {
+          if (changeInfo.status === "complete" && tabId === oAuthTab.id) {
+            const authorizationCode = this.extractCodeFromTabUrl(tab.url);
+
+            if (!authorizationCode) {
+              throw new Error("no authorization code");
+            }
+
+            authClient
+              .requestAccessToken(authorizationCode)
+              .then((token) => {
+                this._updateOAuthToken(token.token);
+                resolve(authClient);
+              })
+              .catch((error) => {
+                console.error("Failed to request new auth token", error);
+                reject(error);
+              })
+              .finally(() => {
+                browser.tabs.remove(tabId);
+                browser.tabs.onUpdated.removeListener(handleTabUpdated);
+              });
+          }
+        };
+        const handleTabRemoved = (tabId: number) => {
+          if (tabId === oAuthTab.id) {
+            // The user closed the authentication tab without completing the flow
+            const error = new Error("OAuth authentication canceled by user");
+            reject(error);
+            browser.tabs.onRemoved.removeListener(handleTabRemoved);
+          }
+        };
+
+        browser.tabs.onUpdated.addListener(handleTabUpdated);
+        browser.tabs.onRemoved.addListener(handleTabRemoved);
+      });
     } catch (error) {
       console.error(error);
       throw error;
     }
   }
 
-  async launchWebAuthFlow(authUrl: string) {
-    const authResult = await browser.identity.launchWebAuthFlow({
-      interactive: true,
-      url: authUrl,
-    });
-
-    return authResult;
+  private extractCodeFromTabUrl(url: string | undefined): string | null {
+    if (!url) {
+      return null;
+    }
+    const urlSearchParams = new URLSearchParams(url.split("?")[1]);
+    return urlSearchParams.get("code");
   }
 
   private async _request<T>(func: (client: Client) => T) {

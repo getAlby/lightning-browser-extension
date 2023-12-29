@@ -48,20 +48,6 @@
           "connection_failed": "Yhteys epäonnistui. Ovatko LND-tunnuksesi oikein?"
         }
       },
-      "lndhub_bluewallet": {
-        "title": "Sinilompakko",
-        "page": {
-          "title": "Yhdistä sinilompakkoosi",
-          "description": "Valitse sinilompakossa lompakko, jonka haluat yhdistää, avaa se, napsauta \"...\", napsauta Vie/Varmuuskopioi näyttääksesi QR-koodin ja skannaa se webbikamerallasi."
-        },
-        "uri": {
-          "label": "Sinilompakon vienti-URI"
-        },
-        "errors": {
-          "invalid_uri": "Virheellinen sinilompakon URI",
-          "connection_failed": "Yhteys epäonnistui. Onko sinilompakon URI oikein?"
-        }
-      },
       "lndhub_go": {
         "title": "LNDHub",
         "page": {
@@ -178,26 +164,6 @@
           "title": "Yhdistä <0>Bitcoin Jungle -lompakkoon</0>"
         }
       },
-      "galoy": {
-        "phone_number": {
-          "label": "Syötä puhelinnumerosi"
-        },
-        "sms_code": {
-          "label": "Syötä tekstiviestivahvistuskoodisi"
-        },
-        "token": {
-          "label": "Syötä JWT-tunnuksesi",
-          "info": "Kirjautumistunnusta {{label}} päivitetään parhaillaan. Jos olet kokenut käyttäjä, voit napata JWT-tunnuksesi kirjautumalla sisään <0>Verkkolompakon (wallet.mainnet.galoy.io) kautta</0><1/><1/>JWT näyttää tältä: < 2>eyJhbG...</2><1/><1/>"
-        },
-        "actions": {
-          "login": "Kirjaudu sisään"
-        },
-        "errors": {
-          "setup_failed": "Määritys epäonnistui",
-          "missing_token": "JWT puuttuu, sisäänkirjautuminen ei onnistunut.",
-          "invalid_token": "virheellinen JWT välitetty"
-        }
-      },
       "btcpay": {
         "title": "BTCPay-palvelin",
         "page": {
@@ -250,13 +216,10 @@
         "send_satoshis": "⚡️ Lähetä Satoshis ⚡️",
         "enable_now": "Ota nyt käyttöön"
       },
-      "recent_transactions": "Viimeaikaiset tapahtumat",
       "allowance_view": {
-        "recent_transactions": "Viimeaikaiset tapahtumat",
         "no_transactions": "Ei vielä tapahtumia <0>{{name}}</0>:lla."
       },
       "default_view": {
-        "recent_transactions": "Viimeaikaiset tapahtumat",
         "is_blocked_hint": "Alby on tällä hetkellä poissa käytöstä {{host}}:lla"
       }
     },
@@ -621,6 +584,5 @@
     "publishers_table": {
       "payments": "maksut"
     }
-  },
-  "permissions": {}
+  }
 }

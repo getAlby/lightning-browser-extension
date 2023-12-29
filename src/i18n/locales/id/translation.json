@@ -36,14 +36,11 @@
     },
     "choose_path": {
       "other": {
-        "description": "Sambungkan dengan wallet lightning atau node yang sudah ada dan sesuaikan pada berbagai konektor.",
-        "and_more": "& lainnya...",
         "connect": "Sambung",
         "title": "Wallets Lainnya"
       },
       "alby": {
         "title": "Akun Alby",
-        "description": "Daftar atau gunakan akun Alby yang sudah ada untuk memulai pembayaran dengan lightning secara cepat.",
         "connect": "Koneksi dengan Alby"
       }
     },
@@ -94,20 +91,6 @@
         "pairing_phrase": {
           "label": "Pairing phrase kamu: ",
           "placeholder": "secret stack sats phrase"
-        }
-      },
-      "lndhub_bluewallet": {
-        "title": "Bluewallet",
-        "page": {
-          "title": "Sambungkan dengan Bluewallet",
-          "description": "Pada Bluewallet, pilih wallet yang kamu ingin sambungkan, buka, lalu klik pada \"...\", klik pada Export/Backup untuk menampilkan kode QR dan pindai dengan webcam kamu."
-        },
-        "uri": {
-          "label": "BlueWallet Export URI"
-        },
-        "errors": {
-          "invalid_uri": "BlueWallet URI Salah",
-          "connection_failed": "Koneksi gagal. Apakah BlueWallet URI kamu benar?"
         }
       },
       "lndhub_go": {
@@ -226,54 +209,6 @@
           "title": "Sambungkan dengan <0>Bitcoin Jungle Wallet</0>"
         }
       },
-      "galoy": {
-        "phone_number": {
-          "label": "Masukkan nomor telepon kamu"
-        },
-        "sms_code": {
-          "label": "Masukkan kode verifikasi SMS"
-        },
-        "token": {
-          "label": "Masukkan token Access",
-          "info": "{{label}} integrasi dengan Alby masih berstatus alpha dan hanya disarankan untuk pengguna yang berpengalaman.<br><br>Kamu bisa mengambil token Access pada aplikasi mobile, klik pada ikon pengaturan, dan sentuh 3 kali pada build number untuk membukan developer menu.<br><br>kemudian, token akses akan bisa disalin.<br><br>"
-        },
-        "errors": {
-          "setup_failed": "Persiapan gagal",
-          "missing_token": "Token akses tidak ada, tidak dapat masuk.",
-          "invalid_token": "Token akses salah"
-        },
-        "actions": {
-          "login": "Login"
-        }
-      },
-      "kollider": {
-        "title": "Kollider",
-        "description": "Masuk pada akun Kollider",
-        "warning": "⚠️ Mohon pastikan kamu menyimpan kredensial di aplikasi password manager secara aman. Jika tidak ada kredensial tersebut, akun kamu tidak dapat dipulihkan.",
-        "choose_path": {
-          "title": "Sambungkan dengan Kollider Wallet",
-          "description": "Login atau daftar akun Kollider dan sambungkan dengan Alby.",
-          "create_new": "Daftar"
-        },
-        "create": {
-          "title": "Buat akun Kollider dan sambungkan dengan Alby",
-          "description": "Buat akun Kollider untuk mengirim, menerima, dan menukar Bitcoin."
-        },
-        "login": {
-          "title": "Sambungkan akun Kollider kamu"
-        },
-        "username": {
-          "label": "Username"
-        },
-        "currency": {
-          "label": "Pilih mata uang akun kamu"
-        },
-        "errors": {
-          "connection_failed": "Koneksi gagal. Apakah kamu yakin data akun sudah benar?",
-          "user_already_exists": "Username sudah terpakai",
-          "registration_limit_exceeded": "Limit pendaftaran sudah maksimal, coba lagi dalam beberapa saat."
-        }
-      },
       "btcpay": {
         "page": {
           "title": "Sambungkan dengan node BTCPay LND",
@@ -351,18 +286,12 @@
         "send_satoshis": "⚡️ Kirim Satoshis ⚡️",
         "enable_now": "Aktifkan Sekarang"
       },
-      "recent_transactions": "Transaksi terbaru",
       "allowance_view": {
-        "no_transactions": "Tidak ada transaksi pada <0>{{name}}</0>.",
-        "recent_transactions": "Transaksi Terbaru"
+        "no_transactions": "Tidak ada transaksi pada <0>{{name}}</0>."
       },
       "default_view": {
         "is_blocked_hint": "Alby sedang tidak aktif pada {{host}}",
-        "block_removed": "Aktifkan {{host}}. Silakan muat ulang website.",
-        "no_outgoing_transactions": "Tidak ada transaksi keluar untuk akun ini.",
-        "no_incoming_transactions": "Tidak ada transaksi masuk untuk akun ini.",
-        "all_transactions_link": "Lihat semua transaksi",
-        "recent_transactions": "Transaksi Terbaru"
+        "block_removed": "Aktifkan {{host}}. Silakan muat ulang website."
       }
     },
     "accounts": {
@@ -800,8 +729,7 @@
         "30078": "data terkait aplikasi"
       },
       "allow": "Izinkan website ini untuk:",
-      "view_details": "Lihat rincian",
-      "no_content": "(Tidak ada konten)"
+      "view_details": "Lihat rincian"
     },
     "on_chain": {
       "title": "Terima melalui alamat bitcoin",
@@ -818,10 +746,6 @@
     },
     "transactions": {
       "title": "Transaksi",
-      "description": {
-        "outgoing": "Transaksi keluar untuk akun ini",
-        "incoming": "Transaksi masuk untuk akun ini"
-      },
       "list_empty": "Tidak ada transaksi."
     }
   },
@@ -909,23 +833,23 @@
   },
   "permissions": {
     "nostr": {
-      "nip04decrypt": "Dekripsi data.",
-      "getpublickey": "Membaca kunci publik Anda.",
-      "nip04encrypt": "Enkripsi data."
+      "nip04decrypt": "Dekripsi data",
+      "getpublickey": "Membaca kunci publik Anda",
+      "nip04encrypt": "Enkripsi data"
     },
     "commando": {
-      "decode": "Decode teks bolt11/bolt12/rune."
+      "decode": "Decode teks bolt11/bolt12/rune"
     },
     "lnc": {
-      "addinvoice": "Buat invoice baru.",
-      "listinvoices": "Dapatkan daftar dari semua invoice.",
-      "openchannel": "Buka channel baru.",
-      "listchannels": "Dapatkan deskripsi dari semua channel yang terbuka.",
-      "getinfo": "Dapatkan informasi node."
+      "addinvoice": "Buat invoice baru",
+      "listinvoices": "Dapatkan daftar dari semua invoice",
+      "openchannel": "Buka channel baru",
+      "listchannels": "Dapatkan deskripsi dari semua channel yang terbuka",
+      "getinfo": "Dapatkan informasi node"
     },
     "lnd": {
-      "addinvoice": "Buat invoice baru.",
-      "addholdinvoice": "Buat invoice HOLD baru."
+      "addinvoice": "Buat invoice baru",
+      "addholdinvoice": "Buat invoice HOLD baru"
     }
   },
   "common": {

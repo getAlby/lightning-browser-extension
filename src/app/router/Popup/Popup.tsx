@@ -70,7 +70,7 @@ const Layout = () => {
     <div className="flex flex-col h-full">
       <Navbar />
 
-      <main className="flex flex-col grow min-h-0">
+      <main className="flex flex-col grow">
         <Outlet />
         <Toaster />
       </main>

@@ -350,7 +350,7 @@ function LNURLPay() {
             </dl>
           )}
         </div>
-        <div className="mb-4">
+        <div>
           <Button onClick={close} label={tCommon("actions.close")} fullWidth />
         </div>
       </Container>
@@ -412,12 +412,9 @@ function LNURLPay() {
                   description={getRecipient()}
                   image={navState.origin?.icon || getImage()}
                 />
-                <form onSubmit={handleSubmit} className="h-full">
-                  <fieldset
-                    disabled={loadingConfirm}
-                    className="h-full flex flex-col justify-between"
-                  >
-                    <div>
+                <form onSubmit={handleSubmit} className="flex grow">
+                  <div className="grow flex flex-col justify-between">
+                    <fieldset disabled={loadingConfirm}>
                       <dl className="mt-4 overflow-hidden">
                         <>
                           {formattedMetadata(details.metadata).map(
@@ -480,7 +477,7 @@ function LNURLPay() {
                       )}
 
                       {(showNameField() || showEmailField()) && (
-                        <div className="flex justify-center mt-4">
+                        <div className="flex justify-center mt-4 caret-transparent">
                           <Hyperlink onClick={toggleShowMoreFields}>
                             {tCommon("actions.more")}{" "}
                             {showMoreFields ? (
@@ -522,7 +519,7 @@ function LNURLPay() {
                           )}
                         </div>
                       )}
-                    </div>
+                    </fieldset>
                     <div className="mt-2 dark:border-white/10">
                       <ConfirmOrCancel
                         isFocused={false}
@@ -534,7 +531,7 @@ function LNURLPay() {
                         onCancel={reject}
                       />
                     </div>
-                  </fieldset>
+                  </div>
                 </form>
               </Container>
             </div>

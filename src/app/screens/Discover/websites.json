@@ -150,12 +150,6 @@
     "title": "trading",
     "items": [
       {
-        "title": "Kollider",
-        "subtitle": "Instant Bitcoin derivatives trading",
-        "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/kollider_thumbnail.png",
-        "url": "https://kollider.xyz"
-      },
-      {
         "title": "LNMarkets",
         "subtitle": "Instant Bitcoin derivatives trading",
         "logo": "https://cdn.getalby-assets.com/alby-extension-website-screen/lnmarkets.png",

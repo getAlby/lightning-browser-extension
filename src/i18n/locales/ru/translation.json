@@ -31,13 +31,10 @@
     },
     "choose_path": {
       "alby": {
-        "title": "",
-        "description": ""
+        "title": ""
       },
       "other": {
         "title": "",
-        "description": "",
-        "and_more": "",
         "connect": ""
       }
     },
@@ -88,20 +85,6 @@
         "pairing_phrase": {
           "label": "",
           "placeholder": ""
-        }
-      },
-      "lndhub_bluewallet": {
-        "title": "",
-        "page": {
-          "title": "",
-          "description": ""
-        },
-        "uri": {
-          "label": ""
-        },
-        "errors": {
-          "invalid_uri": "",
-          "connection_failed": ""
         }
       },
       "lndhub_go": {
@@ -221,16 +204,6 @@
         }
       },
       "galoy": {
-        "phone_number": {
-          "label": ""
-        },
-        "sms_code": {
-          "label": ""
-        },
-        "token": {
-          "label": "",
-          "info": ""
-        },
         "actions": {
           "login": ""
         },
@@ -238,19 +211,6 @@
           "setup_failed": "",
           "missing_token": "",
           "invalid_token": ""
-        }
-      },
-      "kollider": {
-        "title": "",
-        "description": "",
-        "username": {
-          "label": ""
-        },
-        "currency": {
-          "label": ""
-        },
-        "errors": {
-          "connection_failed": ""
         }
       },
       "btcpay": {
@@ -305,13 +265,10 @@
         "send_satoshis": "",
         "enable_now": ""
       },
-      "recent_transactions": "",
       "allowance_view": {
-        "recent_transactions": "",
         "no_transactions": ""
       },
       "default_view": {
-        "recent_transactions": "",
         "is_blocked_hint": "",
         "block_removed": ""
       }
