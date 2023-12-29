@@ -123,7 +123,8 @@ export default function TestConnection() {
                 <div className="mt-6">
                   <TestConnectionResultCard
                     color="bg-gray-100"
-                    alias={`${accountInfo.name} - ${accountInfo.alias}`}
+                    accountName={accountInfo.name}
+                    alias={accountInfo.alias}
                     satoshis={
                       typeof accountInfo.balance === "number"
                         ? getFormattedInCurrency(
