@@ -29,7 +29,7 @@ const setMigrated = (name: Migration): Promise<void> => {
 };
 
 const migrations = {
-  migrateAllowanceDomainProtocol: async () => {
+  migrateHostInAllowances: async () => {
     const allowances = await db.allowances.toArray();
 
     allowances.forEach(async (allowances) => {
@@ -52,12 +52,23 @@ const migrations = {
   },
 
   migrateHostInBlocklist: async () => {
-    const blocklist = await db.blocklist.toArray();
+    const blocklists = await db.blocklist.toArray();
 
-    blocklist.forEach(async (blocklist) => {
-      blocklist.id &&
-        (await db.blocklist.update(blocklist.id, {
-          host: `https://${blocklist.host}`,
+    blocklists.forEach(async (blocklists) => {
+      blocklists.id &&
+        (await db.blocklist.update(blocklists.id, {
+          host: `https://${blocklists.host}`,
+        }));
+    });
+  },
+
+  migrateHostInPermissions: async () => {
+    const permissions = await db.permissions.toArray();
+
+    permissions.forEach(async (permissions) => {
+      permissions.id &&
+        (await db.permissions.update(permissions.id, {
+          host: `https://${permissions.host}`,
         }));
     });
   },
@@ -67,10 +78,10 @@ const migrate = async () => {
   // going forward we can iterate through the the migrations object above and DRY this up:
   // Object.keys(migrations).forEach((name: string) => {
   // example:
-  if (shouldMigrate("migrateAllowanceDomainProtocol")) {
-    console.info("Running migration for: migrateAllowanceDomainProtocol");
-    await migrations["migrateAllowanceDomainProtocol"]();
-    await setMigrated("migrateAllowanceDomainProtocol");
+  if (shouldMigrate("migrateHostInAllowances")) {
+    console.info("Running migration for: migrateHostInAllowances");
+    await migrations["migrateHostInAllowances"]();
+    await setMigrated("migrateHostInAllowances");
   }
 
   if (shouldMigrate("migrateHostInPayments")) {
@@ -83,6 +94,11 @@ const migrate = async () => {
     console.info("Running migration for: migrateHostInBlocklist");
     await migrations["migrateHostInBlocklist"]();
     await setMigrated("migrateHostInBlocklist");
+  }
+  if (shouldMigrate("migrateHostInPermissions")) {
+    console.info("Running migration for: migrateHostInPermissions");
+    await migrations["migrateHostInPermissions"]();
+    await setMigrated("migrateHostInPermissions");
   }
 };
 
