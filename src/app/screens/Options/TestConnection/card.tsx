@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 type Props = {
   alias: string;
   accountName: string;
@@ -15,13 +17,16 @@ export default function TestConnectionResultCard({
   color,
   currency,
 }: Props) {
+  const { t } = useTranslation("translation", {
+    keyPrefix: "welcome.test_connection",
+  });
   return (
     <div className={`${color} rounded-lg py-6 dark:bg-gray-600`}>
       <p className="font-normal text-black ml-6 dark:text-white break-words">
-        Account Name: {accountName}
+        {t("account_name", { accountName })}
       </p>
       <p className="font-normal text-black ml-6 dark:text-white">
-        Alias: {alias}
+        {t("alias", { alias })}
       </p>
       <p className="text-2xl font-bold text-black ml-6 mt-2 dark:text-white">
         {satoshis}
