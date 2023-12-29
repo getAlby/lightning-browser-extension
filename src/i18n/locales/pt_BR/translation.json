@@ -149,12 +149,18 @@
         "title": "Carteira Blink",
         "page": {
           "title": "Conecte-se na <0>Carteira Blink</0>"
+        },
+        "token": {
+          "label": "Insira a chave API"
         }
       },
       "bitcoin_jungle": {
         "title": "Carteira Bitcoin Jungle",
         "page": {
           "title": "Conecte-se na <0>Carteira Bitcoin Jungle</0>"
+        },
+        "token": {
+          "label": "Insira o token de acesso"
         }
       },
       "btcpay": {
@@ -226,6 +232,21 @@
         "title": "Lightning Terminal (LNC)",
         "pairing_phrase": {
           "label": "Frase de pareamento "
+        }
+      },
+      "galoy": {
+        "sms_code": {
+          "label": "Insira o código de verificação SMS"
+        },
+        "actions": {
+          "login": "Login"
+        },
+        "phone_number": {
+          "label": "Insira seu número de telefone"
+        },
+        "errors": {
+          "setup_failed": "Falha na configuração",
+          "invalid_token": "Falha na autorização. Verifique sua chave API e tente novamente."
         }
       }
     },
@@ -302,7 +323,7 @@
             "description": "Você pode gerar chaves Nostr a partir de sua chave mestra ou importar sua chave privada existente colando-a no campo \"Chave privada Nostr\".",
             "no_secret_key": "💡 Você ainda não tem uma chave mestra. <0>Clique aqui</0></div> para gerar sua chave mestra e suas chaves Nostr.",
             "imported_key_warning": "⚠️ No momento, você está usando uma chave Nostr importada ou gerada aleatoriamente. Sua chave privada Nostr não pode ser restaurada por sua frase de recuperação, então lembre-se de fazer o backup de sua chave privada Nostr separadamente.",
-            "remove": "Remover chaves existentes"
+            "remove": "Remover esta chave"
           },
           "setup": {
             "title": "Configure suas chaves Nostr",
@@ -357,7 +378,7 @@
           },
           "backup": {
             "save": "Salvar chave mestra",
-            "button": "Ver frase de recuperação",
+            "button": "Frase de recuperação",
             "protocols": {
               "nostr": "Nostr"
             },
@@ -661,7 +682,6 @@
       "block_added": "{{host}} adicionado na lista de bloqueio, por favor recarregue o site.",
       "allow_sign": "Permitir {{host}} assinar:",
       "view_details": "Ver detalhes",
-      "allow_sign_event": "Permitir {{host}} assinar {{kind}}:",
       "hide_details": "Ocultar detalhes",
       "kinds": {
         "0": "metadados",
@@ -671,9 +691,11 @@
         "5": "exclusão de evento",
         "7": "reação",
         "9735": "zap",
-        "unknown": "evento nostr do tipo {{kind}}"
+        "unknown": "tipo {{kind}}"
       },
-      "no_content": "(Sem conteúdo)"
+      "allow_sign_event": "Permitir {{host}} assinar um evento {{kind}}",
+      "allow_encrypt": "Permitir {{host}} criptografar a mensagem:",
+      "allow_decrypt": "Permitir {{host}} descriptografar a mensagem:"
     },
     "confirm_request_permission": {
       "title": "Aprovar solicitação",
@@ -712,12 +734,13 @@
     "choose_path": {
       "alby": {
         "title": "Conta Alby",
-        "connect": "Conecte-se com a Alby"
+        "connect": "Conecte-se com a Alby",
+        "description": "Crie uma conta Alby ou faça o login caso já possua uma conta conosco."
       },
       "other": {
         "title": "Outras contas",
-        "and_more": "& mais...",
-        "connect": "Conectar outras contas"
+        "connect": "Conectar outras contas",
+        "description": "Conecte-se em sua carteira bitcoin ou em um dos vários servidores de carteira disponíveis."
       }
     },
     "alby": {
@@ -740,7 +763,7 @@
     "transactions": {
       "title": "Transações",
       "list_empty": "Sem transações.",
-      "description": "Transações nesta conta"
+      "description": "Extrato de transações desta conta"
     },
     "distributions": {
       "umbrel": {
@@ -868,7 +891,8 @@
     },
     "nostr_enable": {
       "request1": "Solicitar a leitura de sua chave pública Nostr",
-      "title": "Conectar no Nostr"
+      "title": "Conectar no Nostr",
+      "request2": "Solicitar assinar eventos usando sua chave privada"
     },
     "webln_enable": {
       "title": "Conectar no WebLN",
@@ -982,9 +1006,11 @@
       "block_added": "{{host}} adicionado à lista de bloqueio, recarregue o site.",
       "request1": "Solicitar aprovação para transações",
       "allow": "Permitir este site:",
-      "block_and_ignore": "Bloquear e ignorar {{host}}"
+      "block_and_ignore": "Bloquear e ignorar {{host}}",
+      "insecure_domain_warn": "⚠️ Você está se conectando a um domínio inseguro."
     },
-    "website": "Site"
+    "website": "Site",
+    "apps": "Apps"
   },
   "components": {
     "allowance_menu": {
@@ -1024,7 +1050,9 @@
         "message": "Mensagem",
         "app": "App",
         "podcast": "Podcast",
-        "episode": "Episódio"
+        "episode": "Episódio",
+        "action": "Ação",
+        "totalAmount": "Quantia total"
       },
       "open_location": "Abrir link",
       "payment_hash": "Hash do pagamento",

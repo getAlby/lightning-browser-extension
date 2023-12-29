@@ -75,6 +75,6 @@ describe("ConfirmPaymentAsync", () => {
 
     expect(await screen.findByText("Amount")).toBeInTheDocument();
     expect(await screen.findByText("Description")).toBeInTheDocument();
-    expect(await screen.findByText("(~$0.01)")).toBeInTheDocument();
+    expect(await screen.findByText("~$0.01")).toBeInTheDocument();
   });
 });

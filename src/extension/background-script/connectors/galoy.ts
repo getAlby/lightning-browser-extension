@@ -273,6 +273,21 @@ class Galoy implements Connector {
             errors {
               message
             }
+            transaction {
+              settlementVia {
+                ... on SettlementViaLn {
+                  ${
+                    this.config.apiCompatibilityMode
+                      ? "paymentSecret"
+                      : "preImage"
+                  }
+                }
+                ... on SettlementViaIntraLedger {
+                  counterPartyUsername
+                  counterPartyWalletId
+                }
+              }
+            }
           }
         }
       `,
@@ -295,6 +310,25 @@ class Galoy implements Connector {
         throw new Error(errs[0].message || JSON.stringify(errs));
       }
 
+      const transaction = data.lnInvoicePaymentSend.transaction;
+      let preimageMessage = "No preimage received";
+
+      if (transaction && transaction.settlementVia) {
+        if (
+          "preImage" in transaction.settlementVia ||
+          "paymentSecret" in transaction.settlementVia
+        ) {
+          preimageMessage =
+            transaction.settlementVia.preImage ||
+            transaction.settlementVia.paymentSecret;
+        } else if (
+          "counterPartyUsername" in transaction.settlementVia ||
+          "counterPartyWalletId" in transaction.settlementVia
+        ) {
+          preimageMessage = "No preimage, the payment was settled intraledger";
+        }
+      }
+
       switch (data.lnInvoicePaymentSend.status) {
         case "ALREADY_PAID":
           throw new Error("Invoice was already paid.");
@@ -311,7 +345,7 @@ class Galoy implements Connector {
         default:
           return {
             data: {
-              preimage: "No preimage received",
+              preimage: preimageMessage,
               paymentHash,
               route: { total_amt: amountInSats, total_fees: 0 },
             },
