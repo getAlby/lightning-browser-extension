@@ -72,7 +72,7 @@ const data: PaymentNotificationData = {
   },
   origin: {
     location: "test",
-    domain: "",
+    domain: "https://getalby.com",
     host: "https://getalby.com",
     pathname: "test",
     name: "Alby",
