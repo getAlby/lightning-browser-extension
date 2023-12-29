@@ -36,8 +36,8 @@ function LNURLAuthComponent() {
         lnurlDetails: details,
       });
 
-      if (navState.isPrompt && origin?.host) {
-        const allowance = await api.getAllowance(origin.host);
+      if (navState.isPrompt && origin?.domain) {
+        const allowance = await api.getAllowance(origin.domain);
 
         if (allowance.lnurlAuth === false) {
           await msg.request("updateAllowance", {
