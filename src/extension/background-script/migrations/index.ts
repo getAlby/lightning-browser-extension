@@ -50,6 +50,17 @@ const migrations = {
         }));
     });
   },
+
+  migrateHostInBlocklist: async () => {
+    const blocklist = await db.blocklist.toArray();
+
+    blocklist.forEach(async (blocklist) => {
+      blocklist.id &&
+        (await db.blocklist.update(blocklist.id, {
+          host: `https://${blocklist.host}`,
+        }));
+    });
+  },
 };
 
 const migrate = async () => {
@@ -66,6 +77,12 @@ const migrate = async () => {
     console.info("Running migration for: migrateHostInPayments");
     await migrations["migrateHostInPayments"]();
     await setMigrated("migrateHostInPayments");
+  }
+
+  if (shouldMigrate("migrateHostInBlocklist")) {
+    console.info("Running migration for: migrateHostInBlocklist");
+    await migrations["migrateHostInBlocklist"]();
+    await setMigrated("migrateHostInBlocklist");
   }
 };
 
