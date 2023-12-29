@@ -50,28 +50,6 @@ const migrations = {
         }));
     });
   },
-
-  migrateHostInBlocklist: async () => {
-    const blocklists = await db.blocklist.toArray();
-
-    blocklists.forEach(async (blocklists) => {
-      blocklists.id &&
-        (await db.blocklist.update(blocklists.id, {
-          host: `https://${blocklists.host}`,
-        }));
-    });
-  },
-
-  migrateHostInPermissions: async () => {
-    const permissions = await db.permissions.toArray();
-
-    permissions.forEach(async (permissions) => {
-      permissions.id &&
-        (await db.permissions.update(permissions.id, {
-          host: `https://${permissions.host}`,
-        }));
-    });
-  },
 };
 
 const migrate = async () => {
@@ -88,17 +66,6 @@ const migrate = async () => {
     console.info("Running migration for: migrateHostInPayments");
     await migrations["migrateHostInPayments"]();
     await setMigrated("migrateHostInPayments");
-  }
-
-  if (shouldMigrate("migrateHostInBlocklist")) {
-    console.info("Running migration for: migrateHostInBlocklist");
-    await migrations["migrateHostInBlocklist"]();
-    await setMigrated("migrateHostInBlocklist");
-  }
-  if (shouldMigrate("migrateHostInPermissions")) {
-    console.info("Running migration for: migrateHostInPermissions");
-    await migrations["migrateHostInPermissions"]();
-    await setMigrated("migrateHostInPermissions");
   }
 };
 
