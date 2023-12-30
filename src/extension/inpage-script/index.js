@@ -45,10 +45,12 @@ function registerLightningLinkClickHandler() {
         return;
       }
       const lightningLink = target.closest('[href^="lightning:" i]');
-      const lnurlLink = target.closest('[href^="lnurl" i]');
+      const lnurlLink = target.closest(
+        '[href^="lnurlp:" i],[href^="lnurlw:" i],[href^="lnurlc:" i]'
+      );
       const bitcoinLinkWithLighting = target.closest(
         '[href*="lightning=ln" i]'
-      ); // links with a lightning parameter and a value that starts with ln: payment requests (lnbc...) or lnurl (lnurl*)
+      ); // links with a lightning parameter and a value that starts with ln: payment requests (lnbc...) or lnurl (lnurl[pwc]:)
       let href;
       let paymentRequest;
       let lnurl;
