@@ -654,7 +654,7 @@
         "unknown": "kind {{kind}}"
       },
       "peer": "Peer",
-      "allow_sign_event": "Erlaube {{Gastgeber}}, ein {{kind}} Ereignis zu unterzeichnen",
+      "allow_sign_event": "Erlaube {{Gastgeber}}, ein <0>{{kind}}</0> Ereignis zu unterzeichnen",
       "allow_encrypt": "Erlaube {{host}}, die Nachricht zu verschlüsseln:",
       "allow_decrypt": "Erlaube {{host}}, die Nachricht zu entschlüsseln:"
     },
