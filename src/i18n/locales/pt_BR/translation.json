@@ -693,7 +693,7 @@
         "9735": "zap",
         "unknown": "tipo {{kind}}"
       },
-      "allow_sign_event": "Permitir {{host}} assinar um evento {{kind}}",
+      "allow_sign_event": "Permitir {{host}} assinar um evento <0>{{kind}}</0>",
       "allow_encrypt": "Permitir {{host}} criptografar a mensagem:",
       "allow_decrypt": "Permitir {{host}} descriptografar a mensagem:"
     },
