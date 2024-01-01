@@ -14,6 +14,8 @@ import ConnectUmbrel from "@screens/connectors/ConnectUmbrel";
 import { Route } from "react-router-dom";
 import i18n from "~/i18n/i18nConfig";
 
+import ConnectVoltage from "~/app/screens/connectors/ConnectVoltage";
+import ConnectNWC from "~/app/screens/connectors/ConnectNWC";
 import ConnectCommando from "../screens/connectors/ConnectCommando";
 import btcpay from "/static/assets/icons/btcpay.svg";
 import citadel from "/static/assets/icons/citadel.png";
@@ -27,9 +29,11 @@ import lnbits from "/static/assets/icons/lnbits.png";
 import lnd from "/static/assets/icons/lnd.png";
 import lndhubGo from "/static/assets/icons/lndhub_go.png";
 import mynode from "/static/assets/icons/mynode.png";
+import nwc from "/static/assets/icons/nwc.svg";
 import raspiblitz from "/static/assets/icons/raspiblitz.png";
 import start9 from "/static/assets/icons/start9.png";
 import umbrel from "/static/assets/icons/umbrel.png";
+import voltage from "/static/assets/icons/voltage.png";
 
 export const normalizeKey = (key: string) =>
   key as unknown as TemplateStringsArray;
@@ -95,6 +99,12 @@ const connectorMap: { [key: string]: ConnectorRoute } = {
     title: i18n.t("translation:choose_connector.lnd.title"),
     logo: lnd,
   },
+  "voltage-lnd": {
+    path: "lnd",
+    element: <ConnectVoltage />,
+    title: i18n.t("translation:choose_connector.lnd.title"),
+    logo: lnd,
+  },
   lnc: {
     path: "lnc",
     element: <ConnectLnc />,
@@ -149,6 +159,18 @@ const connectorMap: { [key: string]: ConnectorRoute } = {
     title: i18n.t("translation:choose_connector.btcpay.title"),
     logo: btcpay,
   },
+  voltage: {
+    path: "voltage",
+    element: <ConnectVoltage />,
+    title: i18n.t("translation:choose_connector.voltage.title"),
+    logo: voltage,
+  },
+  nwc: {
+    path: "nwc",
+    element: <ConnectNWC />,
+    title: i18n.t("translation:choose_connector.nwc.title"),
+    logo: nwc,
+  },
 };
 
 function getDistribution(key: string): ConnectorRoute {
@@ -188,6 +210,7 @@ const distributionMap: { [key: string]: { logo: string; children: Route[] } } =
         connectorMap["lnc"],
         connectorMap["commando"],
         connectorMap["lnbits"],
+        connectorMap["nwc"],
       ],
     },
     mynode: {
@@ -228,6 +251,7 @@ function getConnectorRoutes(): ConnectorRoute[] {
     connectorMap["lnd-hub-go"],
     connectorMap["eclair"],
     connectorMap["btcpay"],
+    connectorMap["voltage"],
     connectorMap[galoyPaths.blink],
     connectorMap[galoyPaths.bitcoinJungle],
     getDistribution("citadel"),
@@ -235,6 +259,7 @@ function getConnectorRoutes(): ConnectorRoute[] {
     getDistribution("mynode"),
     getDistribution("start9"),
     getDistribution("raspiblitz"),
+    connectorMap["nwc"],
   ];
 }
 

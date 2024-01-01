@@ -737,7 +737,6 @@
     },
     "choose_path": {
       "other": {
-        "and_more": "& mehr...",
         "title": "Andere Wallets",
         "connect": "Verbinden",
         "description": "Schließe deine vorhandene Lightning Wallet oder Node an und wähle aus verschiedenen Anschlüssen. Großartig für volle Flexibilität. Betreibe deinen eigenen Knotenpunkt."
@@ -1127,7 +1126,8 @@
       "block_added": "{{host}} zur Blockliste hinzugefügt, bitte lade die Webseite neu.",
       "request1": "Genehmigung von Transaktionen beantragen",
       "allow": "Erlaube dieser Webseite:",
-      "block_and_ignore": "Blockieren und Ignorieren von {{host}}"
+      "block_and_ignore": "Blockieren und Ignorieren von {{host}}",
+      "insecure_domain_warn": "⚠️ Du stellst eine Verbindung zu einer unsicheren Domäne her."
     },
     "website": "Website",
     "apps": "Apps"
