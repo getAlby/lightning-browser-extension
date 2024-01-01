@@ -24,3 +24,20 @@ export const removeAccountFromCache = async (id: string) => {
   }
   return accountsCache;
 };
+
+export interface CacheProvider {
+  get(key: string): unknown | undefined;
+  set(key: string, value: object): void;
+}
+
+export class InMemoryCache implements CacheProvider {
+  private _cache = new Map<string, object>();
+
+  get(key: string): unknown | undefined {
+    return this._cache.get(key);
+  }
+
+  set(key: string, value: object): void {
+    this._cache.set(key, value);
+  }
+}
