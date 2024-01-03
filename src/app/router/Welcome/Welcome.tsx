@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Outlet, Route, HashRouter as Router, Routes } from "react-router-dom";
 import Container from "~/app/components/Container";
+import LocaleSwitcher from "~/app/components/LocaleSwitcher/LocaleSwitcher";
 import Toaster from "~/app/components/Toast/Toaster";
 import { AccountProvider } from "~/app/context/AccountContext";
 import { SettingsProvider } from "~/app/context/SettingsContext";
@@ -64,7 +65,10 @@ function Layout() {
   return (
     <div className="flex justify-center items-center min-h-screen">
       <div className="w-full">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-4">
+        <div className="absolute top-0 left-0 mt-4 ml-6 z-50">
+          <LocaleSwitcher className="text-sm border-transparent text-gray-600 hover:text-gray-700 bg-gray-100 dark:bg-surface-00dp dark:text-neutral-400 dark:hover:text-neutral-300" />
+        </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
           <div className="text-center font-serif font-medium text-2xl mt-8 dark:text-white">
             <p>
               {t("welcome.title")}
