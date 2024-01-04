@@ -15,7 +15,7 @@ export function IconLinkCard({
 }: IconLinkCardProps) {
   return (
     <div
-      className="shadow rounded-md p-4 bg-white dark:bg-surface-01dp hover:bg-gray-50 dark:hover:bg-surface-02dp text-gray-800 dark:text-neutral-200 cursor-pointer flex flex-row items-center gap-3"
+      className="shadow rounded-xl p-4 bg-white dark:bg-surface-01dp hover:bg-gray-50 dark:hover:bg-surface-02dp text-gray-800 dark:text-neutral-200 cursor-pointer flex flex-row items-center gap-4"
       onClick={onClick}
     >
       <div className="flex-shrink-0 flex justify-center md:px-3">{icon}</div>
@@ -27,7 +27,7 @@ export function IconLinkCard({
           {description}
         </div>
       </div>
-      <div className="flex-shrink-0 flex justify-end ">
+      <div className="flex-shrink-0 flex justify-end text-gray-400 dark:text-neutral-500 ">
         <CaretRightIcon className="w-8" />
       </div>
     </div>

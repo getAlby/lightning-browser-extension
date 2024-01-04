@@ -2,6 +2,12 @@ import { ArrowRightIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import Button from "@components/Button";
 import Loading from "@components/Loading";
 import TransactionsTable from "@components/TransactionsTable";
+import {
+  PopiconsArrowDownLine,
+  PopiconsBulbLine,
+  PopiconsDownloadLine,
+  PopiconsKeyLine,
+} from "@popicons/react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { FC, useEffect, useState } from "react";
@@ -9,6 +15,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import BalanceBox from "~/app/components/BalanceBox";
 import Hyperlink from "~/app/components/Hyperlink";
+import { IconLinkCard } from "~/app/components/IconLinkCard/IconLinkCard";
 import SkeletonLoader from "~/app/components/SkeletonLoader";
 import toast from "~/app/components/Toast";
 import { useAccount } from "~/app/context/AccountContext";
@@ -88,6 +95,10 @@ const DefaultView: FC<Props> = (props) => {
     }
   }
 
+  function openOptions(path: string) {
+    utils.openPage(`options.html#/${path}`);
+  }
+
   return (
     <div className="w-full max-w-screen-sm h-full mx-auto overflow-y-auto no-scrollbar">
       {props.renderPublisherWidget && !!props.lnDataFromCurrentTab?.length && (
@@ -164,6 +175,72 @@ const DefaultView: FC<Props> = (props) => {
 
         {!isLoading && (
           <div>
+            <div className="flex flex-col gap-2 md:gap-3">
+              {transactions.length == 0 && (
+                <IconLinkCard
+                  title={t("default_view.actions.get_started.title")}
+                  description={t(
+                    "default_view.actions.get_started.description"
+                  )}
+                  icon={
+                    <PopiconsBulbLine className="w-8 h-8 text-gray-400 darK:text-neutral-500" />
+                  }
+                  onClick={() => {
+                    utils.openUrl(
+                      "https://guides.getalby.com/user-guide/v/alby-account-and-browser-extension/"
+                    );
+                  }}
+                />
+              )}
+
+              <IconLinkCard
+                title={t("default_view.actions.backup_masterkey.title")}
+                description={t(
+                  "default_view.actions.backup_masterkey.description"
+                )}
+                icon={
+                  <PopiconsKeyLine className="w-8 h-8 text-gray-400 darK:text-neutral-500" />
+                }
+                onClick={async () => {
+                  const account = await api.getAccount();
+                  if (account.hasMnemonic) {
+                    openOptions(`accounts/${account.id}/secret-key/backup`);
+                  } else {
+                    openOptions(`accounts/${account.id}/secret-key/new`);
+                  }
+                }}
+              />
+
+              {transactions.length == 0 && (
+                <IconLinkCard
+                  title={t("default_view.actions.receive_bitcoin.title")}
+                  description={t(
+                    "default_view.actions.receive_bitcoin.description"
+                  )}
+                  icon={
+                    <PopiconsArrowDownLine className="w-8 h-8 text-gray-400 darK:text-neutral-500" />
+                  }
+                  onClick={() => {
+                    navigate("/receive");
+                  }}
+                />
+              )}
+
+              <IconLinkCard
+                title={t("default_view.actions.import_masterkey.title")}
+                description={t(
+                  "default_view.actions.import_masterkey.description"
+                )}
+                icon={
+                  <PopiconsDownloadLine className="w-8 h-8 text-gray-400 darK:text-neutral-500" />
+                }
+                onClick={async () => {
+                  const account = await api.getAccount();
+
+                  openOptions(`accounts/${account.id}/secret-key/import`);
+                }}
+              />
+            </div>
             <TransactionsTable
               transactions={transactions}
               loading={isLoading}
