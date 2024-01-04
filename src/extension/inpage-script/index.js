@@ -44,6 +44,8 @@ function registerLightningLinkClickHandler() {
       if (!target || !target.closest) {
         return;
       }
+      // parse protocol schemes defined in LUD-17
+      // https://github.com/lnurl/luds/blob/luds/17.md
       const lightningLink = target.closest('[href^="lightning:" i]');
       const lnurlLink = target.closest(
         '[href^="lnurlp:" i],[href^="lnurlw:" i],[href^="lnurlc:" i]'
