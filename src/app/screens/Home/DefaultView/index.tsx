@@ -244,7 +244,6 @@ const DefaultView: FC<Props> = (props) => {
             <TransactionsTable
               transactions={transactions}
               loading={isLoading}
-              noResultMsg={t("default_view.no_transactions")}
             />
 
             {!isLoading && transactions.length > 0 && (
