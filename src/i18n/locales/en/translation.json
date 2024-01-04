@@ -198,11 +198,11 @@
           "placeholder": "lndconnect://yournode:8080?..."
         }
       },
-      "start9": {
-        "title": "Start9",
+      "startos": {
+        "title": "StartOS",
         "page": {
-          "title": "Connect to your <0>Start9 Server</0>",
-          "instructions": "On your Embassy dashboard click on the <0>Lightning Network Daemon</0> service.<1/>Select the <0>Properties</0> tab.<1/>Now copy the <0>LND Connect REST URL.</0>"
+          "title": "Connect to <0>StartOS</0>",
+          "instructions": "On your StartOS dashboard click on the <0>Lightning Network Daemon</0> service.<1/>Select the <0>Properties</0> tab.<1/>Now copy the <0>LND Connect REST URL.</0>"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -352,8 +352,8 @@
       "mynode": {
         "name": "myNode"
       },
-      "start9": {
-        "name": "Start9"
+      "startos": {
+        "name": "StartOS"
       }
     },
     "home": {
