@@ -76,6 +76,7 @@ class NWCConnector implements Connector {
       unpaid: false,
       limit: 50, // restricted by relay max event payload size
     });
+    console.info(listTransactionsResponse);
 
     const transactions: ConnectorTransaction[] =
       listTransactionsResponse.transactions.map(
@@ -98,22 +99,25 @@ class NWCConnector implements Connector {
   }
 
   async makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse> {
-    const invoice = await this.nwc.makeInvoice({
+    const result = await this.nwc.makeInvoice({
       amount: args.amount,
       defaultMemo: args.memo,
     });
+    let paymentHash = result.paymentHash;
 
-    const decodedInvoice = lightningPayReq.decode(invoice.paymentRequest);
-    const paymentHash = decodedInvoice.tags.find(
-      (tag) => tag.tagName === "payment_hash"
-    )?.data as string | undefined;
     if (!paymentHash) {
-      throw new Error("Could not find payment hash in invoice");
+      const decodedInvoice = lightningPayReq.decode(result.paymentRequest);
+      paymentHash = decodedInvoice.tags.find(
+        (tag) => tag.tagName === "payment_hash"
+      )?.data as string | undefined;
+      if (!paymentHash) {
+        throw new Error("Could not find payment hash in invoice");
+      }
     }
 
     return {
       data: {
-        paymentRequest: invoice.paymentRequest,
+        paymentRequest: result.paymentRequest,
         rHash: paymentHash,
       },
     };
