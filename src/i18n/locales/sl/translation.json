@@ -52,12 +52,12 @@
           "instructions": "Na myNode domači strani klikni na <0>Wallet</0> gumb na tvojem <0>lightning</0> servisu.<1/> Klikni na <0>Pair Wallet</0> gumb pod <0>Status</0> zavihkom. Vnesi geslo, ko je to zahtevano.<1/> Izberi spustni meni in izberi možnost povezave. Glede na konfiguracijo lahko uporabiš <0>lightning (REST + Local IP)</0> povezavo ali <0>lightning (REST + Tor)</0> povezavo."
         }
       },
-      "start9": {
+      "startos": {
         "page": {
-          "instructions": "V Embassy nadzorni plošči klikni na <0>Lightning Network Daemon</0> servis.<1/>Izberi <0>Properties</0> zavihek.<1/>Kopiraj <0>LND Connect REST URL.</0>",
-          "title": "Poveži z <0>Start9 Server</0>"
+          "instructions": "V StartOS nadzorni plošči klikni na <0>Lightning Network Daemon</0> servis.<1/>Izberi <0>Properties</0> zavihek.<1/>Kopiraj <0>LND Connect REST URL.</0>",
+          "title": "Poveži z <0>StartOS Server</0>"
         },
-        "title": "Start9",
+        "title": "StartOS",
         "rest_url": {
           "label": "lndconnect REST URL",
           "placeholder": "lndconnect://yournode:8080?..."
@@ -281,8 +281,8 @@
       "citadel": {
         "name": "Citadel"
       },
-      "start9": {
-        "name": "Start9"
+      "startos": {
+        "name": "StartOS"
       },
       "description": "Izberi s katero {{name}} aplikacijo bi se rad povezal",
       "btcpay": {

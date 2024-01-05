@@ -122,11 +122,11 @@
           "placeholder": "lndconnect://sunodo:8080?..."
         }
       },
-      "start9": {
-        "title": "Cuenta Start9",
+      "startos": {
+        "title": "StartOS",
         "page": {
-          "title": "Conéctate a tu <0>Start9 Server</0>",
-          "instructions": "En tu panel de Embassy, haz clic en el servicio <0>Lightning Network Daemon</0>.<1/>Selecciona la pestaña <0>Propiedades</0>.<1/>Ahora copia la URL REST de <0>LND Connect. </0>"
+          "title": "Conectarse a <0>StartOS</0>",
+          "instructions": "En tu panel de StartOS, haz clic en el servicio <0>Lightning Network Daemon</0>.<1/>Selecciona la pestaña <0>Propiedades</0>.<1/>Ahora copia la URL REST de <0>LND Connect. </0>"
         },
         "rest_url": {
           "label": "URL REST conectalnd",
@@ -647,8 +647,8 @@
       "umbrel": {
         "name": "Umbrel"
       },
-      "start9": {
-        "name": "Start9"
+      "startos": {
+        "name": "StartOS"
       },
       "raspiblitz": {
         "name": "Raspiblitz"
