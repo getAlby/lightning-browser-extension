@@ -148,16 +148,16 @@
           "placeholder": "http://localhost:8080"
         }
       },
-      "start9": {
+      "startos": {
         "page": {
-          "instructions": "Klicke in deinem Embassy Dashboard auf den <0>Lightning Network Daemon</0> Service.<1/>Wähle den Reiter <0>Properties</0>.<1/>Kopiere nun die <0>LND Connect REST URL.</0>",
-          "title": "Verbinden mit deinem <0>Start9 Server</0>"
+          "instructions": "Klicke in deinem StartOS Dashboard auf den <0>Lightning Network Daemon</0> Service.<1/>Wähle den Reiter <0>Properties</0>.<1/>Kopiere nun die <0>LND Connect REST URL.</0>",
+          "title": "Verbinden mit <0>StartOS</0>"
         },
         "rest_url": {
           "placeholder": "lndconnect://deinenode:8080?...",
           "label": "Indconnect REST URL"
         },
-        "title": "Start9"
+        "title": "StartOS"
       },
       "blink": {
         "title": "Blink Wallet",
@@ -806,8 +806,8 @@
       "mynode": {
         "name": "myNode"
       },
-      "start9": {
-        "name": "Start9"
+      "startos": {
+        "name": "StartOS"
       }
     },
     "confirm_add_account": {

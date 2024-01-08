@@ -178,11 +178,11 @@
           "placeholder": "lndconnect://yournode:8080?..."
         }
       },
-      "start9": {
-        "title": "Start9",
+      "startos": {
+        "title": "StartOS",
         "page": {
-          "title": "متصل شدن به <0>Start9 Server</0>‎ شما",
-          "instructions": "در داشبورد Embassy روی خدمات <0>Lightning Network Daemon</0> کلیک کنید. سربرگ <0>Properties</0> را انتخاب کنید. حالا <0>LND Connect REST URL.</0> را کپی کنید."
+          "title": "متصل شدن به <0>StartOS Server</0>‎ شما",
+          "instructions": "در داشبورد StartOS روی خدمات <0>Lightning Network Daemon</0> کلیک کنید. سربرگ <0>Properties</0> را انتخاب کنید. حالا <0>LND Connect REST URL.</0> را کپی کنید."
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -278,8 +278,8 @@
       "mynode": {
         "name": "myNode"
       },
-      "start9": {
-        "name": "Start9"
+      "startos": {
+        "name": "StartOS"
       }
     },
     "home": {
