@@ -140,16 +140,16 @@
           "label": "本地私钥（自动生成的）"
         }
       },
-      "start9": {
+      "startos": {
         "page": {
-          "instructions": "在你的 Embassy 仪表板上点击 <0>Lightning Network Daemon</0> 服务。<1/>选择 <0>Properties</0> 标签。<1/>复制 <0>LND Connect REST URL。</0>",
-          "title": "连接你的<0>Start9 服务器</0>"
+          "instructions": "在你的 StartOS 仪表板上点击 <0>Lightning Network Daemon</0> 服务。<1/>选择 <0>Properties</0> 标签。<1/>复制 <0>LND Connect REST URL。</0>",
+          "title": "连接你的<0>StartOS 服务器</0>"
         },
         "rest_url": {
           "placeholder": "lndconnect://yournode:8080?...",
           "label": "lndconnect REST URL"
         },
-        "title": "Start9"
+        "title": "StartOS"
       },
       "raspiblitz": {
         "page": {
@@ -740,8 +740,8 @@
       "mynode": {
         "name": "myNode"
       },
-      "start9": {
-        "name": "Start9"
+      "startos": {
+        "name": "StartOS"
       },
       "umbrel": {
         "name": "Umbrel"
