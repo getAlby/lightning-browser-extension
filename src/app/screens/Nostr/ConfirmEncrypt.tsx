@@ -88,7 +88,7 @@ function NostrConfirmEncrypt() {
             </div>
             {showDetails && (
               <div className="whitespace-pre-wrap break-words p-2 mb-4 shadow bg-white rounded-lg dark:bg-surface-02dp text-gray-500 dark:text-gray-400">
-                {t("peer")}: {peer}
+                {t("recipient")}: {peer}
               </div>
             )}
           </div>
