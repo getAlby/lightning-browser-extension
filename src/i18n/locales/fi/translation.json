@@ -129,11 +129,11 @@
           "placeholder": "lndconnect://solmusi:8080?..."
         }
       },
-      "start9": {
-        "title": "Start9",
+      "startos": {
+        "title": "StartOS",
         "page": {
-          "title": "Yhdistä <0>Embassy</0>-solmuun",
-          "instructions": "<0>Huomautus:</0> Tällä hetkellä tuemme vain LND:tä, mutta lisäämme c-lightning-tuen tulevaisuudessa!<1/>Klikkaa Embassy-kojelaudallasi <0>Lightning Network Daemon</0> -palvelua.<1/>Valitse <0>Ominaisuudet</0>-välilehti.<1/>Kopioi nyt <0>LND Yhdistä -REST URL-osoite.</0>"
+          "title": "Yhdistä <0>StartOS</0>-solmuun",
+          "instructions": "<0>Huomautus:</0> Tällä hetkellä tuemme vain LND:tä, mutta lisäämme c-lightning-tuen tulevaisuudessa!<1/>Klikkaa StartOS-kojelaudallasi <0>Lightning Network Daemon</0> -palvelua.<1/>Valitse <0>Ominaisuudet</0>-välilehti.<1/>Kopioi nyt <0>LND Yhdistä -REST URL-osoite.</0>"
         },
         "rest_url": {
           "label": "lndconnect -REST URL-osoite",
