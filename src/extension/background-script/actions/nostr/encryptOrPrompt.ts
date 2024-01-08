@@ -1,4 +1,5 @@
 import { USER_REJECTED_ERROR } from "~/common/constants";
+import nostr from "~/common/lib/nostr";
 import utils from "~/common/lib/utils";
 import { getHostFromSender } from "~/common/utils/helpers";
 import {
@@ -33,7 +34,7 @@ const encryptOrPrompt = async (message: MessageEncryptGet, sender: Sender) => {
         action: "public/nostr/confirmEncrypt",
         args: {
           encrypt: {
-            peer: message.args.peer,
+            peer: nostr.hexToNip19(message.args.peer, "npub"),
             message: message.args.plaintext,
           },
         },
