@@ -171,7 +171,7 @@ export type NavigationState = {
 
     // nostr
     encrypt: {
-      peer: string;
+      recipientNpub: string;
       message: string;
     };
 
