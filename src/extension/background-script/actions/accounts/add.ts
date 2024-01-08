@@ -29,7 +29,10 @@ const add = async (message: MessageAccountAdd) => {
     name,
   };
 
-  const mnemonic = await generateMnemonic();
+  const mnemonic = await generateMnemonic({
+    action: "generateMnemonic",
+    origin: { internal: true },
+  });
   setMnemonic({
     args: {
       id: accountId,
