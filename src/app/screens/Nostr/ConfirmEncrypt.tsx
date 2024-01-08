@@ -20,7 +20,7 @@ function NostrConfirmEncrypt() {
   const navState = useNavigationState();
   const origin = navState.origin as OriginData;
 
-  const peer = navState.args?.encrypt.peer;
+  const recipientNpub = navState.args?.encrypt.recipientNpub;
   const message = navState.args?.encrypt.message;
 
   const [loading, setLoading] = useState(false);
@@ -88,7 +88,7 @@ function NostrConfirmEncrypt() {
             </div>
             {showDetails && (
               <div className="whitespace-pre-wrap break-words p-2 mb-4 shadow bg-white rounded-lg dark:bg-surface-02dp text-gray-500 dark:text-gray-400">
-                {t("recipient")}: {peer}
+                {t("recipient")}: {recipientNpub}
               </div>
             )}
           </div>

@@ -34,7 +34,7 @@ const encryptOrPrompt = async (message: MessageEncryptGet, sender: Sender) => {
         action: "public/nostr/confirmEncrypt",
         args: {
           encrypt: {
-            peer: nostr.hexToNip19(message.args.peer, "npub"),
+            recipientNpub: nostr.hexToNip19(message.args.peer, "npub"),
             message: message.args.plaintext,
           },
         },
