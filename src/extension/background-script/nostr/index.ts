@@ -82,12 +82,16 @@ class Nostr {
     return Utf8.stringify(decrypted);
   }
 
-  nip44Encrypt(pubkey: string, text: string) {
-    return nip44.v2.encrypt(text, this.getNip44SharedSecret(pubkey));
+  nip44Encrypt(pairs: [string, string][]) {
+    return pairs.map(([pubkey, text]: [string, string]) =>
+      nip44.v2.encrypt(text, this.getNip44SharedSecret(pubkey))
+    );
   }
 
-  nip44Decrypt(pubkey: string, payload: string) {
-    return nip44.v2.decrypt(payload, this.getNip44SharedSecret(pubkey));
+  nip44Decrypt(pairs: [string, string][]) {
+    return pairs.map(([pubkey, payload]) =>
+      nip44.v2.decrypt(payload, this.getNip44SharedSecret(pubkey))
+    );
   }
 
   getEventHash(event: Event) {
