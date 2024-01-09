@@ -79,17 +79,13 @@ class Nip44 {
     this.provider = provider;
   }
 
-  async encrypt(peer: string, plaintext: string, v: number) {
+  async encrypt(pairs: [string, string][]) {
     await this.provider.enable();
-    return this.provider.execute("nip44EncryptOrPrompt", {
-      peer,
-      plaintext,
-      v,
-    });
+    return this.provider.execute("nip44EncryptOrPrompt", { pairs });
   }
 
-  async decrypt(peer: string, payload: string) {
+  async decrypt(pairs: [string, string][]) {
     await this.provider.enable();
-    return this.provider.execute("nip44DecryptOrPrompt", { peer, payload });
+    return this.provider.execute("nip44DecryptOrPrompt", { pairs });
   }
 }
