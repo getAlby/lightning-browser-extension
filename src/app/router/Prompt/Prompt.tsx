@@ -30,6 +30,8 @@ import WebbtcEnable from "~/app/screens/Enable/WebbtcEnable";
 import WeblnEnable from "~/app/screens/Enable/WeblnEnable";
 import NostrConfirmDecrypt from "~/app/screens/Nostr/ConfirmDecrypt";
 import NostrConfirmEncrypt from "~/app/screens/Nostr/ConfirmEncrypt";
+import NostrConfirmNip44Decrypt from "~/app/screens/Nostr/ConfirmNip44Decrypt";
+import NostrConfirmNip44Encrypt from "~/app/screens/Nostr/ConfirmNip44Encrypt";
 import type { NavigationState, OriginData } from "~/types";
 
 // Parse out the parameters from the querystring.
@@ -131,6 +133,14 @@ function Prompt() {
             <Route
               path="public/nostr/confirmDecrypt"
               element={<NostrConfirmDecrypt />}
+            />
+            <Route
+              path="public/nostr/confirmNip44Encrypt"
+              element={<NostrConfirmNip44Encrypt />}
+            />
+            <Route
+              path="public/nostr/confirmNip44Decrypt"
+              element={<NostrConfirmNip44Decrypt />}
             />
             <Route
               path="public/nostr/confirmGetPublicKey"

@@ -23,9 +23,7 @@ const nip44EncryptOrPrompt = async (
 
     if (hasPermission) {
       const response = (await state.getState().getNostr()).nip44Encrypt(
-        message.args.peer,
-        message.args.plaintext,
-        message.args.v
+        message.args.pairs
       );
       return { data: response };
     } else {
@@ -34,12 +32,10 @@ const nip44EncryptOrPrompt = async (
         rememberPermission: boolean;
       }>({
         ...message,
-        action: "public/nostr/confirmEncryptOrDecrypt",
+        action: "public/nostr/confirmNip44Encrypt",
         args: {
-          encryptOrDecrypt: {
-            action: "encrypt",
-            peer: message.args.peer,
-            message: message.args.plaintext,
+          nip44Encrypt: {
+            pairs: message.args.pairs,
           },
         },
       });
@@ -53,9 +49,7 @@ const nip44EncryptOrPrompt = async (
       }
       if (promptResponse.data.confirm) {
         const response = (await state.getState().getNostr()).nip44Encrypt(
-          message.args.peer,
-          message.args.plaintext,
-          message.args.v
+          message.args.pairs
         );
 
         return { data: response };
