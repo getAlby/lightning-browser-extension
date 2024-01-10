@@ -3,8 +3,9 @@
     "welcome": {
       "title": "Welcome to Alby",
       "set_password": {
-        "title": "Set an unlock passcode",
-        "description": "This passcode will allow you to unlock Alby on this device. It cannot be recovered, but may be changed later.",
+        "title": "Set extension unlock passcode",
+        "description1": "Set a passcode to unlock Alby Extension in this browser",
+        "description2": "Unlock passcode cannot be recovered, but may be changed ",
         "choose_password": {
           "label": "Choose an unlock passcode:"
         },
@@ -12,9 +13,9 @@
           "label": "Let's confirm you typed it correct:"
         },
         "errors": {
-          "enter_password": "Please enter a passcode.",
-          "confirm_password": "Please confirm your passcode.",
-          "mismatched_password": "Passcodes don't match."
+          "enter_password": "Please enter a password.",
+          "confirm_password": "Please confirm your password.",
+          "mismatched_password": "Passwords don't match."
         }
       },
       "test_connection": {
