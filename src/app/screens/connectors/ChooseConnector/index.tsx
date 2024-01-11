@@ -25,11 +25,11 @@ export default function ChooseConnector({
             </p>
           )}
         </div>
-        <div className="flex flex-row flex-wrap justify-center -mb-4 -mx-2">
+        <div className="flex flex-row flex-wrap -mb-4 -mx-2">
           {connectorRoutes.map(({ path, title, logo }) => (
             <div
               key={path}
-              className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 mb-4 px-2"
+              className="w-full sm:w-1/2 md:w-1/3 lg:w-1/5 mb-4 px-2"
             >
               <LinkButton to={path} title={title} logo={logo} />
             </div>
