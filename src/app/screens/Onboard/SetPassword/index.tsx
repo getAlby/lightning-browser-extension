@@ -48,7 +48,7 @@ export default function SetPassword() {
             {t("title")}
           </h1>
 
-          <div className="w-full flex justify-center my-8">
+          <div className="w-full flex justify-center my-8 short:hidden">
             {unlockScreenshot}
           </div>
 
