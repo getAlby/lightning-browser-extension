@@ -42,7 +42,7 @@ function ConnectorForm({
       )}
       {image && (
         <>
-          <div className="w-full mb-6">
+          <div className="w-96 mb-6">
             <img
               src={image}
               alt="Screenshot"
@@ -56,7 +56,7 @@ function ConnectorForm({
 
   return (
     <form onSubmit={onSubmit}>
-      <div className="max-w-xl mx-auto mt-6 relative bg-white dark:bg-surface-02dp p-7 shadow rounded-lg">
+      <div className="max-w-xl mx-auto mt-6 relative bg-white dark:bg-surface-02dp p-10 rounded-2xl border border-gray-200 darK:border-neutral-700">
         <div className="flex items-center mb-4">
           {logo && <img src={logo} className="w-16 mr-4 rounded-lg" />}
           {/*
@@ -70,9 +70,8 @@ function ConnectorForm({
             title
           )}
         </div>
-        {media}
         {description && (
-          <div className="text-gray-500 dark:text-white whitespace-pre-line">
+          <div className="text-gray-500 dark:text-white whitespace-pre-line mb-8">
             {typeof description === "string" ? (
               <p className="mb-6">{description}</p>
             ) : (
@@ -80,18 +79,18 @@ function ConnectorForm({
             )}
           </div>
         )}
+        {media}
         <div>{children}</div>
-      </div>
-
-      <div className="my-6 flex justify-center">
-        <Button
-          type="submit"
-          label={submitLabel}
-          loading={submitLoading}
-          disabled={submitDisabled}
-          primary
-          className="w-64"
-        />
+        <div className="mt-8 flex justify-center">
+          <Button
+            type="submit"
+            label={submitLabel}
+            loading={submitLoading}
+            disabled={submitDisabled}
+            primary
+            className="w-64"
+          />
+        </div>
       </div>
     </form>
   );

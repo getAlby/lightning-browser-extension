@@ -1,4 +1,7 @@
-import Button from "@components/Button";
+import {
+  CaretDownIcon,
+  CaretUpIcon,
+} from "@bitcoin-design/bitcoin-icons-react/outline";
 import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
 import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
@@ -6,6 +9,7 @@ import * as secp256k1 from "@noble/secp256k1";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import Hyperlink from "~/app/components/Hyperlink";
 import PasswordViewAdornment from "~/app/components/PasswordViewAdornment";
 import toast from "~/app/components/Toast";
 import msg from "~/common/lib/msg";
@@ -151,12 +155,22 @@ export default function ConnectCommando() {
           onChange={handleChange}
         />
       </div>
-      <Button
-        onClick={() => {
-          setShowAdvanced(!showAdvanced);
-        }}
-        label={tCommon("advanced")}
-      />
+
+      <div className="text-center">
+        <Hyperlink onClick={() => setShowAdvanced(!showAdvanced)}>
+          {showAdvanced ? (
+            <>
+              {tCommon("hide_advanced")}
+              <CaretUpIcon className="h-4 w-4 inline-flex" />
+            </>
+          ) : (
+            <>
+              {tCommon("advanced")}
+              <CaretDownIcon className="h-4 w-4 inline-flex" />
+            </>
+          )}
+        </Hyperlink>
+      </div>
       {showAdvanced && (
         <div className="mt-6">
           <div className="mb-6">
