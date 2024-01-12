@@ -416,10 +416,9 @@
             "warning": "⚠️ Don't forget to back up your recovery phrase! Not backing it up might result in permanently losing access to your Master Key, Nostr identity or assets you manage with this key.",
             "description": "Write down the recovery phrase to be able to restore your Master Key on a new device or in case you lose access to your account.",
             "items": {
-              "keys": "Master Key allows you to interact with various protocols such as: Nostr, Liquid or base layer of Bitcoin.",
-              "recovery_phrase": "You can always access your Master Key by using it's recovery phrase.",
-              "words": "Recovery phrase is set of 12 words that works like a password, however it can't be changed or reset in case it's lost.",
-              "storage": "Make sure to write it down somewhere safe and private!"
+              "keys": "Master Key is your identity that allows you to interact with protocols like Nostr, Liquid Network or base layer of bitcoin",
+              "usage": "You can import and use the same Master Key in each connected wallet in the Alby Extension",
+              "recovery_phrase": "You can import and use the same Master Key in each connected wallet in the Alby Extension"
             },
             "protocols": {
               "nostr": "Nostr"

@@ -1,26 +1,26 @@
-import {
-  KeyIcon,
-  MnemonicIcon,
-  PasswordIcon,
-  SafeIcon,
-} from "@bitcoin-design/bitcoin-icons-react/outline";
+import { PopiconsDownloadLine, PopiconsKeyLine } from "@popicons/react";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "~/app/utils";
 
 function MnemonicDescription() {
   const { t } = useTranslation("translation", {
     keyPrefix: "accounts.account_view.mnemonic",
   });
 
+  const theme = useTheme();
+
   return (
     <>
-      <div className="flex flex-col gap-2">
-        <ListItem icon={<KeyIcon />} title={t("backup.items.keys")} />
+      <div className="flex flex-col gap-4">
+        <ListItem icon={<PopiconsKeyLine />} title={t("backup.items.keys")} />
         <ListItem
-          icon={<MnemonicIcon />}
+          icon={<img src={`assets/images/face_surprise_${theme}.png`} />}
+          title={t("backup.items.usage")}
+        />
+        <ListItem
+          icon={<PopiconsDownloadLine />}
           title={t("backup.items.recovery_phrase")}
         />
-        <ListItem icon={<PasswordIcon />} title={t("backup.items.words")} />
-        <ListItem icon={<SafeIcon />} title={t("backup.items.storage")} />
       </div>
     </>
   );
