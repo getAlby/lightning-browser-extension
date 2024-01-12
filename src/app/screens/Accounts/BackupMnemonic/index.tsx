@@ -6,7 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Button from "~/app/components/Button";
 import { ContentBox } from "~/app/components/ContentBox";
 import toast from "~/app/components/Toast";
-import MnemonicDescription from "~/app/components/mnemonic/MnemonicDescription";
+import MnemonicBackupDescription from "~/app/components/mnemonic/MnemonicBackupDescription";
 import MnemonicInputs from "~/app/components/mnemonic/MnemonicInputs";
 import api from "~/common/lib/api";
 
@@ -49,15 +49,18 @@ function BackupMnemonic() {
           <h1 className="font-bold text-2xl dark:text-white">
             {t("backup.title")}
           </h1>
-          <MnemonicDescription />
+          <MnemonicBackupDescription />
           <MnemonicInputs mnemonic={mnemonic} readOnly />
+
+          <div className="flex justify-center mt-6 w-64 mx-auto">
+            <Button
+              label={tCommon("actions.finish")}
+              primary
+              flex
+              onClick={() => navigate(-1)}
+            />
+          </div>
         </ContentBox>
-        <div className="flex justify-center my-6 gap-4">
-          <Button
-            label={tCommon("actions.back")}
-            onClick={() => navigate(-1)}
-          />
-        </div>
       </Container>
     </div>
   );

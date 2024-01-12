@@ -29,7 +29,7 @@ export default function MnemonicInputs({
   }
 
   return (
-    <div className="border border-gray-200 dark:border-neutral-700 rounded-lg p-6 flex flex-col gap-4 items-center justify-center">
+    <div className="border border-gray-200 dark:border-neutral-700 rounded-2xl p-6 flex flex-col gap-4 items-center justify-center">
       <h3 className="text-lg font-semibold dark:text-white">
         {t("inputs.title")}
       </h3>
@@ -50,7 +50,7 @@ export default function MnemonicInputs({
                   onBlur={() => setRevealedIndex(undefined)}
                   readOnly={readOnly}
                   block={false}
-                  className="w-32 text-center"
+                  className="w-full text-center"
                   list={readOnly ? undefined : "wordlist"}
                   value={isRevealed ? word : word.length ? "•••••" : ""}
                   onChange={(e) => {

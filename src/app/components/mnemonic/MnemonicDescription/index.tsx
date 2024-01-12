@@ -12,14 +12,14 @@ function MnemonicDescription() {
   return (
     <>
       <div className="flex flex-col gap-4">
-        <ListItem icon={<PopiconsKeyLine />} title={t("backup.items.keys")} />
+        <ListItem icon={<PopiconsKeyLine />} title={t("new.items.keys")} />
         <ListItem
           icon={<img src={`assets/images/face_surprise_${theme}.png`} />}
-          title={t("backup.items.usage")}
+          title={t("new.items.usage")}
         />
         <ListItem
           icon={<PopiconsDownloadLine />}
-          title={t("backup.items.recovery_phrase")}
+          title={t("new.items.recovery_phrase")}
         />
       </div>
     </>
@@ -33,10 +33,10 @@ type ListItemProps = { icon: React.ReactNode; title: string };
 function ListItem({ icon, title }: ListItemProps) {
   return (
     <div className="flex gap-2 items-center">
-      <div className="shrink-0 w-8 h-8 text-gray-600 dark:text-neutral-400">
-        {icon}
-      </div>
-      <span className="text-gray-600 dark:text-neutral-400">{title}</span>
+      <div className="shrink-0 text-gray-600 dark:text-neutral-400">{icon}</div>
+      <span className="text-gray-600 text-sm dark:text-neutral-400">
+        {title}
+      </span>
     </div>
   );
 }
