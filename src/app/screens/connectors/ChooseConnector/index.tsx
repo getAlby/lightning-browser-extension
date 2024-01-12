@@ -25,7 +25,7 @@ export default function ChooseConnector({
             </p>
           )}
         </div>
-        <div className="flex flex-row flex-wrap -mb-4 -mx-2">
+        <div className="flex flex-row flex-wrap justify-center -mb-4 -mx-2">
           {connectorRoutes.map(({ path, title, logo }) => (
             <div
               key={path}
