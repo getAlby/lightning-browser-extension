@@ -83,7 +83,8 @@ type CommandoInvoice = {
   label: string;
   status: string;
   description: string;
-  amount_msat: number;
+  amount_received_msat?: number;
+  amount_msat?: number;
   bolt11: string;
   payment_preimage: string;
   paid_at: number;
@@ -236,7 +237,10 @@ export default class Commando implements Connector {
               payment_hash: invoice.payment_hash,
               settleDate: invoice.paid_at * 1000,
               type: "received",
-              totalAmount: Math.floor(invoice.amount_msat / 1000),
+              totalAmount: Math.floor(
+                (invoice.amount_received_msat || invoice.amount_msat || 0) /
+                  1000
+              ),
             })
           )
           .filter((invoice) => invoice.settled);
