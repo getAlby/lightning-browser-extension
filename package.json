@@ -38,7 +38,7 @@
     "@bitcoin-design/bitcoin-icons-react": "^0.1.10",
     "@bitcoinerlab/secp256k1": "^1.0.5",
     "@getalby/sdk": "^3.2.2",
-    "@headlessui/react": "^1.7.16",
+    "@headlessui/react": "^1.7.18",
     "@lightninglabs/lnc-web": "^0.2.4-alpha",
     "@noble/curves": "^1.1.0",
     "@noble/secp256k1": "^2.0.0",
