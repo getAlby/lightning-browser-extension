@@ -14,10 +14,10 @@ function NavbarLink({ children, end = false, href }: Props) {
       to={href}
       className={({ isActive }) =>
         classNames(
-          "inline-flex font-semibold hover:text-gray-600 dark:hover:text-gray-300 transition px-1 text-md",
+          "inline-flex font-semibold hover:text-gray-800 dark:hover:text-gray-300 transition px-1 text-md",
           isActive
-            ? " text-gray-900 dark:text-gray-100"
-            : " text-gray-400 dark:text-gray-400"
+            ? " text-black dark:text-gray-100"
+            : " text-gray-600 dark:text-gray-600"
         )
       }
     >
