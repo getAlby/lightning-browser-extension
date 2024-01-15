@@ -161,9 +161,9 @@ const Layout = () => {
         <Navbar.Link href="/publishers">
           {tCommon("connected_sites")}
         </Navbar.Link>
-        <Navbar.Link href="/discover">
+        <Navbar.Link href="https://getalby.com/discover">
           {tCommon("discover")}
-          <img src="assets/icons/arrow_up_right.svg" className="ml-2" />
+          <img src="assets/icons/arrow_up_right.svg" />
         </Navbar.Link>
       </Navbar>
       <Toaster />
