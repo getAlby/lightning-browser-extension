@@ -42,7 +42,7 @@ export default function UserMenu() {
 
   return (
     <Menu as="div" className="relative">
-      <Menu.Button className="flex items-center text-gray-700 dark:text-white hover:text-black dark:hover:text-white transition-colors duration-200">
+      <Menu.Button className="flex items-center text-gray-800 dark:text-neutral-200 hover:text-black dark:hover:text-white transition-colors duration-200">
         <MenuIcon className="h-6 w-6" />
       </Menu.Button>
       <Menu.List position="left">
@@ -52,7 +52,7 @@ export default function UserMenu() {
               openOptions("wallet");
             }}
           >
-            <PopiconsExpandLine className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
+            <PopiconsExpandLine className="h-5 w-5 mr-2 text-gray-800 dark:text-neutral-200" />
             {tCommon("full_screen")}
           </Menu.ItemButton>
           <Menu.ItemButton
@@ -60,7 +60,7 @@ export default function UserMenu() {
               openOptions("publishers");
             }}
           >
-            <ConnectedSiteIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
+            <ConnectedSiteIcon className="h-5 w-5 mr-2 text-gray-800 dark:text-neutral-200" />
             {tCommon("connected_sites")}
           </Menu.ItemButton>
         </div>
@@ -69,7 +69,7 @@ export default function UserMenu() {
             openOptions("settings");
           }}
         >
-          <PopiconsCogLine className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
+          <PopiconsCogLine className="h-5 w-5 mr-2 text-gray-800 dark:text-neutral-200" />
           {tCommon("settings")}
         </Menu.ItemButton>
         <Menu.ItemButton
@@ -77,7 +77,7 @@ export default function UserMenu() {
             utils.openUrl("https://feedback.getalby.com");
           }}
         >
-          <PopiconsCommentLine className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
+          <PopiconsCommentLine className="h-5 w-5 mr-2 text-gray-800 dark:text-neutral-200" />
           {tCommon("feedback")}
         </Menu.ItemButton>
 
@@ -88,12 +88,12 @@ export default function UserMenu() {
             );
           }}
         >
-          <PopiconsBulbLine className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
+          <PopiconsBulbLine className="h-5 w-5 mr-2 text-gray-800 dark:text-neutral-200" />
           {tCommon("help")}
         </Menu.ItemButton>
 
         <Menu.ItemButton onClick={lock}>
-          <PopiconsLockLine className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
+          <PopiconsLockLine className="h-5 w-5 mr-2 text-gray-800 dark:text-neutral-200" />
           {tCommon("actions.lock")}
         </Menu.ItemButton>
       </Menu.List>

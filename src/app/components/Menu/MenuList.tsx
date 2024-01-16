@@ -25,7 +25,7 @@ function List({ position = "left", fullWidth, children }: Props) {
             ? "left-0 origin-top-left"
             : "right-0 origin-top-right",
           fullWidth ? "w-full" : "w-56",
-          "absolute z-50 mt-2 py-1 rounded-2xl shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-surface-12dp border border-gray-200 dark:border-neutral-700"
+          "absolute z-50 mt-2 py-1 rounded-xl shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-surface-12dp border border-gray-200 dark:border-neutral-700"
         )}
       >
         {children}
