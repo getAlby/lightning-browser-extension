@@ -9,7 +9,7 @@ export default function PinExtension() {
   });
 
   const onNext = () => {
-    utils.redirectPage("options.html#/discover");
+    utils.redirectPage("options.html#/wallet");
   };
 
   const theme = useTheme();
