@@ -31,7 +31,7 @@ import NewMnemonic from "~/app/screens/Accounts/GenerateMnemonic/new";
 import ImportMnemonic from "~/app/screens/Accounts/ImportMnemonic";
 import NostrSettings from "~/app/screens/Accounts/NostrSettings";
 import NostrSetup from "~/app/screens/Accounts/NostrSetup/NostrSetup";
-import Discover from "~/app/screens/Discover";
+
 import LNURLRedeem from "~/app/screens/LNURLRedeem";
 import OnChainReceive from "~/app/screens/OnChainReceive";
 import ReceiveInvoice from "~/app/screens/ReceiveInvoice";
@@ -58,9 +58,6 @@ function Options() {
             }
           >
             <Route index element={<Navigate to="/wallet" replace />} />
-            <Route path="discover">
-              <Route index element={<Discover />} />
-            </Route>
             <Route path="publishers">
               <Route path=":id" element={<PublisherDetail />} />
               <Route index element={<Publishers />} />
@@ -161,7 +158,7 @@ const Layout = () => {
         <Navbar.Link href="/publishers">
           {tCommon("connected_sites")}
         </Navbar.Link>
-        <Navbar.Link href="https://getalby.com/discover">
+        <Navbar.Link href="https://getalby.com/discover" target="_blank">
           {tCommon("discover")}
           <img src="assets/icons/arrow_up_right.svg" />
         </Navbar.Link>

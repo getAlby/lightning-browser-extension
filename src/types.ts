@@ -1,7 +1,7 @@
 import { CreateSwapParams } from "@getalby/sdk/dist/types";
 import { PaymentRequestObject } from "bolt11";
 import { Runtime } from "webextension-polyfill";
-import { ACCOUNT_CURRENCIES, CURRENCIES, TIPS } from "~/common/constants";
+import { ACCOUNT_CURRENCIES, CURRENCIES } from "~/common/constants";
 import connectors from "~/extension/background-script/connectors";
 import {
   ConnectorTransaction,
@@ -862,7 +862,6 @@ export interface SettingsStorage {
   currency: CURRENCIES;
   exchange: SupportedExchanges;
   nostrEnabled: boolean;
-  closedTips: TIPS[];
 }
 
 export interface Badge {
