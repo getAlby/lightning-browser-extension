@@ -580,32 +580,6 @@
         "30078": "datos específicos de la aplicación"
       }
     },
-    "discover": {
-      "title": "Explora el Ecosistema ⚡️ Lightning",
-      "description": "Sitios web y aplicaciones web donde puede usar Alby",
-      "tips": {
-        "top_up_wallet": {
-          "title": "⚡️ Recarga tu billetera",
-          "description": "Cree una factura lightning, envíese algunos bitcoins y comience a usar Alby en el ecosistema lightning"
-        },
-        "title": "Tu billetera Alby está lista",
-        "description": "Algunos consejos para que empieces a zumbar 🐝",
-        "demo": {
-          "title": "🕹️ Prueba la versión Demo de Alby",
-          "description": "Descubra todo lo que puede hacer con Alby en nuestro sitio web de demostraciones"
-        }
-      },
-      "list": {
-        "entertainment": "Entretenimiento",
-        "shopping": "Compras",
-        "miscellaneous": "Varios",
-        "showcases": "Vitrinas",
-        "nostr": "Nostr",
-        "trading": "Comerciar",
-        "gaming": "Juegos",
-        "nodeManagement": "Gestión de nodos"
-      }
-    },
     "confirm_request_permission": {
       "title": "Aprobar solicitud",
       "always_allow": "Recordar mi elección y no volver a preguntar",

@@ -568,31 +568,6 @@
       "always_allow": "Ricorda la mia scelta e non chiederlo più",
       "title": "Approva Richiesta",
       "allow": "Consentire l'esecuzione di questo sito:"
-    },
-    "discover": {
-      "list": {
-        "trading": "Trading",
-        "gaming": "Gaming",
-        "entertainment": "Intrattenimento",
-        "miscellaneous": "Altro",
-        "showcases": "Vetrine",
-        "nostr": "Nostr",
-        "shopping": "Shopping"
-      },
-      "tips": {
-        "description": "Qualche suggerimento per iniziare a ronzare 🐝",
-        "top_up_wallet": {
-          "title": "⚡️ Ricarica il tuo wallet",
-          "description": "Crea una fattura lightning, inviati qualche bitcoin e inizia ad usare Alby nell'ecosistema lightning"
-        },
-        "demo": {
-          "title": "🕹️ Prova la Demo di Alby",
-          "description": "Scopri tutto quello che puoi fare con Alby sul nostro sito demo"
-        },
-        "title": "Il tuo wallet Alby è pronto"
-      },
-      "title": "Esplora l'Ecosistema Lightning ⚡️",
-      "description": "Siti e webapp dove puoi usare Alby"
     }
   },
   "common": {

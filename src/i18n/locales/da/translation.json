@@ -503,31 +503,6 @@
         "status": "Tjek betalingsstatus"
       }
     },
-    "discover": {
-      "title": "Udforsk Lightnings ⚡️ økosystem",
-      "description": "Hjemmesider og web-apps hvor Alby kan bruges",
-      "list": {
-        "trading": "Handel",
-        "gaming": "Spil",
-        "entertainment": "Underholdning",
-        "shopping": "Indkøb",
-        "miscellaneous": "Diverse",
-        "showcases": "Eksempler",
-        "nostr": "Nostr"
-      },
-      "tips": {
-        "title": "Din Alby-wallet er klar",
-        "description": "Et par råd der får dig på vingerne🐝",
-        "top_up_wallet": {
-          "title": "⚡️ Fyld din wallet op",
-          "description": "Generer en lightning-faktura, send lidt bitcoin til dig selv og begynd at bruge Alby i lightnings økosystem"
-        },
-        "demo": {
-          "title": "🕹️ Få en prøvetur med Alby",
-          "description": "Se alle de ting, du kan med Alby på vores præsentationsside"
-        }
-      }
-    },
     "publishers": {
       "title": "Dine ⚡ hjemmesider",
       "description": "Hjemmesider, hvor du tidligere har brugt Alby",

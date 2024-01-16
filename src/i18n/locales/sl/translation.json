@@ -557,35 +557,6 @@
       "no_info": "Videti je, da Albyja še nisi uporabljal na nobenem spletnem mestu.",
       "title": "Tvoja ⚡ spletna stran"
     },
-    "discover": {
-      "tips": {
-        "demo": {
-          "title": "Alby demo",
-          "description": "Odkrijte Albyjeve lastnosti\nna naši predstavitveni spletni strani"
-        },
-        "mnemonic": {
-          "title": "Nostr"
-        },
-        "top_up_wallet": {
-          "description": "Potrebuješ polnitev?\nSkupaj zmoremo!",
-          "title": "Kupi Bitcoin"
-        },
-        "description": "Nekaj nasvetov, da začneš brneti🐝",
-        "title": "Tvoja denarnica Alby je pripravljena"
-      },
-      "list": {
-        "gaming": "Igre",
-        "trading": "Trgovanje",
-        "nostr": "Nostr",
-        "shopping": "Nakupovanje",
-        "nodeManagement": "Upravljanje vozlišča",
-        "showcases": "Primeri",
-        "miscellaneous": "Razno",
-        "entertainment": "Zabava"
-      },
-      "description": "Spletna mesta in spletne aplikacije, kjer lahko uporabljaš Alby",
-      "title": "Razišči ekosistem Lightning ⚡️"
-    },
     "receive": {
       "payment": {
         "status": "Preveri status plačila"
