@@ -1,4 +1,9 @@
 import { decryptData } from "~/common/lib/crypto";
+import edit from "~/extension/background-script/actions/accounts/edit";
+import {
+  generateMnemonic,
+  setMnemonic,
+} from "~/extension/background-script/actions/mnemonic";
 import state from "~/extension/background-script/state";
 import i18n from "~/i18n/i18nConfig";
 import type { MessageAccountUnlock } from "~/types";
@@ -31,6 +36,32 @@ const unlock = async (message: MessageAccountUnlock) => {
 
   // if everything is fine we keep the password in memory
   await state.getState().password(password);
+
+  // for existing alby accounts we can't write migiration to auto generate mnemonic because of unavailability of password field.
+  if (!account.mnemonic) {
+    const mnemonic = await generateMnemonic({
+      action: "generateMnemonic",
+      origin: { internal: true },
+    });
+
+    setMnemonic({
+      args: {
+        id: account.id,
+        mnemonic: mnemonic.data,
+      },
+      action: "setMnemonic",
+      origin: { internal: true },
+    });
+
+    edit({
+      args: {
+        id: account.id,
+        useMnemonicForLnurlAuth: true,
+      },
+      action: "editAccount",
+      origin: { internal: true },
+    });
+  }
   // load the connector to make sure it is initialized for the future calls
   // with this we prevent potentially multiple action calls trying to initialize the connector in parallel
   // we have to be careful here: if the unlock fails (e.g. because of an error in getConnector() the user
