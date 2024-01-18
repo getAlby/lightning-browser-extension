@@ -72,9 +72,14 @@ type CommandoListSendPaysResponse = {
 type CommandoPayInvoiceResponse = {
   payment_preimage: string;
   payment_hash: string;
-  msatoshi: number;
-  msatoshi_sent: number;
+  created_at: number;
+  parts: string;
+  amount_msat: number;
+  amount_sent_msat: number;
+  status: string;
+  destination?: string;
 };
+
 type CommandoListInvoiceResponse = {
   invoices: CommandoInvoice[];
 };
@@ -340,9 +345,9 @@ export default class Commando implements Connector {
             paymentHash: parsed.payment_hash,
             preimage: parsed.payment_preimage,
             route: {
-              total_amt: Math.floor(parsed.msatoshi_sent / 1000),
+              total_amt: Math.floor(parsed.amount_msat / 1000),
               total_fees: Math.floor(
-                (parsed.msatoshi_sent - parsed.msatoshi) / 1000
+                (parsed.amount_sent_msat - parsed.amount_msat) / 1000
               ),
             },
           },
@@ -377,9 +382,9 @@ export default class Commando implements Connector {
             paymentHash: parsed.payment_hash,
             preimage: parsed.payment_preimage,
             route: {
-              total_amt: Math.floor(parsed.msatoshi_sent / 1000),
+              total_amt: Math.floor(parsed.amount_msat / 1000),
               total_fees: Math.floor(
-                (parsed.msatoshi_sent - parsed.msatoshi) / 1000
+                (parsed.amount_sent_msat - parsed.amount_msat) / 1000
               ),
             },
           },
