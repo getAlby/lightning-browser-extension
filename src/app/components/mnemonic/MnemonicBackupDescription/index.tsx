@@ -44,25 +44,15 @@ type ListItemProps = {
 
 function ListItem({ icon, title, type }: ListItemProps) {
   return (
-    <div className="flex gap-2 items-center">
-      <div
-        className={classNames(
-          type == "warn" && "text-orange-700 dark:text-orange-200",
-          "shrink-0",
-          type == "info" && "text-gray-600 dark:text-neutral-400"
-        )}
-      >
-        {icon}
-      </div>
-      <span
-        className={classNames(
-          type == "warn" && "text-orange-700 dark:text-orange-200",
-          type == "info" && "text-gray-600 dark:text-neutral-400",
-          "text-sm"
-        )}
-      >
-        {title}
-      </span>
+    <div
+      className={classNames(
+        type == "warn" && "text-orange-700 dark:text-orange-200",
+        type == "info" && "text-gray-600 dark:text-neutral-400",
+        "flex gap-2 items-center text-sm"
+      )}
+    >
+      <div className="shrink-0">{icon}</div>
+      <span>{title}</span>
     </div>
   );
 }
