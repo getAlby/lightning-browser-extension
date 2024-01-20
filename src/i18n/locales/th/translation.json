@@ -809,7 +809,6 @@
   "permissions": {
     "nostr": {
       "signmessage": "เซ็นข้อความด้วย key ของคุณ",
-      "nip04encrypt": "เข้ารหัสข้อมูล",
       "nip04decrypt": "ถอดรหัสข้อมูล",
       "getpublickey": "แสดง public key ของคุณ"
     },
