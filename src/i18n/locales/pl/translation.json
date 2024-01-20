@@ -884,7 +884,6 @@
   "permissions": {
     "nostr": {
       "getpublickey": "Czytanie Twojego klucza publicznego.",
-      "nip04encrypt": "Szyfrowanie danych.",
       "nip04decrypt": "Deszyfrowanie danych.",
       "signmessage": "Podpisywanie wiadomości Twoim kluczem."
     },
