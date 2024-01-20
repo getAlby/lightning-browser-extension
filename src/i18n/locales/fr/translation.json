@@ -738,7 +738,6 @@
   "permissions": {
     "nostr": {
       "getpublickey": "Lisez votre clé publique",
-      "nip04encrypt": "Crypter les données",
       "nip04decrypt": "Déchiffrer les données",
       "signmessage": "Signez le message avec votre clé"
     },
