@@ -1022,7 +1022,6 @@
   "permissions": {
     "nostr": {
       "getpublickey": "کلید عمومی تان را بخوانید",
-      "nip04encrypt": "رمزنگاری داده",
       "nip04decrypt": "رمزگشایی داده",
       "signmessage": "پیام را با کلید خود امضا کنید"
     },
