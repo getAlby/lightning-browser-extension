@@ -1120,8 +1120,7 @@
     "nostr": {
       "nip04decrypt": "Dekryptera data",
       "getpublickey": "Läs din publika nyckel",
-      "signmessage": "Skriv under meddelandet med din nyckel",
-      "nip04encrypt": "Kryptera data"
+      "signmessage": "Skriv under meddelandet med din nyckel"
     },
     "lnd": {
       "channelbalance": "Få en rapport om de totala medlen över alla öppna kanaler",
