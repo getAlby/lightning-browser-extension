@@ -754,7 +754,6 @@
   "permissions": {
     "nostr": {
       "getpublickey": "तुमची सार्वजनिक की वाचा",
-      "nip04encrypt": "डेटा Encrypt करा",
       "nip04decrypt": "डेटा Decrypt करा",
       "signmessage": "तुमच्या किल्लीने संदेशावर स्वाक्षरी करा"
     },
