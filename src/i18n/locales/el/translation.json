@@ -41,6 +41,9 @@
       "alby": {
         "title": "Λογαριασμός Alby",
         "connect": "Σύνδεση με Alby"
+      },
+      "voltage": {
+        "connect": "Σύνδεση"
       }
     },
     "alby": {
@@ -115,7 +118,10 @@
         "pubkey": {
           "label": "Δημόσιο κλειδί"
         },
-        "title": "Core Lightning"
+        "title": "Core Lightning",
+        "page": {
+          "title": "Σύνδεση στον Core Lightning κόμβο σας"
+        }
       },
       "title": "Σύνδεση με πορτοφόλι Lightning",
       "description": "Σύνδεση σε εξωτερικό πορτοφόλι lightning ή σε κόμβο",
@@ -144,6 +150,15 @@
           "title": "Σύνδεση στον <0>RaspiBlitz<0> κόμβο σας"
         },
         "title": "RaspiBlitz"
+      },
+      "mynode": {
+        "title": "myNode",
+        "page": {
+          "title": "Σύνδεση σε <0>myNode</0>"
+        }
+      },
+      "voltage": {
+        "title": "Voltage"
       }
     },
     "distributions": {
@@ -161,6 +176,9 @@
       },
       "citadel": {
         "name": "Citadel"
+      },
+      "mynode": {
+        "name": "myNode"
       }
     },
     "accounts": {
@@ -174,7 +192,16 @@
               "nostr": "Nostr"
             }
           },
-          "title": "Διαχείριση κλειδιών"
+          "title": "Διαχείριση κλειδιών",
+          "new": {
+            "title": "Τι είναι πρωτεύων κλειδί;"
+          },
+          "generate": {
+            "title": "Δημιουργία νέου πρωτεύοντος κλειδιού"
+          },
+          "import": {
+            "title": "Εισαγωγή του πρωτεύοντος κλειδιού σας"
+          }
         },
         "network": {
           "title": "Δίκτυο"
@@ -191,10 +218,22 @@
             },
             "new": {
               "label": "Δημιουργία νέου λογαριασμού Nostr"
-            }
+            },
+            "new_to_nostr": "Νέος/α στο Nostr;<0>Μάθετε περισσότερα</0>"
           },
           "public_key": {
             "label": "Δημόσιο κλειδί Nostr"
+          },
+          "private_key": {
+            "title": "Διαχείριση του Nostr ιδιωτικού κλειδιού σας",
+            "label": "Ιδιωτικό κλειδί Nostr",
+            "successfully_removed": "Το ιδιωτικό κλειδί Nostr απομακρύνθηκε με επιτυχία.",
+            "subtitle": "Επικόλληση του nostr ιδιωτικού κλειδιού σας ή δημιουργήστε ένα νέο. <0>Μάθετε περισσότερα»</0>",
+            "success": "Το ιδιωτικό κλειδί Nostr κρυπτογραφήθηκε & αποθηκεύτηκε με επιτυχία."
+          },
+          "generate_keys": {
+            "screen_reader": "Δημιουργήστε ένα νέο κλειδί Nostr για τον λογαριασμό σας",
+            "title": "Δημιουργήστε ένα νέο κλειδί Nostr"
           }
         },
         "export": {
@@ -262,7 +301,11 @@
         "title": "Νόμισμα"
       },
       "nostr": {
-        "title": "Nostr"
+        "title": "Nostr",
+        "private_key": {
+          "go_to": "Μετάβαση στους λογαριασμούς",
+          "title": "Ιδιωτικό κλειδί"
+        }
       },
       "language": {
         "title": "Γλώσσα"
@@ -272,12 +315,24 @@
           "system": "Σύστημα",
           "dark": "Σκοτεινό",
           "light": "Φωτεινό"
-        }
+        },
+        "title": "Θέμα"
       },
       "camera_access": {
-        "title": "Πρόσβαση κάμερας"
+        "title": "Πρόσβαση κάμερας",
+        "allow": "Να επιτρέπεται η πρόσβαση στην κάμερα",
+        "subtitle": "Για σάρωση κωδικών QR",
+        "granted": "Έχει δοθεί άδεια"
       },
-      "title": "Ρυθμίσεις"
+      "title": "Ρυθμίσεις",
+      "personal_data": {
+        "title": "Προσωπικά δεδομένα"
+      },
+      "change_password": {
+        "submit": {
+          "label": "Αλλαγή"
+        }
+      }
     },
     "home": {
       "default_view": {
@@ -293,6 +348,16 @@
     "lnurlpay": {
       "comment": {
         "label": "Σχόλιο"
+      },
+      "success": "Επιτυχία, η πληρωμή στάλθηκε!",
+      "amount": {
+        "label": "Ποσό"
+      },
+      "email": {
+        "label": "Email"
+      },
+      "name": {
+        "label": "Όνομα"
       }
     },
     "lnurlwithdraw": {
@@ -310,18 +375,28 @@
     "send": {
       "input": {
         "label": "Παραλήπτης"
-      }
+      },
+      "title": "Αποστολή"
     },
     "unlock": {
       "help_contact": {
         "part2": "Υποστήριξη Alby"
-      }
+      },
+      "unlock_password": "Ο κωδικός ξεκλειδώματος σας",
+      "errors": {
+        "invalid_password": "Μη έγκυρος κωδικός ξεκλειδώματος"
+      },
+      "unlock_to_continue": "Ξεκλειδώστε για συνεχίσετε"
     },
     "alby_enable": {
       "title": "Σύνδεση στο Alby"
     },
     "transactions": {
       "title": "Συναλλαγές"
+    },
+    "lnurlauth": {
+      "success": "Επιτυχής σύνδεση  στο {{name}}",
+      "submit": "Είσοδος"
     }
   },
   "common": {
