@@ -113,12 +113,12 @@
           "instructions": "Das funktioniert aktuell nicht, wenn 2FA ausgewählt ist.",
           "title": "Verbinden mit <0>Citadel</0> Node"
         },
-        "title": "Citadel",
+        "title": "Zitadelle",
         "password": {
           "label": "Citadel Kennwort"
         },
         "url": {
-          "label": "Citadel URL",
+          "label": "Zitadelle URL",
           "placeholder": "http://citadel.local"
         }
       },
@@ -812,7 +812,7 @@
         "name": "Umbrel"
       },
       "citadel": {
-        "name": "Citadel"
+        "name": "Zitadelle"
       },
       "btcpay": {
         "name": "BTCPay"
