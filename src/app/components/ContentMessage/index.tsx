@@ -1,5 +1,5 @@
 type Props = {
-  heading: string;
+  heading: string | React.ReactNode;
   content: string;
 };
 

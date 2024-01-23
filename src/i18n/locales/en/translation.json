@@ -198,11 +198,11 @@
           "placeholder": "lndconnect://yournode:8080?..."
         }
       },
-      "start9": {
-        "title": "Start9",
+      "startos": {
+        "title": "StartOS",
         "page": {
-          "title": "Connect to your <0>Start9 Server</0>",
-          "instructions": "On your Embassy dashboard click on the <0>Lightning Network Daemon</0> service.<1/>Select the <0>Properties</0> tab.<1/>Now copy the <0>LND Connect REST URL.</0>"
+          "title": "Connect to <0>StartOS</0>",
+          "instructions": "On your StartOS dashboard click on the <0>Lightning Network Daemon</0> service.<1/>Select the <0>Properties</0> tab.<1/>Now copy the <0>LND Connect REST URL.</0>"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -352,8 +352,8 @@
       "mynode": {
         "name": "myNode"
       },
-      "start9": {
-        "name": "Start9"
+      "startos": {
+        "name": "StartOS"
       }
     },
     "home": {
@@ -960,14 +960,13 @@
       "allow": "Allow this website to:",
       "content": "This website asks you to sign:",
       "allow_sign": "Allow {{host}} to sign:",
-      "allow_sign_event": "Allow {{host}} to sign a {{kind}} event",
+      "allow_sign_event": "Allow {{host}} to sign a <0>{{kind}}</0> event",
       "allow_encrypt": "Allow {{host}} to encrypt the message:",
-      "allow_decrypt": "Allow {{host}} to decrypt the message:",
       "view_details": "View details",
       "hide_details": "Hide details",
       "block_and_ignore": "Block and ignore {{host}}",
       "block_added": "Added {{host}} to the blocklist, please reload the website.",
-      "peer": "Peer",
+      "recipient": "Recipient",
       "kinds": {
         "unknown": "kind {{kind}}",
         "0": "metadata",
@@ -1218,7 +1217,6 @@
     "nostr": {
       "getpublickey": "Read your public key",
       "signmessage": "Sign message with your key",
-      "nip04encrypt": "Encrypt data",
       "nip04decrypt": "Decrypt data"
     },
     "bitcoin": {

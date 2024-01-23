@@ -168,11 +168,11 @@
           "placeholder": "lndconnect://votrenode:8080?..."
         }
       },
-      "start9": {
-        "title": "Start9",
+      "startos": {
+        "title": "StartOS",
         "page": {
-          "title": "Connectez-vous à votre nœud <0>Embassy</0>",
-          "instructions": "<0>Remarque :</0> Actuellement, nous ne prenons en charge que LND, mais nous ajouterons la prise en charge de c-lightning à l'avenir !<1/>Sur votre tableau de bord Embassy, cliquez sur le service <0>daemon du réseau Lightning</0>. <1/>Sélectionnez l'onglet <0>Properties</0>.<1/>Copiez maintenant l'<0>URL REST LND Connect.</0>"
+          "title": "Connectez-vous à votre nœud <0>StartOS</0>",
+          "instructions": "<0>Remarque :</0> Actuellement, nous ne prenons en charge que LND, mais nous ajouterons la prise en charge de c-lightning à l'avenir !<1/>Sur votre tableau de bord StartOS, cliquez sur le service <0>daemon du réseau Lightning</0>. <1/>Sélectionnez l'onglet <0>Properties</0>.<1/>Copiez maintenant l'<0>URL REST LND Connect.</0>"
         },
         "rest_url": {
           "label": "URL REST lndconnect",
