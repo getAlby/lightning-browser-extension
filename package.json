@@ -79,7 +79,7 @@
     "tailwindcss": "^3.3.3",
     "uuid": "^9.0.0",
     "webextension-polyfill": "^0.10.0",
-    "zustand": "^3.7.2"
+    "zustand": "^4.5.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.8.0",
