@@ -22,6 +22,11 @@ const edit = async (message: MessageAccountEdit) => {
         message.args.useMnemonicForLnurlAuth;
     }
 
+    if (message.args.isMnemonicBackupDone !== undefined) {
+      accounts[accountId].isMnemonicBackupDone =
+        message.args.isMnemonicBackupDone;
+    }
+
     state.setState({ accounts });
     // make sure we immediately persist the updated accounts
     await state.getState().saveToStorage();

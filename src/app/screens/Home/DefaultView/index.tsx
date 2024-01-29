@@ -47,6 +47,8 @@ const DefaultView: FC<Props> = (props) => {
   const lightningAddress = account?.lightningAddress || "";
 
   const [isBlockedUrl, setIsBlockedUrl] = useState<boolean>(false);
+  const [isMnemonicBackupDone, setIsMnemonicBackupDone] = useState(false);
+  const [hasMnemonic, setHasMnemonic] = useState(false);
 
   const { transactions, isLoadingTransactions, loadTransactions } =
     useTransactions();
@@ -68,6 +70,19 @@ const DefaultView: FC<Props> = (props) => {
       checkBlockedUrl(props.currentUrl.host);
     }
   }, [props.currentUrl]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const account = await api.getAccount();
+        setIsMnemonicBackupDone(account.isMnemonicBackupDone);
+        setHasMnemonic(account.hasMnemonic);
+      } catch (e) {
+        console.error(e);
+        if (e instanceof Error) toast.error(`Error: ${e.message}`);
+      }
+    })();
+  }, []);
 
   const unblock = async () => {
     try {
@@ -193,23 +208,25 @@ const DefaultView: FC<Props> = (props) => {
                 />
               )}
 
-              <IconLinkCard
-                title={t("default_view.actions.backup_masterkey.title")}
-                description={t(
-                  "default_view.actions.backup_masterkey.description"
-                )}
-                icon={
-                  <PopiconsKeyLine className="w-8 h-8 text-gray-400 dark:text-neutral-500" />
-                }
-                onClick={async () => {
-                  const account = await api.getAccount();
-                  if (account.hasMnemonic) {
-                    openOptions(`accounts/${account.id}/secret-key/backup`);
-                  } else {
-                    openOptions(`accounts/${account.id}/secret-key/new`);
+              {!(hasMnemonic && isMnemonicBackupDone) && (
+                <IconLinkCard
+                  title={t("default_view.actions.backup_masterkey.title")}
+                  description={t(
+                    "default_view.actions.backup_masterkey.description"
+                  )}
+                  icon={
+                    <PopiconsKeyLine className="w-8 h-8 text-gray-400 dark:text-neutral-500" />
                   }
-                }}
-              />
+                  onClick={async () => {
+                    const account = await api.getAccount();
+                    if (account.hasMnemonic) {
+                      openOptions(`accounts/${account.id}/secret-key/backup`);
+                    } else {
+                      openOptions(`accounts/${account.id}/secret-key/new`);
+                    }
+                  }}
+                />
+              )}
 
               {transactions.length == 0 && (
                 <IconLinkCard
@@ -226,20 +243,22 @@ const DefaultView: FC<Props> = (props) => {
                 />
               )}
 
-              <IconLinkCard
-                title={t("default_view.actions.import_masterkey.title")}
-                description={t(
-                  "default_view.actions.import_masterkey.description"
-                )}
-                icon={
-                  <PopiconsDownloadLine className="w-8 h-8 text-gray-400 dark:text-neutral-500" />
-                }
-                onClick={async () => {
-                  const account = await api.getAccount();
+              {!(hasMnemonic && isMnemonicBackupDone) && (
+                <IconLinkCard
+                  title={t("default_view.actions.import_masterkey.title")}
+                  description={t(
+                    "default_view.actions.import_masterkey.description"
+                  )}
+                  icon={
+                    <PopiconsDownloadLine className="w-8 h-8 text-gray-400 dark:text-neutral-500" />
+                  }
+                  onClick={async () => {
+                    const account = await api.getAccount();
 
-                  openOptions(`accounts/${account.id}/secret-key/import`);
-                }}
-              />
+                    openOptions(`accounts/${account.id}/secret-key/import`);
+                  }}
+                />
+              )}
             </div>
             <TransactionsTable
               transactions={transactions}
