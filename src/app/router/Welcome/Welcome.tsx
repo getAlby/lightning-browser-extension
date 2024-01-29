@@ -63,11 +63,11 @@ function Layout() {
   });
 
   return (
-    <div className="flex flex-col">
-      <div className="ml-6 mt-4">
+    <div className="flex flex-col min-h-screen">
+      <div className="ml-6 mt-4 mb-2">
         <LocaleSwitcher className="text-sm border-transparent text-gray-600 hover:text-gray-700 bg-gray-100 dark:bg-surface-00dp dark:text-neutral-400 dark:hover:text-neutral-300" />
       </div>
-      <div className="flex justify-center items-center min-h-screen">
+      <div className="flex justify-center items-center">
         <div className="w-full">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
             <div className="text-center font-serif font-medium text-2xl mt-8 dark:text-white">
