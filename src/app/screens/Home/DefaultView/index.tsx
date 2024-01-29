@@ -21,7 +21,7 @@ import toast from "~/app/components/Toast";
 import { useAccount } from "~/app/context/AccountContext";
 import { useTransactions } from "~/app/hooks/useTransactions";
 import { PublisherLnData } from "~/app/screens/Home/PublisherLnData";
-import api from "~/common/lib/api";
+import api, { GetAccountRes } from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
 import type { Battery } from "~/types";
@@ -47,8 +47,7 @@ const DefaultView: FC<Props> = (props) => {
   const lightningAddress = account?.lightningAddress || "";
 
   const [isBlockedUrl, setIsBlockedUrl] = useState<boolean>(false);
-  const [isMnemonicBackupDone, setIsMnemonicBackupDone] = useState(false);
-  const [hasMnemonic, setHasMnemonic] = useState(false);
+  const [currentAccount, setCurrentAccount] = useState<GetAccountRes>();
 
   const { transactions, isLoadingTransactions, loadTransactions } =
     useTransactions();
@@ -75,8 +74,7 @@ const DefaultView: FC<Props> = (props) => {
     (async () => {
       try {
         const account = await api.getAccount();
-        setIsMnemonicBackupDone(account.isMnemonicBackupDone);
-        setHasMnemonic(account.hasMnemonic);
+        setCurrentAccount(account);
       } catch (e) {
         console.error(e);
         if (e instanceof Error) toast.error(`Error: ${e.message}`);
@@ -208,7 +206,10 @@ const DefaultView: FC<Props> = (props) => {
                 />
               )}
 
-              {!(hasMnemonic && isMnemonicBackupDone) && (
+              {!(
+                currentAccount?.hasMnemonic &&
+                currentAccount?.isMnemonicBackupDone
+              ) && (
                 <IconLinkCard
                   title={t("default_view.actions.backup_masterkey.title")}
                   description={t(
@@ -218,11 +219,14 @@ const DefaultView: FC<Props> = (props) => {
                     <PopiconsKeyLine className="w-8 h-8 text-gray-400 dark:text-neutral-500" />
                   }
                   onClick={async () => {
-                    const account = await api.getAccount();
-                    if (account.hasMnemonic) {
-                      openOptions(`accounts/${account.id}/secret-key/backup`);
+                    if (currentAccount?.hasMnemonic) {
+                      openOptions(
+                        `accounts/${currentAccount?.id}/secret-key/backup`
+                      );
                     } else {
-                      openOptions(`accounts/${account.id}/secret-key/new`);
+                      openOptions(
+                        `accounts/${currentAccount?.id}/secret-key/new`
+                      );
                     }
                   }}
                 />
@@ -243,7 +247,10 @@ const DefaultView: FC<Props> = (props) => {
                 />
               )}
 
-              {!(hasMnemonic && isMnemonicBackupDone) && (
+              {!(
+                currentAccount?.hasMnemonic &&
+                currentAccount?.isMnemonicBackupDone
+              ) && (
                 <IconLinkCard
                   title={t("default_view.actions.import_masterkey.title")}
                   description={t(
@@ -253,9 +260,9 @@ const DefaultView: FC<Props> = (props) => {
                     <PopiconsDownloadLine className="w-8 h-8 text-gray-400 dark:text-neutral-500" />
                   }
                   onClick={async () => {
-                    const account = await api.getAccount();
-
-                    openOptions(`accounts/${account.id}/secret-key/import`);
+                    openOptions(
+                      `accounts/${currentAccount?.id}/secret-key/import`
+                    );
                   }}
                 />
               )}
