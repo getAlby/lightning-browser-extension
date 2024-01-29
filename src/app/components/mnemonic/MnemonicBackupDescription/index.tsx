@@ -6,7 +6,7 @@ import {
 import { useTranslation } from "react-i18next";
 import { classNames } from "~/app/utils";
 
-function MnemonicBackupDescription() {
+function MnemonicInstructions() {
   const { t } = useTranslation("translation", {
     keyPrefix: "accounts.account_view.mnemonic",
   });
@@ -16,17 +16,17 @@ function MnemonicBackupDescription() {
       <div className="flex flex-col gap-4">
         <ListItem
           icon={<PopiconsLifebuoyLine />}
-          title={t("backup.items.recovery_phrase")}
+          title={t("description.recovery_phrase")}
           type="info"
         />
         <ListItem
           icon={<PopiconsShieldLine />}
-          title={t("backup.items.secure_recovery_phrase")}
+          title={t("description.secure_recovery_phrase")}
           type="info"
         />
         <ListItem
           icon={<PopiconsTriangleExclamationLine />}
-          title={t("backup.items.warning")}
+          title={t("description.warning")}
           type="warn"
         />
       </div>
@@ -34,7 +34,7 @@ function MnemonicBackupDescription() {
   );
 }
 
-export default MnemonicBackupDescription;
+export default MnemonicInstructions;
 
 type ListItemProps = {
   icon: React.ReactNode;

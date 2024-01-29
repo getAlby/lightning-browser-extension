@@ -399,6 +399,11 @@
           "title": "🔑 Key Management",
           "saved": "Master Key encrypted & saved successfully.",
           "existing_nostr_key_notice": "ℹ️ This account already has a nostr private key set and will not be derived from this Master Key. You can manage your Nostr key from your account settings.",
+          "description": {
+            "warning": "Recovery phrase cannot recover this wallet or funds in it. It only recovers the identity you can use across aforementioned protocols",
+            "secure_recovery_phrase": "Make sure to write them down somewhere safe and and keep them private",
+            "recovery_phrase": "Recovery phrase is set of 12 words that backs up your Master Key"
+          },
           "new": {
             "title": "What is a Master Key?",
             "items": {
@@ -420,11 +425,6 @@
             "button": "View recovery phrase",
             "warning": "⚠️ Don't forget to back up your recovery phrase! Not backing it up might result in permanently losing access to your Master Key, Nostr identity or assets you manage with this key.",
             "description": "Write down the recovery phrase to be able to restore your Master Key on a new device or in case you lose access to your account.",
-            "items": {
-              "warning": "Recovery phrase cannot recover this wallet or funds in it. It only recovers the identity you can use across aforementioned protocols",
-              "secure_recovery_phrase": "Make sure to write them down somewhere safe and and keep them private",
-              "recovery_phrase": "Recovery phrase is set of 12 words that backs up your Master Key"
-            },
             "protocols": {
               "nostr": "Nostr"
             }

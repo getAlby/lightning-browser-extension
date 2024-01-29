@@ -6,7 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Button from "~/app/components/Button";
 import { ContentBox } from "~/app/components/ContentBox";
 import toast from "~/app/components/Toast";
-import MnemonicBackupDescription from "~/app/components/mnemonic/MnemonicBackupDescription";
+import MnemonicInstructions from "~/app/components/mnemonic/MnemonicBackupDescription";
 import MnemonicInputs from "~/app/components/mnemonic/MnemonicInputs";
 import api from "~/common/lib/api";
 
@@ -49,7 +49,7 @@ function BackupMnemonic() {
           <h1 className="font-bold text-2xl dark:text-white">
             {t("backup.title")}
           </h1>
-          <MnemonicBackupDescription />
+          <MnemonicInstructions />
           <MnemonicInputs mnemonic={mnemonic} readOnly />
 
           <div className="flex justify-center mt-6 w-64 mx-auto">

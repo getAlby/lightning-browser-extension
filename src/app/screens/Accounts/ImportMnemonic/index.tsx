@@ -9,6 +9,7 @@ import Alert from "~/app/components/Alert";
 import Button from "~/app/components/Button";
 import { ContentBox } from "~/app/components/ContentBox";
 import toast from "~/app/components/Toast";
+import MnemonicInstructions from "~/app/components/mnemonic/MnemonicBackupDescription";
 import MnemonicInputs from "~/app/components/mnemonic/MnemonicInputs";
 import api from "~/common/lib/api";
 
@@ -81,6 +82,8 @@ function ImportMnemonic() {
           <p className="text-gray-500 dark:text-neutral-500 -mt-2 mb-4">
             {t("import.description")}
           </p>
+
+          <MnemonicInstructions />
           {hasNostrPrivateKey && (
             <Alert type="info">{t("existing_nostr_key_notice")}</Alert>
           )}

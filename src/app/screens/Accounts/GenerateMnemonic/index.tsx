@@ -8,6 +8,7 @@ import Button from "~/app/components/Button";
 import { ContentBox } from "~/app/components/ContentBox";
 import toast from "~/app/components/Toast";
 import Checkbox from "~/app/components/form/Checkbox";
+import MnemonicInstructions from "~/app/components/mnemonic/MnemonicBackupDescription";
 import MnemonicInputs from "~/app/components/mnemonic/MnemonicInputs";
 import api from "~/common/lib/api";
 
@@ -79,6 +80,8 @@ function GenerateMnemonic() {
           <h1 className="font-bold text-2xl dark:text-white">
             {t("generate.title")}
           </h1>
+
+          <MnemonicInstructions />
           {hasNostrPrivateKey && (
             <Alert type="info">{t("existing_nostr_key_notice")}</Alert>
           )}
