@@ -183,7 +183,7 @@ const DefaultView: FC<Props> = (props) => {
                     "default_view.actions.get_started.description"
                   )}
                   icon={
-                    <PopiconsBulbLine className="w-8 h-8 text-gray-400 darK:text-neutral-500" />
+                    <PopiconsBulbLine className="w-8 h-8 text-gray-400 dark:text-neutral-500" />
                   }
                   onClick={() => {
                     utils.openUrl(
@@ -199,7 +199,7 @@ const DefaultView: FC<Props> = (props) => {
                   "default_view.actions.backup_masterkey.description"
                 )}
                 icon={
-                  <PopiconsKeyLine className="w-8 h-8 text-gray-400 darK:text-neutral-500" />
+                  <PopiconsKeyLine className="w-8 h-8 text-gray-400 dark:text-neutral-500" />
                 }
                 onClick={async () => {
                   const account = await api.getAccount();
@@ -218,7 +218,7 @@ const DefaultView: FC<Props> = (props) => {
                     "default_view.actions.receive_bitcoin.description"
                   )}
                   icon={
-                    <PopiconsArrowDownLine className="w-8 h-8 text-gray-400 darK:text-neutral-500" />
+                    <PopiconsArrowDownLine className="w-8 h-8 text-gray-400 dark:text-neutral-500" />
                   }
                   onClick={() => {
                     navigate("/receive");
@@ -232,7 +232,7 @@ const DefaultView: FC<Props> = (props) => {
                   "default_view.actions.import_masterkey.description"
                 )}
                 icon={
-                  <PopiconsDownloadLine className="w-8 h-8 text-gray-400 darK:text-neutral-500" />
+                  <PopiconsDownloadLine className="w-8 h-8 text-gray-400 dark:text-neutral-500" />
                 }
                 onClick={async () => {
                   const account = await api.getAccount();

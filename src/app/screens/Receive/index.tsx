@@ -123,7 +123,7 @@ function Receive() {
               title={t("actions.invoice.title")}
               description={t("actions.invoice.description")}
               icon={
-                <PopiconsBoltLine className="w-8 h-8 text-gray-400 darK:text-neutral-500" />
+                <PopiconsBoltLine className="w-8 h-8 text-gray-400 dark:text-neutral-500" />
               }
               onClick={() => {
                 navigate("/receive/invoice");
@@ -134,7 +134,7 @@ function Receive() {
                 title={t("actions.bitcoin_address.title")}
                 description={t("actions.bitcoin_address.description")}
                 icon={
-                  <BitcoinIcon className="w-8 h-8 text-gray-400 darK:text-neutral-500" />
+                  <BitcoinIcon className="w-8 h-8 text-gray-400 dark:text-neutral-500" />
                 }
                 onClick={() => {
                   navigate("/onChainReceive");
@@ -145,7 +145,7 @@ function Receive() {
               title={t("actions.redeem.title")}
               description={t("actions.redeem.description")}
               icon={
-                <PopiconsWithdrawalLine className="w-8 h-8 text-gray-400 darK:text-neutral-500" />
+                <PopiconsWithdrawalLine className="w-8 h-8 text-gray-400 dark:text-neutral-500" />
               }
               onClick={() => {
                 navigate("/lnurlRedeem");
