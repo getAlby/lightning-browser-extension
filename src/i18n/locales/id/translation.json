@@ -620,35 +620,6 @@
     "scan_qrcode": {
       "title": "Menunggu pemindaian"
     },
-    "discover": {
-      "title": "Jelajahi Ekosistem Lightning ⚡️",
-      "description": "Situs Web dan aplikasi Web di mana kamu dapat menggunakan Alby",
-      "list": {
-        "trading": "Perdagangan",
-        "gaming": "Permainan",
-        "nostr": "Nostr",
-        "entertainment": "Hiburan",
-        "shopping": "Berbelanja",
-        "miscellaneous": "Lain-lain",
-        "nodeManagement": "Manajemen Node"
-      },
-      "tips": {
-        "top_up_wallet": {
-          "description": "Perlu top up?\nKami sediakan!",
-          "title": "Beli Bitcoin"
-        },
-        "demo": {
-          "description": "Temukan fitur Alby\ndi situs demo kami",
-          "title": "Demo Alby"
-        },
-        "mnemonic": {
-          "description": "Berencana menggunakan Nostr?\nBuat kunci kamu sekarang.",
-          "title": "Nostr"
-        },
-        "description": "Beberapa tips untuk memulai buzzin'🐝",
-        "title": "Dompet Alby kamu sudah siap"
-      }
-    },
     "publishers": {
       "title": "Website ⚡ Kamu",
       "description": "Situs Web di mana kamu telah menggunakan Alby sebelum",

@@ -504,31 +504,6 @@
         "status": "Vérifier l'état du paiement"
       }
     },
-    "discover": {
-      "title": "Explorez l'écosystème Lightning ⚡️",
-      "description": "Sites Web et applications Web où vous pouvez utiliser Alby",
-      "list": {
-        "trading": "Commerce",
-        "gaming": "Jeux",
-        "entertainment": "Divertissement",
-        "shopping": "Achats",
-        "miscellaneous": "Divers",
-        "showcases": "Vitrines",
-        "nostr": "Nostr"
-      },
-      "tips": {
-        "title": "Votre portefeuille Alby est prêt",
-        "description": "Quelques conseils pour commencer à buzzer🐝",
-        "top_up_wallet": {
-          "title": "⚡️ Rechargez votre portefeuille",
-          "description": "Créez une facture Lightning, envoyez-vous des bitcoins et commencez à utiliser Alby dans l'écosystème Lightning"
-        },
-        "demo": {
-          "title": "🕹️ Essayez la démo d'Alby",
-          "description": "Découvrez tout ce que vous pouvez faire avec Alby sur notre site de démonstration"
-        }
-      }
-    },
     "publishers": {
       "title": "Vos sites ⚡",
       "description": "Sites Web sur lesquels vous avez déjà utilisé Alby",
