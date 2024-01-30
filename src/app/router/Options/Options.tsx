@@ -1,5 +1,6 @@
 import Container from "@components/Container";
 import Navbar from "@components/Navbar";
+import { PopiconsArrowUpLine } from "@popicons/react";
 import Accounts from "@screens/Accounts";
 import AccountDetail from "@screens/Accounts/Detail";
 import ConfirmPayment from "@screens/ConfirmPayment";
@@ -160,7 +161,7 @@ const Layout = () => {
         </Navbar.Link>
         <Navbar.Link href="https://getalby.com/discover" target="_blank">
           {tCommon("discover")}
-          <img src="assets/icons/arrow_up_right.svg" />
+          <PopiconsArrowUpLine className="h-5 w-5 rotate-45" />
         </Navbar.Link>
       </Navbar>
       <Toaster />
