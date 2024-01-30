@@ -278,7 +278,7 @@
         "page": {
           "url": {
             "label": "Nostr Wallet Verbindung URL",
-            "placeholder": "nostr+walletverbindung://69effe..."
+            "placeholder": "nostr+walletconnect://69effe..."
           },
           "instructions": "Einfügen einer NWC-Verbindungszeichenfolge von <0>Alby Nostr Wallet Connect</0>, <1>Umbrel Nostr Wallet Connect</1> oder <2>Mutiny Wallet</2>",
           "errors": {
