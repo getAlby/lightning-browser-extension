@@ -118,7 +118,7 @@
           "label": "Citadel Kennwort"
         },
         "url": {
-          "label": "Zitadelle URL",
+          "label": "Citadel URL",
           "placeholder": "http://citadel.local"
         }
       },
