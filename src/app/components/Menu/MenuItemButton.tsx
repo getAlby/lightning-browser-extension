@@ -3,7 +3,6 @@ import { classNames } from "~/app/utils/index";
 
 type Props = {
   children: React.ReactNode;
-  danger?: boolean;
   disabled?: boolean;
   onClick: () => void;
   title?: string;
@@ -11,7 +10,6 @@ type Props = {
 
 function MenuItemButton({
   children,
-  danger = false,
   disabled = false,
   onClick,
   title = "",
