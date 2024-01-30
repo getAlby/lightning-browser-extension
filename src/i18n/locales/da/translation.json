@@ -707,7 +707,6 @@
   "permissions": {
     "nostr": {
       "getpublickey": "Læs din offentlige nøgle",
-      "nip04encrypt": "Krypter data",
       "nip04decrypt": "De-krypter data",
       "signmessage": "Underskriv meddelelse med din nøgle"
     },

@@ -983,7 +983,6 @@
     "nostr": {
       "signmessage": "使用你的密钥签署消息",
       "nip04decrypt": "解密数据",
-      "nip04encrypt": "加密数据",
       "getpublickey": "读取你的公钥"
     },
     "commando": {

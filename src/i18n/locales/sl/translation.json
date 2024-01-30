@@ -637,7 +637,6 @@
       "getaddress": "Bere tvoj Liquid naslov za prejemanje"
     },
     "nostr": {
-      "nip04encrypt": "Kriptiraj podatke",
       "signmessage": "Podpiši sporočilo s svojim ključem",
       "nip04decrypt": "Dekriptiraj podatke",
       "getpublickey": "Bere tvoj javni ključ"

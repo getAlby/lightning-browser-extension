@@ -805,8 +805,7 @@
   "permissions": {
     "nostr": {
       "nip04decrypt": "Dekripsi data",
-      "getpublickey": "Membaca kunci publik Anda",
-      "nip04encrypt": "Enkripsi data"
+      "getpublickey": "Membaca kunci publik Anda"
     },
     "commando": {
       "decode": "Decode teks bolt11/bolt12/rune"

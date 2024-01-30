@@ -707,7 +707,6 @@
   "permissions": {
     "nostr": {
       "getpublickey": "",
-      "nip04encrypt": "",
       "nip04decrypt": "",
       "signmessage": ""
     },

@@ -151,7 +151,8 @@
           "title": "Conecte-se na <0>Carteira Blink</0>"
         },
         "token": {
-          "label": "Insira a chave API"
+          "label": "Insira a chave API",
+          "info": "Para conectar sua carteira, você precisa gerar uma chave API em <0>Blink Dashboard (dashboard.blink.sv)</0>:<br>- Acesse com e-mail ou número de telefone, caso você já possua uma conta Blink<br>- Se você ainda não tem conta, pode criar uma nova fazendo login com um número de telefone<br>- na aba API, crie uma nova chave<br>- dê um nome e escolha a opção ler e escrever<br>- deixe o padrão sem expiração ou escolha um período longo para evitar a necessidade de reconectar sua carteira periodicamente<br>- copie a chave (starting with blink_ ) e cole-a na caixa de texto abaixo.<br><br>A integração atualmente suporta apenas o uso da carteira BTC.<br>"
         }
       },
       "bitcoin_jungle": {
@@ -248,6 +249,12 @@
           "setup_failed": "Falha na configuração",
           "invalid_token": "Falha na autorização. Verifique sua chave API e tente novamente."
         }
+      },
+      "umbrel_lightning_node": {
+        "title": "Servidor Relâmpago"
+      },
+      "voltage": {
+        "title": "Voltage"
       }
     },
     "home": {
@@ -318,7 +325,7 @@
           "settings": {
             "label": "Configurações Nostr",
             "title": "Configurações Nostr",
-            "derive": "Gere chaves Nostr a partir de sua chave mestra",
+            "derive": "Gerar chave Nostr a partir de sua chave mestra",
             "can_restore": "✅ Chave Nostr gerada a partir de sua chave mestra",
             "description": "Você pode gerar chaves Nostr a partir de sua chave mestra ou importar sua chave privada existente colando-a no campo \"Chave privada Nostr\".",
             "no_secret_key": "💡 Você ainda não tem uma chave mestra. <0>Clique aqui</0></div> para gerar sua chave mestra e suas chaves Nostr.",
@@ -567,15 +574,15 @@
       "actions": {
         "create_invoice": "Gerar fatura",
         "redeem": {
-          "description": "Receba bitcoin de forma instantânea usando um código LNURL",
+          "description": "Receba satoshis de forma instantânea usando um código LNURL",
           "title": "Vale-satoshi"
         },
         "invoice": {
           "title": "Fatura relâmpago",
-          "description": "Receba pagamentos bitcoin de valores específicos e de forma instantânea"
+          "description": "Receba valores específicos de satoshis e de forma instantânea"
         },
         "bitcoin_address": {
-          "description": "Receba via endereço bitcoin usando um serviço de trocas",
+          "description": "Receba satoshis depositando bitcoin em um serviço de trocas",
           "title": "Serviço de trocas"
         }
       },
@@ -694,8 +701,7 @@
         "unknown": "tipo {{kind}}"
       },
       "allow_sign_event": "Permitir {{host}} assinar um evento <0>{{kind}}</0>",
-      "allow_encrypt": "Permitir {{host}} criptografar a mensagem:",
-      "allow_decrypt": "Permitir {{host}} descriptografar a mensagem:"
+      "allow_encrypt": "Permitir {{host}} criptografar a mensagem:"
     },
     "confirm_request_permission": {
       "title": "Aprovar solicitação",
@@ -706,13 +712,31 @@
       "alby": {
         "title": "Conta Alby",
         "connect": "Conecte-se com a Alby",
-        "description": "Crie uma conta Alby ou faça o login caso já possua uma conta conosco."
+        "description": "Ideal para iniciantes que procuram uma ótima carteira para gastos do dia a dia.",
+        "point3": "Cadastro e acesso por e-mail",
+        "point1": "Necessita de convite para criar conta",
+        "point4": "Endereços relâmpago e nostr exclusivos",
+        "point2": "Limites de transação"
       },
       "other": {
-        "title": "Outras contas",
+        "title": "Traga sua carteira atual",
         "connect": "Conectar outras contas",
-        "description": "Conecte-se em sua carteira bitcoin ou em um dos vários servidores de carteira disponíveis."
-      }
+        "description": "Ideal para quem já possui uma carteira e precisa fazer pagamentos de quantias altas.",
+        "point1": "Acesso instantâneo, não precisa de convite",
+        "point4": "Sem endereço relâmpago e nostr",
+        "point3": "Opções de autocustódia ou custódia delegada",
+        "point2": "Sem limites de transação"
+      },
+      "voltage": {
+        "point2": "Sem limites de transação",
+        "connect": "Escolher carteira",
+        "point1": "Acesso instantâneo, não precisa de convite",
+        "point4": "Endereços relâmpago e nostr exclusivos",
+        "title": "Servidor Voltage",
+        "point3": "Serviço pago",
+        "description": "Ideal para quem não se importa em pagar por um servidor de carteira relâmpago."
+      },
+      "title": "Conectar carteira na extensão Alby"
     },
     "alby": {
       "pre_connect": {
@@ -1088,8 +1112,7 @@
     "nostr": {
       "getpublickey": "Ler sua chave pública",
       "signmessage": "Assinar mensagem com sua chave",
-      "nip04decrypt": "Descriptografar dados",
-      "nip04encrypt": "Criptografar dados"
+      "nip04decrypt": "Descriptografar dados"
     },
     "lnc": {
       "openchannel": ""

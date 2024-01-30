@@ -541,9 +541,22 @@
         "connect": "Conectar con Alby"
       },
       "other": {
-        "title": "Otras Billeteras",
-        "connect": "Conectar"
-      }
+        "title": "Lleve su propia cartera",
+        "connect": "Conectar",
+        "point1": "Empieza al instante, sin esperar invitación",
+        "point2": "Sin límite de transacciones ni de importe",
+        "description": "Lo mejor si ya tienes un monedero o necesitas hacer pagos de mucho importe.",
+        "point3": "Opciones de autocustodia y custodia",
+        "point4": "Sin dirección relámpago y nostr"
+      },
+      "voltage": {
+        "connect": "Connectar",
+        "title": "Nodo a Voltage Cloud",
+        "point1": "Empieza al instante, sin esperar invitación",
+        "point2": "Sin límite de transacciones ni de importe",
+        "point3": "Servicio de pago en la nube"
+      },
+      "title": "Conectar la cartera a la extensión Alby"
     },
     "nostr": {
       "title": "Nostr",
@@ -844,7 +857,6 @@
     "nostr": {
       "signmessage": "Firma el mensaje con tu clave",
       "getpublickey": "Leer tu clave pública",
-      "nip04encrypt": "Cifrar datos",
       "nip04decrypt": "Descifrar datos"
     },
     "lnd": {

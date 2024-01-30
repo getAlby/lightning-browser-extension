@@ -838,7 +838,6 @@
       "invoice": "Vytvořit novou platební fakturu"
     },
     "nostr": {
-      "nip04encrypt": "Zašifrovat data",
       "getpublickey": "Přečíst svůj veřejný klíč",
       "nip04decrypt": "Dešifrovat data",
       "signmessage": "Podepsat zprávu klíčem"

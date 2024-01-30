@@ -785,7 +785,6 @@
     "nostr": {
       "nip04decrypt": "Decripta i dati",
       "getpublickey": "Leggi la tua chiave pubblica",
-      "nip04encrypt": "Cripta i dati",
       "signmessage": "Firma il messaggio con la tua chiave"
     }
   }
