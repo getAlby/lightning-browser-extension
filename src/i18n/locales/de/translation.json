@@ -148,16 +148,16 @@
           "placeholder": "http://localhost:8080"
         }
       },
-      "start9": {
+      "startos": {
         "page": {
-          "instructions": "Klicke in deinem Embassy Dashboard auf den <0>Lightning Network Daemon</0> Service.<1/>Wähle den Reiter <0>Properties</0>.<1/>Kopiere nun die <0>LND Connect REST URL.</0>",
-          "title": "Verbinden mit deinem <0>Start9 Server</0>"
+          "instructions": "Klicke in deinem StartOS Dashboard auf den <0>Lightning Network Daemon</0> Service.<1/>Wähle den Reiter <0>Properties</0>.<1/>Kopiere nun die <0>LND Connect REST URL.</0>",
+          "title": "Verbinden mit <0>StartOS</0>"
         },
         "rest_url": {
           "placeholder": "lndconnect://deinenode:8080?...",
           "label": "Indconnect REST URL"
         },
-        "title": "Start9"
+        "title": "StartOS"
       },
       "blink": {
         "title": "Blink Wallet",
@@ -654,7 +654,7 @@
         "unknown": "kind {{kind}}"
       },
       "peer": "Peer",
-      "allow_sign_event": "Erlaube {{Gastgeber}}, ein {{kind}} Ereignis zu unterzeichnen",
+      "allow_sign_event": "Erlaube {{Gastgeber}}, ein <0>{{kind}}</0> Ereignis zu unterzeichnen",
       "allow_encrypt": "Erlaube {{host}}, die Nachricht zu verschlüsseln:",
       "allow_decrypt": "Erlaube {{host}}, die Nachricht zu entschlüsseln:"
     },
@@ -743,7 +743,6 @@
     },
     "choose_path": {
       "other": {
-        "and_more": "& mehr...",
         "title": "Andere Wallets",
         "connect": "Verbinden",
         "description": "Schließe deine vorhandene Lightning Wallet oder Node an und wähle aus verschiedenen Anschlüssen. Großartig für volle Flexibilität. Betreibe deinen eigenen Knotenpunkt."
@@ -752,36 +751,6 @@
         "title": "Alby Konto",
         "connect": "Mit Alby verbinden",
         "description": "Melde dich an oder nutze dein bestehendes Alby-Konto. Ideal für den schnellen Einstieg und für kleine Beträge."
-      }
-    },
-    "discover": {
-      "description": "Webseiten und Webapplikationen, auf denen du Alby verwenden kannst",
-      "title": "Erkunde das Ökosystem von Lightning ⚡️",
-      "list": {
-        "gaming": "Spiele",
-        "trading": "Handel",
-        "entertainment": "Unterhaltung",
-        "shopping": "Einkaufen",
-        "miscellaneous": "Sonstiges",
-        "showcases": "Schaukästen",
-        "nostr": "Nostr",
-        "nodeManagement": "Node-Verwaltung"
-      },
-      "tips": {
-        "title": "Deine Alby Wallet ist bereit",
-        "top_up_wallet": {
-          "description": "Du möchtest deine Wallet aufladen?\nWir haben es für dich!",
-          "title": "Bitcoin kaufen"
-        },
-        "demo": {
-          "description": "Entdecke die Funktionen von Alby\nauf unserer Demo Webseite",
-          "title": "Alby Demo"
-        },
-        "description": "Hier ein paar Tipps für den Anfang 🐝",
-        "mnemonic": {
-          "title": "Nostr",
-          "description": "Generiere jetzt \n deinen Schlüssel."
-        }
       }
     },
     "transactions": {
@@ -807,8 +776,8 @@
       "mynode": {
         "name": "myNode"
       },
-      "start9": {
-        "name": "Start9"
+      "startos": {
+        "name": "StartOS"
       }
     },
     "confirm_add_account": {
@@ -1137,7 +1106,8 @@
       "block_added": "{{host}} zur Blockliste hinzugefügt, bitte lade die Webseite neu.",
       "request1": "Genehmigung von Transaktionen beantragen",
       "allow": "Erlaube dieser Webseite:",
-      "block_and_ignore": "Blockieren und Ignorieren von {{host}}"
+      "block_and_ignore": "Blockieren und Ignorieren von {{host}}",
+      "insecure_domain_warn": "⚠️ Du stellst eine Verbindung zu einer unsicheren Domäne her."
     },
     "website": "Website",
     "apps": "Apps"

@@ -42,8 +42,7 @@
       },
       "other": {
         "title": "その他のウォレット",
-        "connect": "接続",
-        "and_more": "もっと..."
+        "connect": "接続"
       }
     },
     "alby": {
@@ -177,15 +176,15 @@
         },
         "title": "myNode"
       },
-      "start9": {
+      "startos": {
         "rest_url": {
           "label": "lndconnectのREST URL",
           "placeholder": "lndconnect://yournode:8080?..."
         },
-        "title": "Start9",
+        "title": "StartOS",
         "page": {
-          "title": "<0>Start9サーバー</0>に接続",
-          "instructions": "Embassyダッシュボードで<0>Lightning Network Daemon</0>サービスをクリックします。<1/><0>Properties</0>タブを選択します。<1/>ここで<0>LND Connect REST URL</0>をコピーします。"
+          "title": "<0>StartOSサーバー</0>に接続",
+          "instructions": "StartOSダッシュボードで<0>Lightning Network Daemon</0>サービスをクリックします。<1/><0>Properties</0>タブを選択します。<1/>ここで<0>LND Connect REST URL</0>をコピーします。"
         }
       },
       "raspiblitz": {
@@ -426,8 +425,8 @@
       "mynode": {
         "name": "myNode"
       },
-      "start9": {
-        "name": "Start9"
+      "startos": {
+        "name": "StartOS"
       },
       "description": "接続したい{{name}}アプリを選択してください",
       "title": "{{name}}に接続"
