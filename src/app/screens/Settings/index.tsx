@@ -68,6 +68,7 @@ function Settings() {
         <Setting
           title={t("browser_notifications.title")}
           subtitle={t("browser_notifications.subtitle")}
+          inline={true}
         >
           {!isLoading && (
             <Toggle
@@ -83,6 +84,7 @@ function Settings() {
         <Setting
           title={t("website_enhancements.title")}
           subtitle={t("website_enhancements.subtitle")}
+          inline={true}
         >
           {!isLoading && (
             <Toggle
@@ -102,6 +104,7 @@ function Settings() {
           {!cameraPermissionsGranted ? (
             <Button
               label={t("camera_access.allow")}
+              className="sm:w-64 flex-none w-full pt-4 sm:pt-0"
               onClick={async () => {
                 try {
                   await Html5Qrcode.getCameras();
@@ -135,13 +138,13 @@ function Settings() {
             />
           }
         >
-          <div className="w-64">
+          <div className="sm:w-64 flex-none w-full pt-4 sm:pt-0">
             <LocaleSwitcher />
           </div>
         </Setting>
         <Setting title={t("theme.title")} subtitle={t("theme.subtitle")}>
           {!isLoading && (
-            <div className="w-64">
+            <div className="sm:w-64 flex-none w-full pt-4 sm:pt-0">
               <Select
                 name="theme"
                 value={settings.theme}
@@ -182,6 +185,7 @@ function Settings() {
         <Setting
           title={t("show_fiat.title")}
           subtitle={t("show_fiat.subtitle")}
+          inline={true}
         >
           {!isLoading && (
             <Toggle
@@ -383,6 +387,7 @@ function Settings() {
         <Setting
           title={t("lnurl_auth.legacy_lnurl_auth_202207.title")}
           subtitle={t("lnurl_auth.legacy_lnurl_auth_202207.subtitle")}
+          inline={true}
         >
           {!isLoading && (
             <Toggle
@@ -400,6 +405,7 @@ function Settings() {
         <Setting
           title={t("lnurl_auth.legacy_lnurl_auth.title")}
           subtitle={t("lnurl_auth.legacy_lnurl_auth.subtitle")}
+          inline={true}
         >
           {!isLoading && (
             <Toggle
