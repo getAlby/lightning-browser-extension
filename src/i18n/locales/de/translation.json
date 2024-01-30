@@ -113,7 +113,7 @@
           "instructions": "Das funktioniert aktuell nicht, wenn 2FA ausgewählt ist.",
           "title": "Verbinden mit <0>Citadel</0> Node"
         },
-        "title": "Zitadelle",
+        "title": "Citadel",
         "password": {
           "label": "Citadel Kennwort"
         },
