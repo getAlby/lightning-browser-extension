@@ -83,8 +83,8 @@
           "label": "Κωδικός Citadel"
         }
       },
-      "start9": {
-        "title": "Start9"
+      "startos": {
+        "title": "StartOS"
       },
       "btcpay": {
         "title": "BTCPay Server",
@@ -156,8 +156,8 @@
       "btcpay": {
         "name": "BTCPay"
       },
-      "start9": {
-        "name": "Start9"
+      "startos": {
+        "name": "StartOS"
       },
       "citadel": {
         "name": "Citadel"

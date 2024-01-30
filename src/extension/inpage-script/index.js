@@ -13,12 +13,7 @@ function init() {
   window.nostr = new NostrProvider();
   window.webbtc = new WebBTCProvider();
   window.webln = new WebLNProvider();
-  window.alby = new AlbyProvider(
-    window.liquid,
-    window.nostr,
-    window.webbtc,
-    window.webln
-  );
+  window.alby = new AlbyProvider();
   const readyEvent = new Event("webln:ready");
   window.dispatchEvent(readyEvent);
 
@@ -44,11 +39,15 @@ function registerLightningLinkClickHandler() {
       if (!target || !target.closest) {
         return;
       }
+      // parse protocol schemes defined in LUD-17
+      // https://github.com/lnurl/luds/blob/luds/17.md
       const lightningLink = target.closest('[href^="lightning:" i]');
-      const lnurlLink = target.closest('[href^="lnurl" i]');
+      const lnurlLink = target.closest(
+        '[href^="lnurlp:" i],[href^="lnurlw:" i],[href^="lnurlc:" i]'
+      );
       const bitcoinLinkWithLighting = target.closest(
         '[href*="lightning=ln" i]'
-      ); // links with a lightning parameter and a value that starts with ln: payment requests (lnbc...) or lnurl (lnurl*)
+      ); // links with a lightning parameter and a value that starts with ln: payment requests (lnbc...) or lnurl (lnurl[pwc]:)
       let href;
       let paymentRequest;
       let lnurl;

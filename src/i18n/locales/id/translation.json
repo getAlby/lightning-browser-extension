@@ -174,11 +174,11 @@
           "placeholder": "lndconnect://yournode:8080?..."
         }
       },
-      "start9": {
-        "title": "Start9",
+      "startos": {
+        "title": "StartOS",
         "page": {
-          "title": "Sambungkan dengan <0>Server Start9</0>",
-          "instructions": "Pada dashboard Embassy klik pada <0>Lightning Network Daemon</0> service.<1/>Pilih tab <0>Properties</0>.<1/>Kemudian salin <0>LND Connect REST URL.</0>"
+          "title": "Sambungkan dengan <0>Server StartOS</0>",
+          "instructions": "Pada dashboard StartOS klik pada <0>Lightning Network Daemon</0> service.<1/>Pilih tab <0>Properties</0>.<1/>Kemudian salin <0>LND Connect REST URL.</0>"
         },
         "rest_url": {
           "placeholder": "lndconnect://yournode:8080?...",
@@ -277,8 +277,8 @@
       "mynode": {
         "name": "myNode"
       },
-      "start9": {
-        "name": "Start9"
+      "startos": {
+        "name": "StartOS"
       }
     },
     "home": {

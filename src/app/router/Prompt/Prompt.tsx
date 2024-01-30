@@ -28,7 +28,8 @@ import LiquidEnable from "~/app/screens/Enable/LiquidEnable";
 import NostrEnable from "~/app/screens/Enable/NostrEnable";
 import WebbtcEnable from "~/app/screens/Enable/WebbtcEnable";
 import WeblnEnable from "~/app/screens/Enable/WeblnEnable";
-import NostrConfirmEncryptOrDecrypt from "~/app/screens/Nostr/ConfirmEncryptOrDecrypt";
+import NostrConfirmDecrypt from "~/app/screens/Nostr/ConfirmDecrypt";
+import NostrConfirmEncrypt from "~/app/screens/Nostr/ConfirmEncrypt";
 import type { NavigationState, OriginData } from "~/types";
 
 // Parse out the parameters from the querystring.
@@ -124,8 +125,12 @@ function Prompt() {
               element={<ConfirmSignPset />}
             />
             <Route
-              path="public/nostr/confirmEncryptOrDecrypt"
-              element={<NostrConfirmEncryptOrDecrypt />}
+              path="public/nostr/confirmEncrypt"
+              element={<NostrConfirmEncrypt />}
+            />
+            <Route
+              path="public/nostr/confirmDecrypt"
+              element={<NostrConfirmDecrypt />}
             />
             <Route
               path="public/nostr/confirmGetPublicKey"

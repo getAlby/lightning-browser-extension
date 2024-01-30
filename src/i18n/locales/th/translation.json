@@ -631,11 +631,11 @@
       "umbrel_lightning_node": {
         "title": "Lightning Node"
       },
-      "start9": {
-        "title": "Start9",
+      "startos": {
+        "title": "StartOS",
         "page": {
           "title": "เชื่อมต่อกับ <0>Staet9 Server</0> ของคุณ",
-          "instructions": "บนแดชบอร์ดของ Embassy คลิกที่บริการ <0>Lightning Network Daemon</0> <1/>เลือกแท็บ<0>Properties</0><1/>คัดลอก<0>LND Connect REST URL.</0>"
+          "instructions": "บนแดชบอร์ดของ StartOS คลิกที่บริการ <0>Lightning Network Daemon</0> <1/>เลือกแท็บ<0>Properties</0><1/>คัดลอก<0>LND Connect REST URL.</0>"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -660,8 +660,8 @@
       "mynode": {
         "name": "myNode"
       },
-      "start9": {
-        "name": "Start9"
+      "startos": {
+        "name": "StartOS"
       },
       "title": "เชื่อมต่อกับ {{name}}"
     },
