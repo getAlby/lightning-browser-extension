@@ -667,36 +667,6 @@
         "connect": "使用 Alby 连接"
       }
     },
-    "discover": {
-      "list": {
-        "trading": "交易",
-        "miscellaneous": "杂项",
-        "shopping": "购物",
-        "entertainment": "娱乐",
-        "gaming": "游戏",
-        "showcases": "展示",
-        "nostr": "Nostr",
-        "nodeManagement": "节点管理"
-      },
-      "description": "可以使用 Alby 的网站和网络应用程序",
-      "title": "探索闪电⚡️生态系统",
-      "tips": {
-        "top_up_wallet": {
-          "title": "购买比特币",
-          "description": "需要充值？\n我们能帮忙！"
-        },
-        "title": "你的Alby钱包已准备就绪",
-        "description": "一些让你开始嗡嗡作响的小贴士🐝",
-        "demo": {
-          "title": "Alby 演示",
-          "description": "在我们的演示网站上\n发现 Alby 的所有功能"
-        },
-        "mnemonic": {
-          "title": "Nostr",
-          "description": "打算使用 Nostr？\n立即生成你的密钥。"
-        }
-      }
-    },
     "alby": {
       "pre_connect": {
         "set_password": {

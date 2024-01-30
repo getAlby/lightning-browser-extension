@@ -702,35 +702,6 @@
       "allow": "Permitir este site executar:",
       "always_allow": "Lembrar e não perguntar novamente"
     },
-    "discover": {
-      "title": "Explore o ecossistema ⚡️",
-      "description": "Sites onde você pode usar a Alby",
-      "list": {
-        "trading": "Negociação",
-        "gaming": "Jogos",
-        "entertainment": "Entretenimento",
-        "shopping": "Compras",
-        "miscellaneous": "Outros",
-        "nostr": "Nostr",
-        "nodeManagement": "Gerenciamento de servidor"
-      },
-      "tips": {
-        "top_up_wallet": {
-          "description": "Precisa adicionar fundos?\nClique aqui!",
-          "title": "Comprar Bitcoin"
-        },
-        "demo": {
-          "title": "Teste a Alby",
-          "description": "Descubra tudo o que você pode fazer com a Alby\nem nosso site de demonstração"
-        },
-        "title": "Sua carteira Alby está pronta",
-        "description": "Algumas dicas para você começar a usar a Alby 🐝",
-        "mnemonic": {
-          "description": "Planejando usar apps Nostr?\nClique aqui para configurar suas chaves.",
-          "title": "Nostr"
-        }
-      }
-    },
     "choose_path": {
       "alby": {
         "title": "Conta Alby",

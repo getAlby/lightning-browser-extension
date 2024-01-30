@@ -584,31 +584,6 @@
         "status": "Sprawdź status płatności"
       }
     },
-    "discover": {
-      "title": "Eksploruj ekosystem Lightning ⚡️",
-      "description": "Strony i aplikacje webowe, na których możesz używać Alby",
-      "list": {
-        "trading": "Handel",
-        "gaming": "Gry",
-        "entertainment": "Rozrywka",
-        "shopping": "Zakupy",
-        "miscellaneous": "Różne",
-        "showcases": "Prezentowane",
-        "nostr": "Nostr"
-      },
-      "tips": {
-        "title": "Twój portfel Alby jest gotowy",
-        "description": "Oto klika wskazówek na start 🐝",
-        "top_up_wallet": {
-          "title": "⚡️ Doładuj swój portfel",
-          "description": "Stwórz fakturę Lightning, wyślij sobie trochę bitcoinów i zacznij korzystać z Alby w ekosystemie Lightning"
-        },
-        "demo": {
-          "title": "🕹️ Spróbuj demonstracyjnej wersji Alby",
-          "description": "Odkryj wszystkie możliwości, jakie daje Alby na naszej stronie demonstracyjnej"
-        }
-      }
-    },
     "publishers": {
       "title": "Twoje strony ⚡",
       "description": "Strony, na których użyto wcześniej Alby",

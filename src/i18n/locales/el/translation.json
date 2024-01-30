@@ -213,19 +213,6 @@
         "add_account": "Προσθήκη λογαριασμού"
       }
     },
-    "discover": {
-      "list": {
-        "gaming": "Παιχνίδια",
-        "nostr": "Nostr",
-        "shopping": "Αγορές",
-        "entertainment": "Διασκέδαση"
-      },
-      "tips": {
-        "top_up_wallet": {
-          "title": "Αγορά Bitcoin"
-        }
-      }
-    },
     "nostr_enable": {
       "title": "Σύνδεση στο Nostr"
     },

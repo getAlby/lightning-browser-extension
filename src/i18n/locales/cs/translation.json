@@ -627,31 +627,6 @@
         }
       }
     },
-    "discover": {
-      "title": "Prozkoumejte ekosystém Lightningu ⚡️",
-      "description": "Webové stránky a aplikace, kde je možné Alby používat",
-      "list": {
-        "trading": "Obchodování",
-        "gaming": "Hraní her",
-        "entertainment": "Zábava",
-        "shopping": "Nakupování",
-        "nostr": "Nostr",
-        "miscellaneous": "Různé",
-        "showcases": "Příklady užití"
-      },
-      "tips": {
-        "title": "Vaše Alby peněženka je připravena",
-        "description": "Pár tipů než začnete",
-        "top_up_wallet": {
-          "title": "⚡️ Dobít peněženku",
-          "description": "Vytvořte lightning fakturu, pošlete si bitcoiny a začněte používat Alby v ekosystému lightning"
-        },
-        "demo": {
-          "description": "Objevte vše, co lze s Alby dělat, na naší demo stránce",
-          "title": "🕹️ Vyzkoušejte demo Alby"
-        }
-      }
-    },
     "distributions": {
       "title": "Připojit k {{name}}",
       "raspiblitz": {
