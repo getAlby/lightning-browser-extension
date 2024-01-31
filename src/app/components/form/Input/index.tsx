@@ -50,7 +50,7 @@ export default function Input({
           : "pr-0 border-0 focus:ring-0",
         disabled
           ? "bg-gray-50 dark:bg-surface-01dp text-gray-500 dark:text-neutral-500"
-          : "bg-gray-100 dark:bg-black dark:text-white",
+          : "bg-white dark:bg-black dark:text-white",
         !!className && className
       )}
       placeholder={placeholder}
@@ -83,7 +83,7 @@ export default function Input({
       {inputNode}
       {suffix && (
         <span
-          className="flex items-center px-3 font-medium bg-gray-100 dark:bg-surface-00dp dark:text-white"
+          className="flex items-center px-3 font-medium bg-white dark:bg-surface-00dp dark:text-white"
           onClick={() => {
             inputEl.current?.focus();
           }}
@@ -94,7 +94,7 @@ export default function Input({
       {endAdornment && (
         <span
           className={classNames(
-            "flex items-center bg-gray-100 dark:bg-black dark:text-neutral-400",
+            "flex items-center bg-white dark:bg-black dark:text-neutral-400",
             !!disabled && "bg-gray-50 dark:bg-surface-01dp"
           )}
         >

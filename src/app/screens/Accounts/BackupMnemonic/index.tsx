@@ -19,6 +19,7 @@ function BackupMnemonic() {
 
   const [mnemonic, setMnemonic] = useState<string | undefined>();
   const [loading, setLoading] = useState<boolean>(true);
+  const [hasConfirmedBackup, setHasConfirmedBackup] = useState(false);
 
   const { id } = useParams();
 
@@ -38,6 +39,17 @@ function BackupMnemonic() {
     fetchData();
   }, [fetchData]);
 
+  async function completeBackupProcess() {
+    try {
+      if (!hasConfirmedBackup) {
+        throw new Error(t("error_confirm"));
+      }
+      navigate(-1);
+    } catch (e) {
+      if (e instanceof Error) toast.error(e.message);
+    }
+  }
+
   return loading ? (
     <div className="flex justify-center mt-5">
       <Loading />
@@ -50,14 +62,20 @@ function BackupMnemonic() {
             {t("backup.title")}
           </h1>
           <MnemonicInstructions />
-          <MnemonicInputs mnemonic={mnemonic} readOnly />
+          <MnemonicInputs
+            mnemonic={mnemonic}
+            readOnly
+            isConfirmed={(hasConfirmedBackup) => {
+              setHasConfirmedBackup(hasConfirmedBackup);
+            }}
+          />
 
           <div className="flex justify-center mt-6 w-64 mx-auto">
             <Button
               label={tCommon("actions.finish")}
               primary
               flex
-              onClick={() => navigate(-1)}
+              onClick={completeBackupProcess}
             />
           </div>
         </ContentBox>
