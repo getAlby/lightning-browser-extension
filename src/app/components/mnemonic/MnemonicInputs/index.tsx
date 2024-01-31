@@ -43,10 +43,10 @@ export default function MnemonicInputs({
           const inputId = `mnemonic-word-${i}`;
           return (
             <div key={i} className="flex justify-center items-center gap-2">
-              <span className="text-gray-600 dark:text-neutral-400 text-right">
+              <span className="flex w-6 text-gray-600 dark:text-neutral-400">
                 {i + 1}.
               </span>
-              <div className="relative">
+              <div className="flex w-full">
                 <Input
                   id={inputId}
                   autoFocus={!readOnly && i === 0}
