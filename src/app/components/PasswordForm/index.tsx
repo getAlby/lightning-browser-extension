@@ -92,6 +92,7 @@ export default function PasswordForm<
         <TextField
           autoFocus={autoFocus}
           id="password"
+          // @ts-ignore/currently ignore
           label={t("choose_password.label")}
           type={passwordViewVisible ? "text" : "password"}
           required
