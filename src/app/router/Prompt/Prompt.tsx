@@ -11,7 +11,6 @@ import LNURLWithdraw from "@screens/LNURLWithdraw";
 import LiquidConfirmGetAddress from "@screens/Liquid/ConfirmGetAddress";
 import ConfirmSignPset from "@screens/Liquid/ConfirmSignPset";
 import MakeInvoice from "@screens/MakeInvoice";
-import NostrConfirm from "@screens/Nostr/Confirm";
 import NostrConfirmGetPublicKey from "@screens/Nostr/ConfirmGetPublicKey";
 import NostrConfirmSignMessage from "@screens/Nostr/ConfirmSignMessage";
 import NostrConfirmSignSchnorr from "@screens/Nostr/ConfirmSignSchnorr";
@@ -29,6 +28,8 @@ import LiquidEnable from "~/app/screens/Enable/LiquidEnable";
 import NostrEnable from "~/app/screens/Enable/NostrEnable";
 import WebbtcEnable from "~/app/screens/Enable/WebbtcEnable";
 import WeblnEnable from "~/app/screens/Enable/WeblnEnable";
+import NostrConfirmDecrypt from "~/app/screens/Nostr/ConfirmDecrypt";
+import NostrConfirmEncrypt from "~/app/screens/Nostr/ConfirmEncrypt";
 import type { NavigationState, OriginData } from "~/types";
 
 // Parse out the parameters from the querystring.
@@ -123,7 +124,14 @@ function Prompt() {
               path="public/liquid/confirmSignPset"
               element={<ConfirmSignPset />}
             />
-            <Route path="public/nostr/confirm" element={<NostrConfirm />} />
+            <Route
+              path="public/nostr/confirmEncrypt"
+              element={<NostrConfirmEncrypt />}
+            />
+            <Route
+              path="public/nostr/confirmDecrypt"
+              element={<NostrConfirmDecrypt />}
+            />
             <Route
               path="public/nostr/confirmGetPublicKey"
               element={<NostrConfirmGetPublicKey />}
@@ -180,7 +188,7 @@ const Layout = () => {
         </div>
         <AccountMenu showOptions={false} />
       </div>
-      <main className="flex flex-col grow min-h-0">
+      <main className="flex flex-col grow">
         <Outlet />
       </main>
     </>

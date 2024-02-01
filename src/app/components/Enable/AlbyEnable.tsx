@@ -4,6 +4,7 @@ import Container from "@components/Container";
 import PublisherCard from "@components/PublisherCard";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import Alert from "~/app/components/Alert";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import toast from "~/app/components/Toast";
 import { USER_REJECTED_ERROR } from "~/common/constants";
@@ -15,6 +16,7 @@ type Props = {
 };
 function AlbyEnableComponent(props: Props) {
   const [loading, setLoading] = useState(false);
+  const hasHttp = props.origin.domain.startsWith("http://");
   const { t } = useTranslation("translation", {
     keyPrefix: "alby_enable",
   });
@@ -61,6 +63,14 @@ function AlbyEnableComponent(props: Props) {
             url={props.origin.host}
             isSmall={false}
           />
+
+          <div className="pt-3">
+            {hasHttp && (
+              <Alert type="warn">
+                {tCommon("enable.insecure_domain_warn")}
+              </Alert>
+            )}
+          </div>
 
           <div className="dark:text-white pt-6">
             <p className="mb-2">{tCommon("enable.allow")}</p>

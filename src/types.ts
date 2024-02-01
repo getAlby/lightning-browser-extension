@@ -1,10 +1,10 @@
 import { CreateSwapParams } from "@getalby/sdk/dist/types";
 import { PaymentRequestObject } from "bolt11";
 import { Runtime } from "webextension-polyfill";
-import { ACCOUNT_CURRENCIES, CURRENCIES, TIPS } from "~/common/constants";
+import { ACCOUNT_CURRENCIES, CURRENCIES } from "~/common/constants";
 import connectors from "~/extension/background-script/connectors";
 import {
-  ConnectorInvoice,
+  ConnectorTransaction,
   SendPaymentResponse,
   WebLNNode,
 } from "~/extension/background-script/connectors/connector.interface";
@@ -168,8 +168,13 @@ export type NavigationState = {
     message?: string;
     event?: Event;
     sigHash?: string;
-    description?: string;
-    details?: string;
+
+    // nostr
+    encrypt: {
+      recipientNpub: string;
+      message: string;
+    };
+
     psbt?: string;
     requestPermission: {
       method: string;
@@ -342,9 +347,9 @@ export interface MessageAllowanceList extends MessageDefault {
   action: "listAllowances";
 }
 
-export interface MessageInvoices extends Omit<MessageDefault, "args"> {
-  args: { limit?: number; isSettled?: boolean };
-  action: "getInvoices";
+export interface MessageGetTransactions extends Omit<MessageDefault, "args"> {
+  args: { limit?: number };
+  action: "getTransactions";
 }
 
 export interface MessageAllowanceEnable extends MessageDefault {
@@ -707,11 +712,13 @@ export interface RequestInvoiceArgs {
 }
 
 export type Transaction = {
+  timestamp: number;
   amount?: string;
   boostagram?: Invoice["boostagram"];
   createdAt?: string;
   currency?: string;
   date: string;
+  paymentHash?: string;
   description?: string;
   host?: string;
   id: string;
@@ -722,7 +729,7 @@ export type Transaction = {
   totalAmount: Allowance["payments"][number]["totalAmount"];
   totalAmountFiat?: string;
   totalFees?: Allowance["payments"][number]["totalFees"];
-  type?: "sent" | "sending" | "received";
+  type?: "sent" | "received";
   value?: string;
   publisherLink?: string; // either the invoice URL if on PublisherSingleView, or the internal link to Publisher
 };
@@ -854,7 +861,6 @@ export interface SettingsStorage {
   currency: CURRENCIES;
   exchange: SupportedExchanges;
   nostrEnabled: boolean;
-  closedTips: TIPS[];
 }
 
 export interface Badge {
@@ -884,14 +890,15 @@ export type SupportedExchanges = "alby" | "coindesk" | "yadio";
 
 export interface Invoice {
   id: string;
-  memo: string;
-  type: "received";
+  memo?: string;
+  type: "received" | "sent";
   settled: boolean;
   settleDate: number;
-  totalAmount: string;
+  totalAmount: number;
   totalAmountFiat?: string;
   preimage: string;
-  custom_records?: ConnectorInvoice["custom_records"];
+  paymentHash?: string;
+  custom_records?: ConnectorTransaction["custom_records"];
   boostagram?: {
     app_name: string;
     name: string;

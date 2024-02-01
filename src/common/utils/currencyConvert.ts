@@ -1,9 +1,9 @@
 /**
  * Highly inspired by: https://github.com/AryanJ-NYC/bitcoin-conversion
  */
-import i18n from "~/i18n/i18nConfig";
 
-import type { CURRENCIES, ACCOUNT_CURRENCIES } from "../constants";
+import i18n from "~/i18n/i18nConfig";
+import type { ACCOUNT_CURRENCIES, CURRENCIES } from "../constants";
 
 export const numSatsInBtc = 100_000_000;
 

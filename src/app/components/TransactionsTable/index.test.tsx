@@ -1,14 +1,12 @@
 import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import { act } from "react-dom/test-utils";
 import { I18nextProvider } from "react-i18next";
 import { BrowserRouter } from "react-router-dom";
 import { settingsFixture as mockSettings } from "~/../tests/fixtures/settings";
 import i18n from "~/../tests/unit/helpers/i18n";
 import { SettingsProvider } from "~/app/context/SettingsContext";
 
-import TransactionsTable from ".";
 import type { Props } from ".";
+import TransactionsTable from ".";
 
 jest.mock("~/common/lib/api", () => {
   const original = jest.requireActual("~/common/lib/api");
@@ -22,6 +20,7 @@ jest.mock("~/common/lib/api", () => {
 const transactions: Props = {
   transactions: [
     {
+      timestamp: 1656573909064,
       createdAt: "1656573909064",
       date: "5 days ago",
       description: "Polar Invoice for bob",
@@ -44,6 +43,7 @@ const invoices: Props = {
   transactions: [
     {
       id: "lnbcrt666660n1p3tad0hpp5kkguywerj5lqspc4p2a7f53yfnkuywxmxnuawe3lu4gdg0ezc2tqdqjd3sk6cn0ypkxzmtzducqzpgxqyz5vqsp529wvk52ckjkrfkll9q3w6ep6lrsg35se66jjpm5ssmumck7xxy6s9qyyssqzq3zsstfs7gzklgkdnxy2hsp4jfavw8xj4hv5300yww3053jx76h57e3ypsuvg36zwd49xm2nfr2lrfvylwrxs7yhpckjytvlaju0hsq7p9wna",
+      timestamp: 1656573909064,
       type: "received",
       totalAmount: "66666",
       totalAmountFiat: "$13.02",
@@ -53,6 +53,7 @@ const invoices: Props = {
     },
     {
       id: "lnbcrt6543210n1p3tadjepp5rv6ufq4vumg66l9gcyxqhy89n6w90mx0mh6gcj0sawrf6xuep5ssdq5g9kxy7fqd9h8vmmfvdjscqzpgxqyz5vqsp5f9yzxeqjw33ule4rffuh0py32gjjsx8z48cd4xjl8ej3rn7zdtdq9qyyssqe6qvkfe260myc9ypgs5n63xzwcx82fderg8p5ysh6c2fvpz5xu4ksvhs5av0wwestk5pmucmhk8lpjhmy7wqyq9c29xgm9na2q5xv5spy5kukj",
+      timestamp: 1656573909064,
       type: "received",
       totalAmount: "654321",
       totalAmountFiat: "$127.80",
@@ -67,6 +68,7 @@ const invoicesWithBoostagram: Props = {
   transactions: [
     {
       id: "lnbcrt666660n1p3tad0hpp5kkguywerj5lqspc4p2a7f53yfnkuywxmxnuawe3lu4gdg0ezc2tqdqjd3sk6cn0ypkxzmtzducqzpgxqyz5vqsp529wvk52ckjkrfkll9q3w6ep6lrsg35se66jjpm5ssmumck7xxy6s9qyyssqzq3zsstfs7gzklgkdnxy2hsp4jfavw8xj4hv5300yww3053jx76h57e3ypsuvg36zwd49xm2nfr2lrfvylwrxs7yhpckjytvlaju0hsq7p9wna",
+      timestamp: 1656573909064,
       type: "received",
       totalAmount: "66666",
       totalAmountFiat: "$13.02",
@@ -76,6 +78,7 @@ const invoicesWithBoostagram: Props = {
     },
     {
       id: "lnbcrt888880n1p3tad30pp56j6g34wctydrfx4wwdwj3schell8uqug6jnlehlkpw02mdfd9wlqdq0v36k6urvd9hxwuccqzpgxqyz5vqsp5995q4egstsvnyetwvpax6jw8q0fnn4tyz3gp35k3yex29emhsylq9qyyssq0yxpx6peyn4vsepwj3l68w9sc5dqnkt07zff6aw4kqvcfs0fpu4jpfh929w6vqrgtjfkmrlwghq4s9t4mnwrh4dlkm6wjem5uq8eu4gpwqln0j",
+      timestamp: 1656573909064,
       type: "received",
       totalAmount: "88888",
       totalAmountFiat: "$17.36",
@@ -103,8 +106,6 @@ const invoicesWithBoostagram: Props = {
 
 describe("TransactionsTable", () => {
   test("renders transactions", async () => {
-    const user = userEvent.setup();
-
     render(
       <BrowserRouter>
         <I18nextProvider i18n={i18n}>
@@ -117,17 +118,8 @@ describe("TransactionsTable", () => {
 
     expect(screen.getByText("Alby")).toBeInTheDocument();
     expect(screen.getByText(/5 days ago/)).toBeInTheDocument();
-    expect(await screen.findByText(/-1,234,000 sats/)).toBeInTheDocument();
+    expect(await screen.findByText(/- 1,234,000 sats/)).toBeInTheDocument();
     expect(await screen.findByText(/~\$241.02/)).toBeInTheDocument();
-
-    const disclosureButton = screen.getByRole("button");
-
-    await act(() => {
-      user.click(disclosureButton);
-    });
-
-    expect(await screen.findByText("0 sats")).toBeInTheDocument();
-    expect(await screen.findByText(/Open website/)).toBeInTheDocument();
   });
 
   test("renders invoice without boostagram", async () => {
@@ -143,7 +135,7 @@ describe("TransactionsTable", () => {
 
     expect(await screen.findByText("lambo lambo")).toBeInTheDocument();
     expect(await screen.findByText(/4 days ago/)).toBeInTheDocument();
-    expect(await screen.findByText(/\+66,666 sats/)).toBeInTheDocument();
+    expect(await screen.findByText(/\+ 66,666 sats/)).toBeInTheDocument();
     expect(await screen.findByText(/~\$13.02/)).toBeInTheDocument();
 
     const disclosureButtons = screen.queryByRole("button");
@@ -151,8 +143,6 @@ describe("TransactionsTable", () => {
   });
 
   test("renders invoice with boostagram", async () => {
-    const user = userEvent.setup();
-
     render(
       <BrowserRouter>
         <I18nextProvider i18n={i18n}>
@@ -165,23 +155,7 @@ describe("TransactionsTable", () => {
 
     expect(screen.getByText("dumplings")).toBeInTheDocument();
     expect(screen.getByText(/5 days ago/)).toBeInTheDocument();
-    expect(await screen.findByText(/\+88,888 sats/)).toBeInTheDocument();
+    expect(await screen.findByText(/\+ 88,888 sats/)).toBeInTheDocument();
     expect(await screen.findByText(/~\$17.36/)).toBeInTheDocument();
-
-    const disclosureButtons = screen.getAllByRole("button");
-    expect(disclosureButtons).toHaveLength(1);
-
-    await act(() => {
-      user.click(disclosureButtons[0]);
-    });
-
-    expect(
-      await screen.findByText(/Message: Du bist so 1 geiles podcast 100%/)
-    ).toBeInTheDocument();
-    expect(
-      await screen.findByText(/Sender: bumi@getalby.com/)
-    ).toBeInTheDocument();
-    expect(await screen.findByText(/App: Fountain/)).toBeInTheDocument();
-    expect(await screen.findByText(/Podcast: Honigdachs/)).toBeInTheDocument();
   });
 });

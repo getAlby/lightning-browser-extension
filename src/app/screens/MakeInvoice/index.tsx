@@ -7,6 +7,7 @@ import TextField from "@components/form/TextField";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import ScreenHeader from "~/app/components/ScreenHeader";
+import toast from "~/app/components/Toast";
 import { useSettings } from "~/app/context/SettingsContext";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
@@ -91,6 +92,7 @@ function MakeInvoice() {
       });
       msg.reply(response);
     } catch (e) {
+      if (e instanceof Error) toast.error(`${tCommon("error")}: ${e.message}`);
       console.error(e);
     } finally {
       setLoading(false);

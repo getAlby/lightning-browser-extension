@@ -11,16 +11,17 @@ import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import { OriginData } from "~/types";
 
-function NostrConfirm() {
+function NostrConfirmDecrypt() {
   const { t } = useTranslation("translation", {
     keyPrefix: "nostr",
   });
+  const { t: tPermissions } = useTranslation("permissions");
   const { t: tCommon } = useTranslation("common");
   const navState = useNavigationState();
   const origin = navState.origin as OriginData;
-  const description = navState.args?.description;
-  const details = navState.args?.details;
+
   const [loading, setLoading] = useState(false);
+
   const [rememberPermission, setRememberPermission] = useState(true);
 
   function confirm() {
@@ -57,27 +58,20 @@ function NostrConfirm() {
       <ScreenHeader title={t("title")} />
       <form onSubmit={handleSubmit} className="h-full">
         <Container justifyBetween maxWidth="sm">
-          <div>
-            <PublisherCard
-              title={origin.name}
-              image={origin.icon}
-              url={origin.host}
-              isSmall={false}
-            />
-            <div className="dark:text-white pt-6 mb-4">
-              <p className="mb-2">{t("allow", { host: origin.host })}</p>
-              <p className="dark:text-white">
-                <CheckIcon className="w-5 h-5 mr-2 inline" />
-                {description}
-                {details && (
-                  <>
-                    <br />
-                    <i className="ml-7">{details}</i>
-                  </>
-                )}
-              </p>
-            </div>
+          <PublisherCard
+            title={origin.name}
+            image={origin.icon}
+            url={origin.host}
+            isSmall={false}
+          />
+          <div className="dark:text-white pt-6 mb-4">
+            <p className="mb-2">{t("allow", { host: origin.host })}</p>
+            <p className="dark:text-white">
+              <CheckIcon className="w-5 h-5 mr-2 inline" />
+              {tPermissions("nostr.nip04decrypt")}
+            </p>
           </div>
+
           <div className="text-center flex flex-col">
             <div className="flex items-center mb-4">
               <Checkbox
@@ -115,4 +109,4 @@ function NostrConfirm() {
   );
 }
 
-export default NostrConfirm;
+export default NostrConfirmDecrypt;
