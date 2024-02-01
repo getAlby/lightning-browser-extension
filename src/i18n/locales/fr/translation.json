@@ -35,7 +35,6 @@
       },
       "other": {
         "title": "Autres portefeuilles",
-        "and_more": "& plus...",
         "connect": "Connecter"
       }
     },
@@ -169,11 +168,11 @@
           "placeholder": "lndconnect://votrenode:8080?..."
         }
       },
-      "start9": {
-        "title": "Start9",
+      "startos": {
+        "title": "StartOS",
         "page": {
-          "title": "Connectez-vous à votre nœud <0>Embassy</0>",
-          "instructions": "<0>Remarque :</0> Actuellement, nous ne prenons en charge que LND, mais nous ajouterons la prise en charge de c-lightning à l'avenir !<1/>Sur votre tableau de bord Embassy, cliquez sur le service <0>daemon du réseau Lightning</0>. <1/>Sélectionnez l'onglet <0>Properties</0>.<1/>Copiez maintenant l'<0>URL REST LND Connect.</0>"
+          "title": "Connectez-vous à votre nœud <0>StartOS</0>",
+          "instructions": "<0>Remarque :</0> Actuellement, nous ne prenons en charge que LND, mais nous ajouterons la prise en charge de c-lightning à l'avenir !<1/>Sur votre tableau de bord StartOS, cliquez sur le service <0>daemon du réseau Lightning</0>. <1/>Sélectionnez l'onglet <0>Properties</0>.<1/>Copiez maintenant l'<0>URL REST LND Connect.</0>"
         },
         "rest_url": {
           "label": "URL REST lndconnect",
@@ -505,31 +504,6 @@
         "status": "Vérifier l'état du paiement"
       }
     },
-    "discover": {
-      "title": "Explorez l'écosystème Lightning ⚡️",
-      "description": "Sites Web et applications Web où vous pouvez utiliser Alby",
-      "list": {
-        "trading": "Commerce",
-        "gaming": "Jeux",
-        "entertainment": "Divertissement",
-        "shopping": "Achats",
-        "miscellaneous": "Divers",
-        "showcases": "Vitrines",
-        "nostr": "Nostr"
-      },
-      "tips": {
-        "title": "Votre portefeuille Alby est prêt",
-        "description": "Quelques conseils pour commencer à buzzer🐝",
-        "top_up_wallet": {
-          "title": "⚡️ Rechargez votre portefeuille",
-          "description": "Créez une facture Lightning, envoyez-vous des bitcoins et commencez à utiliser Alby dans l'écosystème Lightning"
-        },
-        "demo": {
-          "title": "🕹️ Essayez la démo d'Alby",
-          "description": "Découvrez tout ce que vous pouvez faire avec Alby sur notre site de démonstration"
-        }
-      }
-    },
     "publishers": {
       "title": "Vos sites ⚡",
       "description": "Sites Web sur lesquels vous avez déjà utilisé Alby",
@@ -739,7 +713,6 @@
   "permissions": {
     "nostr": {
       "getpublickey": "Lisez votre clé publique",
-      "nip04encrypt": "Crypter les données",
       "nip04decrypt": "Déchiffrer les données",
       "signmessage": "Signez le message avec votre clé"
     },

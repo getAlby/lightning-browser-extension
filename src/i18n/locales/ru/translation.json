@@ -35,7 +35,6 @@
       },
       "other": {
         "title": "",
-        "and_more": "",
         "connect": ""
       }
     },
@@ -169,7 +168,7 @@
           "placeholder": ""
         }
       },
-      "start9": {
+      "startos": {
         "title": "",
         "page": {
           "title": "",
@@ -514,31 +513,6 @@
         "status": ""
       }
     },
-    "discover": {
-      "title": "",
-      "description": "",
-      "list": {
-        "trading": "",
-        "gaming": "",
-        "entertainment": "",
-        "shopping": "",
-        "miscellaneous": "",
-        "showcases": "",
-        "nostr": ""
-      },
-      "tips": {
-        "title": "",
-        "description": "",
-        "top_up_wallet": {
-          "title": "",
-          "description": ""
-        },
-        "demo": {
-          "title": "",
-          "description": ""
-        }
-      }
-    },
     "publishers": {
       "title": "",
       "description": "",
@@ -743,7 +717,6 @@
   "permissions": {
     "nostr": {
       "getpublickey": "",
-      "nip04encrypt": "",
       "nip04decrypt": "",
       "signmessage": ""
     },

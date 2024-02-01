@@ -52,12 +52,12 @@
           "instructions": "Na myNode domači strani klikni na <0>Wallet</0> gumb na tvojem <0>lightning</0> servisu.<1/> Klikni na <0>Pair Wallet</0> gumb pod <0>Status</0> zavihkom. Vnesi geslo, ko je to zahtevano.<1/> Izberi spustni meni in izberi možnost povezave. Glede na konfiguracijo lahko uporabiš <0>lightning (REST + Local IP)</0> povezavo ali <0>lightning (REST + Tor)</0> povezavo."
         }
       },
-      "start9": {
+      "startos": {
         "page": {
-          "instructions": "V Embassy nadzorni plošči klikni na <0>Lightning Network Daemon</0> servis.<1/>Izberi <0>Properties</0> zavihek.<1/>Kopiraj <0>LND Connect REST URL.</0>",
-          "title": "Poveži z <0>Start9 Server</0>"
+          "instructions": "V StartOS nadzorni plošči klikni na <0>Lightning Network Daemon</0> servis.<1/>Izberi <0>Properties</0> zavihek.<1/>Kopiraj <0>LND Connect REST URL.</0>",
+          "title": "Poveži z <0>StartOS Server</0>"
         },
-        "title": "Start9",
+        "title": "StartOS",
         "rest_url": {
           "label": "lndconnect REST URL",
           "placeholder": "lndconnect://yournode:8080?..."
@@ -270,8 +270,7 @@
       },
       "other": {
         "title": "Ostale denarnice",
-        "connect": "Poveži",
-        "and_more": "& več..."
+        "connect": "Poveži"
       }
     },
     "distributions": {
@@ -282,8 +281,8 @@
       "citadel": {
         "name": "Citadel"
       },
-      "start9": {
-        "name": "Start9"
+      "startos": {
+        "name": "StartOS"
       },
       "description": "Izberi s katero {{name}} aplikacijo bi se rad povezal",
       "btcpay": {
@@ -558,35 +557,6 @@
       "no_info": "Videti je, da Albyja še nisi uporabljal na nobenem spletnem mestu.",
       "title": "Tvoja ⚡ spletna stran"
     },
-    "discover": {
-      "tips": {
-        "demo": {
-          "title": "Alby demo",
-          "description": "Odkrijte Albyjeve lastnosti\nna naši predstavitveni spletni strani"
-        },
-        "mnemonic": {
-          "title": "Nostr"
-        },
-        "top_up_wallet": {
-          "description": "Potrebuješ polnitev?\nSkupaj zmoremo!",
-          "title": "Kupi Bitcoin"
-        },
-        "description": "Nekaj nasvetov, da začneš brneti🐝",
-        "title": "Tvoja denarnica Alby je pripravljena"
-      },
-      "list": {
-        "gaming": "Igre",
-        "trading": "Trgovanje",
-        "nostr": "Nostr",
-        "shopping": "Nakupovanje",
-        "nodeManagement": "Upravljanje vozlišča",
-        "showcases": "Primeri",
-        "miscellaneous": "Razno",
-        "entertainment": "Zabava"
-      },
-      "description": "Spletna mesta in spletne aplikacije, kjer lahko uporabljaš Alby",
-      "title": "Razišči ekosistem Lightning ⚡️"
-    },
     "receive": {
       "payment": {
         "status": "Preveri status plačila"
@@ -667,7 +637,6 @@
       "getaddress": "Bere tvoj Liquid naslov za prejemanje"
     },
     "nostr": {
-      "nip04encrypt": "Kriptiraj podatke",
       "signmessage": "Podpiši sporočilo s svojim ključem",
       "nip04decrypt": "Dekriptiraj podatke",
       "getpublickey": "Bere tvoj javni ključ"

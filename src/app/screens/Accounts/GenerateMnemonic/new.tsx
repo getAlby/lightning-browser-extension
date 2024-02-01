@@ -28,7 +28,7 @@ function MnemonicExplanation() {
         <img
           src={`assets/images/master_key_${theme}.png`}
           alt="Master Key"
-          className="max-w-[412px] mx-auto"
+          className="max-w-[412px] mx-auto w-full"
         />
         <MnemonicDescription />
       </ContentBox>

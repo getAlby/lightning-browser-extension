@@ -35,7 +35,6 @@
       },
       "other": {
         "title": "Andre wallets",
-        "and_more": "med mere...",
         "connect": "Opret forbindelse"
       }
     },
@@ -169,11 +168,11 @@
           "placeholder": "lndconnect://dinnode:8080?..."
         }
       },
-      "start9": {
-        "title": "Start9",
+      "startos": {
+        "title": "StartOS",
         "page": {
-          "title": "Opret forbindelse til din <0>Embassy</0> node",
-          "instructions": "<0>Note:</0> I øjeblikket understøtter vi kun LND, men vi vil fremover også tilføje support af c-lightning!<1/>I din Embassys indstillingsmenu klikker du på servicen <0>Lightning Network Daemon</0>.<1/>Vælg fanen <0>Properties</0>.<1/>Kopier så <0>LND Connect REST URL.</0>"
+          "title": "Opret forbindelse til din <0>StartOS</0> node",
+          "instructions": "<0>Note:</0> I øjeblikket understøtter vi kun LND, men vi vil fremover også tilføje support af c-lightning!<1/>I din StartOSs indstillingsmenu klikker du på servicen <0>Lightning Network Daemon</0>.<1/>Vælg fanen <0>Properties</0>.<1/>Kopier så <0>LND Connect REST URL.</0>"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -504,31 +503,6 @@
         "status": "Tjek betalingsstatus"
       }
     },
-    "discover": {
-      "title": "Udforsk Lightnings ⚡️ økosystem",
-      "description": "Hjemmesider og web-apps hvor Alby kan bruges",
-      "list": {
-        "trading": "Handel",
-        "gaming": "Spil",
-        "entertainment": "Underholdning",
-        "shopping": "Indkøb",
-        "miscellaneous": "Diverse",
-        "showcases": "Eksempler",
-        "nostr": "Nostr"
-      },
-      "tips": {
-        "title": "Din Alby-wallet er klar",
-        "description": "Et par råd der får dig på vingerne🐝",
-        "top_up_wallet": {
-          "title": "⚡️ Fyld din wallet op",
-          "description": "Generer en lightning-faktura, send lidt bitcoin til dig selv og begynd at bruge Alby i lightnings økosystem"
-        },
-        "demo": {
-          "title": "🕹️ Få en prøvetur med Alby",
-          "description": "Se alle de ting, du kan med Alby på vores præsentationsside"
-        }
-      }
-    },
     "publishers": {
       "title": "Dine ⚡ hjemmesider",
       "description": "Hjemmesider, hvor du tidligere har brugt Alby",
@@ -733,7 +707,6 @@
   "permissions": {
     "nostr": {
       "getpublickey": "Læs din offentlige nøgle",
-      "nip04encrypt": "Krypter data",
       "nip04decrypt": "De-krypter data",
       "signmessage": "Underskriv meddelelse med din nøgle"
     },

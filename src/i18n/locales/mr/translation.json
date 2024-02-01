@@ -35,7 +35,6 @@
       },
       "other": {
         "title": "इतर वॉलेट",
-        "and_more": "& बरंच काही...",
         "connect": "कनेक्ट करा"
       }
     },
@@ -169,11 +168,11 @@
           "placeholder": "lndconnect://yournode:8080?..."
         }
       },
-      "start9": {
-        "title": "Start9",
+      "startos": {
+        "title": "StartOS",
         "page": {
-          "title": "your <0>Embassy</0> node ला कनेक्ट करा",
-          "instructions": "<0>Note:</0> Currently we only support LND but we will be adding c-lightning support in the future!<1/>On your Embassy dashboard click on the <0>Lightning Network Daemon</0> service.<1/>Select the <0>Properties</0> tab.<1/>Now copy the <0>LND Connect REST URL.</0>"
+          "title": "your <0>StartOS</0> node ला कनेक्ट करा",
+          "instructions": "<0>Note:</0> Currently we only support LND but we will be adding c-lightning support in the future!<1/>On your StartOS dashboard click on the <0>Lightning Network Daemon</0> service.<1/>Select the <0>Properties</0> tab.<1/>Now copy the <0>LND Connect REST URL.</0>"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -500,31 +499,6 @@
         "status": "पेमेंट स्थिती तपासा"
       }
     },
-    "discover": {
-      "title": " Lightning ⚡️ Ecosystem एक्सप्लोर करा",
-      "description": "वेबसाइट्स आणि वेब अॅप्स जिथे तुम्ही Alby वापरू शकता",
-      "list": {
-        "trading": "व्यापार",
-        "gaming": "गेमिंग",
-        "entertainment": "मनोरंजन",
-        "shopping": "खरेदी",
-        "miscellaneous": "विविध",
-        "showcases": "शोकेस",
-        "nostr": "Nostr"
-      },
-      "tips": {
-        "title": "तुमचे Alby wallet तयार आहे",
-        "description": "सुरू करण्यासाठी काही टिपा 🐝",
-        "top_up_wallet": {
-          "title": "⚡️  तुमचे वॉलेट टॉप अप करा",
-          "description": "Lightning इनव्हॉइस तयार करा, स्वतःला काही Bitcoin पाठवा आणि Lightning इकोसिस्टममध्ये Alby वापरण्यास सुरुवात करा"
-        },
-        "demo": {
-          "title": "🕹️ अल्बी डेमो वापरून पहा",
-          "description": "आमच्या डेमो वेबसाइटवर तुम्ही Alby सोबत सर्व गोष्टी करू शकता.  "
-        }
-      }
-    },
     "publishers": {
       "title": "तुमच्या ⚡ वेबसाइट्स",
       "description": "तुम्ही ज्या वेबसाईट्स याआधी Alby वापरल्या आहेत",
@@ -755,7 +729,6 @@
   "permissions": {
     "nostr": {
       "getpublickey": "तुमची सार्वजनिक की वाचा",
-      "nip04encrypt": "डेटा Encrypt करा",
       "nip04decrypt": "डेटा Decrypt करा",
       "signmessage": "तुमच्या किल्लीने संदेशावर स्वाक्षरी करा"
     },

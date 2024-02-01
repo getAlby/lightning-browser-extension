@@ -159,9 +159,11 @@ class Galoy implements Connector {
                             }
                           }
                           ... on SettlementViaIntraLedger {
-                            __typename
-                            counterPartyWalletId
-                            counterPartyUsername
+                            ${
+                              this.config.apiCompatibilityMode
+                                ? "counterPartyWalletId"
+                                : "preImage"
+                            }
                           }
                         }
                       }
@@ -203,7 +205,10 @@ class Galoy implements Connector {
             transactions.push({
               id: edge.cursor,
               memo: tx.memo,
-              preimage: tx.settlementVia.preImage || "",
+              preimage:
+                tx.settlementVia.preImage ||
+                tx.settlementVia.paymentSecret ||
+                "",
               payment_hash: tx.initiationVia.paymentHash || "",
               settled: tx.status === "SUCCESS",
               settleDate: createdAtDate.getTime(),
@@ -283,8 +288,11 @@ class Galoy implements Connector {
                   }
                 }
                 ... on SettlementViaIntraLedger {
-                  counterPartyUsername
-                  counterPartyWalletId
+                  ${
+                    this.config.apiCompatibilityMode
+                      ? "counterPartyWalletId"
+                      : "preImage"
+                  }
                 }
               }
             }
@@ -321,10 +329,7 @@ class Galoy implements Connector {
           preimageMessage =
             transaction.settlementVia.preImage ||
             transaction.settlementVia.paymentSecret;
-        } else if (
-          "counterPartyUsername" in transaction.settlementVia ||
-          "counterPartyWalletId" in transaction.settlementVia
-        ) {
+        } else if ("counterPartyWalletId" in transaction.settlementVia) {
           preimageMessage = "No preimage, the payment was settled intraledger";
         }
       }
@@ -382,9 +387,11 @@ class Galoy implements Connector {
                           }
                         }
                         ... on SettlementViaIntraLedger {
-                          __typename
-                          counterPartyWalletId
-                          counterPartyUsername
+                          ${
+                            this.config.apiCompatibilityMode
+                              ? "counterPartyWalletId"
+                              : "preImage"
+                          }
                         }
                       }
                     }
@@ -424,7 +431,7 @@ class Galoy implements Connector {
           return {
             data: {
               paid: tx.node.status === "SUCCESS",
-              preimage: tx.node.settlementVia.__typename
+              preimage: tx.node.settlementVia.counterPartyWalletId
                 ? "Payment executed internally"
                 : tx.node.settlementVia.preImage || "No preimage received",
             },
@@ -531,9 +538,8 @@ type TransactionNode = {
   };
   settlementVia: {
     preImage?: string;
-    __typename?: string;
+    paymentSecret?: string;
     counterPartyWalletId?: string;
-    counterPartyUsername?: string;
   };
 };
 

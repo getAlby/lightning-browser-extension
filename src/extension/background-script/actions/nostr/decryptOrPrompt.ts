@@ -32,14 +32,7 @@ const decryptOrPrompt = async (message: MessageDecryptGet, sender: Sender) => {
         rememberPermission: boolean;
       }>({
         ...message,
-        action: "public/nostr/confirmEncryptOrDecrypt",
-        args: {
-          encryptOrDecrypt: {
-            action: "decrypt",
-            peer: message.args.peer,
-            message: message.args.ciphertext,
-          },
-        },
+        action: "public/nostr/confirmDecrypt",
       });
 
       // add permission to db only if user decided to always allow this request

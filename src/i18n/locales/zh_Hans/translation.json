@@ -140,16 +140,16 @@
           "label": "本地私钥（自动生成的）"
         }
       },
-      "start9": {
+      "startos": {
         "page": {
-          "instructions": "在你的 Embassy 仪表板上点击 <0>Lightning Network Daemon</0> 服务。<1/>选择 <0>Properties</0> 标签。<1/>复制 <0>LND Connect REST URL。</0>",
-          "title": "连接你的<0>Start9 服务器</0>"
+          "instructions": "在你的 StartOS 仪表板上点击 <0>Lightning Network Daemon</0> 服务。<1/>选择 <0>Properties</0> 标签。<1/>复制 <0>LND Connect REST URL。</0>",
+          "title": "连接你的<0>StartOS 服务器</0>"
         },
         "rest_url": {
           "placeholder": "lndconnect://yournode:8080?...",
           "label": "lndconnect REST URL"
         },
-        "title": "Start9"
+        "title": "StartOS"
       },
       "raspiblitz": {
         "page": {
@@ -660,42 +660,11 @@
     "choose_path": {
       "other": {
         "title": "其他钱包",
-        "and_more": "等等...",
         "connect": "连接"
       },
       "alby": {
         "title": "Alby帐户",
         "connect": "使用 Alby 连接"
-      }
-    },
-    "discover": {
-      "list": {
-        "trading": "交易",
-        "miscellaneous": "杂项",
-        "shopping": "购物",
-        "entertainment": "娱乐",
-        "gaming": "游戏",
-        "showcases": "展示",
-        "nostr": "Nostr",
-        "nodeManagement": "节点管理"
-      },
-      "description": "可以使用 Alby 的网站和网络应用程序",
-      "title": "探索闪电⚡️生态系统",
-      "tips": {
-        "top_up_wallet": {
-          "title": "购买比特币",
-          "description": "需要充值？\n我们能帮忙！"
-        },
-        "title": "你的Alby钱包已准备就绪",
-        "description": "一些让你开始嗡嗡作响的小贴士🐝",
-        "demo": {
-          "title": "Alby 演示",
-          "description": "在我们的演示网站上\n发现 Alby 的所有功能"
-        },
-        "mnemonic": {
-          "title": "Nostr",
-          "description": "打算使用 Nostr？\n立即生成你的密钥。"
-        }
       }
     },
     "alby": {
@@ -741,8 +710,8 @@
       "mynode": {
         "name": "myNode"
       },
-      "start9": {
-        "name": "Start9"
+      "startos": {
+        "name": "StartOS"
       },
       "umbrel": {
         "name": "Umbrel"
@@ -1014,7 +983,6 @@
     "nostr": {
       "signmessage": "使用你的密钥签署消息",
       "nip04decrypt": "解密数据",
-      "nip04encrypt": "加密数据",
       "getpublickey": "读取你的公钥"
     },
     "commando": {

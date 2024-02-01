@@ -66,13 +66,13 @@ export default function ChooseConnectorPath() {
               <>
                 <FeatureItem type="success">{t("voltage.point1")}</FeatureItem>
                 <FeatureItem type="success">{t("voltage.point2")}</FeatureItem>
-                <FeatureItem type="success">{t("voltage.point3")}</FeatureItem>
+                <FeatureItem type="disabled">{t("voltage.point3")}</FeatureItem>
                 <FeatureItem type="success">{t("voltage.point4")}</FeatureItem>
               </>
             }
             actions={
               <Link
-                to="/accounts/new/choose-connector/voltage"
+                to="choose-connector/voltage"
                 rel="noreferrer noopener"
                 className="flex flex-1"
               >
