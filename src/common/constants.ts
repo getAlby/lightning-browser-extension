@@ -162,8 +162,3 @@ export enum CURRENCIES {
   ZMW = "ZMW",
   ZWL = "ZWL",
 }
-
-export enum TIPS {
-  DEMO = "demo",
-  MNEMONIC = "mnemonic",
-}

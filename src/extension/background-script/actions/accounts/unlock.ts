@@ -31,6 +31,7 @@ const unlock = async (message: MessageAccountUnlock) => {
 
   // if everything is fine we keep the password in memory
   await state.getState().password(password);
+
   // load the connector to make sure it is initialized for the future calls
   // with this we prevent potentially multiple action calls trying to initialize the connector in parallel
   // we have to be careful here: if the unlock fails (e.g. because of an error in getConnector() the user
