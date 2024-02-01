@@ -771,36 +771,6 @@
     "scan_qrcode": {
       "title": "Waiting to scan"
     },
-    "discover": {
-      "title": "Explore the Lightning ⚡️ Ecosystem",
-      "description": "Websites and webapps where you can use Alby",
-      "list": {
-        "trading": "Trading",
-        "gaming": "Gaming",
-        "entertainment": "Entertainment",
-        "shopping": "Shopping",
-        "miscellaneous": "Miscellaneous",
-        "showcases": "Showcases",
-        "nostr": "Nostr",
-        "nodeManagement": "Node Management"
-      },
-      "tips": {
-        "title": "Your Alby wallet is ready",
-        "description": "A few tips to get you started buzzin'🐝",
-        "top_up_wallet": {
-          "title": "Buy Bitcoin",
-          "description": "Need a top up?\nWe got you!"
-        },
-        "demo": {
-          "title": "Alby Demo",
-          "description": "Discover Alby's features\non our demo website"
-        },
-        "mnemonic": {
-          "title": "Nostr",
-          "description": "Planning to use Nostr?\nGenerate your keys now."
-        }
-      }
-    },
     "publishers": {
       "title": "Your ⚡ Websites",
       "description": "Websites where you have used Alby before",
@@ -996,11 +966,12 @@
     "advanced": "Advanced",
     "success": "Success",
     "error": "Error",
-    "settings": "Settings",
+    "settings": "Extension Settings",
     "accounts": "Accounts",
-    "discover": "Discover",
+    "discover": "Discover Apps",
     "connected_sites": "Connected Sites",
     "wallet": "Wallet",
+    "full_screen": "Full Screen",
     "sats_one": "sat",
     "sats_other": "sats",
     "loading": "loading",
@@ -1014,7 +985,7 @@
     "success_message": "{{amount}}{{fiatAmount}} are on their way to {{destination}}",
     "response": "Response",
     "message": "Message",
-    "help": "Help",
+    "help": "Alby Guides",
     "balance": "Balance",
     "or": "or",
     "website": "Website",
