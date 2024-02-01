@@ -1,7 +1,4 @@
-import {
-  HiddenIcon,
-  VisibleIcon,
-} from "@bitcoin-design/bitcoin-icons-react/outline";
+import { PopiconsEyeLine } from "@popicons/react";
 import { useEffect, useState } from "react";
 
 type Props = {
@@ -30,9 +27,12 @@ export default function PasswordViewAdornment({ onChange, isRevealed }: Props) {
       }}
     >
       {_isRevealed ? (
-        <VisibleIcon className="h-6 w-6" />
+        <img
+          src="assets/icons/popicons/eye-crossed.svg"
+          className="h-6 w-6 dark:invert"
+        />
       ) : (
-        <HiddenIcon className="h-6 w-6" />
+        <PopiconsEyeLine className="h-5 w-5" />
       )}
     </button>
   );
