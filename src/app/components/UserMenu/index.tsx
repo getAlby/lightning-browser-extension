@@ -1,4 +1,3 @@
-import { MenuIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useAccount } from "~/app/context/AccountContext";
@@ -6,6 +5,7 @@ import { ConnectedSiteIcon } from "~/app/icons";
 import utils from "~/common/lib/utils";
 
 import {
+  PopiconsBarsSolid,
   PopiconsBulbLine,
   PopiconsCogLine,
   PopiconsCommentLine,
@@ -43,7 +43,7 @@ export default function UserMenu() {
   return (
     <Menu as="div" className="relative">
       <Menu.Button className="flex items-center text-gray-800 dark:text-neutral-200 hover:text-black dark:hover:text-white transition-colors duration-200">
-        <MenuIcon className="h-6 w-6" />
+        <PopiconsBarsSolid className="h-5 w-5" />
       </Menu.Button>
       <Menu.List position="left">
         <div className="lg:hidden">
