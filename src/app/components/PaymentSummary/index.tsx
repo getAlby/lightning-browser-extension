@@ -42,7 +42,9 @@ const Dt = ({ children }: { children: React.ReactNode }) => (
 );
 
 const Dd = ({ children }: { children: React.ReactNode }) => (
-  <dd className="text-lg text-gray-600 dark:text-neutral-400">{children}</dd>
+  <dd className="text-lg text-gray-600 dark:text-neutral-400 break-words">
+    {children}
+  </dd>
 );
 
 export default PaymentSummary;
