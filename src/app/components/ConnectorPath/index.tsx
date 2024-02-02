@@ -19,7 +19,7 @@ function ConnectorPath({ title, icon, description, content, actions }: Props) {
       <div className="flex flex-col space-y-4 text-sm mb-8 dark:text-white">
         {content}
       </div>
-      <div className="flex gap-4 flex-col sm:flex-row">{actions}</div>
+      <div className="flex gap-4 flex-col sm:flex-row mt-auto">{actions}</div>
     </div>
   );
 }
