@@ -1,7 +1,6 @@
 {
   "translation": {
     "welcome": {
-      "title": "Welcome to Alby",
       "set_password": {
         "title": "Set extension unlock passcode",
         "description1": "Set a passcode to unlock Alby Extension in this browser",

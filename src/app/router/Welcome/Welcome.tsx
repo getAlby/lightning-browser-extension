@@ -3,7 +3,6 @@ import SetPassword from "@screens/Onboard/SetPassword";
 import TestConnection from "@screens/Onboard/TestConnection";
 import ChooseConnector from "@screens/connectors/ChooseConnector";
 import { useState } from "react";
-import { useTranslation } from "react-i18next";
 import { Outlet, Route, HashRouter as Router, Routes } from "react-router-dom";
 import Container from "~/app/components/Container";
 import LocaleSwitcher from "~/app/components/LocaleSwitcher/LocaleSwitcher";
@@ -54,8 +53,6 @@ function Welcome() {
 }
 
 function Layout() {
-  const { t } = useTranslation();
-
   const [languageChanged, setLanguageChanged] = useState(false);
   i18n.on("languageChanged", () => {
     // Trigger rerender to update displayed language
@@ -70,21 +67,7 @@ function Layout() {
       <div className="flex justify-center items-center">
         <div className="w-full">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
-            <div className="text-center font-serif font-medium text-2xl mt-8 dark:text-white">
-              <p>
-                {t("welcome.title")}
-                <img
-                  src="assets/icons/alby_icon_yellow.svg"
-                  alt="Alby"
-                  className="dark:hidden inline align-middle w-6 ml-2"
-                />
-                <img
-                  src="assets/icons/alby_icon_yellow_dark.svg"
-                  alt="Alby"
-                  className="hidden dark:inline align-middle w-6 ml-2"
-                />
-              </p>
-            </div>
+            <div className="text-center font-serif font-medium text-2xl mt-8 dark:text-white"></div>
           </div>
           <Container maxWidth="xl">
             <Outlet />

@@ -32,7 +32,7 @@ function ConnectorForm({
     <div className="flex h-full justify-center items-center">
       {video && (
         <div
-          className="flex-1 relative h-0 mb-6"
+          className="flex-1 relative h-0"
           style={{ paddingBottom: "56.25%" }}
         >
           <video className="absolute t-0 l-0 w-full h-full" controls>
@@ -42,7 +42,7 @@ function ConnectorForm({
       )}
       {image && (
         <>
-          <div className="w-96 mb-6">
+          <div className="w-96">
             <img
               src={image}
               alt="Screenshot"
@@ -56,8 +56,8 @@ function ConnectorForm({
 
   return (
     <form onSubmit={onSubmit}>
-      <div className="max-w-xl mx-auto mt-6 relative bg-white dark:bg-surface-02dp p-10 rounded-2xl border border-gray-200 darK:border-neutral-700">
-        <div className="flex items-center mb-4">
+      <div className="flex flex-col max-w-xl mx-auto mt-6 relative bg-white dark:bg-surface-02dp p-10 rounded-2xl border border-gray-200 dark:border-neutral-700 gap-4">
+        <div className="flex items-center">
           {logo && <img src={logo} className="w-16 mr-4 rounded-lg" />}
           {/*
               TODO: this can be simplified to always wrap the title in h1, without checking if it
@@ -71,7 +71,7 @@ function ConnectorForm({
           )}
         </div>
         {description && (
-          <div className="text-gray-700 dark:text-white whitespace-pre-line mb-8">
+          <div className="text-gray-700 dark:text-white whitespace-pre-line">
             {typeof description === "string" ? (
               <p className="mb-6">{description}</p>
             ) : (
@@ -79,9 +79,9 @@ function ConnectorForm({
             )}
           </div>
         )}
-        {media}
+        {video || (image && media)}
         <div>{children}</div>
-        <div className="mt-8 flex justify-center">
+        <div className="mt-4 flex justify-center">
           <Button
             type="submit"
             label={submitLabel}
