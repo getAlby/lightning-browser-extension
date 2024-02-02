@@ -42,7 +42,7 @@ const Dt = ({ children }: { children: React.ReactNode }) => (
 );
 
 const Dd = ({ children }: { children: React.ReactNode }) => (
-  <dd className="text-lg text-gray-600 dark:text-neutral-400 whitespace-prewrap overflow-hidden text-ellipsis">
+  <dd className="text-lg text-gray-600 dark:text-neutral-400 break-words">
     {children}
   </dd>
 );
