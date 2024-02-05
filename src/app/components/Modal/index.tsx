@@ -32,7 +32,7 @@ export default function Modal({
         position == "center" && "items-center",
         position == "top" && "items-start pt-20"
       )}
-      className="rounded-lg shadow-xl bg-white dark:bg-surface-01dp w-full max-w-md overflow-x-hidden relative p-5 cursor-auto mx-5"
+      className="rounded-lg shadow-xl bg-white dark:bg-surface-01dp w-full max-w-md overflow-x-hidden relative p-5 cursor-auto mx-5 no-scrollbar"
       style={{ content: { maxHeight: "80vh" } }}
     >
       {title && (
