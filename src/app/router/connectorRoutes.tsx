@@ -1,5 +1,4 @@
 import ChooseConnector from "@screens/connectors/ChooseConnector";
-import ConnectBtcpay from "@screens/connectors/ConnectBtcpay";
 import ConnectCitadel from "@screens/connectors/ConnectCitadel";
 import ConnectEclair from "@screens/connectors/ConnectEclair";
 import ConnectGaloy, { galoyUrls } from "@screens/connectors/ConnectGaloy";
@@ -14,6 +13,8 @@ import ConnectUmbrel from "@screens/connectors/ConnectUmbrel";
 import { Route } from "react-router-dom";
 import i18n from "~/i18n/i18nConfig";
 
+import ConnectBtcpayCommando from "~/app/screens/connectors/ConnectBtcpayCommando";
+import ConnectBtcpayLND from "~/app/screens/connectors/ConnectBtcpayLND";
 import ConnectNWC from "~/app/screens/connectors/ConnectNWC";
 import ConnectVoltage from "~/app/screens/connectors/ConnectVoltage";
 import ConnectCommando from "../screens/connectors/ConnectCommando";
@@ -80,6 +81,18 @@ const connectorMap: { [key: string]: ConnectorRoute } = {
     element: <ConnectUmbrel />,
     title: i18n.t("translation:choose_connector.umbrel_lightning_node.title"),
     logo: lightning_node,
+  },
+  "btcpay-lnd": {
+    path: "lnd",
+    element: <ConnectBtcpayLND />,
+    title: i18n.t("translation:choose_connector.lnd.title"),
+    logo: lnd,
+  },
+  "btcpay-commando": {
+    path: "commando",
+    element: <ConnectBtcpayCommando />,
+    title: i18n.t("translation:choose_connector.commando.title"),
+    logo: core_ln,
   },
   "raspiblitz-lnd": {
     path: "lnd",
@@ -153,12 +166,6 @@ const connectorMap: { [key: string]: ConnectorRoute } = {
     title: i18n.t("translation:choose_connector.bitcoin_jungle.title"),
     logo: galoyBitcoinJungle,
   },
-  btcpay: {
-    path: "btcpay",
-    element: <ConnectBtcpay />,
-    title: i18n.t("translation:choose_connector.btcpay.title"),
-    logo: btcpay,
-  },
   voltage: {
     path: "voltage",
     element: <ConnectVoltage />,
@@ -202,6 +209,10 @@ const distributionMap: { [key: string]: { logo: string; children: Route[] } } =
         connectorMap["commando"],
         connectorMap["lnbits"],
       ],
+    },
+    btcpay: {
+      logo: btcpay,
+      children: [connectorMap["btcpay-lnd"], connectorMap["btcpay-commando"]],
     },
     umbrel: {
       logo: umbrel,
@@ -250,7 +261,7 @@ function getConnectorRoutes(): ConnectorRoute[] {
     connectorMap["lnbits"],
     connectorMap["lnd-hub-go"],
     connectorMap["eclair"],
-    connectorMap["btcpay"],
+    getDistribution("btcpay"),
     connectorMap["voltage"],
     connectorMap[galoyPaths.blink],
     connectorMap[galoyPaths.bitcoinJungle],
