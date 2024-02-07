@@ -18,10 +18,10 @@ const initialFormData = {
   name: "",
 };
 
-export default function ConnectBtcpayLND() {
+export default function ConnectBtcpay() {
   const navigate = useNavigate();
   const { t } = useTranslation("translation", {
-    keyPrefix: "choose_connector.btcpay_lnd",
+    keyPrefix: "choose_connector.btcpay",
   });
   const [formData, setFormData] = useState(initialFormData);
   const [loading, setLoading] = useState(false);
