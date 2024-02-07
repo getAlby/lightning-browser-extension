@@ -3,12 +3,12 @@ import {
   CreateSwapParams,
   CreateSwapResponse,
   GetAccountInformationResponse,
-  Invoice,
   RequestOptions,
   SwapInfoResponse,
   Token,
 } from "@getalby/sdk/dist/types";
 import browser from "webextension-polyfill";
+import { InMemoryCache } from "~/common/lib/cache";
 import { decryptData, encryptData } from "~/common/lib/crypto";
 import { Account, OAuthToken } from "~/types";
 import state from "../state";
@@ -42,11 +42,12 @@ export default class Alby implements Connector {
   private config: Config;
   private _client: Client | undefined;
   private _authUser: auth.OAuth2User | undefined;
-  private _cache = new Map<string, object>();
+  private _cache: InMemoryCache;
 
   constructor(account: Account, config: Config) {
     this.account = account;
     this.config = config;
+    this._cache = new InMemoryCache();
   }
 
   async init() {
@@ -90,31 +91,48 @@ export default class Alby implements Connector {
   }
 
   async getTransactions(): Promise<GetTransactionsResponse> {
-    const invoicesResponse = (await this._request((client) =>
-      client.invoices({})
-    )) as Invoice[];
+    const cacheKey = "getTransactions";
+    const cacheValue = this._cache.get(
+      "getTransactions"
+    ) as GetTransactionsResponse;
 
-    const transactions: ConnectorTransaction[] = invoicesResponse.map(
-      (invoice, index): ConnectorTransaction => ({
-        custom_records: invoice.custom_records,
-        id: `${invoice.payment_request}-${index}`,
-        memo: invoice.comment || invoice.memo,
-        preimage: invoice.preimage ?? "",
-        payment_hash: invoice.payment_hash,
-        settled: invoice.settled,
-        settleDate: new Date(invoice.settled_at).getTime(),
-        totalAmount: invoice.amount,
-        type: invoice.type == "incoming" ? "received" : "sent",
-      })
-    );
+    if (cacheValue) {
+      return cacheValue;
+    }
 
-    return {
-      data: {
-        transactions,
-      },
-    };
+    try {
+      const invoicesResponse = await this._request((client) =>
+        client.invoices({})
+      );
+
+      const transactions: ConnectorTransaction[] = invoicesResponse.map(
+        (invoice, index): ConnectorTransaction => ({
+          custom_records: invoice.custom_records,
+          id: `${invoice.payment_request}-${index}`,
+          memo: invoice.comment || invoice.memo,
+          preimage: invoice.preimage ?? "",
+          payment_hash: invoice.payment_hash,
+          settled: invoice.settled,
+          settleDate: new Date(invoice.settled_at).getTime(),
+          totalAmount: invoice.amount,
+          type: invoice.type == "incoming" ? "received" : "sent",
+        })
+      );
+
+      const result: GetTransactionsResponse = {
+        data: {
+          transactions,
+        },
+      };
+
+      this._cache.set(cacheKey, result);
+
+      return result;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
   }
-
   async getInfo(): Promise<
     GetInfoResponse<WebLNNode & GetAccountInformationResponse>
   > {
