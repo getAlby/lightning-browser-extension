@@ -22,7 +22,7 @@ const Avatar = (props: Props) => {
 const AvatarImage = (props: Props) => {
   return (
     <div
-      className={classNames("translate-z-0", props.className ?? "")}
+      className={classNames("translate-z-0 shrink-0", props.className ?? "")}
       style={{
         width: `${props.size}px`,
         height: `${props.size}px`,
@@ -52,7 +52,7 @@ const AvatarSVG = (props: Omit<Props, "url">) => {
   return (
     <svg
       className={classNames(
-        "rounded-full overflow-hidden translate-z-0",
+        "rounded-full overflow-hidden translate-z-0 shrink-0",
         props.className ?? ""
       )}
       ref={svgRef}
