@@ -203,7 +203,7 @@ function AddressPreview({
   t,
 }: LiquidAddress & {
   assetInfos?: EsploraAssetInfos;
-  t: TFunction<"translation", "confirm_sign_pset", "translation">;
+  t: TFunction<"translation", "confirm_sign_pset">;
 }) {
   // if assetInfos is not provided, we fallback to a custom ticker based on the asset hash
   const ticker = assetInfos?.ticker ?? asset.slice(0, 5).toUpperCase();
