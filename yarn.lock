@@ -1165,10 +1165,10 @@
     unbzip2-stream "1.4.3"
     yargs "17.7.2"
 
-"@remix-run/router@1.10.0":
-  version "1.10.0"
-  resolved "https://registry.yarnpkg.com/@remix-run/router/-/router-1.10.0.tgz#e2170dc2049b06e65bbe883adad0e8ddf8291278"
-  integrity sha512-Lm+fYpMfZoEucJ7cMxgt4dYt8jLfbpwRCzAjm9UgSLOkmlqo9gupxt6YX3DY0Fk155NT9l17d/ydi+964uS9Lw==
+"@remix-run/router@1.14.2":
+  version "1.14.2"
+  resolved "https://registry.yarnpkg.com/@remix-run/router/-/router-1.14.2.tgz#4d58f59908d9197ba3179310077f25c88e49ed17"
+  integrity sha512-ACXpdMM9hmKZww21yEqWwiLws/UPLhNKvimN8RrYSqPSvB3ov7sLvAcfvaxePeLvccTQKGdkDIhLYApZVDFuKg==
 
 "@scure/base@1.1.1", "@scure/base@~1.1.0":
   version "1.1.1"
@@ -8314,20 +8314,20 @@ react-qr-code@^2.0.12:
     prop-types "^15.8.1"
     qr.js "0.0.0"
 
-react-router-dom@^6.17.0:
-  version "6.17.0"
-  resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-6.17.0.tgz#ea73f89186546c1cf72b10fcb7356d874321b2ad"
-  integrity sha512-qWHkkbXQX+6li0COUUPKAUkxjNNqPJuiBd27dVwQGDNsuFBdMbrS6UZ0CLYc4CsbdLYTckn4oB4tGDuPZpPhaQ==
+react-router-dom@^6.21.2:
+  version "6.21.2"
+  resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-6.21.2.tgz#5fba851731a194fa32c31990c4829c5e247f650a"
+  integrity sha512-tE13UukgUOh2/sqYr6jPzZTzmzc70aGRP4pAjG2if0IP3aUT+sBtAKUJh0qMh0zylJHGLmzS+XWVaON4UklHeg==
   dependencies:
-    "@remix-run/router" "1.10.0"
-    react-router "6.17.0"
+    "@remix-run/router" "1.14.2"
+    react-router "6.21.2"
 
-react-router@6.17.0:
-  version "6.17.0"
-  resolved "https://registry.yarnpkg.com/react-router/-/react-router-6.17.0.tgz#7b680c4cefbc425b57537eb9c73bedecbdc67c1e"
-  integrity sha512-YJR3OTJzi3zhqeJYADHANCGPUu9J+6fT5GLv82UWRGSxu6oJYCKVmxUcaBQuGm9udpWmPsvpme/CdHumqgsoaA==
+react-router@6.21.2:
+  version "6.21.2"
+  resolved "https://registry.yarnpkg.com/react-router/-/react-router-6.21.2.tgz#8820906c609ae7e4e8f926cc8eb5ce161428b956"
+  integrity sha512-jJcgiwDsnaHIeC+IN7atO0XiSRCrOsQAHHbChtJxmgqG2IaYQXSnhqGb5vk2CU/wBQA12Zt+TkbuJjIn65gzbA==
   dependencies:
-    "@remix-run/router" "1.10.0"
+    "@remix-run/router" "1.14.2"
 
 react@^18.2.0:
   version "18.2.0"
