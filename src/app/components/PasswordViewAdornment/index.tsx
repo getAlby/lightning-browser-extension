@@ -1,5 +1,6 @@
 import { PopiconsEyeLine } from "@popicons/react";
 import { useEffect, useState } from "react";
+import EyeCrossedIcon from "~/app/icons/EyeCrossedIcon";
 
 type Props = {
   onChange: (viewingPassword: boolean) => void;
@@ -27,10 +28,7 @@ export default function PasswordViewAdornment({ onChange, isRevealed }: Props) {
       }}
     >
       {_isRevealed ? (
-        <img
-          src="assets/icons/popicons/eye-crossed.svg"
-          className="h-6 w-6 text-gray-800 dark:text-neutral-200"
-        />
+        <EyeCrossedIcon className="h-6 w-6 text-gray-800 dark:text-neutral-200" />
       ) : (
         <PopiconsEyeLine className="h-5 w-5 text-gray-800 dark:text-neutral-200" />
       )}
