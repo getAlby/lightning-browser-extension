@@ -1,7 +1,7 @@
 import merge from "lodash.merge";
 import pick from "lodash.pick";
 import browser from "webextension-polyfill";
-import createState from "zustand";
+import { create } from "zustand";
 import { decryptData } from "~/common/lib/crypto";
 import { DEFAULT_SETTINGS } from "~/common/settings";
 import { isManifestV3 } from "~/common/utils/mv3";
@@ -85,7 +85,7 @@ const getFreshState = () => ({
   mv2Password: null,
 });
 
-const state = createState<State>((set, get) => ({
+const state = create<State>((set, get) => ({
   ...getFreshState(),
   password: async (password) => {
     if (isManifestV3) {
