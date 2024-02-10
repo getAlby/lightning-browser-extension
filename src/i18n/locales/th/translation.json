@@ -82,9 +82,7 @@
             "description": "ใช้ recovery phrase เพื่อนำ Master Key ของคุณเข้าสู่ Alby",
             "button": "นำเข้า Master Key"
           },
-          "inputs": {
-            "title": "Recovery Phrase"
-          },
+          "inputs": {},
           "lnurl": {
             "title": "เข้าสู่ระบบด้วย Lightning",
             "use_mnemonic": "ใช้ Master Key เพื่อลงชื่อเข้าใช้แอปพลิเคชันที่ใช้ Lightning (LNURL Auth)"

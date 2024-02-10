@@ -322,9 +322,7 @@
             "title": "Vygenerování nového Master klíče",
             "error_confirm": "Prosím potvrďte, že jste zazálohovali svou záložní frázi."
           },
-          "inputs": {
-            "title": "Záložní fráze"
-          },
+          "inputs": {},
           "saved": "Master klíč byl zašifrován a úspěšně uložen.",
           "lnurl": {
             "use_mnemonic": "Používat Master klíč pro přihlašování do aplikací podporujících autentizaci přes Lightning (LNURL Auth)",

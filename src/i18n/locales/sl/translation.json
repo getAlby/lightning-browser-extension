@@ -357,9 +357,7 @@
             "description": "Uporabi obnovitveno frazo za uvoz Gladvnega ključa v Alby.",
             "button": "Uvozi Glavni ključ"
           },
-          "inputs": {
-            "title": "Obnovitvena fraza"
-          },
+          "inputs": {},
           "lnurl": {
             "title": "Prijava z Lightning",
             "use_mnemonic": "Uporabi Glavni ključ za prijavo v Lightning omogočene aplikacije (LNURL Auth)"

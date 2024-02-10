@@ -294,9 +294,7 @@
             },
             "save": "マスターキーを保存"
           },
-          "inputs": {
-            "title": "リカバリーフレーズ"
-          },
+          "inputs": {},
           "existing_nostr_key_notice": "ℹ️ このアカウントにはすでにnostr秘密鍵が設定されているため、このマスターキーから生成されることはありません。Nostr鍵はアカウント設定から管理できます。",
           "generate": {
             "description": "マスターキーは、Nostr、Bitcoinのベースレイヤー、LNURL-Authのようなプロトコルとの連携を可能にします。",

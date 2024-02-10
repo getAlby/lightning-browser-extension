@@ -29,10 +29,10 @@ export default function PasswordViewAdornment({ onChange, isRevealed }: Props) {
       {_isRevealed ? (
         <img
           src="assets/icons/popicons/eye-crossed.svg"
-          className="h-6 w-6 dark:invert"
+          className="h-6 w-6 text-gray-800 dark:text-neutral-200"
         />
       ) : (
-        <PopiconsEyeLine className="h-5 w-5" />
+        <PopiconsEyeLine className="h-5 w-5 text-gray-800 dark:text-neutral-200" />
       )}
     </button>
   );

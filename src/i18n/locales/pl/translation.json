@@ -375,9 +375,7 @@
               "nostr": "Nostr"
             }
           },
-          "inputs": {
-            "title": "Fraza odzyskiwania"
-          },
+          "inputs": {},
           "import": {
             "description": "Użyj frazy odzyskiwania, aby zaimportować swój Klucz Główny do Alby.",
             "button": "Zaimportuj Klucz Główny",

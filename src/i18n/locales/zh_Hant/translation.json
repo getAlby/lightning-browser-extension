@@ -385,9 +385,7 @@
             "use_mnemonic": "使用主密鑰登錄閃電驅動的應用程式（LNURL Auth）",
             "title": "閃電登錄"
           },
-          "inputs": {
-            "title": "恢復短語"
-          },
+          "inputs": {},
           "generate": {
             "error_confirm": "請確認你已將你的恢復短語備份。",
             "confirm": "我已將我的帳戶主密鑰的恢復短語保存到私密且安全的地方。",

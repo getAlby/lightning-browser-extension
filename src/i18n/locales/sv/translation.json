@@ -384,9 +384,7 @@
             "button": "Importera huvudnyckel"
           },
           "title": "🔑 Nyckelhantering",
-          "inputs": {
-            "title": "Återställningsfras"
-          },
+          "inputs": {},
           "lnurl": {
             "title": "Logga in med Lightning",
             "use_mnemonic": "Använd Master Key för att logga in på lightning appar (LNURL Auth)"
