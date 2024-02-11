@@ -247,6 +247,10 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
                         }}
                       />
                     </Setting>
+
+                    {permission.metadata && (
+                      <h1>{JSON.stringify(permission.metadata, null, 2)}</h1>
+                    )}
                   </Fragment>
                 ))}
               </div>

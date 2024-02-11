@@ -1,7 +1,11 @@
 import db from "~/extension/background-script/db";
 import state from "~/extension/background-script/state";
 
-export async function addPermissionFor(method: string, host: string) {
+export async function addPermissionFor(
+  method: string,
+  host: string,
+  metadata?: object
+) {
   const accountId = state.getState().currentAccountId;
   const allowance = await db.allowances.get({
     host,
@@ -18,6 +22,7 @@ export async function addPermissionFor(method: string, host: string) {
     method: method,
     enabled: true,
     blocked: false,
+    metadata: metadata ? metadata : undefined,
   });
 
   return !!permissionIsAdded && (await db.saveToStorage());

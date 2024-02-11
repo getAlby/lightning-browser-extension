@@ -766,6 +766,7 @@ export enum PermissionMethodLiquid {
 export enum PermissionMethodNostr {
   NOSTR_SIGNMESSAGE = "nostr/signMessage",
   NOSTR_SIGNSCHNORR = "nostr/signSchnorr",
+  // this can be nostr login
   NOSTR_GETPUBLICKEY = "nostr/getPublicKey",
   NOSTR_NIP04DECRYPT = "nostr/nip04decrypt",
   NOSTR_NIP04ENCRYPT = "nostr/nip04encrypt",
@@ -780,6 +781,7 @@ export interface DbPermission {
   method: string | PermissionMethodNostr;
   enabled: boolean;
   blocked: boolean;
+  metadata?: object;
 }
 
 export interface Permission extends Omit<DbPermission, "id"> {

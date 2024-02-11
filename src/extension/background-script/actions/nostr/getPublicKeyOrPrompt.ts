@@ -38,7 +38,8 @@ const getPublicKeyOrPrompt = async (
       if (promptResponse.data.rememberPermission) {
         await addPermissionFor(
           PermissionMethodNostr["NOSTR_GETPUBLICKEY"],
-          host
+          host,
+          { kind: 4, deny: true, allow: false }
         );
       }
 
