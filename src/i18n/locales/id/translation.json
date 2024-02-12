@@ -36,7 +36,6 @@
     },
     "choose_path": {
       "other": {
-        "and_more": "& lainnya...",
         "connect": "Sambung",
         "title": "Wallets Lainnya"
       },
@@ -175,11 +174,11 @@
           "placeholder": "lndconnect://yournode:8080?..."
         }
       },
-      "start9": {
-        "title": "Start9",
+      "startos": {
+        "title": "StartOS",
         "page": {
-          "title": "Sambungkan dengan <0>Server Start9</0>",
-          "instructions": "Pada dashboard Embassy klik pada <0>Lightning Network Daemon</0> service.<1/>Pilih tab <0>Properties</0>.<1/>Kemudian salin <0>LND Connect REST URL.</0>"
+          "title": "Sambungkan dengan <0>Server StartOS</0>",
+          "instructions": "Pada dashboard StartOS klik pada <0>Lightning Network Daemon</0> service.<1/>Pilih tab <0>Properties</0>.<1/>Kemudian salin <0>LND Connect REST URL.</0>"
         },
         "rest_url": {
           "placeholder": "lndconnect://yournode:8080?...",
@@ -278,8 +277,8 @@
       "mynode": {
         "name": "myNode"
       },
-      "start9": {
-        "name": "Start9"
+      "startos": {
+        "name": "StartOS"
       }
     },
     "home": {
@@ -621,35 +620,6 @@
     "scan_qrcode": {
       "title": "Menunggu pemindaian"
     },
-    "discover": {
-      "title": "Jelajahi Ekosistem Lightning ⚡️",
-      "description": "Situs Web dan aplikasi Web di mana kamu dapat menggunakan Alby",
-      "list": {
-        "trading": "Perdagangan",
-        "gaming": "Permainan",
-        "nostr": "Nostr",
-        "entertainment": "Hiburan",
-        "shopping": "Berbelanja",
-        "miscellaneous": "Lain-lain",
-        "nodeManagement": "Manajemen Node"
-      },
-      "tips": {
-        "top_up_wallet": {
-          "description": "Perlu top up?\nKami sediakan!",
-          "title": "Beli Bitcoin"
-        },
-        "demo": {
-          "description": "Temukan fitur Alby\ndi situs demo kami",
-          "title": "Demo Alby"
-        },
-        "mnemonic": {
-          "description": "Berencana menggunakan Nostr?\nBuat kunci kamu sekarang.",
-          "title": "Nostr"
-        },
-        "description": "Beberapa tips untuk memulai buzzin'🐝",
-        "title": "Dompet Alby kamu sudah siap"
-      }
-    },
     "publishers": {
       "title": "Website ⚡ Kamu",
       "description": "Situs Web di mana kamu telah menggunakan Alby sebelum",
@@ -835,8 +805,7 @@
   "permissions": {
     "nostr": {
       "nip04decrypt": "Dekripsi data",
-      "getpublickey": "Membaca kunci publik Anda",
-      "nip04encrypt": "Enkripsi data"
+      "getpublickey": "Membaca kunci publik Anda"
     },
     "commando": {
       "decode": "Decode teks bolt11/bolt12/rune"

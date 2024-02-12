@@ -3,7 +3,6 @@ import { classNames } from "~/app/utils/index";
 
 type Props = {
   children: React.ReactNode;
-  danger?: boolean;
   disabled?: boolean;
   onClick: () => void;
   title?: string;
@@ -11,7 +10,6 @@ type Props = {
 
 function MenuItemButton({
   children,
-  danger = false,
   disabled = false,
   onClick,
   title = "",
@@ -21,10 +19,9 @@ function MenuItemButton({
       {({ active }) => (
         <button
           className={classNames(
-            active ? "bg-gray-100 dark:bg-white/10" : "",
-            danger ? "text-red-700" : "text-gray-700",
+            active ? "bg-gray-50 dark:bg-surface-02dp" : "",
             disabled ? "cursor-not-allowed" : "cursor-pointer",
-            "flex items-center block w-full text-left px-4 py-3 text-sm dark:text-white"
+            "flex items-center w-full p-4 text-sm text-gray-800 dark:text-neutral-200"
           )}
           disabled={disabled}
           onClick={onClick}

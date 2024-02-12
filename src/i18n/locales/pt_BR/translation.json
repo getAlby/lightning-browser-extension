@@ -122,11 +122,11 @@
           "placeholder": "lndconnect://seuservidor:8080?..."
         }
       },
-      "start9": {
-        "title": "Start9",
+      "startos": {
+        "title": "StartOS",
         "page": {
-          "title": "Conecte-se no seu servidor <0>Start9</0>",
-          "instructions": "<0>Note:</0> Atualmente somente a LND é suportada mas nós adicionaremos suporte para a c-lightning no futuro!<1/>No seu Embassy clique em service <0>Lightning Network Daemon</0>.<1/>Selecione a tab <0>Properties</0>.<1/>Agora copie o <0>LND Connect REST URL.</0>"
+          "title": "Conecte-se no seu servidor <0>StartOS</0>",
+          "instructions": "<0>Note:</0> Atualmente somente a LND é suportada mas nós adicionaremos suporte para a c-lightning no futuro!<1/>No seu StartOS clique em service <0>Lightning Network Daemon</0>.<1/>Selecione a tab <0>Properties</0>.<1/>Agora copie o <0>LND Connect REST URL.</0>"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -149,12 +149,19 @@
         "title": "Carteira Blink",
         "page": {
           "title": "Conecte-se na <0>Carteira Blink</0>"
+        },
+        "token": {
+          "label": "Insira a chave API",
+          "info": "Para conectar sua carteira, você precisa gerar uma chave API em <0>Blink Dashboard (dashboard.blink.sv)</0>:<br>- Acesse com e-mail ou número de telefone, caso você já possua uma conta Blink<br>- Se você ainda não tem conta, pode criar uma nova fazendo login com um número de telefone<br>- na aba API, crie uma nova chave<br>- dê um nome e escolha a opção ler e escrever<br>- deixe o padrão sem expiração ou escolha um período longo para evitar a necessidade de reconectar sua carteira periodicamente<br>- copie a chave (starting with blink_ ) e cole-a na caixa de texto abaixo.<br><br>A integração atualmente suporta apenas o uso da carteira BTC.<br>"
         }
       },
       "bitcoin_jungle": {
         "title": "Carteira Bitcoin Jungle",
         "page": {
           "title": "Conecte-se na <0>Carteira Bitcoin Jungle</0>"
+        },
+        "token": {
+          "label": "Insira o token de acesso"
         }
       },
       "btcpay": {
@@ -242,6 +249,12 @@
           "setup_failed": "Falha na configuração",
           "invalid_token": "Falha na autorização. Verifique sua chave API e tente novamente."
         }
+      },
+      "umbrel_lightning_node": {
+        "title": "Servidor Relâmpago"
+      },
+      "voltage": {
+        "title": "Voltage"
       }
     },
     "home": {
@@ -312,12 +325,12 @@
           "settings": {
             "label": "Configurações Nostr",
             "title": "Configurações Nostr",
-            "derive": "Gere chaves Nostr a partir de sua chave mestra",
+            "derive": "Gerar chave Nostr a partir de sua chave mestra",
             "can_restore": "✅ Chave Nostr gerada a partir de sua chave mestra",
             "description": "Você pode gerar chaves Nostr a partir de sua chave mestra ou importar sua chave privada existente colando-a no campo \"Chave privada Nostr\".",
             "no_secret_key": "💡 Você ainda não tem uma chave mestra. <0>Clique aqui</0></div> para gerar sua chave mestra e suas chaves Nostr.",
             "imported_key_warning": "⚠️ No momento, você está usando uma chave Nostr importada ou gerada aleatoriamente. Sua chave privada Nostr não pode ser restaurada por sua frase de recuperação, então lembre-se de fazer o backup de sua chave privada Nostr separadamente.",
-            "remove": "Remover chaves existentes"
+            "remove": "Remover esta chave"
           },
           "setup": {
             "title": "Configure suas chaves Nostr",
@@ -372,7 +385,7 @@
           },
           "backup": {
             "save": "Salvar chave mestra",
-            "button": "Ver frase de recuperação",
+            "button": "Frase de recuperação",
             "protocols": {
               "nostr": "Nostr"
             },
@@ -561,15 +574,15 @@
       "actions": {
         "create_invoice": "Gerar fatura",
         "redeem": {
-          "description": "Receba bitcoin de forma instantânea usando um código LNURL",
+          "description": "Receba satoshis de forma instantânea usando um código LNURL",
           "title": "Vale-satoshi"
         },
         "invoice": {
           "title": "Fatura relâmpago",
-          "description": "Receba pagamentos bitcoin de valores específicos e de forma instantânea"
+          "description": "Receba valores específicos de satoshis e de forma instantânea"
         },
         "bitcoin_address": {
-          "description": "Receba via endereço bitcoin usando um serviço de trocas",
+          "description": "Receba satoshis depositando bitcoin em um serviço de trocas",
           "title": "Serviço de trocas"
         }
       },
@@ -687,56 +700,43 @@
         "9735": "zap",
         "unknown": "tipo {{kind}}"
       },
-      "allow_sign_event": "Permitir {{host}} assinar um evento {{kind}}",
-      "allow_encrypt": "Permitir {{host}} criptografar a mensagem:",
-      "allow_decrypt": "Permitir {{host}} descriptografar a mensagem:"
+      "allow_sign_event": "Permitir {{host}} assinar um evento <0>{{kind}}</0>",
+      "allow_encrypt": "Permitir {{host}} criptografar a mensagem:"
     },
     "confirm_request_permission": {
       "title": "Aprovar solicitação",
       "allow": "Permitir este site executar:",
       "always_allow": "Lembrar e não perguntar novamente"
     },
-    "discover": {
-      "title": "Explore o ecossistema ⚡️",
-      "description": "Sites onde você pode usar a Alby",
-      "list": {
-        "trading": "Negociação",
-        "gaming": "Jogos",
-        "entertainment": "Entretenimento",
-        "shopping": "Compras",
-        "miscellaneous": "Outros",
-        "nostr": "Nostr",
-        "nodeManagement": "Gerenciamento de servidor"
-      },
-      "tips": {
-        "top_up_wallet": {
-          "description": "Precisa adicionar fundos?\nClique aqui!",
-          "title": "Comprar Bitcoin"
-        },
-        "demo": {
-          "title": "Teste a Alby",
-          "description": "Descubra tudo o que você pode fazer com a Alby\nem nosso site de demonstração"
-        },
-        "title": "Sua carteira Alby está pronta",
-        "description": "Algumas dicas para você começar a usar a Alby 🐝",
-        "mnemonic": {
-          "description": "Planejando usar apps Nostr?\nClique aqui para configurar suas chaves.",
-          "title": "Nostr"
-        }
-      }
-    },
     "choose_path": {
       "alby": {
         "title": "Conta Alby",
         "connect": "Conecte-se com a Alby",
-        "description": "Crie uma conta Alby ou faça o login caso já possua uma conta conosco."
+        "description": "Ideal para iniciantes que procuram uma ótima carteira para gastos do dia a dia.",
+        "point3": "Cadastro e acesso por e-mail",
+        "point1": "Necessita de convite para criar conta",
+        "point4": "Endereços relâmpago e nostr exclusivos",
+        "point2": "Limites de transação"
       },
       "other": {
-        "title": "Outras contas",
-        "and_more": "& mais...",
+        "title": "Traga sua carteira atual",
         "connect": "Conectar outras contas",
-        "description": "Conecte-se em sua carteira bitcoin ou em um dos vários servidores de carteira disponíveis."
-      }
+        "description": "Ideal para quem já possui uma carteira e precisa fazer pagamentos de quantias altas.",
+        "point1": "Acesso instantâneo, não precisa de convite",
+        "point4": "Sem endereço relâmpago e nostr",
+        "point3": "Opções de autocustódia ou custódia delegada",
+        "point2": "Sem limites de transação"
+      },
+      "voltage": {
+        "point2": "Sem limites de transação",
+        "connect": "Escolher carteira",
+        "point1": "Acesso instantâneo, não precisa de convite",
+        "point4": "Endereços relâmpago e nostr exclusivos",
+        "title": "Servidor Voltage",
+        "point3": "Serviço pago",
+        "description": "Ideal para quem não se importa em pagar por um servidor de carteira relâmpago."
+      },
+      "title": "Conectar carteira na extensão Alby"
     },
     "alby": {
       "pre_connect": {
@@ -776,8 +776,8 @@
       "mynode": {
         "name": "myNode"
       },
-      "start9": {
-        "name": "Start9"
+      "startos": {
+        "name": "StartOS"
       },
       "description": "Escolha com qual aplicativo {{name}} você gostaria de se conectar",
       "title": "Conectar em {{name}}"
@@ -1001,7 +1001,8 @@
       "block_added": "{{host}} adicionado à lista de bloqueio, recarregue o site.",
       "request1": "Solicitar aprovação para transações",
       "allow": "Permitir este site:",
-      "block_and_ignore": "Bloquear e ignorar {{host}}"
+      "block_and_ignore": "Bloquear e ignorar {{host}}",
+      "insecure_domain_warn": "⚠️ Você está se conectando a um domínio inseguro."
     },
     "website": "Site",
     "apps": "Apps"
@@ -1111,8 +1112,7 @@
     "nostr": {
       "getpublickey": "Ler sua chave pública",
       "signmessage": "Assinar mensagem com sua chave",
-      "nip04decrypt": "Descriptografar dados",
-      "nip04encrypt": "Criptografar dados"
+      "nip04decrypt": "Descriptografar dados"
     },
     "lnc": {
       "openchannel": ""

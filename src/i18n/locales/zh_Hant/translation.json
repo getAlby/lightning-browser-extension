@@ -42,7 +42,6 @@
       },
       "other": {
         "title": "其他錢包",
-        "and_more": "等等...",
         "connect": "連接"
       }
     },
@@ -176,11 +175,11 @@
           "placeholder": "lndconnect://yournode:8080?..."
         }
       },
-      "start9": {
-        "title": "Start9",
+      "startos": {
+        "title": "StartOS",
         "page": {
-          "title": "連接你的 <0>Start9 服务器</0>",
-          "instructions": "在你的 Embassy 儀表板上點擊 <0>Lightning Network Daemon</0> 服務。<1/>選擇 <0>Properties</0> 標籤。<1/>複製 <0>LND Connect REST URL。</0>"
+          "title": "連接你的 <0>StartOS 服务器</0>",
+          "instructions": "在你的 StartOS 儀表板上點擊 <0>Lightning Network Daemon</0> 服務。<1/>選擇 <0>Properties</0> 標籤。<1/>複製 <0>LND Connect REST URL。</0>"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -606,36 +605,6 @@
         "status": "查看付款狀態"
       }
     },
-    "discover": {
-      "title": "探索閃電⚡️生態系統",
-      "description": "可以使用 Alby 的網站和網絡應用程序",
-      "list": {
-        "trading": "交易",
-        "gaming": "遊戲",
-        "shopping": "購物",
-        "miscellaneous": "雜項",
-        "showcases": "展示",
-        "nostr": "Nostr",
-        "nodeManagement": "節點管理",
-        "entertainment": "娛樂"
-      },
-      "tips": {
-        "title": "你的Alby錢包已準備就緒",
-        "description": "一些讓你開始嗡嗡作响的小貼士🐝",
-        "top_up_wallet": {
-          "title": "購買比特幣",
-          "description": "需要充值？\n我們能幫忙！"
-        },
-        "demo": {
-          "title": "Alby 演示",
-          "description": "在我們的演示網站上\n發現 Alby 的所有功能"
-        },
-        "mnemonic": {
-          "description": "打算使用 Nostr？\n立即生成你的密鑰。",
-          "title": "Nostr"
-        }
-      }
-    },
     "publishers": {
       "title": "你的 ⚡ 網站",
       "description": "你曾經使用過Alby的網站",
@@ -751,8 +720,8 @@
       "mynode": {
         "name": "myNode"
       },
-      "start9": {
-        "name": "Start9"
+      "startos": {
+        "name": "StartOS"
       }
     },
     "confirm_add_account": {
@@ -1020,7 +989,6 @@
   "permissions": {
     "nostr": {
       "getpublickey": "讀取你的公鑰",
-      "nip04encrypt": "加密數據",
       "nip04decrypt": "解密數據",
       "signmessage": "用你的密鑰簽署消息"
     },

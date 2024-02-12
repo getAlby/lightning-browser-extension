@@ -49,7 +49,9 @@ function AccountDetailLayout() {
               {account.name}
             </h2>
             <span>/</span>
-            <span>{t("title1")}</span>
+            <span className="text-ellipsis whitespace-nowrap overflow-hidden">
+              {t("title1")}
+            </span>
           </div>
         )}
       </Header>

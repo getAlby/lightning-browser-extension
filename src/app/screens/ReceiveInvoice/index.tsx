@@ -228,9 +228,11 @@ function ReceiveInvoice() {
         {t("title")}
       </Header>
       {invoice ? (
-        <Container justifyBetween maxWidth="sm">
-          {renderInvoice()}
-        </Container>
+        <div className="h-full">
+          <Container justifyBetween maxWidth="sm">
+            {renderInvoice()}
+          </Container>
+        </div>
       ) : (
         <div className="pt-4 h-full">
           <form onSubmit={handleSubmit} className="h-full">

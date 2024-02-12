@@ -138,8 +138,8 @@ function Settings() {
             />
           }
         >
-          <div className="sm:w-64 flex-none w-full pt-4 sm:pt-0">
-            <LocaleSwitcher />
+          <div className="w-64">
+            <LocaleSwitcher className="w-full border-gray-300 rounded-md shadow-sm text-gray-700 bg-white dark:bg-surface-00dp dark:text-neutral-200 dark:border-neutral-800" />
           </div>
         </Setting>
         <Setting title={t("theme.title")} subtitle={t("theme.subtitle")}>

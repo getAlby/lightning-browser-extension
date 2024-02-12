@@ -78,8 +78,8 @@ export default function ConnectAlby() {
       label={t("connect")}
       loading={loading}
       disabled={loading}
-      primary
       flex
+      outline
       onClick={connectAlby}
     />
   );

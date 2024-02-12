@@ -136,11 +136,11 @@
           "placeholder": "lndconnect://yournode:8080?..."
         }
       },
-      "start9": {
-        "title": "Start9",
+      "startos": {
+        "title": "StartOS",
         "page": {
-          "title": "Anslut till din <0>Start9 Server</0>",
-          "instructions": "På din Embassy instrumentpanel klickar du på tjänsten <0>Lightning Network Daemon</0>.<1/>Välj fliken <0>Egenskaper</0>.<1/>Kopiera nu <0>LND Connect REST URL. </0>"
+          "title": "Anslut till din <0>StartOS Server</0>",
+          "instructions": "På din StartOS instrumentpanel klickar du på tjänsten <0>Lightning Network Daemon</0>.<1/>Välj fliken <0>Egenskaper</0>.<1/>Kopiera nu <0>LND Connect REST URL. </0>"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -704,7 +704,6 @@
       "other": {
         "title": "Annan Plånbok",
         "connect": "Anslut",
-        "and_more": "& mer...",
         "description": "Anslut till din befintliga lightning plånbok eller nod och välj bland olika kontakter. Perfekt för full flexibilitet. Kör din egen nod."
       }
     },
@@ -724,36 +723,6 @@
           }
         }
       }
-    },
-    "discover": {
-      "list": {
-        "miscellaneous": "Diverse",
-        "gaming": "Spel",
-        "entertainment": "Underhållning",
-        "shopping": "Shoppa",
-        "showcases": "Vitriner",
-        "nostr": "Nostr",
-        "trading": "Handel",
-        "nodeManagement": "Nodhantering"
-      },
-      "tips": {
-        "title": "Din Alby plånbok är redo",
-        "description": "Några tips för att få igång dig'🐝",
-        "top_up_wallet": {
-          "title": "Köp Bitcoin",
-          "description": "Behöver du en påfyllning?\nVi hjälper dig!"
-        },
-        "demo": {
-          "title": "Alby Demo",
-          "description": "Upptäck Albys funktioner\npå vår demowebbplats"
-        },
-        "mnemonic": {
-          "title": "Nostr",
-          "description": "Planerar du att använda Nostr?\nSkapa dina nycklar nu."
-        }
-      },
-      "title": "Utforska Lightnings ⚡️ Eco system",
-      "description": "Webbplatser och webbappar där du kan använda Alby"
     },
     "confirm_request_permission": {
       "always_allow": "Kom ihåg mitt val och fråga inte igen",
@@ -783,8 +752,8 @@
       "mynode": {
         "name": "myNode"
       },
-      "start9": {
-        "name": "Start9"
+      "startos": {
+        "name": "StartOS"
       }
     },
     "confirm_add_account": {
@@ -1121,8 +1090,7 @@
     "nostr": {
       "nip04decrypt": "Dekryptera data",
       "getpublickey": "Läs din publika nyckel",
-      "signmessage": "Skriv under meddelandet med din nyckel",
-      "nip04encrypt": "Kryptera data"
+      "signmessage": "Skriv under meddelandet med din nyckel"
     },
     "lnd": {
       "channelbalance": "Få en rapport om de totala medlen över alla öppna kanaler",

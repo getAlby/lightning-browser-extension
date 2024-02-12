@@ -159,9 +159,11 @@ class Galoy implements Connector {
                             }
                           }
                           ... on SettlementViaIntraLedger {
-                            __typename
-                            counterPartyWalletId
-                            counterPartyUsername
+                            ${
+                              this.config.apiCompatibilityMode
+                                ? "counterPartyWalletId"
+                                : "preImage"
+                            }
                           }
                         }
                       }
@@ -203,7 +205,10 @@ class Galoy implements Connector {
             transactions.push({
               id: edge.cursor,
               memo: tx.memo,
-              preimage: tx.settlementVia.preImage || "",
+              preimage:
+                tx.settlementVia.preImage ||
+                tx.settlementVia.paymentSecret ||
+                "",
               payment_hash: tx.initiationVia.paymentHash || "",
               settled: tx.status === "SUCCESS",
               settleDate: createdAtDate.getTime(),
@@ -273,6 +278,24 @@ class Galoy implements Connector {
             errors {
               message
             }
+            transaction {
+              settlementVia {
+                ... on SettlementViaLn {
+                  ${
+                    this.config.apiCompatibilityMode
+                      ? "paymentSecret"
+                      : "preImage"
+                  }
+                }
+                ... on SettlementViaIntraLedger {
+                  ${
+                    this.config.apiCompatibilityMode
+                      ? "counterPartyWalletId"
+                      : "preImage"
+                  }
+                }
+              }
+            }
           }
         }
       `,
@@ -295,6 +318,22 @@ class Galoy implements Connector {
         throw new Error(errs[0].message || JSON.stringify(errs));
       }
 
+      const transaction = data.lnInvoicePaymentSend.transaction;
+      let preimageMessage = "No preimage received";
+
+      if (transaction && transaction.settlementVia) {
+        if (
+          "preImage" in transaction.settlementVia ||
+          "paymentSecret" in transaction.settlementVia
+        ) {
+          preimageMessage =
+            transaction.settlementVia.preImage ||
+            transaction.settlementVia.paymentSecret;
+        } else if ("counterPartyWalletId" in transaction.settlementVia) {
+          preimageMessage = "No preimage, the payment was settled intraledger";
+        }
+      }
+
       switch (data.lnInvoicePaymentSend.status) {
         case "ALREADY_PAID":
           throw new Error("Invoice was already paid.");
@@ -311,7 +350,7 @@ class Galoy implements Connector {
         default:
           return {
             data: {
-              preimage: "No preimage received",
+              preimage: preimageMessage,
               paymentHash,
               route: { total_amt: amountInSats, total_fees: 0 },
             },
@@ -348,9 +387,11 @@ class Galoy implements Connector {
                           }
                         }
                         ... on SettlementViaIntraLedger {
-                          __typename
-                          counterPartyWalletId
-                          counterPartyUsername
+                          ${
+                            this.config.apiCompatibilityMode
+                              ? "counterPartyWalletId"
+                              : "preImage"
+                          }
                         }
                       }
                     }
@@ -390,7 +431,7 @@ class Galoy implements Connector {
           return {
             data: {
               paid: tx.node.status === "SUCCESS",
-              preimage: tx.node.settlementVia.__typename
+              preimage: tx.node.settlementVia.counterPartyWalletId
                 ? "Payment executed internally"
                 : tx.node.settlementVia.preImage || "No preimage received",
             },
@@ -497,9 +538,8 @@ type TransactionNode = {
   };
   settlementVia: {
     preImage?: string;
-    __typename?: string;
+    paymentSecret?: string;
     counterPartyWalletId?: string;
-    counterPartyUsername?: string;
   };
 };
 

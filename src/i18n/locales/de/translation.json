@@ -148,16 +148,16 @@
           "placeholder": "http://localhost:8080"
         }
       },
-      "start9": {
+      "startos": {
         "page": {
-          "instructions": "Klicke in deinem Embassy Dashboard auf den <0>Lightning Network Daemon</0> Service.<1/>Wähle den Reiter <0>Properties</0>.<1/>Kopiere nun die <0>LND Connect REST URL.</0>",
-          "title": "Verbinden mit deinem <0>Start9 Server</0>"
+          "instructions": "Klicke in deinem StartOS Dashboard auf den <0>Lightning Network Daemon</0> Service.<1/>Wähle den Reiter <0>Properties</0>.<1/>Kopiere nun die <0>LND Connect REST URL.</0>",
+          "title": "Verbinden mit <0>StartOS</0>"
         },
         "rest_url": {
           "placeholder": "lndconnect://deinenode:8080?...",
           "label": "Indconnect REST URL"
         },
-        "title": "Start9"
+        "title": "StartOS"
       },
       "blink": {
         "title": "Blink Wallet",
@@ -254,6 +254,36 @@
           "setup_failed": "Einrichtung fehlgeschlagen",
           "invalid_token": "Autorisierung fehlgeschlagen. Bitte überprüfe deinen API-Schlüssel und versuche es erneut.",
           "missing_token": "Zugriffstoken fehlt, konnte sich nicht anmelden."
+        }
+      },
+      "voltage": {
+        "macaroon": {
+          "label": "Admin Macaroon (hex)"
+        },
+        "url": {
+          "label": "Node URL",
+          "placeholder": "https://your-node.m.voltageapp.io:8080"
+        },
+        "page": {
+          "title": "Verbinde dich mit Voltage Node",
+          "description": "Lightning-Node-Hosting der Enterprise-Klasse. Erreiche das Lightning Network schneller als je zuvor. Völlige Kontrolle mit null Verwaltung. <0>Erfahre mehr in unserer Einrichtungsanleitung</0>"
+        },
+        "title": "Voltage",
+        "errors": {
+          "connection_failed": "Verbindung fehlgeschlagen. Sind deine Anmeldedaten korrekt?"
+        }
+      },
+      "nwc": {
+        "title": "Nostr Wallet Verbindung",
+        "page": {
+          "url": {
+            "label": "Nostr Wallet Verbindung URL",
+            "placeholder": "nostr+walletconnect://69effe..."
+          },
+          "instructions": "Einfügen einer NWC-Verbindungszeichenfolge von <0>Alby Nostr Wallet Connect</0>, <1>Umbrel Nostr Wallet Connect</1> oder <2>Mutiny Wallet</2>",
+          "errors": {
+            "connection_failed": "Verbindung fehlgeschlagen. Ist dein Core Lightning-Knoten online und verwendet er das Commando-Plugin?"
+          }
         }
       }
     },
@@ -653,10 +683,9 @@
         "30078": "anwendungsspezifische Daten",
         "unknown": "kind {{kind}}"
       },
-      "peer": "Peer",
-      "allow_sign_event": "Erlaube {{Gastgeber}}, ein {{kind}} Ereignis zu unterzeichnen",
+      "allow_sign_event": "Erlaube {{Gastgeber}}, ein <0>{{kind}}</0> Ereignis zu unterzeichnen",
       "allow_encrypt": "Erlaube {{host}}, die Nachricht zu verschlüsseln:",
-      "allow_decrypt": "Erlaube {{host}}, die Nachricht zu entschlüsseln:"
+      "recipient": "Empfänger"
     },
     "confirm_request_permission": {
       "title": "Antrag genehmigen",
@@ -743,46 +772,33 @@
     },
     "choose_path": {
       "other": {
-        "and_more": "& mehr...",
-        "title": "Andere Wallets",
+        "title": "Bringe dein eigenes Wallet mit",
         "connect": "Verbinden",
-        "description": "Schließe deine vorhandene Lightning Wallet oder Node an und wähle aus verschiedenen Anschlüssen. Großartig für volle Flexibilität. Betreibe deinen eigenen Knotenpunkt."
+        "description": "Am besten, wenn du bereits eine Wallet hast oder ein hohes Zahlungsvolumen abwickeln möchtest.",
+        "point1": "Sofortiger Start, kein Warten auf eine Einladung",
+        "point4": "Kein lightning und nostr Adresse",
+        "point3": "Sowohl Selbstverwahrungs- als auch Verwahrungsoptionen",
+        "point2": "Keine Transaktions- oder Volumenbeschränkungen"
       },
       "alby": {
         "title": "Alby Konto",
         "connect": "Mit Alby verbinden",
-        "description": "Melde dich an oder nutze dein bestehendes Alby-Konto. Ideal für den schnellen Einstieg und für kleine Beträge."
-      }
-    },
-    "discover": {
-      "description": "Webseiten und Webapplikationen, auf denen du Alby verwenden kannst",
-      "title": "Erkunde das Ökosystem von Lightning ⚡️",
-      "list": {
-        "gaming": "Spiele",
-        "trading": "Handel",
-        "entertainment": "Unterhaltung",
-        "shopping": "Einkaufen",
-        "miscellaneous": "Sonstiges",
-        "showcases": "Schaukästen",
-        "nostr": "Nostr",
-        "nodeManagement": "Node-Verwaltung"
+        "description": "Ideal für Einsteiger oder alle, die ein tolles Wallet für den täglichen Gebrauch suchen.",
+        "point3": "Einrichten und Anmelden mit deiner E-Mail",
+        "point1": "Neue Anmeldungen erfordern einen Einladungscode",
+        "point4": "Eindeutige Lightning- und Nostr-Adresse",
+        "point2": "Es gelten Grenzen für das Transaktionsvolumen"
       },
-      "tips": {
-        "title": "Deine Alby Wallet ist bereit",
-        "top_up_wallet": {
-          "description": "Du möchtest deine Wallet aufladen?\nWir haben es für dich!",
-          "title": "Bitcoin kaufen"
-        },
-        "demo": {
-          "description": "Entdecke die Funktionen von Alby\nauf unserer Demo Webseite",
-          "title": "Alby Demo"
-        },
-        "description": "Hier ein paar Tipps für den Anfang 🐝",
-        "mnemonic": {
-          "title": "Nostr",
-          "description": "Generiere jetzt \n deinen Schlüssel."
-        }
-      }
+      "voltage": {
+        "point2": "Keine Transaktions- oder Volumenbeschränkungen",
+        "connect": "Verbinden",
+        "point1": "Sofortiger Start, kein Warten auf eine Einladung",
+        "point4": "Eindeutige Lightning- und Nostr-Adresse",
+        "title": "Voltage Cloud Knoten",
+        "point3": "Kostenpflichtiger Cloud-Dienst",
+        "description": "Großartig, wenn es dir nichts ausmacht, für einen Cloud-Dienst mit lightning zu bezahlen."
+      },
+      "title": "Wallet mit Alby-Erweiterung verbinden"
     },
     "transactions": {
       "title": "Transaktionen",
@@ -807,8 +823,8 @@
       "mynode": {
         "name": "myNode"
       },
-      "start9": {
-        "name": "Start9"
+      "startos": {
+        "name": "StartOS"
       }
     },
     "confirm_add_account": {
@@ -1137,7 +1153,8 @@
       "block_added": "{{host}} zur Blockliste hinzugefügt, bitte lade die Webseite neu.",
       "request1": "Genehmigung von Transaktionen beantragen",
       "allow": "Erlaube dieser Webseite:",
-      "block_and_ignore": "Blockieren und Ignorieren von {{host}}"
+      "block_and_ignore": "Blockieren und Ignorieren von {{host}}",
+      "insecure_domain_warn": "⚠️ Du stellst eine Verbindung zu einer unsicheren Domäne her."
     },
     "website": "Website",
     "apps": "Apps"
@@ -1205,7 +1222,6 @@
     "nostr": {
       "getpublickey": "Lese deinen öffentlichen Schlüssel",
       "nip04decrypt": "Daten entschlüsseln",
-      "nip04encrypt": "Daten verschlüsseln",
       "signmessage": "Unterschreibe deine Nachricht mit deinem Schlüssel"
     },
     "lnc": {

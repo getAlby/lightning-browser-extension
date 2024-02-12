@@ -36,16 +36,33 @@
       }
     },
     "choose_path": {
+      "title": "Connect Wallet to Alby Extension",
+      "other": {
+        "title": "Bring Your Own Wallet",
+        "description": "Best if you already have a wallet or need to do high-volume payments.",
+        "connect": "Connect",
+        "point1": "Start instantly, no waiting for an invite",
+        "point2": "No transaction or volume limits",
+        "point3": "Both self-custody and custodial options",
+        "point4": "No lightning and nostr address"
+      },
+      "voltage": {
+        "title": "Voltage Cloud Node",
+        "description": "Great if you don't mind paying for a lightning node cloud service.",
+        "connect": "Connect",
+        "point1": "Start instantly, no waiting for an invite",
+        "point2": "No transaction or volume limits",
+        "point3": "Paid cloud service",
+        "point4": "Unique lightning and nostr address"
+      },
       "alby": {
         "title": "Alby Account",
-        "description": "Sign up or use your existing Alby Account. Great to quickly get started and for small amounts.",
-        "connect": "Connect with Alby"
-      },
-      "other": {
-        "title": "Other Wallets",
-        "description": "Connect to your existing lightning wallet or node and choose from various connectors. Great for full flexibility. Run your own node.",
-        "and_more": "& more...",
-        "connect": "Connect"
+        "description": "Ideal for beginners or anyone looking for a great daily spending wallet.",
+        "connect": "Connect with Alby",
+        "point1": "New signups require an invite code",
+        "point2": "Transaction volume limits apply",
+        "point3": "Set up and login with your email",
+        "point4": "Unique lightning and nostr address"
       }
     },
     "alby": {
@@ -181,11 +198,11 @@
           "placeholder": "lndconnect://yournode:8080?..."
         }
       },
-      "start9": {
-        "title": "Start9",
+      "startos": {
+        "title": "StartOS",
         "page": {
-          "title": "Connect to your <0>Start9 Server</0>",
-          "instructions": "On your Embassy dashboard click on the <0>Lightning Network Daemon</0> service.<1/>Select the <0>Properties</0> tab.<1/>Now copy the <0>LND Connect REST URL.</0>"
+          "title": "Connect to <0>StartOS</0>",
+          "instructions": "On your StartOS dashboard click on the <0>Lightning Network Daemon</0> service.<1/>Select the <0>Properties</0> tab.<1/>Now copy the <0>LND Connect REST URL.</0>"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -285,6 +302,36 @@
         "errors": {
           "connection_failed": "Connection failed. Is your Core Lightning node online and using the commando plugin?"
         }
+      },
+      "voltage": {
+        "title": "Voltage",
+        "page": {
+          "title": "Connect to your Voltage node",
+          "description": "Enterprise-grade lightning node hosting. Get on Lightning Network faster than ever. Total control with zero management. <0>Learn more in our setup guide</0>"
+        },
+        "url": {
+          "label": "Node URL",
+          "placeholder": "https://your-node.m.voltageapp.io:8080"
+        },
+        "macaroon": {
+          "label": "Admin Macaroon (hex)"
+        },
+        "errors": {
+          "connection_failed": "Connection failed. Are your credentials correct?"
+        }
+      },
+      "nwc": {
+        "title": "Nostr Wallet Connect",
+        "page": {
+          "instructions": "Paste a NWC connection string from <0>Alby Nostr Wallet Connect</0>, <1>Umbrel Nostr Wallet Connect</1>, or <2>Mutiny Wallet</2>",
+          "url": {
+            "label": "Nostr Wallet Connect URL",
+            "placeholder": "nostr+walletconnect://69effe..."
+          },
+          "errors": {
+            "connection_failed": "Connection failed. Is your Core Lightning node online and using the commando plugin?"
+          }
+        }
       }
     },
     "distributions": {
@@ -305,8 +352,8 @@
       "mynode": {
         "name": "myNode"
       },
-      "start9": {
-        "name": "Start9"
+      "startos": {
+        "name": "StartOS"
       }
     },
     "home": {
@@ -724,36 +771,6 @@
     "scan_qrcode": {
       "title": "Waiting to scan"
     },
-    "discover": {
-      "title": "Explore the Lightning ⚡️ Ecosystem",
-      "description": "Websites and webapps where you can use Alby",
-      "list": {
-        "trading": "Trading",
-        "gaming": "Gaming",
-        "entertainment": "Entertainment",
-        "shopping": "Shopping",
-        "miscellaneous": "Miscellaneous",
-        "showcases": "Showcases",
-        "nostr": "Nostr",
-        "nodeManagement": "Node Management"
-      },
-      "tips": {
-        "title": "Your Alby wallet is ready",
-        "description": "A few tips to get you started buzzin'🐝",
-        "top_up_wallet": {
-          "title": "Buy Bitcoin",
-          "description": "Need a top up?\nWe got you!"
-        },
-        "demo": {
-          "title": "Alby Demo",
-          "description": "Discover Alby's features\non our demo website"
-        },
-        "mnemonic": {
-          "title": "Nostr",
-          "description": "Planning to use Nostr?\nGenerate your keys now."
-        }
-      }
-    },
     "publishers": {
       "title": "Your ⚡ Websites",
       "description": "Websites where you have used Alby before",
@@ -894,14 +911,13 @@
       "allow": "Allow this website to:",
       "content": "This website asks you to sign:",
       "allow_sign": "Allow {{host}} to sign:",
-      "allow_sign_event": "Allow {{host}} to sign a {{kind}} event",
+      "allow_sign_event": "Allow {{host}} to sign a <0>{{kind}}</0> event",
       "allow_encrypt": "Allow {{host}} to encrypt the message:",
-      "allow_decrypt": "Allow {{host}} to decrypt the message:",
       "view_details": "View details",
       "hide_details": "Hide details",
       "block_and_ignore": "Block and ignore {{host}}",
       "block_added": "Added {{host}} to the blocklist, please reload the website.",
-      "peer": "Peer",
+      "recipient": "Recipient",
       "kinds": {
         "unknown": "kind {{kind}}",
         "0": "metadata",
@@ -950,11 +966,12 @@
     "advanced": "Advanced",
     "success": "Success",
     "error": "Error",
-    "settings": "Settings",
+    "settings": "Extension Settings",
     "accounts": "Accounts",
-    "discover": "Discover",
+    "discover": "Discover Apps",
     "connected_sites": "Connected Sites",
     "wallet": "Wallet",
+    "full_screen": "Full Screen",
     "sats_one": "sat",
     "sats_other": "sats",
     "loading": "loading",
@@ -968,7 +985,7 @@
     "success_message": "{{amount}}{{fiatAmount}} are on their way to {{destination}}",
     "response": "Response",
     "message": "Message",
-    "help": "Help",
+    "help": "Alby Guides",
     "balance": "Balance",
     "or": "or",
     "website": "Website",
@@ -1152,7 +1169,6 @@
     "nostr": {
       "getpublickey": "Read your public key",
       "signmessage": "Sign message with your key",
-      "nip04encrypt": "Encrypt data",
       "nip04decrypt": "Decrypt data"
     },
     "bitcoin": {

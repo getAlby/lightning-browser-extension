@@ -3,19 +3,23 @@ type Props = {
   description: string;
   content: React.ReactNode;
   actions: React.ReactNode;
+  icon: React.ReactNode;
 };
 
-function ConnectorPath({ title, description, content, actions }: Props) {
+function ConnectorPath({ title, icon, description, content, actions }: Props) {
   return (
-    <div className="shadow-lg p-10 rounded-xl bg-white dark:bg-surface-02dp text-center">
-      <h1 className="text-2xl font-bold dark:text-white">{title}</h1>
-      <p className="text-gray-500 mt-4 dark:text-neutral-400 min-h-[48px]">
-        {description}
-      </p>
-      <div className="lg:h-56 py-4 flex flex-col justify-center items-center">
+    <div className="flex flex-col p-10 border border-neutral-200 dark:border-neutral-700 rounded-2xl bg-white dark:bg-surface-02dp">
+      <div className="flex flex-col sm:flex-row items-center mb-4 space-x-3">
+        {icon}
+        <h1 className="text-xl font-bold dark:text-white text-center">
+          {title}
+        </h1>
+      </div>
+      <p className="text-gray-800 dark:text-neutral-200 mb-6">{description}</p>
+      <div className="flex flex-col space-y-4 text-sm mb-8 dark:text-white">
         {content}
       </div>
-      <div className="flex gap-4 flex-col sm:flex-row">{actions}</div>
+      <div className="flex gap-4 flex-col sm:flex-row mt-auto">{actions}</div>
     </div>
   );
 }

@@ -16,5 +16,4 @@ export const DEFAULT_SETTINGS: SettingsStorage = {
   currency: CURRENCIES.USD,
   exchange: "alby",
   nostrEnabled: false,
-  closedTips: [],
 };
