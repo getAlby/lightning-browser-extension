@@ -113,12 +113,12 @@
           "instructions": "Das funktioniert aktuell nicht, wenn 2FA ausgewählt ist.",
           "title": "Verbinden mit <0>Citadel</0> Node"
         },
-        "title": "Zitadelle",
+        "title": "Citadel",
         "password": {
           "label": "Citadel Kennwort"
         },
         "url": {
-          "label": "Zitadelle URL",
+          "label": "Citadel URL",
           "placeholder": "http://citadel.local"
         }
       },
@@ -789,7 +789,6 @@
         "point4": "Eindeutige Lightning- und Nostr-Adresse",
         "point2": "Es gelten Grenzen für das Transaktionsvolumen"
       },
-
       "voltage": {
         "point2": "Keine Transaktions- oder Volumenbeschränkungen",
         "connect": "Verbinden",
@@ -813,7 +812,7 @@
         "name": "Umbrel"
       },
       "citadel": {
-        "name": "Zitadelle"
+        "name": "Citadel"
       },
       "btcpay": {
         "name": "BTCPay"
