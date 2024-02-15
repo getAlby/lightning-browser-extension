@@ -11,6 +11,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import toast from "~/app/components/Toast";
+import Checkbox from "~/app/components/form/Checkbox";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
@@ -30,6 +31,7 @@ function LNURLChannel() {
 
   const [loadingConfirm, setLoadingConfirm] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
+  const [isPrivateChannel, setIsPrivateChannel] = useState(false);
 
   async function confirm() {
     try {
@@ -54,6 +56,7 @@ function LNURLChannel() {
         params: {
           k1: details.k1,
           remoteid: nodeId,
+          private: isPrivateChannel ? 1 : 0,
         },
         adapter: fetchAdapter,
       });
@@ -73,8 +76,12 @@ function LNURLChannel() {
         msg.reply(callbackResponse?.data);
       }
     } catch (e) {
-      console.error(e);
-      if (e instanceof Error) toast.error(`Error: ${e.message}`);
+      if (axios.isAxiosError(e)) {
+        const error =
+          (e.response?.data as { reason?: string })?.reason || e.message;
+        console.error(e);
+        toast.error(`Error: ${error}`);
+      }
     } finally {
       setLoadingConfirm(false);
     }
@@ -115,6 +122,22 @@ function LNURLChannel() {
               heading={`${t("content_message.heading")}:`}
               content={uri}
             />
+            <div className="flex">
+              <Checkbox
+                id="is_private_channel"
+                name="private channel checkbox"
+                checked={isPrivateChannel}
+                onChange={(event) => {
+                  setIsPrivateChannel(event.target.checked);
+                }}
+              />
+              <label
+                htmlFor="is_private_channel"
+                className="cursor-pointer ml-2 block text-sm text-gray-900 font-medium dark:text-white"
+              >
+                Open a private channel?
+              </label>
+            </div>
           </div>
           <ConfirmOrCancel
             disabled={loadingConfirm || !uri}
