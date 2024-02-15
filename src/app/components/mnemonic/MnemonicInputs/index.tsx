@@ -27,6 +27,9 @@ export default function MnemonicInputs({
   while (words.length < 12) {
     words.push("");
   }
+  while (words.length > 12) {
+    words.pop();
+  }
 
   return (
     <div className="border border-gray-200 dark:border-neutral-700 rounded-lg p-6 flex flex-col gap-4 items-center justify-center">

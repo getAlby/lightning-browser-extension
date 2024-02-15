@@ -21,7 +21,7 @@ function MenuItemButton({
           className={classNames(
             active ? "bg-gray-50 dark:bg-surface-02dp" : "",
             disabled ? "cursor-not-allowed" : "cursor-pointer",
-            "flex items-center w-full p-4 text-sm text-gray-800 dark:text-neutral-200"
+            "flex items-center w-full p-4 text-sm text-gray-800 dark:text-neutral-200 whitespace-nowrap"
           )}
           disabled={disabled}
           onClick={onClick}
