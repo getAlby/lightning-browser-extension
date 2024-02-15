@@ -113,12 +113,12 @@
           "instructions": "Das funktioniert aktuell nicht, wenn 2FA ausgewählt ist.",
           "title": "Verbinden mit <0>Citadel</0> Node"
         },
-        "title": "Citadel",
+        "title": "Zitadelle",
         "password": {
           "label": "Citadel Kennwort"
         },
         "url": {
-          "label": "Citadel URL",
+          "label": "Zitadelle URL",
           "placeholder": "http://citadel.local"
         }
       },
@@ -800,6 +800,36 @@
       },
       "title": "Wallet mit Alby-Erweiterung verbinden"
     },
+    "discover": {
+      "description": "Webseiten und Webapplikationen, auf denen du Alby verwenden kannst",
+      "title": "Erkunde das Ökosystem von Lightning ⚡️",
+      "list": {
+        "gaming": "Spiele",
+        "trading": "Handel",
+        "entertainment": "Unterhaltung",
+        "shopping": "Einkaufen",
+        "miscellaneous": "Sonstiges",
+        "showcases": "Schaukästen",
+        "nostr": "Nostr",
+        "nodeManagement": "Node-Verwaltung"
+      },
+      "tips": {
+        "title": "Deine Alby Wallet ist bereit",
+        "top_up_wallet": {
+          "description": "Du möchtest deine Wallet aufladen?\nWir haben es für dich!",
+          "title": "Bitcoin kaufen"
+        },
+        "demo": {
+          "description": "Entdecke die Funktionen von Alby\nauf unserer Demo Webseite",
+          "title": "Alby Demo"
+        },
+        "description": "Hier ein paar Tipps für den Anfang 🐝",
+        "mnemonic": {
+          "title": "Nostr",
+          "description": "Generiere jetzt \n deinen Schlüssel."
+        }
+      }
+    },
     "transactions": {
       "title": "Transaktionen",
       "list_empty": "Noch keine Transaktionen verfügbar.",
@@ -812,7 +842,7 @@
         "name": "Umbrel"
       },
       "citadel": {
-        "name": "Citadel"
+        "name": "Zitadelle"
       },
       "btcpay": {
         "name": "BTCPay"
