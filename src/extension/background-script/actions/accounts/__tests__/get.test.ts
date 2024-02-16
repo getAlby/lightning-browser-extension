@@ -66,7 +66,7 @@ describe("account info", () => {
       hasImportedNostrKey: true,
       bitcoinNetwork: "bitcoin",
       useMnemonicForLnurlAuth: false,
-      isMnemonicBackupDone: false,
+      isMnemonicBackupDone: true,
     };
 
     expect(await getAccount(message)).toStrictEqual({
