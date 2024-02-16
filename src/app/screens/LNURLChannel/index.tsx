@@ -74,6 +74,7 @@ function LNURLChannel() {
       }
     } catch (e) {
       console.error(e);
+      if (e instanceof Error) toast.error(`Error: ${e.message}`);
     } finally {
       setLoadingConfirm(false);
     }
