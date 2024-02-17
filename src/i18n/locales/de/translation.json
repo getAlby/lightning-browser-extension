@@ -1079,10 +1079,10 @@
     "amount": "Betrag",
     "copied": "Kopiert!",
     "description": "Beschreibung",
-    "settings": "Einstellung",
+    "settings": "Einstellungen der Erweiterung",
     "sats_other": "sats",
     "confirm_password": "Kennwort bestätigen",
-    "help": "Hilfe",
+    "help": "Alby Hilfe",
     "actions": {
       "back": "Zurück",
       "open": "Öffnen",
@@ -1118,7 +1118,7 @@
       "copied_to_clipboard": "In die Zwischenablage kopiert",
       "hide": "Ausblenden"
     },
-    "discover": "Entdecken",
+    "discover": "Apps entdecken",
     "errors": {
       "connection_failed": "Verbindung fehlgeschlagen",
       "payment_failed": "Zahlung fehlgeschlagen"
@@ -1157,7 +1157,8 @@
       "insecure_domain_warn": "⚠️ Du stellst eine Verbindung zu einer unsicheren Domäne her."
     },
     "website": "Website",
-    "apps": "Apps"
+    "apps": "Apps",
+    "full_screen": "Vollbild"
   },
   "permissions": {
     "commando": {
