@@ -917,7 +917,7 @@
     "password": "Senha",
     "success": "Sucesso",
     "error": "Erro",
-    "settings": "Configurações",
+    "settings": "Configurações da extensão",
     "connected_sites": "Sites conectados",
     "sats_one": "sat",
     "sats_other": "sats",
@@ -968,11 +968,11 @@
     "description": "Descrição",
     "description_full": "Descrição completa",
     "message": "Mensagem",
-    "help": "Ajuda",
+    "help": "Guias Alby",
     "response": "Resposta",
     "success_message": "{{amount}}{{fiatAmount}} enviados para {{destination}}",
     "advanced": "Avançado",
-    "discover": "Explorar",
+    "discover": "Explorar apps",
     "confirm_password": "Confirmar senha",
     "accounts": "Minhas contas",
     "range": {
@@ -1005,7 +1005,8 @@
       "insecure_domain_warn": "⚠️ Você está se conectando a um domínio inseguro."
     },
     "website": "Site",
-    "apps": "Apps"
+    "apps": "Apps",
+    "full_screen": "Tela cheia"
   },
   "components": {
     "allowance_menu": {
