@@ -31,7 +31,7 @@ function LNURLChannel() {
 
   const [loadingConfirm, setLoadingConfirm] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
-  const [isPrivateChannel, setIsPrivateChannel] = useState(false);
+  const [privateChannel, setPrivateChannel] = useState(false);
 
   async function confirm() {
     try {
@@ -56,7 +56,7 @@ function LNURLChannel() {
         params: {
           k1: details.k1,
           remoteid: nodeId,
-          private: isPrivateChannel ? 1 : 0,
+          private: privateChannel ? 1 : 0,
         },
         adapter: fetchAdapter,
       });
@@ -128,16 +128,16 @@ function LNURLChannel() {
               <Checkbox
                 id="open_private_channel"
                 name="open_private_channel"
-                checked={isPrivateChannel}
+                checked={privateChannel}
                 onChange={(event) => {
-                  setIsPrivateChannel(event.target.checked);
+                  setPrivateChannel(event.target.checked);
                 }}
               />
               <label
-                htmlFor="is_private_channel"
+                htmlFor="open_private_channel"
                 className="cursor-pointer ml-2 block text-sm text-gray-900 font-medium dark:text-white"
               >
-                {t("is_private_channel.label")}
+                {t("private_channel.label")}
               </label>
             </div>
           </div>
