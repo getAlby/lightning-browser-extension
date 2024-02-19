@@ -705,6 +705,9 @@
       "content_message": {
         "heading": "Request a channel from the node"
       },
+      "is_private_channel": {
+        "label": "Open a private channel?"
+      },
       "success": "Channel request sent successfully to {{name}}"
     },
     "lnurlwithdraw": {
