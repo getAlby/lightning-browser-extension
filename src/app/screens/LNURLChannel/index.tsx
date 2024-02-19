@@ -76,11 +76,13 @@ function LNURLChannel() {
         msg.reply(callbackResponse?.data);
       }
     } catch (e) {
+      console.error(e);
       if (axios.isAxiosError(e)) {
         const error =
           (e.response?.data as { reason?: string })?.reason || e.message;
-        console.error(e);
         toast.error(`Error: ${error}`);
+      } else if (e instanceof Error) {
+        toast.error(`Error: ${e.message}`);
       }
     } finally {
       setLoadingConfirm(false);
@@ -124,8 +126,8 @@ function LNURLChannel() {
             />
             <div className="flex">
               <Checkbox
-                id="is_private_channel"
-                name="private channel checkbox"
+                id="open_private_channel"
+                name="open_private_channel"
                 checked={isPrivateChannel}
                 onChange={(event) => {
                   setIsPrivateChannel(event.target.checked);
@@ -135,7 +137,7 @@ function LNURLChannel() {
                 htmlFor="is_private_channel"
                 className="cursor-pointer ml-2 block text-sm text-gray-900 font-medium dark:text-white"
               >
-                Open a private channel?
+                {t("is_private_channel.label")}
               </label>
             </div>
           </div>
