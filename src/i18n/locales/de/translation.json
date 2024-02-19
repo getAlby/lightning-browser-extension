@@ -2,7 +2,6 @@
   "translation": {
     "welcome": {
       "set_password": {
-        "title": "Einen Passcode zum Entsperren festlegen",
         "description": "Mit diesem Passcode kannst du Alby auf diesem Gerät entsperren. Er kann nicht wiederhergestellt werden, kann aber später geändert werden.",
         "choose_password": {
           "label": "Wähle einen Passcode zum Entsperren:"
@@ -181,13 +180,9 @@
       },
       "btcpay": {
         "title": "BTCPay Server",
-        "page": {
-          "title": "Verbinden mit deiner BTCPay LND Node",
-          "instructions": "Navigiere zu deinem BTCPayServer und melde dich als Administrator an. Gehe zu Servereinstellungen > Dienste > LND-Rest – Siehe Informationen. Klicke dann auf „QR-Code-Informationen anzeigen“ und kopiere die QR-Code-Daten. Füge es unten ein:"
-        },
+        "page": {},
         "config": {
-          "label": "Konfigurationsdaten",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
+          "label": "Konfigurationsdaten"
         },
         "errors": {
           "connection_failed": "Verbindung fehlgeschlagen. Ist die BTCPay Verbindungs URL korrekt und zugänglich?"
@@ -228,10 +223,7 @@
       "title": "Verbinde Lightning Wallet",
       "lnc": {
         "title": "Lightning Terminal (LNC)",
-        "page": {
-          "title": "Verbinden mit deiner LND Node",
-          "description": "1. Öffne Lightning Terminal und wähle <0>Lightning Node Connect</0> in der Seitenleiste.<1/> 2. Klicke auf <0>Erstelle eine neue Sitzung</0><1/>3. Beschrifte die Sitzung, wähle dann die gewünschte Berechtigung und sende sie ab<1/>4. <0>Kopiere die Pairing-Phrase</0> und füge sie hier unten ein."
-        },
+        "page": {},
         "pairing_phrase": {
           "label": "Deine pairing phrase ",
           "placeholder": "geheimer stack sats phrase"
@@ -1074,7 +1066,6 @@
     "sats_one": "sat",
     "success": "Erfolgreich",
     "password": "Kennwort",
-    "advanced": "Fortgeschrittene",
     "description_full": "Vollständige Beschreibung",
     "amount": "Betrag",
     "copied": "Kopiert!",
