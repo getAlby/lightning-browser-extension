@@ -258,10 +258,25 @@
         }
       },
       "btcpay": {
-        "title": "BTCPay Server",
+        "title": "BTCPay Server"
+      },
+      "btcpay_lnd": {
         "page": {
-          "title": "Connect to your BTCPay LND node",
-          "instructions": "Navigate to your BTCPayServer and log in as an admin. Go to Server Settings > Services > LND Rest - See information. Then Click \"See QR Code information\" and copy the QR Code data. Paste it below:"
+          "title": "Connect to BTCPay LND",
+          "instructions": "Navigate to your BTCPayServer and log in as an admin. Go to Server Settings > Services > LND REST - See information. Then Click \"See QR Code information\" and copy the QR Code data. Paste it below:"
+        },
+        "config": {
+          "label": "Config data",
+          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.co"
+        },
+        "errors": {
+          "connection_failed": "Connection failed. Is the BTCPay connection URL correct and accessible?"
+        }
+      },
+      "btcpay_commando": {
+        "page": {
+          "title": "Connect to BTCPay CLN",
+          "instructions": "Navigate to your BTCPayServer and log in as an admin. Go to Server Settings > Services > C- Lightning REST - See information. Then Click \"See QR Code information\" and copy the QR Code data. Paste it below:"
         },
         "config": {
           "label": "Config data",
