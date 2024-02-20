@@ -46,6 +46,9 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
   const { t } = useTranslation("components", { keyPrefix: "allowance_menu" });
   const { t: tCommon } = useTranslation("common");
   const { t: tPermissions } = useTranslation("permissions");
+  const { t: tNostr } = useTranslation("translation", {
+    keyPrefix: "nostr",
+  });
 
   const hasPermissions = !isLoadingPermissions && !!permissions?.length;
 
@@ -221,12 +224,35 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
                 {permissions.map((permission) => (
                   <Fragment key={permission.id}>
                     <Setting
-                      title={permission.method}
+                      title={
+                        permission.method
+                          .toLowerCase()
+                          .split("/")
+                          .slice(0, 2)
+                          .join("/") == "nostr/signmessage"
+                          ? tNostr(
+                              `kinds.${permission.method
+                                .toLowerCase()
+                                .split("/")
+                                .slice(-1)
+                                .toString()}`,
+                              {
+                                defaultValue: tNostr("kinds.unknown", {
+                                  kind: permission.method
+                                    .toLowerCase()
+                                    .split("/")
+                                    .slice(-1)
+                                    .toString(),
+                                }),
+                              }
+                            )
+                          : permission.method.split("/").slice(0, 2).join("/")
+                      }
                       subtitle={tPermissions(
                         permission.method
                           .toLowerCase()
                           .split("/")
-                          .slice(-2)
+                          .slice(0, 2)
                           .join(".") as unknown as TemplateStringsArray
                       )}
                       /* split the method at "/", take the last two items in
