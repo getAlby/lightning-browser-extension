@@ -1,4 +1,5 @@
 import { USER_REJECTED_ERROR } from "~/common/constants";
+import nostr from "~/common/lib/nostr";
 import utils from "~/common/lib/utils";
 import { getHostFromSender } from "~/common/utils/helpers";
 import {
@@ -23,7 +24,8 @@ const nip44EncryptOrPrompt = async (
 
     if (hasPermission) {
       const response = (await state.getState().getNostr()).nip44Encrypt(
-        message.args.pairs
+        message.args.peer,
+        message.args.plaintext
       );
       return { data: response };
     } else {
@@ -32,10 +34,11 @@ const nip44EncryptOrPrompt = async (
         rememberPermission: boolean;
       }>({
         ...message,
-        action: "public/nostr/confirmNip44Encrypt",
+        action: "public/nostr/confirmEncrypt",
         args: {
           nip44Encrypt: {
-            pairs: message.args.pairs,
+            recipientNpub: nostr.hexToNip19(message.args.peer, "npub"),
+            message: message.args.plaintext,
           },
         },
       });
@@ -49,7 +52,8 @@ const nip44EncryptOrPrompt = async (
       }
       if (promptResponse.data.confirm) {
         const response = (await state.getState().getNostr()).nip44Encrypt(
-          message.args.pairs
+          message.args.peer,
+          message.args.plaintext
         );
 
         return { data: response };

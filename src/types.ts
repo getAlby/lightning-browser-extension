@@ -177,7 +177,8 @@ export type NavigationState = {
     };
 
     nip44Encrypt: {
-      pairs: [string, string][];
+      recipientNpub: string;
+      message: string;
     };
 
     psbt?: string;
@@ -568,14 +569,16 @@ export interface MessageDecryptGet extends MessageDefault {
 
 export interface MessageNip44EncryptGet extends MessageDefault {
   args: {
-    pairs: [string, string][];
+    peer: string;
+    plaintext: string;
   };
   action: "encrypt";
 }
 
 export interface MessageNip44DecryptGet extends MessageDefault {
   args: {
-    pairs: [string, string][];
+    peer: string;
+    ciphertext: string;
   };
   action: "decrypt";
 }

@@ -23,7 +23,10 @@ const nip44DecryptOrPrompt = async (
 
     if (hasPermission) {
       const nostr = await state.getState().getNostr();
-      const response = await nostr.nip44Decrypt(message.args.pairs);
+      const response = await nostr.nip44Decrypt(
+        message.args.peer,
+        message.args.ciphertext
+      );
 
       return { data: response };
     } else {
@@ -32,7 +35,7 @@ const nip44DecryptOrPrompt = async (
         rememberPermission: boolean;
       }>({
         ...message,
-        action: "public/nostr/confirmNip44Decrypt",
+        action: "public/nostr/confirmDecrypt",
       });
 
       // add permission to db only if user decided to always allow this request
@@ -44,7 +47,10 @@ const nip44DecryptOrPrompt = async (
       }
       if (promptResponse.data.confirm) {
         const nostr = await state.getState().getNostr();
-        const response = await nostr.nip44Decrypt(message.args.pairs);
+        const response = await nostr.nip44Decrypt(
+          message.args.peer,
+          message.args.ciphertext
+        );
 
         return { data: response };
       } else {
