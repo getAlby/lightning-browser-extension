@@ -40,14 +40,12 @@ function BackupMnemonic() {
   }, [fetchData]);
 
   async function completeBackupProcess() {
-    try {
-      if (!hasConfirmedBackup) {
-        throw new Error(t("error_confirm"));
-      }
-      navigate(-1);
-    } catch (e) {
-      if (e instanceof Error) toast.error(e.message);
+    if (!hasConfirmedBackup) {
+      toast.error(t("error_confirm"));
+      return false;
     }
+
+    navigate(-1);
   }
 
   return loading ? (
