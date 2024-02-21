@@ -36,7 +36,7 @@ const nip44EncryptOrPrompt = async (
         ...message,
         action: "public/nostr/confirmEncrypt",
         args: {
-          nip44Encrypt: {
+          encrypt: {
             recipientNpub: nostr.hexToNip19(message.args.peer, "npub"),
             message: message.args.plaintext,
           },
