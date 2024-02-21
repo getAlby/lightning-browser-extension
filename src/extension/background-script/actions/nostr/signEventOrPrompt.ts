@@ -25,23 +25,35 @@ const signEventOrPrompt = async (message: MessageSignEvent, sender: Sender) => {
       };
     }
 
-    const hasPermission = await hasPermissionFor(
-      PermissionMethodNostr["NOSTR_SIGNMESSAGE"] + "/" + event.kind,
-      host
-    );
+    const hasPermission =
+      (await hasPermissionFor(
+        PermissionMethodNostr["NOSTR_SIGNMESSAGE"],
+        host
+      )) ||
+      (await hasPermissionFor(
+        PermissionMethodNostr["NOSTR_SIGNMESSAGE"] + "/" + event.kind,
+        host
+      ));
     if (!hasPermission) {
       const promptResponse = await utils.openPrompt<{
-        enabled: boolean;
         blocked: boolean;
+        permissionOption: string;
       }>({
         ...message,
         action: "public/nostr/confirmSignMessage",
       });
 
       // add permission to db only if user decided to always allow this request
-      if (promptResponse.data.enabled) {
+      if (promptResponse.data.permissionOption == "dont_ask_again_current") {
         await addPermissionFor(
           PermissionMethodNostr["NOSTR_SIGNMESSAGE"] + "/" + event.kind,
+          host
+        );
+      }
+
+      if (promptResponse.data.permissionOption == "dont_ask_again_all") {
+        await addPermissionFor(
+          PermissionMethodNostr["NOSTR_SIGNMESSAGE"],
           host
         );
       }

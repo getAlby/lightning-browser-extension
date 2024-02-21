@@ -237,13 +237,10 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
                                 .slice(-1)
                                 .toString()}`,
                               {
-                                defaultValue: tNostr("kinds.unknown", {
-                                  kind: permission.method
-                                    .toLowerCase()
-                                    .split("/")
-                                    .slice(-1)
-                                    .toString(),
-                                }),
+                                defaultValue: permission.method
+                                  .split("/")
+                                  .slice(-1)
+                                  .toString(),
                               }
                             )
                           : permission.method.split("/").slice(0, 2).join("/")

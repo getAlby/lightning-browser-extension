@@ -3,7 +3,6 @@ import Container from "@components/Container";
 import ContentMessage from "@components/ContentMessage";
 import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
-import Checkbox from "@components/form/Checkbox";
 import { useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -28,7 +27,7 @@ function ConfirmSignMessage() {
   const origin = navState.origin as OriginData;
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
-  const [rememberPermission, setRememberPermission] = useState(false);
+  const [permissionOption, setPermissionOption] = useState("ask_every_time");
   const [showJSON, setShowJSON] = useState(false);
 
   // TODO: refactor: the success message and loading will not be displayed because after the reply the prompt is closed.
@@ -37,7 +36,7 @@ function ConfirmSignMessage() {
       setLoading(true);
       msg.reply({
         blocked: false,
-        enabled: rememberPermission,
+        permissionOption: permissionOption,
       });
       setSuccessMessage(tCommon("success"));
     } catch (e) {
@@ -115,20 +114,19 @@ function ConfirmSignMessage() {
             </div>
             <div>
               <div className="flex items-center mb-4">
-                <Checkbox
-                  id="remember_permission"
-                  name="remember_permission"
-                  checked={rememberPermission}
-                  onChange={(event) => {
-                    setRememberPermission(event.target.checked);
-                  }}
-                />
-                <label
-                  htmlFor="remember_permission"
-                  className="cursor-pointer ml-2 block text-sm text-gray-900 font-medium dark:text-white"
+                <select
+                  value={permissionOption}
+                  onChange={(event) => setPermissionOption(event.target.value)}
+                  className="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 >
-                  {tCommon("actions.remember")}
-                </label>
+                  <option value="ask_every_time">actions.ask_every_time</option>
+                  <option value="dont_ask_again_current">
+                    actions.dont_ask_again_current
+                  </option>
+                  <option value="dont_ask_again_all">
+                    actions.dont_ask_again_all
+                  </option>
+                </select>
               </div>
               <ConfirmOrCancel
                 disabled={loading}
