@@ -87,7 +87,7 @@ class Nostr {
   }
 
   nip44Decrypt(peer: string, ciphertext: string) {
-    return nip44.v2.decrypt(ciphertext, this.getNip44SharedSecret(peer))
+    return nip44.v2.decrypt(ciphertext, this.getNip44SharedSecret(peer));
   }
 
   getEventHash(event: Event) {
