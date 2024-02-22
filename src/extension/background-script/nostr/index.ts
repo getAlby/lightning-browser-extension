@@ -18,13 +18,13 @@ class Nostr {
   constructor(readonly privateKey: string) {}
 
   // Deriving shared secret is an expensive computation
-  getNip44SharedSecret(pk: string) {
-    let key = this.nip44SharedSecretCache.get(pk);
+  getNip44SharedSecret(peerPubkey: string) {
+    let key = this.nip44SharedSecretCache.get(peerPubkey);
 
     if (!key) {
-      key = nip44.v2.utils.getConversationKey(this.privateKey, pk);
+      key = nip44.v2.utils.getConversationKey(this.privateKey, peerPubkey);
 
-      this.nip44SharedSecretCache.set(pk, key);
+      this.nip44SharedSecretCache.set(peerPubkey, key);
     }
 
     return key;
