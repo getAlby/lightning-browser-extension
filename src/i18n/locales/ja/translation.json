@@ -13,7 +13,6 @@
           "enter_password": "パスコードを入力してください。",
           "confirm_password": "確認用パスコードを入力してください。"
         },
-        "title": "ロック解除パスコードの設定",
         "description": "このパスコードを使用すると、このデバイスでAlbyのロックを解除できます。パスコードは復元できませんが、後で変更することは可能です。"
       },
       "test_connection": {
@@ -86,10 +85,7 @@
       },
       "lnc": {
         "title": "Lightning Terminal (LNC)",
-        "page": {
-          "title": "LNDノードに接続",
-          "description": "1. Lightning Terminalを開き、サイドバーから<0>Lightning Node Connect</0>を選択します。 <0>Create a new session</0>を選択します。<1/>3.セッションにラベルを付け、必要なパーミッションを選択し、送信します。<1/>4.<0>ペアリング・フレーズをコピーし、以下に貼り付けます。"
-        },
+        "page": {},
         "pairing_phrase": {
           "label": "あなたのペアリング・フレーズ ",
           "placeholder": "シークレット・stack sats・フレーズ"
@@ -214,13 +210,9 @@
         }
       },
       "btcpay": {
-        "page": {
-          "title": "BTCPay LNDノードに接続",
-          "instructions": "BTCPay Serverに移動し、管理者としてログインします。Server Settings > Services > LND Rest - See informationに進みます。次に\"See QR Code information\"をクリックし、QRコードデータをコピーします。下に貼り付けてください："
-        },
+        "page": {},
         "config": {
-          "label": "コンフィグデータ",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
+          "label": "コンフィグデータ"
         },
         "errors": {
           "connection_failed": "接続に失敗しました。BTCPayの接続URLは正しく、アクセス可能ですか？"

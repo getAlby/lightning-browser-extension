@@ -3,7 +3,6 @@
     "welcome": {
       "title": "به Alby خوش آمدید",
       "set_password": {
-        "title": "یک گذرواژه برای بازکردن تنظیم کنید",
         "description": "این گذرواژه به شما اجازه می دهد البی را در این دستگاه باز کنید. این گذرواژه قابل بازیابی نیست، ولی می تواند بعدا تغییر کند.",
         "choose_password": {
           "label": "یک گذرواژه برای باز کردن انتخاب کنید:"
@@ -88,10 +87,7 @@
       },
       "lnc": {
         "title": "ترمینال لایتنینگ (LNC)",
-        "page": {
-          "title": "به گره لایتنینگ LND خود وصل شوید",
-          "description": "۱. ترمینال لایتنینگ را باز کرده و <0>Lightning Node Connect</0> را از منوی کناری انتخاب کنید. <1/>۲. روی <0>Create a new session</0> کلیک کنید<1/>۳. عنوانی رو جلسه بگذارید، مجوزهای مطلوب را انتخاب کرده و ثبت کنید<1/> ۴. <0>عبارت جفت را کپی کرده</0> و در پایین بچسبانید."
-        },
+        "page": {},
         "pairing_phrase": {
           "label": "عبارت جفت شما ",
           "placeholder": "عبارت مخفی انباشتن ساتوشی"
@@ -215,13 +211,9 @@
       },
       "btcpay": {
         "title": "سرور BTCPay",
-        "page": {
-          "title": "به گره LND در BTCPay خود متصل شوید",
-          "instructions": "به BTCPayServer بروید و به عنوان ادمین در وارد شوید. به مسیر Server Settings > Services > LND Rest - See information بروید. سپس روی \"See QR Code information\" کلیک کرده و کدQR را کپی کنید. در زیر بچسبانید:"
-        },
+        "page": {},
         "config": {
-          "label": "داده پیکربندی",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
+          "label": "داده پیکربندی"
         },
         "errors": {
           "connection_failed": "اتصال انجام نشد. آیا آدرس اینترنتی اتصال BTCPay صحیح و قابل دسترسی است؟"
@@ -813,7 +805,6 @@
   "common": {
     "password": "گذرواژه",
     "confirm_password": "‬تایید گذرواژه",
-    "advanced": "پیشرفته",
     "success": "موفقیت",
     "error": "خطا",
     "settings": "تنظیمات",

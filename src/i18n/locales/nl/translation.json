@@ -2,7 +2,6 @@
   "translation": {
     "welcome": {
       "set_password": {
-        "title": "Stel een ontgrendelingswachtwoord in",
         "description": "Lightning-accountgegevens zijn veilig versleuteld met een ontgrendelingswachtwoord. Vergeet dit wachtwoord niet! Je hebt het nodig om de Alby-extensie te ontgrendelen (in deze browser)",
         "choose_password": {
           "label": "Kies een ontgrendelingswachtwoord:"
@@ -181,13 +180,9 @@
       },
       "btcpay": {
         "title": "",
-        "page": {
-          "title": "",
-          "instructions": ""
-        },
+        "page": {},
         "config": {
-          "label": "",
-          "placeholder": ""
+          "label": ""
         },
         "errors": {
           "connection_failed": ""
@@ -494,7 +489,6 @@
   },
   "common": {
     "password": "",
-    "advanced": "",
     "success": "",
     "error": "",
     "settings": "",

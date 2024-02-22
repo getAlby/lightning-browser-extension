@@ -1,10 +1,10 @@
 {
   "translation": {
     "welcome": {
-      "title": "Welcome to Alby",
       "set_password": {
-        "title": "Set an unlock passcode",
-        "description": "This passcode will allow you to unlock Alby on this device. It cannot be recovered, but may be changed later.",
+        "title": "Set extension unlock passcode",
+        "description1": "Set a passcode to unlock Alby Extension in this browser",
+        "description2": "Unlock passcode cannot be recovered, but may be changed ",
         "choose_password": {
           "label": "Choose an unlock passcode:"
         },
@@ -109,8 +109,8 @@
       "lnc": {
         "title": "Lightning Terminal (LNC)",
         "page": {
-          "title": "Connect to your LND node",
-          "description": "1. Open Lightning Terminal and choose <0>Lightning Node Connect</0> from the sidebar.<1/> 2. Click <0>Create a new session</0><1/>3. Label the session, choose desired permissions and submit<1/>4. <0>Copy pairing phrase</0> and paste it below."
+          "title": "Connect to Lightning Terminal (LNC)",
+          "description": "1. On Lightning Terminal sidebar choose <0>Lightning Node Connect</0>.<1/> 2. Click <0>Create a new session</0><1/>3. Label the session, choose desired permissions and submit<1/>4. <0>Copy pairing phrase</0> and paste it below."
         },
         "pairing_phrase": {
           "label": "Your pairing phrase ",
@@ -260,12 +260,12 @@
       "btcpay": {
         "title": "BTCPay Server",
         "page": {
-          "title": "Connect to your BTCPay LND node",
-          "instructions": "Navigate to your BTCPayServer and log in as an admin. Go to Server Settings > Services > LND Rest - See information. Then Click \"See QR Code information\" and copy the QR Code data. Paste it below:"
+          "title": "Connect to BTCPay LND",
+          "instructions": "Navigate to your BTCPayServer and log in as an admin. Go to Server Settings > Services > LND REST - See information. Then Click \"See QR Code information\" and copy the QR Code data. Paste it below:"
         },
         "config": {
           "label": "Config data",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
+          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.co"
         },
         "errors": {
           "connection_failed": "Connection failed. Is the BTCPay connection URL correct and accessible?"
@@ -982,7 +982,8 @@
   "common": {
     "password": "Password",
     "confirm_password": "Confirm Password",
-    "advanced": "Advanced",
+    "advanced": "Show advanced settings",
+    "hide_advanced": "Hide advanced settings",
     "success": "Success",
     "error": "Error",
     "settings": "Extension Settings",

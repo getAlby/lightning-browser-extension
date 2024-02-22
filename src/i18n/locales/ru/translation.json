@@ -3,7 +3,6 @@
     "welcome": {
       "title": "Добро пожаловать в Alby",
       "set_password": {
-        "title": "Установите пароль разблокировки",
         "description": "Этот пароль нужен для защиты вашего кошелька, он предоставляет доступ к расширению браузера. Он не может быть восстановлен и не является паролем аккаунта Alby.",
         "choose_password": {
           "label": ""
@@ -78,10 +77,7 @@
       },
       "lnc": {
         "title": "",
-        "page": {
-          "title": "",
-          "description": ""
-        },
+        "page": {},
         "pairing_phrase": {
           "label": "",
           "placeholder": ""
@@ -215,13 +211,9 @@
       },
       "btcpay": {
         "title": "",
-        "page": {
-          "title": "",
-          "instructions": ""
-        },
+        "page": {},
         "config": {
-          "label": "",
-          "placeholder": ""
+          "label": ""
         },
         "errors": {
           "connection_failed": ""
@@ -583,7 +575,6 @@
   "common": {
     "password": "",
     "confirm_password": "",
-    "advanced": "",
     "success": "",
     "error": "",
     "settings": "",
