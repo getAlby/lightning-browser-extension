@@ -53,7 +53,10 @@ function GenerateMnemonic() {
       }
 
       await api.setMnemonic(id, mnemonic);
-      await api.editAccount(id, { useMnemonicForLnurlAuth: true });
+      await api.editAccount(id, {
+        useMnemonicForLnurlAuth: true,
+        isMnemonicBackupDone: true,
+      });
 
       toast.success(t("saved"));
       // go to account settings
