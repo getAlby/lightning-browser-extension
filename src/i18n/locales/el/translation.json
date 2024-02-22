@@ -2,7 +2,6 @@
   "translation": {
     "welcome": {
       "set_password": {
-        "title": "Ορίστε ένα κωδικό ξεκλειδώματος",
         "errors": {
           "confirm_password": "Παρακαλώ επιβεβαιώστε τον κωδικό σας.",
           "enter_password": "Παρακαλώ εισάγετε ένα κωδικό.",
@@ -91,9 +90,7 @@
       },
       "btcpay": {
         "title": "BTCPay Server",
-        "page": {
-          "title": "Σύνδεση στο BTCPay LND κόμβο σας"
-        }
+        "page": {}
       },
       "lnd": {
         "title": "LND",

@@ -3,7 +3,6 @@
     "welcome": {
       "title": "Witaj w Alby",
       "set_password": {
-        "title": "Ustaw hasło blokady",
         "description": "To hasło pozwoli odblokować rozszerzenie Alby na tym urządzeniu. Nie można go odzyskać ale może być zmienione później.",
         "choose_password": {
           "label": "Wybierz hasło blokady:"
@@ -87,10 +86,7 @@
       },
       "lnc": {
         "title": "Lightning Terminal (LNC)",
-        "page": {
-          "title": "Podłącz się do swojego węzła LND",
-          "description": "1. Otwórz Lightning Terminal i wybierz <0>Lightning Node Connect</0> z paska bocznego.<1/> 2. Kliknij <0>Create a new session</0><1/>3. Nadaj etykietę sesji, wybierz żądane uprawnienia i zatwierdź<1/>4. <0>Skopiuj frazę parującą</0> i wklej ją poniżej."
-        },
+        "page": {},
         "pairing_phrase": {
           "label": "Twoja fraza parująca ",
           "placeholder": "tajna fraza stosu satsów"
@@ -220,13 +216,9 @@
       },
       "btcpay": {
         "title": "BTCPay Server",
-        "page": {
-          "title": "Podłącz do węzła LND na BTCPayServer",
-          "instructions": "Przejdź do BTCPayServer i zaloguj się jako administrator. Idź do Server Settings > Services > NDS Rest - See information. Następni kliknij \"See QR Code information\" i skopiuj dane kodu QR. Wklej poniżej:"
-        },
+        "page": {},
         "config": {
-          "label": "Date konfiguracyjne",
-          "placeholder": "config=https://twoj-btc-pay.org/lnd-config/212121/lnd.config"
+          "label": "Date konfiguracyjne"
         },
         "errors": {
           "connection_failed": "Połączenie nieudane. Czy adres BTCPay jest poprawny i osiągalny?"
@@ -705,7 +697,6 @@
   "common": {
     "password": "Hasło",
     "confirm_password": "Potwierdź hasło",
-    "advanced": "Zaawansowane",
     "success": "Sukces",
     "error": "Błąd",
     "settings": "Ustawienia",

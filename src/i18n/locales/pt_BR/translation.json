@@ -2,7 +2,6 @@
   "translation": {
     "welcome": {
       "set_password": {
-        "title": "Definir uma senha de desbloqueio",
         "description": "Esta senha é usada para proteger sua carteira e fornecer acesso à extensão do navegador neste dispositivo. Não esqueça esta senha pois não é possível recuperá-la. Obs. Esta senha é diferente da senha da conta da Alby.",
         "choose_password": {
           "label": "Escolha uma senha de desbloqueio:"
@@ -166,13 +165,9 @@
       },
       "btcpay": {
         "title": "Servidor BTCPay",
-        "page": {
-          "title": "Conecte-se no servidor LND BTCPay",
-          "instructions": "Navegue até a BTCPayServer e acesse como administrador. Vá até Configurações>Serviços>LND Rest - Ver informação. Depois Clique \"Ver Código QR\" e copie os dados do Código QR. Cole os dados abaixo:"
-        },
+        "page": {},
         "config": {
-          "label": "Dados config",
-          "placeholder": "config=https://seu-btc-pay.org/lnd-config/212121/lnd.config"
+          "label": "Dados config"
         },
         "errors": {
           "connection_failed": "Falha na conexão. A URL de conexão do servidor BTCPay está correta e acessível?"
@@ -226,10 +221,7 @@
       },
       "title": "Conectar Carteira Bitcoin",
       "lnc": {
-        "page": {
-          "title": "Conecte-se no servidor LND usando LNC",
-          "description": "1. Open Lightning Terminal and choose <0>Lightning Node Connect</0> from the sidebar.<1/> 2. Click <0>Create a new session</0><1/>3. Label the session, choose desired permissions and submit<1/>4. <0>Copy pairing phrase</0> and paste it below."
-        },
+        "page": {},
         "title": "Lightning Terminal (LNC)",
         "pairing_phrase": {
           "label": "Frase de pareamento "
@@ -915,7 +907,7 @@
     "password": "Senha",
     "success": "Sucesso",
     "error": "Erro",
-    "settings": "Configurações",
+    "settings": "Configurações da extensão",
     "connected_sites": "Sites conectados",
     "sats_one": "sat",
     "sats_other": "sats",
@@ -966,11 +958,11 @@
     "description": "Descrição",
     "description_full": "Descrição completa",
     "message": "Mensagem",
-    "help": "Ajuda",
+    "help": "Guias Alby",
     "response": "Resposta",
     "success_message": "{{amount}}{{fiatAmount}} enviados para {{destination}}",
     "advanced": "Avançado",
-    "discover": "Explorar",
+    "discover": "Explorar apps",
     "confirm_password": "Confirmar senha",
     "accounts": "Minhas contas",
     "range": {
@@ -1003,7 +995,8 @@
       "insecure_domain_warn": "⚠️ Você está se conectando a um domínio inseguro."
     },
     "website": "Site",
-    "apps": "Apps"
+    "apps": "Apps",
+    "full_screen": "Tela cheia"
   },
   "components": {
     "allowance_menu": {

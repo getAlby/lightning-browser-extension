@@ -2,7 +2,6 @@
   "translation": {
     "welcome": {
       "set_password": {
-        "title": "Nastavit pin pro odemčení účtu",
         "description": "Tento pin vám umožní odemykat doplněk Alby na tomto zařízení. Nelze ho resetovat, ale je možné ho později změnit.",
         "choose_password": {
           "label": "Zvolte pin pro odemykání:"
@@ -172,13 +171,9 @@
       },
       "btcpay": {
         "title": "BTCPay Server",
-        "page": {
-          "title": "Připojení k vašemu uzlu BTCPay LND",
-          "instructions": "Přesuňte se do svého BTCPayServer a přihlašte se jako administrátor. Běžte do Nastavení serveru > Služby > LND Rest - Více informací. Následně zvolte \"Zobrazit informace o QR kódu\" a zkopírujte zobrazená data. Vložte je níže:"
-        },
+        "page": {},
         "config": {
-          "label": "Konfigurační data",
-          "placeholder": "config=https://vas-btc-pay.org/lnd-config/212121/lnd.config"
+          "label": "Konfigurační data"
         },
         "errors": {
           "connection_failed": "Připojení se nezdařilo. Je BTCPay URL zadána správně a je přístupná?"
@@ -219,10 +214,7 @@
       "title": "Připojte Lightning peněženku",
       "lnc": {
         "title": "Lightning terminál (LNC)",
-        "page": {
-          "title": "Připojit k vašemu LND uzlu",
-          "description": "Vytvořte nové sezení v terminálu (litd) pro získání nové párovací fráze a vložte ji zde"
-        },
+        "page": {},
         "pairing_phrase": {
           "label": "Vaše párovací fráze ",
           "placeholder": "tajná fráze"
@@ -649,7 +641,6 @@
   },
   "common": {
     "password": "Heslo",
-    "advanced": "Pokročilé",
     "success": "Úspěch",
     "error": "Chyba",
     "settings": "Nastavení",

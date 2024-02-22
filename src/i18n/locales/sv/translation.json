@@ -2,7 +2,6 @@
   "translation": {
     "welcome": {
       "set_password": {
-        "title": "Ange ett lösenord för upplåsning",
         "description": "Detta lösenord låter dig låsa upp Alby på den här enheten. Det kan inte återställas, men kan ändras senare.",
         "choose_password": {
           "label": "Välj ett lösenord för upplåsning:"
@@ -176,13 +175,9 @@
       },
       "btcpay": {
         "title": "BTCPay Server",
-        "page": {
-          "title": "Anslut din BTCPay LND-nod",
-          "instructions": "Navigera till din BTCPayServer och logga in som administratör. Gå till Server Settings > Services > LND Rest - See information. Klicka på \"See QR Code information\" och kopiera QR-koddatan. Klistra in nedan:"
-        },
+        "page": {},
         "config": {
-          "label": "Konfigurationsdata",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
+          "label": "Konfigurationsdata"
         },
         "errors": {
           "connection_failed": "Anslutning misslyckades. Är URL till BTCPay-anslutningen korrekt och tillgänglig?"
@@ -227,10 +222,7 @@
           "label": "Din parningsfras "
         },
         "title": "Lightning Terminal (LNC)",
-        "page": {
-          "title": "Anslut till din LND node",
-          "description": "1. Öppna Lightning Terminal och välj <0>Lightning Node Connect</0> från sidofältet.<1/> 2. Klicka på <0>Skapa en ny session</0><1/>3. Märk sessionen, välj önskade behörigheter och skicka in<1/>4. <0>Kopiera parningsfras</0> och klistra in den nedan."
-        }
+        "page": {}
       },
       "umbrel_lightning_node": {
         "title": "Lightning Node"
@@ -946,7 +938,6 @@
     },
     "sats_other": "sats",
     "sats_one": "sat",
-    "advanced": "Avancerat",
     "accounts": "Konton",
     "discover": "Upptäcka",
     "success_message": "{{amount}}{{fiatAmount}} skickat till {{destination}}",

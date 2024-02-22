@@ -98,13 +98,10 @@
       },
       "btcpay": {
         "config": {
-          "label": "Podatki o konfiguraciji",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
+          "label": "Podatki o konfiguraciji"
         },
         "title": "BTCPay Server",
-        "page": {
-          "title": "Poveži z BTCPay LND node"
-        },
+        "page": {},
         "errors": {
           "connection_failed": "Neuspešna povezava. Je BTCPay URL povezava pravilna in dostopna?"
         }
@@ -142,10 +139,7 @@
       },
       "lnc": {
         "title": "Terminal Lightning (LNC)",
-        "page": {
-          "title": "Poveži s svojim LND vozliščem",
-          "description": "1. Odpri Lightning Terminal in izberi <0>Lightning Node Connect</0> iz stranske vrstice.<1/> 2. Klikni <0>Ustvari novo sejo</0><1/>3. Označi povezavo, izberi dovoljenje in potrdi<1/>4. <0>Kopiraj frazo za spajanje</0> in jo prilepi spodaj."
-        },
+        "page": {},
         "pairing_phrase": {
           "label": "Tvoja fraza za spajanje ",
           "placeholder": "skrivna fraza za stack sats"
@@ -231,7 +225,6 @@
     "welcome": {
       "title": "Dobrodošli v Alby",
       "set_password": {
-        "title": "Nastavi kodo za odklepanje",
         "errors": {
           "enter_password": "Prosim vpiši kodo.",
           "mismatched_password": "Gesli se ne ujemata.",
