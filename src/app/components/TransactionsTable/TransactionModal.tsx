@@ -31,7 +31,7 @@ export default function TransactionModal({
     keyPrefix: "transactions_table",
   });
   const [showMoreFields, setShowMoreFields] = useState(false);
-  const { getFormattedSats } = useSettings();
+  const { getFormattedSats, getFormattedInCurrency } = useSettings();
 
   function toggleShowMoreFields() {
     setShowMoreFields(!showMoreFields);
@@ -82,7 +82,12 @@ export default function TransactionModal({
               )}
             >
               {transaction.type == "sent" ? "-" : "+"}{" "}
-              {getFormattedSats(transaction.totalAmount)}
+              {!transaction.displayAmount
+                ? getFormattedSats(transaction.totalAmount)
+                : getFormattedInCurrency(
+                    transaction.displayAmount[0],
+                    transaction.displayAmount[1]
+                  )}
             </p>
 
             {!!transaction.totalAmountFiat && (

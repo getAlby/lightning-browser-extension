@@ -53,6 +53,11 @@ const AllowanceView: FC<Props> = (props) => {
       try {
         // attach fiatAmount if enabled
         for (const transaction of transactions) {
+          if (
+            transaction.displayAmount &&
+            transaction.displayAmount[1] === settings.currency
+          )
+            continue;
           transaction.totalAmountFiat = showFiat
             ? await getFormattedFiat(transaction.totalAmount)
             : "";
@@ -74,6 +79,7 @@ const AllowanceView: FC<Props> = (props) => {
     transactions,
     getFormattedFiat,
     showFiat,
+    settings.currency,
   ]);
 
   const hasBudget = +props.allowance.totalBudget > 0;

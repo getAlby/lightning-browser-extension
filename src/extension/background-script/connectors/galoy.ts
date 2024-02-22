@@ -1,16 +1,17 @@
 import fetchAdapter from "@vespaiach/axios-fetch-adapter";
 import axios, { AxiosRequestConfig } from "axios";
 import lightningPayReq from "bolt11";
+import { ACCOUNT_CURRENCIES, CURRENCIES } from "~/common/constants";
+import { getCurrencyRateWithCache } from "~/extension/background-script/actions/cache/getCurrencyRate";
 import { Account } from "~/types";
-
 import Connector, {
   CheckPaymentArgs,
   CheckPaymentResponse,
   ConnectPeerResponse,
+  ConnectorTransaction,
   GetBalanceResponse,
   GetInfoResponse,
   GetTransactionsResponse,
-  ConnectorTransaction,
   KeysendArgs,
   MakeInvoiceArgs,
   MakeInvoiceResponse,
@@ -20,12 +21,15 @@ import Connector, {
   SignMessageResponse,
 } from "./connector.interface";
 
+type GaloyCurrencies = Extract<ACCOUNT_CURRENCIES, "BTC" | "USD">;
+
 interface Config {
   walletId: string;
   url: string;
   headers?: Headers; // optional for backward compatibility
   apiCompatibilityMode?: boolean; // optional for backward compatibility
   accessToken?: string; // only present in old connectors
+  currency?: GaloyCurrencies; // default is BTC
 }
 
 class Galoy implements Connector {
@@ -60,6 +64,14 @@ class Galoy implements Connector {
 
   unload() {
     return Promise.resolve();
+  }
+
+  toFiatInt(amount: number, currency: GaloyCurrencies): number {
+    return Math.round(amount * 100);
+  }
+
+  toFiatFloat(amount: number, currency: GaloyCurrencies): number {
+    return amount / 100;
   }
 
   get supportedMethods() {
@@ -187,36 +199,50 @@ class Galoy implements Connector {
       const targetWallet = wallets.find((w) => w.id === this.config.walletId);
 
       if (targetWallet) {
-        if (targetWallet.walletCurrency === "USD") {
-          throw new Error("USD currency support is not yet implemented.");
+        if (targetWallet.walletCurrency !== (this.config.currency || "BTC")) {
+          throw new Error(
+            "Wallet currency does not match the account currency. " +
+              targetWallet.walletCurrency +
+              " != " +
+              (this.config.currency || "BTC")
+          );
         }
 
-        targetWallet.transactions.edges.forEach(
-          (edge: { cursor: string; node: TransactionNode }) => {
-            const tx = edge.node;
-            // Determine transaction type based on the direction field
-            const transactionType: "received" | "sent" =
-              tx.direction === "RECEIVE" ? "received" : "sent";
-            // Do not display a double negative if sent
-            const absSettlementAmount = Math.abs(tx.settlementAmount);
-            // Convert createdAt from UNIX timestamp to Date
-            const createdAtDate = new Date(tx.createdAt * 1000);
-
-            transactions.push({
-              id: edge.cursor,
-              memo: tx.memo,
-              preimage:
-                tx.settlementVia.preImage ||
-                tx.settlementVia.paymentSecret ||
-                "",
-              payment_hash: tx.initiationVia.paymentHash || "",
-              settled: tx.status === "SUCCESS",
-              settleDate: createdAtDate.getTime(),
-              totalAmount: absSettlementAmount, // Assuming this is in the correct unit
-              type: transactionType,
-            });
+        for (const edge of targetWallet.transactions.edges) {
+          const tx = edge.node;
+          // Determine transaction type based on the direction field
+          const transactionType: "received" | "sent" =
+            tx.direction === "RECEIVE" ? "received" : "sent";
+          const currency = targetWallet.walletCurrency || "BTC";
+          // Do not display a double negative if sent
+          let absSettlementAmount = Math.abs(tx.settlementAmount);
+          let displayAmount: [number, ACCOUNT_CURRENCIES] | undefined =
+            undefined;
+          if (currency !== "BTC") {
+            const rate = await getCurrencyRateWithCache(CURRENCIES[currency]);
+            absSettlementAmount = this.toFiatFloat(
+              absSettlementAmount,
+              currency
+            );
+            displayAmount = [absSettlementAmount, CURRENCIES[currency]];
+            absSettlementAmount = Math.floor(absSettlementAmount / rate);
           }
-        );
+
+          const createdAtDate = new Date(tx.createdAt * 1000);
+
+          transactions.push({
+            id: edge.cursor,
+            memo: tx.memo,
+            preimage:
+              tx.settlementVia.preImage || tx.settlementVia.paymentSecret || "",
+            payment_hash: tx.initiationVia.paymentHash || "",
+            settled: tx.status === "SUCCESS",
+            settleDate: createdAtDate.getTime(),
+            totalAmount: absSettlementAmount,
+            type: transactionType,
+            displayAmount,
+          });
+        }
       }
 
       hasNextPage = targetWallet?.transactions.pageInfo.hasNextPage || false;
@@ -255,12 +281,25 @@ class Galoy implements Connector {
         (w: GaloyWallet) => w.id === this.config.walletId
       );
       if (targetWallet) {
-        if (targetWallet.walletCurrency === "USD") {
-          throw new Error("USD currency support is not yet implemented.");
+        if (targetWallet.walletCurrency !== (this.config.currency || "BTC")) {
+          throw new Error(
+            "Wallet currency does not match the account currency. " +
+              targetWallet.walletCurrency +
+              " != " +
+              (this.config.currency || "BTC")
+          );
         }
+
+        const currency = targetWallet.walletCurrency;
+        const balance =
+          currency !== "BTC"
+            ? this.toFiatFloat(targetWallet.balance, currency)
+            : targetWallet.balance;
+
         return {
           data: {
-            balance: targetWallet.balance,
+            balance,
+            currency,
           },
         };
       } else {
@@ -419,8 +458,13 @@ class Galoy implements Connector {
         if (wallet === undefined) {
           throw new Error("Bad data received.");
         }
-        if (wallet.walletCurrency === "USD") {
-          throw new Error("USD currency support is not yet implemented.");
+        if (wallet.walletCurrency !== (this.config.currency || "BTC")) {
+          throw new Error(
+            "Wallet currency does not match the account currency. " +
+              wallet.walletCurrency +
+              " != " +
+              (this.config.currency || "BTC")
+          );
         }
 
         const txEdges = wallet.transactions.edges;
@@ -453,10 +497,26 @@ class Galoy implements Connector {
   }
 
   async makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse> {
+    const mutationName =
+      this.config.currency == "USD" ? "LnUsdInvoiceCreate" : "lnInvoiceCreate";
+    const inputTypeName =
+      this.config.currency == "USD"
+        ? "LnUsdInvoiceCreateInput"
+        : "LnInvoiceCreateInput";
+    const fun =
+      this.config.currency == "USD" ? "lnUsdInvoiceCreate" : "lnInvoiceCreate";
+    const currency = this.config.currency || "BTC";
+
+    let amountSats = Number(args.amount);
+    if (currency !== "BTC") {
+      const rate = await getCurrencyRateWithCache(CURRENCIES[currency]);
+      amountSats = this.toFiatInt(amountSats * rate, currency);
+    }
+
     const query = {
       query: `
-        mutation lnInvoiceCreate($input: LnInvoiceCreateInput!) {
-          lnInvoiceCreate(input: $input) {
+        mutation ${mutationName}($input: ${inputTypeName}!) {
+          ${fun}(input: $input) {
             invoice {
               paymentRequest
               paymentHash
@@ -472,21 +532,21 @@ class Galoy implements Connector {
       variables: {
         input: {
           walletId: this.config.walletId,
-          amount: args.amount,
+          amount: amountSats,
           memo: args.memo,
         },
       },
     };
     return this.request(query).then(({ data, errors }) => {
-      const errs = errors || data.lnInvoiceCreate.errors;
+      const errs = errors || data[fun].errors;
       if (errs && errs.length) {
         throw new Error(errs[0].message || JSON.stringify(errs));
       }
 
       return {
         data: {
-          paymentRequest: data.lnInvoiceCreate.invoice.paymentRequest,
-          rHash: data.lnInvoiceCreate.invoice.paymentHash,
+          paymentRequest: data[fun].invoice.paymentRequest,
+          rHash: data[fun].invoice.paymentHash,
         },
       };
     });

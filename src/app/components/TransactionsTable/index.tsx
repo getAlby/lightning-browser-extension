@@ -23,7 +23,7 @@ export default function TransactionsTable({
   noResultMsg,
   loading = false,
 }: Props) {
-  const { getFormattedSats } = useSettings();
+  const { getFormattedSats, getFormattedInCurrency } = useSettings();
   const [modalOpen, setModalOpen] = useState(false);
   const [transaction, setTransaction] = useState<Transaction | undefined>();
   const { t } = useTranslation("components", {
@@ -93,7 +93,12 @@ export default function TransactionsTable({
                         )}
                       >
                         {type == "outgoing" ? "-" : "+"}{" "}
-                        {getFormattedSats(tx.totalAmount)}
+                        {!tx.displayAmount
+                          ? getFormattedSats(tx.totalAmount)
+                          : getFormattedInCurrency(
+                              tx.displayAmount[0],
+                              tx.displayAmount[1]
+                            )}
                       </p>
 
                       {!!tx.totalAmountFiat && (
