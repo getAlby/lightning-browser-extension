@@ -25,6 +25,7 @@ export interface Account {
   mnemonic?: string | null;
   hasImportedNostrKey?: boolean;
   bitcoinNetwork?: BitcoinNetworkType;
+  isMnemonicBackupDone?: boolean;
   useMnemonicForLnurlAuth?: boolean;
   avatarUrl?: string;
 }
@@ -231,6 +232,7 @@ export interface MessageAccountEdit extends MessageDefault {
     name?: Account["name"];
     bitcoinNetwork?: BitcoinNetworkType;
     useMnemonicForLnurlAuth?: boolean;
+    isMnemonicBackupDone?: boolean;
   };
   action: "editAccount";
 }

@@ -373,7 +373,26 @@
         "is_blocked_hint": "Alby is currently disabled on {{host}}",
         "block_removed": "Enabled {{host}}. Please reload the website.",
         "no_transactions": "No transactions for this account yet.",
-        "see_all": "See all"
+        "see_all": "See all",
+        "actions": {
+          "get_started": {
+            "title": "Get Started With Alby Extension",
+            "description": "New to Alby Extension? Check out our guides, videos, and explanations"
+          },
+          "backup_masterkey": {
+            "title": "Back up your Master Key",
+            "description": "Learn what Master Key is, how it’s used for Nostr and make sure to back up"
+          },
+
+          "receive_bitcoin": {
+            "title": "Receive bitcoin",
+            "description": "Get bitcoin to your lightning address, a lightning invoice or bitcoin address."
+          },
+          "import_masterkey": {
+            "title": "Import your Master Key",
+            "description": "If you already have a Master Key, you can import it using recovery phrase"
+          }
+        }
       }
     },
     "accounts": {
