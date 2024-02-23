@@ -38,6 +38,7 @@ function BackupMnemonic() {
     fetchData();
   }, [fetchData]);
 
+  // TODO: set isMnemonicBackupDone, once new ui for screen is merged
   return loading ? (
     <div className="flex justify-center mt-5">
       <Loading />

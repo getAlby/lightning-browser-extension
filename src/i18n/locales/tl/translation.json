@@ -2,7 +2,6 @@
   "translation": {
     "welcome": {
       "set_password": {
-        "title": "",
         "description": "",
         "choose_password": {
           "label": ""
@@ -166,13 +165,9 @@
       },
       "btcpay": {
         "title": "",
-        "page": {
-          "title": "",
-          "instructions": ""
-        },
+        "page": {},
         "config": {
-          "label": "",
-          "placeholder": ""
+          "label": ""
         },
         "errors": {
           "connection_failed": ""

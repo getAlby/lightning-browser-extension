@@ -27,6 +27,7 @@ const add = async (message: MessageAccountAdd) => {
     ...newAccount,
     id: accountId,
     name,
+    isMnemonicBackupDone: false,
   };
 
   const mnemonic = await generateMnemonic({

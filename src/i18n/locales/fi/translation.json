@@ -2,7 +2,6 @@
   "translation": {
     "welcome": {
       "set_password": {
-        "title": "Aseta lukituksen avaussalasana",
         "description": "Lightning-tilisi tiedot on salattu turvallisesti salasanan avulla. Älä unohda tätä salasanaa! Tarvitset sitä avataksesi Alby-laajennuksen lukituksen (tässä selaimessa)",
         "choose_password": {
           "label": "Valitse lukituksen avaamissalasana:"
@@ -166,13 +165,9 @@
       },
       "btcpay": {
         "title": "BTCPay-palvelin",
-        "page": {
-          "title": "Yhdistä BTCPay LND -solmuusi",
-          "instructions": "Siirry BTCPayServerillesi ja kirjaudu sisään järjestelmänvalvojana. Siirry kohtaan Palvelinasetukset > Palvelut > LND Rest - Katso tiedot. Napsauta sitten \"Katso QR-koodin tiedot\" ja kopioi QR-koodin tiedot. Liitä se alle:"
-        },
+        "page": {},
         "config": {
-          "label": "Konfigurointitiedot",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
+          "label": "Konfigurointitiedot"
         },
         "errors": {
           "connection_failed": "Yhteys epäonnistui. Onko BTCPay-yhteyden URL-osoite oikea ja saatavilla?"
@@ -468,7 +463,6 @@
   },
   "common": {
     "password": "Salasana",
-    "advanced": "Edistynyt",
     "success": "Menestys",
     "error": "Virhe",
     "settings": "Asetukset",

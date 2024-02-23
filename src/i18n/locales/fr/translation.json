@@ -3,7 +3,6 @@
     "welcome": {
       "title": "Bienvenue sur Alby",
       "set_password": {
-        "title": "Définir un mot de passe de déverrouillage",
         "description": "Ce mot de passe est utilisé pour protéger votre portefeuille et donner accès à l'extension du navigateur. Il ne peut pas être réinitialisé et est distinct du mot de passe de votre compte Alby.",
         "choose_password": {
           "label": "Choisissez un mot de passe de déverrouillage :"
@@ -78,10 +77,7 @@
       },
       "lnc": {
         "title": "LND avec LNC",
-        "page": {
-          "title": "Connectez-vous à votre nœud LND",
-          "description": "Créez une nouvelle session dans le terminal (litd) pour obtenir une nouvelle phrase d'appariement et entrez-la ici"
-        },
+        "page": {},
         "pairing_phrase": {
           "label": "Votre phrase d'appariement ",
           "placeholder": "phrase de sats de pile secrète"
@@ -205,13 +201,9 @@
       },
       "btcpay": {
         "title": "Serveur BTCPay",
-        "page": {
-          "title": "Connectez-vous à votre nœud BTCPay LND",
-          "instructions": "Accédez à votre BTCPayServer et connectez-vous en tant qu'administrateur. Accédez à Paramètres du serveur > Services > LND Rest - Voir les informations. Cliquez ensuite sur \"Voir les informations du code QR\" et copiez les données du code QR. Collez-le ci-dessous :"
-        },
+        "page": {},
         "config": {
-          "label": "Données de configuration",
-          "placeholder": "config=https://votre-btc-pay.org/lnd-config/212121/lnd.config"
+          "label": "Données de configuration"
         },
         "errors": {
           "connection_failed": "La connexion a échoué. L'URL de connexion BTCPay est-elle correcte et accessible ?"
@@ -574,7 +566,6 @@
   "common": {
     "password": "Mot de passe",
     "confirm_password": "Confirmez le mot de passe",
-    "advanced": "Avancé",
     "success": "Succès",
     "error": "Erreur",
     "settings": "Paramètres",

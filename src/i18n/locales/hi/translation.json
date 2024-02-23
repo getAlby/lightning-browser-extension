@@ -2,7 +2,6 @@
   "translation": {
     "welcome": {
       "set_password": {
-        "title": "अनलॉक पासवर्ड सेट करें",
         "confirm_password": {
           "label": "आइए पुष्टि करें कि आपने इसे सही टाइप किया है:"
         },
@@ -105,10 +104,7 @@
       },
       "lnc": {
         "title": "LND के साथ LNC",
-        "page": {
-          "title": "अपने LND नोड से कनेक्ट करें",
-          "description": "एक नया युग्मन वाक्यांश प्राप्त करने के लिए टर्मिनल (litd) में एक नया session बनाएँ और इसे यहाँ दर्ज करें।"
-        },
+        "page": {},
         "pairing_phrase": {
           "label": "आपका युग्मन वाक्यांश| ",
           "placeholder": "गुप्त stack sats वाक्यांश"
@@ -240,13 +236,9 @@
       },
       "btcpay": {
         "title": "बीसीटीपे सर्वर(BTCPay Server)",
-        "page": {
-          "title": "आपके BTCPay LND node से connect करें",
-          "instructions": "अपने BTCPayServer पर नेविगेट करें और एक admin के रूप में लॉग इन करें। सर्वर सेटिंग्स पर जाएं> सेवाएं> एलएनडी रेस्ट - जानकारी देखें। फिर \"क्यूआर कोड जानकारी देखें\" पर क्लिक करें और क्यूआर कोड डेटा कॉपी करें। इसे नीचे पेस्ट करें:"
-        },
+        "page": {},
         "config": {
-          "label": "कॉन्फ़िग डेटा",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
+          "label": "कॉन्फ़िग डेटा"
         },
         "errors": {
           "connection_failed": "कनेक्शन विफल। क्या BTCPay कनेक्शन URL सही और पहुंच योग्य है?"
@@ -959,7 +951,6 @@
   "common": {
     "password": "पासवर्ड",
     "confirm_password": "पासवर्ड की पुष्टि करें",
-    "advanced": "उन्नत",
     "success": "सफलता",
     "error": "त्रुटि",
     "settings": "सेटिंग्स",

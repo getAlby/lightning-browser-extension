@@ -88,7 +88,7 @@ export default function PasswordForm<
 
   return (
     <>
-      <div className="w-full">
+      <div className="w-full mt-8">
         <TextField
           autoFocus={autoFocus}
           id="password"
