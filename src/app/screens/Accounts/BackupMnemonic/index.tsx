@@ -21,7 +21,7 @@ function BackupMnemonic() {
   const [loading, setLoading] = useState<boolean>(true);
   const [hasConfirmedBackup, setHasConfirmedBackup] = useState(false);
 
-  const { id } = useParams();
+  const { id } = useParams() as { id: string };
 
   const fetchData = useCallback(async () => {
     try {
@@ -45,10 +45,15 @@ function BackupMnemonic() {
       return false;
     }
 
-    navigate(-1);
+    await api.editAccount(id, {
+      isMnemonicBackupDone: true,
+    });
+
+    toast.success(t("backed_up"));
+
+    navigate(`/accounts/${id}`);
   }
 
-  // TODO: set isMnemonicBackupDone, once new ui for screen is merged
   return loading ? (
     <div className="flex justify-center mt-5">
       <Loading />
