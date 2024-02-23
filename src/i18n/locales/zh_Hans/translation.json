@@ -2,7 +2,6 @@
   "translation": {
     "welcome": {
       "set_password": {
-        "title": "设置解锁密码",
         "description": "此密码将允许你在此设备上解锁 Alby。它无法恢复，但可以稍后更改。",
         "choose_password": {
           "label": "选择解锁密码："
@@ -95,17 +94,13 @@
         }
       },
       "btcpay": {
-        "page": {
-          "instructions": "导航到你的BTCPayServer并以管理员身份登录。转到服务器设置 > 服务 > LND Rest - 查看信息。然后点击 \"查看二维码信息 \"并复制二维码数据。把它粘贴在下面：",
-          "title": "连接你的BTCPay LND节点"
-        },
+        "page": {},
         "title": "BTCPay Server",
         "errors": {
           "connection_failed": "连接失败。BTCPay连接URL是否正确且可访问？"
         },
         "config": {
-          "label": "配置数据",
-          "placeholder": "config=http://your-btc-pay.org/lnd-config/212121/lnd.config"
+          "label": "配置数据"
         }
       },
       "commando": {
@@ -218,10 +213,7 @@
         }
       },
       "lnc": {
-        "page": {
-          "description": "1. 打开 Lightning Terminal 并从侧边栏选择 <0>Lightning Node Connect</0> 。<1/> 2. 点击 <0>Create a new session</0><1/>3. 标记对话，选择所需的权限并提交<1/>4. <0>复制配对词句</0> 并粘贴到下方。",
-          "title": "连接你的LND节点"
-        },
+        "page": {},
         "title": "Lightning Terminal (LNC)",
         "pairing_phrase": {
           "placeholder": "秘密的堆聪短语",
@@ -855,7 +847,6 @@
     "copied": "已复制！",
     "error": "错误",
     "loading": "加载中",
-    "advanced": "高级",
     "accounts": "帐户",
     "confirm_password": "确认密码",
     "discover": "发现",

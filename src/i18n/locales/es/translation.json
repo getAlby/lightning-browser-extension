@@ -2,7 +2,6 @@
   "translation": {
     "welcome": {
       "set_password": {
-        "title": "Establecer un código de desbloqueo",
         "description": "Este código te permitirá desbloquear Alby en este dispositivo. No se puede recuperar, pero se puede cambiar más tarde.",
         "choose_password": {
           "label": "Elige un código de desbloqueo:"
@@ -159,13 +158,9 @@
       },
       "btcpay": {
         "title": "Servidor BTCPay",
-        "page": {
-          "title": "Conéctese a su nodo BTCPay LND",
-          "instructions": "Navegue a su servidor BTCPay e inicie sesión como administrador. Vaya a Configuración del servidor > Servicios > LND Rest-Ver información. Luego haga clic en\" Ver información del código QR \" y copie los datos del Código QR. Pegar a continuación:"
-        },
+        "page": {},
         "config": {
-          "label": "Datos de configuración",
-          "placeholder": "config=https://su-btc-pay.org/lnd-config/212121/lnd.config"
+          "label": "Datos de configuración"
         },
         "errors": {
           "connection_failed": "La conexión falló. ¿Es la URL de conexión de BTCPay correcta y accesible?"
@@ -218,10 +213,7 @@
         }
       },
       "lnc": {
-        "page": {
-          "title": "Conecta tu nodo LND",
-          "description": "1. Abra tu Lightning Terminal y selecciona <0>Lightning Node Connect</0> en la barra lateral.<1/> 2. Haz clic en <0>Crear una nueva sesión</0><1/>3. Etiqueta la sesión, luego elige el permiso que deseas y envía<1/>4. <0>Copia la frase de emparejamiento</0> y pégala a continuación."
-        },
+        "page": {},
         "title": "Lightning Terminal (LNC)",
         "pairing_phrase": {
           "label": "Tu frase vinculada. ",
@@ -708,7 +700,6 @@
     "success_message": "{{amount}}{{fiatAmount}} enviados a {{destination}}",
     "message": "Mensaje",
     "description_full": "Descripción Completa",
-    "advanced": "Avanzado",
     "accounts": "Cuentas",
     "discover": "Descubrir",
     "response": "Respuesta",
