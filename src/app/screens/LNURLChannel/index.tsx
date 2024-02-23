@@ -44,9 +44,6 @@ function LNURLChannel() {
       const nodeId = infoResponse.node.pubkey;
 
       if (!nodeId) {
-        toast.error(
-          `No nodeId available. Your account might not support channel requests`
-        );
         throw new Error(
           `No nodeId available. Your account might not support channel requests`
         );
