@@ -329,7 +329,7 @@
             "placeholder": "nostr+walletconnect://69effe..."
           },
           "errors": {
-            "connection_failed": "Connection failed. Is your Core Lightning node online and using the commando plugin?"
+            "connection_failed": "Connection failed. Is your NWC wallet online and app connection enabled?"
           }
         }
       }
