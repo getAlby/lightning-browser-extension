@@ -21,7 +21,7 @@ export default function PasswordViewAdornment({ onChange, isRevealed }: Props) {
     <button
       type="button"
       tabIndex={-1}
-      className="flex justify-center items-center w-10 h-8 text-gray-800 dark:text-neutral-200"
+      className="flex justify-center items-center w-10 h-8 text-gray-400 dark:text-neutral-600 hover:text-gray-600 hover:dark:text-neutral-400"
       onClick={() => {
         setRevealed(!_isRevealed);
         onChange(!_isRevealed);
