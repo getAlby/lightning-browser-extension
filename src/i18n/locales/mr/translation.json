@@ -3,7 +3,6 @@
     "welcome": {
       "title": "Alby मध्ये आपले स्वागत आहे",
       "set_password": {
-        "title": "अनलॉक पासवर्ड सेट करा",
         "description": "तुमचे लाइटनिंग खाते पासवर्डसह सुरक्षितपणे एन्क्रिप्ट केलेले आहे. कृपया हा पासवर्ड लक्षात ठेवा. ब्राउझरमध्ये alby एक्सटेंशन उघडण्यासाठी तुम्हाला पासवर्डची आवश्यकता असेल.",
         "confirm_password": {
           "label": "आपण ते बरोबर टाईप केले आहे याची पुष्टी करूया:"
@@ -78,10 +77,7 @@
       },
       "lnc": {
         "title": "LND with LNC",
-        "page": {
-          "title": "आपल्या LND नोडशी कनेक्ट करा",
-          "description": "नवीन जोडी वाक्यांश मिळविण्यासाठी टर्मिनल (litd) मध्ये एक नवीन सत्र तयार करा आणि ते येथे प्रविष्ट करा"
-        },
+        "page": {},
         "pairing_phrase": {
           "label": "आपली जोडी वाक्यांश ",
           "placeholder": "गुप्त स्टॅक सॅट्स वाक्यांश"
@@ -205,13 +201,9 @@
       },
       "btcpay": {
         "title": "BTCPay Server",
-        "page": {
-          "title": "BTCPay LND node ला कनेक्ट करा",
-          "instructions": "तुमच्या BTCPayServer वर नेव्हिगेट करा आणि admin म्हणून लॉग इन करा. सर्व्हर सेटिंग्ज > सेवा > LND REST वर जा - माहिती पहा. नंतर \"QR कोड माहिती पहा\" वर क्लिक करा आणि QR कोड डेटा कॉपी करा. ते खाली पेस्ट करा:"
-        },
+        "page": {},
         "config": {
-          "label": "Config data",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
+          "label": "Config data"
         },
         "errors": {
           "connection_failed": "कनेक्शन अयशस्वी झाले. BTCPay कनेक्शन URL योग्य आणि प्रवेशयोग्य आहे का?"
@@ -594,7 +586,6 @@
   "common": {
     "password": "पासवर्ड",
     "confirm_password": "पासवर्डची पुष्टी करा",
-    "advanced": "पुढे",
     "success": "यश",
     "settings": "सेटिंग्ज",
     "accounts": "खाते",

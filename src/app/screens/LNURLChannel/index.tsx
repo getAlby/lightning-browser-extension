@@ -11,6 +11,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import toast from "~/app/components/Toast";
+import Checkbox from "~/app/components/form/Checkbox";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
@@ -30,6 +31,7 @@ function LNURLChannel() {
 
   const [loadingConfirm, setLoadingConfirm] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
+  const [privateChannel, setPrivateChannel] = useState(false);
 
   async function confirm() {
     try {
@@ -42,9 +44,6 @@ function LNURLChannel() {
       const nodeId = infoResponse.node.pubkey;
 
       if (!nodeId) {
-        toast.error(
-          `No nodeId available. Your account might not support channel requests`
-        );
         throw new Error(
           `No nodeId available. Your account might not support channel requests`
         );
@@ -54,6 +53,7 @@ function LNURLChannel() {
         params: {
           k1: details.k1,
           remoteid: nodeId,
+          private: privateChannel ? 1 : 0,
         },
         adapter: fetchAdapter,
       });
@@ -74,6 +74,13 @@ function LNURLChannel() {
       }
     } catch (e) {
       console.error(e);
+      if (axios.isAxiosError(e)) {
+        const error =
+          (e.response?.data as { reason?: string })?.reason || e.message;
+        toast.error(`Error: ${error}`);
+      } else if (e instanceof Error) {
+        toast.error(`Error: ${e.message}`);
+      }
     } finally {
       setLoadingConfirm(false);
     }
@@ -114,6 +121,22 @@ function LNURLChannel() {
               heading={`${t("content_message.heading")}:`}
               content={uri}
             />
+            <div className="flex">
+              <Checkbox
+                id="open_private_channel"
+                name="open_private_channel"
+                checked={privateChannel}
+                onChange={(event) => {
+                  setPrivateChannel(event.target.checked);
+                }}
+              />
+              <label
+                htmlFor="open_private_channel"
+                className="cursor-pointer ml-2 block text-sm text-gray-900 font-medium dark:text-white"
+              >
+                {t("private_channel.label")}
+              </label>
+            </div>
           </div>
           <ConfirmOrCancel
             disabled={loadingConfirm || !uri}

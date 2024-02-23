@@ -2,7 +2,6 @@
   "translation": {
     "welcome": {
       "set_password": {
-        "title": "ตั้งรหัสผ่านเข้าแอพ",
         "description": "ใช้รหัสนี้เพื่อเข้าสู่ Alby บนเครื่องนี้ รหัสผ่านนี้ไม่สามารถกู้คืนได้หากคุณลืมรหัสผ่านแต่คุณสามารถเปลี่ยนรหัสผ่านได้ภายหลัง",
         "choose_password": {
           "label": "ตั้งรหัสผ่านเข้าแอพ:"
@@ -472,10 +471,7 @@
           "placeholder": "รหัสเพื่อเข้าถึงแซต"
         },
         "title": "Lightning Terminal (LNC)",
-        "page": {
-          "title": "เชื่อมต่อกับ LND node ของคุณ",
-          "description": "1. เปิด Lightning Terminal และเลือก <0> เชื่อมต่อ Lightning Node </0> จากแถบด้านข้าง </1> 2. คลิก <0> สร้างเซสชันใหม่ </0><1/> 3. ตั้งชื่อเซสชัน เลือกสิทธิ์ที่ต้องการและกดยืนยัน <1/>4. <0> คัดลอก pairing phrase </0> และวางมันข้างล่าง"
-        }
+        "page": {}
       },
       "lndhub_go": {
         "title": "LNDHub",
@@ -583,12 +579,8 @@
         }
       },
       "btcpay": {
-        "page": {
-          "instructions": "ไปที่ BTCPayServer ของคุณและลงชื่อเข้าใช้ในฐานะผู้ดูแลระบบ ไปที่ Server Settings > Services > LND Rest - ดูข้อมูล จากนั้นคลิก \"See QR code information\" และ คัดลอก QR Code มาวางไว้ด้านล่าง:",
-          "title": "เชื่อมต่อกับ BTCPay LND node ของคุณ"
-        },
+        "page": {},
         "config": {
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config",
           "label": "การกำหนดค่าข้อมูล"
         },
         "errors": {
@@ -945,7 +937,6 @@
       "connection_failed": "การเชื่อมต่อล้มเหลว",
       "payment_failed": "การชำระเงินล้มเหลว"
     },
-    "advanced": "ขั้นสูง",
     "success": "สำเร็จ",
     "error": "ข้อผิดพลาด",
     "settings": "การตั้งค่า",

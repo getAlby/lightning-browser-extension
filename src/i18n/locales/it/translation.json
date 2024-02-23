@@ -2,7 +2,6 @@
   "translation": {
     "welcome": {
       "set_password": {
-        "title": "Imposta una password di sblocco",
         "description": "Questa password serve a proteggere il tuo wallet e a fornirti l'accesso all'estensione del browser. Non può essere reimpostata ed è differente dalla password dell'account Alby.",
         "choose_password": {
           "label": "Scegli una password di sblocco:"
@@ -167,13 +166,9 @@
       },
       "btcpay": {
         "title": "BTCPay Server",
-        "page": {
-          "title": "Connettiti al tuo nodo LND BTCPay",
-          "instructions": "Vai al tuo BTCPayServer e accedi come amministratore. Vai su Impostazioni server > Servizi > LND Rest - See information. Quindi fai clic su \"Visualizza informazioni sul codice QR\" e copia i dati del codice QR. Incollali qui sotto:"
-        },
+        "page": {},
         "config": {
-          "label": "Dati di configurazione",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
+          "label": "Dati di configurazione"
         },
         "errors": {
           "connection_failed": "Connessione fallita. L'URL di connessione a BTCPay è corretto e accessibile?"
@@ -213,10 +208,7 @@
       },
       "title": "Connetti il Wallet Lightning",
       "lnc": {
-        "page": {
-          "description": "Crea una nuova sessione nel terminale (litd) per ottenere una nuova frase di accoppiamento ed inseriscila qui",
-          "title": "Connettiti al tuo nodo LND"
-        },
+        "page": {},
         "pairing_phrase": {
           "label": "La tua frase di accoppiamento ",
           "placeholder": "frase segreta di stack sats"
@@ -619,8 +611,7 @@
     "success_message": "{{amount}}{{fiatAmount}} inviati a {{destination}}",
     "accounts": "Account",
     "discover": "Scopri",
-    "confirm_password": "Conferma la Password",
-    "advanced": "Avanzate"
+    "confirm_password": "Conferma la Password"
   },
   "components": {
     "allowance_menu": {
