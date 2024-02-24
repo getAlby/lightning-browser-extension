@@ -2,7 +2,6 @@
   "translation": {
     "welcome": {
       "set_password": {
-        "description": "Esta senha é usada para proteger sua carteira e fornecer acesso à extensão do navegador neste dispositivo. Não esqueça esta senha pois não é possível recuperá-la. Obs. Esta senha é diferente da senha da conta da Alby.",
         "choose_password": {
           "label": "Escolha uma senha de desbloqueio:"
         },
@@ -13,7 +12,10 @@
           "enter_password": "Insira uma senha.",
           "confirm_password": "Confirme sua senha.",
           "mismatched_password": "As senhas não correspondem."
-        }
+        },
+        "description1": "Defina uma senha para desbloquear a extensão Alby neste navegador",
+        "description2": "A senha de desbloqueio não pode ser recuperada, mas pode ser alterada. ",
+        "title": "Definir senha de desbloqueio da extensão"
       },
       "test_connection": {
         "ready": "Perfeito, tudo configurado!",
@@ -26,7 +28,6 @@
           "delete_edit_account": "Remover conta inválida e editar novamente"
         }
       },
-      "title": "Bem-vindo à Alby",
       "pin_extension": {
         "title": "Fixar extensão Alby",
         "description": "Quase lá. Para facilitar seu acesso à Alby, lembre-se de fixar a extensão Alby na barra de ferramentas do navegador:",
@@ -165,7 +166,6 @@
       },
       "btcpay": {
         "title": "Servidor BTCPay",
-        "page": {},
         "config": {
           "label": "Dados config"
         },
@@ -221,7 +221,6 @@
       },
       "title": "Conectar Carteira Bitcoin",
       "lnc": {
-        "page": {},
         "title": "Lightning Terminal (LNC)",
         "pairing_phrase": {
           "label": "Frase de pareamento "
@@ -266,7 +265,25 @@
         "is_blocked_hint": "A Alby está desativada em {{host}}",
         "block_removed": "{{host}} ativado. Por favor, recarregue o site.",
         "see_all": "Mostrar tudo",
-        "no_transactions": "Sem transações nesta conta ainda."
+        "no_transactions": "Sem transações nesta conta ainda.",
+        "actions": {
+          "get_started": {
+            "title": "Saiba mais sobre a extensão Alby",
+            "description": "Novo na Alby? Confira nossos tutoriais, vídeos e explicações"
+          },
+          "backup_masterkey": {
+            "description": "Descubra o que é a chave mestra, como ela é usada no Nostr e certifique-se de fazer o backup",
+            "title": "Faça o backup da sua chave mestra"
+          },
+          "import_masterkey": {
+            "title": "Importe sua chave mestra",
+            "description": "Se você já possui uma chave mestra, você pode importá-la usando a frase de recuperação"
+          },
+          "receive_bitcoin": {
+            "title": "Deposite bitcoin",
+            "description": "Receba satoshis usando um endereço relâmpago, fatura relâmpago ou endereço bitcoin"
+          }
+        }
       }
     },
     "accounts": {
@@ -960,10 +977,10 @@
     "description": "Descrição",
     "description_full": "Descrição completa",
     "message": "Mensagem",
-    "help": "Guias Alby",
+    "help": "Tutoriais Alby",
     "response": "Resposta",
     "success_message": "{{amount}}{{fiatAmount}} enviados para {{destination}}",
-    "advanced": "Avançado",
+    "advanced": "Mostrar configurações avançadas",
     "discover": "Explorar apps",
     "confirm_password": "Confirmar senha",
     "accounts": "Minhas contas",
@@ -998,7 +1015,8 @@
     },
     "website": "Site",
     "apps": "Apps",
-    "full_screen": "Tela cheia"
+    "full_screen": "Tela cheia",
+    "hide_advanced": "Ocultar configurações avançadas"
   },
   "components": {
     "allowance_menu": {
