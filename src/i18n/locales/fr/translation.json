@@ -1,9 +1,7 @@
 {
   "translation": {
     "welcome": {
-      "title": "Bienvenue sur Alby",
       "set_password": {
-        "description": "Ce mot de passe est utilisé pour protéger votre portefeuille et donner accès à l'extension du navigateur. Il ne peut pas être réinitialisé et est distinct du mot de passe de votre compte Alby.",
         "choose_password": {
           "label": "Choisissez un mot de passe de déverrouillage :"
         },
@@ -77,7 +75,6 @@
       },
       "lnc": {
         "title": "LND avec LNC",
-        "page": {},
         "pairing_phrase": {
           "label": "Votre phrase d'appariement ",
           "placeholder": "phrase de sats de pile secrète"
@@ -201,7 +198,6 @@
       },
       "btcpay": {
         "title": "Serveur BTCPay",
-        "page": {},
         "config": {
           "label": "Données de configuration"
         },
