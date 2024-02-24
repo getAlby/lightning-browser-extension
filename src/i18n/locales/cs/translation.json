@@ -2,7 +2,6 @@
   "translation": {
     "welcome": {
       "set_password": {
-        "description": "Tento pin vám umožní odemykat doplněk Alby na tomto zařízení. Nelze ho resetovat, ale je možné ho později změnit.",
         "choose_password": {
           "label": "Zvolte pin pro odemykání:"
         },
@@ -26,7 +25,6 @@
           "delete_edit_account": "Smažte nevalidní účet a změny proveďte znovu"
         }
       },
-      "title": "Vítejte v Alby",
       "pin_extension": {
         "title": "Připnout rozšíření Alby",
         "explanation": "1. Zvolte <0/> v pravém rohu svého prohlížeče<1/>2. Najděte Alby a zvolte připnout k toolbaru<1/>3. To je vše. Pro přístup k Alby pouze klikněte na <2/> ikonu",
@@ -171,7 +169,6 @@
       },
       "btcpay": {
         "title": "BTCPay Server",
-        "page": {},
         "config": {
           "label": "Konfigurační data"
         },
@@ -214,7 +211,6 @@
       "title": "Připojte Lightning peněženku",
       "lnc": {
         "title": "Lightning terminál (LNC)",
-        "page": {},
         "pairing_phrase": {
           "label": "Vaše párovací fráze ",
           "placeholder": "tajná fráze"
