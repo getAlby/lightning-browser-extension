@@ -1,9 +1,7 @@
 {
   "translation": {
     "welcome": {
-      "title": "Alby मध्ये आपले स्वागत आहे",
       "set_password": {
-        "description": "तुमचे लाइटनिंग खाते पासवर्डसह सुरक्षितपणे एन्क्रिप्ट केलेले आहे. कृपया हा पासवर्ड लक्षात ठेवा. ब्राउझरमध्ये alby एक्सटेंशन उघडण्यासाठी तुम्हाला पासवर्डची आवश्यकता असेल.",
         "confirm_password": {
           "label": "आपण ते बरोबर टाईप केले आहे याची पुष्टी करूया:"
         },
@@ -77,7 +75,6 @@
       },
       "lnc": {
         "title": "LND with LNC",
-        "page": {},
         "pairing_phrase": {
           "label": "आपली जोडी वाक्यांश ",
           "placeholder": "गुप्त स्टॅक सॅट्स वाक्यांश"
@@ -201,7 +198,6 @@
       },
       "btcpay": {
         "title": "BTCPay Server",
-        "page": {},
         "config": {
           "label": "Config data"
         },
