@@ -2,7 +2,6 @@
   "translation": {
     "welcome": {
       "set_password": {
-        "description": "Questa password serve a proteggere il tuo wallet e a fornirti l'accesso all'estensione del browser. Non può essere reimpostata ed è differente dalla password dell'account Alby.",
         "choose_password": {
           "label": "Scegli una password di sblocco:"
         },
@@ -25,8 +24,7 @@
         "actions": {
           "delete_edit_account": "Elimina l'account invalido e modificalo di nuovo"
         }
-      },
-      "title": "Benvenuto su Alby"
+      }
     },
     "choose_connector": {
       "description": "Connettiti al tuo wallet lightning esterno o al tuo nodo",
@@ -166,7 +164,6 @@
       },
       "btcpay": {
         "title": "BTCPay Server",
-        "page": {},
         "config": {
           "label": "Dati di configurazione"
         },
@@ -208,7 +205,6 @@
       },
       "title": "Connetti il Wallet Lightning",
       "lnc": {
-        "page": {},
         "pairing_phrase": {
           "label": "La tua frase di accoppiamento ",
           "placeholder": "frase segreta di stack sats"
