@@ -12,8 +12,7 @@
           "enter_password": "Mohon masukan kode sandi.",
           "confirm_password": "Mohon konfirmasi kode sandi Anda.",
           "mismatched_password": "Kode sandi tidak sama."
-        },
-        "description": "Kode sandi ini dapat digunakan untuk membuka Alby pada perangkat ini. Ini tidak dapat dipulihkan, tetapi bisa diganti."
+        }
       },
       "test_connection": {
         "initializing": "Menginisialisasi akun Anda. Mohon tunggu, ini mungkin akan memakan waktu beberapa menit...",
@@ -30,8 +29,7 @@
         "description": "Kamu hampir samapi. Untuk menggunakan Alby dengan mudah, kamu dapat pin ekstensi ini pada toolbar browser:",
         "next_btn": "Mulai buzzin' {{icon}} dengan Alby",
         "explanation": "1. Klik pada <0/> di ujung kanan atas browser<1/>2. Cari Alby dan klik untuk mem-pin-nya pada toolbar<1/>3. Selesai. Untuk mengakses Alby, tinggal klik pada<2/> ikon"
-      },
-      "title": "Selamat Datang di Alby"
+      }
     },
     "choose_path": {
       "other": {
@@ -83,7 +81,6 @@
       },
       "lnc": {
         "title": "Lightning Terminal (LNC)",
-        "page": {},
         "pairing_phrase": {
           "label": "Pairing phrase kamu: ",
           "placeholder": "secret stack sats phrase"
@@ -206,7 +203,6 @@
         }
       },
       "btcpay": {
-        "page": {},
         "config": {
           "label": "Config data"
         },
