@@ -28,7 +28,7 @@ export default function PasswordViewAdornment({ onChange, isRevealed }: Props) {
       }}
     >
       {_isRevealed ? (
-        <EyeCrossedIcon className="h-6 w-6 " />
+        <EyeCrossedIcon className="h-6 w-6" />
       ) : (
         <PopiconsEyeLine className="h-6 w-6" />
       )}
