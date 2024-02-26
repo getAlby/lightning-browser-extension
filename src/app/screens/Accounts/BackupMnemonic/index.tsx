@@ -49,8 +49,6 @@ function BackupMnemonic() {
       isMnemonicBackupDone: true,
     });
 
-    toast.success(t("backed_up"));
-
     navigate(`/accounts/${id}`);
   }
 

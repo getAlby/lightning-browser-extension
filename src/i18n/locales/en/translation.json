@@ -417,7 +417,6 @@
         "mnemonic": {
           "title": "🔑 Key Management",
           "saved": "Master Key encrypted & saved successfully.",
-          "backed_up": "Master Key backup successfull",
           "existing_nostr_key_notice": "ℹ️ This account already has a nostr private key set and will not be derived from this Master Key. You can manage your Nostr key from your account settings.",
           "description": {
             "warning": "Recovery phrase cannot recover this wallet or funds in it. It only recovers the identity you can use across aforementioned protocols",
