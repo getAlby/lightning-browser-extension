@@ -29,7 +29,7 @@ interface Config {
   headers?: Headers; // optional for backward compatibility
   apiCompatibilityMode?: boolean; // optional for backward compatibility
   accessToken?: string; // only present in old connectors
-  currency?: GaloyCurrencies; // default is BTC
+  currency: GaloyCurrencies; // default is BTC
 }
 
 class Galoy implements Connector {
@@ -47,6 +47,7 @@ class Galoy implements Connector {
         config.apiCompatibilityMode !== undefined
           ? config.apiCompatibilityMode
           : true,
+      currency: config.currency || "BTC",
     };
   }
 
@@ -66,11 +67,11 @@ class Galoy implements Connector {
     return Promise.resolve();
   }
 
-  toFiatInt(amount: number, currency: GaloyCurrencies): number {
+  toFiatCents(amount: number): number {
     return Math.round(amount * 100);
   }
 
-  toFiatFloat(amount: number, currency: GaloyCurrencies): number {
+  fromFiatCents(amount: number): number {
     return amount / 100;
   }
 
@@ -199,12 +200,12 @@ class Galoy implements Connector {
       const targetWallet = wallets.find((w) => w.id === this.config.walletId);
 
       if (targetWallet) {
-        if (targetWallet.walletCurrency !== (this.config.currency || "BTC")) {
+        if (targetWallet.walletCurrency !== this.config.currency) {
           throw new Error(
             "Wallet currency does not match the account currency. " +
               targetWallet.walletCurrency +
               " != " +
-              (this.config.currency || "BTC")
+              this.config.currency
           );
         }
 
@@ -213,17 +214,14 @@ class Galoy implements Connector {
           // Determine transaction type based on the direction field
           const transactionType: "received" | "sent" =
             tx.direction === "RECEIVE" ? "received" : "sent";
-          const currency = targetWallet.walletCurrency || "BTC";
+          const currency = targetWallet.walletCurrency;
           // Do not display a double negative if sent
           let absSettlementAmount = Math.abs(tx.settlementAmount);
           let displayAmount: [number, ACCOUNT_CURRENCIES] | undefined =
             undefined;
           if (currency !== "BTC") {
             const rate = await getCurrencyRateWithCache(CURRENCIES[currency]);
-            absSettlementAmount = this.toFiatFloat(
-              absSettlementAmount,
-              currency
-            );
+            absSettlementAmount = this.fromFiatCents(absSettlementAmount);
             displayAmount = [absSettlementAmount, CURRENCIES[currency]];
             absSettlementAmount = Math.floor(absSettlementAmount / rate);
           }
@@ -281,19 +279,19 @@ class Galoy implements Connector {
         (w: GaloyWallet) => w.id === this.config.walletId
       );
       if (targetWallet) {
-        if (targetWallet.walletCurrency !== (this.config.currency || "BTC")) {
+        if (targetWallet.walletCurrency !== this.config.currency) {
           throw new Error(
             "Wallet currency does not match the account currency. " +
               targetWallet.walletCurrency +
               " != " +
-              (this.config.currency || "BTC")
+              this.config.currency
           );
         }
 
         const currency = targetWallet.walletCurrency;
         const balance =
           currency !== "BTC"
-            ? this.toFiatFloat(targetWallet.balance, currency)
+            ? this.fromFiatCents(targetWallet.balance)
             : targetWallet.balance;
 
         return {
@@ -458,12 +456,12 @@ class Galoy implements Connector {
         if (wallet === undefined) {
           throw new Error("Bad data received.");
         }
-        if (wallet.walletCurrency !== (this.config.currency || "BTC")) {
+        if (wallet.walletCurrency !== this.config.currency) {
           throw new Error(
             "Wallet currency does not match the account currency. " +
               wallet.walletCurrency +
               " != " +
-              (this.config.currency || "BTC")
+              this.config.currency
           );
         }
 
@@ -497,26 +495,22 @@ class Galoy implements Connector {
   }
 
   async makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse> {
-    const mutationName =
-      this.config.currency == "USD" ? "LnUsdInvoiceCreate" : "lnInvoiceCreate";
-    const inputTypeName =
-      this.config.currency == "USD"
-        ? "LnUsdInvoiceCreateInput"
-        : "LnInvoiceCreateInput";
-    const fun =
-      this.config.currency == "USD" ? "lnUsdInvoiceCreate" : "lnInvoiceCreate";
-    const currency = this.config.currency || "BTC";
-
-    let amountSats = Number(args.amount);
-    if (currency !== "BTC") {
-      const rate = await getCurrencyRateWithCache(CURRENCIES[currency]);
-      amountSats = this.toFiatInt(amountSats * rate, currency);
-    }
+    const isUSD = this.config.currency == "USD";
+    const mutationName = isUSD
+      ? "LnUsdInvoiceBtcDenominatedCreateOnBehalfOfRecipient"
+      : "LnInvoiceCreate";
+    const inputTypeName = isUSD
+      ? "LnUsdInvoiceBtcDenominatedCreateOnBehalfOfRecipientInput"
+      : "LnInvoiceCreateInput";
+    const invoiceCreateFunction = isUSD
+      ? "lnUsdInvoiceBtcDenominatedCreateOnBehalfOfRecipient"
+      : "lnInvoiceCreate";
+    const amountSats = Number(args.amount);
 
     const query = {
       query: `
         mutation ${mutationName}($input: ${inputTypeName}!) {
-          ${fun}(input: $input) {
+          ${invoiceCreateFunction}(input: $input) {
             invoice {
               paymentRequest
               paymentHash
@@ -531,22 +525,23 @@ class Galoy implements Connector {
             `,
       variables: {
         input: {
-          walletId: this.config.walletId,
+          walletId: !isUSD ? this.config.walletId : undefined,
+          recipientWalletId: isUSD ? this.config.walletId : undefined,
           amount: amountSats,
           memo: args.memo,
         },
       },
     };
     return this.request(query).then(({ data, errors }) => {
-      const errs = errors || data[fun].errors;
+      const errs = errors || data[invoiceCreateFunction].errors;
       if (errs && errs.length) {
         throw new Error(errs[0].message || JSON.stringify(errs));
       }
 
       return {
         data: {
-          paymentRequest: data[fun].invoice.paymentRequest,
-          rHash: data[fun].invoice.paymentHash,
+          paymentRequest: data[invoiceCreateFunction].invoice.paymentRequest,
+          rHash: data[invoiceCreateFunction].invoice.paymentHash,
         },
       };
     });
