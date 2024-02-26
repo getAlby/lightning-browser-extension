@@ -23,9 +23,10 @@ const get = async (message: MessageAccountGet) => {
     nostrEnabled: !!account.nostrPrivateKey,
     hasMnemonic: !!account.mnemonic,
     // for existing accounts consider mnemonic backup already done
-    isMnemonicBackupDone: account.isMnemonicBackupDone
-      ? account.isMnemonicBackupDone
-      : true,
+    isMnemonicBackupDone:
+      account.isMnemonicBackupDone != undefined
+        ? account.isMnemonicBackupDone
+        : true,
     // Note: undefined (default for new accounts) it is also considered imported
     hasImportedNostrKey: account.hasImportedNostrKey !== false,
     bitcoinNetwork: account.bitcoinNetwork || "bitcoin",
