@@ -537,7 +537,6 @@
             "protocols": {
               "nostr": "Nostr"
             },
-            "title": "Sichere deine Wiederherstellungsphrase",
             "save": "Hauptschlüssel speichern",
             "button": "Zeige Wiederherstellungsphrase",
             "warning": "⚠️ Vergesse nicht, deine Wiederherstellungsphrase zu sichern! Wird sie nicht gesichert, kann dies dazu führen, dass du den Zugang zu deinem Hauptschlüssel, dein Nostr-Identität oder den von dir mit diesem Schlüssel verwalteten Assets dauerhaft verlierst.",

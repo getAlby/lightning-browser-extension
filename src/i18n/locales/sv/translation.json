@@ -351,7 +351,6 @@
             "description": "Master Key låter dig interagera med olika protokoll som: Nostr, baslager av Bitcoin eller LNURL-Auth."
           },
           "backup": {
-            "title": "Säkerhetskopiera din återställningsfras",
             "save": "Spara huvudnyckeln",
             "button": "Visa återställningsfras",
             "protocols": {

@@ -329,7 +329,6 @@
             "error_confirm": "Prosim potrdi, da si naredil varnostno kopijo obnovitvene fraze."
           },
           "backup": {
-            "title": "Varnostno kopiraj obnovitveno frazo",
             "save": "Shrani Glavni ključ",
             "button": "Poglej obnovitveno frazo",
             "items": {

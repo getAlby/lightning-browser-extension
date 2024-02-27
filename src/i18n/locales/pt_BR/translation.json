@@ -398,7 +398,6 @@
             "protocols": {
               "nostr": "Nostr"
             },
-            "title": "Backup de sua frase de recuperação",
             "warning": "⚠️ Não se esqueça de fazer backup de sua frase de recuperação! Não fazer o backup pode resultar na perda permanente do acesso à sua chave mestra, identidade Nostr ou ativos que você gerencia com esta chave.",
             "description": "Anote a frase de recuperação para poder restaurar sua chave mestra em um novo dispositivo ou caso perca o acesso à sua conta.",
             "items": {
