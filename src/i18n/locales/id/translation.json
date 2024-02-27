@@ -309,7 +309,6 @@
             "error_confirm": "Silakan konfirmasi bahwa kamu telah mencadangkan recovery phrase."
           },
           "backup": {
-            "title": "Cadangkan recovery phrase kamu",
             "save": "Simpan Master Key",
             "button": "Lihat recovery phrase",
             "warning": "⚠️ Jangan lupa untuk mencadangkan recovery phrase! tidak mempunyai cadangannya akan mungkin menyebabkan kehilangan akses secara permanen terhadap Master Key, identitas Nostr atau aset lainnya yang menggunakan kunci ini.",
@@ -328,9 +327,7 @@
             "button": "Impor Master Key",
             "description": "Gunakan recovery phrase untuk impor Master Key kamu ke Alby."
           },
-          "inputs": {
-            "title": "Recovery Phrase"
-          },
+          "inputs": {},
           "lnurl": {
             "title": "Masuk dengan Lightning",
             "use_mnemonic": "Gunakan Master Key untuk masuk pada aplikasi yang telah terintegrasi dengan Lightning (LNURL Auth)"

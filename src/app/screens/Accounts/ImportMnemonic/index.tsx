@@ -85,12 +85,12 @@ function ImportMnemonic() {
             <Alert type="info">{t("existing_nostr_key_notice")}</Alert>
           )}
           <MnemonicInputs mnemonic={mnemonic} setMnemonic={setMnemonic} />
-        </ContentBox>
 
-        <div className="flex justify-center my-6 gap-4">
-          <Button label={tCommon("actions.cancel")} onClick={cancelImport} />
-          <Button label={t("import.button")} primary onClick={importKey} />
-        </div>
+          <div className="flex justify-center mt-6 gap-4">
+            <Button label={tCommon("actions.cancel")} onClick={cancelImport} />
+            <Button label={t("import.button")} primary onClick={importKey} />
+          </div>
+        </ContentBox>
       </Container>
     </div>
   );

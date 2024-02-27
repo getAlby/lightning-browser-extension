@@ -60,7 +60,6 @@
             "description": "Master Key ช่วยให้คุณโต้ตอบกับโปรโตคอลต่างๆ เช่น Nostr, เลเยอร์พื้นฐานของ Bitcoin หรือ LNURL-Auth"
           },
           "backup": {
-            "title": "สำรอง recovery phase ของคุณ",
             "save": "บันทึก Master Key",
             "button": "ดู recovery phrase",
             "warning": "⚠️อย่าลืมสำรอง recovery phrase ของคุณ! การไม่สำรองข้อมูลอาจทำให้คุณสูญเสียการเข้าถึง Master Key, ข้อมูลประจำตัว Nostr หรือ สินทรัพย์ที่คุณจัดการด้วยคีย์นี้อย่างถาวร",
@@ -79,9 +78,7 @@
             "description": "ใช้ recovery phrase เพื่อนำ Master Key ของคุณเข้าสู่ Alby",
             "button": "นำเข้า Master Key"
           },
-          "inputs": {
-            "title": "Recovery Phrase"
-          },
+          "inputs": {},
           "lnurl": {
             "title": "เข้าสู่ระบบด้วย Lightning",
             "use_mnemonic": "ใช้ Master Key เพื่อลงชื่อเข้าใช้แอปพลิเคชันที่ใช้ Lightning (LNURL Auth)"

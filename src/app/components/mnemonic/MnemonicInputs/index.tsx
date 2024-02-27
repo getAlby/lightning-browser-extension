@@ -2,12 +2,14 @@ import { wordlist } from "@scure/bip39/wordlists/english";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import PasswordViewAdornment from "~/app/components/PasswordViewAdornment";
+import Checkbox from "~/app/components/form/Checkbox";
 import Input from "~/app/components/form/Input";
 
 type MnemonicInputsProps = {
   mnemonic?: string;
   setMnemonic?(mnemonic: string): void;
   readOnly?: boolean;
+  isConfirmed?: (confirmed: boolean) => void;
 };
 
 export default function MnemonicInputs({
@@ -15,6 +17,7 @@ export default function MnemonicInputs({
   setMnemonic,
   readOnly,
   children,
+  isConfirmed,
 }: React.PropsWithChildren<MnemonicInputsProps>) {
   const { t } = useTranslation("translation", {
     keyPrefix: "accounts.account_view.mnemonic",
@@ -22,6 +25,7 @@ export default function MnemonicInputs({
   const [revealedIndex, setRevealedIndex] = useState<number | undefined>(
     undefined
   );
+  const [hasConfirmedBackup, setHasConfirmedBackup] = useState(false);
 
   const words = mnemonic?.split(" ") || [];
   while (words.length < 12) {
@@ -32,7 +36,7 @@ export default function MnemonicInputs({
   }
 
   return (
-    <div className="border border-gray-200 dark:border-neutral-700 rounded-lg p-6 flex flex-col gap-4 items-center justify-center">
+    <div className="border border-gray-200 dark:border-neutral-700 rounded-2xl p-6 flex flex-col gap-4 items-center justify-center">
       <h3 className="text-lg font-semibold dark:text-white">
         {t("inputs.title")}
       </h3>
@@ -42,10 +46,10 @@ export default function MnemonicInputs({
           const inputId = `mnemonic-word-${i}`;
           return (
             <div key={i} className="flex justify-center items-center gap-2">
-              <span className="text-gray-600 dark:text-neutral-400 text-right">
+              <span className="w-6 text-gray-600 dark:text-neutral-400">
                 {i + 1}.
               </span>
-              <div className="relative">
+              <div className="w-full">
                 <Input
                   id={inputId}
                   autoFocus={!readOnly && i === 0}
@@ -53,7 +57,7 @@ export default function MnemonicInputs({
                   onBlur={() => setRevealedIndex(undefined)}
                   readOnly={readOnly}
                   block={false}
-                  className="w-32 text-center"
+                  className="w-full text-center"
                   list={readOnly ? undefined : "wordlist"}
                   value={isRevealed ? word : word.length ? "•••••" : ""}
                   onChange={(e) => {
@@ -92,6 +96,26 @@ export default function MnemonicInputs({
         </datalist>
       )}
       {children}
+
+      {isConfirmed && (
+        <div className="flex items-center justify-center mt-4">
+          <Checkbox
+            id="has_backed_up"
+            name="Backup confirmation checkbox"
+            checked={hasConfirmedBackup}
+            onChange={(event) => {
+              setHasConfirmedBackup(event.target.checked);
+              if (isConfirmed) isConfirmed(event.target.checked);
+            }}
+          />
+          <label
+            htmlFor="has_backed_up"
+            className="cursor-pointer ml-2 block text-sm text-gray-900 font-medium dark:text-white"
+          >
+            {t("confirm")}
+          </label>
+        </div>
+      )}
     </div>
   );
 }

@@ -24,7 +24,7 @@ const get = async (message: MessageAccountGet) => {
     hasMnemonic: !!account.mnemonic,
     // for existing accounts consider mnemonic backup already done
     isMnemonicBackupDone:
-      account.isMnemonicBackupDone != undefined
+      account.isMnemonicBackupDone !== undefined
         ? account.isMnemonicBackupDone
         : true,
     // Note: undefined (default for new accounts) it is also considered imported
