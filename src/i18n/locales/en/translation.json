@@ -418,28 +418,32 @@
           "title": "🔑 Key Management",
           "saved": "Master Key encrypted & saved successfully.",
           "existing_nostr_key_notice": "ℹ️ This account already has a nostr private key set and will not be derived from this Master Key. You can manage your Nostr key from your account settings.",
+          "description": {
+            "warning": "Recovery phrase cannot recover this wallet or funds in it. It only recovers the identity you can use across aforementioned protocols",
+            "secure_recovery_phrase": "Make sure to write them down somewhere safe and and keep them private",
+            "recovery_phrase": "Recovery phrase is set of 12 words that backs up your Master Key"
+          },
+          "confirm": "I've backed up the recovery phrase to my Master Key in a private and secure place.",
+          "error_confirm": "Please confirm that you have backed up the recovery phrase.",
           "new": {
-            "title": "What is a Master Key?"
+            "title": "What is a Master Key?",
+            "items": {
+              "keys": "Master Key is your identity that allows you to interact with protocols like Nostr, Liquid Network or base layer of bitcoin",
+              "usage": "You can import and use the same Master Key in each connected wallet in the Alby Extension",
+              "recovery_phrase": "To import your Master Key to any wallet in Alby, you need to use a recovery phrase"
+            }
           },
           "generate": {
             "title": "Generate new Master Key",
             "description": "Master Key allows you to interact with various protocols such as: Nostr, base layer of Bitcoin or LNURL-Auth.",
-            "button": "Generate Master Key",
-            "confirm": "I've backed up the recovery phrase to my Master Key in a private and secure place.",
-            "error_confirm": "Please confirm that you have backed up the recovery phrase."
+            "button": "Generate Master Key"
           },
           "backup": {
-            "title": "Back up your recovery phrase",
+            "title": "Back up your Master Key",
             "save": "Save Master Key",
             "button": "View recovery phrase",
             "warning": "⚠️ Don't forget to back up your recovery phrase! Not backing it up might result in permanently losing access to your Master Key, Nostr identity or assets you manage with this key.",
             "description": "Write down the recovery phrase to be able to restore your Master Key on a new device or in case you lose access to your account.",
-            "items": {
-              "keys": "Master Key allows you to interact with various protocols such as: Nostr, Liquid or base layer of Bitcoin.",
-              "recovery_phrase": "You can always access your Master Key by using it's recovery phrase.",
-              "words": "Recovery phrase is set of 12 words that works like a password, however it can't be changed or reset in case it's lost.",
-              "storage": "Make sure to write it down somewhere safe and private!"
-            },
             "protocols": {
               "nostr": "Nostr"
             }
@@ -450,7 +454,7 @@
             "button": "Import Master Key"
           },
           "inputs": {
-            "title": "Recovery Phrase"
+            "title": "Recovery phrase to your Master Key"
           },
           "lnurl": {
             "title": "Login with Lightning",
@@ -1022,6 +1026,7 @@
       "cancel": "Cancel",
       "confirm": "Confirm",
       "continue": "Continue",
+      "finish": "Finish",
       "connect": "Connect",
       "lock": "Lock",
       "unlock": "Unlock",
