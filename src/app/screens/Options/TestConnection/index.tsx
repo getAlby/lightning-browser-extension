@@ -1,5 +1,6 @@
 import Button from "@components/Button";
 import Loading from "@components/Loading";
+import { PopiconsBadgeCheckSolid } from "@popicons/react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -106,15 +107,9 @@ export default function TestConnection() {
 
             {accountInfo && accountInfo.alias && (
               <div>
-                <div className="flex space-x-2">
-                  <h1 className="text-2xl font-bold text-green-bitcoin">
-                    {tCommon("success")}
-                  </h1>
-                  <img
-                    src="assets/icons/star.svg"
-                    alt="image"
-                    className="w-8"
-                  />
+                <div className="flex space-x-2 items-center text-green-bitcoin">
+                  <PopiconsBadgeCheckSolid className="w-8 h-8" />
+                  <h1 className="text-2xl font-bold">{tCommon("success")}</h1>
                 </div>
 
                 <p className="mt-6 dark:text-gray-400"></p>

@@ -26,9 +26,7 @@
         "contact_support": "If you need help please contact support@getalby.com",
         "actions": {
           "delete_edit_account": "Delete invalid account and edit again"
-        },
-        "account_name": "Account Name: {{accountName}}",
-        "alias": "Alias: {{alias}}"
+        }
       },
       "pin_extension": {
         "title": "Pin your Alby extension",
