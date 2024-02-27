@@ -1,9 +1,7 @@
 {
   "translation": {
     "welcome": {
-      "title": "歡迎來到Alby",
       "set_password": {
-        "description": "此密碼將允許你在此設備上解鎖 Alby。它無法恢復，但可以稍後更改。",
         "choose_password": {
           "label": "選擇解鎖密碼："
         },
@@ -84,7 +82,6 @@
       },
       "lnc": {
         "title": "Lightning Terminal (LNC)",
-        "page": {},
         "pairing_phrase": {
           "label": "你的配對短語 ",
           "placeholder": "secret stack sats phrase"
@@ -208,7 +205,6 @@
       },
       "btcpay": {
         "title": "BTCPay Server",
-        "page": {},
         "config": {
           "label": "配置數據"
         },

@@ -1,9 +1,7 @@
 {
   "translation": {
     "welcome": {
-      "title": "Witaj w Alby",
       "set_password": {
-        "description": "To hasło pozwoli odblokować rozszerzenie Alby na tym urządzeniu. Nie można go odzyskać ale może być zmienione później.",
         "choose_password": {
           "label": "Wybierz hasło blokady:"
         },
@@ -86,7 +84,6 @@
       },
       "lnc": {
         "title": "Lightning Terminal (LNC)",
-        "page": {},
         "pairing_phrase": {
           "label": "Twoja fraza parująca ",
           "placeholder": "tajna fraza stosu satsów"
@@ -216,7 +213,6 @@
       },
       "btcpay": {
         "title": "BTCPay Server",
-        "page": {},
         "config": {
           "label": "Date konfiguracyjne"
         },

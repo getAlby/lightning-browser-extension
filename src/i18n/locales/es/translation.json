@@ -2,7 +2,6 @@
   "translation": {
     "welcome": {
       "set_password": {
-        "description": "Este código te permitirá desbloquear Alby en este dispositivo. No se puede recuperar, pero se puede cambiar más tarde.",
         "choose_password": {
           "label": "Elige un código de desbloqueo:"
         },
@@ -26,7 +25,6 @@
           "delete_edit_account": "Eliminar una cuenta no válida y volver a editarla"
         }
       },
-      "title": "Bienvenido a Alby",
       "pin_extension": {
         "title": "Fija tu extensión Alby",
         "description": "Ya casi lo has conseguido. Para utilizar Alby cómodamente, recuerda anclar tu extensión a la barra de herramientas del navegador:",
@@ -158,7 +156,6 @@
       },
       "btcpay": {
         "title": "Servidor BTCPay",
-        "page": {},
         "config": {
           "label": "Datos de configuración"
         },
@@ -213,7 +210,6 @@
         }
       },
       "lnc": {
-        "page": {},
         "title": "Lightning Terminal (LNC)",
         "pairing_phrase": {
           "label": "Tu frase vinculada. ",

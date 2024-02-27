@@ -1,9 +1,7 @@
 {
   "translation": {
     "welcome": {
-      "title": "Velkommen til Alby",
       "set_password": {
-        "description": "Dette kodeord bruges til at beskytte din wallet og giver adgang til browserudvidelsen. Det kan ikke nulstilles, og er ikke den samme som adgangskoden til din Alby-konto.",
         "choose_password": {
           "label": "Vælg en nøglekode:"
         },
@@ -77,7 +75,6 @@
       },
       "lnc": {
         "title": "LND med LNC",
-        "page": {},
         "pairing_phrase": {
           "label": "Din forbindelseskode ",
           "placeholder": "hemmelig kode til sats-samlingen"
@@ -201,7 +198,6 @@
       },
       "btcpay": {
         "title": "BTCPay Server",
-        "page": {},
         "config": {
           "label": "Konfigurationsoplysninger"
         },

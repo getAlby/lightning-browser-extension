@@ -2,7 +2,6 @@
   "translation": {
     "welcome": {
       "set_password": {
-        "description": "Ĉi tiu pasvorto estas uzata por protekti vian monujon kaj havigi aliron al la retumila etendo. Ĝi ne povas esti rekomencigita kaj estas aparta de la pasvorto de via Alby Account",
         "choose_password": {
           "label": "Elektu malŝlosan pasvorton:"
         },
@@ -170,7 +169,6 @@
       },
       "btcpay": {
         "title": "BTCPay-servilo",
-        "page": {},
         "config": {
           "label": ""
         },

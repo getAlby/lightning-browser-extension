@@ -101,7 +101,6 @@
           "label": "Podatki o konfiguraciji"
         },
         "title": "BTCPay Server",
-        "page": {},
         "errors": {
           "connection_failed": "Neuspešna povezava. Je BTCPay URL povezava pravilna in dostopna?"
         }
@@ -139,7 +138,6 @@
       },
       "lnc": {
         "title": "Terminal Lightning (LNC)",
-        "page": {},
         "pairing_phrase": {
           "label": "Tvoja fraza za spajanje ",
           "placeholder": "skrivna fraza za stack sats"
@@ -223,14 +221,12 @@
       }
     },
     "welcome": {
-      "title": "Dobrodošli v Alby",
       "set_password": {
         "errors": {
           "enter_password": "Prosim vpiši kodo.",
           "mismatched_password": "Gesli se ne ujemata.",
           "confirm_password": "Prosim potrdi svoje geslo."
         },
-        "description": "Ta koda omogoča odklep Alby na tej napravi. Kode ne moreš resetirati, zato si jo zapomni, lahko pa jo kasneje spremeniš.",
         "choose_password": {
           "label": "Izberi kodo za odklepanje:"
         },

@@ -2,7 +2,6 @@
   "translation": {
     "welcome": {
       "set_password": {
-        "description": "Detta lösenord låter dig låsa upp Alby på den här enheten. Det kan inte återställas, men kan ändras senare.",
         "choose_password": {
           "label": "Välj ett lösenord för upplåsning:"
         },
@@ -26,7 +25,6 @@
           "delete_edit_account": "Radera ogiltigt konto och redigera igen"
         }
       },
-      "title": "Välkommen till Alby",
       "pin_extension": {
         "title": "Fäst din Alby extension",
         "description": "Du är nästan där. För att använda Alby bekvämt, kom ihåg att fästa ditt tillägg till webbläsarens verktygsfält:",
@@ -175,7 +173,6 @@
       },
       "btcpay": {
         "title": "BTCPay Server",
-        "page": {},
         "config": {
           "label": "Konfigurationsdata"
         },
@@ -221,8 +218,7 @@
           "placeholder": "hemlig stack sats fras",
           "label": "Din parningsfras "
         },
-        "title": "Lightning Terminal (LNC)",
-        "page": {}
+        "title": "Lightning Terminal (LNC)"
       },
       "umbrel_lightning_node": {
         "title": "Lightning Node"

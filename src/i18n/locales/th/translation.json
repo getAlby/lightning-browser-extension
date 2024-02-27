@@ -2,7 +2,6 @@
   "translation": {
     "welcome": {
       "set_password": {
-        "description": "ใช้รหัสนี้เพื่อเข้าสู่ Alby บนเครื่องนี้ รหัสผ่านนี้ไม่สามารถกู้คืนได้หากคุณลืมรหัสผ่านแต่คุณสามารถเปลี่ยนรหัสผ่านได้ภายหลัง",
         "choose_password": {
           "label": "ตั้งรหัสผ่านเข้าแอพ:"
         },
@@ -15,7 +14,6 @@
           "enter_password": "โปรดใส่รหัสผ่าน"
         }
       },
-      "title": "ยินดีต้อนรับสู่ Alby",
       "test_connection": {
         "ready": "เยี่ยมมาก คุณพร้อมลุยแล้ว!",
         "initializing": "กำลังสร้างบัญชีโปรดรอสักครู่ อาจใช้เวลาสักครู่…",
@@ -468,8 +466,7 @@
           "label": "pairing phrase ของคุณ ",
           "placeholder": "รหัสเพื่อเข้าถึงแซต"
         },
-        "title": "Lightning Terminal (LNC)",
-        "page": {}
+        "title": "Lightning Terminal (LNC)"
       },
       "lndhub_go": {
         "title": "LNDHub",
@@ -577,7 +574,6 @@
         }
       },
       "btcpay": {
-        "page": {},
         "config": {
           "label": "การกำหนดค่าข้อมูล"
         },
