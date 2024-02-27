@@ -2,8 +2,6 @@
   "translation": {
     "welcome": {
       "set_password": {
-        "title": "Einen Passcode zum Entsperren festlegen",
-        "description": "Mit diesem Passcode kannst du Alby auf diesem Gerät entsperren. Er kann nicht wiederhergestellt werden, kann aber später geändert werden.",
         "choose_password": {
           "label": "Wähle einen Passcode zum Entsperren:"
         },
@@ -14,7 +12,10 @@
         },
         "confirm_password": {
           "label": "Vergewisse dich, dass du es richtig eingegeben hast:"
-        }
+        },
+        "description1": "Lege ein Password fest, um die Alby-Erweiterung in diesem Browser zu entsperren",
+        "description2": "Das Password zum Entsperren kann nicht wiederhergestellt, aber geändert werden. ",
+        "title": "Passwort zum Entsperren der Erweiterung festlegen"
       },
       "test_connection": {
         "review_connection_details": "Bitte überprüfe deine Verbindungsdaten.",
@@ -27,7 +28,6 @@
         "connection_taking_long": "Der Verbindungsversuch dauert länger als erwartet... Sind deine Angaben korrekt? Ist deine Node erreichbar?",
         "contact_support": "Wenn du Hilfe benötigst, wende dich bitte an support@getalby.com"
       },
-      "title": "Willkommen bei Alby",
       "pin_extension": {
         "title": "Die Alby Erweiterung anpinnen",
         "description": "Fast fertig. Damit du Alby bequem nutzen kannst, musst du die Erweiterung an die Browser Symbolleiste anheften:",
@@ -148,16 +148,16 @@
           "placeholder": "http://localhost:8080"
         }
       },
-      "start9": {
+      "startos": {
         "page": {
-          "instructions": "Klicke in deinem Embassy Dashboard auf den <0>Lightning Network Daemon</0> Service.<1/>Wähle den Reiter <0>Properties</0>.<1/>Kopiere nun die <0>LND Connect REST URL.</0>",
-          "title": "Verbinden mit deinem <0>Start9 Server</0>"
+          "instructions": "Klicke in deinem StartOS Dashboard auf den <0>Lightning Network Daemon</0> Service.<1/>Wähle den Reiter <0>Properties</0>.<1/>Kopiere nun die <0>LND Connect REST URL.</0>",
+          "title": "Verbinden mit <0>StartOS</0>"
         },
         "rest_url": {
           "placeholder": "lndconnect://deinenode:8080?...",
           "label": "Indconnect REST URL"
         },
-        "title": "Start9"
+        "title": "StartOS"
       },
       "blink": {
         "title": "Blink Wallet",
@@ -181,16 +181,16 @@
       },
       "btcpay": {
         "title": "BTCPay Server",
-        "page": {
-          "title": "Verbinden mit deiner BTCPay LND Node",
-          "instructions": "Navigiere zu deinem BTCPayServer und melde dich als Administrator an. Gehe zu Servereinstellungen > Dienste > LND-Rest – Siehe Informationen. Klicke dann auf „QR-Code-Informationen anzeigen“ und kopiere die QR-Code-Daten. Füge es unten ein:"
-        },
         "config": {
           "label": "Konfigurationsdaten",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
+          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.co"
         },
         "errors": {
           "connection_failed": "Verbindung fehlgeschlagen. Ist die BTCPay Verbindungs URL korrekt und zugänglich?"
+        },
+        "page": {
+          "instructions": "Navigiere zu deinem BTCPayServer und melde dich als Administrator an. Gehe zu Servereinstellungen > Dienste > LND REST - Informationen anzeigen. Klicke dann auf \"QR-Code-Informationen anzeigen\" und kopiere die QR-Code-Daten. Fügen sie unten ein:",
+          "title": "Verbindung zu BTCPay LND"
         }
       },
       "commando": {
@@ -228,13 +228,13 @@
       "title": "Verbinde Lightning Wallet",
       "lnc": {
         "title": "Lightning Terminal (LNC)",
-        "page": {
-          "title": "Verbinden mit deiner LND Node",
-          "description": "1. Öffne Lightning Terminal und wähle <0>Lightning Node Connect</0> in der Seitenleiste.<1/> 2. Klicke auf <0>Erstelle eine neue Sitzung</0><1/>3. Beschrifte die Sitzung, wähle dann die gewünschte Berechtigung und sende sie ab<1/>4. <0>Kopiere die Pairing-Phrase</0> und füge sie hier unten ein."
-        },
         "pairing_phrase": {
           "label": "Deine pairing phrase ",
           "placeholder": "geheimer stack sats phrase"
+        },
+        "page": {
+          "title": "Anschließen an Lightning Terminal (LNC)",
+          "description": "1. Wähle in der Seitenleiste von Lightning Terminal <0>Lightning Node Connect</0>.<1/> 2. Klicke auf <0>Erstelle eine neue Sitzung</0><1/>3. Beschrifte die Sitzung, wähle die gewünschte Berechtigung und senden sie ab<1/>4. <0>Kopiere die Pairing-Phrase</0> und füge sie unten ein."
         }
       },
       "umbrel_lightning_node": {
@@ -254,6 +254,36 @@
           "setup_failed": "Einrichtung fehlgeschlagen",
           "invalid_token": "Autorisierung fehlgeschlagen. Bitte überprüfe deinen API-Schlüssel und versuche es erneut.",
           "missing_token": "Zugriffstoken fehlt, konnte sich nicht anmelden."
+        }
+      },
+      "voltage": {
+        "macaroon": {
+          "label": "Admin Macaroon (hex)"
+        },
+        "url": {
+          "label": "Node URL",
+          "placeholder": "https://your-node.m.voltageapp.io:8080"
+        },
+        "page": {
+          "title": "Verbinde dich mit Voltage Node",
+          "description": "Lightning-Node-Hosting der Enterprise-Klasse. Erreiche das Lightning Network schneller als je zuvor. Völlige Kontrolle mit null Verwaltung. <0>Erfahre mehr in unserer Einrichtungsanleitung</0>"
+        },
+        "title": "Voltage",
+        "errors": {
+          "connection_failed": "Verbindung fehlgeschlagen. Sind deine Anmeldedaten korrekt?"
+        }
+      },
+      "nwc": {
+        "title": "Nostr Wallet Verbindung",
+        "page": {
+          "url": {
+            "label": "Nostr Wallet Verbindung URL",
+            "placeholder": "nostr+walletconnect://69effe..."
+          },
+          "instructions": "Einfügen einer NWC-Verbindungszeichenfolge von <0>Alby Nostr Wallet Connect</0>, <1>Umbrel Nostr Wallet Connect</1> oder <2>Mutiny Wallet</2>",
+          "errors": {
+            "connection_failed": "Verbindung fehlgeschlagen. Ist deine NWC-Geldbörse online und die App-Verbindung aktiviert?"
+          }
         }
       }
     },
@@ -372,7 +402,25 @@
         "is_blocked_hint": "Alby ist derzeit auf dem {{host}} deaktiviert",
         "block_removed": "{{host}} aktiviert. Bitte lade die Webseite neu.",
         "see_all": "Alle sehen",
-        "no_transactions": "Noch keine Transaktionen für dieses Konto."
+        "no_transactions": "Noch keine Transaktionen für dieses Konto.",
+        "actions": {
+          "get_started": {
+            "title": "Erste Schritte mit Alby Extension",
+            "description": "Neu bei Alby Extension? Sieh dir unsere Anleitungen, Videos und Erklärungen an"
+          },
+          "backup_masterkey": {
+            "title": "Sichere dein Hauptschlüssel",
+            "description": "Erfahre, was der Master Key ist, wie er für Nostr verwendet wird und stelle sicher, dass du ein Backup erstellst"
+          },
+          "receive_bitcoin": {
+            "title": "Bitcoin erhalten",
+            "description": "Hole dir Bitcoin an deine Lightning-Adresse, eine Lightning-Rechnung oder eine Bitcoin-Adresse."
+          },
+          "import_masterkey": {
+            "title": "Importiere deinen Hauptschlüssel",
+            "description": "Wenn du bereits einen Master Key hast, kannst du ihn mit der Wiederherstellungsphrase importieren"
+          }
+        }
       },
       "allowance_view": {
         "no_transactions": "Noch keine Transaktionen auf <0>{{Name}}</0>.",
@@ -653,10 +701,9 @@
         "30078": "anwendungsspezifische Daten",
         "unknown": "kind {{kind}}"
       },
-      "peer": "Peer",
-      "allow_sign_event": "Erlaube {{Gastgeber}}, ein {{kind}} Ereignis zu unterzeichnen",
+      "allow_sign_event": "Erlaube {{Gastgeber}}, ein <0>{{kind}}</0> Ereignis zu unterzeichnen",
       "allow_encrypt": "Erlaube {{host}}, die Nachricht zu verschlüsseln:",
-      "allow_decrypt": "Erlaube {{host}}, die Nachricht zu entschlüsseln:"
+      "recipient": "Empfänger"
     },
     "confirm_request_permission": {
       "title": "Antrag genehmigen",
@@ -722,7 +769,10 @@
       "content_message": {
         "heading": "Anforderung eines Kanals von der Node"
       },
-      "success": "Kanalanfrage erfolgreich an {{name}} gesendet"
+      "success": "Kanalanfrage erfolgreich an {{name}} gesendet",
+      "private_channel": {
+        "label": "Einen privaten Channel eröffnen?"
+      }
     },
     "alby": {
       "pre_connect": {
@@ -743,45 +793,33 @@
     },
     "choose_path": {
       "other": {
-        "title": "Andere Wallets",
+        "title": "Bringe dein eigenes Wallet mit",
         "connect": "Verbinden",
-        "description": "Schließe deine vorhandene Lightning Wallet oder Node an und wähle aus verschiedenen Anschlüssen. Großartig für volle Flexibilität. Betreibe deinen eigenen Knotenpunkt."
+        "description": "Am besten, wenn du bereits eine Wallet hast oder ein hohes Zahlungsvolumen abwickeln möchtest.",
+        "point1": "Sofortiger Start, kein Warten auf eine Einladung",
+        "point4": "Kein lightning und nostr Adresse",
+        "point3": "Sowohl Selbstverwahrungs- als auch Verwahrungsoptionen",
+        "point2": "Keine Transaktions- oder Volumenbeschränkungen"
       },
       "alby": {
         "title": "Alby Konto",
         "connect": "Mit Alby verbinden",
-        "description": "Melde dich an oder nutze dein bestehendes Alby-Konto. Ideal für den schnellen Einstieg und für kleine Beträge."
-      }
-    },
-    "discover": {
-      "description": "Webseiten und Webapplikationen, auf denen du Alby verwenden kannst",
-      "title": "Erkunde das Ökosystem von Lightning ⚡️",
-      "list": {
-        "gaming": "Spiele",
-        "trading": "Handel",
-        "entertainment": "Unterhaltung",
-        "shopping": "Einkaufen",
-        "miscellaneous": "Sonstiges",
-        "showcases": "Schaukästen",
-        "nostr": "Nostr",
-        "nodeManagement": "Node-Verwaltung"
+        "description": "Ideal für Einsteiger oder alle, die ein tolles Wallet für den täglichen Gebrauch suchen.",
+        "point3": "Einrichten und Anmelden mit deiner E-Mail",
+        "point1": "Neue Anmeldungen erfordern einen Einladungscode",
+        "point4": "Eindeutige Lightning- und Nostr-Adresse",
+        "point2": "Es gelten Grenzen für das Transaktionsvolumen"
       },
-      "tips": {
-        "title": "Deine Alby Wallet ist bereit",
-        "top_up_wallet": {
-          "description": "Du möchtest deine Wallet aufladen?\nWir haben es für dich!",
-          "title": "Bitcoin kaufen"
-        },
-        "demo": {
-          "description": "Entdecke die Funktionen von Alby\nauf unserer Demo Webseite",
-          "title": "Alby Demo"
-        },
-        "description": "Hier ein paar Tipps für den Anfang 🐝",
-        "mnemonic": {
-          "title": "Nostr",
-          "description": "Generiere jetzt \n deinen Schlüssel."
-        }
-      }
+      "voltage": {
+        "point2": "Keine Transaktions- oder Volumenbeschränkungen",
+        "connect": "Verbinden",
+        "point1": "Sofortiger Start, kein Warten auf eine Einladung",
+        "point4": "Eindeutige Lightning- und Nostr-Adresse",
+        "title": "Voltage Cloud Knoten",
+        "point3": "Kostenpflichtiger Cloud-Dienst",
+        "description": "Großartig, wenn es dir nichts ausmacht, für einen Cloud-Dienst mit lightning zu bezahlen."
+      },
+      "title": "Wallet mit Alby-Erweiterung verbinden"
     },
     "transactions": {
       "title": "Transaktionen",
@@ -806,8 +844,8 @@
       "mynode": {
         "name": "myNode"
       },
-      "start9": {
-        "name": "Start9"
+      "startos": {
+        "name": "StartOS"
       }
     },
     "confirm_add_account": {
@@ -1057,15 +1095,14 @@
     "sats_one": "sat",
     "success": "Erfolgreich",
     "password": "Kennwort",
-    "advanced": "Fortgeschrittene",
     "description_full": "Vollständige Beschreibung",
     "amount": "Betrag",
     "copied": "Kopiert!",
     "description": "Beschreibung",
-    "settings": "Einstellung",
+    "settings": "Einstellungen der Erweiterung",
     "sats_other": "sats",
     "confirm_password": "Kennwort bestätigen",
-    "help": "Hilfe",
+    "help": "Alby Hilfe",
     "actions": {
       "back": "Zurück",
       "open": "Öffnen",
@@ -1101,7 +1138,7 @@
       "copied_to_clipboard": "In die Zwischenablage kopiert",
       "hide": "Ausblenden"
     },
-    "discover": "Entdecken",
+    "discover": "Apps entdecken",
     "errors": {
       "connection_failed": "Verbindung fehlgeschlagen",
       "payment_failed": "Zahlung fehlgeschlagen"
@@ -1140,7 +1177,10 @@
       "insecure_domain_warn": "⚠️ Du stellst eine Verbindung zu einer unsicheren Domäne her."
     },
     "website": "Website",
-    "apps": "Apps"
+    "apps": "Apps",
+    "full_screen": "Vollbild",
+    "hide_advanced": "Erweiterte Einstellungen ausblenden",
+    "advanced": "Erweiterte Einstellungen anzeigen"
   },
   "permissions": {
     "commando": {
@@ -1205,7 +1245,6 @@
     "nostr": {
       "getpublickey": "Lese deinen öffentlichen Schlüssel",
       "nip04decrypt": "Daten entschlüsseln",
-      "nip04encrypt": "Daten verschlüsseln",
       "signmessage": "Unterschreibe deine Nachricht mit deinem Schlüssel"
     },
     "lnc": {

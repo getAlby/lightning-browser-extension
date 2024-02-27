@@ -1,10 +1,7 @@
 {
   "translation": {
     "welcome": {
-      "title": "Velkommen til Alby",
       "set_password": {
-        "title": "Angiv en nøglekode",
-        "description": "Dette kodeord bruges til at beskytte din wallet og giver adgang til browserudvidelsen. Det kan ikke nulstilles, og er ikke den samme som adgangskoden til din Alby-konto.",
         "choose_password": {
           "label": "Vælg en nøglekode:"
         },
@@ -78,10 +75,6 @@
       },
       "lnc": {
         "title": "LND med LNC",
-        "page": {
-          "title": "Opret forbindelse til din LND-node",
-          "description": "Start en ny session i terminal (litd) for at få en ny forbindelseskode, og skriv den her"
-        },
         "pairing_phrase": {
           "label": "Din forbindelseskode ",
           "placeholder": "hemmelig kode til sats-samlingen"
@@ -168,11 +161,11 @@
           "placeholder": "lndconnect://dinnode:8080?..."
         }
       },
-      "start9": {
-        "title": "Start9",
+      "startos": {
+        "title": "StartOS",
         "page": {
-          "title": "Opret forbindelse til din <0>Embassy</0> node",
-          "instructions": "<0>Note:</0> I øjeblikket understøtter vi kun LND, men vi vil fremover også tilføje support af c-lightning!<1/>I din Embassys indstillingsmenu klikker du på servicen <0>Lightning Network Daemon</0>.<1/>Vælg fanen <0>Properties</0>.<1/>Kopier så <0>LND Connect REST URL.</0>"
+          "title": "Opret forbindelse til din <0>StartOS</0> node",
+          "instructions": "<0>Note:</0> I øjeblikket understøtter vi kun LND, men vi vil fremover også tilføje support af c-lightning!<1/>I din StartOSs indstillingsmenu klikker du på servicen <0>Lightning Network Daemon</0>.<1/>Vælg fanen <0>Properties</0>.<1/>Kopier så <0>LND Connect REST URL.</0>"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -205,13 +198,8 @@
       },
       "btcpay": {
         "title": "BTCPay Server",
-        "page": {
-          "title": "Opret forbindelse til din BTCPay LND-node",
-          "instructions": "Gå til din BTCPayServer og log på som administrator. Gå til Server Settings > Services > LND Rest - See information. Klik så på \"See QR Code information\" og kopier QR-kodens data. Indsæt dem herunder:"
-        },
         "config": {
-          "label": "Konfigurationsoplysninger",
-          "placeholder": "config=https://din-btc-pay.org/lnd-config/212121/lnd.config"
+          "label": "Konfigurationsoplysninger"
         },
         "errors": {
           "connection_failed": "Forbindelsen kunne ikke oprettes. Er BTCPay-forbindelsens URL korrekt og tilgængelig?"
@@ -503,31 +491,6 @@
         "status": "Tjek betalingsstatus"
       }
     },
-    "discover": {
-      "title": "Udforsk Lightnings ⚡️ økosystem",
-      "description": "Hjemmesider og web-apps hvor Alby kan bruges",
-      "list": {
-        "trading": "Handel",
-        "gaming": "Spil",
-        "entertainment": "Underholdning",
-        "shopping": "Indkøb",
-        "miscellaneous": "Diverse",
-        "showcases": "Eksempler",
-        "nostr": "Nostr"
-      },
-      "tips": {
-        "title": "Din Alby-wallet er klar",
-        "description": "Et par råd der får dig på vingerne🐝",
-        "top_up_wallet": {
-          "title": "⚡️ Fyld din wallet op",
-          "description": "Generer en lightning-faktura, send lidt bitcoin til dig selv og begynd at bruge Alby i lightnings økosystem"
-        },
-        "demo": {
-          "title": "🕹️ Få en prøvetur med Alby",
-          "description": "Se alle de ting, du kan med Alby på vores præsentationsside"
-        }
-      }
-    },
     "publishers": {
       "title": "Dine ⚡ hjemmesider",
       "description": "Hjemmesider, hvor du tidligere har brugt Alby",
@@ -598,7 +561,6 @@
   "common": {
     "password": "Adgangskode",
     "confirm_password": "Bekræft adgangskode",
-    "advanced": "Avanceret",
     "success": "Succes",
     "error": "Fejl",
     "settings": "Indstillinger",
@@ -732,7 +694,6 @@
   "permissions": {
     "nostr": {
       "getpublickey": "Læs din offentlige nøgle",
-      "nip04encrypt": "Krypter data",
       "nip04decrypt": "De-krypter data",
       "signmessage": "Underskriv meddelelse med din nøgle"
     },

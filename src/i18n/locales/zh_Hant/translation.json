@@ -1,10 +1,7 @@
 {
   "translation": {
     "welcome": {
-      "title": "歡迎來到Alby",
       "set_password": {
-        "title": "設置解鎖密碼",
-        "description": "此密碼將允許你在此設備上解鎖 Alby。它無法恢復，但可以稍後更改。",
         "choose_password": {
           "label": "選擇解鎖密碼："
         },
@@ -85,10 +82,6 @@
       },
       "lnc": {
         "title": "Lightning Terminal (LNC)",
-        "page": {
-          "title": "連接你的 LND 節點",
-          "description": "1. 打開 Lightning Terminal 並從側邊欄選擇 <0>Lightning Node Connect</0>。2. 點擊 <0>Create a new session</0><1/>3. 標記對話，選擇所需的權限並提交<1/>4. <0>複製配對詞句</0> 並粘貼到下方。"
-        },
         "pairing_phrase": {
           "label": "你的配對短語 ",
           "placeholder": "secret stack sats phrase"
@@ -175,11 +168,11 @@
           "placeholder": "lndconnect://yournode:8080?..."
         }
       },
-      "start9": {
-        "title": "Start9",
+      "startos": {
+        "title": "StartOS",
         "page": {
-          "title": "連接你的 <0>Start9 服务器</0>",
-          "instructions": "在你的 Embassy 儀表板上點擊 <0>Lightning Network Daemon</0> 服務。<1/>選擇 <0>Properties</0> 標籤。<1/>複製 <0>LND Connect REST URL。</0>"
+          "title": "連接你的 <0>StartOS 服务器</0>",
+          "instructions": "在你的 StartOS 儀表板上點擊 <0>Lightning Network Daemon</0> 服務。<1/>選擇 <0>Properties</0> 標籤。<1/>複製 <0>LND Connect REST URL。</0>"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -212,13 +205,8 @@
       },
       "btcpay": {
         "title": "BTCPay Server",
-        "page": {
-          "title": "連接到你的BTCPay LND節點",
-          "instructions": "導航到你的BTCPayServer並以管理員身份登錄。轉到Server Settings> LND Rest - See Information。然後點擊「See QR Code Information」並複製二維碼數據。在下面貼上："
-        },
         "config": {
-          "label": "配置數據",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
+          "label": "配置數據"
         },
         "errors": {
           "connection_failed": "連接失敗。BTCPay連接URL是否正確且可訪問？"
@@ -605,36 +593,6 @@
         "status": "查看付款狀態"
       }
     },
-    "discover": {
-      "title": "探索閃電⚡️生態系統",
-      "description": "可以使用 Alby 的網站和網絡應用程序",
-      "list": {
-        "trading": "交易",
-        "gaming": "遊戲",
-        "shopping": "購物",
-        "miscellaneous": "雜項",
-        "showcases": "展示",
-        "nostr": "Nostr",
-        "nodeManagement": "節點管理",
-        "entertainment": "娛樂"
-      },
-      "tips": {
-        "title": "你的Alby錢包已準備就緒",
-        "description": "一些讓你開始嗡嗡作响的小貼士🐝",
-        "top_up_wallet": {
-          "title": "購買比特幣",
-          "description": "需要充值？\n我們能幫忙！"
-        },
-        "demo": {
-          "title": "Alby 演示",
-          "description": "在我們的演示網站上\n發現 Alby 的所有功能"
-        },
-        "mnemonic": {
-          "description": "打算使用 Nostr？\n立即生成你的密鑰。",
-          "title": "Nostr"
-        }
-      }
-    },
     "publishers": {
       "title": "你的 ⚡ 網站",
       "description": "你曾經使用過Alby的網站",
@@ -750,8 +708,8 @@
       "mynode": {
         "name": "myNode"
       },
-      "start9": {
-        "name": "Start9"
+      "startos": {
+        "name": "StartOS"
       }
     },
     "confirm_add_account": {
@@ -840,7 +798,6 @@
   "common": {
     "password": "密碼",
     "confirm_password": "確認密碼",
-    "advanced": "高級",
     "success": "成功",
     "error": "錯誤",
     "settings": "設置",
@@ -1019,7 +976,6 @@
   "permissions": {
     "nostr": {
       "getpublickey": "讀取你的公鑰",
-      "nip04encrypt": "加密數據",
       "nip04decrypt": "解密數據",
       "signmessage": "用你的密鑰簽署消息"
     },

@@ -1,10 +1,10 @@
 {
   "translation": {
     "welcome": {
-      "title": "Welcome to Alby",
       "set_password": {
-        "title": "Set an unlock passcode",
-        "description": "This passcode will allow you to unlock Alby on this device. It cannot be recovered, but may be changed later.",
+        "title": "Set extension unlock passcode",
+        "description1": "Set a passcode to unlock Alby Extension in this browser",
+        "description2": "Unlock passcode cannot be recovered, but may be changed ",
         "choose_password": {
           "label": "Choose an unlock passcode:"
         },
@@ -109,8 +109,8 @@
       "lnc": {
         "title": "Lightning Terminal (LNC)",
         "page": {
-          "title": "Connect to your LND node",
-          "description": "1. Open Lightning Terminal and choose <0>Lightning Node Connect</0> from the sidebar.<1/> 2. Click <0>Create a new session</0><1/>3. Label the session, choose desired permissions and submit<1/>4. <0>Copy pairing phrase</0> and paste it below."
+          "title": "Connect to Lightning Terminal (LNC)",
+          "description": "1. On Lightning Terminal sidebar choose <0>Lightning Node Connect</0>.<1/> 2. Click <0>Create a new session</0><1/>3. Label the session, choose desired permissions and submit<1/>4. <0>Copy pairing phrase</0> and paste it below."
         },
         "pairing_phrase": {
           "label": "Your pairing phrase ",
@@ -198,11 +198,11 @@
           "placeholder": "lndconnect://yournode:8080?..."
         }
       },
-      "start9": {
-        "title": "Start9",
+      "startos": {
+        "title": "StartOS",
         "page": {
-          "title": "Connect to your <0>Start9 Server</0>",
-          "instructions": "On your Embassy dashboard click on the <0>Lightning Network Daemon</0> service.<1/>Select the <0>Properties</0> tab.<1/>Now copy the <0>LND Connect REST URL.</0>"
+          "title": "Connect to <0>StartOS</0>",
+          "instructions": "On your StartOS dashboard click on the <0>Lightning Network Daemon</0> service.<1/>Select the <0>Properties</0> tab.<1/>Now copy the <0>LND Connect REST URL.</0>"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -260,12 +260,12 @@
       "btcpay": {
         "title": "BTCPay Server",
         "page": {
-          "title": "Connect to your BTCPay LND node",
-          "instructions": "Navigate to your BTCPayServer and log in as an admin. Go to Server Settings > Services > LND Rest - See information. Then Click \"See QR Code information\" and copy the QR Code data. Paste it below:"
+          "title": "Connect to BTCPay LND",
+          "instructions": "Navigate to your BTCPayServer and log in as an admin. Go to Server Settings > Services > LND REST - See information. Then Click \"See QR Code information\" and copy the QR Code data. Paste it below:"
         },
         "config": {
           "label": "Config data",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
+          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.co"
         },
         "errors": {
           "connection_failed": "Connection failed. Is the BTCPay connection URL correct and accessible?"
@@ -329,7 +329,7 @@
             "placeholder": "nostr+walletconnect://69effe..."
           },
           "errors": {
-            "connection_failed": "Connection failed. Is your Core Lightning node online and using the commando plugin?"
+            "connection_failed": "Connection failed. Is your NWC wallet online and app connection enabled?"
           }
         }
       }
@@ -352,8 +352,8 @@
       "mynode": {
         "name": "myNode"
       },
-      "start9": {
-        "name": "Start9"
+      "startos": {
+        "name": "StartOS"
       }
     },
     "home": {
@@ -373,7 +373,26 @@
         "is_blocked_hint": "Alby is currently disabled on {{host}}",
         "block_removed": "Enabled {{host}}. Please reload the website.",
         "no_transactions": "No transactions for this account yet.",
-        "see_all": "See all"
+        "see_all": "See all",
+        "actions": {
+          "get_started": {
+            "title": "Get Started With Alby Extension",
+            "description": "New to Alby Extension? Check out our guides, videos, and explanations"
+          },
+          "backup_masterkey": {
+            "title": "Back up your Master Key",
+            "description": "Learn what Master Key is, how it’s used for Nostr and make sure to back up"
+          },
+
+          "receive_bitcoin": {
+            "title": "Receive bitcoin",
+            "description": "Get bitcoin to your lightning address, a lightning invoice or bitcoin address."
+          },
+          "import_masterkey": {
+            "title": "Import your Master Key",
+            "description": "If you already have a Master Key, you can import it using recovery phrase"
+          }
+        }
       }
     },
     "accounts": {
@@ -705,6 +724,9 @@
       "content_message": {
         "heading": "Request a channel from the node"
       },
+      "private_channel": {
+        "label": "Open a private channel?"
+      },
       "success": "Channel request sent successfully to {{name}}"
     },
     "lnurlwithdraw": {
@@ -770,36 +792,6 @@
     },
     "scan_qrcode": {
       "title": "Waiting to scan"
-    },
-    "discover": {
-      "title": "Explore the Lightning ⚡️ Ecosystem",
-      "description": "Websites and webapps where you can use Alby",
-      "list": {
-        "trading": "Trading",
-        "gaming": "Gaming",
-        "entertainment": "Entertainment",
-        "shopping": "Shopping",
-        "miscellaneous": "Miscellaneous",
-        "showcases": "Showcases",
-        "nostr": "Nostr",
-        "nodeManagement": "Node Management"
-      },
-      "tips": {
-        "title": "Your Alby wallet is ready",
-        "description": "A few tips to get you started buzzin'🐝",
-        "top_up_wallet": {
-          "title": "Buy Bitcoin",
-          "description": "Need a top up?\nWe got you!"
-        },
-        "demo": {
-          "title": "Alby Demo",
-          "description": "Discover Alby's features\non our demo website"
-        },
-        "mnemonic": {
-          "title": "Nostr",
-          "description": "Planning to use Nostr?\nGenerate your keys now."
-        }
-      }
     },
     "publishers": {
       "title": "Your ⚡ Websites",
@@ -941,14 +933,13 @@
       "allow": "Allow this website to:",
       "content": "This website asks you to sign:",
       "allow_sign": "Allow {{host}} to sign:",
-      "allow_sign_event": "Allow {{host}} to sign a {{kind}} event",
+      "allow_sign_event": "Allow {{host}} to sign a <0>{{kind}}</0> event",
       "allow_encrypt": "Allow {{host}} to encrypt the message:",
-      "allow_decrypt": "Allow {{host}} to decrypt the message:",
       "view_details": "View details",
       "hide_details": "Hide details",
       "block_and_ignore": "Block and ignore {{host}}",
       "block_added": "Added {{host}} to the blocklist, please reload the website.",
-      "peer": "Peer",
+      "recipient": "Recipient",
       "kinds": {
         "unknown": "kind {{kind}}",
         "0": "metadata",
@@ -994,14 +985,16 @@
   "common": {
     "password": "Password",
     "confirm_password": "Confirm Password",
-    "advanced": "Advanced",
+    "advanced": "Show advanced settings",
+    "hide_advanced": "Hide advanced settings",
     "success": "Success",
     "error": "Error",
-    "settings": "Settings",
+    "settings": "Extension Settings",
     "accounts": "Accounts",
-    "discover": "Discover",
+    "discover": "Discover Apps",
     "connected_sites": "Connected Sites",
     "wallet": "Wallet",
+    "full_screen": "Full Screen",
     "sats_one": "sat",
     "sats_other": "sats",
     "loading": "loading",
@@ -1015,7 +1008,7 @@
     "success_message": "{{amount}}{{fiatAmount}} are on their way to {{destination}}",
     "response": "Response",
     "message": "Message",
-    "help": "Help",
+    "help": "Alby Guides",
     "balance": "Balance",
     "or": "or",
     "website": "Website",
@@ -1199,7 +1192,6 @@
     "nostr": {
       "getpublickey": "Read your public key",
       "signmessage": "Sign message with your key",
-      "nip04encrypt": "Encrypt data",
       "nip04decrypt": "Decrypt data"
     },
     "bitcoin": {

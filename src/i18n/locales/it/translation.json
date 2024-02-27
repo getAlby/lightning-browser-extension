@@ -2,8 +2,6 @@
   "translation": {
     "welcome": {
       "set_password": {
-        "title": "Imposta una password di sblocco",
-        "description": "Questa password serve a proteggere il tuo wallet e a fornirti l'accesso all'estensione del browser. Non può essere reimpostata ed è differente dalla password dell'account Alby.",
         "choose_password": {
           "label": "Scegli una password di sblocco:"
         },
@@ -26,8 +24,7 @@
         "actions": {
           "delete_edit_account": "Elimina l'account invalido e modificalo di nuovo"
         }
-      },
-      "title": "Benvenuto su Alby"
+      }
     },
     "choose_connector": {
       "description": "Connettiti al tuo wallet lightning esterno o al tuo nodo",
@@ -130,11 +127,11 @@
           "placeholder": "lndconnect://tuonodo:8080?..."
         }
       },
-      "start9": {
-        "title": "Start9",
+      "startos": {
+        "title": "StartOS",
         "page": {
-          "title": "Collega il tuo nodo Embassy",
-          "instructions": "<0>Nota:</0> Al momento supportiamo solamente LND, aggiungeremo il supporto per c-lightning in futuro!<1/>Nella dashboard di Embassy clicca sul servizio <0>Lightning Network Daemon</0>.<1/>Seleziona il tab <0>Proprieta'</0>.<1/>Adesso copia l'<0>LND Connect REST URL.</0>"
+          "title": "Collega il tuo nodo StartOS",
+          "instructions": "<0>Nota:</0> Al momento supportiamo solamente LND, aggiungeremo il supporto per c-lightning in futuro!<1/>Nella dashboard di StartOS clicca sul servizio <0>Lightning Network Daemon</0>.<1/>Seleziona il tab <0>Proprieta'</0>.<1/>Adesso copia l'<0>LND Connect REST URL.</0>"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -167,13 +164,8 @@
       },
       "btcpay": {
         "title": "BTCPay Server",
-        "page": {
-          "title": "Connettiti al tuo nodo LND BTCPay",
-          "instructions": "Vai al tuo BTCPayServer e accedi come amministratore. Vai su Impostazioni server > Servizi > LND Rest - See information. Quindi fai clic su \"Visualizza informazioni sul codice QR\" e copia i dati del codice QR. Incollali qui sotto:"
-        },
         "config": {
-          "label": "Dati di configurazione",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
+          "label": "Dati di configurazione"
         },
         "errors": {
           "connection_failed": "Connessione fallita. L'URL di connessione a BTCPay è corretto e accessibile?"
@@ -213,10 +205,6 @@
       },
       "title": "Connetti il Wallet Lightning",
       "lnc": {
-        "page": {
-          "description": "Crea una nuova sessione nel terminale (litd) per ottenere una nuova frase di accoppiamento ed inseriscila qui",
-          "title": "Connettiti al tuo nodo LND"
-        },
         "pairing_phrase": {
           "label": "La tua frase di accoppiamento ",
           "placeholder": "frase segreta di stack sats"
@@ -568,31 +556,6 @@
       "always_allow": "Ricorda la mia scelta e non chiederlo più",
       "title": "Approva Richiesta",
       "allow": "Consentire l'esecuzione di questo sito:"
-    },
-    "discover": {
-      "list": {
-        "trading": "Trading",
-        "gaming": "Gaming",
-        "entertainment": "Intrattenimento",
-        "miscellaneous": "Altro",
-        "showcases": "Vetrine",
-        "nostr": "Nostr",
-        "shopping": "Shopping"
-      },
-      "tips": {
-        "description": "Qualche suggerimento per iniziare a ronzare 🐝",
-        "top_up_wallet": {
-          "title": "⚡️ Ricarica il tuo wallet",
-          "description": "Crea una fattura lightning, inviati qualche bitcoin e inizia ad usare Alby nell'ecosistema lightning"
-        },
-        "demo": {
-          "title": "🕹️ Prova la Demo di Alby",
-          "description": "Scopri tutto quello che puoi fare con Alby sul nostro sito demo"
-        },
-        "title": "Il tuo wallet Alby è pronto"
-      },
-      "title": "Esplora l'Ecosistema Lightning ⚡️",
-      "description": "Siti e webapp dove puoi usare Alby"
     }
   },
   "common": {
@@ -644,8 +607,7 @@
     "success_message": "{{amount}}{{fiatAmount}} inviati a {{destination}}",
     "accounts": "Account",
     "discover": "Scopri",
-    "confirm_password": "Conferma la Password",
-    "advanced": "Avanzate"
+    "confirm_password": "Conferma la Password"
   },
   "components": {
     "allowance_menu": {
@@ -810,7 +772,6 @@
     "nostr": {
       "nip04decrypt": "Decripta i dati",
       "getpublickey": "Leggi la tua chiave pubblica",
-      "nip04encrypt": "Cripta i dati",
       "signmessage": "Firma il messaggio con la tua chiave"
     }
   }

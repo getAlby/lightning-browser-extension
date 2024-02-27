@@ -3,7 +3,7 @@ import Loading from "@components/Loading";
 import PublishersTable from "@components/PublishersTable";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Button from "~/app/components/Button";
 import toast from "~/app/components/Toast";
 import msg from "~/common/lib/msg";
@@ -67,9 +67,13 @@ function Publishers() {
           ) : (
             <>
               <p className="dark:text-white mb-4"> {t("no_info")}</p>
-              <Link to="/discover">
-                <Button primary label={t("discover")} />
-              </Link>
+              <Button
+                primary
+                label={t("discover")}
+                onClick={() =>
+                  window.open(`https://getalby.com/discover`, "_blank")
+                }
+              />
             </>
           )}
         </>

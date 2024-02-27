@@ -2,8 +2,6 @@
   "translation": {
     "welcome": {
       "set_password": {
-        "title": "Ange ett lösenord för upplåsning",
-        "description": "Detta lösenord låter dig låsa upp Alby på den här enheten. Det kan inte återställas, men kan ändras senare.",
         "choose_password": {
           "label": "Välj ett lösenord för upplåsning:"
         },
@@ -27,7 +25,6 @@
           "delete_edit_account": "Radera ogiltigt konto och redigera igen"
         }
       },
-      "title": "Välkommen till Alby",
       "pin_extension": {
         "title": "Fäst din Alby extension",
         "description": "Du är nästan där. För att använda Alby bekvämt, kom ihåg att fästa ditt tillägg till webbläsarens verktygsfält:",
@@ -136,11 +133,11 @@
           "placeholder": "lndconnect://yournode:8080?..."
         }
       },
-      "start9": {
-        "title": "Start9",
+      "startos": {
+        "title": "StartOS",
         "page": {
-          "title": "Anslut till din <0>Start9 Server</0>",
-          "instructions": "På din Embassy instrumentpanel klickar du på tjänsten <0>Lightning Network Daemon</0>.<1/>Välj fliken <0>Egenskaper</0>.<1/>Kopiera nu <0>LND Connect REST URL. </0>"
+          "title": "Anslut till din <0>StartOS Server</0>",
+          "instructions": "På din StartOS instrumentpanel klickar du på tjänsten <0>Lightning Network Daemon</0>.<1/>Välj fliken <0>Egenskaper</0>.<1/>Kopiera nu <0>LND Connect REST URL. </0>"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -176,13 +173,8 @@
       },
       "btcpay": {
         "title": "BTCPay Server",
-        "page": {
-          "title": "Anslut din BTCPay LND-nod",
-          "instructions": "Navigera till din BTCPayServer och logga in som administratör. Gå till Server Settings > Services > LND Rest - See information. Klicka på \"See QR Code information\" och kopiera QR-koddatan. Klistra in nedan:"
-        },
         "config": {
-          "label": "Konfigurationsdata",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
+          "label": "Konfigurationsdata"
         },
         "errors": {
           "connection_failed": "Anslutning misslyckades. Är URL till BTCPay-anslutningen korrekt och tillgänglig?"
@@ -226,11 +218,7 @@
           "placeholder": "hemlig stack sats fras",
           "label": "Din parningsfras "
         },
-        "title": "Lightning Terminal (LNC)",
-        "page": {
-          "title": "Anslut till din LND node",
-          "description": "1. Öppna Lightning Terminal och välj <0>Lightning Node Connect</0> från sidofältet.<1/> 2. Klicka på <0>Skapa en ny session</0><1/>3. Märk sessionen, välj önskade behörigheter och skicka in<1/>4. <0>Kopiera parningsfras</0> och klistra in den nedan."
-        }
+        "title": "Lightning Terminal (LNC)"
       },
       "umbrel_lightning_node": {
         "title": "Lightning Node"
@@ -724,36 +712,6 @@
         }
       }
     },
-    "discover": {
-      "list": {
-        "miscellaneous": "Diverse",
-        "gaming": "Spel",
-        "entertainment": "Underhållning",
-        "shopping": "Shoppa",
-        "showcases": "Vitriner",
-        "nostr": "Nostr",
-        "trading": "Handel",
-        "nodeManagement": "Nodhantering"
-      },
-      "tips": {
-        "title": "Din Alby plånbok är redo",
-        "description": "Några tips för att få igång dig'🐝",
-        "top_up_wallet": {
-          "title": "Köp Bitcoin",
-          "description": "Behöver du en påfyllning?\nVi hjälper dig!"
-        },
-        "demo": {
-          "title": "Alby Demo",
-          "description": "Upptäck Albys funktioner\npå vår demowebbplats"
-        },
-        "mnemonic": {
-          "title": "Nostr",
-          "description": "Planerar du att använda Nostr?\nSkapa dina nycklar nu."
-        }
-      },
-      "title": "Utforska Lightnings ⚡️ Eco system",
-      "description": "Webbplatser och webbappar där du kan använda Alby"
-    },
     "confirm_request_permission": {
       "always_allow": "Kom ihåg mitt val och fråga inte igen",
       "title": "Godkänn begäran",
@@ -782,8 +740,8 @@
       "mynode": {
         "name": "myNode"
       },
-      "start9": {
-        "name": "Start9"
+      "startos": {
+        "name": "StartOS"
       }
     },
     "confirm_add_account": {
@@ -978,7 +936,6 @@
     },
     "sats_other": "sats",
     "sats_one": "sat",
-    "advanced": "Avancerat",
     "accounts": "Konton",
     "discover": "Upptäcka",
     "success_message": "{{amount}}{{fiatAmount}} skickat till {{destination}}",
@@ -1120,8 +1077,7 @@
     "nostr": {
       "nip04decrypt": "Dekryptera data",
       "getpublickey": "Läs din publika nyckel",
-      "signmessage": "Skriv under meddelandet med din nyckel",
-      "nip04encrypt": "Kryptera data"
+      "signmessage": "Skriv under meddelandet med din nyckel"
     },
     "lnd": {
       "channelbalance": "Få en rapport om de totala medlen över alla öppna kanaler",

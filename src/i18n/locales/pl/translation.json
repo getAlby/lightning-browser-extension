@@ -1,10 +1,7 @@
 {
   "translation": {
     "welcome": {
-      "title": "Witaj w Alby",
       "set_password": {
-        "title": "Ustaw hasło blokady",
-        "description": "To hasło pozwoli odblokować rozszerzenie Alby na tym urządzeniu. Nie można go odzyskać ale może być zmienione później.",
         "choose_password": {
           "label": "Wybierz hasło blokady:"
         },
@@ -87,10 +84,6 @@
       },
       "lnc": {
         "title": "Lightning Terminal (LNC)",
-        "page": {
-          "title": "Podłącz się do swojego węzła LND",
-          "description": "1. Otwórz Lightning Terminal i wybierz <0>Lightning Node Connect</0> z paska bocznego.<1/> 2. Kliknij <0>Create a new session</0><1/>3. Nadaj etykietę sesji, wybierz żądane uprawnienia i zatwierdź<1/>4. <0>Skopiuj frazę parującą</0> i wklej ją poniżej."
-        },
         "pairing_phrase": {
           "label": "Twoja fraza parująca ",
           "placeholder": "tajna fraza stosu satsów"
@@ -177,11 +170,11 @@
           "placeholder": "lndconnect://twojwezel:8080?..."
         }
       },
-      "start9": {
-        "title": "Start9",
+      "startos": {
+        "title": "StartOS",
         "page": {
-          "title": "Połącz ze swoim <0>serwerem Start9</0>",
-          "instructions": "<0>Uwaga:</0>Obecnie wspieramy tylko LND, ale zamierzamy dodać obsługę c-lightning w przyszłości!<1/>Na pulpicie twojego Embassy kliknij na usługę <0>Lightning Network Daemon</0>.<1/>Wybierz zakładkę <0>Properties</0>.<1/>Następnie skopiuj <0>LND Connect REST URL.</0>"
+          "title": "Połącz ze swoim <0>serwerem StartOS</0>",
+          "instructions": "<0>Uwaga:</0>Obecnie wspieramy tylko LND, ale zamierzamy dodać obsługę c-lightning w przyszłości!<1/>Na pulpicie twojego StartOS kliknij na usługę <0>Lightning Network Daemon</0>.<1/>Wybierz zakładkę <0>Properties</0>.<1/>Następnie skopiuj <0>LND Connect REST URL.</0>"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -220,13 +213,8 @@
       },
       "btcpay": {
         "title": "BTCPay Server",
-        "page": {
-          "title": "Podłącz do węzła LND na BTCPayServer",
-          "instructions": "Przejdź do BTCPayServer i zaloguj się jako administrator. Idź do Server Settings > Services > NDS Rest - See information. Następni kliknij \"See QR Code information\" i skopiuj dane kodu QR. Wklej poniżej:"
-        },
         "config": {
-          "label": "Date konfiguracyjne",
-          "placeholder": "config=https://twoj-btc-pay.org/lnd-config/212121/lnd.config"
+          "label": "Date konfiguracyjne"
         },
         "errors": {
           "connection_failed": "Połączenie nieudane. Czy adres BTCPay jest poprawny i osiągalny?"
@@ -584,31 +572,6 @@
         "status": "Sprawdź status płatności"
       }
     },
-    "discover": {
-      "title": "Eksploruj ekosystem Lightning ⚡️",
-      "description": "Strony i aplikacje webowe, na których możesz używać Alby",
-      "list": {
-        "trading": "Handel",
-        "gaming": "Gry",
-        "entertainment": "Rozrywka",
-        "shopping": "Zakupy",
-        "miscellaneous": "Różne",
-        "showcases": "Prezentowane",
-        "nostr": "Nostr"
-      },
-      "tips": {
-        "title": "Twój portfel Alby jest gotowy",
-        "description": "Oto klika wskazówek na start 🐝",
-        "top_up_wallet": {
-          "title": "⚡️ Doładuj swój portfel",
-          "description": "Stwórz fakturę Lightning, wyślij sobie trochę bitcoinów i zacznij korzystać z Alby w ekosystemie Lightning"
-        },
-        "demo": {
-          "title": "🕹️ Spróbuj demonstracyjnej wersji Alby",
-          "description": "Odkryj wszystkie możliwości, jakie daje Alby na naszej stronie demonstracyjnej"
-        }
-      }
-    },
     "publishers": {
       "title": "Twoje strony ⚡",
       "description": "Strony, na których użyto wcześniej Alby",
@@ -718,8 +681,8 @@
       "btcpay": {
         "name": "BTCPay"
       },
-      "start9": {
-        "name": "Start9"
+      "startos": {
+        "name": "StartOS"
       },
       "umbrel": {
         "name": "Umbrel"
@@ -732,7 +695,6 @@
   "common": {
     "password": "Hasło",
     "confirm_password": "Potwierdź hasło",
-    "advanced": "Zaawansowane",
     "success": "Sukces",
     "error": "Błąd",
     "settings": "Ustawienia",
@@ -884,7 +846,6 @@
   "permissions": {
     "nostr": {
       "getpublickey": "Czytanie Twojego klucza publicznego.",
-      "nip04encrypt": "Szyfrowanie danych.",
       "nip04decrypt": "Deszyfrowanie danych.",
       "signmessage": "Podpisywanie wiadomości Twoim kluczem."
     },

@@ -2,8 +2,6 @@
   "translation": {
     "welcome": {
       "set_password": {
-        "title": "Nastavit pin pro odemčení účtu",
-        "description": "Tento pin vám umožní odemykat doplněk Alby na tomto zařízení. Nelze ho resetovat, ale je možné ho později změnit.",
         "choose_password": {
           "label": "Zvolte pin pro odemykání:"
         },
@@ -27,7 +25,6 @@
           "delete_edit_account": "Smažte nevalidní účet a změny proveďte znovu"
         }
       },
-      "title": "Vítejte v Alby",
       "pin_extension": {
         "title": "Připnout rozšíření Alby",
         "explanation": "1. Zvolte <0/> v pravém rohu svého prohlížeče<1/>2. Najděte Alby a zvolte připnout k toolbaru<1/>3. To je vše. Pro přístup k Alby pouze klikněte na <2/> ikonu",
@@ -135,11 +132,11 @@
           "placeholder": "lndconnect://vas-uzel:8080?..."
         }
       },
-      "start9": {
-        "title": "Start9",
+      "startos": {
+        "title": "StartOS",
         "page": {
-          "title": "Připojení k vašemu uzlu <0>Embassy</0>",
-          "instructions": "<0>Pozn.:</0> Aktuálně podporujeme pouze LND, ale v budoucnu plánujeme přidávat podporu c-lightning!<1/>V dashboardu vašeho Embassy zvolte službu <0>Lightning Network Daemon</0>.<1/>Vyberte záložku <0>Vlastnosti (Properties)</0>.<1/>Následně zkopírujte <0>LND Connect REST URL.</0>"
+          "title": "Připojení k vašemu uzlu <0>StartOS</0>",
+          "instructions": "<0>Pozn.:</0> Aktuálně podporujeme pouze LND, ale v budoucnu plánujeme přidávat podporu c-lightning!<1/>V dashboardu vašeho StartOS zvolte službu <0>Lightning Network Daemon</0>.<1/>Vyberte záložku <0>Vlastnosti (Properties)</0>.<1/>Následně zkopírujte <0>LND Connect REST URL.</0>"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -172,13 +169,8 @@
       },
       "btcpay": {
         "title": "BTCPay Server",
-        "page": {
-          "title": "Připojení k vašemu uzlu BTCPay LND",
-          "instructions": "Přesuňte se do svého BTCPayServer a přihlašte se jako administrátor. Běžte do Nastavení serveru > Služby > LND Rest - Více informací. Následně zvolte \"Zobrazit informace o QR kódu\" a zkopírujte zobrazená data. Vložte je níže:"
-        },
         "config": {
-          "label": "Konfigurační data",
-          "placeholder": "config=https://vas-btc-pay.org/lnd-config/212121/lnd.config"
+          "label": "Konfigurační data"
         },
         "errors": {
           "connection_failed": "Připojení se nezdařilo. Je BTCPay URL zadána správně a je přístupná?"
@@ -219,10 +211,6 @@
       "title": "Připojte Lightning peněženku",
       "lnc": {
         "title": "Lightning terminál (LNC)",
-        "page": {
-          "title": "Připojit k vašemu LND uzlu",
-          "description": "Vytvořte nové sezení v terminálu (litd) pro získání nové párovací fráze a vložte ji zde"
-        },
         "pairing_phrase": {
           "label": "Vaše párovací fráze ",
           "placeholder": "tajná fráze"
@@ -627,31 +615,6 @@
         }
       }
     },
-    "discover": {
-      "title": "Prozkoumejte ekosystém Lightningu ⚡️",
-      "description": "Webové stránky a aplikace, kde je možné Alby používat",
-      "list": {
-        "trading": "Obchodování",
-        "gaming": "Hraní her",
-        "entertainment": "Zábava",
-        "shopping": "Nakupování",
-        "nostr": "Nostr",
-        "miscellaneous": "Různé",
-        "showcases": "Příklady užití"
-      },
-      "tips": {
-        "title": "Vaše Alby peněženka je připravena",
-        "description": "Pár tipů než začnete",
-        "top_up_wallet": {
-          "title": "⚡️ Dobít peněženku",
-          "description": "Vytvořte lightning fakturu, pošlete si bitcoiny a začněte používat Alby v ekosystému lightning"
-        },
-        "demo": {
-          "description": "Objevte vše, co lze s Alby dělat, na naší demo stránce",
-          "title": "🕹️ Vyzkoušejte demo Alby"
-        }
-      }
-    },
     "distributions": {
       "title": "Připojit k {{name}}",
       "raspiblitz": {
@@ -663,8 +626,8 @@
       "btcpay": {
         "name": "BTCPay"
       },
-      "start9": {
-        "name": "Start9"
+      "startos": {
+        "name": "StartOS"
       },
       "umbrel": {
         "name": "Umbrel"
@@ -676,7 +639,6 @@
   },
   "common": {
     "password": "Heslo",
-    "advanced": "Pokročilé",
     "success": "Úspěch",
     "error": "Chyba",
     "settings": "Nastavení",
@@ -863,7 +825,6 @@
       "invoice": "Vytvořit novou platební fakturu"
     },
     "nostr": {
-      "nip04encrypt": "Zašifrovat data",
       "getpublickey": "Přečíst svůj veřejný klíč",
       "nip04decrypt": "Dešifrovat data",
       "signmessage": "Podepsat zprávu klíčem"

@@ -1,12 +1,14 @@
 import type { FallbackLng } from "i18next";
-import { useState, useEffect } from "react";
 import type { ChangeEvent } from "react";
+import { useEffect, useState } from "react";
 import { useSettings } from "~/app/context/SettingsContext";
 import i18n, { supportedLocales } from "~/i18n/i18nConfig";
 
-import Select from "../form/Select";
+type Props = {
+  className: string;
+};
 
-export default function LocaleSwitcher() {
+export default function LocaleSwitcher({ className }: Props) {
   const { settings, updateSetting } = useSettings();
   const fallbackLng = i18n.options.fallbackLng?.[0 as keyof FallbackLng];
   const [dropdownLang, setDropdownLang] = useState(
@@ -30,12 +32,17 @@ export default function LocaleSwitcher() {
   };
 
   return (
-    <Select name="locale" value={dropdownLang} onChange={languageHandler}>
+    <select
+      name="locale"
+      value={dropdownLang}
+      onChange={languageHandler}
+      className={className}
+    >
       {supportedLocales.map((locale) => (
         <option key={locale.locale} value={locale.locale}>
           {locale.label}
         </option>
       ))}
-    </Select>
+    </select>
   );
 }

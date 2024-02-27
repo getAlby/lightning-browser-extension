@@ -54,7 +54,7 @@ export default function TransactionModal({
       contentLabel={"Transactions"}
       position="top"
     >
-      <div className="p-3 flex flex-col gap-4 justify-center ">
+      <div className="p-3 flex flex-col gap-4 justify-center">
         <div>
           <div className="flex items-center justify-center">
             {getTransactionType(transaction) == "outgoing" ? (
