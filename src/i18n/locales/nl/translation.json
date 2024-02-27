@@ -2,7 +2,6 @@
   "translation": {
     "welcome": {
       "set_password": {
-        "description": "Lightning-accountgegevens zijn veilig versleuteld met een ontgrendelingswachtwoord. Vergeet dit wachtwoord niet! Je hebt het nodig om de Alby-extensie te ontgrendelen (in deze browser)",
         "choose_password": {
           "label": "Kies een ontgrendelingswachtwoord:"
         },
@@ -25,8 +24,7 @@
         "actions": {
           "delete_edit_account": "Verwijderd invalide account en probeer opnieuw"
         }
-      },
-      "title": "Welkom bij Alby"
+      }
     },
     "choose_connector": {
       "description": "Maak eerst verbinding met een Lightning wallet zodat je kan synchen met websites die bitcoin Lightning betalingen accepteren!",
@@ -180,7 +178,6 @@
       },
       "btcpay": {
         "title": "",
-        "page": {},
         "config": {
           "label": ""
         },

@@ -12,8 +12,7 @@
           "mismatched_password": "パスコードが一致しませんでした。",
           "enter_password": "パスコードを入力してください。",
           "confirm_password": "確認用パスコードを入力してください。"
-        },
-        "description": "このパスコードを使用すると、このデバイスでAlbyのロックを解除できます。パスコードは復元できませんが、後で変更することは可能です。"
+        }
       },
       "test_connection": {
         "ready": "すごいね、準備万端だ！",
@@ -26,7 +25,6 @@
           "delete_edit_account": "無効なアカウントを削除して再編集"
         }
       },
-      "title": "Albyへようこそ",
       "pin_extension": {
         "title": "Alby拡張機能を固定",
         "description": "もうすぐです。Albyを便利に使うには、拡張機能をブラウザのツールバーに忘れずに固定してください：",
@@ -85,7 +83,6 @@
       },
       "lnc": {
         "title": "Lightning Terminal (LNC)",
-        "page": {},
         "pairing_phrase": {
           "label": "あなたのペアリング・フレーズ ",
           "placeholder": "シークレット・stack sats・フレーズ"
@@ -210,7 +207,6 @@
         }
       },
       "btcpay": {
-        "page": {},
         "config": {
           "label": "コンフィグデータ"
         },

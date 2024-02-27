@@ -2,7 +2,6 @@
   "translation": {
     "welcome": {
       "set_password": {
-        "description": "此密码将允许你在此设备上解锁 Alby。它无法恢复，但可以稍后更改。",
         "choose_password": {
           "label": "选择解锁密码："
         },
@@ -26,7 +25,6 @@
           "delete_edit_account": "删除无效帐户并重新编辑"
         }
       },
-      "title": "欢迎使用Alby",
       "pin_extension": {
         "title": "固定你的 Alby 扩展",
         "description": "就快完成了。以便方便地使用 Alby，请记住把扩展固定到工具栏：",
@@ -94,7 +92,6 @@
         }
       },
       "btcpay": {
-        "page": {},
         "title": "BTCPay Server",
         "errors": {
           "connection_failed": "连接失败。BTCPay连接URL是否正确且可访问？"
@@ -213,7 +210,6 @@
         }
       },
       "lnc": {
-        "page": {},
         "title": "Lightning Terminal (LNC)",
         "pairing_phrase": {
           "placeholder": "秘密的堆聪短语",
