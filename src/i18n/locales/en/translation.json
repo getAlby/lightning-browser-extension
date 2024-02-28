@@ -379,18 +379,14 @@
             "title": "Get Started With Alby Extension",
             "description": "New to Alby Extension? Check out our guides, videos, and explanations"
           },
-          "backup_masterkey": {
-            "title": "Back up your Master Key",
-            "description": "Learn what Master Key is, how it’s used for Nostr and make sure to back up"
+          "setup_keys": {
+            "title": "Setup your keys",
+            "description": "Take care of your Master Key or import your existing Nostr account"
           },
 
           "receive_bitcoin": {
             "title": "Receive bitcoin",
             "description": "Get bitcoin to your lightning address, a lightning invoice or bitcoin address."
-          },
-          "import_masterkey": {
-            "title": "Import your Master Key",
-            "description": "If you already have a Master Key, you can import it using recovery phrase"
           }
         }
       }
