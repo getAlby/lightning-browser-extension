@@ -83,12 +83,16 @@ function LNURLWithdraw() {
           msg.reply(response.data);
         }
       } else {
-        toast.error(`Error: ${response.data.reason}`);
+        throw new Error(response.data.reason);
       }
     } catch (e) {
       console.error(e);
-      if (e instanceof Error) {
-        toast.error(e.message);
+      if (axios.isAxiosError(e)) {
+        const error =
+          (e.response?.data as { reason?: string })?.reason || e.message;
+        toast.error(`Error: ${error}`);
+      } else if (e instanceof Error) {
+        toast.error(`Error: ${e.message}`);
       }
     } finally {
       setLoadingConfirm(false);
