@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import PasswordViewAdornment from "~/app/components/PasswordViewAdornment";
 import toast from "~/app/components/Toast";
 import msg from "~/common/lib/msg";
-import logo from "/static/assets/icons/lnd.png";
+import logo from "/static/assets/icons/lightning_terminal.png";
 
 const initialFormData = Object.freeze({
   pairingPhrase: "",

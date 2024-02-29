@@ -9,13 +9,13 @@ import ConnectLnd from "@screens/connectors/ConnectLnd";
 import ConnectLndHub from "@screens/connectors/ConnectLndHub";
 import ConnectMyNode from "@screens/connectors/ConnectMyNode";
 import ConnectRaspiBlitz from "@screens/connectors/ConnectRaspiBlitz";
-import ConnectStart9 from "@screens/connectors/ConnectStart9";
+import ConnectStartOS from "@screens/connectors/ConnectStartOS";
 import ConnectUmbrel from "@screens/connectors/ConnectUmbrel";
 import { Route } from "react-router-dom";
 import i18n from "~/i18n/i18nConfig";
 
-import ConnectVoltage from "~/app/screens/connectors/ConnectVoltage";
 import ConnectNWC from "~/app/screens/connectors/ConnectNWC";
+import ConnectVoltage from "~/app/screens/connectors/ConnectVoltage";
 import ConnectCommando from "../screens/connectors/ConnectCommando";
 import btcpay from "/static/assets/icons/btcpay.svg";
 import citadel from "/static/assets/icons/citadel.png";
@@ -31,7 +31,7 @@ import lndhubGo from "/static/assets/icons/lndhub_go.png";
 import mynode from "/static/assets/icons/mynode.png";
 import nwc from "/static/assets/icons/nwc.svg";
 import raspiblitz from "/static/assets/icons/raspiblitz.png";
-import start9 from "/static/assets/icons/start9.png";
+import startos from "/static/assets/icons/startos.png";
 import umbrel from "/static/assets/icons/umbrel.png";
 import voltage from "/static/assets/icons/voltage.png";
 
@@ -87,15 +87,21 @@ const connectorMap: { [key: string]: ConnectorRoute } = {
     title: i18n.t("translation:choose_connector.lnd.title"),
     logo: lnd,
   },
+  btcpay: {
+    path: "btcpay",
+    element: <ConnectBtcpay />,
+    title: i18n.t("translation:choose_connector.btcpay.title"),
+    logo: btcpay,
+  },
   "mynode-lnd": {
     path: "lnd",
     element: <ConnectMyNode />,
     title: i18n.t("translation:choose_connector.lnd.title"),
     logo: lnd,
   },
-  "start9-lnd": {
+  "startos-lnd": {
     path: "lnd",
-    element: <ConnectStart9 />,
+    element: <ConnectStartOS />,
     title: i18n.t("translation:choose_connector.lnd.title"),
     logo: lnd,
   },
@@ -152,12 +158,6 @@ const connectorMap: { [key: string]: ConnectorRoute } = {
     element: <ConnectGaloy instance={galoyPaths.bitcoinJungle} />,
     title: i18n.t("translation:choose_connector.bitcoin_jungle.title"),
     logo: galoyBitcoinJungle,
-  },
-  btcpay: {
-    path: "btcpay",
-    element: <ConnectBtcpay />,
-    title: i18n.t("translation:choose_connector.btcpay.title"),
-    logo: btcpay,
   },
   voltage: {
     path: "voltage",
@@ -222,10 +222,10 @@ const distributionMap: { [key: string]: { logo: string; children: Route[] } } =
         connectorMap["lnbits"],
       ],
     },
-    start9: {
-      logo: start9,
+    startos: {
+      logo: startos,
       children: [
-        connectorMap["start9-lnd"],
+        connectorMap["startos-lnd"],
         connectorMap["lnc"],
         connectorMap["commando"],
         connectorMap["lnbits"],
@@ -257,7 +257,7 @@ function getConnectorRoutes(): ConnectorRoute[] {
     getDistribution("citadel"),
     getDistribution("umbrel"),
     getDistribution("mynode"),
-    getDistribution("start9"),
+    getDistribution("startos"),
     getDistribution("raspiblitz"),
     connectorMap["nwc"],
   ];

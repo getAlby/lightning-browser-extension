@@ -67,11 +67,11 @@ describe("AccountMenu", () => {
       await user.click(screen.getByText("Toggle Dropdown"));
     });
 
-    await screen.findByText("Switch account");
+    await screen.findByText("Switch Wallet");
     expect(screen.getByText("Balance")).toBeInTheDocument();
     expect(screen.getByText("LND account")).toBeInTheDocument();
     expect(screen.getByText("Galoy account")).toBeInTheDocument();
-    expect(screen.getByText("Add a new account")).toBeInTheDocument();
-    expect(screen.getByText("Manage accounts")).toBeInTheDocument();
+    expect(screen.getByText("Connect a Wallet")).toBeInTheDocument();
+    expect(screen.getByText("Manage Wallets")).toBeInTheDocument();
   });
 });
