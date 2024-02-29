@@ -398,8 +398,6 @@
           "hint": "adalah protokol simpel dan terbuka yang bertujuan untuk membuat jaringan sosial anti penyensoran. Nostr bekerja dengan menggunakan kunci kriptografi. Untuk menerbitkan sesuatu, kamu dapat gunakan kunci dan mengirimnya ke berbagai relay. Kamu dapat menggunakan Alby untuk mengatur kunci Nostr. Berbagai aplikasi Nostr akan dapat menggunakan kunci dari ekstensi Alby."
         },
         "remove": {
-          "title": "Hapus Akun Ini",
-          "subtitle": "Hapus semua allowances, data pembayaran, dan kunci-kunci yang terasosiasi dengan akun ini.",
           "error": "Nama akun yang dimasukkan tidak sama."
         },
         "remove_secretkey": {
@@ -409,15 +407,9 @@
         },
         "actions": {
           "remove_secretkey": "Hapus Master Key",
-          "export": "Expor",
-          "remove_account": "Hapus akun"
-        },
-        "title1": "Pengaturan Akun"
-      },
-      "actions": {
-        "add_account": "Tambah akun"
-      },
-      "title": "Akun-akun"
+          "export": "Expor"
+        }
+      }
     },
     "unlock": {
       "unlock_to_continue": "Buka untuk melanjutkan",
@@ -435,7 +427,6 @@
       }
     },
     "settings": {
-      "title": "Pengaturan",
       "browser_notifications": {
         "title": "Notifikasi peramban",
         "subtitle": "Notifikasi terkait pembayaran dan autentikasi."
@@ -723,14 +714,10 @@
     "account_menu": {
       "options": {
         "account": {
-          "add": "Tambahkan akun baru",
-          "manage": "Kelola akun",
-          "account_settings": "Pengaturan Akun",
           "go_to_web_wallet": "Atur akun web kamu"
         }
       },
-      "screen_reader": "Toggle Dropdown",
-      "title": "Ganti akun"
+      "screen_reader": "Toggle Dropdown"
     },
     "transactions_table": {
       "sent": "Terkirim",
@@ -864,7 +851,6 @@
     "confirm_password": "Konfirmasi Kata Sandi",
     "success": "Sukses",
     "error": "Eror",
-    "settings": "Pengaturan",
     "accounts": "Akun-akun",
     "connected_sites": "Situs Terhubung",
     "wallet": "Dompet",

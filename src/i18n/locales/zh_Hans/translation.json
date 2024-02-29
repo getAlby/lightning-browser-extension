@@ -231,10 +231,6 @@
       }
     },
     "accounts": {
-      "title": "帐户",
-      "actions": {
-        "add_account": "添加帐户"
-      },
       "account_view": {
         "nostr": {
           "errors": {
@@ -299,7 +295,6 @@
             }
           }
         },
-        "title1": "帐户设置",
         "export": {
           "export_uri": "LNDHub凭证URI",
           "scan_qr": "通过扫描二维码将这个钱包导入Zeus或BlueWallet。",
@@ -310,12 +305,9 @@
           "description": "将允许你在移动钱包上连接并使用此帐户，例如 <0>BlueWallet</0> 和 <1>Zeus</1>。"
         },
         "remove": {
-          "title": "删除此帐户",
-          "subtitle": "将删除与此帐户关联的所有限额、付款数据和密钥。",
           "error": "输入的帐户名称不匹配。"
         },
         "actions": {
-          "remove_account": "删除帐户",
           "export": "导出",
           "remove_secretkey": "移除主密钥"
         },
@@ -457,7 +449,6 @@
           "label": "更改"
         }
       },
-      "title": "设置",
       "theme": {
         "options": {
           "system": "系统",
@@ -826,7 +817,6 @@
     "success": "成功",
     "description_full": "详细描述",
     "password": "密码",
-    "settings": "设置",
     "connected_sites": "已连接的网站",
     "amount": "金额",
     "optional": "可选",
@@ -882,12 +872,8 @@
       }
     },
     "account_menu": {
-      "title": "切换帐户",
       "options": {
         "account": {
-          "add": "添加新帐户",
-          "manage": "管理帐户",
-          "account_settings": "帐户设置",
           "go_to_web_wallet": "管理你的网络帐户"
         }
       },

@@ -321,7 +321,6 @@
       }
     },
     "settings": {
-      "title": "सेटिंग्ज",
       "browser_notifications": {
         "title": "ब्राउझर सूचना",
         "subtitle": "भुगतान और प्रमाणीकरण संबंधी सूचनाएँ।"
@@ -944,7 +943,6 @@
     "confirm_password": "पासवर्ड की पुष्टि करें",
     "success": "सफलता",
     "error": "त्रुटि",
-    "settings": "सेटिंग्स",
     "accounts": "खाते",
     "discover": "खोजें",
     "sats_one": "sat",
@@ -1115,16 +1113,7 @@
       }
     },
     "account_menu": {
-      "screen_reader": "Toggle Dropdown",
-      "title": "खाता बदलें",
-      "options": {
-        "account": {
-          "add": "एक नया खाता जोड़ें",
-          "manage": "खाते प्रबंधित करें",
-          "account_settings": "अकाउंट सेटिंग",
-          "go_to_web_wallet": "अपने web account का प्रबंधन करें"
-        }
-      }
+      "screen_reader": "Toggle Dropdown"
     },
     "publishers_table": {
       "payments": "भुगतान",

@@ -221,12 +221,6 @@
         "is_blocked_hint": ""
       }
     },
-    "accounts": {
-      "title": "Kontoj",
-      "actions": {
-        "add_account": ""
-      }
-    },
     "unlock": {
       "unlock_to_continue": "",
       "unlock_password": "",
@@ -243,7 +237,6 @@
       }
     },
     "settings": {
-      "title": "Agordoj",
       "browser_notifications": {
         "title": "",
         "subtitle": ""
@@ -471,7 +464,6 @@
     "password": "Pasvorto",
     "success": "Sukceso",
     "error": "Eraro",
-    "settings": "Agordoj",
     "connected_sites": "",
     "sats_one": "satoŝio",
     "sats_other": "satoŝioj",
@@ -574,14 +566,7 @@
       }
     },
     "account_menu": {
-      "screen_reader": "",
-      "title": "",
-      "options": {
-        "account": {
-          "add": "",
-          "manage": "Administri kontojn"
-        }
-      }
+      "screen_reader": ""
     },
     "publishers_table": {
       "payments": "pagoj"

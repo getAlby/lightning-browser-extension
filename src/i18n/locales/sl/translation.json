@@ -303,7 +303,6 @@
       }
     },
     "accounts": {
-      "title": "Računi",
       "account_view": {
         "title2": "Račun",
         "export": {
@@ -414,11 +413,8 @@
             "failed_to_load": "Nalaganje ključa Nostr ni uspelo. Je to veljaven ključ Nostr?"
           }
         },
-        "title1": "Nastavitve računa",
         "remove": {
-          "title": "Odstrani ta račun",
-          "error": "Vnešeno ime računa se ne ujema.",
-          "subtitle": "Odstrani vse odobritve, podatke o plačilih in ključe, povezane s tem računom."
+          "error": "Vnešeno ime računa se ne ujema."
         },
         "remove_secretkey": {
           "subtitle": "Odstrani Glavni ključ iz tega računa.",
@@ -427,12 +423,8 @@
         },
         "actions": {
           "export": "Izvoz",
-          "remove_account": "Odstrani račun",
           "remove_secretkey": "Odstrani Glavni ključ"
         }
-      },
-      "actions": {
-        "add_account": "Dodaj račun"
       }
     },
     "unlock": {
@@ -453,7 +445,6 @@
       "browser_notifications": {
         "title": "Obvestila brskalnika"
       },
-      "title": "Nastavitve",
       "personal_data": {
         "title": "Osebni podatki"
       },
@@ -666,14 +657,10 @@
     "account_menu": {
       "options": {
         "account": {
-          "manage": "Upravljanje računov",
-          "account_settings": "Nastavitve računa",
-          "add": "Dodaj nov račun",
           "go_to_web_wallet": "Upravljaj svoj spletni račun"
         }
       },
-      "screen_reader": "Preklopi spustni meni",
-      "title": "Preklopi račun"
+      "screen_reader": "Preklopi spustni meni"
     },
     "publishers_table": {
       "payments": "plačila",

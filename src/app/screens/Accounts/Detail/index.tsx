@@ -540,7 +540,7 @@ function AccountDetail() {
                       name: account.name,
                     });
                   }}
-                  label={t("actions.remove_account")}
+                  label={t("actions.disconnect_wallet")}
                   fullWidth
                 />
               </div>

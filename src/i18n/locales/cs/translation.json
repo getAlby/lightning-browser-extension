@@ -238,15 +238,7 @@
       }
     },
     "accounts": {
-      "title": "Účty",
-      "actions": {
-        "add_account": "Přidat účet"
-      },
       "account_view": {
-        "remove": {
-          "title": "Odstranit tento účet",
-          "subtitle": "Všechny propojené příspěvky budou smazány. Buďte si jisti, že akci chcete opravdu provést."
-        },
         "nostr": {
           "errors": {
             "failed_to_load": "Nepodařilo se načíst Nostr klíč. Zadali jste validní Nostr klíč?"
@@ -283,7 +275,6 @@
           }
         },
         "actions": {
-          "remove_account": "Odstranit účet",
           "export": "Export"
         },
         "export": {
@@ -294,7 +285,6 @@
           "your_ln_address": "Vaše Lightning adresa:",
           "scan_qr": "Importujte tuto peněženku do Zeus nebo BlueWallet naskenováním QR kódu."
         },
-        "title1": "Informace o účtu",
         "title2": "Upravit účet",
         "name": {
           "title": "Jméno",
@@ -355,7 +345,6 @@
       }
     },
     "settings": {
-      "title": "Nastavení",
       "browser_notifications": {
         "title": "Upozornění prohlížeče",
         "subtitle": "Platební notifikace a notifikace týkající se autentizace."
@@ -639,7 +628,6 @@
     "password": "Heslo",
     "success": "Úspěch",
     "error": "Chyba",
-    "settings": "Nastavení",
     "connected_sites": "",
     "sats_one": "sat",
     "sats_other": "satů",
@@ -750,14 +738,7 @@
       }
     },
     "account_menu": {
-      "screen_reader": "Přepnout rozbalovací nabídku",
-      "title": "Změnit účet",
-      "options": {
-        "account": {
-          "add": "Přidat nový účet",
-          "manage": "Spravovat účty"
-        }
-      }
+      "screen_reader": "Přepnout rozbalovací nabídku"
     },
     "publishers_table": {
       "payments": "platby"

@@ -291,7 +291,6 @@
       }
     },
     "accounts": {
-      "title": "Konta",
       "account_view": {
         "title1": "Ustawienia konta",
         "title2": "Konto",
@@ -342,12 +341,7 @@
             "title": "Ustawienia Nostr"
           }
         },
-        "remove": {
-          "title": "Usuń konto",
-          "subtitle": "Wszystkie powiązane limity zostaną usunięte. Proszę się upewnić."
-        },
         "actions": {
-          "remove_account": "Usuń konto",
           "export": "Eksport"
         },
         "mnemonic": {
@@ -384,9 +378,6 @@
           },
           "title": "Sieć"
         }
-      },
-      "actions": {
-        "add_account": "Dodaj konto"
       }
     },
     "unlock": {
@@ -405,7 +396,6 @@
       }
     },
     "settings": {
-      "title": "Ustawienia",
       "browser_notifications": {
         "title": "Powiadomienia w przeglądarce",
         "subtitle": "Powiadomienia związane z płatnościami i uwierzytelnianiem."
@@ -695,7 +685,6 @@
     "confirm_password": "Potwierdź hasło",
     "success": "Sukces",
     "error": "Błąd",
-    "settings": "Ustawienia",
     "accounts": "Konta",
     "discover": "Odkrywaj",
     "connected_sites": "",
@@ -811,14 +800,7 @@
       }
     },
     "account_menu": {
-      "screen_reader": "Przełącznik rozwijany",
-      "title": "Zmień konto",
-      "options": {
-        "account": {
-          "add": "Dodaj nowe konto",
-          "manage": "Zarządzaj kontami"
-        }
-      }
+      "screen_reader": "Przełącznik rozwijany"
     },
     "publishers_table": {
       "payments": "płatności"

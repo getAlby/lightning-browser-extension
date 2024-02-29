@@ -240,10 +240,6 @@
       }
     },
     "accounts": {
-      "title": "Cuentas",
-      "actions": {
-        "add_account": "Agregar Cuenta"
-      },
       "account_view": {
         "nostr": {
           "errors": {
@@ -275,11 +271,6 @@
           "title": "Nostr",
           "hint": "es un protocolo simple y abierto que tiene como objetivo crear redes sociales resistentes a la censura. Nostr trabaja con claves criptográficas. Para publicar algo, lo firma con su clave y lo envía a múltiples relevos. Puede usar Alby para administrar su clave Nostr. Muchas aplicaciones de Nostr le permitirán simplemente usar la clave de la extensión Alby."
         },
-        "remove": {
-          "title": "Eliminar Esta Cuenta",
-          "subtitle": "Se eliminarán todos los enlaces vinculados. Por favor, asegúrese de querer hacerlo."
-        },
-        "title1": "Información de la Cuenta",
         "title2": "Editar Cuenta",
         "name": {
           "title": "Nombre",
@@ -294,7 +285,6 @@
           "export_uri": "URI de credenciales de LNDHub"
         },
         "actions": {
-          "remove_account": "Eliminar cuenta",
           "export": "Exportar"
         }
       }
@@ -315,7 +305,6 @@
       }
     },
     "settings": {
-      "title": "Configuración",
       "website_enhancements": {
         "title": "Mejoras del sitio web",
         "subtitle": "Mejoras de propinas para Twitter, YouTube, etc."
@@ -648,7 +637,6 @@
     "password": "Contraseña",
     "success": "Exitoso",
     "error": "Error",
-    "settings": "Ajustes",
     "connected_sites": "Sitios conectados",
     "sats_one": "sat",
     "sats_other": "sats",
@@ -779,12 +767,8 @@
       }
     },
     "account_menu": {
-      "title": "Cambiar de cuenta",
       "options": {
         "account": {
-          "add": "Agregar una nueva cuenta",
-          "manage": "Administrar cuentas",
-          "account_settings": "Configuraciones de la cuenta",
           "go_to_web_wallet": "Administra tu cuenta de Alby"
         }
       },

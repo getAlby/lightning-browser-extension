@@ -264,7 +264,6 @@
           "title": "表示名",
           "placeholder": "アカウントの表示名"
         },
-        "title1": "アカウント設定",
         "mnemonic": {
           "title": "🔑 鍵の管理",
           "backup": {
@@ -374,12 +373,8 @@
           },
           "title": "Network",
           "subtitle": "アドレス導出やトランザクションをデコードするBitcoinやliquidのネットワークを選んでください。"
-        },
-        "remove": {
-          "title": "このアカウントを削除"
         }
-      },
-      "title": "アカウント"
+      }
     },
     "home": {
       "default_view": {
