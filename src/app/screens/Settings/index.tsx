@@ -10,7 +10,6 @@ import { Html5Qrcode } from "html5-qrcode";
 import type { FormEvent } from "react";
 import { useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
 import Modal from "~/app/components/Modal";
 import toast from "~/app/components/Toast";
 import { useSettings } from "~/app/context/SettingsContext";
@@ -25,7 +24,6 @@ const initialFormData = {
 function Settings() {
   const { t } = useTranslation("translation", { keyPrefix: "settings" });
   const { isLoading, settings, updateSetting } = useSettings();
-  const navigate = useNavigate();
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [formData, setFormData] = useState(initialFormData);
@@ -326,36 +324,6 @@ function Settings() {
             </div>
           </form>
         </Modal>
-      </div>
-
-      <h2 className="text-2xl mt-12 font-bold dark:text-white">
-        {t("nostr.title")}
-      </h2>
-      <p className="mb-6 text-gray-500 dark:text-neutral-500 text-sm">
-        <a
-          href="https://github.com/nostr-protocol/nostr"
-          target="_blank"
-          rel="noreferrer noopener"
-          className="underline"
-        >
-          {t("nostr.title")}
-        </a>{" "}
-        {t("nostr.hint")}
-      </p>
-      <div className="shadow bg-white rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">
-        <Setting
-          title={t("nostr.private_key.title")}
-          subtitle={t("nostr.private_key.subtitle")}
-        >
-          <div className="sm:w-64 w-full pt-4 sm:pt-0">
-            <Button
-              label={t("nostr.private_key.go_to")}
-              primary
-              fullWidth
-              onClick={() => navigate(`/accounts`)}
-            />
-          </div>
-        </Setting>
       </div>
       <div className="relative flex py-5 mt-5 items-center">
         <div className="flex-grow border-t border-gray-300 dark:border-gray-700"></div>

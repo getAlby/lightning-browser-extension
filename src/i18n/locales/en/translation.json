@@ -678,15 +678,6 @@
           "mismatched_password": "Passcodes don't match."
         },
         "success": "Passcode changed successfully"
-      },
-      "nostr": {
-        "title": "Nostr",
-        "hint": "is a simple and open protocol that aims to create censorship-resistant social networks. Nostr works with cryptographic keys. To publish something you sign it with your key and send it to multiple relays. You can use Alby to manage your Nostr key. Many Nostr applications will then allow you to simply use the key from the Alby extension.",
-        "private_key": {
-          "title": "Private key",
-          "subtitle": "This section is moved to accounts page as keys are account specific now.",
-          "go_to": "Go To Accounts"
-        }
       }
     },
     "send": {
