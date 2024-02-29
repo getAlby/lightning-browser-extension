@@ -191,9 +191,9 @@ function AccountDetail() {
                 updatedAccount.name = accountName;
                 setAccount(updatedAccount);
               }}
-              className="flex justify-between items-end"
+              className="flex flex-col sm:flex-row justify-between items-center"
             >
-              <div className="w-7/12">
+              <div className="sm:w-7/12 w-full">
                 <TextField
                   id="name"
                   label={t("name.title")}
@@ -206,7 +206,7 @@ function AccountDetail() {
                 />
               </div>
               <div className="w-1/5 flex-none mx-4 d-none"></div>
-              <div className="w-1/5 flex-none">
+              <div className="flex-none sm:w-1/5 w-full pt-4 sm:pt-0">
                 <Button
                   type="submit"
                   label={tCommon("actions.save")}
@@ -219,8 +219,8 @@ function AccountDetail() {
             {account.connectorType == "lndhub" && (
               <>
                 <MenuDivider />
-                <div className="flex justify-between items-end">
-                  <div className="w-9/12">
+                <div className="flex flex-col sm:flex-row justify-between items-center">
+                  <div className="sm:w-9/12 w-full">
                     <p className="text-black dark:text-white font-medium">
                       {t("export.title")}
                     </p>
@@ -246,7 +246,7 @@ function AccountDetail() {
                     </p>
                   </div>
 
-                  <div className="w-1/5 flex-none">
+                  <div className="flex-none sm:w-1/5 w-full pt-4 sm:pt-0">
                     {exportAccount && account.connectorType === "lndhub" && (
                       <>
                         <Button
@@ -318,8 +318,8 @@ function AccountDetail() {
               <Alert type="warn">{t("mnemonic.backup.warning")}</Alert>
             )}
 
-            <div className="flex justify-between items-end">
-              <div className="w-9/12">
+            <div className="flex flex-col sm:flex-row justify-between items-center">
+              <div className="sm:w-9/12 w-full">
                 <p className="text-black dark:text-white font-medium">
                   {t(
                     hasMnemonic
@@ -336,7 +336,7 @@ function AccountDetail() {
                 </p>
               </div>
 
-              <div className="w-1/5 flex-none">
+              <div className="flex-none sm:w-1/5 w-full pt-4 sm:pt-0">
                 <Link to={`secret-key/${hasMnemonic ? "backup" : "new"}`}>
                   <Button
                     label={t(
@@ -353,8 +353,8 @@ function AccountDetail() {
             {!hasMnemonic && (
               <>
                 <MenuDivider />
-                <div className="flex justify-between items-end">
-                  <div className="w-7/12">
+                <div className="flex flex-col sm:flex-row justify-between items-center">
+                  <div className="sm:w-7/12 w-full">
                     <p className="text-black dark:text-white font-medium">
                       {t("mnemonic.import.title")}
                     </p>
@@ -363,7 +363,7 @@ function AccountDetail() {
                     </p>
                   </div>
 
-                  <div className="w-1/5 flex-none">
+                  <div className="flex-none sm:w-1/5 w-full pt-4 sm:pt-0">
                     <Link to="secret-key/import">
                       <Button
                         label={t("mnemonic.import.button")}
@@ -376,8 +376,8 @@ function AccountDetail() {
               </>
             )}
             <MenuDivider />
-            <div className="flex justify-between items-center">
-              <div className="w-7/12">
+            <div className="flex flex-col sm:flex-row justify-between items-center">
+              <div className="sm:w-7/12 w-full">
                 <div className="flex flex-col">
                   <TextField
                     id="nostrPublicKey"
@@ -402,7 +402,7 @@ function AccountDetail() {
                   </div>
                 )}
               </div>
-              <div className="w-1/5 flex-none">
+              <div className="flex-none sm:w-1/5 w-full pt-4 sm:pt-0">
                 <Link to="nostr/settings">
                   <Button label={t("nostr.settings.label")} primary fullWidth />
                 </Link>
@@ -432,8 +432,8 @@ function AccountDetail() {
                 !hasMnemonic && "opacity-30"
               )}
             >
-              <div className="flex justify-between items-end">
-                <div className="w-7/12 flex flex-col gap-2">
+              <div className="flex flex-col sm:flex-row justify-between items-center">
+                <div className="sm:w-7/12 w-full flex flex-col gap-2">
                   <p className="text-black dark:text-white font-medium">
                     {t("network.title")}
                   </p>
@@ -442,7 +442,7 @@ function AccountDetail() {
                   </p>
                 </div>
 
-                <div className="w-1/5 flex-none">
+                <div className="flex-none sm:w-1/5 w-full pt-4 sm:pt-0">
                   <Select
                     name="network"
                     value={account.bitcoinNetwork}
@@ -472,7 +472,7 @@ function AccountDetail() {
                 </div>
               </div>
               <MenuDivider />
-              <div className="flex justify-between items-end">
+              <div className="flex justify-between items-center">
                 <div className="w-7/12 flex flex-col gap-2">
                   <p className="text-black dark:text-white font-medium">
                     {t("mnemonic.lnurl.title")}
@@ -517,7 +517,7 @@ function AccountDetail() {
                 title={t("remove_secretkey.title")}
                 subtitle={t("remove_secretkey.subtitle")}
               >
-                <div className="w-64">
+                <div className="sm:w-64 flex-none w-full pt-4 sm:pt-0">
                   <Button
                     onClick={() => {
                       removeMnemonic({
@@ -532,7 +532,7 @@ function AccountDetail() {
               </Setting>
             )}
             <Setting title={t("remove.title")} subtitle={t("remove.subtitle")}>
-              <div className="w-64">
+              <div className="sm:w-64 flex-none w-full pt-4 sm:pt-0">
                 <Button
                   onClick={() => {
                     removeAccount({
