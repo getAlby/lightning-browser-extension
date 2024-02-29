@@ -328,7 +328,6 @@
           "backup": {
             "button": "备份恢复短语",
             "warning": "⚠️ 别忘了将你的恢复短语备份！不备份可能会导致永久失去对你的主密钥、Nostr 身份或使用此密钥管理的资产的访问权限。",
-            "title": "备份你的恢复短语",
             "save": "保存主密钥",
             "protocols": {
               "nostr": "Nostr"
@@ -355,9 +354,7 @@
             "description": "通过使用恢复短语将主密钥导入 Alby。",
             "button": "导入主密钥"
           },
-          "inputs": {
-            "title": "恢复短语"
-          },
+          "inputs": {},
           "lnurl": {
             "title": "闪电登录",
             "use_mnemonic": "使用主密钥登录闪电驱动的应用程序（LNURL Auth）"

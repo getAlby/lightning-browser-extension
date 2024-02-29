@@ -47,6 +47,7 @@ function AccountDetail() {
   const [account, setAccount] = useState<GetAccountRes | null>(null);
   const [accountName, setAccountName] = useState("");
   const [hasMnemonic, setHasMnemonic] = useState(false);
+  const [isMnemonicBackupDone, setIsMnemonicBackupDone] = useState(false);
   const [nostrPublicKey, setNostrPublicKey] = useState("");
   const [hasImportedNostrKey, setHasImportedNostrKey] = useState(false);
 
@@ -80,6 +81,7 @@ function AccountDetail() {
         setAccount(response);
         setAccountName(response.name);
         setHasMnemonic(response.hasMnemonic);
+        setIsMnemonicBackupDone(response.isMnemonicBackupDone);
         setHasImportedNostrKey(response.hasImportedNostrKey);
 
         if (response.nostrEnabled) {
@@ -312,7 +314,7 @@ function AccountDetail() {
           </h2>
 
           <div className="shadow bg-white rounded-md sm:overflow-hidden p-6 dark:bg-surface-01dp flex flex-col gap-4">
-            {hasMnemonic && (
+            {hasMnemonic && !isMnemonicBackupDone && (
               <Alert type="warn">{t("mnemonic.backup.warning")}</Alert>
             )}
 

@@ -329,7 +329,6 @@
             "error_confirm": "Prosim potrdi, da si naredil varnostno kopijo obnovitvene fraze."
           },
           "backup": {
-            "title": "Varnostno kopiraj obnovitveno frazo",
             "save": "Shrani Glavni ključ",
             "button": "Poglej obnovitveno frazo",
             "items": {
@@ -346,9 +345,7 @@
             "description": "Uporabi obnovitveno frazo za uvoz Gladvnega ključa v Alby.",
             "button": "Uvozi Glavni ključ"
           },
-          "inputs": {
-            "title": "Obnovitvena fraza"
-          },
+          "inputs": {},
           "lnurl": {
             "title": "Prijava z Lightning",
             "use_mnemonic": "Uporabi Glavni ključ za prijavo v Lightning omogočene aplikacije (LNURL Auth)"
