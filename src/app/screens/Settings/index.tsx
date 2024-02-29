@@ -68,6 +68,7 @@ function Settings() {
         <Setting
           title={t("browser_notifications.title")}
           subtitle={t("browser_notifications.subtitle")}
+          inline={true}
         >
           {!isLoading && (
             <Toggle
@@ -83,6 +84,7 @@ function Settings() {
         <Setting
           title={t("website_enhancements.title")}
           subtitle={t("website_enhancements.subtitle")}
+          inline={true}
         >
           {!isLoading && (
             <Toggle
@@ -102,6 +104,7 @@ function Settings() {
           {!cameraPermissionsGranted ? (
             <Button
               label={t("camera_access.allow")}
+              className="sm:w-64 flex-none w-full mt-4 sm:mt-0"
               onClick={async () => {
                 try {
                   await Html5Qrcode.getCameras();
@@ -112,7 +115,7 @@ function Settings() {
               }}
             />
           ) : (
-            <p className="text-green-500 font-medium">
+            <p className="text-green-500 font-medium pt-2 sm:pt-0">
               {t("camera_access.granted")}
             </p>
           )}
@@ -135,13 +138,13 @@ function Settings() {
             />
           }
         >
-          <div className="w-64">
+          <div className="sm:w-64 w-full pt-4 sm:pt-0">
             <LocaleSwitcher className="w-full border-gray-300 rounded-md shadow-sm text-gray-700 bg-white dark:bg-surface-00dp dark:text-neutral-200 dark:border-neutral-800" />
           </div>
         </Setting>
         <Setting title={t("theme.title")} subtitle={t("theme.subtitle")}>
           {!isLoading && (
-            <div className="w-64">
+            <div className="sm:w-64 flex-none w-full pt-4 sm:pt-0">
               <Select
                 name="theme"
                 value={settings.theme}
@@ -164,7 +167,7 @@ function Settings() {
           subtitle={t("change_password.subtitle")}
         >
           {!isLoading && (
-            <div className="w-64">
+            <div className="sm:w-64 w-full pt-4 sm:pt-0">
               <Button
                 onClick={() => {
                   setModalIsOpen(true);
@@ -182,6 +185,7 @@ function Settings() {
         <Setting
           title={t("show_fiat.title")}
           subtitle={t("show_fiat.subtitle")}
+          inline={true}
         >
           {!isLoading && (
             <Toggle
@@ -202,7 +206,7 @@ function Settings() {
               subtitle={t("currency.subtitle")}
             >
               {!isLoading && (
-                <div className="w-64">
+                <div className="sm:w-64 w-full pt-4 sm:pt-0">
                   <Select
                     name="currency"
                     value={settings.currency}
@@ -227,7 +231,7 @@ function Settings() {
               subtitle={t("exchange.subtitle")}
             >
               {!isLoading && (
-                <div className="w-64">
+                <div className="sm:w-64 w-full pt-4 sm:pt-0">
                   <Select
                     name="exchange"
                     value={settings.exchange}
@@ -260,7 +264,7 @@ function Settings() {
       <div className="shadow bg-white rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-black/10 dark:divide-white/10 dark:bg-surface-02dp">
         <Setting title={t("name.title")} subtitle={t("name.subtitle")}>
           {!isLoading && (
-            <div className="w-64">
+            <div className="sm:w-64 w-full mt-1 sm:mt-0">
               <Input
                 placeholder={t("name.placeholder")}
                 value={settings.userName}
@@ -276,7 +280,7 @@ function Settings() {
 
         <Setting title={t("email.title")} subtitle={t("email.subtitle")}>
           {!isLoading && (
-            <div className="w-64">
+            <div className="sm:w-64 w-full mt-1 sm:mt-0">
               <Input
                 placeholder={t("email.placeholder")}
                 type="email"
@@ -343,7 +347,7 @@ function Settings() {
           title={t("nostr.private_key.title")}
           subtitle={t("nostr.private_key.subtitle")}
         >
-          <div className="w-64">
+          <div className="sm:w-64 w-full pt-4 sm:pt-0">
             <Button
               label={t("nostr.private_key.go_to")}
               primary
@@ -383,6 +387,7 @@ function Settings() {
         <Setting
           title={t("lnurl_auth.legacy_lnurl_auth_202207.title")}
           subtitle={t("lnurl_auth.legacy_lnurl_auth_202207.subtitle")}
+          inline={true}
         >
           {!isLoading && (
             <Toggle
@@ -400,6 +405,7 @@ function Settings() {
         <Setting
           title={t("lnurl_auth.legacy_lnurl_auth.title")}
           subtitle={t("lnurl_auth.legacy_lnurl_auth.subtitle")}
+          inline={true}
         >
           {!isLoading && (
             <Toggle
