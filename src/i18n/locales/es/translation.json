@@ -2,8 +2,6 @@
   "translation": {
     "welcome": {
       "set_password": {
-        "title": "Establecer un código de desbloqueo",
-        "description": "Este código te permitirá desbloquear Alby en este dispositivo. No se puede recuperar, pero se puede cambiar más tarde.",
         "choose_password": {
           "label": "Elige un código de desbloqueo:"
         },
@@ -17,7 +15,7 @@
         }
       },
       "test_connection": {
-        "ready": "¡Genial, estás listo para comenzar!",
+        "ready": "Genial, ¡ya estás listo!",
         "initializing": "Accediendo a su cuenta. Por favor, espere, esto puede tardar un minuto...",
         "connection_error": "Error de Conexión",
         "review_connection_details": "Revise los detalles de su conexión.",
@@ -27,7 +25,6 @@
           "delete_edit_account": "Eliminar una cuenta no válida y volver a editarla"
         }
       },
-      "title": "Bienvenido a Alby",
       "pin_extension": {
         "title": "Fija tu extensión Alby",
         "description": "Ya casi lo has conseguido. Para utilizar Alby cómodamente, recuerda anclar tu extensión a la barra de herramientas del navegador:",
@@ -122,11 +119,11 @@
           "placeholder": "lndconnect://sunodo:8080?..."
         }
       },
-      "start9": {
-        "title": "Cuenta Start9",
+      "startos": {
+        "title": "StartOS",
         "page": {
-          "title": "Conéctate a tu <0>Start9 Server</0>",
-          "instructions": "En tu panel de Embassy, haz clic en el servicio <0>Lightning Network Daemon</0>.<1/>Selecciona la pestaña <0>Propiedades</0>.<1/>Ahora copia la URL REST de <0>LND Connect. </0>"
+          "title": "Conectarse a <0>StartOS</0>",
+          "instructions": "En tu panel de StartOS, haz clic en el servicio <0>Lightning Network Daemon</0>.<1/>Selecciona la pestaña <0>Propiedades</0>.<1/>Ahora copia la URL REST de <0>LND Connect. </0>"
         },
         "rest_url": {
           "label": "URL REST conectalnd",
@@ -159,30 +156,11 @@
       },
       "btcpay": {
         "title": "Servidor BTCPay",
-        "page": {
-          "title": "Conéctese a su nodo BTCPay LND",
-          "instructions": "Navegue a su servidor BTCPay e inicie sesión como administrador. Vaya a Configuración del servidor > Servicios > LND Rest-Ver información. Luego haga clic en\" Ver información del código QR \" y copie los datos del Código QR. Pegar a continuación:"
-        },
         "config": {
-          "label": "Datos de configuración",
-          "placeholder": "config=https://su-btc-pay.org/lnd-config/212121/lnd.config"
+          "label": "Datos de configuración"
         },
         "errors": {
           "connection_failed": "La conexión falló. ¿Es la URL de conexión de BTCPay correcta y accesible?"
-        }
-      },
-      "lndhub_bluewallet": {
-        "title": "Bluewallet",
-        "page": {
-          "title": "Conecta a BlueWallet",
-          "description": "En BlueWallet, elija el monedero que desea conectar, ábralo, haga clic en \"...\", haga clic en Exportar/Copia de seguridad para mostrar el código QR y escanéelo con su cámara web."
-        },
-        "uri": {
-          "label": "URI de Exportación BlueWallet"
-        },
-        "errors": {
-          "invalid_uri": "URI de BlueWallet inválido",
-          "connection_failed": "Error de conexión. ¿Es correcto el URI de BlueWallet?"
         }
       },
       "lndhub_go": {
@@ -198,34 +176,6 @@
           "invalid_uri": "LN Dhubri No válido",
           "connection_failed": "La conexión falló. ¿Es correcto el URI de LNDHub?"
         }
-      },
-      "kollider": {
-        "description": "Inicie sesión en su cuenta Kollider",
-        "username": {
-          "label": "Nombre de usuario"
-        },
-        "errors": {
-          "connection_failed": "La conexión falló. ¿Te aseguraste de que los datos de la cuenta son correctos?",
-          "user_already_exists": "El nombre de usuario ya existe",
-          "registration_limit_exceeded": "Límite de registro excedido, inténtalo más tarde."
-        },
-        "title": "Kollider",
-        "currency": {
-          "label": "Seleccione su cuenta de divisas"
-        },
-        "choose_path": {
-          "description": "Inicia sesión o regístrate para obtener una nueva cuenta de Kollider y conéctate a Alby.",
-          "title": "Conéctate a tú monedero Kollider",
-          "create_new": "Regístrate"
-        },
-        "create": {
-          "title": "Crea tú cuenta Kollider y conéctate a Alby",
-          "description": "Crea una nueva cuenta Kollider para enviar, recibir e intercambiar Bitcoin."
-        },
-        "login": {
-          "title": "Conéctate a tú cuenta Kollider"
-        },
-        "warning": "⚠️ Asegúrate de almacenar tus credenciales de forma segura en un administrador de contraseñas. Sin estas credenciales, tú cuenta no será recuperable."
       },
       "commando": {
         "pubkey": {
@@ -259,31 +209,7 @@
           "label": "Proxy de socket web"
         }
       },
-      "galoy": {
-        "errors": {
-          "setup_failed": "Falló la configuración",
-          "missing_token": "Falta JWT, no se pudo iniciar sesión.",
-          "invalid_token": "JWT inválido aprobado"
-        },
-        "phone_number": {
-          "label": "Ingrese su número telefónico"
-        },
-        "sms_code": {
-          "label": "Ingrese su código de verificación de SMS"
-        },
-        "token": {
-          "label": "Ingresa tu token de JWT",
-          "info": "El inicio de sesión de {{label}} se está actualizando actualmente. Si es un usuario avanzado, puede obtener su token JWT iniciando sesión a través de <0>Web Wallet (wallet.mainnet.galoy.io)</0><1/><1/>El JWT se ve así: < 2>eyJhbG...</2><1/><1/>"
-        },
-        "actions": {
-          "login": "Ingresar"
-        }
-      },
       "lnc": {
-        "page": {
-          "title": "Conecta tu nodo LND",
-          "description": "1. Abra tu Lightning Terminal y selecciona <0>Lightning Node Connect</0> en la barra lateral.<1/> 2. Haz clic en <0>Crear una nueva sesión</0><1/>3. Etiqueta la sesión, luego elige el permiso que deseas y envía<1/>4. <0>Copia la frase de emparejamiento</0> y pégala a continuación."
-        },
         "title": "Lightning Terminal (LNC)",
         "pairing_phrase": {
           "label": "Tu frase vinculada. ",
@@ -300,25 +226,20 @@
         "send_satoshis": "⚡️ Enviar Satoshis ⚡️",
         "enable_now": "Habilitar ahora"
       },
-      "recent_transactions": "Transacciones Recientes",
       "allowance_view": {
-        "recent_transactions": "Transacciones Recientes",
-        "no_transactions": "No hay transacciones en <0>{{name}}</0> todavía."
+        "no_transactions": "No hay transacciones en <0>{{name}}</0> todavía.",
+        "sats": "sats",
+        "budget_spent": "Presupuesto gastado",
+        "total_spent": "Gastos totales"
       },
       "default_view": {
-        "recent_transactions": "Transacciones Recientes",
         "is_blocked_hint": "Alby está actualmente deshabilitado en {{host}}",
         "block_removed": "{{host}} habilitado. Vuelva a cargar el sitio web.",
-        "no_outgoing_transactions": "Aún no hay transacciones salientes para esta cuenta.",
-        "no_incoming_transactions": "Aún no hay transacciones entrantes para esta cuenta.",
-        "all_transactions_link": "Ver todas las transacciones"
+        "see_all": "Ver todo",
+        "no_transactions": "Aún no hay transacciones en esta cuenta."
       }
     },
     "accounts": {
-      "title": "Cuentas",
-      "actions": {
-        "add_account": "Agregar Cuenta"
-      },
       "account_view": {
         "nostr": {
           "errors": {
@@ -350,11 +271,6 @@
           "title": "Nostr",
           "hint": "es un protocolo simple y abierto que tiene como objetivo crear redes sociales resistentes a la censura. Nostr trabaja con claves criptográficas. Para publicar algo, lo firma con su clave y lo envía a múltiples relevos. Puede usar Alby para administrar su clave Nostr. Muchas aplicaciones de Nostr le permitirán simplemente usar la clave de la extensión Alby."
         },
-        "remove": {
-          "title": "Eliminar Esta Cuenta",
-          "subtitle": "Se eliminarán todos los enlaces vinculados. Por favor, asegúrese de querer hacerlo."
-        },
-        "title1": "Información de la Cuenta",
         "title2": "Editar Cuenta",
         "name": {
           "title": "Nombre",
@@ -369,7 +285,6 @@
           "export_uri": "URI de credenciales de LNDHub"
         },
         "actions": {
-          "remove_account": "Eliminar cuenta",
           "export": "Exportar"
         }
       }
@@ -390,7 +305,6 @@
       }
     },
     "settings": {
-      "title": "Configuración",
       "website_enhancements": {
         "title": "Mejoras del sitio web",
         "subtitle": "Mejoras de propinas para Twitter, YouTube, etc."
@@ -601,14 +515,25 @@
     "choose_path": {
       "alby": {
         "title": "Cuenta de Alby",
-        "description": "Regístrate o usa tú cuenta de Alby existente para empezar a realizar pagos relámpago en un abrir y cerrar de ojos."
+        "connect": "Conectar con Alby"
       },
       "other": {
-        "title": "Otras Billeteras",
-        "and_more": "Y más...",
+        "title": "Lleve su propia cartera",
         "connect": "Conectar",
-        "description": "Conecta con tu billetera lightning existente o nodo y elige entre varios conectores."
-      }
+        "point1": "Empieza al instante, sin esperar invitación",
+        "point2": "Sin límite de transacciones ni de importe",
+        "description": "Lo mejor si ya tienes un monedero o necesitas hacer pagos de mucho importe.",
+        "point3": "Opciones de autocustodia y custodia",
+        "point4": "Sin dirección relámpago y nostr"
+      },
+      "voltage": {
+        "connect": "Connectar",
+        "title": "Nodo a Voltage Cloud",
+        "point1": "Empieza al instante, sin esperar invitación",
+        "point2": "Sin límite de transacciones ni de importe",
+        "point3": "Servicio de pago en la nube"
+      },
+      "title": "Conectar la cartera a la extensión Alby"
     },
     "nostr": {
       "title": "Nostr",
@@ -617,10 +542,8 @@
       "allow_sign": "Permitir que {{host}} firme:",
       "block_and_ignore": "Bloquear e ignorar {{host}}",
       "block_added": "Se agregó {{host}} a la lista de bloqueados, vuelva a cargar el sitio web.",
-      "allow_sign_event": "Permitir que {{host}} firme un {{kind}}:",
       "view_details": "Más información",
       "hide_details": "Ocultar los detalles",
-      "no_content": "(Sin contenido)",
       "kinds": {
         "0": "metadatos",
         "1": "nota corta de texto",
@@ -644,34 +567,7 @@
         "30008": "distintivos del perfil",
         "30009": "definición del distintivo",
         "30023": "contenidos largos",
-        "30078": "datos específicos de la aplicación",
-        "unknown": "nostr evento del tipo {{kind}}"
-      }
-    },
-    "discover": {
-      "title": "Explora el Ecosistema ⚡️ Lightning",
-      "description": "Sitios web y aplicaciones web donde puede usar Alby",
-      "tips": {
-        "top_up_wallet": {
-          "title": "⚡️ Recarga tu billetera",
-          "description": "Cree una factura lightning, envíese algunos bitcoins y comience a usar Alby en el ecosistema lightning"
-        },
-        "title": "Tu billetera Alby está lista",
-        "description": "Algunos consejos para que empieces a zumbar 🐝",
-        "demo": {
-          "title": "🕹️ Prueba la versión Demo de Alby",
-          "description": "Descubra todo lo que puede hacer con Alby en nuestro sitio web de demostraciones"
-        }
-      },
-      "list": {
-        "entertainment": "Entretenimiento",
-        "shopping": "Compras",
-        "miscellaneous": "Varios",
-        "showcases": "Vitrinas",
-        "nostr": "Nostr",
-        "trading": "Comerciar",
-        "gaming": "Juegos",
-        "nodeManagement": "Gestión de nodos"
+        "30078": "datos específicos de la aplicación"
       }
     },
     "confirm_request_permission": {
@@ -708,14 +604,15 @@
     },
     "transactions": {
       "title": "Transacciones",
-      "list_empty": "Todavía no hay transacciones disponibles."
+      "list_empty": "Todavía no hay transacciones disponibles.",
+      "description": "Transacciones para esta cuenta"
     },
     "distributions": {
       "umbrel": {
         "name": "Umbrel"
       },
-      "start9": {
-        "name": "Start9"
+      "startos": {
+        "name": "StartOS"
       },
       "raspiblitz": {
         "name": "Raspiblitz"
@@ -731,13 +628,15 @@
       "btcpay": {
         "name": "BTCPay"
       }
+    },
+    "nostr_enable": {
+      "request2": "Solicitud para firmar eventos utilizando su clave privada"
     }
   },
   "common": {
     "password": "Contraseña",
     "success": "Exitoso",
     "error": "Error",
-    "settings": "Ajustes",
     "connected_sites": "Sitios conectados",
     "sats_one": "sat",
     "sats_other": "sats",
@@ -770,7 +669,11 @@
       "log_in": "Iniciar Sesión",
       "remember": "Recordar mi elección y no preguntar nuevamente",
       "transactions": "Transacciones",
-      "more": "Más"
+      "more": "Más",
+      "download": "Descargar",
+      "review": "Revisar",
+      "hide": "Ocultar",
+      "disconnect": "Desconectar"
     },
     "errors": {
       "connection_failed": "Error de conexión",
@@ -781,7 +684,6 @@
     "success_message": "{{amount}}{{fiatAmount}} enviados a {{destination}}",
     "message": "Mensaje",
     "description_full": "Descripción Completa",
-    "advanced": "Avanzado",
     "accounts": "Cuentas",
     "discover": "Descubrir",
     "response": "Respuesta",
@@ -791,7 +693,12 @@
       "lessThanOrEqual": "≤ {{max}}",
       "greaterOrEqual": "≥ {{min}}"
     },
-    "balance": "Balance"
+    "balance": "Balance",
+    "connectors": {
+      "nativelnd": "LND (en Tor)",
+      "lnd": "LND"
+    },
+    "website": "Página web"
   },
   "components": {
     "allowance_menu": {
@@ -820,7 +727,7 @@
         "allow_camera_access": "Permita el acceso a la cámara en la pantalla de configuración."
       }
     },
-    "transactionsTable": {
+    "transactions_table": {
       "fee": "Comisión",
       "preimage": "Preimagen",
       "received": "Recibido",
@@ -829,9 +736,12 @@
         "sender": "Remitente",
         "message": "Mensaje",
         "app": "Aplicación",
-        "podcast": "Podcasts"
+        "podcast": "Podcasts",
+        "episode": "Episodio"
       },
-      "open_location": "Abrir sitio web"
+      "open_location": "Abrir la página web",
+      "payment_hash": "Hash del pago",
+      "date_time": "Fecha y hora"
     },
     "budget_control": {
       "remember": {
@@ -857,12 +767,8 @@
       }
     },
     "account_menu": {
-      "title": "Cambiar de cuenta",
       "options": {
         "account": {
-          "add": "Agregar una nueva cuenta",
-          "manage": "Administrar cuentas",
-          "account_settings": "Configuraciones de la cuenta",
           "go_to_web_wallet": "Administra tu cuenta de Alby"
         }
       },
@@ -891,91 +797,90 @@
   },
   "permissions": {
     "commando": {
-      "getinfo": "Obtenga el resumen del nodo.",
-      "bkpr-listbalances": "Lista de todos los saldos actuales e históricos de la cuenta.",
-      "checkmessage": "Verifique que la firma fue generada por un nodo dado.",
-      "connect": "Establecer una nueva conexión con otro nodo.",
-      "keysend": "Enviar un pago a otro nodo.",
-      "offer": "Crear una oferta.",
-      "sendpay": "Enviar un pago a través de una ruta.",
-      "signmessage": "Crear una firma a partir de este nodo.",
-      "fundchannel": "Abra un canal de pago con un par al realizar una transacción de financiación.",
-      "listfunds": "Listar todos los fondos disponibles.",
-      "getroute": "Encontrar la mejor ruta para el pago a un nodo lightning.",
-      "invoice": "Crear la expectativa de un pago.",
-      "listpays": "Obtener el estado de todos los comandos de pago.",
-      "listpeers": "Listar los nodos que están conectados o que tienen canales abiertos con este nodo.",
-      "listtransactions": "Listar las transacciones rastreadas en la billetera.",
-      "pay": "Envíe un pago a una factura BOLT11.",
-      "listinvoices": "Obtener el estado de todas las facturas.",
-      "listoffers": "Enumerar todas las ofertas u obtener una oferta específica.",
-      "multifundchannel": "Abra múltiples canales de pago con nodos al realizar una sola transacción de financiación.",
-      "disconnect": "Cerrar una conexión existente con un par.",
-      "decode": "Decodifica una cadena bolt11/bolt12/rune.",
-      "decodepay": "Comprobar y analizar una cadena bolt11.",
-      "listforwards": "Enumere todos los htlc que se han intentado reenviar.",
-      "setchannel": "Configurar tarifas/rango htlc anunciado para un canal.",
-      "listnodes": "Enumere los nodos sobre los que el nodo ha aprendido a través de mensajes gossip.",
-      "listsendpays": "Obtiene el estado de todos los comandos sendpay.",
-      "feerates": "Devuelve las tarifas que utilizará CLN."
+      "getinfo": "Obtenga el resumen del nodo",
+      "bkpr-listbalances": "Lista de todos los saldos actuales e históricos de la cuenta",
+      "checkmessage": "Verifique que la firma fue generada por un nodo dado",
+      "connect": "Establecer una nueva conexión con otro nodo",
+      "keysend": "Enviar un pago a otro nodo",
+      "offer": "Crear una oferta",
+      "sendpay": "Enviar un pago a través de una ruta",
+      "signmessage": "Crear una firma a partir de este nodo",
+      "fundchannel": "Abra un canal de pago con un par al realizar una transacción de financiación",
+      "listfunds": "Listar todos los fondos disponibles",
+      "getroute": "Encontrar la mejor ruta para el pago a un nodo lightning",
+      "invoice": "Crear la expectativa de un pago",
+      "listpays": "Obtener el estado de todos los comandos de pago",
+      "listpeers": "Listar los nodos que están conectados o que tienen canales abiertos con este nodo",
+      "listtransactions": "Listar las transacciones rastreadas en la billetera",
+      "pay": "Envíe un pago a una factura BOLT11",
+      "listinvoices": "Obtener el estado de todas las facturas",
+      "listoffers": "Enumerar todas las ofertas u obtener una oferta específica",
+      "multifundchannel": "Abra múltiples canales de pago con nodos al realizar una sola transacción de financiación",
+      "disconnect": "Cerrar una conexión existente con un par",
+      "decode": "Decodifica una cadena bolt11/bolt12/rune",
+      "decodepay": "Comprobar y analizar una cadena bolt11",
+      "listforwards": "Enumere todos los htlc que se han intentado reenviar",
+      "setchannel": "Configurar tarifas/rango htlc anunciado para un canal",
+      "listnodes": "Enumere los nodos sobre los que el nodo ha aprendido a través de mensajes gossip",
+      "listsendpays": "Obtiene el estado de todos los comandos sendpay",
+      "feerates": "Devuelve las tarifas que utilizará CLN"
     },
     "nostr": {
-      "signmessage": "Firma el mensaje con tu clave.",
-      "getpublickey": "Leer tu clave pública.",
-      "nip04encrypt": "Cifrar datos.",
-      "nip04decrypt": "Descifrar datos."
+      "signmessage": "Firma el mensaje con tu clave",
+      "getpublickey": "Leer tu clave pública",
+      "nip04decrypt": "Descifrar datos"
     },
     "lnd": {
-      "queryroutes": "Consultar una posible ruta.",
-      "openchannel": "Abrir un nuevo canal.",
-      "getnetworkinfo": "Obtener estadísticas básicas sobre el gráfico de canales conocidos.",
-      "getnodeinfo": "Obtener la información del canal para un nodo.",
-      "gettransactions": "Obtener una lista de todas las transacciones relevantes para la billetera.",
-      "getchaninfo": "Obtener el anuncio de la red para el canal dado.",
-      "listpeers": "Obtener una lista de todos los pares actualmente activos.",
-      "lookupinvoice": "Consultar los detalles de la factura.",
-      "listpayments": "Obtener una lista de todos los pagos salientes.",
-      "estimatefee": "Calcular la tasa de tarifa y las tarifas totales para una transacción.",
-      "getinfo": "Obtener la información del nodo.",
-      "listchannels": "Obtener una descripción de todos los canales abiertos.",
-      "listinvoices": "Obtener una lista de todas las facturas.",
-      "connectpeer": "Establecer una conexión con un par remoto.",
-      "disconnectpeer": "Desconectar de un par remoto.",
-      "addinvoice": "Crear nuevas facturas.",
-      "channelbalance": "Obtener un informe sobre los fondos totales en todos los canales abiertos.",
-      "walletbalance": "Obtener las salidas totales no gastadas de la billetera.",
-      "sendtoroute": "Realizar un pago a través de la ruta especificada.",
-      "decodepayreq": "Decodificar una cadena de solicitud de pago.",
-      "verifymessage": "Verificar una firma sobre un mensaje.",
-      "routermc": "Lea el estado de control de la misión interna.",
-      "settleinvoice": "Pagar una factura aceptada.",
-      "addholdinvoice": "Crear nuevas facturas HODL."
+      "queryroutes": "Consultar una posible ruta",
+      "openchannel": "Abrir un nuevo canal",
+      "getnetworkinfo": "Obtener estadísticas básicas sobre el gráfico de canales conocidos",
+      "getnodeinfo": "Obtener la información del canal para un nodo",
+      "gettransactions": "Obtener una lista de todas las transacciones relevantes para la billetera",
+      "getchaninfo": "Obtener el anuncio de la red para el canal dado",
+      "listpeers": "Obtener una lista de todos los pares actualmente activos",
+      "lookupinvoice": "Consultar los detalles de la factura",
+      "listpayments": "Obtener una lista de todos los pagos salientes",
+      "estimatefee": "Calcular la tasa de tarifa y las tarifas totales para una transacción",
+      "getinfo": "Obtener la información del nodo",
+      "listchannels": "Obtener una descripción de todos los canales abiertos",
+      "listinvoices": "Obtener una lista de todas las facturas",
+      "connectpeer": "Establecer una conexión con un par remoto",
+      "disconnectpeer": "Desconectar de un par remoto",
+      "addinvoice": "Crear nuevas facturas",
+      "channelbalance": "Obtener un informe sobre los fondos totales en todos los canales abiertos",
+      "walletbalance": "Obtener las salidas totales no gastadas de la billetera",
+      "sendtoroute": "Realizar un pago a través de la ruta especificada",
+      "decodepayreq": "Decodificar una cadena de solicitud de pago",
+      "verifymessage": "Verificar una firma sobre un mensaje",
+      "routermc": "Lea el estado de control de la misión interna",
+      "settleinvoice": "Pagar una factura aceptada",
+      "addholdinvoice": "Crear nuevas facturas HODL"
     },
     "lnc": {
-      "getinfo": "Obtener la información del nodo.",
-      "gettransactions": "Obtener una lista de todas las transacciones relevantes para la billetera.",
-      "getnodeinfo": "Obtener la información del canal para un nodo.",
-      "getnetworkinfo": "Obtener estadísticas básicas sobre el gráfico de canales conocidos.",
-      "listinvoices": "Obtener una lista de todas las facturas.",
-      "channelbalance": "Obtener un informe sobre los fondos totales en todos los canales abiertos.",
-      "walletbalance": "Obtener las salidas totales no gastadas de la billetera.",
-      "listpeers": "Obtener una lista de todos los pares actualmente activos.",
-      "lookupinvoice": "Consultar los detalles de la factura.",
-      "queryroutes": "Consultar una posible ruta.",
-      "sendtoroute": "Realizar un pago a través de la ruta especificada.",
-      "openchannel": "Abrir un nuevo canal.",
-      "connectpeer": "Establezca una conexión con un par remoto.",
-      "disconnectpeer": "Desconectarse de un par remoto.",
-      "estimatefee": "Calcular la tasa de tarifa y las tarifas totales para una transacción.",
-      "getchaninfo": "Obtener el anuncio de la red para el canal dado.",
-      "addinvoice": "Crear nuevas facturas.",
-      "listpayments": "Obtener una lista de todos los pagos salientes.",
-      "listchannels": "Obtener una descripción de todos los canales abiertos.",
-      "decodepayreq": "Decodificar una cadena de solicitud de pago.",
-      "verifymessage": "Verificar una firma sobre un mensaje.",
-      "routermc": "Lea el estado de control de la misión interna.",
-      "addholdinvoice": "Crear nuevas facturas HODL.",
-      "settleinvoice": "Pagar una factura aceptada."
+      "getinfo": "Obtener la información del nodo",
+      "gettransactions": "Obtener una lista de todas las transacciones relevantes para la billetera",
+      "getnodeinfo": "Obtener la información del canal para un nodo",
+      "getnetworkinfo": "Obtener estadísticas básicas sobre el gráfico de canales conocidos",
+      "listinvoices": "Obtener una lista de todas las facturas",
+      "channelbalance": "Obtener un informe sobre los fondos totales en todos los canales abiertos",
+      "walletbalance": "Obtener las salidas totales no gastadas de la billetera",
+      "listpeers": "Obtener una lista de todos los pares actualmente activos",
+      "lookupinvoice": "Consultar los detalles de la factura",
+      "queryroutes": "Consultar una posible ruta",
+      "sendtoroute": "Realizar un pago a través de la ruta especificada",
+      "openchannel": "Abrir un nuevo canal",
+      "connectpeer": "Establezca una conexión con un par remoto",
+      "disconnectpeer": "Desconectarse de un par remoto",
+      "estimatefee": "Calcular la tasa de tarifa y las tarifas totales para una transacción",
+      "getchaninfo": "Obtener el anuncio de la red para el canal dado",
+      "addinvoice": "Crear nuevas facturas",
+      "listpayments": "Obtener una lista de todos los pagos salientes",
+      "listchannels": "Obtener una descripción de todos los canales abiertos",
+      "decodepayreq": "Decodificar una cadena de solicitud de pago",
+      "verifymessage": "Verificar una firma sobre un mensaje",
+      "routermc": "Lea el estado de control de la misión interna",
+      "addholdinvoice": "Crear nuevas facturas HODL",
+      "settleinvoice": "Pagar una factura aceptada"
     }
   }
 }

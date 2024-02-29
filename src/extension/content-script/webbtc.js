@@ -7,10 +7,14 @@ import shouldInject from "./shouldInject";
 const webbtcCalls = [
   "webbtc/enable",
   "webbtc/getInfo",
+  "webbtc/signPsbtWithPrompt",
   "webbtc/getAddressOrPrompt",
+  "webbtc/isEnabled",
+  "webbtc/on",
+  "webbtc/off",
 ];
 // calls that can be executed when `window.webbtc` is not enabled for the current content page
-const disabledCalls = ["webbtc/enable"];
+const disabledCalls = ["webbtc/enable", "webbtc/isEnabled"];
 
 let isEnabled = false; // store if webbtc is enabled for this content page
 let isRejected = false; // store if the webbtc enable call failed. if so we do not prompt again
@@ -22,6 +26,16 @@ async function init() {
   if (!inject) {
     return;
   }
+
+  browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    // forward account changed messaged to inpage script
+    if (request.action === "accountChanged" && isEnabled) {
+      window.postMessage(
+        { action: "accountChanged", scope: "webbtc" },
+        window.location.origin
+      );
+    }
+  });
 
   // message listener to listen to inpage webbtc calls
   // those calls get passed on to the background script
@@ -73,6 +87,10 @@ async function init() {
             console.info("Enable was rejected ignoring further webbtc calls");
             isRejected = true;
           }
+        }
+
+        if (ev.data.action === `${SCOPE}/isEnabled`) {
+          isEnabled = response.data?.isEnabled;
         }
 
         postMessage(ev, response);

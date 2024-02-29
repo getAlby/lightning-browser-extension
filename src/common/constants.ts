@@ -7,7 +7,7 @@ export const ABORT_PROMPT_ERROR = "Prompt was closed";
 export const USER_REJECTED_ERROR = "User rejected";
 export const NO_KEYS_ERROR = "No keys available";
 
-// Currently only relevant for connector Kollider
+// Currently only relevant for connectors which provide stablecoins
 // all other connectors fall back to BTC
 export type ACCOUNT_CURRENCIES = "EUR" | "USD" | "BTC";
 
@@ -161,10 +161,4 @@ export enum CURRENCIES {
   ZAR = "ZAR",
   ZMW = "ZMW",
   ZWL = "ZWL",
-}
-
-export enum TIPS {
-  TOP_UP_WALLET = "top_up_wallet",
-  DEMO = "demo",
-  MNEMONIC = "mnemonic",
 }

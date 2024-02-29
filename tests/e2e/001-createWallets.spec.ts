@@ -194,12 +194,12 @@ test.describe("Create or connect wallets", () => {
     await browser.close();
   });
 
-  test("successfully connects to Start9", async () => {
+  test("successfully connects to StartOS", async () => {
     const { browser, page, $document } = await createNewWalletWithPassword({
       openConnectOtherWallet: true,
     });
 
-    const connectButton = await getByText($document, "Start9");
+    const connectButton = await getByText($document, "StartOS");
     await Promise.all([
       page.waitForNavigation(), // The promise resolves after navigation has finished
       connectButton.click(),

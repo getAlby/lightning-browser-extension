@@ -6,7 +6,6 @@ import {
   hasPermissionFor,
 } from "~/extension/background-script/permissions";
 import state from "~/extension/background-script/state";
-import i18n from "~/i18n/i18nConfig";
 import { MessageDecryptGet, PermissionMethodNostr, Sender } from "~/types";
 
 const decryptOrPrompt = async (message: MessageDecryptGet, sender: Sender) => {
@@ -33,10 +32,7 @@ const decryptOrPrompt = async (message: MessageDecryptGet, sender: Sender) => {
         rememberPermission: boolean;
       }>({
         ...message,
-        action: "public/nostr/confirm",
-        args: {
-          description: i18n.t("permissions:nostr.nip04decrypt"),
-        },
+        action: "public/nostr/confirmDecrypt",
       });
 
       // add permission to db only if user decided to always allow this request

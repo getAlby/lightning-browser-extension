@@ -51,58 +51,24 @@ if (clientId && clientSecret) {
   );
 } else {
   const oauthCredentials = {
-    development: {
-      testnet: {
-        chrome: {
-          id: "CLAp8AfS3W",
-          secret: "KwIxF0VbGX2ZHLbbbYgE",
-        },
-        firefox: {
-          id: "zWdxnF04Hd",
-          secret: "wY5uLJJDjNWrDlB6lAj8",
-        },
-      },
-      mainnet: {
-        chrome: {
-          id: "Zf7u3Zlyxl",
-          secret: "7wtcdVi61emqwzAH9Nm6",
-        },
-        firefox: {
-          id: "uQkyHFBkaC",
-          secret: "0agh0cKkGWQSXTGRz9oy",
-        },
-      },
+    testnet: {
+      id: "TliTCTtJ49",
+      secret: "35RixI2gv0xloVYA0Iq3",
     },
-    production: {
-      testnet: {
-        // only chrome is used for E2E tests
-        chrome: {
-          id: "mI5TEUKCwD",
-          secret: "47lxj2WNCJyVpxiy6vgq",
-        },
-      },
-      mainnet: {
-        chrome: {
-          id: "R7lZBSqfQt",
-          secret: "W4yWprd5ib6OSfq27InN",
-        },
-        firefox: {
-          id: "V682entasX",
-          secret: "GhL3g37I3NAwzavCB3A5",
-        },
-      },
+    mainnet: {
+      id: "NT8bFB23Sk",
+      secret: "wWp7BPpYOm1H0GwSVVpY",
     },
   };
 
   // setup ALBY_OAUTH_CLIENT_ID
-  const selectedOAuthCredentials =
-    oauthCredentials[nodeEnv]?.[network]?.[oauthBrowser];
+  const selectedOAuthCredentials = oauthCredentials[network];
   if (!selectedOAuthCredentials) {
     throw new Error(
-      `No OAuth credentials found for current configuration: NODE_ENV=${nodeEnv} network=${network} oauthBrowser=${oauthBrowser}`
+      `No OAuth credentials found for current configuration: network=${network}`
     );
   }
-  console.info("Using OAuth credentials for", nodeEnv, oauthBrowser, network);
+  console.info("Using OAuth credentials for", network);
   process.env.ALBY_OAUTH_CLIENT_ID = selectedOAuthCredentials.id;
   process.env.ALBY_OAUTH_CLIENT_SECRET = selectedOAuthCredentials.secret;
 }

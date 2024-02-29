@@ -12,9 +12,7 @@
           "mismatched_password": "パスコードが一致しませんでした。",
           "enter_password": "パスコードを入力してください。",
           "confirm_password": "確認用パスコードを入力してください。"
-        },
-        "title": "ロック解除パスコードの設定",
-        "description": "このパスコードを使用すると、このデバイスでAlbyのロックを解除できます。パスコードは復元できませんが、後で変更することは可能です。"
+        }
       },
       "test_connection": {
         "ready": "すごいね、準備万端だ！",
@@ -27,7 +25,6 @@
           "delete_edit_account": "無効なアカウントを削除して再編集"
         }
       },
-      "title": "Albyへようこそ",
       "pin_extension": {
         "title": "Alby拡張機能を固定",
         "description": "もうすぐです。Albyを便利に使うには、拡張機能をブラウザのツールバーに忘れずに固定してください：",
@@ -38,14 +35,11 @@
     "choose_path": {
       "alby": {
         "title": "Albyアカウント",
-        "description": "新規登録するか、登録済みのAlbyアカウントをご利用いただくと、すぐにライトニング・ペイメントを開始できます。",
         "connect": "Albyと接続"
       },
       "other": {
         "title": "その他のウォレット",
-        "connect": "接続",
-        "description": "お持ちのライトニング・ウォレットまたはノードに接続するか、さまざまなサービスと接続できます。",
-        "and_more": "もっと..."
+        "connect": "接続"
       }
     },
     "alby": {
@@ -89,28 +83,10 @@
       },
       "lnc": {
         "title": "Lightning Terminal (LNC)",
-        "page": {
-          "title": "LNDノードに接続",
-          "description": "1. Lightning Terminalを開き、サイドバーから<0>Lightning Node Connect</0>を選択します。 <0>Create a new session</0>を選択します。<1/>3.セッションにラベルを付け、必要なパーミッションを選択し、送信します。<1/>4.<0>ペアリング・フレーズをコピーし、以下に貼り付けます。"
-        },
         "pairing_phrase": {
           "label": "あなたのペアリング・フレーズ ",
           "placeholder": "シークレット・stack sats・フレーズ"
         }
-      },
-      "lndhub_bluewallet": {
-        "page": {
-          "title": "BlueWalletに接続",
-          "description": "BlueWalletで、接続したいウォレットを開き、\"... \"をクリックします。エクスポート/バックアップをクリックしてQRコードを表示し、ウェブカメラでスキャンします。"
-        },
-        "errors": {
-          "invalid_uri": "無効なBlueWalletのURI",
-          "connection_failed": "接続に失敗しました。BlueWalletのURIは正しいですか？"
-        },
-        "uri": {
-          "label": "BlueWalletのエクスポートURI"
-        },
-        "title": "BlueWallet"
       },
       "lndhub_go": {
         "title": "LNDHub",
@@ -193,15 +169,15 @@
         },
         "title": "myNode"
       },
-      "start9": {
+      "startos": {
         "rest_url": {
           "label": "lndconnectのREST URL",
           "placeholder": "lndconnect://yournode:8080?..."
         },
-        "title": "Start9",
+        "title": "StartOS",
         "page": {
-          "title": "<0>Start9サーバー</0>に接続",
-          "instructions": "Embassyダッシュボードで<0>Lightning Network Daemon</0>サービスをクリックします。<1/><0>Properties</0>タブを選択します。<1/>ここで<0>LND Connect REST URL</0>をコピーします。"
+          "title": "<0>StartOSサーバー</0>に接続",
+          "instructions": "StartOSダッシュボードで<0>Lightning Network Daemon</0>サービスをクリックします。<1/><0>Properties</0>タブを選択します。<1/>ここで<0>LND Connect REST URL</0>をコピーします。"
         }
       },
       "raspiblitz": {
@@ -230,62 +206,9 @@
           "title": "<0>Bitcoin Jungle Wallet</0>に接続"
         }
       },
-      "galoy": {
-        "phone_number": {
-          "label": "電話番号を入力"
-        },
-        "sms_code": {
-          "label": "SMS認証コードを入力"
-        },
-        "token": {
-          "label": "アクセストークンを入力",
-          "info": "Albyと{{label}}の連携は現在アルファ版のため、上級者のみに推奨されます。<br><br>アクセストークンは、モバイルアプリで設定アイコンをクリックし、ビルド番号を3回タップして開発者メニューを開くことで入手できます。<br><br>アクセストークンはここからコピーできます。<br><br>"
-        },
-        "actions": {
-          "login": "ログイン"
-        },
-        "errors": {
-          "setup_failed": "セットアップに失敗しました",
-          "missing_token": "アクセストークンが見つからないためログインできませんでした。",
-          "invalid_token": "無効なアクセストークンです"
-        }
-      },
-      "kollider": {
-        "warning": "⚠️ 認証情報は必ずパスワードマネージャーに保存してください。認証情報を紛失した場合、アカウントを復元することはできません。",
-        "title": "Kollider",
-        "choose_path": {
-          "create_new": "新規登録",
-          "title": "Koliderウォレットに接続",
-          "description": "ログインまたはKoliderアカウントを新規作成して、Albyに接続してください。"
-        },
-        "create": {
-          "title": "Koliderアカウントを作成してAlbyと接続",
-          "description": "新しいKolliderアカウントを作成し、ビットコインの送受金と取引を始める。"
-        },
-        "description": "Koliderアカウントにログイン",
-        "username": {
-          "label": "ユーザ名"
-        },
-        "errors": {
-          "user_already_exists": "ユーザー名は既に存在します",
-          "registration_limit_exceeded": "登録制限を超えました。しばらくしてからお試しください。",
-          "connection_failed": "接続に失敗しました。アカウントデータは正しいですか？"
-        },
-        "login": {
-          "title": "Kolliderアカウントに接続"
-        },
-        "currency": {
-          "label": "通貨アカウントを選択"
-        }
-      },
       "btcpay": {
-        "page": {
-          "title": "BTCPay LNDノードに接続",
-          "instructions": "BTCPay Serverに移動し、管理者としてログインします。Server Settings > Services > LND Rest - See informationに進みます。次に\"See QR Code information\"をクリックし、QRコードデータをコピーします。下に貼り付けてください："
-        },
         "config": {
-          "label": "コンフィグデータ",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
+          "label": "コンフィグデータ"
         },
         "errors": {
           "connection_failed": "接続に失敗しました。BTCPayの接続URLは正しく、アクセス可能ですか？"
@@ -341,13 +264,11 @@
           "title": "表示名",
           "placeholder": "アカウントの表示名"
         },
-        "title1": "アカウント設定",
         "mnemonic": {
           "title": "🔑 鍵の管理",
           "backup": {
             "button": "リカバリーフレーズを表示",
             "description": "新しいデバイスでマスターキーを復元したり、アカウントにアクセスできなくなった場合に備えて、リカバリーフレーズは必ずメモしてください。",
-            "title": "リカバリーフレーズをバックアップ",
             "warning": "⚠️ リカバリフレーズのバックアップを忘れないでください！バックアップを忘れると、マスターキー、Nostr ID、またはこのキーで管理する資産へのアクセスを永久に失います。",
             "items": {
               "recovery_phrase": "リカバリーフレーズを使用すれば、いつでもマスターキーにアクセスできます。",
@@ -359,9 +280,7 @@
             },
             "save": "マスターキーを保存"
           },
-          "inputs": {
-            "title": "リカバリーフレーズ"
-          },
+          "inputs": {},
           "existing_nostr_key_notice": "ℹ️ このアカウントにはすでにnostr秘密鍵が設定されているため、このマスターキーから生成されることはありません。Nostr鍵はアカウント設定から管理できます。",
           "generate": {
             "description": "マスターキーは、Nostr、Bitcoinのベースレイヤー、LNURL-Authのようなプロトコルとの連携を可能にします。",
@@ -454,29 +373,19 @@
           },
           "title": "Network",
           "subtitle": "アドレス導出やトランザクションをデコードするBitcoinやliquidのネットワークを選んでください。"
-        },
-        "remove": {
-          "title": "このアカウントを削除"
         }
-      },
-      "title": "アカウント"
+      }
     },
     "home": {
       "default_view": {
         "is_blocked_hint": "Alby は現在{{host}}で無効になっています",
-        "block_removed": "{{host}}を有効にしました。ウェブサイトを再度読み込んでください。",
-        "recent_transactions": "最近のトランザクション",
-        "no_outgoing_transactions": "このアカウントにはまだ送金トランザクションがありません。",
-        "no_incoming_transactions": "このアカウントにはまだ受金トランザクションがありません。",
-        "all_transactions_link": "すべてのトランザクションを見る"
+        "block_removed": "{{host}}を有効にしました。ウェブサイトを再度読み込んでください。"
       },
       "actions": {
         "send_satoshis": "⚡️ サトシを送る ⚡️",
         "enable_now": "今すぐ有効化"
       },
-      "recent_transactions": "最近のトランザクション",
       "allowance_view": {
-        "recent_transactions": "最近のトランザクション",
         "no_transactions": "<0>{{name}}</0>宛てのトランザクションはまだありません。"
       }
     },
@@ -496,8 +405,8 @@
       "mynode": {
         "name": "myNode"
       },
-      "start9": {
-        "name": "Start9"
+      "startos": {
+        "name": "StartOS"
       },
       "description": "接続したい{{name}}アプリを選択してください",
       "title": "{{name}}に接続"

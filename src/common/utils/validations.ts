@@ -1,3 +1,5 @@
+import { Account, Accounts } from "~/types";
+
 export const validate = (formData: Record<string, string>) => {
   let password = "";
   let passwordConfirmation = "";
@@ -14,3 +16,24 @@ export const validate = (formData: Record<string, string>) => {
     passwordConfirmation,
   };
 };
+
+export function getUniqueAccountName(name: string, accounts: Accounts): string {
+  const accountNames = Object.values(accounts).map((el: Account) => el.name);
+
+  let count = 1;
+  let uniqueName = name;
+
+  while (accountNames.includes(uniqueName)) {
+    const match = uniqueName.match(/\((\d+)\)$/);
+
+    if (match) {
+      const currentCount = parseInt(match[1]);
+      count = currentCount + 1;
+      uniqueName = uniqueName.replace(/\(\d+\)$/, `(${count})`);
+    } else {
+      uniqueName = `${name} (${count})`;
+    }
+  }
+
+  return uniqueName;
+}

@@ -2,30 +2,31 @@ import { EventEmitter } from "events";
 import { postMessage } from "~/extension/providers/postMessage";
 
 export default class ProviderBase {
-  enabled: boolean;
+  private _isEnabled: boolean;
   private _eventEmitter: EventEmitter;
 
   private _scope: string;
 
   constructor(scope: string) {
-    this.enabled = false;
+    this._scope = scope;
+    this._isEnabled = false;
     this._eventEmitter = new EventEmitter();
     this._scope = scope;
   }
 
   protected _checkEnabled(methodName: string): void {
-    if (!this.enabled) {
+    if (!this._isEnabled) {
       throw new Error(`Provider must be enabled before calling ${methodName}`);
     }
   }
 
   async enable(): Promise<void> {
-    if (this.enabled) {
+    if (this._isEnabled) {
       return;
     }
     const result = await this.execute("enable");
     if (typeof result.enabled === "boolean") {
-      this.enabled = result.enabled;
+      this._isEnabled = result.enabled;
     }
   }
 
@@ -41,6 +42,17 @@ export default class ProviderBase {
 
   emit(...args: Parameters<EventEmitter["emit"]>) {
     this._eventEmitter.emit(...args);
+  }
+
+  async isEnabled(): Promise<boolean> {
+    if (this._isEnabled) {
+      return true;
+    }
+    const result = await this.execute("isEnabled");
+    if (typeof result.isEnabled === "boolean") {
+      this._isEnabled = result.isEnabled;
+    }
+    return this._isEnabled;
   }
 
   // NOTE: new call `action`s must be specified also in the content script

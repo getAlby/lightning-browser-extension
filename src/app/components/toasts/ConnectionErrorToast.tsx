@@ -37,7 +37,7 @@ export default function ConnectionErrorToast({
         )}
         <li>
           <a
-            href="https://guides.getalby.com/overall-guide/alby-browser-extension/connect-lightning-wallets-and-nodes-to-alby-extension"
+            href="https://guides.getalby.com/user-guide/v/alby-account-and-browser-extension/alby-browser-extension/connect-lightning-wallets-and-nodes-to-the-alby-extension"
             className="underline"
             target="_blank"
             rel="noreferrer noopener"

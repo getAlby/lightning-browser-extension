@@ -1,10 +1,7 @@
 {
   "translation": {
     "welcome": {
-      "title": "Вітаємо у Alby",
       "set_password": {
-        "title": "Встановити пароль для розблокування",
-        "description": "Пароль використовується для захисту вашого гаманця і надання доступу до розширення браузера. Його не можна скинути і він є відокремленим від вашого паролю до облікового запису Alby.",
         "choose_password": {
           "label": "Оберіть пароль для розблокування:"
         },
@@ -31,13 +28,10 @@
     },
     "choose_path": {
       "alby": {
-        "title": "Alby",
-        "description": "Зареєструйтеся або скористайтеся наявним обліковим записом Alby, щоб миттєво розпочати роботу з lightning платежами."
+        "title": "Alby"
       },
       "other": {
         "title": "Інші гаманці",
-        "description": "",
-        "and_more": "",
         "connect": ""
       }
     },
@@ -81,27 +75,9 @@
       },
       "lnc": {
         "title": "",
-        "page": {
-          "title": "",
-          "description": ""
-        },
         "pairing_phrase": {
           "label": "",
           "placeholder": ""
-        }
-      },
-      "lndhub_bluewallet": {
-        "title": "",
-        "page": {
-          "title": "",
-          "description": ""
-        },
-        "uri": {
-          "label": ""
-        },
-        "errors": {
-          "invalid_uri": "",
-          "connection_failed": ""
         }
       },
       "lndhub_go": {
@@ -185,7 +161,7 @@
           "placeholder": ""
         }
       },
-      "start9": {
+      "startos": {
         "title": "",
         "page": {
           "title": "",
@@ -220,48 +196,10 @@
           "title": ""
         }
       },
-      "galoy": {
-        "phone_number": {
-          "label": ""
-        },
-        "sms_code": {
-          "label": ""
-        },
-        "token": {
-          "label": "",
-          "info": ""
-        },
-        "actions": {
-          "login": ""
-        },
-        "errors": {
-          "setup_failed": "",
-          "missing_token": "",
-          "invalid_token": ""
-        }
-      },
-      "kollider": {
-        "title": "",
-        "description": "",
-        "username": {
-          "label": ""
-        },
-        "currency": {
-          "label": ""
-        },
-        "errors": {
-          "connection_failed": ""
-        }
-      },
       "btcpay": {
         "title": "",
-        "page": {
-          "title": "",
-          "instructions": ""
-        },
         "config": {
-          "label": "",
-          "placeholder": ""
+          "label": ""
         },
         "errors": {
           "connection_failed": ""
@@ -305,21 +243,16 @@
         "send_satoshis": "",
         "enable_now": ""
       },
-      "recent_transactions": "",
       "allowance_view": {
-        "recent_transactions": "",
         "no_transactions": ""
       },
       "default_view": {
-        "recent_transactions": "",
         "is_blocked_hint": "",
         "block_removed": ""
       }
     },
     "accounts": {
-      "title": "",
       "account_view": {
-        "title1": "",
         "title2": "",
         "name": {
           "title": "",
@@ -362,17 +295,9 @@
             "failed_to_load": ""
           }
         },
-        "remove": {
-          "title": "",
-          "subtitle": ""
-        },
         "actions": {
-          "remove_account": "",
           "export": ""
         }
-      },
-      "actions": {
-        "add_account": ""
       }
     },
     "unlock": {
@@ -391,7 +316,6 @@
       }
     },
     "settings": {
-      "title": "",
       "browser_notifications": {
         "title": "",
         "subtitle": ""
@@ -556,31 +480,6 @@
         "status": ""
       }
     },
-    "discover": {
-      "title": "",
-      "description": "",
-      "list": {
-        "trading": "",
-        "gaming": "",
-        "entertainment": "",
-        "shopping": "",
-        "miscellaneous": "",
-        "showcases": "",
-        "nostr": ""
-      },
-      "tips": {
-        "title": "",
-        "description": "",
-        "top_up_wallet": {
-          "title": "",
-          "description": ""
-        },
-        "demo": {
-          "title": "",
-          "description": ""
-        }
-      }
-    },
     "publishers": {
       "title": "",
       "description": "",
@@ -651,10 +550,8 @@
   "common": {
     "password": "",
     "confirm_password": "",
-    "advanced": "",
     "success": "",
     "error": "",
-    "settings": "",
     "accounts": "",
     "discover": "",
     "connected_sites": "",
@@ -727,7 +624,7 @@
         "allow_camera_access": ""
       }
     },
-    "transactionsTable": {
+    "transactions_table": {
       "fee": "",
       "preimage": "",
       "received": "",
@@ -764,14 +661,7 @@
       }
     },
     "account_menu": {
-      "screen_reader": "",
-      "title": "",
-      "options": {
-        "account": {
-          "add": "",
-          "manage": ""
-        }
-      }
+      "screen_reader": ""
     },
     "publishers_table": {
       "payments": ""
@@ -785,7 +675,6 @@
   "permissions": {
     "nostr": {
       "getpublickey": "",
-      "nip04encrypt": "",
       "nip04decrypt": "",
       "signmessage": ""
     },

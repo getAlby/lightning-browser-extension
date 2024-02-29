@@ -27,9 +27,10 @@ const mockState = {
       id: "8b7f1dc6-ab87-4c6c-bca5-19fa8632731e",
       name: "Alby",
       nostrPrivateKey: "nostr-123-456",
-      mnemonic: btcFixture.mnemnoic,
+      mnemonic: btcFixture.mnemonic,
       bitcoinNetwork: "regtest",
       useMnemonicForLnurlAuth: true,
+      isMnemonicBackupDone: true,
     },
     "1e1e8ea6-493e-480b-9855-303d37506e97": {
       config: "config-123-456",
@@ -65,6 +66,7 @@ describe("account info", () => {
       hasImportedNostrKey: true,
       bitcoinNetwork: "bitcoin",
       useMnemonicForLnurlAuth: false,
+      isMnemonicBackupDone: true,
     };
 
     expect(await getAccount(message)).toStrictEqual({
@@ -92,6 +94,7 @@ describe("account info", () => {
       hasImportedNostrKey: true,
       bitcoinNetwork: "regtest",
       useMnemonicForLnurlAuth: true,
+      isMnemonicBackupDone: true,
     };
 
     expect(await getAccount(message)).toStrictEqual({

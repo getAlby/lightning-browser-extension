@@ -1,2 +1,3 @@
 import enable from "./enable";
-export { enable };
+import isEnabled from "./isEnabled";
+export { enable, isEnabled };

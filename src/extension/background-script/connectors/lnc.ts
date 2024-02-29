@@ -1,4 +1,5 @@
 import LNC from "@lightninglabs/lnc-web";
+import lightningPayReq from "bolt11";
 import Base64 from "crypto-js/enc-base64";
 import Hex from "crypto-js/enc-hex";
 import UTF8 from "crypto-js/enc-utf8";
@@ -9,16 +10,17 @@ import { encryptData } from "~/common/lib/crypto";
 import utils from "~/common/lib/utils";
 import { Account } from "~/types";
 
+import { mergeTransactions } from "~/common/utils/helpers";
 import state from "../state";
 import Connector, {
   CheckPaymentArgs,
   CheckPaymentResponse,
-  ConnectorInvoice,
+  ConnectorTransaction,
   ConnectPeerResponse,
   flattenRequestMethods,
   GetBalanceResponse,
   GetInfoResponse,
-  GetInvoicesResponse,
+  GetTransactionsResponse,
   KeysendArgs,
   MakeInvoiceArgs,
   MakeInvoiceResponse,
@@ -60,6 +62,10 @@ const methods: Record<string, string> = {
   sendtoroute: "lnd.lightning.SendToRouteSync",
   verifymessage: "lnd.lightning.VerifyMessage",
   walletbalance: "lnd.lightning.WalletBalance",
+  newaddress: "lnd.lightning.NewAddress",
+  nextaddr: "lnd.walletKit.nextAddr",
+  listaddresses: "lnd.walletKit.ListAddresses",
+  listunspent: "lnd.walletKit.ListUnspent",
 };
 
 const DEFAULT_SERVER_HOST = "mailbox.terminal.lightning.today:443";
@@ -194,6 +200,7 @@ class Lnc implements Connector {
       "keysend",
       "makeInvoice",
       "sendPayment",
+      "sendPaymentAsync",
       "signMessage",
       "getBalance",
       ...flattenRequestMethods(Object.keys(methods)),
@@ -241,12 +248,12 @@ class Lnc implements Connector {
     });
   }
 
-  async getInvoices(): Promise<GetInvoicesResponse> {
+  private async getInvoices(): Promise<ConnectorTransaction[]> {
     this.checkConnection();
     const data = await this.lnc.lnd.lightning.ListInvoices({ reversed: true });
 
-    const invoices: ConnectorInvoice[] = data.invoices
-      .map((invoice: FixMe, index: number): ConnectorInvoice => {
+    const invoices: ConnectorTransaction[] = data.invoices
+      .map((invoice: FixMe, index: number): ConnectorTransaction => {
         const custom_records =
           invoice.htlcs[0] && invoice.htlcs[0].customRecords;
 
@@ -263,11 +270,56 @@ class Lnc implements Connector {
       })
       .reverse();
 
+    return invoices;
+  }
+
+  async getTransactions(): Promise<GetTransactionsResponse> {
+    const incomingInvoices = await this.getInvoices();
+    const outgoingInvoices = await this.getPayments();
+
+    const transactions: ConnectorTransaction[] = mergeTransactions(
+      incomingInvoices,
+      outgoingInvoices
+    );
+
     return {
       data: {
-        invoices,
+        transactions,
       },
     };
+  }
+
+  private async getPayments(): Promise<ConnectorTransaction[]> {
+    const outgoingInvoicesResponse = await this.lnc.lnd.lightning.ListPayments({
+      reversed: true,
+      max_payments: 100,
+      include_incomplete: false,
+    });
+
+    const outgoingInvoices: ConnectorTransaction[] =
+      outgoingInvoicesResponse.payments.map(
+        (payment: FixMe, index: number): ConnectorTransaction => {
+          let memo = "Sent";
+          if (payment.payment_request) {
+            memo = (
+              lightningPayReq
+                .decode(payment.payment_request)
+                .tags.find((tag) => tag.tagName === "description")?.data ||
+              "Sent"
+            ).toString();
+          }
+          return {
+            id: `${payment.payment_request}-${index}`,
+            memo: memo,
+            preimage: payment.payment_preimage,
+            settled: true,
+            settleDate: parseInt(payment.creation_date) * 1000,
+            totalAmount: payment.value_sat,
+            type: "sent",
+          };
+        }
+      );
+    return outgoingInvoices;
   }
 
   // not yet implemented

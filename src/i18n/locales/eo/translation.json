@@ -2,8 +2,6 @@
   "translation": {
     "welcome": {
       "set_password": {
-        "title": "Agordu malŝlosan pasvorton",
-        "description": "Ĉi tiu pasvorto estas uzata por protekti vian monujon kaj havigi aliron al la retumila etendo. Ĝi ne povas esti rekomencigita kaj estas aparta de la pasvorto de via Alby Account",
         "choose_password": {
           "label": "Elektu malŝlosan pasvorton:"
         },
@@ -45,20 +43,6 @@
         },
         "drag_and_drop": "",
         "errors": {
-          "connection_failed": ""
-        }
-      },
-      "lndhub_bluewallet": {
-        "title": "Bluewallet",
-        "page": {
-          "title": "Konekti al BlueWallet",
-          "description": ""
-        },
-        "uri": {
-          "label": ""
-        },
-        "errors": {
-          "invalid_uri": "",
           "connection_failed": ""
         }
       },
@@ -143,8 +127,8 @@
           "placeholder": ""
         }
       },
-      "start9": {
-        "title": "Start9",
+      "startos": {
+        "title": "StartOS",
         "page": {
           "title": "",
           "instructions": ""
@@ -179,34 +163,14 @@
         }
       },
       "galoy": {
-        "phone_number": {
-          "label": ""
-        },
-        "sms_code": {
-          "label": ""
-        },
-        "token": {
-          "label": "",
-          "info": ""
-        },
         "actions": {
           "login": "Saluti"
-        },
-        "errors": {
-          "setup_failed": "",
-          "missing_token": "",
-          "invalid_token": ""
         }
       },
       "btcpay": {
         "title": "BTCPay-servilo",
-        "page": {
-          "title": "",
-          "instructions": ""
-        },
         "config": {
-          "label": "",
-          "placeholder": ""
+          "label": ""
         },
         "errors": {
           "connection_failed": ""
@@ -250,20 +214,11 @@
         "send_satoshis": "⚡️ Sendi Bitmonon ⚡️",
         "enable_now": ""
       },
-      "recent_transactions": "",
       "allowance_view": {
-        "recent_transactions": "",
         "no_transactions": ""
       },
       "default_view": {
-        "recent_transactions": "",
         "is_blocked_hint": ""
-      }
-    },
-    "accounts": {
-      "title": "Kontoj",
-      "actions": {
-        "add_account": ""
       }
     },
     "unlock": {
@@ -282,7 +237,6 @@
       }
     },
     "settings": {
-      "title": "Agordoj",
       "browser_notifications": {
         "title": "",
         "subtitle": ""
@@ -508,10 +462,8 @@
   },
   "common": {
     "password": "Pasvorto",
-    "advanced": "Altnivelaj",
     "success": "Sukceso",
     "error": "Eraro",
-    "settings": "Agordoj",
     "connected_sites": "",
     "sats_one": "satoŝio",
     "sats_other": "satoŝioj",
@@ -578,7 +530,7 @@
         "allow_camera_access": ""
       }
     },
-    "transactionsTable": {
+    "transactions_table": {
       "fee": "Kotizo",
       "preimage": "",
       "received": "Ricevita",
@@ -614,14 +566,7 @@
       }
     },
     "account_menu": {
-      "screen_reader": "",
-      "title": "",
-      "options": {
-        "account": {
-          "add": "",
-          "manage": "Administri kontojn"
-        }
-      }
+      "screen_reader": ""
     },
     "publishers_table": {
       "payments": "pagoj"

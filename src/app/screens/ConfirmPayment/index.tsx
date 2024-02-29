@@ -15,6 +15,7 @@ import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
+import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 
 function ConfirmPayment() {
@@ -76,16 +77,9 @@ function ConfirmPayment() {
 
     try {
       setLoading(true);
-      // TODO: move to api
-      const response = await msg.request(
-        "sendPayment",
-        { paymentRequest: paymentRequest },
-        {
-          origin: navState.origin,
-        }
-      );
-      if (response.error) {
-        throw new Error(response.error as string);
+      const response = await api.sendPayment(paymentRequest, navState.origin);
+      if ("error" in response) {
+        throw new Error(response.error);
       }
 
       auth.fetchAccountInfo(); // Update balance.
@@ -143,7 +137,7 @@ function ConfirmPayment() {
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <ScreenHeader title={!successMessage ? t("title") : tCommon("success")} />
       {!successMessage ? (
-        <form onSubmit={handleSubmit} className="h-full">
+        <form onSubmit={handleSubmit} className="grow flex">
           <Container justifyBetween maxWidth="sm">
             <div>
               {navState.origin && (
@@ -156,7 +150,7 @@ function ConfirmPayment() {
               <div className="my-4">
                 <div className="mb-4 p-4 shadow bg-white dark:bg-surface-02dp rounded-lg">
                   <PaymentSummary
-                    amount={invoice.satoshis || "0"} // how come that sathoshis can be undefined, bolt11?
+                    amount={invoice.satoshis || "0"} // TODO: allow entering amount or do not allow zero-amount invoices
                     fiatAmount={fiatAmount}
                     description={invoice.tagsObject.description}
                   />
@@ -186,27 +180,29 @@ function ConfirmPayment() {
           </Container>
         </form>
       ) : (
-        <Container justifyBetween maxWidth="sm">
-          <ResultCard
-            isSuccess
-            message={
-              !navState.origin
-                ? successMessage
-                : tCommon("success_message", {
-                    amount: formattedInvoiceSats,
-                    fiatAmount: showFiat ? ` (${fiatAmount})` : ``,
-                    destination: navState.origin.name,
-                  })
-            }
-          />
-          <div className="mt-4">
-            <Button
-              onClick={close}
-              label={tCommon("actions.close")}
-              fullWidth
+        <div className="grow">
+          <Container justifyBetween maxWidth="sm">
+            <ResultCard
+              isSuccess
+              message={
+                !navState.origin
+                  ? successMessage
+                  : tCommon("success_message", {
+                      amount: formattedInvoiceSats,
+                      fiatAmount: showFiat ? ` (${fiatAmount})` : ``,
+                      destination: navState.origin.name,
+                    })
+              }
             />
-          </div>
-        </Container>
+            <div className="mt-4">
+              <Button
+                onClick={close}
+                label={tCommon("actions.close")}
+                fullWidth
+              />
+            </div>
+          </Container>
+        </div>
       )}
     </div>
   );

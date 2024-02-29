@@ -5,7 +5,7 @@ import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
 import Checkbox from "@components/form/Checkbox";
 import { useState } from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import Hyperlink from "~/app/components/Hyperlink";
 import ScreenHeader from "~/app/components/ScreenHeader";
@@ -84,13 +84,23 @@ function ConfirmSignMessage() {
                 url={origin.host}
               />
               <ContentMessage
-                heading={t("allow_sign_event", {
-                  host: origin.host,
-                  kind: t(`kinds.${event.kind}`, {
-                    defaultValue: t("kinds.unknown", { kind: event.kind }),
-                  }),
-                })}
-                content={event.content || t("no_content")}
+                heading={
+                  <Trans
+                    i18nKey="allow_sign_event"
+                    t={t}
+                    values={{
+                      host: origin.host,
+                      kind: t(`kinds.${event.kind}`, {
+                        defaultValue: t("kinds.unknown", {
+                          kind: event.kind,
+                        }),
+                      }),
+                    }}
+                    // eslint-disable-next-line react/jsx-key
+                    components={[<i></i>]}
+                  />
+                }
+                content={event.content || ""}
               />
               <div className="flex justify-center mb-4 gap-4">
                 <Hyperlink onClick={toggleShowJSON}>

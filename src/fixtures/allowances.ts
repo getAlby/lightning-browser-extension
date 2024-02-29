@@ -3,13 +3,13 @@ import type { DbAllowance } from "~/types";
 export const allowanceFixture: DbAllowance[] = [
   {
     enabled: true,
-    host: "pro.kollider.xyz",
+    host: "getalby.com",
     id: 1,
-    imageURL: "https://pro.kollider.xyz/favicon.ico",
+    imageURL: "https://getalby.com/favicon.ico",
     lastPaymentAt: 0,
     enabledFor: ["webln"],
     lnurlAuth: true,
-    name: "pro kollider",
+    name: "Alby: Your Bitcoin & Nostr companion for the web",
     remainingBudget: 500,
     totalBudget: 500,
     createdAt: "123456",

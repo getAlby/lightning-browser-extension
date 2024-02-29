@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "__chrome__manifest_version": 3,
-  "name": "Alby - Bitcoin Lightning Wallet",
+  "name": "Alby - Bitcoin Wallet for Lightning & Nostr",
   "version": "0.0.0",
   "__chrome|dev__key": "MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCeHUdiqiWZZ/EuVbyt1OXIB543LJNVYFlAhO2Bi8QqEeK+QAUXcjOWEW0yf/hNCZXa0eJhnvTXtWWje6UoHPSgtPX5JEHpaPEWWZ7cneV862CrvR64NIgw4h3kuxWQs9nTKL785/maqURiBWSvwNugBmIIaXOZeei1C/UXYa9TyrRV6shF25XfIlgvaK+TKD1YAdf89TV1r7M/u1QFVKPe1/dv96Fh+pdZSQNaHP5gZsHXlbmryUMxZuP3RQEXRiypUHhW6h2DJ+W9ABYSrUyAaiajccAlzWWHGqbUAGWSKzwUJSGnZ23btIYu2lALW50Op4Sv6/vjhI52z25c/VjHAgMBAAECggEAGcA3+5QtanYYvAyfnYoCYFkJRgAfALUf5BeiHMqYCKgADy8bBS4Gw8aTy7k2xcktXEV5gp+iTa1P39fH1qgcmT3Pn6NtjqeWOCchbdnTYcxt4pp68dIwahGxf6qOgRIhhDfrHwJizvMJXZN2Sf91ZXMUrT0LZDAMG8xWPtgcd19WtmWsO/P3jPKCV7PHGli9xWRdDGTK2FY7V+JcH/+WQS3ddxO5DgFat+LEjVZWDaQJedoa3FiTJgEDjFeqe6GLsiLLPT3STSWMEEK31eo4jPuiJTk9Mo2v2P61R4tiUsfX8a+yq556x8o/5nUIv/odFjJJ2LwKSIzSePyAF2okeQKBgQDdwTemumWu9/XYiXXJcneB/4oirScyx3c4fnkzi5GVZYA5iSJXwkB2v880Y0iBr9UtThDC2PHlkoHPAbEJX48lHLfhXzF/a8MOUIEkWKp5wY6OuKkzxTQVQMz2LGeXIyUg/QTiCzUEWgFmyNsFNA59NZmoBaOkNqH5e0jhA3qWWQKBgQC2iB9e28St7fjXPCx3e8y7JodDgq4Rtz++FshbTSU7SGxXVTGmNg2NcrFoBQUFyVSk+zdz5IT9mKeq/6V7CdNfGcs5aiykZm1KgbcshZE4iAxpPAWpwGJhDzvBRRywZqYyp47baB9oHv1+k5TkPAcr8+JK+E6sivTPSzQE5zHEHwKBgGbFlmoh9uA5MOoTAtDCyRopeTaK8yC4istW6gr2gxku+lcv9AeiEkg2quwHm2HnQLAHfwMekjUoShrLGOZUMD4t6hZ8DK+WHMc0jjVvFkrpZo1Ejb5dhb7X0mXAvJ2x/xIj0TCFqyOCJyYgrkjiEFj9D2JsgqOnYjgCaAtIlna5AoGAd0zMxCD7kXpiE7sejRF7JC7wZW15+9Y7cTBOz23CkdaqCQKDqtDVVsfJr+Tn/XozOol/Gt4XFfC6VYc1Tw+C+TtQmjwM5X6UnAfgAtdhrQMuqXEzelllc26TbaSQNbNBmQXu1vRc4p6urBYlUG7zeQSzuLBGK3u+ueW7ICFDY50CgYB+HjsdHio8KsvNfSD5RrkhVp8nPQmOJnz8qYuREpxOWK/kIrKXEObYRkYK2luYbZ4sj2EIQ5JLMQ2Ef2XwdNir285D4UBa82dcfWUhgUfqjQuDtVLG55IDOBp4RSZSUGS9esfH681LFw7oSOlV6mzbzBT1Rvn+NMrE3Nbhzy1X1w==",
   "__chrome|prod__key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAludn9UxTx8rcLh5LfGjqd9/W+yDDlz1h9GlrrUCzyZouU3tQ3BkXgRNWZVqWUwalvR6DUin2ECu/QTMipsl5fZg36U9HCL6sMOP0MwfDzOPWTQnaKj0AGLvWloFOD7qmIFT+HOlVBcXVCxCbx85LMsHh8mbh5u5mTPBLXKjxSAx5pvGsCHKJ/45zkRxxiF4GorbxAOBEYPUC6m3UpPOLgVQUPYJrQF7mvAgKl/1pd68sdvSc3ragsFNw8IK5/fK1oD6ZV/n1uvpFrlqHF7Ed+OE3eAVkdCSxxiTJnwMfS4duE4QOLfP2cYeriZKBtdkgdQUVrY+Y++R3C85Cdhdz6wIDAQAB",
@@ -11,7 +11,7 @@
     "48": "assets/icons/alby_icon_yellow_48x48.png",
     "128": "assets/icons/alby_icon_yellow_128x128.png"
   },
-  "description": "The Bitcoin Lightning wallet for direct payments across the globe, Bitcoin Lightning applications and passwordless logins.",
+  "description": "Your Bitcoin Lightning wallet and companion for accessing Bitcoin and Nostr apps, digital payments and passwordless logins.",
   "homepage_url": "https://getAlby.com/",
   "permissions": [
     "nativeMessaging",
@@ -77,7 +77,7 @@
         "size": 128
       }
     ],
-    "default_title": "Alby - Bitcoin Lightning Wallet",
+    "default_title": "Alby - Bitcoin Wallet for Lightning & Nostr",
     "__opera__chrome_style": false,
     "__firefox__browser_style": false
   },
@@ -111,7 +111,19 @@
         "size": 128
       }
     ],
-    "default_title": "Alby - Bitcoin Lightning Wallet"
+    "default_title": "Alby - Bitcoin Wallet for Lightning & Nostr"
+  },
+  "commands": {
+    "__chrome___execute_action": {
+      "suggested_key": {
+        "default": "Alt+Shift+A"
+      }
+    },
+    "__firefox___execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+Shift+A"
+      }
+    }
   },
   "options_ui": {
     "page": "options.html",

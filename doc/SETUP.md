@@ -42,6 +42,10 @@
 
 To connect to a remote development LND node you can use a [test account](https://github.com/bumi/lightning-browser-extension/wiki/Test-setup)
 
+## Install and debug extension for Firefox Android
+
+[Refer to SETUP_ANDROID.md for info regarding how to setup and debug Alby on firefox android](./SETUP_ANDROID.md)
+
 ### Multiple Extensions
 
 It is not recommended to have multiple versions of the extension (development + official) running in the same browser. You will have instances of the extension with the same icon which is confusing, and also leads to a poor webln experience as both extensions will launch a popup. There may also be unexpected bugs due to conflict with the two extensions running at the same time.

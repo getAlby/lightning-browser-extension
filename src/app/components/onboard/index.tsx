@@ -1,5 +1,6 @@
 import {
   ClockIcon,
+  InfoCircleIcon,
   TwoKeysIcon,
 } from "@bitcoin-design/bitcoin-icons-react/outline";
 import { useTranslation } from "react-i18next";
@@ -9,7 +10,6 @@ import PublisherCard from "~/app/components/PublisherCard";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import { useAccount } from "~/app/context/AccountContext";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
-import InfoCircleIcon from "~/app/icons/InfoCircleIcon";
 import { NO_KEYS_ERROR, USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";

@@ -12,9 +12,6 @@ const swcConfig = {
     },
     target: "es2016",
   },
-  env: {
-    targets: "",
-  },
 };
 
 // eslint-disable-next-line no-undef

@@ -1,6 +1,5 @@
 import {
   CaretLeftIcon,
-  CheckIcon,
   CopyIcon,
 } from "@bitcoin-design/bitcoin-icons-react/outline";
 import Button from "@components/Button";
@@ -15,6 +14,7 @@ import Confetti from "react-confetti";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import QRCode from "~/app/components/QRCode";
+import ResultCard from "~/app/components/ResultCard";
 import toast from "~/app/components/Toast";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
@@ -46,9 +46,6 @@ function ReceiveInvoice() {
     paymentRequest: string;
     rHash: string;
   } | null>();
-  const [copyInvoiceLabel, setCopyInvoiceLabel] = useState(
-    tCommon("actions.copy_invoice") as string
-  );
 
   const [paid, setPaid] = useState(false);
   const [pollingForPayment, setPollingForPayment] = useState(false);
@@ -142,44 +139,22 @@ function ReceiveInvoice() {
     if (!invoice) return null;
     return (
       <>
-        <div className="mt-4 relative p-8 bg-white rounded-lg shadow-sm ring-1 ring-black ring-opacity-5 flex justify-center items-center overflow-hidden">
-          <QRCode value={invoice.paymentRequest.toUpperCase()} />
-          {paid && (
-            <div className="absolute inset-0 flex justify-center items-center bg-white/90">
-              <div className="text-center">
-                <div className="inline-block bg-green-bitcoin p-1 rounded-full mb-2">
-                  <CheckIcon className="w-7 h-7 text-white" />
-                </div>
-                <p className="text-lg font-bold">{t("success")}</p>
-              </div>
-            </div>
-          )}
-        </div>
-        {paid && (
-          <div className="mt-4">
-            <Button
-              type="submit"
-              label={tCommon("actions.receive_again")}
-              primary
-              fullWidth
-              onClick={() => {
-                setDefaults();
-                navigate("/receive/invoice");
-              }}
-            />
-          </div>
-        )}
         {!paid && (
           <>
-            <div className="mt-8 mb-4 flex justify-center">
+            <div className="mt-4 flex justify-center items-center">
+              <div className="bg-white dark:bg-surface-01dp border-gray-200 dark:border-neutral-700  p-4 rounded-md border max-w-md">
+                <QRCode
+                  value={invoice.paymentRequest.toUpperCase()}
+                  size={512}
+                />
+              </div>
+            </div>
+            <div className="mt-4 mb-4 flex justify-center">
               <Button
                 onClick={async () => {
                   try {
                     navigator.clipboard.writeText(invoice.paymentRequest);
-                    setCopyInvoiceLabel(tCommon("copied"));
-                    setTimeout(() => {
-                      setCopyInvoiceLabel(tCommon("actions.copy_invoice"));
-                    }, 1000);
+                    toast.success(tCommon("copied"));
                   } catch (e) {
                     if (e instanceof Error) {
                       toast.error(e.message);
@@ -187,11 +162,10 @@ function ReceiveInvoice() {
                   }
                 }}
                 icon={<CopyIcon className="w-6 h-6 mr-2" />}
-                label={copyInvoiceLabel}
+                label={tCommon("actions.copy_invoice")}
                 primary
               />
             </div>
-
             <div className="flex justify-center">
               {pollingForPayment && (
                 <div className="flex items-center space-x-2 dark:text-white">
@@ -210,15 +184,30 @@ function ReceiveInvoice() {
           </>
         )}
         {paid && (
-          <Confetti
-            width={window.innerWidth}
-            height={window.innerHeight}
-            recycle={false}
-            onConfettiComplete={(confetti) => {
-              confetti && confetti.reset();
-            }}
-            style={{ pointerEvents: "none" }}
-          />
+          <>
+            <ResultCard isSuccess message={t("success")} />
+            <div className="mt-4">
+              <Button
+                type="submit"
+                label={tCommon("actions.receive_again")}
+                primary
+                fullWidth
+                onClick={() => {
+                  setDefaults();
+                  navigate("/receive/invoice");
+                }}
+              />
+            </div>
+            <Confetti
+              width={window.innerWidth}
+              height={window.innerHeight}
+              recycle={false}
+              onConfettiComplete={(confetti) => {
+                confetti && confetti.reset();
+              }}
+              style={{ pointerEvents: "none" }}
+            />
+          </>
         )}
       </>
     );
@@ -239,7 +228,11 @@ function ReceiveInvoice() {
         {t("title")}
       </Header>
       {invoice ? (
-        <Container maxWidth="sm">{renderInvoice()}</Container>
+        <div className="h-full">
+          <Container justifyBetween maxWidth="sm">
+            {renderInvoice()}
+          </Container>
+        </div>
       ) : (
         <div className="pt-4 h-full">
           <form onSubmit={handleSubmit} className="h-full">

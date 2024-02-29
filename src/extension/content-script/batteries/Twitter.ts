@@ -38,9 +38,11 @@ function getUserData(username: string) {
     const element = document.querySelector(
       '[data-testid="primaryColumn"] [data-testid="UserDescription"]'
     );
-    const imageUrl = document.querySelector<HTMLImageElement>(
-      `[data-testid="primaryColumn"] a[href="/${username}/photo" i] img`
-    )?.src;
+    const imageUrl = document.querySelectorAll<HTMLImageElement>(
+      `[data-testid="primaryColumn"] a[href="/${username}/photo" i] img,
+       [data-testid="primaryColumn"] a[href="/${username}/nft" i] img` // for nft profile
+    )?.[0].src;
+
     const location = document.querySelector<HTMLElement>(
       `[data-testid="primaryColumn"] [data-testid="UserLocation"]`
     );

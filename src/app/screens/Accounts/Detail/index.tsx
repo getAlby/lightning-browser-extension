@@ -1,4 +1,3 @@
-import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import Button from "@components/Button";
 import Container from "@components/Container";
 import Loading from "@components/Loading";
@@ -48,6 +47,7 @@ function AccountDetail() {
   const [account, setAccount] = useState<GetAccountRes | null>(null);
   const [accountName, setAccountName] = useState("");
   const [hasMnemonic, setHasMnemonic] = useState(false);
+  const [isMnemonicBackupDone, setIsMnemonicBackupDone] = useState(false);
   const [nostrPublicKey, setNostrPublicKey] = useState("");
   const [hasImportedNostrKey, setHasImportedNostrKey] = useState(false);
 
@@ -81,6 +81,7 @@ function AccountDetail() {
         setAccount(response);
         setAccountName(response.name);
         setHasMnemonic(response.hasMnemonic);
+        setIsMnemonicBackupDone(response.isMnemonicBackupDone);
         setHasImportedNostrKey(response.hasImportedNostrKey);
 
         if (response.nostrEnabled) {
@@ -178,7 +179,7 @@ function AccountDetail() {
         </div>
 
         <div>
-          <div className="shadow bg-white sm:rounded-md sm:overflow-hidden p-6 dark:bg-surface-01dp flex flex-col gap-4">
+          <div className="shadow bg-white rounded-md sm:overflow-hidden p-6 dark:bg-surface-01dp flex flex-col gap-4">
             <form
               onSubmit={(e: FormEvent) => {
                 e.preventDefault();
@@ -190,9 +191,9 @@ function AccountDetail() {
                 updatedAccount.name = accountName;
                 setAccount(updatedAccount);
               }}
-              className="flex justify-between items-end"
+              className="flex flex-col sm:flex-row justify-between items-center"
             >
-              <div className="w-7/12">
+              <div className="sm:w-7/12 w-full">
                 <TextField
                   id="name"
                   label={t("name.title")}
@@ -205,7 +206,7 @@ function AccountDetail() {
                 />
               </div>
               <div className="w-1/5 flex-none mx-4 d-none"></div>
-              <div className="w-1/5 flex-none">
+              <div className="flex-none sm:w-1/5 w-full pt-4 sm:pt-0">
                 <Button
                   type="submit"
                   label={tCommon("actions.save")}
@@ -218,8 +219,8 @@ function AccountDetail() {
             {account.connectorType == "lndhub" && (
               <>
                 <MenuDivider />
-                <div className="flex justify-between items-end">
-                  <div className="w-9/12">
+                <div className="flex flex-col sm:flex-row justify-between items-center">
+                  <div className="sm:w-9/12 w-full">
                     <p className="text-black dark:text-white font-medium">
                       {t("export.title")}
                     </p>
@@ -245,7 +246,7 @@ function AccountDetail() {
                     </p>
                   </div>
 
-                  <div className="w-1/5 flex-none">
+                  <div className="flex-none sm:w-1/5 w-full pt-4 sm:pt-0">
                     {exportAccount && account.connectorType === "lndhub" && (
                       <>
                         <Button
@@ -264,50 +265,42 @@ function AccountDetail() {
                   <Modal
                     isOpen={exportModalIsOpen}
                     close={closeExportModal}
-                    title={t("export.screen_reader")}
+                    contentLabel={t("export.screen_reader")}
+                    title={t("export.title")}
                   >
-                    <div className="p-5 flex justify-between">
-                      <h2 className="text-2xl font-bold dark:text-white">
-                        {t("export.title")}
-                      </h2>
-                      <button onClick={closeExportModal}>
-                        <CrossIcon className="w-6 h-6 dark:text-white" />
-                      </button>
-                    </div>
-
                     {exportLoading && (
-                      <div className="p-5 flex justify-center items-center space-x-2 dark:text-white">
+                      <div className="flex justify-center items-center space-x-2 dark:text-white">
                         <Loading />
                         <span>{t("export.waiting")}</span>
                       </div>
                     )}
                     {!exportLoading && (
-                      <div className="p-5">
-                        <div className="flex flex-col gap-4 justify-center items-center dark:text-white">
-                          <p>{t("export.scan_qr")}</p>
+                      <div className="flex flex-col gap-4 justify-center items-center dark:text-white">
+                        <p>{t("export.scan_qr")}</p>
+                        <div className="p-5">
                           <QRCode
                             value={`lndhub://${lndHubData.login}:${lndHubData.password}@${lndHubData.url}/`}
                             size={256}
                           />
-                          <div className="w-full">
-                            <TextField
-                              id="uri"
-                              label={t("export.export_uri")}
-                              readOnly
-                              value={`lndhub://${lndHubData.login}:${lndHubData.password}@${lndHubData.url}/`}
-                            />
-                          </div>
-                          {lndHubData.lnAddress && (
-                            <div className="w-full dark:text-white">
-                              <p className="font-medium">
-                                {t("export.your_ln_address")}
-                              </p>
-                              {lndHubData.lnAddress && (
-                                <p>{lndHubData.lnAddress}</p>
-                              )}
-                            </div>
-                          )}
                         </div>
+                        <div className="w-full">
+                          <TextField
+                            id="uri"
+                            label={t("export.export_uri")}
+                            readOnly
+                            value={`lndhub://${lndHubData.login}:${lndHubData.password}@${lndHubData.url}/`}
+                          />
+                        </div>
+                        {lndHubData.lnAddress && (
+                          <div className="w-full dark:text-white">
+                            <p className="font-medium">
+                              {t("export.your_ln_address")}
+                            </p>
+                            {lndHubData.lnAddress && (
+                              <p>{lndHubData.lnAddress}</p>
+                            )}
+                          </div>
+                        )}
                       </div>
                     )}
                   </Modal>
@@ -320,13 +313,13 @@ function AccountDetail() {
             {t("mnemonic.title")}
           </h2>
 
-          <div className="shadow bg-white sm:rounded-md sm:overflow-hidden p-6 dark:bg-surface-01dp flex flex-col gap-4">
-            {hasMnemonic && (
+          <div className="shadow bg-white rounded-md sm:overflow-hidden p-6 dark:bg-surface-01dp flex flex-col gap-4">
+            {hasMnemonic && !isMnemonicBackupDone && (
               <Alert type="warn">{t("mnemonic.backup.warning")}</Alert>
             )}
 
-            <div className="flex justify-between items-end">
-              <div className="w-9/12">
+            <div className="flex flex-col sm:flex-row justify-between items-center">
+              <div className="sm:w-9/12 w-full">
                 <p className="text-black dark:text-white font-medium">
                   {t(
                     hasMnemonic
@@ -343,7 +336,7 @@ function AccountDetail() {
                 </p>
               </div>
 
-              <div className="w-1/5 flex-none">
+              <div className="flex-none sm:w-1/5 w-full pt-4 sm:pt-0">
                 <Link to={`secret-key/${hasMnemonic ? "backup" : "new"}`}>
                   <Button
                     label={t(
@@ -360,8 +353,8 @@ function AccountDetail() {
             {!hasMnemonic && (
               <>
                 <MenuDivider />
-                <div className="flex justify-between items-end">
-                  <div className="w-7/12">
+                <div className="flex flex-col sm:flex-row justify-between items-center">
+                  <div className="sm:w-7/12 w-full">
                     <p className="text-black dark:text-white font-medium">
                       {t("mnemonic.import.title")}
                     </p>
@@ -370,7 +363,7 @@ function AccountDetail() {
                     </p>
                   </div>
 
-                  <div className="w-1/5 flex-none">
+                  <div className="flex-none sm:w-1/5 w-full pt-4 sm:pt-0">
                     <Link to="secret-key/import">
                       <Button
                         label={t("mnemonic.import.button")}
@@ -383,8 +376,8 @@ function AccountDetail() {
               </>
             )}
             <MenuDivider />
-            <div className="flex justify-between items-center">
-              <div className="w-7/12">
+            <div className="flex flex-col sm:flex-row justify-between items-center">
+              <div className="sm:w-7/12 w-full">
                 <div className="flex flex-col">
                   <TextField
                     id="nostrPublicKey"
@@ -404,13 +397,12 @@ function AccountDetail() {
                   <div className="">
                     <Badge
                       label="imported"
-                      color="green-bitcoin"
-                      textColor="white"
+                      className="bg-green-bitcoin text-white"
                     />
                   </div>
                 )}
               </div>
-              <div className="w-1/5 flex-none">
+              <div className="flex-none sm:w-1/5 w-full pt-4 sm:pt-0">
                 <Link to="nostr/settings">
                   <Button label={t("nostr.settings.label")} primary fullWidth />
                 </Link>
@@ -440,8 +432,8 @@ function AccountDetail() {
                 !hasMnemonic && "opacity-30"
               )}
             >
-              <div className="flex justify-between items-end">
-                <div className="w-7/12 flex flex-col gap-2">
+              <div className="flex flex-col sm:flex-row justify-between items-center">
+                <div className="sm:w-7/12 w-full flex flex-col gap-2">
                   <p className="text-black dark:text-white font-medium">
                     {t("network.title")}
                   </p>
@@ -450,7 +442,7 @@ function AccountDetail() {
                   </p>
                 </div>
 
-                <div className="w-1/5 flex-none">
+                <div className="flex-none sm:w-1/5 w-full pt-4 sm:pt-0">
                   <Select
                     name="network"
                     value={account.bitcoinNetwork}
@@ -480,7 +472,7 @@ function AccountDetail() {
                 </div>
               </div>
               <MenuDivider />
-              <div className="flex justify-between items-end">
+              <div className="flex justify-between items-center">
                 <div className="w-7/12 flex flex-col gap-2">
                   <p className="text-black dark:text-white font-medium">
                     {t("mnemonic.lnurl.title")}
@@ -519,13 +511,13 @@ function AccountDetail() {
             </span>
             <div className="flex-grow border-t border-gray-300 dark:border-gray-700"></div>
           </div>
-          <div className="shadow bg-white sm:rounded-md sm:overflow-hidden mb-5 px-6 py-2 divide-y divide-gray-200 dark:divide-neutral-700 dark:bg-surface-01dp">
+          <div className="shadow bg-white rounded-md sm:overflow-hidden mb-5 px-6 py-2 divide-y divide-gray-200 dark:divide-neutral-700 dark:bg-surface-01dp">
             {hasMnemonic && (
               <Setting
                 title={t("remove_secretkey.title")}
                 subtitle={t("remove_secretkey.subtitle")}
               >
-                <div className="w-64">
+                <div className="sm:w-64 flex-none w-full pt-4 sm:pt-0">
                   <Button
                     onClick={() => {
                       removeMnemonic({
@@ -540,7 +532,7 @@ function AccountDetail() {
               </Setting>
             )}
             <Setting title={t("remove.title")} subtitle={t("remove.subtitle")}>
-              <div className="w-64">
+              <div className="sm:w-64 flex-none w-full pt-4 sm:pt-0">
                 <Button
                   onClick={() => {
                     removeAccount({
@@ -548,7 +540,7 @@ function AccountDetail() {
                       name: account.name,
                     });
                   }}
-                  label={t("actions.remove_account")}
+                  label={t("actions.disconnect_wallet")}
                   fullWidth
                 />
               </div>

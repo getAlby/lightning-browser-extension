@@ -9,11 +9,11 @@ import state from "../state";
 import Connector, {
   CheckPaymentArgs,
   CheckPaymentResponse,
-  ConnectorInvoice,
+  ConnectorTransaction,
   ConnectPeerResponse,
   GetBalanceResponse,
   GetInfoResponse,
-  GetInvoicesResponse,
+  GetTransactionsResponse,
   KeysendArgs,
   MakeInvoiceArgs,
   MakeInvoiceResponse,
@@ -50,6 +50,7 @@ class LnBits implements Connector {
       "getInfo",
       "makeInvoice",
       "sendPayment",
+      "sendPaymentAsync",
       "signMessage",
       "getBalance",
     ];
@@ -99,7 +100,8 @@ class LnBits implements Connector {
       }
     ]
   */
-  async getInvoices(): Promise<GetInvoicesResponse> {
+
+  getTransactions(): Promise<GetTransactionsResponse> {
     return this.request(
       "GET",
       "/api/v1/payments",
@@ -122,23 +124,28 @@ class LnBits implements Connector {
           webhook_status: string;
         }[]
       ) => {
-        const invoices: ConnectorInvoice[] = data
-          .filter((invoice) => invoice.amount > 0)
-          .map((invoice, index): ConnectorInvoice => {
+        const transactions: ConnectorTransaction[] = data.map(
+          (transaction, index): ConnectorTransaction => {
             return {
-              id: `${invoice.checking_id}-${index}`,
-              memo: invoice.memo,
-              preimage: invoice.preimage,
-              settled: !invoice.pending,
-              settleDate: invoice.time * 1000,
-              totalAmount: `${Math.floor(invoice.amount / 1000)}`,
-              type: "received",
+              id: `${transaction.checking_id}-${index}`,
+              memo: transaction.memo,
+              preimage:
+                transaction.preimage !=
+                "0000000000000000000000000000000000000000000000000000000000000000"
+                  ? transaction.preimage
+                  : "",
+              payment_hash: transaction.payment_hash,
+              settled: !transaction.pending,
+              settleDate: transaction.time * 1000,
+              totalAmount: Math.abs(Math.floor(transaction.amount / 1000)),
+              type: transaction.amount > 0 ? "received" : "sent",
             };
-          });
+          }
+        );
 
         return {
           data: {
-            invoices,
+            transactions,
           },
         };
       }

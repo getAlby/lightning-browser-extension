@@ -5,11 +5,10 @@ import { Account } from "~/types";
 import Connector, {
   CheckPaymentArgs,
   CheckPaymentResponse,
-  ConnectorInvoice,
   ConnectPeerResponse,
   GetBalanceResponse,
   GetInfoResponse,
-  GetInvoicesResponse,
+  GetTransactionsResponse,
   KeysendArgs,
   MakeInvoiceArgs,
   MakeInvoiceResponse,
@@ -47,6 +46,7 @@ class Eclair implements Connector {
       "keysend",
       "makeInvoice",
       "sendPayment",
+      "sendPaymentAsync",
       "signMessage",
       "getBalance",
     ];
@@ -72,32 +72,11 @@ class Eclair implements Connector {
     throw new Error("Not yet supported with the currently used account.");
   }
 
-  async getInvoices(): Promise<GetInvoicesResponse> {
-    const response = await this.request("/listinvoices");
-    const invoices: ConnectorInvoice[] = response
-      .map(
-        (invoice: {
-          paymentHash: string;
-          description: string;
-          timestamp: number;
-          amount: number;
-        }) => ({
-          id: invoice.paymentHash,
-          memo: invoice.description,
-          settled: true,
-          settleDate: invoice.timestamp * 1000,
-          totalAmount: invoice.amount / 1000,
-          type: "received",
-        })
-      )
-      .sort((a: ConnectorInvoice, b: ConnectorInvoice) => {
-        return b.settleDate - a.settleDate;
-      });
-    return {
-      data: {
-        invoices: invoices,
-      },
-    };
+  async getTransactions(): Promise<GetTransactionsResponse> {
+    console.error(
+      `getTransactions() is not yet supported with the currently used account: ${this.constructor.name}`
+    );
+    return { data: { transactions: [] } };
   }
 
   async getBalance(): Promise<GetBalanceResponse> {

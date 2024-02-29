@@ -1,10 +1,7 @@
 {
   "translation": {
     "welcome": {
-      "title": "Bine ai venit la Alby",
       "set_password": {
-        "title": "Seteaza o parola pentru deblocare",
-        "description": "Aceasta parola este folosita pentru a proteja portofelul tau si pentru a permite accesul la extensia de browser. Aceasta parola nu poate fi resetata si este separata de parola contului Alby.",
         "choose_password": {
           "label": "Alege o parola pentru deblocare:"
         },
@@ -31,13 +28,10 @@
     },
     "choose_path": {
       "alby": {
-        "title": "Alby",
-        "description": "Inregistreaza-te sau foloseste un cont Alby deja existent pentru a incepe sa faci plati prin Lightning imediat."
+        "title": "Alby"
       },
       "other": {
         "title": "Alte portofele",
-        "description": "Conecteaza-te la portofelul tau Lightning deja existent sau la un nod si alege dintre diversi conectori.",
-        "and_more": "& mai multe...",
         "connect": "Conecteaza-te"
       }
     },
@@ -81,27 +75,9 @@
       },
       "lnc": {
         "title": "LND cu LNC",
-        "page": {
-          "title": "Conecteaza-te la nodul tau LND",
-          "description": "Creeaza o sesiune noua in terminal (litd) pentru a obtine o noua fraza de imperechere si introdu-o aici"
-        },
         "pairing_phrase": {
           "label": "Fraza ta de imperechere. ",
           "placeholder": "fraza ta secreta pentru acumulare de sats"
-        }
-      },
-      "lndhub_bluewallet": {
-        "title": "BlueWallet",
-        "page": {
-          "title": "Conecteaza-te la BlueWallet",
-          "description": "In BlueWallet, alegere portofelul pe care vrei sa il conectezi, deschide-l, apasa pe \"...\", apoi pe Export/Backup pentru a afisa codul QR si scaneaza-l cu camera ta."
-        },
-        "uri": {
-          "label": "BlueWallet Export URI"
-        },
-        "errors": {
-          "invalid_uri": "BlueWallet URI invalid",
-          "connection_failed": "Conexiune esuata. BlueWallet URI este corect?"
         }
       },
       "lndhub_go": {
@@ -185,11 +161,11 @@
           "placeholder": "lndconnect://nodultau:8080?..."
         }
       },
-      "start9": {
-        "title": "Start9",
+      "startos": {
+        "title": "StartOS",
         "page": {
-          "title": "Conectare la nodul tau <0>Embassy</0>",
-          "instructions": "<0>Nota:</0> Momentan exista suport doar pentru LND dar vom adauga suport pentru c-lightning in viitor!<1/>Pe tabloul de bord din Embassy apasa pe serviciul <0>Lightning Network Daemon</0>.<1/>Selecteaza tabul <0>Properties</0>.<1/>Acum copiaza <0>LND Connect REST URL.</0>"
+          "title": "Conectare la nodul tau <0>StartOS</0>",
+          "instructions": "<0>Nota:</0> Momentan exista suport doar pentru LND dar vom adauga suport pentru c-lightning in viitor!<1/>Pe tabloul de bord din StartOS apasa pe serviciul <0>Lightning Network Daemon</0>.<1/>Selecteaza tabul <0>Properties</0>.<1/>Acum copiaza <0>LND Connect REST URL.</0>"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -220,48 +196,10 @@
           "title": "Conectare la <0>Bitcoin Jungle Wallet</0>"
         }
       },
-      "galoy": {
-        "phone_number": {
-          "label": "Introdu numarul tau de telefon"
-        },
-        "sms_code": {
-          "label": "Introdu codul de verificare primit prin SMS"
-        },
-        "token": {
-          "label": "Introdu tokenul tau JWT",
-          "info": "Momentan {{eticheta}} de login este in curs de actualizare. Daca esti un utilizator avansat, poti sa iei tokenul tau JWT prin logare via <0>Web Wallet (wallet.mainnet.galoy.io)</0><1/><1/>Tokenul JWT este de tipul: <2>eyJhbG...</2><1/><1/>"
-        },
-        "actions": {
-          "login": "Login"
-        },
-        "errors": {
-          "setup_failed": "Setare esuata",
-          "missing_token": "Lipseste JWT, nu s-a putut efectua logarea.",
-          "invalid_token": "JWT invalid a trecut"
-        }
-      },
-      "kollider": {
-        "title": "Kollider",
-        "description": "Logare la contul tau Kollider",
-        "username": {
-          "label": "Introdu numele de utilizator Kollider"
-        },
-        "currency": {
-          "label": "Selecteaza contul de moneda"
-        },
-        "errors": {
-          "connection_failed": "Conexiune esuata. Esti sigur ca datele contului sunt corecte?"
-        }
-      },
       "btcpay": {
         "title": "Serverul BTCPay",
-        "page": {
-          "title": "Conectare la nodul LND BTCPay",
-          "instructions": "Navigheaza la serverul tau BTCPay si logheaza-te ca administrator. Acceseaza Server Settings > Services > LND Rest - See information. Apoi apasa pe \"See QR Code information\" si copiaza datele codului QR. Insereaza-le mai jos:"
-        },
         "config": {
-          "label": "Date de configurare",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
+          "label": "Date de configurare"
         },
         "errors": {
           "connection_failed": "Conexiune esuata. URL-ul conexiunii BTCPay este corect si accesibil?"
@@ -305,21 +243,16 @@
         "send_satoshis": "⚡️ Trimite Satoshi ⚡️",
         "enable_now": "Activeaza acum"
       },
-      "recent_transactions": "Tranzactii recente",
       "allowance_view": {
-        "recent_transactions": "Tranzactii recente",
         "no_transactions": "Nicio tranzactie pentru <0>{{nume}}</0> inca."
       },
       "default_view": {
-        "recent_transactions": "Tranzactii recente",
         "is_blocked_hint": "Momentan, Alby este dezactivat pentru {{host}}",
         "block_removed": "{{host}} activat. Te rugam sa reincarci website-ul."
       }
     },
     "accounts": {
-      "title": "Conturi",
       "account_view": {
-        "title1": "Informatii cont",
         "title2": "Editeaza cont",
         "name": {
           "title": "Nume",
@@ -363,17 +296,9 @@
             "failed_to_load": ""
           }
         },
-        "remove": {
-          "title": "",
-          "subtitle": ""
-        },
         "actions": {
-          "remove_account": "",
           "export": ""
         }
-      },
-      "actions": {
-        "add_account": ""
       }
     },
     "unlock": {
@@ -392,7 +317,6 @@
       }
     },
     "settings": {
-      "title": "",
       "browser_notifications": {
         "title": "",
         "subtitle": ""
@@ -557,31 +481,6 @@
         "status": ""
       }
     },
-    "discover": {
-      "title": "",
-      "description": "",
-      "list": {
-        "trading": "",
-        "gaming": "",
-        "entertainment": "",
-        "shopping": "",
-        "miscellaneous": "",
-        "showcases": "",
-        "nostr": ""
-      },
-      "tips": {
-        "title": "",
-        "description": "",
-        "top_up_wallet": {
-          "title": "",
-          "description": ""
-        },
-        "demo": {
-          "title": "",
-          "description": ""
-        }
-      }
-    },
     "publishers": {
       "title": "",
       "description": "",
@@ -652,10 +551,8 @@
   "common": {
     "password": "",
     "confirm_password": "",
-    "advanced": "",
     "success": "",
     "error": "",
-    "settings": "",
     "accounts": "",
     "discover": "",
     "connected_sites": "",
@@ -727,7 +624,7 @@
         "allow_camera_access": ""
       }
     },
-    "transactionsTable": {
+    "transactions_table": {
       "fee": "",
       "preimage": "",
       "received": "",
@@ -764,14 +661,7 @@
       }
     },
     "account_menu": {
-      "screen_reader": "",
-      "title": "",
-      "options": {
-        "account": {
-          "add": "",
-          "manage": ""
-        }
-      }
+      "screen_reader": ""
     },
     "publishers_table": {
       "payments": ""
@@ -780,91 +670,6 @@
       "label": {
         "auth": ""
       }
-    }
-  },
-  "permissions": {
-    "nostr": {
-      "getpublickey": "",
-      "nip04encrypt": "",
-      "nip04decrypt": "",
-      "signmessage": ""
-    },
-    "commando": {
-      "bkpr-listbalances": "",
-      "checkmessage": "",
-      "connect": "",
-      "decode": "",
-      "decodepay": "",
-      "disconnect": "",
-      "feerates": "",
-      "fundchannel": "",
-      "getinfo": "",
-      "getroute": "",
-      "invoice": "",
-      "keysend": "",
-      "listforwards": "",
-      "listfunds": "",
-      "listinvoices": "",
-      "listnodes": "",
-      "listoffers": "",
-      "listpays": "",
-      "listpeers": "",
-      "listsendpays": "",
-      "listtransactions": "",
-      "multifundchannel": "",
-      "offer": "",
-      "pay": "",
-      "sendpay": "",
-      "setchannel": "",
-      "signmessage": ""
-    },
-    "lnd": {
-      "getinfo": "",
-      "listchannels": "",
-      "listinvoices": "",
-      "channelbalance": "",
-      "walletbalance": "",
-      "openchannel": "",
-      "connectpeer": "",
-      "disconnectpeer": "",
-      "estimatefee": "",
-      "getchaninfo": "",
-      "getnetworkinfo": "",
-      "getnodeinfo": "",
-      "gettransactions": "",
-      "listpayments": "",
-      "listpeers": "",
-      "lookupinvoice": "",
-      "queryroutes": "",
-      "verifymessage": "",
-      "sendtoroute": "",
-      "decodepayreq": "",
-      "routermc": "",
-      "addinvoice": ""
-    },
-    "lnc": {
-      "getinfo": "",
-      "listchannels": "",
-      "listinvoices": "",
-      "channelbalance": "",
-      "walletbalance": "",
-      "openchannel": "",
-      "connectpeer": "",
-      "disconnectpeer": "",
-      "estimatefee": "",
-      "getchaninfo": "",
-      "getnetworkinfo": "",
-      "getnodeinfo": "",
-      "gettransactions": "",
-      "listpayments": "",
-      "listpeers": "",
-      "lookupinvoice": "",
-      "queryroutes": "",
-      "verifymessage": "",
-      "sendtoroute": "",
-      "decodepayreq": "",
-      "routermc": "",
-      "addinvoice": ""
     }
   }
 }

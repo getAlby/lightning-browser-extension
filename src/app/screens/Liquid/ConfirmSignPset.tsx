@@ -109,7 +109,7 @@ function ConfirmSignPset() {
                   {t("allow_sign", { host: origin.host })}{" "}
                 </h2>
                 <Hyperlink
-                  href="https://guides.getalby.com/overall-guide/alby-browser-extension/features/liquid"
+                  href="https://guides.getalby.com/user-guide/v/alby-account-and-browser-extension/alby-browser-extension/features/liquid"
                   target="_blank"
                 >
                   <div className="bg-blue-500 rounded-full">
@@ -117,14 +117,16 @@ function ConfirmSignPset() {
                   </div>
                 </Hyperlink>
               </div>
-              <div className="flex gap-2">
-                <Hyperlink onClick={toggleShowAddresses}>
-                  {showDetails ? t("hide_details") : t("view_details")}
-                </Hyperlink>
-              </div>
+            </div>
+            <div className="flex w-full justify-center">
+              <Hyperlink onClick={toggleShowAddresses}>
+                {showDetails ? t("hide_details") : t("view_details")}
+              </Hyperlink>
+            </div>
 
-              {showDetails && (
-                <>
+            {showDetails && (
+              <>
+                <div className="p-4 shadow bg-white dark:bg-surface-02dp rounded-lg overflow-hidden flex flex-col gap-4">
                   <div>
                     <p className="font-medium dark:text-white">{t("inputs")}</p>
                     <div className="flex flex-col gap-4">
@@ -154,15 +156,17 @@ function ConfirmSignPset() {
                       ))}
                     </div>
                   </div>
+                </div>
 
+                <div className="flex w-full justify-center">
                   <Hyperlink onClick={toggleShowHex}>
                     {showRawTransaction
                       ? t("hide_raw_transaction")
                       : t("view_raw_transaction")}
                   </Hyperlink>
-                </>
-              )}
-            </div>
+                </div>
+              </>
+            )}
 
             {showRawTransaction && (
               <div className="break-all p-2 mb-4 shadow bg-white rounded-lg dark:bg-surface-02dp text-gray-500 dark:text-gray-400">
@@ -199,7 +203,7 @@ function AddressPreview({
   t,
 }: LiquidAddress & {
   assetInfos?: EsploraAssetInfos;
-  t: TFunction<"translation", "confirm_sign_pset", "translation">;
+  t: TFunction<"translation", "confirm_sign_pset">;
 }) {
   // if assetInfos is not provided, we fallback to a custom ticker based on the asset hash
   const ticker = assetInfos?.ticker ?? asset.slice(0, 5).toUpperCase();

@@ -1,6 +1,15 @@
+import LiquidProvider from "~/extension/providers/liquid";
+import NostrProvider from "~/extension/providers/nostr";
 import ProviderBase from "~/extension/providers/providerBase";
+import WebBTCProvider from "~/extension/providers/webbtc";
+import WebLNProvider from "~/extension/providers/webln";
 
 export default class AlbyProvider extends ProviderBase {
+  webln = new WebLNProvider();
+  nostr = new NostrProvider();
+  webbtc = new WebBTCProvider();
+  liquid = new LiquidProvider();
+
   constructor() {
     super("alby");
   }

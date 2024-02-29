@@ -30,8 +30,9 @@ const routes = {
   lock: accounts.lock,
   unlock: accounts.unlock,
   getInfo: ln.getInfo,
-  getInvoices: ln.invoices,
+  getTransactions: ln.getTransactions,
   sendPayment: ln.sendPayment,
+  sendPaymentAsync: ln.sendPaymentAsync,
   keysend: ln.keysend,
   checkPayment: ln.checkPayment,
   signMessage: ln.signMessage,
@@ -62,7 +63,6 @@ const routes = {
   lnurl: lnurl,
   lnurlAuth: auth,
   getCurrencyRate: cache.getCurrencyRate,
-  getAddress: webbtc.getAddress,
   setMnemonic: mnemonic.setMnemonic,
   getMnemonic: mnemonic.getMnemonic,
   generateMnemonic: mnemonic.generateMnemonic,
@@ -80,22 +80,32 @@ const routes = {
     removePrivateKey: nostr.removePrivateKey,
     setPrivateKey: nostr.setPrivateKey,
   },
+  webbtc: {
+    getPsbtPreview: webbtc.getPsbtPreview,
+    signPsbt: webbtc.signPsbt,
+    getAddress: webbtc.getAddress,
+  },
 
   // Public calls that are accessible from the inpage script (through the content script)
   public: {
     webbtc: {
+      isEnabled: webbtc.isEnabled,
       enable: webbtc.enable,
       getInfo: webbtc.getInfo,
+      signPsbtWithPrompt: webbtc.signPsbtWithPrompt,
       getAddressOrPrompt: webbtc.getAddressOrPrompt,
     },
     alby: {
+      isEnabled: alby.isEnabled,
       enable: alby.enable,
       addAccount: accounts.promptAdd,
     },
     webln: {
       enable: webln.enable,
+      isEnabled: webln.isEnabled,
       getInfo: ln.getInfo,
       sendPaymentOrPrompt: webln.sendPaymentOrPrompt,
+      sendPaymentAsyncWithPrompt: webln.sendPaymentAsyncWithPrompt,
       keysendOrPrompt: webln.keysendOrPrompt,
       signMessageOrPrompt: webln.signMessageOrPrompt,
       lnurl: webln.lnurl,
@@ -104,11 +114,13 @@ const routes = {
       request: ln.request,
     },
     liquid: {
+      isEnabled: liquid.isEnabled,
       enable: liquid.enable,
       getAddressOrPrompt: liquid.getAddressOrPrompt,
       signPsetWithPrompt: liquid.signPsetWithPrompt,
     },
     nostr: {
+      isEnabled: nostr.isEnabled,
       enable: nostr.enable,
       getPublicKeyOrPrompt: nostr.getPublicKeyOrPrompt,
       signEventOrPrompt: nostr.signEventOrPrompt,

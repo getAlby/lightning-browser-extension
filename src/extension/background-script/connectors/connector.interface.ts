@@ -17,19 +17,20 @@ interface Route {
   total_fees: number;
 }
 
-export interface ConnectorInvoice {
+export interface ConnectorTransaction {
   custom_records?: {
     "696969"?: string;
     "7629169"?: string;
     "5482373484"?: string;
   } & Record<string, string>;
   id: string;
-  memo: string;
+  memo?: string;
   preimage: string;
+  payment_hash?: string;
   settled: boolean;
   settleDate: number;
-  totalAmount: string;
-  type: "received";
+  totalAmount: number;
+  type: "received" | "sent";
 }
 
 export interface MakeInvoiceArgs {
@@ -55,9 +56,15 @@ export type GetBalanceResponse = {
   };
 };
 
-export type GetInvoicesResponse = {
+export type GetTransactionsResponse = {
   data: {
-    invoices: ConnectorInvoice[];
+    transactions: ConnectorTransaction[];
+  };
+};
+
+export type GetPaymentsResponse = {
+  data: {
+    payments: ConnectorTransaction[];
   };
 };
 
@@ -67,6 +74,11 @@ export type SendPaymentResponse = {
     paymentHash: string;
     route: Route;
   };
+};
+
+export type SendPaymentAsyncResponse = {
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  data: {};
 };
 
 export interface SendPaymentArgs {
@@ -119,7 +131,7 @@ export default interface Connector {
   unload(): Promise<void>;
   getInfo(): Promise<GetInfoResponse>;
   getBalance(): Promise<GetBalanceResponse>;
-  getInvoices(): Promise<GetInvoicesResponse>;
+  getTransactions(): Promise<GetTransactionsResponse>;
   makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse>;
   sendPayment(args: SendPaymentArgs): Promise<SendPaymentResponse>;
   keysend(args: KeysendArgs): Promise<SendPaymentResponse>;

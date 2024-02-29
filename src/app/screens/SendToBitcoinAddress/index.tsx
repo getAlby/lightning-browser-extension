@@ -82,6 +82,9 @@ function SendToBitcoinAddress() {
         setFeesLoading(true);
 
         const result = await api.getSwapInfo();
+        if (!result.available) {
+          throw new Error("Swaps currently not available");
+        }
 
         setServiceFeePercentage(result.service_fee_percentage);
         setSatsPerVbyte(result.sats_per_vbyte);
@@ -91,7 +94,7 @@ function SendToBitcoinAddress() {
         }
       } catch (e) {
         console.error(e);
-        if (e instanceof Error) toast.error(t("service_unavailable"));
+        setStep("unavailable");
       } finally {
         setFeesLoading(false);
       }
@@ -358,7 +361,6 @@ function SendToBitcoinAddress() {
             </Container>
           </form>
         )}
-
         {step == "success" && (
           <Container justifyBetween maxWidth="sm">
             <ResultCard
@@ -392,12 +394,75 @@ function SendToBitcoinAddress() {
             </div>
           </Container>
         )}
+        {step == "unavailable" && (
+          <Container justifyBetween maxWidth="sm">
+            <Alert type="info">
+              Built-in swaps are currently unavailable. You can use one of the
+              following swap providers in the meantime:
+            </Alert>
+            <ExchangeLink
+              href="https://boltz.exchange/"
+              imageSrc="/assets/icons/swap/boltz.png"
+              title="Boltz Exchange"
+              description="Privacy first, non-Custodial bitcoin exchange"
+            />
+            <ExchangeLink
+              href="https://swap.deezy.io/"
+              imageSrc="/assets/icons/swap/deezy.svg"
+              title="Deezy"
+              description="Swap instantly between lightning and on-chain bitcoin"
+            />
+            <ExchangeLink
+              href="https://sideshift.ai/ln/btc"
+              imageSrc="/assets/icons/swap/sideshift.svg"
+              title="sideshift.ai"
+              description="No sign-up crypto exchange"
+            />
+          </Container>
+        )}
       </div>
     </div>
   );
 }
 
 export default SendToBitcoinAddress;
+
+// Define the types for the component props
+interface ExchangeLinkProps {
+  href: string;
+  imageSrc: string;
+  title: string;
+  description: string;
+}
+
+const ExchangeLink: React.FC<ExchangeLinkProps> = ({
+  href,
+  imageSrc,
+  title,
+  description,
+}) => {
+  return (
+    <a key={href} href={href} target="_blank" rel="noreferrer" className="mt-4">
+      <div className="bg-white dark:bg-surface-01dp shadow flex p-4 rounded-lg hover:bg-gray-50 dark:hover:bg-neutral-800 cursor-pointer w-full">
+        <div className="flex space-x-3 items-center ">
+          <img
+            src={imageSrc}
+            alt="image"
+            className="h-14 w-14 rounded-lg object-cover"
+          />
+          <div>
+            <h2 className="font-medium font-serif text-base dark:text-white">
+              {title}
+            </h2>
+            <p className="font-serif text-sm font-normal text-gray-500 dark:text-neutral-400 line-clamp-3">
+              {description}
+            </p>
+          </div>
+        </div>
+      </div>
+    </a>
+  );
+};
 
 type BitcoinAddressProps = {
   address: string;

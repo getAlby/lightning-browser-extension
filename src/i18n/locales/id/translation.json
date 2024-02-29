@@ -12,9 +12,7 @@
           "enter_password": "Mohon masukan kode sandi.",
           "confirm_password": "Mohon konfirmasi kode sandi Anda.",
           "mismatched_password": "Kode sandi tidak sama."
-        },
-        "description": "Kode sandi ini dapat digunakan untuk membuka Alby pada perangkat ini. Ini tidak dapat dipulihkan, tetapi bisa diganti.",
-        "title": "Atur kode sandi"
+        }
       },
       "test_connection": {
         "initializing": "Menginisialisasi akun Anda. Mohon tunggu, ini mungkin akan memakan waktu beberapa menit...",
@@ -31,19 +29,15 @@
         "description": "Kamu hampir samapi. Untuk menggunakan Alby dengan mudah, kamu dapat pin ekstensi ini pada toolbar browser:",
         "next_btn": "Mulai buzzin' {{icon}} dengan Alby",
         "explanation": "1. Klik pada <0/> di ujung kanan atas browser<1/>2. Cari Alby dan klik untuk mem-pin-nya pada toolbar<1/>3. Selesai. Untuk mengakses Alby, tinggal klik pada<2/> ikon"
-      },
-      "title": "Selamat Datang di Alby"
+      }
     },
     "choose_path": {
       "other": {
-        "description": "Sambungkan dengan wallet lightning atau node yang sudah ada dan sesuaikan pada berbagai konektor.",
-        "and_more": "& lainnya...",
         "connect": "Sambung",
         "title": "Wallets Lainnya"
       },
       "alby": {
         "title": "Akun Alby",
-        "description": "Daftar atau gunakan akun Alby yang sudah ada untuk memulai pembayaran dengan lightning secara cepat.",
         "connect": "Koneksi dengan Alby"
       }
     },
@@ -87,27 +81,9 @@
       },
       "lnc": {
         "title": "Lightning Terminal (LNC)",
-        "page": {
-          "title": "Sambungkan node LND kamu",
-          "description": "1. Bukan Lightning Terminal dan Pilih <0>Sambung Lightning Node</0> dari sidebar.<1/> 2. Klik <0>Buat sesi baru</0><1/>3. Masukkan label pada sesi, pilih izin yang dikehendaki dan kirim<1/>4. <0>Salin pairing phrase</0> dan tempel pada bawah ini."
-        },
         "pairing_phrase": {
           "label": "Pairing phrase kamu: ",
           "placeholder": "secret stack sats phrase"
-        }
-      },
-      "lndhub_bluewallet": {
-        "title": "Bluewallet",
-        "page": {
-          "title": "Sambungkan dengan Bluewallet",
-          "description": "Pada Bluewallet, pilih wallet yang kamu ingin sambungkan, buka, lalu klik pada \"...\", klik pada Export/Backup untuk menampilkan kode QR dan pindai dengan webcam kamu."
-        },
-        "uri": {
-          "label": "BlueWallet Export URI"
-        },
-        "errors": {
-          "invalid_uri": "BlueWallet URI Salah",
-          "connection_failed": "Koneksi gagal. Apakah BlueWallet URI kamu benar?"
         }
       },
       "lndhub_go": {
@@ -191,11 +167,11 @@
           "placeholder": "lndconnect://yournode:8080?..."
         }
       },
-      "start9": {
-        "title": "Start9",
+      "startos": {
+        "title": "StartOS",
         "page": {
-          "title": "Sambungkan dengan <0>Server Start9</0>",
-          "instructions": "Pada dashboard Embassy klik pada <0>Lightning Network Daemon</0> service.<1/>Pilih tab <0>Properties</0>.<1/>Kemudian salin <0>LND Connect REST URL.</0>"
+          "title": "Sambungkan dengan <0>Server StartOS</0>",
+          "instructions": "Pada dashboard StartOS klik pada <0>Lightning Network Daemon</0> service.<1/>Pilih tab <0>Properties</0>.<1/>Kemudian salin <0>LND Connect REST URL.</0>"
         },
         "rest_url": {
           "placeholder": "lndconnect://yournode:8080?...",
@@ -226,62 +202,9 @@
           "title": "Sambungkan dengan <0>Bitcoin Jungle Wallet</0>"
         }
       },
-      "galoy": {
-        "phone_number": {
-          "label": "Masukkan nomor telepon kamu"
-        },
-        "sms_code": {
-          "label": "Masukkan kode verifikasi SMS"
-        },
-        "token": {
-          "label": "Masukkan token Access",
-          "info": "{{label}} integrasi dengan Alby masih berstatus alpha dan hanya disarankan untuk pengguna yang berpengalaman.<br><br>Kamu bisa mengambil token Access pada aplikasi mobile, klik pada ikon pengaturan, dan sentuh 3 kali pada build number untuk membukan developer menu.<br><br>kemudian, token akses akan bisa disalin.<br><br>"
-        },
-        "errors": {
-          "setup_failed": "Persiapan gagal",
-          "missing_token": "Token akses tidak ada, tidak dapat masuk.",
-          "invalid_token": "Token akses salah"
-        },
-        "actions": {
-          "login": "Login"
-        }
-      },
-      "kollider": {
-        "title": "Kollider",
-        "description": "Masuk pada akun Kollider",
-        "warning": "⚠️ Mohon pastikan kamu menyimpan kredensial di aplikasi password manager secara aman. Jika tidak ada kredensial tersebut, akun kamu tidak dapat dipulihkan.",
-        "choose_path": {
-          "title": "Sambungkan dengan Kollider Wallet",
-          "description": "Login atau daftar akun Kollider dan sambungkan dengan Alby.",
-          "create_new": "Daftar"
-        },
-        "create": {
-          "title": "Buat akun Kollider dan sambungkan dengan Alby",
-          "description": "Buat akun Kollider untuk mengirim, menerima, dan menukar Bitcoin."
-        },
-        "login": {
-          "title": "Sambungkan akun Kollider kamu"
-        },
-        "username": {
-          "label": "Username"
-        },
-        "currency": {
-          "label": "Pilih mata uang akun kamu"
-        },
-        "errors": {
-          "connection_failed": "Koneksi gagal. Apakah kamu yakin data akun sudah benar?",
-          "user_already_exists": "Username sudah terpakai",
-          "registration_limit_exceeded": "Limit pendaftaran sudah maksimal, coba lagi dalam beberapa saat."
-        }
-      },
       "btcpay": {
-        "page": {
-          "title": "Sambungkan dengan node BTCPay LND",
-          "instructions": "Buka BTCPayServer dan masuk sebagai admin. Masuk ke Server Settings > Services > LND Rest - See information. Lalu, klik \"See QR Code information\" dan salin data kode QR. Tempel di bawah ini:"
-        },
         "config": {
-          "label": "Config data",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
+          "label": "Config data"
         },
         "errors": {
           "connection_failed": "Koneksi gagal. Apakah koneksi BTCPay URL sudah benar dan dapat dibuka?"
@@ -342,8 +265,8 @@
       "mynode": {
         "name": "myNode"
       },
-      "start9": {
-        "name": "Start9"
+      "startos": {
+        "name": "StartOS"
       }
     },
     "home": {
@@ -351,18 +274,12 @@
         "send_satoshis": "⚡️ Kirim Satoshis ⚡️",
         "enable_now": "Aktifkan Sekarang"
       },
-      "recent_transactions": "Transaksi terbaru",
       "allowance_view": {
-        "no_transactions": "Tidak ada transaksi pada <0>{{name}}</0>.",
-        "recent_transactions": "Transaksi Terbaru"
+        "no_transactions": "Tidak ada transaksi pada <0>{{name}}</0>."
       },
       "default_view": {
         "is_blocked_hint": "Alby sedang tidak aktif pada {{host}}",
-        "block_removed": "Aktifkan {{host}}. Silakan muat ulang website.",
-        "no_outgoing_transactions": "Tidak ada transaksi keluar untuk akun ini.",
-        "no_incoming_transactions": "Tidak ada transaksi masuk untuk akun ini.",
-        "all_transactions_link": "Lihat semua transaksi",
-        "recent_transactions": "Transaksi Terbaru"
+        "block_removed": "Aktifkan {{host}}. Silakan muat ulang website."
       }
     },
     "accounts": {
@@ -392,7 +309,6 @@
             "error_confirm": "Silakan konfirmasi bahwa kamu telah mencadangkan recovery phrase."
           },
           "backup": {
-            "title": "Cadangkan recovery phrase kamu",
             "save": "Simpan Master Key",
             "button": "Lihat recovery phrase",
             "warning": "⚠️ Jangan lupa untuk mencadangkan recovery phrase! tidak mempunyai cadangannya akan mungkin menyebabkan kehilangan akses secara permanen terhadap Master Key, identitas Nostr atau aset lainnya yang menggunakan kunci ini.",
@@ -411,9 +327,7 @@
             "button": "Impor Master Key",
             "description": "Gunakan recovery phrase untuk impor Master Key kamu ke Alby."
           },
-          "inputs": {
-            "title": "Recovery Phrase"
-          },
+          "inputs": {},
           "lnurl": {
             "title": "Masuk dengan Lightning",
             "use_mnemonic": "Gunakan Master Key untuk masuk pada aplikasi yang telah terintegrasi dengan Lightning (LNURL Auth)"
@@ -484,8 +398,6 @@
           "hint": "adalah protokol simpel dan terbuka yang bertujuan untuk membuat jaringan sosial anti penyensoran. Nostr bekerja dengan menggunakan kunci kriptografi. Untuk menerbitkan sesuatu, kamu dapat gunakan kunci dan mengirimnya ke berbagai relay. Kamu dapat menggunakan Alby untuk mengatur kunci Nostr. Berbagai aplikasi Nostr akan dapat menggunakan kunci dari ekstensi Alby."
         },
         "remove": {
-          "title": "Hapus Akun Ini",
-          "subtitle": "Hapus semua allowances, data pembayaran, dan kunci-kunci yang terasosiasi dengan akun ini.",
           "error": "Nama akun yang dimasukkan tidak sama."
         },
         "remove_secretkey": {
@@ -495,15 +407,9 @@
         },
         "actions": {
           "remove_secretkey": "Hapus Master Key",
-          "export": "Expor",
-          "remove_account": "Hapus akun"
-        },
-        "title1": "Pengaturan Akun"
-      },
-      "actions": {
-        "add_account": "Tambah akun"
-      },
-      "title": "Akun-akun"
+          "export": "Expor"
+        }
+      }
     },
     "unlock": {
       "unlock_to_continue": "Buka untuk melanjutkan",
@@ -521,7 +427,6 @@
       }
     },
     "settings": {
-      "title": "Pengaturan",
       "browser_notifications": {
         "title": "Notifikasi peramban",
         "subtitle": "Notifikasi terkait pembayaran dan autentikasi."
@@ -691,35 +596,6 @@
     "scan_qrcode": {
       "title": "Menunggu pemindaian"
     },
-    "discover": {
-      "title": "Jelajahi Ekosistem Lightning ⚡️",
-      "description": "Situs Web dan aplikasi Web di mana kamu dapat menggunakan Alby",
-      "list": {
-        "trading": "Perdagangan",
-        "gaming": "Permainan",
-        "nostr": "Nostr",
-        "entertainment": "Hiburan",
-        "shopping": "Berbelanja",
-        "miscellaneous": "Lain-lain",
-        "nodeManagement": "Manajemen Node"
-      },
-      "tips": {
-        "top_up_wallet": {
-          "description": "Perlu top up?\nKami sediakan!",
-          "title": "Beli Bitcoin"
-        },
-        "demo": {
-          "description": "Temukan fitur Alby\ndi situs demo kami",
-          "title": "Demo Alby"
-        },
-        "mnemonic": {
-          "description": "Berencana menggunakan Nostr?\nBuat kunci kamu sekarang.",
-          "title": "Nostr"
-        },
-        "description": "Beberapa tips untuk memulai buzzin'🐝",
-        "title": "Dompet Alby kamu sudah siap"
-      }
-    },
     "publishers": {
       "title": "Website ⚡ Kamu",
       "description": "Situs Web di mana kamu telah menggunakan Alby sebelum",
@@ -800,8 +676,7 @@
         "30078": "data terkait aplikasi"
       },
       "allow": "Izinkan website ini untuk:",
-      "view_details": "Lihat rincian",
-      "no_content": "(Tidak ada konten)"
+      "view_details": "Lihat rincian"
     },
     "on_chain": {
       "title": "Terima melalui alamat bitcoin",
@@ -818,10 +693,6 @@
     },
     "transactions": {
       "title": "Transaksi",
-      "description": {
-        "outgoing": "Transaksi keluar untuk akun ini",
-        "incoming": "Transaksi masuk untuk akun ini"
-      },
       "list_empty": "Tidak ada transaksi."
     }
   },
@@ -843,16 +714,12 @@
     "account_menu": {
       "options": {
         "account": {
-          "add": "Tambahkan akun baru",
-          "manage": "Kelola akun",
-          "account_settings": "Pengaturan Akun",
           "go_to_web_wallet": "Atur akun web kamu"
         }
       },
-      "screen_reader": "Toggle Dropdown",
-      "title": "Ganti akun"
+      "screen_reader": "Toggle Dropdown"
     },
-    "transactionsTable": {
+    "transactions_table": {
       "sent": "Terkirim",
       "fee": "Biaya",
       "preimage": "Preimage",
@@ -909,23 +776,22 @@
   },
   "permissions": {
     "nostr": {
-      "nip04decrypt": "Dekripsi data.",
-      "getpublickey": "Membaca kunci publik Anda.",
-      "nip04encrypt": "Enkripsi data."
+      "nip04decrypt": "Dekripsi data",
+      "getpublickey": "Membaca kunci publik Anda"
     },
     "commando": {
-      "decode": "Decode teks bolt11/bolt12/rune."
+      "decode": "Decode teks bolt11/bolt12/rune"
     },
     "lnc": {
-      "addinvoice": "Buat invoice baru.",
-      "listinvoices": "Dapatkan daftar dari semua invoice.",
-      "openchannel": "Buka channel baru.",
-      "listchannels": "Dapatkan deskripsi dari semua channel yang terbuka.",
-      "getinfo": "Dapatkan informasi node."
+      "addinvoice": "Buat invoice baru",
+      "listinvoices": "Dapatkan daftar dari semua invoice",
+      "openchannel": "Buka channel baru",
+      "listchannels": "Dapatkan deskripsi dari semua channel yang terbuka",
+      "getinfo": "Dapatkan informasi node"
     },
     "lnd": {
-      "addinvoice": "Buat invoice baru.",
-      "addholdinvoice": "Buat invoice HOLD baru."
+      "addinvoice": "Buat invoice baru",
+      "addholdinvoice": "Buat invoice HOLD baru"
     }
   },
   "common": {
@@ -985,7 +851,6 @@
     "confirm_password": "Konfirmasi Kata Sandi",
     "success": "Sukses",
     "error": "Eror",
-    "settings": "Pengaturan",
     "accounts": "Akun-akun",
     "connected_sites": "Situs Terhubung",
     "wallet": "Dompet",
@@ -1004,7 +869,6 @@
       "connection_failed": "Koneksi gagal",
       "payment_failed": "Pembayaran Gagal"
     },
-    "advanced": "Advanced",
     "discover": "Temui",
     "loading": "memuat",
     "or": "atau"

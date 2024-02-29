@@ -10,29 +10,20 @@ export default function BadgesList({ allowance }: Props) {
   if (allowance.remainingBudget > 0) {
     badges.push({
       label: "budget",
-      color: "green-bitcoin",
-      textColor: "white",
+      className: "bg-blue-500 text-white",
     });
   }
   if (allowance.lnurlAuth) {
     badges.push({
       label: "auth",
-      color: "green-bitcoin",
-      textColor: "white",
+      className: "bg-green-bitcoin text-white",
     });
   }
 
   return (
     <>
       {badges?.map((b) => {
-        return (
-          <Badge
-            key={b.label}
-            label={b.label}
-            color={b.color}
-            textColor={b.textColor}
-          />
-        );
+        return <Badge key={b.label} label={b.label} className={b.className} />;
       })}
     </>
   );

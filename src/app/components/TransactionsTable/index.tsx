@@ -1,12 +1,16 @@
-import { CaretDownIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
+import {
+  ArrowDownIcon,
+  ArrowUpIcon,
+} from "@bitcoin-design/bitcoin-icons-react/outline";
 import Loading from "@components/Loading";
-import { Disclosure } from "@headlessui/react";
-import { useTranslation } from "react-i18next";
-import Button from "~/app/components/Button";
-import { useSettings } from "~/app/context/SettingsContext";
-import { Transaction } from "~/types";
 
-import Badge from "../Badge";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+
+import TransactionModal from "~/app/components/TransactionsTable/TransactionModal";
+import { useSettings } from "~/app/context/SettingsContext";
+import { classNames } from "~/app/utils";
+import { Transaction } from "~/types";
 
 export type Props = {
   transactions: Transaction[] | null | undefined;
@@ -20,155 +24,100 @@ export default function TransactionsTable({
   loading = false,
 }: Props) {
   const { getFormattedSats } = useSettings();
-  const { t } = useTranslation("components");
+  const [modalOpen, setModalOpen] = useState(false);
+  const [transaction, setTransaction] = useState<Transaction | undefined>();
+  const { t } = useTranslation("components", {
+    keyPrefix: "transactions_table",
+  });
 
-  return loading ? (
-    <div className="w-full flex flex-col items-center mt-4">
-      <Loading />
-    </div>
-  ) : !transactions?.length && noResultMsg ? (
-    <p className="text-gray-500 dark:text-neutral-400">{noResultMsg}</p>
-  ) : (
-    <>
-      <div className="shadow overflow-hidden rounded-lg bg-white divide-y divide-gray-200 dark:divide-white/10 dark:bg-surface-02dp">
-        {transactions?.map((tx) => (
-          <div key={tx.id} className="px-3 py-2">
-            <Disclosure>
-              {({ open }) => (
-                <>
-                  <div className="flex">
-                    <div className="overflow-hidden mr-3">
-                      <div
-                        className="
-                  text-sm font-medium text-gray-900 truncate dark:text-white"
-                      >
-                        <p className="truncate">
-                          {tx.publisherLink && tx.title ? (
-                            <a
-                              target="_blank"
-                              href={tx.publisherLink}
-                              rel="noopener noreferrer"
-                            >
-                              {tx.title}
-                            </a>
-                          ) : (
-                            tx.title || tx.boostagram?.message || "\u00A0"
-                          )}
-                        </p>
+  function openDetails(transaction: Transaction) {
+    setTransaction(transaction);
+    setModalOpen(true);
+  }
+
+  function getTransactionType(tx: Transaction): "incoming" | "outgoing" {
+    return [tx.type && "sent"].includes(tx.type) ? "outgoing" : "incoming";
+  }
+
+  return (
+    <div className="mt-4">
+      {loading ? (
+        <div className="w-full flex flex-col items-center">
+          <Loading />
+        </div>
+      ) : !transactions?.length && noResultMsg ? (
+        <p className="text-gray-500 dark:text-neutral-400">{noResultMsg}</p>
+      ) : (
+        <>
+          {transactions?.map((tx) => {
+            const type = getTransactionType(tx);
+
+            return (
+              <div
+                key={tx.id}
+                className="-mx-2 px-2 py-2 hover:bg-gray-100 dark:hover:bg-surface-02dp cursor-pointer rounded-md"
+                onClick={() => openDetails(tx)}
+              >
+                <div className="flex gap-3">
+                  <div className="flex items-center">
+                    {type == "outgoing" ? (
+                      <div className="flex justify-center items-center bg-orange-100 dark:bg-[#261911] rounded-full w-8 h-8">
+                        <ArrowUpIcon className="w-4 h-4 text-orange-400 stroke-[4px]" />
                       </div>
-                      <p className="text-xs text-gray-600 dark:text-neutral-400">
-                        {tx.date}
-                      </p>
-                    </div>
-                    {tx.badges && (
-                      <div className="ml-6 space-x-3">
-                        {tx.badges.map((badge) => (
-                          <Badge
-                            key={badge.label}
-                            label={badge.label}
-                            color={badge.color}
-                            textColor={badge.textColor}
-                          />
-                        ))}
+                    ) : (
+                      <div className="flex justify-center items-center bg-green-100 dark:bg-[#0F1E1A] rounded-full w-8 h-8">
+                        <ArrowDownIcon className="w-4 h-4 text-green-400 stroke-[4px]" />
                       </div>
                     )}
-                    <div className="flex ml-auto text-right space-x-3 shrink-0">
-                      <div>
-                        <p className="text-sm font-medium dark:text-white">
-                          {[tx.type && "sent", "sending"].includes(tx.type)
-                            ? "-"
-                            : "+"}
-                          {getFormattedSats(tx.totalAmount)}
-                        </p>
-                        {!!tx.totalAmountFiat && (
-                          <p className="text-xs text-gray-600 dark:text-neutral-400">
-                            ~{tx.totalAmountFiat}
-                          </p>
+                  </div>
+                  <div className="overflow-hidden mr-3">
+                    <div className="text-sm font-medium text-black truncate dark:text-white">
+                      <p className="truncate">
+                        {tx.title ||
+                          tx.boostagram?.message ||
+                          (type == "incoming" ? t("received") : t("sent"))}
+                      </p>
+                    </div>
+                    <p className="text-xs text-gray-400 dark:text-neutral-500">
+                      {tx.date}
+                    </p>
+                  </div>
+                  <div className="flex ml-auto text-right space-x-3 shrink-0 dark:text-white">
+                    <div>
+                      <p
+                        className={classNames(
+                          "text-sm",
+                          type == "incoming"
+                            ? "text-green-600 dark:color-green-400"
+                            : "text-orange-600 dark:color-orange-400"
                         )}
-                      </div>
-                      {(!!tx.description ||
-                        [tx.type && "sent", "sending"].includes(tx.type) ||
-                        (tx.type === "received" && tx.boostagram)) && (
-                        <Disclosure.Button className="block text-gray-500 hover:text-black dark:hover:text-white transition-color duration-200">
-                          <CaretDownIcon
-                            className={`${open ? "rotate-180" : ""} w-5 h-5`}
-                          />
-                        </Disclosure.Button>
+                      >
+                        {type == "outgoing" ? "-" : "+"}{" "}
+                        {getFormattedSats(tx.totalAmount)}
+                      </p>
+
+                      {!!tx.totalAmountFiat && (
+                        <p className="text-xs text-gray-400 dark:text-neutral-600">
+                          ~{tx.totalAmountFiat}
+                        </p>
                       )}
                     </div>
                   </div>
-                  <Disclosure.Panel>
-                    <div className="text-xs text-gray-600 dark:text-neutral-400">
-                      {(tx.description || tx.boostagram) && (
-                        <div className="my-2">
-                          {tx.description && <p>{tx.description}</p>}
-                          {tx.boostagram && (
-                            <ul>
-                              <li>
-                                {t("transactionsTable.boostagram.sender")}:{" "}
-                                {tx.boostagram.sender_name}
-                              </li>
-                              <li>
-                                {t("transactionsTable.boostagram.message")}:{" "}
-                                {tx.boostagram.message}
-                              </li>
-                              <li>
-                                {t("transactionsTable.boostagram.app")}:{" "}
-                                {tx.boostagram.app_name}
-                              </li>
-                              <li>
-                                {t("transactionsTable.boostagram.podcast")}:{" "}
-                                {tx.boostagram.podcast}
-                              </li>
-                            </ul>
-                          )}
-                        </div>
-                      )}
-                      {(tx.totalFees !== undefined || tx.location) && (
-                        <div className="my-2 flow-root">
-                          {tx.totalFees !== undefined && (
-                            <p className="float-left">
-                              <span className="font-bold">
-                                {t("transactionsTable.fee")}
-                              </span>
-                              <br />
-                              {getFormattedSats(tx.totalFees)}
-                            </p>
-                          )}
-                          {tx.location && (
-                            <a
-                              className="float-right"
-                              href={tx.location}
-                              target="_blank"
-                              rel="noreferrer noopener"
-                            >
-                              <Button
-                                primary
-                                label={t("transactionsTable.open_location")}
-                              />
-                            </a>
-                          )}
-                        </div>
-                      )}
-                      {tx.preimage && (
-                        <div className="my-2 flow-root">
-                          <p className="float-left break-all">
-                            <span className="font-bold">
-                              {t("transactionsTable.preimage")}
-                            </span>
-                            <br />
-                            {tx.preimage}
-                          </p>
-                        </div>
-                      )}
-                    </div>
-                  </Disclosure.Panel>
-                </>
-              )}
-            </Disclosure>
-          </div>
-        ))}
-      </div>
-    </>
+                </div>
+              </div>
+            );
+          })}
+          {transaction && (
+            <TransactionModal
+              transaction={transaction}
+              isOpen={modalOpen}
+              onClose={() => {
+                setModalOpen(false);
+              }}
+            />
+          )}
+        </>
+      )}
+    </div>
   );
 }

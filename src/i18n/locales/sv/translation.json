@@ -2,8 +2,6 @@
   "translation": {
     "welcome": {
       "set_password": {
-        "title": "Ange ett lösenord för upplåsning",
-        "description": "Detta lösenord låter dig låsa upp Alby på den här enheten. Det kan inte återställas, men kan ändras senare.",
         "choose_password": {
           "label": "Välj ett lösenord för upplåsning:"
         },
@@ -27,7 +25,6 @@
           "delete_edit_account": "Radera ogiltigt konto och redigera igen"
         }
       },
-      "title": "Välkommen till Alby",
       "pin_extension": {
         "title": "Fäst din Alby extension",
         "description": "Du är nästan där. För att använda Alby bekvämt, kom ihåg att fästa ditt tillägg till webbläsarens verktygsfält:",
@@ -53,20 +50,6 @@
         "drag_and_drop": "Drag och släpp din macaroon här eller <0>bläddra</0>",
         "errors": {
           "connection_failed": "Koppling misslyckades. Är dina LND-uppgifter korrekta?"
-        }
-      },
-      "lndhub_bluewallet": {
-        "title": "Bluewallet",
-        "page": {
-          "title": "Anslut Bluewallet",
-          "description": "I Bluwallet, välj den plånbok du vill koppla till, öppna den och klicka på \"...\", därefter Export/Backup för att visa QR-koden och scanna den med webb-kameran."
-        },
-        "uri": {
-          "label": "BlueWallet Export URI"
-        },
-        "errors": {
-          "invalid_uri": "Ogiltig BlueWallet URI",
-          "connection_failed": "Anslutningen misslyckades. Är din BlueWallet URI korrekt?"
         }
       },
       "lndhub_go": {
@@ -150,11 +133,11 @@
           "placeholder": "lndconnect://yournode:8080?..."
         }
       },
-      "start9": {
-        "title": "Start9",
+      "startos": {
+        "title": "StartOS",
         "page": {
-          "title": "Anslut till din <0>Start9 Server</0>",
-          "instructions": "På din Embassy instrumentpanel klickar du på tjänsten <0>Lightning Network Daemon</0>.<1/>Välj fliken <0>Egenskaper</0>.<1/>Kopiera nu <0>LND Connect REST URL. </0>"
+          "title": "Anslut till din <0>StartOS Server</0>",
+          "instructions": "På din StartOS instrumentpanel klickar du på tjänsten <0>Lightning Network Daemon</0>.<1/>Välj fliken <0>Egenskaper</0>.<1/>Kopiera nu <0>LND Connect REST URL. </0>"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -177,6 +160,9 @@
         "title": "Blink plånbok",
         "page": {
           "title": "Anslut <0>Blink Wallet</0>"
+        },
+        "token": {
+          "label": "Ange din API-nyckel"
         }
       },
       "bitcoin_jungle": {
@@ -185,66 +171,13 @@
           "title": "Anslut en <0>Bitcoin Jungle Wallet</0>"
         }
       },
-      "galoy": {
-        "phone_number": {
-          "label": "Fyll i ditt telefonnummer"
-        },
-        "sms_code": {
-          "label": "Fyll i verifieringskoden du fick via SMS"
-        },
-        "token": {
-          "label": "Fyll i din JWT-token",
-          "info": "Inloggning till {{label}} uppdateras. Om du är avancerad användare kan du hämta din JWT token genom att logga in via <0>Web Wallet (wallet.mainnet.galoy.io)</0><1/><1/> JWT ser ut som följer: <2>eyJhbG...</2><1/><1/>"
-        },
-        "actions": {
-          "login": "Logga in"
-        },
-        "errors": {
-          "setup_failed": "Konfiguration misslyckades",
-          "missing_token": "JWT saknas, kunde inte logga in.",
-          "invalid_token": "ogiltig JWT godkändes"
-        }
-      },
       "btcpay": {
         "title": "BTCPay Server",
-        "page": {
-          "title": "Anslut din BTCPay LND-nod",
-          "instructions": "Navigera till din BTCPayServer och logga in som administratör. Gå till Server Settings > Services > LND Rest - See information. Klicka på \"See QR Code information\" och kopiera QR-koddatan. Klistra in nedan:"
-        },
         "config": {
-          "label": "Konfigurationsdata",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
+          "label": "Konfigurationsdata"
         },
         "errors": {
           "connection_failed": "Anslutning misslyckades. Är URL till BTCPay-anslutningen korrekt och tillgänglig?"
-        }
-      },
-      "kollider": {
-        "title": "Kollider",
-        "currency": {
-          "label": "Välj ditt valutakonto"
-        },
-        "errors": {
-          "connection_failed": "Anslutningen misslyckades. Är du säker på att kontouppgifterna är korrekta?",
-          "user_already_exists": "Användarnamnet finns redan",
-          "registration_limit_exceeded": "Registreringsgränsen har överskridits, försök efter en stund."
-        },
-        "description": "Logga in på ditt Kollider-konto",
-        "username": {
-          "label": "Användarnamn"
-        },
-        "warning": "⚠️ Se till att du sparar dina uppgifter säkert i en lösenordshanterare. Utan dessa inloggningsuppgifter kommer ditt konto inte att kunna återställas.",
-        "choose_path": {
-          "title": "Anslut till din Kollider Wallet",
-          "description": "Logga in eller registrera dig för ett nytt Kollider-konto och anslut till Alby.",
-          "create_new": "Registrera"
-        },
-        "create": {
-          "title": "Skapa ditt Kollider-konto och anslut till Alby",
-          "description": "Skapa ett nytt Kollider-konto för att skicka, ta emot och handla Bitcoin."
-        },
-        "login": {
-          "title": "Anslut till ditt Kollider-konto"
         }
       },
       "commando": {
@@ -285,11 +218,7 @@
           "placeholder": "hemlig stack sats fras",
           "label": "Din parningsfras "
         },
-        "title": "Lightning Terminal (LNC)",
-        "page": {
-          "title": "Anslut till din LND node",
-          "description": "1. Öppna Lightning Terminal och välj <0>Lightning Node Connect</0> från sidofältet.<1/> 2. Klicka på <0>Skapa en ny session</0><1/>3. Märk sessionen, välj önskade behörigheter och skicka in<1/>4. <0>Kopiera parningsfras</0> och klistra in den nedan."
-        }
+        "title": "Lightning Terminal (LNC)"
       },
       "umbrel_lightning_node": {
         "title": "Lightning Node"
@@ -300,9 +229,7 @@
         "send_satoshis": "⚡️ Skicka Satoshis ⚡️",
         "enable_now": "Aktivera Nu"
       },
-      "recent_transactions": "Senaste Transaktioner",
       "allowance_view": {
-        "recent_transactions": "Senaste Transaktioner",
         "no_transactions": "Inga transaktioner för <0>{{name}}</0> ännu.",
         "sats": "sats",
         "budget_spent": "Budget förbrukad",
@@ -311,19 +238,13 @@
         "permissions": "Behörigheter"
       },
       "default_view": {
-        "recent_transactions": "Senaste Transaktioner",
         "is_blocked_hint": "Alby är för tillfället avstängt hos {{host}}",
         "block_removed": "Aktiverade {{host}}. Ladda om webbplatsen.",
-        "no_outgoing_transactions": "Inga utgående transaktioner för detta konto ännu.",
-        "all_transactions_link": "Se alla transaktioner",
-        "no_incoming_transactions": "Inga inkommande transaktioner för detta konto ännu."
+        "see_all": "Se alla",
+        "no_transactions": "Inga transaktioner för detta konto ännu."
       }
     },
     "accounts": {
-      "title": "Konton",
-      "actions": {
-        "add_account": "Lägg till konto"
-      },
       "account_view": {
         "nostr": {
           "generate_keys": {
@@ -390,12 +311,9 @@
           }
         },
         "remove": {
-          "title": "Ta bort detta konto",
-          "subtitle": "Tar bort alla traktamenten, betalningsdata och nycklar som är kopplade till detta konto.",
           "error": "Det angivna kontonamnet matchade inte.",
           "confirm": "Ange namnet på kontot för att bekräfta raderingen av ditt konto.\n\n{{ name }}\n\n ⚠️ Alla associerade nycklar (Master Key, Nostr, etc) kommer att raderas om du fortsätter. Se till att du har säkerhetskopierat dem, det finns inget annat sätt att återställa dem."
         },
-        "title1": "Konto inställningar",
         "title2": "Konto",
         "name": {
           "title": "Visnings Namn",
@@ -411,7 +329,6 @@
           "description": "Låter dig ansluta och använda det här kontot på mobila plånböcker som <0>Blue Wallet</0> och <1>Zeus</1>."
         },
         "actions": {
-          "remove_account": "Ta bort kontot",
           "export": "Exportera",
           "remove_secretkey": "Ta bort huvudnyckeln"
         },
@@ -426,7 +343,6 @@
             "description": "Master Key låter dig interagera med olika protokoll som: Nostr, baslager av Bitcoin eller LNURL-Auth."
           },
           "backup": {
-            "title": "Säkerhetskopiera din återställningsfras",
             "save": "Spara huvudnyckeln",
             "button": "Visa återställningsfras",
             "protocols": {
@@ -447,9 +363,7 @@
             "button": "Importera huvudnyckel"
           },
           "title": "🔑 Nyckelhantering",
-          "inputs": {
-            "title": "Återställningsfras"
-          },
+          "inputs": {},
           "lnurl": {
             "title": "Logga in med Lightning",
             "use_mnemonic": "Använd Master Key för att logga in på lightning appar (LNURL Auth)"
@@ -462,7 +376,7 @@
           "title": "Ta bort huvudnyckeln",
           "subtitle": "Tar bort huvudnyckeln från det här kontot.",
           "success": "Masternyckeln har tagits bort.",
-          "confirm": "Ange namnet på kontot för att bekräfta raderingen av din huvudnyckel.\n{{ name }}"
+          "confirm": "Ange namnet på kontot för att bekräfta raderingen av din huvudnyckel.\n\n{{ name }}"
         },
         "no_mnemonic_hint": "💡 Du har ingen huvudnyckel än. <0>Klicka här</0></div> för att skapa din huvudnyckel och låsa upp dessa inställningar.",
         "network": {
@@ -492,7 +406,6 @@
       }
     },
     "settings": {
-      "title": "Inställningar",
       "browser_notifications": {
         "title": "Webbläsarnotiser",
         "subtitle": "Betalnings- och autentiseringsrelaterade notiser."
@@ -642,7 +555,19 @@
     "receive": {
       "title": "Tag emot",
       "actions": {
-        "create_invoice": "Skapa Faktura"
+        "create_invoice": "Skapa Faktura",
+        "redeem": {
+          "description": "Ta ut en bitcoin-kupong direkt via en LNURL-kod",
+          "title": "Lösa in"
+        },
+        "invoice": {
+          "title": "Lightning faktura",
+          "description": "Begär omedelbara och specifika belopp bitcoinbetalningar"
+        },
+        "bitcoin_address": {
+          "description": "Ta emot via bitcoin-adress med en bytestjänst",
+          "title": "Bitcoin adress"
+        }
       },
       "amount": {
         "label": "Belopp",
@@ -738,28 +663,24 @@
         "30008": "profil badges",
         "30009": "badge definition",
         "30023": "långformigt innehåll",
-        "30078": "applikationsspecifika data",
-        "unknown": "nostr event av sort {{kind}}"
+        "30078": "applikationsspecifika data"
       },
       "view_details": "Visa detaljer",
       "hide_details": "Göm detaljer",
       "block_added": "Lade till {{host}} till blockeringslistan, ladda om webbplatsen.",
-      "allow_sign_event": "Tillåt {{host}} att signera en {{kind}}:",
-      "no_content": "(Inget innehåll)",
       "allow_sign": "Tillåt {{host}} att signera:",
       "content": "Den här webbplatsen ber dig att signera:"
     },
     "choose_path": {
       "alby": {
         "title": "Alby Konto",
-        "description": "Registrera dig eller använd ditt befintliga Alby-konto för att komma igång med lightning betalningar på nolltid.",
-        "connect": "Anslut med Alby"
+        "connect": "Anslut med Alby",
+        "description": "Registrera dig eller använd ditt befintliga Alby konto. Perfekt att snabbt komma igång och för små belopp."
       },
       "other": {
         "title": "Annan Plånbok",
         "connect": "Anslut",
-        "and_more": "& mer...",
-        "description": "Anslut till din befintliga lightning Plånbok eller Node och välj från olika kontakter."
+        "description": "Anslut till din befintliga lightning plånbok eller nod och välj bland olika kontakter. Perfekt för full flexibilitet. Kör din egen nod."
       }
     },
     "alby": {
@@ -779,36 +700,6 @@
         }
       }
     },
-    "discover": {
-      "list": {
-        "miscellaneous": "Diverse",
-        "gaming": "Spel",
-        "entertainment": "Underhållning",
-        "shopping": "Shoppa",
-        "showcases": "Vitriner",
-        "nostr": "Nostr",
-        "trading": "Handel",
-        "nodeManagement": "Nodhantering"
-      },
-      "tips": {
-        "title": "Din Alby plånbok är redo",
-        "description": "Några tips för att få igång dig'🐝",
-        "top_up_wallet": {
-          "title": "Köp Bitcoin",
-          "description": "Behöver du en påfyllning?\nVi hjälper dig!"
-        },
-        "demo": {
-          "title": "Alby Demo",
-          "description": "Upptäck Albys funktioner\npå vår demowebbplats"
-        },
-        "mnemonic": {
-          "title": "Nostr",
-          "description": "Planerar du att använda Nostr?\nSkapa dina nycklar nu."
-        }
-      },
-      "title": "Utforska Lightnings ⚡️ Eco system",
-      "description": "Webbplatser och webbappar där du kan använda Alby"
-    },
     "confirm_request_permission": {
       "always_allow": "Kom ihåg mitt val och fråga inte igen",
       "title": "Godkänn begäran",
@@ -817,10 +708,7 @@
     "transactions": {
       "title": "Transaktion",
       "list_empty": "Inga transaktioner tillgängliga ännu.",
-      "description": {
-        "incoming": "Inkommande transaktioner för detta konto",
-        "outgoing": "Utgående transaktioner för detta konto"
-      }
+      "description": "Transaktioner för detta konto"
     },
     "distributions": {
       "title": "Anslut till {{namn}}",
@@ -840,8 +728,8 @@
       "mynode": {
         "name": "myNode"
       },
-      "start9": {
-        "name": "Start9"
+      "startos": {
+        "name": "StartOS"
       }
     },
     "confirm_add_account": {
@@ -890,7 +778,18 @@
       "allow": "Tillåt den här webbplatsen att:",
       "allow_sign": "Tillåt {{host}} att signera:",
       "block_and_ignore": "Blockera och ignorera {{host}}",
-      "block_added": "Lade till {{host}} till blockeringslistan, ladda om webbplatsen."
+      "block_added": "Lade till {{host}} till blockeringslistan, ladda om webbplatsen.",
+      "confirm_sign_psbt": {
+        "title": "Signera",
+        "hide_raw_transaction": "Göm råtransaktion (hexadecimal)",
+        "view_raw_transaction": "Visa råtransaktion (hexadecimal)",
+        "inputs": "Ingångar",
+        "fee": "Avgift",
+        "hide_details": "Göm detaljer",
+        "allow_sign": "Den här webbplatsen ber dig att underteckna en bitcoin-transaktion",
+        "view_details": "Visa detaljer",
+        "outputs": "Utgångar"
+      }
     },
     "liquid": {
       "title": "Liquid",
@@ -929,13 +828,45 @@
     "webln_enable": {
       "title": "Anslut till WebLN",
       "request2": "Begär fakturor och lightning information"
+    },
+    "onboard": {
+      "request2": "Du har inte konfigurerat dina nycklar än",
+      "request1": "Denna webbplats kräver nyckelinteraktion",
+      "request3": "Installationen är snabb och enkel",
+      "title": "Ställ in dina nycklar",
+      "actions": {
+        "start_setup": "Starta installationen"
+      }
+    },
+    "liquid_enable": {
+      "request2": "Begär fakturor och likvida uppgifter",
+      "title": "Anslut till Liquid"
+    },
+    "nostr_enable": {
+      "title": "Anslut till Nostr",
+      "request1": "Begär att läsa din publika Nostr-nyckel",
+      "request2": "Begäran att signera händelser med din privata nyckel"
+    },
+    "webbtc_enable": {
+      "request2": "Begär fakturor och Webbtc-information",
+      "title": "Anslut till WebBTC"
+    },
+    "alby_enable": {
+      "title": "Anslut till Alby",
+      "request2": "Begär fakturor och albyinformation"
+    },
+    "confirm_payment_async": {
+      "title": "Godkänn betalning",
+      "description": "Detta är en HOLD-faktura. <0>Läs mer »</0>",
+      "actions": {
+        "pay_now": "Betala nu"
+      }
     }
   },
   "common": {
     "password": "Lösenord",
     "success": "Genomfört",
     "error": "Misslyckades",
-    "settings": "Inställningar",
     "connected_sites": "Anslutna webbplatser",
     "loading": "laddar",
     "amount": "Belopp",
@@ -976,7 +907,10 @@
       "copy_clipboard": "Kopiera till urklipp",
       "paste": "Klistra in",
       "paste_clipboard": "Klistra in från urklipp",
-      "review": "Recension"
+      "review": "Recension",
+      "copied_to_clipboard": "Kopierade till urklipp",
+      "disconnect": "Koppla ifrån",
+      "hide": "Dölj"
     },
     "errors": {
       "connection_failed": "Anslutning misslyckades",
@@ -989,7 +923,6 @@
     },
     "sats_other": "sats",
     "sats_one": "sat",
-    "advanced": "Avancerat",
     "accounts": "Konton",
     "discover": "Upptäcka",
     "success_message": "{{amount}}{{fiatAmount}} skickat till {{destination}}",
@@ -1011,21 +944,29 @@
       "citadel": "Citadel"
     },
     "or": "eller",
-    "pasted": "Klistrat in!"
+    "pasted": "Klistrat in!",
+    "enable": {
+      "block_added": "Lade till {{host}} till blockeringslistan, ladda om webbplatsen.",
+      "request1": "Begär godkännande för transaktioner",
+      "allow": "Tillåt den här webbplatsen att:",
+      "block_and_ignore": "Blockera och ignorera {{host}}"
+    },
+    "website": "Webbsida"
   },
   "components": {
     "allowance_menu": {
-      "confirm_delete": "Är du säker på att du vill radera webbplatsen?",
-      "hint": "Detta nollställer nuvarande budget",
+      "confirm_delete": "Är du säker på att du vill koppla bort den här webbplatsen?",
+      "hint": "Om du ändrar detta återställs den nuvarande budgeten",
       "new_budget": {
-        "label": "Ny budget"
+        "label": "Betalningsbudget med ett klick",
+        "link_label": "Ställ in en budget för betalningar med ett klick"
       },
       "enable_login": {
         "title": "Aktivera webbplatsinloggning",
         "subtitle": "Logga in automatiskt utan bekräftelse när webbplatsen begär det."
       },
       "edit_allowance": {
-        "title": "Redigera Inställningar",
+        "title": "Webbplatsinställningar",
         "screen_reader": "Alternativ för Beloppsgräns"
       },
       "edit_permissions": "Redigera behörigheter"
@@ -1040,7 +981,7 @@
         "allow_camera_access": "Tillåt kameraåtkomst under inställningar."
       }
     },
-    "transactionsTable": {
+    "transactions_table": {
       "fee": "Avgift",
       "preimage": "Förhandsvy",
       "received": "Mottaget",
@@ -1049,9 +990,15 @@
         "sender": "Avsändare",
         "message": "Meddelande",
         "app": "App",
-        "podcast": "Podcast"
+        "podcast": "Podcast",
+        "episode": "Avsnitt",
+        "action": "Åtgärd",
+        "totalAmount": "Totalt belopp",
+        "timestamp": "Tidsstämpel"
       },
-      "open_location": "Öppna websida"
+      "open_location": "Öppna websida",
+      "payment_hash": "Betalningshash",
+      "date_time": "Datum & tid"
     },
     "budget_control": {
       "remember": {
@@ -1078,23 +1025,22 @@
     },
     "account_menu": {
       "screen_reader": "Öppna droppmeny",
-      "title": "Växla konto",
       "options": {
         "account": {
-          "add": "Lägg till nytt konto",
-          "manage": "Hantera konton",
-          "account_settings": "Konto inställningar",
           "go_to_web_wallet": "Hantera ditt webbkonto"
         }
       }
     },
     "publishers_table": {
-      "payments": "betalningar"
+      "payments": "betalningar",
+      "total": "totalt",
+      "budget": "budget"
     },
     "badge": {
       "label": {
         "auth": "LOGGA IN",
-        "imported": "IMPORTERAD"
+        "imported": "IMPORTERAD",
+        "budget": "BUDGET"
       }
     },
     "companion_download_info": {
@@ -1108,111 +1054,104 @@
         "title": "TOR (native)",
         "description": "Välj det här alternativet om den här webbläsaren redan är ansluten till TOR-nätverket."
       }
-    },
-    "transaction_list": {
-      "tabs": {
-        "incoming": "Inkommande",
-        "outgoing": "Utgående"
-      }
     }
   },
   "permissions": {
     "nostr": {
-      "nip04decrypt": "Dekryptera data.",
-      "getpublickey": "Läs din publika nyckel.",
-      "signmessage": "Skriv under meddelandet med din nyckel.",
-      "nip04encrypt": "Kryptera data."
+      "nip04decrypt": "Dekryptera data",
+      "getpublickey": "Läs din publika nyckel",
+      "signmessage": "Skriv under meddelandet med din nyckel"
     },
     "lnd": {
-      "channelbalance": "Få en rapport om de totala medlen över alla öppna kanaler.",
-      "routermc": "Läs det interna uppdragskontroll läget.",
-      "getinfo": "Få nod-informationen.",
-      "lookupinvoice": "Slå upp fakturainformation.",
-      "walletbalance": "Få plånbokens totala outnyttjade uttag.",
-      "disconnectpeer": "Koppla från en fjärr-ansluten peer.",
-      "getchaninfo": "Få nätverksmeddelandet för den givna kanalen.",
-      "listpeers": "Få en lista över alla för närvarande aktiva peers.",
-      "sendtoroute": "Gör en betalning via den angivna vägen.",
-      "getnodeinfo": "Få kanalinformationen för en nod.",
-      "gettransactions": "Få en lista över alla transaktioner som är relevanta för plånboken.",
-      "listpayments": "Få en lista över alla utgående betalningar.",
-      "queryroutes": "Fråga efter en möjlig rutt.",
-      "addholdinvoice": "Skapa nya HODL-fakturor.",
-      "settleinvoice": "Avgör en godkänd faktura.",
-      "listchannels": "Få en beskrivning av alla öppna kanaler.",
-      "listinvoices": "Få en lista över alla fakturor.",
-      "openchannel": "Öppna en ny kanal.",
-      "connectpeer": "Upprätta en anslutning till en extern peer.",
-      "estimatefee": "Uppskatta avgiftssatsen och totala avgifter för en transaktion.",
-      "getnetworkinfo": "Få grundläggande statistik om det kända kanaldiagrammet.",
-      "verifymessage": "Verifiera en signatur över ett meddelande.",
-      "decodepayreq": "Avkoda en sträng för betalningsbegäran.",
-      "addinvoice": "Skapa nya fakturor."
+      "channelbalance": "Få en rapport om de totala medlen över alla öppna kanaler",
+      "routermc": "Läs det interna uppdragskontroll läget",
+      "getinfo": "Få nod-informationen",
+      "lookupinvoice": "Slå upp fakturainformation",
+      "walletbalance": "Få plånbokens totala outnyttjade uttag",
+      "disconnectpeer": "Koppla från en fjärr-ansluten peer",
+      "getchaninfo": "Få nätverksmeddelandet för den givna kanalen",
+      "listpeers": "Få en lista över alla för närvarande aktiva peers",
+      "sendtoroute": "Gör en betalning via den angivna vägen",
+      "getnodeinfo": "Få kanalinformationen för en nod",
+      "gettransactions": "Få en lista över alla transaktioner som är relevanta för plånboken",
+      "listpayments": "Få en lista över alla utgående betalningar",
+      "queryroutes": "Fråga efter en möjlig rutt",
+      "addholdinvoice": "Skapa nya HODL-fakturor",
+      "settleinvoice": "Avgör en godkänd faktura",
+      "listchannels": "Få en beskrivning av alla öppna kanaler",
+      "listinvoices": "Få en lista över alla fakturor",
+      "openchannel": "Öppna en ny kanal",
+      "connectpeer": "Upprätta en anslutning till en extern peer",
+      "estimatefee": "Uppskatta avgiftssatsen och totala avgifter för en transaktion",
+      "getnetworkinfo": "Få grundläggande statistik om det kända kanaldiagrammet",
+      "verifymessage": "Verifiera en signatur över ett meddelande",
+      "decodepayreq": "Avkoda en sträng för betalningsbegäran",
+      "addinvoice": "Skapa nya fakturor"
     },
     "lnc": {
-      "listinvoices": "Få en lista över alla fakturor.",
-      "walletbalance": "Få plånbokens totala outnyttjade uttag.",
-      "openchannel": "Öppna en ny kanal.",
-      "getchaninfo": "Få nätverksmeddelandet för den givna kanalen.",
-      "getnetworkinfo": "Få grundläggande statistik om det kända kanaldiagrammet.",
-      "listchannels": "Få en beskrivning av alla öppna kanaler.",
-      "estimatefee": "Uppskatta avgiftssatsen och totala avgifter för en transaktion.",
-      "getinfo": "Få nod-informationen.",
-      "channelbalance": "Få en rapport om de totala medlen över alla öppna kanaler.",
-      "disconnectpeer": "Koppla från en fjärransluten peer.",
-      "getnodeinfo": "Få kanalinformationen för en nod.",
-      "gettransactions": "Få en lista över alla transaktioner som är relevanta för plånboken.",
-      "lookupinvoice": "Se fakturainformation.",
-      "queryroutes": "Fråga efter en möjlig rutt.",
-      "connectpeer": "Upprätta en anslutning till en extern peer.",
-      "listpayments": "Få en lista över alla utgående betalningar.",
-      "listpeers": "Få en lista över alla för närvarande aktiva peers.",
-      "decodepayreq": "Avkoda en sträng för betalningsbegäran.",
-      "verifymessage": "Verifiera en signatur över ett meddelande.",
-      "sendtoroute": "Gör en betalning via den angivna vägen.",
-      "routermc": "Läs det interna uppdragskontrollläget.",
-      "addinvoice": "Skapa nya fakturor.",
-      "addholdinvoice": "Skapa nya HODL-fakturor.",
-      "settleinvoice": "Avgör en godkänd faktura."
+      "listinvoices": "Få en lista över alla fakturor",
+      "walletbalance": "Få plånbokens totala outnyttjade uttag",
+      "openchannel": "Öppna en ny kanal",
+      "getchaninfo": "Få nätverksmeddelandet för den givna kanalen",
+      "getnetworkinfo": "Få grundläggande statistik om det kända kanaldiagrammet",
+      "listchannels": "Få en beskrivning av alla öppna kanaler",
+      "estimatefee": "Uppskatta avgiftssatsen och totala avgifter för en transaktion",
+      "getinfo": "Få nod-informationen",
+      "channelbalance": "Få en rapport om de totala medlen över alla öppna kanaler",
+      "disconnectpeer": "Koppla från en fjärransluten peer",
+      "getnodeinfo": "Få kanalinformationen för en nod",
+      "gettransactions": "Få en lista över alla transaktioner som är relevanta för plånboken",
+      "lookupinvoice": "Se fakturainformation",
+      "queryroutes": "Fråga efter en möjlig rutt",
+      "connectpeer": "Upprätta en anslutning till en extern peer",
+      "listpayments": "Få en lista över alla utgående betalningar",
+      "listpeers": "Få en lista över alla för närvarande aktiva peers",
+      "decodepayreq": "Avkoda en sträng för betalningsbegäran",
+      "verifymessage": "Verifiera en signatur över ett meddelande",
+      "sendtoroute": "Gör en betalning via den angivna vägen",
+      "routermc": "Läs det interna uppdragskontrollläget",
+      "addinvoice": "Skapa nya fakturor",
+      "addholdinvoice": "Skapa nya HODL-fakturor",
+      "settleinvoice": "Avgör en godkänd faktura"
     },
     "commando": {
-      "invoice": "Skapa förväntningar på en betalning.",
-      "listpeers": "Lista noder som är anslutna eller har öppna kanaler med denna nod.",
-      "setchannel": "Konfigurera avgifter / htlc-intervall som annonseras för en kanal.",
-      "offer": "Skapa ett erbjudande.",
-      "pay": "Skicka en betalning till en BOLT11-faktura.",
-      "decodepay": "Kontrollera och analysera en bolt11-sträng.",
-      "decode": "Avkoda en bolt11/bolt12/rune-sträng.",
-      "getinfo": "Få sammanfattningen av noden.",
-      "multifundchannel": "Öppna flera betalningskanaler med noder genom att utföra en enda finansieringstransaktion.",
-      "sendpay": "Skicka en betalning via en rutt.",
-      "signmessage": "Skapa en signatur från denna nod.",
-      "bkpr-listbalances": "Lista över alla aktuella och historiska kontosaldon.",
-      "disconnect": "Stäng en befintlig anslutning till en peer.",
-      "feerates": "Returnera avgifterna som CLN kommer att använda.",
-      "listfunds": "Lista alla tillgängliga medel.",
-      "fundchannel": "Öppna en betalningskanal med en peer genom att genomföra en finansieringstransaktion.",
-      "listnodes": "Lista noder som noden har lärt sig om via gossip-meddelanden.",
-      "listoffers": "Lista alla erbjudanden eller få ett specifikt erbjudande.",
-      "listpays": "Får status för alla betalkommandon.",
-      "listsendpays": "Får status för alla sendpay-kommandon.",
-      "listtransactions": "Lista transaktioner som spåras i plånboken.",
-      "connect": "Upprätta en ny anslutning med en annan nod.",
-      "getroute": "Hitta den bästa vägen för betalningen till en lightning-nod.",
-      "listinvoices": "Få status på alla fakturor.",
-      "keysend": "Skicka en betalning till en annan nod.",
-      "checkmessage": "Verifiera att signaturen genererades av en given nod.",
-      "listforwards": "Lista alla htlcs som har försökt vidarebefordras."
+      "invoice": "Skapa förväntningar på en betalning",
+      "listpeers": "Lista noder som är anslutna eller har öppna kanaler med denna nod",
+      "setchannel": "Konfigurera avgifter / htlc-intervall som annonseras för en kanal",
+      "offer": "Skapa ett erbjudande",
+      "pay": "Skicka en betalning till en BOLT11-faktura",
+      "decodepay": "Kontrollera och analysera en bolt11-sträng",
+      "decode": "Avkoda en bolt11/bolt12/rune-sträng",
+      "getinfo": "Få sammanfattningen av noden",
+      "multifundchannel": "Öppna flera betalningskanaler med noder genom att utföra en enda finansieringstransaktion",
+      "sendpay": "Skicka en betalning via en rutt",
+      "signmessage": "Skapa en signatur från denna nod",
+      "bkpr-listbalances": "Lista över alla aktuella och historiska kontosaldon",
+      "disconnect": "Stäng en befintlig anslutning till en peer",
+      "feerates": "Returnera avgifterna som CLN kommer att använda",
+      "listfunds": "Lista alla tillgängliga medel",
+      "fundchannel": "Öppna en betalningskanal med en peer genom att genomföra en finansieringstransaktion",
+      "listnodes": "Lista noder som noden har lärt sig om via gossip-meddelanden",
+      "listoffers": "Lista alla erbjudanden eller få ett specifikt erbjudande",
+      "listpays": "Får status för alla betalkommandon",
+      "listsendpays": "Får status för alla sendpay-kommandon",
+      "listtransactions": "Lista transaktioner som spåras i plånboken",
+      "connect": "Upprätta en ny anslutning med en annan nod",
+      "getroute": "Hitta den bästa vägen för betalningen till en lightning-nod",
+      "listinvoices": "Få status på alla fakturor",
+      "keysend": "Skicka en betalning till en annan nod",
+      "checkmessage": "Verifiera att signaturen genererades av en given nod",
+      "listforwards": "Lista alla htlcs som har försökt vidarebefordras"
     },
     "webln": {
-      "getbalance": "Läs saldot på ditt konto."
+      "getbalance": "Läs saldot på ditt konto"
     },
     "bitcoin": {
-      "getaddress": "Läs din Bitcoin-mottagningsadress."
+      "getaddress": "Läs din Bitcoin-mottagningsadress"
     },
     "liquid": {
-      "getaddress": "Läs din Liquid-mottagningsadress.",
-      "signschnorr": "Skriv under meddelandet med din nyckel."
+      "getaddress": "Läs din Liquid-mottagningsadress",
+      "signschnorr": "Skriv under meddelandet med din nyckel"
     }
   }
 }
