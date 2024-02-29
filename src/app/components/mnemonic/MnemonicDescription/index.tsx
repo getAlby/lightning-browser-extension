@@ -1,10 +1,6 @@
-import {
-  KeyIcon,
-  MnemonicIcon,
-  PasswordIcon,
-  SafeIcon,
-} from "@bitcoin-design/bitcoin-icons-react/outline";
+import { PopiconsDownloadLine, PopiconsKeyLine } from "@popicons/react";
 import { useTranslation } from "react-i18next";
+import FaceSurpriseIcon from "~/app/icons/FaceSurpriseIcon";
 
 function MnemonicDescription() {
   const { t } = useTranslation("translation", {
@@ -13,14 +9,13 @@ function MnemonicDescription() {
 
   return (
     <>
-      <div className="flex flex-col gap-2">
-        <ListItem icon={<KeyIcon />} title={t("backup.items.keys")} />
+      <div className="flex flex-col gap-4">
+        <ListItem icon={<PopiconsKeyLine />} title={t("new.items.keys")} />
+        <ListItem icon={<FaceSurpriseIcon />} title={t("new.items.usage")} />
         <ListItem
-          icon={<MnemonicIcon />}
-          title={t("backup.items.recovery_phrase")}
+          icon={<PopiconsDownloadLine />}
+          title={t("new.items.recovery_phrase")}
         />
-        <ListItem icon={<PasswordIcon />} title={t("backup.items.words")} />
-        <ListItem icon={<SafeIcon />} title={t("backup.items.storage")} />
       </div>
     </>
   );
@@ -32,11 +27,9 @@ type ListItemProps = { icon: React.ReactNode; title: string };
 
 function ListItem({ icon, title }: ListItemProps) {
   return (
-    <div className="flex gap-2 items-center">
-      <div className="shrink-0 w-8 h-8 text-gray-600 dark:text-neutral-400">
-        {icon}
-      </div>
-      <span className="text-gray-600 dark:text-neutral-400">{title}</span>
+    <div className="flex gap-2 items-center text-gray-600 dark:text-neutral-400 text-sm">
+      <div className="shrink-0">{icon}</div>
+      <span>{title}</span>
     </div>
   );
 }

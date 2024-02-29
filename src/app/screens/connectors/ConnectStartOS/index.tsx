@@ -9,17 +9,17 @@ import PasswordViewAdornment from "~/app/components/PasswordViewAdornment";
 import toast from "~/app/components/Toast";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
-import logo from "/static/assets/icons/start9.png";
+import logo from "/static/assets/icons/startos.png";
 
 const initialFormData = {
   url: "",
   macaroon: "",
 };
 
-export default function ConnectStart9() {
+export default function ConnectStartOS() {
   const navigate = useNavigate();
   const { t } = useTranslation("translation", {
-    keyPrefix: "choose_connector.start9",
+    keyPrefix: "choose_connector.startos",
   });
   const [formData, setFormData] = useState(initialFormData);
   const [loading, setLoading] = useState(false);
@@ -59,7 +59,7 @@ export default function ConnectStart9() {
     setLoading(true);
     const { url, macaroon } = formData;
     const account = {
-      name: "Start9",
+      name: "StartOS",
       config: {
         macaroon,
         url,
@@ -112,7 +112,7 @@ export default function ConnectStart9() {
             t={t}
             components={[
               // eslint-disable-next-line react/jsx-key
-              <a className="underline" href="https://start9.com/latest/"></a>,
+              <a className="underline" href="https://start9.com/"></a>,
             ]}
           />
         </h1>

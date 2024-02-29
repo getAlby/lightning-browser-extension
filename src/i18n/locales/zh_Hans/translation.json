@@ -2,8 +2,6 @@
   "translation": {
     "welcome": {
       "set_password": {
-        "title": "设置解锁密码",
-        "description": "此密码将允许你在此设备上解锁 Alby。它无法恢复，但可以稍后更改。",
         "choose_password": {
           "label": "选择解锁密码："
         },
@@ -27,7 +25,6 @@
           "delete_edit_account": "删除无效帐户并重新编辑"
         }
       },
-      "title": "欢迎使用Alby",
       "pin_extension": {
         "title": "固定你的 Alby 扩展",
         "description": "就快完成了。以便方便地使用 Alby，请记住把扩展固定到工具栏：",
@@ -95,17 +92,12 @@
         }
       },
       "btcpay": {
-        "page": {
-          "instructions": "导航到你的BTCPayServer并以管理员身份登录。转到服务器设置 > 服务 > LND Rest - 查看信息。然后点击 \"查看二维码信息 \"并复制二维码数据。把它粘贴在下面：",
-          "title": "连接你的BTCPay LND节点"
-        },
         "title": "BTCPay Server",
         "errors": {
           "connection_failed": "连接失败。BTCPay连接URL是否正确且可访问？"
         },
         "config": {
-          "label": "配置数据",
-          "placeholder": "config=http://your-btc-pay.org/lnd-config/212121/lnd.config"
+          "label": "配置数据"
         }
       },
       "commando": {
@@ -140,16 +132,16 @@
           "label": "本地私钥（自动生成的）"
         }
       },
-      "start9": {
+      "startos": {
         "page": {
-          "instructions": "在你的 Embassy 仪表板上点击 <0>Lightning Network Daemon</0> 服务。<1/>选择 <0>Properties</0> 标签。<1/>复制 <0>LND Connect REST URL。</0>",
-          "title": "连接你的<0>Start9 服务器</0>"
+          "instructions": "在你的 StartOS 仪表板上点击 <0>Lightning Network Daemon</0> 服务。<1/>选择 <0>Properties</0> 标签。<1/>复制 <0>LND Connect REST URL。</0>",
+          "title": "连接你的<0>StartOS 服务器</0>"
         },
         "rest_url": {
           "placeholder": "lndconnect://yournode:8080?...",
           "label": "lndconnect REST URL"
         },
-        "title": "Start9"
+        "title": "StartOS"
       },
       "raspiblitz": {
         "page": {
@@ -218,10 +210,6 @@
         }
       },
       "lnc": {
-        "page": {
-          "description": "1. 打开 Lightning Terminal 并从侧边栏选择 <0>Lightning Node Connect</0> 。<1/> 2. 点击 <0>Create a new session</0><1/>3. 标记对话，选择所需的权限并提交<1/>4. <0>复制配对词句</0> 并粘贴到下方。",
-          "title": "连接你的LND节点"
-        },
         "title": "Lightning Terminal (LNC)",
         "pairing_phrase": {
           "placeholder": "秘密的堆聪短语",
@@ -332,7 +320,6 @@
           "backup": {
             "button": "备份恢复短语",
             "warning": "⚠️ 别忘了将你的恢复短语备份！不备份可能会导致永久失去对你的主密钥、Nostr 身份或使用此密钥管理的资产的访问权限。",
-            "title": "备份你的恢复短语",
             "save": "保存主密钥",
             "protocols": {
               "nostr": "Nostr"
@@ -359,9 +346,7 @@
             "description": "通过使用恢复短语将主密钥导入 Alby。",
             "button": "导入主密钥"
           },
-          "inputs": {
-            "title": "恢复短语"
-          },
+          "inputs": {},
           "lnurl": {
             "title": "闪电登录",
             "use_mnemonic": "使用主密钥登录闪电驱动的应用程序（LNURL Auth）"
@@ -658,36 +643,6 @@
         "connect": "使用 Alby 连接"
       }
     },
-    "discover": {
-      "list": {
-        "trading": "交易",
-        "miscellaneous": "杂项",
-        "shopping": "购物",
-        "entertainment": "娱乐",
-        "gaming": "游戏",
-        "showcases": "展示",
-        "nostr": "Nostr",
-        "nodeManagement": "节点管理"
-      },
-      "description": "可以使用 Alby 的网站和网络应用程序",
-      "title": "探索闪电⚡️生态系统",
-      "tips": {
-        "top_up_wallet": {
-          "title": "购买比特币",
-          "description": "需要充值？\n我们能帮忙！"
-        },
-        "title": "你的Alby钱包已准备就绪",
-        "description": "一些让你开始嗡嗡作响的小贴士🐝",
-        "demo": {
-          "title": "Alby 演示",
-          "description": "在我们的演示网站上\n发现 Alby 的所有功能"
-        },
-        "mnemonic": {
-          "title": "Nostr",
-          "description": "打算使用 Nostr？\n立即生成你的密钥。"
-        }
-      }
-    },
     "alby": {
       "pre_connect": {
         "set_password": {
@@ -731,8 +686,8 @@
       "mynode": {
         "name": "myNode"
       },
-      "start9": {
-        "name": "Start9"
+      "startos": {
+        "name": "StartOS"
       },
       "umbrel": {
         "name": "Umbrel"
@@ -875,7 +830,6 @@
     "copied": "已复制！",
     "error": "错误",
     "loading": "加载中",
-    "advanced": "高级",
     "accounts": "帐户",
     "confirm_password": "确认密码",
     "discover": "发现",
@@ -999,7 +953,6 @@
     "nostr": {
       "signmessage": "使用你的密钥签署消息",
       "nip04decrypt": "解密数据",
-      "nip04encrypt": "加密数据",
       "getpublickey": "读取你的公钥"
     },
     "commando": {

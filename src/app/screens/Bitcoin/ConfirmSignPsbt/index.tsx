@@ -178,7 +178,7 @@ function AddressPreview({
   amount,
   t,
 }: Address & {
-  t: TFunction<"translation", "bitcoin.confirm_sign_psbt", "translation">;
+  t: TFunction<"translation", "bitcoin.confirm_sign_psbt">;
 }) {
   const { getFormattedSats } = useSettings();
   return (

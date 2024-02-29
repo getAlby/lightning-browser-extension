@@ -2,8 +2,6 @@
   "translation": {
     "welcome": {
       "set_password": {
-        "title": "Establecer un código de desbloqueo",
-        "description": "Este código te permitirá desbloquear Alby en este dispositivo. No se puede recuperar, pero se puede cambiar más tarde.",
         "choose_password": {
           "label": "Elige un código de desbloqueo:"
         },
@@ -27,7 +25,6 @@
           "delete_edit_account": "Eliminar una cuenta no válida y volver a editarla"
         }
       },
-      "title": "Bienvenido a Alby",
       "pin_extension": {
         "title": "Fija tu extensión Alby",
         "description": "Ya casi lo has conseguido. Para utilizar Alby cómodamente, recuerda anclar tu extensión a la barra de herramientas del navegador:",
@@ -122,11 +119,11 @@
           "placeholder": "lndconnect://sunodo:8080?..."
         }
       },
-      "start9": {
-        "title": "Cuenta Start9",
+      "startos": {
+        "title": "StartOS",
         "page": {
-          "title": "Conéctate a tu <0>Start9 Server</0>",
-          "instructions": "En tu panel de Embassy, haz clic en el servicio <0>Lightning Network Daemon</0>.<1/>Selecciona la pestaña <0>Propiedades</0>.<1/>Ahora copia la URL REST de <0>LND Connect. </0>"
+          "title": "Conectarse a <0>StartOS</0>",
+          "instructions": "En tu panel de StartOS, haz clic en el servicio <0>Lightning Network Daemon</0>.<1/>Selecciona la pestaña <0>Propiedades</0>.<1/>Ahora copia la URL REST de <0>LND Connect. </0>"
         },
         "rest_url": {
           "label": "URL REST conectalnd",
@@ -159,13 +156,8 @@
       },
       "btcpay": {
         "title": "Servidor BTCPay",
-        "page": {
-          "title": "Conéctese a su nodo BTCPay LND",
-          "instructions": "Navegue a su servidor BTCPay e inicie sesión como administrador. Vaya a Configuración del servidor > Servicios > LND Rest-Ver información. Luego haga clic en\" Ver información del código QR \" y copie los datos del Código QR. Pegar a continuación:"
-        },
         "config": {
-          "label": "Datos de configuración",
-          "placeholder": "config=https://su-btc-pay.org/lnd-config/212121/lnd.config"
+          "label": "Datos de configuración"
         },
         "errors": {
           "connection_failed": "La conexión falló. ¿Es la URL de conexión de BTCPay correcta y accesible?"
@@ -218,10 +210,6 @@
         }
       },
       "lnc": {
-        "page": {
-          "title": "Conecta tu nodo LND",
-          "description": "1. Abra tu Lightning Terminal y selecciona <0>Lightning Node Connect</0> en la barra lateral.<1/> 2. Haz clic en <0>Crear una nueva sesión</0><1/>3. Etiqueta la sesión, luego elige el permiso que deseas y envía<1/>4. <0>Copia la frase de emparejamiento</0> y pégala a continuación."
-        },
         "title": "Lightning Terminal (LNC)",
         "pairing_phrase": {
           "label": "Tu frase vinculada. ",
@@ -530,9 +518,22 @@
         "connect": "Conectar con Alby"
       },
       "other": {
-        "title": "Otras Billeteras",
-        "connect": "Conectar"
-      }
+        "title": "Lleve su propia cartera",
+        "connect": "Conectar",
+        "point1": "Empieza al instante, sin esperar invitación",
+        "point2": "Sin límite de transacciones ni de importe",
+        "description": "Lo mejor si ya tienes un monedero o necesitas hacer pagos de mucho importe.",
+        "point3": "Opciones de autocustodia y custodia",
+        "point4": "Sin dirección relámpago y nostr"
+      },
+      "voltage": {
+        "connect": "Connectar",
+        "title": "Nodo a Voltage Cloud",
+        "point1": "Empieza al instante, sin esperar invitación",
+        "point2": "Sin límite de transacciones ni de importe",
+        "point3": "Servicio de pago en la nube"
+      },
+      "title": "Conectar la cartera a la extensión Alby"
     },
     "nostr": {
       "title": "Nostr",
@@ -567,32 +568,6 @@
         "30009": "definición del distintivo",
         "30023": "contenidos largos",
         "30078": "datos específicos de la aplicación"
-      }
-    },
-    "discover": {
-      "title": "Explora el Ecosistema ⚡️ Lightning",
-      "description": "Sitios web y aplicaciones web donde puede usar Alby",
-      "tips": {
-        "top_up_wallet": {
-          "title": "⚡️ Recarga tu billetera",
-          "description": "Cree una factura lightning, envíese algunos bitcoins y comience a usar Alby en el ecosistema lightning"
-        },
-        "title": "Tu billetera Alby está lista",
-        "description": "Algunos consejos para que empieces a zumbar 🐝",
-        "demo": {
-          "title": "🕹️ Prueba la versión Demo de Alby",
-          "description": "Descubra todo lo que puede hacer con Alby en nuestro sitio web de demostraciones"
-        }
-      },
-      "list": {
-        "entertainment": "Entretenimiento",
-        "shopping": "Compras",
-        "miscellaneous": "Varios",
-        "showcases": "Vitrinas",
-        "nostr": "Nostr",
-        "trading": "Comerciar",
-        "gaming": "Juegos",
-        "nodeManagement": "Gestión de nodos"
       }
     },
     "confirm_request_permission": {
@@ -636,8 +611,8 @@
       "umbrel": {
         "name": "Umbrel"
       },
-      "start9": {
-        "name": "Start9"
+      "startos": {
+        "name": "StartOS"
       },
       "raspiblitz": {
         "name": "Raspiblitz"
@@ -709,7 +684,6 @@
     "success_message": "{{amount}}{{fiatAmount}} enviados a {{destination}}",
     "message": "Mensaje",
     "description_full": "Descripción Completa",
-    "advanced": "Avanzado",
     "accounts": "Cuentas",
     "discover": "Descubrir",
     "response": "Respuesta",
@@ -854,7 +828,6 @@
     "nostr": {
       "signmessage": "Firma el mensaje con tu clave",
       "getpublickey": "Leer tu clave pública",
-      "nip04encrypt": "Cifrar datos",
       "nip04decrypt": "Descifrar datos"
     },
     "lnd": {

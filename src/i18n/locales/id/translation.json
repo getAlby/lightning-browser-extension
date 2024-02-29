@@ -12,9 +12,7 @@
           "enter_password": "Mohon masukan kode sandi.",
           "confirm_password": "Mohon konfirmasi kode sandi Anda.",
           "mismatched_password": "Kode sandi tidak sama."
-        },
-        "description": "Kode sandi ini dapat digunakan untuk membuka Alby pada perangkat ini. Ini tidak dapat dipulihkan, tetapi bisa diganti.",
-        "title": "Atur kode sandi"
+        }
       },
       "test_connection": {
         "initializing": "Menginisialisasi akun Anda. Mohon tunggu, ini mungkin akan memakan waktu beberapa menit...",
@@ -31,8 +29,7 @@
         "description": "Kamu hampir samapi. Untuk menggunakan Alby dengan mudah, kamu dapat pin ekstensi ini pada toolbar browser:",
         "next_btn": "Mulai buzzin' {{icon}} dengan Alby",
         "explanation": "1. Klik pada <0/> di ujung kanan atas browser<1/>2. Cari Alby dan klik untuk mem-pin-nya pada toolbar<1/>3. Selesai. Untuk mengakses Alby, tinggal klik pada<2/> ikon"
-      },
-      "title": "Selamat Datang di Alby"
+      }
     },
     "choose_path": {
       "other": {
@@ -84,10 +81,6 @@
       },
       "lnc": {
         "title": "Lightning Terminal (LNC)",
-        "page": {
-          "title": "Sambungkan node LND kamu",
-          "description": "1. Bukan Lightning Terminal dan Pilih <0>Sambung Lightning Node</0> dari sidebar.<1/> 2. Klik <0>Buat sesi baru</0><1/>3. Masukkan label pada sesi, pilih izin yang dikehendaki dan kirim<1/>4. <0>Salin pairing phrase</0> dan tempel pada bawah ini."
-        },
         "pairing_phrase": {
           "label": "Pairing phrase kamu: ",
           "placeholder": "secret stack sats phrase"
@@ -174,11 +167,11 @@
           "placeholder": "lndconnect://yournode:8080?..."
         }
       },
-      "start9": {
-        "title": "Start9",
+      "startos": {
+        "title": "StartOS",
         "page": {
-          "title": "Sambungkan dengan <0>Server Start9</0>",
-          "instructions": "Pada dashboard Embassy klik pada <0>Lightning Network Daemon</0> service.<1/>Pilih tab <0>Properties</0>.<1/>Kemudian salin <0>LND Connect REST URL.</0>"
+          "title": "Sambungkan dengan <0>Server StartOS</0>",
+          "instructions": "Pada dashboard StartOS klik pada <0>Lightning Network Daemon</0> service.<1/>Pilih tab <0>Properties</0>.<1/>Kemudian salin <0>LND Connect REST URL.</0>"
         },
         "rest_url": {
           "placeholder": "lndconnect://yournode:8080?...",
@@ -210,13 +203,8 @@
         }
       },
       "btcpay": {
-        "page": {
-          "title": "Sambungkan dengan node BTCPay LND",
-          "instructions": "Buka BTCPayServer dan masuk sebagai admin. Masuk ke Server Settings > Services > LND Rest - See information. Lalu, klik \"See QR Code information\" dan salin data kode QR. Tempel di bawah ini:"
-        },
         "config": {
-          "label": "Config data",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
+          "label": "Config data"
         },
         "errors": {
           "connection_failed": "Koneksi gagal. Apakah koneksi BTCPay URL sudah benar dan dapat dibuka?"
@@ -277,8 +265,8 @@
       "mynode": {
         "name": "myNode"
       },
-      "start9": {
-        "name": "Start9"
+      "startos": {
+        "name": "StartOS"
       }
     },
     "home": {
@@ -321,7 +309,6 @@
             "error_confirm": "Silakan konfirmasi bahwa kamu telah mencadangkan recovery phrase."
           },
           "backup": {
-            "title": "Cadangkan recovery phrase kamu",
             "save": "Simpan Master Key",
             "button": "Lihat recovery phrase",
             "warning": "⚠️ Jangan lupa untuk mencadangkan recovery phrase! tidak mempunyai cadangannya akan mungkin menyebabkan kehilangan akses secara permanen terhadap Master Key, identitas Nostr atau aset lainnya yang menggunakan kunci ini.",
@@ -340,9 +327,7 @@
             "button": "Impor Master Key",
             "description": "Gunakan recovery phrase untuk impor Master Key kamu ke Alby."
           },
-          "inputs": {
-            "title": "Recovery Phrase"
-          },
+          "inputs": {},
           "lnurl": {
             "title": "Masuk dengan Lightning",
             "use_mnemonic": "Gunakan Master Key untuk masuk pada aplikasi yang telah terintegrasi dengan Lightning (LNURL Auth)"
@@ -611,35 +596,6 @@
     "scan_qrcode": {
       "title": "Menunggu pemindaian"
     },
-    "discover": {
-      "title": "Jelajahi Ekosistem Lightning ⚡️",
-      "description": "Situs Web dan aplikasi Web di mana kamu dapat menggunakan Alby",
-      "list": {
-        "trading": "Perdagangan",
-        "gaming": "Permainan",
-        "nostr": "Nostr",
-        "entertainment": "Hiburan",
-        "shopping": "Berbelanja",
-        "miscellaneous": "Lain-lain",
-        "nodeManagement": "Manajemen Node"
-      },
-      "tips": {
-        "top_up_wallet": {
-          "description": "Perlu top up?\nKami sediakan!",
-          "title": "Beli Bitcoin"
-        },
-        "demo": {
-          "description": "Temukan fitur Alby\ndi situs demo kami",
-          "title": "Demo Alby"
-        },
-        "mnemonic": {
-          "description": "Berencana menggunakan Nostr?\nBuat kunci kamu sekarang.",
-          "title": "Nostr"
-        },
-        "description": "Beberapa tips untuk memulai buzzin'🐝",
-        "title": "Dompet Alby kamu sudah siap"
-      }
-    },
     "publishers": {
       "title": "Website ⚡ Kamu",
       "description": "Situs Web di mana kamu telah menggunakan Alby sebelum",
@@ -821,8 +777,7 @@
   "permissions": {
     "nostr": {
       "nip04decrypt": "Dekripsi data",
-      "getpublickey": "Membaca kunci publik Anda",
-      "nip04encrypt": "Enkripsi data"
+      "getpublickey": "Membaca kunci publik Anda"
     },
     "commando": {
       "decode": "Decode teks bolt11/bolt12/rune"
@@ -914,7 +869,6 @@
       "connection_failed": "Koneksi gagal",
       "payment_failed": "Pembayaran Gagal"
     },
-    "advanced": "Advanced",
     "discover": "Temui",
     "loading": "memuat",
     "or": "atau"

@@ -1,5 +1,9 @@
 import Button from "@components/Button";
 import PasswordForm from "@components/PasswordForm";
+import {
+  PopiconsCircleExclamationLine,
+  PopiconsLockOpenLine,
+} from "@popicons/react";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -33,27 +37,30 @@ export default function SetPassword() {
   }
 
   const unlockScreenshot = (
-    <img
-      src="assets/images/unlock_passcode.png"
-      alt="Unlock screen"
-      className="h-44"
-    />
+    <img src="assets/images/unlock_passcode.png" alt="Unlock screen" />
   );
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="max-w-xl shadow-lg rounded-xl mx-auto relative lg:flex lg:space-x-8 bg-white dark:bg-surface-02dp pt-10 pb-10 px-10">
+      <div className="max-w-xl rounded-2xl mx-auto relative lg:flex lg:space-x-8 bg-white dark:bg-surface-02dp pt-10 pb-10 px-10 border border-gray-200 dark:border-gray-700">
         <div>
-          <h1 className="text-2xl font-bold dark:text-white max-sm:text-center">
+          <h1 className="text-2xl font-bold dark:text-white text-center">
             {t("title")}
           </h1>
 
-          <p className="text-gray-500 my-5 dark:text-gray-400">
-            {t("description")}
-          </p>
-          <div className="w-full flex justify-center short:hidden my-5">
+          <div className="w-full flex justify-center my-8 short:hidden">
             {unlockScreenshot}
           </div>
+
+          <div className="flex flex-row text-gray-500 my-4 dark:text-gray-400">
+            <PopiconsLockOpenLine className="w-6 h-6 mr-2"></PopiconsLockOpenLine>
+            {t("description1")}
+          </div>
+          <div className="flex flex-row text-gray-500 my-4 dark:text-gray-400">
+            <PopiconsCircleExclamationLine className="w-6 h-6 mr-2"></PopiconsCircleExclamationLine>
+            {t("description2")}
+          </div>
+
           <div>
             <PasswordForm
               i18nKeyPrefix="welcome.set_password"
@@ -61,19 +68,19 @@ export default function SetPassword() {
               setFormData={setFormData}
             />
           </div>
+          <div className="mt-8 flex justify-center">
+            <Button
+              label={tCommon("actions.next")}
+              type="submit"
+              primary
+              disabled={
+                !formData.password ||
+                formData.password !== formData.passwordConfirmation
+              }
+              className="w-64"
+            />
+          </div>
         </div>
-      </div>
-      <div className="my-8 flex justify-center">
-        <Button
-          label={tCommon("actions.next")}
-          type="submit"
-          primary
-          disabled={
-            !formData.password ||
-            formData.password !== formData.passwordConfirmation
-          }
-          className="w-64"
-        />
       </div>
     </form>
   );

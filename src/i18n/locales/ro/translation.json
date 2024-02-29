@@ -1,10 +1,7 @@
 {
   "translation": {
     "welcome": {
-      "title": "Bine ai venit la Alby",
       "set_password": {
-        "title": "Seteaza o parola pentru deblocare",
-        "description": "Aceasta parola este folosita pentru a proteja portofelul tau si pentru a permite accesul la extensia de browser. Aceasta parola nu poate fi resetata si este separata de parola contului Alby.",
         "choose_password": {
           "label": "Alege o parola pentru deblocare:"
         },
@@ -78,10 +75,6 @@
       },
       "lnc": {
         "title": "LND cu LNC",
-        "page": {
-          "title": "Conecteaza-te la nodul tau LND",
-          "description": "Creeaza o sesiune noua in terminal (litd) pentru a obtine o noua fraza de imperechere si introdu-o aici"
-        },
         "pairing_phrase": {
           "label": "Fraza ta de imperechere. ",
           "placeholder": "fraza ta secreta pentru acumulare de sats"
@@ -168,11 +161,11 @@
           "placeholder": "lndconnect://nodultau:8080?..."
         }
       },
-      "start9": {
-        "title": "Start9",
+      "startos": {
+        "title": "StartOS",
         "page": {
-          "title": "Conectare la nodul tau <0>Embassy</0>",
-          "instructions": "<0>Nota:</0> Momentan exista suport doar pentru LND dar vom adauga suport pentru c-lightning in viitor!<1/>Pe tabloul de bord din Embassy apasa pe serviciul <0>Lightning Network Daemon</0>.<1/>Selecteaza tabul <0>Properties</0>.<1/>Acum copiaza <0>LND Connect REST URL.</0>"
+          "title": "Conectare la nodul tau <0>StartOS</0>",
+          "instructions": "<0>Nota:</0> Momentan exista suport doar pentru LND dar vom adauga suport pentru c-lightning in viitor!<1/>Pe tabloul de bord din StartOS apasa pe serviciul <0>Lightning Network Daemon</0>.<1/>Selecteaza tabul <0>Properties</0>.<1/>Acum copiaza <0>LND Connect REST URL.</0>"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -205,13 +198,8 @@
       },
       "btcpay": {
         "title": "Serverul BTCPay",
-        "page": {
-          "title": "Conectare la nodul LND BTCPay",
-          "instructions": "Navigheaza la serverul tau BTCPay si logheaza-te ca administrator. Acceseaza Server Settings > Services > LND Rest - See information. Apoi apasa pe \"See QR Code information\" si copiaza datele codului QR. Insereaza-le mai jos:"
-        },
         "config": {
-          "label": "Date de configurare",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
+          "label": "Date de configurare"
         },
         "errors": {
           "connection_failed": "Conexiune esuata. URL-ul conexiunii BTCPay este corect si accesibil?"
@@ -493,31 +481,6 @@
         "status": ""
       }
     },
-    "discover": {
-      "title": "",
-      "description": "",
-      "list": {
-        "trading": "",
-        "gaming": "",
-        "entertainment": "",
-        "shopping": "",
-        "miscellaneous": "",
-        "showcases": "",
-        "nostr": ""
-      },
-      "tips": {
-        "title": "",
-        "description": "",
-        "top_up_wallet": {
-          "title": "",
-          "description": ""
-        },
-        "demo": {
-          "title": "",
-          "description": ""
-        }
-      }
-    },
     "publishers": {
       "title": "",
       "description": "",
@@ -588,7 +551,6 @@
   "common": {
     "password": "",
     "confirm_password": "",
-    "advanced": "",
     "success": "",
     "error": "",
     "accounts": "",

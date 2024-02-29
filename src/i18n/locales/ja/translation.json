@@ -12,9 +12,7 @@
           "mismatched_password": "パスコードが一致しませんでした。",
           "enter_password": "パスコードを入力してください。",
           "confirm_password": "確認用パスコードを入力してください。"
-        },
-        "title": "ロック解除パスコードの設定",
-        "description": "このパスコードを使用すると、このデバイスでAlbyのロックを解除できます。パスコードは復元できませんが、後で変更することは可能です。"
+        }
       },
       "test_connection": {
         "ready": "すごいね、準備万端だ！",
@@ -27,7 +25,6 @@
           "delete_edit_account": "無効なアカウントを削除して再編集"
         }
       },
-      "title": "Albyへようこそ",
       "pin_extension": {
         "title": "Alby拡張機能を固定",
         "description": "もうすぐです。Albyを便利に使うには、拡張機能をブラウザのツールバーに忘れずに固定してください：",
@@ -86,10 +83,6 @@
       },
       "lnc": {
         "title": "Lightning Terminal (LNC)",
-        "page": {
-          "title": "LNDノードに接続",
-          "description": "1. Lightning Terminalを開き、サイドバーから<0>Lightning Node Connect</0>を選択します。 <0>Create a new session</0>を選択します。<1/>3.セッションにラベルを付け、必要なパーミッションを選択し、送信します。<1/>4.<0>ペアリング・フレーズをコピーし、以下に貼り付けます。"
-        },
         "pairing_phrase": {
           "label": "あなたのペアリング・フレーズ ",
           "placeholder": "シークレット・stack sats・フレーズ"
@@ -176,15 +169,15 @@
         },
         "title": "myNode"
       },
-      "start9": {
+      "startos": {
         "rest_url": {
           "label": "lndconnectのREST URL",
           "placeholder": "lndconnect://yournode:8080?..."
         },
-        "title": "Start9",
+        "title": "StartOS",
         "page": {
-          "title": "<0>Start9サーバー</0>に接続",
-          "instructions": "Embassyダッシュボードで<0>Lightning Network Daemon</0>サービスをクリックします。<1/><0>Properties</0>タブを選択します。<1/>ここで<0>LND Connect REST URL</0>をコピーします。"
+          "title": "<0>StartOSサーバー</0>に接続",
+          "instructions": "StartOSダッシュボードで<0>Lightning Network Daemon</0>サービスをクリックします。<1/><0>Properties</0>タブを選択します。<1/>ここで<0>LND Connect REST URL</0>をコピーします。"
         }
       },
       "raspiblitz": {
@@ -214,13 +207,8 @@
         }
       },
       "btcpay": {
-        "page": {
-          "title": "BTCPay LNDノードに接続",
-          "instructions": "BTCPay Serverに移動し、管理者としてログインします。Server Settings > Services > LND Rest - See informationに進みます。次に\"See QR Code information\"をクリックし、QRコードデータをコピーします。下に貼り付けてください："
-        },
         "config": {
-          "label": "コンフィグデータ",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
+          "label": "コンフィグデータ"
         },
         "errors": {
           "connection_failed": "接続に失敗しました。BTCPayの接続URLは正しく、アクセス可能ですか？"
@@ -281,7 +269,6 @@
           "backup": {
             "button": "リカバリーフレーズを表示",
             "description": "新しいデバイスでマスターキーを復元したり、アカウントにアクセスできなくなった場合に備えて、リカバリーフレーズは必ずメモしてください。",
-            "title": "リカバリーフレーズをバックアップ",
             "warning": "⚠️ リカバリフレーズのバックアップを忘れないでください！バックアップを忘れると、マスターキー、Nostr ID、またはこのキーで管理する資産へのアクセスを永久に失います。",
             "items": {
               "recovery_phrase": "リカバリーフレーズを使用すれば、いつでもマスターキーにアクセスできます。",
@@ -293,9 +280,7 @@
             },
             "save": "マスターキーを保存"
           },
-          "inputs": {
-            "title": "リカバリーフレーズ"
-          },
+          "inputs": {},
           "existing_nostr_key_notice": "ℹ️ このアカウントにはすでにnostr秘密鍵が設定されているため、このマスターキーから生成されることはありません。Nostr鍵はアカウント設定から管理できます。",
           "generate": {
             "description": "マスターキーは、Nostr、Bitcoinのベースレイヤー、LNURL-Authのようなプロトコルとの連携を可能にします。",
@@ -420,8 +405,8 @@
       "mynode": {
         "name": "myNode"
       },
-      "start9": {
-        "name": "Start9"
+      "startos": {
+        "name": "StartOS"
       },
       "description": "接続したい{{name}}アプリを選択してください",
       "title": "{{name}}に接続"

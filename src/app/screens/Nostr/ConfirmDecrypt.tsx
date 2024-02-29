@@ -1,10 +1,9 @@
+import { CheckIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
 import PublisherCard from "@components/PublisherCard";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import ContentMessage from "~/app/components/ContentMessage";
-import Hyperlink from "~/app/components/Hyperlink";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import Checkbox from "~/app/components/form/Checkbox";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
@@ -12,19 +11,16 @@ import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import { OriginData } from "~/types";
 
-function NostrConfirmEncryptOrDecrypt() {
+function NostrConfirmDecrypt() {
   const { t } = useTranslation("translation", {
     keyPrefix: "nostr",
   });
+  const { t: tPermissions } = useTranslation("permissions");
   const { t: tCommon } = useTranslation("common");
   const navState = useNavigationState();
   const origin = navState.origin as OriginData;
-  const action = navState.args?.encryptOrDecrypt?.action;
-  const peer = navState.args?.encryptOrDecrypt?.peer;
-  const message = navState.args?.encryptOrDecrypt?.message;
 
   const [loading, setLoading] = useState(false);
-  const [showDetails, setShowDetails] = useState(false);
 
   const [rememberPermission, setRememberPermission] = useState(true);
 
@@ -52,10 +48,6 @@ function NostrConfirmEncryptOrDecrypt() {
     msg.error(USER_REJECTED_ERROR);
   }
 
-  function toggleShowDetails() {
-    setShowDetails((current) => !current);
-  }
-
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     confirm();
@@ -66,35 +58,20 @@ function NostrConfirmEncryptOrDecrypt() {
       <ScreenHeader title={t("title")} />
       <form onSubmit={handleSubmit} className="h-full">
         <Container justifyBetween maxWidth="sm">
-          <div>
-            <PublisherCard
-              title={origin.name}
-              image={origin.icon}
-              url={origin.host}
-              isSmall={true}
-            />
-            {message && (
-              <ContentMessage
-                heading={t(
-                  action == "encrypt" ? "allow_encrypt" : "allow_decrypt",
-                  {
-                    host: origin.host,
-                  }
-                )}
-                content={message}
-              />
-            )}
-            <div className="flex justify-center mb-4 gap-4">
-              <Hyperlink onClick={toggleShowDetails}>
-                {showDetails ? t("hide_details") : t("view_details")}
-              </Hyperlink>
-            </div>
-            {showDetails && (
-              <div className="whitespace-pre-wrap break-words p-2 mb-4 shadow bg-white rounded-lg dark:bg-surface-02dp text-gray-500 dark:text-gray-400">
-                {t("peer")}: {peer}
-              </div>
-            )}
+          <PublisherCard
+            title={origin.name}
+            image={origin.icon}
+            url={origin.host}
+            isSmall={false}
+          />
+          <div className="dark:text-white pt-6 mb-4">
+            <p className="mb-2">{t("allow", { host: origin.host })}</p>
+            <p className="dark:text-white">
+              <CheckIcon className="w-5 h-5 mr-2 inline" />
+              {tPermissions("nostr.nip04decrypt")}
+            </p>
           </div>
+
           <div className="text-center flex flex-col">
             <div className="flex items-center mb-4">
               <Checkbox
@@ -132,4 +109,4 @@ function NostrConfirmEncryptOrDecrypt() {
   );
 }
 
-export default NostrConfirmEncryptOrDecrypt;
+export default NostrConfirmDecrypt;

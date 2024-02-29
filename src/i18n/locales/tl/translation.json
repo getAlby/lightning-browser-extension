@@ -2,8 +2,6 @@
   "translation": {
     "welcome": {
       "set_password": {
-        "title": "",
-        "description": "",
         "choose_password": {
           "label": ""
         },
@@ -129,7 +127,7 @@
           "placeholder": ""
         }
       },
-      "start9": {
+      "startos": {
         "title": "",
         "page": {
           "title": "",
@@ -166,13 +164,8 @@
       },
       "btcpay": {
         "title": "",
-        "page": {
-          "title": "",
-          "instructions": ""
-        },
         "config": {
-          "label": "",
-          "placeholder": ""
+          "label": ""
         },
         "errors": {
           "connection_failed": ""

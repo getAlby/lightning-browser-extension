@@ -1,10 +1,7 @@
 {
   "translation": {
     "welcome": {
-      "title": "Вітаємо у Alby",
       "set_password": {
-        "title": "Встановити пароль для розблокування",
-        "description": "Пароль використовується для захисту вашого гаманця і надання доступу до розширення браузера. Його не можна скинути і він є відокремленим від вашого паролю до облікового запису Alby.",
         "choose_password": {
           "label": "Оберіть пароль для розблокування:"
         },
@@ -78,10 +75,6 @@
       },
       "lnc": {
         "title": "",
-        "page": {
-          "title": "",
-          "description": ""
-        },
         "pairing_phrase": {
           "label": "",
           "placeholder": ""
@@ -168,7 +161,7 @@
           "placeholder": ""
         }
       },
-      "start9": {
+      "startos": {
         "title": "",
         "page": {
           "title": "",
@@ -205,13 +198,8 @@
       },
       "btcpay": {
         "title": "",
-        "page": {
-          "title": "",
-          "instructions": ""
-        },
         "config": {
-          "label": "",
-          "placeholder": ""
+          "label": ""
         },
         "errors": {
           "connection_failed": ""
@@ -492,31 +480,6 @@
         "status": ""
       }
     },
-    "discover": {
-      "title": "",
-      "description": "",
-      "list": {
-        "trading": "",
-        "gaming": "",
-        "entertainment": "",
-        "shopping": "",
-        "miscellaneous": "",
-        "showcases": "",
-        "nostr": ""
-      },
-      "tips": {
-        "title": "",
-        "description": "",
-        "top_up_wallet": {
-          "title": "",
-          "description": ""
-        },
-        "demo": {
-          "title": "",
-          "description": ""
-        }
-      }
-    },
     "publishers": {
       "title": "",
       "description": "",
@@ -587,7 +550,6 @@
   "common": {
     "password": "",
     "confirm_password": "",
-    "advanced": "",
     "success": "",
     "error": "",
     "accounts": "",
@@ -713,7 +675,6 @@
   "permissions": {
     "nostr": {
       "getpublickey": "",
-      "nip04encrypt": "",
       "nip04decrypt": "",
       "signmessage": ""
     },

@@ -1,10 +1,7 @@
 {
   "translation": {
     "welcome": {
-      "title": "Добро пожаловать в Alby",
       "set_password": {
-        "title": "Установите пароль разблокировки",
-        "description": "Этот пароль нужен для защиты вашего кошелька, он предоставляет доступ к расширению браузера. Он не может быть восстановлен и не является паролем аккаунта Alby.",
         "choose_password": {
           "label": ""
         },
@@ -78,10 +75,6 @@
       },
       "lnc": {
         "title": "",
-        "page": {
-          "title": "",
-          "description": ""
-        },
         "pairing_phrase": {
           "label": "",
           "placeholder": ""
@@ -168,7 +161,7 @@
           "placeholder": ""
         }
       },
-      "start9": {
+      "startos": {
         "title": "",
         "page": {
           "title": "",
@@ -215,13 +208,8 @@
       },
       "btcpay": {
         "title": "",
-        "page": {
-          "title": "",
-          "instructions": ""
-        },
         "config": {
-          "label": "",
-          "placeholder": ""
+          "label": ""
         },
         "errors": {
           "connection_failed": ""
@@ -502,31 +490,6 @@
         "status": ""
       }
     },
-    "discover": {
-      "title": "",
-      "description": "",
-      "list": {
-        "trading": "",
-        "gaming": "",
-        "entertainment": "",
-        "shopping": "",
-        "miscellaneous": "",
-        "showcases": "",
-        "nostr": ""
-      },
-      "tips": {
-        "title": "",
-        "description": "",
-        "top_up_wallet": {
-          "title": "",
-          "description": ""
-        },
-        "demo": {
-          "title": "",
-          "description": ""
-        }
-      }
-    },
     "publishers": {
       "title": "",
       "description": "",
@@ -597,7 +560,6 @@
   "common": {
     "password": "",
     "confirm_password": "",
-    "advanced": "",
     "success": "",
     "error": "",
     "accounts": "",
@@ -723,7 +685,6 @@
   "permissions": {
     "nostr": {
       "getpublickey": "",
-      "nip04encrypt": "",
       "nip04decrypt": "",
       "signmessage": ""
     },
