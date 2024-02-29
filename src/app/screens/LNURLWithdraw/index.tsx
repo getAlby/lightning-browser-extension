@@ -90,7 +90,7 @@ function LNURLWithdraw() {
       if (axios.isAxiosError(e)) {
         const error =
           (e.response?.data as { reason?: string })?.reason || e.message;
-        toast.error(`Error: ${error}`);
+        toast.error(error);
       } else if (e instanceof Error) {
         toast.error(`Error: ${e.message}`);
       }
