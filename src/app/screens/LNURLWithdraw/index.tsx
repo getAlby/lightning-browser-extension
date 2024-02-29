@@ -92,7 +92,7 @@ function LNURLWithdraw() {
           (e.response?.data as { reason?: string })?.reason || e.message;
         toast.error(error);
       } else if (e instanceof Error) {
-        toast.error(error);
+        toast.error(e.message);
       }
     } finally {
       setLoadingConfirm(false);
