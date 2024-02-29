@@ -9,7 +9,7 @@ function MnemonicDescription() {
 
   return (
     <>
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-6">
         <ListItem icon={<PopiconsKeyLine />} title={t("new.items.keys")} />
         <ListItem icon={<FaceSurpriseIcon />} title={t("new.items.usage")} />
         <ListItem

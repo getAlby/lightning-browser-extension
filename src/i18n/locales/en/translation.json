@@ -427,6 +427,14 @@
               "keys": "Master Key is your identity that allows you to interact with protocols like Nostr, Liquid Network or base layer of bitcoin",
               "usage": "You can import and use the same Master Key in each connected wallet in the Alby Extension",
               "recovery_phrase": "To import your Master Key to any wallet in Alby, you need to use a recovery phrase"
+            },
+            "secure": {
+              "title": "Secure Your Master Key",
+              "description": "Get to know what Master Key is and back up 12-words recovery phrase"
+            },
+            "import": {
+              "title": "Have a Master key Already?",
+              "description": "Enter your recovery phrase to import Master Key into this wallet"
             }
           },
           "generate": {

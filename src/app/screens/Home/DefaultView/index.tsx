@@ -216,15 +216,9 @@ const DefaultView: FC<Props> = (props) => {
                     <PopiconsKeyLine className="w-8 h-8 text-gray-400 dark:text-neutral-500" />
                   }
                   onClick={async () => {
-                    if (currentAccount?.hasMnemonic) {
-                      openOptions(
-                        `accounts/${currentAccount?.id}/secret-key/backup`
-                      );
-                    } else {
-                      openOptions(
-                        `accounts/${currentAccount?.id}/secret-key/new`
-                      );
-                    }
+                    openOptions(
+                      `accounts/${currentAccount?.id}/secret-key/new`
+                    );
                   }}
                 />
               )}
