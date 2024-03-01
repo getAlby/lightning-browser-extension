@@ -30,11 +30,6 @@ function ImportMnemonic() {
       try {
         const account = await api.getAccount(id);
         setHasNostrPrivateKey(account.nostrEnabled);
-        if (account.hasMnemonic) {
-          // do not allow user to import a mnemonic if they already have one for the current account
-          // go to account settings
-          navigate(`/accounts/${id}`);
-        }
         setHasFetchedData(true);
       } catch (e) {
         console.error(e);
