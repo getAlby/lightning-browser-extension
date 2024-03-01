@@ -287,10 +287,6 @@
       }
     },
     "accounts": {
-      "title": "Minhas contas",
-      "actions": {
-        "add_account": "Adicionar conta"
-      },
       "account_view": {
         "export": {
           "title": "Conectar sua carteira de celular",
@@ -366,13 +362,10 @@
           }
         },
         "remove": {
-          "title": "Remover esta conta",
           "error": "O nome da conta inserido não corresponde.",
-          "subtitle": "Remove todos os limites de gastos, dados de pagamento e chaves associadas à esta conta.",
           "confirm": "Por favor, insira o nome da conta para confirmar a exclusão:\n\n{{ name }}\n\n ⚠️ Por favor, insira o nome da conta para confirmar a exclusão. Todas as chaves associadas (Chave mestra, Nostr, etc) serão excluídas se você continuar. Certifique-se de ter feito backup das chaves, não há outra maneira de restaurá-las."
         },
         "actions": {
-          "remove_account": "Remover conta",
           "export": "Exportar",
           "remove_secretkey": "Remover chave mestra"
         },
@@ -381,7 +374,6 @@
           "placeholder": "Nome da conta"
         },
         "title2": "Conta",
-        "title1": "Configurações da conta",
         "mnemonic": {
           "title": "🔑 Gerenciamento de chaves",
           "saved": "Chave mestra criptografada e salva com sucesso.",
@@ -456,7 +448,6 @@
       }
     },
     "settings": {
-      "title": "Configurações",
       "website_enhancements": {
         "title": "Pagamentos em redes sociais",
         "subtitle": "Reconhece automaticamente endereços relâmpago em perfis do Twitter, Youtube, etc, facilitando o envio de pagamentos."
@@ -923,7 +914,6 @@
     "password": "Senha",
     "success": "Sucesso",
     "error": "Erro",
-    "settings": "Configurações da extensão",
     "connected_sites": "Sites conectados",
     "sats_one": "sat",
     "sats_other": "sats",
@@ -1085,12 +1075,8 @@
       }
     },
     "account_menu": {
-      "title": "Mudar de conta",
       "options": {
         "account": {
-          "add": "Adicionar nova conta",
-          "manage": "Gerenciar contas",
-          "account_settings": "Configurações da conta",
           "go_to_web_wallet": "Acessar sua conta na web"
         }
       }

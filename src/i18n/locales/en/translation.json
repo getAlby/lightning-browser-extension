@@ -392,9 +392,9 @@
       }
     },
     "accounts": {
-      "title": "Accounts",
+      "title": "Wallets",
       "account_view": {
-        "title1": "Account Settings",
+        "title1": "Wallet Settings",
         "title2": "Account",
         "name": {
           "title": "Display Name",
@@ -539,8 +539,8 @@
           }
         },
         "remove": {
-          "title": "Remove This Account",
-          "subtitle": "Removes all allowances, payment data and keys associated with this account.",
+          "title": "Disconnect This Wallet",
+          "subtitle": "Removes all allowances, payment data and keys associated with this wallet.",
           "confirm": "Please enter the name of the account to confirm the deletion of your account:\n\n{{ name }}\n\n ⚠️ All associated keys (Master Key, Nostr, etc) will be deleted if you continue. Please make sure you have backed them up, there is no other way to restore them.",
           "error": "The entered account name didn't match."
         },
@@ -551,13 +551,13 @@
           "success": "Successfully removed the Master Key."
         },
         "actions": {
-          "remove_account": "Remove account",
+          "disconnect_wallet": "Disconnect Wallet",
           "remove_secretkey": "Remove Master Key",
           "export": "Export"
         }
       },
       "actions": {
-        "add_account": "Add account"
+        "connect_a_wallet": "Connect a wallet"
       }
     },
     "webln_enable": {
@@ -597,7 +597,7 @@
       }
     },
     "settings": {
-      "title": "Settings",
+      "title": "Extension Settings",
       "browser_notifications": {
         "title": "Browser notifications",
         "subtitle": "Payment and authentication related notifications."
@@ -682,15 +682,6 @@
           "mismatched_password": "Passcodes don't match."
         },
         "success": "Passcode changed successfully"
-      },
-      "nostr": {
-        "title": "Nostr",
-        "hint": "is a simple and open protocol that aims to create censorship-resistant social networks. Nostr works with cryptographic keys. To publish something you sign it with your key and send it to multiple relays. You can use Alby to manage your Nostr key. Many Nostr applications will then allow you to simply use the key from the Alby extension.",
-        "private_key": {
-          "title": "Private key",
-          "subtitle": "This section is moved to accounts page as keys are account specific now.",
-          "go_to": "Go To Accounts"
-        }
       }
     },
     "send": {
@@ -1171,12 +1162,12 @@
     },
     "account_menu": {
       "screen_reader": "Toggle Dropdown",
-      "title": "Switch account",
+      "title": "Switch Wallet",
       "options": {
         "account": {
-          "add": "Add a new account",
-          "manage": "Manage accounts",
-          "account_settings": "Account settings",
+          "add": "Connect a Wallet",
+          "manage": "Manage Wallets",
+          "wallet_settings": "Wallet settings",
           "go_to_web_wallet": "Manage your web account"
         }
       }

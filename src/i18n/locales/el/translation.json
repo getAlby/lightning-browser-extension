@@ -176,9 +176,7 @@
       }
     },
     "accounts": {
-      "title": "Λογαριασμοί",
       "account_view": {
-        "title1": "Ρυθμίσεις λογαριασμού",
         "title2": "Λογαριασμός",
         "mnemonic": {
           "backup": {

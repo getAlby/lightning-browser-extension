@@ -245,10 +245,6 @@
       }
     },
     "accounts": {
-      "title": "Konton",
-      "actions": {
-        "add_account": "Lägg till konto"
-      },
       "account_view": {
         "nostr": {
           "generate_keys": {
@@ -315,12 +311,9 @@
           }
         },
         "remove": {
-          "title": "Ta bort detta konto",
-          "subtitle": "Tar bort alla traktamenten, betalningsdata och nycklar som är kopplade till detta konto.",
           "error": "Det angivna kontonamnet matchade inte.",
           "confirm": "Ange namnet på kontot för att bekräfta raderingen av ditt konto.\n\n{{ name }}\n\n ⚠️ Alla associerade nycklar (Master Key, Nostr, etc) kommer att raderas om du fortsätter. Se till att du har säkerhetskopierat dem, det finns inget annat sätt att återställa dem."
         },
-        "title1": "Konto inställningar",
         "title2": "Konto",
         "name": {
           "title": "Visnings Namn",
@@ -336,7 +329,6 @@
           "description": "Låter dig ansluta och använda det här kontot på mobila plånböcker som <0>Blue Wallet</0> och <1>Zeus</1>."
         },
         "actions": {
-          "remove_account": "Ta bort kontot",
           "export": "Exportera",
           "remove_secretkey": "Ta bort huvudnyckeln"
         },
@@ -414,7 +406,6 @@
       }
     },
     "settings": {
-      "title": "Inställningar",
       "browser_notifications": {
         "title": "Webbläsarnotiser",
         "subtitle": "Betalnings- och autentiseringsrelaterade notiser."
@@ -876,7 +867,6 @@
     "password": "Lösenord",
     "success": "Genomfört",
     "error": "Misslyckades",
-    "settings": "Inställningar",
     "connected_sites": "Anslutna webbplatser",
     "loading": "laddar",
     "amount": "Belopp",
@@ -1035,12 +1025,8 @@
     },
     "account_menu": {
       "screen_reader": "Öppna droppmeny",
-      "title": "Växla konto",
       "options": {
         "account": {
-          "add": "Lägg till nytt konto",
-          "manage": "Hantera konton",
-          "account_settings": "Konto inställningar",
           "go_to_web_wallet": "Hantera ditt webbkonto"
         }
       }

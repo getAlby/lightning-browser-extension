@@ -262,9 +262,7 @@
       }
     },
     "accounts": {
-      "title": "帳戶",
       "account_view": {
-        "title1": "帳戶設置",
         "title2": "帳戶",
         "name": {
           "title": "名稱",
@@ -343,12 +341,9 @@
           }
         },
         "remove": {
-          "title": "刪除此帳戶",
-          "subtitle": "所有與此帳號關聯的限額、支付信息和密鑰都將被清除。",
           "error": "輸入的帳戶名稱不匹配。"
         },
         "actions": {
-          "remove_account": "刪除帳戶",
           "export": "導出",
           "remove_secretkey": "移除主密鑰"
         },
@@ -403,9 +398,6 @@
             "regtest": "Regtest"
           }
         }
-      },
-      "actions": {
-        "add_account": "添加帳戶"
       }
     },
     "unlock": {
@@ -424,7 +416,6 @@
       }
     },
     "settings": {
-      "title": "設置",
       "browser_notifications": {
         "title": "瀏覽器通知",
         "subtitle": "付款和認證相關通知。"
@@ -797,7 +788,6 @@
     "confirm_password": "確認密碼",
     "success": "成功",
     "error": "錯誤",
-    "settings": "設置",
     "accounts": "帳戶",
     "discover": "發現",
     "connected_sites": "已連接的網站",
@@ -938,12 +928,8 @@
     },
     "account_menu": {
       "screen_reader": "切換下拉菜單",
-      "title": "切換帳戶",
       "options": {
         "account": {
-          "add": "添加新帳戶",
-          "manage": "管理帳戶",
-          "account_settings": "帳戶設置",
           "go_to_web_wallet": "管理你的網路帳戶"
         }
       }

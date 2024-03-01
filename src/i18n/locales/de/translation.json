@@ -436,13 +436,10 @@
       }
     },
     "accounts": {
-      "title": "Konten",
-      "actions": {
-        "add_account": "Konto hinzufügen"
-      },
       "account_view": {
         "title2": "Konto",
         "title1": "Kontoeinstellung",
+
         "name": {
           "title": "Name anzeigen",
           "placeholder": "Konto Anzeigename"
@@ -521,13 +518,10 @@
           }
         },
         "remove": {
-          "title": "Dieses Konto entfernen",
-          "subtitle": "Entfernt alle Zugangsdaten, Zahlungsdaten und Schlüssel, die mit diesem Konto verbunden sind.",
           "error": "Der eingegebene Kontoname stimmte nicht überein.",
           "confirm": "Bitte gebe den Namen des Kontos ein, um die Löschung deines Kontos zu bestätigen:\n\n{{ Name }}\n\n⚠️ Wenn du fortfährst, werden alle zugehörigen Schlüssel (Hauptschlüssel, Nostr, etc.) gelöscht. Bitte vergewissern dich, dass du eine Sicherungskopie erstellt hast, denn es gibt keine andere Möglichkeit, sie wiederherzustellen."
         },
         "actions": {
-          "remove_account": "Konto entfernen",
           "export": "Exportieren",
           "remove_secretkey": "Hauptschlüssel entfernen"
         },
@@ -980,13 +974,9 @@
     "account_menu": {
       "options": {
         "account": {
-          "add": "Neues Konto hinzufügen",
-          "manage": "Konten verwalten",
-          "account_settings": "Kontoeinstellungen",
           "go_to_web_wallet": "Verwalte dein Web-Konto"
         }
       },
-      "title": "Konto wechseln",
       "screen_reader": "Dropdown umschalten"
     },
     "publishers_table": {

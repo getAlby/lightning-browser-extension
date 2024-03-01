@@ -226,10 +226,6 @@
       }
     },
     "accounts": {
-      "title": "Accounts",
-      "actions": {
-        "add_account": "Aggiungi account"
-      },
       "account_view": {
         "nostr": {
           "errors": {
@@ -260,13 +256,8 @@
             "label": "Chiave Pubblica"
           }
         },
-        "remove": {
-          "title": "Rimuovi Questo Account",
-          "subtitle": "Tutte i permessi collegati saranno cancellati. Si prega di esserne certi."
-        },
         "actions": {
-          "export": "Esporta",
-          "remove_account": "Rimuovi account"
+          "export": "Esporta"
         },
         "export": {
           "your_ln_address": "Il Tuo Indirizzo Lightning:",
@@ -276,7 +267,6 @@
           "title": "Esporta Account",
           "screen_reader": "Esporta i dettagli dell'account"
         },
-        "title1": "Informazioni account",
         "title2": "Modifica Account",
         "name": {
           "title": "Nome",
@@ -300,7 +290,6 @@
       }
     },
     "settings": {
-      "title": "Impostazioni",
       "browser_notifications": {
         "title": "Notifiche del browser",
         "subtitle": "Notifiche relative ai pagamenti e all'autenticazione."
@@ -562,7 +551,6 @@
     "password": "Password",
     "success": "Successo",
     "error": "Errore",
-    "settings": "Impostazioni",
     "connected_sites": "",
     "loading": "caricamento",
     "amount": "Importo",
@@ -673,14 +661,7 @@
       }
     },
     "account_menu": {
-      "screen_reader": "Attiva/disattiva menu a tendina",
-      "title": "Cambia account",
-      "options": {
-        "account": {
-          "add": "Aggiungi un nuovo account",
-          "manage": "Gestisci gli account"
-        }
-      }
+      "screen_reader": "Attiva/disattiva menu a tendina"
     },
     "publishers_table": {
       "payments": "pagamenti"
