@@ -1,8 +1,6 @@
-import {
-  HiddenIcon,
-  VisibleIcon,
-} from "@bitcoin-design/bitcoin-icons-react/outline";
+import { PopiconsEyeLine } from "@popicons/react";
 import { useEffect, useState } from "react";
+import EyeCrossedIcon from "~/app/icons/EyeCrossedIcon";
 
 type Props = {
   onChange: (viewingPassword: boolean) => void;
@@ -23,16 +21,16 @@ export default function PasswordViewAdornment({ onChange, isRevealed }: Props) {
     <button
       type="button"
       tabIndex={-1}
-      className="flex justify-center items-center w-10 h-8"
+      className="flex justify-center items-center w-10 h-8 text-gray-400 dark:text-neutral-600 hover:text-gray-600 hover:dark:text-neutral-400"
       onClick={() => {
         setRevealed(!_isRevealed);
         onChange(!_isRevealed);
       }}
     >
       {_isRevealed ? (
-        <VisibleIcon className="h-6 w-6" />
+        <EyeCrossedIcon className="h-6 w-6" />
       ) : (
-        <HiddenIcon className="h-6 w-6" />
+        <PopiconsEyeLine className="h-6 w-6" />
       )}
     </button>
   );

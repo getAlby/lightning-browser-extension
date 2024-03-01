@@ -144,8 +144,6 @@ describe("LNURLWithdraw", () => {
       await user.click(screen.getByText("Confirm"));
     });
 
-    expect(
-      await screen.findByText("Error: Link not working")
-    ).toBeInTheDocument();
+    expect(await screen.findByText("Link not working")).toBeInTheDocument();
   });
 });
