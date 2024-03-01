@@ -3,10 +3,12 @@ import Container from "@components/Container";
 import ContentMessage from "@components/ContentMessage";
 import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
+import { PopiconsShieldCheckLine } from "@popicons/react";
 import { useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import Hyperlink from "~/app/components/Hyperlink";
+import PermissionModal from "~/app/components/PermissionModal";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import toast from "~/app/components/Toast";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
@@ -27,8 +29,10 @@ function ConfirmSignMessage() {
   const origin = navState.origin as OriginData;
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
-  const [permissionOption, setPermissionOption] = useState("ask_every_time");
+
   const [showJSON, setShowJSON] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [permissionOption, setPermissionOption] = useState("ask_every_time");
 
   // TODO: refactor: the success message and loading will not be displayed because after the reply the prompt is closed.
   async function confirm() {
@@ -113,26 +117,36 @@ function ConfirmSignMessage() {
               )}
             </div>
             <div>
-              <div className="flex items-center mb-4">
-                <select
-                  value={permissionOption}
-                  onChange={(event) => setPermissionOption(event.target.value)}
-                  className="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                >
-                  <option value="ask_every_time">actions.ask_every_time</option>
-                  <option value="dont_ask_again_current">
-                    actions.dont_ask_again_current
-                  </option>
-                  <option value="dont_ask_again_all">
-                    actions.dont_ask_again_all
-                  </option>
-                </select>
-              </div>
+              <div className="flex items-center mb-4"></div>
+              <PermissionModal
+                isOpen={modalOpen}
+                onClose={() => {
+                  setModalOpen(false);
+                }}
+                PermssionCallback={(permission) => {
+                  setPermissionOption(permission);
+                  setModalOpen(false);
+                }}
+                permission={t(`kinds.${event.kind}`, {
+                  defaultValue: t("kinds.unknown", {
+                    kind: event.kind,
+                  }),
+                })}
+              />
               <ConfirmOrCancel
                 disabled={loading}
                 loading={loading}
                 onCancel={reject}
               />
+
+              <div className="flex gap-2 justify-center text-gray-600 dark:text-neutral-400 text-sm m-2">
+                <div className="shrink-0">
+                  <PopiconsShieldCheckLine className="w-5 h-5"></PopiconsShieldCheckLine>
+                </div>
+                <button type="button" onClick={() => setModalOpen(true)}>
+                  {permissionOption}
+                </button>
+              </div>
             </div>
           </Container>
         </form>
