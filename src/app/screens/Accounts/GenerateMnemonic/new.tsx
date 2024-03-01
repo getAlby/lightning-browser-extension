@@ -23,12 +23,12 @@ function MnemonicExplanation() {
   return (
     <Container>
       <div className="flex justify-end mt-6">
-        <p>
+        <p className="text-gray-600 dark:text-neutral-400">
           Need to import just a Nostr account?{" "}
           <Link
             to="../../nostr/settings"
             relative="path"
-            className="underline text-blue-700"
+            className="text-blue-600"
           >
             Click here
           </Link>
@@ -48,7 +48,7 @@ function MnemonicExplanation() {
             title={t("secure.title")}
             description={t("secure.description")}
             icon={
-              <PopiconsKeyLine className="w-10 h-10 text-gray-600 dark:text-neutral-400" />
+              <PopiconsKeyLine className="w-8 h-8 text-gray-600 dark:text-neutral-400" />
             }
             onClick={async () => {
               setIsCardSelected("backup");
@@ -59,7 +59,7 @@ function MnemonicExplanation() {
             title={t("import.title")}
             description={t("import.description")}
             icon={
-              <PopiconsDownloadLine className="w-10 h-10 text-gray-600 dark:text-neutral-400" />
+              <PopiconsDownloadLine className="w-8 h-8 text-gray-600 dark:text-neutral-400" />
             }
             onClick={async () => {
               setIsCardSelected("import");
