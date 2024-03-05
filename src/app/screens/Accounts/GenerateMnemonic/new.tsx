@@ -1,6 +1,6 @@
 import Container from "@components/Container";
 import { PopiconsDownloadLine, PopiconsKeyLine } from "@popicons/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "~/app/components/Button";
@@ -8,6 +8,7 @@ import { ContentBox } from "~/app/components/ContentBox";
 import { ExtensionKeyCard } from "~/app/components/ExtensionKeyCard";
 import MnemonicDescription from "~/app/components/mnemonic/MnemonicDescription";
 import { useTheme } from "~/app/utils";
+import api from "~/common/lib/api";
 
 function MnemonicExplanation() {
   const navigate = useNavigate();
@@ -19,6 +20,26 @@ function MnemonicExplanation() {
   const { t: tCommon } = useTranslation("common");
 
   const [cardSelected, setIsCardSelected] = useState("backup");
+
+  const [hasMnemonic, setHasMnemonic] = useState(false);
+
+  useEffect(() => {
+    async function fetchAccountInfo() {
+      try {
+        const fetchedAccount = await api.getAccount();
+
+        if (fetchedAccount.hasMnemonic) {
+          setHasMnemonic(true);
+        } else {
+          setHasMnemonic(false);
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    fetchAccountInfo();
+  }, []);
 
   return (
     <Container maxWidth="md">
@@ -74,7 +95,9 @@ function MnemonicExplanation() {
             flex
             onClick={() =>
               cardSelected == "backup"
-                ? navigate("../secret-key/backup")
+                ? hasMnemonic
+                  ? navigate("../secret-key/backup")
+                  : navigate("../secret-key/generate")
                 : navigate("../secret-key/import")
             }
           />

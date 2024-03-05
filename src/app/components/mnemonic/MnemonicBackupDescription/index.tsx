@@ -46,7 +46,7 @@ function ListItem({ icon, title, type }: ListItemProps) {
   return (
     <div
       className={classNames(
-        type == "warn" && "text-orange-700 dark:text-orange-200",
+        type == "warn" && "text-orange-700 dark:text-orange-300",
         type == "info" && "text-gray-600 dark:text-neutral-400",
         "flex gap-2 items-center text-sm"
       )}

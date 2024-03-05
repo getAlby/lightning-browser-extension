@@ -18,7 +18,6 @@ function GenerateMnemonic() {
   const { t } = useTranslation("translation", {
     keyPrefix: "accounts.account_view.mnemonic",
   });
-  const { t: tCommon } = useTranslation("common");
 
   const [hasConfirmedBackup, setHasConfirmedBackup] = useState(false);
   const [hasNostrPrivateKey, setHasNostrPrivateKey] = useState(false);
@@ -66,18 +65,13 @@ function GenerateMnemonic() {
     }
   }
 
-  function cancel() {
-    // go to account settings
-    navigate(`/accounts/${id}`);
-  }
-
   return !mnemonic ? (
     <div className="flex justify-center mt-5">
       <Loading />
     </div>
   ) : (
     <div>
-      <Container>
+      <Container maxWidth="md">
         <ContentBox>
           <h1 className="font-bold text-2xl dark:text-white">
             {t("generate.title")}
@@ -94,9 +88,7 @@ function GenerateMnemonic() {
               setHasConfirmedBackup(hasConfirmedBackup);
             }}
           ></MnemonicInputs>
-
           <div className="flex justify-center mt-6 gap-4">
-            <Button label={tCommon("actions.cancel")} onClick={cancel} />
             <Button
               label={t("backup.save")}
               primary
