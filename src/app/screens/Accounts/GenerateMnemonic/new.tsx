@@ -21,8 +21,8 @@ function MnemonicExplanation() {
   const [cardSelected, setIsCardSelected] = useState("backup");
 
   return (
-    <Container>
-      <div className="flex justify-end mt-6">
+    <Container maxWidth="md">
+      <div className="flex justify-end mt-6 text-xs">
         <p className="text-gray-600 dark:text-neutral-400">
           Need to import just a Nostr account?{" "}
           <Link
@@ -69,7 +69,7 @@ function MnemonicExplanation() {
 
         <div className="flex justify-center w-64 mx-auto">
           <Button
-            label={tCommon("actions.continue")}
+            label={tCommon("actions.next")}
             primary
             flex
             onClick={() =>

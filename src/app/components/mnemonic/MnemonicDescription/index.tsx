@@ -10,7 +10,7 @@ function MnemonicDescription() {
 
   return (
     <>
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-4">
         <ListItem
           icon={<PopiconsKeyLine />}
           title={
@@ -52,7 +52,7 @@ type ListItemProps = {
 
 function ListItem({ icon, title }: ListItemProps) {
   return (
-    <div className="flex gap-2 items-center text-gray-600 dark:text-neutral-400 text-lg">
+    <div className="flex gap-2 items-center text-gray-600 dark:text-neutral-400 text-sm">
       <div className="shrink-0">{icon}</div>
       <span>{title}</span>
     </div>
