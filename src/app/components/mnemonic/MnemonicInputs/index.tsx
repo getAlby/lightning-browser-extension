@@ -40,13 +40,13 @@ export default function MnemonicInputs({
       <h3 className="text-lg font-semibold dark:text-white">
         {t("inputs.title")}
       </h3>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-5 justify-center">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-4 justify-center">
         {words.map((word, i) => {
           const isRevealed = revealedIndex === i;
           const inputId = `mnemonic-word-${i}`;
           return (
-            <div key={i} className="flex justify-center items-center gap-2">
-              <span className="w-6 text-gray-600 dark:text-neutral-400">
+            <div key={i} className="flex justify-center items-center gap-0.5">
+              <span className="w-7 text-gray-600 dark:text-neutral-400">
                 {i + 1}.
               </span>
               <div className="w-full">

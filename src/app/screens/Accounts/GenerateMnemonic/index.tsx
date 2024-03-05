@@ -88,7 +88,7 @@ function GenerateMnemonic() {
               setHasConfirmedBackup(hasConfirmedBackup);
             }}
           ></MnemonicInputs>
-          <div className="flex justify-center mt-6 gap-4">
+          <div className="flex justify-center">
             <Button
               label={t("backup.save")}
               primary
