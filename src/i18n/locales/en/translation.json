@@ -415,9 +415,9 @@
           "saved": "Master Key encrypted & saved successfully.",
           "existing_nostr_key_notice": "ℹ️ This account already has a nostr private key set and will not be derived from this Master Key. You can manage your Nostr key from your account settings.",
           "description": {
-            "warning": "It cannot recover this wallet or funds in it, it only recovers access to aforementioned protocols",
+            "warning": "<0>It cannot recover this wallet or funds in it,</0> it only recovers access to aforementioned protocol",
             "secure_recovery_phrase": "Make sure to write them down somewhere safe and and keep them private",
-            "recovery_phrase": "Recovery phrase is set of 12 words that backs up your Master Key"
+            "recovery_phrase": "Recovery phrase is set of 12 words that <0>backs up your Master Key</0>"
           },
           "confirm": "I've backed up the recovery phrase to my Master Key in a private and secure place.",
           "error_confirm": "Please confirm that you have backed up the recovery phrase.",

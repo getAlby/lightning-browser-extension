@@ -3,7 +3,7 @@ import {
   PopiconsShieldLine,
   PopiconsTriangleExclamationLine,
 } from "@popicons/react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { classNames } from "~/app/utils";
 
 function MnemonicInstructions() {
@@ -16,7 +16,16 @@ function MnemonicInstructions() {
       <div className="flex flex-col gap-4">
         <ListItem
           icon={<PopiconsLifebuoyLine />}
-          title={t("description.recovery_phrase")}
+          title={
+            <Trans
+              i18nKey={"description.recovery_phrase"}
+              t={t}
+              components={[
+                // eslint-disable-next-line react/jsx-key
+                <b></b>,
+              ]}
+            />
+          }
           type="info"
         />
         <ListItem
@@ -26,7 +35,16 @@ function MnemonicInstructions() {
         />
         <ListItem
           icon={<PopiconsTriangleExclamationLine />}
-          title={t("description.warning")}
+          title={
+            <Trans
+              i18nKey={"description.warning"}
+              t={t}
+              components={[
+                // eslint-disable-next-line react/jsx-key
+                <b></b>,
+              ]}
+            />
+          }
           type="warn"
         />
       </div>
@@ -38,7 +56,7 @@ export default MnemonicInstructions;
 
 type ListItemProps = {
   icon: React.ReactNode;
-  title: string;
+  title: string | React.ReactNode;
   type: "warn" | "info";
 };
 
