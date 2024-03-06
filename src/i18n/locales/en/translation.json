@@ -383,7 +383,6 @@
             "title": "Back up your Master Key",
             "description": "Learn what Master Key is, how it’s used for Nostr and make sure to back up"
           },
-
           "receive_bitcoin": {
             "title": "Receive bitcoin",
             "description": "Get bitcoin to your lightning address, a lightning invoice or bitcoin address."
@@ -595,11 +594,11 @@
     "settings": {
       "title": "Extension Settings",
       "browser_notifications": {
-        "title": "Browser notifications",
+        "title": "Browser Notifications",
         "subtitle": "Payment and authentication related notifications."
       },
       "website_enhancements": {
-        "title": "Website enhancements",
+        "title": "Website Enhancements",
         "subtitle": "Tipping enhancements for Twitter, YouTube, etc."
       },
       "lnurl_auth": {
@@ -615,10 +614,10 @@
         }
       },
       "camera_access": {
-        "title": "Camera access",
+        "title": "Camera Access",
         "subtitle": "For scanning QR codes",
-        "allow": "Allow camera access",
-        "granted": "Permission granted"
+        "allow": "Allow Camera Access",
+        "granted": "Permission Granted"
       },
       "language": {
         "title": "Language",
@@ -660,9 +659,9 @@
         "placeholder": "Enter your email address"
       },
       "change_password": {
-        "title": "Change unlock passcode",
+        "title": "Change Unlock Passcode",
         "subtitle": "",
-        "screen_reader": "Change unlock passcode",
+        "screen_reader": "Change Unlock Passcode",
         "choose_password": {
           "label": "Enter a new unlock passcode:"
         },
