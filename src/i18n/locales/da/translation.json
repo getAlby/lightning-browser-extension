@@ -1,10 +1,7 @@
 {
   "translation": {
     "welcome": {
-      "title": "Velkommen til Alby",
       "set_password": {
-        "title": "Angiv en nøglekode",
-        "description": "Dette kodeord bruges til at beskytte din wallet og giver adgang til browserudvidelsen. Det kan ikke nulstilles, og er ikke den samme som adgangskoden til din Alby-konto.",
         "choose_password": {
           "label": "Vælg en nøglekode:"
         },
@@ -78,10 +75,6 @@
       },
       "lnc": {
         "title": "LND med LNC",
-        "page": {
-          "title": "Opret forbindelse til din LND-node",
-          "description": "Start en ny session i terminal (litd) for at få en ny forbindelseskode, og skriv den her"
-        },
         "pairing_phrase": {
           "label": "Din forbindelseskode ",
           "placeholder": "hemmelig kode til sats-samlingen"
@@ -205,13 +198,8 @@
       },
       "btcpay": {
         "title": "BTCPay Server",
-        "page": {
-          "title": "Opret forbindelse til din BTCPay LND-node",
-          "instructions": "Gå til din BTCPayServer og log på som administrator. Gå til Server Settings > Services > LND Rest - See information. Klik så på \"See QR Code information\" og kopier QR-kodens data. Indsæt dem herunder:"
-        },
         "config": {
-          "label": "Konfigurationsoplysninger",
-          "placeholder": "config=https://din-btc-pay.org/lnd-config/212121/lnd.config"
+          "label": "Konfigurationsoplysninger"
         },
         "errors": {
           "connection_failed": "Forbindelsen kunne ikke oprettes. Er BTCPay-forbindelsens URL korrekt og tilgængelig?"
@@ -264,9 +252,7 @@
       }
     },
     "accounts": {
-      "title": "Konti",
       "account_view": {
-        "title1": "Kontooplysninger",
         "title2": "Rediger konto",
         "name": {
           "title": "Navn",
@@ -309,17 +295,9 @@
             "failed_to_load": "Nostr-nøglen kunne ikke anvendes. Er det en gyldig Nostr-nøgle?"
           }
         },
-        "remove": {
-          "title": "Fjern denne konto",
-          "subtitle": "Alle de tilknyttede puljer bliver slettet. Du skal være helt sikker."
-        },
         "actions": {
-          "remove_account": "Fjern konto",
           "export": "Eksporter"
         }
-      },
-      "actions": {
-        "add_account": "Tilføj konto"
       }
     },
     "unlock": {
@@ -338,7 +316,6 @@
       }
     },
     "settings": {
-      "title": "Indstillinger",
       "browser_notifications": {
         "title": "Browsermeddelelser",
         "subtitle": "Meddelelser om betaling og godkendelser."
@@ -573,10 +550,8 @@
   "common": {
     "password": "Adgangskode",
     "confirm_password": "Bekræft adgangskode",
-    "advanced": "Avanceret",
     "success": "Succes",
     "error": "Fejl",
-    "settings": "Indstillinger",
     "accounts": "Konti",
     "discover": "Opdag",
     "connected_sites": "",
@@ -686,14 +661,7 @@
       }
     },
     "account_menu": {
-      "screen_reader": "Skift drop-down",
-      "title": "Skift konto",
-      "options": {
-        "account": {
-          "add": "Tilføj en ny konto",
-          "manage": "Administrer konti"
-        }
-      }
+      "screen_reader": "Skift drop-down"
     },
     "publishers_table": {
       "payments": "betalinger"

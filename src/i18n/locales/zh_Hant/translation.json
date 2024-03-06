@@ -1,10 +1,7 @@
 {
   "translation": {
     "welcome": {
-      "title": "歡迎來到Alby",
       "set_password": {
-        "title": "設置解鎖密碼",
-        "description": "此密碼將允許你在此設備上解鎖 Alby。它無法恢復，但可以稍後更改。",
         "choose_password": {
           "label": "選擇解鎖密碼："
         },
@@ -85,10 +82,6 @@
       },
       "lnc": {
         "title": "Lightning Terminal (LNC)",
-        "page": {
-          "title": "連接你的 LND 節點",
-          "description": "1. 打開 Lightning Terminal 並從側邊欄選擇 <0>Lightning Node Connect</0>。2. 點擊 <0>Create a new session</0><1/>3. 標記對話，選擇所需的權限並提交<1/>4. <0>複製配對詞句</0> 並粘貼到下方。"
-        },
         "pairing_phrase": {
           "label": "你的配對短語 ",
           "placeholder": "secret stack sats phrase"
@@ -212,13 +205,8 @@
       },
       "btcpay": {
         "title": "BTCPay Server",
-        "page": {
-          "title": "連接到你的BTCPay LND節點",
-          "instructions": "導航到你的BTCPayServer並以管理員身份登錄。轉到Server Settings> LND Rest - See Information。然後點擊「See QR Code Information」並複製二維碼數據。在下面貼上："
-        },
         "config": {
-          "label": "配置數據",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
+          "label": "配置數據"
         },
         "errors": {
           "connection_failed": "連接失敗。BTCPay連接URL是否正確且可訪問？"
@@ -274,9 +262,7 @@
       }
     },
     "accounts": {
-      "title": "帳戶",
       "account_view": {
-        "title1": "帳戶設置",
         "title2": "帳戶",
         "name": {
           "title": "名稱",
@@ -355,12 +341,9 @@
           }
         },
         "remove": {
-          "title": "刪除此帳戶",
-          "subtitle": "所有與此帳號關聯的限額、支付信息和密鑰都將被清除。",
           "error": "輸入的帳戶名稱不匹配。"
         },
         "actions": {
-          "remove_account": "刪除帳戶",
           "export": "導出",
           "remove_secretkey": "移除主密鑰"
         },
@@ -373,7 +356,6 @@
             "button": "備份恢復短語",
             "warning": "⚠️別忘了將你的恢復短語備份！不備份可能會導致永久失去對你的主密鑰、 Nostr 身份或使用此密鑰管理的資產的訪問權限。",
             "save": "保存主密鑰",
-            "title": "備份你的恢復短語",
             "description": "請寫下恢復短語，以便能夠在新設備上恢復主密鑰，或以防失去帳戶訪問。",
             "items": {
               "recovery_phrase": "你將始終可以通過使用主密鑰的恢復短語來訪問它。",
@@ -385,9 +367,7 @@
             "use_mnemonic": "使用主密鑰登錄閃電驅動的應用程式（LNURL Auth）",
             "title": "閃電登錄"
           },
-          "inputs": {
-            "title": "恢復短語"
-          },
+          "inputs": {},
           "generate": {
             "error_confirm": "請確認你已將你的恢復短語備份。",
             "confirm": "我已將我的帳戶主密鑰的恢復短語保存到私密且安全的地方。",
@@ -418,9 +398,6 @@
             "regtest": "Regtest"
           }
         }
-      },
-      "actions": {
-        "add_account": "添加帳戶"
       }
     },
     "unlock": {
@@ -439,7 +416,6 @@
       }
     },
     "settings": {
-      "title": "設置",
       "browser_notifications": {
         "title": "瀏覽器通知",
         "subtitle": "付款和認證相關通知。"
@@ -810,10 +786,8 @@
   "common": {
     "password": "密碼",
     "confirm_password": "確認密碼",
-    "advanced": "高級",
     "success": "成功",
     "error": "錯誤",
-    "settings": "設置",
     "accounts": "帳戶",
     "discover": "發現",
     "connected_sites": "已連接的網站",
@@ -954,12 +928,8 @@
     },
     "account_menu": {
       "screen_reader": "切換下拉菜單",
-      "title": "切換帳戶",
       "options": {
         "account": {
-          "add": "添加新帳戶",
-          "manage": "管理帳戶",
-          "account_settings": "帳戶設置",
           "go_to_web_wallet": "管理你的網路帳戶"
         }
       }
