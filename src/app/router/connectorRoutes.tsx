@@ -89,6 +89,12 @@ const connectorMap: { [key: string]: ConnectorRoute } = {
     title: i18n.t("translation:choose_connector.lnd.title"),
     logo: lnd,
   },
+  btcpay: {
+    path: "btcpay",
+    element: <ConnectBtcpay />,
+    title: i18n.t("translation:choose_connector.btcpay.title"),
+    logo: btcpay,
+  },
   "mynode-lnd": {
     path: "lnd",
     element: <ConnectMyNode />,
@@ -154,12 +160,6 @@ const connectorMap: { [key: string]: ConnectorRoute } = {
     element: <ConnectGaloy instance={galoyPaths.bitcoinJungle} />,
     title: i18n.t("translation:choose_connector.bitcoin_jungle.title"),
     logo: galoyBitcoinJungle,
-  },
-  btcpay: {
-    path: "btcpay",
-    element: <ConnectBtcpay />,
-    title: i18n.t("translation:choose_connector.btcpay.title"),
-    logo: btcpay,
   },
   voltage: {
     path: "voltage",

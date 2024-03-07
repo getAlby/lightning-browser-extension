@@ -2,8 +2,6 @@
   "translation": {
     "welcome": {
       "set_password": {
-        "title": "Einen Passcode zum Entsperren festlegen",
-        "description": "Mit diesem Passcode kannst du Alby auf diesem Gerät entsperren. Er kann nicht wiederhergestellt werden, kann aber später geändert werden.",
         "choose_password": {
           "label": "Wähle einen Passcode zum Entsperren:"
         },
@@ -14,7 +12,10 @@
         },
         "confirm_password": {
           "label": "Vergewisse dich, dass du es richtig eingegeben hast:"
-        }
+        },
+        "description1": "Lege ein Password fest, um die Alby-Erweiterung in diesem Browser zu entsperren",
+        "description2": "Das Password zum Entsperren kann nicht wiederhergestellt, aber geändert werden. ",
+        "title": "Passwort zum Entsperren der Erweiterung festlegen"
       },
       "test_connection": {
         "review_connection_details": "Bitte überprüfe deine Verbindungsdaten.",
@@ -27,7 +28,6 @@
         "connection_taking_long": "Der Verbindungsversuch dauert länger als erwartet... Sind deine Angaben korrekt? Ist deine Node erreichbar?",
         "contact_support": "Wenn du Hilfe benötigst, wende dich bitte an support@getalby.com"
       },
-      "title": "Willkommen bei Alby",
       "pin_extension": {
         "title": "Die Alby Erweiterung anpinnen",
         "description": "Fast fertig. Damit du Alby bequem nutzen kannst, musst du die Erweiterung an die Browser Symbolleiste anheften:",
@@ -181,16 +181,16 @@
       },
       "btcpay": {
         "title": "BTCPay Server",
-        "page": {
-          "title": "Verbinden mit deiner BTCPay LND Node",
-          "instructions": "Navigiere zu deinem BTCPayServer und melde dich als Administrator an. Gehe zu Servereinstellungen > Dienste > LND-Rest – Siehe Informationen. Klicke dann auf „QR-Code-Informationen anzeigen“ und kopiere die QR-Code-Daten. Füge es unten ein:"
-        },
         "config": {
           "label": "Konfigurationsdaten",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
+          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.co"
         },
         "errors": {
           "connection_failed": "Verbindung fehlgeschlagen. Ist die BTCPay Verbindungs URL korrekt und zugänglich?"
+        },
+        "page": {
+          "instructions": "Navigiere zu deinem BTCPayServer und melde dich als Administrator an. Gehe zu Servereinstellungen > Dienste > LND REST - Informationen anzeigen. Klicke dann auf \"QR-Code-Informationen anzeigen\" und kopiere die QR-Code-Daten. Fügen sie unten ein:",
+          "title": "Verbindung zu BTCPay LND"
         }
       },
       "commando": {
@@ -228,13 +228,13 @@
       "title": "Verbinde Lightning Wallet",
       "lnc": {
         "title": "Lightning Terminal (LNC)",
-        "page": {
-          "title": "Verbinden mit deiner LND Node",
-          "description": "1. Öffne Lightning Terminal und wähle <0>Lightning Node Connect</0> in der Seitenleiste.<1/> 2. Klicke auf <0>Erstelle eine neue Sitzung</0><1/>3. Beschrifte die Sitzung, wähle dann die gewünschte Berechtigung und sende sie ab<1/>4. <0>Kopiere die Pairing-Phrase</0> und füge sie hier unten ein."
-        },
         "pairing_phrase": {
           "label": "Deine pairing phrase ",
           "placeholder": "geheimer stack sats phrase"
+        },
+        "page": {
+          "title": "Anschließen an Lightning Terminal (LNC)",
+          "description": "1. Wähle in der Seitenleiste von Lightning Terminal <0>Lightning Node Connect</0>.<1/> 2. Klicke auf <0>Erstelle eine neue Sitzung</0><1/>3. Beschrifte die Sitzung, wähle die gewünschte Berechtigung und senden sie ab<1/>4. <0>Kopiere die Pairing-Phrase</0> und füge sie unten ein."
         }
       },
       "umbrel_lightning_node": {
@@ -282,7 +282,7 @@
           },
           "instructions": "Einfügen einer NWC-Verbindungszeichenfolge von <0>Alby Nostr Wallet Connect</0>, <1>Umbrel Nostr Wallet Connect</1> oder <2>Mutiny Wallet</2>",
           "errors": {
-            "connection_failed": "Verbindung fehlgeschlagen. Ist dein Core Lightning-Knoten online und verwendet er das Commando-Plugin?"
+            "connection_failed": "Verbindung fehlgeschlagen. Ist deine NWC-Geldbörse online und die App-Verbindung aktiviert?"
           }
         }
       }
@@ -402,7 +402,25 @@
         "is_blocked_hint": "Alby ist derzeit auf dem {{host}} deaktiviert",
         "block_removed": "{{host}} aktiviert. Bitte lade die Webseite neu.",
         "see_all": "Alle sehen",
-        "no_transactions": "Noch keine Transaktionen für dieses Konto."
+        "no_transactions": "Noch keine Transaktionen für dieses Konto.",
+        "actions": {
+          "get_started": {
+            "title": "Erste Schritte mit Alby Extension",
+            "description": "Neu bei Alby Extension? Sieh dir unsere Anleitungen, Videos und Erklärungen an"
+          },
+          "backup_masterkey": {
+            "title": "Sichere dein Hauptschlüssel",
+            "description": "Erfahre, was der Master Key ist, wie er für Nostr verwendet wird und stelle sicher, dass du ein Backup erstellst"
+          },
+          "receive_bitcoin": {
+            "title": "Bitcoin erhalten",
+            "description": "Hole dir Bitcoin an deine Lightning-Adresse, eine Lightning-Rechnung oder eine Bitcoin-Adresse."
+          },
+          "import_masterkey": {
+            "title": "Importiere deinen Hauptschlüssel",
+            "description": "Wenn du bereits einen Master Key hast, kannst du ihn mit der Wiederherstellungsphrase importieren"
+          }
+        }
       },
       "allowance_view": {
         "no_transactions": "Noch keine Transaktionen auf <0>{{Name}}</0>.",
@@ -418,13 +436,10 @@
       }
     },
     "accounts": {
-      "title": "Konten",
-      "actions": {
-        "add_account": "Konto hinzufügen"
-      },
       "account_view": {
         "title2": "Konto",
         "title1": "Kontoeinstellung",
+
         "name": {
           "title": "Name anzeigen",
           "placeholder": "Konto Anzeigename"
@@ -503,13 +518,10 @@
           }
         },
         "remove": {
-          "title": "Dieses Konto entfernen",
-          "subtitle": "Entfernt alle Zugangsdaten, Zahlungsdaten und Schlüssel, die mit diesem Konto verbunden sind.",
           "error": "Der eingegebene Kontoname stimmte nicht überein.",
           "confirm": "Bitte gebe den Namen des Kontos ein, um die Löschung deines Kontos zu bestätigen:\n\n{{ Name }}\n\n⚠️ Wenn du fortfährst, werden alle zugehörigen Schlüssel (Hauptschlüssel, Nostr, etc.) gelöscht. Bitte vergewissern dich, dass du eine Sicherungskopie erstellt hast, denn es gibt keine andere Möglichkeit, sie wiederherzustellen."
         },
         "actions": {
-          "remove_account": "Konto entfernen",
           "export": "Exportieren",
           "remove_secretkey": "Hauptschlüssel entfernen"
         },
@@ -519,7 +531,6 @@
             "protocols": {
               "nostr": "Nostr"
             },
-            "title": "Sichere deine Wiederherstellungsphrase",
             "save": "Hauptschlüssel speichern",
             "button": "Zeige Wiederherstellungsphrase",
             "warning": "⚠️ Vergesse nicht, deine Wiederherstellungsphrase zu sichern! Wird sie nicht gesichert, kann dies dazu führen, dass du den Zugang zu deinem Hauptschlüssel, dein Nostr-Identität oder den von dir mit diesem Schlüssel verwalteten Assets dauerhaft verlierst.",
@@ -544,9 +555,7 @@
             "description": "Verwende die Wiederherstellungsphrase, um deinen Hauptschlüssel in Alby zu importieren.",
             "button": "Hauptschlüssel importieren"
           },
-          "inputs": {
-            "title": "Wiederherstellungsphrase"
-          },
+          "inputs": {},
           "existing_nostr_key_notice": "ℹ️ Für dieses Konto ist bereits ein privater Nostr-Schlüssel festgelegt, der nicht von diesem Hauptschlüssel abgeleitet wird. Du kannst dein Nostr-Schlüssel über deine Kontoeinstellungen verwalten.",
           "lnurl": {
             "title": "Anmeldung mit Lightning",
@@ -751,7 +760,10 @@
       "content_message": {
         "heading": "Anforderung eines Kanals von der Node"
       },
-      "success": "Kanalanfrage erfolgreich an {{name}} gesendet"
+      "success": "Kanalanfrage erfolgreich an {{name}} gesendet",
+      "private_channel": {
+        "label": "Einen privaten Channel eröffnen?"
+      }
     },
     "alby": {
       "pre_connect": {
@@ -962,13 +974,9 @@
     "account_menu": {
       "options": {
         "account": {
-          "add": "Neues Konto hinzufügen",
-          "manage": "Konten verwalten",
-          "account_settings": "Kontoeinstellungen",
           "go_to_web_wallet": "Verwalte dein Web-Konto"
         }
       },
-      "title": "Konto wechseln",
       "screen_reader": "Dropdown umschalten"
     },
     "publishers_table": {
@@ -1074,15 +1082,14 @@
     "sats_one": "sat",
     "success": "Erfolgreich",
     "password": "Kennwort",
-    "advanced": "Fortgeschrittene",
     "description_full": "Vollständige Beschreibung",
     "amount": "Betrag",
     "copied": "Kopiert!",
     "description": "Beschreibung",
-    "settings": "Einstellung",
+    "settings": "Einstellungen der Erweiterung",
     "sats_other": "sats",
     "confirm_password": "Kennwort bestätigen",
-    "help": "Hilfe",
+    "help": "Alby Hilfe",
     "actions": {
       "back": "Zurück",
       "open": "Öffnen",
@@ -1118,7 +1125,7 @@
       "copied_to_clipboard": "In die Zwischenablage kopiert",
       "hide": "Ausblenden"
     },
-    "discover": "Entdecken",
+    "discover": "Apps entdecken",
     "errors": {
       "connection_failed": "Verbindung fehlgeschlagen",
       "payment_failed": "Zahlung fehlgeschlagen"
@@ -1157,7 +1164,10 @@
       "insecure_domain_warn": "⚠️ Du stellst eine Verbindung zu einer unsicheren Domäne her."
     },
     "website": "Website",
-    "apps": "Apps"
+    "apps": "Apps",
+    "full_screen": "Vollbild",
+    "hide_advanced": "Erweiterte Einstellungen ausblenden",
+    "advanced": "Erweiterte Einstellungen anzeigen"
   },
   "permissions": {
     "commando": {

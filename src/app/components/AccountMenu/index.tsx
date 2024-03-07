@@ -127,8 +127,8 @@ function AccountMenu({ showOptions = true }: Props) {
               openOptions(`accounts/${authAccount?.id}`);
             }}
           >
-            <WalletIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
-            {t("options.account.account_settings")}
+            <WalletIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300 shrink-0" />
+            {t("options.account.wallet_settings")}
           </Menu.ItemButton>
           {(isAlbyLNDHubAccount(
             authAccount?.alias,
@@ -140,7 +140,7 @@ function AccountMenu({ showOptions = true }: Props) {
                 window.open(`https://getalby.com/user`, "_blank");
               }}
             >
-              <GlobeIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
+              <GlobeIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300 shrink-0" />
               {t("options.account.go_to_web_wallet")} →
             </Menu.ItemButton>
           )}

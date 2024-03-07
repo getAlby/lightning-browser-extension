@@ -8,7 +8,7 @@ type Props = {
 
 function ConnectorPath({ title, icon, description, content, actions }: Props) {
   return (
-    <div className="flex flex-col p-10 border border-neutral-200 dark:border-neutral-700 rounded-2xl bg-white dark:bg-surface-02dp">
+    <div className="flex flex-col p-10 border border-gray-200 dark:border-neutral-700 rounded-2xl bg-white dark:bg-surface-02dp">
       <div className="flex flex-col sm:flex-row items-center mb-4 space-x-3">
         {icon}
         <h1 className="text-xl font-bold dark:text-white text-center">

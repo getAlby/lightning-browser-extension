@@ -2,8 +2,6 @@
   "translation": {
     "welcome": {
       "set_password": {
-        "title": "Establecer un código de desbloqueo",
-        "description": "Este código te permitirá desbloquear Alby en este dispositivo. No se puede recuperar, pero se puede cambiar más tarde.",
         "choose_password": {
           "label": "Elige un código de desbloqueo:"
         },
@@ -27,7 +25,6 @@
           "delete_edit_account": "Eliminar una cuenta no válida y volver a editarla"
         }
       },
-      "title": "Bienvenido a Alby",
       "pin_extension": {
         "title": "Fija tu extensión Alby",
         "description": "Ya casi lo has conseguido. Para utilizar Alby cómodamente, recuerda anclar tu extensión a la barra de herramientas del navegador:",
@@ -159,13 +156,8 @@
       },
       "btcpay": {
         "title": "Servidor BTCPay",
-        "page": {
-          "title": "Conéctese a su nodo BTCPay LND",
-          "instructions": "Navegue a su servidor BTCPay e inicie sesión como administrador. Vaya a Configuración del servidor > Servicios > LND Rest-Ver información. Luego haga clic en\" Ver información del código QR \" y copie los datos del Código QR. Pegar a continuación:"
-        },
         "config": {
-          "label": "Datos de configuración",
-          "placeholder": "config=https://su-btc-pay.org/lnd-config/212121/lnd.config"
+          "label": "Datos de configuración"
         },
         "errors": {
           "connection_failed": "La conexión falló. ¿Es la URL de conexión de BTCPay correcta y accesible?"
@@ -231,10 +223,6 @@
         }
       },
       "lnc": {
-        "page": {
-          "title": "Conecta tu nodo LND",
-          "description": "1. Abra tu Lightning Terminal y selecciona <0>Lightning Node Connect</0> en la barra lateral.<1/> 2. Haz clic en <0>Crear una nueva sesión</0><1/>3. Etiqueta la sesión, luego elige el permiso que deseas y envía<1/>4. <0>Copia la frase de emparejamiento</0> y pégala a continuación."
-        },
         "title": "Lightning Terminal (LNC)",
         "pairing_phrase": {
           "label": "Tu frase vinculada. ",
@@ -265,10 +253,6 @@
       }
     },
     "accounts": {
-      "title": "Cuentas",
-      "actions": {
-        "add_account": "Agregar Cuenta"
-      },
       "account_view": {
         "nostr": {
           "errors": {
@@ -300,11 +284,6 @@
           "title": "Nostr",
           "hint": "es un protocolo simple y abierto que tiene como objetivo crear redes sociales resistentes a la censura. Nostr trabaja con claves criptográficas. Para publicar algo, lo firma con su clave y lo envía a múltiples relevos. Puede usar Alby para administrar su clave Nostr. Muchas aplicaciones de Nostr le permitirán simplemente usar la clave de la extensión Alby."
         },
-        "remove": {
-          "title": "Eliminar Esta Cuenta",
-          "subtitle": "Se eliminarán todos los enlaces vinculados. Por favor, asegúrese de querer hacerlo."
-        },
-        "title1": "Información de la Cuenta",
         "title2": "Editar Cuenta",
         "name": {
           "title": "Nombre",
@@ -319,7 +298,6 @@
           "export_uri": "URI de credenciales de LNDHub"
         },
         "actions": {
-          "remove_account": "Eliminar cuenta",
           "export": "Exportar"
         }
       }
@@ -340,7 +318,6 @@
       }
     },
     "settings": {
-      "title": "Configuración",
       "website_enhancements": {
         "title": "Mejoras del sitio web",
         "subtitle": "Mejoras de propinas para Twitter, YouTube, etc."
@@ -673,7 +650,6 @@
     "password": "Contraseña",
     "success": "Exitoso",
     "error": "Error",
-    "settings": "Ajustes",
     "connected_sites": "Sitios conectados",
     "sats_one": "sat",
     "sats_other": "sats",
@@ -721,7 +697,6 @@
     "success_message": "{{amount}}{{fiatAmount}} enviados a {{destination}}",
     "message": "Mensaje",
     "description_full": "Descripción Completa",
-    "advanced": "Avanzado",
     "accounts": "Cuentas",
     "discover": "Descubrir",
     "response": "Respuesta",
@@ -805,12 +780,8 @@
       }
     },
     "account_menu": {
-      "title": "Cambiar de cuenta",
       "options": {
         "account": {
-          "add": "Agregar una nueva cuenta",
-          "manage": "Administrar cuentas",
-          "account_settings": "Configuraciones de la cuenta",
           "go_to_web_wallet": "Administra tu cuenta de Alby"
         }
       },

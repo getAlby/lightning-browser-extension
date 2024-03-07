@@ -1,10 +1,10 @@
 {
   "translation": {
     "welcome": {
-      "title": "Welcome to Alby",
       "set_password": {
-        "title": "Set an unlock passcode",
-        "description": "This passcode will allow you to unlock Alby on this device. It cannot be recovered, but may be changed later.",
+        "title": "Set extension unlock passcode",
+        "description1": "Set a passcode to unlock Alby Extension in this browser",
+        "description2": "Unlock passcode cannot be recovered, but may be changed ",
         "choose_password": {
           "label": "Choose an unlock passcode:"
         },
@@ -109,8 +109,8 @@
       "lnc": {
         "title": "Lightning Terminal (LNC)",
         "page": {
-          "title": "Connect to your LND node",
-          "description": "1. Open Lightning Terminal and choose <0>Lightning Node Connect</0> from the sidebar.<1/> 2. Click <0>Create a new session</0><1/>3. Label the session, choose desired permissions and submit<1/>4. <0>Copy pairing phrase</0> and paste it below."
+          "title": "Connect to Lightning Terminal (LNC)",
+          "description": "1. On Lightning Terminal sidebar choose <0>Lightning Node Connect</0>.<1/> 2. Click <0>Create a new session</0><1/>3. Label the session, choose desired permissions and submit<1/>4. <0>Copy pairing phrase</0> and paste it below."
         },
         "pairing_phrase": {
           "label": "Your pairing phrase ",
@@ -260,12 +260,12 @@
       "btcpay": {
         "title": "BTCPay Server",
         "page": {
-          "title": "Connect to your BTCPay LND node",
-          "instructions": "Navigate to your BTCPayServer and log in as an admin. Go to Server Settings > Services > LND Rest - See information. Then Click \"See QR Code information\" and copy the QR Code data. Paste it below:"
+          "title": "Connect to BTCPay LND",
+          "instructions": "Navigate to your BTCPayServer and log in as an admin. Go to Server Settings > Services > LND REST - See information. Then Click \"See QR Code information\" and copy the QR Code data. Paste it below:"
         },
         "config": {
           "label": "Config data",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
+          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.co"
         },
         "errors": {
           "connection_failed": "Connection failed. Is the BTCPay connection URL correct and accessible?"
@@ -342,7 +342,7 @@
             "placeholder": "nostr+walletconnect://69effe..."
           },
           "errors": {
-            "connection_failed": "Connection failed. Is your Core Lightning node online and using the commando plugin?"
+            "connection_failed": "Connection failed. Is your NWC wallet online and app connection enabled?"
           }
         }
       }
@@ -386,13 +386,32 @@
         "is_blocked_hint": "Alby is currently disabled on {{host}}",
         "block_removed": "Enabled {{host}}. Please reload the website.",
         "no_transactions": "No transactions for this account yet.",
-        "see_all": "See all"
+        "see_all": "See all",
+        "actions": {
+          "get_started": {
+            "title": "Get Started With Alby Extension",
+            "description": "New to Alby Extension? Check out our guides, videos, and explanations"
+          },
+          "backup_masterkey": {
+            "title": "Back up your Master Key",
+            "description": "Learn what Master Key is, how it’s used for Nostr and make sure to back up"
+          },
+
+          "receive_bitcoin": {
+            "title": "Receive bitcoin",
+            "description": "Get bitcoin to your lightning address, a lightning invoice or bitcoin address."
+          },
+          "import_masterkey": {
+            "title": "Import your Master Key",
+            "description": "If you already have a Master Key, you can import it using recovery phrase"
+          }
+        }
       }
     },
     "accounts": {
-      "title": "Accounts",
+      "title": "Wallets",
       "account_view": {
-        "title1": "Account Settings",
+        "title1": "Wallet Settings",
         "title2": "Account",
         "name": {
           "title": "Display Name",
@@ -412,28 +431,32 @@
           "title": "🔑 Key Management",
           "saved": "Master Key encrypted & saved successfully.",
           "existing_nostr_key_notice": "ℹ️ This account already has a nostr private key set and will not be derived from this Master Key. You can manage your Nostr key from your account settings.",
+          "description": {
+            "warning": "Recovery phrase cannot recover this wallet or funds in it. It only recovers the identity you can use across aforementioned protocols",
+            "secure_recovery_phrase": "Make sure to write them down somewhere safe and and keep them private",
+            "recovery_phrase": "Recovery phrase is set of 12 words that backs up your Master Key"
+          },
+          "confirm": "I've backed up the recovery phrase to my Master Key in a private and secure place.",
+          "error_confirm": "Please confirm that you have backed up the recovery phrase.",
           "new": {
-            "title": "What is a Master Key?"
+            "title": "What is a Master Key?",
+            "items": {
+              "keys": "Master Key is your identity that allows you to interact with protocols like Nostr, Liquid Network or base layer of bitcoin",
+              "usage": "You can import and use the same Master Key in each connected wallet in the Alby Extension",
+              "recovery_phrase": "To import your Master Key to any wallet in Alby, you need to use a recovery phrase"
+            }
           },
           "generate": {
             "title": "Generate new Master Key",
             "description": "Master Key allows you to interact with various protocols such as: Nostr, base layer of Bitcoin or LNURL-Auth.",
-            "button": "Generate Master Key",
-            "confirm": "I've backed up the recovery phrase to my Master Key in a private and secure place.",
-            "error_confirm": "Please confirm that you have backed up the recovery phrase."
+            "button": "Generate Master Key"
           },
           "backup": {
-            "title": "Back up your recovery phrase",
+            "title": "Back up your Master Key",
             "save": "Save Master Key",
             "button": "View recovery phrase",
             "warning": "⚠️ Don't forget to back up your recovery phrase! Not backing it up might result in permanently losing access to your Master Key, Nostr identity or assets you manage with this key.",
             "description": "Write down the recovery phrase to be able to restore your Master Key on a new device or in case you lose access to your account.",
-            "items": {
-              "keys": "Master Key allows you to interact with various protocols such as: Nostr, Liquid or base layer of Bitcoin.",
-              "recovery_phrase": "You can always access your Master Key by using it's recovery phrase.",
-              "words": "Recovery phrase is set of 12 words that works like a password, however it can't be changed or reset in case it's lost.",
-              "storage": "Make sure to write it down somewhere safe and private!"
-            },
             "protocols": {
               "nostr": "Nostr"
             }
@@ -444,7 +467,7 @@
             "button": "Import Master Key"
           },
           "inputs": {
-            "title": "Recovery Phrase"
+            "title": "Recovery phrase to your Master Key"
           },
           "lnurl": {
             "title": "Login with Lightning",
@@ -525,8 +548,8 @@
           }
         },
         "remove": {
-          "title": "Remove This Account",
-          "subtitle": "Removes all allowances, payment data and keys associated with this account.",
+          "title": "Disconnect This Wallet",
+          "subtitle": "Removes all allowances, payment data and keys associated with this wallet.",
           "confirm": "Please enter the name of the account to confirm the deletion of your account:\n\n{{ name }}\n\n ⚠️ All associated keys (Master Key, Nostr, etc) will be deleted if you continue. Please make sure you have backed them up, there is no other way to restore them.",
           "error": "The entered account name didn't match."
         },
@@ -537,13 +560,13 @@
           "success": "Successfully removed the Master Key."
         },
         "actions": {
-          "remove_account": "Remove account",
+          "disconnect_wallet": "Disconnect Wallet",
           "remove_secretkey": "Remove Master Key",
           "export": "Export"
         }
       },
       "actions": {
-        "add_account": "Add account"
+        "connect_a_wallet": "Connect a wallet"
       }
     },
     "webln_enable": {
@@ -583,7 +606,7 @@
       }
     },
     "settings": {
-      "title": "Settings",
+      "title": "Extension Settings",
       "browser_notifications": {
         "title": "Browser notifications",
         "subtitle": "Payment and authentication related notifications."
@@ -668,15 +691,6 @@
           "mismatched_password": "Passcodes don't match."
         },
         "success": "Passcode changed successfully"
-      },
-      "nostr": {
-        "title": "Nostr",
-        "hint": "is a simple and open protocol that aims to create censorship-resistant social networks. Nostr works with cryptographic keys. To publish something you sign it with your key and send it to multiple relays. You can use Alby to manage your Nostr key. Many Nostr applications will then allow you to simply use the key from the Alby extension.",
-        "private_key": {
-          "title": "Private key",
-          "subtitle": "This section is moved to accounts page as keys are account specific now.",
-          "go_to": "Go To Accounts"
-        }
       }
     },
     "send": {
@@ -717,6 +731,9 @@
       "title": "Channel Request",
       "content_message": {
         "heading": "Request a channel from the node"
+      },
+      "private_channel": {
+        "label": "Open a private channel?"
       },
       "success": "Channel request sent successfully to {{name}}"
     },
@@ -976,7 +993,8 @@
   "common": {
     "password": "Password",
     "confirm_password": "Confirm Password",
-    "advanced": "Advanced",
+    "advanced": "Show advanced settings",
+    "hide_advanced": "Hide advanced settings",
     "success": "Success",
     "error": "Error",
     "settings": "Extension Settings",
@@ -1012,6 +1030,7 @@
       "cancel": "Cancel",
       "confirm": "Confirm",
       "continue": "Continue",
+      "finish": "Finish",
       "connect": "Connect",
       "lock": "Lock",
       "unlock": "Unlock",
@@ -1152,12 +1171,12 @@
     },
     "account_menu": {
       "screen_reader": "Toggle Dropdown",
-      "title": "Switch account",
+      "title": "Switch Wallet",
       "options": {
         "account": {
-          "add": "Add a new account",
-          "manage": "Manage accounts",
-          "account_settings": "Account settings",
+          "add": "Connect a Wallet",
+          "manage": "Manage Wallets",
+          "wallet_settings": "Wallet settings",
           "go_to_web_wallet": "Manage your web account"
         }
       }
