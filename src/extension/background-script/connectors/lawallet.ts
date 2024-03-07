@@ -436,7 +436,7 @@ export function makeZapRequest({
   profile,
   event,
   amount,
-  relays,
+  relays = ["wss://relay.lawallet.ar"],
   comment = "",
 }: {
   profile: string;
@@ -454,7 +454,7 @@ export function makeZapRequest({
     content: comment,
     tags: [
       ["p", profile],
-      ["amount", amount.toString()],
+      ["amount", String(amount)],
       ["relays", ...relays],
     ],
   };
