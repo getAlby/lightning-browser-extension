@@ -59,9 +59,18 @@ function Settings() {
 
   return (
     <Container>
-      <h2 className="mt-12 mb-6 text-2xl font-bold dark:text-white">
+      <h2 className="mt-12 mb-1 text-2xl font-bold dark:text-white">
         {t("title")}
       </h2>
+
+      <p className="mb-6 text-gray-500 dark:text-neutral-500 text-sm">
+        {t("subtitle")}
+      </p>
+
+      <h2 className="mb-4 text-xl font-bold dark:text-white">
+        {t("general.title")}
+      </h2>
+
       <div className="shadow bg-white rounded-md sm:overflow-hidden px-6 py-2 divide-y divide-gray-200 dark:divide-white/10 dark:bg-surface-02dp">
         <Setting
           title={t("browser_notifications.title")}
@@ -251,7 +260,7 @@ function Settings() {
         )}
       </div>
 
-      <h2 className="mt-12 text-2xl font-bold dark:text-white">
+      <h2 className="mt-12 text-xl font-bold dark:text-white">
         {t("personal_data.title")}
       </h2>
 

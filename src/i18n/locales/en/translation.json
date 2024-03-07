@@ -593,6 +593,10 @@
     },
     "settings": {
       "title": "Extension Settings",
+      "subtitle": "Global settings that affect your experience on all connected wallet in Alby Extension.",
+      "general": {
+        "title": "General"
+      },
       "browser_notifications": {
         "title": "Browser Notifications",
         "subtitle": "Payment and authentication related notifications."
