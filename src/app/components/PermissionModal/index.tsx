@@ -46,21 +46,22 @@ export default function PermissionModal({
           isSmall={false}
           isCard={false}
         />
-        <div className="m-4 flex flex-col gap-4">
-          <p className="text-sm font-bold">{t("set_permissions")}</p>
+        <div className="flex flex-col gap-2">
+          <p className="text-md">{t("set_permissions")}</p>
 
-          <ListItem checkedValue="ask_everytime" />
-          <ListItem checkedValue="dont_ask_current" />
-          <ListItem checkedValue="dont_ask_any" />
-        </div>
-
-        <div className="flex justify-center mt-6 w-64 mx-auto">
-          <Button
-            label={tCommon("actions.save")}
-            primary
-            flex
-            onClick={() => PermssionCallback(permissionOption)}
-          />
+          <div className="flex flex-col gap-1">
+            <ListItem checkedValue="ask_everytime" />
+            <ListItem checkedValue="dont_ask_current" />
+            <ListItem checkedValue="dont_ask_any" />
+          </div>
+          <div className="flex">
+            <Button
+              label={tCommon("actions.save")}
+              primary
+              flex
+              onClick={() => PermssionCallback(permissionOption)}
+            />
+          </div>
         </div>
       </div>
     </Modal>
@@ -72,7 +73,7 @@ export default function PermissionModal({
 
   function ListItem({ checkedValue }: ListItemProps) {
     return (
-      <div className="flex flex-row gap-4 items-center">
+      <div className="flex flex-row gap-2 items-center py-1">
         <input
           type="radio"
           id="set-permission"
@@ -85,7 +86,7 @@ export default function PermissionModal({
         />
         <label
           htmlFor="set-permission"
-          className="text-sm text-gray-500 cursor-pointer dark:hover:text-gray-300 dark:peer-checked:text-primary peer-checked:border-primary peer-checked:text-primary hover:text-gray-600 dark:text-gray-400 "
+          className="text-xs text-gray-600 dark:text-neutral-400 cursor-pointer"
         >
           <Trans
             i18nKey={checkedValue}

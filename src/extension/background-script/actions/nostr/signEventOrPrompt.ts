@@ -44,14 +44,14 @@ const signEventOrPrompt = async (message: MessageSignEvent, sender: Sender) => {
       });
 
       // add permission to db only if user decided to always allow this request
-      if (promptResponse.data.permissionOption == "dont_ask_again_current") {
+      if (promptResponse.data.permissionOption == "dont_ask_current") {
         await addPermissionFor(
           PermissionMethodNostr["NOSTR_SIGNMESSAGE"] + "/" + event.kind,
           host
         );
       }
 
-      if (promptResponse.data.permissionOption == "dont_ask_again_all") {
+      if (promptResponse.data.permissionOption == "dont_ask_any") {
         await addPermissionFor(
           PermissionMethodNostr["NOSTR_SIGNMESSAGE"],
           host
