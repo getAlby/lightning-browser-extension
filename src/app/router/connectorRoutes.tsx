@@ -105,12 +105,6 @@ const connectorMap: { [key: string]: ConnectorRoute } = {
     title: i18n.t("translation:choose_connector.lnd.title"),
     logo: lnd,
   },
-  "voltage-lnd": {
-    path: "lnd",
-    element: <ConnectVoltage />,
-    title: i18n.t("translation:choose_connector.lnd.title"),
-    logo: lnd,
-  },
   lnc: {
     path: "lnc",
     element: <ConnectLnc />,
