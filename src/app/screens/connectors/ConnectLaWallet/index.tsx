@@ -8,6 +8,7 @@ import toast from "~/app/components/Toast";
 import msg from "~/common/lib/msg";
 
 import Button from "~/app/components/Button";
+import PasswordViewAdornment from "~/app/components/PasswordViewAdornment";
 import LaWallet from "~/extension/background-script/connectors/lawallet";
 import Nostr from "~/extension/background-script/nostr";
 import { ConnectorType } from "~/types";
@@ -29,6 +30,7 @@ export default function ConnectLaWallet() {
   const { t } = useTranslation("translation", {
     keyPrefix: "choose_connector.lawallet",
   });
+  const [passwordViewVisible, setPasswordViewVisible] = useState(false);
   const { t: tCommon } = useTranslation("common");
   const [formData, setFormData] = useState(initialFormData);
   const [loading, setLoading] = useState(false);
@@ -116,8 +118,16 @@ export default function ConnectLaWallet() {
           label={t("private_key")}
           placeholder={t("private_key")}
           onChange={handleChange}
+          type={passwordViewVisible ? "text" : "password"}
           required
           autoFocus={true}
+          endAdornment={
+            <PasswordViewAdornment
+              onChange={(passwordView) => {
+                setPasswordViewVisible(passwordView);
+              }}
+            />
+          }
         />
 
         <Button
