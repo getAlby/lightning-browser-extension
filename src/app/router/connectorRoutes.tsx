@@ -178,7 +178,7 @@ const connectorMap: { [key: string]: ConnectorRoute } = {
     element: <ConnectLaWallet />,
     title: i18n.t("translation:choose_connector.lawallet.title"),
     logo: lawallet,
-  }
+  },
 };
 
 function getDistribution(key: string): ConnectorRoute {
