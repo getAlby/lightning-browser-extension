@@ -414,18 +414,6 @@
         "title": "Webbplatsförbättringar",
         "subtitle": "Dricks för Twitter, YouTube, m.fl."
       },
-      "lnurl_auth": {
-        "title": "LNURL-Auth",
-        "hint": "är ett generiskt autentiseringsprotokoll. Detta autentiserar användarens digitala signaturer. Protokollet kräver ingen ytterligare information såsom lösenord, e-post, användarnamn eller liknande. Med Alby kan du använd dina lightning-konton för att logga in på webbplatser. För att vara kompatibla med andra plånböcker var vi tvungna att göra vissa förändringar som du kan konfigurera här. <0>I bästa fall är alla inställningar AV.</0> Använd enbart om du har äldre konton.",
-        "legacy_lnurl_auth_202207": {
-          "title": "Äldre LNURL-Auth",
-          "subtitle": "Nyckelgenereringen för LNURL-auth har ändrats (Juli 2022). Alby var inte kompatibelt med andra implementationer. Detta har ändrats och nu används andra inloggningsnycklar. Om du tidigare använt LNURL-auth för att logga in, kan du fortfarande aktivera denna metod. Denna möjlighet kommer försvinna så se till att byta till det nya inloggningsförfarandet."
-        },
-        "legacy_lnurl_auth": {
-          "title": "Äldre signeringsmetod för LNDHub och LNbits",
-          "subtitle": "Meddelandesignering och inloggning med LNDhub (t.ex. BlueWallet) och LNbits-konton har ändrats (Mars 2022). Om du tidigare loggade in med dessa konton kan du fortfarande aktivera den äldre signeringsmetoden. Denna möjlighet kommer försvinna så se till att byta till det nya inloggningsförfarandet."
-        }
-      },
       "camera_access": {
         "title": "Åtkomst till kamera",
         "subtitle": "För att skanna QR-koder",

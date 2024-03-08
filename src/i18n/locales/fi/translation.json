@@ -240,18 +240,6 @@
         "title": "Verkkosivuston parannukset",
         "subtitle": "Vinkkien parannuksia Twitterissä, YouTubessa jne."
       },
-      "lnurl_auth": {
-        "title": "LNURL-Auth",
-        "hint": "on yleinen todennusprotokolla. Se tunnistaa käyttäjän digitaalisten allekirjoitusten avulla. Protokolla ei vaadi muita tunnistetietoja, kuten salasanoja, sähköposteja, käyttäjätunnuksia tai vastaavia. Albyn avulla voit käyttää Lightning-tilejäsi kirjautuaksesi turvallisesti verkkosivustoille. Ollaksemme yhteensopiva muiden lompakoiden kanssa, meidän piti tehdä muutamia muutoksia, jotka voit määrittää täällä. <0>Ihannetapauksessa kaikki nämä vaihtoehdot ovat Pois päältä.</0> Käytä niitä vain, jos sinulla on vanhoja tilejä.",
-        "legacy_lnurl_auth_202207": {
-          "title": "Vanha LNURL-Auth",
-          "subtitle": "Avainten luonti LNURL-Authia varten on muuttunut (heinäkuu 2022). Alby ei ollut yhteensopiva muiden toteutusten kanssa. Tätä muutettiin, mutta nyt käytetään erilaisia kirjautumisavaimia. Jos käytit kirjautumiseen LNURL-Authia, ennen kuin voit silti ottaa vanhan menetelmän käyttöön. Tämä vaihtoehto poistetaan myöhemmin, muista vaihtaa uuteen kirjautumistunnukseen."
-        },
-        "legacy_lnurl_auth": {
-          "title": "Vanha allekirjoitus LNDhubille ja LNbitsille",
-          "subtitle": "Viestien allekirjoitus ja sisäänkirjautuminen LNDhub- (esim. BlueWallet (sinilompakko)- ja LNbits-tilillä on muutettu (maaliskuu 2022). Jos kirjauduit sisään näillä tileillä, voit silti ottaa vanhan allekirjoitustavan käyttöön. Tämä vaihtoehto poistetaan myöhemmin, muista vaihtaa uuteen kirjautumistunnukseen."
-        }
-      },
       "camera_access": {
         "title": "Kameran käyttöoikeus",
         "subtitle": "QR-koodien skannaamiseen",
