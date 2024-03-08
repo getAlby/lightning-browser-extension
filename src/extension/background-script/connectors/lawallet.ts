@@ -349,15 +349,20 @@ export default class LaWallet implements Connector {
     limit: number = 10,
     since: number = 0
   ): Promise<Event[]> {
-    const zapEvents = await this.relay.list([
-      {
-        authors: [this.config.urlxPublicKey],
-        kinds: [9735],
-        since,
-        limit,
-        "#p": [this.public_key],
-      },
-    ]);
+    const filter = {
+      authors: [this.config.urlxPublicKey],
+      kinds: [9735],
+      since,
+      limit,
+      "#p": [this.public_key],
+    };
+
+    const zapEvents: Event[] = await LaWallet.request(
+      this.config.apiEndpoint,
+      "POST",
+      "/nostr/fetch",
+      { body: filter }
+    );
 
     return zapEvents;
   }
