@@ -65,24 +65,23 @@ const ConfirmRequestPermission: FC = () => {
                   </p>
                 )}
               </div>
-
-              <div className="flex items-center mb-2">
-                <Checkbox
-                  id="always_allow"
-                  name="always_allow"
-                  checked={alwaysAllow}
-                  onChange={() => setAlwaysAllow((prev) => !prev)}
-                />
-                <label
-                  htmlFor="always_allow"
-                  className="cursor-pointer pl-2 block text-sm text-gray-900 font-medium dark:text-white"
-                >
-                  {t("always_allow")}
-                </label>
-              </div>
             </div>
           </div>
           <div className="text-center flex flex-col">
+            <div className="flex items-center mb-4">
+              <Checkbox
+                id="always_allow"
+                name="always_allow"
+                checked={alwaysAllow}
+                onChange={() => setAlwaysAllow((prev) => !prev)}
+              />
+              <label
+                htmlFor="always_allow"
+                className="cursor-pointer pl-2 block text-sm text-gray-900 font-medium dark:text-white"
+              >
+                {t("always_allow")}
+              </label>
+            </div>
             <ConfirmOrCancel
               label={tCommon("actions.confirm")}
               onCancel={reject}
