@@ -1,11 +1,9 @@
 import lightningPayReq from "bolt11";
 import Hex from "crypto-js/enc-hex";
 import sha256 from "crypto-js/sha256";
-import utils from "~/common/lib/utils";
 import HashKeySigner from "~/common/utils/signer";
 import { Account } from "~/types";
 
-import state from "../state";
 import Connector, {
   CheckPaymentArgs,
   CheckPaymentResponse,
@@ -214,18 +212,10 @@ class LnBits implements Connector {
     if (!args.message) {
       return Promise.reject(new Error("Invalid message"));
     }
-    let message: string | Uint8Array;
-    message = sha256(args.message).toString(Hex);
+    const message = sha256(args.message).toString(Hex);
     // create a signing key from the lnbits adminkey
-    let keyHex = sha256(`lnbits://${this.config.adminkey}`).toString(Hex);
+    const keyHex = sha256(`lnbits://${this.config.adminkey}`).toString(Hex);
 
-    const { settings } = state.getState();
-    if (settings.legacyLnurlAuth) {
-      message = utils.stringToUint8Array(args.message);
-      keyHex = sha256(
-        `LBE-LNBITS-${this.config.url}-${this.config.adminkey}`
-      ).toString(Hex);
-    }
     if (!keyHex) {
       return Promise.reject(new Error("Could not create key"));
     }
