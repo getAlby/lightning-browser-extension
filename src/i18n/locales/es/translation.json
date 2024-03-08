@@ -180,7 +180,7 @@
       "lawallet": {
         "title": "LaWallet.io",
         "page": {
-          "title": "Conectar con el stack de LaWallet.io",
+          "title": "Conectar a LaWallet",
           "instructions": "Ingresá los datos de LaWallet.io a continuación."
         },
         "private_key": "Llave privada",

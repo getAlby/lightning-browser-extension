@@ -274,7 +274,7 @@
       "lawallet": {
         "title": "LaWallet.io",
         "page": {
-          "title": "Connect to your LaWallet Stack",
+          "title": "Connect to LaWallet",
           "instructions": "Set your LaWallet credentials below"
         },
         "private_key": "Private Key",
