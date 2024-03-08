@@ -130,6 +130,15 @@ export default function ConnectLaWallet() {
           }
         />
 
+        <TextField
+          id="identity_endpoint"
+          label={t("identity_endpoint")}
+          value={formData.identity_endpoint}
+          required
+          title={t("identity_endpoint")}
+          onChange={handleChange}
+        />
+
         <Button
           onClick={() => {
             setShowAdvanced(!showAdvanced);
@@ -145,15 +154,6 @@ export default function ConnectLaWallet() {
             value={formData.api_endpoint}
             required
             title={t("api_endpoint")}
-            onChange={handleChange}
-          />
-
-          <TextField
-            id="identity_endpoint"
-            label={t("identity_endpoint")}
-            value={formData.identity_endpoint}
-            required
-            title={t("identity_endpoint")}
             onChange={handleChange}
           />
 
