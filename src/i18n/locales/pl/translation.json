@@ -348,16 +348,10 @@
           "saved": "Klucz Główny został zaszyfrowany i zapisany pomyślnie.",
           "title": "🔑 Zarządzanie kluczami",
           "backup": {
-            "items": {
-              "words": "Fraza odzyskiwania to zestaw 12 słów, który działa jak hasło, jednak nie można go zmienić ani zresetować w przypadku jego utraty.",
-              "recovery_phrase": "Zawsze możesz uzyskać dostęp do swojego Klucza Głównego, korzystając z jego frazy odzyskiwania.",
-              "storage": "Upewnij się, że zapiszesz ją w bezpiecznym i prywatnym miejscu!"
-            },
             "protocols": {
               "nostr": "Nostr"
             }
           },
-          "inputs": {},
           "import": {
             "description": "Użyj frazy odzyskiwania, aby zaimportować swój Klucz Główny do Alby.",
             "button": "Zaimportuj Klucz Główny",
@@ -480,15 +474,6 @@
           "mismatched_password": "Hasła się nie zgadzają."
         },
         "success": "Hasło zmienione pomyślnie"
-      },
-      "nostr": {
-        "title": "Nostr",
-        "hint": "jest prostym i otwartym protokołem mającym na celu stworzenie sieci społecznościowych opornych na cenzurę. Nostr działa przy użyciu kluczy kryptograficznych. Aby coś opublikować podpisujesz to swoim kluczem i wysyłasz do kilku przekaźników. Możesz użyć Alby aby zarządzać swoim kluczem Nostr. Następnie, różne aplikacje umożliwią Ci używanie klucze z rozszerzenia Alby.",
-        "private_key": {
-          "title": "Klucz prywatny",
-          "subtitle": "Ta sekcja została przeniesiona do strony z kontami, ponieważ klucze są teraz związane z konkretnymi kontami.",
-          "go_to": "Przejdź do kont"
-        }
       }
     },
     "send": {
