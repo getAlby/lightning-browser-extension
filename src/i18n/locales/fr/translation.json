@@ -401,15 +401,6 @@
           "mismatched_password": "Les mots de passe ne correspondent pas."
         },
         "success": "Le mot de passe a été changé avec succès"
-      },
-      "nostr": {
-        "title": "Nostr",
-        "hint": "est un protocole simple et ouvert qui vise à créer des réseaux sociaux résistants à la censure. Nostr fonctionne avec des clés cryptographiques. Pour publier quelque chose vous le signez avec votre clé et l'envoyez à plusieurs relais. Vous pouvez utiliser Alby pour gérer votre clé Nostr. De nombreuses applications Nostr vous permettront alors d'utiliser simplement la clé de l'extension Alby.",
-        "private_key": {
-          "title": "Clé privée",
-          "subtitle": "Cette section est déplacée vers la page des comptes car les clés sont désormais spécifiques au compte.",
-          "go_to": "Aller aux comptes"
-        }
       }
     },
     "send": {
