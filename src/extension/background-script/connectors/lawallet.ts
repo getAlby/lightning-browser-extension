@@ -282,6 +282,7 @@ export default class LaWallet implements Connector {
       });
     });
   }
+
   async checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {
     const zapReceipts = await this.getZapReceipts(10, this.last_invoice_check);
     zapReceipts.forEach(this.onZapReceipt.bind(this));
