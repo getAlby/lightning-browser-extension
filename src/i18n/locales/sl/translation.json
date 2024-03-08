@@ -323,18 +323,11 @@
           "generate": {
             "title": "Generiraj nov Glavni ključ",
             "button": "Generiraj Glavni ključ",
-            "confirm": "Naredil sem varnostno kopijo fraze in shranil na varno mesto.",
-            "description": "Glavni ključ ti omogoča interakcijo z različnimi protokoli, kot so: Nostr, Bitcoin omrežje ali LNURL-Auth.",
-            "error_confirm": "Prosim potrdi, da si naredil varnostno kopijo obnovitvene fraze."
+            "description": "Glavni ključ ti omogoča interakcijo z različnimi protokoli, kot so: Nostr, Bitcoin omrežje ali LNURL-Auth."
           },
           "backup": {
             "save": "Shrani Glavni ključ",
             "button": "Poglej obnovitveno frazo",
-            "items": {
-              "words": "Obnovitvena fraza je sestavljena iz 12 besed, ki delujejo kot geslo, a se ne more spremeniti ali obnoviti če se izgubi.",
-              "storage": "Bodi prepričan, da je zapisano na varnem in skrivnem mestu!",
-              "recovery_phrase": "Do Glavnega ključa lahko dostopaš z uporabo obnovitvene fraze."
-            },
             "protocols": {
               "nostr": "Nostr"
             }
@@ -344,7 +337,6 @@
             "description": "Uporabi obnovitveno frazo za uvoz Gladvnega ključa v Alby.",
             "button": "Uvozi Glavni ključ"
           },
-          "inputs": {},
           "lnurl": {
             "title": "Prijava z Lightning",
             "use_mnemonic": "Uporabi Glavni ključ za prijavo v Lightning omogočene aplikacije (LNURL Auth)"
