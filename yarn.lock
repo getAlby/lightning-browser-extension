@@ -7238,18 +7238,6 @@ nostr-tools@^1.17.0:
     "@scure/bip32" "1.3.1"
     "@scure/bip39" "1.2.1"
 
-nostr-tools@^1.17.0:
-  version "1.17.0"
-  resolved "https://registry.yarnpkg.com/nostr-tools/-/nostr-tools-1.17.0.tgz#b6f62e32fedfd9e68ec0a7ce57f74c44fc768e8c"
-  integrity sha512-LZmR8GEWKZeElbFV5Xte75dOeE9EFUW/QLI1Ncn3JKn0kFddDKEfBbFN8Mu4TMs+L4HR/WTPha2l+PPuRnJcMw==
-  dependencies:
-    "@noble/ciphers" "0.2.0"
-    "@noble/curves" "1.1.0"
-    "@noble/hashes" "1.3.1"
-    "@scure/base" "1.1.1"
-    "@scure/bip32" "1.3.1"
-    "@scure/bip39" "1.2.1"
-
 npm-run-path@^4.0.1:
   version "4.0.1"
   resolved "https://registry.npmjs.org/npm-run-path/-/npm-run-path-4.0.1.tgz"
