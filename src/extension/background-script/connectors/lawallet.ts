@@ -162,11 +162,20 @@ export default class LaWallet implements Connector {
   }
 
   async getBalance(): Promise<GetBalanceResponse> {
-    const balanceEvent = await this.relay.get({
+    const filter = {
       authors: [this.config.ledgerPublicKey],
       kinds: [31111],
       "#d": [`balance:BTC:${this.public_key}`],
-    });
+    };
+
+    const events: Event[] = await LaWallet.request(
+      this.config.apiEndpoint,
+      "POST",
+      "/nostr/fetch",
+      { body: filter }
+    );
+
+    const balanceEvent = events[0];
 
     return {
       data: {
