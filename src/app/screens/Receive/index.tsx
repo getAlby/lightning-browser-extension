@@ -1,12 +1,13 @@
-import {
-  BitcoinIcon,
-  CaretLeftIcon,
-  CopyIcon,
-} from "@bitcoin-design/bitcoin-icons-react/outline";
+import { BitcoinIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import Container from "@components/Container";
 import Header from "@components/Header";
 import IconButton from "@components/IconButton";
-import { PopiconsBoltLine, PopiconsWithdrawalLine } from "@popicons/react";
+import {
+  PopiconsBoltLine,
+  PopiconsChevronLeftLine,
+  PopiconsCopyLine,
+  PopiconsWithdrawalLine,
+} from "@popicons/react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -55,7 +56,7 @@ function Receive() {
             onClick={() => {
               navigate(-1);
             }}
-            icon={<CaretLeftIcon className="w-4 h-4" />}
+            icon={<PopiconsChevronLeftLine className="w-5 h-5" />}
           />
         }
       >
@@ -112,7 +113,7 @@ function Receive() {
                         }}
                       >
                         {lightningAddress}
-                        <CopyIcon className="w-4 h-4" />
+                        <PopiconsCopyLine className="w-4 h-4" />
                       </a>
                     )}
                   </div>

@@ -1,8 +1,5 @@
-import {
-  ArrowDownIcon,
-  ArrowUpIcon,
-} from "@bitcoin-design/bitcoin-icons-react/outline";
 import Loading from "@components/Loading";
+import { PopiconsArrowDownSolid, PopiconsArrowUpSolid } from "@popicons/react";
 
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -62,11 +59,11 @@ export default function TransactionsTable({
                   <div className="flex items-center">
                     {type == "outgoing" ? (
                       <div className="flex justify-center items-center bg-orange-100 dark:bg-[#261911] rounded-full w-8 h-8">
-                        <ArrowUpIcon className="w-4 h-4 text-orange-400 stroke-[4px]" />
+                        <PopiconsArrowUpSolid className="w-5 h-5 stroke-orange-400 text-orange-400 stroke-[1px]" />
                       </div>
                     ) : (
                       <div className="flex justify-center items-center bg-green-100 dark:bg-[#0F1E1A] rounded-full w-8 h-8">
-                        <ArrowDownIcon className="w-4 h-4 text-green-400 stroke-[4px]" />
+                        <PopiconsArrowDownSolid className="w-5 h-5 stroke-green-400 text-green-400 stroke-[1px]" />
                       </div>
                     )}
                   </div>

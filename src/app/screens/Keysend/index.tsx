@@ -1,4 +1,3 @@
-import { CaretLeftIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import Button from "@components/Button";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import ContentMessage from "@components/ContentMessage";
@@ -7,6 +6,7 @@ import IconButton from "@components/IconButton";
 import ResultCard from "@components/ResultCard";
 import SatButtons from "@components/SatButtons";
 import DualCurrencyField from "@components/form/DualCurrencyField";
+import { PopiconsChevronLeftLine } from "@popicons/react";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -103,7 +103,7 @@ function Keysend() {
         headerLeft={
           <IconButton
             onClick={() => navigate("/send")}
-            icon={<CaretLeftIcon className="w-4 h-4" />}
+            icon={<PopiconsChevronLeftLine className="w-5 h-5" />}
           />
         }
       >

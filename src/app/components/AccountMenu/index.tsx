@@ -1,10 +1,12 @@
 import {
   AddressBookIcon,
-  CaretDownIcon,
   GlobeIcon,
-  PlusIcon,
-  WalletIcon,
 } from "@bitcoin-design/bitcoin-icons-react/filled";
+import {
+  PopiconsChevronBottomLine,
+  PopiconsPlusSolid,
+  PopiconsWalletSolid,
+} from "@popicons/react";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -88,7 +90,7 @@ function AccountMenu({ showOptions = true }: Props) {
                 )}
               </div>
             </div>
-            <CaretDownIcon className="h-4 w-4 dark:text-white" />
+            <PopiconsChevronBottomLine className="h-5 w-5 dark:text-white" />
             <span className="sr-only">{t("screen_reader")}</span>
           </div>
         </Menu.Button>
@@ -127,7 +129,7 @@ function AccountMenu({ showOptions = true }: Props) {
               openOptions(`accounts/${authAccount?.id}`);
             }}
           >
-            <WalletIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300 shrink-0" />
+            <PopiconsWalletSolid className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300 shrink-0" />
             {t("options.account.wallet_settings")}
           </Menu.ItemButton>
           {(isAlbyLNDHubAccount(
@@ -192,7 +194,7 @@ function AccountMenu({ showOptions = true }: Props) {
                   openOptions("accounts/new");
                 }}
               >
-                <PlusIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
+                <PopiconsPlusSolid className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
                 {t("options.account.add")}
               </Menu.ItemButton>
               <Menu.ItemButton

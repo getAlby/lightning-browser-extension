@@ -1,4 +1,4 @@
-import { CaretRightIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
+import { PopiconsChevronRightLine } from "@popicons/react";
 
 export type IconLinkCardProps = {
   title: string;
@@ -28,7 +28,7 @@ export function IconLinkCard({
         </div>
       </div>
       <div className="flex-shrink-0 flex justify-end text-gray-400 dark:text-neutral-500 ">
-        <CaretRightIcon className="w-8" />
+        <PopiconsChevronRightLine className="w-8" />
       </div>
     </div>
   );

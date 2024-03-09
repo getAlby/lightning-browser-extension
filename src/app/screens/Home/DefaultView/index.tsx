@@ -1,4 +1,4 @@
-import { ArrowRightIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
+import { PopiconsArrowRightLine } from "@popicons/react";
 import Button from "@components/Button";
 import Loading from "@components/Loading";
 import TransactionsTable from "@components/TransactionsTable";
@@ -279,7 +279,7 @@ const DefaultView: FC<Props> = (props) => {
                   className="flex justify-center items-center mt-2"
                 >
                   {t("default_view.see_all")}
-                  <ArrowRightIcon className="ml-2 w-4 h-4" />
+                  <PopiconsArrowRightLine className="ml-2 w-5 h-5" />
                 </Hyperlink>
               </div>
             )}

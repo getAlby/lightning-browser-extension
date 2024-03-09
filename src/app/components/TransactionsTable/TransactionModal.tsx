@@ -1,11 +1,9 @@
 import {
-  CaretDownIcon,
-  CaretUpIcon,
-} from "@bitcoin-design/bitcoin-icons-react/filled";
-import {
-  ArrowDownIcon,
-  ArrowUpIcon,
-} from "@bitcoin-design/bitcoin-icons-react/outline";
+  PopiconsArrowDownSolid,
+  PopiconsArrowUpSolid,
+  PopiconsChevronBottomLine,
+  PopiconsChevronTopLine,
+} from "@popicons/react";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -59,11 +57,11 @@ export default function TransactionModal({
           <div className="flex items-center justify-center">
             {getTransactionType(transaction) == "outgoing" ? (
               <div className="flex justify-center items-center bg-orange-100 dark:bg-[#261911] rounded-full p-4">
-                <ArrowUpIcon className="w-8 h-8 text-orange-400 stroke-[5px]" />
+                <PopiconsArrowUpSolid className="w-11 h-11 text-orange-400 stroke-[1px] stroke-orange-400" />
               </div>
             ) : (
               <div className="flex justify-center items-center bg-green-100 dark:bg-[#0F1E1A] rounded-full p-4">
-                <ArrowDownIcon className="w-8 h-8 text-green-400 stroke-[5px]" />
+                <PopiconsArrowDownSolid className="w-11 h-11 text-green-400 stroke-[1px] stroke-green-400" />
               </div>
             )}
           </div>
@@ -182,12 +180,12 @@ export default function TransactionModal({
                   {showMoreFields ? (
                     <>
                       {tCommon("actions.hide")}
-                      <CaretUpIcon className="h-4 w-4 inline-flex" />
+                      <PopiconsChevronTopLine className="h-5 w-5 inline-flex" />
                     </>
                   ) : (
                     <>
                       {tCommon("actions.more")}
-                      <CaretDownIcon className="h-4 w-4 inline-flex" />
+                      <PopiconsChevronBottomLine className="h-5 w-5 inline-flex" />
                     </>
                   )}
                 </Hyperlink>

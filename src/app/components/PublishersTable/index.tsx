@@ -1,4 +1,4 @@
-import { CaretRightIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
+import { PopiconsChevronRightLine } from "@popicons/react";
 import { useTranslation } from "react-i18next";
 import BadgesList from "~/app/components/BadgesList";
 import { useSettings } from "~/app/context/SettingsContext";
@@ -84,7 +84,7 @@ export default function PublishersTable({
                 </div>
               </td>
               <td className="w-10">
-                <CaretRightIcon className="h-6 w-6 text-gray-500" />
+                <PopiconsChevronRightLine className="h-6 w-6 text-gray-500" />
               </td>
             </tr>
           ))}

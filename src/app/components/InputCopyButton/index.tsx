@@ -1,5 +1,4 @@
-import { CopyIcon as CopyFilledIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
-import { CopyIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
+import { PopiconsCopyLine, PopiconsCopySolid } from "@popicons/react";
 import { useState } from "react";
 import toast from "~/app/components/Toast";
 import { classNames } from "~/app/utils";
@@ -11,7 +10,7 @@ type Props = {
 
 function InputCopyButton({ value, className }: Props) {
   const [copied, setCopied] = useState(false);
-  const CurrentIcon = copied ? CopyFilledIcon : CopyIcon;
+  const CurrentIcon = copied ? PopiconsCopySolid : PopiconsCopyLine;
   return (
     <button
       type="button"
