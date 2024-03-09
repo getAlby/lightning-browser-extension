@@ -838,7 +838,7 @@
         "name": "StartOS"
       }
     },
-    "confirm_add_account": {
+    "confirm_add_wallet": {
       "title": "Konto hinzufügen",
       "content": "Diese Webseite möchte ein Konto hinzufügen ({{connector}}):",
       "tor_info": "Um sich über das TOR-Netzwerk zu verbinden, musst du zunächst die Alby-Begleit-App installieren:"
@@ -970,7 +970,7 @@
     }
   },
   "components": {
-    "account_menu": {
+    "wallet_menu": {
       "options": {
         "account": {
           "go_to_web_wallet": "Verwalte dein Web-Konto"

@@ -799,7 +799,7 @@
         "invalid_credentials": "Hasło niepoprawne. Sprawdź swoje hasło i adres email i spróbuj ponownie."
       }
     },
-    "account_menu": {
+    "wallet_menu": {
       "screen_reader": "Przełącznik rozwijany"
     },
     "publishers_table": {

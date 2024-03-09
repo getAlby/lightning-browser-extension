@@ -17,7 +17,7 @@ function ConfirmAddAccount() {
   const navState = useNavigationState();
   const { t: tCommon } = useTranslation("common");
   const { t } = useTranslation("translation", {
-    keyPrefix: "confirm_add_account",
+    keyPrefix: "confirm_add_wallet",
   });
 
   const name = navState.args?.name as string;

@@ -660,7 +660,7 @@
         "invalid_credentials": "Ugyldig adgangskode. Kontroller din adgangskode og e-mailadresse, og prøv igen."
       }
     },
-    "account_menu": {
+    "wallet_menu": {
       "screen_reader": "Skift drop-down"
     },
     "publishers_table": {

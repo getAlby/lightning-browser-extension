@@ -737,7 +737,7 @@
         "invalid_credentials": "Chybné heslo. Prosím zkontrolujte své heslo a emailovou adresu a zkuste to znovu."
       }
     },
-    "account_menu": {
+    "wallet_menu": {
       "screen_reader": "Přepnout rozbalovací nabídku"
     },
     "publishers_table": {

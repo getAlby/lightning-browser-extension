@@ -732,7 +732,7 @@
         "name": "StartOS"
       }
     },
-    "confirm_add_account": {
+    "confirm_add_wallet": {
       "title": "Lägg till konto",
       "content": "Den här webbplatsen vill lägga till ett konto ({{connector}}):",
       "tor_info": "För att kunna ansluta via TOR-nätverket måste du först installera Alby kompanion appen:"
@@ -1023,7 +1023,7 @@
         "invalid_credentials": "Ogitligt lösenord. Kontrollera ditt lösenord, e-postadress och försök igen."
       }
     },
-    "account_menu": {
+    "wallet_menu": {
       "screen_reader": "Öppna droppmeny",
       "options": {
         "account": {

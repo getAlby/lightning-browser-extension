@@ -654,7 +654,7 @@
         "label": "Proračun"
       }
     },
-    "account_menu": {
+    "wallet_menu": {
       "options": {
         "account": {
           "go_to_web_wallet": "Upravljaj svoj spletni račun"

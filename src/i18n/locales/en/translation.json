@@ -905,7 +905,7 @@
       "allow": "Allow this website to execute:",
       "always_allow": "Remember my choice and don't ask again"
     },
-    "confirm_add_account": {
+    "confirm_add_wallet": {
       "title": "Add wallet",
       "content": "This website wants to add an wallet ({{connector}}):",
       "tor_info": "In order to connect through the TOR network you need to first install the Alby companion app:"
@@ -1151,11 +1151,11 @@
         "invalid_credentials": "Invalid password. Please review your password and email address and try again."
       }
     },
-    "account_menu": {
+    "wallet_menu": {
       "screen_reader": "Toggle Dropdown",
       "title": "Switch Wallet",
       "options": {
-        "account": {
+        "wallet": {
           "add": "Connect a Wallet",
           "manage": "Manage Wallets",
           "wallet_settings": "Wallet settings",

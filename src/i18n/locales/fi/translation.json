@@ -555,7 +555,7 @@
         "invalid_credentials": "Virheellinen salasana. Tarkista salasanasi ja sähköpostiosoitteesi ja yritä uudelleen."
       }
     },
-    "account_menu": {
+    "wallet_menu": {
       "screen_reader": "Vaihda pudotusvalikko"
     },
     "publishers_table": {

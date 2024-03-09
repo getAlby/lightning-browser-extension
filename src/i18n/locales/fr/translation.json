@@ -666,7 +666,7 @@
         "invalid_credentials": "Mot de passe incorrect. Veuillez vérifier votre mot de passe et votre adresse e-mail et réessayer."
       }
     },
-    "account_menu": {
+    "wallet_menu": {
       "screen_reader": "Basculer la liste déroulante"
     },
     "publishers_table": {

@@ -693,7 +693,7 @@
         "name": "Umbrel"
       }
     },
-    "confirm_add_account": {
+    "confirm_add_wallet": {
       "title": "添加帐户",
       "content": "此网站想要添加一个帐户（{{connector}}）：",
       "tor_info": "为了通过 TOR 网络进行连接，你需要先安装 Alby 配套应用程序："
@@ -871,7 +871,7 @@
         "if_ssl_errors": "如果有SSL错误（如ERR_CERT_AUTHORITY_INVALID），点击 \"高级 \"并继续接受凭证。"
       }
     },
-    "account_menu": {
+    "wallet_menu": {
       "options": {
         "account": {
           "go_to_web_wallet": "管理你的网络帐户"

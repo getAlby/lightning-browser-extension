@@ -700,7 +700,7 @@
         "name": "StartOS"
       }
     },
-    "confirm_add_account": {
+    "confirm_add_wallet": {
       "content": "此網站想要添加一個帳戶（{{connector}}）：",
       "title": "添加帳戶",
       "tor_info": "為了通過 TOR 網絡進行連接，你需要先安裝 Alby 配套應用程式："
@@ -926,7 +926,7 @@
         "invalid_credentials": "密碼無效。請檢查你的密碼和電子郵件地址，然後重試。"
       }
     },
-    "account_menu": {
+    "wallet_menu": {
       "screen_reader": "切換下拉菜單",
       "options": {
         "account": {

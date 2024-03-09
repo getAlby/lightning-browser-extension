@@ -660,7 +660,7 @@
         "invalid_credentials": "Password non valida. Controlla la password e l'indirizzo e-mail e riprova."
       }
     },
-    "account_menu": {
+    "wallet_menu": {
       "screen_reader": "Attiva/disattiva menu a tendina"
     },
     "publishers_table": {

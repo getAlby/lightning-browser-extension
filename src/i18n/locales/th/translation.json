@@ -742,7 +742,7 @@
       "allow": "อนุญาตให้เว็บไซต์นี้ดำเนินการ:",
       "always_allow": "จำตัวเลือกของฉันและอย่าถามอีก"
     },
-    "confirm_add_account": {
+    "confirm_add_wallet": {
       "title": "เพื่มบัญชี",
       "content": "เว็บไซต์นี้ต้องการเพิ่มบัญชี ({{connector}}):",
       "tor_info": "ในการเชื่อมต่อผ่านเครือข่าย TOR คุณต้องติดตั้ง Alby companion app เสียก่อน:"
@@ -1004,7 +1004,7 @@
       },
       "open_location": "เปิดเว็บไซต์"
     },
-    "account_menu": {
+    "wallet_menu": {
       "screen_reader": "เมนูแบบเลื่อนลง",
       "options": {
         "account": {

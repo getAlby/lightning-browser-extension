@@ -766,7 +766,7 @@
         "password_reset": "¿Olvidó su contraseña? Haga clic aquí"
       }
     },
-    "account_menu": {
+    "wallet_menu": {
       "options": {
         "account": {
           "go_to_web_wallet": "Administra tu cuenta de Alby"

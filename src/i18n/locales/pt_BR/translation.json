@@ -779,7 +779,7 @@
       "description": "Escolha com qual aplicativo {{name}} você gostaria de se conectar",
       "title": "Conectar em {{name}}"
     },
-    "confirm_add_account": {
+    "confirm_add_wallet": {
       "content": "Este site deseja adicionar uma conta ({{connector}}):",
       "title": "Adicionar conta",
       "tor_info": "Para se conectar através da rede TOR, você precisa primeiro instalar o aplicativo Alby companion:"
@@ -1074,7 +1074,7 @@
         "invalid_credentials": "Senha incorreta. Verifique se sua senha e endereço de e-mail estão corretos e tente novamente."
       }
     },
-    "account_menu": {
+    "wallet_menu": {
       "options": {
         "account": {
           "go_to_web_wallet": "Acessar sua conta na web"
