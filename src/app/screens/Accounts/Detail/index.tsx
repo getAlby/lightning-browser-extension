@@ -35,7 +35,7 @@ function AccountDetail() {
   const auth = useAccount();
   const { accounts, getAccounts } = useAccounts();
   const { t } = useTranslation("translation", {
-    keyPrefix: "accounts.account_view",
+    keyPrefix: "wallets.wallet_view",
   });
   const { t: tCommon } = useTranslation("common");
   const { isLoading: isLoadingSettings } = useSettings();

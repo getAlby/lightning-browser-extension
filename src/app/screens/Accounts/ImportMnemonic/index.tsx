@@ -16,7 +16,7 @@ function ImportMnemonic() {
   const { t: tCommon } = useTranslation("common");
   const navigate = useNavigate();
   const { t } = useTranslation("translation", {
-    keyPrefix: "accounts.account_view.mnemonic",
+    keyPrefix: "wallets.wallet_view.mnemonic",
   });
 
   const [mnemonic, setMnemonic] = useState<string>("");

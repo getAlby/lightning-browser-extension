@@ -17,7 +17,7 @@ import api from "~/common/lib/api";
 
 function NostrSetup() {
   const { t } = useTranslation("translation", {
-    keyPrefix: "accounts.account_view.nostr.setup",
+    keyPrefix: "wallets.wallet_view.nostr.setup",
   });
   const navigate = useNavigate();
   const [step, setStep] = useState<"start" | "import">("start");

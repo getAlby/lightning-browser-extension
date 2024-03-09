@@ -4,7 +4,7 @@ import FaceSurpriseIcon from "~/app/icons/FaceSurpriseIcon";
 
 function MnemonicDescription() {
   const { t } = useTranslation("translation", {
-    keyPrefix: "accounts.account_view.mnemonic",
+    keyPrefix: "wallets.wallet_view.mnemonic",
   });
 
   return (

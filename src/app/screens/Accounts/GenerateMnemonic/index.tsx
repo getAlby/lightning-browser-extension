@@ -16,7 +16,7 @@ function GenerateMnemonic() {
   const { id } = useParams() as { id: string };
 
   const { t } = useTranslation("translation", {
-    keyPrefix: "accounts.account_view.mnemonic",
+    keyPrefix: "wallets.wallet_view.mnemonic",
   });
   const { t: tCommon } = useTranslation("common");
 

@@ -13,7 +13,7 @@ import api from "~/common/lib/api";
 function BackupMnemonic() {
   const { t: tCommon } = useTranslation("common");
   const { t } = useTranslation("translation", {
-    keyPrefix: "accounts.account_view.mnemonic",
+    keyPrefix: "wallets.wallet_view.mnemonic",
   });
   const navigate = useNavigate();
 
