@@ -22,7 +22,7 @@
         "connection_taking_long": "Yhteyden muodostaminen kestää odotettua kauemmin... Ovatko tietosi oikein? Onko solmusi tavoitettavissa?",
         "contact_support": "Jos tarvitset apua, ota yhteyttä osoitteeseen support@getalby.com",
         "actions": {
-          "delete_edit_account": "Poista virheellinen tili ja muokkaa uudelleen"
+          "delete_edit_wallet": "Poista virheellinen tili ja muokkaa uudelleen"
         }
       }
     },

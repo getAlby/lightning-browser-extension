@@ -22,7 +22,7 @@
         "connection_taking_long": "Próba połączenia trwa dłużej niż oczekiwano... Czy dane do połączenia są poprawne? Czy Twój węzeł jest osiągalny?",
         "contact_support": "Jeśli potrzebujesz pomocy, skontaktuj się z support@getalby.com",
         "actions": {
-          "delete_edit_account": "Skasuj niepoprawne konto i wyedytuj ponownie"
+          "delete_edit_wallet": "Skasuj niepoprawne konto i wyedytuj ponownie"
         }
       },
       "pin_extension": {

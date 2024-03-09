@@ -22,7 +22,7 @@
         "connection_taking_long": "Incercarea de conectare dureaza mai mult decat ar trebui... Datele de conectare sunt corecte? Nodul tau este accesibil?",
         "contact_support": "Daca ai nevoie de ajutor te rugam sa contactezi support@getalby.com",
         "actions": {
-          "delete_edit_account": "Sterge contul invalid si editeaza din nou"
+          "delete_edit_wallet": "Sterge contul invalid si editeaza din nou"
         }
       }
     },

@@ -25,7 +25,7 @@
         "connection_taking_long": "Trying to connect takes longer than expected... Are your details correct? Is your node reachable?",
         "contact_support": "If you need help please contact support@getalby.com",
         "actions": {
-          "delete_edit_account": "Delete invalid wallet and edit again"
+          "delete_edit_wallet": "Delete invalid wallet and edit again"
         }
       },
       "pin_extension": {

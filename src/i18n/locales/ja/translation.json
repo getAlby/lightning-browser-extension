@@ -22,7 +22,7 @@
         "connection_taking_long": "接続に時間がかかっています…設定は正しいですか？ノードにアクセス可能か確認してください。",
         "contact_support": "サポートが必要な場合は support@getalby.com までご連絡ください。",
         "actions": {
-          "delete_edit_account": "無効なアカウントを削除して再編集"
+          "delete_edit_wallet": "無効なアカウントを削除して再編集"
         }
       },
       "pin_extension": {

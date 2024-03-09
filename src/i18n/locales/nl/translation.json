@@ -22,7 +22,7 @@
         "connection_taking_long": "Verbinden duurt langer dan verwacht... Kloppen uw gegevens? Is uw node bereikbaar?",
         "contact_support": "Hulp nodig? neem contact op met support@getalby.com",
         "actions": {
-          "delete_edit_account": "Verwijderd invalide account en probeer opnieuw"
+          "delete_edit_wallet": "Verwijderd invalide account en probeer opnieuw"
         }
       }
     },

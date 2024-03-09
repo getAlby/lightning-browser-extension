@@ -25,7 +25,7 @@
         "connection_taking_long": "A tentativa de conexão está demorando mais do que o esperado... Os dados estão corretos? O servidor está acessível?",
         "contact_support": "Se precisar de ajuda, entre em contato com support@getalby.com",
         "actions": {
-          "delete_edit_account": "Remover conta inválida e editar novamente"
+          "delete_edit_wallet": "Remover conta inválida e editar novamente"
         }
       },
       "pin_extension": {

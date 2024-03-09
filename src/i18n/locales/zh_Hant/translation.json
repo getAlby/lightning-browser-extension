@@ -22,7 +22,7 @@
         "connection_taking_long": "嘗試連接的時間比預期的要長...你的詳細信息是否正確？你的節點是否可訪問？",
         "contact_support": "如果你需要幫助，請聯繫 support@getalby.com",
         "actions": {
-          "delete_edit_account": "刪除無效帳戶並重新編輯"
+          "delete_edit_wallet": "刪除無效帳戶並重新編輯"
         }
       },
       "pin_extension": {

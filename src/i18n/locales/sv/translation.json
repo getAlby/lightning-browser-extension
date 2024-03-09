@@ -22,7 +22,7 @@
         "connection_taking_long": "Anslutningen tar längre tid än förväntat... Är inställningarna korrekta? Är din nod nåbar?",
         "contact_support": "Om du behöver hjälp, kontakta support@getalby.com",
         "actions": {
-          "delete_edit_account": "Radera ogiltigt konto och redigera igen"
+          "delete_edit_wallet": "Radera ogiltigt konto och redigera igen"
         }
       },
       "pin_extension": {

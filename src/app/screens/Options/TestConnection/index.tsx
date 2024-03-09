@@ -95,7 +95,7 @@ export default function TestConnection() {
                 </p>
 
                 <Button
-                  label={t("actions.delete_edit_account")}
+                  label={t("actions.delete_edit_wallet")}
                   onClick={handleEdit}
                   primary
                 />

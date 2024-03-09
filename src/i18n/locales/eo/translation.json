@@ -22,7 +22,7 @@
         "connection_taking_long": "Provi konektiĝi daŭras pli longe ol atendite... Ĉu viaj detaloj estas ĝustaj? Ĉu via nodo estas atingebla?",
         "contact_support": "Se vi bezonas helpon bonvolu kontakti support@getalby.com",
         "actions": {
-          "delete_edit_account": "Forigu nevalidan konton kaj redaktu denove"
+          "delete_edit_wallet": "Forigu nevalidan konton kaj redaktu denove"
         }
       }
     },

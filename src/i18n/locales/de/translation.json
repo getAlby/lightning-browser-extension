@@ -20,7 +20,7 @@
       "test_connection": {
         "review_connection_details": "Bitte überprüfe deine Verbindungsdaten.",
         "actions": {
-          "delete_edit_account": "Ungültiges Konto löschen und erneut bearbeiten"
+          "delete_edit_wallet": "Ungültiges Konto löschen und erneut bearbeiten"
         },
         "ready": "Großartig, du kannst jetzt loslegen!",
         "initializing": "Dein Konto wird initialisiert. Bitte warte, dies kann eine Minute dauern...",
@@ -439,7 +439,6 @@
       "account_view": {
         "title2": "Konto",
         "title1": "Kontoeinstellung",
-
         "name": {
           "title": "Name anzeigen",
           "placeholder": "Konto Anzeigename"

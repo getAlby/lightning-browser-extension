@@ -22,7 +22,7 @@
         "connection_taking_long": "Conectarse está llevando más tiempo de lo esperado... ¿Sus datos son correctos? ¿Se puede acceder a su nodo?",
         "contact_support": "Si necesita ayuda, póngase en contacto con support@getalby.com",
         "actions": {
-          "delete_edit_account": "Eliminar una cuenta no válida y volver a editarla"
+          "delete_edit_wallet": "Eliminar una cuenta no válida y volver a editarla"
         }
       },
       "pin_extension": {

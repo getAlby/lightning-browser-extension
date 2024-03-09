@@ -22,7 +22,7 @@
         "connection_taking_long": "Essayer de se connecter prend plus de temps que prévu... Vos informations sont-elles correctes ? Votre nœud est-il accessible ?",
         "contact_support": "Si vous avez besoin d'aide, veuillez contacter support@getalby.com",
         "actions": {
-          "delete_edit_account": "Supprimer le compte invalide et modifier à nouveau"
+          "delete_edit_wallet": "Supprimer le compte invalide et modifier à nouveau"
         }
       }
     },
