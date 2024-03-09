@@ -389,7 +389,11 @@
       "title": "Wallets",
       "account_view": {
         "title1": "Wallet Settings",
+        "description": "Settings related to this particular instance of the connected wallet. If you reconnect, settings related to keys or display name will have to be set again.",
         "title2": "Account",
+        "general": {
+          "title": "General"
+        },
         "name": {
           "title": "Display Name",
           "placeholder": "Wallet Display Name"

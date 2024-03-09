@@ -174,10 +174,16 @@ function AccountDetail() {
   ) : (
     <div>
       <Container>
-        <div className="flex justify-between items-center pt-8 pb-4">
-          <h2 className="text-2xl font-bold dark:text-white">{t("title2")}</h2>
+        <div className="flex justify-between items-center pt-8 pb-2">
+          <h2 className="text-2xl font-bold dark:text-white">{t("title1")}</h2>
         </div>
+        <p className="mb-4 text-gray-500 dark:text-neutral-500 text-sm">
+          {t("description")}
+        </p>
 
+        <h2 className="mb-4 text-xl font-bold dark:text-white">
+          {t("general.title")}
+        </h2>
         <div>
           <div className="shadow bg-white rounded-md sm:overflow-hidden p-6 dark:bg-surface-01dp flex flex-col gap-4">
             <form
@@ -309,7 +315,7 @@ function AccountDetail() {
             )}
           </div>
 
-          <h2 className="text-2xl mt-12 mb-6 font-bold dark:text-white">
+          <h2 className="text-xl mt-8 mb-4 font-bold dark:text-white">
             {t("mnemonic.title")}
           </h2>
 
@@ -504,7 +510,7 @@ function AccountDetail() {
             </div>
           </div>
 
-          <div className="relative flex py-5 mt-12 items-center">
+          <div className="relative flex py-5 mt-8 items-center">
             <div className="flex-grow border-t border-gray-300 dark:border-gray-700"></div>
             <span className="flex-shrink mx-4 text-gray-600 dark:text-gray-400 fw-bold">
               ⛔️ Danger Zone
