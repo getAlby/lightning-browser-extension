@@ -107,12 +107,6 @@ const connectorMap: { [key: string]: ConnectorRoute } = {
     title: i18n.t("translation:choose_connector.lnd.title"),
     logo: lnd,
   },
-  "voltage-lnd": {
-    path: "lnd",
-    element: <ConnectVoltage />,
-    title: i18n.t("translation:choose_connector.lnd.title"),
-    logo: lnd,
-  },
   lnc: {
     path: "lnc",
     element: <ConnectLnc />,
@@ -256,8 +250,12 @@ function getConnectorRoutes(): ConnectorRoute[] {
     connectorMap["lnc"],
     connectorMap["commando"],
     connectorMap["lnbits"],
-    connectorMap["lnd-hub-go"],
-    connectorMap["eclair"],
+    connectorMap["nwc"],
+    getDistribution("umbrel"),
+    getDistribution("startos"),
+    getDistribution("raspiblitz"),
+    getDistribution("mynode"),
+    getDistribution("citadel"),
     connectorMap["btcpay"],
     connectorMap["voltage"],
     connectorMap[galoyPaths.blink],
@@ -269,6 +267,8 @@ function getConnectorRoutes(): ConnectorRoute[] {
     getDistribution("raspiblitz"),
     connectorMap["nwc"],
     connectorMap["lawallet"],
+    connectorMap["lnd-hub-go"],
+    connectorMap["eclair"],
   ];
 }
 
