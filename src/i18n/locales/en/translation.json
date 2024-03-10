@@ -46,15 +46,6 @@
         "point3": "Both self-custody and custodial options",
         "point4": "No lightning and nostr address"
       },
-      "voltage": {
-        "title": "Voltage Cloud Node",
-        "description": "Great if you don't mind paying for a lightning node cloud service.",
-        "connect": "Connect",
-        "point1": "Start instantly, no waiting for an invite",
-        "point2": "No transaction or volume limits",
-        "point3": "Paid cloud service",
-        "point4": "Unique lightning and nostr address"
-      },
       "alby": {
         "title": "Alby Account",
         "description": "Ideal for beginners or anyone looking for a great daily spending wallet.",
