@@ -220,7 +220,6 @@ export default class LaWallet implements Connector {
       return this.getPaymentStatus(event);
     } catch (e) {
       console.error(e);
-      console.error(e);
       if (e instanceof Error) toast.error(`${e.message}`);
       throw e;
     }
