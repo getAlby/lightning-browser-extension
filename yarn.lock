@@ -673,10 +673,10 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.52.0.tgz#78fe5f117840f69dc4a353adf9b9cd926353378c"
   integrity sha512-mjZVbpaeMZludF2fsWLD0Z9gCref1Tk4i9+wddjRvpUNqqcndPkBD09N/Mapey0b3jaXbLm2kICwFv2E64QinA==
 
-"@getalby/sdk@^3.3.0":
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/@getalby/sdk/-/sdk-3.3.0.tgz#176982faecf994bf677944f31ecbb8e0f4032ee1"
-  integrity sha512-Y/RwxIo7iYTsKDaTbDmZME1AuB8v5bw9CmqBN3u6fkI8ibYYi8RgeRW78orwCNKRZFB//ZF4MEpAJBGZ3vNNzQ==
+"@getalby/sdk@^3.4.0":
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/@getalby/sdk/-/sdk-3.4.0.tgz#3251e17435caccc5b6f6448a89736034ed4c0c00"
+  integrity sha512-qzIx6GVs4uc9cFyP1fpqHrMxZqqNwi0dSMcgcFMXlb2QBV1syUaNhEvdyBuQo1s+Y38UkQnRToOMqBAX6jXGwQ==
   dependencies:
     events "^3.3.0"
     nostr-tools "^1.17.0"
@@ -3056,15 +3056,10 @@ caniuse-api@^3.0.0:
     lodash.memoize "^4.1.2"
     lodash.uniq "^4.5.0"
 
-caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001517:
-  version "1.0.30001524"
-  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001524.tgz"
-  integrity sha512-Jj917pJtYg9HSJBF95HVX3Cdr89JUyLT4IZ8SvM5aDRni95swKgYi3TgYLH5hnGfPE/U1dg6IfZ50UsIlLkwSA==
-
-caniuse-lite@^1.0.30001538:
-  version "1.0.30001541"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001541.tgz#b1aef0fadd87fb72db4dcb55d220eae17b81cdb1"
-  integrity sha512-bLOsqxDgTqUBkzxbNlSBt8annkDpQB9NdzdTbO2ooJ+eC/IQcvDspDc058g84ejCelF7vHUx57KIOjEecOHXaw==
+caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001517, caniuse-lite@^1.0.30001538:
+  version "1.0.30001591"
+  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001591.tgz"
+  integrity sha512-PCzRMei/vXjJyL5mJtzNiUCKP59dm8Apqc3PH8gJkMnMXZGox93RbE76jHsmLwmIo6/3nsYIpJtx0O7u5PqFuQ==
 
 chalk@5.3.0:
   version "5.3.0"

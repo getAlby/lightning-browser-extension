@@ -2,7 +2,6 @@
   "translation": {
     "welcome": {
       "set_password": {
-        "description": "此密码将允许你在此设备上解锁 Alby。它无法恢复，但可以稍后更改。",
         "choose_password": {
           "label": "选择解锁密码："
         },
@@ -26,7 +25,6 @@
           "delete_edit_account": "删除无效帐户并重新编辑"
         }
       },
-      "title": "欢迎使用Alby",
       "pin_extension": {
         "title": "固定你的 Alby 扩展",
         "description": "就快完成了。以便方便地使用 Alby，请记住把扩展固定到工具栏：",
@@ -94,7 +92,6 @@
         }
       },
       "btcpay": {
-        "page": {},
         "title": "BTCPay Server",
         "errors": {
           "connection_failed": "连接失败。BTCPay连接URL是否正确且可访问？"
@@ -213,7 +210,6 @@
         }
       },
       "lnc": {
-        "page": {},
         "title": "Lightning Terminal (LNC)",
         "pairing_phrase": {
           "placeholder": "秘密的堆聪短语",
@@ -235,10 +231,6 @@
       }
     },
     "accounts": {
-      "title": "帐户",
-      "actions": {
-        "add_account": "添加帐户"
-      },
       "account_view": {
         "nostr": {
           "errors": {
@@ -303,7 +295,6 @@
             }
           }
         },
-        "title1": "帐户设置",
         "export": {
           "export_uri": "LNDHub凭证URI",
           "scan_qr": "通过扫描二维码将这个钱包导入Zeus或BlueWallet。",
@@ -314,12 +305,9 @@
           "description": "将允许你在移动钱包上连接并使用此帐户，例如 <0>BlueWallet</0> 和 <1>Zeus</1>。"
         },
         "remove": {
-          "title": "删除此帐户",
-          "subtitle": "将删除与此帐户关联的所有限额、付款数据和密钥。",
           "error": "输入的帐户名称不匹配。"
         },
         "actions": {
-          "remove_account": "删除帐户",
           "export": "导出",
           "remove_secretkey": "移除主密钥"
         },
@@ -332,7 +320,6 @@
           "backup": {
             "button": "备份恢复短语",
             "warning": "⚠️ 别忘了将你的恢复短语备份！不备份可能会导致永久失去对你的主密钥、Nostr 身份或使用此密钥管理的资产的访问权限。",
-            "title": "备份你的恢复短语",
             "save": "保存主密钥",
             "protocols": {
               "nostr": "Nostr"
@@ -359,9 +346,7 @@
             "description": "通过使用恢复短语将主密钥导入 Alby。",
             "button": "导入主密钥"
           },
-          "inputs": {
-            "title": "恢复短语"
-          },
+          "inputs": {},
           "lnurl": {
             "title": "闪电登录",
             "use_mnemonic": "使用主密钥登录闪电驱动的应用程序（LNURL Auth）"
@@ -464,7 +449,6 @@
           "label": "更改"
         }
       },
-      "title": "设置",
       "theme": {
         "options": {
           "system": "系统",
@@ -833,7 +817,6 @@
     "success": "成功",
     "description_full": "详细描述",
     "password": "密码",
-    "settings": "设置",
     "connected_sites": "已连接的网站",
     "amount": "金额",
     "optional": "可选",
@@ -889,12 +872,8 @@
       }
     },
     "account_menu": {
-      "title": "切换帐户",
       "options": {
         "account": {
-          "add": "添加新帐户",
-          "manage": "管理帐户",
-          "account_settings": "帐户设置",
           "go_to_web_wallet": "管理你的网络帐户"
         }
       },

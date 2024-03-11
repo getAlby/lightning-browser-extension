@@ -2,7 +2,6 @@
   "translation": {
     "welcome": {
       "set_password": {
-        "description": "",
         "choose_password": {
           "label": ""
         },
@@ -165,7 +164,6 @@
       },
       "btcpay": {
         "title": "",
-        "page": {},
         "config": {
           "label": ""
         },
@@ -186,12 +184,6 @@
         "is_blocked_hint": ""
       }
     },
-    "accounts": {
-      "title": "",
-      "actions": {
-        "add_account": ""
-      }
-    },
     "unlock": {
       "unlock_to_continue": "",
       "unlock_password": "",
@@ -208,7 +200,6 @@
       }
     },
     "settings": {
-      "title": "",
       "browser_notifications": {
         "title": "",
         "subtitle": ""
@@ -417,7 +408,6 @@
     "password": "",
     "success": "",
     "error": "",
-    "settings": "",
     "connected_sites": "",
     "sats_one": "sat",
     "sats_other": "sats",
@@ -518,14 +508,7 @@
       }
     },
     "account_menu": {
-      "screen_reader": "",
-      "title": "",
-      "options": {
-        "account": {
-          "add": "",
-          "manage": ""
-        }
-      }
+      "screen_reader": ""
     },
     "publishers_table": {
       "payments": ""

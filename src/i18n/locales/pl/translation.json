@@ -1,9 +1,7 @@
 {
   "translation": {
     "welcome": {
-      "title": "Witaj w Alby",
       "set_password": {
-        "description": "To hasło pozwoli odblokować rozszerzenie Alby na tym urządzeniu. Nie można go odzyskać ale może być zmienione później.",
         "choose_password": {
           "label": "Wybierz hasło blokady:"
         },
@@ -86,7 +84,6 @@
       },
       "lnc": {
         "title": "Lightning Terminal (LNC)",
-        "page": {},
         "pairing_phrase": {
           "label": "Twoja fraza parująca ",
           "placeholder": "tajna fraza stosu satsów"
@@ -216,7 +213,6 @@
       },
       "btcpay": {
         "title": "BTCPay Server",
-        "page": {},
         "config": {
           "label": "Date konfiguracyjne"
         },
@@ -295,7 +291,6 @@
       }
     },
     "accounts": {
-      "title": "Konta",
       "account_view": {
         "title1": "Ustawienia konta",
         "title2": "Konto",
@@ -346,12 +341,7 @@
             "title": "Ustawienia Nostr"
           }
         },
-        "remove": {
-          "title": "Usuń konto",
-          "subtitle": "Wszystkie powiązane limity zostaną usunięte. Proszę się upewnić."
-        },
         "actions": {
-          "remove_account": "Usuń konto",
           "export": "Eksport"
         },
         "mnemonic": {
@@ -367,9 +357,7 @@
               "nostr": "Nostr"
             }
           },
-          "inputs": {
-            "title": "Fraza odzyskiwania"
-          },
+          "inputs": {},
           "import": {
             "description": "Użyj frazy odzyskiwania, aby zaimportować swój Klucz Główny do Alby.",
             "button": "Zaimportuj Klucz Główny",
@@ -390,9 +378,6 @@
           },
           "title": "Sieć"
         }
-      },
-      "actions": {
-        "add_account": "Dodaj konto"
       }
     },
     "unlock": {
@@ -411,7 +396,6 @@
       }
     },
     "settings": {
-      "title": "Ustawienia",
       "browser_notifications": {
         "title": "Powiadomienia w przeglądarce",
         "subtitle": "Powiadomienia związane z płatnościami i uwierzytelnianiem."
@@ -701,7 +685,6 @@
     "confirm_password": "Potwierdź hasło",
     "success": "Sukces",
     "error": "Błąd",
-    "settings": "Ustawienia",
     "accounts": "Konta",
     "discover": "Odkrywaj",
     "connected_sites": "",
@@ -817,14 +800,7 @@
       }
     },
     "account_menu": {
-      "screen_reader": "Przełącznik rozwijany",
-      "title": "Zmień konto",
-      "options": {
-        "account": {
-          "add": "Dodaj nowe konto",
-          "manage": "Zarządzaj kontami"
-        }
-      }
+      "screen_reader": "Przełącznik rozwijany"
     },
     "publishers_table": {
       "payments": "płatności"

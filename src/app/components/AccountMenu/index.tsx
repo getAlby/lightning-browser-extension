@@ -128,7 +128,7 @@ function AccountMenu({ showOptions = true }: Props) {
             }}
           >
             <WalletIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300 shrink-0" />
-            {t("options.account.account_settings")}
+            {t("options.account.wallet_settings")}
           </Menu.ItemButton>
           {(isAlbyLNDHubAccount(
             authAccount?.alias,

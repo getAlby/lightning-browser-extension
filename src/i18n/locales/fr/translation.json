@@ -1,9 +1,7 @@
 {
   "translation": {
     "welcome": {
-      "title": "Bienvenue sur Alby",
       "set_password": {
-        "description": "Ce mot de passe est utilisé pour protéger votre portefeuille et donner accès à l'extension du navigateur. Il ne peut pas être réinitialisé et est distinct du mot de passe de votre compte Alby.",
         "choose_password": {
           "label": "Choisissez un mot de passe de déverrouillage :"
         },
@@ -77,7 +75,6 @@
       },
       "lnc": {
         "title": "LND avec LNC",
-        "page": {},
         "pairing_phrase": {
           "label": "Votre phrase d'appariement ",
           "placeholder": "phrase de sats de pile secrète"
@@ -201,7 +198,6 @@
       },
       "btcpay": {
         "title": "Serveur BTCPay",
-        "page": {},
         "config": {
           "label": "Données de configuration"
         },
@@ -256,9 +252,7 @@
       }
     },
     "accounts": {
-      "title": "Comptes",
       "account_view": {
-        "title1": "Information sur le compte",
         "title2": "Modifier le compte",
         "name": {
           "title": "Nom",
@@ -302,17 +296,9 @@
             "failed_to_load": "Échec du chargement de la clé Nostr. Est-ce une clé Nostr valide ?"
           }
         },
-        "remove": {
-          "title": "Supprimer ce compte",
-          "subtitle": "Tous les quotas liés seront supprimés. S'il vous plaît soyez certain."
-        },
         "actions": {
-          "remove_account": "Supprimer le compte",
           "export": "Exporter"
         }
-      },
-      "actions": {
-        "add_account": "Ajouter un compte"
       }
     },
     "unlock": {
@@ -331,7 +317,6 @@
       }
     },
     "settings": {
-      "title": "Paramètres",
       "browser_notifications": {
         "title": "Notifications du navigateur",
         "subtitle": "Notifications liées au paiement et à l'authentification."
@@ -568,7 +553,6 @@
     "confirm_password": "Confirmez le mot de passe",
     "success": "Succès",
     "error": "Erreur",
-    "settings": "Paramètres",
     "accounts": "Comptes",
     "discover": "Découvrir",
     "connected_sites": "",
@@ -683,14 +667,7 @@
       }
     },
     "account_menu": {
-      "screen_reader": "Basculer la liste déroulante",
-      "title": "Changer de compte",
-      "options": {
-        "account": {
-          "add": "Ajouter un nouveau compte",
-          "manage": "Gérer les comptes"
-        }
-      }
+      "screen_reader": "Basculer la liste déroulante"
     },
     "publishers_table": {
       "payments": "Paiements"

@@ -1,9 +1,7 @@
 {
   "translation": {
     "welcome": {
-      "title": "Alby मध्ये आपले स्वागत आहे",
       "set_password": {
-        "description": "तुमचे लाइटनिंग खाते पासवर्डसह सुरक्षितपणे एन्क्रिप्ट केलेले आहे. कृपया हा पासवर्ड लक्षात ठेवा. ब्राउझरमध्ये alby एक्सटेंशन उघडण्यासाठी तुम्हाला पासवर्डची आवश्यकता असेल.",
         "confirm_password": {
           "label": "आपण ते बरोबर टाईप केले आहे याची पुष्टी करूया:"
         },
@@ -77,7 +75,6 @@
       },
       "lnc": {
         "title": "LND with LNC",
-        "page": {},
         "pairing_phrase": {
           "label": "आपली जोडी वाक्यांश ",
           "placeholder": "गुप्त स्टॅक सॅट्स वाक्यांश"
@@ -201,7 +198,6 @@
       },
       "btcpay": {
         "title": "BTCPay Server",
-        "page": {},
         "config": {
           "label": "Config data"
         },
@@ -256,9 +252,7 @@
       }
     },
     "accounts": {
-      "title": "Accounts",
       "account_view": {
-        "title1": "खात्याची माहिती",
         "title2": "खाते संपादित करा",
         "name": {
           "title": "नाव",
@@ -297,17 +291,7 @@
           "errors": {
             "failed_to_load": "Nostr की लोड करण्यात अयशस्वी. ती वैध Nostr key आहे का?"
           }
-        },
-        "remove": {
-          "title": "Remove this account",
-          "subtitle": "सर्व लिंक केलेले भत्ते हटवले जातील. कृपया खात्री बाळगा."
-        },
-        "actions": {
-          "remove_account": "खाते काढा"
         }
-      },
-      "actions": {
-        "add_account": "खाते जोडा"
       }
     },
     "unlock": {
@@ -326,7 +310,6 @@
       }
     },
     "settings": {
-      "title": "सेटिंग्ज",
       "browser_notifications": {
         "title": "ब्राउझरकडून सूचना",
         "subtitle": "पेमेंट आणि प्रमाणीकरण संबंधित सूचना."
@@ -587,7 +570,6 @@
     "password": "पासवर्ड",
     "confirm_password": "पासवर्डची पुष्टी करा",
     "success": "यश",
-    "settings": "सेटिंग्ज",
     "accounts": "खाते",
     "discover": "शोध",
     "connected_sites": "",
@@ -707,14 +689,7 @@
       }
     },
     "account_menu": {
-      "screen_reader": "टॉगल ड्रॉपडाउन",
-      "title": "खाते बदला",
-      "options": {
-        "account": {
-          "add": "नवीन खाते जोडा",
-          "manage": "खाती व्यवस्थापित करा"
-        }
-      }
+      "screen_reader": "टॉगल ड्रॉपडाउन"
     }
   },
   "permissions": {

@@ -1,9 +1,7 @@
 {
   "translation": {
     "welcome": {
-      "title": "Вітаємо у Alby",
       "set_password": {
-        "description": "Пароль використовується для захисту вашого гаманця і надання доступу до розширення браузера. Його не можна скинути і він є відокремленим від вашого паролю до облікового запису Alby.",
         "choose_password": {
           "label": "Оберіть пароль для розблокування:"
         },
@@ -77,7 +75,6 @@
       },
       "lnc": {
         "title": "",
-        "page": {},
         "pairing_phrase": {
           "label": "",
           "placeholder": ""
@@ -201,7 +198,6 @@
       },
       "btcpay": {
         "title": "",
-        "page": {},
         "config": {
           "label": ""
         },
@@ -256,9 +252,7 @@
       }
     },
     "accounts": {
-      "title": "",
       "account_view": {
-        "title1": "",
         "title2": "",
         "name": {
           "title": "",
@@ -301,17 +295,9 @@
             "failed_to_load": ""
           }
         },
-        "remove": {
-          "title": "",
-          "subtitle": ""
-        },
         "actions": {
-          "remove_account": "",
           "export": ""
         }
-      },
-      "actions": {
-        "add_account": ""
       }
     },
     "unlock": {
@@ -330,7 +316,6 @@
       }
     },
     "settings": {
-      "title": "",
       "browser_notifications": {
         "title": "",
         "subtitle": ""
@@ -567,7 +552,6 @@
     "confirm_password": "",
     "success": "",
     "error": "",
-    "settings": "",
     "accounts": "",
     "discover": "",
     "connected_sites": "",
@@ -677,14 +661,7 @@
       }
     },
     "account_menu": {
-      "screen_reader": "",
-      "title": "",
-      "options": {
-        "account": {
-          "add": "",
-          "manage": ""
-        }
-      }
+      "screen_reader": ""
     },
     "publishers_table": {
       "payments": ""

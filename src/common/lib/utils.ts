@@ -80,7 +80,8 @@ const utils = {
     )}?${urlParams.toString()}`;
 
     // Window APIs might not be available on mobile browsers
-    const useWindow = !!browser.windows;
+    // on iOS window APIs are available, but `windows.create` is not
+    const useWindow = !!(browser.windows && browser.windows.create);
 
     // Either API yields a tabId
     const tabId = useWindow

@@ -12,8 +12,7 @@
           "mismatched_password": "パスコードが一致しませんでした。",
           "enter_password": "パスコードを入力してください。",
           "confirm_password": "確認用パスコードを入力してください。"
-        },
-        "description": "このパスコードを使用すると、このデバイスでAlbyのロックを解除できます。パスコードは復元できませんが、後で変更することは可能です。"
+        }
       },
       "test_connection": {
         "ready": "すごいね、準備万端だ！",
@@ -26,7 +25,6 @@
           "delete_edit_account": "無効なアカウントを削除して再編集"
         }
       },
-      "title": "Albyへようこそ",
       "pin_extension": {
         "title": "Alby拡張機能を固定",
         "description": "もうすぐです。Albyを便利に使うには、拡張機能をブラウザのツールバーに忘れずに固定してください：",
@@ -85,7 +83,6 @@
       },
       "lnc": {
         "title": "Lightning Terminal (LNC)",
-        "page": {},
         "pairing_phrase": {
           "label": "あなたのペアリング・フレーズ ",
           "placeholder": "シークレット・stack sats・フレーズ"
@@ -210,7 +207,6 @@
         }
       },
       "btcpay": {
-        "page": {},
         "config": {
           "label": "コンフィグデータ"
         },
@@ -268,13 +264,11 @@
           "title": "表示名",
           "placeholder": "アカウントの表示名"
         },
-        "title1": "アカウント設定",
         "mnemonic": {
           "title": "🔑 鍵の管理",
           "backup": {
             "button": "リカバリーフレーズを表示",
             "description": "新しいデバイスでマスターキーを復元したり、アカウントにアクセスできなくなった場合に備えて、リカバリーフレーズは必ずメモしてください。",
-            "title": "リカバリーフレーズをバックアップ",
             "warning": "⚠️ リカバリフレーズのバックアップを忘れないでください！バックアップを忘れると、マスターキー、Nostr ID、またはこのキーで管理する資産へのアクセスを永久に失います。",
             "items": {
               "recovery_phrase": "リカバリーフレーズを使用すれば、いつでもマスターキーにアクセスできます。",
@@ -286,9 +280,7 @@
             },
             "save": "マスターキーを保存"
           },
-          "inputs": {
-            "title": "リカバリーフレーズ"
-          },
+          "inputs": {},
           "existing_nostr_key_notice": "ℹ️ このアカウントにはすでにnostr秘密鍵が設定されているため、このマスターキーから生成されることはありません。Nostr鍵はアカウント設定から管理できます。",
           "generate": {
             "description": "マスターキーは、Nostr、Bitcoinのベースレイヤー、LNURL-Authのようなプロトコルとの連携を可能にします。",
@@ -381,12 +373,8 @@
           },
           "title": "Network",
           "subtitle": "アドレス導出やトランザクションをデコードするBitcoinやliquidのネットワークを選んでください。"
-        },
-        "remove": {
-          "title": "このアカウントを削除"
         }
-      },
-      "title": "アカウント"
+      }
     },
     "home": {
       "default_view": {

@@ -2,7 +2,6 @@
   "translation": {
     "welcome": {
       "set_password": {
-        "description": "Lightning-tilisi tiedot on salattu turvallisesti salasanan avulla. Älä unohda tätä salasanaa! Tarvitset sitä avataksesi Alby-laajennuksen lukituksen (tässä selaimessa)",
         "choose_password": {
           "label": "Valitse lukituksen avaamissalasana:"
         },
@@ -165,7 +164,6 @@
       },
       "btcpay": {
         "title": "BTCPay-palvelin",
-        "page": {},
         "config": {
           "label": "Konfigurointitiedot"
         },
@@ -218,12 +216,6 @@
         "is_blocked_hint": "Alby on tällä hetkellä poissa käytöstä {{host}}:lla"
       }
     },
-    "accounts": {
-      "title": "Tilit",
-      "actions": {
-        "add_account": "Lisää tili"
-      }
-    },
     "unlock": {
       "unlock_to_continue": "Avaa lukitus jatkaaksesi",
       "unlock_password": "Avaussalasanasi",
@@ -240,7 +232,6 @@
       }
     },
     "settings": {
-      "title": "Asetukset",
       "browser_notifications": {
         "title": "Selaimen ilmoitukset",
         "subtitle": "Maksuihin ja todentamiseen liittyvät ilmoitukset."
@@ -465,7 +456,6 @@
     "password": "Salasana",
     "success": "Menestys",
     "error": "Virhe",
-    "settings": "Asetukset",
     "sats_one": "sat",
     "sats_other": "satia",
     "loading": "ladataan",
@@ -566,14 +556,7 @@
       }
     },
     "account_menu": {
-      "screen_reader": "Vaihda pudotusvalikko",
-      "title": "Vaihda tili",
-      "options": {
-        "account": {
-          "add": "Lisää uusi tili",
-          "manage": "Hallitse tilejä"
-        }
-      }
+      "screen_reader": "Vaihda pudotusvalikko"
     },
     "publishers_table": {
       "payments": "maksut"
