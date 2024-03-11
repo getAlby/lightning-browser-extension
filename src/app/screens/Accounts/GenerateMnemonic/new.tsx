@@ -43,16 +43,14 @@ function MnemonicExplanation() {
 
   return (
     <Container maxWidth="md">
-      <div className="flex justify-end mt-6 text-xs">
-        <p className="text-gray-600 dark:text-neutral-400">
-          <Link
-            to="../../nostr/settings"
-            relative="path"
-            className="text-blue-600"
-          >
-            {t("nostr")}
-          </Link>
-        </p>
+      <div className="flex justify-end mt-6 -mb-3 text-xs">
+        <Link
+          to="../../nostr/settings"
+          relative="path"
+          className="text-blue-600 hover:text-blue-700"
+        >
+          {t("nostr")}
+        </Link>
       </div>
       <ContentBox>
         <h1 className="font-bold text-2xl dark:text-white">{t("title")}</h1>
