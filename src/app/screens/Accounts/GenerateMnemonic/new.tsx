@@ -45,13 +45,12 @@ function MnemonicExplanation() {
     <Container maxWidth="md">
       <div className="flex justify-end mt-6 text-xs">
         <p className="text-gray-600 dark:text-neutral-400">
-          Need to import just a Nostr account?{" "}
           <Link
             to="../../nostr/settings"
             relative="path"
             className="text-blue-600"
           >
-            Click here
+            {t("nostr")}
           </Link>
         </p>
       </div>

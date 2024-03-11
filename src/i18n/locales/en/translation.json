@@ -374,7 +374,6 @@
             "title": "Setup your keys",
             "description": "Take care of your Master Key or import your existing Nostr account"
           },
-
           "receive_bitcoin": {
             "title": "Receive bitcoin",
             "description": "Get bitcoin to your lightning address, a lightning invoice or bitcoin address."
@@ -414,6 +413,7 @@
           "error_confirm": "Please confirm that you have backed up the recovery phrase.",
           "new": {
             "title": "Setup Master Key",
+            "nostr": "Import an existing Nostr account",
             "items": {
               "keys": "Master Key allows you to interact with protocols like <0>Nostr</0>, <0>Liquid</0> or <0>base layer of Bitcoin</0>",
               "usage": "You can import and use the same Master Key in <0>each connected wallet in Alby</0>",
