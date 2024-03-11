@@ -53,14 +53,15 @@ function MnemonicExplanation() {
         </Link>
       </div>
       <ContentBox>
-        <h1 className="font-bold text-2xl dark:text-white">{t("title")}</h1>
-        <MnemonicDescription />
-        <img
-          src={`assets/images/master_key_${theme}.png`}
-          alt="Master Key"
-          className="max-w-[412px] mx-auto w-full"
-        />
-
+        <div className="flex flex-col gap-4">
+          <h1 className="font-bold text-2xl dark:text-white">{t("title")}</h1>
+          <MnemonicDescription />
+          <img
+            src={`assets/images/master_key_${theme}.png`}
+            alt="Master Key"
+            className="max-w-[412px] mx-auto w-full"
+          />
+        </div>
         <div className="flex flex-row justify-between gap-x-6">
           <CardButtonGroup>
             <CardButton
