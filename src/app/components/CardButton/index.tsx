@@ -21,10 +21,10 @@ export default function CardButton({
       onClick={onClick}
     >
       <Icon className="w-8 h-8 text-gray-700 dark:text-white" />
-      <h3 className="font-medium leading-7 text-md text-gray-800 dark:text-neutral-200">
+      <h3 className="font-medium leading-6 text-md text-gray-800 dark:text-neutral-200">
         {title}
       </h3>
-      <p className="text-gray-600 dark:text-neutral-400 text-sm leading-6">
+      <p className="text-gray-600 dark:text-neutral-400 text-sm leading-5">
         {description}
       </p>
     </button>

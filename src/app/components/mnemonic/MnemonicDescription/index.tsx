@@ -19,7 +19,7 @@ function MnemonicDescription() {
               t={t}
               components={[
                 //eslint-disable-next-line react/jsx-key
-                <b></b>,
+                <span className="font-semibold"></span>,
               ]}
             />
           }
@@ -32,7 +32,7 @@ function MnemonicDescription() {
               t={t}
               components={[
                 // eslint-disable-next-line react/jsx-key
-                <b></b>,
+                <span className="font-semibold"></span>,
               ]}
             />
           }

@@ -43,7 +43,7 @@ function MnemonicExplanation() {
 
   return (
     <Container maxWidth="md">
-      <div className="flex justify-end mt-6 -mb-3 text-xs">
+      <div className="flex justify-end mt-6 -mb-4 text-xs">
         <Link
           to="../../nostr/settings"
           relative="path"
