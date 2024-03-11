@@ -1,6 +1,5 @@
 import { schnorr } from "@noble/curves/secp256k1";
 import * as secp256k1 from "@noble/secp256k1";
-import { nip44 } from "nostr-tools";
 import { Buffer } from "buffer";
 import * as CryptoJS from "crypto-js";
 import { AES } from "crypto-js";
@@ -9,6 +8,7 @@ import Hex from "crypto-js/enc-hex";
 import Utf8 from "crypto-js/enc-utf8";
 import { LRUCache } from "~/common/utils/lruCache";
 import { Event } from "~/extension/providers/nostr/types";
+import { nip44 } from "./nip44";
 
 import { getEventHash, signEvent } from "../actions/nostr/helpers";
 
@@ -22,7 +22,7 @@ class Nostr {
     let key = this.nip44SharedSecretCache.get(peerPubkey);
 
     if (!key) {
-      key = nip44.v2.utils.getConversationKey(this.privateKey, peerPubkey);
+      key = nip44.utils.getConversationKey(this.privateKey, peerPubkey);
 
       this.nip44SharedSecretCache.set(peerPubkey, key);
     }
@@ -83,11 +83,11 @@ class Nostr {
   }
 
   nip44Encrypt(peer: string, plaintext: string) {
-    return nip44.v2.encrypt(plaintext, this.getNip44SharedSecret(peer));
+    return nip44.encrypt(plaintext, this.getNip44SharedSecret(peer));
   }
 
   nip44Decrypt(peer: string, ciphertext: string) {
-    return nip44.v2.decrypt(ciphertext, this.getNip44SharedSecret(peer));
+    return nip44.decrypt(ciphertext, this.getNip44SharedSecret(peer));
   }
 
   getEventHash(event: Event) {
