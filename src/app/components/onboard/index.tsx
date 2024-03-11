@@ -1,8 +1,5 @@
-import {
-  InfoCircleIcon,
-  TwoKeysIcon,
-} from "@bitcoin-design/bitcoin-icons-react/outline";
-import { PopiconsClockLine } from "@popicons/react";
+import { InfoCircleIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
+import { PopiconsClockLine, PopiconsKeyLeftLine } from "@popicons/react";
 import { useTranslation } from "react-i18next";
 import ConfirmOrCancel from "~/app/components/ConfirmOrCancel";
 import Container from "~/app/components/Container";
@@ -60,7 +57,7 @@ export default function Onboard() {
           />
           <div className="dark:text-white pt-6">
             <div className="mb-2 flex items-center">
-              <TwoKeysIcon className="w-7 h-7 mr-2" />
+              <PopiconsKeyLeftLine className="w-7 h-7 mr-2" />
               <p>{t("request1")}</p>
             </div>
             <div className="mb-2 flex items-center">

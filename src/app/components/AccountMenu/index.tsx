@@ -1,8 +1,6 @@
+import { GlobeIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import {
-  AddressBookIcon,
-  GlobeIcon,
-} from "@bitcoin-design/bitcoin-icons-react/filled";
-import {
+  PopiconsBookmarkSolid,
   PopiconsChevronBottomLine,
   PopiconsPlusSolid,
   PopiconsWalletSolid,
@@ -202,7 +200,7 @@ function AccountMenu({ showOptions = true }: Props) {
                   openOptions("accounts");
                 }}
               >
-                <AddressBookIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
+                <PopiconsBookmarkSolid className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
                 {t("options.account.manage")}
               </Menu.ItemButton>
             </>

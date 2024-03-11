@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FunctionComponent, SVGProps } from "react";
 
 export type Props = {
   title: string;
@@ -8,10 +8,10 @@ export type Props = {
 };
 
 interface IconTypeProps {
-  className: string;
+  className?: string;
 }
 
-type IconType = (props: IconTypeProps) => JSX.Element;
+type IconType = FunctionComponent<IconTypeProps & SVGProps<SVGSVGElement>>;
 
 export default function CardButton({
   title,

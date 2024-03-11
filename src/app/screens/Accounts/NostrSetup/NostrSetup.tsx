@@ -1,10 +1,9 @@
 import {
-  KeyIcon,
   MnemonicIcon,
-  ReceiveIcon,
   TwoKeysIcon,
 } from "@bitcoin-design/bitcoin-icons-react/outline";
 import Container from "@components/Container";
+import { PopiconsDownloadLine, PopiconsKeyLeftLine } from "@popicons/react";
 import { useEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
@@ -71,7 +70,7 @@ function NostrSetup() {
                 <CardButton
                   title={t("import.label")}
                   description={t("import.description")}
-                  icon={ReceiveIcon}
+                  icon={PopiconsDownloadLine}
                   onClick={() => setStep("import")}
                 />
               </CardButtonGroup>
@@ -87,7 +86,7 @@ function NostrSetup() {
                 <CardButton
                   title={t("import.private_key.label")}
                   description={t("import.private_key.description")}
-                  icon={KeyIcon}
+                  icon={PopiconsKeyLeftLine}
                   onClick={() => navigate("../nostr/settings")}
                 />
                 <CardButton
