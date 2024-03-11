@@ -485,21 +485,7 @@
             "new": {
               "label": "Create a new Nostr account",
               "description": "Generate a Master Key with a pair of new Nostr keys."
-            },
-            "import": {
-              "label": "Import a Nostr account",
-              "description": "Use an existing Nostr private key or derive it from your Master Key",
-              "title": "How would you like to import your Nostr account?",
-              "private_key": {
-                "label": "Use Nostr private key",
-                "description": "Paste your Nostr private key to import it to Alby"
-              },
-              "recovery_phrase": {
-                "label": "Use recovery phrase",
-                "description": "Use Master key recovery phrase to import your Nostr keys"
-              }
-            },
-            "new_to_nostr": "New to Nostr? <0>Learn more</0>"
+            }
           },
           "private_key": {
             "title": "Manage your Nostr private key",

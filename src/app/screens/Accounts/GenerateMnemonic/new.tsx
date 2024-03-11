@@ -4,8 +4,9 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "~/app/components/Button";
+import CardButton from "~/app/components/CardButton";
+import CardButtonGroup from "~/app/components/CardButton/Group";
 import { ContentBox } from "~/app/components/ContentBox";
-import { ExtensionKeyCard } from "~/app/components/ExtensionKeyCard";
 import MnemonicDescription from "~/app/components/mnemonic/MnemonicDescription";
 import { useTheme } from "~/app/utils";
 import api from "~/common/lib/api";
@@ -19,8 +20,7 @@ function MnemonicExplanation() {
   });
   const { t: tCommon } = useTranslation("common");
 
-  const [cardSelected, setIsCardSelected] = useState("backup");
-
+  const [selectedCard, setSelectedCard] = useState("backup");
   const [hasMnemonic, setHasMnemonic] = useState(false);
 
   useEffect(() => {
@@ -62,27 +62,20 @@ function MnemonicExplanation() {
         />
 
         <div className="flex flex-row justify-between gap-x-6">
-          <ExtensionKeyCard
-            title={t("secure.title")}
-            description={t("secure.description")}
-            icon={
-              <PopiconsKeyLine className="w-8 h-8 text-gray-600 dark:text-neutral-400" />
-            }
-            onClick={async () => {
-              setIsCardSelected("backup");
-            }}
-          />
-
-          <ExtensionKeyCard
-            title={t("import.title")}
-            description={t("import.description")}
-            icon={
-              <PopiconsDownloadLine className="w-8 h-8 text-gray-600 dark:text-neutral-400" />
-            }
-            onClick={async () => {
-              setIsCardSelected("import");
-            }}
-          />
+          <CardButtonGroup>
+            <CardButton
+              title={t("secure.title")}
+              description={t("secure.description")}
+              icon={PopiconsKeyLine}
+              onClick={() => setSelectedCard("backup")}
+            />
+            <CardButton
+              title={t("import.title")}
+              description={t("import.description")}
+              icon={PopiconsDownloadLine}
+              onClick={() => setSelectedCard("import")}
+            />
+          </CardButtonGroup>
         </div>
 
         <div className="flex justify-center w-64 mx-auto">
@@ -91,7 +84,7 @@ function MnemonicExplanation() {
             primary
             flex
             onClick={() =>
-              cardSelected == "backup"
+              selectedCard == "backup"
                 ? hasMnemonic
                   ? navigate("../secret-key/backup")
                   : navigate("../secret-key/generate")
