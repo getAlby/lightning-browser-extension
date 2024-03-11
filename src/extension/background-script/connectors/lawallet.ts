@@ -274,7 +274,7 @@ export default class LaWallet implements Connector {
             return resolve({
               data: {
                 preimage: "",
-                paymentHash: paymentRequestDetails.paymentRequest as string,
+                paymentHash: paymentRequestDetails.tagsObject.payment_hash!,
                 route: payment_route,
               },
             });
