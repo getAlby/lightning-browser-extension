@@ -15,7 +15,7 @@ export function IconLinkCard({
 }: IconLinkCardProps) {
   return (
     <div
-      className="border border-gray-300 dark:border-neutral-800 rounded-xl p-4 bg-white dark:bg-surface-01dp hover:bg-gray-50 dark:hover:bg-surface-02dp text-gray-800 dark:text-neutral-200 cursor-pointer flex flex-row items-center gap-3"
+      className="border border-gray-200 dark:border-neutral-800 rounded-xl p-4 bg-white dark:bg-surface-01dp hover:bg-gray-50 dark:hover:bg-surface-02dp text-gray-800 dark:text-neutral-200 cursor-pointer flex flex-row items-center gap-3"
       onClick={onClick}
     >
       <div className="flex-shrink-0 flex justify-center md:px-3">{icon}</div>
