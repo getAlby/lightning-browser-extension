@@ -410,9 +410,7 @@
             "use_mnemonic": "Use a chave mestra para acessar aplicativos com tecnologia (LNURL Auth)",
             "title": "Login relâmpago"
           },
-          "new": {
-            "title": "O que é uma chave mestra?"
-          }
+          "new": {}
         },
         "remove_secretkey": {
           "title": "Remover chave mestra",
