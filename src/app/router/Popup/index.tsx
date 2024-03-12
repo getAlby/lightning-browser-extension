@@ -9,6 +9,17 @@ import Popup from "./Popup";
 // Get the active theme and apply corresponding Tailwind classes to the document
 setTheme();
 
+// Occupy full width in Safari Extension on iOS
+document.addEventListener("DOMContentLoaded", function () {
+  const isSafariOniOS =
+    navigator.userAgent.match(/iPhone/i) &&
+    navigator.userAgent.match(/Safari/i);
+  if (isSafariOniOS) {
+    document.body.classList.remove("w-96");
+    document.body.classList.add("w-full");
+  }
+});
+
 const container = document.getElementById("popup-root") as HTMLElement;
 const root = createRoot(container);
 root.render(<Popup />);
