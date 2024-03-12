@@ -85,7 +85,7 @@ class NWCConnector implements Connector {
           preimage: transaction.preimage,
           payment_hash: transaction.payment_hash,
           settled: true,
-          settleDate: new Date(transaction.settled_at).getTime(),
+          settleDate: transaction.settled_at * 1000,
           totalAmount: transaction.amount,
           type: transaction.type == "incoming" ? "received" : "sent",
         })
@@ -167,16 +167,25 @@ class NWCConnector implements Connector {
   }
 
   async checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {
-    const response = await this.nwc.lookupInvoice({
-      paymentHash: args.paymentHash,
-    });
+    try {
+      const response = await this.nwc.lookupInvoice({
+        paymentHash: args.paymentHash,
+      });
 
-    return {
-      data: {
-        paid: response.paid,
-        preimage: response.preimage,
-      },
-    };
+      return {
+        data: {
+          paid: response.paid,
+          preimage: response.preimage,
+        },
+      };
+    } catch (error) {
+      console.error(error);
+      return {
+        data: {
+          paid: false,
+        },
+      };
+    }
   }
 
   signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {

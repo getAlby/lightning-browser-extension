@@ -6,7 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Button from "~/app/components/Button";
 import { ContentBox } from "~/app/components/ContentBox";
 import toast from "~/app/components/Toast";
-import MnemonicDescription from "~/app/components/mnemonic/MnemonicDescription";
+import MnemonicInstructions from "~/app/components/mnemonic/MnemonicBackupDescription";
 import MnemonicInputs from "~/app/components/mnemonic/MnemonicInputs";
 import api from "~/common/lib/api";
 
@@ -19,8 +19,9 @@ function BackupMnemonic() {
 
   const [mnemonic, setMnemonic] = useState<string | undefined>();
   const [loading, setLoading] = useState<boolean>(true);
+  const [hasConfirmedBackup, setHasConfirmedBackup] = useState(false);
 
-  const { id } = useParams();
+  const { id } = useParams() as { id: string };
 
   const fetchData = useCallback(async () => {
     try {
@@ -38,26 +39,48 @@ function BackupMnemonic() {
     fetchData();
   }, [fetchData]);
 
+  async function completeBackupProcess() {
+    if (!hasConfirmedBackup) {
+      toast.error(t("error_confirm"));
+      return false;
+    }
+
+    await api.editAccount(id, {
+      isMnemonicBackupDone: true,
+    });
+
+    navigate(`/accounts/${id}`);
+  }
+
   return loading ? (
     <div className="flex justify-center mt-5">
       <Loading />
     </div>
   ) : (
     <div>
-      <Container>
+      <Container maxWidth="md">
         <ContentBox>
           <h1 className="font-bold text-2xl dark:text-white">
             {t("backup.title")}
           </h1>
-          <MnemonicDescription />
-          <MnemonicInputs mnemonic={mnemonic} readOnly />
-        </ContentBox>
-        <div className="flex justify-center my-6 gap-4">
-          <Button
-            label={tCommon("actions.back")}
-            onClick={() => navigate(-1)}
+          <MnemonicInstructions />
+          <MnemonicInputs
+            mnemonic={mnemonic}
+            readOnly
+            isConfirmed={(hasConfirmedBackup) => {
+              setHasConfirmedBackup(hasConfirmedBackup);
+            }}
           />
-        </div>
+
+          <div className="flex justify-center w-64 mx-auto">
+            <Button
+              label={tCommon("actions.finish")}
+              primary
+              flex
+              onClick={completeBackupProcess}
+            />
+          </div>
+        </ContentBox>
       </Container>
     </div>
   );

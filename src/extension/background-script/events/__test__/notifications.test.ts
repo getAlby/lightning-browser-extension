@@ -30,7 +30,6 @@ const settings: SettingsStorage = {
   userName: "",
   websiteEnhancements: true,
   nostrEnabled: false,
-  closedTips: [],
 };
 
 const mockState = {

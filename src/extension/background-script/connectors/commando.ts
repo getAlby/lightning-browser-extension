@@ -72,22 +72,33 @@ type CommandoListSendPaysResponse = {
 type CommandoPayInvoiceResponse = {
   payment_preimage: string;
   payment_hash: string;
-  msatoshi: number;
-  msatoshi_sent: number;
+  created_at: number;
+  parts: string;
+  amount_msat: number;
+  amount_sent_msat: number;
+  status: string;
+  destination?: string;
 };
+
 type CommandoListInvoiceResponse = {
   invoices: CommandoInvoice[];
 };
 
 type CommandoInvoice = {
   label: string;
+  payment_hash: string;
   status: string;
-  description: string;
-  amount_msat: number;
-  bolt11: string;
+  expires_at: number;
+  description?: string;
+  amount_msat?: number;
+  bolt11?: string;
+  bolt12?: string;
+  local_offer_id?: number;
+  invreq_payer_note?: string;
+  pay_index: number;
+  amount_received_msat: number;
   payment_preimage: string;
   paid_at: number;
-  payment_hash: string;
 };
 
 type CommandoPayment = {
@@ -236,7 +247,7 @@ export default class Commando implements Connector {
               payment_hash: invoice.payment_hash,
               settleDate: invoice.paid_at * 1000,
               type: "received",
-              totalAmount: Math.floor(invoice.amount_msat / 1000),
+              totalAmount: Math.floor(invoice.amount_received_msat / 1000),
             })
           )
           .filter((invoice) => invoice.settled);
@@ -340,9 +351,9 @@ export default class Commando implements Connector {
             paymentHash: parsed.payment_hash,
             preimage: parsed.payment_preimage,
             route: {
-              total_amt: Math.floor(parsed.msatoshi_sent / 1000),
+              total_amt: Math.floor(parsed.amount_msat / 1000),
               total_fees: Math.floor(
-                (parsed.msatoshi_sent - parsed.msatoshi) / 1000
+                (parsed.amount_sent_msat - parsed.amount_msat) / 1000
               ),
             },
           },
@@ -377,9 +388,9 @@ export default class Commando implements Connector {
             paymentHash: parsed.payment_hash,
             preimage: parsed.payment_preimage,
             route: {
-              total_amt: Math.floor(parsed.msatoshi_sent / 1000),
+              total_amt: Math.floor(parsed.amount_msat / 1000),
               total_fees: Math.floor(
-                (parsed.msatoshi_sent - parsed.msatoshi) / 1000
+                (parsed.amount_sent_msat - parsed.amount_msat) / 1000
               ),
             },
           },

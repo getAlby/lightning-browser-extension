@@ -52,12 +52,12 @@
           "instructions": "Na myNode domači strani klikni na <0>Wallet</0> gumb na tvojem <0>lightning</0> servisu.<1/> Klikni na <0>Pair Wallet</0> gumb pod <0>Status</0> zavihkom. Vnesi geslo, ko je to zahtevano.<1/> Izberi spustni meni in izberi možnost povezave. Glede na konfiguracijo lahko uporabiš <0>lightning (REST + Local IP)</0> povezavo ali <0>lightning (REST + Tor)</0> povezavo."
         }
       },
-      "start9": {
+      "startos": {
         "page": {
-          "instructions": "V Embassy nadzorni plošči klikni na <0>Lightning Network Daemon</0> servis.<1/>Izberi <0>Properties</0> zavihek.<1/>Kopiraj <0>LND Connect REST URL.</0>",
-          "title": "Poveži z <0>Start9 Server</0>"
+          "instructions": "V StartOS nadzorni plošči klikni na <0>Lightning Network Daemon</0> servis.<1/>Izberi <0>Properties</0> zavihek.<1/>Kopiraj <0>LND Connect REST URL.</0>",
+          "title": "Poveži z <0>StartOS Server</0>"
         },
-        "title": "Start9",
+        "title": "StartOS",
         "rest_url": {
           "label": "lndconnect REST URL",
           "placeholder": "lndconnect://yournode:8080?..."
@@ -98,13 +98,9 @@
       },
       "btcpay": {
         "config": {
-          "label": "Podatki o konfiguraciji",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
+          "label": "Podatki o konfiguraciji"
         },
         "title": "BTCPay Server",
-        "page": {
-          "title": "Poveži z BTCPay LND node"
-        },
         "errors": {
           "connection_failed": "Neuspešna povezava. Je BTCPay URL povezava pravilna in dostopna?"
         }
@@ -142,10 +138,6 @@
       },
       "lnc": {
         "title": "Terminal Lightning (LNC)",
-        "page": {
-          "title": "Poveži s svojim LND vozliščem",
-          "description": "1. Odpri Lightning Terminal in izberi <0>Lightning Node Connect</0> iz stranske vrstice.<1/> 2. Klikni <0>Ustvari novo sejo</0><1/>3. Označi povezavo, izberi dovoljenje in potrdi<1/>4. <0>Kopiraj frazo za spajanje</0> in jo prilepi spodaj."
-        },
         "pairing_phrase": {
           "label": "Tvoja fraza za spajanje ",
           "placeholder": "skrivna fraza za stack sats"
@@ -229,15 +221,12 @@
       }
     },
     "welcome": {
-      "title": "Dobrodošli v Alby",
       "set_password": {
-        "title": "Nastavi kodo za odklepanje",
         "errors": {
           "enter_password": "Prosim vpiši kodo.",
           "mismatched_password": "Gesli se ne ujemata.",
           "confirm_password": "Prosim potrdi svoje geslo."
         },
-        "description": "Ta koda omogoča odklep Alby na tej napravi. Kode ne moreš resetirati, zato si jo zapomni, lahko pa jo kasneje spremeniš.",
         "choose_password": {
           "label": "Izberi kodo za odklepanje:"
         },
@@ -281,8 +270,8 @@
       "citadel": {
         "name": "Citadel"
       },
-      "start9": {
-        "name": "Start9"
+      "startos": {
+        "name": "StartOS"
       },
       "description": "Izberi s katero {{name}} aplikacijo bi se rad povezal",
       "btcpay": {
@@ -314,7 +303,6 @@
       }
     },
     "accounts": {
-      "title": "Računi",
       "account_view": {
         "title2": "Račun",
         "export": {
@@ -340,7 +328,6 @@
             "error_confirm": "Prosim potrdi, da si naredil varnostno kopijo obnovitvene fraze."
           },
           "backup": {
-            "title": "Varnostno kopiraj obnovitveno frazo",
             "save": "Shrani Glavni ključ",
             "button": "Poglej obnovitveno frazo",
             "items": {
@@ -357,16 +344,12 @@
             "description": "Uporabi obnovitveno frazo za uvoz Gladvnega ključa v Alby.",
             "button": "Uvozi Glavni ključ"
           },
-          "inputs": {
-            "title": "Obnovitvena fraza"
-          },
+          "inputs": {},
           "lnurl": {
             "title": "Prijava z Lightning",
             "use_mnemonic": "Uporabi Glavni ključ za prijavo v Lightning omogočene aplikacije (LNURL Auth)"
           },
-          "new": {
-            "title": "Kaj je Glavni ključ?"
-          }
+          "new": {}
         },
         "network": {
           "title": "Omrežje",
@@ -428,11 +411,8 @@
             "failed_to_load": "Nalaganje ključa Nostr ni uspelo. Je to veljaven ključ Nostr?"
           }
         },
-        "title1": "Nastavitve računa",
         "remove": {
-          "title": "Odstrani ta račun",
-          "error": "Vnešeno ime računa se ne ujema.",
-          "subtitle": "Odstrani vse odobritve, podatke o plačilih in ključe, povezane s tem računom."
+          "error": "Vnešeno ime računa se ne ujema."
         },
         "remove_secretkey": {
           "subtitle": "Odstrani Glavni ključ iz tega računa.",
@@ -441,12 +421,8 @@
         },
         "actions": {
           "export": "Izvoz",
-          "remove_account": "Odstrani račun",
           "remove_secretkey": "Odstrani Glavni ključ"
         }
-      },
-      "actions": {
-        "add_account": "Dodaj račun"
       }
     },
     "unlock": {
@@ -467,7 +443,6 @@
       "browser_notifications": {
         "title": "Obvestila brskalnika"
       },
-      "title": "Nastavitve",
       "personal_data": {
         "title": "Osebni podatki"
       },
@@ -557,35 +532,6 @@
       "no_info": "Videti je, da Albyja še nisi uporabljal na nobenem spletnem mestu.",
       "title": "Tvoja ⚡ spletna stran"
     },
-    "discover": {
-      "tips": {
-        "demo": {
-          "title": "Alby demo",
-          "description": "Odkrijte Albyjeve lastnosti\nna naši predstavitveni spletni strani"
-        },
-        "mnemonic": {
-          "title": "Nostr"
-        },
-        "top_up_wallet": {
-          "description": "Potrebuješ polnitev?\nSkupaj zmoremo!",
-          "title": "Kupi Bitcoin"
-        },
-        "description": "Nekaj nasvetov, da začneš brneti🐝",
-        "title": "Tvoja denarnica Alby je pripravljena"
-      },
-      "list": {
-        "gaming": "Igre",
-        "trading": "Trgovanje",
-        "nostr": "Nostr",
-        "shopping": "Nakupovanje",
-        "nodeManagement": "Upravljanje vozlišča",
-        "showcases": "Primeri",
-        "miscellaneous": "Razno",
-        "entertainment": "Zabava"
-      },
-      "description": "Spletna mesta in spletne aplikacije, kjer lahko uporabljaš Alby",
-      "title": "Razišči ekosistem Lightning ⚡️"
-    },
     "receive": {
       "payment": {
         "status": "Preveri status plačila"
@@ -666,7 +612,6 @@
       "getaddress": "Bere tvoj Liquid naslov za prejemanje"
     },
     "nostr": {
-      "nip04encrypt": "Kriptiraj podatke",
       "signmessage": "Podpiši sporočilo s svojim ključem",
       "nip04decrypt": "Dekriptiraj podatke",
       "getpublickey": "Bere tvoj javni ključ"
@@ -710,14 +655,10 @@
     "account_menu": {
       "options": {
         "account": {
-          "manage": "Upravljanje računov",
-          "account_settings": "Nastavitve računa",
-          "add": "Dodaj nov račun",
           "go_to_web_wallet": "Upravljaj svoj spletni račun"
         }
       },
-      "screen_reader": "Preklopi spustni meni",
-      "title": "Preklopi račun"
+      "screen_reader": "Preklopi spustni meni"
     },
     "publishers_table": {
       "payments": "plačila",

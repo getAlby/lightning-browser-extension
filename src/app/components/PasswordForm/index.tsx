@@ -88,10 +88,11 @@ export default function PasswordForm<
 
   return (
     <>
-      <div className="w-full">
+      <div className="w-full mt-8">
         <TextField
           autoFocus={autoFocus}
           id="password"
+          // @ts-ignore/currently ignore
           label={t("choose_password.label")}
           type={passwordViewVisible ? "text" : "password"}
           required
