@@ -271,7 +271,7 @@ const HomeButton = ({
   onClick: () => void;
 }) => (
   <button
-    className="bg-white dark:bg-surface-01dp hover:bg-amber-50 dark:hover:bg-surface-02dp text-gray-800 dark:text-neutral-200 rounded-xl border border-gray-300 dark:border-neutral-800 hover:border-primary dark:hover:border-primary flex flex-col flex-1 justify-center items-center pt-[18px] pb-3 px-[14px] text-xs font-medium gap-2"
+    className="bg-white dark:bg-surface-01dp hover:bg-amber-50 dark:hover:bg-surface-02dp text-gray-800 dark:text-neutral-200 rounded-xl border border-gray-200 dark:border-neutral-800 hover:border-primary dark:hover:border-primary flex flex-col flex-1 justify-center items-center pt-[18px] pb-3 px-[14px] text-xs font-medium gap-2"
     onClick={onClick}
   >
     {icon}
