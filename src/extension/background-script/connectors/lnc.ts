@@ -1,7 +1,4 @@
-import {
-  Invoice,
-  Invoice_InvoiceState,
-} from "@lightninglabs/lnc-core/dist/types/proto/lnd/lightning";
+import { Invoice } from "@lightninglabs/lnc-core/dist/types/proto/lnd/lightning";
 import LNC from "@lightninglabs/lnc-web";
 import lightningPayReq from "bolt11";
 import Base64 from "crypto-js/enc-base64";
@@ -303,23 +300,24 @@ class Lnc implements Connector {
 
     const outgoingInvoices: ConnectorTransaction[] =
       outgoingInvoicesResponse.payments.map(
-        (payment: FixMe, index: number): ConnectorTransaction => {
+        (payment, index): ConnectorTransaction => {
           let memo = "Sent";
-          if (payment.payment_request) {
+          if (payment.paymentRequest) {
             memo = (
               lightningPayReq
-                .decode(payment.payment_request)
+                .decode(payment.paymentRequest)
                 .tags.find((tag) => tag.tagName === "description")?.data ||
               "Sent"
             ).toString();
           }
+
           return {
-            id: `${payment.payment_request}-${index}`,
+            id: `${payment.paymentRequest}-${index}`,
             memo: memo,
-            preimage: payment.payment_preimage,
+            preimage: payment.paymentPreimage,
             settled: true,
-            settleDate: parseInt(payment.creation_date) * 1000,
-            totalAmount: payment.value_sat,
+            settleDate: parseInt(payment.creationTimeNs) / 1_000_000,
+            totalAmount: parseInt(payment.valueSat),
             type: "sent",
           };
         }
@@ -343,7 +341,7 @@ class Lnc implements Connector {
     });
     return {
       data: {
-        paid: data.state == Invoice_InvoiceState.SETTLED,
+        paid: data.state == "SETTLED",
       },
     };
   }

@@ -1025,18 +1025,18 @@
   resolved "https://registry.npmjs.org/@leichtgewicht/ip-codec/-/ip-codec-2.0.3.tgz"
   integrity sha512-nkalE/f1RvRGChwBnEIoBfSEYOXnCRdleKuv6+lePbMDrMZXeDQnqak5XDOeBgrPPyPfAdcCu/B5z+v3VhplGg==
 
-"@lightninglabs/lnc-core@0.2.8-alpha":
-  version "0.2.8-alpha"
-  resolved "https://registry.yarnpkg.com/@lightninglabs/lnc-core/-/lnc-core-0.2.8-alpha.tgz#78272c04a5ec95a9ccb830f75ab9b5ca227f0801"
-  integrity sha512-2tHzmklIiQhJiK1aabX0R2AbbWi0mizWgniCUOb573XToYQN7L61Phh+hWUCxIFfAhHCkp2mnSmX+7eT/ikxOg==
+"@lightninglabs/lnc-core@0.3.1-alpha":
+  version "0.3.1-alpha"
+  resolved "https://registry.yarnpkg.com/@lightninglabs/lnc-core/-/lnc-core-0.3.1-alpha.tgz#cfd6c0857a20013fb1819b40bd1158a2edc8bcf0"
+  integrity sha512-I/hThdItLWJ6RU8Z27ZIXhpBS2JJuD3+TjtaQXX2CabaUYXlcN4sk+Kx8N/zG/fk8qZvjlRWum4vHu4ZX554Fg==
 
-"@lightninglabs/lnc-web@^0.2.8-alpha":
-  version "0.2.8-alpha"
-  resolved "https://registry.yarnpkg.com/@lightninglabs/lnc-web/-/lnc-web-0.2.8-alpha.tgz#454f6d68bcd8d766761f326846467000fc9c251c"
-  integrity sha512-Pe0Moupd7mglbvbVZk7GqPNxa/4lFFWWsnYtiSahzjhNCmTaoQkk/gUY8kk1u5mHaqUmrL1YgLCLsmbGbWPV/g==
+"@lightninglabs/lnc-web@^0.3.1-alpha":
+  version "0.3.1-alpha"
+  resolved "https://registry.yarnpkg.com/@lightninglabs/lnc-web/-/lnc-web-0.3.1-alpha.tgz#bbeccff8f2b0071468681642d47c97f8c953020b"
+  integrity sha512-yL5SgBkl6kd6ISzJHGlSN7TXbiDoo1pfGvTOIdVWYVyXtEeW8PT+x6YGOmyQXGFT2OOf7fC7PfP9VnskDPuFaA==
   dependencies:
-    "@lightninglabs/lnc-core" "0.2.8-alpha"
-    crypto-js "4.1.1"
+    "@lightninglabs/lnc-core" "0.3.1-alpha"
+    crypto-js "4.2.0"
 
 "@mswjs/cookies@^0.2.2":
   version "0.2.2"
@@ -3545,12 +3545,7 @@ cross-spawn@^7.0.2, cross-spawn@^7.0.3:
     shebang-command "^2.0.0"
     which "^2.0.1"
 
-crypto-js@4.1.1:
-  version "4.1.1"
-  resolved "https://registry.npmjs.org/crypto-js/-/crypto-js-4.1.1.tgz"
-  integrity sha512-o2JlM7ydqd3Qk9CA0L4NL6mTzU2sdx96a+oOfPu8Mkl/PK51vSyoi8/rQ8NknZtk44vq15lmhAj9CIAGwgeWKw==
-
-crypto-js@^4.2.0:
+crypto-js@4.2.0, crypto-js@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/crypto-js/-/crypto-js-4.2.0.tgz#4d931639ecdfd12ff80e8186dba6af2c2e856631"
   integrity sha512-KALDyEYgpY+Rlob/iriUtjV6d5Eq+Y191A5g4UqLAi8CyGP9N1+FdVbkc1SxKc2r4YAYqG8JzO2KGL+AizD70Q==
