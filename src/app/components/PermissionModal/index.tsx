@@ -6,11 +6,13 @@ import PublisherCard from "~/app/components/PublisherCard";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { OriginData } from "~/types";
 
+type PermissionOption = "ask_everytime" | "dont_ask_current" | "dont_ask_any";
+
 type Props = {
   onClose: () => void;
   isOpen: boolean;
-  PermssionCallback: (permission: string) => void;
-  permission: string;
+  PermssionCallback: (permission: PermissionOption) => void;
+  permission: PermissionOption;
 };
 
 export default function PermissionModal({
@@ -46,7 +48,7 @@ export default function PermissionModal({
           isSmall={false}
           isCard={false}
         />
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 py-1">
           <p className="text-md">{t("set_permissions")}</p>
 
           <div className="flex flex-col gap-1">
@@ -59,7 +61,9 @@ export default function PermissionModal({
               label={tCommon("actions.save")}
               primary
               flex
-              onClick={() => PermssionCallback(permissionOption)}
+              onClick={() =>
+                PermssionCallback(permissionOption as PermissionOption)
+              }
             />
           </div>
         </div>
@@ -68,7 +72,7 @@ export default function PermissionModal({
   );
 
   type ListItemProps = {
-    checkedValue: "ask_everytime" | "dont_ask_current" | "dont_ask_any";
+    checkedValue: PermissionOption;
   };
 
   function ListItem({ checkedValue }: ListItemProps) {
@@ -86,7 +90,7 @@ export default function PermissionModal({
         />
         <label
           htmlFor="set-permission"
-          className="text-xs text-gray-600 dark:text-neutral-400 cursor-pointer"
+          className="text-sm text-gray-600 dark:text-neutral-400 cursor-pointer"
         >
           <Trans
             i18nKey={checkedValue}

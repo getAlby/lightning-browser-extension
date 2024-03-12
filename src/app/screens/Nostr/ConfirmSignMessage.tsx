@@ -17,11 +17,16 @@ import msg from "~/common/lib/msg";
 import { Event } from "~/extension/providers/nostr/types";
 import type { OriginData } from "~/types";
 
+type PermissionOption = "ask_everytime" | "dont_ask_current" | "dont_ask_any";
+
 function ConfirmSignMessage() {
   const navState = useNavigationState();
   const { t: tCommon } = useTranslation("common");
   const { t } = useTranslation("translation", {
     keyPrefix: "nostr",
+  });
+  const { t: tPermissions } = useTranslation("components", {
+    keyPrefix: "permissions_modal",
   });
   const navigate = useNavigate();
 
@@ -32,7 +37,8 @@ function ConfirmSignMessage() {
 
   const [showJSON, setShowJSON] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
-  const [permissionOption, setPermissionOption] = useState("ask_every_time");
+  const [permissionOption, setPermissionOption] =
+    useState<PermissionOption>("ask_everytime");
 
   // TODO: refactor: the success message and loading will not be displayed because after the reply the prompt is closed.
   async function confirm() {
@@ -116,8 +122,7 @@ function ConfirmSignMessage() {
                 </div>
               )}
             </div>
-            <div>
-              <div className="flex items-center mb-4"></div>
+            <div className="flex flex-col gap-4">
               <PermissionModal
                 isOpen={modalOpen}
                 onClose={() => {
@@ -139,12 +144,23 @@ function ConfirmSignMessage() {
                 onCancel={reject}
               />
 
-              <div className="flex gap-2 justify-center text-gray-600 dark:text-neutral-400 text-sm m-2">
+              <div className="flex gap-2 justify-center text-gray-600 dark:text-neutral-400 text-sm">
                 <div className="shrink-0">
                   <PopiconsShieldCheckLine className="w-5 h-5"></PopiconsShieldCheckLine>
                 </div>
                 <button type="button" onClick={() => setModalOpen(true)}>
-                  {permissionOption}
+                  <Trans
+                    i18nKey={permissionOption}
+                    t={tPermissions}
+                    values={{
+                      permission: t(`kinds.${event.kind}`, {
+                        defaultValue: t("kinds.unknown", {
+                          kind: event.kind,
+                        }),
+                      }),
+                    }}
+                    components={[]}
+                  />
                 </button>
               </div>
             </div>
