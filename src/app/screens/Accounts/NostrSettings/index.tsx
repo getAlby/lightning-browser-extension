@@ -16,7 +16,7 @@ import { default as nostr } from "~/common/lib/nostr";
 function NostrSettings() {
   const { t: tCommon } = useTranslation("common");
   const { t } = useTranslation("translation", {
-    keyPrefix: "accounts.account_view",
+    keyPrefix: "wallets.wallet_view",
   });
   const navigate = useNavigate();
   const [hasMnemonic, setHasMnemonic] = useState(false);

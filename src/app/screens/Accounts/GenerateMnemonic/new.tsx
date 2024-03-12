@@ -11,7 +11,7 @@ function MnemonicExplanation() {
   const theme = useTheme();
 
   const { t } = useTranslation("translation", {
-    keyPrefix: "accounts.account_view.mnemonic.new",
+    keyPrefix: "wallets.wallet_view.mnemonic.new",
   });
   const { t: tCommon } = useTranslation("common");
 

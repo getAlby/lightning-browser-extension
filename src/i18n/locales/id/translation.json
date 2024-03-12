@@ -20,7 +20,7 @@
         "review_connection_details": "Silakan cek kembali koneksi Anda.",
         "contact_support": "Jika kamu membutuhkan bantuan silakan hubungi support@getalby.com",
         "actions": {
-          "delete_edit_account": "Hapus akun yang salah dan ubah kembali"
+          "delete_edit_wallet": "Hapus akun yang salah dan ubah kembali"
         },
         "connection_taking_long": "Proses koneksi memakan waktu lama... Apakah kamu memasukan informasi secara benar? Apakah node kamu dapat terhubung?"
       },
@@ -687,7 +687,7 @@
     "confirm_sign_message": {
       "title": "Masuk"
     },
-    "confirm_add_account": {
+    "confirm_add_wallet": {
       "title": "Tambah akun",
       "tor_info": "Untuk menghubungkan melalui jaringan TOR kamu perlu memasang aplikasi pendamping Alby:"
     },
@@ -711,7 +711,7 @@
         "invalid_credentials": "Kata sandi salah. Silakan cek kembali kata sandi dan alamat email kamu dan coba lagi."
       }
     },
-    "account_menu": {
+    "wallet_menu": {
       "options": {
         "account": {
           "go_to_web_wallet": "Atur akun web kamu"

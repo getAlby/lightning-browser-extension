@@ -22,7 +22,7 @@
         "connection_taking_long": "Připojování zabralo více, než bylo očekáváno... Zadali jste údaje o připojení správně? Je váš uzel dostupný?",
         "contact_support": "Pokud potřebujete pomoct, prosím kontaktujte support@getalby.com",
         "actions": {
-          "delete_edit_account": "Smažte nevalidní účet a změny proveďte znovu"
+          "delete_edit_wallet": "Smažte nevalidní účet a změny proveďte znovu"
         }
       },
       "pin_extension": {
@@ -737,7 +737,7 @@
         "invalid_credentials": "Chybné heslo. Prosím zkontrolujte své heslo a emailovou adresu a zkuste to znovu."
       }
     },
-    "account_menu": {
+    "wallet_menu": {
       "screen_reader": "Přepnout rozbalovací nabídku"
     },
     "publishers_table": {

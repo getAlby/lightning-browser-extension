@@ -22,7 +22,7 @@
         "connection_taking_long": "Anslutningen tar längre tid än förväntat... Är inställningarna korrekta? Är din nod nåbar?",
         "contact_support": "Om du behöver hjälp, kontakta support@getalby.com",
         "actions": {
-          "delete_edit_account": "Radera ogiltigt konto och redigera igen"
+          "delete_edit_wallet": "Radera ogiltigt konto och redigera igen"
         }
       },
       "pin_extension": {
@@ -732,7 +732,7 @@
         "name": "StartOS"
       }
     },
-    "confirm_add_account": {
+    "confirm_add_wallet": {
       "title": "Lägg till konto",
       "content": "Den här webbplatsen vill lägga till ett konto ({{connector}}):",
       "tor_info": "För att kunna ansluta via TOR-nätverket måste du först installera Alby kompanion appen:"
@@ -1023,7 +1023,7 @@
         "invalid_credentials": "Ogitligt lösenord. Kontrollera ditt lösenord, e-postadress och försök igen."
       }
     },
-    "account_menu": {
+    "wallet_menu": {
       "screen_reader": "Öppna droppmeny",
       "options": {
         "account": {

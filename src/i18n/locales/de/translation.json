@@ -20,7 +20,7 @@
       "test_connection": {
         "review_connection_details": "Bitte überprüfe deine Verbindungsdaten.",
         "actions": {
-          "delete_edit_account": "Ungültiges Konto löschen und erneut bearbeiten"
+          "delete_edit_wallet": "Ungültiges Konto löschen und erneut bearbeiten"
         },
         "ready": "Großartig, du kannst jetzt loslegen!",
         "initializing": "Dein Konto wird initialisiert. Bitte warte, dies kann eine Minute dauern...",
@@ -439,7 +439,6 @@
       "account_view": {
         "title2": "Konto",
         "title1": "Kontoeinstellung",
-
         "name": {
           "title": "Name anzeigen",
           "placeholder": "Konto Anzeigename"
@@ -839,7 +838,7 @@
         "name": "StartOS"
       }
     },
-    "confirm_add_account": {
+    "confirm_add_wallet": {
       "title": "Konto hinzufügen",
       "content": "Diese Webseite möchte ein Konto hinzufügen ({{connector}}):",
       "tor_info": "Um sich über das TOR-Netzwerk zu verbinden, musst du zunächst die Alby-Begleit-App installieren:"
@@ -971,7 +970,7 @@
     }
   },
   "components": {
-    "account_menu": {
+    "wallet_menu": {
       "options": {
         "account": {
           "go_to_web_wallet": "Verwalte dein Web-Konto"

@@ -20,7 +20,7 @@ export default function MnemonicInputs({
   isConfirmed,
 }: React.PropsWithChildren<MnemonicInputsProps>) {
   const { t } = useTranslation("translation", {
-    keyPrefix: "accounts.account_view.mnemonic",
+    keyPrefix: "wallets.wallet_view.mnemonic",
   });
   const [revealedIndex, setRevealedIndex] = useState<number | undefined>(
     undefined

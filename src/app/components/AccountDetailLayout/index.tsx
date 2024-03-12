@@ -11,7 +11,7 @@ function AccountDetailLayout() {
   const isRoot = useMatch("accounts/:id");
   const { accounts } = useAccounts();
   const { t } = useTranslation("translation", {
-    keyPrefix: "accounts.account_view",
+    keyPrefix: "wallets.wallet_view",
   });
   const { id } = useParams() as { id: string };
 

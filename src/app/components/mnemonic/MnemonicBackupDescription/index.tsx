@@ -8,7 +8,7 @@ import { classNames } from "~/app/utils";
 
 function MnemonicInstructions() {
   const { t } = useTranslation("translation", {
-    keyPrefix: "accounts.account_view.mnemonic",
+    keyPrefix: "wallets.wallet_view.mnemonic",
   });
 
   return (

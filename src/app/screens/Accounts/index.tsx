@@ -14,7 +14,7 @@ function AccountsScreen() {
   const navigate = useNavigate();
 
   const { t } = useTranslation("translation", {
-    keyPrefix: "accounts",
+    keyPrefix: "wallets",
   });
 
   return (
