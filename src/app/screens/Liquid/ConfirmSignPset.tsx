@@ -1,4 +1,3 @@
-import { InfoIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
 import PublisherCard from "@components/PublisherCard";
@@ -113,7 +112,17 @@ function ConfirmSignPset() {
                   target="_blank"
                 >
                   <div className="bg-blue-500 rounded-full">
-                    <InfoIcon className="h-4 w-4 text-white" />
+                    <svg
+                      className="h-4 w-4 text-white"
+                      data-v-52a72b4a=""
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <circle cx="12" cy="12" r="8.5"></circle>
+                      <path strokeLinecap="round" d="M12 10.5v7M12 8V7"></path>
+                    </svg>
                   </div>
                 </Hyperlink>
               </div>

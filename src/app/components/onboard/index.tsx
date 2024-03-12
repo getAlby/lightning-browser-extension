@@ -1,4 +1,3 @@
-import { InfoCircleIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import { PopiconsClockLine, PopiconsKeyLeftLine } from "@popicons/react";
 import { useTranslation } from "react-i18next";
 import ConfirmOrCancel from "~/app/components/ConfirmOrCancel";
@@ -61,7 +60,17 @@ export default function Onboard() {
               <p>{t("request1")}</p>
             </div>
             <div className="mb-2 flex items-center">
-              <InfoCircleIcon className="w-7 h-7 mr-2" />
+              <svg
+                className="w-7 h-7 mr-2"
+                data-v-52a72b4a=""
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <circle cx="12" cy="12" r="8.5"></circle>
+                <path strokeLinecap="round" d="M12 10.5v7M12 8V7"></path>
+              </svg>
               <p>{t("request2")}</p>
             </div>
             <div className="mb-2 flex items-center">

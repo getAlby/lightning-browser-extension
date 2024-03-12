@@ -1,4 +1,3 @@
-import { BitcoinIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
 import Container from "@components/Container";
 import Header from "@components/Header";
 import IconButton from "@components/IconButton";
@@ -135,7 +134,21 @@ function Receive() {
                 title={t("actions.bitcoin_address.title")}
                 description={t("actions.bitcoin_address.description")}
                 icon={
-                  <BitcoinIcon className="w-8 h-8 text-gray-400 dark:text-neutral-500" />
+                  <svg
+                    className="w-10 h-10 text-gray-400 dark:text-neutral-500"
+                    data-v-52a72b4a=""
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path d="M20.247 14.052a8.502 8.502 0 01-10.302 6.194C5.394 19.11 2.62 14.5 3.754 9.95c1.134-4.551 5.74-7.33 10.288-6.195 4.562 1.12 7.337 5.744 6.205 10.298z"></path>
+                    <path
+                      strokeLinecap="square"
+                      strokeLinejoin="round"
+                      d="M9.4 14.912l1.693-6.792M9.637 7.757L13.818 8.8c2.728.68 2.12 3.877-.786 3.153 3.184.794 2.86 4.578-.907 3.639-1.841-.46-3.813-.95-3.813-.95M10.306 11.274l2.669.665M11.578 8.241l.363-1.455M9.521 16.489l.363-1.456M13.518 8.725l.363-1.455M11.462 16.973l.363-1.456"
+                    ></path>
+                  </svg>
                 }
                 onClick={() => {
                   navigate("/onChainReceive");
