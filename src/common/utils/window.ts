@@ -5,6 +5,7 @@ export async function createPromptWindow(url: string): Promise<number> {
   const windowHeight = 600;
 
   const { top, left } = await getPosition(windowWidth, windowHeight);
+  console.log("getPosition", top, left);
 
   const popupOptions: browser.Windows.CreateCreateDataType = {
     url: url,
@@ -35,6 +36,12 @@ async function getPosition(
   let top = 0;
   try {
     const lastFocused = await browser.windows.getLastFocused();
+    console.log(
+      "lastFocused",
+      lastFocused.top,
+      lastFocused.width,
+      lastFocused.height
+    );
 
     if (
       lastFocused &&
@@ -53,6 +60,7 @@ async function getPosition(
     // opened from the background chrome process for the extension that
     // has no physical dimensions
     const { screenX, screenY, outerWidth } = window;
+    console.log("catch", screenX, screenY, outerWidth);
     top = Math.max(screenY, 0);
     left = Math.max(screenX + (outerWidth - width), 0);
   }
