@@ -311,22 +311,8 @@
               "label": "新しいNostrアカウントを作成する",
               "description": "新しいNostr鍵のペアでマスター鍵を生成する。"
             },
-            "import": {
-              "label": "Nostrアカウントをインポートする",
-              "title": "Nostrアカウントをどのようにインポートしますか？",
-              "description": "既存のNostr秘密鍵を使用するか、マスターキーから導出する",
-              "private_key": {
-                "description": "Nostr秘密鍵をAlbyにインポートするためにペーストしてください",
-                "label": "Nostr秘密鍵を使用する"
-              },
-              "recovery_phrase": {
-                "label": "リカバリーフレーズを使用する",
-                "description": "Nostr鍵をインポートするためにマスターキーのリカバリーフレーズを使用してください"
-              }
-            },
             "title": "Nostrキーのセットアップ",
-            "description": "新しいNostrアカウント（秘密鍵と公開鍵のペア）を作成するか、既存のアカウントをインポートするかを選択します。",
-            "new_to_nostr": "Nostrは初めてですか？<0>もっと詳しく知る</0>"
+            "description": "新しいNostrアカウント（秘密鍵と公開鍵のペア）を作成するか、既存のアカウントをインポートするかを選択します。"
           },
           "private_key": {
             "successfully_removed": "Nostr秘密鍵の削除に成功しました",
