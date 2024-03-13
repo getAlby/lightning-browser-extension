@@ -293,21 +293,7 @@
             "new": {
               "label": "Skapa ett nytt Nostr-konto",
               "description": "Generera en huvudnyckel med ett par nya Nostr-nycklar."
-            },
-            "import": {
-              "label": "Importera ett Nostr-konto",
-              "description": "Använd en befintlig privat Nostr-nyckel eller härled den från din huvudnyckel",
-              "recovery_phrase": {
-                "label": "Använd återställningsfras",
-                "description": "Använd huvudnyckelåterställningsfrasen för att importera dina Nostr-nycklar"
-              },
-              "private_key": {
-                "description": "Klistra in din privata Nostr-nyckel för att importera den till Alby",
-                "label": "Använd Nostr privat nyckel"
-              },
-              "title": "Hur skulle du vilja importera ditt Nostr-konto?"
-            },
-            "new_to_nostr": "Ny på Nostr? <0>Läs mer</0>"
+            }
           }
         },
         "remove": {
@@ -358,8 +344,7 @@
           "lnurl": {
             "title": "Logga in med Lightning",
             "use_mnemonic": "Använd Master Key för att logga in på lightning appar (LNURL Auth)"
-          },
-          "new": {}
+          }
         },
         "remove_secretkey": {
           "title": "Ta bort huvudnyckeln",
