@@ -53,7 +53,7 @@ class Nostr {
     return signedHex;
   }
 
-  encrypt(pubkey: string, text: string) {
+  nip04Encrypt(pubkey: string, text: string) {
     const key = secp256k1.getSharedSecret(this.privateKey, "02" + pubkey);
     const normalizedKey = Buffer.from(key.slice(1, 33));
     const hexNormalizedKey = secp256k1.etc.bytesToHex(normalizedKey);
@@ -68,7 +68,7 @@ class Nostr {
     )}`;
   }
 
-  async decrypt(pubkey: string, ciphertext: string) {
+  async nip04Decrypt(pubkey: string, ciphertext: string) {
     const [cip, iv] = ciphertext.split("?iv=");
     const key = secp256k1.getSharedSecret(this.privateKey, "02" + pubkey);
     const normalizedKey = Buffer.from(key.slice(1, 33));

@@ -23,11 +23,11 @@ describe("nostr.nip04", () => {
     const aliceNostr = new Nostr(alice.privateKey);
 
     const message = "Secret message that is sent from Alice to Bob";
-    const encrypted = aliceNostr.encrypt(bob.publicKey, message);
+    const encrypted = aliceNostr.nip04Encrypt(bob.publicKey, message);
 
     const bobNostr = new Nostr(bob.privateKey);
 
-    const decrypted = await bobNostr.decrypt(alice.publicKey, encrypted);
+    const decrypted = await bobNostr.nip04Decrypt(alice.publicKey, encrypted);
 
     expect(decrypted).toMatch(message);
   });
@@ -36,13 +36,13 @@ describe("nostr.nip04", () => {
     const aliceNostr = new Nostr(alice.privateKey);
 
     const message = "Secret message that is sent from Alice to Bob";
-    const encrypted = aliceNostr.encrypt(bob.publicKey, message);
+    const encrypted = aliceNostr.nip04Encrypt(bob.publicKey, message);
 
     const carolNostr = new Nostr(carol.privateKey);
 
     let decrypted;
     try {
-      decrypted = await carolNostr.decrypt(alice.publicKey, encrypted);
+      decrypted = await carolNostr.nip04Decrypt(alice.publicKey, encrypted);
     } catch (e) {
       decrypted = "error decrypting message";
     }
