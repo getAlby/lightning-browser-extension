@@ -363,8 +363,8 @@ class Lnc implements Connector {
         preimage: utils.base64ToHex(data.paymentPreimage.toString()),
         paymentHash: utils.base64ToHex(data.paymentHash.toString()),
         route: {
-          total_amt: parseInt(data.paymentRoute?.totalAmtMsat ?? "0") * 1000,
-          total_fees: parseInt(data.paymentRoute?.totalFeesMsat ?? "0") * 1000,
+          total_amt: parseInt(data.paymentRoute?.totalAmtMsat ?? "0") / 1000,
+          total_fees: parseInt(data.paymentRoute?.totalFeesMsat ?? "0") / 1000,
         },
       },
     };
