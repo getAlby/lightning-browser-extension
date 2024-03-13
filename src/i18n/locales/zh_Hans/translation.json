@@ -273,25 +273,11 @@
           },
           "setup": {
             "description2": "在 Alby 中创建的每个 Nostr 帐户都带有<0>恢复短语</0> —— 一组12个单词，始终保证重新获得对你的 Nostr 私钥的访问。",
-            "new_to_nostr": "Nostr 新手？<0>了解更多</0>",
             "title": "设置你的 nostr 密钥",
             "description": "选择是否要创建一个新的 nostr 帐户（一对私钥和公钥）或导入现有帐户。",
             "new": {
               "label": "创建新的 nostr 帐户",
               "description": "通过使用一对新的 nostr 密钥生成主密钥。"
-            },
-            "import": {
-              "label": "导入 nostr 帐户",
-              "description": "使用已有的 nostr 私钥或从主密钥中将其派生",
-              "title": "你想如何导入你的 nostr 帐户？",
-              "private_key": {
-                "label": "使用 nostr 私钥",
-                "description": "粘贴你的 nostr 私钥将其导入 Alby"
-              },
-              "recovery_phrase": {
-                "label": "使用恢复短语",
-                "description": "使用主密钥恢复短语导入你的 nostr 密钥"
-              }
             }
           }
         },
