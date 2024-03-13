@@ -371,6 +371,7 @@ class Lnc implements Connector {
       },
     };
   }
+
   async keysend(args: KeysendArgs): Promise<SendPaymentResponse> {
     this.checkConnection();
 
@@ -389,6 +390,7 @@ class Lnc implements Connector {
         args.customRecords[key]
       ).toString(Base64);
     }
+
     //mandatory record for keysend
     records_base64[5482373484] = preimage_base64;
 
@@ -402,6 +404,7 @@ class Lnc implements Connector {
     if (data.paymentError) {
       throw new Error(data.paymentError);
     }
+
     return {
       data: {
         preimage: utils.base64ToHex(data.paymentPreimage.toString()),
