@@ -399,17 +399,9 @@
             "title": "Erste Schritte mit Alby Extension",
             "description": "Neu bei Alby Extension? Sieh dir unsere Anleitungen, Videos und Erklärungen an"
           },
-          "backup_masterkey": {
-            "title": "Sichere dein Hauptschlüssel",
-            "description": "Erfahre, was der Master Key ist, wie er für Nostr verwendet wird und stelle sicher, dass du ein Backup erstellst"
-          },
           "receive_bitcoin": {
             "title": "Bitcoin erhalten",
             "description": "Hole dir Bitcoin an deine Lightning-Adresse, eine Lightning-Rechnung oder eine Bitcoin-Adresse."
-          },
-          "import_masterkey": {
-            "title": "Importiere deinen Hauptschlüssel",
-            "description": "Wenn du bereits einen Master Key hast, kannst du ihn mit der Wiederherstellungsphrase importieren"
           }
         }
       },
@@ -490,20 +482,6 @@
               "description": "Generiere einen Hauptschlüssel mit einem Paar neuer Nostr-Schlüssel.",
               "label": "Ein neues Nostr-Konto erstellen"
             },
-            "import": {
-              "label": "Ein Nostr-Konto importieren",
-              "description": "Verwende einen vorhandenen privaten Nostr-Schlüssel oder leite ihn von deinem Hauptschlüssel ab",
-              "private_key": {
-                "label": "Privaten Schlüssel von Nostr verwenden",
-                "description": "Füge deinen privaten Nostr-Schlüssel ein, um ihn in Alby zu importieren"
-              },
-              "recovery_phrase": {
-                "label": "Wiederherstellungsphrase verwenden",
-                "description": "Verwende die Phrase zur Wiederherstellung des Hauptschlüssels, um deinen Nostr-Schlüssel zu importieren"
-              },
-              "title": "Wie möchten dein Nostr-Konto importieren?"
-            },
-            "new_to_nostr": "Neu bei Nostr? <0>Mehr erfahren</0>",
             "description2": "Jedes Nostr-Konto, das in Alby erstellt wird, wird mit einer <0>Recovery Phrase</0> geliefert - eine Reihe von 12 Wörtern, die es dir ermöglicht, jederzeit wieder Zugang zu deinen privaten Nostr-Schlüsseln zu erhalten."
           }
         },
@@ -550,7 +528,6 @@
             "title": "Was ist ein Hauptschlüssel?",
             "items": {
               "usage": "Du kannst denselben Master Key in jede angeschlossene Wallet in der Alby Extension importieren und verwenden",
-              "recovery_phrase": "Um deinen Master Key in eine beliebige Wallet in Alby zu importieren, musst du eine Wiederherstellungsphrase verwenden",
               "keys": "Der Master Key ist deine Identität, mit der du die Protokolle wie Nostr, Liquid Network oder der Basisschicht von Bitcoin interagieren kannst."
             }
           },
