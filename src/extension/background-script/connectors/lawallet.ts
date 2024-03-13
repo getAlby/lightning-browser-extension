@@ -1,8 +1,7 @@
 import { schnorr } from "@noble/curves/secp256k1";
 import * as secp256k1 from "@noble/secp256k1";
-import fetchAdapter from "@vespaiach/axios-fetch-adapter";
-import type { AxiosResponse, ResponseType } from "axios";
-import axios, { AxiosRequestConfig, Method } from "axios";
+import type { ResponseType } from "axios";
+import { Method } from "axios";
 import lightningPayReq from "bolt11";
 import Hex from "crypto-js/enc-hex";
 import sha256 from "crypto-js/sha256";
@@ -40,11 +39,16 @@ interface Config {
   relayUrl: string;
 }
 
-const defaultHeaders = {
-  Accept: "application/json",
-  "Content-Type": "application/json",
-  "X-User-Agent": "alby-extension",
-};
+export class HttpError extends Error {
+  status: number;
+  error: Error | undefined;
+
+  constructor(status: number, message: string, error?: Error) {
+    super(message);
+    this.status = status;
+    this.error = error;
+  }
+}
 
 export default class LaWallet implements Connector {
   account: Account;
@@ -172,7 +176,7 @@ export default class LaWallet implements Connector {
       this.config.apiEndpoint,
       "POST",
       "/nostr/fetch",
-      { body: filter }
+      filter
     );
 
     const balanceEvent = events[0];
@@ -214,7 +218,7 @@ export default class LaWallet implements Connector {
         this.config.apiEndpoint,
         "POST",
         "/nostr/publish",
-        { body: event },
+        event,
         "blob"
       );
       return this.getPaymentStatus(event);
@@ -361,60 +365,56 @@ export default class LaWallet implements Connector {
       this.config.apiEndpoint,
       "POST",
       "/nostr/fetch",
-      { body: filter }
+      filter
     );
 
     return zapEvents;
   }
 
   // Static Methods
+
+  /**
+   *
+   * @param url The URL to fetch data from.
+   * @param method HTTP Method
+   * @param path API path
+   * @param args POST arguments
+   * @param responseType
+   * @returns
+   * @throws {HttpError} When the response has an HTTP error status.
+   */
   static async request<Type>(
     url: string,
     method: Method,
     path: string,
-    args?: Record<string, unknown>,
+    args: Record<string, unknown> = {},
     responseType: ResponseType = "json"
   ): Promise<Type> {
-    const reqConfig: AxiosRequestConfig = {
-      method,
-      url: `${url}${path}`,
-      responseType,
-      headers: {
-        ...defaultHeaders,
-      },
-      adapter: fetchAdapter,
-    };
+    const headers = new Headers();
+    headers.append("Accept", "application/json");
+    headers.append("Content-Type", "application/json");
 
-    if (method === "POST") {
-      reqConfig.data = args?.body || {};
-    } else if (args !== undefined) {
-      reqConfig.params = args;
+    let body = null;
+    let res = null;
+
+    if (method !== "GET") {
+      body = JSON.stringify(args);
     }
-
-    let data;
 
     try {
-      const res = await axios(reqConfig);
-      data = res.data;
-    } catch (e) {
-      console.error(e);
-
-      if (axios.isAxiosError(e)) {
-        const errResponse = e.response as AxiosResponse;
-
-        if (errResponse?.status === 404) {
-          const method = path.replace("/", "");
-          throw new Error(`${method} not supported by the connected account.`);
-        }
-
-        console.error(e);
-        throw new Error(errResponse.data.message);
-      }
-
-      throw e;
+      res = await fetch(`${url}${path}`, {
+        headers,
+        method,
+        body,
+      });
+    } catch (e: unknown) {
+      throw new HttpError(0, "Network error", e as Error);
     }
 
-    return data;
+    if (!res.ok) {
+      throw new HttpError(res.status, await res.text());
+    }
+    return await (responseType === "json" ? res.json() : res.text());
   }
 }
 
