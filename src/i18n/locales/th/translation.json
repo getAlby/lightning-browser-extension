@@ -107,21 +107,7 @@
             "new": {
               "description": "สร้าง Master Key และคู่ Nostr keys ใหม่",
               "label": "สร้างบัญชี Nostr ใหม่"
-            },
-            "import": {
-              "label": "นำเข้าบัญชี Nostr",
-              "description": "ใช่ Nostr private key ที่มีอยู่แล้ว หรือรับมาจาก Master Key ของคุณ",
-              "title": "คุณต้องการจะนำเข้าบัญชี Nostr ของคุณด้วยวิธีใด ?",
-              "private_key": {
-                "description": "วาง Nostr private key ของคุณหรือนำเข้าจาก Alby",
-                "label": "ใช้ Nostr private key"
-              },
-              "recovery_phrase": {
-                "label": "ใช้ recovery phrase",
-                "description": "ใช้ recovery phrase ของ Master Key เพื่อนำเข้า Nostr keys ของคุณ"
-              }
-            },
-            "new_to_nostr": "ยังใหม่กับ Nostr ? <0>Learn more</0>"
+            }
           },
           "private_key": {
             "label": "Nostr Private Key",
