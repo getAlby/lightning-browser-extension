@@ -318,6 +318,8 @@ class Lnc implements Connector {
             id: `${payment.paymentRequest}-${index}`,
             memo: memo,
             preimage: payment.paymentPreimage,
+            payment_hash: payment.paymentHash,
+
             settled: true,
             settleDate: parseInt(payment.creationTimeNs) / 1_000_000,
             totalAmount: parseInt(payment.valueSat),
