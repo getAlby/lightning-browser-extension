@@ -161,12 +161,12 @@ export default function ConnectCommando() {
           {showAdvanced ? (
             <>
               {tCommon("hide_advanced")}
-              <PopiconsChevronTopLine className="h-5 w-5 inline-flex" />
+              <PopiconsChevronTopLine className="h-4 w-4 inline-flex" />
             </>
           ) : (
             <>
               {tCommon("advanced")}
-              <PopiconsChevronBottomLine className="h-5 w-5 inline-flex" />
+              <PopiconsChevronBottomLine className="h-4 w-4 inline-flex" />
             </>
           )}
         </Hyperlink>
