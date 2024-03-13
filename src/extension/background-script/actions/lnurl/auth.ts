@@ -94,14 +94,7 @@ export async function authFunction({
 
     const hashingKey = sha256(keyMaterialForSignature).toString(Hex);
 
-    const { settings } = state.getState();
-    if (settings.isUsingLegacyLnurlAuthKey) {
-      linkingKeyPriv = hmacSHA256(url.host, hashingKey).toString(Hex);
-    } else {
-      linkingKeyPriv = hmacSHA256(url.host, Hex.parse(hashingKey)).toString(
-        Hex
-      );
-    }
+    linkingKeyPriv = hmacSHA256(url.host, Hex.parse(hashingKey)).toString(Hex);
   }
 
   // make sure we got a linkingkey (just to be sure for whatever reason)

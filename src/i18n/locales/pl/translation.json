@@ -404,18 +404,6 @@
         "title": "Rozszerzenia na stronach",
         "subtitle": "Rozszerzenia napiwków na Twitterze, YouTube, etc."
       },
-      "lnurl_auth": {
-        "title": "LNURL-Auth",
-        "hint": "jest generycznym protokołem uwierzytelniania. Poświadcza tożsamość użytkownika za pomocą podpisów cyfrowych. Protokół nie wyamga żadnych danych identyfikujących takich jak hasła, emaile, nazwy użytkownika, itp. Za pomocą Alby możesz używać swoich kont Lightning aby bezpiecznie logować się na stronach internetowych. Aby zapewnić kompatybilność z innymi portfelami musieliśmy zrobić kilka modyfikacji, które możesz skonfigurować tutaj. <0>Najlepiej gdy te opcje są WYŁĄCZONE.</0> Używaj ich tylko gdy masz stare konta.",
-        "legacy_lnurl_auth_202207": {
-          "title": "Stary (Legacy) LNURL-Auth",
-          "subtitle": "Generowanie kluczy dla LNURL-auth zmieniło się (w lipcu 2022 r.) Alby nie było kompatybilne z innymi implementacjami. To się zmieniło, ale teraz używane są inne klucze logowania. Jeśli używano wcześniej LNURL-auth do logowania, możesz nadal używać starej metody. Ta opcja później będzie usunięta, więc pamiętaj by przejść na nowy login."
-        },
-        "legacy_lnurl_auth": {
-          "title": "Stare podpisywanie dla LNDhub i LNbits",
-          "subtitle": "Podpisywanie wiadomości i logowanie z kontami LNDhub (np. BlueWallet) i LNbits zmieniło się (w marcu 2022 r.) Jeśli logowano się z tymi kontami możesz nadal włączyć stary sposób podpisywania. Ta opcja później będzie usunięta, więc pamiętaj by przejść na nowy login."
-        }
-      },
       "camera_access": {
         "title": "Dostęp do kamery",
         "subtitle": "W celu skanowania kodów QR",
