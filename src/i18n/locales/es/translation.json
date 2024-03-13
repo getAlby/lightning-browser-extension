@@ -826,9 +826,12 @@
       "feerates": "Devuelve las tarifas que utilizará CLN"
     },
     "nostr": {
-      "signmessage": "Firma el mensaje con tu clave",
       "getpublickey": "Leer tu clave pública",
-      "nip04decrypt": "Descifrar datos"
+      "nip04decrypt": "Descifrar datos",
+      "nip04encrypt": "Cifrar datos",
+      "nip44decrypt": "Descifrar datos",
+      "nip44encrypt": "Cifrar datos",
+      "signmessage": "Firma el mensaje con tu clave"
     },
     "lnd": {
       "queryroutes": "Consultar una posible ruta",

@@ -756,6 +756,8 @@
     "nostr": {
       "signmessage": "เซ็นข้อความด้วย key ของคุณ",
       "nip04decrypt": "ถอดรหัสข้อมูล",
+      "nip44encrypt": "เข้ารหัสข้อมูล",
+      "nip44decrypt": "ถอดรหัสข้อมูล",
       "getpublickey": "แสดง public key ของคุณ"
     },
     "commando": {
