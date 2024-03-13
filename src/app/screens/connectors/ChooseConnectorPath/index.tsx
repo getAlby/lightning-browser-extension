@@ -20,7 +20,7 @@ export default function ChooseConnectorPath() {
         <h1 className="text-2xl font-bold dark:text-white text-center mb-8">
           {t("title")}
         </h1>
-        <div className="grid lg:grid-cols-3 gap-5 mb-4">
+        <div className="grid lg:grid-cols-2 gap-8 mb-4">
           <ConnectorPath
             title={t("other.title")}
             icon={
@@ -58,33 +58,7 @@ export default function ChooseConnectorPath() {
               </Link>
             }
           />
-          <ConnectorPath
-            title={t("voltage.title")}
-            icon={<img src="assets/icons/voltage.png" className="w-10 h-10" />}
-            description={t("voltage.description")}
-            content={
-              <>
-                <FeatureItem type="success">{t("voltage.point1")}</FeatureItem>
-                <FeatureItem type="success">{t("voltage.point2")}</FeatureItem>
-                <FeatureItem type="disabled">{t("voltage.point3")}</FeatureItem>
-                <FeatureItem type="success">{t("voltage.point4")}</FeatureItem>
-              </>
-            }
-            actions={
-              <Link
-                to="choose-connector/voltage"
-                rel="noreferrer noopener"
-                className="flex flex-1"
-              >
-                <Button
-                  tabIndex={-1}
-                  label={t("voltage.connect")}
-                  primary
-                  flex
-                />
-              </Link>
-            }
-          />
+
           <ConnectorPath
             title={t("alby.title")}
             icon={
