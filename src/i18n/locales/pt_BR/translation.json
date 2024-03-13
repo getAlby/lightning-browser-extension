@@ -410,9 +410,7 @@
             "use_mnemonic": "Use a chave mestra para acessar aplicativos com tecnologia (LNURL Auth)",
             "title": "Login relâmpago"
           },
-          "new": {
-            "title": "O que é uma chave mestra?"
-          }
+          "new": {}
         },
         "remove_secretkey": {
           "title": "Remover chave mestra",
@@ -1105,8 +1103,11 @@
   "permissions": {
     "nostr": {
       "getpublickey": "Ler sua chave pública",
-      "signmessage": "Assinar mensagem com sua chave",
-      "nip04decrypt": "Descriptografar dados"
+      "nip04decrypt": "Descriptografar dados",
+      "nip04encrypt": "Criptografar dados",
+      "nip44decrypt": "Descriptografar dados",
+      "nip44encrypt": "Criptografar dados",
+      "signmessage": "Assinar mensagem com sua chave"
     },
     "lnc": {
       "openchannel": ""
