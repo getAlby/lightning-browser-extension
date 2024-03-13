@@ -368,9 +368,7 @@
             "title": "Logga in med Lightning",
             "use_mnemonic": "Använd Master Key för att logga in på lightning appar (LNURL Auth)"
           },
-          "new": {
-            "title": "Vad är en Master Key?"
-          }
+          "new": {}
         },
         "remove_secretkey": {
           "title": "Ta bort huvudnyckeln",

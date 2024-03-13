@@ -439,7 +439,6 @@
       "account_view": {
         "title2": "Konto",
         "title1": "Kontoeinstellung",
-
         "name": {
           "title": "Name anzeigen",
           "placeholder": "Konto Anzeigename"
@@ -561,9 +560,7 @@
             "title": "Anmeldung mit Lightning",
             "use_mnemonic": "Hauptschlüssel für die Anmeldung bei Lightning-Anwendungen verwenden (LNURL Auth)"
           },
-          "new": {
-            "title": "Was ist ein Hauptschlüssel?"
-          }
+          "new": {}
         },
         "remove_secretkey": {
           "title": "Hauptschlüssel entfernen",

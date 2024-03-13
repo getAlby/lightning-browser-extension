@@ -18,8 +18,8 @@ function NavbarLink({ children, end = false, href, target }: Props) {
         classNames(
           "flex items-center font-semibold hover:text-gray-600 dark:hover:text-neutral-400 transition px-1 text-md",
           isActive
-            ? " text-gray-800 dark:text-neutral-200"
-            : " text-gray-400 dark:text-gray-600"
+            ? "text-gray-800 dark:text-neutral-200"
+            : "text-gray-400 dark:text-neutral-600"
         )
       }
     >
