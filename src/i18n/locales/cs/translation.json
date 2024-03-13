@@ -291,9 +291,7 @@
           "placeholder": "Jméno účtu"
         },
         "mnemonic": {
-          "new": {
-            "title": "Co je to Master klíč?"
-          },
+          "new": {},
           "generate": {
             "button": "Vygenerovat Master klíč",
             "confirm": "Zazálohoval jsem svou záložní (recovery) frázi k mému Master klíči na soukromém bezpečném místě.",
