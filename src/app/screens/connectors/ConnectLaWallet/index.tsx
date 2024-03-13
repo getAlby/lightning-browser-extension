@@ -9,7 +9,10 @@ import msg from "~/common/lib/msg";
 
 import Button from "~/app/components/Button";
 import PasswordViewAdornment from "~/app/components/PasswordViewAdornment";
-import LaWallet from "~/extension/background-script/connectors/lawallet";
+import LaWalletToast from "~/app/screens/connectors/ConnectLaWallet/LaWalletToast";
+import LaWallet, {
+  HttpError,
+} from "~/extension/background-script/connectors/lawallet";
 import Nostr from "~/extension/background-script/nostr";
 import { ConnectorType } from "~/types";
 import logo from "/static/assets/icons/lawallet.png";
@@ -62,12 +65,27 @@ export default function ConnectLaWallet() {
     const publicKey = new Nostr(private_key).getPublicKey();
     const domain = identity_endpoint.replace(/https?:\/\//, "");
 
-    const { username } = await LaWallet.request<{ username: string }>(
-      identity_endpoint,
-      "GET",
-      `/api/pubkey/${publicKey}`,
-      undefined
-    );
+    let username;
+    try {
+      const response = await LaWallet.request<{ username: string }>(
+        identity_endpoint,
+        "GET",
+        `/api/pubkey/${publicKey}`,
+        undefined
+      );
+      username = response.username;
+    } catch (e) {
+      if (e instanceof HttpError && e.status === 404) {
+        toast.error(<LaWalletToast domain={domain} />, {
+          position: "top-center",
+        });
+      } else {
+        toast.error(<ConnectionErrorToast message={(e as Error).message} />);
+      }
+
+      setLoading(false);
+      return;
+    }
 
     const account = {
       name: `${username}@${domain}`,
