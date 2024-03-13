@@ -1,4 +1,7 @@
-import { Invoice } from "@lightninglabs/lnc-core/dist/types/proto/lnd/lightning";
+import {
+  Invoice,
+  Invoice_InvoiceState,
+} from "@lightninglabs/lnc-core/dist/types/proto/lnd/lightning";
 import LNC from "@lightninglabs/lnc-web";
 import lightningPayReq from "bolt11";
 import Base64 from "crypto-js/enc-base64";
@@ -264,7 +267,7 @@ class Lnc implements Connector {
           id: `${invoice.paymentRequest}-${index}`,
           memo: invoice.memo,
           preimage: invoice.rPreimage.toString(),
-          settled: invoice.settled,
+          settled: invoice.state === Invoice_InvoiceState.SETTLED,
           settleDate: parseInt(invoice.settleDate) * 1000,
           totalAmount: parseInt(invoice.value),
           type: "received",
@@ -341,7 +344,7 @@ class Lnc implements Connector {
     });
     return {
       data: {
-        paid: data.state == "SETTLED",
+        paid: data.state === Invoice_InvoiceState.SETTLED,
       },
     };
   }
