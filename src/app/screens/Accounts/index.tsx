@@ -47,17 +47,17 @@ function AccountsScreen() {
                       />
 
                       <div className="ml-4">
-                        <h3 className="font-bold text-gray-900 dark:text-white break-all whitespace-normal max-w-xs md:max-w-lg xl:max-w-2xl">
+                        <h3 className="font-medium dark:text-white break-all whitespace-normal max-w-xs md:max-w-lg xl:max-w-2xl">
                           {account.name}
                         </h3>
-                        <p className="text-gray-700 dark:text-neutral-400">
+                        <p className="text-gray-600 dark:text-neutral-400">
                           {account.connector}
                         </p>
                       </div>
                     </div>
                   </td>
                   <td className="w-10">
-                    <PopiconsChevronRightLine className="h-6 w-6 text-gray-500" />
+                    <PopiconsChevronRightLine className="h-6 w-6 text-gray-600 dark:text-neutral-400" />
                   </td>
                 </tr>
               );
