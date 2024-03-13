@@ -291,9 +291,7 @@
           "placeholder": "Jméno účtu"
         },
         "mnemonic": {
-          "new": {
-            "title": "Co je to Master klíč?"
-          },
+          "new": {},
           "generate": {
             "button": "Vygenerovat Master klíč",
             "title": "Vygenerování nového Master klíče"
@@ -794,6 +792,9 @@
     "nostr": {
       "getpublickey": "Přečíst svůj veřejný klíč",
       "nip04decrypt": "Dešifrovat data",
+      "nip04encrypt": "Zašifrovat data",
+      "nip44decrypt": "Dešifrovat data",
+      "nip44encrypt": "Zašifrovat data",
       "signmessage": "Podepsat zprávu klíčem"
     },
     "lnc": {

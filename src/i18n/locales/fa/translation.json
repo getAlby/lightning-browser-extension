@@ -946,6 +946,9 @@
     "nostr": {
       "getpublickey": "کلید عمومی تان را بخوانید",
       "nip04decrypt": "رمزگشایی داده",
+      "nip04encrypt": "رمزنگاری داده",
+      "nip44decrypt": "رمزگشایی داده",
+      "nip44encrypt": "رمزنگاری داده",
       "signmessage": "پیام را با کلید خود امضا کنید"
     },
     "commando": {

@@ -359,9 +359,7 @@
             "title": "Logga in med Lightning",
             "use_mnemonic": "Använd Master Key för att logga in på lightning appar (LNURL Auth)"
           },
-          "new": {
-            "title": "Vad är en Master Key?"
-          }
+          "new": {}
         },
         "remove_secretkey": {
           "title": "Ta bort huvudnyckeln",
@@ -1040,8 +1038,11 @@
   },
   "permissions": {
     "nostr": {
-      "nip04decrypt": "Dekryptera data",
       "getpublickey": "Läs din publika nyckel",
+      "nip04decrypt": "Dekryptera data",
+      "nip04encrypt": "Kryptera data",
+      "nip44decrypt": "Dekryptera data",
+      "nip44encrypt": "Kryptera data",
       "signmessage": "Skriv under meddelandet med din nyckel"
     },
     "lnd": {

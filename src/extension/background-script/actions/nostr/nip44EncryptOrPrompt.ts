@@ -7,21 +7,23 @@ import {
   hasPermissionFor,
 } from "~/extension/background-script/permissions";
 import state from "~/extension/background-script/state";
-import { MessageEncryptGet, PermissionMethodNostr, Sender } from "~/types";
+import { MessageNip44EncryptGet, PermissionMethodNostr, Sender } from "~/types";
 
-const encryptOrPrompt = async (message: MessageEncryptGet, sender: Sender) => {
+const nip44EncryptOrPrompt = async (
+  message: MessageNip44EncryptGet,
+  sender: Sender
+) => {
   const host = getHostFromSender(sender);
   if (!host) return;
 
   try {
     const hasPermission = await hasPermissionFor(
-      PermissionMethodNostr["NOSTR_NIP04ENCRYPT"],
+      PermissionMethodNostr["NOSTR_NIP44ENCRYPT"],
       host
     );
 
     if (hasPermission) {
-      const nostr = await state.getState().getNostr();
-      const response = await nostr.nip04Encrypt(
+      const response = (await state.getState().getNostr()).nip44Encrypt(
         message.args.peer,
         message.args.plaintext
       );
@@ -44,13 +46,12 @@ const encryptOrPrompt = async (message: MessageEncryptGet, sender: Sender) => {
       // add permission to db only if user decided to always allow this request
       if (promptResponse.data.rememberPermission) {
         await addPermissionFor(
-          PermissionMethodNostr["NOSTR_NIP04ENCRYPT"],
+          PermissionMethodNostr["NOSTR_NIP44ENCRYPT"],
           host
         );
       }
       if (promptResponse.data.confirm) {
-        const nostr = await state.getState().getNostr();
-        const response = await nostr.nip04Encrypt(
+        const response = (await state.getState().getNostr()).nip44Encrypt(
           message.args.peer,
           message.args.plaintext
         );
@@ -68,4 +69,4 @@ const encryptOrPrompt = async (message: MessageEncryptGet, sender: Sender) => {
   }
 };
 
-export default encryptOrPrompt;
+export default nip44EncryptOrPrompt;

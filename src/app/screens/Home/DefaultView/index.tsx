@@ -5,7 +5,6 @@ import TransactionsTable from "@components/TransactionsTable";
 import {
   PopiconsArrowDownLine,
   PopiconsBulbLine,
-  PopiconsDownloadLine,
   PopiconsKeyLine,
 } from "@popicons/react";
 import dayjs from "dayjs";
@@ -211,23 +210,15 @@ const DefaultView: FC<Props> = (props) => {
                 currentAccount?.isMnemonicBackupDone
               ) && (
                 <IconLinkCard
-                  title={t("default_view.actions.backup_masterkey.title")}
-                  description={t(
-                    "default_view.actions.backup_masterkey.description"
-                  )}
+                  title={t("default_view.actions.setup_keys.title")}
+                  description={t("default_view.actions.setup_keys.description")}
                   icon={
                     <PopiconsKeyLine className="w-8 h-8 text-gray-400 dark:text-neutral-500" />
                   }
                   onClick={async () => {
-                    if (currentAccount?.hasMnemonic) {
-                      openOptions(
-                        `accounts/${currentAccount?.id}/secret-key/backup`
-                      );
-                    } else {
-                      openOptions(
-                        `accounts/${currentAccount?.id}/secret-key/new`
-                      );
-                    }
+                    openOptions(
+                      `accounts/${currentAccount?.id}/secret-key/new`
+                    );
                   }}
                 />
               )}
@@ -243,26 +234,6 @@ const DefaultView: FC<Props> = (props) => {
                   }
                   onClick={() => {
                     navigate("/receive");
-                  }}
-                />
-              )}
-
-              {!(
-                currentAccount?.hasMnemonic &&
-                currentAccount?.isMnemonicBackupDone
-              ) && (
-                <IconLinkCard
-                  title={t("default_view.actions.import_masterkey.title")}
-                  description={t(
-                    "default_view.actions.import_masterkey.description"
-                  )}
-                  icon={
-                    <PopiconsDownloadLine className="w-8 h-8 text-gray-400 dark:text-neutral-500" />
-                  }
-                  onClick={async () => {
-                    openOptions(
-                      `accounts/${currentAccount?.id}/secret-key/import`
-                    );
                   }}
                 />
               )}

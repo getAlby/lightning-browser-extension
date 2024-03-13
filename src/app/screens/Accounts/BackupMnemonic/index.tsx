@@ -58,7 +58,7 @@ function BackupMnemonic() {
     </div>
   ) : (
     <div>
-      <Container>
+      <Container maxWidth="md">
         <ContentBox>
           <h1 className="font-bold text-2xl dark:text-white">
             {t("backup.title")}
@@ -72,7 +72,7 @@ function BackupMnemonic() {
             }}
           />
 
-          <div className="flex justify-center mt-6 w-64 mx-auto">
+          <div className="flex justify-center w-64 mx-auto">
             <Button
               label={tCommon("actions.finish")}
               primary
