@@ -28,6 +28,9 @@ export interface ConnectorTransaction {
   preimage: string;
   payment_hash?: string;
   settled: boolean;
+  /**
+   * Settle date in UNIX milliseconds
+   */
   settleDate: number;
   totalAmount: number;
   type: "received" | "sent";
