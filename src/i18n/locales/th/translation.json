@@ -54,8 +54,6 @@
         "mnemonic": {
           "generate": {
             "button": "สร้าง Master Key",
-            "confirm": "ฉันได้สำรอง recovery phase ของฉันไปยัง Master Key ของฉันในที่ส่วนตัวและปลอดภัย",
-            "error_confirm": "โปรดยืนยันการสำรอง recovery phase ของคุณ",
             "title": "สร้าง Master Key ใหม่",
             "description": "Master Key ช่วยให้คุณโต้ตอบกับโปรโตคอลต่างๆ เช่น Nostr, เลเยอร์พื้นฐานของ Bitcoin หรือ LNURL-Auth"
           },
@@ -66,11 +64,6 @@
             "description": "จด recovery phase ของคุณ เพื่อให้สามารถกู้คืน Master Key ของคุณในอุปกรณ์ใหม่ หรือในกรณีที่คุณสูญเสียการเข้าถึงบัญชีของคุณ",
             "protocols": {
               "nostr": "Nostr"
-            },
-            "items": {
-              "recovery_phrase": "คุณสามารถเข้าถีง Master Key ของคุณโดยการใช้ recovery phrase",
-              "words": "Recovery phase เป็นชุดคำ 12 คำ ทำงานเหมือนรหัสผ่าน แต่ไม่สามารถเปลี่ยนหรือตั้งค่าใหม่ได้ในกรณีที่สูญหาย",
-              "storage": "อย่าลืมจดไว้ที่ไหนสักแห่งที่ปลอดภัยและเป็นส่วนตัว!"
             }
           },
           "import": {
@@ -78,7 +71,6 @@
             "description": "ใช้ recovery phrase เพื่อนำ Master Key ของคุณเข้าสู่ Alby",
             "button": "นำเข้า Master Key"
           },
-          "inputs": {},
           "lnurl": {
             "title": "เข้าสู่ระบบด้วย Lightning",
             "use_mnemonic": "ใช้ Master Key เพื่อลงชื่อเข้าใช้แอปพลิเคชันที่ใช้ Lightning (LNURL Auth)"
@@ -277,15 +269,6 @@
           "mismatched_password": "รหัสผ่านไม่ถูกต้อง"
         },
         "success": "เปลี่ยนรหัสผ่านเสร็จสมบูรณ์"
-      },
-      "nostr": {
-        "private_key": {
-          "subtitle": "หัวข้อนี้ย้ายไปที่หน้าบัญชีแล้ว เนื่องจาก key เป็นข้อมูลเฉพาะบัญชี",
-          "go_to": "ไปที่บัญชี",
-          "title": "Private key"
-        },
-        "title": "Nostr",
-        "hint": "Nostr เป็นโปรโตคอลที่เรียบง่ายและเปิดกว้างที่มุ่งสร้างเครือข่ายสังคมที่ทนต่อการเซ็นเซอร์ Nostr ทำงานด้วยคีย์ทาง cryptography เมื่อต้องการเผยแพร่บางอย่าง คุณต้องลงชื่อด้วยคีย์ของคุณและส่งไปยังรีเลย์หลายตัว คุณสามารถใช้ Alby เพื่อจัดการคีย์ Nostr ของคุณ แอปพลิเคชัน Nostr หลายตัวจะอนุญาตให้คุณใช้คีย์จาก extension Alby ได้อย่างง่ายดาย"
       },
       "personal_data": {
         "title": "ข้อมูลส่วนบุคคล",

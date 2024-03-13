@@ -38,9 +38,6 @@
       "alby": {
         "title": "Λογαριασμός Alby",
         "connect": "Σύνδεση με Alby"
-      },
-      "voltage": {
-        "connect": "Σύνδεση"
       }
     },
     "alby": {
@@ -237,9 +234,6 @@
         "actions": {
           "export": "Εξαγωγή"
         }
-      },
-      "actions": {
-        "add_account": "Προσθήκη λογαριασμού"
       }
     },
     "nostr_enable": {
@@ -276,13 +270,6 @@
       },
       "currency": {
         "title": "Νόμισμα"
-      },
-      "nostr": {
-        "title": "Nostr",
-        "private_key": {
-          "go_to": "Μετάβαση στους λογαριασμούς",
-          "title": "Ιδιωτικό κλειδί"
-        }
       },
       "language": {
         "title": "Γλώσσα"

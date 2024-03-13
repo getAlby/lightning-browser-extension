@@ -363,11 +363,14 @@
         },
         "remove": {
           "error": "O nome da conta inserido não corresponde.",
-          "confirm": "Por favor, insira o nome da conta para confirmar a exclusão:\n\n{{ name }}\n\n ⚠️ Por favor, insira o nome da conta para confirmar a exclusão. Todas as chaves associadas (Chave mestra, Nostr, etc) serão excluídas se você continuar. Certifique-se de ter feito backup das chaves, não há outra maneira de restaurá-las."
+          "confirm": "Por favor, insira o nome da conta para confirmar a exclusão:\n\n{{ name }}\n\n ⚠️ Por favor, insira o nome da conta para confirmar a exclusão. Todas as chaves associadas (Chave mestra, Nostr, etc) serão excluídas se você continuar. Certifique-se de ter feito backup das chaves, não há outra maneira de restaurá-las.",
+          "title": "Desconectar esta carteira",
+          "subtitle": "Remove todos os limites de gastos, dados de pagamento e chaves associadas à esta carteira."
         },
         "actions": {
           "export": "Exportar",
-          "remove_secretkey": "Remover chave mestra"
+          "remove_secretkey": "Remover chave mestra",
+          "disconnect_wallet": "Desconectar carteira"
         },
         "name": {
           "title": "Nome",
@@ -380,8 +383,6 @@
           "generate": {
             "title": "Gere sua chave mestra",
             "button": "Gerar chave mestra",
-            "confirm": "Eu salvei a frase de recuperação em um local privado e seguro.",
-            "error_confirm": "Por favor, confirme que você salvou a frase de recuperação.",
             "description": "A chave mestra permite que você interaja com diferentes protocolos como: Nostr, rede principal do Bitcoin ou LNURL-Auth."
           },
           "backup": {
@@ -392,25 +393,36 @@
             },
             "warning": "⚠️ Não se esqueça de fazer backup de sua frase de recuperação! Não fazer o backup pode resultar na perda permanente do acesso à sua chave mestra, identidade Nostr ou ativos que você gerencia com esta chave.",
             "description": "Anote a frase de recuperação para poder restaurar sua chave mestra em um novo dispositivo ou caso perca o acesso à sua conta.",
-            "items": {
-              "recovery_phrase": "Você sempre pode acessar sua chave mestra usando sua frase de recuperação.",
-              "words": "A frase de recuperação é um conjunto de 12 palavras que funciona como uma senha, porém não pode ser alterada ou redefinida caso seja perdida.",
-              "storage": "Certifique-se de anotá-la em algum local seguro e privado!",
-              "keys": "A chave mestra permite interagir com diferentes protocolos como: Nostr, Liquid ou a camada base do Bitcoin."
-            }
+            "title": "Backup de sua chave mestra"
           },
           "import": {
             "title": "Importar sua chave mestra",
             "description": "Use a frase de recuperação para importar sua chave mestra na Alby.",
             "button": "Importar chave mestra"
           },
-          "inputs": {},
           "existing_nostr_key_notice": "ℹ️ Esta conta já possui uma chave privada nostr, logo não será gerada uma nova a partir desta chave mestra. Você pode gerenciar sua chave Nostr nas configurações de sua conta.",
           "lnurl": {
             "use_mnemonic": "Use a chave mestra para acessar aplicativos com tecnologia (LNURL Auth)",
             "title": "Login relâmpago"
           },
-          "new": {}
+          "new": {
+            "title": "O que é uma chave mestra?",
+            "items": {
+              "usage": "Você pode importar e usar a mesma chave mestra em diferentes carteiras conectadas na extensão Alby",
+              "recovery_phrase": "Para importar sua chave mestra para outra carteira Alby, você precisa usar a frase de recuperação",
+              "keys": "A chave mestra é a sua identidade e permite interagir com diferentes protocolos como: Nostr, Liquid ou a camada base do bitcoin"
+            }
+          },
+          "inputs": {
+            "title": "Frase de recuperação"
+          },
+          "description": {
+            "recovery_phrase": "A frase de recuperação é um conjunto de 12 palavras usada para recuperar a sua chave mestra",
+            "warning": "A frase de recuperação não permite recuperar esta carteira ou os fundos nela contidos. Ela recupera apenas a identidade que você pode usar nos protocolos mencionados acima",
+            "secure_recovery_phrase": "Certifique-se de anotá-la em algum local seguro e privado"
+          },
+          "confirm": "Fiz o backup da frase de recuperação em um local privado e seguro.",
+          "error_confirm": "Confirme que você fez o backup da frase de recuperação."
         },
         "remove_secretkey": {
           "title": "Remover chave mestra",
@@ -427,8 +439,13 @@
           },
           "subtitle": "Escolha a rede para gerar endereços e decodificar transações bitcoin e liquid"
         },
-        "no_mnemonic_hint": "💡 Você ainda não tem uma chave mestra. <0>Clique aqui</0></div> para gerar sua chave mestra e desbloquear essas configurações."
-      }
+        "no_mnemonic_hint": "💡 Você ainda não tem uma chave mestra. <0>Clique aqui</0></div> para gerar sua chave mestra e desbloquear essas configurações.",
+        "title1": "Configurações da carteira"
+      },
+      "actions": {
+        "connect_a_wallet": "Conecte uma carteira"
+      },
+      "title": "Minhas carteiras"
     },
     "unlock": {
       "unlock_to_continue": "Desbloqueie para continuar",
@@ -531,15 +548,7 @@
         "subtitle": "Exibe no navegador notificações da Alby relacionadas a pagamentos e autenticação.",
         "title": "Notificações do navegador"
       },
-      "nostr": {
-        "title": "Nostr",
-        "private_key": {
-          "subtitle": "Esta seção foi movida para a área de contas, pois as chaves agora são específicas de cada conta.",
-          "title": "Chave privada",
-          "go_to": "Ir para contas"
-        },
-        "hint": "é um protocolo simples e aberto que visa criar redes sociais resistentes à censura. Os perfis na rede Nostr são chaves criptográficas. Para publicar algo, você assina com sua chave e a informação é enviada para servidores. Na Alby você pode usar e gerenciar seu perfil em diferentes aplicações que suportam esse recurso."
-      }
+      "title": "Configurações da extensão"
     },
     "send": {
       "title": "Enviar",
@@ -715,23 +724,14 @@
       },
       "other": {
         "title": "Traga sua carteira atual",
-        "connect": "Conectar outras contas",
+        "connect": "Conectar",
         "description": "Ideal para quem já possui uma carteira e precisa fazer pagamentos de quantias altas.",
         "point1": "Acesso instantâneo, não precisa de convite",
         "point4": "Sem endereço relâmpago e nostr",
         "point3": "Opções de autocustódia ou custódia delegada",
         "point2": "Sem limites de transação"
       },
-      "voltage": {
-        "point2": "Sem limites de transação",
-        "connect": "Escolher carteira",
-        "point1": "Acesso instantâneo, não precisa de convite",
-        "point4": "Endereços relâmpago e nostr exclusivos",
-        "title": "Servidor Voltage",
-        "point3": "Serviço pago",
-        "description": "Ideal para quem não se importa em pagar por um servidor de carteira relâmpago."
-      },
-      "title": "Conectar carteira na extensão Alby"
+      "title": "Conecte carteiras na extensão Alby"
     },
     "alby": {
       "pre_connect": {
@@ -1001,7 +1001,8 @@
     "website": "Site",
     "apps": "Apps",
     "full_screen": "Tela cheia",
-    "hide_advanced": "Ocultar configurações avançadas"
+    "hide_advanced": "Ocultar configurações avançadas",
+    "settings": "Configurações da extensão"
   },
   "components": {
     "allowance_menu": {
@@ -1075,9 +1076,13 @@
     "account_menu": {
       "options": {
         "account": {
-          "go_to_web_wallet": "Acessar sua conta na web"
+          "go_to_web_wallet": "Acessar sua conta na web",
+          "wallet_settings": "Configurações da carteira",
+          "add": "Conectar nova conta",
+          "manage": "Gerenciar carteiras"
         }
-      }
+      },
+      "title": "Mudar de carteira"
     },
     "publishers_table": {
       "payments": "pagamentos",
