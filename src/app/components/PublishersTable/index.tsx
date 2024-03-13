@@ -53,7 +53,7 @@ export default function PublishersTable({
                       </p>
                       <BadgesList allowance={publisher} />
                     </div>
-                    <div className="text-sm space-x-2 text-gray-500 dark:text-neutral-400">
+                    <div className="text-sm space-x-2 text-gray-600 dark:text-neutral-400">
                       <span>{publisher.host}</span>
                       <span>•</span>
                       <span>
@@ -84,7 +84,7 @@ export default function PublishersTable({
                 </div>
               </td>
               <td className="w-10">
-                <PopiconsChevronRightLine className="h-6 w-6 text-gray-500" />
+                <PopiconsChevronRightLine className="h-6 w-6 text-gray-600 dark:text-neutral-400" />
               </td>
             </tr>
           ))}
