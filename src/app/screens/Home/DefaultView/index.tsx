@@ -1,9 +1,9 @@
-import { PopiconsArrowRightLine } from "@popicons/react";
 import Button from "@components/Button";
 import Loading from "@components/Loading";
 import TransactionsTable from "@components/TransactionsTable";
 import {
   PopiconsArrowDownLine,
+  PopiconsArrowRightLine,
   PopiconsBulbLine,
   PopiconsDownloadLine,
   PopiconsKeyLine,
@@ -195,9 +195,7 @@ const DefaultView: FC<Props> = (props) => {
                   description={t(
                     "default_view.actions.get_started.description"
                   )}
-                  icon={
-                    <PopiconsBulbLine className="w-8 h-8 text-gray-400 dark:text-neutral-500" />
-                  }
+                  icon={<PopiconsBulbLine className="w-8 h-8" />}
                   onClick={() => {
                     utils.openUrl(
                       "https://guides.getalby.com/user-guide/v/alby-account-and-browser-extension/"
@@ -215,9 +213,7 @@ const DefaultView: FC<Props> = (props) => {
                   description={t(
                     "default_view.actions.backup_masterkey.description"
                   )}
-                  icon={
-                    <PopiconsKeyLine className="w-8 h-8 text-gray-400 dark:text-neutral-500" />
-                  }
+                  icon={<PopiconsKeyLine className="w-8 h-8" />}
                   onClick={async () => {
                     if (currentAccount?.hasMnemonic) {
                       openOptions(
@@ -238,9 +234,7 @@ const DefaultView: FC<Props> = (props) => {
                   description={t(
                     "default_view.actions.receive_bitcoin.description"
                   )}
-                  icon={
-                    <PopiconsArrowDownLine className="w-8 h-8 text-gray-400 dark:text-neutral-500" />
-                  }
+                  icon={<PopiconsArrowDownLine className="w-8 h-8" />}
                   onClick={() => {
                     navigate("/receive");
                   }}
@@ -256,9 +250,7 @@ const DefaultView: FC<Props> = (props) => {
                   description={t(
                     "default_view.actions.import_masterkey.description"
                   )}
-                  icon={
-                    <PopiconsDownloadLine className="w-8 h-8 text-gray-400 dark:text-neutral-500" />
-                  }
+                  icon={<PopiconsDownloadLine className="w-8 h-8" />}
                   onClick={async () => {
                     openOptions(
                       `accounts/${currentAccount?.id}/secret-key/import`
