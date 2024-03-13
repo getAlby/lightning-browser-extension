@@ -11,6 +11,7 @@ import Loading from "~/app/components/Loading";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import toast from "~/app/components/Toast";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
+import PopiconsCircleInfoLine from "~/app/icons/popicons/CircleInfoLine";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
@@ -112,17 +113,7 @@ function ConfirmSignPset() {
                   target="_blank"
                 >
                   <div className="bg-blue-500 rounded-full">
-                    <svg
-                      className="h-4 w-4 text-white"
-                      data-v-52a72b4a=""
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <circle cx="12" cy="12" r="8.5"></circle>
-                      <path strokeLinecap="round" d="M12 10.5v7M12 8V7"></path>
-                    </svg>
+                    <PopiconsCircleInfoLine className="h-4 w-4 text-white" />
                   </div>
                 </Hyperlink>
               </div>
