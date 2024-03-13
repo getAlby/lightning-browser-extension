@@ -682,6 +682,9 @@
     "nostr": {
       "getpublickey": "Lisez votre clé publique",
       "nip04decrypt": "Déchiffrer les données",
+      "nip04encrypt": "Crypter les données",
+      "nip44decrypt": "Déchiffrer les données",
+      "nip44encrypt": "Crypter les données",
       "signmessage": "Signez le message avec votre clé"
     },
     "commando": {

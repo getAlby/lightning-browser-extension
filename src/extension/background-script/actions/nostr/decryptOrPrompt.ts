@@ -20,7 +20,7 @@ const decryptOrPrompt = async (message: MessageDecryptGet, sender: Sender) => {
 
     if (hasPermission) {
       const nostr = await state.getState().getNostr();
-      const response = await nostr.decrypt(
+      const response = await nostr.nip04Decrypt(
         message.args.peer,
         message.args.ciphertext
       );
@@ -44,7 +44,7 @@ const decryptOrPrompt = async (message: MessageDecryptGet, sender: Sender) => {
       }
       if (promptResponse.data.confirm) {
         const nostr = await state.getState().getNostr();
-        const response = await nostr.decrypt(
+        const response = await nostr.nip04Decrypt(
           message.args.peer,
           message.args.ciphertext
         );

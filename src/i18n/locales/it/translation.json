@@ -751,8 +751,11 @@
       "addinvoice": "Crea nuove ricevute di pagamento"
     },
     "nostr": {
-      "nip04decrypt": "Decripta i dati",
       "getpublickey": "Leggi la tua chiave pubblica",
+      "nip04decrypt": "Decripta i dati",
+      "nip04encrypt": "Cripta i dati",
+      "nip44decrypt": "Decripta i dati",
+      "nip44encrypt": "Cripta i dati",
       "signmessage": "Firma il messaggio con la tua chiave"
     }
   }
