@@ -6,6 +6,7 @@ import PublisherCard from "~/app/components/PublisherCard";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import { useAccount } from "~/app/context/AccountContext";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
+import PopiconsCircleInfoLine from "~/app/icons/popicons/CircleInfoLine";
 import { NO_KEYS_ERROR, USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
@@ -60,17 +61,7 @@ export default function Onboard() {
               <p>{t("request1")}</p>
             </div>
             <div className="mb-2 flex items-center">
-              <svg
-                className="w-7 h-7 mr-2"
-                data-v-52a72b4a=""
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <circle cx="12" cy="12" r="8.5"></circle>
-                <path strokeLinecap="round" d="M12 10.5v7M12 8V7"></path>
-              </svg>
+              <PopiconsCircleInfoLine className="w-7 h-7 mr-2" />
               <p>{t("request2")}</p>
             </div>
             <div className="mb-2 flex items-center">
