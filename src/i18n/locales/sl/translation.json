@@ -349,9 +349,7 @@
             "title": "Prijava z Lightning",
             "use_mnemonic": "Uporabi Glavni ključ za prijavo v Lightning omogočene aplikacije (LNURL Auth)"
           },
-          "new": {
-            "title": "Kaj je Glavni ključ?"
-          }
+          "new": {}
         },
         "network": {
           "title": "Omrežje",
