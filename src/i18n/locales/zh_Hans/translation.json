@@ -273,25 +273,11 @@
           },
           "setup": {
             "description2": "在 Alby 中创建的每个 Nostr 帐户都带有<0>恢复短语</0> —— 一组12个单词，始终保证重新获得对你的 Nostr 私钥的访问。",
-            "new_to_nostr": "Nostr 新手？<0>了解更多</0>",
             "title": "设置你的 nostr 密钥",
             "description": "选择是否要创建一个新的 nostr 帐户（一对私钥和公钥）或导入现有帐户。",
             "new": {
               "label": "创建新的 nostr 帐户",
               "description": "通过使用一对新的 nostr 密钥生成主密钥。"
-            },
-            "import": {
-              "label": "导入 nostr 帐户",
-              "description": "使用已有的 nostr 私钥或从主密钥中将其派生",
-              "title": "你想如何导入你的 nostr 帐户？",
-              "private_key": {
-                "label": "使用 nostr 私钥",
-                "description": "粘贴你的 nostr 私钥将其导入 Alby"
-              },
-              "recovery_phrase": {
-                "label": "使用恢复短语",
-                "description": "使用主密钥恢复短语导入你的 nostr 密钥"
-              }
             }
           }
         },
@@ -324,11 +310,6 @@
             "protocols": {
               "nostr": "Nostr"
             },
-            "items": {
-              "recovery_phrase": "你将始终可以通过使用主密钥的恢复短语来访问它。",
-              "storage": "请确保在一个安全且私密的地方将它记下！",
-              "words": "恢复短语是一组12个单词，它的工作方式类似于秘密，但是如果丢失，它不能被更改或重置。"
-            },
             "description": "请写下恢复短语，以便能够在新设备上恢复主密钥，或以防失去帐户访问。"
           },
           "existing_nostr_key_notice": "ℹ️ 该账户已设置 nostr 私钥，因此不会从此主密钥派生。你可以通过你的帐户设置管理你的 nostr 密钥。",
@@ -337,8 +318,6 @@
           "generate": {
             "title": "生成新的主密钥",
             "button": "生成主密钥",
-            "confirm": "我已将我的帐户主密钥的恢复短语保存到私密且安全的地方。",
-            "error_confirm": "请确认你已将你的恢复短语备份。",
             "description": "主密钥允许你与各种协议进行互动，例如：Nostr、基础层比特币或 LNURL-auth。"
           },
           "import": {
@@ -346,7 +325,6 @@
             "description": "通过使用恢复短语将主密钥导入 Alby。",
             "button": "导入主密钥"
           },
-          "inputs": {},
           "lnurl": {
             "title": "闪电登录",
             "use_mnemonic": "使用主密钥登录闪电驱动的应用程序（LNURL Auth）"
@@ -397,15 +375,6 @@
       "title": "你的⚡网站"
     },
     "settings": {
-      "nostr": {
-        "private_key": {
-          "title": "私钥",
-          "subtitle": "此部分已移至帐户页面，因为密钥现在是特定于帐户的。",
-          "go_to": "前往帐户"
-        },
-        "title": "Nostr",
-        "hint": "是一个简单而开放的协议，旨在创建抗审查的社交网络。 Nostr 使用加密密钥。你可以使用你的密钥对内容进行签署并将其发送到多个中继。你可以使用 Alby 来管理你的 Nostr 密钥。许多 Nostr 应用程序允许你轻松地使用 Alby 扩展中的密钥。"
-      },
       "lnurl_auth": {
         "title": "LNURL-认证",
         "legacy_lnurl_auth": {

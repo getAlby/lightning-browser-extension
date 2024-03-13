@@ -321,14 +321,6 @@
           "mismatched_password": ""
         },
         "success": ""
-      },
-      "nostr": {
-        "title": "Nostr",
-        "hint": "",
-        "private_key": {
-          "title": "Privata ŝlosilo",
-          "subtitle": ""
-        }
       }
     },
     "send": {

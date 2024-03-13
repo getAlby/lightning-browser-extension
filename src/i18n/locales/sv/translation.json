@@ -293,21 +293,7 @@
             "new": {
               "label": "Skapa ett nytt Nostr-konto",
               "description": "Generera en huvudnyckel med ett par nya Nostr-nycklar."
-            },
-            "import": {
-              "label": "Importera ett Nostr-konto",
-              "description": "Använd en befintlig privat Nostr-nyckel eller härled den från din huvudnyckel",
-              "recovery_phrase": {
-                "label": "Använd återställningsfras",
-                "description": "Använd huvudnyckelåterställningsfrasen för att importera dina Nostr-nycklar"
-              },
-              "private_key": {
-                "description": "Klistra in din privata Nostr-nyckel för att importera den till Alby",
-                "label": "Använd Nostr privat nyckel"
-              },
-              "title": "Hur skulle du vilja importera ditt Nostr-konto?"
-            },
-            "new_to_nostr": "Ny på Nostr? <0>Läs mer</0>"
+            }
           }
         },
         "remove": {
@@ -338,8 +324,6 @@
           "generate": {
             "title": "Generera ny huvudnyckel",
             "button": "Generera huvudnyckel",
-            "confirm": "Jag har säkerhetskopierat återställningsfrasen till min huvudnyckel på en privat och säker plats.",
-            "error_confirm": "Bekräfta att du har säkerhetskopierat återställningsfrasen.",
             "description": "Master Key låter dig interagera med olika protokoll som: Nostr, baslager av Bitcoin eller LNURL-Auth."
           },
           "backup": {
@@ -349,13 +333,7 @@
               "nostr": "Nostr"
             },
             "warning": "⚠️ Glöm inte att säkerhetskopiera din återställningsfras! Att inte säkerhetskopiera det kan leda till att du permanent förlorar åtkomst till din huvudnyckel, Nostr-identitet eller tillgångar som du hanterar med denna nyckel.",
-            "description": "Skriv ner återställningsfrasen för att kunna återställa din huvudnyckel på en ny enhet eller om du förlorar åtkomsten till ditt konto.",
-            "items": {
-              "recovery_phrase": "Du kan alltid komma åt din huvudnyckel genom att använda dess återställningsfras.",
-              "words": "Återställningsfrasen består av 12 ord som fungerar som ett lösenord, men det kan inte ändras eller återställas om det tappas bort.",
-              "storage": "Se till att skriva ner det någonstans säkert och privat!",
-              "keys": "Master Key låter dig interagera med olika protokoll som: Nostr, Liquid eller baslager av Bitcoin."
-            }
+            "description": "Skriv ner återställningsfrasen för att kunna återställa din huvudnyckel på en ny enhet eller om du förlorar åtkomsten till ditt konto."
           },
           "import": {
             "title": "Importera din huvudnyckel",
@@ -363,12 +341,10 @@
             "button": "Importera huvudnyckel"
           },
           "title": "🔑 Nyckelhantering",
-          "inputs": {},
           "lnurl": {
             "title": "Logga in med Lightning",
             "use_mnemonic": "Använd Master Key för att logga in på lightning appar (LNURL Auth)"
-          },
-          "new": {}
+          }
         },
         "remove_secretkey": {
           "title": "Ta bort huvudnyckeln",
@@ -488,15 +464,6 @@
           "mismatched_password": "Lösenorden överensstämmer inte."
         },
         "success": "Lösenordet har ändrats"
-      },
-      "nostr": {
-        "title": "Nostr",
-        "hint": "är ett enkelt och öppet protokoll som syftar till att skapa sociala nätverk som är motståndskraftiga mot censur. Nostr använder kryptografiska nycklar. För att publicera något signerar du med dina nycklar som skickas till multipla reläer. Du kan använda Alby för att hantera din Nostr-nyckel. Flertalet Nostr-applikationer tillåter dig att använda nyckeln med hjälp av Alby-tillägget.",
-        "private_key": {
-          "title": "Privat nyckel",
-          "subtitle": "Det här sektionen har flyttas till kontosidan eftersom nycklar är kontospecifika nu.",
-          "go_to": "Gå till Konton"
-        }
       }
     },
     "send": {
