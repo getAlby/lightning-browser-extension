@@ -696,6 +696,9 @@
     "nostr": {
       "getpublickey": "तुमची सार्वजनिक की वाचा",
       "nip04decrypt": "डेटा Decrypt करा",
+      "nip04encrypt": "डेटा Encrypt करा",
+      "nip44decrypt": "डेटा Decrypt करा",
+      "nip44encrypt": "डेटा Encrypt करा",
       "signmessage": "तुमच्या किल्लीने संदेशावर स्वाक्षरी करा"
     },
     "commando": {

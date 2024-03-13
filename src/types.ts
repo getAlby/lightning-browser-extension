@@ -176,6 +176,11 @@ export type NavigationState = {
       message: string;
     };
 
+    nip44Encrypt: {
+      recipientNpub: string;
+      message: string;
+    };
+
     psbt?: string;
     requestPermission: {
       method: string;
@@ -562,6 +567,22 @@ export interface MessageDecryptGet extends MessageDefault {
   action: "decrypt";
 }
 
+export interface MessageNip44EncryptGet extends MessageDefault {
+  args: {
+    peer: string;
+    plaintext: string;
+  };
+  action: "encrypt";
+}
+
+export interface MessageNip44DecryptGet extends MessageDefault {
+  args: {
+    peer: string;
+    ciphertext: string;
+  };
+  action: "decrypt";
+}
+
 export interface MessageSignPsbt extends MessageDefault {
   args: {
     psbt: string;
@@ -772,6 +793,8 @@ export enum PermissionMethodNostr {
   NOSTR_GETPUBLICKEY = "nostr/getPublicKey",
   NOSTR_NIP04DECRYPT = "nostr/nip04decrypt",
   NOSTR_NIP04ENCRYPT = "nostr/nip04encrypt",
+  NOSTR_NIP44DECRYPT = "nostr/nip44decrypt",
+  NOSTR_NIP44ENCRYPT = "nostr/nip44encrypt",
 }
 
 export interface DbPermission {

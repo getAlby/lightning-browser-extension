@@ -1056,8 +1056,11 @@
   },
   "permissions": {
     "nostr": {
-      "nip04decrypt": "Dekryptera data",
       "getpublickey": "Läs din publika nyckel",
+      "nip04decrypt": "Dekryptera data",
+      "nip04encrypt": "Kryptera data",
+      "nip44decrypt": "Dekryptera data",
+      "nip44encrypt": "Kryptera data",
       "signmessage": "Skriv under meddelandet med din nyckel"
     },
     "lnd": {
