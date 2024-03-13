@@ -45,8 +45,8 @@ const sender: Sender = {
   documentId: "ALBY123",
   documentLifecycle: "active",
   id: "alby",
-  origin: `https://${allowanceInDB.host}`,
-  url: `https://${allowanceInDB.host}/test`,
+  origin: `${allowanceInDB.host}`,
+  url: `${allowanceInDB.host}/test`,
 };
 
 const requestResponse = { data: "" };

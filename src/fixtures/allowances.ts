@@ -3,7 +3,7 @@ import type { DbAllowance } from "~/types";
 export const allowanceFixture: DbAllowance[] = [
   {
     enabled: true,
-    host: "getalby.com",
+    host: "https://getalby.com",
     id: 1,
     imageURL: "https://getalby.com/favicon.ico",
     lastPaymentAt: 0,
@@ -17,7 +17,7 @@ export const allowanceFixture: DbAllowance[] = [
   },
   {
     enabled: false,
-    host: "lnmarkets.com",
+    host: "https://lnmarkets.com",
     id: 2,
     imageURL: "https://lnmarkets.com/apple-touch-icon.png",
     lastPaymentAt: 0,

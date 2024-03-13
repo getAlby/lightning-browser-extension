@@ -70,7 +70,7 @@ export default function PublisherPanel({
               </h2>
               {url && (
                 <a
-                  href={`https://${url}`}
+                  href={url}
                   title={url}
                   target="_blank"
                   className="text-gray-500 dark:text-gray-400 overflow-hidden text-ellipsis whitespace-nowrap leading-1 text-lg"

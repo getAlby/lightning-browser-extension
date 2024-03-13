@@ -22,7 +22,7 @@ describe("add allowance", () => {
         internal: true,
       },
       args: {
-        host: "lnmarkets.com",
+        host: "https://lnmarkets.com",
         name: "LN Markets",
         imageURL: "https://lnmarkets.com/apple-touch-icon.png",
         totalBudget: 200,
@@ -41,7 +41,7 @@ describe("add allowance", () => {
     expect(dbAllowances).toContainEqual({
       createdAt: "1487076708000",
       enabled: true,
-      host: "lnmarkets.com",
+      host: "https://lnmarkets.com",
       imageURL: "https://lnmarkets.com/apple-touch-icon.png",
       lastPaymentAt: 0,
       lnurlAuth: false,

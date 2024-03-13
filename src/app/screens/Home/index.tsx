@@ -20,7 +20,7 @@ const Home: FC = () => {
       // typeguard, currentUrl should exist at this point
       if (!currentUrl) throw new Error("No established browser connection");
 
-      const result = await api.getAllowance(currentUrl.host);
+      const result = await api.getAllowance(currentUrl.origin);
 
       if (result.enabled) {
         setAllowance(result);
