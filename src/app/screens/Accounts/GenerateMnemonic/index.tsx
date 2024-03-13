@@ -7,7 +7,7 @@ import Alert from "~/app/components/Alert";
 import Button from "~/app/components/Button";
 import { ContentBox } from "~/app/components/ContentBox";
 import toast from "~/app/components/Toast";
-import Checkbox from "~/app/components/form/Checkbox";
+import MnemonicInstructions from "~/app/components/mnemonic/MnemonicBackupDescription";
 import MnemonicInputs from "~/app/components/mnemonic/MnemonicInputs";
 import api from "~/common/lib/api";
 
@@ -18,7 +18,6 @@ function GenerateMnemonic() {
   const { t } = useTranslation("translation", {
     keyPrefix: "accounts.account_view.mnemonic",
   });
-  const { t: tCommon } = useTranslation("common");
 
   const [hasConfirmedBackup, setHasConfirmedBackup] = useState(false);
   const [hasNostrPrivateKey, setHasNostrPrivateKey] = useState(false);
@@ -46,14 +45,17 @@ function GenerateMnemonic() {
   async function saveGeneratedSecretKey() {
     try {
       if (!hasConfirmedBackup) {
-        throw new Error(t("generate.error_confirm"));
+        throw new Error(t("error_confirm"));
       }
       if (!mnemonic) {
         throw new Error("No mnemonic available");
       }
 
       await api.setMnemonic(id, mnemonic);
-      await api.editAccount(id, { useMnemonicForLnurlAuth: true });
+      await api.editAccount(id, {
+        useMnemonicForLnurlAuth: true,
+        isMnemonicBackupDone: true,
+      });
 
       toast.success(t("saved"));
       // go to account settings
@@ -63,52 +65,37 @@ function GenerateMnemonic() {
     }
   }
 
-  function cancel() {
-    // go to account settings
-    navigate(`/accounts/${id}`);
-  }
-
   return !mnemonic ? (
     <div className="flex justify-center mt-5">
       <Loading />
     </div>
   ) : (
     <div>
-      <Container>
+      <Container maxWidth="md">
         <ContentBox>
           <h1 className="font-bold text-2xl dark:text-white">
             {t("generate.title")}
           </h1>
+
+          <MnemonicInstructions />
           {hasNostrPrivateKey && (
             <Alert type="info">{t("existing_nostr_key_notice")}</Alert>
           )}
-          <MnemonicInputs mnemonic={mnemonic} readOnly></MnemonicInputs>
-
-          <div className="flex items-center justify-center">
-            <Checkbox
-              id="has_backed_up"
-              name="Backup confirmation checkbox"
-              checked={hasConfirmedBackup}
-              onChange={(event) => {
-                setHasConfirmedBackup(event.target.checked);
-              }}
+          <MnemonicInputs
+            mnemonic={mnemonic}
+            readOnly
+            isConfirmed={(hasConfirmedBackup) => {
+              setHasConfirmedBackup(hasConfirmedBackup);
+            }}
+          ></MnemonicInputs>
+          <div className="flex justify-center">
+            <Button
+              label={t("backup.save")}
+              primary
+              onClick={saveGeneratedSecretKey}
             />
-            <label
-              htmlFor="has_backed_up"
-              className="cursor-pointer ml-2 block text-sm text-gray-900 font-medium dark:text-white"
-            >
-              {t("generate.confirm")}
-            </label>
           </div>
         </ContentBox>
-        <div className="flex justify-center mt-8 mb-16 gap-4">
-          <Button label={tCommon("actions.cancel")} onClick={cancel} />
-          <Button
-            label={t("backup.save")}
-            primary
-            onClick={saveGeneratedSecretKey}
-          />
-        </div>
       </Container>
     </div>
   );

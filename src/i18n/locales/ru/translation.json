@@ -1,10 +1,7 @@
 {
   "translation": {
     "welcome": {
-      "title": "Добро пожаловать в Alby",
       "set_password": {
-        "title": "Установите пароль разблокировки",
-        "description": "Этот пароль нужен для защиты вашего кошелька, он предоставляет доступ к расширению браузера. Он не может быть восстановлен и не является паролем аккаунта Alby.",
         "choose_password": {
           "label": ""
         },
@@ -78,10 +75,6 @@
       },
       "lnc": {
         "title": "",
-        "page": {
-          "title": "",
-          "description": ""
-        },
         "pairing_phrase": {
           "label": "",
           "placeholder": ""
@@ -215,13 +208,8 @@
       },
       "btcpay": {
         "title": "",
-        "page": {
-          "title": "",
-          "instructions": ""
-        },
         "config": {
-          "label": "",
-          "placeholder": ""
+          "label": ""
         },
         "errors": {
           "connection_failed": ""
@@ -274,9 +262,7 @@
       }
     },
     "accounts": {
-      "title": "",
       "account_view": {
-        "title1": "",
         "title2": "",
         "name": {
           "title": "",
@@ -319,17 +305,9 @@
             "failed_to_load": ""
           }
         },
-        "remove": {
-          "title": "",
-          "subtitle": ""
-        },
         "actions": {
-          "remove_account": "",
           "export": ""
         }
-      },
-      "actions": {
-        "add_account": ""
       }
     },
     "unlock": {
@@ -348,7 +326,6 @@
       }
     },
     "settings": {
-      "title": "",
       "browser_notifications": {
         "title": "",
         "subtitle": ""
@@ -583,10 +560,8 @@
   "common": {
     "password": "",
     "confirm_password": "",
-    "advanced": "",
     "success": "",
     "error": "",
-    "settings": "",
     "accounts": "",
     "discover": "",
     "connected_sites": "",
@@ -696,14 +671,7 @@
       }
     },
     "account_menu": {
-      "screen_reader": "",
-      "title": "",
-      "options": {
-        "account": {
-          "add": "",
-          "manage": ""
-        }
-      }
+      "screen_reader": ""
     },
     "publishers_table": {
       "payments": ""
@@ -718,6 +686,9 @@
     "nostr": {
       "getpublickey": "",
       "nip04decrypt": "",
+      "nip04encrypt": "",
+      "nip44decrypt": "",
+      "nip44encrypt": "",
       "signmessage": ""
     },
     "commando": {

@@ -2,8 +2,6 @@
   "translation": {
     "welcome": {
       "set_password": {
-        "title": "Nastavit pin pro odemčení účtu",
-        "description": "Tento pin vám umožní odemykat doplněk Alby na tomto zařízení. Nelze ho resetovat, ale je možné ho později změnit.",
         "choose_password": {
           "label": "Zvolte pin pro odemykání:"
         },
@@ -27,7 +25,6 @@
           "delete_edit_account": "Smažte nevalidní účet a změny proveďte znovu"
         }
       },
-      "title": "Vítejte v Alby",
       "pin_extension": {
         "title": "Připnout rozšíření Alby",
         "explanation": "1. Zvolte <0/> v pravém rohu svého prohlížeče<1/>2. Najděte Alby a zvolte připnout k toolbaru<1/>3. To je vše. Pro přístup k Alby pouze klikněte na <2/> ikonu",
@@ -172,13 +169,8 @@
       },
       "btcpay": {
         "title": "BTCPay Server",
-        "page": {
-          "title": "Připojení k vašemu uzlu BTCPay LND",
-          "instructions": "Přesuňte se do svého BTCPayServer a přihlašte se jako administrátor. Běžte do Nastavení serveru > Služby > LND Rest - Více informací. Následně zvolte \"Zobrazit informace o QR kódu\" a zkopírujte zobrazená data. Vložte je níže:"
-        },
         "config": {
-          "label": "Konfigurační data",
-          "placeholder": "config=https://vas-btc-pay.org/lnd-config/212121/lnd.config"
+          "label": "Konfigurační data"
         },
         "errors": {
           "connection_failed": "Připojení se nezdařilo. Je BTCPay URL zadána správně a je přístupná?"
@@ -219,10 +211,6 @@
       "title": "Připojte Lightning peněženku",
       "lnc": {
         "title": "Lightning terminál (LNC)",
-        "page": {
-          "title": "Připojit k vašemu LND uzlu",
-          "description": "Vytvořte nové sezení v terminálu (litd) pro získání nové párovací fráze a vložte ji zde"
-        },
         "pairing_phrase": {
           "label": "Vaše párovací fráze ",
           "placeholder": "tajná fráze"
@@ -250,15 +238,7 @@
       }
     },
     "accounts": {
-      "title": "Účty",
-      "actions": {
-        "add_account": "Přidat účet"
-      },
       "account_view": {
-        "remove": {
-          "title": "Odstranit tento účet",
-          "subtitle": "Všechny propojené příspěvky budou smazány. Buďte si jisti, že akci chcete opravdu provést."
-        },
         "nostr": {
           "errors": {
             "failed_to_load": "Nepodařilo se načíst Nostr klíč. Zadali jste validní Nostr klíč?"
@@ -295,7 +275,6 @@
           }
         },
         "actions": {
-          "remove_account": "Odstranit účet",
           "export": "Export"
         },
         "export": {
@@ -306,25 +285,20 @@
           "your_ln_address": "Vaše Lightning adresa:",
           "scan_qr": "Importujte tuto peněženku do Zeus nebo BlueWallet naskenováním QR kódu."
         },
-        "title1": "Informace o účtu",
         "title2": "Upravit účet",
         "name": {
           "title": "Jméno",
           "placeholder": "Jméno účtu"
         },
         "mnemonic": {
-          "new": {
-            "title": "Co je to Master klíč?"
-          },
+          "new": {},
           "generate": {
             "button": "Vygenerovat Master klíč",
             "confirm": "Zazálohoval jsem svou záložní (recovery) frázi k mému Master klíči na soukromém bezpečném místě.",
             "title": "Vygenerování nového Master klíče",
             "error_confirm": "Prosím potvrďte, že jste zazálohovali svou záložní frázi."
           },
-          "inputs": {
-            "title": "Záložní fráze"
-          },
+          "inputs": {},
           "saved": "Master klíč byl zašifrován a úspěšně uložen.",
           "lnurl": {
             "use_mnemonic": "Používat Master klíč pro přihlašování do aplikací podporujících autentizaci přes Lightning (LNURL Auth)",
@@ -369,7 +343,6 @@
       }
     },
     "settings": {
-      "title": "Nastavení",
       "browser_notifications": {
         "title": "Upozornění prohlížeče",
         "subtitle": "Platební notifikace a notifikace týkající se autentizace."
@@ -651,10 +624,8 @@
   },
   "common": {
     "password": "Heslo",
-    "advanced": "Pokročilé",
     "success": "Úspěch",
     "error": "Chyba",
-    "settings": "Nastavení",
     "connected_sites": "",
     "sats_one": "sat",
     "sats_other": "satů",
@@ -765,14 +736,7 @@
       }
     },
     "account_menu": {
-      "screen_reader": "Přepnout rozbalovací nabídku",
-      "title": "Změnit účet",
-      "options": {
-        "account": {
-          "add": "Přidat nový účet",
-          "manage": "Spravovat účty"
-        }
-      }
+      "screen_reader": "Přepnout rozbalovací nabídku"
     },
     "publishers_table": {
       "payments": "platby"
@@ -840,6 +804,9 @@
     "nostr": {
       "getpublickey": "Přečíst svůj veřejný klíč",
       "nip04decrypt": "Dešifrovat data",
+      "nip04encrypt": "Zašifrovat data",
+      "nip44decrypt": "Dešifrovat data",
+      "nip44encrypt": "Zašifrovat data",
       "signmessage": "Podepsat zprávu klíčem"
     },
     "lnc": {

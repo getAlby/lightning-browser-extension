@@ -12,9 +12,7 @@
           "enter_password": "Mohon masukan kode sandi.",
           "confirm_password": "Mohon konfirmasi kode sandi Anda.",
           "mismatched_password": "Kode sandi tidak sama."
-        },
-        "description": "Kode sandi ini dapat digunakan untuk membuka Alby pada perangkat ini. Ini tidak dapat dipulihkan, tetapi bisa diganti.",
-        "title": "Atur kode sandi"
+        }
       },
       "test_connection": {
         "initializing": "Menginisialisasi akun Anda. Mohon tunggu, ini mungkin akan memakan waktu beberapa menit...",
@@ -31,8 +29,7 @@
         "description": "Kamu hampir samapi. Untuk menggunakan Alby dengan mudah, kamu dapat pin ekstensi ini pada toolbar browser:",
         "next_btn": "Mulai buzzin' {{icon}} dengan Alby",
         "explanation": "1. Klik pada <0/> di ujung kanan atas browser<1/>2. Cari Alby dan klik untuk mem-pin-nya pada toolbar<1/>3. Selesai. Untuk mengakses Alby, tinggal klik pada<2/> ikon"
-      },
-      "title": "Selamat Datang di Alby"
+      }
     },
     "choose_path": {
       "other": {
@@ -84,10 +81,6 @@
       },
       "lnc": {
         "title": "Lightning Terminal (LNC)",
-        "page": {
-          "title": "Sambungkan node LND kamu",
-          "description": "1. Bukan Lightning Terminal dan Pilih <0>Sambung Lightning Node</0> dari sidebar.<1/> 2. Klik <0>Buat sesi baru</0><1/>3. Masukkan label pada sesi, pilih izin yang dikehendaki dan kirim<1/>4. <0>Salin pairing phrase</0> dan tempel pada bawah ini."
-        },
         "pairing_phrase": {
           "label": "Pairing phrase kamu: ",
           "placeholder": "secret stack sats phrase"
@@ -210,13 +203,8 @@
         }
       },
       "btcpay": {
-        "page": {
-          "title": "Sambungkan dengan node BTCPay LND",
-          "instructions": "Buka BTCPayServer dan masuk sebagai admin. Masuk ke Server Settings > Services > LND Rest - See information. Lalu, klik \"See QR Code information\" dan salin data kode QR. Tempel di bawah ini:"
-        },
         "config": {
-          "label": "Config data",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
+          "label": "Config data"
         },
         "errors": {
           "connection_failed": "Koneksi gagal. Apakah koneksi BTCPay URL sudah benar dan dapat dibuka?"
@@ -321,7 +309,6 @@
             "error_confirm": "Silakan konfirmasi bahwa kamu telah mencadangkan recovery phrase."
           },
           "backup": {
-            "title": "Cadangkan recovery phrase kamu",
             "save": "Simpan Master Key",
             "button": "Lihat recovery phrase",
             "warning": "⚠️ Jangan lupa untuk mencadangkan recovery phrase! tidak mempunyai cadangannya akan mungkin menyebabkan kehilangan akses secara permanen terhadap Master Key, identitas Nostr atau aset lainnya yang menggunakan kunci ini.",
@@ -340,9 +327,7 @@
             "button": "Impor Master Key",
             "description": "Gunakan recovery phrase untuk impor Master Key kamu ke Alby."
           },
-          "inputs": {
-            "title": "Recovery Phrase"
-          },
+          "inputs": {},
           "lnurl": {
             "title": "Masuk dengan Lightning",
             "use_mnemonic": "Gunakan Master Key untuk masuk pada aplikasi yang telah terintegrasi dengan Lightning (LNURL Auth)"
@@ -413,8 +398,6 @@
           "hint": "adalah protokol simpel dan terbuka yang bertujuan untuk membuat jaringan sosial anti penyensoran. Nostr bekerja dengan menggunakan kunci kriptografi. Untuk menerbitkan sesuatu, kamu dapat gunakan kunci dan mengirimnya ke berbagai relay. Kamu dapat menggunakan Alby untuk mengatur kunci Nostr. Berbagai aplikasi Nostr akan dapat menggunakan kunci dari ekstensi Alby."
         },
         "remove": {
-          "title": "Hapus Akun Ini",
-          "subtitle": "Hapus semua allowances, data pembayaran, dan kunci-kunci yang terasosiasi dengan akun ini.",
           "error": "Nama akun yang dimasukkan tidak sama."
         },
         "remove_secretkey": {
@@ -424,15 +407,9 @@
         },
         "actions": {
           "remove_secretkey": "Hapus Master Key",
-          "export": "Expor",
-          "remove_account": "Hapus akun"
-        },
-        "title1": "Pengaturan Akun"
-      },
-      "actions": {
-        "add_account": "Tambah akun"
-      },
-      "title": "Akun-akun"
+          "export": "Expor"
+        }
+      }
     },
     "unlock": {
       "unlock_to_continue": "Buka untuk melanjutkan",
@@ -450,7 +427,6 @@
       }
     },
     "settings": {
-      "title": "Pengaturan",
       "browser_notifications": {
         "title": "Notifikasi peramban",
         "subtitle": "Notifikasi terkait pembayaran dan autentikasi."
@@ -738,14 +714,10 @@
     "account_menu": {
       "options": {
         "account": {
-          "add": "Tambahkan akun baru",
-          "manage": "Kelola akun",
-          "account_settings": "Pengaturan Akun",
           "go_to_web_wallet": "Atur akun web kamu"
         }
       },
-      "screen_reader": "Toggle Dropdown",
-      "title": "Ganti akun"
+      "screen_reader": "Toggle Dropdown"
     },
     "transactions_table": {
       "sent": "Terkirim",
@@ -805,6 +777,9 @@
   "permissions": {
     "nostr": {
       "nip04decrypt": "Dekripsi data",
+      "nip04encrypt": "Enkripsi data",
+      "nip44decrypt": "Dekripsi data",
+      "nip44encrypt": "Enkripsi data",
       "getpublickey": "Membaca kunci publik Anda"
     },
     "commando": {
@@ -879,7 +854,6 @@
     "confirm_password": "Konfirmasi Kata Sandi",
     "success": "Sukses",
     "error": "Eror",
-    "settings": "Pengaturan",
     "accounts": "Akun-akun",
     "connected_sites": "Situs Terhubung",
     "wallet": "Dompet",
@@ -898,7 +872,6 @@
       "connection_failed": "Koneksi gagal",
       "payment_failed": "Pembayaran Gagal"
     },
-    "advanced": "Advanced",
     "discover": "Temui",
     "loading": "memuat",
     "or": "atau"

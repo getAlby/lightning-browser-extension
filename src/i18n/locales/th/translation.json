@@ -2,8 +2,6 @@
   "translation": {
     "welcome": {
       "set_password": {
-        "title": "ตั้งรหัสผ่านเข้าแอพ",
-        "description": "ใช้รหัสนี้เพื่อเข้าสู่ Alby บนเครื่องนี้ รหัสผ่านนี้ไม่สามารถกู้คืนได้หากคุณลืมรหัสผ่านแต่คุณสามารถเปลี่ยนรหัสผ่านได้ภายหลัง",
         "choose_password": {
           "label": "ตั้งรหัสผ่านเข้าแอพ:"
         },
@@ -16,7 +14,6 @@
           "enter_password": "โปรดใส่รหัสผ่าน"
         }
       },
-      "title": "ยินดีต้อนรับสู่ Alby",
       "test_connection": {
         "ready": "เยี่ยมมาก คุณพร้อมลุยแล้ว!",
         "initializing": "กำลังสร้างบัญชีโปรดรอสักครู่ อาจใช้เวลาสักครู่…",
@@ -63,7 +60,6 @@
             "description": "Master Key ช่วยให้คุณโต้ตอบกับโปรโตคอลต่างๆ เช่น Nostr, เลเยอร์พื้นฐานของ Bitcoin หรือ LNURL-Auth"
           },
           "backup": {
-            "title": "สำรอง recovery phase ของคุณ",
             "save": "บันทึก Master Key",
             "button": "ดู recovery phrase",
             "warning": "⚠️อย่าลืมสำรอง recovery phrase ของคุณ! การไม่สำรองข้อมูลอาจทำให้คุณสูญเสียการเข้าถึง Master Key, ข้อมูลประจำตัว Nostr หรือ สินทรัพย์ที่คุณจัดการด้วยคีย์นี้อย่างถาวร",
@@ -82,9 +78,7 @@
             "description": "ใช้ recovery phrase เพื่อนำ Master Key ของคุณเข้าสู่ Alby",
             "button": "นำเข้า Master Key"
           },
-          "inputs": {
-            "title": "Recovery Phrase"
-          },
+          "inputs": {},
           "lnurl": {
             "title": "เข้าสู่ระบบด้วย Lightning",
             "use_mnemonic": "ใช้ Master Key เพื่อลงชื่อเข้าใช้แอปพลิเคชันที่ใช้ Lightning (LNURL Auth)"
@@ -167,8 +161,6 @@
           "hint": "Nostr เป็นโปรโตคอลที่เรียบง่ายและเปิดกว้างที่มุ่งสร้างเครือข่ายสังคมที่ทนต่อการเซ็นเซอร์ Nostr ทำงานด้วยคีย์ทาง cryptography เมื่อต้องการเผยแพร่บางอย่าง คุณต้องลงชื่อด้วยคีย์ของคุณและส่งไปยังรีเลย์หลายตัว คุณสามารถใช้ Alby เพื่อจัดการคีย์ Nostr ของคุณ แอปพลิเคชัน Nostr หลายตัวจะอนุญาตให้คุณใช้คีย์จาก extension Alby ได้อย่างง่ายดาย"
         },
         "remove": {
-          "title": "ลบบัญชีนี้",
-          "subtitle": "ลบการอนุญาต ข้อมูลการชำระเงิน และข้อมูลประจำตัวที่เชื่อมโยงกับบัญชีนี้ทั้งหมด",
           "error": "ชื่อบัญชีที่ป้อนไม่ตรงกัน"
         },
         "remove_secretkey": {
@@ -177,7 +169,6 @@
           "success": "การลบ Master Key เสร็จสมบูรณ์"
         },
         "actions": {
-          "remove_account": "ลบบัญชี",
           "export": "ส่งออก",
           "remove_secretkey": "ลบ Master Key"
         },
@@ -194,13 +185,8 @@
           "your_ln_address": "Lightning Address ของคุณ:",
           "export_uri": "LNDHub Credentials URI",
           "scan_qr": "นำกระเป๋านี้เข้าสู่ Zeus หรือ BlueWallet โดยการแสกน QRCode"
-        },
-        "title1": "การตั้งค่าบัญชี"
-      },
-      "actions": {
-        "add_account": "เพิ่มบัญชี"
-      },
-      "title": "บัญชี"
+        }
+      }
     },
     "unlock": {
       "unlock_to_continue": "ปลดล็อคเพื่อไปต่อ",
@@ -301,7 +287,6 @@
         "title": "Nostr",
         "hint": "Nostr เป็นโปรโตคอลที่เรียบง่ายและเปิดกว้างที่มุ่งสร้างเครือข่ายสังคมที่ทนต่อการเซ็นเซอร์ Nostr ทำงานด้วยคีย์ทาง cryptography เมื่อต้องการเผยแพร่บางอย่าง คุณต้องลงชื่อด้วยคีย์ของคุณและส่งไปยังรีเลย์หลายตัว คุณสามารถใช้ Alby เพื่อจัดการคีย์ Nostr ของคุณ แอปพลิเคชัน Nostr หลายตัวจะอนุญาตให้คุณใช้คีย์จาก extension Alby ได้อย่างง่ายดาย"
       },
-      "title": "การตั้งค่า",
       "personal_data": {
         "title": "ข้อมูลส่วนบุคคล",
         "description": "ผู้รับเงินสามารถขอข้อมูลเพิ่มเติมที่จะส่งพร้อมกับการชำระเงิน ข้อมูลนี้จะไม่ถูกแบ่งปันกับใครก็ตามโดยไม่ได้รับความยินยอมจากคุณ คุณจะได้รับแจ้งเสมอก่อนที่จะส่งข้อมูลนี้ไปพร้อมกับการชำระเงิน"
@@ -471,11 +456,7 @@
           "label": "pairing phrase ของคุณ ",
           "placeholder": "รหัสเพื่อเข้าถึงแซต"
         },
-        "title": "Lightning Terminal (LNC)",
-        "page": {
-          "title": "เชื่อมต่อกับ LND node ของคุณ",
-          "description": "1. เปิด Lightning Terminal และเลือก <0> เชื่อมต่อ Lightning Node </0> จากแถบด้านข้าง </1> 2. คลิก <0> สร้างเซสชันใหม่ </0><1/> 3. ตั้งชื่อเซสชัน เลือกสิทธิ์ที่ต้องการและกดยืนยัน <1/>4. <0> คัดลอก pairing phrase </0> และวางมันข้างล่าง"
-        }
+        "title": "Lightning Terminal (LNC)"
       },
       "lndhub_go": {
         "title": "LNDHub",
@@ -583,12 +564,7 @@
         }
       },
       "btcpay": {
-        "page": {
-          "instructions": "ไปที่ BTCPayServer ของคุณและลงชื่อเข้าใช้ในฐานะผู้ดูแลระบบ ไปที่ Server Settings > Services > LND Rest - ดูข้อมูล จากนั้นคลิก \"See QR code information\" และ คัดลอก QR Code มาวางไว้ด้านล่าง:",
-          "title": "เชื่อมต่อกับ BTCPay LND node ของคุณ"
-        },
         "config": {
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config",
           "label": "การกำหนดค่าข้อมูล"
         },
         "errors": {
@@ -780,6 +756,8 @@
     "nostr": {
       "signmessage": "เซ็นข้อความด้วย key ของคุณ",
       "nip04decrypt": "ถอดรหัสข้อมูล",
+      "nip44encrypt": "เข้ารหัสข้อมูล",
+      "nip44decrypt": "ถอดรหัสข้อมูล",
       "getpublickey": "แสดง public key ของคุณ"
     },
     "commando": {
@@ -945,10 +923,8 @@
       "connection_failed": "การเชื่อมต่อล้มเหลว",
       "payment_failed": "การชำระเงินล้มเหลว"
     },
-    "advanced": "ขั้นสูง",
     "success": "สำเร็จ",
     "error": "ข้อผิดพลาด",
-    "settings": "การตั้งค่า",
     "accounts": "บัญชี",
     "discover": "ค้นหา",
     "connected_sites": "เว็บไซต์ที่เชื่อมต่อ",
@@ -1032,12 +1008,8 @@
     },
     "account_menu": {
       "screen_reader": "เมนูแบบเลื่อนลง",
-      "title": "สลับบัญชี",
       "options": {
         "account": {
-          "add": "เพิ่มบัญชีใหม่",
-          "manage": "การจัดการบัญชี",
-          "account_settings": "การตั้งค่าบัญชี",
           "go_to_web_wallet": "จัดการเว็บไซต์บนบัญชีของคุณ"
         }
       }

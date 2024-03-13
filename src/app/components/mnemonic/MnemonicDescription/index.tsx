@@ -1,10 +1,7 @@
-import {
-  KeyIcon,
-  MnemonicIcon,
-  PasswordIcon,
-  SafeIcon,
-} from "@bitcoin-design/bitcoin-icons-react/outline";
-import { useTranslation } from "react-i18next";
+import { PopiconsKeyLine } from "@popicons/react";
+import { Trans, useTranslation } from "react-i18next";
+import FaceSurpriseIcon from "~/app/icons/FaceSurpriseIcon";
+import NostrIcon from "~/app/icons/NostrIcon";
 
 function MnemonicDescription() {
   const { t } = useTranslation("translation", {
@@ -13,14 +10,34 @@ function MnemonicDescription() {
 
   return (
     <>
-      <div className="flex flex-col gap-2">
-        <ListItem icon={<KeyIcon />} title={t("backup.items.keys")} />
+      <div className="flex flex-col gap-4">
         <ListItem
-          icon={<MnemonicIcon />}
-          title={t("backup.items.recovery_phrase")}
+          icon={<PopiconsKeyLine />}
+          title={
+            <Trans
+              i18nKey={"new.items.keys"}
+              t={t}
+              components={[
+                //eslint-disable-next-line react/jsx-key
+                <span className="font-semibold"></span>,
+              ]}
+            />
+          }
         />
-        <ListItem icon={<PasswordIcon />} title={t("backup.items.words")} />
-        <ListItem icon={<SafeIcon />} title={t("backup.items.storage")} />
+        <ListItem
+          icon={<FaceSurpriseIcon />}
+          title={
+            <Trans
+              i18nKey={"new.items.usage"}
+              t={t}
+              components={[
+                // eslint-disable-next-line react/jsx-key
+                <span className="font-semibold"></span>,
+              ]}
+            />
+          }
+        />
+        <ListItem icon={<NostrIcon />} title={t("new.items.nostr_key")} />
       </div>
     </>
   );
@@ -28,15 +45,16 @@ function MnemonicDescription() {
 
 export default MnemonicDescription;
 
-type ListItemProps = { icon: React.ReactNode; title: string };
+type ListItemProps = {
+  icon: React.ReactNode;
+  title: string | React.ReactElement;
+};
 
 function ListItem({ icon, title }: ListItemProps) {
   return (
-    <div className="flex gap-2 items-center">
-      <div className="shrink-0 w-8 h-8 text-gray-600 dark:text-neutral-400">
-        {icon}
-      </div>
-      <span className="text-gray-600 dark:text-neutral-400">{title}</span>
+    <div className="flex gap-2 items-center text-gray-600 dark:text-neutral-400 text-sm">
+      <div className="shrink-0">{icon}</div>
+      <span>{title}</span>
     </div>
   );
 }

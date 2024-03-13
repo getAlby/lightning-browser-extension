@@ -98,13 +98,9 @@
       },
       "btcpay": {
         "config": {
-          "label": "Podatki o konfiguraciji",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
+          "label": "Podatki o konfiguraciji"
         },
         "title": "BTCPay Server",
-        "page": {
-          "title": "Poveži z BTCPay LND node"
-        },
         "errors": {
           "connection_failed": "Neuspešna povezava. Je BTCPay URL povezava pravilna in dostopna?"
         }
@@ -142,10 +138,6 @@
       },
       "lnc": {
         "title": "Terminal Lightning (LNC)",
-        "page": {
-          "title": "Poveži s svojim LND vozliščem",
-          "description": "1. Odpri Lightning Terminal in izberi <0>Lightning Node Connect</0> iz stranske vrstice.<1/> 2. Klikni <0>Ustvari novo sejo</0><1/>3. Označi povezavo, izberi dovoljenje in potrdi<1/>4. <0>Kopiraj frazo za spajanje</0> in jo prilepi spodaj."
-        },
         "pairing_phrase": {
           "label": "Tvoja fraza za spajanje ",
           "placeholder": "skrivna fraza za stack sats"
@@ -229,15 +221,12 @@
       }
     },
     "welcome": {
-      "title": "Dobrodošli v Alby",
       "set_password": {
-        "title": "Nastavi kodo za odklepanje",
         "errors": {
           "enter_password": "Prosim vpiši kodo.",
           "mismatched_password": "Gesli se ne ujemata.",
           "confirm_password": "Prosim potrdi svoje geslo."
         },
-        "description": "Ta koda omogoča odklep Alby na tej napravi. Kode ne moreš resetirati, zato si jo zapomni, lahko pa jo kasneje spremeniš.",
         "choose_password": {
           "label": "Izberi kodo za odklepanje:"
         },
@@ -314,7 +303,6 @@
       }
     },
     "accounts": {
-      "title": "Računi",
       "account_view": {
         "title2": "Račun",
         "export": {
@@ -340,7 +328,6 @@
             "error_confirm": "Prosim potrdi, da si naredil varnostno kopijo obnovitvene fraze."
           },
           "backup": {
-            "title": "Varnostno kopiraj obnovitveno frazo",
             "save": "Shrani Glavni ključ",
             "button": "Poglej obnovitveno frazo",
             "items": {
@@ -357,16 +344,12 @@
             "description": "Uporabi obnovitveno frazo za uvoz Gladvnega ključa v Alby.",
             "button": "Uvozi Glavni ključ"
           },
-          "inputs": {
-            "title": "Obnovitvena fraza"
-          },
+          "inputs": {},
           "lnurl": {
             "title": "Prijava z Lightning",
             "use_mnemonic": "Uporabi Glavni ključ za prijavo v Lightning omogočene aplikacije (LNURL Auth)"
           },
-          "new": {
-            "title": "Kaj je Glavni ključ?"
-          }
+          "new": {}
         },
         "network": {
           "title": "Omrežje",
@@ -428,11 +411,8 @@
             "failed_to_load": "Nalaganje ključa Nostr ni uspelo. Je to veljaven ključ Nostr?"
           }
         },
-        "title1": "Nastavitve računa",
         "remove": {
-          "title": "Odstrani ta račun",
-          "error": "Vnešeno ime računa se ne ujema.",
-          "subtitle": "Odstrani vse odobritve, podatke o plačilih in ključe, povezane s tem računom."
+          "error": "Vnešeno ime računa se ne ujema."
         },
         "remove_secretkey": {
           "subtitle": "Odstrani Glavni ključ iz tega računa.",
@@ -441,12 +421,8 @@
         },
         "actions": {
           "export": "Izvoz",
-          "remove_account": "Odstrani račun",
           "remove_secretkey": "Odstrani Glavni ključ"
         }
-      },
-      "actions": {
-        "add_account": "Dodaj račun"
       }
     },
     "unlock": {
@@ -467,7 +443,6 @@
       "browser_notifications": {
         "title": "Obvestila brskalnika"
       },
-      "title": "Nastavitve",
       "personal_data": {
         "title": "Osebni podatki"
       },
@@ -637,9 +612,12 @@
       "getaddress": "Bere tvoj Liquid naslov za prejemanje"
     },
     "nostr": {
-      "signmessage": "Podpiši sporočilo s svojim ključem",
+      "getpublickey": "Bere tvoj javni ključ",
       "nip04decrypt": "Dekriptiraj podatke",
-      "getpublickey": "Bere tvoj javni ključ"
+      "nip04encrypt": "Kriptiraj podatke",
+      "nip44decrypt": "Dekriptiraj podatke",
+      "nip44encrypt": "Kriptiraj podatke",
+      "signmessage": "Podpiši sporočilo s svojim ključem"
     },
     "webln": {
       "getbalance": "Bere stanje tvojega računa"
@@ -680,14 +658,10 @@
     "account_menu": {
       "options": {
         "account": {
-          "manage": "Upravljanje računov",
-          "account_settings": "Nastavitve računa",
-          "add": "Dodaj nov račun",
           "go_to_web_wallet": "Upravljaj svoj spletni račun"
         }
       },
-      "screen_reader": "Preklopi spustni meni",
-      "title": "Preklopi račun"
+      "screen_reader": "Preklopi spustni meni"
     },
     "publishers_table": {
       "payments": "plačila",

@@ -1,10 +1,7 @@
 {
   "translation": {
     "welcome": {
-      "title": "Witaj w Alby",
       "set_password": {
-        "title": "Ustaw hasło blokady",
-        "description": "To hasło pozwoli odblokować rozszerzenie Alby na tym urządzeniu. Nie można go odzyskać ale może być zmienione później.",
         "choose_password": {
           "label": "Wybierz hasło blokady:"
         },
@@ -87,10 +84,6 @@
       },
       "lnc": {
         "title": "Lightning Terminal (LNC)",
-        "page": {
-          "title": "Podłącz się do swojego węzła LND",
-          "description": "1. Otwórz Lightning Terminal i wybierz <0>Lightning Node Connect</0> z paska bocznego.<1/> 2. Kliknij <0>Create a new session</0><1/>3. Nadaj etykietę sesji, wybierz żądane uprawnienia i zatwierdź<1/>4. <0>Skopiuj frazę parującą</0> i wklej ją poniżej."
-        },
         "pairing_phrase": {
           "label": "Twoja fraza parująca ",
           "placeholder": "tajna fraza stosu satsów"
@@ -220,13 +213,8 @@
       },
       "btcpay": {
         "title": "BTCPay Server",
-        "page": {
-          "title": "Podłącz do węzła LND na BTCPayServer",
-          "instructions": "Przejdź do BTCPayServer i zaloguj się jako administrator. Idź do Server Settings > Services > NDS Rest - See information. Następni kliknij \"See QR Code information\" i skopiuj dane kodu QR. Wklej poniżej:"
-        },
         "config": {
-          "label": "Date konfiguracyjne",
-          "placeholder": "config=https://twoj-btc-pay.org/lnd-config/212121/lnd.config"
+          "label": "Date konfiguracyjne"
         },
         "errors": {
           "connection_failed": "Połączenie nieudane. Czy adres BTCPay jest poprawny i osiągalny?"
@@ -303,7 +291,6 @@
       }
     },
     "accounts": {
-      "title": "Konta",
       "account_view": {
         "title1": "Ustawienia konta",
         "title2": "Konto",
@@ -354,12 +341,7 @@
             "title": "Ustawienia Nostr"
           }
         },
-        "remove": {
-          "title": "Usuń konto",
-          "subtitle": "Wszystkie powiązane limity zostaną usunięte. Proszę się upewnić."
-        },
         "actions": {
-          "remove_account": "Usuń konto",
           "export": "Eksport"
         },
         "mnemonic": {
@@ -375,9 +357,7 @@
               "nostr": "Nostr"
             }
           },
-          "inputs": {
-            "title": "Fraza odzyskiwania"
-          },
+          "inputs": {},
           "import": {
             "description": "Użyj frazy odzyskiwania, aby zaimportować swój Klucz Główny do Alby.",
             "button": "Zaimportuj Klucz Główny",
@@ -398,9 +378,6 @@
           },
           "title": "Sieć"
         }
-      },
-      "actions": {
-        "add_account": "Dodaj konto"
       }
     },
     "unlock": {
@@ -419,7 +396,6 @@
       }
     },
     "settings": {
-      "title": "Ustawienia",
       "browser_notifications": {
         "title": "Powiadomienia w przeglądarce",
         "subtitle": "Powiadomienia związane z płatnościami i uwierzytelnianiem."
@@ -707,10 +683,8 @@
   "common": {
     "password": "Hasło",
     "confirm_password": "Potwierdź hasło",
-    "advanced": "Zaawansowane",
     "success": "Sukces",
     "error": "Błąd",
-    "settings": "Ustawienia",
     "accounts": "Konta",
     "discover": "Odkrywaj",
     "connected_sites": "",
@@ -826,14 +800,7 @@
       }
     },
     "account_menu": {
-      "screen_reader": "Przełącznik rozwijany",
-      "title": "Zmień konto",
-      "options": {
-        "account": {
-          "add": "Dodaj nowe konto",
-          "manage": "Zarządzaj kontami"
-        }
-      }
+      "screen_reader": "Przełącznik rozwijany"
     },
     "publishers_table": {
       "payments": "płatności"
@@ -858,9 +825,12 @@
   },
   "permissions": {
     "nostr": {
-      "getpublickey": "Czytanie Twojego klucza publicznego.",
-      "nip04decrypt": "Deszyfrowanie danych.",
-      "signmessage": "Podpisywanie wiadomości Twoim kluczem."
+      "getpublickey": "Czytanie Twojego klucza publicznego",
+      "nip04decrypt": "Deszyfrowanie danych",
+      "nip04encrypt": "Szyfrowanie danych",
+      "nip44decrypt": "Deszyfrowanie danych",
+      "nip44encrypt": "Szyfrowanie danych",
+      "signmessage": "Podpisywanie wiadomości Twoim kluczem"
     },
     "commando": {
       "bkpr-listbalances": "Listowanie wszystkich bieżących i historycznych sald konta.",
