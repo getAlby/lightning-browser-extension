@@ -343,20 +343,6 @@
               "label": "Buat akun Nostr",
               "description": "Buat Master Key dan sepasang kunci Nostr baru."
             },
-            "import": {
-              "label": "Impor akun Nostr",
-              "description": "Gunakan kunci privat Nostr yang sudah ada atau ambil dari Master Key kamu",
-              "title": "Dengan cara apa kamu mau import akun Nostr?",
-              "private_key": {
-                "label": "Gunakan kunci privat Nostr",
-                "description": "Tempel kunci privat Nostr untuk mengimpornya ke Alby"
-              },
-              "recovery_phrase": {
-                "label": "Gunakan recovery phrase",
-                "description": "Gunakan recovery phrase Master key untuk mengimpor kunci Nostr"
-              }
-            },
-            "new_to_nostr": "Baru tahu tentang Nostr? <0>Pelajari lebih lanjut</0>",
             "title": "Siapkan kunci Nostr kamu",
             "description": "Pilih jika anda mau membuat akun Nostr baru (sepasang kunci privat dan publik) atau impor yang sudah ada.",
             "description2": "setiap akun Nostr yang dibuat dalam Alby, akan mempunyai <0>Recovery Phrase</0> – susunan 12 kata untuk mengakses kembali kunci privat Nostr."
