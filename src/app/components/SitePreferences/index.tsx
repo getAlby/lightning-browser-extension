@@ -12,6 +12,7 @@ import { PreferencesIcon } from "~/app/icons";
 import msg from "~/common/lib/msg";
 import type { Allowance, Permission } from "~/types";
 
+import Badge from "~/app/components/Badge";
 import Modal from "~/app/components/Modal";
 import DualCurrencyField from "../form/DualCurrencyField/index";
 
@@ -45,7 +46,6 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
 
   const { t } = useTranslation("components", { keyPrefix: "allowance_menu" });
   const { t: tCommon } = useTranslation("common");
-  const { t: tPermissions } = useTranslation("permissions");
   const { t: tNostr } = useTranslation("translation", {
     keyPrefix: "nostr",
   });
@@ -223,8 +223,9 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
               <div>
                 {permissions.map((permission) => (
                   <Fragment key={permission.id}>
-                    <Setting
-                      title={
+                    <Badge
+                      key={permission.method}
+                      sitePermission={
                         permission.method
                           .toLowerCase()
                           .split("/")
@@ -245,31 +246,17 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
                             )
                           : permission.method.split("/").slice(0, 2).join("/")
                       }
-                      subtitle={tPermissions(
-                        permission.method
-                          .toLowerCase()
-                          .split("/")
-                          .slice(0, 2)
-                          .join(".") as unknown as TemplateStringsArray
-                      )}
-                      /* split the method at "/", take the last two items in
-                        the array and join them with "." to get the i18n string
-                        webln/lnd/getinfo -> lnd.getinfo
-                        nostr/nip04decrypt --> nostr.nip04decrypt */
-                    >
-                      <Toggle
-                        checked={permission.enabled}
-                        onChange={() => {
-                          setPermissions(
-                            permissions.map((prm) =>
-                              prm.id === permission.id
-                                ? { ...prm, enabled: !prm.enabled }
-                                : prm
-                            )
-                          );
-                        }}
-                      />
-                    </Setting>
+                      delete={() => {
+                        setPermissions(
+                          permissions.map((prm) =>
+                            prm.id === permission.id
+                              ? { ...prm, enabled: !prm.enabled }
+                              : prm
+                          )
+                        );
+                      }}
+                      className="bg-green-100 dark:bg-emerald-950 border border-green-100 dark:border-emerald-950 text-gray-800 dark:text-neutral-200 gap-1"
+                    />
                   </Fragment>
                 ))}
               </div>

@@ -1193,7 +1193,6 @@
     },
     "nostr": {
       "getpublickey": "Read your public key",
-      "signmessage": "Sign message with your key",
       "nip04decrypt": "Decrypt data"
     },
     "bitcoin": {
