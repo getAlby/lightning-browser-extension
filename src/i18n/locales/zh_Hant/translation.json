@@ -317,27 +317,13 @@
             "can_restore": "✅ Nostr 密鑰已從你的主密鑰派生"
           },
           "setup": {
-            "import": {
-              "recovery_phrase": {
-                "label": "使用恢復短語",
-                "description": "使用主密鑰恢復短語導入你的 nostr 密鑰"
-              },
-              "label": "導入 nostr 帳戶",
-              "description": "使用已有的 nostr 私鑰或從主密鑰中將其派生",
-              "title": "你想如何導入你的 nostr 帳戶？",
-              "private_key": {
-                "label": "使用 nostr 私鑰",
-                "description": "粘貼你的 nostr 私鑰將其導入 Alby"
-              }
-            },
             "title": "設置你的 nostr 密鑰",
             "description": "選擇是否要創建一個新的 nostr 帳戶（一對私鑰和公鑰）或導入現有帳戶。",
             "description2": "在 Alby 中創建的每個 Nostr 帳戶都帶有<0>恢復短語</0>——一組12個單詞，始終保證重新獲得對你的 Nostr 私鑰的訪問。",
             "new": {
               "label": "創建新的 nostr 帳戶",
               "description": "通過使用一對新的 nostr 密鑰生成主密鑰。"
-            },
-            "new_to_nostr": "Nostr 新手？<0>瞭解更多</0>"
+            }
           }
         },
         "remove": {

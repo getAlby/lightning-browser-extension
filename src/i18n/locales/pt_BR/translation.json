@@ -271,14 +271,6 @@
             "title": "Saiba mais sobre a extensão Alby",
             "description": "Novo na Alby? Confira nossos tutoriais, vídeos e explicações"
           },
-          "backup_masterkey": {
-            "description": "Descubra o que é a chave mestra, como ela é usada no Nostr e certifique-se de fazer o backup",
-            "title": "Faça o backup da sua chave mestra"
-          },
-          "import_masterkey": {
-            "title": "Importe sua chave mestra",
-            "description": "Se você já possui uma chave mestra, você pode importá-la usando a frase de recuperação"
-          },
           "receive_bitcoin": {
             "title": "Deposite bitcoin",
             "description": "Receba satoshis usando um endereço relâmpago, fatura relâmpago ou endereço bitcoin"
@@ -343,20 +335,6 @@
               "label": "Criar uma nova conta Nostr",
               "description": "Gere uma chave mestra com um par de novas chaves Nostr."
             },
-            "import": {
-              "label": "Importar uma conta Nostr",
-              "description": "Use uma chave privada Nostr existente ou gere uma a partir de sua chave mestra",
-              "title": "Como você gostaria de importar sua conta Nostr?",
-              "private_key": {
-                "label": "Usar chave privada Nostr",
-                "description": "Cole sua chave privada Nostr para importá-la para a Alby"
-              },
-              "recovery_phrase": {
-                "label": "Usar frase de recuperação",
-                "description": "Use a frase de recuperação da chave mestra para importar suas chaves Nostr"
-              }
-            },
-            "new_to_nostr": "Novo no Nostr? <0>Saiba mais</0>",
             "description": "Escolha se você deseja criar uma nova conta Nostr (um par de chaves públicas e privadas) ou importar uma existente.",
             "description2": "Toda conta Nostr criada na Alby vem com uma <0>Frase de recuperação</0> – um conjunto de 12 palavras que sempre permite que você recupere o acesso às suas chaves privadas Nostr."
           }
@@ -409,7 +387,6 @@
             "title": "O que é uma chave mestra?",
             "items": {
               "usage": "Você pode importar e usar a mesma chave mestra em diferentes carteiras conectadas na extensão Alby",
-              "recovery_phrase": "Para importar sua chave mestra para outra carteira Alby, você precisa usar a frase de recuperação",
               "keys": "A chave mestra é a sua identidade e permite interagir com diferentes protocolos como: Nostr, Liquid ou a camada base do bitcoin"
             }
           },
