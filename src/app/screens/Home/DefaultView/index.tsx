@@ -136,7 +136,7 @@ const DefaultView: FC<Props> = (props) => {
             </a>
           </div>
         )}
-        <div className="flex mb-4 space-x-3 justify-between">
+        <div className="flex space-x-3 justify-between">
           <HomeButton
             icon={<img src="assets/icons/popicons/receive.svg" />}
             onClick={() => {
@@ -180,7 +180,7 @@ const DefaultView: FC<Props> = (props) => {
         )}
 
         {isLoading && (
-          <div className="flex justify-center">
+          <div className="flex justify-center mt-4">
             <Loading />
           </div>
         )}
