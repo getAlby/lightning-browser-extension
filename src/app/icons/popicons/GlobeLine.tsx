@@ -2,7 +2,7 @@ import { SVGProps } from "react";
 
 const PopiconsGlobeLine = (props: SVGProps<SVGSVGElement>) => (
   <svg
-    className={props.className}
+    {...props}
     width="20"
     height="20"
     viewBox="0 0 20 20"
