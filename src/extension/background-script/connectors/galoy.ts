@@ -2,6 +2,7 @@ import fetchAdapter from "@vespaiach/axios-fetch-adapter";
 import axios, { AxiosRequestConfig } from "axios";
 import lightningPayReq from "bolt11";
 import { ACCOUNT_CURRENCIES, CURRENCIES } from "~/common/constants";
+import { getPaymentRequestDescription } from "~/common/utils/paymentRequest";
 import { getCurrencyRateWithCache } from "~/extension/background-script/actions/cache/getCurrencyRate";
 import { Account } from "~/types";
 import Connector, {
@@ -160,6 +161,7 @@ class Galoy implements Connector {
                         direction
                         initiationVia {
                           ... on InitiationViaLn {
+                            paymentRequest
                             paymentHash
                           }
                         }
@@ -191,6 +193,7 @@ class Galoy implements Connector {
       };
 
       const response = await this.request(query);
+
       const errs = response.errors || response.data.me.errors;
       if (errs && errs.length) {
         throw new Error(errs[0].message || JSON.stringify(errs));
@@ -228,9 +231,16 @@ class Galoy implements Connector {
 
           const createdAtDate = new Date(tx.createdAt * 1000);
 
+          let paymentRequestDescription = "";
+          if (!tx.memo && tx.initiationVia.paymentRequest) {
+            paymentRequestDescription = getPaymentRequestDescription(
+              tx.initiationVia.paymentRequest
+            );
+          }
+
           transactions.push({
             id: edge.cursor,
-            memo: tx.memo,
+            memo: tx.memo || paymentRequestDescription,
             preimage:
               tx.settlementVia.preImage || tx.settlementVia.paymentSecret || "",
             payment_hash: tx.initiationVia.paymentHash || "",
@@ -590,6 +600,7 @@ type TransactionNode = {
   direction: string;
   initiationVia: {
     paymentHash?: string;
+    paymentRequest?: string;
   };
   settlementVia: {
     preImage?: string;
