@@ -20,7 +20,8 @@ const encryptOrPrompt = async (message: MessageEncryptGet, sender: Sender) => {
     );
 
     if (hasPermission) {
-      const response = (await state.getState().getNostr()).encrypt(
+      const nostr = await state.getState().getNostr();
+      const response = await nostr.nip04Encrypt(
         message.args.peer,
         message.args.plaintext
       );
@@ -48,7 +49,8 @@ const encryptOrPrompt = async (message: MessageEncryptGet, sender: Sender) => {
         );
       }
       if (promptResponse.data.confirm) {
-        const response = (await state.getState().getNostr()).encrypt(
+        const nostr = await state.getState().getNostr();
+        const response = await nostr.nip04Encrypt(
           message.args.peer,
           message.args.plaintext
         );
