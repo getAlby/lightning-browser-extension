@@ -63,7 +63,7 @@
     "i18next": "^23.8.2",
     "i18next-browser-languagedetector": "^7.2.0",
     "liquidjs-lib": "^6.0.2-liquid.29",
-    "lnmessage": "^0.2.3",
+    "lnmessage": "^0.2.7",
     "lodash.merge": "^4.6.2",
     "lodash.pick": "^4.4.0",
     "lodash.snakecase": "^4.1.1",
