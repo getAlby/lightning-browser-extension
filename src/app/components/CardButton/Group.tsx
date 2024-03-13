@@ -3,5 +3,7 @@ export type Props = {
 };
 
 export default function CardButtonGroup({ children }: Props) {
-  return <div className="grid gap-5 grid-cols-2">{children}</div>;
+  return (
+    <div className="grid gap-5 grid-cols-1 sm:grid-cols-2">{children}</div>
+  );
 }

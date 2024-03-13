@@ -676,6 +676,9 @@
     "nostr": {
       "getpublickey": "",
       "nip04decrypt": "",
+      "nip04encrypt": "",
+      "nip44decrypt": "",
+      "nip44encrypt": "",
       "signmessage": ""
     },
     "commando": {

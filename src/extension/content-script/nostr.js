@@ -13,6 +13,8 @@ const nostrCalls = [
   "nostr/enable",
   "nostr/encryptOrPrompt",
   "nostr/decryptOrPrompt",
+  "nostr/nip44EncryptOrPrompt",
+  "nostr/nip44DecryptOrPrompt",
   "nostr/on",
   "nostr/off",
   "nostr/emit",

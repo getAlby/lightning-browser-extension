@@ -128,6 +128,8 @@ const routes = {
       getRelays: nostr.getRelays,
       encryptOrPrompt: nostr.encryptOrPrompt,
       decryptOrPrompt: nostr.decryptOrPrompt,
+      nip44EncryptOrPrompt: nostr.nip44EncryptOrPrompt,
+      nip44DecryptOrPrompt: nostr.nip44DecryptOrPrompt,
     },
   },
 };
