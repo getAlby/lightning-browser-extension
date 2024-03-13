@@ -410,15 +410,6 @@
           "mismatched_password": ""
         },
         "success": ""
-      },
-      "nostr": {
-        "title": "",
-        "hint": "",
-        "private_key": {
-          "title": "",
-          "subtitle": "",
-          "go_to": ""
-        }
       }
     },
     "send": {
@@ -686,6 +677,9 @@
     "nostr": {
       "getpublickey": "",
       "nip04decrypt": "",
+      "nip04encrypt": "",
+      "nip44decrypt": "",
+      "nip44encrypt": "",
       "signmessage": ""
     },
     "commando": {
