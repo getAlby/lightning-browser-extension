@@ -41,13 +41,6 @@ const Home: FC = () => {
     }
   };
 
-  // loadAllowance as soon as currentURL is set
-  useEffect(() => {
-    if (currentUrl) {
-      loadAllowance();
-    }
-  }, [currentUrl, loadAllowance]);
-
   // Get current URL data on mount
   // and start listeners
   useEffect(() => {
@@ -68,9 +61,9 @@ const Home: FC = () => {
             action: "extractLightningData",
           });
         }
-      } else {
-        setLoadingAllowance(false);
       }
+
+      loadAllowance();
     };
 
     getCurrentURL();
@@ -81,7 +74,7 @@ const Home: FC = () => {
     return () => {
       browser.runtime.onMessage.removeListener(handleLightningDataMessage);
     };
-  }, []);
+  }, [loadAllowance]);
 
   if (loadingAllowance) {
     return null;
