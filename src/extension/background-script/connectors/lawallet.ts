@@ -109,15 +109,18 @@ export default class LaWallet implements Connector {
   }
 
   async getTransactions(): Promise<GetTransactionsResponse> {
-    const _transactions = await this.relay.list([
+    const _transactions: Event[] = await LaWallet.request(
+      this.config.apiEndpoint,
+      "POST",
+      "/nostr/fetch",
       {
-        authors: [this.config.ledgerPublicKey],
+        authors: [this.config.ledgerPublicKey, this.config.urlxPublicKey],
         kinds: [1112],
         since: 0,
-        "#t": ["internal-transaction-ok", "inbound-transaction-ok"],
+        "#t": ["internal-transaction-ok", "inbound-transaction-start"],
         "#p": [this.public_key],
-      },
-    ]);
+      }
+    );
 
     const transactions = _transactions.map((event) => {
       return {
