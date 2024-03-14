@@ -72,7 +72,6 @@ export default class LaWallet implements Connector {
   }
 
   async init() {
-    this.relay.connect();
     return Promise.resolve();
   }
 
@@ -230,6 +229,7 @@ export default class LaWallet implements Connector {
         event,
         "blob"
       );
+      this.relay.connect();
       return this.getPaymentStatus(event);
     } catch (e) {
       console.error(e);
@@ -283,7 +283,7 @@ export default class LaWallet implements Connector {
             break;
           case "internal-transaction-error": // No funds or ledger error
             return reject(new Error(content.messages[0]));
-          case "outbound-transaction-ok": // Payment done
+          case "outbound-transaction-start": // Payment done
             return resolve({
               data: {
                 preimage: await extractPreimage(event, this.config.privateKey),
