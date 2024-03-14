@@ -917,30 +917,96 @@
       "block_added": "Added {{host}} to the blocklist, please reload the website.",
       "recipient": "Recipient",
       "kinds": {
-        "unknown": "kind {{kind}}",
-        "0": "metadata",
-        "1": "short text note",
-        "2": "recommend relay",
-        "3": "contacts",
-        "4": "encrypted direct messages",
-        "5": "event deletion",
-        "7": "reaction",
-        "8": "badge award",
-        "40": "channel creation",
-        "41": "channel metadata",
-        "42": "channel message",
-        "43": "channel hide message",
-        "44": "channel mute user",
-        "1984": "reporting",
-        "9734": "zap request",
-        "9735": "zap",
-        "10002": "relay list metadata",
-        "22242": "client authentication",
-        "24133": "nostr connect",
-        "30008": "profile badges",
-        "30009": "badge definition",
-        "30023": "long-form content",
-        "30078": "application-specific data"
+        "unknown": { "title": "kind {{kind}}", "description": "Unknown Kind" },
+        "0": {
+          "title": "Profile",
+          "description": "Share your name, description, profile picture, Nostr address and additional profile metadata."
+        },
+        "1": { "title": "Short note", "description": "Sign a short text note" },
+        "2": {
+          "title": "Recommend relay",
+          "description": "Share a recommended relay"
+        },
+        "3": {
+          "title": "Follow list",
+          "description": "Share a list of accounts you follow"
+        },
+        "4": {
+          "title": "Direct message",
+          "description": "Send an encrypted direct message"
+        },
+        "5": {
+          "title": "Event deletion",
+          "description": "Request relays to delete an event"
+        },
+        "7": {
+          "title": "Reactions",
+          "description": "Sign a reaction to a note"
+        },
+        "8": {
+          "title": "Badge award",
+          "description": "Award a badge to a Nostr profile"
+        },
+        "40": {
+          "title": "Channel creation",
+          "description": "Create a public channel chat"
+        },
+        "41": {
+          "title": "Update channel",
+          "description": "Update channel's name, description, picture and additional metadata"
+        },
+        "42": {
+          "title": "Channel message",
+          "description": "Send a text message to a channel"
+        },
+        "43": {
+          "title": "Channel hide message",
+          "description": "Hide a text message in a channel"
+        },
+        "44": {
+          "title": "Channel mute user",
+          "description": "Hide all messages from a Nostr profile"
+        },
+        "1984": {
+          "title": "Report note",
+          "description": "Report a note for spam, illegal or explicit content "
+        },
+        "9734": {
+          "title": "Zap request",
+          "description": "Request a lightning payment"
+        },
+        "9735": {
+          "title": "Zap recipt",
+          "description": "Display a confirmation of a paid lightning invoice"
+        },
+        "10002": {
+          "title": "Relay list",
+          "description": "Share preferred relays for discovering your notes and receiving others' notes"
+        },
+        "22242": {
+          "title": "Authenticate",
+          "description": "Authenticate to a relay"
+        },
+        "24133": {
+          "title": "Remote signing",
+          "description": "Request and sign events remotely"
+        },
+        "30008": {
+          "title": "Profile badges",
+          "description": "Accept, reject and change display order of awarded badges"
+        },
+        "30009": {
+          "title": "Create badge",
+          "description": "Create a new badge"
+        },
+        "30023": {
+          "title": "Long note",
+          "description": "Sign a long-form notes like articles or blog posts"
+        },
+        "30078": {
+          "title": "App data",
+          "description": "Sign an application-specific data"
+        }
       }
     },
     "transactions": {
@@ -1170,21 +1236,36 @@
   },
   "permissions": {
     "webln": {
-      "getbalance": "Read the balance of your account"
+      "getbalance": {
+        "title": "Get Balance",
+        "description": "Read the balance of your account"
+      }
     },
     "bitcoin": {
-      "getaddress": "Read your Bitcoin receive address"
+      "getaddress": {
+        "title": "Get Address",
+        "description": "Read your Bitcoin receive address"
+      }
     },
     "liquid": {
-      "getaddress": "Read your Liquid receive address",
-      "signschnorr": "Sign message with your key"
+      "getaddress": {
+        "title": "Get Address",
+        "description": "Read your Liquid receive address"
+      },
+      "signschnorr": {
+        "title": "Sign Schnorr",
+        "description": "Sign message with your key"
+      }
     },
     "nostr": {
-      "getpublickey": "Read your public key",
-      "nip04encrypt": "Encrypt data",
-      "nip04decrypt": "Decrypt data",
-      "nip44encrypt": "Encrypt data",
-      "nip44decrypt": "Decrypt data"
+      "getpublickey": {
+        "title": "Read Public Key",
+        "description": "Read your public key"
+      },
+      "decrypt": {
+        "title": "Decrypt Data",
+        "description": "Allow NIP04 Data Decryption"
+      }
     },
     "commando": {
       "bkpr-listbalances": "List of all current and historical account balances",

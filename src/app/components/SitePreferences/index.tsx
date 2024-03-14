@@ -49,6 +49,7 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
   const { t: tNostr } = useTranslation("translation", {
     keyPrefix: "nostr",
   });
+  const { t: tPermissions } = useTranslation("permissions");
 
   const hasPermissions = !isLoadingPermissions && !!permissions?.length;
 
@@ -236,7 +237,8 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
                                 .toLowerCase()
                                 .split("/")
                                 .slice(-1)
-                                .toString()}`,
+                                .toString()
+                                .concat(".title")}`,
                               {
                                 defaultValue: permission.method
                                   .split("/")
@@ -244,11 +246,55 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
                                   .toString(),
                               }
                             ).toUpperCase()
-                          : permission.method
-                              .split("/")
-                              .slice(0, 2)
-                              .join("/")
-                              .toUpperCase()
+                          : tPermissions(
+                              permission.method
+                                .toLowerCase()
+                                .split("/")
+                                .slice(0, 2)
+                                .join(".")
+                                .concat(".title"),
+                              {
+                                defaultValue: permission.method
+                                  .split("/")
+                                  .slice(-1)
+                                  .toString(),
+                              }
+                            )
+                      }
+                      description={
+                        permission.method
+                          .toLowerCase()
+                          .split("/")
+                          .slice(0, 2)
+                          .join("/") == "nostr/signmessage"
+                          ? tNostr(
+                              `kinds.${permission.method
+                                .toLowerCase()
+                                .split("/")
+                                .slice(-1)
+                                .toString()
+                                .concat(".description")}`,
+                              {
+                                defaultValue: permission.method
+                                  .split("/")
+                                  .slice(-1)
+                                  .toString(),
+                              }
+                            )
+                          : tPermissions(
+                              permission.method
+                                .toLowerCase()
+                                .split("/")
+                                .slice(0, 2)
+                                .join(".")
+                                .concat(".description"),
+                              {
+                                defaultValue: permission.method
+                                  .split("/")
+                                  .slice(-1)
+                                  .toString(),
+                              }
+                            )
                       }
                       delete={() => {
                         setPermissions(

@@ -8,6 +8,7 @@ type Props = {
   sitePermission?: string;
   className: string;
   delete?: () => void;
+  description?: string;
 };
 
 export default function Badge({
@@ -15,6 +16,7 @@ export default function Badge({
   className,
   sitePermission,
   delete: deletePermission,
+  description,
 }: Props) {
   const { t: tComponents } = useTranslation("components", {
     keyPrefix: "badge",
@@ -27,9 +29,10 @@ export default function Badge({
       {showBadge && (
         <div
           className={classNames(
-            "inline-flex items-center leading-none rounded-full font-medium mr-2 py-1 pr-2 pl-3 my-2 text-xs",
+            "inline-flex items-center leading-none rounded-full font-medium mr-2 py-1 pr-2 pl-3 my-2 text-xs cursor-default uppercase",
             className
           )}
+          title={description}
         >
           {label ? tComponents(`label.${label}`) : sitePermission}
           {deletePermission && (
