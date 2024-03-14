@@ -14,10 +14,19 @@ document.addEventListener("DOMContentLoaded", function () {
   const isSafariOniOS =
     navigator.userAgent.match(/iPhone/i) &&
     navigator.userAgent.match(/Safari/i);
+  const isSafariOniPad =
+    navigator.userAgent.match(/Macintosh/i) &&
+    navigator.userAgent.match(/Safari/i) &&
+    navigator.maxTouchPoints &&
+    navigator.maxTouchPoints > 1;
   if (isSafariOniOS) {
     document.body.classList.remove("w-96");
     document.body.classList.add("w-full");
   }
+  if (isSafariOniPad) {
+    document.body.classList.remove("max-w-full");
+  }
+  container.innerText = document.body.classList.toString();
 });
 
 const container = document.getElementById("popup-root") as HTMLElement;
