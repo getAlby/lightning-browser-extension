@@ -1,4 +1,4 @@
-import { QrCodeIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
+import { PopiconsQrCodeMinimalLine } from "@popicons/react";
 import { Html5Qrcode, Html5QrcodeScannerState } from "html5-qrcode";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -130,7 +130,7 @@ function QrcodeScanner({
                 onClick={handleRequestCameraPermissions}
               />
             </div>
-            <QrCodeIcon className="h-28 w-28 ml-4 -mr-8 text-blue-600" />
+            <PopiconsQrCodeMinimalLine className="h-28 w-28 ml-4 -mr-8 text-blue-600" />
           </div>
         </>
       )}

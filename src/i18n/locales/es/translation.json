@@ -413,15 +413,6 @@
       "browser_notifications": {
         "title": "Notificaciones del navegador",
         "subtitle": "Notificaciones relacionadas con pagos y autenticación."
-      },
-      "nostr": {
-        "private_key": {
-          "title": "Clave Privada",
-          "subtitle": "Esta sección se ha movido a la página de cuentas ya que las claves ahora son específicas de la cuenta.",
-          "go_to": "Ir a Cuentas"
-        },
-        "title": "Nostr",
-        "hint": "es un protocolo simple y abierto que tiene como objetivo crear redes sociales resistentes a la censura. Nostr trabaja con claves criptográficas. Para publicar algo, lo firma con su clave y lo envía a múltiples relevos. Puede usar Alby para administrar su clave Nostr. Muchas aplicaciones de Nostr le permitirán simplemente usar la clave de la extensión Alby."
       }
     },
     "send": {
@@ -549,13 +540,6 @@
         "description": "Lo mejor si ya tienes un monedero o necesitas hacer pagos de mucho importe.",
         "point3": "Opciones de autocustodia y custodia",
         "point4": "Sin dirección relámpago y nostr"
-      },
-      "voltage": {
-        "connect": "Connectar",
-        "title": "Nodo a Voltage Cloud",
-        "point1": "Empieza al instante, sin esperar invitación",
-        "point2": "Sin límite de transacciones ni de importe",
-        "point3": "Servicio de pago en la nube"
       },
       "title": "Conectar la cartera a la extensión Alby"
     },
@@ -850,9 +834,12 @@
       "feerates": "Devuelve las tarifas que utilizará CLN"
     },
     "nostr": {
-      "signmessage": "Firma el mensaje con tu clave",
       "getpublickey": "Leer tu clave pública",
-      "nip04decrypt": "Descifrar datos"
+      "nip04decrypt": "Descifrar datos",
+      "nip04encrypt": "Cifrar datos",
+      "nip44decrypt": "Descifrar datos",
+      "nip44encrypt": "Cifrar datos",
+      "signmessage": "Firma el mensaje con tu clave"
     },
     "lnd": {
       "queryroutes": "Consultar una posible ruta",

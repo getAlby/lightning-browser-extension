@@ -6,15 +6,28 @@ import { AES } from "crypto-js";
 import Base64 from "crypto-js/enc-base64";
 import Hex from "crypto-js/enc-hex";
 import Utf8 from "crypto-js/enc-utf8";
+import { LRUCache } from "~/common/utils/lruCache";
 import { Event } from "~/extension/providers/nostr/types";
+import { nip44 } from "./nip44";
 
 import { getEventHash, signEvent } from "../actions/nostr/helpers";
 
 class Nostr {
-  privateKey: string;
+  nip44SharedSecretCache = new LRUCache<string, Uint8Array>(100);
 
-  constructor(privateKey: string) {
-    this.privateKey = privateKey;
+  constructor(readonly privateKey: string) {}
+
+  // Deriving shared secret is an expensive computation
+  getNip44SharedSecret(peerPubkey: string) {
+    let key = this.nip44SharedSecretCache.get(peerPubkey);
+
+    if (!key) {
+      key = nip44.utils.getConversationKey(this.privateKey, peerPubkey);
+
+      this.nip44SharedSecretCache.set(peerPubkey, key);
+    }
+
+    return key;
   }
 
   getPublicKey() {
@@ -40,7 +53,7 @@ class Nostr {
     return signedHex;
   }
 
-  encrypt(pubkey: string, text: string) {
+  nip04Encrypt(pubkey: string, text: string) {
     const key = secp256k1.getSharedSecret(this.privateKey, "02" + pubkey);
     const normalizedKey = Buffer.from(key.slice(1, 33));
     const hexNormalizedKey = secp256k1.etc.bytesToHex(normalizedKey);
@@ -55,7 +68,7 @@ class Nostr {
     )}`;
   }
 
-  async decrypt(pubkey: string, ciphertext: string) {
+  async nip04Decrypt(pubkey: string, ciphertext: string) {
     const [cip, iv] = ciphertext.split("?iv=");
     const key = secp256k1.getSharedSecret(this.privateKey, "02" + pubkey);
     const normalizedKey = Buffer.from(key.slice(1, 33));
@@ -67,6 +80,14 @@ class Nostr {
     });
 
     return Utf8.stringify(decrypted);
+  }
+
+  nip44Encrypt(peer: string, plaintext: string) {
+    return nip44.encrypt(plaintext, this.getNip44SharedSecret(peer));
+  }
+
+  nip44Decrypt(peer: string, ciphertext: string) {
+    return nip44.decrypt(ciphertext, this.getNip44SharedSecret(peer));
   }
 
   getEventHash(event: Event) {

@@ -1,4 +1,4 @@
-import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
+import { PopiconsXLine } from "@popicons/react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 import Container from "~/app/components/Container";
@@ -24,7 +24,7 @@ export default function ScanQRCode() {
                 { replace: true }
               )
             }
-            icon={<CrossIcon className="w-4 h-4" />}
+            icon={<PopiconsXLine className="w-4 h-4" />}
           />
         }
       >

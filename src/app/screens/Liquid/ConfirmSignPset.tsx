@@ -1,4 +1,3 @@
-import { InfoIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
 import PublisherCard from "@components/PublisherCard";
@@ -12,6 +11,7 @@ import Loading from "~/app/components/Loading";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import toast from "~/app/components/Toast";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
+import PopiconsCircleInfoLine from "~/app/icons/popicons/CircleInfoLine";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
@@ -113,7 +113,7 @@ function ConfirmSignPset() {
                   target="_blank"
                 >
                   <div className="bg-blue-500 rounded-full">
-                    <InfoIcon className="h-4 w-4 text-white" />
+                    <PopiconsCircleInfoLine className="h-4 w-4 text-white" />
                   </div>
                 </Hyperlink>
               </div>

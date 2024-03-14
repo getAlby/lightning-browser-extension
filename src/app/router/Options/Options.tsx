@@ -31,7 +31,6 @@ import GenerateMnemonic from "~/app/screens/Accounts/GenerateMnemonic";
 import NewMnemonic from "~/app/screens/Accounts/GenerateMnemonic/new";
 import ImportMnemonic from "~/app/screens/Accounts/ImportMnemonic";
 import NostrSettings from "~/app/screens/Accounts/NostrSettings";
-import NostrSetup from "~/app/screens/Accounts/NostrSetup/NostrSetup";
 
 import LNURLRedeem from "~/app/screens/LNURLRedeem";
 import OnChainReceive from "~/app/screens/OnChainReceive";
@@ -94,7 +93,6 @@ function Options() {
                 <Route path="secret-key/new" element={<NewMnemonic />} />
                 <Route path="secret-key/import" element={<ImportMnemonic />} />
                 <Route path="nostr/settings" element={<NostrSettings />} />
-                <Route path="nostr/setup" element={<NostrSetup />} />
               </Route>
 
               <Route
