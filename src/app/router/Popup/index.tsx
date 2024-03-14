@@ -26,7 +26,6 @@ document.addEventListener("DOMContentLoaded", function () {
   if (isSafariOniPad) {
     document.body.classList.remove("max-w-full");
   }
-  container.innerText = document.body.classList.toString();
 });
 
 const container = document.getElementById("popup-root") as HTMLElement;
