@@ -39,7 +39,11 @@ function Keysend() {
   const { t: tCommon } = useTranslation("common");
 
   const amountMin = 1;
-  const amountExceeded = +amountSat > (auth?.account?.balance || 0);
+
+  const amountExceeded =
+    (auth?.account?.currency || "BTC") !== "BTC"
+      ? false
+      : +amountSat > (auth?.account?.balance || 0);
   const rangeExceeded = +amountSat < amountMin;
 
   useEffect(() => {

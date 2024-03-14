@@ -206,7 +206,10 @@ function SendToBitcoinAddress() {
   const amountMin = 100_000;
   const amountMax = 10_000_000;
 
-  const amountExceeded = +amountSat > (auth?.account?.balance || 0);
+  const amountExceeded =
+    (auth?.account?.currency || "BTC") !== "BTC"
+      ? false
+      : +amountSat > (auth?.account?.balance || 0);
   const rangeExceeded = +amountSat > amountMax || +amountSat < amountMin;
 
   const timeEstimateAlert = <Alert type="info">{t("time_estimate")}</Alert>;

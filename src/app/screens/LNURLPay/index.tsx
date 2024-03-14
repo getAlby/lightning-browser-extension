@@ -71,7 +71,10 @@ function LNURLPay() {
 
   const amountMin = Math.floor(+details.minSendable / 1000);
   const amountMax = Math.floor(+details.maxSendable / 1000);
-  const amountExceeded = +valueSat > (auth?.account?.balance || 0);
+  const amountExceeded =
+    (auth?.account?.currency || "BTC") !== "BTC"
+      ? false
+      : +valueSat > (auth?.account?.balance || 0);
   const rangeExceeded = +valueSat > amountMax || +valueSat < amountMin;
 
   const [showMoreFields, setShowMoreFields] = useState(false);

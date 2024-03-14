@@ -43,6 +43,11 @@ function PublisherDetail() {
         );
 
         for (const payment of _transactions) {
+          if (
+            payment.displayAmount &&
+            payment.displayAmount[1] === settings.currency
+          )
+            continue;
           payment.totalAmountFiat = settings.showFiat
             ? await getFormattedFiat(payment.totalAmount)
             : "";
@@ -53,7 +58,7 @@ function PublisherDetail() {
       console.error(e);
       if (e instanceof Error) toast.error(`Error: ${e.message}`);
     }
-  }, [id, settings.showFiat, getFormattedFiat]);
+  }, [id, settings.showFiat, getFormattedFiat, settings.currency]);
 
   useEffect(() => {
     // Run once.
