@@ -87,6 +87,7 @@ export default function PermissionModal({
           onChange={() => {
             setPermissionOption(checkedValue);
           }}
+          className="bg-white dark:bg-surface-01dp border border-gray-200 dark:border-neutral-700 cursor-pointer text-primary focus:ring-0 focus:ring-offset-0"
         />
         <label
           htmlFor="set-permission"
