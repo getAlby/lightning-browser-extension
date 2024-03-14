@@ -1,10 +1,8 @@
 import {
-  AddressBookIcon,
-  CaretDownIcon,
-  GlobeIcon,
-  PlusIcon,
-  WalletIcon,
-} from "@bitcoin-design/bitcoin-icons-react/filled";
+  PopiconsChevronBottomLine,
+  PopiconsCirclePlusLine,
+  PopiconsWalletLine,
+} from "@popicons/react";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -16,6 +14,7 @@ import { useAccounts } from "~/app/context/AccountsContext";
 import { isAlbyLNDHubAccount, isAlbyOAuthAccount } from "~/app/utils";
 import utils from "~/common/lib/utils";
 
+import PopiconsGlobeLine from "~/app/icons/popicons/GlobeLine";
 import Menu from "../Menu";
 
 export type Props = {
@@ -58,7 +57,7 @@ function AccountMenu({ showOptions = true }: Props) {
   }
 
   return (
-    <div className="relative pl-2 flex justify-end w-72">
+    <div className="relative pl-2 flex justify-end w-72 text-gray-800 dark:text-neutral-200">
       <Menu as="div">
         <Menu.Button className="h-full px-2 rounded-md hover:bg-gray-100 dark:hover:bg-white/10 transition-colors duration-200">
           <div className="flex items-center">
@@ -79,7 +78,7 @@ function AccountMenu({ showOptions = true }: Props) {
             >
               <div
                 title={title || ""}
-                className="text-sm font-medium text-gray-700 dark:text-neutral-400 text-ellipsis overflow-hidden whitespace-nowrap"
+                className="text-sm font-medium text-ellipsis overflow-hidden whitespace-nowrap"
               >
                 {accountLoading ? (
                   <SkeletonLoader className="w-20" />
@@ -88,7 +87,7 @@ function AccountMenu({ showOptions = true }: Props) {
                 )}
               </div>
             </div>
-            <CaretDownIcon className="h-4 w-4 dark:text-white" />
+            <PopiconsChevronBottomLine className="h-4 w-4" />
             <span className="sr-only">{t("screen_reader")}</span>
           </div>
         </Menu.Button>
@@ -99,7 +98,7 @@ function AccountMenu({ showOptions = true }: Props) {
                 !title && !balancesDecorated ? "w-28" : ""
               }`}
             >
-              <span className="text-xs text-gray-500 dark:text-neutral-300">
+              <span className="text-xs text-gray-600 dark:text-neutral-400">
                 {tCommon("balance")}
               </span>
               <p className="flex justify-between">
@@ -110,7 +109,7 @@ function AccountMenu({ showOptions = true }: Props) {
                     balancesDecorated.accountBalance
                   )}
                 </span>
-                <span className="text-gray-500 dark:text-neutral-300">
+                <span className="text-gray-600 dark:text-neutral-400">
                   {accountLoading ? (
                     <SkeletonLoader className="w-12" />
                   ) : (
@@ -127,7 +126,7 @@ function AccountMenu({ showOptions = true }: Props) {
               openOptions(`accounts/${authAccount?.id}`);
             }}
           >
-            <WalletIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300 shrink-0" />
+            <PopiconsWalletLine className="w-4 h-4 mr-2 shrink-0" />
             {t("options.account.wallet_settings")}
           </Menu.ItemButton>
           {(isAlbyLNDHubAccount(
@@ -140,7 +139,7 @@ function AccountMenu({ showOptions = true }: Props) {
                 window.open(`https://getalby.com/user`, "_blank");
               }}
             >
-              <GlobeIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300 shrink-0" />
+              <PopiconsGlobeLine className="w-4 h-4 mr-2 shrink-0" />
               {t("options.account.go_to_web_wallet")} →
             </Menu.ItemButton>
           )}
@@ -192,16 +191,8 @@ function AccountMenu({ showOptions = true }: Props) {
                   openOptions("accounts/new");
                 }}
               >
-                <PlusIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
+                <PopiconsCirclePlusLine className="h-4 w-4 mr-2 shrink-0" />
                 {t("options.account.add")}
-              </Menu.ItemButton>
-              <Menu.ItemButton
-                onClick={() => {
-                  openOptions("accounts");
-                }}
-              >
-                <AddressBookIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
-                {t("options.account.manage")}
               </Menu.ItemButton>
             </>
           )}

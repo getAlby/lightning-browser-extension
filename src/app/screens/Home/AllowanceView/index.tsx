@@ -1,4 +1,3 @@
-import { CaretLeftIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import Header from "@components/Header";
 import IconButton from "@components/IconButton";
 import Loading from "@components/Loading";
@@ -6,6 +5,7 @@ import Progressbar from "@components/Progressbar";
 import PublisherCard from "@components/PublisherCard";
 import SitePreferences from "@components/SitePreferences";
 import TransactionsTable from "@components/TransactionsTable";
+import { PopiconsChevronLeftLine } from "@popicons/react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { FC, useEffect, useState } from "react";
@@ -83,7 +83,7 @@ const AllowanceView: FC<Props> = (props) => {
         headerLeft={
           <IconButton
             onClick={props.onGoBack}
-            icon={<CaretLeftIcon className="w-4 h-4" />}
+            icon={<PopiconsChevronLeftLine className="w-5 h-5" />}
           />
         }
       >
