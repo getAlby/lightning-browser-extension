@@ -335,14 +335,20 @@ export default class LaWallet implements Connector {
       this.config.privateKey
     );
 
+    const params = {
+      amount: String((args.amount as number) * 1000),
+      comment: args.memo,
+      nostr: JSON.stringify(zapEvent),
+      lnurl: this.public_key,
+    };
+
+    const url = `/lnurlp/${this.public_key}/callback?${new URLSearchParams(
+      params
+    )}`;
+
     const data = await LaWallet.request<{
       pr: string;
-    }>(this.config.apiEndpoint, "GET", `/lnurlp/${this.public_key}/callback`, {
-      amount: (args.amount as number) * 1000,
-      comment: args.memo,
-      nostr: zapEvent,
-      lnurl: this.public_key,
-    });
+    }>(this.config.apiEndpoint, "GET", url);
 
     const paymentRequestDetails = lightningPayReq.decode(data.pr);
 
