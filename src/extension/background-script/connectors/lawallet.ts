@@ -204,7 +204,6 @@ export default class LaWallet implements Connector {
 
   async sendPayment(args: SendPaymentArgs): Promise<SendPaymentResponse> {
     const paymentRequestDetails = lightningPayReq.decode(args.paymentRequest);
-
     const unsignedEvent: Event = {
       kind: 1112 as EventKind,
       created_at: Math.floor(Date.now() / 1000),
@@ -465,6 +464,7 @@ async function extractPreimage(
     return "";
   }
 }
+
 export async function parseTransaction(
   userPubkey: string,
   privateKey: string,
