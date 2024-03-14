@@ -1,13 +1,11 @@
-import {
-  CaretLeftIcon,
-  ExportIcon,
-} from "@bitcoin-design/bitcoin-icons-react/filled";
+import { PopiconsLinkExternalSolid } from "@popicons/react";
 import Button from "@components/Button";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Header from "@components/Header";
 import IconButton from "@components/IconButton";
 import DualCurrencyField from "@components/form/DualCurrencyField";
 import { CreateSwapResponse } from "@getalby/sdk/dist/types";
+import { PopiconsChevronLeftLine } from "@popicons/react";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Skeleton from "react-loading-skeleton";
@@ -219,7 +217,7 @@ function SendToBitcoinAddress() {
         headerLeft={
           <IconButton
             onClick={() => navigate("/send")}
-            icon={<CaretLeftIcon className="w-4 h-4" />}
+            icon={<PopiconsChevronLeftLine className="w-5 h-5" />}
           />
         }
       >
@@ -381,7 +379,7 @@ function SendToBitcoinAddress() {
                 target="_blank"
               >
                 {t("view_on_explorer")}
-                <ExportIcon className="w-6 h-6 inline" />
+                <PopiconsLinkExternalSolid className="w-6 h-6 inline" />
               </Hyperlink>
             </div>
             {timeEstimateAlert}

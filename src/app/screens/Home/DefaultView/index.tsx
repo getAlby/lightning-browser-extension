@@ -1,8 +1,9 @@
-import { ArrowRightIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
+import Button from "@components/Button";
 import Loading from "@components/Loading";
 import TransactionsTable from "@components/TransactionsTable";
 import {
   PopiconsArrowDownLine,
+  PopiconsArrowRightLine,
   PopiconsBulbLine,
   PopiconsKeyLine,
 } from "@popicons/react";
@@ -13,7 +14,6 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import Alert from "~/app/components/Alert";
 import BalanceBox from "~/app/components/BalanceBox";
-import Button from "~/app/components/Button";
 import Hyperlink from "~/app/components/Hyperlink";
 import { IconLinkCard } from "~/app/components/IconLinkCard/IconLinkCard";
 import SkeletonLoader from "~/app/components/SkeletonLoader";
@@ -198,9 +198,7 @@ const DefaultView: FC<Props> = (props) => {
                   description={t(
                     "default_view.actions.get_started.description"
                   )}
-                  icon={
-                    <PopiconsBulbLine className="w-8 h-8 text-gray-400 dark:text-neutral-500" />
-                  }
+                  icon={<PopiconsBulbLine className="w-8 h-8" />}
                   onClick={() => {
                     utils.openUrl(
                       "https://guides.getalby.com/user-guide/v/alby-account-and-browser-extension/"
@@ -216,9 +214,7 @@ const DefaultView: FC<Props> = (props) => {
                 <IconLinkCard
                   title={t("default_view.actions.setup_keys.title")}
                   description={t("default_view.actions.setup_keys.description")}
-                  icon={
-                    <PopiconsKeyLine className="w-8 h-8 text-gray-400 dark:text-neutral-500" />
-                  }
+                  icon={<PopiconsKeyLine className="w-8 h-8" />}
                   onClick={async () => {
                     openOptions(
                       `accounts/${currentAccount?.id}/secret-key/new`
@@ -233,9 +229,7 @@ const DefaultView: FC<Props> = (props) => {
                   description={t(
                     "default_view.actions.receive_bitcoin.description"
                   )}
-                  icon={
-                    <PopiconsArrowDownLine className="w-8 h-8 text-gray-400 dark:text-neutral-500" />
-                  }
+                  icon={<PopiconsArrowDownLine className="w-8 h-8" />}
                   onClick={() => {
                     navigate("/receive");
                   }}
@@ -254,7 +248,7 @@ const DefaultView: FC<Props> = (props) => {
                   className="flex justify-center items-center mt-2"
                 >
                   {t("default_view.see_all")}
-                  <ArrowRightIcon className="ml-2 w-4 h-4" />
+                  <PopiconsArrowRightLine className="ml-2 w-5 h-5" />
                 </Hyperlink>
               </div>
             )}

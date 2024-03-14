@@ -1,5 +1,4 @@
-import { SatoshiV2Icon } from "@bitcoin-design/bitcoin-icons-react/filled";
-
+import SatoshiIcon from "~/app/icons/SatoshiIcon";
 import Button from "../Button";
 
 type Props = {
@@ -17,7 +16,7 @@ function SatButtons({ onClick, disabled, min, max }: Props) {
       {sizes.map((size) => (
         <Button
           key={size}
-          icon={<SatoshiV2Icon className="w-4 h-4" />}
+          icon={<SatoshiIcon className="w-4 h-4" />}
           label={size / 1000 + "k"}
           onClick={() => onClick(size.toString())}
           fullWidth
