@@ -40,7 +40,7 @@ export default function DualCurrencyField({
   const { t: tCommon } = useTranslation("common");
   const inputEl = useRef<HTMLInputElement>(null);
   const outerStyles =
-    "rounded-md border border-gray-300 dark:border-gray-800 bg-white dark:bg-black transition duration-300";
+    "rounded-md border border-gray-300 dark:border-neutral-800 bg-white dark:bg-black transition duration-300";
 
   const inputNode = (
     <input
@@ -50,7 +50,7 @@ export default function DualCurrencyField({
       id={id}
       className={classNames(
         "dual-currency-field",
-        "block w-full placeholder-gray-500 dark:placeholder-gray-600 dark:text-white ",
+        "block w-full placeholder-gray-400 dark:placeholder-neutral-500 dark:text-white ",
         "px-0 border-0 focus:ring-0 bg-transparent"
       )}
       placeholder={placeholder}
@@ -115,7 +115,7 @@ export default function DualCurrencyField({
         {inputNode}
 
         {!!fiatValue && (
-          <p className="helper text-gray-500 z-1 pointer-events-none">
+          <p className="helper text-gray-400 dark:text-neutral-500 z-1 pointer-events-none">
             ~{fiatValue}
           </p>
         )}

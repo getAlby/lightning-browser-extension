@@ -43,7 +43,7 @@ export default function Input({
       name={name}
       id={id}
       className={classNames(
-        "placeholder-gray-500 dark:placeholder-neutral-600",
+        "placeholder-gray-400 dark:placeholder-neutral-500",
         block && "block w-full",
         !suffix && !endAdornment
           ? `${outerStyles} focus:ring-primary focus:border-primary focus:ring-1`
