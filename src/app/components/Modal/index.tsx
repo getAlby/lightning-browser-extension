@@ -1,4 +1,4 @@
-import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
+import { PopiconsXLine } from "@popicons/react";
 import ReactModal from "react-modal";
 import { classNames } from "~/app/utils";
 
@@ -42,7 +42,7 @@ export default function Modal({
         onClick={closeModal}
         className="absolute right-5 top-5 text-gray-600 dark:text-neutral-400 hover:text-gray-700 dark:hover:text-neutral-300"
       >
-        <CrossIcon className="w-6 h-6" />
+        <PopiconsXLine className="w-6 h-6" />
       </button>
       {children}
     </ReactModal>

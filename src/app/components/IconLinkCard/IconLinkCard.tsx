@@ -1,4 +1,4 @@
-import { PopiconsChevronRightSolid } from "@popicons/react";
+import { PopiconsChevronRightLine } from "@popicons/react";
 
 export type IconLinkCardProps = {
   title: string;
@@ -18,7 +18,9 @@ export function IconLinkCard({
       className="border border-gray-200 dark:border-neutral-800 rounded-xl p-4 bg-white dark:bg-surface-01dp hover:bg-gray-50 dark:hover:bg-surface-02dp text-gray-800 dark:text-neutral-200 cursor-pointer flex flex-row items-center gap-3"
       onClick={onClick}
     >
-      <div className="flex-shrink-0 flex justify-center md:px-3">{icon}</div>
+      <div className="flex-shrink-0 flex justify-center md:px-3 text-gray-400 dark:text-neutral-600">
+        {icon}
+      </div>
       <div className="flex-grow space-y-0.5">
         <div className="font-medium leading-5 text-sm md:text-base">
           {title}
@@ -28,7 +30,7 @@ export function IconLinkCard({
         </div>
       </div>
       <div className="flex-shrink-0 flex justify-end text-gray-400 dark:text-neutral-600 ">
-        <PopiconsChevronRightSolid className="w-5" />
+        <PopiconsChevronRightLine className="w-5" />
       </div>
     </div>
   );

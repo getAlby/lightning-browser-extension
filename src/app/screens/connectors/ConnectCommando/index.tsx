@@ -1,11 +1,11 @@
-import {
-  CaretDownIcon,
-  CaretUpIcon,
-} from "@bitcoin-design/bitcoin-icons-react/outline";
 import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
 import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
 import * as secp256k1 from "@noble/secp256k1";
+import {
+  PopiconsChevronBottomLine,
+  PopiconsChevronTopLine,
+} from "@popicons/react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -161,12 +161,12 @@ export default function ConnectCommando() {
           {showAdvanced ? (
             <>
               {tCommon("hide_advanced")}
-              <CaretUpIcon className="h-4 w-4 inline-flex" />
+              <PopiconsChevronTopLine className="h-4 w-4 inline-flex" />
             </>
           ) : (
             <>
               {tCommon("advanced")}
-              <CaretDownIcon className="h-4 w-4 inline-flex" />
+              <PopiconsChevronBottomLine className="h-4 w-4 inline-flex" />
             </>
           )}
         </Hyperlink>

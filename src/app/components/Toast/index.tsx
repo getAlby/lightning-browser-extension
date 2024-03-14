@@ -1,4 +1,4 @@
-import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
+import { PopiconsXLine } from "@popicons/react";
 import { Transition } from "@headlessui/react";
 import { ReactNode } from "react";
 import {
@@ -47,7 +47,7 @@ const toast: ToastMethods = {
             <div>{children}</div>
             {/* Add close icons for toasts that are displayed for a longer time */}
             {options?.duration && options?.duration > 10_000 && (
-              <CrossIcon
+              <PopiconsXLine
                 className="w-4 h-4 cursor-pointer"
                 onClick={() => hotToast.dismiss(t.id)}
               />

@@ -1,11 +1,12 @@
-import {
-  CaretLeftIcon,
-  CopyIcon,
-} from "@bitcoin-design/bitcoin-icons-react/outline";
 import Container from "@components/Container";
 import Header from "@components/Header";
 import IconButton from "@components/IconButton";
-import { PopiconsBoltLine, PopiconsWithdrawalLine } from "@popicons/react";
+import {
+  PopiconsBoltLine,
+  PopiconsChevronLeftLine,
+  PopiconsCopyLine,
+  PopiconsWithdrawalLine,
+} from "@popicons/react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -49,7 +50,7 @@ function Receive() {
             onClick={() => {
               navigate(-1);
             }}
-            icon={<CaretLeftIcon className="w-4 h-4" />}
+            icon={<PopiconsChevronLeftLine className="w-5 h-5" />}
           />
         }
       >
@@ -106,7 +107,7 @@ function Receive() {
                         }}
                       >
                         {lightningAddress}
-                        <CopyIcon className="w-4 h-4" />
+                        <PopiconsCopyLine className="w-4 h-4" />
                       </a>
                     )}
                   </div>
@@ -116,9 +117,7 @@ function Receive() {
             <IconLinkCard
               title={t("actions.invoice.title")}
               description={t("actions.invoice.description")}
-              icon={
-                <PopiconsBoltLine className="w-8 h-8 text-gray-400 dark:text-neutral-500" />
-              }
+              icon={<PopiconsBoltLine className="w-8 h-8" />}
               onClick={() => {
                 navigate("/receive/invoice");
               }}
@@ -126,9 +125,7 @@ function Receive() {
             <IconLinkCard
               title={t("actions.redeem.title")}
               description={t("actions.redeem.description")}
-              icon={
-                <PopiconsWithdrawalLine className="w-8 h-8 text-gray-400 dark:text-neutral-500" />
-              }
+              icon={<PopiconsWithdrawalLine className="w-8 h-8" />}
               onClick={() => {
                 navigate("/lnurlRedeem");
               }}
