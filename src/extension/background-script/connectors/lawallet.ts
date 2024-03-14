@@ -5,7 +5,7 @@ import { Method } from "axios";
 import lightningPayReq from "bolt11";
 import Hex from "crypto-js/enc-hex";
 import sha256 from "crypto-js/sha256";
-import { relayInit, type Relay } from "nostr-tools";
+import { nip04, relayInit, type Relay } from "nostr-tools";
 import { Event, EventKind } from "~/extension/providers/nostr/types";
 import { Account } from "~/types";
 
@@ -126,11 +126,17 @@ export default class LaWallet implements Connector {
       };
     }) as Event[];
 
+    const parsedTransactions: ConnectorTransaction[] = await Promise.all(
+      transactions.map(
+        parseTransaction.bind(this, this.public_key, this.config.privateKey)
+      )
+    );
+
     return {
       data: {
-        transactions: transactions
-          .map(parseTransaction.bind(this, this.public_key))
-          .sort((a, b) => b.settleDate - a.settleDate),
+        transactions: parsedTransactions.sort(
+          (a, b) => b.settleDate - a.settleDate
+        ),
       },
     };
   }
@@ -249,6 +255,7 @@ export default class LaWallet implements Connector {
     const amountInSats = paymentRequestDetails.satoshis || 0;
     const payment_route = { total_amt: amountInSats, total_fees: 0 };
 
+    await this.relay.connect();
     return new Promise((resolve, reject) => {
       const sub = this.relay.sub([
         {
@@ -257,12 +264,12 @@ export default class LaWallet implements Connector {
           "#t": [
             "internal-transaction-error",
             "internal-transaction-ok",
-            "outbound-transaction-ok",
+            "outbound-transaction-start",
           ],
         },
       ]);
 
-      sub.on("event", (event) => {
+      sub.on("event", async (event) => {
         const tag = event.tags.find((tag) => tag[0] === "t")![1];
         const content = JSON.parse(event.content);
         switch (tag) {
@@ -276,7 +283,7 @@ export default class LaWallet implements Connector {
           case "outbound-transaction-ok": // Payment done
             return resolve({
               data: {
-                preimage: "",
+                preimage: await extractPreimage(event, this.config.privateKey),
                 paymentHash: paymentRequestDetails.tagsObject.payment_hash!,
                 route: payment_route,
               },
@@ -420,6 +427,7 @@ export default class LaWallet implements Connector {
 
 interface TransactionEventContent {
   tokens: { BTC: number };
+  memo?: string;
 }
 
 interface InvoiceCache {
@@ -428,21 +436,55 @@ interface InvoiceCache {
 
 /** Utils Functions **/
 
-export function parseTransaction(
+async function extractPreimage(
+  event: Event,
+  privateKey: string
+): Promise<string> {
+  try {
+    const encrypted = event.tags.find(
+      (tag) => tag[0] === "preimage"
+    )?.[1] as string;
+
+    const messageKeyHex: string = await nip04.decrypt(
+      privateKey,
+      event.pubkey as string,
+      encrypted
+    );
+
+    return messageKeyHex;
+  } catch (e) {
+    return "";
+  }
+}
+export async function parseTransaction(
   userPubkey: string,
+  privateKey: string,
   event: Event
-): ConnectorTransaction {
+): Promise<ConnectorTransaction> {
+  const content = JSON.parse(event.content) as TransactionEventContent;
+  // Get bolt11 tag
+  const bolt11 = event.tags.find((tag) => tag[0] === "bolt11")?.[1] as string;
+
+  let paymentHash = event.id;
+  let memo = content.memo || "";
+
+  // Check if the event is a payment request
+  if (bolt11) {
+    const paymentRequestDetails = lightningPayReq.decode(bolt11);
+    paymentHash = paymentRequestDetails.tagsObject.payment_hash!;
+    memo = paymentRequestDetails.tagsObject.description || memo;
+  }
+
   return {
     id: event.id!,
-    preimage: "",
+    preimage: await extractPreimage(event, privateKey),
     settled: true,
     settleDate: event.created_at * 1000,
-    totalAmount:
-      (JSON.parse(event.content) as TransactionEventContent).tokens.BTC / 1000,
+    totalAmount: content.tokens.BTC / 1000,
     type: event.tags[1][1] === userPubkey ? "received" : "sent",
     custom_records: {},
-    memo: "",
-    payment_hash: "",
+    memo: memo,
+    payment_hash: paymentHash,
   };
 }
 
