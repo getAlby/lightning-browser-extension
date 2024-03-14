@@ -1,5 +1,4 @@
 import { USER_REJECTED_ERROR } from "~/common/constants";
-import nostr from "~/common/lib/nostr";
 import utils from "~/common/lib/utils";
 import { getHostFromSender } from "~/common/utils/helpers";
 import {
@@ -7,24 +6,28 @@ import {
   hasPermissionFor,
 } from "~/extension/background-script/permissions";
 import state from "~/extension/background-script/state";
-import { MessageEncryptGet, PermissionMethodNostr, Sender } from "~/types";
+import { MessageNip44DecryptGet, PermissionMethodNostr, Sender } from "~/types";
 
-const encryptOrPrompt = async (message: MessageEncryptGet, sender: Sender) => {
+const nip44DecryptOrPrompt = async (
+  message: MessageNip44DecryptGet,
+  sender: Sender
+) => {
   const host = getHostFromSender(sender);
   if (!host) return;
 
   try {
     const hasPermission = await hasPermissionFor(
-      PermissionMethodNostr["NOSTR_NIP04ENCRYPT"],
+      PermissionMethodNostr["NOSTR_NIP44DECRYPT"],
       host
     );
 
     if (hasPermission) {
       const nostr = await state.getState().getNostr();
-      const response = await nostr.nip04Encrypt(
+      const response = await nostr.nip44Decrypt(
         message.args.peer,
-        message.args.plaintext
+        message.args.ciphertext
       );
+
       return { data: response };
     } else {
       const promptResponse = await utils.openPrompt<{
@@ -32,27 +35,21 @@ const encryptOrPrompt = async (message: MessageEncryptGet, sender: Sender) => {
         rememberPermission: boolean;
       }>({
         ...message,
-        action: "public/nostr/confirmEncrypt",
-        args: {
-          encrypt: {
-            recipientNpub: nostr.hexToNip19(message.args.peer, "npub"),
-            message: message.args.plaintext,
-          },
-        },
+        action: "public/nostr/confirmDecrypt",
       });
 
       // add permission to db only if user decided to always allow this request
       if (promptResponse.data.rememberPermission) {
         await addPermissionFor(
-          PermissionMethodNostr["NOSTR_NIP04ENCRYPT"],
+          PermissionMethodNostr["NOSTR_NIP44DECRYPT"],
           host
         );
       }
       if (promptResponse.data.confirm) {
         const nostr = await state.getState().getNostr();
-        const response = await nostr.nip04Encrypt(
+        const response = await nostr.nip44Decrypt(
           message.args.peer,
-          message.args.plaintext
+          message.args.ciphertext
         );
 
         return { data: response };
@@ -61,11 +58,11 @@ const encryptOrPrompt = async (message: MessageEncryptGet, sender: Sender) => {
       }
     }
   } catch (e) {
-    console.error("encrypt failed", e);
+    console.error("decrypt failed", e);
     if (e instanceof Error) {
       return { error: e.message };
     }
   }
 };
 
-export default encryptOrPrompt;
+export default nip44DecryptOrPrompt;

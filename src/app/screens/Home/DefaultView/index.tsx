@@ -1,11 +1,9 @@
 import { ArrowRightIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
-import Button from "@components/Button";
 import Loading from "@components/Loading";
 import TransactionsTable from "@components/TransactionsTable";
 import {
   PopiconsArrowDownLine,
   PopiconsBulbLine,
-  PopiconsDownloadLine,
   PopiconsKeyLine,
 } from "@popicons/react";
 import dayjs from "dayjs";
@@ -13,7 +11,9 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import Alert from "~/app/components/Alert";
 import BalanceBox from "~/app/components/BalanceBox";
+import Button from "~/app/components/Button";
 import Hyperlink from "~/app/components/Hyperlink";
 import { IconLinkCard } from "~/app/components/IconLinkCard/IconLinkCard";
 import SkeletonLoader from "~/app/components/SkeletonLoader";
@@ -117,7 +117,26 @@ const DefaultView: FC<Props> = (props) => {
       {props.renderPublisherWidget && !!props.lnDataFromCurrentTab?.length && (
         <PublisherLnData lnData={props.lnDataFromCurrentTab[0]} />
       )}
+
       <div className="p-4">
+        {isBlockedUrl && (
+          <div className="items-center dark:text-white text-sm mb-4">
+            <Alert type="info">
+              <p className="pb-2">
+                {t("default_view.is_blocked_hint", {
+                  host: props.currentUrl?.host,
+                })}
+              </p>
+              <Button
+                fullWidth
+                label={t("actions.enable_now")}
+                direction="column"
+                onClick={() => unblock()}
+              />
+            </Alert>
+          </div>
+        )}
+
         <BalanceBox />
         {(accountLoading || lightningAddress) && (
           <div className="flex justify-center">
@@ -137,7 +156,7 @@ const DefaultView: FC<Props> = (props) => {
             </a>
           </div>
         )}
-        <div className="flex mb-4 space-x-3 justify-between">
+        <div className="flex space-x-3 justify-between">
           <HomeButton
             icon={<img src="assets/icons/popicons/receive.svg" />}
             onClick={() => {
@@ -164,31 +183,15 @@ const DefaultView: FC<Props> = (props) => {
           </HomeButton>
         </div>
 
-        {isBlockedUrl && (
-          <div className="mb-2 items-center py-3 dark:text-white">
-            <p className="py-1">
-              {t("default_view.is_blocked_hint", {
-                host: props.currentUrl?.host,
-              })}
-            </p>
-            <Button
-              fullWidth
-              label={t("actions.enable_now")}
-              direction="column"
-              onClick={() => unblock()}
-            />
-          </div>
-        )}
-
         {isLoading && (
-          <div className="flex justify-center">
+          <div className="flex justify-center mt-4">
             <Loading />
           </div>
         )}
 
         {!isLoading && (
           <div>
-            <div className="flex flex-col gap-2 md:gap-3">
+            <div className="flex flex-col mt-4 gap-2 md:gap-3">
               {transactions.length == 0 && (
                 <IconLinkCard
                   title={t("default_view.actions.get_started.title")}
@@ -211,23 +214,15 @@ const DefaultView: FC<Props> = (props) => {
                 currentAccount?.isMnemonicBackupDone
               ) && (
                 <IconLinkCard
-                  title={t("default_view.actions.backup_masterkey.title")}
-                  description={t(
-                    "default_view.actions.backup_masterkey.description"
-                  )}
+                  title={t("default_view.actions.setup_keys.title")}
+                  description={t("default_view.actions.setup_keys.description")}
                   icon={
                     <PopiconsKeyLine className="w-8 h-8 text-gray-400 dark:text-neutral-500" />
                   }
                   onClick={async () => {
-                    if (currentAccount?.hasMnemonic) {
-                      openOptions(
-                        `accounts/${currentAccount?.id}/secret-key/backup`
-                      );
-                    } else {
-                      openOptions(
-                        `accounts/${currentAccount?.id}/secret-key/new`
-                      );
-                    }
+                    openOptions(
+                      `accounts/${currentAccount?.id}/secret-key/new`
+                    );
                   }}
                 />
               )}
@@ -243,26 +238,6 @@ const DefaultView: FC<Props> = (props) => {
                   }
                   onClick={() => {
                     navigate("/receive");
-                  }}
-                />
-              )}
-
-              {!(
-                currentAccount?.hasMnemonic &&
-                currentAccount?.isMnemonicBackupDone
-              ) && (
-                <IconLinkCard
-                  title={t("default_view.actions.import_masterkey.title")}
-                  description={t(
-                    "default_view.actions.import_masterkey.description"
-                  )}
-                  icon={
-                    <PopiconsDownloadLine className="w-8 h-8 text-gray-400 dark:text-neutral-500" />
-                  }
-                  onClick={async () => {
-                    openOptions(
-                      `accounts/${currentAccount?.id}/secret-key/import`
-                    );
                   }}
                 />
               )}

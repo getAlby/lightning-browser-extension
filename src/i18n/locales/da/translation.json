@@ -400,15 +400,6 @@
           "mismatched_password": "Koderne er forskellige."
         },
         "success": "Koden blev ændret"
-      },
-      "nostr": {
-        "title": "Nostr",
-        "hint": "er en enkel og åben protokol, der bruges til at skabe u-censorerbare sociale netværk. Nostr anvender kryptografisk kode. Når du publicerer noget, underskriver du det med din nøgle, og sender det til flere netværksrelæer. Du kan bruge Alby til opbevaring af din Nostr-nøgle. Mange Nostr-applikationer vil derefter lade dig bruge nøglen direkte fra Alby.",
-        "private_key": {
-          "title": "Privat nøgle",
-          "subtitle": "Dette afsnit blev flyttet til kontosiden, da nøgler nu er kontospecifikke.",
-          "go_to": "Gå til konti"
-        }
       }
     },
     "send": {
@@ -676,6 +667,9 @@
     "nostr": {
       "getpublickey": "Læs din offentlige nøgle",
       "nip04decrypt": "De-krypter data",
+      "nip04encrypt": "Krypter data",
+      "nip44decrypt": "De-krypter data",
+      "nip44encrypt": "Krypter data",
       "signmessage": "Underskriv meddelelse med din nøgle"
     },
     "commando": {
