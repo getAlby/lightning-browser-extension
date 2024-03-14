@@ -44,7 +44,7 @@ const Home: FC = () => {
   // Get current URL data on mount
   // and start listeners
   useEffect(() => {
-    const getCurrentURL = async () => {
+    const getCurrentURLAndLoadAllowance = async () => {
       const tabs = await browser.tabs.query({
         active: true,
         currentWindow: true,
@@ -66,7 +66,7 @@ const Home: FC = () => {
       loadAllowance();
     };
 
-    getCurrentURL();
+    getCurrentURLAndLoadAllowance();
 
     // Enhancement data is loaded asynchronously (for example because we need to fetch additional data).
     browser.runtime.onMessage.addListener(handleLightningDataMessage);
