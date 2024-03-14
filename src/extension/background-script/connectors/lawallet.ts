@@ -157,7 +157,10 @@ export default class LaWallet implements Connector {
       lightning_address: string;
     }>
   > {
-    const { username } = await LaWallet.request<{ username: string }>(
+    const { username, nodeAlias } = await LaWallet.request<{
+      username: string;
+      nodeAlias?: string;
+    }>(
       this.config.identityEndpoint,
       "GET",
       `/api/pubkey/${this.public_key}`,
@@ -166,7 +169,7 @@ export default class LaWallet implements Connector {
     const domain = this.config.identityEndpoint.replace("https://", "");
     return {
       data: {
-        alias: username,
+        alias: nodeAlias || domain,
         pubkey: this.public_key,
         lightning_address: `${username}@${domain}`,
       },
