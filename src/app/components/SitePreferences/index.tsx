@@ -243,8 +243,12 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
                                   .slice(-1)
                                   .toString(),
                               }
-                            )
-                          : permission.method.split("/").slice(0, 2).join("/")
+                            ).toUpperCase()
+                          : permission.method
+                              .split("/")
+                              .slice(0, 2)
+                              .join("/")
+                              .toUpperCase()
                       }
                       delete={() => {
                         setPermissions(
