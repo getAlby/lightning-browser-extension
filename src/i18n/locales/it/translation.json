@@ -374,15 +374,6 @@
           "mismatched_password": "Le password non corrispondono."
         },
         "success": "La password è stata modificata con successo"
-      },
-      "nostr": {
-        "title": "Nostr",
-        "hint": "è un protocollo semplice e aperto che mira a creare reti sociali resistenti alla censura. Nostr funziona con chiavi crittografiche. Per pubblicare qualcosa si firma con la propria chiave e la si invia a più relè. È possibile utilizzare Alby per gestire la propria chiave Nostr. Molte applicazioni Nostr vi permetteranno poi di utilizzare semplicemente la chiave dall'estensione Alby.",
-        "private_key": {
-          "title": "Chiave privata",
-          "subtitle": "Questa sezione è stata spostata nella pagina degli account, poiché le chiavi ora sono specifiche per l'account.",
-          "go_to": "Vai Agli Account"
-        }
       }
     },
     "send": {
@@ -751,8 +742,11 @@
       "addinvoice": "Crea nuove ricevute di pagamento"
     },
     "nostr": {
-      "nip04decrypt": "Decripta i dati",
       "getpublickey": "Leggi la tua chiave pubblica",
+      "nip04decrypt": "Decripta i dati",
+      "nip04encrypt": "Cripta i dati",
+      "nip44decrypt": "Decripta i dati",
+      "nip44encrypt": "Cripta i dati",
       "signmessage": "Firma il messaggio con la tua chiave"
     }
   }

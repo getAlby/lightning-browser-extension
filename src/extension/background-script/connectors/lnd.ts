@@ -1,4 +1,3 @@
-import lightningPayReq from "bolt11";
 import Base64 from "crypto-js/enc-base64";
 import Hex from "crypto-js/enc-hex";
 import UTF8 from "crypto-js/enc-utf8";
@@ -8,6 +7,7 @@ import utils from "~/common/lib/utils";
 import { Account } from "~/types";
 
 import { mergeTransactions } from "~/common/utils/helpers";
+import { getPaymentRequestDescription } from "~/common/utils/paymentRequest";
 import Connector, {
   CheckPaymentArgs,
   CheckPaymentResponse,
@@ -522,10 +522,7 @@ class Lnd implements Connector {
       (payment, index): ConnectorTransaction => {
         let description: string | undefined;
         if (payment.payment_request) {
-          description = lightningPayReq
-            .decode(payment.payment_request)
-            .tags.find((tag) => tag.tagName === "description")
-            ?.data.toString();
+          description = getPaymentRequestDescription(payment.payment_request);
         }
 
         return {
