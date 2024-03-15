@@ -410,15 +410,6 @@
           "mismatched_password": ""
         },
         "success": ""
-      },
-      "nostr": {
-        "title": "",
-        "hint": "",
-        "private_key": {
-          "title": "",
-          "subtitle": "",
-          "go_to": ""
-        }
       }
     },
     "send": {

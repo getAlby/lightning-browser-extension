@@ -317,27 +317,13 @@
             "can_restore": "✅ Nostr 密鑰已從你的主密鑰派生"
           },
           "setup": {
-            "import": {
-              "recovery_phrase": {
-                "label": "使用恢復短語",
-                "description": "使用主密鑰恢復短語導入你的 nostr 密鑰"
-              },
-              "label": "導入 nostr 帳戶",
-              "description": "使用已有的 nostr 私鑰或從主密鑰中將其派生",
-              "title": "你想如何導入你的 nostr 帳戶？",
-              "private_key": {
-                "label": "使用 nostr 私鑰",
-                "description": "粘貼你的 nostr 私鑰將其導入 Alby"
-              }
-            },
             "title": "設置你的 nostr 密鑰",
             "description": "選擇是否要創建一個新的 nostr 帳戶（一對私鑰和公鑰）或導入現有帳戶。",
             "description2": "在 Alby 中創建的每個 Nostr 帳戶都帶有<0>恢復短語</0>——一組12個單詞，始終保證重新獲得對你的 Nostr 私鑰的訪問。",
             "new": {
               "label": "創建新的 nostr 帳戶",
               "description": "通過使用一對新的 nostr 密鑰生成主密鑰。"
-            },
-            "new_to_nostr": "Nostr 新手？<0>瞭解更多</0>"
+            }
           }
         },
         "remove": {
@@ -356,21 +342,13 @@
             "button": "備份恢復短語",
             "warning": "⚠️別忘了將你的恢復短語備份！不備份可能會導致永久失去對你的主密鑰、 Nostr 身份或使用此密鑰管理的資產的訪問權限。",
             "save": "保存主密鑰",
-            "description": "請寫下恢復短語，以便能夠在新設備上恢復主密鑰，或以防失去帳戶訪問。",
-            "items": {
-              "recovery_phrase": "你將始終可以通過使用主密鑰的恢復短語來訪問它。",
-              "storage": "請確保在一個安全且私密的地方將它記下！",
-              "words": "恢復短語是一組12個單詞，它的工作方式類似於密碼，但是如果丟失，它不能被更改或重置。"
-            }
+            "description": "請寫下恢復短語，以便能夠在新設備上恢復主密鑰，或以防失去帳戶訪問。"
           },
           "lnurl": {
             "use_mnemonic": "使用主密鑰登錄閃電驅動的應用程式（LNURL Auth）",
             "title": "閃電登錄"
           },
-          "inputs": {},
           "generate": {
-            "error_confirm": "請確認你已將你的恢復短語備份。",
-            "confirm": "我已將我的帳戶主密鑰的恢復短語保存到私密且安全的地方。",
             "button": "生成主密鑰",
             "title": "生成新的主密鑰",
             "description": "主密鑰允許你與各種協議進行互動，例如：Nostr、基礎層比特幣或 LNURL-auth。"
@@ -500,15 +478,6 @@
           "mismatched_password": "密碼不匹配。"
         },
         "success": "密碼更改成功"
-      },
-      "nostr": {
-        "title": "Nostr",
-        "hint": "是一個簡單而開放的協議，旨在創建抗審查的社交網絡。Nostr 使用加密密鑰。你可以使用你的密鑰對內容進行簽署並將其發送到多個中繼。你可以使用 Alby 來管理你的 Nostr 密鑰。許多 Nostr 應用程序將允許你輕鬆地使用 Alby 擴充套件中的密鑰。",
-        "private_key": {
-          "title": "私鑰",
-          "subtitle": "此部分已移至帳戶頁面，因為私鑰現在是特定於帳戶的。",
-          "go_to": "前往帳戶"
-        }
       }
     },
     "send": {

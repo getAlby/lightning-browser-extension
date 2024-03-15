@@ -38,9 +38,6 @@
       "alby": {
         "title": "Λογαριασμός Alby",
         "connect": "Σύνδεση με Alby"
-      },
-      "voltage": {
-        "connect": "Σύνδεση"
       }
     },
     "alby": {
@@ -185,7 +182,6 @@
             }
           },
           "title": "Διαχείριση κλειδιών",
-          "new": {},
           "generate": {
             "title": "Δημιουργία νέου πρωτεύοντος κλειδιού"
           },
@@ -203,13 +199,9 @@
           },
           "title": "Nostr",
           "setup": {
-            "import": {
-              "label": "Εισαγωγή ενός λογαριασμού Nostr"
-            },
             "new": {
               "label": "Δημιουργία νέου λογαριασμού Nostr"
-            },
-            "new_to_nostr": "Νέος/α στο Nostr;<0>Μάθετε περισσότερα</0>"
+            }
           },
           "public_key": {
             "label": "Δημόσιο κλειδί Nostr"
@@ -237,9 +229,6 @@
         "actions": {
           "export": "Εξαγωγή"
         }
-      },
-      "actions": {
-        "add_account": "Προσθήκη λογαριασμού"
       }
     },
     "nostr_enable": {
@@ -276,13 +265,6 @@
       },
       "currency": {
         "title": "Νόμισμα"
-      },
-      "nostr": {
-        "title": "Nostr",
-        "private_key": {
-          "go_to": "Μετάβαση στους λογαριασμούς",
-          "title": "Ιδιωτικό κλειδί"
-        }
       },
       "language": {
         "title": "Γλώσσα"

@@ -1,6 +1,6 @@
-import { CaretLeftIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import Header from "@components/Header";
 import IconButton from "@components/IconButton";
+import { PopiconsChevronLeftLine } from "@popicons/react";
 import { useTranslation } from "react-i18next";
 import { Outlet, useMatch, useNavigate, useParams } from "react-router-dom";
 import Avatar from "~/app/components/Avatar";
@@ -31,7 +31,7 @@ function AccountDetailLayout() {
         headerLeft={
           <IconButton
             onClick={back}
-            icon={<CaretLeftIcon className="w-4 h-4" />}
+            icon={<PopiconsChevronLeftLine className="w-5 h-5" />}
           />
         }
       >

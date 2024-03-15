@@ -1,6 +1,5 @@
 import { Invoice } from "@lightninglabs/lnc-core/dist/types/proto/lnd/lightning";
 import LNC from "@lightninglabs/lnc-web";
-import lightningPayReq from "bolt11";
 import Base64 from "crypto-js/enc-base64";
 import Hex from "crypto-js/enc-hex";
 import UTF8 from "crypto-js/enc-utf8";
@@ -10,6 +9,7 @@ import snakeCase from "lodash.snakecase";
 import { encryptData } from "~/common/lib/crypto";
 import utils from "~/common/lib/utils";
 import { mergeTransactions } from "~/common/utils/helpers";
+import { getPaymentRequestDescription } from "~/common/utils/paymentRequest";
 import { Account } from "~/types";
 import state from "../state";
 import Connector, {
@@ -301,14 +301,9 @@ class Lnc implements Connector {
     const outgoingInvoices: ConnectorTransaction[] =
       outgoingInvoicesResponse.payments.map(
         (payment, index): ConnectorTransaction => {
-          let memo = "Sent";
+          let memo = "";
           if (payment.paymentRequest) {
-            memo = (
-              lightningPayReq
-                .decode(payment.paymentRequest)
-                .tags.find((tag) => tag.tagName === "description")?.data ||
-              "Sent"
-            ).toString();
+            memo = getPaymentRequestDescription(payment.paymentRequest);
           }
 
           return {
