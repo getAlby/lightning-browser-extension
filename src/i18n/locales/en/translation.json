@@ -1141,7 +1141,8 @@
       },
       "edit_allowance": {
         "title": "Site settings",
-        "screen_reader": "Allowance Options"
+        "screen_reader": "Allowance Options",
+        "always_allow": "Always allow"
       },
       "website_permissions": "Website Permissions"
     },

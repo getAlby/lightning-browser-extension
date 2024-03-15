@@ -229,8 +229,8 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
                 {t("website_permissions")}
               </h2>
               <div>
-                <p className="mb-3 text-xs font-semibold text-gray-800 dark:neutral-200">
-                  Always allow
+                <p className="mb-3 text-xs font-semibold text-gray-800 dark:text-neutral-200">
+                  {t("edit_allowance.always_allow")}
                 </p>
                 <div>
                   {permissions.map((permission) => (
