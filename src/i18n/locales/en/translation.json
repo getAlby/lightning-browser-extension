@@ -46,15 +46,6 @@
         "point3": "Both self-custody and custodial options",
         "point4": "No lightning and nostr address"
       },
-      "voltage": {
-        "title": "Voltage Cloud Node",
-        "description": "Great if you don't mind paying for a lightning node cloud service.",
-        "connect": "Connect",
-        "point1": "Start instantly, no waiting for an invite",
-        "point2": "No transaction or volume limits",
-        "point3": "Paid cloud service",
-        "point4": "Unique lightning and nostr address"
-      },
       "alby": {
         "title": "Alby Account",
         "description": "Ideal for beginners or anyone looking for a great daily spending wallet.",
@@ -228,7 +219,10 @@
         },
         "token": {
           "label": "Enter your API key",
-          "info": "To connect your wallet generate an API key in the <0>Blink Dashboard (dashboard.blink.sv)</0>:<br>- log in with email or phone number if you are using Blink already<br>- if you have no account yet can create a new one by logging in with a phone number<br>- create a new key on the API Keys tab<br>- give it a Name and choose the Read and Write Scope<br>- leave the default no expiry or choose a long timeframe to avoid needing to reconnect your wallet periodically<br>- copy the key (starting with blink_ ) and paste it to the textbox below.<br><br>The integration currently only supports using the BTC wallet.<br>"
+          "info": "To connect your wallet generate an API key in the <0>Blink Dashboard (dashboard.blink.sv)</0>:<br>- log in with email or phone number if you are using Blink already<br>- if you have no account yet can create a new one by logging in with a phone number<br>- create a new key on the API Keys tab<br>- give it a Name and choose the Read and Write Scope<br>- leave the default no expiry or choose a long timeframe to avoid needing to reconnect your wallet periodically<br>- copy the key (starting with blink_ ) and paste it to the textbox below.<br>"
+        },
+        "currency": {
+          "label": "Select wallet"
         }
       },
       "bitcoin_jungle": {
@@ -239,6 +233,9 @@
         "token": {
           "label": "Enter your Access token",
           "info": "The {{label}} integration with Alby is in alpha and only recommended for advanced users.<br><br>You can grab your Access token by going into the mobile app, clicking on the settings icon, and then tapping 3 times on the build number to open the developer menu.<br><br>The access token can be copied from here.<br><br>"
+        },
+        "currency": {
+          "label": "Select wallet"
         }
       },
       "galoy": {
@@ -392,18 +389,13 @@
             "title": "Get Started With Alby Extension",
             "description": "New to Alby Extension? Check out our guides, videos, and explanations"
           },
-          "backup_masterkey": {
-            "title": "Back up your Master Key",
-            "description": "Learn what Master Key is, how it’s used for Nostr and make sure to back up"
+          "setup_keys": {
+            "title": "Setup your keys",
+            "description": "Take care of your Master Key or import your existing Nostr account"
           },
-
           "receive_bitcoin": {
             "title": "Receive bitcoin",
             "description": "Get bitcoin to your lightning address, a lightning invoice or bitcoin address."
-          },
-          "import_masterkey": {
-            "title": "Import your Master Key",
-            "description": "If you already have a Master Key, you can import it using recovery phrase"
           }
         }
       }
@@ -432,18 +424,27 @@
           "saved": "Master Key encrypted & saved successfully.",
           "existing_nostr_key_notice": "ℹ️ This account already has a nostr private key set and will not be derived from this Master Key. You can manage your Nostr key from your account settings.",
           "description": {
-            "warning": "Recovery phrase cannot recover this wallet or funds in it. It only recovers the identity you can use across aforementioned protocols",
+            "warning": "<0>It cannot recover this wallet or funds in it,</0> it only recovers access to aforementioned protocol",
             "secure_recovery_phrase": "Make sure to write them down somewhere safe and and keep them private",
-            "recovery_phrase": "Recovery phrase is set of 12 words that backs up your Master Key"
+            "recovery_phrase": "Recovery phrase is set of 12 words that <0>backs up your Master Key</0>"
           },
           "confirm": "I've backed up the recovery phrase to my Master Key in a private and secure place.",
           "error_confirm": "Please confirm that you have backed up the recovery phrase.",
           "new": {
-            "title": "What is a Master Key?",
+            "title": "Setup Master Key",
+            "nostr": "Import an existing Nostr account",
             "items": {
-              "keys": "Master Key is your identity that allows you to interact with protocols like Nostr, Liquid Network or base layer of bitcoin",
-              "usage": "You can import and use the same Master Key in each connected wallet in the Alby Extension",
-              "recovery_phrase": "To import your Master Key to any wallet in Alby, you need to use a recovery phrase"
+              "keys": "Master Key allows you to interact with protocols like <0>Nostr</0>, <0>Liquid</0> or <0>base layer of Bitcoin</0>",
+              "usage": "You can import and use the same Master Key in <0>each connected wallet in Alby</0>",
+              "nostr_key": "You can always import existing keys Nostr and override those generated by Master Key"
+            },
+            "secure": {
+              "title": "Secure Your Master Key",
+              "description": "Get to know what Master Key is and back up 12-words recovery phrase"
+            },
+            "import": {
+              "title": "Have a Master key Already?",
+              "description": "Enter your recovery phrase to import Master Key into this wallet"
             }
           },
           "generate": {
@@ -503,21 +504,7 @@
             "new": {
               "label": "Create a new Nostr account",
               "description": "Generate a Master Key with a pair of new Nostr keys."
-            },
-            "import": {
-              "label": "Import a Nostr account",
-              "description": "Use an existing Nostr private key or derive it from your Master Key",
-              "title": "How would you like to import your Nostr account?",
-              "private_key": {
-                "label": "Use Nostr private key",
-                "description": "Paste your Nostr private key to import it to Alby"
-              },
-              "recovery_phrase": {
-                "label": "Use recovery phrase",
-                "description": "Use Master key recovery phrase to import your Nostr keys"
-              }
-            },
-            "new_to_nostr": "New to Nostr? <0>Learn more</0>"
+            }
           },
           "private_key": {
             "title": "Manage your Nostr private key",
@@ -1175,7 +1162,6 @@
       "options": {
         "account": {
           "add": "Connect a Wallet",
-          "manage": "Manage Wallets",
           "wallet_settings": "Wallet settings",
           "go_to_web_wallet": "Manage your web account"
         }
@@ -1198,17 +1184,20 @@
     "webln": {
       "getbalance": "Read the balance of your account"
     },
-    "nostr": {
-      "getpublickey": "Read your public key",
-      "signmessage": "Sign message with your key",
-      "nip04decrypt": "Decrypt data"
-    },
     "bitcoin": {
       "getaddress": "Read your Bitcoin receive address"
     },
     "liquid": {
       "getaddress": "Read your Liquid receive address",
       "signschnorr": "Sign message with your key"
+    },
+    "nostr": {
+      "getpublickey": "Read your public key",
+      "nip04encrypt": "Encrypt data",
+      "nip04decrypt": "Decrypt data",
+      "nip44encrypt": "Encrypt data",
+      "nip44decrypt": "Decrypt data",
+      "signmessage": "Sign message with your key"
     },
     "commando": {
       "bkpr-listbalances": "List of all current and historical account balances",

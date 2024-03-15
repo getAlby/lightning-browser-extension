@@ -10,6 +10,7 @@ declare global {
 
 export default class NostrProvider extends ProviderBase {
   nip04 = new Nip04(this);
+  nip44 = new Nip44(this);
 
   constructor() {
     super("nostr");
@@ -65,6 +66,30 @@ class Nip04 {
   async decrypt(peer: string, ciphertext: string) {
     await this.provider.enable();
     return this.provider.execute("decryptOrPrompt", {
+      peer,
+      ciphertext,
+    });
+  }
+}
+
+class Nip44 {
+  provider: NostrProvider;
+
+  constructor(provider: NostrProvider) {
+    this.provider = provider;
+  }
+
+  async encrypt(peer: string, plaintext: string) {
+    await this.provider.enable();
+    return this.provider.execute("nip44EncryptOrPrompt", {
+      peer,
+      plaintext,
+    });
+  }
+
+  async decrypt(peer: string, ciphertext: string) {
+    await this.provider.enable();
+    return this.provider.execute("nip44DecryptOrPrompt", {
       peer,
       ciphertext,
     });

@@ -1,5 +1,5 @@
+import { Invoice } from "@lightninglabs/lnc-core/dist/types/proto/lnd/lightning";
 import LNC from "@lightninglabs/lnc-web";
-import lightningPayReq from "bolt11";
 import Base64 from "crypto-js/enc-base64";
 import Hex from "crypto-js/enc-hex";
 import UTF8 from "crypto-js/enc-utf8";
@@ -8,16 +8,15 @@ import SHA256 from "crypto-js/sha256";
 import snakeCase from "lodash.snakecase";
 import { encryptData } from "~/common/lib/crypto";
 import utils from "~/common/lib/utils";
-import { Account } from "~/types";
-
 import { mergeTransactions } from "~/common/utils/helpers";
+import { getPaymentRequestDescription } from "~/common/utils/paymentRequest";
+import { Account } from "~/types";
 import state from "../state";
 import Connector, {
   CheckPaymentArgs,
   CheckPaymentResponse,
-  ConnectorTransaction,
   ConnectPeerResponse,
-  flattenRequestMethods,
+  ConnectorTransaction,
   GetBalanceResponse,
   GetInfoResponse,
   GetTransactionsResponse,
@@ -28,6 +27,7 @@ import Connector, {
   SendPaymentResponse,
   SignMessageArgs,
   SignMessageResponse,
+  flattenRequestMethods,
 } from "./connector.interface";
 
 interface Config {
@@ -160,7 +160,7 @@ class LncCredentialStore {
 class Lnc implements Connector {
   account: Account;
   config: Config;
-  lnc: FixMe;
+  lnc: LNC;
 
   constructor(account: Account, config: Config) {
     this.account = account;
@@ -188,7 +188,6 @@ class Lnc implements Connector {
     try {
       console.info("LNC disconnect");
       await this.lnc.disconnect();
-      delete this.lnc;
     } catch (error) {
       console.error("Unload LNC failed", error);
     }
@@ -224,47 +223,50 @@ class Lnc implements Connector {
     });
   }
 
-  getInfo(): Promise<GetInfoResponse> {
+  async getInfo(): Promise<GetInfoResponse> {
     this.checkConnection();
-    return this.lnc.lnd.lightning.GetInfo().then((data: FixMe) => {
-      return {
-        data: {
-          alias: data.alias,
-          pubkey: data.identityPubkey,
-          color: data.color,
-        },
-      };
-    });
+
+    const data = await this.lnc.lnd.lightning.getInfo();
+
+    return {
+      data: {
+        alias: data.alias,
+        pubkey: data.identityPubkey,
+        color: data.color,
+      },
+    };
   }
 
-  getBalance(): Promise<GetBalanceResponse> {
+  async getBalance(): Promise<GetBalanceResponse> {
     this.checkConnection();
-    return this.lnc.lnd.lightning.ChannelBalance().then((data: FixMe) => {
-      return {
-        data: {
-          balance: data.balance,
-        },
-      };
-    });
+
+    const data = await this.lnc.lnd.lightning.channelBalance();
+
+    return {
+      data: {
+        balance: parseInt(data.localBalance?.sat ?? ""),
+      },
+    };
   }
 
   private async getInvoices(): Promise<ConnectorTransaction[]> {
     this.checkConnection();
-    const data = await this.lnc.lnd.lightning.ListInvoices({ reversed: true });
+    const data = await this.lnc.lnd.lightning.listInvoices({ reversed: true });
 
     const invoices: ConnectorTransaction[] = data.invoices
-      .map((invoice: FixMe, index: number): ConnectorTransaction => {
-        const custom_records =
-          invoice.htlcs[0] && invoice.htlcs[0].customRecords;
+      .map((invoice: Invoice, index: number): ConnectorTransaction => {
+        let custom_records;
+
+        // TODO: Fill custom records from HTLC
 
         return {
           custom_records,
           id: `${invoice.paymentRequest}-${index}`,
           memo: invoice.memo,
-          preimage: invoice.rPreimage,
-          settled: invoice.settled,
+          preimage: invoice.rPreimage.toString(),
+          settled: invoice.state === "SETTLED",
           settleDate: parseInt(invoice.settleDate) * 1000,
-          totalAmount: invoice.value,
+          totalAmount: parseInt(invoice.value),
           type: "received",
         };
       })
@@ -290,31 +292,28 @@ class Lnc implements Connector {
   }
 
   private async getPayments(): Promise<ConnectorTransaction[]> {
-    const outgoingInvoicesResponse = await this.lnc.lnd.lightning.ListPayments({
+    const outgoingInvoicesResponse = await this.lnc.lnd.lightning.listPayments({
       reversed: true,
-      max_payments: 100,
-      include_incomplete: false,
+      maxPayments: "100",
+      includeIncomplete: false,
     });
 
     const outgoingInvoices: ConnectorTransaction[] =
       outgoingInvoicesResponse.payments.map(
-        (payment: FixMe, index: number): ConnectorTransaction => {
-          let memo = "Sent";
-          if (payment.payment_request) {
-            memo = (
-              lightningPayReq
-                .decode(payment.payment_request)
-                .tags.find((tag) => tag.tagName === "description")?.data ||
-              "Sent"
-            ).toString();
+        (payment, index): ConnectorTransaction => {
+          let memo = "";
+          if (payment.paymentRequest) {
+            memo = getPaymentRequestDescription(payment.paymentRequest);
           }
+
           return {
-            id: `${payment.payment_request}-${index}`,
+            id: `${payment.paymentRequest}-${index}`,
             memo: memo,
-            preimage: payment.payment_preimage,
+            preimage: payment.paymentPreimage,
+            payment_hash: payment.paymentHash,
             settled: true,
-            settleDate: parseInt(payment.creation_date) * 1000,
-            totalAmount: payment.value_sat,
+            settleDate: parseInt(payment.creationTimeNs) / 1_000_000,
+            totalAmount: parseInt(payment.valueSat),
             type: "sent",
           };
         }
@@ -332,41 +331,43 @@ class Lnc implements Connector {
 
   async checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {
     this.checkConnection();
-    return this.lnc.lnd.lightning
-      .LookupInvoice({ r_hash_str: args.paymentHash })
-      .then((data: FixMe) => {
-        return {
-          data: {
-            paid: data.settled,
-          },
-        };
-      });
+
+    const data = await this.lnc.lnd.lightning.lookupInvoice({
+      rHash: args.paymentHash,
+    });
+    return {
+      data: {
+        paid: data.state === "SETTLED",
+      },
+    };
   }
 
-  sendPayment(args: SendPaymentArgs): Promise<SendPaymentResponse> {
+  async sendPayment(args: SendPaymentArgs): Promise<SendPaymentResponse> {
     this.checkConnection();
-    return this.lnc.lnd.lightning
-      .SendPaymentSync({
-        payment_request: args.paymentRequest,
-      })
-      .then((data: FixMe) => {
-        if (data.paymentError) {
-          throw new Error(data.paymentError);
-        }
-        return {
-          data: {
-            preimage: utils.base64ToHex(data.paymentPreimage),
-            paymentHash: utils.base64ToHex(data.paymentHash),
-            route: {
-              total_amt: data.paymentRoute.totalAmt,
-              total_fees: data.paymentRoute.totalFees,
-            },
-          },
-        };
-      });
+
+    const data = await this.lnc.lnd.lightning.sendPaymentSync({
+      paymentRequest: args.paymentRequest,
+    });
+
+    if (data.paymentError) {
+      throw new Error(data.paymentError);
+    }
+
+    return {
+      data: {
+        preimage: utils.base64ToHex(data.paymentPreimage.toString()),
+        paymentHash: utils.base64ToHex(data.paymentHash.toString()),
+        route: {
+          total_amt: parseInt(data.paymentRoute?.totalAmtMsat ?? "0") / 1000,
+          total_fees: parseInt(data.paymentRoute?.totalFeesMsat ?? "0") / 1000,
+        },
+      },
+    };
   }
+
   async keysend(args: KeysendArgs): Promise<SendPaymentResponse> {
     this.checkConnection();
+
     //See: https://gist.github.com/dellagustin/c3793308b75b6b0faf134e64db7dc915
     const dest_pubkey_hex = args.pubkey;
     const dest_pubkey_base64 = Hex.parse(dest_pubkey_hex).toString(Base64);
@@ -382,59 +383,61 @@ class Lnc implements Connector {
         args.customRecords[key]
       ).toString(Base64);
     }
+
     //mandatory record for keysend
     records_base64[5482373484] = preimage_base64;
 
-    return this.lnc.lnd.lightning
-      .SendPaymentSync({
-        dest: dest_pubkey_base64,
-        amt: args.amount,
-        payment_hash: hash,
-        dest_custom_records: records_base64,
-      })
-      .then((data: FixMe) => {
-        if (data.paymentError) {
-          throw new Error(data.paymentError);
-        }
-        return {
-          data: {
-            preimage: utils.base64ToHex(data.paymentPreimage),
-            paymentHash: utils.base64ToHex(data.paymentHash),
-            route: {
-              total_amt: data.paymentRoute.totalAmt,
-              total_fees: data.paymentRoute.totalFees,
-            },
-          },
-        };
-      });
+    const data = await this.lnc.lnd.lightning.sendPaymentSync({
+      dest: dest_pubkey_base64,
+      amt: args.amount.toString(),
+      paymentHash: hash,
+      destCustomRecords: records_base64,
+    });
+
+    if (data.paymentError) {
+      throw new Error(data.paymentError);
+    }
+
+    return {
+      data: {
+        preimage: utils.base64ToHex(data.paymentPreimage.toString()),
+        paymentHash: utils.base64ToHex(data.paymentHash.toString()),
+        route: {
+          total_amt: parseInt(data.paymentRoute?.totalAmtMsat ?? "0") / 1000,
+          total_fees: parseInt(data.paymentRoute?.totalFeesMsat ?? "0") / 1000,
+        },
+      },
+    };
   }
 
-  signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {
+  async signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {
     this.checkConnection();
-    return this.lnc.lnd.lightning
-      .SignMessage({ msg: Base64.stringify(UTF8.parse(args.message)) })
-      .then((data: FixMe) => {
-        return {
-          data: {
-            message: args.message,
-            signature: data.signature,
-          },
-        };
-      });
+
+    const data = await this.lnc.lnd.lightning.signMessage({
+      msg: Base64.stringify(UTF8.parse(args.message)),
+    });
+
+    return {
+      data: {
+        message: args.message,
+        signature: data.signature,
+      },
+    };
   }
 
-  makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse> {
+  async makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse> {
     this.checkConnection();
-    return this.lnc.lnd.lightning
-      .AddInvoice({ memo: args.memo, value: args.amount })
-      .then((data: FixMe) => {
-        return {
-          data: {
-            paymentRequest: data.paymentRequest,
-            rHash: utils.base64ToHex(data.rHash),
-          },
-        };
-      });
+    const data = await this.lnc.lnd.lightning.addInvoice({
+      memo: args.memo,
+      value: args.amount.toString(),
+    });
+
+    return {
+      data: {
+        paymentRequest: data.paymentRequest,
+        rHash: utils.base64ToHex(data.rHash.toString()),
+      },
+    };
   }
 
   private checkConnection() {
