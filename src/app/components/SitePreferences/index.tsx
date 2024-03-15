@@ -191,7 +191,7 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
             updateAllowance();
           }}
         >
-          <div className="pb-4 border-b border-gray-200 dark:border-neutral-700">
+          <div className="pb-5 border-b border-gray-200 dark:border-neutral-700">
             <DualCurrencyField
               id="budget"
               label={t("new_budget.label")}
@@ -204,7 +204,13 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
               onChange={(e) => setBudget(e.target.value)}
             />
           </div>
-          <div className={hasPermissions ? "pb-4" : ""}>
+          <div
+            className={
+              hasPermissions
+                ? "py-1 border-b border-gray-200 dark:border-neutral-700"
+                : ""
+            }
+          >
             <Setting
               title={t("enable_login.title")}
               subtitle={t("enable_login.subtitle")}
@@ -218,98 +224,103 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
           </div>
 
           {hasPermissions && (
-            <div>
-              <h2 className="pt-4 text-lg text-gray-900 font-bold dark:text-white">
-                {t("edit_permissions")}
+            <div className="flex flex-col gap-4 pb-3 border-b border-gray-200 dark:border-neutral-700">
+              <h2 className="pt-5 text-md text-gray-800 dark:text-neutral-200">
+                {t("website_permissions")}
               </h2>
               <div>
-                {permissions.map((permission) => (
-                  <Fragment key={permission.id}>
-                    <Badge
-                      key={permission.method}
-                      sitePermission={
-                        permission.method
-                          .toLowerCase()
-                          .split("/")
-                          .slice(0, 2)
-                          .join("/") == "nostr/signmessage"
-                          ? tNostr(
-                              `kinds.${permission.method
-                                .toLowerCase()
-                                .split("/")
-                                .slice(-1)
-                                .toString()
-                                .concat(".title")}`,
-                              {
-                                defaultValue: permission.method
+                <p className="mb-3 text-xs font-semibold text-gray-800 dark:neutral-200">
+                  Always allow
+                </p>
+                <div>
+                  {permissions.map((permission) => (
+                    <Fragment key={permission.id}>
+                      <Badge
+                        key={permission.method}
+                        sitePermission={
+                          permission.method
+                            .toLowerCase()
+                            .split("/")
+                            .slice(0, 2)
+                            .join("/") == "nostr/signmessage"
+                            ? tNostr(
+                                `kinds.${permission.method
+                                  .toLowerCase()
                                   .split("/")
                                   .slice(-1)
-                                  .toString(),
-                              }
-                            ).toUpperCase()
-                          : tPermissions(
-                              permission.method
-                                .toLowerCase()
-                                .split("/")
-                                .slice(0, 2)
-                                .join(".")
-                                .concat(".title"),
-                              {
-                                defaultValue: permission.method
+                                  .toString()
+                                  .concat(".title")}`,
+                                {
+                                  defaultValue: permission.method
+                                    .split("/")
+                                    .slice(-1)
+                                    .toString(),
+                                }
+                              ).toUpperCase()
+                            : tPermissions(
+                                permission.method
+                                  .toLowerCase()
+                                  .split("/")
+                                  .slice(0, 2)
+                                  .join(".")
+                                  .concat(".title"),
+                                {
+                                  defaultValue: permission.method
+                                    .split("/")
+                                    .slice(-1)
+                                    .toString(),
+                                }
+                              )
+                        }
+                        description={
+                          permission.method
+                            .toLowerCase()
+                            .split("/")
+                            .slice(0, 2)
+                            .join("/") == "nostr/signmessage"
+                            ? tNostr(
+                                `kinds.${permission.method
+                                  .toLowerCase()
                                   .split("/")
                                   .slice(-1)
-                                  .toString(),
-                              }
+                                  .toString()
+                                  .concat(".description")}`,
+                                {
+                                  defaultValue: permission.method
+                                    .split("/")
+                                    .slice(-1)
+                                    .toString(),
+                                }
+                              )
+                            : tPermissions(
+                                permission.method
+                                  .toLowerCase()
+                                  .split("/")
+                                  .slice(0, 2)
+                                  .join(".")
+                                  .concat(".description"),
+                                {
+                                  defaultValue: permission.method
+                                    .split("/")
+                                    .slice(-1)
+                                    .toString(),
+                                }
+                              )
+                        }
+                        delete={() => {
+                          setPermissions(
+                            permissions.map((prm) =>
+                              prm.id === permission.id
+                                ? { ...prm, enabled: !prm.enabled }
+                                : prm
                             )
-                      }
-                      description={
-                        permission.method
-                          .toLowerCase()
-                          .split("/")
-                          .slice(0, 2)
-                          .join("/") == "nostr/signmessage"
-                          ? tNostr(
-                              `kinds.${permission.method
-                                .toLowerCase()
-                                .split("/")
-                                .slice(-1)
-                                .toString()
-                                .concat(".description")}`,
-                              {
-                                defaultValue: permission.method
-                                  .split("/")
-                                  .slice(-1)
-                                  .toString(),
-                              }
-                            )
-                          : tPermissions(
-                              permission.method
-                                .toLowerCase()
-                                .split("/")
-                                .slice(0, 2)
-                                .join(".")
-                                .concat(".description"),
-                              {
-                                defaultValue: permission.method
-                                  .split("/")
-                                  .slice(-1)
-                                  .toString(),
-                              }
-                            )
-                      }
-                      delete={() => {
-                        setPermissions(
-                          permissions.map((prm) =>
-                            prm.id === permission.id
-                              ? { ...prm, enabled: !prm.enabled }
-                              : prm
-                          )
-                        );
-                      }}
-                      className="bg-green-100 dark:bg-emerald-950 border border-green-100 dark:border-emerald-950 text-gray-800 dark:text-neutral-200 gap-1"
-                    />
-                  </Fragment>
-                ))}
+                          );
+                        }}
+                        className="bg-green-100 dark:bg-emerald-950 border border-green-100 dark:border-emerald-950 text-gray-800 dark:text-neutral-200 gap-1"
+                      />
+                    </Fragment>
+                  ))}
+                </div>
               </div>
             </div>
           )}

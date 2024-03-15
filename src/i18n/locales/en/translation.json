@@ -1130,7 +1130,7 @@
   "components": {
     "allowance_menu": {
       "confirm_delete": "Are you sure you want to disconnect this website?",
-      "hint": "Changing this will reset the current budget",
+      "hint": "Changing this number will reset the current budget",
       "new_budget": {
         "label": "One-click payments budget",
         "link_label": "Set a budget for one-click payments"
@@ -1143,7 +1143,7 @@
         "title": "Site settings",
         "screen_reader": "Allowance Options"
       },
-      "edit_permissions": "Edit Permissions"
+      "website_permissions": "Website Permissions"
     },
     "qrcode_scanner": {
       "title": "Scan QR Code",

@@ -29,7 +29,7 @@ export default function Badge({
       {showBadge && (
         <div
           className={classNames(
-            "inline-flex items-center leading-none rounded-full font-medium mr-2 py-1 pr-2 pl-3 my-2 text-xs cursor-default uppercase",
+            "inline-flex items-center leading-none rounded-full font-medium mr-2 py-1 pr-2 pl-3 mb-2 text-xs cursor-default uppercase",
             className
           )}
           title={description}
