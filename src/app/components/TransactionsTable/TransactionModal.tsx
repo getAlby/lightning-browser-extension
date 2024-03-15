@@ -1,11 +1,9 @@
 import {
-  CaretDownIcon,
-  CaretUpIcon,
-} from "@bitcoin-design/bitcoin-icons-react/filled";
-import {
-  ArrowDownIcon,
-  ArrowUpIcon,
-} from "@bitcoin-design/bitcoin-icons-react/outline";
+  PopiconsArrowDownSolid,
+  PopiconsArrowUpSolid,
+  PopiconsChevronBottomLine,
+  PopiconsChevronTopLine,
+} from "@popicons/react";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -31,7 +29,7 @@ export default function TransactionModal({
     keyPrefix: "transactions_table",
   });
   const [showMoreFields, setShowMoreFields] = useState(false);
-  const { getFormattedSats } = useSettings();
+  const { getFormattedSats, getFormattedInCurrency } = useSettings();
 
   function toggleShowMoreFields() {
     setShowMoreFields(!showMoreFields);
@@ -58,12 +56,12 @@ export default function TransactionModal({
         <div>
           <div className="flex items-center justify-center">
             {getTransactionType(transaction) == "outgoing" ? (
-              <div className="flex justify-center items-center bg-orange-100 dark:bg-[#261911] rounded-full p-4">
-                <ArrowUpIcon className="w-8 h-8 text-orange-400 stroke-[5px]" />
+              <div className="flex justify-center items-center bg-orange-100 dark:bg-orange-950 rounded-full p-3">
+                <PopiconsArrowUpSolid className="w-10 h-10 text-orange-400 dark:text-amber-600 stroke-[1px] stroke-orange-400 dark:stroke-amber-600" />
               </div>
             ) : (
-              <div className="flex justify-center items-center bg-green-100 dark:bg-[#0F1E1A] rounded-full p-4">
-                <ArrowDownIcon className="w-8 h-8 text-green-400 stroke-[5px]" />
+              <div className="flex justify-center items-center bg-green-100 dark:bg-emerald-950 rounded-full p-3">
+                <PopiconsArrowDownSolid className="w-10 h-10 text-green-500 dark:text-emerald-500 stroke-[1px] stroke-green-400 dark:stroke-emerald-500" />
               </div>
             )}
           </div>
@@ -82,7 +80,12 @@ export default function TransactionModal({
               )}
             >
               {transaction.type == "sent" ? "-" : "+"}{" "}
-              {getFormattedSats(transaction.totalAmount)}
+              {!transaction.displayAmount
+                ? getFormattedSats(transaction.totalAmount)
+                : getFormattedInCurrency(
+                    transaction.displayAmount[0],
+                    transaction.displayAmount[1]
+                  )}
             </p>
 
             {!!transaction.totalAmountFiat && (
@@ -182,12 +185,12 @@ export default function TransactionModal({
                   {showMoreFields ? (
                     <>
                       {tCommon("actions.hide")}
-                      <CaretUpIcon className="h-4 w-4 inline-flex" />
+                      <PopiconsChevronTopLine className="h-4 w-4 inline-flex" />
                     </>
                   ) : (
                     <>
                       {tCommon("actions.more")}
-                      <CaretDownIcon className="h-4 w-4 inline-flex" />
+                      <PopiconsChevronBottomLine className="h-4 w-4 inline-flex" />
                     </>
                   )}
                 </Hyperlink>

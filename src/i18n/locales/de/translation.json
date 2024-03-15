@@ -303,15 +303,6 @@
       "unlock_password": "Dein Entsperr-Passcode"
     },
     "settings": {
-      "nostr": {
-        "private_key": {
-          "title": "Privater Schlüssel",
-          "subtitle": "Dieser Abschnitt wurde auf die Kontenseite verschoben, da die Schlüssel jetzt kontenspezifisch sind.",
-          "go_to": "Gehe zu deinen Konten"
-        },
-        "hint": "Es ist ein einfaches und offenes Protokoll, das darauf abzielt, zensurresistente soziale Netzwerke zu schaffen. Nostr arbeitet mit kryptographischen Schlüsseln. Um etwas zu veröffentlichen, signiere es mit deinem Schlüssel und senden es an mehrere Relays. Du kannst Alby verwenden, um deinen Nostr-Schlüssel zu verwalten. Viele Nostr-Anwendungen erlauben dann, einfach den Schlüssel aus der Alby-Erweiterung zu verwenden.",
-        "title": "Nostr"
-      },
       "lnurl_auth": {
         "legacy_lnurl_auth": {
           "title": "Legacy Signatur für LNDhub und LNbits",
@@ -332,7 +323,7 @@
         "title": "Erweiterungen der Webseite",
         "subtitle": "Verbesserungen für X, YouTube, etc."
       },
-      "title": "Einstellung",
+      "title": "Einstellungen der Erweiterung",
       "change_password": {
         "choose_password": {
           "label": "Gebe einen neuen Passcode zum Entsperren ein:"
@@ -408,17 +399,9 @@
             "title": "Erste Schritte mit Alby Extension",
             "description": "Neu bei Alby Extension? Sieh dir unsere Anleitungen, Videos und Erklärungen an"
           },
-          "backup_masterkey": {
-            "title": "Sichere dein Hauptschlüssel",
-            "description": "Erfahre, was der Master Key ist, wie er für Nostr verwendet wird und stelle sicher, dass du ein Backup erstellst"
-          },
           "receive_bitcoin": {
             "title": "Bitcoin erhalten",
             "description": "Hole dir Bitcoin an deine Lightning-Adresse, eine Lightning-Rechnung oder eine Bitcoin-Adresse."
-          },
-          "import_masterkey": {
-            "title": "Importiere deinen Hauptschlüssel",
-            "description": "Wenn du bereits einen Master Key hast, kannst du ihn mit der Wiederherstellungsphrase importieren"
           }
         }
       },
@@ -438,7 +421,7 @@
     "accounts": {
       "account_view": {
         "title2": "Konto",
-        "title1": "Kontoeinstellung",
+        "title1": "Wallet Einstellungen",
         "name": {
           "title": "Name anzeigen",
           "placeholder": "Konto Anzeigename"
@@ -499,30 +482,19 @@
               "description": "Generiere einen Hauptschlüssel mit einem Paar neuer Nostr-Schlüssel.",
               "label": "Ein neues Nostr-Konto erstellen"
             },
-            "import": {
-              "label": "Ein Nostr-Konto importieren",
-              "description": "Verwende einen vorhandenen privaten Nostr-Schlüssel oder leite ihn von deinem Hauptschlüssel ab",
-              "private_key": {
-                "label": "Privaten Schlüssel von Nostr verwenden",
-                "description": "Füge deinen privaten Nostr-Schlüssel ein, um ihn in Alby zu importieren"
-              },
-              "recovery_phrase": {
-                "label": "Wiederherstellungsphrase verwenden",
-                "description": "Verwende die Phrase zur Wiederherstellung des Hauptschlüssels, um deinen Nostr-Schlüssel zu importieren"
-              },
-              "title": "Wie möchten dein Nostr-Konto importieren?"
-            },
-            "new_to_nostr": "Neu bei Nostr? <0>Mehr erfahren</0>",
             "description2": "Jedes Nostr-Konto, das in Alby erstellt wird, wird mit einer <0>Recovery Phrase</0> geliefert - eine Reihe von 12 Wörtern, die es dir ermöglicht, jederzeit wieder Zugang zu deinen privaten Nostr-Schlüsseln zu erhalten."
           }
         },
         "remove": {
           "error": "Der eingegebene Kontoname stimmte nicht überein.",
-          "confirm": "Bitte gebe den Namen des Kontos ein, um die Löschung deines Kontos zu bestätigen:\n\n{{ Name }}\n\n⚠️ Wenn du fortfährst, werden alle zugehörigen Schlüssel (Hauptschlüssel, Nostr, etc.) gelöscht. Bitte vergewissern dich, dass du eine Sicherungskopie erstellt hast, denn es gibt keine andere Möglichkeit, sie wiederherzustellen."
+          "confirm": "Bitte gebe den Namen des Kontos ein, um die Löschung deines Kontos zu bestätigen:\n\n{{ Name }}\n\n⚠️ Wenn du fortfährst, werden alle zugehörigen Schlüssel (Hauptschlüssel, Nostr, etc.) gelöscht. Bitte vergewissern dich, dass du eine Sicherungskopie erstellt hast, denn es gibt keine andere Möglichkeit, sie wiederherzustellen.",
+          "subtitle": "Entfernt alle Zertifikate, Zahlungsdaten und Schlüssel, die mit dieser Wallet verbunden sind.",
+          "title": "Trenne deine Verbindung zu deiner Wallet"
         },
         "actions": {
           "export": "Exportieren",
-          "remove_secretkey": "Hauptschlüssel entfernen"
+          "remove_secretkey": "Hauptschlüssel entfernen",
+          "disconnect_wallet": "Wallet abtrennen"
         },
         "mnemonic": {
           "title": "🔑 Schlüsselverwaltung",
@@ -533,20 +505,13 @@
             "save": "Hauptschlüssel speichern",
             "button": "Zeige Wiederherstellungsphrase",
             "warning": "⚠️ Vergesse nicht, deine Wiederherstellungsphrase zu sichern! Wird sie nicht gesichert, kann dies dazu führen, dass du den Zugang zu deinem Hauptschlüssel, dein Nostr-Identität oder den von dir mit diesem Schlüssel verwalteten Assets dauerhaft verlierst.",
-            "items": {
-              "recovery_phrase": "Du kannst jederzeit auf deinen Hauptschlüssel zugreifen, indem du deine Wiederherstellungsphrase verwendest.",
-              "words": "Die Wiederherstellungsphrase besteht aus 12 Wörtern, die wie ein Passwort funktionieren, jedoch nicht geändert oder zurückgesetzt werden können, falls sie verloren gehen.",
-              "storage": "Schreibe sie an einem sicheren und privaten Ort auf!",
-              "keys": "Der Hauptschlüssel ermöglicht dir die Interaktion mit verschiedenen Protokollen wie z.B.: Nostr, Liquid oder Basisschicht von Bitcoin."
-            },
-            "description": "Notiere deine Wiederherstellungsphrase, um deinen Hauptschlüssel auf einem neuen Gerät wiederherstellen zu können oder für den Fall, dass du den Zugriff auf dein Konto verlierst."
+            "description": "Notiere deine Wiederherstellungsphrase, um deinen Hauptschlüssel auf einem neuen Gerät wiederherstellen zu können oder für den Fall, dass du den Zugriff auf dein Konto verlierst.",
+            "title": "Sichere deinen Hauptschlüssel"
           },
           "saved": "Hauptschlüssel erfolgreich verschlüsselt und gespeichert.",
           "generate": {
             "title": "Neuen Hauptschlüssel generieren",
             "button": "Hauptschlüssel generieren",
-            "confirm": "Ich habe die Wiederherstellungsphrase zu meinem Hauptschlüssel an einem privaten und sicheren Ort gesichert.",
-            "error_confirm": "Bitte vergewissere dich, dass du deine Sicherungskopie des Wiederherstellungssatzes erstellt hast.",
             "description": "Hauptschlüssel ermöglicht dir die Interaktion mit verschiedenen Protokollen wie z.B.: Nostr, Basisschicht von Bitcoin oder LNURL-Auth."
           },
           "import": {
@@ -554,13 +519,28 @@
             "description": "Verwende die Wiederherstellungsphrase, um deinen Hauptschlüssel in Alby zu importieren.",
             "button": "Hauptschlüssel importieren"
           },
-          "inputs": {},
           "existing_nostr_key_notice": "ℹ️ Für dieses Konto ist bereits ein privater Nostr-Schlüssel festgelegt, der nicht von diesem Hauptschlüssel abgeleitet wird. Du kannst dein Nostr-Schlüssel über deine Kontoeinstellungen verwalten.",
           "lnurl": {
             "title": "Anmeldung mit Lightning",
             "use_mnemonic": "Hauptschlüssel für die Anmeldung bei Lightning-Anwendungen verwenden (LNURL Auth)"
           },
-          "new": {}
+          "new": {
+            "title": "Was ist ein Hauptschlüssel?",
+            "items": {
+              "usage": "Du kannst denselben Master Key in jede angeschlossene Wallet in der Alby Extension importieren und verwenden",
+              "keys": "Der Master Key ist deine Identität, mit der du die Protokolle wie Nostr, Liquid Network oder der Basisschicht von Bitcoin interagieren kannst."
+            }
+          },
+          "inputs": {
+            "title": "Wiederherstellungsphrase für deinen Master Key"
+          },
+          "description": {
+            "secure_recovery_phrase": "Schreibe sie an einem sicheren Ort auf und bewahren sie privat auf.",
+            "recovery_phrase": "Die Wiederherstellungsphrase ist ein Satz von 12 Wörtern, die deinen Master Key absichern",
+            "warning": "Die Wiederherstellungsphrase kann diese Brieftasche oder das darin befindliche Geld nicht wiederherstellen. Sie stellt nur die Identität wieder her, die du in den oben genannten Protokollen verwendet hast"
+          },
+          "error_confirm": "Bitte vergewisser dich, dass du eine Sicherungskopie der Wiederherstellungsphrase erstellt hast.",
+          "confirm": "Ich habe die Wiederherstellungsphrase zu meinem Hauptschlüssel an einem privaten und sicheren Ort gesichert."
         },
         "remove_secretkey": {
           "title": "Hauptschlüssel entfernen",
@@ -578,7 +558,11 @@
           "title": "Netzwerk"
         },
         "no_mnemonic_hint": "💡 Du hast noch keinen Hauptschlüssel. <0>Klicken Sie hier</0></div>, um deinen Hauptschlüssel zu erstellen und diese Einstellungen freizuschalten."
-      }
+      },
+      "actions": {
+        "connect_a_wallet": "Verbinde deine Wallet"
+      },
+      "title": "Wallets"
     },
     "receive": {
       "amount": {
@@ -798,15 +782,6 @@
         "point4": "Eindeutige Lightning- und Nostr-Adresse",
         "point2": "Es gelten Grenzen für das Transaktionsvolumen"
       },
-      "voltage": {
-        "point2": "Keine Transaktions- oder Volumenbeschränkungen",
-        "connect": "Verbinden",
-        "point1": "Sofortiger Start, kein Warten auf eine Einladung",
-        "point4": "Eindeutige Lightning- und Nostr-Adresse",
-        "title": "Voltage Cloud Knoten",
-        "point3": "Kostenpflichtiger Cloud-Dienst",
-        "description": "Großartig, wenn es dir nichts ausmacht, für einen Cloud-Dienst mit lightning zu bezahlen."
-      },
       "title": "Wallet mit Alby-Erweiterung verbinden"
     },
     "transactions": {
@@ -971,10 +946,14 @@
     "account_menu": {
       "options": {
         "account": {
-          "go_to_web_wallet": "Verwalte dein Web-Konto"
+          "go_to_web_wallet": "Verwalte dein Web-Konto",
+          "wallet_settings": "Einstellungen deiner Wallet",
+          "add": "Verbinde deine Wallet",
+          "manage": "Wallets verwalten"
         }
       },
-      "screen_reader": "Dropdown umschalten"
+      "screen_reader": "Dropdown umschalten",
+      "title": "Wallet wechseln"
     },
     "publishers_table": {
       "payments": "Zahlungen",
@@ -1120,7 +1099,8 @@
       "review": "Überprüfung",
       "disconnect": "Verbindung trennen",
       "copied_to_clipboard": "In die Zwischenablage kopiert",
-      "hide": "Ausblenden"
+      "hide": "Ausblenden",
+      "finish": "Oberfläche"
     },
     "discover": "Apps entdecken",
     "errors": {

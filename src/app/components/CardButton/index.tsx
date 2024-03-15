@@ -1,13 +1,17 @@
-import React from "react";
+import { FunctionComponent, SVGProps } from "react";
 
 export type Props = {
   title: string;
   description: string;
-  icon: React.ComponentType<{
-    className?: string;
-  }>;
+  icon: IconType;
   onClick: () => void;
 };
+
+interface IconTypeProps {
+  className?: string;
+}
+
+type IconType = FunctionComponent<IconTypeProps & SVGProps<SVGSVGElement>>;
 
 export default function CardButton({
   title,

@@ -1,7 +1,7 @@
-import { CheckIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
 import PublisherCard from "@components/PublisherCard";
+import { PopiconsCheckLine } from "@popicons/react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import Alert from "~/app/components/Alert";
@@ -76,11 +76,11 @@ function LiquidEnableComponent(props: Props) {
             <p className="mb-2">{tCommon("enable.allow")}</p>
 
             <div className="mb-2 flex items-center">
-              <CheckIcon className="w-5 h-5 mr-2" />
+              <PopiconsCheckLine className="w-5 h-5 mr-2" />
               <p className="dark:text-white">{tCommon("enable.request1")}</p>
             </div>
             <div className="mb-2 flex items-center">
-              <CheckIcon className="w-5 h-5 mr-2" />
+              <PopiconsCheckLine className="w-5 h-5 mr-2" />
               <p className="dark:text-white">{t("request2")}</p>
             </div>
           </div>
