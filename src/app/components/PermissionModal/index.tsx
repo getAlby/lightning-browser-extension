@@ -40,7 +40,7 @@ export default function PermissionModal({
       contentLabel={"Transactions"}
       position="top"
     >
-      <div className="dark:text-white">
+      <div className="dark:text-white mt-6">
         <PublisherCard
           title={origin.name}
           image={origin.icon}
