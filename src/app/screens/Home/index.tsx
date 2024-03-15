@@ -41,10 +41,17 @@ const Home: FC = () => {
     }
   };
 
+  // loadAllowance as soon as currentURL is set
+  useEffect(() => {
+    if (currentUrl) {
+      loadAllowance();
+    }
+  }, [currentUrl, loadAllowance]);
+
   // Get current URL data on mount
   // and start listeners
   useEffect(() => {
-    const getCurrentURLAndLoadAllowance = async () => {
+    const getCurrentURL = async () => {
       const tabs = await browser.tabs.query({
         active: true,
         currentWindow: true,
@@ -61,12 +68,12 @@ const Home: FC = () => {
             action: "extractLightningData",
           });
         }
+      } else {
+        setLoadingAllowance(false);
       }
-
-      loadAllowance();
     };
 
-    getCurrentURLAndLoadAllowance();
+    getCurrentURL();
 
     // Enhancement data is loaded asynchronously (for example because we need to fetch additional data).
     browser.runtime.onMessage.addListener(handleLightningDataMessage);
@@ -74,7 +81,7 @@ const Home: FC = () => {
     return () => {
       browser.runtime.onMessage.removeListener(handleLightningDataMessage);
     };
-  }, [loadAllowance]);
+  }, []);
 
   if (loadingAllowance) {
     return null;
