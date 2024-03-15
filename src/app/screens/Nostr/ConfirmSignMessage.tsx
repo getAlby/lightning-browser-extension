@@ -99,7 +99,7 @@ function ConfirmSignMessage() {
                     t={t}
                     values={{
                       host: origin.host,
-                      kind: t(`kinds.${event.kind}`, {
+                      kind: t(`kinds.${event.kind}.title`, {
                         defaultValue: t("kinds.unknown.title", {
                           kind: event.kind,
                         }),
@@ -132,7 +132,7 @@ function ConfirmSignMessage() {
                   setPermissionOption(permission);
                   setModalOpen(false);
                 }}
-                permission={t(`kinds.${event.kind}`, {
+                permission={t(`kinds.${event.kind}.title`, {
                   defaultValue: t("kinds.unknown.title", {
                     kind: event.kind,
                   }),
@@ -153,7 +153,7 @@ function ConfirmSignMessage() {
                     i18nKey={permissionOption}
                     t={tPermissions}
                     values={{
-                      permission: t(`kinds.${event.kind}`, {
+                      permission: t(`kinds.${event.kind}.title`, {
                         defaultValue: t("kinds.unknown.title", {
                           kind: event.kind,
                         }),

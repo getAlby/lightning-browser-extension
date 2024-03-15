@@ -1,4 +1,4 @@
-import { CrossIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
+import { PopiconsXLine } from "@popicons/react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { classNames } from "~/app/utils";
@@ -44,7 +44,7 @@ export default function Badge({
               }}
               className="text-gray-400 dark:text-neutral-600 hover:text-gray-600 dark:hover:text-neutral-400"
             >
-              <CrossIcon className="w-4 h-4" />
+              <PopiconsXLine className="w-4 h-4" />
             </button>
           )}
         </div>
