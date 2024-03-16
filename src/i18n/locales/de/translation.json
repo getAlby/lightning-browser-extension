@@ -165,8 +165,11 @@
           "title": "Verbinden mit <0>Blink Wallet</0>"
         },
         "token": {
-          "info": "Um deine Brieftasche zu verbinden, generiere einen API-Schlüssel im <0>Blink Dashboard (dashboard.blink.sv)</0>:<br>- logge dich mit deiner E-Mail oder Telefonnummer ein, wenn du Blink bereits nutzt<br>- wenn du noch keinen Account hast, kannst du einen neuen erstellen, indem du dich mit einer Telefonnummer einloggst<br>- erstelle einen neuen Key auf der Registerkarte API Keys<br>- gib ihm einen Namen und wähle den Lese- und Schreibbereich<br>- belasse die Standardeinstellung ohne Ablaufdatum oder wähle einen langen Zeitraum, um zu vermeiden, dass du deine Wallet regelmäßig neu verbinden musst<br>- kopiere den Key (beginnend mit blink_ ) und füge ihn in die Textbox unten ein.<br><br>Die Integration unterstützt derzeit nur die Verwendung der BTC-Wallet.<br>",
+          "info": "Um deine Brieftasche zu verbinden, generiere einen API-Schlüssel im <0>Blink Dashboard (dashboard.blink.sv)</0>:<br>- logge dich mit deiner E-Mail oder Telefonnummer ein, wenn du Blink bereits nutzt<br>- wenn du noch keinen Account hast, kannst du einen neuen erstellen, indem du dich mit einer Telefonnummer einloggst<br>- erstelle einen neuen Key auf der Registerkarte API Keys<br>- gib ihm einen Namen und wähle den Lese- und Schreibbereich<br>- belasse die Standardeinstellung ohne Ablaufdatum oder wähle einen langen Zeitraum, um zu vermeiden, dass du deine Wallet regelmäßig neu verbinden musst<br>- kopiere den Key (beginnend mit blink_ ) und füge ihn in die Textbox unten ein.<br>",
           "label": "Gebe deinen API-Schlüssel ein"
+        },
+        "currency": {
+          "label": "Wallet auswählen"
         }
       },
       "bitcoin_jungle": {
@@ -177,6 +180,9 @@
         "token": {
           "info": "Die {{label}}-Integration mit Alby befindet sich in der Alpha-Phase und wird nur für fortgeschrittene Benutzer empfohlen.<br><br>du kannst deinen Zugriffstoken abrufen, indem du die mobile App aufrufst, auf das Einstellungssymbol klicken und dann dreimal auf die Build-Nummer tippen, um das Entwicklermenü zu öffnen.<br><br>Das Zugriffstoken kann von hier kopiert werden.<br><br>",
           "label": "Gebe deien Access-Token ein"
+        },
+        "currency": {
+          "label": "Wallet auswählen"
         }
       },
       "btcpay": {
@@ -402,6 +408,10 @@
           "receive_bitcoin": {
             "title": "Bitcoin erhalten",
             "description": "Hole dir Bitcoin an deine Lightning-Adresse, eine Lightning-Rechnung oder eine Bitcoin-Adresse."
+          },
+          "setup_keys": {
+            "title": "Einrichten deiner Schlüssel",
+            "description": "Kümmer dich um deinen Master Key oder importiere dein bestehendes Nostr-Konto"
           }
         }
       },
@@ -525,10 +535,20 @@
             "use_mnemonic": "Hauptschlüssel für die Anmeldung bei Lightning-Anwendungen verwenden (LNURL Auth)"
           },
           "new": {
-            "title": "Was ist ein Hauptschlüssel?",
+            "title": "Masterschlüssel einrichten",
             "items": {
-              "usage": "Du kannst denselben Master Key in jede angeschlossene Wallet in der Alby Extension importieren und verwenden",
-              "keys": "Der Master Key ist deine Identität, mit der du die Protokolle wie Nostr, Liquid Network oder der Basisschicht von Bitcoin interagieren kannst."
+              "usage": "Du kannst denselben Hauptschlüssel in <0>jede angeschlossene Brieftasche in Alby</0> importieren und verwenden",
+              "keys": "Master Key ermöglicht die Interaktion mit Protokollen wie <0>Nostr</0>, <0>Liquid</0> oder <0>Basisschicht von Bitcoin</0>",
+              "nostr_key": "Du kannst jederzeit vorhandene Nostr-Schlüssel importieren und die von Master Key erzeugten überschreiben"
+            },
+            "nostr": "Ein bestehendes Nostr-Konto importieren",
+            "secure": {
+              "title": "Sichere deinen Hauptschlüssel",
+              "description": "Erfahre, was Master Key ist und sichere deine 12-Wörter-Wiederherstellungsphrase"
+            },
+            "import": {
+              "title": "Hast du bereits einen Hauptschlüssel?",
+              "description": "Gebe deine Wiederherstellungsphrase ein, um den Master Key in diese Wallet zu importieren."
             }
           },
           "inputs": {
@@ -536,8 +556,8 @@
           },
           "description": {
             "secure_recovery_phrase": "Schreibe sie an einem sicheren Ort auf und bewahren sie privat auf.",
-            "recovery_phrase": "Die Wiederherstellungsphrase ist ein Satz von 12 Wörtern, die deinen Master Key absichern",
-            "warning": "Die Wiederherstellungsphrase kann diese Brieftasche oder das darin befindliche Geld nicht wiederherstellen. Sie stellt nur die Identität wieder her, die du in den oben genannten Protokollen verwendet hast"
+            "recovery_phrase": "Die Wiederherstellungsphrase besteht aus 12 Wörtern, die <0>Ihren Hauptschlüssel sichern</0>",
+            "warning": "<0>Es kann diese Brieftasche oder das darin befindliche Guthaben nicht wiederherstellen,</0> es wird nur der Zugriff auf das oben genannte Protokoll wiederhergestellt"
           },
           "error_confirm": "Bitte vergewisser dich, dass du eine Sicherungskopie der Wiederherstellungsphrase erstellt hast.",
           "confirm": "Ich habe die Wiederherstellungsphrase zu meinem Hauptschlüssel an einem privaten und sicheren Ort gesichert."
@@ -948,8 +968,7 @@
         "account": {
           "go_to_web_wallet": "Verwalte dein Web-Konto",
           "wallet_settings": "Einstellungen deiner Wallet",
-          "add": "Verbinde deine Wallet",
-          "manage": "Wallets verwalten"
+          "add": "Verbinde deine Wallet"
         }
       },
       "screen_reader": "Dropdown umschalten",
