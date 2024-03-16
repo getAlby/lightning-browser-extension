@@ -44,7 +44,6 @@ function ConfirmPayment() {
     ((invoice.satoshis || 0) * 10).toString()
   );
   const [fiatAmount, setFiatAmount] = useState("");
-  const [fiatBudgetAmount, setFiatBudgetAmount] = useState("");
 
   const formattedInvoiceSats = getFormattedSats(invoice.satoshis || 0);
 
@@ -56,15 +55,6 @@ function ConfirmPayment() {
       }
     })();
   }, [invoice.satoshis, showFiat, getFormattedFiat]);
-
-  useEffect(() => {
-    (async () => {
-      if (showFiat && budget) {
-        const res = await getFormattedFiat(budget);
-        setFiatBudgetAmount(res);
-      }
-    })();
-  }, [budget, showFiat, getFormattedFiat]);
 
   const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -160,7 +150,7 @@ function ConfirmPayment() {
             <div>
               {navState.origin && (
                 <BudgetControl
-                  fiatAmount={fiatBudgetAmount}
+                  showFiat={showFiat}
                   remember={rememberMe}
                   onRememberChange={(event) => {
                     setRememberMe(event.target.checked);

@@ -25,17 +25,12 @@ export type Props = {
 };
 
 function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
-  const {
-    isLoading: isLoadingSettings,
-    settings,
-    getFormattedFiat,
-  } = useSettings();
+  const { isLoading: isLoadingSettings, settings } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
   const { account } = useAccount();
   const [modalIsOpen, setIsOpen] = useState(false);
   const [budget, setBudget] = useState("");
   const [lnurlAuth, setLnurlAuth] = useState(false);
-  const [fiatAmount, setFiatAmount] = useState("");
 
   const [originalPermissions, setOriginalPermissions] = useState<
     Permission[] | null
@@ -78,17 +73,6 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
 
     fetchPermissions();
   }, [account?.id, allowance.id]);
-
-  useEffect(() => {
-    if (budget !== "" && showFiat) {
-      const getFiat = async () => {
-        const res = await getFormattedFiat(budget);
-        setFiatAmount(res);
-      };
-
-      getFiat();
-    }
-  }, [budget, showFiat, getFormattedFiat]);
 
   function openModal() {
     setBudget(allowance.totalBudget.toString());
@@ -196,7 +180,7 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
               placeholder={tCommon("sats", { count: 0 })}
               value={budget}
               hint={t("hint")}
-              fiatValue={fiatAmount}
+              showFiat={showFiat}
               onChange={(e) => setBudget(e.target.value)}
             />
           </div>

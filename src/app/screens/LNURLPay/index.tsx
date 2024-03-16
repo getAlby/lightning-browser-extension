@@ -5,7 +5,9 @@ import Hyperlink from "@components/Hyperlink";
 import PublisherCard from "@components/PublisherCard";
 import ResultCard from "@components/ResultCard";
 import SatButtons from "@components/SatButtons";
-import DualCurrencyField from "@components/form/DualCurrencyField";
+import DualCurrencyField, {
+  DualCurrencyFieldChangeEvent,
+} from "@components/form/DualCurrencyField";
 import TextField from "@components/form/TextField";
 import {
   PopiconsChevronBottomLine,
@@ -35,7 +37,6 @@ import type {
   LNURLPaymentSuccessAction,
   PaymentResponse,
 } from "~/types";
-
 const Dt = ({ children }: { children: React.ReactNode }) => (
   <dt className="font-medium text-gray-800 dark:text-white">{children}</dt>
 );
@@ -53,7 +54,6 @@ function LNURLPay() {
   const {
     isLoading: isLoadingSettings,
     settings,
-    getFormattedFiat,
     getFormattedSats,
   } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
@@ -86,15 +86,6 @@ function LNURLPay() {
   const [successAction, setSuccessAction] = useState<
     LNURLPaymentSuccessAction | undefined
   >();
-
-  useEffect(() => {
-    const getFiat = async () => {
-      const res = await getFormattedFiat(valueSat);
-      setFiatValue(res);
-    };
-
-    getFiat();
-  }, [valueSat, showFiat, getFormattedFiat]);
 
   useEffect(() => {
     !!settings.userName && setUserName(settings.userName);
@@ -451,8 +442,11 @@ function LNURLPay() {
                               max={amountMax}
                               rangeExceeded={rangeExceeded}
                               value={valueSat}
-                              onChange={(e) => setValueSat(e.target.value)}
-                              fiatValue={fiatValue}
+                              onChange={(e: DualCurrencyFieldChangeEvent) => {
+                                setValueSat(e.target.value);
+                                setFiatValue(e.target.formattedValueInFiat);
+                              }}
+                              showFiat={showFiat}
                               hint={`${tCommon("balance")}: ${auth
                                 ?.balancesDecorated?.accountBalance}`}
                               amountExceeded={amountExceeded}

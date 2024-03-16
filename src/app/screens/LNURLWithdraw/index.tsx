@@ -4,9 +4,11 @@ import Container from "@components/Container";
 import ContentMessage from "@components/ContentMessage";
 import PublisherCard from "@components/PublisherCard";
 import ResultCard from "@components/ResultCard";
-import DualCurrencyField from "@components/form/DualCurrencyField";
+import DualCurrencyField, {
+  DualCurrencyFieldChangeEvent,
+} from "@components/form/DualCurrencyField";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import ScreenHeader from "~/app/components/ScreenHeader";
@@ -17,7 +19,6 @@ import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import type { LNURLWithdrawServiceResponse } from "~/types";
-
 function LNURLWithdraw() {
   const { t } = useTranslation("translation", { keyPrefix: "lnurlwithdraw" });
   const { t: tCommon } = useTranslation("common");
@@ -27,7 +28,6 @@ function LNURLWithdraw() {
   const {
     isLoading: isLoadingSettings,
     settings,
-    getFormattedFiat,
     getFormattedSats,
   } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
@@ -42,15 +42,6 @@ function LNURLWithdraw() {
   const [loadingConfirm, setLoadingConfirm] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [fiatValue, setFiatValue] = useState("");
-
-  useEffect(() => {
-    if (valueSat !== "" && showFiat) {
-      (async () => {
-        const res = await getFormattedFiat(valueSat);
-        setFiatValue(res);
-      })();
-    }
-  }, [valueSat, showFiat, getFormattedFiat]);
 
   async function confirm() {
     try {
@@ -117,8 +108,11 @@ function LNURLWithdraw() {
             min={Math.floor(minWithdrawable / 1000)}
             max={Math.floor(maxWithdrawable / 1000)}
             value={valueSat}
-            onChange={(e) => setValueSat(e.target.value)}
-            fiatValue={fiatValue}
+            onChange={(e: DualCurrencyFieldChangeEvent) => {
+              setValueSat(e.target.value);
+              setFiatValue(e.target.formattedValueInFiat);
+            }}
+            showFiat={showFiat}
           />
         </div>
       );
