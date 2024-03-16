@@ -27,11 +27,7 @@ function ReceiveInvoice() {
   const { t: tCommon } = useTranslation("common");
 
   const auth = useAccount();
-  const {
-    isLoading: isLoadingSettings,
-    settings,
-    getFormattedFiat,
-  } = useSettings();
+  const { isLoading: isLoadingSettings, settings } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
 
   const navigate = useNavigate();
@@ -59,17 +55,6 @@ function ReceiveInvoice() {
       mounted.current = false;
     };
   }, []);
-
-  const [fiatAmount, setFiatAmount] = useState("");
-
-  useEffect(() => {
-    if (formData.amount !== "" && showFiat) {
-      (async () => {
-        const res = await getFormattedFiat(formData.amount);
-        setFiatAmount(res);
-      })();
-    }
-  }, [formData, showFiat, getFormattedFiat]);
 
   function handleChange(
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -274,7 +259,7 @@ function ReceiveInvoice() {
                       min={0}
                       label={t("amount.label")}
                       placeholder={t("amount.placeholder")}
-                      fiatValue={fiatAmount}
+                      showFiat={showFiat}
                       onChange={handleChange}
                       autoFocus
                     />

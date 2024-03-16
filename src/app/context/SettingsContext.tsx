@@ -23,8 +23,9 @@ interface SettingsContextType {
   getFormattedNumber: (amount: number | string) => string;
   getFormattedInCurrency: (
     amount: number | string,
-    currency?: ACCOUNT_CURRENCIES
+    currency?: ACCOUNT_CURRENCIES | CURRENCIES
   ) => string;
+  getCurrencyRate: () => Promise<number>;
 }
 
 type Setting = Partial<SettingsStorage>;
@@ -115,7 +116,7 @@ export const SettingsProvider = ({
 
   const getFormattedInCurrency = (
     amount: number | string,
-    currency = "BTC" as ACCOUNT_CURRENCIES
+    currency = "BTC" as ACCOUNT_CURRENCIES | CURRENCIES
   ) => {
     if (currency === "BTC") {
       return getFormattedSats(amount);
@@ -149,6 +150,7 @@ export const SettingsProvider = ({
     getFormattedSats,
     getFormattedNumber,
     getFormattedInCurrency,
+    getCurrencyRate,
     settings,
     updateSetting,
     isLoading,

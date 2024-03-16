@@ -2,7 +2,7 @@ import Button from "@components/Button";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Header from "@components/Header";
 import IconButton from "@components/IconButton";
-import DualCurrencyField from "@components/form/DualCurrencyField";
+import DualCurrencyField, { DualCurrencyFieldChangeEvent} from "@components/form/DualCurrencyField";
 import { CreateSwapResponse } from "@getalby/sdk/dist/oauth/types";
 import {
   PopiconsChevronLeftLine,
@@ -66,15 +66,6 @@ function SendToBitcoinAddress() {
     keyPrefix: "send_to_bitcoin_address",
   });
   const { t: tCommon } = useTranslation("common");
-
-  useEffect(() => {
-    (async () => {
-      if (amountSat !== "" && showFiat) {
-        const res = await getFormattedFiat(amountSat);
-        setFiatAmount(res);
-      }
-    })();
-  }, [amountSat, showFiat, getFormattedFiat]);
 
   useEffect(() => {
     (async () => {
@@ -257,9 +248,12 @@ function SendToBitcoinAddress() {
                   label={tCommon("amount")}
                   min={amountMin}
                   max={amountMax}
-                  onChange={(e) => setAmountSat(e.target.value)}
+                  onChange={(e: DualCurrencyFieldChangeEvent) => {
+                    setAmountSat(e.target.value);
+                    setFiatAmount(e.target.formattedValueInFiat);
+                  }}
+                  showFiat={showFiat}
                   value={amountSat}
-                  fiatValue={fiatAmount}
                   rangeExceeded={rangeExceeded}
                   amountExceeded={amountExceeded}
                   hint={`${tCommon("balance")}: ${auth?.balancesDecorated
