@@ -3,9 +3,9 @@ import axios from "axios";
 import lightningPayReq from "bolt11";
 import { isLNURLDetailsError } from "~/common/utils/typeHelpers";
 import {
+  LNURLAuthServiceResponse,
   LNURLDetails,
   LNURLError,
-  LNURLAuthServiceResponse,
   LNURLPaymentInfo,
 } from "~/types";
 
@@ -105,11 +105,15 @@ const lnurl = {
 
         return lnurlDetails;
       } catch (e) {
-        throw new Error(
-          `Connection problem or invalid lnurl / lightning address: ${
-            e instanceof Error ? e.message : ""
-          }`
-        );
+        let error = "";
+        if (axios.isAxiosError(e)) {
+          error =
+            (e.response?.data as { reason?: string })?.reason || e.message;
+        } else if (e instanceof Error) {
+          error = e.message;
+        }
+
+        throw new Error(error);
       }
     }
   },
