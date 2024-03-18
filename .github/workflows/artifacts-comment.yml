@@ -1,11 +1,10 @@
 name: Comment on pull request
 on:
   workflow_run:
-    workflows: ["Build nightlies"]
+    workflows: ["Test workflow with upload"]
     types: [completed]
 jobs:
   pr_comment:
-    if: ${{ github.event.workflow_run.event == 'pull_request' && github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/setup-node@v2
