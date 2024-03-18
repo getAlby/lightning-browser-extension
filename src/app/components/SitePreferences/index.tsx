@@ -204,6 +204,7 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
             <Setting
               title={t("enable_login.title")}
               subtitle={t("enable_login.subtitle")}
+              inline={true}
             >
               <Toggle
                 checked={lnurlAuth}
@@ -222,6 +223,7 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
                   <Fragment key={permission.id}>
                     <Setting
                       title={permission.method}
+                      inline={true}
                       subtitle={tPermissions(
                         permission.method
                           .toLowerCase()
