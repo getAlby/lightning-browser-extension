@@ -251,12 +251,14 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
                                   .toString()
                                   .concat(".title")}`,
                                 {
-                                  defaultValue: permission.method
-                                    .split("/")
-                                    .slice(-1)
-                                    .toString(),
+                                  defaultValue: tNostr("kinds.unknown.title", {
+                                    kind: permission.method
+                                      .split("/")
+                                      .slice(-1)
+                                      .toString(),
+                                  }),
                                 }
-                              ).toUpperCase()
+                              )
                             : tPermissions(
                                 permission.method
                                   .toLowerCase()
@@ -286,10 +288,15 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
                                   .toString()
                                   .concat(".description")}`,
                                 {
-                                  defaultValue: permission.method
-                                    .split("/")
-                                    .slice(-1)
-                                    .toString(),
+                                  defaultValue: tNostr(
+                                    "kinds.unknown.description",
+                                    {
+                                      kind: permission.method
+                                        .split("/")
+                                        .slice(-1)
+                                        .toString(),
+                                    }
+                                  ),
                                 }
                               )
                             : tPermissions(
