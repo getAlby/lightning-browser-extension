@@ -97,7 +97,7 @@ const lnurl = {
         const lnurlDetails = data;
 
         if (isLNURLDetailsError(lnurlDetails)) {
-          throw new Error(`LNURL Error: ${lnurlDetails.reason}`);
+          throw new Error(lnurlDetails.reason);
         } else {
           lnurlDetails.domain = url.hostname;
           lnurlDetails.url = url.toString();
