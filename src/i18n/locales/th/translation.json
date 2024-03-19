@@ -615,9 +615,6 @@
         "send_satoshis": "⚡️ส่งซาโตชิ⚡️",
         "enable_now": "เปิดใช้งานเดี๋ยวนี้"
       },
-      "allowance_view": {
-        "no_transactions": "ยังไม่มีธุรกรรมบน <0>{{name}}</0>"
-      },
       "default_view": {
         "is_blocked_hint": "Alby ถูกปิดใช้งานบน {{host}}",
         "block_removed": "เปิดใช้งาน {{host}} โปรด รีเฟรชหน้าเว็บไซต์"
@@ -717,8 +714,7 @@
       "tor_info": "ในการเชื่อมต่อผ่านเครือข่าย TOR คุณต้องติดตั้ง Alby companion app เสียก่อน:"
     },
     "transactions": {
-      "title": "การทำธุรกรรม",
-      "list_empty": "ยังไม่มีการทำธุรกรรม"
+      "title": "การทำธุรกรรม"
     }
   },
   "permissions": {

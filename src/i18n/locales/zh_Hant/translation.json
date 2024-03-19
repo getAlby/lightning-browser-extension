@@ -253,9 +253,6 @@
         "send_satoshis": "⚡️ 發送聰 ⚡️",
         "enable_now": "立即啟用"
       },
-      "allowance_view": {
-        "no_transactions": "<0>{{name}}</0> 上還沒有交易。"
-      },
       "default_view": {
         "is_blocked_hint": "Alby目前在 {{host}} 上被禁用",
         "block_removed": "已啟用 {{host}}。請重新載入網站。"
@@ -644,8 +641,7 @@
       }
     },
     "transactions": {
-      "title": "交易",
-      "list_empty": "尚無可用交易。"
+      "title": "交易"
     },
     "distributions": {
       "title": "連接 {{name}}",

@@ -290,7 +290,6 @@
         "enable_now": "Dovoli zdaj"
       },
       "allowance_view": {
-        "no_transactions": "NA <0>{{name}}</0> še ni transakcij.",
         "sats": "sats",
         "budget_spent": "Porabljen proračun",
         "total_spent": "Porabljeno skupaj",

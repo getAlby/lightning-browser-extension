@@ -275,9 +275,6 @@
         "send_satoshis": "⚡️ ارسال ساتوشی ⚡️",
         "enable_now": "اکنون فعال کن"
       },
-      "allowance_view": {
-        "no_transactions": "هنوز تراکنشی در <0>{{name}}</0> نیست."
-      },
       "default_view": {
         "is_blocked_hint": "البی در حال حاضر در {{host}} غیرفعال شده است",
         "block_removed": "{{host}} فعال شد. لطفا دوباره بارگیری کنید."
@@ -669,8 +666,7 @@
       }
     },
     "transactions": {
-      "title": "تراکنش ها",
-      "list_empty": "هنوز هیچ تراکنشی موجود نیست."
+      "title": "تراکنش ها"
     },
     "on_chain": {
       "instructions1": "برای دریافت بیتکوین از طریق آدرس بیتکوین، وارد <0>حساب البی</0> خود در getalby.com شوید",
