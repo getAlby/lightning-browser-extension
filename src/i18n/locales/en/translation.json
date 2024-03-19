@@ -950,8 +950,7 @@
     },
     "transactions": {
       "title": "Transactions",
-      "description": "Transactions for this account",
-      "no_transactions": "No transactions yet."
+      "description": "Transactions for this account"
     },
     "onboard": {
       "title": "Setup your keys",
