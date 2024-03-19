@@ -373,7 +373,7 @@
         "actions": {
           "get_started": {
             "title": "Get Started With Alby Extension",
-            "description": "New to Alby Extension? Check out our guides, videos, and explanations"
+            "description": "New to Alby Extension? Check out our guides, videos and explanations"
           },
           "setup_keys": {
             "title": "Setup your keys",
@@ -381,7 +381,7 @@
           },
           "receive_bitcoin": {
             "title": "Receive bitcoin",
-            "description": "Get bitcoin to your lightning address, a lightning invoice or bitcoin address."
+            "description": "Fund your account and receive via your lightning address or an invoice"
           }
         }
       }

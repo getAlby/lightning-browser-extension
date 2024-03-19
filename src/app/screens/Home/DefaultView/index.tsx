@@ -191,51 +191,57 @@ const DefaultView: FC<Props> = (props) => {
 
         {!isLoading && (
           <div className="mt-4 flex flex-col gap-4">
-            <div className="flex flex-col gap-2 md:gap-3">
-              {transactions.length > 0 && (
-                <IconLinkCard
-                  title={t("default_view.actions.get_started.title")}
-                  description={t(
-                    "default_view.actions.get_started.description"
-                  )}
-                  icon={<PopiconsBulbLine className="w-8 h-8" />}
-                  onClick={() => {
-                    utils.openUrl(
-                      "https://guides.getalby.com/user-guide/v/alby-account-and-browser-extension/"
-                    );
-                  }}
-                />
-              )}
-
-              {!(
-                currentAccount?.hasMnemonic &&
-                currentAccount?.isMnemonicBackupDone
-              ) && (
-                <IconLinkCard
-                  title={t("default_view.actions.setup_keys.title")}
-                  description={t("default_view.actions.setup_keys.description")}
-                  icon={<PopiconsKeyLine className="w-8 h-8" />}
-                  onClick={async () => {
-                    openOptions(
-                      `accounts/${currentAccount?.id}/secret-key/new`
-                    );
-                  }}
-                />
-              )}
-
-              {transactions.length == 0 && (
-                <IconLinkCard
-                  title={t("default_view.actions.receive_bitcoin.title")}
-                  description={t(
-                    "default_view.actions.receive_bitcoin.description"
-                  )}
-                  icon={<PopiconsArrowDownLine className="w-8 h-8" />}
-                  onClick={() => {
-                    navigate("/receive");
-                  }}
-                />
-              )}
-            </div>
+            {(transactions.length === 0 ||
+              (!currentAccount?.hasMnemonic &&
+                currentAccount?.isMnemonicBackupDone)) && (
+              <div className="flex flex-col gap-2 md:gap-3">
+                {transactions.length === 0 && (
+                  <IconLinkCard
+                    title={t("default_view.actions.get_started.title")}
+                    description={t(
+                      "default_view.actions.get_started.description"
+                    )}
+                    icon={<PopiconsBulbLine className="w-8 h-8" />}
+                    onClick={() => {
+                      utils.openUrl(
+                        "https://guides.getalby.com/user-guide/v/alby-account-and-browser-extension/"
+                      );
+                    }}
+                  />
+                )}
+                {
+                  !(
+                    currentAccount?.hasMnemonic &&
+                    currentAccount?.isMnemonicBackupDone && (
+                      <IconLinkCard
+                        title={t("default_view.actions.setup_keys.title")}
+                        description={t(
+                          "default_view.actions.setup_keys.description"
+                        )}
+                        icon={<PopiconsKeyLine className="w-8 h-8" />}
+                        onClick={async () => {
+                          openOptions(
+                            `accounts/${currentAccount?.id}/secret-key/new`
+                          );
+                        }}
+                      />
+                    )
+                  )
+                }
+                {transactions.length === 0 && (
+                  <IconLinkCard
+                    title={t("default_view.actions.receive_bitcoin.title")}
+                    description={t(
+                      "default_view.actions.receive_bitcoin.description"
+                    )}
+                    icon={<PopiconsArrowDownLine className="w-8 h-8" />}
+                    onClick={() => {
+                      navigate("/receive");
+                    }}
+                  />
+                )}
+              </div>
+            )}
 
             <TransactionsTable
               transactions={transactions}
