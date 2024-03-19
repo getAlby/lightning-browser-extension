@@ -230,7 +230,6 @@
         "enable_now": "Aktivera Nu"
       },
       "allowance_view": {
-        "no_transactions": "Inga transaktioner för <0>{{name}}</0> ännu.",
         "sats": "sats",
         "budget_spent": "Budget förbrukad",
         "total_spent": "Totalt spenderat",
@@ -672,7 +671,6 @@
     },
     "transactions": {
       "title": "Transaktion",
-      "list_empty": "Inga transaktioner tillgängliga ännu.",
       "description": "Transaktioner för detta konto"
     },
     "distributions": {
