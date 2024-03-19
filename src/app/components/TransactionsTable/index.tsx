@@ -37,13 +37,15 @@ export default function TransactionsTable({
   }
 
   return (
-    <div className="mt-4">
+    <div>
       {loading ? (
         <div className="w-full flex flex-col items-center">
           <Loading />
         </div>
-      ) : !transactions?.length && noResultMsg ? (
-        <p className="text-gray-500 dark:text-neutral-400">{noResultMsg}</p>
+      ) : !transactions?.length ? (
+        <p className="text-gray-500 dark:text-neutral-400">
+          {t("no_transactions")}
+        </p>
       ) : (
         <>
           {transactions?.map((tx) => {

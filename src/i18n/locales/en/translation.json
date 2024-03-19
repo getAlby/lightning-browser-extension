@@ -361,7 +361,6 @@
       "allowance_view": {
         "budget_spent": "Budget spent",
         "sats": "sats",
-        "no_transactions": "No transactions on <0>{{name}}</0> yet.",
         "total_spent": "Total spent",
         "total_payments": "Total payments",
         "permissions": "Permissions"
@@ -374,7 +373,7 @@
         "actions": {
           "get_started": {
             "title": "Get Started With Alby Extension",
-            "description": "New to Alby Extension? Check out our guides, videos, and explanations"
+            "description": "New to Alby Extension? Check out our guides, videos and explanations"
           },
           "setup_keys": {
             "title": "Setup your keys",
@@ -382,7 +381,7 @@
           },
           "receive_bitcoin": {
             "title": "Receive bitcoin",
-            "description": "Get bitcoin to your lightning address, a lightning invoice or bitcoin address."
+            "description": "Fund your account and receive via your lightning address or an invoice"
           }
         }
       }
@@ -951,8 +950,7 @@
     },
     "transactions": {
       "title": "Transactions",
-      "description": "Transactions for this account",
-      "list_empty": "No transactions available yet."
+      "description": "Transactions for this account"
     },
     "onboard": {
       "title": "Setup your keys",
@@ -1106,7 +1104,8 @@
         "timestamp": "Timestamp",
         "totalAmount": "Total amount"
       },
-      "open_location": "Open website"
+      "open_location": "Open website",
+      "no_transactions": "No transactions yet."
     },
     "budget_control": {
       "remember": {
