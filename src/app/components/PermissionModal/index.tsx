@@ -80,7 +80,7 @@ export default function PermissionModal({
       <div className="flex flex-row gap-2 items-center py-1">
         <input
           type="radio"
-          id="set-permission"
+          id={checkedValue}
           name="permission"
           value="permission"
           checked={permissionOption === checkedValue}
@@ -90,7 +90,7 @@ export default function PermissionModal({
           className="bg-white dark:bg-surface-01dp border border-gray-200 dark:border-neutral-700 cursor-pointer text-primary focus:ring-0 focus:ring-offset-0"
         />
         <label
-          htmlFor="set-permission"
+          htmlFor={checkedValue}
           className="text-sm text-gray-600 dark:text-neutral-400 cursor-pointer"
         >
           <Trans
