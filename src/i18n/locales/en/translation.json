@@ -1160,6 +1160,7 @@
       }
     },
     "permissions_modal": {
+      "content_label": "Permissions",
       "set_permissions": "Set Permissions:",
       "ask_everytime": "Ask everytime for <0>{{permission}}</0>",
       "dont_ask_current": "Don't ask again for <0>{{permission}}</0>",

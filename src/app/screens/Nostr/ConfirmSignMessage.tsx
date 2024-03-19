@@ -128,7 +128,7 @@ function ConfirmSignMessage() {
                 onClose={() => {
                   setModalOpen(false);
                 }}
-                PermssionCallback={(permission) => {
+                permssionCallback={(permission) => {
                   setPermissionOption(permission);
                   setModalOpen(false);
                 }}

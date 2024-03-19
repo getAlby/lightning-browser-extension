@@ -11,14 +11,14 @@ type PermissionOption = "ask_everytime" | "dont_ask_current" | "dont_ask_any";
 type Props = {
   onClose: () => void;
   isOpen: boolean;
-  PermssionCallback: (permission: PermissionOption) => void;
+  permssionCallback: (permission: PermissionOption) => void;
   permission: PermissionOption;
 };
 
 export default function PermissionModal({
   isOpen,
   onClose,
-  PermssionCallback,
+  permssionCallback,
   permission,
 }: Props) {
   const { t: tCommon } = useTranslation("common");
@@ -37,7 +37,7 @@ export default function PermissionModal({
       close={() => {
         onClose();
       }}
-      contentLabel={"Transactions"}
+      contentLabel={t("content_label")}
       position="top"
     >
       <div className="dark:text-white mt-6">
@@ -62,7 +62,7 @@ export default function PermissionModal({
               primary
               flex
               onClick={() =>
-                PermssionCallback(permissionOption as PermissionOption)
+                permssionCallback(permissionOption as PermissionOption)
               }
             />
           </div>
