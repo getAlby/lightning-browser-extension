@@ -53,6 +53,8 @@ const DefaultView: FC<Props> = (props) => {
     useTransactions();
 
   const isLoading = accountLoading || isLoadingTransactions;
+  const needsKeySetup =
+    !currentAccount?.hasMnemonic || !currentAccount?.isMnemonicBackupDone;
 
   useEffect(() => {
     loadTransactions(itemsLimit);
@@ -191,9 +193,7 @@ const DefaultView: FC<Props> = (props) => {
 
         {!isLoading && (
           <div className="mt-4 flex flex-col gap-4">
-            {(transactions.length === 0 ||
-              (!currentAccount?.hasMnemonic &&
-                currentAccount?.isMnemonicBackupDone)) && (
+            {(transactions.length === 0 || needsKeySetup) && (
               <div className="flex flex-col gap-2 md:gap-3">
                 {transactions.length === 0 && (
                   <IconLinkCard
@@ -209,25 +209,20 @@ const DefaultView: FC<Props> = (props) => {
                     }}
                   />
                 )}
-                {
-                  !(
-                    currentAccount?.hasMnemonic &&
-                    currentAccount?.isMnemonicBackupDone && (
-                      <IconLinkCard
-                        title={t("default_view.actions.setup_keys.title")}
-                        description={t(
-                          "default_view.actions.setup_keys.description"
-                        )}
-                        icon={<PopiconsKeyLine className="w-8 h-8" />}
-                        onClick={async () => {
-                          openOptions(
-                            `accounts/${currentAccount?.id}/secret-key/new`
-                          );
-                        }}
-                      />
-                    )
-                  )
-                }
+                {needsKeySetup && (
+                  <IconLinkCard
+                    title={t("default_view.actions.setup_keys.title")}
+                    description={t(
+                      "default_view.actions.setup_keys.description"
+                    )}
+                    icon={<PopiconsKeyLine className="w-8 h-8" />}
+                    onClick={async () => {
+                      openOptions(
+                        `accounts/${currentAccount?.id}/secret-key/new`
+                      );
+                    }}
+                  />
+                )}
                 {transactions.length === 0 && (
                   <IconLinkCard
                     title={t("default_view.actions.receive_bitcoin.title")}
