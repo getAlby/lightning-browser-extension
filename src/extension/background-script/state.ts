@@ -214,12 +214,14 @@ const state = create<State>((set, get) => ({
 
     // https://stackoverflow.com/a/54317362/1667461
     const allTabIds = Array.from(allTabs, (tab) => tab.id).filter(
-      (i): i is number => {
-        return typeof i === "number";
+      (id, index): id is number => {
+        // Safari: allTabs consist of Start Pages too
+        return typeof id === "number" && allTabs[index].title !== "";
       }
     );
 
-    browser.tabs.remove(allTabIds);
+    // Safari: extension popup is not a tab
+    if (allTabIds.length) browser.tabs.remove(allTabIds);
 
     if (get().connector) {
       const connector = (await get().connector) as Connector;

@@ -62,12 +62,14 @@ const Home: FC = () => {
       if (currentUrl) {
         const url = new URL(currentUrl);
         setCurrentUrl(url);
-      }
 
-      if (currentUrl && currentUrl.startsWith("http")) {
-        browser.tabs.sendMessage(tabs[0].id as number, {
-          action: "extractLightningData",
-        });
+        if (currentUrl.startsWith("http")) {
+          browser.tabs.sendMessage(tabs[0].id as number, {
+            action: "extractLightningData",
+          });
+        }
+      } else {
+        setLoadingAllowance(false);
       }
     };
 
