@@ -12,12 +12,20 @@ import PermissionModal from "~/app/components/PermissionModal";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import toast from "~/app/components/Toast";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
-import { USER_REJECTED_ERROR } from "~/common/constants";
+import {
+  ASK_EVERYTIME,
+  DONT_ASK_ANY,
+  DONT_ASK_CURRENT,
+  USER_REJECTED_ERROR,
+} from "~/common/constants";
 import msg from "~/common/lib/msg";
 import { Event } from "~/extension/providers/nostr/types";
 import type { OriginData } from "~/types";
 
-type PermissionOption = "ask_everytime" | "dont_ask_current" | "dont_ask_any";
+type PermissionOption =
+  | typeof ASK_EVERYTIME
+  | typeof DONT_ASK_CURRENT
+  | typeof DONT_ASK_ANY;
 
 function ConfirmSignMessage() {
   const navState = useNavigationState();

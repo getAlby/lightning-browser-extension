@@ -4,9 +4,17 @@ import Button from "~/app/components/Button";
 import Modal from "~/app/components/Modal";
 import PublisherCard from "~/app/components/PublisherCard";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
+import {
+  ASK_EVERYTIME,
+  DONT_ASK_ANY,
+  DONT_ASK_CURRENT,
+} from "~/common/constants";
 import { OriginData } from "~/types";
 
-type PermissionOption = "ask_everytime" | "dont_ask_current" | "dont_ask_any";
+type PermissionOption =
+  | typeof ASK_EVERYTIME
+  | typeof DONT_ASK_CURRENT
+  | typeof DONT_ASK_ANY;
 
 type Props = {
   onClose: () => void;
@@ -52,9 +60,9 @@ export default function PermissionModal({
           <p className="text-md">{t("set_permissions")}</p>
 
           <div className="flex flex-col gap-1">
-            <ListItem checkedValue="ask_everytime" />
-            <ListItem checkedValue="dont_ask_current" />
-            <ListItem checkedValue="dont_ask_any" />
+            <ListItem checkedValue={ASK_EVERYTIME} />
+            <ListItem checkedValue={DONT_ASK_CURRENT} />
+            <ListItem checkedValue={DONT_ASK_ANY} />
           </div>
           <div className="flex">
             <Button

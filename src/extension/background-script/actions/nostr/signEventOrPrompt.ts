@@ -6,6 +6,7 @@ import {
 } from "~/extension/background-script/permissions";
 import { MessageSignEvent, PermissionMethodNostr, Sender } from "~/types";
 
+import { DONT_ASK_ANY, DONT_ASK_CURRENT } from "~/common/constants";
 import state from "../../state";
 import { validateEvent } from "./helpers";
 
@@ -44,14 +45,14 @@ const signEventOrPrompt = async (message: MessageSignEvent, sender: Sender) => {
       });
 
       // add permission to db only if user decided to always allow this request
-      if (promptResponse.data.permissionOption == "dont_ask_current") {
+      if (promptResponse.data.permissionOption == DONT_ASK_CURRENT) {
         await addPermissionFor(
           PermissionMethodNostr["NOSTR_SIGNMESSAGE"] + "/" + event.kind,
           host
         );
       }
 
-      if (promptResponse.data.permissionOption == "dont_ask_any") {
+      if (promptResponse.data.permissionOption == DONT_ASK_ANY) {
         await addPermissionFor(
           PermissionMethodNostr["NOSTR_SIGNMESSAGE"],
           host
