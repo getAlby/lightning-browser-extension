@@ -237,7 +237,7 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
                     <Fragment key={permission.id}>
                       <Badge
                         key={permission.method}
-                        sitePermission={
+                        label={
                           permission.method
                             .toLowerCase()
                             .split("/")
@@ -314,7 +314,7 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
                                 }
                               )
                         }
-                        delete={() => {
+                        onDelete={() => {
                           setPermissions(
                             permissions.map((prm) =>
                               prm.id === permission.id

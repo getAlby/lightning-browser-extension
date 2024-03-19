@@ -1,27 +1,20 @@
 import { PopiconsXLine } from "@popicons/react";
 import { useState } from "react";
-import { useTranslation } from "react-i18next";
 import { classNames } from "~/app/utils";
 
 type Props = {
-  label?: "budget" | "auth" | "imported";
-  sitePermission?: string;
+  label: string;
   className: string;
-  delete?: () => void;
+  onDelete?: () => void;
   description?: string;
 };
 
 export default function Badge({
   label,
   className,
-  sitePermission,
-  delete: deletePermission,
+  onDelete,
   description,
 }: Props) {
-  const { t: tComponents } = useTranslation("components", {
-    keyPrefix: "badge",
-  });
-
   const [showBadge, setShowBadge] = useState(true);
 
   return (
@@ -34,12 +27,12 @@ export default function Badge({
           )}
           title={description}
         >
-          {label ? tComponents(`label.${label}`) : sitePermission}
-          {deletePermission && (
+          {label}
+          {onDelete && (
             <button
               type="button"
               onClick={() => {
-                deletePermission();
+                onDelete();
                 setShowBadge(false);
               }}
               className="text-gray-400 dark:text-neutral-600 hover:text-gray-600 dark:hover:text-neutral-400"

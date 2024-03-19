@@ -1238,9 +1238,9 @@
     },
     "badge": {
       "label": {
-        "auth": "LOGIN",
-        "imported": "IMPORTED",
-        "budget": "BUDGET"
+        "auth": "login",
+        "imported": "imported",
+        "budget": "budget"
       }
     }
   },
