@@ -254,7 +254,6 @@
         "enable_now": "Ativar"
       },
       "allowance_view": {
-        "no_transactions": "Sem transações em <0>{{name}}</0>.",
         "sats": "sats",
         "budget_spent": "Limite de gastos",
         "total_spent": "Total gasto",
@@ -743,7 +742,6 @@
     },
     "transactions": {
       "title": "Transações",
-      "list_empty": "Sem transações.",
       "description": "Extrato de transações desta conta"
     },
     "distributions": {
