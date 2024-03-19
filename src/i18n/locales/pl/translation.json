@@ -278,7 +278,6 @@
         "enable_now": "Włącz teraz"
       },
       "allowance_view": {
-        "no_transactions": "Jeszcze nie ma transakcji na koncie <0>{{name}}</0>.",
         "sats": "sats",
         "budget_spent": "Wykorzystany budżet",
         "permissions": "Uprawnienia"
@@ -639,8 +638,7 @@
       "view_details": "Pokaż szczegóły"
     },
     "transactions": {
-      "title": "Transakcje",
-      "list_empty": "Brak dostępnych transakcji."
+      "title": "Transakcje"
     },
     "distributions": {
       "description": "Wybierz z którą aplikacją {{name}} chcesz się połączyć",
