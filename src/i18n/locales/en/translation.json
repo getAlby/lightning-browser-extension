@@ -1247,33 +1247,33 @@
   "permissions": {
     "webln": {
       "getbalance": {
-        "title": "Get Balance",
+        "title": "get balance",
         "description": "Read the balance of your account"
       }
     },
     "bitcoin": {
       "getaddress": {
-        "title": "Get Address",
+        "title": "get address",
         "description": "Read your Bitcoin receive address"
       }
     },
     "liquid": {
       "getaddress": {
-        "title": "Get Address",
+        "title": "get address",
         "description": "Read your Liquid receive address"
       },
       "signschnorr": {
-        "title": "Sign Schnorr",
+        "title": "sign schnorr",
         "description": "Sign message with your key"
       }
     },
     "nostr": {
       "getpublickey": {
-        "title": "Read Public Key",
+        "title": "read public key",
         "description": "Read your public key"
       },
       "decrypt": {
-        "title": "Decrypt Data",
+        "title": "decrypt data",
         "description": "Allow NIP04 Data Decryption"
       }
     },
