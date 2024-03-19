@@ -1,5 +1,4 @@
 import Container from "@components/Container";
-import Loading from "@components/Loading";
 import TransactionsTable from "@components/TransactionsTable";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
@@ -31,17 +30,7 @@ function Transactions() {
         {t("description")}
       </p>
 
-      {isLoading ? (
-        <div className="flex justify-center mt-12">
-          <Loading />
-        </div>
-      ) : (
-        <div>
-          {transactions && transactions.length > 0 && (
-            <TransactionsTable transactions={transactions} />
-          )}
-        </div>
-      )}
+      <TransactionsTable loading={isLoading} transactions={transactions} />
     </Container>
   );
 }
