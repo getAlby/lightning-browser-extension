@@ -190,9 +190,9 @@ const DefaultView: FC<Props> = (props) => {
         )}
 
         {!isLoading && (
-          <div>
-            <div className="flex flex-col mt-4 gap-2 md:gap-3">
-              {transactions.length == 0 && (
+          <div className="mt-4 flex flex-col gap-4">
+            <div className="flex flex-col gap-2 md:gap-3">
+              {transactions.length > 0 && (
                 <IconLinkCard
                   title={t("default_view.actions.get_started.title")}
                   description={t(
@@ -236,6 +236,7 @@ const DefaultView: FC<Props> = (props) => {
                 />
               )}
             </div>
+
             <TransactionsTable
               transactions={transactions}
               loading={isLoading}

@@ -361,7 +361,6 @@
       "allowance_view": {
         "budget_spent": "Budget spent",
         "sats": "sats",
-        "no_transactions": "No transactions on <0>{{name}}</0> yet.",
         "total_spent": "Total spent",
         "total_payments": "Total payments",
         "permissions": "Permissions"
@@ -952,7 +951,7 @@
     "transactions": {
       "title": "Transactions",
       "description": "Transactions for this account",
-      "list_empty": "No transactions available yet."
+      "no_transactions": "No transactions yet."
     },
     "onboard": {
       "title": "Setup your keys",
@@ -1106,7 +1105,8 @@
         "timestamp": "Timestamp",
         "totalAmount": "Total amount"
       },
-      "open_location": "Open website"
+      "open_location": "Open website",
+      "no_transactions": "No transactions yet."
     },
     "budget_control": {
       "remember": {
