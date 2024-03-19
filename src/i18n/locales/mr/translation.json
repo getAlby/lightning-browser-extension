@@ -243,9 +243,6 @@
         "send_satoshis": "⚡️  Satoshis पाठवा ⚡️",
         "enable_now": "आता सुरू करा"
       },
-      "allowance_view": {
-        "no_transactions": "अद्याप <0>{{name}}</0> वर कोणतेही व्यवहार नाहीत."
-      },
       "default_view": {
         "is_blocked_hint": "Alby सध्या {{host}} वर अक्षम आहे",
         "block_removed": "{{host}} सक्षम केले. कृपया वेबसाइट रीलोड करा."
@@ -553,8 +550,7 @@
       }
     },
     "transactions": {
-      "title": "व्यवहार",
-      "list_empty": "अद्याप कोणतेही व्यवहार उपलब्ध नाहीत."
+      "title": "व्यवहार"
     }
   },
   "common": {
