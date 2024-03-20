@@ -930,7 +930,10 @@
           "title": "share profile",
           "description": "Share your name, description, profile picture, Nostr address and additional profile metadata."
         },
-        "1": { "title": "short note", "description": "Sign a short text note" },
+        "1": {
+          "title": "short note",
+          "description": "Sign a short text note"
+        },
         "2": {
           "title": "recommend relay",
           "description": "Share a recommended relay"
@@ -1273,7 +1276,7 @@
       },
       "decrypt": {
         "title": "decrypt data",
-        "description": "Allow NIP04 Data Decryption"
+        "description": "Decrypt data"
       }
     },
     "commando": {
