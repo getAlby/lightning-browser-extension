@@ -4,6 +4,7 @@ import Button from "~/app/components/Button";
 import Modal from "~/app/components/Modal";
 import PublisherCard from "~/app/components/PublisherCard";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
+import { classNames } from "~/app/utils";
 import {
   ASK_EVERYTIME,
   DONT_ASK_ANY,
@@ -95,7 +96,12 @@ export default function PermissionModal({
           onChange={() => {
             setPermissionOption(checkedValue);
           }}
-          className="bg-white dark:bg-surface-01dp border border-gray-200 dark:border-neutral-700 cursor-pointer text-primary focus:ring-0 focus:ring-offset-0"
+          className={classNames(
+            "border border-gray-200 dark:border-neutral-700 cursor-pointer text-primary focus:ring-0 focus:ring-offset-0",
+            permissionOption !== checkedValue
+              ? "bg-white dark:bg-surface-01dp"
+              : ""
+          )}
         />
         <label
           htmlFor={checkedValue}
