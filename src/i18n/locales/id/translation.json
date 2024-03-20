@@ -274,9 +274,6 @@
         "send_satoshis": "⚡️ Kirim Satoshis ⚡️",
         "enable_now": "Aktifkan Sekarang"
       },
-      "allowance_view": {
-        "no_transactions": "Tidak ada transaksi pada <0>{{name}}</0>."
-      },
       "default_view": {
         "is_blocked_hint": "Alby sedang tidak aktif pada {{host}}",
         "block_removed": "Aktifkan {{host}}. Silakan muat ulang website."
@@ -661,8 +658,7 @@
       "tor_info": "Untuk menghubungkan melalui jaringan TOR kamu perlu memasang aplikasi pendamping Alby:"
     },
     "transactions": {
-      "title": "Transaksi",
-      "list_empty": "Tidak ada transaksi."
+      "title": "Transaksi"
     }
   },
   "components": {

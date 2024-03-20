@@ -243,9 +243,6 @@
         "send_satoshis": "⚡️ Send Satoshi ⚡️",
         "enable_now": "Aktiver nu"
       },
-      "allowance_view": {
-        "no_transactions": "Endnu ingen transaktioner på <0>{{navn}}</0>."
-      },
       "default_view": {
         "is_blocked_hint": "Alby er i øjeblikket deaktiveret på {{vært}}",
         "block_removed": "{{vært}} blev aktiveret. Indlæs hjemmesiden igen."

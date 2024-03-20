@@ -243,9 +243,6 @@
         "send_satoshis": "⚡️ Envoyez des Satoshis ⚡️",
         "enable_now": "Activer maintenant"
       },
-      "allowance_view": {
-        "no_transactions": "Aucune transaction sur <0>{{name}}</0> pour le moment."
-      },
       "default_view": {
         "is_blocked_hint": "Alby est actuellement désactivé sur {{host}}",
         "block_removed": "{{hôte}} activé. Veuillez recharger le site Web."

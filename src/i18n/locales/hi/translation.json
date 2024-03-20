@@ -577,7 +577,6 @@
     },
     "transactions": {
       "title": "लेन-देन",
-      "list_empty": "अभी तक कोई लेन-देन उपलब्ध नहीं है।",
       "description": "इस खाते के लिए लेनदेन"
     },
     "distributions": {
@@ -832,8 +831,7 @@
         "budget_spent": "बजट खर्च हुआ",
         "total_spent": "कुल खर्च",
         "total_payments": "कुल भुगतान",
-        "permissions": "अनुमति",
-        "no_transactions": "<0>{{name}}</0> पर अभी तक कोई लेन-देन नहीं।"
+        "permissions": "अनुमति"
       },
       "default_view": {
         "block_removed": "{{host}} सक्षम किया गया। कृपया वेबसाइट पुनः लोड करें।",

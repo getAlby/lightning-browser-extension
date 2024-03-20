@@ -218,9 +218,6 @@
       }
     },
     "home": {
-      "allowance_view": {
-        "no_transactions": "<0>{{name}}</0>还没有交易。"
-      },
       "default_view": {
         "is_blocked_hint": "Alby 目前在 {{host}} 上被禁用",
         "block_removed": "启用了{{host}}。请重新加载网站。"
@@ -637,7 +634,6 @@
       "success": "通道请求已成功发送到 {{name}}"
     },
     "transactions": {
-      "list_empty": "尚无交易。",
       "title": "交易"
     },
     "distributions": {

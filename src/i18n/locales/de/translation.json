@@ -416,7 +416,6 @@
         }
       },
       "allowance_view": {
-        "no_transactions": "Noch keine Transaktionen auf <0>{{Name}}</0>.",
         "sats": "sats",
         "budget_spent": "Budget",
         "total_spent": "Insgesamt ausgegeben",
@@ -806,7 +805,6 @@
     },
     "transactions": {
       "title": "Transaktionen",
-      "list_empty": "Noch keine Transaktionen verfügbar.",
       "description": "Buchungen für dieses Konto"
     },
     "distributions": {

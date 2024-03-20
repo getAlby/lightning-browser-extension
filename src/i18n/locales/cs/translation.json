@@ -226,7 +226,6 @@
         "enable_now": "Povolit nyní"
       },
       "allowance_view": {
-        "no_transactions": "Prozatím žádné transakce na <0>{{name}}</0>.",
         "sats": "satů",
         "total_spent": "Cekově utraceno",
         "total_payments": "Platby celkem",
@@ -291,7 +290,6 @@
           "placeholder": "Jméno účtu"
         },
         "mnemonic": {
-          "new": {},
           "generate": {
             "button": "Vygenerovat Master klíč",
             "title": "Vygenerování nového Master klíče"
