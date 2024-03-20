@@ -120,6 +120,20 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
     return ids;
   }
 
+  // returns actual permission kind (permission name)
+  function getPermissionKind(permission: Permission): string {
+    return permission.method.split(/[./]/).slice(-1).toString();
+  }
+
+  //constructs i18n key for the permission translations
+  function getPermissionKey(permission: Permission): string {
+    if (permission.method.includes("/")) {
+      return permission.method.toLowerCase().split("/").slice(0, 2).join(".");
+    } else {
+      return permission.method.toLowerCase();
+    }
+  }
+
   async function updateAllowance() {
     try {
       await msg.request("updateAllowance", {
@@ -244,33 +258,19 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
                             .slice(0, 2)
                             .join("/") == "nostr/signmessage"
                             ? tNostr(
-                                `kinds.${permission.method
-                                  .toLowerCase()
-                                  .split("/")
-                                  .slice(-1)
-                                  .toString()
-                                  .concat(".title")}`,
+                                `kinds.${getPermissionKind(permission).concat(
+                                  ".title"
+                                )}`,
                                 {
                                   defaultValue: tNostr("kinds.unknown.title", {
-                                    kind: permission.method
-                                      .split("/")
-                                      .slice(-1)
-                                      .toString(),
+                                    kind: getPermissionKind(permission),
                                   }),
                                 }
                               )
                             : tPermissions(
-                                permission.method
-                                  .toLowerCase()
-                                  .split("/")
-                                  .slice(0, 2)
-                                  .join(".")
-                                  .concat(".title"),
+                                getPermissionKey(permission).concat(".title"),
                                 {
-                                  defaultValue: permission.method
-                                    .split("/")
-                                    .slice(-1)
-                                    .toString(),
+                                  defaultValue: getPermissionKind(permission),
                                 }
                               )
                         }
@@ -281,36 +281,24 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
                             .slice(0, 2)
                             .join("/") == "nostr/signmessage"
                             ? tNostr(
-                                `kinds.${permission.method
-                                  .toLowerCase()
-                                  .split("/")
-                                  .slice(-1)
-                                  .toString()
-                                  .concat(".description")}`,
+                                `kinds.${getPermissionKind(permission).concat(
+                                  ".description"
+                                )}`,
                                 {
                                   defaultValue: tNostr(
                                     "kinds.unknown.description",
                                     {
-                                      kind: permission.method
-                                        .split("/")
-                                        .slice(-1)
-                                        .toString(),
+                                      kind: getPermissionKind(permission),
                                     }
                                   ),
                                 }
                               )
                             : tPermissions(
-                                permission.method
-                                  .toLowerCase()
-                                  .split("/")
-                                  .slice(0, 2)
-                                  .join(".")
-                                  .concat(".description"),
+                                getPermissionKey(permission).concat(
+                                  ".description"
+                                ),
                                 {
-                                  defaultValue: permission.method
-                                    .split("/")
-                                    .slice(-1)
-                                    .toString(),
+                                  defaultValue: getPermissionKind(permission),
                                 }
                               )
                         }
