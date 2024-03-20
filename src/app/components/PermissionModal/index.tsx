@@ -5,29 +5,20 @@ import Modal from "~/app/components/Modal";
 import PublisherCard from "~/app/components/PublisherCard";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { classNames } from "~/app/utils";
-import {
-  ASK_EVERYTIME,
-  DONT_ASK_ANY,
-  DONT_ASK_CURRENT,
-} from "~/common/constants";
-import { OriginData } from "~/types";
 
-type PermissionOption =
-  | typeof ASK_EVERYTIME
-  | typeof DONT_ASK_CURRENT
-  | typeof DONT_ASK_ANY;
+import { OriginData, PermissionOption } from "~/types";
 
 type Props = {
   onClose: () => void;
   isOpen: boolean;
-  permssionCallback: (permission: PermissionOption) => void;
+  permissionCallback: (permission: PermissionOption) => void;
   permission: PermissionOption;
 };
 
 export default function PermissionModal({
   isOpen,
   onClose,
-  permssionCallback,
+  permissionCallback,
   permission,
 }: Props) {
   const { t: tCommon } = useTranslation("common");
@@ -37,7 +28,9 @@ export default function PermissionModal({
   });
 
   const navState = useNavigationState();
-  const [permissionOption, setPermissionOption] = useState("ask_everytime");
+  const [permissionOption, setPermissionOption] = useState(
+    PermissionOption.ASK_EVERYTIME
+  );
   const origin = navState.origin as OriginData;
 
   return (
@@ -61,18 +54,16 @@ export default function PermissionModal({
           <p className="text-md">{t("set_permissions")}</p>
 
           <div className="flex flex-col gap-1">
-            <ListItem checkedValue={ASK_EVERYTIME} />
-            <ListItem checkedValue={DONT_ASK_CURRENT} />
-            <ListItem checkedValue={DONT_ASK_ANY} />
+            <ListItem checkedValue={PermissionOption.ASK_EVERYTIME} />
+            <ListItem checkedValue={PermissionOption.DONT_ASK_CURRENT} />
+            <ListItem checkedValue={PermissionOption.DONT_ASK_ANY} />
           </div>
           <div className="flex">
             <Button
               label={tCommon("actions.save")}
               primary
               flex
-              onClick={() =>
-                permssionCallback(permissionOption as PermissionOption)
-              }
+              onClick={() => permissionCallback(permissionOption)}
             />
           </div>
         </div>
