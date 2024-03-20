@@ -3,7 +3,7 @@ import Hyperlink from "@components/Hyperlink";
 import Setting from "@components/Setting";
 import Toggle from "@components/form/Toggle";
 import type { FormEvent } from "react";
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import toast from "~/app/components/Toast";
 import { useAccount } from "~/app/context/AccountContext";
@@ -250,75 +250,64 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
                   {permissions
                     .filter((x) => x.enabled)
                     .map((permission) => (
-                      <Fragment key={permission.id}>
-                        <Badge
-                          key={permission.method}
-                          label={
-                            permission.method
-                              .toLowerCase()
-                              .split("/")
-                              .slice(0, 2)
-                              .join("/") == "nostr/signmessage"
-                              ? tNostr(
-                                  `kinds.${getPermissionKind(permission).concat(
-                                    ".title"
-                                  )}`,
-                                  {
-                                    defaultValue: tNostr(
-                                      "kinds.unknown.title",
-                                      {
-                                        kind: getPermissionKind(permission),
-                                      }
-                                    ),
-                                  }
-                                )
-                              : tPermissions(
-                                  getPermissionKey(permission).concat(".title"),
-                                  {
-                                    defaultValue: getPermissionKind(permission),
-                                  }
-                                )
-                          }
-                          description={
-                            permission.method
-                              .toLowerCase()
-                              .split("/")
-                              .slice(0, 2)
-                              .join("/") == "nostr/signmessage"
-                              ? tNostr(
-                                  `kinds.${getPermissionKind(permission).concat(
-                                    ".description"
-                                  )}`,
-                                  {
-                                    defaultValue: tNostr(
-                                      "kinds.unknown.description",
-                                      {
-                                        kind: getPermissionKind(permission),
-                                      }
-                                    ),
-                                  }
-                                )
-                              : tPermissions(
-                                  getPermissionKey(permission).concat(
-                                    ".description"
-                                  ),
-                                  {
-                                    defaultValue: getPermissionKind(permission),
-                                  }
-                                )
-                          }
-                          onDelete={() => {
-                            setPermissions(
-                              permissions.map((prm) =>
-                                prm.id === permission.id
-                                  ? { ...prm, enabled: !prm.enabled }
-                                  : prm
+                      <Badge
+                        key={permission.method}
+                        label={
+                          permission.method
+                            .toLowerCase()
+                            .startsWith("nostr/signmessage")
+                            ? tNostr(
+                                `kinds.${getPermissionKind(permission)}.title`,
+                                {
+                                  defaultValue: tNostr("kinds.unknown.title", {
+                                    kind: getPermissionKind(permission),
+                                  }),
+                                }
                               )
-                            );
-                          }}
-                          className="bg-green-100 dark:bg-emerald-950 border border-green-100 dark:border-emerald-950 text-gray-800 dark:text-neutral-200 gap-1"
-                        />
-                      </Fragment>
+                            : tPermissions(
+                                `${getPermissionKey(permission)}.title`,
+                                {
+                                  defaultValue: getPermissionKind(permission),
+                                }
+                              )
+                        }
+                        description={
+                          permission.method
+                            .toLowerCase()
+                            .startsWith("nostr/signmessage")
+                            ? tNostr(
+                                `kinds.${getPermissionKind(
+                                  permission
+                                )}.description`,
+                                {
+                                  defaultValue: tNostr(
+                                    "kinds.unknown.description",
+                                    {
+                                      kind: getPermissionKind(permission),
+                                    }
+                                  ),
+                                }
+                              )
+                            : tPermissions(
+                                getPermissionKey(permission).concat(
+                                  ".description"
+                                ),
+                                {
+                                  defaultValue: getPermissionKind(permission),
+                                }
+                              )
+                        }
+                        onDelete={() => {
+                          setPermissions(
+                            permissions.map((prm) =>
+                              prm.id === permission.id
+                                ? { ...prm, enabled: !prm.enabled }
+                                : prm
+                            )
+                          );
+                        }}
+                        className="bg-green-100 dark:bg-emerald-950 border border-green-100 dark:border-emerald-950 text-gray-800 dark:text-neutral-200 gap-1"
+                      />
                     ))}
                 </div>
               </div>
