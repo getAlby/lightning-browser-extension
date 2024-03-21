@@ -599,8 +599,7 @@
       "edit_allowance": {
         "title": "Modifica tolleranza",
         "screen_reader": "Opzioni di tolleranza"
-      },
-      "edit_permissions": "Modifica Permessi"
+      }
     },
     "qrcode_scanner": {
       "title": "Scansiona il codice QR",
@@ -737,14 +736,6 @@
       "decodepayreq": "Decodifica una stringa di richiesta di pagamento",
       "getnetworkinfo": "Ottieni le statistiche di base riguardo il tracciato del canale conosciuto",
       "addinvoice": "Crea nuove ricevute di pagamento"
-    },
-    "nostr": {
-      "getpublickey": "Leggi la tua chiave pubblica",
-      "nip04decrypt": "Decripta i dati",
-      "nip04encrypt": "Cripta i dati",
-      "nip44decrypt": "Decripta i dati",
-      "nip44encrypt": "Cripta i dati",
-      "signmessage": "Firma il messaggio con la tua chiave"
     }
   }
 }
