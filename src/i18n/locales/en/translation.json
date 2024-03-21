@@ -1274,9 +1274,22 @@
         "title": "read public key",
         "description": "Read your public key"
       },
-      "decrypt": {
-        "title": "decrypt data",
+      "decrypt": "Decrypt data",
+      "nip04decrypt": {
+        "title": "nip04 decrypt",
         "description": "Decrypt data"
+      },
+      "nip04encrypt": {
+        "title": "nip04 encrypt",
+        "description": "Encrypt Data"
+      },
+      "nip44decrypt": {
+        "title": "nip44 decrypt",
+        "description": "Decrypt Data"
+      },
+      "nip44encrypt": {
+        "title": "nip44 encrypt",
+        "description": "encrypt data"
       }
     },
     "commando": {
