@@ -122,7 +122,7 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
 
   // returns actual permission kind (permission name)
   function getPermissionKind(permission: Permission): string {
-    return permission.method.split("/").slice(-1).toString();
+    return permission.method.split(/[./]/).slice(-1).toString();
   }
 
   //constructs i18n key for the permission translations
