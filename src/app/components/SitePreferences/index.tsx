@@ -122,7 +122,7 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
 
   // returns actual permission kind (permission name)
   function getPermissionKind(permission: Permission): string {
-    return permission.method.split(/[./]/).slice(-1).toString();
+    return permission.method.split("/").slice(-1).toString();
   }
 
   //constructs i18n key for the permission translations
@@ -250,64 +250,72 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
                   {permissions
                     .filter((x) => x.enabled)
                     .map((permission) => (
-                      <Badge
-                        key={permission.method}
-                        label={
-                          permission.method
-                            .toLowerCase()
-                            .startsWith("nostr/signmessage")
-                            ? tNostr(
-                                `kinds.${getPermissionKind(permission)}.title`,
-                                {
-                                  defaultValue: tNostr("kinds.unknown.title", {
-                                    kind: getPermissionKind(permission),
-                                  }),
-                                }
-                              )
-                            : tPermissions(
-                                `${getPermissionKey(permission)}.title`,
-                                {
-                                  defaultValue: getPermissionKind(permission),
-                                }
-                              )
-                        }
-                        description={
-                          permission.method
-                            .toLowerCase()
-                            .startsWith("nostr/signmessage")
-                            ? tNostr(
-                                `kinds.${getPermissionKind(
-                                  permission
-                                )}.description`,
-                                {
-                                  defaultValue: tNostr(
-                                    "kinds.unknown.description",
-                                    {
-                                      kind: getPermissionKind(permission),
-                                    }
+                      <>
+                        `${getPermissionKey(permission)}.title`
+                        <Badge
+                          key={permission.method}
+                          label={
+                            permission.method
+                              .toLowerCase()
+                              .startsWith("nostr/signmessage")
+                              ? tNostr(
+                                  `kinds.${getPermissionKind(
+                                    permission
+                                  )}.title`,
+                                  {
+                                    defaultValue: tNostr(
+                                      "kinds.unknown.title",
+                                      {
+                                        kind: getPermissionKind(permission),
+                                      }
+                                    ),
+                                  }
+                                )
+                              : tPermissions(
+                                  `${getPermissionKey(permission)}.title`,
+                                  {
+                                    defaultValue: getPermissionKind(permission),
+                                  }
+                                )
+                          }
+                          description={
+                            permission.method
+                              .toLowerCase()
+                              .startsWith("nostr/signmessage")
+                              ? tNostr(
+                                  `kinds.${getPermissionKind(
+                                    permission
+                                  )}.description`,
+                                  {
+                                    defaultValue: tNostr(
+                                      "kinds.unknown.description",
+                                      {
+                                        kind: getPermissionKind(permission),
+                                      }
+                                    ),
+                                  }
+                                )
+                              : tPermissions(
+                                  getPermissionKey(permission).concat(
+                                    ".description"
                                   ),
-                                }
+                                  {
+                                    defaultValue: getPermissionKind(permission),
+                                  }
+                                )
+                          }
+                          onDelete={() => {
+                            setPermissions(
+                              permissions.map((prm) =>
+                                prm.id === permission.id
+                                  ? { ...prm, enabled: !prm.enabled }
+                                  : prm
                               )
-                            : tPermissions(
-                                getPermissionKey(permission).concat(
-                                  ".description"
-                                ),
-                                {
-                                  defaultValue: getPermissionKind(permission),
-                                }
-                              )
-                        }
-                        onDelete={() => {
-                          setPermissions(
-                            permissions.map((prm) =>
-                              prm.id === permission.id
-                                ? { ...prm, enabled: !prm.enabled }
-                                : prm
-                            )
-                          );
-                        }}
-                        className="bg-green-100 dark:bg-emerald-950 border border-green-100 dark:border-emerald-950 text-gray-800 dark:text-neutral-200 gap-1"
-                      />
+                            );
+                          }}
+                          className="bg-green-100 dark:bg-emerald-950 border border-green-100 dark:border-emerald-950 text-gray-800 dark:text-neutral-200 gap-1"
+                        />
+                      </>
                     ))}
                 </div>
               </div>
