@@ -1228,7 +1228,7 @@
       "options": {
         "account": {
           "add": "Connect a Wallet",
-          "wallet_settings": "Wallet settings",
+          "wallet_settings": "Wallet Settings",
           "go_to_web_wallet": "Manage your web account"
         }
       }
