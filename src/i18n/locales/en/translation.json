@@ -1289,7 +1289,7 @@
       },
       "nip44encrypt": {
         "title": "nip44 encrypt",
-        "description": "encrypt data"
+        "description": "Encrypt data"
       }
     },
     "commando": {
