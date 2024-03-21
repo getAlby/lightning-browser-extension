@@ -1276,19 +1276,19 @@
       },
       "decrypt": "Decrypt data",
       "nip04decrypt": {
-        "title": "nip04 decrypt",
+        "title": "decrypt (nip04)",
         "description": "Decrypt data"
       },
       "nip04encrypt": {
-        "title": "nip04 encrypt",
-        "description": "Encrypt Data"
+        "title": "encrypt (nip04)",
+        "description": "Encrypt data"
       },
       "nip44decrypt": {
-        "title": "nip44 decrypt",
-        "description": "Decrypt Data"
+        "title": "decrypt (nip44)",
+        "description": "Decrypt data"
       },
       "nip44encrypt": {
-        "title": "nip44 encrypt",
+        "title": "encrypt (nip44)",
         "description": "Encrypt data"
       }
     },
