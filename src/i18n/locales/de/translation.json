@@ -403,11 +403,11 @@
         "actions": {
           "get_started": {
             "title": "Erste Schritte mit Alby Extension",
-            "description": "Neu bei Alby Extension? Sieh dir unsere Anleitungen, Videos und Erklärungen an"
+            "description": "Neu bei Alby Extension? Sehe dir unsere Anleitungen, Videos und Erklärungen an"
           },
           "receive_bitcoin": {
             "title": "Bitcoin erhalten",
-            "description": "Hole dir Bitcoin an deine Lightning-Adresse, eine Lightning-Rechnung oder eine Bitcoin-Adresse."
+            "description": "Zahle dein Konto ein und erhalten über deine Blitzadresse oder eine Rechnung"
           },
           "setup_keys": {
             "title": "Einrichten deiner Schlüssel",
@@ -666,32 +666,6 @@
       "allow_sign": "Erlaube dein {{host}} zu unterschreiben:",
       "view_details": "Details anzeigen",
       "hide_details": "Details ausblenden",
-      "kinds": {
-        "0": "Metadaten",
-        "1": "kurze Textnotiz",
-        "2": "Relais empfehlen",
-        "3": "Kontakte",
-        "4": "verschlüsselte Direktnachrichten",
-        "5": "Ereignislöschung",
-        "7": "Reaktion",
-        "8": "Badge Award",
-        "40": "Kanal Erstellung",
-        "41": "Kanal Metadaten",
-        "42": "Kanalnachricht",
-        "43": "Kanal verstecke Nachrichten",
-        "44": "Kanal stummschalten Benutzer",
-        "1984": "Berichterstattung",
-        "9734": "Zappanfrage",
-        "9735": "zap",
-        "10002": "Metadaten der Relaisliste",
-        "22242": "Client Authentifizierung",
-        "24133": "nostr verbinden",
-        "30008": "Profilabzeichen",
-        "30009": "Badge Beschreibung",
-        "30023": "Langform Inhalte",
-        "30078": "anwendungsspezifische Daten",
-        "unknown": "kind {{kind}}"
-      },
       "allow_sign_event": "Erlaube {{Gastgeber}}, ein <0>{{kind}}</0> Ereignis zu unterzeichnen",
       "allow_encrypt": "Erlaube {{host}}, die Nachricht zu verschlüsseln:",
       "recipient": "Empfänger"
@@ -1012,7 +986,6 @@
         "title": "Anmeldung auf der Webseite aktivieren",
         "subtitle": "Automatisches Einloggen ohne Bestätigung, wenn die Webseite dazu auffordert."
       },
-      "edit_permissions": "Berechtigungen bearbeiten",
       "hint": "Die Änderung dieser Einstellung setzt das aktuelle Budget zurück",
       "new_budget": {
         "label": "Budget für Ein-Klick-Zahlungen",
@@ -1047,7 +1020,8 @@
       "fee": "Gebühr",
       "open_location": "Webseite öffnen",
       "payment_hash": "Zahlung hHash",
-      "date_time": "Datum & Uhrzeit"
+      "date_time": "Datum & Uhrzeit",
+      "no_transactions": "Noch keine Transaktionen."
     },
     "budget_control": {
       "remember": {
@@ -1223,14 +1197,6 @@
       "newaddress": "Abrufen einer neuen Onchain-Adresse",
       "nextaddr": "Abrufen der nächsten unbenutzten Adresse in der Wallet"
     },
-    "nostr": {
-      "getpublickey": "Lese deinen öffentlichen Schlüssel",
-      "nip04decrypt": "Daten entschlüsseln",
-      "nip04encrypt": "Daten verschlüsseln",
-      "nip44decrypt": "Daten entschlüsseln",
-      "nip44encrypt": "Daten verschlüsseln",
-      "signmessage": "Unterschreibe deine Nachricht mit deinem Schlüssel"
-    },
     "lnc": {
       "connectpeer": "Stelle eine Verbindung zu einer Gegenstelle her",
       "disconnectpeer": "Trenne die Verbindung zu einer entfernten Gegenstelle",
@@ -1260,16 +1226,6 @@
       "nextaddr": "Abrufen der nächsten unbenutzten Onchain-Adresse innerhalb der Wallet",
       "listaddresses": "Alle Onchain-Adressen zusammen mit ihrem Guthaben abrufen",
       "newaddress": "Abrufen einer neuen Onchain-Adresse"
-    },
-    "webln": {
-      "getbalance": "Den Kontostand abfragen"
-    },
-    "liquid": {
-      "getaddress": "Lese deine Liquid-Empfangsadresse",
-      "signschnorr": "Unterschreibe die Nachricht mit deinem Schlüssel"
-    },
-    "bitcoin": {
-      "getaddress": "Lese deine Bitcoin-Empfangsadresse"
     }
   }
 }
