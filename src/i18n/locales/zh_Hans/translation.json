@@ -543,32 +543,7 @@
       "allow_sign": "允许{{host}}签署：",
       "block_added": "已将{{host}}添加到屏蔽列表，请重新加载网站。",
       "view_details": "查看详情",
-      "hide_details": "隐藏详情",
-      "kinds": {
-        "0": "元数据",
-        "1": "短文笔记",
-        "2": "推荐中继器",
-        "3": "联系人",
-        "4": "加密的直接消息",
-        "5": "删除事件",
-        "7": "回应",
-        "8": "徽章奖励",
-        "40": "频道创建",
-        "41": "频道元数据",
-        "42": "频道消息",
-        "43": "频道隐藏消息",
-        "44": "频道静音用户",
-        "1984": "报告",
-        "9734": "打闪请求",
-        "9735": "打闪",
-        "10002": "中继器列表元数据",
-        "22242": "客户端认证",
-        "24133": "nostr 连接",
-        "30008": "个人资料徽章",
-        "30009": "徽章定义",
-        "30023": "长篇内容",
-        "30078": "应用程序特定数据"
-      }
+      "hide_details": "隐藏详情"
     },
     "lnurlpay": {
       "amount": {
@@ -857,8 +832,7 @@
       "edit_allowance": {
         "title": "编辑偏好",
         "screen_reader": "限额选项"
-      },
-      "edit_permissions": "编辑权限"
+      }
     },
     "transactions_table": {
       "boostagram": {
@@ -915,14 +889,6 @@
     }
   },
   "permissions": {
-    "nostr": {
-      "getpublickey": "读取你的公钥",
-      "nip04decrypt": "解密数据",
-      "nip04encrypt": "加密数据",
-      "nip44decrypt": "解密数据",
-      "nip44encrypt": "加密数据",
-      "signmessage": "使用你的密钥签署消息"
-    },
     "commando": {
       "bkpr-listbalances": "所有当前和历史帐户余额列表",
       "checkmessage": "验证该签名是由一个给定的节点产生的",
@@ -1003,16 +969,6 @@
       "openchannel": "开通新渠道",
       "addholdinvoice": "创建新的 HODL 发票",
       "settleinvoice": "结算已接受的发票"
-    },
-    "webln": {
-      "getbalance": "读取你的帐户余额"
-    },
-    "bitcoin": {
-      "getaddress": "读取你的比特币收款地址"
-    },
-    "liquid": {
-      "getaddress": "读取你的 Liquid 收款地址",
-      "signschnorr": "用你的密钥签署消息"
     }
   }
 }
