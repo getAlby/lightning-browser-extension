@@ -58,7 +58,7 @@ export default function PermissionModal({
             <ListItem checkedValue={PermissionOption.DONT_ASK_CURRENT} />
             <ListItem checkedValue={PermissionOption.DONT_ASK_ANY} />
           </div>
-          <div className="flex">
+          <div className="flex mt-5">
             <Button
               label={tCommon("actions.save")}
               primary
