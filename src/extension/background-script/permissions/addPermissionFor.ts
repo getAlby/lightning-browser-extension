@@ -14,10 +14,10 @@ export async function addPermissionFor(method: string, host: string) {
   const existingPermission = await db.permissions
     .filter(
       (x) =>
-        x.accountId == accountId &&
-        x.allowanceId == allowance.id &&
-        x.host == host &&
-        x.method == method
+        x.accountId === accountId &&
+        x.allowanceId === allowance.id &&
+        x.host === host &&
+        x.method === method
     )
     .first();
 
