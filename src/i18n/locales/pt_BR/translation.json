@@ -152,7 +152,7 @@
         },
         "token": {
           "label": "Insira a chave API",
-          "info": "Para conectar sua carteira, você precisa gerar uma chave API em <0>Blink Dashboard (dashboard.blink.sv)</0>:<br>- Acesse com e-mail ou número de telefone, caso você já possua uma conta Blink<br>- Se você ainda não tem conta, pode criar uma nova fazendo login com um número de telefone<br>- na aba API, crie uma nova chave<br>- dê um nome e escolha a opção ler e escrever<br>- deixe o padrão sem expiração ou escolha um período longo para evitar a necessidade de reconectar sua carteira periodicamente<br>- copie a chave (starting with blink_ ) e cole-a na caixa de texto abaixo.<br><br>A integração atualmente suporta apenas o uso da carteira BTC.<br>"
+          "info": "Para conectar sua carteira, você precisa gerar uma chave API em <0>Blink Dashboard (dashboard.blink.sv)</0>:<br>- Acesse com e-mail ou número de telefone, caso você já possua uma conta Blink<br>- Se você ainda não tem conta, pode criar uma nova fazendo login com um número de telefone<br>- na aba API, crie uma nova chave<br>- dê um nome e escolha a opção ler e escrever<br>- deixe o padrão sem expiração ou escolha um período longo para evitar a necessidade de reconectar sua carteira periodicamente<br>- copie a chave (starting with blink_ ) e cole-a na caixa de texto abaixo.<br>"
         }
       },
       "bitcoin_jungle": {
@@ -254,7 +254,6 @@
         "enable_now": "Ativar"
       },
       "allowance_view": {
-        "no_transactions": "Sem transações em <0>{{name}}</0>.",
         "sats": "sats",
         "budget_spent": "Limite de gastos",
         "total_spent": "Total gasto",
@@ -274,6 +273,10 @@
           "receive_bitcoin": {
             "title": "Deposite bitcoin",
             "description": "Receba satoshis usando um endereço relâmpago, fatura relâmpago ou endereço bitcoin"
+          },
+          "setup_keys": {
+            "title": "Configure suas chaves",
+            "description": "Faça o backup da sua chave mestra ou importe uma conta Nostr"
           }
         }
       }
@@ -384,18 +387,28 @@
             "title": "Login relâmpago"
           },
           "new": {
-            "title": "O que é uma chave mestra?",
+            "title": "Configurar chave mestra",
             "items": {
-              "usage": "Você pode importar e usar a mesma chave mestra em diferentes carteiras conectadas na extensão Alby",
-              "keys": "A chave mestra é a sua identidade e permite interagir com diferentes protocolos como: Nostr, Liquid ou a camada base do bitcoin"
+              "usage": "Você pode importar e usar a mesma chave mestra em <0>diferentes carteiras conectadas na extensão Alby</0>",
+              "keys": "A chave mestra permite interagir com diferentes protocolos como <0>Nostr</0>, <0>Liquid</0> ou a <0>camada base do Bitcoin</0>",
+              "nostr_key": "Você pode substituir as chaves Nostr geradas pela chave mestra por chaves Nostr que você já possua"
+            },
+            "secure": {
+              "title": "Proteja sua chave mestra",
+              "description": "Saiba o que é uma chave mestra e cuide das 12 palavras da frase de recuperação"
+            },
+            "nostr": "Importe uma conta Nostr",
+            "import": {
+              "title": "Você já possui uma chave mestra?",
+              "description": "Insira sua frase de recuperação para importar a chave mestra para esta carteira"
             }
           },
           "inputs": {
             "title": "Frase de recuperação"
           },
           "description": {
-            "recovery_phrase": "A frase de recuperação é um conjunto de 12 palavras usada para recuperar a sua chave mestra",
-            "warning": "A frase de recuperação não permite recuperar esta carteira ou os fundos nela contidos. Ela recupera apenas a identidade que você pode usar nos protocolos mencionados acima",
+            "recovery_phrase": "A frase de recuperação é um conjunto de 12 palavras necessárias para <0>recuperar a sua chave mestra</0>",
+            "warning": "<0>não permite recuperar esta carteira ou os fundos nela contidos,</0>Ela recupera apenas o acesso aos protocolos mencionados",
             "secure_recovery_phrase": "Certifique-se de anotá-la em algum local seguro e privado"
           },
           "confirm": "Fiz o backup da frase de recuperação em um local privado e seguro.",
@@ -671,16 +684,6 @@
       "allow_sign": "Permitir {{host}} assinar:",
       "view_details": "Ver detalhes",
       "hide_details": "Ocultar detalhes",
-      "kinds": {
-        "0": "metadados",
-        "1": "nota de texto curta",
-        "3": "contatos",
-        "4": "mensagens diretas criptografadas",
-        "5": "exclusão de evento",
-        "7": "reação",
-        "9735": "zap",
-        "unknown": "tipo {{kind}}"
-      },
       "allow_sign_event": "Permitir {{host}} assinar um evento <0>{{kind}}</0>",
       "allow_encrypt": "Permitir {{host}} criptografar a mensagem:"
     },
@@ -729,7 +732,6 @@
     },
     "transactions": {
       "title": "Transações",
-      "list_empty": "Sem transações.",
       "description": "Extrato de transações desta conta"
     },
     "distributions": {
@@ -996,8 +998,7 @@
       "enable_login": {
         "title": "Login",
         "subtitle": "O login é realizado de forma automática, sem necessidade de confirmação."
-      },
-      "edit_permissions": "Permissões"
+      }
     },
     "qrcode_scanner": {
       "title": "Ler código QR",
@@ -1055,8 +1056,7 @@
         "account": {
           "go_to_web_wallet": "Acessar sua conta na web",
           "wallet_settings": "Configurações da carteira",
-          "add": "Conectar nova conta",
-          "manage": "Gerenciar carteiras"
+          "add": "Conectar nova conta"
         }
       },
       "title": "Mudar de carteira"
@@ -1083,26 +1083,8 @@
     }
   },
   "permissions": {
-    "nostr": {
-      "getpublickey": "Ler sua chave pública",
-      "nip04decrypt": "Descriptografar dados",
-      "nip04encrypt": "Criptografar dados",
-      "nip44decrypt": "Descriptografar dados",
-      "nip44encrypt": "Criptografar dados",
-      "signmessage": "Assinar mensagem com sua chave"
-    },
     "lnc": {
       "openchannel": ""
-    },
-    "bitcoin": {
-      "getaddress": "Ler seu endereço de recebimento de Bitcoin"
-    },
-    "liquid": {
-      "signschnorr": "Assinar mensagem com sua chave",
-      "getaddress": "Ler seu endereço de recebimento da Liquid"
-    },
-    "webln": {
-      "getbalance": "Ler o saldo da sua conta"
     }
   }
 }

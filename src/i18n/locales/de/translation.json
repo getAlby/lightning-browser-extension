@@ -165,8 +165,11 @@
           "title": "Verbinden mit <0>Blink Wallet</0>"
         },
         "token": {
-          "info": "Um deine Brieftasche zu verbinden, generiere einen API-Schlüssel im <0>Blink Dashboard (dashboard.blink.sv)</0>:<br>- logge dich mit deiner E-Mail oder Telefonnummer ein, wenn du Blink bereits nutzt<br>- wenn du noch keinen Account hast, kannst du einen neuen erstellen, indem du dich mit einer Telefonnummer einloggst<br>- erstelle einen neuen Key auf der Registerkarte API Keys<br>- gib ihm einen Namen und wähle den Lese- und Schreibbereich<br>- belasse die Standardeinstellung ohne Ablaufdatum oder wähle einen langen Zeitraum, um zu vermeiden, dass du deine Wallet regelmäßig neu verbinden musst<br>- kopiere den Key (beginnend mit blink_ ) und füge ihn in die Textbox unten ein.<br><br>Die Integration unterstützt derzeit nur die Verwendung der BTC-Wallet.<br>",
+          "info": "Um deine Brieftasche zu verbinden, generiere einen API-Schlüssel im <0>Blink Dashboard (dashboard.blink.sv)</0>:<br>- logge dich mit deiner E-Mail oder Telefonnummer ein, wenn du Blink bereits nutzt<br>- wenn du noch keinen Account hast, kannst du einen neuen erstellen, indem du dich mit einer Telefonnummer einloggst<br>- erstelle einen neuen Key auf der Registerkarte API Keys<br>- gib ihm einen Namen und wähle den Lese- und Schreibbereich<br>- belasse die Standardeinstellung ohne Ablaufdatum oder wähle einen langen Zeitraum, um zu vermeiden, dass du deine Wallet regelmäßig neu verbinden musst<br>- kopiere den Key (beginnend mit blink_ ) und füge ihn in die Textbox unten ein.<br>",
           "label": "Gebe deinen API-Schlüssel ein"
+        },
+        "currency": {
+          "label": "Wallet auswählen"
         }
       },
       "bitcoin_jungle": {
@@ -177,6 +180,9 @@
         "token": {
           "info": "Die {{label}}-Integration mit Alby befindet sich in der Alpha-Phase und wird nur für fortgeschrittene Benutzer empfohlen.<br><br>du kannst deinen Zugriffstoken abrufen, indem du die mobile App aufrufst, auf das Einstellungssymbol klicken und dann dreimal auf die Build-Nummer tippen, um das Entwicklermenü zu öffnen.<br><br>Das Zugriffstoken kann von hier kopiert werden.<br><br>",
           "label": "Gebe deien Access-Token ein"
+        },
+        "currency": {
+          "label": "Wallet auswählen"
         }
       },
       "btcpay": {
@@ -397,16 +403,19 @@
         "actions": {
           "get_started": {
             "title": "Erste Schritte mit Alby Extension",
-            "description": "Neu bei Alby Extension? Sieh dir unsere Anleitungen, Videos und Erklärungen an"
+            "description": "Neu bei Alby Extension? Sehe dir unsere Anleitungen, Videos und Erklärungen an"
           },
           "receive_bitcoin": {
             "title": "Bitcoin erhalten",
-            "description": "Hole dir Bitcoin an deine Lightning-Adresse, eine Lightning-Rechnung oder eine Bitcoin-Adresse."
+            "description": "Zahle dein Konto ein und erhalten über deine Blitzadresse oder eine Rechnung"
+          },
+          "setup_keys": {
+            "title": "Einrichten deiner Schlüssel",
+            "description": "Kümmer dich um deinen Master Key oder importiere dein bestehendes Nostr-Konto"
           }
         }
       },
       "allowance_view": {
-        "no_transactions": "Noch keine Transaktionen auf <0>{{Name}}</0>.",
         "sats": "sats",
         "budget_spent": "Budget",
         "total_spent": "Insgesamt ausgegeben",
@@ -525,10 +534,20 @@
             "use_mnemonic": "Hauptschlüssel für die Anmeldung bei Lightning-Anwendungen verwenden (LNURL Auth)"
           },
           "new": {
-            "title": "Was ist ein Hauptschlüssel?",
+            "title": "Masterschlüssel einrichten",
             "items": {
-              "usage": "Du kannst denselben Master Key in jede angeschlossene Wallet in der Alby Extension importieren und verwenden",
-              "keys": "Der Master Key ist deine Identität, mit der du die Protokolle wie Nostr, Liquid Network oder der Basisschicht von Bitcoin interagieren kannst."
+              "usage": "Du kannst denselben Hauptschlüssel in <0>jede angeschlossene Brieftasche in Alby</0> importieren und verwenden",
+              "keys": "Master Key ermöglicht die Interaktion mit Protokollen wie <0>Nostr</0>, <0>Liquid</0> oder <0>Basisschicht von Bitcoin</0>",
+              "nostr_key": "Du kannst jederzeit vorhandene Nostr-Schlüssel importieren und die von Master Key erzeugten überschreiben"
+            },
+            "nostr": "Ein bestehendes Nostr-Konto importieren",
+            "secure": {
+              "title": "Sichere deinen Hauptschlüssel",
+              "description": "Erfahre, was Master Key ist und sichere deine 12-Wörter-Wiederherstellungsphrase"
+            },
+            "import": {
+              "title": "Hast du bereits einen Hauptschlüssel?",
+              "description": "Gebe deine Wiederherstellungsphrase ein, um den Master Key in diese Wallet zu importieren."
             }
           },
           "inputs": {
@@ -536,8 +555,8 @@
           },
           "description": {
             "secure_recovery_phrase": "Schreibe sie an einem sicheren Ort auf und bewahren sie privat auf.",
-            "recovery_phrase": "Die Wiederherstellungsphrase ist ein Satz von 12 Wörtern, die deinen Master Key absichern",
-            "warning": "Die Wiederherstellungsphrase kann diese Brieftasche oder das darin befindliche Geld nicht wiederherstellen. Sie stellt nur die Identität wieder her, die du in den oben genannten Protokollen verwendet hast"
+            "recovery_phrase": "Die Wiederherstellungsphrase besteht aus 12 Wörtern, die <0>Ihren Hauptschlüssel sichern</0>",
+            "warning": "<0>Es kann diese Brieftasche oder das darin befindliche Guthaben nicht wiederherstellen,</0> es wird nur der Zugriff auf das oben genannte Protokoll wiederhergestellt"
           },
           "error_confirm": "Bitte vergewisser dich, dass du eine Sicherungskopie der Wiederherstellungsphrase erstellt hast.",
           "confirm": "Ich habe die Wiederherstellungsphrase zu meinem Hauptschlüssel an einem privaten und sicheren Ort gesichert."
@@ -647,32 +666,6 @@
       "allow_sign": "Erlaube dein {{host}} zu unterschreiben:",
       "view_details": "Details anzeigen",
       "hide_details": "Details ausblenden",
-      "kinds": {
-        "0": "Metadaten",
-        "1": "kurze Textnotiz",
-        "2": "Relais empfehlen",
-        "3": "Kontakte",
-        "4": "verschlüsselte Direktnachrichten",
-        "5": "Ereignislöschung",
-        "7": "Reaktion",
-        "8": "Badge Award",
-        "40": "Kanal Erstellung",
-        "41": "Kanal Metadaten",
-        "42": "Kanalnachricht",
-        "43": "Kanal verstecke Nachrichten",
-        "44": "Kanal stummschalten Benutzer",
-        "1984": "Berichterstattung",
-        "9734": "Zappanfrage",
-        "9735": "zap",
-        "10002": "Metadaten der Relaisliste",
-        "22242": "Client Authentifizierung",
-        "24133": "nostr verbinden",
-        "30008": "Profilabzeichen",
-        "30009": "Badge Beschreibung",
-        "30023": "Langform Inhalte",
-        "30078": "anwendungsspezifische Daten",
-        "unknown": "kind {{kind}}"
-      },
       "allow_sign_event": "Erlaube {{Gastgeber}}, ein <0>{{kind}}</0> Ereignis zu unterzeichnen",
       "allow_encrypt": "Erlaube {{host}}, die Nachricht zu verschlüsseln:",
       "recipient": "Empfänger"
@@ -786,7 +779,6 @@
     },
     "transactions": {
       "title": "Transaktionen",
-      "list_empty": "Noch keine Transaktionen verfügbar.",
       "description": "Buchungen für dieses Konto"
     },
     "distributions": {
@@ -948,8 +940,7 @@
         "account": {
           "go_to_web_wallet": "Verwalte dein Web-Konto",
           "wallet_settings": "Einstellungen deiner Wallet",
-          "add": "Verbinde deine Wallet",
-          "manage": "Wallets verwalten"
+          "add": "Verbinde deine Wallet"
         }
       },
       "screen_reader": "Dropdown umschalten",
@@ -995,7 +986,6 @@
         "title": "Anmeldung auf der Webseite aktivieren",
         "subtitle": "Automatisches Einloggen ohne Bestätigung, wenn die Webseite dazu auffordert."
       },
-      "edit_permissions": "Berechtigungen bearbeiten",
       "hint": "Die Änderung dieser Einstellung setzt das aktuelle Budget zurück",
       "new_budget": {
         "label": "Budget für Ein-Klick-Zahlungen",
@@ -1030,7 +1020,8 @@
       "fee": "Gebühr",
       "open_location": "Webseite öffnen",
       "payment_hash": "Zahlung hHash",
-      "date_time": "Datum & Uhrzeit"
+      "date_time": "Datum & Uhrzeit",
+      "no_transactions": "Noch keine Transaktionen."
     },
     "budget_control": {
       "remember": {
@@ -1206,14 +1197,6 @@
       "newaddress": "Abrufen einer neuen Onchain-Adresse",
       "nextaddr": "Abrufen der nächsten unbenutzten Adresse in der Wallet"
     },
-    "nostr": {
-      "getpublickey": "Lese deinen öffentlichen Schlüssel",
-      "nip04decrypt": "Daten entschlüsseln",
-      "nip04encrypt": "Daten verschlüsseln",
-      "nip44decrypt": "Daten entschlüsseln",
-      "nip44encrypt": "Daten verschlüsseln",
-      "signmessage": "Unterschreibe deine Nachricht mit deinem Schlüssel"
-    },
     "lnc": {
       "connectpeer": "Stelle eine Verbindung zu einer Gegenstelle her",
       "disconnectpeer": "Trenne die Verbindung zu einer entfernten Gegenstelle",
@@ -1243,16 +1226,6 @@
       "nextaddr": "Abrufen der nächsten unbenutzten Onchain-Adresse innerhalb der Wallet",
       "listaddresses": "Alle Onchain-Adressen zusammen mit ihrem Guthaben abrufen",
       "newaddress": "Abrufen einer neuen Onchain-Adresse"
-    },
-    "webln": {
-      "getbalance": "Den Kontostand abfragen"
-    },
-    "liquid": {
-      "getaddress": "Lese deine Liquid-Empfangsadresse",
-      "signschnorr": "Unterschreibe die Nachricht mit deinem Schlüssel"
-    },
-    "bitcoin": {
-      "getaddress": "Lese deine Bitcoin-Empfangsadresse"
     }
   }
 }

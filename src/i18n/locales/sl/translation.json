@@ -290,7 +290,6 @@
         "enable_now": "Dovoli zdaj"
       },
       "allowance_view": {
-        "no_transactions": "NA <0>{{name}}</0> še ni transakcij.",
         "sats": "sats",
         "budget_spent": "Porabljen proračun",
         "total_spent": "Porabljeno skupaj",
@@ -583,24 +582,6 @@
       "lookupinvoice": "Preglej podrobnosti računa",
       "settleinvoice": "Poravnaj sprejete račune",
       "sendtoroute": "Izvedi plačilo preko določene poti"
-    },
-    "liquid": {
-      "signschnorr": "Podpiše sporočilo s tvojim ključem",
-      "getaddress": "Bere tvoj Liquid naslov za prejemanje"
-    },
-    "nostr": {
-      "getpublickey": "Bere tvoj javni ključ",
-      "nip04decrypt": "Dekriptiraj podatke",
-      "nip04encrypt": "Kriptiraj podatke",
-      "nip44decrypt": "Dekriptiraj podatke",
-      "nip44encrypt": "Kriptiraj podatke",
-      "signmessage": "Podpiši sporočilo s svojim ključem"
-    },
-    "webln": {
-      "getbalance": "Bere stanje tvojega računa"
-    },
-    "bitcoin": {
-      "getaddress": "Bere tvoj Bitcoin naslov za prejemanje"
     }
   },
   "components": {
@@ -656,7 +637,6 @@
         "screen_reader": "Nastavitve proračunskega zneska"
       },
       "confirm_delete": "Ali si prepričan, da želiš prekiniti povezavo s tem spletnim mestom?",
-      "edit_permissions": "Uredi pravice",
       "new_budget": {
         "label": "Proračun plačil z enim klikom",
         "link_label": "Nastavi proračun za plačila z enim klikom"

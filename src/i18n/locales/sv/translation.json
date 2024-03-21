@@ -230,7 +230,6 @@
         "enable_now": "Aktivera Nu"
       },
       "allowance_view": {
-        "no_transactions": "Inga transaktioner för <0>{{name}}</0> ännu.",
         "sats": "sats",
         "budget_spent": "Budget förbrukad",
         "total_spent": "Totalt spenderat",
@@ -605,31 +604,6 @@
       "title": "Nostr",
       "allow": "Tillåt den här webbplatsen att:",
       "block_and_ignore": "Blockera och ignorera {{host}}",
-      "kinds": {
-        "0": "metadata",
-        "1": "kort textanteckning",
-        "2": "rekommenderade relä",
-        "3": "kontakter",
-        "4": "krypterade direktmeddelanden",
-        "5": "radering av händelse",
-        "7": "reaktion",
-        "8": "badge utmärkelse",
-        "40": "skapa kanal",
-        "41": "kanalens metadata",
-        "42": "kanal meddelande",
-        "43": "kanal gömda meddelande",
-        "44": "kanal tysta användare",
-        "1984": "anmäla",
-        "9734": "zap förfrågan",
-        "9735": "zap",
-        "10002": "relä listans metadata",
-        "22242": "klient autentisering",
-        "24133": "nostr ansluta",
-        "30008": "profil badges",
-        "30009": "badge definition",
-        "30023": "långformigt innehåll",
-        "30078": "applikationsspecifika data"
-      },
       "view_details": "Visa detaljer",
       "hide_details": "Göm detaljer",
       "block_added": "Lade till {{host}} till blockeringslistan, ladda om webbplatsen.",
@@ -672,7 +646,6 @@
     },
     "transactions": {
       "title": "Transaktion",
-      "list_empty": "Inga transaktioner tillgängliga ännu.",
       "description": "Transaktioner för detta konto"
     },
     "distributions": {
@@ -933,8 +906,7 @@
       "edit_allowance": {
         "title": "Webbplatsinställningar",
         "screen_reader": "Alternativ för Beloppsgräns"
-      },
-      "edit_permissions": "Redigera behörigheter"
+      }
     },
     "qrcode_scanner": {
       "title": "Skanna QR-kod",
@@ -1022,14 +994,6 @@
     }
   },
   "permissions": {
-    "nostr": {
-      "getpublickey": "Läs din publika nyckel",
-      "nip04decrypt": "Dekryptera data",
-      "nip04encrypt": "Kryptera data",
-      "nip44decrypt": "Dekryptera data",
-      "nip44encrypt": "Kryptera data",
-      "signmessage": "Skriv under meddelandet med din nyckel"
-    },
     "lnd": {
       "channelbalance": "Få en rapport om de totala medlen över alla öppna kanaler",
       "routermc": "Läs det interna uppdragskontroll läget",
@@ -1110,16 +1074,6 @@
       "keysend": "Skicka en betalning till en annan nod",
       "checkmessage": "Verifiera att signaturen genererades av en given nod",
       "listforwards": "Lista alla htlcs som har försökt vidarebefordras"
-    },
-    "webln": {
-      "getbalance": "Läs saldot på ditt konto"
-    },
-    "bitcoin": {
-      "getaddress": "Läs din Bitcoin-mottagningsadress"
-    },
-    "liquid": {
-      "getaddress": "Läs din Liquid-mottagningsadress",
-      "signschnorr": "Skriv under meddelandet med din nyckel"
     }
   }
 }
