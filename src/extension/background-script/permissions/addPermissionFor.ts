@@ -10,15 +10,34 @@ export async function addPermissionFor(method: string, host: string) {
   if (!allowance?.id || !accountId) {
     return false;
   }
-  const permissionIsAdded = await db.permissions.add({
-    createdAt: Date.now().toString(),
-    accountId: accountId,
-    allowanceId: allowance.id,
-    host: host,
-    method: method,
-    enabled: true,
-    blocked: false,
-  });
 
-  return !!permissionIsAdded && (await db.saveToStorage());
+  const existingPermission = await db.permissions
+    .filter(
+      (x) =>
+        x.accountId == accountId &&
+        x.allowanceId == allowance.id &&
+        x.host == host &&
+        x.method == method
+    )
+    .first();
+
+  let affectedRows = 0;
+  if (!existingPermission) {
+    affectedRows = await db.permissions.add({
+      createdAt: Date.now().toString(),
+      accountId: accountId,
+      allowanceId: allowance.id,
+      host: host,
+      method: method,
+      enabled: true,
+      blocked: false,
+    });
+  } else {
+    affectedRows = await db.permissions.update(existingPermission.id!, {
+      enabled: true,
+      blocked: false,
+    });
+  }
+
+  return !!affectedRows && (await db.saveToStorage());
 }
