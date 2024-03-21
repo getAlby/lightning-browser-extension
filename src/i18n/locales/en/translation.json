@@ -927,8 +927,8 @@
           "description": "Unidentified action"
         },
         "0": {
-          "title": "share profile",
-          "description": "Share your name, description, profile picture, Nostr address and additional profile metadata."
+          "title": "update profile",
+          "description": "Update your name, description, profile picture, Nostr address and additional profile metadata."
         },
         "1": {
           "title": "short note",
@@ -939,8 +939,8 @@
           "description": "Share a recommended relay"
         },
         "3": {
-          "title": "share follow list",
-          "description": "Share a list of accounts you follow"
+          "title": "update follow list",
+          "description": "Update the list of accounts you follow"
         },
         "4": {
           "title": "direct message",
@@ -987,12 +987,12 @@
           "description": "Request a lightning payment"
         },
         "9735": {
-          "title": "share zap receipt",
+          "title": "zap receipt",
           "description": "Display a confirmation of a paid lightning invoice"
         },
         "10002": {
-          "title": "share relay list",
-          "description": "Share preferred relays for discovering your notes and receiving others' notes"
+          "title": "relay list",
+          "description": "Update preferred relays for discovering your notes and receiving others' notes"
         },
         "22242": {
           "title": "authenticate",
