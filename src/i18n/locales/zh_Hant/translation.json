@@ -613,32 +613,7 @@
       "block_and_ignore": "阻止並忽略 {{host}}",
       "block_added": "已將 {{host}} 添加到阻止列表，請重新加載網站。",
       "view_details": "查看詳情",
-      "hide_details": "隱藏詳情",
-      "kinds": {
-        "0": "元數據",
-        "1": "短文筆記",
-        "2": "推薦中繼器",
-        "3": "聯繫人",
-        "4": "加密的直接消息",
-        "5": "刪除事件",
-        "7": "回應",
-        "8": "徽章獎勵",
-        "40": "頻道創建",
-        "41": "頻道元數據",
-        "42": "頻道消息",
-        "43": "頻道隱藏消息",
-        "44": "頻道靜音用戶",
-        "1984": "報告",
-        "9734": "打閃請求",
-        "9735": "打閃",
-        "10002": "中繼器列表元數據",
-        "22242": "客戶端認證",
-        "24133": "nostr連接",
-        "30008": "個人資料徽章",
-        "30009": "徽章定義",
-        "30023": "長篇內容",
-        "30078": "應用程序特定數據"
-      }
+      "hide_details": "隱藏詳情"
     },
     "transactions": {
       "title": "交易"
@@ -842,8 +817,7 @@
       "edit_allowance": {
         "title": "編輯偏好",
         "screen_reader": "限額選項"
-      },
-      "edit_permissions": "編輯權限"
+      }
     },
     "qrcode_scanner": {
       "title": "掃描二維碼",
@@ -922,14 +896,6 @@
     }
   },
   "permissions": {
-    "nostr": {
-      "getpublickey": "讀取你的公鑰",
-      "nip04decrypt": "解密數據",
-      "nip04encrypt": "加密數據",
-      "nip44decrypt": "解密數據",
-      "nip44encrypt": "加密數據",
-      "signmessage": "用你的密鑰簽署消息"
-    },
     "commando": {
       "bkpr-listbalances": "所有當前和歷史帳戶餘額列表",
       "checkmessage": "驗證該簽名是由給定的節點產生的",
@@ -1010,16 +976,6 @@
       "addinvoice": "創建新發票",
       "addholdinvoice": "創建新的 HODL 發票",
       "settleinvoice": "結算已接受的發票"
-    },
-    "webln": {
-      "getbalance": "讀取你的帳戶餘額"
-    },
-    "bitcoin": {
-      "getaddress": "讀取你的比特幣收款地址"
-    },
-    "liquid": {
-      "getaddress": "讀取你的 Liquid 收款地址",
-      "signschnorr": "用你的密鑰簽署消息"
     }
   }
 }
