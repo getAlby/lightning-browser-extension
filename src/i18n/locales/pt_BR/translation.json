@@ -684,16 +684,6 @@
       "allow_sign": "Permitir {{host}} assinar:",
       "view_details": "Ver detalhes",
       "hide_details": "Ocultar detalhes",
-      "kinds": {
-        "0": "metadados",
-        "1": "nota de texto curta",
-        "3": "contatos",
-        "4": "mensagens diretas criptografadas",
-        "5": "exclusão de evento",
-        "7": "reação",
-        "9735": "zap",
-        "unknown": "tipo {{kind}}"
-      },
       "allow_sign_event": "Permitir {{host}} assinar um evento <0>{{kind}}</0>",
       "allow_encrypt": "Permitir {{host}} criptografar a mensagem:"
     },
@@ -1008,8 +998,7 @@
       "enable_login": {
         "title": "Login",
         "subtitle": "O login é realizado de forma automática, sem necessidade de confirmação."
-      },
-      "edit_permissions": "Permissões"
+      }
     },
     "qrcode_scanner": {
       "title": "Ler código QR",
@@ -1094,26 +1083,8 @@
     }
   },
   "permissions": {
-    "nostr": {
-      "getpublickey": "Ler sua chave pública",
-      "nip04decrypt": "Descriptografar dados",
-      "nip04encrypt": "Criptografar dados",
-      "nip44decrypt": "Descriptografar dados",
-      "nip44encrypt": "Criptografar dados",
-      "signmessage": "Assinar mensagem com sua chave"
-    },
     "lnc": {
       "openchannel": ""
-    },
-    "bitcoin": {
-      "getaddress": "Ler seu endereço de recebimento de Bitcoin"
-    },
-    "liquid": {
-      "signschnorr": "Assinar mensagem com sua chave",
-      "getaddress": "Ler seu endereço de recebimento da Liquid"
-    },
-    "webln": {
-      "getbalance": "Ler o saldo da sua conta"
     }
   }
 }
