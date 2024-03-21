@@ -3,7 +3,7 @@ import Hyperlink from "@components/Hyperlink";
 import Setting from "@components/Setting";
 import Toggle from "@components/form/Toggle";
 import type { FormEvent } from "react";
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import toast from "~/app/components/Toast";
 import { useAccount } from "~/app/context/AccountContext";
@@ -12,6 +12,7 @@ import { PreferencesIcon } from "~/app/icons";
 import msg from "~/common/lib/msg";
 import type { Allowance, Permission } from "~/types";
 
+import Badge from "~/app/components/Badge";
 import Modal from "~/app/components/Modal";
 import DualCurrencyField from "../form/DualCurrencyField/index";
 
@@ -45,6 +46,9 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
 
   const { t } = useTranslation("components", { keyPrefix: "allowance_menu" });
   const { t: tCommon } = useTranslation("common");
+  const { t: tNostr } = useTranslation("translation", {
+    keyPrefix: "nostr",
+  });
   const { t: tPermissions } = useTranslation("permissions");
 
   const hasPermissions = !isLoadingPermissions && !!permissions?.length;
@@ -114,6 +118,20 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
       .filter((prm, i) => prm.enabled !== originalPermissions[i].enabled)
       .map((prm) => prm.id);
     return ids;
+  }
+
+  // returns actual permission kind (permission name)
+  function getPermissionKind(permission: Permission): string {
+    return permission.method.split(/[./]/).slice(-1).toString();
+  }
+
+  //constructs i18n key for the permission translations
+  function getPermissionKey(permission: Permission): string {
+    if (permission.method.includes("/")) {
+      return permission.method.toLowerCase().split("/").slice(0, 2).join(".");
+    } else {
+      return permission.method.toLowerCase();
+    }
   }
 
   async function updateAllowance() {
@@ -187,7 +205,7 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
             updateAllowance();
           }}
         >
-          <div className="pb-4 border-b border-gray-200 dark:border-neutral-700">
+          <div className="pb-5 border-b border-gray-200 dark:border-neutral-700">
             <DualCurrencyField
               id="budget"
               label={t("new_budget.label")}
@@ -200,7 +218,13 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
               onChange={(e) => setBudget(e.target.value)}
             />
           </div>
-          <div className={hasPermissions ? "pb-4" : ""}>
+          <div
+            className={
+              hasPermissions
+                ? "py-1 border-b border-gray-200 dark:border-neutral-700"
+                : ""
+            }
+          >
             <Setting
               title={t("enable_login.title")}
               subtitle={t("enable_login.subtitle")}
@@ -214,43 +238,85 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
           </div>
 
           {hasPermissions && (
-            <div>
-              <h2 className="pt-4 text-lg text-gray-900 font-bold dark:text-white">
-                {t("edit_permissions")}
+            <div className="flex flex-col gap-4 pb-3 border-b border-gray-200 dark:border-neutral-700">
+              <h2 className="pt-5 text-md text-gray-800 dark:text-neutral-200">
+                {t("website_permissions")}
               </h2>
               <div>
-                {permissions.map((permission) => (
-                  <Fragment key={permission.id}>
-                    <Setting
-                      title={permission.method}
-                      inline={true}
-                      subtitle={tPermissions(
-                        permission.method
-                          .toLowerCase()
-                          .split("/")
-                          .slice(-2)
-                          .join(".") as unknown as TemplateStringsArray
-                      )}
-                      /* split the method at "/", take the last two items in
-                        the array and join them with "." to get the i18n string
-                        webln/lnd/getinfo -> lnd.getinfo
-                        nostr/nip04decrypt --> nostr.nip04decrypt */
-                    >
-                      <Toggle
-                        checked={permission.enabled}
-                        onChange={() => {
-                          setPermissions(
-                            permissions.map((prm) =>
-                              prm.id === permission.id
-                                ? { ...prm, enabled: !prm.enabled }
-                                : prm
-                            )
-                          );
-                        }}
-                      />
-                    </Setting>
-                  </Fragment>
-                ))}
+                <p className="mb-3 text-xs font-semibold text-gray-800 dark:text-neutral-200">
+                  {t("edit_allowance.always_allow")}
+                </p>
+                <div>
+                  {permissions
+                    .filter((x) => x.enabled)
+                    .map((permission) => (
+                      <>
+                        <Badge
+                          key={permission.method}
+                          label={
+                            permission.method
+                              .toLowerCase()
+                              .startsWith("nostr/signmessage")
+                              ? tNostr(
+                                  `kinds.${getPermissionKind(
+                                    permission
+                                  )}.title`,
+                                  {
+                                    defaultValue: tNostr(
+                                      "kinds.unknown.title",
+                                      {
+                                        kind: getPermissionKind(permission),
+                                      }
+                                    ),
+                                  }
+                                )
+                              : tPermissions(
+                                  `${getPermissionKey(permission)}.title`,
+                                  {
+                                    defaultValue: getPermissionKind(permission),
+                                  }
+                                )
+                          }
+                          description={
+                            permission.method
+                              .toLowerCase()
+                              .startsWith("nostr/signmessage")
+                              ? tNostr(
+                                  `kinds.${getPermissionKind(
+                                    permission
+                                  )}.description`,
+                                  {
+                                    defaultValue: tNostr(
+                                      "kinds.unknown.description",
+                                      {
+                                        kind: getPermissionKind(permission),
+                                      }
+                                    ),
+                                  }
+                                )
+                              : tPermissions(
+                                  getPermissionKey(permission).concat(
+                                    ".description"
+                                  ),
+                                  {
+                                    defaultValue: getPermissionKind(permission),
+                                  }
+                                )
+                          }
+                          onDelete={() => {
+                            setPermissions(
+                              permissions.map((prm) =>
+                                prm.id === permission.id
+                                  ? { ...prm, enabled: !prm.enabled }
+                                  : prm
+                              )
+                            );
+                          }}
+                          className="bg-green-100 dark:bg-emerald-950 border border-green-100 dark:border-emerald-950 text-gray-800 dark:text-neutral-200 gap-1"
+                        />
+                      </>
+                    ))}
+                </div>
               </div>
             </div>
           )}

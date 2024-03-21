@@ -1,4 +1,5 @@
 import Badge from "@components/Badge";
+import { useTranslation } from "react-i18next";
 import type { Allowance, Badge as BadgeType } from "~/types";
 
 type Props = {
@@ -6,6 +7,9 @@ type Props = {
 };
 
 export default function BadgesList({ allowance }: Props) {
+  const { t: tComponents } = useTranslation("components", {
+    keyPrefix: "badge",
+  });
   const badges: BadgeType[] = [];
   if (allowance.remainingBudget > 0) {
     badges.push({
@@ -23,7 +27,13 @@ export default function BadgesList({ allowance }: Props) {
   return (
     <>
       {badges?.map((b) => {
-        return <Badge key={b.label} label={b.label} className={b.className} />;
+        return (
+          <Badge
+            key={b.label}
+            label={tComponents(`label.${b.label}`)}
+            className={b.className}
+          />
+        );
       })}
     </>
   );

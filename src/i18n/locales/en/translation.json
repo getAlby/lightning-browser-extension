@@ -922,30 +922,102 @@
       "block_added": "Added {{host}} to the blocklist, please reload the website.",
       "recipient": "Recipient",
       "kinds": {
-        "unknown": "kind {{kind}}",
-        "0": "metadata",
-        "1": "short text note",
-        "2": "recommend relay",
-        "3": "contacts",
-        "4": "encrypted direct messages",
-        "5": "event deletion",
-        "7": "reaction",
-        "8": "badge award",
-        "40": "channel creation",
-        "41": "channel metadata",
-        "42": "channel message",
-        "43": "channel hide message",
-        "44": "channel mute user",
-        "1984": "reporting",
-        "9734": "zap request",
-        "9735": "zap",
-        "10002": "relay list metadata",
-        "22242": "client authentication",
-        "24133": "nostr connect",
-        "30008": "profile badges",
-        "30009": "badge definition",
-        "30023": "long-form content",
-        "30078": "application-specific data"
+        "unknown": {
+          "title": "kind {{kind}}",
+          "description": "Unidentified action"
+        },
+        "0": {
+          "title": "update profile",
+          "description": "Update your name, description, profile picture, Nostr address and additional profile metadata."
+        },
+        "1": {
+          "title": "short note",
+          "description": "Sign a short text note"
+        },
+        "2": {
+          "title": "recommend relay",
+          "description": "Share a recommended relay"
+        },
+        "3": {
+          "title": "update follow list",
+          "description": "Update the list of accounts you follow"
+        },
+        "4": {
+          "title": "direct message",
+          "description": "Send an encrypted direct message"
+        },
+        "5": {
+          "title": "delete note",
+          "description": "Request relays to delete an event"
+        },
+        "7": {
+          "title": "react",
+          "description": "Sign a reaction to a note"
+        },
+        "8": {
+          "title": "award badge",
+          "description": "Award a badge to a Nostr profile"
+        },
+        "40": {
+          "title": "create channel",
+          "description": "Create a public channel chat"
+        },
+        "41": {
+          "title": "update channel",
+          "description": "Update channel's name, description, picture and additional metadata"
+        },
+        "42": {
+          "title": "send channel message",
+          "description": "Send a text message to a channel"
+        },
+        "43": {
+          "title": "hide channel message",
+          "description": "Hide a text message in a channel"
+        },
+        "44": {
+          "title": "mute channel user",
+          "description": "Hide all messages from a Nostr profile"
+        },
+        "1984": {
+          "title": "report note",
+          "description": "Report a note for spam, illegal or explicit content "
+        },
+        "9734": {
+          "title": "request zap",
+          "description": "Request a lightning payment"
+        },
+        "9735": {
+          "title": "zap receipt",
+          "description": "Display a confirmation of a paid lightning invoice"
+        },
+        "10002": {
+          "title": "relay list",
+          "description": "Update preferred relays for discovering your notes and receiving others' notes"
+        },
+        "22242": {
+          "title": "authenticate",
+          "description": "Authenticate to a relay"
+        },
+        "24133": {
+          "title": "remote sign",
+          "description": "Request and sign events remotely"
+        },
+        "30008": {
+          "title": "profile badge",
+          "description": "Accept, reject and change display order of awarded badges"
+        },
+        "30009": {
+          "title": "create badge",
+          "description": "Create a new badge"
+        },
+        "30023": {
+          "title": "long note",
+          "description": "Sign a long-form notes like articles or blog posts"
+        },
+        "30078": {
+          "title": "app data",
+          "description": "Sign an application-specific data"
+        }
       }
     },
     "transactions": {
@@ -1062,7 +1134,7 @@
   "components": {
     "allowance_menu": {
       "confirm_delete": "Are you sure you want to disconnect this website?",
-      "hint": "Changing this will reset the current budget",
+      "hint": "Changing this number will reset the current budget",
       "new_budget": {
         "label": "One-click payments budget",
         "link_label": "Set a budget for one-click payments"
@@ -1073,9 +1145,10 @@
       },
       "edit_allowance": {
         "title": "Site settings",
-        "screen_reader": "Allowance Options"
+        "screen_reader": "Allowance Options",
+        "always_allow": "Always allow"
       },
-      "edit_permissions": "Edit Permissions"
+      "website_permissions": "Website Permissions"
     },
     "qrcode_scanner": {
       "title": "Scan QR Code",
@@ -1086,6 +1159,13 @@
       "errors": {
         "allow_camera_access": "Please allow camera access in the settings screen."
       }
+    },
+    "permissions_modal": {
+      "content_label": "Permissions",
+      "set_permissions": "Set Permissions:",
+      "ask_everytime": "Ask everytime for <0>{{permission}}</0>",
+      "dont_ask_current": "Don't ask again for <0>{{permission}}</0>",
+      "dont_ask_any": "Don't ask again for <0>any Nostr Requests</0>"
     },
     "transactions_table": {
       "fee": "Fee",
@@ -1160,30 +1240,57 @@
     },
     "badge": {
       "label": {
-        "auth": "LOGIN",
-        "imported": "IMPORTED",
-        "budget": "BUDGET"
+        "auth": "login",
+        "imported": "imported",
+        "budget": "budget"
       }
     }
   },
   "permissions": {
     "webln": {
-      "getbalance": "Read the balance of your account"
+      "getbalance": {
+        "title": "get balance",
+        "description": "Read the balance of your account"
+      }
     },
     "bitcoin": {
-      "getaddress": "Read your Bitcoin receive address"
+      "getaddress": {
+        "title": "get address",
+        "description": "Read your Bitcoin receive address"
+      }
     },
     "liquid": {
-      "getaddress": "Read your Liquid receive address",
-      "signschnorr": "Sign message with your key"
+      "getaddress": {
+        "title": "get address",
+        "description": "Read your Liquid receive address"
+      },
+      "signschnorr": {
+        "title": "sign schnorr",
+        "description": "Sign message with your key"
+      }
     },
     "nostr": {
-      "getpublickey": "Read your public key",
-      "nip04encrypt": "Encrypt data",
-      "nip04decrypt": "Decrypt data",
-      "nip44encrypt": "Encrypt data",
-      "nip44decrypt": "Decrypt data",
-      "signmessage": "Sign message with your key"
+      "getpublickey": {
+        "title": "read public key",
+        "description": "Read your public key"
+      },
+      "decrypt": "Decrypt data",
+      "nip04decrypt": {
+        "title": "decrypt (nip04)",
+        "description": "Decrypt data"
+      },
+      "nip04encrypt": {
+        "title": "encrypt (nip04)",
+        "description": "Encrypt data"
+      },
+      "nip44decrypt": {
+        "title": "decrypt (nip44)",
+        "description": "Decrypt data"
+      },
+      "nip44encrypt": {
+        "title": "encrypt (nip44)",
+        "description": "Encrypt data"
+      }
     },
     "commando": {
       "bkpr-listbalances": "List of all current and historical account balances",

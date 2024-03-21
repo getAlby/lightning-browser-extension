@@ -3,18 +3,19 @@ import Container from "@components/Container";
 import ContentMessage from "@components/ContentMessage";
 import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
-import Checkbox from "@components/form/Checkbox";
+import { PopiconsShieldCheckLine } from "@popicons/react";
 import { useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import Hyperlink from "~/app/components/Hyperlink";
+import PermissionModal from "~/app/components/PermissionModal";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import toast from "~/app/components/Toast";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import { Event } from "~/extension/providers/nostr/types";
-import type { OriginData } from "~/types";
+import { OriginData, PermissionOption } from "~/types";
 
 function ConfirmSignMessage() {
   const navState = useNavigationState();
@@ -22,14 +23,21 @@ function ConfirmSignMessage() {
   const { t } = useTranslation("translation", {
     keyPrefix: "nostr",
   });
+  const { t: tPermissions } = useTranslation("components", {
+    keyPrefix: "permissions_modal",
+  });
   const navigate = useNavigate();
 
   const event = navState.args?.event as Event;
   const origin = navState.origin as OriginData;
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
-  const [rememberPermission, setRememberPermission] = useState(false);
+
   const [showJSON, setShowJSON] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [permissionOption, setPermissionOption] = useState<PermissionOption>(
+    PermissionOption.ASK_EVERYTIME
+  );
 
   // TODO: refactor: the success message and loading will not be displayed because after the reply the prompt is closed.
   async function confirm() {
@@ -37,7 +45,7 @@ function ConfirmSignMessage() {
       setLoading(true);
       msg.reply({
         blocked: false,
-        enabled: rememberPermission,
+        permissionOption: permissionOption,
       });
       setSuccessMessage(tCommon("success"));
     } catch (e) {
@@ -90,8 +98,8 @@ function ConfirmSignMessage() {
                     t={t}
                     values={{
                       host: origin.host,
-                      kind: t(`kinds.${event.kind}`, {
-                        defaultValue: t("kinds.unknown", {
+                      kind: t(`kinds.${event.kind}.title`, {
+                        defaultValue: t("kinds.unknown.title", {
                           kind: event.kind,
                         }),
                       }),
@@ -113,28 +121,47 @@ function ConfirmSignMessage() {
                 </div>
               )}
             </div>
-            <div>
-              <div className="flex items-center mb-4">
-                <Checkbox
-                  id="remember_permission"
-                  name="remember_permission"
-                  checked={rememberPermission}
-                  onChange={(event) => {
-                    setRememberPermission(event.target.checked);
-                  }}
-                />
-                <label
-                  htmlFor="remember_permission"
-                  className="cursor-pointer ml-2 block text-sm text-gray-900 font-medium dark:text-white"
-                >
-                  {tCommon("actions.remember")}
-                </label>
-              </div>
+            <div className="flex flex-col gap-4">
+              <PermissionModal
+                isOpen={modalOpen}
+                onClose={() => {
+                  setModalOpen(false);
+                }}
+                permissionCallback={(permission) => {
+                  setPermissionOption(permission);
+                  setModalOpen(false);
+                }}
+                permission={t(`kinds.${event.kind}.title`, {
+                  defaultValue: t("kinds.unknown.title", {
+                    kind: event.kind,
+                  }),
+                })}
+              />
               <ConfirmOrCancel
                 disabled={loading}
                 loading={loading}
                 onCancel={reject}
               />
+
+              <div className="flex gap-2 justify-center text-gray-600 dark:text-neutral-400 text-sm">
+                <div className="shrink-0">
+                  <PopiconsShieldCheckLine className="w-5 h-5"></PopiconsShieldCheckLine>
+                </div>
+                <button type="button" onClick={() => setModalOpen(true)}>
+                  <Trans
+                    i18nKey={permissionOption}
+                    t={tPermissions}
+                    values={{
+                      permission: t(`kinds.${event.kind}.title`, {
+                        defaultValue: t("kinds.unknown.title", {
+                          kind: event.kind,
+                        }),
+                      }),
+                    }}
+                    components={[]}
+                  />
+                </button>
+              </div>
             </div>
           </Container>
         </form>
