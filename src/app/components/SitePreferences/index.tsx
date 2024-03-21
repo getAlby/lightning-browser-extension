@@ -251,7 +251,6 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
                     .filter((x) => x.enabled)
                     .map((permission) => (
                       <>
-                        `${getPermissionKey(permission)}.title`
                         <Badge
                           key={permission.method}
                           label={
