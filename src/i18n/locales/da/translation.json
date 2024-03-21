@@ -599,8 +599,7 @@
       "edit_allowance": {
         "title": "Rediger pulje",
         "screen_reader": "Indstillinger for pulje"
-      },
-      "edit_permissions": "Rediger tilladelser"
+      }
     },
     "qrcode_scanner": {
       "title": "Skan QR-kode",
@@ -661,14 +660,6 @@
     }
   },
   "permissions": {
-    "nostr": {
-      "getpublickey": "Læs din offentlige nøgle",
-      "nip04decrypt": "De-krypter data",
-      "nip04encrypt": "Krypter data",
-      "nip44decrypt": "De-krypter data",
-      "nip44encrypt": "Krypter data",
-      "signmessage": "Underskriv meddelelse med din nøgle"
-    },
     "commando": {
       "bkpr-listbalances": "Liste over alle nuværende og tidligere kontosaldi",
       "checkmessage": "Verificer, at signaturen blev genereret af en bestemt node",
