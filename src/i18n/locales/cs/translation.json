@@ -672,8 +672,7 @@
       "edit_allowance": {
         "title": "Upravit příspěvek",
         "screen_reader": "Možnosti příspěvku"
-      },
-      "edit_permissions": "Upravit oprávnění"
+      }
     },
     "qrcode_scanner": {
       "title": "Skenovat QR kód",
@@ -786,14 +785,6 @@
       "listfunds": "Vypsat seznam všech dostupných prostředků",
       "listforwards": "Zobrazit seznam všech htlc, které se uzel pokusil předat dále",
       "invoice": "Vytvořit novou platební fakturu"
-    },
-    "nostr": {
-      "getpublickey": "Přečíst svůj veřejný klíč",
-      "nip04decrypt": "Dešifrovat data",
-      "nip04encrypt": "Zašifrovat data",
-      "nip44decrypt": "Dešifrovat data",
-      "nip44encrypt": "Zašifrovat data",
-      "signmessage": "Podepsat zprávu klíčem"
     },
     "lnc": {
       "estimatefee": "Odhadnout sazbu poplatku a celkové poplatky za transakci",
