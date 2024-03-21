@@ -12,7 +12,8 @@
           "enter_password": "Por favor, introduce un código de acceso.",
           "confirm_password": "Por favor, confirma tu código de acceso.",
           "mismatched_password": "Los códigos no coinciden."
-        }
+        },
+        "title": "Establecer contraseña para desbloquear la extensión"
       },
       "test_connection": {
         "ready": "Genial, ¡ya estás listo!",
@@ -526,32 +527,7 @@
       "block_and_ignore": "Bloquear e ignorar {{host}}",
       "block_added": "Se agregó {{host}} a la lista de bloqueados, vuelva a cargar el sitio web.",
       "view_details": "Más información",
-      "hide_details": "Ocultar los detalles",
-      "kinds": {
-        "0": "metadatos",
-        "1": "nota corta de texto",
-        "2": "Recomendar un relé",
-        "3": "contactos",
-        "4": "mensajes directos cifrados",
-        "5": "borrado de eventos",
-        "7": "reacción",
-        "8": "concesión de distintivo",
-        "40": "creación del canal",
-        "41": "metadatos del canal",
-        "42": "mensaje del canal",
-        "43": "ocultar mensaje del canal",
-        "44": "silenciar a un usuario del canal",
-        "1984": "reportando",
-        "9734": "solicitud de eliminación",
-        "9735": "borrar",
-        "10002": "metadatos de la lista de relés",
-        "22242": "autenticación del cliente",
-        "24133": "conectarse a nostr",
-        "30008": "distintivos del perfil",
-        "30009": "definición del distintivo",
-        "30023": "contenidos largos",
-        "30078": "datos específicos de la aplicación"
-      }
+      "hide_details": "Ocultar los detalles"
     },
     "confirm_request_permission": {
       "title": "Aprobar solicitud",
@@ -696,8 +672,7 @@
       "enable_login": {
         "title": "Habilitar inicio de sesión en el sitio web",
         "subtitle": "Iniciar sesión automáticamente sin confirmación cuando el sitio web lo solicite."
-      },
-      "edit_permissions": "Editar Permisos"
+      }
     },
     "qrcode_scanner": {
       "title": "Escanear el Código QR",
@@ -806,14 +781,6 @@
       "listnodes": "Enumere los nodos sobre los que el nodo ha aprendido a través de mensajes gossip",
       "listsendpays": "Obtiene el estado de todos los comandos sendpay",
       "feerates": "Devuelve las tarifas que utilizará CLN"
-    },
-    "nostr": {
-      "getpublickey": "Leer tu clave pública",
-      "nip04decrypt": "Descifrar datos",
-      "nip04encrypt": "Cifrar datos",
-      "nip44decrypt": "Descifrar datos",
-      "nip44encrypt": "Cifrar datos",
-      "signmessage": "Firma el mensaje con tu clave"
     },
     "lnd": {
       "queryroutes": "Consultar una posible ruta",
