@@ -28,12 +28,8 @@ export default function TestConnection() {
     }, 45000);
 
     try {
-      const response = await api.getAccountInfo();
-      if (response.name && response.balance?.balance) {
-        navigate("/pin-extension");
-      } else {
-        setErrorMessage(t("connection_error"));
-      }
+      await api.getAccountInfo();
+      navigate("/pin-extension");
     } catch (e) {
       const message = e instanceof Error ? `(${e.message})` : "";
       console.error(message);
