@@ -1,14 +1,23 @@
 import utils from "~/common/lib/utils";
 import { getHostFromSender } from "~/common/utils/helpers";
 import db from "~/extension/background-script/db";
-import type { MessageAllowanceEnable, Sender } from "~/types";
+import {
+  PermissionMethodNostr,
+  type MessageAllowanceEnable,
+  type Sender,
+} from "~/types";
 
+import { addPermissionFor } from "~/extension/background-script/permissions";
 import state from "../../state";
 import { ExtensionIcon, setIcon } from "../setup/setIcon";
 
 const enable = async (message: MessageAllowanceEnable, sender: Sender) => {
   const host = getHostFromSender(sender);
   if (!host) return;
+
+  const allowedkinds = [
+    1, 3, 7, 22242, 30023, 9734, 30008, 30009, 22242, 0, 10002,
+  ];
 
   const isUnlocked = await state.getState().isUnlocked();
   const account = await state.getState().getAccount();
@@ -35,6 +44,7 @@ const enable = async (message: MessageAllowanceEnable, sender: Sender) => {
       const response = await utils.openPrompt<{
         enabled: boolean;
         remember: boolean;
+        preset: string;
       }>(message);
 
       if (response.data.enabled && sender.tab) {
@@ -70,6 +80,22 @@ const enable = async (message: MessageAllowanceEnable, sender: Sender) => {
             createdAt: Date.now().toString(),
             lnurlAuth: false,
             tag: "",
+          });
+        }
+        if (response.data.preset === "reasonable") {
+          allowedkinds.forEach(async (kinds) => {
+            await addPermissionFor(
+              PermissionMethodNostr["NOSTR_SIGNMESSAGE"] + "/" + kinds,
+              host
+            );
+          });
+          await addPermissionFor(
+            PermissionMethodNostr["NOSTR_GETPUBLICKEY"],
+            host
+          );
+        } else if (response.data.preset === "trust_fully") {
+          Object.values(PermissionMethodNostr).forEach(async (permission) => {
+            await addPermissionFor(permission, host);
           });
         }
         await db.saveToStorage();
