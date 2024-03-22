@@ -29,7 +29,7 @@ export default function TestConnection() {
 
     try {
       const response = await api.getAccountInfo();
-      if (response.name && response.info.alias) {
+      if (response.name && response.balance?.balance) {
         navigate("/pin-extension");
       } else {
         setErrorMessage(t("connection_error"));
