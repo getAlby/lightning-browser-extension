@@ -988,6 +988,7 @@
     "description": "Description",
     "description_full": "Full Description",
     "success_message": "{{amount}}{{fiatAmount}} are on their way to {{destination}}",
+    "amount_placeholder": "Amount in {{currency}}...",
     "response": "Response",
     "message": "Message",
     "help": "Alby Guides",

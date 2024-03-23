@@ -51,7 +51,12 @@ export default function DualCurrencyField({
   rangeExceeded,
 }: React.InputHTMLAttributes<HTMLInputElement> & Props) {
   const { t: tCommon } = useTranslation("common");
-  const { getFormattedInCurrency, getCurrencyRate, settings } = useSettings();
+  const {
+    getFormattedInCurrency,
+    getCurrencyRate,
+    getCurrencySymbol,
+    settings,
+  } = useSettings();
   const { account } = useAccount();
 
   const inputEl = useRef<HTMLInputElement>(null);
@@ -64,6 +69,8 @@ export default function DualCurrencyField({
   const [minValue, setMinValue] = useState(min);
   const [maxValue, setMaxValue] = useState(max);
   const [inputValue, setInputValue] = useState(value || 0);
+  const [inputPrefix, setInputPrefix] = useState("");
+  const [inputPlaceHolder, setInputPlaceHolder] = useState(placeholder || "");
 
   const getValues = useCallback(
     async (value: number, useFiatAsMain: boolean) => {
@@ -83,7 +90,7 @@ export default function DualCurrencyField({
       const formattedSats = getFormattedInCurrency(valueInSats, "BTC");
       let formattedFiat = "";
 
-      if (showFiat && valueInFiat) {
+      if (showFiat) {
         formattedFiat = getFormattedInCurrency(valueInFiat, settings.currency);
       }
 
@@ -144,8 +151,26 @@ export default function DualCurrencyField({
 
       _setUseFiatAsMain(v);
       setInputValue(newValue);
+      setInputPrefix(getCurrencySymbol(v ? settings.currency : "BTC"));
+      if (!placeholder) {
+        setInputPlaceHolder(
+          tCommon("amount_placeholder", {
+            currency: v ? settings.currency : "Satoshis",
+          })
+        );
+      }
     },
-    [showFiat, getCurrencyRate, inputValue, min, max]
+    [
+      showFiat,
+      getCurrencyRate,
+      inputValue,
+      min,
+      max,
+      settings.currency,
+      tCommon,
+      getCurrencySymbol,
+      placeholder,
+    ]
   );
 
   const swapCurrencies = () => {
@@ -196,14 +221,14 @@ export default function DualCurrencyField({
         "block w-full placeholder-gray-500 dark:placeholder-gray-600 dark:text-white ",
         "px-0 border-0 focus:ring-0 bg-transparent"
       )}
-      placeholder={placeholder}
+      placeholder={inputPlaceHolder}
       required={required}
       pattern={pattern}
       title={title}
       onChange={onChangeWrapper}
       onFocus={onFocus}
       onBlur={onBlur}
-      value={inputValue}
+      value={inputValue ? inputValue : undefined}
       autoFocus={autoFocus}
       autoComplete={autoComplete}
       disabled={disabled}
@@ -257,17 +282,26 @@ export default function DualCurrencyField({
           outerStyles
         )}
       >
+        {!!inputPrefix && (
+          <p className="helper text-gray-500 z-1 pr-2" onClick={swapCurrencies}>
+            {inputPrefix}
+          </p>
+        )}
+
         {inputNode}
 
         {!!altFormattedValue && (
-          <p className="helper text-gray-500 z-1" onClick={swapCurrencies}>
+          <p
+            className="helper whitespace-nowrap text-gray-500 z-1"
+            onClick={swapCurrencies}
+          >
             ~{altFormattedValue}
           </p>
         )}
 
         {suffix && (
           <span
-            className="flex items-center px-3 font-medium bg-white dark:bg-surface-00dp dark:text-white"
+            className="flex  items-center px-3 font-medium bg-white dark:bg-surface-00dp dark:text-white"
             onClick={() => {
               inputEl.current?.focus();
             }}

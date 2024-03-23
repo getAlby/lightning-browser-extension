@@ -226,7 +226,6 @@ function ReceiveInvoice() {
                       id="amount"
                       min={0}
                       label={t("amount.label")}
-                      placeholder={t("amount.placeholder")}
                       showFiat={showFiat}
                       onChange={handleChange}
                       autoFocus
