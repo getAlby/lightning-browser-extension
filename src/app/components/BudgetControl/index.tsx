@@ -25,8 +25,6 @@ function BudgetControl({
     keyPrefix: "budget_control",
   });
 
-  const { t: tCommon } = useTranslation("common");
-
   return (
     <div className="mb-4">
       <div className={`flex items-center`}>
@@ -65,7 +63,6 @@ function BudgetControl({
             id="budget"
             min={0}
             label={t("budget.label")}
-            placeholder={tCommon("sats", { count: 0 })}
             value={budget}
             onChange={onBudgetChange}
           />

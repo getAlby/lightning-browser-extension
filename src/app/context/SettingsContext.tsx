@@ -7,6 +7,7 @@ import { ACCOUNT_CURRENCIES, CURRENCIES } from "~/common/constants";
 import api from "~/common/lib/api";
 import { DEFAULT_SETTINGS } from "~/common/settings";
 import {
+  getCurrencySymbol as getCurrencySymbolUtil,
   getFormattedCurrency as getFormattedCurrencyUtil,
   getFormattedFiat as getFormattedFiatUtil,
   getFormattedNumber as getFormattedNumberUtil,
@@ -21,6 +22,7 @@ interface SettingsContextType {
   getFormattedFiat: (amount: number | string) => Promise<string>;
   getFormattedSats: (amount: number | string) => string;
   getFormattedNumber: (amount: number | string) => string;
+  getCurrencySymbol: (currency: CURRENCIES | ACCOUNT_CURRENCIES) => string;
   getFormattedInCurrency: (
     amount: number | string,
     currency?: ACCOUNT_CURRENCIES | CURRENCIES
@@ -129,6 +131,13 @@ export const SettingsProvider = ({
     });
   };
 
+  const getCurrencySymbol = (currency: CURRENCIES | ACCOUNT_CURRENCIES) => {
+    return getCurrencySymbolUtil({
+      currency,
+      locale: settings.locale,
+    });
+  };
+
   // update locale on every change
   useEffect(() => {
     i18n.changeLanguage(settings.locale);
@@ -151,6 +160,7 @@ export const SettingsProvider = ({
     getFormattedNumber,
     getFormattedInCurrency,
     getCurrencyRate,
+    getCurrencySymbol,
     settings,
     updateSetting,
     isLoading,

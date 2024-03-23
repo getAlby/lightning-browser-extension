@@ -222,7 +222,6 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
               label={t("new_budget.label")}
               min={0}
               autoFocus
-              placeholder={tCommon("sats", { count: 0 })}
               value={budget}
               hint={t("hint")}
               showFiat={showFiat}
