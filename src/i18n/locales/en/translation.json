@@ -993,7 +993,7 @@
         },
         "1984": {
           "title": "report note",
-          "description": "Report a note for spam, illegal or explicit content "
+          "description": "Report a note for spam, illegal or explicit content"
         },
         "9734": {
           "title": "request zap",
@@ -1025,11 +1025,11 @@
         },
         "30023": {
           "title": "long note",
-          "description": "Sign a long-form notes like articles or blog posts"
+          "description": "Sign long-form notes like articles or blog posts"
         },
         "30078": {
           "title": "app data",
-          "description": "Sign an application-specific data"
+          "description": "Sign application-specific data"
         }
       }
     },

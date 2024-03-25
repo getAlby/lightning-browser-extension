@@ -101,7 +101,7 @@ function NostrEnableComponent(props: Props) {
             />
             <PermissionPreset
               title={t("presets.paranoid.title")}
-              description={t("presets.reasonable.description")}
+              description={t("presets.paranoid.description")}
               icon={<PopiconsGlassesSolid className="w-6 h-6" />}
               onClick={() => setSelectedCard(PermissionPresets.PARANOID)}
               isSelected={selectedCard === PermissionPresets.PARANOID}
