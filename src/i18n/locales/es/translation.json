@@ -586,9 +586,6 @@
       "btcpay": {
         "name": "BTCPay"
       }
-    },
-    "nostr_enable": {
-      "request2": "Solicitud para firmar eventos utilizando su clave privada"
     }
   },
   "common": {
