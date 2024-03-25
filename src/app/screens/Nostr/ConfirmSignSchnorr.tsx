@@ -76,10 +76,7 @@ function ConfirmSignSchnorr() {
                 image={origin.icon}
                 url={origin.host}
               />
-              <ContentMessage
-                heading={t("allow_sign", { host: origin.host })}
-                content={sigHash}
-              />
+              <ContentMessage heading={t("allow_sign")} content={sigHash} />
               <div className="flex items-center">
                 <Checkbox
                   id="remember_permission"
