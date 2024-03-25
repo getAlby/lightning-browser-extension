@@ -843,7 +843,7 @@
         "fee": "Fee"
       },
       "allow": "Allow this website to:",
-      "allow_sign": "Allow {{host}} to sign:",
+      "allow_sign": "Allow this website to sign:",
       "block_and_ignore": "Block and ignore {{host}}",
       "block_added": "Added {{host}} to the blocklist, please reload the website."
     },
@@ -918,7 +918,7 @@
     "liquid": {
       "title": "Liquid",
       "allow": "Allow this website to:",
-      "allow_sign": "Allow {{host}} to sign:",
+      "allow_sign": "Allow this website to sign:",
       "block_and_ignore": "Block and ignore {{host}}",
       "block_added": "Added {{host}} to the blocklist, please reload the website."
     },
@@ -926,9 +926,9 @@
       "title": "Nostr",
       "allow": "Allow this website to:",
       "content": "This website asks you to sign:",
-      "allow_sign": "Allow {{host}} to sign:",
-      "allow_sign_event": "Allow {{host}} to sign a <0>{{kind}}</0> event",
-      "allow_encrypt": "Allow {{host}} to encrypt the message:",
+      "allow_sign": "Allow this website to sign:",
+      "allow_sign_event": "Allow this website to sign a <0>{{kind}}</0> event:",
+      "allow_encrypt": "Allow this website to encrypt the message:",
       "view_details": "View details",
       "hide_details": "Hide details",
       "block_and_ignore": "Block and ignore {{host}}",

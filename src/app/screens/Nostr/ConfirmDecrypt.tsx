@@ -66,8 +66,8 @@ function NostrConfirmDecrypt() {
               isSmall={false}
             />
             <div className="dark:text-white pt-6 mb-4">
-              <p className="mb-2">{t("allow", { host: origin.host })}</p>
-              <p className="dark:text-white">
+              <p className="mb-2 font-medium text-sm">{t("allow")}</p>
+              <p>
                 <PopiconsCheckLine className="w-5 h-5 mr-2 inline" />
                 {tPermissions("nostr.decrypt")}
               </p>

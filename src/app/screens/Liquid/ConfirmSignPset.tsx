@@ -105,8 +105,8 @@ function ConfirmSignPset() {
             />
             <div className="p-4 shadow bg-white dark:bg-surface-02dp rounded-lg overflow-hidden flex flex-col gap-4">
               <div className="flex justify-between items-start">
-                <h2 className="font-medium dark:text-white">
-                  {t("allow_sign", { host: origin.host })}{" "}
+                <h2 className="font-medium text-sm dark:text-white">
+                  {t("allow_sign")}{" "}
                 </h2>
                 <Hyperlink
                   href="https://guides.getalby.com/user-guide/v/alby-account-and-browser-extension/alby-browser-extension/features/liquid"

@@ -54,7 +54,7 @@ const ConfirmRequestPermission: FC = () => {
               isSmall={false}
             />
             <div className="dark:text-white pt-4">
-              <p className="mb-4">{t("allow")}</p>
+              <p className="mb-4 font-medium text-sm">{t("allow")}</p>
               <div className="mb-6 center dark:text-white">
                 <p className="font-semibold">{requestMethod}</p>
                 {description && (

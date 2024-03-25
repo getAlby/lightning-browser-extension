@@ -116,7 +116,7 @@ function ConfirmSignMessage() {
                 </Hyperlink>
               </div>
               {showJSON && (
-                <div className="whitespace-pre-wrap break-words p-2 mb-4 shadow bg-white rounded-lg dark:bg-surface-02dp text-gray-500 dark:text-gray-400">
+                <div className="whitespace-pre-wrap break-words p-2 mb-4 shadow bg-white rounded-lg dark:bg-surface-02dp text-gray-500 dark:text-gray-400 text-sm">
                   {JSON.stringify(event, null, 2)}
                 </div>
               )}

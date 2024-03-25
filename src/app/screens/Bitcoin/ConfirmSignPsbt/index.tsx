@@ -106,8 +106,8 @@ function ConfirmSignPsbt() {
               url={origin.host}
             />
             <div className="p-4 shadow bg-white dark:bg-surface-02dp rounded-lg overflow-hidden flex flex-col gap-4">
-              <h2 className="font-medium dark:text-white">
-                {t("allow_sign", { host: origin.host })}
+              <h2 className="font-medium text-sm dark:text-white">
+                {t("allow_sign")}
               </h2>
             </div>
             <div className="flex w-full justify-center">
