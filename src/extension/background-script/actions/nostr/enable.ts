@@ -95,6 +95,7 @@ const enable = async (message: MessageAllowanceEnable, sender: Sender) => {
           const reasonableEventKindIds = [
             0, // Update profile
             1, // Short text note
+            3, // Update follow list
             4, // Encrypted direct messages
             7, // Reaction
             9734, // Zap request
