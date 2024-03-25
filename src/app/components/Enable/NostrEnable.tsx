@@ -74,15 +74,15 @@ function NostrEnableComponent(props: Props) {
             url={props.origin.host}
           />
 
-          <div className="pt-3">
-            {hasHttp && (
+          {hasHttp && (
+            <div className="pt-3 text-sm">
               <Alert type="warn">
                 {tCommon("enable.insecure_domain_warn")}
               </Alert>
-            )}
-          </div>
+            </div>
+          )}
 
-          <div className="flex flex-col gap-2 dark:text-white pt-6">
+          <div className="flex flex-col gap-2 dark:text-white my-5">
             <p className="text-base font-medium">{t("description")}</p>
             <PermissionPreset
               title={t("presets.trust_fully.title")}
