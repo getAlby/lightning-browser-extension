@@ -552,8 +552,21 @@
     },
     "nostr_enable": {
       "title": "Connect to Nostr",
-      "request1": "Request to read your Nostr public key",
-      "request2": "Request to sign events using your private key"
+      "description": "How should this app's requests be handled?",
+      "presets": {
+        "trust_fully": {
+          "title": "I fully trust it",
+          "description": "Auto-sign all requests (except payments)"
+        },
+        "reasonable": {
+          "title": "Let’s be reasonable",
+          "description": "Ask me only for potentially intrusive stuff"
+        },
+        "paranoid": {
+          "title": "I’m a bit paranoid",
+          "description": "Do not sign anything without asking me!"
+        }
+      }
     },
     "liquid_enable": {
       "title": "Connect to Liquid",

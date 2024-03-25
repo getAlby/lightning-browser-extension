@@ -3,6 +3,7 @@ import { getHostFromSender } from "~/common/utils/helpers";
 import db from "~/extension/background-script/db";
 import {
   PermissionMethodNostr,
+  PermissionPresets,
   type MessageAllowanceEnable,
   type Sender,
 } from "~/types";
@@ -82,7 +83,7 @@ const enable = async (message: MessageAllowanceEnable, sender: Sender) => {
             tag: "",
           });
         }
-        if (response.data.preset === "reasonable") {
+        if (response.data.preset === PermissionPresets.REASONABLE) {
           allowedkinds.forEach(async (kinds) => {
             await addPermissionFor(
               PermissionMethodNostr["NOSTR_SIGNMESSAGE"] + "/" + kinds,
@@ -93,7 +94,7 @@ const enable = async (message: MessageAllowanceEnable, sender: Sender) => {
             PermissionMethodNostr["NOSTR_GETPUBLICKEY"],
             host
           );
-        } else if (response.data.preset === "trust_fully") {
+        } else if (response.data.preset === PermissionPresets.TRUST_FULLY) {
           Object.values(PermissionMethodNostr).forEach(async (permission) => {
             await addPermissionFor(permission, host);
           });

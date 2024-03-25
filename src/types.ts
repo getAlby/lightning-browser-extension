@@ -779,6 +779,12 @@ export interface Payment extends Omit<DbPayment, "id"> {
   id: number;
 }
 
+export enum PermissionPresets {
+  TRUST_FULLY = "trust_fully",
+  REASONABLE = "reasonable",
+  PARANOID = "paranoid",
+}
+
 export enum PermissionOption {
   ASK_EVERYTIME = "ask_everytime",
   DONT_ASK_CURRENT = "dont_ask_current",
