@@ -1303,6 +1303,14 @@
       "nip44encrypt": {
         "title": "encrypt (nip44)",
         "description": "Encrypt data"
+      },
+      "signmessage": {
+        "title": "Sign Message",
+        "description": "Sign all nostr events"
+      },
+      "signschnorr": {
+        "title": "sign schnorr",
+        "description": "Sign message with your key"
       }
     },
     "commando": {
