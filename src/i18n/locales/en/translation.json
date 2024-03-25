@@ -1306,7 +1306,7 @@
       },
       "signmessage": {
         "title": "Sign Message",
-        "description": "Allow all nostr sign events"
+        "description": "Sign all nostr events"
       },
       "signschnorr": {
         "title": "sign schnorr",
