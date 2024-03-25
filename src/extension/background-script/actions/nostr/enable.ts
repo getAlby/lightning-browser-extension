@@ -16,14 +16,9 @@ const enable = async (message: MessageAllowanceEnable, sender: Sender) => {
   const host = getHostFromSender(sender);
   if (!host) return;
 
-  const allowedkinds = [
-    1, 3, 7, 22242, 30023, 9734, 30008, 30009, 22242, 0, 10002,
-  ];
-
   const isUnlocked = await state.getState().isUnlocked();
   const account = await state.getState().getAccount();
   const allowance = await db.allowances
-
     .where("host")
     .equalsIgnoreCase(host)
     .first();
@@ -84,7 +79,20 @@ const enable = async (message: MessageAllowanceEnable, sender: Sender) => {
           });
         }
         if (response.data.preset === PermissionPresets.REASONABLE) {
-          allowedkinds.forEach(async (kinds) => {
+          const reasonableEventKindIds = [
+            0, // Update profile
+            1, // Short text note
+            3, // Update follow list
+            7, // Reaction
+            9734, // Zap Request
+            9735, // Zap
+            10002, // Relay list metadata
+            22242, // Client relay authentication
+            30023, // Long-form content
+            30008, // Manage profile badges
+            30009, // Badge definition
+          ];
+          reasonableEventKindIds.forEach(async (kinds) => {
             await addPermissionFor(
               PermissionMethodNostr["NOSTR_SIGNMESSAGE"] + "/" + kinds,
               host

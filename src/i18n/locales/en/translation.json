@@ -559,11 +559,11 @@
           "description": "Auto-sign all requests (except payments)"
         },
         "reasonable": {
-          "title": "Let’s be reasonable",
+          "title": "Let's be reasonable",
           "description": "Ask me only for potentially intrusive stuff"
         },
         "paranoid": {
-          "title": "I’m a bit paranoid",
+          "title": "I'm a bit paranoid",
           "description": "Do not sign anything without asking me!"
         }
       }
