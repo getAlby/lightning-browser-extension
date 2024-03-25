@@ -79,29 +79,37 @@ const enable = async (message: MessageAllowanceEnable, sender: Sender) => {
           });
         }
         if (response.data.preset === NostrPermissionPreset.REASONABLE) {
+          // Add permissions
+          const permissions: PermissionMethodNostr[] = [
+            PermissionMethodNostr.NOSTR_GETPUBLICKEY,
+            PermissionMethodNostr.NOSTR_NIP04ENCRYPT,
+            PermissionMethodNostr.NOSTR_NIP04DECRYPT,
+            PermissionMethodNostr.NOSTR_NIP44ENCRYPT,
+            PermissionMethodNostr.NOSTR_NIP44DECRYPT,
+          ];
+          permissions.forEach(async (permission) => {
+            await addPermissionFor(permission, host);
+          });
+
+          // Add specific signing permissions
           const reasonableEventKindIds = [
             0, // Update profile
             1, // Short text note
-            3, // Update follow list
+            4, // Encrypted direct messages
             7, // Reaction
-            9734, // Zap Request
-            9735, // Zap
+            9734, // Zap request
             10002, // Relay list metadata
             22242, // Client relay authentication
             30023, // Long-form content
             30008, // Manage profile badges
             30009, // Badge definition
           ];
-          reasonableEventKindIds.forEach(async (kinds) => {
+          reasonableEventKindIds.forEach(async (kindId) => {
             await addPermissionFor(
-              PermissionMethodNostr["NOSTR_SIGNMESSAGE"] + "/" + kinds,
+              PermissionMethodNostr.NOSTR_SIGNMESSAGE + "/" + kindId,
               host
             );
           });
-          await addPermissionFor(
-            PermissionMethodNostr["NOSTR_GETPUBLICKEY"],
-            host
-          );
         } else if (response.data.preset === NostrPermissionPreset.TRUST_FULLY) {
           Object.values(PermissionMethodNostr).forEach(async (permission) => {
             await addPermissionFor(permission, host);
