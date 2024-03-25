@@ -256,7 +256,7 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
                           label={
                             permission.method
                               .toLowerCase()
-                              .startsWith("nostr/signmessage")
+                              .startsWith("nostr/signmessage/")
                               ? tNostr(
                                   `kinds.${getPermissionKind(
                                     permission
@@ -280,7 +280,7 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
                           description={
                             permission.method
                               .toLowerCase()
-                              .startsWith("nostr/signmessage")
+                              .startsWith("nostr/signmessage/")
                               ? tNostr(
                                   `kinds.${getPermissionKind(
                                     permission
