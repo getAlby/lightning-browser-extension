@@ -552,8 +552,21 @@
     },
     "nostr_enable": {
       "title": "Connect to Nostr",
-      "request1": "Request to read your Nostr public key",
-      "request2": "Request to sign events using your private key"
+      "description": "How should this app's requests be handled?",
+      "presets": {
+        "trust_fully": {
+          "title": "I fully trust it",
+          "description": "Auto-sign all requests (except payments)"
+        },
+        "reasonable": {
+          "title": "Let's be reasonable",
+          "description": "Auto-approve most common requests"
+        },
+        "paranoid": {
+          "title": "I'm a bit paranoid",
+          "description": "Do not sign anything without asking me!"
+        }
+      }
     },
     "liquid_enable": {
       "title": "Connect to Liquid",
@@ -980,7 +993,7 @@
         },
         "1984": {
           "title": "report note",
-          "description": "Report a note for spam, illegal or explicit content "
+          "description": "Report a note for spam, illegal or explicit content"
         },
         "9734": {
           "title": "request zap",
@@ -1012,11 +1025,11 @@
         },
         "30023": {
           "title": "long note",
-          "description": "Sign a long-form notes like articles or blog posts"
+          "description": "Sign long-form notes like articles or blog posts"
         },
         "30078": {
           "title": "app data",
-          "description": "Sign an application-specific data"
+          "description": "Sign application-specific data"
         }
       }
     },
