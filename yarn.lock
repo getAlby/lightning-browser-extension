@@ -668,12 +668,12 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.52.0.tgz#78fe5f117840f69dc4a353adf9b9cd926353378c"
   integrity sha512-mjZVbpaeMZludF2fsWLD0Z9gCref1Tk4i9+wddjRvpUNqqcndPkBD09N/Mapey0b3jaXbLm2kICwFv2E64QinA==
 
-"@getalby/sdk@^3.4.0":
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/@getalby/sdk/-/sdk-3.4.0.tgz#3251e17435caccc5b6f6448a89736034ed4c0c00"
-  integrity sha512-qzIx6GVs4uc9cFyP1fpqHrMxZqqNwi0dSMcgcFMXlb2QBV1syUaNhEvdyBuQo1s+Y38UkQnRToOMqBAX6jXGwQ==
+"@getalby/sdk@^3.4.3":
+  version "3.4.3"
+  resolved "https://registry.yarnpkg.com/@getalby/sdk/-/sdk-3.4.3.tgz#6d407ea11b29a79e40118afa3c58796c1e12b556"
+  integrity sha512-K0F8Sj3aGmsBV87jfYbMBCAYbb8d9JrLA5jUYn+LuE59IF1flw4pQSb7irQBJYmiFHtvHA8+bpg38WRJr7hpeg==
   dependencies:
-    events "^3.3.0"
+    eventemitter3 "^5.0.1"
     nostr-tools "^1.17.0"
 
 "@headlessui/react@^1.7.18":
