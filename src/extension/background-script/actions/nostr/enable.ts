@@ -2,8 +2,8 @@ import utils from "~/common/lib/utils";
 import { getHostFromSender } from "~/common/utils/helpers";
 import db from "~/extension/background-script/db";
 import {
+  NostrPermissionPreset,
   PermissionMethodNostr,
-  PermissionPresets,
   type MessageAllowanceEnable,
   type Sender,
 } from "~/types";
@@ -78,7 +78,7 @@ const enable = async (message: MessageAllowanceEnable, sender: Sender) => {
             tag: "",
           });
         }
-        if (response.data.preset === PermissionPresets.REASONABLE) {
+        if (response.data.preset === NostrPermissionPreset.REASONABLE) {
           const reasonableEventKindIds = [
             0, // Update profile
             1, // Short text note
@@ -102,7 +102,7 @@ const enable = async (message: MessageAllowanceEnable, sender: Sender) => {
             PermissionMethodNostr["NOSTR_GETPUBLICKEY"],
             host
           );
-        } else if (response.data.preset === PermissionPresets.TRUST_FULLY) {
+        } else if (response.data.preset === NostrPermissionPreset.TRUST_FULLY) {
           Object.values(PermissionMethodNostr).forEach(async (permission) => {
             await addPermissionFor(permission, host);
           });

@@ -15,15 +15,15 @@ import toast from "~/app/components/Toast";
 import { classNames } from "~/app/utils";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
-import { PermissionPresets, type OriginData } from "~/types";
+import { NostrPermissionPreset, type OriginData } from "~/types";
 
 type Props = {
   origin: OriginData;
 };
 function NostrEnableComponent(props: Props) {
   const [loading, setLoading] = useState(false);
-  const [selectedCard, setSelectedCard] = useState(
-    PermissionPresets.REASONABLE
+  const [selectedPreset, setSelectedPreset] = useState(
+    NostrPermissionPreset.REASONABLE
   );
   const hasHttp = props.origin.domain.startsWith("http://");
   const { t } = useTranslation("translation", {
@@ -38,7 +38,7 @@ function NostrEnableComponent(props: Props) {
       msg.reply({
         enabled: true,
         remember: true,
-        preset: selectedCard,
+        preset: selectedPreset,
       });
     } catch (e) {
       console.error(e);
@@ -84,27 +84,30 @@ function NostrEnableComponent(props: Props) {
 
           <div className="flex flex-col gap-2 dark:text-white pt-6">
             <p className="text-base font-medium">{t("description")}</p>
-
             <PermissionPreset
               title={t("presets.trust_fully.title")}
               description={t("presets.trust_fully.description")}
               icon={<PopiconsHeartLine className="w-6 h-6" />}
-              onClick={() => setSelectedCard(PermissionPresets.TRUST_FULLY)}
-              isSelected={selectedCard === PermissionPresets.TRUST_FULLY}
+              onClick={() =>
+                setSelectedPreset(NostrPermissionPreset.TRUST_FULLY)
+              }
+              isSelected={selectedPreset === NostrPermissionPreset.TRUST_FULLY}
             />
             <PermissionPreset
               title={t("presets.reasonable.title")}
               description={t("presets.reasonable.description")}
               icon={<PopiconsLikeLine className="w-6 h-6" />}
-              onClick={() => setSelectedCard(PermissionPresets.REASONABLE)}
-              isSelected={selectedCard === PermissionPresets.REASONABLE}
+              onClick={() =>
+                setSelectedPreset(NostrPermissionPreset.REASONABLE)
+              }
+              isSelected={selectedPreset === NostrPermissionPreset.REASONABLE}
             />
             <PermissionPreset
               title={t("presets.paranoid.title")}
               description={t("presets.paranoid.description")}
               icon={<PopiconsGlassesSolid className="w-6 h-6" />}
-              onClick={() => setSelectedCard(PermissionPresets.PARANOID)}
-              isSelected={selectedCard === PermissionPresets.PARANOID}
+              onClick={() => setSelectedPreset(NostrPermissionPreset.PARANOID)}
+              isSelected={selectedPreset === NostrPermissionPreset.PARANOID}
             />
           </div>
         </div>

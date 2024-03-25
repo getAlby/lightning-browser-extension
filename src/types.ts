@@ -779,7 +779,7 @@ export interface Payment extends Omit<DbPayment, "id"> {
   id: number;
 }
 
-export enum PermissionPresets {
+export enum NostrPermissionPreset {
   TRUST_FULLY = "trust_fully",
   REASONABLE = "reasonable",
   PARANOID = "paranoid",
