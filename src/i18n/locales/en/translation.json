@@ -1178,7 +1178,7 @@
       "set_permissions": "Set Permissions:",
       "ask_everytime": "Ask everytime for <0>{{permission}}</0>",
       "dont_ask_current": "Don't ask again for <0>{{permission}}</0>",
-      "dont_ask_any": "Don't ask again for <0>any Nostr Requests</0>"
+      "dont_ask_any": "Don't ask again for <0>any nostr requests</0>"
     },
     "transactions_table": {
       "fee": "Fee",
