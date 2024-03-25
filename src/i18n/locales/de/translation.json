@@ -668,7 +668,29 @@
       "hide_details": "Details ausblenden",
       "allow_sign_event": "Erlaube {{Gastgeber}}, ein <0>{{kind}}</0> Ereignis zu unterzeichnen",
       "allow_encrypt": "Erlaube {{host}}, die Nachricht zu verschlüsseln:",
-      "recipient": "Empfänger"
+      "recipient": "Empfänger",
+      "kinds": {
+        "unknown": {
+          "description": "Nicht identifizierte Aktion",
+          "title": "Art {{kind}}"
+        },
+        "0": {
+          "title": "Profil aktualisieren",
+          "description": "Aktualisiere deinen Namen, deine Beschreibung, dein Profilbild, deine Nostr-Adresse und weitere Profil-Metadaten."
+        },
+        "1": {
+          "title": "kurze Notiz",
+          "description": "Unterschreiben deine kurze Textnotiz"
+        },
+        "2": {
+          "title": "Relais empfehlen",
+          "description": "Ein empfohlenes Relais teilen"
+        },
+        "3": {
+          "title": "Verfolgungsliste aktualisieren",
+          "description": "Aktualisiere die Liste der Konten, denen du folgst"
+        }
+      }
     },
     "confirm_request_permission": {
       "title": "Antrag genehmigen",

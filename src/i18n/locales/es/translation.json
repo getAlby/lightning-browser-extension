@@ -661,9 +661,9 @@
   "components": {
     "allowance_menu": {
       "confirm_delete": "¿Está seguro de que desea eliminar este sitio web?",
-      "hint": "Esto restablecerá el presupuesto actual",
+      "hint": "Cambiar este número restablecerá el presupuesto actual",
       "new_budget": {
-        "label": "Nuevo presupuesto"
+        "label": "Presupuesto de pagos con un clic"
       },
       "edit_allowance": {
         "title": "Editar Asignación",
