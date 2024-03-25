@@ -781,9 +781,7 @@
       "title": "Anslut till Liquid"
     },
     "nostr_enable": {
-      "title": "Anslut till Nostr",
-      "request1": "Begär att läsa din publika Nostr-nyckel",
-      "request2": "Begäran att signera händelser med din privata nyckel"
+      "title": "Anslut till Nostr"
     },
     "webbtc_enable": {
       "request2": "Begär fakturor och Webbtc-information",

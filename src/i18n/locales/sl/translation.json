@@ -522,8 +522,7 @@
       "title": "Poveži se z Liquid"
     },
     "nostr_enable": {
-      "title": "Povežite se z Nostr",
-      "request1": "Zahteva dostop do javnega ključa Nostr"
+      "title": "Povežite se z Nostr"
     },
     "webbtc_enable": {
       "request2": "Pridobi račune in podatke o Webbtc",

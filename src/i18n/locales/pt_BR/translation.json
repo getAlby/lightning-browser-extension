@@ -859,9 +859,7 @@
       "request1": "Interagir com este site exige configurar uma chave"
     },
     "nostr_enable": {
-      "request1": "Solicitar a leitura de sua chave pública Nostr",
-      "title": "Conectar no Nostr",
-      "request2": "Solicitar assinar eventos usando sua chave privada"
+      "title": "Conectar no Nostr"
     },
     "webln_enable": {
       "title": "Conectar no WebLN",
