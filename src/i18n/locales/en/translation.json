@@ -560,7 +560,7 @@
         },
         "reasonable": {
           "title": "Let's be reasonable",
-          "description": "Ask me only for potentially intrusive stuff"
+          "description": "Auto-approve most common requests"
         },
         "paranoid": {
           "title": "I'm a bit paranoid",
