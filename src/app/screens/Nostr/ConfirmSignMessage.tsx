@@ -12,7 +12,6 @@ import PermissionModal from "~/app/components/PermissionModal";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import toast from "~/app/components/Toast";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
-import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import { Event } from "~/extension/providers/nostr/types";
 import { OriginData, PermissionOption } from "~/types";
@@ -57,8 +56,19 @@ function ConfirmSignMessage() {
   }
 
   function reject(e: React.MouseEvent<HTMLAnchorElement>) {
-    e.preventDefault();
-    msg.error(USER_REJECTED_ERROR);
+    try {
+      setLoading(true);
+      msg.reply({
+        blocked: true,
+        permissionOption: permissionOption,
+      });
+      setSuccessMessage(tCommon("success"));
+    } catch (e) {
+      console.error(e);
+      if (e instanceof Error) toast.error(`${tCommon("error")}: ${e.message}`);
+    } finally {
+      setLoading(false);
+    }
   }
 
   function close(e: React.MouseEvent<HTMLButtonElement>) {
