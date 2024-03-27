@@ -59,7 +59,7 @@
     "elliptic": "^6.5.4",
     "events": "^3.3.0",
     "html5-qrcode": "^2.3.8",
-    "i18next": "^23.10.0",
+    "i18next": "^23.10.1",
     "i18next-browser-languagedetector": "^7.2.0",
     "liquidjs-lib": "^6.0.2-liquid.29",
     "lnmessage": "^0.2.7",
