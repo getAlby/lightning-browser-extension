@@ -248,7 +248,7 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
                 </p>
                 <div>
                   {permissions
-                    .filter((x) => x.enabled)
+                    .filter((x) => x.enabled && !x.blocked)
                     .map((permission) => (
                       <>
                         <Badge
@@ -313,6 +313,82 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
                             );
                           }}
                           className="bg-green-50 dark:bg-emerald-950 border border-green-100 dark:border-emerald-900 text-gray-800 dark:text-neutral-200 gap-1"
+                        />
+                      </>
+                    ))}
+                </div>
+              </div>
+              <div>
+                <p className="mb-3 text-xs font-semibold text-gray-800 dark:text-neutral-200">
+                  {"Always reject"}
+                </p>
+                <div>
+                  {permissions
+                    .filter((x) => x.enabled && x.blocked)
+                    .map((permission) => (
+                      <>
+                        <Badge
+                          key={permission.method}
+                          label={
+                            permission.method
+                              .toLowerCase()
+                              .startsWith("nostr/signmessage/")
+                              ? tNostr(
+                                  `kinds.${getPermissionKind(
+                                    permission
+                                  )}.title`,
+                                  {
+                                    defaultValue: tNostr(
+                                      "kinds.unknown.title",
+                                      {
+                                        kind: getPermissionKind(permission),
+                                      }
+                                    ),
+                                  }
+                                )
+                              : tPermissions(
+                                  `${getPermissionKey(permission)}.title`,
+                                  {
+                                    defaultValue: getPermissionKind(permission),
+                                  }
+                                )
+                          }
+                          description={
+                            permission.method
+                              .toLowerCase()
+                              .startsWith("nostr/signmessage/")
+                              ? tNostr(
+                                  `kinds.${getPermissionKind(
+                                    permission
+                                  )}.description`,
+                                  {
+                                    defaultValue: tNostr(
+                                      "kinds.unknown.description",
+                                      {
+                                        kind: getPermissionKind(permission),
+                                      }
+                                    ),
+                                  }
+                                )
+                              : tPermissions(
+                                  getPermissionKey(permission).concat(
+                                    ".description"
+                                  ),
+                                  {
+                                    defaultValue: getPermissionKind(permission),
+                                  }
+                                )
+                          }
+                          onDelete={() => {
+                            setPermissions(
+                              permissions.map((prm) =>
+                                prm.id === permission.id
+                                  ? { ...prm, enabled: !prm.enabled }
+                                  : prm
+                              )
+                            );
+                          }}
+                          className="bg-red-50 dark:bg-red-950 border border-red-100 dark:border-red-900 text-gray-800 dark:text-neutral-200 gap-1"
                         />
                       </>
                     ))}

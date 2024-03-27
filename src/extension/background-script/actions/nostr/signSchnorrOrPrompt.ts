@@ -40,7 +40,8 @@ const signSchnorrOrPrompt = async (
       if (promptResponse.data.enabled) {
         await addPermissionFor(
           PermissionMethodNostr["NOSTR_SIGNSCHNORR"],
-          host
+          host,
+          promptResponse.data.blocked
         );
       }
     }

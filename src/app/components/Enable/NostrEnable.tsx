@@ -39,6 +39,7 @@ function NostrEnableComponent(props: Props) {
         enabled: true,
         remember: true,
         preset: selectedPreset,
+        blocked: false,
       });
     } catch (e) {
       console.error(e);

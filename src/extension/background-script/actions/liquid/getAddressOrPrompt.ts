@@ -35,6 +35,7 @@ const getAddressOrPrompt = async (message: MessageGetLiquidAddress) => {
       const promptResponse = await utils.openPrompt<{
         confirm: boolean;
         rememberPermission: boolean;
+        blocked: boolean;
       }>({
         args: {},
         ...message,
@@ -44,7 +45,8 @@ const getAddressOrPrompt = async (message: MessageGetLiquidAddress) => {
       if (promptResponse.data.rememberPermission) {
         await addPermissionFor(
           PermissionMethodLiquid["LIQUID_GETADDRESS"],
-          message.origin.host
+          message.origin.host,
+          promptResponse.data.blocked
         );
       }
 

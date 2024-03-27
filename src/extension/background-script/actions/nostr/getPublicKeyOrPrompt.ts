@@ -29,6 +29,7 @@ const getPublicKeyOrPrompt = async (
       const promptResponse = await utils.openPrompt<{
         confirm: boolean;
         rememberPermission: boolean;
+        blocked: boolean;
       }>({
         args: {},
         ...message,
@@ -38,7 +39,8 @@ const getPublicKeyOrPrompt = async (
       if (promptResponse.data.rememberPermission) {
         await addPermissionFor(
           PermissionMethodNostr["NOSTR_GETPUBLICKEY"],
-          host
+          host,
+          promptResponse.data.blocked
         );
       }
 

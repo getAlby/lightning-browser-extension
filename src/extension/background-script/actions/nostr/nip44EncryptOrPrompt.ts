@@ -32,6 +32,7 @@ const nip44EncryptOrPrompt = async (
       const promptResponse = await utils.openPrompt<{
         confirm: boolean;
         rememberPermission: boolean;
+        blocked: boolean;
       }>({
         ...message,
         action: "public/nostr/confirmEncrypt",
@@ -47,7 +48,8 @@ const nip44EncryptOrPrompt = async (
       if (promptResponse.data.rememberPermission) {
         await addPermissionFor(
           PermissionMethodNostr["NOSTR_NIP44ENCRYPT"],
-          host
+          host,
+          promptResponse.data.blocked
         );
       }
       if (promptResponse.data.confirm) {

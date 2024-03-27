@@ -41,6 +41,7 @@ const enable = async (message: MessageAllowanceEnable, sender: Sender) => {
         enabled: boolean;
         remember: boolean;
         preset: string;
+        blocked: boolean;
       }>(message);
 
       if (response.data.enabled && sender.tab) {
@@ -88,7 +89,7 @@ const enable = async (message: MessageAllowanceEnable, sender: Sender) => {
             PermissionMethodNostr.NOSTR_NIP44DECRYPT,
           ];
           permissions.forEach(async (permission) => {
-            await addPermissionFor(permission, host);
+            await addPermissionFor(permission, host, response.data.blocked);
           });
 
           // Add specific signing permissions
@@ -108,12 +109,13 @@ const enable = async (message: MessageAllowanceEnable, sender: Sender) => {
           reasonableEventKindIds.forEach(async (kindId) => {
             await addPermissionFor(
               PermissionMethodNostr.NOSTR_SIGNMESSAGE + "/" + kindId,
-              host
+              host,
+              response.data.blocked
             );
           });
         } else if (response.data.preset === NostrPermissionPreset.TRUST_FULLY) {
           Object.values(PermissionMethodNostr).forEach(async (permission) => {
-            await addPermissionFor(permission, host);
+            await addPermissionFor(permission, host, response.data.blocked);
           });
         }
         await db.saveToStorage();
