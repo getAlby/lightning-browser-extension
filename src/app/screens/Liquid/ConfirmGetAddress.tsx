@@ -27,6 +27,7 @@ function LiquidConfirmGetAddress() {
     msg.reply({
       confirm: true,
       rememberPermission,
+      blocked: false,
     });
     setLoading(false);
   }

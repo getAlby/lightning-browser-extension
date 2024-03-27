@@ -29,6 +29,7 @@ const getAddressOrPrompt = async (message: MessageGetAddress) => {
       const promptResponse = await utils.openPrompt<{
         confirm: boolean;
         rememberPermission: boolean;
+        blocked: boolean;
       }>({
         ...message,
         action: "public/webbtc/confirmGetAddress",
@@ -38,7 +39,8 @@ const getAddressOrPrompt = async (message: MessageGetAddress) => {
       if (promptResponse.data.rememberPermission) {
         await addPermissionFor(
           PermissionMethodBitcoin["BITCOIN_GETADDRESS"],
-          message.origin.host
+          message.origin.host,
+          promptResponse.data.blocked
         );
       }
 
