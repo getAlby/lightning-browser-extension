@@ -668,7 +668,105 @@
       "hide_details": "Details ausblenden",
       "allow_sign_event": "Erlaube {{Gastgeber}}, ein <0>{{kind}}</0> Ereignis zu unterzeichnen",
       "allow_encrypt": "Erlaube {{host}}, die Nachricht zu verschlüsseln:",
-      "recipient": "Empfänger"
+      "recipient": "Empfänger",
+      "kinds": {
+        "unknown": {
+          "description": "Nicht identifizierte Aktion",
+          "title": "Art {{kind}}"
+        },
+        "0": {
+          "title": "Profil aktualisieren",
+          "description": "Aktualisiere deinen Namen, deine Beschreibung, dein Profilbild, deine Nostr-Adresse und weitere Profil-Metadaten."
+        },
+        "1": {
+          "title": "kurze Notiz",
+          "description": "Unterschreiben deine kurze Textnotiz"
+        },
+        "2": {
+          "title": "Relais empfehlen",
+          "description": "Ein empfohlenes Relais teilen"
+        },
+        "3": {
+          "title": "Verfolgungsliste aktualisieren",
+          "description": "Aktualisiere die Liste der Konten, denen du folgst"
+        },
+        "4": {
+          "title": "direkte Nachricht",
+          "description": "Eine verschlüsselte Direktnachricht senden"
+        },
+        "5": {
+          "title": "Notiz löschen",
+          "description": "Relays zum Löschen eines Ereignisses auffordern"
+        },
+        "7": {
+          "title": "reagieren",
+          "description": "Unterschreibe eine Reaktion auf eine Notiz"
+        },
+        "8": {
+          "title": "Anstecknadel",
+          "description": "Verleihung eines Abzeichens an ein Nostr-Profil"
+        },
+        "43": {
+          "title": "Channelmeldung ausblenden",
+          "description": "Ausblenden einer Textnachricht in einem Channel"
+        },
+        "44": {
+          "title": "Channelbenutzer stummschalten",
+          "description": "Alle Nachrichten eines Nostr-Profils ausblenden"
+        },
+        "9734": {
+          "title": "Anfrage zappen",
+          "description": "Anforderung einer Lightningzahlung"
+        },
+        "9735": {
+          "title": "Rechnung zappen",
+          "description": "Anzeige einer Bestätigung einer bezahlten Lightningrechnung"
+        },
+        "10002": {
+          "title": "Relaisliste",
+          "description": "Aktualisiere die bevorzugten Relais, um deine Notizen zu entdecken und die Notizen anderer zu empfangen"
+        },
+        "22242": {
+          "title": "authentifizieren",
+          "description": "Authentifizierung bei einem Relais"
+        },
+        "24133": {
+          "title": "Fernanzeige",
+          "description": "Ereignisse aus der Ferne anfordern und unterzeichnen"
+        },
+        "30008": {
+          "description": "Akzeptieren, Ablehnen und Ändern der Anzeigereihenfolge von verliehenen Abzeichen",
+          "title": "Profilabzeichen"
+        },
+        "30009": {
+          "title": "Ausweis erstellen",
+          "description": "Ein neues Abzeichen erstellen"
+        },
+        "30023": {
+          "title": "lange Notiz",
+          "description": "Unterschreibe deine langen Notizen wie Artikel oder Blogbeiträge"
+        },
+        "30078": {
+          "title": "Anwendungsdaten",
+          "description": "Unterschreibe eine anwendungsspezifische Datei"
+        },
+        "40": {
+          "title": "Channel erstellen",
+          "description": "Einen öffentlichen Channel-Chat erstellen"
+        },
+        "41": {
+          "title": "Update-Channel",
+          "description": "Name, Beschreibung, Bild und zusätzliche Metadaten des Channel aktualisieren"
+        },
+        "42": {
+          "description": "Senden einer Textnachricht an einen Channel",
+          "title": "Channelnachricht senden"
+        },
+        "1984": {
+          "title": "Berichtsnotiz",
+          "description": "Melde einen Hinweis auf Spam, illegalen oder expliziten Inhalt "
+        }
+      }
     },
     "confirm_request_permission": {
       "title": "Antrag genehmigen",
@@ -914,9 +1012,7 @@
       "title": "Mit Liquid verbinden"
     },
     "nostr_enable": {
-      "title": "Mit Nostr verbinden",
-      "request1": "Anfrage zum Lesen deines öffentlichen Nostr-Schlüssels",
-      "request2": "Anfrage zum Signieren von Ereignissen mit deinem privaten Schlüssel"
+      "title": "Mit Nostr verbinden"
     },
     "webbtc_enable": {
       "request2": "Rechnungen und Webbtc-Informationen anfordern",
@@ -939,7 +1035,7 @@
       "options": {
         "account": {
           "go_to_web_wallet": "Verwalte dein Web-Konto",
-          "wallet_settings": "Einstellungen deiner Wallet",
+          "wallet_settings": "Wallet-Einstellungen",
           "add": "Verbinde deine Wallet"
         }
       },
@@ -980,18 +1076,20 @@
     "allowance_menu": {
       "edit_allowance": {
         "title": "Seiten Einstellung",
-        "screen_reader": "Zulässigkeitsoptionen"
+        "screen_reader": "Zulässigkeitsoptionen",
+        "always_allow": "Immer erlauben"
       },
       "enable_login": {
         "title": "Anmeldung auf der Webseite aktivieren",
         "subtitle": "Automatisches Einloggen ohne Bestätigung, wenn die Webseite dazu auffordert."
       },
-      "hint": "Die Änderung dieser Einstellung setzt das aktuelle Budget zurück",
+      "hint": "Durch die Änderung dieser Zahl wird das aktuelle Budget zurückgesetzt.",
       "new_budget": {
         "label": "Budget für Ein-Klick-Zahlungen",
         "link_label": "Festlegen eines Budgets für Ein-Klick-Zahlungen"
       },
-      "confirm_delete": "Bist du dir sicher, dass du die Verbindung zu dieser Webseite unterbrechen willst?"
+      "confirm_delete": "Bist du dir sicher, dass du die Verbindung zu dieser Webseite unterbrechen willst?",
+      "website_permissions": "Website-Berechtigungen"
     },
     "qrcode_scanner": {
       "actions": {
@@ -1034,10 +1132,17 @@
     },
     "badge": {
       "label": {
-        "auth": "LOGIN",
-        "imported": "IMPORTIERT",
-        "budget": "BUDGET"
+        "auth": "login",
+        "imported": "importiert",
+        "budget": "Haushalt"
       }
+    },
+    "permissions_modal": {
+      "content_label": "Berechtigungen",
+      "set_permissions": "Berechtigungen festlegen:",
+      "ask_everytime": "Jedes Mal um <0>{{Erlaubnis}}</0> bitten",
+      "dont_ask_current": "Bitte nicht mehr um <0>{{Erlaubnis}}</0>",
+      "dont_ask_any": "Frag nicht wieder nach <0>irgendwelchen Nostr-Anforderungen</0>"
     }
   },
   "common": {
@@ -1226,6 +1331,51 @@
       "nextaddr": "Abrufen der nächsten unbenutzten Onchain-Adresse innerhalb der Wallet",
       "listaddresses": "Alle Onchain-Adressen zusammen mit ihrem Guthaben abrufen",
       "newaddress": "Abrufen einer neuen Onchain-Adresse"
+    },
+    "webln": {
+      "getbalance": {
+        "description": "Lese den Saldo deines Kontos ab",
+        "title": "das Gleichgewicht erhalten"
+      }
+    },
+    "bitcoin": {
+      "getaddress": {
+        "title": "Adresse abrufen",
+        "description": "Lese deine Bitcoin-Empfangsadresse"
+      }
+    },
+    "liquid": {
+      "getaddress": {
+        "title": "Adresse abrufen",
+        "description": "Lese deine Liquid-Empfangsadresse"
+      },
+      "signschnorr": {
+        "title": "Zeichen schnorr",
+        "description": "Nachricht mit deinem Schlüssel unterschreiben"
+      }
+    },
+    "nostr": {
+      "getpublickey": {
+        "title": "öffentlichen Schlüssel lesen",
+        "description": "Lese deinen öffentlichen Schlüssel"
+      },
+      "nip04decrypt": {
+        "title": "entschlüsseln (nip04)",
+        "description": "Daten entschlüsseln"
+      },
+      "nip04encrypt": {
+        "title": "verschlüsseln (nip04)",
+        "description": "Daten verschlüsseln"
+      },
+      "nip44encrypt": {
+        "title": "verschlüsseln (nip44)",
+        "description": "Daten verschlüsseln"
+      },
+      "decrypt": "Daten entschlüsseln",
+      "nip44decrypt": {
+        "title": "entschlüsseln (nip44)",
+        "description": "Daten entschlüsseln"
+      }
     }
   }
 }

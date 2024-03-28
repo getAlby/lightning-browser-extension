@@ -256,7 +256,7 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
                           label={
                             permission.method
                               .toLowerCase()
-                              .startsWith("nostr/signmessage")
+                              .startsWith("nostr/signmessage/")
                               ? tNostr(
                                   `kinds.${getPermissionKind(
                                     permission
@@ -280,7 +280,7 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
                           description={
                             permission.method
                               .toLowerCase()
-                              .startsWith("nostr/signmessage")
+                              .startsWith("nostr/signmessage/")
                               ? tNostr(
                                   `kinds.${getPermissionKind(
                                     permission
@@ -312,7 +312,7 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
                               )
                             );
                           }}
-                          className="bg-green-100 dark:bg-emerald-950 border border-green-100 dark:border-emerald-950 text-gray-800 dark:text-neutral-200 gap-1"
+                          className="bg-green-50 dark:bg-emerald-950 border border-green-100 dark:border-emerald-900 text-gray-800 dark:text-neutral-200 gap-1"
                         />
                       </>
                     ))}
