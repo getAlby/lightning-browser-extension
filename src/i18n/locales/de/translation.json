@@ -744,11 +744,11 @@
         },
         "30023": {
           "title": "lange Notiz",
-          "description": "Unterschreibe deine langen Notizen wie Artikel oder Blogbeiträge"
+          "description": "Signiere lange Notizen wie Artikel oder Blogbeiträge"
         },
         "30078": {
           "title": "Anwendungsdaten",
-          "description": "Unterschreibe eine anwendungsspezifische Datei"
+          "description": "Anwendungsspezifische Daten unterschreiben"
         },
         "40": {
           "title": "Channel erstellen",
@@ -764,7 +764,7 @@
         },
         "1984": {
           "title": "Berichtsnotiz",
-          "description": "Melde einen Hinweis auf Spam, illegalen oder expliziten Inhalt "
+          "description": "Einen Hinweis auf Spam, illegalen oder expliziten Inhalt melden"
         }
       }
     },
@@ -1012,7 +1012,22 @@
       "title": "Mit Liquid verbinden"
     },
     "nostr_enable": {
-      "title": "Mit Nostr verbinden"
+      "title": "Mit Nostr verbinden",
+      "description": "Wie sollten die Anfragen dieser Anwendung behandelt werden?",
+      "presets": {
+        "reasonable": {
+          "title": "Lass uns vernünftig sein",
+          "description": "Häufigste Anfragen automatisch genehmigen"
+        },
+        "paranoid": {
+          "description": "Unterschreibe nichts, ohne mich zu fragen!",
+          "title": "Ich bin ein bisschen paranoid"
+        },
+        "trust_fully": {
+          "title": "Ich vertraue ihr voll und ganz",
+          "description": "Alle Anfragen automatisch unterzeichnen (außer Zahlungen)"
+        }
+      }
     },
     "webbtc_enable": {
       "request2": "Rechnungen und Webbtc-Informationen anfordern",
@@ -1142,7 +1157,7 @@
       "set_permissions": "Berechtigungen festlegen:",
       "ask_everytime": "Jedes Mal um <0>{{Erlaubnis}}</0> bitten",
       "dont_ask_current": "Bitte nicht mehr um <0>{{Erlaubnis}}</0>",
-      "dont_ask_any": "Frag nicht wieder nach <0>irgendwelchen Nostr-Anforderungen</0>"
+      "dont_ask_any": "Nicht mehr nach <0>irgendwelchen Nostr-Anfragen</0>"
     }
   },
   "common": {
@@ -1375,6 +1390,14 @@
       "nip44decrypt": {
         "title": "entschlüsseln (nip44)",
         "description": "Daten entschlüsseln"
+      },
+      "signschnorr": {
+        "title": "Zeichen schnorr",
+        "description": "Nachricht mit deinem Schlüssel unterschreiben"
+      },
+      "signmessage": {
+        "title": "Zeichen Nachricht",
+        "description": "Alle nostr-Veranstaltungen unterzeichnen"
       }
     }
   }
