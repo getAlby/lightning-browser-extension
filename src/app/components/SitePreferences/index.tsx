@@ -320,7 +320,7 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
               </div>
               <div>
                 <p className="mb-3 text-xs font-semibold text-gray-800 dark:text-neutral-200">
-                  {"Always reject"}
+                  {t("edit_allowance.always_reject")}
                 </p>
                 <div>
                   {permissions
