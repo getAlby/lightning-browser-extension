@@ -47,7 +47,11 @@ const signEventOrPrompt = async (message: MessageSignEvent, sender: Sender) => {
         host
       ));
 
-    if (!hasPermission && !isBlocked) {
+    if (isBlocked) {
+      return { denied: true };
+    }
+
+    if (!hasPermission) {
       const promptResponse = await utils.openPrompt<{
         blocked: boolean;
         permissionOption: string;
