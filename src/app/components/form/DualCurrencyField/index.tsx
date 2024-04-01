@@ -72,6 +72,8 @@ export default function DualCurrencyField({
   const [inputPrefix, setInputPrefix] = useState("");
   const [inputPlaceHolder, setInputPlaceHolder] = useState(placeholder || "");
 
+  const userCurrency = settings?.currency || "BTC";
+
   const getValues = useCallback(
     async (value: number, useFiatAsMain: boolean) => {
       let valueInSats = Number(value);
@@ -91,7 +93,7 @@ export default function DualCurrencyField({
       let formattedFiat = "";
 
       if (showFiat) {
-        formattedFiat = getFormattedInCurrency(valueInFiat, settings.currency);
+        formattedFiat = getFormattedInCurrency(valueInFiat, userCurrency);
       }
 
       return {
@@ -101,7 +103,7 @@ export default function DualCurrencyField({
         formattedFiat,
       };
     },
-    [getCurrencyRate, getFormattedInCurrency, showFiat, settings.currency]
+    [getCurrencyRate, getFormattedInCurrency, showFiat, userCurrency]
   );
 
   useEffect(() => {
@@ -151,11 +153,11 @@ export default function DualCurrencyField({
 
       _setUseFiatAsMain(v);
       setInputValue(newValue);
-      setInputPrefix(getCurrencySymbol(v ? settings.currency : "BTC"));
+      setInputPrefix(getCurrencySymbol(v ? userCurrency : "BTC"));
       if (!placeholder) {
         setInputPlaceHolder(
           tCommon("amount_placeholder", {
-            currency: v ? settings.currency : "sats",
+            currency: v ? userCurrency : "sats",
           })
         );
       }
@@ -166,7 +168,7 @@ export default function DualCurrencyField({
       inputValue,
       min,
       max,
-      settings.currency,
+      userCurrency,
       tCommon,
       getCurrencySymbol,
       placeholder,
