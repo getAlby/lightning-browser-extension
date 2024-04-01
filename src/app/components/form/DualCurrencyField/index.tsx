@@ -155,7 +155,7 @@ export default function DualCurrencyField({
       if (!placeholder) {
         setInputPlaceHolder(
           tCommon("amount_placeholder", {
-            currency: v ? settings.currency : "Satoshis",
+            currency: v ? settings.currency : "sats",
           })
         );
       }
