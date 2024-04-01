@@ -1086,6 +1086,8 @@
       "open": "Open",
       "cancel": "Cancel",
       "confirm": "Confirm",
+      "deny": "Deny",
+      "sign": "Sign",
       "continue": "Continue",
       "finish": "Finish",
       "connect": "Connect",
