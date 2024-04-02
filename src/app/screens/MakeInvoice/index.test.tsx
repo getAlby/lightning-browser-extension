@@ -1,4 +1,4 @@
-import { render, screen, act } from "@testing-library/react";
+import { act, render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { settingsFixture as mockSettings } from "~/../tests/fixtures/settings";
 import type { OriginData } from "~/types";
@@ -48,6 +48,9 @@ jest.mock("~/app/context/SettingsContext", () => ({
     getFormattedFiat: jest.fn(() => Promise.resolve("$0.01")),
     getFormattedNumber: jest.fn(),
     getFormattedSats: jest.fn(),
+    getCurrencyRate: jest.fn(() => 1),
+    getCurrencySymbol: jest.fn(() => "₿"),
+    getFormattedInCurrency: jest.fn(() => "$0.01"),
   }),
 }));
 

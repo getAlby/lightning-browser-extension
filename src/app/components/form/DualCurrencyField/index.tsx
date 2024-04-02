@@ -90,11 +90,9 @@ export default function DualCurrencyField({
       }
 
       const formattedSats = getFormattedInCurrency(valueInSats, "BTC");
-      let formattedFiat = "";
-
-      if (showFiat) {
-        formattedFiat = getFormattedInCurrency(valueInFiat, userCurrency);
-      }
+      const formattedFiat = showFiat
+        ? getFormattedInCurrency(valueInFiat, userCurrency)
+        : "";
 
       return {
         valueInSats,
@@ -121,35 +119,23 @@ export default function DualCurrencyField({
   const setUseFiatAsMain = useCallback(
     async (v: boolean) => {
       if (!showFiat) v = false;
-
       const rate = showFiat ? await getCurrencyRate() : 1;
+
       if (min) {
-        let minV;
-        if (v) {
-          minV = (Math.round(Number(min) * rate * 100) / 100.0).toString();
-        } else {
-          minV = min;
-        }
-
-        setMinValue(minV);
+        setMinValue(
+          v ? (Math.round(Number(min) * rate * 100) / 100.0).toString() : min
+        );
       }
+
       if (max) {
-        let maxV;
-        if (v) {
-          maxV = (Math.round(Number(max) * rate * 100) / 100.0).toString();
-        } else {
-          maxV = max;
-        }
-
-        setMaxValue(maxV);
+        setMaxValue(
+          v ? (Math.round(Number(max) * rate * 100) / 100.0).toString() : max
+        );
       }
 
-      let newValue;
-      if (v) {
-        newValue = Math.round(Number(inputValue) * rate * 100) / 100.0;
-      } else {
-        newValue = Math.round(Number(inputValue) / rate);
-      }
+      const newValue = v
+        ? Math.round(Number(inputValue) * rate * 100) / 100.0
+        : Math.round(Number(inputValue) / rate);
 
       _setUseFiatAsMain(v);
       setInputValue(newValue);
