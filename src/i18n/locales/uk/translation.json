@@ -243,9 +243,6 @@
         "send_satoshis": "",
         "enable_now": ""
       },
-      "allowance_view": {
-        "no_transactions": ""
-      },
       "default_view": {
         "is_blocked_hint": "",
         "block_removed": ""
@@ -602,8 +599,7 @@
       "edit_allowance": {
         "title": "",
         "screen_reader": ""
-      },
-      "edit_permissions": ""
+      }
     },
     "qrcode_scanner": {
       "title": "",
@@ -664,14 +660,6 @@
     }
   },
   "permissions": {
-    "nostr": {
-      "getpublickey": "",
-      "nip04decrypt": "",
-      "nip04encrypt": "",
-      "nip44decrypt": "",
-      "nip44encrypt": "",
-      "signmessage": ""
-    },
     "commando": {
       "bkpr-listbalances": "",
       "checkmessage": "",

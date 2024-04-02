@@ -7,6 +7,11 @@ export const ABORT_PROMPT_ERROR = "Prompt was closed";
 export const USER_REJECTED_ERROR = "User rejected";
 export const NO_KEYS_ERROR = "No keys available";
 
+// permissions constants
+export const ASK_EVERYTIME = "ask_everytime";
+export const DONT_ASK_ANY = "dont_ask_any";
+export const DONT_ASK_CURRENT = "dont_ask_current";
+
 // Currently only relevant for connectors which provide stablecoins
 // all other connectors fall back to BTC
 export type ACCOUNT_CURRENCIES = "EUR" | "USD" | "BTC";

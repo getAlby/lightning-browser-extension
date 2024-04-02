@@ -1,6 +1,6 @@
 {
   "name": "lightning-browser-extension",
-  "version": "3.6.0",
+  "version": "3.7.1",
   "description": "Lightning browser extension",
   "private": true,
   "repository": "https://github.com/bumi/lightning-browser-extension.git",
@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "@bitcoinerlab/secp256k1": "^1.1.1",
-    "@getalby/sdk": "^3.4.0",
+    "@getalby/sdk": "^3.4.3",
     "@headlessui/react": "^1.7.18",
     "@lightninglabs/lnc-web": "^0.3.1-alpha",
     "@noble/ciphers": "^0.5.1",

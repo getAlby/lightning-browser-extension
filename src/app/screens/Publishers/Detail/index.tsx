@@ -4,7 +4,6 @@ import TransactionsTable from "@components/TransactionsTable";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Trans, useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import toast from "~/app/components/Toast";
 import { useSettings } from "~/app/context/SettingsContext";
@@ -15,9 +14,6 @@ import type { Allowance, Transaction } from "~/types";
 dayjs.extend(relativeTime);
 
 function PublisherDetail() {
-  const { t } = useTranslation("translation", {
-    keyPrefix: "home",
-  });
   const {
     isLoading: isLoadingSettings,
     settings,
@@ -84,23 +80,10 @@ function PublisherDetail() {
           isSmall={false}
         />
       )}
-
       {allowance && (
         <Container>
-          <div className="mt-5">
-            {transactions && transactions?.length > 0 ? (
-              <TransactionsTable transactions={transactions} />
-            ) : (
-              <p className="text-gray-500 dark:text-neutral-400">
-                <Trans
-                  i18nKey={"allowance_view.no_transactions"}
-                  t={t}
-                  values={{ name: allowance.name }}
-                  // eslint-disable-next-line react/jsx-key
-                  components={[<strong></strong>]}
-                />
-              </p>
-            )}
+          <div className="mt-4">
+            <TransactionsTable transactions={transactions} />
           </div>
         </Container>
       )}
