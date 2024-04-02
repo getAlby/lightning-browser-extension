@@ -21,6 +21,7 @@ jest.mock("~/app/context/SettingsContext", () => ({
     getFormattedNumber: jest.fn(),
     getFormattedSats: jest.fn(() => "21 sats"),
     getFormattedFiat: mockGetFiatValue,
+    getFormattedInCurrency: mockGetFiatValue,
   }),
 }));
 
