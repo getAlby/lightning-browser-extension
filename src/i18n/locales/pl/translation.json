@@ -278,7 +278,6 @@
         "enable_now": "Włącz teraz"
       },
       "allowance_view": {
-        "no_transactions": "Jeszcze nie ma transakcji na koncie <0>{{name}}</0>.",
         "sats": "sats",
         "budget_spent": "Wykorzystany budżet",
         "permissions": "Uprawnienia"
@@ -611,36 +610,10 @@
       "block_and_ignore": "Zablokuj i ignoruj {{host}}",
       "block_added": "Dodano {{host}} do listy zablokowanych, odśwież stronę.",
       "hide_details": "Ukryj szczegóły",
-      "kinds": {
-        "0": "metadane",
-        "1": "krótka wiadomość tekstowa",
-        "2": "rekomendacja przekaźnika",
-        "3": "kontakty",
-        "4": "zaszyfrowane wiadomości prywatne",
-        "5": "usunięcie zdarzenia",
-        "7": "reakcja",
-        "8": "nadanie odznaki",
-        "40": "utworzenie kanału",
-        "41": "metadane kanału",
-        "42": "wiadomość kanału",
-        "43": "ukrycie wiadomości w kanale",
-        "44": "ignorowanie użytkownika w kanale",
-        "1984": "zgłoszenie",
-        "9734": "prośba o zap",
-        "9735": "zap",
-        "10002": "metadane listy przekaźników",
-        "22242": "uwierzytelnienie klienta",
-        "24133": "połączenie nostr",
-        "30008": "odznaki profile",
-        "30009": "definicja odznaki",
-        "30023": "treść długiego formatu",
-        "30078": "dane specyficzne dla aplikacji"
-      },
       "view_details": "Pokaż szczegóły"
     },
     "transactions": {
-      "title": "Transakcje",
-      "list_empty": "Brak dostępnych transakcji."
+      "title": "Transakcje"
     },
     "distributions": {
       "description": "Wybierz z którą aplikacją {{name}} chcesz się połączyć",
@@ -735,8 +708,7 @@
       "edit_allowance": {
         "title": "Edytuj preferencje",
         "screen_reader": "Opcje limitu"
-      },
-      "edit_permissions": "Edytuj uprawnienia"
+      }
     },
     "qrcode_scanner": {
       "title": "Skanuj kod QR",
@@ -809,14 +781,6 @@
     }
   },
   "permissions": {
-    "nostr": {
-      "getpublickey": "Czytanie Twojego klucza publicznego",
-      "nip04decrypt": "Deszyfrowanie danych",
-      "nip04encrypt": "Szyfrowanie danych",
-      "nip44decrypt": "Deszyfrowanie danych",
-      "nip44encrypt": "Szyfrowanie danych",
-      "signmessage": "Podpisywanie wiadomości Twoim kluczem"
-    },
     "commando": {
       "bkpr-listbalances": "Listowanie wszystkich bieżących i historycznych sald konta.",
       "checkmessage": "Weryfikowanie, ze podpis został złożony przez dany węzeł.",

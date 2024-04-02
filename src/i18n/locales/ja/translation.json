@@ -362,9 +362,6 @@
       "actions": {
         "send_satoshis": "⚡️ サトシを送る ⚡️",
         "enable_now": "今すぐ有効化"
-      },
-      "allowance_view": {
-        "no_transactions": "<0>{{name}}</0>宛てのトランザクションはまだありません。"
       }
     },
     "distributions": {

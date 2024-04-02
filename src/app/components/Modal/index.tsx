@@ -36,7 +36,7 @@ export default function Modal({
       style={{ content: { maxHeight: "80vh" } }}
     >
       {title && (
-        <h2 className="text-2xl font-bold dark:text-white mb-6">{title}</h2>
+        <h2 className="text-2xl font-bold dark:text-white pb-5">{title}</h2>
       )}
       <button
         onClick={closeModal}

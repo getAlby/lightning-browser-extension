@@ -31,8 +31,8 @@ export default function PublisherCard({
     <div
       className={classNames(
         isSmall ? "p-2" : "flex-col justify-center p-4",
-        isCard && "drop-shadow rounded-lg mt-4",
-        "flex items-center bg-white dark:bg-surface-02dp"
+        isCard && "drop-shadow rounded-lg mt-4 bg-white dark:bg-surface-02dp",
+        "flex items-center"
       )}
     >
       {image && (
