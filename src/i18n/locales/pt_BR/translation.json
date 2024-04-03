@@ -153,6 +153,9 @@
         "token": {
           "label": "Insira a chave API",
           "info": "Para conectar sua carteira, você precisa gerar uma chave API em <0>Blink Dashboard (dashboard.blink.sv)</0>:<br>- Acesse com e-mail ou número de telefone, caso você já possua uma conta Blink<br>- Se você ainda não tem conta, pode criar uma nova fazendo login com um número de telefone<br>- na aba API, crie uma nova chave<br>- dê um nome e escolha a opção ler e escrever<br>- deixe o padrão sem expiração ou escolha um período longo para evitar a necessidade de reconectar sua carteira periodicamente<br>- copie a chave (starting with blink_ ) e cole-a na caixa de texto abaixo.<br>"
+        },
+        "currency": {
+          "label": "Selecionar carteira"
         }
       },
       "bitcoin_jungle": {
@@ -162,6 +165,9 @@
         },
         "token": {
           "label": "Insira o token de acesso"
+        },
+        "currency": {
+          "label": "Selecionar carteira"
         }
       },
       "btcpay": {
@@ -408,7 +414,7 @@
           },
           "description": {
             "recovery_phrase": "A frase de recuperação é um conjunto de 12 palavras necessárias para <0>recuperar a sua chave mestra</0>",
-            "warning": "<0>não permite recuperar esta carteira ou os fundos nela contidos,</0>Ela recupera apenas o acesso aos protocolos mencionados",
+            "warning": "<0>Não permite recuperar esta carteira ou os fundos nela contidos,</0> recupera somente o acesso aos protocolos",
             "secure_recovery_phrase": "Certifique-se de anotá-la em algum local seguro e privado"
           },
           "confirm": "Fiz o backup da frase de recuperação em um local privado e seguro.",
@@ -685,7 +691,24 @@
       "view_details": "Ver detalhes",
       "hide_details": "Ocultar detalhes",
       "allow_sign_event": "Permitir {{host}} assinar um evento <0>{{kind}}</0>",
-      "allow_encrypt": "Permitir {{host}} criptografar a mensagem:"
+      "allow_encrypt": "Permitir {{host}} criptografar a mensagem:",
+      "kinds": {
+        "9734": {
+          "title": "solicitar zap"
+        },
+        "1": {
+          "title": "nota curta"
+        },
+        "4": {
+          "title": "mensagem direta"
+        },
+        "30023": {
+          "title": "nota longa"
+        },
+        "0": {
+          "title": "atualizar perfil"
+        }
+      }
     },
     "confirm_request_permission": {
       "title": "Aprovar solicitação",
@@ -703,7 +726,7 @@
         "point2": "Limites de transação"
       },
       "other": {
-        "title": "Traga sua carteira atual",
+        "title": "Outras carteiras",
         "connect": "Conectar",
         "description": "Ideal para quem já possui uma carteira e precisa fazer pagamentos de quantias altas.",
         "point1": "Acesso instantâneo, não precisa de convite",
@@ -859,7 +882,22 @@
       "request1": "Interagir com este site exige configurar uma chave"
     },
     "nostr_enable": {
-      "title": "Conectar no Nostr"
+      "title": "Conectar no Nostr",
+      "description": "Como lidar com as solicitações deste app?",
+      "presets": {
+        "trust_fully": {
+          "title": "Eu confio totalmente",
+          "description": "Assinar automaticamente as solicitações (exceto pagamentos)"
+        },
+        "reasonable": {
+          "title": "Sejamos razoáveis",
+          "description": "Aprovar automaticamente as solicitações mais comuns"
+        },
+        "paranoid": {
+          "title": "Sou um pouco paranóico",
+          "description": "Não assinar nada sem antes me perguntar!"
+        }
+      }
     },
     "webln_enable": {
       "title": "Conectar no WebLN",
@@ -930,7 +968,8 @@
       "disconnect": "Desconectar",
       "copied_to_clipboard": "Copiado para a área de transferência",
       "review": "Revisar",
-      "hide": "Ocultar"
+      "hide": "Ocultar",
+      "finish": "Pronto"
     },
     "errors": {
       "connection_failed": "Falha na conexão",
@@ -984,19 +1023,21 @@
   "components": {
     "allowance_menu": {
       "confirm_delete": "Tem certeza de que deseja desconectar este site?",
-      "hint": "O limite atual será redefinido",
+      "hint": "Mudar esse valor irá redefinir seu limite atual",
       "new_budget": {
         "label": "Novo limite",
         "link_label": "Defina um limite para pagamentos com um clique"
       },
       "edit_allowance": {
         "title": "Preferências",
-        "screen_reader": "Opções limite de gastos"
+        "screen_reader": "Opções limite de gastos",
+        "always_allow": "Sempre permitir"
       },
       "enable_login": {
         "title": "Login",
         "subtitle": "O login é realizado de forma automática, sem necessidade de confirmação."
-      }
+      },
+      "website_permissions": "Permissões deste site"
     },
     "qrcode_scanner": {
       "title": "Ler código QR",
@@ -1024,7 +1065,8 @@
       },
       "open_location": "Abrir link",
       "payment_hash": "Hash do pagamento",
-      "date_time": "Data & Hora"
+      "date_time": "Data & Hora",
+      "no_transactions": "Sem transações."
     },
     "budget_control": {
       "remember": {
@@ -1054,7 +1096,7 @@
         "account": {
           "go_to_web_wallet": "Acessar sua conta na web",
           "wallet_settings": "Configurações da carteira",
-          "add": "Conectar nova conta"
+          "add": "Conectar nova carteira"
         }
       },
       "title": "Mudar de carteira"
@@ -1066,9 +1108,9 @@
     },
     "badge": {
       "label": {
-        "auth": "LOGIN",
-        "imported": "IMPORTADA",
-        "budget": "LIMITE DE GASTOS"
+        "auth": "login",
+        "imported": "importada",
+        "budget": "Limite de gastos"
       }
     },
     "companion_download_info": {
@@ -1078,11 +1120,47 @@
       },
       "heading": "Como você deseja se conectar à rede TOR?",
       "download": "Baixar"
+    },
+    "permissions_modal": {
+      "content_label": "Permissões",
+      "set_permissions": "Definir permissões:"
     }
   },
   "permissions": {
     "lnc": {
       "openchannel": ""
+    },
+    "nostr": {
+      "getpublickey": {
+        "title": "Ler chave pública",
+        "description": "Ler sua chave pública"
+      },
+      "signmessage": {
+        "description": "",
+        "title": "Assinar mensagem"
+      },
+      "nip04encrypt": {
+        "title": "criptografar (nip04)",
+        "description": "Criptografar dados"
+      },
+      "nip04decrypt": {
+        "description": "Descriptografar dados",
+        "title": "descriptografar (nip04)"
+      },
+      "nip44encrypt": {
+        "title": "criptografar (nip44)",
+        "description": "Criptografar dados"
+      },
+      "decrypt": "Descriptografar dados",
+      "nip44decrypt": {
+        "title": "descriptografar (nip44)",
+        "description": "Descriptografar dados"
+      }
+    },
+    "liquid": {
+      "signschnorr": {
+        "description": ""
+      }
     }
   }
 }
