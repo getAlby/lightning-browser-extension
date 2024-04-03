@@ -173,18 +173,13 @@ export default function DualCurrencyField({
         const value = Number(e.target.value);
         const { valueInSats, formattedSats, valueInFiat, formattedFiat } =
           await getValues(value, useFiatAsMain);
-        const newEvent: DualCurrencyFieldChangeEvent = {
-          ...e,
-          target: {
-            ...e.target,
-            value: valueInSats.toString(),
-            valueInFiat,
-            formattedValueInFiat: formattedFiat,
-            valueInSats,
-            formattedValueInSats: formattedSats,
-          },
-        };
-        onChange(newEvent);
+        const wrappedEvent: DualCurrencyFieldChangeEvent =
+          e as DualCurrencyFieldChangeEvent;
+        wrappedEvent.target.valueInFiat = valueInFiat;
+        wrappedEvent.target.formattedValueInFiat = formattedFiat;
+        wrappedEvent.target.valueInSats = valueInSats;
+        wrappedEvent.target.formattedValueInSats = formattedSats;
+        onChange(wrappedEvent);
       }
     },
     [onChange, useFiatAsMain, getValues]
