@@ -126,12 +126,39 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
   }
 
   //constructs i18n key for the permission translations
-  function getPermissionKey(permission: Permission): string {
+  function getPermissionTranslationKey(permission: Permission): string {
     if (permission.method.includes("/")) {
       return permission.method.toLowerCase().split("/").slice(0, 2).join(".");
     } else {
       return permission.method.toLowerCase();
     }
+  }
+
+  function getPermissionTitle(permission: Permission): string {
+    return permission.method.toLowerCase().startsWith("nostr/signmessage/")
+      ? tNostr(`kinds.${getPermissionKind(permission)}.title`, {
+          defaultValue: tNostr("kinds.unknown.title", {
+            kind: getPermissionKind(permission),
+          }),
+        })
+      : tPermissions(`${getPermissionTranslationKey(permission)}.title`, {
+          defaultValue: getPermissionKind(permission),
+        });
+  }
+
+  function getPermissionDescription(permission: Permission): string {
+    return permission.method.toLowerCase().startsWith("nostr/signmessage/")
+      ? tNostr(`kinds.${getPermissionKind(permission)}.description`, {
+          defaultValue: tNostr("kinds.unknown.description", {
+            kind: getPermissionKind(permission),
+          }),
+        })
+      : tPermissions(
+          getPermissionTranslationKey(permission).concat(".description"),
+          {
+            defaultValue: getPermissionKind(permission),
+          }
+        );
   }
 
   async function updateAllowance() {
@@ -253,56 +280,8 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
                       <>
                         <Badge
                           key={permission.method}
-                          label={
-                            permission.method
-                              .toLowerCase()
-                              .startsWith("nostr/signmessage/")
-                              ? tNostr(
-                                  `kinds.${getPermissionKind(
-                                    permission
-                                  )}.title`,
-                                  {
-                                    defaultValue: tNostr(
-                                      "kinds.unknown.title",
-                                      {
-                                        kind: getPermissionKind(permission),
-                                      }
-                                    ),
-                                  }
-                                )
-                              : tPermissions(
-                                  `${getPermissionKey(permission)}.title`,
-                                  {
-                                    defaultValue: getPermissionKind(permission),
-                                  }
-                                )
-                          }
-                          description={
-                            permission.method
-                              .toLowerCase()
-                              .startsWith("nostr/signmessage/")
-                              ? tNostr(
-                                  `kinds.${getPermissionKind(
-                                    permission
-                                  )}.description`,
-                                  {
-                                    defaultValue: tNostr(
-                                      "kinds.unknown.description",
-                                      {
-                                        kind: getPermissionKind(permission),
-                                      }
-                                    ),
-                                  }
-                                )
-                              : tPermissions(
-                                  getPermissionKey(permission).concat(
-                                    ".description"
-                                  ),
-                                  {
-                                    defaultValue: getPermissionKind(permission),
-                                  }
-                                )
-                          }
+                          label={getPermissionTitle(permission)}
+                          description={getPermissionDescription(permission)}
                           onDelete={() => {
                             setPermissions(
                               permissions.map((prm) =>
@@ -329,56 +308,8 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
                       <>
                         <Badge
                           key={permission.method}
-                          label={
-                            permission.method
-                              .toLowerCase()
-                              .startsWith("nostr/signmessage/")
-                              ? tNostr(
-                                  `kinds.${getPermissionKind(
-                                    permission
-                                  )}.title`,
-                                  {
-                                    defaultValue: tNostr(
-                                      "kinds.unknown.title",
-                                      {
-                                        kind: getPermissionKind(permission),
-                                      }
-                                    ),
-                                  }
-                                )
-                              : tPermissions(
-                                  `${getPermissionKey(permission)}.title`,
-                                  {
-                                    defaultValue: getPermissionKind(permission),
-                                  }
-                                )
-                          }
-                          description={
-                            permission.method
-                              .toLowerCase()
-                              .startsWith("nostr/signmessage/")
-                              ? tNostr(
-                                  `kinds.${getPermissionKind(
-                                    permission
-                                  )}.description`,
-                                  {
-                                    defaultValue: tNostr(
-                                      "kinds.unknown.description",
-                                      {
-                                        kind: getPermissionKind(permission),
-                                      }
-                                    ),
-                                  }
-                                )
-                              : tPermissions(
-                                  getPermissionKey(permission).concat(
-                                    ".description"
-                                  ),
-                                  {
-                                    defaultValue: getPermissionKind(permission),
-                                  }
-                                )
-                          }
+                          label={getPermissionTitle(permission)}
+                          description={getPermissionDescription(permission)}
                           onDelete={() => {
                             setPermissions(
                               permissions.map((prm) =>
