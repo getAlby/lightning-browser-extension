@@ -7,6 +7,7 @@ import {
 import type { MessageNostrPublicKeyGetOrPrompt, Sender } from "~/types";
 import { PermissionMethodNostr } from "~/types";
 
+import { DONT_ASK_ANY, DONT_ASK_CURRENT } from "~/common/constants";
 import state from "../../state";
 
 const getPublicKeyOrPrompt = async (
@@ -28,18 +29,24 @@ const getPublicKeyOrPrompt = async (
     } else {
       const promptResponse = await utils.openPrompt<{
         confirm: boolean;
-        rememberPermission: boolean;
+        permissionOption: string;
       }>({
         args: {},
         ...message,
         action: "public/nostr/confirmGetPublicKey",
       });
       // add permission to db only if user decided to always allow this request
-      if (promptResponse.data.rememberPermission) {
+      if (promptResponse.data.permissionOption == DONT_ASK_CURRENT) {
         await addPermissionFor(
           PermissionMethodNostr["NOSTR_GETPUBLICKEY"],
           host
         );
+      }
+
+      if (promptResponse.data.permissionOption == DONT_ASK_ANY) {
+        Object.values(PermissionMethodNostr).forEach(async (permission) => {
+          await addPermissionFor(permission, host);
+        });
       }
 
       if (promptResponse.data.confirm) {

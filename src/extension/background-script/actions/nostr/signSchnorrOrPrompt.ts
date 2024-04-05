@@ -6,6 +6,7 @@ import {
 } from "~/extension/background-script/permissions";
 import { MessageSignSchnorr, PermissionMethodNostr, Sender } from "~/types";
 
+import { DONT_ASK_ANY, DONT_ASK_CURRENT } from "~/common/constants";
 import state from "../../state";
 
 const signSchnorrOrPrompt = async (
@@ -27,27 +28,42 @@ const signSchnorrOrPrompt = async (
       PermissionMethodNostr["NOSTR_SIGNSCHNORR"],
       host
     );
-    if (!hasPermission) {
+    if (hasPermission) {
+      const signedSchnorr = await nostr.signSchnorr(sigHash);
+
+      return { data: signedSchnorr };
+    } else {
       const promptResponse = await utils.openPrompt<{
-        enabled: boolean;
+        confirm: boolean;
         blocked: boolean;
+        permissionOption: string;
       }>({
         ...message,
         action: "public/nostr/confirmSignSchnorr",
       });
 
       // add permission to db only if user decided to always allow this request
-      if (promptResponse.data.enabled) {
+      if (promptResponse.data.permissionOption == DONT_ASK_CURRENT) {
         await addPermissionFor(
           PermissionMethodNostr["NOSTR_SIGNSCHNORR"],
           host
         );
       }
+
+      if (promptResponse.data.permissionOption == DONT_ASK_ANY) {
+        Object.values(PermissionMethodNostr).forEach(async (permission) => {
+          await addPermissionFor(permission, host);
+        });
+      }
+
+      if (promptResponse.data.confirm) {
+        const signedSchnorr = await nostr.signSchnorr(sigHash);
+
+        return { data: signedSchnorr };
+      } else {
+        return { error: "User rejected" };
+      }
     }
-
-    const signedSchnorr = await nostr.signSchnorr(sigHash);
-
-    return { data: signedSchnorr };
   } catch (e) {
     console.error("signSchnorr cancelled", e);
     if (e instanceof Error) {

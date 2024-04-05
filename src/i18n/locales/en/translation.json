@@ -1287,21 +1287,13 @@
         "title": "read public key",
         "description": "Read your public key"
       },
-      "decrypt": "Decrypt data",
-      "nip04decrypt": {
-        "title": "decrypt (nip04)",
+
+      "decrypt": {
+        "title": "decrypt",
         "description": "Decrypt data"
       },
-      "nip04encrypt": {
-        "title": "encrypt (nip04)",
-        "description": "Encrypt data"
-      },
-      "nip44decrypt": {
-        "title": "decrypt (nip44)",
-        "description": "Decrypt data"
-      },
-      "nip44encrypt": {
-        "title": "encrypt (nip44)",
+      "encrypt": {
+        "title": "encrypt",
         "description": "Encrypt data"
       },
       "signmessage": {

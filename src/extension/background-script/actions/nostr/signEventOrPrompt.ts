@@ -53,10 +53,9 @@ const signEventOrPrompt = async (message: MessageSignEvent, sender: Sender) => {
       }
 
       if (promptResponse.data.permissionOption == DONT_ASK_ANY) {
-        await addPermissionFor(
-          PermissionMethodNostr["NOSTR_SIGNMESSAGE"],
-          host
-        );
+        Object.values(PermissionMethodNostr).forEach(async (permission) => {
+          await addPermissionFor(permission, host);
+        });
       }
     }
 

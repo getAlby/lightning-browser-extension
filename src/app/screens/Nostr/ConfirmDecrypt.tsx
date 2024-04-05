@@ -4,47 +4,41 @@ import PublisherCard from "@components/PublisherCard";
 import { PopiconsCheckLine } from "@popicons/react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import PermissionModal from "~/app/components/Permissions/PermissionModal";
+import PermissionSelector from "~/app/components/Permissions/PermissionSelector";
 import ScreenHeader from "~/app/components/ScreenHeader";
-import Checkbox from "~/app/components/form/Checkbox";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
-import { OriginData } from "~/types";
+import { OriginData, PermissionOption } from "~/types";
 
 function NostrConfirmDecrypt() {
   const { t } = useTranslation("translation", {
     keyPrefix: "nostr",
   });
   const { t: tPermissions } = useTranslation("permissions");
-  const { t: tCommon } = useTranslation("common");
+
   const navState = useNavigationState();
   const origin = navState.origin as OriginData;
 
   const [loading, setLoading] = useState(false);
 
-  const [rememberPermission, setRememberPermission] = useState(true);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [permissionOption, setPermissionOption] = useState<PermissionOption>(
+    PermissionOption.ASK_EVERYTIME
+  );
 
   function confirm() {
     setLoading(true);
     msg.reply({
       confirm: true,
-      rememberPermission,
+      permissionOption: permissionOption,
     });
     setLoading(false);
   }
 
   function reject(event: React.MouseEvent<HTMLAnchorElement>) {
     event.preventDefault();
-    msg.error(USER_REJECTED_ERROR);
-  }
-
-  async function block(event: React.MouseEvent<HTMLAnchorElement>) {
-    event.preventDefault();
-    await msg.request("addBlocklist", {
-      domain: origin.domain,
-      host: origin.host,
-    });
-    alert(`Added ${origin.host} to the blocklist, please reload the website`);
     msg.error(USER_REJECTED_ERROR);
   }
 
@@ -69,41 +63,36 @@ function NostrConfirmDecrypt() {
               <p className="mb-2">{t("allow", { host: origin.host })}</p>
               <p className="dark:text-white">
                 <PopiconsCheckLine className="w-5 h-5 mr-2 inline" />
-                {tPermissions("nostr.decrypt")}
+                {tPermissions("nostr.decrypt.description")}
               </p>
             </div>
           </div>
 
-          <div className="text-center flex flex-col">
-            <div className="flex items-center mb-4">
-              <Checkbox
-                id="remember_permission"
-                name="remember_permission"
-                checked={rememberPermission}
-                onChange={(event) => {
-                  setRememberPermission(event.target.checked);
-                }}
-              />
-              <label
-                htmlFor="remember_permission"
-                className="cursor-pointer ml-2 block text-sm text-gray-900 font-medium dark:text-white"
-              >
-                {tCommon("actions.remember")}
-              </label>
-            </div>
+          <div className="text-center flex flex-col gap-4">
+            <PermissionModal
+              isOpen={modalOpen}
+              onClose={() => {
+                setModalOpen(false);
+              }}
+              permissionCallback={(permission) => {
+                setPermissionOption(permission);
+                setModalOpen(false);
+              }}
+              permission={tPermissions("nostr.decrypt.title")}
+            />
             <ConfirmOrCancel
               disabled={loading}
               loading={loading}
-              label={tCommon("actions.confirm")}
               onCancel={reject}
             />
-            <a
-              className="mt-4 underline text-sm text-gray-400 overflow-hidden text-ellipsis whitespace-nowrap"
-              href="#"
-              onClick={block}
-            >
-              {t("block_and_ignore", { host: origin.host })}
-            </a>
+
+            <PermissionSelector
+              i18nKey={permissionOption}
+              values={{
+                permission: tPermissions("nostr.decrypt.title"),
+              }}
+              onChange={() => setModalOpen(true)}
+            />
           </div>
         </Container>
       </form>

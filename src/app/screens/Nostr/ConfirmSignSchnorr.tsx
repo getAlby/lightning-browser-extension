@@ -3,16 +3,17 @@ import Container from "@components/Container";
 import ContentMessage from "@components/ContentMessage";
 import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
-import Checkbox from "@components/form/Checkbox";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import PermissionModal from "~/app/components/Permissions/PermissionModal";
+import PermissionSelector from "~/app/components/Permissions/PermissionSelector";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import toast from "~/app/components/Toast";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
-import type { OriginData } from "~/types";
+import { PermissionOption, type OriginData } from "~/types";
 
 function ConfirmSignSchnorr() {
   const navState = useNavigationState();
@@ -20,13 +21,18 @@ function ConfirmSignSchnorr() {
   const { t } = useTranslation("translation", {
     keyPrefix: "nostr",
   });
+  const { t: tPermissions } = useTranslation("permissions");
   const navigate = useNavigate();
 
   const sigHash = navState.args?.sigHash as string;
   const origin = navState.origin as OriginData;
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
-  const [rememberPermission, setRememberPermission] = useState(false);
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const [permissionOption, setPermissionOption] = useState<PermissionOption>(
+    PermissionOption.ASK_EVERYTIME
+  );
 
   // TODO: refactor: the success message and loading will not be displayed because after the reply the prompt is closed.
   async function confirm() {
@@ -34,7 +40,8 @@ function ConfirmSignSchnorr() {
       setLoading(true);
       msg.reply({
         blocked: false,
-        enabled: rememberPermission,
+        confirm: true,
+        permissionOption: permissionOption,
       });
       setSuccessMessage(tCommon("success"));
     } catch (e) {
@@ -80,28 +87,33 @@ function ConfirmSignSchnorr() {
                 heading={t("allow_sign", { host: origin.host })}
                 content={sigHash}
               />
-              <div className="flex items-center">
-                <Checkbox
-                  id="remember_permission"
-                  name="remember_permission"
-                  checked={rememberPermission}
-                  onChange={(event) => {
-                    setRememberPermission(event.target.checked);
-                  }}
-                />
-                <label
-                  htmlFor="remember_permission"
-                  className="cursor-pointer ml-2 block text-sm text-gray-900 font-medium dark:text-white"
-                >
-                  {tCommon("actions.remember")}
-                </label>
-              </div>
             </div>
-            <ConfirmOrCancel
-              disabled={loading}
-              loading={loading}
-              onCancel={reject}
-            />
+            <div className="flex flex-col gap-4">
+              <PermissionModal
+                isOpen={modalOpen}
+                onClose={() => {
+                  setModalOpen(false);
+                }}
+                permissionCallback={(permission) => {
+                  setPermissionOption(permission);
+                  setModalOpen(false);
+                }}
+                permission={tPermissions("nostr.signschnorr.title")}
+              />
+              <ConfirmOrCancel
+                disabled={loading}
+                loading={loading}
+                onCancel={reject}
+              />
+
+              <PermissionSelector
+                i18nKey={permissionOption}
+                values={{
+                  permission: tPermissions("nostr.signschnorr.title"),
+                }}
+                onChange={() => setModalOpen(true)}
+              />
+            </div>
           </Container>
         </form>
       ) : (

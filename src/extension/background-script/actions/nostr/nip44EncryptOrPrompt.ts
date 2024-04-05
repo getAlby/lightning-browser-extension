@@ -1,4 +1,8 @@
-import { USER_REJECTED_ERROR } from "~/common/constants";
+import {
+  DONT_ASK_ANY,
+  DONT_ASK_CURRENT,
+  USER_REJECTED_ERROR,
+} from "~/common/constants";
 import nostr from "~/common/lib/nostr";
 import utils from "~/common/lib/utils";
 import { getHostFromSender } from "~/common/utils/helpers";
@@ -31,7 +35,7 @@ const nip44EncryptOrPrompt = async (
     } else {
       const promptResponse = await utils.openPrompt<{
         confirm: boolean;
-        rememberPermission: boolean;
+        permissionOption: string;
       }>({
         ...message,
         action: "public/nostr/confirmEncrypt",
@@ -44,12 +48,19 @@ const nip44EncryptOrPrompt = async (
       });
 
       // add permission to db only if user decided to always allow this request
-      if (promptResponse.data.rememberPermission) {
+      if (promptResponse.data.permissionOption == DONT_ASK_CURRENT) {
         await addPermissionFor(
           PermissionMethodNostr["NOSTR_NIP44ENCRYPT"],
           host
         );
       }
+
+      if (promptResponse.data.permissionOption == DONT_ASK_ANY) {
+        Object.values(PermissionMethodNostr).forEach(async (permission) => {
+          await addPermissionFor(permission, host);
+        });
+      }
+
       if (promptResponse.data.confirm) {
         const response = (await state.getState().getNostr()).nip44Encrypt(
           message.args.peer,

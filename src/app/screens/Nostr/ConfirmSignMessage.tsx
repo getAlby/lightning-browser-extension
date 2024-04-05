@@ -3,12 +3,12 @@ import Container from "@components/Container";
 import ContentMessage from "@components/ContentMessage";
 import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
-import { PopiconsShieldCheckLine } from "@popicons/react";
 import { useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import Hyperlink from "~/app/components/Hyperlink";
-import PermissionModal from "~/app/components/PermissionModal";
+import PermissionModal from "~/app/components/Permissions/PermissionModal";
+import PermissionSelector from "~/app/components/Permissions/PermissionSelector";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import toast from "~/app/components/Toast";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
@@ -22,9 +22,6 @@ function ConfirmSignMessage() {
   const { t: tCommon } = useTranslation("common");
   const { t } = useTranslation("translation", {
     keyPrefix: "nostr",
-  });
-  const { t: tPermissions } = useTranslation("components", {
-    keyPrefix: "permissions_modal",
   });
   const navigate = useNavigate();
 
@@ -143,25 +140,17 @@ function ConfirmSignMessage() {
                 onCancel={reject}
               />
 
-              <div className="flex gap-2 justify-center items-center text-gray-400 dark:text-neutral-600 hover:text-gray-600 dark:hover:text-neutral-400 text-md">
-                <div className="shrink-0">
-                  <PopiconsShieldCheckLine className="w-4 h-4"></PopiconsShieldCheckLine>
-                </div>
-                <button type="button" onClick={() => setModalOpen(true)}>
-                  <Trans
-                    i18nKey={permissionOption}
-                    t={tPermissions}
-                    values={{
-                      permission: t(`kinds.${event.kind}.title`, {
-                        defaultValue: t("kinds.unknown.title", {
-                          kind: event.kind,
-                        }),
-                      }),
-                    }}
-                    components={[]}
-                  />
-                </button>
-              </div>
+              <PermissionSelector
+                i18nKey={permissionOption}
+                values={{
+                  permission: t(`kinds.${event.kind}.title`, {
+                    defaultValue: t("kinds.unknown.title", {
+                      kind: event.kind,
+                    }),
+                  }),
+                }}
+                onChange={() => setModalOpen(true)}
+              />
             </div>
           </Container>
         </form>
