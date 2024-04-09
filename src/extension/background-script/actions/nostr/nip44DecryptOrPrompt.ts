@@ -37,6 +37,7 @@ const nip44DecryptOrPrompt = async (
       const promptResponse = await utils.openPrompt<{
         confirm: boolean;
         permissionOption: string;
+        blocked: boolean;
       }>({
         ...message,
         action: "public/nostr/confirmDecrypt",
@@ -46,13 +47,14 @@ const nip44DecryptOrPrompt = async (
       if (promptResponse.data.permissionOption == DONT_ASK_CURRENT) {
         await addPermissionFor(
           PermissionMethodNostr["NOSTR_NIP44DECRYPT"],
-          host
+          host,
+          promptResponse.data.blocked
         );
       }
 
       if (promptResponse.data.permissionOption == DONT_ASK_ANY) {
         Object.values(PermissionMethodNostr).forEach(async (permission) => {
-          await addPermissionFor(permission, host);
+          await addPermissionFor(permission, host, promptResponse.data.blocked);
         });
       }
 

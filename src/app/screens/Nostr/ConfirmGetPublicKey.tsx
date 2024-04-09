@@ -32,6 +32,7 @@ function NostrConfirmGetPublicKey() {
     msg.reply({
       confirm: true,
       permissionOption: permissionOption,
+      blocked: false,
     });
     setLoading(false);
   }

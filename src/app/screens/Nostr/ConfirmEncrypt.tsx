@@ -37,6 +37,7 @@ function NostrConfirmEncrypt() {
     msg.reply({
       confirm: true,
       permissionOption: permissionOption,
+      blocked: false,
     });
     setLoading(false);
   }

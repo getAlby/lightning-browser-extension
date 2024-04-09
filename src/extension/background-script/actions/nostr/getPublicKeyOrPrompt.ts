@@ -30,6 +30,7 @@ const getPublicKeyOrPrompt = async (
       const promptResponse = await utils.openPrompt<{
         confirm: boolean;
         permissionOption: string;
+        blocked: boolean;
       }>({
         args: {},
         ...message,
@@ -39,13 +40,14 @@ const getPublicKeyOrPrompt = async (
       if (promptResponse.data.permissionOption == DONT_ASK_CURRENT) {
         await addPermissionFor(
           PermissionMethodNostr["NOSTR_GETPUBLICKEY"],
-          host
+          host,
+          promptResponse.data.blocked
         );
       }
 
       if (promptResponse.data.permissionOption == DONT_ASK_ANY) {
         Object.values(PermissionMethodNostr).forEach(async (permission) => {
-          await addPermissionFor(permission, host);
+          await addPermissionFor(permission, host, promptResponse.data.blocked);
         });
       }
 

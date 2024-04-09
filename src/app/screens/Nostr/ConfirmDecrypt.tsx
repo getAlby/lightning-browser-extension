@@ -33,6 +33,7 @@ function NostrConfirmDecrypt() {
     msg.reply({
       confirm: true,
       permissionOption: permissionOption,
+      blocked: false,
     });
     setLoading(false);
   }
