@@ -72,27 +72,23 @@ export default function DualCurrencyField({
   const [inputPrefix, setInputPrefix] = useState("");
   const [inputPlaceHolder, setInputPlaceHolder] = useState(placeholder || "");
 
-  const userCurrency = settings?.currency || "BTC";
-
-  const getValues = useCallback(
-    async (value: number, useFiatAsMain: boolean) => {
-      let valueInSats = Number(value);
+  const convertValues = useCallback(
+    async (inputValue: number, inputInFiat: boolean) => {
+      const userCurrency = settings?.currency || "BTC";
+      let valueInSats = 0;
       let valueInFiat = 0;
+      const rate = await getCurrencyRate();
 
-      if (showFiat) {
-        valueInFiat = Number(value);
-        const rate = await getCurrencyRate();
-        if (useFiatAsMain) {
-          valueInSats = Math.round(valueInSats / rate);
-        } else {
-          valueInFiat = Math.round(valueInFiat * rate * 100) / 100.0;
-        }
+      if (inputInFiat) {
+        valueInFiat = Number(inputValue);
+        valueInSats = Math.round(valueInFiat / rate);
+      } else {
+        valueInSats = Number(inputValue);
+        valueInFiat = Math.round(valueInSats * rate * 100) / 100.0;
       }
 
       const formattedSats = getFormattedInCurrency(valueInSats, "BTC");
-      const formattedFiat = showFiat
-        ? getFormattedInCurrency(valueInFiat, userCurrency)
-        : "";
+      const formattedFiat = getFormattedInCurrency(valueInFiat, userCurrency);
 
       return {
         valueInSats,
@@ -101,25 +97,14 @@ export default function DualCurrencyField({
         formattedFiat,
       };
     },
-    [getCurrencyRate, getFormattedInCurrency, showFiat, userCurrency]
+    [getCurrencyRate, getFormattedInCurrency, settings]
   );
-
-  useEffect(() => {
-    (async () => {
-      if (showFiat) {
-        const { formattedSats, formattedFiat } = await getValues(
-          Number(inputValue),
-          useFiatAsMain
-        );
-        setAltFormattedValue(useFiatAsMain ? formattedSats : formattedFiat);
-      }
-    })();
-  }, [useFiatAsMain, inputValue, getValues, showFiat]);
 
   const setUseFiatAsMain = useCallback(
     async (v: boolean) => {
       if (!showFiat) v = false;
-      const rate = showFiat ? await getCurrencyRate() : 1;
+      const userCurrency = settings?.currency || "BTC";
+      const rate = await getCurrencyRate();
 
       if (min) {
         setMinValue(
@@ -149,12 +134,12 @@ export default function DualCurrencyField({
       }
     },
     [
+      settings,
       showFiat,
       getCurrencyRate,
       inputValue,
       min,
       max,
-      userCurrency,
       tCommon,
       getCurrencySymbol,
       placeholder,
@@ -172,7 +157,7 @@ export default function DualCurrencyField({
       if (onChange) {
         const value = Number(e.target.value);
         const { valueInSats, formattedSats, valueInFiat, formattedFiat } =
-          await getValues(value, useFiatAsMain);
+          await convertValues(value, useFiatAsMain);
         const wrappedEvent: DualCurrencyFieldChangeEvent =
           e as DualCurrencyFieldChangeEvent;
         wrappedEvent.target.valueInFiat = valueInFiat;
@@ -182,16 +167,31 @@ export default function DualCurrencyField({
         onChange(wrappedEvent);
       }
     },
-    [onChange, useFiatAsMain, getValues]
+    [onChange, useFiatAsMain, convertValues]
   );
 
   // default to fiat when account currency is set to anything other than BTC
   useEffect(() => {
     if (!initialized.current) {
-      setUseFiatAsMain(!!(account?.currency && account?.currency !== "BTC"));
+      if (account?.currency && account?.currency !== "BTC") {
+        setUseFiatAsMain(true);
+      }
       initialized.current = true;
     }
   }, [account?.currency, setUseFiatAsMain]);
+
+  // update alt value
+  useEffect(() => {
+    (async () => {
+      if (showFiat) {
+        const { formattedSats, formattedFiat } = await convertValues(
+          Number(inputValue),
+          useFiatAsMain
+        );
+        setAltFormattedValue(useFiatAsMain ? formattedSats : formattedFiat);
+      }
+    })();
+  }, [useFiatAsMain, inputValue, convertValues, showFiat]);
 
   const inputNode = (
     <input
