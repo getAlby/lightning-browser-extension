@@ -39,6 +39,7 @@ class NWCConnector implements Connector {
       "getBalance",
       "keysend",
       "getTransactions",
+      "signMessage",
     ];
   }
 
@@ -188,8 +189,15 @@ class NWCConnector implements Connector {
     }
   }
 
-  signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {
-    throw new Error("Method not implemented.");
+  async signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {
+    const response = await this.nwc.signMessage(args.message);
+
+    return Promise.resolve({
+      data: {
+        message: response.message,
+        signature: response.signature,
+      },
+    });
   }
 
   connectPeer(args: ConnectPeerArgs): Promise<ConnectPeerResponse> {
