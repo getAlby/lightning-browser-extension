@@ -8,6 +8,7 @@ import { getHostFromSender } from "~/common/utils/helpers";
 import {
   addPermissionFor,
   hasPermissionFor,
+  isPermissionBlocked,
 } from "~/extension/background-script/permissions";
 import state from "~/extension/background-script/state";
 import { MessageDecryptGet, PermissionMethodNostr, Sender } from "~/types";
@@ -21,6 +22,15 @@ const decryptOrPrompt = async (message: MessageDecryptGet, sender: Sender) => {
       PermissionMethodNostr["NOSTR_NIP04DECRYPT"],
       host
     );
+
+    const isBlocked = await isPermissionBlocked(
+      PermissionMethodNostr["NOSTR_NIP04DECRYPT"],
+      host
+    );
+
+    if (isBlocked) {
+      return { denied: true };
+    }
 
     if (hasPermission) {
       const nostr = await state.getState().getNostr();

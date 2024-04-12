@@ -1,4 +1,3 @@
-import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
 import PublisherCard from "@components/PublisherCard";
 import { useState } from "react";
@@ -8,8 +7,9 @@ import Hyperlink from "~/app/components/Hyperlink";
 import PermissionModal from "~/app/components/Permissions/PermissionModal";
 import PermissionSelector from "~/app/components/Permissions/PermissionSelector";
 import ScreenHeader from "~/app/components/ScreenHeader";
+import SignOrDeny from "~/app/components/SignOrDeny";
+import toast from "~/app/components/Toast";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
-import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import { OriginData, PermissionOption } from "~/types";
 
@@ -18,6 +18,7 @@ function NostrConfirmEncrypt() {
     keyPrefix: "nostr",
   });
   const { t: tPermissions } = useTranslation("permissions");
+  const { t: tCommon } = useTranslation("common");
   const navState = useNavigationState();
   const origin = navState.origin as OriginData;
 
@@ -32,19 +33,36 @@ function NostrConfirmEncrypt() {
     PermissionOption.ASK_EVERYTIME
   );
 
-  function confirm() {
-    setLoading(true);
-    msg.reply({
-      confirm: true,
-      permissionOption: permissionOption,
-      blocked: false,
-    });
-    setLoading(false);
+  async function confirm() {
+    try {
+      setLoading(true);
+      msg.reply({
+        confirm: true,
+        permissionOption: permissionOption,
+        blocked: false,
+      });
+    } catch (e) {
+      console.error(e);
+      if (e instanceof Error) toast.error(`${tCommon("error")}: ${e.message}`);
+    } finally {
+      setLoading(false);
+    }
   }
 
-  function reject(event: React.MouseEvent<HTMLAnchorElement>) {
-    event.preventDefault();
-    msg.error(USER_REJECTED_ERROR);
+  function reject(e: React.MouseEvent<HTMLAnchorElement>) {
+    try {
+      setLoading(true);
+      msg.reply({
+        confirm: false,
+        permissionOption: permissionOption,
+        blocked: true,
+      });
+    } catch (e) {
+      console.error(e);
+      if (e instanceof Error) toast.error(`${tCommon("error")}: ${e.message}`);
+    } finally {
+      setLoading(false);
+    }
   }
 
   function toggleShowDetails() {
@@ -99,11 +117,7 @@ function NostrConfirmEncrypt() {
               }}
               permission={tPermissions("nostr.encrypt.title")}
             />
-            <ConfirmOrCancel
-              disabled={loading}
-              loading={loading}
-              onCancel={reject}
-            />
+            <SignOrDeny disabled={loading} loading={loading} onDeny={reject} />
 
             <PermissionSelector
               i18nKey={permissionOption}

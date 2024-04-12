@@ -3,6 +3,7 @@ import { getHostFromSender } from "~/common/utils/helpers";
 import {
   addPermissionFor,
   hasPermissionFor,
+  isPermissionBlocked,
 } from "~/extension/background-script/permissions";
 import { MessageSignSchnorr, PermissionMethodNostr, Sender } from "~/types";
 
@@ -28,6 +29,16 @@ const signSchnorrOrPrompt = async (
       PermissionMethodNostr["NOSTR_SIGNSCHNORR"],
       host
     );
+
+    const isBlocked = await isPermissionBlocked(
+      PermissionMethodNostr["NOSTR_SIGNSCHNORR"],
+      host
+    );
+
+    if (isBlocked) {
+      return { denied: true };
+    }
+
     if (hasPermission) {
       const signedSchnorr = await nostr.signSchnorr(sigHash);
 

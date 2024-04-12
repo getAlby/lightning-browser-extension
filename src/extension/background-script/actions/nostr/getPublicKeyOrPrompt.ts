@@ -3,6 +3,7 @@ import { getHostFromSender } from "~/common/utils/helpers";
 import {
   addPermissionFor,
   hasPermissionFor,
+  isPermissionBlocked,
 } from "~/extension/background-script/permissions";
 import type { MessageNostrPublicKeyGetOrPrompt, Sender } from "~/types";
 import { PermissionMethodNostr } from "~/types";
@@ -22,6 +23,15 @@ const getPublicKeyOrPrompt = async (
       PermissionMethodNostr["NOSTR_GETPUBLICKEY"],
       host
     );
+
+    const isBlocked = await isPermissionBlocked(
+      PermissionMethodNostr["NOSTR_GETPUBLICKEY"],
+      host
+    );
+
+    if (isBlocked) {
+      return { denied: true };
+    }
 
     if (hasPermission) {
       const publicKey = (await state.getState().getNostr()).getPublicKey();

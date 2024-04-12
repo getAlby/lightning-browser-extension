@@ -59,7 +59,6 @@ function ConfirmSignMessage() {
         blocked: true,
         permissionOption: permissionOption,
       });
-      setSuccessMessage(tCommon("success"));
     } catch (e) {
       console.error(e);
       if (e instanceof Error) toast.error(`${tCommon("error")}: ${e.message}`);

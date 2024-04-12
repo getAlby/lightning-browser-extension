@@ -1,4 +1,3 @@
-import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
 import ContentMessage from "@components/ContentMessage";
 import PublisherCard from "@components/PublisherCard";
@@ -9,9 +8,9 @@ import { useNavigate } from "react-router-dom";
 import PermissionModal from "~/app/components/Permissions/PermissionModal";
 import PermissionSelector from "~/app/components/Permissions/PermissionSelector";
 import ScreenHeader from "~/app/components/ScreenHeader";
+import SignOrDeny from "~/app/components/SignOrDeny";
 import toast from "~/app/components/Toast";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
-import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import { PermissionOption, type OriginData } from "~/types";
 
@@ -53,8 +52,19 @@ function ConfirmSignSchnorr() {
   }
 
   function reject(e: React.MouseEvent<HTMLAnchorElement>) {
-    e.preventDefault();
-    msg.error(USER_REJECTED_ERROR);
+    try {
+      setLoading(true);
+      msg.reply({
+        blocked: true,
+        confirm: false,
+        permissionOption: permissionOption,
+      });
+    } catch (e) {
+      console.error(e);
+      if (e instanceof Error) toast.error(`${tCommon("error")}: ${e.message}`);
+    } finally {
+      setLoading(false);
+    }
   }
 
   function close(e: React.MouseEvent<HTMLButtonElement>) {
@@ -100,10 +110,10 @@ function ConfirmSignSchnorr() {
                 }}
                 permission={tPermissions("nostr.signschnorr.title")}
               />
-              <ConfirmOrCancel
+              <SignOrDeny
                 disabled={loading}
                 loading={loading}
-                onCancel={reject}
+                onDeny={reject}
               />
 
               <PermissionSelector

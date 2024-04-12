@@ -8,6 +8,7 @@ import { getHostFromSender } from "~/common/utils/helpers";
 import {
   addPermissionFor,
   hasPermissionFor,
+  isPermissionBlocked,
 } from "~/extension/background-script/permissions";
 import state from "~/extension/background-script/state";
 import { MessageNip44DecryptGet, PermissionMethodNostr, Sender } from "~/types";
@@ -24,6 +25,15 @@ const nip44DecryptOrPrompt = async (
       PermissionMethodNostr["NOSTR_NIP44DECRYPT"],
       host
     );
+
+    const isBlocked = await isPermissionBlocked(
+      PermissionMethodNostr["NOSTR_NIP44DECRYPT"],
+      host
+    );
+
+    if (isBlocked) {
+      return { denied: true };
+    }
 
     if (hasPermission) {
       const nostr = await state.getState().getNostr();
