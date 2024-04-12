@@ -35,7 +35,13 @@ function ConfirmPayment() {
 
   const navState = useNavigationState();
   const paymentRequest = navState.args?.paymentRequest as string;
-  const invoice = lightningPayReq.decode(paymentRequest);
+  const signet = {
+    bech32: "tbs",
+    pubKeyHash: 0x6f,
+    scriptHash: 0xc4,
+    validWitnessVersions: [0],
+  };
+  const invoice = lightningPayReq.decode(paymentRequest, signet);
 
   const navigate = useNavigate();
   const auth = useAccount();

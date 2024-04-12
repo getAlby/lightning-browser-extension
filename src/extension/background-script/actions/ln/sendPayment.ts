@@ -28,7 +28,13 @@ export default async function sendPayment(
   let response, paymentRequestDetails;
 
   try {
-    paymentRequestDetails = lightningPayReq.decode(paymentRequest);
+    const signet = {
+      bech32: "tbs",
+      pubKeyHash: 0x6f,
+      scriptHash: 0xc4,
+      validWitnessVersions: [0],
+    };
+    paymentRequestDetails = lightningPayReq.decode(paymentRequest, signet);
 
     response = await connector.sendPayment({
       paymentRequest,
