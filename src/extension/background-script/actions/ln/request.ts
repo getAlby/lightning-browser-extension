@@ -90,7 +90,11 @@ const request = async (
 
       // add permission to db only if user decided to always allow this request
       if (promptResponse.data.enabled) {
-        await addPermissionFor(weblnMethod, origin.host);
+        await addPermissionFor(
+          weblnMethod,
+          origin.host,
+          promptResponse.data.blocked
+        );
       }
 
       return response;

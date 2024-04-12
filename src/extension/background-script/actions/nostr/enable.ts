@@ -88,7 +88,7 @@ const enable = async (message: MessageAllowanceEnable, sender: Sender) => {
             PermissionMethodNostr.NOSTR_NIP44DECRYPT,
           ];
           permissions.forEach(async (permission) => {
-            await addPermissionFor(permission, host);
+            await addPermissionFor(permission, host, false);
           });
 
           // Add specific signing permissions
@@ -108,12 +108,13 @@ const enable = async (message: MessageAllowanceEnable, sender: Sender) => {
           reasonableEventKindIds.forEach(async (kindId) => {
             await addPermissionFor(
               PermissionMethodNostr.NOSTR_SIGNMESSAGE + "/" + kindId,
-              host
+              host,
+              false
             );
           });
         } else if (response.data.preset === NostrPermissionPreset.TRUST_FULLY) {
           Object.values(PermissionMethodNostr).forEach(async (permission) => {
-            await addPermissionFor(permission, host);
+            await addPermissionFor(permission, host, false);
           });
         }
         await db.saveToStorage();

@@ -1110,6 +1110,8 @@
       "open": "Open",
       "cancel": "Cancel",
       "confirm": "Confirm",
+      "deny": "Deny",
+      "sign": "Sign",
       "continue": "Continue",
       "finish": "Finish",
       "connect": "Connect",
@@ -1183,7 +1185,8 @@
       "edit_allowance": {
         "title": "Site settings",
         "screen_reader": "Allowance Options",
-        "always_allow": "Always allow"
+        "always_allow": "Always allow",
+        "always_reject": "Always reject"
       },
       "website_permissions": "Website Permissions"
     },
