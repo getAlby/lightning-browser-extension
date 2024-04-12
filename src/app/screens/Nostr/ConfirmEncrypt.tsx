@@ -97,7 +97,7 @@ function NostrConfirmEncrypt() {
                 content={message}
               />
             )}
-            <div className="flex justify-center mb-4 gap-4">
+            <div className="flex justify-center mb-4 gap-4 text-gray-400 dark:text-neutral-600">
               <div onClick={toggleShowDetails}>
                 {showDetails ? (
                   <>
