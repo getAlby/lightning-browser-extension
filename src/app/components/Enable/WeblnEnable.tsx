@@ -85,6 +85,7 @@ function WeblnEnableComponent(props: Props) {
             </div>
           </div>
         </div>
+
         <div className="text-center flex flex-col">
           <ConfirmOrCancel
             disabled={loading}

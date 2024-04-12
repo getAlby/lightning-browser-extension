@@ -45,7 +45,7 @@ describe("enable allowance", () => {
         external: true,
       },
       args: {
-        host: "lnmarkets.com",
+        host: "https://lnmarkets.com",
       },
     };
 
@@ -87,7 +87,7 @@ describe("enable allowance", () => {
         external: true,
       },
       args: {
-        host: "getalby.com",
+        host: `https://getalby.com`,
       },
     };
     const sender: Sender = {

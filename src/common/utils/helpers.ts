@@ -21,8 +21,8 @@ export function getHostFromSender(sender: Sender) {
   // from a privileged page, otherwise use MessageSender.url
   // MessageSender.origin is more reliable as it is not spoofable by a
   // compromised renderer.
-  if (sender.origin) return new URL(sender.origin).host;
-  else if (sender.url) return new URL(sender.url).host;
+  if (sender.origin) return sender.origin;
+  else if (sender.url) return new URL(sender.url).origin;
   else return null;
 }
 

@@ -32,7 +32,7 @@ const data: PaymentNotificationData = {
   origin: {
     location: "test",
     domain: "",
-    host: "getalby.com",
+    host: "https://getalby.com",
     pathname: "test",
     name: "Alby",
     description: "test",
@@ -56,7 +56,7 @@ describe("Update Allowances", () => {
         internal: true,
       },
       args: {
-        host: "getalby.com",
+        host: "https://getalby.com",
       },
     };
 

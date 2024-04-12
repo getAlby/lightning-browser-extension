@@ -74,7 +74,7 @@ describe("delete allowance", () => {
     expect(dbAllowances).toEqual([
       {
         enabled: true,
-        host: "getalby.com",
+        host: "https://getalby.com",
         id: 1,
         imageURL: "https://getalby.com/favicon.ico",
         lastPaymentAt: 0,

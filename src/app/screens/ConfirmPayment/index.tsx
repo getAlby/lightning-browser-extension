@@ -122,7 +122,7 @@ function ConfirmPayment() {
     if (!budget || !navState.origin) return;
     return msg.request("addAllowance", {
       totalBudget: parseInt(budget),
-      host: navState.origin.host,
+      host: navState.origin.domain,
       name: navState.origin.name,
       imageURL: navState.origin.icon,
     });
