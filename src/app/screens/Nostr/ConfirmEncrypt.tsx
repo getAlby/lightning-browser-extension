@@ -1,9 +1,12 @@
 import Container from "@components/Container";
 import PublisherCard from "@components/PublisherCard";
+import {
+  PopiconsChevronBottomLine,
+  PopiconsChevronTopLine,
+} from "@popicons/react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import ContentMessage from "~/app/components/ContentMessage";
-import Hyperlink from "~/app/components/Hyperlink";
 import PermissionModal from "~/app/components/Permissions/PermissionModal";
 import PermissionSelector from "~/app/components/Permissions/PermissionSelector";
 import ScreenHeader from "~/app/components/ScreenHeader";
@@ -84,23 +87,33 @@ function NostrConfirmEncrypt() {
               title={origin.name}
               image={origin.icon}
               url={origin.host}
-              isSmall={true}
             />
             {message && (
               <ContentMessage
-                heading={t("allow_encrypt", {
-                  host: origin.host,
+                heading={t("allow", {
+                  publisher: origin.host,
+                  action: tPermissions("nostr.encrypt.title"),
                 })}
                 content={message}
               />
             )}
             <div className="flex justify-center mb-4 gap-4">
-              <Hyperlink onClick={toggleShowDetails}>
-                {showDetails ? t("hide_details") : t("view_details")}
-              </Hyperlink>
+              <div onClick={toggleShowDetails}>
+                {showDetails ? (
+                  <>
+                    {t("hide_details")}
+                    <PopiconsChevronTopLine className="h-4 w-4 inline-flex" />
+                  </>
+                ) : (
+                  <>
+                    {t("view_details")}
+                    <PopiconsChevronBottomLine className="h-4 w-4 inline-flex" />
+                  </>
+                )}
+              </div>
             </div>
             {showDetails && (
-              <div className="whitespace-pre-wrap break-words p-2 mb-4 shadow bg-white rounded-lg dark:bg-surface-02dp text-gray-500 dark:text-gray-400">
+              <div className="whitespace-pre-wrap break-words p-2 mb-4 text-gray-500 dark:text-gray-400">
                 {t("recipient")}: {recipientNpub}
               </div>
             )}

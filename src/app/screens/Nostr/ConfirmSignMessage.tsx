@@ -2,10 +2,13 @@ import Container from "@components/Container";
 import ContentMessage from "@components/ContentMessage";
 import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
+import {
+  PopiconsChevronBottomLine,
+  PopiconsChevronTopLine,
+} from "@popicons/react";
 import { useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import Hyperlink from "~/app/components/Hyperlink";
 import PermissionModal from "~/app/components/Permissions/PermissionModal";
 import PermissionSelector from "~/app/components/Permissions/PermissionSelector";
 import ScreenHeader from "~/app/components/ScreenHeader";
@@ -116,13 +119,23 @@ function ConfirmSignMessage() {
                 }
                 content={event.content || ""}
               />
-              <div className="flex justify-center mb-4 gap-4">
-                <Hyperlink onClick={toggleShowJSON}>
-                  {showJSON ? t("hide_details") : t("view_details")}
-                </Hyperlink>
+              <div className="flex justify-center mb-4 gap-4 text-gray-400 dark:text-neutral-600">
+                <div onClick={toggleShowJSON}>
+                  {showJSON ? (
+                    <>
+                      {t("hide_details")}
+                      <PopiconsChevronTopLine className="h-4 w-4 inline-flex" />
+                    </>
+                  ) : (
+                    <>
+                      {t("view_details")}
+                      <PopiconsChevronBottomLine className="h-4 w-4 inline-flex" />
+                    </>
+                  )}
+                </div>
               </div>
               {showJSON && (
-                <div className="whitespace-pre-wrap break-words p-2 mb-4 shadow bg-white rounded-lg dark:bg-surface-02dp text-gray-500 dark:text-gray-400">
+                <div className="whitespace-pre-wrap break-words p-2 mb-4 text-gray-500 dark:text-gray-400">
                   {JSON.stringify(event, null, 2)}
                 </div>
               )}

@@ -924,11 +924,9 @@
     },
     "nostr": {
       "title": "Nostr",
-      "allow": "Allow this website to:",
+      "allow": "Allow {{publisher}} to {{action}}",
       "content": "This website asks you to sign:",
-      "allow_sign": "Allow {{host}} to sign:",
       "allow_sign_event": "Allow {{host}} to sign a <0>{{kind}}</0> event",
-      "allow_encrypt": "Allow {{host}} to encrypt the message:",
       "view_details": "View details",
       "hide_details": "Hide details",
       "block_and_ignore": "Block and ignore {{host}}",
@@ -1290,17 +1288,16 @@
         "title": "read public key",
         "description": "Read your public key"
       },
-
       "decrypt": {
-        "title": "decrypt",
+        "title": "decrypt data",
         "description": "Decrypt data"
       },
       "encrypt": {
-        "title": "encrypt",
+        "title": "encrypt data",
         "description": "Encrypt data"
       },
       "signmessage": {
-        "title": "Sign Message",
+        "title": "sign message",
         "description": "Sign all nostr events"
       },
       "signschnorr": {

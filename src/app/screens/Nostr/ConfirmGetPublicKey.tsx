@@ -1,8 +1,8 @@
 import Container from "@components/Container";
 import PublisherCard from "@components/PublisherCard";
-import { PopiconsCheckLine } from "@popicons/react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import ContentMessage from "~/app/components/ContentMessage";
 import PermissionModal from "~/app/components/Permissions/PermissionModal";
 import PermissionSelector from "~/app/components/Permissions/PermissionSelector";
 import ScreenHeader from "~/app/components/ScreenHeader";
@@ -74,18 +74,14 @@ function NostrConfirmGetPublicKey() {
             title={origin.name}
             image={origin.icon}
             url={origin.host}
-            isSmall={false}
           />
 
-          <div className="dark:text-white pt-6 mb-4">
-            <p className="mb-2">{t("allow")}</p>
-            <div className="mb-2 flex items-center">
-              <PopiconsCheckLine className="w-5 h-5 mr-2" />
-              <p className="dark:text-white">
-                {tPermissions("nostr.getpublickey.description")}
-              </p>
-            </div>
-          </div>
+          <ContentMessage
+            heading={t("allow", {
+              publisher: origin.host,
+              action: tPermissions("nostr.getpublickey.title"),
+            })}
+          />
         </div>
 
         <form onSubmit={handleSubmit}>

@@ -94,7 +94,10 @@ function ConfirmSignSchnorr() {
                 url={origin.host}
               />
               <ContentMessage
-                heading={t("allow_sign", { host: origin.host })}
+                heading={t("allow", {
+                  publisher: origin.host,
+                  action: tPermissions("nostr.signschnorr.title"),
+                })}
                 content={sigHash}
               />
             </div>

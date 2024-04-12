@@ -1,12 +1,12 @@
-import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
 import PublisherCard from "@components/PublisherCard";
-import { PopiconsCheckLine } from "@popicons/react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import ContentMessage from "~/app/components/ContentMessage";
 import PermissionModal from "~/app/components/Permissions/PermissionModal";
 import PermissionSelector from "~/app/components/Permissions/PermissionSelector";
 import ScreenHeader from "~/app/components/ScreenHeader";
+import SignOrDeny from "~/app/components/SignOrDeny";
 import toast from "~/app/components/Toast";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import msg from "~/common/lib/msg";
@@ -76,15 +76,13 @@ function NostrConfirmDecrypt() {
               title={origin.name}
               image={origin.icon}
               url={origin.host}
-              isSmall={false}
             />
-            <div className="dark:text-white pt-6 mb-4">
-              <p className="mb-2">{t("allow", { host: origin.host })}</p>
-              <p className="dark:text-white">
-                <PopiconsCheckLine className="w-5 h-5 mr-2 inline" />
-                {tPermissions("nostr.decrypt.description")}
-              </p>
-            </div>
+            <ContentMessage
+              heading={t("allow", {
+                publisher: origin.host,
+                action: tPermissions("nostr.decrypt.title"),
+              })}
+            />
           </div>
 
           <div className="text-center flex flex-col gap-4">
@@ -99,11 +97,7 @@ function NostrConfirmDecrypt() {
               }}
               permission={tPermissions("nostr.decrypt.title")}
             />
-            <ConfirmOrCancel
-              disabled={loading}
-              loading={loading}
-              onCancel={reject}
-            />
+            <SignOrDeny disabled={loading} loading={loading} onDeny={reject} />
 
             <PermissionSelector
               i18nKey={permissionOption}
