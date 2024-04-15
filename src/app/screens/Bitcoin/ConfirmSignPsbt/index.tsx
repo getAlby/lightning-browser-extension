@@ -112,7 +112,7 @@ function ConfirmSignPsbt() {
             </div>
             <div className="flex w-full justify-center">
               <Hyperlink onClick={toggleShowAddresses}>
-                {showAddresses ? t("hide_details") : t("view_details")}
+                {showAddresses ? tCommon("details") : tCommon("details")}
               </Hyperlink>
             </div>
 

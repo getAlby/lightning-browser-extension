@@ -97,16 +97,16 @@ function NostrConfirmEncrypt() {
                 content={message}
               />
             )}
-            <div className="flex justify-center mb-4 gap-4 text-gray-400 dark:text-neutral-600">
+            <div className="flex justify-center mb-4 gap-4 text-gray-600 dark:text-neutral-400">
               <div onClick={toggleShowDetails}>
                 {showDetails ? (
                   <>
-                    {t("hide_details")}
+                    {tCommon("details")}
                     <PopiconsChevronTopLine className="h-4 w-4 inline-flex" />
                   </>
                 ) : (
                   <>
-                    {t("view_details")}
+                    {tCommon("details")}
                     <PopiconsChevronBottomLine className="h-4 w-4 inline-flex" />
                   </>
                 )}

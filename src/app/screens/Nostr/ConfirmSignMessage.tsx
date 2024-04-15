@@ -21,10 +21,11 @@ import { OriginData, PermissionOption } from "~/types";
 
 function ConfirmSignMessage() {
   const navState = useNavigationState();
-  const { t: tCommon } = useTranslation("common");
+
   const { t } = useTranslation("translation", {
     keyPrefix: "nostr",
   });
+  const { t: tCommon } = useTranslation("common");
   const navigate = useNavigate();
 
   const event = navState.args?.event as Event;
@@ -119,16 +120,16 @@ function ConfirmSignMessage() {
                 }
                 content={event.content || ""}
               />
-              <div className="flex justify-center mb-4 gap-4 text-gray-400 dark:text-neutral-600">
+              <div className="flex justify-center mb-4 gap-4 text-gray-600 dark:text-neutral-400">
                 <div onClick={toggleShowJSON}>
                   {showJSON ? (
                     <>
-                      {t("hide_details")}
+                      {tCommon("details")}
                       <PopiconsChevronTopLine className="h-4 w-4 inline-flex" />
                     </>
                   ) : (
                     <>
-                      {t("view_details")}
+                      {tCommon("details")}
                       <PopiconsChevronBottomLine className="h-4 w-4 inline-flex" />
                     </>
                   )}

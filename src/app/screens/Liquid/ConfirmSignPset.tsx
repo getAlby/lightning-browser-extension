@@ -120,7 +120,7 @@ function ConfirmSignPset() {
             </div>
             <div className="flex w-full justify-center">
               <Hyperlink onClick={toggleShowAddresses}>
-                {showDetails ? t("hide_details") : t("view_details")}
+                {showDetails ? tCommon("details") : tCommon("details")}
               </Hyperlink>
             </div>
 

@@ -7,9 +7,9 @@ function ContentMessage({ heading, content }: Props) {
   return (
     <>
       <dl className="my-4 overflow-hidden">
-        <dt className="dark:text-white">{heading}</dt>
+        <dt className="text-gray-800 dark:text-neutral-200">{heading}</dt>
         {content && (
-          <dd className="text-gray-500 dark:text-gray-400 break-all">
+          <dd className="text-gray-600 dark:text-neutral-400 break-all">
             {content}
           </dd>
         )}
