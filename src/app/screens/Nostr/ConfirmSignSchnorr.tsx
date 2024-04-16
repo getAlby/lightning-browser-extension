@@ -5,10 +5,10 @@ import SuccessMessage from "@components/SuccessMessage";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import ConfirmOrCancel from "~/app/components/ConfirmOrCancel";
 import PermissionModal from "~/app/components/Permissions/PermissionModal";
 import PermissionSelector from "~/app/components/Permissions/PermissionSelector";
 import ScreenHeader from "~/app/components/ScreenHeader";
-import SignOrDeny from "~/app/components/SignOrDeny";
 import toast from "~/app/components/Toast";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import msg from "~/common/lib/msg";
@@ -113,10 +113,12 @@ function ConfirmSignSchnorr() {
                 }}
                 permission={tPermissions("nostr.signschnorr.title")}
               />
-              <SignOrDeny
+              <ConfirmOrCancel
                 disabled={loading}
                 loading={loading}
-                onDeny={reject}
+                onCancel={reject}
+                cancelLabel={tCommon("actions.deny")}
+                error={true}
               />
 
               <PermissionSelector

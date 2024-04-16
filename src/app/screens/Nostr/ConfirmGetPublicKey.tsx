@@ -2,11 +2,11 @@ import Container from "@components/Container";
 import PublisherCard from "@components/PublisherCard";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import ConfirmOrCancel from "~/app/components/ConfirmOrCancel";
 import ContentMessage from "~/app/components/ContentMessage";
 import PermissionModal from "~/app/components/Permissions/PermissionModal";
 import PermissionSelector from "~/app/components/Permissions/PermissionSelector";
 import ScreenHeader from "~/app/components/ScreenHeader";
-import SignOrDeny from "~/app/components/SignOrDeny";
 import toast from "~/app/components/Toast";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import msg from "~/common/lib/msg";
@@ -97,7 +97,13 @@ function NostrConfirmGetPublicKey() {
               }}
               permission={tPermissions("nostr.getpublickey.title")}
             />
-            <SignOrDeny disabled={loading} loading={loading} onDeny={reject} />
+            <ConfirmOrCancel
+              disabled={loading}
+              loading={loading}
+              onCancel={reject}
+              cancelLabel={tCommon("actions.deny")}
+              error={true}
+            />
             <PermissionSelector
               i18nKey={permissionOption}
               values={{
