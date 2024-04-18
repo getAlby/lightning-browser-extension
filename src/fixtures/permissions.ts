@@ -18,7 +18,7 @@ export const permissionsFixture: DbPermission[] = [
     createdAt: "1487076708000",
     host: "getalby.com",
     method: "the-request-method-2",
-    blocked: false,
+    blocked: true,
     enabled: true,
   },
   {
