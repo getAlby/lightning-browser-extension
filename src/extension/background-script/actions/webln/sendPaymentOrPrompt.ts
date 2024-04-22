@@ -1,8 +1,8 @@
-import lightningPayReq from "bolt11";
 import utils from "~/common/lib/utils";
 import { getHostFromSender } from "~/common/utils/helpers";
 import { Message, Sender } from "~/types";
 
+import { decodeLightningInvoice } from "~/app/utils";
 import db from "../../db";
 import sendPayment from "../ln/sendPayment";
 
@@ -16,13 +16,8 @@ const sendPaymentOrPrompt = async (message: Message, sender: Sender) => {
       error: "Payment request missing.",
     };
   }
-  const signet = {
-    bech32: "tbs",
-    pubKeyHash: 0x6f,
-    scriptHash: 0xc4,
-    validWitnessVersions: [0],
-  };
-  const paymentRequestDetails = lightningPayReq.decode(paymentRequest, signet);
+
+  const paymentRequestDetails = decodeLightningInvoice(paymentRequest);
   if (await checkAllowance(host, paymentRequestDetails.satoshis || 0)) {
     return sendPaymentWithAllowance(message);
   } else {

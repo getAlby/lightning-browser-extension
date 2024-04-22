@@ -1,13 +1,7 @@
-import lightningPayReq from "bolt11";
+import { decodeLightningInvoice } from "~/app/utils";
 
 export function getPaymentRequestDescription(paymentRequest: string): string {
-  const signet = {
-    bech32: "tbs",
-    pubKeyHash: 0x6f,
-    scriptHash: 0xc4,
-    validWitnessVersions: [0],
-  };
-  const decodedPaymentRequest = lightningPayReq.decode(paymentRequest, signet);
+  const decodedPaymentRequest = decodeLightningInvoice(paymentRequest);
   const descriptionTag = decodedPaymentRequest.tags.find(
     (tag) => tag.tagName === "description"
   );
