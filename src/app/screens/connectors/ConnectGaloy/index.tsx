@@ -1,5 +1,6 @@
 import ConnectorForm from "@components/ConnectorForm";
 import Input from "@components/form/Input";
+import Select from "@components/form/Select";
 import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
 import fetchAdapter from "@vespaiach/axios-fetch-adapter";
 import axios from "axios";
@@ -54,9 +55,14 @@ export default function ConnectGaloy(props: Props) {
   });
   const [loading, setLoading] = useState(false);
   const [authToken, setAuthToken] = useState<string | undefined>();
+  const [currency, setCurrency] = useState<string>("BTC");
 
   function handleAuthTokenChange(event: React.ChangeEvent<HTMLInputElement>) {
     setAuthToken(event.target.value.trim());
+  }
+
+  function handleCurrencyChange(event: React.ChangeEvent<HTMLSelectElement>) {
+    setCurrency(event.target.value);
   }
 
   async function loginWithAuthToken(event: React.FormEvent<HTMLFormElement>) {
@@ -100,10 +106,10 @@ export default function ConnectGaloy(props: Props) {
       } else {
         // Find the BTC wallet and get its ID
         const btcWallet = meData.data.me.defaultAccount.wallets.find(
-          (w: Wallet) => w.walletCurrency === "BTC"
+          (w: Wallet) => w.walletCurrency === currency
         );
         const walletId = btcWallet.id;
-        saveAccount({ headers, walletId });
+        saveAccount({ headers, walletId, currency });
       }
     } catch (e: unknown) {
       console.error(e);
@@ -122,7 +128,11 @@ export default function ConnectGaloy(props: Props) {
     }
   }
 
-  async function saveAccount(config: { headers: Headers; walletId: string }) {
+  async function saveAccount(config: {
+    headers: Headers;
+    walletId: string;
+    currency: string;
+  }) {
     setLoading(true);
 
     const account = {
@@ -132,6 +142,7 @@ export default function ConnectGaloy(props: Props) {
         headers: config.headers,
         walletId: config.walletId,
         apiCompatibilityMode,
+        currency: config.currency,
       },
       connector: "galoy",
     };
@@ -215,6 +226,26 @@ export default function ConnectGaloy(props: Props) {
           </div>
         </div>
       }
+
+      <div className="mt-6">
+        <label
+          htmlFor="currency"
+          className="block font-medium text-gray-800 dark:text-white"
+        >
+          {t(`${i18nPrefix}.currency.label`)}
+        </label>
+        <div className="mt-1">
+          <Select
+            id="currency"
+            name="currency"
+            required
+            onChange={handleCurrencyChange}
+          >
+            <option value="BTC">BTC</option>
+            <option value="USD">USD (Stablesats)</option>
+          </Select>
+        </div>
+      </div>
     </ConnectorForm>
   );
 }

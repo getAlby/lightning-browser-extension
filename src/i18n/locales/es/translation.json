@@ -12,7 +12,8 @@
           "enter_password": "Por favor, introduce un código de acceso.",
           "confirm_password": "Por favor, confirma tu código de acceso.",
           "mismatched_password": "Los códigos no coinciden."
-        }
+        },
+        "title": "Establecer contraseña para desbloquear la extensión"
       },
       "test_connection": {
         "ready": "Genial, ¡ya estás listo!",
@@ -227,7 +228,6 @@
         "enable_now": "Habilitar ahora"
       },
       "allowance_view": {
-        "no_transactions": "No hay transacciones en <0>{{name}}</0> todavía.",
         "sats": "sats",
         "budget_spent": "Presupuesto gastado",
         "total_spent": "Gastos totales"
@@ -377,15 +377,6 @@
       "browser_notifications": {
         "title": "Notificaciones del navegador",
         "subtitle": "Notificaciones relacionadas con pagos y autenticación."
-      },
-      "nostr": {
-        "private_key": {
-          "title": "Clave Privada",
-          "subtitle": "Esta sección se ha movido a la página de cuentas ya que las claves ahora son específicas de la cuenta.",
-          "go_to": "Ir a Cuentas"
-        },
-        "title": "Nostr",
-        "hint": "es un protocolo simple y abierto que tiene como objetivo crear redes sociales resistentes a la censura. Nostr trabaja con claves criptográficas. Para publicar algo, lo firma con su clave y lo envía a múltiples relevos. Puede usar Alby para administrar su clave Nostr. Muchas aplicaciones de Nostr le permitirán simplemente usar la clave de la extensión Alby."
       }
     },
     "send": {
@@ -514,13 +505,6 @@
         "point3": "Opciones de autocustodia y custodia",
         "point4": "Sin dirección relámpago y nostr"
       },
-      "voltage": {
-        "connect": "Connectar",
-        "title": "Nodo a Voltage Cloud",
-        "point1": "Empieza al instante, sin esperar invitación",
-        "point2": "Sin límite de transacciones ni de importe",
-        "point3": "Servicio de pago en la nube"
-      },
       "title": "Conectar la cartera a la extensión Alby"
     },
     "nostr": {
@@ -531,32 +515,7 @@
       "block_and_ignore": "Bloquear e ignorar {{host}}",
       "block_added": "Se agregó {{host}} a la lista de bloqueados, vuelva a cargar el sitio web.",
       "view_details": "Más información",
-      "hide_details": "Ocultar los detalles",
-      "kinds": {
-        "0": "metadatos",
-        "1": "nota corta de texto",
-        "2": "Recomendar un relé",
-        "3": "contactos",
-        "4": "mensajes directos cifrados",
-        "5": "borrado de eventos",
-        "7": "reacción",
-        "8": "concesión de distintivo",
-        "40": "creación del canal",
-        "41": "metadatos del canal",
-        "42": "mensaje del canal",
-        "43": "ocultar mensaje del canal",
-        "44": "silenciar a un usuario del canal",
-        "1984": "reportando",
-        "9734": "solicitud de eliminación",
-        "9735": "borrar",
-        "10002": "metadatos de la lista de relés",
-        "22242": "autenticación del cliente",
-        "24133": "conectarse a nostr",
-        "30008": "distintivos del perfil",
-        "30009": "definición del distintivo",
-        "30023": "contenidos largos",
-        "30078": "datos específicos de la aplicación"
-      }
+      "hide_details": "Ocultar los detalles"
     },
     "confirm_request_permission": {
       "title": "Aprobar solicitud",
@@ -592,7 +551,6 @@
     },
     "transactions": {
       "title": "Transacciones",
-      "list_empty": "Todavía no hay transacciones disponibles.",
       "description": "Transacciones para esta cuenta"
     },
     "distributions": {
@@ -616,9 +574,6 @@
       "btcpay": {
         "name": "BTCPay"
       }
-    },
-    "nostr_enable": {
-      "request2": "Solicitud para firmar eventos utilizando su clave privada"
     }
   },
   "common": {
@@ -691,9 +646,9 @@
   "components": {
     "allowance_menu": {
       "confirm_delete": "¿Está seguro de que desea eliminar este sitio web?",
-      "hint": "Esto restablecerá el presupuesto actual",
+      "hint": "Cambiar este número restablecerá el presupuesto actual",
       "new_budget": {
-        "label": "Nuevo presupuesto"
+        "label": "Presupuesto de pagos con un clic"
       },
       "edit_allowance": {
         "title": "Editar Asignación",
@@ -702,8 +657,7 @@
       "enable_login": {
         "title": "Habilitar inicio de sesión en el sitio web",
         "subtitle": "Iniciar sesión automáticamente sin confirmación cuando el sitio web lo solicite."
-      },
-      "edit_permissions": "Editar Permisos"
+      }
     },
     "qrcode_scanner": {
       "title": "Escanear el Código QR",
@@ -812,11 +766,6 @@
       "listnodes": "Enumere los nodos sobre los que el nodo ha aprendido a través de mensajes gossip",
       "listsendpays": "Obtiene el estado de todos los comandos sendpay",
       "feerates": "Devuelve las tarifas que utilizará CLN"
-    },
-    "nostr": {
-      "signmessage": "Firma el mensaje con tu clave",
-      "getpublickey": "Leer tu clave pública",
-      "nip04decrypt": "Descifrar datos"
     },
     "lnd": {
       "queryroutes": "Consultar una posible ruta",

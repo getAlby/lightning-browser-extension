@@ -38,6 +38,9 @@ function AccountDetail() {
     keyPrefix: "accounts.account_view",
   });
   const { t: tCommon } = useTranslation("common");
+  const { t: tComponents } = useTranslation("components", {
+    keyPrefix: "badge",
+  });
   const { isLoading: isLoadingSettings } = useSettings();
 
   const hasFetchedData = useRef(false);
@@ -337,7 +340,7 @@ function AccountDetail() {
               </div>
 
               <div className="flex-none sm:w-1/5 w-full pt-4 sm:pt-0">
-                <Link to={`secret-key/${hasMnemonic ? "backup" : "new"}`}>
+                <Link to={`secret-key/${hasMnemonic ? "backup" : "generate"}`}>
                   <Button
                     label={t(
                       hasMnemonic
@@ -396,7 +399,7 @@ function AccountDetail() {
                 {nostrPublicKey && hasImportedNostrKey && (
                   <div className="">
                     <Badge
-                      label="imported"
+                      label={tComponents("label.imported")}
                       className="bg-green-bitcoin text-white"
                     />
                   </div>

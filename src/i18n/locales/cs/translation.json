@@ -226,7 +226,6 @@
         "enable_now": "Povolit nyní"
       },
       "allowance_view": {
-        "no_transactions": "Prozatím žádné transakce na <0>{{name}}</0>.",
         "sats": "satů",
         "total_spent": "Cekově utraceno",
         "total_payments": "Platby celkem",
@@ -291,16 +290,10 @@
           "placeholder": "Jméno účtu"
         },
         "mnemonic": {
-          "new": {
-            "title": "Co je to Master klíč?"
-          },
           "generate": {
             "button": "Vygenerovat Master klíč",
-            "confirm": "Zazálohoval jsem svou záložní (recovery) frázi k mému Master klíči na soukromém bezpečném místě.",
-            "title": "Vygenerování nového Master klíče",
-            "error_confirm": "Prosím potvrďte, že jste zazálohovali svou záložní frázi."
+            "title": "Vygenerování nového Master klíče"
           },
-          "inputs": {},
           "saved": "Master klíč byl zašifrován a úspěšně uložen.",
           "lnurl": {
             "use_mnemonic": "Používat Master klíč pro přihlašování do aplikací podporujících autentizaci přes Lightning (LNURL Auth)",
@@ -417,15 +410,6 @@
           "mismatched_password": "Hesla se neshodují."
         },
         "success": "Změna hesla proběhla úspěšně"
-      },
-      "nostr": {
-        "title": "Nostr",
-        "hint": "je jednoduchý otevřený protokol, jehož snahou je vytvořit necenzurovatelné sociální sítě. Nostr pracuje s kryptografickými klíči. Pro publikování jakékoliv zpravy přes tento protokol, je vždy nutné zprávu podepsat svým klíčem a odeslat ji několika relé. Můžete použít Alby ke správě svého Nostr klíče. Většina Nostr aplikací vám pak umožní jednoduché použití klíče přímo z doplňku Alby.",
-        "private_key": {
-          "title": "Privátní klíč",
-          "subtitle": "Tato sekce je přesunuta na stránku s účty, protože klíče se týkají účtů.",
-          "go_to": "Jít do správy účtů"
-        }
       }
     },
     "send": {
@@ -676,8 +660,7 @@
       "edit_allowance": {
         "title": "Upravit příspěvek",
         "screen_reader": "Možnosti příspěvku"
-      },
-      "edit_permissions": "Upravit oprávnění"
+      }
     },
     "qrcode_scanner": {
       "title": "Skenovat QR kód",
@@ -790,11 +773,6 @@
       "listfunds": "Vypsat seznam všech dostupných prostředků",
       "listforwards": "Zobrazit seznam všech htlc, které se uzel pokusil předat dále",
       "invoice": "Vytvořit novou platební fakturu"
-    },
-    "nostr": {
-      "getpublickey": "Přečíst svůj veřejný klíč",
-      "nip04decrypt": "Dešifrovat data",
-      "signmessage": "Podepsat zprávu klíčem"
     },
     "lnc": {
       "estimatefee": "Odhadnout sazbu poplatku a celkové poplatky za transakci",

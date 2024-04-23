@@ -214,9 +214,6 @@
         "send_satoshis": "⚡️ Sendi Bitmonon ⚡️",
         "enable_now": ""
       },
-      "allowance_view": {
-        "no_transactions": ""
-      },
       "default_view": {
         "is_blocked_hint": ""
       }
@@ -309,14 +306,6 @@
           "mismatched_password": ""
         },
         "success": ""
-      },
-      "nostr": {
-        "title": "Nostr",
-        "hint": "",
-        "private_key": {
-          "title": "Privata ŝlosilo",
-          "subtitle": ""
-        }
       }
     },
     "send": {

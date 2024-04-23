@@ -20,6 +20,8 @@ Date.now = jest.fn(() => 1487076708000);
 const mockAllowances: DbAllowance[] = [allowanceFixture[0]];
 
 beforeEach(async () => {
+  await db.permissions.clear();
+  await db.allowances.clear();
   // fill the DB first
   await db.allowances.bulkAdd(mockAllowances);
 });
@@ -29,7 +31,7 @@ afterEach(() => {
 });
 
 describe("add permission", () => {
-  test("saves permissions", async () => {
+  test("saves enabled permissions", async () => {
     const message: MessagePermissionAdd = {
       application: "LBE",
       prompt: true,
@@ -50,5 +52,28 @@ describe("add permission", () => {
     const dbPermissions = await db.permissions.toArray();
 
     expect(dbPermissions).toStrictEqual([permissionsFixture[0]]);
+  });
+
+  test("saves disabled permissions", async () => {
+    const message: MessagePermissionAdd = {
+      application: "LBE",
+      prompt: true,
+      action: "addPermission",
+      origin: {
+        internal: true,
+      },
+      args: {
+        host: mockAllowances[0].host,
+        method: "the-request-method-2",
+        enabled: true,
+        blocked: true,
+      },
+    };
+
+    await addPermission(message);
+
+    const dbPermissions = await db.permissions.toArray();
+
+    expect(dbPermissions).toStrictEqual([permissionsFixture[1]]);
   });
 });

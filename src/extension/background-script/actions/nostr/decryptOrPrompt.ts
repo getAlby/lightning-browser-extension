@@ -20,7 +20,7 @@ const decryptOrPrompt = async (message: MessageDecryptGet, sender: Sender) => {
 
     if (hasPermission) {
       const nostr = await state.getState().getNostr();
-      const response = await nostr.decrypt(
+      const response = await nostr.nip04Decrypt(
         message.args.peer,
         message.args.ciphertext
       );
@@ -30,6 +30,7 @@ const decryptOrPrompt = async (message: MessageDecryptGet, sender: Sender) => {
       const promptResponse = await utils.openPrompt<{
         confirm: boolean;
         rememberPermission: boolean;
+        blocked: boolean;
       }>({
         ...message,
         action: "public/nostr/confirmDecrypt",
@@ -39,12 +40,13 @@ const decryptOrPrompt = async (message: MessageDecryptGet, sender: Sender) => {
       if (promptResponse.data.rememberPermission) {
         await addPermissionFor(
           PermissionMethodNostr["NOSTR_NIP04DECRYPT"],
-          host
+          host,
+          promptResponse.data.blocked
         );
       }
       if (promptResponse.data.confirm) {
         const nostr = await state.getState().getNostr();
-        const response = await nostr.decrypt(
+        const response = await nostr.nip04Decrypt(
           message.args.peer,
           message.args.ciphertext
         );

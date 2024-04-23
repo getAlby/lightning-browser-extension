@@ -243,9 +243,6 @@
         "send_satoshis": "⚡️ Trimite Satoshi ⚡️",
         "enable_now": "Activeaza acum"
       },
-      "allowance_view": {
-        "no_transactions": "Nicio tranzactie pentru <0>{{nume}}</0> inca."
-      },
       "default_view": {
         "is_blocked_hint": "Momentan, Alby este dezactivat pentru {{host}}",
         "block_removed": "{{host}} activat. Te rugam sa reincarci website-ul."
@@ -389,15 +386,6 @@
           "mismatched_password": ""
         },
         "success": ""
-      },
-      "nostr": {
-        "title": "",
-        "hint": "",
-        "private_key": {
-          "title": "",
-          "subtitle": "",
-          "go_to": ""
-        }
       }
     },
     "send": {
@@ -599,8 +587,7 @@
       "edit_allowance": {
         "title": "",
         "screen_reader": ""
-      },
-      "edit_permissions": ""
+      }
     },
     "qrcode_scanner": {
       "title": "",

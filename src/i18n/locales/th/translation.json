@@ -54,8 +54,6 @@
         "mnemonic": {
           "generate": {
             "button": "สร้าง Master Key",
-            "confirm": "ฉันได้สำรอง recovery phase ของฉันไปยัง Master Key ของฉันในที่ส่วนตัวและปลอดภัย",
-            "error_confirm": "โปรดยืนยันการสำรอง recovery phase ของคุณ",
             "title": "สร้าง Master Key ใหม่",
             "description": "Master Key ช่วยให้คุณโต้ตอบกับโปรโตคอลต่างๆ เช่น Nostr, เลเยอร์พื้นฐานของ Bitcoin หรือ LNURL-Auth"
           },
@@ -66,11 +64,6 @@
             "description": "จด recovery phase ของคุณ เพื่อให้สามารถกู้คืน Master Key ของคุณในอุปกรณ์ใหม่ หรือในกรณีที่คุณสูญเสียการเข้าถึงบัญชีของคุณ",
             "protocols": {
               "nostr": "Nostr"
-            },
-            "items": {
-              "recovery_phrase": "คุณสามารถเข้าถีง Master Key ของคุณโดยการใช้ recovery phrase",
-              "words": "Recovery phase เป็นชุดคำ 12 คำ ทำงานเหมือนรหัสผ่าน แต่ไม่สามารถเปลี่ยนหรือตั้งค่าใหม่ได้ในกรณีที่สูญหาย",
-              "storage": "อย่าลืมจดไว้ที่ไหนสักแห่งที่ปลอดภัยและเป็นส่วนตัว!"
             }
           },
           "import": {
@@ -78,7 +71,6 @@
             "description": "ใช้ recovery phrase เพื่อนำ Master Key ของคุณเข้าสู่ Alby",
             "button": "นำเข้า Master Key"
           },
-          "inputs": {},
           "lnurl": {
             "title": "เข้าสู่ระบบด้วย Lightning",
             "use_mnemonic": "ใช้ Master Key เพื่อลงชื่อเข้าใช้แอปพลิเคชันที่ใช้ Lightning (LNURL Auth)"
@@ -115,21 +107,7 @@
             "new": {
               "description": "สร้าง Master Key และคู่ Nostr keys ใหม่",
               "label": "สร้างบัญชี Nostr ใหม่"
-            },
-            "import": {
-              "label": "นำเข้าบัญชี Nostr",
-              "description": "ใช่ Nostr private key ที่มีอยู่แล้ว หรือรับมาจาก Master Key ของคุณ",
-              "title": "คุณต้องการจะนำเข้าบัญชี Nostr ของคุณด้วยวิธีใด ?",
-              "private_key": {
-                "description": "วาง Nostr private key ของคุณหรือนำเข้าจาก Alby",
-                "label": "ใช้ Nostr private key"
-              },
-              "recovery_phrase": {
-                "label": "ใช้ recovery phrase",
-                "description": "ใช้ recovery phrase ของ Master Key เพื่อนำเข้า Nostr keys ของคุณ"
-              }
-            },
-            "new_to_nostr": "ยังใหม่กับ Nostr ? <0>Learn more</0>"
+            }
           },
           "private_key": {
             "label": "Nostr Private Key",
@@ -266,15 +244,6 @@
         },
         "success": "เปลี่ยนรหัสผ่านเสร็จสมบูรณ์"
       },
-      "nostr": {
-        "private_key": {
-          "subtitle": "หัวข้อนี้ย้ายไปที่หน้าบัญชีแล้ว เนื่องจาก key เป็นข้อมูลเฉพาะบัญชี",
-          "go_to": "ไปที่บัญชี",
-          "title": "Private key"
-        },
-        "title": "Nostr",
-        "hint": "Nostr เป็นโปรโตคอลที่เรียบง่ายและเปิดกว้างที่มุ่งสร้างเครือข่ายสังคมที่ทนต่อการเซ็นเซอร์ Nostr ทำงานด้วยคีย์ทาง cryptography เมื่อต้องการเผยแพร่บางอย่าง คุณต้องลงชื่อด้วยคีย์ของคุณและส่งไปยังรีเลย์หลายตัว คุณสามารถใช้ Alby เพื่อจัดการคีย์ Nostr ของคุณ แอปพลิเคชัน Nostr หลายตัวจะอนุญาตให้คุณใช้คีย์จาก extension Alby ได้อย่างง่ายดาย"
-      },
       "personal_data": {
         "title": "ข้อมูลส่วนบุคคล",
         "description": "ผู้รับเงินสามารถขอข้อมูลเพิ่มเติมที่จะส่งพร้อมกับการชำระเงิน ข้อมูลนี้จะไม่ถูกแบ่งปันกับใครก็ตามโดยไม่ได้รับความยินยอมจากคุณ คุณจะได้รับแจ้งเสมอก่อนที่จะส่งข้อมูลนี้ไปพร้อมกับการชำระเงิน"
@@ -375,31 +344,6 @@
     },
     "nostr": {
       "block_and_ignore": "บล็อกและเพิกเฉยต่อ {{host}}",
-      "kinds": {
-        "0": "metadata",
-        "1": "บันทึกข้อความสั้น ๆ",
-        "2": "รีเลย์แนะนำ",
-        "3": "รายชื่อติดต่อ",
-        "4": "เข้ารหัสข้อความส่วนตัว",
-        "5": "การลบ event",
-        "7": "การตอบสนอง",
-        "8": "ตรารางวัล",
-        "40": "การสร้าง channel",
-        "41": "channel metadata",
-        "42": "ช่องข้อความ",
-        "43": "ข้อความช่องที่ถูกซ่อน",
-        "44": "ช่องผู้ใช้ที่ถูกปิดเสียง",
-        "1984": "การรายงาน",
-        "9734": "คำขอ zap",
-        "9735": "zap",
-        "10002": "metadata ของรายการรีเลย์",
-        "22242": "การรับรองความถูกต้องของไคลเอนต์",
-        "24133": "เชื่อมต่อ Nostr",
-        "30008": "โปรไฟล์เหรียญตรา",
-        "30009": "คำจำกัดความของเหรียญตรา",
-        "30023": "เนื้อหาแบบยาว",
-        "30078": "ข้อมูลเฉพาะแอปพลิเคชัน"
-      },
       "title": "Nostr",
       "block_added": "เพื่ม {{host}} เข้าสู่แบล็คลิส โปรดรีเฟรชหน้าเว็บใหม่",
       "allow": "อณุญาติเว็บไซต์นี้เพื่อ:",
@@ -634,9 +578,6 @@
         "send_satoshis": "⚡️ส่งซาโตชิ⚡️",
         "enable_now": "เปิดใช้งานเดี๋ยวนี้"
       },
-      "allowance_view": {
-        "no_transactions": "ยังไม่มีธุรกรรมบน <0>{{name}}</0>"
-      },
       "default_view": {
         "is_blocked_hint": "Alby ถูกปิดใช้งานบน {{host}}",
         "block_removed": "เปิดใช้งาน {{host}} โปรด รีเฟรชหน้าเว็บไซต์"
@@ -736,16 +677,10 @@
       "tor_info": "ในการเชื่อมต่อผ่านเครือข่าย TOR คุณต้องติดตั้ง Alby companion app เสียก่อน:"
     },
     "transactions": {
-      "title": "การทำธุรกรรม",
-      "list_empty": "ยังไม่มีการทำธุรกรรม"
+      "title": "การทำธุรกรรม"
     }
   },
   "permissions": {
-    "nostr": {
-      "signmessage": "เซ็นข้อความด้วย key ของคุณ",
-      "nip04decrypt": "ถอดรหัสข้อมูล",
-      "getpublickey": "แสดง public key ของคุณ"
-    },
     "commando": {
       "invoice": "สร้างความคาดหวังในการชำระเงิน",
       "keysend": "ส่งการชำระเงินไปยัง node อื่น",
@@ -826,16 +761,6 @@
       "listinvoices": "รับรายการ invoice ทั้งหมด",
       "channelbalance": "รับรายงานเกี่ยวกับเงินทุนรวมในทุก channel ที่เปิดอยู่",
       "walletbalance": "รับผลลัพธ์ที่ไม่ได้ใช้ทั้งหมดใน wallet"
-    },
-    "liquid": {
-      "signschnorr": "เซ็นข้อความด้วย key ของคุณ",
-      "getaddress": "แสดง Liquid address รับเงินของคุณ"
-    },
-    "webln": {
-      "getbalance": "แสดงยอดเงินในบัญชีของคุณ"
-    },
-    "bitcoin": {
-      "getaddress": "แสดง address บิตคอยน์ที่ใช้รับเงินของคุณ"
     }
   },
   "common": {
@@ -919,7 +844,6 @@
   },
   "components": {
     "allowance_menu": {
-      "edit_permissions": "แก้ไขสิทธิ์",
       "hint": "การดำเนินการนี้จะรีเซ็ตงบประมาณปัจจุบัน",
       "new_budget": {
         "label": "งบประมาณใหม่"

@@ -1,11 +1,10 @@
-import { ArrowRightIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import Button from "@components/Button";
 import Loading from "@components/Loading";
 import TransactionsTable from "@components/TransactionsTable";
 import {
   PopiconsArrowDownLine,
+  PopiconsArrowRightLine,
   PopiconsBulbLine,
-  PopiconsDownloadLine,
   PopiconsKeyLine,
 } from "@popicons/react";
 import dayjs from "dayjs";
@@ -13,6 +12,7 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import Alert from "~/app/components/Alert";
 import BalanceBox from "~/app/components/BalanceBox";
 import Hyperlink from "~/app/components/Hyperlink";
 import { IconLinkCard } from "~/app/components/IconLinkCard/IconLinkCard";
@@ -53,6 +53,8 @@ const DefaultView: FC<Props> = (props) => {
     useTransactions();
 
   const isLoading = accountLoading || isLoadingTransactions;
+  const needsKeySetup =
+    !currentAccount?.hasMnemonic || !currentAccount?.isMnemonicBackupDone;
 
   useEffect(() => {
     loadTransactions(itemsLimit);
@@ -117,7 +119,26 @@ const DefaultView: FC<Props> = (props) => {
       {props.renderPublisherWidget && !!props.lnDataFromCurrentTab?.length && (
         <PublisherLnData lnData={props.lnDataFromCurrentTab[0]} />
       )}
+
       <div className="p-4">
+        {isBlockedUrl && (
+          <div className="items-center dark:text-white text-sm mb-4">
+            <Alert type="info">
+              <p className="pb-2">
+                {t("default_view.is_blocked_hint", {
+                  host: props.currentUrl?.host,
+                })}
+              </p>
+              <Button
+                fullWidth
+                label={t("actions.enable_now")}
+                direction="column"
+                onClick={() => unblock()}
+              />
+            </Alert>
+          </div>
+        )}
+
         <BalanceBox />
         {(accountLoading || lightningAddress) && (
           <div className="flex justify-center">
@@ -137,7 +158,7 @@ const DefaultView: FC<Props> = (props) => {
             </a>
           </div>
         )}
-        <div className="flex mb-4 space-x-3 justify-between">
+        <div className="flex space-x-3 justify-between">
           <HomeButton
             icon={<img src="assets/icons/popicons/receive.svg" />}
             onClick={() => {
@@ -164,109 +185,59 @@ const DefaultView: FC<Props> = (props) => {
           </HomeButton>
         </div>
 
-        {isBlockedUrl && (
-          <div className="mb-2 items-center py-3 dark:text-white">
-            <p className="py-1">
-              {t("default_view.is_blocked_hint", {
-                host: props.currentUrl?.host,
-              })}
-            </p>
-            <Button
-              fullWidth
-              label={t("actions.enable_now")}
-              direction="column"
-              onClick={() => unblock()}
-            />
-          </div>
-        )}
-
         {isLoading && (
-          <div className="flex justify-center">
+          <div className="flex justify-center mt-4">
             <Loading />
           </div>
         )}
 
         {!isLoading && (
-          <div>
-            <div className="flex flex-col gap-2 md:gap-3">
-              {transactions.length == 0 && (
-                <IconLinkCard
-                  title={t("default_view.actions.get_started.title")}
-                  description={t(
-                    "default_view.actions.get_started.description"
-                  )}
-                  icon={
-                    <PopiconsBulbLine className="w-8 h-8 text-gray-400 dark:text-neutral-500" />
-                  }
-                  onClick={() => {
-                    utils.openUrl(
-                      "https://guides.getalby.com/user-guide/v/alby-account-and-browser-extension/"
-                    );
-                  }}
-                />
-              )}
-
-              {!(
-                currentAccount?.hasMnemonic &&
-                currentAccount?.isMnemonicBackupDone
-              ) && (
-                <IconLinkCard
-                  title={t("default_view.actions.backup_masterkey.title")}
-                  description={t(
-                    "default_view.actions.backup_masterkey.description"
-                  )}
-                  icon={
-                    <PopiconsKeyLine className="w-8 h-8 text-gray-400 dark:text-neutral-500" />
-                  }
-                  onClick={async () => {
-                    if (currentAccount?.hasMnemonic) {
-                      openOptions(
-                        `accounts/${currentAccount?.id}/secret-key/backup`
+          <div className="mt-4 flex flex-col gap-4">
+            {(transactions.length === 0 || needsKeySetup) && (
+              <div className="flex flex-col gap-2 md:gap-3">
+                {transactions.length === 0 && (
+                  <IconLinkCard
+                    title={t("default_view.actions.get_started.title")}
+                    description={t(
+                      "default_view.actions.get_started.description"
+                    )}
+                    icon={<PopiconsBulbLine className="w-8 h-8" />}
+                    onClick={() => {
+                      utils.openUrl(
+                        "https://guides.getalby.com/user-guide/v/alby-account-and-browser-extension/"
                       );
-                    } else {
+                    }}
+                  />
+                )}
+                {needsKeySetup && (
+                  <IconLinkCard
+                    title={t("default_view.actions.setup_keys.title")}
+                    description={t(
+                      "default_view.actions.setup_keys.description"
+                    )}
+                    icon={<PopiconsKeyLine className="w-8 h-8" />}
+                    onClick={async () => {
                       openOptions(
                         `accounts/${currentAccount?.id}/secret-key/new`
                       );
-                    }
-                  }}
-                />
-              )}
+                    }}
+                  />
+                )}
+                {transactions.length === 0 && (
+                  <IconLinkCard
+                    title={t("default_view.actions.receive_bitcoin.title")}
+                    description={t(
+                      "default_view.actions.receive_bitcoin.description"
+                    )}
+                    icon={<PopiconsArrowDownLine className="w-8 h-8" />}
+                    onClick={() => {
+                      navigate("/receive");
+                    }}
+                  />
+                )}
+              </div>
+            )}
 
-              {transactions.length == 0 && (
-                <IconLinkCard
-                  title={t("default_view.actions.receive_bitcoin.title")}
-                  description={t(
-                    "default_view.actions.receive_bitcoin.description"
-                  )}
-                  icon={
-                    <PopiconsArrowDownLine className="w-8 h-8 text-gray-400 dark:text-neutral-500" />
-                  }
-                  onClick={() => {
-                    navigate("/receive");
-                  }}
-                />
-              )}
-
-              {!(
-                currentAccount?.hasMnemonic &&
-                currentAccount?.isMnemonicBackupDone
-              ) && (
-                <IconLinkCard
-                  title={t("default_view.actions.import_masterkey.title")}
-                  description={t(
-                    "default_view.actions.import_masterkey.description"
-                  )}
-                  icon={
-                    <PopiconsDownloadLine className="w-8 h-8 text-gray-400 dark:text-neutral-500" />
-                  }
-                  onClick={async () => {
-                    openOptions(
-                      `accounts/${currentAccount?.id}/secret-key/import`
-                    );
-                  }}
-                />
-              )}
-            </div>
             <TransactionsTable
               transactions={transactions}
               loading={isLoading}
@@ -279,7 +250,7 @@ const DefaultView: FC<Props> = (props) => {
                   className="flex justify-center items-center mt-2"
                 >
                   {t("default_view.see_all")}
-                  <ArrowRightIcon className="ml-2 w-4 h-4" />
+                  <PopiconsArrowRightLine className="ml-2 w-5 h-5" />
                 </Hyperlink>
               </div>
             )}
@@ -300,7 +271,7 @@ const HomeButton = ({
   onClick: () => void;
 }) => (
   <button
-    className="bg-white dark:bg-surface-01dp hover:bg-amber-50 dark:hover:bg-surface-02dp text-gray-800 dark:text-neutral-200 rounded-xl border border-gray-300 dark:border-neutral-800 hover:border-primary dark:hover:border-primary flex flex-col flex-1 justify-center items-center pt-[18px] pb-3 px-[14px] text-xs font-medium gap-2"
+    className="bg-white dark:bg-surface-01dp hover:bg-amber-50 dark:hover:bg-surface-02dp text-gray-800 dark:text-neutral-200 rounded-xl border border-gray-200 dark:border-neutral-800 hover:border-primary dark:hover:border-primary flex flex-col flex-1 justify-center items-center pt-[18px] pb-3 px-[14px] text-xs font-medium gap-2"
     onClick={onClick}
   >
     {icon}

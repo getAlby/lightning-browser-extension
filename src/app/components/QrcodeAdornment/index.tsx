@@ -1,4 +1,4 @@
-import { QrCodeIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
+import { PopiconsQrCodeMinimalLine } from "@popicons/react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
@@ -20,7 +20,7 @@ export default function QrcodeAdornment({ route }: Props) {
         navigate("/scanQRCode", { state: { route: route }, replace: true });
       }}
     >
-      <QrCodeIcon className="h-6 w-6 text-blue-600" />
+      <PopiconsQrCodeMinimalLine className="h-5 w-5 text-blue-600" />
     </button>
   );
 }

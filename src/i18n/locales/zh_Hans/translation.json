@@ -218,9 +218,6 @@
       }
     },
     "home": {
-      "allowance_view": {
-        "no_transactions": "<0>{{name}}</0>还没有交易。"
-      },
       "default_view": {
         "is_blocked_hint": "Alby 目前在 {{host}} 上被禁用",
         "block_removed": "启用了{{host}}。请重新加载网站。"
@@ -273,25 +270,11 @@
           },
           "setup": {
             "description2": "在 Alby 中创建的每个 Nostr 帐户都带有<0>恢复短语</0> —— 一组12个单词，始终保证重新获得对你的 Nostr 私钥的访问。",
-            "new_to_nostr": "Nostr 新手？<0>了解更多</0>",
             "title": "设置你的 nostr 密钥",
             "description": "选择是否要创建一个新的 nostr 帐户（一对私钥和公钥）或导入现有帐户。",
             "new": {
               "label": "创建新的 nostr 帐户",
               "description": "通过使用一对新的 nostr 密钥生成主密钥。"
-            },
-            "import": {
-              "label": "导入 nostr 帐户",
-              "description": "使用已有的 nostr 私钥或从主密钥中将其派生",
-              "title": "你想如何导入你的 nostr 帐户？",
-              "private_key": {
-                "label": "使用 nostr 私钥",
-                "description": "粘贴你的 nostr 私钥将其导入 Alby"
-              },
-              "recovery_phrase": {
-                "label": "使用恢复短语",
-                "description": "使用主密钥恢复短语导入你的 nostr 密钥"
-              }
             }
           }
         },
@@ -324,11 +307,6 @@
             "protocols": {
               "nostr": "Nostr"
             },
-            "items": {
-              "recovery_phrase": "你将始终可以通过使用主密钥的恢复短语来访问它。",
-              "storage": "请确保在一个安全且私密的地方将它记下！",
-              "words": "恢复短语是一组12个单词，它的工作方式类似于秘密，但是如果丢失，它不能被更改或重置。"
-            },
             "description": "请写下恢复短语，以便能够在新设备上恢复主密钥，或以防失去帐户访问。"
           },
           "existing_nostr_key_notice": "ℹ️ 该账户已设置 nostr 私钥，因此不会从此主密钥派生。你可以通过你的帐户设置管理你的 nostr 密钥。",
@@ -337,8 +315,6 @@
           "generate": {
             "title": "生成新的主密钥",
             "button": "生成主密钥",
-            "confirm": "我已将我的帐户主密钥的恢复短语保存到私密且安全的地方。",
-            "error_confirm": "请确认你已将你的恢复短语备份。",
             "description": "主密钥允许你与各种协议进行互动，例如：Nostr、基础层比特币或 LNURL-auth。"
           },
           "import": {
@@ -346,7 +322,6 @@
             "description": "通过使用恢复短语将主密钥导入 Alby。",
             "button": "导入主密钥"
           },
-          "inputs": {},
           "lnurl": {
             "title": "闪电登录",
             "use_mnemonic": "使用主密钥登录闪电驱动的应用程序（LNURL Auth）"
@@ -565,32 +540,7 @@
       "allow_sign": "允许{{host}}签署：",
       "block_added": "已将{{host}}添加到屏蔽列表，请重新加载网站。",
       "view_details": "查看详情",
-      "hide_details": "隐藏详情",
-      "kinds": {
-        "0": "元数据",
-        "1": "短文笔记",
-        "2": "推荐中继器",
-        "3": "联系人",
-        "4": "加密的直接消息",
-        "5": "删除事件",
-        "7": "回应",
-        "8": "徽章奖励",
-        "40": "频道创建",
-        "41": "频道元数据",
-        "42": "频道消息",
-        "43": "频道隐藏消息",
-        "44": "频道静音用户",
-        "1984": "报告",
-        "9734": "打闪请求",
-        "9735": "打闪",
-        "10002": "中继器列表元数据",
-        "22242": "客户端认证",
-        "24133": "nostr 连接",
-        "30008": "个人资料徽章",
-        "30009": "徽章定义",
-        "30023": "长篇内容",
-        "30078": "应用程序特定数据"
-      }
+      "hide_details": "隐藏详情"
     },
     "lnurlpay": {
       "amount": {
@@ -656,7 +606,6 @@
       "success": "通道请求已成功发送到 {{name}}"
     },
     "transactions": {
-      "list_empty": "尚无交易。",
       "title": "交易"
     },
     "distributions": {
@@ -880,8 +829,7 @@
       "edit_allowance": {
         "title": "编辑偏好",
         "screen_reader": "限额选项"
-      },
-      "edit_permissions": "编辑权限"
+      }
     },
     "transactions_table": {
       "boostagram": {
@@ -938,11 +886,6 @@
     }
   },
   "permissions": {
-    "nostr": {
-      "signmessage": "使用你的密钥签署消息",
-      "nip04decrypt": "解密数据",
-      "getpublickey": "读取你的公钥"
-    },
     "commando": {
       "bkpr-listbalances": "所有当前和历史帐户余额列表",
       "checkmessage": "验证该签名是由一个给定的节点产生的",
@@ -1023,16 +966,6 @@
       "openchannel": "开通新渠道",
       "addholdinvoice": "创建新的 HODL 发票",
       "settleinvoice": "结算已接受的发票"
-    },
-    "webln": {
-      "getbalance": "读取你的帐户余额"
-    },
-    "bitcoin": {
-      "getaddress": "读取你的比特币收款地址"
-    },
-    "liquid": {
-      "getaddress": "读取你的 Liquid 收款地址",
-      "signschnorr": "用你的密钥签署消息"
     }
   }
 }

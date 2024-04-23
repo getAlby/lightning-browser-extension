@@ -217,9 +217,6 @@
         "send_satoshis": "⚡️ Invia Satoshis ⚡️",
         "enable_now": "Attiva ora"
       },
-      "allowance_view": {
-        "no_transactions": "Non ci sono ancora transazioni su <0>{{name}}</0>."
-      },
       "default_view": {
         "is_blocked_hint": "Alby è attualmente disabilitato su {{host}}",
         "block_removed": "{{host}} abilitato. Si prega di ricaricare la pagina."
@@ -362,15 +359,6 @@
           "mismatched_password": "Le password non corrispondono."
         },
         "success": "La password è stata modificata con successo"
-      },
-      "nostr": {
-        "title": "Nostr",
-        "hint": "è un protocollo semplice e aperto che mira a creare reti sociali resistenti alla censura. Nostr funziona con chiavi crittografiche. Per pubblicare qualcosa si firma con la propria chiave e la si invia a più relè. È possibile utilizzare Alby per gestire la propria chiave Nostr. Molte applicazioni Nostr vi permetteranno poi di utilizzare semplicemente la chiave dall'estensione Alby.",
-        "private_key": {
-          "title": "Chiave privata",
-          "subtitle": "Questa sezione è stata spostata nella pagina degli account, poiché le chiavi ora sono specifiche per l'account.",
-          "go_to": "Vai Agli Account"
-        }
       }
     },
     "send": {
@@ -599,8 +587,7 @@
       "edit_allowance": {
         "title": "Modifica tolleranza",
         "screen_reader": "Opzioni di tolleranza"
-      },
-      "edit_permissions": "Modifica Permessi"
+      }
     },
     "qrcode_scanner": {
       "title": "Scansiona il codice QR",
@@ -737,11 +724,6 @@
       "decodepayreq": "Decodifica una stringa di richiesta di pagamento",
       "getnetworkinfo": "Ottieni le statistiche di base riguardo il tracciato del canale conosciuto",
       "addinvoice": "Crea nuove ricevute di pagamento"
-    },
-    "nostr": {
-      "nip04decrypt": "Decripta i dati",
-      "getpublickey": "Leggi la tua chiave pubblica",
-      "signmessage": "Firma il messaggio con la tua chiave"
     }
   }
 }

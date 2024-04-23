@@ -52,7 +52,7 @@ export default function UserMenu() {
               openOptions("wallet");
             }}
           >
-            <PopiconsExpandLine className="h-5 w-5 mr-2 text-gray-800 dark:text-neutral-200" />
+            <PopiconsExpandLine className="h-5 w-5 mr-2 text-gray-800 dark:text-neutral-200 shrink-0" />
             {tCommon("full_screen")}
           </Menu.ItemButton>
           <Menu.ItemButton
@@ -60,7 +60,7 @@ export default function UserMenu() {
               openOptions("publishers");
             }}
           >
-            <ConnectedSiteIcon className="h-5 w-5 mr-2 text-gray-800 dark:text-neutral-200" />
+            <ConnectedSiteIcon className="h-5 w-5 mr-2 text-gray-800 dark:text-neutral-200 shrink-0" />
             {tCommon("connected_sites")}
           </Menu.ItemButton>
         </div>
@@ -69,7 +69,7 @@ export default function UserMenu() {
             openOptions("settings");
           }}
         >
-          <PopiconsCogLine className="h-5 w-5 mr-2 text-gray-800 dark:text-neutral-200" />
+          <PopiconsCogLine className="h-5 w-5 mr-2 text-gray-800 dark:text-neutral-200 shrink-0" />
           {tCommon("settings")}
         </Menu.ItemButton>
         <Menu.ItemButton
@@ -77,7 +77,7 @@ export default function UserMenu() {
             utils.openUrl("https://feedback.getalby.com");
           }}
         >
-          <PopiconsCommentLine className="h-5 w-5 mr-2 text-gray-800 dark:text-neutral-200" />
+          <PopiconsCommentLine className="h-5 w-5 mr-2 text-gray-800 dark:text-neutral-200 shrink-0" />
           {tCommon("feedback")}
         </Menu.ItemButton>
 
@@ -88,12 +88,12 @@ export default function UserMenu() {
             );
           }}
         >
-          <PopiconsBulbLine className="h-5 w-5 mr-2 text-gray-800 dark:text-neutral-200" />
+          <PopiconsBulbLine className="h-5 w-5 mr-2 text-gray-800 dark:text-neutral-200 shrink-0" />
           {tCommon("help")}
         </Menu.ItemButton>
 
         <Menu.ItemButton onClick={lock}>
-          <PopiconsLockLine className="h-5 w-5 mr-2 text-gray-800 dark:text-neutral-200" />
+          <PopiconsLockLine className="h-5 w-5 mr-2 text-gray-800 dark:text-neutral-200 shrink-0" />
           {tCommon("actions.lock")}
         </Menu.ItemButton>
       </Menu.List>

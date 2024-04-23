@@ -243,9 +243,6 @@
         "send_satoshis": "⚡️ Send Satoshi ⚡️",
         "enable_now": "Aktiver nu"
       },
-      "allowance_view": {
-        "no_transactions": "Endnu ingen transaktioner på <0>{{navn}}</0>."
-      },
       "default_view": {
         "is_blocked_hint": "Alby er i øjeblikket deaktiveret på {{vært}}",
         "block_removed": "{{vært}} blev aktiveret. Indlæs hjemmesiden igen."
@@ -388,15 +385,6 @@
           "mismatched_password": "Koderne er forskellige."
         },
         "success": "Koden blev ændret"
-      },
-      "nostr": {
-        "title": "Nostr",
-        "hint": "er en enkel og åben protokol, der bruges til at skabe u-censorerbare sociale netværk. Nostr anvender kryptografisk kode. Når du publicerer noget, underskriver du det med din nøgle, og sender det til flere netværksrelæer. Du kan bruge Alby til opbevaring af din Nostr-nøgle. Mange Nostr-applikationer vil derefter lade dig bruge nøglen direkte fra Alby.",
-        "private_key": {
-          "title": "Privat nøgle",
-          "subtitle": "Dette afsnit blev flyttet til kontosiden, da nøgler nu er kontospecifikke.",
-          "go_to": "Gå til konti"
-        }
       }
     },
     "send": {
@@ -599,8 +587,7 @@
       "edit_allowance": {
         "title": "Rediger pulje",
         "screen_reader": "Indstillinger for pulje"
-      },
-      "edit_permissions": "Rediger tilladelser"
+      }
     },
     "qrcode_scanner": {
       "title": "Skan QR-kode",
@@ -661,11 +648,6 @@
     }
   },
   "permissions": {
-    "nostr": {
-      "getpublickey": "Læs din offentlige nøgle",
-      "nip04decrypt": "De-krypter data",
-      "signmessage": "Underskriv meddelelse med din nøgle"
-    },
     "commando": {
       "bkpr-listbalances": "Liste over alle nuværende og tidligere kontosaldi",
       "checkmessage": "Verificer, at signaturen blev genereret af en bestemt node",

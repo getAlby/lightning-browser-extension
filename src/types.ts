@@ -176,6 +176,11 @@ export type NavigationState = {
       message: string;
     };
 
+    nip44Encrypt: {
+      recipientNpub: string;
+      message: string;
+    };
+
     psbt?: string;
     requestPermission: {
       method: string;
@@ -562,6 +567,22 @@ export interface MessageDecryptGet extends MessageDefault {
   action: "decrypt";
 }
 
+export interface MessageNip44EncryptGet extends MessageDefault {
+  args: {
+    peer: string;
+    plaintext: string;
+  };
+  action: "encrypt";
+}
+
+export interface MessageNip44DecryptGet extends MessageDefault {
+  args: {
+    peer: string;
+    ciphertext: string;
+  };
+  action: "decrypt";
+}
+
 export interface MessageSignPsbt extends MessageDefault {
   args: {
     psbt: string;
@@ -729,6 +750,7 @@ export type Transaction = {
   preimage: string;
   title: string | React.ReactNode;
   totalAmount: Allowance["payments"][number]["totalAmount"];
+  displayAmount?: [number, ACCOUNT_CURRENCIES];
   totalAmountFiat?: string;
   totalFees?: Allowance["payments"][number]["totalFees"];
   type?: "sent" | "received";
@@ -757,6 +779,18 @@ export interface Payment extends Omit<DbPayment, "id"> {
   id: number;
 }
 
+export enum NostrPermissionPreset {
+  TRUST_FULLY = "trust_fully",
+  REASONABLE = "reasonable",
+  PARANOID = "paranoid",
+}
+
+export enum PermissionOption {
+  ASK_EVERYTIME = "ask_everytime",
+  DONT_ASK_CURRENT = "dont_ask_current",
+  DONT_ASK_ANY = "dont_ask_any",
+}
+
 export enum PermissionMethodBitcoin {
   BITCOIN_GETADDRESS = "bitcoin/getAddress",
 }
@@ -771,6 +805,8 @@ export enum PermissionMethodNostr {
   NOSTR_GETPUBLICKEY = "nostr/getPublicKey",
   NOSTR_NIP04DECRYPT = "nostr/nip04decrypt",
   NOSTR_NIP04ENCRYPT = "nostr/nip04encrypt",
+  NOSTR_NIP44DECRYPT = "nostr/nip44decrypt",
+  NOSTR_NIP44ENCRYPT = "nostr/nip44encrypt",
 }
 
 export interface DbPermission {
@@ -896,6 +932,7 @@ export interface Invoice {
   settleDate: number;
   totalAmount: number;
   totalAmountFiat?: string;
+  displayAmount?: [number, ACCOUNT_CURRENCIES];
   preimage: string;
   paymentHash?: string;
   custom_records?: ConnectorTransaction["custom_records"];

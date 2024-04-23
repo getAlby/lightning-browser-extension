@@ -290,7 +290,6 @@
         "enable_now": "Dovoli zdaj"
       },
       "allowance_view": {
-        "no_transactions": "NA <0>{{name}}</0> še ni transakcij.",
         "sats": "sats",
         "budget_spent": "Porabljen proračun",
         "total_spent": "Porabljeno skupaj",
@@ -323,18 +322,11 @@
           "generate": {
             "title": "Generiraj nov Glavni ključ",
             "button": "Generiraj Glavni ključ",
-            "confirm": "Naredil sem varnostno kopijo fraze in shranil na varno mesto.",
-            "description": "Glavni ključ ti omogoča interakcijo z različnimi protokoli, kot so: Nostr, Bitcoin omrežje ali LNURL-Auth.",
-            "error_confirm": "Prosim potrdi, da si naredil varnostno kopijo obnovitvene fraze."
+            "description": "Glavni ključ ti omogoča interakcijo z različnimi protokoli, kot so: Nostr, Bitcoin omrežje ali LNURL-Auth."
           },
           "backup": {
             "save": "Shrani Glavni ključ",
             "button": "Poglej obnovitveno frazo",
-            "items": {
-              "words": "Obnovitvena fraza je sestavljena iz 12 besed, ki delujejo kot geslo, a se ne more spremeniti ali obnoviti če se izgubi.",
-              "storage": "Bodi prepričan, da je zapisano na varnem in skrivnem mestu!",
-              "recovery_phrase": "Do Glavnega ključa lahko dostopaš z uporabo obnovitvene fraze."
-            },
             "protocols": {
               "nostr": "Nostr"
             }
@@ -344,13 +336,9 @@
             "description": "Uporabi obnovitveno frazo za uvoz Gladvnega ključa v Alby.",
             "button": "Uvozi Glavni ključ"
           },
-          "inputs": {},
           "lnurl": {
             "title": "Prijava z Lightning",
             "use_mnemonic": "Uporabi Glavni ključ za prijavo v Lightning omogočene aplikacije (LNURL Auth)"
-          },
-          "new": {
-            "title": "Kaj je Glavni ključ?"
           }
         },
         "network": {
@@ -371,24 +359,10 @@
           },
           "setup": {
             "title": "Konfiguriraj Nostr ključe",
-            "import": {
-              "label": "Uvozi Nostr račun",
-              "private_key": {
-                "description": "Prilepi Nostr zasebni ključ za uvoz v Alby",
-                "label": "Uporabi Nostr zasebni ključ"
-              },
-              "recovery_phrase": {
-                "label": "Uporabi obnovitveno frazo",
-                "description": "Za uvoz ključev Nostr uporabite frazo za obnovitev glavnega ključa"
-              },
-              "description": "Uporabite obstoječi zasebni ključ Nostr ali ga izpeljite iz svojega glavnega ključa",
-              "title": "Kako želite uvoziti svoj račun Nostr?"
-            },
             "new": {
               "label": "Ustvari nov Nostr račun",
               "description": "Ustvarite glavni ključ s parom novih ključev Nostr."
-            },
-            "new_to_nostr": "Ste novi pri Nostru? <0>Preverite več</0>"
+            }
           },
           "title": "Nostr",
           "public_key": {
@@ -539,8 +513,7 @@
       "title": "Poveži se z Liquid"
     },
     "nostr_enable": {
-      "title": "Povežite se z Nostr",
-      "request1": "Zahteva dostop do javnega ključa Nostr"
+      "title": "Povežite se z Nostr"
     },
     "webbtc_enable": {
       "request2": "Pridobi račune in podatke o Webbtc",
@@ -599,21 +572,6 @@
       "lookupinvoice": "Preglej podrobnosti računa",
       "settleinvoice": "Poravnaj sprejete račune",
       "sendtoroute": "Izvedi plačilo preko določene poti"
-    },
-    "liquid": {
-      "signschnorr": "Podpiše sporočilo s tvojim ključem",
-      "getaddress": "Bere tvoj Liquid naslov za prejemanje"
-    },
-    "nostr": {
-      "signmessage": "Podpiši sporočilo s svojim ključem",
-      "nip04decrypt": "Dekriptiraj podatke",
-      "getpublickey": "Bere tvoj javni ključ"
-    },
-    "webln": {
-      "getbalance": "Bere stanje tvojega računa"
-    },
-    "bitcoin": {
-      "getaddress": "Bere tvoj Bitcoin naslov za prejemanje"
     }
   },
   "components": {
@@ -669,7 +627,6 @@
         "screen_reader": "Nastavitve proračunskega zneska"
       },
       "confirm_delete": "Ali si prepričan, da želiš prekiniti povezavo s tem spletnim mestom?",
-      "edit_permissions": "Uredi pravice",
       "new_budget": {
         "label": "Proračun plačil z enim klikom",
         "link_label": "Nastavi proračun za plačila z enim klikom"

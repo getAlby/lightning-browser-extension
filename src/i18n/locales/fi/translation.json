@@ -209,9 +209,6 @@
         "send_satoshis": "⚡️ Lähetä Satoshis ⚡️",
         "enable_now": "Ota nyt käyttöön"
       },
-      "allowance_view": {
-        "no_transactions": "Ei vielä tapahtumia <0>{{name}}</0>:lla."
-      },
       "default_view": {
         "is_blocked_hint": "Alby on tällä hetkellä poissa käytöstä {{host}}:lla"
       }
@@ -301,14 +298,6 @@
           "mismatched_password": "Salasanat eivät täsmää."
         },
         "success": "Salasana vaihdettu onnistuneesti"
-      },
-      "nostr": {
-        "title": "Nostr",
-        "hint": "on yksinkertainen ja avoin protokolla, jonka tarkoituksena on luoda sensuurin kestäviä sosiaalisia verkostoja. Nostr toimii kryptografisten avainten kanssa. Jos haluat julkaista jotain, allekirjoita se avaimellasi ja lähetä se useille välittäjille. Voit käyttää Albyä Nostr-avaimen hallintaan. Monet Nostr-sovellukset sallivat sitten yksinkertaisesti käyttää avainta Alby-laajennuksesta.",
-        "private_key": {
-          "title": "Yksityinen avain",
-          "subtitle": "Avaimen luominen luo uuden avaimen nykyisen käyttämäsi tilin perusteella. Varmista, että varmuuskopioit tämän yksityisen avaimen."
-        }
       }
     },
     "send": {
