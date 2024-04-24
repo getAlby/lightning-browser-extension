@@ -4,16 +4,13 @@ import Header from "@components/Header";
 import IconButton from "@components/IconButton";
 import TextField from "@components/form/TextField";
 import { PopiconsChevronLeftLine } from "@popicons/react";
+import lightningPayReq from "bolt11";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 import QrcodeAdornment from "~/app/components/QrcodeAdornment";
 import toast from "~/app/components/Toast";
-import {
-  decodeLightningInvoice,
-  extractLightningTagData,
-  isBitcoinAddress,
-} from "~/app/utils";
+import { extractLightningTagData, isBitcoinAddress } from "~/app/utils";
 import lnurlLib from "~/common/lib/lnurl";
 import { isLNURLDetailsError } from "~/common/utils/typeHelpers";
 
@@ -99,7 +96,13 @@ function Send() {
           state: { args: { bitcoinAddress: invoice } },
         });
       } else {
-        decodeLightningInvoice(invoice); // throws if invalid.
+        const signet = {
+          bech32: "tbs",
+          pubKeyHash: 0x6f,
+          scriptHash: 0xc4,
+          validWitnessVersions: [0],
+        };
+        lightningPayReq.decode(invoice, signet); // throws if invalid.
         navigate("/confirmPayment", {
           state: {
             args: {

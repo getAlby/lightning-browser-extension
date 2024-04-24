@@ -1,8 +1,7 @@
 import { GetAccountInformationResponse } from "@getalby/sdk/dist/types";
-import lightningPayReq from "bolt11";
 import { useSettings } from "~/app/context/SettingsContext";
 import api from "~/common/lib/api";
-import { BrowserType, CustomNetwork, Theme } from "~/types";
+import { BrowserType, Theme } from "~/types";
 
 export function classNames(...classes: (string | boolean)[]) {
   return classes.filter(Boolean).join(" ");
@@ -82,29 +81,5 @@ export function extractLightningTagData(url: string) {
     return data[1];
   } else {
     return url.replace(/^lightning:/i, "");
-  }
-}
-
-export function decodeLightningInvoice(
-  invoice: string,
-  customNetwork?: CustomNetwork
-) {
-  try {
-    return lightningPayReq.decode(invoice);
-  } catch (e) {
-    const err = e as Error;
-    // NOTE: is there a way to get network for the current account from here?
-    // This catch-and-rethrow is a workaround for us not having the network
-    const mutinynet = {
-      bech32: "tbs",
-      pubKeyHash: 0x6f,
-      scriptHash: 0xc4,
-      validWitnessVersions: [0],
-    };
-    if (err.message === "Unknown coin bech32 prefix") {
-      return lightningPayReq.decode(invoice, customNetwork ?? mutinynet);
-    } else {
-      throw e;
-    }
   }
 }

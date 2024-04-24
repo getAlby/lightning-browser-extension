@@ -1,10 +1,10 @@
 import { act, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import lightningPayReq from "bolt11";
 import { MemoryRouter } from "react-router-dom";
 import { settingsFixture as mockSettings } from "~/../tests/fixtures/settings";
 import type { OriginData } from "~/types";
 
-import { decodeLightningInvoice } from "~/app/utils";
 import ConfirmPayment from "./index";
 
 const mockOrigin: OriginData = {
@@ -104,7 +104,7 @@ describe("ConfirmPayment", () => {
       );
     });
 
-    const satoshis = decodeLightningInvoice(paymentRequest).satoshis || 0;
+    const satoshis = lightningPayReq.decode(paymentRequest).satoshis || 0;
 
     expect(await screen.findByText(`${satoshis} sats`)).toBeInTheDocument();
 

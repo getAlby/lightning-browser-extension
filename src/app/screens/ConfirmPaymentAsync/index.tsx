@@ -2,6 +2,7 @@ import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
 import PaymentSummary from "@components/PaymentSummary";
 import PublisherCard from "@components/PublisherCard";
+import lightningPayReq from "bolt11";
 import { useEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +12,6 @@ import ScreenHeader from "~/app/components/ScreenHeader";
 import toast from "~/app/components/Toast";
 import { useSettings } from "~/app/context/SettingsContext";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
-import { decodeLightningInvoice } from "~/app/utils";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
@@ -31,7 +31,7 @@ function ConfirmPaymentAsync() {
 
   const navState = useNavigationState();
   const paymentRequest = navState.args?.paymentRequest as string;
-  const invoice = decodeLightningInvoice(paymentRequest);
+  const invoice = lightningPayReq.decode(paymentRequest);
 
   const navigate = useNavigate();
 

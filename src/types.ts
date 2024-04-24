@@ -16,13 +16,6 @@ export type BitcoinNetworkType = "bitcoin" | "testnet" | "regtest";
 
 export type LiquidNetworkType = "liquid" | "testnet" | "regtest";
 
-export type CustomNetwork = {
-  bech32: string;
-  pubKeyHash: number;
-  scriptHash: number;
-  validWitnessVersions: number[];
-};
-
 export interface Account {
   id: string;
   connector: ConnectorType;
