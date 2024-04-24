@@ -16,13 +16,8 @@ const sendPaymentOrPrompt = async (message: Message, sender: Sender) => {
       error: "Payment request missing.",
     };
   }
-  const signet = {
-    bech32: "tbs",
-    pubKeyHash: 0x6f,
-    scriptHash: 0xc4,
-    validWitnessVersions: [0],
-  };
-  const paymentRequestDetails = lightningPayReq.decode(paymentRequest, signet);
+
+  const paymentRequestDetails = lightningPayReq.decode(paymentRequest);
   if (await checkAllowance(host, paymentRequestDetails.satoshis || 0)) {
     return sendPaymentWithAllowance(message);
   } else {
@@ -66,4 +61,4 @@ async function payWithPrompt(message: Message) {
   }
 }
 
-export { checkAllowance, payWithPrompt, sendPaymentOrPrompt };
+export { sendPaymentOrPrompt, payWithPrompt, checkAllowance };

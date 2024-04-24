@@ -96,13 +96,7 @@ function Send() {
           state: { args: { bitcoinAddress: invoice } },
         });
       } else {
-        const signet = {
-          bech32: "tbs",
-          pubKeyHash: 0x6f,
-          scriptHash: 0xc4,
-          validWitnessVersions: [0],
-        };
-        lightningPayReq.decode(invoice, signet); // throws if invalid.
+        lightningPayReq.decode(invoice); // throws if invalid.
         navigate("/confirmPayment", {
           state: {
             args: {
