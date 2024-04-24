@@ -99,7 +99,7 @@ function Send() {
           state: { args: { bitcoinAddress: invoice } },
         });
       } else {
-        decodeLightningInvoice(invoice);
+        decodeLightningInvoice(invoice); // throws if invalid.
         navigate("/confirmPayment", {
           state: {
             args: {
