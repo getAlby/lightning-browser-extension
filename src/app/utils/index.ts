@@ -92,13 +92,16 @@ export function decodeLightningInvoice(
   try {
     return lightningPayReq.decode(invoice);
   } catch (e) {
+    const err = e as Error;
+    // NOTE: is there a way to get network for the current account from here?
+    // This catch-and-rethrow is a workaround for us not having the network
     const mutinynet = {
       bech32: "tbs",
       pubKeyHash: 0x6f,
       scriptHash: 0xc4,
       validWitnessVersions: [0],
     };
-    if ((e as Error).message === "Unknown coin bech32 prefix") {
+    if (err.message === "Unknown coin bech32 prefix") {
       return lightningPayReq.decode(invoice, customNetwork ?? mutinynet);
     } else {
       throw e;
