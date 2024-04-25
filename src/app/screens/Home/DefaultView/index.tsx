@@ -5,6 +5,7 @@ import {
   PopiconsArrowDownLine,
   PopiconsArrowRightLine,
   PopiconsBulbLine,
+  PopiconsCircleExclamationLine,
   PopiconsKeyLine,
 } from "@popicons/react";
 import dayjs from "dayjs";
@@ -21,7 +22,7 @@ import toast from "~/app/components/Toast";
 import { useAccount } from "~/app/context/AccountContext";
 import { useTransactions } from "~/app/hooks/useTransactions";
 import { PublisherLnData } from "~/app/screens/Home/PublisherLnData";
-import api, { GetAccountRes } from "~/common/lib/api";
+import api, { AccountInfoRes, GetAccountRes } from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
 import type { Battery } from "~/types";
@@ -48,6 +49,7 @@ const DefaultView: FC<Props> = (props) => {
 
   const [isBlockedUrl, setIsBlockedUrl] = useState<boolean>(false);
   const [currentAccount, setCurrentAccount] = useState<GetAccountRes>();
+  const [accountInfo, setAccountInfo] = useState<AccountInfoRes>();
 
   const { transactions, isLoadingTransactions, loadTransactions } =
     useTransactions();
@@ -76,13 +78,15 @@ const DefaultView: FC<Props> = (props) => {
     (async () => {
       try {
         const account = await api.getAccount();
+        const accountInfo = await api.getAccountInfo();
+        setAccountInfo(accountInfo);
         setCurrentAccount(account);
       } catch (e) {
         console.error(e);
         if (e instanceof Error) toast.error(`Error: ${e.message}`);
       }
     })();
-  }, []);
+  }, [account]);
 
   const unblock = async () => {
     try {
@@ -120,7 +124,7 @@ const DefaultView: FC<Props> = (props) => {
         <PublisherLnData lnData={props.lnDataFromCurrentTab[0]} />
       )}
 
-      <div className="p-4">
+      <div className="flex flex-col gap-4 p-4">
         {isBlockedUrl && (
           <div className="items-center dark:text-white text-sm mb-4">
             <Alert type="info">
@@ -139,7 +143,21 @@ const DefaultView: FC<Props> = (props) => {
           </div>
         )}
 
-        <BalanceBox />
+        {accountInfo && accountInfo.info.limit ? (
+          <Alert type="warn">
+            <div className="flex flex-row items-center gap-2 text-sm">
+              <div className="shrink-0">
+                <PopiconsCircleExclamationLine />
+              </div>
+              <span>
+                Your Alby Account needs a wallet. Connect a wallet to your
+                account on getalby.com
+              </span>
+            </div>
+          </Alert>
+        ) : (
+          <BalanceBox />
+        )}
         {(accountLoading || lightningAddress) && (
           <div className="flex justify-center">
             <a

@@ -47,7 +47,12 @@ export interface AccountInfoRes {
   connectorType: ConnectorType;
   balance: { balance: string | number; currency: ACCOUNT_CURRENCIES };
   currentAccountId: string;
-  info: { alias: string; pubkey?: string; lightning_address?: string };
+  info: {
+    alias: string;
+    pubkey?: string;
+    lightning_address?: string;
+    limit?: boolean;
+  };
   name: string;
   avatarUrl?: string;
 }

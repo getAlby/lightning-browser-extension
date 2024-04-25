@@ -37,6 +37,25 @@ interface Config {
   oAuthToken: OAuthToken | undefined;
 }
 
+interface UserDetails {
+  identifier: string;
+  email: string;
+  name: string;
+  avatar: string | null;
+  lightning_address: string;
+  custodial: boolean;
+  limits: {
+    max_send_volume: number;
+    max_send_amount: number;
+    max_receive_volume: number;
+    max_receive_amount: number;
+    max_account_balance: number;
+    max_volume_period_in_days: number;
+  };
+  node_type: string;
+  node_connection_error_count: number;
+}
+
 export default class Alby implements Connector {
   private account: Account;
   private config: Config;
@@ -130,9 +149,12 @@ export default class Alby implements Connector {
       const info = await this._request((client) =>
         client.accountInformation({})
       );
+
+      const limits = await this.getLimit();
       const returnValue = {
         data: {
           ...info,
+          limit: limits,
           alias: "🐝 getalby.com",
         },
       };
@@ -405,5 +427,51 @@ export default class Alby implements Connector {
       console.error("Invalid token");
       throw new Error("Invalid token");
     }
+  }
+
+  async getLimit() {
+    const url = "https://api.getalby.com/internal/users";
+
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        ...(await this._authUser?.getAuthHeader()),
+        "User-Agent": `lightning-browser-extension:${process.env.VERSION}`,
+        "X-User-Agent": `lightning-browser-extension:${process.env.VERSION}`,
+      },
+    };
+
+    try {
+      const details = await this._genericRequest<UserDetails>(
+        url,
+        requestOptions
+      );
+      const limits = details.limits;
+      const custodial = details.custodial;
+
+      const hasZeroLimit = Object.values(limits).some((limit) => limit === 0);
+
+      if (custodial && hasZeroLimit) return true;
+      return false;
+    } catch (error) {
+      console.error("Error fetching limits:", error);
+      throw error;
+    }
+  }
+
+  private async _genericRequest<T>(
+    url: RequestInfo,
+    init: RequestInit
+  ): Promise<T> {
+    const res = await fetch(url, init);
+
+    if (!res.ok) {
+      throw new Error(`HTTP error! status: ${res.status}`);
+    }
+
+    const data: T = await res.json();
+
+    return data;
   }
 }
