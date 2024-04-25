@@ -389,12 +389,12 @@
     "accounts": {
       "title": "Wallets",
       "account_view": {
-        "title1": "Wallet Settings",
-        "title2": "Account",
+        "description": "Settings related to this particular instance of the connected wallet. If you reconnect, settings related to keys or display name will have to be set again.",
         "name": {
           "title": "Display Name",
           "placeholder": "Account Display Name"
         },
+        "danger_zone": "Danger Zone",
         "export": {
           "title": "Connect your mobile wallet",
           "description": "Allows you to connect and use this account on mobile wallets like <0>Blue Wallet</0> and <1>Zeus</1>.",
@@ -406,7 +406,7 @@
         },
         "no_mnemonic_hint": "💡 You don't have a Master Key yet. <0>Click here</0></div> to create your Master Key and unlock these settings.",
         "mnemonic": {
-          "title": "🔑 Key Management",
+          "title": "Key Management",
           "saved": "Master Key encrypted & saved successfully.",
           "existing_nostr_key_notice": "ℹ️ This account already has a nostr private key set and will not be derived from this Master Key. You can manage your Nostr key from your account settings.",
           "description": {
@@ -1054,6 +1054,7 @@
     "hide_advanced": "Hide advanced settings",
     "success": "Success",
     "error": "Error",
+    "general": "General",
     "settings": "Extension Settings",
     "accounts": "Accounts",
     "discover": "Discover Apps",
@@ -1077,6 +1078,7 @@
     "balance": "Balance",
     "or": "or",
     "website": "Website",
+    "wallet_settings": "Wallet Settings",
     "apps": "Apps",
     "actions": {
       "back": "Back",
@@ -1244,7 +1246,6 @@
       "options": {
         "account": {
           "add": "Connect a Wallet",
-          "wallet_settings": "Wallet Settings",
           "go_to_web_wallet": "Manage your web account"
         }
       }
