@@ -50,6 +50,19 @@ export interface AccountInfo {
   limit?: boolean;
 }
 
+export type GetAccountInformationResponse = {
+  identifier: string;
+  email: string;
+  name?: string;
+  avatar?: string;
+  keysend_custom_key: string;
+  keysend_custom_value: string;
+  keysend_pubkey: string;
+  lightning_address?: string;
+  nostr_pubkey?: string;
+  limit?: boolean;
+};
+
 export interface MetaData {
   title?: string;
   description?: string;

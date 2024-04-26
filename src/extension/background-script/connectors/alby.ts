@@ -2,7 +2,6 @@ import { auth, Client } from "@getalby/sdk";
 import {
   CreateSwapParams,
   CreateSwapResponse,
-  GetAccountInformationResponse,
   Invoice,
   RequestOptions,
   SwapInfoResponse,
@@ -10,7 +9,7 @@ import {
 } from "@getalby/sdk/dist/types";
 import browser from "webextension-polyfill";
 import { decryptData, encryptData } from "~/common/lib/crypto";
-import { Account, OAuthToken } from "~/types";
+import { Account, GetAccountInformationResponse, OAuthToken } from "~/types";
 import state from "../state";
 import Connector, {
   CheckPaymentArgs,
@@ -141,7 +140,10 @@ export default class Alby implements Connector {
     const cacheValue = this._cache.get(cacheKey) as GetInfoResponse<
       WebLNNode & GetAccountInformationResponse
     >;
-    if (cacheValue) {
+
+    const limit = await this.getLimit();
+
+    if (cacheValue && cacheValue.data.limit === limit) {
       return cacheValue;
     }
 
@@ -150,11 +152,10 @@ export default class Alby implements Connector {
         client.accountInformation({})
       );
 
-      const limits = await this.getLimit();
       const returnValue = {
         data: {
           ...info,
-          limit: limits,
+          limit: limit,
           alias: "🐝 getalby.com",
         },
       };
