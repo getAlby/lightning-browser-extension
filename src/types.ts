@@ -35,7 +35,6 @@ export interface Accounts {
 }
 
 export interface NodeInfo {
-  limit: NodeInfo | undefined;
   node: WebLNNode;
 }
 export interface AccountInfo {
