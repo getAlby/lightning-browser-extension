@@ -142,17 +142,23 @@ const DefaultView: FC<Props> = (props) => {
         )}
 
         {accountLoading || limit ? (
-          <Alert type="warn">
-            <div className="flex flex-row items-center gap-2 text-sm">
-              <div className="shrink-0">
-                <PopiconsCircleExclamationLine />
-              </div>
-              <span>
-                Your Alby Account needs a wallet. Connect a wallet to your
-                account on getalby.com
-              </span>
+          <div className="flex flex-row items-center gap-2 text-sm text-orange-700 bg-orange-50 dark:text-orange-200 dark:bg-orange-900 border rounded-lg p-4">
+            <div className="shrink-0">
+              <PopiconsCircleExclamationLine className="w-6 h-6" />
             </div>
-          </Alert>
+            <span>
+              Your Alby Account needs a wallet. Connect a wallet to your account
+              on{" "}
+              <a
+                className="text-orange-700 dark:bg-orange-900"
+                href="https://getalby.com"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <u>getalby.com</u>
+              </a>
+            </span>
+          </div>
         ) : (
           <BalanceBox />
         )}
