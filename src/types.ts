@@ -35,6 +35,7 @@ export interface Accounts {
 }
 
 export interface NodeInfo {
+  limit: NodeInfo | undefined;
   node: WebLNNode;
 }
 export interface AccountInfo {
@@ -46,6 +47,7 @@ export interface AccountInfo {
   currency: ACCOUNT_CURRENCIES;
   avatarUrl?: string;
   lightningAddress?: string;
+  limit?: boolean;
 }
 
 export interface MetaData {

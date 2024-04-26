@@ -22,7 +22,7 @@ import toast from "~/app/components/Toast";
 import { useAccount } from "~/app/context/AccountContext";
 import { useTransactions } from "~/app/hooks/useTransactions";
 import { PublisherLnData } from "~/app/screens/Home/PublisherLnData";
-import api, { AccountInfoRes, GetAccountRes } from "~/common/lib/api";
+import api, { GetAccountRes } from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
 import type { Battery } from "~/types";
@@ -46,10 +46,10 @@ const DefaultView: FC<Props> = (props) => {
   const { account, accountLoading } = useAccount();
 
   const lightningAddress = account?.lightningAddress || "";
+  const limit = account?.limit || false;
 
   const [isBlockedUrl, setIsBlockedUrl] = useState<boolean>(false);
   const [currentAccount, setCurrentAccount] = useState<GetAccountRes>();
-  const [accountInfo, setAccountInfo] = useState<AccountInfoRes>();
 
   const { transactions, isLoadingTransactions, loadTransactions } =
     useTransactions();
@@ -78,15 +78,13 @@ const DefaultView: FC<Props> = (props) => {
     (async () => {
       try {
         const account = await api.getAccount();
-        const accountInfo = await api.getAccountInfo();
-        setAccountInfo(accountInfo);
         setCurrentAccount(account);
       } catch (e) {
         console.error(e);
         if (e instanceof Error) toast.error(`Error: ${e.message}`);
       }
     })();
-  }, [account]);
+  }, []);
 
   const unblock = async () => {
     try {
@@ -143,7 +141,7 @@ const DefaultView: FC<Props> = (props) => {
           </div>
         )}
 
-        {accountInfo && accountInfo.info.limit ? (
+        {accountLoading || limit ? (
           <Alert type="warn">
             <div className="flex flex-row items-center gap-2 text-sm">
               <div className="shrink-0">
