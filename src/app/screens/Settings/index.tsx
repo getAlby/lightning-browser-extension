@@ -61,7 +61,6 @@ function Settings() {
     <Container>
       <div className="flex flex-col gap-12 mt-12">
         <div className="flex flex-col gap-6">
-          {" "}
           <div className="flex flex-col gap-1">
             <h2 className="text-2xl font-bold dark:text-white leading-8">
               {t("title")}
