@@ -42,7 +42,8 @@ interface UserDetails {
   name: string;
   avatar: string | null;
   lightning_address: string;
-  custodial: boolean;
+  shared_node: boolean;
+  node_required: boolean;
   limits: {
     max_send_volume: number;
     max_send_amount: number;
@@ -141,9 +142,9 @@ export default class Alby implements Connector {
       WebLNNode & GetAccountInformationResponse
     >;
 
-    const limit = await this.getLimit();
+    const node_required = await this.getLimit();
 
-    if (cacheValue && cacheValue.data.limit === limit) {
+    if (cacheValue && cacheValue.data.node_required === node_required) {
       return cacheValue;
     }
 
@@ -155,7 +156,7 @@ export default class Alby implements Connector {
       const returnValue = {
         data: {
           ...info,
-          limit: limit,
+          node_required: node_required,
           alias: "🐝 getalby.com",
         },
       };
@@ -448,12 +449,9 @@ export default class Alby implements Connector {
         url,
         requestOptions
       );
-      const limits = details.limits;
-      const custodial = details.custodial;
 
-      const hasZeroLimit = Object.values(limits).some((limit) => limit === 0);
+      if (details.node_required) return true;
 
-      if (custodial && hasZeroLimit) return true;
       return false;
     } catch (error) {
       console.error("Error fetching limits:", error);

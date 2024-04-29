@@ -51,7 +51,7 @@ export interface AccountInfoRes {
     alias: string;
     pubkey?: string;
     lightning_address?: string;
-    limit?: boolean;
+    node_required?: boolean;
   };
   name: string;
   avatarUrl?: string;
@@ -119,7 +119,7 @@ export const swrGetAccountInfo = async (
           currency: currency || "BTC", // set default currency for every account
           avatarUrl,
           lightningAddress: response.info.lightning_address,
-          limit: response.info.limit,
+          nodeRequired: response.info.node_required,
         };
         storeAccounts({
           ...accountsCache,

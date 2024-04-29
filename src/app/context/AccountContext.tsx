@@ -22,7 +22,7 @@ interface AccountContextType {
     avatarUrl?: AccountInfo["avatarUrl"];
     connectorType?: AccountInfo["connectorType"];
     lightningAddress?: AccountInfo["lightningAddress"];
-    limit?: AccountInfo["limit"];
+    nodeRequired?: AccountInfo["nodeRequired"];
   } | null;
   balancesDecorated: {
     fiatBalance: string;

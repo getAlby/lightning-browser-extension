@@ -46,7 +46,7 @@ export interface AccountInfo {
   currency: ACCOUNT_CURRENCIES;
   avatarUrl?: string;
   lightningAddress?: string;
-  limit?: boolean;
+  nodeRequired?: boolean;
 }
 
 export type GetAccountInformationResponse = {
@@ -59,7 +59,7 @@ export type GetAccountInformationResponse = {
   keysend_pubkey: string;
   lightning_address?: string;
   nostr_pubkey?: string;
-  limit?: boolean;
+  node_required?: boolean;
 };
 
 export interface MetaData {

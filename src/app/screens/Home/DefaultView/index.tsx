@@ -46,7 +46,7 @@ const DefaultView: FC<Props> = (props) => {
   const { account, accountLoading } = useAccount();
 
   const lightningAddress = account?.lightningAddress || "";
-  const limit = account?.limit || false;
+  const nodeRequired = account?.nodeRequired || false;
 
   const [isBlockedUrl, setIsBlockedUrl] = useState<boolean>(false);
   const [currentAccount, setCurrentAccount] = useState<GetAccountRes>();
@@ -141,7 +141,7 @@ const DefaultView: FC<Props> = (props) => {
           </div>
         )}
 
-        {accountLoading || limit ? (
+        {accountLoading || nodeRequired ? (
           <div className="flex flex-row items-center gap-2 text-sm text-orange-700 bg-orange-50 dark:text-orange-200 dark:bg-orange-900 border rounded-lg p-4">
             <div className="shrink-0">
               <PopiconsCircleExclamationLine className="w-6 h-6" />
