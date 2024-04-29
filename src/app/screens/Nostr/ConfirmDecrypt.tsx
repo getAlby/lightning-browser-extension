@@ -102,7 +102,7 @@ function NostrConfirmDecrypt() {
               loading={loading}
               onCancel={reject}
               cancelLabel={tCommon("actions.deny")}
-              error={true}
+              destructive={true}
             />
 
             <PermissionSelector

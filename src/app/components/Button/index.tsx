@@ -9,7 +9,7 @@ export type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   label: string;
   icon?: React.ReactNode;
   primary?: boolean;
-  error?: boolean;
+  destructive?: boolean;
   outline?: boolean;
   loading?: boolean;
   disabled?: boolean;
@@ -31,7 +31,7 @@ const Button = forwardRef(
       primary = false,
       outline = false,
       loading = false,
-      error = false,
+      destructive = false,
       flex = false,
       className,
       ...otherProps
@@ -52,7 +52,7 @@ const Button = forwardRef(
             ? "bg-primary-gradient border-2 border-transparent text-black"
             : outline
             ? "bg-white text-gray-700 border-2 border-primary dark:text-primary dark:bg-surface-02dp"
-            : error
+            : destructive
             ? "bg-white text-red-700 dark:text-red-300 border-2 border-transparent dark:bg-surface-02dp"
             : `bg-white text-gray-700 dark:bg-surface-02dp dark:text-neutral-200 dark:border-neutral-800`,
           primary && !disabled && "hover:bg-primary-gradient-hover",
