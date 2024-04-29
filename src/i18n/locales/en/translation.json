@@ -394,6 +394,9 @@
           "title": "Display Name",
           "placeholder": "Account Display Name"
         },
+        "lnaddress": {
+          "title": "Lightning Address"
+        },
         "danger_zone": "Danger Zone",
         "export": {
           "title": "Connect your mobile wallet",
@@ -535,7 +538,9 @@
         "actions": {
           "disconnect_wallet": "Disconnect Wallet",
           "remove_secretkey": "Remove Master Key",
-          "export": "Export"
+          "export": "Export",
+          "connect_mobile_wallet": "Connect to mobile wallet",
+          "change_lnaddress": "Change on getalby.com"
         }
       },
       "actions": {

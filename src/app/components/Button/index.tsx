@@ -8,6 +8,7 @@ export type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   halfWidth?: boolean;
   label: string;
   icon?: React.ReactNode;
+  iconRight?: React.ReactNode;
   primary?: boolean;
   error?: boolean;
   outline?: boolean;
@@ -26,6 +27,7 @@ const Button = forwardRef(
       disabled,
       direction = "row",
       icon,
+      iconRight,
       fullWidth = false,
       halfWidth = false,
       primary = false,
@@ -61,7 +63,7 @@ const Button = forwardRef(
             "hover:bg-gray-50 dark:hover:bg-surface-16dp",
           disabled ? "cursor-default opacity-60" : "cursor-pointer",
           flex && "flex-1",
-          "inline-flex justify-center items-center font-medium bg-origin-border shadow rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary transition duration-150",
+          "inline-flex justify-center items-center gap-1 font-medium bg-origin-border shadow rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary transition duration-150",
           !!className && className
         )}
         onClick={onClick}
@@ -74,6 +76,7 @@ const Button = forwardRef(
         )}
         {icon}
         {label}
+        {iconRight}
       </button>
     );
   }

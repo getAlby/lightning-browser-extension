@@ -3,6 +3,7 @@ import Container from "@components/Container";
 import Loading from "@components/Loading";
 import Setting from "@components/Setting";
 import TextField from "@components/form/TextField";
+import { PopiconsExpandLine } from "@popicons/react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import type { FormEvent } from "react";
@@ -47,6 +48,10 @@ function AccountDetail() {
   const { id } = useParams() as { id: string };
   const navigate = useNavigate();
 
+  const { account: accountInfo } = useAccount();
+
+  const lightningAddress = accountInfo?.lightningAddress || "";
+
   const [account, setAccount] = useState<GetAccountRes | null>(null);
   const [accountName, setAccountName] = useState("");
   const [hasMnemonic, setHasMnemonic] = useState(false);
@@ -62,6 +67,7 @@ function AccountDetail() {
     url: "",
     lnAddress: "",
   });
+
   async function exportAccount({ id, name }: AccountAction) {
     setExportLoading(true);
     setExportModalIsOpen(true);
@@ -228,6 +234,38 @@ function AccountDetail() {
                   />
                 </div>
               </form>
+              {lightningAddress && (
+                <div className="flex flex-col sm:flex-row justify-between items-center">
+                  <div className="sm:w-9/12 w-full">
+                    <p className="dark:text-white font-medium">
+                      {t("lnaddress.title")}
+                    </p>
+                    <p className="text-gray-600 text-sm dark:text-neutral-400">
+                      {lightningAddress}
+                    </p>
+                  </div>
+
+                  <div className="flex-none sm:w-64 w-full pt-4 sm:pt-0">
+                    <div className="flex flex-row gap-2">
+                      <Button
+                        label={t("actions.change_lnaddress")}
+                        iconRight={<PopiconsExpandLine />}
+                        fullWidth
+                        primary
+                        onClick={() =>
+                          window.open(
+                            `https://getalby.com/lightning_addresses/${lightningAddress.substring(
+                              0,
+                              lightningAddress.indexOf("@getalby.com")
+                            )}/edit`,
+                            "_blank"
+                          )
+                        }
+                      />
+                    </div>
+                  </div>
+                </div>
+              )}
               {account.connectorType == "lndhub" && (
                 <>
                   <MenuDivider />
@@ -260,10 +298,12 @@ function AccountDetail() {
 
                     <div className="flex-none sm:w-64 w-full pt-4 sm:pt-0">
                       {exportAccount && account.connectorType === "lndhub" && (
-                        <>
+                        <div className="flex flex-row gap-2">
                           <Button
-                            label={tCommon("actions.connect")}
+                            label={t("actions.connect_mobile_wallet")}
+                            iconRight={<PopiconsExpandLine />}
                             fullWidth
+                            primary
                             onClick={() =>
                               exportAccount({
                                 id: account.id,
@@ -271,7 +311,7 @@ function AccountDetail() {
                               })
                             }
                           />
-                        </>
+                        </div>
                       )}
                     </div>
                     <Modal
