@@ -2,6 +2,7 @@
 import "dayjs/locale/cs";
 import "dayjs/locale/da";
 import "dayjs/locale/es";
+import "dayjs/locale/fa";
 import "dayjs/locale/fi";
 import "dayjs/locale/fr";
 import "dayjs/locale/hi";
@@ -20,6 +21,7 @@ import da from "~/i18n/locales/da/translation.json";
 import de from "~/i18n/locales/de/translation.json";
 import en from "~/i18n/locales/en/translation.json";
 import es from "~/i18n/locales/es/translation.json";
+import fa from "~/i18n/locales/fa/translation.json";
 import fr from "~/i18n/locales/fr/translation.json";
 import hi from "~/i18n/locales/hi/translation.json";
 import it from "~/i18n/locales/it/translation.json";
@@ -117,6 +119,12 @@ export const resources = {
     components: zh_Hans.components,
     permissions: zh_Hans.permissions,
   },
+  fa: {
+    translation: fa.translation,
+    common: fa.common,
+    components: fa.components,
+    permissions: fa.permissions,
+  },
 } as const;
 
 // needs to be aligned with `resources`
@@ -136,6 +144,7 @@ export const supportedLocales = [
   { locale: "hi", label: "हिंदी" },
   { locale: "mr", label: "मराठी" },
   { locale: "th", label: "ไทย" },
+  { locale: "fa", label: "فارسی" },
 ];
 
 i18n
