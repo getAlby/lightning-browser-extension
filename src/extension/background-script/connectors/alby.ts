@@ -9,7 +9,7 @@ import {
 } from "@getalby/sdk/dist/types";
 import browser from "webextension-polyfill";
 import { decryptData, encryptData } from "~/common/lib/crypto";
-import { Account, GetAccountInformationResponse, OAuthToken } from "~/types";
+import { Account, GetAccountInformationResponses, OAuthToken } from "~/types";
 import state from "../state";
 import Connector, {
   CheckPaymentArgs,
@@ -135,11 +135,11 @@ export default class Alby implements Connector {
   }
 
   async getInfo(): Promise<
-    GetInfoResponse<WebLNNode & GetAccountInformationResponse>
+    GetInfoResponse<WebLNNode & GetAccountInformationResponses>
   > {
     const cacheKey = "getInfo";
     const cacheValue = this._cache.get(cacheKey) as GetInfoResponse<
-      WebLNNode & GetAccountInformationResponse
+      WebLNNode & GetAccountInformationResponses
     >;
 
     const node_required = await this.getLimit();

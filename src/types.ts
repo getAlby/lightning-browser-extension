@@ -1,4 +1,7 @@
-import { CreateSwapParams } from "@getalby/sdk/dist/types";
+import {
+  CreateSwapParams,
+  GetAccountInformationResponse,
+} from "@getalby/sdk/dist/types";
 import { PaymentRequestObject } from "bolt11";
 import { Runtime } from "webextension-polyfill";
 import { ACCOUNT_CURRENCIES, CURRENCIES } from "~/common/constants";
@@ -49,16 +52,7 @@ export interface AccountInfo {
   nodeRequired?: boolean;
 }
 
-export type GetAccountInformationResponse = {
-  identifier: string;
-  email: string;
-  name?: string;
-  avatar?: string;
-  keysend_custom_key: string;
-  keysend_custom_value: string;
-  keysend_pubkey: string;
-  lightning_address?: string;
-  nostr_pubkey?: string;
+export type GetAccountInformationResponses = GetAccountInformationResponse & {
   node_required?: boolean;
 };
 
