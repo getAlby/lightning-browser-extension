@@ -120,7 +120,7 @@ function ConfirmSignMessage() {
                 }
                 content={event.content || ""}
               />
-              <div className="flex justify-center mb-4 gap-4 text-gray-600 dark:text-neutral-400">
+              <div className="flex justify-center mb-4 gap-4 text-gray-600 dark:text-neutral-400 text-sm cursor-pointer">
                 <div onClick={toggleShowJSON}>
                   {showJSON ? (
                     <>
@@ -164,7 +164,6 @@ function ConfirmSignMessage() {
                 cancelLabel={tCommon("actions.deny")}
                 error={true}
               />
-
               <PermissionSelector
                 i18nKey={permissionOption}
                 values={{
