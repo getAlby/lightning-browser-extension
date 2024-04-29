@@ -99,7 +99,13 @@ async function init() {
           isEnabled = response.data?.isEnabled;
         }
 
-        postMessage(ev, response);
+        if (response.denied) {
+          postMessage(ev, {
+            error: "permission denied",
+          });
+        } else {
+          postMessage(ev, response);
+        }
       };
 
       return browser.runtime
