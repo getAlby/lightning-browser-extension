@@ -2,6 +2,10 @@ import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
 import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
+import {
+  PopiconsChevronBottomLine,
+  PopiconsChevronTopLine,
+} from "@popicons/react";
 import { TFunction } from "i18next";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -118,10 +122,16 @@ function ConfirmSignPset() {
                 </Hyperlink>
               </div>
             </div>
-            <div className="flex w-full justify-center">
-              <Hyperlink onClick={toggleShowAddresses}>
-                {showDetails ? tCommon("details") : tCommon("details")}
-              </Hyperlink>
+            <div
+              className="flex w-full justify-center items-center"
+              onClick={toggleShowAddresses}
+            >
+              {tCommon("details")}
+              {showDetails ? (
+                <PopiconsChevronTopLine className="h-4 w-4 inline-flex" />
+              ) : (
+                <PopiconsChevronBottomLine className="h-4 w-4 inline-flex" />
+              )}
             </div>
 
             {showDetails && (

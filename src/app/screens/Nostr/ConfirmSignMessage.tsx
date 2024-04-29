@@ -120,20 +120,16 @@ function ConfirmSignMessage() {
                 }
                 content={event.content || ""}
               />
-              <div className="flex justify-center mb-4 gap-4 text-gray-600 dark:text-neutral-400">
-                <div onClick={toggleShowJSON}>
-                  {showJSON ? (
-                    <>
-                      {tCommon("details")}
-                      <PopiconsChevronTopLine className="h-4 w-4 inline-flex" />
-                    </>
-                  ) : (
-                    <>
-                      {tCommon("details")}
-                      <PopiconsChevronBottomLine className="h-4 w-4 inline-flex" />
-                    </>
-                  )}
-                </div>
+              <div
+                className="flex justify-center items-center mb-4 text-gray-600 dark:text-neutral-400"
+                onClick={toggleShowJSON}
+              >
+                {tCommon("details")}
+                {showJSON ? (
+                  <PopiconsChevronTopLine className="h-4 w-4 inline-flex" />
+                ) : (
+                  <PopiconsChevronBottomLine className="h-4 w-4 inline-flex" />
+                )}
               </div>
               {showJSON && (
                 <div className="whitespace-pre-wrap break-words p-2 mb-4 text-gray-500 dark:text-gray-400">
