@@ -30,6 +30,7 @@ const encryptOrPrompt = async (message: MessageEncryptGet, sender: Sender) => {
       const promptResponse = await utils.openPrompt<{
         confirm: boolean;
         rememberPermission: boolean;
+        blocked: boolean;
       }>({
         ...message,
         action: "public/nostr/confirmEncrypt",
@@ -45,7 +46,8 @@ const encryptOrPrompt = async (message: MessageEncryptGet, sender: Sender) => {
       if (promptResponse.data.rememberPermission) {
         await addPermissionFor(
           PermissionMethodNostr["NOSTR_NIP04ENCRYPT"],
-          host
+          host,
+          promptResponse.data.blocked
         );
       }
       if (promptResponse.data.confirm) {

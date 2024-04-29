@@ -30,6 +30,7 @@ const decryptOrPrompt = async (message: MessageDecryptGet, sender: Sender) => {
       const promptResponse = await utils.openPrompt<{
         confirm: boolean;
         rememberPermission: boolean;
+        blocked: boolean;
       }>({
         ...message,
         action: "public/nostr/confirmDecrypt",
@@ -39,7 +40,8 @@ const decryptOrPrompt = async (message: MessageDecryptGet, sender: Sender) => {
       if (promptResponse.data.rememberPermission) {
         await addPermissionFor(
           PermissionMethodNostr["NOSTR_NIP04DECRYPT"],
-          host
+          host,
+          promptResponse.data.blocked
         );
       }
       if (promptResponse.data.confirm) {

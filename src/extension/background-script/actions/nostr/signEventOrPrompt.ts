@@ -3,6 +3,7 @@ import { getHostFromSender } from "~/common/utils/helpers";
 import {
   addPermissionFor,
   hasPermissionFor,
+  isPermissionBlocked,
 } from "~/extension/background-script/permissions";
 import { MessageSignEvent, PermissionMethodNostr, Sender } from "~/types";
 
@@ -35,6 +36,21 @@ const signEventOrPrompt = async (message: MessageSignEvent, sender: Sender) => {
         PermissionMethodNostr["NOSTR_SIGNMESSAGE"] + "/" + event.kind,
         host
       ));
+
+    const isBlocked =
+      (await isPermissionBlocked(
+        PermissionMethodNostr["NOSTR_SIGNMESSAGE"],
+        host
+      )) ||
+      (await isPermissionBlocked(
+        PermissionMethodNostr["NOSTR_SIGNMESSAGE"] + "/" + event.kind,
+        host
+      ));
+
+    if (isBlocked) {
+      return { denied: true };
+    }
+
     if (!hasPermission) {
       const promptResponse = await utils.openPrompt<{
         blocked: boolean;
@@ -48,14 +64,16 @@ const signEventOrPrompt = async (message: MessageSignEvent, sender: Sender) => {
       if (promptResponse.data.permissionOption == DONT_ASK_CURRENT) {
         await addPermissionFor(
           PermissionMethodNostr["NOSTR_SIGNMESSAGE"] + "/" + event.kind,
-          host
+          host,
+          promptResponse.data.blocked
         );
       }
 
       if (promptResponse.data.permissionOption == DONT_ASK_ANY) {
         await addPermissionFor(
           PermissionMethodNostr["NOSTR_SIGNMESSAGE"],
-          host
+          host,
+          promptResponse.data.blocked
         );
       }
     }
