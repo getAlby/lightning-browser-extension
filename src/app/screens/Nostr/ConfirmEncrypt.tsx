@@ -131,7 +131,7 @@ function NostrConfirmEncrypt() {
               loading={loading}
               onCancel={reject}
               cancelLabel={tCommon("actions.deny")}
-              destructive={true}
+              destructive
             />
 
             <PermissionSelector
