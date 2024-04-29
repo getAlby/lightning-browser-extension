@@ -14,7 +14,7 @@ const decryptOrPrompt = async (message: MessageDecryptGet, sender: Sender) => {
 
   try {
     const hasPermission = await hasPermissionFor(
-      PermissionMethodNostr["NOSTR_NIP04DECRYPT"],
+      PermissionMethodNostr["NOSTR_DECRYPT"],
       host
     );
 
@@ -39,7 +39,7 @@ const decryptOrPrompt = async (message: MessageDecryptGet, sender: Sender) => {
       // add permission to db only if user decided to always allow this request
       if (promptResponse.data.rememberPermission) {
         await addPermissionFor(
-          PermissionMethodNostr["NOSTR_NIP04DECRYPT"],
+          PermissionMethodNostr["NOSTR_DECRYPT"],
           host,
           promptResponse.data.blocked
         );
