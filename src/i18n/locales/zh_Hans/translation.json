@@ -12,7 +12,8 @@
           "enter_password": "请输入密码。",
           "confirm_password": "请确认你的密码。",
           "mismatched_password": "密码不匹配。"
-        }
+        },
+        "title": "设置解锁密码"
       },
       "test_connection": {
         "ready": "真棒，你已准备就绪!",

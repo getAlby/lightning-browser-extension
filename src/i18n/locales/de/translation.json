@@ -1089,7 +1089,8 @@
       "edit_allowance": {
         "title": "Seiten Einstellung",
         "screen_reader": "Zulässigkeitsoptionen",
-        "always_allow": "Immer erlauben"
+        "always_allow": "Immer erlauben",
+        "always_reject": "Immer ablehnen"
       },
       "enable_login": {
         "title": "Anmeldung auf der Webseite aktivieren",
@@ -1208,7 +1209,9 @@
       "disconnect": "Verbindung trennen",
       "copied_to_clipboard": "In die Zwischenablage kopiert",
       "hide": "Ausblenden",
-      "finish": "Oberfläche"
+      "finish": "Oberfläche",
+      "deny": "Verweigern",
+      "sign": "Unterschrift"
     },
     "discover": "Apps entdecken",
     "errors": {

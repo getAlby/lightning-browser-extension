@@ -169,6 +169,7 @@ export default class LndHub implements Connector {
       (transaction, index): ConnectorTransaction => ({
         id: `${index}`,
         memo: transaction.memo,
+        custom_records: transaction.custom_records,
         preimage: transaction.payment_preimage,
         payment_hash: Buffer.from(transaction.payment_hash.data).toString(
           "hex"
