@@ -287,13 +287,11 @@
           "title": "Tampilan Nama"
         },
         "export": {
-          "title": "Sambungkan wallet mobile kamu",
           "screen_reader": "Ekspor detail akun",
           "waiting": "Menunggu data LndHub...",
           "your_ln_address": "Alamat Lightning kamu:",
           "export_uri": "LNDHub Credentials URI",
-          "scan_qr": "Impor wallet ini pada Zeus atau BlueWallet dengan memindai kode QR.",
-          "description": "Memungkinkan kamu untuk menghubungkan dan menggunakan akun ini di mobile wallet seperti <0>Blue Wallet</0> dan <1>Zeus</1>."
+          "scan_qr": "Impor wallet ini pada Zeus atau BlueWallet dengan memindai kode QR."
         },
         "mnemonic": {
           "saved": "Kunci Master terenkripsi & tersimpan dengan sukses.",
@@ -306,7 +304,6 @@
           "backup": {
             "save": "Simpan Master Key",
             "button": "Lihat recovery phrase",
-            "warning": "⚠️ Jangan lupa untuk mencadangkan recovery phrase! tidak mempunyai cadangannya akan mungkin menyebabkan kehilangan akses secara permanen terhadap Master Key, identitas Nostr atau aset lainnya yang menggunakan kunci ini.",
             "description": "Tulis recovery phrase untuk dapat memulihkan Master Key di perangkat baru atau ketika kehilangan akses akun kamu.",
             "protocols": {
               "nostr": "Nostr"
@@ -320,8 +317,7 @@
           "lnurl": {
             "title": "Masuk dengan Lightning",
             "use_mnemonic": "Gunakan Master Key untuk masuk pada aplikasi yang telah terintegrasi dengan Lightning (LNURL Auth)"
-          },
-          "title": "🔑 Manajemen Kunci"
+          }
         },
         "nostr": {
           "title": "Nostr",
@@ -377,7 +373,6 @@
         },
         "remove_secretkey": {
           "title": "Hapus Master Key",
-          "subtitle": "Hapus Master Key dari akun ini.",
           "success": "Master Key telah terhapus."
         },
         "actions": {

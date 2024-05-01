@@ -278,7 +278,6 @@
         },
         "export": {
           "screen_reader": "Exportovat detaily účtu",
-          "title": "Exportovat účet",
           "export_uri": "LNDHub pověřovací URI",
           "waiting": "čekání na data z LndHub...",
           "your_ln_address": "Vaše Lightning adresa:",
@@ -306,7 +305,6 @@
             "save": "Uložit Master klíč",
             "button": "Zobrazit záložní frázi"
           },
-          "title": "🔑 Správa klíčů",
           "import": {
             "button": "Importovat Master klíč",
             "title": "Import Master klíče"
@@ -317,8 +315,7 @@
             "testnet": "Testnet",
             "bitcoin": "Mainnet",
             "regtest": "Regtest"
-          },
-          "title": "Síť"
+          }
         }
       }
     },

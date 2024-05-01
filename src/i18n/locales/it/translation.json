@@ -261,7 +261,6 @@
           "waiting": "in attesa dei dati da LndHub...",
           "export_uri": "URI delle credenziali di LNDHub",
           "scan_qr": "Importa questo wallet su Zeus o BlueWallet scansionando il QRCode.",
-          "title": "Esporta Account",
           "screen_reader": "Esporta i dettagli dell'account"
         },
         "title2": "Modifica Account",
