@@ -3,7 +3,10 @@ import Container from "@components/Container";
 import Loading from "@components/Loading";
 import Setting from "@components/Setting";
 import TextField from "@components/form/TextField";
-import { PopiconsExpandLine } from "@popicons/react";
+import {
+  PopiconsCircleExclamationLine,
+  PopiconsExpandLine,
+} from "@popicons/react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import type { FormEvent } from "react";
@@ -195,7 +198,7 @@ function AccountDetail() {
               </p>
             </div>
 
-            <h2 className="text-2xl font-bold dark:text-white leading-7">
+            <h2 className="text-xl font-bold dark:text-white leading-7">
               {tCommon("general")}
             </h2>
             <div className="shadow bg-white rounded-md sm:overflow-hidden p-6 dark:bg-surface-01dp flex flex-col gap-4">
@@ -236,11 +239,10 @@ function AccountDetail() {
               </form>
               {lightningAddress && (
                 <>
-                  {" "}
                   <MenuDivider />
                   <div className="flex flex-col sm:flex-row justify-between items-center">
                     <div className="sm:w-9/12 w-full">
-                      <p className="dark:text-white font-medium">
+                      <p className="text-gray-800 dark:text-white font-medium">
                         {t("lnaddress.title")}
                       </p>
                       <p className="text-gray-600 text-sm dark:text-neutral-400">
@@ -275,7 +277,7 @@ function AccountDetail() {
                   <MenuDivider />
                   <div className="flex flex-col sm:flex-row justify-between items-center">
                     <div className="sm:w-9/12 w-full">
-                      <p className="text-black dark:text-white font-medium">
+                      <p className="text-gray-800 dark:text-white font-medium">
                         {t("export.title")}
                       </p>
                       <p className="text-gray-600 text-sm dark:text-neutral-400">
@@ -367,18 +369,25 @@ function AccountDetail() {
           </div>
 
           <div className="flex flex-col gap-4">
-            <h2 className="text-xl font-bold dark:text-white">
+            <h2 className="text-xl font-bold dark:text-white leading-7">
               {t("mnemonic.title")}
             </h2>
 
             <div className="shadow bg-white rounded-md sm:overflow-hidden p-6 dark:bg-surface-01dp flex flex-col gap-4">
               {hasMnemonic && !isMnemonicBackupDone && (
-                <Alert type="warn">{t("mnemonic.backup.warning")}</Alert>
+                <Alert type="warn">
+                  <div className="flex flex-row items-center gap-2 text-sm">
+                    <div className="shrink-0">
+                      <PopiconsCircleExclamationLine className="w-6 h-6" />
+                    </div>
+                    <span>{t("mnemonic.backup.warning")}</span>
+                  </div>
+                </Alert>
               )}
 
               <div className="flex flex-col sm:flex-row justify-between items-center">
                 <div className="sm:w-9/12 w-full">
-                  <p className="text-black dark:text-white font-medium">
+                  <p className="text-gray-800 dark:text-white font-medium">
                     {t(
                       hasMnemonic
                         ? "mnemonic.backup.title"
@@ -415,7 +424,7 @@ function AccountDetail() {
                   <MenuDivider />
                   <div className="flex flex-col sm:flex-row justify-between items-center">
                     <div className="sm:w-7/12 w-full">
-                      <p className="text-black dark:text-white font-medium">
+                      <p className="text-gray-800 dark:text-white font-medium">
                         {t("mnemonic.import.title")}
                       </p>
                       <p className="text-gray-600 text-sm dark:text-neutral-400">
@@ -437,31 +446,32 @@ function AccountDetail() {
               )}
               <MenuDivider />
               <div className="flex flex-col sm:flex-row justify-between items-center">
-                <div className="sm:w-7/12 w-full">
-                  <div className="flex flex-col">
-                    <TextField
-                      id="nostrPublicKey"
-                      label={
-                        <div className="flex gap-2">
-                          {t("nostr.public_key.label")}
-                          {nostrPublicKey && hasImportedNostrKey && (
-                            <Badge
-                              label={tComponents("label.imported")}
-                              className="bg-green-bitcoin text-white flex justify-center"
-                            />
-                          )}
-                        </div>
-                      }
-                      value={nostrPublicKey}
-                      disabled
-                      endAdornment={
-                        nostrPublicKey && (
-                          <InputCopyButton value={nostrPublicKey} />
-                        )
-                      }
-                    />
+                <div className="sm:w-9/12 w-full">
+                  <div className="flex items-center gap-2 ">
+                    <p className="text-gray-800 dark:text-white font-medium">
+                      {t("nostr.public_key.label")}
+                    </p>
+                    {nostrPublicKey && hasImportedNostrKey && (
+                      <Badge
+                        label={tComponents("label.imported")}
+                        className="bg-green-bitcoin text-white"
+                      />
+                    )}
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <p className="text-gray-600 text-sm dark:text-neutral-400">
+                      {nostrPublicKey}
+                    </p>
+                    {nostrPublicKey && (
+                      <InputCopyButton
+                        value={nostrPublicKey}
+                        className="w-5 h-5"
+                      />
+                    )}
                   </div>
                 </div>
+
                 <div className="flex-none sm:w-64 w-full pt-4 sm:pt-0">
                   <Link to="nostr/settings">
                     <Button
@@ -497,8 +507,8 @@ function AccountDetail() {
                 )}
               >
                 <div className="flex flex-col sm:flex-row justify-between items-center">
-                  <div className="sm:w-7/12 w-full flex flex-col gap-2">
-                    <p className="text-black dark:text-white font-medium">
+                  <div className="sm:w-7/12 w-full flex flex-col">
+                    <p className="text-gray-800 dark:text-white font-medium">
                       {t("network.title")}
                     </p>
                     <p className="text-gray-600 text-sm dark:text-neutral-400">
@@ -537,8 +547,8 @@ function AccountDetail() {
                 </div>
                 <MenuDivider />
                 <div className="flex justify-between items-center">
-                  <div className="w-7/12 flex flex-col gap-2">
-                    <p className="text-black dark:text-white font-medium">
+                  <div className="w-7/12 flex flex-col">
+                    <p className="text-gray-800 dark:text-white font-medium">
                       {t("mnemonic.lnurl.title")}
                     </p>
                     <p className="text-gray-600 text-sm dark:text-neutral-400">
@@ -570,7 +580,7 @@ function AccountDetail() {
           </div>
 
           <div className="flex flex-col gap-4">
-            <h2 className="text-xl font-bold dark:text-white">
+            <h2 className="text-xl font-bold dark:text-white leading-7">
               {t("danger_zone")}
             </h2>
 
@@ -590,6 +600,7 @@ function AccountDetail() {
                       }}
                       label={t("actions.remove_secretkey")}
                       fullWidth
+                      error
                     />
                   </div>
                 </Setting>
@@ -608,6 +619,7 @@ function AccountDetail() {
                     }}
                     label={t("actions.disconnect_wallet")}
                     fullWidth
+                    error
                   />
                 </div>
               </Setting>
