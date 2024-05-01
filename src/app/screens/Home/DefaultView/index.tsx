@@ -141,27 +141,36 @@ const DefaultView: FC<Props> = (props) => {
           </div>
         )}
 
-        {accountLoading || nodeRequired ? (
-          <div className="flex flex-row items-center gap-2 text-sm text-orange-700 bg-orange-50 dark:text-orange-200 dark:bg-orange-900 border rounded-lg p-4">
-            <div className="shrink-0">
-              <PopiconsCircleExclamationLine className="w-6 h-6" />
-            </div>
-            <span>
-              Your Alby Account needs a wallet. Connect a wallet to your account
-              on{" "}
-              <a
-                className="text-orange-700 dark:bg-orange-900"
-                href="https://getalby.com"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <u>getalby.com</u>
-              </a>
-            </span>
-          </div>
-        ) : (
-          <BalanceBox />
-        )}
+        <div className="flex justify-center">
+          {!accountLoading ? (
+            <>
+              {nodeRequired ? (
+                <div className="flex flex-row items-center gap-2 text-sm text-orange-700 bg-orange-50 dark:text-orange-200 dark:bg-orange-900 border rounded-lg p-4">
+                  <div className="shrink-0">
+                    <PopiconsCircleExclamationLine className="w-6 h-6" />
+                  </div>
+                  <span>
+                    Your Alby Account needs a wallet. Connect a wallet to your
+                    account on{" "}
+                    <a
+                      className="text-orange-700 dark:bg-orange-900"
+                      href="https://getalby.com"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <u>getalby.com</u>
+                    </a>
+                  </span>
+                </div>
+              ) : (
+                <BalanceBox />
+              )}
+            </>
+          ) : (
+            <SkeletonLoader className="w-64" />
+          )}
+        </div>
+
         {(accountLoading || lightningAddress) && (
           <div className="flex justify-center">
             <a
