@@ -359,8 +359,6 @@
       "title": "Nostr",
       "block_added": "เพื่ม {{host}} เข้าสู่แบล็คลิส โปรดรีเฟรชหน้าเว็บใหม่",
       "content": "เว็บไซต์นี้ขอให้คุณลงชื่อ:",
-      "view_details": "ดูรายละเอียด",
-      "hide_details": "ซ่อนรายละเอียด",
       "allow_sign": "อนุญาตให้ {{host}} ลงนาม:"
     },
     "choose_path": {
@@ -635,8 +633,6 @@
     "confirm_sign_pset": {
       "title": "เซ็น",
       "allow_sign": "เว็บไซต์นี้ขอให้คุณลงนามในธุรกรรม Liquid:",
-      "view_details": "ดูรายละเอียด",
-      "hide_details": "ซ่อนรายละเอียด",
       "view_raw_transaction": "ดูธุรกรรม (Base64)",
       "hide_raw_transaction": "ซ่อนธุรกรรม (Base64)",
       "inputs": "อินพุต",

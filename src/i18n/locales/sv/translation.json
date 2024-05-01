@@ -603,8 +603,6 @@
     "nostr": {
       "title": "Nostr",
       "block_and_ignore": "Blockera och ignorera {{host}}",
-      "view_details": "Visa detaljer",
-      "hide_details": "Göm detaljer",
       "block_added": "Lade till {{host}} till blockeringslistan, ladda om webbplatsen.",
       "allow_sign": "Tillåt {{host}} att signera:",
       "content": "Den här webbplatsen ber dig att signera:"
@@ -700,8 +698,6 @@
     "confirm_sign_pset": {
       "title": "Signera",
       "allow_sign": "Denna webbplats ber dig att underteckna en Liquid transaktion:",
-      "view_details": "Visa detaljer",
-      "hide_details": "Dölj detaljer",
       "view_raw_transaction": "Visa obearbetad transaktion (Base64)",
       "hide_raw_transaction": "Göm obearbetad transaktion (Base64)",
       "inputs": "Ingångar",
@@ -722,9 +718,7 @@
         "view_raw_transaction": "Visa råtransaktion (hexadecimal)",
         "inputs": "Ingångar",
         "fee": "Avgift",
-        "hide_details": "Göm detaljer",
         "allow_sign": "Den här webbplatsen ber dig att underteckna en bitcoin-transaktion",
-        "view_details": "Visa detaljer",
         "outputs": "Utgångar"
       }
     },

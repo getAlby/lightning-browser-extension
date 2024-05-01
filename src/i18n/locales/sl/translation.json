@@ -492,8 +492,6 @@
     },
     "confirm_sign_pset": {
       "allow_sign": "To spletno mesto zahteva, da podpišeš Liquid transakcijo",
-      "hide_details": "Skrij podrobnosti",
-      "view_details": "Poglej podrobnosti",
       "title": "Podpiši"
     },
     "publishers": {

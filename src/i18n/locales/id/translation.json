@@ -620,9 +620,7 @@
     },
     "nostr": {
       "title": "Nostr",
-      "hide_details": "Sembunyikan rincian",
-      "block_and_ignore": "Blok dan abaikan {{host}}",
-      "view_details": "Lihat rincian"
+      "block_and_ignore": "Blok dan abaikan {{host}}"
     },
     "on_chain": {
       "title": "Terima melalui alamat bitcoin",
