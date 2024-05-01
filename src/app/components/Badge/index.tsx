@@ -17,7 +17,7 @@ export default function Badge({
   return (
     <div
       className={classNames(
-        "inline-flex items-center leading-none rounded-full font-medium mr-2 py-1 pr-2 pl-3 mb-2 text-xs cursor-default",
+        "inline-flex items-center leading-none rounded-full font-medium py-1.5 px-2 text-xs cursor-default",
         className
       )}
       title={description}

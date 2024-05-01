@@ -957,7 +957,9 @@
       "copied_to_clipboard": "Copiado para a área de transferência",
       "review": "Revisar",
       "hide": "Ocultar",
-      "finish": "Pronto"
+      "finish": "Pronto",
+      "sign": "Assinar",
+      "deny": "Negar"
     },
     "errors": {
       "connection_failed": "Falha na conexão",
@@ -1019,7 +1021,8 @@
       "edit_allowance": {
         "title": "Preferências",
         "screen_reader": "Opções limite de gastos",
-        "always_allow": "Sempre permitir"
+        "always_allow": "Sempre permitir",
+        "always_reject": "Sempre rejeitar"
       },
       "enable_login": {
         "title": "Login",
