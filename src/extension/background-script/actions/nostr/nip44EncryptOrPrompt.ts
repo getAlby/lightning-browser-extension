@@ -23,12 +23,12 @@ const nip44EncryptOrPrompt = async (
 
   try {
     const hasPermission = await hasPermissionFor(
-      PermissionMethodNostr["NOSTR_NIP44ENCRYPT"],
+      PermissionMethodNostr["NOSTR_ENCRYPT"],
       host
     );
 
     const isBlocked = await isPermissionBlocked(
-      PermissionMethodNostr["NOSTR_NIP44ENCRYPT"],
+      PermissionMethodNostr["NOSTR_ENCRYPT"],
       host
     );
 
@@ -61,7 +61,7 @@ const nip44EncryptOrPrompt = async (
       // add permission to db only if user decided to always allow this request
       if (promptResponse.data.permissionOption == DONT_ASK_CURRENT) {
         await addPermissionFor(
-          PermissionMethodNostr["NOSTR_NIP44ENCRYPT"],
+          PermissionMethodNostr["NOSTR_ENCRYPT"],
           host,
           promptResponse.data.blocked
         );

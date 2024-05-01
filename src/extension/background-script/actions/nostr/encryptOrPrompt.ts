@@ -20,12 +20,12 @@ const encryptOrPrompt = async (message: MessageEncryptGet, sender: Sender) => {
 
   try {
     const hasPermission = await hasPermissionFor(
-      PermissionMethodNostr["NOSTR_NIP04ENCRYPT"],
+      PermissionMethodNostr["NOSTR_ENCRYPT"],
       host
     );
 
     const isBlocked = await isPermissionBlocked(
-      PermissionMethodNostr["NOSTR_NIP04ENCRYPT"],
+      PermissionMethodNostr["NOSTR_ENCRYPT"],
       host
     );
 
@@ -59,7 +59,7 @@ const encryptOrPrompt = async (message: MessageEncryptGet, sender: Sender) => {
       // add permission to db only if user decided to always allow this request
       if (promptResponse.data.permissionOption == DONT_ASK_CURRENT) {
         await addPermissionFor(
-          PermissionMethodNostr["NOSTR_NIP04ENCRYPT"],
+          PermissionMethodNostr["NOSTR_ENCRYPT"],
           host,
           promptResponse.data.blocked
         );

@@ -82,10 +82,8 @@ const enable = async (message: MessageAllowanceEnable, sender: Sender) => {
           // Add permissions
           const permissions: PermissionMethodNostr[] = [
             PermissionMethodNostr.NOSTR_GETPUBLICKEY,
-            PermissionMethodNostr.NOSTR_NIP04ENCRYPT,
-            PermissionMethodNostr.NOSTR_NIP04DECRYPT,
-            PermissionMethodNostr.NOSTR_NIP44ENCRYPT,
-            PermissionMethodNostr.NOSTR_NIP44DECRYPT,
+            PermissionMethodNostr.NOSTR_ENCRYPT,
+            PermissionMethodNostr.NOSTR_DECRYPT,
           ];
           permissions.forEach(async (permission) => {
             await addPermissionFor(permission, host, false);

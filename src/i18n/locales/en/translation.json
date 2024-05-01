@@ -1283,13 +1283,14 @@
         "description": "Read your public key"
       },
       "decrypt": {
-        "title": "decrypt data",
+        "title": "decrypt",
         "description": "Decrypt data"
       },
       "encrypt": {
-        "title": "encrypt data",
+        "title": "encrypt",
         "description": "Encrypt data"
       },
+
       "signmessage": {
         "title": "sign message",
         "description": "Sign all nostr events"
