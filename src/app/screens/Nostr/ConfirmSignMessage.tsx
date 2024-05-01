@@ -122,7 +122,7 @@ function ConfirmSignMessage() {
                 content={event.content || ""}
               />
               <div
-                className="flex justify-center items-center mb-4 text-gray-600 dark:text-neutral-400"
+                className="flex justify-center items-center mb-4 text-gray-400 dark:text-neutral-600 hover:text-gray-600 dark:hover:text-neutral-400 text-sm cursor-pointer"
                 onClick={toggleShowJSON}
               >
                 {tCommon("details")}
@@ -133,7 +133,7 @@ function ConfirmSignMessage() {
                 )}
               </div>
               {showJSON && (
-                <div className="whitespace-pre-wrap break-words p-2 mb-4 text-gray-500 dark:text-gray-400">
+                <div className="whitespace-pre-wrap break-words p-2 mb-4 text-gray-600 dark:text-neutral-400">
                   {JSON.stringify(event, null, 2)}
                 </div>
               )}
@@ -159,9 +159,8 @@ function ConfirmSignMessage() {
                 loading={loading}
                 onCancel={reject}
                 cancelLabel={tCommon("actions.deny")}
-                error={true}
+                destructive
               />
-
               <PermissionSelector
                 i18nKey={permissionOption}
                 values={{

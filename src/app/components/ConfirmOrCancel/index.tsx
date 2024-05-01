@@ -8,7 +8,7 @@ export type Props = {
   disabled?: boolean;
   loading?: boolean;
   label?: string;
-  error?: boolean;
+  destructive?: boolean;
   cancelLabel?: string;
   onConfirm?: MouseEventHandler;
   onCancel: MouseEventHandler;
@@ -18,7 +18,7 @@ export type Props = {
 export default function ConfirmOrCancel({
   disabled = false,
   loading = false,
-  error = false,
+  destructive = false,
   cancelLabel = i18n.t("common:actions.cancel"),
   label = i18n.t("common:actions.confirm"),
   onConfirm,
@@ -38,7 +38,7 @@ export default function ConfirmOrCancel({
         onClick={onCancel}
         label={cancelLabel ? cancelLabel : tCommon("actions.cancel")}
         halfWidth
-        error={error}
+        destructive={destructive}
         disabled={loading}
       />
       <Button
