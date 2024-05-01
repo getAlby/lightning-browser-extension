@@ -544,7 +544,7 @@
         }
       },
       "actions": {
-        "connect_a_wallet": "Connect a wallet"
+        "connect_a_wallet": "Connect a Wallet"
       }
     },
     "webln_enable": {
