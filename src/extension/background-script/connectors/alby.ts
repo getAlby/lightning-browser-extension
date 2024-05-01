@@ -142,7 +142,7 @@ export default class Alby implements Connector {
       WebLNNode & GetAccountInformationResponses
     >;
 
-    const node_required = await this.getLimit();
+    const node_required = await this._isNodeRequired();
 
     if (cacheValue && cacheValue.data.node_required === node_required) {
       return cacheValue;
@@ -431,8 +431,8 @@ export default class Alby implements Connector {
     }
   }
 
-  async getLimit() {
-    const url = "https://api.getalby.com/internal/users";
+  private async _isNodeRequired() {
+    const url = `${process.env.ALBY_API_URL}/internal/users`;
 
     const requestOptions = {
       method: "GET",
@@ -450,9 +450,7 @@ export default class Alby implements Connector {
         requestOptions
       );
 
-      if (details.node_required) return true;
-
-      return false;
+      return details.node_required;
     } catch (error) {
       console.error("Error fetching limits:", error);
       throw error;
