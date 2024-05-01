@@ -235,36 +235,40 @@ function AccountDetail() {
                 </div>
               </form>
               {lightningAddress && (
-                <div className="flex flex-col sm:flex-row justify-between items-center">
-                  <div className="sm:w-9/12 w-full">
-                    <p className="dark:text-white font-medium">
-                      {t("lnaddress.title")}
-                    </p>
-                    <p className="text-gray-600 text-sm dark:text-neutral-400">
-                      {lightningAddress}
-                    </p>
-                  </div>
+                <>
+                  {" "}
+                  <MenuDivider />
+                  <div className="flex flex-col sm:flex-row justify-between items-center">
+                    <div className="sm:w-9/12 w-full">
+                      <p className="dark:text-white font-medium">
+                        {t("lnaddress.title")}
+                      </p>
+                      <p className="text-gray-600 text-sm dark:text-neutral-400">
+                        {lightningAddress}
+                      </p>
+                    </div>
 
-                  <div className="flex-none sm:w-64 w-full pt-4 sm:pt-0">
-                    <div className="flex flex-row gap-2">
-                      <Button
-                        label={t("actions.change_lnaddress")}
-                        iconRight={<PopiconsExpandLine />}
-                        fullWidth
-                        primary
-                        onClick={() =>
-                          window.open(
-                            `https://getalby.com/lightning_addresses/${lightningAddress.substring(
-                              0,
-                              lightningAddress.indexOf("@getalby.com")
-                            )}/edit`,
-                            "_blank"
-                          )
-                        }
-                      />
+                    <div className="flex-none sm:w-64 w-full pt-4 sm:pt-0">
+                      <div className="flex flex-row gap-2">
+                        <Button
+                          label={t("actions.change_lnaddress")}
+                          iconRight={<PopiconsExpandLine />}
+                          fullWidth
+                          primary
+                          onClick={() =>
+                            window.open(
+                              `https://getalby.com/lightning_addresses/${lightningAddress.substring(
+                                0,
+                                lightningAddress.indexOf("@getalby.com")
+                              )}/edit`,
+                              "_blank"
+                            )
+                          }
+                        />
+                      </div>
                     </div>
                   </div>
-                </div>
+                </>
               )}
               {account.connectorType == "lndhub" && (
                 <>
@@ -437,7 +441,17 @@ function AccountDetail() {
                   <div className="flex flex-col">
                     <TextField
                       id="nostrPublicKey"
-                      label={t("nostr.public_key.label")}
+                      label={
+                        <div className="flex gap-2">
+                          {t("nostr.public_key.label")}
+                          {nostrPublicKey && hasImportedNostrKey && (
+                            <Badge
+                              label={tComponents("label.imported")}
+                              className="bg-green-bitcoin text-white flex justify-center"
+                            />
+                          )}
+                        </div>
+                      }
                       value={nostrPublicKey}
                       disabled
                       endAdornment={
@@ -447,16 +461,6 @@ function AccountDetail() {
                       }
                     />
                   </div>
-                </div>
-                <div>
-                  {nostrPublicKey && hasImportedNostrKey && (
-                    <div className="">
-                      <Badge
-                        label={tComponents("label.imported")}
-                        className="bg-green-bitcoin text-white"
-                      />
-                    </div>
-                  )}
                 </div>
                 <div className="flex-none sm:w-64 w-full pt-4 sm:pt-0">
                   <Link to="nostr/settings">
