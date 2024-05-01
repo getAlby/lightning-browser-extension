@@ -98,7 +98,7 @@ function NostrConfirmEncrypt() {
               />
             )}
             <div
-              className="flex justify-center items-center mb-4 gap-4text-gray-400 dark:text-neutral-600 hover:text-gray-600 dark:hover:text-neutral-400"
+              className="flex justify-center items-center mb-4 text-gray-400 dark:text-neutral-600 hover:text-gray-600 dark:hover:text-neutral-400 text-sm cursor-pointer"
               onClick={toggleShowDetails}
             >
               {tCommon("details")}
