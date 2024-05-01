@@ -60,6 +60,7 @@ function ConfirmSignMessage() {
     try {
       setLoading(true);
       msg.reply({
+        confirm: false,
         blocked: true,
         permissionOption: permissionOption,
       });

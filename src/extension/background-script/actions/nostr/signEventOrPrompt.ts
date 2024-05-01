@@ -51,8 +51,15 @@ const signEventOrPrompt = async (message: MessageSignEvent, sender: Sender) => {
       return { denied: true };
     }
 
-    if (!hasPermission) {
+    if (hasPermission) {
+      if (!event.pubkey) event.pubkey = nostr.getPublicKey();
+      if (!event.id) event.id = nostr.getEventHash(event);
+      const signedEvent = await nostr.signEvent(event);
+
+      return { data: signedEvent };
+    } else {
       const promptResponse = await utils.openPrompt<{
+        confirm: boolean;
         blocked: boolean;
         permissionOption: string;
       }>({
@@ -73,6 +80,16 @@ const signEventOrPrompt = async (message: MessageSignEvent, sender: Sender) => {
         Object.values(PermissionMethodNostr).forEach(async (permission) => {
           await addPermissionFor(permission, host, promptResponse.data.blocked);
         });
+      }
+
+      if (promptResponse.data.confirm) {
+        if (!event.pubkey) event.pubkey = nostr.getPublicKey();
+        if (!event.id) event.id = nostr.getEventHash(event);
+        const signedEvent = await nostr.signEvent(event);
+
+        return { data: signedEvent };
+      } else {
+        return { error: "User rejected" };
       }
     }
 
