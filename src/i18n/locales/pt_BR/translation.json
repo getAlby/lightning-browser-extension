@@ -682,7 +682,6 @@
       }
     },
     "nostr": {
-      "allow": "Permitir este site:",
       "block_and_ignore": "Bloquear e ignorar {{host}}",
       "title": "Nostr",
       "content": "Este site solicita que você assine:",
@@ -693,8 +692,8 @@
       "allow_sign_event": "Permitir {{host}} assinar um evento <0>{{kind}}</0>",
       "allow_encrypt": "Permitir {{host}} criptografar a mensagem:",
       "kinds": {
-        "9734": {
-          "title": "solicitar zap"
+        "0": {
+          "title": "atualizar perfil"
         },
         "1": {
           "title": "nota curta"
@@ -702,11 +701,11 @@
         "4": {
           "title": "mensagem direta"
         },
+        "9734": {
+          "title": "solicitar zap"
+        },
         "30023": {
           "title": "nota longa"
-        },
-        "0": {
-          "title": "atualizar perfil"
         }
       }
     },

@@ -607,7 +607,6 @@
     },
     "nostr": {
       "title": "Nostr",
-      "allow": "允許该網站：",
       "content": "該網站要求你簽署：",
       "allow_sign": "允許 {{host}} 簽名：",
       "block_and_ignore": "阻止並忽略 {{host}}",

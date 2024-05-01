@@ -602,7 +602,6 @@
     },
     "nostr": {
       "title": "Nostr",
-      "allow": "Tillåt den här webbplatsen att:",
       "block_and_ignore": "Blockera och ignorera {{host}}",
       "view_details": "Visa detaljer",
       "hide_details": "Göm detaljer",

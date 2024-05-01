@@ -622,7 +622,6 @@
       "title": "Nostr",
       "hide_details": "Sembunyikan rincian",
       "block_and_ignore": "Blok dan abaikan {{host}}",
-      "allow": "Izinkan website ini untuk:",
       "view_details": "Lihat rincian"
     },
     "on_chain": {

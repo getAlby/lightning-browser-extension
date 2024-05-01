@@ -521,7 +521,6 @@
     },
     "nostr": {
       "title": "Nostr",
-      "allow": "Permitir que este sitio web:",
       "content": "Este sitio web te solicita firmar:",
       "allow_sign": "Permitir que {{host}} firme:",
       "block_and_ignore": "Bloquear e ignorar {{host}}",

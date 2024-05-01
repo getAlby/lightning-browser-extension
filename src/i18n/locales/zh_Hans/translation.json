@@ -538,7 +538,6 @@
     },
     "nostr": {
       "title": "Nostr",
-      "allow": "允许该网站:",
       "block_and_ignore": "阻止并忽略 {{host}}",
       "content": "该网站要求你签署:",
       "allow_sign": "允许{{host}}签署：",
