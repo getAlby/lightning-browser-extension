@@ -254,7 +254,7 @@ function AccountDetail() {
                       <div className="flex flex-row gap-2">
                         <Button
                           label={t("actions.change_lnaddress")}
-                          iconRight={<PopiconsExpandLine />}
+                          iconRight={<PopiconsExpandLine className="w-5 h-5" />}
                           fullWidth
                           primary
                           onClick={() =>
@@ -287,13 +287,14 @@ function AccountDetail() {
                           components={[
                             // eslint-disable-next-line react/jsx-key
                             <Hyperlink
-                              href="https://bluewallet.io"
+                              href="https://zeusln.app"
                               target="_blank"
                               rel="noopener nofollow"
                             />,
+
                             // eslint-disable-next-line react/jsx-key
                             <Hyperlink
-                              href="https://zeusln.app"
+                              href="https://bluewallet.io"
                               target="_blank"
                               rel="noopener nofollow"
                             />,
@@ -307,7 +308,9 @@ function AccountDetail() {
                         <div className="flex flex-row gap-2">
                           <Button
                             label={t("actions.connect_mobile_wallet")}
-                            iconRight={<PopiconsExpandLine />}
+                            iconRight={
+                              <PopiconsExpandLine className="w-5 h-5" />
+                            }
                             fullWidth
                             primary
                             onClick={() =>

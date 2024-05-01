@@ -399,8 +399,8 @@
         },
         "danger_zone": "Danger Zone",
         "export": {
-          "title": "Connect your mobile wallet",
-          "description": "Allows you to connect and use this account on mobile wallets like <0>Blue Wallet</0> and <1>Zeus</1>.",
+          "title": "Connect to Mobile Wallet",
+          "description": "Log in on getalby.com to connect and use this account on mobile wallets like <0>Zeus</0> and <1>Blue Wallet</1>.",
           "screen_reader": "Export account details",
           "waiting": "waiting for LndHub data...",
           "your_ln_address": "Your Lightning Address:",
@@ -442,10 +442,10 @@
             "button": "Generate Master Key"
           },
           "backup": {
-            "title": "Back up your Master Key",
+            "title": "Back up Your Recovery Phrase",
             "save": "Save Master Key",
             "button": "View recovery phrase",
-            "warning": "⚠️ Don't forget to back up your recovery phrase! Not backing it up might result in permanently losing access to your Master Key, Nostr identity or assets you manage with this key.",
+            "warning": "Don’t forget to back up your recovery phrase! Not backing it up your key might result in permanently loosing access to your Master Key, Nostr identity or assets you manage with this key.",
             "description": "Write down the recovery phrase to be able to restore your Master Key on a new device or in case you lose access to your account.",
             "protocols": {
               "nostr": "Nostr"
@@ -465,8 +465,8 @@
           }
         },
         "network": {
-          "title": "Network",
-          "subtitle": "Choose network to derive addresses and decode bitcoin and liquid transactions",
+          "title": "Bitcoin Network",
+          "subtitle": "Choose network to derive addresses and decode transactions.",
           "options": {
             "bitcoin": "Mainnet",
             "testnet": "Testnet",
@@ -524,14 +524,14 @@
           }
         },
         "remove": {
-          "title": "Disconnect This Wallet",
-          "subtitle": "Removes all allowances, payment data and keys associated with this wallet.",
+          "title": "Remove This Wallet",
+          "subtitle": "All the linked allowances will be deleted. Please be certain.",
           "confirm": "Please enter the name of the account to confirm the deletion of your account:\n\n{{ name }}\n\n ⚠️ All associated keys (Master Key, Nostr, etc) will be deleted if you continue. Please make sure you have backed them up, there is no other way to restore them.",
           "error": "The entered account name didn't match."
         },
         "remove_secretkey": {
           "title": "Remove Master Key",
-          "subtitle": "Removes the Master Key from this account.",
+          "subtitle": "Removes the Master Key from this wallet.",
           "confirm": "Please enter the name of the account to confirm the deletion of your Master Key:\n\n{{ name }}",
           "success": "Successfully removed the Master Key."
         },
