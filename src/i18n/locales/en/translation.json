@@ -383,7 +383,8 @@
             "title": "Receive bitcoin",
             "description": "Fund your account and receive via your lightning address or an invoice"
           }
-        }
+        },
+        "upgrade_account": "Kindly upgrade your Alby account to access the latest features available on <0>getalby.com</0>"
       }
     },
     "accounts": {
