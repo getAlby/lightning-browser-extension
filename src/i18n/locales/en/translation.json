@@ -383,7 +383,8 @@
             "title": "Receive bitcoin",
             "description": "Fund your account and receive via your lightning address or an invoice"
           }
-        }
+        },
+        "node_required": "Your Alby Account needs a wallet. Connect a wallet to your account on <0>getalby.com</0>"
       }
     },
     "accounts": {
