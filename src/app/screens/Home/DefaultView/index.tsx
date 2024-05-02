@@ -5,12 +5,13 @@ import {
   PopiconsArrowDownLine,
   PopiconsArrowRightLine,
   PopiconsBulbLine,
+  PopiconsCircleExclamationLine,
   PopiconsKeyLine,
 } from "@popicons/react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { FC, useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import Alert from "~/app/components/Alert";
 import BalanceBox from "~/app/components/BalanceBox";
@@ -21,6 +22,7 @@ import toast from "~/app/components/Toast";
 import { useAccount } from "~/app/context/AccountContext";
 import { useTransactions } from "~/app/hooks/useTransactions";
 import { PublisherLnData } from "~/app/screens/Home/PublisherLnData";
+import { isAlbyLNDHubAccount } from "~/app/utils";
 import api, { GetAccountRes } from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
@@ -137,6 +139,31 @@ const DefaultView: FC<Props> = (props) => {
               />
             </Alert>
           </div>
+        )}
+
+        {isAlbyLNDHubAccount(account?.alias, account?.connectorType) && (
+          <Alert type="info">
+            <div className="flex gap-2 items-center">
+              <div className="shrink-0">
+                <PopiconsCircleExclamationLine className="w-5 h-5" />
+              </div>
+              <span className="text-sm">
+                <Trans
+                  i18nKey={"default_view.upgrade_account"}
+                  t={t}
+                  components={[
+                    // eslint-disable-next-line react/jsx-key
+                    <a
+                      className="underline"
+                      href="https://getalby.com"
+                      target="_blank"
+                      rel="noreferrer"
+                    />,
+                  ]}
+                />
+              </span>
+            </div>
+          </Alert>
         )}
 
         <BalanceBox />
