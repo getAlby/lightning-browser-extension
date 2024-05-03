@@ -44,6 +44,7 @@ function ConfirmSignMessage() {
     try {
       setLoading(true);
       msg.reply({
+        confirm: true,
         blocked: false,
         permissionOption: permissionOption,
       });

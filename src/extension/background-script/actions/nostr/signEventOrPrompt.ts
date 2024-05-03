@@ -92,12 +92,6 @@ const signEventOrPrompt = async (message: MessageSignEvent, sender: Sender) => {
         return { error: "User rejected" };
       }
     }
-
-    if (!event.pubkey) event.pubkey = nostr.getPublicKey();
-    if (!event.id) event.id = nostr.getEventHash(event);
-    const signedEvent = await nostr.signEvent(event);
-
-    return { data: signedEvent };
   } catch (e) {
     console.error("signEvent cancelled", e);
     if (e instanceof Error) {
