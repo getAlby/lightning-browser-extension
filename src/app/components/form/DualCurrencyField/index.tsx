@@ -68,7 +68,7 @@ export default function DualCurrencyField({
   const [altFormattedValue, setAltFormattedValue] = useState("");
   const [minValue, setMinValue] = useState(min);
   const [maxValue, setMaxValue] = useState(max);
-  const [inputValue, setInputValue] = useState(value || 0);
+  const [inputValue, setInputValue] = useState(value);
   const [inputPrefix, setInputPrefix] = useState("");
   const [inputPlaceHolder, setInputPlaceHolder] = useState(placeholder || "");
 
@@ -101,34 +101,38 @@ export default function DualCurrencyField({
   );
 
   const setUseFiatAsMain = useCallback(
-    async (v: boolean) => {
-      if (!showFiat) v = false;
+    async (useFiatAsMain: boolean) => {
+      if (!showFiat) useFiatAsMain = false;
       const userCurrency = settings?.currency || "BTC";
       const rate = await getCurrencyRate();
 
       if (min) {
         setMinValue(
-          v ? (Math.round(Number(min) * rate * 100) / 100.0).toString() : min
+          useFiatAsMain
+            ? (Math.round(Number(min) * rate * 100) / 100.0).toString()
+            : min
         );
       }
 
       if (max) {
         setMaxValue(
-          v ? (Math.round(Number(max) * rate * 100) / 100.0).toString() : max
+          useFiatAsMain
+            ? (Math.round(Number(max) * rate * 100) / 100.0).toString()
+            : max
         );
       }
 
-      const newValue = v
+      const newValue = useFiatAsMain
         ? Math.round(Number(inputValue) * rate * 100) / 100.0
         : Math.round(Number(inputValue) / rate);
 
-      _setUseFiatAsMain(v);
+      _setUseFiatAsMain(useFiatAsMain);
       setInputValue(newValue);
-      setInputPrefix(getCurrencySymbol(v ? userCurrency : "BTC"));
+      setInputPrefix(getCurrencySymbol(useFiatAsMain ? userCurrency : "BTC"));
       if (!placeholder) {
         setInputPlaceHolder(
           tCommon("amount_placeholder", {
-            currency: v ? userCurrency : "sats",
+            currency: useFiatAsMain ? userCurrency : "sats",
           })
         );
       }
@@ -186,7 +190,7 @@ export default function DualCurrencyField({
     (async () => {
       if (showFiat) {
         const { formattedSats, formattedFiat } = await convertValues(
-          Number(inputValue),
+          Number(inputValue || 0),
           useFiatAsMain
         );
         setAltFormattedValue(useFiatAsMain ? formattedSats : formattedFiat);
@@ -212,7 +216,7 @@ export default function DualCurrencyField({
       onChange={onChangeWrapper}
       onFocus={onFocus}
       onBlur={onBlur}
-      value={inputValue ? inputValue : undefined}
+      value={inputValue ? inputValue : ""}
       autoFocus={autoFocus}
       autoComplete={autoComplete}
       disabled={disabled}
