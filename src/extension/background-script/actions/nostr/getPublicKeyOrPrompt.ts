@@ -8,7 +8,11 @@ import {
 import type { MessageNostrPublicKeyGetOrPrompt, Sender } from "~/types";
 import { PermissionMethodNostr } from "~/types";
 
-import { DONT_ASK_ANY, DONT_ASK_CURRENT } from "~/common/constants";
+import {
+  DONT_ASK_ANY,
+  DONT_ASK_CURRENT,
+  USER_REJECTED_ERROR,
+} from "~/common/constants";
 import state from "../../state";
 
 const getPublicKeyOrPrompt = async (
@@ -34,8 +38,7 @@ const getPublicKeyOrPrompt = async (
     }
 
     if (hasPermission) {
-      const publicKey = (await state.getState().getNostr()).getPublicKey();
-      return { data: publicKey };
+      return getPublicKey();
     } else {
       const promptResponse = await utils.openPrompt<{
         confirm: boolean;
@@ -62,11 +65,9 @@ const getPublicKeyOrPrompt = async (
       }
 
       if (promptResponse.data.confirm) {
-        // Normally `openPrompt` would throw already, but to make sure we got a confirm from the user we check this here
-        const publicKey = (await state.getState().getNostr()).getPublicKey();
-        return { data: publicKey };
+        return getPublicKey();
       } else {
-        return { error: "User rejected" };
+        return { error: USER_REJECTED_ERROR };
       }
     }
   } catch (e) {
@@ -74,6 +75,10 @@ const getPublicKeyOrPrompt = async (
     if (e instanceof Error) {
       return { error: e.message };
     }
+  }
+  async function getPublicKey() {
+    const publicKey = (await state.getState().getNostr()).getPublicKey();
+    return { data: publicKey };
   }
 };
 

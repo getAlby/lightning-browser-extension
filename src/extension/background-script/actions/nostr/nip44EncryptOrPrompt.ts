@@ -37,11 +37,7 @@ const nip44EncryptOrPrompt = async (
     }
 
     if (hasPermission) {
-      const response = (await state.getState().getNostr()).nip44Encrypt(
-        message.args.peer,
-        message.args.plaintext
-      );
-      return { data: response };
+      return nip44Encrypt();
     } else {
       const promptResponse = await utils.openPrompt<{
         confirm: boolean;
@@ -74,12 +70,7 @@ const nip44EncryptOrPrompt = async (
       }
 
       if (promptResponse.data.confirm) {
-        const response = (await state.getState().getNostr()).nip44Encrypt(
-          message.args.peer,
-          message.args.plaintext
-        );
-
-        return { data: response };
+        return nip44Encrypt();
       } else {
         return { error: USER_REJECTED_ERROR };
       }
@@ -89,6 +80,15 @@ const nip44EncryptOrPrompt = async (
     if (e instanceof Error) {
       return { error: e.message };
     }
+  }
+
+  async function nip44Encrypt() {
+    const response = (await state.getState().getNostr()).nip44Encrypt(
+      message.args.peer,
+      message.args.plaintext
+    );
+
+    return { data: response };
   }
 };
 

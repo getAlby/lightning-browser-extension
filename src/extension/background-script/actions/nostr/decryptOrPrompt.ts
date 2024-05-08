@@ -33,13 +33,7 @@ const decryptOrPrompt = async (message: MessageDecryptGet, sender: Sender) => {
     }
 
     if (hasPermission) {
-      const nostr = await state.getState().getNostr();
-      const response = await nostr.nip04Decrypt(
-        message.args.peer,
-        message.args.ciphertext
-      );
-
-      return { data: response };
+      return decrypt();
     } else {
       const promptResponse = await utils.openPrompt<{
         confirm: boolean;
@@ -66,13 +60,7 @@ const decryptOrPrompt = async (message: MessageDecryptGet, sender: Sender) => {
       }
 
       if (promptResponse.data.confirm) {
-        const nostr = await state.getState().getNostr();
-        const response = await nostr.nip04Decrypt(
-          message.args.peer,
-          message.args.ciphertext
-        );
-
-        return { data: response };
+        return decrypt();
       } else {
         return { error: USER_REJECTED_ERROR };
       }
@@ -82,6 +70,16 @@ const decryptOrPrompt = async (message: MessageDecryptGet, sender: Sender) => {
     if (e instanceof Error) {
       return { error: e.message };
     }
+  }
+
+  async function decrypt() {
+    const nostr = await state.getState().getNostr();
+    const response = await nostr.nip04Decrypt(
+      message.args.peer,
+      message.args.ciphertext
+    );
+
+    return { data: response };
   }
 };
 

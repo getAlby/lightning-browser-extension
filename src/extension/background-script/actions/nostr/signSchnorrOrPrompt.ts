@@ -7,7 +7,11 @@ import {
 } from "~/extension/background-script/permissions";
 import { MessageSignSchnorr, PermissionMethodNostr, Sender } from "~/types";
 
-import { DONT_ASK_ANY, DONT_ASK_CURRENT } from "~/common/constants";
+import {
+  DONT_ASK_ANY,
+  DONT_ASK_CURRENT,
+  USER_REJECTED_ERROR,
+} from "~/common/constants";
 import state from "../../state";
 
 const signSchnorrOrPrompt = async (
@@ -40,9 +44,7 @@ const signSchnorrOrPrompt = async (
     }
 
     if (hasPermission) {
-      const signedSchnorr = await nostr.signSchnorr(sigHash);
-
-      return { data: signedSchnorr };
+      return signSchnorr();
     } else {
       const promptResponse = await utils.openPrompt<{
         confirm: boolean;
@@ -69,11 +71,9 @@ const signSchnorrOrPrompt = async (
       }
 
       if (promptResponse.data.confirm) {
-        const signedSchnorr = await nostr.signSchnorr(sigHash);
-
-        return { data: signedSchnorr };
+        return signSchnorr();
       } else {
-        return { error: "User rejected" };
+        return { error: USER_REJECTED_ERROR };
       }
     }
   } catch (e) {
@@ -81,6 +81,12 @@ const signSchnorrOrPrompt = async (
     if (e instanceof Error) {
       return { error: e.message };
     }
+  }
+
+  async function signSchnorr() {
+    const signedSchnorr = await nostr.signSchnorr(sigHash);
+
+    return { data: signedSchnorr };
   }
 };
 

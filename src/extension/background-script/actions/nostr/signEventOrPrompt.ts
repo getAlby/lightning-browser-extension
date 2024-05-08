@@ -7,7 +7,11 @@ import {
 } from "~/extension/background-script/permissions";
 import { MessageSignEvent, PermissionMethodNostr, Sender } from "~/types";
 
-import { DONT_ASK_ANY, DONT_ASK_CURRENT } from "~/common/constants";
+import {
+  DONT_ASK_ANY,
+  DONT_ASK_CURRENT,
+  USER_REJECTED_ERROR,
+} from "~/common/constants";
 import state from "../../state";
 import { validateEvent } from "./helpers";
 
@@ -52,11 +56,7 @@ const signEventOrPrompt = async (message: MessageSignEvent, sender: Sender) => {
     }
 
     if (hasPermission) {
-      if (!event.pubkey) event.pubkey = nostr.getPublicKey();
-      if (!event.id) event.id = nostr.getEventHash(event);
-      const signedEvent = await nostr.signEvent(event);
-
-      return { data: signedEvent };
+      return signEvent();
     } else {
       const promptResponse = await utils.openPrompt<{
         confirm: boolean;
@@ -83,13 +83,9 @@ const signEventOrPrompt = async (message: MessageSignEvent, sender: Sender) => {
       }
 
       if (promptResponse.data.confirm) {
-        if (!event.pubkey) event.pubkey = nostr.getPublicKey();
-        if (!event.id) event.id = nostr.getEventHash(event);
-        const signedEvent = await nostr.signEvent(event);
-
-        return { data: signedEvent };
+        return signEvent();
       } else {
-        return { error: "User rejected" };
+        return { error: USER_REJECTED_ERROR };
       }
     }
   } catch (e) {
@@ -97,6 +93,14 @@ const signEventOrPrompt = async (message: MessageSignEvent, sender: Sender) => {
     if (e instanceof Error) {
       return { error: e.message };
     }
+  }
+
+  async function signEvent() {
+    if (!event.pubkey) event.pubkey = nostr.getPublicKey();
+    if (!event.id) event.id = nostr.getEventHash(event);
+    const signedEvent = await nostr.signEvent(event);
+
+    return { data: signedEvent };
   }
 };
 
