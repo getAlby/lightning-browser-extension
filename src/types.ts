@@ -1,5 +1,5 @@
 import { CreateSwapParams } from "@getalby/sdk/dist/types";
-import { PaymentRequestObject } from "bolt11";
+import { PaymentRequestObject } from "bolt11-signet";
 import { Runtime } from "webextension-polyfill";
 import { ACCOUNT_CURRENCIES, CURRENCIES } from "~/common/constants";
 import connectors from "~/extension/background-script/connectors";

@@ -1,6 +1,6 @@
 import { webln } from "@getalby/sdk";
 import { NostrWebLNProvider } from "@getalby/sdk/dist/webln";
-import lightningPayReq from "bolt11";
+import lightningPayReq from "bolt11-signet";
 import Hex from "crypto-js/enc-hex";
 import SHA256 from "crypto-js/sha256";
 import { Account } from "~/types";
