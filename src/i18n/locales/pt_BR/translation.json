@@ -682,19 +682,16 @@
       }
     },
     "nostr": {
-      "allow": "Permitir este site:",
       "block_and_ignore": "Bloquear e ignorar {{host}}",
       "title": "Nostr",
       "content": "Este site solicita que você assine:",
       "block_added": "{{host}} adicionado na lista de bloqueio, por favor recarregue o site.",
       "allow_sign": "Permitir {{host}} assinar:",
-      "view_details": "Ver detalhes",
-      "hide_details": "Ocultar detalhes",
       "allow_sign_event": "Permitir {{host}} assinar um evento <0>{{kind}}</0>",
       "allow_encrypt": "Permitir {{host}} criptografar a mensagem:",
       "kinds": {
-        "9734": {
-          "title": "solicitar zap"
+        "0": {
+          "title": "atualizar perfil"
         },
         "1": {
           "title": "nota curta"
@@ -702,11 +699,11 @@
         "4": {
           "title": "mensagem direta"
         },
+        "9734": {
+          "title": "solicitar zap"
+        },
         "30023": {
           "title": "nota longa"
-        },
-        "0": {
-          "title": "atualizar perfil"
         }
       }
     },
@@ -808,8 +805,6 @@
       "title": "Aguardando leitura"
     },
     "confirm_sign_pset": {
-      "view_details": "Ver detalhes",
-      "hide_details": "Ocultar detalhes",
       "view_raw_transaction": "Ver transação raw (Base64)",
       "hide_raw_transaction": "Ocultar transação raw (Base64)",
       "outputs": "Saídas",
@@ -832,9 +827,7 @@
         "view_raw_transaction": "Ver transação bruta (Hex)",
         "inputs": "Entradas",
         "fee": "Taxa",
-        "hide_details": "Ocultar detalhes",
         "allow_sign": "Este site solicita que você assine uma transação de bitcoin",
-        "view_details": "Ver detalhes",
         "outputs": "Saídas"
       }
     },

@@ -819,8 +819,6 @@
     "confirm_sign_pset": {
       "title": "Sign",
       "allow_sign": "This website asks you to sign a Liquid transaction",
-      "view_details": "View details",
-      "hide_details": "Hide details",
       "view_raw_transaction": "View raw transaction (Base64)",
       "hide_raw_transaction": "Hide raw transaction (Base64)",
       "inputs": "Inputs",
@@ -834,8 +832,6 @@
       "confirm_sign_psbt": {
         "title": "Sign",
         "allow_sign": "This website asks you to sign a bitcoin transaction",
-        "view_details": "View details",
-        "hide_details": "Hide details",
         "view_raw_transaction": "View raw transaction (Hex)",
         "hide_raw_transaction": "Hide raw transaction (Hex)",
         "inputs": "Inputs",
@@ -924,13 +920,9 @@
     },
     "nostr": {
       "title": "Nostr",
-      "allow": "Allow this website to:",
+      "allow": "Allow {{publisher}} to {{action}}",
       "content": "This website asks you to sign:",
-      "allow_sign": "Allow {{host}} to sign:",
       "allow_sign_event": "Allow {{host}} to sign a <0>{{kind}}</0> event",
-      "allow_encrypt": "Allow {{host}} to encrypt the message:",
-      "view_details": "View details",
-      "hide_details": "Hide details",
       "block_and_ignore": "Block and ignore {{host}}",
       "block_added": "Added {{host}} to the blocklist, please reload the website.",
       "recipient": "Recipient",
@@ -1053,6 +1045,7 @@
     "advanced": "Show advanced settings",
     "hide_advanced": "Hide advanced settings",
     "success": "Success",
+    "details": "Details",
     "error": "Error",
     "settings": "Extension Settings",
     "accounts": "Accounts",
@@ -1087,7 +1080,6 @@
       "cancel": "Cancel",
       "confirm": "Confirm",
       "deny": "Deny",
-      "sign": "Sign",
       "continue": "Continue",
       "finish": "Finish",
       "connect": "Connect",
@@ -1300,7 +1292,7 @@
       },
 
       "signmessage": {
-        "title": "Sign Message",
+        "title": "sign message",
         "description": "Sign all nostr events"
       },
       "signschnorr": {

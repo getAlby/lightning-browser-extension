@@ -538,13 +538,10 @@
     },
     "nostr": {
       "title": "Nostr",
-      "allow": "允许该网站:",
       "block_and_ignore": "阻止并忽略 {{host}}",
       "content": "该网站要求你签署:",
       "allow_sign": "允许{{host}}签署：",
-      "block_added": "已将{{host}}添加到屏蔽列表，请重新加载网站。",
-      "view_details": "查看详情",
-      "hide_details": "隐藏详情"
+      "block_added": "已将{{host}}添加到屏蔽列表，请重新加载网站。"
     },
     "lnurlpay": {
       "amount": {
@@ -664,12 +661,10 @@
     },
     "confirm_sign_pset": {
       "title": "签署",
-      "view_details": "查看详情",
       "inputs": "输入",
       "allow_sign": "该网站要求你签署一笔 Liquid 交易：",
       "view_raw_transaction": "查看原始交易（Base64）",
       "hide_raw_transaction": "隐藏原始交易（Base64）",
-      "hide_details": "隐藏详情",
       "outputs": "输出",
       "amount": "{{amount}} {{ticker}}"
     },

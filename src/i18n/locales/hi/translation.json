@@ -539,11 +539,8 @@
     },
     "nostr": {
       "title": "Nostr",
-      "allow": "इस वेबसाइट को इसकी अनुमति दें:",
       "content": "यह वेबसाइट आपसे हस्ताक्षर करने के लिए कहती है:",
       "allow_sign": "{{host}} को हस्ताक्षर करने की अनुमति दें:",
-      "view_details": "विवरण देखें",
-      "hide_details": "विवरण छिपाएं",
       "block_and_ignore": "ब्लॉक करें और {{host}} को अनदेखा करें",
       "block_added": "ब्लॉकलिस्ट में {{host}} जोड़ा गया, कृपया वेबसाइट फिर से लोड करें।",
       "allow_sign_event": "{{host}} को {{kind}} ईवेंट पर हस्ताक्षर करने की अनुमति दें",
@@ -723,9 +720,7 @@
         "view_raw_transaction": "raw transaction (Hex) देखें",
         "inputs": "इनपुट्स",
         "fee": "फी",
-        "hide_details": "विवरण छुपाएं",
         "allow_sign": "यह वेबसाइट आपसे बिटकॉइन लेनदेन पर साइन करने के लिए कहती है",
-        "view_details": "विवरण देखें",
         "outputs": "आउटपुट्स"
       },
       "confirm_get_address": {
@@ -776,8 +771,6 @@
     },
     "confirm_sign_pset": {
       "allow_sign": "यह वेबसाइट आपसे लिक्विड लेनदेन पर साइन करने के लिए कहती है",
-      "hide_details": "विवरण छुपाओ",
-      "view_details": "विवरण देखें",
       "title": "Sign",
       "hide_raw_transaction": "raw transaction (Base64) छुपाओ",
       "view_raw_transaction": "raw transaction (Base64) देखें",

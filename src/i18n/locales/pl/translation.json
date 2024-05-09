@@ -604,13 +604,10 @@
     },
     "nostr": {
       "title": "Nostr",
-      "allow": "Pozwól tej stronie na:",
       "content": "Ta strona prosi Cię aby podpisywać:",
       "allow_sign": "Pozwól {{host}} na podpisywanie:",
       "block_and_ignore": "Zablokuj i ignoruj {{host}}",
-      "block_added": "Dodano {{host}} do listy zablokowanych, odśwież stronę.",
-      "hide_details": "Ukryj szczegóły",
-      "view_details": "Pokaż szczegóły"
+      "block_added": "Dodano {{host}} do listy zablokowanych, odśwież stronę."
     },
     "transactions": {
       "title": "Transakcje"
