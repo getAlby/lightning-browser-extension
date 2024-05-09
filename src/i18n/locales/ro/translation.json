@@ -530,7 +530,6 @@
     "nostr": {
       "title": "",
       "content": "",
-      "allow_sign": "",
       "block_and_ignore": "",
       "block_added": ""
     }
