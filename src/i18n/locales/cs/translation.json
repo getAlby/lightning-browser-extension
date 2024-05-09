@@ -554,7 +554,6 @@
     "nostr": {
       "title": "Nostr",
       "block_and_ignore": "Zablokovat a ignorovat {{host}}",
-      "allow_sign": "Povolit {{host}} podepsání:",
       "block_added": "{{host}} přidán do seznamu blokovaných, prosím znovu načtěte webovou stránku.",
       "content": "Tato webová stránka vás žádá o podpis:"
     },
