@@ -522,7 +522,6 @@
     "nostr": {
       "title": "Nostr",
       "content": "Este sitio web te solicita firmar:",
-      "allow_sign": "Permitir que {{host}} firme:",
       "block_and_ignore": "Bloquear e ignorar {{host}}",
       "block_added": "Se agregó {{host}} a la lista de bloqueados, vuelva a cargar el sitio web."
     },
