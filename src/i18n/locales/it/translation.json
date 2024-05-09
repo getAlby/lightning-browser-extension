@@ -499,8 +499,7 @@
       "title": "Nostr",
       "block_and_ignore": "Blocca e ignora {{host}}",
       "block_added": "{{host}} aggiunto alla blocklist, si prega di ricaricare la pagina.",
-      "content": "Questo sito chiede di firmare:",
-      "allow_sign": "Consenti a {{host}} di firmare:"
+      "content": "Questo sito chiede di firmare:"
     },
     "alby": {
       "pre_connect": {
