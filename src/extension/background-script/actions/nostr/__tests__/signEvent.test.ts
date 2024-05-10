@@ -4,13 +4,13 @@ import Nostr from "~/extension/background-script/nostr";
 import { allowanceFixture } from "~/fixtures/allowances";
 import { permissionsFixture } from "~/fixtures/permissions";
 import {
+  MessageSignEvent,
   PermissionOption,
-  type MessageSignSchnorr,
   type OriginData,
   type Sender,
 } from "~/types";
 
-import signSchnorr from "../signSchnorrOrPrompt";
+import signEvent from "../signEventOrPrompt";
 
 // suppress console logs when running tests
 console.error = jest.fn();
@@ -35,14 +35,19 @@ const allowanceInDB = allowanceFixture[0];
 
 const permissionInDB = {
   ...permissionsFixture[0],
-  method: "nostr/signSchnorr",
+  method: "nostr/signMessage/1",
 };
 
-const message: MessageSignSchnorr = {
-  action: "signSchnorr",
+const message: MessageSignEvent = {
+  action: "signEvent",
   origin: { host: allowanceInDB.host } as OriginData,
   args: {
-    sigHash: "sighash12345",
+    event: {
+      content: "sign short note",
+      created_at: 1714716414,
+      kind: 1,
+      tags: [],
+    },
   },
 };
 
@@ -54,9 +59,11 @@ const sender: Sender = {
   url: `https://${allowanceInDB.host}/test`,
 };
 
-const requestResponse = { data: "" };
+const requestResponse = { data: MessageEvent };
 const fullNostr = {
-  signSchnorr: jest.fn(() => Promise.resolve(requestResponse.data)),
+  signEvent: jest.fn(() => Promise.resolve(requestResponse.data)),
+  getPublicKey: jest.fn(() => Promise.resolve(String)),
+  getEventHash: jest.fn(() => Promise.resolve(String)),
 } as unknown as Nostr;
 
 // prepare DB with allowance
@@ -71,7 +78,7 @@ afterEach(async () => {
   nostr = fullNostr;
 });
 
-describe("signSchnorr", () => {
+describe("signEvent", () => {
   describe("throws error", () => {
     test("if the host's allowance does not exist", async () => {
       const senderWithUndefinedAllowanceHost = {
@@ -79,44 +86,25 @@ describe("signSchnorr", () => {
         origin: `https://some-host.com`,
       };
 
-      const result = await signSchnorr(
-        message,
-        senderWithUndefinedAllowanceHost
-      );
+      const result = await signEvent(message, senderWithUndefinedAllowanceHost);
 
       expect(console.error).toHaveBeenCalledTimes(1);
       expect(result).toStrictEqual({
         error: "Could not find an allowance for this host",
       });
     });
-
-    test("if the message args are not correct", async () => {
-      const messageWithoutSigHash = {
-        ...message,
-        args: {
-          ...message.args,
-          sigHash: undefined,
-        },
-      } as unknown as MessageSignSchnorr;
-
-      const result = await signSchnorr(messageWithoutSigHash, sender);
-
-      expect(console.error).toHaveBeenCalledTimes(1);
-      expect(result).toStrictEqual({
-        error: "sigHash is missing or not correct",
-      });
-    });
   });
 
-  describe("directly calls signSchnorr with method and params", () => {
-    test("if permission for signSchnorr exists and is enabled", async () => {
+  describe("directly calls signEvent with method and params", () => {
+    test("if permission for signEvent exists and is enabled", async () => {
       // prepare DB with matching permission
+
       await db.permissions.bulkAdd([permissionInDB]);
 
-      const result = await signSchnorr(message, sender);
+      const result = await signEvent(message, sender);
 
       expect(result).toStrictEqual(requestResponse);
-      expect(nostr.signSchnorr).toHaveBeenCalledWith(message.args.sigHash);
+      expect(nostr.signEvent).toHaveBeenCalledWith(message.args.event);
 
       expect(utils.openPrompt).not.toHaveBeenCalled();
 
@@ -124,8 +112,8 @@ describe("signSchnorr", () => {
     });
   });
 
-  describe("prompts the user first and then calls signSchnorr", () => {
-    test("if the permission for signSchnorr does not exist", async () => {
+  describe("prompts the user first and then calls signEvent", () => {
+    test("if the permission for signEvent does not exist", async () => {
       // prepare DB with other permission
       const otherPermission = {
         ...permissionInDB,
@@ -133,14 +121,14 @@ describe("signSchnorr", () => {
       };
       await db.permissions.bulkAdd([otherPermission]);
 
-      await signSchnorr(message, sender);
+      await signEvent(message, sender);
 
       expect(utils.openPrompt).toHaveBeenCalledWith({
         args: {
-          sigHash: message.args.sigHash,
+          event: message.args.event,
         },
         origin: message.origin,
-        action: "public/nostr/confirmSignSchnorr",
+        action: "public/nostr/confirmSignMessage",
       });
     });
   });
@@ -161,23 +149,23 @@ describe("signSchnorr", () => {
 
       expect(await db.permissions.toArray()).toHaveLength(1);
       expect(
-        await db.permissions.get({ method: "nostr/signSchnorr" })
+        await db.permissions.get({ method: "nostr/signMessage/1" })
       ).toBeUndefined();
 
-      const result = await signSchnorr(message, sender);
+      const result = await signEvent(message, sender);
 
       expect(utils.openPrompt).toHaveBeenCalledTimes(1);
 
-      expect(nostr.signSchnorr).toHaveBeenCalledWith(message.args.sigHash);
+      expect(nostr.signEvent).toHaveBeenCalledWith(message.args.event);
 
       expect(await db.permissions.toArray()).toHaveLength(2);
 
       const addedPermission = await db.permissions.get({
-        method: "nostr/signSchnorr",
+        method: "nostr/signMessage/1",
       });
       expect(addedPermission).toEqual(
         expect.objectContaining({
-          method: "nostr/signSchnorr",
+          method: "nostr/signMessage/1",
           enabled: true,
           allowanceId: allowanceInDB.id,
           host: allowanceInDB.host,
@@ -188,7 +176,7 @@ describe("signSchnorr", () => {
       expect(result).toStrictEqual(requestResponse);
     });
 
-    test("doesn't call signSchnorr if clicks cancel", async () => {
+    test("doesn't call signEvent if clicks deny", async () => {
       // prepare DB with a permission
       await db.permissions.bulkAdd([
         { ...permissionInDB, method: "nostr/getPublicKey" },
@@ -196,18 +184,18 @@ describe("signSchnorr", () => {
 
       expect(await db.permissions.toArray()).toHaveLength(1);
       expect(
-        await db.permissions.get({ method: "nostr/signSchnorr" })
+        await db.permissions.get({ method: "nostr/signMessage/1" })
       ).toBeUndefined();
 
-      const result = await signSchnorr(message, sender);
+      const result = await signEvent(message, sender);
 
       expect(utils.openPrompt).toHaveBeenCalledTimes(1);
 
-      expect(nostr.signSchnorr).not.toHaveBeenCalled();
+      expect(nostr.signEvent).not.toHaveBeenCalled();
 
       expect(await db.permissions.toArray()).toHaveLength(1);
       expect(
-        await db.permissions.get({ method: "nostr/signSchnorr" })
+        await db.permissions.get({ method: "nostr/signMessage/1" })
       ).toBeUndefined();
 
       expect(result).toHaveProperty("error");
@@ -216,9 +204,9 @@ describe("signSchnorr", () => {
     test("does not save the permission if permissionOption is 'ASK_EVERYTIME'", async () => {
       (utils.openPrompt as jest.Mock).mockResolvedValueOnce({
         data: {
-          permissionOption: PermissionOption.ASK_EVERYTIME,
-          blocked: false,
           confirm: true,
+          blocked: false,
+          permissionOption: PermissionOption.ASK_EVERYTIME,
         },
       });
       // prepare DB with a permission
@@ -228,18 +216,18 @@ describe("signSchnorr", () => {
 
       expect(await db.permissions.toArray()).toHaveLength(1);
       expect(
-        await db.permissions.get({ method: "nostr/signSchnorr" })
+        await db.permissions.get({ method: "nostr/signMessage/1" })
       ).toBeUndefined();
 
-      const result = await signSchnorr(message, sender);
+      const result = await signEvent(message, sender);
 
       expect(utils.openPrompt).toHaveBeenCalledTimes(1);
 
-      expect(nostr.signSchnorr).toHaveBeenCalledWith(message.args.sigHash);
+      expect(nostr.signEvent).toHaveBeenCalledWith(message.args.event);
 
       expect(await db.permissions.toArray()).toHaveLength(1);
       expect(
-        await db.permissions.get({ method: "nostr/signSchnorr" })
+        await db.permissions.get({ method: "nostr/signMessage/1" })
       ).toBeUndefined();
 
       expect(result).toStrictEqual(requestResponse);

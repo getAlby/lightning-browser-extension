@@ -1,4 +1,4 @@
-import lightningPayReq from "bolt11";
+import lightningPayReq from "bolt11-signet";
 import utils from "~/common/lib/utils";
 import { getHostFromSender } from "~/common/utils/helpers";
 import { Message, Sender } from "~/types";
@@ -61,4 +61,4 @@ async function payWithPrompt(message: Message) {
   }
 }
 
-export { sendPaymentOrPrompt, payWithPrompt, checkAllowance };
+export { checkAllowance, payWithPrompt, sendPaymentOrPrompt };
