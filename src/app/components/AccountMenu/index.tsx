@@ -127,7 +127,7 @@ function AccountMenu({ showOptions = true }: Props) {
             }}
           >
             <PopiconsWalletLine className="w-4 h-4 mr-2 shrink-0" />
-            {t("options.account.wallet_settings")}
+            {tCommon("wallet_settings")}
           </Menu.ItemButton>
           {(isAlbyLNDHubAccount(
             authAccount?.alias,

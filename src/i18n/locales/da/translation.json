@@ -256,7 +256,6 @@
           "placeholder": "Kontonavn"
         },
         "export": {
-          "title": "Eksporter konto",
           "screen_reader": "Eksporter kontooplysninger",
           "waiting": "venter på LndHub-data...",
           "your_ln_address": "Din lightningadresse:",

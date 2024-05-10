@@ -266,13 +266,11 @@
           "placeholder": "帳戶名稱"
         },
         "export": {
-          "title": "連接你的移動錢包",
           "screen_reader": "導出帳戶詳情",
           "waiting": "等待 LndHub 數據...",
           "your_ln_address": "你的閃電地址：",
           "export_uri": "LNDHub 憑據 URI",
-          "scan_qr": "通過掃描二維碼將此錢包導入Zeus或BlueWallet。",
-          "description": "將允許你在移動錢包上連接並使用此帳戶，例如 <0>Blue Wallet</0> 和 <1>Zeus</1>。"
+          "scan_qr": "通過掃描二維碼將此錢包導入Zeus或BlueWallet。"
         },
         "nostr": {
           "title": "Nostr",
@@ -331,13 +329,11 @@
           "remove_secretkey": "移除主密鑰"
         },
         "mnemonic": {
-          "title": "🔑 密鑰管理",
           "backup": {
             "protocols": {
               "nostr": "Nostr"
             },
             "button": "備份恢復短語",
-            "warning": "⚠️別忘了將你的恢復短語備份！不備份可能會導致永久失去對你的主密鑰、 Nostr 身份或使用此密鑰管理的資產的訪問權限。",
             "save": "保存主密鑰",
             "description": "請寫下恢復短語，以便能夠在新設備上恢復主密鑰，或以防失去帳戶訪問。"
           },
@@ -359,14 +355,11 @@
           "saved": "主密鑰已加密並成功保存。"
         },
         "remove_secretkey": {
-          "subtitle": "將主密鑰從該帳戶移除。",
           "title": "移除主密鑰",
           "success": "已成功移除主密鑰。"
         },
         "no_mnemonic_hint": "💡你還沒有主密鑰。<0>點擊此處</0></div>來生成你的主密鑰並解鎖這些設置。",
         "network": {
-          "title": "網絡",
-          "subtitle": "選擇網絡來派生地址並解碼比特幣和 Liquid 交易",
           "options": {
             "bitcoin": "主網",
             "testnet": "測試網",

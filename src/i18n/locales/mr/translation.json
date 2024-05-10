@@ -256,7 +256,6 @@
           "placeholder": "खात्याचे नाव"
         },
         "export": {
-          "title": "निर्यात खाते",
           "screen_reader": "निर्यात खात्याचा तपशील",
           "waiting": "एलएनडीहब डेटाची वाट पाहत...",
           "your_ln_address": "आपला Lightning Address:",
