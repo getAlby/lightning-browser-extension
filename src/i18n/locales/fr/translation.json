@@ -321,18 +321,6 @@
         "title": "Améliorations du site Web",
         "subtitle": "Améliorations des pourboires pour Twitter, YouTube, etc."
       },
-      "lnurl_auth": {
-        "title": "LNURL-Auth",
-        "hint": "est un protocole d'authentification générique. Il authentifie l'utilisateur à l'aide de signatures numériques. Le protocole ne nécessite aucune autre information d'identification telle que des mots de passe, des e-mails, des noms d'utilisateur ou similaires. Avec Alby, vous pouvez utiliser vos comptes Lightning pour vous connecter en toute sécurité aux sites Web. Pour être compatible avec d'autres portefeuilles, nous avons dû apporter quelques modifications que vous pouvez configurer ici. <0>Idéalement, toutes ces options sont désactivées.</0> Utilisez-les uniquement si vous avez d'anciens comptes.",
-        "legacy_lnurl_auth_202207": {
-          "title": "Hérité LNURL-Auth",
-          "subtitle": "La génération de clé pour LNURL-auth a changé (juillet 2022). Alby n'était pas compatible avec d'autres implémentations. Cela a été changé, mais maintenant différentes clés de connexion sont utilisées. Si vous avez utilisé LNURL-auth pour vous connecter auparavant, vous pouvez toujours activer l'ancienne méthode. Cette option sera supprimée plus tard, assurez-vous de passer à la nouvelle connexion."
-        },
-        "legacy_lnurl_auth": {
-          "title": "Signature héritée pour LNDhub et LNbits",
-          "subtitle": "La signature des messages et la connexion avec LNDhub (par exemple BlueWallet) et les comptes LNbits ont été modifiées (mars 2022). Si vous vous êtes connecté avec ces comptes, vous pouvez toujours activer l'ancienne méthode de signature. Cette option sera supprimée plus tard, assurez-vous de passer à la nouvelle connexion."
-        }
-      },
       "camera_access": {
         "title": "accès à la caméra",
         "subtitle": "Pour scanner les codes QR",

@@ -308,18 +308,6 @@
         "title": "Mejoras del sitio web",
         "subtitle": "Mejoras de propinas para Twitter, YouTube, etc."
       },
-      "lnurl_auth": {
-        "title": "Autenticación-LNURL",
-        "hint": "es un protocolo genérico de autenticación. Autentica al usuario utilizando firmas digitales. El protocolo no requiere ninguna otra información de identificación como contraseñas, correos electrónicos, nombres de usuario o similares. Con Alby puedes utilizar tus cuentas relámpago para iniciar sesión en sitios web de forma segura. Para ser compatible con otros monederos hemos tenido que hacer algunos cambios que puedes configurar aquí. <0>Idealmente todas esas opciones están en OFF.</0> Úsalas sólo si tienes cuentas antiguas.",
-        "legacy_lnurl_auth_202207": {
-          "title": "Autenticación-LNURL Legada",
-          "subtitle": "La generación de claves para la autenticación-LNURL ha cambiado (en julio de 2022). Alby no era compatible con otras implementaciones. Esto se cambió, pero ahora se utilizan diferentes claves de inicio de sesión. Si usó autenticación-LNURL para iniciar sesión antes, aún puede habilitar el método anterior. Esta opción se eliminará más adelante, asegúrese de cambiar al nuevo inicio de sesión."
-        },
-        "legacy_lnurl_auth": {
-          "title": "Firma heredada (Legacy) para LNDhub y LNbits",
-          "subtitle": "Se ha cambiado la firma de mensajes y el inicio de sesión con cuentas LNDhub (por ejemplo, BlueWallet) y LNbits (marzo de 2022). Si inició sesión con estas cuentas, aún puede habilitar el método de firma anterior. Esta opción se eliminará más adelante, asegúrese de cambiar al nuevo inicio de sesión."
-        }
-      },
       "camera_access": {
         "title": "Acceso a la cámara",
         "subtitle": "Para escanear códigos QR",

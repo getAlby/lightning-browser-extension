@@ -424,15 +424,6 @@
         "title": "Dostop do kamere",
         "granted": "Dovoljenje omogočeno"
       },
-      "lnurl_auth": {
-        "legacy_lnurl_auth": {
-          "title": "Starerjša verzija podpisovanja za LNDhub in LNbits"
-        },
-        "title": "LNURL-Auth",
-        "legacy_lnurl_auth_202207": {
-          "title": "Stara verzija LNURL-Auth"
-        }
-      },
       "currency": {
         "title": "Valuta",
         "subtitle": "Zneske dodatno prikaži v tej valuti"

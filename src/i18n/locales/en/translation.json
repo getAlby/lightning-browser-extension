@@ -598,31 +598,23 @@
     },
     "settings": {
       "title": "Extension Settings",
+      "subtitle": "Global settings that affect your experience on all connected wallets in Alby Extension.",
+      "general": {
+        "title": "General"
+      },
       "browser_notifications": {
-        "title": "Browser notifications",
+        "title": "Browser Notifications",
         "subtitle": "Payment and authentication related notifications."
       },
       "website_enhancements": {
-        "title": "Website enhancements",
+        "title": "Website Enhancements",
         "subtitle": "Tipping enhancements for Twitter, YouTube, etc."
       },
-      "lnurl_auth": {
-        "title": "LNURL-Auth",
-        "hint": "is a generic authentication protocol. It authenticates the user using digital signatures. The protocol does not require any other identifying information such as passwords, emails, usernames, or similar. With Alby you can use your lightning accounts to securely login to websites. To be compatible with other wallets we had to make a few changes that you can configure here. <0>Ideally all those options are OFF.</0> Use them only if you have old accounts.",
-        "legacy_lnurl_auth_202207": {
-          "title": "Legacy LNURL-Auth",
-          "subtitle": "The key generation for LNURL-auth has changed (July 2022). Alby was not compatible with other implementations. This was changed, but now different login keys are used. If you used LNURL-auth to login before you can still enable the old method. This option will be removed later, make sure to switch to the new login."
-        },
-        "legacy_lnurl_auth": {
-          "title": "Legacy signing for LNDhub and LNbits",
-          "subtitle": "Message signing and login with LNDhub (e.g. BlueWallet) and LNbits accounts has been changed (March 2022). If you logged in with these accounts you can still enable the old signing method. This option will be removed later, make sure to switch to the new login."
-        }
-      },
       "camera_access": {
-        "title": "Camera access",
+        "title": "Camera Access",
         "subtitle": "For scanning QR codes",
-        "allow": "Allow camera access",
-        "granted": "Permission granted"
+        "allow": "Allow Camera Access",
+        "granted": "Permission Granted"
       },
       "language": {
         "title": "Language",
@@ -664,9 +656,9 @@
         "placeholder": "Enter your email address"
       },
       "change_password": {
-        "title": "Change unlock passcode",
+        "title": "Change Unlock Passcode",
         "subtitle": "",
-        "screen_reader": "Change unlock passcode",
+        "screen_reader": "Change Unlock Passcode",
         "choose_password": {
           "label": "Enter a new unlock passcode:"
         },

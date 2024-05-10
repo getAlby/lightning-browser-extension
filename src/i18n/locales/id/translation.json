@@ -405,16 +405,6 @@
         "title": "Tambahan fitur website",
         "subtitle": "Penambahan fitur tip untuk Twitter, YouTube, dll."
       },
-      "lnurl_auth": {
-        "title": "LNURL-Auth",
-        "legacy_lnurl_auth_202207": {
-          "title": "Legacy LNURL-Auth"
-        },
-        "legacy_lnurl_auth": {
-          "title": "Legacy signing untuk LNDhub dan LNbits"
-        },
-        "hint": "adalah protokol autentikasi generik. Dapat mengautentikasi pengguna menggunakan tanda tangan digital. Protokol ini tidak memerlukan informasi yang dapat mengidentifikasi seperti kata sandi, email, username, atau yang lainnya. Dengan Alby, kamu dapat menggunakan akun lightning untuk login pada suatu website dengan aman. Supaya kompatibel dengan wallet lainnya kami membuat beberapa perubahan yang kamu dapat atur di sini. <0>Seharusnya, semua opsi berikut OFF.</0> Gunakanlah ketika kamu memiliki akun yang lama."
-      },
       "camera_access": {
         "title": "Akses kamera",
         "subtitle": "Untuk memindai kode QR",

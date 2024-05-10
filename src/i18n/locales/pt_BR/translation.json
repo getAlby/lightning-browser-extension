@@ -453,18 +453,6 @@
         "title": "Pagamentos em redes sociais",
         "subtitle": "Reconhece automaticamente endereços relâmpago em perfis do Twitter, Youtube, etc, facilitando o envio de pagamentos."
       },
-      "lnurl_auth": {
-        "title": "LNURL-Auth",
-        "hint": "é um protocolo de autenticação. Ele autentica o usuário usando assinaturas digitais. O protocolo não requer nenhuma outra informação de identificação, como senhas, e-mails, nomes de usuário... Com a Alby você pode usar suas contas bitcoin para logar em sites com segurança. Para ser compatível com outras carteiras, tivemos que fazer algumas alterações que você pode configurar aqui. Por padrão essas opções estão DESLIGADAS. Use-as apenas se você tiver contas antigas.",
-        "legacy_lnurl_auth_202207": {
-          "title": "LNURL-Auth antigo",
-          "subtitle": "A geração de chave para a LNURL-auth mudou em (julho de 2022). A Alby não era compatível com outras implementações. Isso foi corrigido, mas agora uma nova chave está sendo usada como padrão. Se você usou a LNURL-auth para logar em sites antes de julho de 2022, ainda poderá fazer login habilitando o método antigo. Esta opção será removida posteriormente, certifique-se de alterar suas contas nos sites para usar o novo login."
-        },
-        "legacy_lnurl_auth": {
-          "title": "Método antigo de autenticação para LNDhub e LNbits",
-          "subtitle": "A assinatura de mensagens e o login com as contas LNDhub (por exemplo, BlueWallet) e LNbits foram alteradas em (março de 2022). Se você fez login com essas contas, ainda poderá ativar o método de assinatura antigo. Esta opção será removida posteriormente, certifique-se de alterar suas contas nos sites para usar o novo login."
-        }
-      },
       "camera_access": {
         "title": "Acesso à câmera",
         "subtitle": "Acesso para ler códigos QR",
