@@ -603,7 +603,7 @@ function AccountDetail() {
                       }}
                       label={t("actions.remove_secretkey")}
                       fullWidth
-                      error
+                      destructive
                     />
                   </div>
                 </Setting>
@@ -622,7 +622,7 @@ function AccountDetail() {
                     }}
                     label={t("actions.disconnect_wallet")}
                     fullWidth
-                    error
+                    destructive
                   />
                 </div>
               </Setting>
