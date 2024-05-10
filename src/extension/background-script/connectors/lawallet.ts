@@ -2,7 +2,7 @@ import { schnorr } from "@noble/curves/secp256k1";
 import * as secp256k1 from "@noble/secp256k1";
 import type { ResponseType } from "axios";
 import { Method } from "axios";
-import lightningPayReq from "bolt11";
+import lightningPayReq from "bolt11-signet";
 import Hex from "crypto-js/enc-hex";
 import sha256 from "crypto-js/sha256";
 import { nip04, relayInit, type Relay } from "nostr-tools";
@@ -98,15 +98,6 @@ export default class LaWallet implements Connector {
     throw new Error("Not yet supported with the currently used account.");
   }
 
-  private async getInvoices(): Promise<ConnectorTransaction[]> {
-    const transactions: ConnectorTransaction[] = (await this.getTransactions())
-      .data.transactions;
-
-    return transactions.filter(
-      (transaction) => transaction.type === "received"
-    );
-  }
-
   async getTransactions(): Promise<GetTransactionsResponse> {
     const _transactions: Event[] = await LaWallet.request(
       this.config.apiEndpoint,
@@ -141,13 +132,6 @@ export default class LaWallet implements Connector {
         ),
       },
     };
-  }
-
-  private async getPayments(): Promise<ConnectorTransaction[]> {
-    const transactions: ConnectorTransaction[] = (await this.getTransactions())
-      .data.transactions;
-
-    return transactions.filter((transaction) => transaction.type === "sent");
   }
 
   async getInfo(): Promise<
