@@ -143,13 +143,6 @@ export default class LaWallet implements Connector {
     };
   }
 
-  private async getPayments(): Promise<ConnectorTransaction[]> {
-    const transactions: ConnectorTransaction[] = (await this.getTransactions())
-      .data.transactions;
-
-    return transactions.filter((transaction) => transaction.type === "sent");
-  }
-
   async getInfo(): Promise<
     GetInfoResponse<{
       alias: string;
