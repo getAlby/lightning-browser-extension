@@ -298,13 +298,11 @@
           "placeholder": "Nazwa wyświetlana konta"
         },
         "export": {
-          "title": "Podłącz swój portfel mobilny",
           "screen_reader": "Eksportuj dane konta",
           "waiting": "oczekiwanie na dane LndHub...",
           "your_ln_address": "Twój adres Lightning:",
           "export_uri": "Adres LNDHub",
-          "scan_qr": "Zaimportuj ten portfel do Zeusa lub BlueWallet skanując kod QR.",
-          "description": "Pozwala na połączenie i korzystanie z tego konta w mobilnych portfelach takich jak <0>Blue Wallet</0> i <1>Zeus</1>."
+          "scan_qr": "Zaimportuj ten portfel do Zeusa lub BlueWallet skanując kod QR."
         },
         "nostr": {
           "title": "Nostr",
@@ -345,7 +343,6 @@
         },
         "mnemonic": {
           "saved": "Klucz Główny został zaszyfrowany i zapisany pomyślnie.",
-          "title": "🔑 Zarządzanie kluczami",
           "backup": {
             "protocols": {
               "nostr": "Nostr"
@@ -363,13 +360,11 @@
         },
         "no_mnemonic_hint": "💡 Nie masz jeszcze Klucza Głównego. <0>Kliknij tutaj</0></div>, aby utworzyć swój Klucz Główny i odblokować te ustawienia.",
         "network": {
-          "subtitle": "Wybierz sieć, aby wygenerować adresy i odczytać transakcje bitcoinowe oraz w sieci Liquid",
           "options": {
             "testnet": "Testnet (sieć testowa)",
             "bitcoin": "Mainnet (sieć główna)",
             "regtest": "Regtest (sieć testów regresji)"
-          },
-          "title": "Sieć"
+          }
         }
       }
     },
@@ -396,18 +391,6 @@
       "website_enhancements": {
         "title": "Rozszerzenia na stronach",
         "subtitle": "Rozszerzenia napiwków na Twitterze, YouTube, etc."
-      },
-      "lnurl_auth": {
-        "title": "LNURL-Auth",
-        "hint": "jest generycznym protokołem uwierzytelniania. Poświadcza tożsamość użytkownika za pomocą podpisów cyfrowych. Protokół nie wyamga żadnych danych identyfikujących takich jak hasła, emaile, nazwy użytkownika, itp. Za pomocą Alby możesz używać swoich kont Lightning aby bezpiecznie logować się na stronach internetowych. Aby zapewnić kompatybilność z innymi portfelami musieliśmy zrobić kilka modyfikacji, które możesz skonfigurować tutaj. <0>Najlepiej gdy te opcje są WYŁĄCZONE.</0> Używaj ich tylko gdy masz stare konta.",
-        "legacy_lnurl_auth_202207": {
-          "title": "Stary (Legacy) LNURL-Auth",
-          "subtitle": "Generowanie kluczy dla LNURL-auth zmieniło się (w lipcu 2022 r.) Alby nie było kompatybilne z innymi implementacjami. To się zmieniło, ale teraz używane są inne klucze logowania. Jeśli używano wcześniej LNURL-auth do logowania, możesz nadal używać starej metody. Ta opcja później będzie usunięta, więc pamiętaj by przejść na nowy login."
-        },
-        "legacy_lnurl_auth": {
-          "title": "Stare podpisywanie dla LNDhub i LNbits",
-          "subtitle": "Podpisywanie wiadomości i logowanie z kontami LNDhub (np. BlueWallet) i LNbits zmieniło się (w marcu 2022 r.) Jeśli logowano się z tymi kontami możesz nadal włączyć stary sposób podpisywania. Ta opcja później będzie usunięta, więc pamiętaj by przejść na nowy login."
-        }
       },
       "camera_access": {
         "title": "Dostęp do kamery",
@@ -604,13 +587,10 @@
     },
     "nostr": {
       "title": "Nostr",
-      "allow": "Pozwól tej stronie na:",
       "content": "Ta strona prosi Cię aby podpisywać:",
       "allow_sign": "Pozwól {{host}} na podpisywanie:",
       "block_and_ignore": "Zablokuj i ignoruj {{host}}",
-      "block_added": "Dodano {{host}} do listy zablokowanych, odśwież stronę.",
-      "hide_details": "Ukryj szczegóły",
-      "view_details": "Pokaż szczegóły"
+      "block_added": "Dodano {{host}} do listy zablokowanych, odśwież stronę."
     },
     "transactions": {
       "title": "Transakcje"

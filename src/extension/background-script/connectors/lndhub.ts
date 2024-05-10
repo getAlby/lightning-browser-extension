@@ -1,17 +1,15 @@
 import fetchAdapter from "@vespaiach/axios-fetch-adapter";
 import type { AxiosResponse } from "axios";
 import axios, { AxiosRequestConfig, Method } from "axios";
-import lightningPayReq from "bolt11";
+import lightningPayReq from "bolt11-signet";
 import Base64 from "crypto-js/enc-base64";
 import Hex from "crypto-js/enc-hex";
 import hmacSHA256 from "crypto-js/hmac-sha256";
 import sha256 from "crypto-js/sha256";
-import utils from "~/common/lib/utils";
 import HashKeySigner from "~/common/utils/signer";
 import { Account } from "~/types";
 
 import { mergeTransactions } from "~/common/utils/helpers";
-import state from "../state";
 import Connector, {
   CheckPaymentArgs,
   CheckPaymentResponse,
@@ -171,6 +169,7 @@ export default class LndHub implements Connector {
       (transaction, index): ConnectorTransaction => ({
         id: `${index}`,
         memo: transaction.memo,
+        custom_records: transaction.custom_records,
         preimage: transaction.payment_preimage,
         payment_hash: Buffer.from(transaction.payment_hash.data).toString(
           "hex"
@@ -345,18 +344,11 @@ export default class LndHub implements Connector {
     if (!args.message) {
       return Promise.reject(new Error("Invalid message"));
     }
-    let message: string | Uint8Array;
-    message = sha256(args.message).toString(Hex);
-    let keyHex = sha256(
+    const message = sha256(args.message).toString(Hex);
+    const keyHex = sha256(
       `lndhub://${this.config.login}:${this.config.password}`
     ).toString(Hex);
-    const { settings } = state.getState();
-    if (settings.legacyLnurlAuth) {
-      message = utils.stringToUint8Array(args.message);
-      keyHex = sha256(
-        `LBE-LNDHUB-${this.config.url}-${this.config.login}-${this.config.password}`
-      ).toString(Hex);
-    }
+
     if (!keyHex) {
       return Promise.reject(new Error("Could not create key"));
     }

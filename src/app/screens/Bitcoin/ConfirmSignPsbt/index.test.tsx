@@ -89,7 +89,7 @@ describe("ConfirmSignPsbt", () => {
     const user = userEvent.setup();
 
     await act(async () => {
-      await user.click(screen.getByText("View details"));
+      await user.click(screen.getByText("Details"));
     });
 
     expect(
