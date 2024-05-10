@@ -243,9 +243,6 @@
         "send_satoshis": "⚡️ Envoyez des Satoshis ⚡️",
         "enable_now": "Activer maintenant"
       },
-      "allowance_view": {
-        "no_transactions": "Aucune transaction sur <0>{{name}}</0> pour le moment."
-      },
       "default_view": {
         "is_blocked_hint": "Alby est actuellement désactivé sur {{host}}",
         "block_removed": "{{hôte}} activé. Veuillez recharger le site Web."
@@ -608,8 +605,7 @@
       "edit_allowance": {
         "title": "Modifier l'allocation",
         "screen_reader": "Options d'allocation"
-      },
-      "edit_permissions": "Modifier les autorisations"
+      }
     },
     "qrcode_scanner": {
       "title": "Scanner le code QR",
@@ -670,14 +666,6 @@
     }
   },
   "permissions": {
-    "nostr": {
-      "getpublickey": "Lisez votre clé publique",
-      "nip04decrypt": "Déchiffrer les données",
-      "nip04encrypt": "Crypter les données",
-      "nip44decrypt": "Déchiffrer les données",
-      "nip44encrypt": "Crypter les données",
-      "signmessage": "Signez le message avec votre clé"
-    },
     "commando": {
       "bkpr-listbalances": "Liste de tous les soldes de compte actuels et historiques",
       "checkmessage": "Vérifiez que la signature a été générée par un nœud donné",

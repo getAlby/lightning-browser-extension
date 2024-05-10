@@ -209,9 +209,6 @@
         "send_satoshis": "⚡️ Lähetä Satoshis ⚡️",
         "enable_now": "Ota nyt käyttöön"
       },
-      "allowance_view": {
-        "no_transactions": "Ei vielä tapahtumia <0>{{name}}</0>:lla."
-      },
       "default_view": {
         "is_blocked_hint": "Alby on tällä hetkellä poissa käytöstä {{host}}:lla"
       }

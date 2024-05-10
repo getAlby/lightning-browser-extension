@@ -274,9 +274,6 @@
         "send_satoshis": "⚡️ Kirim Satoshis ⚡️",
         "enable_now": "Aktifkan Sekarang"
       },
-      "allowance_view": {
-        "no_transactions": "Tidak ada transaksi pada <0>{{name}}</0>."
-      },
       "default_view": {
         "is_blocked_hint": "Alby sedang tidak aktif pada {{host}}",
         "block_removed": "Aktifkan {{host}}. Silakan muat ulang website."
@@ -625,25 +622,6 @@
       "title": "Nostr",
       "hide_details": "Sembunyikan rincian",
       "block_and_ignore": "Blok dan abaikan {{host}}",
-      "kinds": {
-        "0": "metadata",
-        "2": "rekomendasi relay",
-        "3": "Kontak",
-        "4": "pesan langsung terenkripsi",
-        "5": "penghapusan event",
-        "7": "Reaksi",
-        "8": "lencana penghargaan",
-        "40": "pembuatan channel",
-        "41": "metadata channel",
-        "42": "pesan channel",
-        "9734": "permintaan zap",
-        "9735": "zap",
-        "10002": "daftar metadata relay",
-        "22242": "autentikasi klien",
-        "24133": "Sambungkan nostr",
-        "30009": "definisi lencana",
-        "30078": "data terkait aplikasi"
-      },
       "allow": "Izinkan website ini untuk:",
       "view_details": "Lihat rincian"
     },
@@ -661,8 +639,7 @@
       "tor_info": "Untuk menghubungkan melalui jaringan TOR kamu perlu memasang aplikasi pendamping Alby:"
     },
     "transactions": {
-      "title": "Transaksi",
-      "list_empty": "Tidak ada transaksi."
+      "title": "Transaksi"
     }
   },
   "components": {
@@ -744,13 +721,6 @@
     }
   },
   "permissions": {
-    "nostr": {
-      "nip04decrypt": "Dekripsi data",
-      "nip04encrypt": "Enkripsi data",
-      "nip44decrypt": "Dekripsi data",
-      "nip44encrypt": "Enkripsi data",
-      "getpublickey": "Membaca kunci publik Anda"
-    },
     "commando": {
       "decode": "Decode teks bolt11/bolt12/rune"
     },

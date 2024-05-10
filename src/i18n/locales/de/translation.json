@@ -165,8 +165,11 @@
           "title": "Verbinden mit <0>Blink Wallet</0>"
         },
         "token": {
-          "info": "Um deine Brieftasche zu verbinden, generiere einen API-Schlüssel im <0>Blink Dashboard (dashboard.blink.sv)</0>:<br>- logge dich mit deiner E-Mail oder Telefonnummer ein, wenn du Blink bereits nutzt<br>- wenn du noch keinen Account hast, kannst du einen neuen erstellen, indem du dich mit einer Telefonnummer einloggst<br>- erstelle einen neuen Key auf der Registerkarte API Keys<br>- gib ihm einen Namen und wähle den Lese- und Schreibbereich<br>- belasse die Standardeinstellung ohne Ablaufdatum oder wähle einen langen Zeitraum, um zu vermeiden, dass du deine Wallet regelmäßig neu verbinden musst<br>- kopiere den Key (beginnend mit blink_ ) und füge ihn in die Textbox unten ein.<br><br>Die Integration unterstützt derzeit nur die Verwendung der BTC-Wallet.<br>",
+          "info": "Um deine Brieftasche zu verbinden, generiere einen API-Schlüssel im <0>Blink Dashboard (dashboard.blink.sv)</0>:<br>- logge dich mit deiner E-Mail oder Telefonnummer ein, wenn du Blink bereits nutzt<br>- wenn du noch keinen Account hast, kannst du einen neuen erstellen, indem du dich mit einer Telefonnummer einloggst<br>- erstelle einen neuen Key auf der Registerkarte API Keys<br>- gib ihm einen Namen und wähle den Lese- und Schreibbereich<br>- belasse die Standardeinstellung ohne Ablaufdatum oder wähle einen langen Zeitraum, um zu vermeiden, dass du deine Wallet regelmäßig neu verbinden musst<br>- kopiere den Key (beginnend mit blink_ ) und füge ihn in die Textbox unten ein.<br>",
           "label": "Gebe deinen API-Schlüssel ein"
+        },
+        "currency": {
+          "label": "Wallet auswählen"
         }
       },
       "bitcoin_jungle": {
@@ -177,6 +180,9 @@
         "token": {
           "info": "Die {{label}}-Integration mit Alby befindet sich in der Alpha-Phase und wird nur für fortgeschrittene Benutzer empfohlen.<br><br>du kannst deinen Zugriffstoken abrufen, indem du die mobile App aufrufst, auf das Einstellungssymbol klicken und dann dreimal auf die Build-Nummer tippen, um das Entwicklermenü zu öffnen.<br><br>Das Zugriffstoken kann von hier kopiert werden.<br><br>",
           "label": "Gebe deien Access-Token ein"
+        },
+        "currency": {
+          "label": "Wallet auswählen"
         }
       },
       "btcpay": {
@@ -397,16 +403,19 @@
         "actions": {
           "get_started": {
             "title": "Erste Schritte mit Alby Extension",
-            "description": "Neu bei Alby Extension? Sieh dir unsere Anleitungen, Videos und Erklärungen an"
+            "description": "Neu bei Alby Extension? Sehe dir unsere Anleitungen, Videos und Erklärungen an"
           },
           "receive_bitcoin": {
             "title": "Bitcoin erhalten",
-            "description": "Hole dir Bitcoin an deine Lightning-Adresse, eine Lightning-Rechnung oder eine Bitcoin-Adresse."
+            "description": "Zahle dein Konto ein und erhalten über deine Blitzadresse oder eine Rechnung"
+          },
+          "setup_keys": {
+            "title": "Einrichten deiner Schlüssel",
+            "description": "Kümmer dich um deinen Master Key oder importiere dein bestehendes Nostr-Konto"
           }
         }
       },
       "allowance_view": {
-        "no_transactions": "Noch keine Transaktionen auf <0>{{Name}}</0>.",
         "sats": "sats",
         "budget_spent": "Budget",
         "total_spent": "Insgesamt ausgegeben",
@@ -525,10 +534,20 @@
             "use_mnemonic": "Hauptschlüssel für die Anmeldung bei Lightning-Anwendungen verwenden (LNURL Auth)"
           },
           "new": {
-            "title": "Was ist ein Hauptschlüssel?",
+            "title": "Masterschlüssel einrichten",
             "items": {
-              "usage": "Du kannst denselben Master Key in jede angeschlossene Wallet in der Alby Extension importieren und verwenden",
-              "keys": "Der Master Key ist deine Identität, mit der du die Protokolle wie Nostr, Liquid Network oder der Basisschicht von Bitcoin interagieren kannst."
+              "usage": "Du kannst denselben Hauptschlüssel in <0>jede angeschlossene Brieftasche in Alby</0> importieren und verwenden",
+              "keys": "Master Key ermöglicht die Interaktion mit Protokollen wie <0>Nostr</0>, <0>Liquid</0> oder <0>Basisschicht von Bitcoin</0>",
+              "nostr_key": "Du kannst jederzeit vorhandene Nostr-Schlüssel importieren und die von Master Key erzeugten überschreiben"
+            },
+            "nostr": "Ein bestehendes Nostr-Konto importieren",
+            "secure": {
+              "title": "Sichere deinen Hauptschlüssel",
+              "description": "Erfahre, was Master Key ist und sichere deine 12-Wörter-Wiederherstellungsphrase"
+            },
+            "import": {
+              "title": "Hast du bereits einen Hauptschlüssel?",
+              "description": "Gebe deine Wiederherstellungsphrase ein, um den Master Key in diese Wallet zu importieren."
             }
           },
           "inputs": {
@@ -536,8 +555,8 @@
           },
           "description": {
             "secure_recovery_phrase": "Schreibe sie an einem sicheren Ort auf und bewahren sie privat auf.",
-            "recovery_phrase": "Die Wiederherstellungsphrase ist ein Satz von 12 Wörtern, die deinen Master Key absichern",
-            "warning": "Die Wiederherstellungsphrase kann diese Brieftasche oder das darin befindliche Geld nicht wiederherstellen. Sie stellt nur die Identität wieder her, die du in den oben genannten Protokollen verwendet hast"
+            "recovery_phrase": "Die Wiederherstellungsphrase besteht aus 12 Wörtern, die <0>Ihren Hauptschlüssel sichern</0>",
+            "warning": "<0>Es kann diese Brieftasche oder das darin befindliche Guthaben nicht wiederherstellen,</0> es wird nur der Zugriff auf das oben genannte Protokoll wiederhergestellt"
           },
           "error_confirm": "Bitte vergewisser dich, dass du eine Sicherungskopie der Wiederherstellungsphrase erstellt hast.",
           "confirm": "Ich habe die Wiederherstellungsphrase zu meinem Hauptschlüssel an einem privaten und sicheren Ort gesichert."
@@ -647,35 +666,107 @@
       "allow_sign": "Erlaube dein {{host}} zu unterschreiben:",
       "view_details": "Details anzeigen",
       "hide_details": "Details ausblenden",
-      "kinds": {
-        "0": "Metadaten",
-        "1": "kurze Textnotiz",
-        "2": "Relais empfehlen",
-        "3": "Kontakte",
-        "4": "verschlüsselte Direktnachrichten",
-        "5": "Ereignislöschung",
-        "7": "Reaktion",
-        "8": "Badge Award",
-        "40": "Kanal Erstellung",
-        "41": "Kanal Metadaten",
-        "42": "Kanalnachricht",
-        "43": "Kanal verstecke Nachrichten",
-        "44": "Kanal stummschalten Benutzer",
-        "1984": "Berichterstattung",
-        "9734": "Zappanfrage",
-        "9735": "zap",
-        "10002": "Metadaten der Relaisliste",
-        "22242": "Client Authentifizierung",
-        "24133": "nostr verbinden",
-        "30008": "Profilabzeichen",
-        "30009": "Badge Beschreibung",
-        "30023": "Langform Inhalte",
-        "30078": "anwendungsspezifische Daten",
-        "unknown": "kind {{kind}}"
-      },
       "allow_sign_event": "Erlaube {{Gastgeber}}, ein <0>{{kind}}</0> Ereignis zu unterzeichnen",
       "allow_encrypt": "Erlaube {{host}}, die Nachricht zu verschlüsseln:",
-      "recipient": "Empfänger"
+      "recipient": "Empfänger",
+      "kinds": {
+        "unknown": {
+          "description": "Nicht identifizierte Aktion",
+          "title": "Art {{kind}}"
+        },
+        "0": {
+          "title": "Profil aktualisieren",
+          "description": "Aktualisiere deinen Namen, deine Beschreibung, dein Profilbild, deine Nostr-Adresse und weitere Profil-Metadaten."
+        },
+        "1": {
+          "title": "kurze Notiz",
+          "description": "Unterschreiben deine kurze Textnotiz"
+        },
+        "2": {
+          "title": "Relais empfehlen",
+          "description": "Ein empfohlenes Relais teilen"
+        },
+        "3": {
+          "title": "Verfolgungsliste aktualisieren",
+          "description": "Aktualisiere die Liste der Konten, denen du folgst"
+        },
+        "4": {
+          "title": "direkte Nachricht",
+          "description": "Eine verschlüsselte Direktnachricht senden"
+        },
+        "5": {
+          "title": "Notiz löschen",
+          "description": "Relays zum Löschen eines Ereignisses auffordern"
+        },
+        "7": {
+          "title": "reagieren",
+          "description": "Unterschreibe eine Reaktion auf eine Notiz"
+        },
+        "8": {
+          "title": "Anstecknadel",
+          "description": "Verleihung eines Abzeichens an ein Nostr-Profil"
+        },
+        "43": {
+          "title": "Channelmeldung ausblenden",
+          "description": "Ausblenden einer Textnachricht in einem Channel"
+        },
+        "44": {
+          "title": "Channelbenutzer stummschalten",
+          "description": "Alle Nachrichten eines Nostr-Profils ausblenden"
+        },
+        "9734": {
+          "title": "Anfrage zappen",
+          "description": "Anforderung einer Lightningzahlung"
+        },
+        "9735": {
+          "title": "Rechnung zappen",
+          "description": "Anzeige einer Bestätigung einer bezahlten Lightningrechnung"
+        },
+        "10002": {
+          "title": "Relaisliste",
+          "description": "Aktualisiere die bevorzugten Relais, um deine Notizen zu entdecken und die Notizen anderer zu empfangen"
+        },
+        "22242": {
+          "title": "authentifizieren",
+          "description": "Authentifizierung bei einem Relais"
+        },
+        "24133": {
+          "title": "Fernanzeige",
+          "description": "Ereignisse aus der Ferne anfordern und unterzeichnen"
+        },
+        "30008": {
+          "description": "Akzeptieren, Ablehnen und Ändern der Anzeigereihenfolge von verliehenen Abzeichen",
+          "title": "Profilabzeichen"
+        },
+        "30009": {
+          "title": "Ausweis erstellen",
+          "description": "Ein neues Abzeichen erstellen"
+        },
+        "30023": {
+          "title": "lange Notiz",
+          "description": "Signiere lange Notizen wie Artikel oder Blogbeiträge"
+        },
+        "30078": {
+          "title": "Anwendungsdaten",
+          "description": "Anwendungsspezifische Daten unterschreiben"
+        },
+        "40": {
+          "title": "Channel erstellen",
+          "description": "Einen öffentlichen Channel-Chat erstellen"
+        },
+        "41": {
+          "title": "Update-Channel",
+          "description": "Name, Beschreibung, Bild und zusätzliche Metadaten des Channel aktualisieren"
+        },
+        "42": {
+          "description": "Senden einer Textnachricht an einen Channel",
+          "title": "Channelnachricht senden"
+        },
+        "1984": {
+          "title": "Berichtsnotiz",
+          "description": "Einen Hinweis auf Spam, illegalen oder expliziten Inhalt melden"
+        }
+      }
     },
     "confirm_request_permission": {
       "title": "Antrag genehmigen",
@@ -786,7 +877,6 @@
     },
     "transactions": {
       "title": "Transaktionen",
-      "list_empty": "Noch keine Transaktionen verfügbar.",
       "description": "Buchungen für dieses Konto"
     },
     "distributions": {
@@ -923,8 +1013,21 @@
     },
     "nostr_enable": {
       "title": "Mit Nostr verbinden",
-      "request1": "Anfrage zum Lesen deines öffentlichen Nostr-Schlüssels",
-      "request2": "Anfrage zum Signieren von Ereignissen mit deinem privaten Schlüssel"
+      "description": "Wie sollten die Anfragen dieser Anwendung behandelt werden?",
+      "presets": {
+        "reasonable": {
+          "title": "Lass uns vernünftig sein",
+          "description": "Häufigste Anfragen automatisch genehmigen"
+        },
+        "paranoid": {
+          "description": "Unterschreibe nichts, ohne mich zu fragen!",
+          "title": "Ich bin ein bisschen paranoid"
+        },
+        "trust_fully": {
+          "title": "Ich vertraue ihr voll und ganz",
+          "description": "Alle Anfragen automatisch unterzeichnen (außer Zahlungen)"
+        }
+      }
     },
     "webbtc_enable": {
       "request2": "Rechnungen und Webbtc-Informationen anfordern",
@@ -947,9 +1050,8 @@
       "options": {
         "account": {
           "go_to_web_wallet": "Verwalte dein Web-Konto",
-          "wallet_settings": "Einstellungen deiner Wallet",
-          "add": "Verbinde deine Wallet",
-          "manage": "Wallets verwalten"
+          "wallet_settings": "Wallet-Einstellungen",
+          "add": "Verbinde deine Wallet"
         }
       },
       "screen_reader": "Dropdown umschalten",
@@ -989,19 +1091,20 @@
     "allowance_menu": {
       "edit_allowance": {
         "title": "Seiten Einstellung",
-        "screen_reader": "Zulässigkeitsoptionen"
+        "screen_reader": "Zulässigkeitsoptionen",
+        "always_allow": "Immer erlauben"
       },
       "enable_login": {
         "title": "Anmeldung auf der Webseite aktivieren",
         "subtitle": "Automatisches Einloggen ohne Bestätigung, wenn die Webseite dazu auffordert."
       },
-      "edit_permissions": "Berechtigungen bearbeiten",
-      "hint": "Die Änderung dieser Einstellung setzt das aktuelle Budget zurück",
+      "hint": "Durch die Änderung dieser Zahl wird das aktuelle Budget zurückgesetzt.",
       "new_budget": {
         "label": "Budget für Ein-Klick-Zahlungen",
         "link_label": "Festlegen eines Budgets für Ein-Klick-Zahlungen"
       },
-      "confirm_delete": "Bist du dir sicher, dass du die Verbindung zu dieser Webseite unterbrechen willst?"
+      "confirm_delete": "Bist du dir sicher, dass du die Verbindung zu dieser Webseite unterbrechen willst?",
+      "website_permissions": "Website-Berechtigungen"
     },
     "qrcode_scanner": {
       "actions": {
@@ -1030,7 +1133,8 @@
       "fee": "Gebühr",
       "open_location": "Webseite öffnen",
       "payment_hash": "Zahlung hHash",
-      "date_time": "Datum & Uhrzeit"
+      "date_time": "Datum & Uhrzeit",
+      "no_transactions": "Noch keine Transaktionen."
     },
     "budget_control": {
       "remember": {
@@ -1043,10 +1147,17 @@
     },
     "badge": {
       "label": {
-        "auth": "LOGIN",
-        "imported": "IMPORTIERT",
-        "budget": "BUDGET"
+        "auth": "login",
+        "imported": "importiert",
+        "budget": "Haushalt"
       }
+    },
+    "permissions_modal": {
+      "content_label": "Berechtigungen",
+      "set_permissions": "Berechtigungen festlegen:",
+      "ask_everytime": "Jedes Mal um <0>{{Erlaubnis}}</0> bitten",
+      "dont_ask_current": "Bitte nicht mehr um <0>{{Erlaubnis}}</0>",
+      "dont_ask_any": "Nicht mehr nach <0>irgendwelchen Nostr-Anfragen</0>"
     }
   },
   "common": {
@@ -1206,14 +1317,6 @@
       "newaddress": "Abrufen einer neuen Onchain-Adresse",
       "nextaddr": "Abrufen der nächsten unbenutzten Adresse in der Wallet"
     },
-    "nostr": {
-      "getpublickey": "Lese deinen öffentlichen Schlüssel",
-      "nip04decrypt": "Daten entschlüsseln",
-      "nip04encrypt": "Daten verschlüsseln",
-      "nip44decrypt": "Daten entschlüsseln",
-      "nip44encrypt": "Daten verschlüsseln",
-      "signmessage": "Unterschreibe deine Nachricht mit deinem Schlüssel"
-    },
     "lnc": {
       "connectpeer": "Stelle eine Verbindung zu einer Gegenstelle her",
       "disconnectpeer": "Trenne die Verbindung zu einer entfernten Gegenstelle",
@@ -1245,14 +1348,57 @@
       "newaddress": "Abrufen einer neuen Onchain-Adresse"
     },
     "webln": {
-      "getbalance": "Den Kontostand abfragen"
-    },
-    "liquid": {
-      "getaddress": "Lese deine Liquid-Empfangsadresse",
-      "signschnorr": "Unterschreibe die Nachricht mit deinem Schlüssel"
+      "getbalance": {
+        "description": "Lese den Saldo deines Kontos ab",
+        "title": "das Gleichgewicht erhalten"
+      }
     },
     "bitcoin": {
-      "getaddress": "Lese deine Bitcoin-Empfangsadresse"
+      "getaddress": {
+        "title": "Adresse abrufen",
+        "description": "Lese deine Bitcoin-Empfangsadresse"
+      }
+    },
+    "liquid": {
+      "getaddress": {
+        "title": "Adresse abrufen",
+        "description": "Lese deine Liquid-Empfangsadresse"
+      },
+      "signschnorr": {
+        "title": "Zeichen schnorr",
+        "description": "Nachricht mit deinem Schlüssel unterschreiben"
+      }
+    },
+    "nostr": {
+      "getpublickey": {
+        "title": "öffentlichen Schlüssel lesen",
+        "description": "Lese deinen öffentlichen Schlüssel"
+      },
+      "nip04decrypt": {
+        "title": "entschlüsseln (nip04)",
+        "description": "Daten entschlüsseln"
+      },
+      "nip04encrypt": {
+        "title": "verschlüsseln (nip04)",
+        "description": "Daten verschlüsseln"
+      },
+      "nip44encrypt": {
+        "title": "verschlüsseln (nip44)",
+        "description": "Daten verschlüsseln"
+      },
+      "decrypt": "Daten entschlüsseln",
+      "nip44decrypt": {
+        "title": "entschlüsseln (nip44)",
+        "description": "Daten entschlüsseln"
+      },
+      "signschnorr": {
+        "title": "Zeichen schnorr",
+        "description": "Nachricht mit deinem Schlüssel unterschreiben"
+      },
+      "signmessage": {
+        "title": "Zeichen Nachricht",
+        "description": "Alle nostr-Veranstaltungen unterzeichnen"
+      }
     }
   }
 }
