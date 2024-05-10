@@ -199,7 +199,7 @@ function NostrSettings() {
               <div className="mt-4 flex gap-4 items-center justify-center">
                 {nostrPrivateKey && (
                   <Button
-                    error
+                    destructive
                     label={t("nostr.settings.remove")}
                     onClick={handleDeleteKeys}
                   />

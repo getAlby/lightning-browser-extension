@@ -282,11 +282,9 @@
         "export": {
           "export_uri": "LNDHub凭证URI",
           "scan_qr": "通过扫描二维码将这个钱包导入Zeus或BlueWallet。",
-          "title": "连接移动钱包",
           "screen_reader": "导出帐户详情",
           "waiting": "等待LndHub的数据...",
-          "your_ln_address": "你的闪电地址：",
-          "description": "将允许你在移动钱包上连接并使用此帐户，例如 <0>BlueWallet</0> 和 <1>Zeus</1>。"
+          "your_ln_address": "你的闪电地址："
         },
         "remove": {
           "error": "输入的帐户名称不匹配。"
@@ -303,7 +301,6 @@
         "mnemonic": {
           "backup": {
             "button": "备份恢复短语",
-            "warning": "⚠️ 别忘了将你的恢复短语备份！不备份可能会导致永久失去对你的主密钥、Nostr 身份或使用此密钥管理的资产的访问权限。",
             "save": "保存主密钥",
             "protocols": {
               "nostr": "Nostr"
@@ -311,7 +308,6 @@
             "description": "请写下恢复短语，以便能够在新设备上恢复主密钥，或以防失去帐户访问。"
           },
           "existing_nostr_key_notice": "ℹ️ 该账户已设置 nostr 私钥，因此不会从此主密钥派生。你可以通过你的帐户设置管理你的 nostr 密钥。",
-          "title": "🔑密钥管理",
           "saved": "主密钥已加密并成功保存。",
           "generate": {
             "title": "生成新的主密钥",
@@ -330,13 +326,10 @@
         },
         "remove_secretkey": {
           "success": "已成功移除主密钥。",
-          "title": "移除主密钥",
-          "subtitle": "将主密钥从该帐户移除。"
+          "title": "移除主密钥"
         },
         "no_mnemonic_hint": "💡 你还没有主密钥。<0>点击此处e</0></div>来生成你的主密钥并解锁这些设置。",
         "network": {
-          "title": "网络",
-          "subtitle": "选择网络来派生地址并解码比特币和 Liquid 交易",
           "options": {
             "bitcoin": "主网",
             "testnet": "测试网",
@@ -373,17 +366,14 @@
       "title": "你的⚡网站"
     },
     "settings": {
-      "lnurl_auth": {
-        "title": "LNURL-认证",
-        "legacy_lnurl_auth": {
-          "title": "LNDhub 和 LNbits 的旧签名方式",
-          "subtitle": "用 LNDhub（如 BlueWallet）和 LNbits 帐户进行的消息签署和登录已经改变（2022年3月）。如果你使用这些帐户登录，你仍然可以启用旧的签名方法。这个选项以后会被删除，请确保切换到新的登录方式。"
+      "nostr": {
+        "private_key": {
+          "title": "私钥",
+          "subtitle": "此部分已移至帐户页面，因为密钥现在是特定于帐户的。",
+          "go_to": "前往帐户"
         },
-        "hint": "是一个通用的认证协议。它使用数字签名对用户进行认证。该协议不需要任何其他识别信息，如密码、电子邮件、用户名或类似信息。通过 Alby，你可以使用你的闪电帐户安全地登录网站。为了与其他钱包兼容，我们不得不做一些改变，你可以在这里进行配置。 <0>理想情况下，所有这些选项都是关闭的。</0>仅当你有旧帐户时才应该启用它们。",
-        "legacy_lnurl_auth_202207": {
-          "subtitle": "LNURL-认证的密钥生成已经改变（2022年7月）。Alby与其他实施方式不再兼容。这已被改变了，但现在使用的是不同的登录密钥。如果你之前使用LNURL-认证登录，你仍然可以启用旧方法。这个选项以后会被删除，请务必切换到新的登录方式。",
-          "title": "旧版 LNURL-认证"
-        }
+        "title": "Nostr",
+        "hint": "是一个简单而开放的协议，旨在创建抗审查的社交网络。 Nostr 使用加密密钥。你可以使用你的密钥对内容进行签署并将其发送到多个中继。你可以使用 Alby 来管理你的 Nostr 密钥。许多 Nostr 应用程序允许你轻松地使用 Alby 扩展中的密钥。"
       },
       "browser_notifications": {
         "title": "浏览器通知",
@@ -538,13 +528,10 @@
     },
     "nostr": {
       "title": "Nostr",
-      "allow": "允许该网站:",
       "block_and_ignore": "阻止并忽略 {{host}}",
       "content": "该网站要求你签署:",
       "allow_sign": "允许{{host}}签署：",
-      "block_added": "已将{{host}}添加到屏蔽列表，请重新加载网站。",
-      "view_details": "查看详情",
-      "hide_details": "隐藏详情"
+      "block_added": "已将{{host}}添加到屏蔽列表，请重新加载网站。"
     },
     "lnurlpay": {
       "amount": {
@@ -664,12 +651,10 @@
     },
     "confirm_sign_pset": {
       "title": "签署",
-      "view_details": "查看详情",
       "inputs": "输入",
       "allow_sign": "该网站要求你签署一笔 Liquid 交易：",
       "view_raw_transaction": "查看原始交易（Base64）",
       "hide_raw_transaction": "隐藏原始交易（Base64）",
-      "hide_details": "隐藏详情",
       "outputs": "输出",
       "amount": "{{amount}} {{ticker}}"
     },

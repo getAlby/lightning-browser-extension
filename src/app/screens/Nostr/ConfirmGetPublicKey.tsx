@@ -1,15 +1,16 @@
-import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
 import PublisherCard from "@components/PublisherCard";
-import Checkbox from "@components/form/Checkbox";
-import { PopiconsCheckLine } from "@popicons/react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import ConfirmOrCancel from "~/app/components/ConfirmOrCancel";
+import ContentMessage from "~/app/components/ContentMessage";
+import PermissionModal from "~/app/components/Permissions/PermissionModal";
+import PermissionSelector from "~/app/components/Permissions/PermissionSelector";
 import ScreenHeader from "~/app/components/ScreenHeader";
+import toast from "~/app/components/Toast";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
-import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
-import { OriginData } from "~/types";
+import { OriginData, PermissionOption } from "~/types";
 
 function NostrConfirmGetPublicKey() {
   const { t } = useTranslation("translation", {
@@ -20,31 +21,43 @@ function NostrConfirmGetPublicKey() {
   const navState = useNavigationState();
   const origin = navState.origin as OriginData;
   const [loading, setLoading] = useState(false);
-  const [rememberPermission, setRememberPermission] = useState(true);
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const [permissionOption, setPermissionOption] = useState<PermissionOption>(
+    PermissionOption.ASK_EVERYTIME
+  );
 
   function confirm() {
     setLoading(true);
-    msg.reply({
-      confirm: true,
-      rememberPermission,
-      blocked: false,
-    });
-    setLoading(false);
+    try {
+      setLoading(true);
+      msg.reply({
+        confirm: true,
+        permissionOption: permissionOption,
+        blocked: false,
+      });
+    } catch (e) {
+      console.error(e);
+      if (e instanceof Error) toast.error(`${tCommon("error")}: ${e.message}`);
+    } finally {
+      setLoading(false);
+    }
   }
 
-  function reject(event: React.MouseEvent<HTMLAnchorElement>) {
-    event.preventDefault();
-    msg.error(USER_REJECTED_ERROR);
-  }
-
-  async function block(event: React.MouseEvent<HTMLAnchorElement>) {
-    event.preventDefault();
-    await msg.request("addBlocklist", {
-      domain: origin.domain,
-      host: origin.host,
-    });
-    alert(t("block_added", { host: origin.host }));
-    msg.error(USER_REJECTED_ERROR);
+  function reject(e: React.MouseEvent<HTMLAnchorElement>) {
+    try {
+      setLoading(true);
+      msg.reply({
+        confirm: false,
+        permissionOption: permissionOption,
+        blocked: true,
+      });
+    } catch (e) {
+      console.error(e);
+      if (e instanceof Error) toast.error(`${tCommon("error")}: ${e.message}`);
+    } finally {
+      setLoading(false);
+    }
   }
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -61,52 +74,43 @@ function NostrConfirmGetPublicKey() {
             title={origin.name}
             image={origin.icon}
             url={origin.host}
-            isSmall={false}
           />
 
-          <div className="dark:text-white pt-6 mb-4">
-            <p className="mb-2">{t("allow")}</p>
-            <div className="mb-2 flex items-center">
-              <PopiconsCheckLine className="w-5 h-5 mr-2" />
-              <p className="dark:text-white">
-                {tPermissions("nostr.getpublickey.description")}
-              </p>
-            </div>
-          </div>
+          <ContentMessage
+            heading={t("allow", {
+              publisher: origin.host,
+              action: tPermissions("nostr.getpublickey.title"),
+            })}
+          />
         </div>
 
         <form onSubmit={handleSubmit}>
-          <div className="flex items-center mb-4">
-            <Checkbox
-              id="remember_permission"
-              name="remember_permission"
-              checked={rememberPermission}
-              onChange={(event) => {
-                setRememberPermission(event.target.checked);
+          <div className="text-center flex flex-col gap-4">
+            <PermissionModal
+              isOpen={modalOpen}
+              onClose={() => {
+                setModalOpen(false);
               }}
+              permissionCallback={(permission) => {
+                setPermissionOption(permission);
+                setModalOpen(false);
+              }}
+              permission={tPermissions("nostr.getpublickey.title")}
             />
-            <label
-              htmlFor="remember_permission"
-              className="cursor-pointer ml-2 block text-sm text-gray-900 font-medium dark:text-white"
-            >
-              {tCommon("actions.remember")}
-            </label>
-          </div>
-
-          <div className="text-center flex flex-col">
             <ConfirmOrCancel
               disabled={loading}
               loading={loading}
-              label={tCommon("actions.confirm")}
               onCancel={reject}
+              cancelLabel={tCommon("actions.deny")}
+              destructive
             />
-            <a
-              className="mt-4 underline text-sm text-gray-400 overflow-hidden text-ellipsis whitespace-nowrap"
-              href="#"
-              onClick={block}
-            >
-              {t("block_and_ignore", { host: origin.host })}
-            </a>
+            <PermissionSelector
+              i18nKey={permissionOption}
+              values={{
+                permission: tPermissions("nostr.getpublickey.title"),
+              }}
+              onChange={() => setModalOpen(true)}
+            />
           </div>
         </form>
       </Container>
