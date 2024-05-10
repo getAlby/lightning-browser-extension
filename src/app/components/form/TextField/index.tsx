@@ -1,7 +1,7 @@
 import Input from "../Input";
 
 export type Props = {
-  label: string;
+  label: string | React.ReactNode;
   hint?: string;
   suffix?: string;
   endAdornment?: React.ReactNode;

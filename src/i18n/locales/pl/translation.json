@@ -298,13 +298,11 @@
           "placeholder": "Nazwa wyświetlana konta"
         },
         "export": {
-          "title": "Podłącz swój portfel mobilny",
           "screen_reader": "Eksportuj dane konta",
           "waiting": "oczekiwanie na dane LndHub...",
           "your_ln_address": "Twój adres Lightning:",
           "export_uri": "Adres LNDHub",
-          "scan_qr": "Zaimportuj ten portfel do Zeusa lub BlueWallet skanując kod QR.",
-          "description": "Pozwala na połączenie i korzystanie z tego konta w mobilnych portfelach takich jak <0>Blue Wallet</0> i <1>Zeus</1>."
+          "scan_qr": "Zaimportuj ten portfel do Zeusa lub BlueWallet skanując kod QR."
         },
         "nostr": {
           "title": "Nostr",
@@ -345,7 +343,6 @@
         },
         "mnemonic": {
           "saved": "Klucz Główny został zaszyfrowany i zapisany pomyślnie.",
-          "title": "🔑 Zarządzanie kluczami",
           "backup": {
             "protocols": {
               "nostr": "Nostr"
@@ -363,13 +360,11 @@
         },
         "no_mnemonic_hint": "💡 Nie masz jeszcze Klucza Głównego. <0>Kliknij tutaj</0></div>, aby utworzyć swój Klucz Główny i odblokować te ustawienia.",
         "network": {
-          "subtitle": "Wybierz sieć, aby wygenerować adresy i odczytać transakcje bitcoinowe oraz w sieci Liquid",
           "options": {
             "testnet": "Testnet (sieć testowa)",
             "bitcoin": "Mainnet (sieć główna)",
             "regtest": "Regtest (sieć testów regresji)"
-          },
-          "title": "Sieć"
+          }
         }
       }
     },

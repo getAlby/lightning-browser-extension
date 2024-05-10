@@ -256,7 +256,6 @@
           "placeholder": "Nume cont"
         },
         "export": {
-          "title": "Exporta cont",
           "screen_reader": "Exporta date cont",
           "waiting": "in asteptarea datelor LNDHub...",
           "your_ln_address": "Adresa ta Lightning:",

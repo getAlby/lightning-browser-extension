@@ -277,7 +277,6 @@
           "placeholder": "Nombre de la Cuenta"
         },
         "export": {
-          "title": "Exportar Cuenta",
           "screen_reader": "Exportar los detalles de la cuenta",
           "your_ln_address": "Tu Dirección Lightning:",
           "scan_qr": "Importe esta billetera a Zeus o BlueWallet escaneando el código QR.",

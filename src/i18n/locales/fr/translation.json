@@ -256,7 +256,6 @@
           "placeholder": "Nom du compte"
         },
         "export": {
-          "title": "Compte d'exportation",
           "screen_reader": "Exporter les détails du compte",
           "waiting": "en attente des données LndHub...",
           "your_ln_address": "Votre adresse Lightning :",
