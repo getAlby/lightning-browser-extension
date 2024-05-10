@@ -780,11 +780,8 @@
     },
     "nostr": {
       "title": "Nostr",
-      "allow": "به این وبسایت اجازه دهید که:",
       "content": "این وبسایت از شما می خواهد که امضا کنید:",
       "allow_sign": "به {{host}} اجاره امضا بدهید:",
-      "view_details": "مشاهده جزییات",
-      "hide_details": "پنهان کردن جزییات",
       "block_and_ignore": "مسدود کردن و نادیده گرفتن {{host}}",
       "block_added": "{{host}} به لیست مسدودی ها افزوده شد، لطفا وبسایت را دوباره بارگیری کنید.",
       "recipient": "گیرنده",
@@ -926,11 +923,9 @@
       "outputs": "خروجی ها",
       "amount": "{{amount}} {{ticker}}",
       "title": "امضا",
-      "view_details": "دیدن جزییات",
       "view_raw_transaction": "دیدن تراکنش خام (Base64)",
       "hide_raw_transaction": "پنهان کردن تراکنش خام (Base64)",
-      "allow_sign": "این وبسایت از شما می خواهد یک تراکنش Liquid امضا کنید",
-      "hide_details": "پنهان کردن جزییات"
+      "allow_sign": "این وبسایت از شما می خواهد یک تراکنش Liquid امضا کنید"
     },
     "bitcoin": {
       "confirm_get_address": {
@@ -941,8 +936,6 @@
       "block_and_ignore": "مسدود کردن و نادیده گرفتن {{host}}",
       "block_added": "{{host}} به لیست مسدودی ها افزوده شد، لطفا وبسایت را دوباره بارگیری کنید.",
       "confirm_sign_psbt": {
-        "view_details": "دیدن جزییات",
-        "hide_details": "پنهان کردن جزییات",
         "title": "امضا",
         "view_raw_transaction": "دیدن تراکنش خام (Hex)",
         "hide_raw_transaction": "پنهان کردن تراکنش خام (Hex)",

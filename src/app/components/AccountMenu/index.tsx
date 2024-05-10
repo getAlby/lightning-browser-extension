@@ -1,6 +1,7 @@
 import {
   PopiconsChevronBottomLine,
   PopiconsCirclePlusLine,
+  PopiconsGlobeLine,
   PopiconsWalletLine,
 } from "@popicons/react";
 import { useEffect } from "react";
@@ -14,7 +15,6 @@ import { useAccounts } from "~/app/context/AccountsContext";
 import { isAlbyLNDHubAccount, isAlbyOAuthAccount } from "~/app/utils";
 import utils from "~/common/lib/utils";
 
-import PopiconsGlobeLine from "~/app/icons/popicons/GlobeLine";
 import Menu from "../Menu";
 
 export type Props = {

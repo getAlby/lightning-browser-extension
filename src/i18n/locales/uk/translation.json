@@ -527,7 +527,6 @@
     },
     "nostr": {
       "title": "",
-      "allow": "",
       "content": "",
       "allow_sign": "",
       "block_and_ignore": "",
