@@ -444,7 +444,7 @@
           "backup": {
             "title": "Back up Your Recovery Phrase",
             "save": "Save Master Key",
-            "button": "View recovery phrase",
+            "button": "View Recovery Phrase",
             "warning": "Don’t forget to back up your recovery phrase! Not backing it up your key might result in permanently loosing access to your Master Key, Nostr identity or assets you manage with this key.",
             "description": "Write down the recovery phrase to be able to restore your Master Key on a new device or in case you lose access to your account.",
             "protocols": {
