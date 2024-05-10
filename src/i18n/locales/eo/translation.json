@@ -433,7 +433,6 @@
     },
     "nostr": {
       "title": "Nostr",
-      "allow": "",
       "block_and_ignore": ""
     }
   },

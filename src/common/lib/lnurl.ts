@@ -1,6 +1,6 @@
 import fetchAdapter from "@vespaiach/axios-fetch-adapter";
 import axios from "axios";
-import lightningPayReq from "bolt11";
+import lightningPayReq from "bolt11-signet";
 import { isLNURLDetailsError } from "~/common/utils/typeHelpers";
 import {
   LNURLAuthServiceResponse,

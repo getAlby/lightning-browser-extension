@@ -656,21 +656,14 @@
     },
     "nostr": {
       "title": "Nostr",
-      "allow": "Erlaube dieser Webseite:",
       "content": "Auf dieser Webseite wirst du aufgefordert zu signieren:",
       "block_and_ignore": "Blockieren und Ignorieren von {{host}}",
       "block_added": "{{host}} zur Blockliste hinzugefügt, bitte lade deine Webseite neu.",
       "allow_sign": "Erlaube dein {{host}} zu unterschreiben:",
-      "view_details": "Details anzeigen",
-      "hide_details": "Details ausblenden",
       "allow_sign_event": "Erlaube {{Gastgeber}}, ein <0>{{kind}}</0> Ereignis zu unterzeichnen",
       "allow_encrypt": "Erlaube {{host}}, die Nachricht zu verschlüsseln:",
       "recipient": "Empfänger",
       "kinds": {
-        "unknown": {
-          "description": "Nicht identifizierte Aktion",
-          "title": "Art {{kind}}"
-        },
         "0": {
           "title": "Profil aktualisieren",
           "description": "Aktualisiere deinen Namen, deine Beschreibung, dein Profilbild, deine Nostr-Adresse und weitere Profil-Metadaten."
@@ -703,6 +696,18 @@
           "title": "Anstecknadel",
           "description": "Verleihung eines Abzeichens an ein Nostr-Profil"
         },
+        "40": {
+          "title": "Channel erstellen",
+          "description": "Einen öffentlichen Channel-Chat erstellen"
+        },
+        "41": {
+          "title": "Update-Channel",
+          "description": "Name, Beschreibung, Bild und zusätzliche Metadaten des Channel aktualisieren"
+        },
+        "42": {
+          "description": "Senden einer Textnachricht an einen Channel",
+          "title": "Channelnachricht senden"
+        },
         "43": {
           "title": "Channelmeldung ausblenden",
           "description": "Ausblenden einer Textnachricht in einem Channel"
@@ -710,6 +715,10 @@
         "44": {
           "title": "Channelbenutzer stummschalten",
           "description": "Alle Nachrichten eines Nostr-Profils ausblenden"
+        },
+        "1984": {
+          "title": "Berichtsnotiz",
+          "description": "Einen Hinweis auf Spam, illegalen oder expliziten Inhalt melden"
         },
         "9734": {
           "title": "Anfrage zappen",
@@ -747,21 +756,9 @@
           "title": "Anwendungsdaten",
           "description": "Anwendungsspezifische Daten unterschreiben"
         },
-        "40": {
-          "title": "Channel erstellen",
-          "description": "Einen öffentlichen Channel-Chat erstellen"
-        },
-        "41": {
-          "title": "Update-Channel",
-          "description": "Name, Beschreibung, Bild und zusätzliche Metadaten des Channel aktualisieren"
-        },
-        "42": {
-          "description": "Senden einer Textnachricht an einen Channel",
-          "title": "Channelnachricht senden"
-        },
-        "1984": {
-          "title": "Berichtsnotiz",
-          "description": "Einen Hinweis auf Spam, illegalen oder expliziten Inhalt melden"
+        "unknown": {
+          "description": "Nicht identifizierte Aktion",
+          "title": "Art {{kind}}"
         }
       }
     },
@@ -929,8 +926,6 @@
     "confirm_sign_pset": {
       "title": "Unterschrift",
       "allow_sign": "Auf dieser Webseite wirst du aufgefordert, eine Liquid-Transaktion zu unterzeichnen",
-      "view_details": "Details anzeigen",
-      "hide_details": "Details ausblenden",
       "view_raw_transaction": "Rohtransaktion anzeigen (Base64)",
       "hide_raw_transaction": "Rohtransaktion ausblenden (Base64)",
       "inputs": "Eingaben",
@@ -951,9 +946,7 @@
         "view_raw_transaction": "Rohtransaktion anzeigen (Hex)",
         "inputs": "Eingaben",
         "fee": "Gebühr",
-        "hide_details": "Details ausblenden",
         "allow_sign": "Diese Webseite fordert dich auf, eine Bitcoin-Transaktion zu unterzeichnen",
-        "view_details": "Details anzeigen",
         "outputs": "Ausgänge"
       }
     },

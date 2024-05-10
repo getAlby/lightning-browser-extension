@@ -1,6 +1,6 @@
 import fetchAdapter from "@vespaiach/axios-fetch-adapter";
 import axios, { AxiosRequestConfig } from "axios";
-import lightningPayReq from "bolt11";
+import lightningPayReq from "bolt11-signet";
 import { ACCOUNT_CURRENCIES, CURRENCIES } from "~/common/constants";
 import { getPaymentRequestDescription } from "~/common/utils/paymentRequest";
 import { getCurrencyRateWithCache } from "~/extension/background-script/actions/cache/getCurrencyRate";

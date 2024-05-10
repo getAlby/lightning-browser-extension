@@ -425,7 +425,6 @@
     },
     "nostr": {
       "title": "Nostr",
-      "allow": "Salli {{host}}:",
       "block_and_ignore": "Estä ja jätä huomiotta {{host}}"
     }
   },

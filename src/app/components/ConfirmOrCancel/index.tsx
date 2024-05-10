@@ -8,6 +8,8 @@ export type Props = {
   disabled?: boolean;
   loading?: boolean;
   label?: string;
+  destructive?: boolean;
+  cancelLabel?: string;
   onConfirm?: MouseEventHandler;
   onCancel: MouseEventHandler;
   isFocused?: boolean;
@@ -16,6 +18,8 @@ export type Props = {
 export default function ConfirmOrCancel({
   disabled = false,
   loading = false,
+  destructive = false,
+  cancelLabel = i18n.t("common:actions.cancel"),
   label = i18n.t("common:actions.confirm"),
   onConfirm,
   onCancel,
@@ -32,8 +36,9 @@ export default function ConfirmOrCancel({
     <div className="flex flex-row justify-between">
       <Button
         onClick={onCancel}
-        label={tCommon("actions.cancel")}
+        label={cancelLabel ? cancelLabel : tCommon("actions.cancel")}
         halfWidth
+        destructive={destructive}
         disabled={loading}
       />
       <Button

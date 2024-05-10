@@ -595,13 +595,10 @@
     },
     "nostr": {
       "title": "Nostr",
-      "allow": "允許该網站：",
       "content": "該網站要求你簽署：",
       "allow_sign": "允許 {{host}} 簽名：",
       "block_and_ignore": "阻止並忽略 {{host}}",
-      "block_added": "已將 {{host}} 添加到阻止列表，請重新加載網站。",
-      "view_details": "查看詳情",
-      "hide_details": "隱藏詳情"
+      "block_added": "已將 {{host}} 添加到阻止列表，請重新加載網站。"
     },
     "transactions": {
       "title": "交易"
@@ -659,8 +656,6 @@
     "confirm_sign_pset": {
       "title": "簽署",
       "allow_sign": "該網站要求你簽署一筆 Liquid 交易：",
-      "view_details": "查看詳情",
-      "hide_details": "隱藏詳情",
       "inputs": "輸入",
       "outputs": "輸出",
       "amount": "{{amount}} {{ticker}}",
