@@ -8,6 +8,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Hyperlink from "~/app/components/Hyperlink";
 import PasswordViewAdornment from "~/app/components/PasswordViewAdornment";
 import { useAccount } from "~/app/context/AccountContext";
+import { useNavigationState } from "~/app/hooks/useNavigationState";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
 
@@ -17,6 +18,7 @@ function Unlock() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const navState = useNavigationState();
   const location = useLocation() as {
     state: { from?: { pathname?: string } };
   };
@@ -45,6 +47,7 @@ function Unlock() {
     setLoading(true);
     auth
       .unlock(password, () => {
+        if (navState.action === "unlock") msg.reply({ unlocked: true });
         navigate(from, { replace: true });
         setLoading(false);
       })
