@@ -11,9 +11,9 @@ export default function Alert({ type, children }: Props) {
       className={classNames(
         "rounded-md p-3",
         type == "warn" &&
-          "text-orange-700 bg-orange-50 dark:text-orange-200 dark:bg-orange-900",
+          "text-orange-700 dark:text-orange-300 bg-orange-50 dark:bg-orange-900 border border-orange-100",
         type == "info" &&
-          "text-blue-700 bg-blue-50 dark:text-blue-300 dark:bg-blue-900"
+          "text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-900 border border-blue-100"
       )}
     >
       {children}
