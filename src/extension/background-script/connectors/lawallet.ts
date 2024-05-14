@@ -88,6 +88,7 @@ export default class LaWallet implements Connector {
       "signMessage",
       "getInvoices",
       "getBalance",
+      "getTransactions",
     ];
   }
 
