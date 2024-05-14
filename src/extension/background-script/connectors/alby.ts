@@ -2,7 +2,6 @@ import { auth, Client } from "@getalby/sdk";
 import {
   CreateSwapParams,
   CreateSwapResponse,
-  GetAccountInformationResponse,
   Invoice,
   RequestOptions,
   SwapInfoResponse,
@@ -10,7 +9,7 @@ import {
 } from "@getalby/sdk/dist/types";
 import browser from "webextension-polyfill";
 import { decryptData, encryptData } from "~/common/lib/crypto";
-import { Account, OAuthToken } from "~/types";
+import { Account, GetAccountInformationResponses, OAuthToken } from "~/types";
 import state from "../state";
 import Connector, {
   CheckPaymentArgs,
@@ -35,6 +34,26 @@ interface Config {
   password: string;
   url: string;
   oAuthToken: OAuthToken | undefined;
+}
+
+interface UserDetails {
+  identifier: string;
+  email: string;
+  name: string;
+  avatar: string | null;
+  lightning_address: string;
+  shared_node: boolean;
+  node_required: boolean;
+  limits: {
+    max_send_volume: number;
+    max_send_amount: number;
+    max_receive_volume: number;
+    max_receive_amount: number;
+    max_account_balance: number;
+    max_volume_period_in_days: number;
+  };
+  node_type: string;
+  node_connection_error_count: number;
 }
 
 export default class Alby implements Connector {
@@ -116,13 +135,16 @@ export default class Alby implements Connector {
   }
 
   async getInfo(): Promise<
-    GetInfoResponse<WebLNNode & GetAccountInformationResponse>
+    GetInfoResponse<WebLNNode & GetAccountInformationResponses>
   > {
     const cacheKey = "getInfo";
     const cacheValue = this._cache.get(cacheKey) as GetInfoResponse<
-      WebLNNode & GetAccountInformationResponse
+      WebLNNode & GetAccountInformationResponses
     >;
-    if (cacheValue) {
+
+    const node_required = await this._isNodeRequired();
+
+    if (cacheValue && cacheValue.data.node_required === node_required) {
       return cacheValue;
     }
 
@@ -130,9 +152,11 @@ export default class Alby implements Connector {
       const info = await this._request((client) =>
         client.accountInformation({})
       );
+
       const returnValue = {
         data: {
           ...info,
+          node_required: node_required,
           alias: "🐝 getalby.com",
         },
       };
@@ -259,7 +283,6 @@ export default class Alby implements Connector {
         callback: redirectURL,
         user_agent: `lightning-browser-extension:${process.env.VERSION}`,
         scopes: [
-          "invoices:read",
           "account:read",
           "balance:read",
           "invoices:create",
@@ -406,5 +429,46 @@ export default class Alby implements Connector {
       console.error("Invalid token");
       throw new Error("Invalid token");
     }
+  }
+
+  private async _isNodeRequired() {
+    const url = `${process.env.ALBY_API_URL}/internal/users`;
+
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        ...(await this._authUser?.getAuthHeader()),
+        "User-Agent": `lightning-browser-extension:${process.env.VERSION}`,
+        "X-User-Agent": `lightning-browser-extension:${process.env.VERSION}`,
+      },
+    };
+
+    try {
+      const details = await this._genericRequest<UserDetails>(
+        url,
+        requestOptions
+      );
+
+      return details.node_required;
+    } catch (error) {
+      console.error("Error fetching limits:", error);
+      throw error;
+    }
+  }
+
+  private async _genericRequest<T>(
+    url: RequestInfo,
+    init: RequestInit
+  ): Promise<T> {
+    const res = await fetch(url, init);
+
+    if (!res.ok) {
+      throw new Error(`HTTP error! status: ${res.status}`);
+    }
+
+    const data: T = await res.json();
+
+    return data;
   }
 }

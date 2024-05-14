@@ -243,9 +243,6 @@
         "send_satoshis": "⚡️  Satoshis पाठवा ⚡️",
         "enable_now": "आता सुरू करा"
       },
-      "allowance_view": {
-        "no_transactions": "अद्याप <0>{{name}}</0> वर कोणतेही व्यवहार नाहीत."
-      },
       "default_view": {
         "is_blocked_hint": "Alby सध्या {{host}} वर अक्षम आहे",
         "block_removed": "{{host}} सक्षम केले. कृपया वेबसाइट रीलोड करा."
@@ -259,7 +256,6 @@
           "placeholder": "खात्याचे नाव"
         },
         "export": {
-          "title": "निर्यात खाते",
           "screen_reader": "निर्यात खात्याचा तपशील",
           "waiting": "एलएनडीहब डेटाची वाट पाहत...",
           "your_ln_address": "आपला Lightning Address:",
@@ -317,18 +313,6 @@
       "website_enhancements": {
         "title": "वेबसाइट सुधारणा",
         "subtitle": "Twitter, YouTube, इ. साठी टिपिंगमध्ये सुधारणा."
-      },
-      "lnurl_auth": {
-        "title": "LNURL-Auth",
-        "hint": "एक सामान्य प्रमाणीकरण प्रोटोकॉल आहे. हे डिजिटल स्वाक्षरी वापरून वापरकर्त्याचे प्रमाणीकरण करते. प्रोटोकॉलला पासवर्ड, ईमेल, वापरकर्तानाव किंवा तत्सम इतर कोणत्याही ओळखीच्या माहितीची आवश्यकता नसते. Alby सह तुम्ही वेबसाइटवर सुरक्षितपणे लॉग इन करण्यासाठी तुमचे लाइटनिंग खाते वापरू शकता. इतर वॉलेटशी सुसंगत होण्यासाठी आम्हाला काही बदल करावे लागले जे तुम्ही येथे कॉन्फिगर करू शकता. <0>सामान्यत: ते सर्व पर्याय बंद असतात.</0> तुमची जुनी खाती असतील तरच त्यांचा वापर करा.",
-        "legacy_lnurl_auth_202207": {
-          "title": "Legacy LNURL-Auth",
-          "subtitle": "The key generation for LNURL-auth has changed (July 2022). Alby was not compatible with other implementations. This was changed, but now different login keys are used. If you used LNURL-auth to login before you can still enable the old method. This option will be removed later, make sure to switch to the new login."
-        },
-        "legacy_lnurl_auth": {
-          "title": "Legacy signing for LNDhub and LNbits",
-          "subtitle": "Message signing and login with LNDhub (e.g. BlueWallet) and LNbits accounts has been changed (March 2022). If you logged in with these accounts you can still enable the old signing method. This option will be removed later, make sure to switch to the new login."
-        }
       },
       "camera_access": {
         "title": "Camera access",
@@ -394,15 +378,6 @@
           "mismatched_password": "संकेतशब्द जुळत नाहीत."
         },
         "success": "पासवर्ड यशस्वीरित्या बदलला"
-      },
-      "nostr": {
-        "title": "Nostr",
-        "hint": "सेन्सॉरशिप-प्रतिरोधक सोशल नेटवर्क्स तयार करणे हा एक साधा आणि खुला प्रोटोकॉल आहे. Nostr क्रिप्टोग्राफिक कीसह कार्य करते. काहीतरी प्रकाशित करण्यासाठी तुम्ही त्यावर तुमच्या की सह स्वाक्षरी करा आणि एकाधिक रिलेवर पाठवा. तुम्ही तुमचे व्यवस्थापन करण्यासाठी Alby वापरू शकता Nostr की. अनेक Nostr Application तुम्हाला Alby एक्स्टेंशनमधील की वापरण्याची परवानगी देतात.",
-        "private_key": {
-          "title": "खाजगी की",
-          "subtitle": "हा विभाग खाते पृष्ठावर हलविला आहे कारण की आता खाते विशिष्ट आहेत.",
-          "go_to": "खात्यावर जा"
-        }
       }
     },
     "send": {
@@ -528,42 +503,13 @@
     },
     "nostr": {
       "title": "Nostr",
-      "allow": "या वेबसाइटला परवानगी द्या:",
       "content": "ही वेबसाइट तुम्हाला स्वाक्षरी करण्यास सांगते:",
       "allow_sign": "{{host}} ला स्वाक्षरी करण्याची परवानगी द्या:",
-      "view_details": "तपशील पहा",
-      "hide_details": "तपशील लपवा",
       "block_and_ignore": "{{host}} ला अवरोधित करा आणि दुर्लक्ष करा",
-      "block_added": "ब्लॉकलिस्टमध्ये {{होस्ट}} जोडले, कृपया वेबसाइट रीलोड करा.",
-      "kinds": {
-        "0": "metadata",
-        "1": "लहान मजकूर टीप",
-        "2": "रिलेची शिफारस करा",
-        "3": "संपर्क",
-        "4": "एनक्रिप्ट केलेले थेट संदेश",
-        "5": "इव्हेंट हटवणे",
-        "7": "प्रतिक्रिया",
-        "8": "badge पुरस्कार",
-        "40": "चॅनेल निर्मिती",
-        "41": "चॅनेल metadata",
-        "42": "चॅनेल संदेश",
-        "43": "चॅनेल संदेश लपवा",
-        "44": "चॅनेल निःशब्द वापरकर्ता",
-        "1984": "रिपोर्टिंग",
-        "9734": "zap विनंती",
-        "9735": "zap",
-        "10002": "relay सूची metadata",
-        "22242": "क्लायंट ऑथेंटिकेशन",
-        "24133": "nostr कनेक्ट",
-        "30008": "profile बॅज",
-        "30009": "बिल्ला व्याख्या",
-        "30023": "दीर्घ स्वरूपाची सामग्री",
-        "30078": "अनुप्रयोग-विशिष्ट डेटा"
-      }
+      "block_added": "ब्लॉकलिस्टमध्ये {{होस्ट}} जोडले, कृपया वेबसाइट रीलोड करा."
     },
     "transactions": {
-      "title": "व्यवहार",
-      "list_empty": "अद्याप कोणतेही व्यवहार उपलब्ध नाहीत."
+      "title": "व्यवहार"
     }
   },
   "common": {
@@ -633,8 +579,7 @@
       "edit_allowance": {
         "title": "भत्ता संपादित करा",
         "screen_reader": "भत्त्यासाठी पर्याय"
-      },
-      "edit_permissions": "परवानग्या संपादित करा"
+      }
     },
     "qrcode_scanner": {
       "title": "QR कोड स्कॅन करा",
@@ -693,11 +638,6 @@
     }
   },
   "permissions": {
-    "nostr": {
-      "getpublickey": "तुमची सार्वजनिक की वाचा",
-      "nip04decrypt": "डेटा Decrypt करा",
-      "signmessage": "तुमच्या किल्लीने संदेशावर स्वाक्षरी करा"
-    },
     "commando": {
       "bkpr-listbalances": "सर्व चालू आणि ऐतिहासिक खात्यातील शिल्लकांची यादी",
       "checkmessage": "दिलेल्या नोडद्वारे स्वाक्षरी तयार केली आहे याची पडताळणी करा",

@@ -1,5 +1,5 @@
-import { CaretLeftIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import Header from "@components/Header";
+import { PopiconsChevronLeftLine } from "@popicons/react";
 import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import Button from "~/app/components/Button";
@@ -20,7 +20,7 @@ export default function OnChainReceive() {
             onClick={() => {
               navigate(-1);
             }}
-            icon={<CaretLeftIcon className="w-4 h-4" />}
+            icon={<PopiconsChevronLeftLine className="w-5 h-5" />}
           />
         }
       >

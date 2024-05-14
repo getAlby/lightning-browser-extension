@@ -1,10 +1,15 @@
-import { USER_REJECTED_ERROR } from "~/common/constants";
+import {
+  DONT_ASK_ANY,
+  DONT_ASK_CURRENT,
+  USER_REJECTED_ERROR,
+} from "~/common/constants";
 import nostr from "~/common/lib/nostr";
 import utils from "~/common/lib/utils";
 import { getHostFromSender } from "~/common/utils/helpers";
 import {
   addPermissionFor,
   hasPermissionFor,
+  isPermissionBlocked,
 } from "~/extension/background-script/permissions";
 import state from "~/extension/background-script/state";
 import { MessageEncryptGet, PermissionMethodNostr, Sender } from "~/types";
@@ -15,20 +20,26 @@ const encryptOrPrompt = async (message: MessageEncryptGet, sender: Sender) => {
 
   try {
     const hasPermission = await hasPermissionFor(
-      PermissionMethodNostr["NOSTR_NIP04ENCRYPT"],
+      PermissionMethodNostr["NOSTR_ENCRYPT"],
       host
     );
 
+    const isBlocked = await isPermissionBlocked(
+      PermissionMethodNostr["NOSTR_ENCRYPT"],
+      host
+    );
+
+    if (isBlocked) {
+      return { denied: true };
+    }
+
     if (hasPermission) {
-      const response = (await state.getState().getNostr()).encrypt(
-        message.args.peer,
-        message.args.plaintext
-      );
-      return { data: response };
+      return encrypt();
     } else {
       const promptResponse = await utils.openPrompt<{
         confirm: boolean;
-        rememberPermission: boolean;
+        permissionOption: string;
+        blocked: boolean;
       }>({
         ...message,
         action: "public/nostr/confirmEncrypt",
@@ -41,19 +52,22 @@ const encryptOrPrompt = async (message: MessageEncryptGet, sender: Sender) => {
       });
 
       // add permission to db only if user decided to always allow this request
-      if (promptResponse.data.rememberPermission) {
+      if (promptResponse.data.permissionOption == DONT_ASK_CURRENT) {
         await addPermissionFor(
-          PermissionMethodNostr["NOSTR_NIP04ENCRYPT"],
-          host
+          PermissionMethodNostr["NOSTR_ENCRYPT"],
+          host,
+          promptResponse.data.blocked
         );
       }
-      if (promptResponse.data.confirm) {
-        const response = (await state.getState().getNostr()).encrypt(
-          message.args.peer,
-          message.args.plaintext
-        );
 
-        return { data: response };
+      if (promptResponse.data.permissionOption == DONT_ASK_ANY) {
+        Object.values(PermissionMethodNostr).forEach(async (permission) => {
+          await addPermissionFor(permission, host, promptResponse.data.blocked);
+        });
+      }
+
+      if (promptResponse.data.confirm) {
+        return encrypt();
       } else {
         return { error: USER_REJECTED_ERROR };
       }
@@ -63,6 +77,15 @@ const encryptOrPrompt = async (message: MessageEncryptGet, sender: Sender) => {
     if (e instanceof Error) {
       return { error: e.message };
     }
+  }
+
+  async function encrypt() {
+    const nostr = await state.getState().getNostr();
+    const response = await nostr.nip04Encrypt(
+      message.args.peer,
+      message.args.plaintext
+    );
+    return { data: response };
   }
 };
 

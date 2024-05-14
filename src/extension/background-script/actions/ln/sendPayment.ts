@@ -1,4 +1,4 @@
-import lightningPayReq from "bolt11";
+import lightningPayReq from "bolt11-signet";
 import PubSub from "pubsub-js";
 import pubsub from "~/common/lib/pubsub";
 import state from "~/extension/background-script/state";

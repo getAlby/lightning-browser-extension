@@ -243,9 +243,6 @@
         "send_satoshis": "⚡️ Envoyez des Satoshis ⚡️",
         "enable_now": "Activer maintenant"
       },
-      "allowance_view": {
-        "no_transactions": "Aucune transaction sur <0>{{name}}</0> pour le moment."
-      },
       "default_view": {
         "is_blocked_hint": "Alby est actuellement désactivé sur {{host}}",
         "block_removed": "{{hôte}} activé. Veuillez recharger le site Web."
@@ -259,7 +256,6 @@
           "placeholder": "Nom du compte"
         },
         "export": {
-          "title": "Compte d'exportation",
           "screen_reader": "Exporter les détails du compte",
           "waiting": "en attente des données LndHub...",
           "your_ln_address": "Votre adresse Lightning :",
@@ -325,18 +321,6 @@
         "title": "Améliorations du site Web",
         "subtitle": "Améliorations des pourboires pour Twitter, YouTube, etc."
       },
-      "lnurl_auth": {
-        "title": "LNURL-Auth",
-        "hint": "est un protocole d'authentification générique. Il authentifie l'utilisateur à l'aide de signatures numériques. Le protocole ne nécessite aucune autre information d'identification telle que des mots de passe, des e-mails, des noms d'utilisateur ou similaires. Avec Alby, vous pouvez utiliser vos comptes Lightning pour vous connecter en toute sécurité aux sites Web. Pour être compatible avec d'autres portefeuilles, nous avons dû apporter quelques modifications que vous pouvez configurer ici. <0>Idéalement, toutes ces options sont désactivées.</0> Utilisez-les uniquement si vous avez d'anciens comptes.",
-        "legacy_lnurl_auth_202207": {
-          "title": "Hérité LNURL-Auth",
-          "subtitle": "La génération de clé pour LNURL-auth a changé (juillet 2022). Alby n'était pas compatible avec d'autres implémentations. Cela a été changé, mais maintenant différentes clés de connexion sont utilisées. Si vous avez utilisé LNURL-auth pour vous connecter auparavant, vous pouvez toujours activer l'ancienne méthode. Cette option sera supprimée plus tard, assurez-vous de passer à la nouvelle connexion."
-        },
-        "legacy_lnurl_auth": {
-          "title": "Signature héritée pour LNDhub et LNbits",
-          "subtitle": "La signature des messages et la connexion avec LNDhub (par exemple BlueWallet) et les comptes LNbits ont été modifiées (mars 2022). Si vous vous êtes connecté avec ces comptes, vous pouvez toujours activer l'ancienne méthode de signature. Cette option sera supprimée plus tard, assurez-vous de passer à la nouvelle connexion."
-        }
-      },
       "camera_access": {
         "title": "accès à la caméra",
         "subtitle": "Pour scanner les codes QR",
@@ -401,15 +385,6 @@
           "mismatched_password": "Les mots de passe ne correspondent pas."
         },
         "success": "Le mot de passe a été changé avec succès"
-      },
-      "nostr": {
-        "title": "Nostr",
-        "hint": "est un protocole simple et ouvert qui vise à créer des réseaux sociaux résistants à la censure. Nostr fonctionne avec des clés cryptographiques. Pour publier quelque chose vous le signez avec votre clé et l'envoyez à plusieurs relais. Vous pouvez utiliser Alby pour gérer votre clé Nostr. De nombreuses applications Nostr vous permettront alors d'utiliser simplement la clé de l'extension Alby.",
-        "private_key": {
-          "title": "Clé privée",
-          "subtitle": "Cette section est déplacée vers la page des comptes car les clés sont désormais spécifiques au compte.",
-          "go_to": "Aller aux comptes"
-        }
       }
     },
     "send": {
@@ -541,7 +516,6 @@
     },
     "nostr": {
       "title": "Nostr",
-      "allow": "Autoriser ce site Web à :",
       "content": "Ce site vous demande de signer :",
       "allow_sign": "Autoriser {{host}} à signer :",
       "block_and_ignore": "Bloquer et ignorer {{host}}",
@@ -617,8 +591,7 @@
       "edit_allowance": {
         "title": "Modifier l'allocation",
         "screen_reader": "Options d'allocation"
-      },
-      "edit_permissions": "Modifier les autorisations"
+      }
     },
     "qrcode_scanner": {
       "title": "Scanner le code QR",
@@ -679,11 +652,6 @@
     }
   },
   "permissions": {
-    "nostr": {
-      "getpublickey": "Lisez votre clé publique",
-      "nip04decrypt": "Déchiffrer les données",
-      "signmessage": "Signez le message avec votre clé"
-    },
     "commando": {
       "bkpr-listbalances": "Liste de tous les soldes de compte actuels et historiques",
       "checkmessage": "Vérifiez que la signature a été générée par un nœud donné",

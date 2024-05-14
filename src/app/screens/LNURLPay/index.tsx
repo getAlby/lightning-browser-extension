@@ -1,8 +1,3 @@
-import {
-  CaretDownIcon,
-  CaretLeftIcon,
-  CaretUpIcon,
-} from "@bitcoin-design/bitcoin-icons-react/filled";
 import Button from "@components/Button";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
@@ -12,6 +7,11 @@ import ResultCard from "@components/ResultCard";
 import SatButtons from "@components/SatButtons";
 import DualCurrencyField from "@components/form/DualCurrencyField";
 import TextField from "@components/form/TextField";
+import {
+  PopiconsChevronBottomLine,
+  PopiconsChevronLeftLine,
+  PopiconsChevronTopLine,
+} from "@popicons/react";
 import fetchAdapter from "@vespaiach/axios-fetch-adapter";
 import axios from "axios";
 import React, { Fragment, useEffect, useState } from "react";
@@ -71,7 +71,10 @@ function LNURLPay() {
 
   const amountMin = Math.floor(+details.minSendable / 1000);
   const amountMax = Math.floor(+details.maxSendable / 1000);
-  const amountExceeded = +valueSat > (auth?.account?.balance || 0);
+  const amountExceeded =
+    (auth?.account?.currency || "BTC") !== "BTC"
+      ? false
+      : +valueSat > (auth?.account?.balance || 0);
   const rangeExceeded = +valueSat > amountMax || +valueSat < amountMin;
 
   const [showMoreFields, setShowMoreFields] = useState(false);
@@ -390,7 +393,7 @@ function LNURLPay() {
             headerLeft={
               <IconButton
                 onClick={() => navigate(-1)}
-                icon={<CaretLeftIcon className="w-4 h-4" />}
+                icon={<PopiconsChevronLeftLine className="w-5 h-5" />}
               />
             }
           >
@@ -481,9 +484,9 @@ function LNURLPay() {
                           <Hyperlink onClick={toggleShowMoreFields}>
                             {tCommon("actions.more")}{" "}
                             {showMoreFields ? (
-                              <CaretUpIcon className="h-4 w-4 inline-flex" />
+                              <PopiconsChevronTopLine className="h-5 w-5 inline-flex" />
                             ) : (
-                              <CaretDownIcon className="h-4 w-4 inline-flex" />
+                              <PopiconsChevronBottomLine className="h-5 w-5 inline-flex" />
                             )}
                           </Hyperlink>
                         </div>

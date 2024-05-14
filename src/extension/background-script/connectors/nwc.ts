@@ -1,6 +1,6 @@
 import { webln } from "@getalby/sdk";
 import { NostrWebLNProvider } from "@getalby/sdk/dist/webln";
-import lightningPayReq from "bolt11";
+import lightningPayReq from "bolt11-signet";
 import Hex from "crypto-js/enc-hex";
 import SHA256 from "crypto-js/sha256";
 import { Account } from "~/types";
@@ -39,6 +39,7 @@ class NWCConnector implements Connector {
       "getBalance",
       "keysend",
       "getTransactions",
+      "signMessage",
     ];
   }
 
@@ -188,8 +189,15 @@ class NWCConnector implements Connector {
     }
   }
 
-  signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {
-    throw new Error("Method not implemented.");
+  async signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {
+    const response = await this.nwc.signMessage(args.message);
+
+    return Promise.resolve({
+      data: {
+        message: response.message,
+        signature: response.signature,
+      },
+    });
   }
 
   connectPeer(args: ConnectPeerArgs): Promise<ConnectPeerResponse> {

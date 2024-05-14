@@ -1,11 +1,11 @@
 import fetchAdapter from "@vespaiach/axios-fetch-adapter";
 import axios from "axios";
-import lightningPayReq from "bolt11";
+import lightningPayReq from "bolt11-signet";
 import { isLNURLDetailsError } from "~/common/utils/typeHelpers";
 import {
+  LNURLAuthServiceResponse,
   LNURLDetails,
   LNURLError,
-  LNURLAuthServiceResponse,
   LNURLPaymentInfo,
 } from "~/types";
 
@@ -97,7 +97,7 @@ const lnurl = {
         const lnurlDetails = data;
 
         if (isLNURLDetailsError(lnurlDetails)) {
-          throw new Error(`LNURL Error: ${lnurlDetails.reason}`);
+          throw new Error(lnurlDetails.reason);
         } else {
           lnurlDetails.domain = url.hostname;
           lnurlDetails.url = url.toString();
@@ -105,11 +105,15 @@ const lnurl = {
 
         return lnurlDetails;
       } catch (e) {
-        throw new Error(
-          `Connection problem or invalid lnurl / lightning address: ${
-            e instanceof Error ? e.message : ""
-          }`
-        );
+        let error = "";
+        if (axios.isAxiosError(e)) {
+          error =
+            (e.response?.data as { reason?: string })?.reason || e.message;
+        } else if (e instanceof Error) {
+          error = e.message;
+        }
+
+        throw new Error(error);
       }
     }
   },

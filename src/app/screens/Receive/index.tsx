@@ -1,12 +1,12 @@
-import {
-  BitcoinIcon,
-  CaretLeftIcon,
-  CopyIcon,
-} from "@bitcoin-design/bitcoin-icons-react/outline";
 import Container from "@components/Container";
 import Header from "@components/Header";
 import IconButton from "@components/IconButton";
-import { PopiconsBoltLine, PopiconsWithdrawalLine } from "@popicons/react";
+import {
+  PopiconsBoltLine,
+  PopiconsChevronLeftLine,
+  PopiconsCopyLine,
+  PopiconsWithdrawalLine,
+} from "@popicons/react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -15,7 +15,7 @@ import QRCode from "~/app/components/QRCode";
 import SkeletonLoader from "~/app/components/SkeletonLoader";
 import toast from "~/app/components/Toast";
 import { useAccount } from "~/app/context/AccountContext";
-import { isAlbyLNDHubAccount, isAlbyOAuthAccount } from "~/app/utils";
+import { isAlbyOAuthAccount } from "~/app/utils";
 import api from "~/common/lib/api";
 import { IconLinkCard } from "../../components/IconLinkCard/IconLinkCard";
 
@@ -28,12 +28,7 @@ function Receive() {
   const [loadingLightningAddress, setLoadingLightningAddress] = useState(true);
 
   const [lightningAddress, setLightningAddress] = useState("");
-  const isAlbyLNDHubUser = isAlbyLNDHubAccount(
-    auth.account?.alias,
-    auth.account?.connectorType
-  );
   const isAlbyOAuthUser = isAlbyOAuthAccount(auth.account?.connectorType);
-  const isAlbyUser = isAlbyOAuthUser || isAlbyLNDHubUser;
 
   useEffect(() => {
     (async () => {
@@ -55,7 +50,7 @@ function Receive() {
             onClick={() => {
               navigate(-1);
             }}
-            icon={<CaretLeftIcon className="w-4 h-4" />}
+            icon={<PopiconsChevronLeftLine className="w-5 h-5" />}
           />
         }
       >
@@ -112,7 +107,7 @@ function Receive() {
                         }}
                       >
                         {lightningAddress}
-                        <CopyIcon className="w-4 h-4" />
+                        <PopiconsCopyLine className="w-4 h-4" />
                       </a>
                     )}
                   </div>
@@ -122,31 +117,15 @@ function Receive() {
             <IconLinkCard
               title={t("actions.invoice.title")}
               description={t("actions.invoice.description")}
-              icon={
-                <PopiconsBoltLine className="w-8 h-8 text-gray-400 dark:text-neutral-500" />
-              }
+              icon={<PopiconsBoltLine className="w-8 h-8" />}
               onClick={() => {
                 navigate("/receive/invoice");
               }}
             />
-            {isAlbyUser && (
-              <IconLinkCard
-                title={t("actions.bitcoin_address.title")}
-                description={t("actions.bitcoin_address.description")}
-                icon={
-                  <BitcoinIcon className="w-8 h-8 text-gray-400 dark:text-neutral-500" />
-                }
-                onClick={() => {
-                  navigate("/onChainReceive");
-                }}
-              />
-            )}
             <IconLinkCard
               title={t("actions.redeem.title")}
               description={t("actions.redeem.description")}
-              icon={
-                <PopiconsWithdrawalLine className="w-8 h-8 text-gray-400 dark:text-neutral-500" />
-              }
+              icon={<PopiconsWithdrawalLine className="w-8 h-8" />}
               onClick={() => {
                 navigate("/lnurlRedeem");
               }}

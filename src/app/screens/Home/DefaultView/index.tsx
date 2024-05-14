@@ -1,18 +1,19 @@
-import { ArrowRightIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import Button from "@components/Button";
 import Loading from "@components/Loading";
 import TransactionsTable from "@components/TransactionsTable";
 import {
   PopiconsArrowDownLine,
+  PopiconsArrowRightLine,
   PopiconsBulbLine,
-  PopiconsDownloadLine,
+  PopiconsCircleExclamationLine,
   PopiconsKeyLine,
 } from "@popicons/react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { FC, useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import Alert from "~/app/components/Alert";
 import BalanceBox from "~/app/components/BalanceBox";
 import Hyperlink from "~/app/components/Hyperlink";
 import { IconLinkCard } from "~/app/components/IconLinkCard/IconLinkCard";
@@ -21,6 +22,7 @@ import toast from "~/app/components/Toast";
 import { useAccount } from "~/app/context/AccountContext";
 import { useTransactions } from "~/app/hooks/useTransactions";
 import { PublisherLnData } from "~/app/screens/Home/PublisherLnData";
+import { isAlbyLNDHubAccount } from "~/app/utils";
 import api, { GetAccountRes } from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
@@ -53,6 +55,8 @@ const DefaultView: FC<Props> = (props) => {
     useTransactions();
 
   const isLoading = accountLoading || isLoadingTransactions;
+  const needsKeySetup =
+    !currentAccount?.hasMnemonic || !currentAccount?.isMnemonicBackupDone;
 
   useEffect(() => {
     loadTransactions(itemsLimit);
@@ -117,8 +121,77 @@ const DefaultView: FC<Props> = (props) => {
       {props.renderPublisherWidget && !!props.lnDataFromCurrentTab?.length && (
         <PublisherLnData lnData={props.lnDataFromCurrentTab[0]} />
       )}
-      <div className="p-4">
-        <BalanceBox />
+
+      <div className="flex flex-col gap-4 p-4">
+        {isBlockedUrl && (
+          <div className="items-center dark:text-white text-sm">
+            <Alert type="info">
+              <p className="pb-2">
+                {t("default_view.is_blocked_hint", {
+                  host: props.currentUrl?.host,
+                })}
+              </p>
+              <Button
+                fullWidth
+                label={t("actions.enable_now")}
+                direction="column"
+                onClick={() => unblock()}
+              />
+            </Alert>
+          </div>
+        )}
+
+        {isAlbyLNDHubAccount(account?.alias, account?.connectorType) && (
+          <Alert type="info">
+            <div className="flex gap-2 items-center">
+              <div className="shrink-0">
+                <PopiconsCircleExclamationLine className="w-5 h-5" />
+              </div>
+              <span className="text-sm">
+                <Trans
+                  i18nKey={"default_view.upgrade_account"}
+                  t={t}
+                  components={[
+                    // eslint-disable-next-line react/jsx-key
+                    <a
+                      className="underline"
+                      href="https://getalby.com/auth/users/new"
+                      target="_blank"
+                      rel="noreferrer"
+                    />,
+                  ]}
+                />
+              </span>
+            </div>
+          </Alert>
+        )}
+        {account?.nodeRequired ? (
+          <Alert type="warn">
+            <div className="flex items-center gap-2">
+              <div className="shrink-0">
+                <PopiconsCircleExclamationLine className="w-5 h-5" />
+              </div>
+              <span className="text-sm">
+                <Trans
+                  i18nKey={"default_view.node_required"}
+                  t={t}
+                  components={[
+                    // eslint-disable-next-line react/jsx-key
+                    <a
+                      className="underline"
+                      href="https://getalby.com"
+                      target="_blank"
+                      rel="noreferrer"
+                    />,
+                  ]}
+                />
+              </span>
+            </div>
+          </Alert>
+        ) : (
+          <BalanceBox />
+        )}
+
         {(accountLoading || lightningAddress) && (
           <div className="flex justify-center">
             <a
@@ -137,7 +210,7 @@ const DefaultView: FC<Props> = (props) => {
             </a>
           </div>
         )}
-        <div className="flex mb-4 space-x-3 justify-between">
+        <div className="flex space-x-3 justify-between">
           <HomeButton
             icon={<img src="assets/icons/popicons/receive.svg" />}
             onClick={() => {
@@ -164,109 +237,59 @@ const DefaultView: FC<Props> = (props) => {
           </HomeButton>
         </div>
 
-        {isBlockedUrl && (
-          <div className="mb-2 items-center py-3 dark:text-white">
-            <p className="py-1">
-              {t("default_view.is_blocked_hint", {
-                host: props.currentUrl?.host,
-              })}
-            </p>
-            <Button
-              fullWidth
-              label={t("actions.enable_now")}
-              direction="column"
-              onClick={() => unblock()}
-            />
-          </div>
-        )}
-
         {isLoading && (
-          <div className="flex justify-center">
+          <div className="flex justify-center mt-4">
             <Loading />
           </div>
         )}
 
         {!isLoading && (
-          <div>
-            <div className="flex flex-col gap-2 md:gap-3">
-              {transactions.length == 0 && (
-                <IconLinkCard
-                  title={t("default_view.actions.get_started.title")}
-                  description={t(
-                    "default_view.actions.get_started.description"
-                  )}
-                  icon={
-                    <PopiconsBulbLine className="w-8 h-8 text-gray-400 dark:text-neutral-500" />
-                  }
-                  onClick={() => {
-                    utils.openUrl(
-                      "https://guides.getalby.com/user-guide/v/alby-account-and-browser-extension/"
-                    );
-                  }}
-                />
-              )}
-
-              {!(
-                currentAccount?.hasMnemonic &&
-                currentAccount?.isMnemonicBackupDone
-              ) && (
-                <IconLinkCard
-                  title={t("default_view.actions.backup_masterkey.title")}
-                  description={t(
-                    "default_view.actions.backup_masterkey.description"
-                  )}
-                  icon={
-                    <PopiconsKeyLine className="w-8 h-8 text-gray-400 dark:text-neutral-500" />
-                  }
-                  onClick={async () => {
-                    if (currentAccount?.hasMnemonic) {
-                      openOptions(
-                        `accounts/${currentAccount?.id}/secret-key/backup`
+          <div className="mt-4 flex flex-col gap-4">
+            {(transactions.length === 0 || needsKeySetup) && (
+              <div className="flex flex-col gap-2 md:gap-3">
+                {transactions.length === 0 && (
+                  <IconLinkCard
+                    title={t("default_view.actions.get_started.title")}
+                    description={t(
+                      "default_view.actions.get_started.description"
+                    )}
+                    icon={<PopiconsBulbLine className="w-8 h-8" />}
+                    onClick={() => {
+                      utils.openUrl(
+                        "https://guides.getalby.com/user-guide/v/alby-account-and-browser-extension/"
                       );
-                    } else {
+                    }}
+                  />
+                )}
+                {needsKeySetup && (
+                  <IconLinkCard
+                    title={t("default_view.actions.setup_keys.title")}
+                    description={t(
+                      "default_view.actions.setup_keys.description"
+                    )}
+                    icon={<PopiconsKeyLine className="w-8 h-8" />}
+                    onClick={async () => {
                       openOptions(
                         `accounts/${currentAccount?.id}/secret-key/new`
                       );
-                    }
-                  }}
-                />
-              )}
+                    }}
+                  />
+                )}
+                {transactions.length === 0 && (
+                  <IconLinkCard
+                    title={t("default_view.actions.receive_bitcoin.title")}
+                    description={t(
+                      "default_view.actions.receive_bitcoin.description"
+                    )}
+                    icon={<PopiconsArrowDownLine className="w-8 h-8" />}
+                    onClick={() => {
+                      navigate("/receive");
+                    }}
+                  />
+                )}
+              </div>
+            )}
 
-              {transactions.length == 0 && (
-                <IconLinkCard
-                  title={t("default_view.actions.receive_bitcoin.title")}
-                  description={t(
-                    "default_view.actions.receive_bitcoin.description"
-                  )}
-                  icon={
-                    <PopiconsArrowDownLine className="w-8 h-8 text-gray-400 dark:text-neutral-500" />
-                  }
-                  onClick={() => {
-                    navigate("/receive");
-                  }}
-                />
-              )}
-
-              {!(
-                currentAccount?.hasMnemonic &&
-                currentAccount?.isMnemonicBackupDone
-              ) && (
-                <IconLinkCard
-                  title={t("default_view.actions.import_masterkey.title")}
-                  description={t(
-                    "default_view.actions.import_masterkey.description"
-                  )}
-                  icon={
-                    <PopiconsDownloadLine className="w-8 h-8 text-gray-400 dark:text-neutral-500" />
-                  }
-                  onClick={async () => {
-                    openOptions(
-                      `accounts/${currentAccount?.id}/secret-key/import`
-                    );
-                  }}
-                />
-              )}
-            </div>
             <TransactionsTable
               transactions={transactions}
               loading={isLoading}
@@ -279,7 +302,7 @@ const DefaultView: FC<Props> = (props) => {
                   className="flex justify-center items-center mt-2"
                 >
                   {t("default_view.see_all")}
-                  <ArrowRightIcon className="ml-2 w-4 h-4" />
+                  <PopiconsArrowRightLine className="ml-2 w-5 h-5" />
                 </Hyperlink>
               </div>
             )}

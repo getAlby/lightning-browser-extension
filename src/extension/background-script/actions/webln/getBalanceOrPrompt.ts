@@ -43,7 +43,7 @@ const getBalanceOrPrompt = async (message: MessageDefault) => {
         args: {
           requestPermission: {
             method: "getBalance",
-            description: `webln.getbalance`,
+            description: `webln.getbalance.description`,
           },
         },
         origin: message.origin,

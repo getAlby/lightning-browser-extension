@@ -243,9 +243,6 @@
         "send_satoshis": "⚡️ Trimite Satoshi ⚡️",
         "enable_now": "Activeaza acum"
       },
-      "allowance_view": {
-        "no_transactions": "Nicio tranzactie pentru <0>{{nume}}</0> inca."
-      },
       "default_view": {
         "is_blocked_hint": "Momentan, Alby este dezactivat pentru {{host}}",
         "block_removed": "{{host}} activat. Te rugam sa reincarci website-ul."
@@ -259,7 +256,6 @@
           "placeholder": "Nume cont"
         },
         "export": {
-          "title": "Exporta cont",
           "screen_reader": "Exporta date cont",
           "waiting": "in asteptarea datelor LNDHub...",
           "your_ln_address": "Adresa ta Lightning:",
@@ -325,18 +321,6 @@
         "title": "",
         "subtitle": ""
       },
-      "lnurl_auth": {
-        "title": "",
-        "hint": "",
-        "legacy_lnurl_auth_202207": {
-          "title": "",
-          "subtitle": ""
-        },
-        "legacy_lnurl_auth": {
-          "title": "",
-          "subtitle": ""
-        }
-      },
       "camera_access": {
         "title": "",
         "subtitle": "",
@@ -401,15 +385,6 @@
           "mismatched_password": ""
         },
         "success": ""
-      },
-      "nostr": {
-        "title": "",
-        "hint": "",
-        "private_key": {
-          "title": "",
-          "subtitle": "",
-          "go_to": ""
-        }
       }
     },
     "send": {
@@ -541,7 +516,6 @@
     },
     "nostr": {
       "title": "",
-      "allow": "",
       "content": "",
       "allow_sign": "",
       "block_and_ignore": "",
@@ -611,8 +585,7 @@
       "edit_allowance": {
         "title": "",
         "screen_reader": ""
-      },
-      "edit_permissions": ""
+      }
     },
     "qrcode_scanner": {
       "title": "",

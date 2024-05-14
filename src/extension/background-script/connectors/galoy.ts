@@ -1,16 +1,18 @@
 import fetchAdapter from "@vespaiach/axios-fetch-adapter";
 import axios, { AxiosRequestConfig } from "axios";
-import lightningPayReq from "bolt11";
+import lightningPayReq from "bolt11-signet";
+import { ACCOUNT_CURRENCIES, CURRENCIES } from "~/common/constants";
+import { getPaymentRequestDescription } from "~/common/utils/paymentRequest";
+import { getCurrencyRateWithCache } from "~/extension/background-script/actions/cache/getCurrencyRate";
 import { Account } from "~/types";
-
 import Connector, {
   CheckPaymentArgs,
   CheckPaymentResponse,
   ConnectPeerResponse,
+  ConnectorTransaction,
   GetBalanceResponse,
   GetInfoResponse,
   GetTransactionsResponse,
-  ConnectorTransaction,
   KeysendArgs,
   MakeInvoiceArgs,
   MakeInvoiceResponse,
@@ -20,12 +22,15 @@ import Connector, {
   SignMessageResponse,
 } from "./connector.interface";
 
+type GaloyCurrencies = Extract<ACCOUNT_CURRENCIES, "BTC" | "USD">;
+
 interface Config {
   walletId: string;
   url: string;
   headers?: Headers; // optional for backward compatibility
   apiCompatibilityMode?: boolean; // optional for backward compatibility
   accessToken?: string; // only present in old connectors
+  currency: GaloyCurrencies; // default is BTC
 }
 
 class Galoy implements Connector {
@@ -43,6 +48,7 @@ class Galoy implements Connector {
         config.apiCompatibilityMode !== undefined
           ? config.apiCompatibilityMode
           : true,
+      currency: config.currency || "BTC",
     };
   }
 
@@ -60,6 +66,14 @@ class Galoy implements Connector {
 
   unload() {
     return Promise.resolve();
+  }
+
+  toFiatCents(amount: number): number {
+    return Math.round(amount * 100);
+  }
+
+  fromFiatCents(amount: number): number {
+    return amount / 100;
   }
 
   get supportedMethods() {
@@ -147,6 +161,7 @@ class Galoy implements Connector {
                         direction
                         initiationVia {
                           ... on InitiationViaLn {
+                            paymentRequest
                             paymentHash
                           }
                         }
@@ -178,6 +193,7 @@ class Galoy implements Connector {
       };
 
       const response = await this.request(query);
+
       const errs = response.errors || response.data.me.errors;
       if (errs && errs.length) {
         throw new Error(errs[0].message || JSON.stringify(errs));
@@ -187,36 +203,54 @@ class Galoy implements Connector {
       const targetWallet = wallets.find((w) => w.id === this.config.walletId);
 
       if (targetWallet) {
-        if (targetWallet.walletCurrency === "USD") {
-          throw new Error("USD currency support is not yet implemented.");
+        if (targetWallet.walletCurrency !== this.config.currency) {
+          throw new Error(
+            "Wallet currency does not match the account currency. " +
+              targetWallet.walletCurrency +
+              " != " +
+              this.config.currency
+          );
         }
 
-        targetWallet.transactions.edges.forEach(
-          (edge: { cursor: string; node: TransactionNode }) => {
-            const tx = edge.node;
-            // Determine transaction type based on the direction field
-            const transactionType: "received" | "sent" =
-              tx.direction === "RECEIVE" ? "received" : "sent";
-            // Do not display a double negative if sent
-            const absSettlementAmount = Math.abs(tx.settlementAmount);
-            // Convert createdAt from UNIX timestamp to Date
-            const createdAtDate = new Date(tx.createdAt * 1000);
-
-            transactions.push({
-              id: edge.cursor,
-              memo: tx.memo,
-              preimage:
-                tx.settlementVia.preImage ||
-                tx.settlementVia.paymentSecret ||
-                "",
-              payment_hash: tx.initiationVia.paymentHash || "",
-              settled: tx.status === "SUCCESS",
-              settleDate: createdAtDate.getTime(),
-              totalAmount: absSettlementAmount, // Assuming this is in the correct unit
-              type: transactionType,
-            });
+        for (const edge of targetWallet.transactions.edges) {
+          const tx = edge.node;
+          // Determine transaction type based on the direction field
+          const transactionType: "received" | "sent" =
+            tx.direction === "RECEIVE" ? "received" : "sent";
+          const currency = targetWallet.walletCurrency;
+          // Do not display a double negative if sent
+          let absSettlementAmount = Math.abs(tx.settlementAmount);
+          let displayAmount: [number, ACCOUNT_CURRENCIES] | undefined =
+            undefined;
+          if (currency !== "BTC") {
+            const rate = await getCurrencyRateWithCache(CURRENCIES[currency]);
+            absSettlementAmount = this.fromFiatCents(absSettlementAmount);
+            displayAmount = [absSettlementAmount, CURRENCIES[currency]];
+            absSettlementAmount = Math.floor(absSettlementAmount / rate);
           }
-        );
+
+          const createdAtDate = new Date(tx.createdAt * 1000);
+
+          let paymentRequestDescription = "";
+          if (!tx.memo && tx.initiationVia.paymentRequest) {
+            paymentRequestDescription = getPaymentRequestDescription(
+              tx.initiationVia.paymentRequest
+            );
+          }
+
+          transactions.push({
+            id: edge.cursor,
+            memo: tx.memo || paymentRequestDescription,
+            preimage:
+              tx.settlementVia.preImage || tx.settlementVia.paymentSecret || "",
+            payment_hash: tx.initiationVia.paymentHash || "",
+            settled: tx.status === "SUCCESS",
+            settleDate: createdAtDate.getTime(),
+            totalAmount: absSettlementAmount,
+            type: transactionType,
+            displayAmount,
+          });
+        }
       }
 
       hasNextPage = targetWallet?.transactions.pageInfo.hasNextPage || false;
@@ -255,12 +289,25 @@ class Galoy implements Connector {
         (w: GaloyWallet) => w.id === this.config.walletId
       );
       if (targetWallet) {
-        if (targetWallet.walletCurrency === "USD") {
-          throw new Error("USD currency support is not yet implemented.");
+        if (targetWallet.walletCurrency !== this.config.currency) {
+          throw new Error(
+            "Wallet currency does not match the account currency. " +
+              targetWallet.walletCurrency +
+              " != " +
+              this.config.currency
+          );
         }
+
+        const currency = targetWallet.walletCurrency;
+        const balance =
+          currency !== "BTC"
+            ? this.fromFiatCents(targetWallet.balance)
+            : targetWallet.balance;
+
         return {
           data: {
-            balance: targetWallet.balance,
+            balance,
+            currency,
           },
         };
       } else {
@@ -419,8 +466,13 @@ class Galoy implements Connector {
         if (wallet === undefined) {
           throw new Error("Bad data received.");
         }
-        if (wallet.walletCurrency === "USD") {
-          throw new Error("USD currency support is not yet implemented.");
+        if (wallet.walletCurrency !== this.config.currency) {
+          throw new Error(
+            "Wallet currency does not match the account currency. " +
+              wallet.walletCurrency +
+              " != " +
+              this.config.currency
+          );
         }
 
         const txEdges = wallet.transactions.edges;
@@ -453,10 +505,22 @@ class Galoy implements Connector {
   }
 
   async makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse> {
+    const isUSD = this.config.currency == "USD";
+    const mutationName = isUSD
+      ? "LnUsdInvoiceBtcDenominatedCreateOnBehalfOfRecipient"
+      : "LnInvoiceCreate";
+    const inputTypeName = isUSD
+      ? "LnUsdInvoiceBtcDenominatedCreateOnBehalfOfRecipientInput"
+      : "LnInvoiceCreateInput";
+    const invoiceCreateFunction = isUSD
+      ? "lnUsdInvoiceBtcDenominatedCreateOnBehalfOfRecipient"
+      : "lnInvoiceCreate";
+    const amountSats = Number(args.amount);
+
     const query = {
       query: `
-        mutation lnInvoiceCreate($input: LnInvoiceCreateInput!) {
-          lnInvoiceCreate(input: $input) {
+        mutation ${mutationName}($input: ${inputTypeName}!) {
+          ${invoiceCreateFunction}(input: $input) {
             invoice {
               paymentRequest
               paymentHash
@@ -471,22 +535,23 @@ class Galoy implements Connector {
             `,
       variables: {
         input: {
-          walletId: this.config.walletId,
-          amount: args.amount,
+          walletId: !isUSD ? this.config.walletId : undefined,
+          recipientWalletId: isUSD ? this.config.walletId : undefined,
+          amount: amountSats,
           memo: args.memo,
         },
       },
     };
     return this.request(query).then(({ data, errors }) => {
-      const errs = errors || data.lnInvoiceCreate.errors;
+      const errs = errors || data[invoiceCreateFunction].errors;
       if (errs && errs.length) {
         throw new Error(errs[0].message || JSON.stringify(errs));
       }
 
       return {
         data: {
-          paymentRequest: data.lnInvoiceCreate.invoice.paymentRequest,
-          rHash: data.lnInvoiceCreate.invoice.paymentHash,
+          paymentRequest: data[invoiceCreateFunction].invoice.paymentRequest,
+          rHash: data[invoiceCreateFunction].invoice.paymentHash,
         },
       };
     });
@@ -535,6 +600,7 @@ type TransactionNode = {
   direction: string;
   initiationVia: {
     paymentHash?: string;
+    paymentRequest?: string;
   };
   settlementVia: {
     preImage?: string;

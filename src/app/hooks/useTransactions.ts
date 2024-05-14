@@ -27,6 +27,11 @@ export const useTransactions = () => {
         );
 
         for (const transaction of transactions) {
+          if (
+            transaction.displayAmount &&
+            transaction.displayAmount[1] === settings.currency
+          )
+            continue;
           transaction.totalAmountFiat = settings.showFiat
             ? await getFormattedFiat(transaction.totalAmount)
             : "";

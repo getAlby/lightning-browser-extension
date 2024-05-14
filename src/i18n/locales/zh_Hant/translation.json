@@ -253,9 +253,6 @@
         "send_satoshis": "⚡️ 發送聰 ⚡️",
         "enable_now": "立即啟用"
       },
-      "allowance_view": {
-        "no_transactions": "<0>{{name}}</0> 上還沒有交易。"
-      },
       "default_view": {
         "is_blocked_hint": "Alby目前在 {{host}} 上被禁用",
         "block_removed": "已啟用 {{host}}。請重新載入網站。"
@@ -269,13 +266,11 @@
           "placeholder": "帳戶名稱"
         },
         "export": {
-          "title": "連接你的移動錢包",
           "screen_reader": "導出帳戶詳情",
           "waiting": "等待 LndHub 數據...",
           "your_ln_address": "你的閃電地址：",
           "export_uri": "LNDHub 憑據 URI",
-          "scan_qr": "通過掃描二維碼將此錢包導入Zeus或BlueWallet。",
-          "description": "將允許你在移動錢包上連接並使用此帳戶，例如 <0>Blue Wallet</0> 和 <1>Zeus</1>。"
+          "scan_qr": "通過掃描二維碼將此錢包導入Zeus或BlueWallet。"
         },
         "nostr": {
           "title": "Nostr",
@@ -317,27 +312,13 @@
             "can_restore": "✅ Nostr 密鑰已從你的主密鑰派生"
           },
           "setup": {
-            "import": {
-              "recovery_phrase": {
-                "label": "使用恢復短語",
-                "description": "使用主密鑰恢復短語導入你的 nostr 密鑰"
-              },
-              "label": "導入 nostr 帳戶",
-              "description": "使用已有的 nostr 私鑰或從主密鑰中將其派生",
-              "title": "你想如何導入你的 nostr 帳戶？",
-              "private_key": {
-                "label": "使用 nostr 私鑰",
-                "description": "粘貼你的 nostr 私鑰將其導入 Alby"
-              }
-            },
             "title": "設置你的 nostr 密鑰",
             "description": "選擇是否要創建一個新的 nostr 帳戶（一對私鑰和公鑰）或導入現有帳戶。",
             "description2": "在 Alby 中創建的每個 Nostr 帳戶都帶有<0>恢復短語</0>——一組12個單詞，始終保證重新獲得對你的 Nostr 私鑰的訪問。",
             "new": {
               "label": "創建新的 nostr 帳戶",
               "description": "通過使用一對新的 nostr 密鑰生成主密鑰。"
-            },
-            "new_to_nostr": "Nostr 新手？<0>瞭解更多</0>"
+            }
           }
         },
         "remove": {
@@ -348,29 +329,19 @@
           "remove_secretkey": "移除主密鑰"
         },
         "mnemonic": {
-          "title": "🔑 密鑰管理",
           "backup": {
             "protocols": {
               "nostr": "Nostr"
             },
             "button": "備份恢復短語",
-            "warning": "⚠️別忘了將你的恢復短語備份！不備份可能會導致永久失去對你的主密鑰、 Nostr 身份或使用此密鑰管理的資產的訪問權限。",
             "save": "保存主密鑰",
-            "description": "請寫下恢復短語，以便能夠在新設備上恢復主密鑰，或以防失去帳戶訪問。",
-            "items": {
-              "recovery_phrase": "你將始終可以通過使用主密鑰的恢復短語來訪問它。",
-              "storage": "請確保在一個安全且私密的地方將它記下！",
-              "words": "恢復短語是一組12個單詞，它的工作方式類似於密碼，但是如果丟失，它不能被更改或重置。"
-            }
+            "description": "請寫下恢復短語，以便能夠在新設備上恢復主密鑰，或以防失去帳戶訪問。"
           },
           "lnurl": {
             "use_mnemonic": "使用主密鑰登錄閃電驅動的應用程式（LNURL Auth）",
             "title": "閃電登錄"
           },
-          "inputs": {},
           "generate": {
-            "error_confirm": "請確認你已將你的恢復短語備份。",
-            "confirm": "我已將我的帳戶主密鑰的恢復短語保存到私密且安全的地方。",
             "button": "生成主密鑰",
             "title": "生成新的主密鑰",
             "description": "主密鑰允許你與各種協議進行互動，例如：Nostr、基礎層比特幣或 LNURL-auth。"
@@ -384,14 +355,11 @@
           "saved": "主密鑰已加密並成功保存。"
         },
         "remove_secretkey": {
-          "subtitle": "將主密鑰從該帳戶移除。",
           "title": "移除主密鑰",
           "success": "已成功移除主密鑰。"
         },
         "no_mnemonic_hint": "💡你還沒有主密鑰。<0>點擊此處</0></div>來生成你的主密鑰並解鎖這些設置。",
         "network": {
-          "title": "網絡",
-          "subtitle": "選擇網絡來派生地址並解碼比特幣和 Liquid 交易",
           "options": {
             "bitcoin": "主網",
             "testnet": "測試網",
@@ -423,18 +391,6 @@
       "website_enhancements": {
         "title": "網站改進",
         "subtitle": "為Twitter、YouTube等提供小費功能。"
-      },
-      "lnurl_auth": {
-        "title": "LNURL-認證",
-        "hint": "是一個通用的認證協議。它使用數字簽名對用戶進行認證。該協議不需要任何其他識別信息，如密碼、電子郵件、用戶名或類似信息。通過 Alby，你可以使用你的閃電帳戶安全地登錄網站。為了與其他錢包兼容，我們不得不做一些，你可以在這裡進行配置。<0>理想情況下，所有這些選項都是關閉的。</0>僅當你有舊帳戶時才應該啟用它們。",
-        "legacy_lnurl_auth_202207": {
-          "title": "舊版 LNURL-認證",
-          "subtitle": "LNURL-認證的密鑰生成已經改變（2022年7月）。Alby 與其他實施方式不再兼容。這已被改變了，但現在使用的是不同的登錄密鑰。如果你之前使用 LNURL-認證登錄，你仍然可以啟用舊方法。這個選項以後會被刪除，請務必切換到新的登錄方式。"
-        },
-        "legacy_lnurl_auth": {
-          "title": "LNDhub 和 LNbits 的舊版簽名",
-          "subtitle": "用 LNDhub （如 BlueWallet）和 LNbits 帳戶進行的消息簽署和登錄已經改變（2022年3月）。如果你使用這些帳戶登錄，你仍然可以啟用舊的簽名方法。這個選項以後會被刪除，請確保切換到新的登錄方式。"
-        }
       },
       "camera_access": {
         "title": "攝像頭訪問權",
@@ -500,15 +456,6 @@
           "mismatched_password": "密碼不匹配。"
         },
         "success": "密碼更改成功"
-      },
-      "nostr": {
-        "title": "Nostr",
-        "hint": "是一個簡單而開放的協議，旨在創建抗審查的社交網絡。Nostr 使用加密密鑰。你可以使用你的密鑰對內容進行簽署並將其發送到多個中繼。你可以使用 Alby 來管理你的 Nostr 密鑰。許多 Nostr 應用程序將允許你輕鬆地使用 Alby 擴充套件中的密鑰。",
-        "private_key": {
-          "title": "私鑰",
-          "subtitle": "此部分已移至帳戶頁面，因為私鑰現在是特定於帳戶的。",
-          "go_to": "前往帳戶"
-        }
       }
     },
     "send": {
@@ -641,42 +588,13 @@
     },
     "nostr": {
       "title": "Nostr",
-      "allow": "允許该網站：",
       "content": "該網站要求你簽署：",
       "allow_sign": "允許 {{host}} 簽名：",
       "block_and_ignore": "阻止並忽略 {{host}}",
-      "block_added": "已將 {{host}} 添加到阻止列表，請重新加載網站。",
-      "view_details": "查看詳情",
-      "hide_details": "隱藏詳情",
-      "kinds": {
-        "0": "元數據",
-        "1": "短文筆記",
-        "2": "推薦中繼器",
-        "3": "聯繫人",
-        "4": "加密的直接消息",
-        "5": "刪除事件",
-        "7": "回應",
-        "8": "徽章獎勵",
-        "40": "頻道創建",
-        "41": "頻道元數據",
-        "42": "頻道消息",
-        "43": "頻道隱藏消息",
-        "44": "頻道靜音用戶",
-        "1984": "報告",
-        "9734": "打閃請求",
-        "9735": "打閃",
-        "10002": "中繼器列表元數據",
-        "22242": "客戶端認證",
-        "24133": "nostr連接",
-        "30008": "個人資料徽章",
-        "30009": "徽章定義",
-        "30023": "長篇內容",
-        "30078": "應用程序特定數據"
-      }
+      "block_added": "已將 {{host}} 添加到阻止列表，請重新加載網站。"
     },
     "transactions": {
-      "title": "交易",
-      "list_empty": "尚無可用交易。"
+      "title": "交易"
     },
     "distributions": {
       "title": "連接 {{name}}",
@@ -731,8 +649,6 @@
     "confirm_sign_pset": {
       "title": "簽署",
       "allow_sign": "該網站要求你簽署一筆 Liquid 交易：",
-      "view_details": "查看詳情",
-      "hide_details": "隱藏詳情",
       "inputs": "輸入",
       "outputs": "輸出",
       "amount": "{{amount}} {{ticker}}",
@@ -877,8 +793,7 @@
       "edit_allowance": {
         "title": "編輯偏好",
         "screen_reader": "限額選項"
-      },
-      "edit_permissions": "編輯權限"
+      }
     },
     "qrcode_scanner": {
       "title": "掃描二維碼",
@@ -957,11 +872,6 @@
     }
   },
   "permissions": {
-    "nostr": {
-      "getpublickey": "讀取你的公鑰",
-      "nip04decrypt": "解密數據",
-      "signmessage": "用你的密鑰簽署消息"
-    },
     "commando": {
       "bkpr-listbalances": "所有當前和歷史帳戶餘額列表",
       "checkmessage": "驗證該簽名是由給定的節點產生的",
@@ -1042,16 +952,6 @@
       "addinvoice": "創建新發票",
       "addholdinvoice": "創建新的 HODL 發票",
       "settleinvoice": "結算已接受的發票"
-    },
-    "webln": {
-      "getbalance": "讀取你的帳戶餘額"
-    },
-    "bitcoin": {
-      "getaddress": "讀取你的比特幣收款地址"
-    },
-    "liquid": {
-      "getaddress": "讀取你的 Liquid 收款地址",
-      "signschnorr": "用你的密鑰簽署消息"
     }
   }
 }

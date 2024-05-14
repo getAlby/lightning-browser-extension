@@ -12,7 +12,8 @@
           "enter_password": "请输入密码。",
           "confirm_password": "请确认你的密码。",
           "mismatched_password": "密码不匹配。"
-        }
+        },
+        "title": "设置解锁密码"
       },
       "test_connection": {
         "ready": "真棒，你已准备就绪!",
@@ -218,9 +219,6 @@
       }
     },
     "home": {
-      "allowance_view": {
-        "no_transactions": "<0>{{name}}</0>还没有交易。"
-      },
       "default_view": {
         "is_blocked_hint": "Alby 目前在 {{host}} 上被禁用",
         "block_removed": "启用了{{host}}。请重新加载网站。"
@@ -273,36 +271,20 @@
           },
           "setup": {
             "description2": "在 Alby 中创建的每个 Nostr 帐户都带有<0>恢复短语</0> —— 一组12个单词，始终保证重新获得对你的 Nostr 私钥的访问。",
-            "new_to_nostr": "Nostr 新手？<0>了解更多</0>",
             "title": "设置你的 nostr 密钥",
             "description": "选择是否要创建一个新的 nostr 帐户（一对私钥和公钥）或导入现有帐户。",
             "new": {
               "label": "创建新的 nostr 帐户",
               "description": "通过使用一对新的 nostr 密钥生成主密钥。"
-            },
-            "import": {
-              "label": "导入 nostr 帐户",
-              "description": "使用已有的 nostr 私钥或从主密钥中将其派生",
-              "title": "你想如何导入你的 nostr 帐户？",
-              "private_key": {
-                "label": "使用 nostr 私钥",
-                "description": "粘贴你的 nostr 私钥将其导入 Alby"
-              },
-              "recovery_phrase": {
-                "label": "使用恢复短语",
-                "description": "使用主密钥恢复短语导入你的 nostr 密钥"
-              }
             }
           }
         },
         "export": {
           "export_uri": "LNDHub凭证URI",
           "scan_qr": "通过扫描二维码将这个钱包导入Zeus或BlueWallet。",
-          "title": "连接移动钱包",
           "screen_reader": "导出帐户详情",
           "waiting": "等待LndHub的数据...",
-          "your_ln_address": "你的闪电地址：",
-          "description": "将允许你在移动钱包上连接并使用此帐户，例如 <0>BlueWallet</0> 和 <1>Zeus</1>。"
+          "your_ln_address": "你的闪电地址："
         },
         "remove": {
           "error": "输入的帐户名称不匹配。"
@@ -319,26 +301,17 @@
         "mnemonic": {
           "backup": {
             "button": "备份恢复短语",
-            "warning": "⚠️ 别忘了将你的恢复短语备份！不备份可能会导致永久失去对你的主密钥、Nostr 身份或使用此密钥管理的资产的访问权限。",
             "save": "保存主密钥",
             "protocols": {
               "nostr": "Nostr"
             },
-            "items": {
-              "recovery_phrase": "你将始终可以通过使用主密钥的恢复短语来访问它。",
-              "storage": "请确保在一个安全且私密的地方将它记下！",
-              "words": "恢复短语是一组12个单词，它的工作方式类似于秘密，但是如果丢失，它不能被更改或重置。"
-            },
             "description": "请写下恢复短语，以便能够在新设备上恢复主密钥，或以防失去帐户访问。"
           },
           "existing_nostr_key_notice": "ℹ️ 该账户已设置 nostr 私钥，因此不会从此主密钥派生。你可以通过你的帐户设置管理你的 nostr 密钥。",
-          "title": "🔑密钥管理",
           "saved": "主密钥已加密并成功保存。",
           "generate": {
             "title": "生成新的主密钥",
             "button": "生成主密钥",
-            "confirm": "我已将我的帐户主密钥的恢复短语保存到私密且安全的地方。",
-            "error_confirm": "请确认你已将你的恢复短语备份。",
             "description": "主密钥允许你与各种协议进行互动，例如：Nostr、基础层比特币或 LNURL-auth。"
           },
           "import": {
@@ -346,7 +319,6 @@
             "description": "通过使用恢复短语将主密钥导入 Alby。",
             "button": "导入主密钥"
           },
-          "inputs": {},
           "lnurl": {
             "title": "闪电登录",
             "use_mnemonic": "使用主密钥登录闪电驱动的应用程序（LNURL Auth）"
@@ -354,13 +326,10 @@
         },
         "remove_secretkey": {
           "success": "已成功移除主密钥。",
-          "title": "移除主密钥",
-          "subtitle": "将主密钥从该帐户移除。"
+          "title": "移除主密钥"
         },
         "no_mnemonic_hint": "💡 你还没有主密钥。<0>点击此处e</0></div>来生成你的主密钥并解锁这些设置。",
         "network": {
-          "title": "网络",
-          "subtitle": "选择网络来派生地址并解码比特币和 Liquid 交易",
           "options": {
             "bitcoin": "主网",
             "testnet": "测试网",
@@ -405,18 +374,6 @@
         },
         "title": "Nostr",
         "hint": "是一个简单而开放的协议，旨在创建抗审查的社交网络。 Nostr 使用加密密钥。你可以使用你的密钥对内容进行签署并将其发送到多个中继。你可以使用 Alby 来管理你的 Nostr 密钥。许多 Nostr 应用程序允许你轻松地使用 Alby 扩展中的密钥。"
-      },
-      "lnurl_auth": {
-        "title": "LNURL-认证",
-        "legacy_lnurl_auth": {
-          "title": "LNDhub 和 LNbits 的旧签名方式",
-          "subtitle": "用 LNDhub（如 BlueWallet）和 LNbits 帐户进行的消息签署和登录已经改变（2022年3月）。如果你使用这些帐户登录，你仍然可以启用旧的签名方法。这个选项以后会被删除，请确保切换到新的登录方式。"
-        },
-        "hint": "是一个通用的认证协议。它使用数字签名对用户进行认证。该协议不需要任何其他识别信息，如密码、电子邮件、用户名或类似信息。通过 Alby，你可以使用你的闪电帐户安全地登录网站。为了与其他钱包兼容，我们不得不做一些改变，你可以在这里进行配置。 <0>理想情况下，所有这些选项都是关闭的。</0>仅当你有旧帐户时才应该启用它们。",
-        "legacy_lnurl_auth_202207": {
-          "subtitle": "LNURL-认证的密钥生成已经改变（2022年7月）。Alby与其他实施方式不再兼容。这已被改变了，但现在使用的是不同的登录密钥。如果你之前使用LNURL-认证登录，你仍然可以启用旧方法。这个选项以后会被删除，请务必切换到新的登录方式。",
-          "title": "旧版 LNURL-认证"
-        }
       },
       "browser_notifications": {
         "title": "浏览器通知",
@@ -571,38 +528,10 @@
     },
     "nostr": {
       "title": "Nostr",
-      "allow": "允许该网站:",
       "block_and_ignore": "阻止并忽略 {{host}}",
       "content": "该网站要求你签署:",
       "allow_sign": "允许{{host}}签署：",
-      "block_added": "已将{{host}}添加到屏蔽列表，请重新加载网站。",
-      "view_details": "查看详情",
-      "hide_details": "隐藏详情",
-      "kinds": {
-        "0": "元数据",
-        "1": "短文笔记",
-        "2": "推荐中继器",
-        "3": "联系人",
-        "4": "加密的直接消息",
-        "5": "删除事件",
-        "7": "回应",
-        "8": "徽章奖励",
-        "40": "频道创建",
-        "41": "频道元数据",
-        "42": "频道消息",
-        "43": "频道隐藏消息",
-        "44": "频道静音用户",
-        "1984": "报告",
-        "9734": "打闪请求",
-        "9735": "打闪",
-        "10002": "中继器列表元数据",
-        "22242": "客户端认证",
-        "24133": "nostr 连接",
-        "30008": "个人资料徽章",
-        "30009": "徽章定义",
-        "30023": "长篇内容",
-        "30078": "应用程序特定数据"
-      }
+      "block_added": "已将{{host}}添加到屏蔽列表，请重新加载网站。"
     },
     "lnurlpay": {
       "amount": {
@@ -668,7 +597,6 @@
       "success": "通道请求已成功发送到 {{name}}"
     },
     "transactions": {
-      "list_empty": "尚无交易。",
       "title": "交易"
     },
     "distributions": {
@@ -723,12 +651,10 @@
     },
     "confirm_sign_pset": {
       "title": "签署",
-      "view_details": "查看详情",
       "inputs": "输入",
       "allow_sign": "该网站要求你签署一笔 Liquid 交易：",
       "view_raw_transaction": "查看原始交易（Base64）",
       "hide_raw_transaction": "隐藏原始交易（Base64）",
-      "hide_details": "隐藏详情",
       "outputs": "输出",
       "amount": "{{amount}} {{ticker}}"
     },
@@ -892,8 +818,7 @@
       "edit_allowance": {
         "title": "编辑偏好",
         "screen_reader": "限额选项"
-      },
-      "edit_permissions": "编辑权限"
+      }
     },
     "transactions_table": {
       "boostagram": {
@@ -950,11 +875,6 @@
     }
   },
   "permissions": {
-    "nostr": {
-      "signmessage": "使用你的密钥签署消息",
-      "nip04decrypt": "解密数据",
-      "getpublickey": "读取你的公钥"
-    },
     "commando": {
       "bkpr-listbalances": "所有当前和历史帐户余额列表",
       "checkmessage": "验证该签名是由一个给定的节点产生的",
@@ -1035,16 +955,6 @@
       "openchannel": "开通新渠道",
       "addholdinvoice": "创建新的 HODL 发票",
       "settleinvoice": "结算已接受的发票"
-    },
-    "webln": {
-      "getbalance": "读取你的帐户余额"
-    },
-    "bitcoin": {
-      "getaddress": "读取你的比特币收款地址"
-    },
-    "liquid": {
-      "getaddress": "读取你的 Liquid 收款地址",
-      "signschnorr": "用你的密钥签署消息"
     }
   }
 }

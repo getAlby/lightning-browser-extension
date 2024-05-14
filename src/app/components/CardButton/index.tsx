@@ -1,4 +1,4 @@
-import React from "react";
+import { FunctionComponent, SVGProps } from "react";
 
 export type Props = {
   title: string;
@@ -8,29 +8,29 @@ export type Props = {
 };
 
 interface IconTypeProps {
-  className: string;
+  className?: string;
 }
 
-type IconType = (props: IconTypeProps) => JSX.Element;
+type IconType = FunctionComponent<IconTypeProps & SVGProps<SVGSVGElement>>;
 
 export default function CardButton({
   title,
   description,
-  icon,
+  icon: Icon,
   onClick,
 }: Props) {
   return (
-    <div
-      className="flex flex-col gap-2 p-5 hover:bg-gray-50 dark:hover:bg-surface-08dp rounded-md border border-gray-200 dark:border-neutral-700 hover:border-gray-300 hover:dark:border-neutral-800 cursor-pointer"
+    <button
+      className="flex flex-col flex-1 text-left border border-gray-200 dark:border-neutral-700 rounded-md p-6 bg-white dark:bg-surface-01dp hover:bg-gray-100 dark:hover:bg-surface-02dp hover:border-gray-300 dark:hover:border-neutral-700 focus:bg-amber-50 dark:focus:bg-surface-02dp cursor-pointer focus:ring-primary focus:border-primary dark:focus:border-primary focus:ring-1 gap-2"
       onClick={onClick}
     >
-      {React.createElement(icon, {
-        className: "w-8 h-8 text-gray-700 dark:text-white",
-      })}
-      <h3 className="font-medium text-gray-700 dark:text-neutral-200">
+      <Icon className="w-8 h-8 text-gray-700 dark:text-white" />
+      <h3 className="font-medium leading-6 text-md text-gray-800 dark:text-neutral-200">
         {title}
       </h3>
-      <p className="text-gray-500 dark:text-neutral-500">{description}</p>
-    </div>
+      <p className="text-gray-600 dark:text-neutral-400 text-sm leading-5">
+        {description}
+      </p>
+    </button>
   );
 }

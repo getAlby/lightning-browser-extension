@@ -217,9 +217,6 @@
         "send_satoshis": "⚡️ Invia Satoshis ⚡️",
         "enable_now": "Attiva ora"
       },
-      "allowance_view": {
-        "no_transactions": "Non ci sono ancora transazioni su <0>{{name}}</0>."
-      },
       "default_view": {
         "is_blocked_hint": "Alby è attualmente disabilitato su {{host}}",
         "block_removed": "{{host}} abilitato. Si prega di ricaricare la pagina."
@@ -264,7 +261,6 @@
           "waiting": "in attesa dei dati da LndHub...",
           "export_uri": "URI delle credenziali di LNDHub",
           "scan_qr": "Importa questo wallet su Zeus o BlueWallet scansionando il QRCode.",
-          "title": "Esporta Account",
           "screen_reader": "Esporta i dettagli dell'account"
         },
         "title2": "Modifica Account",
@@ -297,18 +293,6 @@
       "website_enhancements": {
         "title": "Miglioramenti del sito web",
         "subtitle": "Miglioramenti per le mance su Twitter, YouTube, ecc."
-      },
-      "lnurl_auth": {
-        "title": "LNURL-Auth",
-        "hint": "è un protocollo di autenticazione generico. Autentica l'utente utilizzando le firme digitali. Il protocollo non richiede altre informazioni di identificazione come password, e-mail, nomi utente o simili. Con Alby è possibile utilizzare i propri account lightning per accedere in modo sicuro ai siti web. Per essere compatibili con altri portafogli abbiamo dovuto apportare alcune modifiche che si possono configurare qui. <0>Idealmente tutte queste opzioni dovrebbero essere spente (OFF).</0> Usatele solo se avete vecchi account.",
-        "legacy_lnurl_auth_202207": {
-          "title": "Legacy LNURL-Auth",
-          "subtitle": "La generazione di chiavi per LNURL-auth è cambiata (Luglio 2022). Alby non era compatibile con altre implementazioni. Abbiamo apportate delle modifiche, ma ora vengono utilizzate chiavi di accesso diverse. Se prima si utilizzava LNURL-auth per il login, si può ancora attivare il vecchio metodo. Questa opzione sarà rimossa in futuro; assicurarati di passare al nuovo login."
-        },
-        "legacy_lnurl_auth": {
-          "title": "Firma tradizione per LNDhub e LNbits",
-          "subtitle": "La firma dei messaggi e il login con gli account LNDhub (ad esempio BlueWallet) e LNbits sono stati modificati (Marzo 2022). Se avete effettuato l'accesso con questi account, potete ancora attivare il vecchio metodo di firma. Questa opzione sarà rimossa in futuro; assicurati di passare al nuovo metodo di login."
-        }
       },
       "camera_access": {
         "title": "Accesso alla telecamera",
@@ -374,15 +358,6 @@
           "mismatched_password": "Le password non corrispondono."
         },
         "success": "La password è stata modificata con successo"
-      },
-      "nostr": {
-        "title": "Nostr",
-        "hint": "è un protocollo semplice e aperto che mira a creare reti sociali resistenti alla censura. Nostr funziona con chiavi crittografiche. Per pubblicare qualcosa si firma con la propria chiave e la si invia a più relè. È possibile utilizzare Alby per gestire la propria chiave Nostr. Molte applicazioni Nostr vi permetteranno poi di utilizzare semplicemente la chiave dall'estensione Alby.",
-        "private_key": {
-          "title": "Chiave privata",
-          "subtitle": "Questa sezione è stata spostata nella pagina degli account, poiché le chiavi ora sono specifiche per l'account.",
-          "go_to": "Vai Agli Account"
-        }
       }
     },
     "send": {
@@ -509,7 +484,6 @@
     },
     "nostr": {
       "title": "Nostr",
-      "allow": "Consenti a questo sito di:",
       "block_and_ignore": "Blocca e ignora {{host}}",
       "block_added": "{{host}} aggiunto alla blocklist, si prega di ricaricare la pagina.",
       "content": "Questo sito chiede di firmare:",
@@ -611,8 +585,7 @@
       "edit_allowance": {
         "title": "Modifica tolleranza",
         "screen_reader": "Opzioni di tolleranza"
-      },
-      "edit_permissions": "Modifica Permessi"
+      }
     },
     "qrcode_scanner": {
       "title": "Scansiona il codice QR",
@@ -749,11 +722,6 @@
       "decodepayreq": "Decodifica una stringa di richiesta di pagamento",
       "getnetworkinfo": "Ottieni le statistiche di base riguardo il tracciato del canale conosciuto",
       "addinvoice": "Crea nuove ricevute di pagamento"
-    },
-    "nostr": {
-      "nip04decrypt": "Decripta i dati",
-      "getpublickey": "Leggi la tua chiave pubblica",
-      "signmessage": "Firma il messaggio con la tua chiave"
     }
   }
 }

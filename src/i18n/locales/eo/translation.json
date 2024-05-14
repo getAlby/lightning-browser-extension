@@ -214,9 +214,6 @@
         "send_satoshis": "⚡️ Sendi Bitmonon ⚡️",
         "enable_now": ""
       },
-      "allowance_view": {
-        "no_transactions": ""
-      },
       "default_view": {
         "is_blocked_hint": ""
       }
@@ -244,18 +241,6 @@
       "website_enhancements": {
         "title": "",
         "subtitle": ""
-      },
-      "lnurl_auth": {
-        "title": "",
-        "hint": "",
-        "legacy_lnurl_auth_202207": {
-          "title": "",
-          "subtitle": ""
-        },
-        "legacy_lnurl_auth": {
-          "title": "",
-          "subtitle": ""
-        }
       },
       "camera_access": {
         "title": "",
@@ -321,14 +306,6 @@
           "mismatched_password": ""
         },
         "success": ""
-      },
-      "nostr": {
-        "title": "Nostr",
-        "hint": "",
-        "private_key": {
-          "title": "Privata ŝlosilo",
-          "subtitle": ""
-        }
       }
     },
     "send": {
@@ -456,7 +433,6 @@
     },
     "nostr": {
       "title": "Nostr",
-      "allow": "",
       "block_and_ignore": ""
     }
   },
