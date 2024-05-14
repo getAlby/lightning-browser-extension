@@ -47,7 +47,6 @@ const DefaultView: FC<Props> = (props) => {
   const { account, accountLoading } = useAccount();
 
   const lightningAddress = account?.lightningAddress || "";
-  const nodeRequired = account?.nodeRequired || false;
 
   const [isBlockedUrl, setIsBlockedUrl] = useState<boolean>(false);
   const [currentAccount, setCurrentAccount] = useState<GetAccountRes>();
@@ -166,38 +165,32 @@ const DefaultView: FC<Props> = (props) => {
             </div>
           </Alert>
         )}
-        <div className="flex justify-center">
-          {!accountLoading ? (
-            <>
-              {nodeRequired ? (
-                <div className="flex flex-row items-center gap-2 text-sm text-orange-700 bg-orange-50 dark:text-orange-200 dark:bg-orange-900 border rounded-lg p-2">
-                  <div className="shrink-0">
-                    <PopiconsCircleExclamationLine className="w-5 h-5" />
-                  </div>
-                  <span>
-                    <Trans
-                      i18nKey={"default_view.node_required"}
-                      t={t}
-                      components={[
-                        // eslint-disable-next-line react/jsx-key
-                        <a
-                          className="underline text-orange-700 dark:bg-orange-900"
-                          href="https://getalby.com"
-                          target="_blank"
-                          rel="noreferrer"
-                        />,
-                      ]}
-                    />
-                  </span>
-                </div>
-              ) : (
-                <BalanceBox />
-              )}
-            </>
-          ) : (
-            <SkeletonLoader className="w-64" />
-          )}
-        </div>
+        {account?.nodeRequired ? (
+          <Alert type="warn">
+            <div className="flex items-center gap-2">
+              <div className="shrink-0">
+                <PopiconsCircleExclamationLine className="w-5 h-5" />
+              </div>
+              <span className="text-sm">
+                <Trans
+                  i18nKey={"default_view.node_required"}
+                  t={t}
+                  components={[
+                    // eslint-disable-next-line react/jsx-key
+                    <a
+                      className="underline"
+                      href="https://getalby.com"
+                      target="_blank"
+                      rel="noreferrer"
+                    />,
+                  ]}
+                />
+              </span>
+            </div>
+          </Alert>
+        ) : (
+          <BalanceBox />
+        )}
 
         {(accountLoading || lightningAddress) && (
           <div className="flex justify-center">
