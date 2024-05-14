@@ -2,7 +2,7 @@ import { schnorr } from "@noble/curves/secp256k1";
 import * as secp256k1 from "@noble/secp256k1";
 import type { ResponseType } from "axios";
 import { Method } from "axios";
-import lightningPayReq from "bolt11";
+import lightningPayReq from "bolt11-signet";
 import Hex from "crypto-js/enc-hex";
 import sha256 from "crypto-js/sha256";
 import { nip04, relayInit, type Relay } from "nostr-tools";
