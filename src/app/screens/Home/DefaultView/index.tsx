@@ -125,7 +125,7 @@ const DefaultView: FC<Props> = (props) => {
 
       <div className="flex flex-col gap-4 p-4">
         {isBlockedUrl && (
-          <div className="items-center dark:text-white text-sm mb-4">
+          <div className="items-center dark:text-white text-sm">
             <Alert type="info">
               <p className="pb-2">
                 {t("default_view.is_blocked_hint", {
@@ -142,6 +142,30 @@ const DefaultView: FC<Props> = (props) => {
           </div>
         )}
 
+        {isAlbyLNDHubAccount(account?.alias, account?.connectorType) && (
+          <Alert type="info">
+            <div className="flex gap-2 items-center">
+              <div className="shrink-0">
+                <PopiconsCircleExclamationLine className="w-5 h-5" />
+              </div>
+              <span className="text-sm">
+                <Trans
+                  i18nKey={"default_view.upgrade_account"}
+                  t={t}
+                  components={[
+                    // eslint-disable-next-line react/jsx-key
+                    <a
+                      className="underline"
+                      href="https://getalby.com/auth/users/new"
+                      target="_blank"
+                      rel="noreferrer"
+                    />,
+                  ]}
+                />
+              </span>
+            </div>
+          </Alert>
+        )}
         <div className="flex justify-center">
           {!accountLoading ? (
             <>
@@ -174,31 +198,6 @@ const DefaultView: FC<Props> = (props) => {
             <SkeletonLoader className="w-64" />
           )}
         </div>
-
-        {isAlbyLNDHubAccount(account?.alias, account?.connectorType) && (
-          <Alert type="info">
-            <div className="flex gap-2 items-center">
-              <div className="shrink-0">
-                <PopiconsCircleExclamationLine className="w-5 h-5" />
-              </div>
-              <span className="text-sm">
-                <Trans
-                  i18nKey={"default_view.upgrade_account"}
-                  t={t}
-                  components={[
-                    // eslint-disable-next-line react/jsx-key
-                    <a
-                      className="underline"
-                      href="https://getalby.com/auth/users/new"
-                      target="_blank"
-                      rel="noreferrer"
-                    />,
-                  ]}
-                />
-              </span>
-            </div>
-          </Alert>
-        )}
 
         {(accountLoading || lightningAddress) && (
           <div className="flex justify-center">
