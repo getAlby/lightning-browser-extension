@@ -384,6 +384,7 @@
             "description": "Fund your account and receive via your lightning address or an invoice"
           }
         },
+        "node_required": "Your Alby Account needs a wallet. Connect a wallet to your account on <0>getalby.com</0>",
         "upgrade_account": "You are using the old LNDHub setup. <0>Please re-connect</0> your Alby account to get access to the latest features."
       }
     },
