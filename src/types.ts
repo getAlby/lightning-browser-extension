@@ -1,5 +1,5 @@
 import { CreateSwapParams } from "@getalby/sdk/dist/types";
-import { PaymentRequestObject } from "bolt11";
+import { PaymentRequestObject } from "bolt11-signet";
 import { Runtime } from "webextension-polyfill";
 import { ACCOUNT_CURRENCIES, CURRENCIES } from "~/common/constants";
 import connectors from "~/extension/background-script/connectors";
@@ -803,10 +803,8 @@ export enum PermissionMethodNostr {
   NOSTR_SIGNMESSAGE = "nostr/signMessage",
   NOSTR_SIGNSCHNORR = "nostr/signSchnorr",
   NOSTR_GETPUBLICKEY = "nostr/getPublicKey",
-  NOSTR_NIP04DECRYPT = "nostr/nip04decrypt",
-  NOSTR_NIP04ENCRYPT = "nostr/nip04encrypt",
-  NOSTR_NIP44DECRYPT = "nostr/nip44decrypt",
-  NOSTR_NIP44ENCRYPT = "nostr/nip44encrypt",
+  NOSTR_DECRYPT = "nostr/decrypt",
+  NOSTR_ENCRYPT = "nostr/encrypt",
 }
 
 export interface DbPermission {
@@ -889,8 +887,6 @@ export interface Allowance extends Omit<DbAllowance, "id"> {
 export interface SettingsStorage {
   browserNotifications: boolean;
   websiteEnhancements: boolean;
-  legacyLnurlAuth: boolean;
-  isUsingLegacyLnurlAuthKey: boolean;
   userName: string;
   userEmail: string;
   locale: string;

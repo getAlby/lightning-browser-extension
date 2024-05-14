@@ -1,4 +1,4 @@
-import lightningPayReq from "bolt11";
+import lightningPayReq from "bolt11-signet";
 
 export function getPaymentRequestDescription(paymentRequest: string): string {
   const decodedPaymentRequest = lightningPayReq.decode(paymentRequest);

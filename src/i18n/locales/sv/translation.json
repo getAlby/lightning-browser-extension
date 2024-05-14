@@ -305,13 +305,11 @@
           "placeholder": "Konto visningsnamn"
         },
         "export": {
-          "title": "Anslut din mobila plånbok",
           "screen_reader": "Exportera konto detaljer",
           "waiting": "väntar på LndHub-data...",
           "your_ln_address": "Din Lightning Address:",
           "export_uri": "LNDHub-inloggnings-URI",
-          "scan_qr": "Importera denna plånbok till Zeus eller BlueWallet genom att skanna QR-koden.",
-          "description": "Låter dig ansluta och använda det här kontot på mobila plånböcker som <0>Blue Wallet</0> och <1>Zeus</1>."
+          "scan_qr": "Importera denna plånbok till Zeus eller BlueWallet genom att skanna QR-koden."
         },
         "actions": {
           "export": "Exportera",
@@ -331,7 +329,6 @@
             "protocols": {
               "nostr": "Nostr"
             },
-            "warning": "⚠️ Glöm inte att säkerhetskopiera din återställningsfras! Att inte säkerhetskopiera det kan leda till att du permanent förlorar åtkomst till din huvudnyckel, Nostr-identitet eller tillgångar som du hanterar med denna nyckel.",
             "description": "Skriv ner återställningsfrasen för att kunna återställa din huvudnyckel på en ny enhet eller om du förlorar åtkomsten till ditt konto."
           },
           "import": {
@@ -339,7 +336,6 @@
             "description": "Använd återställningsfrasen för att importera din huvudnyckel till Alby.",
             "button": "Importera huvudnyckel"
           },
-          "title": "🔑 Nyckelhantering",
           "lnurl": {
             "title": "Logga in med Lightning",
             "use_mnemonic": "Använd Master Key för att logga in på lightning appar (LNURL Auth)"
@@ -347,14 +343,11 @@
         },
         "remove_secretkey": {
           "title": "Ta bort huvudnyckeln",
-          "subtitle": "Tar bort huvudnyckeln från det här kontot.",
           "success": "Masternyckeln har tagits bort.",
           "confirm": "Ange namnet på kontot för att bekräfta raderingen av din huvudnyckel.\n\n{{ name }}"
         },
         "no_mnemonic_hint": "💡 Du har ingen huvudnyckel än. <0>Klicka här</0></div> för att skapa din huvudnyckel och låsa upp dessa inställningar.",
         "network": {
-          "title": "Nätverk",
-          "subtitle": "Välj nätverk för att härleda adresser och avkoda bitcoin och likvida transaktioner",
           "options": {
             "bitcoin": "Mainnet",
             "testnet": "Testnet",
@@ -386,18 +379,6 @@
       "website_enhancements": {
         "title": "Webbplatsförbättringar",
         "subtitle": "Dricks för Twitter, YouTube, m.fl."
-      },
-      "lnurl_auth": {
-        "title": "LNURL-Auth",
-        "hint": "är ett generiskt autentiseringsprotokoll. Detta autentiserar användarens digitala signaturer. Protokollet kräver ingen ytterligare information såsom lösenord, e-post, användarnamn eller liknande. Med Alby kan du använd dina lightning-konton för att logga in på webbplatser. För att vara kompatibla med andra plånböcker var vi tvungna att göra vissa förändringar som du kan konfigurera här. <0>I bästa fall är alla inställningar AV.</0> Använd enbart om du har äldre konton.",
-        "legacy_lnurl_auth_202207": {
-          "title": "Äldre LNURL-Auth",
-          "subtitle": "Nyckelgenereringen för LNURL-auth har ändrats (Juli 2022). Alby var inte kompatibelt med andra implementationer. Detta har ändrats och nu används andra inloggningsnycklar. Om du tidigare använt LNURL-auth för att logga in, kan du fortfarande aktivera denna metod. Denna möjlighet kommer försvinna så se till att byta till det nya inloggningsförfarandet."
-        },
-        "legacy_lnurl_auth": {
-          "title": "Äldre signeringsmetod för LNDHub och LNbits",
-          "subtitle": "Meddelandesignering och inloggning med LNDhub (t.ex. BlueWallet) och LNbits-konton har ändrats (Mars 2022). Om du tidigare loggade in med dessa konton kan du fortfarande aktivera den äldre signeringsmetoden. Denna möjlighet kommer försvinna så se till att byta till det nya inloggningsförfarandet."
-        }
       },
       "camera_access": {
         "title": "Åtkomst till kamera",
@@ -602,10 +583,7 @@
     },
     "nostr": {
       "title": "Nostr",
-      "allow": "Tillåt den här webbplatsen att:",
       "block_and_ignore": "Blockera och ignorera {{host}}",
-      "view_details": "Visa detaljer",
-      "hide_details": "Göm detaljer",
       "block_added": "Lade till {{host}} till blockeringslistan, ladda om webbplatsen.",
       "allow_sign": "Tillåt {{host}} att signera:",
       "content": "Den här webbplatsen ber dig att signera:"
@@ -701,8 +679,6 @@
     "confirm_sign_pset": {
       "title": "Signera",
       "allow_sign": "Denna webbplats ber dig att underteckna en Liquid transaktion:",
-      "view_details": "Visa detaljer",
-      "hide_details": "Dölj detaljer",
       "view_raw_transaction": "Visa obearbetad transaktion (Base64)",
       "hide_raw_transaction": "Göm obearbetad transaktion (Base64)",
       "inputs": "Ingångar",
@@ -723,9 +699,7 @@
         "view_raw_transaction": "Visa råtransaktion (hexadecimal)",
         "inputs": "Ingångar",
         "fee": "Avgift",
-        "hide_details": "Göm detaljer",
         "allow_sign": "Den här webbplatsen ber dig att underteckna en bitcoin-transaktion",
-        "view_details": "Visa detaljer",
         "outputs": "Utgångar"
       }
     },
