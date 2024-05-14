@@ -260,15 +260,9 @@ function getConnectorRoutes(): ConnectorRoute[] {
     connectorMap["voltage"],
     connectorMap[galoyPaths.blink],
     connectorMap[galoyPaths.bitcoinJungle],
-    getDistribution("citadel"),
-    getDistribution("umbrel"),
-    getDistribution("mynode"),
-    getDistribution("startos"),
-    getDistribution("raspiblitz"),
-    connectorMap["nwc"],
-    connectorMap["lawallet"],
     connectorMap["lnd-hub-go"],
     connectorMap["eclair"],
+    connectorMap["lawallet"],
   ];
 }
 
