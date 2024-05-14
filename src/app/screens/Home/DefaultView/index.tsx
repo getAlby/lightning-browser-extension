@@ -122,9 +122,9 @@ const DefaultView: FC<Props> = (props) => {
         <PublisherLnData lnData={props.lnDataFromCurrentTab[0]} />
       )}
 
-      <div className="p-4">
+      <div className="flex flex-col gap-4 p-4">
         {isBlockedUrl && (
-          <div className="items-center dark:text-white text-sm mb-4">
+          <div className="items-center dark:text-white text-sm">
             <Alert type="info">
               <p className="pb-2">
                 {t("default_view.is_blocked_hint", {
@@ -165,8 +165,33 @@ const DefaultView: FC<Props> = (props) => {
             </div>
           </Alert>
         )}
+        {account?.nodeRequired ? (
+          <Alert type="warn">
+            <div className="flex items-center gap-2">
+              <div className="shrink-0">
+                <PopiconsCircleExclamationLine className="w-5 h-5" />
+              </div>
+              <span className="text-sm">
+                <Trans
+                  i18nKey={"default_view.node_required"}
+                  t={t}
+                  components={[
+                    // eslint-disable-next-line react/jsx-key
+                    <a
+                      className="underline"
+                      href="https://getalby.com"
+                      target="_blank"
+                      rel="noreferrer"
+                    />,
+                  ]}
+                />
+              </span>
+            </div>
+          </Alert>
+        ) : (
+          <BalanceBox />
+        )}
 
-        <BalanceBox />
         {(accountLoading || lightningAddress) && (
           <div className="flex justify-center">
             <a
