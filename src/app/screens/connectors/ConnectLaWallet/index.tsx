@@ -62,11 +62,11 @@ export default function ConnectLaWallet() {
       relay_url,
     } = formData;
 
-    const publicKey = new Nostr(private_key).getPublicKey();
     const domain = identity_endpoint.replace(/https?:\/\//, "");
 
     let username;
     try {
+      const publicKey = new Nostr(private_key).getPublicKey();
       const response = await LaWallet.request<{ username: string }>(
         identity_endpoint,
         "GET",
