@@ -86,7 +86,6 @@ export default class LaWallet implements Connector {
       "makeInvoice",
       "sendPayment",
       "signMessage",
-      "getInvoices",
       "getBalance",
       "getTransactions",
     ];
@@ -97,15 +96,6 @@ export default class LaWallet implements Connector {
       `${this.constructor.name} does not implement the getInvoices call`
     );
     throw new Error("Not yet supported with the currently used account.");
-  }
-
-  private async getInvoices(): Promise<ConnectorTransaction[]> {
-    const transactions: ConnectorTransaction[] = (await this.getTransactions())
-      .data.transactions;
-
-    return transactions.filter(
-      (transaction) => transaction.type === "received"
-    );
   }
 
   async getTransactions(): Promise<GetTransactionsResponse> {
