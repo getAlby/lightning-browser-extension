@@ -268,6 +268,30 @@
           "connection_failed": "Connection failed. Is the BTCPay connection URL correct and accessible?"
         }
       },
+      "lawallet": {
+        "title": "LaWallet.io",
+        "page": {
+          "title": "Connect to LaWallet",
+          "instructions": "Set your LaWallet credentials below"
+        },
+        "private_key": "Private Key",
+        "api_endpoint": "API Endpoint",
+        "identity_endpoint": "Identity Endpoint",
+        "ledger_public_key": "Ledger Public key",
+        "urlx_public_key": "URLx Public key",
+        "relay_url": "Relay URL",
+        "errors": {
+          "toast": {
+            "title": "Identity not found",
+            "message": "You have no lightning address in the identity \"{{domain}}\"",
+            "verify": "Verify the following",
+            "match": "Identity Endpoint must match your Lightning Domain",
+            "walias": "Is your lightning address USERNAME<0>@{{domain}}</0> or its using another domain?",
+            "endpoint": "The correct endpoint is built from https://app.<0>{{domain}}</0>",
+            "http": "The identity provider is using the same protocol (<0>HTTP</0> or <0>HTTPS</0>)"
+          }
+        }
+      },
       "commando": {
         "title": "Core Lightning",
         "page": {
