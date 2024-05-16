@@ -17,4 +17,5 @@ export enum EventKind {
   Deleted = 5,
   ZapRequest = 9734,
   ZapReceipt = 9735,
+  uploadChunk = 10000135,
 }

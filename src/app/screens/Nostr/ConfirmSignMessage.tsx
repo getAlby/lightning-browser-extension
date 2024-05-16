@@ -16,7 +16,7 @@ import ScreenHeader from "~/app/components/ScreenHeader";
 import toast from "~/app/components/Toast";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import msg from "~/common/lib/msg";
-import { Event } from "~/extension/providers/nostr/types";
+import { Event, EventKind } from "~/extension/providers/nostr/types";
 import { OriginData, PermissionOption } from "~/types";
 
 function ConfirmSignMessage() {
@@ -91,6 +91,12 @@ function ConfirmSignMessage() {
     setShowJSON((current) => !current);
   }
 
+  let content = event.content || "";
+  // upload chunk event returns lengthy blob data
+  if (event.kind === EventKind.uploadChunk) {
+    content = "";
+  }
+
   return (
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <ScreenHeader title={t("title")} />
@@ -120,7 +126,7 @@ function ConfirmSignMessage() {
                     components={[<i></i>]}
                   />
                 }
-                content={event.content || ""}
+                content={content}
               />
               <div
                 className="flex justify-center items-center mb-4 text-gray-400 dark:text-neutral-600 hover:text-gray-600 dark:hover:text-neutral-400 text-sm cursor-pointer"
