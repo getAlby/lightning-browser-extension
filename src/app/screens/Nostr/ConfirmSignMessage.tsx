@@ -92,8 +92,8 @@ function ConfirmSignMessage() {
   }
 
   let content = event.content || "";
-  // upload chunk event returns lengthy blob data
-  if (event.kind === EventKind.uploadChunk) {
+  // UploadChunk event returns lengthy blob data
+  if (event.kind === EventKind.UploadChunk) {
     content = "";
   }
 
