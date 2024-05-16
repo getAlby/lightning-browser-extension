@@ -1045,6 +1045,10 @@
         "30078": {
           "title": "app data",
           "description": "Sign application-specific data"
+        },
+        "10000135": {
+          "title": "Upload Chunk",
+          "description": "Uploads data in chunks"
         }
       }
     },
