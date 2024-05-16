@@ -160,26 +160,29 @@ function NostrSettings() {
                 )
               ) : null}
               {nostrPublicKey && (
-                <div className="flex flex-col sm:flex-row justify-between items-center">
-                  <div className="sm:w-9/12 w-full">
-                    <p className="text-gray-800 dark:text-white font-medium">
-                      {t("nostr.public_key.label")}
-                    </p>
-
-                    <div className="flex items-center gap-2">
-                      <p className="text-gray-600 text-sm dark:text-neutral-400">
-                        {nostrPublicKey}
+                <>
+                  <div className="flex flex-col sm:flex-row justify-between items-center">
+                    <div className="sm:w-9/12 w-full">
+                      <p className="text-gray-800 dark:text-white font-medium">
+                        {t("nostr.public_key.label")}
                       </p>
 
-                      <InputCopyButton
-                        value={nostrPublicKey}
-                        className="w-5 h-5"
-                      />
+                      <div className="flex items-center gap-2">
+                        <p className="text-gray-600 text-sm dark:text-neutral-400">
+                          {nostrPublicKey}
+                        </p>
+
+                        <InputCopyButton
+                          value={nostrPublicKey}
+                          className="w-5 h-5"
+                        />
+                      </div>
                     </div>
                   </div>
-                </div>
+                  <MenuDivider />
+                </>
               )}
-              <MenuDivider />
+
               <form
                 onSubmit={(e: FormEvent) => {
                   e.preventDefault();
