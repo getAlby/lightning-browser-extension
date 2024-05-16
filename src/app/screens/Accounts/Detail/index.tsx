@@ -26,7 +26,7 @@ import Toggle from "~/app/components/form/Toggle";
 import { useAccount } from "~/app/context/AccountContext";
 import { useAccounts } from "~/app/context/AccountsContext";
 import { useSettings } from "~/app/context/SettingsContext";
-import { classNames } from "~/app/utils";
+import { classNames, isAlbyOAuthAccount } from "~/app/utils";
 import api, { GetAccountRes } from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import nostr from "~/common/lib/nostr";
@@ -70,6 +70,7 @@ function AccountDetail() {
     url: "",
     lnAddress: "",
   });
+  const { account: authAccount } = useAccount();
 
   async function exportAccount({ id, name }: AccountAction) {
     setExportLoading(true);
@@ -237,41 +238,41 @@ function AccountDetail() {
                   />
                 </div>
               </form>
-              {lightningAddress && (
-                <>
-                  <MenuDivider />
-                  <div className="flex flex-col sm:flex-row justify-between items-center">
-                    <div className="sm:w-9/12 w-full">
-                      <p className="text-gray-800 dark:text-white font-medium">
-                        {t("lnaddress.title")}
-                      </p>
-                      <p className="text-gray-600 text-sm dark:text-neutral-400">
-                        {lightningAddress}
-                      </p>
-                    </div>
+              {lightningAddress &&
+                isAlbyOAuthAccount(authAccount?.connectorType) && (
+                  <>
+                    <MenuDivider />
+                    <div className="flex flex-col sm:flex-row justify-between items-center">
+                      <div className="sm:w-9/12 w-full">
+                        <p className="text-gray-800 dark:text-white font-medium">
+                          {t("lnaddress.title")}
+                        </p>
+                        <p className="text-gray-600 text-sm dark:text-neutral-400">
+                          {lightningAddress}
+                        </p>
+                      </div>
 
-                    <div className="flex-none sm:w-64 w-full pt-4 sm:pt-0">
-                      <div className="flex flex-row gap-2">
-                        <Button
-                          label={t("actions.change_lnaddress")}
-                          iconRight={<PopiconsExpandLine className="w-5 h-5" />}
-                          fullWidth
-                          primary
-                          onClick={() =>
-                            window.open(
-                              `https://getalby.com/lightning_addresses/${lightningAddress.substring(
-                                0,
-                                lightningAddress.indexOf("@getalby.com")
-                              )}/edit`,
-                              "_blank"
-                            )
-                          }
-                        />
+                      <div className="flex-none sm:w-64 w-full pt-4 sm:pt-0">
+                        <div className="flex flex-row gap-2">
+                          <Button
+                            label={t("actions.change_lnaddress")}
+                            iconRight={
+                              <PopiconsExpandLine className="w-5 h-5" />
+                            }
+                            fullWidth
+                            primary
+                            onClick={() =>
+                              window.open(
+                                "https://getalby.com/settings",
+                                "_blank"
+                              )
+                            }
+                          />
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </>
-              )}
+                  </>
+                )}
               {account.connectorType == "lndhub" && (
                 <>
                   <MenuDivider />
