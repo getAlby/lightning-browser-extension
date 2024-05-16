@@ -1,15 +1,16 @@
 import Container from "@components/Container";
 import Loading from "@components/Loading";
+import { PopiconsCircleExclamationLine } from "@popicons/react";
 import { FormEvent, useCallback, useEffect, useState } from "react";
-import { Trans, useTranslation } from "react-i18next";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { useNavigate, useParams } from "react-router-dom";
 import Alert from "~/app/components/Alert";
 import Button from "~/app/components/Button";
-import { ContentBox } from "~/app/components/ContentBox";
+import TextField from "~/app/components/form/TextField";
 import InputCopyButton from "~/app/components/InputCopyButton";
+import MenuDivider from "~/app/components/Menu/MenuDivider";
 import PasswordViewAdornment from "~/app/components/PasswordViewAdornment";
 import toast from "~/app/components/Toast";
-import TextField from "~/app/components/form/TextField";
 import api, { GetAccountRes } from "~/common/lib/api";
 import { default as nostr } from "~/common/lib/nostr";
 
@@ -60,11 +61,6 @@ function NostrSettings() {
       console.error(e);
     }
   }, [nostrPrivateKey, t]);
-
-  function onCancel() {
-    // go to account settings
-    navigate(`/accounts/${id}`);
-  }
 
   function handleDeleteKeys() {
     setNostrPrivateKey("");
@@ -120,107 +116,162 @@ function NostrSettings() {
       <Loading />
     </div>
   ) : (
-    <div>
-      <form
-        onSubmit={(e: FormEvent) => {
-          e.preventDefault();
-          handleSaveNostrPrivateKey();
-        }}
-      >
-        <Container maxWidth="sm">
-          <ContentBox>
-            <div>
-              <h1 className="font-bold text-2xl dark:text-white">
-                {t("nostr.settings.title")}
-              </h1>
-              <p className="text-gray-500 dark:text-neutral-500">
-                {t("nostr.settings.description")}
+    <Container>
+      <div className="flex flex-col gap-12 mt-12">
+        <div className="flex flex-col gap-6">
+          <h2 className="text-2xl font-bold dark:text-white leading-8">
+            {t("nostr.settings.title")}
+          </h2>
+
+          <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-1">
+              <h2 className="text-xl font-bold dark:text-white leading-7">
+                {t("nostr.settings.nostr_keys.title")}
+              </h2>
+
+              <p className="text-gray-600 dark:text-neutral-400 text-sm leading-6">
+                {t("nostr.settings.nostr_keys.description")}
               </p>
             </div>
+            <div className="shadow bg-white rounded-md sm:overflow-hidden p-6 dark:bg-surface-01dp flex flex-col gap-4">
+              {hasMnemonic && currentPrivateKey ? (
+                hasImportedNostrKey ? (
+                  <Alert type="warn">
+                    <div className="flex items-center gap-2">
+                      <div className="shrink-0">
+                        <PopiconsCircleExclamationLine className="w-5 h-5" />
+                      </div>
+                      <span className="text-sm">
+                        {t("nostr.settings.imported_key_warning")}
+                      </span>
+                    </div>
+                  </Alert>
+                ) : (
+                  <Alert type="info">
+                    <div className="flex items-center gap-2">
+                      <div className="shrink-0">
+                        <PopiconsCircleExclamationLine className="w-5 h-5" />
+                      </div>
+                      <span className="text-sm">
+                        {t("nostr.settings.can_restore")}
+                      </span>
+                    </div>
+                  </Alert>
+                )
+              ) : null}
+              {nostrPublicKey && (
+                <div className="flex flex-col sm:flex-row justify-between items-center">
+                  <div className="sm:w-9/12 w-full">
+                    <p className="text-gray-800 dark:text-white font-medium">
+                      {t("nostr.public_key.label")}
+                    </p>
 
-            {!hasMnemonic && !nostrPrivateKey && (
-              <Alert type="info">
-                <Trans
-                  i18nKey={"nostr.settings.no_secret_key"}
-                  t={t}
-                  components={[
-                    // eslint-disable-next-line react/jsx-key
-                    <Link
-                      to="../../secret-key/new"
-                      relative="path"
-                      className="underline"
-                    />,
-                  ]}
-                />
-              </Alert>
-            )}
+                    <div className="flex items-center gap-2">
+                      <p className="text-gray-600 text-sm dark:text-neutral-400">
+                        {nostrPublicKey}
+                      </p>
 
-            {hasMnemonic && currentPrivateKey ? (
-              hasImportedNostrKey ? (
-                <Alert type="warn">
-                  {t("nostr.settings.imported_key_warning")}
-                </Alert>
-              ) : (
-                <Alert type="info">{t("nostr.settings.can_restore")}</Alert>
-              )
-            ) : null}
-
-            <div>
-              <TextField
-                id="nostrPrivateKey"
-                label={t("nostr.private_key.label")}
-                autoComplete="new-password"
-                type={nostrPrivateKeyVisible ? "text" : "password"}
-                value={nostrPrivateKey}
-                onChange={(event) => {
-                  setNostrPrivateKey(event.target.value.trim());
-                }}
-                endAdornment={
-                  <div className="flex items-center gap-1 px-2">
-                    <PasswordViewAdornment
-                      onChange={(passwordView) => {
-                        setNostrPrivateKeyVisible(passwordView);
-                      }}
-                    />
-                    <InputCopyButton value={nostrPrivateKey} className="w-6" />
+                      <InputCopyButton
+                        value={nostrPublicKey}
+                        className="w-5 h-5"
+                      />
+                    </div>
                   </div>
-                }
-              />
-            </div>
+                </div>
+              )}
+              <MenuDivider />
+              <form
+                onSubmit={(e: FormEvent) => {
+                  e.preventDefault();
+                  handleSaveNostrPrivateKey();
+                }}
+                className="flex flex-col sm:flex-row justify-between items-center gap-4"
+              >
+                <div className="sm:w-7/12 w-full">
+                  <TextField
+                    id="nostrPrivateKey"
+                    label={t("nostr.private_key.label")}
+                    placeholder="Enter private key"
+                    autoComplete="new-password"
+                    type={nostrPrivateKeyVisible ? "text" : "password"}
+                    value={nostrPrivateKey}
+                    onChange={(event) => {
+                      setNostrPrivateKey(event.target.value.trim());
+                    }}
+                    endAdornment={
+                      <div className="flex items-center gap-1 px-4">
+                        <PasswordViewAdornment
+                          onChange={(passwordView) => {
+                            setNostrPrivateKeyVisible(passwordView);
+                          }}
+                        />
+                        <InputCopyButton
+                          value={nostrPrivateKey}
+                          className="w-6"
+                        />
+                      </div>
+                    }
+                  />
+                </div>
+                <div className="flex flex-col sm:flex-row mt-0 sm:mt-6">
+                  <div className="flex-none sm:w-64 w-full pt-4 sm:pt-0 mr-4">
+                    {hasImportedNostrKey && hasMnemonic && (
+                      <Button
+                        outline
+                        label={t("nostr.settings.derive")}
+                        onClick={handleDeriveNostrKeyFromSecretKey}
+                        fullWidth
+                      />
+                    )}
+                  </div>
 
-            <div>
-              <TextField
-                id="nostrPublicKey"
-                label={t("nostr.public_key.label")}
-                value={nostrPublicKey}
-                disabled
-                endAdornment={<InputCopyButton value={nostrPublicKey} />}
-              />
-              <div className="mt-4 flex gap-4 items-center justify-center">
-                {nostrPrivateKey && (
-                  <Button
-                    destructive
-                    label={t("nostr.settings.remove")}
-                    onClick={handleDeleteKeys}
-                  />
-                )}
-                {hasImportedNostrKey && hasMnemonic && (
-                  <Button
-                    outline
-                    label={t("nostr.settings.derive")}
-                    onClick={handleDeriveNostrKeyFromSecretKey}
-                  />
-                )}
-              </div>
+                  <div className="flex-none sm:w-64 w-full pt-4 sm:pt-0">
+                    <Button
+                      type="submit"
+                      label={tCommon("actions.save")}
+                      primary
+                      fullWidth
+                    />
+                  </div>
+                </div>
+              </form>
+
+              {nostrPrivateKey && (
+                <>
+                  <MenuDivider />
+                  <form
+                    onSubmit={(e: FormEvent) => {
+                      e.preventDefault();
+                      handleSaveNostrPrivateKey();
+                    }}
+                    className="flex flex-col sm:flex-row justify-between items-center"
+                  >
+                    <div className="sm:w-7/12 w-full">
+                      <p className="text-gray-800 dark:text-white font-medium">
+                        {t("nostr.settings.remove_keys.title")}
+                      </p>
+
+                      <p className="text-gray-600 text-sm dark:text-neutral-400">
+                        {t("nostr.settings.remove_keys.description")}
+                      </p>
+                    </div>
+
+                    <div className="flex-none sm:w-64 w-full pt-4 sm:pt-0">
+                      <Button
+                        destructive
+                        label={t("nostr.settings.remove")}
+                        onClick={handleDeleteKeys}
+                        fullWidth
+                      />
+                    </div>
+                  </form>
+                </>
+              )}
             </div>
-          </ContentBox>
-          <div className="flex justify-center my-6 gap-4">
-            <Button label={tCommon("actions.cancel")} onClick={onCancel} />
-            <Button type="submit" label={tCommon("actions.save")} primary />
           </div>
-        </Container>
-      </form>
-    </div>
+        </div>
+      </div>
+    </Container>
   );
 }
 
