@@ -481,9 +481,16 @@
           "settings": {
             "label": "Nostr Settings",
             "title": "Nostr Settings",
-            "description": "Derive Nostr keys from your Master Key or import your existing private key by pasting it in the \"Nostr Private Key\" field.",
-            "imported_key_warning": "⚠️ You're currently using an imported or randomly generated Nostr key. Your Nostr private key cannot be restored by your recovery phrase, so remember to back up your Nostr private key separately.",
-            "can_restore": "✅ Nostr key derived from your Master Key",
+            "nostr_keys": {
+              "title": "Nostr Keys",
+              "description": "Derive Nostr keys from your Master Key or import your existing private key by pasting it in “Nostr Private Key” field."
+            },
+            "remove_keys": {
+              "title": "Remove Nostr Keys",
+              "description": "Removes current Nostr keys from this wallet."
+            },
+            "imported_key_warning": "You're currently using an imported or randomly generated Nostr key. Your Nostr private key cannot be restored by your recovery phrase, so remember to back up your Nostr private key separately.",
+            "can_restore": "Your current Nostr keys are derived from Master Key.",
             "derive": "Derive from Master Key",
             "remove": "Remove current keys",
             "no_secret_key": "💡 You don't have a Master Key yet. <0>Click here</0></div> to create your Master Key and derive your Nostr keys."
