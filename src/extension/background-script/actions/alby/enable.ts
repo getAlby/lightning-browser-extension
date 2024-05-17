@@ -18,7 +18,22 @@ const enable = async (message: MessageAllowanceEnable, sender: Sender) => {
 
   const enabledFor = new Set(allowance?.enabledFor);
 
-  if (isUnlocked && allowance && allowance.enabled && enabledFor.has("alby")) {
+  if (!isUnlocked) {
+    try {
+      await utils.openPrompt<{ unlocked: boolean }>({
+        args: {},
+        origin: { internal: true },
+        action: "unlock",
+      });
+    } catch (e) {
+      console.error(e);
+      if (e instanceof Error) {
+        return { error: e.message };
+      }
+    }
+  }
+
+  if (allowance && allowance.enabled && enabledFor.has("alby")) {
     return {
       data: { enabled: true },
     };
