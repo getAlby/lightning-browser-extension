@@ -200,7 +200,7 @@ const DefaultView: FC<Props> = (props) => {
         )}
 
         {(lightningAddress || nostrPublicKey) && (
-          <div className="flex justify-center gap-2">
+          <div className="flex justify-center gap-3 mb-2">
             {lightningAddress && (
               <a
                 className="relative group cursor-pointer flex flex-row items-center p-1 bg-white dark:bg-surface-01dp border border-gray-200 dark:border-neutral-700 text-gray-800 dark:text-white rounded-full text-xs font-medium hover:border-primary hover:bg-yellow-50 dark:hover:border-primary dark:hover:dark:bg-surface-16dp transition-all duration-250 select-none"
