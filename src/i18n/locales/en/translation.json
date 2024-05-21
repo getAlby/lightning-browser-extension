@@ -978,6 +978,10 @@
           "title": "delete note",
           "description": "Request relays to delete an event"
         },
+        "6": {
+          "title": "repost",
+          "description": "Repost a note"
+        },
         "7": {
           "title": "react",
           "description": "Sign a reaction to a note"
@@ -1045,6 +1049,10 @@
         "30078": {
           "title": "app data",
           "description": "Sign application-specific data"
+        },
+        "10000135": {
+          "title": "Upload Chunk",
+          "description": "Uploads data in chunks"
         }
       }
     },
