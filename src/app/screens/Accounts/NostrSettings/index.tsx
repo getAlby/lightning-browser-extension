@@ -328,7 +328,10 @@ function NostrSettings() {
                     fullWidth
                     primary
                     onClick={() =>
-                      window.open("https://getalby.com/settings", "_blank")
+                      window.open(
+                        "https://getalby.com/settings/nostr",
+                        "_blank"
+                      )
                     }
                   />
                 </div>
