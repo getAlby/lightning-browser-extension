@@ -199,39 +199,41 @@ const DefaultView: FC<Props> = (props) => {
           <BalanceBox />
         )}
 
-        <div className="flex justify-center gap-2">
-          {lightningAddress && (
-            <a
-              className="relative group cursor-pointer flex flex-row items-center mb-6 px-1 py-1 bg-white dark:bg-surface-01dp border border-gray-200 dark:border-neutral-700 text-gray-800 dark:text-white rounded-full text-xs font-medium hover:border-primary hover:bg-yellow-50 dark:hover:border-primary dark:hover:dark:bg-surface-16dp transition-all duration-250 delay-250 select-none"
-              onClick={() => {
-                navigator.clipboard.writeText(lightningAddress);
-                toast.success(tCommon("actions.copied_to_clipboard"));
-              }}
-            >
-              <img src="assets/icons/popicons/bolt.svg" className="w-5 h-5" />
-              <span className="max-w-64 hidden group-hover:block transition-all duration-250 delay-250 truncate">
-                {lightningAddress}
-              </span>
-            </a>
-          )}
+        {(lightningAddress || nostrPublicKey) && (
+          <div className="flex justify-center gap-2">
+            {lightningAddress && (
+              <a
+                className="relative group cursor-pointer flex flex-row items-center p-1 bg-white dark:bg-surface-01dp border border-gray-200 dark:border-neutral-700 text-gray-800 dark:text-white rounded-full text-xs font-medium hover:border-primary hover:bg-yellow-50 dark:hover:border-primary dark:hover:dark:bg-surface-16dp transition-all duration-250 select-none"
+                onClick={() => {
+                  navigator.clipboard.writeText(lightningAddress);
+                  toast.success(tCommon("actions.copied_to_clipboard"));
+                }}
+              >
+                <img src="assets/icons/popicons/bolt.svg" className="w-5 h-5" />
+                <span className="max-w-64 hidden group-hover:block truncate mr-1">
+                  {lightningAddress}
+                </span>
+              </a>
+            )}
 
-          {nostrPublicKey && (
-            <a
-              className="relative group cursor-pointer flex flex-row items-center mb-6 px-1 py-1 bg-white dark:bg-surface-01dp border border-gray-200 dark:border-neutral-700 text-gray-800 dark:text-white rounded-full text-xs font-medium hover:border-primary hover:bg-yellow-50 dark:hover:border-primary dark:hover:dark:bg-surface-16dp transition-all duration-250 delay-250 select-none"
-              onClick={() => {
-                navigator.clipboard.writeText(nostrPublicKey);
-                toast.success(tCommon("actions.copied_to_clipboard"));
-              }}
-            >
-              <PopiconsOstrichSolid className="w-5 h-5 text-purple-500" />
-              <span className="max-w-64 hidden group-hover:block transition-all duration-250 delay-250 truncate">
-                {nostrPublicKey.substring(0, 11)}
-                ...
-                {nostrPublicKey.substring(nostrPublicKey.length - 11)}
-              </span>
-            </a>
-          )}
-        </div>
+            {nostrPublicKey && (
+              <a
+                className="relative group cursor-pointer flex flex-row items-center p-1 bg-white dark:bg-surface-01dp border border-gray-200 dark:border-neutral-700 text-gray-800 dark:text-white rounded-full text-xs font-medium hover:border-primary hover:bg-yellow-50 dark:hover:border-primary dark:hover:dark:bg-surface-16dp transition-all duration-250 select-none"
+                onClick={() => {
+                  navigator.clipboard.writeText(nostrPublicKey);
+                  toast.success(tCommon("actions.copied_to_clipboard"));
+                }}
+              >
+                <PopiconsOstrichSolid className="w-5 h-5 text-purple-500" />
+                <span className="max-w-64 hidden group-hover:block truncate mr-1">
+                  {nostrPublicKey.substring(0, 11)}
+                  ...
+                  {nostrPublicKey.substring(nostrPublicKey.length - 11)}
+                </span>
+              </a>
+            )}
+          </div>
+        )}
 
         <div className="flex space-x-3 justify-between">
           <HomeButton
@@ -261,13 +263,13 @@ const DefaultView: FC<Props> = (props) => {
         </div>
 
         {isLoading && (
-          <div className="flex justify-center mt-4">
+          <div className="flex justify-center">
             <Loading />
           </div>
         )}
 
         {!isLoading && (
-          <div className="mt-4 flex flex-col gap-4">
+          <div className="flex flex-col gap-4">
             {(transactions.length === 0 || needsKeySetup) && (
               <div className="flex flex-col gap-2 md:gap-3">
                 {transactions.length === 0 && (
