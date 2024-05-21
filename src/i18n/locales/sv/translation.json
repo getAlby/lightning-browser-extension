@@ -585,7 +585,6 @@
       "title": "Nostr",
       "block_and_ignore": "Blockera och ignorera {{host}}",
       "block_added": "Lade till {{host}} till blockeringslistan, ladda om webbplatsen.",
-      "allow_sign": "Tillåt {{host}} att signera:",
       "content": "Den här webbplatsen ber dig att signera:"
     },
     "choose_path": {
