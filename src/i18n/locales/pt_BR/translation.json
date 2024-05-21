@@ -164,7 +164,8 @@
           "title": "Conecte-se na <0>Carteira Bitcoin Jungle</0>"
         },
         "token": {
-          "label": "Insira o token de acesso"
+          "label": "Insira o token de acesso",
+          "info": "A {{label}} integração com a Alby está em fase alpha e é somente recomendado para usuários avançados.<br><br>Você pode obter seu token de acesso pelo app do celular, clicando no ícone de configurações, em seguida clicando 3 vezes no número de build para abrir o menu de desenvolvedores.<br><br>O token de acesso pode ser copiado por aqui.<br><br>"
         },
         "currency": {
           "label": "Selecionar carteira"
@@ -173,10 +174,15 @@
       "btcpay": {
         "title": "Servidor BTCPay",
         "config": {
-          "label": "Dados config"
+          "label": "Dados config",
+          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.co"
         },
         "errors": {
           "connection_failed": "Falha na conexão. A URL de conexão do servidor BTCPay está correta e acessível?"
+        },
+        "page": {
+          "title": "Conecte-se ao BTCPay LND",
+          "instructions": "Navegue até o servidor BTCPay e faça login como administrador. Vá até as Configurações > Serviços > LND REST - Ver informação. E então clique em \"Ver informação do código QR\", copie e cole abaixo:"
         }
       },
       "lndhub_go": {
@@ -229,7 +235,12 @@
       "lnc": {
         "title": "Lightning Terminal (LNC)",
         "pairing_phrase": {
-          "label": "Frase de pareamento "
+          "label": "Frase de pareamento ",
+          "placeholder": "frase secreta de empilhamento dos sats"
+        },
+        "page": {
+          "description": "1. Na barra lateral do Terminal Lightning, escolha <0>Conecte o Node Lightning</0>.<1/> 2. Clique <0>Criar uma nova sessão</0><1/>3. Rotule a sessão, escolha as permissões desejadas e envie<1/>4. <0>Copie a frase de emparelhamento</0> e cole-a abaixo.",
+          "title": "Conecte-se ao Terminal Lightning (LNC)"
         }
       },
       "galoy": {
@@ -244,7 +255,8 @@
         },
         "errors": {
           "setup_failed": "Falha na configuração",
-          "invalid_token": "Falha na autorização. Verifique sua chave API e tente novamente."
+          "invalid_token": "Falha na autorização. Verifique sua chave API e tente novamente.",
+          "missing_token": "Token de acesso faltando, não foi possível fazer login."
         }
       },
       "umbrel_lightning_node": {
@@ -664,9 +676,7 @@
       "title": "Nostr",
       "content": "Este site solicita que você assine:",
       "block_added": "{{host}} adicionado na lista de bloqueio, por favor recarregue o site.",
-      "allow_sign": "Permitir {{host}} assinar:",
       "allow_sign_event": "Permitir {{host}} assinar um evento <0>{{kind}}</0>",
-      "allow_encrypt": "Permitir {{host}} criptografar a mensagem:",
       "kinds": {
         "0": {
           "title": "atualizar perfil"
@@ -941,7 +951,6 @@
       "review": "Revisar",
       "hide": "Ocultar",
       "finish": "Pronto",
-      "sign": "Assinar",
       "deny": "Negar"
     },
     "errors": {
@@ -1097,7 +1106,8 @@
     },
     "permissions_modal": {
       "content_label": "Permissões",
-      "set_permissions": "Definir permissões:"
+      "set_permissions": "Definir permissões:",
+      "ask_everytime": "Perguntar sempre por <0>{{permission}}</0>"
     }
   },
   "permissions": {
@@ -1113,22 +1123,13 @@
         "description": "",
         "title": "Assinar mensagem"
       },
-      "nip04encrypt": {
-        "title": "criptografar (nip04)",
-        "description": "Criptografar dados"
-      },
-      "nip04decrypt": {
+      "decrypt": {
         "description": "Descriptografar dados",
-        "title": "descriptografar (nip04)"
+        "title": "descriptografar"
       },
-      "nip44encrypt": {
-        "title": "criptografar (nip44)",
+      "encrypt": {
+        "title": "criptografar",
         "description": "Criptografar dados"
-      },
-      "decrypt": "Descriptografar dados",
-      "nip44decrypt": {
-        "title": "descriptografar (nip44)",
-        "description": "Descriptografar dados"
       }
     },
     "liquid": {

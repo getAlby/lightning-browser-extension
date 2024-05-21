@@ -530,7 +530,6 @@
       "title": "Nostr",
       "block_and_ignore": "阻止并忽略 {{host}}",
       "content": "该网站要求你签署:",
-      "allow_sign": "允许{{host}}签署：",
       "block_added": "已将{{host}}添加到屏蔽列表，请重新加载网站。"
     },
     "lnurlpay": {
