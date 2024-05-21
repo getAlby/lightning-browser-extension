@@ -496,7 +496,7 @@ function AccountDetail() {
                     components={[
                       // eslint-disable-next-line react/jsx-key
                       <Link
-                        to="secret-key/new"
+                        to="secret-key/generate"
                         relative="path"
                         className="underline"
                       />,
