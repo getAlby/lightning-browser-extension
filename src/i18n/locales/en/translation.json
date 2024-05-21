@@ -513,6 +513,16 @@
               "title": "Remove Nostr Keys",
               "description": "Removes current Nostr keys from this wallet."
             },
+            "nostr_address": {
+              "title": "Nostr Address",
+              "description": "You can use your lightning address as a Nostr Address (NIP-05) and allow people to easily find your Nostr profile.",
+              "manage_nostr_address": {
+                "title": "Your Nostr Address",
+                "description": "{{lnaddress}} set to <0>{{npub}}</0>",
+                "description_alternate": "{{lnaddress}} <0>is not set</0> as your Nostr address",
+                "set_nip05": "Set on getalby.com"
+              }
+            },
             "imported_key_warning": "You're currently using an imported or randomly generated Nostr key. Your Nostr private key cannot be restored by your recovery phrase, so remember to back up your Nostr private key separately.",
             "can_restore": "Your current Nostr keys are derived from Master Key.",
             "derive": "Derive from Master Key",
