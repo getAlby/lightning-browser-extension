@@ -178,6 +178,30 @@
           "connection_failed": "La conexión falló. ¿Es correcto el URI de LNDHub?"
         }
       },
+      "lawallet": {
+        "title": "LaWallet.io",
+        "page": {
+          "title": "Conectar a LaWallet",
+          "instructions": "Ingresá los datos de LaWallet.io a continuación."
+        },
+        "private_key": "Llave privada",
+        "api_endpoint": "API Endpoint",
+        "identity_endpoint": "Identity Endpoint",
+        "ledger_public_key": "Ledger Public key",
+        "urlx_public_key": "URLx Public key",
+        "relay_url": "Relay URL",
+        "errors": {
+          "toast": {
+            "title": "No se encontró la identidad",
+            "message": "No hay una lightning address asignada a \"{{domain}}\"",
+            "verify": "Verificá lo siguiente",
+            "match": "El Identity Endpoint debe coincidir con el Lightning Domain",
+            "walias": "Tu lightning address es USERNAME<0>@{{domain}}</0> o está utilizando otro dominio?",
+            "endpoint": "El Identity endpoint se deriva de esta url https://app.<0>{{domain}}</0> de App",
+            "http": "El Identity endpoint utiliza el mismo protocolo (<0>HTTP</0> or <0>HTTPS</0>)"
+          }
+        }
+      },
       "commando": {
         "pubkey": {
           "label": "Clave Pública"
