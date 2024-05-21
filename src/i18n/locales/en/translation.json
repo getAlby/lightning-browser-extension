@@ -978,6 +978,10 @@
           "title": "delete note",
           "description": "Request relays to delete an event"
         },
+        "6": {
+          "title": "repost",
+          "description": "Repost a note"
+        },
         "7": {
           "title": "react",
           "description": "Sign a reaction to a note"
