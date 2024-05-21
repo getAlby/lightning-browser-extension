@@ -1,8 +1,11 @@
 import Container from "@components/Container";
 import Loading from "@components/Loading";
-import { PopiconsCircleExclamationLine } from "@popicons/react";
+import {
+  PopiconsCircleExclamationLine,
+  PopiconsExpandLine,
+} from "@popicons/react";
 import { FormEvent, useCallback, useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import Alert from "~/app/components/Alert";
 import Button from "~/app/components/Button";
@@ -28,10 +31,20 @@ function NostrSettings() {
   const [hasImportedNostrKey, setHasImportedNostrKey] = useState(false);
   const [account, setAccount] = useState<GetAccountRes>();
   const { id } = useParams() as { id: string };
+  const [NIP05Key, setNIP05Key] = useState("");
+  const [lightningAddress, setLightningAddress] = useState("");
 
   const fetchData = useCallback(async () => {
     if (id) {
       const priv = await api.nostr.getPrivateKey(id);
+      const account = await api.getAccountInfo();
+      if (account.info.nostr_pubkey) {
+        setNIP05Key(account.info.nostr_pubkey);
+      }
+
+      if (account.info.lightning_address) {
+        setLightningAddress(account.info.lightning_address);
+      }
       if (priv) {
         setCurrentPrivateKey(priv);
         const nsec = nostr.hexToNip19(priv);
@@ -270,6 +283,53 @@ function NostrSettings() {
                   </form>
                 </>
               )}
+            </div>
+          </div>
+        </div>
+        <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-1">
+            <h2 className="text-xl font-bold dark:text-white leading-7">
+              {t("nostr.settings.nostr_address.title")}
+            </h2>
+
+            <p className="text-gray-600 dark:text-neutral-400 text-sm leading-6">
+              {t("nostr.settings.nostr_address.description")}
+            </p>
+          </div>
+          <div className="shadow bg-white rounded-md sm:overflow-hidden p-6 dark:bg-surface-01dp flex flex-col sm:flex-row gap-4">
+            <div className="sm:w-9/12 w-full">
+              <p className="text-gray-800 dark:text-white font-medium">
+                {t("nostr.settings.nostr_address.manage_nostr_address.title")}
+              </p>
+              <p className="text-gray-600 text-xs dark:text-neutral-400">
+                <Trans
+                  i18nKey={
+                    NIP05Key === ""
+                      ? "nostr.settings.nostr_address.manage_nostr_address.description_alternate"
+                      : "nostr.settings.nostr_address.manage_nostr_address.description"
+                  }
+                  t={t}
+                  values={{ lnaddress: lightningAddress, npub: NIP05Key }}
+                  // eslint-disable-next-line react/jsx-key
+                  components={[<b></b>]}
+                />
+              </p>
+            </div>
+
+            <div className="flex-none sm:w-64 w-full pt-4 sm:pt-0">
+              <div className="flex flex-row gap-2">
+                <Button
+                  label={t(
+                    "nostr.settings.nostr_address.manage_nostr_address.set_nip05"
+                  )}
+                  iconRight={<PopiconsExpandLine className="w-5 h-5" />}
+                  fullWidth
+                  primary
+                  onClick={() =>
+                    window.open("https://getalby.com/settings", "_blank")
+                  }
+                />
+              </div>
             </div>
           </div>
         </div>

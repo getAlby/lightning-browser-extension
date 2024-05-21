@@ -48,6 +48,7 @@ export interface AccountInfoRes {
   balance: { balance: string | number; currency: ACCOUNT_CURRENCIES };
   currentAccountId: string;
   info: {
+    nostr_pubkey?: string;
     alias: string;
     pubkey?: string;
     lightning_address?: string;
