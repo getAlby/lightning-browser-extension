@@ -263,7 +263,7 @@ function AccountDetail() {
                             primary
                             onClick={() =>
                               window.open(
-                                "https://getalby.com/settings",
+                                "https://getalby.com/lightning_addresses",
                                 "_blank"
                               )
                             }
