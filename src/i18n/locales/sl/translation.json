@@ -305,7 +305,6 @@
       "account_view": {
         "title2": "Račun",
         "export": {
-          "title": "Poveži svojo mobilno denarnico",
           "screen_reader": "Izvozi podrobnosti računa",
           "your_ln_address": "Tvoj Lightning naslov:",
           "waiting": "čakanje na LndHub podatke...",
@@ -317,7 +316,6 @@
           "placeholder": "Prikazno ime računa"
         },
         "mnemonic": {
-          "title": "🔑 Upravljanje ključa",
           "saved": "Glavni ključ kriptiran in uspešno shranjen.",
           "generate": {
             "title": "Generiraj nov Glavni ključ",
@@ -342,7 +340,6 @@
           }
         },
         "network": {
-          "title": "Omrežje",
           "options": {
             "bitcoin": "Mainnet",
             "testnet": "Testnet",
@@ -391,7 +388,6 @@
           "error": "Vnešeno ime računa se ne ujema."
         },
         "remove_secretkey": {
-          "subtitle": "Odstrani Glavni ključ iz tega računa.",
           "title": "Odstrani Glavni ključ",
           "success": "Glavni ključ je uspešno odstranjen."
         },
@@ -427,15 +423,6 @@
         "subtitle": "Za skeniranje QR kod",
         "title": "Dostop do kamere",
         "granted": "Dovoljenje omogočeno"
-      },
-      "lnurl_auth": {
-        "legacy_lnurl_auth": {
-          "title": "Starerjša verzija podpisovanja za LNDhub in LNbits"
-        },
-        "title": "LNURL-Auth",
-        "legacy_lnurl_auth_202207": {
-          "title": "Stara verzija LNURL-Auth"
-        }
       },
       "currency": {
         "title": "Valuta",

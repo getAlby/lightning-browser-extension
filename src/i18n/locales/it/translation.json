@@ -261,7 +261,6 @@
           "waiting": "in attesa dei dati da LndHub...",
           "export_uri": "URI delle credenziali di LNDHub",
           "scan_qr": "Importa questo wallet su Zeus o BlueWallet scansionando il QRCode.",
-          "title": "Esporta Account",
           "screen_reader": "Esporta i dettagli dell'account"
         },
         "title2": "Modifica Account",
@@ -294,18 +293,6 @@
       "website_enhancements": {
         "title": "Miglioramenti del sito web",
         "subtitle": "Miglioramenti per le mance su Twitter, YouTube, ecc."
-      },
-      "lnurl_auth": {
-        "title": "LNURL-Auth",
-        "hint": "è un protocollo di autenticazione generico. Autentica l'utente utilizzando le firme digitali. Il protocollo non richiede altre informazioni di identificazione come password, e-mail, nomi utente o simili. Con Alby è possibile utilizzare i propri account lightning per accedere in modo sicuro ai siti web. Per essere compatibili con altri portafogli abbiamo dovuto apportare alcune modifiche che si possono configurare qui. <0>Idealmente tutte queste opzioni dovrebbero essere spente (OFF).</0> Usatele solo se avete vecchi account.",
-        "legacy_lnurl_auth_202207": {
-          "title": "Legacy LNURL-Auth",
-          "subtitle": "La generazione di chiavi per LNURL-auth è cambiata (Luglio 2022). Alby non era compatibile con altre implementazioni. Abbiamo apportate delle modifiche, ma ora vengono utilizzate chiavi di accesso diverse. Se prima si utilizzava LNURL-auth per il login, si può ancora attivare il vecchio metodo. Questa opzione sarà rimossa in futuro; assicurarati di passare al nuovo login."
-        },
-        "legacy_lnurl_auth": {
-          "title": "Firma tradizione per LNDhub e LNbits",
-          "subtitle": "La firma dei messaggi e il login con gli account LNDhub (ad esempio BlueWallet) e LNbits sono stati modificati (Marzo 2022). Se avete effettuato l'accesso con questi account, potete ancora attivare il vecchio metodo di firma. Questa opzione sarà rimossa in futuro; assicurati di passare al nuovo metodo di login."
-        }
       },
       "camera_access": {
         "title": "Accesso alla telecamera",

@@ -309,17 +309,14 @@
       "unlock_password": "Dein Entsperr-Passcode"
     },
     "settings": {
-      "lnurl_auth": {
-        "legacy_lnurl_auth": {
-          "title": "Legacy Signatur für LNDhub und LNbits",
-          "subtitle": "Das Signieren von Nachrichten und die Anmeldung mit LNDhub- (z.B. BlueWallet) und LNbits-Konten wurde geändert (März 2022). Wenn du dich mit diesen Konten angemeldet hast, kannst du noch die alte Signiermethode aktivieren. Diese Option wird später entfernt werden, stelle also sicher, dass du auf das neue Login umsteigst."
+      "nostr": {
+        "private_key": {
+          "title": "Privater Schlüssel",
+          "subtitle": "Dieser Abschnitt wurde auf die Kontenseite verschoben, da die Schlüssel jetzt kontenspezifisch sind.",
+          "go_to": "Gehe zu deinen Konten"
         },
-        "legacy_lnurl_auth_202207": {
-          "subtitle": "Die Schlüsselerzeugung für LNURL-auth hat sich geändert (Juli 2022). Alby war nicht kompatibel mit anderen Implementierungen. Dies wurde geändert, aber jetzt werden andere Anmeldeschlüssel verwendet. Wenn du dich bisher mit LNURL-auth angemeldet hast, kannst du noch die alte Methode aktivieren. Diese Option wird später entfernt werden, stelle sicher, dass du auf die neue Anmeldung umsteigst.",
-          "title": "Vererbte LNURL-Authentifizierung"
-        },
-        "title": "LNURL Authentifizierung",
-        "hint": "ist ein allgemeines Authentifizierungsprotokoll. Es authentifiziert den Benutzer anhand digitaler Signaturen. Das Protokoll erfordert keine anderen identifizierenden Informationen wie Kennwörter, E-Mails, Benutzernamen oder Ähnliches. Mit Alby kannst du deine Lightning-Konten verwenden, um dich sicher auf Webseiten anzumelden. Um mit anderen Wallets kompatibel zu sein, mussten wir ein paar Änderungen vornehmen, die du hier konfigurieren kannst. <0>In der Regel sind alle diese Optionen ausgeschaltet.</0> Verwende sie nur, wenn du alte Konten hast."
+        "hint": "Es ist ein einfaches und offenes Protokoll, das darauf abzielt, zensurresistente soziale Netzwerke zu schaffen. Nostr arbeitet mit kryptographischen Schlüsseln. Um etwas zu veröffentlichen, signiere es mit deinem Schlüssel und senden es an mehrere Relays. Du kannst Alby verwenden, um deinen Nostr-Schlüssel zu verwalten. Viele Nostr-Anwendungen erlauben dann, einfach den Schlüssel aus der Alby-Erweiterung zu verwenden.",
+        "title": "Nostr"
       },
       "browser_notifications": {
         "subtitle": "Zahlungs- und Authentifizierungsbezogene Benachrichtigungen.",
@@ -430,19 +427,17 @@
     "accounts": {
       "account_view": {
         "title2": "Konto",
-        "title1": "Wallet Einstellungen",
+        "title1": "Kontoeinstellung",
         "name": {
           "title": "Name anzeigen",
           "placeholder": "Konto Anzeigename"
         },
         "export": {
-          "title": "Verbinde deine mobile Wallet",
           "screen_reader": "Kontodaten exportieren",
           "waiting": "Warten auf LndHub Daten...",
           "your_ln_address": "Deine Lightning Adresse:",
           "export_uri": "LNDHub Anmeldeinformationen URI",
-          "scan_qr": "Importiere diese Wallet in Zeus oder BlueWallet, indem du den QRCode scannst.",
-          "description": "Ermöglicht es dir, dieses Konto mit mobilen Wallets wie <0>Blue Wallet</0> und <1>Zeus</1> zu verbinden und zu verwenden."
+          "scan_qr": "Importiere diese Wallet in Zeus oder BlueWallet, indem du den QRCode scannst."
         },
         "nostr": {
           "title": "Nostr",
@@ -496,9 +491,7 @@
         },
         "remove": {
           "error": "Der eingegebene Kontoname stimmte nicht überein.",
-          "confirm": "Bitte gebe den Namen des Kontos ein, um die Löschung deines Kontos zu bestätigen:\n\n{{ Name }}\n\n⚠️ Wenn du fortfährst, werden alle zugehörigen Schlüssel (Hauptschlüssel, Nostr, etc.) gelöscht. Bitte vergewissern dich, dass du eine Sicherungskopie erstellt hast, denn es gibt keine andere Möglichkeit, sie wiederherzustellen.",
-          "subtitle": "Entfernt alle Zertifikate, Zahlungsdaten und Schlüssel, die mit dieser Wallet verbunden sind.",
-          "title": "Trenne deine Verbindung zu deiner Wallet"
+          "confirm": "Bitte gebe den Namen des Kontos ein, um die Löschung deines Kontos zu bestätigen:\n\n{{ Name }}\n\n⚠️ Wenn du fortfährst, werden alle zugehörigen Schlüssel (Hauptschlüssel, Nostr, etc.) gelöscht. Bitte vergewissern dich, dass du eine Sicherungskopie erstellt hast, denn es gibt keine andere Möglichkeit, sie wiederherzustellen."
         },
         "actions": {
           "export": "Exportieren",
@@ -506,16 +499,13 @@
           "disconnect_wallet": "Wallet abtrennen"
         },
         "mnemonic": {
-          "title": "🔑 Schlüsselverwaltung",
           "backup": {
             "protocols": {
               "nostr": "Nostr"
             },
             "save": "Hauptschlüssel speichern",
             "button": "Zeige Wiederherstellungsphrase",
-            "warning": "⚠️ Vergesse nicht, deine Wiederherstellungsphrase zu sichern! Wird sie nicht gesichert, kann dies dazu führen, dass du den Zugang zu deinem Hauptschlüssel, dein Nostr-Identität oder den von dir mit diesem Schlüssel verwalteten Assets dauerhaft verlierst.",
-            "description": "Notiere deine Wiederherstellungsphrase, um deinen Hauptschlüssel auf einem neuen Gerät wiederherstellen zu können oder für den Fall, dass du den Zugriff auf dein Konto verlierst.",
-            "title": "Sichere deinen Hauptschlüssel"
+            "description": "Notiere deine Wiederherstellungsphrase, um deinen Hauptschlüssel auf einem neuen Gerät wiederherstellen zu können oder für den Fall, dass du den Zugriff auf dein Konto verlierst."
           },
           "saved": "Hauptschlüssel erfolgreich verschlüsselt und gespeichert.",
           "generate": {
@@ -563,18 +553,15 @@
         },
         "remove_secretkey": {
           "title": "Hauptschlüssel entfernen",
-          "subtitle": "Entfernt den Hauptschlüssel aus diesem Konto.",
           "success": "Der Hauptschlüssel wurde erfolgreich entfernt.",
           "confirm": "Bitte gebe den Namen des Kontos ein, um die Löschung deines Hauptschlüssels zu bestätigen:\n\n{{ Name }}"
         },
         "network": {
-          "subtitle": "Wähle ein Netzwerk zur Ableitung von Adressen und zur Entschlüsselung von Bitcoin- und Liquid-Transaktionen",
           "options": {
             "bitcoin": "Mainnet",
             "testnet": "Testnet",
             "regtest": "Regtest"
-          },
-          "title": "Netzwerk"
+          }
         },
         "no_mnemonic_hint": "💡 Du hast noch keinen Hauptschlüssel. <0>Klicken Sie hier</0></div>, um deinen Hauptschlüssel zu erstellen und diese Einstellungen freizuschalten."
       },

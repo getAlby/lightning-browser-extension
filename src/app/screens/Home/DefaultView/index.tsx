@@ -5,12 +5,13 @@ import {
   PopiconsArrowDownLine,
   PopiconsArrowRightLine,
   PopiconsBulbLine,
+  PopiconsCircleExclamationLine,
   PopiconsKeyLine,
 } from "@popicons/react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { FC, useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import Alert from "~/app/components/Alert";
 import BalanceBox from "~/app/components/BalanceBox";
@@ -21,6 +22,7 @@ import toast from "~/app/components/Toast";
 import { useAccount } from "~/app/context/AccountContext";
 import { useTransactions } from "~/app/hooks/useTransactions";
 import { PublisherLnData } from "~/app/screens/Home/PublisherLnData";
+import { isAlbyLNDHubAccount } from "~/app/utils";
 import api, { GetAccountRes } from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
@@ -120,9 +122,9 @@ const DefaultView: FC<Props> = (props) => {
         <PublisherLnData lnData={props.lnDataFromCurrentTab[0]} />
       )}
 
-      <div className="p-4">
+      <div className="flex flex-col gap-4 p-4">
         {isBlockedUrl && (
-          <div className="items-center dark:text-white text-sm mb-4">
+          <div className="items-center dark:text-white text-sm">
             <Alert type="info">
               <p className="pb-2">
                 {t("default_view.is_blocked_hint", {
@@ -139,7 +141,57 @@ const DefaultView: FC<Props> = (props) => {
           </div>
         )}
 
-        <BalanceBox />
+        {isAlbyLNDHubAccount(account?.alias, account?.connectorType) && (
+          <Alert type="info">
+            <div className="flex gap-2 items-center">
+              <div className="shrink-0">
+                <PopiconsCircleExclamationLine className="w-5 h-5" />
+              </div>
+              <span className="text-sm">
+                <Trans
+                  i18nKey={"default_view.upgrade_account"}
+                  t={t}
+                  components={[
+                    // eslint-disable-next-line react/jsx-key
+                    <a
+                      className="underline"
+                      href="https://getalby.com/auth/users/new"
+                      target="_blank"
+                      rel="noreferrer"
+                    />,
+                  ]}
+                />
+              </span>
+            </div>
+          </Alert>
+        )}
+        {account?.nodeRequired ? (
+          <Alert type="warn">
+            <div className="flex items-center gap-2">
+              <div className="shrink-0">
+                <PopiconsCircleExclamationLine className="w-5 h-5" />
+              </div>
+              <span className="text-sm">
+                <Trans
+                  i18nKey={"default_view.node_required"}
+                  t={t}
+                  components={[
+                    // eslint-disable-next-line react/jsx-key
+                    <a
+                      className="underline"
+                      href="https://getalby.com"
+                      target="_blank"
+                      rel="noreferrer"
+                    />,
+                  ]}
+                />
+              </span>
+            </div>
+          </Alert>
+        ) : (
+          <BalanceBox />
+        )}
+
         {(accountLoading || lightningAddress) && (
           <div className="flex justify-center">
             <a
