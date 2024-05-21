@@ -268,6 +268,30 @@
           "connection_failed": "Connection failed. Is the BTCPay connection URL correct and accessible?"
         }
       },
+      "lawallet": {
+        "title": "LaWallet.io",
+        "page": {
+          "title": "Connect to LaWallet",
+          "instructions": "Set your LaWallet credentials below"
+        },
+        "private_key": "Private Key",
+        "api_endpoint": "API Endpoint",
+        "identity_endpoint": "Identity Endpoint",
+        "ledger_public_key": "Ledger Public key",
+        "urlx_public_key": "URLx Public key",
+        "relay_url": "Relay URL",
+        "errors": {
+          "toast": {
+            "title": "Identity not found",
+            "message": "You have no lightning address in the identity \"{{domain}}\"",
+            "verify": "Verify the following",
+            "match": "Identity Endpoint must match your Lightning Domain",
+            "walias": "Is your lightning address USERNAME<0>@{{domain}}</0> or its using another domain?",
+            "endpoint": "The correct endpoint is built from https://app.<0>{{domain}}</0>",
+            "http": "The identity provider is using the same protocol (<0>HTTP</0> or <0>HTTPS</0>)"
+          }
+        }
+      },
       "commando": {
         "title": "Core Lightning",
         "page": {
@@ -383,21 +407,26 @@
             "title": "Receive bitcoin",
             "description": "Fund your account and receive via your lightning address or an invoice"
           }
-        }
+        },
+        "node_required": "Your Alby Account needs a wallet. Connect a wallet to your account on <0>getalby.com</0>",
+        "upgrade_account": "You are using the old LNDHub setup. <0>Please re-connect</0> your Alby account to get access to the latest features."
       }
     },
     "accounts": {
       "title": "Wallets",
       "account_view": {
-        "title1": "Wallet Settings",
-        "title2": "Account",
+        "description": "Settings related to this particular instance of the connected wallet. If you reconnect, settings related to keys or display name will have to be set again.",
         "name": {
           "title": "Display Name",
           "placeholder": "Account Display Name"
         },
+        "lnaddress": {
+          "title": "Lightning Address"
+        },
+        "danger_zone": "Danger Zone",
         "export": {
-          "title": "Connect your mobile wallet",
-          "description": "Allows you to connect and use this account on mobile wallets like <0>Blue Wallet</0> and <1>Zeus</1>.",
+          "title": "Connect to Mobile Wallet",
+          "description": "Log in on getalby.com to connect and use this account on mobile wallets like <0>Zeus</0> and <1>Blue Wallet</1>.",
           "screen_reader": "Export account details",
           "waiting": "waiting for LndHub data...",
           "your_ln_address": "Your Lightning Address:",
@@ -406,7 +435,7 @@
         },
         "no_mnemonic_hint": "💡 You don't have a Master Key yet. <0>Click here</0></div> to create your Master Key and unlock these settings.",
         "mnemonic": {
-          "title": "🔑 Key Management",
+          "title": "Key Management",
           "saved": "Master Key encrypted & saved successfully.",
           "existing_nostr_key_notice": "ℹ️ This account already has a nostr private key set and will not be derived from this Master Key. You can manage your Nostr key from your account settings.",
           "description": {
@@ -439,10 +468,10 @@
             "button": "Generate Master Key"
           },
           "backup": {
-            "title": "Back up your Master Key",
+            "title": "Back up Your Recovery Phrase",
             "save": "Save Master Key",
-            "button": "View recovery phrase",
-            "warning": "⚠️ Don't forget to back up your recovery phrase! Not backing it up might result in permanently losing access to your Master Key, Nostr identity or assets you manage with this key.",
+            "button": "View Recovery Phrase",
+            "warning": "Don’t forget to back up your recovery phrase! Not backing it up your key might result in permanently loosing access to your Master Key, Nostr identity or assets you manage with this key.",
             "description": "Write down the recovery phrase to be able to restore your Master Key on a new device or in case you lose access to your account.",
             "protocols": {
               "nostr": "Nostr"
@@ -462,8 +491,8 @@
           }
         },
         "network": {
-          "title": "Network",
-          "subtitle": "Choose network to derive addresses and decode bitcoin and liquid transactions",
+          "title": "Bitcoin Network",
+          "subtitle": "Choose network to derive addresses and decode transactions.",
           "options": {
             "bitcoin": "Mainnet",
             "testnet": "Testnet",
@@ -521,25 +550,27 @@
           }
         },
         "remove": {
-          "title": "Disconnect This Wallet",
-          "subtitle": "Removes all allowances, payment data and keys associated with this wallet.",
+          "title": "Remove This Wallet",
+          "subtitle": "All the linked allowances will be deleted. Please be certain.",
           "confirm": "Please enter the name of the account to confirm the deletion of your account:\n\n{{ name }}\n\n ⚠️ All associated keys (Master Key, Nostr, etc) will be deleted if you continue. Please make sure you have backed them up, there is no other way to restore them.",
           "error": "The entered account name didn't match."
         },
         "remove_secretkey": {
           "title": "Remove Master Key",
-          "subtitle": "Removes the Master Key from this account.",
+          "subtitle": "Removes the Master Key from this wallet.",
           "confirm": "Please enter the name of the account to confirm the deletion of your Master Key:\n\n{{ name }}",
           "success": "Successfully removed the Master Key."
         },
         "actions": {
           "disconnect_wallet": "Disconnect Wallet",
           "remove_secretkey": "Remove Master Key",
-          "export": "Export"
+          "export": "Export",
+          "connect_mobile_wallet": "Connect to mobile wallet",
+          "change_lnaddress": "Change on getalby.com"
         }
       },
       "actions": {
-        "connect_a_wallet": "Connect a wallet"
+        "connect_a_wallet": "Connect a Wallet"
       }
     },
     "webln_enable": {
@@ -593,31 +624,23 @@
     },
     "settings": {
       "title": "Extension Settings",
+      "subtitle": "Global settings that affect your experience on all connected wallets in Alby Extension.",
+      "general": {
+        "title": "General"
+      },
       "browser_notifications": {
-        "title": "Browser notifications",
+        "title": "Browser Notifications",
         "subtitle": "Payment and authentication related notifications."
       },
       "website_enhancements": {
-        "title": "Website enhancements",
+        "title": "Website Enhancements",
         "subtitle": "Tipping enhancements for Twitter, YouTube, etc."
       },
-      "lnurl_auth": {
-        "title": "LNURL-Auth",
-        "hint": "is a generic authentication protocol. It authenticates the user using digital signatures. The protocol does not require any other identifying information such as passwords, emails, usernames, or similar. With Alby you can use your lightning accounts to securely login to websites. To be compatible with other wallets we had to make a few changes that you can configure here. <0>Ideally all those options are OFF.</0> Use them only if you have old accounts.",
-        "legacy_lnurl_auth_202207": {
-          "title": "Legacy LNURL-Auth",
-          "subtitle": "The key generation for LNURL-auth has changed (July 2022). Alby was not compatible with other implementations. This was changed, but now different login keys are used. If you used LNURL-auth to login before you can still enable the old method. This option will be removed later, make sure to switch to the new login."
-        },
-        "legacy_lnurl_auth": {
-          "title": "Legacy signing for LNDhub and LNbits",
-          "subtitle": "Message signing and login with LNDhub (e.g. BlueWallet) and LNbits accounts has been changed (March 2022). If you logged in with these accounts you can still enable the old signing method. This option will be removed later, make sure to switch to the new login."
-        }
-      },
       "camera_access": {
-        "title": "Camera access",
+        "title": "Camera Access",
         "subtitle": "For scanning QR codes",
-        "allow": "Allow camera access",
-        "granted": "Permission granted"
+        "allow": "Allow Camera Access",
+        "granted": "Permission Granted"
       },
       "language": {
         "title": "Language",
@@ -659,9 +682,9 @@
         "placeholder": "Enter your email address"
       },
       "change_password": {
-        "title": "Change unlock passcode",
+        "title": "Change Unlock Passcode",
         "subtitle": "",
-        "screen_reader": "Change unlock passcode",
+        "screen_reader": "Change Unlock Passcode",
         "choose_password": {
           "label": "Enter a new unlock passcode:"
         },
@@ -955,6 +978,10 @@
           "title": "delete note",
           "description": "Request relays to delete an event"
         },
+        "6": {
+          "title": "repost",
+          "description": "Repost a note"
+        },
         "7": {
           "title": "react",
           "description": "Sign a reaction to a note"
@@ -1022,6 +1049,10 @@
         "30078": {
           "title": "app data",
           "description": "Sign application-specific data"
+        },
+        "10000135": {
+          "title": "Upload Chunk",
+          "description": "Uploads data in chunks"
         }
       }
     },
@@ -1047,6 +1078,7 @@
     "success": "Success",
     "details": "Details",
     "error": "Error",
+    "general": "General",
     "settings": "Extension Settings",
     "accounts": "Accounts",
     "discover": "Discover Apps",
@@ -1070,6 +1102,7 @@
     "balance": "Balance",
     "or": "or",
     "website": "Website",
+    "wallet_settings": "Wallet Settings",
     "apps": "Apps",
     "actions": {
       "back": "Back",
@@ -1236,7 +1269,6 @@
       "options": {
         "account": {
           "add": "Connect a Wallet",
-          "wallet_settings": "Wallet Settings",
           "go_to_web_wallet": "Manage your web account"
         }
       }

@@ -278,7 +278,6 @@
         },
         "export": {
           "screen_reader": "Exportovat detaily účtu",
-          "title": "Exportovat účet",
           "export_uri": "LNDHub pověřovací URI",
           "waiting": "čekání na data z LndHub...",
           "your_ln_address": "Vaše Lightning adresa:",
@@ -306,7 +305,6 @@
             "save": "Uložit Master klíč",
             "button": "Zobrazit záložní frázi"
           },
-          "title": "🔑 Správa klíčů",
           "import": {
             "button": "Importovat Master klíč",
             "title": "Import Master klíče"
@@ -317,8 +315,7 @@
             "testnet": "Testnet",
             "bitcoin": "Mainnet",
             "regtest": "Regtest"
-          },
-          "title": "Síť"
+          }
         }
       }
     },
@@ -345,18 +342,6 @@
       "website_enhancements": {
         "title": "Vylepšení webové stránky",
         "subtitle": "Možnosti tipování pro Twitter, YouTube, apod."
-      },
-      "lnurl_auth": {
-        "title": "LNURL-Auth",
-        "hint": "je obecný autentizační protokol. Ověřuje uživatele pomocí digitálních podpisu. Protkol nevyžaduje žádné další identifikační údaje jako jsou hesla, e-maily, uživatelská jména a podobně. S Alby můžete používat své lightning účty k bezpečnému přihlášení k webovým stránkám. Abychom byli kompatibilní s jinými peněženkami, museli jsme udělat několik změn, které můžete nakonfigurovat zde. <0>V ideálním případě jsou všechny tyto možnosti vypnuté.</0> Používejte je pouze v případě, že máte staré účty.",
-        "legacy_lnurl_auth_202207": {
-          "title": "Starší verze LNURL-Auth",
-          "subtitle": "Generování klíče pro LNURL-auth se změnilo (červenec 2022). Alby nebylo kompatibilní s jinými implementacemi. To bylo změněno, ale nyní se používají jiné přihlašovací klíče. Pokud jste dříve používali LNURL-auth pro přihlašování, můžete stále zapnout staré chování. Tato volba bude v budoucnu odstraněna. Ujistěte se, že jste přešli na nový typ přihlášení."
-        },
-        "legacy_lnurl_auth": {
-          "title": "Starší verze podepisování pro LNDhub aLNbits",
-          "subtitle": "Podepisování zpráv a přihlašování přes LNDhub (například BlueWallet) a LNbits účty bylo změněno (Březen 2022). Pokud jste se přes tyto účty přihlašovali, můžete stále zapnout podporu staré přihlašovací metody. Tato volba bude v budoucnu odstraněna, proto se ujistěte, že jste přešli na novou metodu přihlašování."
-        }
       },
       "camera_access": {
         "title": "Přístup kamery",

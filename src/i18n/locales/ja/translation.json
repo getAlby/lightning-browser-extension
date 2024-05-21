@@ -253,10 +253,8 @@
         "export": {
           "waiting": "LndHubデータを取得中...",
           "your_ln_address": "あなたのライトニング・アドレス：",
-          "description": "このアカウントを<0>Blue Wallet</0>や<1>Zeus</1>のようなモバイルウォレットに接続して使用できるようにする。",
           "screen_reader": "アカウント情報をエクスポート",
           "export_uri": "LNDHubの認証URl",
-          "title": "モバイルウォレットを接続",
           "scan_qr": "QRCコードをスキャンして、このウォレットをZeusまたはBlueWalletにインポートする。"
         },
         "title2": "アカウント",
@@ -265,11 +263,9 @@
           "placeholder": "アカウントの表示名"
         },
         "mnemonic": {
-          "title": "🔑 鍵の管理",
           "backup": {
             "button": "リカバリーフレーズを表示",
             "description": "新しいデバイスでマスターキーを復元したり、アカウントにアクセスできなくなった場合に備えて、リカバリーフレーズは必ずメモしてください。",
-            "warning": "⚠️ リカバリフレーズのバックアップを忘れないでください！バックアップを忘れると、マスターキー、Nostr ID、またはこのキーで管理する資産へのアクセスを永久に失います。",
             "protocols": {
               "nostr": "Nostr"
             },
@@ -348,9 +344,7 @@
             "bitcoin": "Mainnet",
             "testnet": "Testnet",
             "regtest": "Regtest"
-          },
-          "title": "Network",
-          "subtitle": "アドレス導出やトランザクションをデコードするBitcoinやliquidのネットワークを選んでください。"
+          }
         }
       }
     },
