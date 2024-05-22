@@ -47,7 +47,10 @@ function Unlock() {
     setLoading(true);
     auth
       .unlock(password, () => {
-        if (navState.action === "unlock") msg.reply({ unlocked: true });
+        if (navState.action === "unlock") {
+          msg.reply({ unlocked: true });
+          return;
+        }
         navigate(from, { replace: true });
         setLoading(false);
       })
