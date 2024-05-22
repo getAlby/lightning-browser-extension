@@ -290,13 +290,11 @@
     "accounts": {
       "account_view": {
         "export": {
-          "title": "Conectar sua carteira de celular",
           "your_ln_address": "Seu endereço relâmpago:",
           "screen_reader": "Exportar detalhes da conta",
           "waiting": "aguardando dados LndHub...",
           "export_uri": "Credenciais URI LNDHub",
-          "scan_qr": "Leia o código QR para importar esta carteira na Zeus ou BlueWallet.",
-          "description": "Permite conectar e usar esta conta em carteiras de celular como por ex a <0>Blue Wallet</0> e a <1>Zeus</1>."
+          "scan_qr": "Leia o código QR para importar esta carteira na Zeus ou BlueWallet."
         },
         "nostr": {
           "title": "Nostr",
@@ -350,9 +348,7 @@
         },
         "remove": {
           "error": "O nome da conta inserido não corresponde.",
-          "confirm": "Por favor, insira o nome da conta para confirmar a exclusão:\n\n{{ name }}\n\n ⚠️ Por favor, insira o nome da conta para confirmar a exclusão. Todas as chaves associadas (Chave mestra, Nostr, etc) serão excluídas se você continuar. Certifique-se de ter feito backup das chaves, não há outra maneira de restaurá-las.",
-          "title": "Desconectar esta carteira",
-          "subtitle": "Remove todos os limites de gastos, dados de pagamento e chaves associadas à esta carteira."
+          "confirm": "Por favor, insira o nome da conta para confirmar a exclusão:\n\n{{ name }}\n\n ⚠️ Por favor, insira o nome da conta para confirmar a exclusão. Todas as chaves associadas (Chave mestra, Nostr, etc) serão excluídas se você continuar. Certifique-se de ter feito backup das chaves, não há outra maneira de restaurá-las."
         },
         "actions": {
           "export": "Exportar",
@@ -365,7 +361,6 @@
         },
         "title2": "Conta",
         "mnemonic": {
-          "title": "🔑 Gerenciamento de chaves",
           "saved": "Chave mestra criptografada e salva com sucesso.",
           "generate": {
             "title": "Gere sua chave mestra",
@@ -378,9 +373,7 @@
             "protocols": {
               "nostr": "Nostr"
             },
-            "warning": "⚠️ Não se esqueça de fazer backup de sua frase de recuperação! Não fazer o backup pode resultar na perda permanente do acesso à sua chave mestra, identidade Nostr ou ativos que você gerencia com esta chave.",
-            "description": "Anote a frase de recuperação para poder restaurar sua chave mestra em um novo dispositivo ou caso perca o acesso à sua conta.",
-            "title": "Backup de sua chave mestra"
+            "description": "Anote a frase de recuperação para poder restaurar sua chave mestra em um novo dispositivo ou caso perca o acesso à sua conta."
           },
           "import": {
             "title": "Importar sua chave mestra",
@@ -423,17 +416,14 @@
         "remove_secretkey": {
           "title": "Remover chave mestra",
           "success": "Chave mestra removida com sucesso.",
-          "subtitle": "Remove a chave mestra desta conta.",
           "confirm": "Por favor, insira o nome da conta para confirmar a exclusão de sua chave mestra:\n\n{{ name }}"
         },
         "network": {
-          "title": "Rede",
           "options": {
             "bitcoin": "Rede principal",
             "testnet": "Rede de testes",
             "regtest": "Regtest"
-          },
-          "subtitle": "Escolha a rede para gerar endereços e decodificar transações bitcoin e liquid"
+          }
         },
         "no_mnemonic_hint": "💡 Você ainda não tem uma chave mestra. <0>Clique aqui</0></div> para gerar sua chave mestra e desbloquear essas configurações.",
         "title1": "Configurações da carteira"
@@ -462,18 +452,6 @@
       "website_enhancements": {
         "title": "Pagamentos em redes sociais",
         "subtitle": "Reconhece automaticamente endereços relâmpago em perfis do Twitter, Youtube, etc, facilitando o envio de pagamentos."
-      },
-      "lnurl_auth": {
-        "title": "LNURL-Auth",
-        "hint": "é um protocolo de autenticação. Ele autentica o usuário usando assinaturas digitais. O protocolo não requer nenhuma outra informação de identificação, como senhas, e-mails, nomes de usuário... Com a Alby você pode usar suas contas bitcoin para logar em sites com segurança. Para ser compatível com outras carteiras, tivemos que fazer algumas alterações que você pode configurar aqui. Por padrão essas opções estão DESLIGADAS. Use-as apenas se você tiver contas antigas.",
-        "legacy_lnurl_auth_202207": {
-          "title": "LNURL-Auth antigo",
-          "subtitle": "A geração de chave para a LNURL-auth mudou em (julho de 2022). A Alby não era compatível com outras implementações. Isso foi corrigido, mas agora uma nova chave está sendo usada como padrão. Se você usou a LNURL-auth para logar em sites antes de julho de 2022, ainda poderá fazer login habilitando o método antigo. Esta opção será removida posteriormente, certifique-se de alterar suas contas nos sites para usar o novo login."
-        },
-        "legacy_lnurl_auth": {
-          "title": "Método antigo de autenticação para LNDhub e LNbits",
-          "subtitle": "A assinatura de mensagens e o login com as contas LNDhub (por exemplo, BlueWallet) e LNbits foram alteradas em (março de 2022). Se você fez login com essas contas, ainda poderá ativar o método de assinatura antigo. Esta opção será removida posteriormente, certifique-se de alterar suas contas nos sites para usar o novo login."
-        }
       },
       "camera_access": {
         "title": "Acesso à câmera",

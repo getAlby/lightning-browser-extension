@@ -1,4 +1,7 @@
-import { CreateSwapParams } from "@getalby/sdk/dist/types";
+import {
+  CreateSwapParams,
+  GetAccountInformationResponse,
+} from "@getalby/sdk/dist/types";
 import { PaymentRequestObject } from "bolt11-signet";
 import { Runtime } from "webextension-polyfill";
 import { ACCOUNT_CURRENCIES, CURRENCIES } from "~/common/constants";
@@ -46,7 +49,12 @@ export interface AccountInfo {
   currency: ACCOUNT_CURRENCIES;
   avatarUrl?: string;
   lightningAddress?: string;
+  nodeRequired?: boolean;
 }
+
+export type GetAccountInformationResponses = GetAccountInformationResponse & {
+  node_required?: boolean;
+};
 
 export interface MetaData {
   title?: string;
@@ -887,8 +895,6 @@ export interface Allowance extends Omit<DbAllowance, "id"> {
 export interface SettingsStorage {
   browserNotifications: boolean;
   websiteEnhancements: boolean;
-  legacyLnurlAuth: boolean;
-  isUsingLegacyLnurlAuthKey: boolean;
   userName: string;
   userEmail: string;
   locale: string;

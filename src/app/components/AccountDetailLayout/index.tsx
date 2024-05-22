@@ -10,9 +10,8 @@ function AccountDetailLayout() {
   const navigate = useNavigate();
   const isRoot = useMatch("accounts/:id");
   const { accounts } = useAccounts();
-  const { t } = useTranslation("translation", {
-    keyPrefix: "accounts.account_view",
-  });
+
+  const { t: tCommon } = useTranslation("common");
   const { id } = useParams() as { id: string };
 
   function back() {
@@ -50,7 +49,7 @@ function AccountDetailLayout() {
             </h2>
             <span>/</span>
             <span className="text-ellipsis whitespace-nowrap overflow-hidden">
-              {t("title1")}
+              {tCommon("wallet_settings")}
             </span>
           </div>
         )}

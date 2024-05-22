@@ -116,6 +116,7 @@ const enable = async (message: MessageAllowanceEnable, sender: Sender) => {
             30023, // Long-form content
             30008, // Manage profile badges
             30009, // Badge definition
+            30078, // App Data
           ];
           reasonableEventKindIds.forEach(async (kindId) => {
             await addPermissionFor(
