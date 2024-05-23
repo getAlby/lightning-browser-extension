@@ -589,7 +589,6 @@
     "nostr": {
       "title": "Nostr",
       "content": "該網站要求你簽署：",
-      "allow_sign": "允許 {{host}} 簽名：",
       "block_and_ignore": "阻止並忽略 {{host}}",
       "block_added": "已將 {{host}} 添加到阻止列表，請重新加載網站。"
     },

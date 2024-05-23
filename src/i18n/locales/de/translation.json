@@ -384,7 +384,7 @@
       "name": {
         "title": "Name",
         "placeholder": "Gib deinen Namen ein",
-        "subtitle": ""
+        "subtitle": "Übersetzung.Einstellungen.Name.Untertitel"
       },
       "email": {
         "title": "E-Mail",
@@ -649,9 +649,7 @@
       "content": "Auf dieser Webseite wirst du aufgefordert zu signieren:",
       "block_and_ignore": "Blockieren und Ignorieren von {{host}}",
       "block_added": "{{host}} zur Blockliste hinzugefügt, bitte lade deine Webseite neu.",
-      "allow_sign": "Erlaube dein {{host}} zu unterschreiben:",
       "allow_sign_event": "Erlaube {{Gastgeber}}, ein <0>{{kind}}</0> Ereignis zu unterzeichnen",
-      "allow_encrypt": "Erlaube {{host}}, die Nachricht zu verschlüsseln:",
       "recipient": "Empfänger",
       "kinds": {
         "0": {
@@ -1193,8 +1191,7 @@
       "copied_to_clipboard": "In die Zwischenablage kopiert",
       "hide": "Ausblenden",
       "finish": "Oberfläche",
-      "deny": "Verweigern",
-      "sign": "Unterschrift"
+      "deny": "Verweigern"
     },
     "discover": "Apps entdecken",
     "errors": {
@@ -1357,23 +1354,6 @@
         "title": "öffentlichen Schlüssel lesen",
         "description": "Lese deinen öffentlichen Schlüssel"
       },
-      "nip04decrypt": {
-        "title": "entschlüsseln (nip04)",
-        "description": "Daten entschlüsseln"
-      },
-      "nip04encrypt": {
-        "title": "verschlüsseln (nip04)",
-        "description": "Daten verschlüsseln"
-      },
-      "nip44encrypt": {
-        "title": "verschlüsseln (nip44)",
-        "description": "Daten verschlüsseln"
-      },
-      "decrypt": "Daten entschlüsseln",
-      "nip44decrypt": {
-        "title": "entschlüsseln (nip44)",
-        "description": "Daten entschlüsseln"
-      },
       "signschnorr": {
         "title": "Zeichen schnorr",
         "description": "Nachricht mit deinem Schlüssel unterschreiben"
@@ -1381,6 +1361,14 @@
       "signmessage": {
         "title": "Zeichen Nachricht",
         "description": "Alle nostr-Veranstaltungen unterzeichnen"
+      },
+      "decrypt": {
+        "title": "entschlüsseln",
+        "description": "Daten entschlüsseln"
+      },
+      "encrypt": {
+        "title": "verschlüsseln",
+        "description": "Daten verschlüsseln"
       }
     }
   }
