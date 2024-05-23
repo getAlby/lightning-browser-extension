@@ -303,7 +303,7 @@ function NostrSettings() {
                 <p className="text-gray-800 dark:text-white font-medium">
                   {t("nostr.settings.nostr_address.manage_nostr_address.title")}
                 </p>
-                <p className="text-gray-600 text-xs dark:text-neutral-400">
+                <p className="text-gray-600 text-sm dark:text-neutral-400 text-ellipsis whitespace-nowrap overflow-hidden">
                   <Trans
                     i18nKey={
                       NIP05Key === ""
@@ -311,7 +311,13 @@ function NostrSettings() {
                         : "nostr.settings.nostr_address.manage_nostr_address.description"
                     }
                     t={t}
-                    values={{ lnaddress: lightningAddress, npub: NIP05Key }}
+                    values={{
+                      lnaddress: lightningAddress,
+                      npub:
+                        NIP05Key.substring(0, 11) +
+                        "..." +
+                        NIP05Key.substring(NIP05Key.length - 11),
+                    }}
                     // eslint-disable-next-line react/jsx-key
                     components={[<b></b>]}
                   />
