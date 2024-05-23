@@ -182,7 +182,7 @@ function NostrSettings() {
                       </p>
 
                       <div className="flex items-center gap-2">
-                        <p className="text-gray-600 text-sm dark:text-neutral-400">
+                        <p className="text-gray-600 text-sm dark:text-neutral-400 text-ellipsis overflow-hidden whitespace-nowrap">
                           {nostrPublicKey}
                         </p>
 
@@ -230,17 +230,17 @@ function NostrSettings() {
                     }
                   />
                 </div>
-                <div className="flex flex-col sm:flex-row mt-0 sm:mt-6">
-                  <div className="flex-none sm:w-64 w-full pt-4 sm:pt-0 mr-4">
-                    {hasImportedNostrKey && hasMnemonic && (
+                <div className="flex flex-col sm:flex-row w-full justify-end mt-0 sm:mt-6">
+                  {hasImportedNostrKey && hasMnemonic && (
+                    <div className="flex-none sm:w-64 w-full pt-4 sm:pt-0 mr-4">
                       <Button
                         outline
                         label={t("nostr.settings.derive")}
                         onClick={handleDeriveNostrKeyFromSecretKey}
                         fullWidth
                       />
-                    )}
-                  </div>
+                    </div>
+                  )}
 
                   <div className="flex-none sm:w-64 w-full pt-4 sm:pt-0">
                     <Button
