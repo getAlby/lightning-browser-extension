@@ -10,7 +10,7 @@ const enable = async (message: MessageAllowanceEnable, sender: Sender) => {
   const host = getHostFromSender(sender);
   if (!host) return;
 
-  const isUnlocked = await state.getState().isUnlocked();
+  let isUnlocked = await state.getState().isUnlocked();
   const account = await state.getState().getAccount();
   const allowance = await db.allowances
     .where("host")
@@ -21,20 +21,25 @@ const enable = async (message: MessageAllowanceEnable, sender: Sender) => {
 
   if (!isUnlocked) {
     try {
-      await utils.openPrompt<{ unlocked: boolean }>({
+      const response = await utils.openPrompt<{ unlocked: boolean }>({
         args: {},
         origin: { internal: true },
         action: "unlock",
       });
+
+      isUnlocked = response.data.unlocked;
     } catch (e) {
       console.error(e);
       if (e instanceof Error) {
         return { error: e.message };
+      } else {
+        return { error: "Failed to unlock" };
       }
     }
   }
 
   if (
+    isUnlocked &&
     allowance &&
     allowance.enabled &&
     account?.mnemonic &&
