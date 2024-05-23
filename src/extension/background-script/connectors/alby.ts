@@ -36,31 +36,12 @@ interface Config {
   oAuthToken: OAuthToken | undefined;
 }
 
-interface UserDetails {
-  identifier: string;
-  email: string;
-  name: string;
-  avatar: string | null;
-  lightning_address: string;
-  shared_node: boolean;
-  node_required: boolean;
-  limits: {
-    max_send_volume: number;
-    max_send_amount: number;
-    max_receive_volume: number;
-    max_receive_amount: number;
-    max_account_balance: number;
-    max_volume_period_in_days: number;
-  };
-  node_type: string;
-  node_connection_error_count: number;
-}
-
 export default class Alby implements Connector {
   private account: Account;
   private config: Config;
   private _client: Client | undefined;
   private _authUser: auth.OAuth2User | undefined;
+  private _cache = new Map<string, object>();
 
   constructor(account: Account, config: Config) {
     this.account = account;
@@ -136,19 +117,25 @@ export default class Alby implements Connector {
   async getInfo(): Promise<
     GetInfoResponse<WebLNNode & GetAccountInformationResponses>
   > {
+    const cacheKey = "getInfo";
+    const cacheValue = this._cache.get(cacheKey) as GetInfoResponse<
+      WebLNNode & GetAccountInformationResponses
+    >;
+
+    if (cacheValue) {
+      return cacheValue;
+    }
+
     try {
-      const node_required = await this._isNodeRequired();
-      const info = await this._request((client) =>
-        client.accountInformation({})
-      );
+      const info = await this._getUserDetails();
 
       const returnValue = {
         data: {
           ...info,
-          node_required: node_required,
           alias: "🐝 getalby.com",
         },
       };
+      this._cache.set(cacheKey, returnValue);
 
       return returnValue;
     } catch (error) {
@@ -419,7 +406,7 @@ export default class Alby implements Connector {
     }
   }
 
-  private async _isNodeRequired() {
+  private async _getUserDetails() {
     const url = `${process.env.ALBY_API_URL}/internal/users`;
 
     const requestOptions = {
@@ -433,12 +420,13 @@ export default class Alby implements Connector {
     };
 
     try {
-      const details = await this._genericRequest<UserDetails>(
-        url,
-        requestOptions
-      );
+      const details =
+        await this._genericRequest<GetAccountInformationResponses>(
+          url,
+          requestOptions
+        );
 
-      return details.node_required;
+      return details;
     } catch (error) {
       console.error("Error fetching limits:", error);
       throw error;
