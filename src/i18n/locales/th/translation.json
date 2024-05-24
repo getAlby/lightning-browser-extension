@@ -93,7 +93,6 @@
             "imported_key_warning": "⚠️ คุณกำลังใช้คีย์ Nostr ที่นำเข้า หรือ สร้างขึ้นแบบสุ่มในปัจจุบัน Nostr private key ของคุณไม่สามารถกู้คืนได้โดย recovery phase ของคุณ ดังนั้นโปรดอย่าลืมสำรอง Nostr private key ของคุณแยกต่างหาก",
             "label": "การตั้งค่าสำหรับ Nostr",
             "title": "การตั้งค่าสำหรับ Nostr",
-            "description": "รับคีย์ Nostr จาก Master Key หรือ นำเข้า private key ที่มีอยู่ โดยวางในช่อง \"Nostr Private Key\"",
             "can_restore": "✅ Nostr key ได้มาจาก Master Key ของคุณ"
           },
           "setup": {
