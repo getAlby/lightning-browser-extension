@@ -343,7 +343,6 @@
             "title": "Configurações Nostr",
             "derive": "Gerar chave Nostr a partir de sua chave mestra",
             "can_restore": "✅ Chave Nostr gerada a partir de sua chave mestra",
-            "description": "Você pode gerar chaves Nostr a partir de sua chave mestra ou importar sua chave privada existente colando-a no campo \"Chave privada Nostr\".",
             "no_secret_key": "💡 Você ainda não tem uma chave mestra. <0>Clique aqui</0></div> para gerar sua chave mestra e suas chaves Nostr.",
             "imported_key_warning": "⚠️ No momento, você está usando uma chave Nostr importada ou gerada aleatoriamente. Sua chave privada Nostr não pode ser restaurada por sua frase de recuperação, então lembre-se de fazer o backup de sua chave privada Nostr separadamente.",
             "remove": "Remover esta chave"
