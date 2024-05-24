@@ -281,7 +281,6 @@
             "imported_key_warning": "⚠️ Du använder för närvarande en importerad eller slumpmässigt genererad Nostr-nyckel. Din privata Nostr-nyckel kan inte återställas av din återställningsfras, så kom ihåg att säkerhetskopiera din privata Nostr-nyckel separat.",
             "derive": "Härled från huvudnyckel",
             "can_restore": "✅ Nostr-nyckel härledd från din huvudnyckel",
-            "description": "Härled Nostr-nycklar från din huvudnyckel eller importera din befintliga privata nyckel genom att klistra in den i fältet \"Nostr privat nyckel\".",
             "no_secret_key": "💡 Du har ingen huvudnyckel än. <0>Klicka här</0></div> för att skapa din huvudnyckel och härleda dina Nostr-nycklar.",
             "remove": "Ta bort nuvarande nycklar"
           },
