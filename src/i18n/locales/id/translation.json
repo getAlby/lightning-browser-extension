@@ -281,7 +281,6 @@
     },
     "accounts": {
       "account_view": {
-        "title2": "Akun",
         "name": {
           "placeholder": "Tampilan nama akun",
           "title": "Tampilan Nama"

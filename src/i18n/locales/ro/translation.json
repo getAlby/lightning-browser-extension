@@ -250,7 +250,6 @@
     },
     "accounts": {
       "account_view": {
-        "title2": "Editeaza cont",
         "name": {
           "title": "Nume",
           "placeholder": "Nume cont"
