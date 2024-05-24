@@ -309,15 +309,6 @@
       "unlock_password": "Dein Entsperr-Passcode"
     },
     "settings": {
-      "nostr": {
-        "private_key": {
-          "title": "Privater Schlüssel",
-          "subtitle": "Dieser Abschnitt wurde auf die Kontenseite verschoben, da die Schlüssel jetzt kontenspezifisch sind.",
-          "go_to": "Gehe zu deinen Konten"
-        },
-        "hint": "Es ist ein einfaches und offenes Protokoll, das darauf abzielt, zensurresistente soziale Netzwerke zu schaffen. Nostr arbeitet mit kryptographischen Schlüsseln. Um etwas zu veröffentlichen, signiere es mit deinem Schlüssel und senden es an mehrere Relays. Du kannst Alby verwenden, um deinen Nostr-Schlüssel zu verwalten. Viele Nostr-Anwendungen erlauben dann, einfach den Schlüssel aus der Alby-Erweiterung zu verwenden.",
-        "title": "Nostr"
-      },
       "browser_notifications": {
         "subtitle": "Zahlungs- und Authentifizierungsbezogene Benachrichtigungen.",
         "title": "Browser Benachrichtigungen"
@@ -470,7 +461,6 @@
           "settings": {
             "label": "Nostr Einstellungen",
             "title": "Nostr Einstellungen",
-            "description": "Leite deinen Nostr-Schlüssel von deinem Hauptschlüssel ab oder importiere den bestehenden privaten Schlüssel, indem du ihn in das Feld \"Nostr Private Key\" einfügst.",
             "imported_key_warning": "⚠️ Du verwendest derzeit einen importierten oder zufällig generierten Nostr-Schlüssel. Dein privater Nostr-Schlüssel kann nicht durch deine Wiederherstellungsphrase wiederhergestellt werden, also denke daran, deinen privaten Nostr-Schlüssel separat zu sichern.",
             "can_restore": "✅ Nostr-Schlüssel, abgeleitet von Ihrem Hauptschlüssel",
             "derive": "Vom Hauptschlüssel ableiten",
