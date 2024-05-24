@@ -295,7 +295,6 @@
           "title": "Nostr",
           "hint": "es un protocolo simple y abierto que tiene como objetivo crear redes sociales resistentes a la censura. Nostr trabaja con claves criptográficas. Para publicar algo, lo firma con su clave y lo envía a múltiples relevos. Puede usar Alby para administrar su clave Nostr. Muchas aplicaciones de Nostr le permitirán simplemente usar la clave de la extensión Alby."
         },
-        "title2": "Editar Cuenta",
         "name": {
           "title": "Nombre",
           "placeholder": "Nombre de la Cuenta"

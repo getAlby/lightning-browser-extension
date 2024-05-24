@@ -426,8 +426,6 @@
     },
     "accounts": {
       "account_view": {
-        "title2": "Konto",
-        "title1": "Kontoeinstellung",
         "name": {
           "title": "Name anzeigen",
           "placeholder": "Konto Anzeigename"
@@ -1028,7 +1026,6 @@
       "options": {
         "account": {
           "go_to_web_wallet": "Verwalte dein Web-Konto",
-          "wallet_settings": "Wallet-Einstellungen",
           "add": "Verbinde deine Wallet"
         }
       },

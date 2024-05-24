@@ -250,7 +250,6 @@
     },
     "accounts": {
       "account_view": {
-        "title2": "खाते संपादित करा",
         "name": {
           "title": "नाव",
           "placeholder": "खात्याचे नाव"

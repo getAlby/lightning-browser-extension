@@ -260,7 +260,6 @@
     },
     "accounts": {
       "account_view": {
-        "title2": "帳戶",
         "name": {
           "title": "名稱",
           "placeholder": "帳戶名稱"

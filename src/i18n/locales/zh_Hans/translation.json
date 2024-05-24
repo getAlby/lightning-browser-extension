@@ -293,7 +293,6 @@
           "export": "导出",
           "remove_secretkey": "移除主密钥"
         },
-        "title2": "帐户",
         "name": {
           "title": "名称",
           "placeholder": "帐户名称"

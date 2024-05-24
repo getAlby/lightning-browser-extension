@@ -303,7 +303,6 @@
     },
     "accounts": {
       "account_view": {
-        "title2": "Račun",
         "export": {
           "screen_reader": "Izvozi podrobnosti računa",
           "your_ln_address": "Tvoj Lightning naslov:",

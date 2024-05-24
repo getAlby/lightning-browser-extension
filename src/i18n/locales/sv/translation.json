@@ -299,7 +299,6 @@
           "error": "Det angivna kontonamnet matchade inte.",
           "confirm": "Ange namnet på kontot för att bekräfta raderingen av ditt konto.\n\n{{ name }}\n\n ⚠️ Alla associerade nycklar (Master Key, Nostr, etc) kommer att raderas om du fortsätter. Se till att du har säkerhetskopierat dem, det finns inget annat sätt att återställa dem."
         },
-        "title2": "Konto",
         "name": {
           "title": "Visnings Namn",
           "placeholder": "Konto visningsnamn"

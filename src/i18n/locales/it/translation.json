@@ -263,7 +263,6 @@
           "scan_qr": "Importa questo wallet su Zeus o BlueWallet scansionando il QRCode.",
           "screen_reader": "Esporta i dettagli dell'account"
         },
-        "title2": "Modifica Account",
         "name": {
           "title": "Nome",
           "placeholder": "Nome Account"

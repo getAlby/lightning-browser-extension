@@ -257,7 +257,6 @@
           "export_uri": "LNDHubの認証URl",
           "scan_qr": "QRCコードをスキャンして、このウォレットをZeusまたはBlueWalletにインポートする。"
         },
-        "title2": "アカウント",
         "name": {
           "title": "表示名",
           "placeholder": "アカウントの表示名"

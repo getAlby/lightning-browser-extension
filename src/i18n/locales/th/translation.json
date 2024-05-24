@@ -145,7 +145,6 @@
           "export": "ส่งออก",
           "remove_secretkey": "ลบ Master Key"
         },
-        "title2": "บัญชี",
         "name": {
           "title": "ชื่อที่ปรากฏ",
           "placeholder": "ชื่อที่ปรากฏบนบัญชี"

@@ -250,7 +250,6 @@
     },
     "accounts": {
       "account_view": {
-        "title2": "Modifier le compte",
         "name": {
           "title": "Nom",
           "placeholder": "Nom du compte"

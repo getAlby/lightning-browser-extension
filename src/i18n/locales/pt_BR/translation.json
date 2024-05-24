@@ -371,7 +371,6 @@
           "title": "Nome",
           "placeholder": "Nome da conta"
         },
-        "title2": "Conta",
         "mnemonic": {
           "saved": "Chave mestra criptografada e salva com sucesso.",
           "generate": {
@@ -437,8 +436,7 @@
             "regtest": "Regtest"
           }
         },
-        "no_mnemonic_hint": "💡 Você ainda não tem uma chave mestra. <0>Clique aqui</0></div> para gerar sua chave mestra e desbloquear essas configurações.",
-        "title1": "Configurações da carteira"
+        "no_mnemonic_hint": "💡 Você ainda não tem uma chave mestra. <0>Clique aqui</0></div> para gerar sua chave mestra e desbloquear essas configurações."
       },
       "actions": {
         "connect_a_wallet": "Conecte uma carteira"
@@ -1078,7 +1076,6 @@
       "options": {
         "account": {
           "go_to_web_wallet": "Acessar sua conta na web",
-          "wallet_settings": "Configurações da carteira",
           "add": "Conectar nova carteira"
         }
       },
