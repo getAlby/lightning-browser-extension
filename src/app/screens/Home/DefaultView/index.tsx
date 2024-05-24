@@ -162,7 +162,7 @@ const DefaultView: FC<Props> = (props) => {
                     // eslint-disable-next-line react/jsx-key
                     <a
                       className="underline"
-                      href="https://getalby.com/auth/users/new"
+                      href="https://guides.getalby.com/user-guide/v/alby-account-and-browser-extension/alby-browser-extension/migrate-from-old-lndhub-setup"
                       target="_blank"
                       rel="noreferrer"
                     />,
