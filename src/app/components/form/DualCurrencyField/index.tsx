@@ -178,9 +178,7 @@ export default function DualCurrencyField({
   // default to fiat when account currency is set to anything other than BTC
   useEffect(() => {
     if (!initialized.current) {
-      if (account?.currency && account?.currency !== "BTC") {
-        setUseFiatAsMain(true);
-      }
+      setUseFiatAsMain(!!(account?.currency && account?.currency !== "BTC"));
       initialized.current = true;
     }
   }, [account?.currency, setUseFiatAsMain]);
@@ -271,7 +269,10 @@ export default function DualCurrencyField({
         )}
       >
         {!!inputPrefix && (
-          <p className="helper text-gray-500 z-1 pr-2" onClick={swapCurrencies}>
+          <p
+            className="helper text-gray-500 z-1 pr-2 hover:text-neutral-400 cursor-pointer"
+            onClick={swapCurrencies}
+          >
             {inputPrefix}
           </p>
         )}
@@ -280,10 +281,11 @@ export default function DualCurrencyField({
 
         {!!altFormattedValue && (
           <p
-            className="helper whitespace-nowrap text-gray-500 z-1"
+            className="helper whitespace-nowrap text-gray-500 z-1 hover:text-neutral-400 cursor-pointer"
             onClick={swapCurrencies}
           >
-            ~{altFormattedValue}
+            {!useFiatAsMain && "~"}
+            {altFormattedValue}
           </p>
         )}
 
