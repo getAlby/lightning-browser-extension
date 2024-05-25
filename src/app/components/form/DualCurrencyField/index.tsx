@@ -270,7 +270,7 @@ export default function DualCurrencyField({
       >
         {!!inputPrefix && (
           <p
-            className="helper text-gray-500 z-1 pr-2 hover:text-neutral-400 cursor-pointer"
+            className="helper text-gray-500 z-1 pr-2 hover:text-gray-600 dark:hover:text-neutral-400 cursor-pointer"
             onClick={swapCurrencies}
           >
             {inputPrefix}
@@ -281,7 +281,7 @@ export default function DualCurrencyField({
 
         {!!altFormattedValue && (
           <p
-            className="helper whitespace-nowrap text-gray-500 z-1 hover:text-neutral-400 cursor-pointer"
+            className="helper whitespace-nowrap text-gray-500 z-1 hover:text-gray-600 dark:hover:text-neutral-400 cursor-pointer"
             onClick={swapCurrencies}
           >
             {!useFiatAsMain && "~"}
