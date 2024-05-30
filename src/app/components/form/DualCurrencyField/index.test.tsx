@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { settingsFixture as mockSettings } from "~/../tests/fixtures/settings";
 
@@ -34,6 +34,9 @@ describe("DualCurrencyField", () => {
     const input = screen.getByLabelText("Amount");
 
     expect(input).toBeInTheDocument();
-    expect(await screen.getByText("~$10.00")).toBeInTheDocument();
+
+    await waitFor(() => {
+      expect(screen.getByText("~$10.00")).toBeInTheDocument();
+    });
   });
 });
