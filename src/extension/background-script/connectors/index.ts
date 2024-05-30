@@ -4,6 +4,7 @@ import Commando from "./commando";
 import Eclair from "./eclair";
 import Galoy from "./galoy";
 import Kollider from "./kollider";
+import LaWallet from "./lawallet";
 import LnBits from "./lnbits";
 import Lnc from "./lnc";
 import Lnd from "./lnd";
@@ -38,6 +39,7 @@ const connectors = {
   commando: Commando,
   alby: Alby,
   nwc: NWC,
+  lawallet: LaWallet,
 };
 
 export default connectors;

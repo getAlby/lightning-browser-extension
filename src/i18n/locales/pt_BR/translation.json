@@ -164,7 +164,8 @@
           "title": "Conecte-se na <0>Carteira Bitcoin Jungle</0>"
         },
         "token": {
-          "label": "Insira o token de acesso"
+          "label": "Insira o token de acesso",
+          "info": "A {{label}} integração com a Alby está em fase alpha e é somente recomendado para usuários avançados.<br><br>Você pode obter seu token de acesso pelo app do celular, clicando no ícone de configurações, em seguida clicando 3 vezes no número de build para abrir o menu de desenvolvedores.<br><br>O token de acesso pode ser copiado por aqui.<br><br>"
         },
         "currency": {
           "label": "Selecionar carteira"
@@ -173,10 +174,15 @@
       "btcpay": {
         "title": "Servidor BTCPay",
         "config": {
-          "label": "Dados config"
+          "label": "Dados config",
+          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.co"
         },
         "errors": {
           "connection_failed": "Falha na conexão. A URL de conexão do servidor BTCPay está correta e acessível?"
+        },
+        "page": {
+          "title": "Conecte-se ao BTCPay LND",
+          "instructions": "Navegue até o servidor BTCPay e faça login como administrador. Vá até as Configurações > Serviços > LND REST - Ver informação. E então clique em \"Ver informação do código QR\", copie e cole abaixo:"
         }
       },
       "lndhub_go": {
@@ -229,7 +235,12 @@
       "lnc": {
         "title": "Lightning Terminal (LNC)",
         "pairing_phrase": {
-          "label": "Frase de pareamento "
+          "label": "Frase de pareamento ",
+          "placeholder": "frase secreta de empilhamento dos sats"
+        },
+        "page": {
+          "description": "1. Na barra lateral do Terminal Lightning, escolha <0>Conecte o Node Lightning</0>.<1/> 2. Clique <0>Criar uma nova sessão</0><1/>3. Rotule a sessão, escolha as permissões desejadas e envie<1/>4. <0>Copie a frase de emparelhamento</0> e cole-a abaixo.",
+          "title": "Conecte-se ao Terminal Lightning (LNC)"
         }
       },
       "galoy": {
@@ -244,7 +255,8 @@
         },
         "errors": {
           "setup_failed": "Falha na configuração",
-          "invalid_token": "Falha na autorização. Verifique sua chave API e tente novamente."
+          "invalid_token": "Falha na autorização. Verifique sua chave API e tente novamente.",
+          "missing_token": "Token de acesso faltando, não foi possível fazer login."
         }
       },
       "umbrel_lightning_node": {
@@ -290,13 +302,11 @@
     "accounts": {
       "account_view": {
         "export": {
-          "title": "Conectar sua carteira de celular",
           "your_ln_address": "Seu endereço relâmpago:",
           "screen_reader": "Exportar detalhes da conta",
           "waiting": "aguardando dados LndHub...",
           "export_uri": "Credenciais URI LNDHub",
-          "scan_qr": "Leia o código QR para importar esta carteira na Zeus ou BlueWallet.",
-          "description": "Permite conectar e usar esta conta em carteiras de celular como por ex a <0>Blue Wallet</0> e a <1>Zeus</1>."
+          "scan_qr": "Leia o código QR para importar esta carteira na Zeus ou BlueWallet."
         },
         "nostr": {
           "title": "Nostr",
@@ -333,7 +343,6 @@
             "title": "Configurações Nostr",
             "derive": "Gerar chave Nostr a partir de sua chave mestra",
             "can_restore": "✅ Chave Nostr gerada a partir de sua chave mestra",
-            "description": "Você pode gerar chaves Nostr a partir de sua chave mestra ou importar sua chave privada existente colando-a no campo \"Chave privada Nostr\".",
             "no_secret_key": "💡 Você ainda não tem uma chave mestra. <0>Clique aqui</0></div> para gerar sua chave mestra e suas chaves Nostr.",
             "imported_key_warning": "⚠️ No momento, você está usando uma chave Nostr importada ou gerada aleatoriamente. Sua chave privada Nostr não pode ser restaurada por sua frase de recuperação, então lembre-se de fazer o backup de sua chave privada Nostr separadamente.",
             "remove": "Remover esta chave"
@@ -350,9 +359,7 @@
         },
         "remove": {
           "error": "O nome da conta inserido não corresponde.",
-          "confirm": "Por favor, insira o nome da conta para confirmar a exclusão:\n\n{{ name }}\n\n ⚠️ Por favor, insira o nome da conta para confirmar a exclusão. Todas as chaves associadas (Chave mestra, Nostr, etc) serão excluídas se você continuar. Certifique-se de ter feito backup das chaves, não há outra maneira de restaurá-las.",
-          "title": "Desconectar esta carteira",
-          "subtitle": "Remove todos os limites de gastos, dados de pagamento e chaves associadas à esta carteira."
+          "confirm": "Por favor, insira o nome da conta para confirmar a exclusão:\n\n{{ name }}\n\n ⚠️ Por favor, insira o nome da conta para confirmar a exclusão. Todas as chaves associadas (Chave mestra, Nostr, etc) serão excluídas se você continuar. Certifique-se de ter feito backup das chaves, não há outra maneira de restaurá-las."
         },
         "actions": {
           "export": "Exportar",
@@ -363,9 +370,7 @@
           "title": "Nome",
           "placeholder": "Nome da conta"
         },
-        "title2": "Conta",
         "mnemonic": {
-          "title": "🔑 Gerenciamento de chaves",
           "saved": "Chave mestra criptografada e salva com sucesso.",
           "generate": {
             "title": "Gere sua chave mestra",
@@ -378,9 +383,7 @@
             "protocols": {
               "nostr": "Nostr"
             },
-            "warning": "⚠️ Não se esqueça de fazer backup de sua frase de recuperação! Não fazer o backup pode resultar na perda permanente do acesso à sua chave mestra, identidade Nostr ou ativos que você gerencia com esta chave.",
-            "description": "Anote a frase de recuperação para poder restaurar sua chave mestra em um novo dispositivo ou caso perca o acesso à sua conta.",
-            "title": "Backup de sua chave mestra"
+            "description": "Anote a frase de recuperação para poder restaurar sua chave mestra em um novo dispositivo ou caso perca o acesso à sua conta."
           },
           "import": {
             "title": "Importar sua chave mestra",
@@ -423,20 +426,16 @@
         "remove_secretkey": {
           "title": "Remover chave mestra",
           "success": "Chave mestra removida com sucesso.",
-          "subtitle": "Remove a chave mestra desta conta.",
           "confirm": "Por favor, insira o nome da conta para confirmar a exclusão de sua chave mestra:\n\n{{ name }}"
         },
         "network": {
-          "title": "Rede",
           "options": {
             "bitcoin": "Rede principal",
             "testnet": "Rede de testes",
             "regtest": "Regtest"
-          },
-          "subtitle": "Escolha a rede para gerar endereços e decodificar transações bitcoin e liquid"
+          }
         },
-        "no_mnemonic_hint": "💡 Você ainda não tem uma chave mestra. <0>Clique aqui</0></div> para gerar sua chave mestra e desbloquear essas configurações.",
-        "title1": "Configurações da carteira"
+        "no_mnemonic_hint": "💡 Você ainda não tem uma chave mestra. <0>Clique aqui</0></div> para gerar sua chave mestra e desbloquear essas configurações."
       },
       "actions": {
         "connect_a_wallet": "Conecte uma carteira"
@@ -462,18 +461,6 @@
       "website_enhancements": {
         "title": "Pagamentos em redes sociais",
         "subtitle": "Reconhece automaticamente endereços relâmpago em perfis do Twitter, Youtube, etc, facilitando o envio de pagamentos."
-      },
-      "lnurl_auth": {
-        "title": "LNURL-Auth",
-        "hint": "é um protocolo de autenticação. Ele autentica o usuário usando assinaturas digitais. O protocolo não requer nenhuma outra informação de identificação, como senhas, e-mails, nomes de usuário... Com a Alby você pode usar suas contas bitcoin para logar em sites com segurança. Para ser compatível com outras carteiras, tivemos que fazer algumas alterações que você pode configurar aqui. Por padrão essas opções estão DESLIGADAS. Use-as apenas se você tiver contas antigas.",
-        "legacy_lnurl_auth_202207": {
-          "title": "LNURL-Auth antigo",
-          "subtitle": "A geração de chave para a LNURL-auth mudou em (julho de 2022). A Alby não era compatível com outras implementações. Isso foi corrigido, mas agora uma nova chave está sendo usada como padrão. Se você usou a LNURL-auth para logar em sites antes de julho de 2022, ainda poderá fazer login habilitando o método antigo. Esta opção será removida posteriormente, certifique-se de alterar suas contas nos sites para usar o novo login."
-        },
-        "legacy_lnurl_auth": {
-          "title": "Método antigo de autenticação para LNDhub e LNbits",
-          "subtitle": "A assinatura de mensagens e o login com as contas LNDhub (por exemplo, BlueWallet) e LNbits foram alteradas em (março de 2022). Se você fez login com essas contas, ainda poderá ativar o método de assinatura antigo. Esta opção será removida posteriormente, certifique-se de alterar suas contas nos sites para usar o novo login."
-        }
       },
       "camera_access": {
         "title": "Acesso à câmera",
@@ -682,19 +669,14 @@
       }
     },
     "nostr": {
-      "allow": "Permitir este site:",
       "block_and_ignore": "Bloquear e ignorar {{host}}",
       "title": "Nostr",
       "content": "Este site solicita que você assine:",
       "block_added": "{{host}} adicionado na lista de bloqueio, por favor recarregue o site.",
-      "allow_sign": "Permitir {{host}} assinar:",
-      "view_details": "Ver detalhes",
-      "hide_details": "Ocultar detalhes",
       "allow_sign_event": "Permitir {{host}} assinar um evento <0>{{kind}}</0>",
-      "allow_encrypt": "Permitir {{host}} criptografar a mensagem:",
       "kinds": {
-        "9734": {
-          "title": "solicitar zap"
+        "0": {
+          "title": "atualizar perfil"
         },
         "1": {
           "title": "nota curta"
@@ -702,11 +684,11 @@
         "4": {
           "title": "mensagem direta"
         },
+        "9734": {
+          "title": "solicitar zap"
+        },
         "30023": {
           "title": "nota longa"
-        },
-        "0": {
-          "title": "atualizar perfil"
         }
       }
     },
@@ -808,8 +790,6 @@
       "title": "Aguardando leitura"
     },
     "confirm_sign_pset": {
-      "view_details": "Ver detalhes",
-      "hide_details": "Ocultar detalhes",
       "view_raw_transaction": "Ver transação raw (Base64)",
       "hide_raw_transaction": "Ocultar transação raw (Base64)",
       "outputs": "Saídas",
@@ -832,9 +812,7 @@
         "view_raw_transaction": "Ver transação bruta (Hex)",
         "inputs": "Entradas",
         "fee": "Taxa",
-        "hide_details": "Ocultar detalhes",
         "allow_sign": "Este site solicita que você assine uma transação de bitcoin",
-        "view_details": "Ver detalhes",
         "outputs": "Saídas"
       }
     },
@@ -969,7 +947,8 @@
       "copied_to_clipboard": "Copiado para a área de transferência",
       "review": "Revisar",
       "hide": "Ocultar",
-      "finish": "Pronto"
+      "finish": "Pronto",
+      "deny": "Negar"
     },
     "errors": {
       "connection_failed": "Falha na conexão",
@@ -1031,7 +1010,8 @@
       "edit_allowance": {
         "title": "Preferências",
         "screen_reader": "Opções limite de gastos",
-        "always_allow": "Sempre permitir"
+        "always_allow": "Sempre permitir",
+        "always_reject": "Sempre rejeitar"
       },
       "enable_login": {
         "title": "Login",
@@ -1095,7 +1075,6 @@
       "options": {
         "account": {
           "go_to_web_wallet": "Acessar sua conta na web",
-          "wallet_settings": "Configurações da carteira",
           "add": "Conectar nova carteira"
         }
       },
@@ -1123,7 +1102,8 @@
     },
     "permissions_modal": {
       "content_label": "Permissões",
-      "set_permissions": "Definir permissões:"
+      "set_permissions": "Definir permissões:",
+      "ask_everytime": "Perguntar sempre por <0>{{permission}}</0>"
     }
   },
   "permissions": {
@@ -1139,22 +1119,13 @@
         "description": "",
         "title": "Assinar mensagem"
       },
-      "nip04encrypt": {
-        "title": "criptografar (nip04)",
-        "description": "Criptografar dados"
-      },
-      "nip04decrypt": {
+      "decrypt": {
         "description": "Descriptografar dados",
-        "title": "descriptografar (nip04)"
+        "title": "descriptografar"
       },
-      "nip44encrypt": {
-        "title": "criptografar (nip44)",
+      "encrypt": {
+        "title": "criptografar",
         "description": "Criptografar dados"
-      },
-      "decrypt": "Descriptografar dados",
-      "nip44decrypt": {
-        "title": "descriptografar (nip44)",
-        "description": "Descriptografar dados"
       }
     },
     "liquid": {

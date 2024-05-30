@@ -250,13 +250,11 @@
     },
     "accounts": {
       "account_view": {
-        "title2": "Rediger konto",
         "name": {
           "title": "Navn",
           "placeholder": "Kontonavn"
         },
         "export": {
-          "title": "Eksporter konto",
           "screen_reader": "Eksporter kontooplysninger",
           "waiting": "venter på LndHub-data...",
           "your_ln_address": "Din lightningadresse:",
@@ -320,18 +318,6 @@
       "website_enhancements": {
         "title": "Ekstra hjemmesidefunktioner",
         "subtitle": "Donationer på Twitter, YouTube, etc."
-      },
-      "lnurl_auth": {
-        "title": "LNURL-Auth",
-        "hint": "er en generisk autentifikationsprotokol. Den autentificerer brugeren med digital signatur. Protokollen kræver ikke andre autentifikationsoplysninger som fx adgangskode, e-mail, brugernavn eller lignende. Med Alby kan du bruge dine lightning-konti til at logge sikkert ind på hjemmesider. For at blive kompatible med andre wallets måtte vi ændre et par ting, som du kan konfigurere her. <0>Disse indstillinger skal helst slås fra.</0> Brug dem kun, hvis du har gamle konti.",
-        "legacy_lnurl_auth_202207": {
-          "title": "Gamle LNURL-Auth",
-          "subtitle": "Generering af nøgle med LNURL-auth er ændret (juli 2022). Alby var ikke kompatibel med andre implementeringer. Dette blev ændret, men nu bruges der andre nøgler til at logge ind. Hvis du tidligere brugte LNURL-auth til at logge ind, kan du fortsat aktivere den gamle metode. Denne mulighed vil blive fjernet, husk at skifte til det nye log ind."
-        },
-        "legacy_lnurl_auth": {
-          "title": "Forældet signatur til LNDhub and LNbits",
-          "subtitle": "Signatur og log ind med LNDhub (fx BlueWallet) og LNBits-konti er blevet ændret (marts 2022). Hvis du loggede ind med disse konti, kan du fortsat aktivere den gamle signatur-metode. Denne mulighed vil blive fjernet, husk at skifte til det nye log ind."
-        }
       },
       "camera_access": {
         "title": "Adgang til kamera",
@@ -528,9 +514,7 @@
     },
     "nostr": {
       "title": "Nostr",
-      "allow": "Tillad denne hjemmeside at:",
       "content": "Denne hjemmeside beder dig underskrive:",
-      "allow_sign": "Tillad {{vært}} at underskrive:",
       "block_and_ignore": "Bloker og ignorer {{vært}}",
       "block_added": "{{vært}} blev føjet til blokeringslisten, indlæs hjemmesiden igen."
     }

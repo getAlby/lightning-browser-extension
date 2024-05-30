@@ -61,6 +61,16 @@ function Prompt() {
       <HashRouter>
         <Routes>
           <Route
+            index
+            element={
+              <Navigate
+                to={`/${navigationState.action}`}
+                replace
+                state={navigationState}
+              />
+            }
+          />
+          <Route
             path="/"
             element={
               <RequireAuth>
@@ -68,16 +78,6 @@ function Prompt() {
               </RequireAuth>
             }
           >
-            <Route
-              index
-              element={
-                <Navigate
-                  to={`/${navigationState.action}`}
-                  replace
-                  state={navigationState}
-                />
-              }
-            />
             <Route
               path="public/alby/enable"
               element={
@@ -182,7 +182,7 @@ const Layout = () => {
   return (
     <>
       <Toaster />
-      <div className="px-4 py-2 justify-between items-center bg-white flex border-b border-gray-200 dark:bg-surface-02dp dark:border-neutral-500 gap-5">
+      <div className="px-4 py-2 justify-between items-center bg-white flex border-b border-gray-200 dark:bg-surface-02dp dark:border-neutral-700 gap-5">
         <div className="w-24 shrink-0">
           <AlbyLogo />
         </div>

@@ -1,6 +1,7 @@
 import {
   PopiconsChevronBottomLine,
   PopiconsCirclePlusLine,
+  PopiconsGlobeLine,
   PopiconsWalletLine,
 } from "@popicons/react";
 import { useEffect } from "react";
@@ -14,7 +15,6 @@ import { useAccounts } from "~/app/context/AccountsContext";
 import { isAlbyLNDHubAccount, isAlbyOAuthAccount } from "~/app/utils";
 import utils from "~/common/lib/utils";
 
-import PopiconsGlobeLine from "~/app/icons/popicons/GlobeLine";
 import Menu from "../Menu";
 
 export type Props = {
@@ -127,7 +127,7 @@ function AccountMenu({ showOptions = true }: Props) {
             }}
           >
             <PopiconsWalletLine className="w-4 h-4 mr-2 shrink-0" />
-            {t("options.account.wallet_settings")}
+            {tCommon("wallet_settings")}
           </Menu.ItemButton>
           {(isAlbyLNDHubAccount(
             authAccount?.alias,

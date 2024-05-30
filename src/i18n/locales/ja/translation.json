@@ -253,23 +253,18 @@
         "export": {
           "waiting": "LndHubデータを取得中...",
           "your_ln_address": "あなたのライトニング・アドレス：",
-          "description": "このアカウントを<0>Blue Wallet</0>や<1>Zeus</1>のようなモバイルウォレットに接続して使用できるようにする。",
           "screen_reader": "アカウント情報をエクスポート",
           "export_uri": "LNDHubの認証URl",
-          "title": "モバイルウォレットを接続",
           "scan_qr": "QRCコードをスキャンして、このウォレットをZeusまたはBlueWalletにインポートする。"
         },
-        "title2": "アカウント",
         "name": {
           "title": "表示名",
           "placeholder": "アカウントの表示名"
         },
         "mnemonic": {
-          "title": "🔑 鍵の管理",
           "backup": {
             "button": "リカバリーフレーズを表示",
             "description": "新しいデバイスでマスターキーを復元したり、アカウントにアクセスできなくなった場合に備えて、リカバリーフレーズは必ずメモしてください。",
-            "warning": "⚠️ リカバリフレーズのバックアップを忘れないでください！バックアップを忘れると、マスターキー、Nostr ID、またはこのキーで管理する資産へのアクセスを永久に失います。",
             "protocols": {
               "nostr": "Nostr"
             },
@@ -295,7 +290,6 @@
         "nostr": {
           "hint": "は、検閲に強いソーシャル・ネットワークを作ることを目的とした、シンプルでオープンなプロトコルです。Nostrは秘密鍵で動作します。何かをポストするには、自分の秘密鍵で署名し、複数のリレーに送信します。Albyを使うことで、Nostrの秘密鍵を安全に管理することができます。多くのNostrアプリが、Albyブラウザ拡張機能に対応しています。",
           "settings": {
-            "description": "マスターキーからNostr秘密鍵を生成するか、すでにお持ちの秘密鍵を「Nostr秘密鍵」フィールドに貼り付けてインポートしてください。",
             "label": "Nostr設定",
             "title": "Nostr設定",
             "remove": "現在の鍵を削除する",
@@ -348,9 +342,7 @@
             "bitcoin": "Mainnet",
             "testnet": "Testnet",
             "regtest": "Regtest"
-          },
-          "title": "Network",
-          "subtitle": "アドレス導出やトランザクションをデコードするBitcoinやliquidのネットワークを選んでください。"
+          }
         }
       }
     },

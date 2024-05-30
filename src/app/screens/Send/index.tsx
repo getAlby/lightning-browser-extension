@@ -4,7 +4,7 @@ import Header from "@components/Header";
 import IconButton from "@components/IconButton";
 import TextField from "@components/form/TextField";
 import { PopiconsChevronLeftLine } from "@popicons/react";
-import lightningPayReq from "bolt11";
+import lightningPayReq from "bolt11-signet";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";

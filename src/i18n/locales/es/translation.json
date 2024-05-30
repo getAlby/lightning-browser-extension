@@ -178,6 +178,30 @@
           "connection_failed": "La conexión falló. ¿Es correcto el URI de LNDHub?"
         }
       },
+      "lawallet": {
+        "title": "LaWallet.io",
+        "page": {
+          "title": "Conectar a LaWallet",
+          "instructions": "Ingresá los datos de LaWallet.io a continuación."
+        },
+        "private_key": "Llave privada",
+        "api_endpoint": "API Endpoint",
+        "identity_endpoint": "Identity Endpoint",
+        "ledger_public_key": "Ledger Public key",
+        "urlx_public_key": "URLx Public key",
+        "relay_url": "Relay URL",
+        "errors": {
+          "toast": {
+            "title": "No se encontró la identidad",
+            "message": "No hay una lightning address asignada a \"{{domain}}\"",
+            "verify": "Verificá lo siguiente",
+            "match": "El Identity Endpoint debe coincidir con el Lightning Domain",
+            "walias": "Tu lightning address es USERNAME<0>@{{domain}}</0> o está utilizando otro dominio?",
+            "endpoint": "El Identity endpoint se deriva de esta url https://app.<0>{{domain}}</0> de App",
+            "http": "El Identity endpoint utiliza el mismo protocolo (<0>HTTP</0> or <0>HTTPS</0>)"
+          }
+        }
+      },
       "commando": {
         "pubkey": {
           "label": "Clave Pública"
@@ -271,13 +295,11 @@
           "title": "Nostr",
           "hint": "es un protocolo simple y abierto que tiene como objetivo crear redes sociales resistentes a la censura. Nostr trabaja con claves criptográficas. Para publicar algo, lo firma con su clave y lo envía a múltiples relevos. Puede usar Alby para administrar su clave Nostr. Muchas aplicaciones de Nostr le permitirán simplemente usar la clave de la extensión Alby."
         },
-        "title2": "Editar Cuenta",
         "name": {
           "title": "Nombre",
           "placeholder": "Nombre de la Cuenta"
         },
         "export": {
-          "title": "Exportar Cuenta",
           "screen_reader": "Exportar los detalles de la cuenta",
           "your_ln_address": "Tu Dirección Lightning:",
           "scan_qr": "Importe esta billetera a Zeus o BlueWallet escaneando el código QR.",
@@ -308,18 +330,6 @@
       "website_enhancements": {
         "title": "Mejoras del sitio web",
         "subtitle": "Mejoras de propinas para Twitter, YouTube, etc."
-      },
-      "lnurl_auth": {
-        "title": "Autenticación-LNURL",
-        "hint": "es un protocolo genérico de autenticación. Autentica al usuario utilizando firmas digitales. El protocolo no requiere ninguna otra información de identificación como contraseñas, correos electrónicos, nombres de usuario o similares. Con Alby puedes utilizar tus cuentas relámpago para iniciar sesión en sitios web de forma segura. Para ser compatible con otros monederos hemos tenido que hacer algunos cambios que puedes configurar aquí. <0>Idealmente todas esas opciones están en OFF.</0> Úsalas sólo si tienes cuentas antiguas.",
-        "legacy_lnurl_auth_202207": {
-          "title": "Autenticación-LNURL Legada",
-          "subtitle": "La generación de claves para la autenticación-LNURL ha cambiado (en julio de 2022). Alby no era compatible con otras implementaciones. Esto se cambió, pero ahora se utilizan diferentes claves de inicio de sesión. Si usó autenticación-LNURL para iniciar sesión antes, aún puede habilitar el método anterior. Esta opción se eliminará más adelante, asegúrese de cambiar al nuevo inicio de sesión."
-        },
-        "legacy_lnurl_auth": {
-          "title": "Firma heredada (Legacy) para LNDhub y LNbits",
-          "subtitle": "Se ha cambiado la firma de mensajes y el inicio de sesión con cuentas LNDhub (por ejemplo, BlueWallet) y LNbits (marzo de 2022). Si inició sesión con estas cuentas, aún puede habilitar el método de firma anterior. Esta opción se eliminará más adelante, asegúrese de cambiar al nuevo inicio de sesión."
-        }
       },
       "camera_access": {
         "title": "Acceso a la cámara",
@@ -521,13 +531,9 @@
     },
     "nostr": {
       "title": "Nostr",
-      "allow": "Permitir que este sitio web:",
       "content": "Este sitio web te solicita firmar:",
-      "allow_sign": "Permitir que {{host}} firme:",
       "block_and_ignore": "Bloquear e ignorar {{host}}",
-      "block_added": "Se agregó {{host}} a la lista de bloqueados, vuelva a cargar el sitio web.",
-      "view_details": "Más información",
-      "hide_details": "Ocultar los detalles"
+      "block_added": "Se agregó {{host}} a la lista de bloqueados, vuelva a cargar el sitio web."
     },
     "confirm_request_permission": {
       "title": "Aprobar solicitud",

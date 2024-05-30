@@ -260,13 +260,11 @@
     },
     "accounts": {
       "account_view": {
-        "title2": "",
         "name": {
           "title": "",
           "placeholder": ""
         },
         "export": {
-          "title": "",
           "screen_reader": "",
           "waiting": "",
           "your_ln_address": "",
@@ -330,18 +328,6 @@
       "website_enhancements": {
         "title": "",
         "subtitle": ""
-      },
-      "lnurl_auth": {
-        "title": "",
-        "hint": "",
-        "legacy_lnurl_auth_202207": {
-          "title": "",
-          "subtitle": ""
-        },
-        "legacy_lnurl_auth": {
-          "title": "",
-          "subtitle": ""
-        }
       },
       "camera_access": {
         "title": "",
@@ -538,9 +524,7 @@
     },
     "nostr": {
       "title": "",
-      "allow": "",
       "content": "",
-      "allow_sign": "",
       "block_and_ignore": "",
       "block_added": ""
     }

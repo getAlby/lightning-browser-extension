@@ -250,13 +250,11 @@
     },
     "accounts": {
       "account_view": {
-        "title2": "खाते संपादित करा",
         "name": {
           "title": "नाव",
           "placeholder": "खात्याचे नाव"
         },
         "export": {
-          "title": "निर्यात खाते",
           "screen_reader": "निर्यात खात्याचा तपशील",
           "waiting": "एलएनडीहब डेटाची वाट पाहत...",
           "your_ln_address": "आपला Lightning Address:",
@@ -314,18 +312,6 @@
       "website_enhancements": {
         "title": "वेबसाइट सुधारणा",
         "subtitle": "Twitter, YouTube, इ. साठी टिपिंगमध्ये सुधारणा."
-      },
-      "lnurl_auth": {
-        "title": "LNURL-Auth",
-        "hint": "एक सामान्य प्रमाणीकरण प्रोटोकॉल आहे. हे डिजिटल स्वाक्षरी वापरून वापरकर्त्याचे प्रमाणीकरण करते. प्रोटोकॉलला पासवर्ड, ईमेल, वापरकर्तानाव किंवा तत्सम इतर कोणत्याही ओळखीच्या माहितीची आवश्यकता नसते. Alby सह तुम्ही वेबसाइटवर सुरक्षितपणे लॉग इन करण्यासाठी तुमचे लाइटनिंग खाते वापरू शकता. इतर वॉलेटशी सुसंगत होण्यासाठी आम्हाला काही बदल करावे लागले जे तुम्ही येथे कॉन्फिगर करू शकता. <0>सामान्यत: ते सर्व पर्याय बंद असतात.</0> तुमची जुनी खाती असतील तरच त्यांचा वापर करा.",
-        "legacy_lnurl_auth_202207": {
-          "title": "Legacy LNURL-Auth",
-          "subtitle": "The key generation for LNURL-auth has changed (July 2022). Alby was not compatible with other implementations. This was changed, but now different login keys are used. If you used LNURL-auth to login before you can still enable the old method. This option will be removed later, make sure to switch to the new login."
-        },
-        "legacy_lnurl_auth": {
-          "title": "Legacy signing for LNDhub and LNbits",
-          "subtitle": "Message signing and login with LNDhub (e.g. BlueWallet) and LNbits accounts has been changed (March 2022). If you logged in with these accounts you can still enable the old signing method. This option will be removed later, make sure to switch to the new login."
-        }
       },
       "camera_access": {
         "title": "Camera access",
@@ -516,11 +502,7 @@
     },
     "nostr": {
       "title": "Nostr",
-      "allow": "या वेबसाइटला परवानगी द्या:",
       "content": "ही वेबसाइट तुम्हाला स्वाक्षरी करण्यास सांगते:",
-      "allow_sign": "{{host}} ला स्वाक्षरी करण्याची परवानगी द्या:",
-      "view_details": "तपशील पहा",
-      "hide_details": "तपशील लपवा",
       "block_and_ignore": "{{host}} ला अवरोधित करा आणि दुर्लक्ष करा",
       "block_added": "ब्लॉकलिस्टमध्ये {{होस्ट}} जोडले, कृपया वेबसाइट रीलोड करा."
     },

@@ -1,6 +1,6 @@
 import { act, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import lightningPayReq from "bolt11";
+import lightningPayReq from "bolt11-signet";
 import { MemoryRouter } from "react-router-dom";
 import { settingsFixture as mockSettings } from "~/../tests/fixtures/settings";
 import type { OriginData } from "~/types";

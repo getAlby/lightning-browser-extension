@@ -5,24 +5,27 @@ import {
   PopiconsArrowDownLine,
   PopiconsArrowRightLine,
   PopiconsBulbLine,
+  PopiconsCircleExclamationLine,
   PopiconsKeyLine,
+  PopiconsOstrichSolid,
 } from "@popicons/react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { FC, useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import Alert from "~/app/components/Alert";
 import BalanceBox from "~/app/components/BalanceBox";
 import Hyperlink from "~/app/components/Hyperlink";
 import { IconLinkCard } from "~/app/components/IconLinkCard/IconLinkCard";
-import SkeletonLoader from "~/app/components/SkeletonLoader";
 import toast from "~/app/components/Toast";
 import { useAccount } from "~/app/context/AccountContext";
 import { useTransactions } from "~/app/hooks/useTransactions";
 import { PublisherLnData } from "~/app/screens/Home/PublisherLnData";
+import { isAlbyLNDHubAccount } from "~/app/utils";
 import api, { GetAccountRes } from "~/common/lib/api";
 import msg from "~/common/lib/msg";
+import { default as nostr } from "~/common/lib/nostr";
 import utils from "~/common/lib/utils";
 import type { Battery } from "~/types";
 
@@ -48,6 +51,7 @@ const DefaultView: FC<Props> = (props) => {
 
   const [isBlockedUrl, setIsBlockedUrl] = useState<boolean>(false);
   const [currentAccount, setCurrentAccount] = useState<GetAccountRes>();
+  const [nostrPublicKey, setNostrPublicKey] = useState("");
 
   const { transactions, isLoadingTransactions, loadTransactions } =
     useTransactions();
@@ -76,6 +80,11 @@ const DefaultView: FC<Props> = (props) => {
     (async () => {
       try {
         const account = await api.getAccount();
+        const nostrPrivateKey = await api.nostr.getPrivateKey(account.id);
+
+        setNostrPublicKey(
+          nostrPrivateKey ? await nostr.derivePublicKey(nostrPrivateKey) : ""
+        );
         setCurrentAccount(account);
       } catch (e) {
         console.error(e);
@@ -120,9 +129,9 @@ const DefaultView: FC<Props> = (props) => {
         <PublisherLnData lnData={props.lnDataFromCurrentTab[0]} />
       )}
 
-      <div className="p-4">
+      <div className="flex flex-col gap-4 p-4">
         {isBlockedUrl && (
-          <div className="items-center dark:text-white text-sm mb-4">
+          <div className="items-center dark:text-white text-sm">
             <Alert type="info">
               <p className="pb-2">
                 {t("default_view.is_blocked_hint", {
@@ -139,25 +148,93 @@ const DefaultView: FC<Props> = (props) => {
           </div>
         )}
 
-        <BalanceBox />
-        {(accountLoading || lightningAddress) && (
-          <div className="flex justify-center">
-            <a
-              className="cursor-pointer flex flex-row items-center mb-6 px-3 py-1 bg-white dark:bg-surface-01dp border border-gray-200 dark:border-neutral-700 text-gray-800 dark:text-white rounded-full text-xs font-medium hover:border-primary hover:bg-yellow-50 dark:hover:border-primary dark:hover:dark:bg-surface-16dp transition-all duration-250 select-none"
-              onClick={() => {
-                navigator.clipboard.writeText(lightningAddress);
-                toast.success(tCommon("actions.copied_to_clipboard"));
-              }}
-            >
-              <img src="assets/icons/popicons/bolt.svg" className="mr-1" />
-              {!accountLoading ? (
-                lightningAddress
-              ) : (
-                <SkeletonLoader className="w-32" />
-              )}
-            </a>
+        {isAlbyLNDHubAccount(account?.alias, account?.connectorType) && (
+          <Alert type="info">
+            <div className="flex gap-2 items-center">
+              <div className="shrink-0">
+                <PopiconsCircleExclamationLine className="w-5 h-5" />
+              </div>
+              <span className="text-sm">
+                <Trans
+                  i18nKey={"default_view.upgrade_account"}
+                  t={t}
+                  components={[
+                    // eslint-disable-next-line react/jsx-key
+                    <a
+                      className="underline"
+                      href="https://guides.getalby.com/user-guide/v/alby-account-and-browser-extension/alby-browser-extension/migrate-from-old-lndhub-setup"
+                      target="_blank"
+                      rel="noreferrer"
+                    />,
+                  ]}
+                />
+              </span>
+            </div>
+          </Alert>
+        )}
+        {account?.nodeRequired ? (
+          <Alert type="warn">
+            <div className="flex items-center gap-2">
+              <div className="shrink-0">
+                <PopiconsCircleExclamationLine className="w-5 h-5" />
+              </div>
+              <span className="text-sm">
+                <Trans
+                  i18nKey={"default_view.node_required"}
+                  t={t}
+                  components={[
+                    // eslint-disable-next-line react/jsx-key
+                    <a
+                      className="underline"
+                      href="https://getalby.com"
+                      target="_blank"
+                      rel="noreferrer"
+                    />,
+                  ]}
+                />
+              </span>
+            </div>
+          </Alert>
+        ) : (
+          <BalanceBox />
+        )}
+
+        {(lightningAddress || nostrPublicKey) && (
+          <div className="flex justify-center gap-3 mb-2">
+            {lightningAddress && (
+              <a
+                className="relative group cursor-pointer flex flex-row items-center p-1 bg-white dark:bg-surface-01dp border border-gray-200 dark:border-neutral-700 text-gray-800 dark:text-white rounded-full text-xs font-medium hover:border-primary hover:bg-yellow-50 dark:hover:border-primary dark:hover:dark:bg-surface-16dp transition-all duration-250 select-none"
+                onClick={() => {
+                  navigator.clipboard.writeText(lightningAddress);
+                  toast.success(tCommon("actions.copied_to_clipboard"));
+                }}
+              >
+                <img src="assets/icons/popicons/bolt.svg" className="w-5 h-5" />
+                <span className="max-w-64 hidden group-hover:block truncate mr-1">
+                  {lightningAddress}
+                </span>
+              </a>
+            )}
+
+            {nostrPublicKey && (
+              <a
+                className="relative group cursor-pointer flex flex-row items-center p-1 bg-white dark:bg-surface-01dp border border-gray-200 dark:border-neutral-700 text-gray-800 dark:text-white rounded-full text-xs font-medium hover:border-primary hover:bg-yellow-50 dark:hover:border-primary dark:hover:dark:bg-surface-16dp transition-all duration-250 select-none"
+                onClick={() => {
+                  navigator.clipboard.writeText(nostrPublicKey);
+                  toast.success(tCommon("actions.copied_to_clipboard"));
+                }}
+              >
+                <PopiconsOstrichSolid className="w-5 h-5 text-purple-500" />
+                <span className="max-w-64 hidden group-hover:block truncate mr-1">
+                  {nostrPublicKey.substring(0, 11)}
+                  ...
+                  {nostrPublicKey.substring(nostrPublicKey.length - 11)}
+                </span>
+              </a>
+            )}
           </div>
         )}
+
         <div className="flex space-x-3 justify-between">
           <HomeButton
             icon={<img src="assets/icons/popicons/receive.svg" />}
@@ -186,13 +263,13 @@ const DefaultView: FC<Props> = (props) => {
         </div>
 
         {isLoading && (
-          <div className="flex justify-center mt-4">
+          <div className="flex justify-center">
             <Loading />
           </div>
         )}
 
         {!isLoading && (
-          <div className="mt-4 flex flex-col gap-4">
+          <div className="flex flex-col gap-4">
             {(transactions.length === 0 || needsKeySetup) && (
               <div className="flex flex-col gap-2 md:gap-3">
                 {transactions.length === 0 && (

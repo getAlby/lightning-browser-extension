@@ -2,29 +2,30 @@ import Container from "@components/Container";
 import ContentMessage from "@components/ContentMessage";
 import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
-import { PopiconsShieldCheckLine } from "@popicons/react";
+import {
+  PopiconsChevronBottomLine,
+  PopiconsChevronTopLine,
+} from "@popicons/react";
 import { useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import Hyperlink from "~/app/components/Hyperlink";
-import PermissionModal from "~/app/components/PermissionModal";
+import ConfirmOrCancel from "~/app/components/ConfirmOrCancel";
+import PermissionModal from "~/app/components/Permissions/PermissionModal";
+import PermissionSelector from "~/app/components/Permissions/PermissionSelector";
 import ScreenHeader from "~/app/components/ScreenHeader";
-import SignOrDeny from "~/app/components/SignOrDeny";
 import toast from "~/app/components/Toast";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import msg from "~/common/lib/msg";
-import { Event } from "~/extension/providers/nostr/types";
+import { Event, EventKind } from "~/extension/providers/nostr/types";
 import { OriginData, PermissionOption } from "~/types";
 
 function ConfirmSignMessage() {
   const navState = useNavigationState();
-  const { t: tCommon } = useTranslation("common");
+
   const { t } = useTranslation("translation", {
     keyPrefix: "nostr",
   });
-  const { t: tPermissions } = useTranslation("components", {
-    keyPrefix: "permissions_modal",
-  });
+  const { t: tCommon } = useTranslation("common");
   const navigate = useNavigate();
 
   const event = navState.args?.event as Event;
@@ -43,6 +44,7 @@ function ConfirmSignMessage() {
     try {
       setLoading(true);
       msg.reply({
+        confirm: true,
         blocked: false,
         permissionOption: permissionOption,
       });
@@ -59,10 +61,10 @@ function ConfirmSignMessage() {
     try {
       setLoading(true);
       msg.reply({
+        confirm: false,
         blocked: true,
         permissionOption: permissionOption,
       });
-      setSuccessMessage(tCommon("success"));
     } catch (e) {
       console.error(e);
       if (e instanceof Error) toast.error(`${tCommon("error")}: ${e.message}`);
@@ -87,6 +89,12 @@ function ConfirmSignMessage() {
 
   function toggleShowJSON() {
     setShowJSON((current) => !current);
+  }
+
+  let content = event.content || "";
+  // UploadChunk event returns lengthy blob data
+  if (event.kind === EventKind.UploadChunk) {
+    content = "";
   }
 
   return (
@@ -118,15 +126,21 @@ function ConfirmSignMessage() {
                     components={[<i></i>]}
                   />
                 }
-                content={event.content || ""}
+                content={content}
               />
-              <div className="flex justify-center mb-4 gap-4">
-                <Hyperlink onClick={toggleShowJSON}>
-                  {showJSON ? t("hide_details") : t("view_details")}
-                </Hyperlink>
+              <div
+                className="flex justify-center items-center mb-4 text-gray-400 dark:text-neutral-600 hover:text-gray-600 dark:hover:text-neutral-400 text-sm cursor-pointer"
+                onClick={toggleShowJSON}
+              >
+                {tCommon("details")}
+                {showJSON ? (
+                  <PopiconsChevronTopLine className="h-4 w-4 inline-flex" />
+                ) : (
+                  <PopiconsChevronBottomLine className="h-4 w-4 inline-flex" />
+                )}
               </div>
               {showJSON && (
-                <div className="whitespace-pre-wrap break-words p-2 mb-4 shadow bg-white rounded-lg dark:bg-surface-02dp text-gray-500 dark:text-gray-400">
+                <div className="whitespace-pre-wrap break-words p-2 mb-4 text-gray-600 dark:text-neutral-400">
                   {JSON.stringify(event, null, 2)}
                 </div>
               )}
@@ -147,31 +161,24 @@ function ConfirmSignMessage() {
                   }),
                 })}
               />
-              <SignOrDeny
+              <ConfirmOrCancel
                 disabled={loading}
                 loading={loading}
-                onDeny={reject}
+                onCancel={reject}
+                cancelLabel={tCommon("actions.deny")}
+                destructive
               />
-
-              <div className="flex gap-2 justify-center items-center text-gray-400 dark:text-neutral-600 hover:text-gray-600 dark:hover:text-neutral-400 text-md">
-                <div className="shrink-0">
-                  <PopiconsShieldCheckLine className="w-4 h-4"></PopiconsShieldCheckLine>
-                </div>
-                <button type="button" onClick={() => setModalOpen(true)}>
-                  <Trans
-                    i18nKey={permissionOption}
-                    t={tPermissions}
-                    values={{
-                      permission: t(`kinds.${event.kind}.title`, {
-                        defaultValue: t("kinds.unknown.title", {
-                          kind: event.kind,
-                        }),
-                      }),
-                    }}
-                    components={[]}
-                  />
-                </button>
-              </div>
+              <PermissionSelector
+                i18nKey={permissionOption}
+                values={{
+                  permission: t(`kinds.${event.kind}.title`, {
+                    defaultValue: t("kinds.unknown.title", {
+                      kind: event.kind,
+                    }),
+                  }),
+                }}
+                onChange={() => setModalOpen(true)}
+              />
             </div>
           </Container>
         </form>

@@ -6,8 +6,6 @@ import { CURRENCIES } from "./constants";
 export const DEFAULT_SETTINGS: SettingsStorage = {
   browserNotifications: true,
   websiteEnhancements: true,
-  legacyLnurlAuth: false,
-  isUsingLegacyLnurlAuthKey: false,
   userName: "",
   userEmail: "",
   locale: i18n.resolvedLanguage ?? "en",

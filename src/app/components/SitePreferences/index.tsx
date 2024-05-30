@@ -274,7 +274,7 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
                               )
                             );
                           }}
-                          className="bg-green-50 dark:bg-emerald-950 border border-green-100 dark:border-emerald-900 text-gray-800 dark:text-neutral-200 gap-1"
+                          className="bg-green-50 dark:bg-emerald-950 border border-green-100 dark:border-emerald-900 text-gray-800 dark:text-neutral-200 mr-2 mb-2"
                         />
                       </>
                     ))}
@@ -302,7 +302,7 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
                               )
                             );
                           }}
-                          className="bg-red-50 dark:bg-red-950 border border-red-100 dark:border-red-900 text-gray-800 dark:text-neutral-200 gap-1"
+                          className="bg-red-50 dark:bg-red-950 border border-red-100 dark:border-red-900 text-gray-800 dark:text-neutral-200 mr-2 mb-2"
                         />
                       </>
                     ))}

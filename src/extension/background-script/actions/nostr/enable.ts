@@ -16,7 +16,7 @@ const enable = async (message: MessageAllowanceEnable, sender: Sender) => {
   const host = getHostFromSender(sender);
   if (!host) return;
 
-  const isUnlocked = await state.getState().isUnlocked();
+  let isUnlocked = await state.getState().isUnlocked();
   const account = await state.getState().getAccount();
   const allowance = await db.allowances
     .where("host")
@@ -24,6 +24,24 @@ const enable = async (message: MessageAllowanceEnable, sender: Sender) => {
     .first();
 
   const enabledFor = new Set(allowance?.enabledFor);
+
+  if (!isUnlocked) {
+    try {
+      const response = await utils.openPrompt<{ unlocked: boolean }>({
+        args: {},
+        origin: { internal: true },
+        action: "unlock",
+      });
+
+      isUnlocked = response.data.unlocked;
+    } catch (e) {
+      if (e instanceof Error) {
+        return { error: e.message };
+      } else {
+        return { error: "Failed to unlock" };
+      }
+    }
+  }
 
   if (
     isUnlocked &&
@@ -82,10 +100,8 @@ const enable = async (message: MessageAllowanceEnable, sender: Sender) => {
           // Add permissions
           const permissions: PermissionMethodNostr[] = [
             PermissionMethodNostr.NOSTR_GETPUBLICKEY,
-            PermissionMethodNostr.NOSTR_NIP04ENCRYPT,
-            PermissionMethodNostr.NOSTR_NIP04DECRYPT,
-            PermissionMethodNostr.NOSTR_NIP44ENCRYPT,
-            PermissionMethodNostr.NOSTR_NIP44DECRYPT,
+            PermissionMethodNostr.NOSTR_ENCRYPT,
+            PermissionMethodNostr.NOSTR_DECRYPT,
           ];
           permissions.forEach(async (permission) => {
             await addPermissionFor(permission, host, false);
@@ -104,6 +120,7 @@ const enable = async (message: MessageAllowanceEnable, sender: Sender) => {
             30023, // Long-form content
             30008, // Manage profile badges
             30009, // Badge definition
+            30078, // App Data
           ];
           reasonableEventKindIds.forEach(async (kindId) => {
             await addPermissionFor(

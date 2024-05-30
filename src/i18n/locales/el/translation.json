@@ -174,23 +174,18 @@
     },
     "accounts": {
       "account_view": {
-        "title2": "Λογαριασμός",
         "mnemonic": {
           "backup": {
             "protocols": {
               "nostr": "Nostr"
             }
           },
-          "title": "Διαχείριση κλειδιών",
           "generate": {
             "title": "Δημιουργία νέου πρωτεύοντος κλειδιού"
           },
           "import": {
             "title": "Εισαγωγή του πρωτεύοντος κλειδιού σας"
           }
-        },
-        "network": {
-          "title": "Δίκτυο"
         },
         "nostr": {
           "settings": {
@@ -220,11 +215,7 @@
         },
         "export": {
           "your_ln_address": "Η Lightning διεύθυνση σας:",
-          "screen_reader": "Εξαγωγή λεπτομερειών λογαριασμού",
-          "title": "Σύνδεση με το πορτοφόλι του κινητού σας"
-        },
-        "remove": {
-          "title": "Διαγραφή αυτού του λογαριασμού"
+          "screen_reader": "Εξαγωγή λεπτομερειών λογαριασμού"
         },
         "actions": {
           "export": "Εξαγωγή"

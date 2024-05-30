@@ -250,13 +250,11 @@
     },
     "accounts": {
       "account_view": {
-        "title2": "Editeaza cont",
         "name": {
           "title": "Nume",
           "placeholder": "Nume cont"
         },
         "export": {
-          "title": "Exporta cont",
           "screen_reader": "Exporta date cont",
           "waiting": "in asteptarea datelor LNDHub...",
           "your_ln_address": "Adresa ta Lightning:",
@@ -321,18 +319,6 @@
       "website_enhancements": {
         "title": "",
         "subtitle": ""
-      },
-      "lnurl_auth": {
-        "title": "",
-        "hint": "",
-        "legacy_lnurl_auth_202207": {
-          "title": "",
-          "subtitle": ""
-        },
-        "legacy_lnurl_auth": {
-          "title": "",
-          "subtitle": ""
-        }
       },
       "camera_access": {
         "title": "",
@@ -529,9 +515,7 @@
     },
     "nostr": {
       "title": "",
-      "allow": "",
       "content": "",
-      "allow_sign": "",
       "block_and_ignore": "",
       "block_added": ""
     }

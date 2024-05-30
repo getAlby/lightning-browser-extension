@@ -281,19 +281,16 @@
     },
     "accounts": {
       "account_view": {
-        "title2": "Akun",
         "name": {
           "placeholder": "Tampilan nama akun",
           "title": "Tampilan Nama"
         },
         "export": {
-          "title": "Sambungkan wallet mobile kamu",
           "screen_reader": "Ekspor detail akun",
           "waiting": "Menunggu data LndHub...",
           "your_ln_address": "Alamat Lightning kamu:",
           "export_uri": "LNDHub Credentials URI",
-          "scan_qr": "Impor wallet ini pada Zeus atau BlueWallet dengan memindai kode QR.",
-          "description": "Memungkinkan kamu untuk menghubungkan dan menggunakan akun ini di mobile wallet seperti <0>Blue Wallet</0> dan <1>Zeus</1>."
+          "scan_qr": "Impor wallet ini pada Zeus atau BlueWallet dengan memindai kode QR."
         },
         "mnemonic": {
           "saved": "Kunci Master terenkripsi & tersimpan dengan sukses.",
@@ -306,7 +303,6 @@
           "backup": {
             "save": "Simpan Master Key",
             "button": "Lihat recovery phrase",
-            "warning": "⚠️ Jangan lupa untuk mencadangkan recovery phrase! tidak mempunyai cadangannya akan mungkin menyebabkan kehilangan akses secara permanen terhadap Master Key, identitas Nostr atau aset lainnya yang menggunakan kunci ini.",
             "description": "Tulis recovery phrase untuk dapat memulihkan Master Key di perangkat baru atau ketika kehilangan akses akun kamu.",
             "protocols": {
               "nostr": "Nostr"
@@ -320,15 +316,13 @@
           "lnurl": {
             "title": "Masuk dengan Lightning",
             "use_mnemonic": "Gunakan Master Key untuk masuk pada aplikasi yang telah terintegrasi dengan Lightning (LNURL Auth)"
-          },
-          "title": "🔑 Manajemen Kunci"
+          }
         },
         "nostr": {
           "title": "Nostr",
           "settings": {
             "label": "Pengaturan Nostr",
             "title": "Pengaturan Nostr",
-            "description": "Ambil kunci Nostr dari Master Key atau impor kunci privat dengan memasukkannya pada kolom \"Nostr Private Key\".",
             "imported_key_warning": "⚠️ Saat ini kamu menggunakan kunci Nostr dari proses impor atau yang dibuat secara acak. Kunci privacy Nostr kamu tidak dapat dipulihkan oleh recovery phrase, jadi pastikan kamu telah mencadangkan kunci privat Nostr secara terpisah.",
             "can_restore": "✅ Kunci Nostr diambil dari Master Key kamu",
             "derive": "Ambil dari Master Key",
@@ -377,7 +371,6 @@
         },
         "remove_secretkey": {
           "title": "Hapus Master Key",
-          "subtitle": "Hapus Master Key dari akun ini.",
           "success": "Master Key telah terhapus."
         },
         "actions": {
@@ -409,16 +402,6 @@
       "website_enhancements": {
         "title": "Tambahan fitur website",
         "subtitle": "Penambahan fitur tip untuk Twitter, YouTube, dll."
-      },
-      "lnurl_auth": {
-        "title": "LNURL-Auth",
-        "legacy_lnurl_auth_202207": {
-          "title": "Legacy LNURL-Auth"
-        },
-        "legacy_lnurl_auth": {
-          "title": "Legacy signing untuk LNDhub dan LNbits"
-        },
-        "hint": "adalah protokol autentikasi generik. Dapat mengautentikasi pengguna menggunakan tanda tangan digital. Protokol ini tidak memerlukan informasi yang dapat mengidentifikasi seperti kata sandi, email, username, atau yang lainnya. Dengan Alby, kamu dapat menggunakan akun lightning untuk login pada suatu website dengan aman. Supaya kompatibel dengan wallet lainnya kami membuat beberapa perubahan yang kamu dapat atur di sini. <0>Seharusnya, semua opsi berikut OFF.</0> Gunakanlah ketika kamu memiliki akun yang lama."
       },
       "camera_access": {
         "title": "Akses kamera",
@@ -620,10 +603,7 @@
     },
     "nostr": {
       "title": "Nostr",
-      "hide_details": "Sembunyikan rincian",
-      "block_and_ignore": "Blok dan abaikan {{host}}",
-      "allow": "Izinkan website ini untuk:",
-      "view_details": "Lihat rincian"
+      "block_and_ignore": "Blok dan abaikan {{host}}"
     },
     "on_chain": {
       "title": "Terima melalui alamat bitcoin",

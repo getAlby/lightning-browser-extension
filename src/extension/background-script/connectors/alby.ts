@@ -2,7 +2,6 @@ import { auth, Client } from "@getalby/sdk";
 import {
   CreateSwapParams,
   CreateSwapResponse,
-  GetAccountInformationResponse,
   Invoice,
   RequestOptions,
   SwapInfoResponse,
@@ -10,7 +9,7 @@ import {
 } from "@getalby/sdk/dist/types";
 import browser from "webextension-polyfill";
 import { decryptData, encryptData } from "~/common/lib/crypto";
-import { Account, OAuthToken } from "~/types";
+import { Account, GetAccountInformationResponses, OAuthToken } from "~/types";
 import state from "../state";
 import Connector, {
   CheckPaymentArgs,
@@ -116,20 +115,20 @@ export default class Alby implements Connector {
   }
 
   async getInfo(): Promise<
-    GetInfoResponse<WebLNNode & GetAccountInformationResponse>
+    GetInfoResponse<WebLNNode & GetAccountInformationResponses>
   > {
     const cacheKey = "getInfo";
     const cacheValue = this._cache.get(cacheKey) as GetInfoResponse<
-      WebLNNode & GetAccountInformationResponse
+      WebLNNode & GetAccountInformationResponses
     >;
+
     if (cacheValue) {
       return cacheValue;
     }
 
     try {
-      const info = await this._request((client) =>
-        client.accountInformation({})
-      );
+      const info = await this._getUserDetails();
+
       const returnValue = {
         data: {
           ...info,
@@ -405,5 +404,47 @@ export default class Alby implements Connector {
       console.error("Invalid token");
       throw new Error("Invalid token");
     }
+  }
+
+  private async _getUserDetails() {
+    const url = `${process.env.ALBY_API_URL}/internal/users`;
+
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        ...(await this._authUser?.getAuthHeader()),
+        "User-Agent": `lightning-browser-extension:${process.env.VERSION}`,
+        "X-User-Agent": `lightning-browser-extension:${process.env.VERSION}`,
+      },
+    };
+
+    try {
+      const details =
+        await this._genericRequest<GetAccountInformationResponses>(
+          url,
+          requestOptions
+        );
+
+      return details;
+    } catch (error) {
+      console.error("Error fetching limits:", error);
+      throw error;
+    }
+  }
+
+  private async _genericRequest<T>(
+    url: RequestInfo,
+    init: RequestInit
+  ): Promise<T> {
+    const res = await fetch(url, init);
+
+    if (!res.ok) {
+      throw new Error(`HTTP error! status: ${res.status}`);
+    }
+
+    const data: T = await res.json();
+
+    return data;
   }
 }

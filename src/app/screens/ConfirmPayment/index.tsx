@@ -5,7 +5,7 @@ import Container from "@components/Container";
 import PaymentSummary from "@components/PaymentSummary";
 import PublisherCard from "@components/PublisherCard";
 import ResultCard from "@components/ResultCard";
-import lightningPayReq from "bolt11";
+import lightningPayReq from "bolt11-signet";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
