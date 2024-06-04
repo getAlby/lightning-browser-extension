@@ -47,6 +47,7 @@ module.exports = {
       },
       colors: {
         primary: "#F8C455",
+        "brand-yellow": "#FFDF6F",
         "green-bitcoin": "#27ae60",
 
         // Material Design Surface Colors

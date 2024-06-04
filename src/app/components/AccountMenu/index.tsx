@@ -56,7 +56,7 @@ function AccountMenu({ showOptions = true }: Props) {
   }
 
   return (
-    <div className="relative pl-2 flex justify-end w-80 text-gray-800 dark:text-neutral-200">
+    <div className="relative flex justify-end w-80 text-gray-800 dark:text-neutral-200">
       <Menu as="div">
         <Menu.Button className="h-full px-2 rounded-md hover:bg-gray-100 dark:hover:bg-white/10 transition-colors duration-200">
           <div className="flex items-center">
@@ -94,7 +94,7 @@ function AccountMenu({ showOptions = true }: Props) {
           {authAccount && (
             <Menu.Item>
               <div className="p-2 overflow-hidden">
-                <div className="flex flex-row items-center justify-between bg-amber-50 border-orange-300 border-l-3 p-2 rounded-lg">
+                <div className="flex flex-row items-center justify-between bg-amber-50 dark:bg-brand-yellow/50 border-brand-yellow border-l-4 p-2 rounded-lg">
                   <div className="flex flex-row items-center gap-2">
                     <div className="shrink-0">
                       <Avatar
