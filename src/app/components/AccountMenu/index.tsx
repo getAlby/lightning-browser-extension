@@ -2,13 +2,12 @@ import {
   PopiconsChevronBottomLine,
   PopiconsCirclePlusLine,
   PopiconsGlobeLine,
-  PopiconsWalletLine,
+  PopiconsSettingsMinimalLine,
 } from "@popicons/react";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import Avatar from "~/app/components/Avatar";
-import MenuDivider from "~/app/components/Menu/MenuDivider";
 import SkeletonLoader from "~/app/components/SkeletonLoader";
 import { useAccount } from "~/app/context/AccountContext";
 import { useAccounts } from "~/app/context/AccountsContext";
@@ -57,7 +56,7 @@ function AccountMenu({ showOptions = true }: Props) {
   }
 
   return (
-    <div className="relative pl-2 flex justify-end w-72 text-gray-800 dark:text-neutral-200">
+    <div className="relative pl-2 flex justify-end w-80 text-gray-800 dark:text-neutral-200">
       <Menu as="div">
         <Menu.Button className="h-full px-2 rounded-md hover:bg-gray-100 dark:hover:bg-white/10 transition-colors duration-200">
           <div className="flex items-center">
@@ -92,11 +91,65 @@ function AccountMenu({ showOptions = true }: Props) {
           </div>
         </Menu.Button>
         <Menu.List position="right" fullWidth>
-          <Menu.Item>
+          {authAccount && (
+            <Menu.Item>
+              <div className="p-2 overflow-hidden">
+                <div className="flex flex-row items-center justify-between bg-amber-50 border-orange-300 border-l-3 p-2 rounded-lg">
+                  <div className="flex flex-row items-center gap-2">
+                    <div className="shrink-0">
+                      <Avatar
+                        size={24}
+                        name={authAccount.id}
+                        url={authAccount.avatarUrl}
+                      />
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="overflow-hidden text-ellipsis whitespace-nowrap font-medium">
+                        {authAccount.name}&nbsp;
+                      </span>
+                      <span className="dark:text-white text-xs">
+                        {accountLoading ? (
+                          <SkeletonLoader className="w-16" />
+                        ) : (
+                          balancesDecorated.accountBalance
+                        )}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="flex flex-row gap-1 items-center">
+                    {(isAlbyLNDHubAccount(
+                      authAccount.alias,
+                      authAccount.connectorType
+                    ) ||
+                      isAlbyOAuthAccount(authAccount.connectorType)) && (
+                      <a
+                        className="cursor-pointer"
+                        onClick={() => {
+                          window.open(`https://getalby.com/user`, "_blank");
+                        }}
+                        title={t("options.account.go_to_web_wallet")}
+                      >
+                        <PopiconsGlobeLine className="w-4 h-4 mr-2 shrink-0" />
+                      </a>
+                    )}
+                    <a
+                      className="cursor-pointer"
+                      title={tCommon("wallet_settings")}
+                      onClick={() => {
+                        openOptions(`accounts/${authAccount.id}`);
+                      }}
+                    >
+                      <PopiconsSettingsMinimalLine className="w-4 h-4 mr-2 shrink-0" />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </Menu.Item>
+          )}
+          {/* <Menu.Item>
             <div
-              className={`flex-auto px-4 py-2 overflow-hidden ${
-                !title && !balancesDecorated ? "w-28" : ""
-              }`}
+              className={`flex-auto px-4 py-2 overflow-hidden ${!title && !balancesDecorated ? "w-28" : ""
+                }`}
             >
               <span className="text-xs text-gray-600 dark:text-neutral-400">
                 {tCommon("balance")}
@@ -134,20 +187,20 @@ function AccountMenu({ showOptions = true }: Props) {
             authAccount?.connectorType
           ) ||
             isAlbyOAuthAccount(authAccount?.connectorType)) && (
-            <Menu.ItemButton
-              onClick={() => {
-                window.open(`https://getalby.com/user`, "_blank");
-              }}
-            >
-              <PopiconsGlobeLine className="w-4 h-4 mr-2 shrink-0" />
-              {t("options.account.go_to_web_wallet")} →
-            </Menu.ItemButton>
-          )}
+              <Menu.ItemButton
+                onClick={() => {
+                  window.open(`https://getalby.com/user`, "_blank");
+                }}
+              >
+                <PopiconsGlobeLine className="w-4 h-4 mr-2 shrink-0" />
+                {t("options.account.go_to_web_wallet")} →
+              </Menu.ItemButton>
+            )} */}
 
           {Object.keys(accounts).length > 1 && (
             <>
-              <MenuDivider />
-              <Menu.Subheader>{t("title")}</Menu.Subheader>
+              {/* <MenuDivider /> */}
+              {/* <Menu.Subheader>{t("title")}</Menu.Subheader> */}
               {Object.keys(accounts).map((accountId) => {
                 // Do not render the current active account
                 if (accountId === authAccount?.id) {
