@@ -105,7 +105,7 @@ function AccountMenu({ showOptions = true }: Props) {
                     </div>
                     <div className="flex flex-col">
                       <span className="overflow-hidden text-ellipsis whitespace-nowrap font-medium">
-                        {authAccount.name}&nbsp;
+                        {authAccount.name}
                       </span>
                       <span className="dark:text-white text-xs">
                         {accountLoading ? (
@@ -123,7 +123,7 @@ function AccountMenu({ showOptions = true }: Props) {
                     ) ||
                       isAlbyOAuthAccount(authAccount.connectorType)) && (
                       <a
-                        className="cursor-pointer"
+                        className="cursor-pointer text-gray-600 dark:text-neutral-400 hover:text-gray-400 dark:hover:text-neutral-600"
                         onClick={() => {
                           window.open(`https://getalby.com/user`, "_blank");
                         }}
@@ -133,7 +133,7 @@ function AccountMenu({ showOptions = true }: Props) {
                       </a>
                     )}
                     <a
-                      className="cursor-pointer"
+                      className="cursor-pointer text-gray-600 dark:text-neutral-400 hover:text-gray-400 dark:hover:text-neutral-600"
                       title={tCommon("wallet_settings")}
                       onClick={() => {
                         openOptions(`accounts/${authAccount.id}`);
@@ -146,61 +146,8 @@ function AccountMenu({ showOptions = true }: Props) {
               </div>
             </Menu.Item>
           )}
-          {/* <Menu.Item>
-            <div
-              className={`flex-auto px-4 py-2 overflow-hidden ${!title && !balancesDecorated ? "w-28" : ""
-                }`}
-            >
-              <span className="text-xs text-gray-600 dark:text-neutral-400">
-                {tCommon("balance")}
-              </span>
-              <p className="flex justify-between">
-                <span className="dark:text-white">
-                  {accountLoading ? (
-                    <SkeletonLoader className="w-16" />
-                  ) : (
-                    balancesDecorated.accountBalance
-                  )}
-                </span>
-                <span className="text-gray-600 dark:text-neutral-400">
-                  {accountLoading ? (
-                    <SkeletonLoader className="w-12" />
-                  ) : (
-                    balancesDecorated.fiatBalance && (
-                      <>~{balancesDecorated.fiatBalance}</>
-                    )
-                  )}
-                </span>
-              </p>
-            </div>
-          </Menu.Item>
-          <Menu.ItemButton
-            onClick={() => {
-              openOptions(`accounts/${authAccount?.id}`);
-            }}
-          >
-            <PopiconsWalletLine className="w-4 h-4 mr-2 shrink-0" />
-            {tCommon("wallet_settings")}
-          </Menu.ItemButton>
-          {(isAlbyLNDHubAccount(
-            authAccount?.alias,
-            authAccount?.connectorType
-          ) ||
-            isAlbyOAuthAccount(authAccount?.connectorType)) && (
-              <Menu.ItemButton
-                onClick={() => {
-                  window.open(`https://getalby.com/user`, "_blank");
-                }}
-              >
-                <PopiconsGlobeLine className="w-4 h-4 mr-2 shrink-0" />
-                {t("options.account.go_to_web_wallet")} →
-              </Menu.ItemButton>
-            )} */}
-
           {Object.keys(accounts).length > 1 && (
             <>
-              {/* <MenuDivider /> */}
-              {/* <Menu.Subheader>{t("title")}</Menu.Subheader> */}
               {Object.keys(accounts).map((accountId) => {
                 // Do not render the current active account
                 if (accountId === authAccount?.id) {
@@ -220,16 +167,18 @@ function AccountMenu({ showOptions = true }: Props) {
                     disabled={accountLoading}
                     title={account.name}
                   >
-                    <div className="shrink-0">
-                      <Avatar
-                        size={24}
-                        name={account.id}
-                        url={account.avatarUrl}
-                      />
+                    <div className="flex flex-row w-full items-center">
+                      <div className="shrink-0">
+                        <Avatar
+                          size={24}
+                          name={account.id}
+                          url={account.avatarUrl}
+                        />
+                      </div>
+                      <span className="overflow-hidden text-ellipsis whitespace-nowrap ml-2">
+                        {account.name}
+                      </span>
                     </div>
-                    <span className="overflow-hidden text-ellipsis whitespace-nowrap ml-2">
-                      {account.name}&nbsp;
-                    </span>
                   </Menu.ItemButton>
                 );
               })}

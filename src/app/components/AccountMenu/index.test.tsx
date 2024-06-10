@@ -33,8 +33,7 @@ jest.mock("~/app/context/AccountContext", () => ({
     setAccountId: jest.fn(),
     fetchAccountInfo: jest.fn(),
     balancesDecorated: {
-      fiatBalance: "",
-      satsBalance: "",
+      accountBalance: "123 sats",
     },
   }),
 }));
@@ -67,8 +66,10 @@ describe("AccountMenu", () => {
       await user.click(screen.getByText("Toggle Dropdown"));
     });
 
-    expect(screen.getByText("sats")).toBeInTheDocument();
-    expect(screen.getByText("LND account")).toBeInTheDocument();
+    // Title of active account is rendered as dropdown title + first active item in dropdown
+    expect(screen.getAllByText("LND account").length).toEqual(2);
+
+    expect(screen.getByText("123 sats")).toBeInTheDocument();
     expect(screen.getByText("Galoy account")).toBeInTheDocument();
     expect(screen.getByText("Connect a Wallet")).toBeInTheDocument();
   });
