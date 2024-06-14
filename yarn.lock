@@ -3977,10 +3977,10 @@ devtools-protocol@0.0.1191157:
   resolved "https://registry.yarnpkg.com/devtools-protocol/-/devtools-protocol-0.0.1191157.tgz#2a3e4d95b3fdb8696ab8c486e34d76519eb8715a"
   integrity sha512-Fu2mUhX7zkzLHMJZk5wQTiHdl1eJrhK0GypUoSzogUt51MmYEv/46pCz4PtGGFlr0f2ZyYDzzx5CPtbEkuvcTA==
 
-dexie@^3.2.7:
-  version "3.2.7"
-  resolved "https://registry.yarnpkg.com/dexie/-/dexie-3.2.7.tgz#1346541c9c81e3bc6055a042a928837890595e3a"
-  integrity sha512-2a+BXvVhY5op+smDRLxeBAivE7YcYaneXJ1la3HOkUfX9zKkE/AJ8CNgjiXbtXepFyFmJNGSbmjOwqbT749r/w==
+dexie@^4.0.7:
+  version "4.0.7"
+  resolved "https://registry.yarnpkg.com/dexie/-/dexie-4.0.7.tgz#c92e5032245fc075de58c636238a82ee3ff9fedb"
+  integrity sha512-M+Lo6rk4pekIfrc2T0o2tvVJwL6EAAM/B78DNfb8aaxFVoI1f8/rz5KTxuAnApkwqTSuxx7T5t0RKH7qprapGg==
 
 didyoumean@^1.2.2:
   version "1.2.2"
