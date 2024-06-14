@@ -94,7 +94,7 @@ function AccountMenu({ showOptions = true }: Props) {
           {authAccount && (
             <Menu.Item>
               <div className="p-2 overflow-hidden">
-                <div className="flex flex-row items-center justify-between bg-amber-50 dark:bg-brand-yellow/50 border-brand-yellow border-l-4 p-2 rounded-lg">
+                <div className="flex flex-row items-center justify-between gap-2 bg-amber-50 dark:bg-brand-yellow/50 border-brand-yellow border-l-4 p-2 rounded-lg">
                   <div className="flex flex-row items-center gap-2">
                     <div className="shrink-0">
                       <Avatar
@@ -103,7 +103,7 @@ function AccountMenu({ showOptions = true }: Props) {
                         url={authAccount.avatarUrl}
                       />
                     </div>
-                    <div className="flex flex-col">
+                    <div className="flex flex-col max-w-40">
                       <span className="overflow-hidden text-ellipsis whitespace-nowrap font-medium">
                         {authAccount.name}
                       </span>
