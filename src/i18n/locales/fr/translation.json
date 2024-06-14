@@ -250,7 +250,6 @@
     },
     "accounts": {
       "account_view": {
-        "title2": "Modifier le compte",
         "name": {
           "title": "Nom",
           "placeholder": "Nom du compte"
@@ -517,7 +516,6 @@
     "nostr": {
       "title": "Nostr",
       "content": "Ce site vous demande de signer :",
-      "allow_sign": "Autoriser {{host}} à signer :",
       "block_and_ignore": "Bloquer et ignorer {{host}}",
       "block_added": "{{host}} a été ajouté à la liste de blocage, veuillez recharger le site Web."
     }

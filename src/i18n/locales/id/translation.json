@@ -281,7 +281,6 @@
     },
     "accounts": {
       "account_view": {
-        "title2": "Akun",
         "name": {
           "placeholder": "Tampilan nama akun",
           "title": "Tampilan Nama"
@@ -324,7 +323,6 @@
           "settings": {
             "label": "Pengaturan Nostr",
             "title": "Pengaturan Nostr",
-            "description": "Ambil kunci Nostr dari Master Key atau impor kunci privat dengan memasukkannya pada kolom \"Nostr Private Key\".",
             "imported_key_warning": "⚠️ Saat ini kamu menggunakan kunci Nostr dari proses impor atau yang dibuat secara acak. Kunci privacy Nostr kamu tidak dapat dipulihkan oleh recovery phrase, jadi pastikan kamu telah mencadangkan kunci privat Nostr secara terpisah.",
             "can_restore": "✅ Kunci Nostr diambil dari Master Key kamu",
             "derive": "Ambil dari Master Key",

@@ -250,7 +250,6 @@
     },
     "accounts": {
       "account_view": {
-        "title2": "Rediger konto",
         "name": {
           "title": "Navn",
           "placeholder": "Kontonavn"
@@ -516,7 +515,6 @@
     "nostr": {
       "title": "Nostr",
       "content": "Denne hjemmeside beder dig underskrive:",
-      "allow_sign": "Tillad {{vært}} at underskrive:",
       "block_and_ignore": "Bloker og ignorer {{vært}}",
       "block_added": "{{vært}} blev føjet til blokeringslisten, indlæs hjemmesiden igen."
     }

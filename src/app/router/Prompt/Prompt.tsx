@@ -61,6 +61,16 @@ function Prompt() {
       <HashRouter>
         <Routes>
           <Route
+            index
+            element={
+              <Navigate
+                to={`/${navigationState.action}`}
+                replace
+                state={navigationState}
+              />
+            }
+          />
+          <Route
             path="/"
             element={
               <RequireAuth>
@@ -68,16 +78,6 @@ function Prompt() {
               </RequireAuth>
             }
           >
-            <Route
-              index
-              element={
-                <Navigate
-                  to={`/${navigationState.action}`}
-                  replace
-                  state={navigationState}
-                />
-              }
-            />
             <Route
               path="public/alby/enable"
               element={

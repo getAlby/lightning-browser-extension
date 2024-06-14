@@ -10,13 +10,32 @@ const enable = async (message: MessageAllowanceEnable, sender: Sender) => {
   const host = getHostFromSender(sender);
   if (!host) return;
 
-  const isUnlocked = await state.getState().isUnlocked();
+  let isUnlocked = await state.getState().isUnlocked();
   const allowance = await db.allowances
     .where("host")
     .equalsIgnoreCase(host)
     .first();
 
   const enabledFor = new Set(allowance?.enabledFor);
+
+  if (!isUnlocked) {
+    try {
+      const response = await utils.openPrompt<{ unlocked: boolean }>({
+        args: {},
+        origin: { internal: true },
+        action: "unlock",
+      });
+
+      isUnlocked = response.data.unlocked;
+    } catch (e) {
+      console.error(e);
+      if (e instanceof Error) {
+        return { error: e.message };
+      } else {
+        return { error: "Failed to unlock" };
+      }
+    }
+  }
 
   if (isUnlocked && allowance && allowance.enabled && enabledFor.has("webln")) {
     return {

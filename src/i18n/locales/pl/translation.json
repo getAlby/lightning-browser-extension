@@ -291,8 +291,6 @@
     },
     "accounts": {
       "account_view": {
-        "title1": "Ustawienia konta",
-        "title2": "Konto",
         "name": {
           "title": "Wyświetlana nazwa",
           "placeholder": "Nazwa wyświetlana konta"
@@ -588,7 +586,6 @@
     "nostr": {
       "title": "Nostr",
       "content": "Ta strona prosi Cię aby podpisywać:",
-      "allow_sign": "Pozwól {{host}} na podpisywanie:",
       "block_and_ignore": "Zablokuj i ignoruj {{host}}",
       "block_added": "Dodano {{host}} do listy zablokowanych, odśwież stronę."
     },

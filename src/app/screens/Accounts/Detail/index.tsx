@@ -263,7 +263,7 @@ function AccountDetail() {
                             primary
                             onClick={() =>
                               window.open(
-                                "https://getalby.com/settings",
+                                "https://getalby.com/lightning_addresses",
                                 "_blank"
                               )
                             }
@@ -464,7 +464,7 @@ function AccountDetail() {
                   </div>
 
                   <div className="flex items-center gap-2">
-                    <p className="text-gray-600 text-sm dark:text-neutral-400">
+                    <p className="text-gray-600 text-sm dark:text-neutral-400 text-ellipsis whitespace-nowrap overflow-hidden">
                       {nostrPublicKey}
                     </p>
                     {nostrPublicKey && (
@@ -496,7 +496,7 @@ function AccountDetail() {
                     components={[
                       // eslint-disable-next-line react/jsx-key
                       <Link
-                        to="secret-key/new"
+                        to="secret-key/generate"
                         relative="path"
                         className="underline"
                       />,

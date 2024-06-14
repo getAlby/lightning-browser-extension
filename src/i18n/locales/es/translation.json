@@ -13,7 +13,9 @@
           "confirm_password": "Por favor, confirma tu código de acceso.",
           "mismatched_password": "Los códigos no coinciden."
         },
-        "title": "Establecer contraseña para desbloquear la extensión"
+        "title": "Establecer contraseña para desbloquear la extensión",
+        "description1": "Establecer un código de acceso para desbloquear la extensión Alby en este navegador",
+        "description2": "El código de desbloqueo no se puede recuperar, pero se puede cambiar. "
       },
       "test_connection": {
         "ready": "Genial, ¡ya estás listo!",
@@ -239,6 +241,9 @@
         "pairing_phrase": {
           "label": "Tu frase vinculada. ",
           "placeholder": "frase de pila secreta de sats"
+        },
+        "page": {
+          "title": "Conéctese a la terminal Lightning (LNC)"
         }
       },
       "title": "Conecta la Billetera Lightning",
@@ -295,7 +300,6 @@
           "title": "Nostr",
           "hint": "es un protocolo simple y abierto que tiene como objetivo crear redes sociales resistentes a la censura. Nostr trabaja con claves criptográficas. Para publicar algo, lo firma con su clave y lo envía a múltiples relevos. Puede usar Alby para administrar su clave Nostr. Muchas aplicaciones de Nostr le permitirán simplemente usar la clave de la extensión Alby."
         },
-        "title2": "Editar Cuenta",
         "name": {
           "title": "Nombre",
           "placeholder": "Nombre de la Cuenta"
@@ -517,7 +521,12 @@
     "choose_path": {
       "alby": {
         "title": "Cuenta de Alby",
-        "connect": "Conectar con Alby"
+        "connect": "Conectar con Alby",
+        "description": "Ideal para principiantes o cualquiera que busque una excelente billetera para el uso diario.",
+        "point1": "Los nuevos registros requieren un código de invitación",
+        "point2": "Se aplican límites de volumen de transacciones",
+        "point3": "Configura e inicia sesión con tu correo electrónico",
+        "point4": "Dirección única de Lightning y Nostr"
       },
       "other": {
         "title": "Lleve su propia cartera",
@@ -533,7 +542,6 @@
     "nostr": {
       "title": "Nostr",
       "content": "Este sitio web te solicita firmar:",
-      "allow_sign": "Permitir que {{host}} firme:",
       "block_and_ignore": "Bloquear e ignorar {{host}}",
       "block_added": "Se agregó {{host}} a la lista de bloqueados, vuelva a cargar el sitio web."
     },

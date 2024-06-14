@@ -53,7 +53,19 @@ export interface AccountInfo {
 }
 
 export type GetAccountInformationResponses = GetAccountInformationResponse & {
-  node_required?: boolean;
+  node_required: boolean;
+  limits?: {
+    max_send_volume: number;
+    max_send_amount: number;
+    max_receive_volume: number;
+    max_receive_amount: number;
+    max_account_balance: number;
+    max_volume_period_in_days: number;
+  };
+  node_type?: string;
+  node_connection_error_count?: number;
+  shared_node: boolean;
+  custodial: boolean;
 };
 
 export interface MetaData {

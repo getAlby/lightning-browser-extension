@@ -93,7 +93,6 @@
             "imported_key_warning": "⚠️ คุณกำลังใช้คีย์ Nostr ที่นำเข้า หรือ สร้างขึ้นแบบสุ่มในปัจจุบัน Nostr private key ของคุณไม่สามารถกู้คืนได้โดย recovery phase ของคุณ ดังนั้นโปรดอย่าลืมสำรอง Nostr private key ของคุณแยกต่างหาก",
             "label": "การตั้งค่าสำหรับ Nostr",
             "title": "การตั้งค่าสำหรับ Nostr",
-            "description": "รับคีย์ Nostr จาก Master Key หรือ นำเข้า private key ที่มีอยู่ โดยวางในช่อง \"Nostr Private Key\"",
             "can_restore": "✅ Nostr key ได้มาจาก Master Key ของคุณ"
           },
           "setup": {
@@ -145,7 +144,6 @@
           "export": "ส่งออก",
           "remove_secretkey": "ลบ Master Key"
         },
-        "title2": "บัญชี",
         "name": {
           "title": "ชื่อที่ปรากฏ",
           "placeholder": "ชื่อที่ปรากฏบนบัญชี"
@@ -339,8 +337,7 @@
       "block_and_ignore": "บล็อกและเพิกเฉยต่อ {{host}}",
       "title": "Nostr",
       "block_added": "เพื่ม {{host}} เข้าสู่แบล็คลิส โปรดรีเฟรชหน้าเว็บใหม่",
-      "content": "เว็บไซต์นี้ขอให้คุณลงชื่อ:",
-      "allow_sign": "อนุญาตให้ {{host}} ลงนาม:"
+      "content": "เว็บไซต์นี้ขอให้คุณลงชื่อ:"
     },
     "choose_path": {
       "other": {

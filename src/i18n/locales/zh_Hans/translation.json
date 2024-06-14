@@ -266,7 +266,6 @@
             "can_restore": "✅ Nostr 密钥已从你的主密钥派生",
             "derive": "从主密钥中派生",
             "no_secret_key": "💡 你还没有主密钥。 <0>单击此处</0></div>创建你的主密钥并派生你的 nostr 密钥。",
-            "description": "从你的主密钥中派生 Nostr 密钥，或通过将其粘贴到“Nostr 私钥”字段来导入现有的私钥。",
             "remove": "移除现有的密钥"
           },
           "setup": {
@@ -293,7 +292,6 @@
           "export": "导出",
           "remove_secretkey": "移除主密钥"
         },
-        "title2": "帐户",
         "name": {
           "title": "名称",
           "placeholder": "帐户名称"
@@ -366,15 +364,6 @@
       "title": "你的⚡网站"
     },
     "settings": {
-      "nostr": {
-        "private_key": {
-          "title": "私钥",
-          "subtitle": "此部分已移至帐户页面，因为密钥现在是特定于帐户的。",
-          "go_to": "前往帐户"
-        },
-        "title": "Nostr",
-        "hint": "是一个简单而开放的协议，旨在创建抗审查的社交网络。 Nostr 使用加密密钥。你可以使用你的密钥对内容进行签署并将其发送到多个中继。你可以使用 Alby 来管理你的 Nostr 密钥。许多 Nostr 应用程序允许你轻松地使用 Alby 扩展中的密钥。"
-      },
       "browser_notifications": {
         "title": "浏览器通知",
         "subtitle": "支付和认证相关的通知。"
@@ -530,7 +519,6 @@
       "title": "Nostr",
       "block_and_ignore": "阻止并忽略 {{host}}",
       "content": "该网站要求你签署:",
-      "allow_sign": "允许{{host}}签署：",
       "block_added": "已将{{host}}添加到屏蔽列表，请重新加载网站。"
     },
     "lnurlpay": {
