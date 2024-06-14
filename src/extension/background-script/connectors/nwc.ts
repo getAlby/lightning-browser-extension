@@ -89,6 +89,9 @@ class NWCConnector implements Connector {
           settleDate: transaction.settled_at * 1000,
           totalAmount: transaction.amount,
           type: transaction.type == "incoming" ? "received" : "sent",
+          custom_records: transaction.metadata?.[
+            "custom_records"
+          ] as ConnectorTransaction["custom_records"],
         })
       );
     return {
