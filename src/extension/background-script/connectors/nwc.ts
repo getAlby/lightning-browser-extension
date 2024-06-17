@@ -1,6 +1,7 @@
 import { webln } from "@getalby/sdk";
 import { NostrWebLNProvider } from "@getalby/sdk/dist/webln";
 import lightningPayReq from "bolt11-signet";
+import Base64 from "crypto-js/enc-base64";
 import Hex from "crypto-js/enc-hex";
 import SHA256 from "crypto-js/sha256";
 import { Account } from "~/types";
@@ -21,6 +22,14 @@ import Connector, {
   SignMessageArgs,
   SignMessageResponse,
 } from "./connector.interface";
+
+type TLVRecord = {
+  type: number;
+  /**
+   * hex-encoded value
+   */
+  value: string;
+};
 
 interface Config {
   nostrWalletConnectUrl: string;
@@ -89,9 +98,9 @@ class NWCConnector implements Connector {
           settleDate: transaction.settled_at * 1000,
           totalAmount: transaction.amount,
           type: transaction.type == "incoming" ? "received" : "sent",
-          custom_records: transaction.metadata?.[
-            "custom_records"
-          ] as ConnectorTransaction["custom_records"],
+          custom_records: mapTLVRecords(
+            transaction.metadata?.["tlv_records"] as TLVRecord[] | undefined
+          ),
         })
       );
     return {
@@ -206,6 +215,23 @@ class NWCConnector implements Connector {
   connectPeer(args: ConnectPeerArgs): Promise<ConnectPeerResponse> {
     throw new Error("Method not implemented.");
   }
+}
+
+function mapTLVRecords(
+  tlvRecords: TLVRecord[] | undefined
+): ConnectorTransaction["custom_records"] | undefined {
+  if (tlvRecords) {
+    const customRecords: ConnectorTransaction["custom_records"] = {};
+    for (const tlv of tlvRecords) {
+      // TODO: ConnectorTransaction["custom_records"] should not be in base64 format
+      // as this requires unnecessary re-encoding
+      customRecords[tlv.type.toString()] = Hex.parse(tlv.value).toString(
+        Base64
+      );
+    }
+    return customRecords;
+  }
+  return undefined;
 }
 
 export default NWCConnector;
