@@ -5,14 +5,16 @@ import { useSettings } from "~/app/context/SettingsContext";
 import { classNames } from "~/app/utils";
 import { RangeLabel } from "./rangeLabel";
 
+export type DualCurrencyFieldChangeEventTarget = HTMLInputElement & {
+  valueInFiat: number;
+  formattedValueInFiat: string;
+  valueInSats: number;
+  formattedValueInSats: string;
+};
+
 export type DualCurrencyFieldChangeEvent =
   React.ChangeEvent<HTMLInputElement> & {
-    target: HTMLInputElement & {
-      valueInFiat: number;
-      formattedValueInFiat: string;
-      valueInSats: number;
-      formattedValueInSats: string;
-    };
+    target: DualCurrencyFieldChangeEventTarget;
   };
 
 export type Props = {
@@ -159,11 +161,14 @@ export default function DualCurrencyField({
       setInputValue(e.target.value);
 
       if (onChange) {
+        const wrappedEvent: DualCurrencyFieldChangeEvent =
+          e as DualCurrencyFieldChangeEvent;
+
         const value = Number(e.target.value);
         const { valueInSats, formattedSats, valueInFiat, formattedFiat } =
           await convertValues(value, useFiatAsMain);
-        const wrappedEvent: DualCurrencyFieldChangeEvent =
-          e as DualCurrencyFieldChangeEvent;
+        wrappedEvent.target =
+          e.target.cloneNode() as DualCurrencyFieldChangeEventTarget;
         wrappedEvent.target.value = valueInSats.toString();
         wrappedEvent.target.valueInFiat = valueInFiat;
         wrappedEvent.target.formattedValueInFiat = formattedFiat;
