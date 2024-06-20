@@ -468,8 +468,7 @@
             "success": "Der private Schlüssel von Nostr wurde erfolgreich verschlüsselt und gespeichert.",
             "successfully_removed": "Der private Schlüssel von Nostr wurde erfolgreich entfernt.",
             "label": "Nostr Privater Schlüssel",
-            "failed_to_remove": "Der eingegebene Kontoname stimmt nicht überein, dein alter privater Nostr-Schlüssel wurde wiederhergestellt.",
-            "warning": "Bitte gebe den Namen des Kontos ein, um die Löschung des privaten Schlüssels von nostr zu bestätigen:\n\n{{ Name }}"
+            "failed_to_remove": "Der eingegebene Kontoname stimmt nicht überein, dein alter privater Nostr-Schlüssel wurde wiederhergestellt."
           },
           "public_key": {
             "label": "Nostr Öffentlicher Schlüssel"
@@ -529,7 +528,6 @@
         },
         "remove": {
           "error": "Der eingegebene Kontoname stimmte nicht überein.",
-          "confirm": "Bitte gebe den Namen des Kontos ein, um die Löschung deines Kontos zu bestätigen:\n\n{{ Name }}\n\n⚠️ Wenn du fortfährst, werden alle zugehörigen Schlüssel (Hauptschlüssel, Nostr, etc.) gelöscht. Bitte vergewissern dich, dass du eine Sicherungskopie erstellt hast, denn es gibt keine andere Möglichkeit, sie wiederherzustellen.",
           "subtitle": "Alle verknüpften Zertifikate werden gelöscht. Bitte sei dir sicher.",
           "title": "Diese Wallet entfernen"
         },
@@ -599,7 +597,6 @@
         "remove_secretkey": {
           "title": "Hauptschlüssel entfernen",
           "success": "Der Hauptschlüssel wurde erfolgreich entfernt.",
-          "confirm": "Bitte gebe den Namen des Kontos ein, um die Löschung deines Hauptschlüssels zu bestätigen:\n\n{{ Name }}",
           "subtitle": "Entfernt den Hauptschlüssel aus dieser Wallet."
         },
         "network": {
@@ -729,6 +726,10 @@
           "title": "Notiz löschen",
           "description": "Relays zum Löschen eines Ereignisses auffordern"
         },
+        "6": {
+          "title": "umbuchen",
+          "description": "Eine Notiz neu veröffentlichen"
+        },
         "7": {
           "title": "reagieren",
           "description": "Unterschreibe eine Reaktion auf eine Notiz"
@@ -797,17 +798,13 @@
           "title": "Anwendungsdaten",
           "description": "Anwendungsspezifische Daten unterschreiben"
         },
-        "unknown": {
-          "description": "Nicht identifizierte Aktion",
-          "title": "Art {{kind}}"
-        },
-        "6": {
-          "title": "umbuchen",
-          "description": "Eine Notiz neu veröffentlichen"
-        },
         "10000135": {
           "description": "Hochladen von Daten in Stücken",
           "title": "Chunk hochladen"
+        },
+        "unknown": {
+          "description": "Nicht identifizierte Aktion",
+          "title": "Art {{kind}}"
         }
       },
       "allow": "Erlaube {{Herausgeber}} zu {{Aktion}}"

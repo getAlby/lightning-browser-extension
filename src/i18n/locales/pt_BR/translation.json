@@ -338,8 +338,7 @@
             "label": "Chave privada Nostr",
             "subtitle": "Cole sua chave privada Nostr ou gere uma nova. <0>Saiba mais »</0>",
             "success": "Chave privada Nostr criptografada e salva com sucesso.",
-            "failed_to_remove": "O nome da conta inserido não está correto, sua chave privada Nostr antiga foi restaurada.",
-            "warning": "Por favor, insira o nome da conta para confirmar a exclusão de sua chave privada nostr:\n\n{{ name }}"
+            "failed_to_remove": "O nome da conta inserido não está correto, sua chave privada Nostr antiga foi restaurada."
           },
           "public_key": {
             "label": "Chave pública Nostr"
@@ -397,7 +396,6 @@
         },
         "remove": {
           "error": "O nome da conta inserido não corresponde.",
-          "confirm": "Por favor, insira o nome da conta para confirmar a exclusão:\n\n{{ name }}\n\n ⚠️ Por favor, insira o nome da conta para confirmar a exclusão. Todas as chaves associadas (Chave mestra, Nostr, etc) serão excluídas se você continuar. Certifique-se de ter feito backup das chaves, não há outra maneira de restaurá-las.",
           "title": "Remover esta carteira"
         },
         "actions": {
@@ -469,7 +467,6 @@
         "remove_secretkey": {
           "title": "Remover chave mestra",
           "success": "Chave mestra removida com sucesso.",
-          "confirm": "Por favor, insira o nome da conta para confirmar a exclusão de sua chave mestra:\n\n{{ name }}",
           "subtitle": "Remove a chave mestra desta conta."
         },
         "network": {
@@ -736,6 +733,9 @@
         "1": {
           "title": "nota curta"
         },
+        "3": {
+          "title": "atualizar lista de seguidores"
+        },
         "4": {
           "title": "mensagem direta"
         },
@@ -744,9 +744,6 @@
         },
         "30023": {
           "title": "nota longa"
-        },
-        "3": {
-          "title": "atualizar lista de seguidores"
         }
       }
     },
