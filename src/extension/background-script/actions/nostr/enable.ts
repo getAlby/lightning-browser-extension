@@ -114,13 +114,17 @@ const enable = async (message: MessageAllowanceEnable, sender: Sender) => {
             3, // Update follow list
             4, // Encrypted direct messages
             7, // Reaction
+            6, // Repost
             9734, // Zap request
+            10000, // mute list
             10002, // Relay list metadata
+            10003, // bookmarks
             22242, // Client relay authentication
             30023, // Long-form content
             30008, // Manage profile badges
             30009, // Badge definition
             30078, // App Data
+            10000135, // Upload Chunk/Image Upload
           ];
           reasonableEventKindIds.forEach(async (kindId) => {
             await addPermissionFor(
