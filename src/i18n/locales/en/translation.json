@@ -1059,6 +1059,10 @@
           "title": "remote sign",
           "description": "Request and sign events remotely"
         },
+        "27235": {
+          "title": "HTTP Auth",
+          "description": "HTTP Authentication"
+        },
         "30008": {
           "title": "profile badge",
           "description": "Accept, reject and change display order of awarded badges"

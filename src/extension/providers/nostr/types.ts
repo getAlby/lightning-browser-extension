@@ -31,6 +31,7 @@ export enum EventKind {
   Bookmarks = 10003,
   Authenticate = 22242,
   RemoteSign = 24133,
+  HTTPAuth = 27235,
   ProfileBadge = 30008,
   CreateBadge = 30009,
   LongNote = 30023,
