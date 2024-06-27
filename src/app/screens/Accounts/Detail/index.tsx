@@ -26,7 +26,7 @@ import Toggle from "~/app/components/form/Toggle";
 import { useAccount } from "~/app/context/AccountContext";
 import { useAccounts } from "~/app/context/AccountsContext";
 import { useSettings } from "~/app/context/SettingsContext";
-import { classNames } from "~/app/utils";
+import { classNames, isAlbyOAuthAccount } from "~/app/utils";
 import api, { GetAccountRes } from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import nostr from "~/common/lib/nostr";
@@ -240,7 +240,7 @@ function AccountDetail() {
               </form>
               {/* show lnaddress setting only for OAuth accounts and active account settings */}
               {lightningAddress &&
-                account.connectorType == "alby" &&
+                isAlbyOAuthAccount(account.connectorType) &&
                 account.id === auth.account?.id && (
                   <>
                     <MenuDivider />
