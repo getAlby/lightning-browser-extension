@@ -264,8 +264,7 @@
             "label": "Nostr Privat Nyckel",
             "subtitle": "Klistra in din nostr privata nyckel eller skapa en ny. <0>Läs mer »</0>",
             "success": "Nostr privat nyckel krypterad och sparad.",
-            "failed_to_remove": "Det angivna kontonamnet matchade inte, din gamla Nostr privata nyckel har återställts.",
-            "warning": "Vänligen ange namnet på kontot för att bekräfta raderingen av din nostr privata nyckel:\n\n{{ name }}"
+            "failed_to_remove": "Det angivna kontonamnet matchade inte, din gamla Nostr privata nyckel har återställts."
           },
           "public_key": {
             "label": "Nostr Publik Nyckel"
@@ -295,8 +294,7 @@
           }
         },
         "remove": {
-          "error": "Det angivna kontonamnet matchade inte.",
-          "confirm": "Ange namnet på kontot för att bekräfta raderingen av ditt konto.\n\n{{ name }}\n\n ⚠️ Alla associerade nycklar (Master Key, Nostr, etc) kommer att raderas om du fortsätter. Se till att du har säkerhetskopierat dem, det finns inget annat sätt att återställa dem."
+          "error": "Det angivna kontonamnet matchade inte."
         },
         "name": {
           "title": "Visnings Namn",
@@ -341,8 +339,7 @@
         },
         "remove_secretkey": {
           "title": "Ta bort huvudnyckeln",
-          "success": "Masternyckeln har tagits bort.",
-          "confirm": "Ange namnet på kontot för att bekräfta raderingen av din huvudnyckel.\n\n{{ name }}"
+          "success": "Masternyckeln har tagits bort."
         },
         "no_mnemonic_hint": "💡 Du har ingen huvudnyckel än. <0>Klicka här</0></div> för att skapa din huvudnyckel och låsa upp dessa inställningar.",
         "network": {
