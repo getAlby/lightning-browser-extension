@@ -1039,9 +1039,17 @@
           "title": "zap receipt",
           "description": "Display a confirmation of a paid lightning invoice"
         },
+        "10000": {
+          "title": "mute list",
+          "description": "Blocks spammers and bad actors from your feed"
+        },
         "10002": {
           "title": "relay list",
           "description": "Update preferred relays for discovering your notes and receiving others' notes"
+        },
+        "10003": {
+          "title": "bookmarks",
+          "description": "Bookmark user posts"
         },
         "22242": {
           "title": "authenticate",
@@ -1050,6 +1058,10 @@
         "24133": {
           "title": "remote sign",
           "description": "Request and sign events remotely"
+        },
+        "27235": {
+          "title": "HTTP Auth",
+          "description": "HTTP Authentication"
         },
         "30008": {
           "title": "profile badge",
