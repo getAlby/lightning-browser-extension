@@ -53,6 +53,7 @@ function AccountDetail() {
 
   const { account: accountInfo } = useAccount();
 
+  // lightning address is returned for current active account
   const lightningAddress = accountInfo?.lightningAddress || "";
 
   const [account, setAccount] = useState<GetAccountRes | null>(null);
@@ -237,38 +238,43 @@ function AccountDetail() {
                   />
                 </div>
               </form>
-              {lightningAddress && account.connectorType == "alby" && (
-                <>
-                  <MenuDivider />
-                  <div className="flex flex-col sm:flex-row justify-between items-center">
-                    <div className="sm:w-9/12 w-full">
-                      <p className="text-gray-800 dark:text-white font-medium">
-                        {t("lnaddress.title")}
-                      </p>
-                      <p className="text-gray-600 text-sm dark:text-neutral-400">
-                        {lightningAddress}
-                      </p>
-                    </div>
+              {/* show lnaddress setting only for OAuth accounts and active account settings */}
+              {lightningAddress &&
+                account.connectorType == "alby" &&
+                account.id === auth.account?.id && (
+                  <>
+                    <MenuDivider />
+                    <div className="flex flex-col sm:flex-row justify-between items-center">
+                      <div className="sm:w-9/12 w-full">
+                        <p className="text-gray-800 dark:text-white font-medium">
+                          {t("lnaddress.title")}
+                        </p>
+                        <p className="text-gray-600 text-sm dark:text-neutral-400">
+                          {lightningAddress}
+                        </p>
+                      </div>
 
-                    <div className="flex-none sm:w-64 w-full pt-4 sm:pt-0">
-                      <div className="flex flex-row gap-2">
-                        <Button
-                          label={t("actions.change_lnaddress")}
-                          iconRight={<PopiconsExpandLine className="w-5 h-5" />}
-                          fullWidth
-                          primary
-                          onClick={() =>
-                            window.open(
-                              "https://getalby.com/lightning_addresses",
-                              "_blank"
-                            )
-                          }
-                        />
+                      <div className="flex-none sm:w-64 w-full pt-4 sm:pt-0">
+                        <div className="flex flex-row gap-2">
+                          <Button
+                            label={t("actions.change_lnaddress")}
+                            iconRight={
+                              <PopiconsExpandLine className="w-5 h-5" />
+                            }
+                            fullWidth
+                            primary
+                            onClick={() =>
+                              window.open(
+                                "https://getalby.com/lightning_addresses",
+                                "_blank"
+                              )
+                            }
+                          />
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </>
-              )}
+                  </>
+                )}
               {account.connectorType == "lndhub" && (
                 <>
                   <MenuDivider />
