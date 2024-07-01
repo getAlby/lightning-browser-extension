@@ -1,4 +1,4 @@
-import { render, screen, act } from "@testing-library/react";
+import { act, render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { settingsFixture as mockSettings } from "~/../tests/fixtures/settings";
 import { SettingsProvider } from "~/app/context/SettingsContext";
@@ -42,7 +42,7 @@ jest.mock("~/common/lib/api", () => {
   return {
     ...original,
     getSettings: jest.fn(() => Promise.resolve(mockSettings)),
-    getCurrencyRate: jest.fn(() => Promise.resolve({ rate: 11 })),
+    getCurrencyRate: jest.fn(() => 11),
   };
 });
 
@@ -59,6 +59,6 @@ describe("Keysend", () => {
     });
 
     expect(await screen.findByText("Send payment to")).toBeInTheDocument();
-    expect(await screen.getByLabelText("Amount (Satoshi)")).toHaveValue(21);
+    expect(await screen.getByLabelText("Amount")).toHaveValue(21);
   });
 });

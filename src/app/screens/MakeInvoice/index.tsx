@@ -113,7 +113,7 @@ function MakeInvoice() {
                   <div className="mb-4">
                     <DualCurrencyField
                       id="amount"
-                      label={t("amount.label")}
+                      label={tCommon("amount")}
                       min={invoiceAttributes.minimumAmount}
                       max={invoiceAttributes.maximumAmount}
                       value={valueSat}

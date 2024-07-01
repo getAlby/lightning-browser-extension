@@ -64,7 +64,7 @@ describe("MakeInvoice", () => {
       );
     });
 
-    expect(await screen.findByLabelText("Amount (Satoshi)")).toHaveValue(21);
+    expect(await screen.findByLabelText("Amount")).toHaveValue(21);
     expect(await screen.findByLabelText("Memo")).toHaveValue("Test memo");
     expect(screen.getByText(/~\$0.01/)).toBeInTheDocument();
   });

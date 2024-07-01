@@ -103,7 +103,7 @@ export default function DualCurrencyField({
   );
 
   const setUseFiatAsMain = useCallback(
-    async (useFiatAsMain: boolean) => {
+    async (useFiatAsMain: boolean, recalculateValue: boolean = true) => {
       if (!showFiat) useFiatAsMain = false;
       const userCurrency = settings?.currency || "BTC";
       const rate = await getCurrencyRate();
@@ -124,12 +124,13 @@ export default function DualCurrencyField({
         );
       }
 
-      const newValue = useFiatAsMain
-        ? Math.round(Number(inputValue) * rate * 100) / 100.0
-        : Math.round(Number(inputValue) / rate);
-
       _setUseFiatAsMain(useFiatAsMain);
-      setInputValue(newValue);
+      if (recalculateValue) {
+        const newValue = useFiatAsMain
+          ? Math.round(Number(inputValue) * rate * 100) / 100.0
+          : Math.round(Number(inputValue) / rate);
+        setInputValue(newValue);
+      }
       setInputPrefix(getCurrencySymbol(useFiatAsMain ? userCurrency : "BTC"));
       if (!placeholder) {
         setInputPlaceHolder(
@@ -183,7 +184,10 @@ export default function DualCurrencyField({
   // default to fiat when account currency is set to anything other than BTC
   useEffect(() => {
     if (!initialized.current) {
-      setUseFiatAsMain(!!(account?.currency && account?.currency !== "BTC"));
+      const initializeFiatMain = !!(
+        account?.currency && account?.currency !== "BTC"
+      );
+      setUseFiatAsMain(initializeFiatMain, initializeFiatMain);
       initialized.current = true;
     }
   }, [account?.currency, setUseFiatAsMain]);

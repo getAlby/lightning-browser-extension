@@ -116,7 +116,7 @@ function Keysend() {
                 />
                 <DualCurrencyField
                   id="amount"
-                  label={t("amount.label")}
+                  label={tCommon("amount")}
                   min={1}
                   value={amountSat}
                   showFiat={showFiat}
