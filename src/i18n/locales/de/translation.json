@@ -468,7 +468,8 @@
             "success": "Der private Schlüssel von Nostr wurde erfolgreich verschlüsselt und gespeichert.",
             "successfully_removed": "Der private Schlüssel von Nostr wurde erfolgreich entfernt.",
             "label": "Nostr Privater Schlüssel",
-            "failed_to_remove": "Der eingegebene Kontoname stimmt nicht überein, dein alter privater Nostr-Schlüssel wurde wiederhergestellt."
+            "failed_to_remove": "Der eingegebene Kontoname stimmt nicht überein, dein alter privater Nostr-Schlüssel wurde wiederhergestellt.",
+            "warning": "Bist du dir sicher, dass du deinen privaten nostr-Schlüssel entfernen möchten?\n\nGebe \"{{Name}}\" zur Bestätigung ein:"
           },
           "public_key": {
             "label": "Nostr Öffentlicher Schlüssel"
@@ -529,7 +530,8 @@
         "remove": {
           "error": "Der eingegebene Kontoname stimmte nicht überein.",
           "subtitle": "Alle verknüpften Zertifikate werden gelöscht. Bitte sei dir sicher.",
-          "title": "Diese Wallet entfernen"
+          "title": "Diese Wallet entfernen",
+          "confirm": "Bist du dir sicher, dass du deine Wallet entfernen willst?\n\n⚠️ Wenn du fortfährst, werden alle zugehörigen Schlüssel (Master Key, Nostr, etc.) gelöscht. Bitte vergewisserne dich, dass du eine Sicherungskopie erstellt hast, denn es gibt keine andere Möglichkeit, sie wiederherzustellen.\n\n\nGebe \"{{Name}}\" zur Bestätigung ein:"
         },
         "actions": {
           "export": "Exportieren",
@@ -597,7 +599,8 @@
         "remove_secretkey": {
           "title": "Hauptschlüssel entfernen",
           "success": "Der Hauptschlüssel wurde erfolgreich entfernt.",
-          "subtitle": "Entfernt den Hauptschlüssel aus dieser Wallet."
+          "subtitle": "Entfernt den Hauptschlüssel aus dieser Wallet.",
+          "confirm": "Bist du dir sicher, dass du deinen Hauptschlüssel entfernen möchten?\n\nGebe zur Bestätigung \"{{ Name }}\" ein:"
         },
         "network": {
           "options": {
@@ -805,6 +808,18 @@
         "unknown": {
           "description": "Nicht identifizierte Aktion",
           "title": "Art {{kind}}"
+        },
+        "10000": {
+          "title": "Stummschaltungsliste",
+          "description": "Blockiert Spammer und schlechte Schauspieler aus deinem Feed"
+        },
+        "10003": {
+          "description": "Lesezeichen für Benutzerbeiträge",
+          "title": "Lesezeichen"
+        },
+        "27235": {
+          "title": "HTTP-Authentifizierung",
+          "description": "HTTP Authentifizierung"
         }
       },
       "allow": "Erlaube {{Herausgeber}} zu {{Aktion}}"
