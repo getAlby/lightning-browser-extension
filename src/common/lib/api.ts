@@ -47,7 +47,13 @@ export interface AccountInfoRes {
   connectorType: ConnectorType;
   balance: { balance: string | number; currency: ACCOUNT_CURRENCIES };
   currentAccountId: string;
-  info: { alias: string; pubkey?: string; lightning_address?: string };
+  info: {
+    nostr_pubkey?: string;
+    alias: string;
+    pubkey?: string;
+    lightning_address?: string;
+    node_required?: boolean;
+  };
   name: string;
   avatarUrl?: string;
 }
@@ -57,6 +63,7 @@ export interface GetAccountRes extends Pick<Account, "id" | "name"> {
   liquidEnabled: boolean;
   nostrEnabled: boolean;
   hasMnemonic: boolean;
+  isMnemonicBackupDone: boolean;
   hasImportedNostrKey: boolean;
   bitcoinNetwork: BitcoinNetworkType;
   useMnemonicForLnurlAuth: boolean;
@@ -113,6 +120,7 @@ export const swrGetAccountInfo = async (
           currency: currency || "BTC", // set default currency for every account
           avatarUrl,
           lightningAddress: response.info.lightning_address,
+          nodeRequired: response.info.node_required,
         };
         storeAccounts({
           ...accountsCache,

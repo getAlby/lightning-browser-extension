@@ -1,10 +1,7 @@
 {
   "translation": {
     "welcome": {
-      "title": "Velkommen til Alby",
       "set_password": {
-        "title": "Angiv en nøglekode",
-        "description": "Dette kodeord bruges til at beskytte din wallet og giver adgang til browserudvidelsen. Det kan ikke nulstilles, og er ikke den samme som adgangskoden til din Alby-konto.",
         "choose_password": {
           "label": "Vælg en nøglekode:"
         },
@@ -78,10 +75,6 @@
       },
       "lnc": {
         "title": "LND med LNC",
-        "page": {
-          "title": "Opret forbindelse til din LND-node",
-          "description": "Start en ny session i terminal (litd) for at få en ny forbindelseskode, og skriv den her"
-        },
         "pairing_phrase": {
           "label": "Din forbindelseskode ",
           "placeholder": "hemmelig kode til sats-samlingen"
@@ -205,13 +198,8 @@
       },
       "btcpay": {
         "title": "BTCPay Server",
-        "page": {
-          "title": "Opret forbindelse til din BTCPay LND-node",
-          "instructions": "Gå til din BTCPayServer og log på som administrator. Gå til Server Settings > Services > LND Rest - See information. Klik så på \"See QR Code information\" og kopier QR-kodens data. Indsæt dem herunder:"
-        },
         "config": {
-          "label": "Konfigurationsoplysninger",
-          "placeholder": "config=https://din-btc-pay.org/lnd-config/212121/lnd.config"
+          "label": "Konfigurationsoplysninger"
         },
         "errors": {
           "connection_failed": "Forbindelsen kunne ikke oprettes. Er BTCPay-forbindelsens URL korrekt og tilgængelig?"
@@ -255,25 +243,18 @@
         "send_satoshis": "⚡️ Send Satoshi ⚡️",
         "enable_now": "Aktiver nu"
       },
-      "allowance_view": {
-        "no_transactions": "Endnu ingen transaktioner på <0>{{navn}}</0>."
-      },
       "default_view": {
         "is_blocked_hint": "Alby er i øjeblikket deaktiveret på {{vært}}",
         "block_removed": "{{vært}} blev aktiveret. Indlæs hjemmesiden igen."
       }
     },
     "accounts": {
-      "title": "Konti",
       "account_view": {
-        "title1": "Kontooplysninger",
-        "title2": "Rediger konto",
         "name": {
           "title": "Navn",
           "placeholder": "Kontonavn"
         },
         "export": {
-          "title": "Eksporter konto",
           "screen_reader": "Eksporter kontooplysninger",
           "waiting": "venter på LndHub-data...",
           "your_ln_address": "Din lightningadresse:",
@@ -309,17 +290,9 @@
             "failed_to_load": "Nostr-nøglen kunne ikke anvendes. Er det en gyldig Nostr-nøgle?"
           }
         },
-        "remove": {
-          "title": "Fjern denne konto",
-          "subtitle": "Alle de tilknyttede puljer bliver slettet. Du skal være helt sikker."
-        },
         "actions": {
-          "remove_account": "Fjern konto",
           "export": "Eksporter"
         }
-      },
-      "actions": {
-        "add_account": "Tilføj konto"
       }
     },
     "unlock": {
@@ -338,7 +311,6 @@
       }
     },
     "settings": {
-      "title": "Indstillinger",
       "browser_notifications": {
         "title": "Browsermeddelelser",
         "subtitle": "Meddelelser om betaling og godkendelser."
@@ -346,18 +318,6 @@
       "website_enhancements": {
         "title": "Ekstra hjemmesidefunktioner",
         "subtitle": "Donationer på Twitter, YouTube, etc."
-      },
-      "lnurl_auth": {
-        "title": "LNURL-Auth",
-        "hint": "er en generisk autentifikationsprotokol. Den autentificerer brugeren med digital signatur. Protokollen kræver ikke andre autentifikationsoplysninger som fx adgangskode, e-mail, brugernavn eller lignende. Med Alby kan du bruge dine lightning-konti til at logge sikkert ind på hjemmesider. For at blive kompatible med andre wallets måtte vi ændre et par ting, som du kan konfigurere her. <0>Disse indstillinger skal helst slås fra.</0> Brug dem kun, hvis du har gamle konti.",
-        "legacy_lnurl_auth_202207": {
-          "title": "Gamle LNURL-Auth",
-          "subtitle": "Generering af nøgle med LNURL-auth er ændret (juli 2022). Alby var ikke kompatibel med andre implementeringer. Dette blev ændret, men nu bruges der andre nøgler til at logge ind. Hvis du tidligere brugte LNURL-auth til at logge ind, kan du fortsat aktivere den gamle metode. Denne mulighed vil blive fjernet, husk at skifte til det nye log ind."
-        },
-        "legacy_lnurl_auth": {
-          "title": "Forældet signatur til LNDhub and LNbits",
-          "subtitle": "Signatur og log ind med LNDhub (fx BlueWallet) og LNBits-konti er blevet ændret (marts 2022). Hvis du loggede ind med disse konti, kan du fortsat aktivere den gamle signatur-metode. Denne mulighed vil blive fjernet, husk at skifte til det nye log ind."
-        }
       },
       "camera_access": {
         "title": "Adgang til kamera",
@@ -423,15 +383,6 @@
           "mismatched_password": "Koderne er forskellige."
         },
         "success": "Koden blev ændret"
-      },
-      "nostr": {
-        "title": "Nostr",
-        "hint": "er en enkel og åben protokol, der bruges til at skabe u-censorerbare sociale netværk. Nostr anvender kryptografisk kode. Når du publicerer noget, underskriver du det med din nøgle, og sender det til flere netværksrelæer. Du kan bruge Alby til opbevaring af din Nostr-nøgle. Mange Nostr-applikationer vil derefter lade dig bruge nøglen direkte fra Alby.",
-        "private_key": {
-          "title": "Privat nøgle",
-          "subtitle": "Dette afsnit blev flyttet til kontosiden, da nøgler nu er kontospecifikke.",
-          "go_to": "Gå til konti"
-        }
       }
     },
     "send": {
@@ -503,31 +454,6 @@
         "status": "Tjek betalingsstatus"
       }
     },
-    "discover": {
-      "title": "Udforsk Lightnings ⚡️ økosystem",
-      "description": "Hjemmesider og web-apps hvor Alby kan bruges",
-      "list": {
-        "trading": "Handel",
-        "gaming": "Spil",
-        "entertainment": "Underholdning",
-        "shopping": "Indkøb",
-        "miscellaneous": "Diverse",
-        "showcases": "Eksempler",
-        "nostr": "Nostr"
-      },
-      "tips": {
-        "title": "Din Alby-wallet er klar",
-        "description": "Et par råd der får dig på vingerne🐝",
-        "top_up_wallet": {
-          "title": "⚡️ Fyld din wallet op",
-          "description": "Generer en lightning-faktura, send lidt bitcoin til dig selv og begynd at bruge Alby i lightnings økosystem"
-        },
-        "demo": {
-          "title": "🕹️ Få en prøvetur med Alby",
-          "description": "Se alle de ting, du kan med Alby på vores præsentationsside"
-        }
-      }
-    },
     "publishers": {
       "title": "Dine ⚡ hjemmesider",
       "description": "Hjemmesider, hvor du tidligere har brugt Alby",
@@ -588,9 +514,7 @@
     },
     "nostr": {
       "title": "Nostr",
-      "allow": "Tillad denne hjemmeside at:",
       "content": "Denne hjemmeside beder dig underskrive:",
-      "allow_sign": "Tillad {{vært}} at underskrive:",
       "block_and_ignore": "Bloker og ignorer {{vært}}",
       "block_added": "{{vært}} blev føjet til blokeringslisten, indlæs hjemmesiden igen."
     }
@@ -598,10 +522,8 @@
   "common": {
     "password": "Adgangskode",
     "confirm_password": "Bekræft adgangskode",
-    "advanced": "Avanceret",
     "success": "Succes",
     "error": "Fejl",
-    "settings": "Indstillinger",
     "accounts": "Konti",
     "discover": "Opdag",
     "connected_sites": "",
@@ -661,8 +583,7 @@
       "edit_allowance": {
         "title": "Rediger pulje",
         "screen_reader": "Indstillinger for pulje"
-      },
-      "edit_permissions": "Rediger tilladelser"
+      }
     },
     "qrcode_scanner": {
       "title": "Skan QR-kode",
@@ -711,14 +632,7 @@
       }
     },
     "account_menu": {
-      "screen_reader": "Skift drop-down",
-      "title": "Skift konto",
-      "options": {
-        "account": {
-          "add": "Tilføj en ny konto",
-          "manage": "Administrer konti"
-        }
-      }
+      "screen_reader": "Skift drop-down"
     },
     "publishers_table": {
       "payments": "betalinger"
@@ -730,12 +644,6 @@
     }
   },
   "permissions": {
-    "nostr": {
-      "getpublickey": "Læs din offentlige nøgle",
-      "nip04encrypt": "Krypter data",
-      "nip04decrypt": "De-krypter data",
-      "signmessage": "Underskriv meddelelse med din nøgle"
-    },
     "commando": {
       "bkpr-listbalances": "Liste over alle nuværende og tidligere kontosaldi",
       "checkmessage": "Verificer, at signaturen blev genereret af en bestemt node",

@@ -2,6 +2,10 @@ import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
 import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
+import {
+  PopiconsChevronBottomLine,
+  PopiconsChevronTopLine,
+} from "@popicons/react";
 import { TFunction } from "i18next";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -110,10 +114,16 @@ function ConfirmSignPsbt() {
                 {t("allow_sign", { host: origin.host })}
               </h2>
             </div>
-            <div className="flex w-full justify-center">
-              <Hyperlink onClick={toggleShowAddresses}>
-                {showAddresses ? t("hide_details") : t("view_details")}
-              </Hyperlink>
+            <div
+              className="flex w-full justify-center items-center"
+              onClick={toggleShowAddresses}
+            >
+              {tCommon("details")}
+              {showAddresses ? (
+                <PopiconsChevronTopLine className="h-4 w-4 inline-flex" />
+              ) : (
+                <PopiconsChevronBottomLine className="h-4 w-4 inline-flex" />
+              )}
             </div>
 
             {showAddresses && (
@@ -178,7 +188,7 @@ function AddressPreview({
   amount,
   t,
 }: Address & {
-  t: TFunction<"translation", "bitcoin.confirm_sign_psbt", "translation">;
+  t: TFunction<"translation", "bitcoin.confirm_sign_psbt">;
 }) {
   const { getFormattedSats } = useSettings();
   return (

@@ -1,15 +1,14 @@
-import { CaretLeftIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import Header from "@components/Header";
 import IconButton from "@components/IconButton";
-import Loading from "@components/Loading";
 import Progressbar from "@components/Progressbar";
 import PublisherCard from "@components/PublisherCard";
 import SitePreferences from "@components/SitePreferences";
 import TransactionsTable from "@components/TransactionsTable";
+import { PopiconsChevronLeftLine } from "@popicons/react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { FC, useEffect, useState } from "react";
-import { Trans, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import toast from "~/app/components/Toast";
 import { useSettings } from "~/app/context/SettingsContext";
 import { PublisherLnData } from "~/app/screens/Home/PublisherLnData";
@@ -40,7 +39,6 @@ const AllowanceView: FC<Props> = (props) => {
   const { t } = useTranslation("translation", { keyPrefix: "home" });
 
   const showFiat = !isLoadingSettings && settings.showFiat;
-  const hasTransactions = !isLoadingTransactions && !!transactions?.length;
 
   // get array of payments if not done yet
   useEffect(() => {
@@ -83,7 +81,7 @@ const AllowanceView: FC<Props> = (props) => {
         headerLeft={
           <IconButton
             onClick={props.onGoBack}
-            icon={<CaretLeftIcon className="w-4 h-4" />}
+            icon={<PopiconsChevronLeftLine className="w-5 h-5" />}
           />
         }
       >
@@ -139,26 +137,10 @@ const AllowanceView: FC<Props> = (props) => {
             />
           </div>
         )}
-
-        {isLoadingTransactions && (
-          <div className="flex justify-center">
-            <Loading />
-          </div>
-        )}
-
-        {hasTransactions && <TransactionsTable transactions={transactions} />}
-
-        {!isLoadingTransactions && !transactions?.length && (
-          <p className="text-gray-500 dark:text-neutral-400 text-center">
-            <Trans
-              i18nKey={"allowance_view.no_transactions"}
-              t={t}
-              values={{ name: props.allowance.name }}
-              // eslint-disable-next-line react/jsx-key
-              components={[<strong></strong>]}
-            />
-          </p>
-        )}
+        <TransactionsTable
+          loading={isLoadingTransactions}
+          transactions={transactions}
+        />
       </div>
     </div>
   );

@@ -1,10 +1,7 @@
 {
   "translation": {
     "welcome": {
-      "title": "Bine ai venit la Alby",
       "set_password": {
-        "title": "Seteaza o parola pentru deblocare",
-        "description": "Aceasta parola este folosita pentru a proteja portofelul tau si pentru a permite accesul la extensia de browser. Aceasta parola nu poate fi resetata si este separata de parola contului Alby.",
         "choose_password": {
           "label": "Alege o parola pentru deblocare:"
         },
@@ -78,10 +75,6 @@
       },
       "lnc": {
         "title": "LND cu LNC",
-        "page": {
-          "title": "Conecteaza-te la nodul tau LND",
-          "description": "Creeaza o sesiune noua in terminal (litd) pentru a obtine o noua fraza de imperechere si introdu-o aici"
-        },
         "pairing_phrase": {
           "label": "Fraza ta de imperechere. ",
           "placeholder": "fraza ta secreta pentru acumulare de sats"
@@ -205,13 +198,8 @@
       },
       "btcpay": {
         "title": "Serverul BTCPay",
-        "page": {
-          "title": "Conectare la nodul LND BTCPay",
-          "instructions": "Navigheaza la serverul tau BTCPay si logheaza-te ca administrator. Acceseaza Server Settings > Services > LND Rest - See information. Apoi apasa pe \"See QR Code information\" si copiaza datele codului QR. Insereaza-le mai jos:"
-        },
         "config": {
-          "label": "Date de configurare",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
+          "label": "Date de configurare"
         },
         "errors": {
           "connection_failed": "Conexiune esuata. URL-ul conexiunii BTCPay este corect si accesibil?"
@@ -255,25 +243,18 @@
         "send_satoshis": "⚡️ Trimite Satoshi ⚡️",
         "enable_now": "Activeaza acum"
       },
-      "allowance_view": {
-        "no_transactions": "Nicio tranzactie pentru <0>{{nume}}</0> inca."
-      },
       "default_view": {
         "is_blocked_hint": "Momentan, Alby este dezactivat pentru {{host}}",
         "block_removed": "{{host}} activat. Te rugam sa reincarci website-ul."
       }
     },
     "accounts": {
-      "title": "Conturi",
       "account_view": {
-        "title1": "Informatii cont",
-        "title2": "Editeaza cont",
         "name": {
           "title": "Nume",
           "placeholder": "Nume cont"
         },
         "export": {
-          "title": "Exporta cont",
           "screen_reader": "Exporta date cont",
           "waiting": "in asteptarea datelor LNDHub...",
           "your_ln_address": "Adresa ta Lightning:",
@@ -310,17 +291,9 @@
             "failed_to_load": ""
           }
         },
-        "remove": {
-          "title": "",
-          "subtitle": ""
-        },
         "actions": {
-          "remove_account": "",
           "export": ""
         }
-      },
-      "actions": {
-        "add_account": ""
       }
     },
     "unlock": {
@@ -339,7 +312,6 @@
       }
     },
     "settings": {
-      "title": "",
       "browser_notifications": {
         "title": "",
         "subtitle": ""
@@ -347,18 +319,6 @@
       "website_enhancements": {
         "title": "",
         "subtitle": ""
-      },
-      "lnurl_auth": {
-        "title": "",
-        "hint": "",
-        "legacy_lnurl_auth_202207": {
-          "title": "",
-          "subtitle": ""
-        },
-        "legacy_lnurl_auth": {
-          "title": "",
-          "subtitle": ""
-        }
       },
       "camera_access": {
         "title": "",
@@ -424,15 +384,6 @@
           "mismatched_password": ""
         },
         "success": ""
-      },
-      "nostr": {
-        "title": "",
-        "hint": "",
-        "private_key": {
-          "title": "",
-          "subtitle": "",
-          "go_to": ""
-        }
       }
     },
     "send": {
@@ -504,31 +455,6 @@
         "status": ""
       }
     },
-    "discover": {
-      "title": "",
-      "description": "",
-      "list": {
-        "trading": "",
-        "gaming": "",
-        "entertainment": "",
-        "shopping": "",
-        "miscellaneous": "",
-        "showcases": "",
-        "nostr": ""
-      },
-      "tips": {
-        "title": "",
-        "description": "",
-        "top_up_wallet": {
-          "title": "",
-          "description": ""
-        },
-        "demo": {
-          "title": "",
-          "description": ""
-        }
-      }
-    },
     "publishers": {
       "title": "",
       "description": "",
@@ -589,9 +515,7 @@
     },
     "nostr": {
       "title": "",
-      "allow": "",
       "content": "",
-      "allow_sign": "",
       "block_and_ignore": "",
       "block_added": ""
     }
@@ -599,10 +523,8 @@
   "common": {
     "password": "",
     "confirm_password": "",
-    "advanced": "",
     "success": "",
     "error": "",
-    "settings": "",
     "accounts": "",
     "discover": "",
     "connected_sites": "",
@@ -661,8 +583,7 @@
       "edit_allowance": {
         "title": "",
         "screen_reader": ""
-      },
-      "edit_permissions": ""
+      }
     },
     "qrcode_scanner": {
       "title": "",
@@ -711,14 +632,7 @@
       }
     },
     "account_menu": {
-      "screen_reader": "",
-      "title": "",
-      "options": {
-        "account": {
-          "add": "",
-          "manage": ""
-        }
-      }
+      "screen_reader": ""
     },
     "publishers_table": {
       "payments": ""

@@ -1,10 +1,10 @@
-import { CaretLeftIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import Button from "@components/Button";
 import Container from "@components/Container";
 import Header from "@components/Header";
 import IconButton from "@components/IconButton";
 import TextField from "@components/form/TextField";
-import lightningPayReq from "bolt11";
+import { PopiconsChevronLeftLine } from "@popicons/react";
+import lightningPayReq from "bolt11-signet";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -120,7 +120,7 @@ function Send() {
         headerLeft={
           <IconButton
             onClick={() => navigate(-1)}
-            icon={<CaretLeftIcon className="w-4 h-4" />}
+            icon={<PopiconsChevronLeftLine className="w-5 h-5" />}
           />
         }
       >

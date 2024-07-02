@@ -1,7 +1,3 @@
-import {
-  CaretLeftIcon,
-  CopyIcon,
-} from "@bitcoin-design/bitcoin-icons-react/outline";
 import Button from "@components/Button";
 import Container from "@components/Container";
 import Header from "@components/Header";
@@ -9,6 +5,7 @@ import IconButton from "@components/IconButton";
 import Loading from "@components/Loading";
 import DualCurrencyField from "@components/form/DualCurrencyField";
 import TextField from "@components/form/TextField";
+import { PopiconsChevronLeftLine, PopiconsCopyLine } from "@popicons/react";
 import { useEffect, useRef, useState } from "react";
 import Confetti from "react-confetti";
 import { useTranslation } from "react-i18next";
@@ -161,7 +158,7 @@ function ReceiveInvoice() {
                     }
                   }
                 }}
-                icon={<CopyIcon className="w-6 h-6 mr-2" />}
+                icon={<PopiconsCopyLine className="w-6 h-6 mr-2" />}
                 label={tCommon("actions.copy_invoice")}
                 primary
               />
@@ -221,7 +218,7 @@ function ReceiveInvoice() {
             onClick={() => {
               invoice ? setDefaults() : navigate(-1);
             }}
-            icon={<CaretLeftIcon className="w-4 h-4" />}
+            icon={<PopiconsChevronLeftLine className="w-5 h-5" />}
           />
         }
       >

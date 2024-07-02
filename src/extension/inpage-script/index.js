@@ -13,12 +13,7 @@ function init() {
   window.nostr = new NostrProvider();
   window.webbtc = new WebBTCProvider();
   window.webln = new WebLNProvider();
-  window.alby = new AlbyProvider(
-    window.liquid,
-    window.nostr,
-    window.webbtc,
-    window.webln
-  );
+  window.alby = new AlbyProvider();
   const readyEvent = new Event("webln:ready");
   window.dispatchEvent(readyEvent);
 

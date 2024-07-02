@@ -2,8 +2,6 @@
   "translation": {
     "welcome": {
       "set_password": {
-        "title": "Aseta lukituksen avaussalasana",
-        "description": "Lightning-tilisi tiedot on salattu turvallisesti salasanan avulla. Älä unohda tätä salasanaa! Tarvitset sitä avataksesi Alby-laajennuksen lukituksen (tässä selaimessa)",
         "choose_password": {
           "label": "Valitse lukituksen avaamissalasana:"
         },
@@ -166,13 +164,8 @@
       },
       "btcpay": {
         "title": "BTCPay-palvelin",
-        "page": {
-          "title": "Yhdistä BTCPay LND -solmuusi",
-          "instructions": "Siirry BTCPayServerillesi ja kirjaudu sisään järjestelmänvalvojana. Siirry kohtaan Palvelinasetukset > Palvelut > LND Rest - Katso tiedot. Napsauta sitten \"Katso QR-koodin tiedot\" ja kopioi QR-koodin tiedot. Liitä se alle:"
-        },
         "config": {
-          "label": "Konfigurointitiedot",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
+          "label": "Konfigurointitiedot"
         },
         "errors": {
           "connection_failed": "Yhteys epäonnistui. Onko BTCPay-yhteyden URL-osoite oikea ja saatavilla?"
@@ -216,17 +209,8 @@
         "send_satoshis": "⚡️ Lähetä Satoshis ⚡️",
         "enable_now": "Ota nyt käyttöön"
       },
-      "allowance_view": {
-        "no_transactions": "Ei vielä tapahtumia <0>{{name}}</0>:lla."
-      },
       "default_view": {
         "is_blocked_hint": "Alby on tällä hetkellä poissa käytöstä {{host}}:lla"
-      }
-    },
-    "accounts": {
-      "title": "Tilit",
-      "actions": {
-        "add_account": "Lisää tili"
       }
     },
     "unlock": {
@@ -245,7 +229,6 @@
       }
     },
     "settings": {
-      "title": "Asetukset",
       "browser_notifications": {
         "title": "Selaimen ilmoitukset",
         "subtitle": "Maksuihin ja todentamiseen liittyvät ilmoitukset."
@@ -253,18 +236,6 @@
       "website_enhancements": {
         "title": "Verkkosivuston parannukset",
         "subtitle": "Vinkkien parannuksia Twitterissä, YouTubessa jne."
-      },
-      "lnurl_auth": {
-        "title": "LNURL-Auth",
-        "hint": "on yleinen todennusprotokolla. Se tunnistaa käyttäjän digitaalisten allekirjoitusten avulla. Protokolla ei vaadi muita tunnistetietoja, kuten salasanoja, sähköposteja, käyttäjätunnuksia tai vastaavia. Albyn avulla voit käyttää Lightning-tilejäsi kirjautuaksesi turvallisesti verkkosivustoille. Ollaksemme yhteensopiva muiden lompakoiden kanssa, meidän piti tehdä muutamia muutoksia, jotka voit määrittää täällä. <0>Ihannetapauksessa kaikki nämä vaihtoehdot ovat Pois päältä.</0> Käytä niitä vain, jos sinulla on vanhoja tilejä.",
-        "legacy_lnurl_auth_202207": {
-          "title": "Vanha LNURL-Auth",
-          "subtitle": "Avainten luonti LNURL-Authia varten on muuttunut (heinäkuu 2022). Alby ei ollut yhteensopiva muiden toteutusten kanssa. Tätä muutettiin, mutta nyt käytetään erilaisia kirjautumisavaimia. Jos käytit kirjautumiseen LNURL-Authia, ennen kuin voit silti ottaa vanhan menetelmän käyttöön. Tämä vaihtoehto poistetaan myöhemmin, muista vaihtaa uuteen kirjautumistunnukseen."
-        },
-        "legacy_lnurl_auth": {
-          "title": "Vanha allekirjoitus LNDhubille ja LNbitsille",
-          "subtitle": "Viestien allekirjoitus ja sisäänkirjautuminen LNDhub- (esim. BlueWallet (sinilompakko)- ja LNbits-tilillä on muutettu (maaliskuu 2022). Jos kirjauduit sisään näillä tileillä, voit silti ottaa vanhan allekirjoitustavan käyttöön. Tämä vaihtoehto poistetaan myöhemmin, muista vaihtaa uuteen kirjautumistunnukseen."
-        }
       },
       "camera_access": {
         "title": "Kameran käyttöoikeus",
@@ -327,14 +298,6 @@
           "mismatched_password": "Salasanat eivät täsmää."
         },
         "success": "Salasana vaihdettu onnistuneesti"
-      },
-      "nostr": {
-        "title": "Nostr",
-        "hint": "on yksinkertainen ja avoin protokolla, jonka tarkoituksena on luoda sensuurin kestäviä sosiaalisia verkostoja. Nostr toimii kryptografisten avainten kanssa. Jos haluat julkaista jotain, allekirjoita se avaimellasi ja lähetä se useille välittäjille. Voit käyttää Albyä Nostr-avaimen hallintaan. Monet Nostr-sovellukset sallivat sitten yksinkertaisesti käyttää avainta Alby-laajennuksesta.",
-        "private_key": {
-          "title": "Yksityinen avain",
-          "subtitle": "Avaimen luominen luo uuden avaimen nykyisen käyttämäsi tilin perusteella. Varmista, että varmuuskopioit tämän yksityisen avaimen."
-        }
       }
     },
     "send": {
@@ -462,16 +425,13 @@
     },
     "nostr": {
       "title": "Nostr",
-      "allow": "Salli {{host}}:",
       "block_and_ignore": "Estä ja jätä huomiotta {{host}}"
     }
   },
   "common": {
     "password": "Salasana",
-    "advanced": "Edistynyt",
     "success": "Menestys",
     "error": "Virhe",
-    "settings": "Asetukset",
     "sats_one": "sat",
     "sats_other": "satia",
     "loading": "ladataan",
@@ -572,14 +532,7 @@
       }
     },
     "account_menu": {
-      "screen_reader": "Vaihda pudotusvalikko",
-      "title": "Vaihda tili",
-      "options": {
-        "account": {
-          "add": "Lisää uusi tili",
-          "manage": "Hallitse tilejä"
-        }
-      }
+      "screen_reader": "Vaihda pudotusvalikko"
     },
     "publishers_table": {
       "payments": "maksut"

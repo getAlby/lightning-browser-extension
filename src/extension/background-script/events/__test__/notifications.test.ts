@@ -21,8 +21,6 @@ const settings: SettingsStorage = {
   browserNotifications: true,
   currency: CURRENCIES["USD"],
   exchange: "coindesk",
-  isUsingLegacyLnurlAuthKey: false,
-  legacyLnurlAuth: false,
   locale: "en",
   showFiat: true,
   theme: "",
@@ -30,7 +28,6 @@ const settings: SettingsStorage = {
   userName: "",
   websiteEnhancements: true,
   nostrEnabled: false,
-  closedTips: [],
 };
 
 const mockState = {

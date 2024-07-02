@@ -13,7 +13,6 @@ import MnemonicInputs from "~/app/components/mnemonic/MnemonicInputs";
 import api from "~/common/lib/api";
 
 function ImportMnemonic() {
-  const { t: tCommon } = useTranslation("common");
   const navigate = useNavigate();
   const { t } = useTranslation("translation", {
     keyPrefix: "accounts.account_view.mnemonic",
@@ -30,11 +29,6 @@ function ImportMnemonic() {
       try {
         const account = await api.getAccount(id);
         setHasNostrPrivateKey(account.nostrEnabled);
-        if (account.hasMnemonic) {
-          // do not allow user to import a mnemonic if they already have one for the current account
-          // go to account settings
-          navigate(`/accounts/${id}`);
-        }
         setHasFetchedData(true);
       } catch (e) {
         console.error(e);
@@ -42,11 +36,6 @@ function ImportMnemonic() {
       }
     })();
   }, [id, navigate]);
-
-  function cancelImport() {
-    // go to account settings
-    navigate(`/accounts/${id}`);
-  }
 
   async function importKey() {
     try {
@@ -58,7 +47,10 @@ function ImportMnemonic() {
       }
 
       await api.setMnemonic(id, mnemonic);
-      await api.editAccount(id, { useMnemonicForLnurlAuth: true });
+      await api.editAccount(id, {
+        useMnemonicForLnurlAuth: true,
+        isMnemonicBackupDone: true,
+      });
       toast.success(t("saved"));
       // go to account settings
       navigate(`/accounts/${id}`);
@@ -73,24 +65,23 @@ function ImportMnemonic() {
     </div>
   ) : (
     <div>
-      <Container>
+      <Container maxWidth="md">
         <ContentBox>
           <h1 className="font-bold text-2xl dark:text-white">
             {t("import.title")}
           </h1>
-          <p className="text-gray-500 dark:text-neutral-500 -mt-2 mb-4">
+          <p className="text-gray-600 dark:text-neutral-400">
             {t("import.description")}
           </p>
           {hasNostrPrivateKey && (
             <Alert type="info">{t("existing_nostr_key_notice")}</Alert>
           )}
           <MnemonicInputs mnemonic={mnemonic} setMnemonic={setMnemonic} />
-        </ContentBox>
 
-        <div className="flex justify-center my-6 gap-4">
-          <Button label={tCommon("actions.cancel")} onClick={cancelImport} />
-          <Button label={t("import.button")} primary onClick={importKey} />
-        </div>
+          <div className="flex justify-center">
+            <Button label={t("import.button")} primary onClick={importKey} />
+          </div>
+        </ContentBox>
       </Container>
     </div>
   );

@@ -13,7 +13,7 @@ function BalanceBox({ className }: Props) {
   return (
     <div
       className={classNames(
-        "w-full flex flex-col items-center justify-center dark:text-white p-4",
+        "w-full flex flex-col items-center justify-center dark:text-white mt-4",
         className ?? ""
       )}
     >

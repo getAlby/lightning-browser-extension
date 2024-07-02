@@ -12,9 +12,7 @@
           "enter_password": "Mohon masukan kode sandi.",
           "confirm_password": "Mohon konfirmasi kode sandi Anda.",
           "mismatched_password": "Kode sandi tidak sama."
-        },
-        "description": "Kode sandi ini dapat digunakan untuk membuka Alby pada perangkat ini. Ini tidak dapat dipulihkan, tetapi bisa diganti.",
-        "title": "Atur kode sandi"
+        }
       },
       "test_connection": {
         "initializing": "Menginisialisasi akun Anda. Mohon tunggu, ini mungkin akan memakan waktu beberapa menit...",
@@ -31,8 +29,7 @@
         "description": "Kamu hampir samapi. Untuk menggunakan Alby dengan mudah, kamu dapat pin ekstensi ini pada toolbar browser:",
         "next_btn": "Mulai buzzin' {{icon}} dengan Alby",
         "explanation": "1. Klik pada <0/> di ujung kanan atas browser<1/>2. Cari Alby dan klik untuk mem-pin-nya pada toolbar<1/>3. Selesai. Untuk mengakses Alby, tinggal klik pada<2/> ikon"
-      },
-      "title": "Selamat Datang di Alby"
+      }
     },
     "choose_path": {
       "other": {
@@ -84,10 +81,6 @@
       },
       "lnc": {
         "title": "Lightning Terminal (LNC)",
-        "page": {
-          "title": "Sambungkan node LND kamu",
-          "description": "1. Bukan Lightning Terminal dan Pilih <0>Sambung Lightning Node</0> dari sidebar.<1/> 2. Klik <0>Buat sesi baru</0><1/>3. Masukkan label pada sesi, pilih izin yang dikehendaki dan kirim<1/>4. <0>Salin pairing phrase</0> dan tempel pada bawah ini."
-        },
         "pairing_phrase": {
           "label": "Pairing phrase kamu: ",
           "placeholder": "secret stack sats phrase"
@@ -210,13 +203,8 @@
         }
       },
       "btcpay": {
-        "page": {
-          "title": "Sambungkan dengan node BTCPay LND",
-          "instructions": "Buka BTCPayServer dan masuk sebagai admin. Masuk ke Server Settings > Services > LND Rest - See information. Lalu, klik \"See QR Code information\" dan salin data kode QR. Tempel di bawah ini:"
-        },
         "config": {
-          "label": "Config data",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
+          "label": "Config data"
         },
         "errors": {
           "connection_failed": "Koneksi gagal. Apakah koneksi BTCPay URL sudah benar dan dapat dibuka?"
@@ -286,9 +274,6 @@
         "send_satoshis": "⚡️ Kirim Satoshis ⚡️",
         "enable_now": "Aktifkan Sekarang"
       },
-      "allowance_view": {
-        "no_transactions": "Tidak ada transaksi pada <0>{{name}}</0>."
-      },
       "default_view": {
         "is_blocked_hint": "Alby sedang tidak aktif pada {{host}}",
         "block_removed": "Aktifkan {{host}}. Silakan muat ulang website."
@@ -296,19 +281,16 @@
     },
     "accounts": {
       "account_view": {
-        "title2": "Akun",
         "name": {
           "placeholder": "Tampilan nama akun",
           "title": "Tampilan Nama"
         },
         "export": {
-          "title": "Sambungkan wallet mobile kamu",
           "screen_reader": "Ekspor detail akun",
           "waiting": "Menunggu data LndHub...",
           "your_ln_address": "Alamat Lightning kamu:",
           "export_uri": "LNDHub Credentials URI",
-          "scan_qr": "Impor wallet ini pada Zeus atau BlueWallet dengan memindai kode QR.",
-          "description": "Memungkinkan kamu untuk menghubungkan dan menggunakan akun ini di mobile wallet seperti <0>Blue Wallet</0> dan <1>Zeus</1>."
+          "scan_qr": "Impor wallet ini pada Zeus atau BlueWallet dengan memindai kode QR."
         },
         "mnemonic": {
           "saved": "Kunci Master terenkripsi & tersimpan dengan sukses.",
@@ -316,20 +298,11 @@
           "generate": {
             "title": "Buat Master Key baru",
             "description": "Master Key membuat kamu dapat berinteraksi dengan berbagai protokol seperti, Nostr, layer utama dari Bitcoin atau LNURL-Auth.",
-            "button": "Buat Master Key",
-            "confirm": "Saya telah mencadangkan recovery phrase dari Master Key di tempat yang privat dan aman.",
-            "error_confirm": "Silakan konfirmasi bahwa kamu telah mencadangkan recovery phrase."
+            "button": "Buat Master Key"
           },
           "backup": {
-            "title": "Cadangkan recovery phrase kamu",
             "save": "Simpan Master Key",
             "button": "Lihat recovery phrase",
-            "warning": "⚠️ Jangan lupa untuk mencadangkan recovery phrase! tidak mempunyai cadangannya akan mungkin menyebabkan kehilangan akses secara permanen terhadap Master Key, identitas Nostr atau aset lainnya yang menggunakan kunci ini.",
-            "items": {
-              "recovery_phrase": "Kamu selalu dapat mengakses Master Key dengan menggunakan recovery phrase.",
-              "words": "Recovery phrase merupakan susunan dari 12 kata yang bekerja seperti kata sandi, akan tetapi, jika hilang tidak dapat diubah atau di-reset.",
-              "storage": "Pastikan kamu telah menulisnya secara aman dan privat!"
-            },
             "description": "Tulis recovery phrase untuk dapat memulihkan Master Key di perangkat baru atau ketika kehilangan akses akun kamu.",
             "protocols": {
               "nostr": "Nostr"
@@ -340,21 +313,16 @@
             "button": "Impor Master Key",
             "description": "Gunakan recovery phrase untuk impor Master Key kamu ke Alby."
           },
-          "inputs": {
-            "title": "Recovery Phrase"
-          },
           "lnurl": {
             "title": "Masuk dengan Lightning",
             "use_mnemonic": "Gunakan Master Key untuk masuk pada aplikasi yang telah terintegrasi dengan Lightning (LNURL Auth)"
-          },
-          "title": "🔑 Manajemen Kunci"
+          }
         },
         "nostr": {
           "title": "Nostr",
           "settings": {
             "label": "Pengaturan Nostr",
             "title": "Pengaturan Nostr",
-            "description": "Ambil kunci Nostr dari Master Key atau impor kunci privat dengan memasukkannya pada kolom \"Nostr Private Key\".",
             "imported_key_warning": "⚠️ Saat ini kamu menggunakan kunci Nostr dari proses impor atau yang dibuat secara acak. Kunci privacy Nostr kamu tidak dapat dipulihkan oleh recovery phrase, jadi pastikan kamu telah mencadangkan kunci privat Nostr secara terpisah.",
             "can_restore": "✅ Kunci Nostr diambil dari Master Key kamu",
             "derive": "Ambil dari Master Key",
@@ -366,20 +334,6 @@
               "label": "Buat akun Nostr",
               "description": "Buat Master Key dan sepasang kunci Nostr baru."
             },
-            "import": {
-              "label": "Impor akun Nostr",
-              "description": "Gunakan kunci privat Nostr yang sudah ada atau ambil dari Master Key kamu",
-              "title": "Dengan cara apa kamu mau import akun Nostr?",
-              "private_key": {
-                "label": "Gunakan kunci privat Nostr",
-                "description": "Tempel kunci privat Nostr untuk mengimpornya ke Alby"
-              },
-              "recovery_phrase": {
-                "label": "Gunakan recovery phrase",
-                "description": "Gunakan recovery phrase Master key untuk mengimpor kunci Nostr"
-              }
-            },
-            "new_to_nostr": "Baru tahu tentang Nostr? <0>Pelajari lebih lanjut</0>",
             "title": "Siapkan kunci Nostr kamu",
             "description": "Pilih jika anda mau membuat akun Nostr baru (sepasang kunci privat dan publik) atau impor yang sudah ada.",
             "description2": "setiap akun Nostr yang dibuat dalam Alby, akan mempunyai <0>Recovery Phrase</0> – susunan 12 kata untuk mengakses kembali kunci privat Nostr."
@@ -413,26 +367,17 @@
           "hint": "adalah protokol simpel dan terbuka yang bertujuan untuk membuat jaringan sosial anti penyensoran. Nostr bekerja dengan menggunakan kunci kriptografi. Untuk menerbitkan sesuatu, kamu dapat gunakan kunci dan mengirimnya ke berbagai relay. Kamu dapat menggunakan Alby untuk mengatur kunci Nostr. Berbagai aplikasi Nostr akan dapat menggunakan kunci dari ekstensi Alby."
         },
         "remove": {
-          "title": "Hapus Akun Ini",
-          "subtitle": "Hapus semua allowances, data pembayaran, dan kunci-kunci yang terasosiasi dengan akun ini.",
           "error": "Nama akun yang dimasukkan tidak sama."
         },
         "remove_secretkey": {
           "title": "Hapus Master Key",
-          "subtitle": "Hapus Master Key dari akun ini.",
           "success": "Master Key telah terhapus."
         },
         "actions": {
           "remove_secretkey": "Hapus Master Key",
-          "export": "Expor",
-          "remove_account": "Hapus akun"
-        },
-        "title1": "Pengaturan Akun"
-      },
-      "actions": {
-        "add_account": "Tambah akun"
-      },
-      "title": "Akun-akun"
+          "export": "Expor"
+        }
+      }
     },
     "unlock": {
       "unlock_to_continue": "Buka untuk melanjutkan",
@@ -450,7 +395,6 @@
       }
     },
     "settings": {
-      "title": "Pengaturan",
       "browser_notifications": {
         "title": "Notifikasi peramban",
         "subtitle": "Notifikasi terkait pembayaran dan autentikasi."
@@ -458,16 +402,6 @@
       "website_enhancements": {
         "title": "Tambahan fitur website",
         "subtitle": "Penambahan fitur tip untuk Twitter, YouTube, dll."
-      },
-      "lnurl_auth": {
-        "title": "LNURL-Auth",
-        "legacy_lnurl_auth_202207": {
-          "title": "Legacy LNURL-Auth"
-        },
-        "legacy_lnurl_auth": {
-          "title": "Legacy signing untuk LNDhub dan LNbits"
-        },
-        "hint": "adalah protokol autentikasi generik. Dapat mengautentikasi pengguna menggunakan tanda tangan digital. Protokol ini tidak memerlukan informasi yang dapat mengidentifikasi seperti kata sandi, email, username, atau yang lainnya. Dengan Alby, kamu dapat menggunakan akun lightning untuk login pada suatu website dengan aman. Supaya kompatibel dengan wallet lainnya kami membuat beberapa perubahan yang kamu dapat atur di sini. <0>Seharusnya, semua opsi berikut OFF.</0> Gunakanlah ketika kamu memiliki akun yang lama."
       },
       "camera_access": {
         "title": "Akses kamera",
@@ -526,15 +460,6 @@
           "confirm_password": "Silakan konfirmasi kode sandi."
         },
         "success": "Kode sandi telah terganti dengan sukses"
-      },
-      "nostr": {
-        "title": "Nostr",
-        "hint": "adalah protokol simpel dan terbuka yang bertujuan untuk membuat jaringan sosial anti penyensoran. Nostr bekerja dengan menggunakan kunci kriptografi. Untuk menerbitkan sesuatu, kamu dapat gunakan kunci dan mengirimnya ke berbagai relay. Kamu dapat menggunakan Alby untuk mengatur kunci Nostr. Berbagai aplikasi Nostr akan dapat menggunakan kunci dari ekstensi Alby.",
-        "private_key": {
-          "subtitle": "Seksi ini dipindahkan ke halaman akun karena kunci merupakan hal yang berkaitan dengan akun.",
-          "go_to": "Pergi Ke Akun",
-          "title": "Kunci privat"
-        }
       },
       "name": {
         "title": "Nama",
@@ -620,35 +545,6 @@
     "scan_qrcode": {
       "title": "Menunggu pemindaian"
     },
-    "discover": {
-      "title": "Jelajahi Ekosistem Lightning ⚡️",
-      "description": "Situs Web dan aplikasi Web di mana kamu dapat menggunakan Alby",
-      "list": {
-        "trading": "Perdagangan",
-        "gaming": "Permainan",
-        "nostr": "Nostr",
-        "entertainment": "Hiburan",
-        "shopping": "Berbelanja",
-        "miscellaneous": "Lain-lain",
-        "nodeManagement": "Manajemen Node"
-      },
-      "tips": {
-        "top_up_wallet": {
-          "description": "Perlu top up?\nKami sediakan!",
-          "title": "Beli Bitcoin"
-        },
-        "demo": {
-          "description": "Temukan fitur Alby\ndi situs demo kami",
-          "title": "Demo Alby"
-        },
-        "mnemonic": {
-          "description": "Berencana menggunakan Nostr?\nBuat kunci kamu sekarang.",
-          "title": "Nostr"
-        },
-        "description": "Beberapa tips untuk memulai buzzin'🐝",
-        "title": "Dompet Alby kamu sudah siap"
-      }
-    },
     "publishers": {
       "title": "Website ⚡ Kamu",
       "description": "Situs Web di mana kamu telah menggunakan Alby sebelum",
@@ -707,29 +603,7 @@
     },
     "nostr": {
       "title": "Nostr",
-      "hide_details": "Sembunyikan rincian",
-      "block_and_ignore": "Blok dan abaikan {{host}}",
-      "kinds": {
-        "0": "metadata",
-        "2": "rekomendasi relay",
-        "3": "Kontak",
-        "4": "pesan langsung terenkripsi",
-        "5": "penghapusan event",
-        "7": "Reaksi",
-        "8": "lencana penghargaan",
-        "40": "pembuatan channel",
-        "41": "metadata channel",
-        "42": "pesan channel",
-        "9734": "permintaan zap",
-        "9735": "zap",
-        "10002": "daftar metadata relay",
-        "22242": "autentikasi klien",
-        "24133": "Sambungkan nostr",
-        "30009": "definisi lencana",
-        "30078": "data terkait aplikasi"
-      },
-      "allow": "Izinkan website ini untuk:",
-      "view_details": "Lihat rincian"
+      "block_and_ignore": "Blok dan abaikan {{host}}"
     },
     "on_chain": {
       "title": "Terima melalui alamat bitcoin",
@@ -745,8 +619,7 @@
       "tor_info": "Untuk menghubungkan melalui jaringan TOR kamu perlu memasang aplikasi pendamping Alby:"
     },
     "transactions": {
-      "title": "Transaksi",
-      "list_empty": "Tidak ada transaksi."
+      "title": "Transaksi"
     }
   },
   "components": {
@@ -767,14 +640,10 @@
     "account_menu": {
       "options": {
         "account": {
-          "add": "Tambahkan akun baru",
-          "manage": "Kelola akun",
-          "account_settings": "Pengaturan Akun",
           "go_to_web_wallet": "Atur akun web kamu"
         }
       },
-      "screen_reader": "Toggle Dropdown",
-      "title": "Ganti akun"
+      "screen_reader": "Toggle Dropdown"
     },
     "transactions_table": {
       "sent": "Terkirim",
@@ -832,11 +701,6 @@
     }
   },
   "permissions": {
-    "nostr": {
-      "nip04decrypt": "Dekripsi data",
-      "getpublickey": "Membaca kunci publik Anda",
-      "nip04encrypt": "Enkripsi data"
-    },
     "commando": {
       "decode": "Decode teks bolt11/bolt12/rune"
     },
@@ -909,7 +773,6 @@
     "confirm_password": "Konfirmasi Kata Sandi",
     "success": "Sukses",
     "error": "Eror",
-    "settings": "Pengaturan",
     "accounts": "Akun-akun",
     "connected_sites": "Situs Terhubung",
     "wallet": "Dompet",
@@ -928,7 +791,6 @@
       "connection_failed": "Koneksi gagal",
       "payment_failed": "Pembayaran Gagal"
     },
-    "advanced": "Advanced",
     "discover": "Temui",
     "loading": "memuat",
     "or": "atau"

@@ -28,6 +28,7 @@ const message: MessageAccountAdd = {
     config: "123456config",
     name: "purple",
     nostrPrivateKey: "123456nostr",
+    isMnemonicBackupDone: false,
   },
   origin: { internal: true },
   prompt: true,
@@ -59,6 +60,7 @@ describe("add account to account-list", () => {
           config: "secret-config-string-42",
           name: "purple",
           nostrPrivateKey: "123456nostr",
+          isMnemonicBackupDone: false,
         },
       },
     });
@@ -107,6 +109,7 @@ describe("add account to account-list", () => {
           config: "secret-config-string-42",
           name: "purple",
           nostrPrivateKey: "123456nostr",
+          isMnemonicBackupDone: false,
         },
         "666": {
           config: "xyz",

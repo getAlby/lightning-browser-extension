@@ -1,8 +1,15 @@
 import utils from "~/common/lib/utils";
 import { getHostFromSender } from "~/common/utils/helpers";
 import db from "~/extension/background-script/db";
-import type { MessageAllowanceEnable, Sender } from "~/types";
+import {
+  NostrPermissionPreset,
+  PermissionMethodNostr,
+  type MessageAllowanceEnable,
+  type Sender,
+} from "~/types";
 
+import { addPermissionFor } from "~/extension/background-script/permissions";
+import { EventKind } from "~/extension/providers/nostr/types";
 import state from "../../state";
 import { ExtensionIcon, setIcon } from "../setup/setIcon";
 
@@ -10,15 +17,32 @@ const enable = async (message: MessageAllowanceEnable, sender: Sender) => {
   const host = getHostFromSender(sender);
   if (!host) return;
 
-  const isUnlocked = await state.getState().isUnlocked();
+  let isUnlocked = await state.getState().isUnlocked();
   const account = await state.getState().getAccount();
   const allowance = await db.allowances
-
     .where("host")
     .equalsIgnoreCase(host)
     .first();
 
   const enabledFor = new Set(allowance?.enabledFor);
+
+  if (!isUnlocked) {
+    try {
+      const response = await utils.openPrompt<{ unlocked: boolean }>({
+        args: {},
+        origin: { internal: true },
+        action: "unlock",
+      });
+
+      isUnlocked = response.data.unlocked;
+    } catch (e) {
+      if (e instanceof Error) {
+        return { error: e.message };
+      } else {
+        return { error: "Failed to unlock" };
+      }
+    }
+  }
 
   if (
     isUnlocked &&
@@ -35,6 +59,7 @@ const enable = async (message: MessageAllowanceEnable, sender: Sender) => {
       const response = await utils.openPrompt<{
         enabled: boolean;
         remember: boolean;
+        preset: string;
       }>(message);
 
       if (response.data.enabled && sender.tab) {
@@ -70,6 +95,51 @@ const enable = async (message: MessageAllowanceEnable, sender: Sender) => {
             createdAt: Date.now().toString(),
             lnurlAuth: false,
             tag: "",
+          });
+        }
+        if (response.data.preset === NostrPermissionPreset.REASONABLE) {
+          // Add permissions
+          const permissions: PermissionMethodNostr[] = [
+            PermissionMethodNostr.NOSTR_GETPUBLICKEY,
+            PermissionMethodNostr.NOSTR_ENCRYPT,
+            PermissionMethodNostr.NOSTR_DECRYPT,
+          ];
+          permissions.forEach(async (permission) => {
+            await addPermissionFor(permission, host, false);
+          });
+
+          // Add specific signing permissions
+
+          const reasonableEventKindIds = [
+            EventKind.Metadata,
+            EventKind.Text,
+            EventKind.Contacts,
+            EventKind.DM,
+            EventKind.Repost,
+            EventKind.React,
+            EventKind.ZapRequest,
+            EventKind.MuteList,
+            EventKind.RelayList,
+            EventKind.Bookmarks,
+            EventKind.Authenticate,
+            EventKind.HTTPAuth,
+            EventKind.LongNote,
+            EventKind.ProfileBadge,
+            EventKind.CreateBadge,
+            EventKind.AppData,
+            EventKind.UploadChunk,
+          ];
+
+          reasonableEventKindIds.forEach(async (kindId) => {
+            await addPermissionFor(
+              PermissionMethodNostr.NOSTR_SIGNMESSAGE + "/" + kindId,
+              host,
+              false
+            );
+          });
+        } else if (response.data.preset === NostrPermissionPreset.TRUST_FULLY) {
+          Object.values(PermissionMethodNostr).forEach(async (permission) => {
+            await addPermissionFor(permission, host, false);
           });
         }
         await db.saveToStorage();

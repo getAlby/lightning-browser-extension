@@ -2,8 +2,6 @@
   "translation": {
     "welcome": {
       "set_password": {
-        "title": "Imposta una password di sblocco",
-        "description": "Questa password serve a proteggere il tuo wallet e a fornirti l'accesso all'estensione del browser. Non può essere reimpostata ed è differente dalla password dell'account Alby.",
         "choose_password": {
           "label": "Scegli una password di sblocco:"
         },
@@ -26,8 +24,7 @@
         "actions": {
           "delete_edit_account": "Elimina l'account invalido e modificalo di nuovo"
         }
-      },
-      "title": "Benvenuto su Alby"
+      }
     },
     "choose_connector": {
       "description": "Connettiti al tuo wallet lightning esterno o al tuo nodo",
@@ -167,13 +164,8 @@
       },
       "btcpay": {
         "title": "BTCPay Server",
-        "page": {
-          "title": "Connettiti al tuo nodo LND BTCPay",
-          "instructions": "Vai al tuo BTCPayServer e accedi come amministratore. Vai su Impostazioni server > Servizi > LND Rest - See information. Quindi fai clic su \"Visualizza informazioni sul codice QR\" e copia i dati del codice QR. Incollali qui sotto:"
-        },
         "config": {
-          "label": "Dati di configurazione",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
+          "label": "Dati di configurazione"
         },
         "errors": {
           "connection_failed": "Connessione fallita. L'URL di connessione a BTCPay è corretto e accessibile?"
@@ -213,10 +205,6 @@
       },
       "title": "Connetti il Wallet Lightning",
       "lnc": {
-        "page": {
-          "description": "Crea una nuova sessione nel terminale (litd) per ottenere una nuova frase di accoppiamento ed inseriscila qui",
-          "title": "Connettiti al tuo nodo LND"
-        },
         "pairing_phrase": {
           "label": "La tua frase di accoppiamento ",
           "placeholder": "frase segreta di stack sats"
@@ -229,19 +217,12 @@
         "send_satoshis": "⚡️ Invia Satoshis ⚡️",
         "enable_now": "Attiva ora"
       },
-      "allowance_view": {
-        "no_transactions": "Non ci sono ancora transazioni su <0>{{name}}</0>."
-      },
       "default_view": {
         "is_blocked_hint": "Alby è attualmente disabilitato su {{host}}",
         "block_removed": "{{host}} abilitato. Si prega di ricaricare la pagina."
       }
     },
     "accounts": {
-      "title": "Accounts",
-      "actions": {
-        "add_account": "Aggiungi account"
-      },
       "account_view": {
         "nostr": {
           "errors": {
@@ -272,24 +253,16 @@
             "label": "Chiave Pubblica"
           }
         },
-        "remove": {
-          "title": "Rimuovi Questo Account",
-          "subtitle": "Tutte i permessi collegati saranno cancellati. Si prega di esserne certi."
-        },
         "actions": {
-          "export": "Esporta",
-          "remove_account": "Rimuovi account"
+          "export": "Esporta"
         },
         "export": {
           "your_ln_address": "Il Tuo Indirizzo Lightning:",
           "waiting": "in attesa dei dati da LndHub...",
           "export_uri": "URI delle credenziali di LNDHub",
           "scan_qr": "Importa questo wallet su Zeus o BlueWallet scansionando il QRCode.",
-          "title": "Esporta Account",
           "screen_reader": "Esporta i dettagli dell'account"
         },
-        "title1": "Informazioni account",
-        "title2": "Modifica Account",
         "name": {
           "title": "Nome",
           "placeholder": "Nome Account"
@@ -312,7 +285,6 @@
       }
     },
     "settings": {
-      "title": "Impostazioni",
       "browser_notifications": {
         "title": "Notifiche del browser",
         "subtitle": "Notifiche relative ai pagamenti e all'autenticazione."
@@ -320,18 +292,6 @@
       "website_enhancements": {
         "title": "Miglioramenti del sito web",
         "subtitle": "Miglioramenti per le mance su Twitter, YouTube, ecc."
-      },
-      "lnurl_auth": {
-        "title": "LNURL-Auth",
-        "hint": "è un protocollo di autenticazione generico. Autentica l'utente utilizzando le firme digitali. Il protocollo non richiede altre informazioni di identificazione come password, e-mail, nomi utente o simili. Con Alby è possibile utilizzare i propri account lightning per accedere in modo sicuro ai siti web. Per essere compatibili con altri portafogli abbiamo dovuto apportare alcune modifiche che si possono configurare qui. <0>Idealmente tutte queste opzioni dovrebbero essere spente (OFF).</0> Usatele solo se avete vecchi account.",
-        "legacy_lnurl_auth_202207": {
-          "title": "Legacy LNURL-Auth",
-          "subtitle": "La generazione di chiavi per LNURL-auth è cambiata (Luglio 2022). Alby non era compatibile con altre implementazioni. Abbiamo apportate delle modifiche, ma ora vengono utilizzate chiavi di accesso diverse. Se prima si utilizzava LNURL-auth per il login, si può ancora attivare il vecchio metodo. Questa opzione sarà rimossa in futuro; assicurarati di passare al nuovo login."
-        },
-        "legacy_lnurl_auth": {
-          "title": "Firma tradizione per LNDhub e LNbits",
-          "subtitle": "La firma dei messaggi e il login con gli account LNDhub (ad esempio BlueWallet) e LNbits sono stati modificati (Marzo 2022). Se avete effettuato l'accesso con questi account, potete ancora attivare il vecchio metodo di firma. Questa opzione sarà rimossa in futuro; assicurati di passare al nuovo metodo di login."
-        }
       },
       "camera_access": {
         "title": "Accesso alla telecamera",
@@ -397,15 +357,6 @@
           "mismatched_password": "Le password non corrispondono."
         },
         "success": "La password è stata modificata con successo"
-      },
-      "nostr": {
-        "title": "Nostr",
-        "hint": "è un protocollo semplice e aperto che mira a creare reti sociali resistenti alla censura. Nostr funziona con chiavi crittografiche. Per pubblicare qualcosa si firma con la propria chiave e la si invia a più relè. È possibile utilizzare Alby per gestire la propria chiave Nostr. Molte applicazioni Nostr vi permetteranno poi di utilizzare semplicemente la chiave dall'estensione Alby.",
-        "private_key": {
-          "title": "Chiave privata",
-          "subtitle": "Questa sezione è stata spostata nella pagina degli account, poiché le chiavi ora sono specifiche per l'account.",
-          "go_to": "Vai Agli Account"
-        }
       }
     },
     "send": {
@@ -532,11 +483,9 @@
     },
     "nostr": {
       "title": "Nostr",
-      "allow": "Consenti a questo sito di:",
       "block_and_ignore": "Blocca e ignora {{host}}",
       "block_added": "{{host}} aggiunto alla blocklist, si prega di ricaricare la pagina.",
-      "content": "Questo sito chiede di firmare:",
-      "allow_sign": "Consenti a {{host}} di firmare:"
+      "content": "Questo sito chiede di firmare:"
     },
     "alby": {
       "pre_connect": {
@@ -568,38 +517,12 @@
       "always_allow": "Ricorda la mia scelta e non chiederlo più",
       "title": "Approva Richiesta",
       "allow": "Consentire l'esecuzione di questo sito:"
-    },
-    "discover": {
-      "list": {
-        "trading": "Trading",
-        "gaming": "Gaming",
-        "entertainment": "Intrattenimento",
-        "miscellaneous": "Altro",
-        "showcases": "Vetrine",
-        "nostr": "Nostr",
-        "shopping": "Shopping"
-      },
-      "tips": {
-        "description": "Qualche suggerimento per iniziare a ronzare 🐝",
-        "top_up_wallet": {
-          "title": "⚡️ Ricarica il tuo wallet",
-          "description": "Crea una fattura lightning, inviati qualche bitcoin e inizia ad usare Alby nell'ecosistema lightning"
-        },
-        "demo": {
-          "title": "🕹️ Prova la Demo di Alby",
-          "description": "Scopri tutto quello che puoi fare con Alby sul nostro sito demo"
-        },
-        "title": "Il tuo wallet Alby è pronto"
-      },
-      "title": "Esplora l'Ecosistema Lightning ⚡️",
-      "description": "Siti e webapp dove puoi usare Alby"
     }
   },
   "common": {
     "password": "Password",
     "success": "Successo",
     "error": "Errore",
-    "settings": "Impostazioni",
     "connected_sites": "",
     "loading": "caricamento",
     "amount": "Importo",
@@ -644,8 +567,7 @@
     "success_message": "{{amount}}{{fiatAmount}} inviati a {{destination}}",
     "accounts": "Account",
     "discover": "Scopri",
-    "confirm_password": "Conferma la Password",
-    "advanced": "Avanzate"
+    "confirm_password": "Conferma la Password"
   },
   "components": {
     "allowance_menu": {
@@ -661,8 +583,7 @@
       "edit_allowance": {
         "title": "Modifica tolleranza",
         "screen_reader": "Opzioni di tolleranza"
-      },
-      "edit_permissions": "Modifica Permessi"
+      }
     },
     "qrcode_scanner": {
       "title": "Scansiona il codice QR",
@@ -711,14 +632,7 @@
       }
     },
     "account_menu": {
-      "screen_reader": "Attiva/disattiva menu a tendina",
-      "title": "Cambia account",
-      "options": {
-        "account": {
-          "add": "Aggiungi un nuovo account",
-          "manage": "Gestisci gli account"
-        }
-      }
+      "screen_reader": "Attiva/disattiva menu a tendina"
     },
     "publishers_table": {
       "payments": "pagamenti"
@@ -806,12 +720,6 @@
       "decodepayreq": "Decodifica una stringa di richiesta di pagamento",
       "getnetworkinfo": "Ottieni le statistiche di base riguardo il tracciato del canale conosciuto",
       "addinvoice": "Crea nuove ricevute di pagamento"
-    },
-    "nostr": {
-      "nip04decrypt": "Decripta i dati",
-      "getpublickey": "Leggi la tua chiave pubblica",
-      "nip04encrypt": "Cripta i dati",
-      "signmessage": "Firma il messaggio con la tua chiave"
     }
   }
 }

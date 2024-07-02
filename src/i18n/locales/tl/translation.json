@@ -2,8 +2,6 @@
   "translation": {
     "welcome": {
       "set_password": {
-        "title": "",
-        "description": "",
         "choose_password": {
           "label": ""
         },
@@ -166,13 +164,8 @@
       },
       "btcpay": {
         "title": "",
-        "page": {
-          "title": "",
-          "instructions": ""
-        },
         "config": {
-          "label": "",
-          "placeholder": ""
+          "label": ""
         },
         "errors": {
           "connection_failed": ""
@@ -184,17 +177,8 @@
         "send_satoshis": "",
         "enable_now": ""
       },
-      "allowance_view": {
-        "no_transactions": ""
-      },
       "default_view": {
         "is_blocked_hint": ""
-      }
-    },
-    "accounts": {
-      "title": "",
-      "actions": {
-        "add_account": ""
       }
     },
     "unlock": {
@@ -213,7 +197,6 @@
       }
     },
     "settings": {
-      "title": "",
       "browser_notifications": {
         "title": "",
         "subtitle": ""
@@ -221,18 +204,6 @@
       "website_enhancements": {
         "title": "",
         "subtitle": ""
-      },
-      "lnurl_auth": {
-        "title": "",
-        "hint": "",
-        "legacy_lnurl_auth_202207": {
-          "title": "",
-          "subtitle": ""
-        },
-        "legacy_lnurl_auth": {
-          "title": "",
-          "subtitle": ""
-        }
       },
       "camera_access": {
         "title": "",
@@ -422,7 +393,6 @@
     "password": "",
     "success": "",
     "error": "",
-    "settings": "",
     "connected_sites": "",
     "sats_one": "sat",
     "sats_other": "sats",
@@ -523,14 +493,7 @@
       }
     },
     "account_menu": {
-      "screen_reader": "",
-      "title": "",
-      "options": {
-        "account": {
-          "add": "",
-          "manage": ""
-        }
-      }
+      "screen_reader": ""
     },
     "publishers_table": {
       "payments": ""

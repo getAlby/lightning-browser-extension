@@ -1,17 +1,17 @@
-import {
-  GearIcon,
-  LockIcon,
-  MagicWandIcon,
-  MenuIcon,
-  RocketIcon,
-  WalletIcon,
-} from "@bitcoin-design/bitcoin-icons-react/filled";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useAccount } from "~/app/context/AccountContext";
-import { ConnectedSiteIcon, HelpIcon } from "~/app/icons";
+import { ConnectedSiteIcon } from "~/app/icons";
 import utils from "~/common/lib/utils";
 
+import {
+  PopiconsBarsSolid,
+  PopiconsBulbLine,
+  PopiconsCogLine,
+  PopiconsCommentLine,
+  PopiconsExpandLine,
+  PopiconsLockLine,
+} from "@popicons/react";
 import Menu from "../Menu";
 
 export default function UserMenu() {
@@ -42,43 +42,34 @@ export default function UserMenu() {
 
   return (
     <Menu as="div" className="relative">
-      <Menu.Button className="flex items-center text-gray-700 dark:text-white hover:text-black dark:hover:text-white transition-colors duration-200">
-        <MenuIcon className="h-6 w-6" />
+      <Menu.Button className="flex items-center text-gray-800 dark:text-neutral-200 hover:text-black dark:hover:text-white transition-colors duration-200">
+        <PopiconsBarsSolid className="h-5 w-5" />
       </Menu.Button>
       <Menu.List position="left">
         <div className="lg:hidden">
           <Menu.ItemButton
             onClick={() => {
-              openOptions("discover");
+              openOptions("wallet");
             }}
           >
-            <RocketIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
-            {tCommon("discover")}
+            <PopiconsExpandLine className="h-5 w-5 mr-2 text-gray-800 dark:text-neutral-200 shrink-0" />
+            {tCommon("full_screen")}
           </Menu.ItemButton>
           <Menu.ItemButton
             onClick={() => {
               openOptions("publishers");
             }}
           >
-            <ConnectedSiteIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
+            <ConnectedSiteIcon className="h-5 w-5 mr-2 text-gray-800 dark:text-neutral-200 shrink-0" />
             {tCommon("connected_sites")}
           </Menu.ItemButton>
-          <Menu.ItemButton
-            onClick={() => {
-              openOptions("wallet");
-            }}
-          >
-            <WalletIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
-            {tCommon("wallet")}
-          </Menu.ItemButton>
-          <Menu.Divider />
         </div>
         <Menu.ItemButton
           onClick={() => {
             openOptions("settings");
           }}
         >
-          <GearIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
+          <PopiconsCogLine className="h-5 w-5 mr-2 text-gray-800 dark:text-neutral-200 shrink-0" />
           {tCommon("settings")}
         </Menu.ItemButton>
         <Menu.ItemButton
@@ -86,9 +77,10 @@ export default function UserMenu() {
             utils.openUrl("https://feedback.getalby.com");
           }}
         >
-          <MagicWandIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
+          <PopiconsCommentLine className="h-5 w-5 mr-2 text-gray-800 dark:text-neutral-200 shrink-0" />
           {tCommon("feedback")}
         </Menu.ItemButton>
+
         <Menu.ItemButton
           onClick={() => {
             utils.openUrl(
@@ -96,12 +88,12 @@ export default function UserMenu() {
             );
           }}
         >
-          <HelpIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
+          <PopiconsBulbLine className="h-5 w-5 mr-2 text-gray-800 dark:text-neutral-200 shrink-0" />
           {tCommon("help")}
         </Menu.ItemButton>
-        <Menu.Divider />
+
         <Menu.ItemButton onClick={lock}>
-          <LockIcon className="h-5 w-5 mr-2 text-gray-700 dark:text-neutral-300" />
+          <PopiconsLockLine className="h-5 w-5 mr-2 text-gray-800 dark:text-neutral-200 shrink-0" />
           {tCommon("actions.lock")}
         </Menu.ItemButton>
       </Menu.List>

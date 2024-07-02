@@ -28,7 +28,8 @@ import LiquidEnable from "~/app/screens/Enable/LiquidEnable";
 import NostrEnable from "~/app/screens/Enable/NostrEnable";
 import WebbtcEnable from "~/app/screens/Enable/WebbtcEnable";
 import WeblnEnable from "~/app/screens/Enable/WeblnEnable";
-import NostrConfirmEncryptOrDecrypt from "~/app/screens/Nostr/ConfirmEncryptOrDecrypt";
+import NostrConfirmDecrypt from "~/app/screens/Nostr/ConfirmDecrypt";
+import NostrConfirmEncrypt from "~/app/screens/Nostr/ConfirmEncrypt";
 import type { NavigationState, OriginData } from "~/types";
 
 // Parse out the parameters from the querystring.
@@ -60,6 +61,16 @@ function Prompt() {
       <HashRouter>
         <Routes>
           <Route
+            index
+            element={
+              <Navigate
+                to={`/${navigationState.action}`}
+                replace
+                state={navigationState}
+              />
+            }
+          />
+          <Route
             path="/"
             element={
               <RequireAuth>
@@ -67,16 +78,6 @@ function Prompt() {
               </RequireAuth>
             }
           >
-            <Route
-              index
-              element={
-                <Navigate
-                  to={`/${navigationState.action}`}
-                  replace
-                  state={navigationState}
-                />
-              }
-            />
             <Route
               path="public/alby/enable"
               element={
@@ -124,8 +125,12 @@ function Prompt() {
               element={<ConfirmSignPset />}
             />
             <Route
-              path="public/nostr/confirmEncryptOrDecrypt"
-              element={<NostrConfirmEncryptOrDecrypt />}
+              path="public/nostr/confirmEncrypt"
+              element={<NostrConfirmEncrypt />}
+            />
+            <Route
+              path="public/nostr/confirmDecrypt"
+              element={<NostrConfirmDecrypt />}
             />
             <Route
               path="public/nostr/confirmGetPublicKey"
@@ -177,7 +182,7 @@ const Layout = () => {
   return (
     <>
       <Toaster />
-      <div className="px-4 py-2 justify-between items-center bg-white flex border-b border-gray-200 dark:bg-surface-02dp dark:border-neutral-500 gap-5">
+      <div className="px-4 py-2 justify-between items-center bg-white flex border-b border-gray-200 dark:bg-surface-02dp dark:border-neutral-700 gap-5">
         <div className="w-24 shrink-0">
           <AlbyLogo />
         </div>

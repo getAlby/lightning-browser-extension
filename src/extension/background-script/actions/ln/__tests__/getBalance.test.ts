@@ -123,7 +123,7 @@ describe("prompts the user first and then calls getBalance", () => {
       args: {
         requestPermission: {
           method: "getBalance",
-          description: "webln.getbalance",
+          description: "webln.getbalance.description",
         },
       },
       origin: message.origin,
@@ -147,7 +147,7 @@ describe("prompts the user first and then calls getBalance", () => {
       args: {
         requestPermission: {
           method: "getBalance",
-          description: "webln.getbalance",
+          description: "webln.getbalance.description",
         },
       },
       origin: message.origin,

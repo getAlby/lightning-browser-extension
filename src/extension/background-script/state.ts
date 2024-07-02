@@ -1,7 +1,7 @@
 import merge from "lodash.merge";
 import pick from "lodash.pick";
 import browser from "webextension-polyfill";
-import createState from "zustand";
+import { create } from "zustand";
 import { decryptData } from "~/common/lib/crypto";
 import { DEFAULT_SETTINGS } from "~/common/settings";
 import { isManifestV3 } from "~/common/utils/mv3";
@@ -85,7 +85,7 @@ const getFreshState = () => ({
   mv2Password: null,
 });
 
-const state = createState<State>((set, get) => ({
+const state = create<State>((set, get) => ({
   ...getFreshState(),
   password: async (password) => {
     if (isManifestV3) {
@@ -214,12 +214,14 @@ const state = createState<State>((set, get) => ({
 
     // https://stackoverflow.com/a/54317362/1667461
     const allTabIds = Array.from(allTabs, (tab) => tab.id).filter(
-      (i): i is number => {
-        return typeof i === "number";
+      (id, index): id is number => {
+        // Safari: allTabs consist of Start Pages too
+        return typeof id === "number" && allTabs[index].title !== "";
       }
     );
 
-    browser.tabs.remove(allTabIds);
+    // Safari: extension popup is not a tab
+    if (allTabIds.length) browser.tabs.remove(allTabIds);
 
     if (get().connector) {
       const connector = (await get().connector) as Connector;

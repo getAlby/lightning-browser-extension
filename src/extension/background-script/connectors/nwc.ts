@@ -1,6 +1,6 @@
 import { webln } from "@getalby/sdk";
 import { NostrWebLNProvider } from "@getalby/sdk/dist/webln";
-import lightningPayReq from "bolt11";
+import lightningPayReq from "bolt11-signet";
 import Hex from "crypto-js/enc-hex";
 import SHA256 from "crypto-js/sha256";
 import { Account } from "~/types";
@@ -39,6 +39,7 @@ class NWCConnector implements Connector {
       "getBalance",
       "keysend",
       "getTransactions",
+      "signMessage",
     ];
   }
 
@@ -86,7 +87,7 @@ class NWCConnector implements Connector {
           preimage: transaction.preimage,
           payment_hash: transaction.payment_hash,
           settled: true,
-          settleDate: new Date(transaction.settled_at).getTime(),
+          settleDate: transaction.settled_at * 1000,
           totalAmount: transaction.amount,
           type: transaction.type == "incoming" ? "received" : "sent",
         })
@@ -171,20 +172,36 @@ class NWCConnector implements Connector {
   }
 
   async checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {
-    const response = await this.nwc.lookupInvoice({
-      paymentHash: args.paymentHash,
-    });
+    try {
+      const response = await this.nwc.lookupInvoice({
+        paymentHash: args.paymentHash,
+      });
 
-    return {
-      data: {
-        paid: response.paid,
-        preimage: response.preimage,
-      },
-    };
+      return {
+        data: {
+          paid: response.paid,
+          preimage: response.preimage,
+        },
+      };
+    } catch (error) {
+      console.error(error);
+      return {
+        data: {
+          paid: false,
+        },
+      };
+    }
   }
 
-  signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {
-    throw new Error("Method not implemented.");
+  async signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {
+    const response = await this.nwc.signMessage(args.message);
+
+    return Promise.resolve({
+      data: {
+        message: response.message,
+        signature: response.signature,
+      },
+    });
   }
 
   connectPeer(args: ConnectPeerArgs): Promise<ConnectPeerResponse> {

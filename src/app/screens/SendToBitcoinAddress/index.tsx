@@ -1,13 +1,11 @@
-import {
-  CaretLeftIcon,
-  ExportIcon,
-} from "@bitcoin-design/bitcoin-icons-react/filled";
+import { PopiconsLinkExternalSolid } from "@popicons/react";
 import Button from "@components/Button";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Header from "@components/Header";
 import IconButton from "@components/IconButton";
 import DualCurrencyField from "@components/form/DualCurrencyField";
 import { CreateSwapResponse } from "@getalby/sdk/dist/types";
+import { PopiconsChevronLeftLine } from "@popicons/react";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Skeleton from "react-loading-skeleton";
@@ -208,7 +206,10 @@ function SendToBitcoinAddress() {
   const amountMin = 100_000;
   const amountMax = 10_000_000;
 
-  const amountExceeded = +amountSat > (auth?.account?.balance || 0);
+  const amountExceeded =
+    (auth?.account?.currency || "BTC") !== "BTC"
+      ? false
+      : +amountSat > (auth?.account?.balance || 0);
   const rangeExceeded = +amountSat > amountMax || +amountSat < amountMin;
 
   const timeEstimateAlert = <Alert type="info">{t("time_estimate")}</Alert>;
@@ -219,7 +220,7 @@ function SendToBitcoinAddress() {
         headerLeft={
           <IconButton
             onClick={() => navigate("/send")}
-            icon={<CaretLeftIcon className="w-4 h-4" />}
+            icon={<PopiconsChevronLeftLine className="w-5 h-5" />}
           />
         }
       >
@@ -381,7 +382,7 @@ function SendToBitcoinAddress() {
                 target="_blank"
               >
                 {t("view_on_explorer")}
-                <ExportIcon className="w-6 h-6 inline" />
+                <PopiconsLinkExternalSolid className="w-6 h-6 inline" />
               </Hyperlink>
             </div>
             {timeEstimateAlert}
@@ -411,12 +412,6 @@ function SendToBitcoinAddress() {
               imageSrc="/assets/icons/swap/deezy.svg"
               title="Deezy"
               description="Swap instantly between lightning and on-chain bitcoin"
-            />
-            <ExchangeLink
-              href="https://fixedfloat.com/BTCLN/BTC/?ref=qnnjvywb"
-              imageSrc="/assets/icons/swap/fixedfloat.png"
-              title="FixedFloat"
-              description="Instant cryptocurrency exchange"
             />
             <ExchangeLink
               href="https://sideshift.ai/ln/btc"
