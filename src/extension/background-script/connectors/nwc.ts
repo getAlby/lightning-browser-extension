@@ -1,5 +1,4 @@
-import { webln } from "@getalby/sdk";
-import { NostrWebLNProvider } from "@getalby/sdk/dist/webln";
+import { nwc } from "@getalby/sdk";
 import lightningPayReq from "bolt11-signet";
 import Hex from "crypto-js/enc-hex";
 import SHA256 from "crypto-js/sha256";
@@ -26,9 +25,14 @@ interface Config {
   nostrWalletConnectUrl: string;
 }
 
+interface TlvRecord {
+  type: number;
+  value: string;
+}
+
 class NWCConnector implements Connector {
   config: Config;
-  nwc: NostrWebLNProvider;
+  nwc: nwc.NWCClient;
 
   get supportedMethods() {
     return [
@@ -45,13 +49,13 @@ class NWCConnector implements Connector {
 
   constructor(account: Account, config: Config) {
     this.config = config;
-    this.nwc = new webln.NostrWebLNProvider({
+    this.nwc = new nwc.NWCClient({
       nostrWalletConnectUrl: this.config.nostrWalletConnectUrl,
     });
   }
 
   async init() {
-    return this.nwc.enable();
+    return Promise.resolve();
   }
 
   async unload() {
@@ -61,14 +65,14 @@ class NWCConnector implements Connector {
   async getInfo(): Promise<GetInfoResponse> {
     const info = await this.nwc.getInfo();
     return {
-      data: info.node,
+      data: info,
     };
   }
 
   async getBalance(): Promise<GetBalanceResponse> {
     const balance = await this.nwc.getBalance();
     return {
-      data: { balance: balance.balance, currency: "BTC" },
+      data: { balance: balance.balance / 1000, currency: "BTC" },
     };
   }
 
@@ -77,7 +81,6 @@ class NWCConnector implements Connector {
       unpaid: false,
       limit: 50, // restricted by relay max event payload size
     });
-    console.info(listTransactionsResponse);
 
     const transactions: ConnectorTransaction[] =
       listTransactionsResponse.transactions.map(
@@ -88,7 +91,7 @@ class NWCConnector implements Connector {
           payment_hash: transaction.payment_hash,
           settled: true,
           settleDate: transaction.settled_at * 1000,
-          totalAmount: transaction.amount,
+          totalAmount: transaction.amount / 1000,
           type: transaction.type == "incoming" ? "received" : "sent",
         })
       );
@@ -100,26 +103,18 @@ class NWCConnector implements Connector {
   }
 
   async makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse> {
-    const result = await this.nwc.makeInvoice({
-      amount: args.amount,
-      defaultMemo: args.memo,
+    const invoice = await this.nwc.makeInvoice({
+      amount:
+        typeof args.amount === "number"
+          ? args.amount * 1000
+          : parseInt(args.amount) * 1000 || 0,
+      description: args.memo,
     });
-    let paymentHash = result.paymentHash;
-
-    if (!paymentHash) {
-      const decodedInvoice = lightningPayReq.decode(result.paymentRequest);
-      paymentHash = decodedInvoice.tags.find(
-        (tag) => tag.tagName === "payment_hash"
-      )?.data as string | undefined;
-      if (!paymentHash) {
-        throw new Error("Could not find payment hash in invoice");
-      }
-    }
 
     return {
       data: {
-        paymentRequest: result.paymentRequest,
-        rHash: paymentHash,
+        paymentRequest: invoice.invoice,
+        rHash: invoice.payment_hash,
       },
     };
   }
@@ -133,7 +128,14 @@ class NWCConnector implements Connector {
       throw new Error("Could not find payment hash in invoice");
     }
 
-    const response = await this.nwc.sendPayment(args.paymentRequest);
+    const response = await this.nwc.payInvoice({
+      invoice: args.paymentRequest,
+    });
+
+    const transaction = await this.nwc.lookupInvoice({
+      invoice: args.paymentRequest,
+    });
+
     return {
       data: {
         preimage: response.preimage,
@@ -141,21 +143,24 @@ class NWCConnector implements Connector {
         route: {
           // TODO: how to get amount paid for zero-amount invoices?
           total_amt: parseInt(invoice.millisatoshis || "0") / 1000,
-          // TODO: How to get fees from WebLN?
-          total_fees: 0,
+          total_fees: transaction.fees_paid / 1000,
         },
       },
     };
   }
 
   async keysend(args: KeysendArgs): Promise<SendPaymentResponse> {
-    const data = await this.nwc.keysend({
-      destination: args.pubkey,
-      amount: args.amount,
-      customRecords: args.customRecords,
+    const data = await this.nwc.payKeysend({
+      pubkey: args.pubkey,
+      amount: args.amount * 1000,
+      tlv_records: this.convertCustomRecords(args.customRecords),
     });
 
     const paymentHash = SHA256(data.preimage).toString(Hex);
+
+    const transaction = await this.nwc.lookupInvoice({
+      payment_hash: paymentHash,
+    });
 
     return {
       data: {
@@ -164,8 +169,7 @@ class NWCConnector implements Connector {
 
         route: {
           total_amt: args.amount,
-          // TODO: How to get fees from WebLN?
-          total_fees: 0,
+          total_fees: transaction.fees_paid / 1000,
         },
       },
     };
@@ -174,12 +178,12 @@ class NWCConnector implements Connector {
   async checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {
     try {
       const response = await this.nwc.lookupInvoice({
-        paymentHash: args.paymentHash,
+        payment_hash: args.paymentHash,
       });
 
       return {
         data: {
-          paid: response.paid,
+          paid: !!response.settled_at,
           preimage: response.preimage,
         },
       };
@@ -194,7 +198,7 @@ class NWCConnector implements Connector {
   }
 
   async signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {
-    const response = await this.nwc.signMessage(args.message);
+    const response = await this.nwc.signMessage({ message: args.message });
 
     return Promise.resolve({
       data: {
@@ -206,6 +210,15 @@ class NWCConnector implements Connector {
 
   connectPeer(args: ConnectPeerArgs): Promise<ConnectPeerResponse> {
     throw new Error("Method not implemented.");
+  }
+
+  private convertCustomRecords(
+    customRecords: Record<string, string>
+  ): TlvRecord[] {
+    return Object.entries(customRecords).map(([key, value]) => ({
+      type: parseInt(key),
+      value: value,
+    }));
   }
 }
 
