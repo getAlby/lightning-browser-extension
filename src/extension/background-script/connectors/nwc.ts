@@ -1,5 +1,4 @@
-import { webln } from "@getalby/sdk";
-import { NostrWebLNProvider } from "@getalby/sdk/dist/webln";
+import { nwc } from "@getalby/sdk";
 import lightningPayReq from "bolt11-signet";
 import Hex from "crypto-js/enc-hex";
 import SHA256 from "crypto-js/sha256";
@@ -20,6 +19,7 @@ import Connector, {
   SendPaymentResponse,
   SignMessageArgs,
   SignMessageResponse,
+  TlvRecord,
 } from "./connector.interface";
 
 interface Config {
@@ -28,7 +28,7 @@ interface Config {
 
 class NWCConnector implements Connector {
   config: Config;
-  nwc: NostrWebLNProvider;
+  nwc: nwc.NWCClient;
 
   get supportedMethods() {
     return [
@@ -45,13 +45,13 @@ class NWCConnector implements Connector {
 
   constructor(account: Account, config: Config) {
     this.config = config;
-    this.nwc = new webln.NostrWebLNProvider({
+    this.nwc = new nwc.NWCClient({
       nostrWalletConnectUrl: this.config.nostrWalletConnectUrl,
     });
   }
 
   async init() {
-    return this.nwc.enable();
+    return Promise.resolve();
   }
 
   async unload() {
@@ -61,7 +61,7 @@ class NWCConnector implements Connector {
   async getInfo(): Promise<GetInfoResponse> {
     const info = await this.nwc.getInfo();
     return {
-      data: info.node,
+      data: info,
     };
   }
 
@@ -100,22 +100,27 @@ class NWCConnector implements Connector {
 
   async makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse> {
     const invoice = await this.nwc.makeInvoice({
-      amount: args.amount,
-      defaultMemo: args.memo,
+      amount:
+        typeof args.amount === "number"
+          ? args.amount
+          : parseFloat(args.amount) || 0,
+      description: args.memo,
     });
+    let rHash = invoice.payment_hash;
 
-    const decodedInvoice = lightningPayReq.decode(invoice.paymentRequest);
-    const paymentHash = decodedInvoice.tags.find(
-      (tag) => tag.tagName === "payment_hash"
-    )?.data as string | undefined;
-    if (!paymentHash) {
-      throw new Error("Could not find payment hash in invoice");
+    if (!rHash) {
+      const decodedInvoice = lightningPayReq.decode(invoice.invoice);
+      rHash = decodedInvoice.tags.find((tag) => tag.tagName === "payment_hash")
+        ?.data as string;
+      if (!rHash) {
+        throw new Error("Could not find payment hash in invoice");
+      }
     }
 
     return {
       data: {
-        paymentRequest: invoice.paymentRequest,
-        rHash: paymentHash,
+        paymentRequest: invoice.invoice,
+        rHash,
       },
     };
   }
@@ -129,14 +134,20 @@ class NWCConnector implements Connector {
       throw new Error("Could not find payment hash in invoice");
     }
 
-    const response = await this.nwc.sendPayment(args.paymentRequest);
+    const response = await this.nwc.payInvoice({
+      invoice: args.paymentRequest,
+    });
+    const total_amt = invoice.millisatoshis
+      ? parseInt(invoice.millisatoshis || "0", 10) / 1000
+      : invoice.satoshis ?? 0;
+
     return {
       data: {
         preimage: response.preimage,
         paymentHash,
         route: {
           // TODO: how to get amount paid for zero-amount invoices?
-          total_amt: parseInt(invoice.millisatoshis || "0") / 1000,
+          total_amt: total_amt,
           // TODO: How to get fees from WebLN?
           total_fees: 0,
         },
@@ -145,10 +156,10 @@ class NWCConnector implements Connector {
   }
 
   async keysend(args: KeysendArgs): Promise<SendPaymentResponse> {
-    const data = await this.nwc.keysend({
-      destination: args.pubkey,
+    const data = await this.nwc.payKeysend({
+      pubkey: args.pubkey,
       amount: args.amount,
-      customRecords: args.customRecords,
+      tlv_records: this.convertCustomRecords(args.customRecords),
     });
 
     const paymentHash = SHA256(data.preimage).toString(Hex);
@@ -170,12 +181,12 @@ class NWCConnector implements Connector {
   async checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {
     try {
       const response = await this.nwc.lookupInvoice({
-        paymentHash: args.paymentHash,
+        payment_hash: args.paymentHash,
       });
 
       return {
         data: {
-          paid: response.paid,
+          paid: !!response.settled_at,
           preimage: response.preimage,
         },
       };
@@ -190,7 +201,7 @@ class NWCConnector implements Connector {
   }
 
   async signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {
-    const response = await this.nwc.signMessage(args.message);
+    const response = await this.nwc.signMessage({ message: args.message });
 
     return Promise.resolve({
       data: {
@@ -202,6 +213,15 @@ class NWCConnector implements Connector {
 
   connectPeer(args: ConnectPeerArgs): Promise<ConnectPeerResponse> {
     throw new Error("Method not implemented.");
+  }
+
+  private convertCustomRecords(
+    customRecords: Record<string, string>
+  ): TlvRecord[] {
+    return Object.entries(customRecords).map(([key, value]) => ({
+      type: parseInt(key, 10),
+      value: value,
+    }));
   }
 }
 
