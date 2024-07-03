@@ -418,11 +418,17 @@ export default class LndHub implements Connector {
 
       return authData;
     } catch (e) {
-      throw new Error(
-        `API error (${this.config.url})${
-          e instanceof Error ? `: ${e.message}` : ""
-        }`
-      );
+      let error = "";
+      if (axios.isAxiosError(e)) {
+        const data = e.response?.data as
+          | { reason?: string; message?: string }
+          | undefined;
+        error = data?.reason || data?.message || e.message;
+      } else if (e instanceof Error) {
+        error = e.message;
+      }
+
+      throw new Error(`API error (${this.config.url}) ${error}`);
     }
   }
 

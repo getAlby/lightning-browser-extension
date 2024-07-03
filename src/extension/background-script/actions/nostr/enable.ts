@@ -9,6 +9,7 @@ import {
 } from "~/types";
 
 import { addPermissionFor } from "~/extension/background-script/permissions";
+import { EventKind } from "~/extension/providers/nostr/types";
 import state from "../../state";
 import { ExtensionIcon, setIcon } from "../setup/setIcon";
 
@@ -108,20 +109,27 @@ const enable = async (message: MessageAllowanceEnable, sender: Sender) => {
           });
 
           // Add specific signing permissions
+
           const reasonableEventKindIds = [
-            0, // Update profile
-            1, // Short text note
-            3, // Update follow list
-            4, // Encrypted direct messages
-            7, // Reaction
-            9734, // Zap request
-            10002, // Relay list metadata
-            22242, // Client relay authentication
-            30023, // Long-form content
-            30008, // Manage profile badges
-            30009, // Badge definition
-            30078, // App Data
+            EventKind.Metadata,
+            EventKind.Text,
+            EventKind.Contacts,
+            EventKind.DM,
+            EventKind.Repost,
+            EventKind.React,
+            EventKind.ZapRequest,
+            EventKind.MuteList,
+            EventKind.RelayList,
+            EventKind.Bookmarks,
+            EventKind.Authenticate,
+            EventKind.HTTPAuth,
+            EventKind.LongNote,
+            EventKind.ProfileBadge,
+            EventKind.CreateBadge,
+            EventKind.AppData,
+            EventKind.UploadChunk,
           ];
+
           reasonableEventKindIds.forEach(async (kindId) => {
             await addPermissionFor(
               PermissionMethodNostr.NOSTR_SIGNMESSAGE + "/" + kindId,

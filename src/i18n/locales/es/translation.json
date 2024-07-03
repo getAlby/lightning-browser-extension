@@ -13,7 +13,9 @@
           "confirm_password": "Por favor, confirma tu código de acceso.",
           "mismatched_password": "Los códigos no coinciden."
         },
-        "title": "Establecer contraseña para desbloquear la extensión"
+        "title": "Establecer contraseña para desbloquear la extensión",
+        "description1": "Establecer un código de acceso para desbloquear la extensión Alby en este navegador",
+        "description2": "El código de desbloqueo no se puede recuperar, pero se puede cambiar. "
       },
       "test_connection": {
         "ready": "Genial, ¡ya estás listo!",
@@ -239,6 +241,9 @@
         "pairing_phrase": {
           "label": "Tu frase vinculada. ",
           "placeholder": "frase de pila secreta de sats"
+        },
+        "page": {
+          "title": "Conéctese a la terminal Lightning (LNC)"
         }
       },
       "title": "Conecta la Billetera Lightning",
@@ -516,7 +521,12 @@
     "choose_path": {
       "alby": {
         "title": "Cuenta de Alby",
-        "connect": "Conectar con Alby"
+        "connect": "Conectar con Alby",
+        "description": "Ideal para principiantes o cualquiera que busque una excelente billetera para el uso diario.",
+        "point1": "Los nuevos registros requieren un código de invitación",
+        "point2": "Se aplican límites de volumen de transacciones",
+        "point3": "Configura e inicia sesión con tu correo electrónico",
+        "point4": "Dirección única de Lightning y Nostr"
       },
       "other": {
         "title": "Lleve su propia cartera",

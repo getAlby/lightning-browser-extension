@@ -291,6 +291,30 @@
             "connection_failed": "Verbindung fehlgeschlagen. Ist deine NWC-Geldbörse online und die App-Verbindung aktiviert?"
           }
         }
+      },
+      "lawallet": {
+        "page": {
+          "instructions": "Lege deine LaWallet-Anmeldedaten unten fest",
+          "title": "Verbindung zu LaWallet"
+        },
+        "api_endpoint": "API-Endpunkt",
+        "identity_endpoint": "Identitäts-Endpunkt",
+        "ledger_public_key": "Ledger Öffentlicher Schlüssel",
+        "urlx_public_key": "URLx Öffentlicher Schlüssel",
+        "relay_url": "Relais-URL",
+        "errors": {
+          "toast": {
+            "title": "Identität nicht gefunden",
+            "message": "Sie haben keine Lightning Adresse in der Identität \"{{Domain}}\"",
+            "verify": "Überprüfe Folgendes",
+            "walias": "Ist deine Lightning Adresse USERNAME<0>@{{domain}}</0> oder verwendest du eine andere Domain?",
+            "endpoint": "Der richtige Endpunkt wird aus https://app.<0>{{Domäne}}</0> erstellt",
+            "match": "Der Identitätsendpunkt muss mit Ihrer Lightning-Domäne übereinstimmen",
+            "http": "Der Identitätsanbieter verwendet das gleiche Protokoll (<0>HTTP</0> oder <0>HTTPS</0>)"
+          }
+        },
+        "title": "LaWallet.io",
+        "private_key": "Privater Schlüssel"
       }
     },
     "unlock": {
@@ -311,10 +335,10 @@
     "settings": {
       "browser_notifications": {
         "subtitle": "Zahlungs- und Authentifizierungsbezogene Benachrichtigungen.",
-        "title": "Browser Benachrichtigungen"
+        "title": "Browser-Benachrichtigungen"
       },
       "website_enhancements": {
-        "title": "Erweiterungen der Webseite",
+        "title": "Website-Verbesserungen",
         "subtitle": "Verbesserungen für X, YouTube, etc."
       },
       "title": "Einstellungen der Erweiterung",
@@ -331,8 +355,8 @@
           "mismatched_password": "Die Passwörter stimmen nicht überein."
         },
         "success": "Passcode erfolgreich geändert",
-        "title": "Passcode zum Entsperren ändern",
-        "screen_reader": "Passcode zum Entsperren ändern",
+        "title": "Ändere deinen Unlock Passcode",
+        "screen_reader": "Freischalt-Passcode ändern",
         "confirm_password": {
           "label": "Bestätige den neuen Passcode:"
         }
@@ -359,10 +383,10 @@
         "subtitle": "Zeige die Beträge zusätzlich in dieser Währung an"
       },
       "camera_access": {
-        "title": "Kamerazugriff",
+        "title": "Zugang zur Kamera",
         "subtitle": "Zum Scannen von QR-Codes",
         "allow": "Kamerazugriff zulassen",
-        "granted": "Erlaubnis erteilt"
+        "granted": "Erlaubnis Gewährt"
       },
       "show_fiat": {
         "title": "Sats in Fiat",
@@ -380,6 +404,10 @@
       "email": {
         "title": "E-Mail",
         "placeholder": "Gib deine E-Mail Adresse ein"
+      },
+      "subtitle": "Globale Einstellungen, die sich auf alle verbundenen Wallets in Alby Extension auswirken.",
+      "general": {
+        "title": "Allgemein"
       }
     },
     "home": {
@@ -401,7 +429,9 @@
             "title": "Einrichten deiner Schlüssel",
             "description": "Kümmer dich um deinen Master Key oder importiere dein bestehendes Nostr-Konto"
           }
-        }
+        },
+        "node_required": "Ihr Alby-Konto benötigt eine Brieftasche. Verbinde deine Brieftasche mit deinem Konto auf <0>getalby.com</0>",
+        "upgrade_account": "Du verwendest die alte LNDHub-Einrichtung. <0>Bitte verbinde dich erneut</0> mit deinem Alby-Konto, um Zugang zu den neuesten Funktionen zu erhalten."
       },
       "allowance_view": {
         "sats": "sats",
@@ -426,7 +456,9 @@
           "waiting": "Warten auf LndHub Daten...",
           "your_ln_address": "Deine Lightning Adresse:",
           "export_uri": "LNDHub Anmeldeinformationen URI",
-          "scan_qr": "Importiere diese Wallet in Zeus oder BlueWallet, indem du den QRCode scannst."
+          "scan_qr": "Importiere diese Wallet in Zeus oder BlueWallet, indem du den QRCode scannst.",
+          "title": "Verbindung mit Mobile Wallet",
+          "description": "Ermöglicht es dir, dieses Konto mit mobilen Wallets wie <0>Blue Wallet</0> und <0>Zeus</0> zu verbinden und zu verwenden"
         },
         "nostr": {
           "title": "Nostr",
@@ -437,7 +469,7 @@
             "successfully_removed": "Der private Schlüssel von Nostr wurde erfolgreich entfernt.",
             "label": "Nostr Privater Schlüssel",
             "failed_to_remove": "Der eingegebene Kontoname stimmt nicht überein, dein alter privater Nostr-Schlüssel wurde wiederhergestellt.",
-            "warning": "Bitte gebe den Namen des Kontos ein, um die Löschung des privaten Schlüssels von nostr zu bestätigen:\n\n{{ Name }}"
+            "warning": "Bist du dir sicher, dass du deinen privaten nostr-Schlüssel entfernen möchten?\n\nGebe \"{{Name}}\" zur Bestätigung ein:"
           },
           "public_key": {
             "label": "Nostr Öffentlicher Schlüssel"
@@ -461,11 +493,29 @@
           "settings": {
             "label": "Nostr Einstellungen",
             "title": "Nostr Einstellungen",
-            "imported_key_warning": "⚠️ Du verwendest derzeit einen importierten oder zufällig generierten Nostr-Schlüssel. Dein privater Nostr-Schlüssel kann nicht durch deine Wiederherstellungsphrase wiederhergestellt werden, also denke daran, deinen privaten Nostr-Schlüssel separat zu sichern.",
-            "can_restore": "✅ Nostr-Schlüssel, abgeleitet von Ihrem Hauptschlüssel",
+            "imported_key_warning": "Du verwendest derzeit einen importierten oder zufällig generierten Nostr-Schlüssel. Dein privater Nostr-Schlüssel kann nicht durch deine Wiederherstellungsphrase wiederhergestellt werden, also denke daran, deinen privaten Nostr-Schlüssel separat zu sichern.",
+            "can_restore": "Dein aktueller Nostr-Schlüssel wird vom Master Key abgeleitet.",
             "derive": "Vom Hauptschlüssel ableiten",
             "no_secret_key": "💡Du hast noch keinen Hauptschlüssel. <0>Klicke hier</0></div>, um deinen Hauptschlüssel zu erstellen und deine Nostr-Schlüssel abzuleiten.",
-            "remove": "Aktuelle Schlüssel entfernen"
+            "remove": "Aktuelle Schlüssel entfernen",
+            "nostr_keys": {
+              "title": "Nostr-Schlüssel",
+              "description": "Leite dein Nostr-Schlüssel von deinem Master Key ab oder importiere deinen bestehenden privaten Schlüssel, indem du in das Feld \"Nostr Private Key\" einfügst."
+            },
+            "remove_keys": {
+              "title": "Nostr-Schlüssel entfernen",
+              "description": "Entfernt die aktuellen Nostr-Schlüssel aus dieser Brieftasche."
+            },
+            "nostr_address": {
+              "description": "Du kannst deine Blitzadresse als Nostr-Adresse (NIP-05) verwenden und es anderen ermöglichen, dein Nostr-Profil leicht zu finden.",
+              "manage_nostr_address": {
+                "title": "Deine Nostr-Adresse",
+                "description": "{{lnaddress}} set to <0>{{npub}}</0>",
+                "description_alternate": "{{lnaddress}} <0>ist nicht als deine Nostr-Adresse eingestellt</0>",
+                "set_nip05": "Einstellung auf getalby.com"
+              },
+              "title": "Nostr-Adresse"
+            }
           },
           "setup": {
             "title": "Einrichten der Nostr-Schlüssel",
@@ -479,12 +529,16 @@
         },
         "remove": {
           "error": "Der eingegebene Kontoname stimmte nicht überein.",
-          "confirm": "Bitte gebe den Namen des Kontos ein, um die Löschung deines Kontos zu bestätigen:\n\n{{ Name }}\n\n⚠️ Wenn du fortfährst, werden alle zugehörigen Schlüssel (Hauptschlüssel, Nostr, etc.) gelöscht. Bitte vergewissern dich, dass du eine Sicherungskopie erstellt hast, denn es gibt keine andere Möglichkeit, sie wiederherzustellen."
+          "subtitle": "Alle verknüpften Zertifikate werden gelöscht. Bitte sei dir sicher.",
+          "title": "Diese Wallet entfernen",
+          "confirm": "Bist du dir sicher, dass du deine Wallet entfernen willst?\n\n⚠️ Wenn du fortfährst, werden alle zugehörigen Schlüssel (Master Key, Nostr, etc.) gelöscht. Bitte vergewisserne dich, dass du eine Sicherungskopie erstellt hast, denn es gibt keine andere Möglichkeit, sie wiederherzustellen.\n\n\nGebe \"{{Name}}\" zur Bestätigung ein:"
         },
         "actions": {
           "export": "Exportieren",
           "remove_secretkey": "Hauptschlüssel entfernen",
-          "disconnect_wallet": "Wallet abtrennen"
+          "disconnect_wallet": "Wallet abtrennen",
+          "connect_mobile_wallet": "Verbindung zur mobilen Wallet",
+          "change_lnaddress": "Ändern auf getalby.com"
         },
         "mnemonic": {
           "backup": {
@@ -492,8 +546,10 @@
               "nostr": "Nostr"
             },
             "save": "Hauptschlüssel speichern",
-            "button": "Zeige Wiederherstellungsphrase",
-            "description": "Notiere deine Wiederherstellungsphrase, um deinen Hauptschlüssel auf einem neuen Gerät wiederherstellen zu können oder für den Fall, dass du den Zugriff auf dein Konto verlierst."
+            "button": "Ansicht rRecovery pPhrase",
+            "description": "Notiere deine Wiederherstellungsphrase, um deinen Hauptschlüssel auf einem neuen Gerät wiederherstellen zu können oder für den Fall, dass du den Zugriff auf dein Konto verlierst.",
+            "title": "Sichere deine Recovery Phrase",
+            "warning": "⚠️ Vergesse nicht, deine Wiederherstellungsphrase zu sichern! Wird sie nicht gesichert, kann dies dazu führen, dass du den Zugang zu deinem Master Key, dein Nostr-Identität oder den von dir mit diesem Schlüssel verwalteten Assets dauerhaft verlierst"
           },
           "saved": "Hauptschlüssel erfolgreich verschlüsselt und gespeichert.",
           "generate": {
@@ -537,24 +593,33 @@
             "warning": "<0>Es kann diese Brieftasche oder das darin befindliche Guthaben nicht wiederherstellen,</0> es wird nur der Zugriff auf das oben genannte Protokoll wiederhergestellt"
           },
           "error_confirm": "Bitte vergewisser dich, dass du eine Sicherungskopie der Wiederherstellungsphrase erstellt hast.",
-          "confirm": "Ich habe die Wiederherstellungsphrase zu meinem Hauptschlüssel an einem privaten und sicheren Ort gesichert."
+          "confirm": "Ich habe die Wiederherstellungsphrase zu meinem Hauptschlüssel an einem privaten und sicheren Ort gesichert.",
+          "title": "Schlüsselverwaltung"
         },
         "remove_secretkey": {
           "title": "Hauptschlüssel entfernen",
           "success": "Der Hauptschlüssel wurde erfolgreich entfernt.",
-          "confirm": "Bitte gebe den Namen des Kontos ein, um die Löschung deines Hauptschlüssels zu bestätigen:\n\n{{ Name }}"
+          "subtitle": "Entfernt den Hauptschlüssel aus dieser Wallet.",
+          "confirm": "Bist du dir sicher, dass du deinen Hauptschlüssel entfernen möchten?\n\nGebe zur Bestätigung \"{{ Name }}\" ein:"
         },
         "network": {
           "options": {
             "bitcoin": "Mainnet",
             "testnet": "Testnet",
             "regtest": "Regtest"
-          }
+          },
+          "subtitle": "Wähle ein Netzwerk zur Ableitung von Adressen und zur Entschlüsselung von Bitcoin- und Liquid-Transaktionen",
+          "title": "Bitcoin Netzwerk"
         },
-        "no_mnemonic_hint": "💡 Du hast noch keinen Hauptschlüssel. <0>Klicken Sie hier</0></div>, um deinen Hauptschlüssel zu erstellen und diese Einstellungen freizuschalten."
+        "no_mnemonic_hint": "💡 Du hast noch keinen Hauptschlüssel. <0>Klicken Sie hier</0></div>, um deinen Hauptschlüssel zu erstellen und diese Einstellungen freizuschalten.",
+        "description": "Einstellungen, die sich auf diese spezielle Instanz der verbundenen Brieftasche beziehen. Wenn du die Verbindung wiederherstellst, müssen die Einstellungen für die Schlüssel oder den Anzeigenamen erneut vorgenommen werden.",
+        "lnaddress": {
+          "title": "Lightning Adresse"
+        },
+        "danger_zone": "Gefahrenzone"
       },
       "actions": {
-        "connect_a_wallet": "Verbinde deine Wallet"
+        "connect_a_wallet": "Verbinde eine deine Wallet"
       },
       "title": "Wallets"
     },
@@ -664,6 +729,10 @@
           "title": "Notiz löschen",
           "description": "Relays zum Löschen eines Ereignisses auffordern"
         },
+        "6": {
+          "title": "umbuchen",
+          "description": "Eine Notiz neu veröffentlichen"
+        },
         "7": {
           "title": "reagieren",
           "description": "Unterschreibe eine Reaktion auf eine Notiz"
@@ -732,11 +801,28 @@
           "title": "Anwendungsdaten",
           "description": "Anwendungsspezifische Daten unterschreiben"
         },
+        "10000135": {
+          "description": "Hochladen von Daten in Stücken",
+          "title": "Chunk hochladen"
+        },
         "unknown": {
           "description": "Nicht identifizierte Aktion",
           "title": "Art {{kind}}"
+        },
+        "10000": {
+          "title": "Stummschaltungsliste",
+          "description": "Blockiert Spammer und schlechte Schauspieler aus deinem Feed"
+        },
+        "10003": {
+          "description": "Lesezeichen für Benutzerbeiträge",
+          "title": "Lesezeichen"
+        },
+        "27235": {
+          "title": "HTTP-Authentifizierung",
+          "description": "HTTP Authentifizierung"
         }
-      }
+      },
+      "allow": "Erlaube {{Herausgeber}} zu {{Aktion}}"
     },
     "confirm_request_permission": {
       "title": "Antrag genehmigen",
@@ -1222,7 +1308,10 @@
     "apps": "Apps",
     "full_screen": "Vollbild",
     "hide_advanced": "Erweiterte Einstellungen ausblenden",
-    "advanced": "Erweiterte Einstellungen anzeigen"
+    "advanced": "Erweiterte Einstellungen anzeigen",
+    "details": "Einzelheiten",
+    "general": "Allgemein",
+    "wallet_settings": "Wallet-Einstellungen"
   },
   "permissions": {
     "commando": {
@@ -1346,7 +1435,7 @@
         "description": "Nachricht mit deinem Schlüssel unterschreiben"
       },
       "signmessage": {
-        "title": "Zeichen Nachricht",
+        "title": "Schildnachricht",
         "description": "Alle nostr-Veranstaltungen unterzeichnen"
       },
       "decrypt": {

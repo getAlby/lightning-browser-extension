@@ -264,6 +264,26 @@
       },
       "voltage": {
         "title": "Voltage"
+      },
+      "lawallet": {
+        "title": "LaWallet.io",
+        "page": {
+          "title": "Conecte-se na LaWallet",
+          "instructions": "Insira suas credenciais Lawallet abaixo"
+        },
+        "private_key": "Chave privada",
+        "errors": {
+          "toast": {
+            "title": "Identidade não encontrada"
+          }
+        }
+      },
+      "nwc": {
+        "page": {
+          "url": {
+            "placeholder": "nostr+walletconnect://69effe..."
+          }
+        }
       }
     },
     "home": {
@@ -306,7 +326,9 @@
           "screen_reader": "Exportar detalhes da conta",
           "waiting": "aguardando dados LndHub...",
           "export_uri": "Credenciais URI LNDHub",
-          "scan_qr": "Leia o código QR para importar esta carteira na Zeus ou BlueWallet."
+          "scan_qr": "Leia o código QR para importar esta carteira na Zeus ou BlueWallet.",
+          "description": "Permite conectar e usar esta conta em carteiras de celular como por ex a <0>Blue Wallet</0> e a <1>Zeus</1>.",
+          "title": "Conectar sua carteira de celular"
         },
         "nostr": {
           "title": "Nostr",
@@ -316,8 +338,7 @@
             "label": "Chave privada Nostr",
             "subtitle": "Cole sua chave privada Nostr ou gere uma nova. <0>Saiba mais »</0>",
             "success": "Chave privada Nostr criptografada e salva com sucesso.",
-            "failed_to_remove": "O nome da conta inserido não está correto, sua chave privada Nostr antiga foi restaurada.",
-            "warning": "Por favor, insira o nome da conta para confirmar a exclusão de sua chave privada nostr:\n\n{{ name }}"
+            "failed_to_remove": "O nome da conta inserido não está correto, sua chave privada Nostr antiga foi restaurada."
           },
           "public_key": {
             "label": "Chave pública Nostr"
@@ -345,7 +366,23 @@
             "can_restore": "✅ Chave Nostr gerada a partir de sua chave mestra",
             "no_secret_key": "💡 Você ainda não tem uma chave mestra. <0>Clique aqui</0></div> para gerar sua chave mestra e suas chaves Nostr.",
             "imported_key_warning": "⚠️ No momento, você está usando uma chave Nostr importada ou gerada aleatoriamente. Sua chave privada Nostr não pode ser restaurada por sua frase de recuperação, então lembre-se de fazer o backup de sua chave privada Nostr separadamente.",
-            "remove": "Remover esta chave"
+            "remove": "Remover esta chave",
+            "nostr_address": {
+              "description": "Você pode usar seu endereço relâmpago como um endereço NOSTR (NIP-05), permitindo que as pessoas encontrem facilmente o seu perfil Nostr.",
+              "title": "Endereço Nostr",
+              "manage_nostr_address": {
+                "title": "Seu endereço Nostr",
+                "set_nip05": "Definir em getalby.com"
+              }
+            },
+            "nostr_keys": {
+              "title": "Chaves Nostr",
+              "description": "Gere uma chave Nostr a partir da sua chave mestra ou importe uma chave Nostr existente colando-a no campo \"Chave privada Nostr\"."
+            },
+            "remove_keys": {
+              "title": "Remover chaves Nostr",
+              "description": "Remove as chaves Nostr desta carteira."
+            }
           },
           "setup": {
             "title": "Configure suas chaves Nostr",
@@ -359,15 +396,16 @@
         },
         "remove": {
           "error": "O nome da conta inserido não corresponde.",
-          "confirm": "Por favor, insira o nome da conta para confirmar a exclusão:\n\n{{ name }}\n\n ⚠️ Por favor, insira o nome da conta para confirmar a exclusão. Todas as chaves associadas (Chave mestra, Nostr, etc) serão excluídas se você continuar. Certifique-se de ter feito backup das chaves, não há outra maneira de restaurá-las."
+          "title": "Remover esta carteira"
         },
         "actions": {
           "export": "Exportar",
           "remove_secretkey": "Remover chave mestra",
-          "disconnect_wallet": "Desconectar carteira"
+          "disconnect_wallet": "Desconectar carteira",
+          "change_lnaddress": "Alterar em getalby.com"
         },
         "name": {
-          "title": "Nome",
+          "title": "Nome de exibição",
           "placeholder": "Nome da conta"
         },
         "mnemonic": {
@@ -383,7 +421,9 @@
             "protocols": {
               "nostr": "Nostr"
             },
-            "description": "Anote a frase de recuperação para poder restaurar sua chave mestra em um novo dispositivo ou caso perca o acesso à sua conta."
+            "description": "Anote a frase de recuperação para poder restaurar sua chave mestra em um novo dispositivo ou caso perca o acesso à sua conta.",
+            "title": "Backup da sua chave de recuperação",
+            "warning": "Não se esqueça de fazer o backup de sua frase de recuperação! Não fazer o backup pode resultar na perda permanente do acesso à sua chave mestra, identidade Nostr ou ativos que você gerencia com esta chave."
           },
           "import": {
             "title": "Importar sua chave mestra",
@@ -421,21 +461,29 @@
             "secure_recovery_phrase": "Certifique-se de anotá-la em algum local seguro e privado"
           },
           "confirm": "Fiz o backup da frase de recuperação em um local privado e seguro.",
-          "error_confirm": "Confirme que você fez o backup da frase de recuperação."
+          "error_confirm": "Confirme que você fez o backup da frase de recuperação.",
+          "title": "Gerenciamento de chaves"
         },
         "remove_secretkey": {
           "title": "Remover chave mestra",
           "success": "Chave mestra removida com sucesso.",
-          "confirm": "Por favor, insira o nome da conta para confirmar a exclusão de sua chave mestra:\n\n{{ name }}"
+          "subtitle": "Remove a chave mestra desta conta."
         },
         "network": {
           "options": {
             "bitcoin": "Rede principal",
             "testnet": "Rede de testes",
             "regtest": "Regtest"
-          }
+          },
+          "subtitle": "Escolha a rede para gerar endereços e decodificar transações.",
+          "title": "Rede bitcoin"
         },
-        "no_mnemonic_hint": "💡 Você ainda não tem uma chave mestra. <0>Clique aqui</0></div> para gerar sua chave mestra e desbloquear essas configurações."
+        "no_mnemonic_hint": "💡 Você ainda não tem uma chave mestra. <0>Clique aqui</0></div> para gerar sua chave mestra e desbloquear essas configurações.",
+        "danger_zone": "Zona de perigo",
+        "lnaddress": {
+          "title": "Endereço relâmpago"
+        },
+        "description": "Configurações relacionadas à carteira atualmente selecionada. Se você reconectar a carteira, as configurações relacionadas a chaves ou nome de exibição terão que ser definidas novamente."
       },
       "actions": {
         "connect_a_wallet": "Conecte uma carteira"
@@ -531,7 +579,11 @@
         "subtitle": "Exibe no navegador notificações da Alby relacionadas a pagamentos e autenticação.",
         "title": "Notificações do navegador"
       },
-      "title": "Configurações da extensão"
+      "title": "Configurações da extensão",
+      "general": {
+        "title": "Geral"
+      },
+      "subtitle": "Configurações globais que afetam sua experiência em todas as carteiras conectadas na extensão Alby."
     },
     "send": {
       "title": "Enviar",
@@ -681,6 +733,9 @@
         "1": {
           "title": "nota curta"
         },
+        "3": {
+          "title": "atualizar lista de seguidores"
+        },
         "4": {
           "title": "mensagem direta"
         },
@@ -709,7 +764,7 @@
       },
       "other": {
         "title": "Outras carteiras",
-        "connect": "Conectar",
+        "connect": "Escolher carteira",
         "description": "Ideal para quem já possui uma carteira e precisa fazer pagamentos de quantias altas.",
         "point1": "Acesso instantâneo, não precisa de convite",
         "point4": "Sem endereço relâmpago e nostr",
@@ -997,7 +1052,10 @@
     "apps": "Apps",
     "full_screen": "Tela cheia",
     "hide_advanced": "Ocultar configurações avançadas",
-    "settings": "Configurações da extensão"
+    "settings": "Configurações da extensão",
+    "details": "Detalhes",
+    "wallet_settings": "Configurações da carteira",
+    "general": "Geral"
   },
   "components": {
     "allowance_menu": {
@@ -1103,7 +1161,9 @@
     "permissions_modal": {
       "content_label": "Permissões",
       "set_permissions": "Definir permissões:",
-      "ask_everytime": "Perguntar sempre por <0>{{permission}}</0>"
+      "ask_everytime": "Perguntar sempre para <0>{{permission}}</0>",
+      "dont_ask_current": "Não perguntar novamente para <0>{{permission}}</0>",
+      "dont_ask_any": "Não perguntar novamente para <0>qualquer solicitação nostr</0>"
     }
   },
   "permissions": {
