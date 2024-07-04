@@ -220,18 +220,16 @@ class NWCConnector implements Connector {
 function mapTLVRecords(
   tlvRecords: TLVRecord[] | undefined
 ): ConnectorTransaction["custom_records"] | undefined {
-  if (tlvRecords) {
-    const customRecords: ConnectorTransaction["custom_records"] = {};
-    for (const tlv of tlvRecords) {
-      // TODO: ConnectorTransaction["custom_records"] should not be in base64 format
-      // as this requires unnecessary re-encoding
-      customRecords[tlv.type.toString()] = Hex.parse(tlv.value).toString(
-        Base64
-      );
-    }
-    return customRecords;
+  if (!tlvRecords) {
+    return undefined;
   }
-  return undefined;
+  const customRecords: ConnectorTransaction["custom_records"] = {};
+  for (const tlv of tlvRecords) {
+    // TODO: ConnectorTransaction["custom_records"] should not be in base64 format
+    // as this requires unnecessary re-encoding
+    customRecords[tlv.type.toString()] = Hex.parse(tlv.value).toString(Base64);
+  }
+  return customRecords;
 }
 
 export default NWCConnector;
