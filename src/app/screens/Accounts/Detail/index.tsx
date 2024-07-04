@@ -53,6 +53,7 @@ function AccountDetail() {
 
   const { account: accountInfo } = useAccount();
 
+  // lightning address is returned for current active account
   const lightningAddress = accountInfo?.lightningAddress || "";
 
   const [account, setAccount] = useState<GetAccountRes | null>(null);
@@ -70,7 +71,6 @@ function AccountDetail() {
     url: "",
     lnAddress: "",
   });
-  const { account: authAccount } = useAccount();
 
   async function exportAccount({ id, name }: AccountAction) {
     setExportLoading(true);
@@ -238,8 +238,10 @@ function AccountDetail() {
                   />
                 </div>
               </form>
+              {/* show lnaddress setting only for OAuth accounts and active account settings */}
               {lightningAddress &&
-                isAlbyOAuthAccount(authAccount?.connectorType) && (
+                isAlbyOAuthAccount(account.connectorType) &&
+                account.id === auth.account?.id && (
                   <>
                     <MenuDivider />
                     <div className="flex flex-col sm:flex-row justify-between items-center">

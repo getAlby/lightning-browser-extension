@@ -469,7 +469,7 @@
             "successfully_removed": "Der private Schlüssel von Nostr wurde erfolgreich entfernt.",
             "label": "Nostr Privater Schlüssel",
             "failed_to_remove": "Der eingegebene Kontoname stimmt nicht überein, dein alter privater Nostr-Schlüssel wurde wiederhergestellt.",
-            "warning": "Bitte gebe den Namen des Kontos ein, um die Löschung des privaten Schlüssels von nostr zu bestätigen:\n\n{{ Name }}"
+            "warning": "Bist du dir sicher, dass du deinen privaten nostr-Schlüssel entfernen möchten?\n\nGebe \"{{Name}}\" zur Bestätigung ein:"
           },
           "public_key": {
             "label": "Nostr Öffentlicher Schlüssel"
@@ -529,9 +529,9 @@
         },
         "remove": {
           "error": "Der eingegebene Kontoname stimmte nicht überein.",
-          "confirm": "Bitte gebe den Namen des Kontos ein, um die Löschung deines Kontos zu bestätigen:\n\n{{ Name }}\n\n⚠️ Wenn du fortfährst, werden alle zugehörigen Schlüssel (Hauptschlüssel, Nostr, etc.) gelöscht. Bitte vergewissern dich, dass du eine Sicherungskopie erstellt hast, denn es gibt keine andere Möglichkeit, sie wiederherzustellen.",
           "subtitle": "Alle verknüpften Zertifikate werden gelöscht. Bitte sei dir sicher.",
-          "title": "Diese Wallet entfernen"
+          "title": "Diese Wallet entfernen",
+          "confirm": "Bist du dir sicher, dass du deine Wallet entfernen willst?\n\n⚠️ Wenn du fortfährst, werden alle zugehörigen Schlüssel (Master Key, Nostr, etc.) gelöscht. Bitte vergewisserne dich, dass du eine Sicherungskopie erstellt hast, denn es gibt keine andere Möglichkeit, sie wiederherzustellen.\n\n\nGebe \"{{Name}}\" zur Bestätigung ein:"
         },
         "actions": {
           "export": "Exportieren",
@@ -599,8 +599,8 @@
         "remove_secretkey": {
           "title": "Hauptschlüssel entfernen",
           "success": "Der Hauptschlüssel wurde erfolgreich entfernt.",
-          "confirm": "Bitte gebe den Namen des Kontos ein, um die Löschung deines Hauptschlüssels zu bestätigen:\n\n{{ Name }}",
-          "subtitle": "Entfernt den Hauptschlüssel aus dieser Wallet."
+          "subtitle": "Entfernt den Hauptschlüssel aus dieser Wallet.",
+          "confirm": "Bist du dir sicher, dass du deinen Hauptschlüssel entfernen möchten?\n\nGebe zur Bestätigung \"{{ Name }}\" ein:"
         },
         "network": {
           "options": {
@@ -729,6 +729,10 @@
           "title": "Notiz löschen",
           "description": "Relays zum Löschen eines Ereignisses auffordern"
         },
+        "6": {
+          "title": "umbuchen",
+          "description": "Eine Notiz neu veröffentlichen"
+        },
         "7": {
           "title": "reagieren",
           "description": "Unterschreibe eine Reaktion auf eine Notiz"
@@ -797,17 +801,25 @@
           "title": "Anwendungsdaten",
           "description": "Anwendungsspezifische Daten unterschreiben"
         },
+        "10000135": {
+          "description": "Hochladen von Daten in Stücken",
+          "title": "Chunk hochladen"
+        },
         "unknown": {
           "description": "Nicht identifizierte Aktion",
           "title": "Art {{kind}}"
         },
-        "6": {
-          "title": "umbuchen",
-          "description": "Eine Notiz neu veröffentlichen"
+        "10000": {
+          "title": "Stummschaltungsliste",
+          "description": "Blockiert Spammer und schlechte Schauspieler aus deinem Feed"
         },
-        "10000135": {
-          "description": "Hochladen von Daten in Stücken",
-          "title": "Chunk hochladen"
+        "10003": {
+          "description": "Lesezeichen für Benutzerbeiträge",
+          "title": "Lesezeichen"
+        },
+        "27235": {
+          "title": "HTTP-Authentifizierung",
+          "description": "HTTP Authentifizierung"
         }
       },
       "allow": "Erlaube {{Herausgeber}} zu {{Aktion}}"

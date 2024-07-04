@@ -541,7 +541,7 @@
           "private_key": {
             "title": "Manage your Nostr private key",
             "subtitle": "Paste your nostr private key or generate a new one. <0>Learn more »</0>",
-            "warning": "Please enter the name of the account to confirm the deletion of your nostr private key:\n\n{{ name }}",
+            "warning": "Are you sure you want to remove your nostr private key?\n\nType \"{{name}}\" to confirm:",
             "success": "Nostr private key encrypted & saved successfully.",
             "failed_to_remove": "The entered account name didn't match, your old Nostr private key has been restored.",
             "successfully_removed": "Nostr private key removed successfully.",
@@ -569,13 +569,13 @@
         "remove": {
           "title": "Remove This Wallet",
           "subtitle": "All the linked allowances will be deleted. Please be certain.",
-          "confirm": "Please enter the name of the account to confirm the deletion of your account:\n\n{{ name }}\n\n ⚠️ All associated keys (Master Key, Nostr, etc) will be deleted if you continue. Please make sure you have backed them up, there is no other way to restore them.",
+          "confirm": "Are you sure you want to remove your wallet?\n\n⚠️ All associated keys (Master Key, Nostr, etc) will be deleted if you continue. Please make sure you have backed them up, there is no other way to restore them.\n\nType \"{{name}}\" to confirm:",
           "error": "The entered account name didn't match."
         },
         "remove_secretkey": {
           "title": "Remove Master Key",
           "subtitle": "Removes the Master Key from this wallet.",
-          "confirm": "Please enter the name of the account to confirm the deletion of your Master Key:\n\n{{ name }}",
+          "confirm": "Are you sure you want to remove your Master Key?\n\nType \"{{ name }}\" to confirm:",
           "success": "Successfully removed the Master Key."
         },
         "actions": {
@@ -1039,9 +1039,17 @@
           "title": "zap receipt",
           "description": "Display a confirmation of a paid lightning invoice"
         },
+        "10000": {
+          "title": "mute list",
+          "description": "Blocks spammers and bad actors from your feed"
+        },
         "10002": {
           "title": "relay list",
           "description": "Update preferred relays for discovering your notes and receiving others' notes"
+        },
+        "10003": {
+          "title": "bookmarks",
+          "description": "Bookmark user posts"
         },
         "22242": {
           "title": "authenticate",
@@ -1050,6 +1058,10 @@
         "24133": {
           "title": "remote sign",
           "description": "Request and sign events remotely"
+        },
+        "27235": {
+          "title": "HTTP Auth",
+          "description": "HTTP Authentication"
         },
         "30008": {
           "title": "profile badge",
@@ -1339,7 +1351,6 @@
         "title": "encrypt",
         "description": "Encrypt data"
       },
-
       "signmessage": {
         "title": "sign message",
         "description": "Sign all nostr events"
