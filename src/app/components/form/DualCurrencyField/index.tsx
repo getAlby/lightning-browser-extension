@@ -6,10 +6,10 @@ import { classNames } from "~/app/utils";
 import { RangeLabel } from "./rangeLabel";
 
 export type DualCurrencyFieldChangeEventTarget = HTMLInputElement & {
-  valueInFiat: number;
-  formattedValueInFiat: string;
-  valueInSats: number;
-  formattedValueInSats: string;
+  valueInFiat: number; // current value converted to fiat
+  formattedValueInFiat: string; // current value in fiat formatted (e.g. $10.00)
+  valueInSats: number; // current value in sats
+  formattedValueInSats: string; // current value in sats formatted (e.g. 1000 sats)
 };
 
 export type DualCurrencyFieldChangeEvent =
@@ -24,8 +24,7 @@ export type Props = {
   hint?: string;
   amountExceeded?: boolean;
   rangeExceeded?: boolean;
-  baseToAltRate?: number;
-  showFiat?: boolean;
+  showFiat?: boolean; // compute and show fiat value
   onChange?: (e: DualCurrencyFieldChangeEvent) => void;
 };
 
@@ -74,6 +73,8 @@ export default function DualCurrencyField({
   const [inputPrefix, setInputPrefix] = useState("");
   const [inputPlaceHolder, setInputPlaceHolder] = useState(placeholder || "");
 
+  // Perform currency conversions for the input value
+  // always returns formatted and raw values in sats and fiat
   const convertValues = useCallback(
     async (inputValue: number, inputInFiat: boolean) => {
       const userCurrency = settings?.currency || "BTC";
@@ -86,7 +87,7 @@ export default function DualCurrencyField({
         valueInSats = Math.round(valueInFiat / rate);
       } else {
         valueInSats = Number(inputValue);
-        valueInFiat = Math.round(valueInSats * rate * 100) / 100.0;
+        valueInFiat = Math.round(valueInSats * rate * 10000) / 10000.0;
       }
 
       const formattedSats = getFormattedInCurrency(valueInSats, "BTC");
@@ -102,6 +103,7 @@ export default function DualCurrencyField({
     [getCurrencyRate, getFormattedInCurrency, settings]
   );
 
+  // Use fiat as main currency for the input
   const setUseFiatAsMain = useCallback(
     async (useFiatAsMain: boolean, recalculateValue: boolean = true) => {
       if (!showFiat) useFiatAsMain = false;
@@ -111,7 +113,7 @@ export default function DualCurrencyField({
       if (min) {
         setMinValue(
           useFiatAsMain
-            ? (Math.round(Number(min) * rate * 100) / 100.0).toString()
+            ? (Math.round(Number(min) * rate * 10000) / 10000.0).toString()
             : min
         );
       }
@@ -119,7 +121,7 @@ export default function DualCurrencyField({
       if (max) {
         setMaxValue(
           useFiatAsMain
-            ? (Math.round(Number(max) * rate * 100) / 100.0).toString()
+            ? (Math.round(Number(max) * rate * 10000) / 10000.0).toString()
             : max
         );
       }
@@ -127,7 +129,7 @@ export default function DualCurrencyField({
       _setUseFiatAsMain(useFiatAsMain);
       if (recalculateValue) {
         const newValue = useFiatAsMain
-          ? Math.round(Number(inputValue) * rate * 100) / 100.0
+          ? Math.round(Number(inputValue) * rate * 10000) / 10000.0
           : Math.round(Number(inputValue) / rate);
         setInputValue(newValue);
       }
@@ -153,10 +155,12 @@ export default function DualCurrencyField({
     ]
   );
 
+  // helper to swap currencies (btc->fiat fiat->btc)
   const swapCurrencies = () => {
     setUseFiatAsMain(!useFiatAsMain);
   };
 
+  // This wraps the onChange event and converts input values
   const onChangeWrapper = useCallback(
     async (e: React.ChangeEvent<HTMLInputElement>) => {
       setInputValue(e.target.value);
@@ -165,16 +169,22 @@ export default function DualCurrencyField({
         const wrappedEvent: DualCurrencyFieldChangeEvent =
           e as DualCurrencyFieldChangeEvent;
 
+        // Convert and inject the converted values into the event
         const value = Number(e.target.value);
         const { valueInSats, formattedSats, valueInFiat, formattedFiat } =
           await convertValues(value, useFiatAsMain);
+
+        // we need to clone the target to avoid side effects on react internals
         wrappedEvent.target =
           e.target.cloneNode() as DualCurrencyFieldChangeEventTarget;
+        // ensure the value field is always in sats, this allows the code using this component
+        // to "reason in sats" and not have to worry about the user's currency
         wrappedEvent.target.value = valueInSats.toString();
         wrappedEvent.target.valueInFiat = valueInFiat;
         wrappedEvent.target.formattedValueInFiat = formattedFiat;
         wrappedEvent.target.valueInSats = valueInSats;
         wrappedEvent.target.formattedValueInSats = formattedSats;
+        // Call the original onChange callback
         onChange(wrappedEvent);
       }
     },
@@ -229,7 +239,7 @@ export default function DualCurrencyField({
       disabled={disabled}
       min={minValue}
       max={maxValue}
-      step={useFiatAsMain ? "0.01" : "1"}
+      step={useFiatAsMain ? "0.0001" : "1"}
     />
   );
 
