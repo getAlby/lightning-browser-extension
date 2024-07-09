@@ -81,7 +81,7 @@ class NWCConnector implements Connector {
   async getBalance(): Promise<GetBalanceResponse> {
     const balance = await this.nwc.getBalance();
     return {
-      data: { balance: balance.balance / 1000, currency: "BTC" },
+      data: { balance: Math.floor(balance.balance / 1000), currency: "BTC" },
     };
   }
 
@@ -100,7 +100,7 @@ class NWCConnector implements Connector {
           payment_hash: transaction.payment_hash,
           settled: true,
           settleDate: transaction.settled_at * 1000,
-          totalAmount: transaction.amount / 1000,
+          totalAmount: Math.floor(transaction.amount / 1000),
           type: transaction.type == "incoming" ? "received" : "sent",
           custom_records: mapTLVRecords(
             transaction.metadata?.["tlv_records"] as TLVRecord[] | undefined
@@ -154,8 +154,8 @@ class NWCConnector implements Connector {
         paymentHash,
         route: {
           // TODO: how to get amount paid for zero-amount invoices?
-          total_amt: parseInt(invoice.millisatoshis || "0") / 1000,
-          total_fees: transaction.fees_paid / 1000,
+          total_amt: Math.floor(parseInt(invoice.millisatoshis || "0") / 1000),
+          total_fees: Math.floor(transaction.fees_paid / 1000),
         },
       },
     };
@@ -181,7 +181,7 @@ class NWCConnector implements Connector {
 
         route: {
           total_amt: args.amount,
-          total_fees: transaction.fees_paid / 1000,
+          total_fees: Math.floor(transaction.fees_paid / 1000),
         },
       },
     };
@@ -229,7 +229,7 @@ class NWCConnector implements Connector {
   ): TlvRecord[] {
     return Object.entries(customRecords).map(([key, value]) => ({
       type: parseInt(key),
-      value: value,
+      value: Hex.parse(value).toString(Base64),
     }));
   }
 }
