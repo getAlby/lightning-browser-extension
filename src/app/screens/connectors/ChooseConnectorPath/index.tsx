@@ -22,6 +22,26 @@ export default function ChooseConnectorPath() {
         </h1>
         <div className="grid lg:grid-cols-2 gap-8 mb-4">
           <ConnectorPath
+            title={t("alby.title")}
+            icon={
+              <img
+                src="assets/icons/alby.png"
+                className="w-10 h-10 rounded-md"
+              />
+            }
+            description={t("alby.description")}
+            content={
+              <>
+                <FeatureItem type="warning">{t("alby.point1")}</FeatureItem>
+                <FeatureItem type="success">
+                  <span className="font-bold">{t("alby.point2")}</span>
+                </FeatureItem>
+                <FeatureItem type="success">{t("alby.point3")}</FeatureItem>
+              </>
+            }
+            actions={<ConnectAlby />}
+          />
+          <ConnectorPath
             title={t("other.title")}
             icon={
               <div className="grid grid-cols-2 gap-1">
@@ -48,35 +68,14 @@ export default function ChooseConnectorPath() {
               <>
                 <FeatureItem type="success">{t("other.point1")}</FeatureItem>
                 <FeatureItem type="success">{t("other.point2")}</FeatureItem>
-                <FeatureItem type="success">{t("other.point3")}</FeatureItem>
-                <FeatureItem type="disabled">{t("other.point4")}</FeatureItem>
+                <FeatureItem type="disabled">{t("other.point3")}</FeatureItem>
               </>
             }
             actions={
               <Link to="choose-connector" className="flex flex-1">
-                <Button tabIndex={-1} label={t("other.connect")} primary flex />
+                <Button tabIndex={-1} label={t("other.connect")} outline flex />
               </Link>
             }
-          />
-
-          <ConnectorPath
-            title={t("alby.title")}
-            icon={
-              <img
-                src="assets/icons/alby.png"
-                className="w-10 h-10 rounded-md"
-              />
-            }
-            description={t("alby.description")}
-            content={
-              <>
-                <FeatureItem type="warning">{t("alby.point1")}</FeatureItem>
-                <FeatureItem type="warning">{t("alby.point2")}</FeatureItem>
-                <FeatureItem type="success">{t("alby.point3")}</FeatureItem>
-                <FeatureItem type="success">{t("alby.point4")}</FeatureItem>
-              </>
-            }
-            actions={<ConnectAlby />}
           />
         </div>
       </div>
