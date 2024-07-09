@@ -773,9 +773,17 @@
           "title": "Rechnung zappen",
           "description": "Anzeige einer Bestätigung einer bezahlten Lightningrechnung"
         },
+        "10000": {
+          "title": "Stummschaltungsliste",
+          "description": "Blockiert Spammer und schlechte Schauspieler aus deinem Feed"
+        },
         "10002": {
           "title": "Relaisliste",
           "description": "Aktualisiere die bevorzugten Relais, um deine Notizen zu entdecken und die Notizen anderer zu empfangen"
+        },
+        "10003": {
+          "description": "Lesezeichen für Benutzerbeiträge",
+          "title": "Lesezeichen"
         },
         "22242": {
           "title": "authentifizieren",
@@ -784,6 +792,10 @@
         "24133": {
           "title": "Fernanzeige",
           "description": "Ereignisse aus der Ferne anfordern und unterzeichnen"
+        },
+        "27235": {
+          "title": "HTTP-Authentifizierung",
+          "description": "HTTP Authentifizierung"
         },
         "30008": {
           "description": "Akzeptieren, Ablehnen und Ändern der Anzeigereihenfolge von verliehenen Abzeichen",
@@ -808,18 +820,6 @@
         "unknown": {
           "description": "Nicht identifizierte Aktion",
           "title": "Art {{kind}}"
-        },
-        "10000": {
-          "title": "Stummschaltungsliste",
-          "description": "Blockiert Spammer und schlechte Schauspieler aus deinem Feed"
-        },
-        "10003": {
-          "description": "Lesezeichen für Benutzerbeiträge",
-          "title": "Lesezeichen"
-        },
-        "27235": {
-          "title": "HTTP-Authentifizierung",
-          "description": "HTTP Authentifizierung"
         }
       },
       "allow": "Erlaube {{Herausgeber}} zu {{Aktion}}"
@@ -913,21 +913,13 @@
     "choose_path": {
       "other": {
         "title": "Bringe dein eigenes Wallet mit",
-        "connect": "Verbinden",
-        "description": "Am besten, wenn du bereits eine Wallet hast oder ein hohes Zahlungsvolumen abwickeln möchtest.",
         "point1": "Sofortiger Start, kein Warten auf eine Einladung",
-        "point4": "Kein lightning und nostr Adresse",
-        "point3": "Sowohl Selbstverwahrungs- als auch Verwahrungsoptionen",
-        "point2": "Keine Transaktions- oder Volumenbeschränkungen"
+        "point4": "Kein lightning und nostr Adresse"
       },
       "alby": {
         "title": "Alby Konto",
-        "connect": "Mit Alby verbinden",
-        "description": "Ideal für Einsteiger oder alle, die ein tolles Wallet für den täglichen Gebrauch suchen.",
-        "point3": "Einrichten und Anmelden mit deiner E-Mail",
         "point1": "Neue Anmeldungen erfordern einen Einladungscode",
-        "point4": "Eindeutige Lightning- und Nostr-Adresse",
-        "point2": "Es gelten Grenzen für das Transaktionsvolumen"
+        "point4": "Eindeutige Lightning- und Nostr-Adresse"
       },
       "title": "Wallet mit Alby-Erweiterung verbinden"
     },

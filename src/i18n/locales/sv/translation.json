@@ -584,14 +584,10 @@
     },
     "choose_path": {
       "alby": {
-        "title": "Alby Konto",
-        "connect": "Anslut med Alby",
-        "description": "Registrera dig eller använd ditt befintliga Alby konto. Perfekt att snabbt komma igång och för små belopp."
+        "title": "Alby Konto"
       },
       "other": {
-        "title": "Annan Plånbok",
-        "connect": "Anslut",
-        "description": "Anslut till din befintliga lightning plånbok eller nod och välj bland olika kontakter. Perfekt för full flexibilitet. Kör din egen nod."
+        "title": "Annan Plånbok"
       }
     },
     "alby": {

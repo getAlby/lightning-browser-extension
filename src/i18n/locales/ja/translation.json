@@ -34,12 +34,10 @@
     },
     "choose_path": {
       "alby": {
-        "title": "Albyアカウント",
-        "connect": "Albyと接続"
+        "title": "Albyアカウント"
       },
       "other": {
-        "title": "その他のウォレット",
-        "connect": "接続"
+        "title": "その他のウォレット"
       }
     },
     "alby": {
