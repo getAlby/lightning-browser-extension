@@ -192,10 +192,10 @@
           "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.co"
         },
         "errors": {
-          "connection_failed": "Verbindung fehlgeschlagen. Ist die BTCPay Verbindungs URL korrekt und zugänglich?"
+          "connection_failed": "Verbindung fehlgeschlagen. Ist die BTCPay Verbindungs-URL korrekt und zugänglich?"
         },
         "page": {
-          "instructions": "Navigiere zu deinem BTCPayServer und melde dich als Administrator an. Gehe zu Servereinstellungen > Dienste > LND REST - Informationen anzeigen. Klicke dann auf \"QR-Code-Informationen anzeigen\" und kopiere die QR-Code-Daten. Fügen sie unten ein:",
+          "instructions": "Navigiere zu deinem BTCPay Server und melde dich als Administrator an. Gehe zu Servereinstellungen > Dienste > LND REST - Informationen anzeigen. Klicke dann auf \"QR-Code-Informationen anzeigen\" und kopiere die QR-Code-Daten. Fügen sie unten ein:",
           "title": "Verbindung zu BTCPay LND"
         }
       },
@@ -203,7 +203,7 @@
         "title": "Core Lightning",
         "page": {
           "title": "Verbinden mit deiner Core Lightning Node",
-          "instructions": "Stelle sicher, dass du die Core Lightning Version 0.12.0 oder neuer hast, das Commando-Plugin ausgeführt wird und deine Node über das Llightning Network zugänglich ist. Erstelle eine Rune, indem du „lightning-cli commando-rune“ ausführst."
+          "instructions": "Stelle sicher, dass du die Core Lightning Version 0.12.0 oder neuer hast, das Commando-Plugin ausgeführt wird und deine Node über das Lightning Network zugänglich ist. Erstelle eine Rune, indem du „lightning-cli commando-rune“ ausführst."
         },
         "host": {
           "label": "Host"
