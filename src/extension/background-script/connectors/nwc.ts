@@ -2,6 +2,7 @@ import { nwc } from "@getalby/sdk";
 import lightningPayReq from "bolt11-signet";
 import Base64 from "crypto-js/enc-base64";
 import Hex from "crypto-js/enc-hex";
+import UTF8 from "crypto-js/enc-utf8";
 import SHA256 from "crypto-js/sha256";
 import { Account } from "~/types";
 import Connector, {
@@ -229,7 +230,7 @@ class NWCConnector implements Connector {
   ): TlvRecord[] {
     return Object.entries(customRecords).map(([key, value]) => ({
       type: parseInt(key),
-      value: Hex.parse(value).toString(Base64),
+      value: UTF8.parse(value).toString(Hex),
     }));
   }
 }
