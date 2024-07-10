@@ -15,7 +15,7 @@ export default function ChooseConnectorPath() {
   });
 
   return (
-    <div className="relative mt-10 lg:grid lg:gap-8">
+    <div className="mx-auto max-w-3xl">
       <div className="relative">
         <h1 className="text-2xl font-bold dark:text-white text-center mb-8">
           {t("title")}
@@ -80,7 +80,7 @@ export default function ChooseConnectorPath() {
             }
             actions={
               <Link to="choose-connector" className="flex flex-1">
-                <Button tabIndex={-1} label={t("other.connect")} outline flex />
+                <Button tabIndex={-1} label={t("other.connect")} flex />
               </Link>
             }
           />
