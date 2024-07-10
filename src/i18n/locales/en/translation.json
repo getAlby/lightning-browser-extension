@@ -36,22 +36,22 @@
       }
     },
     "choose_path": {
-      "title": "Connect Wallet to Alby Extension",
+      "title": "Connect Alby Extension to a wallet",
       "other": {
         "title": "Bring Your Own Wallet",
-        "description": "Good if you already have a wallet or own lightning node.",
+        "description": "Best if you already have a wallet or own a lightning node.",
         "connect": "Find Your Wallet",
-        "point1": "Start instantly, no waiting for an invite",
-        "point2": "Both self-custody and custodial options",
-        "point3": "No lightning and nostr address"
+        "point1": "Both self-custody and custodial options",
+        "point2": "No lightning and nostr address",
+        "point3": "Start instantly, no waiting for an invite"
       },
       "alby": {
         "title": "Alby Account",
-        "description": "Ideal if you would like to enjoy apps while staying in control of your bitcoin.",
+        "description": "Ideal If you would like to enjoy apps while staying in control of your bitcoin.",
         "connect": "Continue with Alby Account",
-        "point1": "New signups require an invite code",
-        "point2": "Alby Hub: your self-custodial wallet",
-        "point3": "Unique lightning and nostr address"
+        "point1": "New self-custodial wallet — <0>Alby Hub</0>",
+        "point2": "Unique lightning and nostr address",
+        "point3": "New signups require an invite code"
       }
     },
     "alby": {

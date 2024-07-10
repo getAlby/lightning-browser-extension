@@ -3,7 +3,7 @@ import {
   PopiconsCircleExclamationLine,
   PopiconsCircleXLine,
 } from "@popicons/react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import Button from "~/app/components/Button";
 import ConnectorPath from "~/app/components/ConnectorPath";
@@ -32,11 +32,18 @@ export default function ChooseConnectorPath() {
             description={t("alby.description")}
             content={
               <>
-                <FeatureItem type="warning">{t("alby.point1")}</FeatureItem>
                 <FeatureItem type="success">
-                  <span className="font-bold">{t("alby.point2")}</span>
+                  <Trans
+                    i18nKey={"alby.point1"}
+                    t={t}
+                    components={[
+                      // eslint-disable-next-line react/jsx-key
+                      <b></b>,
+                    ]}
+                  />
                 </FeatureItem>
-                <FeatureItem type="success">{t("alby.point3")}</FeatureItem>
+                <FeatureItem type="success">{t("alby.point2")}</FeatureItem>
+                <FeatureItem type="warning">{t("alby.point3")}</FeatureItem>
               </>
             }
             actions={<ConnectAlby />}
@@ -67,8 +74,8 @@ export default function ChooseConnectorPath() {
             content={
               <>
                 <FeatureItem type="success">{t("other.point1")}</FeatureItem>
-                <FeatureItem type="success">{t("other.point2")}</FeatureItem>
-                <FeatureItem type="disabled">{t("other.point3")}</FeatureItem>
+                <FeatureItem type="disabled">{t("other.point2")}</FeatureItem>
+                <FeatureItem type="success">{t("other.point3")}</FeatureItem>
               </>
             }
             actions={
