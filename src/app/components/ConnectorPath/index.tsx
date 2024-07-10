@@ -15,11 +15,11 @@ function ConnectorPath({ title, icon, description, content, actions }: Props) {
           {title}
         </h1>
       </div>
-      <p className="mb-8">{description}</p>
-      <div className="flex flex-col space-y-4 text-sm mb-8 text-gray-600 dark:text-neutral-400">
+      <p className="mb-8 text-gray-600 dark:text-neutral-400">{description}</p>
+      <div className="flex flex-col space-y-4 text-sm dark:text-white">
         {content}
       </div>
-      <div className="flex gap-4 flex-col sm:flex-row mt-8">{actions}</div>
+      <div className="flex gap-4 flex-col sm:flex-row mt-12">{actions}</div>
     </div>
   );
 }

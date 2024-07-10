@@ -79,7 +79,7 @@ export default function ChooseConnectorPath() {
               </>
             }
             actions={
-              <Link to="choose-connector" className="flex flex-1">
+              <Link to="choose-connector" className="flex flex-1 mt-1">
                 <Button tabIndex={-1} label={t("other.connect")} flex />
               </Link>
             }
