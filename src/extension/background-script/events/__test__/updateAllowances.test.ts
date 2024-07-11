@@ -32,9 +32,9 @@ const data: PaymentNotificationData = {
   origin: {
     location: "test",
     domain: "",
-    host: "pro.kollider.xyz",
+    host: "getalby.com",
     pathname: "test",
-    name: "Kollider",
+    name: "Alby",
     description: "test",
     icon: "",
     metaData: {},
@@ -56,7 +56,7 @@ describe("Update Allowances", () => {
         internal: true,
       },
       args: {
-        host: "pro.kollider.xyz",
+        host: "getalby.com",
       },
     };
 

@@ -4,6 +4,7 @@ import Commando from "./commando";
 import Eclair from "./eclair";
 import Galoy from "./galoy";
 import Kollider from "./kollider";
+import LaWallet from "./lawallet";
 import LnBits from "./lnbits";
 import Lnc from "./lnc";
 import Lnd from "./lnd";
@@ -12,6 +13,7 @@ import NativeCitadel from "./nativecitadel";
 import NativeLnBits from "./nativelnbits";
 import NativeLnd from "./nativelnd";
 import NativeLndHub from "./nativelndhub";
+import NWC from "./nwc";
 
 /*
 const initialize = (account, password) => {
@@ -26,6 +28,7 @@ const connectors = {
   nativelnd: NativeLnd,
   lndhub: LndHub,
   nativelndhub: NativeLndHub,
+  kollider: Kollider,
   lnbits: LnBits,
   lnc: Lnc,
   nativelnbits: NativeLnBits,
@@ -34,8 +37,9 @@ const connectors = {
   citadel: Citadel,
   nativecitadel: NativeCitadel,
   commando: Commando,
-  kollider: Kollider,
   alby: Alby,
+  nwc: NWC,
+  lawallet: LaWallet,
 };
 
 export default connectors;

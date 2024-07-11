@@ -1,11 +1,5 @@
 import ProviderBase from "~/extension/providers/providerBase";
 
-declare global {
-  interface Window {
-    webln: WebLNProvider;
-  }
-}
-
 type RequestInvoiceArgs = {
   amount?: string | number;
   defaultAmount?: string | number;
@@ -38,6 +32,10 @@ export default class WebLNProvider extends ProviderBase {
   sendPayment(paymentRequest: string) {
     this._checkEnabled("sendPayment");
     return this.execute("sendPaymentOrPrompt", { paymentRequest });
+  }
+  sendPaymentAsync(paymentRequest: string) {
+    this._checkEnabled("sendPaymentAsync");
+    return this.execute("sendPaymentAsyncWithPrompt", { paymentRequest });
   }
 
   keysend(args: KeysendArgs) {

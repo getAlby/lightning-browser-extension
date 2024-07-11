@@ -4,16 +4,17 @@ import LnMessage from "lnmessage";
 import { v4 as uuidv4 } from "uuid";
 import { Account } from "~/types";
 
+import { mergeTransactions } from "~/common/utils/helpers";
 import Connector, {
   CheckPaymentArgs,
   CheckPaymentResponse,
-  ConnectorInvoice,
+  ConnectorTransaction,
   ConnectPeerArgs,
   ConnectPeerResponse,
   flattenRequestMethods,
   GetBalanceResponse,
   GetInfoResponse,
-  GetInvoicesResponse,
+  GetTransactionsResponse,
   KeysendArgs,
   MakeInvoiceArgs,
   MakeInvoiceResponse,
@@ -46,13 +47,16 @@ type CommandoMakeInvoiceResponse = {
   payment_secret: string;
 };
 type CommandoChannel = {
-  peer_id: string;
-  channel_sat: number;
-  amount_msat: number;
-  funding_txid: string;
-  funding_output: number;
-  connected: boolean;
-  state: string;
+  peer_id?: string;
+  funding_txid?: string;
+  funding_output?: string;
+  connected?: boolean;
+  state?: string;
+  short_channel_id?: string;
+  our_amount_msat?: number;
+  channel_sat?: number;
+  channel_total_sat?: number;
+  amount_msat?: number;
 };
 type CommandoListFundsResponse = {
   channels: CommandoChannel[];
@@ -60,25 +64,59 @@ type CommandoListFundsResponse = {
 type CommandoListInvoicesResponse = {
   invoices: CommandoInvoice[];
 };
+
+type CommandoListSendPaysResponse = {
+  payments: CommandoPayment[];
+};
+
 type CommandoPayInvoiceResponse = {
   payment_preimage: string;
   payment_hash: string;
-  msatoshi: number;
-  msatoshi_sent: number;
+  created_at: number;
+  parts: string;
+  amount_msat: number;
+  amount_sent_msat: number;
+  status: string;
+  destination?: string;
 };
+
 type CommandoListInvoiceResponse = {
   invoices: CommandoInvoice[];
 };
 
 type CommandoInvoice = {
   label: string;
+  payment_hash: string;
   status: string;
-  description: string;
-  msatoshi: number;
-  bolt11: string;
+  expires_at: number;
+  description?: string;
+  amount_msat?: number;
+  bolt11?: string;
+  bolt12?: string;
+  local_offer_id?: number;
+  invreq_payer_note?: string;
+  pay_index: number;
+  amount_received_msat: number;
   payment_preimage: string;
   paid_at: number;
+};
+
+type CommandoPayment = {
+  id: number;
+  partid?: number;
+  groupid: number;
+  created_at: number;
+  label?: string;
+  status: string;
+  description?: string;
+  amount_sent_msat: number;
+  amount_msat?: number;
+  bolt11?: string;
+  bolt12?: string;
+  payment_preimage: string;
   payment_hash: string;
+  destination: string;
+  erroronion?: string;
 };
 
 const supportedMethods: string[] = [
@@ -148,6 +186,7 @@ export default class Commando implements Connector {
       "keysend",
       "makeInvoice",
       "sendPayment",
+      "sendPaymentAsync",
       "signMessage",
       "getBalance",
       ...flattenRequestMethods(supportedMethods),
@@ -189,7 +228,7 @@ export default class Commando implements Connector {
       });
   }
 
-  async getInvoices(): Promise<GetInvoicesResponse> {
+  private async getInvoices(): Promise<ConnectorTransaction[]> {
     return this.ln
       .commando({
         method: "listinvoices",
@@ -198,26 +237,62 @@ export default class Commando implements Connector {
       })
       .then((resp) => {
         const parsed = resp as CommandoListInvoicesResponse;
-        return {
-          data: {
-            invoices: parsed.invoices
-              .map(
-                (invoice, index): ConnectorInvoice => ({
-                  id: invoice.label,
-                  memo: invoice.description,
-                  settled: invoice.status === "paid",
-                  preimage: invoice.payment_preimage,
-                  settleDate: invoice.paid_at * 1000,
-                  type: "received",
-                  totalAmount: (invoice.msatoshi / 1000).toString(),
-                })
-              )
-              .filter((invoice) => invoice.settled)
-              .sort((a, b) => {
-                return b.settleDate - a.settleDate;
-              }),
-          },
-        };
+        return parsed.invoices
+          .map(
+            (invoice, index): ConnectorTransaction => ({
+              id: invoice.label,
+              memo: invoice.description,
+              settled: invoice.status === "paid",
+              preimage: invoice.payment_preimage,
+              payment_hash: invoice.payment_hash,
+              settleDate: invoice.paid_at * 1000,
+              type: "received",
+              totalAmount: Math.floor(invoice.amount_received_msat / 1000),
+            })
+          )
+          .filter((invoice) => invoice.settled);
+      });
+  }
+
+  async getTransactions(): Promise<GetTransactionsResponse> {
+    const incomingInvoicesResponse = await this.getInvoices();
+    const outgoingInvoicesResponse = await this.getPayments();
+
+    const transactions: ConnectorTransaction[] = mergeTransactions(
+      incomingInvoicesResponse,
+      outgoingInvoicesResponse
+    );
+
+    return {
+      data: {
+        transactions,
+      },
+    };
+  }
+
+  private async getPayments(): Promise<ConnectorTransaction[]> {
+    return await this.ln
+      .commando({
+        method: "listsendpays",
+        params: {},
+        rune: this.config.rune,
+      })
+      .then((resp) => {
+        const parsed = resp as CommandoListSendPaysResponse;
+        return parsed.payments
+          .map(
+            (payment, index): ConnectorTransaction => ({
+              id: `${payment.id}`,
+              memo: payment.description ?? "",
+              settled: payment.status === "complete",
+              preimage: payment.payment_preimage,
+              payment_hash: payment.payment_hash,
+              settleDate: payment.created_at * 1000,
+              type: "sent",
+              totalAmount: payment.amount_sent_msat / 1000,
+            })
+          )
+          .filter((payment) => payment.settled);
       });
   }
 
@@ -242,10 +317,17 @@ export default class Commando implements Connector {
       params: {},
       rune: this.config.rune,
     })) as CommandoListFundsResponse;
-    const lnBalance = response.channels.reduce(
-      (balance, channel) => balance + channel.channel_sat,
-      0
-    );
+    // https://github.com/ElementsProject/cln-application/blob/main/apps/frontend/src/store/AppContext.tsx#L139
+    const lnBalance = response.channels
+      .filter((x) => x.connected && x.state == "CHANNELD_NORMAL")
+      .reduce(
+        (balance, channel) =>
+          balance +
+          Math.floor(
+            channel.channel_sat || (channel.our_amount_msat || 0) / 1000
+          ),
+        0
+      );
     return {
       data: {
         balance: lnBalance,
@@ -269,9 +351,9 @@ export default class Commando implements Connector {
             paymentHash: parsed.payment_hash,
             preimage: parsed.payment_preimage,
             route: {
-              total_amt: Math.floor(parsed.msatoshi_sent / 1000),
+              total_amt: Math.floor(parsed.amount_msat / 1000),
               total_fees: Math.floor(
-                (parsed.msatoshi_sent - parsed.msatoshi) / 1000
+                (parsed.amount_sent_msat - parsed.amount_msat) / 1000
               ),
             },
           },
@@ -306,9 +388,9 @@ export default class Commando implements Connector {
             paymentHash: parsed.payment_hash,
             preimage: parsed.payment_preimage,
             route: {
-              total_amt: Math.floor(parsed.msatoshi_sent / 1000),
+              total_amt: Math.floor(parsed.amount_msat / 1000),
               total_fees: Math.floor(
-                (parsed.msatoshi_sent - parsed.msatoshi) / 1000
+                (parsed.amount_sent_msat - parsed.amount_msat) / 1000
               ),
             },
           },

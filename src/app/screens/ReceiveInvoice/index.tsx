@@ -1,8 +1,3 @@
-import {
-  CaretLeftIcon,
-  CheckIcon,
-  CopyIcon,
-} from "@bitcoin-design/bitcoin-icons-react/outline";
 import Button from "@components/Button";
 import Container from "@components/Container";
 import Header from "@components/Header";
@@ -10,12 +5,14 @@ import IconButton from "@components/IconButton";
 import Loading from "@components/Loading";
 import DualCurrencyField from "@components/form/DualCurrencyField";
 import TextField from "@components/form/TextField";
+import { PopiconsChevronLeftLine, PopiconsCopyLine } from "@popicons/react";
 import { useEffect, useRef, useState } from "react";
 import Confetti from "react-confetti";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import Avatar from "~/app/components/Avatar";
 import QRCode from "~/app/components/QRCode";
+import ResultCard from "~/app/components/ResultCard";
 import SkeletonLoader from "~/app/components/SkeletonLoader";
 import toast from "~/app/components/Toast";
 import { useAccount } from "~/app/context/AccountContext";
@@ -49,9 +46,6 @@ function ReceiveInvoice() {
     paymentRequest: string;
     rHash: string;
   } | null>();
-  const [copyInvoiceLabel, setCopyInvoiceLabel] = useState(
-    tCommon("actions.copy_invoice") as string
-  );
 
   const [paid, setPaid] = useState(false);
   const [pollingForPayment, setPollingForPayment] = useState(false);
@@ -146,84 +140,61 @@ function ReceiveInvoice() {
     if (!invoice) return null;
     return (
       <>
-        <div className="mt-4 relative p-8 bg-white dark:bg-surface-01dp rounded-lg shadow-sm ring-1 ring-black ring-opacity-5 flex justify-center items-center overflow-hidden">
-          <div className="relative flex items-center justify-center">
-            <QRCode value={invoice.paymentRequest.toUpperCase()} />
-            {isAlbyOAuthUser ? (
-              <>
-                {!auth.accountLoading && auth.account ? (
-                  <Avatar
-                    size={64}
-                    className="border-4 border-white rounded-full absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 bg-white"
-                    url={auth.account.avatarUrl}
-                    name={auth.account.id}
-                  />
-                ) : (
-                  auth.accountLoading && (
-                    <SkeletonLoader
-                      circle
-                      opaque={false}
-                      className="w-[64px] h-[64px] border-4 border-white rounded-full absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 opacity-100"
-                    />
-                  )
-                )}
-              </>
-            ) : (
-              <img
-                className="w-[64px] h-[64px] absolute z-10"
-                src="assets/icons/alby_icon_qr.svg"
-                alt="Alby logo"
-              />
-            )}
-          </div>
-          {paid && (
-            <div className="absolute inset-0 flex justify-center items-center bg-white/90">
-              <div className="text-center">
-                <div className="inline-block bg-green-bitcoin p-1 rounded-full mb-2">
-                  <CheckIcon className="w-7 h-7 text-white" />
-                </div>
-                <p className="text-lg font-bold">{t("success")}</p>
-              </div>
-            </div>
-          )}
-        </div>
-        {paid && (
-          <div className="mt-4">
-            <Button
-              type="submit"
-              label={tCommon("actions.receive_again")}
-              primary
-              fullWidth
-              onClick={() => {
-                setDefaults();
-                navigate("/receive/invoice");
-              }}
-            />
-          </div>
-        )}
         {!paid && (
           <>
-            <div className="mt-8 mb-4 flex justify-center">
+            <div className="mt-4 flex justify-center items-center">
+              <div className="bg-white dark:bg-surface-01dp border-gray-200 dark:border-neutral-700  p-4 rounded-md border max-w-md">
+                <div className="relative flex items-center justify-center">
+                  <QRCode
+                    value={invoice.paymentRequest.toUpperCase()}
+                    size={512}
+                  />
+                  {isAlbyOAuthUser ? (
+                    <>
+                      {!auth.accountLoading && auth.account ? (
+                        <Avatar
+                          size={64}
+                          className="border-4 border-white rounded-full absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 bg-white"
+                          url={auth.account.avatarUrl}
+                          name={auth.account.id}
+                        />
+                      ) : (
+                        auth.accountLoading && (
+                          <SkeletonLoader
+                            circle
+                            opaque={false}
+                            className="w-[64px] h-[64px] border-4 border-white rounded-full absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 opacity-100"
+                          />
+                        )
+                      )}
+                    </>
+                  ) : (
+                    <img
+                      className="w-[64px] h-[64px] absolute z-10"
+                      src="assets/icons/alby_icon_qr.svg"
+                      alt="Alby logo"
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
+            <div className="mt-4 mb-4 flex justify-center">
               <Button
                 onClick={async () => {
                   try {
                     navigator.clipboard.writeText(invoice.paymentRequest);
-                    setCopyInvoiceLabel(tCommon("copied"));
-                    setTimeout(() => {
-                      setCopyInvoiceLabel(tCommon("actions.copy_invoice"));
-                    }, 1000);
+                    toast.success(tCommon("copied"));
                   } catch (e) {
                     if (e instanceof Error) {
                       toast.error(e.message);
                     }
                   }
                 }}
-                icon={<CopyIcon className="w-6 h-6 mr-2" />}
-                label={copyInvoiceLabel}
+                icon={<PopiconsCopyLine className="w-6 h-6 mr-2" />}
+                label={tCommon("actions.copy_invoice")}
                 primary
               />
             </div>
-
             <div className="flex justify-center">
               {pollingForPayment && (
                 <div className="flex items-center space-x-2 dark:text-white">
@@ -242,15 +213,30 @@ function ReceiveInvoice() {
           </>
         )}
         {paid && (
-          <Confetti
-            width={window.innerWidth}
-            height={window.innerHeight}
-            recycle={false}
-            onConfettiComplete={(confetti) => {
-              confetti && confetti.reset();
-            }}
-            style={{ pointerEvents: "none" }}
-          />
+          <>
+            <ResultCard isSuccess message={t("success")} />
+            <div className="mt-4">
+              <Button
+                type="submit"
+                label={tCommon("actions.receive_again")}
+                primary
+                fullWidth
+                onClick={() => {
+                  setDefaults();
+                  navigate("/receive/invoice");
+                }}
+              />
+            </div>
+            <Confetti
+              width={window.innerWidth}
+              height={window.innerHeight}
+              recycle={false}
+              onConfettiComplete={(confetti) => {
+                confetti && confetti.reset();
+              }}
+              style={{ pointerEvents: "none" }}
+            />
+          </>
         )}
       </>
     );
@@ -264,14 +250,18 @@ function ReceiveInvoice() {
             onClick={() => {
               invoice ? setDefaults() : navigate(-1);
             }}
-            icon={<CaretLeftIcon className="w-4 h-4" />}
+            icon={<PopiconsChevronLeftLine className="w-5 h-5" />}
           />
         }
       >
         {t("title")}
       </Header>
       {invoice ? (
-        <Container maxWidth="sm">{renderInvoice()}</Container>
+        <div className="h-full">
+          <Container justifyBetween maxWidth="sm">
+            {renderInvoice()}
+          </Container>
+        </div>
       ) : (
         <div className="pt-4 h-full">
           <form onSubmit={handleSubmit} className="h-full">

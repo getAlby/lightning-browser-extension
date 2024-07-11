@@ -1,6 +1,6 @@
-import { CaretLeftIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import Header from "@components/Header";
 import IconButton from "@components/IconButton";
+import { PopiconsChevronLeftLine } from "@popicons/react";
 import { useTranslation } from "react-i18next";
 import { Outlet, useMatch, useNavigate, useParams } from "react-router-dom";
 import Avatar from "~/app/components/Avatar";
@@ -10,9 +10,8 @@ function AccountDetailLayout() {
   const navigate = useNavigate();
   const isRoot = useMatch("accounts/:id");
   const { accounts } = useAccounts();
-  const { t } = useTranslation("translation", {
-    keyPrefix: "accounts.account_view",
-  });
+
+  const { t: tCommon } = useTranslation("common");
   const { id } = useParams() as { id: string };
 
   function back() {
@@ -31,7 +30,7 @@ function AccountDetailLayout() {
         headerLeft={
           <IconButton
             onClick={back}
-            icon={<CaretLeftIcon className="w-4 h-4" />}
+            icon={<PopiconsChevronLeftLine className="w-5 h-5" />}
           />
         }
       >
@@ -49,7 +48,9 @@ function AccountDetailLayout() {
               {account.name}
             </h2>
             <span>/</span>
-            <span>{t("title1")}</span>
+            <span className="text-ellipsis whitespace-nowrap overflow-hidden">
+              {tCommon("wallet_settings")}
+            </span>
           </div>
         )}
       </Header>

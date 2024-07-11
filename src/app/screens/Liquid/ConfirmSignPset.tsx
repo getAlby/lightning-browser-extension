@@ -1,8 +1,11 @@
-import { InfoIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
 import PublisherCard from "@components/PublisherCard";
 import SuccessMessage from "@components/SuccessMessage";
+import {
+  PopiconsChevronBottomLine,
+  PopiconsChevronTopLine,
+} from "@popicons/react";
 import { TFunction } from "i18next";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -12,6 +15,7 @@ import Loading from "~/app/components/Loading";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import toast from "~/app/components/Toast";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
+import PopiconsCircleInfoLine from "~/app/icons/popicons/CircleInfoLine";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
@@ -109,22 +113,30 @@ function ConfirmSignPset() {
                   {t("allow_sign", { host: origin.host })}{" "}
                 </h2>
                 <Hyperlink
-                  href="https://guides.getalby.com/overall-guide/alby-browser-extension/features/liquid"
+                  href="https://guides.getalby.com/user-guide/v/alby-account-and-browser-extension/alby-browser-extension/features/liquid"
                   target="_blank"
                 >
                   <div className="bg-blue-500 rounded-full">
-                    <InfoIcon className="h-4 w-4 text-white" />
+                    <PopiconsCircleInfoLine className="h-4 w-4 text-white" />
                   </div>
                 </Hyperlink>
               </div>
-              <div className="flex gap-2">
-                <Hyperlink onClick={toggleShowAddresses}>
-                  {showDetails ? t("hide_details") : t("view_details")}
-                </Hyperlink>
-              </div>
+            </div>
+            <div
+              className="flex w-full justify-center items-center"
+              onClick={toggleShowAddresses}
+            >
+              {tCommon("details")}
+              {showDetails ? (
+                <PopiconsChevronTopLine className="h-4 w-4 inline-flex" />
+              ) : (
+                <PopiconsChevronBottomLine className="h-4 w-4 inline-flex" />
+              )}
+            </div>
 
-              {showDetails && (
-                <>
+            {showDetails && (
+              <>
+                <div className="p-4 shadow bg-white dark:bg-surface-02dp rounded-lg overflow-hidden flex flex-col gap-4">
                   <div>
                     <p className="font-medium dark:text-white">{t("inputs")}</p>
                     <div className="flex flex-col gap-4">
@@ -154,15 +166,17 @@ function ConfirmSignPset() {
                       ))}
                     </div>
                   </div>
+                </div>
 
+                <div className="flex w-full justify-center">
                   <Hyperlink onClick={toggleShowHex}>
                     {showRawTransaction
                       ? t("hide_raw_transaction")
                       : t("view_raw_transaction")}
                   </Hyperlink>
-                </>
-              )}
-            </div>
+                </div>
+              </>
+            )}
 
             {showRawTransaction && (
               <div className="break-all p-2 mb-4 shadow bg-white rounded-lg dark:bg-surface-02dp text-gray-500 dark:text-gray-400">
@@ -199,7 +213,7 @@ function AddressPreview({
   t,
 }: LiquidAddress & {
   assetInfos?: EsploraAssetInfos;
-  t: TFunction<"translation", "confirm_sign_pset", "translation">;
+  t: TFunction<"translation", "confirm_sign_pset">;
 }) {
   // if assetInfos is not provided, we fallback to a custom ticker based on the asset hash
   const ticker = assetInfos?.ticker ?? asset.slice(0, 5).toUpperCase();

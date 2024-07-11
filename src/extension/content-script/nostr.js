@@ -13,12 +13,15 @@ const nostrCalls = [
   "nostr/enable",
   "nostr/encryptOrPrompt",
   "nostr/decryptOrPrompt",
+  "nostr/nip44EncryptOrPrompt",
+  "nostr/nip44DecryptOrPrompt",
   "nostr/on",
   "nostr/off",
   "nostr/emit",
+  "nostr/isEnabled",
 ];
 // calls that can be executed when nostr is not enabled for the current content page
-const disabledCalls = ["nostr/enable"];
+const disabledCalls = ["nostr/enable", "nostr/isEnabled"];
 
 let isEnabled = false; // store if nostr is enabled for this content page
 let isRejected = false; // store if the nostr enable call failed. if so we do not prompt again
@@ -31,7 +34,7 @@ async function init() {
 
   browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
     // forward account changed messaged to inpage script
-    if (request.action === "accountChanged") {
+    if (request.action === "accountChanged" && isEnabled) {
       window.postMessage(
         { action: "accountChanged", scope: "nostr" },
         window.location.origin
@@ -92,8 +95,17 @@ async function init() {
             isRejected = true;
           }
         }
+        if (ev.data.action === "nostr/isEnabled") {
+          isEnabled = response.data?.isEnabled;
+        }
 
-        postMessage(ev, response);
+        if (response.denied) {
+          postMessage(ev, {
+            error: "permission denied",
+          });
+        } else {
+          postMessage(ev, response);
+        }
       };
 
       return browser.runtime

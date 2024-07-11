@@ -9,6 +9,8 @@ import {
   ConnectPeerResponse,
   MakeInvoiceArgs,
   MakeInvoiceResponse,
+  SendPaymentAsyncResponse,
+  SendPaymentResponse,
 } from "~/extension/background-script/connectors/connector.interface";
 import type {
   Account,
@@ -23,10 +25,12 @@ import type {
   LnurlAuthResponse,
   MessageAccountEdit,
   MessageAccountValidate,
-  MessageInvoices,
+  MessageGetTransactions,
   MessageLnurlAuth,
   MessageSettingsSet,
   NodeInfo,
+  OriginData,
+  PsbtPreview,
   PsetPreview,
   SettingsStorage,
   ValidateAccountResponse,
@@ -43,7 +47,13 @@ export interface AccountInfoRes {
   connectorType: ConnectorType;
   balance: { balance: string | number; currency: ACCOUNT_CURRENCIES };
   currentAccountId: string;
-  info: { alias: string; pubkey?: string; lightning_address?: string };
+  info: {
+    nostr_pubkey?: string;
+    alias: string;
+    pubkey?: string;
+    lightning_address?: string;
+    node_required?: boolean;
+  };
   name: string;
   avatarUrl?: string;
 }
@@ -53,6 +63,7 @@ export interface GetAccountRes extends Pick<Account, "id" | "name"> {
   liquidEnabled: boolean;
   nostrEnabled: boolean;
   hasMnemonic: boolean;
+  isMnemonicBackupDone: boolean;
   hasImportedNostrKey: boolean;
   bitcoinNetwork: BitcoinNetworkType;
   useMnemonicForLnurlAuth: boolean;
@@ -109,6 +120,7 @@ export const swrGetAccountInfo = async (
           currency: currency || "BTC", // set default currency for every account
           avatarUrl,
           lightningAddress: response.info.lightning_address,
+          nodeRequired: response.info.node_required,
         };
         storeAccounts({
           ...accountsCache,
@@ -166,12 +178,35 @@ export const unlock = (password: string) =>
   msg.request<UnlockRes>("unlock", { password });
 export const getBlocklist = (host: string) =>
   msg.request<BlocklistRes>("getBlocklist", { host });
-export const getInvoices = (options?: MessageInvoices["args"]) =>
-  msg.request<{ invoices: Invoice[] }>("getInvoices", options);
+export const getTransactions = (options?: MessageGetTransactions["args"]) =>
+  msg.request<{ transactions: Invoice[] }>("getTransactions", options);
 export const lnurlAuth = (
   options: MessageLnurlAuth["args"]
 ): Promise<LnurlAuthResponse> =>
   msg.request<LnurlAuthResponse>("lnurlAuth", options);
+
+export const sendPayment = (
+  paymentRequest: string,
+  origin: OriginData | undefined
+) =>
+  msg.request<SendPaymentResponse["data"] | { error: string }>(
+    "sendPayment",
+    { paymentRequest },
+    {
+      origin,
+    }
+  );
+export const sendPaymentAsync = (
+  paymentRequest: string,
+  origin: OriginData | undefined
+) =>
+  msg.request<SendPaymentAsyncResponse["data"] | { error: string }>(
+    "sendPaymentAsync",
+    { paymentRequest },
+    {
+      origin,
+    }
+  );
 
 export const getCurrencyRate = async () =>
   msg.request<{ rate: number }>("getCurrencyRate");
@@ -236,6 +271,15 @@ const signPset = (pset: string): Promise<string> =>
     pset,
   });
 
+const getPsbtPreview = (psbt: string): Promise<PsbtPreview> =>
+  msg.request("webbtc/getPsbtPreview", {
+    psbt,
+  });
+const signPsbt = (psbt: string): Promise<string> =>
+  msg.request("webbtc/signPsbt", {
+    psbt,
+  });
+
 export default {
   getAccount,
   getAccountInfo,
@@ -259,9 +303,11 @@ export default {
   removeAccount,
   unlock,
   getBlocklist,
-  getInvoices,
+  getTransactions,
   lnurlAuth,
   getCurrencyRate,
+  sendPayment,
+  sendPaymentAsync,
   nostr: {
     getPrivateKey: getNostrPrivateKey,
     getPublicKey: getNostrPublicKey,
@@ -278,5 +324,9 @@ export default {
     getPsetPreview: getLiquidPsetPreview,
     fetchAssetRegistry: fetchLiquidAssetRegistry,
     signPset: signPset,
+  },
+  bitcoin: {
+    getPsbtPreview,
+    signPsbt,
   },
 };

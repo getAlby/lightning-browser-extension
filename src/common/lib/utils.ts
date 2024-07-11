@@ -1,12 +1,9 @@
 import browser, { Runtime } from "webextension-polyfill";
 import { ABORT_PROMPT_ERROR } from "~/common/constants";
-import { getPosition as getWindowPosition } from "~/common/utils/window";
-import type {
-  DeferredPromise,
-  Invoice,
-  OriginData,
-  OriginDataInternal,
-} from "~/types";
+import { base64DecodeUnicode } from "~/common/lib/string";
+import { ConnectorTransaction } from "~/extension/background-script/connectors/connector.interface";
+import type { DeferredPromise, OriginData, OriginDataInternal } from "~/types";
+import { createPromptTab, createPromptWindow } from "../utils/window";
 
 const utils = {
   base64ToHex: (str: string) => {
@@ -83,104 +80,77 @@ const utils = {
       "prompt.html"
     )}?${urlParams.toString()}`;
 
-    const windowWidth = 400;
-    const windowHeight = 600;
+    // Window APIs might not be available on mobile browsers
+    // on iOS window APIs are available, but `windows.create` is not
+    const useWindow = !!(browser.windows && browser.windows.create);
 
-    const { top, left } = await getWindowPosition(windowWidth, windowHeight);
+    // Either API yields a tabId
+    const tabId = useWindow
+      ? await createPromptWindow(url)
+      : await createPromptTab(url);
 
     return new Promise((resolve, reject) => {
-      browser.windows
-        .create({
-          url: url,
-          type: "popup",
-          width: windowWidth,
-          height: windowHeight,
-          top: top,
-          left: left,
-        })
-        .then((window) => {
-          let closeWindow = true; // by default we call remove.window (except the browser forces this prompt to open in a tab)
-          let tabId: number | undefined;
-          if (window.tabs) {
-            tabId = window.tabs[0].id;
+      const onMessageListener = (
+        responseMessage: {
+          response?: unknown;
+          error?: string;
+          data: Type;
+        },
+        sender: Runtime.MessageSender
+      ) => {
+        if (
+          responseMessage &&
+          responseMessage.response &&
+          sender.tab &&
+          sender.tab.id === tabId &&
+          sender.tab.windowId
+        ) {
+          // Remove the event listener as we are about to close the tab
+          browser.tabs.onRemoved.removeListener(onRemovedListener);
+
+          // Use window APIs for removing the window as Opera doesn't
+          // close the window if you remove the last tab (e.g. in popups)
+          let closePromise;
+          if (useWindow) {
+            closePromise = browser.windows.remove(sender.tab.windowId);
+          } else {
+            closePromise = browser.tabs.remove(tabId);
           }
 
-          // Kiwi Browser opens the prompt in the same window (there are only tabs on mobile browsers)
-          // Find the currently active tab to validate messages
-          if (window.tabs && window.tabs?.length > 1) {
-            tabId = window.tabs?.find((x) => x.active)?.id;
-            closeWindow = false; // we'll only remove the tab and not the window further down
-          }
-
-          // Re-focus the popup after 2 seconds to mitigate the problem of lost popups
-          // (e.g. when a user clicks the website)
-          setTimeout(() => {
-            if (!window.id) return;
-
-            browser.windows.update(window.id, {
-              focused: true,
-            });
-          }, 2100);
-
-          const onMessageListener = (
-            responseMessage: {
-              response?: unknown;
-              error?: string;
-              data: Type;
-            },
-            sender: Runtime.MessageSender
-          ) => {
-            if (
-              responseMessage &&
-              responseMessage.response &&
-              sender.tab &&
-              sender.tab.id === tabId &&
-              sender.tab.windowId
-            ) {
-              browser.tabs.onRemoved.removeListener(onRemovedListener);
-              // if the window was opened as tab we remove the tab
-              // otherwise if a window was opened we have to remove the window.
-              // Opera fails to close the window with tabs.remove - it fails with: "Tabs cannot be edited right now (user may be dragging a tab)"
-              let closePromise;
-              if (closeWindow) {
-                closePromise = browser.windows.remove(sender.tab.windowId);
-              } else {
-                closePromise = browser.tabs.remove(sender.tab.id as number); // as number only for TS - we check for sender.tab.id in the if above
-              }
-
-              return closePromise.then(() => {
-                // in the future actual "remove" (closing prompt) will be moved to component for i.e. budget flow
-                // https://github.com/getAlby/lightning-browser-extension/issues/1197
-                if (responseMessage.error) {
-                  return reject(new Error(responseMessage.error));
-                } else {
-                  return resolve(responseMessage);
-                }
-              });
+          return closePromise.then(() => {
+            // in the future actual "remove" (closing prompt) will be moved to component for i.e. budget flow
+            // https://github.com/getAlby/lightning-browser-extension/issues/1197
+            if (responseMessage.error) {
+              return reject(new Error(responseMessage.error));
+            } else {
+              return resolve(responseMessage);
             }
-          };
+          });
+        }
+      };
 
-          const onRemovedListener = (tid: number) => {
-            if (tabId === tid) {
-              browser.runtime.onMessage.removeListener(onMessageListener);
-              reject(new Error(ABORT_PROMPT_ERROR));
-            }
-          };
+      const onRemovedListener = (tid: number) => {
+        if (tabId === tid) {
+          browser.runtime.onMessage.removeListener(onMessageListener);
+          reject(new Error(ABORT_PROMPT_ERROR));
+        }
+      };
 
-          browser.runtime.onMessage.addListener(onMessageListener);
-          browser.tabs.onRemoved.addListener(onRemovedListener);
-        });
+      browser.runtime.onMessage.addListener(onMessageListener);
+      browser.tabs.onRemoved.addListener(onRemovedListener);
     });
   },
+
   getBoostagramFromInvoiceCustomRecords: (
-    custom_records: Invoice["custom_records"] | undefined
+    custom_records: ConnectorTransaction["custom_records"] | undefined
   ) => {
     try {
       let boostagramDecoded: string | undefined;
       const boostagram = custom_records?.[7629169];
       if (boostagram) {
-        boostagramDecoded = atob(boostagram);
+        boostagramDecoded = base64DecodeUnicode(boostagram);
       }
+
       return boostagramDecoded ? JSON.parse(boostagramDecoded) : undefined;
     } catch (e) {
       console.error(e);

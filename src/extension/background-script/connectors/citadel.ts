@@ -6,7 +6,7 @@ import Connector, {
   ConnectPeerResponse,
   GetBalanceResponse,
   GetInfoResponse,
-  GetInvoicesResponse,
+  GetTransactionsResponse,
   KeysendArgs,
   MakeInvoiceArgs,
   MakeInvoiceResponse,
@@ -56,6 +56,7 @@ class CitadelConnector implements Connector {
     return [
       "makeInvoice",
       "sendPayment",
+      "sendPaymentAsync",
       "signMessage",
       "getInfo",
       "getBalance",
@@ -75,14 +76,11 @@ class CitadelConnector implements Connector {
     });
   }
 
-  // not yet implemented
-  async getInvoices(): Promise<GetInvoicesResponse> {
+  async getTransactions(): Promise<GetTransactionsResponse> {
     console.error(
-      `Not yet supported with the currently used account: ${this.constructor.name}`
+      `getTransactions() is not yet supported with the currently used account: ${this.constructor.name}`
     );
-    throw new Error(
-      `${this.constructor.name}: "getInvoices" is not yet supported. Contact us if you need it.`
-    );
+    return { data: { transactions: [] } };
   }
 
   // not yet implemented

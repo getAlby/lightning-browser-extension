@@ -2,7 +2,6 @@ import { auth, Client } from "@getalby/sdk";
 import {
   CreateSwapParams,
   CreateSwapResponse,
-  GetAccountInformationResponse,
   Invoice,
   RequestOptions,
   SwapInfoResponse,
@@ -10,16 +9,16 @@ import {
 } from "@getalby/sdk/dist/types";
 import browser from "webextension-polyfill";
 import { decryptData, encryptData } from "~/common/lib/crypto";
-import { Account, OAuthToken } from "~/types";
+import { Account, GetAccountInformationResponses, OAuthToken } from "~/types";
 import state from "../state";
 import Connector, {
   CheckPaymentArgs,
   CheckPaymentResponse,
-  ConnectorInvoice,
+  ConnectorTransaction,
   ConnectPeerResponse,
   GetBalanceResponse,
   GetInfoResponse,
-  GetInvoicesResponse,
+  GetTransactionsResponse,
   KeysendArgs,
   MakeInvoiceArgs,
   MakeInvoiceResponse,
@@ -42,6 +41,7 @@ export default class Alby implements Connector {
   private config: Config;
   private _client: Client | undefined;
   private _authUser: auth.OAuth2User | undefined;
+  private _cache = new Map<string, object>();
 
   constructor(account: Account, config: Config) {
     this.account = account;
@@ -69,7 +69,15 @@ export default class Alby implements Connector {
   }
 
   get supportedMethods() {
-    return ["getInfo", "keysend", "makeInvoice", "sendPayment", "getBalance"];
+    return [
+      "getInfo",
+      "keysend",
+      "makeInvoice",
+      "sendPayment",
+      "sendPaymentAsync",
+      "getBalance",
+      "getTransactions",
+    ];
   }
 
   // not yet implemented
@@ -80,43 +88,56 @@ export default class Alby implements Connector {
     throw new Error("Not yet supported with the currently used account.");
   }
 
-  async getInvoices(): Promise<GetInvoicesResponse> {
-    const incomingInvoices = (await this._request((client) =>
-      client.incomingInvoices({})
+  async getTransactions(): Promise<GetTransactionsResponse> {
+    const invoicesResponse = (await this._request((client) =>
+      client.invoices({})
     )) as Invoice[];
 
-    const invoices: ConnectorInvoice[] = incomingInvoices.map(
-      (invoice, index): ConnectorInvoice => ({
+    const transactions: ConnectorTransaction[] = invoicesResponse.map(
+      (invoice, index): ConnectorTransaction => ({
         custom_records: invoice.custom_records,
         id: `${invoice.payment_request}-${index}`,
         memo: invoice.comment || invoice.memo,
-        preimage: "", // alby wallet api doesn't support preimage (yet)
+        preimage: invoice.preimage ?? "",
+        payment_hash: invoice.payment_hash,
         settled: invoice.settled,
         settleDate: new Date(invoice.settled_at).getTime(),
-        totalAmount: `${invoice.amount}`,
-        type: "received",
+        totalAmount: invoice.amount,
+        type: invoice.type == "incoming" ? "received" : "sent",
       })
     );
+
     return {
       data: {
-        invoices,
+        transactions,
       },
     };
   }
 
   async getInfo(): Promise<
-    GetInfoResponse<WebLNNode & GetAccountInformationResponse>
+    GetInfoResponse<WebLNNode & GetAccountInformationResponses>
   > {
+    const cacheKey = "getInfo";
+    const cacheValue = this._cache.get(cacheKey) as GetInfoResponse<
+      WebLNNode & GetAccountInformationResponses
+    >;
+
+    if (cacheValue) {
+      return cacheValue;
+    }
+
     try {
-      const info = await this._request((client) =>
-        client.accountInformation({})
-      );
-      return {
+      const info = await this._getUserDetails();
+
+      const returnValue = {
         data: {
           ...info,
           alias: "🐝 getalby.com",
         },
       };
+      this._cache.set(cacheKey, returnValue);
+
+      return returnValue;
     } catch (error) {
       console.error(error);
       throw error;
@@ -228,7 +249,8 @@ export default class Alby implements Connector {
         throw new Error("OAuth client credentials missing");
       }
 
-      const redirectURL = browser.identity.getRedirectURL();
+      const redirectURL = "https://getalby.com/extension/connect";
+
       const authClient = new auth.OAuth2User({
         request_options: this._getRequestOptions(),
         client_id: clientId,
@@ -236,7 +258,6 @@ export default class Alby implements Connector {
         callback: redirectURL,
         user_agent: `lightning-browser-extension:${process.env.VERSION}`,
         scopes: [
-          "invoices:read",
           "account:read",
           "balance:read",
           "invoices:create",
@@ -247,55 +268,95 @@ export default class Alby implements Connector {
         token: this.config.oAuthToken, // initialize with existing token
       });
 
+      authClient.on("tokenRefreshed", (token: Token) => {
+        this._updateOAuthToken(token);
+      });
+      // Currently the JS SDK guarantees request of a new refresh token is done synchronously.
+      // The only way a refresh should fail is if the refresh token has expired, which is handled when the connector is initialized.
+      // If a token refresh fails after init then the connector will be unusable, but we will still log errors here so that this can be debugged if it does ever happen.
+      authClient.on("tokenRefreshFailed", (error: Error) => {
+        console.error("Failed to Refresh token", error);
+      });
+
       if (this.config.oAuthToken) {
         try {
           if (authClient.isAccessTokenExpired()) {
-            const token = await authClient.refreshAccessToken();
-            await this._updateOAuthToken(token.token);
+            await authClient.refreshAccessToken();
           }
           return authClient;
         } catch (error) {
-          // if auth token refresh fails, the refresh token has probably expired or is invalid
-          // the user will be asked to re-login
           console.error("Failed to request new auth token", error);
         }
       }
 
-      let authUrl = authClient.generateAuthURL({
+      let authUrl = await authClient.generateAuthURL({
         code_challenge_method: "S256",
         authorizeUrl: process.env.ALBY_OAUTH_AUTHORIZE_URL,
       });
 
       authUrl += "&webln=false"; // stop getalby.com login modal launching lnurl auth
-      const authResult = await this.launchWebAuthFlow(authUrl);
-      const code = new URL(authResult).searchParams.get("code");
-      if (!code) {
-        throw new Error("Authentication failed: missing authResult");
-      }
 
-      const token = await authClient.requestAccessToken(code);
-      await this._updateOAuthToken(token.token);
-      return authClient;
+      const oAuthTab = await browser.tabs.create({ url: authUrl });
+
+      return new Promise<auth.OAuth2User>((resolve, reject) => {
+        const handleTabUpdated = (
+          tabId: number,
+          changeInfo: browser.Tabs.OnUpdatedChangeInfoType,
+          tab: browser.Tabs.Tab
+        ) => {
+          if (changeInfo.status === "complete" && tabId === oAuthTab.id) {
+            const authorizationCode = this.extractCodeFromTabUrl(tab.url);
+
+            if (!authorizationCode) {
+              throw new Error("no authorization code");
+            }
+
+            authClient
+              .requestAccessToken(authorizationCode)
+              .then((token) => {
+                this._updateOAuthToken(token.token);
+                resolve(authClient);
+              })
+              .catch((error) => {
+                console.error("Failed to request new auth token", error);
+                reject(error);
+              })
+              .finally(() => {
+                browser.tabs.remove(tabId);
+                browser.tabs.onUpdated.removeListener(handleTabUpdated);
+              });
+          }
+        };
+        const handleTabRemoved = (tabId: number) => {
+          if (tabId === oAuthTab.id) {
+            // The user closed the authentication tab without completing the flow
+            const error = new Error("OAuth authentication canceled by user");
+            reject(error);
+            browser.tabs.onRemoved.removeListener(handleTabRemoved);
+          }
+        };
+
+        browser.tabs.onUpdated.addListener(handleTabUpdated);
+        browser.tabs.onRemoved.addListener(handleTabRemoved);
+      });
     } catch (error) {
       console.error(error);
       throw error;
     }
   }
 
-  async launchWebAuthFlow(authUrl: string) {
-    const authResult = await browser.identity.launchWebAuthFlow({
-      interactive: true,
-      url: authUrl,
-    });
-
-    return authResult;
+  private extractCodeFromTabUrl(url: string | undefined): string | null {
+    if (!url) {
+      return null;
+    }
+    const urlSearchParams = new URLSearchParams(url.split("?")[1]);
+    return urlSearchParams.get("code");
   }
 
   private async _request<T>(func: (client: Client) => T) {
     if (!this._authUser || !this._client) {
       throw new Error("Alby client was not initialized");
     }
-    const oldToken = this._authUser?.token;
     let result: T;
     try {
       result = await func(this._client);
@@ -303,19 +364,17 @@ export default class Alby implements Connector {
       console.error(error);
 
       throw error;
-    } finally {
-      const newToken = this._authUser.token;
-      if (newToken && newToken !== oldToken) {
-        await this._updateOAuthToken(newToken);
-      }
     }
     return result;
   }
 
   private _getRequestOptions(): Partial<RequestOptions> {
     return {
+      user_agent: `lightning-browser-extension:${process.env.VERSION}`,
       ...(process.env.ALBY_API_URL
-        ? { base_url: process.env.ALBY_API_URL }
+        ? {
+            base_url: process.env.ALBY_API_URL,
+          }
         : {}),
     };
   }
@@ -345,5 +404,47 @@ export default class Alby implements Connector {
       console.error("Invalid token");
       throw new Error("Invalid token");
     }
+  }
+
+  private async _getUserDetails() {
+    const url = `${process.env.ALBY_API_URL}/internal/users`;
+
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        ...(await this._authUser?.getAuthHeader()),
+        "User-Agent": `lightning-browser-extension:${process.env.VERSION}`,
+        "X-User-Agent": `lightning-browser-extension:${process.env.VERSION}`,
+      },
+    };
+
+    try {
+      const details =
+        await this._genericRequest<GetAccountInformationResponses>(
+          url,
+          requestOptions
+        );
+
+      return details;
+    } catch (error) {
+      console.error("Error fetching limits:", error);
+      throw error;
+    }
+  }
+
+  private async _genericRequest<T>(
+    url: RequestInfo,
+    init: RequestInit
+  ): Promise<T> {
+    const res = await fetch(url, init);
+
+    if (!res.ok) {
+      throw new Error(`HTTP error! status: ${res.status}`);
+    }
+
+    const data: T = await res.json();
+
+    return data;
   }
 }

@@ -1,6 +1,6 @@
-import { render, screen, act } from "@testing-library/react";
+import { act, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import lightningPayReq from "bolt11";
+import lightningPayReq from "bolt11-signet";
 import { MemoryRouter } from "react-router-dom";
 import { settingsFixture as mockSettings } from "~/../tests/fixtures/settings";
 import type { OriginData } from "~/types";
@@ -77,7 +77,7 @@ describe("ConfirmPayment", () => {
 
     expect(await screen.findByText("Amount")).toBeInTheDocument();
     expect(await screen.findByText("Description")).toBeInTheDocument();
-    expect(await screen.findByText("(~$0.01)")).toBeInTheDocument();
+    expect(await screen.findByText("~$0.01")).toBeInTheDocument();
     expect(
       await screen.findByLabelText("Remember and set a budget")
     ).toBeInTheDocument();
@@ -135,7 +135,7 @@ describe("ConfirmPayment", () => {
 
     expect(await screen.findByText("Amount")).toBeInTheDocument();
     expect(await screen.findByText("Description")).toBeInTheDocument();
-    expect(screen.getByText("(~$0.01)")).toBeInTheDocument();
+    expect(screen.getByText("~$0.01")).toBeInTheDocument();
     expect(
       await screen.queryByText("Remember and set a budget")
     ).not.toBeInTheDocument();

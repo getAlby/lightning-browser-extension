@@ -4,7 +4,6 @@ import TransactionsTable from "@components/TransactionsTable";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Trans, useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import toast from "~/app/components/Toast";
 import { useSettings } from "~/app/context/SettingsContext";
@@ -15,9 +14,6 @@ import type { Allowance, Transaction } from "~/types";
 dayjs.extend(relativeTime);
 
 function PublisherDetail() {
-  const { t } = useTranslation("translation", {
-    keyPrefix: "home",
-  });
   const {
     isLoading: isLoadingSettings,
     settings,
@@ -43,6 +39,11 @@ function PublisherDetail() {
         );
 
         for (const payment of _transactions) {
+          if (
+            payment.displayAmount &&
+            payment.displayAmount[1] === settings.currency
+          )
+            continue;
           payment.totalAmountFiat = settings.showFiat
             ? await getFormattedFiat(payment.totalAmount)
             : "";
@@ -53,7 +54,7 @@ function PublisherDetail() {
       console.error(e);
       if (e instanceof Error) toast.error(`Error: ${e.message}`);
     }
-  }, [id, settings.showFiat, getFormattedFiat]);
+  }, [id, settings.showFiat, getFormattedFiat, settings.currency]);
 
   useEffect(() => {
     // Run once.
@@ -64,47 +65,29 @@ function PublisherDetail() {
   }, [fetchData, isLoadingSettings]);
 
   return (
-    <div>
-      <div className="border-b border-gray-200 dark:border-neutral-700">
-        {allowance && (
-          <PublisherPanel
-            allowance={allowance}
-            onEdit={fetchData}
-            onDelete={() => {
-              navigate("/publishers", { replace: true });
-            }}
-            title={allowance?.name || ""}
-            image={allowance?.imageURL || ""}
-            url={allowance?.host}
-            isCard={false}
-            isSmall={false}
-          />
-        )}
-      </div>
-
+    <>
+      {allowance && (
+        <PublisherPanel
+          allowance={allowance}
+          onEdit={fetchData}
+          onDelete={() => {
+            navigate("/publishers", { replace: true });
+          }}
+          title={allowance?.name || ""}
+          image={allowance?.imageURL || ""}
+          url={allowance?.host}
+          isCard={false}
+          isSmall={false}
+        />
+      )}
       {allowance && (
         <Container>
-          <div>
-            <h2 className="mt-[34px] mb-4 text-lg text-gray-900 font-bold dark:text-white">
-              {t("allowance_view.recent_transactions")}
-            </h2>
-            {transactions && transactions?.length > 0 ? (
-              <TransactionsTable transactions={transactions} />
-            ) : (
-              <p className="text-gray-500 dark:text-neutral-400">
-                <Trans
-                  i18nKey={"allowance_view.no_transactions"}
-                  t={t}
-                  values={{ name: allowance.name }}
-                  // eslint-disable-next-line react/jsx-key
-                  components={[<strong></strong>]}
-                />
-              </p>
-            )}
+          <div className="mt-4">
+            <TransactionsTable transactions={transactions} />
           </div>
         </Container>
       )}
-    </div>
+    </>
   );
 }
 

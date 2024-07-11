@@ -1,4 +1,5 @@
 import Badge from "@components/Badge";
+import { useTranslation } from "react-i18next";
 import type { Allowance, Badge as BadgeType } from "~/types";
 
 type Props = {
@@ -6,19 +7,20 @@ type Props = {
 };
 
 export default function BadgesList({ allowance }: Props) {
+  const { t: tComponents } = useTranslation("components", {
+    keyPrefix: "badge",
+  });
   const badges: BadgeType[] = [];
   if (allowance.remainingBudget > 0) {
     badges.push({
       label: "budget",
-      color: "green-bitcoin",
-      textColor: "white",
+      className: "bg-blue-500 text-white mr-2",
     });
   }
   if (allowance.lnurlAuth) {
     badges.push({
       label: "auth",
-      color: "green-bitcoin",
-      textColor: "white",
+      className: "bg-green-bitcoin text-white mr-2",
     });
   }
 
@@ -28,9 +30,8 @@ export default function BadgesList({ allowance }: Props) {
         return (
           <Badge
             key={b.label}
-            label={b.label}
-            color={b.color}
-            textColor={b.textColor}
+            label={tComponents(`label.${b.label}`)}
+            className={b.className}
           />
         );
       })}

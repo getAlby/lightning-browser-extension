@@ -1,7 +1,4 @@
-import {
-  ClockIcon,
-  TwoKeysIcon,
-} from "@bitcoin-design/bitcoin-icons-react/outline";
+import { PopiconsClockLine, PopiconsKeyLeftLine } from "@popicons/react";
 import { useTranslation } from "react-i18next";
 import ConfirmOrCancel from "~/app/components/ConfirmOrCancel";
 import Container from "~/app/components/Container";
@@ -9,7 +6,7 @@ import PublisherCard from "~/app/components/PublisherCard";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import { useAccount } from "~/app/context/AccountContext";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
-import InfoCircleIcon from "~/app/icons/InfoCircleIcon";
+import PopiconsCircleInfoLine from "~/app/icons/popicons/CircleInfoLine";
 import { NO_KEYS_ERROR, USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
@@ -60,15 +57,15 @@ export default function Onboard() {
           />
           <div className="dark:text-white pt-6">
             <div className="mb-2 flex items-center">
-              <TwoKeysIcon className="w-7 h-7 mr-2" />
+              <PopiconsKeyLeftLine className="w-7 h-7 mr-2" />
               <p>{t("request1")}</p>
             </div>
             <div className="mb-2 flex items-center">
-              <InfoCircleIcon className="w-7 h-7 mr-2" />
+              <PopiconsCircleInfoLine className="w-7 h-7 mr-2" />
               <p>{t("request2")}</p>
             </div>
             <div className="mb-2 flex items-center">
-              <ClockIcon className="w-7 h-7 mr-2" />
+              <PopiconsClockLine className="w-7 h-7 mr-2" />
               <p>{t("request3")}</p>
             </div>
           </div>

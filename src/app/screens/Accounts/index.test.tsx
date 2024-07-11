@@ -17,6 +17,6 @@ describe("Accounts", () => {
         </I18nextProvider>
       </AccountsProvider>
     );
-    expect(await screen.findByText("Accounts")).toBeInTheDocument();
+    expect(await screen.findByText("Wallets")).toBeInTheDocument();
   });
 });

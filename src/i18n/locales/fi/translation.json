@@ -2,8 +2,6 @@
   "translation": {
     "welcome": {
       "set_password": {
-        "title": "Aseta lukituksen avaussalasana",
-        "description": "Lightning-tilisi tiedot on salattu turvallisesti salasanan avulla. Älä unohda tätä salasanaa! Tarvitset sitä avataksesi Alby-laajennuksen lukituksen (tässä selaimessa)",
         "choose_password": {
           "label": "Valitse lukituksen avaamissalasana:"
         },
@@ -46,20 +44,6 @@
         "drag_and_drop": "Vedä ja pudota makaroonisi tänne tai <0>selaa</0>",
         "errors": {
           "connection_failed": "Yhteys epäonnistui. Ovatko LND-tunnuksesi oikein?"
-        }
-      },
-      "lndhub_bluewallet": {
-        "title": "Sinilompakko",
-        "page": {
-          "title": "Yhdistä sinilompakkoosi",
-          "description": "Valitse sinilompakossa lompakko, jonka haluat yhdistää, avaa se, napsauta \"...\", napsauta Vie/Varmuuskopioi näyttääksesi QR-koodin ja skannaa se webbikamerallasi."
-        },
-        "uri": {
-          "label": "Sinilompakon vienti-URI"
-        },
-        "errors": {
-          "invalid_uri": "Virheellinen sinilompakon URI",
-          "connection_failed": "Yhteys epäonnistui. Onko sinilompakon URI oikein?"
         }
       },
       "lndhub_go": {
@@ -143,11 +127,11 @@
           "placeholder": "lndconnect://solmusi:8080?..."
         }
       },
-      "start9": {
-        "title": "Start9",
+      "startos": {
+        "title": "StartOS",
         "page": {
-          "title": "Yhdistä <0>Embassy</0>-solmuun",
-          "instructions": "<0>Huomautus:</0> Tällä hetkellä tuemme vain LND:tä, mutta lisäämme c-lightning-tuen tulevaisuudessa!<1/>Klikkaa Embassy-kojelaudallasi <0>Lightning Network Daemon</0> -palvelua.<1/>Valitse <0>Ominaisuudet</0>-välilehti.<1/>Kopioi nyt <0>LND Yhdistä -REST URL-osoite.</0>"
+          "title": "Yhdistä <0>StartOS</0>-solmuun",
+          "instructions": "<0>Huomautus:</0> Tällä hetkellä tuemme vain LND:tä, mutta lisäämme c-lightning-tuen tulevaisuudessa!<1/>Klikkaa StartOS-kojelaudallasi <0>Lightning Network Daemon</0> -palvelua.<1/>Valitse <0>Ominaisuudet</0>-välilehti.<1/>Kopioi nyt <0>LND Yhdistä -REST URL-osoite.</0>"
         },
         "rest_url": {
           "label": "lndconnect -REST URL-osoite",
@@ -178,35 +162,10 @@
           "title": "Yhdistä <0>Bitcoin Jungle -lompakkoon</0>"
         }
       },
-      "galoy": {
-        "phone_number": {
-          "label": "Syötä puhelinnumerosi"
-        },
-        "sms_code": {
-          "label": "Syötä tekstiviestivahvistuskoodisi"
-        },
-        "token": {
-          "label": "Syötä JWT-tunnuksesi",
-          "info": "Kirjautumistunnusta {{label}} päivitetään parhaillaan. Jos olet kokenut käyttäjä, voit napata JWT-tunnuksesi kirjautumalla sisään <0>Verkkolompakon (wallet.mainnet.galoy.io) kautta</0><1/><1/>JWT näyttää tältä: < 2>eyJhbG...</2><1/><1/>"
-        },
-        "actions": {
-          "login": "Kirjaudu sisään"
-        },
-        "errors": {
-          "setup_failed": "Määritys epäonnistui",
-          "missing_token": "JWT puuttuu, sisäänkirjautuminen ei onnistunut.",
-          "invalid_token": "virheellinen JWT välitetty"
-        }
-      },
       "btcpay": {
         "title": "BTCPay-palvelin",
-        "page": {
-          "title": "Yhdistä BTCPay LND -solmuusi",
-          "instructions": "Siirry BTCPayServerillesi ja kirjaudu sisään järjestelmänvalvojana. Siirry kohtaan Palvelinasetukset > Palvelut > LND Rest - Katso tiedot. Napsauta sitten \"Katso QR-koodin tiedot\" ja kopioi QR-koodin tiedot. Liitä se alle:"
-        },
         "config": {
-          "label": "Konfigurointitiedot",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
+          "label": "Konfigurointitiedot"
         },
         "errors": {
           "connection_failed": "Yhteys epäonnistui. Onko BTCPay-yhteyden URL-osoite oikea ja saatavilla?"
@@ -250,20 +209,8 @@
         "send_satoshis": "⚡️ Lähetä Satoshis ⚡️",
         "enable_now": "Ota nyt käyttöön"
       },
-      "recent_transactions": "Viimeaikaiset tapahtumat",
-      "allowance_view": {
-        "recent_transactions": "Viimeaikaiset tapahtumat",
-        "no_transactions": "Ei vielä tapahtumia <0>{{name}}</0>:lla."
-      },
       "default_view": {
-        "recent_transactions": "Viimeaikaiset tapahtumat",
         "is_blocked_hint": "Alby on tällä hetkellä poissa käytöstä {{host}}:lla"
-      }
-    },
-    "accounts": {
-      "title": "Tilit",
-      "actions": {
-        "add_account": "Lisää tili"
       }
     },
     "unlock": {
@@ -282,7 +229,6 @@
       }
     },
     "settings": {
-      "title": "Asetukset",
       "browser_notifications": {
         "title": "Selaimen ilmoitukset",
         "subtitle": "Maksuihin ja todentamiseen liittyvät ilmoitukset."
@@ -290,18 +236,6 @@
       "website_enhancements": {
         "title": "Verkkosivuston parannukset",
         "subtitle": "Vinkkien parannuksia Twitterissä, YouTubessa jne."
-      },
-      "lnurl_auth": {
-        "title": "LNURL-Auth",
-        "hint": "on yleinen todennusprotokolla. Se tunnistaa käyttäjän digitaalisten allekirjoitusten avulla. Protokolla ei vaadi muita tunnistetietoja, kuten salasanoja, sähköposteja, käyttäjätunnuksia tai vastaavia. Albyn avulla voit käyttää Lightning-tilejäsi kirjautuaksesi turvallisesti verkkosivustoille. Ollaksemme yhteensopiva muiden lompakoiden kanssa, meidän piti tehdä muutamia muutoksia, jotka voit määrittää täällä. <0>Ihannetapauksessa kaikki nämä vaihtoehdot ovat Pois päältä.</0> Käytä niitä vain, jos sinulla on vanhoja tilejä.",
-        "legacy_lnurl_auth_202207": {
-          "title": "Vanha LNURL-Auth",
-          "subtitle": "Avainten luonti LNURL-Authia varten on muuttunut (heinäkuu 2022). Alby ei ollut yhteensopiva muiden toteutusten kanssa. Tätä muutettiin, mutta nyt käytetään erilaisia kirjautumisavaimia. Jos käytit kirjautumiseen LNURL-Authia, ennen kuin voit silti ottaa vanhan menetelmän käyttöön. Tämä vaihtoehto poistetaan myöhemmin, muista vaihtaa uuteen kirjautumistunnukseen."
-        },
-        "legacy_lnurl_auth": {
-          "title": "Vanha allekirjoitus LNDhubille ja LNbitsille",
-          "subtitle": "Viestien allekirjoitus ja sisäänkirjautuminen LNDhub- (esim. BlueWallet (sinilompakko)- ja LNbits-tilillä on muutettu (maaliskuu 2022). Jos kirjauduit sisään näillä tileillä, voit silti ottaa vanhan allekirjoitustavan käyttöön. Tämä vaihtoehto poistetaan myöhemmin, muista vaihtaa uuteen kirjautumistunnukseen."
-        }
       },
       "camera_access": {
         "title": "Kameran käyttöoikeus",
@@ -364,14 +298,6 @@
           "mismatched_password": "Salasanat eivät täsmää."
         },
         "success": "Salasana vaihdettu onnistuneesti"
-      },
-      "nostr": {
-        "title": "Nostr",
-        "hint": "on yksinkertainen ja avoin protokolla, jonka tarkoituksena on luoda sensuurin kestäviä sosiaalisia verkostoja. Nostr toimii kryptografisten avainten kanssa. Jos haluat julkaista jotain, allekirjoita se avaimellasi ja lähetä se useille välittäjille. Voit käyttää Albyä Nostr-avaimen hallintaan. Monet Nostr-sovellukset sallivat sitten yksinkertaisesti käyttää avainta Alby-laajennuksesta.",
-        "private_key": {
-          "title": "Yksityinen avain",
-          "subtitle": "Avaimen luominen luo uuden avaimen nykyisen käyttämäsi tilin perusteella. Varmista, että varmuuskopioit tämän yksityisen avaimen."
-        }
       }
     },
     "send": {
@@ -499,16 +425,13 @@
     },
     "nostr": {
       "title": "Nostr",
-      "allow": "Salli {{host}}:",
       "block_and_ignore": "Estä ja jätä huomiotta {{host}}"
     }
   },
   "common": {
     "password": "Salasana",
-    "advanced": "Edistynyt",
     "success": "Menestys",
     "error": "Virhe",
-    "settings": "Asetukset",
     "sats_one": "sat",
     "sats_other": "satia",
     "loading": "ladataan",
@@ -573,7 +496,7 @@
         "allow_camera_access": "Salli kameran käyttöoikeus asetusruudussa."
       }
     },
-    "transactionsTable": {
+    "transactions_table": {
       "fee": "Kustannus",
       "preimage": "Esikuva",
       "received": "Vastaanotettu",
@@ -609,18 +532,10 @@
       }
     },
     "account_menu": {
-      "screen_reader": "Vaihda pudotusvalikko",
-      "title": "Vaihda tili",
-      "options": {
-        "account": {
-          "add": "Lisää uusi tili",
-          "manage": "Hallitse tilejä"
-        }
-      }
+      "screen_reader": "Vaihda pudotusvalikko"
     },
     "publishers_table": {
       "payments": "maksut"
     }
-  },
-  "permissions": {}
+  }
 }

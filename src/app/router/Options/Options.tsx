@@ -1,5 +1,6 @@
 import Container from "@components/Container";
 import Navbar from "@components/Navbar";
+import { PopiconsArrowUpLine } from "@popicons/react";
 import Accounts from "@screens/Accounts";
 import AccountDetail from "@screens/Accounts/Detail";
 import ConfirmPayment from "@screens/ConfirmPayment";
@@ -30,8 +31,7 @@ import GenerateMnemonic from "~/app/screens/Accounts/GenerateMnemonic";
 import NewMnemonic from "~/app/screens/Accounts/GenerateMnemonic/new";
 import ImportMnemonic from "~/app/screens/Accounts/ImportMnemonic";
 import NostrSettings from "~/app/screens/Accounts/NostrSettings";
-import NostrSetup from "~/app/screens/Accounts/NostrSetup/NostrSetup";
-import Discover from "~/app/screens/Discover";
+
 import LNURLRedeem from "~/app/screens/LNURLRedeem";
 import OnChainReceive from "~/app/screens/OnChainReceive";
 import ReceiveInvoice from "~/app/screens/ReceiveInvoice";
@@ -58,9 +58,6 @@ function Options() {
             }
           >
             <Route index element={<Navigate to="/wallet" replace />} />
-            <Route path="discover">
-              <Route index element={<Discover />} />
-            </Route>
             <Route path="publishers">
               <Route path=":id" element={<PublisherDetail />} />
               <Route index element={<Publishers />} />
@@ -76,16 +73,7 @@ function Options() {
             <Route path="receive/invoice" element={<ReceiveInvoice />} />
             <Route path="onChainReceive" element={<OnChainReceive />} />
             <Route path="wallet" element={<DefaultView />} />
-            <Route path="transactions">
-              <Route
-                path="outgoing"
-                element={<Transactions type="outgoing" />}
-              />
-              <Route
-                path="incoming"
-                element={<Transactions type="incoming" />}
-              />
-            </Route>
+            <Route path="transactions" element={<Transactions />} />
             <Route path="lnurlPay" element={<LNURLPay />} />
             <Route path="lnurlChannel" element={<LNURLChannel />} />
             <Route path="lnurlWithdraw" element={<LNURLWithdraw />} />
@@ -105,7 +93,6 @@ function Options() {
                 <Route path="secret-key/new" element={<NewMnemonic />} />
                 <Route path="secret-key/import" element={<ImportMnemonic />} />
                 <Route path="nostr/settings" element={<NostrSettings />} />
-                <Route path="nostr/setup" element={<NostrSetup />} />
               </Route>
 
               <Route
@@ -166,11 +153,14 @@ const Layout = () => {
   return (
     <div>
       <Navbar>
-        <Navbar.Link href="/discover">{tCommon("discover")}</Navbar.Link>
+        <Navbar.Link href="/wallet">{tCommon("wallet")}</Navbar.Link>
         <Navbar.Link href="/publishers">
           {tCommon("connected_sites")}
         </Navbar.Link>
-        <Navbar.Link href="/wallet">{tCommon("wallet")}</Navbar.Link>
+        <Navbar.Link href="https://getalby.com/discover" target="_blank">
+          {tCommon("discover")}
+          <PopiconsArrowUpLine className="h-5 w-5 rotate-45" />
+        </Navbar.Link>
       </Navbar>
       <Toaster />
       <Outlet />

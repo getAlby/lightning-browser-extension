@@ -3,7 +3,12 @@ import db from "~/extension/background-script/db";
 import Nostr from "~/extension/background-script/nostr";
 import { allowanceFixture } from "~/fixtures/allowances";
 import { permissionsFixture } from "~/fixtures/permissions";
-import type { MessageSignSchnorr, OriginData, Sender } from "~/types";
+import {
+  PermissionOption,
+  type MessageSignSchnorr,
+  type OriginData,
+  type Sender,
+} from "~/types";
 
 import signSchnorr from "../signSchnorrOrPrompt";
 
@@ -128,7 +133,7 @@ describe("signSchnorr", () => {
       };
       await db.permissions.bulkAdd([otherPermission]);
 
-      const result = await signSchnorr(message, sender);
+      await signSchnorr(message, sender);
 
       expect(utils.openPrompt).toHaveBeenCalledWith({
         args: {
@@ -137,36 +142,17 @@ describe("signSchnorr", () => {
         origin: message.origin,
         action: "public/nostr/confirmSignSchnorr",
       });
-      expect(nostr.signSchnorr).toHaveBeenCalledWith(message.args.sigHash);
-      expect(result).toStrictEqual(requestResponse);
-    });
-
-    test("if the permission for signSchnorr exists but is not enabled", async () => {
-      // prepare DB with disabled permission
-      const disabledPermission = {
-        ...permissionInDB,
-        enabled: false,
-      };
-      await db.permissions.bulkAdd([disabledPermission]);
-
-      const result = await signSchnorr(message, sender);
-
-      expect(utils.openPrompt).toHaveBeenCalledWith({
-        args: {
-          sigHash: message.args.sigHash,
-        },
-        origin: message.origin,
-        action: "public/nostr/confirmSignSchnorr",
-      });
-      expect(nostr.signSchnorr).toHaveBeenCalledWith(message.args.sigHash);
-      expect(result).toStrictEqual(requestResponse);
     });
   });
 
   describe("on the user's prompt response", () => {
-    test("saves the permission if enabled 'true'", async () => {
+    test("saves the permission if permissionOption is dont_ask_current", async () => {
       (utils.openPrompt as jest.Mock).mockResolvedValueOnce({
-        data: { enabled: true, blocked: false },
+        data: {
+          permissionOption: PermissionOption.DONT_ASK_CURRENT,
+          blocked: false,
+          confirm: true,
+        },
       });
       // prepare DB with a permission
       await db.permissions.bulkAdd([
@@ -203,9 +189,6 @@ describe("signSchnorr", () => {
     });
 
     test("doesn't call signSchnorr if clicks cancel", async () => {
-      (utils.openPrompt as jest.Mock).mockImplementationOnce(() => {
-        throw new Error();
-      });
       // prepare DB with a permission
       await db.permissions.bulkAdd([
         { ...permissionInDB, method: "nostr/getPublicKey" },
@@ -230,9 +213,13 @@ describe("signSchnorr", () => {
       expect(result).toHaveProperty("error");
     });
 
-    test("does not save the permission if enabled 'false'", async () => {
+    test("does not save the permission if permissionOption is 'ASK_EVERYTIME'", async () => {
       (utils.openPrompt as jest.Mock).mockResolvedValueOnce({
-        data: { enabled: false, blocked: false },
+        data: {
+          permissionOption: PermissionOption.ASK_EVERYTIME,
+          blocked: false,
+          confirm: true,
+        },
       });
       // prepare DB with a permission
       await db.permissions.bulkAdd([

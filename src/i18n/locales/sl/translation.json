@@ -52,12 +52,12 @@
           "instructions": "Na myNode domači strani klikni na <0>Wallet</0> gumb na tvojem <0>lightning</0> servisu.<1/> Klikni na <0>Pair Wallet</0> gumb pod <0>Status</0> zavihkom. Vnesi geslo, ko je to zahtevano.<1/> Izberi spustni meni in izberi možnost povezave. Glede na konfiguracijo lahko uporabiš <0>lightning (REST + Local IP)</0> povezavo ali <0>lightning (REST + Tor)</0> povezavo."
         }
       },
-      "start9": {
+      "startos": {
         "page": {
-          "instructions": "V Embassy nadzorni plošči klikni na <0>Lightning Network Daemon</0> servis.<1/>Izberi <0>Properties</0> zavihek.<1/>Kopiraj <0>LND Connect REST URL.</0>",
-          "title": "Poveži z <0>Start9 Server</0>"
+          "instructions": "V StartOS nadzorni plošči klikni na <0>Lightning Network Daemon</0> servis.<1/>Izberi <0>Properties</0> zavihek.<1/>Kopiraj <0>LND Connect REST URL.</0>",
+          "title": "Poveži z <0>StartOS Server</0>"
         },
-        "title": "Start9",
+        "title": "StartOS",
         "rest_url": {
           "label": "lndconnect REST URL",
           "placeholder": "lndconnect://yournode:8080?..."
@@ -90,51 +90,17 @@
         "sms_code": {
           "label": "Vnesi SMS potrditveno kodo"
         },
-        "token": {
-          "label": "Vnesi svoj dostopni žeton"
-        },
         "errors": {
           "setup_failed": "Namestitev ni bila uspešna",
           "invalid_token": "Neveljaven dostopni žeton je potekel",
           "missing_token": "Manjka dostopni žeton, ne moreš se prijaviti."
         }
       },
-      "kollider": {
-        "description": "Prijava v Kollider račun",
-        "username": {
-          "label": "Uporabniško ime"
-        },
-        "errors": {
-          "registration_limit_exceeded": "Preseženo število registracij, poskusi čez nekaj časa.",
-          "connection_failed": "Povezava ni uspela. Si prepičan, da so podatki pravilni?",
-          "user_already_exists": "Uporabniško ime že obstaja"
-        },
-        "title": "Kollider",
-        "choose_path": {
-          "title": "Poveži v Kollider Wallet",
-          "description": "Prijavi ali se registriraj v nov Kollider račun in se poveži v Alby.",
-          "create_new": "Registracija"
-        },
-        "create": {
-          "title": "Ustvari svoj Kollider račun se poveži v Alby",
-          "description": "Ustvari nov Kollider račun za pošiljanje, sprejemanje in menjavo Bitcoin-ov."
-        },
-        "login": {
-          "title": "Poveži se z Kollider računom"
-        },
-        "currency": {
-          "label": "Izberi valuto računa"
-        }
-      },
       "btcpay": {
         "config": {
-          "label": "Podatki o konfiguraciji",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
+          "label": "Podatki o konfiguraciji"
         },
         "title": "BTCPay Server",
-        "page": {
-          "title": "Poveži z BTCPay LND node"
-        },
         "errors": {
           "connection_failed": "Neuspešna povezava. Je BTCPay URL povezava pravilna in dostopna?"
         }
@@ -165,31 +131,16 @@
         },
         "privKey": {
           "label": "Lokalni zasebni ključ (samodejno generiran)"
+        },
+        "errors": {
+          "connection_failed": "Neuspešna povezava. Je tvoje Core Lightning vozlišče povezano in uporablja commando vtičnik?"
         }
       },
       "lnc": {
         "title": "Terminal Lightning (LNC)",
-        "page": {
-          "title": "Poveži s svojim LND vozliščem",
-          "description": "1. Odpri Lightning Terminal in izberi <0>Lightning Node Connect</0> iz stranske vrstice.<1/> 2. Klikni <0>Ustvari novo sejo</0><1/>3. Označi povezavo, izberi dovoljenje in potrdi<1/>4. <0>Kopiraj frazo za spajanje</0> in jo prilepi spodaj."
-        },
         "pairing_phrase": {
           "label": "Tvoja fraza za spajanje ",
           "placeholder": "skrivna fraza za stack sats"
-        }
-      },
-      "lndhub_bluewallet": {
-        "title": "Bluewallet",
-        "page": {
-          "title": "Poveži z BlueWallet",
-          "description": "V BlueWallet izberi denarnico, ki jo želiš povezati, jo odpri, klikni na \"...\", klikni na Izvozi/Varnostno kopiraj za prikaz QR kode, ki jo skeniraš s svojo kamero."
-        },
-        "errors": {
-          "invalid_uri": "Nepravilen BlueWallet URI",
-          "connection_failed": "Povezava ni bila uspešna. Je tvoj BlueWallet URI pravilen?"
-        },
-        "uri": {
-          "label": "BlueWallet izvozni URI"
         }
       },
       "lnbits": {
@@ -240,7 +191,8 @@
       "umbrel": {
         "title": "Umbrel",
         "page": {
-          "title": "Poveži <0>Umbrel</0> vozlišče"
+          "title": "Poveži <0>Umbrel</0> vozlišče",
+          "instructions": "1. V tvoji nadzorni plošči Lightning vozliška pojdi na <0>Poveži denarnico</0><1/>2. Izberi <0>REST (Tor)</0> ali <0>REST (Local Network)</0> način<1/>3. Skopiraj <0>lndconnect URL</0> in ga prilepi spodaj"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -260,18 +212,21 @@
           "invalid_uri": "Nepravilni LNDHub URI",
           "connection_failed": "Povezava ni bila uspešna. Je tvoj LNDHub URI pravilen?"
         }
+      },
+      "blink": {
+        "page": {
+          "title": "Poveži z <0>Blink denarnico</0>"
+        },
+        "title": "Blink denarnica"
       }
     },
     "welcome": {
-      "title": "Dobrodošli v Alby",
       "set_password": {
-        "title": "Nastavi kodo za odklepanje",
         "errors": {
           "enter_password": "Prosim vpiši kodo.",
           "mismatched_password": "Gesli se ne ujemata.",
           "confirm_password": "Prosim potrdi svoje geslo."
         },
-        "description": "Ta koda omogoča odklep Alby na tej napravi. Kode ne moreš resetirati, zato si jo zapomni, lahko pa jo kasneje spremeniš.",
         "choose_password": {
           "label": "Izberi kodo za odklepanje:"
         },
@@ -300,14 +255,11 @@
     "choose_path": {
       "alby": {
         "title": "Alby račun",
-        "connect": "Poveži z Alby",
-        "description": "Registriraj se ali uporabi obstoječi Alby račun za takojšnji začetek z lightning plačili."
+        "connect": "Poveži z Alby"
       },
       "other": {
         "title": "Ostale denarnice",
-        "description": "Poveži z obstoječo lightning denarnico ali vozliščem in izberi med različnimi priključki.",
-        "connect": "Poveži",
-        "and_more": "& več..."
+        "connect": "Poveži"
       }
     },
     "distributions": {
@@ -318,8 +270,8 @@
       "citadel": {
         "name": "Citadel"
       },
-      "start9": {
-        "name": "Start9"
+      "startos": {
+        "name": "StartOS"
       },
       "description": "Izberi s katero {{name}} aplikacijo bi se rad povezal",
       "btcpay": {
@@ -337,51 +289,41 @@
         "send_satoshis": "⚡️ Pošlji Satoshis ⚡️",
         "enable_now": "Dovoli zdaj"
       },
-      "recent_transactions": "Pretekle transakcije",
       "allowance_view": {
-        "recent_transactions": "Pretekle transakcije",
-        "no_transactions": "NA <0>{{name}}</0> še ni transakcij."
+        "sats": "sats",
+        "budget_spent": "Porabljen proračun",
+        "total_spent": "Porabljeno skupaj",
+        "total_payments": "Skupaj plačila",
+        "permissions": "Pravice"
       },
       "default_view": {
-        "recent_transactions": "Pretekle transakcije",
         "is_blocked_hint": "Alby je trenutno na {{host}} onemogočen",
-        "all_transactions_link": "Poglej vse transakcije",
-        "block_removed": "Omogoči {{host}}. Ponovno naloži stran.",
-        "no_outgoing_transactions": "Na tem računu ni odlivov.",
-        "no_incoming_transactions": "Na tem računu ni prihodkov."
+        "block_removed": "Omogoči {{host}}. Ponovno naloži stran."
       }
     },
     "accounts": {
-      "title": "Računi",
       "account_view": {
-        "title2": "Račun",
         "export": {
-          "title": "Poveži svojo mobilno denarnico",
           "screen_reader": "Izvozi podrobnosti računa",
           "your_ln_address": "Tvoj Lightning naslov:",
           "waiting": "čakanje na LndHub podatke...",
-          "export_uri": "LNDHub URI poverilnice"
+          "export_uri": "LNDHub URI poverilnice",
+          "scan_qr": "Uvozi to denarnico v Zeus ali BlueWallet s skeniranjem QR kode."
         },
         "name": {
           "title": "Prikazno ime",
           "placeholder": "Prikazno ime računa"
         },
         "mnemonic": {
-          "title": "🔑 Upravljanje ključa",
           "saved": "Glavni ključ kriptiran in uspešno shranjen.",
           "generate": {
             "title": "Generiraj nov Glavni ključ",
-            "button": "Generiraj Glavni ključ"
+            "button": "Generiraj Glavni ključ",
+            "description": "Glavni ključ ti omogoča interakcijo z različnimi protokoli, kot so: Nostr, Bitcoin omrežje ali LNURL-Auth."
           },
           "backup": {
-            "title": "Varnostno kopiraj obnovitveno frazo",
             "save": "Shrani Glavni ključ",
             "button": "Poglej obnovitveno frazo",
-            "items": {
-              "words": "Obnovitvena fraza je sestavljena iz 12 besed, ki delujejo kot geslo, a se ne more spremeniti ali obnoviti če se izgubi.",
-              "storage": "Bodi prepričan, da je zapisano na varnem in skrivnem mestu!",
-              "recovery_phrase": "Do Glavnega ključa lahko dostopaš z uporabo obnovitvene fraze."
-            },
             "protocols": {
               "nostr": "Nostr"
             }
@@ -391,15 +333,12 @@
             "description": "Uporabi obnovitveno frazo za uvoz Gladvnega ključa v Alby.",
             "button": "Uvozi Glavni ključ"
           },
-          "inputs": {
-            "title": "Obnovitvena fraza"
-          },
           "lnurl": {
-            "title": "Prijava z Lightning"
+            "title": "Prijava z Lightning",
+            "use_mnemonic": "Uporabi Glavni ključ za prijavo v Lightning omogočene aplikacije (LNURL Auth)"
           }
         },
         "network": {
-          "title": "Omrežje",
           "options": {
             "bitcoin": "Mainnet",
             "testnet": "Testnet",
@@ -410,22 +349,15 @@
           "settings": {
             "label": "Nostr nastavitve",
             "remove": "Odstrani trenutne ključe",
-            "title": "Nostr nastavitve"
+            "title": "Nostr nastavitve",
+            "can_restore": "✅ Nostr ključ, izpeljan iz vašega glavnega ključa",
+            "derive": "Izpelji iz glavnega ključa"
           },
           "setup": {
             "title": "Konfiguriraj Nostr ključe",
-            "import": {
-              "label": "Uvozi Nostr račun",
-              "private_key": {
-                "description": "Prilepi Nostr zasebni ključ za uvoz v Alby",
-                "label": "Uporabi Nostr zasebni ključ"
-              },
-              "recovery_phrase": {
-                "label": "Uporabi obnovitveno frazo"
-              }
-            },
             "new": {
-              "label": "Ustvari nov Nostr račun"
+              "label": "Ustvari nov Nostr račun",
+              "description": "Ustvarite glavni ključ s parom novih ključev Nostr."
             }
           },
           "title": "Nostr",
@@ -436,34 +368,32 @@
             "screen_reader": "Generiraj nov Nostr ključ za svoj račun",
             "title": "Generiraj nov Nostr ključ",
             "actions": {
-              "random_keys": "Generiraj naključni ključ"
+              "random_keys": "Generiraj naključni ključ",
+              "derived_keys": "Izpelji ključ iz računa"
             }
           },
           "private_key": {
-            "label": "Zasebni ključ Nostr"
+            "label": "Zasebni ključ Nostr",
+            "title": "Upravljajte svoj zasebni ključ Nostr"
           },
           "actions": {
             "generate": "Generiraj nov ključ"
+          },
+          "errors": {
+            "failed_to_load": "Nalaganje ključa Nostr ni uspelo. Je to veljaven ključ Nostr?"
           }
         },
-        "title1": "Nastavitve računa",
         "remove": {
-          "title": "Odstrani ta račun",
           "error": "Vnešeno ime računa se ne ujema."
         },
         "remove_secretkey": {
-          "subtitle": "Odstrani Glavni ključ iz tega računa.",
           "title": "Odstrani Glavni ključ",
           "success": "Glavni ključ je uspešno odstranjen."
         },
         "actions": {
           "export": "Izvoz",
-          "remove_account": "Odstrani račun",
           "remove_secretkey": "Odstrani Glavni ključ"
         }
-      },
-      "actions": {
-        "add_account": "Dodaj račun"
       }
     },
     "unlock": {
@@ -484,47 +414,322 @@
       "browser_notifications": {
         "title": "Obvestila brskalnika"
       },
-      "title": "Nastavitve"
+      "personal_data": {
+        "title": "Osebni podatki"
+      },
+      "camera_access": {
+        "allow": "Omogoči dostop do kamere",
+        "subtitle": "Za skeniranje QR kod",
+        "title": "Dostop do kamere",
+        "granted": "Dovoljenje omogočeno"
+      },
+      "currency": {
+        "title": "Valuta",
+        "subtitle": "Zneske dodatno prikaži v tej valuti"
+      },
+      "exchange": {
+        "subtitle": "Vir menjalnih tečajev bitcoinov",
+        "title": "Vir tečaja"
+      },
+      "show_fiat": {
+        "title": "Sats v Fiat",
+        "subtitle": "Vedno pretvori v izbrano valuto iz izbrane menjalnice"
+      },
+      "language": {
+        "title": "Jezik",
+        "subtitle": "Prevodi še niso 100% dokončani. <0>Pomagajte nam prevesti Alby v vaš jezik!</0>"
+      },
+      "theme": {
+        "title": "Tema",
+        "options": {
+          "system": "Sistem",
+          "dark": "Temna",
+          "light": "Svetla"
+        },
+        "subtitle": "Uporabi Alby v temnem ali svetlem načinu"
+      },
+      "website_enhancements": {
+        "subtitle": "Izboljšave napitnin za Twitter, YouTube itd.",
+        "title": "Izboljšave spletne strani"
+      }
+    },
+    "webln_enable": {
+      "title": "Poveži se z WebLN",
+      "request2": "Zahtevaj račune in Lightning informacije"
+    },
+    "make_invoice": {
+      "title": "Ustvari račun",
+      "amount": {
+        "label": "Znesek (Satoshi)"
+      },
+      "errors": {
+        "amount_too_small": "Znesek je manjši on minimalne vrednosti",
+        "amount_too_big": "Znesek je višji od maksimalne vrednosti"
+      },
+      "memo": {
+        "label": "Beležka"
+      }
+    },
+    "on_chain": {
+      "go": "Pojdi na svoj račun Alby →",
+      "title": "Prejmi preko bitcoin naslova",
+      "instructions1": "Če želiš prejemati bitcoin prek naslova bitcoin, se prijavi v svoj <0>Alby račun</0> na getalby.com",
+      "instructions2": "Svoj bitcoin naslov najdete na strani <0>Prejmi</0>."
+    },
+    "confirm_sign_pset": {
+      "allow_sign": "To spletno mesto zahteva, da podpišeš Liquid transakcijo",
+      "title": "Podpiši"
+    },
+    "publishers": {
+      "description": "Spletna mesta, kjer si že uporabljal Alby",
+      "discover": "Okdrij spletna mesta",
+      "publisher": {
+        "allowance": {
+          "used_budget": "porabljeni satoshiji",
+          "title": "Odobritev"
+        }
+      },
+      "no_info": "Videti je, da Albyja še nisi uporabljal na nobenem spletnem mestu.",
+      "title": "Tvoja ⚡ spletna stran"
+    },
+    "receive": {
+      "payment": {
+        "status": "Preveri status plačila"
+      }
+    },
+    "confirm_sign_message": {
+      "title": "Podpiši",
+      "content": "To spletno mesto te prosi, da podpišeš:"
+    },
+    "liquid_enable": {
+      "request2": "Pridobi račune in podatke o liquid",
+      "title": "Poveži se z Liquid"
+    },
+    "nostr_enable": {
+      "title": "Povežite se z Nostr"
+    },
+    "webbtc_enable": {
+      "request2": "Pridobi račune in podatke o Webbtc",
+      "title": "Poveži se z WebBTC"
+    },
+    "alby_enable": {
+      "title": "Poveži se z Albyjem",
+      "request2": "Zahtevajte račune in podatke o albi"
+    },
+    "scan_qrcode": {
+      "title": "Čakam na skeniranje"
     }
   },
   "permissions": {
     "lnc": {
-      "listinvoices": "Pridobi seznam vseh računov.",
-      "openchannel": "Odpri nov kanal.",
-      "getinfo": "Pridobi informacije vozlišča.",
-      "lookupinvoice": "Pridobi podrobnosti računa.",
-      "addinvoice": "Kreiraj nove račune.",
-      "addholdinvoice": "Kreiraj nov eHODL račune.",
-      "listchannels": "Pridobi opis vseh odprtih kanalov.",
-      "connectpeer": "Vzpostavi povezavo z oddaljenim strežnikom.",
-      "disconnectpeer": "Odjavi iz oddaljenega strežnika.",
-      "queryroutes": "Poišči možno pot.",
-      "listpeers": "Pridobi seznam trenutno aktivnih strežnikov.",
-      "getnodeinfo": "Prodobi kanalne informacije o vozlišču.",
-      "decodepayreq": "Dekodiraj niz plačilne zahteve.",
-      "sendtoroute": "Izvedi plačilo preko določene poti.",
-      "verifymessage": "Overi podpis preko sporočila.",
-      "settleinvoice": "Poravnaj prejeti račun."
+      "listinvoices": "Pridobi seznam vseh računov",
+      "openchannel": "Odpri nov kanal",
+      "getinfo": "Pridobi informacije vozlišča",
+      "lookupinvoice": "Pridobi podrobnosti računa",
+      "addinvoice": "Kreiraj nove račune",
+      "addholdinvoice": "Kreiraj nov eHODL račune",
+      "listchannels": "Pridobi opis vseh odprtih kanalov",
+      "connectpeer": "Vzpostavi povezavo z oddaljenim strežnikom",
+      "disconnectpeer": "Odjavi iz oddaljenega strežnika",
+      "queryroutes": "Poišči možno pot",
+      "listpeers": "Pridobi seznam trenutno aktivnih strežnikov",
+      "getnodeinfo": "Prodobi kanalne informacije o vozlišču",
+      "decodepayreq": "Dekodiraj niz plačilne zahteve",
+      "sendtoroute": "Izvedi plačilo preko določene poti",
+      "verifymessage": "Overi podpis preko sporočila",
+      "settleinvoice": "Poravnaj prejeti račun"
     },
     "commando": {
-      "offer": "Oblikuj ponudbo.",
-      "pay": "Pošlji plačilo na BOLT11 račun."
+      "offer": "Oblikuj ponudbo",
+      "pay": "Pošlji plačilo na BOLT11 račun",
+      "connect": "Vzpostavi novo povezavo z drugim vozliščem",
+      "disconnect": "Zapri obstoječo povezavo s sosednjim vozliščem",
+      "feerates": "Vrni feerates, ki jih bo uporabil CLN",
+      "decode": "Dekodiraj niz bolt11/bolt12/rune",
+      "decodepay": "Preverite in razčlenite niz bolt11",
+      "checkmessage": "Preveri, ali je podpis ustvarilo dano vozlišče",
+      "bkpr-listbalances": "Bere seznam vseh tekočih in preteklih stanj računa"
     },
     "lnd": {
-      "addinvoice": "Kreiraj nove račune.",
-      "addholdinvoice": "Kreiraj nove HODL račune.",
-      "openchannel": "Odpri nov kanal.",
-      "listpeers": "Pridobi seznam trenutno aktivnih strežnikov.",
-      "listchannels": "Pridobi opis vseh odprtih kanalov.",
-      "disconnectpeer": "Odjava iz oddaljenega strežnika.",
-      "connectpeer": "Vzpostavi povezavo z oddaljenim strežnikom.",
-      "listinvoices": "Pridobi seznam vseh računov.",
-      "getnodeinfo": "Pridobi kanalne informacije o vozlišču.",
-      "verifymessage": "Preveri podpis preko sporočila.",
-      "queryroutes": "Poišči možno pot.",
-      "lookupinvoice": "Preglej podrobnosti računa.",
-      "settleinvoice": "Poravnaj sprejete račune.",
-      "sendtoroute": "Izvedi plačilo preko določene poti."
+      "addinvoice": "Kreiraj nove račune",
+      "addholdinvoice": "Kreiraj nove HODL račune",
+      "openchannel": "Odpri nov kanal",
+      "listpeers": "Pridobi seznam trenutno aktivnih strežnikov",
+      "listchannels": "Pridobi opis vseh odprtih kanalov",
+      "disconnectpeer": "Odjava iz oddaljenega strežnika",
+      "connectpeer": "Vzpostavi povezavo z oddaljenim strežnikom",
+      "listinvoices": "Pridobi seznam vseh računov",
+      "getnodeinfo": "Pridobi kanalne informacije o vozlišču",
+      "verifymessage": "Preveri podpis preko sporočila",
+      "queryroutes": "Poišči možno pot",
+      "lookupinvoice": "Preglej podrobnosti računa",
+      "settleinvoice": "Poravnaj sprejete račune",
+      "sendtoroute": "Izvedi plačilo preko določene poti"
     }
+  },
+  "components": {
+    "companion_download_info": {
+      "heading": "Kako se želiš povezati z omrežjem TOR?",
+      "download": "Prenos",
+      "tor_native": {
+        "title": "TOR (native)",
+        "description": "Izberi to možnost, če je ta brskalnik že povezan z omrežjem TOR."
+      },
+      "companion": {
+        "title": "Spremljevalna aplikacija",
+        "description": "Aplikacija, ki tvoj brskalnik poveže z omrežjem TOR."
+      }
+    },
+    "badge": {
+      "label": {
+        "imported": "Uvožen",
+        "auth": "Prijava",
+        "budget": "PRORAČUN"
+      }
+    },
+    "budget_control": {
+      "remember": {
+        "description": "Stanje lahko nastavite tako, da ne boste pozvani k potrditvi plačil, dokler ni porabljeno.",
+        "label": "Zapomni in določi proračun"
+      },
+      "budget": {
+        "label": "Proračun"
+      }
+    },
+    "account_menu": {
+      "options": {
+        "account": {
+          "go_to_web_wallet": "Upravljaj svoj spletni račun"
+        }
+      },
+      "screen_reader": "Preklopi spustni meni"
+    },
+    "publishers_table": {
+      "payments": "plačila",
+      "total": "skupaj",
+      "budget": "proračun"
+    },
+    "allowance_menu": {
+      "enable_login": {
+        "title": "Omogoči prijavo na spletna mesta",
+        "subtitle": "Samodejna prijava brez potrditve, ko to zahteva spletno mesto."
+      },
+      "hint": "Če to spremeniš, boš ponastavili trenutni proračun",
+      "edit_allowance": {
+        "title": "Nastavitve spletnega mesta",
+        "screen_reader": "Nastavitve proračunskega zneska"
+      },
+      "confirm_delete": "Ali si prepričan, da želiš prekiniti povezavo s tem spletnim mestom?",
+      "new_budget": {
+        "label": "Proračun plačil z enim klikom",
+        "link_label": "Nastavi proračun za plačila z enim klikom"
+      }
+    },
+    "qrcode_scanner": {
+      "actions": {
+        "stop_scanning": "Končaj skeniranje",
+        "start_scanning": "Začni skenirati"
+      },
+      "errors": {
+        "allow_camera_access": "Prosim dovoli dostop do kamere v nastavitvah."
+      },
+      "title": "Skeniraj QR kodo"
+    },
+    "toasts": {
+      "connection_error": {
+        "double_check": "Preveri podrobnosti povezave",
+        "if_ssl_errors": "in če so napake SSL (npr. ERR_CERT_AUTHORITY_INVALID), klikni \"napredno\" in nadaljuj s sprejemom potrdila.",
+        "what_you_can_do": "Narediš lahko naslednje:",
+        "visit_guides": "Za več pomoči obišči naše vodnike"
+      },
+      "errors": {
+        "invalid_credentials": "Neveljavno geslo. Preveri svoje geslo in e-poštni naslov ter poskusi znova."
+      },
+      "login_failed": {
+        "password_reset": "Si pozabil geslo? Klikni tukaj"
+      }
+    }
+  },
+  "common": {
+    "enable": {
+      "block_added": "Strežnik {{host}} dodan na črno list, prosim ozveži spletno stran.",
+      "request1": "odobritev transakcij",
+      "allow": "Dovoli spletnemu mestu:",
+      "block_and_ignore": "Blokiraj in ignoriraj {{host}}"
+    },
+    "range": {
+      "greaterOrEqual": "≥ {{min}}",
+      "between": "med {{min}} in {{max}}",
+      "lessThanOrEqual": "≤ {{max}}"
+    },
+    "actions": {
+      "edit": "Uredi",
+      "download": "Prenesi",
+      "receive_again": "Prejmi naslednje plačilo",
+      "send": "Pošlji",
+      "review": "Preglej",
+      "log_in": "Prijava",
+      "delete": "Izbriši",
+      "back": "Nazaj",
+      "import": "Uvozi",
+      "continue": "Nadaljuj",
+      "save": "Shrani",
+      "remember": "Zapomni si mojo izbiro in ne sprašuj več",
+      "receive": "Prejmi",
+      "cancel": "Prkeliči",
+      "remove": "Odstrani",
+      "paste": "Prilepi",
+      "more": "Več",
+      "copied_to_clipboard": "Kopirano v odložišče",
+      "copy_clipboard": "Kopiraj v odložišče",
+      "next": "Naslednji",
+      "confirm": "Potrdi",
+      "copy_invoice": "Kopiraj račun",
+      "lock": "Zakleni",
+      "connect": "Poveži",
+      "transactions": "Transakcije",
+      "export": "Izvozi",
+      "disconnect": "Prekini povezavo",
+      "paste_clipboard": "Prilepljeno iz odložišča",
+      "open": "Odpri",
+      "unlock": "Odkleni",
+      "copy": "Kopiraj",
+      "close": "Zapri"
+    },
+    "connectors": {
+      "nativelnd": "LND (preko Tor)",
+      "commando": "Commando",
+      "citadel": "Citadel",
+      "nativelndhub": "LNDHub (preko Tor)",
+      "lnbits": "LNBits",
+      "nativelnbits": "LNBits (preko Tor)",
+      "nativecitadel": "Citadel (preko Tor)",
+      "lnd": "LND",
+      "lndhub": "LNDHub",
+      "eclair": "Eclair",
+      "galoy": "Galoy"
+    },
+    "message": "Sporočilo",
+    "help": "Pomoč",
+    "description": "Opis",
+    "optional": "Neobvezno",
+    "feedback": "Povratne informacije",
+    "wallet": "Denarnica",
+    "sats_one": "sat",
+    "amount": "Znesek",
+    "copied": "Skopirano!",
+    "response": "Odgovor",
+    "pasted": "Prilepljeno!",
+    "errors": {
+      "connection_failed": "Neuspešna povezava",
+      "payment_failed": "Neuspešno plačilo"
+    },
+    "balance": "Stanje",
+    "or": "ali",
+    "sats_other": "sats",
+    "description_full": "Polni opis",
+    "connected_sites": "Povezana spletna mesta",
+    "loading": "nalagam",
+    "success_message": "{{amount}}{{fiatAmount}} je na poti do {{destination}}"
   }
 }

@@ -4,50 +4,47 @@ import { useSettings } from "~/app/context/SettingsContext";
 
 export type Props = {
   amount: string | number;
-  amountAlt?: string;
   description?: string | React.ReactNode;
   fiatAmount: string;
 };
 
-const PaymentSummary: FC<Props> = ({
-  amount,
-  amountAlt,
-  description,
-  fiatAmount,
-}) => {
+const PaymentSummary: FC<Props> = ({ amount, description, fiatAmount }) => {
   const { t: tCommon } = useTranslation("common");
   const { getFormattedSats } = useSettings();
 
   return (
-    <dl className="mb-0">
-      <dt className="text-sm text-gray-500 dark:text-neutral-500">
-        {tCommon("amount")}
-      </dt>
-      <dd className="text-lg text-gray-700 dark:text-neutral-200 flex flex-row justify-between">
-        <div>{getFormattedSats(amount)}</div>
-        {!!fiatAmount && (
-          <span
-            className="text-gray-500 dark:text-neutral-500"
-            data-testid="fiat_amount"
-          >
-            {" "}
-            (~{fiatAmount})
-          </span>
-        )}
-      </dd>
-      {amountAlt && <dd className="text-gray-400">{amountAlt}</dd>}
+    <dl className="space-y-4">
+      <div>
+        <Dt>{tCommon("amount")}</Dt>
+        <Dd>
+          <div className="flex flex-row justify-between">
+            <div>{getFormattedSats(amount)}</div>
+            {!!fiatAmount && (
+              <span data-testid="fiat_amount">~{fiatAmount}</span>
+            )}
+          </div>
+        </Dd>
+      </div>
       {!!description && (
-        <>
-          <dt className="mt-4 font-medium dark:text-white">
-            {tCommon("description")}
-          </dt>
-          <dd className="text-gray-500 dark:text-neutral-400 break-all">
-            {description}
-          </dd>
-        </>
+        <div>
+          <Dt>{tCommon("description")}</Dt>
+          <Dd>{description}</Dd>
+        </div>
       )}
     </dl>
   );
 };
+
+const Dt = ({ children }: { children: React.ReactNode }) => (
+  <dt className="text-sm font-medium text-gray-800 dark:text-neutral-200">
+    {children}
+  </dt>
+);
+
+const Dd = ({ children }: { children: React.ReactNode }) => (
+  <dd className="text-lg text-gray-600 dark:text-neutral-400 break-words">
+    {children}
+  </dd>
+);
 
 export default PaymentSummary;

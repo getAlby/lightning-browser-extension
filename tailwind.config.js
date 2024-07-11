@@ -47,19 +47,16 @@ module.exports = {
       },
       colors: {
         primary: "#F8C455",
+        "brand-yellow": "#FFDF6F",
         "green-bitcoin": "#27ae60",
 
         // Material Design Surface Colors
         "surface-00dp": surfaceColor,
         "surface-01dp": lighten(surfaceColor, 5),
         "surface-02dp": lighten(surfaceColor, 7),
-        "surface-03dp": lighten(surfaceColor, 8),
-        "surface-04dp": lighten(surfaceColor, 9),
-        "surface-06dp": lighten(surfaceColor, 11),
         "surface-08dp": lighten(surfaceColor, 12),
         "surface-12dp": lighten(surfaceColor, 14),
         "surface-16dp": lighten(surfaceColor, 15),
-        "surface-24dp": lighten(surfaceColor, 16),
       },
     },
     backgroundImage: (theme) => ({

@@ -1,8 +1,8 @@
-import { SendIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 import CompanionDownloadInfo from "@components/CompanionDownloadInfo";
 import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
 import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
+import { PopiconsShareLine } from "@popicons/react";
 import { useRef, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -204,7 +204,7 @@ export default function ConnectLnd() {
             if (hiddenFileInput?.current) hiddenFileInput.current.click();
           }}
         >
-          <SendIcon className="mb-3 h-6 w-6 text-blue-600 hover:text-blue-700" />
+          <PopiconsShareLine className="mb-3 h-6 w-6 text-blue-600 hover:text-blue-700" />
           <p className="dark:text-white">
             <Trans
               i18nKey={"drag_and_drop"}

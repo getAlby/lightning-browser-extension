@@ -1,24 +1,23 @@
 import fetchAdapter from "@vespaiach/axios-fetch-adapter";
 import type { AxiosResponse } from "axios";
 import axios, { AxiosRequestConfig, Method } from "axios";
-import lightningPayReq from "bolt11";
+import lightningPayReq from "bolt11-signet";
 import Base64 from "crypto-js/enc-base64";
 import Hex from "crypto-js/enc-hex";
 import hmacSHA256 from "crypto-js/hmac-sha256";
 import sha256 from "crypto-js/sha256";
-import utils from "~/common/lib/utils";
 import HashKeySigner from "~/common/utils/signer";
 import { Account } from "~/types";
 
-import state from "../state";
+import { mergeTransactions } from "~/common/utils/helpers";
 import Connector, {
   CheckPaymentArgs,
   CheckPaymentResponse,
-  ConnectorInvoice,
+  ConnectorTransaction,
   ConnectPeerResponse,
   GetBalanceResponse,
   GetInfoResponse,
-  GetInvoicesResponse,
+  GetTransactionsResponse,
   KeysendArgs,
   MakeInvoiceArgs,
   MakeInvoiceResponse,
@@ -71,6 +70,7 @@ export default class LndHub implements Connector {
       "keysend",
       "makeInvoice",
       "sendPayment",
+      "sendPaymentAsync",
       "signMessage",
       "getBalance",
     ];
@@ -84,7 +84,7 @@ export default class LndHub implements Connector {
     throw new Error("Not yet supported with the currently used account.");
   }
 
-  async getInvoices(): Promise<GetInvoicesResponse> {
+  private async getInvoices(): Promise<ConnectorTransaction[]> {
     const data = await this.request<
       {
         r_hash: {
@@ -92,7 +92,7 @@ export default class LndHub implements Connector {
           data: number[];
         };
         amt: number;
-        custom_records: ConnectorInvoice["custom_records"];
+        custom_records: ConnectorTransaction["custom_records"];
         description: string;
         expire_time: number;
         ispaid: boolean;
@@ -105,16 +105,17 @@ export default class LndHub implements Connector {
       }[]
     >("GET", "/getuserinvoices", undefined);
 
-    const invoices: ConnectorInvoice[] = data
+    const invoices: ConnectorTransaction[] = data
       .map(
-        (invoice, index): ConnectorInvoice => ({
+        (invoice, index): ConnectorTransaction => ({
           custom_records: invoice.custom_records,
           id: `${invoice.payment_request}-${index}`,
           memo: invoice.description,
           preimage: "", // lndhub doesn't support preimage (yet)
+          payment_hash: invoice.payment_hash,
           settled: invoice.ispaid,
           settleDate: invoice.timestamp * 1000,
-          totalAmount: `${invoice.amt}`,
+          totalAmount: invoice.amt,
           type: "received",
         })
       )
@@ -122,11 +123,64 @@ export default class LndHub implements Connector {
         return b.settleDate - a.settleDate;
       });
 
+    return invoices;
+  }
+
+  async getTransactions(): Promise<GetTransactionsResponse> {
+    const incomingInvoices = await this.getInvoices();
+    const outgoingInvoices = await this.getPayments();
+
+    const transactions: ConnectorTransaction[] = mergeTransactions(
+      incomingInvoices,
+      outgoingInvoices
+    );
+
     return {
       data: {
-        invoices,
+        transactions,
       },
     };
+  }
+
+  private async getPayments(): Promise<ConnectorTransaction[]> {
+    const lndhubPayments = await this.request<
+      {
+        custom_records: ConnectorTransaction["custom_records"];
+        fee: string;
+        keysend: boolean;
+        memo: string;
+        payment_hash: {
+          type: string;
+          data: ArrayBuffer;
+        };
+        payment_preimage: string;
+        r_hash: {
+          type: "Buffer";
+          data: number[];
+        };
+        timestamp: number;
+        type: "paid_invoice";
+        value: number;
+      }[]
+    >("GET", "/gettxs", { limit: 100 });
+
+    // gettxs endpoint returns successfull outgoing  transactions by default
+    const payments: ConnectorTransaction[] = lndhubPayments.map(
+      (transaction, index): ConnectorTransaction => ({
+        id: `${index}`,
+        memo: transaction.memo,
+        custom_records: transaction.custom_records,
+        preimage: transaction.payment_preimage,
+        payment_hash: Buffer.from(transaction.payment_hash.data).toString(
+          "hex"
+        ),
+        settled: true,
+        settleDate: transaction.timestamp * 1000,
+        totalAmount: transaction.value,
+        type: "sent",
+      })
+    );
+    return payments;
   }
 
   async getInfo(): Promise<GetInfoResponse> {
@@ -290,18 +344,11 @@ export default class LndHub implements Connector {
     if (!args.message) {
       return Promise.reject(new Error("Invalid message"));
     }
-    let message: string | Uint8Array;
-    message = sha256(args.message).toString(Hex);
-    let keyHex = sha256(
+    const message = sha256(args.message).toString(Hex);
+    const keyHex = sha256(
       `lndhub://${this.config.login}:${this.config.password}`
     ).toString(Hex);
-    const { settings } = state.getState();
-    if (settings.legacyLnurlAuth) {
-      message = utils.stringToUint8Array(args.message);
-      keyHex = sha256(
-        `LBE-LNDHUB-${this.config.url}-${this.config.login}-${this.config.password}`
-      ).toString(Hex);
-    }
+
     if (!keyHex) {
       return Promise.reject(new Error("Could not create key"));
     }
@@ -371,11 +418,17 @@ export default class LndHub implements Connector {
 
       return authData;
     } catch (e) {
-      throw new Error(
-        `API error (${this.config.url})${
-          e instanceof Error ? `: ${e.message}` : ""
-        }`
-      );
+      let error = "";
+      if (axios.isAxiosError(e)) {
+        const data = e.response?.data as
+          | { reason?: string; message?: string }
+          | undefined;
+        error = data?.reason || data?.message || e.message;
+      } else if (e instanceof Error) {
+        error = e.message;
+      }
+
+      throw new Error(`API error (${this.config.url}) ${error}`);
     }
   }
 

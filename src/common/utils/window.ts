@@ -1,6 +1,33 @@
 import browser from "webextension-polyfill";
 
-export async function getPosition(
+export async function createPromptWindow(url: string): Promise<number> {
+  const windowWidth = 400;
+  const windowHeight = 600;
+
+  const { top, left } = await getPosition(windowWidth, windowHeight);
+
+  const popupOptions: browser.Windows.CreateCreateDataType = {
+    url: url,
+    type: "popup",
+    width: windowWidth,
+    height: windowHeight,
+    top: top,
+    left: left,
+  };
+  const result = await browser.windows.create(popupOptions);
+  return result.tabs! && result.tabs[0].id!;
+}
+
+export async function createPromptTab(url: string): Promise<number> {
+  const tabOptions: browser.Tabs.CreateCreatePropertiesType = {
+    url: url,
+  };
+
+  const result = await browser.tabs.create(tabOptions);
+  return result.id!;
+}
+
+async function getPosition(
   width: number,
   height: number
 ): Promise<{ top: number; left: number }> {

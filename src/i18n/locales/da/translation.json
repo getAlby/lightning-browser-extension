@@ -1,10 +1,7 @@
 {
   "translation": {
     "welcome": {
-      "title": "Velkommen til Alby",
       "set_password": {
-        "title": "Angiv en nøglekode",
-        "description": "Dette kodeord bruges til at beskytte din wallet og giver adgang til browserudvidelsen. Det kan ikke nulstilles, og er ikke den samme som adgangskoden til din Alby-konto.",
         "choose_password": {
           "label": "Vælg en nøglekode:"
         },
@@ -31,13 +28,10 @@
     },
     "choose_path": {
       "alby": {
-        "title": "Alby",
-        "description": "Opret dig, eller brug din eksisterende Alby-konto til hurtigt at starte med at betale via lightning."
+        "title": "Alby"
       },
       "other": {
         "title": "Andre wallets",
-        "description": "Opret forbindelse til din eksisterende wallet eller node, og vælg mellem flere forbindelser.",
-        "and_more": "med mere...",
         "connect": "Opret forbindelse"
       }
     },
@@ -81,27 +75,9 @@
       },
       "lnc": {
         "title": "LND med LNC",
-        "page": {
-          "title": "Opret forbindelse til din LND-node",
-          "description": "Start en ny session i terminal (litd) for at få en ny forbindelseskode, og skriv den her"
-        },
         "pairing_phrase": {
           "label": "Din forbindelseskode ",
           "placeholder": "hemmelig kode til sats-samlingen"
-        }
-      },
-      "lndhub_bluewallet": {
-        "title": "Bluewallet",
-        "page": {
-          "title": "Opet forbindelse til Bluewallet",
-          "description": "Vælg den wallet du vil oprette forbindelse til i Bluewallet, åbn den, klik på \"...\", klik på Export/Backup for at se QR-koden og aflæs den med dit webkamera."
-        },
-        "uri": {
-          "label": "BlueWallet export URI"
-        },
-        "errors": {
-          "invalid_uri": "Ugyldig BlueWallet URI",
-          "connection_failed": "Forbindelse kunne ikke oprettes. Er din BlueWallet URI korrekt?"
         }
       },
       "lndhub_go": {
@@ -185,11 +161,11 @@
           "placeholder": "lndconnect://dinnode:8080?..."
         }
       },
-      "start9": {
-        "title": "Start9",
+      "startos": {
+        "title": "StartOS",
         "page": {
-          "title": "Opret forbindelse til din <0>Embassy</0> node",
-          "instructions": "<0>Note:</0> I øjeblikket understøtter vi kun LND, men vi vil fremover også tilføje support af c-lightning!<1/>I din Embassys indstillingsmenu klikker du på servicen <0>Lightning Network Daemon</0>.<1/>Vælg fanen <0>Properties</0>.<1/>Kopier så <0>LND Connect REST URL.</0>"
+          "title": "Opret forbindelse til din <0>StartOS</0> node",
+          "instructions": "<0>Note:</0> I øjeblikket understøtter vi kun LND, men vi vil fremover også tilføje support af c-lightning!<1/>I din StartOSs indstillingsmenu klikker du på servicen <0>Lightning Network Daemon</0>.<1/>Vælg fanen <0>Properties</0>.<1/>Kopier så <0>LND Connect REST URL.</0>"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -220,48 +196,10 @@
           "title": "Opret forbindelse til <0>Bitcoin Jungle Wallet</0>"
         }
       },
-      "galoy": {
-        "phone_number": {
-          "label": "Indtast dit telefonnummer"
-        },
-        "sms_code": {
-          "label": "Indtast din SMS-bekræftelseskode"
-        },
-        "token": {
-          "label": "Indtast din JWT-token",
-          "info": "Log ind med {{label}} bliver i øjeblikketl opgraderet. Hvis du er en øvet bruger, kan du få din JWT-token ved at logge ind via <0>Web Wallet (wallet.mainnet.galoy.io)</0><1/><1/>JWT ser sådan ud: <2>eyJhbG...</2><1/><1/>"
-        },
-        "actions": {
-          "login": "Adgangsoplysninger"
-        },
-        "errors": {
-          "setup_failed": "Opsætning mislykkedes",
-          "missing_token": "JWT mangler, kunne ikke logge ind.",
-          "invalid_token": "ugyldig JWT givet"
-        }
-      },
-      "kollider": {
-        "title": "Kollider",
-        "description": "Log ind på din Kollider-konto",
-        "username": {
-          "label": "Indtast dit Kollider-brugernavn"
-        },
-        "currency": {
-          "label": "Vælg din kontovaluta"
-        },
-        "errors": {
-          "connection_failed": "Forbindelsen kunne ikke oprettes. Er du sikker på at kontooplysningerne er korrekte?"
-        }
-      },
       "btcpay": {
         "title": "BTCPay Server",
-        "page": {
-          "title": "Opret forbindelse til din BTCPay LND-node",
-          "instructions": "Gå til din BTCPayServer og log på som administrator. Gå til Server Settings > Services > LND Rest - See information. Klik så på \"See QR Code information\" og kopier QR-kodens data. Indsæt dem herunder:"
-        },
         "config": {
-          "label": "Konfigurationsoplysninger",
-          "placeholder": "config=https://din-btc-pay.org/lnd-config/212121/lnd.config"
+          "label": "Konfigurationsoplysninger"
         },
         "errors": {
           "connection_failed": "Forbindelsen kunne ikke oprettes. Er BTCPay-forbindelsens URL korrekt og tilgængelig?"
@@ -305,28 +243,18 @@
         "send_satoshis": "⚡️ Send Satoshi ⚡️",
         "enable_now": "Aktiver nu"
       },
-      "recent_transactions": "Seneste transaktioner",
-      "allowance_view": {
-        "recent_transactions": "Seneste transaktioner",
-        "no_transactions": "Endnu ingen transaktioner på <0>{{navn}}</0>."
-      },
       "default_view": {
-        "recent_transactions": "Seneste transaktioner",
         "is_blocked_hint": "Alby er i øjeblikket deaktiveret på {{vært}}",
         "block_removed": "{{vært}} blev aktiveret. Indlæs hjemmesiden igen."
       }
     },
     "accounts": {
-      "title": "Konti",
       "account_view": {
-        "title1": "Kontooplysninger",
-        "title2": "Rediger konto",
         "name": {
           "title": "Navn",
           "placeholder": "Kontonavn"
         },
         "export": {
-          "title": "Eksporter konto",
           "screen_reader": "Eksporter kontooplysninger",
           "waiting": "venter på LndHub-data...",
           "your_ln_address": "Din lightningadresse:",
@@ -362,17 +290,9 @@
             "failed_to_load": "Nostr-nøglen kunne ikke anvendes. Er det en gyldig Nostr-nøgle?"
           }
         },
-        "remove": {
-          "title": "Fjern denne konto",
-          "subtitle": "Alle de tilknyttede puljer bliver slettet. Du skal være helt sikker."
-        },
         "actions": {
-          "remove_account": "Fjern konto",
           "export": "Eksporter"
         }
-      },
-      "actions": {
-        "add_account": "Tilføj konto"
       }
     },
     "unlock": {
@@ -391,7 +311,6 @@
       }
     },
     "settings": {
-      "title": "Indstillinger",
       "browser_notifications": {
         "title": "Browsermeddelelser",
         "subtitle": "Meddelelser om betaling og godkendelser."
@@ -399,18 +318,6 @@
       "website_enhancements": {
         "title": "Ekstra hjemmesidefunktioner",
         "subtitle": "Donationer på Twitter, YouTube, etc."
-      },
-      "lnurl_auth": {
-        "title": "LNURL-Auth",
-        "hint": "er en generisk autentifikationsprotokol. Den autentificerer brugeren med digital signatur. Protokollen kræver ikke andre autentifikationsoplysninger som fx adgangskode, e-mail, brugernavn eller lignende. Med Alby kan du bruge dine lightning-konti til at logge sikkert ind på hjemmesider. For at blive kompatible med andre wallets måtte vi ændre et par ting, som du kan konfigurere her. <0>Disse indstillinger skal helst slås fra.</0> Brug dem kun, hvis du har gamle konti.",
-        "legacy_lnurl_auth_202207": {
-          "title": "Gamle LNURL-Auth",
-          "subtitle": "Generering af nøgle med LNURL-auth er ændret (juli 2022). Alby var ikke kompatibel med andre implementeringer. Dette blev ændret, men nu bruges der andre nøgler til at logge ind. Hvis du tidligere brugte LNURL-auth til at logge ind, kan du fortsat aktivere den gamle metode. Denne mulighed vil blive fjernet, husk at skifte til det nye log ind."
-        },
-        "legacy_lnurl_auth": {
-          "title": "Forældet signatur til LNDhub and LNbits",
-          "subtitle": "Signatur og log ind med LNDhub (fx BlueWallet) og LNBits-konti er blevet ændret (marts 2022). Hvis du loggede ind med disse konti, kan du fortsat aktivere den gamle signatur-metode. Denne mulighed vil blive fjernet, husk at skifte til det nye log ind."
-        }
       },
       "camera_access": {
         "title": "Adgang til kamera",
@@ -476,15 +383,6 @@
           "mismatched_password": "Koderne er forskellige."
         },
         "success": "Koden blev ændret"
-      },
-      "nostr": {
-        "title": "Nostr",
-        "hint": "er en enkel og åben protokol, der bruges til at skabe u-censorerbare sociale netværk. Nostr anvender kryptografisk kode. Når du publicerer noget, underskriver du det med din nøgle, og sender det til flere netværksrelæer. Du kan bruge Alby til opbevaring af din Nostr-nøgle. Mange Nostr-applikationer vil derefter lade dig bruge nøglen direkte fra Alby.",
-        "private_key": {
-          "title": "Privat nøgle",
-          "subtitle": "Dette afsnit blev flyttet til kontosiden, da nøgler nu er kontospecifikke.",
-          "go_to": "Gå til konti"
-        }
       }
     },
     "send": {
@@ -556,31 +454,6 @@
         "status": "Tjek betalingsstatus"
       }
     },
-    "discover": {
-      "title": "Udforsk Lightnings ⚡️ økosystem",
-      "description": "Hjemmesider og web-apps hvor Alby kan bruges",
-      "list": {
-        "trading": "Handel",
-        "gaming": "Spil",
-        "entertainment": "Underholdning",
-        "shopping": "Indkøb",
-        "miscellaneous": "Diverse",
-        "showcases": "Eksempler",
-        "nostr": "Nostr"
-      },
-      "tips": {
-        "title": "Din Alby-wallet er klar",
-        "description": "Et par råd der får dig på vingerne🐝",
-        "top_up_wallet": {
-          "title": "⚡️ Fyld din wallet op",
-          "description": "Generer en lightning-faktura, send lidt bitcoin til dig selv og begynd at bruge Alby i lightnings økosystem"
-        },
-        "demo": {
-          "title": "🕹️ Få en prøvetur med Alby",
-          "description": "Se alle de ting, du kan med Alby på vores præsentationsside"
-        }
-      }
-    },
     "publishers": {
       "title": "Dine ⚡ hjemmesider",
       "description": "Hjemmesider, hvor du tidligere har brugt Alby",
@@ -641,9 +514,7 @@
     },
     "nostr": {
       "title": "Nostr",
-      "allow": "Tillad denne hjemmeside at:",
       "content": "Denne hjemmeside beder dig underskrive:",
-      "allow_sign": "Tillad {{vært}} at underskrive:",
       "block_and_ignore": "Bloker og ignorer {{vært}}",
       "block_added": "{{vært}} blev føjet til blokeringslisten, indlæs hjemmesiden igen."
     }
@@ -651,10 +522,8 @@
   "common": {
     "password": "Adgangskode",
     "confirm_password": "Bekræft adgangskode",
-    "advanced": "Avanceret",
     "success": "Succes",
     "error": "Fejl",
-    "settings": "Indstillinger",
     "accounts": "Konti",
     "discover": "Opdag",
     "connected_sites": "",
@@ -714,8 +583,7 @@
       "edit_allowance": {
         "title": "Rediger pulje",
         "screen_reader": "Indstillinger for pulje"
-      },
-      "edit_permissions": "Rediger tilladelser"
+      }
     },
     "qrcode_scanner": {
       "title": "Skan QR-kode",
@@ -727,7 +595,7 @@
         "allow_camera_access": "Giv adgang til kameraet i indstillingsvinduet."
       }
     },
-    "transactionsTable": {
+    "transactions_table": {
       "fee": "Betaling",
       "preimage": "Præ-visning",
       "received": "Modtaget",
@@ -764,14 +632,7 @@
       }
     },
     "account_menu": {
-      "screen_reader": "Skift drop-down",
-      "title": "Skift konto",
-      "options": {
-        "account": {
-          "add": "Tilføj en ny konto",
-          "manage": "Administrer konti"
-        }
-      }
+      "screen_reader": "Skift drop-down"
     },
     "publishers_table": {
       "payments": "betalinger"
@@ -783,88 +644,82 @@
     }
   },
   "permissions": {
-    "nostr": {
-      "getpublickey": "Læs din offentlige nøgle.",
-      "nip04encrypt": "Krypter data.",
-      "nip04decrypt": "De-krypter data.",
-      "signmessage": "Underskriv meddelelse med din nøgle."
-    },
     "commando": {
-      "bkpr-listbalances": "Liste over alle nuværende og tidligere kontosaldi.",
-      "checkmessage": "Verificer, at signaturen blev genereret af en bestemt node.",
-      "connect": "Opret en ny forbindelse til en anden node.",
-      "decode": "Afkod en bolt11/bolt12/rune-streng.",
-      "decodepay": "Tjek og parse en bolt11-streng.",
-      "disconnect": "Luk en eksisterende forbindelse til en peer.",
-      "feerates": "Vis de betalingstakster CLN vil anvende.",
-      "fundchannel": "Åbn en betalingskanal til en peer ved at sende en betalingstransaktion.",
-      "getinfo": "Få nodens nøgleoplysninger.",
-      "getroute": "Find den bedste betalingsrute til en lightning-node.",
-      "invoice": "Opret en betalingsforventning.",
-      "keysend": "Send en betaling til en anden node.",
-      "listforwards": "Vis alle de htlc, der er forsøgt sendt.",
-      "listfunds": "Vis alle tilgængelige midler.",
-      "listinvoices": "Få status på alle faktura.",
-      "listnodes": "Vis de noder, som noden har kendskab til via gossip-beskeder.",
-      "listoffers": "Vis alle tilbud eller få et specifikt tilbud.",
-      "listpays": "Giver status for alle betalingsinstruktioner.",
-      "listpeers": "Vis noder, der er forbundne med eller har åbne kanaler til denne node.",
-      "listsendpays": "Giver status for alle sendpay-instruktioner.",
-      "listtransactions": "Viser transaktioner, der er gemt i din wallet.",
-      "multifundchannel": "Åbn flere betalingskanaler til noder ved at sende en enkelt betalingstransaktion.",
-      "offer": "Opret et tilbud.",
-      "pay": "Send en betaling til en BOLT11-faktura.",
-      "sendpay": "Send en betaling via en rute.",
-      "setchannel": "Konfigurer den betaling/ det htlc-interval, der annonceres for kanalen.",
-      "signmessage": "Lav en signatur fra denne node."
+      "bkpr-listbalances": "Liste over alle nuværende og tidligere kontosaldi",
+      "checkmessage": "Verificer, at signaturen blev genereret af en bestemt node",
+      "connect": "Opret en ny forbindelse til en anden node",
+      "decode": "Afkod en bolt11/bolt12/rune-streng",
+      "decodepay": "Tjek og parse en bolt11-streng",
+      "disconnect": "Luk en eksisterende forbindelse til en peer",
+      "feerates": "Vis de betalingstakster CLN vil anvende",
+      "fundchannel": "Åbn en betalingskanal til en peer ved at sende en betalingstransaktion",
+      "getinfo": "Få nodens nøgleoplysninger",
+      "getroute": "Find den bedste betalingsrute til en lightning-node",
+      "invoice": "Opret en betalingsforventning",
+      "keysend": "Send en betaling til en anden node",
+      "listforwards": "Vis alle de htlc, der er forsøgt sendt",
+      "listfunds": "Vis alle tilgængelige midler",
+      "listinvoices": "Få status på alle faktura",
+      "listnodes": "Vis de noder, som noden har kendskab til via gossip-beskeder",
+      "listoffers": "Vis alle tilbud eller få et specifikt tilbud",
+      "listpays": "Giver status for alle betalingsinstruktioner",
+      "listpeers": "Vis noder, der er forbundne med eller har åbne kanaler til denne node",
+      "listsendpays": "Giver status for alle sendpay-instruktioner",
+      "listtransactions": "Viser transaktioner, der er gemt i din wallet",
+      "multifundchannel": "Åbn flere betalingskanaler til noder ved at sende en enkelt betalingstransaktion",
+      "offer": "Opret et tilbud",
+      "pay": "Send en betaling til en BOLT11-faktura",
+      "sendpay": "Send en betaling via en rute",
+      "setchannel": "Konfigurer den betaling/ det htlc-interval, der annonceres for kanalen",
+      "signmessage": "Lav en signatur fra denne node"
     },
     "lnd": {
-      "getinfo": "Hent node-oplysningerne.",
-      "listchannels": "Få en beskrivelse af alle åbne kanaler.",
-      "listinvoices": "Hent en oversigt over alle faktura.",
-      "channelbalance": "Hent en rapport over samlede midler i alle åbne kanaler.",
-      "walletbalance": "Hent summen af ubrugte output i denne wallet.",
-      "openchannel": "Åbn en ny kanal.",
-      "connectpeer": "Opret forbindelse til en peer på nettet.",
-      "disconnectpeer": "Afbryd forbindelsen til en peer på nettet.",
-      "estimatefee": "Beregn betalingstakst og samlet betaling for en transaktion.",
-      "getchaninfo": "Hent netværksannonceringen for den givne kanal.",
-      "getnetworkinfo": "Hent basisoplysningerne for det kendte kanalsystem.",
-      "getnodeinfo": "Hent oplysninger om en nodes kanaler.",
-      "gettransactions": "Hent en liste over alle transaktioner, der er relevante for denne wallet.",
-      "listpayments": "Hent en liste over udgående betalinger.",
-      "listpeers": "Hent en liste over alle aktive peers.",
-      "lookupinvoice": "Se faktura-oplysningerne.",
-      "queryroutes": "Forespørg om en mulig rute.",
-      "verifymessage": "Verificer en signatur over en meddelelse.",
-      "sendtoroute": "Foretag en betaling via den angivne rute.",
-      "decodepayreq": "Afkod en betalingsanmodnings-streng.",
-      "routermc": "Aflæs tilstanden for den interne mission control.",
-      "addinvoice": "Opret nye faktura."
+      "getinfo": "Hent node-oplysningerne",
+      "listchannels": "Få en beskrivelse af alle åbne kanaler",
+      "listinvoices": "Hent en oversigt over alle faktura",
+      "channelbalance": "Hent en rapport over samlede midler i alle åbne kanaler",
+      "walletbalance": "Hent summen af ubrugte output i denne wallet",
+      "openchannel": "Åbn en ny kanal",
+      "connectpeer": "Opret forbindelse til en peer på nettet",
+      "disconnectpeer": "Afbryd forbindelsen til en peer på nettet",
+      "estimatefee": "Beregn betalingstakst og samlet betaling for en transaktion",
+      "getchaninfo": "Hent netværksannonceringen for den givne kanal",
+      "getnetworkinfo": "Hent basisoplysningerne for det kendte kanalsystem",
+      "getnodeinfo": "Hent oplysninger om en nodes kanaler",
+      "gettransactions": "Hent en liste over alle transaktioner, der er relevante for denne wallet",
+      "listpayments": "Hent en liste over udgående betalinger",
+      "listpeers": "Hent en liste over alle aktive peers",
+      "lookupinvoice": "Se faktura-oplysningerne",
+      "queryroutes": "Forespørg om en mulig rute",
+      "verifymessage": "Verificer en signatur over en meddelelse",
+      "sendtoroute": "Foretag en betaling via den angivne rute",
+      "decodepayreq": "Afkod en betalingsanmodnings-streng",
+      "routermc": "Aflæs tilstanden for den interne mission control",
+      "addinvoice": "Opret nye faktura"
     },
     "lnc": {
-      "getinfo": "Hent oplysninger om noden.",
-      "listchannels": "Hent en beskrivelse af alle åbne kanaler.",
-      "listinvoices": "Hent en liste over alle faktura.",
-      "channelbalance": "Hent en rapport over samtlige midler i alle åbne kanaler.",
-      "walletbalance": "Hent summen af ubrugte output i denne wallet.",
-      "openchannel": "Åbn en ny kanal.",
-      "connectpeer": "Opret forbindelse til en peer på nettet.",
-      "disconnectpeer": "Afbryd forbindelsen til en peer på nettet.",
-      "estimatefee": "Beregn betalingstaksten og samlet betaling for en transaktion.",
-      "getchaninfo": "Hent netværksannonceringen for den givne kanal.",
-      "getnetworkinfo": "Hent basisoplysningerne for det kendte kanalsystem.",
-      "getnodeinfo": "Hent oplysninger om en nodes kanaler.",
-      "gettransactions": "Hent en liste over alle transaktioner, der er relevante for denne wallet.",
-      "listpayments": "Hent en liste over alle udgående betalinger.",
-      "listpeers": "Hent en liste over alle de peers, der er aktive nu.",
-      "lookupinvoice": "Se faktura-oplysningerne.",
-      "queryroutes": "Forespørg om en mulig rute.",
-      "verifymessage": "Verificer en signatur over en meddelelse.",
-      "sendtoroute": "Foretag en betaling via den angivne rute.",
-      "decodepayreq": "Afkod en betalingsanmodnings-streng.",
-      "routermc": "Aflæs tilstanden for den interne mission control.",
-      "addinvoice": "Opret nye faktura."
+      "getinfo": "Hent oplysninger om noden",
+      "listchannels": "Hent en beskrivelse af alle åbne kanaler",
+      "listinvoices": "Hent en liste over alle faktura",
+      "channelbalance": "Hent en rapport over samtlige midler i alle åbne kanaler",
+      "walletbalance": "Hent summen af ubrugte output i denne wallet",
+      "openchannel": "Åbn en ny kanal",
+      "connectpeer": "Opret forbindelse til en peer på nettet",
+      "disconnectpeer": "Afbryd forbindelsen til en peer på nettet",
+      "estimatefee": "Beregn betalingstaksten og samlet betaling for en transaktion",
+      "getchaninfo": "Hent netværksannonceringen for den givne kanal",
+      "getnetworkinfo": "Hent basisoplysningerne for det kendte kanalsystem",
+      "getnodeinfo": "Hent oplysninger om en nodes kanaler",
+      "gettransactions": "Hent en liste over alle transaktioner, der er relevante for denne wallet",
+      "listpayments": "Hent en liste over alle udgående betalinger",
+      "listpeers": "Hent en liste over alle de peers, der er aktive nu",
+      "lookupinvoice": "Se faktura-oplysningerne",
+      "queryroutes": "Forespørg om en mulig rute",
+      "verifymessage": "Verificer en signatur over en meddelelse",
+      "sendtoroute": "Foretag en betaling via den angivne rute",
+      "decodepayreq": "Afkod en betalingsanmodnings-streng",
+      "routermc": "Aflæs tilstanden for den interne mission control",
+      "addinvoice": "Opret nye faktura"
     }
   }
 }

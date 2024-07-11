@@ -1,6 +1,5 @@
-import { CopyIcon as CopyFilledIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
-import { CopyIcon } from "@bitcoin-design/bitcoin-icons-react/outline";
-import { useState } from "react";
+import { PopiconsCopyLine } from "@popicons/react";
+import { t } from "i18next";
 import toast from "~/app/components/Toast";
 import { classNames } from "~/app/utils";
 
@@ -10,23 +9,19 @@ type Props = {
 };
 
 function InputCopyButton({ value, className }: Props) {
-  const [copied, setCopied] = useState(false);
-  const CurrentIcon = copied ? CopyFilledIcon : CopyIcon;
   return (
     <button
       type="button"
       tabIndex={-1}
       className={classNames(
         "flex justify-center items-center h-8 w-10",
+        "text-gray-400 dark:text-neutral-600 hover:text-gray-600 hover:dark:text-neutral-400",
         !!className && className
       )}
       onClick={async () => {
         try {
           navigator.clipboard.writeText(value);
-          setCopied(true);
-          setTimeout(() => {
-            setCopied(false);
-          }, 1000);
+          toast.success(t("common:actions.copied_to_clipboard"));
         } catch (e) {
           if (e instanceof Error) {
             toast.error(e.message);
@@ -34,7 +29,7 @@ function InputCopyButton({ value, className }: Props) {
         }
       }}
     >
-      <CurrentIcon className="w-6 h-6" />
+      <PopiconsCopyLine className="w-6 h-6" />
     </button>
   );
 }

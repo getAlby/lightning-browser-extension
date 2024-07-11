@@ -2,11 +2,11 @@ import type { DbBlocklist } from "~/types";
 
 export const blocklistFixture: DbBlocklist[] = [
   {
-    host: "pro.kollider.xyz",
+    host: "getalby.com",
     id: 1,
-    imageURL: "https://pro.kollider.xyz/favicon.ico",
+    imageURL: "https://getalby.com/favicon.ico",
     isBlocked: true,
-    name: "pro kollider",
+    name: "Alby: Your Bitcoin & Nostr companion for the web",
   },
   {
     host: "lnmarkets.com",

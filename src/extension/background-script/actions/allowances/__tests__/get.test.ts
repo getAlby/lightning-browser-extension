@@ -23,7 +23,7 @@ describe("get allowance", () => {
         internal: true,
       },
       args: {
-        host: "pro.kollider.xyz",
+        host: "getalby.com",
       },
     };
 

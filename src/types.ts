@@ -1,10 +1,13 @@
-import { CreateSwapParams } from "@getalby/sdk/dist/types";
-import { PaymentRequestObject } from "bolt11";
+import {
+  CreateSwapParams,
+  GetAccountInformationResponse,
+} from "@getalby/sdk/dist/types";
+import { PaymentRequestObject } from "bolt11-signet";
 import { Runtime } from "webextension-polyfill";
-import { ACCOUNT_CURRENCIES, CURRENCIES, TIPS } from "~/common/constants";
+import { ACCOUNT_CURRENCIES, CURRENCIES } from "~/common/constants";
 import connectors from "~/extension/background-script/connectors";
 import {
-  ConnectorInvoice,
+  ConnectorTransaction,
   SendPaymentResponse,
   WebLNNode,
 } from "~/extension/background-script/connectors/connector.interface";
@@ -25,6 +28,7 @@ export interface Account {
   mnemonic?: string | null;
   hasImportedNostrKey?: boolean;
   bitcoinNetwork?: BitcoinNetworkType;
+  isMnemonicBackupDone?: boolean;
   useMnemonicForLnurlAuth?: boolean;
   avatarUrl?: string;
 }
@@ -45,7 +49,24 @@ export interface AccountInfo {
   currency: ACCOUNT_CURRENCIES;
   avatarUrl?: string;
   lightningAddress?: string;
+  nodeRequired?: boolean;
 }
+
+export type GetAccountInformationResponses = GetAccountInformationResponse & {
+  node_required: boolean;
+  limits?: {
+    max_send_volume: number;
+    max_send_amount: number;
+    max_receive_volume: number;
+    max_receive_amount: number;
+    max_account_balance: number;
+    max_volume_period_in_days: number;
+  };
+  node_type?: string;
+  node_connection_error_count?: number;
+  shared_node: boolean;
+  custodial: boolean;
+};
 
 export interface MetaData {
   title?: string;
@@ -168,8 +189,19 @@ export type NavigationState = {
     message?: string;
     event?: Event;
     sigHash?: string;
-    description?: string;
-    details?: string;
+
+    // nostr
+    encrypt: {
+      recipientNpub: string;
+      message: string;
+    };
+
+    nip44Encrypt: {
+      recipientNpub: string;
+      message: string;
+    };
+
+    psbt?: string;
     requestPermission: {
       method: string;
       description: string;
@@ -225,6 +257,7 @@ export interface MessageAccountEdit extends MessageDefault {
     name?: Account["name"];
     bitcoinNetwork?: BitcoinNetworkType;
     useMnemonicForLnurlAuth?: boolean;
+    isMnemonicBackupDone?: boolean;
   };
   action: "editAccount";
 }
@@ -341,9 +374,9 @@ export interface MessageAllowanceList extends MessageDefault {
   action: "listAllowances";
 }
 
-export interface MessageInvoices extends Omit<MessageDefault, "args"> {
-  args: { limit?: number; isSettled?: boolean };
-  action: "getInvoices";
+export interface MessageGetTransactions extends Omit<MessageDefault, "args"> {
+  args: { limit?: number };
+  action: "getTransactions";
 }
 
 export interface MessageAllowanceEnable extends MessageDefault {
@@ -554,6 +587,36 @@ export interface MessageDecryptGet extends MessageDefault {
   action: "decrypt";
 }
 
+export interface MessageNip44EncryptGet extends MessageDefault {
+  args: {
+    peer: string;
+    plaintext: string;
+  };
+  action: "encrypt";
+}
+
+export interface MessageNip44DecryptGet extends MessageDefault {
+  args: {
+    peer: string;
+    ciphertext: string;
+  };
+  action: "decrypt";
+}
+
+export interface MessageSignPsbt extends MessageDefault {
+  args: {
+    psbt: string;
+  };
+  action: "signPsbt";
+}
+
+export interface MessageGetPsbtPreview extends MessageDefault {
+  args: {
+    psbt: string;
+  };
+  action: "getPsbtPreview";
+}
+
 export interface MessageBalanceGet extends MessageDefault {
   action: "getBalance";
 }
@@ -692,12 +755,13 @@ export interface RequestInvoiceArgs {
 }
 
 export type Transaction = {
+  timestamp: number;
   amount?: string;
   boostagram?: Invoice["boostagram"];
-  badges?: Badge[];
   createdAt?: string;
   currency?: string;
   date: string;
+  paymentHash?: string;
   description?: string;
   host?: string;
   id: string;
@@ -706,9 +770,10 @@ export type Transaction = {
   preimage: string;
   title: string | React.ReactNode;
   totalAmount: Allowance["payments"][number]["totalAmount"];
+  displayAmount?: [number, ACCOUNT_CURRENCIES];
   totalAmountFiat?: string;
   totalFees?: Allowance["payments"][number]["totalFees"];
-  type?: "sent" | "sending" | "received";
+  type?: "sent" | "received";
   value?: string;
   publisherLink?: string; // either the invoice URL if on PublisherSingleView, or the internal link to Publisher
 };
@@ -734,6 +799,18 @@ export interface Payment extends Omit<DbPayment, "id"> {
   id: number;
 }
 
+export enum NostrPermissionPreset {
+  TRUST_FULLY = "trust_fully",
+  REASONABLE = "reasonable",
+  PARANOID = "paranoid",
+}
+
+export enum PermissionOption {
+  ASK_EVERYTIME = "ask_everytime",
+  DONT_ASK_CURRENT = "dont_ask_current",
+  DONT_ASK_ANY = "dont_ask_any",
+}
+
 export enum PermissionMethodBitcoin {
   BITCOIN_GETADDRESS = "bitcoin/getAddress",
 }
@@ -746,8 +823,8 @@ export enum PermissionMethodNostr {
   NOSTR_SIGNMESSAGE = "nostr/signMessage",
   NOSTR_SIGNSCHNORR = "nostr/signSchnorr",
   NOSTR_GETPUBLICKEY = "nostr/getPublicKey",
-  NOSTR_NIP04DECRYPT = "nostr/nip04decrypt",
-  NOSTR_NIP04ENCRYPT = "nostr/nip04encrypt",
+  NOSTR_DECRYPT = "nostr/decrypt",
+  NOSTR_ENCRYPT = "nostr/encrypt",
 }
 
 export interface DbPermission {
@@ -830,8 +907,6 @@ export interface Allowance extends Omit<DbAllowance, "id"> {
 export interface SettingsStorage {
   browserNotifications: boolean;
   websiteEnhancements: boolean;
-  legacyLnurlAuth: boolean;
-  isUsingLegacyLnurlAuthKey: boolean;
   userName: string;
   userEmail: string;
   locale: string;
@@ -840,13 +915,11 @@ export interface SettingsStorage {
   currency: CURRENCIES;
   exchange: SupportedExchanges;
   nostrEnabled: boolean;
-  closedTips: TIPS[];
 }
 
 export interface Badge {
   label: "budget" | "auth" | "imported";
-  color: string;
-  textColor: string;
+  className: string;
 }
 
 export interface Publisher
@@ -871,14 +944,16 @@ export type SupportedExchanges = "alby" | "coindesk" | "yadio";
 
 export interface Invoice {
   id: string;
-  memo: string;
-  type: "received";
+  memo?: string;
+  type: "received" | "sent";
   settled: boolean;
   settleDate: number;
-  totalAmount: string;
+  totalAmount: number;
   totalAmountFiat?: string;
+  displayAmount?: [number, ACCOUNT_CURRENCIES];
   preimage: string;
-  custom_records?: ConnectorInvoice["custom_records"];
+  paymentHash?: string;
+  custom_records?: ConnectorTransaction["custom_records"];
   boostagram?: {
     app_name: string;
     name: string;
@@ -938,3 +1013,11 @@ export type EsploraAssetInfos = {
 };
 
 export type EsploraAssetRegistry = Record<string, EsploraAssetInfos>;
+
+export type Address = { amount: number; address: string };
+
+export type PsbtPreview = {
+  inputs: Address[];
+  outputs: Address[];
+  fee: number;
+};

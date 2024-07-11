@@ -1,16 +1,20 @@
 type Props = {
-  heading: string;
-  content: string;
+  heading: string | React.ReactNode;
+  content?: string;
 };
 
 function ContentMessage({ heading, content }: Props) {
   return (
     <>
-      <dl className="my-4 p-4 shadow bg-white dark:bg-surface-02dp rounded-lg overflow-hidden">
-        <dt className="font-medium dark:text-white">{heading}</dt>
-        <dd className="text-gray-500 dark:text-gray-400 break-all">
-          {content}
-        </dd>
+      <dl className="my-4 overflow-hidden">
+        <dt className="text-sm text-gray-800 dark:text-neutral-200">
+          {heading}
+        </dt>
+        {content && (
+          <dd className="text-lg text-gray-600 dark:text-neutral-400 break-all line-clamp-[8]">
+            {content}
+          </dd>
+        )}
       </dl>
     </>
   );

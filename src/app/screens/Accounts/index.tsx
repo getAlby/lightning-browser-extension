@@ -1,9 +1,6 @@
-import {
-  CaretRightIcon,
-  PlusIcon,
-} from "@bitcoin-design/bitcoin-icons-react/filled";
 import Button from "@components/Button";
 import Container from "@components/Container";
+import { PopiconsChevronRightLine, PopiconsPlusSolid } from "@popicons/react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import Avatar from "~/app/components/Avatar";
@@ -23,8 +20,8 @@ function AccountsScreen() {
         <h2 className="text-2xl font-bold dark:text-white">{t("title")}</h2>
         <div>
           <Button
-            icon={<PlusIcon className="w-5 h-5 mr-2" />}
-            label={t("actions.add_account")}
+            icon={<PopiconsPlusSolid className="w-5 h-5 mr-2" />}
+            label={t("actions.connect_a_wallet")}
             primary
             onClick={() => navigate(`/accounts/new`)}
           />
@@ -50,17 +47,17 @@ function AccountsScreen() {
                       />
 
                       <div className="ml-4">
-                        <h3 className="font-bold text-gray-900 dark:text-white break-all whitespace-normal max-w-xs md:max-w-lg xl:max-w-2xl">
+                        <h3 className="font-medium dark:text-white break-all whitespace-normal max-w-xs md:max-w-lg xl:max-w-2xl">
                           {account.name}
                         </h3>
-                        <p className="text-gray-700 dark:text-neutral-400">
+                        <p className="text-gray-600 dark:text-neutral-400">
                           {account.connector}
                         </p>
                       </div>
                     </div>
                   </td>
                   <td className="w-10">
-                    <CaretRightIcon className="h-6 w-6 text-gray-500" />
+                    <PopiconsChevronRightLine className="h-6 w-6 text-gray-600 dark:text-neutral-400" />
                   </td>
                 </tr>
               );

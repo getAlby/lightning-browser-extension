@@ -22,6 +22,7 @@ interface AccountContextType {
     avatarUrl?: AccountInfo["avatarUrl"];
     connectorType?: AccountInfo["connectorType"];
     lightningAddress?: AccountInfo["lightningAddress"];
+    nodeRequired?: AccountInfo["nodeRequired"];
   } | null;
   balancesDecorated: {
     fiatBalance: string;
@@ -143,10 +144,9 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
         if (!response.configured && !onWelcomePage) {
           utils.openPage("welcome.html");
           window.close();
+        } else if (response.configured && onWelcomePage) {
+          utils.redirectPage("options.html");
         } else if (response.unlocked) {
-          if (response.configured && onWelcomePage) {
-            utils.redirectPage("options.html");
-          }
           selectAccount(response.currentAccountId, true);
         } else {
           setAccount(null);
