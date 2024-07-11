@@ -75,8 +75,8 @@ export default function TransactionModal({
               className={classNames(
                 "text-3xl font-medium",
                 transaction.type == "received"
-                  ? "text-green-600 dark:color-green-400"
-                  : "text-orange-600 dark:color-orange-400"
+                  ? "text-green-600 dark:text-emerald-500"
+                  : "text-orange-600 dark:text-amber-600"
               )}
             >
               {transaction.type == "sent" ? "-" : "+"}{" "}

@@ -87,8 +87,8 @@ export default function TransactionsTable({
                         className={classNames(
                           "text-sm",
                           type == "incoming"
-                            ? "text-green-600 dark:color-green-400"
-                            : "text-orange-600 dark:color-orange-400"
+                            ? "text-green-600 dark:text-emerald-500"
+                            : "text-orange-600 dark:text-amber-600"
                         )}
                       >
                         {type == "outgoing" ? "-" : "+"}{" "}
