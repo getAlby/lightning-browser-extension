@@ -145,10 +145,6 @@ class NWCConnector implements Connector {
       invoice: args.paymentRequest,
     });
 
-    const transaction = await this.nwc.lookupInvoice({
-      invoice: args.paymentRequest,
-    });
-
     return {
       data: {
         preimage: response.preimage,
@@ -156,7 +152,8 @@ class NWCConnector implements Connector {
         route: {
           // TODO: how to get amount paid for zero-amount invoices?
           total_amt: Math.floor(parseInt(invoice.millisatoshis || "0") / 1000),
-          total_fees: Math.floor(transaction.fees_paid / 1000),
+          // TODO: How to get fees?
+          total_fees: 0,
         },
       },
     };
@@ -171,10 +168,6 @@ class NWCConnector implements Connector {
 
     const paymentHash = SHA256(data.preimage).toString(Hex);
 
-    const transaction = await this.nwc.lookupInvoice({
-      payment_hash: paymentHash,
-    });
-
     return {
       data: {
         preimage: data.preimage,
@@ -182,7 +175,8 @@ class NWCConnector implements Connector {
 
         route: {
           total_amt: args.amount,
-          total_fees: Math.floor(transaction.fees_paid / 1000),
+          // TODO: How to get fees?
+          total_fees: 0,
         },
       },
     };
