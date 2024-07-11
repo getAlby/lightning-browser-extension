@@ -154,7 +154,7 @@ function ReceiveInvoice() {
                       {!auth.accountLoading && auth.account ? (
                         <Avatar
                           size={64}
-                          className="border-4 border-white rounded-full absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 bg-white"
+                          className="border-[6px] border-white rounded-full absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 bg-white"
                           url={auth.account.avatarUrl}
                           name={auth.account.id}
                         />
@@ -163,7 +163,7 @@ function ReceiveInvoice() {
                           <SkeletonLoader
                             circle
                             opaque={false}
-                            className="w-[64px] h-[64px] border-4 border-white rounded-full absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 opacity-100"
+                            className="w-[64px] h-[64px] border-[6px] border-white rounded-full absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 opacity-100"
                           />
                         )
                       )}
