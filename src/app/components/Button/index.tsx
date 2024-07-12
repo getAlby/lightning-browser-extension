@@ -63,7 +63,7 @@ const Button = forwardRef(
             "hover:bg-gray-50 dark:hover:bg-surface-16dp",
           disabled ? "cursor-default opacity-60" : "cursor-pointer",
           flex && "flex-1",
-          "inline-flex justify-center items-center gap-1 font-medium bg-origin-border shadow rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary transition duration-150",
+          "inline-flex justify-center items-center gap-1 font-medium bg-origin-border shadow rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary transition duration-150 whitespace-nowrap",
           !!className && className
         )}
         onClick={onClick}
