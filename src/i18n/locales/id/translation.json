@@ -33,12 +33,10 @@
     },
     "choose_path": {
       "other": {
-        "connect": "Sambung",
         "title": "Wallets Lainnya"
       },
       "alby": {
-        "title": "Akun Alby",
-        "connect": "Koneksi dengan Alby"
+        "title": "Akun Alby"
       }
     },
     "alby": {

@@ -34,12 +34,10 @@
     },
     "choose_path": {
       "alby": {
-        "title": "Alby帳戶",
-        "connect": "使用 Alby 連接"
+        "title": "Alby帳戶"
       },
       "other": {
-        "title": "其他錢包",
-        "connect": "連接"
+        "title": "其他錢包"
       }
     },
     "alby": {

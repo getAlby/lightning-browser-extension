@@ -254,12 +254,10 @@
     },
     "choose_path": {
       "alby": {
-        "title": "Alby račun",
-        "connect": "Poveži z Alby"
+        "title": "Alby račun"
       },
       "other": {
-        "title": "Ostale denarnice",
-        "connect": "Poveži"
+        "title": "Ostale denarnice"
       }
     },
     "distributions": {

@@ -3,7 +3,7 @@ import {
   PopiconsCircleExclamationLine,
   PopiconsCircleXLine,
 } from "@popicons/react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import Button from "~/app/components/Button";
 import ConnectorPath from "~/app/components/ConnectorPath";
@@ -15,12 +15,39 @@ export default function ChooseConnectorPath() {
   });
 
   return (
-    <div className="relative mt-10 lg:grid lg:gap-8">
+    <div className="mx-auto max-w-3xl">
       <div className="relative">
         <h1 className="text-2xl font-bold dark:text-white text-center mb-8">
           {t("title")}
         </h1>
         <div className="grid lg:grid-cols-2 gap-8 mb-4">
+          <ConnectorPath
+            title={t("alby.title")}
+            icon={
+              <img
+                src="assets/icons/alby.png"
+                className="w-10 h-10 rounded-md"
+              />
+            }
+            description={t("alby.description")}
+            content={
+              <>
+                <FeatureItem type="success">
+                  <Trans
+                    i18nKey={"alby.point1"}
+                    t={t}
+                    components={[
+                      // eslint-disable-next-line react/jsx-key
+                      <b></b>,
+                    ]}
+                  />
+                </FeatureItem>
+                <FeatureItem type="success">{t("alby.point2")}</FeatureItem>
+                <FeatureItem type="warning">{t("alby.point3")}</FeatureItem>
+              </>
+            }
+            actions={<ConnectAlby />}
+          />
           <ConnectorPath
             title={t("other.title")}
             icon={
@@ -47,36 +74,15 @@ export default function ChooseConnectorPath() {
             content={
               <>
                 <FeatureItem type="success">{t("other.point1")}</FeatureItem>
-                <FeatureItem type="success">{t("other.point2")}</FeatureItem>
+                <FeatureItem type="disabled">{t("other.point2")}</FeatureItem>
                 <FeatureItem type="success">{t("other.point3")}</FeatureItem>
-                <FeatureItem type="disabled">{t("other.point4")}</FeatureItem>
               </>
             }
             actions={
-              <Link to="choose-connector" className="flex flex-1">
-                <Button tabIndex={-1} label={t("other.connect")} primary flex />
+              <Link to="choose-connector" className="flex flex-1 mt-1">
+                <Button tabIndex={-1} label={t("other.connect")} flex />
               </Link>
             }
-          />
-
-          <ConnectorPath
-            title={t("alby.title")}
-            icon={
-              <img
-                src="assets/icons/alby.png"
-                className="w-10 h-10 rounded-md"
-              />
-            }
-            description={t("alby.description")}
-            content={
-              <>
-                <FeatureItem type="warning">{t("alby.point1")}</FeatureItem>
-                <FeatureItem type="warning">{t("alby.point2")}</FeatureItem>
-                <FeatureItem type="success">{t("alby.point3")}</FeatureItem>
-                <FeatureItem type="success">{t("alby.point4")}</FeatureItem>
-              </>
-            }
-            actions={<ConnectAlby />}
           />
         </div>
       </div>
