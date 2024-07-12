@@ -1,5 +1,6 @@
 import browser, { Runtime } from "webextension-polyfill";
 import { ABORT_PROMPT_ERROR } from "~/common/constants";
+import { base64DecodeUnicode } from "~/common/lib/string";
 import { ConnectorTransaction } from "~/extension/background-script/connectors/connector.interface";
 import type { DeferredPromise, OriginData, OriginDataInternal } from "~/types";
 import { createPromptTab, createPromptWindow } from "../utils/window";
@@ -147,8 +148,9 @@ const utils = {
       let boostagramDecoded: string | undefined;
       const boostagram = custom_records?.[7629169];
       if (boostagram) {
-        boostagramDecoded = atob(boostagram);
+        boostagramDecoded = base64DecodeUnicode(boostagram);
       }
+
       return boostagramDecoded ? JSON.parse(boostagramDecoded) : undefined;
     } catch (e) {
       console.error(e);
