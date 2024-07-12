@@ -755,21 +755,13 @@
     "choose_path": {
       "alby": {
         "title": "Conta Alby",
-        "connect": "Conecte-se com a Alby",
-        "description": "Ideal para iniciantes que procuram uma ótima carteira para gastos do dia a dia.",
-        "point3": "Cadastro e acesso por e-mail",
         "point1": "Necessita de convite para criar conta",
-        "point4": "Endereços relâmpago e nostr exclusivos",
-        "point2": "Limites de transação"
+        "point4": "Endereços relâmpago e nostr exclusivos"
       },
       "other": {
         "title": "Outras carteiras",
-        "connect": "Escolher carteira",
-        "description": "Ideal para quem já possui uma carteira e precisa fazer pagamentos de quantias altas.",
         "point1": "Acesso instantâneo, não precisa de convite",
-        "point4": "Sem endereço relâmpago e nostr",
-        "point3": "Opções de autocustódia ou custódia delegada",
-        "point2": "Sem limites de transação"
+        "point4": "Sem endereço relâmpago e nostr"
       },
       "title": "Conecte carteiras na extensão Alby"
     },

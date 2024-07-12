@@ -521,20 +521,12 @@
     "choose_path": {
       "alby": {
         "title": "Cuenta de Alby",
-        "connect": "Conectar con Alby",
-        "description": "Ideal para principiantes o cualquiera que busque una excelente billetera para el uso diario.",
         "point1": "Los nuevos registros requieren un código de invitación",
-        "point2": "Se aplican límites de volumen de transacciones",
-        "point3": "Configura e inicia sesión con tu correo electrónico",
         "point4": "Dirección única de Lightning y Nostr"
       },
       "other": {
         "title": "Lleve su propia cartera",
-        "connect": "Conectar",
         "point1": "Empieza al instante, sin esperar invitación",
-        "point2": "Sin límite de transacciones ni de importe",
-        "description": "Lo mejor si ya tienes un monedero o necesitas hacer pagos de mucho importe.",
-        "point3": "Opciones de autocustodia y custodia",
         "point4": "Sin dirección relámpago y nostr"
       },
       "title": "Conectar la cartera a la extensión Alby"

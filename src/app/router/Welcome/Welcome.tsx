@@ -64,15 +64,10 @@ function Layout() {
       <div className="ml-6 mt-4">
         <LocaleSwitcher className="text-sm border-transparent text-gray-600 hover:text-gray-700 bg-gray-100 dark:bg-surface-00dp dark:text-neutral-400 dark:hover:text-neutral-300" />
       </div>
-      <div className="flex justify-center items-center">
-        <div className="w-full">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
-            <div className="text-center font-serif font-medium text-2xl mt-8 dark:text-white"></div>
-          </div>
-          <Container maxWidth="xl">
-            <Outlet />
-          </Container>
-        </div>
+      <div className="flex flex-1 justify-center items-center">
+        <Container maxWidth="xl">
+          <Outlet />
+        </Container>
       </div>
     </div>
   );

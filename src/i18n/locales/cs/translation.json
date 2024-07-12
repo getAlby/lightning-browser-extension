@@ -543,12 +543,10 @@
     },
     "choose_path": {
       "other": {
-        "title": "Jiné peněženky",
-        "connect": "Připojit"
+        "title": "Jiné peněženky"
       },
       "alby": {
-        "title": "Alby",
-        "connect": "Připojit se s Alby"
+        "title": "Alby"
       }
     },
     "alby": {
