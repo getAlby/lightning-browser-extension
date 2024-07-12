@@ -72,6 +72,7 @@ export default function DualCurrencyField({
   const [inputValue, setInputValue] = useState(value);
   const [inputPrefix, setInputPrefix] = useState("");
   const [inputPlaceHolder, setInputPlaceHolder] = useState(placeholder || "");
+  const [externalUpdate, setExternalUpdate] = useState(false);
 
   // Perform currency conversions for the input value
   // always returns formatted and raw values in sats and fiat
@@ -102,6 +103,25 @@ export default function DualCurrencyField({
     },
     [getCurrencyRate, getFormattedInCurrency, settings]
   );
+
+  useEffect(() => {
+    setExternalUpdate(true);
+  }, [externalUpdate]);
+
+  // handle value conversions which can be passed externally such as from Sats Buttons
+  useEffect(() => {
+    (async () => {
+      if (externalUpdate) {
+        const { valueInSats, valueInFiat } = await convertValues(
+          Number(value),
+          false
+        );
+        const newValue = useFiatAsMain ? valueInFiat : valueInSats;
+        setInputValue(newValue);
+      }
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value, useFiatAsMain, convertValues]);
 
   // Use fiat as main currency for the input
   const setUseFiatAsMain = useCallback(
@@ -164,6 +184,8 @@ export default function DualCurrencyField({
   const onChangeWrapper = useCallback(
     async (e: React.ChangeEvent<HTMLInputElement>) => {
       setInputValue(e.target.value);
+
+      setExternalUpdate(false);
 
       if (onChange) {
         const wrappedEvent: DualCurrencyFieldChangeEvent =
