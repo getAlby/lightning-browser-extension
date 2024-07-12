@@ -103,7 +103,7 @@ class NWCConnector implements Connector {
           settleDate: transaction.settled_at * 1000,
           totalAmount: Math.floor(transaction.amount / 1000),
           type: transaction.type == "incoming" ? "received" : "sent",
-          custom_records: mapTLVRecords(
+          custom_records: this.tlvToCustomRecords(
             transaction.metadata?.["tlv_records"] as TLVRecord[] | undefined
           ),
         })
@@ -163,7 +163,7 @@ class NWCConnector implements Connector {
     const data = await this.nwc.payKeysend({
       pubkey: args.pubkey,
       amount: args.amount * 1000,
-      tlv_records: this.convertCustomRecords(args.customRecords),
+      tlv_records: this.customRecordsToTlv(args.customRecords),
     });
 
     const paymentHash = SHA256(data.preimage).toString(Hex);
@@ -219,7 +219,7 @@ class NWCConnector implements Connector {
     throw new Error("Method not implemented.");
   }
 
-  private convertCustomRecords(
+  private customRecordsToTlv(
     customRecords: Record<string, string>
   ): TlvRecord[] {
     return Object.entries(customRecords).map(([key, value]) => ({
@@ -227,21 +227,23 @@ class NWCConnector implements Connector {
       value: UTF8.parse(value).toString(Hex),
     }));
   }
-}
 
-function mapTLVRecords(
-  tlvRecords: TLVRecord[] | undefined
-): ConnectorTransaction["custom_records"] | undefined {
-  if (!tlvRecords) {
-    return undefined;
+  private tlvToCustomRecords(
+    tlvRecords: TLVRecord[] | undefined
+  ): ConnectorTransaction["custom_records"] | undefined {
+    if (!tlvRecords) {
+      return undefined;
+    }
+    const customRecords: ConnectorTransaction["custom_records"] = {};
+    for (const tlv of tlvRecords) {
+      // TODO: ConnectorTransaction["custom_records"] should not be in base64 format
+      // as this requires unnecessary re-encoding
+      customRecords[tlv.type.toString()] = Hex.parse(tlv.value).toString(
+        Base64
+      );
+    }
+    return customRecords;
   }
-  const customRecords: ConnectorTransaction["custom_records"] = {};
-  for (const tlv of tlvRecords) {
-    // TODO: ConnectorTransaction["custom_records"] should not be in base64 format
-    // as this requires unnecessary re-encoding
-    customRecords[tlv.type.toString()] = Hex.parse(tlv.value).toString(Base64);
-  }
-  return customRecords;
 }
 
 export default NWCConnector;
