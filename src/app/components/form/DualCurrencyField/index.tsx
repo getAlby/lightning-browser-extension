@@ -72,6 +72,7 @@ export default function DualCurrencyField({
   const [inputValue, setInputValue] = useState(value);
   const [inputPrefix, setInputPrefix] = useState("");
   const [inputPlaceHolder, setInputPlaceHolder] = useState(placeholder || "");
+  const [lastSeenInputValue, setLastSeenInputValue] = useState(value);
 
   // Perform currency conversions for the input value
   // always returns formatted and raw values in sats and fiat
@@ -214,6 +215,40 @@ export default function DualCurrencyField({
       }
     })();
   }, [useFiatAsMain, inputValue, convertValues, showFiat]);
+
+  // update input value when the value prop changes
+  useEffect(() => {
+    const newValue = Number(value || "0");
+    const lastSeenValue = Number(lastSeenInputValue || "0");
+    const currentValue = Number(inputValue || "0");
+    const currentValueIsFiat = useFiatAsMain;
+    (async (newValue, lastSeenValue, currentValue, currentValueIsFiat) => {
+      const { valueInSats } = await convertValues(
+        currentValue,
+        currentValueIsFiat
+      );
+      currentValue = Number(valueInSats);
+      // if the new value is different than the last seen value, it means it value was changes externally
+      if (newValue != lastSeenValue) {
+        // update the last seen value
+        setLastSeenInputValue(newValue.toString());
+        // update input value unless the new value is equals to the current input value converted to sats
+        // (this means the external cose is passing the value from onChange to the input value)
+        if (newValue != currentValue) {
+          // Apply conversion for the input value
+          const { valueInSats, valueInFiat } = await convertValues(
+            Number(value),
+            false
+          );
+          if (useFiatAsMain) {
+            setInputValue(valueInFiat);
+          } else {
+            setInputValue(valueInSats);
+          }
+        }
+      }
+    })(newValue, lastSeenValue, currentValue, currentValueIsFiat);
+  }, [value, lastSeenInputValue, inputValue, convertValues, useFiatAsMain]);
 
   const inputNode = (
     <input
