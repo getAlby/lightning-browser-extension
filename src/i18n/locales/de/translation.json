@@ -912,12 +912,22 @@
     },
     "choose_path": {
       "other": {
-        "title": "Bringe dein eigenes Wallet mit"
+        "title": "Bringe dein eigenes Wallet mit",
+        "point3": "Sofortiger Start, kein Warten auf eine Einladung",
+        "point2": "Keine Lightning und nostr Adresse",
+        "description": "Am besten ist es, wenn du bereits eine Wallet oder einen Lightning Node besitzt.",
+        "connect": "Finde deine Wallet",
+        "point1": "Sowohl Selbstverwahrung als auch Verwahrungsoptionen"
       },
       "alby": {
-        "title": "Alby Konto"
+        "title": "Alby Konto",
+        "point3": "Neue Anmeldungen erfordern einen Einladungscode",
+        "description": "Ideal, wenn du die Anwendungen genießt und gleichzeitig die Kontrolle über deine Bitcoin behalten möchtest.",
+        "connect": "Weiter mit Alby Account",
+        "point2": "Eindeutige Lightning- und Nostr-Adresse",
+        "point1": "Neues Self-Costodial Wallet — <0>Alby Hub</0>"
       },
-      "title": "Verbinde Wallet mit der Alby-Erweiterung"
+      "title": "Alby Extension mit einer Wallet verbinden"
     },
     "transactions": {
       "title": "Transaktionen",
