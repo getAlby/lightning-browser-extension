@@ -521,13 +521,11 @@
     "choose_path": {
       "alby": {
         "title": "Cuenta de Alby",
-        "point1": "Los nuevos registros requieren un código de invitación",
-        "point4": "Dirección única de Lightning y Nostr"
+        "point1": "Los nuevos registros requieren un código de invitación"
       },
       "other": {
         "title": "Lleve su propia cartera",
-        "point1": "Empieza al instante, sin esperar invitación",
-        "point4": "Sin dirección relámpago y nostr"
+        "point1": "Empieza al instante, sin esperar invitación"
       },
       "title": "Conectar la cartera a la extensión Alby"
     },
