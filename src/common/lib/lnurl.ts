@@ -109,6 +109,10 @@ const lnurl = {
         if (axios.isAxiosError(e)) {
           error =
             (e.response?.data as { reason?: string })?.reason || e.message;
+
+          if (this.isLightningAddress(lnurlString)) {
+            error = `This is not a valid lightning address. Either the address is invalid or it is using a different and unsupported protocol: ${error}`;
+          }
         } else if (e instanceof Error) {
           error = e.message;
         }
