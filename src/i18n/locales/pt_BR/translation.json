@@ -755,13 +755,11 @@
     "choose_path": {
       "alby": {
         "title": "Conta Alby",
-        "point1": "Necessita de convite para criar conta",
-        "point4": "Endereços relâmpago e nostr exclusivos"
+        "point1": "Necessita de convite para criar conta"
       },
       "other": {
         "title": "Outras carteiras",
-        "point1": "Acesso instantâneo, não precisa de convite",
-        "point4": "Sem endereço relâmpago e nostr"
+        "point1": "Acesso instantâneo, não precisa de convite"
       },
       "title": "Conecte carteiras na extensão Alby"
     },
