@@ -7,7 +7,7 @@ declare global {
   }
 }
 
-const urlMatcher = /^https:\/\/(mobile.)?twitter\.com\/(\w+).*/;
+const urlMatcher = /^https:\/\/(mobile.)?x\.com\/(\w+).*/;
 
 function getUsername() {
   const matchData = document.location.toString().match(urlMatcher);
