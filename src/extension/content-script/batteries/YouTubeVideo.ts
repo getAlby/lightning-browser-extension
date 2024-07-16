@@ -8,13 +8,13 @@ const battery = async (): Promise<void> => {
   let text = "";
   document
     .querySelectorAll(
-      "#columns #primary #primary-inner #meta-contents #description .content"
+      "ytd-watch-metadata #above-the-fold #bottom-row #description #description-inner #description-inline-expander yt-attributed-string .yt-core-attributed-string"
     )
     .forEach((e) => {
       text += ` ${e.textContent}`;
     });
   const channelLink = document.querySelector<HTMLAnchorElement>(
-    "#columns #primary #primary-inner #meta-contents .ytd-channel-name a"
+    "ytd-watch-metadata #above-the-fold #top-row ytd-video-owner-renderer .ytd-video-owner-renderer .ytd-channel-name a"
   );
   if (!text || !channelLink) {
     return;
