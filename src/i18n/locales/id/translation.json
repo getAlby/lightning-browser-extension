@@ -12,7 +12,9 @@
           "enter_password": "Mohon masukan kode sandi.",
           "confirm_password": "Mohon konfirmasi kode sandi Anda.",
           "mismatched_password": "Kode sandi tidak sama."
-        }
+        },
+        "title": "Atur kode sandi ekstensi",
+        "description1": "Atur kode sandi untuk membuka ekstensi Alby pada peramban ini"
       },
       "test_connection": {
         "initializing": "Menginisialisasi akun Anda. Mohon tunggu, ini mungkin akan memakan waktu beberapa menit...",
