@@ -11,7 +11,7 @@ const urlMatcher = /^https:\/\/(mobile.)?(twitter|x)\.com\/(\w+).*/;
 
 function getUsername() {
   const matchData = document.location.toString().match(urlMatcher);
-  if (matchData) return matchData[2];
+  if (matchData) return matchData[3];
   return "";
 }
 
