@@ -14,7 +14,7 @@
           "label": "Vergewisse dich, dass du es richtig eingegeben hast:"
         },
         "description1": "Lege ein Password fest, um die Alby-Erweiterung in diesem Browser zu entsperren",
-        "description2": "Das Password zum Entsperren kann nicht wiederhergestellt, aber geändert werden. ",
+        "description2": "Das Password zum Entsperren kann nicht wiederhergestellt, aber geändert werden ",
         "title": "Passwort zum Entsperren der Erweiterung festlegen"
       },
       "test_connection": {
@@ -268,27 +268,27 @@
         },
         "url": {
           "label": "Node URL",
-          "placeholder": "https://your-node.m.voltageapp.io:8080"
+          "placeholder": "https://deine-node.m.voltageapp.io:8080"
         },
         "page": {
-          "title": "Verbinde dich mit Voltage Node",
-          "description": "Lightning-Node-Hosting der Enterprise-Klasse. Erreiche das Lightning Network schneller als je zuvor. Völlige Kontrolle mit null Verwaltung. <0>Erfahre mehr in unserer Einrichtungsanleitung</0>"
+          "title": "Verbinde dich mit deiner Voltage-Node",
+          "description": "\"Hosting von Lightning-Node auf Unternehmensniveau. Schneller denn je im Lightning-Netzwerk. Vollständige Kontrolle ohne Verwaltungsaufwand. <0>Mehr erfahren</0>"
         },
         "title": "Voltage",
         "errors": {
-          "connection_failed": "Verbindung fehlgeschlagen. Sind deine Anmeldedaten korrekt?"
+          "connection_failed": "Verbindung fehlgeschlagen. Sind Ihre Anmeldeinformationen korrekt?"
         }
       },
       "nwc": {
-        "title": "Nostr Wallet Verbindung",
+        "title": "Nostr-Wallet-Verbindung",
         "page": {
           "url": {
-            "label": "Nostr Wallet Verbindung URL",
+            "label": "Nostr Wallet Verbindungs URL",
             "placeholder": "nostr+walletconnect://69effe..."
           },
-          "instructions": "Einfügen einer NWC-Verbindungszeichenfolge von <0>Alby Nostr Wallet Connect</0>, <1>Umbrel Nostr Wallet Connect</1> oder <2>Mutiny Wallet</2>",
+          "instructions": "Füge einen NWC-Verbindungsstring von <0>Alby Nostr Wallet Connect</0>, <1>Umbrel Nostr Wallet Connect</1> oder <2>Mutiny Wallet</2>",
           "errors": {
-            "connection_failed": "Verbindung fehlgeschlagen. Ist deine NWC-Geldbörse online und die App-Verbindung aktiviert?"
+            "connection_failed": "Verbindung fehlgeschlagen. Ist Ihre Core Lightning-Node online und verwendet Sie das Commando-Plugin?"
           }
         }
       },
@@ -458,7 +458,7 @@
           "export_uri": "LNDHub Anmeldeinformationen URI",
           "scan_qr": "Importiere diese Wallet in Zeus oder BlueWallet, indem du den QRCode scannst.",
           "title": "Verbindung mit Mobile Wallet",
-          "description": "Ermöglicht es dir, dieses Konto mit mobilen Wallets wie <0>Blue Wallet</0> und <0>Zeus</0> zu verbinden und zu verwenden"
+          "description": "Ermöglicht es dir, dieses Konto mit mobilen Wallets wie <0>Blue Wallet</0> und <0>Zeus</0> zu verbinden und zu verwenden."
         },
         "nostr": {
           "title": "Nostr",
@@ -531,7 +531,7 @@
           "error": "Der eingegebene Kontoname stimmte nicht überein.",
           "subtitle": "Alle verknüpften Zertifikate werden gelöscht. Bitte sei dir sicher.",
           "title": "Diese Wallet entfernen",
-          "confirm": "Bist du dir sicher, dass du deine Wallet entfernen willst?\n\n⚠️ Wenn du fortfährst, werden alle zugehörigen Schlüssel (Master Key, Nostr, etc.) gelöscht. Bitte vergewisserne dich, dass du eine Sicherungskopie erstellt hast, denn es gibt keine andere Möglichkeit, sie wiederherzustellen.\n\n\nGebe \"{{Name}}\" zur Bestätigung ein:"
+          "confirm": "Bist du dir sicher, dass du deine Wallet entfernen willst?\n\n⚠️ Wenn du fortfährst, werden alle zugehörigen Schlüssel (Master Key, Nostr, etc.) gelöscht. Bitte vergewisserne dich, dass du eine Sicherungskopie erstellt hast, denn es gibt keine andere Möglichkeit, sie wiederherzustellen.\n\nGebe \"{{Name}}\" zur Bestätigung ein:"
         },
         "actions": {
           "export": "Exportieren",
@@ -549,7 +549,7 @@
             "button": "Ansicht rRecovery pPhrase",
             "description": "Notiere deine Wiederherstellungsphrase, um deinen Hauptschlüssel auf einem neuen Gerät wiederherstellen zu können oder für den Fall, dass du den Zugriff auf dein Konto verlierst.",
             "title": "Sichere deine Recovery Phrase",
-            "warning": "⚠️ Vergesse nicht, deine Wiederherstellungsphrase zu sichern! Wird sie nicht gesichert, kann dies dazu führen, dass du den Zugang zu deinem Master Key, dein Nostr-Identität oder den von dir mit diesem Schlüssel verwalteten Assets dauerhaft verlierst"
+            "warning": "⚠️ Vergesse nicht, deine Wiederherstellungsphrase zu sichern! Wird sie nicht gesichert, kann dies dazu führen, dass du den Zugang zu deinem Master Key, dein Nostr-Identität oder den von dir mit diesem Schlüssel verwalteten Assets dauerhaft verlierst."
           },
           "saved": "Hauptschlüssel erfolgreich verschlüsselt und gespeichert.",
           "generate": {
@@ -581,14 +581,14 @@
             },
             "import": {
               "title": "Hast du bereits einen Hauptschlüssel?",
-              "description": "Gebe deine Wiederherstellungsphrase ein, um den Master Key in diese Wallet zu importieren."
+              "description": "Gebe deine Wiederherstellungsphrase ein, um den Master Key in diese Wallet zu importieren"
             }
           },
           "inputs": {
             "title": "Wiederherstellungsphrase für deinen Master Key"
           },
           "description": {
-            "secure_recovery_phrase": "Schreibe sie an einem sicheren Ort auf und bewahren sie privat auf.",
+            "secure_recovery_phrase": "Schreibe sie an einem sicheren Ort auf und bewahren sie privat auf",
             "recovery_phrase": "Die Wiederherstellungsphrase besteht aus 12 Wörtern, die <0>Ihren Hauptschlüssel sichern</0>",
             "warning": "<0>Es kann diese Brieftasche oder das darin befindliche Guthaben nicht wiederherstellen,</0> es wird nur der Zugriff auf das oben genannte Protokoll wiederhergestellt"
           },
@@ -608,7 +608,7 @@
             "testnet": "Testnet",
             "regtest": "Regtest"
           },
-          "subtitle": "Wähle ein Netzwerk zur Ableitung von Adressen und zur Entschlüsselung von Bitcoin- und Liquid-Transaktionen",
+          "subtitle": "Wähle ein Netzwerk zur Ableitung von Adressen und zur Entschlüsselung von Bitcoin- und Liquid-Transaktionen.",
           "title": "Bitcoin Netzwerk"
         },
         "no_mnemonic_hint": "💡 Du hast noch keinen Hauptschlüssel. <0>Klicken Sie hier</0></div>, um deinen Hauptschlüssel zu erstellen und diese Einstellungen freizuschalten.",
@@ -773,9 +773,17 @@
           "title": "Rechnung zappen",
           "description": "Anzeige einer Bestätigung einer bezahlten Lightningrechnung"
         },
+        "10000": {
+          "title": "Stummschaltungsliste",
+          "description": "Blockiert Spammer und schlechte Schauspieler aus deinem Feed"
+        },
         "10002": {
           "title": "Relaisliste",
           "description": "Aktualisiere die bevorzugten Relais, um deine Notizen zu entdecken und die Notizen anderer zu empfangen"
+        },
+        "10003": {
+          "description": "Lesezeichen für Benutzerbeiträge",
+          "title": "Lesezeichen"
         },
         "22242": {
           "title": "authentifizieren",
@@ -784,6 +792,10 @@
         "24133": {
           "title": "Fernanzeige",
           "description": "Ereignisse aus der Ferne anfordern und unterzeichnen"
+        },
+        "27235": {
+          "title": "HTTP-Authentifizierung",
+          "description": "HTTP Authentifizierung"
         },
         "30008": {
           "description": "Akzeptieren, Ablehnen und Ändern der Anzeigereihenfolge von verliehenen Abzeichen",
@@ -808,18 +820,6 @@
         "unknown": {
           "description": "Nicht identifizierte Aktion",
           "title": "Art {{kind}}"
-        },
-        "10000": {
-          "title": "Stummschaltungsliste",
-          "description": "Blockiert Spammer und schlechte Schauspieler aus deinem Feed"
-        },
-        "10003": {
-          "description": "Lesezeichen für Benutzerbeiträge",
-          "title": "Lesezeichen"
-        },
-        "27235": {
-          "title": "HTTP-Authentifizierung",
-          "description": "HTTP Authentifizierung"
         }
       },
       "allow": "Erlaube {{Herausgeber}} zu {{Aktion}}"
@@ -913,23 +913,21 @@
     "choose_path": {
       "other": {
         "title": "Bringe dein eigenes Wallet mit",
-        "connect": "Verbinden",
-        "description": "Am besten, wenn du bereits eine Wallet hast oder ein hohes Zahlungsvolumen abwickeln möchtest.",
-        "point1": "Sofortiger Start, kein Warten auf eine Einladung",
-        "point4": "Kein lightning und nostr Adresse",
-        "point3": "Sowohl Selbstverwahrungs- als auch Verwahrungsoptionen",
-        "point2": "Keine Transaktions- oder Volumenbeschränkungen"
+        "point3": "Sofortiger Start, kein Warten auf eine Einladung",
+        "point2": "Keine Lightning und nostr Adresse",
+        "description": "Am besten ist es, wenn du bereits eine Wallet oder einen Lightning Node besitzt.",
+        "connect": "Finde deine Wallet",
+        "point1": "Sowohl Selbstverwahrung als auch Verwahrungsoptionen"
       },
       "alby": {
         "title": "Alby Konto",
-        "connect": "Mit Alby verbinden",
-        "description": "Ideal für Einsteiger oder alle, die ein tolles Wallet für den täglichen Gebrauch suchen.",
-        "point3": "Einrichten und Anmelden mit deiner E-Mail",
-        "point1": "Neue Anmeldungen erfordern einen Einladungscode",
-        "point4": "Eindeutige Lightning- und Nostr-Adresse",
-        "point2": "Es gelten Grenzen für das Transaktionsvolumen"
+        "point3": "Neue Anmeldungen erfordern einen Einladungscode",
+        "description": "Ideal, wenn du die Anwendungen genießt und gleichzeitig die Kontrolle über deine Bitcoin behalten möchtest.",
+        "connect": "Weiter mit Alby Account",
+        "point2": "Eindeutige Lightning- und Nostr-Adresse",
+        "point1": "Neues Self-Costodial Wallet — <0>Alby Hub</0>"
       },
-      "title": "Wallet mit Alby-Erweiterung verbinden"
+      "title": "Alby Extension mit einer Wallet verbinden"
     },
     "transactions": {
       "title": "Transaktionen",
@@ -1150,7 +1148,7 @@
         "title": "Anmeldung auf der Webseite aktivieren",
         "subtitle": "Automatisches Einloggen ohne Bestätigung, wenn die Webseite dazu auffordert."
       },
-      "hint": "Durch die Änderung dieser Zahl wird das aktuelle Budget zurückgesetzt.",
+      "hint": "Durch die Änderung dieser Zahl wird das aktuelle Budget zurückgesetzt",
       "new_budget": {
         "label": "Budget für Ein-Klick-Zahlungen",
         "link_label": "Festlegen eines Budgets für Ein-Klick-Zahlungen"

@@ -552,12 +552,10 @@
     },
     "choose_path": {
       "other": {
-        "title": "其他钱包",
-        "connect": "连接"
+        "title": "其他钱包"
       },
       "alby": {
-        "title": "Alby帐户",
-        "connect": "使用 Alby 连接"
+        "title": "Alby帐户"
       }
     },
     "alby": {

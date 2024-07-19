@@ -341,12 +341,10 @@
     },
     "choose_path": {
       "other": {
-        "title": "wallets อื่น ๆ",
-        "connect": "เชื่อมต่อ"
+        "title": "wallets อื่น ๆ"
       },
       "alby": {
-        "title": "บัญชี Alby",
-        "connect": "เชื่อมต่อกับ Alby"
+        "title": "บัญชี Alby"
       }
     },
     "choose_connector": {

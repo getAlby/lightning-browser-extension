@@ -37,6 +37,12 @@ function Send() {
         lnurl = invoice;
       }
 
+      if (lnurl?.endsWith("phoenixwallet.me")) {
+        throw new Error(
+          "Paying Phoenix addresses is not possible. Phoenix is not compatible with the current state of lightning addresses as they use a different protocol."
+        );
+      }
+
       if (lnurl) {
         const lnurlDetails = await lnurlLib.getDetails(lnurl);
         if (isLNURLDetailsError(lnurlDetails)) {

@@ -98,9 +98,11 @@ function Options() {
               <Route
                 path="new"
                 element={
-                  <Container maxWidth="xl">
-                    <Outlet />
-                  </Container>
+                  <div className="flex flex-1 justify-center items-center">
+                    <Container maxWidth="xl">
+                      <Outlet />
+                    </Container>
+                  </div>
                 }
               >
                 <Route index={true} element={<ChooseConnectorPath />}></Route>
@@ -151,7 +153,7 @@ const Layout = () => {
   const { t: tCommon } = useTranslation("common");
 
   return (
-    <div>
+    <div className="flex flex-col min-h-screen">
       <Navbar>
         <Navbar.Link href="/wallet">{tCommon("wallet")}</Navbar.Link>
         <Navbar.Link href="/publishers">

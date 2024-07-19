@@ -79,8 +79,8 @@ export default function ConnectAlby() {
       loading={loading}
       disabled={loading}
       flex
-      outline
       onClick={connectAlby}
+      primary
     />
   );
 }
