@@ -43,7 +43,7 @@ export default function TransactionsTable({
           <Loading />
         </div>
       ) : !transactions?.length ? (
-        <p className="text-gray-500 dark:text-neutral-400">
+        <p className="text-gray-500 dark:text-neutral-400 text-center">
           {t("no_transactions")}
         </p>
       ) : (
