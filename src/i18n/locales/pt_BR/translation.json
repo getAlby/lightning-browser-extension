@@ -744,8 +744,18 @@
         },
         "30023": {
           "title": "nota longa"
+        },
+        "7": {
+          "title": "reagir"
+        },
+        "22242": {
+          "title": "autenticar"
+        },
+        "10002": {
+          "title": "atualizar relays"
         }
-      }
+      },
+      "allow": "Permitir {{publisher}} {{action}}"
     },
     "confirm_request_permission": {
       "title": "Aprovar solicitação",
