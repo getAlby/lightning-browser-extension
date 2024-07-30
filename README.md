@@ -29,7 +29,6 @@ The extension can connect to different node implementations and supports custodi
 - [x] WebLN signMessage, verifyMessage support
 - [x] WebLN dynamic makeInvoice support
 - [x] Keysend
-- [ ] [L402](https://l402.org/) support
 
 ### STATUS: 🚀
 
