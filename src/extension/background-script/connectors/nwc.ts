@@ -220,8 +220,12 @@ class NWCConnector implements Connector {
   }
 
   private customRecordsToTlv(
-    customRecords: Record<string, string>
-  ): TlvRecord[] {
+    customRecords: Record<string, string> | undefined
+  ): TlvRecord[] | undefined {
+    if (!customRecords) {
+      return undefined;
+    }
+
     return Object.entries(customRecords).map(([key, value]) => ({
       type: parseInt(key),
       value: UTF8.parse(value).toString(Hex),
