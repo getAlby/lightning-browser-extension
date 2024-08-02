@@ -163,7 +163,9 @@ class NWCConnector implements Connector {
     const data = await this.nwc.payKeysend({
       pubkey: args.pubkey,
       amount: args.amount * 1000,
-      tlv_records: this.customRecordsToTlv(args.customRecords),
+      ...(args.customRecords && {
+        tlv_records: this.customRecordsToTlv(args.customRecords),
+      }),
     });
 
     const paymentHash = SHA256(data.preimage).toString(Hex);
@@ -220,12 +222,8 @@ class NWCConnector implements Connector {
   }
 
   private customRecordsToTlv(
-    customRecords: Record<string, string> | undefined
-  ): TlvRecord[] | undefined {
-    if (!customRecords) {
-      return undefined;
-    }
-
+    customRecords: Record<string, string>
+  ): TlvRecord[] {
     return Object.entries(customRecords).map(([key, value]) => ({
       type: parseInt(key),
       value: UTF8.parse(value).toString(Hex),
