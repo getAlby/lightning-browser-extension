@@ -4,6 +4,8 @@
 
 > For Windows users, please use [WSL 2](https://learn.microsoft.com/en-us/windows/wsl/install).
 
+> **NOTE:** this tutorial uses `yarn`. If you prefer a different package manager, like `npm` or `pnpm`, you can replace Yarn with your preferred tool in all instructions. Just be sure to make the same changes in your local `package.json` file while in development.
+
 - Install dependencies\
   `$ yarn install`
 
