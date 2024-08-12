@@ -277,11 +277,12 @@ class Lnd implements Connector {
       if (data.payment_error) {
         throw new Error(data.payment_error);
       }
+      const { total_amt, total_fees } = data.payment_route;
       return {
         data: {
           preimage: utils.base64ToHex(data.payment_preimage),
           paymentHash: utils.base64ToHex(data.payment_hash),
-          route: data.payment_route,
+          route: { total_amt: total_amt - total_fees, total_fees },
         },
       };
     });

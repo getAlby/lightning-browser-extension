@@ -1,6 +1,6 @@
 {
   "name": "lightning-browser-extension",
-  "version": "3.8.1",
+  "version": "3.9.0",
   "description": "Lightning browser extension",
   "private": true,
   "repository": "https://github.com/bumi/lightning-browser-extension.git",
@@ -141,7 +141,6 @@
     "puppeteer": "^21.4.1",
     "stream-browserify": "^3.0.0",
     "swc-loader": "^0.2.3",
-    "tailwindcss-3d": "^1.0.2",
     "terser-webpack-plugin": "^5.3.9",
     "tsconfig-paths-webpack-plugin": "^4.1.0",
     "typescript": "^5.2.2",

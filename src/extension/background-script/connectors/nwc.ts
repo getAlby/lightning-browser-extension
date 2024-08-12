@@ -163,7 +163,9 @@ class NWCConnector implements Connector {
     const data = await this.nwc.payKeysend({
       pubkey: args.pubkey,
       amount: args.amount * 1000,
-      tlv_records: this.customRecordsToTlv(args.customRecords),
+      ...(args.customRecords && {
+        tlv_records: this.customRecordsToTlv(args.customRecords),
+      }),
     });
 
     const paymentHash = SHA256(data.preimage).toString(Hex);

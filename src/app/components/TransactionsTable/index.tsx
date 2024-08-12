@@ -43,7 +43,7 @@ export default function TransactionsTable({
           <Loading />
         </div>
       ) : !transactions?.length ? (
-        <p className="text-gray-500 dark:text-neutral-400">
+        <p className="text-gray-500 dark:text-neutral-400 text-center">
           {t("no_transactions")}
         </p>
       ) : (
@@ -87,8 +87,8 @@ export default function TransactionsTable({
                         className={classNames(
                           "text-sm",
                           type == "incoming"
-                            ? "text-green-600 dark:color-green-400"
-                            : "text-orange-600 dark:color-orange-400"
+                            ? "text-green-600 dark:text-emerald-500"
+                            : "text-orange-600 dark:text-amber-600"
                         )}
                       >
                         {type == "outgoing" ? "-" : "+"}{" "}
