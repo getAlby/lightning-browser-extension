@@ -1,6 +1,7 @@
 import browser from "webextension-polyfill";
 
 import extractLightningData from "./batteries";
+import { sendLightningData } from "./batteries/helpers";
 import getOriginData from "./originData";
 import shouldInject from "./shouldInject";
 
@@ -45,6 +46,10 @@ async function init() {
         { action: "accountChanged", scope: "webln" },
         window.location.origin
       );
+    }
+    // homepage requests this to get current lightning data from battery
+    if (request.action === "getCurrentLightningData") {
+      sendLightningData();
     }
   });
 

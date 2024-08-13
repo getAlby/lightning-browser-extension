@@ -48,11 +48,26 @@ export const findLightningAddressInText = (text: string): string | null => {
   return null;
 };
 
+let lightningData: [Battery] | null;
+
+export const resetLightningData = (): void => {
+  lightningData = null;
+  msg.request("setIcon", { icon: ExtensionIcon.Default });
+};
+
+export const sendLightningData = () => {
+  if (lightningData) {
+    browser.runtime.sendMessage({
+      application: "LBE",
+      action: "lightningData",
+      args: lightningData,
+    });
+  } else {
+    console.warn("Attempted to send undefined lightningData");
+  }
+};
+
 export const setLightningData = (data: [Battery]): void => {
-  browser.runtime.sendMessage({
-    application: "LBE",
-    action: "lightningData",
-    args: data,
-  });
+  lightningData = data;
   msg.request("setIcon", { icon: ExtensionIcon.Tipping });
 };
