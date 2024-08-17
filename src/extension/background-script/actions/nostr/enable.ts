@@ -128,6 +128,7 @@ const enable = async (message: MessageAllowanceEnable, sender: Sender) => {
             EventKind.CreateBadge,
             EventKind.AppData,
             EventKind.UploadChunk,
+            EventKind.RemoteSign,
           ];
 
           reasonableEventKindIds.forEach(async (kindId) => {
