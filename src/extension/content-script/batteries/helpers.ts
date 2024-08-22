@@ -62,8 +62,6 @@ export const sendLightningData = () => {
       action: "lightningData",
       args: lightningData,
     });
-  } else {
-    console.warn("Attempted to send undefined lightningData");
   }
 };
 

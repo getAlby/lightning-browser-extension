@@ -21,6 +21,8 @@ const setData = async (): Promise<void> => {
   const searchParams = new URLSearchParams(window.location.search);
   const videoId = searchParams.get("v");
 
+  // to keep the battery info stable after the description settles
+  // youtube returns old lightning data even when switching on new video for few initial seconds. so we just return from here instead of showing old lightning data
   if (videoId === oldVideoId) {
     return;
   }
@@ -107,9 +109,12 @@ const battery = (): void => {
     if (description && channelLink) {
       clearInterval(descriptionInterval); // Stop checking for the elements
 
+      // run this only once, during the first load
       if (!window.ALBY_BATTERY) {
         window.ALBY_BATTERY = true;
 
+        // we need to run setData if this is the first time the user is
+        // visiting youtube as the observer doesn't run intially on attach
         setData();
 
         // Re-initialize the observer
@@ -117,7 +122,7 @@ const battery = (): void => {
           setData();
         });
 
-        // Observe changes in the description
+        // Observe changes in the description (without subtree it didn't work properly)
         observer.observe(description, { childList: true, subtree: true });
         // Observe changes in the channelLink
         observer.observe(channelLink, { childList: true, subtree: true });
@@ -125,6 +130,7 @@ const battery = (): void => {
     }
   }
 
+  // Wait for the channel link and description to load before initializing the observer and fetching the data
   const descriptionInterval = setInterval(
     waitForChannelLinkAndDescription,
     100
