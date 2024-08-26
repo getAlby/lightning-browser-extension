@@ -75,7 +75,7 @@
     "react-i18next": "^15.0.1",
     "react-loading-skeleton": "^3.4.0",
     "react-modal": "^3.16.1",
-    "react-qr-code": "^2.0.12",
+    "react-qr-code": "^2.0.15",
     "react-router-dom": "^6.22.3",
     "slip77": "^0.2.0",
     "stream": "^0.0.2",
