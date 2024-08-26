@@ -33,7 +33,8 @@ function Send() {
       setLoading(true);
 
       let lnurl = lnurlLib.findLnurl(invoice);
-      if (!lnurl && lnurlLib.isLightningAddress(invoice)) {
+
+      if (lnurlLib.isLightningAddress(invoice)) {
         lnurl = invoice;
       }
 
