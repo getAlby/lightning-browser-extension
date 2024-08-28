@@ -15,13 +15,12 @@ const getRelays = async (message: MessageDefaultPublic, sender: Sender) => {
   return {
     data: {
       "wss://relay.damus.io": { read: true, write: true },
-      "wss://nostr1.tunnelsats.com": { read: true, write: true },
       "wss://nostr-pub.wellorder.net": { read: true, write: true },
-      "wss://relay.nostr.info": { read: true, write: true },
       "wss://nostr-relay.wlvs.space": { read: true, write: true },
       "wss://nostr.bitcoiner.social": { read: true, write: true },
       "wss://nostr-01.bolt.observer": { read: true, write: true },
-      "wss://relayer.fiatjaf.com": { read: true, write: true },
+      "wss://relay.current.io": { read: true, write: true },
+      "wss://nos.lol": { read: true, write: true }
     },
   };
 };
