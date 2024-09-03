@@ -1,6 +1,10 @@
 import db from "~/extension/background-script/db";
 import state from "~/extension/background-script/state";
 
+function delay(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 export async function hasPermissionFor(method: string, host: string) {
   if (!host) {
     return false;
@@ -20,6 +24,8 @@ export async function hasPermissionFor(method: string, host: string) {
   if (!accountId) {
     throw new Error("Account doesn't exist");
   }
+
+  await delay(1000);
 
   const findPermission = await db.permissions.get({
     host,
