@@ -34,6 +34,7 @@ interface Config {
   password: string;
   url: string;
   oAuthToken: OAuthToken | undefined;
+  userIdentifer: string | undefined;
 }
 
 export default class Alby implements Connector {
@@ -62,6 +63,25 @@ export default class Alby implements Connector {
 
   getOAuthToken(): OAuthToken | undefined {
     return this.config.oAuthToken;
+  }
+
+  async persistUserIdentifier(userIdentifier: string): Promise<void> {
+    if (!this.config.userIdentifer) {
+      if (this.account.id) {
+        const accounts = state.getState().accounts;
+        const password = (await state.getState().password()) as string;
+
+        const configData = decryptData(
+          accounts[this.account.id].config,
+          password
+        );
+        configData.userIdentifer = userIdentifier;
+        accounts[this.account.id].config = encryptData(configData, password);
+        state.setState({ accounts });
+        // make sure we immediately persist the updated accounts
+        await state.getState().saveToStorage();
+      }
+    }
   }
 
   unload() {
@@ -123,6 +143,9 @@ export default class Alby implements Connector {
     >;
 
     if (cacheValue) {
+      if (!this.config.userIdentifer) {
+        this.persistUserIdentifier(cacheValue.data.identifier);
+      }
       return cacheValue;
     }
 
@@ -137,6 +160,9 @@ export default class Alby implements Connector {
       };
       this._cache.set(cacheKey, returnValue);
 
+      if (!this.config.userIdentifer) {
+        this.persistUserIdentifier(info.identifier);
+      }
       return returnValue;
     } catch (error) {
       console.error(error);
@@ -295,6 +321,9 @@ export default class Alby implements Connector {
       });
 
       authUrl += "&webln=false"; // stop getalby.com login modal launching lnurl auth
+      if (this.config.userIdentifer) {
+        authUrl += `&identifier=${this.config.userIdentifer}`;
+      }
 
       const oAuthTab = await browser.tabs.create({ url: authUrl });
 
