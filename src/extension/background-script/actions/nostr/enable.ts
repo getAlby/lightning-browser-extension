@@ -132,8 +132,8 @@ const enable = async (message: MessageAllowanceEnable, sender: Sender) => {
           ];
           // when addding multiple permissions at once, the flow shall wait until all asynchronous addPermissionFor calls are completed.
           await Promise.all(
-            reasonableEventKindIds.map(async (kindId) => {
-              await addPermissionFor(
+            reasonableEventKindIds.map((kindId) => {
+              addPermissionFor(
                 PermissionMethodNostr.NOSTR_SIGNMESSAGE + "/" + kindId,
                 host,
                 false
