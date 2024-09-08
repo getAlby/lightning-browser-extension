@@ -55,7 +55,7 @@
     "bolt11-signet": "1.4.1",
     "crypto-js": "^4.2.0",
     "dayjs": "^1.11.12",
-    "dexie": "^3.2.7",
+    "dexie": "^4.0.8",
     "elliptic": "^6.5.7",
     "events": "^3.3.0",
     "html5-qrcode": "^2.3.8",
