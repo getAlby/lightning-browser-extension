@@ -65,7 +65,7 @@ const Home: FC = () => {
 
         if (currentUrl.startsWith("http")) {
           browser.tabs.sendMessage(tabs[0].id as number, {
-            action: "extractLightningData",
+            action: "getCurrentLightningData",
           });
         }
       } else {
