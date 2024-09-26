@@ -9,7 +9,6 @@ const nostrCalls = [
   "nostr/getPublicKeyOrPrompt",
   "nostr/signEventOrPrompt",
   "nostr/signSchnorrOrPrompt",
-  "nostr/getRelays",
   "nostr/enable",
   "nostr/encryptOrPrompt",
   "nostr/decryptOrPrompt",
