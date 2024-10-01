@@ -29,7 +29,9 @@ export default function TestConnection() {
 
     try {
       const response = await api.getAccountInfo();
-      if (response.name) {
+      if (response.info.node_required) {
+        navigate("/node-setup");
+      } else if (response.name) {
         navigate("/pin-extension");
       } else {
         setErrorMessage(t("connection_error"));

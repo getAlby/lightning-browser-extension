@@ -14,7 +14,7 @@ import type { AccountInfo } from "~/types";
 
 export default function TestConnection() {
   const { getFormattedInCurrency } = useSettings();
-  const { setAccountId, fetchAccountInfo } = useAccount();
+  const { account, setAccountId, fetchAccountInfo } = useAccount();
   const { getAccounts } = useAccounts();
 
   const [accountInfo, setAccountInfo] = useState<{
@@ -130,6 +130,16 @@ export default function TestConnection() {
                     }
                   />
                 </div>
+                {account?.nodeRequired && (
+                  <div className="flex mt-6">
+                    <Button
+                      label={"Continue to Setup Node"}
+                      primary
+                      flex
+                      onClick={() => navigate("/node-setup")}
+                    />
+                  </div>
+                )}
               </div>
             )}
             {loading && (
