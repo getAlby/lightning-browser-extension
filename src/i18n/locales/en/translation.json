@@ -399,7 +399,7 @@
           },
           "setup_keys": {
             "title": "Setup Master Key",
-            "description": "Take care of your Master Key or import your existing Nostr account"
+            "description": "Create a Master key for Bitcoin, Nostr and Liquid or import an existing Nostr account."
           },
           "receive_bitcoin": {
             "title": "Receive bitcoin",
