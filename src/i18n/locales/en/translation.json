@@ -398,8 +398,8 @@
             "description": "New to Alby Extension? Check out our guides, videos and explanations"
           },
           "setup_keys": {
-            "title": "Setup your keys",
-            "description": "Take care of your Master Key or import your existing Nostr account"
+            "title": "Setup Master Key",
+            "description": "Create a Master key for Bitcoin, Nostr and Liquid or import an existing Nostr account."
           },
           "receive_bitcoin": {
             "title": "Receive bitcoin",
