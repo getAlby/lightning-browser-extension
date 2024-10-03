@@ -31,11 +31,6 @@ export default class NostrProvider extends ProviderBase {
     return this.execute("signSchnorrOrPrompt", { sigHash });
   }
 
-  async getRelays() {
-    await this.enable();
-    return this.execute("getRelays");
-  }
-
   //override method from base class, we don't want to throw error if not enabled
   async on(...args: Parameters<EventEmitter["on"]>) {
     await this.enable();

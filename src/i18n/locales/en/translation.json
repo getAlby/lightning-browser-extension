@@ -36,24 +36,22 @@
       }
     },
     "choose_path": {
-      "title": "Connect Wallet to Alby Extension",
+      "title": "Connect Alby Extension to a wallet",
       "other": {
         "title": "Bring Your Own Wallet",
-        "description": "Best if you already have a wallet or need to do high-volume payments.",
-        "connect": "Connect",
-        "point1": "Start instantly, no waiting for an invite",
-        "point2": "No transaction or volume limits",
-        "point3": "Both self-custody and custodial options",
-        "point4": "No lightning and nostr address"
+        "description": "Best if you already have a wallet or own a lightning node.",
+        "connect": "Find Your Wallet",
+        "point1": "Both self-custody and custodial options",
+        "point2": "No lightning and nostr address",
+        "point3": "Start instantly, no waiting for an invite"
       },
       "alby": {
         "title": "Alby Account",
-        "description": "Ideal for beginners or anyone looking for a great daily spending wallet.",
-        "connect": "Connect with Alby",
-        "point1": "New signups require an invite code",
-        "point2": "Transaction volume limits apply",
-        "point3": "Set up and login with your email",
-        "point4": "Unique lightning and nostr address"
+        "description": "Ideal If you would like to enjoy apps while staying in control of your bitcoin.",
+        "connect": "Continue with Alby Account",
+        "point1": "New self-custodial wallet — <0>Alby Hub</0>",
+        "point2": "Unique lightning and nostr address",
+        "point3": "New signups require an invite code"
       }
     },
     "alby": {
@@ -400,8 +398,8 @@
             "description": "New to Alby Extension? Check out our guides, videos and explanations"
           },
           "setup_keys": {
-            "title": "Setup your keys",
-            "description": "Take care of your Master Key or import your existing Nostr account"
+            "title": "Setup Master Key",
+            "description": "Create a Master key for Bitcoin, Nostr and Liquid or import an existing Nostr account."
           },
           "receive_bitcoin": {
             "title": "Receive bitcoin",

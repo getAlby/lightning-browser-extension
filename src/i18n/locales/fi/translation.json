@@ -3,16 +3,19 @@
     "welcome": {
       "set_password": {
         "choose_password": {
-          "label": "Valitse lukituksen avaamissalasana:"
+          "label": "Valitse lukituksen avauskoodi:"
         },
         "confirm_password": {
           "label": "Vahvistetaan, että kirjoitit sen oikein:"
         },
         "errors": {
-          "enter_password": "Syötä salasana.",
-          "confirm_password": "Vahvista salasanasi.",
-          "mismatched_password": "Salasanat eivät täsmää."
-        }
+          "enter_password": "Syötä avauskoodi.",
+          "confirm_password": "Vahvista avauskoodisi.",
+          "mismatched_password": "Avauskoodit eivät täsmää."
+        },
+        "description1": "Aseta avauskoodi Alby-laajennuksen lukituksen avaamiseksi tässä selaimessa",
+        "description2": "Lukituksen avauskoodia ei voi palauttaa, mutta sitä voidaan muuttaa ",
+        "title": "Aseta laajennuksen lukituksen avauskoodi"
       },
       "test_connection": {
         "ready": "Mahtavaa, olet valmis menemään!",
@@ -24,10 +27,16 @@
         "actions": {
           "delete_edit_account": "Poista virheellinen tili ja muokkaa uudelleen"
         }
+      },
+      "pin_extension": {
+        "title": "Kiinnitä Alby-laajennuksesi",
+        "description": "Olet melkein siellä. Jos haluat käyttää Albya kätevästi, muista kiinnittää laajennuksesi selaimen työkalupalkkiin:",
+        "explanation": "1. Napsauta <0/> selaimen oikeassa yläkulmassa.<1/>2. Etsi Alby ja kiinnitä se työkalupalkkiin napsauttamalla.<1/>3. Se siitä. Pääset Albyyn napsauttamalla <2/>-kuvaketta",
+        "next_btn": "Aloita buzzin' {{icon}} Albyn kanssa"
       }
     },
     "choose_connector": {
-      "description": "Sinun täytyy ensin muodostaa yhteys Lightning-lompakkoon, jotta voit olla vuorovaikutuksessa suosikkisivustojesi kanssa, jotka hyväksyvät Bitcoin Lightning -maksut!",
+      "description": "Yhdistä ulkoiseen Lightning-lompakkoosi tai -solmuun",
       "lnd": {
         "title": "LND",
         "page": {
@@ -109,7 +118,7 @@
         "title": "Umbrel",
         "page": {
           "title": "Yhdistä <0>Umbrel</0>-solmuun",
-          "instructions": "Siirry Umbrelin kojelaudassa kohtaan <0>Yhdistä lompakkoon</0>. Valitse <0>lndconnect REST</0> ja kopioi <0>lndconnect URL-osoite</0>. (Asetuksistasi riippuen voit käyttää joko paikallista yhteyttä tai Tor-yhteyttä)"
+          "instructions": "1. Siirry Lightning-solmun hallintapaneelissa kohtaan <0>Yhdistä lompakko</0><1/>2. Valitse tila <0>REST (Tor)</0> tai <0>REST (paikallinen verkko)</0>.<1/>3. Kopioi <0>lndconnect-URL</0> ja liitä se alle"
         },
         "rest_url": {
           "label": "lndconnect -REST URL-osoite",
@@ -120,7 +129,7 @@
         "title": "myNode",
         "page": {
           "title": "Yhteys <0>myNode</0>:een",
-          "instructions": "Napsauta myNode-etusivullasi <0>Lompakko</0>-painiketta <0>Lightning</0>-palvelun kohdalla.<1/> Napsauta nyt <0>Muodosta parilompakko</0>-painiketta <0>Tila</0>-välilehden alla. Syötä salasanasi, kun sitä pyydetään.<1/> Valitse pudotusvalikosta pariliitäntävaihtoehto. Asetuksestasi riippuen voit käyttää joko <0>Lightning (REST + paikallinen IP-osoite)</0> -yhteyttä tai <0>Lightning (REST + Tor)</0> -yhteyttä."
+          "instructions": "Napsauta myNode-etusivullasi <0>Lampakko</0>-painiketta <0>lightning</0>-palvelussasi.<1/> Napsauta nyt <0>Pair Wallet</0> -painiketta kohdan <0 >Tila</0>-välilehti. Anna salasanasi pyydettäessä.<1/> Valitse avattava valikko ja valitse pariliitosvaihtoehto. Asetuksistasi riippuen voit käyttää joko <0>lightning (REST + paikallinen IP)</0> tai <0>lightning (REST + Tor)</0> yhteyttä."
         },
         "rest_url": {
           "label": "lndconnect -REST URL-osoite",
@@ -142,8 +151,8 @@
         "title": "RaspiBlitz",
         "page": {
           "title": "Yhdistä <0>RaspiBlitz</0>solmuusi",
-          "instructions1": "Tarvitset solmusi sipuliosoitteen, portin ja makaroonin, jolla on luku- ja lähetysoikeudet (esim. admin.makaroon). <1/><1/><0>SSH</0> sisään <0>RaspiBlitz</0>. <1/>Aja komento <0>sudo cat /mnt/hdd/tor/lndrest/hostname</0>.<1/>Kopioi ja liitä <0>.onion</0> osoite alla olevaan syötteeseen.<1/>Lisää <0>portti</0> sipilin osoitteen perään, oletusportti on <0>:8080</0>.",
-          "instructions2": "Valitse <0>Yhdistä</0>. <1/>Valitse <0>Vie</0>. <1/>Valitse <0>HEX</0>. <1/>Kopioi <0>adminMacaroon</0>. <1/>Liitä macaroon alla olevaan syötteeseen."
+          "instructions1": "Noudata näitä ohjeita:<1/> 1. <0>SSH</0> <0>Raspiblitzi</0>:ssa<1/>2. Valitse luettelosta <0>Yhdistä sovellukset ja näytä tunnistetiedot</0>.<1/><0/>3. Valitse <0>Yhdistä Alby tähän solmuun</0><1/>4. Paina <0>OK</0> nähdäksesi yhteystiedot.<1/><1/>Kopioi ja liitä <0>REST API -isäntä</0> tai <0>.onion</0>-osoite muodostaaksesi yhteyden Torin kautta alla olevaan syötteeseen.",
+          "instructions2": "Kopioi (järjestelmänvalvojan) <0>macaroon</0> alla olevaan syötteeseen."
         },
         "rest_api_host": {
           "label": "REST API -kone",
@@ -154,28 +163,47 @@
         "title": "Bitcoin Blink -lompakko",
         "page": {
           "title": "Yhdistä <0>Blink -lompakkoon</0>"
+        },
+        "token": {
+          "label": "Syötä API-avaimesi",
+          "info": "Liitä lompakkosi luomalla API-avain <0>Blink-hallintapaneeliin (dashboard.blink.sv)</0>:<br>- kirjaudu sisään sähköpostiosoitteella tai puhelinnumerolla, jos käytät jo Blinkiä<br>- jos käytät sinulla ei ole vielä tiliä, voit luoda uuden kirjautumalla sisään puhelinnumerolla<br>- luo uusi avain API-avaimet-välilehdellä<br>- anna sille nimi ja valitse luku- ja kirjoitusalue<br>- jätä oletuksena ei vanhenemista tai valitse pitkä aikaväli, jotta sinun ei tarvitse kytkeä lompakkosi uudelleen ajoittain<br>- kopioi avain (alkaen 'blink_ ':lla) ja liitä se alla olevaan tekstiruutuun.<br>"
+        },
+        "currency": {
+          "label": "Valitse lompakko"
         }
       },
       "bitcoin_jungle": {
         "title": "Bitcoin Jungle - lompakko",
         "page": {
           "title": "Yhdistä <0>Bitcoin Jungle -lompakkoon</0>"
+        },
+        "token": {
+          "label": "Syötä käyttöoikeustunnuksesi",
+          "info": "{{label}}-integraatio Albyn kanssa on alfaversiossa ja sitä suositellaan vain edistyneille käyttäjille.<br><br>Voit tarttua käyttöoikeustunnukseesi siirtymällä mobiilisovellukseen, napsauttamalla asetukset-kuvaketta ja napauttamalla sitten kolme kertaa koontiversion numero kehittäjävalikon avaamiseksi.<br><br>Käyttöoikeustunnus voidaan kopioida täältä.<br><br>"
+        },
+        "currency": {
+          "label": "Valitse lompakko"
         }
       },
       "btcpay": {
         "title": "BTCPay-palvelin",
         "config": {
-          "label": "Konfigurointitiedot"
+          "label": "Konfigurointitiedot",
+          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.co"
         },
         "errors": {
           "connection_failed": "Yhteys epäonnistui. Onko BTCPay-yhteyden URL-osoite oikea ja saatavilla?"
+        },
+        "page": {
+          "instructions": "Siirry BTCPayServerillesi ja kirjaudu sisään järjestelmänvalvojana. Siirry kohtaan Palvelinasetukset > Palvelut > LND Rest - Katso tiedot. Napsauta sitten \"Katso QR-koodin tiedot\" ja kopioi QR-koodin tiedot. Liitä se alle:",
+          "title": "Yhdistä BTCPay LND:hen"
         }
       },
       "commando": {
         "title": "Core Lightning",
         "page": {
           "title": "Yhdistä Core Lightning -solmuusi",
-          "instructions": "Varmista, että sinulla on Core Lightning -versio 0.12.0 tai uudempi, että Commando-laajennus on käynnissä ja että solmuasi on käytettävissä Lightning-verkon kautta. Luo riimu suorittamalla \"lightning-cli commando-rune\"."
+          "instructions": "Varmista, että sinulla on Core Lightning -versio 0.12.0 tai uudempi, että commando-laajennus on käynnissä ja että solmuasi on käytettävissä Lightning-verkon kautta. Luo riimu suorittamalla 'lightning-cli commando-rune'."
         },
         "host": {
           "label": "Kone"
@@ -202,6 +230,88 @@
         "errors": {
           "connection_failed": "Yhteys epäonnistui. Onko Core Lightning -solmu verkossa ja käyttääkö Commando-laajennusta?"
         }
+      },
+      "lawallet": {
+        "errors": {
+          "toast": {
+            "walias": "Onko Lightning-osoitteesi KÄYTTÄJÄNIMI<0>@{{domain}}</0> vai käyttääkö se toista toimialuetta?",
+            "endpoint": "Oikea päätepiste on rakennettu https://app.<0>{{domain}}</0>:sta",
+            "message": "Sinulla ei ole Lightning-osoitetta identiteetissä \"{{domain}}\"",
+            "verify": "Tarkista seuraavat asiat",
+            "match": "Identiteetin päätepisteen on vastattava Lightning-toimialuettasi",
+            "http": "Identiteetintarjoaja käyttää samaa protokollaa (<0>HTTP</0> tai <0>HTTPS</0>)",
+            "title": "Identiteettiä ei löytynyt"
+          }
+        },
+        "private_key": "Yksityinen avain",
+        "api_endpoint": "API-päätepiste",
+        "identity_endpoint": "Identiteettipäätepiste",
+        "ledger_public_key": "Reskontin julkinen avain",
+        "urlx_public_key": "URLx:n julkinen avain",
+        "relay_url": "Välitys-URL",
+        "title": "LaWallet.io",
+        "page": {
+          "title": "Yhdistä LaWalletiin",
+          "instructions": "Aseta LaWallet-kirjautumistietosi alla"
+        }
+      },
+      "lnc": {
+        "page": {
+          "description": "1. Valitse Lightning-pääteohjelman sivupalkista <0>Lightning-solmuyhteys</0>.<1/> 2. Napsauta <0>Luo uusi istunto</0><1/>3. Määritä nimiö istunoolle, valitse haluamasi käyttöoikeudet ja lähetä<1/>4. <0>Kopioi pariliitoslause</0> ja liitä se alle.",
+          "title": "Yhdistä Lightning-pääteohjelmaan (LNC)"
+        },
+        "title": "Lightning-pääteohjelma (LNC)",
+        "pairing_phrase": {
+          "placeholder": "salaisen pinon sats-lause",
+          "label": "Pariliitoslauseesi "
+        }
+      },
+      "galoy": {
+        "errors": {
+          "missing_token": "Pääsytunnus puuttuu, sisäänkirjautuminen ei onnistunut.",
+          "invalid_token": "Valtuuttaminen epäonnistui. Tarkista API-avaimesi ja yritä uudelleen.",
+          "setup_failed": "Määritys epäonnistui"
+        },
+        "phone_number": {
+          "label": "Syötä puhelinnumerosi"
+        },
+        "sms_code": {
+          "label": "Syötä tekstiviestivahvistuskoodisi"
+        },
+        "actions": {
+          "login": "Kirjaudu sisään"
+        }
+      },
+      "title": "Yhdistä Lightning-lompakko",
+      "umbrel_lightning_node": {
+        "title": "Lightning-solmu"
+      },
+      "voltage": {
+        "page": {
+          "description": "Enterprise-luokan Lightning-solmun isännöinti. Liity Lightning-verkkoon nopeammin kuin koskaan. Täydellinen ohjaus ilman hallintaa. <0>Lisätietoja määritysoppaastamme</0>",
+          "title": "Yhdistä Voltage-solmuun"
+        },
+        "macaroon": {
+          "label": "Järjestelmänvalvojan Macaroon (hex)"
+        },
+        "errors": {
+          "connection_failed": "Yhteys epäonnistui. Ovatko tunnistetietosi oikein?"
+        },
+        "url": {
+          "placeholder": "https://sinun-solmusi.m.voltage-sovellus.io:8080",
+          "label": "Solmun URL"
+        },
+        "title": "Voltage"
+      },
+      "nwc": {
+        "page": {
+          "errors": {
+            "connection_failed": "Yhteys epäonnistui. Onko NWC-lompakkosi verkkotilassa ja sovellusyhteys käytössä?"
+          },
+          "url": {
+            "placeholder": "nostr+wallet_connect://69effe..."
+          }
+        }
       }
     },
     "home": {
@@ -210,7 +320,30 @@
         "enable_now": "Ota nyt käyttöön"
       },
       "default_view": {
-        "is_blocked_hint": "Alby on tällä hetkellä poissa käytöstä {{host}}:lla"
+        "is_blocked_hint": "Alby on tällä hetkellä poissa käytöstä {{host}}:lla",
+        "actions": {
+          "get_started": {
+            "description": "Oletko uusi Alby-laajennuksen käyttäjä? Tutustu oppaihimme, videoihimme ja selityksiimme",
+            "title": "Aloita Alby-laajennuksen käyttö"
+          },
+          "setup_keys": {},
+          "receive_bitcoin": {
+            "title": "Vastaanota bitcoineja",
+            "description": "Rahoita tiliäsi ja vastaanota Lightning-osoitteesi tai laskun kautta"
+          }
+        },
+        "node_required": "Alby-tilisi tarvitsee lompakon. Yhdistä lompakko tiliisi <0>getalby.com</0>:ssa",
+        "upgrade_account": "Käytät vanhaa LNDHub-kokoonpanoa. <0>Yhdistä uudelleen</0> Alby-tilisi, jotta pääset käyttämään uusimpia ominaisuuksia.",
+        "no_transactions": "Ei vielä tapahtumia tällä tilillä.",
+        "block_removed": "Käytössä {{host}}. Ole hyvä ja lataa verkkosivusto uudelleen.",
+        "see_all": "Katso kaikki"
+      },
+      "allowance_view": {
+        "budget_spent": "Budjetti kulunut",
+        "sats": "sats",
+        "total_spent": "Kulutettu yhteensä",
+        "total_payments": "Maksuja yhteensä",
+        "permissions": "Käyttöoikeudet"
       }
     },
     "unlock": {
@@ -426,6 +559,238 @@
     "nostr": {
       "title": "Nostr",
       "block_and_ignore": "Estä ja jätä huomiotta {{host}}"
+    },
+    "accounts": {
+      "title": "Lompakot",
+      "account_view": {
+        "mnemonic": {
+          "title": "Avaintenhallinta",
+          "saved": "Pääavain salattu ja tallennettu onnistuneesti.",
+          "new": {
+            "nostr": "Tuo olemassa oleva Nostr-tili",
+            "items": {
+              "usage": "Voit tuoda ja käyttää samaa pääavainta <0>jossakin yhdistetyssä Albyn lompakossa</0>",
+              "keys": "Pääavaimen avulla voit olla vuorovaikutuksessa protokollien, kuten <0>Nostr</0>, <0>Liquid</0> tai <0>Bitcoinin peruskerroksen</0> kanssa",
+              "nostr_key": "Voit aina tuoda olemassa olevat Nostr-avaimet ja ohittaa pääavaimen luomat avaimet"
+            },
+            "import": {
+              "title": "Onko sinulla jo pääavain?",
+              "description": "Syötä palautuslauseesi tuodaksesi pääavaimen tähän lompakkoon"
+            },
+            "title": "Määritä pääavain",
+            "secure": {
+              "title": "Suojaa pääavaimesi",
+              "description": "Opi tuntemaan pääavain ja varmuuskopioi 12-sanainen palautuslause"
+            }
+          },
+          "backup": {
+            "protocols": {
+              "nostr": "Nostr"
+            },
+            "button": "Katso palautuslause",
+            "title": "Varmuuskopioi palautuslauseesi",
+            "description": "Kirjoita palautuslause muistiin, jotta voit palauttaa pääavaimesi uudelle laitteelle tai jos menetät pääsyn tiliisi.",
+            "save": "Tallenna pääavain",
+            "warning": "Älä unohda varmuuskopioida palautuslausettasi! Avaimen varmuuskopioimatta jättäminen saattaa johtaa pysyvästi pääsyn menettämiseen pääavaimesi, Nostr-identiteettisi tai tällä avaimella hallinnoimiesi resurssien käyttöön."
+          },
+          "lnurl": {
+            "title": "Kirjaudu sisään Lightningilla",
+            "use_mnemonic": "Käytä pääavainta kirjautumiseen Lightning-käyttöisiin sovelluksiin (LNURL Auth)"
+          },
+          "description": {
+            "secure_recovery_phrase": "Muista kirjoittaa ne ylös turvalliseen paikkaan ja pitää ne yksityisinä",
+            "warning": "<0>Se ei voi palauttaa tätä lompakkoa tai siinä olevia varoja,</0> se palauttaa vain pääsyn edellä mainittuun protokollaan",
+            "recovery_phrase": "Palautuslause, joka <0>varmuuskopioi pääavaimesi</0>, koostuu kahdestatoista sanasta"
+          },
+          "error_confirm": "Ole hyvä ja vahvista, että olet varmuuskopioinut palautuslausekkeen.",
+          "import": {
+            "title": "Tuo pääavaimesi",
+            "description": "Käytä palautuslausetta tuodaksesi pääavaimesi Albyyn.",
+            "button": "Tuo pääavain"
+          },
+          "inputs": {
+            "title": "Palautuslause pääavaimellesi"
+          },
+          "generate": {
+            "description": "Pääavaimen avulla voit olla vuorovaikutuksessa eri protokollien kanssa, kuten: Nostr, Bitcoinin peruskerros tai LNURL-Auth.",
+            "title": "Luo uusi pääavain",
+            "button": "Luo pääavain"
+          },
+          "existing_nostr_key_notice": "ℹ️ Tälle tilille on jo määritetty yksityinen Nostr-avain, eikä sitä johdeta tästä pääavaimesta. Voit hallita Nostr-avainta tilisi asetuksista.",
+          "confirm": "Olen varmuuskopioinut palautuslauseen pääavaimelleni yksityiseen ja turvalliseen paikkaan."
+        },
+        "network": {
+          "title": "Bitcoin-verkko",
+          "subtitle": "Valitse verkko osoitteiden johtamiseksi ja tapahtumien purkamiseksi.",
+          "options": {
+            "testnet": "Testnet",
+            "bitcoin": "Mainnet",
+            "regtest": "Regtest"
+          }
+        },
+        "nostr": {
+          "settings": {
+            "title": "Nostr-asetukset",
+            "derive": "Johda pääavaimesta",
+            "no_secret_key": "💡 Sinulla ei ole vielä pääavainta. Luo pääavaimesi ja johda Nostr-avaimesi <0>napsauttamalla tätä</0></div>.",
+            "remove": "Poista nykyiset avaimet",
+            "imported_key_warning": "Käytät tällä hetkellä tuotua tai satunnaisesti luotua Nostr-avainta. Yksityistä Nostr-avainta ei voi palauttaa palautuslauseellasi, joten muista varmuuskopioida yksityinen Nostr-avaimesi erikseen.",
+            "label": "Nostr-asetukset",
+            "nostr_keys": {
+              "title": "Nostr-avaimet",
+              "description": "Johda Nostr-avaimet pääavaimestasi tai tuo olemassa oleva yksityinen avain liittämällä se \"Yksityinen Nostr-avain\"-kenttään."
+            },
+            "remove_keys": {
+              "title": "Poista Nostr-avaimet",
+              "description": "Poistaa nykyiset Nostr-avaimet tästä lompakosta."
+            },
+            "nostr_address": {
+              "title": "Nostr-osoite",
+              "manage_nostr_address": {
+                "description_alternate": "{{lnaddress}}:ta <0> ei ole asetettu</0> Nostr-osoitteeksesi",
+                "title": "Nostr-osoitteesi",
+                "description": "{{lnaddress}} asetettiin <0>{{npub}}</0>:een",
+                "set_nip05": "Aseta getalby.comilla"
+              },
+              "description": "Voit käyttää Lightning-osoitettasi Nostr-osoitteena (NIP-05) ja antaa ihmisten löytää Nostr-profiilisi helposti."
+            },
+            "can_restore": "Nykyiset Nostr-avaimesi on johdettu pääavaimesta."
+          },
+          "private_key": {
+            "title": "Hallinnoi yksityistä Nostr-avainta",
+            "successfully_removed": "Yksityinen Nostr -avain poistettu onnistuneesti.",
+            "warning": "Haluatko varmasti poistaa yksityisen Nostr-avaimesi?\n\nVahvista kirjoittamalla \"{{name}}\":",
+            "failed_to_remove": "Syötetty tilin nimi ei täsmää, vanha Nostr-yksityinen avaimesi on palautettu.",
+            "label": "Yyksityinen Nostr -avain",
+            "subtitle": "Liitä yksityinen Nostr-avaimesi tai luo uusi. <0>Lisätietoja »</0>",
+            "success": "Yksityinen Nostr -avain salattu ja tallennettu onnistuneesti."
+          },
+          "hint": "on yksinkertainen ja avoin protokolla, jonka tarkoituksena on luoda sensuurin kestäviä sosiaalisia verkostoja. Nostr toimii kryptografisten avaimilla. Jos haluat julkaista jotain, allekirjoita se avaimellasi ja lähetä se useille välittäjille. Voit käyttää Albyä Nostr-avaimen hallintaan. Monet Nostr-sovellukset sallivat sitten yksinkertaisesti käyttää avainta Alby-laajennuksesta.",
+          "generate_keys": {
+            "screen_reader": "Luo tilillesi uusi Nostr-avain",
+            "hint": "Voit luoda satunnaisen avaimen tai johdetun avaimen näistä tilitiedoista (käyttäen allekirjoitettua kanonista lausetta). <0>Lisätietoja »</0>",
+            "title": "Luo uusi Nostr-avain",
+            "actions": {
+              "random_keys": "Luo satunnainen avain",
+              "derived_keys": "Johda avain tililtä"
+            }
+          },
+          "setup": {
+            "description2": "Jokaisella Albyssa luodulla Nostr-tilillä on <0>palautuslause</0> – kahdentoista sanan merkkijono, jonka avulla voit aina saada takaisin pääsyn yksityisiin Nostr-avaimiisi.",
+            "title": "Määritä Nostr-avaimesi",
+            "description": "Valitse haluatko luoda uuden Nostr-tilin (yksityisen ja julkisen avaimen pari) tai tuoda olemassa olevan.",
+            "new": {
+              "description": "Luo pääavain uudella Nostr-avainparilla.",
+              "label": "Luo uusi Nostr-tili"
+            }
+          },
+          "public_key": {
+            "label": "Julkinen Nostr-avain"
+          },
+          "errors": {
+            "failed_to_load": "Nostr-avaimen lataaminen epäonnistui. Onko se kelvollinen Nostr-avain?"
+          },
+          "actions": {
+            "generate": "Luo uusi avain"
+          },
+          "title": "Nostr"
+        },
+        "actions": {
+          "export": "Vie",
+          "disconnect_wallet": "Katkaise yhteys lompakolta",
+          "remove_secretkey": "Poista pääavain",
+          "connect_mobile_wallet": "Yhdistä mobiililompakkoon"
+        },
+        "remove": {
+          "subtitle": "Kaikki linkitetyt pääsyoikeudet poistetaan. Ole varma.",
+          "confirm": "Haluatko varmasti poistaa lompakkosi?\n\n⚠️ Kaikki liittyvät avaimet (pääavain, Nostr jne.) poistetaan, jos jatkat. Varmista, että olet varmuuskopioinut ne, sillä ei ole muuta tapaa palauttaa niitä.\n\nVahvista kirjoittamalla \"{{name}}\":",
+          "error": "Syötetty tilin nimi ei täsmännyt.",
+          "title": "Poista tämä lompakko"
+        },
+        "export": {
+          "your_ln_address": "Lightning-osoitteesi:",
+          "waiting": "odottamassa LndHub-tietoja...",
+          "title": "Yhdistä mobiililompakkoon",
+          "scan_qr": "Tuo tämä lompakko Zeusiin tai BlueWalletiin skannaamalla QRCode.",
+          "description": "Kirjaudu sisään getalby.comiin yhdistääksesi ja käyttääksesi tätä tiliä mobiililompakoissa, kuten <0>Zeus</0> ja <1>Blue Wallet</1>.",
+          "screen_reader": "Vie tilin yksityiskohdat",
+          "export_uri": "LNDHub-tunnistetietojen URI"
+        },
+        "remove_secretkey": {
+          "success": "Pääavaimen poistaminen onnistui.",
+          "title": "Poista pääavain",
+          "subtitle": "Poistaa pääavaimen tästä lompakosta.",
+          "confirm": "Oletko varma, että haluat poistaa pääavaimesi?\n\nVahvista kirjoittamalla \"{{ name }}\":"
+        },
+        "name": {
+          "placeholder": "Tilin näytön nimi",
+          "title": "Näytön nimi"
+        },
+        "description": "Asetukset, jotka liittyvät tähän yhdistetyn lompakon istuntoon. Jos muodostat yhteyden uudelleen, näppäimiin tai näyttönimeen liittyvät asetukset on määritettävä uudelleen.",
+        "lnaddress": {
+          "title": "Lightningin osoite"
+        },
+        "danger_zone": "Vaarallinen vyöhyke",
+        "no_mnemonic_hint": "💡 Sinulla ei ole vielä pääavainta. Luo pääavaimesi ja avaa näiden asetusten lukitus <0>napsauttamalla tätä</0></div>."
+      }
+    },
+    "alby": {
+      "pre_connect": {
+        "set_password": {
+          "errors": {
+            "confirm_password": "Vahvista salasanasi.",
+            "enter_password": "Ole hyvä ja syötä salasana.",
+            "mismatched_password": "Salasanat eivät täsmää."
+          },
+          "choose_password": {
+            "label": "Salasana"
+          },
+          "confirm_password": {
+            "label": "Vahvista salasana"
+          }
+        }
+      }
+    },
+    "choose_path": {
+      "other": {
+        "description": "Parasta, jos sinulla on jo lompakko tai omistat lightning-solmun.",
+        "title": "Tuo oma lompakkosi",
+        "connect": "Löydä lompakkosi",
+        "point1": "Sekä omahuollon että säilytysvaihtoehdot",
+        "point3": "Aloita heti, ei kutsun odottamista",
+        "point2": "Ei lightningia ja nostr-osoitetta"
+      },
+      "alby": {
+        "point2": "Ainutlaatuinen lightning ja nostr-osoite",
+        "connect": "Jatka Alby-tilillä",
+        "title": "Alby-tili",
+        "point1": "Uusi omavarainen lompakko — <0>Alby Hub</0>",
+        "description": "Ihanteellinen, jos haluat nauttia sovelluksista samalla kun hallitset bitcoinejasi.",
+        "point3": "Uudet rekisteröinnit vaativat kutsukoodin"
+      },
+      "title": "Yhdistä Alby Extension lompakkoon"
+    },
+    "distributions": {
+      "description": "Valitse, mihin {{name}}-sovellukseen haluat muodostaa yhteyden",
+      "startos": {
+        "name": "StartOS"
+      },
+      "citadel": {
+        "name": "Citadel"
+      },
+      "btcpay": {
+        "name": "BTCPay"
+      },
+      "umbrel": {
+        "name": "Umbrel"
+      },
+      "title": "Yhdistä {{name}}:hen",
+      "raspiblitz": {
+        "name": "Raspiblitz"
+      },
+      "mynode": {
+        "name": "myNode"
+      }
     }
   },
   "common": {

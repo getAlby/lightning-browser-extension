@@ -32,12 +32,10 @@
     },
     "choose_path": {
       "other": {
-        "title": "Άλλα πορτοφόλια",
-        "connect": "Σύνδεση"
+        "title": "Άλλα πορτοφόλια"
       },
       "alby": {
-        "title": "Λογαριασμός Alby",
-        "connect": "Σύνδεση με Alby"
+        "title": "Λογαριασμός Alby"
       }
     },
     "alby": {

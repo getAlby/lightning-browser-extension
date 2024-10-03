@@ -10,11 +10,14 @@ import { useEffect, useRef, useState } from "react";
 import Confetti from "react-confetti";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import Avatar from "~/app/components/Avatar";
 import QRCode from "~/app/components/QRCode";
 import ResultCard from "~/app/components/ResultCard";
+import SkeletonLoader from "~/app/components/SkeletonLoader";
 import toast from "~/app/components/Toast";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
+import { isAlbyOAuthAccount } from "~/app/utils";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import { poll } from "~/common/utils/helpers";
@@ -43,6 +46,7 @@ function ReceiveInvoice() {
   const [paid, setPaid] = useState(false);
   const [pollingForPayment, setPollingForPayment] = useState(false);
   const mounted = useRef(false);
+  const isAlbyOAuthUser = isAlbyOAuthAccount(auth.account?.connectorType);
 
   useEffect(() => {
     mounted.current = true;
@@ -125,10 +129,38 @@ function ReceiveInvoice() {
           <>
             <div className="mt-4 flex justify-center items-center">
               <div className="bg-white dark:bg-surface-01dp border-gray-200 dark:border-neutral-700  p-4 rounded-md border max-w-md">
-                <QRCode
-                  value={invoice.paymentRequest.toUpperCase()}
-                  size={512}
-                />
+                <div className="relative flex items-center justify-center">
+                  <QRCode
+                    value={invoice.paymentRequest.toUpperCase()}
+                    size={512}
+                  />
+                  {isAlbyOAuthUser ? (
+                    <>
+                      {!auth.accountLoading && auth.account ? (
+                        <Avatar
+                          size={64}
+                          className="border-[6px] border-white rounded-full absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 bg-white"
+                          url={auth.account.avatarUrl}
+                          name={auth.account.id}
+                        />
+                      ) : (
+                        auth.accountLoading && (
+                          <SkeletonLoader
+                            circle
+                            opaque={false}
+                            className="w-[64px] h-[64px] border-[6px] border-white rounded-full absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 opacity-100"
+                          />
+                        )
+                      )}
+                    </>
+                  ) : (
+                    <img
+                      className="w-[64px] h-[64px] absolute z-10"
+                      src="assets/icons/alby_icon_qr.svg"
+                      alt="Alby logo"
+                    />
+                  )}
+                </div>
               </div>
             </div>
             <div className="mt-4 mb-4 flex justify-center">

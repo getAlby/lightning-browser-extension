@@ -22,7 +22,7 @@ const paymentSuccessNotification = async (
 
   const route = paymentResponseData?.data.route;
   const { total_amt, total_fees } = route;
-  const paymentAmount = total_amt - total_fees;
+  const paymentAmount = total_amt;
 
   const { settings } = state.getState();
   const { showFiat, currency, locale } = settings;

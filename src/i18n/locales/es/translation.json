@@ -149,12 +149,21 @@
         "title": "Billetera de Blink",
         "page": {
           "title": "Conecta a <0>La cartera Blink</0>"
+        },
+        "token": {
+          "label": "Introduzca su clave API"
         }
       },
       "bitcoin_jungle": {
         "title": "Billetera de Bitcoin Jungle",
         "page": {
           "title": "Conecta a <0>La cartera Bitcoin Jungle</0>"
+        },
+        "token": {
+          "label": "Introduzca su código de acceso"
+        },
+        "currency": {
+          "label": "Elija cartera"
         }
       },
       "btcpay": {
@@ -249,6 +258,17 @@
       "title": "Conecta la Billetera Lightning",
       "umbrel_lightning_node": {
         "title": "Lightning Node"
+      },
+      "galoy": {
+        "sms_code": {
+          "label": "Ingrese su código de verificación de SMS"
+        },
+        "actions": {
+          "login": "Ingresar"
+        },
+        "phone_number": {
+          "label": "Ingrese su número telefónico"
+        }
       }
     },
     "home": {
@@ -521,21 +541,19 @@
     "choose_path": {
       "alby": {
         "title": "Cuenta de Alby",
-        "connect": "Conectar con Alby",
-        "description": "Ideal para principiantes o cualquiera que busque una excelente billetera para el uso diario.",
-        "point1": "Los nuevos registros requieren un código de invitación",
-        "point2": "Se aplican límites de volumen de transacciones",
-        "point3": "Configura e inicia sesión con tu correo electrónico",
-        "point4": "Dirección única de Lightning y Nostr"
+        "point1": "Los nuevos registros requieren un código de invitación. Nueva cartera auto-custodiada",
+        "point2": "Dirección única de lightning y nostr",
+        "description": "Es ideal si  quisieras disfrutar las apps mientras mantienes el control de tu bitcoin",
+        "connect": "Continuar con la cuenta de Alby",
+        "point3": "Las nuevas suscripciones requieren un código de invitación"
       },
       "other": {
         "title": "Lleve su propia cartera",
-        "connect": "Conectar",
-        "point1": "Empieza al instante, sin esperar invitación",
-        "point2": "Sin límite de transacciones ni de importe",
-        "description": "Lo mejor si ya tienes un monedero o necesitas hacer pagos de mucho importe.",
-        "point3": "Opciones de autocustodia y custodia",
-        "point4": "Sin dirección relámpago y nostr"
+        "point1": "Ambas opciones: Autocustodia o custodiada",
+        "point2": "No hay dirección lightning y nostr",
+        "description": "Es mejor si ya tienes una cartera o tu propio nodo lightning",
+        "point3": "Comenzar inmediatamente, no esperar invitación",
+        "connect": "Encuentra tu cartera"
       },
       "title": "Conectar la cartera a la extensión Alby"
     },

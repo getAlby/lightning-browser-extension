@@ -6,7 +6,6 @@ import encryptOrPrompt from "./encryptOrPrompt";
 import generatePrivateKey from "./generatePrivateKey";
 import getPrivateKey from "./getPrivateKey";
 import getPublicKeyOrPrompt from "./getPublicKeyOrPrompt";
-import getRelays from "./getRelays";
 import isEnabled from "./isEnabled";
 import nip44DecryptOrPrompt from "./nip44DecryptOrPrompt";
 import nip44EncryptOrPrompt from "./nip44EncryptOrPrompt";
@@ -23,7 +22,6 @@ export {
   getPrivateKey,
   getPublicKey,
   getPublicKeyOrPrompt,
-  getRelays,
   isEnabled,
   nip44DecryptOrPrompt,
   nip44EncryptOrPrompt,

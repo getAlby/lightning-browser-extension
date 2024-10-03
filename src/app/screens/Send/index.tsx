@@ -33,8 +33,15 @@ function Send() {
       setLoading(true);
 
       let lnurl = lnurlLib.findLnurl(invoice);
-      if (!lnurl && lnurlLib.isLightningAddress(invoice)) {
+
+      if (lnurlLib.isLightningAddress(invoice)) {
         lnurl = invoice;
+      }
+
+      if (lnurl?.endsWith("phoenixwallet.me")) {
+        throw new Error(
+          "Paying Phoenix addresses is not possible. Phoenix is not compatible with the current state of lightning addresses as they use a different protocol."
+        );
       }
 
       if (lnurl) {

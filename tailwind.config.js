@@ -1,5 +1,6 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
 const colors = require("tailwindcss/colors");
+const plugin = require("tailwindcss/plugin");
 
 function lighten(color, percent) {
   var num = parseInt(color.replace("#", ""), 16),
@@ -25,7 +26,17 @@ const surfaceColor = "#121212";
 module.exports = {
   darkMode: "class",
   content: ["./static/views/**/*.html", "./src/app/**/*.{js,ts,jsx,tsx}"],
-  plugins: [require("tailwindcss-3d"), require("@tailwindcss/forms")],
+  plugins: [
+    plugin(function ({ addUtilities }) {
+      const newUtilities = {
+        ".translate-z-0": {
+          transform: "translateZ(0)",
+        },
+      };
+      addUtilities(newUtilities);
+    }),
+    require("@tailwindcss/forms"),
+  ],
   theme: {
     extend: {
       animation: {

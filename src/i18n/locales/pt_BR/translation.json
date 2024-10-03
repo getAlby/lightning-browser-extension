@@ -312,10 +312,7 @@
             "title": "Deposite bitcoin",
             "description": "Receba satoshis usando um endereço relâmpago, fatura relâmpago ou endereço bitcoin"
           },
-          "setup_keys": {
-            "title": "Configure suas chaves",
-            "description": "Faça o backup da sua chave mestra ou importe uma conta Nostr"
-          }
+          "setup_keys": {}
         }
       }
     },
@@ -579,7 +576,7 @@
         "subtitle": "Exibe no navegador notificações da Alby relacionadas a pagamentos e autenticação.",
         "title": "Notificações do navegador"
       },
-      "title": "Configurações da extensão",
+      "title": "Configurações",
       "general": {
         "title": "Geral"
       },
@@ -739,13 +736,23 @@
         "4": {
           "title": "mensagem direta"
         },
+        "7": {
+          "title": "reagir"
+        },
         "9734": {
           "title": "solicitar zap"
+        },
+        "10002": {
+          "title": "atualizar relays"
+        },
+        "22242": {
+          "title": "autenticar"
         },
         "30023": {
           "title": "nota longa"
         }
-      }
+      },
+      "allow": "Permitir {{publisher}} {{action}}"
     },
     "confirm_request_permission": {
       "title": "Aprovar solicitação",
@@ -755,21 +762,19 @@
     "choose_path": {
       "alby": {
         "title": "Conta Alby",
+        "point1": "Nova carteira com autocustódia — <0>Alby Hub</0>",
         "connect": "Conecte-se com a Alby",
-        "description": "Ideal para iniciantes que procuram uma ótima carteira para gastos do dia a dia.",
-        "point3": "Cadastro e acesso por e-mail",
-        "point1": "Necessita de convite para criar conta",
-        "point4": "Endereços relâmpago e nostr exclusivos",
-        "point2": "Limites de transação"
+        "point3": "Necessita de convite para criar conta",
+        "point2": "Endereço relâmpago e nostr exclusivos",
+        "description": "Ideal para iniciantes que procuram uma ótima carteira para gastos do dia a dia."
       },
       "other": {
         "title": "Outras carteiras",
+        "point1": "Opções de autocustódia e custódia delegada",
         "connect": "Escolher carteira",
-        "description": "Ideal para quem já possui uma carteira e precisa fazer pagamentos de quantias altas.",
-        "point1": "Acesso instantâneo, não precisa de convite",
-        "point4": "Sem endereço relâmpago e nostr",
-        "point3": "Opções de autocustódia ou custódia delegada",
-        "point2": "Sem limites de transação"
+        "point2": "Sem endereço relâmpago e nostr",
+        "description": "Ideal para quem já possui uma carteira e deseja conectá-la na extensão.",
+        "point3": "Pronta para o uso, não precisa de convite"
       },
       "title": "Conecte carteiras na extensão Alby"
     },
@@ -1052,9 +1057,9 @@
     "apps": "Apps",
     "full_screen": "Tela cheia",
     "hide_advanced": "Ocultar configurações avançadas",
-    "settings": "Configurações da extensão",
+    "settings": "Configurações",
     "details": "Detalhes",
-    "wallet_settings": "Configurações da carteira",
+    "wallet_settings": "Preferências da carteira",
     "general": "Geral"
   },
   "components": {
