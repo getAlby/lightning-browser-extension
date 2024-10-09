@@ -84,7 +84,7 @@ export default function TestConnection() {
     <div>
       {account?.nodeRequired && (
         <div className="mt-14">
-          <Alert type="info">
+          <Alert type="warn">
             <div className="flex items-center gap-2">
               <div className="shrink-0">
                 <PopiconsCircleExclamationLine className="w-5 h-5" />
