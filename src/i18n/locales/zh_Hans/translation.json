@@ -321,7 +321,6 @@
       "default_view": {
         "is_blocked_hint": "Alby 目前在 {{host}} 上被禁用",
         "block_removed": "启用了{{host}}。请重新加载网站。",
-        "node_required": "你的 Albby 账户需要设置一个钱包。前往 <0>getalby.com</0> 连接你的钱包",
         "actions": {
           "setup_keys": {
             "description": "保管你的主密钥或导入已有 Nostr 账户",
@@ -732,21 +731,73 @@
       "content": "该网站要求你签署:",
       "block_added": "已将{{host}}添加到屏蔽列表，请重新加载网站。",
       "kinds": {
+        "0": {
+          "title": "更新资料",
+          "description": "更新你的用户名、描述、头像、Nostr 地址和其他资料元数据。"
+        },
         "1": {
           "title": "短文本消息",
           "description": "签署短文本消息"
+        },
+        "2": {
+          "description": "分享推荐的中继",
+          "title": "推荐中继"
+        },
+        "3": {
+          "description": "更新你的关注列表中的账户",
+          "title": "更新关注列表"
+        },
+        "4": {
+          "title": "私信",
+          "description": "发送加密私信"
         },
         "5": {
           "title": "删除",
           "description": "请求中继删除事件"
         },
+        "6": {
+          "description": "转发笔记",
+          "title": "转发"
+        },
+        "7": {
+          "title": "回应",
+          "description": "签署对笔记的回应"
+        },
+        "8": {
+          "description": "授予一个徽章给一个 Nostr 账户",
+          "title": "徽章授予"
+        },
+        "40": {
+          "title": "创建频道",
+          "description": "创建一个公共聊天频道"
+        },
+        "41": {
+          "title": "更新频道",
+          "description": "更新频道的名称、描述、头像和其他额外元数据"
+        },
+        "42": {
+          "title": "发送频道消息",
+          "description": "发送文本消息到频道"
+        },
+        "43": {
+          "description": "隐藏频道中的文本消息",
+          "title": "隐藏频道消息"
+        },
         "44": {
           "description": "隐藏特定 Nostr 公钥用户的所有消息",
           "title": "静音频道用户"
         },
-        "30009": {
-          "description": "创建新徽章",
-          "title": "创建徽章"
+        "1984": {
+          "title": "举报笔记",
+          "description": "举报笔记（垃圾、违法或露骨内容）"
+        },
+        "9734": {
+          "title": "请求打闪",
+          "description": "请求一个闪电网络付款"
+        },
+        "9735": {
+          "description": "显示已支付的闪电发票的确认消息",
+          "title": "打闪收据"
         },
         "10000": {
           "title": "静音列表",
@@ -756,17 +807,29 @@
           "title": "中继列表",
           "description": "更新用于接收和发送你的和其他人的笔记的中继偏好"
         },
-        "27235": {
-          "description": "HTTP 验证",
-          "title": "HTTP 验证"
-        },
         "10003": {
           "title": "书签",
           "description": "为用户贴文加书签"
         },
+        "22242": {
+          "description": "对中继进行身份验证",
+          "title": "客户端验证"
+        },
         "24133": {
           "description": "远程请求和签署事件",
           "title": "远程签名"
+        },
+        "27235": {
+          "description": "HTTP 验证",
+          "title": "HTTP 验证"
+        },
+        "30008": {
+          "description": "接受、拒绝徽章和修改徽章显示顺序",
+          "title": "徽章"
+        },
+        "30009": {
+          "description": "创建新徽章",
+          "title": "创建徽章"
         },
         "30023": {
           "description": "签署类似文章的长篇内容",
@@ -780,73 +843,9 @@
           "title": "上传块",
           "description": "以块的形式上传数据"
         },
-        "3": {
-          "description": "更新你的关注列表中的账户",
-          "title": "更新关注列表"
-        },
-        "7": {
-          "title": "回应",
-          "description": "签署对笔记的回应"
-        },
-        "4": {
-          "title": "私信",
-          "description": "发送加密私信"
-        },
-        "8": {
-          "description": "授予一个徽章给一个 Nostr 账户",
-          "title": "徽章授予"
-        },
-        "40": {
-          "title": "创建频道",
-          "description": "创建一个公共聊天频道"
-        },
-        "43": {
-          "description": "隐藏频道中的文本消息",
-          "title": "隐藏频道消息"
-        },
-        "42": {
-          "title": "发送频道消息",
-          "description": "发送文本消息到频道"
-        },
-        "9734": {
-          "title": "请求打闪",
-          "description": "请求一个闪电网络付款"
-        },
-        "9735": {
-          "description": "显示已支付的闪电发票的确认消息",
-          "title": "打闪收据"
-        },
-        "22242": {
-          "description": "对中继进行身份验证",
-          "title": "客户端验证"
-        },
-        "30008": {
-          "description": "接受、拒绝徽章和修改徽章显示顺序",
-          "title": "徽章"
-        },
         "unknown": {
           "description": "未知操作",
           "title": "kind {{kind}}"
-        },
-        "0": {
-          "title": "更新资料",
-          "description": "更新你的用户名、描述、头像、Nostr 地址和其他资料元数据。"
-        },
-        "2": {
-          "description": "分享推荐的中继",
-          "title": "推荐中继"
-        },
-        "6": {
-          "description": "转发笔记",
-          "title": "转发"
-        },
-        "41": {
-          "title": "更新频道",
-          "description": "更新频道的名称、描述、头像和其他额外元数据"
-        },
-        "1984": {
-          "title": "举报笔记",
-          "description": "举报笔记（垃圾、违法或露骨内容）"
         }
       },
       "recipient": "收件人",
