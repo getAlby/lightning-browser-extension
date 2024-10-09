@@ -34,7 +34,6 @@ import NostrSettings from "~/app/screens/Accounts/NostrSettings";
 
 import LNURLRedeem from "~/app/screens/LNURLRedeem";
 import OnChainReceive from "~/app/screens/OnChainReceive";
-import NodeSetup from "~/app/screens/Onboard/NodeSetup";
 import ReceiveInvoice from "~/app/screens/ReceiveInvoice";
 import ScanQRCode from "~/app/screens/ScanQRCode";
 import SendToBitcoinAddress from "~/app/screens/SendToBitcoinAddress";
@@ -82,7 +81,6 @@ function Options() {
             <Route path="lnurlAuth" element={<LNURLAuth />} />
             <Route path="settings" element={<Settings />} />
             <Route path="scanQRCode" element={<ScanQRCode />} />
-            <Route path="node-setup" element={<NodeSetup />} />
             <Route path="accounts">
               <Route index element={<Accounts />} />
               <Route path=":id" element={<AccountDetailLayout />}>

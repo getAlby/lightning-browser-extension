@@ -186,7 +186,7 @@ const DefaultView: FC<Props> = (props) => {
                     // eslint-disable-next-line react/jsx-key
                     <a
                       className="underline"
-                      href="https://getalby.com"
+                      href="https://getalby.com/onboarding/node/new"
                       target="_blank"
                       rel="noreferrer"
                     />,

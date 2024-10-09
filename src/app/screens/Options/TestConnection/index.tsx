@@ -1,9 +1,13 @@
 import Button from "@components/Button";
 import Loading from "@components/Loading";
-import { PopiconsBadgeCheckSolid } from "@popicons/react";
+import {
+  PopiconsBadgeCheckSolid,
+  PopiconsCircleExclamationLine,
+} from "@popicons/react";
 import { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import Alert from "~/app/components/Alert";
 import { useAccount } from "~/app/context/AccountContext";
 import { useAccounts } from "~/app/context/AccountsContext";
 import { useSettings } from "~/app/context/SettingsContext";
@@ -78,7 +82,33 @@ export default function TestConnection() {
 
   return (
     <div>
-      <div className="relative mt-14 lg:grid lg:grid-cols-2 lg:gap-8 bg-white dark:bg-surface-02dp p-12 shadow rounded-lg">
+      {account?.nodeRequired && (
+        <div className="mt-14">
+          <Alert type="info">
+            <div className="flex items-center gap-2">
+              <div className="shrink-0">
+                <PopiconsCircleExclamationLine className="w-5 h-5" />
+              </div>
+              <span className="text-sm">
+                <Trans
+                  i18nKey={"node_required"}
+                  t={t}
+                  components={[
+                    // eslint-disable-next-line react/jsx-key
+                    <a
+                      className="underline"
+                      href="https://getalby.com/onboarding/node/new"
+                      target="_blank"
+                      rel="noreferrer"
+                    />,
+                  ]}
+                />
+              </span>
+            </div>
+          </Alert>
+        </div>
+      )}
+      <div className="relative mt-6 lg:grid lg:grid-cols-2 lg:gap-8 bg-white dark:bg-surface-02dp p-12 shadow rounded-lg">
         <div className="relative">
           <div>
             {errorMessage && (
@@ -130,16 +160,6 @@ export default function TestConnection() {
                     }
                   />
                 </div>
-                {account?.nodeRequired && (
-                  <div className="flex mt-6">
-                    <Button
-                      label={"Continue to Setup Node"}
-                      primary
-                      flex
-                      onClick={() => navigate("/node-setup")}
-                    />
-                  </div>
-                )}
               </div>
             )}
             {loading && (

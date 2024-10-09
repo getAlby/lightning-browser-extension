@@ -10,7 +10,6 @@ import Toaster from "~/app/components/Toast/Toaster";
 import { AccountProvider } from "~/app/context/AccountContext";
 import { SettingsProvider } from "~/app/context/SettingsContext";
 import { getConnectorRoutes, renderRoutes } from "~/app/router/connectorRoutes";
-import NodeSetup from "~/app/screens/Onboard/NodeSetup";
 import ChooseConnectorPath from "~/app/screens/connectors/ChooseConnectorPath";
 import i18n from "~/i18n/i18nConfig";
 
@@ -45,7 +44,6 @@ function Welcome() {
               </Route>
               <Route path="test-connection" element={<TestConnection />} />
               <Route path="pin-extension" element={<PinExtension />} />
-              <Route path="node-setup" element={<NodeSetup />} />
             </Route>
           </Routes>
         </Router>
