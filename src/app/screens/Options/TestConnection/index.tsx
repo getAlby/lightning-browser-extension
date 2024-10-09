@@ -82,33 +82,7 @@ export default function TestConnection() {
 
   return (
     <div>
-      {account?.nodeRequired && (
-        <div className="mt-14">
-          <Alert type="warn">
-            <div className="flex items-center gap-2">
-              <div className="shrink-0">
-                <PopiconsCircleExclamationLine className="w-5 h-5" />
-              </div>
-              <span className="text-sm">
-                <Trans
-                  i18nKey={"node_required"}
-                  t={t}
-                  components={[
-                    // eslint-disable-next-line react/jsx-key
-                    <a
-                      className="underline"
-                      href="https://getalby.com/onboarding/node/new"
-                      target="_blank"
-                      rel="noreferrer"
-                    />,
-                  ]}
-                />
-              </span>
-            </div>
-          </Alert>
-        </div>
-      )}
-      <div className="relative mt-6 lg:grid lg:grid-cols-2 lg:gap-8 bg-white dark:bg-surface-02dp p-12 shadow rounded-lg">
+      <div className="relative mt-14 lg:grid lg:grid-cols-1 lg:gap-8 bg-white dark:bg-surface-02dp p-12 shadow rounded-lg">
         <div className="relative">
           <div>
             {errorMessage && (
@@ -144,6 +118,33 @@ export default function TestConnection() {
 
                 <p className="mt-6 dark:text-gray-400"></p>
                 <p className="mt-6 dark:text-neutral-400">{t("ready")}</p>
+
+                {account?.nodeRequired && (
+                  <div className="mt-6">
+                    <Alert type="info">
+                      <div className="flex items-center gap-2">
+                        <div className="shrink-0">
+                          <PopiconsCircleExclamationLine className="w-5 h-5" />
+                        </div>
+                        <span className="text-sm">
+                          <Trans
+                            i18nKey={"node_required"}
+                            t={t}
+                            components={[
+                              // eslint-disable-next-line react/jsx-key
+                              <a
+                                className="underline"
+                                href="https://getalby.com/onboarding/node/new"
+                                target="_blank"
+                                rel="noreferrer"
+                              />,
+                            ]}
+                          />
+                        </span>
+                      </div>
+                    </Alert>
+                  </div>
+                )}
 
                 <div className="mt-6">
                   <TestConnectionResultCard
