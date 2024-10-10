@@ -427,10 +427,7 @@
             "title": "Bitcoin erhalten",
             "description": "Zahle auf dein Konto ein und empfange über deine Lightning Adresse oder eine Rechnung"
           },
-          "setup_keys": {
-            "title": "Einrichten deiner Schlüssel",
-            "description": "Kümmer dich um deinen Master Key oder importiere dein bestehendes Nostr-Konto"
-          }
+          "setup_keys": {}
         },
         "upgrade_account": "Du verwendest die alte LNDHub-Einstellung. <0>Bitte verbinde dich erneut</0> mit deinem Alby-Konto, um Zugang zu den neuesten Funktionen zu erhalten."
       },

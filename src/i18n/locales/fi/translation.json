@@ -326,10 +326,7 @@
             "description": "Oletko uusi Alby-laajennuksen käyttäjä? Tutustu oppaihimme, videoihimme ja selityksiimme",
             "title": "Aloita Alby-laajennuksen käyttö"
           },
-          "setup_keys": {
-            "title": "Määritä avaimesi",
-            "description": "Pidä huolta pääavaimestasi tai tuo olemassa oleva Nostr-tilisi"
-          },
+          "setup_keys": {},
           "receive_bitcoin": {
             "title": "Vastaanota bitcoineja",
             "description": "Rahoita tiliäsi ja vastaanota Lightning-osoitteesi tai laskun kautta"

@@ -312,10 +312,7 @@
             "title": "Deposite bitcoin",
             "description": "Receba satoshis usando um endereço relâmpago, fatura relâmpago ou endereço bitcoin"
           },
-          "setup_keys": {
-            "title": "Configure suas chaves",
-            "description": "Faça o backup da sua chave mestra ou importe uma conta Nostr"
-          }
+          "setup_keys": {}
         }
       }
     },
@@ -739,20 +736,20 @@
         "4": {
           "title": "mensagem direta"
         },
+        "7": {
+          "title": "reagir"
+        },
         "9734": {
           "title": "solicitar zap"
         },
-        "30023": {
-          "title": "nota longa"
-        },
-        "7": {
-          "title": "reagir"
+        "10002": {
+          "title": "atualizar relays"
         },
         "22242": {
           "title": "autenticar"
         },
-        "10002": {
-          "title": "atualizar relays"
+        "30023": {
+          "title": "nota longa"
         }
       },
       "allow": "Permitir {{publisher}} {{action}}"
