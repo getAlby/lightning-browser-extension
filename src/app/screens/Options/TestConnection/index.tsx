@@ -117,9 +117,7 @@ export default function TestConnection() {
                 </div>
 
                 <p className="mt-6 dark:text-gray-400"></p>
-                <p className="mt-6 dark:text-neutral-400">{t("ready")}</p>
-
-                {account?.nodeRequired && (
+                {account?.nodeRequired ? (
                   <div className="mt-6">
                     <Alert type="info">
                       <div className="flex items-center gap-2">
@@ -144,9 +142,11 @@ export default function TestConnection() {
                       </div>
                     </Alert>
                   </div>
+                ) : (
+                  <p className="mt-6 dark:text-neutral-400">{t("ready")}</p>
                 )}
 
-                <div className="mt-6">
+                <div className="mt-6 lg:grid lg:grid-cols-2">
                   <TestConnectionResultCard
                     color="bg-gray-100"
                     accountName={accountInfo.name}
