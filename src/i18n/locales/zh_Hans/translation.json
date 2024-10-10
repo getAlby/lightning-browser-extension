@@ -321,7 +321,6 @@
       "default_view": {
         "is_blocked_hint": "Alby 目前在 {{host}} 上被禁用",
         "block_removed": "启用了{{host}}。请重新加载网站。",
-        "node_required": "你的 Albby 账户需要设置一个钱包。前往 <0>getalby.com</0> 连接你的钱包",
         "actions": {
           "setup_keys": {},
           "get_started": {

@@ -432,7 +432,6 @@
             "description": "Erstelle einen Master Key für Bitcoin, Nostr und Liquid oder importiere ein bestehendes Nostr-Konto."
           }
         },
-        "node_required": "Ihr Alby-Konto benötigt eine Brieftasche. Verbinde deine Brieftasche mit deinem Konto auf <0>getalby.com</0>",
         "upgrade_account": "Du verwendest die alte LNDHub-Einstellung. <0>Bitte verbinde dich erneut</0> mit deinem Alby-Konto, um Zugang zu den neuesten Funktionen zu erhalten."
       },
       "allowance_view": {

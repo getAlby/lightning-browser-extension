@@ -332,7 +332,6 @@
             "description": "Rahoita tiliäsi ja vastaanota Lightning-osoitteesi tai laskun kautta"
           }
         },
-        "node_required": "Alby-tilisi tarvitsee lompakon. Yhdistä lompakko tiliisi <0>getalby.com</0>:ssa",
         "upgrade_account": "Käytät vanhaa LNDHub-kokoonpanoa. <0>Yhdistä uudelleen</0> Alby-tilisi, jotta pääset käyttämään uusimpia ominaisuuksia.",
         "no_transactions": "Ei vielä tapahtumia tällä tilillä.",
         "block_removed": "Käytössä {{host}}. Ole hyvä ja lataa verkkosivusto uudelleen.",

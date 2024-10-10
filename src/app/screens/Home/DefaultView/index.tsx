@@ -173,7 +173,7 @@ const DefaultView: FC<Props> = (props) => {
           </Alert>
         )}
         {account?.nodeRequired ? (
-          <Alert type="warn">
+          <Alert type="info">
             <div className="flex items-center gap-2">
               <div className="shrink-0">
                 <PopiconsCircleExclamationLine className="w-5 h-5" />
@@ -186,7 +186,7 @@ const DefaultView: FC<Props> = (props) => {
                     // eslint-disable-next-line react/jsx-key
                     <a
                       className="underline"
-                      href="https://getalby.com"
+                      href="https://getalby.com/onboarding/node/new"
                       target="_blank"
                       rel="noreferrer"
                     />,
