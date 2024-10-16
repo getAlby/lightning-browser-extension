@@ -449,7 +449,7 @@
     "accounts": {
       "account_view": {
         "name": {
-          "title": "Name anzeigen",
+          "title": "Anzeigename",
           "placeholder": "Konto Anzeigename"
         },
         "export": {
@@ -470,7 +470,7 @@
             "successfully_removed": "Der private Schlüssel von Nostr wurde erfolgreich entfernt.",
             "label": "Nostr privater Schlüssel",
             "failed_to_remove": "Der eingegebene Kontoname stimmt nicht überein, dein alter privater Nostr-Schlüssel wurde wiederhergestellt.",
-            "warning": "Bist du dir sicher, dass du deinen privaten Nostr-Schlüssel entfernen möchten?\n\nGebe \"{{name}}\" zur Bestätigung ein:"
+            "warning": "Bist du dir sicher, dass du deinen privaten Nostr-Schlüssel entfernen möchtest?\n\nGebe \"{{name}}\" zur Bestätigung ein:"
           },
           "public_key": {
             "label": "Nostr öffentlicher Schlüssel"
@@ -530,7 +530,7 @@
         },
         "remove": {
           "error": "Der eingegebene Kontoname stimmte nicht überein.",
-          "subtitle": "Alle verknüpften Zertifikate werden gelöscht. Bitte sei dir sicher.",
+          "subtitle": "Alle verknüpften Berechtigungen und Budgets werden gelöscht.",
           "title": "Diese Wallet entfernen",
           "confirm": "Bist du dir sicher, dass du deine Wallet entfernen willst?\n\n⚠️ Wenn du fortfährst, werden alle zugehörigen Schlüssel (Master Key, Nostr, etc.) gelöscht. Bitte vergewissere dich, dass du eine Sicherungskopie erstellt hast, denn es gibt keine andere Möglichkeit, sie wiederherzustellen.\n\nGebe \"{{name}}\" zur Bestätigung ein:"
         },
@@ -547,10 +547,10 @@
               "nostr": "Nostr"
             },
             "save": "Hauptschlüssel speichern",
-            "button": "Ansicht Wiederherstellungsphrase",
+            "button": "Phrase anzeigen",
             "description": "Notiere deine Wiederherstellungsphrase, um deinen Hauptschlüssel auf einem neuen Gerät wiederherstellen zu können oder für den Fall, dass du den Zugriff auf dein Konto verlierst.",
-            "title": "Sichere deine Recovery Phrase",
-            "warning": "⚠️ Vergesse nicht, deine Wiederherstellungsphrase zu sichern! Wird sie nicht gesichert, kann dies dazu führen, dass du den Zugang zu deinem Master Key, dein Nostr-Identität oder den von dir mit diesem Schlüssel verwalteten Assets dauerhaft verlierst."
+            "title": "Sichere deine Wiederherstellungsphrase",
+            "warning": "Vergesse nicht, deine Wiederherstellungsphrase zu sichern! Wird sie nicht gesichert, kann dies dazu führen, dass du den Zugang zu deinem Master Key, dein Nostr-Identität oder den von dir mit diesem Schlüssel verwalteten Assets dauerhaft verlierst."
           },
           "saved": "Hauptschlüssel erfolgreich verschlüsselt und gespeichert.",
           "generate": {
