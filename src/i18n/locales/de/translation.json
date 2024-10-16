@@ -1101,7 +1101,7 @@
       "options": {
         "account": {
           "go_to_web_wallet": "Verwalte dein Web-Konto",
-          "add": "Verbinde deine Wallet"
+          "add": "Hinzufügen"
         }
       },
       "screen_reader": "Dropdown umschalten",

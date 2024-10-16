@@ -1137,8 +1137,7 @@
     "account_menu": {
       "options": {
         "account": {
-          "go_to_web_wallet": "Acessar sua conta na web",
-          "add": "Conectar nova carteira"
+          "go_to_web_wallet": "Acessar sua conta na web"
         }
       },
       "title": "Mudar de carteira"
