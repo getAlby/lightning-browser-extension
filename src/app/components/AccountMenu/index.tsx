@@ -1,7 +1,7 @@
 import {
   PopiconsChevronBottomLine,
-  PopiconsCirclePlusLine,
   PopiconsGlobeLine,
+  PopiconsPlusLine,
   PopiconsSettingsMinimalLine,
 } from "@popicons/react";
 import { useEffect } from "react";
@@ -193,7 +193,7 @@ function AccountMenu({ showOptions = true }: Props) {
                   openOptions("accounts/new");
                 }}
               >
-                <PopiconsCirclePlusLine className="h-5 w-5 mr-2 shrink-0" />
+                <PopiconsPlusLine className="h-4 w-4 mr-2 shrink-0" />
                 {t("options.account.add")}
               </Menu.ItemButton>
             </>
