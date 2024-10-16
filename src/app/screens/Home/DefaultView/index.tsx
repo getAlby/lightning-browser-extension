@@ -91,7 +91,7 @@ const DefaultView: FC<Props> = (props) => {
         if (e instanceof Error) toast.error(`Error: ${e.message}`);
       }
     })();
-  }, []);
+  }, [account]);
 
   const unblock = async () => {
     try {
