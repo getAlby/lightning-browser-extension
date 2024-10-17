@@ -43,7 +43,7 @@ export default function ChooseConnectorPath() {
                   />
                 </FeatureItem>
                 <FeatureItem type="success">{t("alby.point2")}</FeatureItem>
-                <FeatureItem type="warning">{t("alby.point3")}</FeatureItem>
+                <FeatureItem type="success">{t("alby.point3")}</FeatureItem>
               </>
             }
             actions={<ConnectAlby />}
