@@ -882,16 +882,11 @@
       "other": {
         "title": "自备钱包",
         "connect": "发现你的钱包",
-        "description": "最好已经拥有钱包或闪电节点。",
-        "point1": "自托管或代托管选项",
-        "point2": "无闪电网络或 Nostr 地址",
-        "point3": "立即开始，无需邀请"
+        "description": "最好已经拥有钱包或闪电节点。"
       },
       "alby": {
         "title": "Alby帐户",
         "description": "同时控制比特币并享受应用的最佳选择。",
-        "point1": "新的自托管钱包 — <0>Alby Hub</0>",
-        "point2": "独一无二的闪电网络和 Nostr 地址",
         "connect": "使用 Alby 账户"
       },
       "title": "连接钱包到 Alby 浏览器扩展"

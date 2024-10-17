@@ -762,18 +762,13 @@
     "choose_path": {
       "alby": {
         "title": "Conta Alby",
-        "point1": "Nova carteira com autocustódia — <0>Alby Hub</0>",
         "connect": "Conecte-se com a Alby",
-        "point2": "Endereço relâmpago e nostr exclusivos",
         "description": "Ideal para iniciantes que procuram uma ótima carteira para gastos do dia a dia."
       },
       "other": {
         "title": "Outras carteiras",
-        "point1": "Opções de autocustódia e custódia delegada",
         "connect": "Escolher carteira",
-        "point2": "Sem endereço relâmpago e nostr",
-        "description": "Ideal para quem já possui uma carteira e deseja conectá-la na extensão.",
-        "point3": "Pronta para o uso, não precisa de convite"
+        "description": "Ideal para quem já possui uma carteira e deseja conectá-la na extensão."
       },
       "title": "Conecte carteiras na extensão Alby"
     },
