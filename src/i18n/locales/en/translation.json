@@ -41,18 +41,12 @@
       "other": {
         "title": "Bring Your Own Wallet",
         "description": "Best if you already have a wallet or own a lightning node.",
-        "connect": "Find Your Wallet",
-        "point1": "Both self-custody and custodial options",
-        "point2": "No lightning and nostr address",
-        "point3": "Start instantly, no waiting for an invite"
+        "connect": "Find Your Wallet"
       },
       "alby": {
         "title": "Alby Account",
         "description": "Ideal If you would like to enjoy apps while staying in control of your bitcoin.",
-        "connect": "Continue with Alby Account",
-        "point1": "New self-custodial wallet — <0>Alby Hub</0>",
-        "point2": "Unique lightning and nostr address",
-        "point3": "Start instantly — perfect for anyone new to Bitcoin! "
+        "connect": "Continue with Alby Account"
       }
     },
     "alby": {
