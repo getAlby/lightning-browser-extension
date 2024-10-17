@@ -79,13 +79,13 @@ const DefaultView: FC<Props> = (props) => {
   useEffect(() => {
     (async () => {
       try {
-        const account = await api.getAccount();
-        const nostrPrivateKey = await api.nostr.getPrivateKey(account.id);
+        const userAccount = await api.getAccount();
+        const nostrPrivateKey = await api.nostr.getPrivateKey(userAccount.id);
 
         setNostrPublicKey(
           nostrPrivateKey ? await nostr.derivePublicKey(nostrPrivateKey) : ""
         );
-        setCurrentAccount(account);
+        setCurrentAccount(userAccount);
       } catch (e) {
         console.error(e);
         if (e instanceof Error) toast.error(`Error: ${e.message}`);
