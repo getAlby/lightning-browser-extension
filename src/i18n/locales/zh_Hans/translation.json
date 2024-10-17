@@ -1209,8 +1209,7 @@
     "account_menu": {
       "options": {
         "account": {
-          "go_to_web_wallet": "管理你的网络帐户",
-          "add": "连接钱包"
+          "go_to_web_wallet": "管理你的网络帐户"
         }
       },
       "screen_reader": "切换下拉菜单",
