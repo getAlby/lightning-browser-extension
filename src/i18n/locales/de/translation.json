@@ -922,7 +922,6 @@
       },
       "alby": {
         "title": "Alby Konto",
-        "point3": "Neue Anmeldungen erfordern einen Einladungscode",
         "description": "Ideal, wenn du die Anwendungen nutzt und gleichzeitig die Kontrolle über deine Bitcoin behalten möchtest.",
         "connect": "Weiter mit Alby Account",
         "point2": "Einzigartige Lightning- und Nostr-Adresse",
