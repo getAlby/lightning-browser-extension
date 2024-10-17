@@ -1296,7 +1296,7 @@
       "title": "Switch Wallet",
       "options": {
         "account": {
-          "add": "Connect a Wallet",
+          "add": "Add",
           "go_to_web_wallet": "Manage your web account"
         }
       }
