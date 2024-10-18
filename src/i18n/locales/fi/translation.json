@@ -754,18 +754,12 @@
       "other": {
         "description": "Parasta, jos sinulla on jo lompakko tai omistat lightning-solmun.",
         "title": "Tuo oma lompakkosi",
-        "connect": "Löydä lompakkosi",
-        "point1": "Sekä omahuollon että säilytysvaihtoehdot",
-        "point3": "Aloita heti, ei kutsun odottamista",
-        "point2": "Ei lightningia ja nostr-osoitetta"
+        "connect": "Löydä lompakkosi"
       },
       "alby": {
-        "point2": "Ainutlaatuinen lightning ja nostr-osoite",
         "connect": "Jatka Alby-tilillä",
         "title": "Alby-tili",
-        "point1": "Uusi omavarainen lompakko — <0>Alby Hub</0>",
-        "description": "Ihanteellinen, jos haluat nauttia sovelluksista samalla kun hallitset bitcoinejasi.",
-        "point3": "Uudet rekisteröinnit vaativat kutsukoodin"
+        "description": "Ihanteellinen, jos haluat nauttia sovelluksista samalla kun hallitset bitcoinejasi."
       },
       "title": "Yhdistä Alby Extension lompakkoon"
     },

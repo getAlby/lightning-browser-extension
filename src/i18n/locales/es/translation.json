@@ -541,18 +541,12 @@
     "choose_path": {
       "alby": {
         "title": "Cuenta de Alby",
-        "point1": "Los nuevos registros requieren un código de invitación. Nueva cartera auto-custodiada",
-        "point2": "Dirección única de lightning y nostr",
         "description": "Es ideal si  quisieras disfrutar las apps mientras mantienes el control de tu bitcoin",
-        "connect": "Continuar con la cuenta de Alby",
-        "point3": "Las nuevas suscripciones requieren un código de invitación"
+        "connect": "Continuar con la cuenta de Alby"
       },
       "other": {
         "title": "Lleve su propia cartera",
-        "point1": "Ambas opciones: Autocustodia o custodiada",
-        "point2": "No hay dirección lightning y nostr",
         "description": "Es mejor si ya tienes una cartera o tu propio nodo lightning",
-        "point3": "Comenzar inmediatamente, no esperar invitación",
         "connect": "Encuentra tu cartera"
       },
       "title": "Conectar la cartera a la extensión Alby"
