@@ -62,7 +62,6 @@
       "title": "Sambungkan Lightning Wallet",
       "description": "Sambungkan lightning wallet atau node ekternal kamu",
       "lnd": {
-        "title": "LND",
         "page": {
           "title": "Sambungkan node LND kamu",
           "description": "Kamu membutuhkan URL node dan macaroon izin baca dan tulis (Misalnya dmin.macaroon)"
@@ -132,7 +131,6 @@
         }
       },
       "citadel": {
-        "title": "Citadel",
         "page": {
           "title": "Sambungkan dengan node <0>Citadel</0>",
           "instructions": "Saat ini tidak berfungsi jika 2FA diaktifkan."
@@ -153,11 +151,9 @@
         "rest_url": {
           "label": "lndconnect REST URL",
           "placeholder": "lndconnect://yournode:8080?..."
-        },
-        "title": "Umbrel"
+        }
       },
       "mynode": {
-        "title": "myNode",
         "page": {
           "title": "Sambungkan dengan <0>myNode</0>",
           "instructions": "Pada homepage myNode klik tombol <0>Wallet</0> untuk <0>lightning</0> service.<1/> Kemudian, klik pada tombol <0>Pair Wallet</0> di bawah tab <0>Status</0>. Masukkan kata sandi jika diminta.<1/> Pilih menu dropdown dan pilih pairing option. Tergantung dengan pengaturan kamu, kamu bisa menggunakan sambungan<0>lightning (REST + Local IP)</0> atau sambungan <0>lightning (REST + Tor)</0>."
@@ -168,7 +164,6 @@
         }
       },
       "startos": {
-        "title": "StartOS",
         "page": {
           "title": "Sambungkan dengan <0>Server StartOS</0>",
           "instructions": "Pada dashboard StartOS klik pada <0>Lightning Network Daemon</0> service.<1/>Pilih tab <0>Properties</0>.<1/>Kemudian salin <0>LND Connect REST URL.</0>"
@@ -179,7 +174,6 @@
         }
       },
       "raspiblitz": {
-        "title": "RaspiBlitz",
         "page": {
           "title": "Sambungkan dengan node <0>RaspiBlitz</0>",
           "instructions2": "Salin (admin) <0>macaroon</0> dan masukkan ke bawah ini.",
@@ -191,13 +185,11 @@
         }
       },
       "blink": {
-        "title": "Blink Wallet",
         "page": {
           "title": "Sambungkan dengan <0>Blink Wallet</0>"
         }
       },
       "bitcoin_jungle": {
-        "title": "Bitcoin Jungle Wallet",
         "page": {
           "title": "Sambungkan dengan <0>Bitcoin Jungle Wallet</0>"
         }
@@ -208,11 +200,9 @@
         },
         "errors": {
           "connection_failed": "Koneksi gagal. Apakah koneksi BTCPay URL sudah benar dan dapat dibuka?"
-        },
-        "title": "BTCPay Server"
+        }
       },
       "commando": {
-        "title": "Core Lightning",
         "page": {
           "title": "Sambungkan dengan node Core Lightning",
           "instructions": "Pastikan versi Core Lightning kamu sudah 0.12.0 atau terbaru, plugin commando berjalan dan node kamu dapat diakses melalui lighting network. Buat rune dengan menjalankan 'lightning-cli commando-rune'."

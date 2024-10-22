@@ -55,7 +55,6 @@
       "title": "Conecteaza portofel Lightning",
       "description": "Conecteaza-te la portofelul tau Lightning extern sau la un nod",
       "lnd": {
-        "title": "LND",
         "page": {
           "title": "Conecteaza-te la nodul tau LND",
           "description": "Ai nevoie de adresa URL a nodului tau si de un macaroon cu permisiuni de citire si trimitere (ex. admin.macaroon)"
@@ -125,7 +124,6 @@
         }
       },
       "citadel": {
-        "title": "Citadel",
         "page": {
           "title": "Conectare la <0>Citadel</0>",
           "instructions": "Momentan nu functioneaza daca autentificarea in 2-factori (2FA) este activata."
@@ -139,7 +137,6 @@
         }
       },
       "umbrel": {
-        "title": "Umbrel",
         "page": {
           "title": "Conectare la nodul <0>Umbrel</0>",
           "instructions": "In dashboard-ul Umbrel mergi la <0>Connect Wallet</0>. Selecteaza <0>lndconnect REST</0> si copiaza <0>lndconnect URL</0>. (In functie de setari, poti folosi conexiune locala sau conexiune Tor)"
@@ -150,7 +147,6 @@
         }
       },
       "mynode": {
-        "title": "myNode",
         "page": {
           "title": "Conectare la <0>myNode</0>",
           "instructions": "Pe pagina ta myNode apasa pe butonul <0>Wallet</0> pentru serviciul tau <0>lightning</0>.<1/>Acum apasa pe butonul <0>Pair Wallet</0> din tabul <0>Status</0>. Introdu parola ta.<1/> Selecteaza meniul dropdown si alege optiunea de imperechere (pairing). In functie de setarile tale poti sa utilizezi fie conexiunea <0>lightning (REST + Local IP)</0> sau conexiunea <0>lightning (REST + Tor)</0>."
@@ -161,7 +157,6 @@
         }
       },
       "startos": {
-        "title": "StartOS",
         "page": {
           "title": "Conectare la nodul tau <0>StartOS</0>",
           "instructions": "<0>Nota:</0> Momentan exista suport doar pentru LND dar vom adauga suport pentru c-lightning in viitor!<1/>Pe tabloul de bord din StartOS apasa pe serviciul <0>Lightning Network Daemon</0>.<1/>Selecteaza tabul <0>Properties</0>.<1/>Acum copiaza <0>LND Connect REST URL.</0>"
@@ -172,7 +167,6 @@
         }
       },
       "raspiblitz": {
-        "title": "RaspiBlitz",
         "page": {
           "title": "Conectare la nodul tau <0>RaspiBlitz</0>",
           "instructions1": "Urmareste aceste pasi:<1/> 1. Conecteaza-te prin <0>SSH</0> la <0>Raspiblitz</0><1/> 2. Selecteaza <0>Connect Apps & Show Credentials</0> din lista <1/><0/> 3. Alege <0>Connect Alby to this node</0><1/> 4. Apasa <0>OK</0> pentru a afisa credentialele conexiunii <1/><1/>Copiaza <0>REST API host</0> sau adresa <0>.onion</0>, pentru conectarea prin Tor, si insereaza in campul de mai jos.",
@@ -184,19 +178,16 @@
         }
       },
       "blink": {
-        "title": "Blink Wallet",
         "page": {
           "title": "Conectare la <0>Blink Wallet</0>"
         }
       },
       "bitcoin_jungle": {
-        "title": "Bitcoin Jungle Wallet",
         "page": {
           "title": "Conectare la <0>Bitcoin Jungle Wallet</0>"
         }
       },
       "btcpay": {
-        "title": "Serverul BTCPay",
         "config": {
           "label": "Date de configurare"
         },
@@ -205,7 +196,6 @@
         }
       },
       "commando": {
-        "title": "Core Lightning",
         "page": {
           "title": "Conectare la nodul tau Core Lightning",
           "instructions": "Asigura-te ca folosesti cel putin versiunea 0.12.0 a Core Lightning, ca plugin-ul commando ruleaza si ca nodul tau este accesibil in Lightning network. Creeaza o runa ruland 'lightning-cli commando-rune'."

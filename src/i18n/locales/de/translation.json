@@ -52,8 +52,7 @@
         "page": {
           "description": "Du benötigst deine Node-URL und einen Macaroon mit Lese- und Sendeberechtigung (z.B. admin.macaroon)",
           "title": "Verbinden mit deiner LND Node"
-        },
-        "title": "LND"
+        }
       },
       "lndhub_go": {
         "title": "LNDHub",
@@ -94,8 +93,7 @@
         "rest_url": {
           "label": "Indconnect REST URL",
           "placeholder": "lndconnect://deinenode:8080?..."
-        },
-        "title": "myNode"
+        }
       },
       "umbrel": {
         "page": {
@@ -105,8 +103,7 @@
         "rest_url": {
           "label": "Indconnect-REST URL",
           "placeholder": "lndconnect://deinenode:8080?..."
-        },
-        "title": "Umbrel"
+        }
       },
       "description": "Verbinden mit deinem externen Lightning Wallet oder Node",
       "citadel": {
@@ -114,7 +111,6 @@
           "instructions": "Das funktioniert aktuell nicht, wenn 2FA ausgewählt ist.",
           "title": "Verbinden mit <0>Citadel</0> Node"
         },
-        "title": "Citadel",
         "password": {
           "label": "Citadel Passwort"
         },
@@ -129,7 +125,6 @@
           "title": "Verbinden mit deiner <0>RaspiBlitz</0> Node",
           "instructions2": "Kopiere das (admin) <0>Macaroon</0> in die untenstehende Eingabe."
         },
-        "title": "RaspiBlitz",
         "rest_api_host": {
           "label": "REST API Host",
           "placeholder": "deine-node-onion-adresse:port"
@@ -157,11 +152,9 @@
         "rest_url": {
           "placeholder": "lndconnect://deinenode:8080?...",
           "label": "Indconnect REST URL"
-        },
-        "title": "StartOS"
+        }
       },
       "blink": {
-        "title": "Blink Wallet",
         "page": {
           "title": "Verbinden mit <0>Blink Wallet</0>"
         },
@@ -174,7 +167,6 @@
         }
       },
       "bitcoin_jungle": {
-        "title": "Bitcoin Jungle Wallet",
         "page": {
           "title": "Verbinden mit <0>Bitcoin Jungle Wallet</0>"
         },
@@ -187,7 +179,6 @@
         }
       },
       "btcpay": {
-        "title": "BTCPay Server",
         "config": {
           "label": "Konfigurationsdaten",
           "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.co"
@@ -201,7 +192,6 @@
         }
       },
       "commando": {
-        "title": "Core Lightning",
         "page": {
           "title": "Verbinden mit deiner Core Lightning Node",
           "instructions": "Stelle sicher, dass du die Core Lightning Version 0.12.0 oder neuer hast, das Commando-Plugin ausgeführt wird und deine Node über das Lightning Network zugänglich ist. Erstelle eine Rune, indem du „lightning-cli commando-rune“ ausführst."

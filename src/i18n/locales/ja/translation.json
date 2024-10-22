@@ -59,7 +59,6 @@
     },
     "choose_connector": {
       "lnd": {
-        "title": "LND",
         "page": {
           "title": "LNDノードに接続",
           "description": "ノードのURLと、readとsendのパーミッションを持つmacaroon（例：admin.macaroon）が必要です"
@@ -142,8 +141,7 @@
         "url": {
           "label": "CitadelのURL",
           "placeholder": "http://citadel.local"
-        },
-        "title": "Citadel"
+        }
       },
       "umbrel": {
         "page": {
@@ -153,8 +151,7 @@
         "rest_url": {
           "label": "lndconnectのREST URL",
           "placeholder": "lndconnect://yournode:8080?..."
-        },
-        "title": "Umbrel"
+        }
       },
       "mynode": {
         "page": {
@@ -164,15 +161,13 @@
         "rest_url": {
           "label": "lndconnectのREST URL",
           "placeholder": "lndconnect://yournode:8080?..."
-        },
-        "title": "myNode"
+        }
       },
       "startos": {
         "rest_url": {
           "label": "lndconnectのREST URL",
           "placeholder": "lndconnect://yournode:8080?..."
         },
-        "title": "StartOS",
         "page": {
           "title": "<0>StartOSサーバー</0>に接続",
           "instructions": "StartOSダッシュボードで<0>Lightning Network Daemon</0>サービスをクリックします。<1/><0>Properties</0>タブを選択します。<1/>ここで<0>LND Connect REST URL</0>をコピーします。"
@@ -187,19 +182,16 @@
         "rest_api_host": {
           "label": "REST APIのホスト",
           "placeholder": "your-node-onion-address:port"
-        },
-        "title": "RaspiBlitz"
+        }
       },
       "blink": {
         "page": {
           "title": "<0>Blink Wallet</0>に接続"
-        },
-        "title": "Blink Wallet"
+        }
       },
       "title": "ライトニング・ウォレットを接続",
       "description": "外部のライトニング・ウォレットまたはノードに接続",
       "bitcoin_jungle": {
-        "title": "Bitcoin Jungle Wallet",
         "page": {
           "title": "<0>Bitcoin Jungle Wallet</0>に接続"
         }
@@ -210,8 +202,7 @@
         },
         "errors": {
           "connection_failed": "接続に失敗しました。BTCPayの接続URLは正しく、アクセス可能ですか？"
-        },
-        "title": "BTCPay Server"
+        }
       },
       "commando": {
         "page": {
@@ -228,7 +219,6 @@
         "errors": {
           "connection_failed": "接続に失敗しました。Core Lightningノードがオンラインであり、commandoプラグインを使用していますか？"
         },
-        "title": "Core Lightning",
         "pubkey": {
           "label": "公開鍵"
         },

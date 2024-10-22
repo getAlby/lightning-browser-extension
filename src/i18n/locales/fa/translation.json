@@ -65,7 +65,6 @@
       "title": "اتصال به کیف پول لایتنینگی",
       "description": "به کیف پول یا گره لایتنینگی خارجی خود متصل شوید",
       "lnd": {
-        "title": "LND",
         "page": {
           "title": "به گره LND خود متصل شوید",
           "description": "به گره تان و یک macaroon با مجوز خواندن و ارسال نیاز دارید (مثال admin.macaroon)"
@@ -142,7 +141,6 @@
         }
       },
       "citadel": {
-        "title": "Citadel",
         "page": {
           "title": "به گره <0>Citadel</0> متصل شوید",
           "instructions": "در حال حاضر در صورت فعال بودن تایید دو مرحله ای، این کار نمی کند."
@@ -156,7 +154,6 @@
         }
       },
       "umbrel": {
-        "title": "Umbrel",
         "page": {
           "title": "اتصال به گره <0>Umbrel</0>",
           "instructions": "۱. در داشبورد گره لایتنینگی خودبه<0>Connect wallet</0> بروید <1/> ۲. حالت<0>REST (Tor)</0> یا <0>REST (Local Network)</0>را انتخاب کنید ۳. <0>lndconnect URL</0>‎‎‎‎ را کپی کرده و در زیر بچسبانید"
@@ -167,7 +164,6 @@
         }
       },
       "mynode": {
-        "title": "myNode",
         "page": {
           "title": "اتصال به ‎<0>myNode</0>",
           "instructions": "در صفحه خانه myNode خود جهت خدمات روی دکمه <0>Wallet</0> برای خدمات لایتنینگ خود کلیک کنید."
@@ -178,7 +174,6 @@
         }
       },
       "startos": {
-        "title": "StartOS",
         "page": {
           "title": "متصل شدن به <0>StartOS Server</0>‎ شما",
           "instructions": "در داشبورد StartOS روی خدمات <0>Lightning Network Daemon</0> کلیک کنید. سربرگ <0>Properties</0> را انتخاب کنید. حالا <0>LND Connect REST URL.</0> را کپی کنید."
@@ -189,7 +184,6 @@
         }
       },
       "raspiblitz": {
-        "title": "RaspiBlitz",
         "page": {
           "title": "اتصال به گره RaspiBlitz",
           "instructions1": "این مراحل را پیگیری کنید:\n۱. SSH در Raspiblitz خود\n۲. از لیست Connect Apps & Show Credentials را انتخاب کنید\n۳. Connect Alby to this node را انتخاب کنید\n۴. OK را بفشارید تا اعتبارنامه ها نمایش داده شود.\nآدرس REST API host یا onion را کپی کنید و در ورودی زیر بچسبانید تا Tor از طریق متصل شوید.",
@@ -201,7 +195,6 @@
         }
       },
       "blink": {
-        "title": "کیف پول Blink",
         "page": {
           "title": "اتصال به <0>Blink Wallet</0>"
         },
@@ -214,7 +207,6 @@
         }
       },
       "bitcoin_jungle": {
-        "title": "کیف پول Bitcoin Jungl",
         "page": {
           "title": "اتصال به کیف پول Bitcoin Jungl"
         },
@@ -227,7 +219,6 @@
         }
       },
       "btcpay": {
-        "title": "سرور BTCPay",
         "config": {
           "label": "داده پیکربندی",
           "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.co"
@@ -241,7 +232,6 @@
         }
       },
       "commando": {
-        "title": "Core Lightning",
         "page": {
           "title": "به گره Core Lightning خود متصل شوید",
           "instructions": "مطمئن شوید که ورژن 0.12.0 با جدیدتر Core Lightning را دارید، پلاگین روشن است و گره شما در شبکه لایتنینگ قابل دسترسی است. با راه اجرای 'lightning-cli commando-rune' یک رون بسازید."
