@@ -46,7 +46,13 @@ function ConfirmPayment() {
   const [fiatAmount, setFiatAmount] = useState("");
   const [fiatBudgetAmount, setFiatBudgetAmount] = useState("");
 
-  const formattedInvoiceSats = getFormattedSats(invoice.satoshis || 0);
+  const formattedInvoiceSats = getFormattedSats(
+    invoice.satoshis
+      ? invoice.satoshis
+      : invoice.millisatoshis
+      ? Math.floor(parseInt(invoice.millisatoshis) / 1000)
+      : 0
+  );
 
   useEffect(() => {
     (async () => {
