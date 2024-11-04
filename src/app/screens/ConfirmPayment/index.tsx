@@ -150,7 +150,15 @@ function ConfirmPayment() {
               <div className="my-4">
                 <div className="mb-4 p-4 shadow bg-white dark:bg-surface-02dp rounded-lg">
                   <PaymentSummary
-                    amount={invoice.satoshis || "0"} // TODO: allow entering amount or do not allow zero-amount invoices
+                    amount={
+                      invoice.satoshis
+                        ? invoice.satoshis
+                        : invoice.millisatoshis
+                        ? Math.floor(
+                            parseInt(invoice.millisatoshis) / 1000
+                          ).toString()
+                        : "0"
+                    } // TODO: allow entering amount or do not allow zero-amount invoices
                     fiatAmount={fiatAmount}
                     description={invoice.tagsObject.description}
                   />
