@@ -311,8 +311,7 @@
           "receive_bitcoin": {
             "title": "Deposite bitcoin",
             "description": "Receba satoshis usando um endereço relâmpago, fatura relâmpago ou endereço bitcoin"
-          },
-          "setup_keys": {}
+          }
         }
       }
     },
@@ -1131,7 +1130,8 @@
     "account_menu": {
       "options": {
         "account": {
-          "go_to_web_wallet": "Acessar sua conta na web"
+          "go_to_web_wallet": "Acessar sua conta na web",
+          "add": "Conectar"
         }
       },
       "title": "Mudar de carteira"
