@@ -55,7 +55,6 @@
       "title": "Connect Lightning Wallet",
       "description": "आपल्या बाह्य लाइटनिंग वॉलेट किंवा नोडशी कनेक्ट करा",
       "lnd": {
-        "title": "LND",
         "page": {
           "title": "आपल्या LND नोडशी कनेक्ट करा",
           "description": "आपल्याला आपले नोड URL आणि वाचन आणि पाठवा परवानग्यांसह मॅकरून आवश्यक आहे (उदा. अॅडमिन.मॅकरून)"
@@ -125,7 +124,6 @@
         }
       },
       "citadel": {
-        "title": "Citadel",
         "page": {
           "title": "<0>Citadel</0> node ला कनेक्ट करा",
           "instructions": "This currently doesn't work if 2FA is enabled."
@@ -139,7 +137,6 @@
         }
       },
       "umbrel": {
-        "title": "Umbrel",
         "page": {
           "title": "<0>Umbrel</0> node ला कनेक्ट करा",
           "instructions": "In your Umbrel dashboard go to <0>Connect Wallet</0>. Select <0>lndconnect REST</0> and copy the <0>lndconnect URL</0>. (Depending on your setup you can either use the local connection or the Tor connection.)"
@@ -150,7 +147,6 @@
         }
       },
       "mynode": {
-        "title": "myNode",
         "page": {
           "title": "<0>myNode</0> ला कनेक्ट करा",
           "instructions": "On your myNode homepage click on the <0>Wallet</0> button for your <0>lightning</0> service.<1/> Now click on the <0>Pair Wallet</0> button under the <0>Status</0> tab. Enter your password when prompted.<1/> Select the dropdown menu and choose a pairing option. Depending on your setup you can either use the <0>lightning (REST + Local IP)</0> connection or the <0>lightning (REST + Tor)</0> connection."
@@ -161,7 +157,6 @@
         }
       },
       "startos": {
-        "title": "StartOS",
         "page": {
           "title": "your <0>StartOS</0> node ला कनेक्ट करा",
           "instructions": "<0>Note:</0> Currently we only support LND but we will be adding c-lightning support in the future!<1/>On your StartOS dashboard click on the <0>Lightning Network Daemon</0> service.<1/>Select the <0>Properties</0> tab.<1/>Now copy the <0>LND Connect REST URL.</0>"
@@ -172,7 +167,6 @@
         }
       },
       "raspiblitz": {
-        "title": "RaspiBlitz",
         "page": {
           "title": "your <0>RaspiBlitz</0> node ला कनेक्ट करा",
           "instructions1": "या चरणांचे अनुसरण करा:<1/> 1. <0>SSH</0> तुमच्या <0>Raspiblitz</0><1/>2. सूचीमधून <0>अ‍ॅप्स कनेक्ट करा आणि क्रेडेंशियल दाखवा</0> निवडा<1/><0/>3. <0>Alby ला या नोडशी कनेक्ट करा</0><1/>4 निवडा. कनेक्शन क्रेडेन्शियल प्रदर्शित करण्यासाठी <0>ओके</0> दाबा<1/><1/>कनेक्‍ट करण्यासाठी <0>REST API होस्ट</0> किंवा <0>.onion</0> पत्ता कॉपी आणि पेस्ट करा टोर द्वारे खालील इनपुटमध्ये.",
@@ -184,19 +178,16 @@
         }
       },
       "blink": {
-        "title": "Blink Wallet",
         "page": {
           "title": "<0>Blink Wallet ला कनेक्ट करा</0>"
         }
       },
       "bitcoin_jungle": {
-        "title": "Bitcoin Jungle Wallet",
         "page": {
           "title": "<0>Bitcoin Jungle Wallet ला कनेक्ट करा</0>"
         }
       },
       "btcpay": {
-        "title": "BTCPay Server",
         "config": {
           "label": "Config data"
         },
@@ -205,7 +196,6 @@
         }
       },
       "commando": {
-        "title": "Core Lightning",
         "page": {
           "title": "आपल्या Core Lightning node ला कनेक्ट करा",
           "instructions": "Make sure you have Core Lightning version 0.12.0 or newer, the commando plugin is running and your node is accessible over the lightning network. Create a rune by running 'lightning-cli commando-rune'."

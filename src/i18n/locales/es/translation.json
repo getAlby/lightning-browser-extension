@@ -38,7 +38,6 @@
     "choose_connector": {
       "description": "Conecta tu billetera lightning externa o nodo",
       "lnd": {
-        "title": "LND",
         "page": {
           "title": "Conecta a tu nodo LND",
           "description": "Necesita la URL de su nodo y una frase macarrón con permisos de lectura y envío (por ejemplo, admin.macaroon)"
@@ -87,7 +86,6 @@
         }
       },
       "citadel": {
-        "title": "Cuenta de Citadel",
         "password": {
           "label": "Contraseña de Citadel"
         },
@@ -101,7 +99,6 @@
         }
       },
       "umbrel": {
-        "title": "Cuenta de Umbrel",
         "page": {
           "title": "Conectar a Umbrel",
           "instructions": "1. En tu Lightning Node dashboard ve a <0>Connect wallet</0><1/>2. Selecciona <0>REST (Tor)</0> o <0>REST (Local Network)</0> mode<1/>3. Copia la <0>lndconnect URL</0> y pégala a continuación"
@@ -112,7 +109,6 @@
         }
       },
       "mynode": {
-        "title": "MiNodo",
         "page": {
           "title": "Conecta <0>miNodo</0>",
           "instructions": "En tu página myNode pulsa el botón <0>Billetera</0> para tu servicio <0>lightning</0>.<1/> Ahora pulsa el botón <0>Emparejar Billetera</0> bajo la pestaña <0>Estado</0>. Escribe tu contraseña cuando se indique.<1/> Selecciona el menú desplegable y elige una opción de emparejamiento. Dependiendo de tu configuración puedes usar la conexión <0>lightning (REST + IP Local)</0> o la conexión <0>lightning (REST + TOR)</0>."
@@ -123,7 +119,6 @@
         }
       },
       "startos": {
-        "title": "StartOS",
         "page": {
           "title": "Conectarse a <0>StartOS</0>",
           "instructions": "En tu panel de StartOS, haz clic en el servicio <0>Lightning Network Daemon</0>.<1/>Selecciona la pestaña <0>Propiedades</0>.<1/>Ahora copia la URL REST de <0>LND Connect. </0>"
@@ -134,7 +129,6 @@
         }
       },
       "raspiblitz": {
-        "title": "Cuenta RaspiBlitz",
         "page": {
           "title": "Conecta tu nodo <0>RaspiBlitz</0>",
           "instructions2": "Copie el (admin) <0>macaroon</0> en la entrada de abajo.",
@@ -146,7 +140,6 @@
         }
       },
       "blink": {
-        "title": "Billetera de Blink",
         "page": {
           "title": "Conecta a <0>La cartera Blink</0>"
         },
@@ -155,7 +148,6 @@
         }
       },
       "bitcoin_jungle": {
-        "title": "Billetera de Bitcoin Jungle",
         "page": {
           "title": "Conecta a <0>La cartera Bitcoin Jungle</0>"
         },
@@ -167,7 +159,6 @@
         }
       },
       "btcpay": {
-        "title": "Servidor BTCPay",
         "config": {
           "label": "Datos de configuración"
         },
@@ -234,7 +225,6 @@
           "title": "Conéctese a su nodo Core Lightning",
           "instructions": "Asegúrese de tener Core Lightning versión 0.12.0 o posterior, el complemento de comando se está ejecutando y se puede acceder a su nodo a través de Lightning Network. Cree una runa ejecutando 'lightning-cli commando-rune'."
         },
-        "title": "Core Lightning",
         "errors": {
           "connection_failed": "La conexión falló. ¿Está su nodo Core Lightning en línea y usando el plugin de comando?"
         },

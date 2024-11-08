@@ -34,7 +34,6 @@
     "choose_connector": {
       "description": "Připojte svou externí ligtning peněženku nebo uzel",
       "lnd": {
-        "title": "LND",
         "page": {
           "title": "Připojt se ke svému LND uzlu",
           "description": "Potřebujete URL svého uzlu a macaroon s oprávněním pro čtení a odesílání (například admin.macaroon)"
@@ -97,7 +96,6 @@
         }
       },
       "citadel": {
-        "title": "Citadel",
         "page": {
           "title": "Připojení k uzlu <0>Citadel</0>",
           "instructions": "Aktuálně nefunguje v případě, že máte zapnutou dvoufaktorovou autentizaci (2FA)."
@@ -111,7 +109,6 @@
         }
       },
       "umbrel": {
-        "title": "Umbrel",
         "page": {
           "title": "Připojení k uzlu <0>Umbrel</0>",
           "instructions": "V dashboardu Umbrell přejděte do <0>Připojit pěněženku (Connect Wallet)</0>. Vyberte volbu <0>lndconnect REST</0> a zkopírujte <0>lndconnect URL</0>. (V závislosti na vašem nastavení můžete využít buď lokálního spojení nebo připojení přes Tor.)"
@@ -122,7 +119,6 @@
         }
       },
       "mynode": {
-        "title": "myNode",
         "page": {
           "title": "Připojení k <0>myNode</0>",
           "instructions": "Na vaší domovské stránce myNode klikněte na tlačítko <0>Pěněženka (Wallet)</0> služby <0>lightning</0>.<1/> Dále zvolte <0>Párovat peněženku (Pair Wallet)</0> pod záložkou <0>Stav (Status)</0>. S dotázáním vložte vaše heslo.<1/> Z rozbalovací nabídky vyberte volbu párování. V závislosti na vašem nastavení můžete zvolit buď připojení přes <0>lightning (REST + Local IP)</0> nebo <0>lightning (REST + Tor)</0>."
@@ -133,7 +129,6 @@
         }
       },
       "startos": {
-        "title": "StartOS",
         "page": {
           "title": "Připojení k vašemu uzlu <0>StartOS</0>",
           "instructions": "<0>Pozn.:</0> Aktuálně podporujeme pouze LND, ale v budoucnu plánujeme přidávat podporu c-lightning!<1/>V dashboardu vašeho StartOS zvolte službu <0>Lightning Network Daemon</0>.<1/>Vyberte záložku <0>Vlastnosti (Properties)</0>.<1/>Následně zkopírujte <0>LND Connect REST URL.</0>"
@@ -144,7 +139,6 @@
         }
       },
       "raspiblitz": {
-        "title": "RaspiBlitz",
         "page": {
           "title": "Připojení k vašemu uzlu <0>RaspiBlitz</0>",
           "instructions1": "Následujte tyto kroky:<1/> 1. <0>Připojte se přes SSH</0> k vašemu <0>RaspiBlitz</0><1/>2. Vyberte <0>Připojit aplikace a zobrazit přístupové údaje (Connect Apps & Show Credentials)</0> ze seznamu<1/><0/>3. Vyberte <0>Připojit Alby k tomuto uzlu</0><1/>4. Stiskněte <0>OK</0>pro zobrazení detailů připojení<1/><1/>Zkopírujte <0>REST API</0> nebo <0>.onion</0> adresu pro připojení přes Tor a vložte ji do vstupního pole níže.",
@@ -156,19 +150,16 @@
         }
       },
       "blink": {
-        "title": "Blink",
         "page": {
           "title": "Připojení k <0>Blink Wallet</0>"
         }
       },
       "bitcoin_jungle": {
-        "title": "Bitcoin Jungle Wallet",
         "page": {
           "title": "Připojení k <0>Bitcoin Jungle Wallet</0>"
         }
       },
       "btcpay": {
-        "title": "BTCPay Server",
         "config": {
           "label": "Konfigurační data"
         },
@@ -177,7 +168,6 @@
         }
       },
       "commando": {
-        "title": "Core Lightning",
         "page": {
           "title": "Připojení k vašemu uzlu Core Lightning",
           "instructions": "Ujistěte se, že používáte Core Lightning verze 0.12.0 (nebo novější), dále že vám běží doplněk commando a váš uzel je přístupný přes síť lightning. Vytvořte novou \"runu\" spuštěním příkazu 'lightning-cli commando-rune'."

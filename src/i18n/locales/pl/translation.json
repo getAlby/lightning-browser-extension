@@ -61,7 +61,6 @@
       "title": "Podłącz portfel Lightning",
       "description": "Podłącz swój zewnętrzny portfel lightning lub węzeł",
       "lnd": {
-        "title": "LND",
         "page": {
           "title": "Podłącz się do swojego węzła LND",
           "description": "Potrzebujesz adresu URL Twojego węzła i tzw. macaroon z uprawnieniami do odczytu i wysyłania (np. admin.macaroon)"
@@ -131,7 +130,6 @@
         }
       },
       "citadel": {
-        "title": "Citadel",
         "page": {
           "title": "Podłącz do węzła <0>Citadel</0>",
           "instructions": "Ta funkcja nie działa jeśli 2FA jest włączone."
@@ -145,7 +143,6 @@
         }
       },
       "umbrel": {
-        "title": "Umbrel",
         "page": {
           "title": "Podłącz do węzła <0>Umbrel</0>",
           "instructions": "Na stronie głównej Umbrel idź do <0>Connect Wallet</0>. Wybierz <0>ldconnect REST</0> i skopiuj <0>lndconnect URL</0>. (W zależności od ustawień możesz wybrać połaczenie lokalne albo przez Tor.)"
@@ -156,7 +153,6 @@
         }
       },
       "mynode": {
-        "title": "myNode",
         "page": {
           "title": "Podłącz do <0>myNode</0>",
           "instructions": "Na stronie głównej myNode kliknij na przycisk <0>Wallet</0> swojej usługi <0>lightning</0>.<1/>Teraz kliknij na przycisk <0>Pair Wallet</0> w sekcji <0>Status</0>. Wprowadź hasło.<1/> Wybierz z rozwijalnej listy opcję parowania. W zależności od ustawień możesz użyć połączenia <0>lightning (REST + Local IP)</0> albo <0>lightning (REST + Tor)</0>."
@@ -167,7 +163,6 @@
         }
       },
       "startos": {
-        "title": "StartOS",
         "page": {
           "title": "Połącz ze swoim <0>serwerem StartOS</0>",
           "instructions": "<0>Uwaga:</0>Obecnie wspieramy tylko LND, ale zamierzamy dodać obsługę c-lightning w przyszłości!<1/>Na pulpicie twojego StartOS kliknij na usługę <0>Lightning Network Daemon</0>.<1/>Wybierz zakładkę <0>Properties</0>.<1/>Następnie skopiuj <0>LND Connect REST URL.</0>"
@@ -178,7 +173,6 @@
         }
       },
       "raspiblitz": {
-        "title": "RaspiBlitz",
         "page": {
           "title": "Podłącz do węzła <0>RaspiBlitz</0>",
           "instructions1": "Wykonaj te kroki:<1/> 1. Używając <0>SSH</0> zaloguj się do swojego <0>Raspiblitz</0><1/>2. Wybierz z listy <0>Connect Apps & Show Credentials</0><1/><0/>3. Wybierz <0>Connect Alby to this node</0><1/>4. Naciśnij <0>OK</0> aby wyświetlić dane uwierzytelniające<1/><1/>Skopiuj i wklej adres <0>REST API host</0> lub <0>.onion</0> aby połączyć się przez Tor do pola tekstowego poniżej.",
@@ -190,7 +184,6 @@
         }
       },
       "blink": {
-        "title": "Portfel Blink",
         "page": {
           "title": "Podłącz do <0>Blink Wallet</0>"
         },
@@ -199,7 +192,6 @@
         }
       },
       "bitcoin_jungle": {
-        "title": "Portfel Bitcoin Jungle",
         "page": {
           "title": "Podłącz do <0>Portfela Bitcoin Jungle</0>"
         },
@@ -208,7 +200,6 @@
         }
       },
       "btcpay": {
-        "title": "BTCPay Server",
         "config": {
           "label": "Date konfiguracyjne"
         },
@@ -217,7 +208,6 @@
         }
       },
       "commando": {
-        "title": "Core Lightning",
         "page": {
           "title": "Podłącz do Twojego węzła Core Lightning",
           "instructions": "Upewnij się, że masz Core Lightning w wersji 0.12.0 lub nowszej, że plugin commando działa, a Twój węzeł jest dostępny w sieci lightning. Stwórz runę komendą 'lightning-cli commando-rune'."

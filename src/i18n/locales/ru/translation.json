@@ -68,7 +68,6 @@
       "title": "Подключить Lightning кошелёк",
       "description": "Подключиться к стороннему кошельку или ноде",
       "lnd": {
-        "title": "LND",
         "page": {
           "title": "Подключитесь к вашей LND ноде",
           "description": "Вам нужен URL вашей ноды и macaroon с правами на чтение и отправку (например, admin.macaroon)"
@@ -141,7 +140,6 @@
         }
       },
       "citadel": {
-        "title": "",
         "page": {
           "title": "",
           "instructions": ""
@@ -155,7 +153,6 @@
         }
       },
       "umbrel": {
-        "title": "",
         "page": {
           "title": "",
           "instructions": ""
@@ -166,7 +163,6 @@
         }
       },
       "mynode": {
-        "title": "",
         "page": {
           "title": "",
           "instructions": ""
@@ -177,7 +173,6 @@
         }
       },
       "startos": {
-        "title": "",
         "page": {
           "title": "",
           "instructions": ""
@@ -188,7 +183,6 @@
         }
       },
       "raspiblitz": {
-        "title": "",
         "page": {
           "title": "",
           "instructions1": "",
@@ -200,13 +194,11 @@
         }
       },
       "blink": {
-        "title": "",
         "page": {
           "title": ""
         }
       },
       "bitcoin_jungle": {
-        "title": "",
         "page": {
           "title": ""
         }
@@ -222,7 +214,6 @@
         }
       },
       "btcpay": {
-        "title": "",
         "config": {
           "label": ""
         },
@@ -231,7 +222,6 @@
         }
       },
       "commando": {
-        "title": "",
         "page": {
           "title": "",
           "instructions": ""
