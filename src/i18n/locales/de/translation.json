@@ -429,7 +429,7 @@
             "description": "Zahle auf dein Konto ein und empfange über deine Lightning Adresse oder eine Rechnung"
           },
           "setup_keys": {
-            "title": "Setup Master Key",
+            "title": "Master Key einrichten",
             "description": "Erstelle einen Master Key für Bitcoin, Nostr und Liquid oder importiere ein bestehendes Nostr-Konto."
           }
         },
