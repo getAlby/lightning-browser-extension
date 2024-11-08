@@ -337,9 +337,9 @@
       "albyhub": {
         "title": "Alby Hub",
         "page": {
-          "instructions": "Paste a NWC connection secret from Alby Hub",
+          "instructions": "Open your Alby Hub, create a new app connection and paste the connection secret to connect.",
           "url": {
-            "label": "NWC connection secret from Alby Hub",
+            "label": "NWC connection secret",
             "placeholder": "nostr+walletconnect://69effe..."
           },
           "errors": {
