@@ -35,7 +35,7 @@ export default function ConnectAlbyHub() {
     setLoading(true);
     const { nostrWalletConnectUrl } = formData;
     const account = {
-      name: "AlbyHub",
+      name: "Alby Hub",
       config: {
         nostrWalletConnectUrl,
       },
