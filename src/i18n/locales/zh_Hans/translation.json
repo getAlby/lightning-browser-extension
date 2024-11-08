@@ -51,8 +51,7 @@
         "macaroon": {
           "label": "Macaroon(HEX格式)"
         },
-        "drag_and_drop": "将你的macaroon拖放到此处或<0>浏览</0>",
-        "title": "LND"
+        "drag_and_drop": "将你的macaroon拖放到此处或<0>浏览</0>"
       },
       "eclair": {
         "url": {
@@ -79,11 +78,9 @@
         "url": {
           "label": "Citadel URL",
           "placeholder": "http://citadel.local"
-        },
-        "title": "Citadel"
+        }
       },
       "blink": {
-        "title": "眨眼钱包",
         "page": {
           "title": "连接<0>眨眼钱包</0>"
         },
@@ -96,7 +93,6 @@
         }
       },
       "bitcoin_jungle": {
-        "title": "比特币丛林钱包",
         "page": {
           "title": "连接<0>比特币丛林钱包</0>"
         },
@@ -109,7 +105,6 @@
         }
       },
       "btcpay": {
-        "title": "BTCPay Server",
         "errors": {
           "connection_failed": "连接失败。BTCPay连接URL是否正确且可访问？"
         },
@@ -130,7 +125,6 @@
         "errors": {
           "connection_failed": "连接失败。你的Core Lightning节点是否在线并使用了commando插件？"
         },
-        "title": "Core Lightning",
         "page": {
           "title": "连接你的Core Lightning节点",
           "instructions": "确保你用的是Core Lightning 0.12.0或更新的版本、commando插件正在运行，并且你的节点可以通过闪电网络访问。通过运行'lightning-cli commando-rune'来创建rune。"
@@ -162,8 +156,7 @@
         "rest_url": {
           "placeholder": "lndconnect://yournode:8080?...",
           "label": "lndconnect REST URL"
-        },
-        "title": "StartOS"
+        }
       },
       "raspiblitz": {
         "page": {
@@ -174,8 +167,7 @@
         "rest_api_host": {
           "label": "REST API主机",
           "placeholder": "your-node-onion-address:port"
-        },
-        "title": "RaspiBlitz"
+        }
       },
       "lndhub_go": {
         "title": "LNDHub",
@@ -213,7 +205,6 @@
           "title": "连接<0>Umbrel</0>节点",
           "instructions": "1. 在你的Umbrel仪表板上，进入<0>连接钱包</0><1/>2. 选择<0>REST (Tor)</0>或<0>REST （本地网络）</0>模式<1/>3. 复制<0>lndconnect URL</0>并粘贴到下方"
         },
-        "title": "Umbrel",
         "rest_url": {
           "label": "lndconnect REST URL",
           "placeholder": "lndconnect://yournode:8080?..."
@@ -221,7 +212,6 @@
       },
       "description": "连接你外部的闪电钱包或节点",
       "mynode": {
-        "title": "myNode",
         "page": {
           "title": "连接<0>myNode</0>",
           "instructions": "在你的myNode主页上点击你的<0>Lightning</0>服务的<0>Wallet</0>按钮。<1/> 现在点击<0>Status</0>标签下的<0>Pair Wallet</0>按钮。出现提示时输入密码。<1/>选择下拉菜单并选择一个配对选项。根据你的设置，你可以使用<0>闪电（REST +本地IP）</0>连接或<0>闪电（REST + Tor）</0>连接。"

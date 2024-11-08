@@ -38,7 +38,6 @@
     "choose_connector": {
       "description": "Yhdistä ulkoiseen Lightning-lompakkoosi tai -solmuun",
       "lnd": {
-        "title": "LND",
         "page": {
           "title": "Yhdistä LND-solmuusi",
           "description": "Tarvitset solmusi URL-osoitteen ja macaroonin, jolla on luku- ja lähetysoikeudet (esim. admin.macaroon)"
@@ -101,7 +100,6 @@
         }
       },
       "citadel": {
-        "title": "Citadel",
         "page": {
           "title": "Yhdistä <0>Citadel</0> solmuun",
           "instructions": "Tämä ei tällä hetkellä toimi, jos 2FA on käytössä."
@@ -115,7 +113,6 @@
         }
       },
       "umbrel": {
-        "title": "Umbrel",
         "page": {
           "title": "Yhdistä <0>Umbrel</0>-solmuun",
           "instructions": "1. Siirry Lightning-solmun hallintapaneelissa kohtaan <0>Yhdistä lompakko</0><1/>2. Valitse tila <0>REST (Tor)</0> tai <0>REST (paikallinen verkko)</0>.<1/>3. Kopioi <0>lndconnect-URL</0> ja liitä se alle"
@@ -126,7 +123,6 @@
         }
       },
       "mynode": {
-        "title": "myNode",
         "page": {
           "title": "Yhteys <0>myNode</0>:een",
           "instructions": "Napsauta myNode-etusivullasi <0>Lampakko</0>-painiketta <0>lightning</0>-palvelussasi.<1/> Napsauta nyt <0>Pair Wallet</0> -painiketta kohdan <0 >Tila</0>-välilehti. Anna salasanasi pyydettäessä.<1/> Valitse avattava valikko ja valitse pariliitosvaihtoehto. Asetuksistasi riippuen voit käyttää joko <0>lightning (REST + paikallinen IP)</0> tai <0>lightning (REST + Tor)</0> yhteyttä."
@@ -137,7 +133,6 @@
         }
       },
       "startos": {
-        "title": "StartOS",
         "page": {
           "title": "Yhdistä <0>StartOS</0>-solmuun",
           "instructions": "<0>Huomautus:</0> Tällä hetkellä tuemme vain LND:tä, mutta lisäämme c-lightning-tuen tulevaisuudessa!<1/>Klikkaa StartOS-kojelaudallasi <0>Lightning Network Daemon</0> -palvelua.<1/>Valitse <0>Ominaisuudet</0>-välilehti.<1/>Kopioi nyt <0>LND Yhdistä -REST URL-osoite.</0>"
@@ -148,7 +143,6 @@
         }
       },
       "raspiblitz": {
-        "title": "RaspiBlitz",
         "page": {
           "title": "Yhdistä <0>RaspiBlitz</0>solmuusi",
           "instructions1": "Noudata näitä ohjeita:<1/> 1. <0>SSH</0> <0>Raspiblitzi</0>:ssa<1/>2. Valitse luettelosta <0>Yhdistä sovellukset ja näytä tunnistetiedot</0>.<1/><0/>3. Valitse <0>Yhdistä Alby tähän solmuun</0><1/>4. Paina <0>OK</0> nähdäksesi yhteystiedot.<1/><1/>Kopioi ja liitä <0>REST API -isäntä</0> tai <0>.onion</0>-osoite muodostaaksesi yhteyden Torin kautta alla olevaan syötteeseen.",
@@ -160,7 +154,6 @@
         }
       },
       "blink": {
-        "title": "Bitcoin Blink -lompakko",
         "page": {
           "title": "Yhdistä <0>Blink -lompakkoon</0>"
         },
@@ -173,7 +166,6 @@
         }
       },
       "bitcoin_jungle": {
-        "title": "Bitcoin Jungle - lompakko",
         "page": {
           "title": "Yhdistä <0>Bitcoin Jungle -lompakkoon</0>"
         },
@@ -186,7 +178,6 @@
         }
       },
       "btcpay": {
-        "title": "BTCPay-palvelin",
         "config": {
           "label": "Konfigurointitiedot",
           "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.co"
@@ -200,7 +191,6 @@
         }
       },
       "commando": {
-        "title": "Core Lightning",
         "page": {
           "title": "Yhdistä Core Lightning -solmuusi",
           "instructions": "Varmista, että sinulla on Core Lightning -versio 0.12.0 tai uudempi, että commando-laajennus on käynnissä ja että solmuasi on käytettävissä Lightning-verkon kautta. Luo riimu suorittamalla 'lightning-cli commando-rune'."

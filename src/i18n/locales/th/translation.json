@@ -359,7 +359,6 @@
           "label": "Host และ Port ของ API REST",
           "placeholder": "https://your-node-url:8080"
         },
-        "title": "LND",
         "macaroon": {
           "label": "Macaroon (รูปแบบ HEX)"
         },
@@ -421,7 +420,6 @@
         }
       },
       "citadel": {
-        "title": "Citadel",
         "page": {
           "title": "เชื่อมต่อกับ<0>Citaddel</0> node",
           "instructions": "ไม่ทำงานในปัจจุบันหากเปิดใช้งาน 2FA"
@@ -442,11 +440,9 @@
         "rest_url": {
           "label": "lndconnect REST URL",
           "placeholder": "lndconnect://yournode:8080?..."
-        },
-        "title": "Umbrel"
+        }
       },
       "mynode": {
-        "title": "myNode",
         "page": {
           "title": "เชื่อมต่อกับ<0>myNode</0>",
           "instructions": "บนหน้าแรกของ myNode คลิกที่ปุ่ม <0>Wallet</0> สำหรับบริการ <0>lightning</0> ของคุณ จากนั้นคลิกที่ปุ่ม <0>Pair Wallet</0> ใต้แท็บ <0>Status </0>ป้อนรหัสผ่าน เมื่อได้รับแจ้ง<1/> เลือกเมนูแบบเลื่อนลงและเลือกตัวเลือกการจับคู่ ขึ้นอยู่กับการตั้งค่าของคุณ คุณสามารถใช้การเชื่อมต่อ <0>lightning (REST + Local IP)</0> หรือ การเชื่อมต่อ <0>lightning (REST + Tor)</0>"
@@ -462,20 +458,17 @@
           "title": "เชื่อมต่อกับ <0>RaspiBlitz</0> node ของคุณ",
           "instructions2": "คัดลอก (admin) <0>macaroon</0> มาใส่ในช่องข้างล่าง"
         },
-        "title": "RaspiBlitz",
         "rest_api_host": {
           "label": "REST API host",
           "placeholder": "your-node-onion-address:port"
         }
       },
       "blink": {
-        "title": "Blink plånbok",
         "page": {
           "title": "Anslut <0>Blink Wallet</0>"
         }
       },
       "bitcoin_jungle": {
-        "title": "Bitcoin Jungle Wallet",
         "page": {
           "title": "เชื่อมต่อกับ <0>Bitcoin Jungle Wallet</0>"
         }
@@ -486,8 +479,7 @@
         },
         "errors": {
           "connection_failed": "การเชื่อมต่อผิดพลาด โปรดตรวจสอบ BTCPay connection URL ว่าถูกต้องและเข้าถึงได้หรือไม่ ?"
-        },
-        "title": "BTCPay Server"
+        }
       },
       "commando": {
         "page": {
@@ -512,7 +504,6 @@
         "privKey": {
           "label": "Local private key (สร้างขึ้นโดยอัตโนมัติ)"
         },
-        "title": "Core Lightning",
         "config": {
           "label": "การกำหนดค่าข้อมูล",
           "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
@@ -525,7 +516,6 @@
         "title": "Lightning Node"
       },
       "startos": {
-        "title": "StartOS",
         "page": {
           "title": "เชื่อมต่อกับ <0>Staet9 Server</0> ของคุณ",
           "instructions": "บนแดชบอร์ดของ StartOS คลิกที่บริการ <0>Lightning Network Daemon</0> <1/>เลือกแท็บ<0>Properties</0><1/>คัดลอก<0>LND Connect REST URL.</0>"

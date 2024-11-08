@@ -55,7 +55,6 @@
       "title": "Opret forbindelse til Lightning-wallet",
       "description": "Opret forbindelse til din eksterne Lightning-wallet eller node",
       "lnd": {
-        "title": "LND",
         "page": {
           "title": "Opret forbindelse til din LND-node",
           "description": "Du skal bruge din nodes URL og en macaroon med tilladelse til at læse og sende (fx admin.macaroon)"
@@ -125,7 +124,6 @@
         }
       },
       "citadel": {
-        "title": "Citadel",
         "page": {
           "title": "Opret forbindelse til <0>Citadel</0> node",
           "instructions": "Dette virker i øjeblikket ikke, hvis 2FA er slået til."
@@ -139,7 +137,6 @@
         }
       },
       "umbrel": {
-        "title": "Umbrel",
         "page": {
           "title": "Opret forbindelse til <0>Umbrel</0> node",
           "instructions": "Find <0>Connect Wallet</0> i din Umbrels indstillingsmenu. Vælg <0>lndconnect REST</0> og kopier <0>lndconnect URL</0>. (Afhængigt af din opsætning kan du enten bruge den lokale forbindelse eller Tor-forbindelsen.)"
@@ -150,7 +147,6 @@
         }
       },
       "mynode": {
-        "title": "myNode",
         "page": {
           "title": "Opret forbindelse til <0>myNode</0>",
           "instructions": "På din myNode-side klikker du på <0>Wallet</0> knappen til din <0>lightning</0> service.<1/> Klik så på knappen <0>Pair Wallet</0> under <0>Status</0> fanen. Skriv din adgangskode, når du bliver spurgt.<1/> Vælg rullemenuen og vælg en koblingstype. Afhængigt af din opsætning kan du enten bruge forbindelsen <0>lightning (REST + Lokal IP)</0> eller forbindelsen <0>lightning (REST + Tor)</0> ."
@@ -161,7 +157,6 @@
         }
       },
       "startos": {
-        "title": "StartOS",
         "page": {
           "title": "Opret forbindelse til din <0>StartOS</0> node",
           "instructions": "<0>Note:</0> I øjeblikket understøtter vi kun LND, men vi vil fremover også tilføje support af c-lightning!<1/>I din StartOSs indstillingsmenu klikker du på servicen <0>Lightning Network Daemon</0>.<1/>Vælg fanen <0>Properties</0>.<1/>Kopier så <0>LND Connect REST URL.</0>"
@@ -172,7 +167,6 @@
         }
       },
       "raspiblitz": {
-        "title": "RaspiBlitz",
         "page": {
           "title": "Opret forbindelse til din <0>RaspiBlitz</0> node",
           "instructions1": "Du skal bruge din nodes onion-adresse og port samt en macaroon med tilladelse til at læse og sende (fx admin.macaroon).<1/><1/><0>SSH</0> ind til din <0>RaspiBlitz</0>.<1/>Udfør instruktionen <0>sudo cat /mnt/hdd/tor/lndrest/hostname</0>.<1/>Kopier og indsæt <0>.onion</0> adressen i nedenstående indtastningsfelt.<1/>Tilføj din <0>port</0> efter onion-adressen, standardporten er <0>:8080</0>.",
@@ -184,19 +178,16 @@
         }
       },
       "blink": {
-        "title": "Blink Wallet",
         "page": {
           "title": "Opret forbindelse til <0>Blink Wallet</0>"
         }
       },
       "bitcoin_jungle": {
-        "title": "Bitcoin Jungle Wallet",
         "page": {
           "title": "Opret forbindelse til <0>Bitcoin Jungle Wallet</0>"
         }
       },
       "btcpay": {
-        "title": "BTCPay Server",
         "config": {
           "label": "Konfigurationsoplysninger"
         },
@@ -205,7 +196,6 @@
         }
       },
       "commando": {
-        "title": "Core Lightning",
         "page": {
           "title": "Opret forbindelse til din Core Lightning-node",
           "instructions": "Sørg for at have Core Lightning-versionen 0.12.0 eller nyere, at kommandomodulet kører og at din node kan tilgås på lightning-netværket. Opret en rune ved at køre 'lightning-cli commando-rune'."

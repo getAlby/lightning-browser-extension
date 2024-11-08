@@ -3,19 +3,22 @@
     "welcome": {
       "set_password": {
         "choose_password": {
-          "label": "Choisissez un mot de passe de déverrouillage :"
+          "label": "Choisissez un code de déverrouillage :"
         },
         "confirm_password": {
           "label": "Confirmons que vous l'avez tapé correctement :"
         },
         "errors": {
-          "enter_password": "S'il vous plait, entrez votre mot de passe.",
-          "confirm_password": "Veuillez confirmer votre mot de passe.",
-          "mismatched_password": "Les mots de passe entrés ne sont pas les mêmes."
-        }
+          "enter_password": "Veuillez saisir un code.",
+          "confirm_password": "Veuillez confirmer votre code.",
+          "mismatched_password": "Les codes ne correspondent pas."
+        },
+        "title": "Définir un code de déverrouillage",
+        "description1": "Définir un code pour déverrouiller Alby dans ce navigateur",
+        "description2": "Le code de déverrouillage peut être modifié mais pas récupéré. "
       },
       "test_connection": {
-        "ready": "Parfait, vous êtes prêt !",
+        "ready": "Parfait, tout est prêt !",
         "initializing": "Création de votre compte. S'il vous plait, veuillez patienter, ceci peut prendre une minute...",
         "connection_error": "Erreur de connexion",
         "review_connection_details": "Veuillez vérifier vos informations de connexion.",
@@ -23,7 +26,12 @@
         "contact_support": "Si vous avez besoin d'aide, veuillez contacter support@getalby.com",
         "actions": {
           "delete_edit_account": "Supprimer le compte invalide et modifier à nouveau"
-        }
+        },
+        "node_required": "L'extension est configurée, mais pour être en mesure de recevoir des paiements, il est nécessaire de configurer votre <0>compte Alby</0>."
+      },
+      "pin_extension": {
+        "title": "Épingler Alby",
+        "description": "Vous y êtes presque. Pour lancer Alby plus facilement, pensez à l'épingler à votre barre d'outils :"
       }
     },
     "choose_path": {
@@ -55,7 +63,6 @@
       "title": "Connecter le portefeuille Lightning",
       "description": "Connectez-vous à votre portefeuille ou nœud Lightning externe",
       "lnd": {
-        "title": "LND",
         "page": {
           "title": "Connectez-vous à votre nœud LND",
           "description": "Vous avez besoin de l'URL de votre nœud et d'un macaroon avec des autorisations de lecture et d'envoi (par exemple, admin.macaroon )"
@@ -125,7 +132,6 @@
         }
       },
       "citadel": {
-        "title": "Citadelle",
         "page": {
           "title": "Connectez-vous au nœud <0>Citadelle</0>",
           "instructions": "Cela ne fonctionne pas actuellement si 2FA est activé."
@@ -139,7 +145,6 @@
         }
       },
       "umbrel": {
-        "title": "Parapluie",
         "page": {
           "title": "Connectez-vous au nœud <0>Umbrel</0>",
           "instructions": "Dans votre tableau de bord Umbrel, accédez à <0>Connect Wallet</0>. Sélectionnez <0>lndconnect REST</0> et copiez l'<0>URL lndconnect</0>. (Selon votre configuration, vous pouvez utiliser la connexion locale ou la connexion Tor.)"
@@ -150,7 +155,6 @@
         }
       },
       "mynode": {
-        "title": "monNode",
         "page": {
           "title": "Connectez-vous à <0>monNode</0>",
           "instructions": "Sur votre page d'accueil myNode, cliquez sur le bouton <0>Wallet</0> pour votre service <0>lightning</0>.<1/> Cliquez maintenant sur le bouton <0>Pair Wallet</0> sous le <0 Onglet >État</0>. Saisissez votre mot de passe lorsque vous y êtes invité.<1/> Sélectionnez le menu déroulant et choisissez une option de couplage. Selon votre configuration, vous pouvez soit utiliser la connexion <0>lightning (REST + Local IP)</0> ou la connexion <0>lightning (REST + Tor)</0>."
@@ -161,7 +165,6 @@
         }
       },
       "startos": {
-        "title": "StartOS",
         "page": {
           "title": "Connectez-vous à votre nœud <0>StartOS</0>",
           "instructions": "<0>Remarque :</0> Actuellement, nous ne prenons en charge que LND, mais nous ajouterons la prise en charge de c-lightning à l'avenir !<1/>Sur votre tableau de bord StartOS, cliquez sur le service <0>daemon du réseau Lightning</0>. <1/>Sélectionnez l'onglet <0>Properties</0>.<1/>Copiez maintenant l'<0>URL REST LND Connect.</0>"
@@ -172,7 +175,6 @@
         }
       },
       "raspiblitz": {
-        "title": "RaspiBlitz",
         "page": {
           "title": "Connectez-vous à votre nœud <0>RaspiBlitz</0>",
           "instructions1": "Suivez ces étapes :<1/> 1. <0>SSH</0> dans votre <0>Raspiblitz</0><1/>2. Sélectionnez <0>Connect Apps & Show Credentials</0> dans la liste<1/><0/>3. Choisissez <0>Connecter Alby à ce nœud</0><1/>4. Appuyez sur <0>OK</0> pour afficher les identifiants de connexion<1/><1/>Copiez et collez l'<0>hôte API REST</0> ou l'adresse <0>.onion</0> pour vous connecter via Tor dans l'entrée ci-dessous.",
@@ -184,19 +186,16 @@
         }
       },
       "blink": {
-        "title": "Portefeuille de plage Bitcoin",
         "page": {
           "title": "Connectez-vous à <0>Bitcoin Blink Wallet</0>"
         }
       },
       "bitcoin_jungle": {
-        "title": "Portefeuille Jungle Bitcoin",
         "page": {
           "title": "Connectez-vous au <0>portefeuille Bitcoin Jungle</0>"
         }
       },
       "btcpay": {
-        "title": "Serveur BTCPay",
         "config": {
           "label": "Données de configuration"
         },
@@ -205,7 +204,6 @@
         }
       },
       "commando": {
-        "title": "Core Lightning",
         "page": {
           "title": "Connectez-vous à votre nœud Core Lightning",
           "instructions": "Assurez-vous que vous disposez de Core Lightning version 0.12.0 ou plus récente, que le plug-in commando est en cours d'exécution et que votre nœud est accessible via le réseau Lightning. Créez une rune en exécutant 'lightning-cli commando-rune'."

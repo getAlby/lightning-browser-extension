@@ -66,7 +66,6 @@
         }
       },
       "citadel": {
-        "title": "Citadel",
         "url": {
           "label": "Citadel URL",
           "placeholder": "http://citadel.local"
@@ -78,14 +77,9 @@
           "label": "Κωδικός Citadel"
         }
       },
-      "startos": {
-        "title": "StartOS"
-      },
-      "btcpay": {
-        "title": "BTCPay Server"
-      },
+      "startos": {},
+      "btcpay": {},
       "lnd": {
-        "title": "LND",
         "page": {
           "title": "Σύνδεση στον LND κόμβο σας"
         }
@@ -107,7 +101,6 @@
         "pubkey": {
           "label": "Δημόσιο κλειδί"
         },
-        "title": "Core Lightning",
         "page": {
           "title": "Σύνδεση στον Core Lightning κόμβο σας"
         }
@@ -117,8 +110,7 @@
       "umbrel": {
         "page": {
           "title": "Σύνδεση σε κόμβο <0>Umbrel</0>"
-        },
-        "title": "Umbrel"
+        }
       },
       "umbrel_lightning_node": {
         "title": "Κόμβος Lightning"
@@ -137,11 +129,9 @@
       "raspiblitz": {
         "page": {
           "title": "Σύνδεση στον <0>RaspiBlitz<0> κόμβο σας"
-        },
-        "title": "RaspiBlitz"
+        }
       },
       "mynode": {
-        "title": "myNode",
         "page": {
           "title": "Σύνδεση σε <0>myNode</0>"
         }

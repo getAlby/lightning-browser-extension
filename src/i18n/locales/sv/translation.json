@@ -35,7 +35,6 @@
     "choose_connector": {
       "description": "Anslut till din externa lightning-plånbok eller node",
       "lnd": {
-        "title": "LND",
         "page": {
           "title": "Anslut din LND-nod",
           "description": "Du behöver URLen till din nod samt en macaroon med läs och skicka-rättigheter (t.ex. admin.macaroon)"
@@ -98,7 +97,6 @@
         }
       },
       "citadel": {
-        "title": "Citadel",
         "page": {
           "title": "Anslut <0>Citadel</0>-nod",
           "instructions": "Detta fungerar för tillfället inte om 2FA är aktiverat."
@@ -112,7 +110,6 @@
         }
       },
       "umbrel": {
-        "title": "Umbrel",
         "page": {
           "title": "Anslut <0>Umbrel</0>-nod",
           "instructions": "1. Gå till <0>Anslut plånbok</0><1/>2 i din Lightning Node-instrumentpanel. Välj läge <0>REST (Tor)</0> eller <0>REST (Lokalt nätverk)</0><1/>3. Kopiera <0>lndconnect URL</0> och klistra in den nedan"
@@ -123,7 +120,6 @@
         }
       },
       "mynode": {
-        "title": "myNode",
         "page": {
           "title": "Anslut <0>myNode</0>",
           "instructions": "På din myNode-hemsida, klicka på knappen <0>Wallet</0> som motsvarar din <0>Lightning</0>-tjänst. <1/> Klicka på knappen <0>Pair Wallet</0> under fliken <0>Status</0>. Fyll i ditt lösenord när du blir tillfrågad.<1/> I droppmenym välj kopplingsalternativ. Beroende på dina inställningar kan du antingen välja <0>Lightning (REST + Local IP)</0> eller <0>Lightning (REST + Tor)</0>."
@@ -134,7 +130,6 @@
         }
       },
       "startos": {
-        "title": "StartOS",
         "page": {
           "title": "Anslut till din <0>StartOS Server</0>",
           "instructions": "På din StartOS instrumentpanel klickar du på tjänsten <0>Lightning Network Daemon</0>.<1/>Välj fliken <0>Egenskaper</0>.<1/>Kopiera nu <0>LND Connect REST URL. </0>"
@@ -145,7 +140,6 @@
         }
       },
       "raspiblitz": {
-        "title": "RaspiBlitz",
         "page": {
           "title": "Anslut din <0>RaspiBlitz</0>-nod",
           "instructions1": "Följ dessa steg:<1/> 1. <0>SSH</0> till din <0>Raspiblitz</0><1/>2. Välj <0>Anslut appar och visa inloggningsuppgifter</0> från listan<1/><0/>3. Välj <0>Anslut Alby till denna nod</0><1/>4. Tryck på <0>OK</0> för att visa anslutningsuppgifterna<1/><1/>Kopiera och klistra in <0>REST API-värden</0> eller <0>.onion</0>-adressen för att ansluta genom Tor till ingången nedan.",
@@ -157,7 +151,6 @@
         }
       },
       "blink": {
-        "title": "Blink plånbok",
         "page": {
           "title": "Anslut <0>Blink Wallet</0>"
         },
@@ -166,13 +159,11 @@
         }
       },
       "bitcoin_jungle": {
-        "title": "Bitcoin Jungle Wallet",
         "page": {
           "title": "Anslut en <0>Bitcoin Jungle Wallet</0>"
         }
       },
       "btcpay": {
-        "title": "BTCPay Server",
         "config": {
           "label": "Konfigurationsdata"
         },
@@ -184,7 +175,6 @@
         "port": {
           "label": "Port"
         },
-        "title": "Core Lightning",
         "proxy": {
           "label": "Websocket proxy"
         },

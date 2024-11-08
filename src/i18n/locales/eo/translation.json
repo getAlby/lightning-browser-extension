@@ -29,7 +29,6 @@
     "choose_connector": {
       "description": "",
       "lnd": {
-        "title": "LND",
         "page": {
           "title": "Konekti al via LND-nodo",
           "description": ""
@@ -92,7 +91,6 @@
         }
       },
       "citadel": {
-        "title": "Citadel",
         "page": {
           "title": "",
           "instructions": ""
@@ -106,7 +104,6 @@
         }
       },
       "umbrel": {
-        "title": "Umbrel",
         "page": {
           "title": "",
           "instructions": ""
@@ -117,7 +114,6 @@
         }
       },
       "mynode": {
-        "title": "myNode",
         "page": {
           "title": "Konekti al <0>myNode</0>",
           "instructions": ""
@@ -128,7 +124,6 @@
         }
       },
       "startos": {
-        "title": "StartOS",
         "page": {
           "title": "",
           "instructions": ""
@@ -139,7 +134,6 @@
         }
       },
       "raspiblitz": {
-        "title": "RaspiBlitz",
         "page": {
           "title": "Konekti al via <0>RaspiBlitz</0>-nodo",
           "instructions1": "",
@@ -151,13 +145,11 @@
         }
       },
       "blink": {
-        "title": "",
         "page": {
           "title": ""
         }
       },
       "bitcoin_jungle": {
-        "title": "",
         "page": {
           "title": ""
         }
@@ -168,7 +160,6 @@
         }
       },
       "btcpay": {
-        "title": "BTCPay-servilo",
         "config": {
           "label": ""
         },
@@ -177,7 +168,6 @@
         }
       },
       "commando": {
-        "title": "",
         "page": {
           "title": "",
           "instructions": ""

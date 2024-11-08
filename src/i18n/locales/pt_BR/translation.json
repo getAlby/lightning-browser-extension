@@ -38,7 +38,6 @@
     "choose_connector": {
       "description": "Escolha uma carteira ou servidor disponível abaixo",
       "lnd": {
-        "title": "LND",
         "page": {
           "title": "Conecte-se no servidor LND",
           "description": "Você precisa da URL do servidor e um macaroon com permissão de envio e leitura (ex. admin.macaroon)"
@@ -87,7 +86,6 @@
         }
       },
       "citadel": {
-        "title": "Citadel",
         "page": {
           "title": "Conecte-se no servidor <0>Citadel</0>",
           "instructions": "Não funciona se o 2FA estiver ativado."
@@ -101,7 +99,6 @@
         }
       },
       "umbrel": {
-        "title": "Umbrel",
         "page": {
           "title": "Conecte-se no servidor <0>Umbrel</0>",
           "instructions": "1. In your Lightning Node dashboard go to <0>Connect wallet</0><1/>2. Select <0>REST (Tor)</0> or <0>REST (Local Network)</0> mode<1/>3. Copy the <0>lndconnect URL</0> and paste it below"
@@ -112,7 +109,6 @@
         }
       },
       "mynode": {
-        "title": "myNode",
         "page": {
           "title": "Conecte-se no servidor <0>myNode</0>",
           "instructions": "No myNode clique em <0>Wallet</0> botão para seu serviço <0>lightning</0>.<1/> Agora clique em <0>Pair Wallet</0> botão abaixo da tab <0>Status</0>. Insira sua senha quando solicitada.<1/> Selecione o menu suspenso e escolha uma opção de emparelhamento. Dependendo de sua configuração você pode escolher <0>Conexão lightning (REST + Local IP)</0> ou conexão <0>lightning (REST + Tor)</0>."
@@ -123,7 +119,6 @@
         }
       },
       "startos": {
-        "title": "StartOS",
         "page": {
           "title": "Conecte-se no seu servidor <0>StartOS</0>",
           "instructions": "<0>Note:</0> Atualmente somente a LND é suportada mas nós adicionaremos suporte para a c-lightning no futuro!<1/>No seu StartOS clique em service <0>Lightning Network Daemon</0>.<1/>Selecione a tab <0>Properties</0>.<1/>Agora copie o <0>LND Connect REST URL.</0>"
@@ -134,7 +129,6 @@
         }
       },
       "raspiblitz": {
-        "title": "RaspiBlitz",
         "page": {
           "title": "Conecte-se seu servidor <0>RaspiBlitz</0>",
           "instructions2": "Copie o (admin) <0>macaroon</0> no campo abaixo.",
@@ -146,7 +140,6 @@
         }
       },
       "blink": {
-        "title": "Carteira Blink",
         "page": {
           "title": "Conecte-se na <0>Carteira Blink</0>"
         },
@@ -159,7 +152,6 @@
         }
       },
       "bitcoin_jungle": {
-        "title": "Carteira Bitcoin Jungle",
         "page": {
           "title": "Conecte-se na <0>Carteira Bitcoin Jungle</0>"
         },
@@ -172,7 +164,6 @@
         }
       },
       "btcpay": {
-        "title": "Servidor BTCPay",
         "config": {
           "label": "Dados config",
           "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.co"
@@ -204,7 +195,6 @@
           "title": "Conecte-se no seu servidor Core Lightning",
           "instructions": "Certifique-se de conectar em um servidor Core Lightning que esteja na versão 0.12.0 ou mais recente, o plugin commando instalado e rodando e o servidor acessível na rede relâmpago. Crie um rune executando o comando 'lightning-cli commando-rune'."
         },
-        "title": "Core Lightning",
         "pubkey": {
           "label": "Chave pública"
         },
@@ -311,8 +301,7 @@
           "receive_bitcoin": {
             "title": "Deposite bitcoin",
             "description": "Receba satoshis usando um endereço relâmpago, fatura relâmpago ou endereço bitcoin"
-          },
-          "setup_keys": {}
+          }
         }
       }
     },
@@ -1131,7 +1120,8 @@
     "account_menu": {
       "options": {
         "account": {
-          "go_to_web_wallet": "Acessar sua conta na web"
+          "go_to_web_wallet": "Acessar sua conta na web",
+          "add": "Conectar"
         }
       },
       "title": "Mudar de carteira"

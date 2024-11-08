@@ -61,7 +61,6 @@
       "title": "連接閃電錢包",
       "description": "連接你的外部閃電錢包或節點",
       "lnd": {
-        "title": "LND",
         "page": {
           "title": "連接你的 LND 節點",
           "description": "你需要你的節點 URL 和一個具有讀取和發送權限的macaroon（例如 admin.macaroon）"
@@ -131,7 +130,6 @@
         }
       },
       "citadel": {
-        "title": "Citadel",
         "page": {
           "title": "連接 <0>Citadel</0> 節點",
           "instructions": "如果啟用了 2FA，這目前不可用。"
@@ -145,7 +143,6 @@
         }
       },
       "umbrel": {
-        "title": "Umbrel",
         "page": {
           "title": "連接 <0>Umbrel</0> 節點",
           "instructions": "1. 在你的 Umbrel 儀表板上，進入 <0>連接錢包</0><1/>2. 選擇 <0>REST (Tor)</0> 或 <0>REST （本地網絡）</0> 模式<1/>3. 複製 <0>lndconnect URL</0> 並粘貼到下方"
@@ -156,7 +153,6 @@
         }
       },
       "mynode": {
-        "title": "myNode",
         "page": {
           "title": "連接 <0>myNode</0>",
           "instructions": "在你的myNode主頁上，點擊你的<0>Lightning</0>服務的<0>Wallet</0>按鈕。<1/>現在點擊<0>Status</0>選項卡下的<0>Pair Wallet</0>按鈕。出現提示時輸入密碼。<1/>選擇下拉功能表，然後選擇配對選項。根據你的設置，你可以使用<0>Lightning（REST + Local IP）</0> 連接或 <0>Lightning（REST + Tor）</0> 連接。"
@@ -167,7 +163,6 @@
         }
       },
       "startos": {
-        "title": "StartOS",
         "page": {
           "title": "連接你的 <0>StartOS 服务器</0>",
           "instructions": "在你的 StartOS 儀表板上點擊 <0>Lightning Network Daemon</0> 服務。<1/>選擇 <0>Properties</0> 標籤。<1/>複製 <0>LND Connect REST URL。</0>"
@@ -178,7 +173,6 @@
         }
       },
       "raspiblitz": {
-        "title": "RaspiBlitz",
         "page": {
           "title": "連接你的 <0>RaspiBlitz</0> 節點",
           "instructions1": "按照以下步驟操作：<1/> 1.<0>SSH</0>進入你的<0>Raspiblitz</0><1/>2。從列表中選擇<0>Connect Apps & Show Credentials</0><1/><0/>3。選擇 <0>Connect Alby to this node</0><1/>4。按 <0>OK</0> 以顯示連接憑據<1/><1/>在下面的輸入中複製並粘貼<0>REST API 主機</0>或 <0>.onion</0> 位址以通過 Tor 連接。",
@@ -190,19 +184,16 @@
         }
       },
       "blink": {
-        "title": "Blink Wallet",
         "page": {
           "title": "連接<0>Blink Wallet</0>"
         }
       },
       "bitcoin_jungle": {
-        "title": "Bitcoin Jungle Wallet",
         "page": {
           "title": "連接<0>Bitcoin Jungle Wallet</0>"
         }
       },
       "btcpay": {
-        "title": "BTCPay Server",
         "config": {
           "label": "配置數據"
         },
@@ -211,7 +202,6 @@
         }
       },
       "commando": {
-        "title": "Core Lightning",
         "page": {
           "title": "連接到你的Core Lightning節點",
           "instructions": "確保你使用的是Core Lightning 0.12.0或更高版本，commando插件正在運行，並且你的節點可以通過閃電網路訪問。通過運行「lightning-cli commando-rune」來創建rune。"

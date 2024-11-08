@@ -29,7 +29,6 @@
     "choose_connector": {
       "description": "",
       "lnd": {
-        "title": "",
         "page": {
           "title": "",
           "description": ""
@@ -92,7 +91,6 @@
         }
       },
       "citadel": {
-        "title": "",
         "page": {
           "title": "",
           "instructions": ""
@@ -106,7 +104,6 @@
         }
       },
       "umbrel": {
-        "title": "",
         "page": {
           "title": "",
           "instructions": ""
@@ -117,7 +114,6 @@
         }
       },
       "mynode": {
-        "title": "",
         "page": {
           "title": "",
           "instructions": ""
@@ -128,7 +124,6 @@
         }
       },
       "startos": {
-        "title": "",
         "page": {
           "title": "",
           "instructions": ""
@@ -139,7 +134,6 @@
         }
       },
       "raspiblitz": {
-        "title": "",
         "page": {
           "title": "",
           "instructions1": "",
@@ -151,19 +145,16 @@
         }
       },
       "blink": {
-        "title": "",
         "page": {
           "title": ""
         }
       },
       "bitcoin_jungle": {
-        "title": "",
         "page": {
           "title": ""
         }
       },
       "btcpay": {
-        "title": "",
         "config": {
           "label": ""
         },
