@@ -3,19 +3,22 @@
     "welcome": {
       "set_password": {
         "choose_password": {
-          "label": "Choisissez un mot de passe de déverrouillage :"
+          "label": "Choisissez un code de déverrouillage :"
         },
         "confirm_password": {
           "label": "Confirmons que vous l'avez tapé correctement :"
         },
         "errors": {
-          "enter_password": "S'il vous plait, entrez votre mot de passe.",
-          "confirm_password": "Veuillez confirmer votre mot de passe.",
-          "mismatched_password": "Les mots de passe entrés ne sont pas les mêmes."
-        }
+          "enter_password": "Veuillez saisir un code.",
+          "confirm_password": "Veuillez confirmer votre code.",
+          "mismatched_password": "Les codes ne correspondent pas."
+        },
+        "title": "Définir un code de déverrouillage",
+        "description1": "Définir un code pour déverrouiller Alby dans ce navigateur",
+        "description2": "Le code de déverrouillage peut être modifié mais pas récupéré. "
       },
       "test_connection": {
-        "ready": "Parfait, vous êtes prêt !",
+        "ready": "Parfait, tout est prêt !",
         "initializing": "Création de votre compte. S'il vous plait, veuillez patienter, ceci peut prendre une minute...",
         "connection_error": "Erreur de connexion",
         "review_connection_details": "Veuillez vérifier vos informations de connexion.",
@@ -23,7 +26,12 @@
         "contact_support": "Si vous avez besoin d'aide, veuillez contacter support@getalby.com",
         "actions": {
           "delete_edit_account": "Supprimer le compte invalide et modifier à nouveau"
-        }
+        },
+        "node_required": "L'extension est configurée, mais pour être en mesure de recevoir des paiements, il est nécessaire de configurer votre <0>compte Alby</0>."
+      },
+      "pin_extension": {
+        "title": "Épingler Alby",
+        "description": "Vous y êtes presque. Pour lancer Alby plus facilement, pensez à l'épingler à votre barre d'outils :"
       }
     },
     "choose_path": {
