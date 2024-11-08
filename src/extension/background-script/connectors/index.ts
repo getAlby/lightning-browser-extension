@@ -1,5 +1,4 @@
 import Alby from "./alby";
-import AlbyHub from "./albyhub";
 import Citadel from "./citadel";
 import Commando from "./commando";
 import Eclair from "./eclair";
@@ -41,7 +40,6 @@ const connectors = {
   alby: Alby,
   nwc: NWC,
   lawallet: LaWallet,
-  albyhub: AlbyHub,
 };
 
 export default connectors;

@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import toast from "~/app/components/Toast";
 import msg from "~/common/lib/msg";
 
-import logo from "/static/assets/icons/albyhub.svg";
+import logo from "/static/assets/icons/albyhub.png";
 
 export default function ConnectAlbyHub() {
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ export default function ConnectAlbyHub() {
   }
 
   function getConnectorType() {
-    return "albyhub";
+    return "nwc";
   }
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
