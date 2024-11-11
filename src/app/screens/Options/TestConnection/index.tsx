@@ -128,7 +128,7 @@ export default function TestConnection() {
                         <span className="text-sm">
                           <Trans
                             i18nKey={"node_required"}
-                            t={t}
+                            t={tCommon}
                             components={[
                               // eslint-disable-next-line react/jsx-key
                               <Hyperlink

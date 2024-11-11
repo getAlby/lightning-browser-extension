@@ -423,8 +423,7 @@
             "description": "Erstelle einen Master Key für Bitcoin, Nostr und Liquid oder importiere ein bestehendes Nostr-Konto."
           }
         },
-        "upgrade_account": "Du verwendest die alte LNDHub-Einstellung. <0>Bitte verbinde dich erneut</0> mit deinem Alby-Konto, um Zugang zu den neuesten Funktionen zu erhalten.",
-        "node_required": "Ihr Alby-Konto hat keine Wallet konfiguriert. Um Zahlungen senden und empfangen zu können, schließe die Konfiguration der Wallet für dein <0>Alby-Konto</0> ab."
+        "upgrade_account": "Du verwendest die alte LNDHub-Einstellung. <0>Bitte verbinde dich erneut</0> mit deinem Alby-Konto, um Zugang zu den neuesten Funktionen zu erhalten."
       },
       "allowance_view": {
         "sats": "sats",

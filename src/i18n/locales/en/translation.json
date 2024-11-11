@@ -24,7 +24,6 @@
         "review_connection_details": "Please review your connection details.",
         "connection_taking_long": "Trying to connect takes longer than expected... Are your details correct? Is your node reachable?",
         "contact_support": "If you need help please contact support@getalby.com",
-        "node_required": "The extension is configured, but to be able to send and receive payments finish the wallet configuration for your <0>Alby account</0>.",
         "actions": {
           "delete_edit_account": "Delete invalid account and edit again"
         }
@@ -401,7 +400,6 @@
             "description": "Fund your account and receive via your lightning address or an invoice"
           }
         },
-        "node_required": "Complete your wallet setup to start sending and receiving unlimited payments <0>here</0>.Until setup is complete, you can receive up to 50k sats as <1>fee credits</1> only.",
         "upgrade_account": "You are using the old LNDHub setup. <0>Please re-connect</0> your Alby account to get access to the latest features."
       }
     },
@@ -1126,6 +1124,7 @@
     "website": "Website",
     "wallet_settings": "Wallet Settings",
     "apps": "Apps",
+    "node_required": "Complete your wallet setup to start sending and receiving unlimited payments <0>here</0>.Until setup is complete, you can receive up to 50k sats as <1>fee credits</1> only.",
     "actions": {
       "back": "Back",
       "delete": "Delete",

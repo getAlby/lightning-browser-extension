@@ -180,8 +180,8 @@ const DefaultView: FC<Props> = (props) => {
               </div>
               <span className="text-sm">
                 <Trans
-                  i18nKey={"default_view.node_required"}
-                  t={t}
+                  i18nKey={"node_required"}
+                  t={tCommon}
                   components={[
                     // eslint-disable-next-line react/jsx-key
                     <Hyperlink
