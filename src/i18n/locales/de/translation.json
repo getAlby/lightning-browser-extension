@@ -26,8 +26,7 @@
         "initializing": "Dein Konto wird initialisiert. Bitte warte, dies kann eine Minute dauern...",
         "connection_error": "Verbindungsfehler",
         "connection_taking_long": "Der Verbindungsversuch dauert länger als erwartet... Sind deine Angaben korrekt? Ist deine Node erreichbar?",
-        "contact_support": "Wenn du Hilfe benötigst, wende dich bitte an support@getalby.com",
-        "node_required": "Die Erweiterung ist konfiguriert, aber um Zahlungen senden und empfangen zu können, musst du die Konfiguration der Wallet für Ihr <0>Alby-Konto</0> abschließen."
+        "contact_support": "Wenn du Hilfe benötigst, wende dich bitte an support@getalby.com"
       },
       "pin_extension": {
         "title": "Die Alby Erweiterung anpinnen",
