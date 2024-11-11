@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import Alert from "~/app/components/Alert";
+import Hyperlink from "~/app/components/Hyperlink";
 import { useAccount } from "~/app/context/AccountContext";
 import { useAccounts } from "~/app/context/AccountsContext";
 import { useSettings } from "~/app/context/SettingsContext";
@@ -130,11 +131,17 @@ export default function TestConnection() {
                             t={t}
                             components={[
                               // eslint-disable-next-line react/jsx-key
-                              <a
-                                className="underline"
+                              <Hyperlink
                                 href="https://getalby.com/onboarding/node/new"
                                 target="_blank"
-                                rel="noreferrer"
+                                rel="noopener nofollow"
+                              />,
+
+                              // eslint-disable-next-line react/jsx-key
+                              <Hyperlink
+                                href="https://guides.getalby.com/user-guide/alby-account-and-browser-extension/alby-account/faqs-alby-account/what-are-fee-credits-in-my-alby-account"
+                                target="_blank"
+                                rel="noopener nofollow"
                               />,
                             ]}
                           />
