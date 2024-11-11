@@ -334,6 +334,19 @@
           "connection_failed": "Connection failed. Are your credentials correct?"
         }
       },
+      "albyhub": {
+        "title": "Alby Hub",
+        "page": {
+          "instructions": "Open your Alby Hub, create a new app connection and paste the connection secret to connect.",
+          "url": {
+            "label": "NWC connection secret",
+            "placeholder": "nostr+walletconnect://69effe..."
+          },
+          "errors": {
+            "connection_failed": "Connection failed. Is your Alby Hub online and app connection enabled?"
+          }
+        }
+      },
       "nwc": {
         "title": "Nostr Wallet Connect",
         "page": {
