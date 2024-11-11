@@ -132,6 +132,7 @@ export default function TestConnection() {
                             components={[
                               // eslint-disable-next-line react/jsx-key
                               <Hyperlink
+                                className="underline"
                                 href="https://getalby.com/onboarding/node/new"
                                 target="_blank"
                                 rel="noopener nofollow"
@@ -139,6 +140,7 @@ export default function TestConnection() {
 
                               // eslint-disable-next-line react/jsx-key
                               <Hyperlink
+                                className="underline"
                                 href="https://guides.getalby.com/user-guide/alby-account-and-browser-extension/alby-account/faqs-alby-account/what-are-fee-credits-in-my-alby-account"
                                 target="_blank"
                                 rel="noopener nofollow"
