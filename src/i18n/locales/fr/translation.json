@@ -26,8 +26,7 @@
         "contact_support": "Si vous avez besoin d'aide, veuillez contacter support@getalby.com",
         "actions": {
           "delete_edit_account": "Supprimer le compte invalide et modifier à nouveau"
-        },
-        "node_required": "L'extension est configurée, mais pour être en mesure de recevoir des paiements, il est nécessaire de configurer votre <0>compte Alby</0>."
+        }
       },
       "pin_extension": {
         "title": "Épingler Alby",
