@@ -15,9 +15,11 @@ import ConnectUmbrel from "@screens/connectors/ConnectUmbrel";
 import { Route } from "react-router-dom";
 import i18n from "~/i18n/i18nConfig";
 
+import ConnectAlbyHub from "~/app/screens/connectors/ConnectAlbyHub";
 import ConnectNWC from "~/app/screens/connectors/ConnectNWC";
 import ConnectVoltage from "~/app/screens/connectors/ConnectVoltage";
 import ConnectCommando from "../screens/connectors/ConnectCommando";
+import albyhub from "/static/assets/icons/albyhub.png";
 import btcpay from "/static/assets/icons/btcpay.svg";
 import citadel from "/static/assets/icons/citadel.png";
 import core_ln from "/static/assets/icons/core_ln.svg";
@@ -167,6 +169,12 @@ const connectorMap: { [key: string]: ConnectorRoute } = {
     title: i18n.t("translation:choose_connector.nwc.title"),
     logo: nwc,
   },
+  albyhub: {
+    path: "albyhub",
+    element: <ConnectAlbyHub />,
+    title: i18n.t("translation:choose_connector.albyhub.title"),
+    logo: albyhub,
+  },
   lawallet: {
     path: "lawallet",
     element: <ConnectLaWallet />,
@@ -246,6 +254,7 @@ const distributionMap: { [key: string]: { logo: string; children: Route[] } } =
 
 function getConnectorRoutes(): ConnectorRoute[] {
   return [
+    connectorMap["albyhub"],
     connectorMap["lnd"],
     connectorMap["lnc"],
     connectorMap["commando"],
