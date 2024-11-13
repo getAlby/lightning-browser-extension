@@ -1124,7 +1124,7 @@
     "website": "Website",
     "wallet_settings": "Wallet Settings",
     "apps": "Apps",
-    "node_required": "Complete your wallet setup to start sending and receiving unlimited payments <0>here</0>.Until setup is complete, you can receive up to 50k sats as <1>fee credits</1> only.",
+    "node_required": "Finish setting up your wallet to start sending and receiving unlimited payments <0>here</0>. Until then, you can receive up to 50,000 sats as <1>fee credits</1> only.",
     "actions": {
       "back": "Back",
       "delete": "Delete",
