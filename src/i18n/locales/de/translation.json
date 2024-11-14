@@ -11,9 +11,9 @@
           "confirm_password": "Bitte bestätige deinen Passcode."
         },
         "confirm_password": {
-          "label": "Vergewisse dich, dass du es richtig eingegeben hast:"
+          "label": "Vergewisser dich, dass du es richtig eingegeben hast:"
         },
-        "description1": "Lege ein Password fest, um die Alby-Erweiterung in diesem Browser zu entsperren",
+        "description1": "Lege ein Password fest, um die Alby Erweiterung in diesem Browser zu entsperren",
         "description2": "Das Password zum Entsperren kann nicht wiederhergestellt, aber geändert werden ",
         "title": "Passwort zum Entsperren der Erweiterung festlegen"
       },
@@ -42,29 +42,29 @@
           "connection_failed": "Verbindung fehlgeschlagen. Sind deine LND-Anmeldeinformationen korrekt?"
         },
         "url": {
-          "label": "REST-API-Host und -Port",
+          "label": "REST-API Host und Port",
           "placeholder": "https://dein-node-url:8080"
         },
         "macaroon": {
-          "label": "Macaroon (HEX-Format)"
+          "label": "Macaroon (HEX Format)"
         },
         "page": {
-          "description": "Du benötigst deine Node-URL und einen Macaroon mit Lese- und Sendeberechtigung (z.B. admin.macaroon)",
+          "description": "Du benötigst deine Node URL und einen Macaroon mit Lese- und Sendeberechtigung (z.B. admin.macaroon)",
           "title": "Verbinden mit deiner LND Node"
         }
       },
       "lndhub_go": {
         "title": "LNDHub",
         "uri": {
-          "label": "LNDHub-Export-URI"
+          "label": "LNDHub Export URI"
         },
         "errors": {
-          "invalid_uri": "Ungültiger LNDHub-URI",
-          "connection_failed": "Verbindung fehlgeschlagen. Ist dein LNDHub-URI korrekt?"
+          "invalid_uri": "Ungültiger LNDHub URI",
+          "connection_failed": "Verbindung fehlgeschlagen. Ist dein LNDHub URI korrekt?"
         },
         "page": {
           "title": "Verbinden mit LNDHub",
-          "description": "Gebe hier deine LNDHub-Zugangsdaten-URI ein oder scanne den QR-Code mit deiner Webcam."
+          "description": "Gebe hier deine LNDHub Zugangsdaten URI ein oder scanne den QR-Code mit deiner Webcam."
         }
       },
       "lnbits": {
@@ -104,7 +104,7 @@
           "placeholder": "lndconnect://deinenode:8080?..."
         }
       },
-      "description": "Verbinden mit deinem externen Lightning Wallet oder Node",
+      "description": "Verbinden mit deiner externen Lightning Wallet oder Node",
       "citadel": {
         "page": {
           "instructions": "Das funktioniert aktuell nicht, wenn 2FA ausgewählt ist.",
@@ -226,7 +226,7 @@
         "title": "Lightning Terminal (LNC)",
         "pairing_phrase": {
           "label": "Deine Pairing Phrase ",
-          "placeholder": "geheimer Stack Sats Phrase"
+          "placeholder": "Geheimer Stack Sats Phrase"
         },
         "page": {
           "title": "Anschließen an Lightning Terminal (LNC)",
@@ -1190,7 +1190,7 @@
         "label": "Erinnere dich und lege ein Budget fest"
       },
       "budget": {
-        "label": "Budget"
+        "label": "Guthaben"
       }
     },
     "badge": {
@@ -1307,7 +1307,8 @@
     "advanced": "Erweiterte Einstellungen anzeigen",
     "details": "Einzelheiten",
     "general": "Allgemein",
-    "wallet_settings": "Wallet-Einstellungen"
+    "wallet_settings": "Wallet-Einstellungen",
+    "node_required": "Schließe deine Einrichtung von deiner Geldbörse ab, damit du <0>hier</0> unbegrenzt Zahlungen senden und empfangen kannst. Bis dahin kannst du nur bis zu 50.000 Sats als <1>Gebührenguthaben</1> empfangen."
   },
   "permissions": {
     "commando": {
