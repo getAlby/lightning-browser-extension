@@ -51,7 +51,8 @@
         "page": {
           "description": "Du benötigst deine Node-URL und einen Macaroon mit Lese- und Sendeberechtigung (z.B. admin.macaroon)",
           "title": "Verbinden mit deiner LND Node"
-        }
+        },
+        "title": "LND"
       },
       "lndhub_go": {
         "title": "LNDHub",
@@ -92,7 +93,8 @@
         "rest_url": {
           "label": "Indconnect REST URL",
           "placeholder": "lndconnect://deinenode:8080?..."
-        }
+        },
+        "title": "myNode"
       },
       "umbrel": {
         "page": {
@@ -102,7 +104,8 @@
         "rest_url": {
           "label": "Indconnect-REST URL",
           "placeholder": "lndconnect://deinenode:8080?..."
-        }
+        },
+        "title": "Umbrel"
       },
       "description": "Verbinden mit deinem externen Lightning Wallet oder Node",
       "citadel": {
@@ -116,7 +119,8 @@
         "url": {
           "label": "Citadel URL",
           "placeholder": "http://citadel.local"
-        }
+        },
+        "title": "Citadel"
       },
       "raspiblitz": {
         "page": {
@@ -127,7 +131,8 @@
         "rest_api_host": {
           "label": "REST API Host",
           "placeholder": "deine-node-onion-adresse:port"
-        }
+        },
+        "title": "RaspiBlitz"
       },
       "eclair": {
         "title": "Eclair",
@@ -151,7 +156,8 @@
         "rest_url": {
           "placeholder": "lndconnect://deinenode:8080?...",
           "label": "Indconnect REST URL"
-        }
+        },
+        "title": "StartOS"
       },
       "blink": {
         "page": {
@@ -163,7 +169,8 @@
         },
         "currency": {
           "label": "Wallet auswählen"
-        }
+        },
+        "title": "Blink Wallet"
       },
       "bitcoin_jungle": {
         "page": {
@@ -175,7 +182,8 @@
         },
         "currency": {
           "label": "Wallet auswählen"
-        }
+        },
+        "title": "Bitcoin Jungle Wallet"
       },
       "btcpay": {
         "config": {
@@ -188,7 +196,8 @@
         "page": {
           "instructions": "Navigiere zu deinem BTCPay Server und melde dich als Administrator an. Gehe zu Servereinstellungen > Dienste > LND REST - Informationen anzeigen. Klicke dann auf \"QR-Code-Informationen anzeigen\" und kopiere die QR-Code-Daten. Fügen sie unten ein:",
           "title": "Verbindung zu BTCPay LND"
-        }
+        },
+        "title": "BTCPay Server"
       },
       "commando": {
         "page": {
@@ -219,7 +228,8 @@
         },
         "errors": {
           "connection_failed": "Verbindung fehlgeschlagen. Ist deine Core Lightning Node online und verwendet diese das Commando Plugin?"
-        }
+        },
+        "title": "Core Lightning"
       },
       "title": "Verbinde Lightning Wallet",
       "lnc": {
@@ -305,6 +315,19 @@
         },
         "title": "LaWallet.io",
         "private_key": "Privater Schlüssel"
+      },
+      "albyhub": {
+        "title": "Alby Hub",
+        "page": {
+          "instructions": "Öffne deinen Alby Hub, erstelle eine neue App-Verbindung und fügen das Verbindungsgeheimnis ein, um eine Verbindung herzustellen.",
+          "url": {
+            "label": "NWC-Verbindungsgeheimnis",
+            "placeholder": "nostr+walletconnect://69effe..."
+          },
+          "errors": {
+            "connection_failed": "Verbindung fehlgeschlagen. Ist dein Alby Hub online und die App-Verbindung aktiviert?"
+          }
+        }
       }
     },
     "unlock": {
