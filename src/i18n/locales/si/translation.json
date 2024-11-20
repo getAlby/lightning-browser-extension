@@ -1,0 +1,197 @@
+{
+  "translation": {
+    "welcome": {
+      "set_password": {
+        "title": "දිගු අගුළු හැරීමේ මුර කේතය සකසන්න",
+        "description2": "අගුළු ඇරීමේ මුර කේතය ප්‍රතිසාධනය කළ නොහැක, නමුත් වෙනස් කළ හැක. ",
+        "confirm_password": {
+          "label": "ඔබ එය නිවැරදිව ටයිප් කළ බව තහවුරු කරමු:"
+        },
+        "errors": {
+          "mismatched_password": "මුරකේත නොගැලපේ.",
+          "enter_password": "කරුණාකර මුර කේතයක් ඇතුළු කරන්න.",
+          "confirm_password": "කරුණාකර ඔබගේ මුර කේතය තහවුරු කරන්න."
+        },
+        "choose_password": {
+          "label": "අගුළු ඇරීමේ මුර කේතයක් තෝරන්න:"
+        },
+        "description1": "මෙම බ්‍රවුසරයේ ඇල්බි(Alby) දිගුව අගුළු හැරීමට මුරකේතයක් සකසන්න"
+      },
+      "test_connection": {
+        "ready": "නියමයි, ඔබ යාමට සූදානම්!",
+        "connection_error": "සම්බන්ධතා දෝෂය",
+        "review_connection_details": "කරුණාකර ඔබගේ සම්බන්ධතා විස්තර සමාලෝචනය කරන්න.",
+        "actions": {
+          "delete_edit_account": "වලංගු නොවන ගිණුමක් මකා නැවත සංස්කරණය කරන්න"
+        },
+        "contact_support": "ඔබට උදවු අවශ්‍ය නම් කරුණාකර support@getalby.com සම්බන්ධ කරගන්න",
+        "initializing": "ඔබගේ ගිණුම ආරම්භ කිරීම. කරුණාකර රැඳී සිටින්න, මෙයට විනාඩියක් ගත විය හැක...",
+        "connection_taking_long": "සම්බන්ධ වීමට උත්සාහ කිරීමට බලාපොරොත්තු වූවාට වඩා වැඩි කාලයක් ගතවේ... ඔබේ විස්තර නිවැරදිද? ඔබගේ නෝඩයට ළඟා විය හැකිද?"
+      },
+      "pin_extension": {
+        "title": "ඔබේ ඇල්බි(Alby) දිගුව අමුණන්න",
+        "next_btn": "ඇල්බි(Alby) සමඟ {{icon}} buzzin' ආරම්භ කරන්න",
+        "explanation": "1. ඔබගේ බ්‍රවුසරයේ ඉහළ දකුණු කෙළවරේ ඇති <0/> මත ක්ලික් කරන්න<1/>2. Alby සොයාගෙන එය මෙවලම් තීරුවට සම්බන්ධ කිරීමට ක්ලික් කරන්න<1/>3. හරි.  ඇල්බි(Alby) වෙත ප්‍රවේශ වීමට <2/> නිරූපකය මත ක්ලික් කරන්න",
+        "description": "ඔබ බොහෝ දුරට එහි පැමිණ ඇත. ඇල්බි(Alby) පහසුවෙන් භාවිත කිරීමට, ඔබේ දිගුව බ්‍රවුසර මෙවලම් තීරුවට ඇලවීමට මතක තබා ගන්න:"
+      }
+    },
+    "choose_path": {
+      "other": {
+        "title": "ඔබේම මුදල් පසුම්බිය රැගෙන එන්න",
+        "connect": "ඔබේ මුදල් පසුම්බිය සොයන්න",
+        "description": "ඔබට දැනටමත් මුදල් පසුම්බියක් තිබේ නම් හෝ ලයිට්නින්(lightning) නෝඩයක් තිබේ නම් වඩාත් සුදුසුය."
+      },
+      "title": "ඇල්බි(Alby) දිගුව මුදල් පසුම්බියකට සම්බන්ධ කරන්න",
+      "alby": {
+        "title": "ඇල්බි(Alby) ගිණුම",
+        "connect": "ඇල්බි(Alby) ගිණුම සමඟින් ඉදිරියට යන්න",
+        "description": "ඔබ ඔබේ බිට්කොයින් පාලනය කරමින් යෙදුම් භුක්ති විඳීමට කැමති නම් වඩාත් සුදුසුය."
+      }
+    },
+    "alby": {
+      "pre_connect": {
+        "set_password": {
+          "choose_password": {
+            "label": "මුරපදය"
+          },
+          "confirm_password": {
+            "label": "මුරපදය තහවුරු කරන්න"
+          },
+          "errors": {
+            "confirm_password": "කරුණාකර ඔබගේ මුරපදය තහවුරු කරන්න.",
+            "enter_password": "කරුණාකර මුරපදයක් ඇතුළත් කරන්න.",
+            "mismatched_password": "මුරපද නොගැලපේ."
+          }
+        }
+      }
+    },
+    "choose_connector": {
+      "title": "ලයිට්නින්(Lightning) පසුම්බිය සම්බන්ධ කරන්න",
+      "description": "ඔබගේ බාහිර ලයිට්නින්(lightning) මුදල් පසුම්බියට හෝ නෝඩයට සම්බන්ධ කරන්න",
+      "lnd": {
+        "url": {
+          "label": "REST API සත්කාරක(host) සහ port",
+          "placeholder": "https://ඔබගේ-නෝඩ්-url:8080"
+        },
+        "page": {
+          "title": "ඔබගේ LND නෝඩයට සම්බන්ධ කරන්න",
+          "description": "ඔබට ඔබගේ නෝඩ් URL සහ කියවීමට සහ යැවීමට අවසර සහිත මැකරූන්(macaroon) අවශ්‍ය වේ (උදා. admin.macaroon)"
+        },
+        "errors": {
+          "connection_failed": "සම්බන්ධතාවය අසාර්ථක විය. ඔබගේ LND අක්තපත්‍ර නිවැරදිද?"
+        },
+        "macaroon": {
+          "label": "මැකරූන්(Macaroon) (HEX ආකෘතිය)"
+        },
+        "drag_and_drop": "ඔබේ මැකරූන්(macaroon) මෙතැනට ඇද දමන්න හෝ <0>බ්‍රවුස් කරන්න(browse)</0>"
+      },
+      "umbrel_lightning_node": {
+        "title": "ලයිට්නින්(lightning) නෝඩ්"
+      },
+      "lnc": {
+        "title": "ලයිට්නින්(Lightning) පර්යන්තය (LNC)",
+        "page": {
+          "title": "ලයිට්නින්(lightning) පර්යන්තයට (LNC) සම්බන්ධ කරන්න",
+          "description": "1. Lightning Terminal පැති තීරුවේ <0>අකුණු(lightning) නෝඩ් සම්බන්ධ කිරීම තෝරන්න</0> .<1/> 2. <0>නව සැසියක් සාදන්න</0><1/>3 ක්ලික් කරන්න. සැසිය ලේබල් කරන්න, කැමති අවසර තෝරාගෙන ඉදිරිපත් කරන්න<1/>4. <0>යුගල කිරීමේ වාක්‍ය ඛණ්ඩය පිටපත් කර</0> එය පහත අලවන්න."
+        },
+        "pairing_phrase": {
+          "label": "ඔබේ යුගල කිරීමේ වාක්‍ය ඛණ්ඩය. ",
+          "placeholder": "රහස් ස්ටැක් සැට්ස්(sats) වාක්‍ය ඛණ්ඩය"
+        }
+      },
+      "lndhub_go": {
+        "title": "LNDHub",
+        "page": {
+          "title": "LNDHub වෙත සම්බන්ධ වන්න",
+          "description": "ඔබේ LNDHub අක්තපත්‍ර URI මෙහි ඇතුළත් කරන්න නැතහොත් ඔබේ වෙබ් කැමරාව සමඟ QR කේතය පරිලෝකනය කරන්න."
+        },
+        "uri": {
+          "label": "LNDHub අපනයන URI"
+        },
+        "errors": {
+          "invalid_uri": "වලංගු නොවන LNDHub URI",
+          "connection_failed": "සම්බන්ධතාවය අසාර්ථක විය. ඔබේ LNDHub URI නිවැරදිද?"
+        }
+      },
+      "lnbits": {
+        "title": "LNbits",
+        "page": {
+          "title": "<0>LNbits</0> වෙත සම්බන්ධ වන්න",
+          "instructions": "LNbits හි, ඔබට සම්බන්ධ වීමට අවශ්‍ය මුදල් පසුම්බිය තෝරා එය විවෘත කර API තොරතුරු මත ක්ලික් කර පරිපාලක යතුර පිටපත් කරන්න. එය පහත අලවන්න:"
+        },
+        "admin_key": {
+          "label": "LNbits පරිපාලක යතුර",
+          "placeholder": "ඔබේ ඉලක්කම් 32 පරිපාලක යතුර"
+        },
+        "url": {
+          "label": "LNbits URL"
+        },
+        "errors": {
+          "connection_failed": "සම්බන්ධතාවය අසාර්ථක විය. ඔබ සතුව නිවැරදි URL සහ පරිපාලක යතුර තිබේද?"
+        }
+      },
+      "eclair": {
+        "title": "ඉක්ලෙයාර්(Eclair)",
+        "page": {
+          "title": "<0>ඉක්ලෙයාර්(Eclair)</0> වෙත සම්බන්ධ වන්න",
+          "instructions": "ඔබට ඔබේ ඉක්ලෙයාර්(Eclair) URL සහ මුරපදය අවශ්‍ය වේ."
+        },
+        "password": {
+          "label": "ඉක්ලෙයාර්(Eclair) මුරපදය"
+        },
+        "url": {
+          "label": "ඉක්ලෙයාර්(Eclair) URL",
+          "placeholder": "http://localhost:8080"
+        }
+      },
+      "citadel": {
+        "page": {
+          "title": "<0>සිටඩෙල්(Citadel)</0> node වෙත සම්බන්ධ කරන්න",
+          "instructions": "2FA සබල කර ඇත්නම් මෙය දැනට ක්‍රියා නොකරයි."
+        },
+        "password": {
+          "label": "සිටඩෙල්(Citadel) මුරපදය"
+        },
+        "url": {
+          "label": "සිටඩෙල්(Citadel) URL",
+          "placeholder": "http://citadel.local"
+        }
+      },
+      "umbrel": {
+        "page": {
+          "title": "Connect to <0>අම්බ්‍රල්(Umbrel)</0> node",
+          "instructions": "1. ඔබේ Lightning Node dashboard එකේ <0>Connect wallet</0><1/>2 වෙත යන්න. <0>REST (Tor)</0> හෝ <0>REST (Local Network)</0> mode<1/>3 තෝරන්න. <0>lndconnect URL</0> පිටපත් කර පහතින් අලවන්න"
+        },
+        "rest_url": {
+          "placeholder": "lndconnect://ඔබේ නෝඩය:8080?...",
+          "label": "lndconnect REST URL"
+        }
+      },
+      "mynode": {
+        "rest_url": {
+          "label": "lndconnect REST URL",
+          "placeholder": "lndconnect://ඔබේ නෝඩය:8080?..."
+        },
+        "page": {
+          "title": "<0>myNode</0> වෙත සම්බන්ධ වන්න",
+          "instructions": "ඔබගේ myNode මුල් පිටුවේ ඔබගේ <0>අකුණු(lightning)</0> සේවාව සඳහා <0>Wallet</0> බොත්තම මත ක්ලික් කරන්න.<1/> තත්ත්ව(Status) ටැබය<0 යටතේ ඇති <0>Pair Wallet</0> බොත්තම ක්ලික් කරන්න ></0> . විමසූ විට ඔබගේ මුරපදය ඇතුළත් කරන්න.<1/> පතන මෙනුව(dropdown menu) තෝරා යුගල කිරීමේ විකල්පයක් තෝරන්න. ඔබගේ පිහිටුවීම් මත පදනම්ව ඔබට <0>අකුණු (REST + local IP)</0> සම්බන්ධතාවය හෝ <0>අකුණු (REST + Tor)</0> සම්බන්ධතාව භාවිතා කළ හැක."
+        }
+      },
+      "startos": {
+        "page": {
+          "title": "<0>StartOS</0> වෙත සම්බන්ධ වන්න",
+          "instructions": "ඔබේ StartOS උපකරණ පුවරුවේ <0>Lightning Network Daemon</0> සේවාව මත ක්ලික් කරන්න.<1/><0>Properties</0> ටැබය තෝරන්න.<1/>දැන් <0>LND Connect REST URL එක පිටපත් කරන්න. </0>"
+        },
+        "rest_url": {
+          "label": "lndconnect REST URL",
+          "placeholder": "lndconnect://ඔබේනෝඩය:8080?..."
+        }
+      },
+      "raspiblitz": {
+        "page": {
+          "title": "ඔබගේ <0>RaspiBlitz</0> නෝඩයට සම්බන්ධ කරන්න"
+        }
+      }
+    }
+  }
+}
