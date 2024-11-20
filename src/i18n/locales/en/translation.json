@@ -413,7 +413,8 @@
             "description": "Fund your account and receive via your lightning address or an invoice"
           }
         },
-        "upgrade_account": "You are using the old LNDHub setup. <0>Please re-connect</0> your Alby account to get access to the latest features."
+        "upgrade_account": "You are using the old LNDHub setup. <0>Please re-connect</0> your Alby account to get access to the latest features.",
+        "upgrade_to_alby_hub": "<0>Experience Bitcoin with Alby Hub!</0> Your self-custodial wallet for instant payments, app connectivity, and 24/7 online access—<1>Get Started Here</1>! 🐝💛"
       }
     },
     "accounts": {
