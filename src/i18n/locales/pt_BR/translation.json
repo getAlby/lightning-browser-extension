@@ -301,6 +301,10 @@
           "receive_bitcoin": {
             "title": "Deposite bitcoin",
             "description": "Receba satoshis usando um endereço relâmpago, fatura relâmpago ou endereço bitcoin"
+          },
+          "setup_keys": {
+            "title": "Configurar chave mestra",
+            "description": "Gere uma chave mestra para Bitcoin, Nostr e Liquid ou importe uma conta Nostr existente."
           }
         }
       }
