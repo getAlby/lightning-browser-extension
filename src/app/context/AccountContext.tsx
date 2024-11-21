@@ -23,6 +23,7 @@ interface AccountContextType {
     connectorType?: AccountInfo["connectorType"];
     lightningAddress?: AccountInfo["lightningAddress"];
     nodeRequired?: AccountInfo["nodeRequired"];
+    usingDiscontinuedWallet?: AccountInfo["usingDiscontinuedWallet"];
   } | null;
   balancesDecorated: {
     fiatBalance: string;

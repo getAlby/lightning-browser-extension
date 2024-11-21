@@ -53,6 +53,7 @@ export interface AccountInfoRes {
     pubkey?: string;
     lightning_address?: string;
     node_required?: boolean;
+    using_discontinued_wallet?: boolean;
   };
   name: string;
   avatarUrl?: string;
@@ -121,6 +122,7 @@ export const swrGetAccountInfo = async (
           avatarUrl,
           lightningAddress: response.info.lightning_address,
           nodeRequired: response.info.node_required,
+          usingDiscontinuedWallet: response.info.using_discontinued_wallet,
         };
         storeAccounts({
           ...accountsCache,

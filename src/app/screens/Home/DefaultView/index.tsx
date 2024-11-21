@@ -172,6 +172,32 @@ const DefaultView: FC<Props> = (props) => {
             </div>
           </Alert>
         )}
+
+        {account?.usingDiscontinuedWallet && (
+          <Alert type="warn">
+            <div className="flex items-center gap-2">
+              <div className="shrink-0">
+                <PopiconsCircleExclamationLine className="w-5 h-5" />
+              </div>
+              <span className="text-sm">
+                <Trans
+                  i18nKey={"default_view.using_discontinued_wallet"}
+                  t={t}
+                  components={[
+                    // eslint-disable-next-line react/jsx-key
+                    <Hyperlink
+                      className="underline"
+                      href="https://getalby.com/node/embrace_albyhub"
+                      target="_blank"
+                      rel="noopener nofollow"
+                    />,
+                  ]}
+                />
+              </span>
+            </div>
+          </Alert>
+        )}
+
         {account?.nodeRequired ? (
           <Alert type="info">
             <div className="flex items-center gap-2">

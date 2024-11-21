@@ -50,10 +50,12 @@ export interface AccountInfo {
   avatarUrl?: string;
   lightningAddress?: string;
   nodeRequired?: boolean;
+  usingDiscontinuedWallet?: boolean;
 }
 
 export type GetAccountInformationResponses = GetAccountInformationResponse & {
   node_required: boolean;
+  using_discontinued_wallet: boolean;
   limits?: {
     max_send_volume: number;
     max_send_amount: number;

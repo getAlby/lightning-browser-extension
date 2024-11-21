@@ -413,7 +413,8 @@
             "description": "Fund your account and receive via your lightning address or an invoice"
           }
         },
-        "upgrade_account": "You are using the old LNDHub setup. <0>Please re-connect</0> your Alby account to get access to the latest features."
+        "upgrade_account": "You are using the old LNDHub setup. <0>Please re-connect</0> your Alby account to get access to the latest features.",
+        "using_discontinued_wallet": "Alby Hub replaces your current Alby wallet in January 2025. <0>Update now</0>."
       }
     },
     "accounts": {
