@@ -130,6 +130,26 @@ const DefaultView: FC<Props> = (props) => {
       )}
 
       <div className="flex flex-col gap-4 p-4">
+        <Alert type="promotion">
+          <span className="text-sm">
+            <Trans
+              i18nKey={"default_view.upgrade_to_alby_hub"}
+              t={t}
+              components={[
+                // eslint-disable-next-line react/jsx-key
+                <p className="text-center font-semibold"></p>,
+                // eslint-disable-next-line react/jsx-key
+                <Hyperlink
+                  className="underline"
+                  href="https://albyhub.com/"
+                  target="_blank"
+                  rel="noreferrer"
+                />,
+              ]}
+            />
+          </span>
+        </Alert>
+
         {isBlockedUrl && (
           <div className="items-center dark:text-white text-sm">
             <Alert type="info">
