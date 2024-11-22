@@ -173,7 +173,7 @@ const DefaultView: FC<Props> = (props) => {
           </Alert>
         )}
 
-        {account?.usingDiscontinuedWallet && (
+        {account?.usingFeeCredits && (
           <Alert type="warn">
             <div className="flex items-center gap-2">
               <div className="shrink-0">
@@ -181,7 +181,7 @@ const DefaultView: FC<Props> = (props) => {
               </div>
               <span className="text-sm">
                 <Trans
-                  i18nKey={"default_view.using_discontinued_wallet"}
+                  i18nKey={"default_view.using_fee_credits"}
                   t={t}
                   components={[
                     // eslint-disable-next-line react/jsx-key
