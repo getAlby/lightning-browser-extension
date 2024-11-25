@@ -174,7 +174,7 @@ const DefaultView: FC<Props> = (props) => {
         )}
 
         {account?.usingFeeCredits && (
-          <Alert type="warn">
+          <Alert type="info">
             <div className="flex items-center gap-2">
               <div className="shrink-0">
                 <PopiconsCircleExclamationLine className="w-5 h-5" />
@@ -183,11 +183,21 @@ const DefaultView: FC<Props> = (props) => {
                 <Trans
                   i18nKey={"default_view.using_fee_credits"}
                   t={t}
+                  values={{
+                    max_account_balance: account?.limits?.max_account_balance,
+                  }}
                   components={[
                     // eslint-disable-next-line react/jsx-key
                     <Hyperlink
                       className="underline"
-                      href="https://getalby.com/node/embrace_albyhub"
+                      href="https://getalby.com/node"
+                      target="_blank"
+                      rel="noopener nofollow"
+                    />,
+                    // eslint-disable-next-line react/jsx-key
+                    <Hyperlink
+                      className="underline"
+                      href="https://guides.getalby.com/user-guide/alby-account-and-browser-extension/alby-account/faqs-alby-account/what-are-fee-credits-in-my-alby-account"
                       target="_blank"
                       rel="noopener nofollow"
                     />,

@@ -24,6 +24,7 @@ interface AccountContextType {
     lightningAddress?: AccountInfo["lightningAddress"];
     nodeRequired?: AccountInfo["nodeRequired"];
     usingFeeCredits?: AccountInfo["usingFeeCredits"];
+    limits?: AccountInfo["limits"];
   } | null;
   balancesDecorated: {
     fiatBalance: string;

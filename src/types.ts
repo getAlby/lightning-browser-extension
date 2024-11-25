@@ -51,6 +51,14 @@ export interface AccountInfo {
   lightningAddress?: string;
   nodeRequired?: boolean;
   usingFeeCredits?: boolean;
+  limits?: {
+    max_send_volume: number;
+    max_send_amount: number;
+    max_receive_volume: number;
+    max_receive_amount: number;
+    max_account_balance: number;
+    max_volume_period_in_days: number;
+  };
 }
 
 export type GetAccountInformationResponses = GetAccountInformationResponse & {

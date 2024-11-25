@@ -54,6 +54,14 @@ export interface AccountInfoRes {
     lightning_address?: string;
     node_required?: boolean;
     using_fee_credits?: boolean;
+    limits?: {
+      max_send_volume: number;
+      max_send_amount: number;
+      max_receive_volume: number;
+      max_receive_amount: number;
+      max_account_balance: number;
+      max_volume_period_in_days: number;
+    };
   };
   name: string;
   avatarUrl?: string;
@@ -123,6 +131,7 @@ export const swrGetAccountInfo = async (
           lightningAddress: response.info.lightning_address,
           nodeRequired: response.info.node_required,
           usingFeeCredits: response.info.using_fee_credits,
+          limits: response.info.limits,
         };
         storeAccounts({
           ...accountsCache,
