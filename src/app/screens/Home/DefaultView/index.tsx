@@ -20,6 +20,7 @@ import Hyperlink from "~/app/components/Hyperlink";
 import { IconLinkCard } from "~/app/components/IconLinkCard/IconLinkCard";
 import toast from "~/app/components/Toast";
 import { useAccount } from "~/app/context/AccountContext";
+import { useSettings } from "~/app/context/SettingsContext";
 import { useTransactions } from "~/app/hooks/useTransactions";
 import { PublisherLnData } from "~/app/screens/Home/PublisherLnData";
 import { isAlbyLNDHubAccount } from "~/app/utils";
@@ -44,6 +45,8 @@ const DefaultView: FC<Props> = (props) => {
   const { t: tCommon } = useTranslation("common");
 
   const navigate = useNavigate();
+
+  const { getFormattedSats } = useSettings();
 
   const { account, accountLoading } = useAccount();
 
@@ -184,7 +187,9 @@ const DefaultView: FC<Props> = (props) => {
                   i18nKey={"default_view.using_fee_credits"}
                   t={t}
                   values={{
-                    max_account_balance: account?.limits?.max_account_balance,
+                    max_account_balance: getFormattedSats(
+                      account?.limits?.max_account_balance || 0
+                    ),
                   }}
                   components={[
                     // eslint-disable-next-line react/jsx-key
