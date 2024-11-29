@@ -50,6 +50,7 @@ export interface AccountInfo {
   avatarUrl?: string;
   lightningAddress?: string;
   nodeRequired?: boolean;
+  sharedNode?: boolean;
   usingFeeCredits?: boolean;
   limits?: {
     max_send_volume: number;

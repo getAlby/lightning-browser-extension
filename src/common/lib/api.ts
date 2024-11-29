@@ -53,6 +53,7 @@ export interface AccountInfoRes {
     pubkey?: string;
     lightning_address?: string;
     node_required?: boolean;
+    shared_node?: boolean;
     using_fee_credits?: boolean;
     limits?: {
       max_send_volume: number;
@@ -130,6 +131,7 @@ export const swrGetAccountInfo = async (
           avatarUrl,
           lightningAddress: response.info.lightning_address,
           nodeRequired: response.info.node_required,
+          sharedNode: response.info.shared_node,
           usingFeeCredits: response.info.using_fee_credits,
           limits: response.info.limits,
         };

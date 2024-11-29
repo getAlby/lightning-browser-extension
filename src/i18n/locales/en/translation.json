@@ -414,7 +414,8 @@
           }
         },
         "upgrade_account": "You are using the old LNDHub setup. <0>Please re-connect</0> your Alby account to get access to the latest features.",
-        "using_fee_credits": "Alby Hub replaces your current Alby wallet in January 2025.  Connect your wallet to your <0>Alby account</0> for unlimited payments. Until your setup is complete, you can receive up to {{max_account_balance}} sats as <1>fee credits</1>"
+        "using_fee_credits": "Finish your setup and connect your wallet to your <0>Alby account</0> for unlimited payments. Until your setup is complete, you can receive up to {{max_account_balance}} sats as <1>fee credits</1>",
+        "using_shared_node": "The shared wallet that you use is being deprecated in favor of the Alby Hub wallet. To continue sending and receiving payments <0>setup your wallet</0> by January 3, 2025."
       }
     },
     "accounts": {
