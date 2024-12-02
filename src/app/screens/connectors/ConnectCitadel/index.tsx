@@ -8,49 +8,61 @@ import { useNavigate } from "react-router-dom";
 import PasswordViewAdornment from "~/app/components/PasswordViewAdornment";
 import toast from "~/app/components/Toast";
 import msg from "~/common/lib/msg";
-import logo from "/static/assets/icons/citadel.png";
+import utils from "~/common/lib/utils";
+import logo from "/static/assets/icons/citadel.svg";
+
+const initialFormData = {
+  url: "",
+  macaroon: "",
+};
 
 export default function ConnectCitadel() {
   const navigate = useNavigate();
   const { t } = useTranslation("translation", {
     keyPrefix: "choose_connector.citadel",
   });
-  const [passwordViewVisible, setPasswordViewVisible] = useState(false);
-  const [formData, setFormData] = useState({
-    password: "",
-    url: "",
-  });
+  const [formData, setFormData] = useState(initialFormData);
   const [loading, setLoading] = useState(false);
   const [hasTorSupport, setHasTorSupport] = useState(false);
+  const [lndconnectUrlVisible, setLndconnectUrlVisible] = useState(false);
 
-  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    setFormData({
-      ...formData,
-      [event.target.name]: event.target.value.trim(),
-    });
+  function handleLndconnectUrl(event: React.ChangeEvent<HTMLInputElement>) {
+    try {
+      const lndconnectUrl = event.target.value.trim();
+      let lndconnect = new URL(lndconnectUrl);
+      lndconnect.protocol = "http:";
+      lndconnect = new URL(lndconnect.toString());
+      const url = `https://${lndconnect.host}${lndconnect.pathname}`;
+      let macaroon = lndconnect.searchParams.get("macaroon") || "";
+      macaroon = utils.urlSafeBase64ToHex(macaroon);
+      // const cert = lndconnect.searchParams.get("cert"); // TODO: handle LND certs with the native connector
+      setFormData({
+        ...formData,
+        url,
+        macaroon,
+      });
+    } catch (e) {
+      console.error("invalid lndconnect string", e);
+    }
   }
 
   function getConnectorType() {
     if (formData.url.match(/\.onion/i) && !hasTorSupport) {
-      return "nativecitadel";
+      return "nativelnd";
     }
-    return "citadel";
+    // default to LND
+    return "lnd";
   }
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setLoading(true);
-    const { password, url } = formData;
-    /** The URL with an http:// in front if the protocol is missing */
-    const fullUrl =
-      url.startsWith("http://") || url.startsWith("https://")
-        ? url
-        : `http://${url}`;
+    const { url, macaroon } = formData;
     const account = {
       name: "Citadel",
       config: {
-        url: fullUrl,
-        password,
+        macaroon,
+        url,
       },
       connector: getConnectorType(),
     };
@@ -58,11 +70,12 @@ export default function ConnectCitadel() {
     try {
       let validation;
       // TODO: for native connectors we currently skip the validation because it is too slow (booting up Tor etc.)
-      if (account.connector === "nativecitadel") {
+      if (account.connector === "nativelnd") {
         validation = { valid: true, error: "" };
       } else {
         validation = await msg.request("validateAccount", account);
       }
+
       if (validation.valid) {
         const addResult = await msg.request("addAccount", account);
         if (addResult.accountId) {
@@ -73,7 +86,10 @@ export default function ConnectCitadel() {
         }
       } else {
         toast.error(
-          <ConnectionErrorToast message={validation.error as string} />
+          <ConnectionErrorToast
+            message={validation.error as string}
+            link={`${formData.url}/v1/getinfo`}
+          />
         );
       }
     } catch (e) {
@@ -101,38 +117,39 @@ export default function ConnectCitadel() {
           />
         </h1>
       }
-      description={t("page.instructions")}
+      description={
+        <Trans
+          i18nKey={"page.instructions"}
+          t={t}
+          // eslint-disable-next-line react/jsx-key
+          components={[<strong></strong>, <br />]}
+        />
+      }
       logo={logo}
       submitLoading={loading}
-      submitDisabled={formData.password === "" || formData.url === ""}
+      submitDisabled={formData.url === "" || formData.macaroon === ""}
       onSubmit={handleSubmit}
+      image="https://cdn.getalby-assets.com/connector-guides/citadel.svg"
     >
-      <div className="mb-6">
+      <div className="mt-6">
         <TextField
-          label={t("password.label")}
-          id="password"
+          id="lndconnect"
+          type={lndconnectUrlVisible ? "text" : "password"}
           autoComplete="new-password"
-          type={passwordViewVisible ? "text" : "password"}
-          autoFocus={true}
+          label={t("rest_url.label")}
+          placeholder={t("rest_url.placeholder")}
+          onChange={handleLndconnectUrl}
           required
-          onChange={handleChange}
+          autoFocus={true}
           endAdornment={
             <PasswordViewAdornment
               onChange={(passwordView) => {
-                setPasswordViewVisible(passwordView);
+                setLndconnectUrlVisible(passwordView);
               }}
             />
           }
         />
       </div>
-      <TextField
-        label={t("url.label")}
-        id="url"
-        placeholder={t("url.placeholder")}
-        value={formData.url}
-        required
-        onChange={handleChange}
-      />
       {formData.url.match(/\.onion/i) && (
         <div className="mt-6">
           <CompanionDownloadInfo
