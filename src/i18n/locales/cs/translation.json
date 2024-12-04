@@ -97,8 +97,7 @@
       },
       "citadel": {
         "page": {
-          "title": "Připojení k uzlu <0>Citadel</0>",
-          "instructions": "Aktuálně nefunguje v případě, že máte zapnutou dvoufaktorovou autentizaci (2FA)."
+          "title": "Připojení k uzlu <0>Citadel</0>"
         },
         "password": {
           "label": "Heslo k Citadel"

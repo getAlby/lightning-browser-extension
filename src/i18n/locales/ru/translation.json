@@ -140,8 +140,7 @@
       },
       "citadel": {
         "page": {
-          "title": "",
-          "instructions": ""
+          "title": ""
         },
         "password": {
           "label": ""

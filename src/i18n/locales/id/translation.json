@@ -132,8 +132,7 @@
       },
       "citadel": {
         "page": {
-          "title": "Sambungkan dengan node <0>Citadel</0>",
-          "instructions": "Saat ini tidak berfungsi jika 2FA diaktifkan."
+          "title": "Sambungkan dengan node <0>Citadel</0>"
         },
         "password": {
           "label": "Kata sandi Citadel"

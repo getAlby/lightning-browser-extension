@@ -146,8 +146,7 @@
       },
       "citadel": {
         "page": {
-          "title": "<0>සිටඩෙල්(Citadel)</0> node වෙත සම්බන්ධ කරන්න",
-          "instructions": "2FA සබල කර ඇත්නම් මෙය දැනට ක්‍රියා නොකරයි."
+          "title": "<0>සිටඩෙල්(Citadel)</0> node වෙත සම්බන්ධ කරන්න"
         },
         "password": {
           "label": "සිටඩෙල්(Citadel) මුරපදය"

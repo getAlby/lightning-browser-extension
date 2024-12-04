@@ -92,8 +92,7 @@
       },
       "citadel": {
         "page": {
-          "title": "Collega un nodo <0>Citadel</0>",
-          "instructions": "Attualmente non funziona se è abilitata la 2FA."
+          "title": "Collega un nodo <0>Citadel</0>"
         },
         "password": {
           "label": "Password Citadel"

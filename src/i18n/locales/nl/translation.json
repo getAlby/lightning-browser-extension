@@ -92,8 +92,7 @@
       },
       "citadel": {
         "page": {
-          "title": "Verbinding maken met <0>Citadel</0> node",
-          "instructions": "Dit werkt momenteel niet als 2FA is ingeschakeld."
+          "title": "Verbinding maken met <0>Citadel</0> node"
         },
         "password": {
           "label": "Citadel-wachtwoord"

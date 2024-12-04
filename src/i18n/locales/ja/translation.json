@@ -132,8 +132,7 @@
       },
       "citadel": {
         "page": {
-          "title": "<0>Citadel</0>ノードに接続",
-          "instructions": "現在のところ、2要素認証（2FA）が有効になっている場合は機能しません。"
+          "title": "<0>Citadel</0>ノードに接続"
         },
         "password": {
           "label": "Citadelのパスワード"

@@ -69,8 +69,7 @@
       },
       "citadel": {
         "page": {
-          "title": "连接<0>Citadel</0>节点",
-          "instructions": "目前，如果启用了2FA，这就用不了了。"
+          "title": "连接<0>Citadel</0>节点"
         },
         "password": {
           "label": "Citadel密码"

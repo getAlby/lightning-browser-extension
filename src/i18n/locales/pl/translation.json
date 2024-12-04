@@ -131,8 +131,7 @@
       },
       "citadel": {
         "page": {
-          "title": "Podłącz do węzła <0>Citadel</0>",
-          "instructions": "Ta funkcja nie działa jeśli 2FA jest włączone."
+          "title": "Podłącz do węzła <0>Citadel</0>"
         },
         "password": {
           "label": "Hasło Citadel"

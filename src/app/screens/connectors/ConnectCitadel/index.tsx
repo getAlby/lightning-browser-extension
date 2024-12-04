@@ -129,7 +129,8 @@ export default function ConnectCitadel() {
       submitLoading={loading}
       submitDisabled={formData.url === "" || formData.macaroon === ""}
       onSubmit={handleSubmit}
-      image="https://cdn.getalby-assets.com/connector-guides/citadel.svg"
+      // fixMe: fix link when screen is publicly accessible
+      image="https://cdn.getalby-assets.com/connector-guides/citadel.png"
     >
       <div className="mt-6">
         <TextField

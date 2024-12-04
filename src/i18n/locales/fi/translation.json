@@ -101,8 +101,7 @@
       },
       "citadel": {
         "page": {
-          "title": "Yhdistä <0>Citadel</0> solmuun",
-          "instructions": "Tämä ei tällä hetkellä toimi, jos 2FA on käytössä."
+          "title": "Yhdistä <0>Citadel</0> solmuun"
         },
         "password": {
           "label": "Citadel-salasana"

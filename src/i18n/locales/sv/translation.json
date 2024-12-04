@@ -98,8 +98,7 @@
       },
       "citadel": {
         "page": {
-          "title": "Anslut <0>Citadel</0>-nod",
-          "instructions": "Detta fungerar för tillfället inte om 2FA är aktiverat."
+          "title": "Anslut <0>Citadel</0>-nod"
         },
         "password": {
           "label": "Citadel lösenord"

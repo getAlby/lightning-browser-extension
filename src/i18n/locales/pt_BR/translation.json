@@ -87,8 +87,7 @@
       },
       "citadel": {
         "page": {
-          "title": "Conecte-se no servidor <0>Citadel</0>",
-          "instructions": "Não funciona se o 2FA estiver ativado."
+          "title": "Conecte-se no servidor <0>Citadel</0>"
         },
         "password": {
           "label": "Senha Citadel"
