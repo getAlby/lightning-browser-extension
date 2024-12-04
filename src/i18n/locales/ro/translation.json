@@ -125,8 +125,7 @@
       },
       "citadel": {
         "page": {
-          "title": "Conectare la <0>Citadel</0>",
-          "instructions": "Momentan nu functioneaza daca autentificarea in 2-factori (2FA) este activata."
+          "title": "Conectare la <0>Citadel</0>"
         },
         "password": {
           "label": "Parola Citadel"

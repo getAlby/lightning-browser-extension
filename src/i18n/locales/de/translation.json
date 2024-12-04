@@ -107,7 +107,6 @@
       "description": "Verbinden mit deiner externen Lightning Wallet oder Node",
       "citadel": {
         "page": {
-          "instructions": "Das funktioniert aktuell nicht, wenn 2FA ausgewählt ist.",
           "title": "Verbinden mit <0>Citadel</0> Node"
         },
         "password": {

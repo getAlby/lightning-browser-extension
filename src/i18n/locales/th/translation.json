@@ -421,8 +421,7 @@
       },
       "citadel": {
         "page": {
-          "title": "เชื่อมต่อกับ<0>Citaddel</0> node",
-          "instructions": "ไม่ทำงานในปัจจุบันหากเปิดใช้งาน 2FA"
+          "title": "เชื่อมต่อกับ<0>Citaddel</0> node"
         },
         "password": {
           "label": "รหัสผ่าน Citadel"

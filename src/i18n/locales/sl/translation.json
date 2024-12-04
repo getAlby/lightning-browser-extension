@@ -169,8 +169,7 @@
       },
       "citadel": {
         "page": {
-          "title": "Poveži <0>Citadel</0> vozlišče",
-          "instructions": "Tole trenutno ne deluje, če je vklopljen 2FA."
+          "title": "Poveži <0>Citadel</0> vozlišče"
         },
         "url": {
           "placeholder": "http://citadel.local",

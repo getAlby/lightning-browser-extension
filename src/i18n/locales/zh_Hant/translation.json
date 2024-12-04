@@ -131,8 +131,7 @@
       },
       "citadel": {
         "page": {
-          "title": "連接 <0>Citadel</0> 節點",
-          "instructions": "如果啟用了 2FA，這目前不可用。"
+          "title": "連接 <0>Citadel</0> 節點"
         },
         "password": {
           "label": "Citadel 密碼"

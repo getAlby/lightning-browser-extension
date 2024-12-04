@@ -132,8 +132,7 @@
       },
       "citadel": {
         "page": {
-          "title": "<0>Citadel</0> node से कनेक्ट करें",
-          "instructions": "यह वर्तमान में काम नहीं करता है अगर 2FA सक्षम है।"
+          "title": "<0>Citadel</0> node से कनेक्ट करें"
         },
         "password": {
           "label": "Citadel पासवर्ड"

@@ -125,8 +125,7 @@
       },
       "citadel": {
         "page": {
-          "title": "Opret forbindelse til <0>Citadel</0> node",
-          "instructions": "Dette virker i øjeblikket ikke, hvis 2FA er slået til."
+          "title": "Opret forbindelse til <0>Citadel</0> node"
         },
         "password": {
           "label": "Citadel adgangskode"

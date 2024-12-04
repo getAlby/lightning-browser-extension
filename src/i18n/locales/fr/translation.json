@@ -132,8 +132,7 @@
       },
       "citadel": {
         "page": {
-          "title": "Connectez-vous au nœud <0>Citadelle</0>",
-          "instructions": "Cela ne fonctionne pas actuellement si 2FA est activé."
+          "title": "Connectez-vous au nœud <0>Citadelle</0>"
         },
         "password": {
           "label": "Mot de passe Citadelle"

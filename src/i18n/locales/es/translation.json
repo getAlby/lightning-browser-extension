@@ -94,8 +94,7 @@
           "placeholder": "http://citadel.local"
         },
         "page": {
-          "title": "Conectar a nodo Citadel",
-          "instructions": "Esto actualmente no funciona si el 2FA está activado."
+          "title": "Conectar a nodo Citadel"
         }
       },
       "umbrel": {

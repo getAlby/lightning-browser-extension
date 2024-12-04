@@ -142,8 +142,7 @@
       },
       "citadel": {
         "page": {
-          "title": "به گره <0>Citadel</0> متصل شوید",
-          "instructions": "در حال حاضر در صورت فعال بودن تایید دو مرحله ای، این کار نمی کند."
+          "title": "به گره <0>Citadel</0> متصل شوید"
         },
         "password": {
           "label": "گذرواژه Citadel"
