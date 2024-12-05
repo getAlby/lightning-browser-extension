@@ -132,13 +132,6 @@
       "citadel": {
         "page": {
           "title": "Podłącz do węzła <0>Citadel</0>"
-        },
-        "password": {
-          "label": "Hasło Citadel"
-        },
-        "url": {
-          "label": "Adres URL Citadel",
-          "placeholder": "http://citadel.local"
         }
       },
       "umbrel": {
@@ -594,9 +587,6 @@
       },
       "umbrel": {
         "name": "Umbrel"
-      },
-      "citadel": {
-        "name": "Citadel"
       }
     }
   },
