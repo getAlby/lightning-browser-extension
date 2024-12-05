@@ -70,13 +70,6 @@
       "citadel": {
         "page": {
           "title": "连接<0>Citadel</0>节点"
-        },
-        "password": {
-          "label": "Citadel密码"
-        },
-        "url": {
-          "label": "Citadel URL",
-          "placeholder": "http://citadel.local"
         }
       },
       "blink": {
@@ -311,7 +304,6 @@
         "is_blocked_hint": "Alby 目前在 {{host}} 上被禁用",
         "block_removed": "启用了{{host}}。请重新加载网站。",
         "actions": {
-          "setup_keys": {},
           "get_started": {
             "title": "准备好使用 Alby 浏览器扩展",
             "description": "第一次使用 Alby 扩展？浏览我们的指南、视频和解析"
@@ -914,9 +906,6 @@
     "distributions": {
       "title": "连接 {{name}}",
       "description": "选择你想连接的{{name}}应用程序",
-      "citadel": {
-        "name": "Citadel"
-      },
       "btcpay": {
         "name": "BTCPay"
       },
