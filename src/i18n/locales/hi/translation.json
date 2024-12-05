@@ -133,13 +133,6 @@
       "citadel": {
         "page": {
           "title": "<0>Citadel</0> node से कनेक्ट करें"
-        },
-        "password": {
-          "label": "Citadel पासवर्ड"
-        },
-        "url": {
-          "label": "Citadel URL",
-          "placeholder": "http://citadel.local"
         }
       },
       "umbrel": {
@@ -527,9 +520,6 @@
       },
       "umbrel": {
         "name": "Umbrel"
-      },
-      "citadel": {
-        "name": "Citadel"
       }
     },
     "accounts": {
