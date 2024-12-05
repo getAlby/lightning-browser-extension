@@ -147,13 +147,6 @@
       "citadel": {
         "page": {
           "title": "<0>සිටඩෙල්(Citadel)</0> node වෙත සම්බන්ධ කරන්න"
-        },
-        "password": {
-          "label": "සිටඩෙල්(Citadel) මුරපදය"
-        },
-        "url": {
-          "label": "සිටඩෙල්(Citadel) URL",
-          "placeholder": "http://citadel.local"
         }
       },
       "umbrel": {
