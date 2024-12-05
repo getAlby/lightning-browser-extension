@@ -133,13 +133,6 @@
       "citadel": {
         "page": {
           "title": "<0>Citadel</0>ノードに接続"
-        },
-        "password": {
-          "label": "Citadelのパスワード"
-        },
-        "url": {
-          "label": "CitadelのURL",
-          "placeholder": "http://citadel.local"
         }
       },
       "umbrel": {
@@ -345,9 +338,6 @@
     "distributions": {
       "umbrel": {
         "name": "Umbrel"
-      },
-      "citadel": {
-        "name": "Citadel"
       },
       "btcpay": {
         "name": "BTCPay"

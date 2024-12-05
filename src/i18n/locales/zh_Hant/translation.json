@@ -132,13 +132,6 @@
       "citadel": {
         "page": {
           "title": "連接 <0>Citadel</0> 節點"
-        },
-        "password": {
-          "label": "Citadel 密碼"
-        },
-        "url": {
-          "label": "Citadel URL",
-          "placeholder": "http://citadel.local"
         }
       },
       "umbrel": {
@@ -583,9 +576,6 @@
     "distributions": {
       "title": "連接 {{name}}",
       "description": "選擇你想連接的{{name}}應用程序",
-      "citadel": {
-        "name": "Citadel"
-      },
       "btcpay": {
         "name": "BTCPay"
       },

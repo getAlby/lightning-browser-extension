@@ -126,13 +126,6 @@
       "citadel": {
         "page": {
           "title": "Opret forbindelse til <0>Citadel</0> node"
-        },
-        "password": {
-          "label": "Citadel adgangskode"
-        },
-        "url": {
-          "label": "Citadel URL",
-          "placeholder": "http://citadel.local"
         }
       },
       "umbrel": {

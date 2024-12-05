@@ -88,13 +88,6 @@
       "citadel": {
         "page": {
           "title": "Conecte-se no servidor <0>Citadel</0>"
-        },
-        "password": {
-          "label": "Senha Citadel"
-        },
-        "url": {
-          "label": "URL Citadel",
-          "placeholder": "http://citadel.local"
         }
       },
       "umbrel": {
@@ -788,9 +781,6 @@
     "distributions": {
       "umbrel": {
         "name": "Umbrel"
-      },
-      "citadel": {
-        "name": "Citadel"
       },
       "btcpay": {
         "name": "BTCPay"

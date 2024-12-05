@@ -133,13 +133,6 @@
       "citadel": {
         "page": {
           "title": "Sambungkan dengan node <0>Citadel</0>"
-        },
-        "password": {
-          "label": "Kata sandi Citadel"
-        },
-        "url": {
-          "label": "Citadel URL",
-          "placeholder": "http://citadel.local"
         }
       },
       "umbrel": {
@@ -241,9 +234,6 @@
       "description": "Pilih aplikasi {{name}} yang ingin kamu sambungkan",
       "umbrel": {
         "name": "Umbrel"
-      },
-      "citadel": {
-        "name": "Citadel"
       },
       "btcpay": {
         "name": "BTCPay"
