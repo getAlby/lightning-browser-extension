@@ -126,13 +126,6 @@
       "citadel": {
         "page": {
           "title": "<0>Citadel</0> node ला कनेक्ट करा"
-        },
-        "password": {
-          "label": "Citadel Password"
-        },
-        "url": {
-          "label": "Citadel URL",
-          "placeholder": "http://citadel.local"
         }
       },
       "umbrel": {
