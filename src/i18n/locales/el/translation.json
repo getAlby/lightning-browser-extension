@@ -66,19 +66,10 @@
         }
       },
       "citadel": {
-        "url": {
-          "label": "Citadel URL",
-          "placeholder": "http://citadel.local"
-        },
         "page": {
           "title": "Σύνδεση σε κόμβο <0>Citadel</0>"
-        },
-        "password": {
-          "label": "Κωδικός Citadel"
         }
       },
-      "startos": {},
-      "btcpay": {},
       "lnd": {
         "page": {
           "title": "Σύνδεση στον LND κόμβο σας"
@@ -152,9 +143,6 @@
       },
       "startos": {
         "name": "StartOS"
-      },
-      "citadel": {
-        "name": "Citadel"
       },
       "mynode": {
         "name": "myNode"
