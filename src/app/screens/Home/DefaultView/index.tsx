@@ -87,7 +87,7 @@ const DefaultView: FC<Props> = (props) => {
         const userAccount = await api.getAccount();
         const nostrPrivateKey = await api.nostr.getPrivateKey(userAccount.id);
 
-        setSeenSharedNodeBanner(userAccount.seenSharedNodeBanner); //SharedNodeBanner); //SharedNodeBanner);
+        setSeenSharedNodeBanner(userAccount.seenSharedNodeBanner);
 
         setNostrPublicKey(
           nostrPrivateKey ? await nostr.derivePublicKey(nostrPrivateKey) : ""
