@@ -93,13 +93,6 @@
       "citadel": {
         "page": {
           "title": "Collega un nodo <0>Citadel</0>"
-        },
-        "password": {
-          "label": "Password Citadel"
-        },
-        "url": {
-          "label": "URL Citadel",
-          "placeholder": "http://citadel.local"
         }
       },
       "umbrel": {
