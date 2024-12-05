@@ -170,13 +170,6 @@
       "citadel": {
         "page": {
           "title": "Poveži <0>Citadel</0> vozlišče"
-        },
-        "url": {
-          "placeholder": "http://citadel.local",
-          "label": "Citadel URL"
-        },
-        "password": {
-          "label": "Citadel geslo"
         }
       },
       "umbrel": {
@@ -253,9 +246,6 @@
       "title": "Poveži na {{name}}",
       "umbrel": {
         "name": "Umbrel"
-      },
-      "citadel": {
-        "name": "Citadel"
       },
       "startos": {
         "name": "StartOS"
