@@ -422,13 +422,6 @@
       "citadel": {
         "page": {
           "title": "เชื่อมต่อกับ<0>Citaddel</0> node"
-        },
-        "password": {
-          "label": "รหัสผ่าน Citadel"
-        },
-        "url": {
-          "label": "Citadel URL",
-          "placeholder": "http://citadel.local"
         }
       },
       "umbrel": {
@@ -532,9 +525,6 @@
       },
       "btcpay": {
         "name": "BTCPay"
-      },
-      "citadel": {
-        "name": "Citadel"
       },
       "raspiblitz": {
         "name": "RaspiBlitz"
