@@ -92,7 +92,7 @@ describe("account info", () => {
       nostrEnabled: true,
       liquidEnabled: true,
       hasMnemonic: true,
-      seenSharedNodeBanner: true,
+      seenSharedNodeBanner: false,
       hasImportedNostrKey: true,
       bitcoinNetwork: "regtest",
       useMnemonicForLnurlAuth: true,
