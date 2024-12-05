@@ -99,13 +99,6 @@
       "citadel": {
         "page": {
           "title": "Anslut <0>Citadel</0>-nod"
-        },
-        "password": {
-          "label": "Citadel lösenord"
-        },
-        "url": {
-          "label": "Citadel URL",
-          "placeholder": "http://citadel.local"
         }
       },
       "umbrel": {
@@ -610,9 +603,6 @@
       "description": "Välj vilket {{namn}} app du vill ansluta med",
       "umbrel": {
         "name": "Umbrel"
-      },
-      "citadel": {
-        "name": "Citadel"
       },
       "btcpay": {
         "name": "BTCPay"
