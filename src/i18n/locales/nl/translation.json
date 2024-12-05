@@ -93,13 +93,6 @@
       "citadel": {
         "page": {
           "title": "Verbinding maken met <0>Citadel</0> node"
-        },
-        "password": {
-          "label": "Citadel-wachtwoord"
-        },
-        "url": {
-          "label": "Citadel-URL",
-          "placeholder": "http://citadel.local"
         }
       },
       "umbrel": {
