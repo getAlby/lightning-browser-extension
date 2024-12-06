@@ -1,5 +1,6 @@
 import api from "~/common/lib/api";
 
+import Feedbin from "./Feedbin";
 import GeyserProject from "./GeyserProject";
 import GitHub from "./GitHub";
 import LinkTree from "./LinkTree";
@@ -36,6 +37,7 @@ const enhancements = [
   GeyserProject,
   Vida,
   Twitch,
+  Feedbin,
 
   // Monetization must likely always be the last one as this is the fallback option if no specific enhancement matched
   Monetization,
