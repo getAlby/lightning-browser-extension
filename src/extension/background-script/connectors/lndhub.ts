@@ -98,7 +98,7 @@ export default class LndHub implements Connector {
         ispaid: boolean;
         keysend: boolean;
         pay_req: string;
-        payment_hash: string;
+        payment_hash?: string;
         payment_request: string;
         timestamp: number;
         type: "user_invoice";
@@ -112,7 +112,7 @@ export default class LndHub implements Connector {
           id: `${invoice.payment_request}-${index}`,
           memo: invoice.description,
           preimage: "", // lndhub doesn't support preimage (yet)
-          payment_hash: invoice.payment_hash,
+          payment_hash: invoice.payment_hash ? invoice.payment_hash : "",
           settled: invoice.ispaid,
           settleDate: invoice.timestamp * 1000,
           totalAmount: invoice.amt,
@@ -149,7 +149,7 @@ export default class LndHub implements Connector {
         fee: string;
         keysend: boolean;
         memo: string;
-        payment_hash: {
+        payment_hash?: {
           type: string;
           data: ArrayBuffer;
         };
@@ -171,9 +171,9 @@ export default class LndHub implements Connector {
         memo: transaction.memo,
         custom_records: transaction.custom_records,
         preimage: transaction.payment_preimage,
-        payment_hash: Buffer.from(transaction.payment_hash.data).toString(
-          "hex"
-        ),
+        payment_hash: transaction.payment_hash
+          ? Buffer.from(transaction.payment_hash.data).toString("hex")
+          : "",
         settled: true,
         settleDate: transaction.timestamp * 1000,
         totalAmount: transaction.value,
