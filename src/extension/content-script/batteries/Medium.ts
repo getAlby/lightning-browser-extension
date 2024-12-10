@@ -6,9 +6,12 @@ const urlMatcher = /^https:\/\/(.+\.)?medium.com\/(\S+)?/;
 const battery = (): void => {
   const name =
     document.querySelector<HTMLHeadingElement>(".pw-author-name")?.innerText;
-  const description = document.querySelector<HTMLParagraphElement>(
-    ".pw-follower-count ~ p"
-  )?.textContent;
+
+  const description = document
+    .querySelector(".pw-author-name")
+    ?.parentElement?.parentElement?.querySelector("p")
+    ?.querySelector("span")?.textContent;
+
   if (!name || !description) return;
 
   const match = findLightningAddressInText(description);
