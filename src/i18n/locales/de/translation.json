@@ -580,7 +580,6 @@
               "keys": "Master Key ermöglicht die Interaktion mit Protokollen wie <0>Nostr</0>, <0>Liquid</0> oder <0> der Bitcoin Blockchain</0>",
               "nostr_key": "Du kannst jederzeit vorhandene Nostr-Schlüssel importieren und die von Hauptschlüssel erzeugten überschreiben"
             },
-            "nostr": "Ein bestehendes Nostr-Konto importieren",
             "secure": {
               "title": "Sichere deinen Hauptschlüssel",
               "description": "Erfahre, was der Hauptschlüssel ist und sichere deine 12-Wörter-Wiederherstellungsphrase"

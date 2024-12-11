@@ -465,8 +465,7 @@
               "title": "已经有主密钥？",
               "description": "输入你的恢复词以导入主密钥到该钱包"
             },
-            "title": "设置主密钥",
-            "nostr": "导入已有 Nostr 账户"
+            "title": "设置主密钥"
           },
           "inputs": {
             "title": "主密钥恢复词"
