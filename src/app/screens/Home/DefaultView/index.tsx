@@ -56,7 +56,7 @@ const DefaultView: FC<Props> = (props) => {
   const [currentAccount, setCurrentAccount] = useState<GetAccountRes>();
   const [nostrPublicKey, setNostrPublicKey] = useState("");
   const [seenSharedNodeBanner, setSeenSharedNodeBanner] =
-    useState<boolean>(false);
+    useState<boolean>(true);
 
   const { transactions, isLoadingTransactions, loadTransactions } =
     useTransactions();
