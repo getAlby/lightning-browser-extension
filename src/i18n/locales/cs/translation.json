@@ -98,13 +98,6 @@
       "citadel": {
         "page": {
           "title": "Připojení k uzlu <0>Citadel</0>"
-        },
-        "password": {
-          "label": "Heslo k Citadel"
-        },
-        "url": {
-          "label": "Citadel URL",
-          "placeholder": "http://citadel.local"
         }
       },
       "umbrel": {
@@ -571,9 +564,6 @@
       },
       "umbrel": {
         "name": "Umbrel"
-      },
-      "citadel": {
-        "name": "Citadel"
       }
     }
   },

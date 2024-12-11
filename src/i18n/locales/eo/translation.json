@@ -93,13 +93,6 @@
       "citadel": {
         "page": {
           "title": ""
-        },
-        "password": {
-          "label": "Citadel-pasvorto"
-        },
-        "url": {
-          "label": "",
-          "placeholder": "http://citadel.local"
         }
       },
       "umbrel": {
