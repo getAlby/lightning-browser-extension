@@ -467,7 +467,7 @@
               "description": "Enter your recovery phrase to import Master Key into this wallet"
             },
             "import_nostr": {
-              "title": "Import Just Nostr Key",
+              "title": "Import Nostr Key",
               "description": "Have a Nostr identity already? Import it to use it with this account"
             }
           },
