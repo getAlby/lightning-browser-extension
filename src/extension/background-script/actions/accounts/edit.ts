@@ -27,11 +27,6 @@ const edit = async (message: MessageAccountEdit) => {
         message.args.isMnemonicBackupDone;
     }
 
-    if (message.args.seenSharedNodeBanner !== undefined) {
-      accounts[accountId].seenSharedNodeBanner =
-        message.args.seenSharedNodeBanner;
-    }
-
     state.setState({ accounts });
     // make sure we immediately persist the updated accounts
     await state.getState().saveToStorage();

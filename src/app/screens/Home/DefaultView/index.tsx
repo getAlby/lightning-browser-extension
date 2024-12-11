@@ -55,8 +55,6 @@ const DefaultView: FC<Props> = (props) => {
   const [isBlockedUrl, setIsBlockedUrl] = useState<boolean>(false);
   const [currentAccount, setCurrentAccount] = useState<GetAccountRes>();
   const [nostrPublicKey, setNostrPublicKey] = useState("");
-  const [seenSharedNodeBanner, setSeenSharedNodeBanner] =
-    useState<boolean>(false);
 
   const { transactions, isLoadingTransactions, loadTransactions } =
     useTransactions();
@@ -86,8 +84,6 @@ const DefaultView: FC<Props> = (props) => {
       try {
         const userAccount = await api.getAccount();
         const nostrPrivateKey = await api.nostr.getPrivateKey(userAccount.id);
-
-        setSeenSharedNodeBanner(userAccount.seenSharedNodeBanner);
 
         setNostrPublicKey(
           nostrPrivateKey ? await nostr.derivePublicKey(nostrPrivateKey) : ""
@@ -180,16 +176,8 @@ const DefaultView: FC<Props> = (props) => {
           </Alert>
         )}
 
-        {account?.sharedNode && !seenSharedNodeBanner && (
-          <Alert
-            type="info"
-            showClose
-            onClose={async () =>
-              await api.editAccount(account.id, {
-                seenSharedNodeBanner: true,
-              })
-            }
-          >
+        {account?.sharedNode && (
+          <Alert type="info">
             <div className="flex items-center gap-2">
               <div className="shrink-0">
                 <PopiconsCircleExclamationLine className="w-5 h-5" />
