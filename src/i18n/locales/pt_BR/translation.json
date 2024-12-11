@@ -428,7 +428,6 @@
               "title": "Proteja sua chave mestra",
               "description": "Saiba o que é uma chave mestra e cuide das 12 palavras da frase de recuperação"
             },
-            "nostr": "Importe uma conta Nostr",
             "import": {
               "title": "Você já possui uma chave mestra?",
               "description": "Insira sua frase de recuperação para importar a chave mestra para esta carteira"
