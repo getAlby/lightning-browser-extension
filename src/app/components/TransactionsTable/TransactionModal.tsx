@@ -3,6 +3,7 @@ import {
   PopiconsArrowUpSolid,
   PopiconsChevronBottomLine,
   PopiconsChevronTopLine,
+  PopiconsXSolid,
 } from "@popicons/react";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
@@ -10,7 +11,6 @@ import { useTranslation } from "react-i18next";
 import Hyperlink from "~/app/components/Hyperlink";
 import Modal from "~/app/components/Modal";
 import { useSettings } from "~/app/context/SettingsContext";
-import CrossIcon from "~/app/icons/FailedTransaction";
 import { classNames } from "~/app/utils";
 import { Transaction } from "~/types";
 
@@ -63,7 +63,7 @@ export default function TransactionModal({
                 </div>
               ) : transaction.state === "failed" ? (
                 <div className="flex justify-center items-center bg-red-100 dark:bg-red-900 rounded-full p-3">
-                  <CrossIcon className="w-10 h-10 mt-1 text-red-400 dark:text-red-600 stroke-[1px] stroke-red-400 dark:stroke-red-600" />
+                  <PopiconsXSolid className="w-10 h-10 text-red-400 dark:text-red-600 stroke-[1px] stroke-red-400 dark:stroke-red-600" />
                 </div>
               ) : (
                 <div className="flex justify-center items-center bg-orange-100 dark:bg-orange-950 rounded-full p-3">

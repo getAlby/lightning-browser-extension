@@ -1,12 +1,15 @@
 import Loading from "@components/Loading";
-import { PopiconsArrowDownSolid, PopiconsArrowUpSolid } from "@popicons/react";
+import {
+  PopiconsArrowDownSolid,
+  PopiconsArrowUpSolid,
+  PopiconsXSolid,
+} from "@popicons/react";
 
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import TransactionModal from "~/app/components/TransactionsTable/TransactionModal";
 import { useSettings } from "~/app/context/SettingsContext";
-import CrossIcon from "~/app/icons/FailedTransaction";
 import { classNames } from "~/app/utils";
 import { Transaction } from "~/types";
 
@@ -67,7 +70,7 @@ export default function TransactionsTable({
                         </div>
                       ) : tx.state === "failed" ? (
                         <div className="flex justify-center items-center bg-red-100 dark:bg-red-900 rounded-full w-8 h-8">
-                          <CrossIcon className="w-5 h-5 mt-1 text-red-400 dark:text-red-600 stroke-[1px] stroke-red-400 dark:stroke-red-600" />
+                          <PopiconsXSolid className="w-5 h-5 text-red-400 dark:text-red-600 stroke-[1px] stroke-red-400 dark:stroke-red-600" />
                         </div>
                       ) : (
                         <div className="flex justify-center items-center bg-orange-100 dark:bg-orange-950 rounded-full w-8 h-8">
