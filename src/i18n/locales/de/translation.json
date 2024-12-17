@@ -581,12 +581,16 @@
               "nostr_key": "Du kannst jederzeit vorhandene Nostr-Schlüssel importieren und die von Hauptschlüssel erzeugten überschreiben"
             },
             "secure": {
-              "title": "Sichere deinen Hauptschlüssel",
+              "title": "Sicherer Hauptschlüssel",
               "description": "Erfahre, was der Hauptschlüssel ist und sichere deine 12-Wörter-Wiederherstellungsphrase"
             },
             "import": {
-              "title": "Hast du bereits einen Hauptschlüssel?",
+              "title": "Hauptschlüssel importieren",
               "description": "Gebe deine Wiederherstellungsphrase ein, um den Hauptschlüssel in diese Wallet zu importieren"
+            },
+            "import_nostr": {
+              "title": "Nostr Schlüssel importieren",
+              "description": "Hast du bereits eine Nostr-Identität? Importiere es, um es mit diesem Konto zu verwenden"
             }
           },
           "inputs": {
