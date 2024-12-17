@@ -16,7 +16,6 @@ export const useTransactions = () => {
         const getTransactionsResponse = await api.getTransactions({
           limit,
         });
-
         const transactions = getTransactionsResponse.transactions.map(
           (transaction) => ({
             ...transaction,

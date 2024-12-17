@@ -10,6 +10,7 @@ import { useTranslation } from "react-i18next";
 import Hyperlink from "~/app/components/Hyperlink";
 import Modal from "~/app/components/Modal";
 import { useSettings } from "~/app/context/SettingsContext";
+import CrossIcon from "~/app/icons/FailedTransaction";
 import { classNames } from "~/app/utils";
 import { Transaction } from "~/types";
 
@@ -56,17 +57,38 @@ export default function TransactionModal({
         <div>
           <div className="flex items-center justify-center">
             {getTransactionType(transaction) == "outgoing" ? (
-              <div className="flex justify-center items-center bg-orange-100 dark:bg-orange-950 rounded-full p-3">
-                <PopiconsArrowUpSolid className="w-10 h-10 text-orange-400 dark:text-amber-600 stroke-[1px] stroke-orange-400 dark:stroke-amber-600" />
-              </div>
+              transaction.state === "pending" ? (
+                <div className="flex justify-center items-center bg-orange-100 dark:bg-orange-950 rounded-full p-3">
+                  <PopiconsArrowUpSolid className="w-10 h-10 rotate-45 text-orange-400 dark:text-amber-600 stroke-[1px] stroke-orange-400 dark:stroke-amber-600" />
+                </div>
+              ) : transaction.state === "failed" ? (
+                <div className="flex justify-center items-center bg-red-100 dark:bg-red-900 rounded-full p-3">
+                  <CrossIcon className="w-10 h-10 mt-1 text-red-400 dark:text-red-600 stroke-[1px] stroke-red-400 dark:stroke-red-600" />
+                </div>
+              ) : (
+                <div className="flex justify-center items-center bg-orange-100 dark:bg-orange-950 rounded-full p-3">
+                  <PopiconsArrowUpSolid className="w-10 h-10 text-orange-400 dark:text-amber-600 stroke-[1px] stroke-orange-400 dark:stroke-amber-600" />
+                </div>
+              )
             ) : (
               <div className="flex justify-center items-center bg-green-100 dark:bg-emerald-950 rounded-full p-3">
                 <PopiconsArrowDownSolid className="w-10 h-10 text-green-500 dark:text-emerald-500 stroke-[1px] stroke-green-400 dark:stroke-emerald-500" />
               </div>
             )}
           </div>
+
           <h2 className="mt-4 text-md text-gray-900 font-bold dark:text-white text-center">
-            {transaction.type == "received" ? t("received") : t("sent")}
+            {transaction.type == "received"
+              ? t("received")
+              : t(
+                  transaction.state === "settled"
+                    ? "sent"
+                    : transaction.state === "pending"
+                    ? "sending"
+                    : transaction.state === "failed"
+                    ? "failed"
+                    : "sent"
+                )}
           </h2>
         </div>
         <div className="flex items-center text-center justify-center dark:text-white">

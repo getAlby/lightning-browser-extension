@@ -9,19 +9,22 @@ const getTransactions = async (message: MessageGetTransactions) => {
   const connector = await state.getState().getConnector();
   try {
     const result = await connector.getTransactions();
-
-    let transactions: ConnectorTransaction[] = result.data.transactions
-      .filter((transaction) => transaction.settled)
-      .map((transaction) => {
-        const boostagram = utils.getBoostagramFromInvoiceCustomRecords(
-          transaction.custom_records
-        );
-        return {
-          ...transaction,
-          boostagram,
-          paymentHash: transaction.payment_hash,
-        };
-      });
+    const isNWC = connector.connectorType == "nwc";
+    // we show pending and failed transactions for nwc. pass on all transactions for nwc connector to frontend
+    let transactions: ConnectorTransaction[] = result.data.transactions;
+    if (!isNWC) {
+      transactions = transactions.filter((transaction) => transaction.settled);
+    }
+    transactions = transactions.map((transaction) => {
+      const boostagram = utils.getBoostagramFromInvoiceCustomRecords(
+        transaction.custom_records
+      );
+      return {
+        ...transaction,
+        boostagram,
+        paymentHash: transaction.payment_hash,
+      };
+    });
 
     if (limit) {
       transactions = transactions.slice(0, limit);

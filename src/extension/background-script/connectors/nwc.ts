@@ -88,10 +88,9 @@ class NWCConnector implements Connector {
 
   async getTransactions(): Promise<GetTransactionsResponse> {
     const listTransactionsResponse = await this.nwc.listTransactions({
-      unpaid: false,
       limit: 50, // restricted by relay max event payload size
+      unpaid_outgoing: true,
     });
-
     const transactions: ConnectorTransaction[] =
       listTransactionsResponse.transactions.map(
         (transaction, index): ConnectorTransaction => ({
@@ -99,13 +98,17 @@ class NWCConnector implements Connector {
           memo: transaction.description,
           preimage: transaction.preimage,
           payment_hash: transaction.payment_hash,
-          settled: true,
-          settleDate: transaction.settled_at * 1000,
+          settled: transaction.state == "settled",
+          settleDate:
+            transaction.state == "settled"
+              ? transaction.settled_at * 1000
+              : transaction.created_at * 1000,
           totalAmount: Math.floor(transaction.amount / 1000),
           type: transaction.type == "incoming" ? "received" : "sent",
           custom_records: this.tlvToCustomRecords(
             transaction.metadata?.["tlv_records"] as TLVRecord[] | undefined
           ),
+          state: transaction.state,
         })
       );
     return {
@@ -219,6 +222,10 @@ class NWCConnector implements Connector {
 
   connectPeer(args: ConnectPeerArgs): Promise<ConnectPeerResponse> {
     throw new Error("Method not implemented.");
+  }
+
+  get connectorType(): string {
+    return "nwc";
   }
 
   private customRecordsToTlv(
