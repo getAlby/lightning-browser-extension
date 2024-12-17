@@ -30,6 +30,7 @@ const get = async (message: MessageAccountGet) => {
     // Note: undefined (default for new accounts) it is also considered imported
     hasImportedNostrKey: account.hasImportedNostrKey !== false,
     bitcoinNetwork: account.bitcoinNetwork || "bitcoin",
+    seenSharedNodeBanner: account.seenSharedNodeBanner || false,
     useMnemonicForLnurlAuth: account.useMnemonicForLnurlAuth || false,
   };
 
