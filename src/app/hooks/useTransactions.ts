@@ -16,13 +16,15 @@ export const useTransactions = () => {
         const getTransactionsResponse = await api.getTransactions({
           limit,
         });
-
         const transactions = getTransactionsResponse.transactions.map(
           (transaction) => ({
             ...transaction,
             title: transaction.memo,
-            date: dayjs(transaction.settleDate).fromNow(),
-            timestamp: transaction.settleDate,
+            date: dayjs(
+              transaction.settleDate || transaction.creationDate
+            ).fromNow(),
+            timestamp:
+              transaction.settleDate || transaction.creationDate || Date.now(),
           })
         );
 
