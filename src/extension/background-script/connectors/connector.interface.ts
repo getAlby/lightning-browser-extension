@@ -31,7 +31,8 @@ export interface ConnectorTransaction {
   /**
    * Settle date in UNIX milliseconds
    */
-  settleDate: number;
+  settleDate?: number;
+  creationDate?: number;
   totalAmount: number;
   displayAmount?: [number, ACCOUNT_CURRENCIES];
   type: "received" | "sent";

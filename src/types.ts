@@ -959,7 +959,8 @@ export interface Invoice {
   memo?: string;
   type: "received" | "sent";
   settled: boolean;
-  settleDate: number;
+  settleDate?: number;
+  creationDate?: number;
   totalAmount: number;
   totalAmountFiat?: string;
   displayAmount?: [number, ACCOUNT_CURRENCIES];

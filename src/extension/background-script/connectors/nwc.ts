@@ -99,10 +99,10 @@ class NWCConnector implements Connector {
           preimage: transaction.preimage,
           payment_hash: transaction.payment_hash,
           settled: transaction.state == "settled",
-          settleDate:
-            transaction.state == "settled"
-              ? transaction.settled_at * 1000
-              : transaction.created_at * 1000,
+          ...(transaction.state == "settled" && transaction.settled_at
+            ? { settleDate: transaction.settled_at * 1000 }
+            : {}),
+          creationDate: transaction.created_at * 1000,
           totalAmount: Math.floor(transaction.amount / 1000),
           type: transaction.type == "incoming" ? "received" : "sent",
           custom_records: this.tlvToCustomRecords(
