@@ -36,7 +36,7 @@ export interface ConnectorTransaction {
   totalAmount: number;
   displayAmount?: [number, ACCOUNT_CURRENCIES];
   type: "received" | "sent";
-  state?: string;
+  state?: "settled" | "pending" | "failed";
 }
 
 export interface MakeInvoiceArgs {
