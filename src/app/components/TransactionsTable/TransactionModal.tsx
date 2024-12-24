@@ -62,8 +62,8 @@ export default function TransactionModal({
                   <PopiconsArrowUpSolid className="w-10 h-10 rotate-45 text-orange-400 dark:text-amber-600 stroke-[1px] stroke-orange-400 dark:stroke-amber-600" />
                 </div>
               ) : transaction.state === "failed" ? (
-                <div className="flex justify-center items-center bg-red-100 dark:bg-red-900 rounded-full p-3">
-                  <PopiconsXSolid className="w-10 h-10 text-red-400 dark:text-red-600 stroke-[1px] stroke-red-400 dark:stroke-red-600" />
+                <div className="flex justify-center items-center bg-red-100 dark:bg-rose-950 rounded-full p-3">
+                  <PopiconsXSolid className="w-10 h-10 text-red-400 dark:text-rose-600 stroke-[1px] stroke-red-400 dark:stroke-red-600" />
                 </div>
               ) : (
                 <div className="flex justify-center items-center bg-orange-100 dark:bg-orange-950 rounded-full p-3">
@@ -77,7 +77,12 @@ export default function TransactionModal({
             )}
           </div>
 
-          <h2 className="mt-4 text-md text-gray-900 font-bold dark:text-white text-center">
+          <h2
+            className={classNames(
+              "mt-4 text-md text-gray-900 font-bold dark:text-white text-center",
+              transaction.state == "pending" && "animate-pulse text-gray-400"
+            )}
+          >
             {transaction.type == "received"
               ? t("received")
               : t(
@@ -98,6 +103,8 @@ export default function TransactionModal({
                 "text-3xl font-medium",
                 transaction.type == "received"
                   ? "text-green-600 dark:text-emerald-500"
+                  : transaction.state == "failed"
+                  ? "text-red-400 dark:text-rose-600"
                   : "text-orange-600 dark:text-amber-600"
               )}
             >
