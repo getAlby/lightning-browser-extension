@@ -484,7 +484,7 @@ class Lnd implements Connector {
     const transactions: ConnectorTransaction[] = mergeTransactions(
       invoices,
       payments
-    );
+    ).filter((transaction) => transaction.settled);
 
     return {
       data: {

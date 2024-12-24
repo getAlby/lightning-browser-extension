@@ -261,7 +261,7 @@ export default class Commando implements Connector {
     const transactions: ConnectorTransaction[] = mergeTransactions(
       incomingInvoicesResponse,
       outgoingInvoicesResponse
-    );
+    ).filter((transaction) => transaction.settled);
 
     return {
       data: {

@@ -133,7 +133,7 @@ export default class LndHub implements Connector {
     const transactions: ConnectorTransaction[] = mergeTransactions(
       incomingInvoices,
       outgoingInvoices
-    );
+    ).filter((transaction) => transaction.settled);
 
     return {
       data: {

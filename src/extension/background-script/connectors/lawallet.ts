@@ -127,9 +127,9 @@ export default class LaWallet implements Connector {
 
     return {
       data: {
-        transactions: parsedTransactions.sort(
-          (a, b) => (b.settleDate ?? 0) - (a.settleDate ?? 0)
-        ),
+        transactions: parsedTransactions
+          .sort((a, b) => (b.settleDate ?? 0) - (a.settleDate ?? 0))
+          .filter((transaction) => transaction.settled),
       },
     };
   }

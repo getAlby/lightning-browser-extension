@@ -152,7 +152,6 @@ export default interface Connector {
   getOAuthToken?(): OAuthToken | undefined;
   getSwapInfo?(): Promise<SwapInfoResponse>;
   createSwap?(params: CreateSwapParams): Promise<CreateSwapResponse>;
-  connectorType?: string;
 }
 
 export function flattenRequestMethods(methods: string[]) {

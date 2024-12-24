@@ -122,8 +122,8 @@ class LnBits implements Connector {
           webhook_status: string;
         }[]
       ) => {
-        const transactions: ConnectorTransaction[] = data.map(
-          (transaction, index): ConnectorTransaction => {
+        const transactions: ConnectorTransaction[] = data
+          .map((transaction, index): ConnectorTransaction => {
             return {
               id: `${transaction.checking_id}-${index}`,
               memo: transaction.memo,
@@ -138,8 +138,8 @@ class LnBits implements Connector {
               totalAmount: Math.abs(Math.floor(transaction.amount / 1000)),
               type: transaction.amount > 0 ? "received" : "sent",
             };
-          }
-        );
+          })
+          .filter((transaction) => transaction.settled);
 
         return {
           data: {

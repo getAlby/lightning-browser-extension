@@ -238,7 +238,7 @@ class Galoy implements Connector {
             );
           }
 
-          transactions.push({
+          const transaction: ConnectorTransaction = {
             id: edge.cursor,
             memo: tx.memo || paymentRequestDescription,
             preimage:
@@ -249,7 +249,11 @@ class Galoy implements Connector {
             totalAmount: absSettlementAmount,
             type: transactionType,
             displayAmount,
-          });
+          };
+
+          if (transaction.settled) {
+            transactions.push(transaction);
+          }
         }
       }
 

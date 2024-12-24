@@ -222,10 +222,6 @@ class NWCConnector implements Connector {
     throw new Error("Method not implemented.");
   }
 
-  get connectorType(): string {
-    return "nwc";
-  }
-
   private customRecordsToTlv(
     customRecords: Record<string, string>
   ): TlvRecord[] {
