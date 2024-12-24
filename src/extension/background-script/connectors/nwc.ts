@@ -99,9 +99,7 @@ class NWCConnector implements Connector {
           preimage: transaction.preimage,
           payment_hash: transaction.payment_hash,
           settled: transaction.state == "settled",
-          ...(transaction.state == "settled" && transaction.settled_at
-            ? { settleDate: transaction.settled_at * 1000 }
-            : {}),
+          settleDate: transaction.settled_at * 1000,
           creationDate: transaction.created_at * 1000,
           totalAmount: Math.floor(transaction.amount / 1000),
           type: transaction.type == "incoming" ? "received" : "sent",

@@ -959,7 +959,7 @@ export interface Invoice {
   memo?: string;
   type: "received" | "sent";
   settled: boolean;
-  settleDate?: number;
+  settleDate: number | null;
   creationDate?: number;
   totalAmount: number;
   totalAmountFiat?: string;
