@@ -120,7 +120,7 @@ export default class LndHub implements Connector {
         })
       )
       .sort((a, b) => {
-        return b.settleDate - a.settleDate;
+        return (b.settleDate ?? 0) - (a.settleDate ?? 0);
       });
 
     return invoices;

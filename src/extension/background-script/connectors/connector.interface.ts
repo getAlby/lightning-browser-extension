@@ -31,10 +31,12 @@ export interface ConnectorTransaction {
   /**
    * Settle date in UNIX milliseconds
    */
-  settleDate: number;
+  settleDate: number | null;
+  creationDate?: number;
   totalAmount: number;
   displayAmount?: [number, ACCOUNT_CURRENCIES];
   type: "received" | "sent";
+  state?: "settled" | "pending" | "failed";
 }
 
 export interface MakeInvoiceArgs {
@@ -150,6 +152,7 @@ export default interface Connector {
   getOAuthToken?(): OAuthToken | undefined;
   getSwapInfo?(): Promise<SwapInfoResponse>;
   createSwap?(params: CreateSwapParams): Promise<CreateSwapResponse>;
+  connectorType?: string;
 }
 
 export function flattenRequestMethods(methods: string[]) {
