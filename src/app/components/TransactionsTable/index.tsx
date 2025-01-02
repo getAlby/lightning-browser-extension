@@ -65,7 +65,7 @@ export default function TransactionsTable({
                   <div className="flex items-center">
                     {type == "outgoing" ? (
                       tx.state === "pending" ? (
-                        <div className="flex justify-center items-center bg-orange-100 dark:bg-orange-950 rounded-full w-8 h-8">
+                        <div className="flex justify-center items-center bg-orange-100 dark:bg-orange-950 rounded-full w-8 h-8 animate-pulse">
                           <PopiconsArrowUpSolid className="w-5 h-5 rotate-45 text-orange-400 dark:text-amber-600 stroke-[1px] stroke-orange-400 dark:stroke-amber-600" />
                         </div>
                       ) : tx.state === "failed" ? (
