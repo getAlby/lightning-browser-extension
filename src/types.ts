@@ -787,6 +787,7 @@ export type Transaction = {
   type?: "sent" | "received";
   value?: string;
   publisherLink?: string; // either the invoice URL if on PublisherSingleView, or the internal link to Publisher
+  state?: "settled" | "pending" | "failed";
 };
 
 export interface DbPayment {
@@ -958,7 +959,8 @@ export interface Invoice {
   memo?: string;
   type: "received" | "sent";
   settled: boolean;
-  settleDate: number;
+  settleDate: number | null;
+  creationDate?: number;
   totalAmount: number;
   totalAmountFiat?: string;
   displayAmount?: [number, ACCOUNT_CURRENCIES];
