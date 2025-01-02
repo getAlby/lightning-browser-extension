@@ -58,7 +58,7 @@ export default function TransactionModal({
           <div className="flex items-center justify-center">
             {getTransactionType(transaction) == "outgoing" ? (
               transaction.state === "pending" ? (
-                <div className="flex justify-center items-center bg-orange-100 dark:bg-orange-950 rounded-full p-3">
+                <div className="flex justify-center items-center bg-orange-100 dark:bg-orange-950 rounded-full p-3 animate-pulse">
                   <PopiconsArrowUpSolid className="w-10 h-10 rotate-45 text-orange-400 dark:text-amber-600 stroke-[1px] stroke-orange-400 dark:stroke-amber-600" />
                 </div>
               ) : transaction.state === "failed" ? (
