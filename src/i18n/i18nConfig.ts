@@ -10,8 +10,10 @@ import "dayjs/locale/it";
 import "dayjs/locale/mr";
 import "dayjs/locale/pl";
 import "dayjs/locale/pt-br";
+import "dayjs/locale/ru";
 import "dayjs/locale/si";
 import "dayjs/locale/sv";
+import "dayjs/locale/ta";
 import "dayjs/locale/zh-cn";
 import i18n from "i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
@@ -29,8 +31,10 @@ import it from "~/i18n/locales/it/translation.json";
 import mr from "~/i18n/locales/mr/translation.json";
 import pl from "~/i18n/locales/pl/translation.json";
 import pt_BR from "~/i18n/locales/pt_BR/translation.json";
+import ru from "~/i18n/locales/ru/translation.json";
 import si from "~/i18n/locales/si/translation.json";
 import sv from "~/i18n/locales/sv/translation.json";
+import ta from "~/i18n/locales/ta/translation.json";
 import th from "~/i18n/locales/th/translation.json";
 import zh_Hans from "~/i18n/locales/zh_Hans/translation.json";
 
@@ -133,6 +137,18 @@ export const resources = {
     components: si.components,
     permissions: si.permissions,
   },
+  ta: {
+    translation: ta.translation,
+    common: ta.common,
+    components: ta.components,
+    permissions: ta.permissions,
+  },
+  ru: {
+    translation: ru.translation,
+    common: ru.common,
+    components: ru.components,
+    permissions: ru.permissions,
+  },
 } as const;
 
 // needs to be aligned with `resources`
@@ -154,6 +170,8 @@ export const supportedLocales = [
   { locale: "th", label: "ไทย" },
   { locale: "fa", label: "فارسی" },
   { locale: "si", label: "Sinhalese" },
+  { locale: "ta", label: "Tamil" },
+  { locale: "ru", label: "Russian" },
 ];
 
 i18n
