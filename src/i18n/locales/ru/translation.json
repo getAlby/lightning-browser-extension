@@ -626,17 +626,14 @@
       },
       "name": {
         "title": "Имя",
-        "subtitle": "",
         "placeholder": "Введите ваше имя"
       },
       "email": {
         "title": "Email",
-        "subtitle": "",
         "placeholder": "Введите адрес вашей электронной почты"
       },
       "change_password": {
         "title": "Изменение пароля разблокировки",
-        "subtitle": "",
         "screen_reader": "Изменить пароль разблокировки",
         "choose_password": {
           "label": "Введите новый код разблокировки:"
@@ -745,70 +742,6 @@
         "status": "Проверка состояния оплаты"
       }
     },
-    "publishers": {
-      "title": "",
-      "description": "",
-      "no_info": "",
-      "discover": "",
-      "publisher": {
-        "allowance": {
-          "title": "",
-          "used_budget": ""
-        }
-      }
-    },
-    "make_invoice": {
-      "title": "",
-      "amount": {
-        "label": ""
-      },
-      "memo": {
-        "label": ""
-      },
-      "errors": {
-        "amount_too_small": "",
-        "amount_too_big": ""
-      }
-    },
-    "confirm_sign_message": {
-      "title": "",
-      "content": ""
-    },
-    "confirm_keysend": {
-      "title": "",
-      "success": "",
-      "payment_summary": {
-        "description": ""
-      }
-    },
-    "keysend": {
-      "title": "",
-      "success": "",
-      "receiver": {
-        "label": ""
-      },
-      "amount": {
-        "label": ""
-      }
-    },
-    "confirm_payment": {
-      "title": "",
-      "success": "",
-      "actions": {
-        "pay_now": ""
-      }
-    },
-    "confirm_request_permission": {
-      "title": "",
-      "allow": "",
-      "always_allow": ""
-    },
-    "nostr": {
-      "title": "",
-      "content": "",
-      "block_and_ignore": "",
-      "block_added": ""
-    },
     "lnurlredeem": {
       "errors": {
         "invalid_withdraw_request": "Недейственный запрос LNURL отозвать",
@@ -880,207 +813,7 @@
       "request2": "Запросите счета и информацию о молниях"
     }
   },
-  "common": {
-    "password": "",
-    "confirm_password": "",
-    "success": "",
-    "error": "",
-    "accounts": "",
-    "discover": "",
-    "connected_sites": "",
-    "sats_one": "",
-    "sats_other": "",
-    "loading": "",
-    "amount": "",
-    "optional": "",
-    "feedback": "",
-    "copied": "",
-    "description": "",
-    "description_full": "",
-    "success_message": "",
-    "response": "",
-    "message": "",
-    "help": "",
-    "actions": {
-      "back": "",
-      "delete": "",
-      "edit": "",
-      "next": "",
-      "open": "",
-      "cancel": "",
-      "confirm": "",
-      "continue": "",
-      "connect": "",
-      "lock": "",
-      "unlock": "",
-      "send": "",
-      "save": "",
-      "receive": "",
-      "receive_again": "",
-      "close": "",
-      "export": "",
-      "remove": "",
-      "copy": "",
-      "copy_invoice": "",
-      "log_in": "",
-      "remember": ""
-    },
-    "errors": {
-      "connection_failed": "",
-      "payment_failed": ""
-    }
-  },
-  "components": {
-    "allowance_menu": {
-      "confirm_delete": "",
-      "hint": "",
-      "new_budget": {
-        "label": ""
-      },
-      "enable_login": {
-        "title": "",
-        "subtitle": ""
-      },
-      "edit_allowance": {
-        "title": "",
-        "screen_reader": ""
-      }
-    },
-    "qrcode_scanner": {
-      "title": "",
-      "actions": {
-        "start_scanning": "",
-        "stop_scanning": ""
-      },
-      "errors": {
-        "allow_camera_access": ""
-      }
-    },
-    "transactions_table": {
-      "fee": "",
-      "preimage": "",
-      "received": "",
-      "sent": "",
-      "boostagram": {
-        "sender": "",
-        "message": "",
-        "app": "",
-        "podcast": ""
-      },
-      "open_location": ""
-    },
-    "budget_control": {
-      "remember": {
-        "label": "",
-        "description": ""
-      },
-      "budget": {
-        "label": ""
-      }
-    },
-    "toasts": {
-      "connection_error": {
-        "what_you_can_do": "",
-        "double_check": "",
-        "if_ssl_errors": "",
-        "visit_guides": ""
-      },
-      "login_failed": {
-        "password_reset": ""
-      },
-      "errors": {
-        "invalid_credentials": ""
-      }
-    },
-    "account_menu": {
-      "screen_reader": ""
-    },
-    "publishers_table": {
-      "payments": ""
-    },
-    "badge": {
-      "label": {
-        "auth": ""
-      }
-    }
-  },
-  "permissions": {
-    "commando": {
-      "bkpr-listbalances": "",
-      "checkmessage": "",
-      "connect": "",
-      "decode": "",
-      "decodepay": "",
-      "disconnect": "",
-      "feerates": "",
-      "fundchannel": "",
-      "getinfo": "",
-      "getroute": "",
-      "invoice": "",
-      "keysend": "",
-      "listforwards": "",
-      "listfunds": "",
-      "listinvoices": "",
-      "listnodes": "",
-      "listoffers": "",
-      "listpays": "",
-      "listpeers": "",
-      "listsendpays": "",
-      "listtransactions": "",
-      "multifundchannel": "",
-      "offer": "",
-      "pay": "",
-      "sendpay": "",
-      "setchannel": "",
-      "signmessage": ""
-    },
-    "lnd": {
-      "getinfo": "",
-      "listchannels": "",
-      "listinvoices": "",
-      "channelbalance": "",
-      "walletbalance": "",
-      "openchannel": "",
-      "connectpeer": "",
-      "disconnectpeer": "",
-      "estimatefee": "",
-      "getchaninfo": "",
-      "getnetworkinfo": "",
-      "getnodeinfo": "",
-      "gettransactions": "",
-      "listpayments": "",
-      "listpeers": "",
-      "lookupinvoice": "",
-      "queryroutes": "",
-      "verifymessage": "",
-      "sendtoroute": "",
-      "decodepayreq": "",
-      "routermc": "",
-      "addinvoice": ""
-    },
-    "lnc": {
-      "getinfo": "",
-      "listchannels": "",
-      "listinvoices": "",
-      "channelbalance": "",
-      "walletbalance": "",
-      "openchannel": "",
-      "connectpeer": "",
-      "disconnectpeer": "",
-      "estimatefee": "",
-      "getchaninfo": "",
-      "getnetworkinfo": "",
-      "getnodeinfo": "",
-      "gettransactions": "",
-      "listpayments": "",
-      "listpeers": "",
-      "lookupinvoice": "",
-      "queryroutes": "",
-      "verifymessage": "",
-      "sendtoroute": "",
-      "decodepayreq": "",
-      "routermc": "",
-      "addinvoice": ""
-    }
-  }
+  "common": {},
+  "components": {},
+  "permissions": {}
 }
