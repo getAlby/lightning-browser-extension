@@ -246,6 +246,7 @@ class Galoy implements Connector {
             payment_hash: tx.initiationVia.paymentHash || "",
             settled: tx.status === "SUCCESS",
             settleDate: createdAtDate.getTime(),
+            creationDate: createdAtDate.getTime(),
             totalAmount: absSettlementAmount,
             type: transactionType,
             displayAmount,

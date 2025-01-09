@@ -123,6 +123,7 @@ export default class Alby implements Connector {
           payment_hash: invoice.payment_hash,
           settled: invoice.settled,
           settleDate: new Date(invoice.settled_at).getTime(),
+          creationDate: new Date(invoice.created_at).getTime(),
           totalAmount: invoice.amount,
           type: invoice.type == "incoming" ? "received" : "sent",
         })

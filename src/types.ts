@@ -960,7 +960,7 @@ export interface Invoice {
   type: "received" | "sent";
   settled: boolean;
   settleDate: number | null;
-  creationDate?: number;
+  creationDate: number;
   totalAmount: number;
   totalAmountFiat?: string;
   displayAmount?: [number, ACCOUNT_CURRENCIES];

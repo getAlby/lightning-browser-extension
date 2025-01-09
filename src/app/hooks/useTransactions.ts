@@ -23,8 +23,7 @@ export const useTransactions = () => {
             date: dayjs(
               transaction.settleDate || transaction.creationDate
             ).fromNow(),
-            timestamp:
-              transaction.settleDate || transaction.creationDate || Date.now(),
+            timestamp: transaction.settleDate || transaction.creationDate,
           })
         );
 

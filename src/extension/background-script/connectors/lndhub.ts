@@ -115,6 +115,7 @@ export default class LndHub implements Connector {
           payment_hash: invoice.payment_hash,
           settled: invoice.ispaid,
           settleDate: invoice.timestamp * 1000,
+          creationDate: invoice.timestamp * 1000,
           totalAmount: invoice.amt,
           type: "received",
         })
@@ -176,6 +177,7 @@ export default class LndHub implements Connector {
         ),
         settled: true,
         settleDate: transaction.timestamp * 1000,
+        creationDate: transaction.timestamp * 1000,
         totalAmount: transaction.value,
         type: "sent",
       })

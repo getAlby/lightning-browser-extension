@@ -476,6 +476,7 @@ export async function parseTransaction(
     preimage: await extractPreimage(event, privateKey),
     settled: true,
     settleDate: event.created_at * 1000,
+    creationDate: event.created_at * 1000,
     totalAmount: content.tokens.BTC / 1000,
     type: event.tags[1][1] === userPubkey ? "received" : "sent",
     custom_records: {},
