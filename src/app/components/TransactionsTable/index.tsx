@@ -107,7 +107,7 @@ export default function TransactionsTable({
                       </p>
                     </div>
                     <p className="text-xs text-gray-400 dark:text-neutral-500">
-                      {tx.date}
+                      {tx.timeAgo}
                     </p>
                   </div>
                   <div className="flex ml-auto text-right space-x-3 shrink-0 dark:text-white">

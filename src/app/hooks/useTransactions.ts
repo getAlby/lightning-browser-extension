@@ -20,7 +20,7 @@ export const useTransactions = () => {
           (transaction) => ({
             ...transaction,
             title: transaction.memo,
-            date: dayjs(
+            timeAgo: dayjs(
               transaction.settleDate || transaction.creationDate
             ).fromNow(),
             timestamp: transaction.settleDate || transaction.creationDate,

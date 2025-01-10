@@ -771,7 +771,7 @@ export type Transaction = {
   boostagram?: Invoice["boostagram"];
   createdAt?: string;
   currency?: string;
-  date: string;
+  timeAgo: string;
   paymentHash?: string;
   description?: string;
   host?: string;
