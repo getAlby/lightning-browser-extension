@@ -58,21 +58,21 @@ export default function TransactionModal({
           <div className="flex items-center justify-center">
             {getTransactionType(transaction) == "outgoing" ? (
               transaction.state === "pending" ? (
-                <div className="flex justify-center items-center bg-blue-100 dark:bg-blue-900 rounded-full p-3 animate-pulse">
-                  <PopiconsArrowUpSolid className="w-10 h-10 rotate-45 text-blue-500 stroke-[1px] stroke-blue-400 dark:stroke-blue-600" />
+                <div className="flex justify-center items-center bg-blue-100 dark:bg-sky-950 rounded-full p-3 animate-pulse">
+                  <PopiconsArrowUpSolid className="w-10 h-10 rotate-45 text-blue-500 dark:text-sky-500 stroke-[1px] stroke-blue-500 dark:stroke-sky-500" />
                 </div>
               ) : transaction.state === "failed" ? (
-                <div className="flex justify-center items-center bg-red-100 dark:bg-red-950 rounded-full p-3">
-                  <PopiconsXSolid className="w-10 h-10 text-red-400 dark:text-rose-600 stroke-[1px] stroke-rose-400 dark:stroke-red-600" />
+                <div className="flex justify-center items-center bg-red-100 dark:bg-rose-950 rounded-full p-3">
+                  <PopiconsXSolid className="w-10 h-10 text-red-500 dark:text-rose-500 stroke-[1px] stroke-red-500 dark:stroke-rose-500" />
                 </div>
               ) : (
-                <div className="flex justify-center items-center bg-orange-100 dark:bg-orange-950 rounded-full p-3">
-                  <PopiconsArrowUpSolid className="w-10 h-10 text-orange-400 dark:text-amber-600 stroke-[1px] stroke-orange-400 dark:stroke-amber-600" />
+                <div className="flex justify-center items-center bg-orange-100 dark:bg-amber-950 rounded-full p-3">
+                  <PopiconsArrowUpSolid className="w-10 h-10 text-orange-500 dark:text-amber-500 stroke-[1px] stroke-orange-500 dark:stroke-amber-500" />
                 </div>
               )
             ) : (
               <div className="flex justify-center items-center bg-green-100 dark:bg-emerald-950 rounded-full p-3">
-                <PopiconsArrowDownSolid className="w-10 h-10 text-green-500 dark:text-emerald-500 stroke-[1px] stroke-green-400 dark:stroke-emerald-500" />
+                <PopiconsArrowDownSolid className="w-10 h-10 text-green-500 dark:text-teal-500 stroke-[1px] stroke-green-500 dark:stroke-teal-500" />
               </div>
             )}
           </div>
