@@ -126,13 +126,6 @@
       "citadel": {
         "page": {
           "title": ""
-        },
-        "password": {
-          "label": ""
-        },
-        "url": {
-          "label": "",
-          "placeholder": ""
         }
       },
       "umbrel": {

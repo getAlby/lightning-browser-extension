@@ -102,13 +102,6 @@
       "citadel": {
         "page": {
           "title": "Yhdistä <0>Citadel</0> solmuun"
-        },
-        "password": {
-          "label": "Citadel-salasana"
-        },
-        "url": {
-          "label": "Citadelin URL-osoite",
-          "placeholder": "http://citadel.local"
         }
       },
       "umbrel": {
@@ -315,7 +308,6 @@
             "description": "Oletko uusi Alby-laajennuksen käyttäjä? Tutustu oppaihimme, videoihimme ja selityksiimme",
             "title": "Aloita Alby-laajennuksen käyttö"
           },
-          "setup_keys": {},
           "receive_bitcoin": {
             "title": "Vastaanota bitcoineja",
             "description": "Rahoita tiliäsi ja vastaanota Lightning-osoitteesi tai laskun kautta"
@@ -555,7 +547,6 @@
           "title": "Avaintenhallinta",
           "saved": "Pääavain salattu ja tallennettu onnistuneesti.",
           "new": {
-            "nostr": "Tuo olemassa oleva Nostr-tili",
             "items": {
               "usage": "Voit tuoda ja käyttää samaa pääavainta <0>jossakin yhdistetyssä Albyn lompakossa</0>",
               "keys": "Pääavaimen avulla voit olla vuorovaikutuksessa protokollien, kuten <0>Nostr</0>, <0>Liquid</0> tai <0>Bitcoinin peruskerroksen</0> kanssa",
@@ -756,9 +747,6 @@
       "description": "Valitse, mihin {{name}}-sovellukseen haluat muodostaa yhteyden",
       "startos": {
         "name": "StartOS"
-      },
-      "citadel": {
-        "name": "Citadel"
       },
       "btcpay": {
         "name": "BTCPay"

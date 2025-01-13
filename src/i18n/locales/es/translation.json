@@ -86,13 +86,6 @@
         }
       },
       "citadel": {
-        "password": {
-          "label": "Contraseña de Citadel"
-        },
-        "url": {
-          "label": "URL de Citadel",
-          "placeholder": "http://citadel.local"
-        },
         "page": {
           "title": "Conectar a nodo Citadel"
         }
@@ -597,9 +590,6 @@
       },
       "title": "Conectarse a {{name}}",
       "description": "Elige la aplicación {{name}} con la que deseas conectarse",
-      "citadel": {
-        "name": "Citadel"
-      },
       "btcpay": {
         "name": "BTCPay"
       }

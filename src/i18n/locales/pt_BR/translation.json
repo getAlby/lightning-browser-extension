@@ -88,13 +88,6 @@
       "citadel": {
         "page": {
           "title": "Conecte-se no servidor <0>Citadel</0>"
-        },
-        "password": {
-          "label": "Senha Citadel"
-        },
-        "url": {
-          "label": "URL Citadel",
-          "placeholder": "http://citadel.local"
         }
       },
       "umbrel": {
@@ -272,6 +265,14 @@
           "url": {
             "placeholder": "nostr+walletconnect://69effe..."
           }
+        },
+        "title": "Nostr Wallet Connect"
+      },
+      "albyhub": {
+        "page": {
+          "errors": {
+            "connection_failed": "Falha na conexão. Seu Alby Hub e a conexão do aplicativo estão ativados?"
+          }
         }
       }
     },
@@ -327,7 +328,8 @@
             "label": "Chave privada Nostr",
             "subtitle": "Cole sua chave privada Nostr ou gere uma nova. <0>Saiba mais »</0>",
             "success": "Chave privada Nostr criptografada e salva com sucesso.",
-            "failed_to_remove": "O nome da conta inserido não está correto, sua chave privada Nostr antiga foi restaurada."
+            "failed_to_remove": "O nome da conta inserido não está correto, sua chave privada Nostr antiga foi restaurada.",
+            "warning": "Tem certeza de que deseja remover sua chave privada nostr?\n\nDigite \"{{name}}\" para confirmar:"
           },
           "public_key": {
             "label": "Chave pública Nostr"
@@ -435,7 +437,6 @@
               "title": "Proteja sua chave mestra",
               "description": "Saiba o que é uma chave mestra e cuide das 12 palavras da frase de recuperação"
             },
-            "nostr": "Importe uma conta Nostr",
             "import": {
               "title": "Você já possui uma chave mestra?",
               "description": "Insira sua frase de recuperação para importar a chave mestra para esta carteira"
@@ -788,9 +789,6 @@
     "distributions": {
       "umbrel": {
         "name": "Umbrel"
-      },
-      "citadel": {
-        "name": "Citadel"
       },
       "btcpay": {
         "name": "BTCPay"

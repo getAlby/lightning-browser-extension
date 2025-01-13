@@ -143,13 +143,6 @@
       "citadel": {
         "page": {
           "title": "به گره <0>Citadel</0> متصل شوید"
-        },
-        "password": {
-          "label": "گذرواژه Citadel"
-        },
-        "url": {
-          "label": "آدرس اینترنتی Citadel",
-          "placeholder": "http://citadel.local"
         }
       },
       "umbrel": {
@@ -314,9 +307,6 @@
       "umbrel": {
         "name": "Umbrel"
       },
-      "citadel": {
-        "name": "Citadel"
-      },
       "btcpay": {
         "name": "BTCPay"
       },
@@ -339,7 +329,6 @@
         "is_blocked_hint": "البی در حال حاضر در {{host}} غیرفعال شده است",
         "block_removed": "{{host}} فعال شد. لطفا دوباره بارگیری کنید.",
         "actions": {
-          "setup_keys": {},
           "get_started": {
             "title": "استفاده از افزونه البی را آغاز کن",
             "description": "افزونه البی ندارید؟ این راهنما، فیلم ها، و توضیحات را ببینید"
@@ -460,7 +449,6 @@
               "description": "عبارت بازیابی خود را بنویسید تا کلید اصلی خود را در این کیف پول وارد کنید",
               "title": "از قبل یک کلید اصلی دارید؟"
             },
-            "nostr": "یک حساب کاربری موجود ناستر را وارد کنید",
             "title": "تنظیم کلید اصلی",
             "secure": {
               "title": "کلید اصلی خود را ایمن کنید",

@@ -107,14 +107,12 @@
       "description": "Verbinden mit deiner externen Lightning Wallet oder Node",
       "citadel": {
         "page": {
-          "title": "Verbinden mit <0>Citadel</0> Node"
+          "title": "Verbinden mit <0>Citadel</0> Node",
+          "instructions": "1. Gehe in deinem Citadel-Bereich deines Nirvati-Dashboards auf <0>Connect wallet</0><1/>2. Wähle den Modus <0>Alby (Tor)</0> oder <0>Alby (Local Network)</0> aus<1/>3. Kopiere die <0>lndconnect URL</0> und füge sie unten ein"
         },
-        "password": {
-          "label": "Citadel Passwort"
-        },
-        "url": {
-          "label": "Citadel URL",
-          "placeholder": "http://citadel.local"
+        "rest_url": {
+          "label": "lndconnect REST URL",
+          "placeholder": "lndconnect://yournode:8080?..."
         }
       },
       "raspiblitz": {
@@ -317,6 +315,9 @@
             "connection_failed": "Verbindung fehlgeschlagen. Ist dein Alby Hub online und die App-Verbindung aktiviert?"
           }
         }
+      },
+      "nirvati": {
+        "title": "Nirvati"
       }
     },
     "unlock": {
@@ -434,7 +435,9 @@
             "description": "Erstelle einen Master Key für Bitcoin, Nostr und Liquid oder importiere ein bestehendes Nostr-Konto."
           }
         },
-        "upgrade_account": "Du verwendest die alte LNDHub-Einstellung. <0>Bitte verbinde dich erneut</0> mit deinem Alby-Konto, um Zugang zu den neuesten Funktionen zu erhalten."
+        "upgrade_account": "Du verwendest die alte LNDHub-Einstellung. <0>Bitte verbinde dich erneut</0> mit deinem Alby-Konto, um Zugang zu den neuesten Funktionen zu erhalten.",
+        "using_fee_credits": "Schließe deine Einrichtung ab und verbinde deine Geldbörse mit deinem <0>Alby-Konto</0> für unbegrenzte Zahlungen. Bis deine Einrichtung abgeschlossen ist, kannst du bis zu {{max_account_balance}} sats als <1>Gebührenguthaben</1> erhalten",
+        "using_shared_node": "Die von dir genutzte gemeinsame Wallet wird zugunsten der Alby Hub Wallet veraltet sein. Um weiterhin Zahlungen zu senden und zu empfangen, <0>richte deine Geldbörse</0> bis zum 3. Januar 2025 ein."
       },
       "allowance_view": {
         "sats": "sats",
@@ -577,14 +580,17 @@
               "keys": "Master Key ermöglicht die Interaktion mit Protokollen wie <0>Nostr</0>, <0>Liquid</0> oder <0> der Bitcoin Blockchain</0>",
               "nostr_key": "Du kannst jederzeit vorhandene Nostr-Schlüssel importieren und die von Hauptschlüssel erzeugten überschreiben"
             },
-            "nostr": "Ein bestehendes Nostr-Konto importieren",
             "secure": {
-              "title": "Sichere deinen Hauptschlüssel",
+              "title": "Sicherer Hauptschlüssel",
               "description": "Erfahre, was der Hauptschlüssel ist und sichere deine 12-Wörter-Wiederherstellungsphrase"
             },
             "import": {
-              "title": "Hast du bereits einen Hauptschlüssel?",
+              "title": "Hauptschlüssel importieren",
               "description": "Gebe deine Wiederherstellungsphrase ein, um den Hauptschlüssel in diese Wallet zu importieren"
+            },
+            "import_nostr": {
+              "title": "Nostr Schlüssel importieren",
+              "description": "Hast du bereits eine Nostr-Identität? Importiere es, um es mit diesem Konto zu verwenden"
             }
           },
           "inputs": {
@@ -936,9 +942,6 @@
       "umbrel": {
         "name": "Umbrel"
       },
-      "citadel": {
-        "name": "Citadel"
-      },
       "btcpay": {
         "name": "BTCPay"
       },
@@ -950,6 +953,9 @@
       },
       "startos": {
         "name": "StartOS"
+      },
+      "nirvati": {
+        "name": "Nirvati"
       }
     },
     "confirm_add_account": {
