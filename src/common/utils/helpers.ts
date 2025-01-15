@@ -63,19 +63,13 @@ export async function poll<T>({
   return new Promise(executePoll);
 }
 
-function hasSettleDate(
-  transaction: ConnectorTransaction
-): transaction is ConnectorTransaction & { settleDate: number } {
-  return transaction.settleDate !== null;
-}
-
 export function mergeTransactions(
   invoices: ConnectorTransaction[],
   payments: ConnectorTransaction[]
 ): ConnectorTransaction[] {
-  const mergedTransactions = [...invoices, ...payments]
-    .filter(hasSettleDate)
-    .sort((a, b) => b.settleDate - a.settleDate);
+  const mergedTransactions = [...invoices, ...payments].sort((a, b) => {
+    return (b.settleDate ?? 0) - (a.settleDate ?? 0);
+  });
 
   return mergedTransactions;
 }
