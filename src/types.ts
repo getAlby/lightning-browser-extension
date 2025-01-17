@@ -27,7 +27,7 @@ export interface Account {
   nostrPrivateKey?: string | null;
   mnemonic?: string | null;
   hasImportedNostrKey?: boolean;
-  seenSharedNodeBanner?: boolean;
+  hasSeenInfoBanner?: boolean;
   bitcoinNetwork?: BitcoinNetworkType;
   isMnemonicBackupDone?: boolean;
   useMnemonicForLnurlAuth?: boolean;
@@ -270,7 +270,7 @@ export interface MessageAccountEdit extends MessageDefault {
     bitcoinNetwork?: BitcoinNetworkType;
     useMnemonicForLnurlAuth?: boolean;
     isMnemonicBackupDone?: boolean;
-    seenSharedNodeBanner?: boolean;
+    hasSeenInfoBanner?: boolean;
   };
   action: "editAccount";
 }

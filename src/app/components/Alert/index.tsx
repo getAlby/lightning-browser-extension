@@ -6,7 +6,7 @@ type Props = {
   type: "warn" | "info";
   children: React.ReactNode;
   showClose?: boolean;
-  onClose?: () => void; // Optional callback function
+  onClose?: () => void;
 };
 
 export default function Alert({

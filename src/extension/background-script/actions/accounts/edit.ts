@@ -27,9 +27,8 @@ const edit = async (message: MessageAccountEdit) => {
         message.args.isMnemonicBackupDone;
     }
 
-    if (message.args.seenSharedNodeBanner !== undefined) {
-      accounts[accountId].seenSharedNodeBanner =
-        message.args.seenSharedNodeBanner;
+    if (message.args.hasSeenInfoBanner !== undefined) {
+      accounts[accountId].hasSeenInfoBanner = message.args.hasSeenInfoBanner;
     }
 
     state.setState({ accounts });
