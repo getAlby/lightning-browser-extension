@@ -1251,6 +1251,8 @@
       "payment_hash": "Payment Hash",
       "received": "Received",
       "sent": "Sent",
+      "sending": "Sending",
+      "failed": "Failed",
       "date_time": "Date & Time",
       "boostagram": {
         "sender": "Sender",

@@ -10,9 +10,8 @@ const getTransactions = async (message: MessageGetTransactions) => {
   try {
     const result = await connector.getTransactions();
 
-    let transactions: ConnectorTransaction[] = result.data.transactions
-      .filter((transaction) => transaction.settled)
-      .map((transaction) => {
+    let transactions: ConnectorTransaction[] = result.data.transactions.map(
+      (transaction) => {
         const boostagram = utils.getBoostagramFromInvoiceCustomRecords(
           transaction.custom_records
         );
@@ -21,7 +20,8 @@ const getTransactions = async (message: MessageGetTransactions) => {
           boostagram,
           paymentHash: transaction.payment_hash,
         };
-      });
+      }
+    );
 
     if (limit) {
       transactions = transactions.slice(0, limit);

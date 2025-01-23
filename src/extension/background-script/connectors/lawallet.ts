@@ -112,12 +112,14 @@ export default class LaWallet implements Connector {
       }
     );
 
-    const transactions = _transactions.map((event) => {
-      return {
-        ...event,
-        kind: event.kind as EventKind,
-      };
-    }) as Event[];
+    const transactions: Event[] = _transactions
+      .map((event) => {
+        return {
+          ...event,
+          kind: event.kind as EventKind,
+        };
+      })
+      .sort((a, b) => b.created_at - a.created_at);
 
     const parsedTransactions: ConnectorTransaction[] = await Promise.all(
       transactions.map(
@@ -127,8 +129,8 @@ export default class LaWallet implements Connector {
 
     return {
       data: {
-        transactions: parsedTransactions.sort(
-          (a, b) => b.settleDate - a.settleDate
+        transactions: parsedTransactions.filter(
+          (transaction) => transaction.settled
         ),
       },
     };
@@ -476,6 +478,7 @@ export async function parseTransaction(
     preimage: await extractPreimage(event, privateKey),
     settled: true,
     settleDate: event.created_at * 1000,
+    creationDate: event.created_at * 1000,
     totalAmount: content.tokens.BTC / 1000,
     type: event.tags[1][1] === userPubkey ? "received" : "sent",
     custom_records: {},
