@@ -675,10 +675,10 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.52.0.tgz#78fe5f117840f69dc4a353adf9b9cd926353378c"
   integrity sha512-mjZVbpaeMZludF2fsWLD0Z9gCref1Tk4i9+wddjRvpUNqqcndPkBD09N/Mapey0b3jaXbLm2kICwFv2E64QinA==
 
-"@getalby/sdk@^3.8.2":
-  version "3.8.2"
-  resolved "https://registry.yarnpkg.com/@getalby/sdk/-/sdk-3.8.2.tgz#84a184c46fdebf18652d6c06b92f07ed36129d3d"
-  integrity sha512-0F4ub/e+t93V9wzR5Vr+Xdfhhy5kK+ZKls/J3yX2YBT27X1Rd3QIPLCTUFCb4RaV6a/e17aZAVJF8Af7r9BeAg==
+"@getalby/sdk@^3.9.0":
+  version "3.9.0"
+  resolved "https://registry.yarnpkg.com/@getalby/sdk/-/sdk-3.9.0.tgz#4eb4dd9512fc41312c8a894b7f653360feb61eac"
+  integrity sha512-qgNXr4FsX0a+PPvWgb112Q8h1/ov31zVP4LjsDYr5+W0CkrRbW9pQnsHPycVPLB5H8k5WVRRNkxYBBoWIBAwyw==
   dependencies:
     emittery "^1.0.3"
     nostr-tools "2.9.4"
