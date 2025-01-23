@@ -184,11 +184,12 @@ const DefaultView: FC<Props> = (props) => {
           <Alert
             type="info"
             showClose
-            onClose={async () =>
+            onClose={async () => {
               await api.editAccount(account.id, {
                 hasSeenInfoBanner: true,
-              })
-            }
+              });
+              setHasSeenInfoBanner(true);
+            }}
           >
             <div className="flex items-center gap-2">
               <div className="shrink-0">
