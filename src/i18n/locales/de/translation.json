@@ -435,9 +435,7 @@
             "description": "Erstelle einen Master Key für Bitcoin, Nostr und Liquid oder importiere ein bestehendes Nostr-Konto."
           }
         },
-        "upgrade_account": "Du verwendest die alte LNDHub-Einstellung. <0>Bitte verbinde dich erneut</0> mit deinem Alby-Konto, um Zugang zu den neuesten Funktionen zu erhalten.",
-        "using_fee_credits": "Schließe deine Einrichtung ab und verbinde deine Geldbörse mit deinem <0>Alby-Konto</0> für unbegrenzte Zahlungen. Bis deine Einrichtung abgeschlossen ist, kannst du bis zu {{max_account_balance}} sats als <1>Gebührenguthaben</1> erhalten",
-        "using_shared_node": "Die von dir genutzte gemeinsame Wallet wird zugunsten der Alby Hub Wallet veraltet sein. Um weiterhin Zahlungen zu senden und zu empfangen, <0>richte deine Geldbörse</0> bis zum 3. Januar 2025 ein."
+        "upgrade_account": "Du verwendest die alte LNDHub-Einstellung. <0>Bitte verbinde dich erneut</0> mit deinem Alby-Konto, um Zugang zu den neuesten Funktionen zu erhalten."
       },
       "allowance_view": {
         "sats": "sats",
@@ -1312,8 +1310,7 @@
     "advanced": "Erweiterte Einstellungen anzeigen",
     "details": "Einzelheiten",
     "general": "Allgemein",
-    "wallet_settings": "Wallet-Einstellungen",
-    "node_required": "Schließe deine Einrichtung von deiner Geldbörse ab, damit du <0>hier</0> unbegrenzt Zahlungen senden und empfangen kannst. Bis dahin kannst du nur bis zu 50.000 Sats als <1>Gebührenguthaben</1> empfangen."
+    "wallet_settings": "Wallet-Einstellungen"
   },
   "permissions": {
     "commando": {
