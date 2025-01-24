@@ -122,8 +122,14 @@ class LnBits implements Connector {
           webhook_status: string;
         }[]
       ) => {
-        const transactions: ConnectorTransaction[] = data.map(
-          (transaction, index): ConnectorTransaction => {
+        const transactions: ConnectorTransaction[] = data
+          .map((transaction, index): ConnectorTransaction => {
+            const decoded = lightningPayReq.decode(transaction.bolt11);
+
+            const creationDate = decoded.timestamp
+              ? decoded.timestamp * 1000
+              : new Date(0).getTime();
+
             return {
               id: `${transaction.checking_id}-${index}`,
               memo: transaction.memo,
@@ -135,11 +141,12 @@ class LnBits implements Connector {
               payment_hash: transaction.payment_hash,
               settled: !transaction.pending,
               settleDate: transaction.time * 1000,
+              creationDate: creationDate,
               totalAmount: Math.abs(Math.floor(transaction.amount / 1000)),
               type: transaction.amount > 0 ? "received" : "sent",
             };
-          }
-        );
+          })
+          .filter((transaction) => transaction.settled);
 
         return {
           data: {

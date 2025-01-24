@@ -75,6 +75,7 @@ export interface GetAccountRes extends Pick<Account, "id" | "name"> {
   hasMnemonic: boolean;
   isMnemonicBackupDone: boolean;
   hasImportedNostrKey: boolean;
+  hasSeenInfoBanner: boolean;
   bitcoinNetwork: BitcoinNetworkType;
   useMnemonicForLnurlAuth: boolean;
 }

@@ -68,7 +68,7 @@ export function mergeTransactions(
   payments: ConnectorTransaction[]
 ): ConnectorTransaction[] {
   const mergedTransactions = [...invoices, ...payments].sort((a, b) => {
-    return b.settleDate - a.settleDate;
+    return (b.settleDate ?? 0) - (a.settleDate ?? 0);
   });
 
   return mergedTransactions;

@@ -105,23 +105,22 @@ export default class LndHub implements Connector {
       }[]
     >("GET", "/getuserinvoices", undefined);
 
-    const invoices: ConnectorTransaction[] = data
-      .map(
-        (invoice, index): ConnectorTransaction => ({
-          custom_records: invoice.custom_records,
-          id: `${invoice.payment_request}-${index}`,
-          memo: invoice.description,
-          preimage: "", // lndhub doesn't support preimage (yet)
-          payment_hash: invoice.payment_hash,
-          settled: invoice.ispaid,
-          settleDate: invoice.timestamp * 1000,
-          totalAmount: invoice.amt,
-          type: "received",
-        })
-      )
-      .sort((a, b) => {
-        return b.settleDate - a.settleDate;
-      });
+    data.sort((a, b) => b.timestamp - a.timestamp);
+
+    const invoices: ConnectorTransaction[] = data.map(
+      (invoice, index): ConnectorTransaction => ({
+        custom_records: invoice.custom_records,
+        id: `${invoice.payment_request}-${index}`,
+        memo: invoice.description,
+        preimage: "", // lndhub doesn't support preimage (yet)
+        payment_hash: invoice.payment_hash,
+        settled: invoice.ispaid,
+        settleDate: invoice.timestamp * 1000,
+        creationDate: invoice.timestamp * 1000,
+        totalAmount: invoice.amt,
+        type: "received",
+      })
+    );
 
     return invoices;
   }
@@ -133,7 +132,7 @@ export default class LndHub implements Connector {
     const transactions: ConnectorTransaction[] = mergeTransactions(
       incomingInvoices,
       outgoingInvoices
-    );
+    ).filter((transaction) => transaction.settled);
 
     return {
       data: {
@@ -176,6 +175,7 @@ export default class LndHub implements Connector {
         ),
         settled: true,
         settleDate: transaction.timestamp * 1000,
+        creationDate: transaction.timestamp * 1000,
         totalAmount: transaction.value,
         type: "sent",
       })
