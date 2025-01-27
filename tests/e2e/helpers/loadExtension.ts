@@ -1,3 +1,4 @@
+import path from "path";
 import { getDocument, queries } from "pptr-testing-library";
 import puppeteer, { Browser, ElementHandle, Page } from "puppeteer";
 
@@ -12,7 +13,7 @@ const delay = async (time) => {
 export const loadExtension = async () => {
   const extensionPath = process.env.CI
     ? "./dist/production/chrome"
-    : "./dist/development/chrome";
+    : path.resolve(__dirname, "../../../dist/development/chrome");
 
   const browser = await puppeteer.launch({
     userDataDir: "./puppeteer-user-data-dir",
