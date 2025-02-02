@@ -12,7 +12,7 @@ jest.mock("~/common/lib/api", () => {
   return {
     ...original,
     getSettings: jest.fn(() => Promise.resolve(mockSettings)),
-    getCurrencyRate: jest.fn(() => Promise.resolve({ rate: 11 })),
+    getCurrencyRate: jest.fn(() => 11),
   };
 });
 
