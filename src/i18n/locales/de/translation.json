@@ -13,7 +13,7 @@
         "confirm_password": {
           "label": "Vergewisser dich, dass du es richtig eingegeben hast:"
         },
-        "description1": "Lege ein Password fest, um die Alby Erweiterung in diesem Browser zu entsperren",
+        "description1": "Lege ein Password fest, um die Alby Erweiterung in dem Browser zu entsperren",
         "description2": "Das Password zum Entsperren kann nicht wiederhergestellt, aber geändert werden ",
         "title": "Passwort zum Entsperren der Erweiterung festlegen"
       },
@@ -1185,7 +1185,9 @@
       "open_location": "Webseite öffnen",
       "payment_hash": "Zahlung hHash",
       "date_time": "Datum & Uhrzeit",
-      "no_transactions": "Noch keine Transaktionen."
+      "no_transactions": "Noch keine Transaktionen.",
+      "failed": "Gescheitert",
+      "sending": "Senden von"
     },
     "budget_control": {
       "remember": {
@@ -1310,7 +1312,8 @@
     "advanced": "Erweiterte Einstellungen anzeigen",
     "details": "Einzelheiten",
     "general": "Allgemein",
-    "wallet_settings": "Wallet-Einstellungen"
+    "wallet_settings": "Wallet-Einstellungen",
+    "setup_wallet": "Beende deine <0>Alby-Kontoeinrichtung</0> für unbegrenzte Zahlungen. Bis deine Einrichtung abgeschlossen ist, kannst du bis zu {{max_account_balance}} als <1>Gebührengutschrift</1> erhalten"
   },
   "permissions": {
     "commando": {
