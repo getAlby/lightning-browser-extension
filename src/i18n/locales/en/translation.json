@@ -406,7 +406,7 @@
           },
           "setup_keys": {
             "title": "Setup Master Key",
-            "description": "Create a Master key for Bitcoin, Nostr and Liquid or import an existing Nostr wallet."
+            "description": "Create a Master key for Bitcoin, Nostr and Liquid or import an existing Nostr account."
           },
           "receive_bitcoin": {
             "title": "Receive bitcoin",
@@ -538,10 +538,10 @@
           },
           "setup": {
             "title": "Setup your Nostr keys",
-            "description": "Choose If you'd like to create a new Nostr wallet (a pair of private and public keys) or import an existing one.",
-            "description2": "Every Nostr wallet created in Alby comes with a <0>Recovery Phrase</0> – a set of 12 words that always allow you to regain access to your Nostr private keys.",
+            "description": "Choose If you'd like to create a new Nostr account (a pair of private and public keys) or import an existing one.",
+            "description2": "Every Nostr account created in Alby comes with a <0>Recovery Phrase</0> – a set of 12 words that always allow you to regain access to your Nostr private keys.",
             "new": {
-              "label": "Create a new Nostr wallet",
+              "label": "Create a new Nostr account",
               "description": "Generate a Master Key with a pair of new Nostr keys."
             }
           },
