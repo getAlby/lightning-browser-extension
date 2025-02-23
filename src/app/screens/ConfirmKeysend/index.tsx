@@ -41,7 +41,6 @@ function ConfirmKeysend() {
     ((parseInt(amount) || 0) * 10).toString()
   );
   const [fiatAmount, setFiatAmount] = useState("");
-  const [fiatBudgetAmount, setFiatBudgetAmount] = useState("");
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
 
@@ -53,13 +52,6 @@ function ConfirmKeysend() {
       }
     })();
   }, [amount, showFiat, getFormattedFiat]);
-
-  useEffect(() => {
-    (async () => {
-      const res = await getFormattedFiat(budget);
-      setFiatBudgetAmount(res);
-    })();
-  }, [budget, showFiat, getFormattedFiat]);
 
   async function confirm() {
     if (rememberMe && budget) {
@@ -153,7 +145,7 @@ function ConfirmKeysend() {
             </div>
             <div>
               <BudgetControl
-                fiatAmount={fiatBudgetAmount}
+                showFiat={showFiat}
                 remember={rememberMe}
                 onRememberChange={(event) => {
                   setRememberMe(event.target.checked);
