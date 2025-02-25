@@ -288,15 +288,6 @@
             "imported_key_warning": "⚠️ 你當前正在使用導入的或隨機生成的 Nostr 密鑰。你的 Nostr 私鑰無法通過你的恢復短語恢復，因此請記住分別備份你的 Nostr 私鑰。",
             "remove": "移除現有的密鑰",
             "can_restore": "✅ Nostr 密鑰已從你的主密鑰派生"
-          },
-          "setup": {
-            "title": "設置你的 nostr 密鑰",
-            "description": "選擇是否要創建一個新的 nostr 帳戶（一對私鑰和公鑰）或導入現有帳戶。",
-            "description2": "在 Alby 中創建的每個 Nostr 帳戶都帶有<0>恢復短語</0>——一組12個單詞，始終保證重新獲得對你的 Nostr 私鑰的訪問。",
-            "new": {
-              "label": "創建新的 nostr 帳戶",
-              "description": "通過使用一對新的 nostr 密鑰生成主密鑰。"
-            }
           }
         },
         "remove": {

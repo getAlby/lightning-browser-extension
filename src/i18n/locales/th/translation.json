@@ -95,15 +95,6 @@
             "title": "การตั้งค่าสำหรับ Nostr",
             "can_restore": "✅ Nostr key ได้มาจาก Master Key ของคุณ"
           },
-          "setup": {
-            "title": "ตั้งค่า Nostr keys ของคุณ",
-            "description": "เลือกระหว่างการสร้างบัญชี Nostr (คู่ private และ public keys) หรือ นำเข้าที่มีอยู่แล้ว",
-            "description2": "บัญชี Nostr ทุกบัญชีที่สร้างใน Alby มาพร้อมกับ <0>Recovery Phrase</0> ซึ่งเป็นชุดคำ 12 คำที่ช่วยให้คุณเข้าถึง private keys ของ Nostr ได้อีกครั้ง",
-            "new": {
-              "description": "สร้าง Master Key และคู่ Nostr keys ใหม่",
-              "label": "สร้างบัญชี Nostr ใหม่"
-            }
-          },
           "private_key": {
             "label": "Nostr Private Key",
             "title": "จัดการ Nostr private key ของคุณ",

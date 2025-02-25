@@ -520,15 +520,6 @@
               },
               "title": "Nostr-Adresse"
             }
-          },
-          "setup": {
-            "title": "Einrichten der Nostr-Schlüssel",
-            "description": "Wähle, ob du ein neues Nostr-Konto (ein Paar privater und öffentlicher Schlüssel) erstellen oder ein bestehendes importieren möchtest.",
-            "new": {
-              "description": "Generiere einen Hauptschlüssel mit einem Paar neuer Nostr-Schlüssel.",
-              "label": "Ein neues Nostr-Konto erstellen"
-            },
-            "description2": "Jedes Nostr-Konto, das in Alby erstellt wird, wird mit einer <0>Wiederherstellungsphrase</0> geliefert - eine Reihe von 12 Wörtern, die es dir ermöglicht, jederzeit wieder Zugang zu deinen privaten Nostr-Schlüsseln zu erhalten."
           }
         },
         "remove": {

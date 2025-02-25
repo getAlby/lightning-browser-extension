@@ -387,15 +387,6 @@
               "title": "Nostr 密钥",
               "description": "从主密钥派生 Nostr 密钥或将私钥粘贴到「Nostr 私钥」处导入已有私钥。"
             }
-          },
-          "setup": {
-            "description2": "在 Alby 中创建的每个 Nostr 帐户都带有<0>恢复短语</0> —— 一组12个单词，始终保证重新获得对你的 Nostr 私钥的访问。",
-            "title": "设置你的 nostr 密钥",
-            "description": "选择是否要创建一个新的 nostr 帐户（一对私钥和公钥）或导入现有帐户。",
-            "new": {
-              "label": "创建新的 nostr 帐户",
-              "description": "通过使用一对新的 nostr 密钥生成主密钥。"
-            }
           }
         },
         "export": {

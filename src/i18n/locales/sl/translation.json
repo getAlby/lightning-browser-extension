@@ -330,13 +330,6 @@
             "can_restore": "✅ Nostr ključ, izpeljan iz vašega glavnega ključa",
             "derive": "Izpelji iz glavnega ključa"
           },
-          "setup": {
-            "title": "Konfiguriraj Nostr ključe",
-            "new": {
-              "label": "Ustvari nov Nostr račun",
-              "description": "Ustvarite glavni ključ s parom novih ključev Nostr."
-            }
-          },
           "title": "Nostr",
           "public_key": {
             "label": "Javni ključ Nostr"

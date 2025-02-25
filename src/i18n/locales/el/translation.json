@@ -169,11 +169,6 @@
             "title": "Ρυθμίσεις Nostr"
           },
           "title": "Nostr",
-          "setup": {
-            "new": {
-              "label": "Δημιουργία νέου λογαριασμού Nostr"
-            }
-          },
           "public_key": {
             "label": "Δημόσιο κλειδί Nostr"
           },

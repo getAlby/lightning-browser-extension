@@ -308,15 +308,6 @@
             "remove": "Hapus kunci saat ini",
             "no_secret_key": "💡 Kamu tidak memiliki Master Key. <0>Klik di sini</0></div> untuk membuat Master Key dan mengambil kunci Nostr kamu."
           },
-          "setup": {
-            "new": {
-              "label": "Buat akun Nostr",
-              "description": "Buat Master Key dan sepasang kunci Nostr baru."
-            },
-            "title": "Siapkan kunci Nostr kamu",
-            "description": "Pilih jika anda mau membuat akun Nostr baru (sepasang kunci privat dan publik) atau impor yang sudah ada.",
-            "description2": "setiap akun Nostr yang dibuat dalam Alby, akan mempunyai <0>Recovery Phrase</0> – susunan 12 kata untuk mengakses kembali kunci privat Nostr."
-          },
           "private_key": {
             "subtitle": "Tempel kunci privat nostr atau buat baru. <0>Pelajari lebih lanjut »</0>",
             "failed_to_remove": "Nama akun yang dimasukkan tidak sama, kunci privat Nostr yang dahulu telah dikembalikan.",

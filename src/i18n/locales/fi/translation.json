@@ -654,15 +654,6 @@
               "derived_keys": "Johda avain tililtä"
             }
           },
-          "setup": {
-            "description2": "Jokaisella Albyssa luodulla Nostr-tilillä on <0>palautuslause</0> – kahdentoista sanan merkkijono, jonka avulla voit aina saada takaisin pääsyn yksityisiin Nostr-avaimiisi.",
-            "title": "Määritä Nostr-avaimesi",
-            "description": "Valitse haluatko luoda uuden Nostr-tilin (yksityisen ja julkisen avaimen pari) tai tuoda olemassa olevan.",
-            "new": {
-              "description": "Luo pääavain uudella Nostr-avainparilla.",
-              "label": "Luo uusi Nostr-tili"
-            }
-          },
           "public_key": {
             "label": "Julkinen Nostr-avain"
           },

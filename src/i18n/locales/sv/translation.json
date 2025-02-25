@@ -264,15 +264,6 @@
             "can_restore": "✅ Nostr-nyckel härledd från din huvudnyckel",
             "no_secret_key": "💡 Du har ingen huvudnyckel än. <0>Klicka här</0></div> för att skapa din huvudnyckel och härleda dina Nostr-nycklar.",
             "remove": "Ta bort nuvarande nycklar"
-          },
-          "setup": {
-            "description": "Välj Om du vill skapa ett nytt Nostr-konto (ett par privata och offentliga nycklar) eller importera ett befintligt.",
-            "description2": "Varje Nostr-konto som skapas i Alby kommer med en <0>Återställningsfras</0> – en uppsättning av 12 ord som alltid låter dig återfå åtkomst till dina privata Nostr-nycklar.",
-            "title": "Ställ in dina Nostr-nycklar",
-            "new": {
-              "label": "Skapa ett nytt Nostr-konto",
-              "description": "Generera en huvudnyckel med ett par nya Nostr-nycklar."
-            }
           }
         },
         "remove": {

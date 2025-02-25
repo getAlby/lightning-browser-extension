@@ -406,7 +406,7 @@
           },
           "setup_keys": {
             "title": "Setup Master Key",
-            "description": "Create a Master key for Bitcoin, Nostr and Liquid or import an existing Nostr account."
+            "description": "Create a Master key for Bitcoin, Nostr, and Liquid, or import existing Nostr keys."
           },
           "receive_bitcoin": {
             "title": "Receive bitcoin",
@@ -430,7 +430,7 @@
         "danger_zone": "Danger Zone",
         "export": {
           "title": "Connect to Mobile Wallet",
-          "description": "Log in on getalby.com to connect and use this wallet on mobile wallets like <0>Zeus</0> and <1>Blue Wallet</1>.",
+          "description": "Log in to getalby.com to connect and use this wallet with mobile wallets like <0>Zeus</0> and <1>Blue Wallet</1>.",
           "screen_reader": "Export wallet details",
           "waiting": "waiting for LndHub data...",
           "your_ln_address": "Your Lightning Address:",
@@ -536,15 +536,6 @@
             "remove": "Remove current keys",
             "no_secret_key": "💡 You don't have a Master Key yet. <0>Click here</0></div> to create your Master Key and derive your Nostr keys."
           },
-          "setup": {
-            "title": "Setup your Nostr keys",
-            "description": "Choose If you'd like to create a new Nostr account (a pair of private and public keys) or import an existing one.",
-            "description2": "Every Nostr account created in Alby comes with a <0>Recovery Phrase</0> – a set of 12 words that always allow you to regain access to your Nostr private keys.",
-            "new": {
-              "label": "Create a new Nostr account",
-              "description": "Generate a Master Key with a pair of new Nostr keys."
-            }
-          },
           "private_key": {
             "title": "Manage your Nostr private key",
             "subtitle": "Paste your nostr private key or generate a new one. <0>Learn more »</0>",
@@ -563,7 +554,7 @@
             "hint": "You can generate a random key or a derive key from this wallet details (using a signed canonical phrase). <0>Learn more »</0>",
             "actions": {
               "random_keys": "Generate a random key",
-              "derived_keys": "Derive a key from wallet"
+              "derived_keys": "Derive a key from a wallet"
             }
           },
           "actions": {
@@ -955,7 +946,7 @@
     },
     "confirm_add_account": {
       "title": "Add wallet",
-      "content": "This website wants to add an wallet ({{connector}}):",
+      "content": "This website wants to add a wallet ({{connector}}):",
       "tor_info": "In order to connect through the TOR network you need to first install the Alby companion app:"
     },
     "liquid": {
@@ -1116,7 +1107,7 @@
     "error": "Error",
     "general": "General",
     "settings": "Extension Settings",
-    "accounts": "Wallets",
+    "wallets": "Wallets",
     "discover": "Discover Apps",
     "connected_sites": "Connected Sites",
     "wallet": "Wallet",

@@ -279,15 +279,6 @@
             "can_restore": "✅ Nostrキーはマスターキーから導出されています"
           },
           "title": "Nostr",
-          "setup": {
-            "description2": "Albyで作成されたすべてのNostrアカウントには、<0>リカバリーフレーズ</0>が付属しています。これはNostrの秘密鍵を復旧するための12個の単語です。",
-            "new": {
-              "label": "新しいNostrアカウントを作成する",
-              "description": "新しいNostr鍵のペアでマスター鍵を生成する。"
-            },
-            "title": "Nostrキーのセットアップ",
-            "description": "新しいNostrアカウント（秘密鍵と公開鍵のペア）を作成するか、既存のアカウントをインポートするかを選択します。"
-          },
           "private_key": {
             "successfully_removed": "Nostr秘密鍵の削除に成功しました",
             "label": "Nostr秘密鍵",

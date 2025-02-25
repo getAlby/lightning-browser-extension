@@ -374,15 +374,6 @@
               "title": "Remover chaves Nostr",
               "description": "Remove as chaves Nostr desta carteira."
             }
-          },
-          "setup": {
-            "title": "Configure suas chaves Nostr",
-            "new": {
-              "label": "Criar uma nova conta Nostr",
-              "description": "Gere uma chave mestra com um par de novas chaves Nostr."
-            },
-            "description": "Escolha se você deseja criar uma nova conta Nostr (um par de chaves públicas e privadas) ou importar uma existente.",
-            "description2": "Toda conta Nostr criada na Alby vem com uma <0>Frase de recuperação</0> – um conjunto de 12 palavras que sempre permite que você recupere o acesso às suas chaves privadas Nostr."
           }
         },
         "remove": {
