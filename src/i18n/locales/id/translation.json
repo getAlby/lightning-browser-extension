@@ -17,13 +17,10 @@
         "description1": "Atur kode sandi untuk membuka ekstensi Alby pada peramban ini"
       },
       "test_connection": {
-        "initializing": "Menginisialisasi akun Anda. Mohon tunggu, ini mungkin akan memakan waktu beberapa menit...",
         "connection_error": "Koneksi Error",
         "review_connection_details": "Silakan cek kembali koneksi Anda.",
         "contact_support": "Jika kamu membutuhkan bantuan silakan hubungi support@getalby.com",
-        "actions": {
-          "delete_edit_account": "Hapus akun yang salah dan ubah kembali"
-        },
+        "actions": {},
         "connection_taking_long": "Proses koneksi memakan waktu lama... Apakah kamu memasukan informasi secara benar? Apakah node kamu dapat terhubung?"
       },
       "pin_extension": {
@@ -261,11 +258,9 @@
     "accounts": {
       "account_view": {
         "name": {
-          "placeholder": "Tampilan nama akun",
           "title": "Tampilan Nama"
         },
         "export": {
-          "screen_reader": "Ekspor detail akun",
           "waiting": "Menunggu data LndHub...",
           "your_ln_address": "Alamat Lightning kamu:",
           "export_uri": "LNDHub Credentials URI",
@@ -273,7 +268,6 @@
         },
         "mnemonic": {
           "saved": "Kunci Master terenkripsi & tersimpan dengan sukses.",
-          "existing_nostr_key_notice": "ℹ️ Akun ini sudah memiliki kunci privat nostr dan tidak akan diambil dari Master Key. Kamu bisa mengatur kunci Nostr pada pengaturan akun.",
           "generate": {
             "title": "Buat Master Key baru",
             "description": "Master Key membuat kamu dapat berinteraksi dengan berbagai protokol seperti, Nostr, layer utama dari Bitcoin atau LNURL-Auth.",

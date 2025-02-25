@@ -16,14 +16,11 @@
       },
       "test_connection": {
         "ready": "太棒了，你已準備就緒！",
-        "initializing": "正在初始化你的帳戶。請稍候，這可能需要一分鐘...",
         "connection_error": "連接錯誤",
         "review_connection_details": "請檢查你的連接詳細信息。",
         "connection_taking_long": "嘗試連接的時間比預期的要長...你的詳細信息是否正確？你的節點是否可訪問？",
         "contact_support": "如果你需要幫助，請聯繫 support@getalby.com",
-        "actions": {
-          "delete_edit_account": "刪除無效帳戶並重新編輯"
-        }
+        "actions": {}
       },
       "pin_extension": {
         "title": "釘選你的Alby擴充套件",
@@ -241,11 +238,9 @@
     "accounts": {
       "account_view": {
         "name": {
-          "title": "名稱",
-          "placeholder": "帳戶名稱"
+          "title": "名稱"
         },
         "export": {
-          "screen_reader": "導出帳戶詳情",
           "waiting": "等待 LndHub 數據...",
           "your_ln_address": "你的閃電地址：",
           "export_uri": "LNDHub 憑據 URI",
@@ -320,7 +315,6 @@
             "description": "通過使用恢復短語將主密鑰導入 Alby。",
             "title": "導入主密鑰"
           },
-          "existing_nostr_key_notice": "ℹ️ 該帳戶已設置 nostr 私鑰，因此不會從此主密鑰派生。你可以通過你的帳戶設置管理你的 nostr 密鑰。",
           "saved": "主密鑰已加密並成功保存。"
         },
         "remove_secretkey": {

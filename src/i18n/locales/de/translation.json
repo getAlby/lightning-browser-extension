@@ -19,11 +19,8 @@
       },
       "test_connection": {
         "review_connection_details": "Bitte überprüfe deine Verbindungsdaten.",
-        "actions": {
-          "delete_edit_account": "Ungültiges Konto löschen und erneut bearbeiten"
-        },
+        "actions": {},
         "ready": "Großartig, du kannst jetzt loslegen!",
-        "initializing": "Dein Konto wird initialisiert. Bitte warte, dies kann eine Minute dauern...",
         "connection_error": "Verbindungsfehler",
         "connection_taking_long": "Der Verbindungsversuch dauert länger als erwartet... Sind deine Angaben korrekt? Ist deine Node erreichbar?",
         "contact_support": "Wenn du Hilfe benötigst, wende dich bitte an support@getalby.com"
@@ -420,19 +417,16 @@
         "is_blocked_hint": "Alby ist derzeit auf dem {{host}} deaktiviert",
         "block_removed": "{{host}} aktiviert. Bitte lade die Webseite neu.",
         "see_all": "Alle sehen",
-        "no_transactions": "Noch keine Transaktionen für dieses Konto.",
         "actions": {
           "get_started": {
             "title": "Erste Schritte mit Alby Extension",
             "description": "Neu bei Alby Extension? Sehe dir unsere Anleitungen, Videos und Erklärungen an"
           },
           "receive_bitcoin": {
-            "title": "Bitcoin erhalten",
-            "description": "Zahle auf dein Konto ein und empfange über deine Lightning Adresse oder eine Rechnung"
+            "title": "Bitcoin erhalten"
           },
           "setup_keys": {
-            "title": "Master Key einrichten",
-            "description": "Erstelle einen Master Key für Bitcoin, Nostr und Liquid oder importiere ein bestehendes Nostr-Konto."
+            "title": "Master Key einrichten"
           }
         },
         "upgrade_account": "Du verwendest die alte LNDHub-Einstellung. <0>Bitte verbinde dich erneut</0> mit deinem Alby-Konto, um Zugang zu den neuesten Funktionen zu erhalten."
@@ -452,17 +446,14 @@
     "accounts": {
       "account_view": {
         "name": {
-          "title": "Anzeigename",
-          "placeholder": "Konto Anzeigename"
+          "title": "Anzeigename"
         },
         "export": {
-          "screen_reader": "Kontodaten exportieren",
           "waiting": "Warten auf LndHub Daten...",
           "your_ln_address": "Deine Lightning Adresse:",
           "export_uri": "LNDHub Anmeldeinformationen URI",
           "scan_qr": "Importiere diese Wallet in Zeus oder BlueWallet, indem du den QRCode scannst.",
-          "title": "Verbindung mit Mobile Wallet",
-          "description": "Ermöglicht es dir, dieses Konto mit mobilen Wallets wie <0>Blue Wallet</0> und <0>Zeus</0> zu verbinden und zu verwenden."
+          "title": "Verbindung mit Mobile Wallet"
         },
         "nostr": {
           "title": "Nostr",
@@ -557,7 +548,6 @@
             "description": "Verwende die Wiederherstellungsphrase, um deinen Hauptschlüssel in Alby zu importieren.",
             "button": "Hauptschlüssel importieren"
           },
-          "existing_nostr_key_notice": "ℹ️ Für dieses Konto ist bereits ein privater Nostr-Schlüssel festgelegt, der nicht von diesem Hauptschlüssel abgeleitet wird. Du kannst dein Nostr-Schlüssel über deine Kontoeinstellungen verwalten.",
           "lnurl": {
             "title": "Anmeldung mit Lightning",
             "use_mnemonic": "Hauptschlüssel für die Anmeldung bei Lightning-Anwendungen verwenden (LNURL Auth)"
@@ -578,8 +568,7 @@
               "description": "Gebe deine Wiederherstellungsphrase ein, um den Hauptschlüssel in diese Wallet zu importieren"
             },
             "import_nostr": {
-              "title": "Nostr Schlüssel importieren",
-              "description": "Hast du bereits eine Nostr-Identität? Importiere es, um es mit diesem Konto zu verwenden"
+              "title": "Nostr Schlüssel importieren"
             }
           },
           "inputs": {

@@ -16,14 +16,11 @@
       },
       "test_connection": {
         "ready": "Skvěle, vše je připraveno!",
-        "initializing": "Inicializace vašeho účtu. Prosím čekejte, chvíli to zabere...",
         "connection_error": "Chyba spojení",
         "review_connection_details": "Prosím překontrolujte nastavení vašeho spojení.",
         "connection_taking_long": "Připojování zabralo více, než bylo očekáváno... Zadali jste údaje o připojení správně? Je váš uzel dostupný?",
         "contact_support": "Pokud potřebujete pomoct, prosím kontaktujte support@getalby.com",
-        "actions": {
-          "delete_edit_account": "Smažte nevalidní účet a změny proveďte znovu"
-        }
+        "actions": {}
       },
       "pin_extension": {
         "title": "Připnout rozšíření Alby",
@@ -259,15 +256,13 @@
           "export": "Export"
         },
         "export": {
-          "screen_reader": "Exportovat detaily účtu",
           "export_uri": "LNDHub pověřovací URI",
           "waiting": "čekání na data z LndHub...",
           "your_ln_address": "Vaše Lightning adresa:",
           "scan_qr": "Importujte tuto peněženku do Zeus nebo BlueWallet naskenováním QR kódu."
         },
         "name": {
-          "title": "Jméno",
-          "placeholder": "Jméno účtu"
+          "title": "Jméno"
         },
         "mnemonic": {
           "generate": {

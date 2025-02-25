@@ -16,14 +16,11 @@
       },
       "test_connection": {
         "ready": "Excelent, esti gata!",
-        "initializing": "Contul tau se initializeaza. Te rugam sa astepti, poate dura cateva minute...",
         "connection_error": "Eroare de conexiune",
         "review_connection_details": "Te rog sa verifici datele de conectare.",
         "connection_taking_long": "Incercarea de conectare dureaza mai mult decat ar trebui... Datele de conectare sunt corecte? Nodul tau este accesibil?",
         "contact_support": "Daca ai nevoie de ajutor te rugam sa contactezi support@getalby.com",
-        "actions": {
-          "delete_edit_account": "Sterge contul invalid si editeaza din nou"
-        }
+        "actions": {}
       }
     },
     "choose_path": {
@@ -232,11 +229,9 @@
     "accounts": {
       "account_view": {
         "name": {
-          "title": "Nume",
-          "placeholder": "Nume cont"
+          "title": "Nume"
         },
         "export": {
-          "screen_reader": "Exporta date cont",
           "waiting": "in asteptarea datelor LNDHub...",
           "your_ln_address": "Adresa ta Lightning:",
           "export_uri": "Credentialele URI pentru LNDHub",
