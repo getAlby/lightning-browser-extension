@@ -16,14 +16,11 @@
       },
       "test_connection": {
         "ready": "Geweldig, klaar om te starten!",
-        "initializing": "Uw account wordt geïnitialiseerd. Even geduld, dit kan even duren...",
         "connection_error": "Connectie Error",
         "review_connection_details": "Controleer uw verbindingsgegevens.",
         "connection_taking_long": "Verbinden duurt langer dan verwacht... Kloppen uw gegevens? Is uw node bereikbaar?",
         "contact_support": "Hulp nodig? neem contact op met support@getalby.com",
-        "actions": {
-          "delete_edit_account": "Verwijderd invalide account en probeer opnieuw"
-        }
+        "actions": {}
       }
     },
     "choose_connector": {

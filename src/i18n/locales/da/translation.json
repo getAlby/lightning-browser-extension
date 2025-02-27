@@ -16,14 +16,11 @@
       },
       "test_connection": {
         "ready": "Super, så er du klar!",
-        "initializing": "Forbereder din konto. Vent venligst, dette tager et øjeblik...",
         "connection_error": "Fejl på forbindelse",
         "review_connection_details": "Kontroller dine forbindelsesoplysninger.",
         "connection_taking_long": "Etablering af forbindelse går lidt langsomt...Er dine oplysninger korrekte? Er der kontakt til din node?",
         "contact_support": "Kontakt support@getalby.com hvis du behøver hjælp",
-        "actions": {
-          "delete_edit_account": "Slet ugyldig konto og rediger igen"
-        }
+        "actions": {}
       }
     },
     "choose_path": {
@@ -232,11 +229,9 @@
     "accounts": {
       "account_view": {
         "name": {
-          "title": "Navn",
-          "placeholder": "Kontonavn"
+          "title": "Navn"
         },
         "export": {
-          "screen_reader": "Eksporter kontooplysninger",
           "waiting": "venter på LndHub-data...",
           "your_ln_address": "Din lightningadresse:",
           "export_uri": "URI til LNDHub-adgangsoplysninger",
@@ -505,7 +500,6 @@
     "confirm_password": "Bekræft adgangskode",
     "success": "Succes",
     "error": "Fejl",
-    "accounts": "Konti",
     "discover": "Opdag",
     "connected_sites": "",
     "sats_one": "sat",

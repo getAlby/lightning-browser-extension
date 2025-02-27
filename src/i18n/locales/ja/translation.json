@@ -16,14 +16,11 @@
       },
       "test_connection": {
         "ready": "すごいね、準備万端だ！",
-        "initializing": "アカウントを作成中です。少々お待ちください…",
         "connection_error": "接続エラー",
         "review_connection_details": "接続情報を確認してください。",
         "connection_taking_long": "接続に時間がかかっています…設定は正しいですか？ノードにアクセス可能か確認してください。",
         "contact_support": "サポートが必要な場合は support@getalby.com までご連絡ください。",
-        "actions": {
-          "delete_edit_account": "無効なアカウントを削除して再編集"
-        }
+        "actions": {}
       },
       "pin_extension": {
         "title": "Alby拡張機能を固定",
@@ -233,13 +230,11 @@
         "export": {
           "waiting": "LndHubデータを取得中...",
           "your_ln_address": "あなたのライトニング・アドレス：",
-          "screen_reader": "アカウント情報をエクスポート",
           "export_uri": "LNDHubの認証URl",
           "scan_qr": "QRCコードをスキャンして、このウォレットをZeusまたはBlueWalletにインポートする。"
         },
         "name": {
-          "title": "表示名",
-          "placeholder": "アカウントの表示名"
+          "title": "表示名"
         },
         "mnemonic": {
           "backup": {
@@ -250,7 +245,6 @@
             },
             "save": "マスターキーを保存"
           },
-          "existing_nostr_key_notice": "ℹ️ このアカウントにはすでにnostr秘密鍵が設定されているため、このマスターキーから生成されることはありません。Nostr鍵はアカウント設定から管理できます。",
           "generate": {
             "description": "マスターキーは、Nostr、Bitcoinのベースレイヤー、LNURL-Authのようなプロトコルとの連携を可能にします。",
             "title": "新しいマスターキーの生成",
@@ -279,15 +273,6 @@
             "can_restore": "✅ Nostrキーはマスターキーから導出されています"
           },
           "title": "Nostr",
-          "setup": {
-            "description2": "Albyで作成されたすべてのNostrアカウントには、<0>リカバリーフレーズ</0>が付属しています。これはNostrの秘密鍵を復旧するための12個の単語です。",
-            "new": {
-              "label": "新しいNostrアカウントを作成する",
-              "description": "新しいNostr鍵のペアでマスター鍵を生成する。"
-            },
-            "title": "Nostrキーのセットアップ",
-            "description": "新しいNostrアカウント（秘密鍵と公開鍵のペア）を作成するか、既存のアカウントをインポートするかを選択します。"
-          },
           "private_key": {
             "successfully_removed": "Nostr秘密鍵の削除に成功しました",
             "label": "Nostr秘密鍵",

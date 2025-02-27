@@ -48,7 +48,7 @@ describe("ConfirmAddAccount", () => {
 
     expect(
       await screen.findByText(
-        "This website wants to add an account (Citadel (over Tor)):"
+        "This website wants to add a wallet (Citadel (over Tor)):"
       )
     ).toBeInTheDocument();
     expect(await screen.findByText("Your Citadel wallet")).toBeInTheDocument();
