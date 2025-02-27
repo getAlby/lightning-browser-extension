@@ -991,7 +991,6 @@
     "advanced": "Mostrar configurações avançadas",
     "discover": "Explorar apps",
     "confirm_password": "Confirmar senha",
-    "accounts": "Minhas contas",
     "range": {
       "between": "entre {{min}} e {{max}}",
       "lessThanOrEqual": "≤ {{max}}",

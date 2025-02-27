@@ -1255,7 +1255,6 @@
     "message": "Nachricht",
     "response": "Antwort",
     "success_message": "{{amount}}{{fiatAmount}} sind auf dem Weg zum {{destination}}",
-    "accounts": "Konten",
     "range": {
       "between": "zwischen {{min}} und {{max}}",
       "lessThanOrEqual": "≤ {{max}}",

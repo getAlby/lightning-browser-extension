@@ -640,7 +640,6 @@
     "success_message": "{{amount}}{{fiatAmount}} enviados a {{destination}}",
     "message": "Mensaje",
     "description_full": "Descripción Completa",
-    "accounts": "Cuentas",
     "discover": "Descubrir",
     "response": "Respuesta",
     "help": "Ayuda",

@@ -786,7 +786,6 @@
     },
     "sats_other": "sats",
     "sats_one": "sat",
-    "accounts": "Konton",
     "discover": "Upptäcka",
     "success_message": "{{amount}}{{fiatAmount}} skickat till {{destination}}",
     "response": "Svar",
