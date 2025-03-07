@@ -19,14 +19,11 @@
       },
       "test_connection": {
         "ready": "Perfeito, tudo configurado!",
-        "initializing": "Iniciando sua conta. Aguarde, pode demorar um pouco...",
         "connection_error": "Erro de conexão",
         "review_connection_details": "Revise os detalhes da conexão.",
         "connection_taking_long": "A tentativa de conexão está demorando mais do que o esperado... Os dados estão corretos? O servidor está acessível?",
         "contact_support": "Se precisar de ajuda, entre em contato com support@getalby.com",
-        "actions": {
-          "delete_edit_account": "Remover conta inválida e editar novamente"
-        }
+        "actions": {}
       },
       "pin_extension": {
         "title": "Fixar extensão Alby",
@@ -292,19 +289,16 @@
         "is_blocked_hint": "A Alby está desativada em {{host}}",
         "block_removed": "{{host}} ativado. Por favor, recarregue o site.",
         "see_all": "Mostrar tudo",
-        "no_transactions": "Sem transações nesta conta ainda.",
         "actions": {
           "get_started": {
             "title": "Saiba mais sobre a extensão Alby",
             "description": "Novo na Alby? Confira nossos tutoriais, vídeos e explicações"
           },
           "receive_bitcoin": {
-            "title": "Deposite bitcoin",
-            "description": "Adicione fundos na sua conta usando um endereço relâmpago ou uma fatura relâmpago"
+            "title": "Deposite bitcoin"
           },
           "setup_keys": {
-            "title": "Configurar chave mestra",
-            "description": "Gere uma chave mestra para Bitcoin, Nostr e Liquid ou importe uma conta Nostr existente."
+            "title": "Configurar chave mestra"
           }
         }
       }
@@ -313,11 +307,9 @@
       "account_view": {
         "export": {
           "your_ln_address": "Seu endereço relâmpago:",
-          "screen_reader": "Exportar detalhes da conta",
           "waiting": "aguardando dados LndHub...",
           "export_uri": "Credenciais URI LNDHub",
           "scan_qr": "Leia o código QR para importar esta carteira na Zeus ou BlueWallet.",
-          "description": "Permite conectar e usar esta conta em carteiras de celular como por ex a <0>Blue Wallet</0> e a <1>Zeus</1>.",
           "title": "Conectar sua carteira de celular"
         },
         "nostr": {
@@ -374,15 +366,6 @@
               "title": "Remover chaves Nostr",
               "description": "Remove as chaves Nostr desta carteira."
             }
-          },
-          "setup": {
-            "title": "Configure suas chaves Nostr",
-            "new": {
-              "label": "Criar uma nova conta Nostr",
-              "description": "Gere uma chave mestra com um par de novas chaves Nostr."
-            },
-            "description": "Escolha se você deseja criar uma nova conta Nostr (um par de chaves públicas e privadas) ou importar uma existente.",
-            "description2": "Toda conta Nostr criada na Alby vem com uma <0>Frase de recuperação</0> – um conjunto de 12 palavras que sempre permite que você recupere o acesso às suas chaves privadas Nostr."
           }
         },
         "remove": {
@@ -396,8 +379,7 @@
           "change_lnaddress": "Alterar em getalby.com"
         },
         "name": {
-          "title": "Nome de exibição",
-          "placeholder": "Nome da conta"
+          "title": "Nome de exibição"
         },
         "mnemonic": {
           "saved": "Chave mestra criptografada e salva com sucesso.",
@@ -421,7 +403,6 @@
             "description": "Use a frase de recuperação para importar sua chave mestra na Alby.",
             "button": "Importar chave mestra"
           },
-          "existing_nostr_key_notice": "ℹ️ Esta conta já possui uma chave privada nostr, logo não será gerada uma nova a partir desta chave mestra. Você pode gerenciar sua chave Nostr nas configurações de sua conta.",
           "lnurl": {
             "use_mnemonic": "Use a chave mestra para acessar aplicativos com tecnologia (LNURL Auth)",
             "title": "Login relâmpago"
@@ -442,7 +423,6 @@
               "description": "Insira sua frase de recuperação para importar a chave mestra para esta carteira"
             },
             "import_nostr": {
-              "description": "Já tem uma identidade Nostr? Importe-a para usá-la com esta conta",
               "title": "Importe uma chave mestra"
             }
           },
@@ -1011,7 +991,6 @@
     "advanced": "Mostrar configurações avançadas",
     "discover": "Explorar apps",
     "confirm_password": "Confirmar senha",
-    "accounts": "Minhas contas",
     "range": {
       "between": "entre {{min}} e {{max}}",
       "lessThanOrEqual": "≤ {{max}}",
