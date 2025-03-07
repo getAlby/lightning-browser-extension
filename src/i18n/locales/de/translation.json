@@ -19,7 +19,6 @@
       },
       "test_connection": {
         "review_connection_details": "Bitte überprüfe deine Verbindungsdaten.",
-        "actions": {},
         "ready": "Großartig, du kannst jetzt loslegen!",
         "connection_error": "Verbindungsfehler",
         "connection_taking_long": "Der Verbindungsversuch dauert länger als erwartet... Sind deine Angaben korrekt? Ist deine Node erreichbar?",
