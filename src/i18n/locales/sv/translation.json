@@ -19,8 +19,7 @@
         "connection_error": "Anslutningsfel",
         "review_connection_details": "Se över dina anslutningsinställningar.",
         "connection_taking_long": "Anslutningen tar längre tid än förväntat... Är inställningarna korrekta? Är din nod nåbar?",
-        "contact_support": "Om du behöver hjälp, kontakta support@getalby.com",
-        "actions": {}
+        "contact_support": "Om du behöver hjälp, kontakta support@getalby.com"
       },
       "pin_extension": {
         "title": "Fäst din Alby extension",
