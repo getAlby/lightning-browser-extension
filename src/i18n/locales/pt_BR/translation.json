@@ -22,8 +22,7 @@
         "connection_error": "Erro de conexão",
         "review_connection_details": "Revise os detalhes da conexão.",
         "connection_taking_long": "A tentativa de conexão está demorando mais do que o esperado... Os dados estão corretos? O servidor está acessível?",
-        "contact_support": "Se precisar de ajuda, entre em contato com support@getalby.com",
-        "actions": {}
+        "contact_support": "Se precisar de ajuda, entre em contato com support@getalby.com"
       },
       "pin_extension": {
         "title": "Fixar extensão Alby",
