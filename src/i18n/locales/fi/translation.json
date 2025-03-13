@@ -22,8 +22,7 @@
         "connection_error": "Yhteysvirhe",
         "review_connection_details": "Ole hyvä ja tarkista yhteystietosi.",
         "connection_taking_long": "Yhteyden muodostaminen kestää odotettua kauemmin... Ovatko tietosi oikein? Onko solmusi tavoitettavissa?",
-        "contact_support": "Jos tarvitset apua, ota yhteyttä osoitteeseen support@getalby.com",
-        "actions": {}
+        "contact_support": "Jos tarvitset apua, ota yhteyttä osoitteeseen support@getalby.com"
       },
       "pin_extension": {
         "title": "Kiinnitä Alby-laajennuksesi",
