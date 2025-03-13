@@ -19,11 +19,14 @@
       },
       "test_connection": {
         "review_connection_details": "Bitte überprüfe deine Verbindungsdaten.",
-        "actions": {},
         "ready": "Großartig, du kannst jetzt loslegen!",
         "connection_error": "Verbindungsfehler",
         "connection_taking_long": "Der Verbindungsversuch dauert länger als erwartet... Sind deine Angaben korrekt? Ist deine Node erreichbar?",
-        "contact_support": "Wenn du Hilfe benötigst, wende dich bitte an support@getalby.com"
+        "contact_support": "Wenn du Hilfe benötigst, wende dich bitte an support@getalby.com",
+        "actions": {
+          "delete_edit_account": "Ungültiges Konto löschen und erneut bearbeiten"
+        },
+        "initializing": "Initialisierung deiner Brieftasche. Bitte warte, dies kann eine Minute dauern..."
       },
       "pin_extension": {
         "title": "Die Alby Erweiterung anpinnen",
@@ -423,13 +426,16 @@
             "description": "Neu bei Alby Extension? Sehe dir unsere Anleitungen, Videos und Erklärungen an"
           },
           "receive_bitcoin": {
-            "title": "Bitcoin erhalten"
+            "title": "Bitcoin erhalten",
+            "description": "Deine Wallet aufladen und über deine Blitzadresse oder eine Rechnung erhalten"
           },
           "setup_keys": {
-            "title": "Master Key einrichten"
+            "title": "Master Key einrichten",
+            "description": "Erstelle einen Master-Schlüssel für Bitcoin, Nostr und Liquid, oder importiere deinen bestehenden Nostr-Schlüssel."
           }
         },
-        "upgrade_account": "Du verwendest die alte LNDHub-Einstellung. <0>Bitte verbinde dich erneut</0> mit deinem Alby-Konto, um Zugang zu den neuesten Funktionen zu erhalten."
+        "upgrade_account": "Du verwendest die alte LNDHub-Einstellung. <0>Bitte verbinde dich erneut</0> mit deinem Alby-Konto, um Zugang zu den neuesten Funktionen zu erhalten.",
+        "no_transactions": "Noch keine Transaktionen für diese Brieftasche."
       },
       "allowance_view": {
         "sats": "sats",
@@ -446,7 +452,8 @@
     "accounts": {
       "account_view": {
         "name": {
-          "title": "Anzeigename"
+          "title": "Anzeigename",
+          "placeholder": "Wallet Display Name"
         },
         "export": {
           "waiting": "Warten auf LndHub Daten...",
