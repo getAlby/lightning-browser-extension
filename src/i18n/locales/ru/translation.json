@@ -22,8 +22,7 @@
         "connection_error": "Ошибка подключения",
         "review_connection_details": "Пожалуйста, ознакомьтесь с вашими деталями подключения.",
         "connection_taking_long": "Попытка подключения занимает больше времени, чем ожидалось... Ваши данные верны? Ваш узел доступен?",
-        "contact_support": "Если вам нужна помощь, пожалуйста, свяжитесь с support@getalby.com",
-        "actions": {}
+        "contact_support": "Если вам нужна помощь, пожалуйста, свяжитесь с support@getalby.com"
       },
       "pin_extension": {
         "title": "Закрепите расширение",
