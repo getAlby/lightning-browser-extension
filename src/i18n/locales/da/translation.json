@@ -19,8 +19,7 @@
         "connection_error": "Fejl på forbindelse",
         "review_connection_details": "Kontroller dine forbindelsesoplysninger.",
         "connection_taking_long": "Etablering af forbindelse går lidt langsomt...Er dine oplysninger korrekte? Er der kontakt til din node?",
-        "contact_support": "Kontakt support@getalby.com hvis du behøver hjælp",
-        "actions": {}
+        "contact_support": "Kontakt support@getalby.com hvis du behøver hjælp"
       }
     },
     "choose_path": {
