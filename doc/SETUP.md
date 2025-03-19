@@ -89,15 +89,6 @@ Most logs are written to the background script. Make sure to "inspect" the backg
 
 ### :white_check_mark: Tests
 
-#### E2E tests via [playwright](https://playwright.dev) ([using testing-library](https://testing-library.com/docs/pptr-testing-library/intro/))
-
-```bash
-yarn run dev:chrome
-yarn test:e2e
-```
-
-:tipping_hand_woman: For now we only do E2E tests for Chrome
-
 #### Unit tests tests via [Jest](https://jestjs.io)
 
 ```bash
