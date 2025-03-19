@@ -38,16 +38,16 @@ Alby is open-source, our goal is to create the best online experience to consume
 
 ## Join the conversation
 
-- [Discord](https://discord.gg/K7aQ5PErht) via [bitcoin.design](https://bitcoin.design/): Find us in the #alby channel
+- [Discord](https://discord.gg/4DQu2pa72D)  
 - [Telegram](https://t.me/getAlby)
-- [Community calls](https://meet.fulmo.org/AlbyCommunityCall): bi-weekly on Thursday at [15:00 UTC](https://everytimezone.com/?t=642e0b80,ec4)
+- [Community calls](https://cal.com/getalby/communitycall): bi-weekly on Thursday at 15:00 UTC
 
 ## Browser Support
 
 Alby supports
 
 - All [Chromium based browsers](<https://en.wikipedia.org/wiki/Chromium_(web_browser)#Browsers_based_on_Chromium>) - Chrome, Edge, Opera, Brave etc.
-- Firefox
+- Firefox desktop and mobile
 - more coming soon...
 
 ## Installation
