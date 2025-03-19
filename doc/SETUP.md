@@ -95,12 +95,6 @@ Most logs are written to the background script. Make sure to "inspect" the backg
 yarn test:unit
 ```
 
-#### Run all tests
-
-```bash
-yarn test
-```
-
 ### ⌨️ Production package files
 
 - `yarn run package` builds the extension for all the browsers to `dist/production` directory respectively.
