@@ -10,6 +10,7 @@ import { LRUCache } from "~/common/utils/lruCache";
 import { Event } from "~/extension/providers/nostr/types";
 import { nip44 } from "./nip44";
 
+import { sha256 } from "@noble/hashes/sha256";
 import { getEventHash, signEvent } from "../actions/nostr/helpers";
 
 class Nostr {
@@ -44,9 +45,10 @@ class Nostr {
     return event;
   }
 
-  async signSchnorr(sigHash: string): Promise<string> {
+  async signSchnorr(message: string): Promise<string> {
+    const hashedMessage = sha256(message);
     const signature = await schnorr.sign(
-      Buffer.from(secp256k1.etc.hexToBytes(sigHash)),
+      hashedMessage,
       secp256k1.etc.hexToBytes(this.privateKey)
     );
     const signedHex = secp256k1.etc.bytesToHex(signature);
