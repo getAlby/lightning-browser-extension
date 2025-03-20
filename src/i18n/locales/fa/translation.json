@@ -22,8 +22,7 @@
         "connection_error": "خطا در اتصال",
         "review_connection_details": "لطفا جزییات اتصال خود را بازبینی کنید.",
         "connection_taking_long": "تلاش برای اتصال بیش از انتظار طول کشید... جزییات اتصال درست است؟ گره شما قابل دسترسی است؟",
-        "contact_support": "اگر به کمک نیاز دارید لطفا با support@getalby.com تماس بگیرید",
-        "actions": {}
+        "contact_support": "اگر به کمک نیاز دارید لطفا با support@getalby.com تماس بگیرید"
       },
       "pin_extension": {
         "title": "افزونه البی خود را سنجاق کنید",

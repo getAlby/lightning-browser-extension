@@ -19,8 +19,7 @@
         "connection_error": "Chyba spojení",
         "review_connection_details": "Prosím překontrolujte nastavení vašeho spojení.",
         "connection_taking_long": "Připojování zabralo více, než bylo očekáváno... Zadali jste údaje o připojení správně? Je váš uzel dostupný?",
-        "contact_support": "Pokud potřebujete pomoct, prosím kontaktujte support@getalby.com",
-        "actions": {}
+        "contact_support": "Pokud potřebujete pomoct, prosím kontaktujte support@getalby.com"
       },
       "pin_extension": {
         "title": "Připnout rozšíření Alby",

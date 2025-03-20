@@ -19,8 +19,7 @@
         "connection_error": "連接錯誤",
         "review_connection_details": "請檢查你的連接詳細信息。",
         "connection_taking_long": "嘗試連接的時間比預期的要長...你的詳細信息是否正確？你的節點是否可訪問？",
-        "contact_support": "如果你需要幫助，請聯繫 support@getalby.com",
-        "actions": {}
+        "contact_support": "如果你需要幫助，請聯繫 support@getalby.com"
       },
       "pin_extension": {
         "title": "釘選你的Alby擴充套件",

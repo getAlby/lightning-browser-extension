@@ -13,17 +13,20 @@
         "confirm_password": {
           "label": "Vergewisser dich, dass du es richtig eingegeben hast:"
         },
-        "description1": "Lege ein Password fest, um die Alby Erweiterung in dem Browser zu entsperren",
+        "description1": "Lege ein Passcode fest, um die Alby-Erweiterung in diesem Browser zu entsperren",
         "description2": "Das Password zum Entsperren kann nicht wiederhergestellt, aber geändert werden ",
-        "title": "Passwort zum Entsperren der Erweiterung festlegen"
+        "title": "Passcode zum Entsperren der Erweiterung festlegen"
       },
       "test_connection": {
         "review_connection_details": "Bitte überprüfe deine Verbindungsdaten.",
-        "actions": {},
         "ready": "Großartig, du kannst jetzt loslegen!",
         "connection_error": "Verbindungsfehler",
         "connection_taking_long": "Der Verbindungsversuch dauert länger als erwartet... Sind deine Angaben korrekt? Ist deine Node erreichbar?",
-        "contact_support": "Wenn du Hilfe benötigst, wende dich bitte an support@getalby.com"
+        "contact_support": "Wenn du Hilfe benötigst, wende dich bitte an support@getalby.com",
+        "actions": {
+          "delete_edit_account": "Ungültiges Konto löschen und erneut bearbeiten"
+        },
+        "initializing": "Initialisierung deiner Brieftasche. Bitte warte, dies kann eine Minute dauern..."
       },
       "pin_extension": {
         "title": "Die Alby Erweiterung anpinnen",
@@ -228,7 +231,7 @@
         }
       },
       "umbrel_lightning_node": {
-        "title": "Lightning Node"
+        "title": "Lightning-Node"
       },
       "galoy": {
         "sms_code": {
@@ -319,8 +322,8 @@
     },
     "unlock": {
       "unlock_error": {
-        "link": "Jetzt zurücksetzen und ein neues Konto hinzufügen",
-        "help": "Deine Kontodaten werden mit deinem Entsperr-Passcode verschlüsselt. Wenn du deinen Entsperr-Passcode wirklich vergessen hast, musst du dein Lightning Account zurücksetzen und erneut hinzufügen."
+        "link": "Jetzt zurücksetzen und eine neue Wallet hinzufügen",
+        "help": "Deine Walletdaten werden mit deinem Freischalt-Passcode verschlüsselt. Wenn du dein Freischaltcode wirklich vergessen hast, musst du das Lightning-Konto zurücksetzen und erneut hinzufügen."
       },
       "errors": {
         "invalid_password": "Ungültiger Passcode"
@@ -423,13 +426,16 @@
             "description": "Neu bei Alby Extension? Sehe dir unsere Anleitungen, Videos und Erklärungen an"
           },
           "receive_bitcoin": {
-            "title": "Bitcoin erhalten"
+            "title": "Bitcoin erhalten",
+            "description": "Deine Wallet aufladen und über deine Blitzadresse oder eine Rechnung erhalten"
           },
           "setup_keys": {
-            "title": "Master Key einrichten"
+            "title": "Master Key einrichten",
+            "description": "Erstelle einen Master-Schlüssel für Bitcoin, Nostr und Liquid, oder importiere deinen bestehenden Nostr-Schlüssel."
           }
         },
-        "upgrade_account": "Du verwendest die alte LNDHub-Einstellung. <0>Bitte verbinde dich erneut</0> mit deinem Alby-Konto, um Zugang zu den neuesten Funktionen zu erhalten."
+        "upgrade_account": "Du verwendest die alte LNDHub-Einstellung. <0>Bitte verbinde dich erneut</0> mit deinem Alby-Konto, um Zugang zu den neuesten Funktionen zu erhalten.",
+        "no_transactions": "Noch keine Transaktionen für diese Brieftasche."
       },
       "allowance_view": {
         "sats": "sats",
@@ -446,14 +452,17 @@
     "accounts": {
       "account_view": {
         "name": {
-          "title": "Anzeigename"
+          "title": "Anzeigename",
+          "placeholder": "Wallet Display Name"
         },
         "export": {
           "waiting": "Warten auf LndHub Daten...",
           "your_ln_address": "Deine Lightning Adresse:",
           "export_uri": "LNDHub Anmeldeinformationen URI",
           "scan_qr": "Importiere diese Wallet in Zeus oder BlueWallet, indem du den QRCode scannst.",
-          "title": "Verbindung mit Mobile Wallet"
+          "title": "Verbindung mit Mobile Wallet",
+          "description": "Melde dich bei getalby.com an, um diese Wallet mit mobilen Wallets wie <0>Zeus</0> und <1>Blue Wallet</1> zu verbinden und zu verwenden.",
+          "screen_reader": "Details zur Wallet exportieren"
         },
         "nostr": {
           "title": "Nostr",
@@ -463,7 +472,7 @@
             "success": "Der private Schlüssel von Nostr wurde erfolgreich verschlüsselt und gespeichert.",
             "successfully_removed": "Der private Schlüssel von Nostr wurde erfolgreich entfernt.",
             "label": "Nostr privater Schlüssel",
-            "failed_to_remove": "Der eingegebene Kontoname stimmt nicht überein, dein alter privater Nostr-Schlüssel wurde wiederhergestellt.",
+            "failed_to_remove": "Der eingegebene Kontoname stimmt nicht überein, dein alter privater Schlüssel von Nostr wurde wiederhergestellt.",
             "warning": "Bist du dir sicher, dass du deinen privaten Nostr-Schlüssel entfernen möchtest?\n\nGebe \"{{name}}\" zur Bestätigung ein:"
           },
           "public_key": {
@@ -471,11 +480,11 @@
           },
           "generate_keys": {
             "title": "Erzeugen eines neuen Nostr-Schlüssels",
-            "screen_reader": "Erzeuge einen neuen Nostr-Schlüssel für dein Konto",
-            "hint": "Du kannst einen zufälligen Satz von Nostr Schlüsseln generieren oder Schlüssel aus diesen Kontodaten ableiten (unter Verwendung einer signierten kanonischen Phrase). <0>Mehr erfahren\"</0>",
+            "screen_reader": "Erzeugen Sie einen neuen Nostr-Schlüssel für deine Wallet",
+            "hint": "Du kannst einen zufälligen Schlüssel oder einen abgeleiteten Schlüssel aus dieser Wallet generieren (unter Verwendung einer signierten kanonischen Phrase). <0>Mehr erfahren\"</0>",
             "actions": {
               "random_keys": "Generieren eines Zufallsschlüssels",
-              "derived_keys": "Ableitung eines Schlüssels aus dem Konto"
+              "derived_keys": "Ableitung eines Schlüssels aus der Wallet"
             }
           },
           "actions": {
@@ -514,7 +523,7 @@
           }
         },
         "remove": {
-          "error": "Der eingegebene Kontoname stimmte nicht überein.",
+          "error": "Der eingegebene Walletname stimmte nicht überein.",
           "subtitle": "Alle verknüpften Berechtigungen und Budgets werden gelöscht.",
           "title": "Diese Wallet entfernen",
           "confirm": "Bist du dir sicher, dass du deine Wallet entfernen willst?\n\n⚠️ Wenn du fortfährst, werden alle zugehörigen Schlüssel (Master Key, Nostr, etc.) gelöscht. Bitte vergewissere dich, dass du eine Sicherungskopie erstellt hast, denn es gibt keine andere Möglichkeit, sie wiederherzustellen.\n\nGebe \"{{name}}\" zur Bestätigung ein:"
@@ -533,7 +542,7 @@
             },
             "save": "Hauptschlüssel speichern",
             "button": "Phrase anzeigen",
-            "description": "Notiere deine Wiederherstellungsphrase, um deinen Hauptschlüssel auf einem neuen Gerät wiederherstellen zu können oder für den Fall, dass du den Zugriff auf dein Konto verlierst.",
+            "description": "Notiere dir die Wiederherstellungsphrase, um deinen Hauptschlüssel auf einem neuen Gerät wiederherstellen zu können oder für den Fall, dass du den Zugang zu deinem Guthaben verlierst.",
             "title": "Sichere deine Wiederherstellungsphrase",
             "warning": "Vergesse nicht, deine Wiederherstellungsphrase zu sichern! Wird sie nicht gesichert, kann dies dazu führen, dass du den Zugang zu deinem Master Key, dein Nostr-Identität oder den von dir mit diesem Schlüssel verwalteten Assets dauerhaft verlierst."
           },
@@ -568,7 +577,8 @@
               "description": "Gebe deine Wiederherstellungsphrase ein, um den Hauptschlüssel in diese Wallet zu importieren"
             },
             "import_nostr": {
-              "title": "Nostr Schlüssel importieren"
+              "title": "Nostr Schlüssel importieren",
+              "description": "Hast du bereits eine Nostr-Identität? Importiere deinen, um sie mit deiner Wallet zu verwenden"
             }
           },
           "inputs": {
@@ -581,7 +591,8 @@
           },
           "error_confirm": "Bitte vergewisser dich, dass du eine Sicherungskopie der Wiederherstellungsphrase erstellt hast.",
           "confirm": "Ich habe die Wiederherstellungsphrase zu meinem Hauptschlüssel an einem privaten und sicheren Ort gesichert.",
-          "title": "Schlüsselverwaltung"
+          "title": "Schlüsselverwaltung",
+          "existing_nostr_key_notice": "ℹ️ Diese Wallet hat bereits einen privaten Nostr-Schlüssel und wird nicht von diesem Master Key abgeleitet. Du kannst deinen Nostr-Schlüssel über Ihre Wallet-Einstellungen verwalten."
         },
         "remove_secretkey": {
           "title": "Hauptschlüssel entfernen",
@@ -912,7 +923,7 @@
     },
     "transactions": {
       "title": "Transaktionen",
-      "description": "Buchungen für dieses Konto"
+      "description": "Transaktionen für diese Wallet"
     },
     "distributions": {
       "title": "Verbinden mit {{name}}",
@@ -937,8 +948,8 @@
       }
     },
     "confirm_add_account": {
-      "title": "Konto hinzufügen",
-      "content": "Diese Webseite möchte ein Konto hinzufügen ({{connector}}):",
+      "title": "Wallet hinzufügen",
+      "content": "Diese Website möchte eine Wallet ({{connector}}) hinzufügen:",
       "tor_info": "Um sich über das TOR-Netzwerk zu verbinden, musst du zunächst die Alby-Begleit-App installieren:"
     },
     "on_chain": {
@@ -1296,7 +1307,7 @@
   },
   "permissions": {
     "commando": {
-      "bkpr-listbalances": "Liste aller aktuellen und historischen Kontostände",
+      "bkpr-listbalances": "Liste aller aktuellen und historischen Wallets",
       "checkmessage": "Überprüfe, ob die Signatur von einem bestimmten Node erstellt wurde",
       "fundchannel": "Öffne einen Zahlungskanal mit einem Peer, indem du eine Finanzierungstransaktion durchführst",
       "getroute": "Finde die beste Route für die Zahlung an eine Lightning Node",
@@ -1386,7 +1397,7 @@
     },
     "webln": {
       "getbalance": {
-        "description": "Lese den Saldo deines Kontos ab",
+        "description": "Lesen Sie den Kontostand deiner Wallet ab",
         "title": "das Gleichgewicht erhalten"
       }
     },
