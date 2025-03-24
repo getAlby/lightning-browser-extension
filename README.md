@@ -38,7 +38,7 @@ Alby is open-source, our goal is to create the best online experience to consume
 
 Extension supports
 
-✅ **[All Chromium-based browsers](<(<https://en.wikipedia.org/wiki/Chromium_(web_browser)#Browsers_based_on_Chromium>)>)** (Chrome, Edge, Opera, Brave, etc.)  
+✅ **[All Chromium-based browsers](<https://en.wikipedia.org/wiki/Chromium_(web_browser)#Browsers_based_on_Chromium>)** (Chrome, Edge, Opera, Brave, etc.)  
 ✅ **Firefox**  
 🚀 **More browsers coming soon...**
 
