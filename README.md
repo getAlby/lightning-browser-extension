@@ -120,7 +120,7 @@ Yes. Thanks to generous donors, Alby is able to offer several bounties. You can 
 Want to support the work on Alby?
 
 Support the Alby team ⚡️hello@getalby.com
-You can also contribute to our [bounty program](https://github.com/getAlby/lightning-browser-extension/wiki/Bounties): ⚡️bounties@getalby.com
+You can also contribute to our [bounty program](https://guides.getalby.com/developer-guide/bounties/alby-browser-extension-bounties): ⚡️bounties@getalby.com
 
 ## 🎉 Thanks
 
