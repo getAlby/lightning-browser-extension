@@ -1,13 +1,32 @@
 # How to run Alby in the local development environment
 
+This guide walks you through setting up the Alby Lightning Browser Extension for local development, enabling you to modify, test, and debug it efficiently.
+
+Please go through the [Contribution Guidelines](./CONTRIBUTION.md) before going forward with any development. This helps us keep the process streamlined and results in better PRs.
+
+If you have any setup problems, please ensure you have read through all the instructions have all the required software installed before creating an issue.
+
+## ⚡ Prerequisites
+
+- [Node.js](https://nodejs.org) v16 or newer installed (we run tests with v18)
+- [Yarn](https://yarnpkg.com) v1 or v2 installed
+
+Supported but not required
+
+- [nvm](https://github.com/nvm-sh/nvm#intro)
+
+## 🖥️ OS Requirements
+
+For the best development experience, we recommend using Linux or MacOS, as it offers better compatibility, streamlined workflows, and a consistent development environment. If using Windows, we highly recommend to set up WSL 2 to run a Linux environment smoothly on windows. Install [WSL 2](https://learn.microsoft.com/en-us/windows/wsl/install).
+
 ## 🚀 Quick Start
 
-> For Windows users, please use [WSL 2](https://learn.microsoft.com/en-us/windows/wsl/install).
+This guide helps you run the extension in desktop browsers.
 
-- Install dependencies\
+- We use [Yarn](https://yarnpkg.com/) as package manager. To install all required dependencies, run the following command at the root of the project:
   `$ yarn install`
 
-### 💻 Load extension into browser
+### Run Development Build
 
 > To run a dev build with the mainnet API, add the following `ALBY_API_URL` environment variable to your command: `$ ALBY_API_URL="https://api.getalby.com" yarn run dev:[chrome|firefox]`
 
@@ -19,6 +38,8 @@
     `$ ALBY_API_URL="https://api.getalby.com" yarn run dev:firefox`
   - Opera\
      `$ ALBY_API_URL="https://api.getalby.com" yarn run dev:opera`
+
+### Load extension into browser
 
 - **Chrome**
 
@@ -42,11 +63,32 @@
 
 To connect to a remote development LND node you can use a [test account](https://github.com/bumi/lightning-browser-extension/wiki/Test-setup)
 
-## Install and debug extension for Firefox Android
+## 📱 Firefox Android Setup
 
-[Refer to SETUP_ANDROID.md for info regarding how to setup and debug Alby on firefox android](./SETUP_ANDROID.md)
+Alby extension is actively maintained for Firefox on Android.Follow the [SETUP_ANDROID.md](./SETUP_ANDROID.md) guide to install and debug it.
 
-### Multiple Extensions
+## 🛠️ Testing and Debugging
+
+### Unit Testing with Jest
+
+Unit tests help ensure that individual components and functions work as expected. By writing unit tests, we can catch bugs early, improve code quality, and maintain stability when making changes.
+
+The extension uses [Jest](https://jestjs.io) as the testing framework. To run the unit tests, use the following command:
+
+```bash
+yarn test:unit
+```
+
+### Debugging
+
+Most logs are written to the background script of the extension. Make sure to "inspect" the background script to see the console.
+
+- [Chrome](https://developer.chrome.com/docs/extensions/mv3/tut_debugging/)
+- [Firefox](https://extensionworkshop.com/documentation/develop/debugging/)
+
+## ❓ FAQ
+
+### Can I run multiple versions of the extension at the same time?
 
 It is not recommended to have multiple versions of the extension (development + official) running in the same browser. You will have instances of the extension with the same icon which is confusing, and also leads to a poor webln experience as both extensions will launch a popup. There may also be unexpected bugs due to conflict with the two extensions running at the same time.
 
@@ -56,13 +98,11 @@ Some ways you can work around this are:
 - Use a dedicated browser for development of the extension (this browser would not have the official extension installed)
 - Disable the official extension during development, and disable the development extension when you want to use Alby as normal.
 
-### Testnet/testing-accounts for development use localhost testnet
+### How to Test Different Connectors Supported by the Extension?
 
-For most people who are new to the btc lightning network, starting a test version of the lightning network environment locally is very helpful for developing wallets, so that they can transfer money with confidence.
+By default, Alby and NWC (Nostr Wallet Connect) connectors are sufficient for testing UI changes and core functionality. However, if you need to test specific connectors like LND, CLN, or LNbits, you can [Start the lightning network test environment locally and link to the Alby Browser Extension](https://github.com/getAlby/lightning-browser-extension/wiki/Start-the-lightning-network-test-environment-locally-and-link-to-the-Alby)
 
-[Start the lightning network test environment locally and link to the Alby](https://github.com/getAlby/lightning-browser-extension/wiki/Start-the-lightning-network-test-environment-locally-and-link-to-the-Alby)
-
-## Project Structure
+## 📂 Project Structure
 
 ```bash
 ./lightning-browser-extension
@@ -83,34 +123,7 @@ For most people who are new to the btc lightning network, starting a test versio
 └
 ```
 
-### Debugging
-
-Most logs are written to the background script. Make sure to "inspect" the background script to see the console. Help for [Chrome](https://developer.chrome.com/docs/extensions/mv3/tut_debugging/), [Firefox](https://extensionworkshop.com/documentation/develop/debugging/)
-
-### :white_check_mark: Tests
-
-#### E2E tests via [playwright](https://playwright.dev) ([using testing-library](https://testing-library.com/docs/pptr-testing-library/intro/))
-
-```bash
-yarn run dev:chrome
-yarn test:e2e
-```
-
-:tipping_hand_woman: For now we only do E2E tests for Chrome
-
-#### Unit tests tests via [Jest](https://jestjs.io)
-
-```bash
-yarn test:unit
-```
-
-#### Run all tests
-
-```bash
-yarn test
-```
-
-### ⌨️ Production package files
+## ⌨️ Production package files
 
 - `yarn run package` builds the extension for all the browsers to `dist/production` directory respectively.
 
@@ -121,11 +134,6 @@ docker run --rm --volume="$(pwd):/app" --workdir="/app" -t -i node:lts "yarn ins
 ```
 
 Note: By default the `manifest.json` is set with version `0.0.0`. The webpack loader will update the version in the build with that of the `package.json` version. In order to release a new version, update version in `package.json` and run script.
-
-#### Storybook.js
-
-We used to maintain a [Storybook](https://storybook.js.org)-setup but nobody as using it. Currently we do not see a use for it.\
-But happy to talk about if you think it's useful.
 
 ## Contributing
 
