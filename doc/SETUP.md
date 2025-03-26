@@ -65,7 +65,7 @@ To connect to a remote development LND node you can use a [test account](https:/
 
 ## 📱 Firefox Android Setup
 
-Alby extension is actively maintained for Firefox on Android.Follow the [SETUP_ANDROID.md](./SETUP_ANDROID.md) guide to install and debug it.
+Alby extension is actively maintained for Firefox on Android. Follow the [SETUP_ANDROID.md](./SETUP_ANDROID.md) guide to install and debug it.
 
 ## 🛠️ Testing and Debugging
 

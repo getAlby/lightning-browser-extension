@@ -19,7 +19,7 @@ Alby implements the WebLN standard, providing a universal interface for websites
 - Connect to Lightning Network nodes
 - Request payments, invoices, signatures, and logins
 - Enable a smooth and frictionless web payment experience
-- The extension supports both custodial and non-custodial setups, making it flexible for different use cases.
+- The extension supports both custodial and non-custodial setups, making it flexible for different use cases
 
 ## 🌟 Key Features
 
