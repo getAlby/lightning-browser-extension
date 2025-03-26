@@ -20,7 +20,6 @@
         "connection_error": "Koneksi Error",
         "review_connection_details": "Silakan cek kembali koneksi Anda.",
         "contact_support": "Jika kamu membutuhkan bantuan silakan hubungi support@getalby.com",
-        "actions": {},
         "connection_taking_long": "Proses koneksi memakan waktu lama... Apakah kamu memasukan informasi secara benar? Apakah node kamu dapat terhubung?"
       },
       "pin_extension": {

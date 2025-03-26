@@ -22,8 +22,7 @@
         "connection_error": "Erreur de connexion",
         "review_connection_details": "Veuillez vérifier vos informations de connexion.",
         "connection_taking_long": "Essayer de se connecter prend plus de temps que prévu... Vos informations sont-elles correctes ? Votre nœud est-il accessible ?",
-        "contact_support": "Si vous avez besoin d'aide, veuillez contacter support@getalby.com",
-        "actions": {}
+        "contact_support": "Si vous avez besoin d'aide, veuillez contacter support@getalby.com"
       },
       "pin_extension": {
         "title": "Épingler Alby",
