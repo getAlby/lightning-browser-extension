@@ -14,12 +14,12 @@
     "yarn": ">= 1.0.0"
   },
   "scripts": {
-    "dev:chrome": "NODE_ENV=development TARGET_BROWSER=chrome webpack --watch",
-    "dev:firefox": "NODE_ENV=development TARGET_BROWSER=firefox webpack --watch",
-    "dev:opera": "NODE_ENV=development TARGET_BROWSER=opera webpack --watch",
-    "build:chrome": "NODE_ENV=production TARGET_BROWSER=chrome webpack",
-    "build:firefox": "NODE_ENV=production TARGET_BROWSER=firefox webpack",
-    "build:opera": "NODE_ENV=production TARGET_BROWSER=opera webpack",
+    "dev:chrome": "NODE_ENV=development ALBY_API_URL=https://api.getalby.com TARGET_BROWSER=chrome webpack --watch",
+    "dev:firefox": "NODE_ENV=development ALBY_API_URL=https://api.getalby.com TARGET_BROWSER=firefox webpack --watch",
+    "dev:opera": "NODE_ENV=development ALBY_API_URL=https://api.getalby.com TARGET_BROWSER=opera webpack --watch",
+    "build:chrome": "NODE_ENV=production ALBY_API_URL=https://api.getalby.com TARGET_BROWSER=chrome webpack",
+    "build:firefox": "NODE_ENV=production ALBY_API_URL=https://api.getalby.com TARGET_BROWSER=firefox webpack",
+    "build:opera": "NODE_ENV=production ALBY_API_URL=https://api.getalby.com TARGET_BROWSER=opera webpack",
     "build": "yarn build:chrome && yarn build:firefox && yarn build:opera",
     "package": "./create-packages.sh",
     "lint": "yarn lint:js && yarn tsc:compile && yarn format:fix",
