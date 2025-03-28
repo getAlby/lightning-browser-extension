@@ -44,10 +44,6 @@ Extension supports
 
 ## 🛠 Installation
 
-- All [Chromium based browsers](<https://en.wikipedia.org/wiki/Chromium_(web_browser)#Browsers_based_on_Chromium>) - Chrome, Edge, Opera, Brave etc.
-- Firefox desktop and mobile
-- more coming soon...
-
 ### Official Release
 
 Add Alby to your browser
