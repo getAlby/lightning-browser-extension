@@ -22,15 +22,7 @@ const destPath = path.join(__dirname, "dist", nodeEnv);
 
 const targetBrowser = process.env.TARGET_BROWSER;
 
-let network = "mainnet";
-if (!process.env.ALBY_API_URL) {
-  process.env.ALBY_API_URL = "https://api.regtest.getalby.com";
-  if (!process.env.ALBY_OAUTH_AUTHORIZE_URL) {
-    process.env.ALBY_OAUTH_AUTHORIZE_URL =
-      "https://app.regtest.getalby.com/oauth";
-  }
-  network = "testnet";
-}
+const network = "mainnet";
 
 // release build (check for explicitly set env variables)
 const oauthBrowser =
@@ -51,10 +43,6 @@ if (clientId && clientSecret) {
   );
 } else {
   const oauthCredentials = {
-    testnet: {
-      id: "TliTCTtJ49",
-      secret: "35RixI2gv0xloVYA0Iq3",
-    },
     mainnet: {
       id: "NT8bFB23Sk",
       secret: "wWp7BPpYOm1H0GwSVVpY",
