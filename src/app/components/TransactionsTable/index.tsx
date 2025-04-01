@@ -1,5 +1,9 @@
 import Loading from "@components/Loading";
-import { PopiconsArrowDownSolid, PopiconsArrowUpSolid } from "@popicons/react";
+import {
+  PopiconsArrowDownSolid,
+  PopiconsArrowUpSolid,
+  PopiconsXSolid,
+} from "@popicons/react";
 
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -60,25 +64,50 @@ export default function TransactionsTable({
                 <div className="flex gap-3">
                   <div className="flex items-center">
                     {type == "outgoing" ? (
-                      <div className="flex justify-center items-center bg-orange-100 dark:bg-orange-950 rounded-full w-8 h-8">
-                        <PopiconsArrowUpSolid className="w-5 h-5 text-orange-400 dark:text-amber-600 stroke-[1px] stroke-orange-400 dark:stroke-amber-600" />
-                      </div>
+                      tx.state === "pending" ? (
+                        <div className="flex justify-center items-center bg-blue-100 dark:bg-sky-950 rounded-full w-8 h-8 animate-pulse">
+                          <PopiconsArrowUpSolid className="w-5 h-5 rotate-45 text-blue-500 dark:text-sky-500 stroke-[1px] stroke-blue-500 dark:stroke-sky-500" />
+                        </div>
+                      ) : tx.state === "failed" ? (
+                        <div className="flex justify-center items-center bg-red-100 dark:bg-rose-950 rounded-full w-8 h-8">
+                          <PopiconsXSolid className="w-5 h-5 text-red-500 dark:text-rose-500 stroke-[1px] stroke-red-500 dark:stroke-rose-500" />
+                        </div>
+                      ) : (
+                        <div className="flex justify-center items-center bg-orange-100 dark:bg-amber-950 rounded-full w-8 h-8">
+                          <PopiconsArrowUpSolid className="w-5 h-5 text-orange-500 dark:text-amber-500 stroke-[1px] stroke-orange-500 dark:stroke-amber-500" />
+                        </div>
+                      )
                     ) : (
                       <div className="flex justify-center items-center bg-green-100 dark:bg-emerald-950 rounded-full w-8 h-8">
-                        <PopiconsArrowDownSolid className="w-5 h-5 text-green-500 dark:text-emerald-500 stroke-[1px] stroke-green-400 dark:stroke-emerald-500" />
+                        <PopiconsArrowDownSolid className="w-5 h-5 text-green-500 dark:text-teal-500 stroke-[1px] stroke-green-500 dark:stroke-teal-500" />
                       </div>
                     )}
                   </div>
                   <div className="overflow-hidden mr-3">
                     <div className="text-sm font-medium text-black truncate dark:text-white">
-                      <p className="truncate">
+                      <p
+                        className={classNames(
+                          "truncate",
+                          tx.state == "pending" && "animate-pulse"
+                        )}
+                      >
                         {tx.title ||
                           tx.boostagram?.message ||
-                          (type == "incoming" ? t("received") : t("sent"))}
+                          (type == "incoming"
+                            ? t("received")
+                            : t(
+                                tx.state === "settled"
+                                  ? "sent"
+                                  : tx.state === "pending"
+                                  ? "sending"
+                                  : tx.state === "failed"
+                                  ? "failed"
+                                  : "sent"
+                              ))}
                       </p>
                     </div>
                     <p className="text-xs text-gray-400 dark:text-neutral-500">
-                      {tx.date}
+                      {tx.timeAgo}
                     </p>
                   </div>
                   <div className="flex ml-auto text-right space-x-3 shrink-0 dark:text-white">
@@ -88,6 +117,8 @@ export default function TransactionsTable({
                           "text-sm",
                           type == "incoming"
                             ? "text-green-600 dark:text-emerald-500"
+                            : tx.state == "failed"
+                            ? "text-red-600 dark:text-rose-500"
                             : "text-orange-600 dark:text-amber-600"
                         )}
                       >

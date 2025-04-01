@@ -218,13 +218,9 @@
       },
       "test_connection": {
         "connection_error": "Napaka pri povezavi",
-        "initializing": "Pripravljamo račun. Prosim počakaj, to lahko traja nekaj minut...",
         "connection_taking_long": "Čas povezovanja je daljši od pričakovanega... Ali so podrobnosti pravilne? Je vozlišče dosegljivo?",
         "review_connection_details": "Prosim preglej podrobnosti povezave.",
         "contact_support": "Za pomoč piši na support@getalby.com",
-        "actions": {
-          "delete_edit_account": "Izbriši neveljavni račun in ponovno uredi"
-        },
         "ready": "Super, pripravljeni ste na začetek!"
       },
       "pin_extension": {
@@ -281,15 +277,13 @@
     "accounts": {
       "account_view": {
         "export": {
-          "screen_reader": "Izvozi podrobnosti računa",
           "your_ln_address": "Tvoj Lightning naslov:",
           "waiting": "čakanje na LndHub podatke...",
           "export_uri": "LNDHub URI poverilnice",
           "scan_qr": "Uvozi to denarnico v Zeus ali BlueWallet s skeniranjem QR kode."
         },
         "name": {
-          "title": "Prikazno ime",
-          "placeholder": "Prikazno ime računa"
+          "title": "Prikazno ime"
         },
         "mnemonic": {
           "saved": "Glavni ključ kriptiran in uspešno shranjen.",
@@ -329,13 +323,6 @@
             "title": "Nostr nastavitve",
             "can_restore": "✅ Nostr ključ, izpeljan iz vašega glavnega ključa",
             "derive": "Izpelji iz glavnega ključa"
-          },
-          "setup": {
-            "title": "Konfiguriraj Nostr ključe",
-            "new": {
-              "label": "Ustvari nov Nostr račun",
-              "description": "Ustvarite glavni ključ s parom novih ključev Nostr."
-            }
           },
           "title": "Nostr",
           "public_key": {

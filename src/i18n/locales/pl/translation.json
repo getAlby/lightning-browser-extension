@@ -16,14 +16,10 @@
       },
       "test_connection": {
         "ready": "Świetnie, wszystko gotowe!",
-        "initializing": "Tworzenie Twojego konta. Poczekaj proszę, to może chwilę zająć...",
         "connection_error": "Błąd połączenia",
         "review_connection_details": "Sprawdź proszę dane do połączenia.",
         "connection_taking_long": "Próba połączenia trwa dłużej niż oczekiwano... Czy dane do połączenia są poprawne? Czy Twój węzeł jest osiągalny?",
-        "contact_support": "Jeśli potrzebujesz pomocy, skontaktuj się z support@getalby.com",
-        "actions": {
-          "delete_edit_account": "Skasuj niepoprawne konto i wyedytuj ponownie"
-        }
+        "contact_support": "Jeśli potrzebujesz pomocy, skontaktuj się z support@getalby.com"
       },
       "pin_extension": {
         "explanation": "1. Kliknij <0/> w prawym górnym rogu przeglądarki <1/>2. Znajdź Alby i kliknij, aby przypiąć je do paska narzędzi<1/>3. Gotowe. Aby uzyskać dostęp do Alby, kliknij ikonę <2/>",
@@ -34,11 +30,16 @@
     },
     "choose_path": {
       "alby": {
-        "title": "Konto Alby"
+        "title": "Konto Alby",
+        "connect": "Kontynuuj używając konta Alby",
+        "description": "Idealne, jeśli chcesz korzystać z aplikacji, zachowując pełną kontrolę nad swoimi bitcoinami."
       },
       "other": {
-        "title": "Inne portfele"
-      }
+        "title": "Użyj wlasnego portfela",
+        "description": "Najlepiej, jeśli masz już portfel lub własny węzeł Lightning.",
+        "connect": "Znajdź swój portfel"
+      },
+      "title": "Połącz rozszerzenie Alby do portfela"
     },
     "alby": {
       "pre_connect": {
@@ -263,18 +264,15 @@
       "default_view": {
         "is_blocked_hint": "Alby jest obecnie wyłączone na {{host}}",
         "block_removed": "Włączono {{host}}. Odśwież stronę.",
-        "see_all": "Zobacz wszystko",
-        "no_transactions": "Jeszcze nie ma transakcji na tym koncie."
+        "see_all": "Zobacz wszystko"
       }
     },
     "accounts": {
       "account_view": {
         "name": {
-          "title": "Wyświetlana nazwa",
-          "placeholder": "Nazwa wyświetlana konta"
+          "title": "Wyświetlana nazwa"
         },
         "export": {
-          "screen_reader": "Eksportuj dane konta",
           "waiting": "oczekiwanie na dane LndHub...",
           "your_ln_address": "Twój adres Lightning:",
           "export_uri": "Adres LNDHub",
@@ -595,7 +593,6 @@
     "confirm_password": "Potwierdź hasło",
     "success": "Sukces",
     "error": "Błąd",
-    "accounts": "Konta",
     "discover": "Odkrywaj",
     "connected_sites": "",
     "sats_one": "sat",

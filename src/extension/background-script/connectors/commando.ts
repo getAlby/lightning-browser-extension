@@ -4,6 +4,7 @@ import LnMessage from "lnmessage";
 import { v4 as uuidv4 } from "uuid";
 import { Account } from "~/types";
 
+import lightningPayReq from "bolt11-signet";
 import { mergeTransactions } from "~/common/utils/helpers";
 import Connector, {
   CheckPaymentArgs,
@@ -238,18 +239,28 @@ export default class Commando implements Connector {
       .then((resp) => {
         const parsed = resp as CommandoListInvoicesResponse;
         return parsed.invoices
-          .map(
-            (invoice, index): ConnectorTransaction => ({
+          .map((invoice, index): ConnectorTransaction => {
+            const decoded = invoice.bolt11
+              ? lightningPayReq.decode(invoice.bolt11)
+              : null;
+
+            const creationDate =
+              decoded && decoded.timestamp
+                ? decoded.timestamp * 1000
+                : new Date(0).getTime();
+
+            return {
               id: invoice.label,
               memo: invoice.description,
               settled: invoice.status === "paid",
+              creationDate: creationDate,
               preimage: invoice.payment_preimage,
               payment_hash: invoice.payment_hash,
               settleDate: invoice.paid_at * 1000,
               type: "received",
               totalAmount: Math.floor(invoice.amount_received_msat / 1000),
-            })
-          )
+            };
+          })
           .filter((invoice) => invoice.settled);
       });
   }
@@ -261,7 +272,7 @@ export default class Commando implements Connector {
     const transactions: ConnectorTransaction[] = mergeTransactions(
       incomingInvoicesResponse,
       outgoingInvoicesResponse
-    );
+    ).filter((transaction) => transaction.settled);
 
     return {
       data: {
@@ -280,18 +291,28 @@ export default class Commando implements Connector {
       .then((resp) => {
         const parsed = resp as CommandoListSendPaysResponse;
         return parsed.payments
-          .map(
-            (payment, index): ConnectorTransaction => ({
+          .map((payment, index): ConnectorTransaction => {
+            const decoded = payment.bolt11
+              ? lightningPayReq.decode(payment.bolt11)
+              : null;
+
+            const creationDate =
+              decoded && decoded.timestamp
+                ? decoded.timestamp * 1000
+                : new Date(0).getTime();
+
+            return {
               id: `${payment.id}`,
               memo: payment.description ?? "",
               settled: payment.status === "complete",
               preimage: payment.payment_preimage,
+              creationDate: creationDate,
               payment_hash: payment.payment_hash,
               settleDate: payment.created_at * 1000,
               type: "sent",
               totalAmount: payment.amount_sent_msat / 1000,
-            })
-          )
+            };
+          })
           .filter((payment) => payment.settled);
       });
   }

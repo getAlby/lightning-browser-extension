@@ -27,6 +27,7 @@ export interface Account {
   nostrPrivateKey?: string | null;
   mnemonic?: string | null;
   hasImportedNostrKey?: boolean;
+  hasSeenInfoBanner?: boolean;
   bitcoinNetwork?: BitcoinNetworkType;
   isMnemonicBackupDone?: boolean;
   useMnemonicForLnurlAuth?: boolean;
@@ -269,6 +270,7 @@ export interface MessageAccountEdit extends MessageDefault {
     bitcoinNetwork?: BitcoinNetworkType;
     useMnemonicForLnurlAuth?: boolean;
     isMnemonicBackupDone?: boolean;
+    hasSeenInfoBanner?: boolean;
   };
   action: "editAccount";
 }
@@ -771,7 +773,7 @@ export type Transaction = {
   boostagram?: Invoice["boostagram"];
   createdAt?: string;
   currency?: string;
-  date: string;
+  timeAgo: string;
   paymentHash?: string;
   description?: string;
   host?: string;
@@ -787,6 +789,7 @@ export type Transaction = {
   type?: "sent" | "received";
   value?: string;
   publisherLink?: string; // either the invoice URL if on PublisherSingleView, or the internal link to Publisher
+  state?: "settled" | "pending" | "failed";
 };
 
 export interface DbPayment {
@@ -958,7 +961,8 @@ export interface Invoice {
   memo?: string;
   type: "received" | "sent";
   settled: boolean;
-  settleDate: number;
+  settleDate: number | null;
+  creationDate: number;
   totalAmount: number;
   totalAmountFiat?: string;
   displayAmount?: [number, ACCOUNT_CURRENCIES];

@@ -17,13 +17,9 @@
         "description1": "Atur kode sandi untuk membuka ekstensi Alby pada peramban ini"
       },
       "test_connection": {
-        "initializing": "Menginisialisasi akun Anda. Mohon tunggu, ini mungkin akan memakan waktu beberapa menit...",
         "connection_error": "Koneksi Error",
         "review_connection_details": "Silakan cek kembali koneksi Anda.",
         "contact_support": "Jika kamu membutuhkan bantuan silakan hubungi support@getalby.com",
-        "actions": {
-          "delete_edit_account": "Hapus akun yang salah dan ubah kembali"
-        },
         "connection_taking_long": "Proses koneksi memakan waktu lama... Apakah kamu memasukan informasi secara benar? Apakah node kamu dapat terhubung?"
       },
       "pin_extension": {
@@ -261,11 +257,9 @@
     "accounts": {
       "account_view": {
         "name": {
-          "placeholder": "Tampilan nama akun",
           "title": "Tampilan Nama"
         },
         "export": {
-          "screen_reader": "Ekspor detail akun",
           "waiting": "Menunggu data LndHub...",
           "your_ln_address": "Alamat Lightning kamu:",
           "export_uri": "LNDHub Credentials URI",
@@ -273,7 +267,6 @@
         },
         "mnemonic": {
           "saved": "Kunci Master terenkripsi & tersimpan dengan sukses.",
-          "existing_nostr_key_notice": "ℹ️ Akun ini sudah memiliki kunci privat nostr dan tidak akan diambil dari Master Key. Kamu bisa mengatur kunci Nostr pada pengaturan akun.",
           "generate": {
             "title": "Buat Master Key baru",
             "description": "Master Key membuat kamu dapat berinteraksi dengan berbagai protokol seperti, Nostr, layer utama dari Bitcoin atau LNURL-Auth.",
@@ -307,15 +300,6 @@
             "derive": "Ambil dari Master Key",
             "remove": "Hapus kunci saat ini",
             "no_secret_key": "💡 Kamu tidak memiliki Master Key. <0>Klik di sini</0></div> untuk membuat Master Key dan mengambil kunci Nostr kamu."
-          },
-          "setup": {
-            "new": {
-              "label": "Buat akun Nostr",
-              "description": "Buat Master Key dan sepasang kunci Nostr baru."
-            },
-            "title": "Siapkan kunci Nostr kamu",
-            "description": "Pilih jika anda mau membuat akun Nostr baru (sepasang kunci privat dan publik) atau impor yang sudah ada.",
-            "description2": "setiap akun Nostr yang dibuat dalam Alby, akan mempunyai <0>Recovery Phrase</0> – susunan 12 kata untuk mengakses kembali kunci privat Nostr."
           },
           "private_key": {
             "subtitle": "Tempel kunci privat nostr atau buat baru. <0>Pelajari lebih lanjut »</0>",
@@ -752,7 +736,6 @@
     "confirm_password": "Konfirmasi Kata Sandi",
     "success": "Sukses",
     "error": "Eror",
-    "accounts": "Akun-akun",
     "connected_sites": "Situs Terhubung",
     "wallet": "Dompet",
     "sats_one": "sat",

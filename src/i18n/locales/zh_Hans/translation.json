@@ -19,14 +19,10 @@
       },
       "test_connection": {
         "ready": "真棒，你已准备就绪!",
-        "initializing": "正在初始化你的帐户。请耐心等待，可能需要几分钟。。。",
         "connection_error": "连接错误",
         "review_connection_details": "请检查你的连接详情。",
         "connection_taking_long": "尝试连接花费的时间不预期的要长。。。你的详情正确吗？你的节点是否可达？",
-        "contact_support": "如果你需要帮助，请联系support@getalby.com",
-        "actions": {
-          "delete_edit_account": "删除无效帐户并重新编辑"
-        }
+        "contact_support": "如果你需要帮助，请联系support@getalby.com"
       },
       "pin_extension": {
         "title": "固定你的 Alby 扩展",
@@ -309,12 +305,10 @@
             "description": "第一次使用 Alby 扩展？浏览我们的指南、视频和解析"
           },
           "receive_bitcoin": {
-            "title": "接收比特币",
-            "description": "为你的账户储值并通过闪电地址或发票收款"
+            "title": "接收比特币"
           }
         },
         "see_all": "查看全部",
-        "no_transactions": "该账户暂无交易记录。",
         "upgrade_account": "你正在使用旧版 LNDHub 设置。<0>请重新连接</0>你的 Alby 账户以访问最新功能。"
       },
       "actions": {
@@ -387,24 +381,13 @@
               "title": "Nostr 密钥",
               "description": "从主密钥派生 Nostr 密钥或将私钥粘贴到「Nostr 私钥」处导入已有私钥。"
             }
-          },
-          "setup": {
-            "description2": "在 Alby 中创建的每个 Nostr 帐户都带有<0>恢复短语</0> —— 一组12个单词，始终保证重新获得对你的 Nostr 私钥的访问。",
-            "title": "设置你的 nostr 密钥",
-            "description": "选择是否要创建一个新的 nostr 帐户（一对私钥和公钥）或导入现有帐户。",
-            "new": {
-              "label": "创建新的 nostr 帐户",
-              "description": "通过使用一对新的 nostr 密钥生成主密钥。"
-            }
           }
         },
         "export": {
           "export_uri": "LNDHub凭证URI",
           "scan_qr": "通过扫描二维码将这个钱包导入Zeus或BlueWallet。",
-          "screen_reader": "导出帐户详情",
           "waiting": "等待LndHub的数据...",
           "your_ln_address": "你的闪电地址：",
-          "description": "登录 getalby.com 以在 <0>Zeus</0> 和 <1>Blue Wallet</1> 中连接和使用该账户。",
           "title": "连接到移动钱包"
         },
         "remove": {
@@ -421,8 +404,7 @@
           "change_lnaddress": "在 getalby.com 上修改"
         },
         "name": {
-          "title": "名称",
-          "placeholder": "帐户名称"
+          "title": "名称"
         },
         "mnemonic": {
           "backup": {
@@ -435,7 +417,6 @@
             "title": "备份你的恢复词",
             "warning": "不要忘记备份你的恢复词！不进行备份可能会导致你失去对主密钥、Nostr 身份以及通过该密钥管理的资产的访问权限。"
           },
-          "existing_nostr_key_notice": "ℹ️ 该账户已设置 Nostr 私钥，因此不会从此主密钥派生。你可以通过你的帐户设置管理你的 Nostr 密钥。",
           "saved": "主密钥已加密并成功保存。",
           "generate": {
             "title": "生成新的主密钥",
@@ -1120,7 +1101,6 @@
     "copied": "已复制！",
     "error": "错误",
     "loading": "加载中",
-    "accounts": "帐户",
     "confirm_password": "确认密码",
     "discover": "发现更多应用",
     "range": {

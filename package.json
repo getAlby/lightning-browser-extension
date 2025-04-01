@@ -1,6 +1,6 @@
 {
   "name": "lightning-browser-extension",
-  "version": "3.10.0",
+  "version": "3.11.0",
   "description": "Lightning browser extension",
   "private": true,
   "repository": "https://github.com/bumi/lightning-browser-extension.git",
@@ -14,12 +14,12 @@
     "yarn": ">= 1.0.0"
   },
   "scripts": {
-    "dev:chrome": "NODE_ENV=development TARGET_BROWSER=chrome webpack --watch",
-    "dev:firefox": "NODE_ENV=development TARGET_BROWSER=firefox webpack --watch",
-    "dev:opera": "NODE_ENV=development TARGET_BROWSER=opera webpack --watch",
-    "build:chrome": "NODE_ENV=production TARGET_BROWSER=chrome webpack",
-    "build:firefox": "NODE_ENV=production TARGET_BROWSER=firefox webpack",
-    "build:opera": "NODE_ENV=production TARGET_BROWSER=opera webpack",
+    "dev:chrome": "NODE_ENV=development ALBY_API_URL=https://api.getalby.com TARGET_BROWSER=chrome webpack --watch",
+    "dev:firefox": "NODE_ENV=development ALBY_API_URL=https://api.getalby.com TARGET_BROWSER=firefox webpack --watch",
+    "dev:opera": "NODE_ENV=development ALBY_API_URL=https://api.getalby.com TARGET_BROWSER=opera webpack --watch",
+    "build:chrome": "NODE_ENV=production ALBY_API_URL=https://api.getalby.com TARGET_BROWSER=chrome webpack",
+    "build:firefox": "NODE_ENV=production ALBY_API_URL=https://api.getalby.com TARGET_BROWSER=firefox webpack",
+    "build:opera": "NODE_ENV=production ALBY_API_URL=https://api.getalby.com TARGET_BROWSER=opera webpack",
     "build": "yarn build:chrome && yarn build:firefox && yarn build:opera",
     "package": "./create-packages.sh",
     "lint": "yarn lint:js && yarn tsc:compile && yarn format:fix",
@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "@bitcoinerlab/secp256k1": "^1.1.1",
-    "@getalby/sdk": "^3.6.0",
+    "@getalby/sdk": "^3.9.0",
     "@headlessui/react": "^1.7.18",
     "@lightninglabs/lnc-web": "^0.3.1-alpha",
     "@noble/ciphers": "^0.5.1",

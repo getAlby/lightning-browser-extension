@@ -16,14 +16,11 @@
       },
       "test_connection": {
         "ready": "Bonege, ĉio pretas!",
-        "initializing": "Inicializante vian konton. Bonvolu atendi, ĉi tio povas daŭri minuton...",
         "connection_error": "Konekta eraro",
         "review_connection_details": "Bonvolu revizii viajn konektajn detalojn.",
         "connection_taking_long": "Provi konektiĝi daŭras pli longe ol atendite... Ĉu viaj detaloj estas ĝustaj? Ĉu via nodo estas atingebla?",
         "contact_support": "Se vi bezonas helpon bonvolu kontakti support@getalby.com",
-        "actions": {
-          "delete_edit_account": "Forigu nevalidan konton kaj redaktu denove"
-        }
+        "actions": {}
       }
     },
     "choose_connector": {
