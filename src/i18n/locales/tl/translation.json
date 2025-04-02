@@ -16,20 +16,16 @@
       },
       "test_connection": {
         "ready": "",
-        "initializing": "",
         "connection_error": "",
         "review_connection_details": "",
         "connection_taking_long": "",
         "contact_support": "",
-        "actions": {
-          "delete_edit_account": ""
-        }
+        "actions": {}
       }
     },
     "choose_connector": {
       "description": "",
       "lnd": {
-        "title": "",
         "page": {
           "title": "",
           "description": ""
@@ -92,21 +88,11 @@
         }
       },
       "citadel": {
-        "title": "",
         "page": {
-          "title": "",
-          "instructions": ""
-        },
-        "password": {
-          "label": ""
-        },
-        "url": {
-          "label": "",
-          "placeholder": ""
+          "title": ""
         }
       },
       "umbrel": {
-        "title": "",
         "page": {
           "title": "",
           "instructions": ""
@@ -117,7 +103,6 @@
         }
       },
       "mynode": {
-        "title": "",
         "page": {
           "title": "",
           "instructions": ""
@@ -128,7 +113,6 @@
         }
       },
       "startos": {
-        "title": "",
         "page": {
           "title": "",
           "instructions": ""
@@ -139,7 +123,6 @@
         }
       },
       "raspiblitz": {
-        "title": "",
         "page": {
           "title": "",
           "instructions1": "",
@@ -151,19 +134,16 @@
         }
       },
       "blink": {
-        "title": "",
         "page": {
           "title": ""
         }
       },
       "bitcoin_jungle": {
-        "title": "",
         "page": {
           "title": ""
         }
       },
       "btcpay": {
-        "title": "",
         "config": {
           "label": ""
         },

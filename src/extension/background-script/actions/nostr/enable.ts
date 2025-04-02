@@ -128,15 +128,18 @@ const enable = async (message: MessageAllowanceEnable, sender: Sender) => {
             EventKind.CreateBadge,
             EventKind.AppData,
             EventKind.UploadChunk,
+            EventKind.RemoteSign,
           ];
-
-          reasonableEventKindIds.forEach(async (kindId) => {
-            await addPermissionFor(
-              PermissionMethodNostr.NOSTR_SIGNMESSAGE + "/" + kindId,
-              host,
-              false
-            );
-          });
+          // when addding multiple permissions at once, the flow shall wait until all asynchronous addPermissionFor calls are completed.
+          await Promise.all(
+            reasonableEventKindIds.map((kindId) => {
+              addPermissionFor(
+                PermissionMethodNostr.NOSTR_SIGNMESSAGE + "/" + kindId,
+                host,
+                false
+              );
+            })
+          );
         } else if (response.data.preset === NostrPermissionPreset.TRUST_FULLY) {
           Object.values(PermissionMethodNostr).forEach(async (permission) => {
             await addPermissionFor(permission, host, false);

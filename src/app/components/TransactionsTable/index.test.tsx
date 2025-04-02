@@ -22,7 +22,7 @@ const transactions: Props = {
     {
       timestamp: 1656573909064,
       createdAt: "1656573909064",
-      date: "5 days ago",
+      timeAgo: "5 days ago",
       description: "Polar Invoice for bob",
       host: "https://openai.com/dall-e-2/",
       id: "1",
@@ -49,7 +49,7 @@ const invoices: Props = {
       totalAmountFiat: "$13.02",
       preimage: "",
       title: "lambo lambo",
-      date: "4 days ago",
+      timeAgo: "4 days ago",
     },
     {
       id: "lnbcrt6543210n1p3tadjepp5rv6ufq4vumg66l9gcyxqhy89n6w90mx0mh6gcj0sawrf6xuep5ssdq5g9kxy7fqd9h8vmmfvdjscqzpgxqyz5vqsp5f9yzxeqjw33ule4rffuh0py32gjjsx8z48cd4xjl8ej3rn7zdtdq9qyyssqe6qvkfe260myc9ypgs5n63xzwcx82fderg8p5ysh6c2fvpz5xu4ksvhs5av0wwestk5pmucmhk8lpjhmy7wqyq9c29xgm9na2q5xv5spy5kukj",
@@ -59,7 +59,7 @@ const invoices: Props = {
       totalAmountFiat: "$127.80",
       preimage: "",
       title: "Alby invoice",
-      date: "6 days ago",
+      timeAgo: "6 days ago",
     },
   ],
 };
@@ -74,7 +74,7 @@ const invoicesWithBoostagram: Props = {
       totalAmountFiat: "$13.02",
       preimage: "",
       title: "lambo lambo",
-      date: "4 days ago",
+      timeAgo: "4 days ago",
     },
     {
       id: "lnbcrt888880n1p3tad30pp56j6g34wctydrfx4wwdwj3schell8uqug6jnlehlkpw02mdfd9wlqdq0v36k6urvd9hxwuccqzpgxqyz5vqsp5995q4egstsvnyetwvpax6jw8q0fnn4tyz3gp35k3yex29emhsylq9qyyssq0yxpx6peyn4vsepwj3l68w9sc5dqnkt07zff6aw4kqvcfs0fpu4jpfh929w6vqrgtjfkmrlwghq4s9t4mnwrh4dlkm6wjem5uq8eu4gpwqln0j",
@@ -84,7 +84,7 @@ const invoicesWithBoostagram: Props = {
       totalAmountFiat: "$17.36",
       preimage: "",
       title: "dumplings",
-      date: "5 days ago",
+      timeAgo: "5 days ago",
       boostagram: {
         app_name: "Fountain",
         name: "Friedemann",

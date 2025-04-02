@@ -125,7 +125,6 @@ const routes = {
       getPublicKeyOrPrompt: nostr.getPublicKeyOrPrompt,
       signEventOrPrompt: nostr.signEventOrPrompt,
       signSchnorrOrPrompt: nostr.signSchnorrOrPrompt,
-      getRelays: nostr.getRelays,
       encryptOrPrompt: nostr.encryptOrPrompt,
       decryptOrPrompt: nostr.decryptOrPrompt,
       nip44EncryptOrPrompt: nostr.nip44EncryptOrPrompt,

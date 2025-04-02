@@ -467,6 +467,7 @@ class Lnd implements Connector {
           payment_hash: utils.base64ToHex(invoice.r_hash),
           settled: invoice.settled,
           settleDate: parseInt(invoice.settle_date) * 1000,
+          creationDate: parseInt(invoice.creation_date) * 1000,
           totalAmount: parseInt(invoice.value),
           type: "received",
           custom_records,
@@ -484,7 +485,7 @@ class Lnd implements Connector {
     const transactions: ConnectorTransaction[] = mergeTransactions(
       invoices,
       payments
-    );
+    ).filter((transaction) => transaction.settled);
 
     return {
       data: {
@@ -533,6 +534,7 @@ class Lnd implements Connector {
           payment_hash: payment.payment_hash,
           settled: true,
           settleDate: parseInt(payment.creation_date) * 1000,
+          creationDate: parseInt(payment.creation_date) * 1000,
           totalAmount: payment.value_sat,
           type: "sent",
         };

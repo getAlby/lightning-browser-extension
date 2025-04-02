@@ -19,14 +19,10 @@
       },
       "test_connection": {
         "ready": "真棒，你已准备就绪!",
-        "initializing": "正在初始化你的帐户。请耐心等待，可能需要几分钟。。。",
         "connection_error": "连接错误",
         "review_connection_details": "请检查你的连接详情。",
         "connection_taking_long": "尝试连接花费的时间不预期的要长。。。你的详情正确吗？你的节点是否可达？",
-        "contact_support": "如果你需要帮助，请联系support@getalby.com",
-        "actions": {
-          "delete_edit_account": "删除无效帐户并重新编辑"
-        }
+        "contact_support": "如果你需要帮助，请联系support@getalby.com"
       },
       "pin_extension": {
         "title": "固定你的 Alby 扩展",
@@ -51,8 +47,7 @@
         "macaroon": {
           "label": "Macaroon(HEX格式)"
         },
-        "drag_and_drop": "将你的macaroon拖放到此处或<0>浏览</0>",
-        "title": "LND"
+        "drag_and_drop": "将你的macaroon拖放到此处或<0>浏览</0>"
       },
       "eclair": {
         "url": {
@@ -70,20 +65,10 @@
       },
       "citadel": {
         "page": {
-          "title": "连接<0>Citadel</0>节点",
-          "instructions": "目前，如果启用了2FA，这就用不了了。"
-        },
-        "password": {
-          "label": "Citadel密码"
-        },
-        "url": {
-          "label": "Citadel URL",
-          "placeholder": "http://citadel.local"
-        },
-        "title": "Citadel"
+          "title": "连接<0>Citadel</0>节点"
+        }
       },
       "blink": {
-        "title": "眨眼钱包",
         "page": {
           "title": "连接<0>眨眼钱包</0>"
         },
@@ -96,7 +81,6 @@
         }
       },
       "bitcoin_jungle": {
-        "title": "比特币丛林钱包",
         "page": {
           "title": "连接<0>比特币丛林钱包</0>"
         },
@@ -109,7 +93,6 @@
         }
       },
       "btcpay": {
-        "title": "BTCPay Server",
         "errors": {
           "connection_failed": "连接失败。BTCPay连接URL是否正确且可访问？"
         },
@@ -130,7 +113,6 @@
         "errors": {
           "connection_failed": "连接失败。你的Core Lightning节点是否在线并使用了commando插件？"
         },
-        "title": "Core Lightning",
         "page": {
           "title": "连接你的Core Lightning节点",
           "instructions": "确保你用的是Core Lightning 0.12.0或更新的版本、commando插件正在运行，并且你的节点可以通过闪电网络访问。通过运行'lightning-cli commando-rune'来创建rune。"
@@ -162,8 +144,7 @@
         "rest_url": {
           "placeholder": "lndconnect://yournode:8080?...",
           "label": "lndconnect REST URL"
-        },
-        "title": "StartOS"
+        }
       },
       "raspiblitz": {
         "page": {
@@ -174,8 +155,7 @@
         "rest_api_host": {
           "label": "REST API主机",
           "placeholder": "your-node-onion-address:port"
-        },
-        "title": "RaspiBlitz"
+        }
       },
       "lndhub_go": {
         "title": "LNDHub",
@@ -213,7 +193,6 @@
           "title": "连接<0>Umbrel</0>节点",
           "instructions": "1. 在你的Umbrel仪表板上，进入<0>连接钱包</0><1/>2. 选择<0>REST (Tor)</0>或<0>REST （本地网络）</0>模式<1/>3. 复制<0>lndconnect URL</0>并粘贴到下方"
         },
-        "title": "Umbrel",
         "rest_url": {
           "label": "lndconnect REST URL",
           "placeholder": "lndconnect://yournode:8080?..."
@@ -221,7 +200,6 @@
       },
       "description": "连接你外部的闪电钱包或节点",
       "mynode": {
-        "title": "myNode",
         "page": {
           "title": "连接<0>myNode</0>",
           "instructions": "在你的myNode主页上点击你的<0>Lightning</0>服务的<0>Wallet</0>按钮。<1/> 现在点击<0>Status</0>标签下的<0>Pair Wallet</0>按钮。出现提示时输入密码。<1/>选择下拉菜单并选择一个配对选项。根据你的设置，你可以使用<0>闪电（REST +本地IP）</0>连接或<0>闪电（REST + Tor）</0>连接。"
@@ -321,23 +299,16 @@
       "default_view": {
         "is_blocked_hint": "Alby 目前在 {{host}} 上被禁用",
         "block_removed": "启用了{{host}}。请重新加载网站。",
-        "node_required": "你的 Albby 账户需要设置一个钱包。前往 <0>getalby.com</0> 连接你的钱包",
         "actions": {
-          "setup_keys": {
-            "description": "保管你的主密钥或导入已有 Nostr 账户",
-            "title": "设置你的密钥"
-          },
           "get_started": {
             "title": "准备好使用 Alby 浏览器扩展",
             "description": "第一次使用 Alby 扩展？浏览我们的指南、视频和解析"
           },
           "receive_bitcoin": {
-            "title": "接收比特币",
-            "description": "为你的账户储值并通过闪电地址或发票收款"
+            "title": "接收比特币"
           }
         },
         "see_all": "查看全部",
-        "no_transactions": "该账户暂无交易记录。",
         "upgrade_account": "你正在使用旧版 LNDHub 设置。<0>请重新连接</0>你的 Alby 账户以访问最新功能。"
       },
       "actions": {
@@ -410,24 +381,13 @@
               "title": "Nostr 密钥",
               "description": "从主密钥派生 Nostr 密钥或将私钥粘贴到「Nostr 私钥」处导入已有私钥。"
             }
-          },
-          "setup": {
-            "description2": "在 Alby 中创建的每个 Nostr 帐户都带有<0>恢复短语</0> —— 一组12个单词，始终保证重新获得对你的 Nostr 私钥的访问。",
-            "title": "设置你的 nostr 密钥",
-            "description": "选择是否要创建一个新的 nostr 帐户（一对私钥和公钥）或导入现有帐户。",
-            "new": {
-              "label": "创建新的 nostr 帐户",
-              "description": "通过使用一对新的 nostr 密钥生成主密钥。"
-            }
           }
         },
         "export": {
           "export_uri": "LNDHub凭证URI",
           "scan_qr": "通过扫描二维码将这个钱包导入Zeus或BlueWallet。",
-          "screen_reader": "导出帐户详情",
           "waiting": "等待LndHub的数据...",
           "your_ln_address": "你的闪电地址：",
-          "description": "登录 getalby.com 以在 <0>Zeus</0> 和 <1>Blue Wallet</1> 中连接和使用该账户。",
           "title": "连接到移动钱包"
         },
         "remove": {
@@ -444,8 +404,7 @@
           "change_lnaddress": "在 getalby.com 上修改"
         },
         "name": {
-          "title": "名称",
-          "placeholder": "帐户名称"
+          "title": "名称"
         },
         "mnemonic": {
           "backup": {
@@ -458,7 +417,6 @@
             "title": "备份你的恢复词",
             "warning": "不要忘记备份你的恢复词！不进行备份可能会导致你失去对主密钥、Nostr 身份以及通过该密钥管理的资产的访问权限。"
           },
-          "existing_nostr_key_notice": "ℹ️ 该账户已设置 Nostr 私钥，因此不会从此主密钥派生。你可以通过你的帐户设置管理你的 Nostr 密钥。",
           "saved": "主密钥已加密并成功保存。",
           "generate": {
             "title": "生成新的主密钥",
@@ -488,8 +446,7 @@
               "title": "已经有主密钥？",
               "description": "输入你的恢复词以导入主密钥到该钱包"
             },
-            "title": "设置主密钥",
-            "nostr": "导入已有 Nostr 账户"
+            "title": "设置主密钥"
           },
           "inputs": {
             "title": "主密钥恢复词"
@@ -732,21 +689,73 @@
       "content": "该网站要求你签署:",
       "block_added": "已将{{host}}添加到屏蔽列表，请重新加载网站。",
       "kinds": {
+        "0": {
+          "title": "更新资料",
+          "description": "更新你的用户名、描述、头像、Nostr 地址和其他资料元数据。"
+        },
         "1": {
           "title": "短文本消息",
           "description": "签署短文本消息"
+        },
+        "2": {
+          "description": "分享推荐的中继",
+          "title": "推荐中继"
+        },
+        "3": {
+          "description": "更新你的关注列表中的账户",
+          "title": "更新关注列表"
+        },
+        "4": {
+          "title": "私信",
+          "description": "发送加密私信"
         },
         "5": {
           "title": "删除",
           "description": "请求中继删除事件"
         },
+        "6": {
+          "description": "转发笔记",
+          "title": "转发"
+        },
+        "7": {
+          "title": "回应",
+          "description": "签署对笔记的回应"
+        },
+        "8": {
+          "description": "授予一个徽章给一个 Nostr 账户",
+          "title": "徽章授予"
+        },
+        "40": {
+          "title": "创建频道",
+          "description": "创建一个公共聊天频道"
+        },
+        "41": {
+          "title": "更新频道",
+          "description": "更新频道的名称、描述、头像和其他额外元数据"
+        },
+        "42": {
+          "title": "发送频道消息",
+          "description": "发送文本消息到频道"
+        },
+        "43": {
+          "description": "隐藏频道中的文本消息",
+          "title": "隐藏频道消息"
+        },
         "44": {
           "description": "隐藏特定 Nostr 公钥用户的所有消息",
           "title": "静音频道用户"
         },
-        "30009": {
-          "description": "创建新徽章",
-          "title": "创建徽章"
+        "1984": {
+          "title": "举报笔记",
+          "description": "举报笔记（垃圾、违法或露骨内容）"
+        },
+        "9734": {
+          "title": "请求打闪",
+          "description": "请求一个闪电网络付款"
+        },
+        "9735": {
+          "description": "显示已支付的闪电发票的确认消息",
+          "title": "打闪收据"
         },
         "10000": {
           "title": "静音列表",
@@ -756,17 +765,29 @@
           "title": "中继列表",
           "description": "更新用于接收和发送你的和其他人的笔记的中继偏好"
         },
-        "27235": {
-          "description": "HTTP 验证",
-          "title": "HTTP 验证"
-        },
         "10003": {
           "title": "书签",
           "description": "为用户贴文加书签"
         },
+        "22242": {
+          "description": "对中继进行身份验证",
+          "title": "客户端验证"
+        },
         "24133": {
           "description": "远程请求和签署事件",
           "title": "远程签名"
+        },
+        "27235": {
+          "description": "HTTP 验证",
+          "title": "HTTP 验证"
+        },
+        "30008": {
+          "description": "接受、拒绝徽章和修改徽章显示顺序",
+          "title": "徽章"
+        },
+        "30009": {
+          "description": "创建新徽章",
+          "title": "创建徽章"
         },
         "30023": {
           "description": "签署类似文章的长篇内容",
@@ -780,73 +801,9 @@
           "title": "上传块",
           "description": "以块的形式上传数据"
         },
-        "3": {
-          "description": "更新你的关注列表中的账户",
-          "title": "更新关注列表"
-        },
-        "7": {
-          "title": "回应",
-          "description": "签署对笔记的回应"
-        },
-        "4": {
-          "title": "私信",
-          "description": "发送加密私信"
-        },
-        "8": {
-          "description": "授予一个徽章给一个 Nostr 账户",
-          "title": "徽章授予"
-        },
-        "40": {
-          "title": "创建频道",
-          "description": "创建一个公共聊天频道"
-        },
-        "43": {
-          "description": "隐藏频道中的文本消息",
-          "title": "隐藏频道消息"
-        },
-        "42": {
-          "title": "发送频道消息",
-          "description": "发送文本消息到频道"
-        },
-        "9734": {
-          "title": "请求打闪",
-          "description": "请求一个闪电网络付款"
-        },
-        "9735": {
-          "description": "显示已支付的闪电发票的确认消息",
-          "title": "打闪收据"
-        },
-        "22242": {
-          "description": "对中继进行身份验证",
-          "title": "客户端验证"
-        },
-        "30008": {
-          "description": "接受、拒绝徽章和修改徽章显示顺序",
-          "title": "徽章"
-        },
         "unknown": {
           "description": "未知操作",
           "title": "kind {{kind}}"
-        },
-        "0": {
-          "title": "更新资料",
-          "description": "更新你的用户名、描述、头像、Nostr 地址和其他资料元数据。"
-        },
-        "2": {
-          "description": "分享推荐的中继",
-          "title": "推荐中继"
-        },
-        "6": {
-          "description": "转发笔记",
-          "title": "转发"
-        },
-        "41": {
-          "title": "更新频道",
-          "description": "更新频道的名称、描述、头像和其他额外元数据"
-        },
-        "1984": {
-          "title": "举报笔记",
-          "description": "举报笔记（垃圾、违法或露骨内容）"
         }
       },
       "recipient": "收件人",
@@ -886,18 +843,12 @@
       "other": {
         "title": "自备钱包",
         "connect": "发现你的钱包",
-        "description": "最好已经拥有钱包或闪电节点。",
-        "point1": "自托管或代托管选项",
-        "point2": "无闪电网络或 Nostr 地址",
-        "point3": "立即开始，无需邀请"
+        "description": "最好已经拥有钱包或闪电节点。"
       },
       "alby": {
         "title": "Alby帐户",
         "description": "同时控制比特币并享受应用的最佳选择。",
-        "point1": "新的自托管钱包 — <0>Alby Hub</0>",
-        "point2": "独一无二的闪电网络和 Nostr 地址",
-        "connect": "使用 Alby 账户",
-        "point3": "需要邀请码进行注册"
+        "connect": "使用 Alby 账户"
       },
       "title": "连接钱包到 Alby 浏览器扩展"
     },
@@ -935,9 +886,6 @@
     "distributions": {
       "title": "连接 {{name}}",
       "description": "选择你想连接的{{name}}应用程序",
-      "citadel": {
-        "name": "Citadel"
-      },
       "btcpay": {
         "name": "BTCPay"
       },
@@ -1153,7 +1101,6 @@
     "copied": "已复制！",
     "error": "错误",
     "loading": "加载中",
-    "accounts": "帐户",
     "confirm_password": "确认密码",
     "discover": "发现更多应用",
     "range": {
@@ -1213,8 +1160,7 @@
     "account_menu": {
       "options": {
         "account": {
-          "go_to_web_wallet": "管理你的网络帐户",
-          "add": "连接钱包"
+          "go_to_web_wallet": "管理你的网络帐户"
         }
       },
       "screen_reader": "切换下拉菜单",

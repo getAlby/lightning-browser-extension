@@ -16,14 +16,10 @@
       },
       "test_connection": {
         "ready": "太棒了，你已準備就緒！",
-        "initializing": "正在初始化你的帳戶。請稍候，這可能需要一分鐘...",
         "connection_error": "連接錯誤",
         "review_connection_details": "請檢查你的連接詳細信息。",
         "connection_taking_long": "嘗試連接的時間比預期的要長...你的詳細信息是否正確？你的節點是否可訪問？",
-        "contact_support": "如果你需要幫助，請聯繫 support@getalby.com",
-        "actions": {
-          "delete_edit_account": "刪除無效帳戶並重新編輯"
-        }
+        "contact_support": "如果你需要幫助，請聯繫 support@getalby.com"
       },
       "pin_extension": {
         "title": "釘選你的Alby擴充套件",
@@ -61,7 +57,6 @@
       "title": "連接閃電錢包",
       "description": "連接你的外部閃電錢包或節點",
       "lnd": {
-        "title": "LND",
         "page": {
           "title": "連接你的 LND 節點",
           "description": "你需要你的節點 URL 和一個具有讀取和發送權限的macaroon（例如 admin.macaroon）"
@@ -131,21 +126,11 @@
         }
       },
       "citadel": {
-        "title": "Citadel",
         "page": {
-          "title": "連接 <0>Citadel</0> 節點",
-          "instructions": "如果啟用了 2FA，這目前不可用。"
-        },
-        "password": {
-          "label": "Citadel 密碼"
-        },
-        "url": {
-          "label": "Citadel URL",
-          "placeholder": "http://citadel.local"
+          "title": "連接 <0>Citadel</0> 節點"
         }
       },
       "umbrel": {
-        "title": "Umbrel",
         "page": {
           "title": "連接 <0>Umbrel</0> 節點",
           "instructions": "1. 在你的 Umbrel 儀表板上，進入 <0>連接錢包</0><1/>2. 選擇 <0>REST (Tor)</0> 或 <0>REST （本地網絡）</0> 模式<1/>3. 複製 <0>lndconnect URL</0> 並粘貼到下方"
@@ -156,7 +141,6 @@
         }
       },
       "mynode": {
-        "title": "myNode",
         "page": {
           "title": "連接 <0>myNode</0>",
           "instructions": "在你的myNode主頁上，點擊你的<0>Lightning</0>服務的<0>Wallet</0>按鈕。<1/>現在點擊<0>Status</0>選項卡下的<0>Pair Wallet</0>按鈕。出現提示時輸入密碼。<1/>選擇下拉功能表，然後選擇配對選項。根據你的設置，你可以使用<0>Lightning（REST + Local IP）</0> 連接或 <0>Lightning（REST + Tor）</0> 連接。"
@@ -167,7 +151,6 @@
         }
       },
       "startos": {
-        "title": "StartOS",
         "page": {
           "title": "連接你的 <0>StartOS 服务器</0>",
           "instructions": "在你的 StartOS 儀表板上點擊 <0>Lightning Network Daemon</0> 服務。<1/>選擇 <0>Properties</0> 標籤。<1/>複製 <0>LND Connect REST URL。</0>"
@@ -178,7 +161,6 @@
         }
       },
       "raspiblitz": {
-        "title": "RaspiBlitz",
         "page": {
           "title": "連接你的 <0>RaspiBlitz</0> 節點",
           "instructions1": "按照以下步驟操作：<1/> 1.<0>SSH</0>進入你的<0>Raspiblitz</0><1/>2。從列表中選擇<0>Connect Apps & Show Credentials</0><1/><0/>3。選擇 <0>Connect Alby to this node</0><1/>4。按 <0>OK</0> 以顯示連接憑據<1/><1/>在下面的輸入中複製並粘貼<0>REST API 主機</0>或 <0>.onion</0> 位址以通過 Tor 連接。",
@@ -190,19 +172,16 @@
         }
       },
       "blink": {
-        "title": "Blink Wallet",
         "page": {
           "title": "連接<0>Blink Wallet</0>"
         }
       },
       "bitcoin_jungle": {
-        "title": "Bitcoin Jungle Wallet",
         "page": {
           "title": "連接<0>Bitcoin Jungle Wallet</0>"
         }
       },
       "btcpay": {
-        "title": "BTCPay Server",
         "config": {
           "label": "配置數據"
         },
@@ -211,7 +190,6 @@
         }
       },
       "commando": {
-        "title": "Core Lightning",
         "page": {
           "title": "連接到你的Core Lightning節點",
           "instructions": "確保你使用的是Core Lightning 0.12.0或更高版本，commando插件正在運行，並且你的節點可以通過閃電網路訪問。通過運行「lightning-cli commando-rune」來創建rune。"
@@ -259,11 +237,9 @@
     "accounts": {
       "account_view": {
         "name": {
-          "title": "名稱",
-          "placeholder": "帳戶名稱"
+          "title": "名稱"
         },
         "export": {
-          "screen_reader": "導出帳戶詳情",
           "waiting": "等待 LndHub 數據...",
           "your_ln_address": "你的閃電地址：",
           "export_uri": "LNDHub 憑據 URI",
@@ -306,15 +282,6 @@
             "imported_key_warning": "⚠️ 你當前正在使用導入的或隨機生成的 Nostr 密鑰。你的 Nostr 私鑰無法通過你的恢復短語恢復，因此請記住分別備份你的 Nostr 私鑰。",
             "remove": "移除現有的密鑰",
             "can_restore": "✅ Nostr 密鑰已從你的主密鑰派生"
-          },
-          "setup": {
-            "title": "設置你的 nostr 密鑰",
-            "description": "選擇是否要創建一個新的 nostr 帳戶（一對私鑰和公鑰）或導入現有帳戶。",
-            "description2": "在 Alby 中創建的每個 Nostr 帳戶都帶有<0>恢復短語</0>——一組12個單詞，始終保證重新獲得對你的 Nostr 私鑰的訪問。",
-            "new": {
-              "label": "創建新的 nostr 帳戶",
-              "description": "通過使用一對新的 nostr 密鑰生成主密鑰。"
-            }
           }
         },
         "remove": {
@@ -347,7 +314,6 @@
             "description": "通過使用恢復短語將主密鑰導入 Alby。",
             "title": "導入主密鑰"
           },
-          "existing_nostr_key_notice": "ℹ️ 該帳戶已設置 nostr 私鑰，因此不會從此主密鑰派生。你可以通過你的帳戶設置管理你的 nostr 密鑰。",
           "saved": "主密鑰已加密並成功保存。"
         },
         "remove_secretkey": {
@@ -594,9 +560,6 @@
     "distributions": {
       "title": "連接 {{name}}",
       "description": "選擇你想連接的{{name}}應用程序",
-      "citadel": {
-        "name": "Citadel"
-      },
       "btcpay": {
         "name": "BTCPay"
       },
@@ -699,7 +662,6 @@
     "confirm_password": "確認密碼",
     "success": "成功",
     "error": "錯誤",
-    "accounts": "帳戶",
     "discover": "發現",
     "connected_sites": "已連接的網站",
     "sats_one": "聰",

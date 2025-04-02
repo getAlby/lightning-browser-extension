@@ -16,14 +16,11 @@
       },
       "test_connection": {
         "ready": "Чудово, все готово!",
-        "initializing": "Ініціалізація Вашого аккаунту. Будь ласка, зачекайте, це може зайняти деякий час...",
         "connection_error": "Помилка з'єднання",
         "review_connection_details": "Будь ласка, перегляньте деталі вашого з'єднання.",
         "connection_taking_long": "Спроба з'єднання триває довше ніж очікувалось...Чи правильні Ваші дані? Чи доступний Ваш вузол?",
         "contact_support": "Якщо Вам потрібна допомога, будь ласка, зв'яжіться з support@getalby.com",
-        "actions": {
-          "delete_edit_account": "Видалити непрацездатний обліковий запис і відредагувати знову"
-        }
+        "actions": {}
       }
     },
     "choose_path": {
@@ -55,7 +52,6 @@
       "title": "",
       "description": "",
       "lnd": {
-        "title": "",
         "page": {
           "title": "",
           "description": ""
@@ -125,21 +121,11 @@
         }
       },
       "citadel": {
-        "title": "",
         "page": {
-          "title": "",
-          "instructions": ""
-        },
-        "password": {
-          "label": ""
-        },
-        "url": {
-          "label": "",
-          "placeholder": ""
+          "title": ""
         }
       },
       "umbrel": {
-        "title": "",
         "page": {
           "title": "",
           "instructions": ""
@@ -150,7 +136,6 @@
         }
       },
       "mynode": {
-        "title": "",
         "page": {
           "title": "",
           "instructions": ""
@@ -161,7 +146,6 @@
         }
       },
       "startos": {
-        "title": "",
         "page": {
           "title": "",
           "instructions": ""
@@ -172,7 +156,6 @@
         }
       },
       "raspiblitz": {
-        "title": "",
         "page": {
           "title": "",
           "instructions1": "",
@@ -184,19 +167,16 @@
         }
       },
       "blink": {
-        "title": "",
         "page": {
           "title": ""
         }
       },
       "bitcoin_jungle": {
-        "title": "",
         "page": {
           "title": ""
         }
       },
       "btcpay": {
-        "title": "",
         "config": {
           "label": ""
         },
@@ -205,7 +185,6 @@
         }
       },
       "commando": {
-        "title": "",
         "page": {
           "title": "",
           "instructions": ""
@@ -250,11 +229,9 @@
     "accounts": {
       "account_view": {
         "name": {
-          "title": "",
-          "placeholder": ""
+          "title": ""
         },
         "export": {
-          "screen_reader": "",
           "waiting": "",
           "your_ln_address": "",
           "export_uri": "",
@@ -523,7 +500,6 @@
     "confirm_password": "",
     "success": "",
     "error": "",
-    "accounts": "",
     "discover": "",
     "connected_sites": "",
     "sats_one": "",

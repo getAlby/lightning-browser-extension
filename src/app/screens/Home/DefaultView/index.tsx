@@ -20,6 +20,7 @@ import Hyperlink from "~/app/components/Hyperlink";
 import { IconLinkCard } from "~/app/components/IconLinkCard/IconLinkCard";
 import toast from "~/app/components/Toast";
 import { useAccount } from "~/app/context/AccountContext";
+import { useSettings } from "~/app/context/SettingsContext";
 import { useTransactions } from "~/app/hooks/useTransactions";
 import { PublisherLnData } from "~/app/screens/Home/PublisherLnData";
 import { isAlbyLNDHubAccount } from "~/app/utils";
@@ -45,6 +46,8 @@ const DefaultView: FC<Props> = (props) => {
 
   const navigate = useNavigate();
 
+  const { getFormattedSats } = useSettings();
+
   const { account, accountLoading } = useAccount();
 
   const lightningAddress = account?.lightningAddress || "";
@@ -52,6 +55,7 @@ const DefaultView: FC<Props> = (props) => {
   const [isBlockedUrl, setIsBlockedUrl] = useState<boolean>(false);
   const [currentAccount, setCurrentAccount] = useState<GetAccountRes>();
   const [nostrPublicKey, setNostrPublicKey] = useState("");
+  const [hasSeenInfoBanner, setHasSeenInfoBanner] = useState<boolean>(true);
 
   const { transactions, isLoadingTransactions, loadTransactions } =
     useTransactions();
@@ -79,19 +83,21 @@ const DefaultView: FC<Props> = (props) => {
   useEffect(() => {
     (async () => {
       try {
-        const account = await api.getAccount();
-        const nostrPrivateKey = await api.nostr.getPrivateKey(account.id);
+        const userAccount = await api.getAccount();
+        const nostrPrivateKey = await api.nostr.getPrivateKey(userAccount.id);
+
+        setHasSeenInfoBanner(userAccount.hasSeenInfoBanner);
 
         setNostrPublicKey(
           nostrPrivateKey ? await nostr.derivePublicKey(nostrPrivateKey) : ""
         );
-        setCurrentAccount(account);
+        setCurrentAccount(userAccount);
       } catch (e) {
         console.error(e);
         if (e instanceof Error) toast.error(`Error: ${e.message}`);
       }
     })();
-  }, []);
+  }, [account]);
 
   const unblock = async () => {
     try {
@@ -172,23 +178,47 @@ const DefaultView: FC<Props> = (props) => {
             </div>
           </Alert>
         )}
-        {account?.nodeRequired ? (
-          <Alert type="warn">
+
+        {(account?.usingFeeCredits || account?.nodeRequired) &&
+        !hasSeenInfoBanner ? (
+          <Alert
+            type="info"
+            showClose
+            onClose={async () => {
+              await api.editAccount(account.id, {
+                hasSeenInfoBanner: true,
+              });
+              setHasSeenInfoBanner(true);
+            }}
+          >
             <div className="flex items-center gap-2">
               <div className="shrink-0">
                 <PopiconsCircleExclamationLine className="w-5 h-5" />
               </div>
               <span className="text-sm">
                 <Trans
-                  i18nKey={"default_view.node_required"}
-                  t={t}
+                  i18nKey={"setup_wallet"}
+                  t={tCommon}
+                  values={{
+                    max_account_balance: getFormattedSats(
+                      account?.limits?.max_account_balance || 0
+                    ),
+                  }}
                   components={[
                     // eslint-disable-next-line react/jsx-key
-                    <a
+                    <Hyperlink
                       className="underline"
-                      href="https://getalby.com"
+                      href="https://getalby.com/node/embrace_albyhub"
                       target="_blank"
-                      rel="noreferrer"
+                      rel="noopener nofollow"
+                    />,
+
+                    // eslint-disable-next-line react/jsx-key
+                    <Hyperlink
+                      className="underline"
+                      href="https://guides.getalby.com/user-guide/alby-account-and-browser-extension/alby-account/faqs-alby-account/what-are-fee-credits-in-my-alby-account"
+                      target="_blank"
+                      rel="noopener nofollow"
                     />,
                   ]}
                 />
