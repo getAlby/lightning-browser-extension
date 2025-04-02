@@ -19,14 +19,10 @@
       },
       "test_connection": {
         "ready": "Perfeito, tudo configurado!",
-        "initializing": "Iniciando sua conta. Aguarde, pode demorar um pouco...",
         "connection_error": "Erro de conexão",
         "review_connection_details": "Revise os detalhes da conexão.",
         "connection_taking_long": "A tentativa de conexão está demorando mais do que o esperado... Os dados estão corretos? O servidor está acessível?",
-        "contact_support": "Se precisar de ajuda, entre em contato com support@getalby.com",
-        "actions": {
-          "delete_edit_account": "Remover conta inválida e editar novamente"
-        }
+        "contact_support": "Se precisar de ajuda, entre em contato com support@getalby.com"
       },
       "pin_extension": {
         "title": "Fixar extensão Alby",
@@ -87,15 +83,7 @@
       },
       "citadel": {
         "page": {
-          "title": "Conecte-se no servidor <0>Citadel</0>",
-          "instructions": "Não funciona se o 2FA estiver ativado."
-        },
-        "password": {
-          "label": "Senha Citadel"
-        },
-        "url": {
-          "label": "URL Citadel",
-          "placeholder": "http://citadel.local"
+          "title": "Conecte-se no servidor <0>Citadel</0>"
         }
       },
       "umbrel": {
@@ -173,7 +161,7 @@
         },
         "page": {
           "title": "Conecte-se ao BTCPay LND",
-          "instructions": "Navegue até o servidor BTCPay e faça login como administrador. Vá até as Configurações > Serviços > LND REST - Ver informação. E então clique em \"Ver informação do código QR\", copie e cole abaixo:"
+          "instructions": "Navegue até o servidor BTCPay e faça login como administrador. Vá até as Configurações do servidor > Serviços > LND REST - Ver informação. E então clique em \"Ver informação do código QR\", copie e cole abaixo:"
         }
       },
       "lndhub_go": {
@@ -273,6 +261,14 @@
           "url": {
             "placeholder": "nostr+walletconnect://69effe..."
           }
+        },
+        "title": "Nostr Wallet Connect"
+      },
+      "albyhub": {
+        "page": {
+          "errors": {
+            "connection_failed": "Falha na conexão. Seu Alby Hub e a conexão do aplicativo estão ativados?"
+          }
         }
       }
     },
@@ -292,15 +288,16 @@
         "is_blocked_hint": "A Alby está desativada em {{host}}",
         "block_removed": "{{host}} ativado. Por favor, recarregue o site.",
         "see_all": "Mostrar tudo",
-        "no_transactions": "Sem transações nesta conta ainda.",
         "actions": {
           "get_started": {
             "title": "Saiba mais sobre a extensão Alby",
             "description": "Novo na Alby? Confira nossos tutoriais, vídeos e explicações"
           },
           "receive_bitcoin": {
-            "title": "Deposite bitcoin",
-            "description": "Receba satoshis usando um endereço relâmpago, fatura relâmpago ou endereço bitcoin"
+            "title": "Deposite bitcoin"
+          },
+          "setup_keys": {
+            "title": "Configurar chave mestra"
           }
         }
       }
@@ -309,11 +306,9 @@
       "account_view": {
         "export": {
           "your_ln_address": "Seu endereço relâmpago:",
-          "screen_reader": "Exportar detalhes da conta",
           "waiting": "aguardando dados LndHub...",
           "export_uri": "Credenciais URI LNDHub",
           "scan_qr": "Leia o código QR para importar esta carteira na Zeus ou BlueWallet.",
-          "description": "Permite conectar e usar esta conta em carteiras de celular como por ex a <0>Blue Wallet</0> e a <1>Zeus</1>.",
           "title": "Conectar sua carteira de celular"
         },
         "nostr": {
@@ -324,7 +319,8 @@
             "label": "Chave privada Nostr",
             "subtitle": "Cole sua chave privada Nostr ou gere uma nova. <0>Saiba mais »</0>",
             "success": "Chave privada Nostr criptografada e salva com sucesso.",
-            "failed_to_remove": "O nome da conta inserido não está correto, sua chave privada Nostr antiga foi restaurada."
+            "failed_to_remove": "O nome da conta inserido não está correto, sua chave privada Nostr antiga foi restaurada.",
+            "warning": "Tem certeza de que deseja remover sua chave privada nostr?\n\nDigite \"{{name}}\" para confirmar:"
           },
           "public_key": {
             "label": "Chave pública Nostr"
@@ -348,10 +344,10 @@
           "settings": {
             "label": "Configurações Nostr",
             "title": "Configurações Nostr",
-            "derive": "Gerar chave Nostr a partir de sua chave mestra",
-            "can_restore": "✅ Chave Nostr gerada a partir de sua chave mestra",
+            "derive": "Derivar da chave mestra",
+            "can_restore": "Sua chave Nostr atual foi gerada a partir da chave mestra.",
             "no_secret_key": "💡 Você ainda não tem uma chave mestra. <0>Clique aqui</0></div> para gerar sua chave mestra e suas chaves Nostr.",
-            "imported_key_warning": "⚠️ No momento, você está usando uma chave Nostr importada ou gerada aleatoriamente. Sua chave privada Nostr não pode ser restaurada por sua frase de recuperação, então lembre-se de fazer o backup de sua chave privada Nostr separadamente.",
+            "imported_key_warning": "No momento, você está usando uma chave Nostr importada ou gerada aleatoriamente. Sua chave privada Nostr não pode ser restaurada por sua frase de recuperação, então lembre-se de fazer o backup de sua chave privada Nostr separadamente.",
             "remove": "Remover esta chave",
             "nostr_address": {
               "description": "Você pode usar seu endereço relâmpago como um endereço NOSTR (NIP-05), permitindo que as pessoas encontrem facilmente o seu perfil Nostr.",
@@ -369,15 +365,6 @@
               "title": "Remover chaves Nostr",
               "description": "Remove as chaves Nostr desta carteira."
             }
-          },
-          "setup": {
-            "title": "Configure suas chaves Nostr",
-            "new": {
-              "label": "Criar uma nova conta Nostr",
-              "description": "Gere uma chave mestra com um par de novas chaves Nostr."
-            },
-            "description": "Escolha se você deseja criar uma nova conta Nostr (um par de chaves públicas e privadas) ou importar uma existente.",
-            "description2": "Toda conta Nostr criada na Alby vem com uma <0>Frase de recuperação</0> – um conjunto de 12 palavras que sempre permite que você recupere o acesso às suas chaves privadas Nostr."
           }
         },
         "remove": {
@@ -391,8 +378,7 @@
           "change_lnaddress": "Alterar em getalby.com"
         },
         "name": {
-          "title": "Nome de exibição",
-          "placeholder": "Nome da conta"
+          "title": "Nome de exibição"
         },
         "mnemonic": {
           "saved": "Chave mestra criptografada e salva com sucesso.",
@@ -416,7 +402,6 @@
             "description": "Use a frase de recuperação para importar sua chave mestra na Alby.",
             "button": "Importar chave mestra"
           },
-          "existing_nostr_key_notice": "ℹ️ Esta conta já possui uma chave privada nostr, logo não será gerada uma nova a partir desta chave mestra. Você pode gerenciar sua chave Nostr nas configurações de sua conta.",
           "lnurl": {
             "use_mnemonic": "Use a chave mestra para acessar aplicativos com tecnologia (LNURL Auth)",
             "title": "Login relâmpago"
@@ -429,13 +414,15 @@
               "nostr_key": "Você pode substituir as chaves Nostr geradas pela chave mestra por chaves Nostr que você já possua"
             },
             "secure": {
-              "title": "Proteja sua chave mestra",
-              "description": "Saiba o que é uma chave mestra e cuide das 12 palavras da frase de recuperação"
+              "title": "Proteger chave mestra",
+              "description": "Aprenda o que é uma chave mestra e cuide das 12 palavras da frase de recuperação"
             },
-            "nostr": "Importe uma conta Nostr",
             "import": {
-              "title": "Você já possui uma chave mestra?",
+              "title": "Importar chave mestra",
               "description": "Insira sua frase de recuperação para importar a chave mestra para esta carteira"
+            },
+            "import_nostr": {
+              "title": "Importe uma chave mestra"
             }
           },
           "inputs": {
@@ -786,9 +773,6 @@
       "umbrel": {
         "name": "Umbrel"
       },
-      "citadel": {
-        "name": "Citadel"
-      },
       "btcpay": {
         "name": "BTCPay"
       },
@@ -1006,7 +990,6 @@
     "advanced": "Mostrar configurações avançadas",
     "discover": "Explorar apps",
     "confirm_password": "Confirmar senha",
-    "accounts": "Minhas contas",
     "range": {
       "between": "entre {{min}} e {{max}}",
       "lessThanOrEqual": "≤ {{max}}",

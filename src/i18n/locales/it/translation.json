@@ -16,14 +16,10 @@
       },
       "test_connection": {
         "ready": "Fantastico, sei pronto per partire!",
-        "initializing": "Stiamo inizializzando il tuo account. Per favore attendi, questa operazione potrebbe impiegare alcuni minuti…",
         "connection_error": "Errore di connessione",
         "review_connection_details": "Controlla i dettagli della tua connessione.",
         "connection_taking_long": "Il tentativo di connessione richiede più tempo del previsto... I tuoi dati sono corretti? Il tuo nodo è raggiungibile?",
-        "contact_support": "Se hai bisogno di aiuto, contatta support@getalby.com",
-        "actions": {
-          "delete_edit_account": "Elimina l'account invalido e modificalo di nuovo"
-        }
+        "contact_support": "Se hai bisogno di aiuto, contatta support@getalby.com"
       }
     },
     "choose_connector": {
@@ -92,15 +88,7 @@
       },
       "citadel": {
         "page": {
-          "title": "Collega un nodo <0>Citadel</0>",
-          "instructions": "Attualmente non funziona se è abilitata la 2FA."
-        },
-        "password": {
-          "label": "Password Citadel"
-        },
-        "url": {
-          "label": "URL Citadel",
-          "placeholder": "http://citadel.local"
+          "title": "Collega un nodo <0>Citadel</0>"
         }
       },
       "umbrel": {
@@ -250,12 +238,10 @@
           "your_ln_address": "Il Tuo Indirizzo Lightning:",
           "waiting": "in attesa dei dati da LndHub...",
           "export_uri": "URI delle credenziali di LNDHub",
-          "scan_qr": "Importa questo wallet su Zeus o BlueWallet scansionando il QRCode.",
-          "screen_reader": "Esporta i dettagli dell'account"
+          "scan_qr": "Importa questo wallet su Zeus o BlueWallet scansionando il QRCode."
         },
         "name": {
-          "title": "Nome",
-          "placeholder": "Nome Account"
+          "title": "Nome"
         }
       }
     },
@@ -554,7 +540,6 @@
     "sats_one": "sat",
     "sats_other": "sats",
     "success_message": "{{amount}}{{fiatAmount}} inviati a {{destination}}",
-    "accounts": "Account",
     "discover": "Scopri",
     "confirm_password": "Conferma la Password"
   },

@@ -16,14 +16,10 @@
       },
       "test_connection": {
         "ready": "太棒了，你已準備就緒！",
-        "initializing": "正在初始化你的帳戶。請稍候，這可能需要一分鐘...",
         "connection_error": "連接錯誤",
         "review_connection_details": "請檢查你的連接詳細信息。",
         "connection_taking_long": "嘗試連接的時間比預期的要長...你的詳細信息是否正確？你的節點是否可訪問？",
-        "contact_support": "如果你需要幫助，請聯繫 support@getalby.com",
-        "actions": {
-          "delete_edit_account": "刪除無效帳戶並重新編輯"
-        }
+        "contact_support": "如果你需要幫助，請聯繫 support@getalby.com"
       },
       "pin_extension": {
         "title": "釘選你的Alby擴充套件",
@@ -131,15 +127,7 @@
       },
       "citadel": {
         "page": {
-          "title": "連接 <0>Citadel</0> 節點",
-          "instructions": "如果啟用了 2FA，這目前不可用。"
-        },
-        "password": {
-          "label": "Citadel 密碼"
-        },
-        "url": {
-          "label": "Citadel URL",
-          "placeholder": "http://citadel.local"
+          "title": "連接 <0>Citadel</0> 節點"
         }
       },
       "umbrel": {
@@ -249,11 +237,9 @@
     "accounts": {
       "account_view": {
         "name": {
-          "title": "名稱",
-          "placeholder": "帳戶名稱"
+          "title": "名稱"
         },
         "export": {
-          "screen_reader": "導出帳戶詳情",
           "waiting": "等待 LndHub 數據...",
           "your_ln_address": "你的閃電地址：",
           "export_uri": "LNDHub 憑據 URI",
@@ -296,15 +282,6 @@
             "imported_key_warning": "⚠️ 你當前正在使用導入的或隨機生成的 Nostr 密鑰。你的 Nostr 私鑰無法通過你的恢復短語恢復，因此請記住分別備份你的 Nostr 私鑰。",
             "remove": "移除現有的密鑰",
             "can_restore": "✅ Nostr 密鑰已從你的主密鑰派生"
-          },
-          "setup": {
-            "title": "設置你的 nostr 密鑰",
-            "description": "選擇是否要創建一個新的 nostr 帳戶（一對私鑰和公鑰）或導入現有帳戶。",
-            "description2": "在 Alby 中創建的每個 Nostr 帳戶都帶有<0>恢復短語</0>——一組12個單詞，始終保證重新獲得對你的 Nostr 私鑰的訪問。",
-            "new": {
-              "label": "創建新的 nostr 帳戶",
-              "description": "通過使用一對新的 nostr 密鑰生成主密鑰。"
-            }
           }
         },
         "remove": {
@@ -337,7 +314,6 @@
             "description": "通過使用恢復短語將主密鑰導入 Alby。",
             "title": "導入主密鑰"
           },
-          "existing_nostr_key_notice": "ℹ️ 該帳戶已設置 nostr 私鑰，因此不會從此主密鑰派生。你可以通過你的帳戶設置管理你的 nostr 密鑰。",
           "saved": "主密鑰已加密並成功保存。"
         },
         "remove_secretkey": {
@@ -584,9 +560,6 @@
     "distributions": {
       "title": "連接 {{name}}",
       "description": "選擇你想連接的{{name}}應用程序",
-      "citadel": {
-        "name": "Citadel"
-      },
       "btcpay": {
         "name": "BTCPay"
       },
@@ -689,7 +662,6 @@
     "confirm_password": "確認密碼",
     "success": "成功",
     "error": "錯誤",
-    "accounts": "帳戶",
     "discover": "發現",
     "connected_sites": "已連接的網站",
     "sats_one": "聰",

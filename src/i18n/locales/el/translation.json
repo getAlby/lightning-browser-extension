@@ -15,12 +15,8 @@
         }
       },
       "test_connection": {
-        "initializing": "Αρχικοποίηση του λογαριασμού σας. Παρακαλώ περιμένετε, αυτό μπορεί να πάρει ένα λεπτό...",
         "review_connection_details": "Παρακαλώ εξετάστε τις λεπτομέρειες σύνδεσης σας.",
         "contact_support": "Αν το χρειάζεστε παρακαλώ επικοινωνήστε με το support@getalby.com",
-        "actions": {
-          "delete_edit_account": "Διαγράψτε τον μη έγκυρο λογαριασμό και εισάγετε ξανά τα στοιχεία"
-        },
         "ready": "Φανταστικά, μπορείτε να ξεκινήσετε!",
         "connection_error": "Σφάλμα σύνδεσης",
         "connection_taking_long": "Η προσπάθεια σύνδεσης πήρε περισσότερο από το αναμενόμενο... Είναι τα στοιχεία σας σωστά; Υπάρχει πρόσβαση στον κόμβο σας;"
@@ -66,19 +62,10 @@
         }
       },
       "citadel": {
-        "url": {
-          "label": "Citadel URL",
-          "placeholder": "http://citadel.local"
-        },
         "page": {
           "title": "Σύνδεση σε κόμβο <0>Citadel</0>"
-        },
-        "password": {
-          "label": "Κωδικός Citadel"
         }
       },
-      "startos": {},
-      "btcpay": {},
       "lnd": {
         "page": {
           "title": "Σύνδεση στον LND κόμβο σας"
@@ -153,9 +140,6 @@
       "startos": {
         "name": "StartOS"
       },
-      "citadel": {
-        "name": "Citadel"
-      },
       "mynode": {
         "name": "myNode"
       }
@@ -181,11 +165,6 @@
             "title": "Ρυθμίσεις Nostr"
           },
           "title": "Nostr",
-          "setup": {
-            "new": {
-              "label": "Δημιουργία νέου λογαριασμού Nostr"
-            }
-          },
           "public_key": {
             "label": "Δημόσιο κλειδί Nostr"
           },
@@ -202,8 +181,7 @@
           }
         },
         "export": {
-          "your_ln_address": "Η Lightning διεύθυνση σας:",
-          "screen_reader": "Εξαγωγή λεπτομερειών λογαριασμού"
+          "your_ln_address": "Η Lightning διεύθυνση σας:"
         },
         "actions": {
           "export": "Εξαγωγή"
@@ -365,7 +343,6 @@
     "copied": "Έγινε αντιγραφή!",
     "discover": "Ανακάλυψε",
     "pasted": "Έγινε επικόλληση!",
-    "accounts": "Λογαριασμοί",
     "settings": "Ρυθμίσεις",
     "success": "Επιτυχία",
     "description_full": "Πλήρης περιγραφή"

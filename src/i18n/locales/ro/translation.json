@@ -16,14 +16,10 @@
       },
       "test_connection": {
         "ready": "Excelent, esti gata!",
-        "initializing": "Contul tau se initializeaza. Te rugam sa astepti, poate dura cateva minute...",
         "connection_error": "Eroare de conexiune",
         "review_connection_details": "Te rog sa verifici datele de conectare.",
         "connection_taking_long": "Incercarea de conectare dureaza mai mult decat ar trebui... Datele de conectare sunt corecte? Nodul tau este accesibil?",
-        "contact_support": "Daca ai nevoie de ajutor te rugam sa contactezi support@getalby.com",
-        "actions": {
-          "delete_edit_account": "Sterge contul invalid si editeaza din nou"
-        }
+        "contact_support": "Daca ai nevoie de ajutor te rugam sa contactezi support@getalby.com"
       }
     },
     "choose_path": {
@@ -125,15 +121,7 @@
       },
       "citadel": {
         "page": {
-          "title": "Conectare la <0>Citadel</0>",
-          "instructions": "Momentan nu functioneaza daca autentificarea in 2-factori (2FA) este activata."
-        },
-        "password": {
-          "label": "Parola Citadel"
-        },
-        "url": {
-          "label": "URL Citadel",
-          "placeholder": "http://citadel.local"
+          "title": "Conectare la <0>Citadel</0>"
         }
       },
       "umbrel": {
@@ -240,11 +228,9 @@
     "accounts": {
       "account_view": {
         "name": {
-          "title": "Nume",
-          "placeholder": "Nume cont"
+          "title": "Nume"
         },
         "export": {
-          "screen_reader": "Exporta date cont",
           "waiting": "in asteptarea datelor LNDHub...",
           "your_ln_address": "Adresa ta Lightning:",
           "export_uri": "Credentialele URI pentru LNDHub",
@@ -514,7 +500,6 @@
     "confirm_password": "",
     "success": "",
     "error": "",
-    "accounts": "",
     "discover": "",
     "connected_sites": "",
     "sats_one": "",

@@ -16,14 +16,10 @@
       },
       "test_connection": {
         "ready": "छान, तुम्ही पुढे जाण्यासाठी तयार आहात!",
-        "initializing": "तुमचे खाते सुरू करत आहे. कृपया प्रतीक्षा करा, हे पूर्ण होण्यासाठी एक मिनिट लागू शकतो...",
         "connection_error": "कनेक्ट करताना समस्या उद्भवली",
         "review_connection_details": "कृपया आपल्या कनेक्शन तपशीलांचे पुनरावलोकन करा.",
         "contact_support": "तुम्हाला मदत हवी असल्यास कृपया support@getalby.com येथे संपर्क साधा",
-        "connection_taking_long": "कनेक्ट करण्याचा प्रयत्न करताना अपेक्षेपेक्षा जास्त वेळ लागतो का... तुमचे तपशील बरोबर आहेत का? तुमचा नोड पोहोचण्यायोग्य आहे का? कृपया तपासून पहा.",
-        "actions": {
-          "delete_edit_account": "अवैध खाते हटवा आणि पुन्हा संपादित करा"
-        }
+        "connection_taking_long": "कनेक्ट करण्याचा प्रयत्न करताना अपेक्षेपेक्षा जास्त वेळ लागतो का... तुमचे तपशील बरोबर आहेत का? तुमचा नोड पोहोचण्यायोग्य आहे का? कृपया तपासून पहा."
       }
     },
     "choose_path": {
@@ -125,15 +121,7 @@
       },
       "citadel": {
         "page": {
-          "title": "<0>Citadel</0> node ला कनेक्ट करा",
-          "instructions": "This currently doesn't work if 2FA is enabled."
-        },
-        "password": {
-          "label": "Citadel Password"
-        },
-        "url": {
-          "label": "Citadel URL",
-          "placeholder": "http://citadel.local"
+          "title": "<0>Citadel</0> node ला कनेक्ट करा"
         }
       },
       "umbrel": {
@@ -240,11 +228,9 @@
     "accounts": {
       "account_view": {
         "name": {
-          "title": "नाव",
-          "placeholder": "खात्याचे नाव"
+          "title": "नाव"
         },
         "export": {
-          "screen_reader": "निर्यात खात्याचा तपशील",
           "waiting": "एलएनडीहब डेटाची वाट पाहत...",
           "your_ln_address": "आपला Lightning Address:",
           "export_uri": "LNDHub Credentials URI",
@@ -503,7 +489,6 @@
     "password": "पासवर्ड",
     "confirm_password": "पासवर्डची पुष्टी करा",
     "success": "यश",
-    "accounts": "खाते",
     "discover": "शोध",
     "connected_sites": "",
     "sats_one": "sat",

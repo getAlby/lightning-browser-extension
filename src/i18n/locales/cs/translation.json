@@ -16,14 +16,10 @@
       },
       "test_connection": {
         "ready": "Skvěle, vše je připraveno!",
-        "initializing": "Inicializace vašeho účtu. Prosím čekejte, chvíli to zabere...",
         "connection_error": "Chyba spojení",
         "review_connection_details": "Prosím překontrolujte nastavení vašeho spojení.",
         "connection_taking_long": "Připojování zabralo více, než bylo očekáváno... Zadali jste údaje o připojení správně? Je váš uzel dostupný?",
-        "contact_support": "Pokud potřebujete pomoct, prosím kontaktujte support@getalby.com",
-        "actions": {
-          "delete_edit_account": "Smažte nevalidní účet a změny proveďte znovu"
-        }
+        "contact_support": "Pokud potřebujete pomoct, prosím kontaktujte support@getalby.com"
       },
       "pin_extension": {
         "title": "Připnout rozšíření Alby",
@@ -97,15 +93,7 @@
       },
       "citadel": {
         "page": {
-          "title": "Připojení k uzlu <0>Citadel</0>",
-          "instructions": "Aktuálně nefunguje v případě, že máte zapnutou dvoufaktorovou autentizaci (2FA)."
-        },
-        "password": {
-          "label": "Heslo k Citadel"
-        },
-        "url": {
-          "label": "Citadel URL",
-          "placeholder": "http://citadel.local"
+          "title": "Připojení k uzlu <0>Citadel</0>"
         }
       },
       "umbrel": {
@@ -267,15 +255,13 @@
           "export": "Export"
         },
         "export": {
-          "screen_reader": "Exportovat detaily účtu",
           "export_uri": "LNDHub pověřovací URI",
           "waiting": "čekání na data z LndHub...",
           "your_ln_address": "Vaše Lightning adresa:",
           "scan_qr": "Importujte tuto peněženku do Zeus nebo BlueWallet naskenováním QR kódu."
         },
         "name": {
-          "title": "Jméno",
-          "placeholder": "Jméno účtu"
+          "title": "Jméno"
         },
         "mnemonic": {
           "generate": {
@@ -572,9 +558,6 @@
       },
       "umbrel": {
         "name": "Umbrel"
-      },
-      "citadel": {
-        "name": "Citadel"
       }
     }
   },
@@ -625,7 +608,6 @@
       "payment_failed": "Platba se nezdařila"
     },
     "confirm_password": "Potvrďte heslo",
-    "accounts": "Účty",
     "discover": "Objevovat"
   },
   "components": {

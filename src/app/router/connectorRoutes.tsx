@@ -21,7 +21,7 @@ import ConnectVoltage from "~/app/screens/connectors/ConnectVoltage";
 import ConnectCommando from "../screens/connectors/ConnectCommando";
 import albyhub from "/static/assets/icons/albyhub.png";
 import btcpay from "/static/assets/icons/btcpay.svg";
-import citadel from "/static/assets/icons/citadel.png";
+import citadel from "/static/assets/icons/citadel.svg";
 import core_ln from "/static/assets/icons/core_ln.svg";
 import eclair from "/static/assets/icons/eclair.jpg";
 import galoyBitcoinJungle from "/static/assets/icons/galoy_bitcoin_jungle.png";
@@ -33,6 +33,7 @@ import lnbits from "/static/assets/icons/lnbits.png";
 import lnd from "/static/assets/icons/lnd.png";
 import lndhubGo from "/static/assets/icons/lndhub_go.png";
 import mynode from "/static/assets/icons/mynode.png";
+import nirvati from "/static/assets/icons/nirvati.svg";
 import nwc from "/static/assets/icons/nwc.svg";
 import raspiblitz from "/static/assets/icons/raspiblitz.png";
 import startos from "/static/assets/icons/startos.png";
@@ -204,12 +205,12 @@ function getDistribution(key: string): ConnectorRoute {
 
 const distributionMap: { [key: string]: { logo: string; children: Route[] } } =
   {
-    citadel: {
-      logo: citadel,
+    nirvati: {
+      logo: nirvati,
       children: [
-        connectorMap["citadel"],
+        //connectorMap["citadel"],
         connectorMap["lnc"],
-        connectorMap["commando"],
+        //connectorMap["commando"],
         connectorMap["lnbits"],
       ],
     },
@@ -264,7 +265,7 @@ function getConnectorRoutes(): ConnectorRoute[] {
     getDistribution("startos"),
     getDistribution("raspiblitz"),
     getDistribution("mynode"),
-    getDistribution("citadel"),
+    getDistribution("nirvati"),
     connectorMap["btcpay"],
     connectorMap["voltage"],
     connectorMap[galoyPaths.blink],

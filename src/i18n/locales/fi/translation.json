@@ -19,14 +19,10 @@
       },
       "test_connection": {
         "ready": "Mahtavaa, olet valmis menemään!",
-        "initializing": "Tilin alustaminen. Odota, tämä voi kestää hetken...",
         "connection_error": "Yhteysvirhe",
         "review_connection_details": "Ole hyvä ja tarkista yhteystietosi.",
         "connection_taking_long": "Yhteyden muodostaminen kestää odotettua kauemmin... Ovatko tietosi oikein? Onko solmusi tavoitettavissa?",
-        "contact_support": "Jos tarvitset apua, ota yhteyttä osoitteeseen support@getalby.com",
-        "actions": {
-          "delete_edit_account": "Poista virheellinen tili ja muokkaa uudelleen"
-        }
+        "contact_support": "Jos tarvitset apua, ota yhteyttä osoitteeseen support@getalby.com"
       },
       "pin_extension": {
         "title": "Kiinnitä Alby-laajennuksesi",
@@ -101,15 +97,7 @@
       },
       "citadel": {
         "page": {
-          "title": "Yhdistä <0>Citadel</0> solmuun",
-          "instructions": "Tämä ei tällä hetkellä toimi, jos 2FA on käytössä."
-        },
-        "password": {
-          "label": "Citadel-salasana"
-        },
-        "url": {
-          "label": "Citadelin URL-osoite",
-          "placeholder": "http://citadel.local"
+          "title": "Yhdistä <0>Citadel</0> solmuun"
         }
       },
       "umbrel": {
@@ -316,14 +304,11 @@
             "description": "Oletko uusi Alby-laajennuksen käyttäjä? Tutustu oppaihimme, videoihimme ja selityksiimme",
             "title": "Aloita Alby-laajennuksen käyttö"
           },
-          "setup_keys": {},
           "receive_bitcoin": {
-            "title": "Vastaanota bitcoineja",
-            "description": "Rahoita tiliäsi ja vastaanota Lightning-osoitteesi tai laskun kautta"
+            "title": "Vastaanota bitcoineja"
           }
         },
         "upgrade_account": "Käytät vanhaa LNDHub-kokoonpanoa. <0>Yhdistä uudelleen</0> Alby-tilisi, jotta pääset käyttämään uusimpia ominaisuuksia.",
-        "no_transactions": "Ei vielä tapahtumia tällä tilillä.",
         "block_removed": "Käytössä {{host}}. Ole hyvä ja lataa verkkosivusto uudelleen.",
         "see_all": "Katso kaikki"
       },
@@ -556,7 +541,6 @@
           "title": "Avaintenhallinta",
           "saved": "Pääavain salattu ja tallennettu onnistuneesti.",
           "new": {
-            "nostr": "Tuo olemassa oleva Nostr-tili",
             "items": {
               "usage": "Voit tuoda ja käyttää samaa pääavainta <0>jossakin yhdistetyssä Albyn lompakossa</0>",
               "keys": "Pääavaimen avulla voit olla vuorovaikutuksessa protokollien, kuten <0>Nostr</0>, <0>Liquid</0> tai <0>Bitcoinin peruskerroksen</0> kanssa",
@@ -605,7 +589,6 @@
             "title": "Luo uusi pääavain",
             "button": "Luo pääavain"
           },
-          "existing_nostr_key_notice": "ℹ️ Tälle tilille on jo määritetty yksityinen Nostr-avain, eikä sitä johdeta tästä pääavaimesta. Voit hallita Nostr-avainta tilisi asetuksista.",
           "confirm": "Olen varmuuskopioinut palautuslauseen pääavaimelleni yksityiseen ja turvalliseen paikkaan."
         },
         "network": {
@@ -664,15 +647,6 @@
               "derived_keys": "Johda avain tililtä"
             }
           },
-          "setup": {
-            "description2": "Jokaisella Albyssa luodulla Nostr-tilillä on <0>palautuslause</0> – kahdentoista sanan merkkijono, jonka avulla voit aina saada takaisin pääsyn yksityisiin Nostr-avaimiisi.",
-            "title": "Määritä Nostr-avaimesi",
-            "description": "Valitse haluatko luoda uuden Nostr-tilin (yksityisen ja julkisen avaimen pari) tai tuoda olemassa olevan.",
-            "new": {
-              "description": "Luo pääavain uudella Nostr-avainparilla.",
-              "label": "Luo uusi Nostr-tili"
-            }
-          },
           "public_key": {
             "label": "Julkinen Nostr-avain"
           },
@@ -701,8 +675,6 @@
           "waiting": "odottamassa LndHub-tietoja...",
           "title": "Yhdistä mobiililompakkoon",
           "scan_qr": "Tuo tämä lompakko Zeusiin tai BlueWalletiin skannaamalla QRCode.",
-          "description": "Kirjaudu sisään getalby.comiin yhdistääksesi ja käyttääksesi tätä tiliä mobiililompakoissa, kuten <0>Zeus</0> ja <1>Blue Wallet</1>.",
-          "screen_reader": "Vie tilin yksityiskohdat",
           "export_uri": "LNDHub-tunnistetietojen URI"
         },
         "remove_secretkey": {
@@ -712,7 +684,6 @@
           "confirm": "Oletko varma, että haluat poistaa pääavaimesi?\n\nVahvista kirjoittamalla \"{{ name }}\":"
         },
         "name": {
-          "placeholder": "Tilin näytön nimi",
           "title": "Näytön nimi"
         },
         "description": "Asetukset, jotka liittyvät tähän yhdistetyn lompakon istuntoon. Jos muodostat yhteyden uudelleen, näppäimiin tai näyttönimeen liittyvät asetukset on määritettävä uudelleen.",
@@ -757,9 +728,6 @@
       "description": "Valitse, mihin {{name}}-sovellukseen haluat muodostaa yhteyden",
       "startos": {
         "name": "StartOS"
-      },
-      "citadel": {
-        "name": "Citadel"
       },
       "btcpay": {
         "name": "BTCPay"
