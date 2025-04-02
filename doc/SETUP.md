@@ -28,16 +28,14 @@ This guide helps you run the extension in desktop browsers.
 
 ### Run Development Build
 
-> To run a dev build with the mainnet API, add the following `ALBY_API_URL` environment variable to your command: `$ ALBY_API_URL="https://api.getalby.com" yarn run dev:[chrome|firefox]`
-
-- Start development build, which will automatically watch for file changes:
+- Start the development build with the mainnet API. The build will automatically watch for file changes:
 
   - Chrome\
-    `$ ALBY_API_URL="https://api.getalby.com" yarn run dev:chrome`
+    `$ yarn run dev:chrome`
   - Firefox\
-    `$ ALBY_API_URL="https://api.getalby.com" yarn run dev:firefox`
+    `$ yarn run dev:firefox`
   - Opera\
-     `$ ALBY_API_URL="https://api.getalby.com" yarn run dev:opera`
+     `$ yarn run dev:opera`
 
 ### Load extension into browser
 
