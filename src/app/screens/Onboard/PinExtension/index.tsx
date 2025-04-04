@@ -21,14 +21,14 @@ export default function PinExtension() {
       <img
         src={`assets/images/pin_your_alby_extension_${imageType}_${theme}.png`}
         alt="Pin your Alby extension"
-        className="h-28"
+        className="h-32"
       />
     );
   };
 
   return (
-    <div className="flex flex-col items-center">
-      <div className="shadow-lg rounded-xl bg-white dark:bg-surface-02dp p-12 max-w-lg">
+    <div className="flex flex-col items-center text-lg">
+      <div className="shadow-lg rounded-xl bg-white dark:bg-surface-02dp p-12 max-w-xl">
         <h1 className="text-2xl font-bold dark:text-white max-sm:text-center">
           {t("title")}
         </h1>
@@ -45,14 +45,14 @@ export default function PinExtension() {
               // eslint-disable-next-line react/jsx-key
               <img
                 src="assets/icons/puzzle.svg"
-                className="w-5 inline align-bottom dark:invert"
+                className="w-5 inline dark:invert"
               />,
               // eslint-disable-next-line react/jsx-key
               <br />,
               // eslint-disable-next-line react/jsx-key
               <img
                 src="assets/icons/alby_icon_yellow.svg"
-                className="w-5 inline align-bottom"
+                className="w-5 inline"
               />,
             ]}
           />
