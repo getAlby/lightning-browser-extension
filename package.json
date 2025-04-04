@@ -51,7 +51,7 @@
     "@vespaiach/axios-fetch-adapter": "^0.3.0",
     "axios": "^0.27.2",
     "bech32": "^2.0.0",
-    "bitcoinjs-lib": "^6.1.6",
+    "bitcoinjs-lib": "^6.1.7",
     "bolt11-signet": "1.4.1",
     "crypto-js": "^4.2.0",
     "dayjs": "^1.11.13",
