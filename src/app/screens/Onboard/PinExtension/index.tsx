@@ -37,17 +37,23 @@ export default function PinExtension() {
           {t("description")}
         </p>
         <div className="mt-4 w-full flex justify-center">{getImage()}</div>
-        <p className="text-gray-500 mt-6 dark:text-gray-400 flex items-center justify-center gap-2">
+        <p className="text-gray-500 mt-6 dark:text-gray-400">
           <Trans
             i18nKey={"explanation"}
             t={t}
             components={[
               // eslint-disable-next-line react/jsx-key
-              <img src="assets/icons/puzzle.svg" className="w-5 dark:invert" />,
+              <img
+                src="assets/icons/puzzle.svg"
+                className="w-5 inline dark:invert"
+              />,
               // eslint-disable-next-line react/jsx-key
               <br />,
               // eslint-disable-next-line react/jsx-key
-              <img src="assets/icons/alby_icon_yellow.svg" className="w-5" />,
+              <img
+                src="assets/icons/alby_icon_yellow.svg"
+                className="w-5 inline"
+              />,
             ]}
           />
         </p>
