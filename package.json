@@ -54,7 +54,7 @@
     "bitcoinjs-lib": "^6.1.6",
     "bolt11-signet": "1.4.1",
     "crypto-js": "^4.2.0",
-    "dayjs": "^1.11.12",
+    "dayjs": "^1.11.13",
     "dexie": "^3.2.7",
     "elliptic": "^6.6.1",
     "events": "^3.3.0",
