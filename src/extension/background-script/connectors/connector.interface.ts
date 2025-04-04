@@ -31,10 +31,12 @@ export interface ConnectorTransaction {
   /**
    * Settle date in UNIX milliseconds
    */
-  settleDate: number;
+  settleDate: number | null;
+  creationDate: number;
   totalAmount: number;
   displayAmount?: [number, ACCOUNT_CURRENCIES];
   type: "received" | "sent";
+  state?: "settled" | "pending" | "failed";
 }
 
 export interface MakeInvoiceArgs {

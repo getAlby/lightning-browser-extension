@@ -266,6 +266,7 @@ class Lnc implements Connector {
           preimage: invoice.rPreimage.toString(),
           settled: invoice.state === "SETTLED",
           settleDate: parseInt(invoice.settleDate) * 1000,
+          creationDate: parseInt(invoice.creationDate) * 1000,
           totalAmount: parseInt(invoice.value),
           type: "received",
         };
@@ -282,7 +283,7 @@ class Lnc implements Connector {
     const transactions: ConnectorTransaction[] = mergeTransactions(
       incomingInvoices,
       outgoingInvoices
-    );
+    ).filter((transaction) => transaction.settled);
 
     return {
       data: {
@@ -313,6 +314,7 @@ class Lnc implements Connector {
             payment_hash: payment.paymentHash,
             settled: true,
             settleDate: parseInt(payment.creationTimeNs) / 1_000_000,
+            creationDate: parseInt(payment.creationTimeNs) / 1_000_000,
             totalAmount: parseInt(payment.valueSat),
             type: "sent",
           };

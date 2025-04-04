@@ -15,6 +15,7 @@ import { useSettings } from "~/app/context/SettingsContext";
 import TestConnectionResultCard from "~/app/screens/Options/TestConnection/card";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
+
 import type { AccountInfo } from "~/types";
 
 export default function TestConnection() {
@@ -30,6 +31,7 @@ export default function TestConnection() {
   }>();
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const { getFormattedSats } = useSettings();
 
   const navigate = useNavigate();
   const { t } = useTranslation("translation", {
@@ -127,13 +129,18 @@ export default function TestConnection() {
                         </div>
                         <span className="text-sm">
                           <Trans
-                            i18nKey={"node_required"}
+                            i18nKey={"setup_wallet"}
                             t={tCommon}
+                            values={{
+                              max_account_balance: getFormattedSats(
+                                account?.limits?.max_account_balance || 0
+                              ),
+                            }}
                             components={[
                               // eslint-disable-next-line react/jsx-key
                               <Hyperlink
                                 className="underline"
-                                href="https://getalby.com/onboarding/node/new"
+                                href="https://getalby.com/node/embrace_albyhub"
                                 target="_blank"
                                 rel="noopener nofollow"
                               />,

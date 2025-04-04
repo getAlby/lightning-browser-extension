@@ -13,20 +13,20 @@
         "confirm_password": {
           "label": "Vergewisser dich, dass du es richtig eingegeben hast:"
         },
-        "description1": "Lege ein Password fest, um die Alby Erweiterung in diesem Browser zu entsperren",
+        "description1": "Lege ein Passcode fest, um die Alby-Erweiterung in diesem Browser zu entsperren",
         "description2": "Das Password zum Entsperren kann nicht wiederhergestellt, aber geändert werden ",
-        "title": "Passwort zum Entsperren der Erweiterung festlegen"
+        "title": "Passcode zum Entsperren der Erweiterung festlegen"
       },
       "test_connection": {
         "review_connection_details": "Bitte überprüfe deine Verbindungsdaten.",
+        "ready": "Großartig, du kannst jetzt loslegen!",
+        "connection_error": "Verbindungsfehler",
+        "connection_taking_long": "Der Verbindungsversuch dauert länger als erwartet... Sind deine Angaben korrekt? Ist deine Node erreichbar?",
+        "contact_support": "Wenn du Hilfe benötigst, wende dich bitte an support@getalby.com",
         "actions": {
           "delete_edit_account": "Ungültiges Konto löschen und erneut bearbeiten"
         },
-        "ready": "Großartig, du kannst jetzt loslegen!",
-        "initializing": "Dein Konto wird initialisiert. Bitte warte, dies kann eine Minute dauern...",
-        "connection_error": "Verbindungsfehler",
-        "connection_taking_long": "Der Verbindungsversuch dauert länger als erwartet... Sind deine Angaben korrekt? Ist deine Node erreichbar?",
-        "contact_support": "Wenn du Hilfe benötigst, wende dich bitte an support@getalby.com"
+        "initializing": "Initialisierung deiner Brieftasche. Bitte warte, dies kann eine Minute dauern..."
       },
       "pin_extension": {
         "title": "Die Alby Erweiterung anpinnen",
@@ -231,7 +231,7 @@
         }
       },
       "umbrel_lightning_node": {
-        "title": "Lightning Node"
+        "title": "Lightning-Node"
       },
       "galoy": {
         "sms_code": {
@@ -322,8 +322,8 @@
     },
     "unlock": {
       "unlock_error": {
-        "link": "Jetzt zurücksetzen und ein neues Konto hinzufügen",
-        "help": "Deine Kontodaten werden mit deinem Entsperr-Passcode verschlüsselt. Wenn du deinen Entsperr-Passcode wirklich vergessen hast, musst du dein Lightning Account zurücksetzen und erneut hinzufügen."
+        "link": "Jetzt zurücksetzen und eine neue Wallet hinzufügen",
+        "help": "Deine Walletdaten werden mit deinem Freischalt-Passcode verschlüsselt. Wenn du dein Freischaltcode wirklich vergessen hast, musst du das Lightning-Konto zurücksetzen und erneut hinzufügen."
       },
       "errors": {
         "invalid_password": "Ungültiger Passcode"
@@ -420,7 +420,6 @@
         "is_blocked_hint": "Alby ist derzeit auf dem {{host}} deaktiviert",
         "block_removed": "{{host}} aktiviert. Bitte lade die Webseite neu.",
         "see_all": "Alle sehen",
-        "no_transactions": "Noch keine Transaktionen für dieses Konto.",
         "actions": {
           "get_started": {
             "title": "Erste Schritte mit Alby Extension",
@@ -428,16 +427,15 @@
           },
           "receive_bitcoin": {
             "title": "Bitcoin erhalten",
-            "description": "Zahle auf dein Konto ein und empfange über deine Lightning Adresse oder eine Rechnung"
+            "description": "Deine Wallet aufladen und über deine Blitzadresse oder eine Rechnung erhalten"
           },
           "setup_keys": {
             "title": "Master Key einrichten",
-            "description": "Erstelle einen Master Key für Bitcoin, Nostr und Liquid oder importiere ein bestehendes Nostr-Konto."
+            "description": "Erstelle einen Master-Schlüssel für Bitcoin, Nostr und Liquid, oder importiere deinen bestehenden Nostr-Schlüssel."
           }
         },
         "upgrade_account": "Du verwendest die alte LNDHub-Einstellung. <0>Bitte verbinde dich erneut</0> mit deinem Alby-Konto, um Zugang zu den neuesten Funktionen zu erhalten.",
-        "using_fee_credits": "Schließe deine Einrichtung ab und verbinde deine Geldbörse mit deinem <0>Alby-Konto</0> für unbegrenzte Zahlungen. Bis deine Einrichtung abgeschlossen ist, kannst du bis zu {{max_account_balance}} sats als <1>Gebührenguthaben</1> erhalten",
-        "using_shared_node": "Die von dir genutzte gemeinsame Wallet wird zugunsten der Alby Hub Wallet veraltet sein. Um weiterhin Zahlungen zu senden und zu empfangen, <0>richte deine Geldbörse</0> bis zum 3. Januar 2025 ein."
+        "no_transactions": "Noch keine Transaktionen für diese Brieftasche."
       },
       "allowance_view": {
         "sats": "sats",
@@ -455,16 +453,16 @@
       "account_view": {
         "name": {
           "title": "Anzeigename",
-          "placeholder": "Konto Anzeigename"
+          "placeholder": "Wallet Display Name"
         },
         "export": {
-          "screen_reader": "Kontodaten exportieren",
           "waiting": "Warten auf LndHub Daten...",
           "your_ln_address": "Deine Lightning Adresse:",
           "export_uri": "LNDHub Anmeldeinformationen URI",
           "scan_qr": "Importiere diese Wallet in Zeus oder BlueWallet, indem du den QRCode scannst.",
           "title": "Verbindung mit Mobile Wallet",
-          "description": "Ermöglicht es dir, dieses Konto mit mobilen Wallets wie <0>Blue Wallet</0> und <0>Zeus</0> zu verbinden und zu verwenden."
+          "description": "Melde dich bei getalby.com an, um diese Wallet mit mobilen Wallets wie <0>Zeus</0> und <1>Blue Wallet</1> zu verbinden und zu verwenden.",
+          "screen_reader": "Details zur Wallet exportieren"
         },
         "nostr": {
           "title": "Nostr",
@@ -474,7 +472,7 @@
             "success": "Der private Schlüssel von Nostr wurde erfolgreich verschlüsselt und gespeichert.",
             "successfully_removed": "Der private Schlüssel von Nostr wurde erfolgreich entfernt.",
             "label": "Nostr privater Schlüssel",
-            "failed_to_remove": "Der eingegebene Kontoname stimmt nicht überein, dein alter privater Nostr-Schlüssel wurde wiederhergestellt.",
+            "failed_to_remove": "Der eingegebene Kontoname stimmt nicht überein, dein alter privater Schlüssel von Nostr wurde wiederhergestellt.",
             "warning": "Bist du dir sicher, dass du deinen privaten Nostr-Schlüssel entfernen möchtest?\n\nGebe \"{{name}}\" zur Bestätigung ein:"
           },
           "public_key": {
@@ -482,11 +480,11 @@
           },
           "generate_keys": {
             "title": "Erzeugen eines neuen Nostr-Schlüssels",
-            "screen_reader": "Erzeuge einen neuen Nostr-Schlüssel für dein Konto",
-            "hint": "Du kannst einen zufälligen Satz von Nostr Schlüsseln generieren oder Schlüssel aus diesen Kontodaten ableiten (unter Verwendung einer signierten kanonischen Phrase). <0>Mehr erfahren\"</0>",
+            "screen_reader": "Erzeugen Sie einen neuen Nostr-Schlüssel für deine Wallet",
+            "hint": "Du kannst einen zufälligen Schlüssel oder einen abgeleiteten Schlüssel aus dieser Wallet generieren (unter Verwendung einer signierten kanonischen Phrase). <0>Mehr erfahren\"</0>",
             "actions": {
               "random_keys": "Generieren eines Zufallsschlüssels",
-              "derived_keys": "Ableitung eines Schlüssels aus dem Konto"
+              "derived_keys": "Ableitung eines Schlüssels aus der Wallet"
             }
           },
           "actions": {
@@ -522,19 +520,10 @@
               },
               "title": "Nostr-Adresse"
             }
-          },
-          "setup": {
-            "title": "Einrichten der Nostr-Schlüssel",
-            "description": "Wähle, ob du ein neues Nostr-Konto (ein Paar privater und öffentlicher Schlüssel) erstellen oder ein bestehendes importieren möchtest.",
-            "new": {
-              "description": "Generiere einen Hauptschlüssel mit einem Paar neuer Nostr-Schlüssel.",
-              "label": "Ein neues Nostr-Konto erstellen"
-            },
-            "description2": "Jedes Nostr-Konto, das in Alby erstellt wird, wird mit einer <0>Wiederherstellungsphrase</0> geliefert - eine Reihe von 12 Wörtern, die es dir ermöglicht, jederzeit wieder Zugang zu deinen privaten Nostr-Schlüsseln zu erhalten."
           }
         },
         "remove": {
-          "error": "Der eingegebene Kontoname stimmte nicht überein.",
+          "error": "Der eingegebene Walletname stimmte nicht überein.",
           "subtitle": "Alle verknüpften Berechtigungen und Budgets werden gelöscht.",
           "title": "Diese Wallet entfernen",
           "confirm": "Bist du dir sicher, dass du deine Wallet entfernen willst?\n\n⚠️ Wenn du fortfährst, werden alle zugehörigen Schlüssel (Master Key, Nostr, etc.) gelöscht. Bitte vergewissere dich, dass du eine Sicherungskopie erstellt hast, denn es gibt keine andere Möglichkeit, sie wiederherzustellen.\n\nGebe \"{{name}}\" zur Bestätigung ein:"
@@ -553,7 +542,7 @@
             },
             "save": "Hauptschlüssel speichern",
             "button": "Phrase anzeigen",
-            "description": "Notiere deine Wiederherstellungsphrase, um deinen Hauptschlüssel auf einem neuen Gerät wiederherstellen zu können oder für den Fall, dass du den Zugriff auf dein Konto verlierst.",
+            "description": "Notiere dir die Wiederherstellungsphrase, um deinen Hauptschlüssel auf einem neuen Gerät wiederherstellen zu können oder für den Fall, dass du den Zugang zu deinem Guthaben verlierst.",
             "title": "Sichere deine Wiederherstellungsphrase",
             "warning": "Vergesse nicht, deine Wiederherstellungsphrase zu sichern! Wird sie nicht gesichert, kann dies dazu führen, dass du den Zugang zu deinem Master Key, dein Nostr-Identität oder den von dir mit diesem Schlüssel verwalteten Assets dauerhaft verlierst."
           },
@@ -568,7 +557,6 @@
             "description": "Verwende die Wiederherstellungsphrase, um deinen Hauptschlüssel in Alby zu importieren.",
             "button": "Hauptschlüssel importieren"
           },
-          "existing_nostr_key_notice": "ℹ️ Für dieses Konto ist bereits ein privater Nostr-Schlüssel festgelegt, der nicht von diesem Hauptschlüssel abgeleitet wird. Du kannst dein Nostr-Schlüssel über deine Kontoeinstellungen verwalten.",
           "lnurl": {
             "title": "Anmeldung mit Lightning",
             "use_mnemonic": "Hauptschlüssel für die Anmeldung bei Lightning-Anwendungen verwenden (LNURL Auth)"
@@ -590,7 +578,7 @@
             },
             "import_nostr": {
               "title": "Nostr Schlüssel importieren",
-              "description": "Hast du bereits eine Nostr-Identität? Importiere es, um es mit diesem Konto zu verwenden"
+              "description": "Hast du bereits eine Nostr-Identität? Importiere deinen, um sie mit deiner Wallet zu verwenden"
             }
           },
           "inputs": {
@@ -603,7 +591,8 @@
           },
           "error_confirm": "Bitte vergewisser dich, dass du eine Sicherungskopie der Wiederherstellungsphrase erstellt hast.",
           "confirm": "Ich habe die Wiederherstellungsphrase zu meinem Hauptschlüssel an einem privaten und sicheren Ort gesichert.",
-          "title": "Schlüsselverwaltung"
+          "title": "Schlüsselverwaltung",
+          "existing_nostr_key_notice": "ℹ️ Diese Wallet hat bereits einen privaten Nostr-Schlüssel und wird nicht von diesem Master Key abgeleitet. Du kannst deinen Nostr-Schlüssel über Ihre Wallet-Einstellungen verwalten."
         },
         "remove_secretkey": {
           "title": "Hauptschlüssel entfernen",
@@ -934,7 +923,7 @@
     },
     "transactions": {
       "title": "Transaktionen",
-      "description": "Buchungen für dieses Konto"
+      "description": "Transaktionen für diese Wallet"
     },
     "distributions": {
       "title": "Verbinden mit {{name}}",
@@ -959,8 +948,8 @@
       }
     },
     "confirm_add_account": {
-      "title": "Konto hinzufügen",
-      "content": "Diese Webseite möchte ein Konto hinzufügen ({{connector}}):",
+      "title": "Wallet hinzufügen",
+      "content": "Diese Website möchte eine Wallet ({{connector}}) hinzufügen:",
       "tor_info": "Um sich über das TOR-Netzwerk zu verbinden, musst du zunächst die Alby-Begleit-App installieren:"
     },
     "on_chain": {
@@ -1187,7 +1176,9 @@
       "open_location": "Webseite öffnen",
       "payment_hash": "Zahlung hHash",
       "date_time": "Datum & Uhrzeit",
-      "no_transactions": "Noch keine Transaktionen."
+      "no_transactions": "Noch keine Transaktionen.",
+      "failed": "Gescheitert",
+      "sending": "Senden von"
     },
     "budget_control": {
       "remember": {
@@ -1275,7 +1266,6 @@
     "message": "Nachricht",
     "response": "Antwort",
     "success_message": "{{amount}}{{fiatAmount}} sind auf dem Weg zum {{destination}}",
-    "accounts": "Konten",
     "range": {
       "between": "zwischen {{min}} und {{max}}",
       "lessThanOrEqual": "≤ {{max}}",
@@ -1313,11 +1303,11 @@
     "details": "Einzelheiten",
     "general": "Allgemein",
     "wallet_settings": "Wallet-Einstellungen",
-    "node_required": "Schließe deine Einrichtung von deiner Geldbörse ab, damit du <0>hier</0> unbegrenzt Zahlungen senden und empfangen kannst. Bis dahin kannst du nur bis zu 50.000 Sats als <1>Gebührenguthaben</1> empfangen."
+    "setup_wallet": "Beende deine <0>Alby-Kontoeinrichtung</0> für unbegrenzte Zahlungen. Bis deine Einrichtung abgeschlossen ist, kannst du bis zu {{max_account_balance}} als <1>Gebührengutschrift</1> erhalten"
   },
   "permissions": {
     "commando": {
-      "bkpr-listbalances": "Liste aller aktuellen und historischen Kontostände",
+      "bkpr-listbalances": "Liste aller aktuellen und historischen Wallets",
       "checkmessage": "Überprüfe, ob die Signatur von einem bestimmten Node erstellt wurde",
       "fundchannel": "Öffne einen Zahlungskanal mit einem Peer, indem du eine Finanzierungstransaktion durchführst",
       "getroute": "Finde die beste Route für die Zahlung an eine Lightning Node",
@@ -1407,7 +1397,7 @@
     },
     "webln": {
       "getbalance": {
-        "description": "Lese den Saldo deines Kontos ab",
+        "description": "Lesen Sie den Kontostand deiner Wallet ab",
         "title": "das Gleichgewicht erhalten"
       }
     },

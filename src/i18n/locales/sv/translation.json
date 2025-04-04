@@ -16,14 +16,10 @@
       },
       "test_connection": {
         "ready": "Fantastiskt, du är redo att börja!",
-        "initializing": "Initialiserar ditt konto. Vänta, det kan ta någon minut...",
         "connection_error": "Anslutningsfel",
         "review_connection_details": "Se över dina anslutningsinställningar.",
         "connection_taking_long": "Anslutningen tar längre tid än förväntat... Är inställningarna korrekta? Är din nod nåbar?",
-        "contact_support": "Om du behöver hjälp, kontakta support@getalby.com",
-        "actions": {
-          "delete_edit_account": "Radera ogiltigt konto och redigera igen"
-        }
+        "contact_support": "Om du behöver hjälp, kontakta support@getalby.com"
       },
       "pin_extension": {
         "title": "Fäst din Alby extension",
@@ -221,8 +217,7 @@
       "default_view": {
         "is_blocked_hint": "Alby är för tillfället avstängt hos {{host}}",
         "block_removed": "Aktiverade {{host}}. Ladda om webbplatsen.",
-        "see_all": "Se alla",
-        "no_transactions": "Inga transaktioner för detta konto ännu."
+        "see_all": "Se alla"
       }
     },
     "accounts": {
@@ -264,26 +259,15 @@
             "can_restore": "✅ Nostr-nyckel härledd från din huvudnyckel",
             "no_secret_key": "💡 Du har ingen huvudnyckel än. <0>Klicka här</0></div> för att skapa din huvudnyckel och härleda dina Nostr-nycklar.",
             "remove": "Ta bort nuvarande nycklar"
-          },
-          "setup": {
-            "description": "Välj Om du vill skapa ett nytt Nostr-konto (ett par privata och offentliga nycklar) eller importera ett befintligt.",
-            "description2": "Varje Nostr-konto som skapas i Alby kommer med en <0>Återställningsfras</0> – en uppsättning av 12 ord som alltid låter dig återfå åtkomst till dina privata Nostr-nycklar.",
-            "title": "Ställ in dina Nostr-nycklar",
-            "new": {
-              "label": "Skapa ett nytt Nostr-konto",
-              "description": "Generera en huvudnyckel med ett par nya Nostr-nycklar."
-            }
           }
         },
         "remove": {
           "error": "Det angivna kontonamnet matchade inte."
         },
         "name": {
-          "title": "Visnings Namn",
-          "placeholder": "Konto visningsnamn"
+          "title": "Visnings Namn"
         },
         "export": {
-          "screen_reader": "Exportera konto detaljer",
           "waiting": "väntar på LndHub-data...",
           "your_ln_address": "Din Lightning Address:",
           "export_uri": "LNDHub-inloggnings-URI",
@@ -295,7 +279,6 @@
         },
         "mnemonic": {
           "saved": "Huvudnyckeln krypterad och sparad.",
-          "existing_nostr_key_notice": "ℹ️ Detta konto har redan en nostr privat nyckeluppsättning och kommer inte att härledas från denna huvudnyckel. Du kan hantera din Nostr-nyckel från dina kontoinställningar.",
           "generate": {
             "title": "Generera ny huvudnyckel",
             "button": "Generera huvudnyckel",
@@ -802,7 +785,6 @@
     },
     "sats_other": "sats",
     "sats_one": "sat",
-    "accounts": "Konton",
     "discover": "Upptäcka",
     "success_message": "{{amount}}{{fiatAmount}} skickat till {{destination}}",
     "response": "Svar",
