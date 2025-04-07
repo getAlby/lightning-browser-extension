@@ -1,4 +1,3 @@
-import fetchAdapter from "@vespaiach/axios-fetch-adapter";
 import axios from "axios";
 import type { Battery } from "~/types";
 
@@ -34,7 +33,7 @@ async function handleQuestionPage(questionId: string): Promise<Battery | null> {
   const questionResponse = await axios.get(
     // The filter can be generated here: https://api.stackexchange.com/docs/users-by-ids
     `https://api.stackexchange.com/2.2/questions/${questionId}?site=stackoverflow&filter=!9bOY8fLl6`,
-    { adapter: fetchAdapter }
+    { adapter: "fetch" }
   );
 
   if (!questionResponse) {
@@ -56,7 +55,7 @@ async function handleQuestionPage(questionId: string): Promise<Battery | null> {
   const answerResponse = await axios.get(
     // The filter can be generated here: https://api.stackexchange.com/docs/users-by-ids
     `https://api.stackexchange.com/2.2/answers/${questionData.accepted_answer_id}?site=stackoverflow&filter=!-)QWsbXSB(JQ`,
-    { adapter: fetchAdapter }
+    { adapter: "fetch" }
   );
 
   if (!answerResponse) {
@@ -81,7 +80,7 @@ async function handleProfilePage(userId: string): Promise<Battery | null> {
   const response = await axios.get(
     // The filter can be generated here: https://api.stackexchange.com/docs/users-by-ids
     `https://api.stackexchange.com/2.2/users/${userId}?site=stackoverflow&filter=!-B3yqvQ2YYGK1t-Hg_ydU`,
-    { adapter: fetchAdapter }
+    { adapter: "fetch" }
   );
 
   if (!response) {

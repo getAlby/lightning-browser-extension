@@ -4,7 +4,6 @@ import Container from "@components/Container";
 import ContentMessage from "@components/ContentMessage";
 import PublisherCard from "@components/PublisherCard";
 import ResultCard from "@components/ResultCard";
-import fetchAdapter from "@vespaiach/axios-fetch-adapter";
 import axios from "axios";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -55,7 +54,7 @@ function LNURLChannel() {
           remoteid: nodeId,
           private: privateChannel ? 1 : 0,
         },
-        adapter: fetchAdapter,
+        adapter: "fetch",
       });
 
       if (axios.isAxiosError(callbackResponse)) {

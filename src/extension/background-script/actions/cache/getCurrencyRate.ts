@@ -1,4 +1,3 @@
-import fetchAdapter from "@vespaiach/axios-fetch-adapter";
 import axios from "axios";
 import dayjs from "dayjs";
 import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
@@ -38,7 +37,7 @@ const getFiatBtcRate = async (currency: CURRENCIES): Promise<number> => {
     response = await axios.get(
       `https://api.yadio.io/exrates/${currency.toLowerCase()}`,
       {
-        adapter: fetchAdapter,
+        adapter: "fetch",
       }
     );
     const data = await response?.data;
@@ -49,7 +48,7 @@ const getFiatBtcRate = async (currency: CURRENCIES): Promise<number> => {
     response = await axios.get(
       `https://api.coindesk.com/v1/bpi/currentprice/${currency.toLowerCase()}.json`,
       {
-        adapter: fetchAdapter,
+        adapter: "fetch",
       }
     );
     const data = await response?.data;
@@ -59,7 +58,7 @@ const getFiatBtcRate = async (currency: CURRENCIES): Promise<number> => {
   response = await axios.get(
     `https://getalby.com/api/rates/${currency.toLowerCase()}.json`,
     {
-      adapter: fetchAdapter,
+      adapter: "fetch",
     }
   );
   const data = await response?.data;

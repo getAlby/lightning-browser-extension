@@ -2,7 +2,6 @@ import ConnectorForm from "@components/ConnectorForm";
 import Input from "@components/form/Input";
 import Select from "@components/form/Select";
 import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
-import fetchAdapter from "@vespaiach/axios-fetch-adapter";
 import axios from "axios";
 import { useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
@@ -92,7 +91,7 @@ export default function ConnectGaloy(props: Props) {
 
       const { data: meData } = await axios.post(url, meQuery, {
         headers: headers,
-        adapter: fetchAdapter,
+        adapter: "fetch",
       });
 
       if (meData.error || meData.errors) {
