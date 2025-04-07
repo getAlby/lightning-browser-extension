@@ -64,7 +64,7 @@ const enable = async (message: MessageAllowanceEnable, sender: Sender) => {
 
           await db.allowances.update(allowance.id, {
             enabled: true,
-            enabledFor,
+            enabledFor: Array.from(enabledFor),
             name: message.origin.name,
             imageURL: message.origin.icon,
           });
