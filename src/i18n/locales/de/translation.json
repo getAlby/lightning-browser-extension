@@ -429,10 +429,7 @@
             "title": "Bitcoin erhalten",
             "description": "Deine Wallet aufladen und über deine Blitzadresse oder eine Rechnung erhalten"
           },
-          "setup_keys": {
-            "title": "Master Key einrichten",
-            "description": "Erstelle einen Master-Schlüssel für Bitcoin, Nostr und Liquid, oder importiere deinen bestehenden Nostr-Schlüssel."
-          }
+          "setup_keys": {}
         },
         "upgrade_account": "Du verwendest die alte LNDHub-Einstellung. <0>Bitte verbinde dich erneut</0> mit deinem Alby-Konto, um Zugang zu den neuesten Funktionen zu erhalten.",
         "no_transactions": "Noch keine Transaktionen für diese Brieftasche."

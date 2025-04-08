@@ -296,9 +296,7 @@
           "receive_bitcoin": {
             "title": "Deposite bitcoin"
           },
-          "setup_keys": {
-            "title": "Configurar chave mestra"
-          }
+          "setup_keys": {}
         }
       }
     },
