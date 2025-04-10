@@ -1,10 +1,12 @@
 import { PopiconsFaceSmileLine, PopiconsKeyLine } from "@popicons/react";
 import { useTranslation } from "react-i18next";
+import Alert from "~/app/components/Alert";
 import ConfirmOrCancel from "~/app/components/ConfirmOrCancel";
 import Container from "~/app/components/Container";
 import PublisherCard from "~/app/components/PublisherCard";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import { useAccount } from "~/app/context/AccountContext";
+import { useAccounts } from "~/app/context/AccountsContext";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import PopiconsCircleInfoLine from "~/app/icons/popicons/CircleInfoLine";
 import { NO_KEYS_ERROR, USER_REJECTED_ERROR } from "~/common/constants";
@@ -18,6 +20,7 @@ export default function Onboard() {
   const action = navState.action as string;
 
   const { account: authAccount } = useAccount();
+  const { accounts } = useAccounts();
 
   const { t } = useTranslation("translation", {
     keyPrefix: "onboard",
@@ -34,6 +37,11 @@ export default function Onboard() {
   };
 
   const keyPrefix = actionToKeyMap[action] || "default";
+  const hasNostrAction = action === "public/nostr/enable";
+
+  const accountsWithKeys = Object.values(accounts).filter((account) =>
+    hasNostrAction ? !!account.nostrPrivateKey : !!account.mnemonic
+  );
 
   async function keySetup() {
     openOptions(`accounts/${authAccount?.id}/secret-key/new`);
@@ -52,6 +60,10 @@ export default function Onboard() {
     defaultValue: t("default.request2"),
   });
 
+  const alreadyHasKeyLabel = hasNostrAction
+    ? t("labels.nostr_key")
+    : t("labels.mnemonic");
+
   return (
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
       <ScreenHeader title={t("title")} />
@@ -63,7 +75,28 @@ export default function Onboard() {
             url={origin.host}
             isSmall={false}
           />
-          <div className="text-gray-600 dark:text-neutral-400 text-sm pt-6">
+
+          <div className="text-gray-600 dark:text-neutral-400 text-sm pt-4">
+            {accountsWithKeys.length > 0 && (
+              <div className="mb-3">
+                <Alert type="info">
+                  {accountsWithKeys.length === 1 ? (
+                    <>
+                      {t("messages.single_account_with_key", {
+                        accountName: accountsWithKeys[0].name,
+                        keyType: alreadyHasKeyLabel,
+                      })}
+                    </>
+                  ) : (
+                    <>
+                      {t("messages.multiple_accounts_with_key", {
+                        keyType: alreadyHasKeyLabel,
+                      })}
+                    </>
+                  )}
+                </Alert>
+              </div>
+            )}
             <div className="mb-3 flex gap-2 items-center">
               <PopiconsKeyLine className="w-5 h-5" />
               <p>{request1}</p>

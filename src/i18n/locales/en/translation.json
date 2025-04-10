@@ -1109,6 +1109,14 @@
         "request1": "This website requires Bitcoin on-chain interaction",
         "request2": "Setup your Master Key to get an on-chain key"
       },
+      "messages": {
+        "single_account_with_key": "{{accountName}} already has {{keyType}} set up. You can use it by switching account from the top right dropdown.",
+        "multiple_accounts_with_key": "Some of your accounts already have {{keyType}} set up. You can use them by switching your account from the top right dropdown."
+      },
+      "labels": {
+        "mnemonic": "a mnemonic",
+        "nostr_key": "a Nostr key"
+      },
       "request3": "Setup is quick and easy",
       "actions": {
         "start_setup": "Start Setup"
