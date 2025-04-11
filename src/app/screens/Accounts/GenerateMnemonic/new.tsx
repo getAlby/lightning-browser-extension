@@ -1,8 +1,7 @@
-import Container from "@components/Container";
 import {
   PopiconsDownloadLine,
+  PopiconsKeyLine,
   PopiconsOstrichLine,
-  PopiconsShieldLine,
 } from "@popicons/react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -46,7 +45,7 @@ function MnemonicExplanation() {
   }, []);
 
   return (
-    <Container maxWidth="md">
+    <div className="flex max-w-3xl mx-auto">
       <ContentBox>
         <div className="flex flex-col gap-4">
           <h1 className="font-bold text-2xl dark:text-white">{t("title")}</h1>
@@ -60,9 +59,11 @@ function MnemonicExplanation() {
         <div className="flex flex-row justify-between gap-x-6">
           <CardButtonGroup>
             <CardButton
-              title={t("secure.title")}
-              description={t("secure.description")}
-              icon={PopiconsShieldLine}
+              title={hasMnemonic ? t("secure.title") : t("create.title")}
+              description={
+                hasMnemonic ? t("secure.description") : t("create.description")
+              }
+              icon={PopiconsKeyLine}
               onClick={() => setSelectedCard("backup")}
             />
             <CardButton
@@ -99,7 +100,7 @@ function MnemonicExplanation() {
           />
         </div>
       </ContentBox>
-    </Container>
+    </div>
   );
 }
 

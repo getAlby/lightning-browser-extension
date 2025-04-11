@@ -31,7 +31,8 @@ export default function PublisherCard({
     <div
       className={classNames(
         isSmall ? "p-2" : "flex-col justify-center p-4",
-        isCard && "drop-shadow rounded-lg mt-4 bg-white dark:bg-surface-02dp",
+        isCard &&
+          "drop-shadow rounded-lg mt-4 bg-white dark:bg-surface-02dp border border-gray-200 dark:border-neutral-800",
         "flex items-center"
       )}
     >
@@ -71,8 +72,7 @@ export default function PublisherCard({
             title={url}
             target="_blank"
             className={classNames(
-              "text-gray-500 dark:text-neutral-500 overflow-hidden text-ellipsis whitespace-nowrap",
-              isSmall && "text-xs"
+              "text-gray-600 dark:text-neutral-400 overflow-hidden text-ellipsis whitespace-nowrap text-xs"
             )}
             rel="noreferrer noopener"
           >
@@ -83,8 +83,7 @@ export default function PublisherCard({
           <p
             title={description}
             className={classNames(
-              "text-gray-500 dark:text-neutral-500 overflow-hidden text-ellipsis whitespace-nowrap",
-              isSmall && "text-xs"
+              "text-gray-600 dark:text-neutral-400 overflow-hidden text-ellipsis whitespace-nowrap text-xs"
             )}
           >
             {description}

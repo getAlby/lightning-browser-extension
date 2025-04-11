@@ -543,14 +543,12 @@
           "new": {
             "items": {
               "usage": "Voit tuoda ja käyttää samaa pääavainta <0>jossakin yhdistetyssä Albyn lompakossa</0>",
-              "keys": "Pääavaimen avulla voit olla vuorovaikutuksessa protokollien, kuten <0>Nostr</0>, <0>Liquid</0> tai <0>Bitcoinin peruskerroksen</0> kanssa",
-              "nostr_key": "Voit aina tuoda olemassa olevat Nostr-avaimet ja ohittaa pääavaimen luomat avaimet"
+              "keys": "Pääavaimen avulla voit olla vuorovaikutuksessa protokollien, kuten <0>Nostr</0>, <0>Liquid</0> tai <0>Bitcoinin peruskerroksen</0> kanssa"
             },
             "import": {
               "title": "Onko sinulla jo pääavain?",
               "description": "Syötä palautuslauseesi tuodaksesi pääavaimen tähän lompakkoon"
             },
-            "title": "Määritä pääavain",
             "secure": {
               "title": "Suojaa pääavaimesi",
               "description": "Opi tuntemaan pääavain ja varmuuskopioi 12-sanainen palautuslause"
@@ -561,7 +559,6 @@
               "nostr": "Nostr"
             },
             "button": "Katso palautuslause",
-            "title": "Varmuuskopioi palautuslauseesi",
             "description": "Kirjoita palautuslause muistiin, jotta voit palauttaa pääavaimesi uudelle laitteelle tai jos menetät pääsyn tiliisi.",
             "save": "Tallenna pääavain",
             "warning": "Älä unohda varmuuskopioida palautuslausettasi! Avaimen varmuuskopioimatta jättäminen saattaa johtaa pysyvästi pääsyn menettämiseen pääavaimesi, Nostr-identiteettisi tai tällä avaimella hallinnoimiesi resurssien käyttöön."
@@ -571,7 +568,6 @@
             "use_mnemonic": "Käytä pääavainta kirjautumiseen Lightning-käyttöisiin sovelluksiin (LNURL Auth)"
           },
           "description": {
-            "secure_recovery_phrase": "Muista kirjoittaa ne ylös turvalliseen paikkaan ja pitää ne yksityisinä",
             "warning": "<0>Se ei voi palauttaa tätä lompakkoa tai siinä olevia varoja,</0> se palauttaa vain pääsyn edellä mainittuun protokollaan",
             "recovery_phrase": "Palautuslause, joka <0>varmuuskopioi pääavaimesi</0>, koostuu kahdestatoista sanasta"
           },
@@ -588,8 +584,7 @@
             "description": "Pääavaimen avulla voit olla vuorovaikutuksessa eri protokollien kanssa, kuten: Nostr, Bitcoinin peruskerros tai LNURL-Auth.",
             "title": "Luo uusi pääavain",
             "button": "Luo pääavain"
-          },
-          "confirm": "Olen varmuuskopioinut palautuslauseen pääavaimelleni yksityiseen ja turvalliseen paikkaan."
+          }
         },
         "network": {
           "title": "Bitcoin-verkko",
