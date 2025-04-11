@@ -53,13 +53,13 @@
     "bitcoinjs-lib": "^6.1.7",
     "bolt11-signet": "1.4.1",
     "crypto-js": "^4.2.0",
-    "dexie": "^4.0.11",
     "dayjs": "^1.11.13",
+    "dexie": "^4.0.11",
     "elliptic": "^6.6.1",
     "events": "^3.3.0",
     "html5-qrcode": "^2.3.8",
-    "i18next-browser-languagedetector": "^8.0.0",
     "i18next": "^23.11.5",
+    "i18next-browser-languagedetector": "^8.0.0",
     "liquidjs-lib": "^6.0.2-liquid.29",
     "lnmessage": "^0.2.7",
     "lodash.merge": "^4.6.2",
@@ -150,5 +150,6 @@
     "webpack-sources": "^3.2.3",
     "wext-manifest-loader": "^3.0.0",
     "wext-manifest-webpack-plugin": "^1.2.1"
-  }
+  },
+  "packageManager": "yarn@4.9.0+sha512.5f5f00843eae735dfab6f0442524603e987ceca55e98b36eb0120f4e58908e5b1406545321e46627dca97d15d562f23dc13fb96cabd4e6bc92d379f619001e4e"
 }

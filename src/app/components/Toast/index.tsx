@@ -1,5 +1,5 @@
-import { PopiconsXLine } from "@popicons/react";
 import { Transition } from "@headlessui/react";
+import { PopiconsXLine } from "@popicons/react";
 import { ReactNode } from "react";
 import {
   CheckmarkIcon,
@@ -39,19 +39,24 @@ const toast: ToastMethods = {
           leaveTo="opacity-0 scale-0"
           show={t.visible}
         >
-          <div className="bg-white dark:bg-surface-02dp px-4 py-3 drop-shadow-lg rounded-lg overflow-hidden flex flex-row items-center gap-3 text-gray-800 dark:text-neutral-200">
-            <div className="shrink-0">
-              {type == "success" && <CheckmarkIcon />}
-              {type == "error" && <ErrorIcon />}
+          <div className="bg-white dark:bg-surface-02dp px-4 py-3 drop-shadow-lg rounded-lg overflow-hidden flex flex-row items-center gap-3 text-gray-800 dark:text-neutral-200 max-w-sm sm:max-w-lg w-full break-words">
+            <div className="flex items-start gap-2 w-full">
+              <div className="shrink-0">
+                {type == "success" && <CheckmarkIcon />}
+                {type == "error" && <ErrorIcon />}
+              </div>
+              <div className="flex-1 text-sm max-h-[200px] overflow-auto">
+                {children}
+              </div>
+              {/* Add close icons for toasts that are displayed for a longer time */}
+              {(options?.duration && options?.duration > 10_000) ||
+              (typeof children === "string" && children.length > 50) ? (
+                <PopiconsXLine
+                  className="w-4 h-4 cursor-pointer"
+                  onClick={() => hotToast.dismiss(t.id)}
+                />
+              ) : null}
             </div>
-            <div>{children}</div>
-            {/* Add close icons for toasts that are displayed for a longer time */}
-            {options?.duration && options?.duration > 10_000 && (
-              <PopiconsXLine
-                className="w-4 h-4 cursor-pointer"
-                onClick={() => hotToast.dismiss(t.id)}
-              />
-            )}
           </div>
         </Transition>
       ),
