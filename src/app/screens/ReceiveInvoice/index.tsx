@@ -148,6 +148,7 @@ function ReceiveInvoice() {
                   <QRCode
                     value={invoice.paymentRequest.toUpperCase()}
                     size={512}
+                    onCopy={() => toast.success("Copied to clipboard!")}
                   />
                   {isAlbyOAuthUser ? (
                     <>
