@@ -47,13 +47,15 @@ const toast: ToastMethods = {
             <div className="flex-1 text-sm max-h-[200px] overflow-auto">
               {children}
             </div>
-            {/* Add close icons for toasts that are displayed for a longer time or with longer legnth*/}
+            {/* Add close icons for toasts that are displayed for a longer time or with longer length*/}
             {(options?.duration && options?.duration > 10_000) ||
             (typeof children === "string" && children.length > 50) ? (
-              <PopiconsXLine
-                className="w-4 h-4 cursor-pointer mt-1 shrink-0 hover:opacity-80 transition-opacity"
-                onClick={() => hotToast.dismiss(t.id)}
-              />
+              <div className="absolute right-2 top-2 text-gray-600 cursor-button dark:text-neutral-400 hover:text-gray-700 dark:hover:text-neutral-300">
+                <PopiconsXLine
+                  className="w-5 h-5"
+                  onClick={() => hotToast.dismiss(t.id)}
+                />
+              </div>
             ) : null}
           </div>
         </Transition>
