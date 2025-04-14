@@ -429,10 +429,7 @@
             "title": "Bitcoin erhalten",
             "description": "Deine Wallet aufladen und über deine Blitzadresse oder eine Rechnung erhalten"
           },
-          "setup_keys": {
-            "title": "Master Key einrichten",
-            "description": "Erstelle einen Master-Schlüssel für Bitcoin, Nostr und Liquid, oder importiere deinen bestehenden Nostr-Schlüssel."
-          }
+          "setup_keys": {}
         },
         "upgrade_account": "Du verwendest die alte LNDHub-Einstellung. <0>Bitte verbinde dich erneut</0> mit deinem Alby-Konto, um Zugang zu den neuesten Funktionen zu erhalten.",
         "no_transactions": "Noch keine Transaktionen für diese Brieftasche."
@@ -543,7 +540,6 @@
             "save": "Hauptschlüssel speichern",
             "button": "Phrase anzeigen",
             "description": "Notiere dir die Wiederherstellungsphrase, um deinen Hauptschlüssel auf einem neuen Gerät wiederherstellen zu können oder für den Fall, dass du den Zugang zu deinem Guthaben verlierst.",
-            "title": "Sichere deine Wiederherstellungsphrase",
             "warning": "Vergesse nicht, deine Wiederherstellungsphrase zu sichern! Wird sie nicht gesichert, kann dies dazu führen, dass du den Zugang zu deinem Master Key, dein Nostr-Identität oder den von dir mit diesem Schlüssel verwalteten Assets dauerhaft verlierst."
           },
           "saved": "Hauptschlüssel erfolgreich verschlüsselt und gespeichert.",
@@ -562,11 +558,9 @@
             "use_mnemonic": "Hauptschlüssel für die Anmeldung bei Lightning-Anwendungen verwenden (LNURL Auth)"
           },
           "new": {
-            "title": "Masterschlüssel einrichten",
             "items": {
               "usage": "Du kannst denselben Hauptschlüssel in <0>jede angeschlossene Wallet in Alby</0> importieren und verwenden",
-              "keys": "Master Key ermöglicht die Interaktion mit Protokollen wie <0>Nostr</0>, <0>Liquid</0> oder <0> der Bitcoin Blockchain</0>",
-              "nostr_key": "Du kannst jederzeit vorhandene Nostr-Schlüssel importieren und die von Hauptschlüssel erzeugten überschreiben"
+              "keys": "Master Key ermöglicht die Interaktion mit Protokollen wie <0>Nostr</0>, <0>Liquid</0> oder <0> der Bitcoin Blockchain</0>"
             },
             "secure": {
               "title": "Sicherer Hauptschlüssel",
@@ -577,20 +571,17 @@
               "description": "Gebe deine Wiederherstellungsphrase ein, um den Hauptschlüssel in diese Wallet zu importieren"
             },
             "import_nostr": {
-              "title": "Nostr Schlüssel importieren",
-              "description": "Hast du bereits eine Nostr-Identität? Importiere deinen, um sie mit deiner Wallet zu verwenden"
+              "title": "Nostr Schlüssel importieren"
             }
           },
           "inputs": {
             "title": "Wiederherstellungsphrase für deinen Hauptschlüssel"
           },
           "description": {
-            "secure_recovery_phrase": "Schreibe sie an einem sicheren Ort auf und bewahre sie privat auf",
             "recovery_phrase": "Die Wiederherstellungsphrase besteht aus 12 Wörtern, die <0>Ihren Hauptschlüssel sichern</0>",
             "warning": "<0>Es kann diese Brieftasche oder das darin befindliche Guthaben nicht wiederherstellen,</0> es wird nur der Zugriff auf das oben genannte Protokoll wiederhergestellt"
           },
           "error_confirm": "Bitte vergewisser dich, dass du eine Sicherungskopie der Wiederherstellungsphrase erstellt hast.",
-          "confirm": "Ich habe die Wiederherstellungsphrase zu meinem Hauptschlüssel an einem privaten und sicheren Ort gesichert.",
           "title": "Schlüsselverwaltung",
           "existing_nostr_key_notice": "ℹ️ Diese Wallet hat bereits einen privaten Nostr-Schlüssel und wird nicht von diesem Master Key abgeleitet. Du kannst deinen Nostr-Schlüssel über Ihre Wallet-Einstellungen verwalten."
         },
