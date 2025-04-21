@@ -1,4 +1,3 @@
-import fetchAdapter from "@vespaiach/axios-fetch-adapter";
 import axios from "axios";
 import lightningPayReq from "bolt11-signet";
 import { isLNURLDetailsError } from "~/common/utils/typeHelpers";
@@ -90,7 +89,7 @@ const lnurl = {
         const { data }: { data: LNURLDetails | LNURLError } = await axios.get(
           url.toString(),
           {
-            adapter: fetchAdapter,
+            adapter: "fetch",
           }
         );
 
