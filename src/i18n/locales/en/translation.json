@@ -441,7 +441,7 @@
         "mnemonic": {
           "title": "Key Management",
           "saved": "Master Key encrypted & saved successfully.",
-          "existing_nostr_key_notice": "ℹ️ This wallet already has a nostr private key set and will not be derived from this Master Key. You can manage your Nostr key from your wallet settings.",
+          "existing_nostr_key_notice": "This wallet already has a nostr private key set and will not be derived from this Master Key. You can manage your Nostr key from your wallet settings.",
           "description": {
             "warning": "<0>It cannot recover this wallet or funds in it,</0> it only recovers access to aforementioned protocol",
             "secure_recovery_phrase": "Make sure to write them down somewhere safe and private",
@@ -489,8 +489,8 @@
             }
           },
           "import": {
-            "title": "Import your Master Key",
-            "description": "Use the recovery phrase to import your Master Key into Alby.",
+            "title": "Import Master Key",
+            "description": "Enter the recovery phrase to import your Master Key into Alby.",
             "button": "Import Master Key"
           },
           "inputs": {
@@ -1110,12 +1110,12 @@
         "request2": "Setup your Master Key to get an on-chain key"
       },
       "messages": {
-        "single_account_with_key": "{{accountName}} already has {{keyType}} set up. You can use it by switching account from the top right dropdown.",
-        "multiple_accounts_with_key": "Some of your accounts already have {{keyType}} set up. You can use them by switching your account from the top right dropdown."
+        "single_account_with_key": "{{accountName}} already has {{keyType}} set. Switch the wallet to access them.",
+        "multiple_accounts_with_key": "Some of your wallets already have {{keyType}} set. Switch the wallet to access them."
       },
       "labels": {
-        "mnemonic": "a mnemonic",
-        "nostr_key": "a Nostr key"
+        "master_key": "Master Key",
+        "nostr_key": "Nostr Key"
       },
       "request3": "Setup is quick and easy",
       "actions": {

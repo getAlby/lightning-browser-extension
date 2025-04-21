@@ -62,7 +62,7 @@ export default function Onboard() {
 
   const alreadyHasKeyLabel = hasNostrAction
     ? t("labels.nostr_key")
-    : t("labels.mnemonic");
+    : t("labels.master_key");
 
   return (
     <div className="h-full flex flex-col overflow-y-auto no-scrollbar">
@@ -80,20 +80,27 @@ export default function Onboard() {
             {accountsWithKeys.length > 0 && (
               <div className="mb-3">
                 <Alert type="info">
-                  {accountsWithKeys.length === 1 ? (
-                    <>
-                      {t("messages.single_account_with_key", {
-                        accountName: accountsWithKeys[0].name,
-                        keyType: alreadyHasKeyLabel,
-                      })}
-                    </>
-                  ) : (
-                    <>
-                      {t("messages.multiple_accounts_with_key", {
-                        keyType: alreadyHasKeyLabel,
-                      })}
-                    </>
-                  )}
+                  <div className="flex items-center gap-2">
+                    <div className="shrink-0">
+                      <PopiconsCircleInfoLine className="w-5 h-5" />
+                    </div>
+                    <span className="text-sm">
+                      {accountsWithKeys.length === 1 ? (
+                        <>
+                          {t("messages.single_account_with_key", {
+                            accountName: accountsWithKeys[0].name,
+                            keyType: alreadyHasKeyLabel,
+                          })}
+                        </>
+                      ) : (
+                        <>
+                          {t("messages.multiple_accounts_with_key", {
+                            keyType: alreadyHasKeyLabel,
+                          })}
+                        </>
+                      )}
+                    </span>
+                  </div>
                 </Alert>
               </div>
             )}
