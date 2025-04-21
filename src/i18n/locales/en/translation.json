@@ -1216,10 +1216,7 @@
         "always_allow": "Always allow",
         "always_reject": "Always reject"
       },
-      "website_permissions": "Website Permissions",
-      "qrcode": {
-        "click_to_copy": "Click to copy"
-      }
+      "website_permissions": "Website Permissions"
     },
     "qrcode_scanner": {
       "title": "Scan QR Code",

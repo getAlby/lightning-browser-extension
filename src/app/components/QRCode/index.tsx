@@ -1,8 +1,8 @@
-import ReactQRCode from "react-qr-code";
-import { classNames, useTheme } from "~/app/utils";
-import { useState } from "react";
+import { PopiconsCopyLine } from "@popicons/react";
 import { useTranslation } from "react-i18next";
-import { CopyIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
+import ReactQRCode from "react-qr-code";
+import toast from "~/app/components/Toast";
+import { classNames, useTheme } from "~/app/utils";
 
 export type Props = {
   value: string;
@@ -18,56 +18,35 @@ export type Props = {
   // (meaning you have to aim your phone very precisely and have to wait longer for the reader
   // to recognize the QR code)
   level?: "Q" | undefined;
-  onCopy?: () => void;
 };
 
-export default function QRCode({
-  value,
-  size,
-  level,
-  className,
-  onCopy,
-}: Props) {
+export default function QRCode({ value, size, level, className }: Props) {
   const theme = useTheme();
   const fgColor = theme === "dark" ? "#FFFFFF" : "#000000";
   const bgColor = theme === "dark" ? "#000000" : "#FFFFFF";
-  const { t } = useTranslation("components");
-  const [isHovering, setIsHovering] = useState(false);
+  const { t } = useTranslation("common");
 
   const handleCopy = () => {
     navigator.clipboard.writeText(value);
-    onCopy?.();
+    toast.success(t("actions.copied_to_clipboard"));
   };
 
   return (
-    <div
-      className="relative cursor-pointer"
-      onClick={handleCopy}
-      onMouseEnter={() => setIsHovering(true)}
-      onMouseLeave={() => setIsHovering(false)}
-    >
+    <div className="relative cursor-pointer group" onClick={handleCopy}>
       <ReactQRCode
         value={value}
         size={size}
         fgColor={fgColor}
         bgColor={bgColor}
         className={classNames(
-          "w-full h-auto rounded-md transition-opacity",
-          isHovering ? "opacity-80" : "opacity-100",
+          "w-full h-auto rounded-md transition-opacity group-hover:opacity-80",
           className ?? ""
         )}
         level={level}
       />
-      {isHovering && (
-        <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-md">
-          <div className="flex flex-col items-center">
-            <CopyIcon className="h-8 w-8 text-white" />
-            <span className="text-white font-medium mt-2">
-              {t("allowance_menu.qrcode.click_to_copy")}
-            </span>
-          </div>
-        </div>
-      )}
+      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+        <PopiconsCopyLine className="h-8 w-8 text-white drop-shadow-lg" />
+      </div>
     </div>
   );
 }

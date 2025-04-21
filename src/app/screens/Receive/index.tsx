@@ -74,7 +74,6 @@ function Receive() {
                             value={lightningAddress}
                             size={192}
                             level="Q"
-                            onCopy={() => toast.success("Copied to clipboard")}
                           />
                         </>
                       )}
