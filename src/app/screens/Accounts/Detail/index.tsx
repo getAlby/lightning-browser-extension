@@ -345,9 +345,6 @@ function AccountDetail() {
                             <QRCode
                               value={`lndhub://${lndHubData.login}:${lndHubData.password}@${lndHubData.url}/`}
                               size={256}
-                              onCopy={() =>
-                                toast.success("Copied to clipboard")
-                              }
                             />
                           </div>
                           <div className="w-full">

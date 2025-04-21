@@ -147,8 +147,7 @@ function ReceiveInvoice() {
                 <div className="relative flex items-center justify-center">
                   <QRCode
                     value={invoice.paymentRequest.toUpperCase()}
-                    size={512}
-                    onCopy={() => toast.success("Copied to clipboard!")}
+                    size={192}
                   />
                   {isAlbyOAuthUser ? (
                     <>
