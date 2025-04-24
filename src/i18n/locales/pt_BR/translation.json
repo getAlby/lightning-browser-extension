@@ -296,9 +296,7 @@
           "receive_bitcoin": {
             "title": "Deposite bitcoin"
           },
-          "setup_keys": {
-            "title": "Configurar chave mestra"
-          }
+          "setup_keys": {}
         }
       }
     },
@@ -394,7 +392,6 @@
               "nostr": "Nostr"
             },
             "description": "Anote a frase de recuperação para poder restaurar sua chave mestra em um novo dispositivo ou caso perca o acesso à sua conta.",
-            "title": "Backup da sua chave de recuperação",
             "warning": "Não se esqueça de fazer o backup de sua frase de recuperação! Não fazer o backup pode resultar na perda permanente do acesso à sua chave mestra, identidade Nostr ou ativos que você gerencia com esta chave."
           },
           "import": {
@@ -407,11 +404,9 @@
             "title": "Login relâmpago"
           },
           "new": {
-            "title": "Configurar chave mestra",
             "items": {
               "usage": "Você pode importar e usar a mesma chave mestra em <0>diferentes carteiras conectadas na extensão Alby</0>",
-              "keys": "A chave mestra permite interagir com diferentes protocolos como <0>Nostr</0>, <0>Liquid</0> ou a <0>camada base do Bitcoin</0>",
-              "nostr_key": "Você pode substituir as chaves Nostr geradas pela chave mestra por chaves Nostr que você já possua"
+              "keys": "A chave mestra permite interagir com diferentes protocolos como <0>Nostr</0>, <0>Liquid</0> ou a <0>camada base do Bitcoin</0>"
             },
             "secure": {
               "title": "Proteger chave mestra",
@@ -430,10 +425,8 @@
           },
           "description": {
             "recovery_phrase": "A frase de recuperação é um conjunto de 12 palavras necessárias para <0>recuperar a sua chave mestra</0>",
-            "warning": "<0>Não permite recuperar esta carteira ou os fundos nela contidos,</0> recupera somente o acesso aos protocolos",
-            "secure_recovery_phrase": "Certifique-se de anotá-la em algum local seguro e privado"
+            "warning": "<0>Não permite recuperar esta carteira ou os fundos nela contidos,</0> recupera somente o acesso aos protocolos"
           },
-          "confirm": "Fiz o backup da frase de recuperação em um local privado e seguro.",
           "error_confirm": "Confirme que você fez o backup da frase de recuperação.",
           "title": "Gerenciamento de chaves"
         },
