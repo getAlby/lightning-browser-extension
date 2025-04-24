@@ -991,8 +991,6 @@
       "title": "连接到 Liquid"
     },
     "onboard": {
-      "request1": "该网站请求密钥交互",
-      "request2": "你还没有设置你的密钥",
       "title": "设置你的密钥",
       "request3": "设置过程非常简单快捷",
       "actions": {
