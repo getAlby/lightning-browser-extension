@@ -428,8 +428,7 @@
           "receive_bitcoin": {
             "title": "Bitcoin erhalten",
             "description": "Deine Wallet aufladen und über deine Blitzadresse oder eine Rechnung erhalten"
-          },
-          "setup_keys": {}
+          }
         },
         "upgrade_account": "Du verwendest die alte LNDHub-Einstellung. <0>Bitte verbinde dich erneut</0> mit deinem Alby-Konto, um Zugang zu den neuesten Funktionen zu erhalten.",
         "no_transactions": "Noch keine Transaktionen für diese Brieftasche."
@@ -1032,8 +1031,6 @@
       "request2": "Rechnungen und Lightning Informationen anfordern"
     },
     "onboard": {
-      "request2": "Du hast deinen Schlüssel noch nicht eingerichtet",
-      "request1": "Diese Webseite erfordert eine wichtige Interaktion",
       "request3": "Die Einrichtung ist schnell und einfach",
       "title": "Deine Schlüssel einrichten",
       "actions": {
