@@ -295,8 +295,7 @@
           },
           "receive_bitcoin": {
             "title": "Deposite bitcoin"
-          },
-          "setup_keys": {}
+          }
         }
       }
     },
@@ -871,13 +870,11 @@
       }
     },
     "onboard": {
-      "request2": "Você ainda não configurou suas chaves",
       "request3": "A configuração é rápida e fácil",
       "title": "Configure suas chaves",
       "actions": {
         "start_setup": "Configurar"
-      },
-      "request1": "Interagir com este site exige configurar uma chave"
+      }
     },
     "nostr_enable": {
       "title": "Conectar no Nostr",
