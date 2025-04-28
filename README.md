@@ -29,6 +29,8 @@ Alby implements the WebLN standard, providing a universal interface for websites
 - **LNURL Support** - Seamless [LNURL-pay](https://github.com/lnurl/luds/blob/luds/06.md), [LNURL-auth](https://github.com/lnurl/luds/blob/luds/04.md), and [LNURL-withdraw](https://github.com/lnurl/luds/blob/luds/03.md) integrations.
 - **Keysend Payments** - Send payments without an invoice.
 - **Payment History & Metadata** - Track transactions with additional website metadata.
+- **Website Batteries** - Site-specific enhancements that [detect Lightning addresses](./src/extension/content-script/batteries/README.md) on popular platforms like Twitter, YouTube, Reddit and many more.  
+
 
 ## 🐝 About Alby
 
