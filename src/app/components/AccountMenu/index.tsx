@@ -1,7 +1,7 @@
 import {
   PopiconsChevronBottomLine,
+  PopiconsCirclePlusLine,
   PopiconsGlobeLine,
-  PopiconsPlusLine,
   PopiconsSettingsMinimalLine,
 } from "@popicons/react";
 import { useEffect } from "react";
@@ -91,10 +91,13 @@ function AccountMenu({ showOptions = true }: Props) {
           </div>
         </Menu.Button>
         <Menu.List position="right" fullWidth>
+          <p className="flex justify-center text-lg dark:text-white p-3 mt-1 font-semibold">
+            Select Wallet
+          </p>
           {authAccount && (
             <Menu.Item>
               <div className="p-2 overflow-hidden">
-                <div className="flex flex-row items-center justify-between gap-2 bg-amber-50 dark:bg-brand-yellow/50 border-brand-yellow border-l-4 p-2 rounded-lg">
+                <div className="flex flex-row items-center justify-between gap-2 bg-amber-50 dark:bg-brand-yellow/50 border-brand-yellow border-l-4 p-3">
                   <div className="flex flex-row items-center gap-2 overflow-hidden">
                     <div className="shrink-0">
                       <Avatar
@@ -107,7 +110,7 @@ function AccountMenu({ showOptions = true }: Props) {
                       <span className="overflow-hidden text-ellipsis whitespace-nowrap font-medium">
                         {authAccount.name}
                       </span>
-                      <span className="dark:text-white text-xs">
+                      <span className="text-gray-600 text-xs">
                         {accountLoading ? (
                           <SkeletonLoader className="w-16" />
                         ) : (
@@ -129,7 +132,7 @@ function AccountMenu({ showOptions = true }: Props) {
                         }}
                         title={t("options.account.go_to_web_wallet")}
                       >
-                        <PopiconsGlobeLine className="w-4 h-4 mr-2 shrink-0" />
+                        <PopiconsGlobeLine className="w-5 h-5 mr-2 shrink-0" />
                       </a>
                     )}
                     <a
@@ -139,7 +142,7 @@ function AccountMenu({ showOptions = true }: Props) {
                         openOptions(`accounts/${authAccount.id}`);
                       }}
                     >
-                      <PopiconsSettingsMinimalLine className="w-4 h-4 mr-2 shrink-0" />
+                      <PopiconsSettingsMinimalLine className="w-5 h-5 mr-2 shrink-0" />
                     </a>
                   </div>
                 </div>
@@ -175,7 +178,7 @@ function AccountMenu({ showOptions = true }: Props) {
                           url={account.avatarUrl}
                         />
                       </div>
-                      <span className="overflow-hidden text-ellipsis whitespace-nowrap ml-2">
+                      <span className="overflow-hidden text-ellipsis whitespace-nowrap ml-2 text-gray-600 dark:text-neutral-400">
                         {account.name}
                       </span>
                     </div>
@@ -193,8 +196,10 @@ function AccountMenu({ showOptions = true }: Props) {
                   openOptions("accounts/new");
                 }}
               >
-                <PopiconsPlusLine className="h-4 w-4 mr-2 shrink-0" />
-                {t("options.account.add")}
+                <PopiconsCirclePlusLine className="h-4 w-4 mr-2 shrink-0 text-gray-800 dark:text-neutral-200" />
+                <span className="text-gray-600 dark:text-neutral-400">
+                  {t("options.account.connect_wallet")}
+                </span>
               </Menu.ItemButton>
             </>
           )}
