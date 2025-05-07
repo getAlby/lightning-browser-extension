@@ -11,6 +11,7 @@ import {
   PopiconsCommentLine,
   PopiconsExpandLine,
   PopiconsLockLine,
+  PopiconsSettingsMinimalLine,
 } from "@popicons/react";
 import Menu from "../Menu";
 
@@ -46,6 +47,19 @@ export default function UserMenu() {
         <PopiconsBarsSolid className="h-5 w-5" />
       </Menu.Button>
       <Menu.List position="left">
+        {auth.account && (
+          <>
+            <Menu.ItemButton
+              onClick={() => {
+                openOptions(`accounts/${auth.account?.id}`);
+              }}
+            >
+              <PopiconsSettingsMinimalLine className="h-5 w-5 mr-2 text-gray-800 dark:text-neutral-200 shrink-0" />
+              {tCommon("wallet_settings")}
+            </Menu.ItemButton>
+            <Menu.Divider />
+          </>
+        )}
         <div className="lg:hidden">
           <Menu.ItemButton
             onClick={() => {
