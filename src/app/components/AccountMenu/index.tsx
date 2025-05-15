@@ -196,10 +196,8 @@ function AccountMenu({ showOptions = true }: Props) {
                   openOptions("accounts/new");
                 }}
               >
-                <PopiconsCirclePlusLine className="h-4 w-4 mr-2 shrink-0 text-gray-800 dark:text-neutral-200" />
-                <span className="text-gray-600 dark:text-neutral-400">
-                  {t("options.account.connect_wallet")}
-                </span>
+                <PopiconsCirclePlusLine className="h-4 w-4 mr-2 shrink-0" />
+                <span>{t("options.account.connect_wallet")}</span>
               </Menu.ItemButton>
             </>
           )}
