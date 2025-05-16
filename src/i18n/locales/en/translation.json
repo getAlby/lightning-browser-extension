@@ -1322,6 +1322,7 @@
     "account_menu": {
       "screen_reader": "Toggle Dropdown",
       "title": "Switch Wallet",
+      "select_wallet": "Select Wallet",
       "options": {
         "account": {
           "connect_wallet": "Connect Wallet",
