@@ -88,7 +88,7 @@ function AccountMenu({ showOptions = true }: Props) {
             close={closeModal}
             contentLabel={t("select_wallet")}
             position="center"
-            padding="p-0"
+            padding={showOptions ? "p-0" : "pb-3"}
           >
             <Menu as="div">
               <ListItem isPrompt={true} />

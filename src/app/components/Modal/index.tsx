@@ -36,7 +36,7 @@ export default function Modal({
       )}
       className={classNames(
         padding,
-        "rounded-lg shadow-xl bg-white dark:bg-surface-01dp w-full max-w-md overflow-x-hidden relative cursor-auto mx-5 no-scrollbar"
+        "rounded-xl shadow-xl bg-white dark:bg-surface-01dp w-full max-w-md overflow-x-hidden relative cursor-auto mx-5 no-scrollbar"
       )}
       style={{ content: { maxHeight: "80vh" } }}
     >
