@@ -1155,6 +1155,7 @@
     "or": "or",
     "website": "Website",
     "wallet_settings": "Wallet Settings",
+    "active_wallet_settings": "Active Wallet Settings",
     "apps": "Apps",
     "setup_wallet": "Finish your <0>Alby account setup</0> for unlimited payments. Until your setup is complete, you can receive up to {{max_account_balance}} as <1>fee credits</1>",
     "actions": {
@@ -1321,9 +1322,10 @@
     "account_menu": {
       "screen_reader": "Toggle Dropdown",
       "title": "Switch Wallet",
+      "select_wallet": "Select Wallet",
       "options": {
         "account": {
-          "add": "Add",
+          "connect_wallet": "Connect Wallet",
           "go_to_web_wallet": "Manage your web account"
         }
       }
