@@ -17,7 +17,7 @@ jobs:
         with:
           node-version: "18"
 
-      - run: yarn install
+      - run: rm -rf node_modules && yarn install --frozen-lockfile
 
       - name: Linting
         run: yarn lint:js
