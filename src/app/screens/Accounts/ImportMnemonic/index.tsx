@@ -10,6 +10,7 @@ import Button from "~/app/components/Button";
 import { ContentBox } from "~/app/components/ContentBox";
 import toast from "~/app/components/Toast";
 import MnemonicInputs from "~/app/components/mnemonic/MnemonicInputs";
+import PopiconsCircleInfoLine from "~/app/icons/popicons/CircleInfoLine";
 import api from "~/common/lib/api";
 
 function ImportMnemonic() {
@@ -28,6 +29,11 @@ function ImportMnemonic() {
     (async () => {
       try {
         const account = await api.getAccount(id);
+        if (account.hasMnemonic) {
+          // do not allow user to import a mnemonic if they already have one for the current account
+          // go to account settings
+          navigate(`/accounts/${id}`);
+        }
         setHasNostrPrivateKey(account.nostrEnabled);
         setHasFetchedData(true);
       } catch (e) {
@@ -67,19 +73,32 @@ function ImportMnemonic() {
     <div>
       <Container maxWidth="md">
         <ContentBox>
-          <h1 className="font-bold text-2xl dark:text-white">
-            {t("import.title")}
-          </h1>
-          <p className="text-gray-600 dark:text-neutral-400">
-            {t("import.description")}
-          </p>
-          {hasNostrPrivateKey && (
-            <Alert type="info">{t("existing_nostr_key_notice")}</Alert>
-          )}
-          <MnemonicInputs mnemonic={mnemonic} setMnemonic={setMnemonic} />
+          <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-4">
+              <h1 className="font-bold text-2xl dark:text-white">
+                {t("import.title")}
+              </h1>
+              <p className="text-gray-600 dark:text-neutral-400">
+                {t("import.description")}
+              </p>
+            </div>
+            {hasNostrPrivateKey && (
+              <Alert type="info">
+                <div className="flex items-center gap-2">
+                  <div className="shrink-0">
+                    <PopiconsCircleInfoLine className="w-5 h-5" />
+                  </div>
+                  <span className="text-sm">
+                    {t("existing_nostr_key_notice")}
+                  </span>
+                </div>
+              </Alert>
+            )}
+            <MnemonicInputs mnemonic={mnemonic} setMnemonic={setMnemonic} />
 
-          <div className="flex justify-center">
-            <Button label={t("import.button")} primary onClick={importKey} />
+            <div className="flex justify-center">
+              <Button label={t("import.button")} primary onClick={importKey} />
+            </div>
           </div>
         </ContentBox>
       </Container>
