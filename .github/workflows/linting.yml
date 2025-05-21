@@ -9,18 +9,14 @@ on:
 
 jobs:
   linting:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: "18"
-
-      - name: Install Yarn 3.6.4
-        run: |
-          npm install -g yarn@1.22.19
-          yarn --version
+          node-version: 20.x
+          cache: "yarn"
 
       - run: yarn install
 
