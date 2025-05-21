@@ -9,18 +9,18 @@ on:
 
 jobs:
   linting:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: "18"
 
-      - name: Setup Yarn Berry
-        uses: threeal/setup-yarn-action@v2.0.0
-        with:
-          cache: false
+      - name: Install Yarn 3.6.4
+        run: |
+          npm install -g yarn@3.6.4
+          yarn --version
 
       - run: yarn install
 
