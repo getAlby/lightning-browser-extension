@@ -1,5 +1,4 @@
 import * as secp256k1 from "@noble/secp256k1";
-import fetchAdapter from "@vespaiach/axios-fetch-adapter";
 import axios from "axios";
 import { Buffer } from "buffer";
 import Hex from "crypto-js/enc-hex";
@@ -120,7 +119,7 @@ export async function authFunction({
     const authResponse = await axios.get<AuthResponseObject>(
       loginURL.toString(),
       {
-        adapter: fetchAdapter,
+        adapter: "fetch",
       }
     );
 

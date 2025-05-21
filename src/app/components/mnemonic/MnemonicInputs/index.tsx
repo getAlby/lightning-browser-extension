@@ -36,7 +36,7 @@ export default function MnemonicInputs({
   }
 
   return (
-    <div className="border border-gray-200 dark:border-neutral-800 rounded-2xl p-6 flex flex-col gap-4 items-center justify-center">
+    <div className="border border-gray-200 dark:border-neutral-800 rounded-lg p-6 flex flex-col gap-4 items-center justify-center">
       <h3 className="text-lg font-semibold dark:text-white">
         {t("inputs.title")}
       </h3>
@@ -59,7 +59,7 @@ export default function MnemonicInputs({
                   block={false}
                   className="w-full text-center"
                   list={readOnly ? undefined : "wordlist"}
-                  value={isRevealed ? word : word.length ? "•••••" : ""}
+                  value={isRevealed ? word : word.length ? "••••" : ""}
                   onChange={(e) => {
                     if (revealedIndex !== i) {
                       return;
@@ -110,7 +110,7 @@ export default function MnemonicInputs({
           />
           <label
             htmlFor="has_backed_up"
-            className="cursor-pointer ml-2 block text-sm text-gray-900 font-medium dark:text-white"
+            className="cursor-pointer ml-2 block text-sm text-gray-600 dark:text-neutral-400 font-medium"
           >
             {t("confirm")}
           </label>

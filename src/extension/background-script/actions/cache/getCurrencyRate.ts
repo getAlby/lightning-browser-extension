@@ -1,4 +1,3 @@
-import fetchAdapter from "@vespaiach/axios-fetch-adapter";
 import axios from "axios";
 import dayjs from "dayjs";
 import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
@@ -15,6 +14,9 @@ interface CurrencyRate {
   rate?: number;
   timestamp?: number;
 }
+
+const axiosOptions =
+  process.env.NODE_ENV === "test" ? {} : { adapter: "fetch" };
 
 const storeCurrencyRate = async ({ rate, currency }: CurrencyRate) => {
   const currencyRate: CurrencyRate = {
@@ -37,9 +39,7 @@ const getFiatBtcRate = async (currency: CURRENCIES): Promise<number> => {
   if (exchange === "yadio") {
     response = await axios.get(
       `https://api.yadio.io/exrates/${currency.toLowerCase()}`,
-      {
-        adapter: fetchAdapter,
-      }
+      axiosOptions
     );
     const data = await response?.data;
     return data.BTC / numSatsInBtc;
@@ -48,9 +48,7 @@ const getFiatBtcRate = async (currency: CURRENCIES): Promise<number> => {
   if (exchange === "coindesk") {
     response = await axios.get(
       `https://api.coindesk.com/v1/bpi/currentprice/${currency.toLowerCase()}.json`,
-      {
-        adapter: fetchAdapter,
-      }
+      axiosOptions
     );
     const data = await response?.data;
     return data.bpi[currency].rate_float / numSatsInBtc;
@@ -58,9 +56,7 @@ const getFiatBtcRate = async (currency: CURRENCIES): Promise<number> => {
 
   response = await axios.get(
     `https://getalby.com/api/rates/${currency.toLowerCase()}.json`,
-    {
-      adapter: fetchAdapter,
-    }
+    axiosOptions
   );
   const data = await response?.data;
 
