@@ -217,8 +217,7 @@ function LNURLPay() {
 
       auth.fetchAccountInfo(); // Update balance.
 
-      // ATTENTION: if this LNURL is called through `webln.lnurl` then we immediately return and return the payment response. This closes the window which means the user will NOT see the above successAction.
-      // We assume this is OK when it is called through webln.
+      // Do not reply to the prompt if the payment was successful and the successAction is not null
       if (navState.isPrompt && !paymentInfo.successAction) {
         msg.reply(paymentResponse);
       }
