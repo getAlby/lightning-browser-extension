@@ -2,7 +2,27 @@
   "translation": {
     "welcome": {
       "set_password": {
-        "title": "تعيين رمز المرور لفتح الامتداد"
+        "title": "تعيين رمز المرور لفتح الاضافة",
+        "confirm_password": {
+          "label": "دعنا نتأكد من أنك كتبته بشكل صحيح:"
+        },
+        "errors": {
+          "confirm_password": "يرجى تأكيد رمز المرور الخاص بك:",
+          "mismatched_password": "رمز المرور غير متطابق.",
+          "enter_password": "رجاءً ادخل رمز المرور:"
+        },
+        "description1": "عين رمز مرور لفتح قفل إضافة Alby في هذا المتصفح",
+        "description2": "لا يمكن استرداد رمز المرور الخاص بإلغاء القفل، ولكن يمكنك تغييره ",
+        "choose_password": {
+          "label": "اختر رمز مرور لإلغاء القفل:"
+        }
+      },
+      "test_connection": {
+        "ready": "رائع، أنت جاهز للذهاب!",
+        "connection_error": "خطأ في الاتصال",
+        "review_connection_details": "يرجى مراجعة تفاصيل الاتصال الخاصة بك.",
+        "initializing": "جاري تهيئة محفظتك. يُرجى الانتظار، قد يستغرق هذا دقيقة واحدة...",
+        "contact_support": "إذا كنت بحاجة إلى مساعدة يرجى الاتصال بـ support@getalby.com"
       }
     }
   }

@@ -694,8 +694,6 @@
       "request2": "Begär fakturor och lightning information"
     },
     "onboard": {
-      "request2": "Du har inte konfigurerat dina nycklar än",
-      "request1": "Denna webbplats kräver nyckelinteraktion",
       "request3": "Installationen är snabb och enkel",
       "title": "Ställ in dina nycklar",
       "actions": {
