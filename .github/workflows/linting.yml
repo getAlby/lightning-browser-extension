@@ -19,7 +19,7 @@ jobs:
 
       - name: Install Yarn 3.6.4
         run: |
-          npm install -g yarn@3.6.4
+          npm install -g yarn@1.22.19
           yarn --version
 
       - run: yarn install
