@@ -675,12 +675,17 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.52.0.tgz#78fe5f117840f69dc4a353adf9b9cd926353378c"
   integrity sha512-mjZVbpaeMZludF2fsWLD0Z9gCref1Tk4i9+wddjRvpUNqqcndPkBD09N/Mapey0b3jaXbLm2kICwFv2E64QinA==
 
-"@getalby/sdk@^3.9.0":
-  version "3.9.0"
-  resolved "https://registry.yarnpkg.com/@getalby/sdk/-/sdk-3.9.0.tgz#4eb4dd9512fc41312c8a894b7f653360feb61eac"
-  integrity sha512-qgNXr4FsX0a+PPvWgb112Q8h1/ov31zVP4LjsDYr5+W0CkrRbW9pQnsHPycVPLB5H8k5WVRRNkxYBBoWIBAwyw==
+"@getalby/lightning-tools@^5.1.2":
+  version "5.1.2"
+  resolved "https://registry.yarnpkg.com/@getalby/lightning-tools/-/lightning-tools-5.1.2.tgz#8a018e98d5c13097dd98d93192cf5e4e455f4c20"
+  integrity sha512-BwGm8eGbPh59BVa1gI5yJMantBl/Fdps6X4p1ZACnmxz9vDINX8/3aFoOnDlF7yyA2boXWCsReVQSr26Q2yjiQ==
+
+"@getalby/sdk@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@getalby/sdk/-/sdk-5.0.0.tgz#eb51028391471408cf63fdc53bbbf1ec3e6e0b66"
+  integrity sha512-PyXgLZN3p+xZIPqyNyTwE0WxTCZI1YJK8TV/amOjdNkecQCR3LnVsusdtZfoszyS+pVo/HaSwF5zCQWUmz8I+Q==
   dependencies:
-    emittery "^1.0.3"
+    "@getalby/lightning-tools" "^5.1.2"
     nostr-tools "2.9.4"
 
 "@headlessui/react@^1.7.18":
@@ -4263,11 +4268,6 @@ emittery@^0.13.1:
   version "0.13.1"
   resolved "https://registry.npmjs.org/emittery/-/emittery-0.13.1.tgz"
   integrity sha512-DeWwawk6r5yR9jFgnDKYt4sLS0LmHJJi3ZOnb5/JdbYwj3nW+FxQnHIjhBKz8YLC7oRNPVM9NQ47I3CVx34eqQ==
-
-emittery@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/emittery/-/emittery-1.0.3.tgz#c9d2a9c689870f15251bb13b31c67715c26d69ac"
-  integrity sha512-tJdCJitoy2lrC2ldJcqN4vkqJ00lT+tOWNT1hBJjO/3FDMJa5TTIiYGCKGkn/WfCyOzUMObeohbVTj00fhiLiA==
 
 emoji-log@^1.0.2:
   version "1.0.2"
