@@ -4050,10 +4050,10 @@ devtools-protocol@0.0.1439962:
   resolved "https://registry.yarnpkg.com/devtools-protocol/-/devtools-protocol-0.0.1439962.tgz#395c5ca1cd83aa451c667056a025f9873c4598c1"
   integrity sha512-jJF48UdryzKiWhJ1bLKr7BFWUQCEIT5uCNbDLqkQJBtkFxYzILJH44WN0PDKMIlGDN7Utb8vyUY85C3w4R/t2g==
 
-dexie@^4.0.11:
-  version "4.0.11"
-  resolved "https://registry.yarnpkg.com/dexie/-/dexie-4.0.11.tgz#010a2c82dd35d40aa9a81c8d21951bfeb487b7d6"
-  integrity sha512-SOKO002EqlvBYYKQSew3iymBoN2EQ4BDw/3yprjh7kAfFzjBYkaMNa/pZvcA7HSWlcKSQb9XhPe3wKyQ0x4A8A==
+dexie@^3.2.7:
+  version "3.2.7"
+  resolved "https://registry.yarnpkg.com/dexie/-/dexie-3.2.7.tgz#1346541c9c81e3bc6055a042a928837890595e3a"
+  integrity sha512-2a+BXvVhY5op+smDRLxeBAivE7YcYaneXJ1la3HOkUfX9zKkE/AJ8CNgjiXbtXepFyFmJNGSbmjOwqbT749r/w==
 
 didyoumean@^1.2.2:
   version "1.2.2"
