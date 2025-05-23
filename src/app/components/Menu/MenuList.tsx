@@ -5,10 +5,10 @@ import { classNames } from "~/app/utils";
 type Props = {
   position?: string;
   children: React.ReactNode;
-  fullWidth?: boolean;
+  width?: string;
 };
 
-function List({ position = "left", fullWidth, children }: Props) {
+function List({ position = "left", width = "w-56", children }: Props) {
   return (
     <Transition
       as={Fragment}
@@ -24,8 +24,8 @@ function List({ position = "left", fullWidth, children }: Props) {
           position === "left"
             ? "left-0 origin-top-left"
             : "right-0 origin-top-right",
-          fullWidth ? "w-full" : "w-56",
-          "absolute z-50 mt-2 overflow-hidden rounded-xl shadow-lg bg-white focus:outline-none dark:bg-surface-01dp border border-gray-200 dark:border-neutral-700"
+          width,
+          "absolute z-50 mt-3 overflow-hidden rounded-xl shadow-lg bg-white focus:outline-none dark:bg-surface-01dp border border-gray-200 dark:border-neutral-700"
         )}
       >
         {children}

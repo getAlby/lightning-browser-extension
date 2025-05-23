@@ -1117,8 +1117,7 @@
     "account_menu": {
       "options": {
         "account": {
-          "go_to_web_wallet": "Verwalte dein Web-Konto",
-          "add": "Hinzufügen"
+          "go_to_web_wallet": "Verwalte dein Web-Konto"
         }
       },
       "screen_reader": "Dropdown umschalten",
