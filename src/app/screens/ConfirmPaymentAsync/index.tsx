@@ -113,7 +113,7 @@ function ConfirmPaymentAsync() {
                   components={[
                     // eslint-disable-next-line react/jsx-key
                     <Hyperlink
-                      href="https://guides.getalby.com/user-guide/v/alby-account-and-browser-extension/alby-browser-extension/features/hold-payments"
+                      href="https://guides.getalby.com/user-guide/browser-extension/features/hold-payments"
                       target="_blank"
                       rel="noopener nofollow"
                       className="dark:text-white underline font-medium"
