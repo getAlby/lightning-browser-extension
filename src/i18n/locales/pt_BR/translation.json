@@ -1093,8 +1093,7 @@
     "account_menu": {
       "options": {
         "account": {
-          "go_to_web_wallet": "Acessar sua conta na web",
-          "add": "Conectar"
+          "go_to_web_wallet": "Acessar sua conta na web"
         }
       },
       "title": "Mudar de carteira"
