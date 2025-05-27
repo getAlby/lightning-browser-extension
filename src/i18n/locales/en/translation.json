@@ -849,6 +849,12 @@
       "memo": {
         "label": "Memo"
       },
+      "fiat_amount": {
+        "label": "Local Currency Amount"
+      },
+      "enter_fiat_amount": {
+        "placeholder": "Enter amount in local currency"
+      },
       "errors": {
         "amount_too_small": "Amount is less than minimum",
         "amount_too_big": "Amount exceeds maximum"

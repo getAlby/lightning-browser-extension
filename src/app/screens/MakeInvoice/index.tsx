@@ -13,6 +13,7 @@ import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
+import { numSatsInBtc } from "~/common/utils/currencyConvert";
 import type { OriginData, RequestInvoiceArgs } from "~/types";
 
 const Dt = ({ children }: { children: React.ReactNode }) => (
@@ -29,6 +30,7 @@ function MakeInvoice() {
     isLoading: isLoadingSettings,
     settings,
     getFormattedFiat,
+    getCurrencyRate,
   } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
 
@@ -40,6 +42,8 @@ function MakeInvoice() {
   const [loading, setLoading] = useState(false);
   const [valueSat, setValueSat] = useState(invoiceAttributes.amount || "");
   const [fiatValue, setFiatValue] = useState("");
+  const [valueFiatString, setValueFiatString] = useState("");
+  const [isSatsPrimary, setIsSatsPrimary] = useState(true);
   const [memo, setMemo] = useState(invoiceAttributes.memo || "");
   const [error, setError] = useState("");
   const { t: tCommon } = useTranslation("common");
@@ -48,13 +52,91 @@ function MakeInvoice() {
   });
 
   useEffect(() => {
-    if (valueSat !== "" && showFiat) {
+    if (valueSat !== "" && showFiat && isSatsPrimary) {
       (async () => {
-        const res = await getFormattedFiat(valueSat);
-        setFiatValue(res);
+        const formattedFiat = await getFormattedFiat(valueSat);
+        setFiatValue(formattedFiat);
+        const numericFiat = formattedFiat.replace(/[^0-9.]/g, "");
+        setValueFiatString(numericFiat);
       })();
+    } else if (valueSat === "" && isSatsPrimary) {
+      setFiatValue("");
+      setValueFiatString("");
     }
-  }, [valueSat, showFiat, getFormattedFiat]);
+  }, [valueSat, showFiat, getFormattedFiat, isSatsPrimary]);
+
+  useEffect(() => {
+    if (!isSatsPrimary && valueFiatString && valueFiatString !== ".") {
+      (async () => {
+        try {
+          setLoading(true);
+          const rate = await getCurrencyRate();
+          if (!rate) {
+            setError(tCommon("error") + ": Failed to fetch currency rate");
+            console.error("Failed to fetch currency rate.");
+            setValueSat("");
+            return;
+          }
+
+          const fiatNumericValue = parseFloat(valueFiatString);
+          if (isNaN(fiatNumericValue)) {
+            setError(tCommon("error") + ": Invalid amount");
+            setValueSat("");
+            return;
+          }
+
+          const calculatedSats = Math.floor(
+            (fiatNumericValue / rate) * numSatsInBtc
+          );
+
+          if (
+            invoiceAttributes.minimumAmount &&
+            calculatedSats <
+              (typeof invoiceAttributes.minimumAmount === "string"
+                ? parseInt(invoiceAttributes.minimumAmount)
+                : invoiceAttributes.minimumAmount)
+          ) {
+            setError(t("errors.amount_too_small"));
+            setValueSat("");
+            return;
+          } else if (
+            invoiceAttributes.maximumAmount &&
+            calculatedSats >
+              (typeof invoiceAttributes.maximumAmount === "string"
+                ? parseInt(invoiceAttributes.maximumAmount)
+                : invoiceAttributes.maximumAmount)
+          ) {
+            setError(t("errors.amount_too_big"));
+            setValueSat("");
+            return;
+          } else {
+            setError("");
+          }
+
+          setValueSat(calculatedSats.toString());
+        } catch (e) {
+          console.error("Error during fiat to sats conversion:", e);
+          if (e instanceof Error) setError(tCommon("error") + ": " + e.message);
+          else setError(tCommon("error") + ": Conversion failed");
+          setValueSat("");
+        } finally {
+          setLoading(false);
+        }
+      })();
+    } else if (!isSatsPrimary && !valueFiatString) {
+      setValueSat("");
+      setError("");
+    }
+  }, [
+    valueFiatString,
+    isSatsPrimary,
+    getCurrencyRate,
+    invoiceAttributes.minimumAmount,
+    invoiceAttributes.maximumAmount,
+    t,
+    tCommon,
+    setLoading,
+  ]);
 
   function handleValueChange(amount: string) {
     setError("");
@@ -76,6 +158,15 @@ function MakeInvoice() {
       setError(t("errors.amount_too_big"));
     }
     setValueSat(amount);
+    setIsSatsPrimary(true);
+  }
+
+  function handleFiatInputChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const newValue = e.target.value;
+    if (/^\d*\.?\d*$/.test(newValue)) {
+      setValueFiatString(newValue);
+      setIsSatsPrimary(false);
+    }
   }
 
   function handleMemoChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -135,6 +226,15 @@ function MakeInvoice() {
                       fiatValue={fiatValue}
                     />
                     <SatButtons onClick={handleValueChange} />
+                    {showFiat && (
+                      <TextField
+                        id="fiatAmount"
+                        label="Fiat Amount (e.g., USD)"
+                        value={valueFiatString}
+                        onChange={handleFiatInputChange}
+                        placeholder="Enter amount in your local currency"
+                      />
+                    )}
                   </div>
                 ) : (
                   <dl className="overflow-hidden">
