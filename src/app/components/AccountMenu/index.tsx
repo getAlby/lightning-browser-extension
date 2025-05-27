@@ -88,10 +88,10 @@ function AccountMenu({ showOptions = true }: Props) {
             close={closeModal}
             contentLabel={t("select_wallet")}
             position="center"
-            padding={showOptions ? "p-0" : "pb-3"}
+            className={showOptions ? "p-0" : "pb-3"}
           >
             <Menu as="div">
-              <ListItem isPrompt={true} />
+              <ListItem onAccountSelect={closeModal} />
             </Menu>
           </Modal>
         </>
@@ -193,10 +193,10 @@ function AccountMenu({ showOptions = true }: Props) {
   }
 
   type ListItemProps = {
-    isPrompt?: boolean;
+    onAccountSelect?: () => void;
   };
 
-  function ListItem({ isPrompt }: ListItemProps) {
+  function ListItem({ onAccountSelect }: ListItemProps) {
     return (
       <>
         <p className="flex justify-center text-lg dark:text-white p-3 font-semibold">
@@ -224,9 +224,7 @@ function AccountMenu({ showOptions = true }: Props) {
                     if (window.location.pathname !== "/prompt.html") {
                       navigate("/");
                     }
-                    if (isPrompt) {
-                      closeModal();
-                    }
+                    onAccountSelect?.();
                   }}
                   disabled={accountLoading}
                   title={account.name}

@@ -9,7 +9,7 @@ type Props = {
   contentLabel: string;
   title?: string;
   position?: "top" | "center";
-  padding?: string;
+  className?: string;
 };
 
 export default function Modal({
@@ -19,7 +19,7 @@ export default function Modal({
   contentLabel,
   title,
   position = "center",
-  padding = "p-5",
+  className = "p-5",
 }: Props) {
   return (
     <ReactModal
@@ -35,7 +35,7 @@ export default function Modal({
         position == "top" && "items-start pt-20"
       )}
       className={classNames(
-        padding,
+        className,
         "rounded-xl shadow-xl bg-white dark:bg-surface-01dp w-full max-w-md overflow-x-hidden relative cursor-auto mx-5 no-scrollbar"
       )}
       style={{ content: { maxHeight: "80vh" } }}
