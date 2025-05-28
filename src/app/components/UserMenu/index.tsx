@@ -98,7 +98,7 @@ export default function UserMenu() {
         <Menu.ItemButton
           onClick={() => {
             utils.openUrl(
-              "https://guides.getalby.com/user-guide/v/alby-account-and-browser-extension/"
+              "https://guides.getalby.com/user-guide/browser-extension"
             );
           }}
         >

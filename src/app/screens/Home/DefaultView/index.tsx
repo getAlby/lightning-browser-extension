@@ -168,7 +168,7 @@ const DefaultView: FC<Props> = (props) => {
                     // eslint-disable-next-line react/jsx-key
                     <a
                       className="underline"
-                      href="https://guides.getalby.com/user-guide/v/alby-account-and-browser-extension/alby-browser-extension/migrate-from-old-lndhub-setup"
+                      href="https://guides.getalby.com/user-guide/browser-extension/faq/migrate-from-old-lndhub-setup"
                       target="_blank"
                       rel="noreferrer"
                     />,
@@ -216,7 +216,7 @@ const DefaultView: FC<Props> = (props) => {
                     // eslint-disable-next-line react/jsx-key
                     <Hyperlink
                       className="underline"
-                      href="https://guides.getalby.com/user-guide/alby-account-and-browser-extension/alby-account/faqs-alby-account/what-are-fee-credits-in-my-alby-account"
+                      href="https://guides.getalby.com/user-guide/alby-account/faq/what-are-fee-credits-in-my-alby-account"
                       target="_blank"
                       rel="noopener nofollow"
                     />,
@@ -311,7 +311,7 @@ const DefaultView: FC<Props> = (props) => {
                     icon={<PopiconsBulbLine className="w-8 h-8" />}
                     onClick={() => {
                       utils.openUrl(
-                        "https://guides.getalby.com/user-guide/v/alby-account-and-browser-extension/"
+                        "https://guides.getalby.com/user-guide/browser-extension"
                       );
                     }}
                   />
