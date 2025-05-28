@@ -148,7 +148,7 @@ export default function TestConnection() {
                               // eslint-disable-next-line react/jsx-key
                               <Hyperlink
                                 className="underline"
-                                href="https://guides.getalby.com/user-guide/alby-account-and-browser-extension/alby-account/faqs-alby-account/what-are-fee-credits-in-my-alby-account"
+                                href="https://guides.getalby.com/user-guide/alby-account/faq/what-are-fee-credits-in-my-alby-account"
                                 target="_blank"
                                 rel="noopener nofollow"
                               />,
