@@ -1,6 +1,7 @@
 import browser, { Runtime, Tabs } from "webextension-polyfill";
 import utils from "~/common/lib/utils";
 
+import { isBitcoinAddress } from "~/app/utils";
 import { isManifestV3 } from "~/common/utils/mv3";
 import { registerInPageContentScript } from "~/extension/background-script/registerContentScript";
 import { ExtensionIcon, setIcon } from "./actions/setup/setIcon";
@@ -139,6 +140,64 @@ browser.tabs.onUpdated.addListener(extractLightningData);
 // The onInstalled event is fired directly after the code is loaded.
 // When we subscribe to that event asynchronously in the init() function it is too late and we miss the event.
 browser.runtime.onInstalled.addListener(handleInstalled);
+
+// create context menu items for lightning actions
+browser.runtime.onInstalled.addListener(() => {
+  browser.contextMenus.create({
+    id: "btc-lightning-pay",
+    title: "Pay with Bitcoin or Lightning",
+    contexts: ["selection"],
+  });
+
+  browser.contextMenus.create({
+    id: "lightning-copy",
+    title: "Copy Lightning Address",
+    contexts: ["selection"],
+  });
+});
+
+// Handle menu clicks
+browser.contextMenus.onClicked.addListener((info, tab) => {
+  const text = info?.selectionText?.trim();
+  if (!text) return;
+
+  //  `send page` invoice inputfield will also validate the input anyways
+  if (info.menuItemId === "btc-lightning-pay" && isValidLightningInput(text)) {
+    const sendUrl = browser.runtime.getURL(
+      `popup.html?invoice=${encodeURIComponent(text)}#/send`
+    );
+    browser.windows.create({
+      url: sendUrl,
+      type: "popup",
+      width: 400,
+      height: 650,
+    });
+  } else if (info.menuItemId === "lightning-copy" && isValidLightningInput(text)) {
+    if (tab?.id !== undefined) {
+      browser.scripting.executeScript({
+        target: { tabId: tab.id },
+        func: (textToCopy) => {
+          navigator.clipboard.writeText(textToCopy);
+          // TODO :  use a notification to inform the user that the text was copied
+        },
+        args: [text],
+      });
+    }
+  }
+});
+
+
+function isValidLightningInput(text: string): boolean {
+  const isInvoice =
+    /^(lightning:)?ln(bc|tb|lntb)[a-zA-HJ-NP-Z0-9]{1,4000}$/i.test(text);
+  const isLNURL = /^(lightning:)?lnurl[pwc][a-zA-Z0-9]{1,4000}$/i.test(text);
+  const isAddress = /^[\w+-]+@[\w+-.]+\.[a-zA-Z]{2,}$/i.test(text);
+  const isPubKey = /^([0-9a-f]{66}|[0-9a-f]{130})$/i.test(text);
+
+  return (
+    isInvoice || isLNURL || isAddress || isBitcoinAddress(text) || isPubKey
+  );
+}
 
 async function init() {
   console.info("Loading background script");

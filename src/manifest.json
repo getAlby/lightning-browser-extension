@@ -19,6 +19,9 @@
     "storage",
     "tabs",
     "unlimitedStorage",
+    "contextMenus",
+    "clipboardWrite",
+    "scripting",
     "*://*/*"
   ],
   "__chrome__permissions": [
@@ -27,7 +30,9 @@
     "scripting",
     "storage",
     "tabs",
-    "unlimitedStorage"
+    "unlimitedStorage",
+    "contextMenus",
+    "clipboardWrite"
   ],
   "__chrome__host_permissions": ["*://*/*"],
   "content_security_policy": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'",
