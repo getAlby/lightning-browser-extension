@@ -24,7 +24,6 @@ function Send() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
- 
   // Extract invoice from URL parameters (if available)
   // This is passed when a user selects "Pay with Alby" from the browser's context menu
   useEffect(() => {

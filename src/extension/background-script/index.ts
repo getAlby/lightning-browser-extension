@@ -172,7 +172,10 @@ browser.contextMenus.onClicked.addListener((info, tab) => {
       width: 400,
       height: 650,
     });
-  } else if (info.menuItemId === "lightning-copy" && isValidLightningInput(text)) {
+  } else if (
+    info.menuItemId === "lightning-copy" &&
+    isValidLightningInput(text)
+  ) {
     if (tab?.id !== undefined) {
       browser.scripting.executeScript({
         target: { tabId: tab.id },
@@ -185,7 +188,6 @@ browser.contextMenus.onClicked.addListener((info, tab) => {
     }
   }
 });
-
 
 function isValidLightningInput(text: string): boolean {
   const isInvoice =
