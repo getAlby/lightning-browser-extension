@@ -151,7 +151,7 @@ browser.runtime.onInstalled.addListener(() => {
 
   browser.contextMenus.create({
     id: "lightning-copy",
-    title: "Copy Lightning Address",
+    title: "Copy Address or Invoice",
     contexts: ["selection"],
   });
 });
