@@ -328,8 +328,7 @@
     },
     "settings": {
       "website_enhancements": {
-        "title": "Mejoras del sitio web",
-        "subtitle": "Mejoras de propinas para Twitter, YouTube, etc."
+        "title": "Mejoras del sitio web"
       },
       "camera_access": {
         "title": "Acceso a la cámara",
