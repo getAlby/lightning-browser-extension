@@ -341,8 +341,7 @@
         "title": "Browser-Benachrichtigungen"
       },
       "website_enhancements": {
-        "title": "Website-Verbesserungen",
-        "subtitle": "Verbesserungen für X, YouTube, etc."
+        "title": "Website-Verbesserungen"
       },
       "title": "Einstellungen der Erweiterung",
       "change_password": {
@@ -1117,11 +1116,13 @@
     "account_menu": {
       "options": {
         "account": {
-          "go_to_web_wallet": "Verwalte dein Web-Konto"
+          "go_to_web_wallet": "Verwalte dein Web-Konto",
+          "connect_wallet": "Brieftasche verbinden"
         }
       },
       "screen_reader": "Dropdown umschalten",
-      "title": "Wallet wechseln"
+      "title": "Wallet wechseln",
+      "select_wallet": "Brieftasche auswählen"
     },
     "publishers_table": {
       "payments": "Zahlungen",
@@ -1328,7 +1329,8 @@
     "details": "Einzelheiten",
     "general": "Allgemein",
     "wallet_settings": "Wallet-Einstellungen",
-    "setup_wallet": "Beende deine <0>Alby-Kontoeinrichtung</0> für unbegrenzte Zahlungen. Bis deine Einrichtung abgeschlossen ist, kannst du bis zu {{max_account_balance}} als <1>Gebührengutschrift</1> erhalten"
+    "setup_wallet": "Beende deine <0>Alby-Kontoeinrichtung</0> für unbegrenzte Zahlungen. Bis deine Einrichtung abgeschlossen ist, kannst du bis zu {{max_account_balance}} als <1>Gebührengutschrift</1> erhalten",
+    "active_wallet_settings": "Aktive Wallet Einstellungen"
   },
   "permissions": {
     "commando": {

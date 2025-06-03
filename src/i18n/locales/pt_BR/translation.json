@@ -472,8 +472,7 @@
     },
     "settings": {
       "website_enhancements": {
-        "title": "Pagamentos em redes sociais",
-        "subtitle": "Reconhece automaticamente endereços relâmpago em perfis do Twitter, Youtube, etc, facilitando o envio de pagamentos."
+        "title": "Pagamentos em redes sociais"
       },
       "camera_access": {
         "title": "Acesso à câmera",
