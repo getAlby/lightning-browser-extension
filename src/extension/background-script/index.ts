@@ -148,12 +148,6 @@ browser.runtime.onInstalled.addListener(() => {
     title: "Pay with Bitcoin or Lightning",
     contexts: ["selection"],
   });
-
-  browser.contextMenus.create({
-    id: "lightning-copy",
-    title: "Copy Address or Invoice",
-    contexts: ["selection"],
-  });
 });
 
 // Handle menu clicks
@@ -172,20 +166,6 @@ browser.contextMenus.onClicked.addListener((info, tab) => {
       width: 400,
       height: 650,
     });
-  } else if (
-    info.menuItemId === "lightning-copy" &&
-    isValidLightningInput(text)
-  ) {
-    if (tab?.id !== undefined) {
-      browser.scripting.executeScript({
-        target: { tabId: tab.id },
-        func: (textToCopy) => {
-          navigator.clipboard.writeText(textToCopy);
-          // TODO :  use a notification to inform the user that the text was copied
-        },
-        args: [text],
-      });
-    }
   }
 });
 
