@@ -25,6 +25,22 @@ export const getFormattedCurrency = (params: {
   }).format(Number(params.amount));
 };
 
+export const getCurrencySymbol = (params: {
+  currency: CURRENCIES | ACCOUNT_CURRENCIES;
+  locale: string;
+}) => {
+  if (params.currency === "BTC") return "₿";
+  const l = (params.locale || "en").toLowerCase().replace("_", "-");
+  const value =
+    new Intl.NumberFormat(l || "en", {
+      style: "currency",
+      currency: params.currency,
+    })
+      .formatToParts(0)
+      .find((part) => part.type === "currency")?.value || "";
+  return value;
+};
+
 export const getFormattedFiat = (params: {
   amount: number | string;
   rate: number;

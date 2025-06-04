@@ -9,8 +9,8 @@ type Props = {
   onRememberChange: ChangeEventHandler<HTMLInputElement>;
   budget: string;
   onBudgetChange: ChangeEventHandler<HTMLInputElement>;
-  fiatAmount: string;
   disabled?: boolean;
+  showFiat?: boolean;
 };
 
 function BudgetControl({
@@ -18,14 +18,12 @@ function BudgetControl({
   onRememberChange,
   budget,
   onBudgetChange,
-  fiatAmount,
   disabled = false,
+  showFiat = false,
 }: Props) {
   const { t } = useTranslation("components", {
     keyPrefix: "budget_control",
   });
-
-  const { t: tCommon } = useTranslation("common");
 
   return (
     <div className="mb-4">
@@ -60,12 +58,11 @@ function BudgetControl({
 
         <div>
           <DualCurrencyField
+            showFiat={showFiat}
             autoFocus
-            fiatValue={fiatAmount}
             id="budget"
             min={0}
             label={t("budget.label")}
-            placeholder={tCommon("sats", { count: 0 })}
             value={budget}
             onChange={onBudgetChange}
           />

@@ -1,13 +1,27 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
+import { settingsFixture as mockSettings } from "~/../tests/fixtures/settings";
 
 import type { Props } from "./index";
 import DualCurrencyField from "./index";
 
 const props: Props = {
-  fiatValue: "$10.00",
+  showFiat: true,
   label: "Amount",
 };
+jest.mock("~/app/context/SettingsContext", () => ({
+  useSettings: () => ({
+    settings: mockSettings,
+    isLoading: false,
+    updateSetting: jest.fn(),
+    getFormattedFiat: jest.fn(() => "$10.00"),
+    getFormattedNumber: jest.fn(),
+    getFormattedSats: jest.fn(),
+    getCurrencyRate: jest.fn(() => 1),
+    getCurrencySymbol: jest.fn(() => "₿"),
+    getFormattedInCurrency: jest.fn(() => "$10.00"),
+  }),
+}));
 
 describe("DualCurrencyField", () => {
   test("render", async () => {
@@ -20,6 +34,9 @@ describe("DualCurrencyField", () => {
     const input = screen.getByLabelText("Amount");
 
     expect(input).toBeInTheDocument();
-    expect(await screen.getByText("~$10.00")).toBeInTheDocument();
+
+    await waitFor(() => {
+      expect(screen.getByText("~$10.00")).toBeInTheDocument();
+    });
   });
 });

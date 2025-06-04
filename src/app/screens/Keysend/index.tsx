@@ -5,9 +5,11 @@ import Header from "@components/Header";
 import IconButton from "@components/IconButton";
 import ResultCard from "@components/ResultCard";
 import SatButtons from "@components/SatButtons";
-import DualCurrencyField from "@components/form/DualCurrencyField";
+import DualCurrencyField, {
+  DualCurrencyFieldChangeEvent,
+} from "@components/form/DualCurrencyField";
 import { PopiconsChevronLeftLine } from "@popicons/react";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import Container from "~/app/components/Container";
@@ -21,7 +23,6 @@ function Keysend() {
   const {
     isLoading: isLoadingSettings,
     settings,
-    getFormattedFiat,
     getFormattedSats,
   } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
@@ -45,15 +46,6 @@ function Keysend() {
       ? false
       : +amountSat > (auth?.account?.balance || 0);
   const rangeExceeded = +amountSat < amountMin;
-
-  useEffect(() => {
-    (async () => {
-      if (amountSat !== "" && showFiat) {
-        const res = await getFormattedFiat(amountSat);
-        setFiatAmount(res);
-      }
-    })();
-  }, [amountSat, showFiat, getFormattedFiat]);
 
   async function confirm() {
     try {
@@ -124,11 +116,14 @@ function Keysend() {
                 />
                 <DualCurrencyField
                   id="amount"
-                  label={t("amount.label")}
+                  label={tCommon("amount")}
                   min={1}
-                  onChange={(e) => setAmountSat(e.target.value)}
                   value={amountSat}
-                  fiatValue={fiatAmount}
+                  showFiat={showFiat}
+                  onChange={(e: DualCurrencyFieldChangeEvent) => {
+                    setAmountSat(e.target.value);
+                    setFiatAmount(e.target.formattedValueInFiat);
+                  }}
                   hint={`${tCommon("balance")}: ${auth?.balancesDecorated
                     ?.accountBalance}`}
                   amountExceeded={amountExceeded}
