@@ -5,7 +5,7 @@ import IconButton from "@components/IconButton";
 import DualCurrencyField, {
   DualCurrencyFieldChangeEvent,
 } from "@components/form/DualCurrencyField";
-import { CreateSwapResponse } from "@getalby/sdk/dist/types";
+import { CreateSwapResponse } from "@getalby/sdk/dist/oauth/types";
 import {
   PopiconsChevronLeftLine,
   PopiconsLinkExternalSolid,
