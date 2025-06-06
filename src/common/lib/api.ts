@@ -2,7 +2,7 @@ import {
   CreateSwapParams,
   CreateSwapResponse,
   SwapInfoResponse,
-} from "@getalby/sdk/dist/types";
+} from "@getalby/sdk/dist/oauth/types";
 import { ACCOUNT_CURRENCIES } from "~/common/constants";
 import {
   ConnectPeerArgs,

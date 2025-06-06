@@ -107,6 +107,7 @@ class NWCConnector implements Connector {
             transaction.metadata?.["tlv_records"] as TLVRecord[] | undefined
           ),
           state: transaction.state,
+          metadata: transaction.metadata,
         })
       );
     return {

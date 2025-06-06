@@ -1,11 +1,13 @@
-import { PopiconsLinkExternalSolid } from "@popicons/react";
 import Button from "@components/Button";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Header from "@components/Header";
 import IconButton from "@components/IconButton";
 import DualCurrencyField from "@components/form/DualCurrencyField";
-import { CreateSwapResponse } from "@getalby/sdk/dist/types";
-import { PopiconsChevronLeftLine } from "@popicons/react";
+import { CreateSwapResponse } from "@getalby/sdk/dist/oauth/types";
+import {
+  PopiconsChevronLeftLine,
+  PopiconsLinkExternalSolid,
+} from "@popicons/react";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Skeleton from "react-loading-skeleton";

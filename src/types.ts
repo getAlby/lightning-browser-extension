@@ -1,7 +1,7 @@
 import {
   CreateSwapParams,
   GetAccountInformationResponse,
-} from "@getalby/sdk/dist/types";
+} from "@getalby/sdk/dist/oauth/types";
 import { PaymentRequestObject } from "bolt11-signet";
 import { Runtime } from "webextension-polyfill";
 import { ACCOUNT_CURRENCIES, CURRENCIES } from "~/common/constants";
@@ -790,6 +790,7 @@ export type Transaction = {
   value?: string;
   publisherLink?: string; // either the invoice URL if on PublisherSingleView, or the internal link to Publisher
   state?: "settled" | "pending" | "failed";
+  metadata?: ConnectorTransaction["metadata"];
 };
 
 export interface DbPayment {
