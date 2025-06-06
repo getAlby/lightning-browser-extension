@@ -10,7 +10,7 @@ import { useTranslation } from "react-i18next";
 
 import TransactionModal from "~/app/components/TransactionsTable/TransactionModal";
 import { useSettings } from "~/app/context/SettingsContext";
-import { classNames } from "~/app/utils";
+import { classNames, safeNpubEncode } from "~/app/utils";
 import { Transaction } from "~/types";
 
 export type Props = {
@@ -21,7 +21,6 @@ export type Props = {
 
 export default function TransactionsTable({
   transactions,
-  noResultMsg,
   loading = false,
 }: Props) {
   const { getFormattedSats, getFormattedInCurrency } = useSettings();
@@ -54,6 +53,35 @@ export default function TransactionsTable({
         <>
           {transactions?.map((tx) => {
             const type = getTransactionType(tx);
+            const typeStateText =
+              type == "incoming"
+                ? t("received")
+                : t(
+                    tx.state === "settled"
+                      ? "sent"
+                      : tx.state === "pending"
+                      ? "sending"
+                      : tx.state === "failed"
+                      ? "failed"
+                      : "sent"
+                  );
+
+            const payerName = tx.metadata?.payer_data?.name;
+            const pubkey = tx.metadata?.nostr?.pubkey;
+            const npub = pubkey ? safeNpubEncode(pubkey) : undefined;
+
+            const from = payerName
+              ? `from ${payerName}`
+              : npub
+              ? `zap from ${npub.substring(0, 12)}...`
+              : undefined;
+
+            const recipientIdentifier = tx.metadata?.recipient_data?.identifier;
+            const to = recipientIdentifier
+              ? `${
+                  tx.state === "failed" ? "payment " : ""
+                }to ${recipientIdentifier}`
+              : undefined;
 
             return (
               <div
@@ -91,19 +119,9 @@ export default function TransactionsTable({
                           tx.state == "pending" && "animate-pulse"
                         )}
                       >
-                        {tx.title ||
-                          tx.boostagram?.message ||
-                          (type == "incoming"
-                            ? t("received")
-                            : t(
-                                tx.state === "settled"
-                                  ? "sent"
-                                  : tx.state === "pending"
-                                  ? "sending"
-                                  : tx.state === "failed"
-                                  ? "failed"
-                                  : "sent"
-                              ))}
+                        {tx.title || tx.boostagram?.message || typeStateText}
+                        {from !== undefined && <>&nbsp;{from}</>}
+                        {to !== undefined && <>&nbsp;{to}</>}
                       </p>
                     </div>
                     <p className="text-xs text-gray-400 dark:text-neutral-500">
