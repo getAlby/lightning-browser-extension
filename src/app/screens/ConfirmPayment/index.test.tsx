@@ -50,6 +50,7 @@ jest.mock("~/app/context/SettingsContext", () => ({
     getFormattedNumber: jest.fn(),
     getFormattedSats: jest.fn(() => "25 sats"),
     getCurrencySymbol: jest.fn(() => "₿"),
+    getFormattedInCurrency: jest.fn(() => "$10.00"),
   }),
 }));
 
