@@ -16,14 +16,10 @@
       },
       "test_connection": {
         "ready": "すごいね、準備万端だ！",
-        "initializing": "アカウントを作成中です。少々お待ちください…",
         "connection_error": "接続エラー",
         "review_connection_details": "接続情報を確認してください。",
         "connection_taking_long": "接続に時間がかかっています…設定は正しいですか？ノードにアクセス可能か確認してください。",
-        "contact_support": "サポートが必要な場合は support@getalby.com までご連絡ください。",
-        "actions": {
-          "delete_edit_account": "無効なアカウントを削除して再編集"
-        }
+        "contact_support": "サポートが必要な場合は support@getalby.com までご連絡ください。"
       },
       "pin_extension": {
         "title": "Alby拡張機能を固定",
@@ -59,7 +55,6 @@
     },
     "choose_connector": {
       "lnd": {
-        "title": "LND",
         "page": {
           "title": "LNDノードに接続",
           "description": "ノードのURLと、readとsendのパーミッションを持つmacaroon（例：admin.macaroon）が必要です"
@@ -133,17 +128,8 @@
       },
       "citadel": {
         "page": {
-          "title": "<0>Citadel</0>ノードに接続",
-          "instructions": "現在のところ、2要素認証（2FA）が有効になっている場合は機能しません。"
-        },
-        "password": {
-          "label": "Citadelのパスワード"
-        },
-        "url": {
-          "label": "CitadelのURL",
-          "placeholder": "http://citadel.local"
-        },
-        "title": "Citadel"
+          "title": "<0>Citadel</0>ノードに接続"
+        }
       },
       "umbrel": {
         "page": {
@@ -153,8 +139,7 @@
         "rest_url": {
           "label": "lndconnectのREST URL",
           "placeholder": "lndconnect://yournode:8080?..."
-        },
-        "title": "Umbrel"
+        }
       },
       "mynode": {
         "page": {
@@ -164,15 +149,13 @@
         "rest_url": {
           "label": "lndconnectのREST URL",
           "placeholder": "lndconnect://yournode:8080?..."
-        },
-        "title": "myNode"
+        }
       },
       "startos": {
         "rest_url": {
           "label": "lndconnectのREST URL",
           "placeholder": "lndconnect://yournode:8080?..."
         },
-        "title": "StartOS",
         "page": {
           "title": "<0>StartOSサーバー</0>に接続",
           "instructions": "StartOSダッシュボードで<0>Lightning Network Daemon</0>サービスをクリックします。<1/><0>Properties</0>タブを選択します。<1/>ここで<0>LND Connect REST URL</0>をコピーします。"
@@ -187,19 +170,16 @@
         "rest_api_host": {
           "label": "REST APIのホスト",
           "placeholder": "your-node-onion-address:port"
-        },
-        "title": "RaspiBlitz"
+        }
       },
       "blink": {
         "page": {
           "title": "<0>Blink Wallet</0>に接続"
-        },
-        "title": "Blink Wallet"
+        }
       },
       "title": "ライトニング・ウォレットを接続",
       "description": "外部のライトニング・ウォレットまたはノードに接続",
       "bitcoin_jungle": {
-        "title": "Bitcoin Jungle Wallet",
         "page": {
           "title": "<0>Bitcoin Jungle Wallet</0>に接続"
         }
@@ -210,8 +190,7 @@
         },
         "errors": {
           "connection_failed": "接続に失敗しました。BTCPayの接続URLは正しく、アクセス可能ですか？"
-        },
-        "title": "BTCPay Server"
+        }
       },
       "commando": {
         "page": {
@@ -228,7 +207,6 @@
         "errors": {
           "connection_failed": "接続に失敗しました。Core Lightningノードがオンラインであり、commandoプラグインを使用していますか？"
         },
-        "title": "Core Lightning",
         "pubkey": {
           "label": "公開鍵"
         },
@@ -251,13 +229,11 @@
         "export": {
           "waiting": "LndHubデータを取得中...",
           "your_ln_address": "あなたのライトニング・アドレス：",
-          "screen_reader": "アカウント情報をエクスポート",
           "export_uri": "LNDHubの認証URl",
           "scan_qr": "QRCコードをスキャンして、このウォレットをZeusまたはBlueWalletにインポートする。"
         },
         "name": {
-          "title": "表示名",
-          "placeholder": "アカウントの表示名"
+          "title": "表示名"
         },
         "mnemonic": {
           "backup": {
@@ -268,7 +244,6 @@
             },
             "save": "マスターキーを保存"
           },
-          "existing_nostr_key_notice": "ℹ️ このアカウントにはすでにnostr秘密鍵が設定されているため、このマスターキーから生成されることはありません。Nostr鍵はアカウント設定から管理できます。",
           "generate": {
             "description": "マスターキーは、Nostr、Bitcoinのベースレイヤー、LNURL-Authのようなプロトコルとの連携を可能にします。",
             "title": "新しいマスターキーの生成",
@@ -297,15 +272,6 @@
             "can_restore": "✅ Nostrキーはマスターキーから導出されています"
           },
           "title": "Nostr",
-          "setup": {
-            "description2": "Albyで作成されたすべてのNostrアカウントには、<0>リカバリーフレーズ</0>が付属しています。これはNostrの秘密鍵を復旧するための12個の単語です。",
-            "new": {
-              "label": "新しいNostrアカウントを作成する",
-              "description": "新しいNostr鍵のペアでマスター鍵を生成する。"
-            },
-            "title": "Nostrキーのセットアップ",
-            "description": "新しいNostrアカウント（秘密鍵と公開鍵のペア）を作成するか、既存のアカウントをインポートするかを選択します。"
-          },
           "private_key": {
             "successfully_removed": "Nostr秘密鍵の削除に成功しました",
             "label": "Nostr秘密鍵",
@@ -356,9 +322,6 @@
     "distributions": {
       "umbrel": {
         "name": "Umbrel"
-      },
-      "citadel": {
-        "name": "Citadel"
       },
       "btcpay": {
         "name": "BTCPay"

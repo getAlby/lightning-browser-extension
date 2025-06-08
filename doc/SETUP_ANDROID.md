@@ -17,6 +17,6 @@ b. **Setup Android Device**
 c. **Install and run extension**
 
 1. Remove native messaging permission from extensions manifest (web-ext currently doesn't ignore unsupported permissions. temporarily we need to do this unless we find proper solution)
-2. Run extension's local development environment via `$ ALBY_API_URL="https://api.getalby.com" yarn run dev:firefox`
+2. Run extension's local development environment via `$ yarn run dev:firefox`
 3. Go to extension's dist directory: `dist/development/firefox`
 4. In the unzipped dist directory of the extension run `$ web-ext run -t firefox-android --adb-device <your_device_id> --firefox-apk org.mozilla.fenix`

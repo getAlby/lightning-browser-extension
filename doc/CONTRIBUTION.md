@@ -2,27 +2,42 @@
 
 We welcome and appreciate new contributions.
 
-### Testnet/testing-accounts for development use Alby testnet
+- We expect contributors to abide by our underlying [Code of Conduct](./CODE_OF_CONDUCT.md) . All discussions about this project must be respectful and harassment-free.
+- Remember that communication is the lifeblood of any Open Source project. We are all working on this together, and we are all benefiting from this software.
+- It's very easy to misunderstand one another in asynchronous, text-based conversations. When in doubt, assume everyone has the best intentions.
 
-We have setup some testnet nodes, which can be used for your development.
-If this is not reachable please let us know.
+### Creating an Issue
 
-- [Test-setup](https://github.com/getAlby/lightning-browser-extension/wiki/Test-setup) for different connectors (i.e. LND)
-- [Thunderhub](https://thunderhub.regtest.getalby.com/) for testing nodes (PW: `getalby`)
-  Currently only lists LND nodes
-- [LNDhub.go API Swagger](https://lndhub.regtest.getalby.com/swagger/index.html)
+- Check if the issue you are going to propose is not duplicate of another issue.
+- Open a new issue according to type i.e., if issue is a bug open a new issue by clicking on Bug Report.
+- Give a precise and meaningful name of the issue.
+- Describe your issue as good as possible that may ease the process of issue-reviewing by a community member.
 
-After installing the wallet in the browser and setting the username and password, the page will jump to the page for selecting the lightning network wallet.
+### How to contribute
 
-Select the LND Testnet accounts account LND-1 in the document [Test-setup](https://github.com/getAlby/lightning-browser-extension/wiki/Test-setup).
+- Fork the project and clone it to your local machine. Follow the [setup](./SETUP.md) guideline.
+- Always take a pull from the remote repository to your master branch to keep it at sync with the main project(updated repository).
 
-Copy the content of Address to the REST API host and port pasted into the wallet
+  ```
+  git pull upstream master
+  ```
 
-Copy the contents of Admin Macaroon and paste it into the Macaroon (HEX format) in the wallet
+* Create a branch. For details on how to name your branches, see [Branch names](#branch-names).
 
-Click Continue to create an account
+  ```
+  git checkout -b feat/feature-name
+  ```
 
-### Creating a PR
+  This both creates and checks out that branch in one command.
+  The feature name should provide a (short) description of the issue.
+
+- Follow the [translation](#translations) rules while translating UI strings
+
+- Commit your changes and push it to your fork of the repository. For details on how to name your commit, see [Commit Message Format](#commit-message-format).
+
+- Create Pull Request (PR). Make sure to comment the issue that your PR is supposed to solve.
+
+### Creating a Pull Request
 
 When creating a PR please take this points as a reminder:
 

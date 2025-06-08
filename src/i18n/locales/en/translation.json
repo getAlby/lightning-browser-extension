@@ -19,13 +19,13 @@
       },
       "test_connection": {
         "ready": "Awesome, you're ready to go!",
-        "initializing": "Initializing your account. Please wait, this can take a minute...",
+        "initializing": "Initializing your wallet. Please wait, this can take a minute...",
         "connection_error": "Connection Error",
         "review_connection_details": "Please review your connection details.",
         "connection_taking_long": "Trying to connect takes longer than expected... Are your details correct? Is your node reachable?",
         "contact_support": "If you need help please contact support@getalby.com",
         "actions": {
-          "delete_edit_account": "Delete invalid account and edit again"
+          "delete_edit_account": "Delete invalid wallet and edit again"
         }
       },
       "pin_extension": {
@@ -40,18 +40,12 @@
       "other": {
         "title": "Bring Your Own Wallet",
         "description": "Best if you already have a wallet or own a lightning node.",
-        "connect": "Find Your Wallet",
-        "point1": "Both self-custody and custodial options",
-        "point2": "No lightning and nostr address",
-        "point3": "Start instantly, no waiting for an invite"
+        "connect": "Find Your Wallet"
       },
       "alby": {
         "title": "Alby Account",
         "description": "Ideal If you would like to enjoy apps while staying in control of your bitcoin.",
-        "connect": "Continue with Alby Account",
-        "point1": "New self-custodial wallet — <0>Alby Hub</0>",
-        "point2": "Unique lightning and nostr address",
-        "point3": "New signups require an invite code"
+        "connect": "Continue with Alby Account"
       }
     },
     "alby": {
@@ -155,15 +149,15 @@
         "title": "Citadel",
         "page": {
           "title": "Connect to <0>Citadel</0> node",
-          "instructions": "This currently doesn't work if 2FA is enabled."
+          "instructions": "1. In the Citadel section of your Nirvati dashboard go to <0>Connect wallet</0><1/>2. Select <0>Alby (Tor)</0> or <0>Alby (Local Network)</0> mode<1/>3. Copy the <0>lndconnect URL</0> and paste it below"
         },
-        "password": {
-          "label": "Citadel Password"
-        },
-        "url": {
-          "label": "Citadel URL",
-          "placeholder": "http://citadel.local"
+        "rest_url": {
+          "label": "lndconnect REST URL",
+          "placeholder": "lndconnect://yournode:8080?..."
         }
+      },
+      "nirvati": {
+        "title": "Nirvati"
       },
       "umbrel": {
         "title": "Umbrel",
@@ -339,6 +333,19 @@
           "connection_failed": "Connection failed. Are your credentials correct?"
         }
       },
+      "albyhub": {
+        "title": "Alby Hub",
+        "page": {
+          "instructions": "Open your Alby Hub, create a new app connection and paste the connection secret to connect.",
+          "url": {
+            "label": "NWC connection secret",
+            "placeholder": "nostr+walletconnect://69effe..."
+          },
+          "errors": {
+            "connection_failed": "Connection failed. Is your Alby Hub online and app connection enabled?"
+          }
+        }
+      },
       "nwc": {
         "title": "Nostr Wallet Connect",
         "page": {
@@ -359,8 +366,8 @@
       "umbrel": {
         "name": "Umbrel"
       },
-      "citadel": {
-        "name": "Citadel"
+      "nirvati": {
+        "name": "Nirvati"
       },
       "btcpay": {
         "name": "BTCPay"
@@ -390,7 +397,7 @@
       "default_view": {
         "is_blocked_hint": "Alby is currently disabled on {{host}}",
         "block_removed": "Enabled {{host}}. Please reload the website.",
-        "no_transactions": "No transactions for this account yet.",
+        "no_transactions": "No transactions for this wallet yet.",
         "see_all": "See all",
         "actions": {
           "get_started": {
@@ -398,15 +405,14 @@
             "description": "New to Alby Extension? Check out our guides, videos and explanations"
           },
           "setup_keys": {
-            "title": "Setup Master Key",
-            "description": "Create a Master key for Bitcoin, Nostr and Liquid or import an existing Nostr account."
+            "title": "Setup Master Key or Nostr Key",
+            "description": "Generate or import a Master Key or import your existing Nostr key"
           },
           "receive_bitcoin": {
             "title": "Receive bitcoin",
-            "description": "Fund your account and receive via your lightning address or an invoice"
+            "description": "Fund your wallet and receive via your lightning address or an invoice"
           }
         },
-        "node_required": "Your Alby Account needs a wallet. Connect a wallet to your account on <0>getalby.com</0>",
         "upgrade_account": "You are using the old LNDHub setup. <0>Please re-connect</0> your Alby account to get access to the latest features."
       }
     },
@@ -416,7 +422,7 @@
         "description": "Settings related to this particular instance of the connected wallet. If you reconnect, settings related to keys or display name will have to be set again.",
         "name": {
           "title": "Display Name",
-          "placeholder": "Account Display Name"
+          "placeholder": "Wallet Display Name"
         },
         "lnaddress": {
           "title": "Lightning Address"
@@ -424,8 +430,8 @@
         "danger_zone": "Danger Zone",
         "export": {
           "title": "Connect to Mobile Wallet",
-          "description": "Log in on getalby.com to connect and use this account on mobile wallets like <0>Zeus</0> and <1>Blue Wallet</1>.",
-          "screen_reader": "Export account details",
+          "description": "Log in to getalby.com to connect and use this wallet with mobile wallets like <0>Zeus</0> and <1>Blue Wallet</1>.",
+          "screen_reader": "Export wallet details",
           "waiting": "waiting for LndHub data...",
           "your_ln_address": "Your Lightning Address:",
           "export_uri": "LNDHub Credentials URI",
@@ -435,29 +441,36 @@
         "mnemonic": {
           "title": "Key Management",
           "saved": "Master Key encrypted & saved successfully.",
-          "existing_nostr_key_notice": "ℹ️ This account already has a nostr private key set and will not be derived from this Master Key. You can manage your Nostr key from your account settings.",
+          "existing_nostr_key_notice": "This wallet already has a nostr private key set and will not be derived from this Master Key. You can manage your Nostr key from your wallet settings.",
           "description": {
             "warning": "<0>It cannot recover this wallet or funds in it,</0> it only recovers access to aforementioned protocol",
-            "secure_recovery_phrase": "Make sure to write them down somewhere safe and and keep them private",
+            "secure_recovery_phrase": "Make sure to write them down somewhere safe and private",
             "recovery_phrase": "Recovery phrase is set of 12 words that <0>backs up your Master Key</0>"
           },
-          "confirm": "I've backed up the recovery phrase to my Master Key in a private and secure place.",
+          "confirm": "I’ve backed recovery phrase to my Master Key in a private and secure place",
           "error_confirm": "Please confirm that you have backed up the recovery phrase.",
           "new": {
-            "title": "Setup Master Key",
-            "nostr": "Import an existing Nostr account",
+            "title": "About Master Key",
             "items": {
               "keys": "Master Key allows you to interact with protocols like <0>Nostr</0>, <0>Liquid</0> or <0>base layer of Bitcoin</0>",
               "usage": "You can import and use the same Master Key in <0>each connected wallet in Alby</0>",
-              "nostr_key": "You can always import existing keys Nostr and override those generated by Master Key"
+              "nostr_key": "Already have a Nostr identity? Import existing Nostr keys or override those created by Master Key"
             },
             "secure": {
-              "title": "Secure Your Master Key",
+              "title": "Secure Master Key",
               "description": "Get to know what Master Key is and back up 12-words recovery phrase"
             },
+            "create": {
+              "title": "Create Master Key",
+              "description": "Generate a new Master Key and back up its 12-word recovery phrase"
+            },
             "import": {
-              "title": "Have a Master key Already?",
+              "title": "Import Master Key",
               "description": "Enter your recovery phrase to import Master Key into this wallet"
+            },
+            "import_nostr": {
+              "title": "Import Nostr Key",
+              "description": "Import only existing Nostr identity, skip Master Key for now"
             }
           },
           "generate": {
@@ -466,18 +479,18 @@
             "button": "Generate Master Key"
           },
           "backup": {
-            "title": "Back up Your Recovery Phrase",
+            "title": "Back Up Master Key",
             "save": "Save Master Key",
             "button": "View Recovery Phrase",
             "warning": "Don’t forget to back up your recovery phrase! Not backing it up your key might result in permanently loosing access to your Master Key, Nostr identity or assets you manage with this key.",
-            "description": "Write down the recovery phrase to be able to restore your Master Key on a new device or in case you lose access to your account.",
+            "description": "Write down the recovery phrase to be able to restore your Master Key on a new device or in case you lose access to your wallet.",
             "protocols": {
               "nostr": "Nostr"
             }
           },
           "import": {
-            "title": "Import your Master Key",
-            "description": "Use the recovery phrase to import your Master Key into Alby.",
+            "title": "Import Master Key",
+            "description": "Enter the recovery phrase to import your Master Key into Alby.",
             "button": "Import Master Key"
           },
           "inputs": {
@@ -527,21 +540,12 @@
             "remove": "Remove current keys",
             "no_secret_key": "💡 You don't have a Master Key yet. <0>Click here</0></div> to create your Master Key and derive your Nostr keys."
           },
-          "setup": {
-            "title": "Setup your Nostr keys",
-            "description": "Choose If you'd like to create a new Nostr account (a pair of private and public keys) or import an existing one.",
-            "description2": "Every Nostr account created in Alby comes with a <0>Recovery Phrase</0> – a set of 12 words that always allow you to regain access to your Nostr private keys.",
-            "new": {
-              "label": "Create a new Nostr account",
-              "description": "Generate a Master Key with a pair of new Nostr keys."
-            }
-          },
           "private_key": {
             "title": "Manage your Nostr private key",
             "subtitle": "Paste your nostr private key or generate a new one. <0>Learn more »</0>",
             "warning": "Are you sure you want to remove your nostr private key?\n\nType \"{{name}}\" to confirm:",
             "success": "Nostr private key encrypted & saved successfully.",
-            "failed_to_remove": "The entered account name didn't match, your old Nostr private key has been restored.",
+            "failed_to_remove": "The entered wallet name didn't match, your old Nostr private key has been restored.",
             "successfully_removed": "Nostr private key removed successfully.",
             "label": "Nostr Private Key"
           },
@@ -550,11 +554,11 @@
           },
           "generate_keys": {
             "title": "Generate a new Nostr key",
-            "screen_reader": "Generate a new Nostr key for your account",
-            "hint": "You can generate a random key or a derive key from this account details (using a signed canonical phrase). <0>Learn more »</0>",
+            "screen_reader": "Generate a new Nostr key for your wallet",
+            "hint": "You can generate a random key or a derive key from this wallet details (using a signed canonical phrase). <0>Learn more »</0>",
             "actions": {
               "random_keys": "Generate a random key",
-              "derived_keys": "Derive a key from account"
+              "derived_keys": "Derive a key from a wallet"
             }
           },
           "actions": {
@@ -568,7 +572,7 @@
           "title": "Remove This Wallet",
           "subtitle": "All the linked allowances will be deleted. Please be certain.",
           "confirm": "Are you sure you want to remove your wallet?\n\n⚠️ All associated keys (Master Key, Nostr, etc) will be deleted if you continue. Please make sure you have backed them up, there is no other way to restore them.\n\nType \"{{name}}\" to confirm:",
-          "error": "The entered account name didn't match."
+          "error": "The entered wallet name didn't match."
         },
         "remove_secretkey": {
           "title": "Remove Master Key",
@@ -630,8 +634,8 @@
         "part2": "Alby Support"
       },
       "unlock_error": {
-        "help": "Your account data is encrypted with your unlock passcode. If you really forgot your unlock passcode you have to reset and add your lightning account again.",
-        "link": "Reset now and add a new account"
+        "help": "Your wallet data is encrypted with your unlock passcode. If you really forgot your unlock passcode you have to reset and add your lightning wallet again.",
+        "link": "Reset now and add a new wallet"
       },
       "errors": {
         "invalid_password": "Invalid passcode"
@@ -649,7 +653,7 @@
       },
       "website_enhancements": {
         "title": "Website Enhancements",
-        "subtitle": "Tipping enhancements for Twitter, YouTube, etc."
+        "subtitle": "Tipping enhancements for websites that support Alby."
       },
       "camera_access": {
         "title": "Camera Access",
@@ -945,8 +949,8 @@
       "always_allow": "Remember my choice and don't ask again"
     },
     "confirm_add_account": {
-      "title": "Add account",
-      "content": "This website wants to add an account ({{connector}}):",
+      "title": "Add wallet",
+      "content": "This website wants to add a wallet ({{connector}}):",
       "tor_info": "In order to connect through the TOR network you need to first install the Alby companion app:"
     },
     "liquid": {
@@ -1085,12 +1089,34 @@
     },
     "transactions": {
       "title": "Transactions",
-      "description": "Transactions for this account"
+      "description": "Transactions for this wallet"
     },
     "onboard": {
       "title": "Setup your keys",
-      "request1": "This website requires key interaction",
-      "request2": "You haven't setup your keys yet",
+      "default": {
+        "request1": "This website requires key interaction",
+        "request2": "You haven't setup your keys yet"
+      },
+      "enableNostr": {
+        "request1": "This website requires Nostr interaction",
+        "request2": "Setup your Nostr key or Master Key to continue"
+      },
+      "enableLiquid": {
+        "request1": "This website requires Liquid Network interaction",
+        "request2": "Setup your Master Key to get a Liquid key"
+      },
+      "enableBitcoin": {
+        "request1": "This website requires Bitcoin on-chain interaction",
+        "request2": "Setup your Master Key to get an on-chain key"
+      },
+      "messages": {
+        "single_account_with_key": "{{accountName}} already has {{keyType}} set. Switch the wallet to access them.",
+        "multiple_accounts_with_key": "Some of your wallets already have {{keyType}} set. Switch the wallet to access them."
+      },
+      "labels": {
+        "master_key": "Master Key",
+        "nostr_key": "Nostr Key"
+      },
       "request3": "Setup is quick and easy",
       "actions": {
         "start_setup": "Start Setup"
@@ -1107,7 +1133,6 @@
     "error": "Error",
     "general": "General",
     "settings": "Extension Settings",
-    "accounts": "Accounts",
     "discover": "Discover Apps",
     "connected_sites": "Connected Sites",
     "wallet": "Wallet",
@@ -1131,7 +1156,9 @@
     "or": "or",
     "website": "Website",
     "wallet_settings": "Wallet Settings",
+    "active_wallet_settings": "Active Wallet Settings",
     "apps": "Apps",
+    "setup_wallet": "Finish your <0>Alby account setup</0> for unlimited payments. Until your setup is complete, you can receive up to {{max_account_balance}} as <1>fee credits</1>",
     "actions": {
       "back": "Back",
       "delete": "Delete",
@@ -1242,6 +1269,8 @@
       "payment_hash": "Payment Hash",
       "received": "Received",
       "sent": "Sent",
+      "sending": "Sending",
+      "failed": "Failed",
       "date_time": "Date & Time",
       "boostagram": {
         "sender": "Sender",
@@ -1294,9 +1323,10 @@
     "account_menu": {
       "screen_reader": "Toggle Dropdown",
       "title": "Switch Wallet",
+      "select_wallet": "Select Wallet",
       "options": {
         "account": {
-          "add": "Connect a Wallet",
+          "connect_wallet": "Connect Wallet",
           "go_to_web_wallet": "Manage your web account"
         }
       }
@@ -1318,7 +1348,7 @@
     "webln": {
       "getbalance": {
         "title": "get balance",
-        "description": "Read the balance of your account"
+        "description": "Read the balance of your wallet"
       }
     },
     "bitcoin": {
@@ -1360,7 +1390,7 @@
       }
     },
     "commando": {
-      "bkpr-listbalances": "List of all current and historical account balances",
+      "bkpr-listbalances": "List of all current and historical wallet balances",
       "checkmessage": "Verify that the signature was generated by a given node",
       "connect": "Establish a new connection with another node",
       "decode": "Decode a bolt11/bolt12/rune string",

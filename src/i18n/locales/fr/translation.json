@@ -3,36 +3,50 @@
     "welcome": {
       "set_password": {
         "choose_password": {
-          "label": "Choisissez un mot de passe de déverrouillage :"
+          "label": "Choisissez un code de déverrouillage :"
         },
         "confirm_password": {
           "label": "Confirmons que vous l'avez tapé correctement :"
         },
         "errors": {
-          "enter_password": "S'il vous plait, entrez votre mot de passe.",
-          "confirm_password": "Veuillez confirmer votre mot de passe.",
-          "mismatched_password": "Les mots de passe entrés ne sont pas les mêmes."
-        }
+          "enter_password": "Veuillez saisir un code.",
+          "confirm_password": "Veuillez confirmer votre code.",
+          "mismatched_password": "Les codes ne correspondent pas."
+        },
+        "title": "Définir un code de déverrouillage",
+        "description1": "Définir un code pour déverrouiller Alby dans ce navigateur",
+        "description2": "Le code de déverrouillage peut être modifié mais pas récupéré. "
       },
       "test_connection": {
-        "ready": "Parfait, vous êtes prêt !",
-        "initializing": "Création de votre compte. S'il vous plait, veuillez patienter, ceci peut prendre une minute...",
+        "ready": "Parfait, tout est prêt !",
         "connection_error": "Erreur de connexion",
         "review_connection_details": "Veuillez vérifier vos informations de connexion.",
         "connection_taking_long": "Essayer de se connecter prend plus de temps que prévu... Vos informations sont-elles correctes ? Votre nœud est-il accessible ?",
         "contact_support": "Si vous avez besoin d'aide, veuillez contacter support@getalby.com",
         "actions": {
-          "delete_edit_account": "Supprimer le compte invalide et modifier à nouveau"
-        }
+          "delete_edit_account": "Supprimer le portefeuille invalide et le modifier à nouveau"
+        },
+        "initializing": "Initialisation de votre portefeuille. Veuillez patienter, cela peut prendre une minute…"
+      },
+      "pin_extension": {
+        "title": "Épingler Alby",
+        "description": "Vous y êtes presque. Pour lancer Alby plus facilement, pensez à l'épingler à votre barre d'outils :",
+        "explanation": "1. Cliquez sur <0/> en haut à droite de votre navigateur<1/>2. Localisez Alby et cliquez pour l'épingler à la barre d'outils<1/>3. Et voilà. Pour accéder à Alby, cliquez simplement sur l'<2/>icône",
+        "next_btn": "Commencez à buzzé {{icon}} avec Alby"
       }
     },
     "choose_path": {
       "alby": {
-        "title": "Alby"
+        "title": "Compte Alby",
+        "connect": "Continuer avec un compte Alby",
+        "description": "Idéal si vous souhaitez profiter des applications tout en gardant le contrôle de votre bitcoin."
       },
       "other": {
-        "title": "Autres portefeuilles"
-      }
+        "title": "Apportez votre propre portefeuille",
+        "description": "Idéal si vous disposez déjà d'un wallet ou de votre propre nœud Lightning.",
+        "connect": "Sélectionnez votre wallet"
+      },
+      "title": "Connectez Alby à un wallet"
     },
     "alby": {
       "pre_connect": {
@@ -55,7 +69,6 @@
       "title": "Connecter le portefeuille Lightning",
       "description": "Connectez-vous à votre portefeuille ou nœud Lightning externe",
       "lnd": {
-        "title": "LND",
         "page": {
           "title": "Connectez-vous à votre nœud LND",
           "description": "Vous avez besoin de l'URL de votre nœud et d'un macaroon avec des autorisations de lecture et d'envoi (par exemple, admin.macaroon )"
@@ -77,6 +90,10 @@
         "pairing_phrase": {
           "label": "Votre phrase d'appariement ",
           "placeholder": "phrase de sats de pile secrète"
+        },
+        "page": {
+          "title": "Se connecter à Lightning Terminal (LNC)",
+          "description": "1. Dans la barre latérale du terminal Lightning, sélectionnez <0>Connexion au nœud Lightning</0>.<1/> 2. Cliquez sur <0>Créer une session</0>.<1/> 3. Nommez la session, choisissez les autorisations souhaitées et soumettez.<1/> 4. Copiez le code d'appairage</0> et collez-le ci-dessous."
         }
       },
       "lndhub_go": {
@@ -89,7 +106,7 @@
           "label": "URI d'exportation LNDHub"
         },
         "errors": {
-          "invalid_uri": "",
+          "invalid_uri": "URI LNDHub invalide",
           "connection_failed": "La connexion a échoué. Votre URI LNDHub est-elle correcte ?"
         }
       },
@@ -125,21 +142,16 @@
         }
       },
       "citadel": {
-        "title": "Citadelle",
         "page": {
           "title": "Connectez-vous au nœud <0>Citadelle</0>",
-          "instructions": "Cela ne fonctionne pas actuellement si 2FA est activé."
+          "instructions": "1. Dans la section Citadelle de votre tableau de bord Nirvati, accédez à <0>Connecter le portefeuille</0><1/>2. Sélectionnez <0>Alby (Tor)</0> ou <0>Alby (réseau local)</0>mode<1/>3. Copiez l'<0>URL lndconnect</0> et collez-la ci-dessous"
         },
-        "password": {
-          "label": "Mot de passe Citadelle"
-        },
-        "url": {
-          "label": "URL de la Citadelle",
-          "placeholder": "http://citadel.local"
+        "rest_url": {
+          "label": "lndconnect REST URL",
+          "placeholder": "lndconnect://yournode:8080?..."
         }
       },
       "umbrel": {
-        "title": "Parapluie",
         "page": {
           "title": "Connectez-vous au nœud <0>Umbrel</0>",
           "instructions": "Dans votre tableau de bord Umbrel, accédez à <0>Connect Wallet</0>. Sélectionnez <0>lndconnect REST</0> et copiez l'<0>URL lndconnect</0>. (Selon votre configuration, vous pouvez utiliser la connexion locale ou la connexion Tor.)"
@@ -150,7 +162,6 @@
         }
       },
       "mynode": {
-        "title": "monNode",
         "page": {
           "title": "Connectez-vous à <0>monNode</0>",
           "instructions": "Sur votre page d'accueil myNode, cliquez sur le bouton <0>Wallet</0> pour votre service <0>lightning</0>.<1/> Cliquez maintenant sur le bouton <0>Pair Wallet</0> sous le <0 Onglet >État</0>. Saisissez votre mot de passe lorsque vous y êtes invité.<1/> Sélectionnez le menu déroulant et choisissez une option de couplage. Selon votre configuration, vous pouvez soit utiliser la connexion <0>lightning (REST + Local IP)</0> ou la connexion <0>lightning (REST + Tor)</0>."
@@ -161,7 +172,6 @@
         }
       },
       "startos": {
-        "title": "StartOS",
         "page": {
           "title": "Connectez-vous à votre nœud <0>StartOS</0>",
           "instructions": "<0>Remarque :</0> Actuellement, nous ne prenons en charge que LND, mais nous ajouterons la prise en charge de c-lightning à l'avenir !<1/>Sur votre tableau de bord StartOS, cliquez sur le service <0>daemon du réseau Lightning</0>. <1/>Sélectionnez l'onglet <0>Properties</0>.<1/>Copiez maintenant l'<0>URL REST LND Connect.</0>"
@@ -172,7 +182,6 @@
         }
       },
       "raspiblitz": {
-        "title": "RaspiBlitz",
         "page": {
           "title": "Connectez-vous à votre nœud <0>RaspiBlitz</0>",
           "instructions1": "Suivez ces étapes :<1/> 1. <0>SSH</0> dans votre <0>Raspiblitz</0><1/>2. Sélectionnez <0>Connect Apps & Show Credentials</0> dans la liste<1/><0/>3. Choisissez <0>Connecter Alby à ce nœud</0><1/>4. Appuyez sur <0>OK</0> pour afficher les identifiants de connexion<1/><1/>Copiez et collez l'<0>hôte API REST</0> ou l'adresse <0>.onion</0> pour vous connecter via Tor dans l'entrée ci-dessous.",
@@ -184,28 +193,43 @@
         }
       },
       "blink": {
-        "title": "Portefeuille de plage Bitcoin",
         "page": {
           "title": "Connectez-vous à <0>Bitcoin Blink Wallet</0>"
+        },
+        "token": {
+          "label": "Entrez votre clé API",
+          "info": "Pour connecter votre portefeuille, générez une clé API dans le <0>tableau de bord Blink (dashboard.blink.sv)</0>:<br>- connectez-vous avec votre adresse e-mail ou votre numéro de téléphone si vous utilisez déjà Blink<br>- si vous n'avez pas encore de compte, vous pouvez encore en créer un nouveau en vous connectant avec un numéro de téléphone<br>- créez une nouvelle clé dans l'onglet Clés API<br>- donnez-lui un nom et choisissez la portée de lecture et d'écriture<br>-laissez la valeur par défaut sans expiration ou choisissez un délai long pour éviter d'avoir à reconnecter périodiquement votre portefeuille<br>- copiez la clé (en commençant par blink_ ) et collez-la dans la zone de texte ci-dessous.<br>"
+        },
+        "currency": {
+          "label": "Sélectionnez le portefeuille"
         }
       },
       "bitcoin_jungle": {
-        "title": "Portefeuille Jungle Bitcoin",
         "page": {
           "title": "Connectez-vous au <0>portefeuille Bitcoin Jungle</0>"
+        },
+        "token": {
+          "label": "Entrez votre jeton d'accès (access token)",
+          "info": "L'intégration de {{label}} avec Alby est en version alpha et n'est recommandée que pour les utilisateurs avancés.<br><br>Vous pouvez récupérer votre jeton d'accès en accédant à l'application mobile, en cliquant sur l'icône des paramètres, puis en appuyez 3 fois sur le numéro de build pour ouvrir le menu développeur.<br><br>Le jeton d'accès (access token) peut être copié à partir d'ici.<br><br>"
+        },
+        "currency": {
+          "label": "Sélectionnez le portefeuille"
         }
       },
       "btcpay": {
-        "title": "Serveur BTCPay",
         "config": {
-          "label": "Données de configuration"
+          "label": "Données de configuration",
+          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.co"
         },
         "errors": {
           "connection_failed": "La connexion a échoué. L'URL de connexion BTCPay est-elle correcte et accessible ?"
+        },
+        "page": {
+          "title": "Connectez-vous à BTCPay LND",
+          "instructions": "Accédez à votre serveur BTCPayServer et connectez-vous en tant qu'administrateur. Accédez à Paramètres du serveur Settings > Services > LND REST - Voir les informations. Cliquez ensuite sur \"See QR Code information\" et copiez les données du code QR. Collez-le ci-dessous:"
         }
       },
       "commando": {
-        "title": "Core Lightning",
         "page": {
           "title": "Connectez-vous à votre nœud Core Lightning",
           "instructions": "Assurez-vous que vous disposez de Core Lightning version 0.12.0 ou plus récente, que le plug-in commando est en cours d'exécution et que votre nœud est accessible via le réseau Lightning. Créez une rune en exécutant 'lightning-cli commando-rune'."
@@ -235,6 +259,92 @@
         "errors": {
           "connection_failed": "La connexion a échoué. Votre nœud Core Lightning est-il en ligne et utilise-t-il le plugin commando ?"
         }
+      },
+      "umbrel_lightning_node": {
+        "title": "Nœud Lightning"
+      },
+      "galoy": {
+        "sms_code": {
+          "label": "Entrez votre code de vérification SMS"
+        },
+        "phone_number": {
+          "label": "Entrez votre numéro de téléphone"
+        },
+        "errors": {
+          "missing_token": "Jeton d'accès manquant, impossible de se connecter.",
+          "invalid_token": "L'autorisation a échoué. Veuillez vérifier votre clé API et réessayer.",
+          "setup_failed": "L'installation a échoué"
+        },
+        "actions": {
+          "login": "Se connecter"
+        }
+      },
+      "voltage": {
+        "title": "Voltage",
+        "page": {
+          "title": "Connectez-vous à votre nœud Voltage",
+          "description": "Hébergement de nœuds Lightning de qualité professionnelle. Accédez à Lightning Network plus rapidement que jamais. Contrôle total sans aucune gestion. <0>Pour en savoir plus, consultez notre guide de configuration</0>"
+        },
+        "url": {
+          "label": "URL du nœud",
+          "placeholder": ""
+        },
+        "errors": {
+          "connection_failed": "La connexion a échoué. Vos identifiants sont-ils corrects ?"
+        }
+      },
+      "albyhub": {
+        "page": {
+          "url": {
+            "label": "Secret de connexion au NWC",
+            "placeholder": "nostr+walletconnect://69effe..."
+          },
+          "instructions": "Ouvrez votre Alby Hub, créez une nouvelle connexion d'application et collez le secret de connexion pour vous connecter.",
+          "errors": {
+            "connection_failed": "La connexion a échoué. Votre connexion en ligne et à l'application Alby Hub est-elle activée ?"
+          }
+        },
+        "title": "Alby Hub"
+      },
+      "nwc": {
+        "page": {
+          "url": {
+            "placeholder": "nostr+walletconnect://69effe...",
+            "label": "URL de Nostr Wallet Connect"
+          },
+          "errors": {
+            "connection_failed": "La connexion a échoué. Votre portefeuille NWC en ligne et la connexion à l'application sont-ils activés ?"
+          },
+          "instructions": "Collez une chaîne de connexion NWC (NWC connection string) depuis <0>Alby Nostr Wallet Connect</0>, <1>Umbrel Nostr Wallet Connect</1> ou <2>Mutiny Wallet</2>"
+        },
+        "title": "Nostr Wallet Connect"
+      },
+      "lawallet": {
+        "page": {
+          "instructions": "Définissez vos identifiants LaWallet ci-dessous",
+          "title": "Connectez-vous à LaWallet"
+        },
+        "identity_endpoint": "Identity Endpoint",
+        "errors": {
+          "toast": {
+            "title": "Identité non trouvée",
+            "message": "Vous n'avez pas d'adresse Lightning dans l'identité \"{{domain}}\"",
+            "verify": "Vérifiez les éléments suivants",
+            "match": "Identity Endpoint doit correspondre à votre domaine Lightning",
+            "walias": "Votre adresse Lightning est-elle USERNAME<0>@{{domain}}</0> ou utilise-t-elle un autre domaine?",
+            "endpoint": "Le point final correct est construit à partir de https://app.<0>{{domain}}</0>",
+            "http": "Le fournisseur d'identité utilise le même protocole (<0>HTTP</0> ou <0>HTTPS</0>)"
+          }
+        },
+        "api_endpoint": "API Endpoint",
+        "private_key": "Clé privée",
+        "ledger_public_key": "Clé publique du Ledger",
+        "urlx_public_key": "URLx Public key",
+        "relay_url": "Relay URL",
+        "title": "LaWallet.io"
+      },
+      "nirvati": {
+        "title": "Nirvati"
       }
     },
     "home": {
@@ -245,16 +355,21 @@
       "default_view": {
         "is_blocked_hint": "Alby est actuellement désactivé sur {{host}}",
         "block_removed": "{{hôte}} activé. Veuillez recharger le site Web."
+      },
+      "allowance_view": {
+        "budget_spent": "Budget dépensé",
+        "sats": "sats",
+        "permissions": "Autorisations",
+        "total_payments": "Paiements totaux",
+        "total_spent": "Total dépensé"
       }
     },
     "accounts": {
       "account_view": {
         "name": {
-          "title": "Nom",
-          "placeholder": "Nom du compte"
+          "title": "Nom"
         },
         "export": {
-          "screen_reader": "Exporter les détails du compte",
           "waiting": "en attente des données LndHub...",
           "your_ln_address": "Votre adresse Lightning :",
           "export_uri": "URI des identifiants LNDHub",
@@ -316,8 +431,7 @@
         "subtitle": "Notifications liées au paiement et à l'authentification."
       },
       "website_enhancements": {
-        "title": "Améliorations du site Web",
-        "subtitle": "Améliorations des pourboires pour Twitter, YouTube, etc."
+        "title": "Améliorations du site Web"
       },
       "camera_access": {
         "title": "accès à la caméra",
@@ -517,6 +631,28 @@
       "content": "Ce site vous demande de signer :",
       "block_and_ignore": "Bloquer et ignorer {{host}}",
       "block_added": "{{host}} a été ajouté à la liste de blocage, veuillez recharger le site Web."
+    },
+    "distributions": {
+      "umbrel": {
+        "name": "Umbrel"
+      },
+      "description": "Choisissez l'application {{name}} avec laquelle vous souhaitez vous connecter",
+      "mynode": {
+        "name": "myNode"
+      },
+      "startos": {
+        "name": "StartOS"
+      },
+      "title": "Connectez-vous à {{name}}",
+      "raspiblitz": {
+        "name": "Raspiblitz"
+      },
+      "btcpay": {
+        "name": "BTCPay"
+      },
+      "nirvati": {
+        "name": "Nirvati"
+      }
     }
   },
   "common": {
@@ -524,7 +660,6 @@
     "confirm_password": "Confirmez le mot de passe",
     "success": "Succès",
     "error": "Erreur",
-    "accounts": "Comptes",
     "discover": "Découvrir",
     "connected_sites": "",
     "sats_one": "sat",

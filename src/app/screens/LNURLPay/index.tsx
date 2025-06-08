@@ -14,7 +14,6 @@ import {
   PopiconsChevronLeftLine,
   PopiconsChevronTopLine,
 } from "@popicons/react";
-import fetchAdapter from "@vespaiach/axios-fetch-adapter";
 import axios from "axios";
 import React, { Fragment, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -136,7 +135,7 @@ function LNURLPay() {
             params,
             // https://github.com/fiatjaf/lnurl-rfc/blob/luds/01.md#http-status-codes-and-content-type
             validateStatus: () => true,
-            adapter: fetchAdapter,
+            adapter: "fetch",
           }
         );
 

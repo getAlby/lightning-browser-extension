@@ -1,8 +1,11 @@
-import Container from "@components/Container";
-import { PopiconsDownloadLine, PopiconsKeyLine } from "@popicons/react";
+import {
+  PopiconsDownloadLine,
+  PopiconsKeyLine,
+  PopiconsOstrichLine,
+} from "@popicons/react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Button from "~/app/components/Button";
 import CardButton from "~/app/components/CardButton";
 import CardButtonGroup from "~/app/components/CardButton/Group";
@@ -42,16 +45,7 @@ function MnemonicExplanation() {
   }, []);
 
   return (
-    <Container maxWidth="md">
-      <div className="flex justify-end mt-6 -mb-4 text-xs">
-        <Link
-          to="../../nostr/settings"
-          relative="path"
-          className="text-blue-600 hover:text-blue-700"
-        >
-          {t("nostr")}
-        </Link>
-      </div>
+    <div className="flex max-w-3xl mx-auto">
       <ContentBox>
         <div className="flex flex-col gap-4">
           <h1 className="font-bold text-2xl dark:text-white">{t("title")}</h1>
@@ -65,8 +59,10 @@ function MnemonicExplanation() {
         <div className="flex flex-row justify-between gap-x-6">
           <CardButtonGroup>
             <CardButton
-              title={t("secure.title")}
-              description={t("secure.description")}
+              title={hasMnemonic ? t("secure.title") : t("create.title")}
+              description={
+                hasMnemonic ? t("secure.description") : t("create.description")
+              }
               icon={PopiconsKeyLine}
               onClick={() => setSelectedCard("backup")}
             />
@@ -76,6 +72,12 @@ function MnemonicExplanation() {
               icon={PopiconsDownloadLine}
               onClick={() => setSelectedCard("import")}
             />
+            <CardButton
+              title={t("import_nostr.title")}
+              description={t("import_nostr.description")}
+              icon={PopiconsOstrichLine}
+              onClick={() => setSelectedCard("importNostr")}
+            />
           </CardButtonGroup>
         </div>
 
@@ -84,17 +86,21 @@ function MnemonicExplanation() {
             label={tCommon("actions.next")}
             primary
             flex
-            onClick={() =>
-              selectedCard == "backup"
-                ? hasMnemonic
+            onClick={() => {
+              if (selectedCard === "backup") {
+                hasMnemonic
                   ? navigate("../secret-key/backup")
-                  : navigate("../secret-key/generate")
-                : navigate("../secret-key/import")
-            }
+                  : navigate("../secret-key/generate");
+              } else if (selectedCard === "import") {
+                navigate("../secret-key/import");
+              } else if (selectedCard === "importNostr") {
+                navigate("../nostr/settings");
+              }
+            }}
           />
         </div>
       </ContentBox>
-    </Container>
+    </div>
   );
 }
 

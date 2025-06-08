@@ -19,14 +19,10 @@
       },
       "test_connection": {
         "ready": "真棒，你已准备就绪!",
-        "initializing": "正在初始化你的帐户。请耐心等待，可能需要几分钟。。。",
         "connection_error": "连接错误",
         "review_connection_details": "请检查你的连接详情。",
         "connection_taking_long": "尝试连接花费的时间不预期的要长。。。你的详情正确吗？你的节点是否可达？",
-        "contact_support": "如果你需要帮助，请联系support@getalby.com",
-        "actions": {
-          "delete_edit_account": "删除无效帐户并重新编辑"
-        }
+        "contact_support": "如果你需要帮助，请联系support@getalby.com"
       },
       "pin_extension": {
         "title": "固定你的 Alby 扩展",
@@ -51,8 +47,7 @@
         "macaroon": {
           "label": "Macaroon(HEX格式)"
         },
-        "drag_and_drop": "将你的macaroon拖放到此处或<0>浏览</0>",
-        "title": "LND"
+        "drag_and_drop": "将你的macaroon拖放到此处或<0>浏览</0>"
       },
       "eclair": {
         "url": {
@@ -70,20 +65,10 @@
       },
       "citadel": {
         "page": {
-          "title": "连接<0>Citadel</0>节点",
-          "instructions": "目前，如果启用了2FA，这就用不了了。"
-        },
-        "password": {
-          "label": "Citadel密码"
-        },
-        "url": {
-          "label": "Citadel URL",
-          "placeholder": "http://citadel.local"
-        },
-        "title": "Citadel"
+          "title": "连接<0>Citadel</0>节点"
+        }
       },
       "blink": {
-        "title": "眨眼钱包",
         "page": {
           "title": "连接<0>眨眼钱包</0>"
         },
@@ -96,7 +81,6 @@
         }
       },
       "bitcoin_jungle": {
-        "title": "比特币丛林钱包",
         "page": {
           "title": "连接<0>比特币丛林钱包</0>"
         },
@@ -109,7 +93,6 @@
         }
       },
       "btcpay": {
-        "title": "BTCPay Server",
         "errors": {
           "connection_failed": "连接失败。BTCPay连接URL是否正确且可访问？"
         },
@@ -130,7 +113,6 @@
         "errors": {
           "connection_failed": "连接失败。你的Core Lightning节点是否在线并使用了commando插件？"
         },
-        "title": "Core Lightning",
         "page": {
           "title": "连接你的Core Lightning节点",
           "instructions": "确保你用的是Core Lightning 0.12.0或更新的版本、commando插件正在运行，并且你的节点可以通过闪电网络访问。通过运行'lightning-cli commando-rune'来创建rune。"
@@ -162,8 +144,7 @@
         "rest_url": {
           "placeholder": "lndconnect://yournode:8080?...",
           "label": "lndconnect REST URL"
-        },
-        "title": "StartOS"
+        }
       },
       "raspiblitz": {
         "page": {
@@ -174,8 +155,7 @@
         "rest_api_host": {
           "label": "REST API主机",
           "placeholder": "your-node-onion-address:port"
-        },
-        "title": "RaspiBlitz"
+        }
       },
       "lndhub_go": {
         "title": "LNDHub",
@@ -213,7 +193,6 @@
           "title": "连接<0>Umbrel</0>节点",
           "instructions": "1. 在你的Umbrel仪表板上，进入<0>连接钱包</0><1/>2. 选择<0>REST (Tor)</0>或<0>REST （本地网络）</0>模式<1/>3. 复制<0>lndconnect URL</0>并粘贴到下方"
         },
-        "title": "Umbrel",
         "rest_url": {
           "label": "lndconnect REST URL",
           "placeholder": "lndconnect://yournode:8080?..."
@@ -221,7 +200,6 @@
       },
       "description": "连接你外部的闪电钱包或节点",
       "mynode": {
-        "title": "myNode",
         "page": {
           "title": "连接<0>myNode</0>",
           "instructions": "在你的myNode主页上点击你的<0>Lightning</0>服务的<0>Wallet</0>按钮。<1/> 现在点击<0>Status</0>标签下的<0>Pair Wallet</0>按钮。出现提示时输入密码。<1/>选择下拉菜单并选择一个配对选项。根据你的设置，你可以使用<0>闪电（REST +本地IP）</0>连接或<0>闪电（REST + Tor）</0>连接。"
@@ -321,20 +299,16 @@
       "default_view": {
         "is_blocked_hint": "Alby 目前在 {{host}} 上被禁用",
         "block_removed": "启用了{{host}}。请重新加载网站。",
-        "node_required": "你的 Albby 账户需要设置一个钱包。前往 <0>getalby.com</0> 连接你的钱包",
         "actions": {
-          "setup_keys": {},
           "get_started": {
             "title": "准备好使用 Alby 浏览器扩展",
             "description": "第一次使用 Alby 扩展？浏览我们的指南、视频和解析"
           },
           "receive_bitcoin": {
-            "title": "接收比特币",
-            "description": "为你的账户储值并通过闪电地址或发票收款"
+            "title": "接收比特币"
           }
         },
         "see_all": "查看全部",
-        "no_transactions": "该账户暂无交易记录。",
         "upgrade_account": "你正在使用旧版 LNDHub 设置。<0>请重新连接</0>你的 Alby 账户以访问最新功能。"
       },
       "actions": {
@@ -407,24 +381,13 @@
               "title": "Nostr 密钥",
               "description": "从主密钥派生 Nostr 密钥或将私钥粘贴到「Nostr 私钥」处导入已有私钥。"
             }
-          },
-          "setup": {
-            "description2": "在 Alby 中创建的每个 Nostr 帐户都带有<0>恢复短语</0> —— 一组12个单词，始终保证重新获得对你的 Nostr 私钥的访问。",
-            "title": "设置你的 nostr 密钥",
-            "description": "选择是否要创建一个新的 nostr 帐户（一对私钥和公钥）或导入现有帐户。",
-            "new": {
-              "label": "创建新的 nostr 帐户",
-              "description": "通过使用一对新的 nostr 密钥生成主密钥。"
-            }
           }
         },
         "export": {
           "export_uri": "LNDHub凭证URI",
           "scan_qr": "通过扫描二维码将这个钱包导入Zeus或BlueWallet。",
-          "screen_reader": "导出帐户详情",
           "waiting": "等待LndHub的数据...",
           "your_ln_address": "你的闪电地址：",
-          "description": "登录 getalby.com 以在 <0>Zeus</0> 和 <1>Blue Wallet</1> 中连接和使用该账户。",
           "title": "连接到移动钱包"
         },
         "remove": {
@@ -441,8 +404,7 @@
           "change_lnaddress": "在 getalby.com 上修改"
         },
         "name": {
-          "title": "名称",
-          "placeholder": "帐户名称"
+          "title": "名称"
         },
         "mnemonic": {
           "backup": {
@@ -452,10 +414,8 @@
               "nostr": "Nostr"
             },
             "description": "请写下恢复短语，以便能够在新设备上恢复主密钥，或以防失去帐户访问。",
-            "title": "备份你的恢复词",
             "warning": "不要忘记备份你的恢复词！不进行备份可能会导致你失去对主密钥、Nostr 身份以及通过该密钥管理的资产的访问权限。"
           },
-          "existing_nostr_key_notice": "ℹ️ 该账户已设置 Nostr 私钥，因此不会从此主密钥派生。你可以通过你的帐户设置管理你的 Nostr 密钥。",
           "saved": "主密钥已加密并成功保存。",
           "generate": {
             "title": "生成新的主密钥",
@@ -474,8 +434,7 @@
           "new": {
             "items": {
               "usage": "你能为<0>每个连接到 Alby 的钱包</0>导入并使用相同的主密钥",
-              "keys": "主密钥允许你与 <0>Nostr</0>、 <0>Liquid</0>或<0>Bitcoin 基础层</0>进行交互",
-              "nostr_key": "你可以随时导入现有的 Nostr 密钥并覆盖主密钥生成的密钥"
+              "keys": "主密钥允许你与 <0>Nostr</0>、 <0>Liquid</0>或<0>Bitcoin 基础层</0>进行交互"
             },
             "secure": {
               "description": "了解什么是主密钥和 12 个恢复词备份",
@@ -484,19 +443,15 @@
             "import": {
               "title": "已经有主密钥？",
               "description": "输入你的恢复词以导入主密钥到该钱包"
-            },
-            "title": "设置主密钥",
-            "nostr": "导入已有 Nostr 账户"
+            }
           },
           "inputs": {
             "title": "主密钥恢复词"
           },
           "error_confirm": "请确认你已经备份恢复词。",
-          "confirm": "已将主密钥恢复词备份并保存在安全的位置。",
           "title": "密钥管理",
           "description": {
             "warning": "<0>无法恢复该钱包或其中的余额，</0>只能恢复对上述协议的访问",
-            "secure_recovery_phrase": "确保将它保存在安全的地方并加密",
             "recovery_phrase": "恢复词由 12 个单词组成，用于<0>备份你的主密钥</0>"
           }
         },
@@ -596,7 +551,6 @@
         "subtitle": "在深色或浅色模式下使用 Alby"
       },
       "website_enhancements": {
-        "subtitle": "为Twitter、YouTube等提供小费功能。",
         "title": "站点增强"
       },
       "camera_access": {
@@ -883,18 +837,12 @@
       "other": {
         "title": "自备钱包",
         "connect": "发现你的钱包",
-        "description": "最好已经拥有钱包或闪电节点。",
-        "point1": "自托管或代托管选项",
-        "point2": "无闪电网络或 Nostr 地址",
-        "point3": "立即开始，无需邀请"
+        "description": "最好已经拥有钱包或闪电节点。"
       },
       "alby": {
         "title": "Alby帐户",
         "description": "同时控制比特币并享受应用的最佳选择。",
-        "point1": "新的自托管钱包 — <0>Alby Hub</0>",
-        "point2": "独一无二的闪电网络和 Nostr 地址",
-        "connect": "使用 Alby 账户",
-        "point3": "需要邀请码进行注册"
+        "connect": "使用 Alby 账户"
       },
       "title": "连接钱包到 Alby 浏览器扩展"
     },
@@ -932,9 +880,6 @@
     "distributions": {
       "title": "连接 {{name}}",
       "description": "选择你想连接的{{name}}应用程序",
-      "citadel": {
-        "name": "Citadel"
-      },
       "btcpay": {
         "name": "BTCPay"
       },
@@ -1045,8 +990,6 @@
       "title": "连接到 Liquid"
     },
     "onboard": {
-      "request1": "该网站请求密钥交互",
-      "request2": "你还没有设置你的密钥",
       "title": "设置你的密钥",
       "request3": "设置过程非常简单快捷",
       "actions": {
@@ -1150,7 +1093,6 @@
     "copied": "已复制！",
     "error": "错误",
     "loading": "加载中",
-    "accounts": "帐户",
     "confirm_password": "确认密码",
     "discover": "发现更多应用",
     "range": {
@@ -1210,8 +1152,7 @@
     "account_menu": {
       "options": {
         "account": {
-          "go_to_web_wallet": "管理你的网络帐户",
-          "add": "连接钱包"
+          "go_to_web_wallet": "管理你的网络帐户"
         }
       },
       "screen_reader": "切换下拉菜单",

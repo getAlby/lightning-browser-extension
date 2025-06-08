@@ -19,14 +19,10 @@
       },
       "test_connection": {
         "ready": "Genial, ¡ya estás listo!",
-        "initializing": "Accediendo a su cuenta. Por favor, espere, esto puede tardar un minuto...",
         "connection_error": "Error de Conexión",
         "review_connection_details": "Revise los detalles de su conexión.",
         "connection_taking_long": "Conectarse está llevando más tiempo de lo esperado... ¿Sus datos son correctos? ¿Se puede acceder a su nodo?",
-        "contact_support": "Si necesita ayuda, póngase en contacto con support@getalby.com",
-        "actions": {
-          "delete_edit_account": "Eliminar una cuenta no válida y volver a editarla"
-        }
+        "contact_support": "Si necesita ayuda, póngase en contacto con support@getalby.com"
       },
       "pin_extension": {
         "title": "Fija tu extensión Alby",
@@ -38,7 +34,6 @@
     "choose_connector": {
       "description": "Conecta tu billetera lightning externa o nodo",
       "lnd": {
-        "title": "LND",
         "page": {
           "title": "Conecta a tu nodo LND",
           "description": "Necesita la URL de su nodo y una frase macarrón con permisos de lectura y envío (por ejemplo, admin.macaroon)"
@@ -87,21 +82,11 @@
         }
       },
       "citadel": {
-        "title": "Cuenta de Citadel",
-        "password": {
-          "label": "Contraseña de Citadel"
-        },
-        "url": {
-          "label": "URL de Citadel",
-          "placeholder": "http://citadel.local"
-        },
         "page": {
-          "title": "Conectar a nodo Citadel",
-          "instructions": "Esto actualmente no funciona si el 2FA está activado."
+          "title": "Conectar a nodo Citadel"
         }
       },
       "umbrel": {
-        "title": "Cuenta de Umbrel",
         "page": {
           "title": "Conectar a Umbrel",
           "instructions": "1. En tu Lightning Node dashboard ve a <0>Connect wallet</0><1/>2. Selecciona <0>REST (Tor)</0> o <0>REST (Local Network)</0> mode<1/>3. Copia la <0>lndconnect URL</0> y pégala a continuación"
@@ -112,7 +97,6 @@
         }
       },
       "mynode": {
-        "title": "MiNodo",
         "page": {
           "title": "Conecta <0>miNodo</0>",
           "instructions": "En tu página myNode pulsa el botón <0>Billetera</0> para tu servicio <0>lightning</0>.<1/> Ahora pulsa el botón <0>Emparejar Billetera</0> bajo la pestaña <0>Estado</0>. Escribe tu contraseña cuando se indique.<1/> Selecciona el menú desplegable y elige una opción de emparejamiento. Dependiendo de tu configuración puedes usar la conexión <0>lightning (REST + IP Local)</0> o la conexión <0>lightning (REST + TOR)</0>."
@@ -123,7 +107,6 @@
         }
       },
       "startos": {
-        "title": "StartOS",
         "page": {
           "title": "Conectarse a <0>StartOS</0>",
           "instructions": "En tu panel de StartOS, haz clic en el servicio <0>Lightning Network Daemon</0>.<1/>Selecciona la pestaña <0>Propiedades</0>.<1/>Ahora copia la URL REST de <0>LND Connect. </0>"
@@ -134,7 +117,6 @@
         }
       },
       "raspiblitz": {
-        "title": "Cuenta RaspiBlitz",
         "page": {
           "title": "Conecta tu nodo <0>RaspiBlitz</0>",
           "instructions2": "Copie el (admin) <0>macaroon</0> en la entrada de abajo.",
@@ -146,7 +128,6 @@
         }
       },
       "blink": {
-        "title": "Billetera de Blink",
         "page": {
           "title": "Conecta a <0>La cartera Blink</0>"
         },
@@ -155,7 +136,6 @@
         }
       },
       "bitcoin_jungle": {
-        "title": "Billetera de Bitcoin Jungle",
         "page": {
           "title": "Conecta a <0>La cartera Bitcoin Jungle</0>"
         },
@@ -167,7 +147,6 @@
         }
       },
       "btcpay": {
-        "title": "Servidor BTCPay",
         "config": {
           "label": "Datos de configuración"
         },
@@ -234,7 +213,6 @@
           "title": "Conéctese a su nodo Core Lightning",
           "instructions": "Asegúrese de tener Core Lightning versión 0.12.0 o posterior, el complemento de comando se está ejecutando y se puede acceder a su nodo a través de Lightning Network. Cree una runa ejecutando 'lightning-cli commando-rune'."
         },
-        "title": "Core Lightning",
         "errors": {
           "connection_failed": "La conexión falló. ¿Está su nodo Core Lightning en línea y usando el plugin de comando?"
         },
@@ -284,8 +262,7 @@
       "default_view": {
         "is_blocked_hint": "Alby está actualmente deshabilitado en {{host}}",
         "block_removed": "{{host}} habilitado. Vuelva a cargar el sitio web.",
-        "see_all": "Ver todo",
-        "no_transactions": "Aún no hay transacciones en esta cuenta."
+        "see_all": "Ver todo"
       }
     },
     "accounts": {
@@ -321,11 +298,9 @@
           "hint": "es un protocolo simple y abierto que tiene como objetivo crear redes sociales resistentes a la censura. Nostr trabaja con claves criptográficas. Para publicar algo, lo firma con su clave y lo envía a múltiples relevos. Puede usar Alby para administrar su clave Nostr. Muchas aplicaciones de Nostr le permitirán simplemente usar la clave de la extensión Alby."
         },
         "name": {
-          "title": "Nombre",
-          "placeholder": "Nombre de la Cuenta"
+          "title": "Nombre"
         },
         "export": {
-          "screen_reader": "Exportar los detalles de la cuenta",
           "your_ln_address": "Tu Dirección Lightning:",
           "scan_qr": "Importe esta billetera a Zeus o BlueWallet escaneando el código QR.",
           "waiting": "esperando datos de LndHub...",
@@ -353,8 +328,7 @@
     },
     "settings": {
       "website_enhancements": {
-        "title": "Mejoras del sitio web",
-        "subtitle": "Mejoras de propinas para Twitter, YouTube, etc."
+        "title": "Mejoras del sitio web"
       },
       "camera_access": {
         "title": "Acceso a la cámara",
@@ -541,18 +515,12 @@
     "choose_path": {
       "alby": {
         "title": "Cuenta de Alby",
-        "point1": "Los nuevos registros requieren un código de invitación. Nueva cartera auto-custodiada",
-        "point2": "Dirección única de lightning y nostr",
         "description": "Es ideal si  quisieras disfrutar las apps mientras mantienes el control de tu bitcoin",
-        "connect": "Continuar con la cuenta de Alby",
-        "point3": "Las nuevas suscripciones requieren un código de invitación"
+        "connect": "Continuar con la cuenta de Alby"
       },
       "other": {
         "title": "Lleve su propia cartera",
-        "point1": "Ambas opciones: Autocustodia o custodiada",
-        "point2": "No hay dirección lightning y nostr",
         "description": "Es mejor si ya tienes una cartera o tu propio nodo lightning",
-        "point3": "Comenzar inmediatamente, no esperar invitación",
         "connect": "Encuentra tu cartera"
       },
       "title": "Conectar la cartera a la extensión Alby"
@@ -614,9 +582,6 @@
       },
       "title": "Conectarse a {{name}}",
       "description": "Elige la aplicación {{name}} con la que deseas conectarse",
-      "citadel": {
-        "name": "Citadel"
-      },
       "btcpay": {
         "name": "BTCPay"
       }
@@ -673,7 +638,6 @@
     "success_message": "{{amount}}{{fiatAmount}} enviados a {{destination}}",
     "message": "Mensaje",
     "description_full": "Descripción Completa",
-    "accounts": "Cuentas",
     "discover": "Descubrir",
     "response": "Respuesta",
     "help": "Ayuda",

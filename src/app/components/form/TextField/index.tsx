@@ -32,7 +32,7 @@ const TextField = ({
   tabIndex,
   value,
 }: React.InputHTMLAttributes<HTMLInputElement> & Props) => (
-  <>
+  <div>
     <label htmlFor={id} className="font-medium text-gray-800 dark:text-white">
       {label}
     </label>
@@ -69,7 +69,7 @@ const TextField = ({
         </p>
       )}
     </div>
-  </>
+  </div>
 );
 
 export default TextField;

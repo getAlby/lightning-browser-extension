@@ -71,6 +71,6 @@ describe("AccountMenu", () => {
 
     expect(screen.getByText("123 sats")).toBeInTheDocument();
     expect(screen.getByText("Galoy account")).toBeInTheDocument();
-    expect(screen.getByText("Connect a Wallet")).toBeInTheDocument();
+    expect(screen.getByText("Connect Wallet")).toBeInTheDocument();
   });
 });

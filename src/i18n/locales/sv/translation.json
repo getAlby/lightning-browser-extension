@@ -16,14 +16,10 @@
       },
       "test_connection": {
         "ready": "Fantastiskt, du är redo att börja!",
-        "initializing": "Initialiserar ditt konto. Vänta, det kan ta någon minut...",
         "connection_error": "Anslutningsfel",
         "review_connection_details": "Se över dina anslutningsinställningar.",
         "connection_taking_long": "Anslutningen tar längre tid än förväntat... Är inställningarna korrekta? Är din nod nåbar?",
-        "contact_support": "Om du behöver hjälp, kontakta support@getalby.com",
-        "actions": {
-          "delete_edit_account": "Radera ogiltigt konto och redigera igen"
-        }
+        "contact_support": "Om du behöver hjälp, kontakta support@getalby.com"
       },
       "pin_extension": {
         "title": "Fäst din Alby extension",
@@ -35,7 +31,6 @@
     "choose_connector": {
       "description": "Anslut till din externa lightning-plånbok eller node",
       "lnd": {
-        "title": "LND",
         "page": {
           "title": "Anslut din LND-nod",
           "description": "Du behöver URLen till din nod samt en macaroon med läs och skicka-rättigheter (t.ex. admin.macaroon)"
@@ -98,21 +93,11 @@
         }
       },
       "citadel": {
-        "title": "Citadel",
         "page": {
-          "title": "Anslut <0>Citadel</0>-nod",
-          "instructions": "Detta fungerar för tillfället inte om 2FA är aktiverat."
-        },
-        "password": {
-          "label": "Citadel lösenord"
-        },
-        "url": {
-          "label": "Citadel URL",
-          "placeholder": "http://citadel.local"
+          "title": "Anslut <0>Citadel</0>-nod"
         }
       },
       "umbrel": {
-        "title": "Umbrel",
         "page": {
           "title": "Anslut <0>Umbrel</0>-nod",
           "instructions": "1. Gå till <0>Anslut plånbok</0><1/>2 i din Lightning Node-instrumentpanel. Välj läge <0>REST (Tor)</0> eller <0>REST (Lokalt nätverk)</0><1/>3. Kopiera <0>lndconnect URL</0> och klistra in den nedan"
@@ -123,7 +108,6 @@
         }
       },
       "mynode": {
-        "title": "myNode",
         "page": {
           "title": "Anslut <0>myNode</0>",
           "instructions": "På din myNode-hemsida, klicka på knappen <0>Wallet</0> som motsvarar din <0>Lightning</0>-tjänst. <1/> Klicka på knappen <0>Pair Wallet</0> under fliken <0>Status</0>. Fyll i ditt lösenord när du blir tillfrågad.<1/> I droppmenym välj kopplingsalternativ. Beroende på dina inställningar kan du antingen välja <0>Lightning (REST + Local IP)</0> eller <0>Lightning (REST + Tor)</0>."
@@ -134,7 +118,6 @@
         }
       },
       "startos": {
-        "title": "StartOS",
         "page": {
           "title": "Anslut till din <0>StartOS Server</0>",
           "instructions": "På din StartOS instrumentpanel klickar du på tjänsten <0>Lightning Network Daemon</0>.<1/>Välj fliken <0>Egenskaper</0>.<1/>Kopiera nu <0>LND Connect REST URL. </0>"
@@ -145,7 +128,6 @@
         }
       },
       "raspiblitz": {
-        "title": "RaspiBlitz",
         "page": {
           "title": "Anslut din <0>RaspiBlitz</0>-nod",
           "instructions1": "Följ dessa steg:<1/> 1. <0>SSH</0> till din <0>Raspiblitz</0><1/>2. Välj <0>Anslut appar och visa inloggningsuppgifter</0> från listan<1/><0/>3. Välj <0>Anslut Alby till denna nod</0><1/>4. Tryck på <0>OK</0> för att visa anslutningsuppgifterna<1/><1/>Kopiera och klistra in <0>REST API-värden</0> eller <0>.onion</0>-adressen för att ansluta genom Tor till ingången nedan.",
@@ -157,7 +139,6 @@
         }
       },
       "blink": {
-        "title": "Blink plånbok",
         "page": {
           "title": "Anslut <0>Blink Wallet</0>"
         },
@@ -166,13 +147,11 @@
         }
       },
       "bitcoin_jungle": {
-        "title": "Bitcoin Jungle Wallet",
         "page": {
           "title": "Anslut en <0>Bitcoin Jungle Wallet</0>"
         }
       },
       "btcpay": {
-        "title": "BTCPay Server",
         "config": {
           "label": "Konfigurationsdata"
         },
@@ -184,7 +163,6 @@
         "port": {
           "label": "Port"
         },
-        "title": "Core Lightning",
         "proxy": {
           "label": "Websocket proxy"
         },
@@ -239,8 +217,7 @@
       "default_view": {
         "is_blocked_hint": "Alby är för tillfället avstängt hos {{host}}",
         "block_removed": "Aktiverade {{host}}. Ladda om webbplatsen.",
-        "see_all": "Se alla",
-        "no_transactions": "Inga transaktioner för detta konto ännu."
+        "see_all": "Se alla"
       }
     },
     "accounts": {
@@ -282,26 +259,15 @@
             "can_restore": "✅ Nostr-nyckel härledd från din huvudnyckel",
             "no_secret_key": "💡 Du har ingen huvudnyckel än. <0>Klicka här</0></div> för att skapa din huvudnyckel och härleda dina Nostr-nycklar.",
             "remove": "Ta bort nuvarande nycklar"
-          },
-          "setup": {
-            "description": "Välj Om du vill skapa ett nytt Nostr-konto (ett par privata och offentliga nycklar) eller importera ett befintligt.",
-            "description2": "Varje Nostr-konto som skapas i Alby kommer med en <0>Återställningsfras</0> – en uppsättning av 12 ord som alltid låter dig återfå åtkomst till dina privata Nostr-nycklar.",
-            "title": "Ställ in dina Nostr-nycklar",
-            "new": {
-              "label": "Skapa ett nytt Nostr-konto",
-              "description": "Generera en huvudnyckel med ett par nya Nostr-nycklar."
-            }
           }
         },
         "remove": {
           "error": "Det angivna kontonamnet matchade inte."
         },
         "name": {
-          "title": "Visnings Namn",
-          "placeholder": "Konto visningsnamn"
+          "title": "Visnings Namn"
         },
         "export": {
-          "screen_reader": "Exportera konto detaljer",
           "waiting": "väntar på LndHub-data...",
           "your_ln_address": "Din Lightning Address:",
           "export_uri": "LNDHub-inloggnings-URI",
@@ -313,7 +279,6 @@
         },
         "mnemonic": {
           "saved": "Huvudnyckeln krypterad och sparad.",
-          "existing_nostr_key_notice": "ℹ️ Detta konto har redan en nostr privat nyckeluppsättning och kommer inte att härledas från denna huvudnyckel. Du kan hantera din Nostr-nyckel från dina kontoinställningar.",
           "generate": {
             "title": "Generera ny huvudnyckel",
             "button": "Generera huvudnyckel",
@@ -372,8 +337,7 @@
         "subtitle": "Betalnings- och autentiseringsrelaterade notiser."
       },
       "website_enhancements": {
-        "title": "Webbplatsförbättringar",
-        "subtitle": "Dricks för Twitter, YouTube, m.fl."
+        "title": "Webbplatsförbättringar"
       },
       "camera_access": {
         "title": "Åtkomst till kamera",
@@ -622,9 +586,6 @@
       "umbrel": {
         "name": "Umbrel"
       },
-      "citadel": {
-        "name": "Citadel"
-      },
       "btcpay": {
         "name": "BTCPay"
       },
@@ -732,8 +693,6 @@
       "request2": "Begär fakturor och lightning information"
     },
     "onboard": {
-      "request2": "Du har inte konfigurerat dina nycklar än",
-      "request1": "Denna webbplats kräver nyckelinteraktion",
       "request3": "Installationen är snabb och enkel",
       "title": "Ställ in dina nycklar",
       "actions": {
@@ -823,7 +782,6 @@
     },
     "sats_other": "sats",
     "sats_one": "sat",
-    "accounts": "Konton",
     "discover": "Upptäcka",
     "success_message": "{{amount}}{{fiatAmount}} skickat till {{destination}}",
     "response": "Svar",

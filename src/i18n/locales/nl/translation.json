@@ -16,20 +16,16 @@
       },
       "test_connection": {
         "ready": "Geweldig, klaar om te starten!",
-        "initializing": "Uw account wordt geïnitialiseerd. Even geduld, dit kan even duren...",
         "connection_error": "Connectie Error",
         "review_connection_details": "Controleer uw verbindingsgegevens.",
         "connection_taking_long": "Verbinden duurt langer dan verwacht... Kloppen uw gegevens? Is uw node bereikbaar?",
         "contact_support": "Hulp nodig? neem contact op met support@getalby.com",
-        "actions": {
-          "delete_edit_account": "Verwijderd invalide account en probeer opnieuw"
-        }
+        "actions": {}
       }
     },
     "choose_connector": {
       "description": "Maak eerst verbinding met een Lightning wallet zodat je kan synchen met websites die bitcoin Lightning betalingen accepteren!",
       "lnd": {
-        "title": "LND",
         "page": {
           "title": "Verbind met je LND node",
           "description": "Je hebt je node-URL nodig en een macaroon met lees- en verzendrechten (bijv. admin.macaroon)"
@@ -92,21 +88,11 @@
         }
       },
       "citadel": {
-        "title": "Citadel",
         "page": {
-          "title": "Verbinding maken met <0>Citadel</0> node",
-          "instructions": "Dit werkt momenteel niet als 2FA is ingeschakeld."
-        },
-        "password": {
-          "label": "Citadel-wachtwoord"
-        },
-        "url": {
-          "label": "Citadel-URL",
-          "placeholder": "http://citadel.local"
+          "title": "Verbinding maken met <0>Citadel</0> node"
         }
       },
       "umbrel": {
-        "title": "Umbrel",
         "page": {
           "title": "Verbinding maken met <0>Umbrel</0> node",
           "instructions": "Ga in uw Umbrel dashboard naar <0>Connect Wallet</0>. Selecteer <0>lndconnect REST</0> en kopieer de URL <0>lndconnect</0>. (Afhankelijk van uw installatie kunt u de lokale verbinding of de Tor-verbinding gebruiken.)"
@@ -117,7 +103,6 @@
         }
       },
       "mynode": {
-        "title": "myNode",
         "page": {
           "title": "Verbinding maken met <0>myNode</0>",
           "instructions": "Op uw myNode homepage klikt u op de <0>Wallet</0> knop voor uw <0>Lightning</0> dienst.<1/> Klik nu op de <0>Pair Wallet</0> knop onder de <0>Status</0> tab. Voer uw wachtwoord in wanneer daarom wordt gevraagd.<1/> Selecteer het dropdown menu en kies een koppelingsoptie. Afhankelijk van uw instelling kunt u de <0>Lightning (REST + Lokaal IP)</0> verbinding of de <0>Lightning (REST + Tor)</0> verbinding gebruiken."
@@ -128,7 +113,6 @@
         }
       },
       "startos": {
-        "title": "StartOS",
         "page": {
           "title": "Maak verbinding met uw <0>StartOS</0> node",
           "instructions": "<0>Note:</0> Momenteel ondersteunen we alleen LND, maar we zullen in de toekomst c-lightning ondersteuning toevoegen! <1/>Op uw StartOS dashboard klikt u op de <0>Lightning Network Daemon</0> service.<1/>Selecteer de <0>Properties</0> tab.<1/>Kopieer nu de <0>LND Connect REST URL.</0>"
@@ -139,7 +123,6 @@
         }
       },
       "raspiblitz": {
-        "title": "RaspiBlitz",
         "page": {
           "title": "Verbind met uw RaspiBlitz node",
           "instructions1": "Je hebt je node onion adres, poort en een macaroon met lees- en verzendrechten nodig (bijv. admin.macaroon).<1/><1/><0>SSH</0> in uw <0>RaspiBlitz</0>.<1/>Run het commando <0>sudo cat /mnt/hdd/tor/lndrest/hostname</0>.<1/>Kopieer en plak het <0>.onion</0> adres in de onderstaande invoer.<1/>Voeg uw <0>port</0> toe na het onion adres, de standaard poort is <0>:8080</0>.",
@@ -151,13 +134,11 @@
         }
       },
       "blink": {
-        "title": "",
         "page": {
           "title": ""
         }
       },
       "bitcoin_jungle": {
-        "title": "",
         "page": {
           "title": ""
         },
@@ -177,7 +158,6 @@
         }
       },
       "btcpay": {
-        "title": "",
         "config": {
           "label": ""
         },
@@ -186,7 +166,6 @@
         }
       },
       "commando": {
-        "title": "",
         "page": {
           "title": "",
           "instructions": ""
@@ -249,8 +228,7 @@
         "subtitle": ""
       },
       "website_enhancements": {
-        "title": "",
-        "subtitle": ""
+        "title": ""
       },
       "camera_access": {
         "title": "",

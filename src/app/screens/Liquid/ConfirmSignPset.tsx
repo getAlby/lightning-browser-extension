@@ -113,7 +113,7 @@ function ConfirmSignPset() {
                   {t("allow_sign", { host: origin.host })}{" "}
                 </h2>
                 <Hyperlink
-                  href="https://guides.getalby.com/user-guide/v/alby-account-and-browser-extension/alby-browser-extension/features/liquid"
+                  href="https://guides.getalby.com/user-guide/browser-extension/features/liquid"
                   target="_blank"
                 >
                   <div className="bg-blue-500 rounded-full">

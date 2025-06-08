@@ -1,4 +1,3 @@
-import fetchAdapter from "@vespaiach/axios-fetch-adapter";
 import type { AxiosResponse } from "axios";
 import axios, { AxiosRequestConfig, Method } from "axios";
 import lightningPayReq from "bolt11-signet";
@@ -105,23 +104,22 @@ export default class LndHub implements Connector {
       }[]
     >("GET", "/getuserinvoices", undefined);
 
-    const invoices: ConnectorTransaction[] = data
-      .map(
-        (invoice, index): ConnectorTransaction => ({
-          custom_records: invoice.custom_records,
-          id: `${invoice.payment_request}-${index}`,
-          memo: invoice.description,
-          preimage: "", // lndhub doesn't support preimage (yet)
-          payment_hash: invoice.payment_hash,
-          settled: invoice.ispaid,
-          settleDate: invoice.timestamp * 1000,
-          totalAmount: invoice.amt,
-          type: "received",
-        })
-      )
-      .sort((a, b) => {
-        return b.settleDate - a.settleDate;
-      });
+    data.sort((a, b) => b.timestamp - a.timestamp);
+
+    const invoices: ConnectorTransaction[] = data.map(
+      (invoice, index): ConnectorTransaction => ({
+        custom_records: invoice.custom_records,
+        id: `${invoice.payment_request}-${index}`,
+        memo: invoice.description,
+        preimage: "", // lndhub doesn't support preimage (yet)
+        payment_hash: invoice.payment_hash,
+        settled: invoice.ispaid,
+        settleDate: invoice.timestamp * 1000,
+        creationDate: invoice.timestamp * 1000,
+        totalAmount: invoice.amt,
+        type: "received",
+      })
+    );
 
     return invoices;
   }
@@ -133,7 +131,7 @@ export default class LndHub implements Connector {
     const transactions: ConnectorTransaction[] = mergeTransactions(
       incomingInvoices,
       outgoingInvoices
-    );
+    ).filter((transaction) => transaction.settled);
 
     return {
       data: {
@@ -176,6 +174,7 @@ export default class LndHub implements Connector {
         ),
         settled: true,
         settleDate: transaction.timestamp * 1000,
+        creationDate: transaction.timestamp * 1000,
         totalAmount: transaction.value,
         type: "sent",
       })
@@ -400,7 +399,7 @@ export default class LndHub implements Connector {
             "X-TS": Math.floor(Date.now() / 1000),
             "X-VERIFY": this.generateHmacVerification(url),
           },
-          adapter: fetchAdapter,
+          adapter: "fetch",
         }
       );
 
@@ -457,7 +456,7 @@ export default class LndHub implements Connector {
         "X-TS": Math.floor(Date.now() / 1000),
         "X-VERIFY": this.generateHmacVerification(url),
       },
-      adapter: fetchAdapter,
+      adapter: "fetch",
     };
 
     if (method === "POST") {

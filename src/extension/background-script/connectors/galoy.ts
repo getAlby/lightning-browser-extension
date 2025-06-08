@@ -1,4 +1,3 @@
-import fetchAdapter from "@vespaiach/axios-fetch-adapter";
 import axios, { AxiosRequestConfig } from "axios";
 import lightningPayReq from "bolt11-signet";
 import { ACCOUNT_CURRENCIES, CURRENCIES } from "~/common/constants";
@@ -238,7 +237,7 @@ class Galoy implements Connector {
             );
           }
 
-          transactions.push({
+          const transaction: ConnectorTransaction = {
             id: edge.cursor,
             memo: tx.memo || paymentRequestDescription,
             preimage:
@@ -246,10 +245,15 @@ class Galoy implements Connector {
             payment_hash: tx.initiationVia.paymentHash || "",
             settled: tx.status === "SUCCESS",
             settleDate: createdAtDate.getTime(),
+            creationDate: createdAtDate.getTime(),
             totalAmount: absSettlementAmount,
             type: transactionType,
             displayAmount,
-          });
+          };
+
+          if (transaction.settled) {
+            transactions.push(transaction);
+          }
         }
       }
 
@@ -563,7 +567,7 @@ class Galoy implements Connector {
       url: this.config.url,
       responseType: "json",
       headers: this.config.headers,
-      adapter: fetchAdapter,
+      adapter: "fetch",
     };
     reqConfig.data = query;
     let data;

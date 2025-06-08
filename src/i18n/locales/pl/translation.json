@@ -16,14 +16,10 @@
       },
       "test_connection": {
         "ready": "Świetnie, wszystko gotowe!",
-        "initializing": "Tworzenie Twojego konta. Poczekaj proszę, to może chwilę zająć...",
         "connection_error": "Błąd połączenia",
         "review_connection_details": "Sprawdź proszę dane do połączenia.",
         "connection_taking_long": "Próba połączenia trwa dłużej niż oczekiwano... Czy dane do połączenia są poprawne? Czy Twój węzeł jest osiągalny?",
-        "contact_support": "Jeśli potrzebujesz pomocy, skontaktuj się z support@getalby.com",
-        "actions": {
-          "delete_edit_account": "Skasuj niepoprawne konto i wyedytuj ponownie"
-        }
+        "contact_support": "Jeśli potrzebujesz pomocy, skontaktuj się z support@getalby.com"
       },
       "pin_extension": {
         "explanation": "1. Kliknij <0/> w prawym górnym rogu przeglądarki <1/>2. Znajdź Alby i kliknij, aby przypiąć je do paska narzędzi<1/>3. Gotowe. Aby uzyskać dostęp do Alby, kliknij ikonę <2/>",
@@ -34,11 +30,16 @@
     },
     "choose_path": {
       "alby": {
-        "title": "Konto Alby"
+        "title": "Konto Alby",
+        "connect": "Kontynuuj używając konta Alby",
+        "description": "Idealne, jeśli chcesz korzystać z aplikacji, zachowując pełną kontrolę nad swoimi bitcoinami."
       },
       "other": {
-        "title": "Inne portfele"
-      }
+        "title": "Użyj wlasnego portfela",
+        "description": "Najlepiej, jeśli masz już portfel lub własny węzeł Lightning.",
+        "connect": "Znajdź swój portfel"
+      },
+      "title": "Połącz rozszerzenie Alby do portfela"
     },
     "alby": {
       "pre_connect": {
@@ -61,7 +62,6 @@
       "title": "Podłącz portfel Lightning",
       "description": "Podłącz swój zewnętrzny portfel lightning lub węzeł",
       "lnd": {
-        "title": "LND",
         "page": {
           "title": "Podłącz się do swojego węzła LND",
           "description": "Potrzebujesz adresu URL Twojego węzła i tzw. macaroon z uprawnieniami do odczytu i wysyłania (np. admin.macaroon)"
@@ -131,21 +131,11 @@
         }
       },
       "citadel": {
-        "title": "Citadel",
         "page": {
-          "title": "Podłącz do węzła <0>Citadel</0>",
-          "instructions": "Ta funkcja nie działa jeśli 2FA jest włączone."
-        },
-        "password": {
-          "label": "Hasło Citadel"
-        },
-        "url": {
-          "label": "Adres URL Citadel",
-          "placeholder": "http://citadel.local"
+          "title": "Podłącz do węzła <0>Citadel</0>"
         }
       },
       "umbrel": {
-        "title": "Umbrel",
         "page": {
           "title": "Podłącz do węzła <0>Umbrel</0>",
           "instructions": "Na stronie głównej Umbrel idź do <0>Connect Wallet</0>. Wybierz <0>ldconnect REST</0> i skopiuj <0>lndconnect URL</0>. (W zależności od ustawień możesz wybrać połaczenie lokalne albo przez Tor.)"
@@ -156,7 +146,6 @@
         }
       },
       "mynode": {
-        "title": "myNode",
         "page": {
           "title": "Podłącz do <0>myNode</0>",
           "instructions": "Na stronie głównej myNode kliknij na przycisk <0>Wallet</0> swojej usługi <0>lightning</0>.<1/>Teraz kliknij na przycisk <0>Pair Wallet</0> w sekcji <0>Status</0>. Wprowadź hasło.<1/> Wybierz z rozwijalnej listy opcję parowania. W zależności od ustawień możesz użyć połączenia <0>lightning (REST + Local IP)</0> albo <0>lightning (REST + Tor)</0>."
@@ -167,7 +156,6 @@
         }
       },
       "startos": {
-        "title": "StartOS",
         "page": {
           "title": "Połącz ze swoim <0>serwerem StartOS</0>",
           "instructions": "<0>Uwaga:</0>Obecnie wspieramy tylko LND, ale zamierzamy dodać obsługę c-lightning w przyszłości!<1/>Na pulpicie twojego StartOS kliknij na usługę <0>Lightning Network Daemon</0>.<1/>Wybierz zakładkę <0>Properties</0>.<1/>Następnie skopiuj <0>LND Connect REST URL.</0>"
@@ -178,7 +166,6 @@
         }
       },
       "raspiblitz": {
-        "title": "RaspiBlitz",
         "page": {
           "title": "Podłącz do węzła <0>RaspiBlitz</0>",
           "instructions1": "Wykonaj te kroki:<1/> 1. Używając <0>SSH</0> zaloguj się do swojego <0>Raspiblitz</0><1/>2. Wybierz z listy <0>Connect Apps & Show Credentials</0><1/><0/>3. Wybierz <0>Connect Alby to this node</0><1/>4. Naciśnij <0>OK</0> aby wyświetlić dane uwierzytelniające<1/><1/>Skopiuj i wklej adres <0>REST API host</0> lub <0>.onion</0> aby połączyć się przez Tor do pola tekstowego poniżej.",
@@ -190,7 +177,6 @@
         }
       },
       "blink": {
-        "title": "Portfel Blink",
         "page": {
           "title": "Podłącz do <0>Blink Wallet</0>"
         },
@@ -199,7 +185,6 @@
         }
       },
       "bitcoin_jungle": {
-        "title": "Portfel Bitcoin Jungle",
         "page": {
           "title": "Podłącz do <0>Portfela Bitcoin Jungle</0>"
         },
@@ -208,7 +193,6 @@
         }
       },
       "btcpay": {
-        "title": "BTCPay Server",
         "config": {
           "label": "Date konfiguracyjne"
         },
@@ -217,7 +201,6 @@
         }
       },
       "commando": {
-        "title": "Core Lightning",
         "page": {
           "title": "Podłącz do Twojego węzła Core Lightning",
           "instructions": "Upewnij się, że masz Core Lightning w wersji 0.12.0 lub nowszej, że plugin commando działa, a Twój węzeł jest dostępny w sieci lightning. Stwórz runę komendą 'lightning-cli commando-rune'."
@@ -281,18 +264,15 @@
       "default_view": {
         "is_blocked_hint": "Alby jest obecnie wyłączone na {{host}}",
         "block_removed": "Włączono {{host}}. Odśwież stronę.",
-        "see_all": "Zobacz wszystko",
-        "no_transactions": "Jeszcze nie ma transakcji na tym koncie."
+        "see_all": "Zobacz wszystko"
       }
     },
     "accounts": {
       "account_view": {
         "name": {
-          "title": "Wyświetlana nazwa",
-          "placeholder": "Nazwa wyświetlana konta"
+          "title": "Wyświetlana nazwa"
         },
         "export": {
-          "screen_reader": "Eksportuj dane konta",
           "waiting": "oczekiwanie na dane LndHub...",
           "your_ln_address": "Twój adres Lightning:",
           "export_uri": "Adres LNDHub",
@@ -383,8 +363,7 @@
         "subtitle": "Powiadomienia związane z płatnościami i uwierzytelnianiem."
       },
       "website_enhancements": {
-        "title": "Rozszerzenia na stronach",
-        "subtitle": "Rozszerzenia napiwków na Twitterze, YouTube, etc."
+        "title": "Rozszerzenia na stronach"
       },
       "camera_access": {
         "title": "Dostęp do kamery",
@@ -605,9 +584,6 @@
       },
       "umbrel": {
         "name": "Umbrel"
-      },
-      "citadel": {
-        "name": "Citadel"
       }
     }
   },
@@ -616,7 +592,6 @@
     "confirm_password": "Potwierdź hasło",
     "success": "Sukces",
     "error": "Błąd",
-    "accounts": "Konta",
     "discover": "Odkrywaj",
     "connected_sites": "",
     "sats_one": "sat",

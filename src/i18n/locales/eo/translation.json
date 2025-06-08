@@ -16,20 +16,16 @@
       },
       "test_connection": {
         "ready": "Bonege, ĉio pretas!",
-        "initializing": "Inicializante vian konton. Bonvolu atendi, ĉi tio povas daŭri minuton...",
         "connection_error": "Konekta eraro",
         "review_connection_details": "Bonvolu revizii viajn konektajn detalojn.",
         "connection_taking_long": "Provi konektiĝi daŭras pli longe ol atendite... Ĉu viaj detaloj estas ĝustaj? Ĉu via nodo estas atingebla?",
         "contact_support": "Se vi bezonas helpon bonvolu kontakti support@getalby.com",
-        "actions": {
-          "delete_edit_account": "Forigu nevalidan konton kaj redaktu denove"
-        }
+        "actions": {}
       }
     },
     "choose_connector": {
       "description": "",
       "lnd": {
-        "title": "LND",
         "page": {
           "title": "Konekti al via LND-nodo",
           "description": ""
@@ -92,21 +88,11 @@
         }
       },
       "citadel": {
-        "title": "Citadel",
         "page": {
-          "title": "",
-          "instructions": ""
-        },
-        "password": {
-          "label": "Citadel-pasvorto"
-        },
-        "url": {
-          "label": "",
-          "placeholder": "http://citadel.local"
+          "title": ""
         }
       },
       "umbrel": {
-        "title": "Umbrel",
         "page": {
           "title": "",
           "instructions": ""
@@ -117,7 +103,6 @@
         }
       },
       "mynode": {
-        "title": "myNode",
         "page": {
           "title": "Konekti al <0>myNode</0>",
           "instructions": ""
@@ -128,7 +113,6 @@
         }
       },
       "startos": {
-        "title": "StartOS",
         "page": {
           "title": "",
           "instructions": ""
@@ -139,7 +123,6 @@
         }
       },
       "raspiblitz": {
-        "title": "RaspiBlitz",
         "page": {
           "title": "Konekti al via <0>RaspiBlitz</0>-nodo",
           "instructions1": "",
@@ -151,13 +134,11 @@
         }
       },
       "blink": {
-        "title": "",
         "page": {
           "title": ""
         }
       },
       "bitcoin_jungle": {
-        "title": "",
         "page": {
           "title": ""
         }
@@ -168,7 +149,6 @@
         }
       },
       "btcpay": {
-        "title": "BTCPay-servilo",
         "config": {
           "label": ""
         },
@@ -177,7 +157,6 @@
         }
       },
       "commando": {
-        "title": "",
         "page": {
           "title": "",
           "instructions": ""
@@ -239,8 +218,7 @@
         "subtitle": ""
       },
       "website_enhancements": {
-        "title": "",
-        "subtitle": ""
+        "title": ""
       },
       "camera_access": {
         "title": "",

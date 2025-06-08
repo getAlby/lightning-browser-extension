@@ -53,6 +53,16 @@ export interface AccountInfoRes {
     pubkey?: string;
     lightning_address?: string;
     node_required?: boolean;
+    shared_node?: boolean;
+    using_fee_credits?: boolean;
+    limits?: {
+      max_send_volume: number;
+      max_send_amount: number;
+      max_receive_volume: number;
+      max_receive_amount: number;
+      max_account_balance: number;
+      max_volume_period_in_days: number;
+    };
   };
   name: string;
   avatarUrl?: string;
@@ -65,6 +75,7 @@ export interface GetAccountRes extends Pick<Account, "id" | "name"> {
   hasMnemonic: boolean;
   isMnemonicBackupDone: boolean;
   hasImportedNostrKey: boolean;
+  hasSeenInfoBanner: boolean;
   bitcoinNetwork: BitcoinNetworkType;
   useMnemonicForLnurlAuth: boolean;
 }
@@ -121,6 +132,9 @@ export const swrGetAccountInfo = async (
           avatarUrl,
           lightningAddress: response.info.lightning_address,
           nodeRequired: response.info.node_required,
+          sharedNode: response.info.shared_node,
+          usingFeeCredits: response.info.using_fee_credits,
+          limits: response.info.limits,
         };
         storeAccounts({
           ...accountsCache,

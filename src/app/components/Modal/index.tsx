@@ -9,6 +9,7 @@ type Props = {
   contentLabel: string;
   title?: string;
   position?: "top" | "center";
+  className?: string;
 };
 
 export default function Modal({
@@ -18,6 +19,7 @@ export default function Modal({
   contentLabel,
   title,
   position = "center",
+  className = "p-5",
 }: Props) {
   return (
     <ReactModal
@@ -32,17 +34,22 @@ export default function Modal({
         position == "center" && "items-center",
         position == "top" && "items-start pt-20"
       )}
-      className="rounded-lg shadow-xl bg-white dark:bg-surface-01dp w-full max-w-md overflow-x-hidden relative p-5 cursor-auto mx-5 no-scrollbar"
+      className={classNames(
+        className,
+        "rounded-xl shadow-xl bg-white dark:bg-surface-01dp w-full max-w-md overflow-x-hidden relative cursor-auto mx-5 no-scrollbar"
+      )}
       style={{ content: { maxHeight: "80vh" } }}
     >
       {title && (
-        <h2 className="text-2xl font-bold dark:text-white pb-5">{title}</h2>
+        <h2 className="text-xl font-semibold text-center dark:text-white pb-5">
+          {title}
+        </h2>
       )}
       <button
         onClick={closeModal}
         className="absolute right-5 top-5 text-gray-600 dark:text-neutral-400 hover:text-gray-700 dark:hover:text-neutral-300"
       >
-        <PopiconsXLine className="w-6 h-6" />
+        <PopiconsXLine className="w-5 h-5" />
       </button>
       {children}
     </ReactModal>

@@ -16,20 +16,15 @@
       },
       "test_connection": {
         "ready": "Fantastico, sei pronto per partire!",
-        "initializing": "Stiamo inizializzando il tuo account. Per favore attendi, questa operazione potrebbe impiegare alcuni minuti…",
         "connection_error": "Errore di connessione",
         "review_connection_details": "Controlla i dettagli della tua connessione.",
         "connection_taking_long": "Il tentativo di connessione richiede più tempo del previsto... I tuoi dati sono corretti? Il tuo nodo è raggiungibile?",
-        "contact_support": "Se hai bisogno di aiuto, contatta support@getalby.com",
-        "actions": {
-          "delete_edit_account": "Elimina l'account invalido e modificalo di nuovo"
-        }
+        "contact_support": "Se hai bisogno di aiuto, contatta support@getalby.com"
       }
     },
     "choose_connector": {
       "description": "Connettiti al tuo wallet lightning esterno o al tuo nodo",
       "lnd": {
-        "title": "LND",
         "page": {
           "title": "Connettiti al tuo nodo LND",
           "description": "Sono necessari l'URL del nodo e un macaroon con permessi di lettura e invio (ad esempio, admin.macaroon)"
@@ -92,21 +87,11 @@
         }
       },
       "citadel": {
-        "title": "Citadel",
         "page": {
-          "title": "Collega un nodo <0>Citadel</0>",
-          "instructions": "Attualmente non funziona se è abilitata la 2FA."
-        },
-        "password": {
-          "label": "Password Citadel"
-        },
-        "url": {
-          "label": "URL Citadel",
-          "placeholder": "http://citadel.local"
+          "title": "Collega un nodo <0>Citadel</0>"
         }
       },
       "umbrel": {
-        "title": "Umbrel",
         "page": {
           "title": "Collega un nodo <0>Umbrel</0>",
           "instructions": "Nella dashboard di Umbrel vai su <0>Connect Wallet</0>. Seleziona <0>lndconnect REST</0> e copia il <0>lndconnect URL</0>. (In base al tuo setup puoi usare una connessione locale o una connessione via TOR)"
@@ -117,7 +102,6 @@
         }
       },
       "mynode": {
-        "title": "myNode",
         "page": {
           "title": "Collegati a <0>myNode</0>",
           "instructions": "Nella homepage di myNode clicca sul tasto <0>Wallet</0> per il servizio <0>Lightning</0>.<1/> Ora clicca sul tasto <0>Pair Wallet</0> sotto il tab <0>Status</0>. Inserisci la tua password quando richiesta.<1/> Seleziona il menu a tendina e scegli l'opzione per effettuare l'accoppiamento. In base al tuo setup puoi utilizzare la connessione <0>Lightning (REST + Local IP)</0> o quella <0>Lightning (REST + Tor)</0>."
@@ -128,7 +112,6 @@
         }
       },
       "startos": {
-        "title": "StartOS",
         "page": {
           "title": "Collega il tuo nodo StartOS",
           "instructions": "<0>Nota:</0> Al momento supportiamo solamente LND, aggiungeremo il supporto per c-lightning in futuro!<1/>Nella dashboard di StartOS clicca sul servizio <0>Lightning Network Daemon</0>.<1/>Seleziona il tab <0>Proprieta'</0>.<1/>Adesso copia l'<0>LND Connect REST URL.</0>"
@@ -139,7 +122,6 @@
         }
       },
       "raspiblitz": {
-        "title": "RaspiBlitz",
         "page": {
           "title": "Collega il tuo nodo <0>RaspiBlitz</0>",
           "instructions1": "Hai bisogno dell'indirizzo onion, la porta e il macaroon con permessi di lettura e scrittura (e.g admin.macaroon) del tuo nodo..<1/><1/>Entra attraverso <0>SSH</0> nel tuo <0>RaspiBlitz</0>.<1/>Lancia il comando <0>sudo cat /mnt/hdd/tor/lndrest/hostname</0>.<1/>Copia e incolla l'indirizzo <0>.onion</0> di seguito.<1/>Aggiungi la tua <0>porta</0> subito dopo l'indirizzo onion, la porta di default e' <0>:8080</0>.",
@@ -151,19 +133,16 @@
         }
       },
       "blink": {
-        "title": "Blink Wallet",
         "page": {
           "title": "Connetti il tuo <0>Blink Wallet</0>"
         }
       },
       "bitcoin_jungle": {
-        "title": "Bitcoin Jungle Wallet",
         "page": {
           "title": "Connetti a <0>Bitcoin Jungle Wallet</0>"
         }
       },
       "btcpay": {
-        "title": "BTCPay Server",
         "config": {
           "label": "Dati di configurazione"
         },
@@ -184,7 +163,6 @@
         "privKey": {
           "label": "Chiave privata locale (autogenerata)"
         },
-        "title": "Core Lightning",
         "page": {
           "title": "Connettiti al tuo nodo Core Lightning",
           "instructions": "Assicurati di avere la versione 0.12.0 o più recente di Core Lightning, che il plugin commando sia in esecuzione e che il tuo nodo sia accessibile sulla rete Lightning. Crea una rune eseguendo 'lightning-cli commando-rune'."
@@ -260,12 +238,10 @@
           "your_ln_address": "Il Tuo Indirizzo Lightning:",
           "waiting": "in attesa dei dati da LndHub...",
           "export_uri": "URI delle credenziali di LNDHub",
-          "scan_qr": "Importa questo wallet su Zeus o BlueWallet scansionando il QRCode.",
-          "screen_reader": "Esporta i dettagli dell'account"
+          "scan_qr": "Importa questo wallet su Zeus o BlueWallet scansionando il QRCode."
         },
         "name": {
-          "title": "Nome",
-          "placeholder": "Nome Account"
+          "title": "Nome"
         }
       }
     },
@@ -290,8 +266,7 @@
         "subtitle": "Notifiche relative ai pagamenti e all'autenticazione."
       },
       "website_enhancements": {
-        "title": "Miglioramenti del sito web",
-        "subtitle": "Miglioramenti per le mance su Twitter, YouTube, ecc."
+        "title": "Miglioramenti del sito web"
       },
       "camera_access": {
         "title": "Accesso alla telecamera",
@@ -564,7 +539,6 @@
     "sats_one": "sat",
     "sats_other": "sats",
     "success_message": "{{amount}}{{fiatAmount}} inviati a {{destination}}",
-    "accounts": "Account",
     "discover": "Scopri",
     "confirm_password": "Conferma la Password"
   },

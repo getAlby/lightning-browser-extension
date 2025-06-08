@@ -27,6 +27,10 @@ const edit = async (message: MessageAccountEdit) => {
         message.args.isMnemonicBackupDone;
     }
 
+    if (message.args.hasSeenInfoBanner !== undefined) {
+      accounts[accountId].hasSeenInfoBanner = message.args.hasSeenInfoBanner;
+    }
+
     state.setState({ accounts });
     // make sure we immediately persist the updated accounts
     await state.getState().saveToStorage();
