@@ -254,7 +254,7 @@ const distributionMap: { [key: string]: { logo: string; children: Route[] } } =
   };
 
 function getConnectorRoutes(): ConnectorRoute[] {
-  return [
+  const routes = [
     connectorMap["albyhub"],
     connectorMap["lnd"],
     connectorMap["lnc"],
@@ -274,6 +274,9 @@ function getConnectorRoutes(): ConnectorRoute[] {
     connectorMap["lnd-hub-go"],
     connectorMap["eclair"],
   ];
+
+  // Sort connectors alphabetically by title
+  return routes.sort((a, b) => a.title.localeCompare(b.title));
 }
 
 function renderRoutes(routes: (ChildRoute | ConnectorRoute)[]) {
