@@ -38,8 +38,11 @@ import type {
 
 import {
   getAccountsCache,
+  getTransactionsCache,
   removeAccountFromCache,
+  removeTransactionsFromCache,
   storeAccounts,
+  storeTransactions,
 } from "./cache";
 import msg from "./msg";
 
@@ -146,6 +149,41 @@ export const swrGetAccountInfo = async (
       .catch(reject);
   });
 };
+
+/**
+ * stale-while-revalidate get transactions
+ * @param accountId - account id
+ * @param options - transaction options (limit, etc.)
+ * @param callback - will be called first with cached (stale) data first, then with fresh data.
+ */
+export const swrGetTransactions = async (
+  accountId: string,
+  options?: { limit?: number },
+  callback?: (transactions: { transactions: Invoice[] }) => void
+): Promise<{ transactions: Invoice[] }> => {
+  const cachedTransactions = await getTransactionsCache(accountId);
+
+  return new Promise((resolve, reject) => {
+    if (cachedTransactions) {
+      const cachedResponse = { transactions: cachedTransactions };
+      if (callback) callback(cachedResponse);
+      resolve(cachedResponse);
+    }
+
+    // Update transactions with most recent data, save to cache.
+    getTransactions(options)
+      .then((response) => {
+        storeTransactions(accountId, response.transactions);
+        if (callback) callback(response);
+        return resolve(response);
+      })
+      .catch(reject);
+  });
+};
+export const clearTransactionsCache = async (accountId: string) => {
+  await removeTransactionsFromCache(accountId);
+};
+
 export const getAccounts = () => msg.request<Accounts>("getAccounts");
 export const getAccount = (id?: string) =>
   msg.request<GetAccountRes>("getAccount", {
@@ -313,7 +351,9 @@ export default {
   setSetting,
   swr: {
     getAccountInfo: swrGetAccountInfo,
+    getTransactions: swrGetTransactions,
   },
+  clearTransactionsCache,
   removeAccount,
   unlock,
   getBlocklist,
