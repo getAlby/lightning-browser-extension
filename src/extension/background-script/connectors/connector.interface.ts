@@ -38,10 +38,6 @@ export interface ConnectorTransaction {
   displayAmount?: [number, ACCOUNT_CURRENCIES];
   type: "received" | "sent";
   state?: "settled" | "pending" | "failed";
-  recipient_data?: {
-    identifier?: string;
-  };
-
   metadata?: Nip47TransactionMetadata;
 }
 
