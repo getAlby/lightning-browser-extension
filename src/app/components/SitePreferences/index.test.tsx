@@ -89,7 +89,7 @@ describe("SitePreferences", () => {
           "USD"
         );
       }
-      expect(mockGetFormattedInCurrency).toHaveBeenCalledTimes(n * 2);
+      expect(mockGetFormattedInCurrency).toHaveBeenCalledTimes(2);
     };
 
     // update fiat value when modal is open
