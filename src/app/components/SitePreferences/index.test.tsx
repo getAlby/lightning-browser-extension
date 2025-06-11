@@ -93,7 +93,7 @@ describe("SitePreferences", () => {
     };
 
     // update fiat value when modal is open
-    checkDualInputValue(defaultProps.allowance.totalBudget, 2);
+    checkDualInputValue(defaultProps.allowance.totalBudget, 1);
 
     await act(async () => {
       await user.clear(screen.getByLabelText("One-click payments budget"));
@@ -104,7 +104,6 @@ describe("SitePreferences", () => {
       );
     });
 
-    // update fiat value
     expect(screen.getByLabelText("One-click payments budget")).toHaveValue(250);
 
     checkDualInputValues([
@@ -116,6 +115,12 @@ describe("SitePreferences", () => {
       [25, "USD"],
       [25, "BTC"],
       [25, "USD"],
+      [250, "BTC"],
+      [250, "USD"],
+      [250, "BTC"],
+      [250, "USD"],
+      [250, "BTC"],
+      [250, "USD"],
       [250, "BTC"],
       [250, "USD"],
       [250, "BTC"],
