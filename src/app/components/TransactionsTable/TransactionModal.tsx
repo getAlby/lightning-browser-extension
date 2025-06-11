@@ -47,14 +47,12 @@ export default function TransactionModal({
     return [tx.type && "sent"].includes(tx.type) ? "outgoing" : "incoming";
   }
 
-  const eventId = transaction.metadata?.nostr?.tags?.find(
-    (t) => t[0] === "e"
-  )?.[1];
-
-  const pubkey = transaction.metadata?.nostr?.pubkey;
-  const npub = pubkey ? safeNpubEncode(pubkey) : undefined;
-
   const metadata = transaction.metadata as Nip47TransactionMetadata;
+
+  const eventId = metadata?.nostr?.tags?.find((t) => t[0] === "e")?.[1];
+
+  const pubkey = metadata?.nostr?.pubkey;
+  const npub = pubkey ? safeNpubEncode(pubkey) : undefined;
 
   return (
     <Modal
@@ -169,7 +167,7 @@ export default function TransactionModal({
             <TransactionDetailRow title="Comment" content={metadata.comment} />
           )}
 
-          {transaction.metadata?.nostr && eventId && npub && (
+          {metadata?.nostr && eventId && npub && (
             <TransactionDetailRow
               title={t("nostr_zap")}
               content={
@@ -290,10 +288,10 @@ export default function TransactionModal({
                     />
                   )}
 
-                  {transaction.metadata && (
+                  {metadata && (
                     <TransactionDetailRow
                       title={t("metadata")}
-                      content={JSON.stringify(transaction.metadata, null, 2)}
+                      content={JSON.stringify(metadata, null, 2)}
                     />
                   )}
                 </div>
