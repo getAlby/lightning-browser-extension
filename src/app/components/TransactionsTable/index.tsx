@@ -1,4 +1,5 @@
 import Loading from "@components/Loading";
+import { Nip47TransactionMetadata } from "@getalby/sdk/dist/nwc";
 import {
   PopiconsArrowDownSolid,
   PopiconsArrowUpSolid,
@@ -66,8 +67,9 @@ export default function TransactionsTable({
                       : "sent"
                   );
 
-            const payerName = tx.metadata?.payer_data?.name;
-            const pubkey = tx.metadata?.nostr?.pubkey;
+            const metadata = tx.metadata as Nip47TransactionMetadata;
+            const payerName = metadata?.payer_data?.name;
+            const pubkey = metadata?.nostr?.pubkey;
             const npub = pubkey ? safeNpubEncode(pubkey) : undefined;
 
             const from = payerName
@@ -76,7 +78,7 @@ export default function TransactionsTable({
               ? `zap from ${npub.substring(0, 12)}...`
               : undefined;
 
-            const recipientIdentifier = tx.metadata?.recipient_data?.identifier;
+            const recipientIdentifier = metadata?.recipient_data?.identifier;
             const to = recipientIdentifier
               ? `${
                   tx.state === "failed" ? "payment " : ""
