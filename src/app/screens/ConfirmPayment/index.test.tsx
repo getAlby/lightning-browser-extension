@@ -44,10 +44,13 @@ jest.mock("~/app/context/SettingsContext", () => ({
   useSettings: () => ({
     settings: mockSettingsTmp,
     isLoading: false,
+    getCurrencyRate: jest.fn(() => 11),
     updateSetting: jest.fn(),
     getFormattedFiat: mockGetFiatValue,
     getFormattedNumber: jest.fn(),
     getFormattedSats: jest.fn(() => "25 sats"),
+    getCurrencySymbol: jest.fn(() => "₿"),
+    getFormattedInCurrency: jest.fn(() => "$10.00"),
   }),
 }));
 
