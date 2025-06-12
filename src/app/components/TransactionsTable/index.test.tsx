@@ -116,7 +116,7 @@ describe("TransactionsTable", () => {
       </BrowserRouter>
     );
 
-    expect(screen.getByText("Alby")).toBeInTheDocument();
+    expect(screen.getByText("Sent")).toBeInTheDocument();
     expect(screen.getByText(/5 days ago/)).toBeInTheDocument();
     expect(await screen.findByText(/- 1,234,000 sats/)).toBeInTheDocument();
     expect(await screen.findByText(/~\$241.02/)).toBeInTheDocument();
@@ -133,7 +133,7 @@ describe("TransactionsTable", () => {
       </BrowserRouter>
     );
 
-    expect(await screen.findByText("lambo lambo")).toBeInTheDocument();
+    expect(await screen.getAllByText("Received")[0]).toBeInTheDocument();
     expect(await screen.findByText(/4 days ago/)).toBeInTheDocument();
     expect(await screen.findByText(/\+ 66,666 sats/)).toBeInTheDocument();
     expect(await screen.findByText(/~\$13.02/)).toBeInTheDocument();
@@ -153,7 +153,7 @@ describe("TransactionsTable", () => {
       </BrowserRouter>
     );
 
-    expect(screen.getByText("dumplings")).toBeInTheDocument();
+    expect(screen.getAllByText("Received")[0]).toBeInTheDocument();
     expect(screen.getByText(/5 days ago/)).toBeInTheDocument();
     expect(await screen.findByText(/\+ 88,888 sats/)).toBeInTheDocument();
     expect(await screen.findByText(/~\$17.36/)).toBeInTheDocument();

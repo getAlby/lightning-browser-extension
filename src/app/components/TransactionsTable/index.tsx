@@ -1,4 +1,5 @@
 import Loading from "@components/Loading";
+import { Nip47TransactionMetadata } from "@getalby/sdk/dist/nwc";
 import {
   PopiconsArrowDownSolid,
   PopiconsArrowUpSolid,
@@ -10,7 +11,7 @@ import { useTranslation } from "react-i18next";
 
 import TransactionModal from "~/app/components/TransactionsTable/TransactionModal";
 import { useSettings } from "~/app/context/SettingsContext";
-import { classNames } from "~/app/utils";
+import { classNames, safeNpubEncode } from "~/app/utils";
 import { Transaction } from "~/types";
 
 export type Props = {
@@ -21,7 +22,6 @@ export type Props = {
 
 export default function TransactionsTable({
   transactions,
-  noResultMsg,
   loading = false,
 }: Props) {
   const { getFormattedSats, getFormattedInCurrency } = useSettings();
@@ -54,6 +54,36 @@ export default function TransactionsTable({
         <>
           {transactions?.map((tx) => {
             const type = getTransactionType(tx);
+            const typeStateText =
+              type == "incoming"
+                ? t("received")
+                : t(
+                    tx.state === "settled"
+                      ? "sent"
+                      : tx.state === "pending"
+                      ? "sending"
+                      : tx.state === "failed"
+                      ? "failed"
+                      : "sent"
+                  );
+
+            const metadata = tx.metadata as Nip47TransactionMetadata;
+            const payerName = metadata?.payer_data?.name;
+            const pubkey = metadata?.nostr?.pubkey;
+            const npub = pubkey ? safeNpubEncode(pubkey) : undefined;
+
+            const from = payerName
+              ? `from ${payerName}`
+              : npub
+              ? `zap from ${npub.substring(0, 12)}...`
+              : undefined;
+
+            const recipientIdentifier = metadata?.recipient_data?.identifier;
+            const to = recipientIdentifier
+              ? `${
+                  tx.state === "failed" ? "payment " : ""
+                }to ${recipientIdentifier}`
+              : undefined;
 
             return (
               <div
@@ -61,7 +91,7 @@ export default function TransactionsTable({
                 className="-mx-2 px-2 py-2 hover:bg-gray-100 dark:hover:bg-surface-02dp cursor-pointer rounded-md"
                 onClick={() => openDetails(tx)}
               >
-                <div className="flex gap-3">
+                <div className="flex gap-3 items-center">
                   <div className="flex items-center">
                     {type == "outgoing" ? (
                       tx.state === "pending" ? (
@@ -84,31 +114,26 @@ export default function TransactionsTable({
                     )}
                   </div>
                   <div className="overflow-hidden mr-3">
-                    <div className="text-sm font-medium text-black truncate dark:text-white">
+                    <div className="flex gap-2 text-sm font-medium text-black truncate dark:text-white items-center">
                       <p
                         className={classNames(
                           "truncate",
                           tx.state == "pending" && "animate-pulse"
                         )}
                       >
-                        {tx.title ||
-                          tx.boostagram?.message ||
-                          (type == "incoming"
-                            ? t("received")
-                            : t(
-                                tx.state === "settled"
-                                  ? "sent"
-                                  : tx.state === "pending"
-                                  ? "sending"
-                                  : tx.state === "failed"
-                                  ? "failed"
-                                  : "sent"
-                              ))}
+                        {typeStateText}
+                        {from !== undefined && <>&nbsp;{from}</>}
+                        {to !== undefined && <>&nbsp;{to}</>}
+                      </p>
+                      <p className="text-xs text-gray-400 dark:text-neutral-500">
+                        {tx.timeAgo}
                       </p>
                     </div>
-                    <p className="text-xs text-gray-400 dark:text-neutral-500">
-                      {tx.timeAgo}
-                    </p>
+                    {(tx.description || metadata?.comment) && (
+                      <p className="truncate text-xs text-gray-600 dark:text-neutral-400">
+                        {tx.description || metadata?.comment}
+                      </p>
+                    )}
                   </div>
                   <div className="flex ml-auto text-right space-x-3 shrink-0 dark:text-white">
                     <div>

@@ -1,17 +1,20 @@
+import { Nip47TransactionMetadata } from "@getalby/sdk/dist/nwc";
 import {
   PopiconsArrowDownSolid,
   PopiconsArrowUpSolid,
   PopiconsChevronBottomLine,
   PopiconsChevronTopLine,
+  PopiconsLinkLine,
   PopiconsXSolid,
 } from "@popicons/react";
 import dayjs from "dayjs";
+import { nip19 } from "nostr-tools";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Hyperlink from "~/app/components/Hyperlink";
 import Modal from "~/app/components/Modal";
 import { useSettings } from "~/app/context/SettingsContext";
-import { classNames } from "~/app/utils";
+import { classNames, safeNpubEncode } from "~/app/utils";
 import { Transaction } from "~/types";
 
 type Props = {
@@ -43,6 +46,13 @@ export default function TransactionModal({
   function getTransactionType(tx: Transaction): "incoming" | "outgoing" {
     return [tx.type && "sent"].includes(tx.type) ? "outgoing" : "incoming";
   }
+
+  const metadata = transaction.metadata as Nip47TransactionMetadata;
+
+  const eventId = metadata?.nostr?.tags?.find((t) => t[0] === "e")?.[1];
+
+  const pubkey = metadata?.nostr?.pubkey;
+  const npub = pubkey ? safeNpubEncode(pubkey) : undefined;
 
   return (
     <Modal
@@ -125,6 +135,18 @@ export default function TransactionModal({
           </div>
         </div>
         <div className="mt-6">
+          {metadata?.recipient_data?.identifier && (
+            <TransactionDetailRow
+              title="To"
+              content={metadata.recipient_data.identifier}
+            />
+          )}
+          {metadata?.payer_data?.name && (
+            <TransactionDetailRow
+              title="From"
+              content={metadata.payer_data.name}
+            />
+          )}
           <TransactionDetailRow
             title={t("date_time")}
             content={dayjs(transaction.timestamp).format("D MMMM YYYY, HH:mm")}
@@ -139,6 +161,33 @@ export default function TransactionModal({
             <TransactionDetailRow
               title={tCommon("description")}
               content={transaction.title}
+            />
+          )}
+          {metadata?.comment && (
+            <TransactionDetailRow title="Comment" content={metadata.comment} />
+          )}
+
+          {metadata?.nostr && eventId && npub && (
+            <TransactionDetailRow
+              title={t("nostr_zap")}
+              content={
+                <Hyperlink
+                  target="_blank"
+                  href={`https://njump.me/${nip19.neventEncode({
+                    id: eventId,
+                  })}`}
+                  rel="noopener noreferrer"
+                  className="flex flex-row items-center gap-1"
+                >
+                  <span className="w-full overflow-hidden whitespace-nowrap text-ellipsis">
+                    {npub}
+                  </span>
+                  <PopiconsLinkLine
+                    width={16}
+                    className="shrink-0 text-primary-foreground"
+                  />
+                </Hyperlink>
+              }
             />
           )}
           {transaction.publisherLink && transaction.title && (
@@ -181,7 +230,7 @@ export default function TransactionModal({
               content={transaction.boostagram.action}
             />
           )}
-          {transaction.boostagram?.ts && (
+          {!!transaction.boostagram?.ts && (
             <TransactionDetailRow
               title={t("boostagram.timestamp")}
               content={transaction.boostagram.ts}
@@ -236,6 +285,13 @@ export default function TransactionModal({
                     <TransactionDetailRow
                       title={t("payment_hash")}
                       content={transaction.paymentHash}
+                    />
+                  )}
+
+                  {metadata && (
+                    <TransactionDetailRow
+                      title={t("metadata")}
+                      content={JSON.stringify(metadata, null, 2)}
                     />
                   )}
                 </div>
