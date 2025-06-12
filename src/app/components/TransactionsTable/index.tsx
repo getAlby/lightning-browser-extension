@@ -91,7 +91,7 @@ export default function TransactionsTable({
                 className="-mx-2 px-2 py-2 hover:bg-gray-100 dark:hover:bg-surface-02dp cursor-pointer rounded-md"
                 onClick={() => openDetails(tx)}
               >
-                <div className="flex gap-3">
+                <div className="flex gap-3 items-center">
                   <div className="flex items-center">
                     {type == "outgoing" ? (
                       tx.state === "pending" ? (
@@ -114,21 +114,26 @@ export default function TransactionsTable({
                     )}
                   </div>
                   <div className="overflow-hidden mr-3">
-                    <div className="text-sm font-medium text-black truncate dark:text-white">
+                    <div className="flex gap-2 text-sm font-medium text-black truncate dark:text-white items-center">
                       <p
                         className={classNames(
                           "truncate",
                           tx.state == "pending" && "animate-pulse"
                         )}
                       >
-                        {tx.title || tx.boostagram?.message || typeStateText}
+                        {typeStateText}
                         {from !== undefined && <>&nbsp;{from}</>}
                         {to !== undefined && <>&nbsp;{to}</>}
                       </p>
+                      <p className="text-xs text-gray-400 dark:text-neutral-500">
+                        {tx.timeAgo}
+                      </p>
                     </div>
-                    <p className="text-xs text-gray-400 dark:text-neutral-500">
-                      {tx.timeAgo}
-                    </p>
+                    {(tx.description || metadata?.comment) && (
+                      <p className="truncate text-xs text-gray-600 dark:text-neutral-400">
+                        {tx.description || metadata?.comment}
+                      </p>
+                    )}
                   </div>
                   <div className="flex ml-auto text-right space-x-3 shrink-0 dark:text-white">
                     <div>
