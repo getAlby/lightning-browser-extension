@@ -1205,7 +1205,9 @@
       "date_time": "Datum & Uhrzeit",
       "no_transactions": "Noch keine Transaktionen.",
       "failed": "Gescheitert",
-      "sending": "Senden von"
+      "sending": "Senden von",
+      "metadata": "Metadaten",
+      "nostr_zap": "Nostr Zap von"
     },
     "budget_control": {
       "remember": {
