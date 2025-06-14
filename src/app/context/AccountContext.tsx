@@ -101,7 +101,9 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
     currency?: AccountInfo["currency"]
   ) => {
     const balance = getFormattedInCurrency(amount, currency);
-    setAccountBalance(balance);
+    Number.isFinite(amount)
+      ? setAccountBalance(balance)
+      : setAccountBalance("");
   };
 
   const fetchAccountInfo = async (options?: { accountId?: string }) => {
@@ -170,7 +172,11 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
 
   // Listen to showFiat
   useEffect(() => {
-    if (showFiat && typeof account?.balance === "number") {
+    if (
+      showFiat &&
+      typeof account?.balance === "number" &&
+      Number.isFinite(account.balance)
+    ) {
       updateFiatValue(account.balance);
     } else {
       setFiatBalance("");
