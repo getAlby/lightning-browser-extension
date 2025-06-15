@@ -341,7 +341,8 @@
         "title": "Browser-Benachrichtigungen"
       },
       "website_enhancements": {
-        "title": "Website-Verbesserungen"
+        "title": "Website-Verbesserungen",
+        "subtitle": "Trinkgeldverbesserungen für Websites, die Alby unterstützen."
       },
       "title": "Einstellungen der Erweiterung",
       "change_password": {
