@@ -27,22 +27,14 @@ function Send() {
   // Extract invoice from URL parameters (if available)
   // This is passed when a user selects "Pay with Alby" from the browser's context menu
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const invoiceParam = params.get("invoice");
-    if (invoiceParam) {
-      setInvoice(invoiceParam);
+    const url = new URL(window.location.href);
+    const invoice = url.searchParams.get("invoice");
+    if (invoice) {
+      setInvoice(invoice);
 
-      // Clear query params without reloading the page
-      params.delete("invoice");
-      const newSearch = params.toString();
-      const newUrl =
-        window.location.origin +
-        window.location.pathname +
-        (newSearch ? `?${newSearch}` : "") +
-        window.location.hash;
-
-      // Update URL in address bar without page reload
-      window.history.replaceState(null, "", newUrl);
+      // Clean up URL without reloading
+      url.searchParams.delete("invoice");
+      window.history.replaceState(null, "", url.toString());
     }
   }, []);
 
