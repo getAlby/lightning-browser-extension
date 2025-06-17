@@ -149,7 +149,8 @@
         "js/contentScriptAlby.bundle.js",
         "js/contentScriptLiquid.bundle.js",
         "js/contentScriptNostr.bundle.js",
-        "js/contentScriptWebBTC.bundle.js"
+        "js/contentScriptWebBTC.bundle.js",
+        "js/contentScriptContextMenu.bundle.js"
       ]
     }
   ],
