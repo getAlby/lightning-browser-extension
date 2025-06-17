@@ -7,6 +7,7 @@ import { ACCOUNT_CURRENCIES, CURRENCIES } from "~/common/constants";
 import api from "~/common/lib/api";
 import { DEFAULT_SETTINGS } from "~/common/settings";
 import {
+  getCurrencySymbol as getCurrencySymbolUtil,
   getFormattedCurrency as getFormattedCurrencyUtil,
   getFormattedFiat as getFormattedFiatUtil,
   getFormattedNumber as getFormattedNumberUtil,
@@ -21,10 +22,12 @@ interface SettingsContextType {
   getFormattedFiat: (amount: number | string) => Promise<string>;
   getFormattedSats: (amount: number | string) => string;
   getFormattedNumber: (amount: number | string) => string;
+  getCurrencySymbol: (currency: CURRENCIES | ACCOUNT_CURRENCIES) => string;
   getFormattedInCurrency: (
     amount: number | string,
-    currency?: ACCOUNT_CURRENCIES
+    currency?: ACCOUNT_CURRENCIES | CURRENCIES
   ) => string;
+  getCurrencyRate: () => Promise<number>;
 }
 
 type Setting = Partial<SettingsStorage>;
@@ -115,7 +118,7 @@ export const SettingsProvider = ({
 
   const getFormattedInCurrency = (
     amount: number | string,
-    currency = "BTC" as ACCOUNT_CURRENCIES
+    currency = "BTC" as ACCOUNT_CURRENCIES | CURRENCIES
   ) => {
     if (currency === "BTC") {
       return getFormattedSats(amount);
@@ -125,6 +128,13 @@ export const SettingsProvider = ({
       amount,
       locale: settings.locale,
       currency,
+    });
+  };
+
+  const getCurrencySymbol = (currency: CURRENCIES | ACCOUNT_CURRENCIES) => {
+    return getCurrencySymbolUtil({
+      currency,
+      locale: settings.locale,
     });
   };
 
@@ -149,6 +159,8 @@ export const SettingsProvider = ({
     getFormattedSats,
     getFormattedNumber,
     getFormattedInCurrency,
+    getCurrencyRate,
+    getCurrencySymbol,
     settings,
     updateSetting,
     isLoading,
