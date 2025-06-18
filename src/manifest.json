@@ -19,6 +19,7 @@
     "storage",
     "tabs",
     "unlimitedStorage",
+    "contextMenus",
     "*://*/*"
   ],
   "__chrome__permissions": [
@@ -27,7 +28,8 @@
     "scripting",
     "storage",
     "tabs",
-    "unlimitedStorage"
+    "unlimitedStorage",
+    "contextMenus"
   ],
   "__chrome__host_permissions": ["*://*/*"],
   "content_security_policy": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'",
@@ -147,7 +149,8 @@
         "js/contentScriptAlby.bundle.js",
         "js/contentScriptLiquid.bundle.js",
         "js/contentScriptNostr.bundle.js",
-        "js/contentScriptWebBTC.bundle.js"
+        "js/contentScriptWebBTC.bundle.js",
+        "js/contentScriptContextMenu.bundle.js"
       ]
     }
   ],

@@ -5,7 +5,7 @@ import IconButton from "@components/IconButton";
 import TextField from "@components/form/TextField";
 import { PopiconsChevronLeftLine } from "@popicons/react";
 import lightningPayReq from "bolt11-signet";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 import QrcodeAdornment from "~/app/components/QrcodeAdornment";
@@ -18,10 +18,25 @@ function Send() {
   const { t } = useTranslation("translation", { keyPrefix: "send" });
   const { t: tCommon } = useTranslation("common");
   const location = useLocation();
+
   // location.state used to access the decoded QR coming from ScanQRCode screen
   const [invoice, setInvoice] = useState(location.state?.decodedQR || "");
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+
+  // Extract invoice from URL parameters (if available)
+  // This is passed when a user selects "Pay with Alby" from the browser's context menu
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    const invoice = url.searchParams.get("invoice");
+    if (invoice) {
+      setInvoice(invoice);
+
+      // Clean up URL without reloading
+      url.searchParams.delete("invoice");
+      window.history.replaceState(null, "", url.toString());
+    }
+  }, []);
 
   function isPubKey(str: string) {
     return str.length == 66 && (str.startsWith("02") || str.startsWith("03"));
