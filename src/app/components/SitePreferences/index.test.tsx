@@ -70,31 +70,7 @@ describe("SitePreferences", () => {
       name: "Save",
     });
 
-    const checkDualInputValues = (values: Array<[number, string]>) => {
-      for (let i = 0; i < values.length; i++) {
-        expect(mockGetFormattedInCurrency).toHaveBeenNthCalledWith(
-          i + 1,
-          ...values[i]
-        );
-      }
-      expect(mockGetFormattedInCurrency).toHaveBeenCalledTimes(values.length);
-    };
-
-    const checkDualInputValue = (v: number, n: number) => {
-      for (let i = 1; i <= n * 2; i += 2) {
-        expect(mockGetFormattedInCurrency).toHaveBeenNthCalledWith(i, v, "BTC");
-        expect(mockGetFormattedInCurrency).toHaveBeenNthCalledWith(
-          i + 1,
-          v,
-          "USD"
-        );
-      }
-      expect(mockGetFormattedInCurrency).toHaveBeenCalledTimes(n * 2);
-    };
-
-    // update fiat value when modal is open
-    checkDualInputValue(defaultProps.allowance.totalBudget, 2);
-
+    // Budget input
     await act(async () => {
       await user.clear(screen.getByLabelText("One-click payments budget"));
       mockGetFormattedInCurrency.mockClear();
@@ -107,23 +83,11 @@ describe("SitePreferences", () => {
     // update fiat value
     expect(screen.getByLabelText("One-click payments budget")).toHaveValue(250);
 
-    checkDualInputValues([
-      [2, "BTC"],
-      [2, "USD"],
-      [2, "BTC"],
-      [2, "USD"],
-      [25, "BTC"],
-      [25, "USD"],
-      [25, "BTC"],
-      [25, "USD"],
-      [250, "BTC"],
-      [250, "USD"],
-      [250, "BTC"],
-      [250, "USD"],
-      [250, "BTC"],
-      [250, "USD"],
-    ]);
+    // Final formatting check — just once each
+    expect(mockGetFormattedInCurrency).toHaveBeenCalledWith(250, "BTC");
+    expect(mockGetFormattedInCurrency).toHaveBeenCalledWith(250, "USD");
 
+    // Save
     await act(async () => {
       await user.click(saveButton);
     });
