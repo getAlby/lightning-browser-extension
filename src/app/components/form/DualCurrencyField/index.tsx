@@ -220,34 +220,33 @@ export default function DualCurrencyField({
   useEffect(() => {
     const newValue = Number(value || "0");
     const lastSeenValue = Number(lastSeenInputValue || "0");
-    const currentValue = Number(inputValue || "0");
-    const currentValueIsFiat = useFiatAsMain;
-    (async (newValue, lastSeenValue, currentValue, currentValueIsFiat) => {
-      const { valueInSats } = await convertValues(
-        currentValue,
-        currentValueIsFiat
+
+    if (newValue === lastSeenValue) return;
+
+    setLastSeenInputValue(newValue.toString());
+
+    (async () => {
+      // Convert the current input field value using current input mode (fiat or sats)
+      const { valueInSats: currentConvertedInputInSats } = await convertValues(
+        Number(inputValue || "0"),
+        useFiatAsMain
       );
-      currentValue = Number(valueInSats);
-      // if the new value is different than the last seen value, it means it value was changes externally
-      if (newValue != lastSeenValue) {
-        // update the last seen value
-        setLastSeenInputValue(newValue.toString());
-        // update input value unless the new value is equals to the current input value converted to sats
-        // (this means the external cose is passing the value from onChange to the input value)
-        if (newValue != currentValue) {
-          // Apply conversion for the input value
-          const { valueInSats, valueInFiat } = await convertValues(
-            Number(value),
-            false
-          );
-          if (useFiatAsMain) {
-            setInputValue(valueInFiat);
-          } else {
-            setInputValue(valueInSats);
-          }
-        }
+
+      if (newValue === currentConvertedInputInSats) {
+        return;
       }
-    })(newValue, lastSeenValue, currentValue, currentValueIsFiat);
+
+      //  Convert the *new external value* into both sats and fiat
+      // Always assume external value is in sats (raw format)
+      const { valueInSats, valueInFiat } = await convertValues(newValue, false);
+
+      const newInput = useFiatAsMain ? valueInFiat : valueInSats;
+
+      // Only set input if it's truly changed to avoid React re-render
+      if (Number(inputValue || "0") !== newInput) {
+        setInputValue(newInput);
+      }
+    })();
   }, [value, lastSeenInputValue, inputValue, convertValues, useFiatAsMain]);
 
   const inputNode = (
