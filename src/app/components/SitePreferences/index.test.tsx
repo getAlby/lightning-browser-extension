@@ -6,16 +6,20 @@ import { settingsFixture as mockSettings } from "~/../tests/fixtures/settings";
 import type { Props } from "./index";
 import SitePreferences from "./index";
 
-const mockGetFiatValue = jest.fn(() => Promise.resolve("$1,22"));
+const mockGetFormattedFiat = jest.fn(() => "$1,22");
+const mockGetFormattedInCurrency = jest.fn((v, curr) => v + " " + curr);
 
 jest.mock("~/app/context/SettingsContext", () => ({
   useSettings: () => ({
     settings: mockSettings,
     isLoading: false,
     updateSetting: jest.fn(),
-    getFormattedFiat: mockGetFiatValue,
+    getFormattedFiat: mockGetFormattedFiat,
     getFormattedNumber: jest.fn(),
     getFormattedSats: jest.fn(),
+    getCurrencyRate: jest.fn(() => 1),
+    getCurrencySymbol: jest.fn(() => "₿"),
+    getFormattedInCurrency: mockGetFormattedInCurrency,
   }),
 }));
 
@@ -53,7 +57,7 @@ describe("SitePreferences", () => {
 
     await renderComponent();
 
-    expect(mockGetFiatValue).not.toHaveBeenCalled();
+    expect(mockGetFormattedFiat).not.toHaveBeenCalled();
 
     const settingsButton = await screen.getByRole("button");
 
@@ -66,26 +70,24 @@ describe("SitePreferences", () => {
       name: "Save",
     });
 
-    // update fiat value when modal is open
-    expect(mockGetFiatValue).toHaveBeenCalledWith(
-      defaultProps.allowance.totalBudget.toString()
-    );
-    expect(mockGetFiatValue).toHaveBeenCalledTimes(1);
-
+    // Budget input
     await act(async () => {
       await user.clear(screen.getByLabelText("One-click payments budget"));
+      mockGetFormattedInCurrency.mockClear();
       await user.type(
         screen.getByLabelText("One-click payments budget"),
         "250"
       );
     });
 
+    // update fiat value
     expect(screen.getByLabelText("One-click payments budget")).toHaveValue(250);
 
-    // update fiat value
-    expect(mockGetFiatValue).toHaveBeenCalledWith("250");
-    expect(mockGetFiatValue).toHaveBeenCalledTimes(4); // plus 3 times for each input value 2, 5, 0
+    // Final formatting check — just once each
+    expect(mockGetFormattedInCurrency).toHaveBeenCalledWith(250, "BTC");
+    expect(mockGetFormattedInCurrency).toHaveBeenCalledWith(250, "USD");
 
+    // Save
     await act(async () => {
       await user.click(saveButton);
     });
