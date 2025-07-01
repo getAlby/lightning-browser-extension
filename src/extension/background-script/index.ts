@@ -1,6 +1,5 @@
 import browser, { Runtime, Tabs } from "webextension-polyfill";
 import utils from "~/common/lib/utils";
-
 import { isManifestV3 } from "~/common/utils/mv3";
 import { registerInPageContentScript } from "~/extension/background-script/registerContentScript";
 import { ExtensionIcon, setIcon } from "./actions/setup/setIcon";
@@ -139,6 +138,57 @@ browser.tabs.onUpdated.addListener(extractLightningData);
 // The onInstalled event is fired directly after the code is loaded.
 // When we subscribe to that event asynchronously in the init() function it is too late and we miss the event.
 browser.runtime.onInstalled.addListener(handleInstalled);
+
+// CONTEXT MENU CODE START
+let contextMenuCreated = false;
+
+// Listen for messages from content script
+browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request.type === "updateContextMenu") {
+    updateMenu(request.isValid);
+  }
+});
+
+// Adds or removes the context menu item based on validation result.
+function updateMenu(shouldShow: boolean) {
+  if (shouldShow && !contextMenuCreated) {
+    browser.contextMenus.create({
+      id: "btc-lightning-pay",
+      title: "Pay with Bitcoin or Lightning",
+      contexts: ["selection"],
+    });
+    contextMenuCreated = true;
+  } else if (!shouldShow && contextMenuCreated) {
+    browser.contextMenus.remove("btc-lightning-pay");
+    contextMenuCreated = false;
+  }
+}
+
+// Handle menu clicks
+browser.contextMenus.onClicked.addListener((info, tab) => {
+  const text = info?.selectionText?.trim();
+  if (!text) return;
+
+  if (info.menuItemId === "btc-lightning-pay") {
+    const sendUrl = browser.runtime.getURL(
+      `popup.html?invoice=${encodeURIComponent(text)}#/send`
+    );
+    browser.windows.create({
+      url: sendUrl,
+      type: "popup",
+      width: 400,
+      height: 650,
+    });
+  }
+});
+
+// Clean up on startup
+browser.runtime.onStartup.addListener(() => {
+  browser.contextMenus.removeAll();
+  contextMenuCreated = false;
+});
+
+// CONTEXT MENU CODE END
 
 async function init() {
   console.info("Loading background script");
