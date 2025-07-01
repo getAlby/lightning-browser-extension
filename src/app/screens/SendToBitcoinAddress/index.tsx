@@ -2,7 +2,9 @@ import Button from "@components/Button";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Header from "@components/Header";
 import IconButton from "@components/IconButton";
-import DualCurrencyField, { DualCurrencyFieldChangeEvent} from "@components/form/DualCurrencyField";
+import DualCurrencyField, {
+  DualCurrencyFieldChangeEvent,
+} from "@components/form/DualCurrencyField";
 import { CreateSwapResponse } from "@getalby/sdk/dist/oauth/types";
 import {
   PopiconsChevronLeftLine,
