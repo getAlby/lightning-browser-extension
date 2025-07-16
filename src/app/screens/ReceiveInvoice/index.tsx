@@ -146,7 +146,7 @@ function ReceiveInvoice() {
               <div className="bg-white dark:bg-surface-01dp border-gray-200 dark:border-neutral-700  p-4 rounded-md border max-w-md">
                 <div className="relative flex items-center justify-center">
                   <QRCode
-                    value={invoice.paymentRequest.toUpperCase()}
+                    value={invoice.paymentRequest?.toUpperCase() || ""}
                     size={512}
                   />
                   {isAlbyOAuthUser ? (
@@ -182,8 +182,12 @@ function ReceiveInvoice() {
               <Button
                 onClick={async () => {
                   try {
-                    navigator.clipboard.writeText(invoice.paymentRequest);
-                    toast.success(tCommon("copied"));
+                    if (invoice.paymentRequest) {
+                      navigator.clipboard.writeText(invoice.paymentRequest);
+                      toast.success(tCommon("copied"));
+                    } else {
+                      toast.error("No payment request available");
+                    }
                   } catch (e) {
                     if (e instanceof Error) {
                       toast.error(e.message);

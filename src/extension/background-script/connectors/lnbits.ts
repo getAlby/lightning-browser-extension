@@ -246,6 +246,15 @@ class LnBits implements Connector {
       memo: args.memo,
       out: false,
     }).then((data) => {
+      // Validate that the response contains the required fields
+      if (!data.payment_request) {
+        throw new Error("Invalid response: missing payment_request");
+      }
+
+      if (!data.payment_hash) {
+        throw new Error("Invalid response: missing payment_hash");
+      }
+
       return {
         data: {
           paymentRequest: data.payment_request,
