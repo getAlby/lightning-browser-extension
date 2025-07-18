@@ -22,9 +22,6 @@
         "contact_support": "サポートが必要な場合は support@getalby.com までご連絡ください。"
       },
       "pin_extension": {
-        "title": "Alby拡張機能を固定",
-        "description": "もうすぐです。Albyを便利に使うには、拡張機能をブラウザのツールバーに忘れずに固定してください：",
-        "explanation": "1. ブラウザの右上にある<0/>をクリックします。<1/>2. Albyを見つけてクリックし、ツールバーに固定します。<1/>3. 以上です。Albyにアクセスするには、<2/>アイコンをクリックします。",
         "next_btn": "Albyを始めよう！{{icon}}"
       }
     },

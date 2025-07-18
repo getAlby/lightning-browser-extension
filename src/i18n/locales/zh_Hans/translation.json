@@ -25,10 +25,7 @@
         "contact_support": "如果你需要帮助，请联系support@getalby.com"
       },
       "pin_extension": {
-        "title": "固定你的 Alby 扩展",
-        "description": "就快完成了。以便方便地使用 Alby，请记住把扩展固定到工具栏：",
-        "next_btn": "与 Alby 一起开始嗡嗡作响{{icon}}",
-        "explanation": "1.点击浏览器右上角的<0/><1/>2.找到Alby并点击将其固定到工具栏<1/>3.就这样。要访问Alby，只需点击<2/>图标"
+        "next_btn": "与 Alby 一起开始嗡嗡作响{{icon}}"
       }
     },
     "choose_connector": {

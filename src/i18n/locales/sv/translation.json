@@ -22,9 +22,6 @@
         "contact_support": "Om du behöver hjälp, kontakta support@getalby.com"
       },
       "pin_extension": {
-        "title": "Fäst din Alby extension",
-        "description": "Du är nästan där. För att använda Alby bekvämt, kom ihåg att fästa ditt tillägg till webbläsarens verktygsfält:",
-        "explanation": "1. Klicka på <0/> i det övre högra hörnet av din webbläsare<1/>2. Hitta Alby och klicka för att fästa den i verktygsfältet<1/>3. Det är allt. För att komma åt Alby klickar du bara på ikonen <2/>",
         "next_btn": "Börja surra {{icon}} med Alby"
       }
     },

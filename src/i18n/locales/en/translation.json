@@ -30,12 +30,12 @@
       },
       "pin_extension": {
         "title": "Alby is ready! Let’s start buzzin’",
-        "description": "You're almost there. To use Alby conveniently, remember to pin your extension to the browser toolbar:",
         "explanation": "<0/> Pin and access the extension from the browser toolbar<1/><2/> You can also open Alby using the keyboard shortcut:",
         "keyboard_shortcut": {
           "first_key": "ALT",
           "second_key": "A"
-        }
+        },
+        "cta": "Pin me here!"
       }
     },
     "choose_path": {

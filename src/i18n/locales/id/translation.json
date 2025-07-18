@@ -23,10 +23,7 @@
         "connection_taking_long": "Proses koneksi memakan waktu lama... Apakah kamu memasukan informasi secara benar? Apakah node kamu dapat terhubung?"
       },
       "pin_extension": {
-        "title": "Pin ekstensi Alby kamu",
-        "description": "Kamu hampir samapi. Untuk menggunakan Alby dengan mudah, kamu dapat pin ekstensi ini pada toolbar browser:",
-        "next_btn": "Mulai buzzin' {{icon}} dengan Alby",
-        "explanation": "1. Klik pada <0/> di ujung kanan atas browser<1/>2. Cari Alby dan klik untuk mem-pin-nya pada toolbar<1/>3. Selesai. Untuk mengakses Alby, tinggal klik pada<2/> ikon"
+        "next_btn": "Mulai buzzin' {{icon}} dengan Alby"
       }
     },
     "choose_path": {
