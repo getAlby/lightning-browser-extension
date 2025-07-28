@@ -1,4 +1,3 @@
-import Button from "@components/Button";
 import { useEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useTheme } from "~/app/utils";
@@ -16,8 +15,6 @@ export default function PinExtension() {
   const theme = useTheme();
 
   const getImage = () => {
-    // const imageType = getBrowserType();
-
     return (
       <img
         src={
@@ -67,7 +64,7 @@ export default function PinExtension() {
 
   return (
     <div className="flex flex-col items-center text-lg">
-      <div className="shadow-lg rounded-xl bg-white dark:bg-surface-02dp p-12 max-w-xl">
+      <div className="shadow-lg rounded-xl bg-white dark:bg-surface-02dp p-10 max-w-xl">
         <h1 className="text-2xl font-bold dark:text-white text-center">
           {t("title")}
         </h1>
@@ -95,22 +92,20 @@ export default function PinExtension() {
 
         {/* keyboard shortcut */}
         <div className="flex justify-center gap-3 mt-6">
-          <Button
-            label={t("keyboard_shortcut.first_key")}
-            className={`text-black dark:text-white rounded-xl border-[#404040] ${
+          <div
+            className={`text-black dark:text-white rounded-xl py-3 px-5 border-4 border-gray-300 font-bold ${
               keysPressed.alt ? "border-primary dark:text-primary" : ""
             }`}
-            outline
-            // onClick={onNext}
-          />
-          <Button
-            label={t("keyboard_shortcut.second_key")}
-            className={`text-black dark:text-white rounded-xl border-[#404040] ${
+          >
+            {t("keyboard_shortcut.first_key")}
+          </div>
+          <div
+            className={`text-black dark:text-white rounded-xl py-3 px-5 border-4 border-gray-300 font-bold ${
               keysPressed.a ? "border-primary dark:text-primary" : ""
             }`}
-            outline
-            // onClick={onNext}
-          />
+          >
+            {t("keyboard_shortcut.second_key")}
+          </div>
         </div>
       </div>
     </div>
