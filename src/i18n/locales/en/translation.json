@@ -29,7 +29,7 @@
         }
       },
       "pin_extension": {
-        "title": "Alby is ready! Let’s start buzzin’",
+        "title": "Alby is ready! Let`s start buzzin`",
         "explanation": "<0/> Pin and access the extension from the browser toolbar<1/><2/> You can also open Alby using the keyboard shortcut:",
         "keyboard_shortcut": {
           "first_key": "ALT",
