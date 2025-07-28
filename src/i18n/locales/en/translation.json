@@ -32,7 +32,8 @@
         "title": "Alby is ready! Let`s start buzzin`",
         "explanation": "<0/> Pin and access the extension from the browser toolbar<1/><2/> You can also open Alby using the keyboard shortcut:",
         "keyboard_shortcut": {
-          "first_key": "ALT",
+          "window_modifier_key": "Alt",
+          "mac_modifier_key": "⌥",
           "second_key": "A"
         },
         "cta": "Pin me here!"

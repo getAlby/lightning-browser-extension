@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
-import { useTheme } from "~/app/utils";
+import { getOperatingSystem, useTheme } from "~/app/utils";
 
 export default function PinExtension() {
   const [keysPressed, setKeysPressed] = useState({
-    alt: false,
+    modifier: false,
     a: false,
   });
 
@@ -32,24 +32,16 @@ export default function PinExtension() {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Alt") {
-        // eslint-disable-next-line no-console
-        console.log("ALT PRESSED");
-        setKeysPressed((prev) => ({ ...prev, alt: true }));
+        setKeysPressed((prev) => ({ ...prev, modifier: true }));
       } else if (e.key.toLowerCase() === "a") {
-        // eslint-disable-next-line no-console
-        console.log("A PRESSED");
         setKeysPressed((prev) => ({ ...prev, a: true }));
       }
     };
 
     const handleKeyUp = (e: KeyboardEvent) => {
       if (e.key === "Alt") {
-        // eslint-disable-next-line no-console
-        console.log("ALT UNPRESSED");
-        setKeysPressed((prev) => ({ ...prev, alt: false }));
+        setKeysPressed((prev) => ({ ...prev, modifier: false }));
       } else if (e.key.toLowerCase() === "a") {
-        // eslint-disable-next-line no-console
-        console.log("A UNPRESSED");
         setKeysPressed((prev) => ({ ...prev, a: false }));
       }
     };
@@ -69,7 +61,7 @@ export default function PinExtension() {
           {t("title")}
         </h1>
         <div className="mt-4 w-full flex justify-center">{getImage()}</div>
-        <p className="text-gray-500 mt-6 dark:text-gray-400 text-sm">
+        <div className="text-gray-500 mt-6 dark:text-gray-400 text-sm">
           <Trans
             i18nKey={"explanation"}
             t={t}
@@ -80,7 +72,7 @@ export default function PinExtension() {
                 className="w-5 inline dark:invert mr-2"
               />,
               // eslint-disable-next-line react/jsx-key
-              <div className="h-4" />,
+              <span className="block h-4" />,
               // eslint-disable-next-line react/jsx-key
               <img
                 src="assets/icons/keyboard.svg"
@@ -88,16 +80,18 @@ export default function PinExtension() {
               />,
             ]}
           />
-        </p>
+        </div>
 
         {/* keyboard shortcut */}
         <div className="flex justify-center gap-3 mt-6">
           <div
             className={`text-black dark:text-white rounded-xl py-3 px-5 border-4 border-gray-300 font-bold ${
-              keysPressed.alt ? "border-primary dark:text-primary" : ""
+              keysPressed.modifier ? "border-primary dark:text-primary" : ""
             }`}
           >
-            {t("keyboard_shortcut.first_key")}
+            {getOperatingSystem() === "macOS"
+              ? t("keyboard_shortcut.mac_modifier_key")
+              : t("keyboard_shortcut.window_modifier_key")}
           </div>
           <div
             className={`text-black dark:text-white rounded-xl py-3 px-5 border-4 border-gray-300 font-bold ${
