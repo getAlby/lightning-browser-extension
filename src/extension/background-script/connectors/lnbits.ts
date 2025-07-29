@@ -249,7 +249,7 @@ class LnBits implements Connector {
     }).then((data) => {
       return {
         data: {
-          paymentRequest: data.bolt11,
+          paymentRequest: data.bolt11 || data.payment_request,
           rHash: data.payment_hash,
         },
       };
