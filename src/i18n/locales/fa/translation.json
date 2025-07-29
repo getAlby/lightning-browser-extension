@@ -268,7 +268,7 @@
         }
       },
       "nwc": {
-        "title": "اتصال کیف پول ناستر",
+        "title": "NWC (اتصال کیف پول ناستر)",
         "page": {
           "url": {
             "label": "Nostr Wallet Connect URL",
