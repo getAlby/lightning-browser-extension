@@ -92,13 +92,3 @@ export function safeNpubEncode(hex: string): string | undefined {
     return undefined;
   }
 }
-
-export function getOperatingSystem(): "macOS" | "Windows" | "Linux" | "Other" {
-  const ua = navigator.userAgent.toLowerCase();
-
-  if (ua.includes("macintosh") || ua.includes("mac os x")) return "macOS";
-  if (ua.includes("windows") || ua.includes("win32")) return "Windows";
-  if (ua.includes("linux")) return "Linux";
-
-  return "Other";
-}
