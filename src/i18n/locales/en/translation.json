@@ -968,6 +968,8 @@
       "block_and_ignore": "Block and ignore {{host}}",
       "block_added": "Added {{host}} to the blocklist, please reload the website.",
       "recipient": "Recipient",
+      "follow_list_warning_title": "Follow List Warning",
+      "follow_list_warning_description": "You're about to sign a follow list with fewer than 2 follows. This could overwrite your entire follow list. Please double-check that this is intended.",
       "kinds": {
         "unknown": {
           "title": "kind {{kind}}",
