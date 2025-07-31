@@ -14,6 +14,7 @@ import "dayjs/locale/ru";
 import "dayjs/locale/si";
 import "dayjs/locale/sv";
 import "dayjs/locale/ta";
+import "dayjs/locale/uk";
 import "dayjs/locale/zh-cn";
 import i18n from "i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
@@ -36,6 +37,7 @@ import si from "~/i18n/locales/si/translation.json";
 import sv from "~/i18n/locales/sv/translation.json";
 import ta from "~/i18n/locales/ta/translation.json";
 import th from "~/i18n/locales/th/translation.json";
+import uk from "~/i18n/locales/uk/translation.json";
 import zh_Hans from "~/i18n/locales/zh_Hans/translation.json";
 
 export const defaultNS = "translation";
@@ -149,6 +151,12 @@ export const resources = {
     components: ru.components,
     permissions: ru.permissions,
   },
+  uk: {
+    translation: uk.translation,
+    common: uk.common,
+    components: uk.components,
+    permissions: uk.permissions,
+  },
 } as const;
 
 // needs to be aligned with `resources`
@@ -172,6 +180,7 @@ export const supportedLocales = [
   { locale: "si", label: "Sinhalese" },
   { locale: "ta", label: "Tamil" },
   { locale: "ru", label: "Russian" },
+  { locale: "uk", label: "Ukrainian" },
 ];
 
 i18n
