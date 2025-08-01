@@ -1,9 +1,16 @@
 import PinExtension from "@screens/Onboard/PinExtension";
+import PinMeCard from "@screens/Onboard/PinExtension/PinMeCard";
 import SetPassword from "@screens/Onboard/SetPassword";
 import TestConnection from "@screens/Onboard/TestConnection";
 import ChooseConnector from "@screens/connectors/ChooseConnector";
-import { useState } from "react";
-import { Outlet, Route, HashRouter as Router, Routes } from "react-router-dom";
+import { useEffect, useState } from "react";
+import {
+  Outlet,
+  Route,
+  HashRouter as Router,
+  Routes,
+  useLocation,
+} from "react-router-dom";
 import Container from "~/app/components/Container";
 import LocaleSwitcher from "~/app/components/LocaleSwitcher/LocaleSwitcher";
 import Toaster from "~/app/components/Toast/Toaster";
@@ -54,15 +61,27 @@ function Welcome() {
 
 function Layout() {
   const [languageChanged, setLanguageChanged] = useState(false);
+  const [isPinScreen, setPinScreen] = useState(false);
+  const location = useLocation();
   i18n.on("languageChanged", () => {
     // Trigger rerender to update displayed language
     setLanguageChanged(!languageChanged);
   });
 
+  // Check if the current path is the pin-extension screen
+  useEffect(() => {
+    const checkHash = () => {
+      const isPinExtensionScreen = location.pathname.includes("pin-extension");
+      setPinScreen(isPinExtensionScreen);
+    };
+    checkHash();
+  }, [location]);
+
   return (
     <div className="flex flex-col min-h-screen">
-      <div className="ml-6 mt-4">
-        <LocaleSwitcher className="text-sm border-transparent text-gray-600 hover:text-gray-700 bg-gray-100 dark:bg-surface-00dp dark:text-neutral-400 dark:hover:text-neutral-300" />
+      <div className="flex justify-between ml-6 mr-[8%]">
+        <LocaleSwitcher className="text-sm mt-4 border-transparent text-gray-600 hover:text-gray-700 bg-gray-100 dark:bg-surface-00dp dark:text-neutral-400 dark:hover:text-neutral-300" />
+        {isPinScreen && <PinMeCard />}
       </div>
       <div className="flex flex-1 justify-center items-center">
         <Container maxWidth="xl">

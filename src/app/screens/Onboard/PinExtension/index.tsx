@@ -1,6 +1,6 @@
 import Button from "@components/Button";
 import { Trans, useTranslation } from "react-i18next";
-import { getBrowserType, useTheme } from "~/app/utils";
+import { useTheme } from "~/app/utils";
 import utils from "~/common/lib/utils";
 
 export default function PinExtension() {
@@ -15,11 +15,13 @@ export default function PinExtension() {
   const theme = useTheme();
 
   const getImage = () => {
-    const imageType = getBrowserType();
-
     return (
       <img
-        src={`assets/images/pin_your_alby_extension_${imageType}_${theme}.png`}
+        src={
+          theme === "dark"
+            ? "assets/icons/alby_logo_dark.svg"
+            : "assets/icons/alby_logo.svg"
+        }
         alt="Pin your Alby extension"
         className="h-32"
       />
@@ -27,37 +29,46 @@ export default function PinExtension() {
   };
 
   return (
-    <div className="flex flex-col items-center text-lg">
-      <div className="shadow-lg rounded-xl bg-white dark:bg-surface-02dp p-12 max-w-xl">
-        <h1 className="text-2xl font-bold dark:text-white max-sm:text-center">
+    <div className="flex flex-col items-center text-lg ">
+      <div className="shadow-lg rounded-xl bg-white dark:bg-surface-02dp p-10 md:max-w-2xl">
+        <h1 className="text-2xl  font-bold dark:text-white text-center">
           {t("title")}
         </h1>
-
-        <p className="text-gray-500 my-6 dark:text-gray-400">
-          {t("description")}
-        </p>
         <div className="mt-4 w-full flex justify-center">{getImage()}</div>
-        <p className="text-gray-500 mt-6 dark:text-gray-400">
+        <div className="text-gray-500 mt-6 dark:text-gray-400 text-sm">
           <Trans
             i18nKey={"explanation"}
             t={t}
             components={[
               // eslint-disable-next-line react/jsx-key
               <img
-                src="assets/icons/puzzle.svg"
-                className="w-5 inline dark:invert"
+                src="assets/icons/extension.svg"
+                className="w-5 inline dark:invert mr-2"
               />,
               // eslint-disable-next-line react/jsx-key
-              <br />,
+              <span className="block h-4" />,
               // eslint-disable-next-line react/jsx-key
               <img
-                src="assets/icons/alby_icon_yellow.svg"
-                className="w-5 inline"
+                src="assets/icons/keyboard.svg"
+                className="w-5 inline dark:invert mr-2"
               />,
             ]}
           />
-        </p>
+        </div>
+
+        {/* keyboard shortcut */}
+        <div className="flex justify-center gap-3 mt-6">
+          <div className="text-black dark:text-white text-xl rounded-xl py-4 px-5 border-2 border-primary font-bold">
+            {t("keyboard_shortcut.windows_modifier_key")} /{" "}
+            {t("keyboard_shortcut.mac_modifier_key")}
+          </div>
+
+          <div className="text-black dark:text-white text-xl rounded-xl py-4 px-5 border-2 border-[#F8C455] font-bold">
+            {t("keyboard_shortcut.second_key")}
+          </div>
+        </div>
       </div>
+
       <div className="my-8 flex justify-center">
         <Button
           label={t("next_btn", { icon: "🐝" })}

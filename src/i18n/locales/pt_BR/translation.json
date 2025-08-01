@@ -25,9 +25,6 @@
         "contact_support": "Se precisar de ajuda, entre em contato com support@getalby.com"
       },
       "pin_extension": {
-        "title": "Fixar extensão Alby",
-        "description": "Quase lá. Para facilitar seu acesso à Alby, lembre-se de fixar a extensão Alby na barra de ferramentas do navegador:",
-        "explanation": "1. Clique em <0/> no canto superior direito do seu navegador<1/>2. Localize a Alby e clique no ícone de fixação para fixá-lo na barra de ferramentas do navegador<1/>3. É isso. Agora é só clicar no ícone da Alby <2/>",
         "next_btn": "Comece a usar a Alby {{icon}}"
       }
     },
