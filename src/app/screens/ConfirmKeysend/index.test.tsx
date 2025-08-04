@@ -4,14 +4,16 @@ import { MemoryRouter } from "react-router-dom";
 import { settingsFixture as mockSettings } from "~/../tests/fixtures/settings";
 import type { OriginData } from "~/types";
 
+import { waitFor } from "@testing-library/react";
 import ConfirmKeysend from "./index";
 
 const mockGetFiatValue = jest
   .fn()
-  .mockImplementationOnce(() => Promise.resolve("$0.00"))
-  .mockImplementationOnce(() => Promise.resolve("$0.00"))
-  .mockImplementationOnce(() => Promise.resolve("$0.01"))
-  .mockImplementationOnce(() => Promise.resolve("$0.05"));
+  .mockImplementationOnce(() => "$0.00")
+  .mockImplementationOnce(() => "$0.01")
+  .mockImplementationOnce(() => "$0.05");
+
+const getFormattedInCurrency = jest.fn((v, c) => "$0.05");
 
 jest.mock("~/app/context/SettingsContext", () => ({
   useSettings: () => ({
@@ -21,6 +23,9 @@ jest.mock("~/app/context/SettingsContext", () => ({
     getFormattedNumber: jest.fn(),
     getFormattedSats: jest.fn(() => "21 sats"),
     getFormattedFiat: mockGetFiatValue,
+    getFormattedInCurrency: getFormattedInCurrency,
+    getCurrencyRate: jest.fn(() => 11),
+    getCurrencySymbol: jest.fn(() => "₿"),
   }),
 }));
 
@@ -95,6 +100,8 @@ describe("ConfirmKeysend", () => {
 
     const input = await screen.findByLabelText("Budget");
     expect(input).toHaveValue(amount * 10);
-    expect(screen.getByText("~$0.05")).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText("~$0.05")).toBeInTheDocument();
+    });
   });
 });

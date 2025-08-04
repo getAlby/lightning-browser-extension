@@ -4,7 +4,7 @@ import PublisherCard from "@components/PublisherCard";
 import SatButtons from "@components/SatButtons";
 import DualCurrencyField from "@components/form/DualCurrencyField";
 import TextField from "@components/form/TextField";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import toast from "~/app/components/Toast";
@@ -25,11 +25,7 @@ const Dd = ({ children }: { children: React.ReactNode }) => (
 
 function MakeInvoice() {
   const navState = useNavigationState();
-  const {
-    isLoading: isLoadingSettings,
-    settings,
-    getFormattedFiat,
-  } = useSettings();
+  const { isLoading: isLoadingSettings, settings } = useSettings();
   const showFiat = !isLoadingSettings && settings.showFiat;
 
   const origin = navState.origin as OriginData;
@@ -39,22 +35,12 @@ function MakeInvoice() {
   const memoEditable = navState.args?.memoEditable;
   const [loading, setLoading] = useState(false);
   const [valueSat, setValueSat] = useState(invoiceAttributes.amount || "");
-  const [fiatValue, setFiatValue] = useState("");
   const [memo, setMemo] = useState(invoiceAttributes.memo || "");
   const [error, setError] = useState("");
   const { t: tCommon } = useTranslation("common");
   const { t } = useTranslation("translation", {
     keyPrefix: "make_invoice",
   });
-
-  useEffect(() => {
-    if (valueSat !== "" && showFiat) {
-      (async () => {
-        const res = await getFormattedFiat(valueSat);
-        setFiatValue(res);
-      })();
-    }
-  }, [valueSat, showFiat, getFormattedFiat]);
 
   function handleValueChange(amount: string) {
     setError("");
@@ -127,12 +113,12 @@ function MakeInvoice() {
                   <div className="mb-4">
                     <DualCurrencyField
                       id="amount"
-                      label={t("amount.label")}
+                      label={tCommon("amount")}
                       min={invoiceAttributes.minimumAmount}
                       max={invoiceAttributes.maximumAmount}
                       value={valueSat}
                       onChange={(e) => handleValueChange(e.target.value)}
-                      fiatValue={fiatValue}
+                      showFiat={showFiat}
                     />
                     <SatButtons onClick={handleValueChange} />
                   </div>
