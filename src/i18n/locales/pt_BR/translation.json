@@ -261,8 +261,7 @@
           "url": {
             "placeholder": "nostr+walletconnect://69effe..."
           }
-        },
-        "title": "NWC (Nostr Wallet Connect)"
+        }
       },
       "albyhub": {
         "page": {

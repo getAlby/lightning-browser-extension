@@ -267,7 +267,6 @@
         }
       },
       "nwc": {
-        "title": "NWC (Nostr Wallet Connect)",
         "page": {
           "url": {
             "label": "Nostr Wallet Connect-URL",
