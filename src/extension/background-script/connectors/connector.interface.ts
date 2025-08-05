@@ -1,9 +1,9 @@
-import { Nip47TransactionMetadata } from "@getalby/sdk/dist/nwc";
-import {
+import type {
   CreateSwapParams,
   CreateSwapResponse,
+  Nip47TransactionMetadata,
   SwapInfoResponse,
-} from "@getalby/sdk/dist/oauth/types";
+} from "@getalby/sdk";
 import { ACCOUNT_CURRENCIES } from "~/common/constants";
 import { OAuthToken } from "~/types";
 

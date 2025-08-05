@@ -1,4 +1,4 @@
-import { GetAccountInformationResponse } from "@getalby/sdk/dist/oauth/types";
+import type { GetAccountInformationResponse } from "@getalby/sdk";
 import { nip19 } from "nostr-tools";
 import { useSettings } from "~/app/context/SettingsContext";
 import api from "~/common/lib/api";

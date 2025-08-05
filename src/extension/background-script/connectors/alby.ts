@@ -1,12 +1,12 @@
-import { oauth } from "@getalby/sdk";
-import {
+import type {
   CreateSwapParams,
   CreateSwapResponse,
   Invoice,
   RequestOptions,
   SwapInfoResponse,
   Token,
-} from "@getalby/sdk/dist/oauth/types";
+} from "@getalby/sdk";
+import { Client, OAuth2User } from "@getalby/sdk";
 import browser from "webextension-polyfill";
 import { decryptData, encryptData } from "~/common/lib/crypto";
 import { Account, GetAccountInformationResponses, OAuthToken } from "~/types";
@@ -40,8 +40,8 @@ interface Config {
 export default class Alby implements Connector {
   private account: Account;
   private config: Config;
-  private _client: oauth.Client | undefined;
-  private _authUser: oauth.auth.OAuth2User | undefined;
+  private _client: Client | undefined;
+  private _authUser: OAuth2User | undefined;
   private _cache = new Map<string, object>();
 
   constructor(account: Account, config: Config) {
@@ -52,10 +52,7 @@ export default class Alby implements Connector {
   async init() {
     try {
       this._authUser = await this.authorize();
-      this._client = new oauth.Client(
-        this._authUser,
-        this._getRequestOptions()
-      );
+      this._client = new Client(this._authUser, this._getRequestOptions());
     } catch (error) {
       console.error("Failed to initialize alby connector", error);
       this._authUser = undefined;
@@ -273,7 +270,7 @@ export default class Alby implements Connector {
     return result;
   }
 
-  private async authorize(): Promise<oauth.auth.OAuth2User> {
+  private async authorize(): Promise<OAuth2User> {
     try {
       const clientId = process.env.ALBY_OAUTH_CLIENT_ID;
       const clientSecret = process.env.ALBY_OAUTH_CLIENT_SECRET;
@@ -283,7 +280,7 @@ export default class Alby implements Connector {
 
       const redirectURL = "https://getalby.com/extension/connect";
 
-      const authClient = new oauth.auth.OAuth2User({
+      const authClient = new OAuth2User({
         request_options: this._getRequestOptions(),
         client_id: clientId,
         client_secret: clientSecret,
@@ -333,7 +330,7 @@ export default class Alby implements Connector {
 
       const oAuthTab = await browser.tabs.create({ url: authUrl });
 
-      return new Promise<oauth.auth.OAuth2User>((resolve, reject) => {
+      return new Promise<OAuth2User>((resolve, reject) => {
         const handleTabUpdated = (
           tabId: number,
           changeInfo: browser.Tabs.OnUpdatedChangeInfoType,
@@ -388,7 +385,7 @@ export default class Alby implements Connector {
     return urlSearchParams.get("code");
   }
 
-  private async _request<T>(func: (client: oauth.Client) => T) {
+  private async _request<T>(func: (client: Client) => T) {
     if (!this._authUser || !this._client) {
       throw new Error("Alby client was not initialized");
     }
