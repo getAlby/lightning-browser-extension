@@ -276,7 +276,8 @@
           "errors": {
             "connection_failed": "Verbindung fehlgeschlagen. Ist Ihre NWC Wallet online und wurden App Verbindungen zugelassen?"
           }
-        }
+        },
+        "title": "NWC (Nostr Wallet Connect)"
       },
       "lawallet": {
         "page": {
