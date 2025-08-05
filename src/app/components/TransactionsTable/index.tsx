@@ -1,5 +1,5 @@
 import Loading from "@components/Loading";
-import { Nip47TransactionMetadata } from "@getalby/sdk/dist/nwc";
+import type { Nip47TransactionMetadata } from "@getalby/sdk";
 import {
   PopiconsArrowDownSolid,
   PopiconsArrowUpSolid,

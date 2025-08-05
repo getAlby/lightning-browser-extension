@@ -675,18 +675,18 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.52.0.tgz#78fe5f117840f69dc4a353adf9b9cd926353378c"
   integrity sha512-mjZVbpaeMZludF2fsWLD0Z9gCref1Tk4i9+wddjRvpUNqqcndPkBD09N/Mapey0b3jaXbLm2kICwFv2E64QinA==
 
-"@getalby/lightning-tools@^5.1.2":
-  version "5.2.0"
-  resolved "https://registry.yarnpkg.com/@getalby/lightning-tools/-/lightning-tools-5.2.0.tgz#5f71ce9b25c04adeb7e421e920d0a28dfe32e082"
-  integrity sha512-8kBvENBTMh541VjGKhw3I29+549/C02gLSh3AQaMfoMNSZaMxfQW+7dcMcc7vbFaCKEcEe18ST5bUveTRBuXCQ==
+"@getalby/lightning-tools@^5.2.0":
+  version "5.2.1"
+  resolved "https://registry.yarnpkg.com/@getalby/lightning-tools/-/lightning-tools-5.2.1.tgz#861f025218e3d4dc5fb8fe55a16b33c66fb93a56"
+  integrity sha512-dxOmJLJAh6qJ8rsbA5/Bwj7MSI9X3RkxxqmCedl5rfP+yKwNSdfu8i4EiCZN/tk2hNBJb8GHSCcPRNZfwfmEHg==
 
-"@getalby/sdk@^5.1.0":
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/@getalby/sdk/-/sdk-5.1.0.tgz#5e54d99b7c9470425ddcca529a95718f451efe0d"
-  integrity sha512-0ijo4enzoxZinyhOMFlR4h3qTQ9I0Se+dBkefk0ja5zOcpi61ZqT86n0T+7u94l8SH6/poysFBObdtN61u+6tQ==
+"@getalby/sdk@^6.0.0":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@getalby/sdk/-/sdk-6.0.0.tgz#3f7b4965f7113b3a75752f96f88f4347a859518c"
+  integrity sha512-ix2ZFcYwxBy3r4o11C1jC4Hwlu2s8C9pz7Y/NWYw8sSEutioPjG2e0k5Nx1nTs6luQ2LKUBFg9/6f1akZiwYcw==
   dependencies:
-    "@getalby/lightning-tools" "^5.1.2"
-    nostr-tools "2.12.0"
+    "@getalby/lightning-tools" "^5.2.0"
+    nostr-tools "2.15.0"
 
 "@headlessui/react@^1.7.18":
   version "1.7.18"
@@ -7375,10 +7375,10 @@ normalize-range@^0.1.2:
   resolved "https://registry.npmjs.org/normalize-range/-/normalize-range-0.1.2.tgz"
   integrity "sha1-LRDAa9/TEuqXd2laTShDlFa3WUI= sha512-bdok/XvKII3nUpklnV6P2hxtMNrCboOjAcyBuQnWEhO665FwrSNRxU+AqpsyvO6LgGYPspN+lu5CLtw4jPRKNA=="
 
-nostr-tools@2.12.0:
-  version "2.12.0"
-  resolved "https://registry.yarnpkg.com/nostr-tools/-/nostr-tools-2.12.0.tgz#09f270e32453611a85c3670ff86ae856f3cbd21a"
-  integrity sha512-pUWEb020gTvt1XZvTa8AKNIHWFapjsv2NKyk43Ez2nnvz6WSXsrTFE0XtkNLSRBjPn6EpxumKeNiVzLz74jNSA==
+nostr-tools@2.15.0:
+  version "2.15.0"
+  resolved "https://registry.yarnpkg.com/nostr-tools/-/nostr-tools-2.15.0.tgz#cd119006681a861cabcdcf0200d29fd9864ddab8"
+  integrity sha512-Jj/+UFbu3JbTAWP4ipPFNuyD4W5eVRBNAP+kmnoRCYp3bLmTrlQ0Qhs5O1xSQJTFpjdZqoS0zZOUKdxUdjc+pw==
   dependencies:
     "@noble/ciphers" "^0.5.1"
     "@noble/curves" "1.2.0"
@@ -7386,7 +7386,6 @@ nostr-tools@2.12.0:
     "@scure/base" "1.1.1"
     "@scure/bip32" "1.3.1"
     "@scure/bip39" "1.2.1"
-  optionalDependencies:
     nostr-wasm "0.1.0"
 
 nostr-tools@^1.17.0:
