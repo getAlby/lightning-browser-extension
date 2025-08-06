@@ -1,5 +1,4 @@
 import PinExtension from "@screens/Onboard/PinExtension";
-import PinMeCard from "@screens/Onboard/PinExtension/PinMeCard";
 import SetPassword from "@screens/Onboard/SetPassword";
 import TestConnection from "@screens/Onboard/TestConnection";
 import ChooseConnector from "@screens/connectors/ChooseConnector";
@@ -16,6 +15,7 @@ import LocaleSwitcher from "~/app/components/LocaleSwitcher/LocaleSwitcher";
 import Toaster from "~/app/components/Toast/Toaster";
 import { AccountProvider } from "~/app/context/AccountContext";
 import { SettingsProvider } from "~/app/context/SettingsContext";
+import PinMeHereIcon from "~/app/icons/PinMeHereIcon";
 import { getConnectorRoutes, renderRoutes } from "~/app/router/connectorRoutes";
 import ChooseConnectorPath from "~/app/screens/connectors/ChooseConnectorPath";
 import i18n from "~/i18n/i18nConfig";
@@ -79,9 +79,11 @@ function Layout() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <div className="flex justify-between ml-6 mr-[8%]">
-        <LocaleSwitcher className="text-sm mt-4 border-transparent text-gray-600 hover:text-gray-700 bg-gray-100 dark:bg-surface-00dp dark:text-neutral-400 dark:hover:text-neutral-300" />
-        {isPinScreen && <PinMeCard />}
+      <div className="relative flex ml-6 mr-[8%]">
+        <LocaleSwitcher className="absolute left-0 top-4 text-sm text-gray-600 hover:text-gray-700 bg-gray-100 dark:bg-surface-00dp dark:text-neutral-400 dark:hover:text-neutral-300 border-transparent" />
+        {isPinScreen && (
+          <PinMeHereIcon className="ml-auto text-gray-600 dark:text-gray-400" />
+        )}
       </div>
       <div className="flex flex-1 justify-center items-center">
         <Container maxWidth="xl">

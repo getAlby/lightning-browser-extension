@@ -36,8 +36,7 @@
           "mac_modifier_key": "⌥",
           "second_key": "A"
         },
-        "next_btn": "Start buzzin' {{icon}} with Alby",
-        "cta": "Pin me here!"
+        "next_btn": "Start buzzin' {{icon}} with Alby"
       }
     },
     "choose_path": {
