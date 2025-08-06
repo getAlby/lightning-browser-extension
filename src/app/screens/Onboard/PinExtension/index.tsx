@@ -69,7 +69,7 @@ export default function PinExtension() {
         </div>
       </div>
 
-      <div className="my-8 flex justify-center">
+      <div className="flex md:hidden my-8 justify-center">
         <Button
           label={t("next_btn", { icon: "🐝" })}
           primary
