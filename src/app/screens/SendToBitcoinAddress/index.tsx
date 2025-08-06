@@ -3,7 +3,7 @@ import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Header from "@components/Header";
 import IconButton from "@components/IconButton";
 import DualCurrencyField from "@components/form/DualCurrencyField";
-import { CreateSwapResponse } from "@getalby/sdk/dist/oauth/types";
+import type { CreateSwapResponse } from "@getalby/sdk";
 import {
   PopiconsChevronLeftLine,
   PopiconsLinkExternalSolid,

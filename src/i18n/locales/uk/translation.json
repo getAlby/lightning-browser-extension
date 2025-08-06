@@ -335,7 +335,7 @@
         }
       },
       "nwc": {
-        "title": "Підключення гаманця Nostr",
+        "title": "NWC (Підключення гаманця Nostr)",
         "page": {
           "instructions": "Вставте рядок підключення NWC з <0>Alby Nostr Wallet Connect</0>, <1>Umbrel Nostr Wallet Connect</1> або <2>Mutiny Wallet</2>",
           "url": {

@@ -280,8 +280,7 @@
           "errors": {
             "connection_failed": "සම්බන්ධතාවය අසාර්ථක විය. ඔබගේ NWC පසුම්බිය මාර්ගගතව සහ යෙදුම් සම්බන්ධතාවය සබල කර තිබේද?"
           }
-        },
-        "title": "Nostr Wallet Connect"
+        }
       },
       "voltage": {
         "page": {

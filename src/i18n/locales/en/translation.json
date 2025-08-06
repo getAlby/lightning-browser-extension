@@ -351,7 +351,7 @@
         }
       },
       "nwc": {
-        "title": "Nostr Wallet Connect",
+        "title": "NWC (Nostr Wallet Connect)",
         "page": {
           "instructions": "Paste a NWC connection string from <0>Alby Nostr Wallet Connect</0>, <1>Umbrel Nostr Wallet Connect</1>, or <2>Mutiny Wallet</2>",
           "url": {

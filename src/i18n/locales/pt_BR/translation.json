@@ -258,8 +258,7 @@
           "url": {
             "placeholder": "nostr+walletconnect://69effe..."
           }
-        },
-        "title": "Nostr Wallet Connect"
+        }
       },
       "albyhub": {
         "page": {

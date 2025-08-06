@@ -1,4 +1,4 @@
-import { nwc } from "@getalby/sdk";
+import { NWCClient } from "@getalby/sdk";
 import lightningPayReq from "bolt11-signet";
 import Base64 from "crypto-js/enc-base64";
 import Hex from "crypto-js/enc-hex";
@@ -42,7 +42,7 @@ interface TlvRecord {
 
 class NWCConnector implements Connector {
   config: Config;
-  nwc: nwc.NWCClient;
+  nwc: NWCClient;
 
   get supportedMethods() {
     return [
@@ -59,7 +59,7 @@ class NWCConnector implements Connector {
 
   constructor(account: Account, config: Config) {
     this.config = config;
-    this.nwc = new nwc.NWCClient({
+    this.nwc = new NWCClient({
       nostrWalletConnectUrl: this.config.nostrWalletConnectUrl,
     });
   }
