@@ -82,7 +82,7 @@ function Layout() {
       <div className="relative flex ml-6 mr-[8%]">
         <LocaleSwitcher className="absolute left-0 top-4 text-sm text-gray-600 hover:text-gray-700 bg-gray-100 dark:bg-surface-00dp dark:text-neutral-400 dark:hover:text-neutral-300 border-transparent" />
         {isPinScreen && (
-          <PinMeHereIcon className="ml-auto text-gray-600 dark:text-gray-400" />
+          <PinMeHereIcon className="hidden md:block ml-auto text-gray-600 dark:text-gray-400" />
         )}
       </div>
       <div className="flex flex-1 justify-center items-center">

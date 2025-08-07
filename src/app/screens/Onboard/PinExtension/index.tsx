@@ -2,6 +2,7 @@ import Button from "@components/Button";
 import { Trans, useTranslation } from "react-i18next";
 import { useTheme } from "~/app/utils";
 import utils from "~/common/lib/utils";
+import getOS from "~/common/utils/os";
 
 export default function PinExtension() {
   const { t } = useTranslation("translation", {
@@ -30,7 +31,7 @@ export default function PinExtension() {
 
   return (
     <div className="flex flex-col items-center text-lg ">
-      <div className="shadow-lg rounded-xl bg-white dark:bg-surface-02dp p-10">
+      <div className="shadow-lg rounded-xl bg-white dark:bg-surface-02dp p-10 md:max-w-xl">
         <h1 className="text-2xl  font-bold dark:text-white text-center">
           {t("title")}
         </h1>
@@ -58,9 +59,10 @@ export default function PinExtension() {
 
         {/* keyboard shortcut */}
         <div className="flex justify-center gap-3 mt-6">
-          <div className="text-black dark:text-white text-xl rounded-xl py-4 px-5 border-2 border-gray-200 dark:border-gray-800 font-bold">
-            {t("keyboard_shortcut.windows_modifier_key")} /{" "}
-            {t("keyboard_shortcut.mac_modifier_key")}
+          <div className="text-black dark:text-white text-xl rounded-xl py-4 px-5 border-2 border-primary font-bold">
+            {getOS() === "MacOS"
+              ? t("keyboard_shortcut.mac_modifier_key")
+              : t("keyboard_shortcut.windows_modifier_key")}
           </div>
 
           <div className="text-black dark:text-white text-xl rounded-xl py-4 px-5 border-2 border-gray-200 dark:border-gray-800 font-bold">
