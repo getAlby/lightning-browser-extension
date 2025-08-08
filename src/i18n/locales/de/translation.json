@@ -29,10 +29,7 @@
         "initializing": "Initialisierung deiner Brieftasche. Bitte warte, dies kann eine Minute dauern..."
       },
       "pin_extension": {
-        "title": "Die Alby Erweiterung anpinnen",
-        "description": "Fast fertig. Damit du Alby bequem nutzen kannst, musst du die Erweiterung an die Browser Symbolleiste anheften:",
-        "next_btn": "Beginne mit Alby {{icon}}",
-        "explanation": "1. Klicke auf <0/> in der oberen rechten Ecke deines Browsers<1/>2. Suche das Symbol für Alby und klicke, um es an die Symbolleiste anzuheften<1/>3. Das war es. Um auf Alby zuzugreifen, klicke einfach auf das Symbol <2/>"
+        "next_btn": "Beginne mit Alby {{icon}}"
       }
     },
     "choose_connector": {

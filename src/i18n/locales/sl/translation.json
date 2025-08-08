@@ -224,9 +224,6 @@
         "ready": "Super, pripravljeni ste na začetek!"
       },
       "pin_extension": {
-        "title": "Pripni Alby vtičnik",
-        "description": "Si skoraj na koncu. Za priročno uporabo Alby, pripni razširitev v orodno vrstico:",
-        "explanation": "1. Klik na <0/> v zgornjem desnem kotu brskalnika<1/>2. Najdi Alby in klikni za pripenjanje v orodno vrstico<1/>3. To je to. Za dostop do Alby klikni na <2/> ikona",
         "next_btn": "Prični brenčati {{icon}} z Alby"
       }
     },

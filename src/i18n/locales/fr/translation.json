@@ -29,9 +29,6 @@
         "initializing": "Initialisation de votre portefeuille. Veuillez patienter, cela peut prendre une minute…"
       },
       "pin_extension": {
-        "title": "Épingler Alby",
-        "description": "Vous y êtes presque. Pour lancer Alby plus facilement, pensez à l'épingler à votre barre d'outils :",
-        "explanation": "1. Cliquez sur <0/> en haut à droite de votre navigateur<1/>2. Localisez Alby et cliquez pour l'épingler à la barre d'outils<1/>3. Et voilà. Pour accéder à Alby, cliquez simplement sur l'<2/>icône",
         "next_btn": "Commencez à buzzé {{icon}} avec Alby"
       }
     },

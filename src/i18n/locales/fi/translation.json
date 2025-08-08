@@ -25,9 +25,6 @@
         "contact_support": "Jos tarvitset apua, ota yhteyttä osoitteeseen support@getalby.com"
       },
       "pin_extension": {
-        "title": "Kiinnitä Alby-laajennuksesi",
-        "description": "Olet melkein siellä. Jos haluat käyttää Albya kätevästi, muista kiinnittää laajennuksesi selaimen työkalupalkkiin:",
-        "explanation": "1. Napsauta <0/> selaimen oikeassa yläkulmassa.<1/>2. Etsi Alby ja kiinnitä se työkalupalkkiin napsauttamalla.<1/>3. Se siitä. Pääset Albyyn napsauttamalla <2/>-kuvaketta",
         "next_btn": "Aloita buzzin' {{icon}} Albyn kanssa"
       }
     },

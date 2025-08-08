@@ -22,9 +22,6 @@
         "contact_support": "如果你需要幫助，請聯繫 support@getalby.com"
       },
       "pin_extension": {
-        "title": "釘選你的Alby擴充套件",
-        "description": "就快完成了。以方便地使用 Alby，請記住把擴充套件固定到工具欄：",
-        "explanation": "1. 點擊瀏覽器右上角的 <0/><1/>2. 找到 Alby 並點擊將其固定到工具欄<1/>3. 就這樣。要訪問 Alby，只需點擊<2/>圖標",
         "next_btn": "與 Alby 一起開始嗡嗡作響{{icon}}"
       }
     },

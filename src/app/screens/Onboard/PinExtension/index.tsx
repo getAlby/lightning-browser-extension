@@ -1,7 +1,8 @@
 import Button from "@components/Button";
 import { Trans, useTranslation } from "react-i18next";
-import { getBrowserType, useTheme } from "~/app/utils";
+import { useTheme } from "~/app/utils";
 import utils from "~/common/lib/utils";
+import getOS from "~/common/utils/os";
 
 export default function PinExtension() {
   const { t } = useTranslation("translation", {
@@ -15,11 +16,13 @@ export default function PinExtension() {
   const theme = useTheme();
 
   const getImage = () => {
-    const imageType = getBrowserType();
-
     return (
       <img
-        src={`assets/images/pin_your_alby_extension_${imageType}_${theme}.png`}
+        src={
+          theme === "dark"
+            ? "assets/icons/alby_logo_dark.svg"
+            : "assets/icons/alby_logo.svg"
+        }
         alt="Pin your Alby extension"
         className="h-32"
       />
@@ -27,38 +30,53 @@ export default function PinExtension() {
   };
 
   return (
-    <div className="flex flex-col items-center text-lg">
-      <div className="shadow-lg rounded-xl bg-white dark:bg-surface-02dp p-12 max-w-xl">
-        <h1 className="text-2xl font-bold dark:text-white max-sm:text-center">
-          {t("title")}
-        </h1>
+    <div className="flex flex-col items-center text-lg ">
+      <div className="shadow-lg rounded-xl bg-white dark:bg-surface-02dp p-10 md:max-w-xl w-full mx-auto">
+        <div className="md:max-w-[512px] mx-auto">
+          <h1 className="text-2xl  font-bold dark:text-white text-center">
+            {t("title")}
+          </h1>
 
-        <p className="text-gray-500 my-6 dark:text-gray-400">
-          {t("description")}
-        </p>
-        <div className="mt-4 w-full flex justify-center">{getImage()}</div>
-        <p className="text-gray-500 mt-6 dark:text-gray-400">
-          <Trans
-            i18nKey={"explanation"}
-            t={t}
-            components={[
-              // eslint-disable-next-line react/jsx-key
-              <img
-                src="assets/icons/puzzle.svg"
-                className="w-5 inline dark:invert"
-              />,
-              // eslint-disable-next-line react/jsx-key
-              <br />,
-              // eslint-disable-next-line react/jsx-key
-              <img
-                src="assets/icons/alby_icon_yellow.svg"
-                className="w-5 inline"
-              />,
-            ]}
-          />
-        </p>
+          <div className="flex flex-col  items-center mt-4 max-w-[396px] w-full mx-auto">
+            <div className="flex justify-center">{getImage()}</div>
+            <div className="text-gray-500 mt-8 dark:text-gray-400 text-sm">
+              <Trans
+                i18nKey={"explanation"}
+                t={t}
+                components={[
+                  // eslint-disable-next-line react/jsx-key
+                  <img
+                    src="assets/icons/extension.svg"
+                    className="w-5 inline dark:invert mr-2"
+                  />,
+                  // eslint-disable-next-line react/jsx-key
+                  <span className="block h-5" />,
+                  // eslint-disable-next-line react/jsx-key
+                  <img
+                    src="assets/icons/keyboard.svg"
+                    className="w-5 inline dark:invert mr-2"
+                  />,
+                ]}
+              />
+            </div>
+
+            {/* keyboard shortcut */}
+            <div className="flex w-full md:max-w-[152px] justify-center gap-3 mt-8">
+              <p className="text-black dark:text-white text-xl rounded-xl py-4 px-6 border-2 border-gray-200 dark:border-gray-800 font-bold">
+                {getOS() === "MacOS"
+                  ? t("keyboard_shortcut.mac_modifier_key")
+                  : t("keyboard_shortcut.windows_modifier_key")}
+              </p>
+
+              <p className="text-black dark:text-white text-xl rounded-xl py-4 px-6 border-2 border-gray-200 dark:border-gray-800 font-bold">
+                {t("keyboard_shortcut.second_key")}
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
-      <div className="my-8 flex justify-center">
+
+      <div className="flex md:hidden my-8 justify-center">
         <Button
           label={t("next_btn", { icon: "🐝" })}
           primary
