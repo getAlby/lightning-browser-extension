@@ -62,13 +62,13 @@ export default function PinExtension() {
 
             {/* keyboard shortcut */}
             <div className="flex w-full md:max-w-[152px] justify-center gap-3 mt-8">
-              <p className="text-black dark:text-white text-xl rounded-xl py-4 px-6 border-2 border-primary font-bold">
+              <p className="text-black dark:text-white text-xl rounded-xl py-4 px-6 border-2 border-gray-200 dark:border-gray-800 font-bold">
                 {getOS() === "MacOS"
                   ? t("keyboard_shortcut.mac_modifier_key")
                   : t("keyboard_shortcut.windows_modifier_key")}
               </p>
 
-              <p className="text-black dark:text-white text-xl rounded-xl py-4 px-6 border-2 border-[#F8C455] font-bold">
+              <p className="text-black dark:text-white text-xl rounded-xl py-4 px-6 border-2 border-gray-200 dark:border-gray-800 font-bold">
                 {t("keyboard_shortcut.second_key")}
               </p>
             </div>
