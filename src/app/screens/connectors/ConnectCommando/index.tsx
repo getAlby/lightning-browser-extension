@@ -27,7 +27,7 @@ export default function ConnectCommando() {
     rune: "",
     port: 9735,
     privateKey: generateCommandoPrivateKey(),
-    proxy: "wss://lnproxy.getalby.com",
+    proxy: "",
   });
   const [loading, setLoading] = useState(false);
   const [showAdvanced, setShowAdvanced] = useState(false);
@@ -155,6 +155,17 @@ export default function ConnectCommando() {
           onChange={handleChange}
         />
       </div>
+      <div className="mb-6">
+        <TextField
+          id="proxy"
+          label={t("proxy.label")}
+          placeholder="proxy"
+          required
+          title="proxy"
+          value={formData.proxy}
+          onChange={handleChange}
+        />
+      </div>
 
       <div className="text-center">
         <Hyperlink onClick={() => setShowAdvanced(!showAdvanced)}>
@@ -173,17 +184,6 @@ export default function ConnectCommando() {
       </div>
       {showAdvanced && (
         <div className="mt-6">
-          <div className="mb-6">
-            <TextField
-              id="proxy"
-              label={t("proxy.label")}
-              placeholder="proxy"
-              required
-              title="proxy"
-              value={formData.proxy}
-              onChange={handleChange}
-            />
-          </div>
           <TextField
             id="commandoPrivateKey"
             label={t("privKey.label")}
