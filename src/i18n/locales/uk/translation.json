@@ -29,7 +29,14 @@
         }
       },
       "pin_extension": {
-        "next_btn": "Почніть дзижчати {{icon}} з Албі"
+        "next_btn": "Почніть дзижчати {{icon}} з Албі",
+        "title": "Alby готовий! Почнемо дзижчати'",
+        "explanation": "<0/> Закріпіть розширення та отримайте доступ до нього з панелі інструментів браузера<1/><2/> Ви також можете відкрити Alby за допомогою комбінації клавіш:",
+        "keyboard_shortcut": {
+          "windows_modifier_key": "Alt",
+          "mac_modifier_key": "⌥",
+          "second_key": "A"
+        }
       }
     },
     "choose_path": {
