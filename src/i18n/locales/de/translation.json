@@ -29,7 +29,14 @@
         "initializing": "Initialisierung deiner Brieftasche. Bitte warte, dies kann eine Minute dauern..."
       },
       "pin_extension": {
-        "next_btn": "Beginne mit Alby {{icon}}"
+        "next_btn": "Beginne mit Alby {{icon}}",
+        "title": "Alby ist bereit! Los geht's!",
+        "explanation": "<0/> Die Erweiterung in der Browser-Symbolleiste anheften und darauf zugreifen<1/><2/> Du kannst Alby auch über die Tastenkombination öffnen:",
+        "keyboard_shortcut": {
+          "windows_modifier_key": "Alt",
+          "mac_modifier_key": "⌥",
+          "second_key": "A"
+        }
       }
     },
     "choose_connector": {
