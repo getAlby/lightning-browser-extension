@@ -15,8 +15,9 @@ import ConnectUmbrel from "@screens/connectors/ConnectUmbrel";
 import { Route } from "react-router-dom";
 import i18n from "~/i18n/i18nConfig";
 
-import ConnectAlbyHub from "~/app/screens/connectors/ConnectAlbyHub";
+import { default as ConnectAlbyHub } from "~/app/screens/connectors/ConnectAlbyHub";
 import ConnectNWC from "~/app/screens/connectors/ConnectNWC";
+import ConnectSpark from "~/app/screens/connectors/ConnectSpark";
 import ConnectVoltage from "~/app/screens/connectors/ConnectVoltage";
 import ConnectCommando from "../screens/connectors/ConnectCommando";
 import albyhub from "/static/assets/icons/albyhub.png";
@@ -176,6 +177,12 @@ const connectorMap: { [key: string]: ConnectorRoute } = {
     title: i18n.t("translation:choose_connector.albyhub.title"),
     logo: albyhub,
   },
+  spark: {
+    path: "spark",
+    element: <ConnectSpark />,
+    title: i18n.t("translation:choose_connector.spark.title"),
+    logo: albyhub,
+  },
   lawallet: {
     path: "lawallet",
     element: <ConnectLaWallet />,
@@ -256,6 +263,7 @@ const distributionMap: { [key: string]: { logo: string; children: Route[] } } =
 function getConnectorRoutes(): ConnectorRoute[] {
   return [
     connectorMap["albyhub"],
+    connectorMap["spark"],
     connectorMap["lnd"],
     connectorMap["lnc"],
     connectorMap["commando"],

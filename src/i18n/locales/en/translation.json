@@ -337,6 +337,15 @@
           "connection_failed": "Connection failed. Are your credentials correct?"
         }
       },
+      "spark": {
+        "title": "Spark",
+        "page": {
+          "instructions": "Instructions",
+          "errors": {
+            "connection_failed": "Connection failed. Is spark working?"
+          }
+        }
+      },
       "albyhub": {
         "title": "Alby Hub",
         "page": {
