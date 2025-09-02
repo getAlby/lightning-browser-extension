@@ -114,9 +114,7 @@ function Send() {
           },
         });
       } else if (isBitcoinAddress(invoice)) {
-        navigate("/sendToBitcoinAddress", {
-          state: { args: { bitcoinAddress: invoice } },
-        });
+        toast.error("Bitcoin address payments are not supported");
       } else {
         lightningPayReq.decode(invoice); // throws if invalid.
         navigate("/confirmPayment", {

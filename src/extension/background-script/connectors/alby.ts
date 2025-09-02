@@ -1,9 +1,6 @@
 import type {
-  CreateSwapParams,
-  CreateSwapResponse,
   Invoice,
   RequestOptions,
-  SwapInfoResponse,
   Token,
 } from "@getalby/sdk";
 import { Client, OAuth2User } from "@getalby/sdk";
@@ -260,15 +257,6 @@ export default class Alby implements Connector {
     };
   }
 
-  async getSwapInfo(): Promise<SwapInfoResponse> {
-    const result = await this._request((client) => client.getSwapInfo());
-    return result;
-  }
-
-  async createSwap(params: CreateSwapParams): Promise<CreateSwapResponse> {
-    const result = await this._request((client) => client.createSwap(params));
-    return result;
-  }
 
   private async authorize(): Promise<OAuth2User> {
     try {
