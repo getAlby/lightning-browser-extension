@@ -62,7 +62,7 @@ const DefaultView: FC<Props> = (props) => {
 
   const isLoading = accountLoading || isLoadingTransactions;
   const needsKeySetup =
-    !currentAccount?.hasMnemonic || !currentAccount?.isMnemonicBackupDone;
+    !currentAccount?.hasMnemonic && !currentAccount?.nostrEnabled;
 
   useEffect(() => {
     loadTransactions(itemsLimit);
