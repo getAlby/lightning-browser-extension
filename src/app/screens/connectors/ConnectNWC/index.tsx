@@ -86,7 +86,7 @@ export default function ConnectNWC() {
               target="_blank"
               rel="noreferrer"
               className="underline"
-              href="https://guides.getalby.com/user-guide/alby-hub/app-store"
+              href="https://guides.getalby.com/user-guide/browser-extension/link-wallet/alby-hub-via-nwc-link"
             ></a>,
           ]}
         />
