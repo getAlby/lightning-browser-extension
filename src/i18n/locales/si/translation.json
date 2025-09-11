@@ -276,7 +276,6 @@
             "label": "Nostr Wallet Connect URL",
             "placeholder": "nostr+walletconnect://69effe..."
           },
-          "instructions": "<0>ඇල්බි(Alby) Nostr Wallet Connect</0>, <1>අම්බ්‍රෙල්(Umbrel) Nostr Wallet Connect</1>, හෝ <2>මියුටිනි(Mutiny) පසුම්බිය</2> වෙතින් NWC සම්බන්ධතා තන්තුවක් අලවන්න",
           "errors": {
             "connection_failed": "සම්බන්ධතාවය අසාර්ථක විය. ඔබගේ NWC පසුම්බිය මාර්ගගතව සහ යෙදුම් සම්බන්ධතාවය සබල කර තිබේද?"
           }

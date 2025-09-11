@@ -276,7 +276,6 @@
             "label": "Nostr Wallet Connect-URL",
             "placeholder": "nostr+walletconnect://69effe..."
           },
-          "instructions": "Füge einen NWC-Verbindungsstring von <0>Nostr Wallet Connect</0>, <1>Umbrel Nostr Wallet Connect</1> oder <2>Mutiny Wallet</2>",
           "errors": {
             "connection_failed": "Verbindung fehlgeschlagen. Ist Ihre NWC Wallet online und wurden App Verbindungen zugelassen?"
           }
