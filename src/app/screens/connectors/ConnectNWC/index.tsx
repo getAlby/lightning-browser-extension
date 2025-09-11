@@ -86,21 +86,7 @@ export default function ConnectNWC() {
               target="_blank"
               rel="noreferrer"
               className="underline"
-              href="https://nwc.getalby.com"
-            ></a>,
-            // eslint-disable-next-line react/jsx-key
-            <a
-              target="_blank"
-              rel="noreferrer"
-              className="underline"
-              href="https://apps.umbrel.com/app/alby-nostr-wallet-connect"
-            ></a>,
-            // eslint-disable-next-line react/jsx-key
-            <a
-              target="_blank"
-              rel="noreferrer"
-              className="underline"
-              href="https://www.mutinywallet.com"
+              href="https://guides.getalby.com/user-guide/alby-hub/app-store"
             ></a>,
           ]}
         />
