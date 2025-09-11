@@ -276,7 +276,6 @@
       },
       "nwc": {
         "page": {
-          "instructions": "从 <0>Alby Nostr Wallet Connect</0>、<1>Umbrel Nostr Wallet Connect</1> 或 <2>Mutiny Wallet</2> 粘贴你的 NWC 链接符。",
           "url": {
             "label": "Nostr 钱包集成 URL",
             "placeholder": "nostr+walletconnect://69effe..."

@@ -353,7 +353,7 @@
       "nwc": {
         "title": "NWC (Nostr Wallet Connect)",
         "page": {
-          "instructions": "Paste a NWC connection string from <0>Alby Nostr Wallet Connect</0>, <1>Umbrel Nostr Wallet Connect</1>, or <2>Mutiny Wallet</2>",
+          "instructions": "Paste a NWC connection string from <0>Alby Hub</0> or from other NWC-enabled wallets.",
           "url": {
             "label": "Nostr Wallet Connect URL",
             "placeholder": "nostr+walletconnect://69effe..."
