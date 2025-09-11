@@ -20,6 +20,7 @@ module.exports = {
   transform: {
     "^.+\\.(t|j)sx?$": ["@swc/jest", swcConfig],
   },
+  transformIgnorePatterns: [],
   moduleNameMapper: {
     "^dexie$": require.resolve("dexie"),
     // needs to align with "tsconfig.json"-paths
