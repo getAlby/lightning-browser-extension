@@ -1,4 +1,10 @@
-import { SparkWallet } from "@buildonspark/spark-sdk";
+import type { SparkWallet } from "@buildonspark/spark-sdk";
+import type {
+  LightningReceiveRequest,
+  LightningSendRequest,
+  WalletTransfer,
+} from "@buildonspark/spark-sdk/dist/types";
+import { Invoice } from "@getalby/lightning-tools";
 import { Account } from "~/types";
 import Connector, {
   CheckPaymentArgs,
@@ -22,7 +28,6 @@ interface Config {
 }
 
 class SparkConnector implements Connector {
-  config: Config;
   private _wallet: SparkWallet | undefined;
 
   get supportedMethods() {
@@ -37,23 +42,24 @@ class SparkConnector implements Connector {
     ];
   }
 
-  constructor(account: Account, config: Config) {
-    this.config = config;
-  }
+  constructor(_account: Account, _config: Config) {}
 
-  async init() {
-    // TODO: use the master key
-    const mnemonic = "TODO put your mnmemonic here";
+  async init(mnemonic?: string) {
+    if (!mnemonic) {
+      throw new Error("Account has no mnemonic set");
+    }
+
+    const SparkWallet = await import("@buildonspark/spark-sdk").then(
+      (mod) => mod.SparkWallet
+    );
 
     const { wallet } = await SparkWallet.initialize({
       mnemonicOrSeed: mnemonic,
       options: {
-        network: "REGTEST",
+        network: "MAINNET",
       },
     });
     this._wallet = wallet;
-
-    return Promise.resolve();
   }
 
   async unload() {}
@@ -77,50 +83,143 @@ class SparkConnector implements Connector {
   }
 
   async getTransactions(): Promise<GetTransactionsResponse> {
+    if (!this._wallet) {
+      throw new Error("Wallet not initialized");
+    }
+
+    const transfers: WalletTransfer[] = [];
+    let offset = 0;
+
+    // eslint-disable-next-line no-constant-condition
+    while (true) {
+      const { transfers: tr } = await this._wallet.getTransfers(100, offset);
+      if (tr.length === 0) {
+        break;
+      }
+      transfers.push(...tr);
+      offset += 100;
+    }
+
     return {
       data: {
-        transactions: [],
+        transactions: transfers.map((transfer) => {
+          let preimage: string | undefined;
+          let paymentHash: string | undefined;
+          let memo: string | undefined;
+          let fee = 0;
+          let amount = 0;
+          if (transfer.userRequest?.typename === "LightningSendRequest") {
+            preimage = (transfer.userRequest as LightningSendRequest)
+              .paymentPreimage;
+            fee = (transfer.userRequest as LightningSendRequest).fee
+              .originalValue;
+            const encodedInvoice = (
+              transfer.userRequest as LightningSendRequest
+            ).encodedInvoice;
+            const invoice = new Invoice({ pr: encodedInvoice });
+            paymentHash = invoice.paymentHash;
+            memo = invoice.description || undefined;
+            amount = invoice.satoshi;
+          }
+          if (transfer.userRequest?.typename === "LightningReceiveRequest") {
+            preimage = (transfer.userRequest as LightningReceiveRequest)
+              .paymentPreimage;
+
+            const encodedInvoice = (
+              transfer.userRequest as LightningReceiveRequest
+            ).invoice.encodedInvoice;
+            const invoice = new Invoice({ pr: encodedInvoice });
+            paymentHash = invoice.paymentHash;
+            memo = invoice.description || undefined;
+            amount = invoice.satoshi;
+          }
+          return {
+            id: transfer.id,
+            memo,
+            preimage: preimage || "",
+            payment_hash: paymentHash,
+            settled: transfer.status === "TRANSFER_STATUS_COMPLETED",
+            settleDate:
+              (transfer.status === "TRANSFER_STATUS_COMPLETED"
+                ? transfer.updatedTime?.getTime()
+                : undefined) || null,
+            creationDate:
+              transfer.createdTime?.getTime() || new Date().getTime(),
+            totalAmount: amount,
+            fee,
+            //displayAmount?: [number, ACCOUNT_CURRENCIES];
+            type:
+              transfer.transferDirection === "OUTGOING" ? "sent" : "received",
+            state:
+              transfer.status === "TRANSFER_STATUS_COMPLETED"
+                ? "settled"
+                : transfer.status === "TRANSFER_STATUS_SENDER_INITIATED"
+                ? "pending"
+                : "failed",
+            //metadata?: Nip47TransactionMetadata;
+          };
+        }),
       },
     };
   }
 
   async makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse> {
-    throw new Error("Method not implemented.");
-    /*
-    return {
-      data: {
-        paymentRequest: invoice.invoice,
-        rHash: invoice.payment_hash,
-      },
-    };*/
-  }
-
-  async sendPayment(args: SendPaymentArgs): Promise<SendPaymentResponse> {
-    throw new Error("Method not implemented.");
-    /*const invoice = lightningPayReq.decode(args.paymentRequest);
-    const paymentHash = invoice.tags.find(
-      (tag) => tag.tagName === "payment_hash"
-    )?.data as string | undefined;
-    if (!paymentHash) {
-      throw new Error("Could not find payment hash in invoice");
+    if (!this._wallet) {
+      throw new Error("Wallet not initialized");
     }
 
-    const response = await this.nwc.payInvoice({
-      invoice: args.paymentRequest,
+    if (!globalThis.crypto.getRandomValues) {
+      throw new Error("No Crypto getRandomValues");
+    }
+
+    const receiveRequest = await this._wallet.createLightningInvoice({
+      amountSats: +args.amount,
+      memo: args.memo,
     });
 
     return {
       data: {
-        preimage: response.preimage,
-        paymentHash,
-        route: {
-          // TODO: how to get amount paid for zero-amount invoices?
-          total_amt: Math.floor(parseInt(invoice.millisatoshis || "0") / 1000),
-          // TODO: How to get fees?
-          total_fees: 0,
-        },
+        paymentRequest: receiveRequest.invoice.encodedInvoice,
+        rHash: receiveRequest.invoice.paymentHash,
       },
-    };*/
+    };
+  }
+
+  async sendPayment(args: SendPaymentArgs): Promise<SendPaymentResponse> {
+    if (!this._wallet) {
+      throw new Error("Wallet not initialized");
+    }
+    const invoice = new Invoice({ pr: args.paymentRequest });
+
+    const sendRequest = await this._wallet.payLightningInvoice({
+      invoice: args.paymentRequest,
+      // TODO: calculate the fee first
+      maxFeeSats: 10 + Math.floor((invoice.satoshi || 0) * 0.01),
+    });
+
+    for (let i = 0; i < 10; i++) {
+      const updatedSendRequest = await this._wallet.getLightningSendRequest(
+        sendRequest.id
+      );
+      if (updatedSendRequest?.paymentPreimage) {
+        return {
+          data: {
+            preimage: updatedSendRequest.paymentPreimage,
+            paymentHash: invoice.paymentHash,
+            route: {
+              total_amt: invoice.satoshi,
+              total_fees: Math.floor(
+                updatedSendRequest.fee.originalValue / 1000
+              ), // msat
+            },
+          },
+        };
+      }
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+    }
+
+    // TODO: add better handling
+    throw new Error("Payment failed or timed out");
   }
 
   async keysend(args: KeysendArgs): Promise<SendPaymentResponse> {
@@ -128,7 +227,33 @@ class SparkConnector implements Connector {
   }
 
   async checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {
-    throw new Error("Method not implemented.");
+    if (!this._wallet) {
+      throw new Error("Wallet not initialized");
+    }
+    try {
+      // HACK: get transactions to find received payment
+      // ideally we can look up a payment by payment hash, not just a spark transfer ID
+      // (currently we do not store transfers locally)
+      const transactions = await this.getTransactions();
+
+      const transaction = transactions.data.transactions.find(
+        (t) => t.payment_hash === args.paymentHash
+      );
+
+      return {
+        data: {
+          paid: !!transaction?.preimage,
+          preimage: transaction?.preimage,
+        },
+      };
+    } catch (error) {
+      console.error(error);
+      return {
+        data: {
+          paid: false,
+        },
+      };
+    }
   }
 
   async signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {

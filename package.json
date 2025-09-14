@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "@bitcoinerlab/secp256k1": "^1.1.1",
-    "@buildonspark/spark-sdk": "^0.2.12",
+    "@buildonspark/spark-sdk": "^0.3.3",
     "@getalby/sdk": "^6.0.0",
     "@headlessui/react": "^1.7.18",
     "@lightninglabs/lnc-web": "^0.3.1-alpha",
