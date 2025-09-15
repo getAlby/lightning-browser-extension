@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import toast from "~/app/components/Toast";
 import msg from "~/common/lib/msg";
 
+import api from "~/common/lib/api";
 import logo from "/static/assets/icons/albyhub.png";
 
 export default function ConnectSpark() {
@@ -22,10 +23,16 @@ export default function ConnectSpark() {
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setLoading(true);
+
+    const mnemonic = await api.generateMnemonic();
+    const encryptedMnemonic = await api.encryptMnemonic(mnemonic);
+
     const account = {
       name: "Spark",
       config: {},
       connector: getConnectorType(),
+      mnemonic: encryptedMnemonic,
+      useMnemonicForLnurlAuth: true,
     };
 
     try {
