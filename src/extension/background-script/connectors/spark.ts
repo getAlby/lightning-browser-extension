@@ -269,7 +269,19 @@ class SparkConnector implements Connector {
   }
 
   async signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {
-    throw new Error("Method not implemented.");
+    if (!this._wallet) {
+      throw new Error("Wallet not initialized");
+    }
+    const signature = await this._wallet.signMessageWithIdentityKey(
+      args.message
+    );
+
+    return {
+      data: {
+        message: args.message,
+        signature: signature,
+      },
+    };
   }
 
   connectPeer(args: ConnectPeerArgs): Promise<ConnectPeerResponse> {
