@@ -341,6 +341,7 @@
         "title": "Spark",
         "page": {
           "instructions": "Use <0>Spark</0> in Alby for instant, low-fee, self-custodial Bitcoin and Lightning payments.",
+          "warning": "Spark is experimental. Recovery of funds via <0>unilateral exit</0> is not yet supported",
           "errors": {
             "connection_failed": "Connection failed. Is spark working?"
           }

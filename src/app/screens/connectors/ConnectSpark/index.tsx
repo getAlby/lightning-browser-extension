@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import toast from "~/app/components/Toast";
 import msg from "~/common/lib/msg";
 
+import Alert from "~/app/components/Alert";
 import api from "~/common/lib/api";
 import logo from "/static/assets/icons/spark.png";
 
@@ -87,6 +88,22 @@ export default function ConnectSpark() {
       logo={logo}
       submitLoading={loading}
       onSubmit={handleSubmit}
-    ></ConnectorForm>
+    >
+      <Alert type="warn">
+        <Trans
+          i18nKey={"page.warning"}
+          t={t}
+          components={[
+            // eslint-disable-next-line react/jsx-key
+            <a
+              target="_blank"
+              rel="noreferrer"
+              className="underline"
+              href="https://docs.spark.money/wallet/developer-guide/unilateral-exit"
+            ></a>,
+          ]}
+        />
+      </Alert>
+    </ConnectorForm>
   );
 }
