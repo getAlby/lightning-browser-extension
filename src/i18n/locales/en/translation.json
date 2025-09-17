@@ -340,7 +340,7 @@
       "spark": {
         "title": "Spark",
         "page": {
-          "instructions": "Instructions",
+          "instructions": "Use <0>Spark</0> in Alby for instant, low-fee, self-custodial Bitcoin and Lightning payments.",
           "errors": {
             "connection_failed": "Connection failed. Is spark working?"
           }

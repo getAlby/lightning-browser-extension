@@ -37,6 +37,7 @@ import mynode from "/static/assets/icons/mynode.png";
 import nirvati from "/static/assets/icons/nirvati.svg";
 import nwc from "/static/assets/icons/nwc.svg";
 import raspiblitz from "/static/assets/icons/raspiblitz.png";
+import spark from "/static/assets/icons/spark.svg";
 import startos from "/static/assets/icons/startos.png";
 import umbrel from "/static/assets/icons/umbrel.png";
 import voltage from "/static/assets/icons/voltage.png";
@@ -181,7 +182,7 @@ const connectorMap: { [key: string]: ConnectorRoute } = {
     path: "spark",
     element: <ConnectSpark />,
     title: i18n.t("translation:choose_connector.spark.title"),
-    logo: albyhub,
+    logo: spark,
   },
   lawallet: {
     path: "lawallet",

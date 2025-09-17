@@ -7,7 +7,7 @@ import toast from "~/app/components/Toast";
 import msg from "~/common/lib/msg";
 
 import api from "~/common/lib/api";
-import logo from "/static/assets/icons/albyhub.png";
+import logo from "/static/assets/icons/spark.svg";
 
 export default function ConnectSpark() {
   const navigate = useNavigate();
@@ -79,21 +79,7 @@ export default function ConnectSpark() {
               target="_blank"
               rel="noreferrer"
               className="underline"
-              href="https://nwc.getalby.com"
-            ></a>,
-            // eslint-disable-next-line react/jsx-key
-            <a
-              target="_blank"
-              rel="noreferrer"
-              className="underline"
-              href="https://apps.umbrel.com/app/alby-nostr-wallet-connect"
-            ></a>,
-            // eslint-disable-next-line react/jsx-key
-            <a
-              target="_blank"
-              rel="noreferrer"
-              className="underline"
-              href="https://www.mutinywallet.com"
+              href="https://www.spark.money/"
             ></a>,
           ]}
         />
@@ -101,8 +87,6 @@ export default function ConnectSpark() {
       logo={logo}
       submitLoading={loading}
       onSubmit={handleSubmit}
-    >
-      <div className="mt-4 mb-6"></div>
-    </ConnectorForm>
+    ></ConnectorForm>
   );
 }
