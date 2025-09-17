@@ -128,12 +128,7 @@ const state = create<State>((set, get) => ({
       if (!password) throw new Error("Password is not set");
       const config = decryptData(account.config as string, password);
       const connector = new connectors[account.connector](account, config);
-      let mnemonic = "";
-      if (!account.mnemonic) {
-        throw new Error("Mnemonic is not set");
-      }
-      mnemonic = decryptData(account.mnemonic, password);
-      await connector.init(mnemonic);
+      await connector.init();
       return connector;
     })();
     set({ connector: connectorPromise });

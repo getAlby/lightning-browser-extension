@@ -66,6 +66,7 @@ const routes = {
   setMnemonic: mnemonic.setMnemonic,
   getMnemonic: mnemonic.getMnemonic,
   generateMnemonic: mnemonic.generateMnemonic,
+  encryptMnemonic: mnemonic.encryptMnemonic,
   getSwapInfo: swaps.info,
   createSwap: swaps.createSwap,
   liquid: {

@@ -5,6 +5,8 @@ import type {
   WalletTransfer,
 } from "@buildonspark/spark-sdk/dist/types";
 import { Invoice } from "@getalby/lightning-tools";
+import { decryptData } from "~/common/lib/crypto";
+import state from "~/extension/background-script/state";
 import { Account } from "~/types";
 import Connector, {
   CheckPaymentArgs,
@@ -29,6 +31,8 @@ interface Config {
 
 class SparkConnector implements Connector {
   private _wallet: SparkWallet | undefined;
+  private account: Account;
+  private config: Config;
 
   get supportedMethods() {
     return [
@@ -42,19 +46,27 @@ class SparkConnector implements Connector {
     ];
   }
 
-  constructor(_account: Account, _config: Config) {}
+  constructor(account: Account, config: Config) {
+    this.account = account;
+    this.config = config;
+  }
 
-  async init(mnemonic?: string) {
-    if (!mnemonic) {
+  async init() {
+    if (!this.account.mnemonic) {
       throw new Error("Account has no mnemonic set");
     }
 
     const SparkWallet = await import("@buildonspark/spark-sdk").then(
       (mod) => mod.SparkWallet
     );
+    const password = (await state.getState().password()) as string;
+    const decryptedMnemonic = await decryptData(
+      this.account.mnemonic,
+      password
+    );
 
     const { wallet } = await SparkWallet.initialize({
-      mnemonicOrSeed: mnemonic,
+      mnemonicOrSeed: decryptedMnemonic,
       options: {
         network: "MAINNET",
       },
@@ -257,7 +269,19 @@ class SparkConnector implements Connector {
   }
 
   async signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {
-    throw new Error("Method not implemented.");
+    if (!this._wallet) {
+      throw new Error("Wallet not initialized");
+    }
+    const signature = await this._wallet.signMessageWithIdentityKey(
+      args.message
+    );
+
+    return {
+      data: {
+        message: args.message,
+        signature: signature,
+      },
+    };
   }
 
   connectPeer(args: ConnectPeerArgs): Promise<ConnectPeerResponse> {

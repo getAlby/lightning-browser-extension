@@ -570,6 +570,13 @@ export interface MessageMnemonicGenerate extends MessageDefault {
   action: "generateMnemonic";
 }
 
+export interface MessageMnemonicEncrypt extends MessageDefault {
+  args: {
+    mnemonic: Account["mnemonic"];
+  };
+  action: "encryptMnemonic";
+}
+
 export interface MessageSignEvent extends MessageDefault {
   args: {
     event: Event;
