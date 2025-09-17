@@ -37,7 +37,7 @@ import mynode from "/static/assets/icons/mynode.png";
 import nirvati from "/static/assets/icons/nirvati.svg";
 import nwc from "/static/assets/icons/nwc.svg";
 import raspiblitz from "/static/assets/icons/raspiblitz.png";
-import spark from "/static/assets/icons/spark.svg";
+import spark from "/static/assets/icons/spark.png";
 import startos from "/static/assets/icons/startos.png";
 import umbrel from "/static/assets/icons/umbrel.png";
 import voltage from "/static/assets/icons/voltage.png";

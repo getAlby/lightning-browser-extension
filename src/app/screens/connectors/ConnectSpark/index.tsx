@@ -7,7 +7,7 @@ import toast from "~/app/components/Toast";
 import msg from "~/common/lib/msg";
 
 import api from "~/common/lib/api";
-import logo from "/static/assets/icons/spark.svg";
+import logo from "/static/assets/icons/spark.png";
 
 export default function ConnectSpark() {
   const navigate = useNavigate();
