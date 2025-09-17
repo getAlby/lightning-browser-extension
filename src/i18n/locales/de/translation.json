@@ -278,7 +278,8 @@
           },
           "errors": {
             "connection_failed": "Verbindung fehlgeschlagen. Ist Ihre NWC Wallet online und wurden App Verbindungen zugelassen?"
-          }
+          },
+          "instructions": "Fügen Sie eine NWC-Verbindungszeichenfolge aus <0>Alby Hub</0> oder aus anderen NWC-fähigen Wallets ein."
         },
         "title": "NWC (Nostr Wallet Connect)"
       },
