@@ -125,6 +125,7 @@ var options = {
   output: {
     path: path.join(destPath, targetBrowser),
     filename: "js/[name].bundle.js",
+    chunkLoading: false,
   },
 
   resolve: {

@@ -14,6 +14,7 @@ import NativeLnBits from "./nativelnbits";
 import NativeLnd from "./nativelnd";
 import NativeLndHub from "./nativelndhub";
 import NWC from "./nwc";
+import Spark from "./spark";
 
 /*
 const initialize = (account, password) => {
@@ -38,6 +39,7 @@ const connectors = {
   nativecitadel: NativeCitadel,
   commando: Commando,
   alby: Alby,
+  spark: Spark,
   nwc: NWC,
   lawallet: LaWallet,
 };

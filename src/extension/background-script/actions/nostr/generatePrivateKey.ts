@@ -7,6 +7,7 @@ import state from "../../state";
 const generatePrivateKey = async (message: MessageNostrPrivateKeyGenerate) => {
   const id = message.args?.id || state.getState().currentAccountId;
   const password = await state.getState().password();
+  let nostrPrivateKey = "";
   if (!password) {
     return {
       error: "Password is missing.",
@@ -22,16 +23,19 @@ const generatePrivateKey = async (message: MessageNostrPrivateKeyGenerate) => {
       };
     }
     const mnemonic = new Mnemonic(decryptData(account.mnemonic, password));
-    const nostrPrivateKey = mnemonic.deriveNostrPrivateKeyHex();
-
-    return {
-      data: nostrPrivateKey,
-    };
+    nostrPrivateKey = mnemonic.deriveNostrPrivateKeyHex();
+  } else if (message.args?.mnemonic) {
+    const mnemonic = new Mnemonic(message.args.mnemonic);
+    nostrPrivateKey = mnemonic.deriveNostrPrivateKeyHex();
   } else {
     return {
       error: "Error generating private key.",
     };
   }
+
+  return {
+    data: nostrPrivateKey,
+  };
 };
 
 export default generatePrivateKey;

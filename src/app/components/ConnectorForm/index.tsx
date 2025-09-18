@@ -10,7 +10,7 @@ type Props = {
   submitLoading?: boolean;
   submitDisabled?: boolean;
   onSubmit: FormEventHandler;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   video?: string;
   image?: string;
   logo?: string;
@@ -80,7 +80,7 @@ function ConnectorForm({
           </div>
         )}
         {video || (image && media)}
-        <div>{children}</div>
+        {children && <div>{children}</div>}
         <div className="mt-4 flex justify-center">
           <Button
             type="submit"
