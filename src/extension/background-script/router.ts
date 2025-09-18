@@ -50,6 +50,7 @@ const routes = {
   selectAccount: accounts.select,
   setPassword: setup.setPassword,
   reset: setup.reset,
+  encryptKey: setup.encryptKey,
   status: setup.status,
   validateAccount: setup.validateAccount,
   setIcon: setup.setIconMessageHandler,
@@ -66,7 +67,6 @@ const routes = {
   setMnemonic: mnemonic.setMnemonic,
   getMnemonic: mnemonic.getMnemonic,
   generateMnemonic: mnemonic.generateMnemonic,
-  encryptMnemonic: mnemonic.encryptMnemonic,
   getSwapInfo: swaps.info,
   createSwap: swaps.createSwap,
   liquid: {

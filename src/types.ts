@@ -533,6 +533,7 @@ export interface MessageNostrPrivateKeyGet extends MessageDefault {
 export interface MessageNostrPrivateKeyGenerate extends MessageDefault {
   args?: {
     id?: Account["id"];
+    mnemonic?: Account["mnemonic"];
   };
   action: "generatePrivateKey";
 }
@@ -570,11 +571,11 @@ export interface MessageMnemonicGenerate extends MessageDefault {
   action: "generateMnemonic";
 }
 
-export interface MessageMnemonicEncrypt extends MessageDefault {
+export interface MessageKeyEncrypt extends MessageDefault {
   args: {
-    mnemonic: Account["mnemonic"];
+    key: string;
   };
-  action: "encryptMnemonic";
+  action: "encryptKey";
 }
 
 export interface MessageSignEvent extends MessageDefault {

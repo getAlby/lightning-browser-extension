@@ -42,7 +42,7 @@ class SparkConnector implements Connector {
       "sendPaymentAsync",
       "getBalance",
       "getTransactions",
-      // "signMessage",
+      "signMessage",
     ];
   }
 
