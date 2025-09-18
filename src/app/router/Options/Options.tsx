@@ -36,7 +36,6 @@ import LNURLRedeem from "~/app/screens/LNURLRedeem";
 import OnChainReceive from "~/app/screens/OnChainReceive";
 import ReceiveInvoice from "~/app/screens/ReceiveInvoice";
 import ScanQRCode from "~/app/screens/ScanQRCode";
-import SendToBitcoinAddress from "~/app/screens/SendToBitcoinAddress";
 import ChooseConnector from "~/app/screens/connectors/ChooseConnector";
 import ChooseConnectorPath from "~/app/screens/connectors/ChooseConnectorPath";
 import i18n from "~/i18n/i18nConfig";
@@ -65,10 +64,6 @@ function Options() {
             <Route path="send" element={<Send />} />
             <Route path="confirmPayment" element={<ConfirmPayment />} />
             <Route path="keysend" element={<Keysend />} />
-            <Route
-              path="sendToBitcoinAddress"
-              element={<SendToBitcoinAddress />}
-            />
             <Route path="receive" element={<Receive />} />
             <Route path="receive/invoice" element={<ReceiveInvoice />} />
             <Route path="onChainReceive" element={<OnChainReceive />} />

@@ -16,7 +16,6 @@ import LNURLRedeem from "~/app/screens/LNURLRedeem";
 import OnChainReceive from "~/app/screens/OnChainReceive";
 import ReceiveInvoice from "~/app/screens/ReceiveInvoice";
 import ScanQRCode from "~/app/screens/ScanQRCode";
-import SendToBitcoinAddress from "~/app/screens/SendToBitcoinAddress";
 import RequireAuth from "../RequireAuth";
 
 function Popup() {
@@ -45,10 +44,6 @@ function Popup() {
             <Route path="keysend" element={<Keysend />} />
             <Route path="confirmPayment" element={<ConfirmPayment />} />
             <Route path="lnurlAuth" element={<LNURLAuth />} />
-            <Route
-              path="sendToBitcoinAddress"
-              element={<SendToBitcoinAddress />}
-            />
           </Route>
           <Route
             path="unlock"
