@@ -311,8 +311,7 @@
           },
           "errors": {
             "connection_failed": "La connexion a échoué. Votre portefeuille NWC en ligne et la connexion à l'application sont-ils activés ?"
-          },
-          "instructions": "Collez une chaîne de connexion NWC (NWC connection string) depuis <0>Alby Nostr Wallet Connect</0>, <1>Umbrel Nostr Wallet Connect</1> ou <2>Mutiny Wallet</2>"
+          }
         }
       },
       "lawallet": {

@@ -343,14 +343,14 @@
       "nwc": {
         "title": "NWC (Підключення гаманця Nostr)",
         "page": {
-          "instructions": "Вставте рядок підключення NWC з <0>Alby Nostr Wallet Connect</0>, <1>Umbrel Nostr Wallet Connect</1> або <2>Mutiny Wallet</2>",
           "url": {
             "label": "URL-адреса підключення до гаманця Nostr",
             "placeholder": "nostr+walletconnect://69effe..."
           },
           "errors": {
             "connection_failed": "Не вдалося підключитися. Чи увімкнено підключення до вашого онлайн-гаманця та програми NWC?"
-          }
+          },
+          "instructions": "Вставте рядок підключення NWC з <0>Alby Hub</0> або з інших гаманців із підтримкою NWC."
         }
       }
     },
