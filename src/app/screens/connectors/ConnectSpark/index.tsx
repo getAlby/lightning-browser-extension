@@ -26,14 +26,14 @@ export default function ConnectSpark() {
     setLoading(true);
 
     const mnemonic = await api.generateMnemonic();
-    const encryptedMnemonic = await api.encryptKey(mnemonic);
+    const encryptedMnemonic = await api.encryptValue(mnemonic);
 
     const nostrPrivateKey = await api.nostr.generatePrivateKey(
       undefined,
       mnemonic
     );
 
-    const encryptedNostrPrivateKey = await api.encryptKey(nostrPrivateKey);
+    const encryptedNostrPrivateKey = await api.encryptValue(nostrPrivateKey);
     const account = {
       name: "Spark",
       config: {},

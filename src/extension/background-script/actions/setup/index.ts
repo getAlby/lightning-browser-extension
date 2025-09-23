@@ -1,4 +1,4 @@
-import encryptKey from "./encryptKey";
+import encryptValue from "./encryptValue";
 import reset from "./reset";
 import { setIcon, setIconMessageHandler } from "./setIcon";
 import setPassword from "./setPassword";
@@ -6,7 +6,7 @@ import status from "./status";
 import validateAccount from "./validateAccount";
 
 export {
-  encryptKey,
+  encryptValue,
   reset,
   setIcon,
   setIconMessageHandler,

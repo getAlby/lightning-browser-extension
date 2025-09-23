@@ -1,20 +1,20 @@
 import { encryptData } from "~/common/lib/crypto";
-import type { MessageKeyEncrypt } from "~/types";
 
+import { MessageValueEncrypt } from "~/types";
 import state from "../../state";
 
-const encryptKey = async (message: MessageKeyEncrypt) => {
+const encryptValue = async (message: MessageValueEncrypt) => {
   const password = await state.getState().password();
   if (!password) {
     return {
       error: "Password is missing.",
     };
   }
-  let key = message.args.key;
-  key = encryptData(key, password);
+  let value = message.args.value;
+  value = encryptData(value, password);
   return {
-    data: key,
+    data: value,
   };
 };
 
-export default encryptKey;
+export default encryptValue;

@@ -571,11 +571,11 @@ export interface MessageMnemonicGenerate extends MessageDefault {
   action: "generateMnemonic";
 }
 
-export interface MessageKeyEncrypt extends MessageDefault {
+export interface MessageValueEncrypt extends MessageDefault {
   args: {
-    key: string;
+    value: string;
   };
-  action: "encryptKey";
+  action: "encryptValue";
 }
 
 export interface MessageSignEvent extends MessageDefault {

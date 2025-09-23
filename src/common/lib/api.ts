@@ -269,9 +269,9 @@ const setMnemonic = (id: string, mnemonic: string | null): Promise<void> =>
     mnemonic,
   });
 
-const encryptKey = (key: string): Promise<string> =>
-  msg.request("encryptKey", {
-    key,
+const encryptValue = (value: string): Promise<string> =>
+  msg.request("encryptValue", {
+    value,
   });
 
 const getSwapInfo = (): Promise<SwapInfoResponse> => msg.request("getSwapInfo");
@@ -341,7 +341,7 @@ export default {
   getMnemonic,
   setMnemonic,
   generateMnemonic,
-  encryptKey,
+  encryptValue,
   getSwapInfo,
   createSwap,
   liquid: {
