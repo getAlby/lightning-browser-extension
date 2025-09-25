@@ -191,34 +191,8 @@
         }
       },
       "commando": {
-        "pubkey": {
-          "label": "Clave Pública"
-        },
-        "port": {
-          "label": "Puerto"
-        },
-        "privKey": {
-          "label": "Clave privada local (autogenerada)"
-        },
-        "config": {
-          "label": "Datos de Configuración",
-          "placeholder": "config=https://su-btc-pay.org/lnd-config/212121/lnd.config"
-        },
-        "host": {
-          "label": "Host"
-        },
         "page": {
-          "title": "Conéctese a su nodo Core Lightning",
           "instructions": "Asegúrese de tener Core Lightning versión 0.12.0 o posterior, el complemento de comando se está ejecutando y se puede acceder a su nodo a través de Lightning Network. Cree una runa ejecutando 'lightning-cli commando-rune'."
-        },
-        "errors": {
-          "connection_failed": "La conexión falló. ¿Está su nodo Core Lightning en línea y usando el plugin de comando?"
-        },
-        "rune": {
-          "label": "Rune"
-        },
-        "proxy": {
-          "label": "Proxy de socket web"
         }
       },
       "lnc": {
