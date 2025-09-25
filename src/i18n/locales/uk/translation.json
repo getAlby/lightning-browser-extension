@@ -235,33 +235,7 @@
       },
       "commando": {
         "page": {
-          "title": "Підключіться до вашого вузла Core Lightning",
           "instructions": "Переконайтеся, що у вас встановлено Core Lightning версії 0.12.0 або новішої, плагін commando запущено, а ваш вузол доступний через мережу Lightning. Створіть руну, виконавши команду «lightning-cli commando-rune»."
-        },
-        "host": {
-          "label": "Хост"
-        },
-        "pubkey": {
-          "label": "Відкритий ключ"
-        },
-        "rune": {
-          "label": "Руна"
-        },
-        "port": {
-          "label": "Порт"
-        },
-        "proxy": {
-          "label": "Проксі-сервер вебсокета"
-        },
-        "privKey": {
-          "label": "Локальний закритий ключ (згенерований автоматично)"
-        },
-        "config": {
-          "label": "Дані конфігурації",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
-        },
-        "errors": {
-          "connection_failed": "Помилка з’єднання. Ваш вузол Core Lightning підключений до Інтернету та використовує плагін commando?"
         }
       },
       "umbrel_lightning_node": {
