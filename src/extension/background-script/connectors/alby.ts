@@ -460,7 +460,7 @@ export default class Alby implements Connector {
 
       return details;
     } catch (error) {
-      console.error("Error fetching limits:", error);
+      console.error("Error fetching user details:", error);
       throw error;
     }
   }

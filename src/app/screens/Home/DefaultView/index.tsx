@@ -20,7 +20,6 @@ import Hyperlink from "~/app/components/Hyperlink";
 import { IconLinkCard } from "~/app/components/IconLinkCard/IconLinkCard";
 import toast from "~/app/components/Toast";
 import { useAccount } from "~/app/context/AccountContext";
-import { useSettings } from "~/app/context/SettingsContext";
 import { useTransactions } from "~/app/hooks/useTransactions";
 import { PublisherLnData } from "~/app/screens/Home/PublisherLnData";
 import { isAlbyLNDHubAccount } from "~/app/utils";
@@ -45,8 +44,6 @@ const DefaultView: FC<Props> = (props) => {
   const { t: tCommon } = useTranslation("common");
 
   const navigate = useNavigate();
-
-  const { getFormattedSats } = useSettings();
 
   const { account, accountLoading } = useAccount();
 
@@ -179,8 +176,7 @@ const DefaultView: FC<Props> = (props) => {
           </Alert>
         )}
 
-        {(account?.usingFeeCredits || account?.nodeRequired) &&
-        !hasSeenInfoBanner ? (
+        {account?.nodeRequired && !hasSeenInfoBanner ? (
           <Alert
             type="info"
             showClose
@@ -199,11 +195,6 @@ const DefaultView: FC<Props> = (props) => {
                 <Trans
                   i18nKey={"setup_wallet"}
                   t={tCommon}
-                  values={{
-                    max_account_balance: getFormattedSats(
-                      account?.limits?.max_account_balance || 0
-                    ),
-                  }}
                   components={[
                     // eslint-disable-next-line react/jsx-key
                     <Hyperlink
