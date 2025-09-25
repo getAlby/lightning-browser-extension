@@ -188,33 +188,7 @@
       },
       "commando": {
         "page": {
-          "title": "連接到你的Core Lightning節點",
           "instructions": "確保你使用的是Core Lightning 0.12.0或更高版本，commando插件正在運行，並且你的節點可以通過閃電網路訪問。通過運行「lightning-cli commando-rune」來創建rune。"
-        },
-        "host": {
-          "label": "主機"
-        },
-        "pubkey": {
-          "label": "公鑰"
-        },
-        "rune": {
-          "label": "Rune"
-        },
-        "port": {
-          "label": "端口"
-        },
-        "proxy": {
-          "label": "Websocket 代理"
-        },
-        "privKey": {
-          "label": "本地私鑰（自動產生）"
-        },
-        "config": {
-          "label": "配置數據",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
-        },
-        "errors": {
-          "connection_failed": "連接失敗。你的Core Lightning節點是否在線並使用commando插件？"
         }
       },
       "umbrel_lightning_node": {
