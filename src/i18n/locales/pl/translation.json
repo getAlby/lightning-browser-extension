@@ -199,33 +199,7 @@
       },
       "commando": {
         "page": {
-          "title": "Podłącz do Twojego węzła Core Lightning",
           "instructions": "Upewnij się, że masz Core Lightning w wersji 0.12.0 lub nowszej, że plugin commando działa, a Twój węzeł jest dostępny w sieci lightning. Stwórz runę komendą 'lightning-cli commando-rune'."
-        },
-        "host": {
-          "label": "Serwer"
-        },
-        "pubkey": {
-          "label": "Klucz publiczny"
-        },
-        "rune": {
-          "label": "Runa"
-        },
-        "port": {
-          "label": "Port"
-        },
-        "proxy": {
-          "label": "Proxy websocket"
-        },
-        "privKey": {
-          "label": "Lokalny klucz prywatny (generowany automatycznie)"
-        },
-        "config": {
-          "label": "Konfiguracja",
-          "placeholder": "config=https://twoj-btc-pay.org/lnd-config/212121/lnd.config"
-        },
-        "errors": {
-          "connection_failed": "Połączenie nieudane. Czy Twój węzeł Core Lightning jest online i korzysta z wtyczki commando?"
         }
       },
       "umbrel_lightning_node": {
