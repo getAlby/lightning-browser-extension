@@ -218,33 +218,7 @@
       },
       "commando": {
         "page": {
-          "title": "به گره Core Lightning خود متصل شوید",
           "instructions": "مطمئن شوید که ورژن 0.12.0 با جدیدتر Core Lightning را دارید، پلاگین روشن است و گره شما در شبکه لایتنینگ قابل دسترسی است. با راه اجرای 'lightning-cli commando-rune' یک رون بسازید."
-        },
-        "host": {
-          "label": "هاست"
-        },
-        "pubkey": {
-          "label": "کلید عمومی"
-        },
-        "rune": {
-          "label": "Rune"
-        },
-        "port": {
-          "label": "درگاه"
-        },
-        "proxy": {
-          "label": "پروکسی Websocket"
-        },
-        "privKey": {
-          "label": "کلید خصوصی محلی (خودکار ساخته شده)"
-        },
-        "config": {
-          "label": "داده پیکربندی",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
-        },
-        "errors": {
-          "connection_failed": "اتصال انجام نشد. آیا گره Core Lightning شما آنلاین است و از پلاگین commando استفاده می کند؟"
         }
       },
       "voltage": {
