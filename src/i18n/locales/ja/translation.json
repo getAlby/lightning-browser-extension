@@ -191,33 +191,7 @@
       },
       "commando": {
         "page": {
-          "title": "Core Lightningノードに接続",
           "instructions": "Core Lightningのバージョンが0.12.0以降であること、commandoプラグインが動作していること、ノードがライトニング・ネットワーク経由でアクセス可能であることを確認してください。'lightning-cli commando-rune' を実行してルーンを作成します。"
-        },
-        "host": {
-          "label": "ホスト"
-        },
-        "config": {
-          "label": "コンフィグデータ",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
-        },
-        "errors": {
-          "connection_failed": "接続に失敗しました。Core Lightningノードがオンラインであり、commandoプラグインを使用していますか？"
-        },
-        "pubkey": {
-          "label": "公開鍵"
-        },
-        "port": {
-          "label": "ポート"
-        },
-        "proxy": {
-          "label": "WebSocketプロキシ"
-        },
-        "rune": {
-          "label": "ルーン"
-        },
-        "privKey": {
-          "label": "ローカルの秘密鍵（自動生成）"
         }
       }
     },

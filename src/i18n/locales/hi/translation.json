@@ -197,33 +197,7 @@
       },
       "commando": {
         "page": {
-          "title": "अपने Core Lightning node से कनेक्ट करें",
           "instructions": "निश्चित करें कि आपके पास कोर लाइटनिंग संस्करण 0.12.0 या नया है, कमांडो प्लगइन चल रहा है और आपका नोड लाइटनिंग नेटवर्क पर पहुंच योग्य है। 'lightning-cli commando-rune' चलाकर एक rune बनाएं।"
-        },
-        "host": {
-          "label": "Host"
-        },
-        "pubkey": {
-          "label": "Public key"
-        },
-        "rune": {
-          "label": "Rune"
-        },
-        "port": {
-          "label": "Port"
-        },
-        "proxy": {
-          "label": "Websocket proxy"
-        },
-        "privKey": {
-          "label": "स्थानीय निजी कुंजी (स्वत: उत्पन्न)"
-        },
-        "config": {
-          "label": "Config data",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
-        },
-        "errors": {
-          "connection_failed": "कनेक्शन विफल। क्या आपका Core lightning node ऑनलाइन है और commando plugin का उपयोग कर रहा है?"
         }
       },
       "umbrel_lightning_node": {

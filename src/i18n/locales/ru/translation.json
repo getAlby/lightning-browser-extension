@@ -238,33 +238,7 @@
       },
       "commando": {
         "page": {
-          "title": "Подключитесь к узлу Core Lightning",
           "instructions": "Убедитесь, что у вас есть Core Lightning версии 0.12.0 или новее, запущен плагин commando и ваш узел доступен по сети Lightning. Создайте руну, выполнив команду 'lightning-cli commando-rune'."
-        },
-        "host": {
-          "label": "Хост"
-        },
-        "pubkey": {
-          "label": "Публичный ключ"
-        },
-        "rune": {
-          "label": "Руна"
-        },
-        "port": {
-          "label": "Порт"
-        },
-        "proxy": {
-          "label": "Прокси Websocket"
-        },
-        "privKey": {
-          "label": "Локальный закрытый ключ (автогенерируемый)"
-        },
-        "config": {
-          "label": "Конфигурационные данные",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
-        },
-        "errors": {
-          "connection_failed": "Не удалось установить соединение. Ваш узел Core Lightning находится в сети и использует плагин commando?"
         }
       },
       "umbrel_lightning_node": {

@@ -99,36 +99,6 @@
           "connection_failed": "Neuspešna povezava. Je BTCPay URL povezava pravilna in dostopna?"
         }
       },
-      "commando": {
-        "page": {
-          "title": "Poveži z Core Lightning vozliščem"
-        },
-        "host": {
-          "label": "Strežnik"
-        },
-        "pubkey": {
-          "label": "Javni ključ"
-        },
-        "rune": {
-          "label": "Rune"
-        },
-        "port": {
-          "label": "Vrata"
-        },
-        "proxy": {
-          "label": "Websocket proxy"
-        },
-        "config": {
-          "label": "Konfiguracijski podatki",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
-        },
-        "privKey": {
-          "label": "Lokalni zasebni ključ (samodejno generiran)"
-        },
-        "errors": {
-          "connection_failed": "Neuspešna povezava. Je tvoje Core Lightning vozlišče povezano in uporablja commando vtičnik?"
-        }
-      },
       "lnc": {
         "title": "Terminal Lightning (LNC)",
         "pairing_phrase": {

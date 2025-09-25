@@ -185,33 +185,7 @@
       },
       "commando": {
         "page": {
-          "title": "Conectare la nodul tau Core Lightning",
           "instructions": "Asigura-te ca folosesti cel putin versiunea 0.12.0 a Core Lightning, ca plugin-ul commando ruleaza si ca nodul tau este accesibil in Lightning network. Creeaza o runa ruland 'lightning-cli commando-rune'."
-        },
-        "host": {
-          "label": "Host"
-        },
-        "pubkey": {
-          "label": "Cheia publica"
-        },
-        "rune": {
-          "label": "Runa"
-        },
-        "port": {
-          "label": "Port"
-        },
-        "proxy": {
-          "label": "Websocket proxy"
-        },
-        "privKey": {
-          "label": "Cheia privata locala (autogenerata)"
-        },
-        "config": {
-          "label": "Config data",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
-        },
-        "errors": {
-          "connection_failed": "Conexiune esuata. Nodul tau Core Lightning este online si utilizeaza pluginul commando?"
         }
       }
     },

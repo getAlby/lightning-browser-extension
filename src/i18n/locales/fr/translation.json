@@ -228,33 +228,7 @@
       },
       "commando": {
         "page": {
-          "title": "Connectez-vous à votre nœud Core Lightning",
           "instructions": "Assurez-vous que vous disposez de Core Lightning version 0.12.0 ou plus récente, que le plug-in commando est en cours d'exécution et que votre nœud est accessible via le réseau Lightning. Créez une rune en exécutant 'lightning-cli commando-rune'."
-        },
-        "host": {
-          "label": "Hôte"
-        },
-        "pubkey": {
-          "label": "Clé publique"
-        },
-        "rune": {
-          "label": "Rune"
-        },
-        "port": {
-          "label": "Port"
-        },
-        "proxy": {
-          "label": "Proxy websocket"
-        },
-        "privKey": {
-          "label": "Clé privée locale (générée automatiquement)"
-        },
-        "config": {
-          "label": "Données de configuration",
-          "placeholder": "config=https://votre-btc-payer.org/lnd-config/212121/lnd.config"
-        },
-        "errors": {
-          "connection_failed": "La connexion a échoué. Votre nœud Core Lightning est-il en ligne et utilise-t-il le plugin commando ?"
         }
       },
       "umbrel_lightning_node": {

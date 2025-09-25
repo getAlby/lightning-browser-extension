@@ -455,33 +455,7 @@
       },
       "commando": {
         "page": {
-          "title": "เชื่อมต่อกับ Core Lightning node ของคุณ",
           "instructions": "โปรดตรวจสอบให้แน่ใจว่า Core Lightning ของคุณเป็นเวอร์ชัน 0.12.0 หรือ ใหม่กว่า และ commando plugin กำลังทำงานและโหนดของคุณสามารถเข้าถึงได้ผ่านเครือข่าย Lightning สร้าง rune โดยการเรียกใช้ \"lightning-cli commando-rune\""
-        },
-        "host": {
-          "label": "Host"
-        },
-        "pubkey": {
-          "label": "Public key"
-        },
-        "rune": {
-          "label": "Rune"
-        },
-        "port": {
-          "label": "Port"
-        },
-        "proxy": {
-          "label": "Websocket-proxy"
-        },
-        "privKey": {
-          "label": "Local private key (สร้างขึ้นโดยอัตโนมัติ)"
-        },
-        "config": {
-          "label": "การกำหนดค่าข้อมูล",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
-        },
-        "errors": {
-          "connection_failed": "เกิดข้อผิดหลาดในการเชื่อมต่อ โปรดตรวจสอบว่า Core Lightning node ของคุณออนไลน์และกำลังใช้ commando plugin หรือไม่?"
         }
       },
       "umbrel_lightning_node": {

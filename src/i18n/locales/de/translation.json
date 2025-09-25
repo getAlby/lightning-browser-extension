@@ -193,33 +193,7 @@
       },
       "commando": {
         "page": {
-          "title": "Verbinden mit deiner Core Lightning Node",
           "instructions": "Stelle sicher, dass du die Core Lightning Version 0.12.0 oder neuer hast, das Commando-Plugin ausgeführt wird und deine Node über das Lightning Network zugänglich ist. Erstelle eine Rune, indem du „lightning-cli commando-rune“ ausführst."
-        },
-        "host": {
-          "label": "Host"
-        },
-        "pubkey": {
-          "label": "Öffentlicher Schlüssel"
-        },
-        "rune": {
-          "label": "Rune"
-        },
-        "port": {
-          "label": "Port"
-        },
-        "proxy": {
-          "label": "Websocket-Proxy"
-        },
-        "privKey": {
-          "label": "Lokaler privater Schlüssel (automatisch generiert)"
-        },
-        "config": {
-          "label": "Konfigurationsdaten",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
-        },
-        "errors": {
-          "connection_failed": "Verbindung fehlgeschlagen. Ist deine Core Lightning Node online und verwendet diese das Commando Plugin?"
         }
       },
       "title": "Verbinde Lightning Wallet",

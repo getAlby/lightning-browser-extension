@@ -20,8 +20,7 @@
         "review_connection_details": "Prosím překontrolujte nastavení vašeho spojení.",
         "connection_taking_long": "Připojování zabralo více, než bylo očekáváno... Zadali jste údaje o připojení správně? Je váš uzel dostupný?",
         "contact_support": "Pokud potřebujete pomoct, prosím kontaktujte support@getalby.com"
-      },
-      "pin_extension": {}
+      }
     },
     "choose_connector": {
       "description": "Připojte svou externí ligtning peněženku nebo uzel",
@@ -153,33 +152,7 @@
       },
       "commando": {
         "page": {
-          "title": "Připojení k vašemu uzlu Core Lightning",
           "instructions": "Ujistěte se, že používáte Core Lightning verze 0.12.0 (nebo novější), dále že vám běží doplněk commando a váš uzel je přístupný přes síť lightning. Vytvořte novou \"runu\" spuštěním příkazu 'lightning-cli commando-rune'."
-        },
-        "host": {
-          "label": "Host"
-        },
-        "pubkey": {
-          "label": "Veřejný klíč"
-        },
-        "rune": {
-          "label": "Runa"
-        },
-        "port": {
-          "label": "Port"
-        },
-        "proxy": {
-          "label": "Websocket proxy"
-        },
-        "privKey": {
-          "label": "Lokální privátní klíč (automaticky generovaný)"
-        },
-        "config": {
-          "label": "Konfigurační data",
-          "placeholder": "config=https://vas-btc-pay.org/lnd-config/212121/lnd.config"
-        },
-        "errors": {
-          "connection_failed": "Připojení se nezdařilo. Je váš Core Lightning uzel online a se zapnutým doplňkem commando?"
         }
       },
       "title": "Připojte Lightning peněženku",

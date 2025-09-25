@@ -177,33 +177,7 @@
       },
       "commando": {
         "page": {
-          "title": "Conecte-se no seu servidor Core Lightning",
           "instructions": "Certifique-se de conectar em um servidor Core Lightning que esteja na versão 0.12.0 ou mais recente, o plugin commando instalado e rodando e o servidor acessível na rede relâmpago. Crie um rune executando o comando 'lightning-cli commando-rune'."
-        },
-        "pubkey": {
-          "label": "Chave pública"
-        },
-        "rune": {
-          "label": "Rune"
-        },
-        "port": {
-          "label": "Porta"
-        },
-        "privKey": {
-          "label": "Chave privada local (Gerada automaticamente)"
-        },
-        "config": {
-          "label": "Dados config",
-          "placeholder": "config=https://seu-btc-pay.org/lnd-config/212121/lnd.config"
-        },
-        "proxy": {
-          "label": "Websocket proxy"
-        },
-        "host": {
-          "label": "Host"
-        },
-        "errors": {
-          "connection_failed": "Falha na conexão. O servidor Core Lightning está online e usando o plugin comando?"
         }
       },
       "title": "Conectar Carteira Bitcoin",
