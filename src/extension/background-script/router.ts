@@ -50,6 +50,7 @@ const routes = {
   selectAccount: accounts.select,
   setPassword: setup.setPassword,
   reset: setup.reset,
+  encryptValue: setup.encryptValue,
   status: setup.status,
   validateAccount: setup.validateAccount,
   setIcon: setup.setIconMessageHandler,

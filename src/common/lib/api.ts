@@ -235,9 +235,13 @@ const getNostrPublicKey = (id: string): Promise<string> =>
     id,
   });
 
-const generateNostrPrivateKey = (id: string): Promise<string> =>
+const generateNostrPrivateKey = (
+  id?: string,
+  mnemonic?: string
+): Promise<string> =>
   msg.request("nostr/generatePrivateKey", {
     id,
+    mnemonic,
   });
 
 const removeNostrPrivateKey = (id: string): Promise<void> =>
@@ -263,6 +267,11 @@ const setMnemonic = (id: string, mnemonic: string | null): Promise<void> =>
   msg.request("setMnemonic", {
     id,
     mnemonic,
+  });
+
+const encryptValue = (value: string): Promise<string> =>
+  msg.request("encryptValue", {
+    value,
   });
 
 const getSwapInfo = (): Promise<SwapInfoResponse> => msg.request("getSwapInfo");
@@ -332,6 +341,7 @@ export default {
   getMnemonic,
   setMnemonic,
   generateMnemonic,
+  encryptValue,
   getSwapInfo,
   createSwap,
   liquid: {
