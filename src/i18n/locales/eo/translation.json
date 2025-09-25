@@ -19,8 +19,7 @@
         "connection_error": "Konekta eraro",
         "review_connection_details": "Bonvolu revizii viajn konektajn detalojn.",
         "connection_taking_long": "Provi konektiĝi daŭras pli longe ol atendite... Ĉu viaj detaloj estas ĝustaj? Ĉu via nodo estas atingebla?",
-        "contact_support": "Se vi bezonas helpon bonvolu kontakti support@getalby.com",
-        "actions": {}
+        "contact_support": "Se vi bezonas helpon bonvolu kontakti support@getalby.com"
       }
     },
     "choose_connector": {
@@ -158,33 +157,7 @@
       },
       "commando": {
         "page": {
-          "title": "",
           "instructions": ""
-        },
-        "host": {
-          "label": "Gastiganto"
-        },
-        "pubkey": {
-          "label": "Publika ŝlosilo"
-        },
-        "rune": {
-          "label": "Runo"
-        },
-        "port": {
-          "label": "Pordo"
-        },
-        "proxy": {
-          "label": "Retkonektinga perilo"
-        },
-        "privKey": {
-          "label": ""
-        },
-        "config": {
-          "label": "",
-          "placeholder": ""
-        },
-        "errors": {
-          "connection_failed": ""
         }
       }
     },
