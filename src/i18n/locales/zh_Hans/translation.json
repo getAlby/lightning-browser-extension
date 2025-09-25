@@ -103,34 +103,8 @@
         }
       },
       "commando": {
-        "config": {
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config",
-          "label": "配置数据"
-        },
-        "errors": {
-          "connection_failed": "连接失败。你的Core Lightning节点是否在线并使用了commando插件？"
-        },
         "page": {
-          "title": "连接你的Core Lightning节点",
           "instructions": "确保你用的是Core Lightning 0.12.0或更新的版本、commando插件正在运行，并且你的节点可以通过闪电网络访问。通过运行'lightning-cli commando-rune'来创建rune。"
-        },
-        "host": {
-          "label": "主机"
-        },
-        "pubkey": {
-          "label": "公钥"
-        },
-        "rune": {
-          "label": "Rune"
-        },
-        "proxy": {
-          "label": "Websocket代理"
-        },
-        "port": {
-          "label": "端口"
-        },
-        "privKey": {
-          "label": "本地私钥（自动生成的）"
         }
       },
       "startos": {
