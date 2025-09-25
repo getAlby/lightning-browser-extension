@@ -157,34 +157,8 @@
         }
       },
       "commando": {
-        "port": {
-          "label": "Port"
-        },
-        "proxy": {
-          "label": "Websocket proxy"
-        },
-        "config": {
-          "label": "Config data",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
-        },
-        "errors": {
-          "connection_failed": "Anslutningen misslyckades. Är din Core Lightning-nod online och använder kommandoplugin?"
-        },
-        "privKey": {
-          "label": "Lokal privat nyckel (automatiskt genererad)"
-        },
         "page": {
-          "title": "Anslut till din Core Lightning node",
           "instructions": "Säkerställ att du har Core Lightning version 0.12.0 eller nyare, att kommando insticksprogrammet är aktivt samt att din node är nåbar över lightning-nätverket. Skapa en rune genom att köra 'lightning-cli commando-rune'."
-        },
-        "pubkey": {
-          "label": "Publik nyckel"
-        },
-        "rune": {
-          "label": "Rune"
-        },
-        "host": {
-          "label": "Hosta"
         }
       },
       "title": "Anslut Lightning Plånbok",
