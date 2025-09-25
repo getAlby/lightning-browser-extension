@@ -19,8 +19,7 @@
         "connection_error": "Connectie Error",
         "review_connection_details": "Controleer uw verbindingsgegevens.",
         "connection_taking_long": "Verbinden duurt langer dan verwacht... Kloppen uw gegevens? Is uw node bereikbaar?",
-        "contact_support": "Hulp nodig? neem contact op met support@getalby.com",
-        "actions": {}
+        "contact_support": "Hulp nodig? neem contact op met support@getalby.com"
       }
     },
     "choose_connector": {
@@ -167,33 +166,7 @@
       },
       "commando": {
         "page": {
-          "title": "",
           "instructions": ""
-        },
-        "host": {
-          "label": ""
-        },
-        "pubkey": {
-          "label": ""
-        },
-        "rune": {
-          "label": ""
-        },
-        "port": {
-          "label": ""
-        },
-        "proxy": {
-          "label": ""
-        },
-        "privKey": {
-          "label": ""
-        },
-        "config": {
-          "label": "",
-          "placeholder": ""
-        },
-        "errors": {
-          "connection_failed": ""
         }
       }
     },
