@@ -189,33 +189,7 @@
       },
       "commando": {
         "page": {
-          "title": "Sambungkan dengan node Core Lightning",
           "instructions": "Pastikan versi Core Lightning kamu sudah 0.12.0 atau terbaru, plugin commando berjalan dan node kamu dapat diakses melalui lighting network. Buat rune dengan menjalankan 'lightning-cli commando-rune'."
-        },
-        "rune": {
-          "label": "Rune"
-        },
-        "port": {
-          "label": "Port"
-        },
-        "proxy": {
-          "label": "Proxy websocket"
-        },
-        "privKey": {
-          "label": "Local private key (terbuat secara otomatis)"
-        },
-        "config": {
-          "label": "Config data",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
-        },
-        "pubkey": {
-          "label": "Public key"
-        },
-        "host": {
-          "label": "Host"
-        },
-        "errors": {
-          "connection_failed": "Koneksi gagal. Apakah node Core Lightning sudah online dan menggunakan plugin commando?"
         }
       },
       "umbrel_lightning_node": {
