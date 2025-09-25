@@ -177,33 +177,7 @@
       },
       "commando": {
         "page": {
-          "title": "Yhdistä Core Lightning -solmuusi",
           "instructions": "Varmista, että sinulla on Core Lightning -versio 0.12.0 tai uudempi, että commando-laajennus on käynnissä ja että solmuasi on käytettävissä Lightning-verkon kautta. Luo riimu suorittamalla 'lightning-cli commando-rune'."
-        },
-        "host": {
-          "label": "Kone"
-        },
-        "pubkey": {
-          "label": "Julkinen avain"
-        },
-        "rune": {
-          "label": "Rune"
-        },
-        "port": {
-          "label": "Portti"
-        },
-        "proxy": {
-          "label": "Websocket-välityspalvelin"
-        },
-        "privKey": {
-          "label": "Paikallinen yksityinen avain (automaattisesti luotu)"
-        },
-        "config": {
-          "label": "Asetustiedot",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
-        },
-        "errors": {
-          "connection_failed": "Yhteys epäonnistui. Onko Core Lightning -solmu verkossa ja käyttääkö Commando-laajennusta?"
         }
       },
       "lawallet": {
