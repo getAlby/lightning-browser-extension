@@ -249,33 +249,7 @@
       },
       "commando": {
         "page": {
-          "title": "Conecte o seu servidor Core Lightning",
           "instructions": "Certifique-se de conectar num servidor Core Lightning que esteja na versão 0.12.0 ou mais recente, o plugin commando instalado e executando e o servidor acessível na rede relâmpago. Crie um rune executando o comando 'lightning-cli commando-rune'."
-        },
-        "host": {
-          "label": "Host"
-        },
-        "pubkey": {
-          "label": "Chave pública"
-        },
-        "rune": {
-          "label": "Rune"
-        },
-        "port": {
-          "label": "Porta"
-        },
-        "proxy": {
-          "label": "Websocket proxy"
-        },
-        "privKey": {
-          "label": "Chave privada local (Gerada automaticamente)"
-        },
-        "config": {
-          "label": "Dados config",
-          "placeholder": "config=https://seu-btc-pay.org/lnd-config/212121/lnd.config"
-        },
-        "errors": {
-          "connection_failed": "Falha na conexão. O servidor Core Lightning está online e usando o plugin comando?"
         }
       },
       "voltage": {
