@@ -1142,7 +1142,7 @@
     "wallet_settings": "Wallet Settings",
     "active_wallet_settings": "Active Wallet Settings",
     "apps": "Apps",
-    "setup_wallet": "Finish your <0>Alby account setup</0> for unlimited payments. Until your setup is complete, you can receive up to {{max_account_balance}} as <1>fee credits</1>",
+    "setup_wallet": "Finish your setup and link your wallet to your <0>Alby account</0> for unlimited payments.",
     "actions": {
       "back": "Back",
       "delete": "Delete",
