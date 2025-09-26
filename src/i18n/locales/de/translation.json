@@ -1336,7 +1336,6 @@
     "details": "Einzelheiten",
     "general": "Allgemein",
     "wallet_settings": "Wallet-Einstellungen",
-    "setup_wallet": "Beende deine <0>Alby-Kontoeinrichtung</0> für unbegrenzte Zahlungen. Bis deine Einrichtung abgeschlossen ist, kannst du bis zu {{max_account_balance}} als <1>Gebührengutschrift</1> erhalten",
     "active_wallet_settings": "Aktive Wallet Einstellungen"
   },
   "permissions": {
