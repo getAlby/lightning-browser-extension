@@ -1,5 +1,4 @@
 import type {
-  CreateSwapParams,
   GetAccountInformationResponse,
 } from "@getalby/sdk";
 import { PaymentRequestObject } from "bolt11-signet";
@@ -640,16 +639,6 @@ export interface MessageGetAddress extends MessageDefault {
   action: "getAddress";
 }
 
-export interface MessageGetSwapInfo extends MessageDefault {
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  args: {};
-  action: "getSwapInfo";
-}
-
-export interface MessageCreateSwap extends MessageDefault {
-  args: CreateSwapParams;
-  action: "getSwapInfo";
-}
 
 // Liquid
 export interface MessageSignPsetWithPrompt extends MessageDefault {

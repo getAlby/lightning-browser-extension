@@ -1,8 +1,5 @@
 import type {
-  CreateSwapParams,
-  CreateSwapResponse,
   Nip47TransactionMetadata,
-  SwapInfoResponse,
 } from "@getalby/sdk";
 import { ACCOUNT_CURRENCIES } from "~/common/constants";
 import { OAuthToken } from "~/types";
@@ -152,8 +149,6 @@ export default interface Connector {
     args: Record<string, unknown>
   ): Promise<{ data: unknown }>;
   getOAuthToken?(): OAuthToken | undefined;
-  getSwapInfo?(): Promise<SwapInfoResponse>;
-  createSwap?(params: CreateSwapParams): Promise<CreateSwapResponse>;
 }
 
 export function flattenRequestMethods(methods: string[]) {

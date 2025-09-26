@@ -1,8 +1,3 @@
-import type {
-  CreateSwapParams,
-  CreateSwapResponse,
-  SwapInfoResponse,
-} from "@getalby/sdk";
 import { ACCOUNT_CURRENCIES } from "~/common/constants";
 import {
   ConnectPeerArgs,
@@ -265,9 +260,6 @@ const setMnemonic = (id: string, mnemonic: string | null): Promise<void> =>
     mnemonic,
   });
 
-const getSwapInfo = (): Promise<SwapInfoResponse> => msg.request("getSwapInfo");
-const createSwap = (params: CreateSwapParams): Promise<CreateSwapResponse> =>
-  msg.request("createSwap", params);
 const getLiquidPsetPreview = (pset: string): Promise<PsetPreview> =>
   msg.request("liquid/getPsetPreview", {
     pset,
@@ -332,8 +324,6 @@ export default {
   getMnemonic,
   setMnemonic,
   generateMnemonic,
-  getSwapInfo,
-  createSwap,
   liquid: {
     getPsetPreview: getLiquidPsetPreview,
     fetchAssetRegistry: fetchLiquidAssetRegistry,
