@@ -235,7 +235,14 @@
       },
       "commando": {
         "page": {
-          "instructions": "Переконайтеся, що у вас встановлено Core Lightning версії 0.12.0 або новішої, плагін commando запущено, а ваш вузол доступний через мережу Lightning. Створіть руну, виконавши команду «lightning-cli commando-rune»."
+          "instructions": "Встановіть плагін <0>cln-nip47</0> на ваш вузол Core Lightning та вставте сюди секрет вашого NWC-з’єднання.",
+          "url": {
+            "label": "Секрет підключення NWC",
+            "placeholder": "nostr+walletconnect://69effe..."
+          },
+          "errors": {
+            "connection_failed": "Не вдалося підключитися. Чи ваш основний вузол Lightning онлайн, а підключення до програми ввімкнено?"
+          }
         }
       },
       "umbrel_lightning_node": {
