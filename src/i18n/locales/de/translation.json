@@ -193,7 +193,14 @@
       },
       "commando": {
         "page": {
-          "instructions": "Stelle sicher, dass du die Core Lightning Version 0.12.0 oder neuer hast, das Commando-Plugin ausgeführt wird und deine Node über das Lightning Network zugänglich ist. Erstelle eine Rune, indem du „lightning-cli commando-rune“ ausführst."
+          "instructions": "Installiere das <0>cln-nip47-Plugin</0> auf deinem Core Lightning-Knoten und füge es deinem NWC-Verbindungsgeheimnis ein.",
+          "url": {
+            "label": "NWC-Verbindungsgeheimnis",
+            "placeholder": "nostr+walletconnect://69effe..."
+          },
+          "errors": {
+            "connection_failed": "Verbindung fehlgeschlagen. Ist dein Core Lightning Node online und die App-Verbindung aktiviert?"
+          }
         }
       },
       "title": "Verbinde Lightning Wallet",
@@ -1310,7 +1317,8 @@
     "details": "Einzelheiten",
     "general": "Allgemein",
     "wallet_settings": "Wallet-Einstellungen",
-    "active_wallet_settings": "Aktive Wallet Einstellungen"
+    "active_wallet_settings": "Aktive Wallet Einstellungen",
+    "setup_wallet": "Beende die Einrichtung und verknüpfe deine Wallet mit dem <0>Alby-Konto</0>, um unbegrenzt Zahlungen zu tätigen."
   },
   "permissions": {
     "commando": {
