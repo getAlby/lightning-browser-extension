@@ -64,7 +64,7 @@ function Unlock() {
     <Container maxWidth="sm">
       <div className="p-8">
         <div className="flex justify-center">
-          <div className="w-40 dark:text-white">
+          <div className="w-64 mt-4 dark:text-white">
             <AlbyLogo />
           </div>
         </div>

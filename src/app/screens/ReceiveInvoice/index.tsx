@@ -171,7 +171,7 @@ function ReceiveInvoice() {
                   ) : (
                     <img
                       className="w-[64px] h-[64px] absolute z-1"
-                      src="assets/icons/alby_icon_qr.svg"
+                      src="assets/icons/alby_logo.svg"
                       alt="Alby logo"
                     />
                   )}
