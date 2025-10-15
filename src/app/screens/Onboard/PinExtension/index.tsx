@@ -20,8 +20,8 @@ export default function PinExtension() {
       <img
         src={
           theme === "dark"
-            ? "assets/icons/pin_extension_dark.png"
-            : "assets/icons/pin_extension_light.png"
+            ? "assets/images/pin_extension_dark.png"
+            : "assets/images/pin_extension_light.png"
         }
         alt="Pin your Alby extension"
         className="h-64"
