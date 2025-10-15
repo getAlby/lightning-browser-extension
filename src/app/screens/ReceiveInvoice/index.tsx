@@ -175,8 +175,8 @@ function ReceiveInvoice() {
                       className="w-[64px] h-[64px] absolute z-1"
                       src={
                         theme === "dark"
-                          ? "assets/icons/alby_logo_dark.svg"
-                          : "assets/icons/alby_logo.svg"
+                          ? "assets/icons/alby_logo_qr_dark.svg"
+                          : "assets/icons/alby_logo_qr_light.svg"
                       }
                       alt="Alby logo"
                     />
