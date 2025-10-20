@@ -20,11 +20,11 @@ export default function PinExtension() {
       <img
         src={
           theme === "dark"
-            ? "assets/icons/alby_logo_dark.svg"
-            : "assets/icons/alby_logo.svg"
+            ? "assets/images/pin_extension_dark.png"
+            : "assets/images/pin_extension_light.png"
         }
         alt="Pin your Alby extension"
-        className="h-32"
+        className="h-64"
       />
     );
   };
