@@ -3,11 +3,14 @@ import { Link } from "react-router-dom";
 import Button from "~/app/components/Button";
 import ConnectorPath from "~/app/components/ConnectorPath";
 import ConnectAlby from "~/app/screens/connectors/ConnectAlby";
+import { useTheme } from "~/app/utils";
 
 export default function ChooseConnectorPath() {
   const { t } = useTranslation("translation", {
     keyPrefix: "choose_path",
   });
+
+  const theme = useTheme();
 
   return (
     <div className="mx-auto max-w-3xl">
@@ -20,7 +23,11 @@ export default function ChooseConnectorPath() {
             title={t("alby.title")}
             icon={
               <img
-                src="assets/icons/alby.png"
+                src={
+                  theme === "dark"
+                    ? "assets/icons/alby_dark.svg"
+                    : "assets/icons/alby_light.svg"
+                }
                 className="w-10 h-10 rounded-md"
               />
             }
