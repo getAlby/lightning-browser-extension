@@ -57,23 +57,23 @@
     },
     "theme_icons": [
       {
-        "dark": "assets/icons/alby_icon_yellow_dark_16x16.png",
-        "light": "assets/icons/alby_icon_yellow_16x16.png",
+        "dark": "assets/icons/alby_icon_yellow_16x16.png",
+        "light": "assets/icons/alby_icon_yellow_dark_16x16.png",
         "size": 16
       },
       {
-        "dark": "assets/icons/alby_icon_yellow_dark_32x32.png",
-        "light": "assets/icons/alby_icon_yellow_32x32.png",
+        "dark": "assets/icons/alby_icon_yellow_32x32.png",
+        "light": "assets/icons/alby_icon_yellow_dark_32x32.png",
         "size": 32
       },
       {
-        "dark": "assets/icons/alby_icon_yellow_dark_48x48.png",
-        "light": "assets/icons/alby_icon_yellow_48x48.png",
+        "dark": "assets/icons/alby_icon_yellow_48x48.png",
+        "light": "assets/icons/alby_icon_yellow_dark_48x48.png",
         "size": 48
       },
       {
-        "dark": "assets/icons/alby_icon_yellow_dark_128x128.png",
-        "light": "assets/icons/alby_icon_yellow_128x128.png",
+        "dark": "assets/icons/alby_icon_yellow_128x128.png",
+        "light": "assets/icons/alby_icon_yellow_dark_128x128.png",
         "size": 128
       }
     ],
@@ -91,23 +91,23 @@
     },
     "theme_icons": [
       {
-        "dark": "assets/icons/alby_icon_yellow_dark_16x16.png",
-        "light": "assets/icons/alby_icon_yellow_16x16.png",
+        "dark": "assets/icons/alby_icon_yellow_16x16.png",
+        "light": "assets/icons/alby_icon_yellow_dark_16x16.png",
         "size": 16
       },
       {
-        "dark": "assets/icons/alby_icon_yellow_dark_32x32.png",
-        "light": "assets/icons/alby_icon_yellow_32x32.png",
+        "dark": "assets/icons/alby_icon_yellow_32x32.png",
+        "light": "assets/icons/alby_icon_yellow_dark_32x32.png",
         "size": 32
       },
       {
-        "dark": "assets/icons/alby_icon_yellow_dark_48x48.png",
-        "light": "assets/icons/alby_icon_yellow_48x48.png",
+        "dark": "assets/icons/alby_icon_yellow_48x48.png",
+        "light": "assets/icons/alby_icon_yellow_dark_48x48.png",
         "size": 48
       },
       {
-        "dark": "assets/icons/alby_icon_yellow_dark_128x128.png",
-        "light": "assets/icons/alby_icon_yellow_128x128.png",
+        "dark": "assets/icons/alby_icon_yellow_128x128.png",
+        "light": "assets/icons/alby_icon_yellow_dark_128x128.png",
         "size": 128
       }
     ],
