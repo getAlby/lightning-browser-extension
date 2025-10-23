@@ -5,6 +5,7 @@ import SuccessMessage from "@components/SuccessMessage";
 import {
   PopiconsChevronBottomLine,
   PopiconsChevronTopLine,
+  PopiconsCircleInfoLine,
 } from "@popicons/react";
 import { useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
@@ -128,8 +129,9 @@ function ConfirmSignMessage() {
                         href={`https://nostrbook.dev/kinds/${event.kind}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="italic underline"
-                      ></a>,
+                      >
+                        <PopiconsCircleInfoLine className="inline-flex w-4 h-4 ml-1" />
+                      </a>,
                     ]}
                   />
                 }

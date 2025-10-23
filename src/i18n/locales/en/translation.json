@@ -949,7 +949,7 @@
       "title": "Nostr",
       "allow": "Allow {{publisher}} to {{action}}",
       "content": "This website asks you to sign:",
-      "allow_sign_event": "Allow {{host}} to sign a <0>{{kind}}</0> event",
+      "allow_sign_event": "Allow {{host}} to sign a <0>{{kind}}<0></0></0> event",
       "block_and_ignore": "Block and ignore {{host}}",
       "block_added": "Added {{host}} to the blocklist, please reload the website.",
       "recipient": "Recipient",
