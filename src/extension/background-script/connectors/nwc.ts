@@ -92,24 +92,29 @@ class NWCConnector implements Connector {
       unpaid_outgoing: true,
     });
     const transactions: ConnectorTransaction[] =
-      listTransactionsResponse.transactions.map(
-        (transaction, index): ConnectorTransaction => ({
-          id: `${index}`,
-          memo: transaction.description,
-          preimage: transaction.preimage,
-          payment_hash: transaction.payment_hash,
-          settled: transaction.state == "settled",
-          settleDate: transaction.settled_at * 1000,
-          creationDate: transaction.created_at * 1000,
-          totalAmount: Math.floor(transaction.amount / 1000),
-          type: transaction.type == "incoming" ? "received" : "sent",
-          custom_records: this.tlvToCustomRecords(
-            transaction.metadata?.["tlv_records"] as TLVRecord[] | undefined
-          ),
-          state: transaction.state,
-          metadata: transaction.metadata,
-        })
-      );
+      listTransactionsResponse.transactions
+        .filter((transaction) => transaction.state !== "accepted") // TODO: add support to display accepted HOLD payments
+        .map(
+          (transaction, index): ConnectorTransaction => ({
+            id: `${index}`,
+            memo: transaction.description,
+            preimage: transaction.preimage,
+            payment_hash: transaction.payment_hash,
+            settled: transaction.state == "settled",
+            settleDate: transaction.settled_at * 1000,
+            creationDate: transaction.created_at * 1000,
+            totalAmount: Math.floor(transaction.amount / 1000),
+            type: transaction.type == "incoming" ? "received" : "sent",
+            custom_records: this.tlvToCustomRecords(
+              transaction.metadata?.["tlv_records"] as TLVRecord[] | undefined
+            ),
+            state: transaction.state as Exclude<
+              typeof transaction.state,
+              "accepted"
+            >, // TODO: add support to display accepted HOLD payments
+            metadata: transaction.metadata,
+          })
+        );
     return {
       data: {
         transactions,
