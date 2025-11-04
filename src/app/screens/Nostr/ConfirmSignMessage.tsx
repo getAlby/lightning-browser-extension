@@ -5,6 +5,7 @@ import SuccessMessage from "@components/SuccessMessage";
 import {
   PopiconsChevronBottomLine,
   PopiconsChevronTopLine,
+  PopiconsCircleInfoLine,
 } from "@popicons/react";
 import { useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
@@ -122,8 +123,16 @@ function ConfirmSignMessage() {
                         }),
                       }),
                     }}
-                    // eslint-disable-next-line react/jsx-key
-                    components={[<i></i>]}
+                    components={[
+                      // eslint-disable-next-line react/jsx-key
+                      <a
+                        href={`https://nostrbook.dev/kinds/${event.kind}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <PopiconsCircleInfoLine className="inline-flex w-4 h-4 ml-1" />
+                      </a>,
+                    ]}
                   />
                 }
                 content={content}
