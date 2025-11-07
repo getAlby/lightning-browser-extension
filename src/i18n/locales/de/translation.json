@@ -689,7 +689,7 @@
       "content": "Auf dieser Webseite wirst du aufgefordert zu signieren:",
       "block_and_ignore": "Blockieren und Ignorieren von {{host}}",
       "block_added": "{{host}} zur Blockliste hinzugefügt, bitte lade deine Webseite neu.",
-      "allow_sign_event": "Erlaube {{host}}, ein <0>{{kind}}</0> Ereignis zu unterzeichnen",
+      "allow_sign_event": "{{host}} darf ein <0>{{kind}}<0></0></0> Ereignis signieren",
       "recipient": "Empfänger",
       "kinds": {
         "0": {
