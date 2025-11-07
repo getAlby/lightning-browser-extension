@@ -103,7 +103,7 @@ class NWCConnector implements Connector {
             settled: transaction.state == "settled",
             settleDate: transaction.settled_at * 1000,
             creationDate: transaction.created_at * 1000,
-            totalAmount: Math.floor(transaction.amount / 1000),
+            totalAmount: Math.ceil(transaction.amount / 1000),
             type: transaction.type == "incoming" ? "received" : "sent",
             custom_records: this.tlvToCustomRecords(
               transaction.metadata?.["tlv_records"] as TLVRecord[] | undefined
