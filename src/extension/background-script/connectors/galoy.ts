@@ -225,7 +225,7 @@ class Galoy implements Connector {
             const rate = await getCurrencyRateWithCache(CURRENCIES[currency]);
             absSettlementAmount = this.fromFiatCents(absSettlementAmount);
             displayAmount = [absSettlementAmount, CURRENCIES[currency]];
-            absSettlementAmount = Math.floor(absSettlementAmount / rate);
+            absSettlementAmount = Math.ceil(absSettlementAmount / rate);
           }
 
           const createdAtDate = new Date(tx.createdAt * 1000);
