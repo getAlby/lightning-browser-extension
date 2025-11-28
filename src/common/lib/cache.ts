@@ -5,7 +5,10 @@ export const getAccountsCache = async () => {
   let accountsCache: { [id: string]: AccountInfo } = {};
   const result = await browser.storage.local.get(["accounts"]);
   if (result.accounts) {
-    accountsCache = JSON.parse(result.accounts);
+    accountsCache =
+      typeof result.accounts === "string"
+        ? JSON.parse(result.accounts)
+        : result.accounts;
   }
   return accountsCache;
 };
