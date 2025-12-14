@@ -39,7 +39,7 @@
     "@getalby/sdk": "^6.0.2",
     "@headlessui/react": "^1.7.18",
     "@lightninglabs/lnc-web": "^0.3.1-alpha",
-    "@noble/ciphers": "^0.5.1",
+    "@noble/ciphers": "^2.1.1",
     "@noble/curves": "^1.9.1",
     "@noble/hashes": "^1.8.0",
     "@noble/secp256k1": "^2.2.3",
