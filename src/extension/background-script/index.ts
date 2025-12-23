@@ -1,6 +1,7 @@
 import browser, { Runtime, Tabs } from "webextension-polyfill";
 import utils from "~/common/lib/utils";
 import { isManifestV3 } from "~/common/utils/mv3";
+import getOS from "~/common/utils/os";
 import { registerInPageContentScript } from "~/extension/background-script/registerContentScript";
 import { ExtensionIcon, setIcon } from "./actions/setup/setIcon";
 import { db, isIndexedDbAvailable } from "./db";
@@ -141,13 +142,7 @@ browser.runtime.onInstalled.addListener(handleInstalled);
 
 // CONTEXT MENU CODE START
 let contextMenuCreated = false;
-
-// Listen for messages from content script
-browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request.type === "updateContextMenu") {
-    updateMenu(request.isValid);
-  }
-});
+const isAndroid = getOS() === "Android";
 
 // Adds or removes the context menu item based on validation result.
 function updateMenu(shouldShow: boolean) {
@@ -164,30 +159,38 @@ function updateMenu(shouldShow: boolean) {
   }
 }
 
-// Handle menu clicks
-browser.contextMenus.onClicked.addListener((info, tab) => {
-  const text = info?.selectionText?.trim();
-  if (!text) return;
+if (!isAndroid) {
+  // Listen for messages from content script
+  browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    if (request.type === "updateContextMenu") {
+      updateMenu(request.isValid);
+    }
+  });
 
-  if (info.menuItemId === "btc-lightning-pay") {
-    const sendUrl = browser.runtime.getURL(
-      `popup.html?invoice=${encodeURIComponent(text)}#/send`
-    );
-    browser.windows.create({
-      url: sendUrl,
-      type: "popup",
-      width: 400,
-      height: 650,
-    });
-  }
-});
+  // Handle menu clicks
+  browser.contextMenus.onClicked.addListener((info, tab) => {
+    const text = info?.selectionText?.trim();
+    if (!text) return;
 
-// Clean up on startup
-browser.runtime.onStartup.addListener(() => {
-  browser.contextMenus.removeAll();
-  contextMenuCreated = false;
-});
+    if (info.menuItemId === "btc-lightning-pay") {
+      const sendUrl = browser.runtime.getURL(
+        `popup.html?invoice=${encodeURIComponent(text)}#/send`
+      );
+      browser.windows.create({
+        url: sendUrl,
+        type: "popup",
+        width: 400,
+        height: 650,
+      });
+    }
+  });
 
+  // Clean up on startup
+  browser.runtime.onStartup.addListener(() => {
+    browser.contextMenus.removeAll();
+    contextMenuCreated = false;
+  });
+}
 // CONTEXT MENU CODE END
 
 async function init() {
