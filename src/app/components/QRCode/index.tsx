@@ -1,4 +1,8 @@
+import { PopiconsCopyLine } from "@popicons/react";
 import ReactQRCode from "react-qr-code";
+import React from "react";
+import { useTranslation } from "react-i18next";
+import toast from "~/app/components/Toast";
 import { classNames, useTheme } from "~/app/utils";
 
 export type Props = {
@@ -19,17 +23,40 @@ export type Props = {
 
 export default function QRCode({ value, size, level, className }: Props) {
   const theme = useTheme();
+  const { t } = useTranslation("common");
+
   const fgColor = theme === "dark" ? "#FFFFFF" : "#000000";
   const bgColor = theme === "dark" ? "#000000" : "#FFFFFF";
 
+  function handleCopy(e: React.MouseEvent) {
+    e.stopPropagation(); // Stop the click from bubbling up
+    navigator.clipboard.writeText(value);
+    toast.success(t("copied"));
+  }
+
   return (
-    <ReactQRCode
-      value={value}
-      size={size}
-      fgColor={fgColor}
-      bgColor={bgColor}
-      className={classNames("w-full h-auto rounded-md", className ?? "")}
-      level={level}
-    />
+    <div
+      onClick={handleCopy}
+      className={classNames(
+        "relative group cursor-pointer inline-block",
+        className ?? ""
+      )}
+    >
+      <ReactQRCode
+        value={value}
+        size={size}
+        fgColor={fgColor}
+        bgColor={bgColor}
+        className="w-full h-auto rounded-md"
+        level={level}
+      />
+
+      {/* Overlay: Hidden by default (opacity-0), Visible on hover (opacity-100) */}
+      <div className="absolute inset-0 flex items-center justify-center bg-black/10 dark:bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-200 rounded-md">
+        <div className="bg-white dark:bg-neutral-800 p-2 rounded-full shadow-lg">
+          <PopiconsCopyLine className="w-6 h-6 text-neutral-800 dark:text-white" />
+        </div>
+      </div>
+    </div>
   );
 }

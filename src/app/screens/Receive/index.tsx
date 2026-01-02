@@ -80,7 +80,7 @@ function Receive() {
                       {!auth.accountLoading && auth.account ? (
                         <Avatar
                           size={40}
-                          className="border-4 border-white rounded-full absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 z-1 bg-white"
+                          className="border-4 border-white rounded-full absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 z-1 bg-white pointer-events-none"
                           url={auth.account.avatarUrl}
                           name={auth.account.id}
                         />
@@ -89,7 +89,7 @@ function Receive() {
                           <SkeletonLoader
                             circle
                             opaque={false}
-                            className="w-[40px] h-[40px] border-4 border-white rounded-full absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 z-1 opacity-100"
+                            className="w-[40px] h-[40px] border-4 border-white rounded-full absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 z-1 opacity-100 pointer-events-none"
                           />
                         )
                       )}
