@@ -151,34 +151,8 @@
         }
       },
       "commando": {
-        "port": {
-          "label": "Porta"
-        },
-        "proxy": {
-          "label": "Websocket proxy"
-        },
-        "rune": {
-          "label": "Rune"
-        },
-        "privKey": {
-          "label": "Chiave privata locale (autogenerata)"
-        },
         "page": {
-          "title": "Connettiti al tuo nodo Core Lightning",
           "instructions": "Assicurati di avere la versione 0.12.0 o più recente di Core Lightning, che il plugin commando sia in esecuzione e che il tuo nodo sia accessibile sulla rete Lightning. Crea una rune eseguendo 'lightning-cli commando-rune'."
-        },
-        "host": {
-          "label": "Host"
-        },
-        "pubkey": {
-          "label": "Chiave pubblica"
-        },
-        "config": {
-          "label": "Dati di configurazione",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
-        },
-        "errors": {
-          "connection_failed": "Connessione fallita. Il tuo nodo Core Lightning è online e sta usando il plugin Commando?"
         }
       },
       "title": "Connetti il Wallet Lightning",
@@ -266,8 +240,7 @@
         "subtitle": "Notifiche relative ai pagamenti e all'autenticazione."
       },
       "website_enhancements": {
-        "title": "Miglioramenti del sito web",
-        "subtitle": "Miglioramenti per le mance su Twitter, YouTube, ecc."
+        "title": "Miglioramenti del sito web"
       },
       "camera_access": {
         "title": "Accesso alla telecamera",

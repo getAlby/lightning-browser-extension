@@ -142,7 +142,7 @@ class LnBits implements Connector {
               settled: !transaction.pending,
               settleDate: transaction.time * 1000,
               creationDate: creationDate,
-              totalAmount: Math.abs(Math.floor(transaction.amount / 1000)),
+              totalAmount: Math.ceil(Math.abs(transaction.amount / 1000)),
               type: transaction.amount > 0 ? "received" : "sent",
             };
           })
@@ -243,12 +243,13 @@ class LnBits implements Connector {
   makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse> {
     return this.request("POST", "/api/v1/payments", this.config.adminkey, {
       amount: args.amount,
+      unit: "sat",
       memo: args.memo,
       out: false,
     }).then((data) => {
       return {
         data: {
-          paymentRequest: data.payment_request,
+          paymentRequest: data.bolt11 || data.payment_request,
           rHash: data.payment_hash,
         },
       };

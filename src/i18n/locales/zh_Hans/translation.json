@@ -25,10 +25,7 @@
         "contact_support": "如果你需要帮助，请联系support@getalby.com"
       },
       "pin_extension": {
-        "title": "固定你的 Alby 扩展",
-        "description": "就快完成了。以便方便地使用 Alby，请记住把扩展固定到工具栏：",
-        "next_btn": "与 Alby 一起开始嗡嗡作响{{icon}}",
-        "explanation": "1.点击浏览器右上角的<0/><1/>2.找到Alby并点击将其固定到工具栏<1/>3.就这样。要访问Alby，只需点击<2/>图标"
+        "next_btn": "与 Alby 一起开始嗡嗡作响{{icon}}"
       }
     },
     "choose_connector": {
@@ -106,34 +103,8 @@
         }
       },
       "commando": {
-        "config": {
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config",
-          "label": "配置数据"
-        },
-        "errors": {
-          "connection_failed": "连接失败。你的Core Lightning节点是否在线并使用了commando插件？"
-        },
         "page": {
-          "title": "连接你的Core Lightning节点",
           "instructions": "确保你用的是Core Lightning 0.12.0或更新的版本、commando插件正在运行，并且你的节点可以通过闪电网络访问。通过运行'lightning-cli commando-rune'来创建rune。"
-        },
-        "host": {
-          "label": "主机"
-        },
-        "pubkey": {
-          "label": "公钥"
-        },
-        "rune": {
-          "label": "Rune"
-        },
-        "proxy": {
-          "label": "Websocket代理"
-        },
-        "port": {
-          "label": "端口"
-        },
-        "privKey": {
-          "label": "本地私钥（自动生成的）"
         }
       },
       "startos": {
@@ -278,9 +249,7 @@
         }
       },
       "nwc": {
-        "title": "Nostr 钱包集成",
         "page": {
-          "instructions": "从 <0>Alby Nostr Wallet Connect</0>、<1>Umbrel Nostr Wallet Connect</1> 或 <2>Mutiny Wallet</2> 粘贴你的 NWC 链接符。",
           "url": {
             "label": "Nostr 钱包集成 URL",
             "placeholder": "nostr+walletconnect://69effe..."
@@ -551,7 +520,6 @@
         "subtitle": "在深色或浅色模式下使用 Alby"
       },
       "website_enhancements": {
-        "subtitle": "为Twitter、YouTube等提供小费功能。",
         "title": "站点增强"
       },
       "camera_access": {

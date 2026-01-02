@@ -19,6 +19,7 @@
     "storage",
     "tabs",
     "unlimitedStorage",
+    "contextMenus",
     "*://*/*"
   ],
   "__chrome__permissions": [
@@ -27,7 +28,8 @@
     "scripting",
     "storage",
     "tabs",
-    "unlimitedStorage"
+    "unlimitedStorage",
+    "contextMenus"
   ],
   "__chrome__host_permissions": ["*://*/*"],
   "content_security_policy": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'",
@@ -87,28 +89,6 @@
       "48": "assets/icons/alby_icon_yellow_48x48.png",
       "128": "assets/icons/alby_icon_yellow_128x128.png"
     },
-    "theme_icons": [
-      {
-        "dark": "assets/icons/alby_icon_yellow_16x16.png",
-        "light": "assets/icons/alby_icon_yellow_dark_16x16.png",
-        "size": 16
-      },
-      {
-        "dark": "assets/icons/alby_icon_yellow_32x32.png",
-        "light": "assets/icons/alby_icon_yellow_dark_32x32.png",
-        "size": 32
-      },
-      {
-        "dark": "assets/icons/alby_icon_yellow_48x48.png",
-        "light": "assets/icons/alby_icon_yellow_dark_48x48.png",
-        "size": 48
-      },
-      {
-        "dark": "assets/icons/alby_icon_yellow_128x128.png",
-        "light": "assets/icons/alby_icon_yellow_dark_128x128.png",
-        "size": 128
-      }
-    ],
     "default_title": "Alby - Bitcoin Wallet for Lightning & Nostr"
   },
   "commands": {
@@ -147,7 +127,8 @@
         "js/contentScriptAlby.bundle.js",
         "js/contentScriptLiquid.bundle.js",
         "js/contentScriptNostr.bundle.js",
-        "js/contentScriptWebBTC.bundle.js"
+        "js/contentScriptWebBTC.bundle.js",
+        "js/contentScriptContextMenu.bundle.js"
       ]
     }
   ],

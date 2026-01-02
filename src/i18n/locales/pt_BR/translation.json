@@ -25,9 +25,6 @@
         "contact_support": "Se precisar de ajuda, entre em contato com support@getalby.com"
       },
       "pin_extension": {
-        "title": "Fixar extensão Alby",
-        "description": "Quase lá. Para facilitar seu acesso à Alby, lembre-se de fixar a extensão Alby na barra de ferramentas do navegador:",
-        "explanation": "1. Clique em <0/> no canto superior direito do seu navegador<1/>2. Localize a Alby e clique no ícone de fixação para fixá-lo na barra de ferramentas do navegador<1/>3. É isso. Agora é só clicar no ícone da Alby <2/>",
         "next_btn": "Comece a usar a Alby {{icon}}"
       }
     },
@@ -180,33 +177,7 @@
       },
       "commando": {
         "page": {
-          "title": "Conecte-se no seu servidor Core Lightning",
           "instructions": "Certifique-se de conectar em um servidor Core Lightning que esteja na versão 0.12.0 ou mais recente, o plugin commando instalado e rodando e o servidor acessível na rede relâmpago. Crie um rune executando o comando 'lightning-cli commando-rune'."
-        },
-        "pubkey": {
-          "label": "Chave pública"
-        },
-        "rune": {
-          "label": "Rune"
-        },
-        "port": {
-          "label": "Porta"
-        },
-        "privKey": {
-          "label": "Chave privada local (Gerada automaticamente)"
-        },
-        "config": {
-          "label": "Dados config",
-          "placeholder": "config=https://seu-btc-pay.org/lnd-config/212121/lnd.config"
-        },
-        "proxy": {
-          "label": "Websocket proxy"
-        },
-        "host": {
-          "label": "Host"
-        },
-        "errors": {
-          "connection_failed": "Falha na conexão. O servidor Core Lightning está online e usando o plugin comando?"
         }
       },
       "title": "Conectar Carteira Bitcoin",
@@ -261,8 +232,7 @@
           "url": {
             "placeholder": "nostr+walletconnect://69effe..."
           }
-        },
-        "title": "Nostr Wallet Connect"
+        }
       },
       "albyhub": {
         "page": {
@@ -472,8 +442,7 @@
     },
     "settings": {
       "website_enhancements": {
-        "title": "Pagamentos em redes sociais",
-        "subtitle": "Reconhece automaticamente endereços relâmpago em perfis do Twitter, Youtube, etc, facilitando o envio de pagamentos."
+        "title": "Pagamentos em redes sociais"
       },
       "camera_access": {
         "title": "Acesso à câmera",
@@ -1093,8 +1062,7 @@
     "account_menu": {
       "options": {
         "account": {
-          "go_to_web_wallet": "Acessar sua conta na web",
-          "add": "Conectar"
+          "go_to_web_wallet": "Acessar sua conta na web"
         }
       },
       "title": "Mudar de carteira"

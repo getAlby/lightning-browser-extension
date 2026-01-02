@@ -22,9 +22,6 @@
         "connection_taking_long": "การเชื่อมต่อใช้เวลานานกว่าที่คาดไว้… ข้อมูลของคุณถูกต้องหรือไม่? โหนดของคุณสามารถเข้าถึงได้หรือไม่?"
       },
       "pin_extension": {
-        "title": "ปักหมุด extension Alby",
-        "description": "ใกล้จะเสร็จแล้ว! เพื่อใช้ Alby ได้อย่างสะดวก อย่าลืมปักหมุดไว้ที่แถบเครื่องมือเบราว์เซอร์:",
-        "explanation": "1. คลิกที่ <0/> ที่มุมขวาบนของเบราว์เซอร์ของคุณ <1/> 2. ค้นหา Alby แล้วคลิกเพื่อปักหมุดไว้ที่แถบเครื่องมือ <1/> 3. เสร็จแล้ว! ในการเข้าถึง Alby เพียงคลิกที่ไอคอน <2/>",
         "next_btn": "เริ่มใช้งาน Alby {{icon}}"
       }
     },
@@ -162,8 +159,7 @@
         "subtitle": "การแจ้งเตือนที่เกี่ยวข้องกับการชำระเงินและการตรวจสอบสิทธิ์"
       },
       "website_enhancements": {
-        "title": "การปรับปรุงเว็บไซต์",
-        "subtitle": "การปรับปรุงระบบการให้ทิปสำหรับ Twitter, YouTube และอื่น ๆ"
+        "title": "การปรับปรุงเว็บไซต์"
       },
       "camera_access": {
         "title": "การเข้าถึงกล้องถ่ายรูป",
@@ -459,33 +455,7 @@
       },
       "commando": {
         "page": {
-          "title": "เชื่อมต่อกับ Core Lightning node ของคุณ",
           "instructions": "โปรดตรวจสอบให้แน่ใจว่า Core Lightning ของคุณเป็นเวอร์ชัน 0.12.0 หรือ ใหม่กว่า และ commando plugin กำลังทำงานและโหนดของคุณสามารถเข้าถึงได้ผ่านเครือข่าย Lightning สร้าง rune โดยการเรียกใช้ \"lightning-cli commando-rune\""
-        },
-        "host": {
-          "label": "Host"
-        },
-        "pubkey": {
-          "label": "Public key"
-        },
-        "rune": {
-          "label": "Rune"
-        },
-        "port": {
-          "label": "Port"
-        },
-        "proxy": {
-          "label": "Websocket-proxy"
-        },
-        "privKey": {
-          "label": "Local private key (สร้างขึ้นโดยอัตโนมัติ)"
-        },
-        "config": {
-          "label": "การกำหนดค่าข้อมูล",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
-        },
-        "errors": {
-          "connection_failed": "เกิดข้อผิดหลาดในการเชื่อมต่อ โปรดตรวจสอบว่า Core Lightning node ของคุณออนไลน์และกำลังใช้ commando plugin หรือไม่?"
         }
       },
       "umbrel_lightning_node": {

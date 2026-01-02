@@ -22,12 +22,13 @@
         "connection_error": "Erreur de connexion",
         "review_connection_details": "Veuillez vérifier vos informations de connexion.",
         "connection_taking_long": "Essayer de se connecter prend plus de temps que prévu... Vos informations sont-elles correctes ? Votre nœud est-il accessible ?",
-        "contact_support": "Si vous avez besoin d'aide, veuillez contacter support@getalby.com"
+        "contact_support": "Si vous avez besoin d'aide, veuillez contacter support@getalby.com",
+        "actions": {
+          "delete_edit_account": "Supprimer le portefeuille invalide et le modifier à nouveau"
+        },
+        "initializing": "Initialisation de votre portefeuille. Veuillez patienter, cela peut prendre une minute…"
       },
       "pin_extension": {
-        "title": "Épingler Alby",
-        "description": "Vous y êtes presque. Pour lancer Alby plus facilement, pensez à l'épingler à votre barre d'outils :",
-        "explanation": "1. Cliquez sur <0/> en haut à droite de votre navigateur<1/>2. Localisez Alby et cliquez pour l'épingler à la barre d'outils<1/>3. Et voilà. Pour accéder à Alby, cliquez simplement sur l'<2/>icône",
         "next_btn": "Commencez à buzzé {{icon}} avec Alby"
       }
     },
@@ -88,7 +89,8 @@
           "placeholder": "phrase de sats de pile secrète"
         },
         "page": {
-          "title": "Se connecter à Lightning Terminal (LNC)"
+          "title": "Se connecter à Lightning Terminal (LNC)",
+          "description": "1. Dans la barre latérale du terminal Lightning, sélectionnez <0>Connexion au nœud Lightning</0>.<1/> 2. Cliquez sur <0>Créer une session</0>.<1/> 3. Nommez la session, choisissez les autorisations souhaitées et soumettez.<1/> 4. Copiez le code d'appairage</0> et collez-le ci-dessous."
         }
       },
       "lndhub_go": {
@@ -142,7 +144,8 @@
           "instructions": "1. Dans la section Citadelle de votre tableau de bord Nirvati, accédez à <0>Connecter le portefeuille</0><1/>2. Sélectionnez <0>Alby (Tor)</0> ou <0>Alby (réseau local)</0>mode<1/>3. Copiez l'<0>URL lndconnect</0> et collez-la ci-dessous"
         },
         "rest_url": {
-          "label": "lndconnect REST URL"
+          "label": "lndconnect REST URL",
+          "placeholder": "lndconnect://yournode:8080?..."
         }
       },
       "umbrel": {
@@ -225,33 +228,7 @@
       },
       "commando": {
         "page": {
-          "title": "Connectez-vous à votre nœud Core Lightning",
           "instructions": "Assurez-vous que vous disposez de Core Lightning version 0.12.0 ou plus récente, que le plug-in commando est en cours d'exécution et que votre nœud est accessible via le réseau Lightning. Créez une rune en exécutant 'lightning-cli commando-rune'."
-        },
-        "host": {
-          "label": "Hôte"
-        },
-        "pubkey": {
-          "label": "Clé publique"
-        },
-        "rune": {
-          "label": "Rune"
-        },
-        "port": {
-          "label": "Port"
-        },
-        "proxy": {
-          "label": "Proxy websocket"
-        },
-        "privKey": {
-          "label": "Clé privée locale (générée automatiquement)"
-        },
-        "config": {
-          "label": "Données de configuration",
-          "placeholder": "config=https://votre-btc-payer.org/lnd-config/212121/lnd.config"
-        },
-        "errors": {
-          "connection_failed": "La connexion a échoué. Votre nœud Core Lightning est-il en ligne et utilise-t-il le plugin commando ?"
         }
       },
       "umbrel_lightning_node": {
@@ -280,7 +257,8 @@
           "description": "Hébergement de nœuds Lightning de qualité professionnelle. Accédez à Lightning Network plus rapidement que jamais. Contrôle total sans aucune gestion. <0>Pour en savoir plus, consultez notre guide de configuration</0>"
         },
         "url": {
-          "label": "URL du nœud"
+          "label": "URL du nœud",
+          "placeholder": ""
         },
         "errors": {
           "connection_failed": "La connexion a échoué. Vos identifiants sont-ils corrects ?"
@@ -307,10 +285,8 @@
           },
           "errors": {
             "connection_failed": "La connexion a échoué. Votre portefeuille NWC en ligne et la connexion à l'application sont-ils activés ?"
-          },
-          "instructions": "Collez une chaîne de connexion NWC (NWC connection string) depuis <0>Alby Nostr Wallet Connect</0>, <1>Umbrel Nostr Wallet Connect</1> ou <2>Mutiny Wallet</2>"
-        },
-        "title": "Nostr Wallet Connect"
+          }
+        }
       },
       "lawallet": {
         "page": {
@@ -324,7 +300,9 @@
             "message": "Vous n'avez pas d'adresse Lightning dans l'identité \"{{domain}}\"",
             "verify": "Vérifiez les éléments suivants",
             "match": "Identity Endpoint doit correspondre à votre domaine Lightning",
-            "walias": "Votre adresse Lightning est-elle USERNAME<0>@{{domain}}</0> ou utilise-t-elle un autre domaine?"
+            "walias": "Votre adresse Lightning est-elle USERNAME<0>@{{domain}}</0> ou utilise-t-elle un autre domaine?",
+            "endpoint": "Le point final correct est construit à partir de https://app.<0>{{domain}}</0>",
+            "http": "Le fournisseur d'identité utilise le même protocole (<0>HTTP</0> ou <0>HTTPS</0>)"
           }
         },
         "api_endpoint": "API Endpoint",
@@ -422,8 +400,7 @@
         "subtitle": "Notifications liées au paiement et à l'authentification."
       },
       "website_enhancements": {
-        "title": "Améliorations du site Web",
-        "subtitle": "Améliorations des pourboires pour Twitter, YouTube, etc."
+        "title": "Améliorations du site Web"
       },
       "camera_access": {
         "title": "accès à la caméra",

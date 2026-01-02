@@ -114,6 +114,7 @@ var options = {
     contentScriptNostr: "./src/extension/content-script/nostr.js",
     contentScriptWebBTC: "./src/extension/content-script/webbtc.js",
     contentScriptOnStart: "./src/extension/content-script/onstart.ts",
+    contentScriptContextMenu: "./src/extension/content-script/context-menu.ts",
     inpageScript: "./src/extension/inpage-script/index.js",
     popup: "./src/app/router/Popup/index.tsx",
     prompt: "./src/app/router/Prompt/index.tsx",

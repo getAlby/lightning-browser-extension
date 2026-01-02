@@ -22,9 +22,6 @@
         "contact_support": "サポートが必要な場合は support@getalby.com までご連絡ください。"
       },
       "pin_extension": {
-        "title": "Alby拡張機能を固定",
-        "description": "もうすぐです。Albyを便利に使うには、拡張機能をブラウザのツールバーに忘れずに固定してください：",
-        "explanation": "1. ブラウザの右上にある<0/>をクリックします。<1/>2. Albyを見つけてクリックし、ツールバーに固定します。<1/>3. 以上です。Albyにアクセスするには、<2/>アイコンをクリックします。",
         "next_btn": "Albyを始めよう！{{icon}}"
       }
     },
@@ -194,33 +191,7 @@
       },
       "commando": {
         "page": {
-          "title": "Core Lightningノードに接続",
           "instructions": "Core Lightningのバージョンが0.12.0以降であること、commandoプラグインが動作していること、ノードがライトニング・ネットワーク経由でアクセス可能であることを確認してください。'lightning-cli commando-rune' を実行してルーンを作成します。"
-        },
-        "host": {
-          "label": "ホスト"
-        },
-        "config": {
-          "label": "コンフィグデータ",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
-        },
-        "errors": {
-          "connection_failed": "接続に失敗しました。Core Lightningノードがオンラインであり、commandoプラグインを使用していますか？"
-        },
-        "pubkey": {
-          "label": "公開鍵"
-        },
-        "port": {
-          "label": "ポート"
-        },
-        "proxy": {
-          "label": "WebSocketプロキシ"
-        },
-        "rune": {
-          "label": "ルーン"
-        },
-        "privKey": {
-          "label": "ローカルの秘密鍵（自動生成）"
         }
       }
     },

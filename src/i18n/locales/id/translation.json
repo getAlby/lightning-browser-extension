@@ -23,10 +23,7 @@
         "connection_taking_long": "Proses koneksi memakan waktu lama... Apakah kamu memasukan informasi secara benar? Apakah node kamu dapat terhubung?"
       },
       "pin_extension": {
-        "title": "Pin ekstensi Alby kamu",
-        "description": "Kamu hampir samapi. Untuk menggunakan Alby dengan mudah, kamu dapat pin ekstensi ini pada toolbar browser:",
-        "next_btn": "Mulai buzzin' {{icon}} dengan Alby",
-        "explanation": "1. Klik pada <0/> di ujung kanan atas browser<1/>2. Cari Alby dan klik untuk mem-pin-nya pada toolbar<1/>3. Selesai. Untuk mengakses Alby, tinggal klik pada<2/> ikon"
+        "next_btn": "Mulai buzzin' {{icon}} dengan Alby"
       }
     },
     "choose_path": {
@@ -192,33 +189,7 @@
       },
       "commando": {
         "page": {
-          "title": "Sambungkan dengan node Core Lightning",
           "instructions": "Pastikan versi Core Lightning kamu sudah 0.12.0 atau terbaru, plugin commando berjalan dan node kamu dapat diakses melalui lighting network. Buat rune dengan menjalankan 'lightning-cli commando-rune'."
-        },
-        "rune": {
-          "label": "Rune"
-        },
-        "port": {
-          "label": "Port"
-        },
-        "proxy": {
-          "label": "Proxy websocket"
-        },
-        "privKey": {
-          "label": "Local private key (terbuat secara otomatis)"
-        },
-        "config": {
-          "label": "Config data",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
-        },
-        "pubkey": {
-          "label": "Public key"
-        },
-        "host": {
-          "label": "Host"
-        },
-        "errors": {
-          "connection_failed": "Koneksi gagal. Apakah node Core Lightning sudah online dan menggunakan plugin commando?"
         }
       },
       "umbrel_lightning_node": {
@@ -363,8 +334,7 @@
         "subtitle": "Notifikasi terkait pembayaran dan autentikasi."
       },
       "website_enhancements": {
-        "title": "Tambahan fitur website",
-        "subtitle": "Penambahan fitur tip untuk Twitter, YouTube, dll."
+        "title": "Tambahan fitur website"
       },
       "camera_access": {
         "title": "Akses kamera",

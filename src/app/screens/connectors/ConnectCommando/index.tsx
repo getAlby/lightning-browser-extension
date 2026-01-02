@@ -1,38 +1,23 @@
 import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
 import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
-import * as secp256k1 from "@noble/secp256k1";
-import {
-  PopiconsChevronBottomLine,
-  PopiconsChevronTopLine,
-} from "@popicons/react";
 import { useState } from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import Hyperlink from "~/app/components/Hyperlink";
-import PasswordViewAdornment from "~/app/components/PasswordViewAdornment";
 import toast from "~/app/components/Toast";
 import msg from "~/common/lib/msg";
+
 import logo from "/static/assets/icons/core_ln.svg";
 
 export default function ConnectCommando() {
   const navigate = useNavigate();
   const { t } = useTranslation("translation", {
-    keyPrefix: `choose_connector.commando`,
+    keyPrefix: "choose_connector.commando",
   });
-  const { t: tCommon } = useTranslation("common");
   const [formData, setFormData] = useState({
-    host: "",
-    pubkey: "",
-    rune: "",
-    port: 9735,
-    privateKey: generateCommandoPrivateKey(),
-    proxy: "wss://lnproxy.getalby.com",
+    nostrWalletConnectUrl: "",
   });
   const [loading, setLoading] = useState(false);
-  const [showAdvanced, setShowAdvanced] = useState(false);
-  const [commandoPrivateKeyVisible, setCommandoPrivateKeyVisible] =
-    useState(false);
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setFormData({
@@ -42,32 +27,17 @@ export default function ConnectCommando() {
   }
 
   function getConnectorType() {
-    return "commando";
-  }
-
-  function generateCommandoPrivateKey(): string {
-    const privKey = secp256k1.utils.randomPrivateKey();
-    return secp256k1.etc.bytesToHex(privKey);
+    return "nwc";
   }
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setLoading(true);
-    const host = formData.host;
-    const pubkey = formData.pubkey;
-    const rune = formData.rune;
-    const port = formData.port;
-    const wsProxy = formData.proxy;
-    const privateKey = formData.privateKey;
+    const { nostrWalletConnectUrl } = formData;
     const account = {
       name: "commando",
       config: {
-        host,
-        pubkey,
-        rune,
-        port,
-        wsProxy,
-        privateKey,
+        nostrWalletConnectUrl,
       },
       connector: getConnectorType(),
     };
@@ -90,7 +60,7 @@ export default function ConnectCommando() {
       }
     } catch (e) {
       console.error(e);
-      let message = t("errors.connection_failed");
+      let message = t("page.errors.connection_failed");
       if (e instanceof Error) {
         message += `\n\n${e.message}`;
       }
@@ -101,105 +71,41 @@ export default function ConnectCommando() {
 
   return (
     <ConnectorForm
-      title={t("page.title")}
-      description={t("page.instructions")}
+      title={
+        <h1 className="text-2xl font-bold dark:text-white">
+          <Trans i18nKey={"title"} t={t} />
+        </h1>
+      }
+      description={
+        <Trans
+          i18nKey={"page.instructions"}
+          t={t}
+          components={[
+            // eslint-disable-next-line react/jsx-key
+            <a
+              target="_blank"
+              rel="noreferrer"
+              className="underline"
+              href="https://github.com/daywalker90/cln-nip47#installation"
+            ></a>,
+          ]}
+        />
+      }
       logo={logo}
       submitLoading={loading}
-      submitDisabled={
-        formData.host === "" && formData.pubkey === "" && formData.rune === ""
-      }
+      submitDisabled={formData.nostrWalletConnectUrl === ""}
       onSubmit={handleSubmit}
     >
-      <div className="mb-6">
+      <div className="mt-4 mb-6">
         <TextField
-          id="host"
-          label={t("host.label")}
+          id="nostrWalletConnectUrl"
+          label={t("page.url.label")}
+          placeholder={t("page.url.placeholder")}
           required
-          placeholder="0.0.0.0"
-          title="host"
-          value={formData.host}
           onChange={handleChange}
           autoFocus={true}
         />
       </div>
-      <div className="mb-6">
-        <TextField
-          id="pubkey"
-          label={t("pubkey.label")}
-          required
-          placeholder="02...."
-          title="pubkey"
-          value={formData.pubkey}
-          onChange={handleChange}
-        />
-      </div>
-      <div className="mb-6">
-        <TextField
-          id="rune"
-          label={t("rune.label")}
-          required
-          placeholder=""
-          title="rune"
-          value={formData.rune}
-          onChange={handleChange}
-        />
-      </div>
-      <div className="mb-6">
-        <TextField
-          id="port"
-          label={t("port.label")}
-          type="number"
-          required
-          title="port"
-          value={formData.port}
-          onChange={handleChange}
-        />
-      </div>
-
-      <div className="text-center">
-        <Hyperlink onClick={() => setShowAdvanced(!showAdvanced)}>
-          {showAdvanced ? (
-            <>
-              {tCommon("hide_advanced")}
-              <PopiconsChevronTopLine className="h-4 w-4 inline-flex" />
-            </>
-          ) : (
-            <>
-              {tCommon("advanced")}
-              <PopiconsChevronBottomLine className="h-4 w-4 inline-flex" />
-            </>
-          )}
-        </Hyperlink>
-      </div>
-      {showAdvanced && (
-        <div className="mt-6">
-          <div className="mb-6">
-            <TextField
-              id="proxy"
-              label={t("proxy.label")}
-              placeholder="proxy"
-              required
-              title="proxy"
-              value={formData.proxy}
-              onChange={handleChange}
-            />
-          </div>
-          <TextField
-            id="commandoPrivateKey"
-            label={t("privKey.label")}
-            type={commandoPrivateKeyVisible ? "text" : "password"}
-            autoComplete="new-password"
-            value={formData.privateKey}
-            endAdornment={
-              <PasswordViewAdornment
-                onChange={(passwordView) => {
-                  setCommandoPrivateKeyVisible(passwordView);
-                }}
-              />
-            }
-          />
-        </div>
-      )}
     </ConnectorForm>
   );
 }

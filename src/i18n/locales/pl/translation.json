@@ -22,9 +22,6 @@
         "contact_support": "Jeśli potrzebujesz pomocy, skontaktuj się z support@getalby.com"
       },
       "pin_extension": {
-        "explanation": "1. Kliknij <0/> w prawym górnym rogu przeglądarki <1/>2. Znajdź Alby i kliknij, aby przypiąć je do paska narzędzi<1/>3. Gotowe. Aby uzyskać dostęp do Alby, kliknij ikonę <2/>",
-        "title": "Przypnij swoje rozszerzenie Alby",
-        "description": "Prawie gotowe. Aby wygodnie korzystać z Alby, pamiętaj o przypięciu rozszerzenia do paska narzędzi przeglądarki:",
         "next_btn": "Zzzzacznij przygodę {{icon}} z Alby!"
       }
     },
@@ -202,33 +199,7 @@
       },
       "commando": {
         "page": {
-          "title": "Podłącz do Twojego węzła Core Lightning",
           "instructions": "Upewnij się, że masz Core Lightning w wersji 0.12.0 lub nowszej, że plugin commando działa, a Twój węzeł jest dostępny w sieci lightning. Stwórz runę komendą 'lightning-cli commando-rune'."
-        },
-        "host": {
-          "label": "Serwer"
-        },
-        "pubkey": {
-          "label": "Klucz publiczny"
-        },
-        "rune": {
-          "label": "Runa"
-        },
-        "port": {
-          "label": "Port"
-        },
-        "proxy": {
-          "label": "Proxy websocket"
-        },
-        "privKey": {
-          "label": "Lokalny klucz prywatny (generowany automatycznie)"
-        },
-        "config": {
-          "label": "Konfiguracja",
-          "placeholder": "config=https://twoj-btc-pay.org/lnd-config/212121/lnd.config"
-        },
-        "errors": {
-          "connection_failed": "Połączenie nieudane. Czy Twój węzeł Core Lightning jest online i korzysta z wtyczki commando?"
         }
       },
       "umbrel_lightning_node": {
@@ -363,8 +334,7 @@
         "subtitle": "Powiadomienia związane z płatnościami i uwierzytelnianiem."
       },
       "website_enhancements": {
-        "title": "Rozszerzenia na stronach",
-        "subtitle": "Rozszerzenia napiwków na Twitterze, YouTube, etc."
+        "title": "Rozszerzenia na stronach"
       },
       "camera_access": {
         "title": "Dostęp do kamery",

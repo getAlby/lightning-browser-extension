@@ -185,33 +185,7 @@
       },
       "commando": {
         "page": {
-          "title": "Opret forbindelse til din Core Lightning-node",
           "instructions": "Sørg for at have Core Lightning-versionen 0.12.0 eller nyere, at kommandomodulet kører og at din node kan tilgås på lightning-netværket. Opret en rune ved at køre 'lightning-cli commando-rune'."
-        },
-        "host": {
-          "label": "Vært"
-        },
-        "pubkey": {
-          "label": "Offentlig nøgle"
-        },
-        "rune": {
-          "label": "Rune"
-        },
-        "port": {
-          "label": "Port"
-        },
-        "proxy": {
-          "label": "Websocket-proxy"
-        },
-        "privKey": {
-          "label": "Lokal privat nøgle (autogenereret)"
-        },
-        "config": {
-          "label": "Konfigurationsdata",
-          "placeholder": "config=https://din-btc-pay.org/lnd-config/212121/lnd.config"
-        },
-        "errors": {
-          "connection_failed": "Forbindelse kunne ikke oprettes. Er din Core Lightning-node online, og er kommandomodulet i brug?"
         }
       }
     },
@@ -291,8 +265,7 @@
         "subtitle": "Meddelelser om betaling og godkendelser."
       },
       "website_enhancements": {
-        "title": "Ekstra hjemmesidefunktioner",
-        "subtitle": "Donationer på Twitter, YouTube, etc."
+        "title": "Ekstra hjemmesidefunktioner"
       },
       "camera_access": {
         "title": "Adgang til kamera",

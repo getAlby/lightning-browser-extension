@@ -31,7 +31,6 @@ export default function TestConnection() {
   }>();
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  const { getFormattedSats } = useSettings();
 
   const navigate = useNavigate();
   const { t } = useTranslation("translation", {
@@ -131,11 +130,6 @@ export default function TestConnection() {
                           <Trans
                             i18nKey={"setup_wallet"}
                             t={tCommon}
-                            values={{
-                              max_account_balance: getFormattedSats(
-                                account?.limits?.max_account_balance || 0
-                              ),
-                            }}
                             components={[
                               // eslint-disable-next-line react/jsx-key
                               <Hyperlink
@@ -148,7 +142,7 @@ export default function TestConnection() {
                               // eslint-disable-next-line react/jsx-key
                               <Hyperlink
                                 className="underline"
-                                href="https://guides.getalby.com/user-guide/alby-account-and-browser-extension/alby-account/faqs-alby-account/what-are-fee-credits-in-my-alby-account"
+                                href="https://guides.getalby.com/user-guide/alby-account/faq/what-are-fee-credits-in-my-alby-account"
                                 target="_blank"
                                 rel="noopener nofollow"
                               />,

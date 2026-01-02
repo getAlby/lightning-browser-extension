@@ -25,9 +25,6 @@
         "contact_support": "Если вам нужна помощь, пожалуйста, свяжитесь с support@getalby.com"
       },
       "pin_extension": {
-        "title": "Закрепите расширение",
-        "description": "Вы почти у цели. Для удобства не забудьте закрепить Alby на панели инструментов браузера:",
-        "explanation": "1. Нажмите на <0/> в правом верхнем углу браузера<1/>2. Найдите Alby и нажмите \"закрепить\"<1/>3. Это всё. Для работы с Alby просто нажмите на иконку <2/>",
         "next_btn": "Начать общаться {{icon}} с Alby"
       }
     },
@@ -241,33 +238,7 @@
       },
       "commando": {
         "page": {
-          "title": "Подключитесь к узлу Core Lightning",
           "instructions": "Убедитесь, что у вас есть Core Lightning версии 0.12.0 или новее, запущен плагин commando и ваш узел доступен по сети Lightning. Создайте руну, выполнив команду 'lightning-cli commando-rune'."
-        },
-        "host": {
-          "label": "Хост"
-        },
-        "pubkey": {
-          "label": "Публичный ключ"
-        },
-        "rune": {
-          "label": "Руна"
-        },
-        "port": {
-          "label": "Порт"
-        },
-        "proxy": {
-          "label": "Прокси Websocket"
-        },
-        "privKey": {
-          "label": "Локальный закрытый ключ (автогенерируемый)"
-        },
-        "config": {
-          "label": "Конфигурационные данные",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
-        },
-        "errors": {
-          "connection_failed": "Не удалось установить соединение. Ваш узел Core Lightning находится в сети и использует плагин commando?"
         }
       },
       "umbrel_lightning_node": {
@@ -329,7 +300,6 @@
       },
       "nwc": {
         "page": {
-          "instructions": "Вставьте строку подключения NWC из <0>Alby Nostr Wallet Connect</0>, <1>Umbrel Nostr Wallet Connect</1> или <2>Mutiny Wallet</2>",
           "url": {
             "label": "URL подключения кошелька Nostr",
             "placeholder": "nostr+walletconnect://69effe..."
@@ -337,8 +307,7 @@
           "errors": {
             "connection_failed": "Не удалось подключиться. Включено ли подключение к онлайн-кошельку NWC и приложению?"
           }
-        },
-        "title": "Подключение кошелька Nostr"
+        }
       },
       "nirvati": {
         "title": "Nirvati"
@@ -555,8 +524,7 @@
         "subtitle": "Уведомления, связанные с оплатой и аутентификацией."
       },
       "website_enhancements": {
-        "title": "Повышение веб-сайта",
-        "subtitle": "Улучшение чаевых для Twitter, YouTube и т. д."
+        "title": "Повышение веб-сайта"
       },
       "camera_access": {
         "title": "Доступ к камере",
@@ -1238,8 +1206,7 @@
       "title": "Кошелек для переключателей",
       "options": {
         "account": {
-          "go_to_web_wallet": "Управляйте своим веб-аккаунтом",
-          "add": "Добавить"
+          "go_to_web_wallet": "Управляйте своим веб-аккаунтом"
         }
       }
     },

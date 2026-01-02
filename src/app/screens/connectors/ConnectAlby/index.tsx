@@ -1,4 +1,4 @@
-import { GetAccountInformationResponse } from "@getalby/sdk/dist/types";
+import type { GetAccountInformationResponse } from "@getalby/sdk";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";

@@ -22,9 +22,6 @@
         "contact_support": "如果你需要幫助，請聯繫 support@getalby.com"
       },
       "pin_extension": {
-        "title": "釘選你的Alby擴充套件",
-        "description": "就快完成了。以方便地使用 Alby，請記住把擴充套件固定到工具欄：",
-        "explanation": "1. 點擊瀏覽器右上角的 <0/><1/>2. 找到 Alby 並點擊將其固定到工具欄<1/>3. 就這樣。要訪問 Alby，只需點擊<2/>圖標",
         "next_btn": "與 Alby 一起開始嗡嗡作響{{icon}}"
       }
     },
@@ -191,33 +188,7 @@
       },
       "commando": {
         "page": {
-          "title": "連接到你的Core Lightning節點",
           "instructions": "確保你使用的是Core Lightning 0.12.0或更高版本，commando插件正在運行，並且你的節點可以通過閃電網路訪問。通過運行「lightning-cli commando-rune」來創建rune。"
-        },
-        "host": {
-          "label": "主機"
-        },
-        "pubkey": {
-          "label": "公鑰"
-        },
-        "rune": {
-          "label": "Rune"
-        },
-        "port": {
-          "label": "端口"
-        },
-        "proxy": {
-          "label": "Websocket 代理"
-        },
-        "privKey": {
-          "label": "本地私鑰（自動產生）"
-        },
-        "config": {
-          "label": "配置數據",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
-        },
-        "errors": {
-          "connection_failed": "連接失敗。你的Core Lightning節點是否在線並使用commando插件？"
         }
       },
       "umbrel_lightning_node": {
@@ -351,8 +322,7 @@
         "subtitle": "付款和認證相關通知。"
       },
       "website_enhancements": {
-        "title": "網站改進",
-        "subtitle": "為Twitter、YouTube等提供小費功能。"
+        "title": "網站改進"
       },
       "camera_access": {
         "title": "攝像頭訪問權",

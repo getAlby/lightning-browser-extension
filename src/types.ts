@@ -1,7 +1,7 @@
-import {
+import type {
   CreateSwapParams,
   GetAccountInformationResponse,
-} from "@getalby/sdk/dist/types";
+} from "@getalby/sdk";
 import { PaymentRequestObject } from "bolt11-signet";
 import { Runtime } from "webextension-polyfill";
 import { ACCOUNT_CURRENCIES, CURRENCIES } from "~/common/constants";
@@ -51,29 +51,11 @@ export interface AccountInfo {
   avatarUrl?: string;
   lightningAddress?: string;
   nodeRequired?: boolean;
-  sharedNode?: boolean;
-  usingFeeCredits?: boolean;
-  limits?: {
-    max_send_volume: number;
-    max_send_amount: number;
-    max_receive_volume: number;
-    max_receive_amount: number;
-    max_account_balance: number;
-    max_volume_period_in_days: number;
-  };
 }
 
 export type GetAccountInformationResponses = GetAccountInformationResponse & {
   node_required: boolean;
   using_fee_credits: boolean;
-  limits?: {
-    max_send_volume: number;
-    max_send_amount: number;
-    max_receive_volume: number;
-    max_receive_amount: number;
-    max_account_balance: number;
-    max_volume_period_in_days: number;
-  };
   node_type?: string;
   node_connection_error_count?: number;
   shared_node: boolean;
@@ -790,6 +772,7 @@ export type Transaction = {
   value?: string;
   publisherLink?: string; // either the invoice URL if on PublisherSingleView, or the internal link to Publisher
   state?: "settled" | "pending" | "failed";
+  metadata?: ConnectorTransaction["metadata"];
 };
 
 export interface DbPayment {

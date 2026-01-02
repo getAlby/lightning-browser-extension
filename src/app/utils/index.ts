@@ -1,4 +1,5 @@
-import { GetAccountInformationResponse } from "@getalby/sdk/dist/types";
+import type { GetAccountInformationResponse } from "@getalby/sdk";
+import { nip19 } from "nostr-tools";
 import { useSettings } from "~/app/context/SettingsContext";
 import api from "~/common/lib/api";
 import { BrowserType, Theme } from "~/types";
@@ -81,5 +82,13 @@ export function extractLightningTagData(url: string) {
     return data[1];
   } else {
     return url.replace(/^lightning:/i, "");
+  }
+}
+
+export function safeNpubEncode(hex: string): string | undefined {
+  try {
+    return nip19.npubEncode(hex);
+  } catch {
+    return undefined;
   }
 }

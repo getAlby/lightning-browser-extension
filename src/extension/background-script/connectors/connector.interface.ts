@@ -1,8 +1,9 @@
-import {
+import type {
   CreateSwapParams,
   CreateSwapResponse,
+  Nip47TransactionMetadata,
   SwapInfoResponse,
-} from "@getalby/sdk/dist/types";
+} from "@getalby/sdk";
 import { ACCOUNT_CURRENCIES } from "~/common/constants";
 import { OAuthToken } from "~/types";
 
@@ -37,6 +38,7 @@ export interface ConnectorTransaction {
   displayAmount?: [number, ACCOUNT_CURRENCIES];
   type: "received" | "sent";
   state?: "settled" | "pending" | "failed";
+  metadata?: Nip47TransactionMetadata;
 }
 
 export interface MakeInvoiceArgs {

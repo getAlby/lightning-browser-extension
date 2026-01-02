@@ -22,9 +22,6 @@
         "contact_support": "Om du behöver hjälp, kontakta support@getalby.com"
       },
       "pin_extension": {
-        "title": "Fäst din Alby extension",
-        "description": "Du är nästan där. För att använda Alby bekvämt, kom ihåg att fästa ditt tillägg till webbläsarens verktygsfält:",
-        "explanation": "1. Klicka på <0/> i det övre högra hörnet av din webbläsare<1/>2. Hitta Alby och klicka för att fästa den i verktygsfältet<1/>3. Det är allt. För att komma åt Alby klickar du bara på ikonen <2/>",
         "next_btn": "Börja surra {{icon}} med Alby"
       }
     },
@@ -160,34 +157,8 @@
         }
       },
       "commando": {
-        "port": {
-          "label": "Port"
-        },
-        "proxy": {
-          "label": "Websocket proxy"
-        },
-        "config": {
-          "label": "Config data",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
-        },
-        "errors": {
-          "connection_failed": "Anslutningen misslyckades. Är din Core Lightning-nod online och använder kommandoplugin?"
-        },
-        "privKey": {
-          "label": "Lokal privat nyckel (automatiskt genererad)"
-        },
         "page": {
-          "title": "Anslut till din Core Lightning node",
           "instructions": "Säkerställ att du har Core Lightning version 0.12.0 eller nyare, att kommando insticksprogrammet är aktivt samt att din node är nåbar över lightning-nätverket. Skapa en rune genom att köra 'lightning-cli commando-rune'."
-        },
-        "pubkey": {
-          "label": "Publik nyckel"
-        },
-        "rune": {
-          "label": "Rune"
-        },
-        "host": {
-          "label": "Hosta"
         }
       },
       "title": "Anslut Lightning Plånbok",
@@ -337,8 +308,7 @@
         "subtitle": "Betalnings- och autentiseringsrelaterade notiser."
       },
       "website_enhancements": {
-        "title": "Webbplatsförbättringar",
-        "subtitle": "Dricks för Twitter, YouTube, m.fl."
+        "title": "Webbplatsförbättringar"
       },
       "camera_access": {
         "title": "Åtkomst till kamera",

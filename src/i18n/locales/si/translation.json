@@ -25,10 +25,7 @@
         "connection_taking_long": "සම්බන්ධ වීමට උත්සාහ කිරීමට බලාපොරොත්තු වූවාට වඩා වැඩි කාලයක් ගතවේ... ඔබේ විස්තර නිවැරදිද? ඔබගේ නෝඩයට(node) ළඟා විය හැකිද?"
       },
       "pin_extension": {
-        "title": "ඔබේ ඇල්බි(Alby) දිගුව අමුණන්න",
-        "next_btn": "ඇල්බි(Alby) {{icon}} සමඟ කටයුතු කිරීම ආරම්භ කරන්න",
-        "explanation": "1. ඔබගේ බ්‍රවුසරයේ ඉහළ දකුණු කෙළවරේ ඇති <0/> මත ක්ලික් කරන්න<1/>2. ඇල්බි(Alby) සොයාගෙන එය මෙවලම් තීරුවට සම්බන්ධ කිරීමට ක්ලික් කරන්න<1/>3. හරි. ඇල්බි(Alby) වෙත ප්‍රවේශ වීමට <2/> නිරූපකය මත ක්ලික් කරන්න",
-        "description": "ඔබ බොහෝ දුරට එහි පැමිණ ඇත. ඇල්බි(Alby) පහසුවෙන් භාවිත කිරීමට, ඔබේ දිගුව බ්‍රවුසර මෙවලම් තීරුවට ඇලවීමට මතක තබා ගන්න:"
+        "next_btn": "ඇල්බි(Alby) {{icon}} සමඟ කටයුතු කිරීම ආරම්භ කරන්න"
       }
     },
     "choose_path": {
@@ -244,33 +241,7 @@
       },
       "commando": {
         "page": {
-          "instructions": "ඔබ සතුව Core Lightning අනුවාදය 0.12.0 හෝ නව අනුවාදයක් ඇති බවට වග බලා ගන්න,කමාන්ඩෝ(commando) ප්ලගිනය ක්‍රියාත්මක වන අතර ඔබගේ නෝඩය(node) ලයිට්නින්(lightning) ජාලය හරහා ප්‍රවේශ විය හැක. 'lightning-cli commando-rune' ධාවනය කිරීමෙන් රූනයක් සාදන්න.",
-          "title": "ඔබගේ Core Lightning නෝඩයට සම්බන්ධ කරන්න"
-        },
-        "host": {
-          "label": "සත්කාරක"
-        },
-        "pubkey": {
-          "label": "පොදු යතුර"
-        },
-        "rune": {
-          "label": "රූන්"
-        },
-        "proxy": {
-          "label": "වෙබ්සොකට් ප්රොක්සි"
-        },
-        "port": {
-          "label": "පොර්ට්"
-        },
-        "privKey": {
-          "label": "දේශීය පුද්ගලික යතුර (ස්වයංක්‍රීය ජනනය)"
-        },
-        "config": {
-          "label": "Config දත්ත",
-          "placeholder": "config=https://ඔබගේ-btc-pay.org/lnd-config/212121/lnd.config"
-        },
-        "errors": {
-          "connection_failed": "සම්බන්ධතාවය අසාර්ථක විය. ඔබගේ Core Lightning නෝඩය(node) ඔන්ලයින් සහ කමාන්ඩෝ ප්ලගිනය භාවිතා කරන්නේද?"
+          "instructions": "ඔබ සතුව Core Lightning අනුවාදය 0.12.0 හෝ නව අනුවාදයක් ඇති බවට වග බලා ගන්න,කමාන්ඩෝ(commando) ප්ලගිනය ක්‍රියාත්මක වන අතර ඔබගේ නෝඩය(node) ලයිට්නින්(lightning) ජාලය හරහා ප්‍රවේශ විය හැක. 'lightning-cli commando-rune' ධාවනය කිරීමෙන් රූනයක් සාදන්න."
         }
       },
       "nwc": {
@@ -279,12 +250,10 @@
             "label": "Nostr Wallet Connect URL",
             "placeholder": "nostr+walletconnect://69effe..."
           },
-          "instructions": "<0>ඇල්බි(Alby) Nostr Wallet Connect</0>, <1>අම්බ්‍රෙල්(Umbrel) Nostr Wallet Connect</1>, හෝ <2>මියුටිනි(Mutiny) පසුම්බිය</2> වෙතින් NWC සම්බන්ධතා තන්තුවක් අලවන්න",
           "errors": {
             "connection_failed": "සම්බන්ධතාවය අසාර්ථක විය. ඔබගේ NWC පසුම්බිය මාර්ගගතව සහ යෙදුම් සම්බන්ධතාවය සබල කර තිබේද?"
           }
-        },
-        "title": "Nostr Wallet Connect"
+        }
       },
       "voltage": {
         "page": {
@@ -530,7 +499,6 @@
       },
       "title": "දිගු(Extension) සැකසුම්",
       "website_enhancements": {
-        "subtitle": "Twitter, YouTube, ආදිය සඳහා ඉඟි වැඩි දියුණු කිරීම්.",
         "title": "වෙබ් අඩවි වැඩිදියුණු කිරීම්"
       },
       "personal_data": {
@@ -1240,7 +1208,6 @@
       "screen_reader": "පතන(dropdown) ටොගල්(toggle) කරන්න",
       "options": {
         "account": {
-          "add": "එකතු කරන්න",
           "go_to_web_wallet": "ඔබගේ වෙබ් ගිණුම කළමනාකරණය කරන්න"
         }
       }

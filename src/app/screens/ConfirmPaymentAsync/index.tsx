@@ -32,19 +32,20 @@ function ConfirmPaymentAsync() {
   const navState = useNavigationState();
   const paymentRequest = navState.args?.paymentRequest as string;
   const invoice = lightningPayReq.decode(paymentRequest);
-
+  const amountSat =
+    invoice.satoshis || Number(invoice.millisatoshis) / 1000 || 0;
   const navigate = useNavigate();
 
   const [fiatAmount, setFiatAmount] = useState("");
 
   useEffect(() => {
     (async () => {
-      if (showFiat && invoice.satoshis) {
-        const res = await getFormattedFiat(invoice.satoshis);
+      if (showFiat && amountSat !== 0) {
+        const res = await getFormattedFiat(amountSat);
         setFiatAmount(res);
       }
     })();
-  }, [invoice.satoshis, showFiat, getFormattedFiat]);
+  }, [amountSat, showFiat, getFormattedFiat]);
 
   const [loading, setLoading] = useState(false);
 
@@ -99,7 +100,7 @@ function ConfirmPaymentAsync() {
             <div className="my-4">
               <div className="mb-4 p-4 shadow bg-white dark:bg-surface-02dp rounded-lg">
                 <PaymentSummary
-                  amount={invoice.satoshis || "0"} // TODO: allow entering amount or do not allow zero-amount invoices
+                  amount={amountSat} // TODO: allow entering amount or do not allow zero-amount invoices
                   fiatAmount={fiatAmount}
                   description={invoice.tagsObject.description}
                 />
@@ -113,7 +114,7 @@ function ConfirmPaymentAsync() {
                   components={[
                     // eslint-disable-next-line react/jsx-key
                     <Hyperlink
-                      href="https://guides.getalby.com/user-guide/v/alby-account-and-browser-extension/alby-browser-extension/features/hold-payments"
+                      href="https://guides.getalby.com/user-guide/browser-extension/features/hold-payments"
                       target="_blank"
                       rel="noopener nofollow"
                       className="dark:text-white underline font-medium"

@@ -1,8 +1,8 @@
-import {
+import type {
   CreateSwapParams,
   CreateSwapResponse,
   SwapInfoResponse,
-} from "@getalby/sdk/dist/types";
+} from "@getalby/sdk";
 import { ACCOUNT_CURRENCIES } from "~/common/constants";
 import {
   ConnectPeerArgs,
@@ -55,14 +55,6 @@ export interface AccountInfoRes {
     node_required?: boolean;
     shared_node?: boolean;
     using_fee_credits?: boolean;
-    limits?: {
-      max_send_volume: number;
-      max_send_amount: number;
-      max_receive_volume: number;
-      max_receive_amount: number;
-      max_account_balance: number;
-      max_volume_period_in_days: number;
-    };
   };
   name: string;
   avatarUrl?: string;
@@ -132,9 +124,6 @@ export const swrGetAccountInfo = async (
           avatarUrl,
           lightningAddress: response.info.lightning_address,
           nodeRequired: response.info.node_required,
-          sharedNode: response.info.shared_node,
-          usingFeeCredits: response.info.using_fee_credits,
-          limits: response.info.limits,
         };
         storeAccounts({
           ...accountsCache,

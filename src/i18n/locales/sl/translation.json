@@ -99,36 +99,6 @@
           "connection_failed": "Neuspešna povezava. Je BTCPay URL povezava pravilna in dostopna?"
         }
       },
-      "commando": {
-        "page": {
-          "title": "Poveži z Core Lightning vozliščem"
-        },
-        "host": {
-          "label": "Strežnik"
-        },
-        "pubkey": {
-          "label": "Javni ključ"
-        },
-        "rune": {
-          "label": "Rune"
-        },
-        "port": {
-          "label": "Vrata"
-        },
-        "proxy": {
-          "label": "Websocket proxy"
-        },
-        "config": {
-          "label": "Konfiguracijski podatki",
-          "placeholder": "config=https://your-btc-pay.org/lnd-config/212121/lnd.config"
-        },
-        "privKey": {
-          "label": "Lokalni zasebni ključ (samodejno generiran)"
-        },
-        "errors": {
-          "connection_failed": "Neuspešna povezava. Je tvoje Core Lightning vozlišče povezano in uporablja commando vtičnik?"
-        }
-      },
       "lnc": {
         "title": "Terminal Lightning (LNC)",
         "pairing_phrase": {
@@ -224,9 +194,6 @@
         "ready": "Super, pripravljeni ste na začetek!"
       },
       "pin_extension": {
-        "title": "Pripni Alby vtičnik",
-        "description": "Si skoraj na koncu. Za priročno uporabo Alby, pripni razširitev v orodno vrstico:",
-        "explanation": "1. Klik na <0/> v zgornjem desnem kotu brskalnika<1/>2. Najdi Alby in klikni za pripenjanje v orodno vrstico<1/>3. To je to. Za dostop do Alby klikni na <2/> ikona",
         "next_btn": "Prični brenčati {{icon}} z Alby"
       }
     },
@@ -413,7 +380,6 @@
         "subtitle": "Uporabi Alby v temnem ali svetlem načinu"
       },
       "website_enhancements": {
-        "subtitle": "Izboljšave napitnin za Twitter, YouTube itd.",
         "title": "Izboljšave spletne strani"
       }
     },

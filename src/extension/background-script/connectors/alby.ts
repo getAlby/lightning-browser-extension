@@ -1,12 +1,12 @@
-import { auth, Client } from "@getalby/sdk";
-import {
+import type {
   CreateSwapParams,
   CreateSwapResponse,
   Invoice,
   RequestOptions,
   SwapInfoResponse,
   Token,
-} from "@getalby/sdk/dist/types";
+} from "@getalby/sdk";
+import { Client, OAuth2User } from "@getalby/sdk";
 import browser from "webextension-polyfill";
 import { decryptData, encryptData } from "~/common/lib/crypto";
 import { Account, GetAccountInformationResponses, OAuthToken } from "~/types";
@@ -41,7 +41,7 @@ export default class Alby implements Connector {
   private account: Account;
   private config: Config;
   private _client: Client | undefined;
-  private _authUser: auth.OAuth2User | undefined;
+  private _authUser: OAuth2User | undefined;
   private _cache = new Map<string, object>();
 
   constructor(account: Account, config: Config) {
@@ -270,7 +270,7 @@ export default class Alby implements Connector {
     return result;
   }
 
-  private async authorize(): Promise<auth.OAuth2User> {
+  private async authorize(): Promise<OAuth2User> {
     try {
       const clientId = process.env.ALBY_OAUTH_CLIENT_ID;
       const clientSecret = process.env.ALBY_OAUTH_CLIENT_SECRET;
@@ -280,7 +280,7 @@ export default class Alby implements Connector {
 
       const redirectURL = "https://getalby.com/extension/connect";
 
-      const authClient = new auth.OAuth2User({
+      const authClient = new OAuth2User({
         request_options: this._getRequestOptions(),
         client_id: clientId,
         client_secret: clientSecret,
@@ -330,7 +330,7 @@ export default class Alby implements Connector {
 
       const oAuthTab = await browser.tabs.create({ url: authUrl });
 
-      return new Promise<auth.OAuth2User>((resolve, reject) => {
+      return new Promise<OAuth2User>((resolve, reject) => {
         const handleTabUpdated = (
           tabId: number,
           changeInfo: browser.Tabs.OnUpdatedChangeInfoType,
@@ -460,7 +460,7 @@ export default class Alby implements Connector {
 
       return details;
     } catch (error) {
-      console.error("Error fetching limits:", error);
+      console.error("Error fetching user details:", error);
       throw error;
     }
   }

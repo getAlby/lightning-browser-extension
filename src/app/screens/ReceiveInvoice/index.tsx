@@ -17,7 +17,7 @@ import SkeletonLoader from "~/app/components/SkeletonLoader";
 import toast from "~/app/components/Toast";
 import { useAccount } from "~/app/context/AccountContext";
 import { useSettings } from "~/app/context/SettingsContext";
-import { isAlbyOAuthAccount } from "~/app/utils";
+import { isAlbyOAuthAccount, useTheme } from "~/app/utils";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import { poll } from "~/common/utils/helpers";
@@ -59,6 +59,8 @@ function ReceiveInvoice() {
       mounted.current = false;
     };
   }, []);
+
+  const theme = useTheme();
 
   const [fiatAmount, setFiatAmount] = useState("");
 
@@ -154,7 +156,7 @@ function ReceiveInvoice() {
                       {!auth.accountLoading && auth.account ? (
                         <Avatar
                           size={64}
-                          className="border-[6px] border-white rounded-full absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 bg-white"
+                          className="border-[6px] border-white rounded-full absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 z-1 bg-white"
                           url={auth.account.avatarUrl}
                           name={auth.account.id}
                         />
@@ -163,15 +165,19 @@ function ReceiveInvoice() {
                           <SkeletonLoader
                             circle
                             opaque={false}
-                            className="w-[64px] h-[64px] border-[6px] border-white rounded-full absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 opacity-100"
+                            className="w-[64px] h-[64px] border-[6px] border-white rounded-full absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 z-1 opacity-100"
                           />
                         )
                       )}
                     </>
                   ) : (
                     <img
-                      className="w-[64px] h-[64px] absolute z-10"
-                      src="assets/icons/alby_icon_qr.svg"
+                      className="w-[64px] h-[64px] absolute z-1"
+                      src={
+                        theme === "dark"
+                          ? "assets/icons/alby_logo_qr_dark.svg"
+                          : "assets/icons/alby_logo_qr_light.svg"
+                      }
                       alt="Alby logo"
                     />
                   )}
