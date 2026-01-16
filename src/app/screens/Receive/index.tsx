@@ -15,7 +15,6 @@ import QRCode from "~/app/components/QRCode";
 import SkeletonLoader from "~/app/components/SkeletonLoader";
 import toast from "~/app/components/Toast";
 import { useAccount } from "~/app/context/AccountContext";
-import { isAlbyOAuthAccount } from "~/app/utils";
 import api from "~/common/lib/api";
 import { IconLinkCard } from "../../components/IconLinkCard/IconLinkCard";
 
@@ -28,7 +27,6 @@ function Receive() {
   const [loadingLightningAddress, setLoadingLightningAddress] = useState(true);
 
   const [lightningAddress, setLightningAddress] = useState("");
-  const isAlbyOAuthUser = isAlbyOAuthAccount(auth.account?.connectorType);
 
   useEffect(() => {
     (async () => {
@@ -60,7 +58,7 @@ function Receive() {
       <div className="pt-4">
         <Container justifyBetween maxWidth="sm">
           <div className="flex flex-col gap-2 md:gap-3">
-            {isAlbyOAuthUser && (
+            {lightningAddress && (
               <div className="bg-white dark:bg-surface-01dp border-gray-200 dark:border-neutral-700 rounded border p-4 flex flex-col justify-center items-center gap-1 text-gray-800 dark:text-neutral-200">
                 <>
                   <div className="relative flex flex-grid">
