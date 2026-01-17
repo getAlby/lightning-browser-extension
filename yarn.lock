@@ -10091,10 +10091,10 @@ web-encoding@^1.1.5:
   optionalDependencies:
     "@zxing/text-encoding" "0.9.0"
 
-webextension-polyfill@^0.10.0:
-  version "0.10.0"
-  resolved "https://registry.npmjs.org/webextension-polyfill/-/webextension-polyfill-0.10.0.tgz"
-  integrity sha512-c5s35LgVa5tFaHhrZDnr3FpQpjj1BB+RXhLTYUxGqBVN460HkbM8TBtEqdXWbpTKfzwCcjAZVF7zXCYSKtcp9g==
+webextension-polyfill@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/webextension-polyfill/-/webextension-polyfill-0.12.0.tgz#f62c57d2cd42524e9fbdcee494c034cae34a3d69"
+  integrity sha512-97TBmpoWJEE+3nFBQ4VocyCdLKfw54rFaJ6EVQYLBCXqCIpLSZkwGgASpv4oPt9gdKCJ80RJlcmNzNn008Ag6Q==
 
 webidl-conversions@^3.0.0:
   version "3.0.1"
