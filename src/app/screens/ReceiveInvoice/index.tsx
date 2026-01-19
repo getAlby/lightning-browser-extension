@@ -79,7 +79,6 @@ function ReceiveInvoice() {
   ) {
     setFormData({
       ...formData,
-      ...formData,
       [event.target.name]:
         event.target.type === "checkbox"
           ? (event.target as HTMLInputElement).checked
