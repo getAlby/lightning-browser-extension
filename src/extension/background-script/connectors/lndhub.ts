@@ -370,7 +370,7 @@ export default class LndHub implements Connector {
       payment_request: string;
       r_hash: { type: string; data: ArrayBuffer } | string;
     }>("POST", "/addinvoice", {
-      amt: args.amount,
+      amt: args.amount.toString(),
       memo: args.memo,
     });
     if (typeof data.r_hash === "object" && data.r_hash.type === "Buffer") {
