@@ -29,6 +29,7 @@ const sendPaymentOrPrompt = async (message: Message, sender: Sender) => {
       if (lnurlDetails.tag === "payRequest") {
         return lnurlPayWithPrompt(message, lnurlDetails);
       }
+      return { error: `Unsupported LNURL type: ${lnurlDetails.tag}` };
     } catch (e) {
       console.error(e);
       // Fallback to regular flow or return error?
@@ -37,17 +38,15 @@ const sendPaymentOrPrompt = async (message: Message, sender: Sender) => {
       if (e instanceof Error) {
         return { error: e.message };
       }
+      return { error: "Failed to resolve Lightning Address" };
     }
-    return { error: "Failed to resolve Lightning Address" };
   }
 
   let paymentRequestDetails;
   try {
     paymentRequestDetails = lightningPayReq.decode(paymentRequest);
   } catch (e) {
-    if (e instanceof Error) {
-      return { error: e.message };
-    }
+    return { error: e instanceof Error ? e.message : String(e) };
   }
 
   if (
