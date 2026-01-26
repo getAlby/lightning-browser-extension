@@ -1,10 +1,13 @@
 import lightningPayReq from "bolt11-signet";
+import lnurlLib from "~/common/lib/lnurl";
 import utils from "~/common/lib/utils";
 import { getHostFromSender } from "~/common/utils/helpers";
+import { isLNURLDetailsError } from "~/common/utils/typeHelpers";
 import { Message, Sender } from "~/types";
 
 import db from "../../db";
 import sendPayment from "../ln/sendPayment";
+import lnurlPayWithPrompt from "../lnurl/pay";
 
 const sendPaymentOrPrompt = async (message: Message, sender: Sender) => {
   const host = getHostFromSender(sender);
@@ -17,8 +20,40 @@ const sendPaymentOrPrompt = async (message: Message, sender: Sender) => {
     };
   }
 
-  const paymentRequestDetails = lightningPayReq.decode(paymentRequest);
-  if (await checkAllowance(host, paymentRequestDetails.satoshis || 0)) {
+  if (lnurlLib.isLightningAddress(paymentRequest)) {
+    try {
+      const lnurlDetails = await lnurlLib.getDetails(paymentRequest);
+      if (isLNURLDetailsError(lnurlDetails)) {
+        return { error: lnurlDetails.reason };
+      }
+      if (lnurlDetails.tag === "payRequest") {
+        return lnurlPayWithPrompt(message, lnurlDetails);
+      }
+    } catch (e) {
+      console.error(e);
+      // Fallback to regular flow or return error?
+      // If it looks like an address but fails resolution, it's safer to return the error
+      // than to try and decode it as a BOLT11 which will definitely fail.
+      if (e instanceof Error) {
+        return { error: e.message };
+      }
+    }
+    return { error: "Failed to resolve Lightning Address" };
+  }
+
+  let paymentRequestDetails;
+  try {
+    paymentRequestDetails = lightningPayReq.decode(paymentRequest);
+  } catch (e) {
+    if (e instanceof Error) {
+      return { error: e.message };
+    }
+  }
+
+  if (
+    paymentRequestDetails &&
+    (await checkAllowance(host, paymentRequestDetails.satoshis || 0))
+  ) {
     return sendPaymentWithAllowance(message);
   } else {
     return payWithPrompt(message);
