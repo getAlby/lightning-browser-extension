@@ -379,7 +379,7 @@
       },
       "show_fiat": {
         "title": "Sats in Fiat",
-        "subtitle": "Beträge in die ausgewählte Währung umrechnen (z.B.: EUR)"
+        "subtitle": "Immer in die ausgewählte Währung zum ausgewählten Wechselkurs umrechnen"
       },
       "personal_data": {
         "title": "Persönliche Daten",
@@ -655,7 +655,7 @@
     },
     "send": {
       "input": {
-        "label": "Rechnung, Lightning-Adresse oder LNURL",
+        "label": "Empfänger",
         "hint": "Rechnung, Lightning-Adresse, LNURL",
         "hint_with_bitcoin_address": "Rechnung, Lightning-Adresse, LNURL oder Bitcoin-Adresse"
       },
