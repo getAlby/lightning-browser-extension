@@ -29,7 +29,7 @@
         }
       },
       "pin_extension": {
-        "next_btn": "अल्बी के साथ बज़िन शुरू करें {{icon}}",
+        "next_btn": "अल्बी के साथ बज़िंग शुरू करें {{icon}}",
         "title": "Alby तैयार है! चलिए शुरू करें",
         "explanation": "<0/> ब्राउज़र टूलबार में एक्सटेंशन को पिन करें और वहीं से खोलें<1/><2/> आप कीबोर्ड शॉर्टकट से भी Alby खोल सकते हैं:",
         "keyboard_shortcut": {
@@ -226,7 +226,7 @@
           "instructions": "अपने Core Lightning नोड पर <0>cln-nip47 plugin</0> इंस्टॉल करें और अपना NWC कनेक्शन सीक्रेट यहाँ पेस्ट करें।",
           "url": {
             "label": "NWC कनेक्शन की गुप्त कुंजी",
-            "placeholder": "nostr+walletconnect://69effe..।"
+            "placeholder": "nostr+walletconnect://69effe.."
           },
           "errors": {
             "connection_failed": "कनेक्शन नहीं हो पाया। क्या आपका Core Lightning नोड ऑनलाइन है और ऐप कनेक्शन चालू है?"
@@ -365,7 +365,7 @@
         "subtitle": "",
         "screen_reader": "अनलॉक पासकोड बदलें",
         "choose_password": {
-          "label": "एक नया अनलॉक पासकोडदर्ज करें:"
+          "label": "एक नया अनलॉक पासकोड दर्ज करें:"
         },
         "confirm_password": {
           "label": "नए पासकोड की पुष्टि करें:"
@@ -568,7 +568,7 @@
         },
         "7": {
           "title": "प्रतिक्रिया दें",
-          "description": "नोट पर प्रतिक्रिया दें की"
+          "description": "नोट पर प्रतिक्रिया दें"
         },
         "8": {
           "title": "बैज दें",
@@ -701,10 +701,10 @@
             "derive": "मास्टर की से लिया गया",
             "nostr_keys": {
               "title": "Nostr कुंजियां",
-              "description": "Translation"
+              "description": "अपनी मास्टर कुंजी से Nostr कुंजी प्राप्त करें या अपनी मौजूदा प्राइवेट कुंजी को “Nostr प्राइवेट कुंजी“ फ़ील्ड में पेस्ट करके आयात करें।"
             },
             "remove_keys": {
-              "title": "ostr कुंजियाँ हटाएँ",
+              "title": "Nostr कुंजियाँ हटाएँ",
               "description": "ह इस वॉलेट से मौजूदा Nostr कुंजियाँ हटा देता है।"
             },
             "nostr_address": {
@@ -747,7 +747,7 @@
             },
             "save": "मास्टर की सेव करे",
             "button": "पुनर्प्राप्ति वाक्यांश देखें",
-            "title": "aster Key का बैकअप लें"
+            "title": "Master Key का बैकअप लें"
           },
           "generate": {
             "button": "मास्टर की उत्पन्न करें",
@@ -769,10 +769,10 @@
           "description": {
             "warning": "यह वॉलेट या उसमें मौजूद पैसे वापस नहीं ला सकता, यह सिर्र ूपर बताए गए प्रोटोकॉल की पहुंच वापस देता है।",
             "secure_recovery_phrase": "इन्हें किसी सुरक्षित और निजी जगह पर लिखकर रख लें",
-            "recovery_phrase": "रिकवरी फर्ेश 12 शस्दों का समूह होता है, जो आपकी Master Key का बैकअप होता है।"
+            "recovery_phrase": "रिकवरी फ्रेज 12 शस्दों का समूह होता है, जो आपकी Master Key का बैकअप होता है।"
           },
-          "confirm": "मैंने अपनी Master Key की रिकवरी फर्ेश को किसी सुरक्षित और निजी जगह पर रख लिया है।",
-          "error_confirm": "कृपया पुष्टी करें कि आपने रिकवरी फर्ेश का बैकअप ले लिया है",
+          "confirm": "मैंने अपनी Master Key की रिकवरी फ्रेज को किसी सुरक्षित और निजी जगह पर रख लिया है।",
+          "error_confirm": "कृपया पुष्टी करें कि आपने रिकवरी फ्रेज का बैकअप ले लिया है",
           "new": {
             "title": "Master Key के बारे में",
             "items": {
@@ -791,12 +791,12 @@
               "description": "इस वॉलेट में Master Key जोड़ने के लिए अपनी रिकवरी फ्रेज डालें"
             },
             "import_nostr": {
-              "title": "ostr कुंजी इम्पोर्ट करें",
+              "title": "Nostr कुंजी इम्पोर्ट करें",
               "description": "र्फ मौजूदा Nostr पहचान इम्पोर्ट करें, अभी Master Key छोड़ दें"
             }
           },
           "inputs": {
-            "title": "aster Key की रिकवरी फ्रेज"
+            "title": "Master Key की रिकवरी फ्रेज"
           }
         },
         "name": {
@@ -808,8 +808,8 @@
             "bitcoin": "Mainnet",
             "regtest": "Regtest"
           },
-          "title": "te:<translated",
-          "subtitle": "Choose network to derive addresses and decode transactions।"
+          "title": "बिटकॉइन नेटवर्क",
+          "subtitle": "एड्रेस प्राप्त करने और ट्रांसक्शन्स को डिकोड करने के लिए नेटवर्क चुनें।"
         },
         "remove": {
           "error": "दर्ज किया गया खाता नाम मेल नहीं खाता।",
@@ -996,7 +996,7 @@
         },
         "reasonable": {
           "title": "ठीक तरह से फैसला करें",
-          "description": "जो रिक्वेस्ट ज्यादा आती हैं, उन्हें अपने आप स्वीकार कर"
+          "description": "जो रिक्वेस्ट ज्यादा आती हैं, उन्हें अपने आप स्वीकार करें"
         },
         "paranoid": {
           "title": "मुझे थोड़ा डर लग रहा है",
@@ -1047,7 +1047,7 @@
     "success_message": "{{amount}}{{fiatAmount}} {{destination}} की ओर जा रहे हैं",
     "response": "जवाब",
     "message": "संदेश",
-    "help": "मददAlby गाइड",
+    "help": "अल्बी गाइड",
     "actions": {
       "back": "वापस",
       "delete": "हटाएं",
@@ -1180,7 +1180,7 @@
       },
       "open_location": "Website खोलें",
       "payment_hash": "भुगतान हैश",
-      "date_time": "तारीखऔर समय",
+      "date_time": "तारीख और समय",
       "metadata": "मेटाडेटा",
       "nostr_zap": "Nostr Zap किससे",
       "sending": "भेज रहे हैं",
@@ -1223,7 +1223,7 @@
       }
     },
     "account_menu": {
-      "screen_reader": "Toggle Dropdown",
+      "screen_reader": "ड्रॉपडाउन टॉगल करें",
       "title": "वॉलेट बदलें",
       "select_wallet": "वॉलेट चुनें",
       "options": {
