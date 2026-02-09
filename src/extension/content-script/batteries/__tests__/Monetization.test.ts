@@ -123,6 +123,18 @@ describe("Monetization battery", () => {
       ]);
     });
 
+    test("detects uncompressed pubkey (04 prefix)", () => {
+      const uncompressedPubkey = "04" + "a".repeat(128);
+      setMetaTag(uncompressedPubkey);
+      Monetization.battery();
+      expect(helpers.setLightningData).toHaveBeenCalledWith([
+        expect.objectContaining({
+          method: "keysend",
+          address: uncompressedPubkey,
+        }),
+      ]);
+    });
+
     test("trims whitespace from pubkey", () => {
       setMetaTag(`  ${compressedPubkey}  `);
       Monetization.battery();

@@ -41,7 +41,7 @@ const battery = (): void => {
       method: "keysend",
       address: content,
     };
-  } else if (content.match(/^lnurlp:/) || content.indexOf("=") === -1) {
+  } else if (content.match(/^lnurlp:/i) || content.indexOf("=") === -1) {
     // Backwards compatibility: lightning address or lnurlp:xxx
     const lnAddress = content.replace(/lnurlp:/i, "");
     recipient = {
