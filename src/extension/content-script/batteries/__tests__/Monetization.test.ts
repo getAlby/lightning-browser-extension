@@ -57,6 +57,17 @@ describe("Monetization battery", () => {
       ]);
     });
 
+    test("detects LNURLP: prefixed address (case-insensitive)", () => {
+      setMetaTag("LNURLP:hello@getalby.com");
+      Monetization.battery();
+      expect(helpers.setLightningData).toHaveBeenCalledWith([
+        expect.objectContaining({
+          method: "lnurl",
+          address: "hello@getalby.com",
+        }),
+      ]);
+    });
+
     test("detects key=value LNURL format", () => {
       setMetaTag("method=lnurl;address=hello@getalby.com");
       Monetization.battery();
