@@ -94,6 +94,9 @@ class Galoy implements Connector {
               id
               username
           }
+          globals {
+            lightningAddressDomain
+          }
         }
       `,
     };
@@ -106,9 +109,19 @@ class Galoy implements Connector {
       const alias = data.me.username
         ? data.me.username.substr(0, 10)
         : data.me.id.substr(0, 8);
+
+      const domain = data.globals?.lightningAddressDomain;
+      const username = data.me.username;
+
+      let lightningAddress: string | undefined;
+      if (username && domain) {
+        lightningAddress = `${username}@${domain}`;
+      }
+
       return {
         data: {
           alias,
+          lightning_address: lightningAddress,
         },
       };
     });
