@@ -59,7 +59,6 @@ This guide helps you run the extension in desktop browsers.
   - Load the extension via `opera:extensions`
   - Check the `Developer Mode` and load as unpacked from extension’s extracted directory.
 
-
 ## 📱 Firefox Android Setup
 
 Alby extension is actively maintained for Firefox on Android. Follow the [SETUP_ANDROID.md](./SETUP_ANDROID.md) guide to install and debug it.
