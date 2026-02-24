@@ -59,7 +59,6 @@ This guide helps you run the extension in desktop browsers.
   - Load the extension via `opera:extensions`
   - Check the `Developer Mode` and load as unpacked from extension’s extracted directory.
 
-To connect to a remote development LND node you can use a [test account](https://github.com/bumi/lightning-browser-extension/wiki/Test-setup)
 
 ## 📱 Firefox Android Setup
 
@@ -98,7 +97,7 @@ Some ways you can work around this are:
 
 ### How to Test Different Connectors Supported by the Extension?
 
-By default, Alby and NWC (Nostr Wallet Connect) connectors are sufficient for testing UI changes and core functionality. However, if you need to test specific connectors like LND, CLN, or LNbits, you can [Start the lightning network test environment locally and link to the Alby Browser Extension](https://github.com/getAlby/lightning-browser-extension/wiki/Start-the-lightning-network-test-environment-locally-and-link-to-the-Alby)
+By default, Alby and NWC (Nostr Wallet Connect) connectors are sufficient for testing UI changes and core functionality. However, if you need to test specific connectors like LND, CLN, or LNbits, you can run your own local lightning network and you can use [Lightning Polar](https://lightningpolar.com/) which helps you to spin up local instances.
 
 ## 📂 Project Structure
 
