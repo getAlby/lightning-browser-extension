@@ -76,7 +76,6 @@ We welcome and appreciate new contributions! 🎉 To get started, [Refer to SETU
 
 #### 🎨 Designer
 
-- Have a look at our [Open source Design guide](https://github.com/getAlby/lightning-browser-extension/wiki/Open-source-Design)
 - Check out the issues that have specifically been [marked with "design"](https://github.com/getAlby/lightning-browser-extension/issues?q=is%3Aopen+is%3Aissue+label%3A%22design%22)
 - You can find and copy the current version of the extension in this Figma file: [Alby Extension Master Design](https://www.figma.com/file/O49NS4o3IjWwmHvFLncTy6/Alby-Extension-Master-Design?node-id=0%3A1&t=rd4dQkDtwZ4Nuuqo-1)
 
@@ -113,7 +112,7 @@ WebLN is a library and set of specifications for lightning apps and client provi
 
 #### Is there a bounty program and can I contribute?
 
-Yes. Thanks to generous donors, Alby is able to offer several bounties. You can find them on our [Wiki page](https://github.com/getAlby/lightning-browser-extension/wiki/Bounties). If you want to support Alby's bounty program, please donate [here](https://getalby.com/p/bounties). We greatly appreciate your contribution! 🙏
+Yes. Thanks to generous donors, Alby is able to offer several bounties. You can find them on our [Alby Guides](https://guides.getalby.com/developer-guide/developer-guide/bounties/). If you want to support Alby's bounty program, please donate [here](https://getalby.com/p/bounties). We greatly appreciate your contribution! 🙏
 
 ## ⚡️ Donations
 
