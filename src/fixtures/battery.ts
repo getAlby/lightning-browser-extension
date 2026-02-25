@@ -23,3 +23,26 @@ export const BatteryFixture: Battery[] = [
     external: true,
   },
 ];
+
+export const KeysendBatteryFixture: Battery[] = [
+  {
+    method: "keysend",
+    address:
+      "030a58b8653d32b99200a2334cfe913e51dc7d155aa0116c176657a4f1722677a3",
+    customKey: "696969",
+    customValue: "017rsl75kNnSke4mMHYE",
+    suggested: "",
+    name: "keysend-test.example",
+    icon: "",
+    location: "https://example.com/blog",
+    domain: "https://example.com",
+    host: "example.com",
+    pathname: "/blog",
+    description: "keysend tipping test",
+    metaData: {
+      title: "Example Blog",
+      url: "https://example.com/blog",
+    },
+    external: true,
+  },
+];
