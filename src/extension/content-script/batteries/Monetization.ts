@@ -1,7 +1,7 @@
 import { BatteryMetaTagRecipient } from "~/types";
 
 import getOriginData from "../originData";
-import { setLightningData } from "./helpers";
+import { isPubKey, setLightningData } from "./helpers";
 
 const urlMatcher = /^https?:\/\/.*/i;
 
@@ -12,9 +12,11 @@ const parseRecipient = (content: string): BatteryMetaTagRecipient => {
     .filter((e) => !!e);
 
   const recipient = tokens.reduce((obj, tkn) => {
-    const keyAndValue = tkn.split("=");
-    const keyAndValueTrimmed = keyAndValue.map((e) => e.trim());
-    return { ...obj, [keyAndValueTrimmed[0]]: keyAndValueTrimmed[1] };
+    const eqIdx = tkn.indexOf("=");
+    if (eqIdx === -1) return obj;
+    const key = tkn.slice(0, eqIdx).trim();
+    const value = tkn.slice(eqIdx + 1).trim();
+    return { ...obj, [key]: value };
   }, {} as BatteryMetaTagRecipient);
 
   return recipient;
@@ -27,18 +29,35 @@ const battery = (): void => {
   if (!monetizationTag) {
     return;
   }
-  const content = monetizationTag.content;
+
+  // Trim whitespace for robustness
+  const content = monetizationTag.content.trim();
 
   let recipient: BatteryMetaTagRecipient;
-  // check for backwards compatibility: supports directly a lightning address or lnurlp:xxx
-  if (content.match(/^lnurlp:/) || content.indexOf("=") === -1) {
-    const lnAddress = monetizationTag.content.replace(/lnurlp:/i, "");
-    recipient = {
-      method: "lnurl",
-      address: lnAddress,
-    };
+
+  if (content.match(/^lnurlp:/i) || content.indexOf("=") === -1) {
+    // Backwards-compatible: direct lightning address, lnurlp:xxx, OR a bare pubkey
+    const address = content.replace(/^lnurlp:/i, "");
+    if (isPubKey(address)) {
+      // Bare node pubkey → keysend
+      recipient = {
+        method: "keysend",
+        address,
+      };
+    } else {
+      // Lightning address or LNURL → lnurl pay flow
+      recipient = {
+        method: "lnurl",
+        address,
+      };
+    }
   } else {
+    // Key=value format — parse and trust the method field if present
     recipient = parseRecipient(content);
+    // If no method was specified but address looks like a pubkey, default to keysend
+    if (!recipient.method && recipient.address && isPubKey(recipient.address)) {
+      recipient = { ...recipient, method: "keysend" };
+    }
   }
 
   const metaData = getOriginData();
