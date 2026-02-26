@@ -25,8 +25,9 @@ export const setLightningData = (data: [Battery]): void => {
  *  - Compressed pubkeys: 02 or 03 prefix followed by 64 hex chars (66 total)
  *  - Uncompressed pubkeys: 04 prefix followed by 128 hex chars (130 total)
  */
+const COMPRESSED_PUBKEY_RE = /^(02|03)[0-9a-fA-F]{64}$/;
+const UNCOMPRESSED_PUBKEY_RE = /^04[0-9a-fA-F]{128}$/;
+
 export const isPubKey = (value: string): boolean => {
-  const compressed = /^(02|03)[0-9a-fA-F]{64}$/;
-  const uncompressed = /^04[0-9a-fA-F]{128}$/;
-  return compressed.test(value) || uncompressed.test(value);
+  return COMPRESSED_PUBKEY_RE.test(value) || UNCOMPRESSED_PUBKEY_RE.test(value);
 };

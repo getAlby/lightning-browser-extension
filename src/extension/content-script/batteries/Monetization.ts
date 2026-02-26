@@ -12,9 +12,11 @@ const parseRecipient = (content: string): BatteryMetaTagRecipient => {
     .filter((e) => !!e);
 
   const recipient = tokens.reduce((obj, tkn) => {
-    const keyAndValue = tkn.split("=");
-    const keyAndValueTrimmed = keyAndValue.map((e) => e.trim());
-    return { ...obj, [keyAndValueTrimmed[0]]: keyAndValueTrimmed[1] };
+    const eqIdx = tkn.indexOf("=");
+    if (eqIdx === -1) return obj;
+    const key = tkn.slice(0, eqIdx).trim();
+    const value = tkn.slice(eqIdx + 1).trim();
+    return { ...obj, [key]: value };
   }, {} as BatteryMetaTagRecipient);
 
   return recipient;

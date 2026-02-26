@@ -22,7 +22,10 @@ jest.mock("../../originData", () => ({
 }));
 
 const setMetaTag = (content: string) => {
-  document.head.innerHTML = `<meta name="lightning" content="${content}">`;
+  const meta = document.createElement("meta");
+  meta.setAttribute("name", "lightning");
+  meta.setAttribute("content", content);
+  document.head.appendChild(meta);
 };
 
 const clearMetaTag = () => {
