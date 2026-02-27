@@ -370,6 +370,7 @@ class Lnd implements Connector {
       {
         memo: args.memo,
         value: args.amount,
+        private: args.includePrivateChannels,
       }
     ).then((data) => {
       return {

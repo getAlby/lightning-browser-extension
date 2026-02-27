@@ -40,6 +40,7 @@ function ReceiveInvoice() {
     amount: "0",
     description: "",
     expiration: "",
+    includePrivateChannels: false,
   });
   const [loadingInvoice, setLoadingInvoice] = useState(false);
   const [invoice, setInvoice] = useState<{
@@ -78,7 +79,10 @@ function ReceiveInvoice() {
   ) {
     setFormData({
       ...formData,
-      [event.target.name]: event.target.value.trim(),
+      [event.target.name]:
+        event.target.type === "checkbox"
+          ? (event.target as HTMLInputElement).checked
+          : event.target.value.trim(),
     });
   }
 
@@ -109,6 +113,7 @@ function ReceiveInvoice() {
       amount: "0",
       description: "",
       expiration: "",
+      includePrivateChannels: false,
     });
     setPaid(false);
     setPollingForPayment(false);
@@ -121,6 +126,7 @@ function ReceiveInvoice() {
       const response = await api.makeInvoice({
         amount: formData.amount,
         memo: formData.description,
+        includePrivateChannels: formData.includePrivateChannels,
       });
       setInvoice(response);
       checkPayment(response.rHash);
@@ -293,6 +299,27 @@ function ReceiveInvoice() {
                       placeholder={t("description.placeholder")}
                       onChange={handleChange}
                     />
+                  </div>
+                  <div className="mb-4">
+                    <div className="flex items-center">
+                      <input
+                        id="includePrivateChannels"
+                        name="includePrivateChannels"
+                        type="checkbox"
+                        className="w-4 h-4 text-orange-bitcoin border-gray-300 rounded focus:ring-orange-bitcoin dark:focus:ring-orange-bitcoin dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                        checked={formData.includePrivateChannels}
+                        onChange={handleChange}
+                      />
+                      <label
+                        htmlFor="includePrivateChannels"
+                        className="ml-2 block text-sm font-medium text-gray-900 dark:text-gray-300"
+                      >
+                        {t(
+                          "include_private_channels",
+                          "Include private channels"
+                        )}
+                      </label>
+                    </div>
                   </div>
                 </div>
                 <Button
