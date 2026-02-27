@@ -3,18 +3,18 @@
     "welcome": {
       "set_password": {
         "choose_password": {
-          "label": "Wähle einen Passcode zum Entsperren:"
+          "label": "Wählen Sie einen Entsperrcode:"
         },
         "errors": {
           "mismatched_password": "Die Passcodes stimmen nicht überein.",
-          "enter_password": "Bitte gebe einen Passcode ein.",
+          "enter_password": "Bitte gebe Sie einen Passcode ein.",
           "confirm_password": "Bitte bestätige deinen Passcode."
         },
         "confirm_password": {
-          "label": "Vergewisser dich, dass du es richtig eingegeben hast:"
+          "label": "Vergewissere dich, dass du es richtig eingegeben hast:"
         },
-        "description1": "Lege ein Passcode fest, um die Alby-Erweiterung in diesem Browser zu entsperren",
-        "description2": "Das Password zum Entsperren kann nicht wiederhergestellt, aber geändert werden ",
+        "description1": "Lege einen Passcode fest, um die Alby-Erweiterung in diesem Browser zu entsperren.",
+        "description2": "Das Passwort zum Entsperren kann nicht wiederhergestellt, aber geändert werden. ",
         "title": "Passcode zum Entsperren der Erweiterung festlegen"
       },
       "test_connection": {
