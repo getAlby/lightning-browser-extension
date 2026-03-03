@@ -7,7 +7,7 @@
         },
         "errors": {
           "mismatched_password": "Die Passcodes stimmen nicht überein.",
-          "enter_password": "Bitte gebe Sie einen Passcode ein.",
+          "enter_password": "Bitte geben Sie einen Passcode ein.",
           "confirm_password": "Bitte bestätige deinen Passcode."
         },
         "confirm_password": {
