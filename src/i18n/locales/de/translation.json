@@ -14,7 +14,7 @@
           "label": "Vergewissere dich, dass du es richtig eingegeben hast:"
         },
         "description1": "Lege einen Passcode fest, um die Alby-Erweiterung in diesem Browser zu entsperren.",
-        "description2": "Das Passwort zum Entsperren kann nicht wiederhergestellt, aber geändert werden. ",
+        "description2": "Der Passcode zum Entsperren kann nicht wiederhergestellt, aber geändert werden.",
         "title": "Passcode zum Entsperren der Erweiterung festlegen"
       },
       "test_connection": {
