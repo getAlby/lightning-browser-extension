@@ -86,7 +86,12 @@ class Galoy implements Connector {
     ];
   }
 
-  async getInfo(): Promise<GetInfoResponse> {
+  async getInfo(): Promise<
+    GetInfoResponse<{
+      alias: string;
+      lightning_address?: string;
+    }>
+  > {
     const query = {
       query: `
         query getinfo {
