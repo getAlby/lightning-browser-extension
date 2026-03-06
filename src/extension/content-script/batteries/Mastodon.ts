@@ -1,7 +1,7 @@
 import getOriginData from "../originData";
 import { findLightningAddressInText, setLightningData } from "./helpers";
 
-const urlMatcher = /https?:\/\/([^/]+)\/@([^/]+)/;
+const urlMatcher = /^https?:\/\/[^/]+\/@[^/]+\/?$/;
 
 const battery = (): void => {
   // Mastodon Profile Extraktion (robuster Selektor fuer Bio)
@@ -27,9 +27,10 @@ const battery = (): void => {
                document.querySelector(".account__header__tabs__name")?.innerText || 
                "Mastodon User";
 
-  const icon = document.querySelector(".u-photo")?.getAttribute("src") || 
-               document.querySelector(".account__header__avatar img")?.getAttribute("src") || 
-               "";
+  const icon =
+    (document.querySelector(".u-photo") as HTMLImageElement)?.src ||
+    (document.querySelector(".account__header__avatar img") as HTMLImageElement)?.src ||
+    "";
 
   setLightningData([
     {
