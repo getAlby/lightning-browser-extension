@@ -1,10 +1,10 @@
 import getOriginData from "../originData";
 import { findLightningAddressInText, setLightningData } from "./helpers";
 
-const urlMatcher = /^https?:\/\/[^/]+\/@[^/]+\/?$/;
+const urlMatcher = /^https?:\/\/[^/]+\/@[^/]+(?:\/)?(?:\?.*)?(?:#.*)?$/;
 
 const battery = (): void => {
-  // Mastodon Profile Extraktion (robuster Selektor fuer Bio)
+  // Mastodon profile extraction (robust selector for bio)
   const bioSelectors = [
     ".p-note",
     ".account__header__content",
