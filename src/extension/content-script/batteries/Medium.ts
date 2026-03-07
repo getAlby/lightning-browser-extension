@@ -13,16 +13,23 @@ const battery = (): void => {
     '.ae.af.ag.ah.ai.aj.ak.al.am.an' // Fallback für generische Klassen
   ];
   
-  let bioText = "";
+  let address = null;
+  let finalBioText = "";
+  
   for (const selector of bioSelectors) {
     const element = document.querySelector(selector);
     if (element) {
-      bioText = element instanceof HTMLMetaElement ? element.content : (element as HTMLElement).innerText;
-      if (bioText) break;
+      const bioText = element instanceof HTMLMetaElement ? element.content : (element as HTMLElement).innerText;
+      if (bioText) {
+        address = findLightningAddressInText(bioText);
+        if (address) {
+          finalBioText = bioText;
+          break;
+        }
+      }
     }
   }
 
-  const address = findLightningAddressInText(bioText);
   if (!address) return;
 
   // 2. Extrahiere Name und Icon (robust via og-tags)
@@ -41,7 +48,7 @@ const battery = (): void => {
       method: "lnurl",
       address: address,
       ...getOriginData(),
-      description: bioText.substring(0, 160),
+      description: finalBioText.substring(0, 160),
       name: name,
       icon: icon,
     },
