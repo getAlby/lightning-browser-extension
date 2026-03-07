@@ -26,7 +26,6 @@ interface SettingsContextType {
     amount: number | string,
     currency?: ACCOUNT_CURRENCIES
   ) => string;
-  getCurrencyRate: () => Promise<number>;
 }
 
 type Setting = Partial<SettingsStorage>;
@@ -152,7 +151,6 @@ export const SettingsProvider = ({
     getFormattedSats,
     getFormattedNumber,
     getFormattedInCurrency,
-    getCurrencyRate,
     settings,
     updateSetting,
     isLoading,
