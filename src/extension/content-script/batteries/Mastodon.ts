@@ -1,31 +1,41 @@
 import getOriginData from "../originData";
 import { findLightningAddressInText, setLightningData } from "./helpers";
 
-const urlMatcher = /^https?:\/\/[^/]+\/@[^/]+(?:\/)?(?:\?.*)?(?:#.*)?$/;
+const urlMatcher = /^https?:\/\/[^/]+\/@[^/?#]+(?:\/)?(?:\?.*)?(?:#.*)?$/;
 
 const battery = (): void => {
-  // Mastodon profile extraction (robust selector for bio)
-  const bioSelectors = [
-    ".p-note",
-    ".account__header__content",
-    ".public-account-bio"
-  ];
-  
-  let bioText = "";
+  const isActivityPub = !!(
+    document.querySelector("link[rel=\"alternate\"][type=\"application/activity+json\"]") ||
+    document.querySelector("meta[property=\"og:site_name\"][content*=\"Mastodon\"]") ||
+    document.querySelector(".p-note, .account__header__content")
+  );
+
+  if (!isActivityPub) return;
+
+  const bioSelectors = [".p-note", ".account__header__content", ".public-account-bio"];
+  let address = null;
+  let finalBioText = "";
+
   for (const selector of bioSelectors) {
     const element = document.querySelector(selector);
     if (element) {
-      bioText = (element as HTMLElement).innerText;
-      if (bioText) break;
+      const text = (element as HTMLElement).innerText;
+      if (text) {
+        address = findLightningAddressInText(text);
+        if (address) {
+          finalBioText = text;
+          break;
+        }
+      }
     }
   }
 
-  const address = findLightningAddressInText(bioText);
   if (!address) return;
 
-  const name = document.querySelector(".p-name")?.innerText || 
-               document.querySelector(".account__header__tabs__name")?.innerText || 
-               "Mastodon User";
+  const name =
+    document.querySelector(".p-name")?.innerText ||
+    document.querySelector(".account__header__tabs__name")?.innerText ||
+    "Mastodon User";
 
   const icon =
     (document.querySelector(".u-photo") as HTMLImageElement)?.src ||
@@ -35,18 +45,13 @@ const battery = (): void => {
   setLightningData([
     {
       method: "lnurl",
-      address: address,
+      address,
       ...getOriginData(),
-      description: bioText.substring(0, 160),
-      name: name,
-      icon: icon,
+      description: finalBioText.substring(0, 160),
+      name: name.trim(),
+      icon,
     },
   ]);
 };
 
-const Mastodon = {
-  urlMatcher,
-  battery,
-};
-
-export default Mastodon;
+export default { urlMatcher, battery };
