@@ -1,21 +1,19 @@
 import getOriginData from "../originData";
 import { findLightningAddressInText, setLightningData } from "./helpers";
 
-const urlMatcher = /^https?:\/\/(?:[^/]+\.)?medium\.com\/(?:@([^/]+)|([^/]+))(?:\/.*)?$/;
+const urlMatcher = /^https?:\/\/(?:[^/]+\.)?medium\.com\/@([^/?#]+)\/?(?:\?.*)?(?:#.*)?$/;
 
 const battery = (): void => {
-  // 1. Suche nach Lightning-Adressen in der Bio (robusterer Ansatz)
-  // Wir suchen nach Elementen, die typischerweise die Bio enthalten
   const bioSelectors = [
-    'p.be.bf.z', // Aktueller Medium Bio-Selektor (variiert oft)
-    '[data-testid="authorBio"]', 
-    'meta[name="description"]',
-    '.ae.af.ag.ah.ai.aj.ak.al.am.an' // Fallback für generische Klassen
+    "meta[name=\"description\"]",
+    "[data-testid=\"authorBio\"]",
+    "[data-testid=\"author-bio\"]",
+    "p.be.bf.z"
   ];
-  
+
   let address = null;
   let finalBioText = "";
-  
+
   for (const selector of bioSelectors) {
     const element = document.querySelector(selector);
     if (element) {
@@ -32,32 +30,27 @@ const battery = (): void => {
 
   if (!address) return;
 
-  // 2. Extrahiere Name und Icon (robust via og-tags)
-  const name = 
-    document.querySelector('meta[property="og:title"]')?.getAttribute('content')?.split(' – ')[0] ||
-    document.querySelector('h1')?.innerText ||
+  const name =
+    document.querySelector("meta[name=\"author\"]")?.getAttribute("content") ||
+    document.querySelector("a[rel=\"author\"]")?.innerText ||
+    document.querySelector("meta[property=\"og:title\"]")?.getAttribute("content")?.split(" – ")[0] ||
     "Medium Author";
 
-  const icon = 
-    document.querySelector('meta[property="og:image"]')?.getAttribute('content') ||
-    document.querySelector('img[src*="/profile/"]')?.getAttribute('src') ||
+  const icon =
+    document.querySelector("meta[property=\"og:image\"]")?.getAttribute("content") ||
+    document.querySelector("img[src*=\"/profile/\"]")?.getAttribute("src") ||
     "";
 
   setLightningData([
     {
       method: "lnurl",
-      address: address,
+      address,
       ...getOriginData(),
       description: finalBioText.substring(0, 160),
-      name: name,
-      icon: icon,
+      name: name.trim(),
+      icon,
     },
   ]);
 };
 
-const Medium = {
-  urlMatcher,
-  battery,
-};
-
-export default Medium;
+export default { urlMatcher, battery };
