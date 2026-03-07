@@ -63,18 +63,21 @@ function MnemonicExplanation() {
               description={
                 hasMnemonic ? t("secure.description") : t("create.description")
               }
+              active={selectedCard === "backup"}
               icon={PopiconsKeyLine}
               onClick={() => setSelectedCard("backup")}
             />
             <CardButton
               title={t("import.title")}
               description={t("import.description")}
+              active={selectedCard === "import"}
               icon={PopiconsDownloadLine}
               onClick={() => setSelectedCard("import")}
             />
             <CardButton
               title={t("import_nostr.title")}
               description={t("import_nostr.description")}
+              active={selectedCard === "importNostr"}
               icon={PopiconsOstrichLine}
               onClick={() => setSelectedCard("importNostr")}
             />
@@ -86,6 +89,7 @@ function MnemonicExplanation() {
             label={tCommon("actions.next")}
             primary
             flex
+            disabled={!selectedCard}
             onClick={() => {
               if (selectedCard === "backup") {
                 hasMnemonic
