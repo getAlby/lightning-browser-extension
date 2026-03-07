@@ -9,10 +9,7 @@ import { RangeLabel } from "./rangeLabel";
 export type Props = {
   suffix?: string;
   endAdornment?: React.ReactNode;
-  /** Controlled fiat value from parent. When provided, the component uses it
-   *  as the initial / externally-driven fiat display value. */
   fiatValue?: string;
-  /** Called whenever the internal fiat value changes, keeping the parent in sync. */
   onFiatValueChange?: (value: string) => void;
   label: string;
   hint?: string;
@@ -21,46 +18,10 @@ export type Props = {
 };
 
 /**
- * Strip grouping separators (thousands dots/commas) and normalise the decimal
- * separator to `.` so that `parseFloat` always works correctly regardless of
- * locale.
- *
- * Strategy:
- * 1. If the string contains both `.` and `,` the one that appears last is the
- *    decimal separator; the other is a grouping separator → remove grouping,
- *    replace decimal with `.`.
- * 2. If the string contains only `,` treat it as a decimal separator.
- * 3. If the string contains only `.` it is already canonical.
- */
-function normalizeFiatInput(raw: string): string {
-  const lastDot = raw.lastIndexOf(".");
-  const lastComma = raw.lastIndexOf(",");
-
-  if (lastDot !== -1 && lastComma !== -1) {
-    // Both separators present – the later one is the decimal separator
-    if (lastComma > lastDot) {
-      // European style: 1.234,56 → 1234.56
-      return raw.replace(/\./g, "").replace(",", ".");
-    } else {
-      // Anglo style: 1,234.56 → 1234.56
-      return raw.replace(/,/g, "");
-    }
-  }
-
-  if (lastComma !== -1) {
-    // Only comma present – treat as decimal separator: 1234,56 → 1234.56
-    return raw.replace(",", ".");
-  }
-
-  // Only dot or no separator – already canonical
-  return raw;
-}
-
-/**
- * Enhanced DualCurrencyField (JARVIS Optimized via Sonnet 4.6 Review)
+ * Enhanced DualCurrencyField
  *
  * Supports seamless switching between Sats and Fiat input with high-precision
- * bidirectional syncing and mobile-optimized keyboards.
+ * bidirectional syncing, mobile-optimized keyboards, and international formatting.
  */
 export default function DualCurrencyField({
   label,
@@ -72,6 +33,8 @@ export default function DualCurrencyField({
   onChange,
   onFocus,
   onBlur,
+  fiatValue: controlledFiatValue,
+  onFiatValueChange,
   value, // Sats value as string
   autoFocus = false,
   autoComplete = "off",
@@ -80,31 +43,22 @@ export default function DualCurrencyField({
   max,
   suffix,
   endAdornment,
-  fiatValue,
-  onFiatValueChange,
   hint,
   amountExceeded,
   rangeExceeded,
 }: React.InputHTMLAttributes<HTMLInputElement> & Props) {
-  const { t } = useTranslation("translation", { keyPrefix: "settings" });
   const { t: tCommon } = useTranslation("common");
   const { settings, getCurrencyRate } = useSettings();
 
   const [isFiatMode, setIsFiatMode] = useState(false);
-  // Prefer the controlled `fiatValue` prop as the initial state when provided
-  const [localFiatValue, setLocalFiatValue] = useState(fiatValue ?? "");
+  const [localFiatValue, setLocalFiatValue] = useState("");
   const [rate, setRate] = useState<number | null>(null);
+  const [isFocused, setIsFocused] = useState(false);
 
   const inputEl = useRef<HTMLInputElement>(null);
   const rateRef = useRef<number | null>(null);
   const onChangeRef = useRef(onChange);
   onChangeRef.current = onChange;
-
-  /**
-   * Hysteresis guard: while the user is actively typing in the fiat field we
-   * do NOT want a background rate-refresh to clobber their in-progress input.
-   */
-  const isTypingRef = useRef(false);
 
   // Constants for precision math
   const PRECISION = 1_000_000;
@@ -112,11 +66,10 @@ export default function DualCurrencyField({
   // Initialize and sync currency rate
   useEffect(() => {
     let isMounted = true;
-    getCurrencyRate().then((res: number | { rate: number }) => {
+    getCurrencyRate().then((res) => {
       if (isMounted) {
-        const rateValue = typeof res === "number" ? res : res.rate;
-        setRate(rateValue);
-        rateRef.current = rateValue;
+        setRate(res);
+        rateRef.current = res;
       }
     });
     return () => {
@@ -124,34 +77,49 @@ export default function DualCurrencyField({
     };
   }, [getCurrencyRate, settings.currency]);
 
-  // When a controlled `fiatValue` prop changes, sync internal state (but only
-  // when the user is not actively typing to avoid fighting the user).
-  useEffect(() => {
-    if (fiatValue !== undefined && !isTypingRef.current) {
-      setLocalFiatValue(fiatValue);
-    }
-  }, [fiatValue]);
+  // Normalize fiat input by stripping grouping separators and ensuring "." decimal point
+  const normalizeFiatInput = (input: string) => {
+    const lastComma = input.lastIndexOf(",");
+    const lastDot = input.lastIndexOf(".");
 
-  // Sync Fiat field when Sats change (only if NOT in Fiat mode and user is not
-  // currently typing – hysteresis guard).
+    if (lastComma > lastDot) {
+      // Comma is decimal separator (e.g. 1.000,50)
+      return input.replace(/\./g, "").replace(",", ".");
+    } else if (lastDot > lastComma) {
+      // Dot is decimal separator (e.g. 1,000.50)
+      return input.replace(/,/g, "");
+    }
+    return input.replace(",", ".");
+  };
+
+  // Sync Fiat field when Sats change (only if NOT focused/typing)
   useEffect(() => {
-    if (!isFiatMode && rate && value && !isTypingRef.current) {
+    if (!isFocused && !isFiatMode && rate && value) {
       const numericSats = parseInt(String(value));
       if (!isNaN(numericSats)) {
         const calculatedFiat = (numericSats / numSatsInBtc) * rate;
-        setLocalFiatValue(
-          calculatedFiat.toLocaleString(undefined, {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-          })
-        );
+        const formatted = calculatedFiat.toLocaleString(undefined, {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        });
+        setLocalFiatValue(formatted);
+        onFiatValueChange?.(formatted);
       } else {
         setLocalFiatValue("");
+        onFiatValueChange?.("");
       }
-    } else if (!value) {
+    } else if (!value && !isFocused) {
       setLocalFiatValue("");
+      onFiatValueChange?.("");
     }
-  }, [value, rate, isFiatMode]);
+  }, [value, rate, isFiatMode, isFocused, onFiatValueChange]);
+
+  // Support for externally controlled fiatValue
+  useEffect(() => {
+    if (controlledFiatValue !== undefined && !isFocused) {
+      setLocalFiatValue(controlledFiatValue);
+    }
+  }, [controlledFiatValue, isFocused]);
 
   const handleFiatChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -160,8 +128,8 @@ export default function DualCurrencyField({
       onFiatValueChange?.(rawInput);
 
       if (rateRef.current) {
-        const normalized = normalizeFiatInput(rawInput);
-        const numericFiat = parseFloat(normalized);
+        const sanitized = normalizeFiatInput(rawInput);
+        const numericFiat = parseFloat(sanitized);
 
         if (!isNaN(numericFiat)) {
           // High precision math to avoid IEEE 754 drift
@@ -173,48 +141,30 @@ export default function DualCurrencyField({
           if (onChangeRef.current) {
             const fakeEvent = {
               ...e,
-              target: {
-                ...e.target,
-                value: calculatedSats.toString(),
-                name: id,
-              },
+              target: { ...e.target, value: calculatedSats.toString(), name: id },
             } as React.ChangeEvent<HTMLInputElement>;
             onChangeRef.current(fakeEvent);
           }
         }
       }
     },
-    [id, onFiatValueChange, PRECISION]
-  );
-
-  /**
-   * Mark the user as "typing" on focus so that background rate updates do not
-   * overwrite the field while they are mid-entry.
-   */
-  const handleFiatFocus = useCallback(
-    (e: React.FocusEvent<HTMLInputElement>) => {
-      isTypingRef.current = true;
-      onFocus?.(e);
-    },
-    [onFocus]
-  );
-
-  /**
-   * Clear the typing guard on blur so that the next background rate sync can
-   * update the fiat display again.
-   */
-  const handleFiatBlur = useCallback(
-    (e: React.FocusEvent<HTMLInputElement>) => {
-      isTypingRef.current = false;
-      onBlur?.(e);
-    },
-    [onBlur]
+    [id, onFiatValueChange]
   );
 
   const toggleMode = (e: React.MouseEvent) => {
     e.preventDefault();
     setIsFiatMode(!isFiatMode);
     setTimeout(() => inputEl.current?.focus(), 0);
+  };
+
+  const internalOnFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+    setIsFocused(true);
+    onFocus?.(e);
+  };
+
+  const internalOnBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    setIsFocused(false);
+    onBlur?.(e);
   };
 
   const conversionHint = useMemo(() => {
@@ -236,10 +186,6 @@ export default function DualCurrencyField({
   const outerStyles =
     "rounded-md border border-gray-300 dark:border-gray-800 bg-white dark:bg-black transition duration-300";
 
-  // Explicit null/undefined checks so that min={0} or max={0} are respected
-  const hasMin = min !== null && min !== undefined;
-  const hasMax = max !== null && max !== undefined;
-
   return (
     <div className="relative block m-0">
       <div className="flex justify-between items-center w-full">
@@ -259,7 +205,7 @@ export default function DualCurrencyField({
               {isFiatMode ? "→ Sats" : `→ ${settings.currency}`}
             </button>
           )}
-          {(hasMin || hasMax) && (
+          {(min !== undefined || max !== undefined) && (
             <span
               className={classNames(
                 "text-xs text-gray-700 dark:text-neutral-400",
@@ -298,8 +244,8 @@ export default function DualCurrencyField({
           pattern={pattern}
           title={title}
           onChange={isFiatMode ? handleFiatChange : onChange}
-          onFocus={isFiatMode ? handleFiatFocus : onFocus}
-          onBlur={isFiatMode ? handleFiatBlur : onBlur}
+          onFocus={internalOnFocus}
+          onBlur={internalOnBlur}
           value={isFiatMode ? localFiatValue : value}
           autoFocus={autoFocus}
           autoComplete={autoComplete}
