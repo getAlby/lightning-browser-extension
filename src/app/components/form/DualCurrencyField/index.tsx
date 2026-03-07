@@ -9,7 +9,8 @@ import { RangeLabel } from "./rangeLabel";
 export type Props = {
   suffix?: string;
   endAdornment?: React.ReactNode;
-  fiatValue?: string; // Optional since we handle it internally now
+  fiatValue?: string;
+  onFiatValueChange?: (value: string) => void;
   label: string;
   hint?: string;
   amountExceeded?: boolean;
@@ -17,10 +18,10 @@ export type Props = {
 };
 
 /**
- * Enhanced DualCurrencyField (JARVIS Optimized via Sonnet 4.6 Review)
- * 
+ * Enhanced DualCurrencyField (JARVIS Optimized via Sonnet 4.6 & CodeRabbit Review)
+ *
  * Supports seamless switching between Sats and Fiat input with high-precision
- * bidirection syncing and mobile-optimized keyboards.
+ * bidirectional syncing, mobile-optimized keyboards, and international formatting.
  */
 export default function DualCurrencyField({
   label,
@@ -32,6 +33,8 @@ export default function DualCurrencyField({
   onChange,
   onFocus,
   onBlur,
+  fiatValue: controlledFiatValue,
+  onFiatValueChange,
   value, // Sats value as string
   autoFocus = false,
   autoComplete = "off",
@@ -47,11 +50,12 @@ export default function DualCurrencyField({
   const { t } = useTranslation("translation", { keyPrefix: "settings" });
   const { t: tCommon } = useTranslation("common");
   const { settings, getCurrencyRate } = useSettings();
-  
+
   const [isFiatMode, setIsFiatMode] = useState(false);
   const [localFiatValue, setLocalFiatValue] = useState("");
   const [rate, setRate] = useState<number | null>(null);
-  
+  const [isFocused, setIsFocused] = useState(false);
+
   const inputEl = useRef<HTMLInputElement>(null);
   const rateRef = useRef<number | null>(null);
   const onChangeRef = useRef(onChange);
@@ -65,61 +69,106 @@ export default function DualCurrencyField({
     let isMounted = true;
     getCurrencyRate().then((res) => {
       if (isMounted) {
-        const rateValue = typeof res === "number" ? res : res.rate;
+        const rateValue = typeof res === "number" ? res : (res as any).rate;
         setRate(rateValue);
         rateRef.current = rateValue;
       }
     });
-    return () => { isMounted = false; };
+    return () => {
+      isMounted = false;
+    };
   }, [getCurrencyRate, settings.currency]);
 
-  // Sync Fiat field when Sats change (only if NOT in Fiat mode)
+  // Normalize fiat input by stripping grouping separators and ensuring "." decimal point
+  const normalizeFiatInput = (input: string) => {
+    // If there are multiple dots/commas, it's likely thousands separators
+    // We treat the LAST occurrence of , or . as the decimal separator if others exist
+    const lastComma = input.lastIndexOf(",");
+    const lastDot = input.lastIndexOf(".");
+
+    if (lastComma > lastDot) {
+      // Comma is decimal separator (e.g. 1.000,50)
+      return input.replace(/\./g, "").replace(",", ".");
+    } else if (lastDot > lastComma) {
+      // Dot is decimal separator (e.g. 1,000.50)
+      return input.replace(/,/g, "");
+    }
+    return input.replace(",", ".");
+  };
+
+  // Sync Fiat field when Sats change (only if NOT focused/typing)
   useEffect(() => {
-    if (!isFiatMode && rate && value) {
+    if (!isFocused && !isFiatMode && rate && value) {
       const numericSats = parseInt(String(value));
       if (!isNaN(numericSats)) {
         const calculatedFiat = (numericSats / numSatsInBtc) * rate;
-        setLocalFiatValue(calculatedFiat.toLocaleString(undefined, {
+        const formatted = calculatedFiat.toLocaleString(undefined, {
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
-        }));
+        });
+        setLocalFiatValue(formatted);
+        onFiatValueChange?.(formatted);
       } else {
         setLocalFiatValue("");
+        onFiatValueChange?.("");
       }
-    } else if (!value) {
+    } else if (!value && !isFocused) {
       setLocalFiatValue("");
+      onFiatValueChange?.("");
     }
-  }, [value, rate, isFiatMode]);
+  }, [value, rate, isFiatMode, isFocused, onFiatValueChange]);
 
-  const handleFiatChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const rawInput = e.target.value;
-    setLocalFiatValue(rawInput);
-    
-    if (rateRef.current) {
-      // Handle both . and , as decimal separators
-      const sanitized = rawInput.replace(",", ".");
-      const numericFiat = parseFloat(sanitized);
-      
-      if (!isNaN(numericFiat)) {
-        // High precision math to avoid IEEE 754 drift
-        const rateInt = Math.round(rateRef.current * PRECISION);
-        const calculatedSats = Math.round((numericFiat * numSatsInBtc * PRECISION) / rateInt);
-        
-        if (onChangeRef.current) {
-          const fakeEvent = {
-            ...e,
-            target: { ...e.target, value: calculatedSats.toString(), name: id }
-          } as React.ChangeEvent<HTMLInputElement>;
-          onChangeRef.current(fakeEvent);
+  // Support for externally controlled fiatValue
+  useEffect(() => {
+    if (controlledFiatValue !== undefined && !isFocused) {
+      setLocalFiatValue(controlledFiatValue);
+    }
+  }, [controlledFiatValue, isFocused]);
+
+  const handleFiatChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const rawInput = e.target.value;
+      setLocalFiatValue(rawInput);
+      onFiatValueChange?.(rawInput);
+
+      if (rateRef.current) {
+        const sanitized = normalizeFiatInput(rawInput);
+        const numericFiat = parseFloat(sanitized);
+
+        if (!isNaN(numericFiat)) {
+          // High precision math to avoid IEEE 754 drift
+          const rateInt = Math.round(rateRef.current * PRECISION);
+          const calculatedSats = Math.round(
+            (numericFiat * numSatsInBtc * PRECISION) / rateInt
+          );
+
+          if (onChangeRef.current) {
+            const fakeEvent = {
+              ...e,
+              target: { ...e.target, value: calculatedSats.toString(), name: id },
+            } as React.ChangeEvent<HTMLInputElement>;
+            onChangeRef.current(fakeEvent);
+          }
         }
       }
-    }
-  }, [id, numSatsInBtc, PRECISION]);
+    },
+    [id, onFiatValueChange, PRECISION]
+  );
 
   const toggleMode = (e: React.MouseEvent) => {
     e.preventDefault();
     setIsFiatMode(!isFiatMode);
     setTimeout(() => inputEl.current?.focus(), 0);
+  };
+
+  const internalOnFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+    setIsFocused(true);
+    onFocus?.(e);
+  };
+
+  const internalOnBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    setIsFocused(false);
+    onBlur?.(e);
   };
 
   const conversionHint = useMemo(() => {
@@ -129,7 +178,14 @@ export default function DualCurrencyField({
     } else {
       return localFiatValue ? `≈ ${localFiatValue} ${settings.currency}` : null;
     }
-  }, [isFiatMode, localFiatValue, value, settings.showFiat, settings.currency, rate]);
+  }, [
+    isFiatMode,
+    localFiatValue,
+    value,
+    settings.showFiat,
+    settings.currency,
+    rate,
+  ]);
 
   const outerStyles =
     "rounded-md border border-gray-300 dark:border-gray-800 bg-white dark:bg-black transition duration-300";
@@ -137,7 +193,10 @@ export default function DualCurrencyField({
   return (
     <div className="relative block m-0">
       <div className="flex justify-between items-center w-full">
-        <label htmlFor={id} className="font-medium text-gray-800 dark:text-white">
+        <label
+          htmlFor={id}
+          className="font-medium text-gray-800 dark:text-white"
+        >
           {label}
         </label>
         <div className="flex gap-3 items-center">
@@ -150,7 +209,7 @@ export default function DualCurrencyField({
               {isFiatMode ? "→ Sats" : `→ ${settings.currency}`}
             </button>
           )}
-          {(min || max) && (
+          {(min !== undefined || max !== undefined) && (
             <span
               className={classNames(
                 "text-xs text-gray-700 dark:text-neutral-400",
@@ -168,7 +227,8 @@ export default function DualCurrencyField({
           "flex items-center overflow-hidden field mt-1 px-3 py-1",
           "focus-within:ring-primary focus-within:border-primary focus-within:dark:border-primary focus-within:ring-1",
           !hint && "mb-2",
-          (!!amountExceeded || !!rangeExceeded) && "border-red-500 dark:border-red-500",
+          (!!amountExceeded || !!rangeExceeded) &&
+            "border-red-500 dark:border-red-500",
           outerStyles
         )}
       >
@@ -183,13 +243,13 @@ export default function DualCurrencyField({
             "block w-full placeholder-gray-500 dark:placeholder-gray-600 dark:text-white",
             "px-0 border-0 focus:ring-0 bg-transparent"
           )}
-          placeholder={isFiatMode ? "0.00" : (placeholder || "0")}
+          placeholder={isFiatMode ? "0.00" : placeholder || "0"}
           required={required}
           pattern={pattern}
           title={title}
           onChange={isFiatMode ? handleFiatChange : onChange}
-          onFocus={onFocus}
-          onBlur={onBlur}
+          onFocus={internalOnFocus}
+          onBlur={internalOnBlur}
           value={isFiatMode ? localFiatValue : value}
           autoFocus={autoFocus}
           autoComplete={autoComplete}
@@ -219,7 +279,7 @@ export default function DualCurrencyField({
           </span>
         )}
       </div>
-      
+
       {hint && (
         <p
           className={classNames(

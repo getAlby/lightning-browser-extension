@@ -18,6 +18,7 @@ interface SettingsContextType {
   settings: SettingsStorage;
   updateSetting: (setting: Setting) => void;
   isLoading: boolean;
+  getCurrencyRate: () => Promise<number | { rate: number }>;
   getFormattedFiat: (amount: number | string) => Promise<string>;
   getFormattedSats: (amount: number | string) => string;
   getFormattedNumber: (amount: number | string) => string;
@@ -25,6 +26,7 @@ interface SettingsContextType {
     amount: number | string,
     currency?: ACCOUNT_CURRENCIES
   ) => string;
+  getCurrencyRate: () => Promise<number>;
 }
 
 type Setting = Partial<SettingsStorage>;
@@ -145,10 +147,12 @@ export const SettingsProvider = ({
   }, [settings.theme]);
 
   const value = {
+    getCurrencyRate,
     getFormattedFiat,
     getFormattedSats,
     getFormattedNumber,
     getFormattedInCurrency,
+    getCurrencyRate,
     settings,
     updateSetting,
     isLoading,
