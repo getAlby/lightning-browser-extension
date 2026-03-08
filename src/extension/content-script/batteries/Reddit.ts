@@ -2,7 +2,7 @@ import getOriginData from "../originData";
 import { findLightningAddressInText, setLightningData } from "./helpers";
 
 const urlMatcher =
-  /^https?:\/\/(?:www\.)?reddit\.com\/(?:u|user)\/([^/?#]+)\/?(?:\?.*)?(?:#.*)?$/;
+  /^https?:\/\/(?:[A-Za-z0-9-]+\.)*reddit\.com\/(?:u|user)\/([^/?#]+)\/?(?:\?.*)?(?:#.*)?$/;
 
 const battery = (): void => {
   const bioSelectors = [

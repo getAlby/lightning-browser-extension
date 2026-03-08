@@ -19,9 +19,10 @@ export const setLightningData = (data: [Battery]): void => {
 };
 
 export const findLightningAddressInText = (text: string): string | null => {
-  // Match lightning address pattern: user@domain.tld
+  // Use the same broad candidate-extraction regex as lnurl.ts fromInternetIdentifier
+  // to avoid missing valid Lightning addresses with complex local parts.
   const lightningAddressRegex =
-    /[a-zA-Z0-9._+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g;
+    /(?:[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*|"[^"]*")@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}/g;
   const candidates = text.match(lightningAddressRegex);
   if (candidates) {
     for (const candidate of candidates) {
