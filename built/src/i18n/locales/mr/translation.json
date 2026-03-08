@@ -1,0 +1,658 @@
+{
+    "translation": {
+        "welcome": {
+            "set_password": {
+                "confirm_password": {
+                    "label": "आपण ते बरोबर टाईप केले आहे याची पुष्टी करूया:"
+                },
+                "choose_password": {
+                    "label": "पासवर्ड निवडा"
+                },
+                "errors": {
+                    "enter_password": "कृपया पासवर्ड टाका.",
+                    "confirm_password": "कृपया पुष्टी करण्यासाठी तुमचा पासवर्ड पुन्हा-एंटर करा.",
+                    "mismatched_password": "पासवर्ड एकमेकांशी जुळत नाहीत."
+                }
+            },
+            "test_connection": {
+                "ready": "छान, तुम्ही पुढे जाण्यासाठी तयार आहात!",
+                "connection_error": "कनेक्ट करताना समस्या उद्भवली",
+                "review_connection_details": "कृपया आपल्या कनेक्शन तपशीलांचे पुनरावलोकन करा.",
+                "contact_support": "तुम्हाला मदत हवी असल्यास कृपया support@getalby.com येथे संपर्क साधा",
+                "connection_taking_long": "कनेक्ट करण्याचा प्रयत्न करताना अपेक्षेपेक्षा जास्त वेळ लागतो का... तुमचे तपशील बरोबर आहेत का? तुमचा नोड पोहोचण्यायोग्य आहे का? कृपया तपासून पहा."
+            }
+        },
+        "choose_path": {
+            "alby": {
+                "title": "Alby"
+            },
+            "other": {
+                "title": "इतर वॉलेट"
+            }
+        },
+        "alby": {
+            "pre_connect": {
+                "set_password": {
+                    "choose_password": {
+                        "label": "पासवर्ड"
+                    },
+                    "confirm_password": {
+                        "label": "पासवर्ड ची पुष्टी करा"
+                    },
+                    "errors": {
+                        "enter_password": "कृपया पासवर्ड प्रविष्ट करा.",
+                        "confirm_password": "कृपया आपला पासवर्ड कन्फर्म करा.",
+                        "mismatched_password": "पासवर्ड जुळत नाहीत."
+                    }
+                }
+            }
+        },
+        "choose_connector": {
+            "title": "Connect Lightning Wallet",
+            "description": "आपल्या बाह्य लाइटनिंग वॉलेट किंवा नोडशी कनेक्ट करा",
+            "lnd": {
+                "page": {
+                    "title": "आपल्या LND नोडशी कनेक्ट करा",
+                    "description": "आपल्याला आपले नोड URL आणि वाचन आणि पाठवा परवानग्यांसह मॅकरून आवश्यक आहे (उदा. अॅडमिन.मॅकरून)"
+                },
+                "url": {
+                    "label": "REST API host and port",
+                    "placeholder": "https://your-node-url:8080"
+                },
+                "macaroon": {
+                    "label": "Macaroon (HEX format)"
+                },
+                "drag_and_drop": "आपले Macaroon येथे खेचून टाका किंवा <0> browse</0>",
+                "errors": {
+                    "connection_failed": "कनेक्शन निकामी झाले. आपली LND क्रेडेंशियल्स योग्य आहेत का?"
+                }
+            },
+            "lnc": {
+                "title": "LND with LNC",
+                "pairing_phrase": {
+                    "label": "आपली जोडी वाक्यांश ",
+                    "placeholder": "गुप्त स्टॅक सॅट्स वाक्यांश"
+                }
+            },
+            "lndhub_go": {
+                "title": "LNDHub",
+                "page": {
+                    "title": "LNDHub ला कनेक्ट करा",
+                    "description": "आपले एलएनडीएचयूबी क्रेडेंशियल यूआरआय येथे इनपुट करा किंवा आपल्या वेबकॅमसह QR कोड स्कॅन करा."
+                },
+                "uri": {
+                    "label": "LNDHub Export URI"
+                },
+                "errors": {
+                    "invalid_uri": "अवैध LNDHub URI",
+                    "connection_failed": "कनेक्शन निकामी झाले. तुमची LNDHub URI योग्य आहे का?"
+                }
+            },
+            "lnbits": {
+                "title": "LNbits",
+                "page": {
+                    "title": "<0>LNbits</0> ला कनेक्ट करा",
+                    "instructions": "In LNbits, choose the wallet you want to connect, open it, click on API Info and copy the Admin Key. Paste it below:"
+                },
+                "admin_key": {
+                    "label": "LNbits Admin Key",
+                    "placeholder": "Your 32 digit admin key"
+                },
+                "url": {
+                    "label": "LNbits URL"
+                },
+                "errors": {
+                    "connection_failed": "Connection failed. Do you have the correct URL and Admin Key?"
+                }
+            },
+            "eclair": {
+                "title": "Eclair",
+                "page": {
+                    "title": "<0>Eclair</0> ला कनेक्ट करा",
+                    "instructions": "You need your Eclair URL and password."
+                },
+                "password": {
+                    "label": "Eclair Password"
+                },
+                "url": {
+                    "label": "Eclair URL",
+                    "placeholder": "http://localhost:8080"
+                }
+            },
+            "citadel": {
+                "page": {
+                    "title": "<0>Citadel</0> node ला कनेक्ट करा"
+                }
+            },
+            "umbrel": {
+                "page": {
+                    "title": "<0>Umbrel</0> node ला कनेक्ट करा",
+                    "instructions": "In your Umbrel dashboard go to <0>Connect Wallet</0>. Select <0>lndconnect REST</0> and copy the <0>lndconnect URL</0>. (Depending on your setup you can either use the local connection or the Tor connection.)"
+                },
+                "rest_url": {
+                    "label": "lndconnect REST URL",
+                    "placeholder": "lndconnect://yournode:8080?..."
+                }
+            },
+            "mynode": {
+                "page": {
+                    "title": "<0>myNode</0> ला कनेक्ट करा",
+                    "instructions": "On your myNode homepage click on the <0>Wallet</0> button for your <0>lightning</0> service.<1/> Now click on the <0>Pair Wallet</0> button under the <0>Status</0> tab. Enter your password when prompted.<1/> Select the dropdown menu and choose a pairing option. Depending on your setup you can either use the <0>lightning (REST + Local IP)</0> connection or the <0>lightning (REST + Tor)</0> connection."
+                },
+                "rest_url": {
+                    "label": "lndconnect REST URL",
+                    "placeholder": "lndconnect://yournode:8080?..."
+                }
+            },
+            "startos": {
+                "page": {
+                    "title": "your <0>StartOS</0> node ला कनेक्ट करा",
+                    "instructions": "<0>Note:</0> Currently we only support LND but we will be adding c-lightning support in the future!<1/>On your StartOS dashboard click on the <0>Lightning Network Daemon</0> service.<1/>Select the <0>Properties</0> tab.<1/>Now copy the <0>LND Connect REST URL.</0>"
+                },
+                "rest_url": {
+                    "label": "lndconnect REST URL",
+                    "placeholder": "lndconnect://yournode:8080?..."
+                }
+            },
+            "raspiblitz": {
+                "page": {
+                    "title": "your <0>RaspiBlitz</0> node ला कनेक्ट करा",
+                    "instructions1": "या चरणांचे अनुसरण करा:<1/> 1. <0>SSH</0> तुमच्या <0>Raspiblitz</0><1/>2. सूचीमधून <0>अ‍ॅप्स कनेक्ट करा आणि क्रेडेंशियल दाखवा</0> निवडा<1/><0/>3. <0>Alby ला या नोडशी कनेक्ट करा</0><1/>4 निवडा. कनेक्शन क्रेडेन्शियल प्रदर्शित करण्यासाठी <0>ओके</0> दाबा<1/><1/>कनेक्‍ट करण्यासाठी <0>REST API होस्ट</0> किंवा <0>.onion</0> पत्ता कॉपी आणि पेस्ट करा टोर द्वारे खालील इनपुटमध्ये.",
+                    "instructions2": "खालील इनपुटमध्ये (admin) <0>macaroon</0> कॉपी करा."
+                },
+                "rest_api_host": {
+                    "label": "REST API host",
+                    "placeholder": "your-node-onion-address:port"
+                }
+            },
+            "blink": {
+                "page": {
+                    "title": "<0>Blink Wallet ला कनेक्ट करा</0>"
+                }
+            },
+            "bitcoin_jungle": {
+                "page": {
+                    "title": "<0>Bitcoin Jungle Wallet ला कनेक्ट करा</0>"
+                }
+            },
+            "btcpay": {
+                "config": {
+                    "label": "Config data"
+                },
+                "errors": {
+                    "connection_failed": "कनेक्शन अयशस्वी झाले. BTCPay कनेक्शन URL योग्य आणि प्रवेशयोग्य आहे का?"
+                }
+            },
+            "commando": {
+                "page": {
+                    "instructions": "Make sure you have Core Lightning version 0.12.0 or newer, the commando plugin is running and your node is accessible over the lightning network. Create a rune by running 'lightning-cli commando-rune'."
+                }
+            }
+        },
+        "home": {
+            "actions": {
+                "send_satoshis": "⚡️  Satoshis पाठवा ⚡️",
+                "enable_now": "आता सुरू करा"
+            },
+            "default_view": {
+                "is_blocked_hint": "Alby सध्या {{host}} वर अक्षम आहे",
+                "block_removed": "{{host}} सक्षम केले. कृपया वेबसाइट रीलोड करा."
+            }
+        },
+        "accounts": {
+            "account_view": {
+                "name": {
+                    "title": "नाव"
+                },
+                "export": {
+                    "waiting": "एलएनडीहब डेटाची वाट पाहत...",
+                    "your_ln_address": "आपला Lightning Address:",
+                    "export_uri": "LNDHub Credentials URI",
+                    "scan_qr": "क्यूआरकोड स्कॅन करून हे वॉलेट Zeus किंवा BlueWallet आयात करा."
+                },
+                "nostr": {
+                    "title": "Nostr",
+                    "hint": "एक सोपा आणि खुला प्रोटोकॉल आहे ज्याचा उद्देश सेन्सॉरशिप-प्रतिरोधक सामाजिक नेटवर्क तयार करणे आहे. नॉस्टर क्रिप्टोग्राफिक कीसह कार्य करते. एखादी गोष्ट प्रकाशित करण्यासाठी आपण आपल्या कुंजीसह स्वाक्षरी करा आणि एकाधिक रिलेवर पाठवा. आपण आपली Nostr की व्यवस्थापित करण्यासाठी Alby वापरू शकता. त्यानंतर बरेच Nostr अनुप्रयोग आपल्याला Alby exntension वापरण्याची परवानगी देतील.",
+                    "private_key": {
+                        "title": "Manage your key",
+                        "subtitle": "Paste your private key or generate a new one. <0>Learn more »</0>",
+                        "success": "खाजगी की एनक्रिप्ट केली आणि यशस्वीरित्या जतन केली.",
+                        "failed_to_remove": "एंटर केलेले खाते नाव जुळत नाही, तुमचे जुने खाजगी पुनर्संचयित केले गेले आहे.",
+                        "successfully_removed": "खाजगी key यशस्वीरित्या काढली.",
+                        "label": "Private Key"
+                    },
+                    "public_key": {
+                        "label": "Public Key"
+                    },
+                    "generate_keys": {
+                        "title": "नवीन Nostr की तयार करा",
+                        "screen_reader": "तुमच्या खात्यासाठी नवीन Nostr की तयार करा",
+                        "hint": "तुम्ही या खात्याच्या तपशिलांमधून एक यादृच्छिक की किंवा व्युत्पन्न की तयार करू शकता (स्वाक्षरी केलेले प्रामाणिक वाक्यांश वापरून). <0>अधिक जाणून घ्या »</0>"
+                    },
+                    "actions": {
+                        "generate": "नवीन की व्युत्पन्न करा"
+                    },
+                    "errors": {
+                        "failed_to_load": "Nostr की लोड करण्यात अयशस्वी. ती वैध Nostr key आहे का?"
+                    }
+                }
+            }
+        },
+        "unlock": {
+            "unlock_to_continue": "चालू ठेवण्यासाठी अनलॉक करा",
+            "unlock_password": "तुमचा अनलॉक पासवर्ड",
+            "help_contact": {
+                "part1": "मदत हवी आहे? संपर्क साधा",
+                "part2": "Alby सपोर्ट"
+            },
+            "unlock_error": {
+                "help": "तुमचा खाते डेटा तुमच्या अनलॉक पासवर्डसह कूटबद्ध केला आहे. तुम्ही तुमचा अनलॉक पासवर्ड खरोखर विसरलात तर तुम्हाला तुमचे Lightning खाते रीसेट करून पुन्हा जोडावे लागेल.",
+                "link": "आता रीसेट करा आणि नवीन खाते जोडा"
+            },
+            "errors": {
+                "invalid_password": "चुकीचा पासवर्ड"
+            }
+        },
+        "settings": {
+            "browser_notifications": {
+                "title": "ब्राउझरकडून सूचना",
+                "subtitle": "पेमेंट आणि प्रमाणीकरण संबंधित सूचना."
+            },
+            "website_enhancements": {
+                "title": "वेबसाइट सुधारणा"
+            },
+            "camera_access": {
+                "title": "Camera access",
+                "subtitle": "QR कोड स्कॅन करण्यासाठी",
+                "allow": "कॅमेरा प्रवेशास परवानगी द्या",
+                "granted": "परवानगी दिली"
+            },
+            "language": {
+                "title": "भाषा",
+                "subtitle": "अजून 100% भाषांतरे पूर्ण झालेली नाहीत. <0>तुमच्या भाषेत Alby चे भाषांतर करण्यास आम्हाला मदत करा!</0>"
+            },
+            "theme": {
+                "title": "Theme",
+                "subtitle": "Use Alby in dark or light mode",
+                "options": {
+                    "dark": "डार्क",
+                    "light": "लाइट",
+                    "system": "डीफॉल्ट"
+                }
+            },
+            "show_fiat": {
+                "title": "Sats to Fiat",
+                "subtitle": "निवडलेल्या एक्सचेंजमधून नेहमी निवडलेल्या चलनात रूपांतरित करा"
+            },
+            "currency": {
+                "title": "चलन",
+                "subtitle": "या चलनात अतिरिक्त रक्कम दाखवा"
+            },
+            "exchange": {
+                "title": "एक्सचेंज स्रोत",
+                "subtitle": "बिटकॉइन विनिमय दरांचा स्रोत"
+            },
+            "personal_data": {
+                "title": "वैयक्तिक डेटा",
+                "description": "देयके पेमेंटसह अतिरिक्त डेटा पाठवण्याची विनंती करू शकतात. हा डेटा तुमच्या संमतीशिवाय कोणाशीही शेअर केला जात नाही, हा डेटा पेमेंटसह पाठवण्यापूर्वी तुम्हाला नेहमी सूचित केले जाईल."
+            },
+            "name": {
+                "title": "नाव",
+                "subtitle": "",
+                "placeholder": "तुमचे नाव प्रविष्ट करा"
+            },
+            "email": {
+                "title": "ईमेल",
+                "subtitle": "",
+                "placeholder": "तुमचा ईमेल पत्ता प्रविष्ट करा"
+            },
+            "change_password": {
+                "title": "अनलॉक पासवर्ड बदला",
+                "subtitle": "",
+                "screen_reader": "अनलॉक पासवर्ड बदला",
+                "choose_password": {
+                    "label": "नवीन अनलॉक पासवर्ड टाका:"
+                },
+                "confirm_password": {
+                    "label": "नवीन पासवर्डची पुष्टी करा:"
+                },
+                "submit": {
+                    "label": "बदला"
+                },
+                "errors": {
+                    "enter_password": "कृपया नवीन अनलॉक पासवर्ड टाका.",
+                    "confirm_password": "कृपया तुमच्या पासवर्डची पुष्टी करा.",
+                    "mismatched_password": "संकेतशब्द जुळत नाहीत."
+                },
+                "success": "पासवर्ड यशस्वीरित्या बदलला"
+            }
+        },
+        "send": {
+            "title": "Send",
+            "input": {
+                "label": "प्राप्तकर्ता",
+                "hint": "चालन, Lightning address किंवा LNURL"
+            }
+        },
+        "lnurlpay": {
+            "amount": {
+                "label": "रक्कम"
+            },
+            "comment": {
+                "label": "टिप्पणी"
+            },
+            "name": {
+                "label": "नाव"
+            },
+            "email": {
+                "label": "ईमेल"
+            },
+            "success": "पेमेंट यशस्वीरीत्या पाठवले!"
+        },
+        "lnurlauth": {
+            "title": "Authentication",
+            "content_message": {
+                "heading": "तुम्हाला लॉग इन करायचे आहे का"
+            },
+            "submit": "लॉग इन",
+            "success": "{{name}} वर लॉगिन यशस्वी झाले",
+            "errors": {
+                "status": "समस्या: प्रमाणीकरण स्थिती ठीक नाही"
+            }
+        },
+        "lnurlchannel": {
+            "title": "चॅनेल विनंती",
+            "content_message": {
+                "heading": "नोडमधून चॅनेलची विनंती करा"
+            },
+            "success": "{{name}} ला चॅनल विनंती यशस्वीरीत्या पाठवली"
+        },
+        "lnurlwithdraw": {
+            "title": "मागे घ्या",
+            "content_message": {
+                "heading": "रक्कम"
+            },
+            "amount": {
+                "label": "रक्कम"
+            },
+            "success": "{{sender}} ला {{amount}} पैसे काढण्याची विनंती यशस्वीरीत्या पाठवली"
+        },
+        "receive": {
+            "title": "प्राप्त करा",
+            "actions": {
+                "create_invoice": "चालन तयार करा"
+            },
+            "amount": {
+                "label": "रक्कम",
+                "placeholder": "सतोशीमधील रक्कम..."
+            },
+            "description": {
+                "label": "वर्णन",
+                "placeholder": "उदा. हे पेमेंट कोण पाठवत आहे?"
+            },
+            "success": "पेमेंट मिळाले!",
+            "payment": {
+                "waiting": "पेमेंटची वाट पाहत आहे...",
+                "status": "पेमेंट स्थिती तपासा"
+            }
+        },
+        "publishers": {
+            "title": "तुमच्या ⚡ वेबसाइट्स",
+            "description": "तुम्ही ज्या वेबसाईट्स याआधी Alby वापरल्या आहेत",
+            "no_info": "असे दिसते की तुम्ही अद्याप कोणत्याही वेबसाइटवर Alby वापरलेले नाही.",
+            "discover": "वेबसाइट शोधा",
+            "publisher": {
+                "allowance": {
+                    "title": "भत्ता",
+                    "used_budget": "sats वापरले"
+                }
+            }
+        },
+        "make_invoice": {
+            "title": "चालन तयार करा",
+            "amount": {
+                "label": "रक्कम (Satoshi)"
+            },
+            "memo": {
+                "label": "Memo"
+            },
+            "errors": {
+                "amount_too_small": "रक्कम किमान पेक्षा कमी आहे",
+                "amount_too_big": "रक्कम कमाल ओलांडली"
+            }
+        },
+        "confirm_sign_message": {
+            "title": "Sign",
+            "content": "ही वेबसाइट तुम्हाला स्वाक्षरी करण्यास सांगते:"
+        },
+        "confirm_keysend": {
+            "title": "पेमेंट मंजूर करा",
+            "success": "पेमेंट पाठवले! Preimage: {{preimage}}",
+            "payment_summary": {
+                "description": "पेमेंट पाठवा: {{destination}}"
+            }
+        },
+        "keysend": {
+            "title": "पाठवा",
+            "success": "पेमेंट पाठवले! preimage: {{preimage}}",
+            "amount": {
+                "label": "रक्कम (Satoshi)"
+            }
+        },
+        "confirm_payment": {
+            "title": "पेमेंट मंजूर करा",
+            "success": "{{amount}} चे पेमेंट यशस्वी!"
+        },
+        "confirm_request_permission": {
+            "title": "विनंती मंजूर करा",
+            "allow": "या वेबसाइटला कार्यान्वित करण्यास अनुमती द्या:",
+            "always_allow": "माझी निवड लक्षात ठेवा आणि पुन्हा विचारू नका"
+        },
+        "nostr": {
+            "title": "Nostr",
+            "content": "ही वेबसाइट तुम्हाला स्वाक्षरी करण्यास सांगते:",
+            "block_and_ignore": "{{host}} ला अवरोधित करा आणि दुर्लक्ष करा",
+            "block_added": "ब्लॉकलिस्टमध्ये {{होस्ट}} जोडले, कृपया वेबसाइट रीलोड करा."
+        },
+        "transactions": {
+            "title": "व्यवहार"
+        }
+    },
+    "common": {
+        "password": "पासवर्ड",
+        "confirm_password": "पासवर्डची पुष्टी करा",
+        "success": "यश",
+        "discover": "शोध",
+        "connected_sites": "",
+        "sats_one": "sat",
+        "sats_other": "sats",
+        "loading": "लोड होत आहे",
+        "amount": "रक्कम",
+        "optional": "पर्यायी",
+        "feedback": "अभिप्राय",
+        "copied": "कॉपी केलेले!",
+        "description": "वर्णन",
+        "description_full": "संपूर्ण वर्णन",
+        "success_message": "{{amount}}{{fiatAmount}} {{destination}} ला पाठवले",
+        "response": "प्रतिसाद",
+        "message": "संदेश",
+        "help": "मदत",
+        "actions": {
+            "back": "मागे",
+            "delete": "हटवा",
+            "edit": "संपादित करा",
+            "next": "पुढील",
+            "open": "उघडा",
+            "confirm": "पुष्टी करा",
+            "continue": "सुरू ठेवा",
+            "connect": "जोडणे",
+            "lock": "लॉक",
+            "unlock": "अनलॉक",
+            "send": "पाठवा",
+            "save": "जतन करा",
+            "receive": "प्राप्त करा",
+            "receive_again": "दुसरे पेमेंट प्राप्त करा",
+            "close": "बंद करा",
+            "export": "निर्यात",
+            "remove": "काढून टाका",
+            "copy": "कॉपी",
+            "copy_invoice": "",
+            "log_in": "लॉग इन",
+            "remember": "माझी निवड लक्षात ठेवा आणि पुन्हा विचारू नका"
+        },
+        "errors": {
+            "connection_failed": "कनेक्शन अयशस्वी",
+            "payment_failed": "पेमेंट अयशस्वी"
+        },
+        "range": {
+            "between": "{{min}} आणि {{max}} दरम्यान",
+            "lessThanOrEqual": "≤ {{max}}",
+            "greaterOrEqual": "≥ {{min}}"
+        }
+    },
+    "components": {
+        "allowance_menu": {
+            "confirm_delete": "तुम्हाला खात्री आहे की तुम्ही ही वेबसाइट हटवू इच्छिता?",
+            "hint": "हे वर्तमान बजेट रीसेट करेल",
+            "new_budget": {
+                "label": "नवीन बजेट"
+            },
+            "enable_login": {
+                "title": "वेबसाइट लॉगिन सक्षम करा",
+                "subtitle": "वेबसाइट विनंती करते तेव्हा पुष्टी न करता आपोआप लॉग इन करा."
+            },
+            "edit_allowance": {
+                "title": "भत्ता संपादित करा",
+                "screen_reader": "भत्त्यासाठी पर्याय"
+            }
+        },
+        "qrcode_scanner": {
+            "title": "QR कोड स्कॅन करा",
+            "actions": {
+                "start_scanning": "स्कॅनिंग सुरू करा",
+                "stop_scanning": "स्कॅनिंग थांबवा"
+            },
+            "errors": {
+                "allow_camera_access": "कृपया सेटिंग्ज स्क्रीनमध्ये कॅमेरा प्रवेशास अनुमती द्या."
+            }
+        },
+        "transactions_table": {
+            "fee": "शुल्क",
+            "preimage": "प्रीइमेज",
+            "received": "प्राप्त",
+            "sent": "पाठवले",
+            "open_location": "वेबसाइट उघडा"
+        },
+        "budget_control": {
+            "remember": {
+                "label": "लक्षात ठेवा आणि बजेट सेट करा",
+                "description": "पेमेंट संपेपर्यंत त्याची पुष्टी करण्यासाठी विचारले जाणार नाही यासाठी तुम्ही शिल्लक सेट करू शकता."
+            },
+            "budget": {
+                "label": "बजेट"
+            }
+        },
+        "companion_download_info": {
+            "heading": "तुम्हाला TOR नेटवर्कशी कसे जोडायचे आहे?",
+            "download": "डाउनलोड करा",
+            "companion": {
+                "title": "सहकारी अॅप",
+                "description": "तुमच्या ब्राउझरला TOR नेटवर्कशी जोडणारे लाइटवेट अॅप."
+            },
+            "tor_native": {
+                "title": "TOR (native)",
+                "description": "हा ब्राउझर आधीच TOR नेटवर्कशी जोडलेला असल्यास हा पर्याय निवडा."
+            }
+        },
+        "toasts": {
+            "connection_error": {
+                "what_you_can_do": "तुम्ही काय करू शकता ते येथे आहे:",
+                "double_check": "तुमचे कनेक्शन तपशील पुन्हा तपासा",
+                "if_ssl_errors": "आणि SSL त्रुटी असल्यास (उदा. ERR_CERT_AUTHORITY_INVALID), \"प्रगत\" वर क्लिक करा आणि प्रमाणपत्र स्वीकारण्यासाठी पुढे जा.",
+                "visit_guides": "अधिक मदतीसाठी आमच्या मार्गदर्शकांना भेट द्या"
+            },
+            "login_failed": {
+                "password_reset": "तुमचा पासवर्ड विसरलात? येथे क्लिक करा"
+            },
+            "errors": {
+                "invalid_credentials": "अवैध पासवर्ड. कृपया तुमच्या पासवर्ड आणि ईमेल पत्त्याचे पुनरावलोकन करा आणि पुन्हा प्रयत्न करा."
+            }
+        },
+        "account_menu": {
+            "screen_reader": "टॉगल ड्रॉपडाउन"
+        }
+    },
+    "permissions": {
+        "commando": {
+            "bkpr-listbalances": "सर्व चालू आणि ऐतिहासिक खात्यातील शिल्लकांची यादी",
+            "checkmessage": "दिलेल्या नोडद्वारे स्वाक्षरी तयार केली आहे याची पडताळणी करा",
+            "connect": "दुसऱ्या नोडसह नवीन कनेक्शन स्थापित करा",
+            "decode": "bolt11/bolt12/rune स्ट्रिंग डीकोड करा",
+            "decodepay": "bolt11 string तपासा आणि पार्स करा",
+            "disconnect": "समयावत असलेले विद्यमान कनेक्शन बंद करा",
+            "feerates": "CLN वापरेल ते fee rates परत करा",
+            "fundchannel": "निधी व्यवहार करून समवयस्क व्यक्तीसोबत पेमेंट चॅनल उघडा",
+            "getinfo": "नोडचा सारांश मिळवा",
+            "getroute": "Lightning नोडला देय देण्यासाठी सर्वोत्तम मार्ग शोधा",
+            "invoice": "पेमेंटची अपेक्षा निर्माण करा",
+            "keysend": "दुसऱ्या नोडला पेमेंट पाठवा",
+            "listforwards": "फॉरवर्ड करण्याचा प्रयत्न केलेल्या सर्व htlcs ची यादी करा",
+            "listfunds": "उपलब्ध सर्व निधीची यादी करा",
+            "listinvoices": "सर्व चलनांची स्थिती मिळवा",
+            "listnodes": "गॉसिप संदेशांद्वारे नोडने शिकलेल्या नोड्सची यादी करा",
+            "listoffers": "सर्व ऑफर सूचीबद्ध करा किंवा विशिष्ट ऑफर मिळवा",
+            "listpays": "सर्व वेतन आदेशांची स्थिती मिळवते",
+            "listpeers": "या नोडसह जोडलेले किंवा खुले चॅनेल असलेले नोड सूचीबद्ध करा",
+            "listsendpays": "सर्व सेंडपे आदेशांची स्थिती प्राप्त होते",
+            "listtransactions": "वॉलेटमध्ये ट्रॅक केलेल्या व्यवहारांची यादी करा",
+            "multifundchannel": "एकल फंडिंग व्यवहार करून नोड्ससह अनेक पेमेंट चॅनेल उघडा",
+            "offer": "ऑफर तयार करा",
+            "pay": "BOLT11 इनव्हॉइसवर पेमेंट पाठवा",
+            "sendpay": "मार्गाने पेमेंट पाठवा",
+            "setchannel": "चॅनेलसाठी जाहिरात केलेली फी / htlc श्रेणी कॉन्फिगर करा",
+            "signmessage": "या नोडवरून स्वाक्षरी तयार करा"
+        },
+        "lnd": {
+            "getinfo": "नोड माहिती मिळवा",
+            "listchannels": "सर्व खुल्या चॅनेलचे वर्णन मिळवा",
+            "listinvoices": "सर्व चलनांची यादी मिळवा",
+            "channelbalance": "सर्व खुल्या चॅनेलवर एकूण निधीचा अहवाल मिळवा",
+            "walletbalance": "वॉलेटचे एकूण न खर्च केलेले आउटपुट मिळवा",
+            "openchannel": "नवीन चॅनेल उघडा",
+            "connectpeer": "रिमोट पीअरशी कनेक्शन स्थापित करा",
+            "disconnectpeer": "रिमोट पीअरपासून डिस्कनेक्ट करा",
+            "getchaninfo": "दिलेल्या चॅनेलसाठी नेटवर्क घोषणा मिळवा",
+            "getnetworkinfo": "ज्ञात चॅनेल आलेखाबद्दल मूलभूत आकडेवारी मिळवा",
+            "getnodeinfo": "नोडसाठी चॅनेल माहिती मिळवा",
+            "gettransactions": "वॉलेटशी संबंधित सर्व व्यवहारांची यादी मिळवा",
+            "listpayments": "सर्व आउटगोइंग पेमेंट्सची यादी मिळवा",
+            "listpeers": "सध्या सक्रिय असलेल्या सर्व मित्रांची यादी मिळवा",
+            "lookupinvoice": "चालन तपशील पहा",
+            "queryroutes": "संभाव्य मार्गासाठी प्रश्न",
+            "verifymessage": "संदेशावर स्वाक्षरीची पडताळणी करा",
+            "sendtoroute": "निर्दिष्ट मार्गाने पेमेंट करा",
+            "decodepayreq": "पेमेंट विनंती स्ट्रिंग डीकोड करा",
+            "routermc": "अंतर्गत मिशन नियंत्रण स्थिती वाचा",
+            "addinvoice": "नवीन पावत्या तयार करा",
+            "addholdinvoice": "नवीन HODL पावत्या तयार करा",
+            "settleinvoice": "स्वीकारलेले बीजक सेटल करा"
+        },
+        "lnc": {
+            "getchaninfo": "दिलेल्या चॅनेलसाठी नेटवर्क घोषणा मिळवा",
+            "getnetworkinfo": "ज्ञात चॅनेल आलेखाबद्दल मूलभूत आकडेवारी मिळवा",
+            "getnodeinfo": "नोडसाठी चॅनेल माहिती मिळवा",
+            "gettransactions": "वॉलेटशी संबंधित सर्व व्यवहारांची यादी मिळवा",
+            "listpayments": "सर्व आउटगोइंग पेमेंट्सची यादी मिळवा",
+            "listpeers": "सध्या सक्रिय असलेल्या सर्व मित्रांची यादी मिळवा",
+            "lookupinvoice": "चालन तपशील पहा",
+            "queryroutes": "संभाव्य मार्गासाठी प्रश्न",
+            "verifymessage": "संदेशावर स्वाक्षरीची पडताळणी करा",
+            "sendtoroute": "निर्दिष्ट मार्गाने पेमेंट करा",
+            "decodepayreq": "Payment request string डीकोड करा",
+            "routermc": "अंतर्गत मिशन नियंत्रण स्थिती वाचा",
+            "addinvoice": "नवीन पावत्या तयार करा",
+            "addholdinvoice": "नवीन HODL पावत्या तयार करा",
+            "settleinvoice": "स्वीकारलेले बीजक सेटल करा"
+        }
+    }
+}

@@ -23,7 +23,7 @@ function MnemonicExplanation() {
   });
   const { t: tCommon } = useTranslation("common");
 
-  const [selectedCard, setSelectedCard] = useState("backup");
+  const [selectedCard, setSelectedCard] = useState<string | null>(null);
   const [hasMnemonic, setHasMnemonic] = useState(false);
 
   useEffect(() => {
@@ -64,18 +64,21 @@ function MnemonicExplanation() {
                 hasMnemonic ? t("secure.description") : t("create.description")
               }
               icon={PopiconsKeyLine}
+              active={selectedCard === "backup"}
               onClick={() => setSelectedCard("backup")}
             />
             <CardButton
               title={t("import.title")}
               description={t("import.description")}
               icon={PopiconsDownloadLine}
+              active={selectedCard === "import"}
               onClick={() => setSelectedCard("import")}
             />
             <CardButton
               title={t("import_nostr.title")}
               description={t("import_nostr.description")}
               icon={PopiconsOstrichLine}
+              active={selectedCard === "importNostr"}
               onClick={() => setSelectedCard("importNostr")}
             />
           </CardButtonGroup>
@@ -86,6 +89,7 @@ function MnemonicExplanation() {
             label={tCommon("actions.next")}
             primary
             flex
+            disabled={!selectedCard}
             onClick={() => {
               if (selectedCard === "backup") {
                 hasMnemonic
