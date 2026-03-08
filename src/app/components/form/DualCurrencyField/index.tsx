@@ -244,6 +244,9 @@ export default function DualCurrencyField({
           inputMode={isFiatMode ? "decimal" : "numeric"}
           name={id}
           id={id}
+          aria-label={
+            isFiatMode ? `${label} (${settings.currency})` : `${label} (Sats)`
+          }
           className={classNames(
             "dual-currency-field",
             "block w-full placeholder-gray-500 dark:placeholder-gray-600 dark:text-white",

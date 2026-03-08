@@ -87,9 +87,8 @@ export const SettingsProvider = ({
       const response = await api.getCurrencyRate(); // gets rate from browser.storage or API
 
       // update local ref
-      const rate = typeof response === "number" ? response : response.rate;
       currencyRate.current = {
-        rate,
+        rate: response.rate,
         currency: settings.currency,
       };
     }
