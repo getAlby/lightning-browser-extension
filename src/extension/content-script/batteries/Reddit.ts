@@ -1,7 +1,7 @@
 import getOriginData from "../originData";
 import { findLightningAddressInText, setLightningData } from "./helpers";
 
-const urlMatcher = /^https?:\/\/(?:www\.)?reddit\.com\/(?:u|user)\/([^/?#]+)\/?(?:\?.*)?(?:#.*)?$/;
+const urlMatcher = /^https?:\/\/(?:www\.)?reddit\.com\/(?:u|user)\/([^/?#]+)/;
 
 const battery = (): void => {
   const bioSelectors = ["#profile--about-card p", "[data-testid=\"user-description\"]", ".ProfileSidebar__about"];
