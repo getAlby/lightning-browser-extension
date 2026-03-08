@@ -1,16 +1,15 @@
 import getOriginData from "../originData";
 import { findLightningAddressInText, setLightningData } from "./helpers";
 
-const urlMatcher = /^https?:\/\/[^/]+\/@[^/?#]+(?:\/)?(?:\?.*)?(?:#.*)?$/;
+const urlMatcher = /^https?:\/\/[^/]+\/@[^/?#]+\/?(?:\?.*)?(?:#.*)?$/;
 
 const battery = (): void => {
-  const isActivityPub = !!(
-    document.querySelector("link[rel=\"alternate\"][type=\"application/activity+json\"]") ||
-    document.querySelector("meta[property=\"og:site_name\"][content*=\"Mastodon\"]") ||
-    document.querySelector(".p-note, .account__header__content")
+  const isProfile = !!(
+    document.querySelector(".p-author, .p-name, .account__header, .public-account-header") ||
+    document.querySelector("meta[property=\"og:type\"][content=\"profile\"]")
   );
 
-  if (!isActivityPub) return;
+  if (!isProfile) return;
 
   const bioSelectors = [".p-note", ".account__header__content", ".public-account-bio"];
   let address = null;
