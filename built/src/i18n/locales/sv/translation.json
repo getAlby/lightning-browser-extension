@@ -1,0 +1,970 @@
+{
+    "translation": {
+        "welcome": {
+            "set_password": {
+                "choose_password": {
+                    "label": "Välj ett lösenord för upplåsning:"
+                },
+                "confirm_password": {
+                    "label": "Bekräfta att du skrivit in lösenordet korrekt:"
+                },
+                "errors": {
+                    "enter_password": "Skriv in ett lösenord.",
+                    "confirm_password": "Bekräfta ditt lösenord.",
+                    "mismatched_password": "Lösenorden överensstämmer inte."
+                }
+            },
+            "test_connection": {
+                "ready": "Fantastiskt, du är redo att börja!",
+                "connection_error": "Anslutningsfel",
+                "review_connection_details": "Se över dina anslutningsinställningar.",
+                "connection_taking_long": "Anslutningen tar längre tid än förväntat... Är inställningarna korrekta? Är din nod nåbar?",
+                "contact_support": "Om du behöver hjälp, kontakta support@getalby.com"
+            },
+            "pin_extension": {
+                "next_btn": "Börja surra {{icon}} med Alby"
+            }
+        },
+        "choose_connector": {
+            "description": "Anslut till din externa lightning-plånbok eller node",
+            "lnd": {
+                "page": {
+                    "title": "Anslut din LND-nod",
+                    "description": "Du behöver URLen till din nod samt en macaroon med läs och skicka-rättigheter (t.ex. admin.macaroon)"
+                },
+                "url": {
+                    "label": "REST API värd och port",
+                    "placeholder": "https://your-node-url:8080"
+                },
+                "macaroon": {
+                    "label": "Macaroon (HEX-format)"
+                },
+                "drag_and_drop": "Drag och släpp din macaroon här eller <0>bläddra</0>",
+                "errors": {
+                    "connection_failed": "Koppling misslyckades. Är dina LND-uppgifter korrekta?"
+                }
+            },
+            "lndhub_go": {
+                "title": "LNDHub",
+                "page": {
+                    "title": "Koppla till LNDHub",
+                    "description": "Fyll i dina LNDHub-uppgifter eller skanna QR-koden med din webbkamera."
+                },
+                "uri": {
+                    "label": "LNDHub Export URI"
+                },
+                "errors": {
+                    "invalid_uri": "Ogiltig LNDHub URI",
+                    "connection_failed": "Koppling misslyckades. Är din LNDHub URI korrekt?"
+                }
+            },
+            "lnbits": {
+                "title": "LNbits",
+                "page": {
+                    "title": "Anslut <0>LNbits</0>",
+                    "instructions": "I LNBits, välj den plånbok du vill ansluta, öppna den och klicka på API info och kopiera Admin-nyckeln. Klistra in nedan:"
+                },
+                "admin_key": {
+                    "label": "LNBits Admin-nyckel",
+                    "placeholder": "Din 32-siffriga admin-nyckel"
+                },
+                "url": {
+                    "label": "LNbits URL"
+                },
+                "errors": {
+                    "connection_failed": "Anslutningen misslyckades. Har du korrekt URL och Admin-nyckel?"
+                }
+            },
+            "eclair": {
+                "title": "Eclair",
+                "page": {
+                    "title": "Anslut <0>Eclair</0>",
+                    "instructions": "Du behöver din Eclair URL och lösenord."
+                },
+                "password": {
+                    "label": "Eclair lösenord"
+                },
+                "url": {
+                    "label": "Eclair URL",
+                    "placeholder": "http://localhost:8080"
+                }
+            },
+            "citadel": {
+                "page": {
+                    "title": "Anslut <0>Citadel</0>-nod"
+                }
+            },
+            "umbrel": {
+                "page": {
+                    "title": "Anslut <0>Umbrel</0>-nod",
+                    "instructions": "1. Gå till <0>Anslut plånbok</0><1/>2 i din Lightning Node-instrumentpanel. Välj läge <0>REST (Tor)</0> eller <0>REST (Lokalt nätverk)</0><1/>3. Kopiera <0>lndconnect URL</0> och klistra in den nedan"
+                },
+                "rest_url": {
+                    "label": "lndconnect REST URL",
+                    "placeholder": "lndconnect://yournode:8080?..."
+                }
+            },
+            "mynode": {
+                "page": {
+                    "title": "Anslut <0>myNode</0>",
+                    "instructions": "På din myNode-hemsida, klicka på knappen <0>Wallet</0> som motsvarar din <0>Lightning</0>-tjänst. <1/> Klicka på knappen <0>Pair Wallet</0> under fliken <0>Status</0>. Fyll i ditt lösenord när du blir tillfrågad.<1/> I droppmenym välj kopplingsalternativ. Beroende på dina inställningar kan du antingen välja <0>Lightning (REST + Local IP)</0> eller <0>Lightning (REST + Tor)</0>."
+                },
+                "rest_url": {
+                    "label": "lndconnect REST URL",
+                    "placeholder": "lndconnect://yournode:8080?..."
+                }
+            },
+            "startos": {
+                "page": {
+                    "title": "Anslut till din <0>StartOS Server</0>",
+                    "instructions": "På din StartOS instrumentpanel klickar du på tjänsten <0>Lightning Network Daemon</0>.<1/>Välj fliken <0>Egenskaper</0>.<1/>Kopiera nu <0>LND Connect REST URL. </0>"
+                },
+                "rest_url": {
+                    "label": "lndconnect REST URL",
+                    "placeholder": "lndconnect://yournode:8080?..."
+                }
+            },
+            "raspiblitz": {
+                "page": {
+                    "title": "Anslut din <0>RaspiBlitz</0>-nod",
+                    "instructions1": "Följ dessa steg:<1/> 1. <0>SSH</0> till din <0>Raspiblitz</0><1/>2. Välj <0>Anslut appar och visa inloggningsuppgifter</0> från listan<1/><0/>3. Välj <0>Anslut Alby till denna nod</0><1/>4. Tryck på <0>OK</0> för att visa anslutningsuppgifterna<1/><1/>Kopiera och klistra in <0>REST API-värden</0> eller <0>.onion</0>-adressen för att ansluta genom Tor till ingången nedan.",
+                    "instructions2": "Kopiera (admin) <0>macaroon</0> till inmatningen nedan."
+                },
+                "rest_api_host": {
+                    "label": "REST API värd",
+                    "placeholder": "din-onion-nod-adress:port"
+                }
+            },
+            "blink": {
+                "page": {
+                    "title": "Anslut <0>Blink Wallet</0>"
+                },
+                "token": {
+                    "label": "Ange din API-nyckel"
+                }
+            },
+            "bitcoin_jungle": {
+                "page": {
+                    "title": "Anslut en <0>Bitcoin Jungle Wallet</0>"
+                }
+            },
+            "btcpay": {
+                "config": {
+                    "label": "Konfigurationsdata"
+                },
+                "errors": {
+                    "connection_failed": "Anslutning misslyckades. Är URL till BTCPay-anslutningen korrekt och tillgänglig?"
+                }
+            },
+            "commando": {
+                "page": {
+                    "instructions": "Säkerställ att du har Core Lightning version 0.12.0 eller nyare, att kommando insticksprogrammet är aktivt samt att din node är nåbar över lightning-nätverket. Skapa en rune genom att köra 'lightning-cli commando-rune'."
+                }
+            },
+            "title": "Anslut Lightning Plånbok",
+            "lnc": {
+                "pairing_phrase": {
+                    "placeholder": "hemlig stack sats fras",
+                    "label": "Din parningsfras "
+                },
+                "title": "Lightning Terminal (LNC)"
+            },
+            "umbrel_lightning_node": {
+                "title": "Lightning Node"
+            }
+        },
+        "home": {
+            "actions": {
+                "send_satoshis": "⚡️ Skicka Satoshis ⚡️",
+                "enable_now": "Aktivera Nu"
+            },
+            "allowance_view": {
+                "sats": "sats",
+                "budget_spent": "Budget förbrukad",
+                "total_spent": "Totalt spenderat",
+                "total_payments": "Totala betalningar",
+                "permissions": "Behörigheter"
+            },
+            "default_view": {
+                "is_blocked_hint": "Alby är för tillfället avstängt hos {{host}}",
+                "block_removed": "Aktiverade {{host}}. Ladda om webbplatsen.",
+                "see_all": "Se alla"
+            }
+        },
+        "accounts": {
+            "account_view": {
+                "nostr": {
+                    "generate_keys": {
+                        "hint": "Du kan generera en slumpmässig nyckel eller få en nyckel från denna kontoinformation (med en signerad kanonisk fras). <0>Läs mer »</0>",
+                        "screen_reader": "Skapa en ny Nostr-nyckel för ditt konto",
+                        "title": "Generera en ny Nostr nyckel",
+                        "actions": {
+                            "random_keys": "Generera en slumpmässig nyckel",
+                            "derived_keys": "Få en nyckel från kontot"
+                        }
+                    },
+                    "errors": {
+                        "failed_to_load": "Det gick inte att ladda Nostr-nyckeln. Är det en giltig Nostr-nyckel?"
+                    },
+                    "private_key": {
+                        "title": "Hantera dina Nostr privata nyckel",
+                        "successfully_removed": "Nostr privat nyckel har tagits bort.",
+                        "label": "Nostr Privat Nyckel",
+                        "subtitle": "Klistra in din nostr privata nyckel eller skapa en ny. <0>Läs mer »</0>",
+                        "success": "Nostr privat nyckel krypterad och sparad.",
+                        "failed_to_remove": "Det angivna kontonamnet matchade inte, din gamla Nostr privata nyckel har återställts."
+                    },
+                    "public_key": {
+                        "label": "Nostr Publik Nyckel"
+                    },
+                    "actions": {
+                        "generate": "Generera en ny nyckel"
+                    },
+                    "title": "Nostr",
+                    "hint": "är ett enkelt och öppet protokoll som syftar till att skapa ett censur beskyddat sociala nätverk. Nostr fungerar med kryptografiska nycklar. För att publicera något signerar du det med din nyckel och skickar det till flera reläer. Du kan använda Alby för att hantera din Nostr-nyckel. Många Nostr-applikationer låter dig då helt enkelt använda nyckeln från Alby-tillägget.",
+                    "settings": {
+                        "label": "Nostr Inställningar",
+                        "title": "Nostr Inställningar",
+                        "imported_key_warning": "⚠️ Du använder för närvarande en importerad eller slumpmässigt genererad Nostr-nyckel. Din privata Nostr-nyckel kan inte återställas av din återställningsfras, så kom ihåg att säkerhetskopiera din privata Nostr-nyckel separat.",
+                        "derive": "Härled från huvudnyckel",
+                        "can_restore": "✅ Nostr-nyckel härledd från din huvudnyckel",
+                        "no_secret_key": "💡 Du har ingen huvudnyckel än. <0>Klicka här</0></div> för att skapa din huvudnyckel och härleda dina Nostr-nycklar.",
+                        "remove": "Ta bort nuvarande nycklar"
+                    }
+                },
+                "remove": {
+                    "error": "Det angivna kontonamnet matchade inte."
+                },
+                "name": {
+                    "title": "Visnings Namn"
+                },
+                "export": {
+                    "waiting": "väntar på LndHub-data...",
+                    "your_ln_address": "Din Lightning Address:",
+                    "export_uri": "LNDHub-inloggnings-URI",
+                    "scan_qr": "Importera denna plånbok till Zeus eller BlueWallet genom att skanna QR-koden."
+                },
+                "actions": {
+                    "export": "Exportera",
+                    "remove_secretkey": "Ta bort huvudnyckeln"
+                },
+                "mnemonic": {
+                    "saved": "Huvudnyckeln krypterad och sparad.",
+                    "generate": {
+                        "title": "Generera ny huvudnyckel",
+                        "button": "Generera huvudnyckel",
+                        "description": "Master Key låter dig interagera med olika protokoll som: Nostr, baslager av Bitcoin eller LNURL-Auth."
+                    },
+                    "backup": {
+                        "save": "Spara huvudnyckeln",
+                        "button": "Visa återställningsfras",
+                        "protocols": {
+                            "nostr": "Nostr"
+                        },
+                        "description": "Skriv ner återställningsfrasen för att kunna återställa din huvudnyckel på en ny enhet eller om du förlorar åtkomsten till ditt konto."
+                    },
+                    "import": {
+                        "title": "Importera din huvudnyckel",
+                        "description": "Använd återställningsfrasen för att importera din huvudnyckel till Alby.",
+                        "button": "Importera huvudnyckel"
+                    },
+                    "lnurl": {
+                        "title": "Logga in med Lightning",
+                        "use_mnemonic": "Använd Master Key för att logga in på lightning appar (LNURL Auth)"
+                    }
+                },
+                "remove_secretkey": {
+                    "title": "Ta bort huvudnyckeln",
+                    "success": "Masternyckeln har tagits bort."
+                },
+                "no_mnemonic_hint": "💡 Du har ingen huvudnyckel än. <0>Klicka här</0></div> för att skapa din huvudnyckel och låsa upp dessa inställningar.",
+                "network": {
+                    "options": {
+                        "bitcoin": "Mainnet",
+                        "testnet": "Testnet",
+                        "regtest": "Regtest"
+                    }
+                }
+            }
+        },
+        "unlock": {
+            "unlock_to_continue": "Lås upp för att fortsätta",
+            "unlock_password": "Ditt upplåsningslösenord",
+            "help_contact": {
+                "part1": "Behvöver du hjälp? Kontakta",
+                "part2": "Alby Support"
+            },
+            "unlock_error": {
+                "help": "Ditt konto är krypterat med ditt upplåsningslösenord. Om du har glömt ditt upplåsningslösenord behöver du nollställa och lägga till ditt Lightning-konto på nytt.",
+                "link": "Nollställ och skapa ett nytt konto"
+            },
+            "errors": {
+                "invalid_password": "Ogiltigt lösenord"
+            }
+        },
+        "settings": {
+            "browser_notifications": {
+                "title": "Webbläsarnotiser",
+                "subtitle": "Betalnings- och autentiseringsrelaterade notiser."
+            },
+            "website_enhancements": {
+                "title": "Webbplatsförbättringar"
+            },
+            "camera_access": {
+                "title": "Åtkomst till kamera",
+                "subtitle": "För att skanna QR-koder",
+                "allow": "Tillåt åtkomst till kamera",
+                "granted": "Åtkomst beviljad"
+            },
+            "language": {
+                "title": "Språk",
+                "subtitle": "Översättningarna är inte fullständiga till 100%. <0>Hjälp oss att översätta Alby till ditt språk!</0>"
+            },
+            "theme": {
+                "title": "Tema",
+                "subtitle": "Använd Alby i mörkt eller ljust läge",
+                "options": {
+                    "dark": "Mörkt",
+                    "light": "Ljust",
+                    "system": "System"
+                }
+            },
+            "show_fiat": {
+                "title": "Sats till Fiat",
+                "subtitle": "Växla alltid till denna valuta från vald valutaväxlare"
+            },
+            "currency": {
+                "title": "Valuta",
+                "subtitle": "Visa belopp även i denna valuta"
+            },
+            "exchange": {
+                "title": "Källa för växlingskurs",
+                "subtitle": "Källa för Bitcoin växlingskurs"
+            },
+            "personal_data": {
+                "title": "Personlig information",
+                "description": "Betalande kan be att få skicka ytterligare information tillsammans med en överföring. Denna information delas inte med någon annan utan ditt samtycke. Du kommer alltid få frågan om denna information ska skickas tillsammmans med en överföring."
+            },
+            "name": {
+                "title": "Namn",
+                "subtitle": "",
+                "placeholder": "Skriv ditt namn"
+            },
+            "email": {
+                "title": "E-post",
+                "subtitle": "",
+                "placeholder": "Skriv in din e-postadress"
+            },
+            "change_password": {
+                "title": "Ändra upplåsningslösenord",
+                "subtitle": "",
+                "screen_reader": "Ända upplåsningslösenord",
+                "choose_password": {
+                    "label": "Skriv in det nya upplåsningslösenordet:"
+                },
+                "confirm_password": {
+                    "label": "Bekräfta nytt lösenord:"
+                },
+                "submit": {
+                    "label": "Ändra"
+                },
+                "errors": {
+                    "enter_password": "Skriv in ett nytt upplåsningslösenord.",
+                    "confirm_password": "Bekräfta ditt lösenord.",
+                    "mismatched_password": "Lösenorden överensstämmer inte."
+                },
+                "success": "Lösenordet har ändrats"
+            }
+        },
+        "send": {
+            "title": "Skicka",
+            "input": {
+                "label": "Mottagare",
+                "hint": "Faktura, Lightning-adress eller LNURL",
+                "hint_with_bitcoin_address": "Faktura, Lightning-adress , LNURL eller bitcoin adress"
+            }
+        },
+        "lnurlpay": {
+            "amount": {
+                "label": "Belopp"
+            },
+            "comment": {
+                "label": "Kommentar"
+            },
+            "name": {
+                "label": "Namn"
+            },
+            "email": {
+                "label": "E-post"
+            },
+            "success": "Klart. Betalning skickad!"
+        },
+        "lnurlauth": {
+            "title": "Autentisering",
+            "content_message": {
+                "heading": "Vill du logga in till"
+            },
+            "submit": "Logga in",
+            "success": "Inloggad till {{name}}",
+            "errors": {
+                "status": "Fel: Auth status är felaktig"
+            }
+        },
+        "lnurlchannel": {
+            "title": "Kanalbegäran",
+            "content_message": {
+                "heading": "Begär kanal från nod"
+            },
+            "success": "Kanalbegäran skickad till {{name}}"
+        },
+        "lnurlwithdraw": {
+            "title": "Återkalla",
+            "content_message": {
+                "heading": "Belopp"
+            },
+            "amount": {
+                "label": "Belopp"
+            },
+            "success": "Återkallelse av begäran om {{amount}} skickad till {{sender}}"
+        },
+        "receive": {
+            "title": "Tag emot",
+            "actions": {
+                "create_invoice": "Skapa Faktura",
+                "redeem": {
+                    "description": "Ta ut en bitcoin-kupong direkt via en LNURL-kod",
+                    "title": "Lösa in"
+                },
+                "invoice": {
+                    "title": "Lightning faktura",
+                    "description": "Begär omedelbara och specifika belopp bitcoinbetalningar"
+                },
+                "bitcoin_address": {
+                    "description": "Ta emot via bitcoin-adress med en bytestjänst",
+                    "title": "Bitcoin adress"
+                }
+            },
+            "amount": {
+                "label": "Belopp",
+                "placeholder": "Belopp i Satoshi..."
+            },
+            "description": {
+                "label": "Beskrivning",
+                "placeholder": "T.ex. vem skickar denna betalning?"
+            },
+            "success": "Betalning mottagen!",
+            "payment": {
+                "waiting": "väntar på betalning...",
+                "status": "Kontrollera betalningsstatus"
+            }
+        },
+        "publishers": {
+            "publisher": {
+                "allowance": {
+                    "title": "Beloppsgräns",
+                    "used_budget": "spenderade sats"
+                }
+            },
+            "description": "Webbplatser där du har använt Alby tidigare",
+            "discover": "Upptäck webbplatser",
+            "no_info": "Det verkar som att du inte har använt Alby på några webbplatser än.",
+            "title": "Dina ⚡ webbsidor"
+        },
+        "make_invoice": {
+            "title": "Skapa Faktura",
+            "amount": {
+                "label": "Belopp (Satoshi)"
+            },
+            "memo": {
+                "label": "PM"
+            },
+            "errors": {
+                "amount_too_small": "Belopp understiger minimigränsen",
+                "amount_too_big": "Belopp överstiger maximumgränsen"
+            }
+        },
+        "confirm_sign_message": {
+            "title": "Signera",
+            "content": "Den här webbplatsen ber dig att logga in:"
+        },
+        "confirm_keysend": {
+            "title": "Godkänn Betalning",
+            "success": "Betalning skickad! Förhandsvy: {{preimage}}",
+            "payment_summary": {
+                "description": "Skicka betalning till: {{destination}}"
+            }
+        },
+        "keysend": {
+            "title": "Skicka",
+            "success": "Betalning skickad! Förhandsvy: {{preimage}}",
+            "receiver": {
+                "label": "Skicka betalning till"
+            },
+            "amount": {
+                "label": "Belopp (Satoshi)"
+            }
+        },
+        "confirm_payment": {
+            "title": "Godkänn Betalning",
+            "success": "Betalning av {{amount}} genomförd!",
+            "actions": {
+                "pay_now": "Betala nu"
+            }
+        },
+        "nostr": {
+            "title": "Nostr",
+            "block_and_ignore": "Blockera och ignorera {{host}}",
+            "block_added": "Lade till {{host}} till blockeringslistan, ladda om webbplatsen.",
+            "content": "Den här webbplatsen ber dig att signera:"
+        },
+        "choose_path": {
+            "alby": {
+                "title": "Alby Konto"
+            },
+            "other": {
+                "title": "Annan Plånbok"
+            }
+        },
+        "alby": {
+            "pre_connect": {
+                "set_password": {
+                    "choose_password": {
+                        "label": "Lösenord"
+                    },
+                    "confirm_password": {
+                        "label": "Bekräfta Lösenord"
+                    },
+                    "errors": {
+                        "mismatched_password": "Lösenordet matchar inte.",
+                        "enter_password": "Vänligen ange ett lösenord.",
+                        "confirm_password": "Vänligen ange ditt lösenord."
+                    }
+                }
+            }
+        },
+        "confirm_request_permission": {
+            "always_allow": "Kom ihåg mitt val och fråga inte igen",
+            "title": "Godkänn begäran",
+            "allow": "Tillåt den här webbplatsen att köra:"
+        },
+        "transactions": {
+            "title": "Transaktion",
+            "description": "Transaktioner för detta konto"
+        },
+        "distributions": {
+            "title": "Anslut till {{namn}}",
+            "description": "Välj vilket {{namn}} app du vill ansluta med",
+            "umbrel": {
+                "name": "Umbrel"
+            },
+            "btcpay": {
+                "name": "BTCPay"
+            },
+            "raspiblitz": {
+                "name": "Raspiblitz"
+            },
+            "mynode": {
+                "name": "myNode"
+            },
+            "startos": {
+                "name": "StartOS"
+            }
+        },
+        "confirm_add_account": {
+            "title": "Lägg till konto",
+            "content": "Den här webbplatsen vill lägga till ett konto ({{connector}}):",
+            "tor_info": "För att kunna ansluta via TOR-nätverket måste du först installera Alby kompanion appen:"
+        },
+        "on_chain": {
+            "title": "Ta emot via bitcoin adress",
+            "instructions2": "Du hittar din bitcoin adress på <0>Ta emot</0> sidan.",
+            "go": "Gå till ditt Alby konto →",
+            "instructions1": "För att ta emot bitcoin via en bitcoin adress, logga in på ditt <0>Alby-konto</0> på getalby.com"
+        },
+        "scan_qrcode": {
+            "title": "Väntar på att skanna"
+        },
+        "lnurlredeem": {
+            "input": {
+                "placeholder": "LNURL...",
+                "label": "LNURL-uttagskod"
+            },
+            "errors": {
+                "invalid_withdraw_request": "Ogiltig LNURL-utagningsbegäran",
+                "invalid_lnurl": "Ogiltig LNURL"
+            },
+            "title": "Lös in bitcoin",
+            "actions": {
+                "withdraw": "Ta ut"
+            }
+        },
+        "confirm_sign_pset": {
+            "title": "Signera",
+            "allow_sign": "Denna webbplats ber dig att underteckna en Liquid transaktion:",
+            "view_raw_transaction": "Visa obearbetad transaktion (Base64)",
+            "hide_raw_transaction": "Göm obearbetad transaktion (Base64)",
+            "inputs": "Ingångar",
+            "outputs": "Utgångar",
+            "amount": "{{amount}} {{ticker}}"
+        },
+        "bitcoin": {
+            "confirm_get_address": {
+                "title": "Hämta Adress"
+            },
+            "allow": "Tillåt den här webbplatsen att:",
+            "allow_sign": "Tillåt {{host}} att signera:",
+            "block_and_ignore": "Blockera och ignorera {{host}}",
+            "block_added": "Lade till {{host}} till blockeringslistan, ladda om webbplatsen.",
+            "confirm_sign_psbt": {
+                "title": "Signera",
+                "hide_raw_transaction": "Göm råtransaktion (hexadecimal)",
+                "view_raw_transaction": "Visa råtransaktion (hexadecimal)",
+                "inputs": "Ingångar",
+                "fee": "Avgift",
+                "allow_sign": "Den här webbplatsen ber dig att underteckna en bitcoin-transaktion",
+                "outputs": "Utgångar"
+            }
+        },
+        "liquid": {
+            "title": "Liquid",
+            "allow": "Tillåt den här webbplatsen att:",
+            "allow_sign": "Tillåt {{host}} att signera:",
+            "block_and_ignore": "Blockera och ignorera {{host}}",
+            "block_added": "Lade till {{host}} till blockeringslistan, ladda om webbplatsen."
+        },
+        "send_to_bitcoin_address": {
+            "service_unavailable": "Tjänsten är för tillfällig inte tillgänglig, försök igen om några minuter.",
+            "amount": {
+                "label": "Belopp (sats)"
+            },
+            "title": "Skicka till bitcoin-adress",
+            "recipient": {
+                "label": "Mottagare"
+            },
+            "network_fee": {
+                "label": "Nätverksavgift"
+            },
+            "service_fee": {
+                "label": "Serviceavgift"
+            },
+            "total": {
+                "label": "Total"
+            },
+            "total_fee": {
+                "label": "Avgift"
+            },
+            "provider": {
+                "label": "Byt leverantör"
+            },
+            "view_on_explorer": "Visa på mempool explorer",
+            "time_estimate": "ℹ️ Transaktioner kommer vanligtvis inom 10-30 minuter."
+        },
+        "webln_enable": {
+            "title": "Anslut till WebLN",
+            "request2": "Begär fakturor och lightning information"
+        },
+        "onboard": {
+            "request3": "Installationen är snabb och enkel",
+            "title": "Ställ in dina nycklar",
+            "actions": {
+                "start_setup": "Starta installationen"
+            }
+        },
+        "liquid_enable": {
+            "request2": "Begär fakturor och likvida uppgifter",
+            "title": "Anslut till Liquid"
+        },
+        "nostr_enable": {
+            "title": "Anslut till Nostr"
+        },
+        "webbtc_enable": {
+            "request2": "Begär fakturor och Webbtc-information",
+            "title": "Anslut till WebBTC"
+        },
+        "alby_enable": {
+            "title": "Anslut till Alby",
+            "request2": "Begär fakturor och albyinformation"
+        },
+        "confirm_payment_async": {
+            "title": "Godkänn betalning",
+            "description": "Detta är en HOLD-faktura. <0>Läs mer »</0>",
+            "actions": {
+                "pay_now": "Betala nu"
+            }
+        }
+    },
+    "common": {
+        "password": "Lösenord",
+        "success": "Genomfört",
+        "error": "Misslyckades",
+        "connected_sites": "Anslutna webbplatser",
+        "loading": "laddar",
+        "amount": "Belopp",
+        "optional": "Valfritt",
+        "feedback": "Återkoppling",
+        "copied": "Kopierad!",
+        "description": "Beskrivning",
+        "description_full": "Fullständig beskrivning",
+        "message": "Meddelande",
+        "help": "Hjälp",
+        "actions": {
+            "back": "Tillbaka",
+            "delete": "Radera",
+            "edit": "Redigera",
+            "next": "Nästa",
+            "open": "Öppna",
+            "cancel": "Avbryt",
+            "confirm": "Bekräfta",
+            "continue": "Fortsätt",
+            "connect": "Anslut",
+            "lock": "Lås",
+            "unlock": "Lås upp",
+            "send": "Skicka",
+            "save": "Spara",
+            "receive": "Tag emot",
+            "close": "Stäng",
+            "export": "Exportera",
+            "remove": "Tag bort",
+            "copy": "Kopiera",
+            "copy_invoice": "Kopiera faktura",
+            "transactions": "Transaktioner",
+            "receive_again": "Ta emot en ny betalning",
+            "remember": "Kom ihåg mitt val och fråga inte igen",
+            "log_in": "Logga in",
+            "more": "Mer",
+            "download": "Ladda ner",
+            "import": "Importera",
+            "copy_clipboard": "Kopiera till urklipp",
+            "paste": "Klistra in",
+            "paste_clipboard": "Klistra in från urklipp",
+            "review": "Recension",
+            "copied_to_clipboard": "Kopierade till urklipp",
+            "disconnect": "Koppla ifrån",
+            "hide": "Dölj"
+        },
+        "errors": {
+            "connection_failed": "Anslutning misslyckades",
+            "payment_failed": "Betalning misslyckades"
+        },
+        "range": {
+            "between": "mellan {{min}} och {{max}}",
+            "lessThanOrEqual": "≤ {{max}}",
+            "greaterOrEqual": "≥ {{min}}"
+        },
+        "sats_other": "sats",
+        "sats_one": "sat",
+        "discover": "Upptäcka",
+        "success_message": "{{amount}}{{fiatAmount}} skickat till {{destination}}",
+        "response": "Svar",
+        "confirm_password": "Bekräfta Lösenord",
+        "balance": "Balans",
+        "wallet": "Plånbok",
+        "connectors": {
+            "lnd": "LND",
+            "nativelnd": "LND (över Tor)",
+            "nativelndhub": "LNDHub (över Tor)",
+            "galoy": "Galoy",
+            "eclair": "Eclair",
+            "nativecitadel": "Citadel (över Tor)",
+            "commando": "Commando",
+            "nativelnbits": "LNBits (över Tor)",
+            "lndhub": "LNDHub",
+            "lnbits": "LNBits",
+            "citadel": "Citadel"
+        },
+        "or": "eller",
+        "pasted": "Klistrat in!",
+        "enable": {
+            "block_added": "Lade till {{host}} till blockeringslistan, ladda om webbplatsen.",
+            "request1": "Begär godkännande för transaktioner",
+            "allow": "Tillåt den här webbplatsen att:",
+            "block_and_ignore": "Blockera och ignorera {{host}}"
+        },
+        "website": "Webbsida"
+    },
+    "components": {
+        "allowance_menu": {
+            "confirm_delete": "Är du säker på att du vill koppla bort den här webbplatsen?",
+            "hint": "Om du ändrar detta återställs den nuvarande budgeten",
+            "new_budget": {
+                "label": "Betalningsbudget med ett klick",
+                "link_label": "Ställ in en budget för betalningar med ett klick"
+            },
+            "enable_login": {
+                "title": "Aktivera webbplatsinloggning",
+                "subtitle": "Logga in automatiskt utan bekräftelse när webbplatsen begär det."
+            },
+            "edit_allowance": {
+                "title": "Webbplatsinställningar",
+                "screen_reader": "Alternativ för Beloppsgräns"
+            }
+        },
+        "qrcode_scanner": {
+            "title": "Skanna QR-kod",
+            "actions": {
+                "start_scanning": "Påbörja skanning",
+                "stop_scanning": "Avsluta skanning"
+            },
+            "errors": {
+                "allow_camera_access": "Tillåt kameraåtkomst under inställningar."
+            }
+        },
+        "transactions_table": {
+            "fee": "Avgift",
+            "preimage": "Förhandsvy",
+            "received": "Mottaget",
+            "sent": "Skickat",
+            "boostagram": {
+                "sender": "Avsändare",
+                "message": "Meddelande",
+                "app": "App",
+                "podcast": "Podcast",
+                "episode": "Avsnitt",
+                "action": "Åtgärd",
+                "totalAmount": "Totalt belopp",
+                "timestamp": "Tidsstämpel"
+            },
+            "open_location": "Öppna websida",
+            "payment_hash": "Betalningshash",
+            "date_time": "Datum & tid"
+        },
+        "budget_control": {
+            "remember": {
+                "label": "Kom ihåg att ange en budget",
+                "description": "Du kan ange en beloppsgräns utan att behöva bekräfta betalningar förrän gränsen är uppnådd."
+            },
+            "budget": {
+                "label": "Budget"
+            }
+        },
+        "toasts": {
+            "connection_error": {
+                "what_you_can_do": "Du kan göra detta:",
+                "double_check": "Kontrollera dina anslutningsinställningar",
+                "if_ssl_errors": "och om det förekommer SSL-fel (t.ex. ERR_CERT_AUTHORITY_INVALID), klicka på \"advanced\" och fortsätt genom att godkänna certifikatet.",
+                "visit_guides": "Besök vår guide för ytterligare hjälp"
+            },
+            "login_failed": {
+                "password_reset": "Glömt ditt lösenord? Klicka här"
+            },
+            "errors": {
+                "invalid_credentials": "Ogitligt lösenord. Kontrollera ditt lösenord, e-postadress och försök igen."
+            }
+        },
+        "account_menu": {
+            "screen_reader": "Öppna droppmeny",
+            "options": {
+                "account": {
+                    "go_to_web_wallet": "Hantera ditt webbkonto"
+                }
+            }
+        },
+        "publishers_table": {
+            "payments": "betalningar",
+            "total": "totalt",
+            "budget": "budget"
+        },
+        "badge": {
+            "label": {
+                "auth": "LOGGA IN",
+                "imported": "IMPORTERAD",
+                "budget": "BUDGET"
+            }
+        },
+        "companion_download_info": {
+            "heading": "Hur vill du ansluta till TOR-nätverket?",
+            "companion": {
+                "title": "Companion App",
+                "description": "Lättviktsapp som ansluter din webbläsare till TOR-nätverket."
+            },
+            "download": "Ladda ner",
+            "tor_native": {
+                "title": "TOR (native)",
+                "description": "Välj det här alternativet om den här webbläsaren redan är ansluten till TOR-nätverket."
+            }
+        }
+    },
+    "permissions": {
+        "lnd": {
+            "channelbalance": "Få en rapport om de totala medlen över alla öppna kanaler",
+            "routermc": "Läs det interna uppdragskontroll läget",
+            "getinfo": "Få nod-informationen",
+            "lookupinvoice": "Slå upp fakturainformation",
+            "walletbalance": "Få plånbokens totala outnyttjade uttag",
+            "disconnectpeer": "Koppla från en fjärr-ansluten peer",
+            "getchaninfo": "Få nätverksmeddelandet för den givna kanalen",
+            "listpeers": "Få en lista över alla för närvarande aktiva peers",
+            "sendtoroute": "Gör en betalning via den angivna vägen",
+            "getnodeinfo": "Få kanalinformationen för en nod",
+            "gettransactions": "Få en lista över alla transaktioner som är relevanta för plånboken",
+            "listpayments": "Få en lista över alla utgående betalningar",
+            "queryroutes": "Fråga efter en möjlig rutt",
+            "addholdinvoice": "Skapa nya HODL-fakturor",
+            "settleinvoice": "Avgör en godkänd faktura",
+            "listchannels": "Få en beskrivning av alla öppna kanaler",
+            "listinvoices": "Få en lista över alla fakturor",
+            "openchannel": "Öppna en ny kanal",
+            "connectpeer": "Upprätta en anslutning till en extern peer",
+            "estimatefee": "Uppskatta avgiftssatsen och totala avgifter för en transaktion",
+            "getnetworkinfo": "Få grundläggande statistik om det kända kanaldiagrammet",
+            "verifymessage": "Verifiera en signatur över ett meddelande",
+            "decodepayreq": "Avkoda en sträng för betalningsbegäran",
+            "addinvoice": "Skapa nya fakturor"
+        },
+        "lnc": {
+            "listinvoices": "Få en lista över alla fakturor",
+            "walletbalance": "Få plånbokens totala outnyttjade uttag",
+            "openchannel": "Öppna en ny kanal",
+            "getchaninfo": "Få nätverksmeddelandet för den givna kanalen",
+            "getnetworkinfo": "Få grundläggande statistik om det kända kanaldiagrammet",
+            "listchannels": "Få en beskrivning av alla öppna kanaler",
+            "estimatefee": "Uppskatta avgiftssatsen och totala avgifter för en transaktion",
+            "getinfo": "Få nod-informationen",
+            "channelbalance": "Få en rapport om de totala medlen över alla öppna kanaler",
+            "disconnectpeer": "Koppla från en fjärransluten peer",
+            "getnodeinfo": "Få kanalinformationen för en nod",
+            "gettransactions": "Få en lista över alla transaktioner som är relevanta för plånboken",
+            "lookupinvoice": "Se fakturainformation",
+            "queryroutes": "Fråga efter en möjlig rutt",
+            "connectpeer": "Upprätta en anslutning till en extern peer",
+            "listpayments": "Få en lista över alla utgående betalningar",
+            "listpeers": "Få en lista över alla för närvarande aktiva peers",
+            "decodepayreq": "Avkoda en sträng för betalningsbegäran",
+            "verifymessage": "Verifiera en signatur över ett meddelande",
+            "sendtoroute": "Gör en betalning via den angivna vägen",
+            "routermc": "Läs det interna uppdragskontrollläget",
+            "addinvoice": "Skapa nya fakturor",
+            "addholdinvoice": "Skapa nya HODL-fakturor",
+            "settleinvoice": "Avgör en godkänd faktura"
+        },
+        "commando": {
+            "invoice": "Skapa förväntningar på en betalning",
+            "listpeers": "Lista noder som är anslutna eller har öppna kanaler med denna nod",
+            "setchannel": "Konfigurera avgifter / htlc-intervall som annonseras för en kanal",
+            "offer": "Skapa ett erbjudande",
+            "pay": "Skicka en betalning till en BOLT11-faktura",
+            "decodepay": "Kontrollera och analysera en bolt11-sträng",
+            "decode": "Avkoda en bolt11/bolt12/rune-sträng",
+            "getinfo": "Få sammanfattningen av noden",
+            "multifundchannel": "Öppna flera betalningskanaler med noder genom att utföra en enda finansieringstransaktion",
+            "sendpay": "Skicka en betalning via en rutt",
+            "signmessage": "Skapa en signatur från denna nod",
+            "bkpr-listbalances": "Lista över alla aktuella och historiska kontosaldon",
+            "disconnect": "Stäng en befintlig anslutning till en peer",
+            "feerates": "Returnera avgifterna som CLN kommer att använda",
+            "listfunds": "Lista alla tillgängliga medel",
+            "fundchannel": "Öppna en betalningskanal med en peer genom att genomföra en finansieringstransaktion",
+            "listnodes": "Lista noder som noden har lärt sig om via gossip-meddelanden",
+            "listoffers": "Lista alla erbjudanden eller få ett specifikt erbjudande",
+            "listpays": "Får status för alla betalkommandon",
+            "listsendpays": "Får status för alla sendpay-kommandon",
+            "listtransactions": "Lista transaktioner som spåras i plånboken",
+            "connect": "Upprätta en ny anslutning med en annan nod",
+            "getroute": "Hitta den bästa vägen för betalningen till en lightning-nod",
+            "listinvoices": "Få status på alla fakturor",
+            "keysend": "Skicka en betalning till en annan nod",
+            "checkmessage": "Verifiera att signaturen genererades av en given nod",
+            "listforwards": "Lista alla htlcs som har försökt vidarebefordras"
+        }
+    }
+}

@@ -1,4 +1,10 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { useTranslation } from "react-i18next";
 import { useSettings } from "~/app/context/SettingsContext";
 import { classNames } from "~/app/utils";
@@ -98,7 +104,7 @@ export default function DualCurrencyField({
       const numericSats = parseInt(String(value));
       if (!isNaN(numericSats)) {
         const calculatedFiat = (numericSats / numSatsInBtc) * rate;
-        const formatted = calculatedFiat.toLocaleString(undefined, {
+        const formatted = calculatedFiat.toLocaleString(settings.locale, {
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
         });
@@ -112,7 +118,7 @@ export default function DualCurrencyField({
       setLocalFiatValue("");
       onFiatValueChange?.("");
     }
-  }, [value, rate, isFiatMode, isFocused, onFiatValueChange]);
+  }, [value, rate, isFiatMode, isFocused, onFiatValueChange, settings.locale]);
 
   // Support for externally controlled fiatValue
   useEffect(() => {
@@ -141,7 +147,11 @@ export default function DualCurrencyField({
           if (onChangeRef.current) {
             const fakeEvent = {
               ...e,
-              target: { ...e.target, value: calculatedSats.toString(), name: id },
+              target: {
+                ...e.target,
+                value: calculatedSats.toString(),
+                name: id,
+              },
             } as React.ChangeEvent<HTMLInputElement>;
             onChangeRef.current(fakeEvent);
           }

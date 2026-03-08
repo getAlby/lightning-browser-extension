@@ -10,10 +10,10 @@ interface UnifiedAmountProps {
 
 /**
  * UnifiedAmount Component
- * 
+ *
  * Centralizes the display of BTC/Sats and Fiat values.
  * Uses SettingsContext for rates and formatting preferences.
- * 
+ *
  * Quality features:
  * - Skeleton loading state
  * - Defensive validation against NaN/invalid inputs
@@ -25,7 +25,8 @@ const UnifiedAmount: React.FC<UnifiedAmountProps> = ({
   primary = "sats",
   showSecondary = true,
 }) => {
-  const { settings, getFormattedFiat, getFormattedSats, isLoading } = useSettings();
+  const { settings, getFormattedFiat, getFormattedSats, isLoading } =
+    useSettings();
   const [fiatValue, setFiatValue] = useState<string | null>(null);
 
   const amountSats = Number(sats);
@@ -42,10 +43,15 @@ const UnifiedAmount: React.FC<UnifiedAmountProps> = ({
     } else {
       setFiatValue(null);
     }
-    return () => { isMounted = false; };
+    return () => {
+      isMounted = false;
+    };
   }, [safeSats, settings.showFiat, getFormattedFiat]);
 
-  if (isLoading) return <span className="animate-pulse bg-gray-200 rounded w-16 h-4 inline-block" />;
+  if (isLoading)
+    return (
+      <span className="animate-pulse bg-gray-200 rounded w-16 h-4 inline-block" />
+    );
 
   const fiatActive = settings.showFiat && fiatValue;
 
@@ -58,12 +64,14 @@ const UnifiedAmount: React.FC<UnifiedAmountProps> = ({
 
   const renderSecondary = () => {
     if (!showSecondary) return null;
-    
+
     if (primary === "sats" && fiatActive) {
       return <span className="text-gray-500 text-sm ml-1">({fiatValue})</span>;
     }
     if (primary === "fiat" && fiatActive) {
-      return <span className="text-gray-500 text-sm ml-1">({formattedSats})</span>;
+      return (
+        <span className="text-gray-500 text-sm ml-1">({formattedSats})</span>
+      );
     }
     return null;
   };

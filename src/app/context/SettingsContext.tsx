@@ -1,6 +1,14 @@
 import dayjs from "dayjs";
 import i18n from "i18next";
-import { createContext, useContext, useEffect, useRef, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import toast from "~/app/components/Toast";
 import { setTheme } from "~/app/utils";
 import { ACCOUNT_CURRENCIES, CURRENCIES } from "~/common/constants";
@@ -73,7 +81,7 @@ export const SettingsProvider = ({
       });
   }, []);
 
-  const getCurrencyRate = async (): Promise<number> => {
+  const getCurrencyRate = useCallback(async (): Promise<number> => {
     // ensure to get the correct rate for current currency in state
     if (settings.currency !== currencyRate.current?.currency) {
       const response = await api.getCurrencyRate(); // gets rate from browser.storage or API
@@ -87,48 +95,57 @@ export const SettingsProvider = ({
     }
 
     return currencyRate.current.rate;
-  };
+  }, [settings.currency]);
 
-  const getFormattedFiat = async (amount: number | string) => {
-    try {
-      const rate = await getCurrencyRate();
-      const value = getFormattedFiatUtil({
+  const getFormattedFiat = useCallback(
+    async (amount: number | string) => {
+      try {
+        const rate = await getCurrencyRate();
+        const value = getFormattedFiatUtil({
+          amount,
+          rate,
+          currency: settings.currency,
+          locale: settings.locale,
+        });
+
+        return value;
+      } catch (e) {
+        console.error(e);
+
+        return "??"; // show the user that something went wrong
+      }
+    },
+    [getCurrencyRate, settings.currency, settings.locale]
+  );
+
+  const getFormattedSats = useCallback(
+    (amount: number | string) => {
+      return getFormattedSatsUtil({ amount, locale: settings.locale });
+    },
+    [settings.locale]
+  );
+
+  const getFormattedNumber = useCallback(
+    (amount: number | string) => {
+      return getFormattedNumberUtil({ amount, locale: settings.locale });
+    },
+    [settings.locale]
+  );
+
+  const getFormattedInCurrency = useCallback(
+    (amount: number | string, currency = "BTC" as ACCOUNT_CURRENCIES) => {
+      if (currency === "BTC") {
+        return getFormattedSats(amount);
+      }
+
+      return getFormattedCurrencyUtil({
         amount,
-        rate,
-        currency: settings.currency,
         locale: settings.locale,
+        currency,
       });
-
-      return value;
-    } catch (e) {
-      console.error(e);
-
-      return "??"; // show the user that something went wrong
-    }
-  };
-
-  const getFormattedSats = (amount: number | string) => {
-    return getFormattedSatsUtil({ amount, locale: settings.locale });
-  };
-
-  const getFormattedNumber = (amount: number | string) => {
-    return getFormattedNumberUtil({ amount, locale: settings.locale });
-  };
-
-  const getFormattedInCurrency = (
-    amount: number | string,
-    currency = "BTC" as ACCOUNT_CURRENCIES
-  ) => {
-    if (currency === "BTC") {
-      return getFormattedSats(amount);
-    }
-
-    return getFormattedCurrencyUtil({
-      amount,
-      locale: settings.locale,
-      currency,
-    });
-  };
+    },
+    [getFormattedSats, settings.locale]
+  );
 
   // update locale on every change
   useEffect(() => {
@@ -146,16 +163,27 @@ export const SettingsProvider = ({
     setTheme(); // Get the active theme and apply corresponding Tailwind classes to the document
   }, [settings.theme]);
 
-  const value = {
-    getCurrencyRate,
-    getFormattedFiat,
-    getFormattedSats,
-    getFormattedNumber,
-    getFormattedInCurrency,
-    settings,
-    updateSetting,
-    isLoading,
-  };
+  const value = useMemo(
+    () => ({
+      getCurrencyRate,
+      getFormattedFiat,
+      getFormattedSats,
+      getFormattedNumber,
+      getFormattedInCurrency,
+      settings,
+      updateSetting,
+      isLoading,
+    }),
+    [
+      getCurrencyRate,
+      getFormattedFiat,
+      getFormattedSats,
+      getFormattedNumber,
+      getFormattedInCurrency,
+      settings,
+      isLoading,
+    ]
+  );
 
   return (
     <SettingsContext.Provider value={value}>

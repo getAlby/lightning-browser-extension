@@ -1,25 +1,27 @@
 import getOriginData from "../originData";
 import { findLightningAddressInText, setLightningData } from "./helpers";
 
-const urlMatcher = /^https?:\/\/(?:[^/]+\.)?medium\.com\/(?:@([^/]+)|([^/]+))(?:\/.*)?$/;
+const urlMatcher =
+  /^https?:\/\/(?:[^/]+\.)?medium\.com\/@([^/?#]+)\/?(?:\?.*)?(?:#.*)?$/;
 
 const battery = (): void => {
-  // 1. Suche nach Lightning-Adressen in der Bio (robusterer Ansatz)
-  // Wir suchen nach Elementen, die typischerweise die Bio enthalten
+  // 1. Search for Lightning addresses in the bio (more robust approach)
+  // We search for elements that typically contain the bio
   const bioSelectors = [
-    'p.be.bf.z', // Aktueller Medium Bio-Selektor (variiert oft)
-    '[data-testid="authorBio"]', 
+    '[data-testid="authorBio"]',
     'meta[name="description"]',
-    '.ae.af.ag.ah.ai.aj.ak.al.am.an' // Fallback für generische Klassen
   ];
-  
+
   let address = null;
   let finalBioText = "";
-  
+
   for (const selector of bioSelectors) {
     const element = document.querySelector(selector);
     if (element) {
-      const bioText = element instanceof HTMLMetaElement ? element.content : (element as HTMLElement).innerText;
+      const bioText =
+        element instanceof HTMLMetaElement
+          ? element.content
+          : (element as HTMLElement).innerText;
       if (bioText) {
         address = findLightningAddressInText(bioText);
         if (address) {
@@ -32,15 +34,20 @@ const battery = (): void => {
 
   if (!address) return;
 
-  // 2. Extrahiere Name und Icon (robust via og-tags)
-  const name = 
-    document.querySelector('meta[property="og:title"]')?.getAttribute('content')?.split(' – ')[0] ||
-    document.querySelector('h1')?.innerText ||
+  // 2. Extract name and icon (robust via og-tags)
+  const name =
+    document
+      .querySelector('meta[property="og:title"]')
+      ?.getAttribute("content")
+      ?.split(" – ")[0] ||
+    document.querySelector("h1")?.innerText ||
     "Medium Author";
 
-  const icon = 
-    document.querySelector('meta[property="og:image"]')?.getAttribute('content') ||
-    document.querySelector('img[src*="/profile/"]')?.getAttribute('src') ||
+  const icon =
+    document
+      .querySelector('meta[property="og:image"]')
+      ?.getAttribute("content") ||
+    document.querySelector('img[src*="/profile/"]')?.getAttribute("src") ||
     "";
 
   setLightningData([

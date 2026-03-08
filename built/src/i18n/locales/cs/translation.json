@@ -1,0 +1,734 @@
+{
+    "translation": {
+        "welcome": {
+            "set_password": {
+                "choose_password": {
+                    "label": "Zvolte pin pro odemykání:"
+                },
+                "confirm_password": {
+                    "label": "Ověřte, že heslo je zadáno správně:"
+                },
+                "errors": {
+                    "enter_password": "Prosím, zadejte pin.",
+                    "confirm_password": "Prosím potvrďte svůj pin.",
+                    "mismatched_password": "Zadané piny se neshodují."
+                }
+            },
+            "test_connection": {
+                "ready": "Skvěle, vše je připraveno!",
+                "connection_error": "Chyba spojení",
+                "review_connection_details": "Prosím překontrolujte nastavení vašeho spojení.",
+                "connection_taking_long": "Připojování zabralo více, než bylo očekáváno... Zadali jste údaje o připojení správně? Je váš uzel dostupný?",
+                "contact_support": "Pokud potřebujete pomoct, prosím kontaktujte support@getalby.com"
+            }
+        },
+        "choose_connector": {
+            "description": "Připojte svou externí ligtning peněženku nebo uzel",
+            "lnd": {
+                "page": {
+                    "title": "Připojt se ke svému LND uzlu",
+                    "description": "Potřebujete URL svého uzlu a macaroon s oprávněním pro čtení a odesílání (například admin.macaroon)"
+                },
+                "url": {
+                    "label": "REST API host a port",
+                    "placeholder": "https://url-vaseho-uzlu:8080"
+                },
+                "macaroon": {
+                    "label": "Macaroon (v hexadecimálním formátu)"
+                },
+                "drag_and_drop": "Přetáhněte svůj macaroon zde nebo ho <0>vyhledejte</0>",
+                "errors": {
+                    "connection_failed": "Připojení se nezdařilo. Jsou vaše údaje pro LND zadány správně?"
+                }
+            },
+            "lndhub_go": {
+                "title": "LNDHub",
+                "page": {
+                    "title": "Připojit k LNDHub",
+                    "description": "Vložte svou LNDHub URI nebo naskenujte QR kód svou webkamerou."
+                },
+                "uri": {
+                    "label": "LNDHub Export URI"
+                },
+                "errors": {
+                    "invalid_uri": "Nevalidní LNDHub URI",
+                    "connection_failed": "Připojení se nezdařilo. Je vaše LNDHub URI zadána správně?"
+                }
+            },
+            "lnbits": {
+                "title": "LNbits",
+                "page": {
+                    "title": "Připojení k <0>LNbits</0>",
+                    "instructions": "V LNbits vyberte peněženku, ke které se chcete připojit, otevřete ji, zvolte Informace o API, zkopírujte administrační klíč. Vložte ho zde:"
+                },
+                "admin_key": {
+                    "label": "LNbits Administrační klíč",
+                    "placeholder": "Váš 32-místný administrační klíč"
+                },
+                "url": {
+                    "label": "LNbits URL"
+                },
+                "errors": {
+                    "connection_failed": "Připojení se nezdařilo. Zadali jste správnou URL a administrační klíč?"
+                }
+            },
+            "eclair": {
+                "title": "Eclair",
+                "page": {
+                    "title": "Připojení k <0>Eclair</0>",
+                    "instructions": "Potřebujete svou Eclair URL a heslo."
+                },
+                "password": {
+                    "label": "Eclair heslo"
+                },
+                "url": {
+                    "label": "Eclair URL",
+                    "placeholder": "http://localhost:8080"
+                }
+            },
+            "citadel": {
+                "page": {
+                    "title": "Připojení k uzlu <0>Citadel</0>"
+                }
+            },
+            "umbrel": {
+                "page": {
+                    "title": "Připojení k uzlu <0>Umbrel</0>",
+                    "instructions": "V dashboardu Umbrell přejděte do <0>Připojit pěněženku (Connect Wallet)</0>. Vyberte volbu <0>lndconnect REST</0> a zkopírujte <0>lndconnect URL</0>. (V závislosti na vašem nastavení můžete využít buď lokálního spojení nebo připojení přes Tor.)"
+                },
+                "rest_url": {
+                    "label": "lndconnect REST URL",
+                    "placeholder": "lndconnect://vas-uzel:8080?..."
+                }
+            },
+            "mynode": {
+                "page": {
+                    "title": "Připojení k <0>myNode</0>",
+                    "instructions": "Na vaší domovské stránce myNode klikněte na tlačítko <0>Pěněženka (Wallet)</0> služby <0>lightning</0>.<1/> Dále zvolte <0>Párovat peněženku (Pair Wallet)</0> pod záložkou <0>Stav (Status)</0>. S dotázáním vložte vaše heslo.<1/> Z rozbalovací nabídky vyberte volbu párování. V závislosti na vašem nastavení můžete zvolit buď připojení přes <0>lightning (REST + Local IP)</0> nebo <0>lightning (REST + Tor)</0>."
+                },
+                "rest_url": {
+                    "label": "lndconnect REST URL",
+                    "placeholder": "lndconnect://vas-uzel:8080?..."
+                }
+            },
+            "startos": {
+                "page": {
+                    "title": "Připojení k vašemu uzlu <0>StartOS</0>",
+                    "instructions": "<0>Pozn.:</0> Aktuálně podporujeme pouze LND, ale v budoucnu plánujeme přidávat podporu c-lightning!<1/>V dashboardu vašeho StartOS zvolte službu <0>Lightning Network Daemon</0>.<1/>Vyberte záložku <0>Vlastnosti (Properties)</0>.<1/>Následně zkopírujte <0>LND Connect REST URL.</0>"
+                },
+                "rest_url": {
+                    "label": "lndconnect REST URL",
+                    "placeholder": "lndconnect://vas-uzel:8080?..."
+                }
+            },
+            "raspiblitz": {
+                "page": {
+                    "title": "Připojení k vašemu uzlu <0>RaspiBlitz</0>",
+                    "instructions1": "Následujte tyto kroky:<1/> 1. <0>Připojte se přes SSH</0> k vašemu <0>RaspiBlitz</0><1/>2. Vyberte <0>Připojit aplikace a zobrazit přístupové údaje (Connect Apps & Show Credentials)</0> ze seznamu<1/><0/>3. Vyberte <0>Připojit Alby k tomuto uzlu</0><1/>4. Stiskněte <0>OK</0>pro zobrazení detailů připojení<1/><1/>Zkopírujte <0>REST API</0> nebo <0>.onion</0> adresu pro připojení přes Tor a vložte ji do vstupního pole níže.",
+                    "instructions2": "Zkopírujte (administrační) <0>macaroon</0> do pole níže."
+                },
+                "rest_api_host": {
+                    "label": "REST API host",
+                    "placeholder": "onion-adresa-vaseho-uzlu:port"
+                }
+            },
+            "blink": {
+                "page": {
+                    "title": "Připojení k <0>Blink Wallet</0>"
+                }
+            },
+            "bitcoin_jungle": {
+                "page": {
+                    "title": "Připojení k <0>Bitcoin Jungle Wallet</0>"
+                }
+            },
+            "btcpay": {
+                "config": {
+                    "label": "Konfigurační data"
+                },
+                "errors": {
+                    "connection_failed": "Připojení se nezdařilo. Je BTCPay URL zadána správně a je přístupná?"
+                }
+            },
+            "commando": {
+                "page": {
+                    "instructions": "Ujistěte se, že používáte Core Lightning verze 0.12.0 (nebo novější), dále že vám běží doplněk commando a váš uzel je přístupný přes síť lightning. Vytvořte novou \"runu\" spuštěním příkazu 'lightning-cli commando-rune'."
+                }
+            },
+            "title": "Připojte Lightning peněženku",
+            "lnc": {
+                "title": "Lightning terminál (LNC)",
+                "pairing_phrase": {
+                    "label": "Vaše párovací fráze ",
+                    "placeholder": "tajná fráze"
+                }
+            },
+            "umbrel_lightning_node": {
+                "title": "Lightning uzel"
+            }
+        },
+        "home": {
+            "actions": {
+                "send_satoshis": "⚡️ Odeslat satoshi ⚡️",
+                "enable_now": "Povolit nyní"
+            },
+            "allowance_view": {
+                "sats": "satů",
+                "total_spent": "Cekově utraceno",
+                "total_payments": "Platby celkem",
+                "permissions": "Oprávnění"
+            },
+            "default_view": {
+                "is_blocked_hint": "Alby je v současnosti zakázaná na {host}}",
+                "block_removed": "Povolen {{host}}. Prosím znovu načtěte webovou stránku."
+            }
+        },
+        "accounts": {
+            "account_view": {
+                "nostr": {
+                    "errors": {
+                        "failed_to_load": "Nepodařilo se načíst Nostr klíč. Zadali jste validní Nostr klíč?"
+                    },
+                    "generate_keys": {
+                        "hint": "Můžete vygenerovat nový náhodně generovaný klíč nebo derivovat klíč ze svého účtu (s využitím podepsané kanonické fráze). <0>Dozvědět se více »</0>",
+                        "screen_reader": "Vygenerovat nový Nostr klíč pro váš účet",
+                        "actions": {
+                            "random_keys": "Vygenerovat náhodný klíč",
+                            "derived_keys": "Derivovat klíč z vašeho účtu"
+                        },
+                        "title": "Vygenerujte nový Nostr klíč"
+                    },
+                    "private_key": {
+                        "title": "Správa vašeho klíče",
+                        "subtitle": "Vložte svůj privátní klíč nebo si vygenerujte nový. Předtím, než budete generovat nový klíč, ujistěte se, že máte svůj klíč zazalohovaný. <0>Dozvědět se více »</0>",
+                        "success": "Privátní klíč byl úspěšně zašifrován a uložen.",
+                        "successfully_removed": "Privátní klíč byl odstraněn.",
+                        "label": "Privátní klíč",
+                        "failed_to_remove": "Zadané jméno účtu se neshoduje, váš starý privátní klíč byl obnoven."
+                    },
+                    "actions": {
+                        "generate": "Vygenerovat nový klíč"
+                    },
+                    "hint": "je jednoduchý otevřený protokol, jehož snahou je vytvořit necenzurovatelné sociální sítě. Nostr pracuje s kryptografickými klíči. Pro publikování jakékoliv zpravy přes tento protokol, je vždy nutné zprávu podepsat svým klíčem a odeslat ji několika tzv. relé. Alby můžete použít ke správě svého Nostr klíče. Většina Nostr aplikací vám pak umožní jednoduché použití klíče přímo z doplňku Alby.",
+                    "title": "Nostr",
+                    "public_key": {
+                        "label": "Veřejný klíč"
+                    },
+                    "settings": {
+                        "label": "Nastavení Nostru",
+                        "remove": "Odstranit současné klíče",
+                        "title": "Nastavení Nostru"
+                    }
+                },
+                "actions": {
+                    "export": "Export"
+                },
+                "export": {
+                    "export_uri": "LNDHub pověřovací URI",
+                    "waiting": "čekání na data z LndHub...",
+                    "your_ln_address": "Vaše Lightning adresa:",
+                    "scan_qr": "Importujte tuto peněženku do Zeus nebo BlueWallet naskenováním QR kódu."
+                },
+                "name": {
+                    "title": "Jméno"
+                },
+                "mnemonic": {
+                    "generate": {
+                        "button": "Vygenerovat Master klíč",
+                        "title": "Vygenerování nového Master klíče"
+                    },
+                    "saved": "Master klíč byl zašifrován a úspěšně uložen.",
+                    "lnurl": {
+                        "use_mnemonic": "Používat Master klíč pro přihlašování do aplikací podporujících autentizaci přes Lightning (LNURL Auth)",
+                        "title": "Přihlášení přes Lightning"
+                    },
+                    "backup": {
+                        "protocols": {
+                            "nostr": "Nostr"
+                        },
+                        "save": "Uložit Master klíč",
+                        "button": "Zobrazit záložní frázi"
+                    },
+                    "import": {
+                        "button": "Importovat Master klíč",
+                        "title": "Import Master klíče"
+                    }
+                },
+                "network": {
+                    "options": {
+                        "testnet": "Testnet",
+                        "bitcoin": "Mainnet",
+                        "regtest": "Regtest"
+                    }
+                }
+            }
+        },
+        "unlock": {
+            "unlock_to_continue": "Odemknout pro pokračování",
+            "unlock_password": "Vaše heslo pro odemčení",
+            "help_contact": {
+                "part1": "Potřebujete pomoc? Kontaktujte",
+                "part2": "podporu Alby"
+            },
+            "unlock_error": {
+                "help": "Data vašeho účtu jsou šifrována vaším heslem pro odemčení. Pokud své heslo pro odemčení zapomenete, budete muset resetovat a znovu vytvořit svůj lightning účet.",
+                "link": "Resetovat a vytvořit nový účet"
+            },
+            "errors": {
+                "invalid_password": "Nesprávné heslo"
+            }
+        },
+        "settings": {
+            "browser_notifications": {
+                "title": "Upozornění prohlížeče",
+                "subtitle": "Platební notifikace a notifikace týkající se autentizace."
+            },
+            "website_enhancements": {
+                "title": "Vylepšení webové stránky"
+            },
+            "camera_access": {
+                "title": "Přístup kamery",
+                "subtitle": "Pro skenování QR kódů",
+                "allow": "Povolit přístup kameře",
+                "granted": "Oprávnění uděleno"
+            },
+            "language": {
+                "title": "Jazyk",
+                "subtitle": "Překlady ještě nejsou stoprocentně hotové. <0>Pomožte nám přeložit Alby do vašeho jazyka!<0>"
+            },
+            "theme": {
+                "title": "Téma",
+                "subtitle": "Používejte Alby v tmavém nebo světlém módu",
+                "options": {
+                    "dark": "Tmavé",
+                    "light": "Světlé",
+                    "system": "Systém"
+                }
+            },
+            "show_fiat": {
+                "title": "Saty do fiatu",
+                "subtitle": "Vždy provádět směnu do vybrané měny z vybrané směnárny"
+            },
+            "currency": {
+                "title": "Měna",
+                "subtitle": "Zobrazovat částky v této měně"
+            },
+            "exchange": {
+                "title": "Zdroj kurzu",
+                "subtitle": "Zdroj bitcoinového směnného kurzu"
+            },
+            "personal_data": {
+                "title": "Osobní data",
+                "description": "Příjemci plateb mohou žádat o dodatečná data, která se odešlou spolu s plabou. Tato data nejsou s nikým sdílena bez vašeho souhlasu, vždy budete dotázání, zda si opravdu přejete tato data odeslat zároveň s vaši platbou."
+            },
+            "name": {
+                "title": "Jméno",
+                "subtitle": "",
+                "placeholder": "Vložte své jméno"
+            },
+            "email": {
+                "title": "Email",
+                "subtitle": "",
+                "placeholder": "Vložte svou e-mailovou adresu"
+            },
+            "change_password": {
+                "title": "Změnit heslo pro odemčení",
+                "subtitle": "",
+                "screen_reader": "Změnit heslo pro odemčení",
+                "choose_password": {
+                    "label": "Vložte nové heslo pro odemčení:"
+                },
+                "confirm_password": {
+                    "label": "Potvrďte nové heslo:"
+                },
+                "submit": {
+                    "label": "Změnit"
+                },
+                "errors": {
+                    "enter_password": "Prosím vložte nové heslo pro odemčení.",
+                    "confirm_password": "Prosím potvrďte své heslo.",
+                    "mismatched_password": "Hesla se neshodují."
+                },
+                "success": "Změna hesla proběhla úspěšně"
+            }
+        },
+        "send": {
+            "title": "Odeslat",
+            "input": {
+                "label": "Příjemce",
+                "hint": "Faktura, Lightning adresa nebo LNURL"
+            }
+        },
+        "lnurlpay": {
+            "amount": {
+                "label": "Částka"
+            },
+            "comment": {
+                "label": "Komentář"
+            },
+            "name": {
+                "label": "Jméno"
+            },
+            "email": {
+                "label": "Email"
+            },
+            "success": "Úspěch, platba byla odeslána!"
+        },
+        "lnurlauth": {
+            "title": "Autentizace",
+            "content_message": {
+                "heading": "Chcete se přihlásit do"
+            },
+            "submit": "Přihlásit",
+            "success": "Úspěšné přihlášení na {{name}}",
+            "errors": {
+                "status": "Chyba: Stav autentizace není v pořádku"
+            }
+        },
+        "lnurlchannel": {
+            "title": "Žádost o kanál",
+            "content_message": {
+                "heading": "Žádost o kanál z uzlu"
+            },
+            "success": "Žádost o kanál odeslána úspěšně na {{name}}"
+        },
+        "lnurlwithdraw": {
+            "title": "Výběr",
+            "content_message": {
+                "heading": "Částka"
+            },
+            "amount": {
+                "label": "Částka"
+            },
+            "success": "Žádost o výber částky {{amount}} byla úspěšně odeslána {{sender}}"
+        },
+        "receive": {
+            "title": "Přijmout",
+            "actions": {
+                "create_invoice": "Vytvořit fakturu"
+            },
+            "amount": {
+                "label": "Částka",
+                "placeholder": "Částka v satoshi..."
+            },
+            "description": {
+                "label": "Popisek",
+                "placeholder": "Např. kdo tuto platbu odesílá?"
+            },
+            "success": "Platba přijata!",
+            "payment": {
+                "waiting": "čekání na platbu...",
+                "status": "Zkontrolovat stav platby"
+            }
+        },
+        "publishers": {
+            "publisher": {
+                "allowance": {
+                    "title": "Příspěvek",
+                    "used_budget": "použité satoshi"
+                }
+            },
+            "title": "Vaše ⚡ webové stránky",
+            "description": "Webové stránky, na kterých jste v minulosti použili Alby",
+            "no_info": "Vypadá to, že jste Alby ještě na žádné webové stránce nepoužili.",
+            "discover": "Prozkoumat webové stránky"
+        },
+        "make_invoice": {
+            "title": "Vytvořit fakturu",
+            "amount": {
+                "label": "Částka (v satoshi)"
+            },
+            "memo": {
+                "label": "Poznámka"
+            },
+            "errors": {
+                "amount_too_small": "Částka je menší než minimum",
+                "amount_too_big": "Částka převyšuje maximum"
+            }
+        },
+        "confirm_sign_message": {
+            "title": "Podepsat",
+            "content": "Tato webová stránka vás žádá o podpis:"
+        },
+        "confirm_keysend": {
+            "title": "Schválit platbu",
+            "success": "Platba odeslána! Preimage: {{preimage}}",
+            "payment_summary": {
+                "description": "Platba odeslána na: {{destination}}"
+            }
+        },
+        "keysend": {
+            "title": "Odeslat",
+            "success": "Platba odeslána! Preimage: {{preimage}}",
+            "receiver": {
+                "label": "Platba odeslána na"
+            },
+            "amount": {
+                "label": "Částka (v satoshi)"
+            }
+        },
+        "confirm_payment": {
+            "title": "Schválit platbu",
+            "success": "Platba v hodnote {{amount}} byla úspěšná!",
+            "actions": {
+                "pay_now": "Zaplatit"
+            }
+        },
+        "confirm_request_permission": {
+            "title": "Schválit žádost",
+            "allow": "Dovolit této stránce spustit:",
+            "always_allow": "Zapamatovat si mé volby a nikdy se už neptat"
+        },
+        "nostr": {
+            "title": "Nostr",
+            "block_and_ignore": "Zablokovat a ignorovat {{host}}",
+            "block_added": "{{host}} přidán do seznamu blokovaných, prosím znovu načtěte webovou stránku.",
+            "content": "Tato webová stránka vás žádá o podpis:"
+        },
+        "choose_path": {
+            "other": {
+                "title": "Jiné peněženky"
+            },
+            "alby": {
+                "title": "Alby"
+            }
+        },
+        "alby": {
+            "pre_connect": {
+                "set_password": {
+                    "choose_password": {
+                        "label": "Heslo"
+                    },
+                    "confirm_password": {
+                        "label": "Potvrďte heslo"
+                    },
+                    "errors": {
+                        "enter_password": "Prosím zadejte heslo.",
+                        "confirm_password": "Prosím potvrďte své heslo.",
+                        "mismatched_password": "Hesla se neshodují."
+                    }
+                }
+            }
+        },
+        "distributions": {
+            "title": "Připojit k {{name}}",
+            "raspiblitz": {
+                "name": "Raspiblitz"
+            },
+            "mynode": {
+                "name": "myNode"
+            },
+            "btcpay": {
+                "name": "BTCPay"
+            },
+            "startos": {
+                "name": "StartOS"
+            },
+            "umbrel": {
+                "name": "Umbrel"
+            }
+        }
+    },
+    "common": {
+        "password": "Heslo",
+        "success": "Úspěch",
+        "error": "Chyba",
+        "connected_sites": "",
+        "sats_one": "sat",
+        "sats_other": "satů",
+        "loading": "načítání",
+        "amount": "Částka",
+        "optional": "Volitené",
+        "feedback": "Zpětná vazba",
+        "copied": "Zkopírováno!",
+        "description": "Popis",
+        "description_full": "Plný popis",
+        "success_message": "{{amount}}{{fiatAmount}} odeslána na {{destination}}",
+        "response": "Odezva",
+        "message": "Zpráva",
+        "help": "Pomoc",
+        "actions": {
+            "back": "Zpět",
+            "delete": "Smazat",
+            "edit": "Upravit",
+            "next": "Další",
+            "open": "Otevřít",
+            "cancel": "Zrušit",
+            "confirm": "Potvrdit",
+            "continue": "Pokračovat",
+            "connect": "Připojit",
+            "lock": "Uzamčít",
+            "unlock": "Odemknout",
+            "send": "Odeslat",
+            "save": "Uložit",
+            "receive": "Přijmout",
+            "close": "Zavřít",
+            "export": "Exportovat",
+            "remove": "Odstranit",
+            "copy": "Zkopírovat",
+            "copy_invoice": "",
+            "log_in": "Přihlásit se",
+            "receive_again": "Přijmout další platbu",
+            "remember": "Zapamatovat moji volbu a nikdy se už neptat"
+        },
+        "errors": {
+            "connection_failed": "Připojení se nezdařilo",
+            "payment_failed": "Platba se nezdařila"
+        },
+        "confirm_password": "Potvrďte heslo",
+        "discover": "Objevovat"
+    },
+    "components": {
+        "allowance_menu": {
+            "confirm_delete": "Jste si jisti, že chcete tuto webovou stránku smazat?",
+            "hint": "Tato akce vyresetuje váš aktuální rozpočet",
+            "new_budget": {
+                "label": "Nový rozpočet"
+            },
+            "enable_login": {
+                "title": "Povolit přihlášení k webovým stránkám",
+                "subtitle": "Automaticky přihlásit bez potvrzení, když to webová stránka vyžádá."
+            },
+            "edit_allowance": {
+                "title": "Upravit příspěvek",
+                "screen_reader": "Možnosti příspěvku"
+            }
+        },
+        "qrcode_scanner": {
+            "title": "Skenovat QR kód",
+            "actions": {
+                "start_scanning": "Začít skenovat",
+                "stop_scanning": "Zastavit skenování"
+            },
+            "errors": {
+                "allow_camera_access": "Prosím povolte přístup kamery ve svém nastavení."
+            }
+        },
+        "transactions_table": {
+            "fee": "Poplatek",
+            "preimage": "Preimage",
+            "received": "Přijato",
+            "sent": "Odesláno",
+            "boostagram": {
+                "sender": "Odesílatel",
+                "message": "Zpráva",
+                "app": "Aplikace",
+                "podcast": "Podcast"
+            },
+            "open_location": "Otevřít webovou stránku"
+        },
+        "budget_control": {
+            "remember": {
+                "label": "Zapamatovat a nastavit rozpočet",
+                "description": "Můžete nastavit zůstatek tak, aby nebylo požadováno potvrzení o platbách, dokud nebude vyčerpán."
+            },
+            "budget": {
+                "label": "Rozpočet"
+            }
+        },
+        "toasts": {
+            "connection_error": {
+                "what_you_can_do": "Co můžete dělat:",
+                "double_check": "Znovu překontrolujte detaily spojení",
+                "if_ssl_errors": "a pokud vidíte SSL chyby (například ERR_CERT_AUTHORITY_INVALID), klikněte na \"pokročilé\" a pokračujte přijetím certifikátu.",
+                "visit_guides": "Navštivte naše návody pro další pomoc"
+            },
+            "login_failed": {
+                "password_reset": "Zapomněli jste heslo? Klikněte zde"
+            },
+            "errors": {
+                "invalid_credentials": "Chybné heslo. Prosím zkontrolujte své heslo a emailovou adresu a zkuste to znovu."
+            }
+        },
+        "account_menu": {
+            "screen_reader": "Přepnout rozbalovací nabídku"
+        },
+        "publishers_table": {
+            "payments": "platby"
+        },
+        "badge": {
+            "label": {
+                "auth": "PŘIHLÁŠENÍ"
+            }
+        }
+    },
+    "permissions": {
+        "lnd": {
+            "lookupinvoice": "Vyhledat detaily o faktuře",
+            "getinfo": "Získat informace o uzlu",
+            "disconnectpeer": "Odpojit se od vzdáleného uzlu",
+            "listpeers": "Získat seznam všech aktuálně aktivních peerů",
+            "connectpeer": "Navázet spojení se vzdáleným uzlem",
+            "listchannels": "Získat popis všech otevřených kanálů",
+            "estimatefee": "Odhadnout sazbu poplatku a celkové poplatky za transakci",
+            "listinvoices": "Získat seznam všech faktur",
+            "channelbalance": "Získat přehled o celkových prostředcích napříč všemi otevřenými kanály",
+            "walletbalance": "Získat celkové neutracené výstupy (UTXO) peněženky",
+            "getnetworkinfo": "Získat základní statistiky o známém grafu kanálů",
+            "openchannel": "Otevřít nový kanál",
+            "listpayments": "Získat seznam všech odchozích plateb",
+            "verifymessage": "Verifikovat podpis zprávy",
+            "sendtoroute": "Provést platbu přes zadanou cestu",
+            "addinvoice": "Vytvořit nové faktury",
+            "routermc": "Přečíst vnitřní kontrolní stav",
+            "getchaninfo": "Získat oznámení sítě pro daný kanál",
+            "getnodeinfo": "Získat informace o kanálu pro daný uzel",
+            "queryroutes": "Vyhledat možné cesty",
+            "gettransactions": "Získat seznam všech transakcí týkajících se dané peněženky",
+            "decodepayreq": "Dekódovat řetězec žádosti o platbu"
+        },
+        "commando": {
+            "setchannel": "Konfigurace poplatků / rozsahu htlc oznamovaného pro kanál",
+            "disconnect": "Uzavřít existující spojení s uzlem",
+            "connect": "Navázat nové spojení s jiným uzlem",
+            "bkpr-listbalances": "Seznam všech současných i minulých zůstatků účtu",
+            "checkmessage": "Zkontrolovat, že byl podpis vygenerován zadaným uzlem",
+            "decode": "Dekódovat řetězec bolt11/bolt12/runu",
+            "decodepay": "Zkontrolovat a zparsovat řetězec bolt11",
+            "feerates": "Vrátit sazby poplatků, které CLN použije",
+            "fundchannel": "Otevřít platební kanál s uzlem provedením tzv. funding transakce",
+            "getinfo": "Získat souhrn o uzlu",
+            "offer": "Vytvořit nabídku",
+            "sendpay": "Odeslat platbu přes danou cestu",
+            "listpeers": "Zobrazit uzly, které jsou připojeny nebo mají otevřený kanál s tímto uzlem",
+            "listsendpays": "Získá stav všech sendpay příkazů",
+            "listpays": "Získá stav všech platebních příkazů",
+            "listtransactions": "Seznam transakcí sledovaných v peněžence",
+            "pay": "Odeslat platbu na BOLT11 fakturu",
+            "keysend": "Odeslat platbu na jiný uzel",
+            "listinvoices": "Získat status všech faktur",
+            "listnodes": "Vypsat uzly, o kterých se uzel dozvěděl prostřednictvím gossip zpráv",
+            "listoffers": "Vypsat všechy nabídky nebo získat konkrétní nabídku",
+            "multifundchannel": "Otevřít více platebních kanálů s uzly provedením jedné (funding) transakce",
+            "signmessage": "Vytvořit podpis z tohoto uzlu",
+            "getroute": "Najít nejlepší cestu pro platbu na lightning uzel",
+            "listfunds": "Vypsat seznam všech dostupných prostředků",
+            "listforwards": "Zobrazit seznam všech htlc, které se uzel pokusil předat dále",
+            "invoice": "Vytvořit novou platební fakturu"
+        },
+        "lnc": {
+            "estimatefee": "Odhadnout sazbu poplatku a celkové poplatky za transakci",
+            "lookupinvoice": "Vyhledat detaily o faktuře",
+            "queryroutes": "Vyhledat možné cesty",
+            "verifymessage": "Verifikovat podpis zprávy",
+            "sendtoroute": "Provést platbu přes zadanou cestu",
+            "decodepayreq": "Dekódovat řetězec žádosti o platbu",
+            "routermc": "Přečíst vnitřní kontrolní stav",
+            "getinfo": "Získat informace o uzlu",
+            "walletbalance": "Získat celkové neutracené výstupy (UTXO) peněženky",
+            "listpeers": "Získat seznam všech aktuálně aktivních peerů",
+            "addinvoice": "Vytvořit nové faktury",
+            "listchannels": "Získat popis všech otevřených kanálů",
+            "listinvoices": "Získat seznam všech faktur",
+            "channelbalance": "Získat přehled o celkových prostředcích napříč všemi otevřenými kanály",
+            "openchannel": "Otevřít nový kanál",
+            "disconnectpeer": "Odpojit se od vzdáleného uzlu",
+            "getchaninfo": "Získat oznámení sítě pro daný kanál",
+            "getnetworkinfo": "Získat základní statistiky o známém grafu kanálů",
+            "getnodeinfo": "Získat informace o kanálu pro daný uzel",
+            "gettransactions": "Získat seznam všech transakcí týkajících se dané peněženky",
+            "listpayments": "Získat seznam všech odchozích plateb",
+            "connectpeer": "Navázet spojení se vzdáleným uzlem"
+        }
+    }
+}

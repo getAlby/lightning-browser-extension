@@ -1,0 +1,852 @@
+{
+    "translation": {
+        "welcome": {
+            "set_password": {
+                "choose_password": {
+                    "label": "ตั้งรหัสผ่านเข้าแอพ:"
+                },
+                "confirm_password": {
+                    "label": "โปรดยืนยันว่าคุณพิมพ์ถูกต้อง:"
+                },
+                "errors": {
+                    "confirm_password": "โปรดยืนยันรหัสผ่าน",
+                    "mismatched_password": "รหัสผ่านไม่ถูกต้อง",
+                    "enter_password": "โปรดใส่รหัสผ่าน"
+                }
+            },
+            "test_connection": {
+                "ready": "เยี่ยมมาก คุณพร้อมลุยแล้ว!",
+                "connection_error": "เกิดข้อผิดพลาดในการเชื่อมต่อ",
+                "contact_support": "ถ้าคุณต้องการความช่วยเหลือ ติดต่อ support@getalby.com",
+                "review_connection_details": "กรุณาตรวจสอบรายละเอียดการเชื่อมต่อของคุณ",
+                "connection_taking_long": "การเชื่อมต่อใช้เวลานานกว่าที่คาดไว้… ข้อมูลของคุณถูกต้องหรือไม่? โหนดของคุณสามารถเข้าถึงได้หรือไม่?"
+            },
+            "pin_extension": {
+                "next_btn": "เริ่มใช้งาน Alby {{icon}}"
+            }
+        },
+        "alby": {
+            "pre_connect": {
+                "set_password": {
+                    "choose_password": {
+                        "label": "รหัสผ่าน"
+                    },
+                    "errors": {
+                        "enter_password": "ยืนยันรหัสผ่านอีกครั้ง",
+                        "confirm_password": "โปรดยืนยันรหัสผ่านของคุณ",
+                        "mismatched_password": "รหัสผ่านไม่ถูกต้อง"
+                    },
+                    "confirm_password": {
+                        "label": "ยืนยันรหัสผ่าน"
+                    }
+                }
+            }
+        },
+        "accounts": {
+            "account_view": {
+                "mnemonic": {
+                    "generate": {
+                        "button": "สร้าง Master Key",
+                        "title": "สร้าง Master Key ใหม่",
+                        "description": "Master Key ช่วยให้คุณโต้ตอบกับโปรโตคอลต่างๆ เช่น Nostr, เลเยอร์พื้นฐานของ Bitcoin หรือ LNURL-Auth"
+                    },
+                    "backup": {
+                        "save": "บันทึก Master Key",
+                        "button": "ดู recovery phrase",
+                        "description": "จด recovery phase ของคุณ เพื่อให้สามารถกู้คืน Master Key ของคุณในอุปกรณ์ใหม่ หรือในกรณีที่คุณสูญเสียการเข้าถึงบัญชีของคุณ",
+                        "protocols": {
+                            "nostr": "Nostr"
+                        }
+                    },
+                    "import": {
+                        "title": "นำเข้า Master Key ของคุณ",
+                        "description": "ใช้ recovery phrase เพื่อนำ Master Key ของคุณเข้าสู่ Alby",
+                        "button": "นำเข้า Master Key"
+                    },
+                    "lnurl": {
+                        "title": "เข้าสู่ระบบด้วย Lightning",
+                        "use_mnemonic": "ใช้ Master Key เพื่อลงชื่อเข้าใช้แอปพลิเคชันที่ใช้ Lightning (LNURL Auth)"
+                    },
+                    "saved": "Master Key ถูกเข้ารหัสและบันทึกไว้เรียบร้อย"
+                },
+                "no_mnemonic_hint": "💡คุณยังไม่มี Master Key คลิก ที่นี่ เพื่อสร้าง Master Key ของคุณและปลดล็อกการตั้งค่าเหล่านี้",
+                "network": {
+                    "options": {
+                        "bitcoin": "Mainnet",
+                        "testnet": "Testnet",
+                        "regtest": "Regtest"
+                    }
+                },
+                "nostr": {
+                    "settings": {
+                        "derive": "มาจาก Master Key",
+                        "remove": "ลบ keys ปัจจุบัน",
+                        "no_secret_key": "💡คุณยังไม่มี Master Key <0>คลิกที่นี่</0></div> เพื่อสร้าง Master Key และ Nostr keys ของคุณ",
+                        "imported_key_warning": "⚠️ คุณกำลังใช้คีย์ Nostr ที่นำเข้า หรือ สร้างขึ้นแบบสุ่มในปัจจุบัน Nostr private key ของคุณไม่สามารถกู้คืนได้โดย recovery phase ของคุณ ดังนั้นโปรดอย่าลืมสำรอง Nostr private key ของคุณแยกต่างหาก",
+                        "label": "การตั้งค่าสำหรับ Nostr",
+                        "title": "การตั้งค่าสำหรับ Nostr",
+                        "can_restore": "✅ Nostr key ได้มาจาก Master Key ของคุณ"
+                    },
+                    "private_key": {
+                        "label": "Nostr Private Key",
+                        "title": "จัดการ Nostr private key ของคุณ",
+                        "subtitle": "วาง Nostr private key ของคุณ หรือ สร้างอันใหม่ <0>Learn more »</0>",
+                        "success": "Nostr private key ถูกเข้ารหัส และ บันทึกเรียบร้อยแล้ว",
+                        "failed_to_remove": "ชื่อบัญชีที่ป้อนไม่ตรงกัน Nostr private key เก่าของคุณได้รับการคืนค่าแล้ว",
+                        "successfully_removed": "ลบ Nostr private key เรียบร้อยแล้ว"
+                    },
+                    "public_key": {
+                        "label": "Nostr Public Key"
+                    },
+                    "generate_keys": {
+                        "title": "สร้าง Nostr key ใหม่",
+                        "screen_reader": "สร้าง Nostr key อันใหม่สำหรับบัญชีของคุณ",
+                        "hint": "คุณสามารถสร้าง key แบบสุ่ม หรือ คีย์ที่ได้มาจากรายละเอียดบัญชีนี้ (โดยใช้canonical phrase) <0>เรียนรู้เพิ่มเติม »</0>",
+                        "actions": {
+                            "random_keys": "สร้าง key ใหม่แบบสุ่ม",
+                            "derived_keys": "รับ key จากบัญชี"
+                        }
+                    },
+                    "actions": {
+                        "generate": "สร้าง key ใหม่"
+                    },
+                    "errors": {
+                        "failed_to_load": "เกิดข้อผิดพลาดในการโหลด Nostr key โปรดตรวจว่าNostr key ถูกต้องหรือไม่ ?"
+                    },
+                    "title": "Nostr",
+                    "hint": "Nostr เป็นโปรโตคอลที่เรียบง่ายและเปิดกว้างที่มุ่งสร้างเครือข่ายสังคมที่ทนต่อการเซ็นเซอร์ Nostr ทำงานด้วยคีย์ทาง cryptography เมื่อต้องการเผยแพร่บางอย่าง คุณต้องลงชื่อด้วยคีย์ของคุณและส่งไปยังรีเลย์หลายตัว คุณสามารถใช้ Alby เพื่อจัดการคีย์ Nostr ของคุณ แอปพลิเคชัน Nostr หลายตัวจะอนุญาตให้คุณใช้คีย์จาก extension Alby ได้อย่างง่ายดาย"
+                },
+                "remove": {
+                    "error": "ชื่อบัญชีที่ป้อนไม่ตรงกัน"
+                },
+                "remove_secretkey": {
+                    "title": "ลบ Master Key",
+                    "success": "การลบ Master Key เสร็จสมบูรณ์"
+                },
+                "actions": {
+                    "export": "ส่งออก",
+                    "remove_secretkey": "ลบ Master Key"
+                },
+                "name": {
+                    "title": "ชื่อที่ปรากฏ"
+                },
+                "export": {
+                    "waiting": "รอช้อมูลจาก LNDHub…",
+                    "your_ln_address": "Lightning Address ของคุณ:",
+                    "export_uri": "LNDHub Credentials URI",
+                    "scan_qr": "นำกระเป๋านี้เข้าสู่ Zeus หรือ BlueWallet โดยการแสกน QRCode"
+                }
+            }
+        },
+        "unlock": {
+            "unlock_to_continue": "ปลดล็อคเพื่อไปต่อ",
+            "unlock_password": "รหัสผ่านปลดล็อคของคุณ",
+            "help_contact": {
+                "part1": "ต้องการความช่วยเหลือ ? ติดต่อ",
+                "part2": "ฝ่ายสนับสนุนของ Alby"
+            },
+            "unlock_error": {
+                "help": "ข้อมูลในบัญชีของคุณถูกเข้ารหัสด้วยรหัสผ่านของคุณ ถ้าคุณลืมรหัสผ่านของคุณจริง ๆ คุณต้องตั้งค่าใหม่และเพิ่มบัญชี Lightning ของคุณใหม่อีกครั้ง",
+                "link": "ตั้งค่าใหม่ตอนนี้และเพิ่มบัญชีใหม่"
+            },
+            "errors": {
+                "invalid_password": "รหัสผ่านไม่ถูกต้อง"
+            }
+        },
+        "settings": {
+            "browser_notifications": {
+                "title": "การแจ้งเตือนของเบราว์เซอร์",
+                "subtitle": "การแจ้งเตือนที่เกี่ยวข้องกับการชำระเงินและการตรวจสอบสิทธิ์"
+            },
+            "website_enhancements": {
+                "title": "การปรับปรุงเว็บไซต์"
+            },
+            "camera_access": {
+                "title": "การเข้าถึงกล้องถ่ายรูป",
+                "subtitle": "เพื่อแสกน QR codes",
+                "allow": "อนุญาติให้เข้าถึงกล้อง",
+                "granted": "ได้รับอนุญาต"
+            },
+            "language": {
+                "title": "ภาษา",
+                "subtitle": "การแปลยังไม่เสร็จสมบูรณ์ 100% <0>ช่วยเราแปล Alby เป็นภาษาของคุณ!</0>"
+            },
+            "theme": {
+                "title": "ธีม",
+                "subtitle": "ใช้ Alby ในโหมดมืดหรือสว่าง",
+                "options": {
+                    "dark": "มีด",
+                    "light": "สว่าง",
+                    "system": "ระบบ"
+                }
+            },
+            "show_fiat": {
+                "title": "แปลงซาโตชิเป็น Fiat",
+                "subtitle": "แปลงเป็นสกุลเงินที่เลือกจากการแลกเปลี่ยนที่เลือกเสมอ"
+            },
+            "currency": {
+                "title": "สกุลเงิน",
+                "subtitle": "แสดงจำนวนเพิ่มเติมในสกุลเงินนี้"
+            },
+            "exchange": {
+                "title": "แหล่งแลกเปลี่ยน",
+                "subtitle": "แหล่งที่มาของอัตราแลกเปลี่ยนบิตคอยน์"
+            },
+            "email": {
+                "title": "อีเมล",
+                "placeholder": "โปรดใส่อีเมลของคุณ"
+            },
+            "change_password": {
+                "title": "เปลี่ยนรหัสผ่านที่ใช้ปลดล๊อค",
+                "screen_reader": "เปลี่ยนรหัสผ่านที่ใช้ปลดล๊อค",
+                "choose_password": {
+                    "label": "โปรดใส่รหัสผ่านที่ใช้ปลดล๊อคอันใหม่:"
+                },
+                "submit": {
+                    "label": "เปลี่ยน"
+                },
+                "confirm_password": {
+                    "label": "ยืนยันรหัสผ่านอันใหม่:"
+                },
+                "errors": {
+                    "enter_password": "โปรดป้อนรหัสเพื่อปลดล๊อคอันใหม่",
+                    "confirm_password": "โปรดยืนยันรหัสผ่านของคุณ",
+                    "mismatched_password": "รหัสผ่านไม่ถูกต้อง"
+                },
+                "success": "เปลี่ยนรหัสผ่านเสร็จสมบูรณ์"
+            },
+            "personal_data": {
+                "title": "ข้อมูลส่วนบุคคล",
+                "description": "ผู้รับเงินสามารถขอข้อมูลเพิ่มเติมที่จะส่งพร้อมกับการชำระเงิน ข้อมูลนี้จะไม่ถูกแบ่งปันกับใครก็ตามโดยไม่ได้รับความยินยอมจากคุณ คุณจะได้รับแจ้งเสมอก่อนที่จะส่งข้อมูลนี้ไปพร้อมกับการชำระเงิน"
+            },
+            "name": {
+                "title": "ชื่อ",
+                "placeholder": "โปรดใส่ชื่อของคุณ"
+            }
+        },
+        "send": {
+            "title": "ส่ง",
+            "input": {
+                "label": "ผู้รับ",
+                "hint": "Invoice, Lightning Address หรือ LNURL"
+            }
+        },
+        "lnurlpay": {
+            "amount": {
+                "label": "จำนวน"
+            },
+            "comment": {
+                "label": "ความคิดเห็น"
+            },
+            "name": {
+                "label": "ชื่อ"
+            },
+            "email": {
+                "label": "อีเมล"
+            },
+            "success": "การชำระเงินสำเร็จ!"
+        },
+        "lnurlauth": {
+            "title": "การตรวจสอบสิทธิ์",
+            "content_message": {
+                "heading": "คุณต้องการเข้าสู่ระบบด้วย"
+            },
+            "submit": "เข้าระบบ",
+            "success": "เข้าระบบสำเร็จแล้ว บน {{name}}",
+            "errors": {
+                "status": "ข้อผิดพลาด: สถานะการตรวจสอบสิทธิ์ไม่ถูกต้อง"
+            }
+        },
+        "lnurlchannel": {
+            "title": "คำขอ Channel",
+            "content_message": {
+                "heading": "ขอ channel จาก node"
+            },
+            "success": "ส่งการขอ channel สำเร็จแล้วที่ {{name}}"
+        },
+        "lnurlredeem": {
+            "title": "แลกบิตคอยน์",
+            "input": {
+                "label": "LNURL-withdraw code",
+                "placeholder": "LNURL..."
+            },
+            "actions": {
+                "withdraw": "ถอน"
+            },
+            "errors": {
+                "invalid_lnurl": "LNURLไม่ถูกต้อง",
+                "invalid_withdraw_request": "คำขอการถอนจาก LNURL ไม่ถูกต้อง"
+            }
+        },
+        "receive": {
+            "payment": {
+                "status": "ตรวจสถานะการชำระเงิน",
+                "waiting": "กำลังรอการชำระเงิน…"
+            },
+            "title": "รับ",
+            "actions": {
+                "create_invoice": "สร้าง Invoice"
+            },
+            "amount": {
+                "label": "จำนวน",
+                "placeholder": "จำนวนในหน่วยซาโตชิ…"
+            },
+            "description": {
+                "label": "คำอธิบาย",
+                "placeholder": "ตัวอย่างเช่น ใครเป็นคนส่งการชำระเงินนี้ ?"
+            },
+            "success": "ได้รับการชำระเงินแล้ว!"
+        },
+        "on_chain": {
+            "title": "รับด้วย address บิตคอยน์",
+            "go": "ไปที่บัญชี Alby ของคุณ →",
+            "instructions1": "เพื่อรับบิตคอยน์ด้วย address บิตคอยน์ โปรดเข้าสู่ระบบ <0>Alby Account</0> ของคุณบน getalby.com",
+            "instructions2": "คุณสามารถหา address ของบิตคอยน์ได้ที่หน้า <0>Receive</0>"
+        },
+        "keysend": {
+            "title": "ส่ง",
+            "success": "ชำระเงินแล้ว! พรีอิมเมจ: {{preimage}}",
+            "amount": {
+                "label": "จำนวน (ซาโตชิ)"
+            },
+            "receiver": {
+                "label": "โอนเงินไปที่"
+            }
+        },
+        "nostr": {
+            "block_and_ignore": "บล็อกและเพิกเฉยต่อ {{host}}",
+            "title": "Nostr",
+            "block_added": "เพื่ม {{host}} เข้าสู่แบล็คลิส โปรดรีเฟรชหน้าเว็บใหม่",
+            "content": "เว็บไซต์นี้ขอให้คุณลงชื่อ:"
+        },
+        "choose_path": {
+            "other": {
+                "title": "wallets อื่น ๆ"
+            },
+            "alby": {
+                "title": "บัญชี Alby"
+            }
+        },
+        "choose_connector": {
+            "title": "เชื่อมต่อกับ Lightning Wallet",
+            "description": "เชื่อมต่อกับ lightning wallet อื่น ๆ หรือ node ของคุณ",
+            "lnd": {
+                "page": {
+                    "title": "เชื่อมต่อกับ LND node ของคุณ",
+                    "description": "คุณต้องมี URL ของ node และ macaroon ที่มีสิทธิ์อ่านและส่ง (เช่น admin.macaroon)"
+                },
+                "url": {
+                    "label": "Host และ Port ของ API REST",
+                    "placeholder": "https://your-node-url:8080"
+                },
+                "macaroon": {
+                    "label": "Macaroon (รูปแบบ HEX)"
+                },
+                "drag_and_drop": "ลากและวาง macaroon ของคุณที่นี่ หรือ <0>browse</0>",
+                "errors": {
+                    "connection_failed": "การเชื่อมต่อล้มเหลว LND credentials ของคุณถูกต้องหรือไม่?"
+                }
+            },
+            "lnc": {
+                "pairing_phrase": {
+                    "label": "pairing phrase ของคุณ ",
+                    "placeholder": "รหัสเพื่อเข้าถึงแซต"
+                },
+                "title": "Lightning Terminal (LNC)"
+            },
+            "lndhub_go": {
+                "title": "LNDHub",
+                "page": {
+                    "title": "เชื่อมต่อกับ LNDHub",
+                    "description": "ใส่ LNDHub credential URI ของคุณที่นี่ หรือแสกน QR code ด้วย webcam ของคุณ"
+                },
+                "errors": {
+                    "connection_failed": "เกิดข้อผิดพลาดในการเชื่อมต่อ LNDHub URI ของคุณถูกต้องหรือไม่ ?",
+                    "invalid_uri": "LNDHub URI ไม่ถูกต้อง"
+                },
+                "uri": {
+                    "label": "ส่องออก URI จาก LNDHub"
+                }
+            },
+            "lnbits": {
+                "page": {
+                    "title": "เชื่อมต่อกับ <0>LNbits</0>",
+                    "instructions": "ใน LNbits, เลือกกระเป๋าที่คุณต้องการเชื่อมต่อ, เปิดมัน , คลิกที่ API Info และ คัดลอก Admin Key และวางข้างล่างนี้:"
+                },
+                "errors": {
+                    "connection_failed": "เกิดการผิดพลาดในการเชื่อมต่อ โปรพตรวจสอบ URL และ Admin Key ว่าถูกต้องหรือไม่ ?"
+                },
+                "title": "LNbits",
+                "admin_key": {
+                    "label": "LNbits Admin Key",
+                    "placeholder": "Admin Key 32 ตัวของคุณ"
+                },
+                "url": {
+                    "label": "LNbits URL"
+                }
+            },
+            "eclair": {
+                "url": {
+                    "label": "Eclair URL",
+                    "placeholder": "http://localhost:8080"
+                },
+                "title": "Eclair",
+                "page": {
+                    "title": "เชื่อมต่อกับ<0>Eclair</0>",
+                    "instructions": "คุณต้องการ Eclair URL และ รหัสผ่าน"
+                },
+                "password": {
+                    "label": "รหัสผ่าน Eclair"
+                }
+            },
+            "citadel": {
+                "page": {
+                    "title": "เชื่อมต่อกับ<0>Citaddel</0> node"
+                }
+            },
+            "umbrel": {
+                "page": {
+                    "instructions": "1. ในแดชบอร์ด Lightning node ของคุณไปที่ <0>เชื่อมต่อกระเป๋า</0><1/>2. เลือก<0>REST (TOR)</0> หรือ <0> REST (Local Network)</0><1/>3. คัดลอก<0>Indconnect URL</0> และวางข้างล่างนี้",
+                    "title": "เชื่อมต่อกับ<0>Umbrel</0> node"
+                },
+                "rest_url": {
+                    "label": "lndconnect REST URL",
+                    "placeholder": "lndconnect://yournode:8080?..."
+                }
+            },
+            "mynode": {
+                "page": {
+                    "title": "เชื่อมต่อกับ<0>myNode</0>",
+                    "instructions": "บนหน้าแรกของ myNode คลิกที่ปุ่ม <0>Wallet</0> สำหรับบริการ <0>lightning</0> ของคุณ จากนั้นคลิกที่ปุ่ม <0>Pair Wallet</0> ใต้แท็บ <0>Status </0>ป้อนรหัสผ่าน เมื่อได้รับแจ้ง<1/> เลือกเมนูแบบเลื่อนลงและเลือกตัวเลือกการจับคู่ ขึ้นอยู่กับการตั้งค่าของคุณ คุณสามารถใช้การเชื่อมต่อ <0>lightning (REST + Local IP)</0> หรือ การเชื่อมต่อ <0>lightning (REST + Tor)</0>"
+                },
+                "rest_url": {
+                    "label": "lndconnect REST URL",
+                    "placeholder": "lndconnect://yournode:8080?..."
+                }
+            },
+            "raspiblitz": {
+                "page": {
+                    "instructions1": "ทำตามขั้นตอนต่อไปนี้:<1/> 1.<0>SSH</0> เข้ากับ <0>Raspiblitz</0> ของคุณ</1> 2.เลือก <0>Connect Apps & Show Credentials<1/></0>3. เลือก <0>Connect Alby to this node</0><1/>4. กด <0>OK</0> เพื่อแสดงข้อมูลรับรองการเชื่อมต่อ<1/><1/>คัดลอกและวาง<0>REST API host</0> หรือ <0>.onion</0> address เพื่อเชื่อมต่อผ่าน Tor ลงในอินพุตด้านล่าง",
+                    "title": "เชื่อมต่อกับ <0>RaspiBlitz</0> node ของคุณ",
+                    "instructions2": "คัดลอก (admin) <0>macaroon</0> มาใส่ในช่องข้างล่าง"
+                },
+                "rest_api_host": {
+                    "label": "REST API host",
+                    "placeholder": "your-node-onion-address:port"
+                }
+            },
+            "blink": {
+                "page": {
+                    "title": "Anslut <0>Blink Wallet</0>"
+                }
+            },
+            "bitcoin_jungle": {
+                "page": {
+                    "title": "เชื่อมต่อกับ <0>Bitcoin Jungle Wallet</0>"
+                }
+            },
+            "btcpay": {
+                "config": {
+                    "label": "การกำหนดค่าข้อมูล"
+                },
+                "errors": {
+                    "connection_failed": "การเชื่อมต่อผิดพลาด โปรดตรวจสอบ BTCPay connection URL ว่าถูกต้องและเข้าถึงได้หรือไม่ ?"
+                }
+            },
+            "commando": {
+                "page": {
+                    "instructions": "โปรดตรวจสอบให้แน่ใจว่า Core Lightning ของคุณเป็นเวอร์ชัน 0.12.0 หรือ ใหม่กว่า และ commando plugin กำลังทำงานและโหนดของคุณสามารถเข้าถึงได้ผ่านเครือข่าย Lightning สร้าง rune โดยการเรียกใช้ \"lightning-cli commando-rune\""
+                }
+            },
+            "umbrel_lightning_node": {
+                "title": "Lightning Node"
+            },
+            "startos": {
+                "page": {
+                    "title": "เชื่อมต่อกับ <0>Staet9 Server</0> ของคุณ",
+                    "instructions": "บนแดชบอร์ดของ StartOS คลิกที่บริการ <0>Lightning Network Daemon</0> <1/>เลือกแท็บ<0>Properties</0><1/>คัดลอก<0>LND Connect REST URL.</0>"
+                },
+                "rest_url": {
+                    "label": "lndconnect REST URL",
+                    "placeholder": "lndconnect://yournode:8080?..."
+                }
+            }
+        },
+        "distributions": {
+            "description": "เลือกแอปพลิเคชัน {{name}} ที่คุณต้องการเชื่อมต่อ",
+            "umbrel": {
+                "name": "Umbrel"
+            },
+            "btcpay": {
+                "name": "BTCPay"
+            },
+            "raspiblitz": {
+                "name": "RaspiBlitz"
+            },
+            "mynode": {
+                "name": "myNode"
+            },
+            "startos": {
+                "name": "StartOS"
+            },
+            "title": "เชื่อมต่อกับ {{name}}"
+        },
+        "home": {
+            "actions": {
+                "send_satoshis": "⚡️ส่งซาโตชิ⚡️",
+                "enable_now": "เปิดใช้งานเดี๋ยวนี้"
+            },
+            "default_view": {
+                "is_blocked_hint": "Alby ถูกปิดใช้งานบน {{host}}",
+                "block_removed": "เปิดใช้งาน {{host}} โปรด รีเฟรชหน้าเว็บไซต์"
+            }
+        },
+        "lnurlwithdraw": {
+            "success": "คำขอการถอนจำนวน {{amount}} ถูกส่งให้ {{sender}} เรียบร้อยแล้ว",
+            "title": "ถอน",
+            "content_message": {
+                "heading": "จำนวน"
+            },
+            "amount": {
+                "label": "จำนวน"
+            }
+        },
+        "scan_qrcode": {
+            "title": "กำลังรอการสแกน"
+        },
+        "publishers": {
+            "title": "เว็บไซต์⚡ของคุณ",
+            "description": "เว็บไซต์ที่คุณเคยใช้ Alby มาก่อน",
+            "no_info": "ดูเหมือนว่าคุณยังไม่เคยใช้ Alby ในเว็บไซต์ใดๆ เลย",
+            "discover": "สำรวจเว็บไซต์ต่าง ๆ",
+            "publisher": {
+                "allowance": {
+                    "title": "การยินยอม",
+                    "used_budget": "ซาโตชิที่ใช้ไป"
+                }
+            }
+        },
+        "make_invoice": {
+            "title": "สร้าง Invoice",
+            "amount": {
+                "label": "จำนวน (ซาโตชิ)"
+            },
+            "memo": {
+                "label": "บันทึกช่วยจำ"
+            },
+            "errors": {
+                "amount_too_small": "จำนวนเงินน้อยกว่าขั้นต่ำ",
+                "amount_too_big": "จำนวนเงินเกินจำนวนสูงสุด"
+            }
+        },
+        "confirm_sign_pset": {
+            "title": "เซ็น",
+            "allow_sign": "เว็บไซต์นี้ขอให้คุณลงนามในธุรกรรม Liquid:",
+            "view_raw_transaction": "ดูธุรกรรม (Base64)",
+            "hide_raw_transaction": "ซ่อนธุรกรรม (Base64)",
+            "inputs": "อินพุต",
+            "outputs": "ผลลัพธ์",
+            "amount": "{{amount}} {{ticker}}"
+        },
+        "confirm_sign_message": {
+            "title": "เซ็น",
+            "content": "เว็บไซต์นี้ขอให้คุณลงชื่อ:"
+        },
+        "liquid": {
+            "block_and_ignore": "บล็อกและเพิกเฉยต่อ {{host}}",
+            "block_added": "เพื่ม {{host}} เข้าสู่แบล็คลิส โปรดรีเฟรชหน้าเว็บใหม่",
+            "allow": "อณุญาติเว็บไซต์นี้เพื่อ:",
+            "allow_sign": "อนุญาตให้ {{host}} ลงนาม:",
+            "title": "Liquid"
+        },
+        "bitcoin": {
+            "block_and_ignore": "บล็อกและเพิกเฉยต่อ {{host}}",
+            "block_added": "เพื่ม {{host}} เข้าสู่แบล็คลิส โปรดรีเฟรชหน้าเว็บใหม่",
+            "allow": "อณุญาติเว็บไซต์นี้เพื่อ:",
+            "confirm_get_address": {
+                "title": "รับ Address"
+            },
+            "allow_sign": "อนุญาตให้ {{host}} ลงนาม:"
+        },
+        "confirm_keysend": {
+            "title": "อนุมัติการชำระเงิน",
+            "success": "ชำระเงินแล้ว! พรีอิมเมจ: {{preimage}}",
+            "payment_summary": {
+                "description": "ส่งการชำระเงินไปที่: {{destination}}"
+            }
+        },
+        "confirm_payment": {
+            "title": "อนุมัติการชำระเงิน",
+            "success": "การชำระเงิน {{amount}} เสร็จสมบูรณ์!",
+            "actions": {
+                "pay_now": "จ่ายตอนนี้"
+            }
+        },
+        "confirm_request_permission": {
+            "title": "อนุมัติคำขอ",
+            "allow": "อนุญาตให้เว็บไซต์นี้ดำเนินการ:",
+            "always_allow": "จำตัวเลือกของฉันและอย่าถามอีก"
+        },
+        "confirm_add_account": {
+            "title": "เพื่มบัญชี",
+            "content": "เว็บไซต์นี้ต้องการเพิ่มบัญชี ({{connector}}):",
+            "tor_info": "ในการเชื่อมต่อผ่านเครือข่าย TOR คุณต้องติดตั้ง Alby companion app เสียก่อน:"
+        },
+        "transactions": {
+            "title": "การทำธุรกรรม"
+        }
+    },
+    "permissions": {
+        "commando": {
+            "invoice": "สร้างความคาดหวังในการชำระเงิน",
+            "keysend": "ส่งการชำระเงินไปยัง node อื่น",
+            "listfunds": "แสดงรายการการเงินทั้งหมด",
+            "listinvoices": "รับสถานะของ invoice ทั้งหมด",
+            "listoffers": "แสดงรายการข้อเสนอทั้งหมดหรือรับข้อเสนอเฉพาะ",
+            "offer": "สร้างข้อเสนอ",
+            "pay": "ส่งการชำระเงินไปยัง invoice BOLT11",
+            "connect": "สร้างการเชื่อมต่อใหม่กับ node อื่น",
+            "decode": "ถอดรหัสสตริง bolt11/bolt12/rune",
+            "decodepay": "การตรวจสอบความถูกต้องของสตริง Bolt11",
+            "feerates": "คืนค่าธรรมเนียมที่ CLN จะใช้",
+            "fundchannel": "เปิดช่องทางการชำระเงินกับคู่ของคุณโดยการทำธุรกรรมทางการเงิน",
+            "getinfo": "รับข้อมูลสรุปเกี่ยวกับ node",
+            "getroute": "ค้นหาเส้นทางที่ดีที่สุดสำหรับการชำระเงินไปยัง lightning node",
+            "listforwards": "แสดงรายการ htlcs ทั้งหมดที่พยายามส่งต่อ",
+            "listnodes": "แสดงรายการ node ที่ได้รับ gossip messages",
+            "listtransactions": "รายการธุรกรรมที่ติดตามใน wallet",
+            "sendpay": "ส่งการชำระเงินผ่าน route",
+            "bkpr-listbalances": "ประวัติยอดคงเหลือบัญชีทั้งหมด",
+            "checkmessage": "ตรวจสอบว่าลายเซ็นถูกสร้างขึ้นโดย node ที่กำหนด",
+            "disconnect": "ปิดการเชื่อมต่อที่มีอยู่กับ peer",
+            "listpays": "รับสถานะของคำสั่งจ่ายทั้งหมด",
+            "multifundchannel": "เปิดช่องทางการชำระเงินหลายช่องทางด้วย node โดยการทำธุรกรรมทางการเงินเพียงครั้งเดียว",
+            "setchannel": "กำหนดค่าค่าธรรมเนียม / ช่วง htlc สำหรับ channel",
+            "signmessage": "สร้างลายเซ็นจาก node นี้",
+            "listpeers": "แสดงรายการ ืnode ที่เชื่อมต่อหรือมีการเปิด channel กับ node นี้",
+            "listsendpays": "รับสถานะของคำสั่งการส่งเงินทั้งหมด"
+        },
+        "lnd": {
+            "listinvoices": "รับรายการ invoice ทั้งหมด",
+            "walletbalance": "รับผลลัพธ์ที่ไม่ได้ใช้ทั้งหมดใน wallet",
+            "openchannel": "เปิด channel ใหม่",
+            "getnetworkinfo": "รับสถิติพื้นฐานจาก channel graph ที่รู้จัก",
+            "getchaninfo": "รับประกาศเครือข่ายจาก channel ที่กำหนด",
+            "settleinvoice": "ชำระ invoice ที่ยอมรับ",
+            "getinfo": "รับข้อมูลจาก node",
+            "channelbalance": "รับรายงานเกี่ยวกับเงินทุนรวมในทุก channel ที่เปิดอยู่",
+            "disconnectpeer": "หยุดการเชื่อมต่อกับ node ระยะไกล",
+            "estimatefee": "ประมาณการอัตราค่าธรรมเนียมและค่าธรรมเนียมทั้งหมดสำหรับการทำธุรกรรม",
+            "gettransactions": "รับรายการธุรกรรมทั้งหมดที่เกี่ยวข้องกับ wallet",
+            "listpayments": "รับรายการการชำระเงินขาออกทั้งหมด",
+            "listpeers": "รับรายชื่อเพื่อนที่ใช้งานอยู่ทั้งหมด",
+            "lookupinvoice": "ดูรายละเอียดของ invoice",
+            "queryroutes": "สอบถามเส้นทางที่เป็นไปได้",
+            "decodepayreq": "ถอดรหัสสตริงคำขอชำระเงิน",
+            "addinvoice": "สร้าง invoice ใหม่",
+            "addholdinvoice": "สร้าง HODL invoice ใหม่",
+            "routermc": "แสดงค่าสถานะการควบคุมภายใน",
+            "listchannels": "รับคำอธิบายของ channel ที่เปิดอยู่ทั้งหมด",
+            "connectpeer": "สร้างการเชื่อมต่อกับ node ระยะไกล",
+            "getnodeinfo": "รับข้อมูล channel จาก node",
+            "verifymessage": "ตรวจสอบลายเซ็นผ่านข้อความ",
+            "sendtoroute": "ชำระเงินตามเส้นทางที่กำหนด"
+        },
+        "lnc": {
+            "sendtoroute": "ชำระเงินตามเส้นทางที่กำหนด",
+            "decodepayreq": "ถอดรหัสสตริงคำขอชำระเงิน",
+            "routermc": "แสดงค่าสถานะการควบคุมภายใน",
+            "openchannel": "เปิด channel ใหม่",
+            "connectpeer": "สร้างการเชื่อมต่อกับ node ระยะไกล",
+            "disconnectpeer": "หยุดการเชื่อมต่อกับ node ระยะไกล",
+            "estimatefee": "ประมาณการอัตราค่าธรรมเนียมและค่าธรรมเนียมทั้งหมดสำหรับการทำธุรกรรม",
+            "getchaninfo": "รับประกาศเครือข่ายจาก channel ที่กำหนด",
+            "getnetworkinfo": "รับสถิติพื้นฐานจาก channel graph ที่รู้จัก",
+            "getnodeinfo": "รับข้อมูล channel จาก node",
+            "gettransactions": "รับรายการธุรกรรมทั้งหมดที่เกี่ยวข้องกับ wallet",
+            "listpayments": "รับรายการการชำระเงินขาออกทั้งหมด",
+            "listpeers": "รับรายชื่อเพื่อนที่ใช้งานอยู่ทั้งหมด",
+            "lookupinvoice": "ดูรายละเอียดของ invoice",
+            "queryroutes": "สอบถามเส้นทางที่เป็นไปได้",
+            "verifymessage": "ตรวจสอบลายเซ็นผ่านข้อความ",
+            "addholdinvoice": "สร้าง HODL invoice ใหม่",
+            "settleinvoice": "ชำระ invoice ที่ยอมรับ",
+            "addinvoice": "สร้าง invoice ใหม่",
+            "getinfo": "รับข้อมูลจาก node",
+            "listchannels": "รับคำอธิบายของ channel ที่เปิดอยู่ทั้งหมด",
+            "listinvoices": "รับรายการ invoice ทั้งหมด",
+            "channelbalance": "รับรายงานเกี่ยวกับเงินทุนรวมในทุก channel ที่เปิดอยู่",
+            "walletbalance": "รับผลลัพธ์ที่ไม่ได้ใช้ทั้งหมดใน wallet"
+        }
+    },
+    "common": {
+        "amount": "จำนวน",
+        "optional": "ไม่จำเป็น",
+        "feedback": "ข้อเสนอแนะ",
+        "copied": "คัดลอกเรียบร้อย!",
+        "pasted": "วาง!",
+        "message": "ข้อความ",
+        "help": "ช่วยเหลือ",
+        "balance": "คงเหลือ",
+        "or": "หรือ",
+        "actions": {
+            "back": "ย้อนกลับ",
+            "delete": "ลบ",
+            "edit": "แก้ไข",
+            "send": "ส่ง",
+            "save": "บันทึก",
+            "import": "นำเข้า",
+            "unlock": "ปลดล๊อค",
+            "open": "เปิด",
+            "cancel": "ยกเลิก",
+            "confirm": "ยืนยัน",
+            "continue": "ต่อไป",
+            "connect": "เชื่อมต่อ",
+            "lock": "ล๊อค",
+            "receive": "รับ",
+            "remember": "จำตัวเลือกของฉันและอย่าถามอีก",
+            "more": "อื่น ๆ",
+            "download": "ดาวน์โหลด",
+            "log_in": "เข้าสู่ระบบ",
+            "next": "ต่อไป",
+            "transactions": "การทำธุรกรรม",
+            "close": "ปิด",
+            "export": "ส่งออก",
+            "remove": "ลบออก",
+            "copy": "คัดลอก",
+            "copy_clipboard": "คัดลอกไปยังคลิปบอร์ด",
+            "paste": "วาง",
+            "paste_clipboard": "วางจากคลิปบอร์ด",
+            "copy_invoice": "คัดลอก Invoice",
+            "receive_again": "รับการชำระเงินอีกรายการ"
+        },
+        "connectors": {
+            "lnd": "LND",
+            "nativelnd": "LND(บน Tor)",
+            "lndhub": "LNDHub",
+            "nativelndhub": "LNDHub(บนTor)",
+            "lnbits": "LNbits",
+            "nativelnbits": "LNbits(บน Tor)",
+            "galoy": "Galoy",
+            "eclair": "Eclair",
+            "citadel": "Citadel",
+            "nativecitadel": "Citadel (บน Tor)",
+            "commando": "Commando"
+        },
+        "range": {
+            "between": "ระหว่าง {{min}} และ {{max}}",
+            "lessThanOrEqual": "≤ {{max}}",
+            "greaterOrEqual": "≥ {{min}}"
+        },
+        "description": "คำอธิบาย",
+        "description_full": "คำอธิบายแบบเต็ม",
+        "success_message": "{{amount}}{{fiatAmount}} ส่งถึง {{destination}}",
+        "response": "การตอบสนอง",
+        "password": "รหัสผ่าน",
+        "confirm_password": "ยืนยันรหัสผ่าน",
+        "sats_other": "ซาโตชิ",
+        "loading": "กำลังโหลด",
+        "errors": {
+            "connection_failed": "การเชื่อมต่อล้มเหลว",
+            "payment_failed": "การชำระเงินล้มเหลว"
+        },
+        "success": "สำเร็จ",
+        "error": "ข้อผิดพลาด",
+        "discover": "ค้นหา",
+        "connected_sites": "เว็บไซต์ที่เชื่อมต่อ",
+        "wallet": "กระเป๋าตัง",
+        "sats_one": "ซาโตชิ"
+    },
+    "components": {
+        "allowance_menu": {
+            "hint": "การดำเนินการนี้จะรีเซ็ตงบประมาณปัจจุบัน",
+            "new_budget": {
+                "label": "งบประมาณใหม่"
+            },
+            "enable_login": {
+                "title": "เปิดใช้งานการเข้าสู่ระบบเว็บไซต์",
+                "subtitle": "เข้าสู่ระบบโดยอัตโนมัติโดยไม่ต้องยืนยันเมื่อเว็บไซต์ร้องขอ"
+            },
+            "edit_allowance": {
+                "title": "แก้ไขการตั้งค่า",
+                "screen_reader": "ตัวเลือกการอนุญาติ"
+            },
+            "confirm_delete": "คุณแน่ใจหรือไม่ว่าต้องการลบเว็บไซต์นี้ ?"
+        },
+        "qrcode_scanner": {
+            "title": "สแกน QR Code",
+            "actions": {
+                "start_scanning": "เริ่มสแกน",
+                "stop_scanning": "หยุดสแกน"
+            },
+            "errors": {
+                "allow_camera_access": "โปรดอนุญาตการเข้าถึงกล้องในหน้าจอการตั้งค่า"
+            }
+        },
+        "companion_download_info": {
+            "download": "ดาวน์โหลด",
+            "companion": {
+                "title": "Companion App",
+                "description": "Lightweight app เชื่อมต่อเบราว์เซอร์ของคุณกับเครือข่าย TOR"
+            },
+            "tor_native": {
+                "title": "TOR (native)",
+                "description": "เลือกตัวเลือกนี้หากเบราว์เซอร์นี้เชื่อมต่อกับเครือข่าย TOR แล้ว"
+            },
+            "heading": "คุณต้องการเชื่อมต่อเครือข่าย TOR อย่างไร?"
+        },
+        "budget_control": {
+            "remember": {
+                "label": "จดจำและกำหนดงบประมาณ",
+                "description": "คุณสามารถตั้งค่ายอดคงเหลือไม่ให้ถูกขอให้ยืนยันการชำระเงินจนกว่าจะหมด"
+            },
+            "budget": {
+                "label": "งบประมาณ"
+            }
+        },
+        "toasts": {
+            "connection_error": {
+                "what_you_can_do": "นี่คือสิ่งที่คุณสามารถทำได้:",
+                "double_check": "ตรวจสอบรายละเอียดการเชื่อมต่อของคุณอีกครั้ง",
+                "if_ssl_errors": "และถ้ามีข้อผิดพลาด SSL (เช่น ERR_CERT_AUTHORITY_INVALID) ให้คลิก \"ขั้นสูง\" และดำเนินการยอมรับใบรับรอง",
+                "visit_guides": "ดูคำแนะนำของเราสำหรับความช่วยเหลือเพิ่มเติม"
+            },
+            "login_failed": {
+                "password_reset": "ลืมรหัสผ่านของคุณ ? คลิกที่นี่"
+            },
+            "errors": {
+                "invalid_credentials": "รหัสผ่านไม่ถูกต้อง โปรดเช็ครหัสผ่านและอีเมลของคุณ และลองอีกครั้ง"
+            }
+        },
+        "transactions_table": {
+            "fee": "ค่าทำเนียม",
+            "preimage": "Preimage",
+            "received": "ได้รับ",
+            "sent": "ส่ง",
+            "boostagram": {
+                "sender": "ผู้ส่ง",
+                "message": "ข้อความ",
+                "app": "แอปพลิเคชัน",
+                "podcast": "พอดคาสต์"
+            },
+            "open_location": "เปิดเว็บไซต์"
+        },
+        "account_menu": {
+            "screen_reader": "เมนูแบบเลื่อนลง",
+            "options": {
+                "account": {
+                    "go_to_web_wallet": "จัดการเว็บไซต์บนบัญชีของคุณ"
+                }
+            }
+        },
+        "publishers_table": {
+            "payments": "การชำระเงิน"
+        },
+        "badge": {
+            "label": {
+                "auth": "เข้าสู่ระบบ",
+                "imported": "นำเข้า"
+            }
+        }
+    }
+}

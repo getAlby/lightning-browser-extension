@@ -1,0 +1,672 @@
+{
+    "translation": {
+        "welcome": {
+            "set_password": {
+                "choose_password": {
+                    "label": "Vælg en nøglekode:"
+                },
+                "confirm_password": {
+                    "label": "Lad os se, om du skrev det korrekt:"
+                },
+                "errors": {
+                    "enter_password": "Indtast en adgangskode.",
+                    "confirm_password": "Bekræft din adgangskode.",
+                    "mismatched_password": "Adgangskoderne er forskellige."
+                }
+            },
+            "test_connection": {
+                "ready": "Super, så er du klar!",
+                "connection_error": "Fejl på forbindelse",
+                "review_connection_details": "Kontroller dine forbindelsesoplysninger.",
+                "connection_taking_long": "Etablering af forbindelse går lidt langsomt...Er dine oplysninger korrekte? Er der kontakt til din node?",
+                "contact_support": "Kontakt support@getalby.com hvis du behøver hjælp"
+            }
+        },
+        "choose_path": {
+            "alby": {
+                "title": "Alby"
+            },
+            "other": {
+                "title": "Andre wallets"
+            }
+        },
+        "alby": {
+            "pre_connect": {
+                "set_password": {
+                    "choose_password": {
+                        "label": "Adgangskode"
+                    },
+                    "confirm_password": {
+                        "label": "Bekræft adgangskoden"
+                    },
+                    "errors": {
+                        "enter_password": "Indtast en adgangskode.",
+                        "confirm_password": "Bekræft din adgangskode.",
+                        "mismatched_password": "Adgangskoderne er forskellige."
+                    }
+                }
+            }
+        },
+        "choose_connector": {
+            "title": "Opret forbindelse til Lightning-wallet",
+            "description": "Opret forbindelse til din eksterne Lightning-wallet eller node",
+            "lnd": {
+                "page": {
+                    "title": "Opret forbindelse til din LND-node",
+                    "description": "Du skal bruge din nodes URL og en macaroon med tilladelse til at læse og sende (fx admin.macaroon)"
+                },
+                "url": {
+                    "label": "REST API vært og port",
+                    "placeholder": "https://din-nodes-url:8080"
+                },
+                "macaroon": {
+                    "label": "Macaroon (HEX-format)"
+                },
+                "drag_and_drop": "Træk din macaroon herhen eller <0>find den</0>",
+                "errors": {
+                    "connection_failed": "Forbindelse kunne ikke oprettes. Er dine LND-oplysninger korrekte?"
+                }
+            },
+            "lnc": {
+                "title": "LND med LNC",
+                "pairing_phrase": {
+                    "label": "Din forbindelseskode ",
+                    "placeholder": "hemmelig kode til sats-samlingen"
+                }
+            },
+            "lndhub_go": {
+                "title": "LNDHub",
+                "page": {
+                    "title": "Opret forbindelse til LNDHub",
+                    "description": "Indsæt dine adgangsoplysninger til LNDHub her, eller aflæs QR-koden med dit webkamera."
+                },
+                "uri": {
+                    "label": "LNDHub export URI"
+                },
+                "errors": {
+                    "invalid_uri": "Ugyldig LNDHub URI",
+                    "connection_failed": "Forbindelse kunne ikke oprettes. Er din LNDHub URI korrekt?"
+                }
+            },
+            "lnbits": {
+                "title": "LNbits",
+                "page": {
+                    "title": "Opret forbindelse til <0>LNbits</0>",
+                    "instructions": "Vælg den wallet du vil oprette forbindelse til i LNbits, åbn den, klik på API-oplysninger og kopier Admin-nøglen. Indsæt den herunder:"
+                },
+                "admin_key": {
+                    "label": "LNbits Admin-nøgle",
+                    "placeholder": "Din admin-nøgle med 32 tegn"
+                },
+                "url": {
+                    "label": "LNbits URL"
+                },
+                "errors": {
+                    "connection_failed": "Forbindelse kunne ikke oprettes. Er URL og admin-nøgle korrekte?"
+                }
+            },
+            "eclair": {
+                "title": "Eclair",
+                "page": {
+                    "title": "Opret forbindelse til <0>Eclair</0>",
+                    "instructions": "Du skal bruge din adgangskode og URL til Eclair."
+                },
+                "password": {
+                    "label": "Eclair adgangskode"
+                },
+                "url": {
+                    "label": "Eclair URL",
+                    "placeholder": "http://localhost:8080"
+                }
+            },
+            "citadel": {
+                "page": {
+                    "title": "Opret forbindelse til <0>Citadel</0> node"
+                }
+            },
+            "umbrel": {
+                "page": {
+                    "title": "Opret forbindelse til <0>Umbrel</0> node",
+                    "instructions": "Find <0>Connect Wallet</0> i din Umbrels indstillingsmenu. Vælg <0>lndconnect REST</0> og kopier <0>lndconnect URL</0>. (Afhængigt af din opsætning kan du enten bruge den lokale forbindelse eller Tor-forbindelsen.)"
+                },
+                "rest_url": {
+                    "label": "lndconnect REST URL",
+                    "placeholder": "lndconnect://dinnode:8080?..."
+                }
+            },
+            "mynode": {
+                "page": {
+                    "title": "Opret forbindelse til <0>myNode</0>",
+                    "instructions": "På din myNode-side klikker du på <0>Wallet</0> knappen til din <0>lightning</0> service.<1/> Klik så på knappen <0>Pair Wallet</0> under <0>Status</0> fanen. Skriv din adgangskode, når du bliver spurgt.<1/> Vælg rullemenuen og vælg en koblingstype. Afhængigt af din opsætning kan du enten bruge forbindelsen <0>lightning (REST + Lokal IP)</0> eller forbindelsen <0>lightning (REST + Tor)</0> ."
+                },
+                "rest_url": {
+                    "label": "lndconnect REST URL",
+                    "placeholder": "lndconnect://dinnode:8080?..."
+                }
+            },
+            "startos": {
+                "page": {
+                    "title": "Opret forbindelse til din <0>StartOS</0> node",
+                    "instructions": "<0>Note:</0> I øjeblikket understøtter vi kun LND, men vi vil fremover også tilføje support af c-lightning!<1/>I din StartOSs indstillingsmenu klikker du på servicen <0>Lightning Network Daemon</0>.<1/>Vælg fanen <0>Properties</0>.<1/>Kopier så <0>LND Connect REST URL.</0>"
+                },
+                "rest_url": {
+                    "label": "lndconnect REST URL",
+                    "placeholder": "lndconnect://dinnode:8080?..."
+                }
+            },
+            "raspiblitz": {
+                "page": {
+                    "title": "Opret forbindelse til din <0>RaspiBlitz</0> node",
+                    "instructions1": "Du skal bruge din nodes onion-adresse og port samt en macaroon med tilladelse til at læse og sende (fx admin.macaroon).<1/><1/><0>SSH</0> ind til din <0>RaspiBlitz</0>.<1/>Udfør instruktionen <0>sudo cat /mnt/hdd/tor/lndrest/hostname</0>.<1/>Kopier og indsæt <0>.onion</0> adressen i nedenstående indtastningsfelt.<1/>Tilføj din <0>port</0> efter onion-adressen, standardporten er <0>:8080</0>.",
+                    "instructions2": "Vælg <0>CONNECT</0>.<1/>Vælg <0>EXPORT</0>.<1/>Vælg <0>HEX</0>.<1/>Kopier <0>adminMacaroon</0>.<1/>Sæt din macaroon ind i indtastningsfeltet nedenunder."
+                },
+                "rest_api_host": {
+                    "label": "REST API host",
+                    "placeholder": "din-nodes-onion-adresse:port"
+                }
+            },
+            "blink": {
+                "page": {
+                    "title": "Opret forbindelse til <0>Blink Wallet</0>"
+                }
+            },
+            "bitcoin_jungle": {
+                "page": {
+                    "title": "Opret forbindelse til <0>Bitcoin Jungle Wallet</0>"
+                }
+            },
+            "btcpay": {
+                "config": {
+                    "label": "Konfigurationsoplysninger"
+                },
+                "errors": {
+                    "connection_failed": "Forbindelsen kunne ikke oprettes. Er BTCPay-forbindelsens URL korrekt og tilgængelig?"
+                }
+            },
+            "commando": {
+                "page": {
+                    "instructions": "Sørg for at have Core Lightning-versionen 0.12.0 eller nyere, at kommandomodulet kører og at din node kan tilgås på lightning-netværket. Opret en rune ved at køre 'lightning-cli commando-rune'."
+                }
+            }
+        },
+        "home": {
+            "actions": {
+                "send_satoshis": "⚡️ Send Satoshi ⚡️",
+                "enable_now": "Aktiver nu"
+            },
+            "default_view": {
+                "is_blocked_hint": "Alby er i øjeblikket deaktiveret på {{vært}}",
+                "block_removed": "{{vært}} blev aktiveret. Indlæs hjemmesiden igen."
+            }
+        },
+        "accounts": {
+            "account_view": {
+                "name": {
+                    "title": "Navn"
+                },
+                "export": {
+                    "waiting": "venter på LndHub-data...",
+                    "your_ln_address": "Din lightningadresse:",
+                    "export_uri": "URI til LNDHub-adgangsoplysninger",
+                    "scan_qr": "Importer denne wallet til Zeus eller BlueWallet ved at skanne QR-koden."
+                },
+                "nostr": {
+                    "title": "Nostr",
+                    "hint": "er en enkel og åben protokol, der bruges til at skabe u-censorerbare sociale netværk. Nostr anvender kryptografisk kode. Når du publicerer noget, underskriver du det med din nøgle, og sender det til flere netværksrelæer. Du kan bruge Alby til opbevaring af din Nostr-nøgle. Mange Nostr-applikationer vil derefter lade dig bruge nøglen direkte fra Alby.",
+                    "private_key": {
+                        "title": "Opbevar din nøgle",
+                        "subtitle": "Indsæt din private nøgle eller generer en ny. Husk at tage en sikkerhedskopi af din private nøgle, før du genererer en ny. <0>Læs mere »</0>",
+                        "success": "Den private nøgle blev krypteret & gemt.",
+                        "successfully_removed": "Den private nøgle blev fjernet.",
+                        "label": "Privat nøgle"
+                    },
+                    "public_key": {
+                        "label": "Offentlig nøgle"
+                    },
+                    "generate_keys": {
+                        "title": "Generer en ny Nostr-nøgle",
+                        "screen_reader": "Generer en ny Nostr-nøgle til din konto",
+                        "hint": "Du kan generere en vilkårlig nøgle eller få nøglen fra kontooplysningerne (med et underskrevet standardudtryk). <0>Læs mere »</0>",
+                        "actions": {
+                            "random_keys": "Generer en vilkårlig nøgle",
+                            "derived_keys": "Få en kontospecifik nøgle"
+                        }
+                    },
+                    "actions": {
+                        "generate": "Generer en ny nøgle"
+                    },
+                    "errors": {
+                        "failed_to_load": "Nostr-nøglen kunne ikke anvendes. Er det en gyldig Nostr-nøgle?"
+                    }
+                },
+                "actions": {
+                    "export": "Eksporter"
+                }
+            }
+        },
+        "unlock": {
+            "unlock_to_continue": "Lås op for at fortsætte",
+            "unlock_password": "Din nøglekode",
+            "help_contact": {
+                "part1": "Brug for hjælp? Kontakt",
+                "part2": "Albys support"
+            },
+            "unlock_error": {
+                "help": "Dine kontooplysninger er krypteret med din nøglekode. Hvis du er sikker på at du har glemt din nøglekode, må du nulstille og tilføje din lightning konto igen.",
+                "link": "Nulstil nu, og tilføj en ny konto"
+            },
+            "errors": {
+                "invalid_password": "Ugyldig adgangskode"
+            }
+        },
+        "settings": {
+            "browser_notifications": {
+                "title": "Browsermeddelelser",
+                "subtitle": "Meddelelser om betaling og godkendelser."
+            },
+            "website_enhancements": {
+                "title": "Ekstra hjemmesidefunktioner"
+            },
+            "camera_access": {
+                "title": "Adgang til kamera",
+                "subtitle": "Til at skanne QR-koder",
+                "allow": "Tillad adgang til kamera",
+                "granted": "Tilladelse givet"
+            },
+            "language": {
+                "title": "Sprog",
+                "subtitle": "Oversættelsen er endnu ikke 100% færdig. <0>Hjælp os med at oversætte Alby til dit sprog!</0>"
+            },
+            "theme": {
+                "title": "Tema",
+                "subtitle": "Brug Alby med mørk eller lys indstilling",
+                "options": {
+                    "dark": "Mørk",
+                    "light": "Lys",
+                    "system": "System"
+                }
+            },
+            "show_fiat": {
+                "title": "Sats til fiat",
+                "subtitle": "Konverter altid til den valgte valuta fra den valgte børs"
+            },
+            "currency": {
+                "title": "Valuta",
+                "subtitle": "Vis også beløb i denne valuta"
+            },
+            "exchange": {
+                "title": "Børs-kilde",
+                "subtitle": "Kilde til bitcoinkurser"
+            },
+            "personal_data": {
+                "title": "Personoplysninger",
+                "description": "Betalingsmodtagere kan anmode om at yderligere oplysninger medsendes en betaling. Oplysningerne deles ikke med nogen uden dit samtykke, du bliver altid spurgt før oplysningerne medsendes en betaling."
+            },
+            "name": {
+                "title": "Navn",
+                "subtitle": "",
+                "placeholder": "Indtast dit navn"
+            },
+            "email": {
+                "title": "E-mail",
+                "subtitle": "",
+                "placeholder": "Indtast din e-mailadresse"
+            },
+            "change_password": {
+                "title": "Ændring af nøglekode",
+                "subtitle": "",
+                "screen_reader": "Ændring af nøglekode",
+                "choose_password": {
+                    "label": "Indtast en ny nøglekode:"
+                },
+                "confirm_password": {
+                    "label": "Bekræft ny kode:"
+                },
+                "submit": {
+                    "label": "Ændring"
+                },
+                "errors": {
+                    "enter_password": "Indtast en ny nøglekode.",
+                    "confirm_password": "Bekræft din kode.",
+                    "mismatched_password": "Koderne er forskellige."
+                },
+                "success": "Koden blev ændret"
+            }
+        },
+        "send": {
+            "title": "Send",
+            "input": {
+                "label": "Modtager",
+                "hint": "Faktura, lightningadresse eller LNURL"
+            }
+        },
+        "lnurlpay": {
+            "amount": {
+                "label": "Beløb"
+            },
+            "comment": {
+                "label": "Kommentar"
+            },
+            "name": {
+                "label": "Navn"
+            },
+            "email": {
+                "label": "E-mail"
+            },
+            "success": "Hurra, betalingen er sendt!"
+        },
+        "lnurlauth": {
+            "title": "Godkendelse",
+            "content_message": {
+                "heading": "Vil du logge ind på"
+            },
+            "submit": "Log ind",
+            "success": "Logget ind på {{navn}}",
+            "errors": {
+                "status": "Fejl: Auth-status er ikke ok"
+            }
+        },
+        "lnurlchannel": {
+            "title": "Anmodning om kanal",
+            "content_message": {
+                "heading": "Anmod noden om en kanal"
+            },
+            "success": "Anmodning om kanal blev sendt til {{navn}}"
+        },
+        "lnurlwithdraw": {
+            "title": "Hæv",
+            "content_message": {
+                "heading": "Beløb"
+            },
+            "amount": {
+                "label": "Beløb"
+            },
+            "success": "Hæveanmodning om {{beløb}} blev sendt til {{afsender}}"
+        },
+        "receive": {
+            "title": "Modtag",
+            "actions": {
+                "create_invoice": "Generer faktura"
+            },
+            "amount": {
+                "label": "Beløb",
+                "placeholder": "Beløb i Satoshi..."
+            },
+            "description": {
+                "label": "Beskrivelse",
+                "placeholder": "Fx hvem sender denne betaling?"
+            },
+            "success": "Betaling modtaget!",
+            "payment": {
+                "waiting": "venter på betaling...",
+                "status": "Tjek betalingsstatus"
+            }
+        },
+        "publishers": {
+            "title": "Dine ⚡ hjemmesider",
+            "description": "Hjemmesider, hvor du tidligere har brugt Alby",
+            "no_info": "Det ser ud til, at du endnu ikke har brugt Alby på nogen hjemmesider.",
+            "discover": "Opdag hjemmesider",
+            "publisher": {
+                "allowance": {
+                    "title": "Pulje",
+                    "used_budget": "sats brugt"
+                }
+            }
+        },
+        "make_invoice": {
+            "title": "Generer faktura",
+            "amount": {
+                "label": "Beløb (Satoshi)"
+            },
+            "memo": {
+                "label": "Besked"
+            },
+            "errors": {
+                "amount_too_small": "Beløb er under minimum",
+                "amount_too_big": "Beløb overstiger maksimum"
+            }
+        },
+        "confirm_sign_message": {
+            "title": "Underskriv",
+            "content": "Denne hjemmeside beder dig underskrive:"
+        },
+        "confirm_keysend": {
+            "title": "Godkend betaling",
+            "success": "Betaling sendt! Preimage: {{preimage}}",
+            "payment_summary": {
+                "description": "Send betaling til: {{bestemmelsessted}}"
+            }
+        },
+        "keysend": {
+            "title": "Send",
+            "success": "Betaling sendt! Preimage: {{preimage}}",
+            "receiver": {
+                "label": "Send betaling til"
+            },
+            "amount": {
+                "label": "Beløb (Satoshi)"
+            }
+        },
+        "confirm_payment": {
+            "title": "Godkend betaling",
+            "success": "Betaling af {{beløb}} blev udført!",
+            "actions": {
+                "pay_now": "Betal nu"
+            }
+        },
+        "confirm_request_permission": {
+            "title": "Godkend anmodning",
+            "allow": "Tillad denne hjemmeside at udføre:",
+            "always_allow": "Husk mit valg, og spørg ikke igen"
+        },
+        "nostr": {
+            "title": "Nostr",
+            "content": "Denne hjemmeside beder dig underskrive:",
+            "block_and_ignore": "Bloker og ignorer {{vært}}",
+            "block_added": "{{vært}} blev føjet til blokeringslisten, indlæs hjemmesiden igen."
+        }
+    },
+    "common": {
+        "password": "Adgangskode",
+        "confirm_password": "Bekræft adgangskode",
+        "success": "Succes",
+        "error": "Fejl",
+        "discover": "Opdag",
+        "connected_sites": "",
+        "sats_one": "sat",
+        "sats_other": "sat",
+        "loading": "indlæser",
+        "amount": "Beløb",
+        "optional": "Valgfri",
+        "feedback": "Tilbagemelding",
+        "copied": "Kopieret!",
+        "description": "Beskrivelse",
+        "description_full": "Komplet beskrivelse",
+        "success_message": "{{beløb}}{{fiatBeløb}} sendt til {{bestemmelsessted}}",
+        "response": "Svar",
+        "message": "Besked",
+        "help": "Hjælp",
+        "actions": {
+            "back": "Tilbage",
+            "delete": "Slet",
+            "edit": "Rediger",
+            "next": "Næste",
+            "open": "Åbn",
+            "cancel": "Annuller",
+            "confirm": "Bekræft",
+            "continue": "Fortsæt",
+            "connect": "Opret forbindelse",
+            "lock": "Lås",
+            "unlock": "Lås op",
+            "send": "Send",
+            "save": "Gem",
+            "receive": "Modtag",
+            "receive_again": "Modtag en ny betaling",
+            "close": "Luk",
+            "export": "Eksporter",
+            "remove": "Fjern",
+            "copy": "Kopier",
+            "copy_invoice": "",
+            "log_in": "Log ind",
+            "remember": "Husk mit valg, og spørg ikke igen"
+        },
+        "errors": {
+            "connection_failed": "Forbindelse kunne ikke oprettes",
+            "payment_failed": "Betaling fejlede"
+        }
+    },
+    "components": {
+        "allowance_menu": {
+            "confirm_delete": "Er du sikker på, du vil slette denne hjemmeside?",
+            "hint": "Dette nulstiller det aktuelle budget",
+            "new_budget": {
+                "label": "Nyt budget"
+            },
+            "enable_login": {
+                "title": "Aktiver log ind til hjemmeside",
+                "subtitle": "Log ind automatisk uden bekræftelse efter anmodning fra hjemmesiden."
+            },
+            "edit_allowance": {
+                "title": "Rediger pulje",
+                "screen_reader": "Indstillinger for pulje"
+            }
+        },
+        "qrcode_scanner": {
+            "title": "Skan QR-kode",
+            "actions": {
+                "start_scanning": "Start med at skanne",
+                "stop_scanning": "Stop med at skanne"
+            },
+            "errors": {
+                "allow_camera_access": "Giv adgang til kameraet i indstillingsvinduet."
+            }
+        },
+        "transactions_table": {
+            "fee": "Betaling",
+            "preimage": "Præ-visning",
+            "received": "Modtaget",
+            "sent": "Sendt",
+            "boostagram": {
+                "sender": "Afsender",
+                "message": "Meddelelse",
+                "app": "App",
+                "podcast": "Podcast"
+            },
+            "open_location": "Åbn hjemmeside"
+        },
+        "budget_control": {
+            "remember": {
+                "label": "Husk og fastlæg et budget",
+                "description": "Du kan angive et beløb, så du ikke behøver bekræfte betalinger indtil det er opbrugt."
+            },
+            "budget": {
+                "label": "Budget"
+            }
+        },
+        "toasts": {
+            "connection_error": {
+                "what_you_can_do": "Dette kan du gøre:",
+                "double_check": "Dobbelttjek dine forbindelsesoplysninger",
+                "if_ssl_errors": "og hvis der er SSL-fejl (fx RR_CERT_AUTHORITY_INVALID), så klik på \"avanceret\" og fortsæt med at acceptere certifikatet.",
+                "visit_guides": "Find yderligere hjælp i vores vejledninger"
+            },
+            "login_failed": {
+                "password_reset": "Glemt din adgangskode? Klik her"
+            },
+            "errors": {
+                "invalid_credentials": "Ugyldig adgangskode. Kontroller din adgangskode og e-mailadresse, og prøv igen."
+            }
+        },
+        "account_menu": {
+            "screen_reader": "Skift drop-down"
+        },
+        "publishers_table": {
+            "payments": "betalinger"
+        },
+        "badge": {
+            "label": {
+                "auth": "LOG IND"
+            }
+        }
+    },
+    "permissions": {
+        "commando": {
+            "bkpr-listbalances": "Liste over alle nuværende og tidligere kontosaldi",
+            "checkmessage": "Verificer, at signaturen blev genereret af en bestemt node",
+            "connect": "Opret en ny forbindelse til en anden node",
+            "decode": "Afkod en bolt11/bolt12/rune-streng",
+            "decodepay": "Tjek og parse en bolt11-streng",
+            "disconnect": "Luk en eksisterende forbindelse til en peer",
+            "feerates": "Vis de betalingstakster CLN vil anvende",
+            "fundchannel": "Åbn en betalingskanal til en peer ved at sende en betalingstransaktion",
+            "getinfo": "Få nodens nøgleoplysninger",
+            "getroute": "Find den bedste betalingsrute til en lightning-node",
+            "invoice": "Opret en betalingsforventning",
+            "keysend": "Send en betaling til en anden node",
+            "listforwards": "Vis alle de htlc, der er forsøgt sendt",
+            "listfunds": "Vis alle tilgængelige midler",
+            "listinvoices": "Få status på alle faktura",
+            "listnodes": "Vis de noder, som noden har kendskab til via gossip-beskeder",
+            "listoffers": "Vis alle tilbud eller få et specifikt tilbud",
+            "listpays": "Giver status for alle betalingsinstruktioner",
+            "listpeers": "Vis noder, der er forbundne med eller har åbne kanaler til denne node",
+            "listsendpays": "Giver status for alle sendpay-instruktioner",
+            "listtransactions": "Viser transaktioner, der er gemt i din wallet",
+            "multifundchannel": "Åbn flere betalingskanaler til noder ved at sende en enkelt betalingstransaktion",
+            "offer": "Opret et tilbud",
+            "pay": "Send en betaling til en BOLT11-faktura",
+            "sendpay": "Send en betaling via en rute",
+            "setchannel": "Konfigurer den betaling/ det htlc-interval, der annonceres for kanalen",
+            "signmessage": "Lav en signatur fra denne node"
+        },
+        "lnd": {
+            "getinfo": "Hent node-oplysningerne",
+            "listchannels": "Få en beskrivelse af alle åbne kanaler",
+            "listinvoices": "Hent en oversigt over alle faktura",
+            "channelbalance": "Hent en rapport over samlede midler i alle åbne kanaler",
+            "walletbalance": "Hent summen af ubrugte output i denne wallet",
+            "openchannel": "Åbn en ny kanal",
+            "connectpeer": "Opret forbindelse til en peer på nettet",
+            "disconnectpeer": "Afbryd forbindelsen til en peer på nettet",
+            "estimatefee": "Beregn betalingstakst og samlet betaling for en transaktion",
+            "getchaninfo": "Hent netværksannonceringen for den givne kanal",
+            "getnetworkinfo": "Hent basisoplysningerne for det kendte kanalsystem",
+            "getnodeinfo": "Hent oplysninger om en nodes kanaler",
+            "gettransactions": "Hent en liste over alle transaktioner, der er relevante for denne wallet",
+            "listpayments": "Hent en liste over udgående betalinger",
+            "listpeers": "Hent en liste over alle aktive peers",
+            "lookupinvoice": "Se faktura-oplysningerne",
+            "queryroutes": "Forespørg om en mulig rute",
+            "verifymessage": "Verificer en signatur over en meddelelse",
+            "sendtoroute": "Foretag en betaling via den angivne rute",
+            "decodepayreq": "Afkod en betalingsanmodnings-streng",
+            "routermc": "Aflæs tilstanden for den interne mission control",
+            "addinvoice": "Opret nye faktura"
+        },
+        "lnc": {
+            "getinfo": "Hent oplysninger om noden",
+            "listchannels": "Hent en beskrivelse af alle åbne kanaler",
+            "listinvoices": "Hent en liste over alle faktura",
+            "channelbalance": "Hent en rapport over samtlige midler i alle åbne kanaler",
+            "walletbalance": "Hent summen af ubrugte output i denne wallet",
+            "openchannel": "Åbn en ny kanal",
+            "connectpeer": "Opret forbindelse til en peer på nettet",
+            "disconnectpeer": "Afbryd forbindelsen til en peer på nettet",
+            "estimatefee": "Beregn betalingstaksten og samlet betaling for en transaktion",
+            "getchaninfo": "Hent netværksannonceringen for den givne kanal",
+            "getnetworkinfo": "Hent basisoplysningerne for det kendte kanalsystem",
+            "getnodeinfo": "Hent oplysninger om en nodes kanaler",
+            "gettransactions": "Hent en liste over alle transaktioner, der er relevante for denne wallet",
+            "listpayments": "Hent en liste over alle udgående betalinger",
+            "listpeers": "Hent en liste over alle de peers, der er aktive nu",
+            "lookupinvoice": "Se faktura-oplysningerne",
+            "queryroutes": "Forespørg om en mulig rute",
+            "verifymessage": "Verificer en signatur over en meddelelse",
+            "sendtoroute": "Foretag en betaling via den angivne rute",
+            "decodepayreq": "Afkod en betalingsanmodnings-streng",
+            "routermc": "Aflæs tilstanden for den interne mission control",
+            "addinvoice": "Opret nye faktura"
+        }
+    }
+}

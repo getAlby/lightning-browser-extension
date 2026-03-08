@@ -1,4 +1,5 @@
 import browser from "webextension-polyfill";
+import lnurl from "~/common/lib/lnurl";
 import msg from "~/common/lib/msg";
 import type { Battery } from "~/types";
 
@@ -17,8 +18,6 @@ export const setLightningData = (data: [Battery]): void => {
   });
   msg.request("setIcon", { icon: ExtensionIcon.Tipping });
 };
-
-import lnurl from "~/common/lib/lnurl";
 
 export const findLightningAddressInText = (text: string): string | null => {
   const match = text.match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/);

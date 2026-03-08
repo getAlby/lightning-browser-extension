@@ -66,7 +66,7 @@ function fiatToSats(fiatStr: string, rate: number): number {
  *  - Strip currency symbols / spaces that might be pasted
  */
 function normaliseFiatInput(raw: string): string {
-  return raw.replace(/[^0-9.,\-]/g, "").replace(",", ".");
+  return raw.replace(/[^0-9.,-]/g, "").replace(",", ".");
 }
 
 // ---------------------------------------------------------------------------
@@ -280,7 +280,9 @@ const DualCurrencyField: React.FC<Props> = ({
               className="text-xs text-orange-600 hover:text-orange-700 dark:text-orange-400 dark:hover:text-orange-300 font-semibold"
               aria-label={
                 isFiatMode
-                  ? tCommon("switch_to_sats", { defaultValue: "Switch to Sats" })
+                  ? tCommon("switch_to_sats", {
+                      defaultValue: "Switch to Sats",
+                    })
                   : tCommon("switch_to_currency", {
                       currency: settings.currency,
                       defaultValue: `Switch to ${settings.currency}`,
