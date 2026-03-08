@@ -36,10 +36,16 @@ const battery = (): void => {
     document.querySelector(".account__header__tabs__name")?.innerText ||
     "Mastodon User";
 
-  const icon =
-    (document.querySelector(".u-photo") as HTMLImageElement)?.src ||
-    (document.querySelector(".account__header__avatar img") as HTMLImageElement)?.src ||
-    "";
+  const iconElement =
+    (document.querySelector(".u-photo") as HTMLImageElement) ||
+    (document.querySelector(".account__header__avatar img") as HTMLImageElement);
+  let icon = "";
+  if (iconElement) {
+    icon = iconElement.src;
+    if (icon && !icon.startsWith("http")) {
+      icon = window.location.origin + (icon.startsWith("/") ? "" : "/") + icon;
+    }
+  }
 
   setLightningData([
     {
