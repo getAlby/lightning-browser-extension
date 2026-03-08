@@ -5,14 +5,22 @@ const urlMatcher = /^https?:\/\/[^/]+\/@[^/?#]+(?:\/)?(?:\?.*)?(?:#.*)?$/;
 
 const battery = (): void => {
   const isActivityPub = !!(
-    document.querySelector("link[rel=\"alternate\"][type=\"application/activity+json\"]") ||
-    document.querySelector("meta[property=\"og:site_name\"][content*=\"Mastodon\"]") ||
+    document.querySelector(
+      'link[rel="alternate"][type="application/activity+json"]'
+    ) ||
+    document.querySelector(
+      'meta[property="og:site_name"][content*="Mastodon"]'
+    ) ||
     document.querySelector(".p-note, .account__header__content")
   );
 
   if (!isActivityPub) return;
 
-  const bioSelectors = [".p-note", ".account__header__content", ".public-account-bio"];
+  const bioSelectors = [
+    ".p-note",
+    ".account__header__content",
+    ".public-account-bio",
+  ];
   let address = null;
   let finalBioText = "";
 
@@ -33,13 +41,18 @@ const battery = (): void => {
   if (!address) return;
 
   const name =
-    document.querySelector(".p-name")?.innerText ||
-    document.querySelector(".account__header__tabs__name")?.innerText ||
+    (document.querySelector(".p-name") as HTMLElement | null)?.innerText ||
+    (
+      document.querySelector(
+        ".account__header__tabs__name"
+      ) as HTMLElement | null
+    )?.innerText ||
     "Mastodon User";
 
   const icon =
     (document.querySelector(".u-photo") as HTMLImageElement)?.src ||
-    (document.querySelector(".account__header__avatar img") as HTMLImageElement)?.src ||
+    (document.querySelector(".account__header__avatar img") as HTMLImageElement)
+      ?.src ||
     "";
 
   setLightningData([

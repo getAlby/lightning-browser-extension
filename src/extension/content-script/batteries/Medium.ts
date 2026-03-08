@@ -1,15 +1,14 @@
 import getOriginData from "../originData";
 import { findLightningAddressInText, setLightningData } from "./helpers";
 
-const urlMatcher =
-  /^https?:\/\/(?:[^/]+\.)?medium\.com\/@([^/?#]+)\/?(?:\?.*)?(?:#.*)?$/;
+const urlMatcher = /^https?:\/\/([\w-]+\.)?medium\.com\//i;
 
 const battery = (): void => {
   const bioSelectors = [
-    "meta[name=\"description\"]",
-    "[data-testid=\"authorBio\"]",
-    "[data-testid=\"author-bio\"]",
-    "p.be.bf.z"
+    'meta[name="description"]',
+    '[data-testid="authorBio"]',
+    '[data-testid="author-bio"]',
+    "p.be.bf.z",
   ];
 
   let address = null;
@@ -17,7 +16,10 @@ const battery = (): void => {
 
   for (const selector of bioSelectors) {
     const element = document.querySelector(selector);
-    const bioText = element instanceof HTMLMetaElement ? element.content : (element as HTMLElement)?.innerText;
+    const bioText =
+      element instanceof HTMLMetaElement
+        ? element.content
+        : (element as HTMLElement)?.innerText;
     if (bioText) {
       address = findLightningAddressInText(bioText);
       if (address) {
@@ -30,14 +32,20 @@ const battery = (): void => {
   if (!address) return;
 
   const name =
-    document.querySelector("meta[name=\"author\"]")?.getAttribute("content") ||
-    document.querySelector("a[rel=\"author\"]")?.innerText ||
-    document.querySelector("meta[property=\"og:title\"]")?.getAttribute("content")?.split(" – ")[0] ||
+    document.querySelector('meta[name="author"]')?.getAttribute("content") ||
+    (document.querySelector('a[rel="author"]') as HTMLElement | null)
+      ?.innerText ||
+    document
+      .querySelector('meta[property="og:title"]')
+      ?.getAttribute("content")
+      ?.split(" – ")[0] ||
     "Medium Author";
 
   const icon =
-    document.querySelector("meta[property=\"og:image\"]")?.getAttribute("content") ||
-    document.querySelector("img[src*=\"/profile/\"]")?.getAttribute("src") ||
+    document
+      .querySelector('meta[property="og:image"]')
+      ?.getAttribute("content") ||
+    document.querySelector('img[src*="/profile/"]')?.getAttribute("src") ||
     "";
 
   setLightningData([

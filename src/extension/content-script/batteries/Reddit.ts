@@ -1,10 +1,15 @@
 import getOriginData from "../originData";
 import { findLightningAddressInText, setLightningData } from "./helpers";
 
-const urlMatcher = /^https?:\/\/(?:www\.)?reddit\.com\/(?:u|user)\/([^/?#]+)\/?(?:\?.*)?(?:#.*)?$/;
+const urlMatcher =
+  /^https?:\/\/(?:www\.)?reddit\.com\/(?:u|user)\/([^/?#]+)\/?(?:\?.*)?(?:#.*)?$/;
 
 const battery = (): void => {
-  const bioSelectors = ["#profile--about-card p", "[data-testid=\"user-description\"]", ".ProfileSidebar__about"];
+  const bioSelectors = [
+    "#profile--about-card p",
+    '[data-testid="user-description"]',
+    ".ProfileSidebar__about",
+  ];
   let address = null;
   let finalBioText = "";
 
@@ -25,11 +30,13 @@ const battery = (): void => {
   if (!address) return;
 
   const name =
-    document.querySelector("h1")?.innerText ||
-    document.querySelector("[data-testid=\"user-name\"]")?.innerText ||
+    (document.querySelector("h1") as HTMLElement | null)?.innerText ||
+    (document.querySelector('[data-testid="user-name"]') as HTMLElement | null)
+      ?.innerText ||
     "Reddit User";
 
-  const icon = document.querySelector("img[src*=\"avatar\"]")?.getAttribute("src") || "";
+  const icon =
+    document.querySelector('img[src*="avatar"]')?.getAttribute("src") || "";
 
   setLightningData([
     {
