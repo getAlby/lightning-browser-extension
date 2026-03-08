@@ -5,13 +5,18 @@ const urlMatcher = /^https?:\/\/[^/]+\/@[^/?#]+\/?(?:\?.*)?(?:#.*)?$/;
 
 const battery = (): void => {
   const isProfile = !!(
-    document.querySelector(".p-author, .p-name, .account__header, .public-account-header") ||
-    document.querySelector("meta[property=\"og:type\"][content=\"profile\"]")
+    document.querySelector(
+      ".p-author, .p-name, .account__header, .public-account-header"
+    ) || document.querySelector('meta[property="og:type"][content="profile"]')
   );
 
   if (!isProfile) return;
 
-  const bioSelectors = [".p-note", ".account__header__content", ".public-account-bio"];
+  const bioSelectors = [
+    ".p-note",
+    ".account__header__content",
+    ".public-account-bio",
+  ];
   let address = null;
   let finalBioText = "";
 
@@ -32,13 +37,19 @@ const battery = (): void => {
   if (!address) return;
 
   const name =
-    document.querySelector(".p-name")?.innerText ||
-    document.querySelector(".account__header__tabs__name")?.innerText ||
+    (document.querySelector(".p-name") as HTMLElement | null)?.innerText ||
+    (
+      document.querySelector(
+        ".account__header__tabs__name"
+      ) as HTMLElement | null
+    )?.innerText ||
     "Mastodon User";
 
   const iconElement =
     (document.querySelector(".u-photo") as HTMLImageElement) ||
-    (document.querySelector(".account__header__avatar img") as HTMLImageElement);
+    (document.querySelector(
+      ".account__header__avatar img"
+    ) as HTMLImageElement);
   let icon = "";
   if (iconElement) {
     icon = iconElement.src;

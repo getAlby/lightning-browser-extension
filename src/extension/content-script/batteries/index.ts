@@ -3,10 +3,8 @@ import Monetization from "./Monetization";
 import Reddit from "./Reddit";
 import Mastodon from "./Mastodon";
 
-import Medium from "./Medium";
-
 // Order is important as the first one for which the URL matches will be used
-const enhancements = [Reddit, Mastodon, Medium, Monetization];
+const enhancements = [Reddit, Mastodon, Monetization];
 
 async function extractLightningData() {
   const settings = await api.getSettings();
