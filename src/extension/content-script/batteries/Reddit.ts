@@ -53,9 +53,9 @@ const battery = (): void => {
 
   setLightningData([
     {
+      ...originData,
       method: "lnurl",
       address,
-      ...originData,
       description: finalBioText.substring(0, 160),
       name: name.trim(),
       icon,
