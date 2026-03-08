@@ -8,9 +8,9 @@ const battery = (): void => {
   const bioSelectors = [
     ".p-note",
     ".account__header__content",
-    ".public-account-bio"
+    ".public-account-bio",
   ];
-  
+
   let bioText = "";
   for (const selector of bioSelectors) {
     const element = document.querySelector(selector);
@@ -23,13 +23,19 @@ const battery = (): void => {
   const address = findLightningAddressInText(bioText);
   if (!address) return;
 
-  const name = document.querySelector(".p-name")?.innerText || 
-               document.querySelector(".account__header__tabs__name")?.innerText || 
-               "Mastodon User";
+  const name =
+    (document.querySelector(".p-name") as HTMLElement | null)?.innerText ||
+    (
+      document.querySelector(
+        ".account__header__tabs__name"
+      ) as HTMLElement | null
+    )?.innerText ||
+    "Mastodon User";
 
   const icon =
     (document.querySelector(".u-photo") as HTMLImageElement)?.src ||
-    (document.querySelector(".account__header__avatar img") as HTMLImageElement)?.src ||
+    (document.querySelector(".account__header__avatar img") as HTMLImageElement)
+      ?.src ||
     "";
 
   setLightningData([
