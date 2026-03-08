@@ -36,7 +36,11 @@ const battery = (): void => {
     "Reddit User";
 
   const icon =
-    document.querySelector('img[src*="avatar"]')?.getAttribute("src") || "";
+    document
+      .querySelector('#profile--avatar img, [data-testid="profile-avatar"] img')
+      ?.getAttribute("src") ||
+    document.querySelector('img[src*="avatar"]')?.getAttribute("src") ||
+    "";
 
   setLightningData([
     {

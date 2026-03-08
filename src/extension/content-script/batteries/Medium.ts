@@ -8,7 +8,6 @@ const battery = (): void => {
     'meta[name="description"]',
     '[data-testid="authorBio"]',
     '[data-testid="author-bio"]',
-    "p.be.bf.z",
   ];
 
   let address = null;
