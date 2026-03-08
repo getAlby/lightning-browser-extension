@@ -50,7 +50,11 @@ const UnifiedAmount: React.FC<UnifiedAmountProps> = ({
 
   if (isLoading)
     return (
-      <span className="animate-pulse bg-gray-200 rounded w-16 h-4 inline-block" />
+      <span
+        className="animate-pulse bg-gray-200 rounded w-16 h-4 inline-block"
+        role="status"
+        aria-label="Loading amount"
+      />
     );
 
   const fiatActive = settings.showFiat && fiatValue;
