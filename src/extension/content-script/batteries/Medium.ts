@@ -1,7 +1,8 @@
 import getOriginData from "../originData";
 import { findLightningAddressInText, setLightningData } from "./helpers";
 
-const urlMatcher = /^https?:\/\/(?:[^/]+\.)?medium\.com\/@([^/?#]+)\/?(?:\?.*)?(?:#.*)?$/;
+const urlMatcher =
+  /^https?:\/\/(?:[^/]+\.)?medium\.com\/@([^/?#]+)\/?(?:\?.*)?(?:#.*)?$/;
 
 const battery = (): void => {
   const bioSelectors = [
@@ -16,14 +17,12 @@ const battery = (): void => {
 
   for (const selector of bioSelectors) {
     const element = document.querySelector(selector);
-    if (element) {
-      const bioText = element instanceof HTMLMetaElement ? element.content : (element as HTMLElement).innerText;
-      if (bioText) {
-        address = findLightningAddressInText(bioText);
-        if (address) {
-          finalBioText = bioText;
-          break;
-        }
+    const bioText = element instanceof HTMLMetaElement ? element.content : (element as HTMLElement)?.innerText;
+    if (bioText) {
+      address = findLightningAddressInText(bioText);
+      if (address) {
+        finalBioText = bioText;
+        break;
       }
     }
   }
