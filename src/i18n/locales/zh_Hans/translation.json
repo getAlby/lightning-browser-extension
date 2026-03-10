@@ -22,7 +22,11 @@
         "connection_error": "连接错误",
         "review_connection_details": "请检查你的连接详情。",
         "connection_taking_long": "尝试连接花费的时间不预期的要长。。。你的详情正确吗？你的节点是否可达？",
-        "contact_support": "如果你需要帮助，请联系support@getalby.com"
+        "contact_support": "如果你需要帮助，请联系support@getalby.com",
+        "initializing": "正在初始化您的钱包。请稍等，这会花一些时间...",
+        "actions": {
+          "delete_edit_account": "请删除无效账户并重新编辑"
+        }
       },
       "pin_extension": {
         "next_btn": "与 Alby 一起开始嗡嗡作响{{icon}}"
