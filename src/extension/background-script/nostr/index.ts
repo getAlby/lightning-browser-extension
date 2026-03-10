@@ -53,6 +53,19 @@ class Nostr {
     return signedHex;
   }
 
+  async signSchnorrMessage(message: string): Promise<string> {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(message);
+    const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+    const hashArray = new Uint8Array(hashBuffer);
+
+    const signature = await schnorr.sign(
+      hashArray,
+      secp256k1.etc.hexToBytes(this.privateKey)
+    );
+    return secp256k1.etc.bytesToHex(signature);
+  }
+
   nip04Encrypt(pubkey: string, text: string) {
     const key = secp256k1.getSharedSecret(this.privateKey, "02" + pubkey);
     const normalizedKey = Buffer.from(key.slice(1, 33));

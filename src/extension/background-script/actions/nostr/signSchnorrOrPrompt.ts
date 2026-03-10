@@ -23,21 +23,23 @@ const signSchnorrOrPrompt = async (
 
   const nostr = await state.getState().getNostr();
   const sigHash = message.args.sigHash;
+  const plaintext = message.args.message;
+
+  const isMessageMode = !!plaintext;
 
   try {
-    if (!sigHash || typeof sigHash !== "string") {
+    if (!isMessageMode && (!sigHash || typeof sigHash !== "string")) {
       throw new Error("sigHash is missing or not correct");
     }
+    if (isMessageMode && typeof plaintext !== "string") {
+      throw new Error("message is missing or not correct");
+    }
 
-    const hasPermission = await hasPermissionFor(
-      PermissionMethodNostr["NOSTR_SIGNSCHNORR"],
-      host
-    );
+    const permissionMethod = PermissionMethodNostr["NOSTR_SIGNSCHNORR"];
 
-    const isBlocked = await isPermissionBlocked(
-      PermissionMethodNostr["NOSTR_SIGNSCHNORR"],
-      host
-    );
+    const hasPermission = await hasPermissionFor(permissionMethod, host);
+
+    const isBlocked = await isPermissionBlocked(permissionMethod, host);
 
     if (isBlocked) {
       return { denied: true };
@@ -55,10 +57,9 @@ const signSchnorrOrPrompt = async (
         action: "public/nostr/confirmSignSchnorr",
       });
 
-      // add permission to db only if user decided to always allow this request
       if (promptResponse.data.permissionOption == DONT_ASK_CURRENT) {
         await addPermissionFor(
-          PermissionMethodNostr["NOSTR_SIGNSCHNORR"],
+          permissionMethod,
           host,
           promptResponse.data.blocked
         );
@@ -84,7 +85,13 @@ const signSchnorrOrPrompt = async (
   }
 
   async function signSchnorr() {
-    const signedSchnorr = await nostr.signSchnorr(sigHash);
+    let signedSchnorr: string;
+
+    if (isMessageMode) {
+      signedSchnorr = await nostr.signSchnorrMessage(plaintext as string);
+    } else {
+      signedSchnorr = await nostr.signSchnorr(sigHash as string);
+    }
 
     return { data: signedSchnorr };
   }
