@@ -412,7 +412,7 @@
           },
           "receive_bitcoin": {
             "title": "Bitcoin erhalten",
-            "description": "Lade deine Wallet auf und erhalte über deine Blitzadresse oder eine Rechnung"
+            "description": "Lade deine Wallet auf und erhalte über deine Lightning-Adresse oder eine Rechnung"
           },
           "setup_keys": {
             "title": "Setup Master Key oder Nostr Key",
