@@ -115,7 +115,7 @@ class Galoy implements Connector {
         ? data.me.username.substr(0, 10)
         : data.me.id.substr(0, 8);
 
-      const domain = data.globals?.lightningAddressDomain;
+      const domain = data.globals.lightningAddressDomain;
       const username = data.me.username;
 
       let lightningAddress: string | undefined;
