@@ -3,7 +3,7 @@
     "welcome": {
       "set_password": {
         "choose_password": {
-          "label": "Wähle einen Passcode zum Entsperren:"
+          "label": "Wählen Sie einen Entsperrcode:"
         },
         "errors": {
           "mismatched_password": "Die Passcodes stimmen nicht überein.",
