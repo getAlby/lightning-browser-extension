@@ -53,7 +53,7 @@ class Nostr {
     return signedHex;
   }
 
-  async signSchnorrMessage(message: string): Promise<string> {
+  async hashAndSignSchnorr(message: string): Promise<string> {
     const encoder = new TextEncoder();
     const data = encoder.encode(message);
     const hashBuffer = await crypto.subtle.digest("SHA-256", data);

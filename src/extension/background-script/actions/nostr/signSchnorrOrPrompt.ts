@@ -25,14 +25,15 @@ const signSchnorrOrPrompt = async (
   const sigHash = message.args.sigHash;
   const plaintext = message.args.message;
 
-  const isMessageMode = !!plaintext;
+  const isMessageMode = message.args.message !== undefined;
 
   try {
-    if (!isMessageMode && (!sigHash || typeof sigHash !== "string")) {
+    if (isMessageMode) {
+      if (typeof plaintext !== "string") {
+        throw new Error("message is missing or not correct");
+      }
+    } else if (!sigHash || typeof sigHash !== "string") {
       throw new Error("sigHash is missing or not correct");
-    }
-    if (isMessageMode && typeof plaintext !== "string") {
-      throw new Error("message is missing or not correct");
     }
 
     const permissionMethod = PermissionMethodNostr["NOSTR_SIGNSCHNORR"];
@@ -88,7 +89,7 @@ const signSchnorrOrPrompt = async (
     let signedSchnorr: string;
 
     if (isMessageMode) {
-      signedSchnorr = await nostr.signSchnorrMessage(plaintext as string);
+      signedSchnorr = await nostr.hashAndSignSchnorr(plaintext as string);
     } else {
       signedSchnorr = await nostr.signSchnorr(sigHash as string);
     }
