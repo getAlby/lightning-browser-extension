@@ -37,7 +37,7 @@
   "dependencies": {
     "@bitcoinerlab/secp256k1": "^1.1.1",
     "@getalby/sdk": "^6.0.2",
-    "@headlessui/react": "^1.7.18",
+    "@headlessui/react": "^2.2.9",
     "@lightninglabs/lnc-web": "^0.3.1-alpha",
     "@noble/ciphers": "^1.3.0",
     "@noble/curves": "^1.9.1",
