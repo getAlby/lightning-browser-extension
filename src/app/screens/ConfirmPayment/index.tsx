@@ -37,25 +37,26 @@ function ConfirmPayment() {
   const paymentRequest = navState.args?.paymentRequest as string;
   const invoice = lightningPayReq.decode(paymentRequest);
 
+  const amountSat =
+    invoice.satoshis || Number(invoice.millisatoshis) / 1000 || 0;
+
   const navigate = useNavigate();
   const auth = useAccount();
 
-  const [budget, setBudget] = useState(
-    ((invoice.satoshis || 0) * 10).toString()
-  );
+  const [budget, setBudget] = useState((amountSat * 10).toString());
   const [fiatAmount, setFiatAmount] = useState("");
   const [fiatBudgetAmount, setFiatBudgetAmount] = useState("");
 
-  const formattedInvoiceSats = getFormattedSats(invoice.satoshis || 0);
+  const formattedInvoiceSats = getFormattedSats(amountSat);
 
   useEffect(() => {
     (async () => {
-      if (showFiat && invoice.satoshis) {
-        const res = await getFormattedFiat(invoice.satoshis);
+      if (showFiat && amountSat !== 0) {
+        const res = await getFormattedFiat(amountSat);
         setFiatAmount(res);
       }
     })();
-  }, [invoice.satoshis, showFiat, getFormattedFiat]);
+  }, [amountSat, showFiat, getFormattedFiat]);
 
   useEffect(() => {
     (async () => {
@@ -150,7 +151,7 @@ function ConfirmPayment() {
               <div className="my-4">
                 <div className="mb-4 p-4 shadow bg-white dark:bg-surface-02dp rounded-lg">
                   <PaymentSummary
-                    amount={invoice.satoshis || "0"} // TODO: allow entering amount or do not allow zero-amount invoices
+                    amount={amountSat} // TODO: allow entering amount or do not allow zero-amount invoices
                     fiatAmount={fiatAmount}
                     description={invoice.tagsObject.description}
                   />

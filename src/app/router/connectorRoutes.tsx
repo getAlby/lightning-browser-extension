@@ -19,7 +19,7 @@ import ConnectAlbyHub from "~/app/screens/connectors/ConnectAlbyHub";
 import ConnectNWC from "~/app/screens/connectors/ConnectNWC";
 import ConnectVoltage from "~/app/screens/connectors/ConnectVoltage";
 import ConnectCommando from "../screens/connectors/ConnectCommando";
-import albyhub from "/static/assets/icons/albyhub.png";
+import albyhub from "/static/assets/icons/albyhub.svg";
 import btcpay from "/static/assets/icons/btcpay.svg";
 import citadel from "/static/assets/icons/citadel.svg";
 import core_ln from "/static/assets/icons/core_ln.svg";

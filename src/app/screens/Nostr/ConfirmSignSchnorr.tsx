@@ -23,7 +23,8 @@ function ConfirmSignSchnorr() {
   const { t: tPermissions } = useTranslation("permissions");
   const navigate = useNavigate();
 
-  const sigHash = navState.args?.sigHash as string;
+  const sigHash = navState.args?.sigHash as string | undefined;
+  const plaintext = navState.args?.message as string | undefined;
   const origin = navState.origin as OriginData;
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
@@ -98,7 +99,7 @@ function ConfirmSignSchnorr() {
                   publisher: origin.host,
                   action: tPermissions("nostr.signschnorr.title"),
                 })}
-                content={sigHash}
+                content={plaintext || sigHash || ""}
               />
             </div>
             <div className="flex flex-col gap-4">

@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import toast from "~/app/components/Toast";
 import msg from "~/common/lib/msg";
 
-import logo from "/static/assets/icons/albyhub.png";
+import logo from "/static/assets/icons/albyhub.svg";
 
 export default function ConnectAlbyHub() {
   const navigate = useNavigate();

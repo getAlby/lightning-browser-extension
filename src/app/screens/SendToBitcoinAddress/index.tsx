@@ -44,7 +44,8 @@ function SendToBitcoinAddress() {
   const auth = useAccount();
   const bitcoinAddress = navState.args?.bitcoinAddress as string;
   const [amountSat, setAmountSat] = useState("");
-  const [step, setStep] = useState("amount");
+  // change to "amount" when built-in swaps will be available
+  const [step, setStep] = useState("unavailable");
   const [loading, setLoading] = useState(false);
   const [fiatAmount, setFiatAmount] = useState("");
   const [predictedTotalFee, setPredictedTotalFee] = useState("0");
@@ -399,21 +400,11 @@ function SendToBitcoinAddress() {
         )}
         {step == "unavailable" && (
           <Container justifyBetween maxWidth="sm">
-            <Alert type="info">
-              Built-in swaps are currently unavailable. You can use one of the
-              following swap providers in the meantime:
-            </Alert>
             <ExchangeLink
               href="https://boltz.exchange/"
               imageSrc="/assets/icons/swap/boltz.png"
               title="Boltz Exchange"
               description="Privacy first, non-Custodial bitcoin exchange"
-            />
-            <ExchangeLink
-              href="https://swap.deezy.io/"
-              imageSrc="/assets/icons/swap/deezy.svg"
-              title="Deezy"
-              description="Swap instantly between lightning and on-chain bitcoin"
             />
             <ExchangeLink
               href="https://sideshift.ai/ln/btc"

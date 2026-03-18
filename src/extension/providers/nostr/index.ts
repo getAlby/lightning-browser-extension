@@ -26,6 +26,11 @@ export default class NostrProvider extends ProviderBase {
     return this.execute("signEventOrPrompt", { event });
   }
 
+  async hashAndSignSchnorr(message: string) {
+    await this.enable();
+    return this.execute("signSchnorrOrPrompt", { message });
+  }
+
   async signSchnorr(sigHash: string) {
     await this.enable();
     return this.execute("signSchnorrOrPrompt", { sigHash });

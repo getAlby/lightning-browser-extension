@@ -16,7 +16,6 @@ import NostrConfirmSignMessage from "@screens/Nostr/ConfirmSignMessage";
 import NostrConfirmSignSchnorr from "@screens/Nostr/ConfirmSignSchnorr";
 import Unlock from "@screens/Unlock";
 import { HashRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
-import AlbyLogo from "~/app/components/AlbyLogo";
 import Toaster from "~/app/components/Toast/Toaster";
 import Providers from "~/app/context/Providers";
 import RequireAuth from "~/app/router/RequireAuth";
@@ -30,6 +29,7 @@ import WebbtcEnable from "~/app/screens/Enable/WebbtcEnable";
 import WeblnEnable from "~/app/screens/Enable/WeblnEnable";
 import NostrConfirmDecrypt from "~/app/screens/Nostr/ConfirmDecrypt";
 import NostrConfirmEncrypt from "~/app/screens/Nostr/ConfirmEncrypt";
+import { useTheme } from "~/app/utils";
 import type { NavigationState, OriginData } from "~/types";
 
 // Parse out the parameters from the querystring.
@@ -179,12 +179,20 @@ function Prompt() {
 }
 
 const Layout = () => {
+  const theme = useTheme();
   return (
     <>
       <Toaster />
       <div className="px-4 py-2 justify-between items-center bg-white flex border-b border-gray-200 dark:bg-surface-02dp dark:border-neutral-700 gap-5">
         <div className="w-24 shrink-0">
-          <AlbyLogo />
+          <img
+            src={
+              theme === "dark"
+                ? "assets/icons/alby_logo_dark.svg"
+                : "assets/icons/alby_logo.svg"
+            }
+            className="h-8"
+          />
         </div>
         <AccountMenu showOptions={false} />
       </div>

@@ -2,8 +2,6 @@ import browser, { Runtime } from "webextension-polyfill";
 import { isManifestV3 } from "~/common/utils/mv3";
 import { MessageSetIcon } from "~/types";
 
-import state from "../../state";
-
 // Store all tabs with their respective icon
 const tabIcons = new Map<number, string>();
 
@@ -46,7 +44,27 @@ const setIcon = async (icon: string, tabId: number): Promise<void> => {
 
   tabIcons.set(tabId, icon);
 
-  const theme = state.getState().settings.theme == "dark" ? "_dark" : "";
+  // For Chrome (Manifest V3): Use browser theme (prefers-color-scheme)
+  // For Firefox (Manifest V2): theme_icons in manifest.json handles OS-based icons automatically
+  let theme = "";
+  if (isManifestV3) {
+    try {
+      const results = await browser.scripting.executeScript({
+        target: { tabId },
+        func: () => {
+          return window.matchMedia &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light";
+        },
+      });
+      theme = results[0]?.result === "dark" ? "_dark" : "";
+    } catch (error) {
+      console.warn("Failed to detect browser theme, using default:", error);
+      theme = "";
+    }
+  }
+
   const iconsParams = {
     path: {
       // it's looking relative from the "js" folder
@@ -63,4 +81,4 @@ const setIcon = async (icon: string, tabId: number): Promise<void> => {
     : browser.browserAction.setIcon(iconsParams);
 };
 
-export { setIcon, setIconMessageHandler, ExtensionIcon };
+export { ExtensionIcon, setIcon, setIconMessageHandler };

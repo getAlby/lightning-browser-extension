@@ -142,7 +142,7 @@ class LnBits implements Connector {
               settled: !transaction.pending,
               settleDate: transaction.time * 1000,
               creationDate: creationDate,
-              totalAmount: Math.abs(Math.floor(transaction.amount / 1000)),
+              totalAmount: Math.ceil(Math.abs(transaction.amount / 1000)),
               type: transaction.amount > 0 ? "received" : "sent",
             };
           })
