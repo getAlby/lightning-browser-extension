@@ -561,7 +561,8 @@ export interface MessageSignEvent extends MessageDefault {
 
 export interface MessageSignSchnorr extends MessageDefault {
   args: {
-    sigHash: string;
+    sigHash?: string;
+    message?: string;
   };
   action: "signSchnorr";
 }
