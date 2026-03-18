@@ -14,7 +14,7 @@ export function Tab({ icon, onClick, label, className, ...otherProps }: Props) {
     <HeadlessUiTab
       {...otherProps}
       onClick={onClick}
-      className={({ selected }) =>
+      className={({ selected }: { selected: boolean }) =>
         classNames(
           "font-bold flex px-2 py-2 justify-center items-center rounded-md focus:outline-none duration-150",
           selected

@@ -12,7 +12,7 @@ type Props = {
   onClose: () => void;
   isOpen: boolean;
   permissionCallback: (permission: PermissionOption) => void;
-  permission: PermissionOption;
+  permission: string;
 };
 
 export default function PermissionModal({
