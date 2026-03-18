@@ -43,7 +43,7 @@
     "@noble/curves": "^1.9.1",
     "@noble/hashes": "^1.8.0",
     "@noble/secp256k1": "^2.2.3",
-    "@popicons/react": "^0.0.24",
+    "@popicons/react": "^0.0.25",
     "@scure/base": "^1.2.5",
     "@scure/bip32": "^1.7.0",
     "@scure/bip39": "^1.6.0",
