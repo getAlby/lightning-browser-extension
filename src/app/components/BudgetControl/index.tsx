@@ -46,6 +46,7 @@ function BudgetControl({
       </div>
 
       <Transition
+        as="div"
         show={remember}
         enter="transition duration-100 ease-out"
         enterFrom="scale-95 opacity-0"
