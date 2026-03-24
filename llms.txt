@@ -1,0 +1,132 @@
+# Alby Lightning Browser Extension
+
+> AI/LLM developer context for the Alby browser extension — a cross-browser WebExtension for Bitcoin Lightning, Nostr, and Liquid payments.
+
+## Overview
+
+Alby is an open-source browser extension (Chrome, Firefox, Brave) that provides Lightning Network, Nostr, and Liquid wallet functionality via a WebExtension architecture. Users manage wallets, make payments, authenticate with websites (LNOAuth), and interact with Nostr — all from the browser.
+
+## Repository Structure
+
+```
+src/
+  app/                        # React popup UI (options page, dashboard)
+    components/               # Shared React components
+    context/                  # React context providers (AppContext, i18n)
+    hooks/                    # Custom React hooks
+    icons/                    # SVG icon components
+    router/                   # React Router configuration
+    screens/                  # Page-level components (home, send, receive, settings)
+    styles/                   # Global styles (Tailwind CSS)
+    utils/                    # UI utility functions
+  extension/
+    background-script/        # Service worker (background page)
+      actions/                # Message action handlers
+      bitcoin/                # Bitcoin-specific logic (bip32, psbt)
+      connectors/             # Payment connector implementations (LND, CLN, Lnbits, Eclair, etc.)
+      db.ts                   # IndexedDB persistence layer
+      events.ts               # Event handlers
+      index.ts                # Service worker entry point
+      liquid/                 # Liquid/Elements integration
+      migrations/             # Schema migration scripts
+      mnemonic/               # BIP39 mnemonic handling
+      nostr/                  # Nostr protocol implementation (relay pool, keys, events)
+      permissions.ts          # Extension permission management
+      registerContentScript.ts
+      router.ts               # Internal message routing
+      state.ts                # Global state management
+    content-script/           # Injected content scripts (page communication)
+    inpage-script/            # Injected in-page script (window.webln, window.nostr)
+    providers/
+      alby/                   # Alby built-in account provider (custodial)
+      liquid/                 # Liquid wallet provider
+      nostr/                  # Nostr provider
+      webbtc/                 # Web Bitcoin provider (core WebLN implementation)
+      webln/                  # WebLN API provider
+      postMessage.ts          # Page ↔ extension message bridge
+      promiseQueue.ts         # Async message queue
+      providerBase.ts         # Base provider class
+  common/
+    constants.ts              # Shared constants
+    lib/                      # Shared libraries
+    settings.ts               # User settings model
+    utils/                    # Shared utility functions
+  i18n/                       # Internationalization (i18next)
+    i18nConfig.ts             # i18next configuration
+    locales/                  # Translation JSON files (en, de, es, etc.)
+  fixtures/                   # Mock data and test fixtures
+  types.ts                    # Shared TypeScript type definitions
+  manifest.json               # WebExtension manifest (MV3)
+build-utils/
+  ProviderInjectionPlugin.js  # Webpack plugin for provider injection
+scripts/
+  check-changed-translations.js
+  remove-outdated-translations.js
+static/                      # Static assets (icons, images)
+doc/
+  SETUP.md                   # Local development setup guide
+  CONTRIBUTION.md            # Contribution guidelines
+  CODE_OF_CONDUCT.md         # Code of Conduct
+```
+
+## Technology Stack
+
+- **Language**: TypeScript (strict mode)
+- **Framework**: React (popup/options UI)
+- **Styling**: Tailwind CSS + PostCSS
+- **Build**: Webpack (with SWC via .swcrc)
+- **Testing**: Jest + Playwright (E2E)
+- **Package Manager**: Yarn (v1 or v2)
+- **Browser API**: WebExtension Manifest V3
+- **Linting**: ESLint (@typescript-eslint), Prettier
+- **Commit Convention**: commitlint (Conventional Commits), enforced via husky
+
+## Key Concepts
+
+- **WebLN**: Browser API standard for Lightning payments (`window.webln.enable()`, `webln.sendPayment()`, `webln.signMessage()`)
+- **Nostr**: Decentralized social protocol — the extension manages keys, relay connections, and event signing
+- **Connectors**: Backend-agnostic payment connectors (LND, CLN, Lnbits, Eclair, BTCPay, Xapo, Phoenix, Mutiny) — each implements a common interface
+- **Inpage Scripts**: Scripts injected into web pages exposing `window.webln` and `window.nostr` global APIs
+- **Content Scripts**: Bridge between injected inpage scripts and the extension background service worker
+- **LNOAuth**: Lightning-based authentication protocol (sign challenge with Lightning node key)
+- **Museum Mode**: Read-only mode for viewing wallets without signing capabilities
+
+## Build & Development
+
+```bash
+yarn install                   # Install dependencies (Node.js v16+)
+yarn dev:chrome                # Development build for Chrome
+yarn dev:firefox               # Development build for Firefox
+yarn dev:brave                 # Development build for Brave
+yarn test                      # Run Jest test suite
+yarn test:e2e                  # Run Playwright E2E tests
+yarn lint                      # Run ESLint
+yarn format                    # Run Prettier
+yarn build                     # Production build
+```
+
+## Code Style
+
+- TypeScript strict mode enabled
+- Conventional Commits enforced via commitlint (`feat:`, `fix:`, `chore:`, etc.)
+- Branch naming: `feat/feature-name`, `fix/bug-name`
+- Prettier for formatting (config in `.prettierrc.json`)
+- ESLint with `@typescript-eslint/recommended`
+- EditorConfig in `.editorconfig`
+
+## Testing
+
+- **Unit tests**: Jest (config in `jest.config.js`)
+- **E2E tests**: Playwright (config in `playwright.config.ts`)
+- **Test fixtures**: `src/fixtures/`
+- Custom test environment: `jest.custom-test-environment.js`
+
+## Important Constraints
+
+- WebExtension Manifest V3 — no persistent background pages, use service workers
+- Cross-browser compatibility (Chrome, Firefox, Brave) — test across browsers
+- Inpage scripts run in isolated world — communication via `postMessage` bridge only
+- Do not leak private keys or mnemonic to content/inpage scripts
+- All sensitive operations must go through the background service worker
+- Follow existing connector patterns when adding new payment providers
+- i18n: all user-facing strings must go through the i18n system, never hardcoded
