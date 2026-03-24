@@ -95,7 +95,7 @@ export default function ConnectVoltage() {
           components={[
             <Hyperlink
               key="link"
-              href="https://www.getalby.com/voltage"
+              href="https://docs.voltage.cloud/macaroons"
               target="_blank"
               rel="noreferrer noopener"
             />,
