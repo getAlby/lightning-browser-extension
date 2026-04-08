@@ -47,7 +47,7 @@
     "@scure/base": "^1.2.5",
     "@scure/bip32": "^1.7.0",
     "@scure/bip39": "^1.6.0",
-    "@tailwindcss/forms": "^0.5.10",
+    "@tailwindcss/forms": "^0.5.11",
     "axios": "^1.13.6",
     "bech32": "^2.0.0",
     "bitcoinjs-lib": "^6.1.7",
