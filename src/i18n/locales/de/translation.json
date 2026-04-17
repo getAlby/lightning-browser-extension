@@ -94,7 +94,7 @@
           "title": "Verbinden mit <0>myNode</0>"
         },
         "rest_url": {
-          "label": "lndconnect REST URL",
+          "label": "lndconnect-REST-URL",
           "placeholder": "lndconnect://deinenode:8080?..."
         }
       },
@@ -207,7 +207,7 @@
       "lnc": {
         "title": "Lightning Terminal (LNC)",
         "pairing_phrase": {
-          "label": "Deine Pairing-Phrase",
+          "label": "Dein Passwort ",
           "placeholder": "Geheimer Stack Sats Phrase"
         },
         "page": {
@@ -1182,11 +1182,11 @@
         "totalAmount": "Gesamtbetrag",
         "timestamp": "Zeitstempel"
       },
-      "preimage": "Preimage",
+      "preimage": "Vorbild",
       "received": "Empfangen",
       "fee": "Gebühr",
       "open_location": "Webseite öffnen",
-      "payment_hash": "Payment Hash",
+      "payment_hash": "Zahlungs-Hash",
       "date_time": "Datum & Uhrzeit",
       "no_transactions": "Noch keine Transaktionen.",
       "failed": "Fehlgeschlagen",
@@ -1292,7 +1292,7 @@
       "nativelnd": "LND (über Tor)",
       "citadel": "Citadel",
       "nativecitadel": "Citadel (über Tor)",
-      "commando": "Commando",
+      "commando": "Befehl",
       "lnbits": "LNBits",
       "lndhub": "LNDHub",
       "nativelndhub": "LNDHub (über Tor)",
@@ -1375,7 +1375,7 @@
       "verifymessage": "Überprüfe eine Signatur über eine Nachricht",
       "addholdinvoice": "Erstelle neue HODL-Rechnungen",
       "settleinvoice": "Begleiche eine akzeptierte Rechnung",
-      "listunspent": "Liste aller UTXOs, die von der Wallet ausgegeben werden können",
+      "listunspent": "Eine Liste aller UTXOs abrufen, die von der Wallet ausgegeben werden können",
       "listaddresses": "Erhalte alle Adressen zusammen mit deinem Guthaben",
       "newaddress": "Rufe eine neue Onchain-Adresse ab",
       "nextaddr": "Rufe die nächste unbenutzte Adresse in der Wallet ab"
@@ -1405,7 +1405,7 @@
       "openchannel": "Öffne einen neuen Kanal",
       "addholdinvoice": "Erstelle neue HODL-Rechnungen",
       "settleinvoice": "Begleiche eine akzeptierte Rechnung",
-      "listunspent": "Liste aller UTXOs, die von der Wallet ausgegeben werden können",
+      "listunspent": "Eine Liste aller UTXOs abrufen, die von der Wallet ausgegeben werden können",
       "nextaddr": "Rufe die nächste unbenutzte Onchain-Adresse innerhalb der Wallet ab",
       "listaddresses": "Rufe alle Onchain-Adressen zusammen mit ihrem Guthaben ab",
       "newaddress": "Rufe eine neue Onchain-Adresse ab"
