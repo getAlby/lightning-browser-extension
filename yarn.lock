@@ -1370,10 +1370,10 @@
   resolved "https://registry.npmjs.org/@noble/secp256k1/-/secp256k1-1.7.1.tgz"
   integrity sha512-hOUk6AyBFmqVrv7k5WAw/LpszxVbj9gGN4JRkIX52fdFAj1UA61KXmZDvqVEm+pOyec3+fIeZB02LYa/pWOArw==
 
-"@noble/secp256k1@^2.2.3":
-  version "2.2.3"
-  resolved "https://registry.yarnpkg.com/@noble/secp256k1/-/secp256k1-2.2.3.tgz#c505ced542328ed13315a8d811684d042f7acc5b"
-  integrity sha512-l7r5oEQym9Us7EAigzg30/PQAvynhMt2uoYtT3t26eGDVm9Yii5mZ5jWSWmZ/oSIR2Et0xfc6DXrG0bZ787V3w==
+"@noble/secp256k1@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@noble/secp256k1/-/secp256k1-3.1.0.tgz#92d7a857b400a3faab62863bb311b3bd2e4ef032"
+  integrity sha512-+F7iS7tUMaNGXcc9X3PjmjvuQnXEuSjCRNzVVA2xAcKXgCaP0dHYz4SFyt4FKNHef7sOP//xihowcySSS7PK9g==
 
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
