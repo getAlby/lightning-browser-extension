@@ -64,7 +64,7 @@
     "lodash.merge": "^4.6.2",
     "lodash.pick": "^4.4.0",
     "lodash.snakecase": "^4.1.1",
-    "nostr-tools": "^1.17.0",
+    "nostr-tools": "^2.23.3",
     "pubsub-js": "^1.9.5",
     "react": "^19.2.6",
     "react-confetti": "^6.4.0",
