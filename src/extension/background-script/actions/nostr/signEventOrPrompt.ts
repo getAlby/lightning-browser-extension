@@ -14,6 +14,15 @@ import {
 } from "~/common/constants";
 import state from "../../state";
 import { validateEvent } from "./helpers";
+import { EventKind } from "~/extension/providers/nostr/types";
+
+// Helper function to check if a kind 3 event has insufficient p-tags
+function hasInsufficientPTags(event: any): boolean {
+  if (event.kind !== EventKind.Contacts) return false;
+  
+  const pTags = event.tags?.filter((tag: string[]) => tag[0] === 'p') || [];
+  return pTags.length < 2;
+}
 
 const signEventOrPrompt = async (message: MessageSignEvent, sender: Sender) => {
   const host = getHostFromSender(sender);
@@ -55,7 +64,10 @@ const signEventOrPrompt = async (message: MessageSignEvent, sender: Sender) => {
       return { denied: true };
     }
 
-    if (hasPermission) {
+    // Always warn for kind 3 events with insufficient p-tags, even if permission exists
+    const needsKind3Warning = hasInsufficientPTags(event);
+
+    if (hasPermission && !needsKind3Warning) {
       return signEvent();
     } else {
       const promptResponse = await utils.openPrompt<{
@@ -65,6 +77,10 @@ const signEventOrPrompt = async (message: MessageSignEvent, sender: Sender) => {
       }>({
         ...message,
         action: "public/nostr/confirmSignMessage",
+        args: {
+          ...message.args,
+          hasKind3Warning: needsKind3Warning,
+        }
       });
 
       // add permission to db only if user decided to always allow this request
