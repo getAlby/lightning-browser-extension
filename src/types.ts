@@ -424,7 +424,12 @@ export interface MessageGetInfo extends MessageDefault {
 }
 
 export interface MessageMakeInvoice extends MessageDefault {
-  args: { memo?: string; defaultMemo?: string; amount?: string };
+  args: {
+    memo?: string;
+    defaultMemo?: string;
+    amount?: string;
+    includePrivateChannels?: boolean;
+  };
   action: "makeInvoice";
 }
 
