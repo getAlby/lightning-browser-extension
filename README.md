@@ -1,10 +1,3 @@
-<p align="center">
-  <picture>
-    <source srcset="/doc/logo-white.svg" media="(prefers-color-scheme: dark)" width="300">
-    <img alt="Alby Logo" src="/doc/logo-black.svg" width="300">
-  </picture>
-</p>
-
 <h1 align="center">⚡ Alby - Lightning Browser Extension</h1>
 <p align="center">
   <strong>Seamlessly bring Bitcoin's Lightning Network to your browser.</strong>
