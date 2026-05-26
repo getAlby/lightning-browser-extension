@@ -137,16 +137,6 @@
           "placeholder": "http://localhost:8080"
         }
       },
-      "citadel": {
-        "page": {
-          "title": "<0>Citadel</0> නෝඩය(node) වෙත සම්බන්ධ කරන්න",
-          "instructions": "ඔබේ නිර්වාති(Nirvati) උපකරණ පුවරුවේ Citadel කොටසේ <0>පසුම්බිය සම්බන්ධ කරන්න</0><1/> වෙත යන්න2. <0>ඇල්බි(Alby) (Tor)</0> හෝ <0>ඇල්බි(Alby) (Local Network)</0> මාදිලිය තෝරන්න<1/>3. <0>lndconnect URL</0> පිටපත් කර පහතින් අලවන්න"
-        },
-        "rest_url": {
-          "label": "lndconnect REST URL",
-          "placeholder": "lndconnect://ඔබේනෝඩය(node):8080?..."
-        }
-      },
       "umbrel": {
         "page": {
           "title": "<0>Umbrel</0> නෝඩයට(node) සම්බන්ධ කරන්න",
@@ -1080,8 +1070,6 @@
       "lndhub": "LNDHub",
       "galoy": "Galoy",
       "eclair": "Eclair",
-      "citadel": "Citadel",
-      "nativecitadel": "Citadel (ටෝර් හරහා)",
       "commando": "Commando"
     },
     "success": "සාර්ථකයි",

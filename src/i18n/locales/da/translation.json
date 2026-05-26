@@ -119,11 +119,6 @@
           "placeholder": "http://localhost:8080"
         }
       },
-      "citadel": {
-        "page": {
-          "title": "Opret forbindelse til <0>Citadel</0> node"
-        }
-      },
       "umbrel": {
         "page": {
           "title": "Opret forbindelse til <0>Umbrel</0> node",
