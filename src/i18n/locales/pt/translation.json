@@ -13,7 +13,8 @@
         },
         "errors": {
           "enter_password": "Insira uma palavra-passe.",
-          "mismatched_password": "As palavras-passe não correspondem."
+          "mismatched_password": "As palavras-passe não correspondem.",
+          "confirm_password": "Confirme a palavra-passe."
         }
       },
       "test_connection": {
@@ -26,7 +27,12 @@
       "pin_extension": {
         "title": "Fixar extensão Alby",
         "explanation": "1. Clique em <0/> no canto superior direito do seu navegador<1/>2. Localize a Alby e clique no ícone de fixação para fixá-lo na barra de ferramentas do navegador<1/>3. É tudo. Agora é só clicar no ícone da Alby <2/>",
-        "next_btn": "Comece a usar a Alby {{icon}}"
+        "next_btn": "Comece a usar a Alby {{icon}}",
+        "keyboard_shortcut": {
+          "windows_modifier_key": "Alt",
+          "mac_modifier_key": "⌥",
+          "second_key": "A"
+        }
       }
     },
     "choose_path": {
@@ -53,7 +59,8 @@
           },
           "errors": {
             "enter_password": "Insira uma palavra-passe.",
-            "mismatched_password": "As palavras-passe não correspondem."
+            "mismatched_password": "As palavras-passe não correspondem.",
+            "confirm_password": "Confirme a sua palavra-passe."
           }
         }
       }
@@ -140,6 +147,10 @@
       "citadel": {
         "page": {
           "title": "Conecte-se no servidor <0>Citadel</0>"
+        },
+        "rest_url": {
+          "label": "lndconnect REST URL",
+          "placeholder": "lndconnect://seuservidor:8080?..."
         }
       },
       "umbrel": {
@@ -163,7 +174,8 @@
       },
       "startos": {
         "page": {
-          "title": "Conecte ao seu servidor <0>StartOS</0>"
+          "title": "Conecte ao seu servidor <0>StartOS</0>",
+          "instructions": "<0>Note:</0> Atualmente somente a LND é suportada mas nós adicionaremos suporte para a c-lightning no futuro!<1/>No seu StartOS clique em service <0>Lightning Network Daemon</0>.<1/>Selecione a tab <0>Properties</0>.<1/>Agora copie o <0>LND Connect REST URL.</0>"
         },
         "rest_url": {
           "label": "lndconnect REST URL",
@@ -245,11 +257,15 @@
           "toast": {
             "title": "Identidade não encontrada"
           }
-        }
+        },
+        "relay_url": "URL de retransmissão"
       },
       "commando": {
         "page": {
-          "instructions": "Certifique-se de conectar num servidor Core Lightning que esteja na versão 0.12.0 ou mais recente, o plugin commando instalado e executando e o servidor acessível na rede relâmpago. Crie um rune executando o comando 'lightning-cli commando-rune'."
+          "instructions": "Certifique-se de conectar num servidor Core Lightning que esteja na versão 0.12.0 ou mais recente, o plugin commando instalado e executando e o servidor acessível na rede relâmpago. Crie um rune executando o comando 'lightning-cli commando-rune'.",
+          "url": {
+            "placeholder": "nostr+walletconnect://69effe..."
+          }
         }
       },
       "voltage": {
@@ -259,6 +275,9 @@
         "page": {
           "errors": {
             "connection_failed": "Falha na conexão. O seu Alby Hub e a conexão da app estão ativados?"
+          },
+          "url": {
+            "placeholder": "nostr+walletconnect://69effe..."
           }
         }
       },
@@ -268,6 +287,9 @@
             "placeholder": "nostr+walletconnect://69effe..."
           }
         }
+      },
+      "nirvati": {
+        "title": "Nirvati"
       }
     },
     "distributions": {
@@ -357,6 +379,10 @@
             },
             "import_nostr": {
               "title": "Importe uma chave mestra"
+            },
+            "title": "Sobre a chave mestre",
+            "create": {
+              "title": "Criar chave mestre"
             }
           },
           "generate": {
@@ -369,10 +395,12 @@
             "warning": "Não se esqueça de fazer o backup da sua frase de recuperação! Não fazer o backup pode resultar na perda permanente do acesso à sua chave mestra, identidade Nostr ou ativos que gera com esta chave.",
             "protocols": {
               "nostr": "Nostr"
-            }
+            },
+            "button": "Ver a frase de recuperação"
           },
           "import": {
-            "button": "Importar chave mestra"
+            "button": "Importar chave mestra",
+            "title": "Importar chave mestre"
           },
           "lnurl": {
             "title": "Login relâmpago",
@@ -452,7 +480,8 @@
           "disconnect_wallet": "Desconectar carteira",
           "remove_secretkey": "Remover chave mestra",
           "export": "Exportar",
-          "change_lnaddress": "Alterar em getalby.com"
+          "change_lnaddress": "Alterar em getalby.com",
+          "connect_mobile_wallet": "Conectar à sua carteira móvel"
         }
       },
       "actions": {
@@ -803,7 +832,8 @@
       "always_allow": "Lembrar e não perguntar novamente"
     },
     "confirm_add_account": {
-      "tor_info": "Para conectar através da rede TOR, precisa primeiro instalar a app Alby companion:"
+      "tor_info": "Para conectar através da rede TOR, precisa primeiro instalar a app Alby companion:",
+      "title": "Adicionar carteira"
     },
     "liquid": {
       "title": "Liquid",
@@ -846,8 +876,19 @@
         },
         "30023": {
           "title": "nota longa"
+        },
+        "10003": {
+          "title": "favoritos"
+        },
+        "27235": {
+          "title": "HTTP Auth",
+          "description": "Autenticação HTTP"
+        },
+        "30078": {
+          "title": "Dados da app"
         }
-      }
+      },
+      "recipient": "Destinatário"
     },
     "transactions": {
       "title": "Transações"
@@ -857,6 +898,10 @@
       "request3": "A configuração é rápida e fácil",
       "actions": {
         "start_setup": "Configurar"
+      },
+      "labels": {
+        "master_key": "Chave Mestre",
+        "nostr_key": "Chave Nostr"
       }
     }
   },
@@ -957,7 +1002,8 @@
       "request1": "Solicitar aprovação para transações",
       "block_and_ignore": "Bloquear e ignorar {{host}}",
       "insecure_domain_warn": "⚠️ Está a conectar a um domínio inseguro."
-    }
+    },
+    "optional": "Opcional"
   },
   "components": {
     "allowance_menu": {
@@ -1013,12 +1059,18 @@
         "totalAmount": "Quantia total"
       },
       "open_location": "Abrir ligação",
-      "no_transactions": "Sem transações."
+      "no_transactions": "Sem transações.",
+      "metadata": "Metadados",
+      "sending": "A enviandor",
+      "failed": "Falhou"
     },
     "budget_control": {
       "remember": {
         "label": "Lembrar e definir um limite de gastos",
         "description": "Pode definir um valor limite para pagamentos automáticos (sem necessidade de confirmação)."
+      },
+      "budget": {
+        "label": "Orçamento"
       }
     },
     "companion_download_info": {
@@ -1027,6 +1079,9 @@
       "tor_native": {
         "title": "TOR (nativo)",
         "description": "Selecione esta opção se este navegador já estiver conectado à rede TOR."
+      },
+      "companion": {
+        "title": "Aplicação companheira"
       }
     },
     "toasts": {
@@ -1059,7 +1114,8 @@
     "badge": {
       "label": {
         "auth": "login",
-        "imported": "importada"
+        "imported": "importada",
+        "budget": "orçamento"
       }
     }
   },
@@ -1080,6 +1136,9 @@
       "signmessage": {
         "title": "Assinar mensagem"
       }
+    },
+    "lnd": {
+      "openchannel": "Abrir canal novo"
     }
   }
 }
