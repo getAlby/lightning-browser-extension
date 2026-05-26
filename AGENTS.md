@@ -80,7 +80,7 @@ Each surface lives under `src/app/router/<Name>/index.tsx` and is referenced fro
 
 ### Request flow (the critical path)
 
-```
+```text
 Web page
   → injected provider (src/extension/providers/<api>/index.ts, run in MAIN world)
   → window.postMessage to content script
