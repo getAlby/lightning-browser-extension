@@ -124,15 +124,15 @@ Web page
 
 ## Files Worth Knowing
 
-| File | Purpose |
-|------|---------|
-| `webpack.config.js` | Build configuration; lists every entry (popup/prompt/options/welcome + content/inpage scripts) |
-| `src/manifest.json` | Multi-browser manifest with `__chrome__` / `__firefox__` / `__opera__` overrides |
-| `src/extension/background-script/index.ts` | Background entry: migrations, state hydration, tab listeners, prompt orchestration |
-| `src/extension/background-script/router.ts` | Single source of truth for background RPC routes |
-| `src/extension/background-script/connectors/connector.interface.ts` | The interface every Lightning backend implements |
-| `src/extension/background-script/state.ts` | In-memory wallet/session state |
-| `src/extension/background-script/db.ts` | Dexie/IndexedDB schema |
-| `src/common/lib/api.ts` | Typed RPC client used by UI and content scripts |
-| `src/app/router/{Popup,Prompt,Options,Welcome}/index.tsx` | The four React app entry points |
-| `src/i18n/locales/en/translation.json` | Source-of-truth English strings |
+| File                                                                | Purpose                                                                                        |
+| ------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `webpack.config.js`                                                 | Build configuration; lists every entry (popup/prompt/options/welcome + content/inpage scripts) |
+| `src/manifest.json`                                                 | Multi-browser manifest with `__chrome__` / `__firefox__` / `__opera__` overrides               |
+| `src/extension/background-script/index.ts`                          | Background entry: migrations, state hydration, tab listeners, prompt orchestration             |
+| `src/extension/background-script/router.ts`                         | Single source of truth for background RPC routes                                               |
+| `src/extension/background-script/connectors/connector.interface.ts` | The interface every Lightning backend implements                                               |
+| `src/extension/background-script/state.ts`                          | In-memory wallet/session state                                                                 |
+| `src/extension/background-script/db.ts`                             | Dexie/IndexedDB schema                                                                         |
+| `src/common/lib/api.ts`                                             | Typed RPC client used by UI and content scripts                                                |
+| `src/app/router/{Popup,Prompt,Options,Welcome}/index.tsx`           | The four React app entry points                                                                |
+| `src/i18n/locales/en/translation.json`                              | Source-of-truth English strings                                                                |
