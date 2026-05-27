@@ -134,16 +134,6 @@
           "placeholder": "http://localhost:8080"
         }
       },
-      "citadel": {
-        "page": {
-          "title": "Подключение к узлу <0>Citadel</0>",
-          "instructions": "1. В разделе Citadel на панели управления Nirvati перейдите в <0>Подключить кошелек</0><1/>2. Выберите <0>Alby (Tor)</0> или <0>Alby (Local Network)</0> режим<1/>3. Скопируйте <0>lndconnect URL</0> и вставьте его ниже"
-        },
-        "rest_url": {
-          "label": "lndconnect REST URL",
-          "placeholder": "lndconnect://yournode:8080?..."
-        }
-      },
       "umbrel": {
         "page": {
           "title": "Подключение к узлу <0>Umbrel</0>",
@@ -1114,10 +1104,8 @@
       "nativelndhub": "LNDHub (второй Tor)",
       "galoy": "Галерея",
       "eclair": "Eclair",
-      "citadel": "Цитадель",
       "nativelnbits": "LNBits (через Tor)",
-      "commando": "Командировка",
-      "nativecitadel": "Цитадель (за Тор)"
+      "commando": "Командировка"
     },
     "range": {
       "greaterOrEqual": "≥ {{мин}}",

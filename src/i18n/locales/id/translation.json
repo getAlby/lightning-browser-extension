@@ -123,11 +123,6 @@
           "placeholder": "http://localhost:8080"
         }
       },
-      "citadel": {
-        "page": {
-          "title": "Sambungkan dengan node <0>Citadel</0>"
-        }
-      },
       "umbrel": {
         "page": {
           "instructions": "1. Pada dashboard Lightning Node masuk ke<0>Connect wallet</0><1/>2. Pilih <0>REST (Tor)</0> atau <0>REST (Local Network)</0> mode<1/>3. Salin <0>lndconnect URL</0> dan tempel di bawah ini",
@@ -687,15 +682,13 @@
     "connectors": {
       "lnbits": "LNBits",
       "commando": "Commando",
-      "nativecitadel": "Citadel (melalui Tor)",
       "lnd": "LND",
       "nativelnd": "LND (melalui Tor)",
       "lndhub": "LNDHub",
       "nativelndhub": "LNDHub (melalui Tor)",
       "nativelnbits": "LNBits (melalui Tor)",
       "galoy": "Galoy",
-      "eclair": "Eclair",
-      "citadel": "Citadel"
+      "eclair": "Eclair"
     },
     "range": {
       "greaterOrEqual": "≥ {{min}}",

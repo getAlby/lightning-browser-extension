@@ -399,11 +399,6 @@
           "label": "รหัสผ่าน Eclair"
         }
       },
-      "citadel": {
-        "page": {
-          "title": "เชื่อมต่อกับ<0>Citaddel</0> node"
-        }
-      },
       "umbrel": {
         "page": {
           "instructions": "1. ในแดชบอร์ด Lightning node ของคุณไปที่ <0>เชื่อมต่อกระเป๋า</0><1/>2. เลือก<0>REST (TOR)</0> หรือ <0> REST (Local Network)</0><1/>3. คัดลอก<0>Indconnect URL</0> และวางข้างล่างนี้",
@@ -729,8 +724,6 @@
       "nativelnbits": "LNbits(บน Tor)",
       "galoy": "Galoy",
       "eclair": "Eclair",
-      "citadel": "Citadel",
-      "nativecitadel": "Citadel (บน Tor)",
       "commando": "Commando"
     },
     "range": {
