@@ -145,16 +145,6 @@
           "placeholder": "http://localhost:8080"
         }
       },
-      "citadel": {
-        "page": {
-          "title": "<0>सिटाडेल</0> नोड से कनेक्ट करें",
-          "instructions": "1. निरवाती डैशबोर्ड के सिटाडेल सेक्शन में जाकर <0>वॉलेट कनेक्ट करें</0> चुनें।<1/> 2. <0>अल्बी (Tor)</0> या <0>अल्बी (लोकल नेटवर्क)</0> मोड चुनें।<1/> 3. <0>lndconnect URL</0> को कॉपी करें और नीचे पेस्ट करें।"
-        },
-        "rest_url": {
-          "label": "lndconnect REST URL",
-          "placeholder": "lndconnect://yournode:8080?..।"
-        }
-      },
       "umbrel": {
         "page": {
           "title": "<0>अंब्रेल</0> नोड से कनेक्ट करें",
@@ -1170,11 +1160,9 @@
     "connectors": {
       "nativelnd": "LND (Tor पर)",
       "commando": "Commando",
-      "citadel": "Citadel",
       "nativelndhub": "LNDHub (Tor पर)",
       "lnbits": "LNBits",
       "nativelnbits": "LNbits (Tor पर)",
-      "nativecitadel": "Citadel (Tor पर)",
       "lnd": "LND",
       "lndhub": "LNDHub",
       "eclair": "एक्लेयर",

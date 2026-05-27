@@ -86,11 +86,6 @@
           "placeholder": "http://localhost:8080"
         }
       },
-      "citadel": {
-        "page": {
-          "title": "Collega un nodo <0>Citadel</0>"
-        }
-      },
       "umbrel": {
         "page": {
           "title": "Collega un nodo <0>Umbrel</0>",

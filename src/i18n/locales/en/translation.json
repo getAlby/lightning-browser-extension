@@ -149,17 +149,6 @@
           "placeholder": "http://localhost:8080"
         }
       },
-      "citadel": {
-        "title": "Citadel",
-        "page": {
-          "title": "Connect to <0>Citadel</0> node",
-          "instructions": "1. In the Citadel section of your Nirvati dashboard go to <0>Connect wallet</0><1/>2. Select <0>Alby (Tor)</0> or <0>Alby (Local Network)</0> mode<1/>3. Copy the <0>lndconnect URL</0> and paste it below"
-        },
-        "rest_url": {
-          "label": "lndconnect REST URL",
-          "placeholder": "lndconnect://yournode:8080?..."
-        }
-      },
       "nirvati": {
         "title": "Nirvati"
       },
@@ -1189,8 +1178,6 @@
       "nativelnbits": "LNBits (over Tor)",
       "galoy": "Galoy",
       "eclair": "Eclair",
-      "citadel": "Citadel",
-      "nativecitadel": "Citadel (over Tor)",
       "commando": "Commando"
     },
     "errors": {
