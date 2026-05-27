@@ -137,11 +137,6 @@
           "placeholder": "http://localhost:8080"
         }
       },
-      "citadel": {
-        "page": {
-          "title": "Poveži <0>Citadel</0> vozlišče"
-        }
-      },
       "umbrel": {
         "page": {
           "title": "Poveži <0>Umbrel</0> vozlišče",
@@ -629,11 +624,9 @@
     "connectors": {
       "nativelnd": "LND (preko Tor)",
       "commando": "Commando",
-      "citadel": "Citadel",
       "nativelndhub": "LNDHub (preko Tor)",
       "lnbits": "LNBits",
       "nativelnbits": "LNBits (preko Tor)",
-      "nativecitadel": "Citadel (preko Tor)",
       "lnd": "LND",
       "lndhub": "LNDHub",
       "eclair": "Eclair",

@@ -138,16 +138,6 @@
           "placeholder": "http://localhost:8080"
         }
       },
-      "citadel": {
-        "page": {
-          "title": "Connectez-vous au nœud <0>Citadelle</0>",
-          "instructions": "1. Dans la section Citadelle de votre tableau de bord Nirvati, accédez à <0>Connecter le portefeuille</0><1/>2. Sélectionnez <0>Alby (Tor)</0> ou <0>Alby (réseau local)</0>mode<1/>3. Copiez l'<0>URL lndconnect</0> et collez-la ci-dessous"
-        },
-        "rest_url": {
-          "label": "lndconnect REST URL",
-          "placeholder": "lndconnect://yournode:8080?..."
-        }
-      },
       "umbrel": {
         "page": {
           "title": "Connectez-vous au nœud <0>Umbrel</0>",

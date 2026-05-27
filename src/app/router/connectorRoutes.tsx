@@ -1,6 +1,5 @@
 import ChooseConnector from "@screens/connectors/ChooseConnector";
 import ConnectBtcpay from "@screens/connectors/ConnectBtcpay";
-import ConnectCitadel from "@screens/connectors/ConnectCitadel";
 import ConnectEclair from "@screens/connectors/ConnectEclair";
 import ConnectGaloy, { galoyUrls } from "@screens/connectors/ConnectGaloy";
 import ConnectLaWallet from "@screens/connectors/ConnectLaWallet";
@@ -21,7 +20,6 @@ import ConnectVoltage from "~/app/screens/connectors/ConnectVoltage";
 import ConnectCommando from "../screens/connectors/ConnectCommando";
 import albyhub from "/static/assets/icons/albyhub.svg";
 import btcpay from "/static/assets/icons/btcpay.svg";
-import citadel from "/static/assets/icons/citadel.svg";
 import core_ln from "/static/assets/icons/core_ln.svg";
 import eclair from "/static/assets/icons/eclair.jpg";
 import galoyBitcoinJungle from "/static/assets/icons/galoy_bitcoin_jungle.png";
@@ -128,12 +126,6 @@ const connectorMap: { [key: string]: ConnectorRoute } = {
     title: i18n.t("translation:choose_connector.lnbits.title"),
     logo: lnbits,
   },
-  citadel: {
-    path: "citadel",
-    element: <ConnectCitadel />,
-    title: i18n.t("translation:choose_connector.citadel.title"),
-    logo: citadel,
-  },
   "lnd-hub-go": {
     path: "lnd-hub-go",
     element: <ConnectLndHub />,
@@ -208,7 +200,6 @@ const distributionMap: { [key: string]: { logo: string; children: Route[] } } =
     nirvati: {
       logo: nirvati,
       children: [
-        //connectorMap["citadel"],
         connectorMap["lnc"],
         //connectorMap["commando"],
         connectorMap["lnbits"],
