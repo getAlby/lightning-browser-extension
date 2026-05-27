@@ -3,7 +3,7 @@ import browser from "webextension-polyfill";
 const nativeApplication = "alby";
 
 // https://www.typescriptlang.org/docs/handbook/mixins.html
-// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/ban-types
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Constructor = new (...args: any[]) => {};
 
 export default function Native<TBase extends Constructor>(Base: TBase) {

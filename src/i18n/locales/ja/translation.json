@@ -123,11 +123,6 @@
         },
         "title": "Eclair"
       },
-      "citadel": {
-        "page": {
-          "title": "<0>Citadel</0>ノードに接続"
-        }
-      },
       "umbrel": {
         "page": {
           "title": "<0>Umbrel</0>ノードに接続",

@@ -79,11 +79,6 @@
           "placeholder": "http://localhost:8080"
         }
       },
-      "citadel": {
-        "page": {
-          "title": "Conectar a nodo Citadel"
-        }
-      },
       "umbrel": {
         "page": {
           "title": "Conectar a Umbrel",
