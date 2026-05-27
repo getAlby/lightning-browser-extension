@@ -4,10 +4,10 @@ import { secp256k1 } from "@noble/curves/secp256k1";
 import {
   expand as hkdf_expand,
   extract as hkdf_extract,
-} from "@noble/hashes/hkdf";
-import { hmac } from "@noble/hashes/hmac";
-import { sha256 } from "@noble/hashes/sha256";
-import { concatBytes, randomBytes, utf8ToBytes } from "@noble/hashes/utils";
+} from "@noble/hashes/hkdf.js";
+import { hmac } from "@noble/hashes/hmac.js";
+import { sha256 } from "@noble/hashes/sha2.js";
+import { concatBytes, randomBytes, utf8ToBytes } from "@noble/hashes/utils.js";
 import { base64 } from "@scure/base";
 
 // Extracted from https://github.com/nbd-wtf/nostr-tools
@@ -26,7 +26,7 @@ const u = {
     const sharedX = secp256k1
       .getSharedSecret(privkeyA, "02" + pubkeyB)
       .subarray(1, 33);
-    return hkdf_extract(sha256, sharedX, "nip44-v2");
+    return hkdf_extract(sha256, sharedX, utf8ToBytes("nip44-v2"));
   },
 
   getMessageKeys(conversationKey: Uint8Array, nonce: Uint8Array) {
