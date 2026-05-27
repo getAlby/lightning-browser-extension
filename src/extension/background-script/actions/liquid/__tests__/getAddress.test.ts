@@ -91,7 +91,7 @@ describe("getLiquidAddress", () => {
     );
 
     const publicBlindKeyFromPrvKey = getPublicKey(
-      result.data.blindingPrivateKey,
+      etc.hexToBytes(result.data.blindingPrivateKey),
       true
     );
 
