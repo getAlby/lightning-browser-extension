@@ -94,7 +94,7 @@
           "title": "Verbinden mit <0>myNode</0>"
         },
         "rest_url": {
-          "label": "lndconnect REST URL",
+          "label": "lndconnect-REST-URL",
           "placeholder": "lndconnect://deinenode:8080?..."
         }
       },
@@ -109,16 +109,6 @@
         }
       },
       "description": "Verbinde deine externe Lightning-Wallet oder -Node",
-      "citadel": {
-        "page": {
-          "title": "Verbinden mit <0>Citadel</0>-Node",
-          "instructions": "1. Gehe in deinem Citadel-Bereich deines Nirvati-Dashboards auf <0>Connect wallet</0><1/>2. Wähle den Modus <0>Alby (Tor)</0> oder <0>Alby (Local Network)</0> aus<1/>3. Kopiere die <0>lndconnect URL</0> und füge sie unten ein"
-        },
-        "rest_url": {
-          "label": "lndconnect REST URL",
-          "placeholder": "lndconnect://deinenode:8080?..."
-        }
-      },
       "raspiblitz": {
         "page": {
           "instructions1": "Folge diesen Schritten:<1/> 1. <0>SSH</0> in deinen <0>Raspiblitz</0><1/>2. Wähle <0>Connect Apps & Show Credentials</0> aus der Liste<1/><0/>3. Wähle <0>Connect Alby to this node</0><1/>4. Drücke <0>OK</0>, um die Verbindungsdaten anzuzeigen<1/><1/>Kopiere den <0>REST-API-Host</0> oder die <0>.onion</0>-Adresse, um dich über Tor zu verbinden, und füge sie in das Feld darunter ein.",
@@ -207,7 +197,7 @@
       "lnc": {
         "title": "Lightning Terminal (LNC)",
         "pairing_phrase": {
-          "label": "Deine Pairing-Phrase",
+          "label": "Dein Passwort ",
           "placeholder": "Geheimer Stack Sats Phrase"
         },
         "page": {
@@ -1182,11 +1172,11 @@
         "totalAmount": "Gesamtbetrag",
         "timestamp": "Zeitstempel"
       },
-      "preimage": "Preimage",
+      "preimage": "Vorbild",
       "received": "Empfangen",
       "fee": "Gebühr",
       "open_location": "Webseite öffnen",
-      "payment_hash": "Payment Hash",
+      "payment_hash": "Zahlungs-Hash",
       "date_time": "Datum & Uhrzeit",
       "no_transactions": "Noch keine Transaktionen.",
       "failed": "Fehlgeschlagen",
@@ -1290,9 +1280,7 @@
     "connectors": {
       "lnd": "LND",
       "nativelnd": "LND (über Tor)",
-      "citadel": "Citadel",
-      "nativecitadel": "Citadel (über Tor)",
-      "commando": "Commando",
+      "commando": "Befehl",
       "lnbits": "LNBits",
       "lndhub": "LNDHub",
       "nativelndhub": "LNDHub (über Tor)",
@@ -1375,7 +1363,7 @@
       "verifymessage": "Überprüfe eine Signatur über eine Nachricht",
       "addholdinvoice": "Erstelle neue HODL-Rechnungen",
       "settleinvoice": "Begleiche eine akzeptierte Rechnung",
-      "listunspent": "Liste aller UTXOs, die von der Wallet ausgegeben werden können",
+      "listunspent": "Eine Liste aller UTXOs abrufen, die von der Wallet ausgegeben werden können",
       "listaddresses": "Erhalte alle Adressen zusammen mit deinem Guthaben",
       "newaddress": "Rufe eine neue Onchain-Adresse ab",
       "nextaddr": "Rufe die nächste unbenutzte Adresse in der Wallet ab"
@@ -1405,7 +1393,7 @@
       "openchannel": "Öffne einen neuen Kanal",
       "addholdinvoice": "Erstelle neue HODL-Rechnungen",
       "settleinvoice": "Begleiche eine akzeptierte Rechnung",
-      "listunspent": "Liste aller UTXOs, die von der Wallet ausgegeben werden können",
+      "listunspent": "Eine Liste aller UTXOs abrufen, die von der Wallet ausgegeben werden können",
       "nextaddr": "Rufe die nächste unbenutzte Onchain-Adresse innerhalb der Wallet ab",
       "listaddresses": "Rufe alle Onchain-Adressen zusammen mit ihrem Guthaben ab",
       "newaddress": "Rufe eine neue Onchain-Adresse ab"

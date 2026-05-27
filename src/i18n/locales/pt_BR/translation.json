@@ -78,11 +78,6 @@
           "label": "Senha Eclair"
         }
       },
-      "citadel": {
-        "page": {
-          "title": "Conecte-se no servidor <0>Citadel</0>"
-        }
-      },
       "umbrel": {
         "page": {
           "title": "Conecte-se no servidor <0>Umbrel</0>",
@@ -964,9 +959,7 @@
       "lnbits": "LNBits",
       "nativelndhub": "LNDHub (usando Tor)",
       "commando": "Commando",
-      "citadel": "Citadel",
       "nativelnbits": "LNBits (usando Tor)",
-      "nativecitadel": "Citadel (usando Tor)",
       "nativelnd": "LND (usando Tor)"
     },
     "pasted": "Colado!",

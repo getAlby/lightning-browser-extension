@@ -122,11 +122,6 @@
           "placeholder": "http://localhost:8080"
         }
       },
-      "citadel": {
-        "page": {
-          "title": "連接 <0>Citadel</0> 節點"
-        }
-      },
       "umbrel": {
         "page": {
           "title": "連接 <0>Umbrel</0> 節點",
@@ -698,8 +693,6 @@
       "nativelnbits": "LNBits（通過 Tor）",
       "galoy": "Galoy",
       "eclair": "Eclair",
-      "citadel": "Citadel",
-      "nativecitadel": "Citadel（通過 Tor）",
       "commando": "Commando",
       "nativelndhub": "LNDHub（通過 Tor）"
     },

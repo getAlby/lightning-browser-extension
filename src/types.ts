@@ -618,13 +618,11 @@ export interface MessageBalanceGet extends MessageDefault {
 }
 
 export interface MessageGetAddress extends MessageDefault {
-  // eslint-disable-next-line @typescript-eslint/ban-types
   args: {};
   action: "getAddress";
 }
 
 export interface MessageGetSwapInfo extends MessageDefault {
-  // eslint-disable-next-line @typescript-eslint/ban-types
   args: {};
   action: "getSwapInfo";
 }
@@ -876,7 +874,6 @@ export interface DbBlocklist {
   isBlocked: boolean;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface Blocklist extends DbBlocklist {}
 
 export interface DbAllowance {

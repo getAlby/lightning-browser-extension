@@ -89,11 +89,6 @@
           "placeholder": "http://localhost:8080"
         }
       },
-      "citadel": {
-        "page": {
-          "title": "Anslut <0>Citadel</0>-nod"
-        }
-      },
       "umbrel": {
         "page": {
           "title": "Anslut <0>Umbrel</0>-nod",
@@ -765,12 +760,10 @@
       "nativelndhub": "LNDHub (över Tor)",
       "galoy": "Galoy",
       "eclair": "Eclair",
-      "nativecitadel": "Citadel (över Tor)",
       "commando": "Commando",
       "nativelnbits": "LNBits (över Tor)",
       "lndhub": "LNDHub",
-      "lnbits": "LNBits",
-      "citadel": "Citadel"
+      "lnbits": "LNBits"
     },
     "or": "eller",
     "pasted": "Klistrat in!",

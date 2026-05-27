@@ -64,11 +64,6 @@
         },
         "title": "Eclair"
       },
-      "citadel": {
-        "page": {
-          "title": "连接<0>Citadel</0>节点"
-        }
-      },
       "blink": {
         "page": {
           "title": "连接<0>眨眼钱包</0>"
@@ -1084,8 +1079,6 @@
       "nativelnbits": "LNBits（通过 Tor）",
       "galoy": "Galoy",
       "eclair": "Eclair",
-      "citadel": "Citadel",
-      "nativecitadel": "Citadel（通过 Tor）",
       "commando": "Commando"
     },
     "or": "或",

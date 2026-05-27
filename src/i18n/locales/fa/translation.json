@@ -133,11 +133,6 @@
           "placeholder": "http://localhost:8080"
         }
       },
-      "citadel": {
-        "page": {
-          "title": "به گره <0>Citadel</0> متصل شوید"
-        }
-      },
       "umbrel": {
         "page": {
           "title": "اتصال به گره <0>Umbrel</0>",
@@ -991,9 +986,7 @@
       "lnbits": "LNBits",
       "nativelndhub": "LNDHub (روی Tor)",
       "nativelnbits": "LNBits (روی Tor)",
-      "citadel": "Citadel",
       "galoy": "Galoy",
-      "nativecitadel": "Citadel (روی Tor)",
       "commando": "Commando"
     },
     "wallet": "کیف پول",
