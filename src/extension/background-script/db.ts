@@ -65,13 +65,11 @@ export class DB extends Dexie {
 
   async openWithInMemoryDB() {
     console.info("Opening DB using fake indexedDB");
-    // @ts-expect-error _options is inherited from Dexie
     this._options.indexedDB = indexedDB;
-    // @ts-expect-error _options is inherited from Dexie
     this._options.IDBKeyRange = IDBKeyRange;
-    // @ts-expect-error _options is inherited from Dexie
+    // @ts-expect-error _deps is inherited from Dexie
     this._deps.indexedDB = indexedDB;
-    // @ts-expect-error _options is inherited from Dexie
+    // @ts-expect-error _deps is inherited from Dexie
     this._deps.IDBKeyRange = IDBKeyRange;
     return this.open();
   }
