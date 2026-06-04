@@ -1,6 +1,7 @@
 import { chacha20 } from "@noble/ciphers/chacha.js";
 import { equalBytes } from "@noble/ciphers/utils.js";
-import { secp256k1 } from "@noble/curves/secp256k1";
+import { secp256k1 } from "@noble/curves/secp256k1.js";
+import { hexToBytes } from "@noble/curves/utils.js";
 import {
   expand as hkdf_expand,
   extract as hkdf_extract,
@@ -24,7 +25,7 @@ const u = {
 
   getConversationKey(privkeyA: string, pubkeyB: string): Uint8Array {
     const sharedX = secp256k1
-      .getSharedSecret(privkeyA, "02" + pubkeyB)
+      .getSharedSecret(hexToBytes(privkeyA), hexToBytes("02" + pubkeyB))
       .subarray(1, 33);
     return hkdf_extract(sha256, sharedX, utf8ToBytes("nip44-v2"));
   },

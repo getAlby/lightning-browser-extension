@@ -1,4 +1,4 @@
-import { schnorr } from "@noble/curves/secp256k1";
+import { schnorr } from "@noble/curves/secp256k1.js";
 import * as secp256k1 from "@noble/secp256k1";
 import type { ResponseType } from "axios";
 import { Method } from "axios";
@@ -306,7 +306,10 @@ export default class LaWallet implements Connector {
       data: {
         message: args.message,
         signature: schnorr
-          .sign(sha256(args.message).toString(Hex), this.config.privateKey)
+          .sign(
+            secp256k1.etc.hexToBytes(sha256(args.message).toString(Hex)),
+            secp256k1.etc.hexToBytes(this.config.privateKey)
+          )
           .toString(),
       },
     });
@@ -529,6 +532,9 @@ export function finishEvent(event: Event, privateKey: string): Event {
 }
 
 export function signEvent(event: Event, key: string) {
-  const signedEvent = schnorr.sign(getEventHash(event), key);
+  const signedEvent = schnorr.sign(
+    secp256k1.etc.hexToBytes(getEventHash(event)),
+    secp256k1.etc.hexToBytes(key)
+  );
   return secp256k1.etc.bytesToHex(signedEvent);
 }

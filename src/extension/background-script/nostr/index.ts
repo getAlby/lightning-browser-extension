@@ -1,4 +1,4 @@
-import { schnorr } from "@noble/curves/secp256k1";
+import { schnorr } from "@noble/curves/secp256k1.js";
 import * as secp256k1 from "@noble/secp256k1";
 import { Buffer } from "buffer";
 import * as CryptoJS from "crypto-js";

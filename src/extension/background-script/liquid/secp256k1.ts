@@ -2,11 +2,11 @@
  * This file defines the secp256k1 module injected in liquidjs-lib and slip77.
  * It implements interface compatible with BIP341Factory and SLIP77Factory.
  */
-import { mod } from "@noble/curves/abstract/modular";
-import { schnorr, secp256k1 } from "@noble/curves/secp256k1";
+import { mod } from "@noble/curves/abstract/modular.js";
+import { schnorr, secp256k1 } from "@noble/curves/secp256k1.js";
 import type { XOnlyPointAddTweakResult } from "liquidjs-lib/src/bip341";
 
-const ORDER = secp256k1.CURVE.n;
+const ORDER = secp256k1.Point.CURVE().n;
 
 function assertBytes(name: string, bytes: Uint8Array, length: number): void {
   if (bytes.length !== length) {
@@ -31,16 +31,16 @@ export function pointFromScalar(
   d: Uint8Array,
   compressed = true
 ): Uint8Array | null {
-  return secp256k1.ProjectivePoint.fromPrivateKey(d).toRawBytes(compressed);
+  return secp256k1.getPublicKey(d, compressed);
 }
 
 export function privateSub(
   d: Uint8Array,
   tweak: Uint8Array
 ): Uint8Array | null {
-  const point = secp256k1.ProjectivePoint.fromPrivateKey(d);
-  const tweakedPoint = secp256k1.ProjectivePoint.fromHex(tweak);
-  return point.subtract(tweakedPoint).toRawBytes(true);
+  const point = secp256k1.Point.fromBytes(secp256k1.getPublicKey(d, false));
+  const tweakedPoint = secp256k1.Point.fromBytes(tweak);
+  return point.subtract(tweakedPoint).toBytes(true);
 }
 
 export function signSchnorr(
@@ -61,7 +61,7 @@ export function verifySchnorr(
 
 export function isPoint(p: Uint8Array): boolean {
   try {
-    secp256k1.ProjectivePoint.fromHex(p);
+    secp256k1.Point.fromBytes(p);
     return true;
   } catch {
     return false;
@@ -69,16 +69,11 @@ export function isPoint(p: Uint8Array): boolean {
 }
 
 export function pointCompress(p: Uint8Array, compressed?: boolean): Uint8Array {
-  return secp256k1.ProjectivePoint.fromHex(p).toRawBytes(compressed);
+  return secp256k1.Point.fromBytes(p).toBytes(compressed);
 }
 
 export function isPrivate(d: Uint8Array): boolean {
-  try {
-    secp256k1.ProjectivePoint.fromPrivateKey(d);
-    return true;
-  } catch {
-    return false;
-  }
+  return secp256k1.utils.isValidSecretKey(d);
 }
 
 export function xOnlyPointAddTweak(
@@ -89,8 +84,10 @@ export function xOnlyPointAddTweak(
   // the value does not matter, taproot will ignore it and use the x coordinate only
   p = Buffer.concat([Buffer.from([0x02]), p]);
 
-  const point = secp256k1.ProjectivePoint.fromHex(p);
-  const tweakedPoint = secp256k1.ProjectivePoint.fromPrivateKey(tweak);
+  const point = secp256k1.Point.fromBytes(p);
+  const tweakedPoint = secp256k1.Point.fromBytes(
+    secp256k1.getPublicKey(tweak, false)
+  );
   let result = null;
   try {
     result = point.add(tweakedPoint);
@@ -98,8 +95,8 @@ export function xOnlyPointAddTweak(
     return null;
   }
   return {
-    parity: result.hasEvenY() ? 0 : 1,
-    xOnlyPubkey: result.toRawBytes(true).slice(1),
+    parity: result.y % BigInt(2) === BigInt(0) ? 0 : 1,
+    xOnlyPubkey: result.toBytes(true).slice(1),
   };
 }
 
