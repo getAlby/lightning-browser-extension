@@ -30,10 +30,10 @@ class Mnemonic {
   async signMessage(message: string) {
     const messageHex = sha256(message).toString(Hex);
     const signedMessageBytes = await secp256k1.signAsync(
-      messageHex,
+      secp256k1.etc.hexToBytes(messageHex),
       this._hdkey.privateKey as Uint8Array
     );
-    return secp256k1.etc.bytesToHex(signedMessageBytes.toCompactRawBytes());
+    return secp256k1.etc.bytesToHex(signedMessageBytes);
   }
 }
 
