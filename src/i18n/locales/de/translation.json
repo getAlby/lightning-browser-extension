@@ -989,31 +989,7 @@
       "block_added": "{{host}} zur Blockliste hinzugefügt, bitte lade die Webseite neu."
     },
     "send_to_bitcoin_address": {
-      "time_estimate": "ℹ️ Transaktionen werden in der Regel innerhalb von 10-30 Minuten bearbeitet.",
-      "service_unavailable": "Der Dienst ist vorübergehend nicht verfügbar, bitte versuche es in ein paar Minuten erneut.",
-      "title": "An Bitcoin-Adresse senden",
-      "recipient": {
-        "label": "Empfänger"
-      },
-      "amount": {
-        "label": "Betrag (sats)"
-      },
-      "network_fee": {
-        "label": "Netzgebühr"
-      },
-      "service_fee": {
-        "label": "Servicegebühr"
-      },
-      "total": {
-        "label": "Insgesamt"
-      },
-      "total_fee": {
-        "label": "Gebühr"
-      },
-      "provider": {
-        "label": "Wechseldienst"
-      },
-      "view_on_explorer": "Ansicht auf Mempool Explorer"
+      "title": "An Bitcoin-Adresse senden"
     },
     "webln_enable": {
       "title": "Mit WebLN verbinden",

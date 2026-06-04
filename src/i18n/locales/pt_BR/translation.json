@@ -807,31 +807,7 @@
       "block_and_ignore": "Bloquear e ignorar {{host}}"
     },
     "send_to_bitcoin_address": {
-      "total_fee": {
-        "label": "Taxa"
-      },
-      "view_on_explorer": "Ver no explorer mempool",
-      "network_fee": {
-        "label": "Taxa de rede"
-      },
-      "total": {
-        "label": "Total"
-      },
-      "service_fee": {
-        "label": "Taxa de serviço"
-      },
-      "amount": {
-        "label": "Quantia (sats)"
-      },
-      "service_unavailable": "Serviço temporariamente indisponível. Tente novamente em alguns minutos.",
-      "provider": {
-        "label": "Serviço provedor de trocas"
-      },
-      "time_estimate": "ℹ️ As transações geralmente são recebidas no prazo de 10 a 30 minutos.",
-      "title": "Enviar para um endereço bitcoin",
-      "recipient": {
-        "label": "Endereço"
-      }
+      "title": "Enviar para um endereço bitcoin"
     },
     "onboard": {
       "request3": "A configuração é rápida e fácil",

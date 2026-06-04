@@ -752,31 +752,7 @@
       }
     },
     "send_to_bitcoin_address": {
-      "title": "Enviar para um endereço bitcoin",
-      "recipient": {
-        "label": "Destinatário"
-      },
-      "amount": {
-        "label": "Quantia (sats)"
-      },
-      "network_fee": {
-        "label": "Taxa de rede"
-      },
-      "service_fee": {
-        "label": "Taxa de serviço"
-      },
-      "total": {
-        "label": "Total"
-      },
-      "total_fee": {
-        "label": "Taxa"
-      },
-      "provider": {
-        "label": "Serviço provedor de trocas"
-      },
-      "view_on_explorer": "Ver no explorer mempool",
-      "time_estimate": "ℹ️ As transações geralmente são recebidas no prazo de 10 a 30 minutos.",
-      "service_unavailable": "Serviço temporariamente indisponível. Tente novamente em alguns minutos."
+      "title": "Enviar para um endereço bitcoin"
     },
     "confirm_payment_async": {
       "title": "Aprovar pagamento",

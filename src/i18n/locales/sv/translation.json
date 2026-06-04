@@ -628,31 +628,7 @@
       "block_added": "Lade till {{host}} till blockeringslistan, ladda om webbplatsen."
     },
     "send_to_bitcoin_address": {
-      "service_unavailable": "Tjänsten är för tillfällig inte tillgänglig, försök igen om några minuter.",
-      "amount": {
-        "label": "Belopp (sats)"
-      },
-      "title": "Skicka till bitcoin-adress",
-      "recipient": {
-        "label": "Mottagare"
-      },
-      "network_fee": {
-        "label": "Nätverksavgift"
-      },
-      "service_fee": {
-        "label": "Serviceavgift"
-      },
-      "total": {
-        "label": "Total"
-      },
-      "total_fee": {
-        "label": "Avgift"
-      },
-      "provider": {
-        "label": "Byt leverantör"
-      },
-      "view_on_explorer": "Visa på mempool explorer",
-      "time_estimate": "ℹ️ Transaktioner kommer vanligtvis inom 10-30 minuter."
+      "title": "Skicka till bitcoin-adress"
     },
     "webln_enable": {
       "title": "Anslut till WebLN",
