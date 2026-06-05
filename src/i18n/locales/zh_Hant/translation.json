@@ -595,31 +595,7 @@
       "block_added": "已將{{host}}添加到阻止列表，請重新加載網站。"
     },
     "send_to_bitcoin_address": {
-      "title": "發送到比特幣地址",
-      "amount": {
-        "label": "金額（聰）"
-      },
-      "service_fee": {
-        "label": "服務費"
-      },
-      "total": {
-        "label": "總額"
-      },
-      "total_fee": {
-        "label": "費用"
-      },
-      "provider": {
-        "label": "交換提供者"
-      },
-      "view_on_explorer": "在內存池瀏覽器上查看",
-      "time_estimate": "ℹ️ 交易通常在10到30分鐘內到達。",
-      "service_unavailable": "服務暫時不可用，請幾分鐘後重試。",
-      "recipient": {
-        "label": "收款方"
-      },
-      "network_fee": {
-        "label": "網絡費"
-      }
+      "title": "發送到比特幣地址"
     }
   },
   "common": {

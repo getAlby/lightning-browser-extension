@@ -927,31 +927,7 @@
       "block_added": "已将{{host}}加入阻止列表，请重新加载网站。"
     },
     "send_to_bitcoin_address": {
-      "view_on_explorer": "在内存池浏览器上查看",
-      "title": "发送到比特币地址",
-      "recipient": {
-        "label": "收款方"
-      },
-      "network_fee": {
-        "label": "网络费"
-      },
-      "total": {
-        "label": "总额"
-      },
-      "service_fee": {
-        "label": "服务费"
-      },
-      "provider": {
-        "label": "交换提供方"
-      },
-      "service_unavailable": "服务暂时不可用，请几分钟后重试。",
-      "amount": {
-        "label": "金额（聪）"
-      },
-      "total_fee": {
-        "label": "费用"
-      },
-      "time_estimate": "ℹ️ 交易通常在10到30分钟内到达。"
+      "title": "发送到比特币地址"
     },
     "liquid_enable": {
       "request2": "请求 Liquid 信息和发票",
