@@ -432,6 +432,7 @@ class Lnc implements Connector {
     const data = await this.lnc.lnd.lightning.addInvoice({
       memo: args.memo,
       value: args.amount.toString(),
+      private: args.includePrivateChannels,
     });
 
     return {
