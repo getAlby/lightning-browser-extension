@@ -5,7 +5,7 @@ import { Method } from "axios";
 import lightningPayReq from "bolt11-signet";
 import Hex from "crypto-js/enc-hex";
 import sha256 from "crypto-js/sha256";
-import { nip04, relayInit, type Relay } from "nostr-tools";
+import { nip04, Relay } from "nostr-tools";
 import { Event, EventKind } from "~/extension/providers/nostr/types";
 import { Account } from "~/types";
 
@@ -68,7 +68,7 @@ export default class LaWallet implements Connector {
     this.account = account;
     this.config = config;
     this.public_key = new Nostr(config.privateKey).getPublicKey();
-    this.relay = relayInit(config.relayUrl);
+    this.relay = new Relay(config.relayUrl);
   }
 
   async init() {
@@ -248,39 +248,45 @@ export default class LaWallet implements Connector {
 
     await this.relay.connect();
     return new Promise((resolve, reject) => {
-      const sub = this.relay.sub([
+      this.relay.subscribe(
+        [
+          {
+            authors: [this.config.ledgerPublicKey, this.config.urlxPublicKey],
+            "#e": [event.id!],
+            "#t": [
+              "internal-transaction-error",
+              "internal-transaction-ok",
+              "outbound-transaction-start",
+            ],
+          },
+        ],
         {
-          authors: [this.config.ledgerPublicKey, this.config.urlxPublicKey],
-          "#e": [event.id!],
-          "#t": [
-            "internal-transaction-error",
-            "internal-transaction-ok",
-            "outbound-transaction-start",
-          ],
-        },
-      ]);
-
-      sub.on("event", async (event) => {
-        const tag = event.tags.find((tag) => tag[0] === "t")![1];
-        const content = JSON.parse(event.content);
-        switch (tag) {
-          case "internal-transaction-ok": // Refund
-            if (event.tags[1][1] === this.public_key && !!content.memo) {
-              return reject(new Error(content.memo));
+          onevent: async (event) => {
+            const tag = event.tags.find((tag) => tag[0] === "t")![1];
+            const content = JSON.parse(event.content);
+            switch (tag) {
+              case "internal-transaction-ok": // Refund
+                if (event.tags[1][1] === this.public_key && !!content.memo) {
+                  return reject(new Error(content.memo));
+                }
+                break;
+              case "internal-transaction-error": // No funds or ledger error
+                return reject(new Error(content.messages[0]));
+              case "outbound-transaction-start": // Payment done
+                return resolve({
+                  data: {
+                    preimage: await extractPreimage(
+                      event,
+                      this.config.privateKey
+                    ),
+                    paymentHash: paymentRequestDetails.tagsObject.payment_hash!,
+                    route: payment_route,
+                  },
+                });
             }
-            break;
-          case "internal-transaction-error": // No funds or ledger error
-            return reject(new Error(content.messages[0]));
-          case "outbound-transaction-start": // Payment done
-            return resolve({
-              data: {
-                preimage: await extractPreimage(event, this.config.privateKey),
-                paymentHash: paymentRequestDetails.tagsObject.payment_hash!,
-                route: payment_route,
-              },
-            });
+          },
         }
-      });
+      );
     });
   }
 
