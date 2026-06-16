@@ -836,31 +836,7 @@
       "allow_sign": "به {{host}} اجازه امضا بدهید:"
     },
     "send_to_bitcoin_address": {
-      "provider": {
-        "label": "ارائه دهنده تعویض"
-      },
-      "view_on_explorer": "در مرورگر ممپول ببینید",
-      "time_estimate": "ℹ️ تراکنش ها معمولا در 10-30 ثانیه می رسند.",
-      "service_unavailable": "خدمات موقتا در دسترس نیست، لطفا دقایقی دیگر دوباره تلاش کنید.",
-      "title": "ارسال به آدرس بیتکوین",
-      "service_fee": {
-        "label": "کارمزد خدمات"
-      },
-      "recipient": {
-        "label": "گیرنده"
-      },
-      "amount": {
-        "label": "مبلغ(ساتوشی)"
-      },
-      "network_fee": {
-        "label": "کارمزد شبکه"
-      },
-      "total": {
-        "label": "مجموع"
-      },
-      "total_fee": {
-        "label": "کارمزد"
-      }
+      "title": "ارسال به آدرس بیتکوین"
     },
     "nostr_enable": {
       "title": "اتصال به ناستر",

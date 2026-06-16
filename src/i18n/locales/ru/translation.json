@@ -969,31 +969,7 @@
       }
     },
     "send_to_bitcoin_address": {
-      "service_unavailable": "Сервис временно недоступен, повторите попытку через несколько минут.",
-      "title": "Отправить адрес Bitcoin",
-      "recipient": {
-        "label": "Получатель"
-      },
-      "total": {
-        "label": "Итого"
-      },
-      "amount": {
-        "label": "Сумма (дата)"
-      },
-      "network_fee": {
-        "label": "Сетевой сбор"
-      },
-      "provider": {
-        "label": "Поставщик швапа"
-      },
-      "time_estimate": "ℹ️ Транзакции обычно доставляются в течение 10-30 минут.",
-      "service_fee": {
-        "label": "Сбор за обслуживание"
-      },
-      "total_fee": {
-        "label": "Плата"
-      },
-      "view_on_explorer": "Просмотр в проводнике mempool"
+      "title": "Отправить адрес Bitcoin"
     },
     "liquid": {
       "title": "Жидкость",

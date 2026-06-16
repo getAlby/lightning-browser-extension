@@ -764,31 +764,7 @@
       "success": "ගෙවීම යවා ඇත! පූර්ව රූපය: {{preimage}}"
     },
     "send_to_bitcoin_address": {
-      "recipient": {
-        "label": "ලබන්නා"
-      },
-      "time_estimate": "ℹ️ ගනුදෙනු සාමාන්‍යයෙන් විනාඩි 10-30ක් ඇතුළත පැමිණේ.",
-      "view_on_explorer": "මෙම්පූල්(mempool) ගවේෂකයේ බලන්න",
-      "title": "බිට්කොයින්(bitcoin) ලිපිනයට යවන්න",
-      "provider": {
-        "label": "සපයන්නා හුවමාරු කරන්න"
-      },
-      "amount": {
-        "label": "මුදල (සැට්ස්)"
-      },
-      "network_fee": {
-        "label": "ජාල ගාස්තුව"
-      },
-      "service_fee": {
-        "label": "සේවා ගාස්තුව"
-      },
-      "total": {
-        "label": "එකතුව"
-      },
-      "total_fee": {
-        "label": "ගාස්තුව"
-      },
-      "service_unavailable": "සේවාව තාවකාලිකව ලබාගත නොහැක, කරුණාකර විනාඩි කිහිපයකින් නැවත උත්සාහ කරන්න."
+      "title": "බිට්කොයින්(bitcoin) ලිපිනයට යවන්න"
     },
     "confirm_payment_async": {
       "title": "ගෙවීම අනුමත කරන්න",
