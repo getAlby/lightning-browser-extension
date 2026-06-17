@@ -50,7 +50,7 @@
     "@tailwindcss/forms": "^0.5.11",
     "axios": "^1.16.1",
     "bech32": "^2.0.0",
-    "bitcoinjs-lib": "^6.1.7",
+    "bitcoinjs-lib": "^7.0.1",
     "bolt11-signet": "1.4.1",
     "crypto-js": "^4.2.0",
     "dexie": "^4.4.3",

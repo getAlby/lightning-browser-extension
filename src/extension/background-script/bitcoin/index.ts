@@ -80,7 +80,7 @@ class Bitcoin {
     const derivedKey = this.mnemonic.deriveKey(derivationPath);
 
     const { address } = bitcoin.payments.p2tr({
-      internalPubkey: toXOnly(Buffer.from(derivedKey.publicKey as Uint8Array)),
+      internalPubkey: toXOnly(derivedKey.publicKey as Uint8Array),
       network: this.network,
     });
     if (!address) {
@@ -106,7 +106,7 @@ class Bitcoin {
     };
 
     for (let i = 0; i < unsignedPsbt.data.inputs.length; i++) {
-      const pubkey: Buffer | undefined =
+      const pubkey: Uint8Array | undefined =
         unsignedPsbt.data.inputs[i].tapInternalKey ||
         unsignedPsbt.data.inputs[i].tapBip32Derivation?.[0]?.pubkey;
 
@@ -126,7 +126,7 @@ class Bitcoin {
       }
 
       preview.inputs.push({
-        amount: unsignedPsbt.data.inputs[i].witnessUtxo?.value || 0,
+        amount: Number(unsignedPsbt.data.inputs[i].witnessUtxo?.value || 0),
         address,
       });
     }
@@ -150,7 +150,7 @@ class Bitcoin {
         "UNKNOWN";
 
       const previewOutput: Address = {
-        amount: txOutput.value,
+        amount: Number(txOutput.value),
         address,
       };
       preview.outputs.push(previewOutput);
@@ -170,13 +170,13 @@ class Bitcoin {
 export default Bitcoin;
 
 // Below code taken from https://github.com/bitcoinjs/bitcoinjs-lib/blob/master/test/integration/taproot.spec.ts#L636
-const toXOnly = (pubKey: Buffer) =>
+const toXOnly = (pubKey: Uint8Array) =>
   pubKey.length === 32 ? pubKey : pubKey.slice(1, 33);
 
 function tweakSigner(
   ECPair: ECPairAPI,
   signer: bitcoin.Signer,
-  opts: { network: bitcoin.Network; tweakHash?: Buffer | undefined }
+  opts: { network: bitcoin.Network; tweakHash?: Uint8Array | undefined }
 ): bitcoin.Signer {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
@@ -201,7 +201,10 @@ function tweakSigner(
   });
 }
 
-function tapTweakHash(pubKey: Buffer, h: Buffer | undefined): Buffer {
+function tapTweakHash(
+  pubKey: Uint8Array,
+  h: Uint8Array | undefined
+): Uint8Array {
   return bitcoin.crypto.taggedHash(
     "TapTweak",
     Buffer.concat(h ? [pubKey, h] : [pubKey])
