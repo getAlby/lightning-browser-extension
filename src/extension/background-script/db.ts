@@ -56,7 +56,10 @@ export class DB extends Dexie {
         "++id,&host,name,imageURL,tag,enabled,*enabledFor,totalBudget,remainingBudget,lastPaymentAt,lnurlAuth,createdAt",
     });
 
-    this.on("ready", this.loadFromStorage.bind(this));
+    // Dexie v4 passes a VIP-scoped db to the "ready" subscriber. Queries issued
+    // during "ready" MUST use it: the regular instance's queries block until
+    // open() resolves, but open() is itself awaiting this handler -> deadlock.
+    this.on("ready", (vipDb) => this.loadFromStorage(vipDb as DB));
     this.allowances = this.table("allowances");
     this.payments = this.table("payments");
     this.blocklist = this.table("blocklist");
@@ -98,21 +101,21 @@ export class DB extends Dexie {
   // BUT maybe there are already entries in the IndexedDB (that depends on the browser).
   // In that case we don't do anything as this would cause conflicts and errors.
   // (this could use some DRY-up)
-  async loadFromStorage() {
+  async loadFromStorage(vipDb: DB) {
     console.info(`Current DB version: ${this.verno}`);
     console.info("Loading DB data from storage");
 
     return browser.storage.local
       .get(["allowances", "payments", "blocklist", "permissions"])
       .then((result) => {
-        const allowancePromise = this.allowances.count().then((count) => {
+        const allowancePromise = vipDb.allowances.count().then((count) => {
           // if the DB already has entries we do not need to add the data from the browser storage. We then already have the data in the indexeddb
           if (count > 0) {
             console.info(`Found ${count} allowances already in the DB`);
             return;
           } else if (result.allowances && result.allowances.length > 0) {
             // adding the data from the browser storage
-            return this.allowances
+            return vipDb.allowances
               .bulkAdd(result.allowances)
               .catch(Dexie.BulkError, function (e) {
                 console.error("Failed to add allowances; ignoring", e);
@@ -120,14 +123,14 @@ export class DB extends Dexie {
           }
         });
 
-        const paymentsPromise = this.payments.count().then((count) => {
+        const paymentsPromise = vipDb.payments.count().then((count) => {
           // if the DB already has entries we do not need to add the data from the browser storage. We then already have the data in the indexeddb
           if (count > 0) {
             console.info(`Found ${count} payments already in the DB`);
             return;
           } else if (result.payments && result.payments.length > 0) {
             // adding the data from the browser storage
-            return this.payments
+            return vipDb.payments
               .bulkAdd(result.payments)
               .catch(Dexie.BulkError, function (e) {
                 console.error("Failed to add payments; ignoring", e);
@@ -135,14 +138,14 @@ export class DB extends Dexie {
           }
         });
 
-        const blocklistPromise = this.blocklist.count().then((count) => {
+        const blocklistPromise = vipDb.blocklist.count().then((count) => {
           // if the DB already has entries we do not need to add the data from the browser storage. We then already have the data in the indexeddb
           if (count > 0) {
             console.info(`Found ${count} blocklist already in the DB`);
             return;
           } else if (result.blocklist && result.blocklist.length > 0) {
             // adding the data from the browser storage
-            return this.blocklist
+            return vipDb.blocklist
               .bulkAdd(result.blocklist)
               .catch(Dexie.BulkError, function (e) {
                 console.error("Failed to add blocklist; ignoring", e);
@@ -150,14 +153,14 @@ export class DB extends Dexie {
           }
         });
 
-        const permissionsPromise = this.permissions.count().then((count) => {
+        const permissionsPromise = vipDb.permissions.count().then((count) => {
           // if the DB already has entries we do not need to add the data from the browser storage. We then already have the data in the indexeddb
           if (count > 0) {
             console.info(`Found ${count} permissions already in the DB`);
             return;
           } else if (result.permissions && result.permissions.length > 0) {
             // adding the data from the browser storage
-            return this.permissions
+            return vipDb.permissions
               .bulkAdd(result.permissions)
               .catch(Dexie.BulkError, function (e) {
                 console.error("Failed to add permissions; ignoring", e);
