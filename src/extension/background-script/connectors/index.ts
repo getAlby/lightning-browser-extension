@@ -1,7 +1,6 @@
 import Alby from "./alby";
 import Eclair from "./eclair";
 import Galoy from "./galoy";
-import LaWallet from "./lawallet";
 import LnBits from "./lnbits";
 import Lnc from "./lnc";
 import Lnd from "./lnd";
@@ -31,7 +30,6 @@ const connectors = {
   eclair: Eclair,
   alby: Alby,
   nwc: NWC,
-  lawallet: LaWallet,
 };
 
 export default connectors;

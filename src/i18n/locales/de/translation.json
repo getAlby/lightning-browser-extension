@@ -254,30 +254,6 @@
         },
         "title": "NWC (Nostr Wallet Connect)"
       },
-      "lawallet": {
-        "page": {
-          "instructions": "Lege deine LaWallet-Anmeldedaten unten fest",
-          "title": "Verbindung zu LaWallet"
-        },
-        "api_endpoint": "API-Endpunkt",
-        "identity_endpoint": "Identitäts-Endpunkt",
-        "ledger_public_key": "Ledger öffentlicher Schlüssel",
-        "urlx_public_key": "URLx öffentlicher Schlüssel",
-        "relay_url": "Relais-URL",
-        "errors": {
-          "toast": {
-            "title": "Identität nicht gefunden",
-            "message": "Du hast keine Lightning-Adresse in der Identität \"{{domain}}\"",
-            "verify": "Überprüfe Folgendes",
-            "walias": "Ist deine Lightning-Adresse USERNAME<0>@{{domain}}</0> oder verwendest du eine andere Domain?",
-            "endpoint": "Der richtige Endpunkt wird aus https://app.<0>{{domain}}</0> erstellt",
-            "match": "Der Identitätsendpunkt muss mit deiner Lightning-Domain übereinstimmen",
-            "http": "Der Identitätsanbieter verwendet das gleiche Protokoll (<0>HTTP</0> oder <0>HTTPS</0>)"
-          }
-        },
-        "title": "LaWallet.io",
-        "private_key": "Privater Schlüssel"
-      },
       "albyhub": {
         "title": "Alby Hub",
         "page": {

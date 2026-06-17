@@ -4,7 +4,7 @@ This file provides guidance for AI coding agents working on the Alby Lightning B
 
 ## Project Overview
 
-Alby Lightning Browser Extension — a WebExtension (Chrome MV3, Firefox/Opera MV2) that brings Bitcoin Lightning Network payments and Nostr signing to the browser. It implements the **WebLN**, **Nostr (NIP-07)**, **WebBTC**, and **Liquid** provider APIs by injecting them into web pages and routing requests through a background script that talks to a configurable Lightning backend (LND, LNbits, LNC, LNDhub, NWC, Alby account, Eclair, Galoy, LaWallet, plus native-companion variants for Tor).
+Alby Lightning Browser Extension — a WebExtension (Chrome MV3, Firefox/Opera MV2) that brings Bitcoin Lightning Network payments and Nostr signing to the browser. It implements the **WebLN**, **Nostr (NIP-07)**, **WebBTC**, and **Liquid** provider APIs by injecting them into web pages and routing requests through a background script that talks to a configurable Lightning backend (LND, LNbits, LNC, LNDhub, NWC, Alby account, Eclair, Galoy, plus native-companion variants for Tor).
 
 ## Tech Stack
 
@@ -152,7 +152,7 @@ Web page
 
 ### Connectors
 
-`src/extension/background-script/connectors/connector.interface.ts` is the abstraction every Lightning backend implements (`getInfo`, `sendPayment`, `keysend`, `makeInvoice`, `signMessage`, etc.). Adding/modifying a method here means updating **every** connector implementation (`alby`, `lnd`, `lnc`, `lnbits`, `lndhub`, `nwc`, `eclair`, `galoy`, `lawallet`, and the `native*` companion-app variants). The `Native.ts` base class handles the native-messaging transport used for Tor proxying via the [alby-companion-rs](https://github.com/getAlby/alby-companion-rs) host app.
+`src/extension/background-script/connectors/connector.interface.ts` is the abstraction every Lightning backend implements (`getInfo`, `sendPayment`, `keysend`, `makeInvoice`, `signMessage`, etc.). Adding/modifying a method here means updating **every** connector implementation (`alby`, `lnd`, `lnc`, `lnbits`, `lndhub`, `nwc`, `eclair`, `galoy`, and the `native*` companion-app variants). The `Native.ts` base class handles the native-messaging transport used for Tor proxying via the [alby-companion-rs](https://github.com/getAlby/alby-companion-rs) host app.
 
 ### State & persistence
 
