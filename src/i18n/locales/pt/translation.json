@@ -237,20 +237,6 @@
           "connection_failed": "Falha na conexão. A URL de conexão do servidor BTCPay está correta e acessível?"
         }
       },
-      "lawallet": {
-        "title": "LaWallet.io",
-        "page": {
-          "title": "Conecte-se na LaWallet",
-          "instructions": "Insira as suas credenciais Lawallet abaixo"
-        },
-        "private_key": "Chave privada",
-        "errors": {
-          "toast": {
-            "title": "Identidade não encontrada"
-          }
-        },
-        "relay_url": "URL de retransmissão"
-      },
       "commando": {
         "page": {
           "instructions": "Certifique-se de conectar num servidor Core Lightning que esteja na versão 0.12.0 ou mais recente, o plugin commando instalado e executando e o servidor acessível na rede relâmpago. Crie um rune executando o comando 'lightning-cli commando-rune'.",

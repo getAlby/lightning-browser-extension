@@ -209,19 +209,6 @@
       "voltage": {
         "title": "Voltage"
       },
-      "lawallet": {
-        "title": "LaWallet.io",
-        "page": {
-          "title": "Conecte-se na LaWallet",
-          "instructions": "Insira suas credenciais Lawallet abaixo"
-        },
-        "private_key": "Chave privada",
-        "errors": {
-          "toast": {
-            "title": "Identidade não encontrada"
-          }
-        }
-      },
       "nwc": {
         "page": {
           "url": {

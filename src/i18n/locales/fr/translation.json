@@ -278,30 +278,6 @@
           }
         }
       },
-      "lawallet": {
-        "page": {
-          "instructions": "Définissez vos identifiants LaWallet ci-dessous",
-          "title": "Connectez-vous à LaWallet"
-        },
-        "identity_endpoint": "Identity Endpoint",
-        "errors": {
-          "toast": {
-            "title": "Identité non trouvée",
-            "message": "Vous n'avez pas d'adresse Lightning dans l'identité \"{{domain}}\"",
-            "verify": "Vérifiez les éléments suivants",
-            "match": "Identity Endpoint doit correspondre à votre domaine Lightning",
-            "walias": "Votre adresse Lightning est-elle USERNAME<0>@{{domain}}</0> ou utilise-t-elle un autre domaine?",
-            "endpoint": "Le point final correct est construit à partir de https://app.<0>{{domain}}</0>",
-            "http": "Le fournisseur d'identité utilise le même protocole (<0>HTTP</0> ou <0>HTTPS</0>)"
-          }
-        },
-        "api_endpoint": "API Endpoint",
-        "private_key": "Clé privée",
-        "ledger_public_key": "Clé publique du Ledger",
-        "urlx_public_key": "URLx Public key",
-        "relay_url": "Relay URL",
-        "title": "LaWallet.io"
-      },
       "nirvati": {
         "title": "Nirvati"
       }

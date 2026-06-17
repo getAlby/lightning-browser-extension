@@ -2,7 +2,6 @@ import ChooseConnector from "@screens/connectors/ChooseConnector";
 import ConnectBtcpay from "@screens/connectors/ConnectBtcpay";
 import ConnectEclair from "@screens/connectors/ConnectEclair";
 import ConnectGaloy, { galoyUrls } from "@screens/connectors/ConnectGaloy";
-import ConnectLaWallet from "@screens/connectors/ConnectLaWallet";
 import ConnectLnbits from "@screens/connectors/ConnectLnbits";
 import ConnectLnc from "@screens/connectors/ConnectLnc";
 import ConnectLnd from "@screens/connectors/ConnectLnd";
@@ -24,7 +23,6 @@ import core_ln from "/static/assets/icons/core_ln.svg";
 import eclair from "/static/assets/icons/eclair.jpg";
 import galoyBitcoinJungle from "/static/assets/icons/galoy_bitcoin_jungle.png";
 import galoyBlink from "/static/assets/icons/galoy_blink.png";
-import lawallet from "/static/assets/icons/lawallet.png";
 import lightning_node from "/static/assets/icons/lightning_node.png";
 import lightning_terminal from "/static/assets/icons/lightning_terminal.png";
 import lnbits from "/static/assets/icons/lnbits.png";
@@ -168,12 +166,6 @@ const connectorMap: { [key: string]: ConnectorRoute } = {
     title: i18n.t("translation:choose_connector.albyhub.title"),
     logo: albyhub,
   },
-  lawallet: {
-    path: "lawallet",
-    element: <ConnectLaWallet />,
-    title: i18n.t("translation:choose_connector.lawallet.title"),
-    logo: lawallet,
-  },
 };
 
 function getDistribution(key: string): ConnectorRoute {
@@ -261,7 +253,6 @@ function getConnectorRoutes(): ConnectorRoute[] {
     connectorMap["voltage"],
     connectorMap[galoyPaths.blink],
     connectorMap[galoyPaths.bitcoinJungle],
-    connectorMap["lawallet"],
     connectorMap["lnd-hub-go"],
     connectorMap["eclair"],
   ];

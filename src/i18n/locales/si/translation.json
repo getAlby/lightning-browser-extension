@@ -205,30 +205,6 @@
       "nirvati": {
         "title": "නිර්වාති(Nirvati)"
       },
-      "lawallet": {
-        "relay_url": "රිලේ URL",
-        "title": "LaWallet.io",
-        "urlx_public_key": "URLx පොදු යතුර",
-        "errors": {
-          "toast": {
-            "endpoint": "නිවැරදි අන්ත ලක්ෂ්‍යය https://app.<0>{{domain}}</0> වෙතින් ගොඩනගා ඇත",
-            "http": "අනන්‍යතා සපයන්නා එකම ප්‍රොටෝකෝලය භාවිතා කරයි (<0>HTTP</0> හෝ <0>HTTPS</0>)",
-            "title": "අනන්‍යතාවය හමු නොවීය",
-            "message": "\"{{domain}}\" අනන්‍යතාවයේ ඔබට ලයිට්නින්(lightning) ලිපිනයක් නොමැත",
-            "verify": "පහත සත්‍යාපනය කරන්න",
-            "match": "අනන්‍යතා අන්ත ලක්ෂ්‍යය ඔබේ ලයිට්නින්(Lightning) Domain එකට ගැළපිය යුතුයි",
-            "walias": "ඔබගේ ලයිට්නින්(lightning) ලිපිනය USERNAME<0>@{{domain}}</0> හෝ වෙනත් domain එකක් භාවිතා කරන්නේද?"
-          }
-        },
-        "page": {
-          "title": "LaWallet වෙත සම්බන්ධ වන්න",
-          "instructions": "ඔබගේ LaWallet අක්තපත්‍ර පහතින් සකසන්න"
-        },
-        "private_key": "පුද්ගලික යතුර",
-        "api_endpoint": "API අන්ත ලක්ෂ්‍යය",
-        "identity_endpoint": "අනන්‍යතා අන්ත ලක්ෂ්‍යය",
-        "ledger_public_key": "ලෙජර් පොදු යතුර"
-      },
       "commando": {
         "page": {
           "instructions": "ඔබ සතුව Core Lightning අනුවාදය 0.12.0 හෝ නව අනුවාදයක් ඇති බවට වග බලා ගන්න,කමාන්ඩෝ(commando) ප්ලගිනය ක්‍රියාත්මක වන අතර ඔබගේ නෝඩය(node) ලයිට්නින්(lightning) ජාලය හරහා ප්‍රවේශ විය හැක. 'lightning-cli commando-rune' ධාවනය කිරීමෙන් රූනයක් සාදන්න."

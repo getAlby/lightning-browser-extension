@@ -206,30 +206,6 @@
           "label": "输入你的短信验证码"
         }
       },
-      "lawallet": {
-        "identity_endpoint": "身份端点",
-        "relay_url": "中继链接",
-        "errors": {
-          "toast": {
-            "title": "身份未找到",
-            "message": "\"{{domain}}\" 身份域中未找到你的闪电地址",
-            "match": "身份端点必须与你的闪电网络域匹配",
-            "walias": "你的闪电地址是否为 USERNAME<0>@{{domain}}</0>？或者使用另一个域？",
-            "endpoint": "正确的端点应该类似 https://app.<0>{{domain}}</0>",
-            "http": "身份提供方需要使用相同的协议（<0>HTTP</0> 或 <0>HTTPS</0>）",
-            "verify": "通过以下内容验证"
-          }
-        },
-        "ledger_public_key": "Ledger 公钥",
-        "urlx_public_key": "URLx 公钥",
-        "title": "LaWallet.io",
-        "page": {
-          "title": "连接到 LaWallet",
-          "instructions": "在下方设置你的 LaWallet 凭据"
-        },
-        "private_key": "私钥",
-        "api_endpoint": "API 端点"
-      },
       "voltage": {
         "title": "Voltage",
         "page": {
