@@ -32,7 +32,8 @@ export default function ConnectUmbrel() {
       let lndconnect = new URL(lndconnectUrl);
       lndconnect.protocol = "http:";
       lndconnect = new URL(lndconnect.toString());
-      const url = `https://${lndconnect.host}${lndconnect.pathname}`;
+      const pathname = lndconnect.pathname.replace(/\/$/, "");
+      const url = `https://${lndconnect.host}${pathname}`;
       let macaroon = lndconnect.searchParams.get("macaroon") || "";
       macaroon = utils.urlSafeBase64ToHex(macaroon);
       // const cert = lndconnect.searchParams.get("cert"); // TODO: handle LND certs with the native connector
