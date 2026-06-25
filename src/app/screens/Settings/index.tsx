@@ -35,6 +35,7 @@ function Settings() {
 
   function closeModal() {
     setModalIsOpen(false);
+    setFormData(initialFormData);
   }
 
   async function updateAccountPassword() {
@@ -46,7 +47,6 @@ function Settings() {
 
       toast.success(t("change_password.success"));
       closeModal();
-      setFormData(initialFormData);
     } catch (e) {
       console.error(e);
       if (e instanceof Error)
@@ -335,10 +335,11 @@ function Settings() {
                     type="password"
                     label={t("change_password.current_password.label")}
                     required
+                    value={formData.currentPassword}
                     onChange={(e) => {
                       setFormData({
                         ...formData,
-                        currentPassword: e.target.value.trim(),
+                        currentPassword: e.target.value,
                       });
                     }}
                   />

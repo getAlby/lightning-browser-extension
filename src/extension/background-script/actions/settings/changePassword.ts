@@ -28,7 +28,8 @@ const changePassword = async (message: MessageChangePassword) => {
 
   const tmpAccounts = { ...accounts };
 
-  for (const accountId in tmpAccounts) {
+  for (const accountId in accounts) {
+    tmpAccounts[accountId] = { ...accounts[accountId] };
     const accountConfig = decryptData(
       accounts[accountId].config as string,
       currentPassword
