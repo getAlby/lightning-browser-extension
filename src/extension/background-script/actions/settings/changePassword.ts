@@ -1,19 +1,37 @@
 import { decryptData, encryptData } from "~/common/lib/crypto";
-import type { Message } from "~/types";
+import type { MessageChangePassword } from "~/types";
 
 import state from "../../state";
 
-const changePassword = async (message: Message) => {
+const changePassword = async (message: MessageChangePassword) => {
+  const { currentPassword, password: newPassword } = message.args;
+
+  if (typeof currentPassword !== "string" || currentPassword === "") {
+    return { error: "Current password is missing" };
+  }
+
+  if (typeof newPassword !== "string" || newPassword === "") {
+    return { error: "New password is missing" };
+  }
+
   const accounts = state.getState().accounts;
-  const password = await state.getState().password();
-  if (!password) return { error: "Password is missing" };
-  const newPassword = message.args.password as string;
+  const accountIds = Object.keys(accounts);
+
+  if (accountIds.length > 0) {
+    // Verify current password by attempting to decrypt an account config
+    try {
+      decryptData(accounts[accountIds[0]].config as string, currentPassword);
+    } catch (e) {
+      return { error: "Invalid current password" };
+    }
+  }
+
   const tmpAccounts = { ...accounts };
 
   for (const accountId in tmpAccounts) {
     const accountConfig = decryptData(
       accounts[accountId].config as string,
-      password
+      currentPassword
     );
     tmpAccounts[accountId].config = encryptData(accountConfig, newPassword);
 
@@ -21,7 +39,7 @@ const changePassword = async (message: Message) => {
     if (accounts[accountId].nostrPrivateKey) {
       const accountNostrKey = decryptData(
         accounts[accountId].nostrPrivateKey as string,
-        password
+        currentPassword
       );
       tmpAccounts[accountId].nostrPrivateKey = encryptData(
         accountNostrKey,
@@ -33,7 +51,7 @@ const changePassword = async (message: Message) => {
     if (accounts[accountId].mnemonic) {
       const accountMnemonic = decryptData(
         accounts[accountId].mnemonic as string,
-        password
+        currentPassword
       );
       tmpAccounts[accountId].mnemonic = encryptData(
         accountMnemonic,
