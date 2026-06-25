@@ -654,6 +654,9 @@
         "title": "Change Unlock Passcode",
         "subtitle": "",
         "screen_reader": "Change Unlock Passcode",
+        "current_password": {
+          "label": "Current unlock passcode:"
+        },
         "choose_password": {
           "label": "Enter a new unlock passcode:"
         },
