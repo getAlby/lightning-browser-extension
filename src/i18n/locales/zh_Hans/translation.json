@@ -305,7 +305,7 @@
             "imported_key_warning": "你正在使用导入的或随机生成的 Nostr 密钥。你将无法通过恢复词恢复这些 Nostr 密钥，因此请单独备份你的 Nostr 私钥。",
             "can_restore": "你当前 Nostr 密钥是从主密钥派生的。",
             "derive": "从主密钥中派生",
-            "no_secret_key": "💡 你还没有主密钥。 <0>单击此处</0></div>创建你的主密钥并派生你的 nostr 密钥。",
+            "no_secret_key": "💡 你还没有主密钥。 <0>单击此处</0>创建你的主密钥并派生你的 nostr 密钥。",
             "remove": "移除现有的密钥",
             "nostr_address": {
               "title": "Nostr 地址",
@@ -405,7 +405,7 @@
           "subtitle": "从该钱包删除主密钥。",
           "confirm": "确定要移除你的主密钥吗？\n\n键入 “{{name}}” 以继续操作："
         },
-        "no_mnemonic_hint": "💡 你还没有主密钥。<0>点击此处e</0></div>来生成你的主密钥并解锁这些设置。",
+        "no_mnemonic_hint": "💡 你还没有主密钥。<0>点击此处e</0>来生成你的主密钥并解锁这些设置。",
         "network": {
           "options": {
             "bitcoin": "主网",
