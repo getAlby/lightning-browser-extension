@@ -2,9 +2,9 @@ import type { GetAccountInformationResponse } from "@getalby/sdk";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import Button from "~/app/components/Button";
+import Hyperlink from "~/app/components/Hyperlink";
 import toast from "~/app/components/Toast";
-import { getAlbyAccountName } from "~/app/utils";
+import { classNames, getAlbyAccountName } from "~/app/utils";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
 import { WebLNNode } from "~/extension/background-script/connectors/connector.interface";
@@ -73,14 +73,14 @@ export default function ConnectAlby() {
   }
 
   return (
-    <Button
-      type="button"
-      label={t("connect")}
-      loading={loading}
-      disabled={loading}
-      flex
-      onClick={connectAlby}
-      primary
-    />
+    <Hyperlink
+      onClick={loading ? undefined : connectAlby}
+      className={classNames(
+        "text-sm font-medium",
+        loading ? "opacity-50 pointer-events-none" : ""
+      )}
+    >
+      {t("connect")}
+    </Hyperlink>
   );
 }
