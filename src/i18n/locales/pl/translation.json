@@ -298,7 +298,7 @@
             "title": "Zaloguj się za pomocą Lightning"
           }
         },
-        "no_mnemonic_hint": "💡 Nie masz jeszcze Klucza Głównego. <0>Kliknij tutaj</0></div>, aby utworzyć swój Klucz Główny i odblokować te ustawienia.",
+        "no_mnemonic_hint": "💡 Nie masz jeszcze Klucza Głównego. <0>Kliknij tutaj</0>, aby utworzyć swój Klucz Główny i odblokować te ustawienia.",
         "network": {
           "options": {
             "testnet": "Testnet (sieć testowa)",

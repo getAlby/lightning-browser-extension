@@ -540,7 +540,7 @@
           "settings": {
             "title": "Nostr-asetukset",
             "derive": "Johda pääavaimesta",
-            "no_secret_key": "💡 Sinulla ei ole vielä pääavainta. Luo pääavaimesi ja johda Nostr-avaimesi <0>napsauttamalla tätä</0></div>.",
+            "no_secret_key": "💡 Sinulla ei ole vielä pääavainta. Luo pääavaimesi ja johda Nostr-avaimesi <0>napsauttamalla tätä</0>.",
             "remove": "Poista nykyiset avaimet",
             "imported_key_warning": "Käytät tällä hetkellä tuotua tai satunnaisesti luotua Nostr-avainta. Yksityistä Nostr-avainta ei voi palauttaa palautuslauseellasi, joten muista varmuuskopioida yksityinen Nostr-avaimesi erikseen.",
             "label": "Nostr-asetukset",
@@ -627,7 +627,7 @@
           "title": "Lightningin osoite"
         },
         "danger_zone": "Vaarallinen vyöhyke",
-        "no_mnemonic_hint": "💡 Sinulla ei ole vielä pääavainta. Luo pääavaimesi ja avaa näiden asetusten lukitus <0>napsauttamalla tätä</0></div>."
+        "no_mnemonic_hint": "💡 Sinulla ei ole vielä pääavainta. Luo pääavaimesi ja avaa näiden asetusten lukitus <0>napsauttamalla tätä</0>."
       }
     },
     "alby": {

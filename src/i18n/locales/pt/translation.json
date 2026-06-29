@@ -332,7 +332,7 @@
           "export_uri": "Credenciais URI LNDHub",
           "scan_qr": "Leia o código QR para importar esta carteira na Zeus ou BlueWallet."
         },
-        "no_mnemonic_hint": "💡 Ainda não tem uma chave mestra. <0>Clique aqui</0></div> para gerar a sua chave mestra e desbloquear estas configurações.",
+        "no_mnemonic_hint": "💡 Ainda não tem uma chave mestra. <0>Clique aqui</0> para gerar a sua chave mestra e desbloquear estas configurações.",
         "mnemonic": {
           "title": "Gestão de chaves",
           "saved": "Chave mestra criptografada e gravada com sucesso.",
@@ -419,7 +419,7 @@
             "can_restore": "A sua chave Nostr atual foi gerada a partir da chave mestra.",
             "derive": "Derivar da chave mestra",
             "remove": "Remover esta chave",
-            "no_secret_key": "💡 Ainda não tem uma chave mestra. <0>Clique aqui</0></div> para gerar a sua chave mestra e as suas chaves Nostr."
+            "no_secret_key": "💡 Ainda não tem uma chave mestra. <0>Clique aqui</0> para gerar a sua chave mestra e as suas chaves Nostr."
           },
           "private_key": {
             "title": "Gerir a sua chave privada Nostr",

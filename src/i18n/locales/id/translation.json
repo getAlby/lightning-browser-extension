@@ -265,7 +265,7 @@
             "can_restore": "✅ Kunci Nostr diambil dari Master Key kamu",
             "derive": "Ambil dari Master Key",
             "remove": "Hapus kunci saat ini",
-            "no_secret_key": "💡 Kamu tidak memiliki Master Key. <0>Klik di sini</0></div> untuk membuat Master Key dan mengambil kunci Nostr kamu."
+            "no_secret_key": "💡 Kamu tidak memiliki Master Key. <0>Klik di sini</0> untuk membuat Master Key dan mengambil kunci Nostr kamu."
           },
           "private_key": {
             "subtitle": "Tempel kunci privat nostr atau buat baru. <0>Pelajari lebih lanjut »</0>",
