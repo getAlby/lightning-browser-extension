@@ -37,15 +37,10 @@
     },
     "choose_path": {
       "title": "Conecte carteiras na extensão Alby",
-      "other": {
-        "title": "Outras carteiras",
-        "description": "Ideal para quem já possui uma carteira e deseja conectá-la na extensão.",
-        "connect": "Escolher carteira"
-      },
+      "other": {},
       "alby": {
         "title": "Conta Alby",
-        "description": "Ideal para iniciantes que procuram uma ótima carteira para gastos do dia a dia.",
-        "connect": "Conecte-se com a Alby"
+        "description": "Ideal para iniciantes que procuram uma ótima carteira para gastos do dia a dia."
       }
     },
     "alby": {
@@ -824,18 +819,18 @@
         "10002": {
           "title": "atualizar relays"
         },
-        "22242": {
-          "title": "autenticar"
-        },
-        "30023": {
-          "title": "nota longa"
-        },
         "10003": {
           "title": "favoritos"
+        },
+        "22242": {
+          "title": "autenticar"
         },
         "27235": {
           "title": "HTTP Auth",
           "description": "Autenticação HTTP"
+        },
+        "30023": {
+          "title": "nota longa"
         },
         "30078": {
           "title": "Dados da app"

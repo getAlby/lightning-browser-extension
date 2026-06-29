@@ -26,9 +26,7 @@
       "alby": {
         "title": "Alby"
       },
-      "other": {
-        "title": "इतर वॉलेट"
-      }
+      "other": {}
     },
     "alby": {
       "pre_connect": {

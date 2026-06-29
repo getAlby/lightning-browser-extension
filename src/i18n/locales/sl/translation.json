@@ -196,9 +196,7 @@
       "alby": {
         "title": "Alby račun"
       },
-      "other": {
-        "title": "Ostale denarnice"
-      }
+      "other": {}
     },
     "distributions": {
       "title": "Poveži na {{name}}",

@@ -35,14 +35,9 @@
     "choose_path": {
       "alby": {
         "title": "Compte Alby",
-        "connect": "Continuer avec un compte Alby",
         "description": "Idéal si vous souhaitez profiter des applications tout en gardant le contrôle de votre bitcoin."
       },
-      "other": {
-        "title": "Apportez votre propre portefeuille",
-        "description": "Idéal si vous disposez déjà d'un wallet ou de votre propre nœud Lightning.",
-        "connect": "Sélectionnez votre wallet"
-      },
+      "other": {},
       "title": "Connectez Alby à un wallet"
     },
     "alby": {

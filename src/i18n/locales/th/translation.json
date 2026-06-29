@@ -320,9 +320,7 @@
       "content": "เว็บไซต์นี้ขอให้คุณลงชื่อ:"
     },
     "choose_path": {
-      "other": {
-        "title": "wallets อื่น ๆ"
-      },
+      "other": {},
       "alby": {
         "title": "บัญชี Alby"
       }

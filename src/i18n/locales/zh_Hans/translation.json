@@ -778,15 +778,10 @@
       }
     },
     "choose_path": {
-      "other": {
-        "title": "自备钱包",
-        "connect": "发现你的钱包",
-        "description": "最好已经拥有钱包或闪电节点。"
-      },
+      "other": {},
       "alby": {
         "title": "Alby帐户",
-        "description": "同时控制比特币并享受应用的最佳选择。",
-        "connect": "使用 Alby 账户"
+        "description": "同时控制比特币并享受应用的最佳选择。"
       },
       "title": "连接钱包到 Alby 浏览器扩展"
     },

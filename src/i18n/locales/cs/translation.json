@@ -481,9 +481,7 @@
       "content": "Tato webová stránka vás žádá o podpis:"
     },
     "choose_path": {
-      "other": {
-        "title": "Jiné peněženky"
-      },
+      "other": {},
       "alby": {
         "title": "Alby"
       }
