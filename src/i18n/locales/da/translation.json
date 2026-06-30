@@ -26,9 +26,7 @@
       "alby": {
         "title": "Alby"
       },
-      "other": {
-        "title": "Andre wallets"
-      }
+      "other": {}
     },
     "alby": {
       "pre_connect": {

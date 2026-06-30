@@ -27,9 +27,7 @@
       }
     },
     "choose_path": {
-      "other": {
-        "title": "…Wallets Lainnya"
-      },
+      "other": {},
       "alby": {
         "title": "Akun Alby"
       }

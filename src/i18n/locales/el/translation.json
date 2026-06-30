@@ -23,9 +23,7 @@
       }
     },
     "choose_path": {
-      "other": {
-        "title": "Άλλα πορτοφόλια"
-      },
+      "other": {},
       "alby": {
         "title": "Λογαριασμός Alby"
       }

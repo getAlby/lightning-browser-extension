@@ -29,9 +29,7 @@
       "alby": {
         "title": "Albyアカウント"
       },
-      "other": {
-        "title": "その他のウォレット"
-      }
+      "other": {}
     },
     "alby": {
       "pre_connect": {

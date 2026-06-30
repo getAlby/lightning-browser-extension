@@ -648,13 +648,8 @@
       }
     },
     "choose_path": {
-      "other": {
-        "description": "Parasta, jos sinulla on jo lompakko tai omistat lightning-solmun.",
-        "title": "Tuo oma lompakkosi",
-        "connect": "Löydä lompakkosi"
-      },
+      "other": {},
       "alby": {
-        "connect": "Jatka Alby-tilillä",
         "title": "Alby-tili",
         "description": "Ihanteellinen, jos haluat nauttia sovelluksista samalla kun hallitset bitcoinejasi."
       },

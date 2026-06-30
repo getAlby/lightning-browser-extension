@@ -41,15 +41,21 @@
     },
     "choose_path": {
       "title": "Connect Alby Extension to a wallet",
+      "albyhub": {
+        "title": "Don't have a wallet yet?",
+        "description": "Set up Alby Hub to run your own node and stay in full control of your bitcoin.",
+        "get_started": "Get Started"
+      },
       "other": {
-        "title": "Bring Your Own Wallet",
-        "description": "Best if you already have a wallet or own a lightning node.",
-        "connect": "Find Your Wallet"
+        "title": "Already have a wallet?",
+        "description": "Connect your Alby Hub or any other lightning wallet.",
+        "connect": "Connect"
       },
       "alby": {
         "title": "Alby Account",
         "description": "Ideal If you would like to enjoy apps while staying in control of your bitcoin.",
-        "connect": "Continue with Alby Account"
+        "connect": "Connect it",
+        "prompt": "Have an Alby Account?"
       }
     },
     "alby": {

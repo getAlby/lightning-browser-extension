@@ -864,15 +864,10 @@
       }
     },
     "choose_path": {
-      "other": {
-        "title": "Bringe deine eigene Wallet mit",
-        "description": "Am besten ist es, wenn du bereits eine Wallet oder eine Lightning-Node besitzt.",
-        "connect": "Finde deine Wallet"
-      },
+      "other": {},
       "alby": {
         "title": "Alby-Konto",
-        "description": "Ideal, wenn du die Anwendungen nutzen und gleichzeitig die Kontrolle über deine Bitcoin behalten möchtest.",
-        "connect": "Weiter mit Alby Account"
+        "description": "Ideal, wenn du die Anwendungen nutzen und gleichzeitig die Kontrolle über deine Bitcoin behalten möchtest."
       },
       "title": "Alby Extension mit einer Wallet verbinden"
     },

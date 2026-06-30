@@ -28,14 +28,9 @@
     "choose_path": {
       "alby": {
         "title": "Konto Alby",
-        "connect": "Kontynuuj używając konta Alby",
         "description": "Idealne, jeśli chcesz korzystać z aplikacji, zachowując pełną kontrolę nad swoimi bitcoinami."
       },
-      "other": {
-        "title": "Użyj wlasnego portfela",
-        "description": "Najlepiej, jeśli masz już portfel lub własny węzeł Lightning.",
-        "connect": "Znajdź swój portfel"
-      },
+      "other": {},
       "title": "Połącz rozszerzenie Alby do portfela"
     },
     "alby": {

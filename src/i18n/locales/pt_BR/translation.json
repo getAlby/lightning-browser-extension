@@ -681,14 +681,9 @@
     "choose_path": {
       "alby": {
         "title": "Conta Alby",
-        "connect": "Conecte-se com a Alby",
         "description": "Ideal para iniciantes que procuram uma ótima carteira para gastos do dia a dia."
       },
-      "other": {
-        "title": "Outras carteiras",
-        "connect": "Escolher carteira",
-        "description": "Ideal para quem já possui uma carteira e deseja conectá-la na extensão."
-      },
+      "other": {},
       "title": "Conecte carteiras na extensão Alby"
     },
     "alby": {

@@ -516,9 +516,7 @@
       "alby": {
         "title": "Alby Konto"
       },
-      "other": {
-        "title": "Annan Plånbok"
-      }
+      "other": {}
     },
     "alby": {
       "pre_connect": {

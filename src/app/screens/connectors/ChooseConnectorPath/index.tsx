@@ -3,14 +3,11 @@ import { Link } from "react-router-dom";
 import Button from "~/app/components/Button";
 import ConnectorPath from "~/app/components/ConnectorPath";
 import ConnectAlby from "~/app/screens/connectors/ConnectAlby";
-import { useTheme } from "~/app/utils";
 
 export default function ChooseConnectorPath() {
   const { t } = useTranslation("translation", {
     keyPrefix: "choose_path",
   });
-
-  const theme = useTheme();
 
   return (
     <div className="mx-auto max-w-3xl">
@@ -20,19 +17,31 @@ export default function ChooseConnectorPath() {
         </h1>
         <div className="grid lg:grid-cols-2 gap-8 mb-4">
           <ConnectorPath
-            title={t("alby.title")}
+            title={t("albyhub.title")}
             icon={
               <img
-                src={
-                  theme === "dark"
-                    ? "assets/icons/alby_dark.svg"
-                    : "assets/icons/alby_light.svg"
-                }
+                src="assets/icons/albyhub.svg"
+                alt=""
+                aria-hidden="true"
                 className="w-10 h-10 rounded-md"
               />
             }
-            description={t("alby.description")}
-            actions={<ConnectAlby />}
+            description={t("albyhub.description")}
+            actions={
+              <a
+                href="https://getalby.com/alby-hub#download"
+                target="_blank"
+                rel="noreferrer"
+                className="flex flex-1"
+              >
+                <Button
+                  tabIndex={-1}
+                  label={t("albyhub.get_started")}
+                  flex
+                  primary
+                />
+              </a>
+            }
           />
           <ConnectorPath
             title={t("other.title")}
@@ -63,6 +72,10 @@ export default function ChooseConnectorPath() {
               </Link>
             }
           />
+        </div>
+        <div className="mt-8 flex justify-center items-center gap-1.5 text-sm text-gray-600 dark:text-neutral-400">
+          <span>{t("alby.prompt")}</span>
+          <ConnectAlby />
         </div>
       </div>
     </div>

@@ -452,9 +452,7 @@
       "alby": {
         "title": "Alby"
       },
-      "other": {
-        "title": "Altri Wallet"
-      }
+      "other": {}
     },
     "confirm_request_permission": {
       "always_allow": "Ricorda la mia scelta e non chiederlo più",

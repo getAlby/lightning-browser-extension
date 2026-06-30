@@ -458,14 +458,9 @@
     "choose_path": {
       "alby": {
         "title": "Cuenta de Alby",
-        "description": "Es ideal si  quisieras disfrutar las apps mientras mantienes el control de tu bitcoin",
-        "connect": "Continuar con la cuenta de Alby"
+        "description": "Es ideal si  quisieras disfrutar las apps mientras mantienes el control de tu bitcoin"
       },
-      "other": {
-        "title": "Lleve su propia cartera",
-        "description": "Es mejor si ya tienes una cartera o tu propio nodo lightning",
-        "connect": "Encuentra tu cartera"
-      },
+      "other": {},
       "title": "Conectar la cartera a la extensión Alby"
     },
     "nostr": {
