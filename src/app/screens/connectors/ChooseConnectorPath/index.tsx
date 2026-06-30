@@ -21,6 +21,8 @@ export default function ChooseConnectorPath() {
             icon={
               <img
                 src="assets/icons/albyhub.svg"
+                alt=""
+                aria-hidden="true"
                 className="w-10 h-10 rounded-md"
               />
             }
