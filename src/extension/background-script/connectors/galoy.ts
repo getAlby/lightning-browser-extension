@@ -338,6 +338,58 @@ class Galoy implements Connector {
     });
   }
 
+  /**
+   * Probe the route for the fee of an amount-carrying lightning invoice.
+   *
+   * Blink caches the probed route on its backend so that the subsequent
+   * `lnInvoicePaymentSend` settles with the exact fee instead of Blink's max
+   * fee reserve (which otherwise overcharges e.g. 10 sats on a small payment).
+   *
+   * This is best-effort: any failure (GraphQL error or network) is logged and
+   * swallowed so the payment still proceeds. Only amount-carrying invoices are
+   * probed; zero-amount invoices carry no amount to probe with here.
+   */
+  async feeProbe(paymentRequest: string): Promise<void> {
+    const isUSD = this.config.currency === "USD";
+    const mutationName = isUSD ? "lnUsdInvoiceFeeProbe" : "lnInvoiceFeeProbe";
+    const inputTypeName = isUSD
+      ? "LnUsdInvoiceFeeProbeInput"
+      : "LnInvoiceFeeProbeInput";
+
+    const query = {
+      query: `
+        mutation ${mutationName}($input: ${inputTypeName}!) {
+          ${mutationName}(input: $input) {
+            amount
+            errors {
+              message
+            }
+          }
+        }
+      `,
+      variables: {
+        input: {
+          walletId: this.config.walletId,
+          paymentRequest,
+        },
+      },
+    };
+
+    try {
+      const { data, errors } = await this.request(query);
+      const errs = errors || data?.[mutationName]?.errors;
+      if (errs && errs.length) {
+        console.warn(
+          `Galoy/Blink fee probe failed ('${
+            errs[0].message || JSON.stringify(errs)
+          }'), paying without probe.`
+        );
+      }
+    } catch (e) {
+      console.warn("Galoy/Blink fee probe errored, paying without probe.", e);
+    }
+  }
+
   async sendPayment(args: SendPaymentArgs): Promise<SendPaymentResponse> {
     const query = {
       query: `
@@ -380,6 +432,13 @@ class Galoy implements Connector {
     const paymentRequestDetails = lightningPayReq.decode(args.paymentRequest);
     const amountInSats = paymentRequestDetails.satoshis || 0;
     const paymentHash = paymentRequestDetails.tagsObject.payment_hash || "";
+
+    // Probe amount invoices first so Blink caches the route and settles at the
+    // exact fee instead of its max fee reserve. Zero-amount invoices carry no
+    // amount to probe with here, so they are paid as-is (best-effort, no reject).
+    if (amountInSats > 0) {
+      await this.feeProbe(args.paymentRequest);
+    }
 
     return this.request(query).then(({ data, errors }) => {
       const errs = errors || data.lnInvoicePaymentSend.errors;
