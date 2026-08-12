@@ -1,3 +1,4 @@
+import Alert from "@components/Alert";
 import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
 import PublisherCard from "@components/PublisherCard";
@@ -5,6 +6,7 @@ import Checkbox from "@components/form/Checkbox";
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import ScreenHeader from "~/app/components/ScreenHeader";
+import { useSettings } from "~/app/context/SettingsContext";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
@@ -18,11 +20,15 @@ const ConfirmRequestPermission: FC = () => {
   });
   const { t: tCommon } = useTranslation("common");
   const { t: tPermissions } = useTranslation("permissions");
+  const { getFormattedSats } = useSettings();
 
   const navState = useNavigationState();
   const origin = navState.origin as OriginData;
   const requestMethod = navState.args?.requestPermission?.method;
   const description = navState.args?.requestPermission?.description;
+  const isFundMoving = navState.args?.requestPermission?.isFundMoving;
+  const amount = navState.args?.requestPermission?.amount;
+  const destination = navState.args?.requestPermission?.destination;
 
   const enable = () => {
     msg.reply({
@@ -64,24 +70,41 @@ const ConfirmRequestPermission: FC = () => {
                     )}
                   </p>
                 )}
+                {amount !== undefined && (
+                  <p className="mt-2 text-sm text-gray-700 dark:text-neutral-400">
+                    {t("amount", { amount: getFormattedSats(amount) })}
+                  </p>
+                )}
+                {destination && (
+                  <p className="text-sm break-all text-gray-700 dark:text-neutral-400">
+                    {t("destination", { destination })}
+                  </p>
+                )}
               </div>
+              {isFundMoving && (
+                <Alert type="warn">
+                  <p className="text-sm">{t("fund_moving_warning")}</p>
+                </Alert>
+              )}
             </div>
           </div>
           <div className="text-center flex flex-col">
-            <div className="flex items-center mb-4">
-              <Checkbox
-                id="always_allow"
-                name="always_allow"
-                checked={alwaysAllow}
-                onChange={() => setAlwaysAllow((prev) => !prev)}
-              />
-              <label
-                htmlFor="always_allow"
-                className="cursor-pointer pl-2 block text-sm text-gray-900 font-medium dark:text-white"
-              >
-                {t("always_allow")}
-              </label>
-            </div>
+            {!isFundMoving && (
+              <div className="flex items-center mb-4">
+                <Checkbox
+                  id="always_allow"
+                  name="always_allow"
+                  checked={alwaysAllow}
+                  onChange={() => setAlwaysAllow((prev) => !prev)}
+                />
+                <label
+                  htmlFor="always_allow"
+                  className="cursor-pointer pl-2 block text-sm text-gray-900 font-medium dark:text-white"
+                >
+                  {t("always_allow")}
+                </label>
+              </div>
+            )}
             <ConfirmOrCancel
               label={tCommon("actions.confirm")}
               onCancel={reject}

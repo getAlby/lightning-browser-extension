@@ -158,3 +158,20 @@ export default interface Connector {
 export function flattenRequestMethods(methods: string[]) {
   return methods.map((method) => `request.${method}`);
 }
+
+// Request methods that move funds or change the state of the node.
+// These are confirmed on every call, are never remembered as a permission and,
+// where the amount is known, are checked against and debited from the
+// allowance budget of the host.
+export const FUND_MOVING_REQUEST_METHODS = [
+  "sendtoroute",
+  "openchannel",
+  "settleinvoice",
+  "addholdinvoice",
+  "connectpeer",
+  "disconnectpeer",
+];
+
+export function isFundMovingRequestMethod(method: string) {
+  return FUND_MOVING_REQUEST_METHODS.includes(method);
+}

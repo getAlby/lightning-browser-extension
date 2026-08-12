@@ -1,3 +1,4 @@
+import { FUND_MOVING_REQUEST_METHODS } from "../connectors/connector.interface";
 import db from "../db";
 import state from "../state";
 
@@ -92,6 +93,26 @@ const migrations = {
 
     console.info("Migration migrateDecryptPermission complete.");
   },
+
+  migrateFundMovingRequestPermissions: async () => {
+    const permissions = await db.permissions.toArray();
+
+    for (const permission of permissions) {
+      // stored as webln/<connector>/<method>
+      const method = permission.method.split("/").pop() || "";
+
+      if (
+        permission.method.startsWith("webln/") &&
+        FUND_MOVING_REQUEST_METHODS.includes(method)
+      ) {
+        permission.id && (await db.permissions.delete(permission.id));
+      }
+    }
+
+    await db.saveToStorage();
+
+    console.info("Migration migrateFundMovingRequestPermissions complete.");
+  },
 };
 
 const migrate = async () => {
@@ -114,6 +135,12 @@ const migrate = async () => {
     console.info("Running migration for: migrateDecryptPermission");
     await migrations["migrateDecryptPermission"]();
     await setMigrated("migrateDecryptPermission");
+  }
+
+  if (shouldMigrate("migrateFundMovingRequestPermissions")) {
+    console.info("Running migration for: migrateFundMovingRequestPermissions");
+    await migrations["migrateFundMovingRequestPermissions"]();
+    await setMigrated("migrateFundMovingRequestPermissions");
   }
 };
 

@@ -199,6 +199,9 @@ export type NavigationState = {
     requestPermission: {
       method: string;
       description: string;
+      isFundMoving?: boolean;
+      amount?: number;
+      destination?: string;
     };
     // liquid
     pset?: string;

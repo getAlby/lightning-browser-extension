@@ -1,12 +1,14 @@
 import utils from "~/common/lib/utils";
 import type Connector from "~/extension/background-script/connectors/connector.interface";
 import db from "~/extension/background-script/db";
+import * as events from "~/extension/background-script/events";
 import type { MessageGenericRequest, OriginData } from "~/types";
 
 import request from "../request";
 
 // suppress console logs when running tests
 console.error = jest.fn();
+console.info = jest.fn();
 
 jest.mock("~/common/lib/utils", () => ({
   openPrompt: jest.fn(() => Promise.resolve({ data: {} })),
@@ -22,11 +24,13 @@ jest.mock("~/extension/background-script/state", () => ({
   getState: () => ({
     getConnector: jest.fn(() => Promise.resolve(new ConnectorClass())),
     currentAccountId: "8b7f1dc6-ab87-4c6c-bca5-19fa8632731e",
+    settings: { browserNotifications: false },
   }),
 }));
 
 const allowanceInDB = {
   enabled: true,
+  enabledFor: ["webln"],
   host: "getalby.com",
   id: 1,
   imageURL: "https://getalby.com/favicon.ico",
@@ -73,6 +77,45 @@ const fullConnector = {
   ],
 } as unknown as Connector;
 
+// the response of the node for a "sendtoroute" call
+const sendToRouteResponse = {
+  data: {
+    payment_preimage: "preimage",
+    payment_hash: "hash",
+    payment_route: { total_amt: "120", total_fees: "20" },
+  },
+};
+
+const sendToRouteConnector = {
+  // hacky fix because Jest doesn't return constructor name
+  constructor: {
+    name: "lnd",
+  },
+  requestMethod: jest.fn(() => Promise.resolve(sendToRouteResponse)),
+  supportedMethods: ["request.sendtoroute"],
+} as unknown as Connector;
+
+const sendToRouteMessage: MessageGenericRequest = {
+  action: "request",
+  origin: { host: allowanceInDB.host } as OriginData,
+  args: {
+    method: "sendtoroute",
+    params: {
+      payment_hash: "hash",
+      route: {
+        total_amt: "120",
+        total_fees: "20",
+        hops: [{ pub_key: "first-hop" }, { pub_key: "destination" }],
+      },
+    },
+  },
+};
+
+const sendToRoutePermissionInDB = {
+  ...permissionInDB,
+  method: "webln/lnd/sendtoroute",
+};
+
 // prepare DB with allowance
 db.allowances.bulkAdd([allowanceInDB]);
 
@@ -81,6 +124,10 @@ afterEach(async () => {
   jest.clearAllMocks();
   // ensure a clear permission table in DB
   await db.permissions.clear();
+  // restore the allowance, tests may have changed or debited it
+  await db.allowances.clear();
+  await db.allowances.add({ ...allowanceInDB });
+  await db.payments.clear();
   // set a default connector if overwritten in a previous test
   connector = fullConnector;
 });
@@ -360,6 +407,124 @@ describe("ln request", () => {
       ).toBeUndefined();
 
       expect(result).toStrictEqual(requestResponse);
+    });
+  });
+
+  describe("requires the host to be enabled for WebLN", () => {
+    test("throws if the allowance is disabled", async () => {
+      await db.allowances.update(allowanceInDB.id, { enabled: false });
+
+      const result = await request(message);
+
+      expect(connector.requestMethod).not.toHaveBeenCalled();
+      expect(result).toStrictEqual({
+        error: "WebLN is not enabled for this host",
+      });
+    });
+
+    test("throws if the allowance is only enabled for another provider", async () => {
+      await db.allowances.update(allowanceInDB.id, { enabledFor: ["nostr"] });
+
+      const result = await request(message);
+
+      expect(connector.requestMethod).not.toHaveBeenCalled();
+      expect(result).toStrictEqual({
+        error: "WebLN is not enabled for this host",
+      });
+    });
+  });
+
+  describe("on a request that moves funds", () => {
+    beforeEach(() => {
+      connector = sendToRouteConnector;
+    });
+
+    test("prompts the user even if a permission exists", async () => {
+      await db.permissions.bulkAdd([sendToRoutePermissionInDB]);
+
+      const result = await request(sendToRouteMessage);
+
+      expect(utils.openPrompt).toHaveBeenCalledWith({
+        args: {
+          requestPermission: {
+            method: "sendtoroute",
+            description: "lnd.sendtoroute",
+            isFundMoving: true,
+            amount: 120,
+            destination: "destination",
+          },
+        },
+        origin: sendToRouteMessage.origin,
+        action: "public/confirmRequestPermission",
+      });
+      expect(result).toStrictEqual(sendToRouteResponse);
+    });
+
+    test("does not save the permission if enabled 'true'", async () => {
+      (utils.openPrompt as jest.Mock).mockResolvedValueOnce({
+        data: { enabled: true, blocked: false },
+      });
+
+      await request(sendToRouteMessage);
+
+      expect(await db.permissions.toArray()).toHaveLength(0);
+    });
+
+    test("throws before calling requestMethod if the budget is not sufficient", async () => {
+      await db.allowances.update(allowanceInDB.id, { remainingBudget: 100 });
+
+      const result = await request(sendToRouteMessage);
+
+      expect(connector.requestMethod).not.toHaveBeenCalled();
+      expect(utils.openPrompt).not.toHaveBeenCalled();
+      expect(result).toStrictEqual({
+        error: "The budget of this website is not sufficient",
+      });
+    });
+
+    test("throws before calling requestMethod if the amount can not be read", async () => {
+      const messageWithoutAmount = {
+        ...sendToRouteMessage,
+        args: {
+          ...sendToRouteMessage.args,
+          params: { route: { hops: [] } },
+        },
+      };
+
+      const result = await request(messageWithoutAmount);
+
+      expect(connector.requestMethod).not.toHaveBeenCalled();
+      expect(utils.openPrompt).not.toHaveBeenCalled();
+      expect(result).toStrictEqual({
+        error: "Could not determine the amount of this request",
+      });
+    });
+
+    test("debits the budget and persists the payment", async () => {
+      events.subscribe();
+
+      const result = await request(sendToRouteMessage);
+      // the payment is published, give the subscribers time to run
+      await new Promise((resolve) => setTimeout(resolve, 150));
+
+      expect(result).toStrictEqual(sendToRouteResponse);
+
+      const allowance = await db.allowances.get(allowanceInDB.id);
+      // 120 sats sent, 20 of which are routing fees
+      expect(allowance?.remainingBudget).toBe(400);
+
+      const payments = await db.payments.toArray();
+      expect(payments).toHaveLength(1);
+      expect(payments[0]).toEqual(
+        expect.objectContaining({
+          host: allowanceInDB.host,
+          totalAmount: 100,
+          totalFees: 20,
+          preimage: "preimage",
+          paymentHash: "hash",
+          destination: "destination",
+        })
+      );
     });
   });
 });
