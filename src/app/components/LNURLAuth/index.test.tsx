@@ -97,7 +97,7 @@ describe("LNURLAuth", () => {
 
     await act(async () => {
       await user.click(
-        screen.getByLabelText("Log in to site.com automatically next time")
+        screen.getByLabelText("Remember my choice and don't ask again")
       );
       await user.click(screen.getByRole("button", { name: "Login" }));
     });

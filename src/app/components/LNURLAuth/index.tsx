@@ -136,7 +136,7 @@ function LNURLAuthComponent() {
                     htmlFor="remember_login"
                     className="cursor-pointer ml-2 block text-sm text-gray-900 font-medium dark:text-white"
                   >
-                    {t("remember", { domain: details.domain })}
+                    {t("remember")}
                   </label>
                 </div>
               )}

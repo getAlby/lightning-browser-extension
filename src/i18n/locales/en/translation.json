@@ -706,7 +706,7 @@
         "heading": "Do you want to log in to"
       },
       "submit": "Login",
-      "remember": "Log in to {{domain}} automatically next time",
+      "remember": "Remember my choice and don't ask again",
       "success": "Login successful on {{name}}",
       "errors": {
         "status": "Error: Auth status is not ok"
