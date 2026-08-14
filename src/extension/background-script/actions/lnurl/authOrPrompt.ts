@@ -24,6 +24,10 @@ async function authOrPrompt(
 
   PubSub.publish(`lnurl.auth.start`, { message, lnurlDetails });
 
+  // the LNURL-auth service the user would be logged in to. This can be a
+  // different host than the website that requested the login
+  const targetHost = new URL(lnurlDetails.url).host;
+
   // get the publisher to check if lnurlAuth for auto-login is enabled
   const allowance = await db.allowances
     .where("host")
@@ -54,14 +58,16 @@ async function authOrPrompt(
     }
   }
 
-  // check if there is a publisher and lnurlAuth is enabled,
-  // otherwise we we prompt the user
+  // check if there is a publisher, lnurlAuth is enabled and the LNURL-auth
+  // service belongs to the website that requested the login,
+  // otherwise we prompt the user
 
   if (
     isUnlocked &&
     allowance &&
     allowance.enabled &&
     allowance.lnurlAuth &&
+    targetHost === host &&
     (!account?.useMnemonicForLnurlAuth || account?.mnemonic)
   ) {
     return await authFunction({ lnurlDetails, origin: message.origin });

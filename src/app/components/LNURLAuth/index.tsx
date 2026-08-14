@@ -4,6 +4,7 @@ import Container from "@components/Container";
 import ContentMessage from "@components/ContentMessage";
 import PublisherCard from "@components/PublisherCard";
 import ResultCard from "@components/ResultCard";
+import Checkbox from "@components/form/Checkbox";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -27,6 +28,14 @@ function LNURLAuthComponent() {
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [rememberLogin, setRememberLogin] = useState(false);
+
+  // auto-login is only possible when the LNURL-auth service belongs to the
+  // website that requested the login, so only offer it in that case
+  const canRememberLogin =
+    !!navState.isPrompt &&
+    !!origin?.host &&
+    new URL(details.url).host === origin.host;
 
   async function confirm() {
     try {
@@ -36,18 +45,18 @@ function LNURLAuthComponent() {
         lnurlDetails: details,
       });
 
-      if (navState.isPrompt && origin?.host) {
-        const allowance = await api.getAllowance(origin.host);
-
-        if (allowance.lnurlAuth === false) {
-          await msg.request("updateAllowance", {
-            id: allowance.id,
-            lnurlAuth: true,
-          });
-        }
-      }
-
       if (response.success) {
+        if (rememberLogin && canRememberLogin && origin?.host) {
+          const allowance = await api.getAllowance(origin.host);
+
+          if (allowance.id) {
+            await msg.request("updateAllowance", {
+              id: allowance.id,
+              lnurlAuth: true,
+            });
+          }
+        }
+
         setSuccessMessage(
           t("success", { name: origin ? origin.name : details.domain })
         );
@@ -112,13 +121,34 @@ function LNURLAuthComponent() {
                 <p className="my-2 mx-5 text-red-500">{errorMessage}</p>
               )}
             </div>
-            <ConfirmOrCancel
-              label={t("submit")}
-              onConfirm={confirm}
-              onCancel={reject}
-              disabled={loading}
-              loading={loading}
-            />
+            <div>
+              {canRememberLogin && (
+                <div className="flex items-center mb-4">
+                  <Checkbox
+                    id="remember_login"
+                    name="remember_login"
+                    checked={rememberLogin}
+                    onChange={(event) => {
+                      setRememberLogin(event.target.checked);
+                    }}
+                  />
+                  <label
+                    htmlFor="remember_login"
+                    className="cursor-pointer ml-2 block text-sm text-gray-900 font-medium dark:text-white"
+                  >
+                    {t("remember", { domain: details.domain })}
+                  </label>
+                </div>
+              )}
+
+              <ConfirmOrCancel
+                label={t("submit")}
+                onConfirm={confirm}
+                onCancel={reject}
+                disabled={loading}
+                loading={loading}
+              />
+            </div>
           </Container>
         </>
       ) : (
