@@ -47,6 +47,11 @@ async function authOrPrompt(
         args: {
           ...message.args,
           lnurlDetails,
+          // the host whose allowance may be granted auto-login, set only when
+          // the service belongs to the requesting website. Derived from the
+          // sender, because the origin forwarded by the page is not a
+          // trustworthy basis for this decision
+          rememberLoginHost: targetHost === host ? host : undefined,
         },
       };
 

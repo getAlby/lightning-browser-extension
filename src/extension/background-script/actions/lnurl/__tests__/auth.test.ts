@@ -210,6 +210,54 @@ describe("auto-login", () => {
     expect(fetchedUrl).toBe("");
   });
 
+  test("offers to remember the login for the website's own service", async () => {
+    mockAllowance = { id: 1, host: "site.com", enabled: true } as DbAllowance;
+
+    await authOrPrompt(
+      message,
+      sender,
+      lnurlDetailsFor("https://site.com/lnurl-login")
+    );
+
+    expect(mockOpenPrompt).toHaveBeenCalledWith(
+      expect.objectContaining({
+        args: expect.objectContaining({ rememberLoginHost: "site.com" }),
+      })
+    );
+  });
+
+  test("does not offer to remember the login for a service on a different host", async () => {
+    mockAllowance = { id: 1, host: "site.com", enabled: true } as DbAllowance;
+
+    await authOrPrompt(
+      message,
+      sender,
+      lnurlDetailsFor("https://auth.site.com/lnurl-login")
+    );
+
+    expect(mockOpenPrompt).toHaveBeenCalledWith(
+      expect.objectContaining({
+        args: expect.objectContaining({ rememberLoginHost: undefined }),
+      })
+    );
+  });
+
+  test("takes the remembered host from the sender, not the forwarded origin", async () => {
+    mockAllowance = { id: 1, host: "site.com", enabled: true } as DbAllowance;
+
+    await authOrPrompt(
+      { ...message, origin: { host: "bank.com" } } as MessageWebLnLnurl,
+      sender,
+      lnurlDetailsFor("https://bank.com/lnurl-login")
+    );
+
+    expect(mockOpenPrompt).toHaveBeenCalledWith(
+      expect.objectContaining({
+        args: expect.objectContaining({ rememberLoginHost: undefined }),
+      })
+    );
+  });
+
   test("prompts if lnurlAuth is not enabled", async () => {
     mockAllowance = {
       id: 1,

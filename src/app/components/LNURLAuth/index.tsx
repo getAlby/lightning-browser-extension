@@ -30,12 +30,10 @@ function LNURLAuthComponent() {
   const [loading, setLoading] = useState(false);
   const [rememberLogin, setRememberLogin] = useState(false);
 
-  // auto-login is only possible when the LNURL-auth service belongs to the
-  // website that requested the login, so only offer it in that case
-  const canRememberLogin =
-    !!navState.isPrompt &&
-    !!origin?.host &&
-    new URL(details.url).host === origin.host;
+  // set by the background script only when the LNURL-auth service belongs to
+  // the website that requested the login
+  const rememberLoginHost = navState.args?.rememberLoginHost;
+  const canRememberLogin = !!navState.isPrompt && !!rememberLoginHost;
 
   async function confirm() {
     try {
@@ -46,8 +44,8 @@ function LNURLAuthComponent() {
       });
 
       if (response.success) {
-        if (rememberLogin && canRememberLogin && origin?.host) {
-          const allowance = await api.getAllowance(origin.host);
+        if (rememberLogin && rememberLoginHost) {
+          const allowance = await api.getAllowance(rememberLoginHost);
 
           if (allowance.id) {
             await msg.request("updateAllowance", {
