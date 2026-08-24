@@ -98,6 +98,9 @@ export interface PaymentNotificationData {
   details: {
     destination?: string | undefined;
     description?: string | undefined;
+    // the amount the user or the budget authorised, in sats. Used when the
+    // connector settles without reporting what it actually spent.
+    amount?: number | undefined;
   };
 }
 

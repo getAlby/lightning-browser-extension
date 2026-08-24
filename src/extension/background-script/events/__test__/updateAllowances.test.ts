@@ -108,4 +108,17 @@ describe("Update Allowances", () => {
     expect(result).toBe(true);
     expect((await db.allowances.get(1))?.remainingBudget).toBe(0);
   });
+
+  test("falls back to the authorised keysend amount when no route is reported", async () => {
+    await db.allowances.bulkAdd(mockAllowances);
+
+    await updateAllowance("ln.keysend.success", {
+      ...data,
+      response: { data: { preimage: "123", paymentHash: "123" } } as never,
+      details: { ...data.details, amount: 30 },
+    });
+
+    // the getalby.com fixture starts at 500 sats
+    expect((await db.allowances.get(1))?.remainingBudget).toBe(470);
+  });
 });

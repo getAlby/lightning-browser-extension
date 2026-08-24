@@ -5,7 +5,7 @@ import { Message, Sender } from "~/types";
 import {
   BudgetReservation,
   persistBudget,
-  refundBudget,
+  releaseBudget,
   reserveBudget,
 } from "../../budget";
 import keysend from "../ln/keysend";
@@ -41,21 +41,24 @@ async function keysendWithAllowance(
   message: Message,
   reservation: BudgetReservation
 ) {
+  let response;
   try {
-    const response = await keysend(message, { budgetReserved: true });
-    if (!response || "error" in response) {
-      await refundBudget(reservation);
-    }
-    await persistBudget();
-    return response;
+    response = await keysend(message, { budgetReserved: true });
   } catch (e) {
-    await refundBudget(reservation);
-    await persistBudget();
+    await releaseBudget(reservation);
     console.error(e);
     if (e instanceof Error) {
       return { error: e.message };
     }
+    return;
   }
+
+  if (!response || "error" in response) {
+    await releaseBudget(reservation);
+  } else {
+    await persistBudget();
+  }
+  return response;
 }
 
 async function keysendWithPrompt(message: Message) {

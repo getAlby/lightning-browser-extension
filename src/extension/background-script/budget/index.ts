@@ -81,7 +81,26 @@ export async function refundBudget({
 }
 
 // Persists the budget change. Kept separate from the transactions above so the
-// storage write never runs inside a Dexie transaction.
+// storage write never runs inside a Dexie transaction. Storage failures are
+// logged rather than raised: the caller is reporting on a payment, and the
+// outcome of that payment must not change because persisting the budget failed.
 export async function persistBudget(): Promise<void> {
-  await db.saveToStorage();
+  try {
+    await db.saveToStorage();
+  } catch (e) {
+    console.error("Failed to persist the allowance budget", e);
+  }
+}
+
+// Puts a reservation back and persists it. Used on the paths where the payment
+// did not happen, so it must not raise on top of the original failure.
+export async function releaseBudget(
+  reservation: BudgetReservation
+): Promise<void> {
+  try {
+    await refundBudget(reservation);
+  } catch (e) {
+    console.error("Failed to refund the allowance budget", e);
+  }
+  await persistBudget();
 }

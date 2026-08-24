@@ -142,4 +142,19 @@ describe("Persist payments", () => {
       },
     });
   });
+
+  test("still records a payment when the connector reports no route", async () => {
+    await db.payments.clear();
+
+    await persistSuccessfulPayment("ln.keysend.success", {
+      ...data,
+      response: { data: { preimage: "abc", paymentHash: "abc" } } as never,
+      details: { ...data.details, amount: 30 },
+    });
+
+    const payments = await db.payments.toArray();
+    expect(payments).toHaveLength(1);
+    expect(payments[0].totalAmount).toBe(30);
+    expect(payments[0].totalFees).toBe(0);
+  });
 });

@@ -1,6 +1,13 @@
+import { getPaymentRequestAmountSats } from "~/common/utils/paymentRequest";
 import type { PaymentNotificationData } from "~/types";
 
 import db from "../db";
+
+function usableAmount(value: number | null | undefined) {
+  return typeof value === "number" && Number.isFinite(value) && value >= 0
+    ? value
+    : null;
+}
 
 const updateAllowance = async (
   message: "ln.sendPayment.success" | "ln.keysend.success",
@@ -32,15 +39,22 @@ const updateAllowance = async (
     return;
   }
 
-  const totalAmt = paymentResponse.data.route?.total_amt;
-
   // Some connectors settle a payment without reporting a route (LNDHub keysend
-  // returns no payment_route). The amount that just left the wallet is then
-  // unknown, so there is no honest number to subtract. Stop the allowance from
-  // authorising anything else rather than leaving the budget as it was.
-  if (typeof totalAmt !== "number" || !Number.isFinite(totalAmt)) {
+  // returns no payment_route). Fall back to the amount that was authorised, and
+  // only when even that is unknown stop the allowance from authorising anything
+  // else - leaving the budget untouched would let the next payment reuse it.
+  const amountSpent =
+    usableAmount(paymentResponse.data.route?.total_amt) ??
+    usableAmount(data.details.amount) ??
+    usableAmount(
+      data.paymentRequestDetails
+        ? getPaymentRequestAmountSats(data.paymentRequestDetails)
+        : null
+    );
+
+  if (amountSpent === null) {
     console.error(
-      `Payment for ${host} settled without a usable route; clearing the remaining budget`
+      `Payment for ${host} settled without a usable amount; clearing the remaining budget`
     );
     await db.allowances.update(allowance.id, {
       remainingBudget: 0,
@@ -51,7 +65,7 @@ const updateAllowance = async (
   }
 
   const remainingBudget = allowance.remainingBudget || 0; // remainingBudget might be blank
-  const newRemaining = Math.max(remainingBudget - totalAmt, 0); // no negative values
+  const newRemaining = Math.max(remainingBudget - amountSpent, 0); // no negative values
 
   await db.allowances.update(allowance.id, {
     remainingBudget: newRemaining,

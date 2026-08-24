@@ -21,8 +21,11 @@ const persistSuccessfulPayment = async (
     .equalsIgnoreCase(host as string)
     .first();
 
+  // a connector can settle without reporting a route (LNDHub keysend); the
+  // payment still has to reach the history, with the amount that was authorised
   const route = paymentResponse.data.route;
-  const { total_amt, total_fees } = route;
+  const total_amt = route?.total_amt ?? data.details.amount ?? 0;
+  const total_fees = route?.total_fees ?? 0;
 
   await db.payments.add({
     accountId,
