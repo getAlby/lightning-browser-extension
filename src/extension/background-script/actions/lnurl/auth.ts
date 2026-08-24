@@ -1,5 +1,6 @@
 import * as secp256k1 from "@noble/secp256k1";
 import axios from "axios";
+import { assertAllowedLnurlUrl, lnurlGet } from "~/common/lib/lnurlValidation";
 import { Buffer } from "buffer";
 import Hex from "crypto-js/enc-hex";
 import Utf8 from "crypto-js/enc-utf8";
@@ -42,7 +43,7 @@ export async function authFunction({
     throw new Error("LNURL-AUTH FAIL: no account selected");
   }
 
-  const url = new URL(lnurlDetails.url);
+  const url = assertAllowedLnurlUrl(lnurlDetails.url);
   if (!url.host) {
     throw new Error("Invalid input");
   }
@@ -116,12 +117,7 @@ export async function authFunction({
   loginURL.searchParams.set("t", Date.now().toString());
 
   try {
-    const authResponse = await axios.get<AuthResponseObject>(
-      loginURL.toString(),
-      {
-        adapter: "fetch",
-      }
-    );
+    const authResponse = await lnurlGet<AuthResponseObject>(loginURL);
 
     // if the service returned with a HTTP 200 we still check if the response data is OK
     if (authResponse?.data.status?.toUpperCase() !== "OK") {

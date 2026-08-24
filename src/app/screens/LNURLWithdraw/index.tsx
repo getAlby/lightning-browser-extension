@@ -6,6 +6,7 @@ import PublisherCard from "@components/PublisherCard";
 import ResultCard from "@components/ResultCard";
 import DualCurrencyField from "@components/form/DualCurrencyField";
 import axios from "axios";
+import { lnurlGet } from "~/common/lib/lnurlValidation";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -61,12 +62,15 @@ function LNURLWithdraw() {
         memo: details.defaultDescription,
       });
 
-      const response = await axios.get(details.callback, {
-        params: {
-          k1: details.k1,
-          pr: invoice.paymentRequest,
-        },
-      });
+      const response = await lnurlGet<{ status: string; reason?: string }>(
+        details.callback,
+        {
+          params: {
+            k1: details.k1,
+            pr: invoice.paymentRequest,
+          },
+        }
+      );
 
       if (response.data.status.toUpperCase() === "OK") {
         setSuccessMessage(

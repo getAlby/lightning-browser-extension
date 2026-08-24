@@ -9,6 +9,7 @@ import {
 } from "~/types";
 
 import { bech32Decode } from "../utils/helpers";
+import { assertAllowedLnurlUrl, lnurlGet } from "./lnurlValidation";
 
 const fromInternetIdentifier = (address: string) => {
   // email regex: https://emailregex.com/
@@ -69,7 +70,7 @@ const lnurl = {
   },
 
   async getDetails(lnurlString: string): Promise<LNURLError | LNURLDetails> {
-    const url = normalizeLnurl(lnurlString);
+    const url = assertAllowedLnurlUrl(normalizeLnurl(lnurlString));
     const searchParamsTag = url.searchParams.get("tag");
     const searchParamsK1 = url.searchParams.get("k1");
     const searchParamsAction = url.searchParams.get("action");
@@ -86,12 +87,9 @@ const lnurl = {
       return lnurlAuthDetails;
     } else {
       try {
-        const { data }: { data: LNURLDetails | LNURLError } = await axios.get(
-          url.toString(),
-          {
-            adapter: "fetch",
-          }
-        );
+        const { data }: { data: LNURLDetails | LNURLError } = await lnurlGet<
+          LNURLDetails | LNURLError
+        >(url);
 
         const lnurlDetails = data;
 
@@ -104,15 +102,15 @@ const lnurl = {
 
         return lnurlDetails;
       } catch (e) {
-        let error = "";
-        if (axios.isAxiosError(e)) {
+        let error = "Failed to load LNURL details";
+        if (this.isLightningAddress(lnurlString)) {
           error =
-            (e.response?.data as { reason?: string })?.reason || e.message;
-
-          if (this.isLightningAddress(lnurlString)) {
-            error = `This is not a valid lightning address. Either the address is invalid or it is using a different and unsupported protocol: ${error}`;
-          }
-        } else if (e instanceof Error) {
+            "This is not a valid lightning address. Either the address is invalid or it is using a different and unsupported protocol.";
+        } else if (
+          !axios.isAxiosError(e) &&
+          e instanceof Error &&
+          e.message.startsWith("Invalid LNURL")
+        ) {
           error = e.message;
         }
 
