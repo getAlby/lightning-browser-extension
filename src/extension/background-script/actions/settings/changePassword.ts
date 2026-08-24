@@ -1,4 +1,4 @@
-import { decryptData, encryptData } from "~/common/lib/crypto";
+import { clearKeyCache, decryptData, encryptData } from "~/common/lib/crypto";
 import type { Message } from "~/types";
 
 import state from "../../state";
@@ -43,6 +43,9 @@ const changePassword = async (message: Message) => {
   }
   await state.getState().password(newPassword);
   state.setState({ accounts: tmpAccounts });
+  // drop keys derived from the previous password: changing a password is often
+  // exactly when the old one should stop being usable
+  clearKeyCache();
   // make sure we immediately persist the updated accounts
   await state.getState().saveToStorage();
 

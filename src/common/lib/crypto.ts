@@ -31,7 +31,15 @@ import { AES, enc } from "crypto-js";
 
 const KDF_ITERATIONS = 600_000; // OWASP 2023 floor for PBKDF2-HMAC-SHA256
 const MIN_ITERATIONS = 1;
-const MAX_ITERATIONS = 4_000_000; // guardrail: reject absurd counts from storage
+// Guardrail against a corrupted/poisoned envelope driving PBKDF2 into a long
+// synchronous stall. Sized to leave headroom above KDF_ITERATIONS while capping
+// the worst case near a second or two.
+//
+// NOTE: raising KDF_ITERATIONS above MAX_ITERATIONS is a BREAKING format change.
+// Builds with the lower bound classify such envelopes as not-v2 and fail to
+// decrypt them, which surfaces to the user as "invalid password". Raise this
+// constant (and ship it) before raising KDF_ITERATIONS past it.
+const MAX_ITERATIONS = 1_200_000;
 const SALT_BYTES = 16;
 const NONCE_BYTES = 12;
 const KEY_BYTES = 32;
