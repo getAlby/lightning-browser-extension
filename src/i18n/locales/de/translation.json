@@ -1374,7 +1374,7 @@
       },
       "signschnorr": {
         "title": "Schnorr signieren",
-        "description": "Nachricht mit deinem Schlüssel unterschreiben"
+        "description": ""
       },
       "signmessage": {
         "title": "Nachricht signieren",

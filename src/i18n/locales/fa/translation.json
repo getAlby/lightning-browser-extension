@@ -1215,7 +1215,7 @@
       },
       "signschnorr": {
         "title": "امضای schnorr",
-        "description": "با کلید خود پیام را امضا کنید"
+        "description": ""
       }
     }
   }

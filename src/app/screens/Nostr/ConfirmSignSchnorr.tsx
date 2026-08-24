@@ -10,6 +10,7 @@ import ConfirmOrCancel from "~/app/components/ConfirmOrCancel";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import toast from "~/app/components/Toast";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
+import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
 import { parseDelegation } from "~/common/utils/nostrSigning";
 import { type OriginData } from "~/types";
@@ -61,6 +62,18 @@ function ConfirmSignSchnorr() {
     }
   }
 
+  // signing here is never remembered, so blocking the site is the only way out
+  // of a page that keeps asking
+  async function block(e: React.MouseEvent<HTMLAnchorElement>) {
+    e.preventDefault();
+    await msg.request("addBlocklist", {
+      domain: origin.domain,
+      host: origin.host,
+    });
+    alert(tCommon("enable.block_added", { host: origin.host }));
+    msg.error(USER_REJECTED_ERROR);
+  }
+
   function close(e: React.MouseEvent<HTMLButtonElement>) {
     if (navState.isPrompt) {
       window.close();
@@ -106,7 +119,8 @@ function ConfirmSignSchnorr() {
                       {t("signschnorr.delegation.conditions")}
                     </dt>
                     <dd className="mb-4 text-gray-600 dark:text-neutral-400 break-all">
-                      {delegation.conditions}
+                      {delegation.conditions ||
+                        t("signschnorr.delegation.no_conditions")}
                     </dd>
                   </dl>
                   <Alert type="warn">
@@ -120,8 +134,12 @@ function ConfirmSignSchnorr() {
                       publisher: origin.host,
                       action: tPermissions("nostr.signschnorr.title"),
                     })}
-                    content={message}
                   />
+                  {/* scrollable rather than clamped: this screen is the only
+                      place the message is shown before it gets signed */}
+                  <p className="my-4 max-h-48 overflow-y-auto text-lg text-gray-600 dark:text-neutral-400 break-all whitespace-pre-wrap">
+                    {message}
+                  </p>
                   <Alert type="warn">{t("signschnorr.warning")}</Alert>
                 </>
               )}
@@ -134,6 +152,13 @@ function ConfirmSignSchnorr() {
                 cancelLabel={tCommon("actions.deny")}
                 destructive
               />
+              <a
+                className="mx-auto underline text-sm text-gray-400 overflow-hidden text-ellipsis whitespace-nowrap"
+                href="#"
+                onClick={block}
+              >
+                {tCommon("enable.block_and_ignore", { host: origin.host })}
+              </a>
             </div>
           </Container>
         </form>

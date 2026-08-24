@@ -906,7 +906,8 @@
           "action": "publish notes as you",
           "delegatee": "Delegate to",
           "conditions": "Conditions",
-          "warning": "This lets another Nostr account publish notes under your identity until these conditions no longer apply. It cannot be revoked from Alby."
+          "no_conditions": "None — this delegation is unlimited",
+          "warning": "This lets another Nostr account publish notes under your identity for as long as the conditions above hold, which may be indefinitely. It cannot be revoked from Alby."
         }
       },
       "kinds": {

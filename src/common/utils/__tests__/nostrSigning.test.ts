@@ -55,10 +55,16 @@ describe("parseDelegation", () => {
     ).toBe("kind=1&note=a:b");
   });
 
+  test("keeps an unconditional delegation, which is the widest one", () => {
+    expect(parseDelegation(`nostr:delegation:${PUBKEY}:`)).toEqual({
+      delegatee: PUBKEY,
+      conditions: "",
+    });
+  });
+
   test.each([
     ["a plain message", "nostr is great"],
     ["a missing conditions part", `nostr:delegation:${PUBKEY}`],
-    ["empty conditions", `nostr:delegation:${PUBKEY}:`],
     ["a delegatee that is not a pubkey", "nostr:delegation:someone:kind=1"],
   ])("returns undefined for %s", (_label, input) => {
     expect(parseDelegation(input)).toBeUndefined();

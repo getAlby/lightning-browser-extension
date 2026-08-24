@@ -31,6 +31,12 @@ export default class NostrProvider extends ProviderBase {
     return this.execute("signSchnorrOrPrompt", { message });
   }
 
+  async signSchnorr() {
+    throw new Error(
+      "nostr.signSchnorr was removed. Pass the message to nostr.hashAndSignSchnorr, or use nostr.signEvent to sign an event."
+    );
+  }
+
   //override method from base class, we don't want to throw error if not enabled
   async on(...args: Parameters<EventEmitter["on"]>) {
     await this.enable();

@@ -1274,7 +1274,7 @@
       },
       "signschnorr": {
         "title": "знак Шнорр",
-        "description": "Подпишите сообщение своим ключом"
+        "description": ""
       },
       "encrypt": {
         "title": "зашифровать",

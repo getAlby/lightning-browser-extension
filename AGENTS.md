@@ -100,14 +100,14 @@ Inpage providers live in `src/extension/providers/<api>/index.ts`. Each method c
 
 **`window.nostr`** — [providers/nostr/index.ts](src/extension/providers/nostr/index.ts) (NIP-07)
 
-| Method                                                                                 | Purpose                                                                                |
-| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `getPublicKey()`                                                                       | Return the user's Nostr pubkey (hex).                                                  |
-| `signEvent(event)`                                                                     | Sign a Nostr event; fills `pubkey`, `id`, and `sig`.                                   |
-| `signSchnorr(sigHash)` / `hashAndSignSchnorr(message)`                                 | Raw schnorr signature over a 32-byte hash, or over `sha256(message)`.                  |
-| `nip04.encrypt(peerHexPubkey, plaintext)` / `nip04.decrypt(peerHexPubkey, ciphertext)` | NIP-04 (legacy) DM encryption.                                                         |
-| `nip44.encrypt(peerHexPubkey, plaintext)` / `nip44.decrypt(peerHexPubkey, ciphertext)` | NIP-44 v2 encryption. `peer` must be a 32-byte **hex** pubkey, not bech32 (`npub...`). |
-| `on(event, handler)` / `off(...)`                                                      | Subscribe to provider events.                                                          |
+| Method                                                                                 | Purpose                                                                                                           |
+| -------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `getPublicKey()`                                                                       | Return the user's Nostr pubkey (hex).                                                                             |
+| `signEvent(event)`                                                                     | Sign a Nostr event; fills `pubkey`, `id`, and `sig`.                                                              |
+| `hashAndSignSchnorr(message)`                                                          | Schnorr signature over `sha256(message)`. Always prompts; serialized nostr events are rejected (use `signEvent`). |
+| `nip04.encrypt(peerHexPubkey, plaintext)` / `nip04.decrypt(peerHexPubkey, ciphertext)` | NIP-04 (legacy) DM encryption.                                                                                    |
+| `nip44.encrypt(peerHexPubkey, plaintext)` / `nip44.decrypt(peerHexPubkey, ciphertext)` | NIP-44 v2 encryption. `peer` must be a 32-byte **hex** pubkey, not bech32 (`npub...`).                            |
+| `on(event, handler)` / `off(...)`                                                      | Subscribe to provider events.                                                                                     |
 
 **`window.webbtc`** — [providers/webbtc/index.ts](src/extension/providers/webbtc/index.ts) (on-chain BTC, taproot account only)
 

@@ -41,8 +41,11 @@ export function isEventSerialization(message: string): boolean {
 
 /**
  * NIP-26 delegation token strings: `nostr:delegation:<pubkey>:<conditions>`.
- * Signing one lets the delegatee publish as the user until the conditions run
- * out, so the confirmation screen spells the two parts out.
+ * Signing one lets the delegatee publish as the user for as long as the
+ * conditions hold, so the confirmation screen spells the two parts out.
+ *
+ * Empty conditions are kept rather than treated as a non-match: that is an
+ * unconditional delegation, the widest one there is.
  */
 export function parseDelegation(message: string): NostrDelegation | undefined {
   const prefix = "nostr:delegation:";
@@ -53,8 +56,7 @@ export function parseDelegation(message: string): NostrDelegation | undefined {
   if (separator === -1) return undefined;
 
   const delegatee = rest.slice(0, separator);
-  const conditions = rest.slice(separator + 1);
-  if (!HEX_32_BYTES.test(delegatee) || !conditions) return undefined;
+  if (!HEX_32_BYTES.test(delegatee)) return undefined;
 
-  return { delegatee, conditions };
+  return { delegatee, conditions: rest.slice(separator + 1) };
 }

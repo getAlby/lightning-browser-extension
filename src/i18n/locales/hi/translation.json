@@ -1385,7 +1385,7 @@
       },
       "signschnorr": {
         "title": "Schnorr साइन करें",
-        "description": "अपनी की के साथ मैसेज साइन करें"
+        "description": ""
       }
     }
   }
