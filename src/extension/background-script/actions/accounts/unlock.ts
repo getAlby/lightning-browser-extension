@@ -1,4 +1,5 @@
 import { decryptData } from "~/common/lib/crypto";
+import { upgradeAccountEncryption } from "~/extension/background-script/actions/accounts/upgradeEncryption";
 import state from "~/extension/background-script/state";
 import i18n from "~/i18n/i18nConfig";
 import type { MessageAccountUnlock } from "~/types";
@@ -31,6 +32,14 @@ const unlock = async (message: MessageAccountUnlock) => {
 
   // if everything is fine we keep the password in memory
   await state.getState().password(password);
+
+  // Opportunistically upgrade any secrets still stored in the legacy format now
+  // that the password is available. Best-effort: never allowed to block unlock.
+  try {
+    await upgradeAccountEncryption(password);
+  } catch (e) {
+    console.error("Could not upgrade stored account encryption", e);
+  }
 
   // load the connector to make sure it is initialized for the future calls
   // with this we prevent potentially multiple action calls trying to initialize the connector in parallel
