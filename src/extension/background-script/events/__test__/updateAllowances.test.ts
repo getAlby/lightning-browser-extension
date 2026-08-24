@@ -43,6 +43,10 @@ const data: PaymentNotificationData = {
 };
 
 describe("Update Allowances", () => {
+  beforeEach(async () => {
+    await db.allowances.clear();
+  });
+
   afterEach(() => {
     jest.clearAllMocks();
   });
@@ -76,5 +80,32 @@ describe("Update Allowances", () => {
         usedBudget: 50,
       },
     });
+  });
+
+  test("leaves the budget alone when it was already taken before paying", async () => {
+    await db.allowances.bulkAdd(mockAllowances);
+
+    await updateAllowance("ln.sendPayment.success", {
+      ...data,
+      budgetReserved: true,
+    });
+
+    const allowance = await db.allowances.get(1);
+    expect(allowance?.remainingBudget).toBe(mockAllowances[0].remainingBudget);
+  });
+
+  // a connector can settle a payment without telling us what it cost (LNDHub
+  // keysend reports no route). The amount is then unknown, so the allowance
+  // must stop authorising instead of silently keeping its budget.
+  test("clears the remaining budget when the settled amount is unknown", async () => {
+    await db.allowances.bulkAdd(mockAllowances);
+
+    const result = await updateAllowance("ln.keysend.success", {
+      ...data,
+      response: { data: { preimage: "123", paymentHash: "123" } } as never,
+    });
+
+    expect(result).toBe(true);
+    expect((await db.allowances.get(1))?.remainingBudget).toBe(0);
   });
 });

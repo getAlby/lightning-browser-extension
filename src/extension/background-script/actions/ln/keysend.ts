@@ -4,7 +4,10 @@ import { Message } from "~/types";
 
 import state from "../../state";
 
-export default async function keysend(message: Message) {
+export default async function keysend(
+  message: Message,
+  options?: { budgetReserved?: boolean }
+) {
   PubSub.publish(`ln.keysend.start`, message);
   const { destination, amount, customRecords } = message.args;
 
@@ -40,6 +43,7 @@ export default async function keysend(message: Message) {
   }
   pubsub.publishPaymentNotification("keysend", message, {
     accountId,
+    budgetReserved: options?.budgetReserved,
     response,
     details: {
       destination: destination,

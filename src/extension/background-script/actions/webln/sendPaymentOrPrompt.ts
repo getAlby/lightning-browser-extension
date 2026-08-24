@@ -4,7 +4,12 @@ import { getHostFromSender } from "~/common/utils/helpers";
 import { getPaymentRequestAmountSats } from "~/common/utils/paymentRequest";
 import { Message, Sender } from "~/types";
 
-import db from "../../db";
+import {
+  BudgetReservation,
+  persistBudget,
+  refundBudget,
+  reserveBudget,
+} from "../../budget";
 import sendPayment from "../ln/sendPayment";
 
 const sendPaymentOrPrompt = async (message: Message, sender: Sender) => {
@@ -23,34 +28,30 @@ const sendPaymentOrPrompt = async (message: Message, sender: Sender) => {
 
   // amountless invoices carry no amount to check against the budget, so they
   // always require explicit confirmation
-  if (amountInSats !== null && (await checkAllowance(host, amountInSats))) {
-    return sendPaymentWithAllowance(message);
+  const reservation =
+    amountInSats === null ? null : await reserveBudget(host, amountInSats);
+
+  if (reservation) {
+    return sendPaymentWithAllowance(message, reservation);
   } else {
     return payWithPrompt(message);
   }
 };
 
-async function checkAllowance(host: string, amount: number) {
-  const allowance = await db.allowances
-    .where("host")
-    .equalsIgnoreCase(host)
-    .first();
-
-  const enabledFor = new Set(allowance?.enabledFor);
-
-  return (
-    allowance &&
-    allowance.enabled &&
-    enabledFor.has("webln") &&
-    allowance.remainingBudget > amount // check that the budget is higher than the amount. amount can be 0
-  );
-}
-
-async function sendPaymentWithAllowance(message: Message) {
+async function sendPaymentWithAllowance(
+  message: Message,
+  reservation: BudgetReservation
+) {
   try {
-    const response = await sendPayment(message);
+    const response = await sendPayment(message, { budgetReserved: true });
+    if (!response || "error" in response) {
+      await refundBudget(reservation);
+    }
+    await persistBudget();
     return response;
   } catch (e) {
+    await refundBudget(reservation);
+    await persistBudget();
     console.error(e);
     if (e instanceof Error) {
       return { error: e.message };
@@ -73,4 +74,4 @@ async function payWithPrompt(message: Message) {
   }
 }
 
-export { checkAllowance, payWithPrompt, sendPaymentOrPrompt };
+export { payWithPrompt, sendPaymentOrPrompt };

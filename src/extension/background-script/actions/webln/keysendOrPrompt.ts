@@ -1,10 +1,14 @@
 import utils from "~/common/lib/utils";
-// TODO: move checkAllowance to some helpers/models?
 import { getHostFromSender } from "~/common/utils/helpers";
 import { Message, Sender } from "~/types";
 
+import {
+  BudgetReservation,
+  persistBudget,
+  refundBudget,
+  reserveBudget,
+} from "../../budget";
 import keysend from "../ln/keysend";
-import { checkAllowance } from "./sendPaymentOrPrompt";
 
 const keysendOrPrompt = async (message: Message, sender: Sender) => {
   const host = getHostFromSender(sender);
@@ -20,18 +24,33 @@ const keysendOrPrompt = async (message: Message, sender: Sender) => {
       error: "Destination or amount missing.",
     };
   }
-  if (await checkAllowance(host, parseInt(amount as string))) {
-    return keysendWithAllowance(message);
+
+  const amountInSats = parseInt(amount as string);
+  const reservation = Number.isNaN(amountInSats)
+    ? null
+    : await reserveBudget(host, amountInSats);
+
+  if (reservation) {
+    return keysendWithAllowance(message, reservation);
   } else {
     return keysendWithPrompt(message);
   }
 };
 
-async function keysendWithAllowance(message: Message) {
+async function keysendWithAllowance(
+  message: Message,
+  reservation: BudgetReservation
+) {
   try {
-    const response = await keysend(message);
+    const response = await keysend(message, { budgetReserved: true });
+    if (!response || "error" in response) {
+      await refundBudget(reservation);
+    }
+    await persistBudget();
     return response;
   } catch (e) {
+    await refundBudget(reservation);
+    await persistBudget();
     console.error(e);
     if (e instanceof Error) {
       return { error: e.message };

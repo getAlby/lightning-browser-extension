@@ -5,7 +5,8 @@ import state from "~/extension/background-script/state";
 import { Message, MessageSendPayment } from "~/types";
 
 export default async function sendPayment(
-  message: MessageSendPayment | Message // 'keysend' & 'sendPaymentOrPrompt' still need the Message type
+  message: MessageSendPayment | Message, // 'keysend' & 'sendPaymentOrPrompt' still need the Message type
+  options?: { budgetReserved?: boolean }
 ) {
   PubSub.publish(`ln.sendPayment.start`, message);
 
@@ -51,6 +52,7 @@ export default async function sendPayment(
 
   pubsub.publishPaymentNotification("sendPayment", message, {
     accountId,
+    budgetReserved: options?.budgetReserved,
     paymentRequestDetails,
     response,
     details: {

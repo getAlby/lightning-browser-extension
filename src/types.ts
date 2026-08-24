@@ -89,6 +89,9 @@ export interface OriginData {
 
 export interface PaymentNotificationData {
   accountId: Account["id"];
+  // set when the budget was already debited before the payment was sent, so
+  // the settle-time subscriber must not debit it a second time
+  budgetReserved?: boolean;
   paymentRequestDetails?: PaymentRequestObject | undefined;
   response: SendPaymentResponse | { error: string };
   origin?: OriginData;

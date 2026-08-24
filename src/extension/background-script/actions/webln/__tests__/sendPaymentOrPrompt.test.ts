@@ -58,7 +58,10 @@ function message(millisatoshis?: number): Message {
 }
 
 describe("sendPaymentOrPrompt", () => {
-  beforeAll(async () => {
+  // paying against a budget now takes the amount out of it, so each test needs
+  // to start from the fixture budgets rather than whatever the last one left
+  beforeEach(async () => {
+    await db.allowances.clear();
     await db.allowances.bulkAdd(mockAllowances);
     await db.allowances.add({
       ...mockAllowances[0],
@@ -136,5 +139,40 @@ describe("sendPaymentOrPrompt", () => {
 
     expect(utils.openPrompt).toHaveBeenCalled();
     expect(sendPayment).not.toHaveBeenCalled();
+  });
+
+  test("takes the amount out of the budget before paying", async () => {
+    await sendPaymentOrPrompt(message(100_000), sender);
+
+    // the getalby.com fixture starts at 500 sats
+    expect((await db.allowances.get(1))?.remainingBudget).toBe(400);
+  });
+
+  test("puts the amount back when the payment fails", async () => {
+    (sendPayment as jest.Mock).mockResolvedValueOnce({ error: "no route" });
+
+    await sendPaymentOrPrompt(message(100_000), sender);
+
+    expect((await db.allowances.get(1))?.remainingBudget).toBe(500);
+  });
+
+  test("puts the amount back when the payment throws", async () => {
+    (sendPayment as jest.Mock).mockRejectedValueOnce(new Error("boom"));
+
+    await sendPaymentOrPrompt(message(100_000), sender);
+
+    expect((await db.allowances.get(1))?.remainingBudget).toBe(500);
+  });
+
+  test("concurrent payments cannot spend more than the budget", async () => {
+    // five 200 sat payments against a 500 sat budget: only the two the budget
+    // covers may reach the connector, the rest have to ask the user
+    await Promise.all(
+      [1, 2, 3, 4, 5].map(() => sendPaymentOrPrompt(message(200_000), sender))
+    );
+
+    expect(sendPayment).toHaveBeenCalledTimes(2);
+    expect(utils.openPrompt).toHaveBeenCalledTimes(3);
+    expect((await db.allowances.get(1))?.remainingBudget).toBe(100);
   });
 });
