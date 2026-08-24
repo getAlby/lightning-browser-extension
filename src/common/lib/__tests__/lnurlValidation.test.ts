@@ -18,10 +18,6 @@ describe("isDisallowedLnurlHost", () => {
     "169.254.169.254", // cloud metadata
     "100.64.0.1", // CGNAT
     "0.0.0.0",
-    "::1",
-    "fe80::1",
-    "fd00::1",
-    "::ffff:127.0.0.1",
     "224.0.0.1", // multicast
     "255.255.255.255", // broadcast
     "198.18.0.1", // benchmarking
@@ -57,16 +53,34 @@ describe("assertAllowedLnurlUrl", () => {
   it("allows http only for .onion", () => {
     expect(assertAllowedLnurlUrl("http://abc.onion/x").protocol).toBe("http:");
   });
-  it("rejects loopback and private targets", () => {
+
+  // These go through the WHATWG URL parser on purpose: it re-serialises IPv6
+  // literals (https://[::ffff:127.0.0.1]/ becomes [::ffff:7f00:1]), so asserting
+  // on the raw string form would not exercise what the validator actually sees.
+  const blockedUrls = [
+    "https://127.0.0.1/x",
+    "https://169.254.169.254/latest",
+    "https://[::1]/x",
+    "https://[::ffff:127.0.0.1]/x", // IPv4-mapped loopback
+    "https://[::ffff:169.254.169.254]/", // IPv4-mapped metadata
+    "https://[::ffff:10.0.0.1]/", // IPv4-mapped RFC1918
+    "https://[64:ff9b::127.0.0.1]/", // NAT64 to loopback
+    "https://[fe80::1]/", // link-local
+    "https://[fd00::1]/", // unique local
+    "https://[fec0::1]/", // site-local
+    "https://[::]/",
+  ];
+  it.each(blockedUrls)("rejects %s", (url) => {
+    expect(() => assertAllowedLnurlUrl(url)).toThrow(/not allowed/);
+  });
+
+  it("rejects http loopback on the scheme check", () => {
     expect(() => assertAllowedLnurlUrl("http://127.0.0.1:1234/x")).toThrow();
-    expect(() => assertAllowedLnurlUrl("https://127.0.0.1/x")).toThrow(
-      /not allowed/
-    );
-    expect(() =>
-      assertAllowedLnurlUrl("https://169.254.169.254/latest")
-    ).toThrow(/not allowed/);
-    expect(() => assertAllowedLnurlUrl("https://[::1]/x")).toThrow(
-      /not allowed/
+  });
+
+  it("still allows public IPv6", () => {
+    expect(assertAllowedLnurlUrl("https://[2606:4700::1111]/x").protocol).toBe(
+      "https:"
     );
   });
 });

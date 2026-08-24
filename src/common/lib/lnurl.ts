@@ -11,6 +11,9 @@ import {
 import { bech32Decode } from "../utils/helpers";
 import { assertAllowedLnurlUrl, lnurlGet } from "./lnurlValidation";
 
+/** An error returned by the LNURL service itself (LUD-06 `status: "ERROR"`). */
+class LNURLServiceError extends Error {}
+
 const fromInternetIdentifier = (address: string) => {
   // email regex: https://emailregex.com/
   // modified to allow _ in subdomains
@@ -94,7 +97,7 @@ const lnurl = {
         const lnurlDetails = data;
 
         if (isLNURLDetailsError(lnurlDetails)) {
-          throw new Error(lnurlDetails.reason);
+          throw new LNURLServiceError(lnurlDetails.reason);
         } else {
           lnurlDetails.domain = url.hostname;
           lnurlDetails.url = url.toString();
@@ -102,16 +105,23 @@ const lnurl = {
 
         return lnurlDetails;
       } catch (e) {
-        let error = "Failed to load LNURL details";
-        if (this.isLightningAddress(lnurlString)) {
-          error =
-            "This is not a valid lightning address. Either the address is invalid or it is using a different and unsupported protocol.";
+        // The service's own error text is safe to surface: the endpoint host has
+        // already been validated. Transport failures are reported generically so
+        // the response of an arbitrary endpoint is not relayed back to a caller.
+        let error: string;
+        if (e instanceof LNURLServiceError) {
+          error = e.message;
         } else if (
           !axios.isAxiosError(e) &&
           e instanceof Error &&
           e.message.startsWith("Invalid LNURL")
         ) {
           error = e.message;
+        } else if (this.isLightningAddress(lnurlString)) {
+          error =
+            "Could not reach this lightning address. It may be invalid, or its server may be unavailable.";
+        } else {
+          error = "Failed to load LNURL details";
         }
 
         throw new Error(error);

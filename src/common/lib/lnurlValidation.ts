@@ -39,27 +39,74 @@ function parseIpv4(hostname: string): number | null {
   );
 }
 
+/**
+ * Expand an IPv6 literal (any "::" form, optionally ending in a dotted quad)
+ * into its eight 16-bit groups. Returns null if it is not an IPv6 address.
+ */
+function expandIpv6(ip: string): number[] | null {
+  if (!ip.includes(":")) return null;
+
+  let text = ip;
+  // a trailing dotted quad (::ffff:127.0.0.1) becomes two hex groups
+  const dotted = text.match(/(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})$/);
+  if (dotted) {
+    const asInt = parseIpv4(dotted[1]);
+    if (asInt === null) return null;
+    text =
+      text.slice(0, dotted.index) +
+      ((asInt >>> 16) & 0xffff).toString(16) +
+      ":" +
+      (asInt & 0xffff).toString(16);
+  }
+
+  const halves = text.split("::");
+  if (halves.length > 2) return null;
+
+  const parse = (part: string) =>
+    part === "" ? [] : part.split(":").map((g) => parseInt(g, 16));
+
+  const head = parse(halves[0]);
+  const tail = halves.length === 2 ? parse(halves[1]) : [];
+  if ([...head, ...tail].some((g) => Number.isNaN(g) || g < 0 || g > 0xffff)) {
+    return null;
+  }
+
+  let groups: number[];
+  if (halves.length === 2) {
+    const fill = 8 - head.length - tail.length;
+    if (fill < 0) return null;
+    groups = [...head, ...new Array(fill).fill(0), ...tail];
+  } else {
+    groups = head;
+  }
+  return groups.length === 8 ? groups : null;
+}
+
 function isDisallowedIpv6(hostname: string): boolean {
-  const ip = hostname.toLowerCase();
-  if (!ip.includes(":")) return false;
-  if (ip === "::1" || ip === "::") return true; // loopback / unspecified
-  if (
-    ip.startsWith("fe80") ||
-    ip.startsWith("fe9") ||
-    ip.startsWith("fea") ||
-    ip.startsWith("feb")
-  )
-    return true; // link-local fe80::/10
-  if (ip.startsWith("fc") || ip.startsWith("fd")) return true; // unique local fc00::/7
-  // IPv4-mapped / -embedded (::ffff:127.0.0.1, ::ffff:a.b.c.d)
-  const embedded = ip.match(/(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})$/);
-  if (embedded) {
-    const asInt = parseIpv4(embedded[1]);
+  const groups = expandIpv6(hostname.toLowerCase());
+  if (!groups) return false;
+
+  const isZero = (upTo: number) => groups.slice(0, upTo).every((g) => g === 0);
+
+  // :: (unspecified) and ::1 (loopback)
+  if (isZero(7) && (groups[7] === 0 || groups[7] === 1)) return true;
+  // fe80::/10 link-local, fc00::/7 unique local, fec0::/10 site-local
+  if ((groups[0] & 0xffc0) === 0xfe80) return true;
+  if ((groups[0] & 0xfe00) === 0xfc00) return true;
+  if ((groups[0] & 0xffc0) === 0xfec0) return true;
+
+  // IPv4-mapped (::ffff:a.b.c.d), IPv4-compatible (::a.b.c.d) and
+  // NAT64 (64:ff9b::a.b.c.d) all carry an IPv4 address in the last two groups.
+  const isMapped = isZero(5) && groups[5] === 0xffff;
+  const isCompatible = isZero(6);
+  const isNat64 = groups[0] === 0x0064 && groups[1] === 0xff9b;
+  if (isMapped || isCompatible || isNat64) {
+    const embedded = ((groups[6] << 16) + groups[7]) >>> 0;
     if (
-      asInt !== null &&
-      PRIVATE_IPV4_RANGES.some(([lo, hi]) => asInt >= lo && asInt <= hi)
-    )
+      PRIVATE_IPV4_RANGES.some(([lo, hi]) => embedded >= lo && embedded <= hi)
+    ) {
       return true;
+    }
   }
   return false;
 }
