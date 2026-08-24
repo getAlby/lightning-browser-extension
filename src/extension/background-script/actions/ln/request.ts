@@ -15,6 +15,7 @@ const WEBLN_PREFIX = "webln/";
 // the request method that sends a payment and therefore has to be accounted
 // for in the allowance budget of the host
 const SEND_TO_ROUTE = "sendtoroute";
+const OPEN_CHANNEL = "openchannel";
 
 // LND returns int64 values as strings, LNC returns them as numbers. Both the
 // REST and the LNC API are called with the parameters the website provides, so
@@ -29,8 +30,13 @@ const readAmount = (
     if (typeof value !== "string" && typeof value !== "number") {
       continue;
     }
+    if (typeof value === "string" && !value.trim()) {
+      continue;
+    }
     const amount = Number(value);
-    if (Number.isFinite(amount) && amount >= 0) {
+    // an amount of zero is not an amount we can show or account for, it is
+    // treated like a missing value
+    if (Number.isFinite(amount) && amount > 0) {
       return Math.ceil(amount / divisor);
     }
   }
@@ -45,14 +51,37 @@ const getSendToRouteAmount = (params: Record<string, unknown>): number => {
   }
 
   const routeValues = route as Record<string, unknown>;
-  const amount =
-    readAmount(routeValues, ["total_amt", "totalAmt"]) ??
-    readAmount(routeValues, ["total_amt_msat", "totalAmtMsat"], 1000);
+  // the node takes the amount from the millisatoshi fields and ignores the
+  // deprecated satoshi fields when both are given, so the amount that can leave
+  // the wallet is the larger of the two readings, never the first one found
+  const amounts = [
+    readAmount(routeValues, ["total_amt", "totalAmt"]),
+    readAmount(routeValues, ["total_amt_msat", "totalAmtMsat"], 1000),
+  ].filter((amount): amount is number => amount !== undefined);
 
-  if (amount === undefined) {
+  if (!amounts.length) {
     throw new Error("Could not determine the amount of this request");
   }
-  return amount;
+  return Math.max(...amounts);
+};
+
+// the funds a channel is opened with. Not a lightning payment, so it is not
+// checked against or debited from the budget, but the confirmation has to state
+// the size of the channel it asks for
+const getOpenChannelAmount = (
+  params: Record<string, unknown>
+): number | undefined => {
+  const values = (params ?? {}) as Record<string, unknown>;
+  const amounts = [
+    readAmount(values, ["local_funding_amount", "localFundingAmount"]),
+    readAmount(
+      values,
+      ["local_funding_amount_msat", "localFundingAmountMsat"],
+      1000
+    ),
+  ].filter((amount): amount is number => amount !== undefined);
+
+  return amounts.length ? Math.max(...amounts) : undefined;
 };
 
 const getSendToRouteDestination = (
@@ -106,8 +135,14 @@ const publishSendToRoutePayment = (
     accountId,
     response: {
       data: {
-        preimage: data.payment_preimage ?? "",
-        paymentHash: data.payment_hash ?? "",
+        // both are base64 encoded bytes on the wire, the payment history
+        // stores them as hex, like the connectors do for `sendPayment`
+        preimage: data.payment_preimage
+          ? utils.base64ToHex(data.payment_preimage)
+          : "",
+        paymentHash: data.payment_hash
+          ? utils.base64ToHex(data.payment_hash)
+          : "",
         route: { total_amt: Math.max(totalAmount, 0), total_fees: totalFees },
       },
     },
@@ -176,9 +211,13 @@ const request = async (
       ? getSendToRouteDestination(args.params)
       : undefined;
 
-    if (amount !== undefined && !(allowance.remainingBudget > amount)) {
-      throw new Error("The budget of this website is not sufficient");
-    }
+    // the amount to put in front of the user. Requests that move funds are
+    // confirmed on every call, so the confirmation is what guards the amount,
+    // the budget is what the payment is debited from afterwards
+    const confirmedAmount =
+      methodInLowerCase === OPEN_CHANNEL
+        ? getOpenChannelAmount(args.params)
+        : amount;
 
     // the connector type of the account, not the name of the connector class:
     // the class name is mangled by the production build, so a permission keyed
@@ -229,7 +268,11 @@ const request = async (
           requestPermission: {
             method: methodInLowerCase,
             description: `${connectorName}.${methodInLowerCase}`,
-            ...(isFundMoving && { isFundMoving, amount, destination }),
+            ...(isFundMoving && {
+              isFundMoving,
+              amount: confirmedAmount,
+              destination,
+            }),
           },
         },
         origin,

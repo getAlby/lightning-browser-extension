@@ -11,6 +11,7 @@ console.error = jest.fn();
 console.info = jest.fn();
 
 jest.mock("~/common/lib/utils", () => ({
+  ...jest.requireActual("~/common/lib/utils").default,
   openPrompt: jest.fn(() => Promise.resolve({ data: {} })),
 }));
 
@@ -79,10 +80,11 @@ const fullConnector = {
 } as unknown as Connector;
 
 // the response of the node for a "sendtoroute" call
+// the node returns the preimage and the hash as base64 encoded bytes
 const sendToRouteResponse = {
   data: {
-    payment_preimage: "preimage",
-    payment_hash: "hash",
+    payment_preimage: "jxzysJs=",
+    payment_hash: "jxzysA==",
     payment_route: { total_amt: "120", total_fees: "20" },
   },
 };
@@ -471,25 +473,64 @@ describe("ln request", () => {
       expect(await db.permissions.toArray()).toHaveLength(0);
     });
 
-    test("throws before calling requestMethod if the budget is not sufficient", async () => {
-      await db.allowances.update(allowanceInDB.id, { remainingBudget: 100 });
-
-      const result = await request(sendToRouteMessage);
-
-      expect(connector.requestMethod).not.toHaveBeenCalled();
-      expect(utils.openPrompt).not.toHaveBeenCalled();
-      expect(result).toStrictEqual({
-        error: "The budget of this website is not sufficient",
-      });
-    });
-
-    test("throws before calling requestMethod if the amount can not be read", async () => {
-      const messageWithoutAmount = {
+    test("confirms the amount the node reads, not the deprecated one", async () => {
+      // the node takes the amount from the millisatoshi field and ignores
+      // total_amt when both are set
+      const messageWithMsatAmount = {
         ...sendToRouteMessage,
         args: {
           ...sendToRouteMessage.args,
-          params: { route: { hops: [] } },
+          params: {
+            route: { total_amt: "0", total_amt_msat: "500000", hops: [] },
+          },
         },
+      };
+
+      await request(messageWithMsatAmount);
+
+      expect(utils.openPrompt).toHaveBeenCalledWith(
+        expect.objectContaining({
+          args: {
+            requestPermission: expect.objectContaining({ amount: 500 }),
+          },
+        })
+      );
+    });
+
+    test("confirms the size of a channel it is asked to open", async () => {
+      connector = {
+        ...sendToRouteConnector,
+        supportedMethods: ["request.openchannel"],
+      } as unknown as Connector;
+
+      await request({
+        ...sendToRouteMessage,
+        args: {
+          method: "openchannel",
+          params: { local_funding_amount: "250000", node_pubkey: "abc" },
+        },
+      } as MessageGenericRequest);
+
+      expect(utils.openPrompt).toHaveBeenCalledWith(
+        expect.objectContaining({
+          args: {
+            requestPermission: expect.objectContaining({
+              isFundMoving: true,
+              amount: 250000,
+            }),
+          },
+        })
+      );
+    });
+
+    test.each([
+      ["no amount at all", { route: { hops: [] } }],
+      ["an amount of zero", { route: { total_amt: "0", hops: [] } }],
+      ["an empty amount", { route: { total_amt: "", hops: [] } }],
+    ])("throws before calling requestMethod with %s", async (_name, params) => {
+      const messageWithoutAmount = {
+        ...sendToRouteMessage,
+        args: { ...sendToRouteMessage.args, params },
       };
 
       const result = await request(messageWithoutAmount);
@@ -521,8 +562,8 @@ describe("ln request", () => {
           host: allowanceInDB.host,
           totalAmount: 100,
           totalFees: 20,
-          preimage: "preimage",
-          paymentHash: "hash",
+          preimage: "8f1cf2b09b",
+          paymentHash: "8f1cf2b0",
           destination: "destination",
         })
       );
