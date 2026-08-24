@@ -900,6 +900,15 @@
       "block_and_ignore": "Block and ignore {{host}}",
       "block_added": "Added {{host}} to the blocklist, please reload the website.",
       "recipient": "Recipient",
+      "signschnorr": {
+        "warning": "Alby cannot tell what this data is used for. Only continue if you trust this website.",
+        "delegation": {
+          "action": "publish notes as you",
+          "delegatee": "Delegate to",
+          "conditions": "Conditions",
+          "warning": "This lets another Nostr account publish notes under your identity until these conditions no longer apply. It cannot be revoked from Alby."
+        }
+      },
       "kinds": {
         "unknown": {
           "title": "kind {{kind}}",
@@ -1317,7 +1326,7 @@
       },
       "signschnorr": {
         "title": "sign schnorr",
-        "description": "Sign message with your key"
+        "description": "Sign arbitrary data with your key"
       }
     },
     "commando": {

@@ -42,7 +42,7 @@ const message: MessageSignSchnorr = {
   action: "signSchnorr",
   origin: { host: allowanceInDB.host } as OriginData,
   args: {
-    sigHash: "sighash12345",
+    message: "auth challenge 12345",
   },
 };
 
@@ -56,7 +56,7 @@ const sender: Sender = {
 
 const requestResponse = { data: "" };
 const fullNostr = {
-  signSchnorr: jest.fn(() => Promise.resolve(requestResponse.data)),
+  hashAndSignSchnorr: jest.fn(() => Promise.resolve(requestResponse.data)),
 } as unknown as Nostr;
 
 // prepare DB with allowance
@@ -91,62 +91,92 @@ describe("signSchnorr", () => {
     });
 
     test("if the message args are not correct", async () => {
-      const messageWithoutSigHash = {
+      const messageWithoutMessage = {
         ...message,
-        args: {
-          ...message.args,
-          sigHash: undefined,
-        },
+        args: {},
       } as unknown as MessageSignSchnorr;
 
-      const result = await signSchnorr(messageWithoutSigHash, sender);
+      const result = await signSchnorr(messageWithoutMessage, sender);
 
       expect(console.error).toHaveBeenCalledTimes(1);
       expect(result).toStrictEqual({
-        error: "sigHash is missing or not correct",
+        error: "message is missing or not correct",
       });
     });
-  });
 
-  describe("directly calls signSchnorr with method and params", () => {
-    test("if permission for signSchnorr exists and is enabled", async () => {
-      // prepare DB with matching permission
-      await db.permissions.bulkAdd([permissionInDB]);
+    test("if the message is a serialized nostr event", async () => {
+      const serializedEvent = JSON.stringify([
+        0,
+        "4f355bdcb7cc0af728ef3cceb9615d90684bb5b2ca5f859ab0f0b704075871aa",
+        1785942594,
+        0,
+        [],
+        '{"lud16":"attacker@example.com"}',
+      ]);
 
-      const result = await signSchnorr(message, sender);
+      const result = await signSchnorr(
+        { ...message, args: { message: serializedEvent } },
+        sender
+      );
 
-      expect(result).toStrictEqual(requestResponse);
-      expect(nostr.signSchnorr).toHaveBeenCalledWith(message.args.sigHash);
-
+      expect(result).toStrictEqual({
+        error:
+          "nostr events must be signed with signEvent, not hashAndSignSchnorr",
+      });
       expect(utils.openPrompt).not.toHaveBeenCalled();
-
-      expect(result).toStrictEqual(requestResponse);
+      expect(nostr.hashAndSignSchnorr).not.toHaveBeenCalled();
     });
   });
 
-  describe("prompts the user first and then calls signSchnorr", () => {
-    test("if the permission for signSchnorr does not exist", async () => {
-      // prepare DB with other permission
-      const otherPermission = {
-        ...permissionInDB,
-        method: "nostr/getPublicKey",
-      };
-      await db.permissions.bulkAdd([otherPermission]);
+  describe("always prompts", () => {
+    test("even if a permission for signSchnorr is stored and enabled", async () => {
+      await db.permissions.bulkAdd([permissionInDB]);
 
       await signSchnorr(message, sender);
 
       expect(utils.openPrompt).toHaveBeenCalledWith({
         args: {
-          sigHash: message.args.sigHash,
+          message: message.args.message,
         },
         origin: message.origin,
         action: "public/nostr/confirmSignSchnorr",
       });
     });
+
+    test("unless the permission is blocked", async () => {
+      await db.permissions.bulkAdd([{ ...permissionInDB, blocked: true }]);
+
+      const result = await signSchnorr(message, sender);
+
+      expect(result).toStrictEqual({ denied: true });
+      expect(utils.openPrompt).not.toHaveBeenCalled();
+      expect(nostr.hashAndSignSchnorr).not.toHaveBeenCalled();
+    });
   });
 
   describe("on the user's prompt response", () => {
-    test("saves the permission if permissionOption is dont_ask_current", async () => {
+    test("signs the message on confirm", async () => {
+      (utils.openPrompt as jest.Mock).mockResolvedValueOnce({
+        data: { blocked: false, confirm: true },
+      });
+
+      const result = await signSchnorr(message, sender);
+
+      expect(nostr.hashAndSignSchnorr).toHaveBeenCalledWith(
+        message.args.message
+      );
+      expect(result).toStrictEqual(requestResponse);
+    });
+
+    test("doesn't sign if the user cancels", async () => {
+      const result = await signSchnorr(message, sender);
+
+      expect(utils.openPrompt).toHaveBeenCalledTimes(1);
+      expect(nostr.hashAndSignSchnorr).not.toHaveBeenCalled();
+      expect(result).toHaveProperty("error");
+    });
+
+    test("never stores an approval, whatever the prompt replies", async () => {
       (utils.openPrompt as jest.Mock).mockResolvedValueOnce({
         data: {
           permissionOption: PermissionOption.DONT_ASK_CURRENT,
@@ -154,95 +184,13 @@ describe("signSchnorr", () => {
           confirm: true,
         },
       });
-      // prepare DB with a permission
-      await db.permissions.bulkAdd([
-        { ...permissionInDB, method: "nostr/getPublicKey" },
-      ]);
-
-      expect(await db.permissions.toArray()).toHaveLength(1);
-      expect(
-        await db.permissions.get({ method: "nostr/signSchnorr" })
-      ).toBeUndefined();
 
       const result = await signSchnorr(message, sender);
-
-      expect(utils.openPrompt).toHaveBeenCalledTimes(1);
-
-      expect(nostr.signSchnorr).toHaveBeenCalledWith(message.args.sigHash);
-
-      expect(await db.permissions.toArray()).toHaveLength(2);
-
-      const addedPermission = await db.permissions.get({
-        method: "nostr/signSchnorr",
-      });
-      expect(addedPermission).toEqual(
-        expect.objectContaining({
-          method: "nostr/signSchnorr",
-          enabled: true,
-          allowanceId: allowanceInDB.id,
-          host: allowanceInDB.host,
-          blocked: false,
-        })
-      );
 
       expect(result).toStrictEqual(requestResponse);
-    });
-
-    test("doesn't call signSchnorr if clicks cancel", async () => {
-      // prepare DB with a permission
-      await db.permissions.bulkAdd([
-        { ...permissionInDB, method: "nostr/getPublicKey" },
-      ]);
-
-      expect(await db.permissions.toArray()).toHaveLength(1);
       expect(
         await db.permissions.get({ method: "nostr/signSchnorr" })
       ).toBeUndefined();
-
-      const result = await signSchnorr(message, sender);
-
-      expect(utils.openPrompt).toHaveBeenCalledTimes(1);
-
-      expect(nostr.signSchnorr).not.toHaveBeenCalled();
-
-      expect(await db.permissions.toArray()).toHaveLength(1);
-      expect(
-        await db.permissions.get({ method: "nostr/signSchnorr" })
-      ).toBeUndefined();
-
-      expect(result).toHaveProperty("error");
-    });
-
-    test("does not save the permission if permissionOption is 'ASK_EVERYTIME'", async () => {
-      (utils.openPrompt as jest.Mock).mockResolvedValueOnce({
-        data: {
-          permissionOption: PermissionOption.ASK_EVERYTIME,
-          blocked: false,
-          confirm: true,
-        },
-      });
-      // prepare DB with a permission
-      await db.permissions.bulkAdd([
-        { ...permissionInDB, method: "nostr/getPublicKey" },
-      ]);
-
-      expect(await db.permissions.toArray()).toHaveLength(1);
-      expect(
-        await db.permissions.get({ method: "nostr/signSchnorr" })
-      ).toBeUndefined();
-
-      const result = await signSchnorr(message, sender);
-
-      expect(utils.openPrompt).toHaveBeenCalledTimes(1);
-
-      expect(nostr.signSchnorr).toHaveBeenCalledWith(message.args.sigHash);
-
-      expect(await db.permissions.toArray()).toHaveLength(1);
-      expect(
-        await db.permissions.get({ method: "nostr/signSchnorr" })
-      ).toBeUndefined();
-
-      expect(result).toStrictEqual(requestResponse);
     });
   });
 });

@@ -1,17 +1,10 @@
 import utils from "~/common/lib/utils";
 import { getHostFromSender } from "~/common/utils/helpers";
-import {
-  addPermissionFor,
-  hasPermissionFor,
-  isPermissionBlocked,
-} from "~/extension/background-script/permissions";
+import { isEventSerialization } from "~/common/utils/nostrSigning";
+import { isPermissionBlocked } from "~/extension/background-script/permissions";
 import { MessageSignSchnorr, PermissionMethodNostr, Sender } from "~/types";
 
-import {
-  DONT_ASK_ANY,
-  DONT_ASK_CURRENT,
-  USER_REJECTED_ERROR,
-} from "~/common/constants";
+import { USER_REJECTED_ERROR } from "~/common/constants";
 import state from "../../state";
 
 const signSchnorrOrPrompt = async (
@@ -22,79 +15,49 @@ const signSchnorrOrPrompt = async (
   if (!host) return;
 
   const nostr = await state.getState().getNostr();
-  const sigHash = message.args.sigHash;
   const plaintext = message.args.message;
 
-  const isMessageMode = message.args.message !== undefined;
-
   try {
-    if (isMessageMode) {
-      if (typeof plaintext !== "string") {
-        throw new Error("message is missing or not correct");
-      }
-    } else if (!sigHash || typeof sigHash !== "string") {
-      throw new Error("sigHash is missing or not correct");
+    if (typeof plaintext !== "string" || !plaintext) {
+      throw new Error("message is missing or not correct");
+    }
+
+    // The digest of a NIP-01 serialization is the event id, so signing one
+    // produces a valid event signature. Those requests go through signEvent,
+    // which shows the kind and asks for the matching permission.
+    if (isEventSerialization(plaintext)) {
+      throw new Error(
+        "nostr events must be signed with signEvent, not hashAndSignSchnorr"
+      );
     }
 
     const permissionMethod = PermissionMethodNostr["NOSTR_SIGNSCHNORR"];
 
-    const hasPermission = await hasPermissionFor(permissionMethod, host);
-
-    const isBlocked = await isPermissionBlocked(permissionMethod, host);
-
-    if (isBlocked) {
+    if (await isPermissionBlocked(permissionMethod, host)) {
       return { denied: true };
     }
 
-    if (hasPermission) {
-      return signSchnorr();
-    } else {
-      const promptResponse = await utils.openPrompt<{
-        confirm: boolean;
-        blocked: boolean;
-        permissionOption: string;
-      }>({
-        ...message,
-        action: "public/nostr/confirmSignSchnorr",
-      });
+    // Always ask. What is signed here is opaque to the extension and a
+    // signature is reusable, so there is no grant that safely covers the next
+    // request.
+    const promptResponse = await utils.openPrompt<{
+      confirm: boolean;
+      blocked: boolean;
+    }>({
+      ...message,
+      action: "public/nostr/confirmSignSchnorr",
+    });
 
-      if (promptResponse.data.permissionOption == DONT_ASK_CURRENT) {
-        await addPermissionFor(
-          permissionMethod,
-          host,
-          promptResponse.data.blocked
-        );
-      }
-
-      if (promptResponse.data.permissionOption == DONT_ASK_ANY) {
-        Object.values(PermissionMethodNostr).forEach(async (permission) => {
-          await addPermissionFor(permission, host, promptResponse.data.blocked);
-        });
-      }
-
-      if (promptResponse.data.confirm) {
-        return signSchnorr();
-      } else {
-        return { error: USER_REJECTED_ERROR };
-      }
+    if (!promptResponse.data.confirm) {
+      return { error: USER_REJECTED_ERROR };
     }
+
+    return { data: await nostr.hashAndSignSchnorr(plaintext) };
   } catch (e) {
     console.error("signSchnorr cancelled", e);
     if (e instanceof Error) {
       return { error: e.message };
     }
-  }
-
-  async function signSchnorr() {
-    let signedSchnorr: string;
-
-    if (isMessageMode) {
-      signedSchnorr = await nostr.hashAndSignSchnorr(plaintext as string);
-    } else {
-      signedSchnorr = await nostr.signSchnorr(sigHash as string);
-    }
-
-    return { data: signedSchnorr };
   }
 };
 

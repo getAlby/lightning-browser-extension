@@ -1,11 +1,18 @@
 import db from "~/extension/background-script/db";
 import state from "~/extension/background-script/state";
+import { PermissionMethodNostr } from "~/types";
 
 export async function addPermissionFor(
   method: string,
   host: string,
   blocked: boolean
 ) {
+  // What hashAndSignSchnorr signs is opaque to the extension, so a stored
+  // approval would cover requests the user never saw. Only a block is kept.
+  if (method === PermissionMethodNostr.NOSTR_SIGNSCHNORR && !blocked) {
+    return false;
+  }
+
   const accountId = state.getState().currentAccountId;
   const allowance = await db.allowances.get({
     host,

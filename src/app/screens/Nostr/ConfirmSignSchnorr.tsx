@@ -5,14 +5,14 @@ import SuccessMessage from "@components/SuccessMessage";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import Alert from "~/app/components/Alert";
 import ConfirmOrCancel from "~/app/components/ConfirmOrCancel";
-import PermissionModal from "~/app/components/Permissions/PermissionModal";
-import PermissionSelector from "~/app/components/Permissions/PermissionSelector";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import toast from "~/app/components/Toast";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
 import msg from "~/common/lib/msg";
-import { PermissionOption, type OriginData } from "~/types";
+import { parseDelegation } from "~/common/utils/nostrSigning";
+import { type OriginData } from "~/types";
 
 function ConfirmSignSchnorr() {
   const navState = useNavigationState();
@@ -23,16 +23,11 @@ function ConfirmSignSchnorr() {
   const { t: tPermissions } = useTranslation("permissions");
   const navigate = useNavigate();
 
-  const sigHash = navState.args?.sigHash as string | undefined;
-  const plaintext = navState.args?.message as string | undefined;
+  const message = (navState.args?.message as string | undefined) || "";
+  const delegation = parseDelegation(message);
   const origin = navState.origin as OriginData;
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
-
-  const [modalOpen, setModalOpen] = useState(false);
-  const [permissionOption, setPermissionOption] = useState<PermissionOption>(
-    PermissionOption.ASK_EVERYTIME
-  );
 
   // TODO: refactor: the success message and loading will not be displayed because after the reply the prompt is closed.
   async function confirm() {
@@ -41,7 +36,6 @@ function ConfirmSignSchnorr() {
       msg.reply({
         blocked: false,
         confirm: true,
-        permissionOption: permissionOption,
       });
       setSuccessMessage(tCommon("success"));
     } catch (e) {
@@ -58,7 +52,6 @@ function ConfirmSignSchnorr() {
       msg.reply({
         blocked: true,
         confirm: false,
-        permissionOption: permissionOption,
       });
     } catch (e) {
       console.error(e);
@@ -94,40 +87,52 @@ function ConfirmSignSchnorr() {
                 image={origin.icon}
                 url={origin.host}
               />
-              <ContentMessage
-                heading={t("allow", {
-                  publisher: origin.host,
-                  action: tPermissions("nostr.signschnorr.title"),
-                })}
-                content={plaintext || sigHash || ""}
-              />
+              {delegation ? (
+                <>
+                  <ContentMessage
+                    heading={t("allow", {
+                      publisher: origin.host,
+                      action: t("signschnorr.delegation.action"),
+                    })}
+                  />
+                  <dl>
+                    <dt className="text-sm text-gray-800 dark:text-neutral-200">
+                      {t("signschnorr.delegation.delegatee")}
+                    </dt>
+                    <dd className="mb-4 text-gray-600 dark:text-neutral-400 break-all">
+                      {delegation.delegatee}
+                    </dd>
+                    <dt className="text-sm text-gray-800 dark:text-neutral-200">
+                      {t("signschnorr.delegation.conditions")}
+                    </dt>
+                    <dd className="mb-4 text-gray-600 dark:text-neutral-400 break-all">
+                      {delegation.conditions}
+                    </dd>
+                  </dl>
+                  <Alert type="warn">
+                    {t("signschnorr.delegation.warning")}
+                  </Alert>
+                </>
+              ) : (
+                <>
+                  <ContentMessage
+                    heading={t("allow", {
+                      publisher: origin.host,
+                      action: tPermissions("nostr.signschnorr.title"),
+                    })}
+                    content={message}
+                  />
+                  <Alert type="warn">{t("signschnorr.warning")}</Alert>
+                </>
+              )}
             </div>
             <div className="flex flex-col gap-4">
-              <PermissionModal
-                isOpen={modalOpen}
-                onClose={() => {
-                  setModalOpen(false);
-                }}
-                permissionCallback={(permission) => {
-                  setPermissionOption(permission);
-                  setModalOpen(false);
-                }}
-                permission={tPermissions("nostr.signschnorr.title")}
-              />
               <ConfirmOrCancel
                 disabled={loading}
                 loading={loading}
                 onCancel={reject}
                 cancelLabel={tCommon("actions.deny")}
                 destructive
-              />
-
-              <PermissionSelector
-                i18nKey={permissionOption}
-                values={{
-                  permission: tPermissions("nostr.signschnorr.title"),
-                }}
-                onChange={() => setModalOpen(true)}
               />
             </div>
           </Container>

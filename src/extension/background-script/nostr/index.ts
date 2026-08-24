@@ -44,15 +44,6 @@ class Nostr {
     return event;
   }
 
-  async signSchnorr(sigHash: string): Promise<string> {
-    const signature = await schnorr.sign(
-      Buffer.from(secp256k1.etc.hexToBytes(sigHash)),
-      secp256k1.etc.hexToBytes(this.privateKey)
-    );
-    const signedHex = secp256k1.etc.bytesToHex(signature);
-    return signedHex;
-  }
-
   async hashAndSignSchnorr(message: string): Promise<string> {
     const encoder = new TextEncoder();
     const data = encoder.encode(message);

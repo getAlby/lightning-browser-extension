@@ -182,7 +182,6 @@ export type NavigationState = {
     config?: unknown;
     message?: string;
     event?: Event;
-    sigHash?: string;
 
     // nostr
     encrypt: {
@@ -561,8 +560,7 @@ export interface MessageSignEvent extends MessageDefault {
 
 export interface MessageSignSchnorr extends MessageDefault {
   args: {
-    sigHash?: string;
-    message?: string;
+    message: string;
   };
   action: "signSchnorr";
 }
