@@ -57,13 +57,18 @@ export const TRUST_FULLY_PRESET_METHODS: PermissionMethodNostr[] =
   );
 
 /**
- * Permission methods earlier versions persisted from the "reasonable" preset
- * that it no longer grants. Revoked once on upgrade so existing connections do
- * not keep a broader grant than the preset now describes.
+ * Permission methods no preset grants any more, revoked once on upgrade.
+ *
+ * The revoke is unconditional: a permission row records only its method, not
+ * which preset or prompt created it, so a grant the user made deliberately
+ * through "don't ask again" is removed along with the preset's. It is limited
+ * to methods no preset grants today, so nobody ends up narrower than the
+ * preset they picked. `nostr/encrypt` is deliberately absent - "I fully trust
+ * it" still grants it, and revoking it would prompt those users for a
+ * permission that preset still covers.
  */
 export const WITHDRAWN_PRESET_PERMISSIONS: string[] = [
   PermissionMethodNostr.NOSTR_DECRYPT,
-  PermissionMethodNostr.NOSTR_ENCRYPT,
   ...ALWAYS_CONFIRMED_EVENT_KINDS.map(
     (kind) => `${PermissionMethodNostr.NOSTR_SIGNMESSAGE}/${kind}`
   ),

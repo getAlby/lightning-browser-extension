@@ -564,7 +564,8 @@
           "title": "I fully trust it",
           "description": "Auto-approve everything except payments",
           "grants": {
-            "sign_anything": "Signs anything, including your profile, contacts and logins"
+            "sign_anything": "Signs anything, including your profile, contacts and logins",
+            "send_encrypted": "Sends encrypted messages as you"
           }
         },
         "reasonable": {

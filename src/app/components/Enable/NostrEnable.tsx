@@ -88,7 +88,10 @@ function NostrEnableComponent(props: Props) {
             <PermissionPreset
               title={t("presets.trust_fully.title")}
               description={t("presets.trust_fully.description")}
-              grants={[t("presets.trust_fully.grants.sign_anything")]}
+              grants={[
+                t("presets.trust_fully.grants.sign_anything"),
+                t("presets.trust_fully.grants.send_encrypted"),
+              ]}
               asks={[t("presets.always_asks.read_messages")]}
               icon={<PopiconsHeartLine className="w-6 h-6" />}
               onClick={() =>

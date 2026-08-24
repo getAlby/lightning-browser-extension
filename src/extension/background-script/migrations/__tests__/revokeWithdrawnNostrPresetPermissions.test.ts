@@ -60,6 +60,19 @@ describe("revokeWithdrawnNostrPresetPermissions", () => {
     expect(methods).not.toContain(PermissionMethodNostr.NOSTR_DECRYPT);
   });
 
+  test("keeps a permission that a preset still grants", async () => {
+    // "I fully trust it" still grants encryption, so revoking it would prompt
+    // those users for something their chosen preset covers
+    await db.permissions.bulkAdd([
+      permission(PermissionMethodNostr.NOSTR_ENCRYPT),
+    ]);
+
+    await migrate();
+
+    const methods = (await db.permissions.toArray()).map((p) => p.method);
+    expect(methods).toContain(PermissionMethodNostr.NOSTR_ENCRYPT);
+  });
+
   test("leaves blocked entries alone - a block is a denial, not a grant", async () => {
     await db.permissions.bulkAdd([
       permission(PermissionMethodNostr.NOSTR_DECRYPT, true),

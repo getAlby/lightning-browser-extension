@@ -95,9 +95,10 @@ const migrations = {
   },
 
   revokeWithdrawnNostrPresetPermissions: async () => {
-    // Earlier versions granted these from the "reasonable" preset. The preset no
-    // longer covers them, so existing connections are brought in line with what
-    // the preset now describes; the site is asked about them again.
+    // No preset grants these any more, so existing connections are brought in
+    // line with what the presets now describe and the site is asked again.
+    // A permission row records only its method, so this cannot tell a preset's
+    // grant from one the user made through "don't ask again": both are removed.
     // Blocked entries are left alone - those are denials, not grants.
     const permissions = await db.permissions
       .filter(
