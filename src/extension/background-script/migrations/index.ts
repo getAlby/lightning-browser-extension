@@ -1,4 +1,3 @@
-import { FUND_MOVING_REQUEST_METHODS } from "../connectors/connector.interface";
 import db from "../db";
 import state from "../state";
 
@@ -94,24 +93,26 @@ const migrations = {
     console.info("Migration migrateDecryptPermission complete.");
   },
 
-  migrateFundMovingRequestPermissions: async () => {
+  migrateRequestMethodPermissions: async () => {
     const permissions = await db.permissions.toArray();
 
     for (const permission of permissions) {
-      // stored as webln/<connector>/<method>
-      const method = permission.method.split("/").pop() || "";
-
-      if (
-        permission.method.startsWith("webln/") &&
-        FUND_MOVING_REQUEST_METHODS.includes(method)
-      ) {
-        permission.id && (await db.permissions.delete(permission.id));
+      // request method permissions are stored as webln/<connector>/<method>,
+      // every other webln permission has no connector segment
+      const segments = permission.method.split("/");
+      if (segments[0] !== "webln" || segments.length !== 3) {
+        continue;
       }
+
+      // methods that can move funds are no longer remembered at all, and the
+      // remaining rows are keyed on the connector class name, which the
+      // production build mangles, so they can never match again
+      permission.id && (await db.permissions.delete(permission.id));
     }
 
     await db.saveToStorage();
 
-    console.info("Migration migrateFundMovingRequestPermissions complete.");
+    console.info("Migration migrateRequestMethodPermissions complete.");
   },
 };
 
@@ -137,10 +138,10 @@ const migrate = async () => {
     await setMigrated("migrateDecryptPermission");
   }
 
-  if (shouldMigrate("migrateFundMovingRequestPermissions")) {
-    console.info("Running migration for: migrateFundMovingRequestPermissions");
-    await migrations["migrateFundMovingRequestPermissions"]();
-    await setMigrated("migrateFundMovingRequestPermissions");
+  if (shouldMigrate("migrateRequestMethodPermissions")) {
+    console.info("Running migration for: migrateRequestMethodPermissions");
+    await migrations["migrateRequestMethodPermissions"]();
+    await setMigrated("migrateRequestMethodPermissions");
   }
 };
 

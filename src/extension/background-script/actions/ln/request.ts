@@ -180,7 +180,15 @@ const request = async (
       throw new Error("The budget of this website is not sufficient");
     }
 
-    const connectorName = connector.constructor.name.toLowerCase();
+    // the connector type of the account, not the name of the connector class:
+    // the class name is mangled by the production build, so a permission keyed
+    // on it depends on the output of the minifier and the description does not
+    // resolve to a translation
+    const connectorName = state.getState().getAccount()?.connector;
+    if (!connectorName) {
+      throw new Error("Could not find a selected account");
+    }
+
     // prefix method with webln to prevent potential naming conflicts (e.g. with nostr calls that also use the permissions)
     const weblnMethod = `${WEBLN_PREFIX}${connectorName}/${methodInLowerCase}`;
 
@@ -189,7 +197,9 @@ const request = async (
     const hasPermission =
       !isFundMoving && (await hasPermissionFor(weblnMethod, origin.host));
 
-    const requestMethod = connector.requestMethod;
+    // bound to the connector: the implementations call other methods on
+    // themselves, a detached reference loses the receiver
+    const requestMethod = connector.requestMethod.bind(connector);
     const callRequestMethod = async () => {
       const response = await requestMethod(methodInLowerCase, args.params);
 

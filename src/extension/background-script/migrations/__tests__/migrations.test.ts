@@ -28,7 +28,10 @@ const permissionsInDB: DbPermission[] = [
   { ...permission, id: 2, method: "webln/lnc/openchannel" },
   { ...permission, id: 3, method: "webln/lnd/settleinvoice" },
   { ...permission, id: 4, method: "webln/lnd/listchannels" },
-  { ...permission, id: 5, method: "nostr/getpublickey" },
+  // written by a build that mangled the name of the connector class
+  { ...permission, id: 5, method: "webln/e/listchannels" },
+  { ...permission, id: 6, method: "webln/getbalance" },
+  { ...permission, id: 7, method: "nostr/getpublickey" },
 ];
 
 beforeEach(async () => {
@@ -36,14 +39,14 @@ beforeEach(async () => {
   await db.permissions.bulkAdd(permissionsInDB);
 });
 
-describe("migrateFundMovingRequestPermissions", () => {
-  test("removes the stored permissions of request methods that move funds", async () => {
+describe("migrateRequestMethodPermissions", () => {
+  test("removes the stored permissions of request methods", async () => {
     await migrate();
 
     const methods = (await db.permissions.toArray()).map(
       (permission) => permission.method
     );
 
-    expect(methods).toEqual(["webln/lnd/listchannels", "nostr/getpublickey"]);
+    expect(methods).toEqual(["webln/getbalance", "nostr/getpublickey"]);
   });
 });

@@ -23,6 +23,7 @@ const ConnectorClass = jest.fn().mockImplementation(() => {
 jest.mock("~/extension/background-script/state", () => ({
   getState: () => ({
     getConnector: jest.fn(() => Promise.resolve(new ConnectorClass())),
+    getAccount: jest.fn(() => ({ connector: "lnd" })),
     currentAccountId: "8b7f1dc6-ab87-4c6c-bca5-19fa8632731e",
     settings: { browserNotifications: false },
   }),
@@ -526,5 +527,23 @@ describe("ln request", () => {
         })
       );
     });
+  });
+
+  test("calls requestMethod on the connector", async () => {
+    // the connectors implement requestMethod as a class method that calls other
+    // methods on themselves, so it has to keep its receiver
+    class TestConnector {
+      supportedMethods = ["request.listchannels"];
+      private channels = { channels: [] };
+
+      requestMethod() {
+        return Promise.resolve({ data: this.channels });
+      }
+    }
+    connector = new TestConnector() as unknown as Connector;
+
+    const result = await request(message);
+
+    expect(result).toStrictEqual({ data: { channels: [] } });
   });
 });
