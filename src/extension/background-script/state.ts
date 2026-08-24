@@ -2,7 +2,7 @@ import merge from "lodash.merge";
 import pick from "lodash.pick";
 import browser from "webextension-polyfill";
 import { create } from "zustand";
-import { decryptData } from "~/common/lib/crypto";
+import { clearKeyCache, decryptData } from "~/common/lib/crypto";
 import { DEFAULT_SETTINGS } from "~/common/settings";
 import { isManifestV3 } from "~/common/utils/mv3";
 import Bitcoin from "~/extension/background-script/bitcoin";
@@ -203,6 +203,8 @@ const state = create<State>((set, get) => ({
     return bitcoin;
   },
   lock: async () => {
+    // drop derived keys so they do not outlive the unlocked session
+    clearKeyCache();
     if (isManifestV3) {
       // @ts-ignore: https://github.com/mozilla/webextension-polyfill/issues/329
       await browser.storage.session.set({ password: null });
@@ -262,6 +264,7 @@ const state = create<State>((set, get) => ({
       });
   },
   reset: async () => {
+    clearKeyCache();
     try {
       // @ts-ignore: https://github.com/mozilla/webextension-polyfill/issues/329
       await browser.storage.session.clear();

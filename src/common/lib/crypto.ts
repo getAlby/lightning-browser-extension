@@ -1,12 +1,8 @@
 import { gcm } from "@noble/ciphers/aes.js";
 import { pbkdf2 } from "@noble/hashes/pbkdf2.js";
 import { sha256 } from "@noble/hashes/sha2.js";
-import {
-  bytesToHex,
-  hexToBytes,
-  randomBytes,
-  utf8ToBytes,
-} from "@noble/hashes/utils.js";
+import { bytesToHex, randomBytes, utf8ToBytes } from "@noble/hashes/utils.js";
+import { base64 } from "@scure/base";
 import { AES, enc } from "crypto-js";
 
 /**
@@ -18,15 +14,24 @@ import { AES, enc } from "crypto-js";
  *    ciphertext tamper-evident; a modified blob fails to decrypt instead of
  *    silently yielding altered plaintext.
  *  - **legacy** (crypto-js passphrase mode): still readable so that data written
- *    by older versions — including blobs that sync down from another device that
- *    has not upgraded yet — keeps working. Never written by new code.
+ *    by older versions keeps working. Never written by new code.
  *
- * `encryptData` always writes v2. `decryptData` detects the format and reads
- * either. Both keep the synchronous signature the rest of the codebase relies
- * on (connectors and actions call these inline).
+ * `encryptData` always writes v2. `decryptData` reads either. Both keep the
+ * synchronous signature the rest of the codebase relies on (connectors and
+ * actions call these inline).
+ *
+ * Cross-version note: v2 blobs are stored under the single `accounts`
+ * `browser.storage.sync` key, so they replicate to other devices. A v2 blob is
+ * NOT readable by versions <= 3.14.5 (their crypto-js path throws on it). Reading
+ * the previous format here keeps a not-yet-upgraded device working when it
+ * receives an old blob; the reverse — an old build receiving a v2 blob — cannot
+ * be made to work and is a deliberate, documented consequence of no longer
+ * writing the weak format.
  */
 
 const KDF_ITERATIONS = 600_000; // OWASP 2023 floor for PBKDF2-HMAC-SHA256
+const MIN_ITERATIONS = 1;
+const MAX_ITERATIONS = 4_000_000; // guardrail: reject absurd counts from storage
 const SALT_BYTES = 16;
 const NONCE_BYTES = 12;
 const KEY_BYTES = 32;
@@ -34,43 +39,57 @@ const KEY_BYTES = 32;
 type EncryptedEnvelope = {
   v: 2;
   c: number; // KDF iteration count (so it can be raised later without a break)
-  s: string; // salt, hex
-  n: string; // GCM nonce, hex
-  d: string; // ciphertext + GCM tag, hex
+  s: string; // salt, base64
+  n: string; // GCM nonce, base64
+  d: string; // ciphertext + GCM tag, base64
 };
 
 const textEncoder = new TextEncoder();
 const textDecoder = new TextDecoder();
 
 // Deriving a PBKDF2 key at this iteration count costs a few hundred ms, so the
-// result is memoised per (password, salt, iterations). Decrypting the same
-// stored blob repeatedly in one session then pays the cost once. Bounded so it
-// can never grow without limit. The derived key is no more sensitive than the
-// unlock password, which is already held in memory while unlocked.
+// result is memoised per (password, salt, iterations) for the hot *read* path:
+// decrypting the same stored blob repeatedly in one session then pays the cost
+// once. Bounded, and cleared on lock via clearKeyCache() so derived keys and the
+// password hash below do not outlive the unlocked session. Encryption uses a
+// fresh salt every call, so its keys are single-use and are never cached (that
+// would only evict useful read keys).
 const MAX_CACHE_ENTRIES = 64;
 const keyCache = new Map<string, Uint8Array>();
+
+/** Drop all memoised keys. Call when the wallet locks or state is reset. */
+export function clearKeyCache(): void {
+  keyCache.clear();
+}
 
 function deriveKey(
   password: string,
   salt: Uint8Array,
-  iterations: number
+  iterations: number,
+  cache: boolean
 ): Uint8Array {
-  const cacheKey = `${iterations}:${bytesToHex(salt)}:${bytesToHex(
-    sha256(utf8ToBytes(password))
-  )}`;
-  const cached = keyCache.get(cacheKey);
-  if (cached) return cached;
+  const cacheKey = cache
+    ? `${iterations}:${bytesToHex(salt)}:${bytesToHex(
+        sha256(utf8ToBytes(password))
+      )}`
+    : null;
+  if (cacheKey) {
+    const cached = keyCache.get(cacheKey);
+    if (cached) return cached;
+  }
 
   const key = pbkdf2(sha256, utf8ToBytes(password), salt, {
     c: iterations,
     dkLen: KEY_BYTES,
   });
 
-  if (keyCache.size >= MAX_CACHE_ENTRIES) {
-    const oldest = keyCache.keys().next().value;
-    if (oldest !== undefined) keyCache.delete(oldest);
+  if (cacheKey) {
+    if (keyCache.size >= MAX_CACHE_ENTRIES) {
+      const oldest = keyCache.keys().next().value;
+      if (oldest !== undefined) keyCache.delete(oldest);
+    }
+    keyCache.set(cacheKey, key);
   }
-  keyCache.set(cacheKey, key);
   return key;
 }
 
@@ -80,6 +99,9 @@ function isEncryptedEnvelope(value: unknown): value is EncryptedEnvelope {
   return (
     e.v === 2 &&
     typeof e.c === "number" &&
+    Number.isInteger(e.c) &&
+    e.c >= MIN_ITERATIONS &&
+    e.c <= MAX_ITERATIONS &&
     typeof e.s === "string" &&
     typeof e.n === "string" &&
     typeof e.d === "string"
@@ -99,7 +121,7 @@ export function isLegacyEncrypted(cipher: string): boolean {
 export function encryptData(data: unknown, password: string): string {
   const salt = randomBytes(SALT_BYTES);
   const nonce = randomBytes(NONCE_BYTES);
-  const key = deriveKey(password, salt, KDF_ITERATIONS);
+  const key = deriveKey(password, salt, KDF_ITERATIONS, false);
 
   const plaintext = textEncoder.encode(JSON.stringify(data));
   const ciphertext = gcm(key, nonce).encrypt(plaintext);
@@ -107,9 +129,9 @@ export function encryptData(data: unknown, password: string): string {
   const envelope: EncryptedEnvelope = {
     v: 2,
     c: KDF_ITERATIONS,
-    s: bytesToHex(salt),
-    n: bytesToHex(nonce),
-    d: bytesToHex(ciphertext),
+    s: base64.encode(salt),
+    n: base64.encode(nonce),
+    d: base64.encode(ciphertext),
   };
   return JSON.stringify(envelope);
 }
@@ -123,10 +145,10 @@ export function decryptData(cipher: string, password: string) {
   }
 
   if (isEncryptedEnvelope(parsed)) {
-    const key = deriveKey(password, hexToBytes(parsed.s), parsed.c);
+    const key = deriveKey(password, base64.decode(parsed.s), parsed.c, true);
     // GCM verifies the tag and throws on any tampering or wrong key.
-    const plaintext = gcm(key, hexToBytes(parsed.n)).decrypt(
-      hexToBytes(parsed.d)
+    const plaintext = gcm(key, base64.decode(parsed.n)).decrypt(
+      base64.decode(parsed.d)
     );
     return JSON.parse(textDecoder.decode(plaintext));
   }
@@ -140,8 +162,7 @@ export function decryptData(cipher: string, password: string) {
  * Re-encrypt a legacy blob into the v2 format using the same password. Returns
  * the input unchanged when it is already v2, or when it cannot be decrypted
  * (wrong password / not this account's data) so callers can run it opportunis-
- * tically without risking data loss. Used to upgrade already-stored secrets on
- * unlock, when the password is available.
+ * tically without risking data loss.
  */
 export function reEncryptToLatest(
   cipher: string | null | undefined,

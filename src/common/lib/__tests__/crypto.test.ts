@@ -1,6 +1,7 @@
 import { AES } from "crypto-js";
 
 import {
+  clearKeyCache,
   decryptData,
   encryptData,
   isLegacyEncrypted,
@@ -45,11 +46,31 @@ describe("crypto (v2 authenticated format)", () => {
   test("tampering with the ciphertext is detected (AEAD tag)", () => {
     const cipher = encryptData(secret, "pw");
     const env = JSON.parse(cipher);
-    // flip one nibble of the ciphertext+tag
+    // flip one character of the base64 ciphertext+tag
     const bytes = env.d.split("");
-    bytes[10] = bytes[10] === "a" ? "b" : "a";
+    bytes[10] = bytes[10] === "A" ? "B" : "A";
     env.d = bytes.join("");
     expect(() => decryptData(JSON.stringify(env), "pw")).toThrow();
+  });
+
+  test("an absurd iteration count is rejected, not run (no unbounded KDF)", () => {
+    const cipher = encryptData(secret, "pw");
+    const env = JSON.parse(cipher);
+    // a corrupted / sync-poisoned envelope must not send pbkdf2 into a spin;
+    // it is treated as not-a-v2-envelope and falls through to the legacy path,
+    // which throws on this input rather than hanging.
+    for (const bad of [Infinity, 1e12, -1, 0, 1.5, NaN]) {
+      env.c = bad;
+      expect(isLegacyEncrypted(JSON.stringify(env))).toBe(true);
+      expect(() => decryptData(JSON.stringify(env), "pw")).toThrow();
+    }
+  });
+
+  test("clearKeyCache lets the same blob be decrypted again", () => {
+    const cipher = encryptData(secret, "pw");
+    expect(decryptData(cipher, "pw")).toEqual(secret); // populates cache
+    clearKeyCache();
+    expect(decryptData(cipher, "pw")).toEqual(secret); // re-derives, still works
   });
 });
 
