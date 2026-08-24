@@ -473,16 +473,13 @@
       "description": "Como lidar com as solicitações desta app?",
       "presets": {
         "trust_fully": {
-          "title": "Confio totalmente",
-          "description": "Assinar automaticamente as solicitações (exceto pagamentos)"
+          "title": "Confio totalmente"
         },
         "reasonable": {
-          "title": "Sejamos razoáveis",
-          "description": "Aprovar automaticamente as solicitações mais comuns"
+          "title": "Sejamos razoáveis"
         },
         "paranoid": {
-          "title": "Sou um pouco paranóico",
-          "description": "Não assinar nada sem me perguntar antes!"
+          "title": "Sou um pouco paranóico"
         }
       }
     },

@@ -2,6 +2,7 @@ import ConfirmOrCancel from "@components/ConfirmOrCancel";
 import Container from "@components/Container";
 import PublisherCard from "@components/PublisherCard";
 import {
+  PopiconsNotificationAlertLine,
   PopiconsCheckLine,
   PopiconsGlassesSolid,
   PopiconsHeartLine,
@@ -87,6 +88,8 @@ function NostrEnableComponent(props: Props) {
             <PermissionPreset
               title={t("presets.trust_fully.title")}
               description={t("presets.trust_fully.description")}
+              grants={[t("presets.trust_fully.grants.sign_anything")]}
+              asks={[t("presets.always_asks.read_messages")]}
               icon={<PopiconsHeartLine className="w-6 h-6" />}
               onClick={() =>
                 setSelectedPreset(NostrPermissionPreset.TRUST_FULLY)
@@ -96,6 +99,11 @@ function NostrEnableComponent(props: Props) {
             <PermissionPreset
               title={t("presets.reasonable.title")}
               description={t("presets.reasonable.description")}
+              grants={[t("presets.reasonable.grants.posts_and_zaps")]}
+              asks={[
+                t("presets.always_asks.identity"),
+                t("presets.always_asks.read_messages"),
+              ]}
               icon={<PopiconsLikeLine className="w-6 h-6" />}
               onClick={() =>
                 setSelectedPreset(NostrPermissionPreset.REASONABLE)
@@ -135,6 +143,8 @@ function NostrEnableComponent(props: Props) {
 type PermissionPresetProps = {
   title: string;
   description: string;
+  grants?: string[];
+  asks?: string[];
   icon: React.ReactNode;
   onClick: () => void;
   isSelected: boolean;
@@ -143,6 +153,8 @@ function PermissionPreset({
   icon,
   title,
   description,
+  grants,
+  asks,
   onClick,
   isSelected,
 }: PermissionPresetProps) {
@@ -171,6 +183,28 @@ function PermissionPreset({
         <div className="text-gray-600 dark:text-neutral-400 text-xs leading-4 md:text-sm">
           {description}
         </div>
+        {!!(grants?.length || asks?.length) && (
+          <ul className="pt-1 space-y-0.5 text-xs leading-4">
+            {grants?.map((grant) => (
+              <li
+                key={grant}
+                className="flex gap-1.5 text-gray-600 dark:text-neutral-400"
+              >
+                <PopiconsCheckLine className="w-3.5 flex-shrink-0" />
+                <span>{grant}</span>
+              </li>
+            ))}
+            {asks?.map((ask) => (
+              <li
+                key={ask}
+                className="flex gap-1.5 text-gray-500 dark:text-neutral-500"
+              >
+                <PopiconsNotificationAlertLine className="w-3.5 flex-shrink-0" />
+                <span>{ask}</span>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
       <div
         className={classNames(

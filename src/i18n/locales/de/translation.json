@@ -1006,16 +1006,13 @@
       "description": "Wie sollen die Anfragen dieser Anwendung behandelt werden?",
       "presets": {
         "reasonable": {
-          "title": "Lass uns vernünftig sein",
-          "description": "Häufigste Anfragen automatisch genehmigen"
+          "title": "Lass uns vernünftig sein"
         },
         "paranoid": {
-          "description": "Unterschreibe nichts, ohne mich zu fragen!",
           "title": "Ich bin ein bisschen paranoid"
         },
         "trust_fully": {
-          "title": "Ich vertraue ihr voll und ganz",
-          "description": "Alle Anfragen automatisch unterzeichnen (außer Zahlungen)"
+          "title": "Ich vertraue ihr voll und ganz"
         }
       }
     },

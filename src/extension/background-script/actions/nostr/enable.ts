@@ -9,7 +9,11 @@ import {
 } from "~/types";
 
 import { addPermissionFor } from "~/extension/background-script/permissions";
-import { EventKind } from "~/extension/providers/nostr/types";
+import {
+  REASONABLE_PRESET_EVENT_KINDS,
+  REASONABLE_PRESET_METHODS,
+  TRUST_FULLY_PRESET_METHODS,
+} from "~/common/utils/nostrPresets";
 import state from "../../state";
 import { ExtensionIcon, setIcon } from "../setup/setIcon";
 
@@ -98,52 +102,23 @@ const enable = async (message: MessageAllowanceEnable, sender: Sender) => {
           });
         }
         if (response.data.preset === NostrPermissionPreset.REASONABLE) {
-          // Add permissions
-          const permissions: PermissionMethodNostr[] = [
-            PermissionMethodNostr.NOSTR_GETPUBLICKEY,
-            PermissionMethodNostr.NOSTR_ENCRYPT,
-            PermissionMethodNostr.NOSTR_DECRYPT,
+          const permissions: string[] = [
+            ...REASONABLE_PRESET_METHODS,
+            ...REASONABLE_PRESET_EVENT_KINDS.map(
+              (kindId) => `${PermissionMethodNostr.NOSTR_SIGNMESSAGE}/${kindId}`
+            ),
           ];
-          permissions.forEach(async (permission) => {
-            await addPermissionFor(permission, host, false);
-          });
-
-          // Add specific signing permissions
-
-          const reasonableEventKindIds = [
-            EventKind.Metadata,
-            EventKind.Text,
-            EventKind.Contacts,
-            EventKind.DM,
-            EventKind.Repost,
-            EventKind.React,
-            EventKind.ZapRequest,
-            EventKind.MuteList,
-            EventKind.RelayList,
-            EventKind.Bookmarks,
-            EventKind.Authenticate,
-            EventKind.HTTPAuth,
-            EventKind.LongNote,
-            EventKind.ProfileBadge,
-            EventKind.CreateBadge,
-            EventKind.AppData,
-            EventKind.UploadChunk,
-            EventKind.RemoteSign,
-          ];
-          // when addding multiple permissions at once, the flow shall wait until all asynchronous addPermissionFor calls are completed.
           await Promise.all(
-            reasonableEventKindIds.map((kindId) => {
-              addPermissionFor(
-                PermissionMethodNostr.NOSTR_SIGNMESSAGE + "/" + kindId,
-                host,
-                false
-              );
-            })
+            permissions.map((permission) =>
+              addPermissionFor(permission, host, false)
+            )
           );
         } else if (response.data.preset === NostrPermissionPreset.TRUST_FULLY) {
-          Object.values(PermissionMethodNostr).forEach(async (permission) => {
-            await addPermissionFor(permission, host, false);
-          });
+          await Promise.all(
+            TRUST_FULLY_PRESET_METHODS.map((permission) =>
+              addPermissionFor(permission, host, false)
+            )
+          );
         }
         await db.saveToStorage();
       }

@@ -919,16 +919,13 @@
       "title": "连接到 Nostr",
       "presets": {
         "trust_fully": {
-          "title": "完全信任",
-          "description": "自动签署所有请求（除付款外）"
+          "title": "完全信任"
         },
         "paranoid": {
-          "title": "我有点偏执",
-          "description": "不要没有经过我的同意就签署任何事件！"
+          "title": "我有点偏执"
         },
         "reasonable": {
-          "title": "有话好说",
-          "description": "自动批复最常见的请求"
+          "title": "有话好说"
         }
       },
       "description": "如何处理该应用的请求？"

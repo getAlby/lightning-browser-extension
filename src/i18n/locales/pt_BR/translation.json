@@ -803,16 +803,13 @@
       "description": "Como lidar com as solicitações deste app?",
       "presets": {
         "trust_fully": {
-          "title": "Eu confio totalmente",
-          "description": "Assinar automaticamente as solicitações (exceto pagamentos)"
+          "title": "Eu confio totalmente"
         },
         "reasonable": {
-          "title": "Sejamos razoáveis",
-          "description": "Aprovar automaticamente as solicitações mais comuns"
+          "title": "Sejamos razoáveis"
         },
         "paranoid": {
-          "title": "Sou um pouco paranóico",
-          "description": "Não assinar nada sem antes me perguntar!"
+          "title": "Sou um pouco paranóico"
         }
       }
     },

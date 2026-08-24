@@ -562,15 +562,25 @@
       "presets": {
         "trust_fully": {
           "title": "I fully trust it",
-          "description": "Auto-sign all requests (except payments)"
+          "description": "Auto-approve everything except payments",
+          "grants": {
+            "sign_anything": "Signs anything, including your profile, contacts and logins"
+          }
         },
         "reasonable": {
           "title": "Let's be reasonable",
-          "description": "Auto-approve most common requests"
+          "description": "Auto-approve posting and zapping",
+          "grants": {
+            "posts_and_zaps": "Signs notes, reactions, zaps and lists"
+          }
         },
         "paranoid": {
           "title": "I'm a bit paranoid",
-          "description": "Do not sign anything without asking me!"
+          "description": "Ask me about every single request"
+        },
+        "always_asks": {
+          "identity": "Always asks about your profile, contacts, relays and logins",
+          "read_messages": "Always asks before reading your encrypted messages"
         }
       }
     },
