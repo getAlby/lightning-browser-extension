@@ -72,8 +72,18 @@ const lnurl = {
     return null;
   },
 
-  async getDetails(lnurlString: string): Promise<LNURLError | LNURLDetails> {
-    const url = assertAllowedLnurlUrl(normalizeLnurl(lnurlString));
+  /**
+   * `userInitiated` marks an LNURL the user pasted or scanned themselves. Those
+   * may point at a self-hosted service on a local network; LNURLs supplied by a
+   * website may not, since the request is made from a privileged context.
+   */
+  async getDetails(
+    lnurlString: string,
+    { userInitiated = false } = {}
+  ): Promise<LNURLError | LNURLDetails> {
+    const url = userInitiated
+      ? normalizeLnurl(lnurlString)
+      : assertAllowedLnurlUrl(normalizeLnurl(lnurlString));
     const searchParamsTag = url.searchParams.get("tag");
     const searchParamsK1 = url.searchParams.get("k1");
     const searchParamsAction = url.searchParams.get("action");
@@ -92,7 +102,11 @@ const lnurl = {
       try {
         const { data }: { data: LNURLDetails | LNURLError } = await lnurlGet<
           LNURLDetails | LNURLError
-        >(url);
+        >(
+          url,
+          {},
+          { validate: !userInitiated, followRedirects: userInitiated }
+        );
 
         const lnurlDetails = data;
 

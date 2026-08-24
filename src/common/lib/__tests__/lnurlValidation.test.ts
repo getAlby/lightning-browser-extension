@@ -1,4 +1,5 @@
 import {
+  assertAllowedCallbackUrl,
   assertAllowedLnurlUrl,
   isDisallowedLnurlHost,
 } from "../lnurlValidation";
@@ -82,5 +83,34 @@ describe("assertAllowedLnurlUrl", () => {
     expect(assertAllowedLnurlUrl("https://[2606:4700::1111]/x").protocol).toBe(
       "https:"
     );
+  });
+});
+
+describe("assertAllowedCallbackUrl", () => {
+  it("allows a cross-host callback that is itself public (lightning address)", () => {
+    expect(
+      assertAllowedCallbackUrl(
+        "https://callback.example.com/pay",
+        "https://getalby.com/.well-known/lnurlp/x"
+      ).host
+    ).toBe("callback.example.com");
+  });
+
+  it("allows a callback on the same origin as the LNURL, even on a local network", () => {
+    expect(
+      assertAllowedCallbackUrl(
+        "http://192.168.1.5:5000/withdraw/api/v1/lnurl/cb/abc",
+        "http://192.168.1.5:5000/withdraw/api/v1/lnurl/abc"
+      ).host
+    ).toBe("192.168.1.5:5000");
+  });
+
+  it("rejects a cross-host callback pointing at a private address", () => {
+    expect(() =>
+      assertAllowedCallbackUrl(
+        "http://127.0.0.1:8443/internal",
+        "https://getalby.com/.well-known/lnurlp/x"
+      )
+    ).toThrow();
   });
 });

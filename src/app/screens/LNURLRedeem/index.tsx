@@ -30,7 +30,9 @@ function LNURLRedeem() {
       const lnurl = lnurlLib.findLnurl(lnurlWithdrawLink);
 
       if (lnurl) {
-        const lnurlDetails = await lnurlLib.getDetails(lnurl);
+        const lnurlDetails = await lnurlLib.getDetails(lnurl, {
+          userInitiated: true,
+        });
 
         if (isLNURLDetailsError(lnurlDetails)) {
           toast.error(lnurlDetails.reason);

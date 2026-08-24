@@ -5,7 +5,10 @@ import ContentMessage from "@components/ContentMessage";
 import PublisherCard from "@components/PublisherCard";
 import ResultCard from "@components/ResultCard";
 import axios from "axios";
-import { lnurlGet } from "~/common/lib/lnurlValidation";
+import {
+  assertAllowedCallbackUrl,
+  lnurlGet,
+} from "~/common/lib/lnurlValidation";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -49,13 +52,16 @@ function LNURLChannel() {
         );
       }
 
-      const callbackResponse = await lnurlGet(details.callback, {
-        params: {
-          k1: details.k1,
-          remoteid: nodeId,
-          private: privateChannel ? 1 : 0,
-        },
-      });
+      const callbackResponse = await lnurlGet(
+        assertAllowedCallbackUrl(details.callback, details.url),
+        {
+          params: {
+            k1: details.k1,
+            remoteid: nodeId,
+            private: privateChannel ? 1 : 0,
+          },
+        }
+      );
 
       if (axios.isAxiosError(callbackResponse)) {
         toast.error(`Failed to call callback: ${callbackResponse.message}`);

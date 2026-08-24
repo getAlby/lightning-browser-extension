@@ -12,7 +12,10 @@ import {
   PopiconsChevronLeftLine,
   PopiconsChevronTopLine,
 } from "@popicons/react";
-import { lnurlGet } from "~/common/lib/lnurlValidation";
+import {
+  assertAllowedCallbackUrl,
+  lnurlGet,
+} from "~/common/lib/lnurlValidation";
 import React, { Fragment, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -139,7 +142,7 @@ function LNURLPay() {
 
       try {
         response = await lnurlGet<LNURLPaymentInfo | LNURLError>(
-          details.callback,
+          assertAllowedCallbackUrl(details.callback, details.url),
           {
             params,
             // https://github.com/fiatjaf/lnurl-rfc/blob/luds/01.md#http-status-codes-and-content-type

@@ -159,14 +159,42 @@ export function assertAllowedLnurlUrl(rawUrl: string | URL): URL {
 }
 
 /**
+ * A callback may stay on the origin of the LNURL that produced it whatever that
+ * origin was (this keeps self-hosted services on a local network working);
+ * otherwise it has to satisfy the normal restrictions. Cross-host callbacks are
+ * common for lightning addresses, so the origin is not required to match.
+ */
+export function assertAllowedCallbackUrl(
+  callback: string | URL,
+  lnurlUrl: string | URL | undefined
+): URL {
+  const callbackUrl = callback instanceof URL ? callback : new URL(callback);
+  if (lnurlUrl) {
+    const base = lnurlUrl instanceof URL ? lnurlUrl : new URL(lnurlUrl);
+    if (callbackUrl.origin === base.origin) {
+      return callbackUrl;
+    }
+  }
+  return assertAllowedLnurlUrl(callbackUrl);
+}
+
+/**
  * axios GET guarded for LNURL: validates the target and refuses to follow
  * redirects, so a permitted host cannot bounce the request to a denied one.
  */
 export async function lnurlGet<T = unknown>(
   target: string | URL,
-  config: AxiosRequestConfig = {}
+  config: AxiosRequestConfig = {},
+  { validate = true, followRedirects = false } = {}
 ): Promise<AxiosResponse<T>> {
-  const url = assertAllowedLnurlUrl(target);
+  const url = validate
+    ? assertAllowedLnurlUrl(target)
+    : target instanceof URL
+    ? target
+    : new URL(target);
+  if (followRedirects) {
+    return axios.get<T>(url.toString(), { ...config, adapter: "fetch" });
+  }
   return axios.get<T>(url.toString(), {
     ...config,
     adapter: "fetch",

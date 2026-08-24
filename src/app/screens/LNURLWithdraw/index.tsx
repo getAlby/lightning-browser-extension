@@ -6,7 +6,10 @@ import PublisherCard from "@components/PublisherCard";
 import ResultCard from "@components/ResultCard";
 import DualCurrencyField from "@components/form/DualCurrencyField";
 import axios from "axios";
-import { lnurlGet } from "~/common/lib/lnurlValidation";
+import {
+  assertAllowedCallbackUrl,
+  lnurlGet,
+} from "~/common/lib/lnurlValidation";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -63,7 +66,7 @@ function LNURLWithdraw() {
       });
 
       const response = await lnurlGet<{ status: string; reason?: string }>(
-        details.callback,
+        assertAllowedCallbackUrl(details.callback, details.url),
         {
           params: {
             k1: details.k1,
