@@ -92,6 +92,25 @@ const migrations = {
 
     console.info("Migration migrateDecryptPermission complete.");
   },
+  removeSchnorrSigningApprovals: async () => {
+    // signSchnorr approvals are no longer honoured - every request is asked
+    // for - so a stored grant would show in the permission list without doing
+    // anything. Blocks still apply and are kept.
+    const approvals = await db.permissions
+      .filter(
+        (permission) =>
+          permission.method === "nostr/signSchnorr" && !permission.blocked
+      )
+      .toArray();
+
+    for (const approval of approvals) {
+      approval.id && (await db.permissions.delete(approval.id));
+    }
+
+    if (approvals.length) {
+      await db.saveToStorage();
+    }
+  },
 };
 
 const migrate = async () => {
@@ -114,6 +133,12 @@ const migrate = async () => {
     console.info("Running migration for: migrateDecryptPermission");
     await migrations["migrateDecryptPermission"]();
     await setMigrated("migrateDecryptPermission");
+  }
+
+  if (shouldMigrate("removeSchnorrSigningApprovals")) {
+    console.info("Running migration for: removeSchnorrSigningApprovals");
+    await migrations["removeSchnorrSigningApprovals"]();
+    await setMigrated("removeSchnorrSigningApprovals");
   }
 };
 
