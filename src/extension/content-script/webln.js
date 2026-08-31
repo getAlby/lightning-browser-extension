@@ -1,6 +1,7 @@
 import browser from "webextension-polyfill";
 
 import extractLightningData from "./batteries";
+import { createScopePort } from "./messagePortServer";
 import getOriginData from "./originData";
 import shouldInject from "./shouldInject";
 
@@ -28,6 +29,11 @@ const disabledCalls = ["webln/enable", "webln/isEnabled"];
 let isEnabled = false; // store if webln is enabled for this content page
 let isRejected = false; // store if the webln enable call failed. if so we do not prompt again
 
+// Establish the private channel to the inpage world synchronously at
+// document_start, before page scripts can register a competing listener. Only
+// request servicing (below) is gated on the async should-inject decision.
+const transport = createScopePort("webln");
+
 async function init() {
   const inject = await shouldInject();
   if (!inject) {
@@ -41,95 +47,68 @@ async function init() {
     }
     // forward account changed messaged to inpage script
     else if (request.action === "accountChanged" && isEnabled) {
-      window.postMessage(
-        { action: "accountChanged", scope: "webln" },
-        window.location.origin
-      );
+      transport.sendEvent("accountChanged");
     }
   });
 
-  // message listener to listen to inpage webln/webbtc calls
-  // those calls get passed on to the background script
-  // (the inpage script can not do that directly, but only the inpage script can make webln available to the page)
-  window.addEventListener("message", async (ev) => {
-    // Only accept messages from the current window
-    if (
-      ev.source !== window ||
-      ev.data.application !== "LBE" ||
-      ev.data.scope !== "webln"
-    ) {
+  // requests from the inpage webln/webbtc provider arrive over the private port
+  // and get passed on to the background script (the inpage script cannot do that
+  // directly, but only the inpage script can make webln available to the page)
+  transport.onRequest(async (data, reply) => {
+    // if an enable call failed we ignore the request to prevent spamming the user with prompts
+    if (isRejected) {
+      reply({
+        error:
+          "webln.enable() failed (rejecting further window.webln calls until the next reload)",
+      });
       return;
     }
 
-    if (ev.data && !ev.data.response) {
-      // if an enable call railed we ignore the request to prevent spamming the user with prompts
-      if (isRejected) {
-        postMessage(ev, {
-          error:
-            "webln.enable() failed (rejecting further window.webln calls until the next reload)",
-        });
-        return;
-      }
-
-      // limit the calls that can be made from webln
-      // only listed calls can be executed
-      // if not enabled only enable can be called.
-      const availableCalls = isEnabled ? weblnCalls : disabledCalls;
-      if (!availableCalls.includes(ev.data.action)) {
-        console.error("Function not available. Is the provider enabled?");
-        return;
-      }
-
-      const messageWithOrigin = {
-        // every call call is scoped in `public`
-        // this prevents websites from accessing internal actions
-        action: `public/${ev.data.action}`,
-        args: ev.data.args,
-        application: "LBE",
-        public: true, // indicate that this is a public call from the content script
-        prompt: true,
-        origin: getOriginData(),
-      };
-
-      const replyFunction = (response) => {
-        // if it is the enable call we store if webln is enabled for this content script
-        if (ev.data.action === "webln/enable") {
-          isEnabled = response.data?.enabled;
-          const enabledEvent = new Event("webln:enabled");
-          window.dispatchEvent(enabledEvent);
-          if (response.error) {
-            console.error(response.error);
-            console.info("Enable was rejected ignoring further webln calls");
-            isRejected = true;
-          }
-        }
-
-        if (ev.data.action === "webln/isEnabled") {
-          isEnabled = response.data?.isEnabled;
-        }
-        postMessage(ev, response);
-      };
-      return browser.runtime
-        .sendMessage(messageWithOrigin)
-        .then(replyFunction)
-        .catch(replyFunction);
+    // limit the calls that can be made from webln
+    // only listed calls can be executed
+    // if not enabled only enable can be called.
+    const availableCalls = isEnabled ? weblnCalls : disabledCalls;
+    if (!availableCalls.includes(data.action)) {
+      console.error("Function not available. Is the provider enabled?");
+      return;
     }
+
+    const messageWithOrigin = {
+      // every call call is scoped in `public`
+      // this prevents websites from accessing internal actions
+      action: `public/${data.action}`,
+      args: data.args,
+      application: "LBE",
+      public: true, // indicate that this is a public call from the content script
+      prompt: true,
+      origin: getOriginData(),
+    };
+
+    const replyFunction = (response) => {
+      // if it is the enable call we store if webln is enabled for this content script
+      if (data.action === "webln/enable") {
+        isEnabled = response.data?.enabled;
+        const enabledEvent = new Event("webln:enabled");
+        window.dispatchEvent(enabledEvent);
+        if (response.error) {
+          console.error(response.error);
+          console.info("Enable was rejected ignoring further webln calls");
+          isRejected = true;
+        }
+      }
+
+      if (data.action === "webln/isEnabled") {
+        isEnabled = response.data?.isEnabled;
+      }
+      reply(response);
+    };
+    return browser.runtime
+      .sendMessage(messageWithOrigin)
+      .then(replyFunction)
+      .catch(replyFunction);
   });
 }
 
 init();
-
-function postMessage(ev, response) {
-  window.postMessage(
-    {
-      id: ev.data.id,
-      application: "LBE",
-      response: true,
-      data: response,
-      scope: "webln",
-    },
-    window.location.origin
-  );
-}
 
 export {};

@@ -4,6 +4,7 @@ import LiquidProvider from "~/extension/providers/liquid";
 import NostrProvider from "~/extension/providers/nostr";
 import WebBTCProvider from "~/extension/providers/webbtc";
 import WebLNProvider from "~/extension/providers/webln";
+import { onScopeEvent } from "~/extension/providers/postMessage";
 import shouldInjectInpage from "./shouldInject";
 
 function init() {
@@ -19,12 +20,11 @@ function init() {
 
   registerLightningLinkClickHandler();
 
-  // Listen for webln events from the extension
-  // emit events to the websites
-  window.addEventListener("message", (event) => {
-    if (event.source === window && event.data.action === "accountChanged") {
-      eventEmitter(event.data.action, event.data.scope);
-    }
+  // Listen for events from the extension (e.g. accountChanged) over each
+  // provider's private port and emit them to the website. These used to be read
+  // off the page window, where any script could post them.
+  ["webln", "nostr", "webbtc", "liquid", "alby"].forEach((scope) => {
+    onScopeEvent(scope, (action) => eventEmitter(action, scope));
   });
 }
 function registerLightningLinkClickHandler() {
