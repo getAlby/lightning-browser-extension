@@ -92,6 +92,23 @@ const migrations = {
 
     console.info("Migration migrateDecryptPermission complete.");
   },
+
+  migrateRequestMethodPermissions: async () => {
+    const permissions = await db.permissions.toArray();
+
+    for (const permission of permissions) {
+      const segments = permission.method.split("/");
+      if (segments[0] !== "webln" || segments.length !== 3) {
+        continue;
+      }
+
+      permission.id && (await db.permissions.delete(permission.id));
+    }
+
+    await db.saveToStorage();
+
+    console.info("Migration migrateRequestMethodPermissions complete.");
+  },
 };
 
 const migrate = async () => {
@@ -114,6 +131,12 @@ const migrate = async () => {
     console.info("Running migration for: migrateDecryptPermission");
     await migrations["migrateDecryptPermission"]();
     await setMigrated("migrateDecryptPermission");
+  }
+
+  if (shouldMigrate("migrateRequestMethodPermissions")) {
+    console.info("Running migration for: migrateRequestMethodPermissions");
+    await migrations["migrateRequestMethodPermissions"]();
+    await setMigrated("migrateRequestMethodPermissions");
   }
 };
 

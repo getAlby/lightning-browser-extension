@@ -878,7 +878,13 @@
     "confirm_request_permission": {
       "title": "Approve Request",
       "allow": "Allow this website to execute:",
-      "always_allow": "Remember my choice and don't ask again"
+      "always_allow": "Remember my choice and don't ask again",
+      "always_confirm_warning": "This request can move funds or change the state of your node. It has to be confirmed every time and can not be remembered.",
+      "params": {
+        "pubkey": "Pubkey",
+        "preimage": "Preimage",
+        "hash": "Payment hash"
+      }
     },
     "confirm_add_account": {
       "title": "Add wallet",

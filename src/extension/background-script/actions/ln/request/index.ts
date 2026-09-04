@@ -5,10 +5,27 @@ import {
 } from "~/extension/background-script/permissions";
 import { MessageGenericRequest } from "~/types";
 
-import db from "../../db";
-import state from "../../state";
+import db from "../../../db";
+import state from "../../../state";
+import { checkAllowance } from "../../webln/sendPaymentOrPrompt";
+import addholdinvoice from "./addholdinvoice";
+import connectpeer from "./connectpeer";
+import disconnectpeer from "./disconnectpeer";
+import openchannel from "./openchannel";
+import sendtoroute from "./sendtoroute";
+import settleinvoice from "./settleinvoice";
+import { RequestMethodHandler } from "./types";
 
 const WEBLN_PREFIX = "webln/";
+
+const methods: Record<string, RequestMethodHandler> = {
+  addholdinvoice,
+  connectpeer,
+  disconnectpeer,
+  openchannel,
+  sendtoroute,
+  settleinvoice,
+};
 
 const request = async (
   message: MessageGenericRequest
@@ -49,24 +66,47 @@ const request = async (
       throw new Error("Could not find an allowance for this host");
     }
 
-    if (!accountId) {
-      // type guard
+    if (!allowance.enabled || !allowance.enabledFor?.includes("webln")) {
+      throw new Error("WebLN is not enabled for this host");
+    }
+
+    const connectorName = state.getState().getAccount()?.connector;
+    if (!accountId || !connectorName) {
       throw new Error("Could not find a selected account");
     }
 
-    const connectorName = connector.constructor.name.toLowerCase();
     // prefix method with webln to prevent potential naming conflicts (e.g. with nostr calls that also use the permissions)
     const weblnMethod = `${WEBLN_PREFIX}${connectorName}/${methodInLowerCase}`;
 
-    const hasPermission = await hasPermissionFor(weblnMethod, origin.host);
+    const requestMethod = connector.requestMethod.bind(connector);
+    const method = methods[methodInLowerCase];
+    const params = method?.getParams(args.params) ?? {};
+    const isPayment = Boolean(method?.isPayment);
+    const alwaysConfirm = Boolean(method?.alwaysConfirm);
+
+    // budgeting is meaningless without a real amount, so this must throw here —
+    // before any permission/budget check or prompt — same as a bad params object
+    if (isPayment && params.amount === undefined) {
+      throw new Error("Could not determine the amount of this request");
+    }
+
+    const execute = async () => {
+      const response = await requestMethod(methodInLowerCase, args.params);
+      method?.onSuccess?.(message, accountId, response, params);
+      return response;
+    };
+
+    const hasBudget =
+      !isPayment ||
+      (await checkAllowance(origin.host, Number(params.amount ?? 0)));
+    const hasPermission =
+      !alwaysConfirm &&
+      hasBudget &&
+      (await hasPermissionFor(weblnMethod, origin.host));
 
     // request method is allowed to be called
     if (hasPermission) {
-      const response = await connector.requestMethod(
-        methodInLowerCase,
-        args.params
-      );
-      return response;
+      return await execute();
     } else {
       // throws an error if the user rejects
       const promptResponse = await utils.openPrompt<{
@@ -77,19 +117,19 @@ const request = async (
           requestPermission: {
             method: methodInLowerCase,
             description: `${connectorName}.${methodInLowerCase}`,
+            ...(alwaysConfirm && { alwaysConfirm }),
+            ...(isPayment && { showBudgetControl: !hasBudget }),
+            ...(Object.keys(params).length && { params }),
           },
         },
         origin,
         action: "public/confirmRequestPermission",
       });
 
-      const response = await connector.requestMethod(
-        methodInLowerCase,
-        args.params
-      );
+      const response = await execute();
 
       // add permission to db only if user decided to always allow this request
-      if (promptResponse.data.enabled) {
+      if (!alwaysConfirm && promptResponse.data.enabled) {
         await addPermissionFor(
           weblnMethod,
           origin.host,

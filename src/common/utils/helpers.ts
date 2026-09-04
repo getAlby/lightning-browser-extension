@@ -1,5 +1,6 @@
 import * as secp256k1 from "@noble/secp256k1";
 import { bech32 } from "bech32";
+import snakeCase from "lodash.snakecase";
 import { ConnectorTransaction } from "~/extension/background-script/connectors/connector.interface";
 import { Sender } from "~/types";
 
@@ -72,4 +73,27 @@ export function mergeTransactions(
   });
 
   return mergedTransactions;
+}
+
+// recursively converts every object key to snake_case, leaving already
+// snake_case keys untouched. Used to read RPC params/results regardless of
+// which casing convention the caller (or connector) used.
+export function snakeCaseObjectDeep(value: FixMe): FixMe {
+  if (Array.isArray(value)) {
+    return value.map(snakeCaseObjectDeep);
+  }
+
+  if (value && typeof value === "object" && value.constructor === Object) {
+    const obj = {} as FixMe;
+    const keys = Object.keys(value);
+    const len = keys.length;
+
+    for (let i = 0; i < len; i += 1) {
+      obj[snakeCase(keys[i])] = snakeCaseObjectDeep(value[keys[i]]);
+    }
+
+    return obj;
+  }
+
+  return value;
 }

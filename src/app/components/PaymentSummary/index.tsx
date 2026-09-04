@@ -35,13 +35,13 @@ const PaymentSummary: FC<Props> = ({ amount, description, fiatAmount }) => {
   );
 };
 
-const Dt = ({ children }: { children: React.ReactNode }) => (
+export const Dt = ({ children }: { children: React.ReactNode }) => (
   <dt className="text-sm font-medium text-gray-800 dark:text-neutral-200">
     {children}
   </dt>
 );
 
-const Dd = ({ children }: { children: React.ReactNode }) => (
+export const Dd = ({ children }: { children: React.ReactNode }) => (
   <dd className="text-lg text-gray-600 dark:text-neutral-400 break-words">
     {children}
   </dd>

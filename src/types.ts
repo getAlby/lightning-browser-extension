@@ -199,6 +199,9 @@ export type NavigationState = {
     requestPermission: {
       method: string;
       description: string;
+      showBudgetControl?: boolean;
+      alwaysConfirm?: boolean;
+      params?: Record<string, string | number>;
     };
     // liquid
     pset?: string;
