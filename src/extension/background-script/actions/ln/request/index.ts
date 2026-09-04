@@ -30,9 +30,6 @@ const methods: Record<string, RequestMethodHandler> = {
 const request = async (
   message: MessageGenericRequest
 ): Promise<{ data: unknown } | { error: string }> => {
-  const connector = await state.getState().getConnector();
-  const accountId = state.getState().currentAccountId;
-
   const { origin, args } = message;
 
   try {
@@ -43,6 +40,15 @@ const request = async (
 
     const methodInLowerCase = args.method.toLowerCase();
     const requestMethodName = `request.${methodInLowerCase}`;
+
+    const currentState = state.getState();
+    const accountId = currentState.currentAccountId;
+    const connectorName = currentState.getAccount()?.connector;
+    if (!accountId || !connectorName) {
+      throw new Error("Could not find a selected account");
+    }
+
+    const connector = await currentState.getConnector();
 
     // Check if the current connector support the call
     // connectors maybe do not support `requestMethod` at all
@@ -70,11 +76,6 @@ const request = async (
       throw new Error("WebLN is not enabled for this host");
     }
 
-    const connectorName = state.getState().getAccount()?.connector;
-    if (!accountId || !connectorName) {
-      throw new Error("Could not find a selected account");
-    }
-
     // prefix method with webln to prevent potential naming conflicts (e.g. with nostr calls that also use the permissions)
     const weblnMethod = `${WEBLN_PREFIX}${connectorName}/${methodInLowerCase}`;
 
@@ -91,6 +92,10 @@ const request = async (
     }
 
     const execute = async () => {
+      if (state.getState().currentAccountId !== accountId) {
+        throw new Error("Selected account changed");
+      }
+
       const response = await requestMethod(methodInLowerCase, args.params);
       method?.onSuccess?.(message, accountId, response, params);
       return response;
