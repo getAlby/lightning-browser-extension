@@ -237,6 +237,8 @@ const state = create<State>((set, get) => ({
       mnemonic: null,
       bitcoin: null,
     });
+    // in-flight decrypts can refill the cache after the opening clear
+    clearKeyCache();
   },
   isUnlocked: async () => {
     const password = await await get().password();
@@ -278,6 +280,8 @@ const state = create<State>((set, get) => ({
     }
     set({ ...getFreshState() });
     await get().saveToStorage();
+    // in-flight decrypts can refill the cache after the opening clear
+    clearKeyCache();
   },
   saveToStorage: () => {
     const current = get();

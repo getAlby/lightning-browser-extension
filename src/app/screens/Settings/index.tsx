@@ -15,6 +15,7 @@ import toast from "~/app/components/Toast";
 import { useSettings } from "~/app/context/SettingsContext";
 import { CURRENCIES } from "~/common/constants";
 import msg from "~/common/lib/msg";
+import { isValidUnlockPassword } from "~/common/utils/validations";
 
 const initialFormData = {
   password: "",
@@ -36,9 +37,12 @@ function Settings() {
   }
 
   async function updateAccountPassword(password: string) {
+    if (!isValidUnlockPassword(password)) {
+      return;
+    }
     try {
       await msg.request("changePassword", {
-        password: formData.password,
+        password,
       });
 
       toast.success(t("change_password.success"));
@@ -337,7 +341,7 @@ function Settings() {
                     type="submit"
                     primary
                     disabled={
-                      !formData.password ||
+                      !isValidUnlockPassword(formData.password) ||
                       formData.password !== formData.passwordConfirmation
                     }
                   />

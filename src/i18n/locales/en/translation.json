@@ -14,7 +14,9 @@
         "errors": {
           "enter_password": "Please enter a passcode.",
           "confirm_password": "Please confirm your passcode.",
-          "mismatched_password": "Passcodes don't match."
+          "mismatched_password": "Passcodes don't match.",
+          "password_too_short": "Passcode must be at least {{min}} characters.",
+          "password_numeric_only": "Passcode cannot be numbers only."
         }
       },
       "test_connection": {
@@ -672,7 +674,9 @@
         "errors": {
           "enter_password": "Please enter a new unlock passcode.",
           "confirm_password": "Please confirm your passcode.",
-          "mismatched_password": "Passcodes don't match."
+          "mismatched_password": "Passcodes don't match.",
+          "password_too_short": "Passcode must be at least {{min}} characters.",
+          "password_numeric_only": "Passcode cannot be numbers only."
         },
         "success": "Passcode changed successfully"
       }

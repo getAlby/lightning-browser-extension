@@ -1,10 +1,39 @@
 import { Account, Accounts } from "~/types";
 
-export const validate = (formData: Record<string, string>) => {
-  let password = "";
-  let passwordConfirmation = "";
+export const UNLOCK_PASSWORD_MIN_LENGTH = 8;
 
-  if (!formData.password) password = "enter_password";
+export type PasswordError =
+  | ""
+  | "enter_password"
+  | "password_too_short"
+  | "password_numeric_only";
+
+export type PasswordConfirmationError =
+  | ""
+  | "confirm_password"
+  | "mismatched_password";
+
+export function getPasswordError(
+  password: string,
+  minLength = UNLOCK_PASSWORD_MIN_LENGTH
+): PasswordError {
+  if (!password) return "enter_password";
+  if (password.length < minLength) return "password_too_short";
+  if (/^\d+$/.test(password)) return "password_numeric_only";
+  return "";
+}
+
+export function isValidUnlockPassword(
+  password: string,
+  minLength = UNLOCK_PASSWORD_MIN_LENGTH
+): boolean {
+  return getPasswordError(password, minLength) === "";
+}
+
+export const validate = (formData: Record<string, string>) => {
+  const password = getPasswordError(formData.password);
+  let passwordConfirmation: PasswordConfirmationError = "";
+
   if (!formData.passwordConfirmation) {
     passwordConfirmation = "confirm_password";
   } else if (formData.password !== formData.passwordConfirmation) {

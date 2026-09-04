@@ -1,3 +1,4 @@
+import { isValidUnlockPassword } from "~/common/utils/validations";
 import state from "~/extension/background-script/state";
 import { MessageSetPassword } from "~/types";
 
@@ -6,6 +7,12 @@ const setPassword = async (message: MessageSetPassword) => {
   // We might want to validate that no account was already configured with a different password
 
   const password = message.args.password;
+  if (!isValidUnlockPassword(password)) {
+    return {
+      error:
+        "Password must be at least 8 characters and must not be numbers only",
+    };
+  }
   await state.getState().password(password);
   return Promise.resolve({ data: { unlocked: true } });
 };

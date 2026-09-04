@@ -3,6 +3,12 @@ import type { KeyPrefix } from "i18next";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import PasswordViewAdornment from "~/app/components/PasswordViewAdornment";
+import {
+  UNLOCK_PASSWORD_MIN_LENGTH,
+  getPasswordError,
+  type PasswordConfirmationError,
+  type PasswordError,
+} from "~/common/utils/validations";
 
 export type PasswordFormData = {
   password: string;
@@ -19,13 +25,10 @@ export type Props<T extends PasswordFormData = PasswordFormData> = {
   autoFocus?: boolean;
 };
 
-type errorMessage =
-  | ""
-  | "enter_password"
-  | "confirm_password"
-  | "mismatched_password";
-
-const initialErrors: Record<string, errorMessage> = {
+const initialErrors: {
+  passwordErrorMessage: PasswordError;
+  passwordConfirmationErrorMessage: PasswordConfirmationError;
+} = {
   passwordErrorMessage: "",
   passwordConfirmationErrorMessage: "",
 };
@@ -36,7 +39,7 @@ export default function PasswordForm<
   formData,
   setFormData,
   i18nKeyPrefix,
-  minLength,
+  minLength = UNLOCK_PASSWORD_MIN_LENGTH,
   confirm = true,
   autoFocus = true,
 }: Props<T>) {
@@ -71,17 +74,15 @@ export default function PasswordForm<
   }
 
   function validate() {
-    let passwordErrorMessage: errorMessage = "";
-    let passwordConfirmationErrorMessage: errorMessage = "";
+    let passwordConfirmationErrorMessage: PasswordConfirmationError = "";
 
-    if (!formData.password) passwordErrorMessage = "enter_password";
     if (confirm && !formData.passwordConfirmation) {
       passwordConfirmationErrorMessage = "confirm_password";
     } else if (confirm && formData.password !== formData.passwordConfirmation) {
       passwordConfirmationErrorMessage = "mismatched_password";
     }
     setErrors({
-      passwordErrorMessage,
+      passwordErrorMessage: getPasswordError(formData.password, minLength),
       passwordConfirmationErrorMessage,
     });
   }
@@ -115,7 +116,7 @@ export default function PasswordForm<
         />
         {errors.passwordErrorMessage && (
           <p className="mt-1 text-red-500">
-            {t(`errors.${errors.passwordErrorMessage}`)}
+            {t(`errors.${errors.passwordErrorMessage}`, { min: minLength })}
           </p>
         )}
       </div>

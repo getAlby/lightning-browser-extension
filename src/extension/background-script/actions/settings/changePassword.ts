@@ -1,4 +1,5 @@
 import { clearKeyCache, decryptData, encryptData } from "~/common/lib/crypto";
+import { isValidUnlockPassword } from "~/common/utils/validations";
 import type { Message } from "~/types";
 
 import state from "../../state";
@@ -8,6 +9,12 @@ const changePassword = async (message: Message) => {
   const password = await state.getState().password();
   if (!password) return { error: "Password is missing" };
   const newPassword = message.args.password as string;
+  if (!isValidUnlockPassword(newPassword)) {
+    return {
+      error:
+        "Password must be at least 8 characters and must not be numbers only",
+    };
+  }
   const tmpAccounts = { ...accounts };
 
   for (const accountId in tmpAccounts) {

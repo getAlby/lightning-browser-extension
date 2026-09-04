@@ -1,5 +1,10 @@
 import { Accounts } from "~/types";
-import { getUniqueAccountName } from "~/common/utils/validations";
+import {
+  UNLOCK_PASSWORD_MIN_LENGTH,
+  getPasswordError,
+  getUniqueAccountName,
+  isValidUnlockPassword,
+} from "~/common/utils/validations";
 
 function getMockAccounts(names: string[]): Accounts {
   const accounts: Accounts = {};
@@ -13,6 +18,30 @@ function getMockAccounts(names: string[]): Accounts {
   });
   return accounts;
 }
+
+describe("getPasswordError", () => {
+  test("rejects an empty password", () => {
+    expect(getPasswordError("")).toBe("enter_password");
+    expect(isValidUnlockPassword("")).toBe(false);
+  });
+
+  test("rejects a password shorter than the minimum length", () => {
+    expect(getPasswordError("abc12")).toBe("password_too_short");
+    expect(getPasswordError("a".repeat(UNLOCK_PASSWORD_MIN_LENGTH - 1))).toBe(
+      "password_too_short"
+    );
+  });
+
+  test("rejects a numbers-only password", () => {
+    expect(getPasswordError("12345678")).toBe("password_numeric_only");
+    expect(isValidUnlockPassword("00000000")).toBe(false);
+  });
+
+  test("accepts a mixed password that meets the minimum length", () => {
+    expect(getPasswordError("correct horse")).toBe("");
+    expect(isValidUnlockPassword("passcode1")).toBe(true);
+  });
+});
 
 describe("getUniqueAccountName", () => {
   test("should return the same name if account account is not present yet", () => {

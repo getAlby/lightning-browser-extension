@@ -28,12 +28,12 @@ const mockState = {
   saveToStorage: jest.fn().mockResolvedValue(undefined),
 };
 
-describe("edit account", () => {
+describe("unlock account", () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
 
-  test("edit existing account", async () => {
+  test("unlocks and upgrades a legacy-encrypted config", async () => {
     const message: MessageAccountUnlock = {
       application: "LBE",
       args: { password: 1 },

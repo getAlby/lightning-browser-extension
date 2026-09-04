@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import toast from "~/app/components/Toast";
 import msg from "~/common/lib/msg";
+import { isValidUnlockPassword } from "~/common/utils/validations";
 
 const initialFormData = {
   password: "",
@@ -25,6 +26,9 @@ export default function SetPassword() {
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (!isValidUnlockPassword(formData.password)) {
+      return;
+    }
     try {
       await msg.request("setPassword", { password: formData.password });
       navigate("/choose-path");
@@ -74,7 +78,7 @@ export default function SetPassword() {
               type="submit"
               primary
               disabled={
-                !formData.password ||
+                !isValidUnlockPassword(formData.password) ||
                 formData.password !== formData.passwordConfirmation
               }
               className="w-64"
