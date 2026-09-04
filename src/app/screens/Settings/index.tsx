@@ -37,7 +37,10 @@ function Settings() {
   }
 
   async function updateAccountPassword(password: string) {
-    if (!isValidUnlockPassword(password)) {
+    if (
+      !isValidUnlockPassword(password) ||
+      password !== formData.passwordConfirmation
+    ) {
       return;
     }
     try {

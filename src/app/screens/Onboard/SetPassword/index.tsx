@@ -26,7 +26,10 @@ export default function SetPassword() {
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!isValidUnlockPassword(formData.password)) {
+    if (
+      !isValidUnlockPassword(formData.password) ||
+      formData.password !== formData.passwordConfirmation
+    ) {
       return;
     }
     try {
