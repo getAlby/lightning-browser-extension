@@ -11,5 +11,5 @@ export type RequestMethodHandler = {
     accountId: string,
     response: { data: unknown },
     params: RequestParams
-  ) => void;
+  ) => void | Promise<void>;
 };

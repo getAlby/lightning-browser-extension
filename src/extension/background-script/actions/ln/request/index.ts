@@ -97,7 +97,13 @@ const request = async (
       }
 
       const response = await requestMethod(methodInLowerCase, args.params);
-      method?.onSuccess?.(message, accountId, response, params);
+
+      try {
+        await method?.onSuccess?.(message, accountId, response, params);
+      } catch (e) {
+        console.error(e);
+      }
+
       return response;
     };
 

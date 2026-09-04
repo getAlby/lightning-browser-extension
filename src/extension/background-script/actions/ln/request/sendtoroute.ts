@@ -45,7 +45,11 @@ const sendtoroute: RequestMethodHandler = {
     };
   },
   onSuccess(message, accountId, response, params) {
-    publishSendToRoutePayment(message, accountId, response, params);
+    try {
+      publishSendToRoutePayment(message, accountId, response, params);
+    } catch (e) {
+      console.error(e);
+    }
   },
 };
 
@@ -77,12 +81,8 @@ function publishSendToRoutePayment(
     accountId,
     response: {
       data: {
-        preimage: data.payment_preimage
-          ? utils.base64ToHex(data.payment_preimage)
-          : "",
-        paymentHash: data.payment_hash
-          ? utils.base64ToHex(data.payment_hash)
-          : "",
+        preimage: toHexOrEmpty(data.payment_preimage),
+        paymentHash: toHexOrEmpty(data.payment_hash),
         route: { total_amt: Math.max(totalAmount, 0), total_fees: totalFees },
       },
     },
@@ -91,6 +91,19 @@ function publishSendToRoutePayment(
         params.pubkey !== undefined ? String(params.pubkey) : undefined,
     },
   });
+}
+
+function toHexOrEmpty(value: unknown): string {
+  if (typeof value !== "string" || !value) {
+    return "";
+  }
+
+  try {
+    return utils.base64ToHex(value);
+  } catch (e) {
+    console.error(e);
+    return "";
+  }
 }
 
 function toSats(value: unknown, divisor = 1): number | undefined {
