@@ -21,12 +21,14 @@ const ConnectorClass = jest.fn().mockImplementation(() => {
 jest.mock("~/extension/background-script/state", () => ({
   getState: () => ({
     getConnector: jest.fn(() => Promise.resolve(new ConnectorClass())),
+    getAccount: () => ({ connector: "lnd" }),
     currentAccountId: "8b7f1dc6-ab87-4c6c-bca5-19fa8632731e",
   }),
 }));
 
 const allowanceInDB = {
   enabled: true,
+  enabledFor: ["webln"],
   host: "getalby.com",
   id: 1,
   imageURL: "https://getalby.com/favicon.ico",
