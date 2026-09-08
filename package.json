@@ -21,6 +21,7 @@
     "build:firefox": "NODE_ENV=production ALBY_API_URL=https://api.getalby.com TARGET_BROWSER=firefox webpack",
     "build:opera": "NODE_ENV=production ALBY_API_URL=https://api.getalby.com TARGET_BROWSER=opera webpack",
     "build": "yarn build:chrome && yarn build:firefox && yarn build:opera",
+    "analyze": "yarn build:chrome --json=dist/stats.json --stats detailed && webpack-bundle-analyzer dist/stats.json dist/production/chrome -m static -r dist/bundle-report.html -O",
     "package": "./create-packages.sh",
     "lint": "yarn lint:js && yarn tsc:compile && yarn format:fix",
     "lint:js": "eslint src --max-warnings 0",
