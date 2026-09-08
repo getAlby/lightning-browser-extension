@@ -9,10 +9,25 @@ import {
 } from "~/types";
 
 import { bech32Decode } from "../utils/helpers";
-import { assertAllowedLnurlUrl, lnurlGet } from "./lnurlValidation";
 
 /** An error returned by the LNURL service itself (LUD-06 `status: "ERROR"`). */
 class LNURLServiceError extends Error {}
+
+const LNURL_TAGS = ["payRequest", "withdrawRequest", "channelRequest", "login"];
+
+/**
+ * Only a response that looks like an LNURL service response is processed any
+ * further. Anything else (HTML, plain text, unrelated JSON) is rejected with a
+ * generic error so its content never leaks into an error message.
+ */
+const isLNURLResponse = (data: unknown): data is LNURLDetails | LNURLError => {
+  if (typeof data !== "object" || data === null) return false;
+  const res = data as Record<string, unknown>;
+  if (res.status === "ERROR") return typeof res.reason === "string";
+  if (typeof res.tag !== "string" || !LNURL_TAGS.includes(res.tag))
+    return false;
+  return res.tag === "login" || typeof res.callback === "string";
+};
 
 const fromInternetIdentifier = (address: string) => {
   // email regex: https://emailregex.com/
@@ -72,18 +87,10 @@ const lnurl = {
     return null;
   },
 
-  /**
-   * `userInitiated` marks an LNURL the user pasted or scanned themselves. Those
-   * may point at a self-hosted service on a local network; LNURLs supplied by a
-   * website may not, since the request is made from a privileged context.
-   */
-  async getDetails(
-    lnurlString: string,
-    { userInitiated = false } = {}
-  ): Promise<LNURLError | LNURLDetails> {
-    const url = userInitiated
-      ? normalizeLnurl(lnurlString)
-      : assertAllowedLnurlUrl(normalizeLnurl(lnurlString));
+  normalizeLnurl,
+
+  async getDetails(lnurlString: string): Promise<LNURLError | LNURLDetails> {
+    const url = normalizeLnurl(lnurlString);
     const searchParamsTag = url.searchParams.get("tag");
     const searchParamsK1 = url.searchParams.get("k1");
     const searchParamsAction = url.searchParams.get("action");
@@ -100,13 +107,15 @@ const lnurl = {
       return lnurlAuthDetails;
     } else {
       try {
-        const { data }: { data: LNURLDetails | LNURLError } = await lnurlGet<
-          LNURLDetails | LNURLError
-        >(
-          url,
-          {},
-          { validate: !userInitiated, followRedirects: userInitiated }
-        );
+        const { data } = await axios.get<unknown>(url.toString(), {
+          adapter: "fetch",
+          // https://github.com/lnurl/luds/blob/luds/01.md#http-status-codes-and-content-type
+          validateStatus: () => true,
+        });
+
+        if (!isLNURLResponse(data)) {
+          throw new Error("Invalid LNURL response");
+        }
 
         const lnurlDetails = data;
 
@@ -119,17 +128,11 @@ const lnurl = {
 
         return lnurlDetails;
       } catch (e) {
-        // The service's own error text is safe to surface: the endpoint host has
-        // already been validated. Transport failures are reported generically so
-        // the response of an arbitrary endpoint is not relayed back to a caller.
+        // Only the service's own LNURL error text is surfaced. Transport
+        // failures and non-LNURL responses are reported generically so the
+        // content of an arbitrary endpoint is never relayed to the caller.
         let error: string;
         if (e instanceof LNURLServiceError) {
-          error = e.message;
-        } else if (
-          !axios.isAxiosError(e) &&
-          e instanceof Error &&
-          e.message.startsWith("Invalid LNURL")
-        ) {
           error = e.message;
         } else if (this.isLightningAddress(lnurlString)) {
           error =

@@ -12,10 +12,7 @@ import {
   PopiconsChevronLeftLine,
   PopiconsChevronTopLine,
 } from "@popicons/react";
-import {
-  assertAllowedCallbackUrl,
-  lnurlGet,
-} from "~/common/lib/lnurlValidation";
+import axios from "axios";
 import React, { Fragment, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -141,12 +138,13 @@ function LNURLPay() {
       let response;
 
       try {
-        response = await lnurlGet<LNURLPaymentInfo | LNURLError>(
-          assertAllowedCallbackUrl(details.callback, details.url),
+        response = await axios.get<LNURLPaymentInfo | LNURLError>(
+          details.callback,
           {
             params,
             // https://github.com/fiatjaf/lnurl-rfc/blob/luds/01.md#http-status-codes-and-content-type
             validateStatus: () => true,
+            adapter: "fetch",
           }
         );
 

@@ -60,9 +60,7 @@ function Send() {
       }
 
       if (lnurl) {
-        const lnurlDetails = await lnurlLib.getDetails(lnurl, {
-          userInitiated: true,
-        });
+        const lnurlDetails = await lnurlLib.getDetails(lnurl);
         if (isLNURLDetailsError(lnurlDetails)) {
           toast.error(lnurlDetails.reason);
           return;
