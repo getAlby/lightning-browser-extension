@@ -16,7 +16,6 @@ const weblnCalls = [
   "webln/makeInvoice",
   "webln/signMessageOrPrompt",
   "webln/getBalanceOrPrompt",
-  "webln/request",
   "webln/on",
   "webln/emit",
   "webln/off",

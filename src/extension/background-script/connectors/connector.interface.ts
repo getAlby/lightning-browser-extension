@@ -146,15 +146,7 @@ export default interface Connector {
   signMessage(args: SignMessageArgs): Promise<SignMessageResponse>;
   connectPeer(args: ConnectPeerArgs): Promise<ConnectPeerResponse>;
   supportedMethods?: string[];
-  requestMethod?(
-    method: string,
-    args: Record<string, unknown>
-  ): Promise<{ data: unknown }>;
   getOAuthToken?(): OAuthToken | undefined;
   getSwapInfo?(): Promise<SwapInfoResponse>;
   createSwap?(params: CreateSwapParams): Promise<CreateSwapResponse>;
-}
-
-export function flattenRequestMethods(methods: string[]) {
-  return methods.map((method) => `request.${method}`);
 }

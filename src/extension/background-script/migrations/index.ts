@@ -92,6 +92,20 @@ const migrations = {
 
     console.info("Migration migrateDecryptPermission complete.");
   },
+
+  migrateRemoveWeblnRequestPermissions: async () => {
+    const weblnRequestMethod = /^webln\/(lnd|lnc|commando)\//;
+    const permissions = await db.permissions.toArray();
+
+    for (const permission of permissions) {
+      if (permission.id && weblnRequestMethod.test(permission.method)) {
+        await db.permissions.delete(permission.id);
+      }
+    }
+
+    await db.saveToStorage();
+    console.info("Migration migrateRemoveWeblnRequestPermissions complete.");
+  },
 };
 
 const migrate = async () => {
@@ -114,6 +128,12 @@ const migrate = async () => {
     console.info("Running migration for: migrateDecryptPermission");
     await migrations["migrateDecryptPermission"]();
     await setMigrated("migrateDecryptPermission");
+  }
+
+  if (shouldMigrate("migrateRemoveWeblnRequestPermissions")) {
+    console.info("Running migration for: migrateRemoveWeblnRequestPermissions");
+    await migrations["migrateRemoveWeblnRequestPermissions"]();
+    await setMigrated("migrateRemoveWeblnRequestPermissions");
   }
 };
 
