@@ -169,6 +169,7 @@ export type NavigationState = {
   origin?: OriginData; // only defoned if coming via "Prompt", can be empty if a LNURL-action is being used via "Send" within the "PopUp"
   args?: {
     lnurlDetails: LNURLDetails;
+    rememberLoginHost?: string;
     amountEditable?: boolean;
     memoEditable?: boolean;
     invoiceAttributes?: RequestInvoiceArgs;
