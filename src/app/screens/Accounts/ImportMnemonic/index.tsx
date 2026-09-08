@@ -1,7 +1,7 @@
 import Container from "@components/Container";
 import Loading from "@components/Loading";
 import * as bip39 from "@scure/bip39";
-import { wordlist } from "@scure/bip39/wordlists/english";
+import { wordlist } from "@scure/bip39/wordlists/english.js";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
