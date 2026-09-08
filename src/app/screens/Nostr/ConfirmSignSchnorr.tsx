@@ -103,9 +103,6 @@ function ConfirmSignSchnorr() {
               />
             </div>
             <div className="flex flex-col gap-4">
-              <p className="text-center text-sm text-gray-600 dark:text-neutral-400">
-                {t("always_confirm")}
-              </p>
               <ConfirmOrCancel
                 disabled={loading}
                 loading={loading}
