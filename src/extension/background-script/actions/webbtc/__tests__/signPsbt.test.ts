@@ -29,6 +29,18 @@ function mockSettings(network: BitcoinNetworkType) {
   state.getState = jest.fn().mockReturnValue(mockState);
 }
 
+// @bitcoinerlab/secp256k1 >= 2.0.0 draws random BIP340 auxiliary data when
+// none is given, which makes every signature different. Pin it to zeros (the
+// pre-2.0.0 default) so the signed transaction matches the fixture exactly.
+jest.mock("@bitcoinerlab/secp256k1", () => {
+  const actual = jest.requireActual("@bitcoinerlab/secp256k1");
+  return {
+    ...actual,
+    signSchnorr: (h: Uint8Array, d: Uint8Array, e?: Uint8Array) =>
+      actual.signSchnorr(h, d, e ?? new Uint8Array(32)),
+  };
+});
+
 jest.mock("~/common/lib/crypto", () => {
   return {
     decryptData: jest.fn((encrypted, _password) => {

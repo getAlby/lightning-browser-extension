@@ -36,7 +36,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@bitcoinerlab/secp256k1": "^1.1.1",
+    "@bitcoinerlab/secp256k1": "^2.0.0",
     "@getalby/sdk": "^8.0.3",
     "@headlessui/react": "^2.2.10",
     "@lightninglabs/lnc-web": "^0.3.1-alpha",
