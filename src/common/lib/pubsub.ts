@@ -13,7 +13,6 @@ const pubsub = {
     }
     PubSub.publish(`ln.${type}.${status}`, {
       accountId: data.accountId,
-      budgetReserved: data.budgetReserved,
       response: data.response,
       details: data.details,
       paymentRequestDetails: data.paymentRequestDetails,

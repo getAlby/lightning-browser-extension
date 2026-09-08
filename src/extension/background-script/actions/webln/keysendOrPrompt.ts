@@ -29,7 +29,7 @@ const keysendOrPrompt = async (message: Message, sender: Sender) => {
 
 async function keysendWithAllowance(message: Message) {
   try {
-    const response = await keysend(message, { budgetReserved: true });
+    const response = await keysend(message);
     return response;
   } catch (e) {
     console.error(e);

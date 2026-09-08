@@ -89,8 +89,6 @@ export interface OriginData {
 
 export interface PaymentNotificationData {
   accountId: Account["id"];
-  // set when the budget was already debited before the payment was sent
-  budgetReserved?: boolean;
   paymentRequestDetails?: PaymentRequestObject | undefined;
   response: SendPaymentResponse | { error: string };
   origin?: OriginData;

@@ -30,10 +30,10 @@ const sendPaymentOrPrompt = async (message: Message, sender: Sender) => {
   }
 };
 
-// Checks the budget and takes the amount out of it in a single transaction.
-// The budget is debited before the payment is sent and is not put back if the
-// payment fails: concurrent payments would otherwise all read the same budget
-// and each spend it.
+// Checks the budget and takes the amount out of it in a single transaction,
+// before the payment is sent. The amount is not put back if the payment fails.
+// Concurrent payments would otherwise all read the same budget and each spend
+// it.
 async function checkAllowance(host: string, amount: number) {
   if (!Number.isFinite(amount) || amount < 0) return false;
 
@@ -67,7 +67,7 @@ async function checkAllowance(host: string, amount: number) {
 
 async function sendPaymentWithAllowance(message: Message) {
   try {
-    const response = await sendPayment(message, { budgetReserved: true });
+    const response = await sendPayment(message);
     return response;
   } catch (e) {
     console.error(e);
