@@ -68,6 +68,24 @@ afterEach(async () => {
 
 describe("signSchnorr", () => {
   describe("throws error", () => {
+    test("if the host's allowance does not exist", async () => {
+      const senderWithUndefinedAllowanceHost = {
+        ...sender,
+        origin: `https://some-host.com`,
+      };
+
+      const result = await signSchnorr(
+        message,
+        senderWithUndefinedAllowanceHost
+      );
+
+      expect(console.error).toHaveBeenCalledTimes(1);
+      expect(utils.openPrompt).not.toHaveBeenCalled();
+      expect(result).toStrictEqual({
+        error: "Could not find an allowance for this host",
+      });
+    });
+
     test("if the message args are not correct", async () => {
       const messageWithoutSigHash = {
         ...message,

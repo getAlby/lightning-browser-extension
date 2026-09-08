@@ -1,6 +1,7 @@
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import utils from "~/common/lib/utils";
 import { getHostFromSender } from "~/common/utils/helpers";
+import db from "~/extension/background-script/db";
 import { MessageSignSchnorr, Sender } from "~/types";
 
 import state from "../../state";
@@ -16,6 +17,15 @@ const signSchnorr = async (message: MessageSignSchnorr, sender: Sender) => {
   const isMessageMode = message.args.message !== undefined;
 
   try {
+    const allowance = await db.allowances
+      .where("host")
+      .equalsIgnoreCase(host)
+      .first();
+
+    if (!allowance?.id) {
+      throw new Error("Could not find an allowance for this host");
+    }
+
     if (isMessageMode) {
       if (typeof plaintext !== "string") {
         throw new Error("message is missing or not correct");
