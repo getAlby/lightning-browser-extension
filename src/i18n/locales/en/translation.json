@@ -339,6 +339,7 @@
       }
     },
     "home": {
+      "invalid_lnurl": "Invalid LNURL",
       "actions": {
         "send_satoshis": "⚡️ Send Satoshis ⚡️",
         "enable_now": "Enable Now"

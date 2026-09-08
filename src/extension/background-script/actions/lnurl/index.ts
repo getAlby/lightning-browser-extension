@@ -8,15 +8,6 @@ import channelRequestWithPrompt from "./channel";
 import payWithPrompt from "./pay";
 import withdrawWithPrompt from "./withdraw";
 
-// LUD-01: LNURL endpoints are https; only onion services may use http
-function isAllowedTarget(url: URL): boolean {
-  const isOnion = url.hostname.toLowerCase().endsWith(".onion");
-  if (url.protocol !== "https:" && !(url.protocol === "http:" && isOnion)) {
-    return false;
-  }
-  return !lnurlLib.isPrivateHost(url.hostname);
-}
-
 /*
   Main entry point for LNURL calls
   returns a messagable response: an object with either a `data` or with an `error`
@@ -25,7 +16,11 @@ async function lnurl(message: MessageWebLnLnurl, sender: Sender) {
   if (typeof message.args.lnurlEncoded !== "string") return;
   let lnurlDetails;
   try {
-    if (!isAllowedTarget(lnurlLib.normalizeLnurl(message.args.lnurlEncoded))) {
+    if (
+      !lnurlLib.isAllowedTarget(
+        lnurlLib.normalizeLnurl(message.args.lnurlEncoded)
+      )
+    ) {
       return { error: "Invalid LNURL" };
     }
 
@@ -37,7 +32,7 @@ async function lnurl(message: MessageWebLnLnurl, sender: Sender) {
     // the callback is chosen by the LNURL service, so it is checked as well
     if (
       "callback" in lnurlDetails &&
-      !isAllowedTarget(new URL(lnurlDetails.callback))
+      !lnurlLib.isAllowedTarget(new URL(lnurlDetails.callback))
     ) {
       return { error: "Invalid LNURL" };
     }

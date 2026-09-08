@@ -111,6 +111,15 @@ const lnurl = {
   normalizeLnurl,
   isPrivateHost,
 
+  /** LUD-01: LNURL endpoints are https; only onion services may use http. */
+  isAllowedTarget(url: URL): boolean {
+    const isOnion = url.hostname.toLowerCase().endsWith(".onion");
+    if (url.protocol !== "https:" && !(url.protocol === "http:" && isOnion)) {
+      return false;
+    }
+    return !isPrivateHost(url.hostname);
+  },
+
   async getDetails(lnurlString: string): Promise<LNURLError | LNURLDetails> {
     const url = normalizeLnurl(lnurlString);
     const searchParamsTag = url.searchParams.get("tag");
