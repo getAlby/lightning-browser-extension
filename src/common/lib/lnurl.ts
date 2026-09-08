@@ -1,5 +1,6 @@
 import axios from "axios";
 import lightningPayReq from "bolt11-signet";
+import ipaddr from "ipaddr.js";
 import { isLNURLDetailsError } from "~/common/utils/typeHelpers";
 import {
   LNURLAuthServiceResponse,
@@ -14,6 +15,26 @@ import { bech32Decode } from "../utils/helpers";
 class LNURLServiceError extends Error {}
 
 const LNURL_TAGS = ["payRequest", "withdrawRequest", "channelRequest", "login"];
+
+const LOCAL_HOST_SUFFIXES = [".local", ".internal", ".localhost", ".home.arpa"];
+
+/**
+ * LNURLs passed in by a website are fetched from the extension, which holds
+ * broad host permissions. A website must not be able to point those requests
+ * at the user's own machine or local network.
+ */
+const isPrivateHost = (hostname: string): boolean => {
+  const host = hostname
+    .toLowerCase()
+    .replace(/^\[|\]$/g, "")
+    .replace(/\.$/, "");
+  if (!host || host === "localhost") return true;
+  if (LOCAL_HOST_SUFFIXES.some((suffix) => host.endsWith(suffix))) return true;
+  // process() unwraps IPv4-mapped IPv6 (::ffff:a.b.c.d); everything that is
+  // not plain unicast (loopback, private, link-local, CGNAT, NAT64, ...) is
+  // treated as private.
+  return ipaddr.isValid(host) && ipaddr.process(host).range() !== "unicast";
+};
 
 /**
  * Only a response that looks like an LNURL service response is processed any
@@ -88,6 +109,7 @@ const lnurl = {
   },
 
   normalizeLnurl,
+  isPrivateHost,
 
   async getDetails(lnurlString: string): Promise<LNURLError | LNURLDetails> {
     const url = normalizeLnurl(lnurlString);

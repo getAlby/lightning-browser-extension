@@ -33,6 +33,10 @@ export const PublisherLnData: FC<Props> = ({ lnData }) => {
 
       if (lnData.method === "lnurl") {
         const lnurl = lnData.address;
+        if (lnurlLib.isPrivateHost(lnurlLib.normalizeLnurl(lnurl).hostname)) {
+          toast.error("Invalid LNURL");
+          return;
+        }
         const lnurlDetails = await lnurlLib.getDetails(lnurl);
         if (isLNURLDetailsError(lnurlDetails)) {
           toast.error(lnurlDetails.reason);

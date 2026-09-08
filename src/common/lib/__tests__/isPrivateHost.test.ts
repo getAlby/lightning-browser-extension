@@ -1,4 +1,4 @@
-import { isPrivateHost } from "../index";
+import lnurlLib from "../lnurl";
 
 // hostnames are taken from the WHATWG URL parser, which re-serialises IPv6
 // literals (https://[::ffff:127.0.0.1]/ becomes [::ffff:7f00:1])
@@ -40,9 +40,9 @@ describe("isPrivateHost", () => {
   ];
 
   it.each(privateHosts)("treats %s as private", (host) => {
-    expect(isPrivateHost(host)).toBe(true);
+    expect(lnurlLib.isPrivateHost(host)).toBe(true);
   });
   it.each(publicHosts)("treats %s as public", (host) => {
-    expect(isPrivateHost(host)).toBe(false);
+    expect(lnurlLib.isPrivateHost(host)).toBe(false);
   });
 });
