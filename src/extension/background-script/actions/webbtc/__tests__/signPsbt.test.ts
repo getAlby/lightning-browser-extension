@@ -1,3 +1,5 @@
+import * as ecc from "@bitcoinerlab/secp256k1";
+import * as bitcoin from "bitcoinjs-lib";
 import getPsbtPreview from "~/extension/background-script/actions/webbtc/getPsbtPreview";
 import signPsbt from "~/extension/background-script/actions/webbtc/signPsbt";
 import Bitcoin from "~/extension/background-script/bitcoin";
@@ -89,7 +91,34 @@ describe("signPsbt", () => {
     expect(result.data?.signed).not.toBe(undefined);
     expect(result.error).toBe(undefined);
 
-    expect(result.data?.signed).toBe(btcFixture.regtestTaprootSignedPsbt);
+    // BIP340 signatures use random auxiliary data, so the witness differs on
+    // every run. Compare the unsigned transaction (txid excludes witness data)
+    // and verify the Schnorr signature against the taproot output key instead.
+    const signedTx = bitcoin.Transaction.fromHex(result.data.signed);
+    const expectedTx = bitcoin.Transaction.fromHex(
+      btcFixture.regtestTaprootSignedPsbt
+    );
+    expect(signedTx.getId()).toBe(expectedTx.getId());
+
+    const witnessUtxo = bitcoin.Psbt.fromHex(btcFixture.regtestTaprootPsbt).data
+      .inputs[0].witnessUtxo;
+    if (!witnessUtxo) {
+      throw new Error("Fixture PSBT should have a witnessUtxo");
+    }
+    const sighash = signedTx.hashForWitnessV1(
+      0,
+      [witnessUtxo.script],
+      [witnessUtxo.value],
+      bitcoin.Transaction.SIGHASH_DEFAULT
+    );
+    const [signature] = signedTx.ins[0].witness;
+    expect(signature.length).toBe(64);
+    const outputKey = witnessUtxo.script.subarray(2, 34);
+    expect(ecc.verifySchnorr(sighash, outputKey, signature)).toBe(true);
+    // sanity: a wrong sighash must not verify, so the check above is meaningful
+    expect(
+      ecc.verifySchnorr(bitcoin.crypto.sha256(sighash), outputKey, signature)
+    ).toBe(false);
   });
 });
 
