@@ -67,13 +67,4 @@ export default class WebLNProvider extends ProviderBase {
     this._checkEnabled("getBalance");
     return this.execute("getBalanceOrPrompt");
   }
-
-  request(method: string, params: Record<string, unknown>) {
-    this._checkEnabled("request");
-
-    return this.execute("request", {
-      method,
-      params,
-    });
-  }
 }

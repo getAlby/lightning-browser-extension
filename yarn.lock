@@ -458,13 +458,12 @@
   resolved "https://registry.npmjs.org/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@bitcoinerlab/secp256k1@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@bitcoinerlab/secp256k1/-/secp256k1-1.1.1.tgz#938305c30505b67b15f3de53627bc9d8b4cc7680"
-  integrity sha512-uhjW51WfVLpnHN7+G0saDcM/k9IqcyTbZ+bDgLF3AX8V/a3KXSE9vn7UPBrcdU72tp0J4YPR7BHp2m7MLAZ/1Q==
+"@bitcoinerlab/secp256k1@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@bitcoinerlab/secp256k1/-/secp256k1-2.0.0.tgz#c062aad7a341d960ef086cb6a27797ee2bc4e296"
+  integrity sha512-l8wO4Hx7fovtcDVU5xYEa7yfP9DokC8QxYlJoaP1zi2/iX+c6NNSvMzq+oCZ8ikqvrXTuhSQ6iP1IRx08kWZgw==
   dependencies:
-    "@noble/hashes" "^1.1.5"
-    "@noble/secp256k1" "^1.7.1"
+    "@noble/curves" "^2.3.0"
 
 "@commitlint/cli@^17.8.0":
   version "17.8.0"
@@ -1385,6 +1384,13 @@
   dependencies:
     "@noble/hashes" "2.2.0"
 
+"@noble/curves@^2.3.0":
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/@noble/curves/-/curves-2.4.0.tgz#367c869bfd790c3a2248152562f255b5f8898b74"
+  integrity sha512-P4/62zrgfH33CneE3Dn4WhJVA22YUU0eR51wKIan4NVRvwsA0YnPTwWGpNbpuacSujmSFLvyzpyuR30+fbq2Ew==
+  dependencies:
+    "@noble/hashes" "2.4.0"
+
 "@noble/hashes@1.3.1", "@noble/hashes@~1.3.0", "@noble/hashes@~1.3.1":
   version "1.3.1"
   resolved "https://registry.npmjs.org/@noble/hashes/-/hashes-1.3.1.tgz"
@@ -1410,20 +1416,10 @@
   resolved "https://registry.yarnpkg.com/@noble/hashes/-/hashes-2.4.0.tgz#e6a3e98edbed3c8659b28bb8f9b18ca02ec8ea4b"
   integrity sha512-X5XaVWZIBCT7HHZGm5I7ZQXDwLG+bGXuSrMQAW+7Zvl87h1kmc1ZB1VSRJcpUfoUrGQp4Fkoxm5kZ+Ms+aW+eA==
 
-"@noble/hashes@^1.1.5":
-  version "1.3.2"
-  resolved "https://registry.yarnpkg.com/@noble/hashes/-/hashes-1.3.2.tgz#6f26dbc8fbc7205873ce3cee2f690eba0d421b39"
-  integrity sha512-MVC8EAQp7MvEcm30KWENFjgR+Mkmf+D189XJTkFIlwohU5hcBbn1ZkKq7KVTi2Hme3PMGF390DaL52beVrIihQ==
-
 "@noble/hashes@^1.2.0":
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/@noble/hashes/-/hashes-1.3.0.tgz#085fd70f6d7d9d109671090ccae1d3bec62554a1"
   integrity sha512-ilHEACi9DwqJB0pw7kv+Apvh50jiiSyR/cQ3y4W7lOR5mhvn/50FLUfsnfJz0BDZtl/RR16kXvptiv6q1msYZg==
-
-"@noble/secp256k1@^1.7.1":
-  version "1.7.1"
-  resolved "https://registry.npmjs.org/@noble/secp256k1/-/secp256k1-1.7.1.tgz"
-  integrity sha512-hOUk6AyBFmqVrv7k5WAw/LpszxVbj9gGN4JRkIX52fdFAj1UA61KXmZDvqVEm+pOyec3+fIeZB02LYa/pWOArw==
 
 "@noble/secp256k1@^3.1.0":
   version "3.1.0"
@@ -2279,13 +2275,6 @@
   version "4.4.8"
   resolved "https://registry.yarnpkg.com/@types/lodash.pick/-/lodash.pick-4.4.8.tgz#125ba7fb4a0d7a02ac41bae1f2c455e60c125347"
   integrity sha512-jQUDDkyIROOnAvtuqhvOb/Ws1plf+Wr1f0jKOoctJJZFreu/Bbc5Fnjg7dIrdt9ZxRDiItuVFGP84z1xHAHS4w==
-  dependencies:
-    "@types/lodash" "*"
-
-"@types/lodash.snakecase@^4.1.8":
-  version "4.1.8"
-  resolved "https://registry.yarnpkg.com/@types/lodash.snakecase/-/lodash.snakecase-4.1.8.tgz#2cb47f705b93f8c620842aad4100a6c0b1a56c79"
-  integrity sha512-x1b+z3ZeperNh6sWRvIjJZsM+06ZeBWx155ej6LGe2KjsbqP5GVa8/n33QrrEVXBVLEGubINSHt//8MdC9h+GQ==
   dependencies:
     "@types/lodash" "*"
 

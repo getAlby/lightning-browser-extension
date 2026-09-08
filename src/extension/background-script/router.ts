@@ -111,7 +111,6 @@ const routes = {
       lnurl: webln.lnurl,
       makeInvoice: webln.makeInvoiceOrPrompt,
       getBalanceOrPrompt: webln.getBalanceOrPrompt,
-      request: ln.request,
     },
     liquid: {
       isEnabled: liquid.isEnabled,
