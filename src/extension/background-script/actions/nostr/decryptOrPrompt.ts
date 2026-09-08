@@ -1,12 +1,8 @@
-import {
-  DONT_ASK_ANY,
-  DONT_ASK_CURRENT,
-  USER_REJECTED_ERROR,
-} from "~/common/constants";
+import { USER_REJECTED_ERROR } from "~/common/constants";
 import utils from "~/common/lib/utils";
 import { getHostFromSender } from "~/common/utils/helpers";
 import {
-  addPermissionFor,
+  addPermissionForNostrPrompt,
   hasPermissionFor,
   isPermissionBlocked,
 } from "~/extension/background-script/permissions";
@@ -45,19 +41,12 @@ const decryptOrPrompt = async (message: MessageDecryptGet, sender: Sender) => {
       });
 
       // add permission to db only if user decided to always allow this request
-      if (promptResponse.data.permissionOption == DONT_ASK_CURRENT) {
-        await addPermissionFor(
-          PermissionMethodNostr["NOSTR_DECRYPT"],
-          host,
-          promptResponse.data.blocked
-        );
-      }
-
-      if (promptResponse.data.permissionOption == DONT_ASK_ANY) {
-        Object.values(PermissionMethodNostr).forEach(async (permission) => {
-          await addPermissionFor(permission, host, promptResponse.data.blocked);
-        });
-      }
+      await addPermissionForNostrPrompt(
+        host,
+        PermissionMethodNostr["NOSTR_DECRYPT"],
+        promptResponse.data.permissionOption,
+        promptResponse.data.blocked
+      );
 
       if (promptResponse.data.confirm) {
         return decrypt();
