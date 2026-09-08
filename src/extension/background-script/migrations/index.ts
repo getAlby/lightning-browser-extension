@@ -94,14 +94,15 @@ const migrations = {
   },
 
   migrateRemoveWeblnRequestPermissions: async () => {
-    const weblnRequestMethod = /^webln\/(lnd|lnc|commando)\//;
-    const permissions = await db.permissions.toArray();
+    // webln.request permissions were stored as `webln/<connector>/<method>`.
+    // The connector segment came from `connector.constructor.name`, which is
+    // mangled in production builds, so match on the shape instead of the name.
+    // Other webln permissions (e.g. `webln/sendpayment`) have no third segment.
+    const weblnRequestMethod = /^webln\/[^/]*\/[^/]+$/;
 
-    for (const permission of permissions) {
-      if (permission.id && weblnRequestMethod.test(permission.method)) {
-        await db.permissions.delete(permission.id);
-      }
-    }
+    await db.permissions
+      .filter((permission) => weblnRequestMethod.test(permission.method))
+      .delete();
 
     await db.saveToStorage();
     console.info("Migration migrateRemoveWeblnRequestPermissions complete.");
