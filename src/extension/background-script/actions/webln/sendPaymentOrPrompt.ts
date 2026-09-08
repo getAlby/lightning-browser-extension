@@ -25,13 +25,33 @@ const sendPaymentOrPrompt = async (message: Message, sender: Sender) => {
   }
 };
 
+// Checks the budget and takes the amount out of it in a single transaction,
+// before the payment is sent. The amount is not put back if the payment fails.
+// Concurrent payments would otherwise all read the same budget and each spend
+// it.
 async function checkAllowance(host: string, amount: number) {
-  const allowance = await db.allowances
-    .where("host")
-    .equalsIgnoreCase(host)
-    .first();
+  if (!Number.isFinite(amount) || amount < 0) return false;
 
-  return allowance && allowance.remainingBudget > amount; // check that the budget is higher than the amount. amount can be 0
+  const debited = await db.transaction("rw", db.allowances, async () => {
+    const allowance = await db.allowances
+      .where("host")
+      .equalsIgnoreCase(host)
+      .first();
+
+    if (!allowance?.id || !(allowance.remainingBudget > amount)) {
+      // check that the budget is higher than the amount. amount can be 0
+      return false;
+    }
+
+    await db.allowances.update(allowance.id, {
+      remainingBudget: allowance.remainingBudget - amount,
+      lastPaymentAt: Date.now(),
+    });
+    return true;
+  });
+
+  if (debited) await db.saveToStorage();
+  return debited;
 }
 
 async function sendPaymentWithAllowance(message: Message) {
