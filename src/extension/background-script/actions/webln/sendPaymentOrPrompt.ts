@@ -42,7 +42,7 @@ async function checkAllowance(host: string, amount: number) {
     allowance &&
     allowance.enabled &&
     enabledFor.has("webln") &&
-    allowance.remainingBudget > amount // check that the budget is higher than the amount. amount can be 0
+    allowance.remainingBudget > amount // check that the budget is higher than the amount
   );
 }
 

@@ -1,7 +1,7 @@
-import lightningPayReq from "bolt11-signet";
 import utils from "~/common/lib/utils";
 import db from "~/extension/background-script/db";
 import { allowanceFixture } from "~/fixtures/allowances";
+import { createPaymentRequest } from "~/fixtures/paymentRequests";
 import type { DbAllowance, Message, Sender } from "~/types";
 
 import sendPayment from "../../ln/sendPayment";
@@ -22,31 +22,6 @@ const mockAllowances: DbAllowance[] = allowanceFixture;
 // the allowance fixture for getalby.com has a remaining budget of 500 sats
 const sender: Sender = { origin: "https://getalby.com" };
 
-const PRIVATE_KEY = Buffer.from(
-  "e126f68f7eafcc8b74f54d269fe206be715000f94dac067d1c04a8ca3b2db734",
-  "hex"
-);
-
-function createPaymentRequest(millisatoshis?: number) {
-  const encoded = lightningPayReq.encode({
-    ...(millisatoshis !== undefined && {
-      millisatoshis: String(millisatoshis),
-    }),
-    tags: [
-      {
-        tagName: "payment_hash",
-        data: "0001020304050607080900010203040506070809000102030405060708090102",
-      },
-      { tagName: "description", data: "test" },
-    ],
-  });
-  const { paymentRequest } = lightningPayReq.sign(encoded, PRIVATE_KEY);
-  if (!paymentRequest) {
-    throw new Error("Failed to encode payment request");
-  }
-  return paymentRequest;
-}
-
 function message(millisatoshis?: number): Message {
   return {
     application: "LBE",
@@ -65,6 +40,13 @@ describe("sendPaymentOrPrompt", () => {
       id: 3,
       host: "nostr-only.example",
       enabledFor: ["nostr"],
+    });
+    // enabled for webln with budget to spare, only the `enabled` flag denies it
+    await db.allowances.add({
+      ...mockAllowances[0],
+      id: 4,
+      host: "disabled.example",
+      enabled: false,
     });
   });
 
@@ -110,10 +92,9 @@ describe("sendPaymentOrPrompt", () => {
     expect(sendPayment).not.toHaveBeenCalled();
   });
 
-  // the lnmarkets.com fixture has a remaining budget but is disabled
   test("prompts when the allowance is disabled", async () => {
     await sendPaymentOrPrompt(message(100_000), {
-      origin: "https://lnmarkets.com",
+      origin: "https://disabled.example",
     });
 
     expect(utils.openPrompt).toHaveBeenCalled();

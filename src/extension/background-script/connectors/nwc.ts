@@ -4,6 +4,7 @@ import Base64 from "crypto-js/enc-base64";
 import Hex from "crypto-js/enc-hex";
 import UTF8 from "crypto-js/enc-utf8";
 import SHA256 from "crypto-js/sha256";
+import { getPaymentRequestAmountSats } from "~/common/utils/paymentRequest";
 import { Account } from "~/types";
 import Connector, {
   CheckPaymentArgs,
@@ -158,7 +159,7 @@ class NWCConnector implements Connector {
         paymentHash,
         route: {
           // TODO: how to get amount paid for zero-amount invoices?
-          total_amt: Math.floor(parseInt(invoice.millisatoshis || "0") / 1000),
+          total_amt: getPaymentRequestAmountSats(invoice) ?? 0,
           // TODO: How to get fees?
           total_fees: 0,
         },
