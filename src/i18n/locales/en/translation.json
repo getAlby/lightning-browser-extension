@@ -562,7 +562,7 @@
       "presets": {
         "trust_fully": {
           "title": "I fully trust it",
-          "description": "Auto-sign all requests (except payments and signing)"
+          "description": "Auto-sign all requests (except payments and Schnorr signing)"
         },
         "reasonable": {
           "title": "Let's be reasonable",
