@@ -6,13 +6,12 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import ConfirmOrCancel from "~/app/components/ConfirmOrCancel";
-import PermissionModal from "~/app/components/Permissions/PermissionModal";
-import PermissionSelector from "~/app/components/Permissions/PermissionSelector";
 import ScreenHeader from "~/app/components/ScreenHeader";
 import toast from "~/app/components/Toast";
 import { useNavigationState } from "~/app/hooks/useNavigationState";
+import { USER_REJECTED_ERROR } from "~/common/constants";
 import msg from "~/common/lib/msg";
-import { PermissionOption, type OriginData } from "~/types";
+import { type OriginData } from "~/types";
 
 function ConfirmSignSchnorr() {
   const navState = useNavigationState();
@@ -29,19 +28,12 @@ function ConfirmSignSchnorr() {
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
 
-  const [modalOpen, setModalOpen] = useState(false);
-  const [permissionOption, setPermissionOption] = useState<PermissionOption>(
-    PermissionOption.ASK_EVERYTIME
-  );
-
   // TODO: refactor: the success message and loading will not be displayed because after the reply the prompt is closed.
   async function confirm() {
     try {
       setLoading(true);
       msg.reply({
-        blocked: false,
         confirm: true,
-        permissionOption: permissionOption,
       });
       setSuccessMessage(tCommon("success"));
     } catch (e) {
@@ -56,9 +48,7 @@ function ConfirmSignSchnorr() {
     try {
       setLoading(true);
       msg.reply({
-        blocked: true,
         confirm: false,
-        permissionOption: permissionOption,
       });
     } catch (e) {
       console.error(e);
@@ -66,6 +56,16 @@ function ConfirmSignSchnorr() {
     } finally {
       setLoading(false);
     }
+  }
+
+  async function block(event: React.MouseEvent<HTMLAnchorElement>) {
+    event.preventDefault();
+    await msg.request("addBlocklist", {
+      domain: origin.domain,
+      host: origin.host,
+    });
+    alert(t("block_added", { host: origin.host }));
+    msg.error(USER_REJECTED_ERROR);
   }
 
   function close(e: React.MouseEvent<HTMLButtonElement>) {
@@ -103,17 +103,9 @@ function ConfirmSignSchnorr() {
               />
             </div>
             <div className="flex flex-col gap-4">
-              <PermissionModal
-                isOpen={modalOpen}
-                onClose={() => {
-                  setModalOpen(false);
-                }}
-                permissionCallback={(permission) => {
-                  setPermissionOption(permission);
-                  setModalOpen(false);
-                }}
-                permission={tPermissions("nostr.signschnorr.title")}
-              />
+              <p className="text-center text-sm text-gray-600 dark:text-neutral-400">
+                {t("always_confirm")}
+              </p>
               <ConfirmOrCancel
                 disabled={loading}
                 loading={loading}
@@ -121,14 +113,13 @@ function ConfirmSignSchnorr() {
                 cancelLabel={tCommon("actions.deny")}
                 destructive
               />
-
-              <PermissionSelector
-                i18nKey={permissionOption}
-                values={{
-                  permission: tPermissions("nostr.signschnorr.title"),
-                }}
-                onChange={() => setModalOpen(true)}
-              />
+              <a
+                className="underline text-sm text-gray-400 mx-4 overflow-hidden text-ellipsis whitespace-nowrap text-center"
+                href="#"
+                onClick={block}
+              >
+                {t("block_and_ignore", { host: origin.host })}
+              </a>
             </div>
           </Container>
         </form>

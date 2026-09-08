@@ -817,7 +817,6 @@ export enum PermissionMethodLiquid {
 
 export enum PermissionMethodNostr {
   NOSTR_SIGNMESSAGE = "nostr/signMessage",
-  NOSTR_SIGNSCHNORR = "nostr/signSchnorr",
   NOSTR_GETPUBLICKEY = "nostr/getPublicKey",
   NOSTR_DECRYPT = "nostr/decrypt",
   NOSTR_ENCRYPT = "nostr/encrypt",
