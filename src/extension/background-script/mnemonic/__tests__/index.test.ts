@@ -6,6 +6,7 @@ import { webcrypto } from "crypto";
 import sha256 from "crypto-js/sha256";
 import generateMnemonic from "~/extension/background-script/actions/mnemonic/generateMnemonic";
 import Mnemonic from "~/extension/background-script/mnemonic";
+import Nostr from "~/extension/background-script/nostr";
 import type { MessageMnemonicGenerate } from "~/types";
 
 // jsdom does not provide WebCrypto, which @noble/secp256k1 needs for signing
@@ -124,14 +125,9 @@ describe("Mnemonic", () => {
       vector.masterPrivateKey
     );
     expect(mnemonic.deriveNostrPrivateKeyHex()).toBe(vector.nostrPrivateKey);
-    expect(
-      toHex(
-        secp256k1.getPublicKey(
-          secp256k1.etc.hexToBytes(mnemonic.deriveNostrPrivateKeyHex()),
-          true
-        )
-      ).slice(2)
-    ).toBe(vector.nostrPublicKey);
+    expect(new Nostr(mnemonic.deriveNostrPrivateKeyHex()).getPublicKey()).toBe(
+      vector.nostrPublicKey
+    );
   });
 
   test("signs a message with the master key", async () => {
@@ -139,18 +135,25 @@ describe("Mnemonic", () => {
     const message = "hello alby";
     const signature = await mnemonic.signMessage(message);
 
+    // signMessage passes sha256(message) to signAsync, which prehashes again
+    // by default since @noble/secp256k1 v3, so the signed digest is
+    // sha256(sha256(message)). Verify exactly that so a change is noticed.
+    const signedDigest = secp256k1.etc.hexToBytes(
+      sha256(Hex.parse(sha256(message).toString(Hex))).toString(Hex)
+    );
     expect(
       await secp256k1.verifyAsync(
         secp256k1.etc.hexToBytes(signature),
-        secp256k1.etc.hexToBytes(sha256(message).toString(Hex)),
+        signedDigest,
         secp256k1.getPublicKey(
           secp256k1.etc.hexToBytes(vectors[0].masterPrivateKey)
-        )
+        ),
+        { prehash: false }
       )
     ).toBe(true);
   });
 
-  test("throws on an invalid mnemonic", () => {
+  test("throws on a mnemonic with the wrong number of words", () => {
     expect(() => new Mnemonic("not a valid mnemonic")).toThrow();
   });
 });
