@@ -17,15 +17,13 @@ const mockOrigin: OriginData = {
   external: true,
 };
 
-const lnurlDetailsFor = (url: string): LNURLAuthServiceResponse => ({
-  domain: new URL(url).hostname,
+const mockLnurlDetails: LNURLAuthServiceResponse = {
+  domain: "site.com",
   k1: "dea6a5e410ae8db8872b30ed715d9c10bbaca1dda653396511a40bb353529572",
   tag: "login",
-  url,
-});
+  url: "https://site.com/lnurl-login",
+};
 
-// the service of the website itself
-let mockLnurlDetails = lnurlDetailsFor("https://site.com/lnurl-login");
 // set by the background script only for a service on the requesting host
 let mockRememberLoginHost: string | undefined = "site.com";
 
@@ -64,7 +62,6 @@ jest.mock("~/common/lib/msg", () => ({
 describe("LNURLAuth", () => {
   beforeEach(() => {
     mockRequest.mockClear();
-    mockLnurlDetails = lnurlDetailsFor("https://site.com/lnurl-login");
     mockRememberLoginHost = "site.com";
   });
 
@@ -114,8 +111,7 @@ describe("LNURLAuth", () => {
     });
   });
 
-  test("auto-login is not offered for a service on a different host", async () => {
-    mockLnurlDetails = lnurlDetailsFor("https://auth.site.com/lnurl-login");
+  test("auto-login is not offered without a remember host from the background", async () => {
     mockRememberLoginHost = undefined;
 
     await act(async () => {
