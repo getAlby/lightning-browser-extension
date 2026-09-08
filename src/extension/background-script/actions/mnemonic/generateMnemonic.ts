@@ -1,5 +1,5 @@
 import * as bip39 from "@scure/bip39";
-import { wordlist } from "@scure/bip39/wordlists/english";
+import { wordlist } from "@scure/bip39/wordlists/english.js";
 import type { MessageMnemonicGenerate } from "~/types";
 
 const generateMnemonic = async (message: MessageMnemonicGenerate) => {
