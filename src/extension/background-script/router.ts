@@ -123,7 +123,7 @@ const routes = {
       enable: nostr.enable,
       getPublicKeyOrPrompt: nostr.getPublicKeyOrPrompt,
       signEventOrPrompt: nostr.signEventOrPrompt,
-      signSchnorrOrPrompt: nostr.signSchnorrOrPrompt,
+      signSchnorr: nostr.signSchnorr,
       encryptOrPrompt: nostr.encryptOrPrompt,
       decryptOrPrompt: nostr.decryptOrPrompt,
       nip44EncryptOrPrompt: nostr.nip44EncryptOrPrompt,
