@@ -169,6 +169,7 @@ export type NavigationState = {
   origin?: OriginData; // only defoned if coming via "Prompt", can be empty if a LNURL-action is being used via "Send" within the "PopUp"
   args?: {
     lnurlDetails: LNURLDetails;
+    rememberLoginHost?: string;
     amountEditable?: boolean;
     memoEditable?: boolean;
     invoiceAttributes?: RequestInvoiceArgs;
@@ -206,15 +207,6 @@ export type NavigationState = {
   isPrompt?: true; // only passed via Prompt.tsx
   action: string;
 };
-
-export interface MessageGenericRequest extends MessageDefault {
-  action: "request";
-  origin: OriginData;
-  args: {
-    method: string;
-    params: Record<string, unknown>;
-  };
-}
 
 export interface MessagePaymentAll extends MessageDefault {
   action: "getPayments";

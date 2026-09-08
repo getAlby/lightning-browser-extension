@@ -5,7 +5,6 @@ import Hex from "crypto-js/enc-hex";
 import UTF8 from "crypto-js/enc-utf8";
 import WordArray from "crypto-js/lib-typedarrays";
 import SHA256 from "crypto-js/sha256";
-import snakeCase from "lodash.snakecase";
 import { encryptData } from "~/common/lib/crypto";
 import utils from "~/common/lib/utils";
 import { mergeTransactions } from "~/common/utils/helpers";
@@ -27,7 +26,6 @@ import Connector, {
   SendPaymentResponse,
   SignMessageArgs,
   SignMessageResponse,
-  flattenRequestMethods,
 } from "./connector.interface";
 
 interface Config {
@@ -37,58 +35,7 @@ interface Config {
   serverHost?: string;
 }
 
-const methods: Record<string, string> = {
-  addinvoice: "lnd.lightning.AddInvoice",
-  addholdinvoice: "lnd.invoices.AddHoldInvoice",
-  settleinvoice: "lnd.invoices.SettleInvoice",
-  channelbalance: "lnd.lightning.ChannelBalance",
-  connectpeer: "lnd.lightning.ConnectPeer",
-  decodepayreq: "lnd.lightning.DecodePayReq",
-  disconnectpeer: "lnd.lightning.DisconnectPeer",
-  estimatefee: "lnd.lightning.EstimateFee",
-  getchaninfo: "lnd.lightning.GetChanInfo",
-  getinfo: "lnd.lightning.GetInfo",
-  getnetworkinfo: "lnd.lightning.GetNetworkInfo",
-  getnodeinfo: "lnd.lightning.GetNodeInfo",
-  gettransactions: "lnd.lightning.GetTransactions",
-  listchannels: "lnd.lightning.ListChannels",
-  listinvoices: "lnd.lightning.ListInvoices",
-  listpayments: "lnd.lightning.ListPayments",
-  listpeers: "lnd.lightning.ListPeers",
-  lookupinvoice: "lnd.lightning.LookupInvoice",
-  openchannel: "lnd.lightning.OpenChannelSync",
-  queryroutes: "lnd.lightning.QueryRoutes",
-  routermc: "lnd.router.QueryMissionControl",
-  sendtoroute: "lnd.lightning.SendToRouteSync",
-  verifymessage: "lnd.lightning.VerifyMessage",
-  walletbalance: "lnd.lightning.WalletBalance",
-  newaddress: "lnd.lightning.NewAddress",
-  nextaddr: "lnd.walletKit.nextAddr",
-  listaddresses: "lnd.walletKit.ListAddresses",
-  listunspent: "lnd.walletKit.ListUnspent",
-};
-
 const DEFAULT_SERVER_HOST = "mailbox.terminal.lightning.today:443";
-
-const snakeCaseObjectDeep = (value: FixMe): FixMe => {
-  if (Array.isArray(value)) {
-    return value.map(snakeCaseObjectDeep);
-  }
-
-  if (value && typeof value === "object" && value.constructor === Object) {
-    const obj = {} as FixMe;
-    const keys = Object.keys(value);
-    const len = keys.length;
-
-    for (let i = 0; i < len; i += 1) {
-      obj[snakeCase(keys[i])] = snakeCaseObjectDeep(value[keys[i]]);
-    }
-
-    return obj;
-  }
-
-  return value;
-};
 
 class LncCredentialStore {
   account: Account;
@@ -202,25 +149,7 @@ class Lnc implements Connector {
       "sendPaymentAsync",
       "signMessage",
       "getBalance",
-      ...flattenRequestMethods(Object.keys(methods)),
     ];
-  }
-
-  async requestMethod(
-    method: string,
-    args: Record<string, unknown>
-  ): Promise<{ data: unknown }> {
-    const lncCall = methods[method];
-    if (!lncCall) {
-      throw new Error(`${method} is not supported`);
-    }
-
-    const func = lncCall.split(".").reduce((obj: FixMe, prop: FixMe) => {
-      return obj[prop];
-    }, this.lnc);
-    return func(args).then((data: FixMe) => {
-      return { data: snakeCaseObjectDeep(data) };
-    });
   }
 
   async getInfo(): Promise<GetInfoResponse> {
