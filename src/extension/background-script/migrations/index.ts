@@ -92,6 +92,27 @@ const migrations = {
 
     console.info("Migration migrateDecryptPermission complete.");
   },
+
+  removeSignSchnorrPermissions: async () => {
+    await db.permissions.where("method").equals("nostr/signSchnorr").delete();
+
+    console.info("Migration removeSignSchnorrPermissions complete.");
+  },
+
+  migrateRemoveWeblnRequestPermissions: async () => {
+    // webln.request permissions were stored as `webln/<connector>/<method>`.
+    // The connector segment came from `connector.constructor.name`, which is
+    // mangled in production builds, so match on the shape instead of the name.
+    // Other webln permissions (e.g. `webln/sendpayment`) have no third segment.
+    const weblnRequestMethod = /^webln\/[^/]*\/[^/]+$/;
+
+    await db.permissions
+      .filter((permission) => weblnRequestMethod.test(permission.method))
+      .delete();
+
+    await db.saveToStorage();
+    console.info("Migration migrateRemoveWeblnRequestPermissions complete.");
+  },
 };
 
 const migrate = async () => {
@@ -114,6 +135,18 @@ const migrate = async () => {
     console.info("Running migration for: migrateDecryptPermission");
     await migrations["migrateDecryptPermission"]();
     await setMigrated("migrateDecryptPermission");
+  }
+
+  if (shouldMigrate("removeSignSchnorrPermissions")) {
+    console.info("Running migration for: removeSignSchnorrPermissions");
+    await migrations["removeSignSchnorrPermissions"]();
+    await setMigrated("removeSignSchnorrPermissions");
+  }
+
+  if (shouldMigrate("migrateRemoveWeblnRequestPermissions")) {
+    console.info("Running migration for: migrateRemoveWeblnRequestPermissions");
+    await migrations["migrateRemoveWeblnRequestPermissions"]();
+    await setMigrated("migrateRemoveWeblnRequestPermissions");
   }
 };
 

@@ -8,7 +8,7 @@ import shouldInject from "./shouldInject";
 const nostrCalls = [
   "nostr/getPublicKeyOrPrompt",
   "nostr/signEventOrPrompt",
-  "nostr/signSchnorrOrPrompt",
+  "nostr/signSchnorr",
   "nostr/enable",
   "nostr/encryptOrPrompt",
   "nostr/decryptOrPrompt",

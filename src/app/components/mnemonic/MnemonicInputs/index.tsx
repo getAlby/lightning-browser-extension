@@ -1,4 +1,4 @@
-import { wordlist } from "@scure/bip39/wordlists/english";
+import { wordlist } from "@scure/bip39/wordlists/english.js";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import PasswordViewAdornment from "~/app/components/PasswordViewAdornment";

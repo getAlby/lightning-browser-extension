@@ -95,7 +95,6 @@ Inpage providers live in `src/extension/providers/<api>/index.ts`. Each method c
 | `signMessage(message)`                             | Sign an arbitrary message with the wallet's message-signing key.              |
 | `verifyMessage(signature, message)`                | Verify a previously signed message.                                           |
 | `getBalance()`                                     | Return the current spendable balance.                                         |
-| `request(method, params)`                          | Escape hatch — forward an arbitrary RPC to the active connector.              |
 | `on(event, handler)` / `off(...)`                  | Subscribe to provider events (e.g. `accountChanged`).                         |
 
 **`window.nostr`** — [providers/nostr/index.ts](src/extension/providers/nostr/index.ts) (NIP-07)

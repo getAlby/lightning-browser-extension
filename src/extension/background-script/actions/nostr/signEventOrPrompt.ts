@@ -1,17 +1,13 @@
 import utils from "~/common/lib/utils";
 import { getHostFromSender } from "~/common/utils/helpers";
 import {
-  addPermissionFor,
+  addPermissionForNostrPrompt,
   hasPermissionFor,
   isPermissionBlocked,
 } from "~/extension/background-script/permissions";
 import { MessageSignEvent, PermissionMethodNostr, Sender } from "~/types";
 
-import {
-  DONT_ASK_ANY,
-  DONT_ASK_CURRENT,
-  USER_REJECTED_ERROR,
-} from "~/common/constants";
+import { USER_REJECTED_ERROR } from "~/common/constants";
 import state from "../../state";
 import { validateEvent } from "./helpers";
 
@@ -68,19 +64,12 @@ const signEventOrPrompt = async (message: MessageSignEvent, sender: Sender) => {
       });
 
       // add permission to db only if user decided to always allow this request
-      if (promptResponse.data.permissionOption == DONT_ASK_CURRENT) {
-        await addPermissionFor(
-          PermissionMethodNostr["NOSTR_SIGNMESSAGE"] + "/" + event.kind,
-          host,
-          promptResponse.data.blocked
-        );
-      }
-
-      if (promptResponse.data.permissionOption == DONT_ASK_ANY) {
-        Object.values(PermissionMethodNostr).forEach(async (permission) => {
-          await addPermissionFor(permission, host, promptResponse.data.blocked);
-        });
-      }
+      await addPermissionForNostrPrompt(
+        PermissionMethodNostr["NOSTR_SIGNMESSAGE"] + "/" + event.kind,
+        host,
+        promptResponse.data.permissionOption,
+        promptResponse.data.blocked
+      );
 
       if (promptResponse.data.confirm) {
         return signEvent();
