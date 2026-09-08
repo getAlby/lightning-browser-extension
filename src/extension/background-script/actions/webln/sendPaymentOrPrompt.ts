@@ -4,12 +4,7 @@ import { getHostFromSender } from "~/common/utils/helpers";
 import { getPaymentRequestAmountSats } from "~/common/utils/paymentRequest";
 import { Message, Sender } from "~/types";
 
-import {
-  BudgetReservation,
-  persistBudget,
-  releaseBudget,
-  reserveBudget,
-} from "../../budget";
+import { debitBudget } from "../../budget";
 import sendPayment from "../ln/sendPayment";
 
 const sendPaymentOrPrompt = async (message: Message, sender: Sender) => {
@@ -28,38 +23,23 @@ const sendPaymentOrPrompt = async (message: Message, sender: Sender) => {
 
   // amountless invoices carry no amount to check against the budget, so they
   // always require explicit confirmation
-  const reservation =
-    amountInSats === null ? null : await reserveBudget(host, amountInSats);
-
-  if (reservation) {
-    return sendPaymentWithAllowance(message, reservation);
+  if (amountInSats !== null && (await debitBudget(host, amountInSats))) {
+    return sendPaymentWithAllowance(message);
   } else {
     return payWithPrompt(message);
   }
 };
 
-async function sendPaymentWithAllowance(
-  message: Message,
-  reservation: BudgetReservation
-) {
-  let response;
+async function sendPaymentWithAllowance(message: Message) {
   try {
-    response = await sendPayment(message, { budgetReserved: true });
+    const response = await sendPayment(message, { budgetReserved: true });
+    return response;
   } catch (e) {
-    await releaseBudget(reservation);
     console.error(e);
     if (e instanceof Error) {
       return { error: e.message };
     }
-    return;
   }
-
-  if (!response || "error" in response) {
-    await releaseBudget(reservation);
-  } else {
-    await persistBudget();
-  }
-  return response;
 }
 
 async function payWithPrompt(message: Message) {

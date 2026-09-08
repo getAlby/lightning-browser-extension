@@ -148,20 +148,21 @@ describe("sendPaymentOrPrompt", () => {
     expect((await db.allowances.get(1))?.remainingBudget).toBe(400);
   });
 
-  test("puts the amount back when the payment fails", async () => {
+  test("keeps the amount out of the budget when the payment fails", async () => {
     (sendPayment as jest.Mock).mockResolvedValueOnce({ error: "no route" });
 
     await sendPaymentOrPrompt(message(100_000), sender);
 
-    expect((await db.allowances.get(1))?.remainingBudget).toBe(500);
+    expect((await db.allowances.get(1))?.remainingBudget).toBe(400);
   });
 
-  test("puts the amount back when the payment throws", async () => {
+  test("keeps the amount out of the budget when the payment throws", async () => {
     (sendPayment as jest.Mock).mockRejectedValueOnce(new Error("boom"));
 
-    await sendPaymentOrPrompt(message(100_000), sender);
+    const response = await sendPaymentOrPrompt(message(100_000), sender);
 
-    expect((await db.allowances.get(1))?.remainingBudget).toBe(500);
+    expect(response).toEqual({ error: "boom" });
+    expect((await db.allowances.get(1))?.remainingBudget).toBe(400);
   });
 
   test("concurrent payments cannot spend more than the budget", async () => {

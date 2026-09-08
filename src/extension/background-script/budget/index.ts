@@ -2,33 +2,32 @@ import type { DbAllowance } from "~/types";
 
 import db from "../db";
 
-export type BudgetReservation = {
-  allowanceId: number;
-  amount: number;
-};
-
 function isEnabledForWebln(allowance: DbAllowance) {
   return new Set(allowance.enabledFor).has("webln");
 }
 
-// Takes the amount out of the host's budget up front, in one transaction, and
-// returns a handle describing what was taken. Returns null when the host has no
-// usable allowance or the budget does not cover the amount, in which case the
-// caller has to ask the user instead.
+// Takes the amount out of the host's budget before the payment is sent and
+// returns whether it was covered. Returns false when the host has no usable
+// allowance or the budget does not cover the amount, in which case the caller
+// has to ask the user instead.
+//
+// The amount is never put back, even when the payment fails: the failure mode
+// is a budget that is too small until the user tops it up, rather than one that
+// can be spent twice.
 //
 // Reading the budget and writing the new one has to happen in a single
-// transaction: the payment in between is asynchronous, so several calls from the
-// same origin would otherwise all read the same budget, all consider themselves
-// covered by it, and each spend it.
-export async function reserveBudget(
+// transaction: the payment afterwards is asynchronous, so several calls from
+// the same origin would otherwise all read the same budget, all consider
+// themselves covered by it, and each spend it.
+export async function debitBudget(
   host: string,
   amount: number
-): Promise<BudgetReservation | null> {
+): Promise<boolean> {
   if (!Number.isFinite(amount) || amount < 0) {
-    return null;
+    return false;
   }
 
-  return db.transaction("rw", db.allowances, async () => {
+  const debited = await db.transaction("rw", db.allowances, async () => {
     const allowance = await db.allowances
       .where("host")
       .equalsIgnoreCase(host)
@@ -40,14 +39,14 @@ export async function reserveBudget(
       !allowance.enabled ||
       !isEnabledForWebln(allowance)
     ) {
-      return null;
+      return false;
     }
 
     const remainingBudget = allowance.remainingBudget || 0;
     // keeps the pre-existing comparison: the budget has to be higher than the
     // amount, and the amount can be 0
     if (!(remainingBudget > amount)) {
-      return null;
+      return false;
     }
 
     await db.allowances.update(allowance.id, {
@@ -55,52 +54,18 @@ export async function reserveBudget(
       lastPaymentAt: Date.now(),
     });
 
-    return { allowanceId: allowance.id, amount };
+    return true;
   });
-}
 
-// Puts a reservation back after a payment did not happen. Never raises the
-// budget above the total the user set, so repeated refunds cannot inflate it.
-export async function refundBudget({
-  allowanceId,
-  amount,
-}: BudgetReservation): Promise<void> {
-  await db.transaction("rw", db.allowances, async () => {
-    const allowance = await db.allowances.get(allowanceId);
-    if (!allowance) {
-      return;
+  if (debited) {
+    // outside the transaction: the storage write must not run inside it, and
+    // a storage failure must not turn a debited budget into a prompt
+    try {
+      await db.saveToStorage();
+    } catch (e) {
+      console.error("Failed to persist the allowance budget", e);
     }
-
-    await db.allowances.update(allowanceId, {
-      remainingBudget: Math.min(
-        (allowance.remainingBudget || 0) + amount,
-        allowance.totalBudget
-      ),
-    });
-  });
-}
-
-// Persists the budget change. Kept separate from the transactions above so the
-// storage write never runs inside a Dexie transaction. Storage failures are
-// logged rather than raised: the caller is reporting on a payment, and the
-// outcome of that payment must not change because persisting the budget failed.
-export async function persistBudget(): Promise<void> {
-  try {
-    await db.saveToStorage();
-  } catch (e) {
-    console.error("Failed to persist the allowance budget", e);
   }
-}
 
-// Puts a reservation back and persists it. Used on the paths where the payment
-// did not happen, so it must not raise on top of the original failure.
-export async function releaseBudget(
-  reservation: BudgetReservation
-): Promise<void> {
-  try {
-    await refundBudget(reservation);
-  } catch (e) {
-    console.error("Failed to refund the allowance budget", e);
-  }
-  await persistBudget();
+  return debited;
 }

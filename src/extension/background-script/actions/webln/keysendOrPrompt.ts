@@ -2,12 +2,7 @@ import utils from "~/common/lib/utils";
 import { getHostFromSender } from "~/common/utils/helpers";
 import { Message, Sender } from "~/types";
 
-import {
-  BudgetReservation,
-  persistBudget,
-  releaseBudget,
-  reserveBudget,
-} from "../../budget";
+import { debitBudget } from "../../budget";
 import keysend from "../ln/keysend";
 
 const keysendOrPrompt = async (message: Message, sender: Sender) => {
@@ -25,40 +20,23 @@ const keysendOrPrompt = async (message: Message, sender: Sender) => {
     };
   }
 
-  const amountInSats = parseInt(amount as string);
-  const reservation = Number.isNaN(amountInSats)
-    ? null
-    : await reserveBudget(host, amountInSats);
-
-  if (reservation) {
-    return keysendWithAllowance(message, reservation);
+  if (await debitBudget(host, parseInt(amount as string))) {
+    return keysendWithAllowance(message);
   } else {
     return keysendWithPrompt(message);
   }
 };
 
-async function keysendWithAllowance(
-  message: Message,
-  reservation: BudgetReservation
-) {
-  let response;
+async function keysendWithAllowance(message: Message) {
   try {
-    response = await keysend(message, { budgetReserved: true });
+    const response = await keysend(message, { budgetReserved: true });
+    return response;
   } catch (e) {
-    await releaseBudget(reservation);
     console.error(e);
     if (e instanceof Error) {
       return { error: e.message };
     }
-    return;
   }
-
-  if (!response || "error" in response) {
-    await releaseBudget(reservation);
-  } else {
-    await persistBudget();
-  }
-  return response;
 }
 
 async function keysendWithPrompt(message: Message) {
