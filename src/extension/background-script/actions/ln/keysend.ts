@@ -47,7 +47,6 @@ export default async function keysend(
     response,
     details: {
       destination: destination,
-      amount: parseInt(amount as string),
     },
   });
   return response;

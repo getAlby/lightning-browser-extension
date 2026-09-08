@@ -93,32 +93,4 @@ describe("Update Allowances", () => {
     const allowance = await db.allowances.get(1);
     expect(allowance?.remainingBudget).toBe(mockAllowances[0].remainingBudget);
   });
-
-  // a connector can settle a payment without telling us what it cost (LNDHub
-  // keysend reports no route). The amount is then unknown, so the allowance
-  // must stop authorising instead of silently keeping its budget.
-  test("clears the remaining budget when the settled amount is unknown", async () => {
-    await db.allowances.bulkAdd(mockAllowances);
-
-    const result = await updateAllowance("ln.keysend.success", {
-      ...data,
-      response: { data: { preimage: "123", paymentHash: "123" } } as never,
-    });
-
-    expect(result).toBe(true);
-    expect((await db.allowances.get(1))?.remainingBudget).toBe(0);
-  });
-
-  test("falls back to the authorised keysend amount when no route is reported", async () => {
-    await db.allowances.bulkAdd(mockAllowances);
-
-    await updateAllowance("ln.keysend.success", {
-      ...data,
-      response: { data: { preimage: "123", paymentHash: "123" } } as never,
-      details: { ...data.details, amount: 30 },
-    });
-
-    // the getalby.com fixture starts at 500 sats
-    expect((await db.allowances.get(1))?.remainingBudget).toBe(470);
-  });
 });

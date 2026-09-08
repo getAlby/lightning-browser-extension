@@ -89,8 +89,7 @@ export interface OriginData {
 
 export interface PaymentNotificationData {
   accountId: Account["id"];
-  // set when the budget was already debited before the payment was sent, so
-  // the settle-time subscriber must not debit it a second time
+  // set when the budget was already debited before the payment was sent
   budgetReserved?: boolean;
   paymentRequestDetails?: PaymentRequestObject | undefined;
   response: SendPaymentResponse | { error: string };
@@ -98,9 +97,6 @@ export interface PaymentNotificationData {
   details: {
     destination?: string | undefined;
     description?: string | undefined;
-    // the amount the user or the budget authorised, in sats. Used when the
-    // connector settles without reporting what it actually spent.
-    amount?: number | undefined;
   };
 }
 

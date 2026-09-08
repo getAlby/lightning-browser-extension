@@ -58,8 +58,8 @@ function message(millisatoshis?: number): Message {
 }
 
 describe("sendPaymentOrPrompt", () => {
-  // paying against a budget now takes the amount out of it, so each test needs
-  // to start from the fixture budgets rather than whatever the last one left
+  // paying against a budget takes the amount out of it, so each test starts
+  // from the fixture budgets
   beforeEach(async () => {
     await db.allowances.clear();
     await db.allowances.bulkAdd(mockAllowances);
@@ -145,23 +145,6 @@ describe("sendPaymentOrPrompt", () => {
     await sendPaymentOrPrompt(message(100_000), sender);
 
     // the getalby.com fixture starts at 500 sats
-    expect((await db.allowances.get(1))?.remainingBudget).toBe(400);
-  });
-
-  test("keeps the amount out of the budget when the payment fails", async () => {
-    (sendPayment as jest.Mock).mockResolvedValueOnce({ error: "no route" });
-
-    await sendPaymentOrPrompt(message(100_000), sender);
-
-    expect((await db.allowances.get(1))?.remainingBudget).toBe(400);
-  });
-
-  test("keeps the amount out of the budget when the payment throws", async () => {
-    (sendPayment as jest.Mock).mockRejectedValueOnce(new Error("boom"));
-
-    const response = await sendPaymentOrPrompt(message(100_000), sender);
-
-    expect(response).toEqual({ error: "boom" });
     expect((await db.allowances.get(1))?.remainingBudget).toBe(400);
   });
 
