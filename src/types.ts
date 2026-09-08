@@ -208,15 +208,6 @@ export type NavigationState = {
   action: string;
 };
 
-export interface MessageGenericRequest extends MessageDefault {
-  action: "request";
-  origin: OriginData;
-  args: {
-    method: string;
-    params: Record<string, unknown>;
-  };
-}
-
 export interface MessagePaymentAll extends MessageDefault {
   action: "getPayments";
   args?: {
