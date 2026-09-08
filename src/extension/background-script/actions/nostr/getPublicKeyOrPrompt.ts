@@ -47,8 +47,8 @@ const getPublicKeyOrPrompt = async (
       });
       // add permission to db only if user decided to always allow this request
       await addPermissionForNostrPrompt(
-        host,
         PermissionMethodNostr["NOSTR_GETPUBLICKEY"],
+        host,
         promptResponse.data.permissionOption,
         promptResponse.data.blocked
       );

@@ -104,8 +104,8 @@ describe("signSchnorr", () => {
     });
   });
 
-  describe("prompts the user first and then calls signSchnorr", () => {
-    test("if permission for signSchnorr exists and is enabled", async () => {
+  describe("always prompts the user before calling signSchnorr", () => {
+    test("even if a legacy signSchnorr permission exists", async () => {
       await db.permissions.bulkAdd([permissionInDB]);
       (utils.openPrompt as jest.Mock).mockResolvedValueOnce({
         data: {
@@ -127,7 +127,7 @@ describe("signSchnorr", () => {
       expect(result).toStrictEqual(requestResponse);
     });
 
-    test("if the permission for signSchnorr does not exist", async () => {
+    test("if no signSchnorr permission exists", async () => {
       const otherPermission = {
         ...permissionInDB,
         method: "nostr/getPublicKey",

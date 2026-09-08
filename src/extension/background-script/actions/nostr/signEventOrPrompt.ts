@@ -65,8 +65,8 @@ const signEventOrPrompt = async (message: MessageSignEvent, sender: Sender) => {
 
       // add permission to db only if user decided to always allow this request
       await addPermissionForNostrPrompt(
-        host,
         PermissionMethodNostr["NOSTR_SIGNMESSAGE"] + "/" + event.kind,
+        host,
         promptResponse.data.permissionOption,
         promptResponse.data.blocked
       );

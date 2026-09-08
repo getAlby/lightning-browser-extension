@@ -49,8 +49,8 @@ const encryptOrPrompt = async (message: MessageEncryptGet, sender: Sender) => {
 
       // add permission to db only if user decided to always allow this request
       await addPermissionForNostrPrompt(
-        host,
         PermissionMethodNostr["NOSTR_ENCRYPT"],
+        host,
         promptResponse.data.permissionOption,
         promptResponse.data.blocked
       );

@@ -45,8 +45,8 @@ const nip44DecryptOrPrompt = async (
 
       // add permission to db only if user decided to always allow this request
       await addPermissionForNostrPrompt(
-        host,
         PermissionMethodNostr["NOSTR_DECRYPT"],
+        host,
         promptResponse.data.permissionOption,
         promptResponse.data.blocked
       );

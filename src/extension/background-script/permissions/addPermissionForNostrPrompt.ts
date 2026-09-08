@@ -4,8 +4,8 @@ import { PermissionMethodNostr } from "~/types";
 import { addPermissionFor } from "./addPermissionFor";
 
 export async function addPermissionForNostrPrompt(
-  host: string,
   method: string,
+  host: string,
   permissionOption: string,
   blocked: boolean
 ) {

@@ -1,9 +1,9 @@
-import { USER_REJECTED_ERROR } from "~/common/constants";
 import utils from "~/common/lib/utils";
 import { getHostFromSender } from "~/common/utils/helpers";
 import db from "~/extension/background-script/db";
 import { MessageSignSchnorr, Sender } from "~/types";
 
+import { USER_REJECTED_ERROR } from "~/common/constants";
 import state from "../../state";
 
 const signSchnorr = async (message: MessageSignSchnorr, sender: Sender) => {
@@ -42,15 +42,7 @@ const signSchnorr = async (message: MessageSignSchnorr, sender: Sender) => {
     });
 
     if (promptResponse.data.confirm) {
-      let signedSchnorr: string;
-
-      if (isMessageMode) {
-        signedSchnorr = await nostr.hashAndSignSchnorr(plaintext as string);
-      } else {
-        signedSchnorr = await nostr.signSchnorr(sigHash as string);
-      }
-
-      return { data: signedSchnorr };
+      return sign();
     } else {
       return { error: USER_REJECTED_ERROR };
     }
@@ -59,6 +51,18 @@ const signSchnorr = async (message: MessageSignSchnorr, sender: Sender) => {
     if (e instanceof Error) {
       return { error: e.message };
     }
+  }
+
+  async function sign() {
+    let signedSchnorr: string;
+
+    if (isMessageMode) {
+      signedSchnorr = await nostr.hashAndSignSchnorr(plaintext as string);
+    } else {
+      signedSchnorr = await nostr.signSchnorr(sigHash as string);
+    }
+
+    return { data: signedSchnorr };
   }
 };
 
