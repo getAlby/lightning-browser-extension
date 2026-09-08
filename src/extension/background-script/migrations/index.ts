@@ -96,6 +96,7 @@ const migrations = {
   removeSignSchnorrPermissions: async () => {
     await db.permissions.where("method").equals("nostr/signSchnorr").delete();
 
+    await db.saveToStorage();
     console.info("Migration removeSignSchnorrPermissions complete.");
   },
 
