@@ -28,12 +28,12 @@ export default class NostrProvider extends ProviderBase {
 
   async hashAndSignSchnorr(message: string) {
     await this.enable();
-    return this.execute("signSchnorrOrPrompt", { message });
+    return this.execute("signSchnorr", { message });
   }
 
   async signSchnorr(sigHash: string) {
     await this.enable();
-    return this.execute("signSchnorrOrPrompt", { sigHash });
+    return this.execute("signSchnorr", { sigHash });
   }
 
   //override method from base class, we don't want to throw error if not enabled

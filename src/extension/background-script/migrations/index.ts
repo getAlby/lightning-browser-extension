@@ -93,6 +93,12 @@ const migrations = {
     console.info("Migration migrateDecryptPermission complete.");
   },
 
+  removeSignSchnorrPermissions: async () => {
+    await db.permissions.where("method").equals("nostr/signSchnorr").delete();
+
+    console.info("Migration removeSignSchnorrPermissions complete.");
+  },
+
   migrateRemoveWeblnRequestPermissions: async () => {
     // webln.request permissions were stored as `webln/<connector>/<method>`.
     // The connector segment came from `connector.constructor.name`, which is
@@ -129,6 +135,12 @@ const migrate = async () => {
     console.info("Running migration for: migrateDecryptPermission");
     await migrations["migrateDecryptPermission"]();
     await setMigrated("migrateDecryptPermission");
+  }
+
+  if (shouldMigrate("removeSignSchnorrPermissions")) {
+    console.info("Running migration for: removeSignSchnorrPermissions");
+    await migrations["removeSignSchnorrPermissions"]();
+    await setMigrated("removeSignSchnorrPermissions");
   }
 
   if (shouldMigrate("migrateRemoveWeblnRequestPermissions")) {
