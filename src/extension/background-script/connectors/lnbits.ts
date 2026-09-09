@@ -1,6 +1,7 @@
 import lightningPayReq from "bolt11-signet";
 import Hex from "crypto-js/enc-hex";
 import sha256 from "crypto-js/sha256";
+import { getPaymentRequestAmountSats } from "~/common/utils/paymentRequest";
 import HashKeySigner from "~/common/utils/signer";
 import { Account } from "~/types";
 
@@ -175,7 +176,8 @@ class LnBits implements Connector {
 
   sendPayment(args: SendPaymentArgs): Promise<SendPaymentResponse> {
     const paymentRequestDetails = lightningPayReq.decode(args.paymentRequest);
-    const amountInSats = paymentRequestDetails.satoshis || 0;
+    const amountInSats =
+      getPaymentRequestAmountSats(paymentRequestDetails) ?? 0;
     return this.request("POST", "/api/v1/payments", this.config.adminkey, {
       bolt11: args.paymentRequest,
       out: true,

@@ -1,3 +1,4 @@
+import { getPaymentRequestAmountSats } from "~/common/utils/paymentRequest";
 import type { PaymentNotificationData } from "~/types";
 
 import db from "../db";
@@ -17,8 +18,13 @@ const updateAllowance = async (
     return;
   }
 
-  const route = paymentResponse.data.route;
-  const { total_amt } = route;
+  // debit the same amount the allowance check was made against, so a connector
+  // that rounds `route.total_amt` differently cannot leave the budget untouched.
+  // keysends carry no invoice, so fall back to what the connector reports.
+  const amountInSats =
+    (data.paymentRequestDetails &&
+      getPaymentRequestAmountSats(data.paymentRequestDetails)) ??
+    paymentResponse.data.route.total_amt;
 
   const allowance = await db.allowances
     .where("host")
@@ -30,7 +36,7 @@ const updateAllowance = async (
   }
 
   const remainingBudget = allowance.remainingBudget || 0; // remainingBudget might be blank
-  const newRemaining = Math.max(remainingBudget - total_amt, 0); // no negative values
+  const newRemaining = Math.max(remainingBudget - amountInSats, 0); // no negative values
 
   await db.allowances.update(allowance.id, {
     remainingBudget: newRemaining,

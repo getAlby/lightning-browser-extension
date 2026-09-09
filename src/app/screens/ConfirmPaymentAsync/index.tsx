@@ -15,6 +15,7 @@ import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
+import { getPaymentRequestAmountSats } from "~/common/utils/paymentRequest";
 
 function ConfirmPaymentAsync() {
   const {
@@ -32,8 +33,7 @@ function ConfirmPaymentAsync() {
   const navState = useNavigationState();
   const paymentRequest = navState.args?.paymentRequest as string;
   const invoice = lightningPayReq.decode(paymentRequest);
-  const amountSat =
-    invoice.satoshis || Number(invoice.millisatoshis) / 1000 || 0;
+  const amountSat = getPaymentRequestAmountSats(invoice) ?? 0;
   const navigate = useNavigate();
 
   const [fiatAmount, setFiatAmount] = useState("");
