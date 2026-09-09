@@ -69,7 +69,8 @@ function LNURLChannel() {
       // ATTENTION: if this LNURL is called through `webln.lnurl` then we immediately return and return the response. This closes the window which means the user will NOT see the above successAction.
       // We assume this is OK when it is called through webln.
       if (navState.isPrompt) {
-        msg.reply(callbackResponse?.data);
+        const { status, reason } = callbackResponse.data ?? {};
+        msg.reply({ status, reason });
       }
     } catch (e) {
       console.error(e);

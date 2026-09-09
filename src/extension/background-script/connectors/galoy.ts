@@ -1,7 +1,10 @@
 import axios, { AxiosRequestConfig } from "axios";
 import lightningPayReq from "bolt11-signet";
 import { ACCOUNT_CURRENCIES, CURRENCIES } from "~/common/constants";
-import { getPaymentRequestDescription } from "~/common/utils/paymentRequest";
+import {
+  getPaymentRequestAmountSats,
+  getPaymentRequestDescription,
+} from "~/common/utils/paymentRequest";
 import { getCurrencyRateWithCache } from "~/extension/background-script/actions/cache/getCurrencyRate";
 import { Account } from "~/types";
 import Connector, {
@@ -378,7 +381,8 @@ class Galoy implements Connector {
     };
 
     const paymentRequestDetails = lightningPayReq.decode(args.paymentRequest);
-    const amountInSats = paymentRequestDetails.satoshis || 0;
+    const amountInSats =
+      getPaymentRequestAmountSats(paymentRequestDetails) ?? 0;
     const paymentHash = paymentRequestDetails.tagsObject.payment_hash || "";
 
     return this.request(query).then(({ data, errors }) => {

@@ -139,7 +139,10 @@ export async function authFunction({
         success: true,
         status: authResponse.data.status,
         reason: authResponse.data.reason,
-        authResponseData: authResponse.data,
+        authResponseData: {
+          status: authResponse.data.status,
+          ...(authResponse.data.reason && { reason: authResponse.data.reason }),
+        },
       };
 
       return response;

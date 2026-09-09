@@ -2,6 +2,7 @@ import {
   getFormattedFiat,
   getFormattedSats,
 } from "~/common/utils/currencyConvert";
+import { getPaymentRequestAmountSats } from "~/common/utils/paymentRequest";
 import { getCurrencyRateWithCache } from "~/extension/background-script/actions/cache/getCurrencyRate";
 import state from "~/extension/background-script/state";
 import type { AuthNotificationData, PaymentNotificationData } from "~/types";
@@ -21,8 +22,11 @@ const paymentSuccessNotification = async (
   }
 
   const route = paymentResponseData?.data.route;
-  const { total_amt, total_fees } = route;
-  const paymentAmount = total_amt;
+  const { total_fees } = route;
+  const paymentAmount =
+    (data.paymentRequestDetails &&
+      getPaymentRequestAmountSats(data.paymentRequestDetails)) ??
+    route.total_amt;
 
   const { settings } = state.getState();
   const { showFiat, currency, locale } = settings;

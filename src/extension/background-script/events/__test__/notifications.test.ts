@@ -1,5 +1,7 @@
+import lightningPayReq from "bolt11-signet";
 import { CURRENCIES } from "~/common/constants";
 import state from "~/extension/background-script/state";
+import { createPaymentRequest } from "~/fixtures/paymentRequests";
 import type {
   AuthNotificationData,
   PaymentNotificationData,
@@ -184,6 +186,34 @@ describe("Payment notifications", () => {
     expect(notifySpy).toHaveBeenCalledWith({
       message: "Amount: 1 sat ($0.00)\nFee: 0 sats",
       title: "✅ Successfully paid",
+    });
+  });
+
+  // a connector may floor a sub-satoshi invoice to 0; the toast must show the
+  // same rounded-up amount the allowance was checked and debited against
+  test("uses the invoice amount rather than what the connector reports", async () => {
+    state.getState = jest.fn().mockReturnValue(mockState);
+    const notifySpy = jest.spyOn(helpers, "notify");
+    await notifications.paymentSuccessNotification("ln.sendPayment.success", {
+      ...data,
+      paymentRequestDetails: lightningPayReq.decode(createPaymentRequest(999)),
+      response: {
+        data: {
+          preimage:
+            "3463336437663532393963353537396361623734643365663039386565346335",
+          paymentHash:
+            "979ab075ebd4b0be49df380ec7fadd14751c33afa1ffa0a6a22499aa819cb153",
+          route: {
+            total_amt: 0,
+            total_fees: 0,
+          },
+        },
+      },
+    });
+
+    expect(notifySpy).toHaveBeenCalledWith({
+      message: "Amount: 1 sat ($0.00)\nFee: 0 sats",
+      title: "✅ Successfully paid to »escapedcat@getalby.com«",
     });
   });
 });

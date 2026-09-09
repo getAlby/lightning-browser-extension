@@ -1,5 +1,7 @@
+import lightningPayReq from "bolt11-signet";
 import db from "~/extension/background-script/db";
 import { allowanceFixture } from "~/fixtures/allowances";
+import { createPaymentRequest } from "~/fixtures/paymentRequests";
 import type {
   DbAllowance,
   MessageAllowanceGet,
@@ -76,5 +78,25 @@ describe("Update Allowances", () => {
         usedBudget: 50,
       },
     });
+  });
+
+  // a connector may floor the paid amount to 0 sats for a sub-satoshi invoice,
+  // which left the budget untouched no matter how often the site paid. The debit
+  // must use the same rounded-up amount the allowance check was made against.
+  test("debits the invoice amount rather than what the connector reports", async () => {
+    await updateAllowance("ln.sendPayment.success", {
+      ...data,
+      paymentRequestDetails: lightningPayReq.decode(createPaymentRequest(999)),
+      response: {
+        data: {
+          preimage: "123",
+          paymentHash: "123",
+          route: { total_amt: 0, total_fees: 0 },
+        },
+      },
+    });
+
+    const allowance = await db.allowances.get(1);
+    expect(allowance?.remainingBudget).toBe(449);
   });
 });
