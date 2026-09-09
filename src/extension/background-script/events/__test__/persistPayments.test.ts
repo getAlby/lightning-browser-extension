@@ -1,6 +1,8 @@
+import lightningPayReq from "bolt11-signet";
 import db from "~/extension/background-script/db";
 import { allowanceFixture } from "~/fixtures/allowances";
 import { paymentsFixture } from "~/fixtures/payment";
+import { createPaymentRequest } from "~/fixtures/paymentRequests";
 import type {
   DbAllowance,
   DbPayment,
@@ -141,5 +143,27 @@ describe("Persist payments", () => {
         payments: [...updatedPaymentsWithoutOrigin.reverse()],
       },
     });
+  });
+
+  // a connector may floor a sub-satoshi invoice to 0; history must record the
+  // same rounded-up amount the allowance was checked and debited against
+  test("persists the invoice amount rather than what the connector reports", async () => {
+    await persistSuccessfulPayment("ln.sendPayment.success", {
+      ...data,
+      paymentRequestDetails: lightningPayReq.decode(createPaymentRequest(999)),
+      response: {
+        data: {
+          preimage: "msat",
+          paymentHash: "msat",
+          route: { total_amt: 0, total_fees: 0 },
+        },
+      },
+    });
+
+    const payment = await db.payments
+      .where("paymentHash")
+      .equals("msat")
+      .first();
+    expect(payment?.totalAmount).toBe(1);
   });
 });

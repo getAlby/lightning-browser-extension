@@ -3,6 +3,8 @@ import userEvent from "@testing-library/user-event";
 import lightningPayReq from "bolt11-signet";
 import { MemoryRouter } from "react-router-dom";
 import { settingsFixture as mockSettings } from "~/../tests/fixtures/settings";
+import { getPaymentRequestAmountSats } from "~/common/utils/paymentRequest";
+import { createPaymentRequest } from "~/fixtures/paymentRequests";
 import type { OriginData } from "~/types";
 
 import ConfirmPayment from "./index";
@@ -104,16 +106,51 @@ describe("ConfirmPayment", () => {
       );
     });
 
-    const satoshis = lightningPayReq.decode(paymentRequest).satoshis || 0;
+    const amountSat =
+      getPaymentRequestAmountSats(lightningPayReq.decode(paymentRequest)) ?? 0;
 
-    expect(await screen.findByText(`${satoshis} sats`)).toBeInTheDocument();
+    expect(await screen.findByText(`${amountSat} sats`)).toBeInTheDocument();
 
     await act(() => {
       user.click(screen.getByText("Remember and set a budget"));
     });
 
     const input = await screen.findByLabelText("Budget");
-    expect(input).toHaveValue(satoshis * 10);
+    expect(input).toHaveValue(amountSat * 10);
+  });
+
+  // a sub-satoshi invoice leaves `satoshis` unset; the default budget must use
+  // the same rounded-up amount the allowance check uses, not 0
+  test("prompt: default budget uses the rounded-up invoice amount", async () => {
+    const paymentRequest = createPaymentRequest(999);
+    parameters = {
+      origin: mockOrigin,
+      args: {
+        paymentRequest,
+      },
+    };
+
+    mockSettingsTmp = { ...mockSettings, showFiat: false };
+    mockGetFiatValue = jest.fn(() => Promise.resolve("$0.01"));
+
+    const user = userEvent.setup();
+
+    await act(async () => {
+      render(
+        <MemoryRouter>
+          <ConfirmPayment />
+        </MemoryRouter>
+      );
+    });
+
+    await act(() => {
+      user.click(screen.getByText("Remember and set a budget"));
+    });
+
+    const amountSat =
+      getPaymentRequestAmountSats(lightningPayReq.decode(paymentRequest)) ?? 0;
+    const input = await screen.findByLabelText("Budget");
+    expect(input).toHaveValue(amountSat * 10);
   });
 
   test("send: renders with fiat", async () => {
