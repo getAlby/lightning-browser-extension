@@ -16,9 +16,25 @@ async function lnurl(message: MessageWebLnLnurl, sender: Sender) {
   if (typeof message.args.lnurlEncoded !== "string") return;
   let lnurlDetails;
   try {
+    if (
+      !lnurlLib.isAllowedTarget(
+        lnurlLib.normalizeLnurl(message.args.lnurlEncoded)
+      )
+    ) {
+      return { error: "Invalid LNURL" };
+    }
+
     lnurlDetails = await lnurlLib.getDetails(message.args.lnurlEncoded);
     if (isLNURLDetailsError(lnurlDetails)) {
       return { error: lnurlDetails.reason };
+    }
+
+    // the callback is chosen by the LNURL service, so it is checked as well
+    if (
+      "callback" in lnurlDetails &&
+      !lnurlLib.isAllowedTarget(new URL(lnurlDetails.callback))
+    ) {
+      return { error: "Invalid LNURL" };
     }
   } catch (e) {
     return { error: e instanceof Error ? e.message : "Failed to parse LNURL" };
