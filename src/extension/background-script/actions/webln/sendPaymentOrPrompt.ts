@@ -18,7 +18,7 @@ const sendPaymentOrPrompt = async (message: Message, sender: Sender) => {
   }
 
   const paymentRequestDetails = lightningPayReq.decode(paymentRequest);
-  if (await checkAllowance(host, paymentRequestDetails.satoshis || 0)) {
+  if (await checkAndDebitAllowance(host, paymentRequestDetails.satoshis || 0)) {
     return sendPaymentWithAllowance(message);
   } else {
     return payWithPrompt(message);
@@ -29,7 +29,7 @@ const sendPaymentOrPrompt = async (message: Message, sender: Sender) => {
 // before the payment is sent. The amount is not put back if the payment fails.
 // Concurrent payments would otherwise all read the same budget and each spend
 // it.
-async function checkAllowance(host: string, amount: number) {
+async function checkAndDebitAllowance(host: string, amount: number) {
   if (!Number.isFinite(amount) || amount < 0) return false;
 
   const debited = await db.transaction("rw", db.allowances, async () => {
@@ -81,4 +81,4 @@ async function payWithPrompt(message: Message) {
   }
 }
 
-export { checkAllowance, payWithPrompt, sendPaymentOrPrompt };
+export { checkAndDebitAllowance, payWithPrompt, sendPaymentOrPrompt };

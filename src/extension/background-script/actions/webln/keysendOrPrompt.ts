@@ -1,10 +1,10 @@
 import utils from "~/common/lib/utils";
-// TODO: move checkAllowance to some helpers/models?
+// TODO: move checkAndDebitAllowance to some helpers/models?
 import { getHostFromSender } from "~/common/utils/helpers";
 import { Message, Sender } from "~/types";
 
 import keysend from "../ln/keysend";
-import { checkAllowance } from "./sendPaymentOrPrompt";
+import { checkAndDebitAllowance } from "./sendPaymentOrPrompt";
 
 const keysendOrPrompt = async (message: Message, sender: Sender) => {
   const host = getHostFromSender(sender);
@@ -20,7 +20,7 @@ const keysendOrPrompt = async (message: Message, sender: Sender) => {
       error: "Destination or amount missing.",
     };
   }
-  if (await checkAllowance(host, parseInt(amount as string))) {
+  if (await checkAndDebitAllowance(host, parseInt(amount as string))) {
     return keysendWithAllowance(message);
   } else {
     return keysendWithPrompt(message);
