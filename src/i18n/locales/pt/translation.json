@@ -37,7 +37,6 @@
     },
     "choose_path": {
       "title": "Conecte carteiras na extensão Alby",
-      "other": {},
       "alby": {
         "title": "Conta Alby",
         "description": "Ideal para iniciantes que procuram uma ótima carteira para gastos do dia a dia."
@@ -1082,9 +1081,6 @@
       "signmessage": {
         "title": "Assinar mensagem"
       }
-    },
-    "lnd": {
-      "openchannel": "Abrir canal novo"
     }
   }
 }

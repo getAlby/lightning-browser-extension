@@ -107,7 +107,7 @@ class Eclair implements Connector {
         preimage: paymentPreimage,
         paymentHash,
         route: {
-          total_amt: Math.floor(recipientAmount / 1000),
+          total_amt: Math.ceil(recipientAmount / 1000),
           total_fees: Math.floor(status.feesPaid / 1000),
         },
       },

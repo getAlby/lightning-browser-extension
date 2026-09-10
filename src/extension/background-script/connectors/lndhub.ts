@@ -5,6 +5,7 @@ import Base64 from "crypto-js/enc-base64";
 import Hex from "crypto-js/enc-hex";
 import hmacSHA256 from "crypto-js/hmac-sha256";
 import sha256 from "crypto-js/sha256";
+import { getPaymentRequestAmountSats } from "~/common/utils/paymentRequest";
 import HashKeySigner from "~/common/utils/signer";
 import { Account } from "~/types";
 
@@ -257,7 +258,8 @@ export default class LndHub implements Connector {
     // lnbits needs to fix this and return proper route information with a total amount and fees
     if (!data.payment_route) {
       const paymentRequestDetails = lightningPayReq.decode(args.paymentRequest);
-      const amountInSats = paymentRequestDetails.satoshis || 0;
+      const amountInSats =
+        getPaymentRequestAmountSats(paymentRequestDetails) ?? 0;
       data.payment_route = { total_amt: amountInSats, total_fees: 0 };
     }
     return {

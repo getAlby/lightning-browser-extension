@@ -1,3 +1,4 @@
+import { getPaymentRequestAmountSats } from "~/common/utils/paymentRequest";
 import type { PaymentNotificationData } from "~/types";
 
 import db from "../db";
@@ -22,7 +23,11 @@ const persistSuccessfulPayment = async (
     .first();
 
   const route = paymentResponse.data.route;
-  const { total_amt, total_fees } = route;
+  const total_amt =
+    (data.paymentRequestDetails &&
+      getPaymentRequestAmountSats(data.paymentRequestDetails)) ??
+    route.total_amt;
+  const { total_fees } = route;
 
   await db.payments.add({
     accountId,

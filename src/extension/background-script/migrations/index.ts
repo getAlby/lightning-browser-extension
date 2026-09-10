@@ -92,6 +92,41 @@ const migrations = {
 
     console.info("Migration migrateDecryptPermission complete.");
   },
+
+  removeSignSchnorrPermissions: async () => {
+    await db.permissions.where("method").equals("nostr/signSchnorr").delete();
+
+    console.info("Migration removeSignSchnorrPermissions complete.");
+  },
+
+  migrateRemoveWeblnRequestPermissions: async () => {
+    // webln.request permissions were stored as `webln/<connector>/<method>`.
+    // The connector segment came from `connector.constructor.name`, which is
+    // mangled in production builds, so match on the shape instead of the name.
+    // Other webln permissions (e.g. `webln/sendpayment`) have no third segment.
+    const weblnRequestMethod = /^webln\/[^/]*\/[^/]+$/;
+
+    await db.permissions
+      .filter((permission) => weblnRequestMethod.test(permission.method))
+      .delete();
+
+    await db.saveToStorage();
+    console.info("Migration migrateRemoveWeblnRequestPermissions complete.");
+  },
+};
+
+const runMigration = async (name: Migration) => {
+  if (!shouldMigrate(name)) {
+    return;
+  }
+  console.info(`Running migration for: ${name}`);
+  await migrations[name]();
+  // Migrations write to IndexedDB, which the browser can drop; mirror the
+  // tables to browser.storage.local so db.loadFromStorage() does not restore
+  // the pre-migration rows. Done before setMigrated() so a crash in between
+  // reruns the migration instead of leaving a stale mirror behind.
+  await db.saveToStorage();
+  await setMigrated(name);
 };
 
 const migrate = async () => {
@@ -104,17 +139,10 @@ const migrate = async () => {
   //  await setMigrated("migratePermissionsWithoutAccountId");
   //}
 
-  if (shouldMigrate("migrateEncryptPermission")) {
-    console.info("Running migration for: migrateEncryptPermission");
-    await migrations["migrateEncryptPermission"]();
-    await setMigrated("migrateEncryptPermission");
-  }
-
-  if (shouldMigrate("migrateDecryptPermission")) {
-    console.info("Running migration for: migrateDecryptPermission");
-    await migrations["migrateDecryptPermission"]();
-    await setMigrated("migrateDecryptPermission");
-  }
+  await runMigration("migrateEncryptPermission");
+  await runMigration("migrateDecryptPermission");
+  await runMigration("removeSignSchnorrPermissions");
+  await runMigration("migrateRemoveWeblnRequestPermissions");
 };
 
 export default migrate;

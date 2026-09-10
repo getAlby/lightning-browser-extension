@@ -28,8 +28,7 @@
     "choose_path": {
       "alby": {
         "title": "Albyアカウント"
-      },
-      "other": {}
+      }
     },
     "alby": {
       "pre_connect": {
@@ -301,73 +300,6 @@
       },
       "description": "接続したい{{name}}アプリを選択してください",
       "title": "{{name}}に接続"
-    }
-  },
-  "permissions": {
-    "lnc": {
-      "sendtoroute": "指定したルートで支払いを行う。",
-      "addinvoice": "新しいインボイスを作成。",
-      "settleinvoice": "受け付けたインボイスを決済する。",
-      "addholdinvoice": "新しいHODLインボイスを作成する。",
-      "decodepayreq": "支払いリクエスト文字列をデコードする。",
-      "queryroutes": "可能なルートを照会する。",
-      "listpeers": "現在アクティブなピアの一覧を取得する。",
-      "lookupinvoice": "インボイス情報を確認。",
-      "verifymessage": "メッセージに対する署名を検証する。",
-      "getnodeinfo": "ノードのチャンネル情報を取得する。",
-      "listpayments": "支払いの一覧を取得する。",
-      "getnetworkinfo": "既知のチャンネルグラフの基本的な統計を取得する。",
-      "gettransactions": "ウォレットに関する全ての取引情報を取得する。",
-      "getchaninfo": "特定のチャンネルのネットワークアナウンスを取得します。",
-      "estimatefee": "取引の手数料率と合計手数料を見積もる。",
-      "disconnectpeer": "リモートピアから切断する。",
-      "connectpeer": "リモートピアとの接続を確立する。",
-      "openchannel": "新しいチャンネルを開く。",
-      "walletbalance": "未使用の取引出力(UTXO)を取得。",
-      "channelbalance": "開かれた全てのチャンネルの合計資金のレポートを取得。",
-      "listchannels": "開いている全てのチャンネルの説明を取得。",
-      "getinfo": "ノードの情報を取得。",
-      "listinvoices": "全てのインボイス一覧を取得。"
-    },
-    "lnd": {
-      "addinvoice": "新しい請求書の作成。",
-      "decodepayreq": "支払いリクエスト文字列をデコードする。",
-      "settleinvoice": "承認した請求を決済。",
-      "addholdinvoice": "新しい保留付き請求(HODL invoice)の作成。",
-      "verifymessage": "メッセージの署名を検証する。",
-      "lookupinvoice": "インボイス情報を確認。",
-      "listpeers": "現在アクティブなピアの一覧を取得。",
-      "gettransactions": "このウォレットに関連する全ての取引情報の一覧を取得。",
-      "estimatefee": "取引の手数料率と合計手数料を見積もる。",
-      "sendtoroute": "指定されたルートを利用して支払う。",
-      "queryroutes": "使用可能なルートを問い合わせる。",
-      "getnodeinfo": "ノートのチャンネル情報を取得。",
-      "getnetworkinfo": "既知のチャンネルグラフの基本的な統計を取得。",
-      "getchaninfo": "特定のチャンネルのネットワークアナウンスを取得。",
-      "connectpeer": "リモートピアとの接続を確立する。",
-      "openchannel": "新しいチャンネルを開く。",
-      "channelbalance": "開かれた全てのチャンネルの合計資金のレポートを取得。",
-      "listchannels": "開いている全てのチャンネルの説明を取得。",
-      "getinfo": "ノードの情報を取得。",
-      "walletbalance": "未使用の取引出力(UTXO)を取得。",
-      "listpayments": "全ての支払いの一覧を取得。",
-      "disconnectpeer": "リモートピアから切断する。",
-      "listinvoices": "全ての請求書の一覧を取得。"
-    },
-    "commando": {
-      "listsendpays": "全てのsendpayコマンドの状態を取得。",
-      "listpeers": "接続している、もしくは開いているチャンネルを持つノードを一覧表示。",
-      "listoffers": "全てのOffer、もしくは特定のOfferを一覧表示。",
-      "listinvoices": "全ての請求書の状態を取得。",
-      "listfunds": "利用可能な全ての資金を一覧表示。",
-      "listforwards": "転送を試みた全てのHTLCを一覧表示。",
-      "getinfo": "ノードの概要を取得。",
-      "signmessage": "このノードから署名を作成。",
-      "pay": "BOLT11の請求書に支払う。",
-      "offer": "Offerを作成。",
-      "listtransactions": "ウォレット内で追跡されている取引を一覧表示。",
-      "listpays": "全てのpayコマンドの状態を取得する。",
-      "getroute": "ライトニングノードへの支払いに最適なルートを見つける。"
     }
   }
 }

@@ -1,5 +1,6 @@
 import axios from "axios";
 import lightningPayReq from "bolt11-signet";
+import ipaddr from "ipaddr.js";
 import { isLNURLDetailsError } from "~/common/utils/typeHelpers";
 import {
   LNURLAuthServiceResponse,
@@ -9,6 +10,45 @@ import {
 } from "~/types";
 
 import { bech32Decode } from "../utils/helpers";
+
+/** An error returned by the LNURL service itself (LUD-06 `status: "ERROR"`). */
+class LNURLServiceError extends Error {}
+
+const LNURL_TAGS = ["payRequest", "withdrawRequest", "channelRequest", "login"];
+
+const LOCAL_HOST_SUFFIXES = [".local", ".internal", ".localhost", ".home.arpa"];
+
+/**
+ * LNURLs passed in by a website are fetched from the extension, which holds
+ * broad host permissions. A website must not be able to point those requests
+ * at the user's own machine or local network.
+ */
+const isPrivateHost = (hostname: string): boolean => {
+  const host = hostname
+    .toLowerCase()
+    .replace(/^\[|\]$/g, "")
+    .replace(/\.$/, "");
+  if (!host || host === "localhost") return true;
+  if (LOCAL_HOST_SUFFIXES.some((suffix) => host.endsWith(suffix))) return true;
+  // process() unwraps IPv4-mapped IPv6 (::ffff:a.b.c.d); everything that is
+  // not plain unicast (loopback, private, link-local, CGNAT, NAT64, ...) is
+  // treated as private.
+  return ipaddr.isValid(host) && ipaddr.process(host).range() !== "unicast";
+};
+
+/**
+ * Only a response that looks like an LNURL service response is processed any
+ * further. Anything else (HTML, plain text, unrelated JSON) is rejected with a
+ * generic error so its content never leaks into an error message.
+ */
+const isLNURLResponse = (data: unknown): data is LNURLDetails | LNURLError => {
+  if (typeof data !== "object" || data === null) return false;
+  const res = data as Record<string, unknown>;
+  if (res.status === "ERROR") return typeof res.reason === "string";
+  if (typeof res.tag !== "string" || !LNURL_TAGS.includes(res.tag))
+    return false;
+  return res.tag === "login" || typeof res.callback === "string";
+};
 
 const fromInternetIdentifier = (address: string) => {
   // email regex: https://emailregex.com/
@@ -68,6 +108,18 @@ const lnurl = {
     return null;
   },
 
+  normalizeLnurl,
+  isPrivateHost,
+
+  /** LUD-01: LNURL endpoints are https; only onion services may use http. */
+  isAllowedTarget(url: URL): boolean {
+    const isOnion = url.hostname.toLowerCase().endsWith(".onion");
+    if (url.protocol !== "https:" && !(url.protocol === "http:" && isOnion)) {
+      return false;
+    }
+    return !isPrivateHost(url.hostname);
+  },
+
   async getDetails(lnurlString: string): Promise<LNURLError | LNURLDetails> {
     const url = normalizeLnurl(lnurlString);
     const searchParamsTag = url.searchParams.get("tag");
@@ -86,17 +138,20 @@ const lnurl = {
       return lnurlAuthDetails;
     } else {
       try {
-        const { data }: { data: LNURLDetails | LNURLError } = await axios.get(
-          url.toString(),
-          {
-            adapter: "fetch",
-          }
-        );
+        const { data } = await axios.get<unknown>(url.toString(), {
+          adapter: "fetch",
+          // https://github.com/lnurl/luds/blob/luds/01.md#http-status-codes-and-content-type
+          validateStatus: () => true,
+        });
+
+        if (!isLNURLResponse(data)) {
+          throw new Error("Invalid LNURL response");
+        }
 
         const lnurlDetails = data;
 
         if (isLNURLDetailsError(lnurlDetails)) {
-          throw new Error(lnurlDetails.reason);
+          throw new LNURLServiceError(lnurlDetails.reason);
         } else {
           lnurlDetails.domain = url.hostname;
           lnurlDetails.url = url.toString();
@@ -104,16 +159,17 @@ const lnurl = {
 
         return lnurlDetails;
       } catch (e) {
-        let error = "";
-        if (axios.isAxiosError(e)) {
-          error =
-            (e.response?.data as { reason?: string })?.reason || e.message;
-
-          if (this.isLightningAddress(lnurlString)) {
-            error = `This is not a valid lightning address. Either the address is invalid or it is using a different and unsupported protocol: ${error}`;
-          }
-        } else if (e instanceof Error) {
+        // Only the service's own LNURL error text is surfaced. Transport
+        // failures and non-LNURL responses are reported generically so the
+        // content of an arbitrary endpoint is never relayed to the caller.
+        let error: string;
+        if (e instanceof LNURLServiceError) {
           error = e.message;
+        } else if (this.isLightningAddress(lnurlString)) {
+          error =
+            "Could not reach this lightning address. It may be invalid, or its server may be unavailable.";
+        } else {
+          error = "Failed to load LNURL details";
         }
 
         throw new Error(error);

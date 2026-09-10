@@ -111,7 +111,6 @@ const routes = {
       lnurl: webln.lnurl,
       makeInvoice: webln.makeInvoiceOrPrompt,
       getBalanceOrPrompt: webln.getBalanceOrPrompt,
-      request: ln.request,
     },
     liquid: {
       isEnabled: liquid.isEnabled,
@@ -124,7 +123,7 @@ const routes = {
       enable: nostr.enable,
       getPublicKeyOrPrompt: nostr.getPublicKeyOrPrompt,
       signEventOrPrompt: nostr.signEventOrPrompt,
-      signSchnorrOrPrompt: nostr.signSchnorrOrPrompt,
+      signSchnorr: nostr.signSchnorr,
       encryptOrPrompt: nostr.encryptOrPrompt,
       decryptOrPrompt: nostr.decryptOrPrompt,
       nip44EncryptOrPrompt: nostr.nip44EncryptOrPrompt,

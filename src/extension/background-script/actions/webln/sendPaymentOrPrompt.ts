@@ -1,6 +1,7 @@
 import lightningPayReq from "bolt11-signet";
 import utils from "~/common/lib/utils";
 import { getHostFromSender } from "~/common/utils/helpers";
+import { getPaymentRequestAmountSats } from "~/common/utils/paymentRequest";
 import { Message, Sender } from "~/types";
 
 import db from "../../db";
@@ -18,7 +19,14 @@ const sendPaymentOrPrompt = async (message: Message, sender: Sender) => {
   }
 
   const paymentRequestDetails = lightningPayReq.decode(paymentRequest);
-  if (await checkAndDebitAllowance(host, paymentRequestDetails.satoshis || 0)) {
+  const amountInSats = getPaymentRequestAmountSats(paymentRequestDetails);
+
+  // amountless invoices carry no amount to check against the budget, so they
+  // always require explicit confirmation
+  if (
+    amountInSats !== null &&
+    (await checkAndDebitAllowance(host, amountInSats))
+  ) {
     return sendPaymentWithAllowance(message);
   } else {
     return payWithPrompt(message);
@@ -38,8 +46,14 @@ async function checkAndDebitAllowance(host: string, amount: number) {
       .equalsIgnoreCase(host)
       .first();
 
-    if (!allowance?.id || !(allowance.remainingBudget > amount)) {
-      // check that the budget is higher than the amount. amount can be 0
+    const enabledFor = new Set(allowance?.enabledFor);
+
+    if (
+      !allowance?.id ||
+      !allowance.enabled ||
+      !enabledFor.has("webln") ||
+      !(allowance.remainingBudget > amount) // check that the budget is higher than the amount. amount can be 0
+    ) {
       return false;
     }
 

@@ -12,7 +12,7 @@ import nip44EncryptOrPrompt from "./nip44EncryptOrPrompt";
 import removePrivateKey from "./removePrivateKey";
 import setPrivateKey from "./setPrivateKey";
 import signEventOrPrompt from "./signEventOrPrompt";
-import signSchnorrOrPrompt from "./signSchnorrOrPrompt";
+import signSchnorr from "./signSchnorr";
 
 export {
   decryptOrPrompt,
@@ -28,5 +28,5 @@ export {
   removePrivateKey,
   setPrivateKey,
   signEventOrPrompt,
-  signSchnorrOrPrompt,
+  signSchnorr,
 };

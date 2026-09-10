@@ -864,12 +864,23 @@
       }
     },
     "choose_path": {
-      "other": {},
       "alby": {
         "title": "Alby-Konto",
-        "description": "Ideal, wenn du die Anwendungen nutzen und gleichzeitig die Kontrolle über deine Bitcoin behalten möchtest."
+        "description": "Ideal, wenn du die Anwendungen nutzen und gleichzeitig die Kontrolle über deine Bitcoin behalten möchtest.",
+        "connect": "Verbinden",
+        "prompt": "Hast du schon ein Alby-Konto?"
       },
-      "title": "Alby Extension mit einer Wallet verbinden"
+      "title": "Alby Extension mit einer Wallet verbinden",
+      "other": {
+        "title": "Hast du schon eine Wallet?",
+        "description": "Verbinde deinen Alby Hub oder eine beliebige andere Lightning-Wallet.",
+        "connect": "Verbinden"
+      },
+      "albyhub": {
+        "title": "Hast du noch keine Wallet?",
+        "description": "Richte deinen Alby Hub ein, um deinen eigenen Knoten zu betreiben und die volle Kontrolle über deine Bitcoins zu behalten.",
+        "get_started": "Erste Schritte"
+      }
     },
     "transactions": {
       "title": "Transaktionen",
@@ -1256,95 +1267,6 @@
     "setup_wallet": "Beende die Einrichtung und verknüpfe deine Wallet mit dem <0>Alby-Konto</0>, um unbegrenzt Zahlungen zu tätigen."
   },
   "permissions": {
-    "commando": {
-      "bkpr-listbalances": "Liste aller aktuellen und historischen Wallets",
-      "checkmessage": "Überprüfe, ob die Signatur von einer bestimmten Node erstellt wurde",
-      "fundchannel": "Öffne einen Zahlungskanal mit einem Peer, indem du eine Finanzierungstransaktion durchführst",
-      "getroute": "Finde die beste Route für die Zahlung an eine Lightning-Node",
-      "invoice": "Schaffe die Erwartung einer Zahlung",
-      "keysend": "Sende eine Zahlung an eine andere Node",
-      "listoffers": "Alle Angebote auflisten oder ein bestimmtes Angebot erhalten",
-      "listpays": "Rufe den Status aller Zahlungsbefehle ab",
-      "signmessage": "Erstelle eine Signatur von dieser Node",
-      "feerates": "Rückgabe der Fee-Rate, die bei CLN verwendet wird",
-      "listforwards": "Auflistung aller versuchten Übermittlungsversuche",
-      "listfunds": "Liste alle verfügbaren Mittel auf",
-      "listinvoices": "Rufe den Status aller Rechnungen ab",
-      "sendpay": "Sende eine Zahlung über eine Route",
-      "multifundchannel": "Öffne mehrere Zahlungskanäle mit Nodes, indem du eine einzige Finanzierungstransaktion durchführst",
-      "disconnect": "Schließe eine bestehende Verbindung zu einem Peer",
-      "decodepay": "Prüfe und analysiere einen Bolt11-String",
-      "getinfo": "Rufe die Zusammenfassung der Node ab",
-      "listtransactions": "Liste der in der Wallet verfolgten Transaktionen",
-      "offer": "Erstelle ein Angebot",
-      "connect": "Stelle eine neue Verbindung mit einer anderen Node her",
-      "decode": "Dekodiere eine Bolt11/Bolt12/Rune-Kette",
-      "listpeers": "Liste der Nodes, die mit dieser Node verbunden sind oder offene Kanäle haben",
-      "listsendpays": "Rufe den Status aller sendpay-Befehle ab",
-      "pay": "Sende eine Zahlung an eine BOLT11-Rechnung",
-      "setchannel": "Konfiguriere die für einen Kanal beworbenen Gebühren / htlc-Bereiche",
-      "listnodes": "Auflistung von Nodes, von denen die Node durch Gossip-Nachrichten erfahren hat"
-    },
-    "lnd": {
-      "channelbalance": "Du erhältst einen Bericht über den Gesamtbetrag der Mittel für alle offenen Kanäle",
-      "walletbalance": "Ermittle die gesamten nicht verbrauchten Ausgaben der Wallet",
-      "listchannels": "Erhalte eine Beschreibung aller offenen Kanäle",
-      "openchannel": "Öffne einen neuen Kanal",
-      "estimatefee": "Schätze den Gebührensatz und die Gesamtgebühren für eine Transaktion",
-      "getchaninfo": "Ermittle die Netzansage für den angegebenen Kanal",
-      "getinfo": "Rufe die Node-Informationen ab",
-      "listinvoices": "Erhalte eine Liste aller Rechnungen",
-      "connectpeer": "Stelle eine Verbindung zu einem entfernten Peer her",
-      "disconnectpeer": "Trenne die Verbindung zu einem entfernten Peer",
-      "getnetworkinfo": "Rufe grundlegende Statistiken über die bekannte Kanalkurve ab",
-      "getnodeinfo": "Rufe die Kanalinformationen für eine Node ab",
-      "gettransactions": "Rufe eine Liste aller für die Wallet relevanten Transaktionen ab",
-      "listpeers": "Erhalte eine Liste aller derzeit aktiven Peers",
-      "lookupinvoice": "Rechnungsdetails nachschlagen",
-      "queryroutes": "Frage nach einer möglichen Route",
-      "sendtoroute": "Führe eine Zahlung über die angegebene Route durch",
-      "routermc": "Lese den internen Status der Missionskontrolle",
-      "decodepayreq": "Entschlüssle eine Zahlungsanforderungszeichenfolge",
-      "addinvoice": "Erstelle neue Rechnungen",
-      "listpayments": "Erhalte eine Liste aller ausgehenden Zahlungen",
-      "verifymessage": "Überprüfe eine Signatur über eine Nachricht",
-      "addholdinvoice": "Erstelle neue HODL-Rechnungen",
-      "settleinvoice": "Begleiche eine akzeptierte Rechnung",
-      "listunspent": "Eine Liste aller UTXOs abrufen, die von der Wallet ausgegeben werden können",
-      "listaddresses": "Erhalte alle Adressen zusammen mit deinem Guthaben",
-      "newaddress": "Rufe eine neue Onchain-Adresse ab",
-      "nextaddr": "Rufe die nächste unbenutzte Adresse in der Wallet ab"
-    },
-    "lnc": {
-      "connectpeer": "Stelle eine Verbindung zu einem Peer her",
-      "disconnectpeer": "Trenne die Verbindung zu einem entfernten Peer",
-      "estimatefee": "Schätze den Gebührensatz und die Gesamtgebühren für eine Transaktion",
-      "getnodeinfo": "Rufe die Kanalinformationen für eine Node ab",
-      "getchaninfo": "Ermittle die Netzansage für den angegebenen Kanal",
-      "listpayments": "Erhalte eine Liste aller ausgehenden Zahlungen",
-      "queryroutes": "Frage nach einer möglichen Route",
-      "verifymessage": "Überprüfe eine Signatur über eine Nachricht",
-      "listpeers": "Ermittle eine Liste aller derzeit aktiven Peers",
-      "sendtoroute": "Führe eine Zahlung über die angegebene Route durch",
-      "decodepayreq": "Dekodiere eine Zahlungsanforderungszeichenfolge",
-      "addinvoice": "Erstelle neue Rechnungen",
-      "routermc": "Lese den internen Status der Missionskontrolle",
-      "gettransactions": "Rufe eine Liste aller für die Wallet relevanten Transaktionen ab",
-      "getnetworkinfo": "Rufe grundlegende Statistiken über die bekannte Kanalkurve ab",
-      "lookupinvoice": "Rechnungsdetails nachschlagen",
-      "getinfo": "Rufe die Node-Informationen ab",
-      "listchannels": "Erhalte eine Beschreibung aller offenen Kanäle",
-      "listinvoices": "Erhalte eine Liste aller Rechnungen",
-      "channelbalance": "Erhalte einen Bericht über den Gesamtbetrag der Mittel für alle offenen Kanäle",
-      "walletbalance": "Ermittle die gesamten nicht verbrauchten Ausgaben deiner Wallet",
-      "openchannel": "Öffne einen neuen Kanal",
-      "addholdinvoice": "Erstelle neue HODL-Rechnungen",
-      "settleinvoice": "Begleiche eine akzeptierte Rechnung",
-      "listunspent": "Eine Liste aller UTXOs abrufen, die von der Wallet ausgegeben werden können",
-      "nextaddr": "Rufe die nächste unbenutzte Onchain-Adresse innerhalb der Wallet ab",
-      "listaddresses": "Rufe alle Onchain-Adressen zusammen mit ihrem Guthaben ab",
-      "newaddress": "Rufe eine neue Onchain-Adresse ab"
-    },
     "webln": {
       "getbalance": {
         "description": "Lese den Kontostand deiner Wallet ab",

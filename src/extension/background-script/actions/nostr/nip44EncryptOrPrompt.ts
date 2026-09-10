@@ -1,13 +1,9 @@
-import {
-  DONT_ASK_ANY,
-  DONT_ASK_CURRENT,
-  USER_REJECTED_ERROR,
-} from "~/common/constants";
+import { USER_REJECTED_ERROR } from "~/common/constants";
 import nostr from "~/common/lib/nostr";
 import utils from "~/common/lib/utils";
 import { getHostFromSender } from "~/common/utils/helpers";
 import {
-  addPermissionFor,
+  addPermissionForNostrPrompt,
   hasPermissionFor,
   isPermissionBlocked,
 } from "~/extension/background-script/permissions";
@@ -55,19 +51,12 @@ const nip44EncryptOrPrompt = async (
       });
 
       // add permission to db only if user decided to always allow this request
-      if (promptResponse.data.permissionOption == DONT_ASK_CURRENT) {
-        await addPermissionFor(
-          PermissionMethodNostr["NOSTR_ENCRYPT"],
-          host,
-          promptResponse.data.blocked
-        );
-      }
-
-      if (promptResponse.data.permissionOption == DONT_ASK_ANY) {
-        Object.values(PermissionMethodNostr).forEach(async (permission) => {
-          await addPermissionFor(permission, host, promptResponse.data.blocked);
-        });
-      }
+      await addPermissionForNostrPrompt(
+        PermissionMethodNostr["NOSTR_ENCRYPT"],
+        host,
+        promptResponse.data.permissionOption,
+        promptResponse.data.blocked
+      );
 
       if (promptResponse.data.confirm) {
         return nip44Encrypt();
