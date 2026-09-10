@@ -41,6 +41,23 @@ import uk from "~/i18n/locales/uk/translation.json";
 import zh_Hans from "~/i18n/locales/zh_Hans/translation.json";
 
 export const defaultNS = "translation";
+
+type LocaleResources = {
+  translation: Record<string, unknown>;
+  common: Record<string, unknown>;
+  components: Record<string, unknown>;
+  // Weblate drops a namespace entirely from a locale file when none of its
+  // keys are translated, so `permissions` may be missing for some locales.
+  permissions?: Record<string, unknown>;
+};
+
+const localeResources = (locale: LocaleResources) => ({
+  translation: locale.translation,
+  common: locale.common,
+  components: locale.components,
+
+  permissions: locale.permissions ?? {},
+});
 // needs to be aligned with `supportedLocales`
 export const resources = {
   en: {
@@ -49,114 +66,24 @@ export const resources = {
     components: en.components,
     permissions: en.permissions,
   },
-  cs: {
-    translation: cs.translation,
-    common: cs.common,
-    components: cs.components,
-    permissions: cs.permissions,
-  },
-  da: {
-    translation: da.translation,
-    common: da.common,
-    components: da.components,
-    permissions: da.permissions,
-  },
-  de: {
-    translation: de.translation,
-    common: de.common,
-    components: de.components,
-    permissions: de.permissions,
-  },
-  es: {
-    translation: es.translation,
-    common: es.common,
-    components: es.components,
-    permissions: es.permissions,
-  },
-  fr: {
-    translation: fr.translation,
-    common: fr.common,
-    components: fr.components,
-    permissions: fr.permissions,
-  },
-  it: {
-    translation: it.translation,
-    common: it.common,
-    components: it.components,
-    permissions: it.permissions,
-  },
-  hi: {
-    translation: hi.translation,
-    common: hi.common,
-    components: hi.components,
-    permissions: hi.permissions,
-  },
-  mr: {
-    translation: mr.translation,
-    common: mr.common,
-    components: mr.components,
-    permissions: mr.permissions,
-  },
-  pl: {
-    translation: pl.translation,
-    common: pl.common,
-    components: pl.components,
-    permissions: pl.permissions,
-  },
-  "pt-BR": {
-    translation: pt_BR.translation,
-    common: pt_BR.common,
-    components: pt_BR.components,
-    permissions: pt_BR.permissions,
-  },
-  sv: {
-    translation: sv.translation,
-    common: sv.common,
-    components: sv.components,
-    permissions: sv.permissions,
-  },
-  th: {
-    translation: th.translation,
-    common: th.common,
-    components: th.components,
-    permissions: th.permissions,
-  },
-  "zh-CN": {
-    translation: zh_Hans.translation,
-    common: zh_Hans.common,
-    components: zh_Hans.components,
-    permissions: zh_Hans.permissions,
-  },
-  fa: {
-    translation: fa.translation,
-    common: fa.common,
-    components: fa.components,
-    permissions: fa.permissions,
-  },
-  si: {
-    translation: si.translation,
-    common: si.common,
-    components: si.components,
-    permissions: si.permissions,
-  },
-  ta: {
-    translation: ta.translation,
-    common: ta.common,
-    components: ta.components,
-    permissions: ta.permissions,
-  },
-  ru: {
-    translation: ru.translation,
-    common: ru.common,
-    components: ru.components,
-    permissions: ru.permissions,
-  },
-  uk: {
-    translation: uk.translation,
-    common: uk.common,
-    components: uk.components,
-    permissions: uk.permissions,
-  },
+  cs: localeResources(cs),
+  da: localeResources(da),
+  de: localeResources(de),
+  es: localeResources(es),
+  fr: localeResources(fr),
+  it: localeResources(it),
+  hi: localeResources(hi),
+  mr: localeResources(mr),
+  pl: localeResources(pl),
+  "pt-BR": localeResources(pt_BR),
+  sv: localeResources(sv),
+  th: localeResources(th),
+  "zh-CN": localeResources(zh_Hans),
+  fa: localeResources(fa),
+  si: localeResources(si),
+  ta: localeResources(ta),
+  ru: localeResources(ru),
+  uk: localeResources(uk),
 } as const;
 
 // needs to be aligned with `resources`
