@@ -1,5 +1,4 @@
 import merge from "lodash.merge";
-import pick from "lodash.pick";
 import browser from "webextension-polyfill";
 import { create } from "zustand";
 import { decryptData } from "~/common/lib/crypto";
@@ -280,7 +279,9 @@ const state = create<State>((set, get) => ({
     const current = get();
     const data = {
       ...browserStorageDefaults,
-      ...pick(current, browserStorageKeys),
+      ...Object.fromEntries(
+        browserStorageKeys.map((key) => [key, current[key]])
+      ),
     };
 
     if (storage === "sync") {
