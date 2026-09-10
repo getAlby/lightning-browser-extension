@@ -57,6 +57,11 @@ describe("sendPaymentOrPrompt", () => {
   });
 
   test("takes the amount out of the budget before paying", async () => {
+    (sendPayment as jest.Mock).mockImplementationOnce(async () => {
+      expect((await db.allowances.get(1))?.remainingBudget).toBe(400);
+      return { data: {} };
+    });
+
     await sendPaymentOrPrompt(message(100), sender);
 
     expect(sendPayment).toHaveBeenCalled();
