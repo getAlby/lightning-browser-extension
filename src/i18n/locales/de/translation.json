@@ -867,13 +867,13 @@
       "alby": {
         "title": "Alby-Konto",
         "description": "Ideal, wenn du die Anwendungen nutzen und gleichzeitig die Kontrolle über deine Bitcoin behalten möchtest.",
-        "connect": "Schließe es an",
+        "connect": "Verbinden",
         "prompt": "Hast du schon ein Alby-Konto?"
       },
       "title": "Alby Extension mit einer Wallet verbinden",
       "other": {
         "title": "Hast du schon eine Wallet?",
-        "description": "Verbinden Sie Ihren Alby Hub oder eine beliebige andere Lightning-Wallet.",
+        "description": "Verbinde deinen Alby Hub oder eine beliebige andere Lightning-Wallet.",
         "connect": "Verbinden"
       },
       "albyhub": {
