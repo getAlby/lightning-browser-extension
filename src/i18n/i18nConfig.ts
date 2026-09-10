@@ -42,22 +42,9 @@ import zh_Hans from "~/i18n/locales/zh_Hans/translation.json";
 
 export const defaultNS = "translation";
 
-type LocaleResources = {
-  translation: Record<string, unknown>;
-  common: Record<string, unknown>;
-  components: Record<string, unknown>;
-  // Weblate drops a namespace entirely from a locale file when none of its
-  // keys are translated, so `permissions` may be missing for some locales.
-  permissions?: Record<string, unknown>;
-};
-
-const localeResources = (locale: LocaleResources) => ({
-  translation: locale.translation,
-  common: locale.common,
-  components: locale.components,
-
-  permissions: locale.permissions ?? {},
-});
+// Locale files are keyed by i18next namespace. Weblate omits a namespace
+// entirely when a locale has no translated keys in it; i18next then falls
+// back to English per key, so no namespace is required here.
 // needs to be aligned with `supportedLocales`
 export const resources = {
   en: {
@@ -66,24 +53,24 @@ export const resources = {
     components: en.components,
     permissions: en.permissions,
   },
-  cs: localeResources(cs),
-  da: localeResources(da),
-  de: localeResources(de),
-  es: localeResources(es),
-  fr: localeResources(fr),
-  it: localeResources(it),
-  hi: localeResources(hi),
-  mr: localeResources(mr),
-  pl: localeResources(pl),
-  "pt-BR": localeResources(pt_BR),
-  sv: localeResources(sv),
-  th: localeResources(th),
-  "zh-CN": localeResources(zh_Hans),
-  fa: localeResources(fa),
-  si: localeResources(si),
-  ta: localeResources(ta),
-  ru: localeResources(ru),
-  uk: localeResources(uk),
+  cs,
+  da,
+  de,
+  es,
+  fr,
+  it,
+  hi,
+  mr,
+  pl,
+  "pt-BR": pt_BR,
+  sv,
+  th,
+  "zh-CN": zh_Hans,
+  fa,
+  si,
+  ta,
+  ru,
+  uk,
 } as const;
 
 // needs to be aligned with `resources`
