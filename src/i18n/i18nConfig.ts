@@ -47,12 +47,7 @@ export const defaultNS = "translation";
 // back to English per key, so no namespace is required here.
 // needs to be aligned with `supportedLocales`
 export const resources = {
-  en: {
-    translation: en.translation,
-    common: en.common,
-    components: en.components,
-    permissions: en.permissions,
-  },
+  en,
   cs,
   da,
   de,
