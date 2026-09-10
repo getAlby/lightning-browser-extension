@@ -44,6 +44,9 @@ const persistSuccessfulPayment = async (
     allowanceId: allowance ? (allowance.id ?? "").toString() : "",
     paymentRequest: "",
   });
+  if (allowance?.id) {
+    await db.allowances.update(allowance.id, { lastPaymentAt: Date.now() });
+  }
   await db.saveToStorage();
   console.info(`Persisted payment ${paymentResponse.data.paymentHash}`);
   return true;

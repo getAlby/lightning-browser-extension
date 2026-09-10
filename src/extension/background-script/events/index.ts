@@ -1,6 +1,5 @@
 import PubSub from "pubsub-js";
 
-import { updateAllowance } from "./allowances";
 import {
   lnurlAuthFailedNotification,
   lnurlAuthSuccessNotification,
@@ -20,8 +19,6 @@ const subscribe = () => {
 
     // @ts-expect-error typed as ln.sendPayment.success | ln.keysend.success
     PubSub.subscribe(`ln.${type}.success`, persistSuccessfulPayment);
-    // @ts-expect-error typed as ln.sendPayment.success | ln.keysend.success
-    PubSub.subscribe(`ln.${type}.success`, updateAllowance);
   });
 
   // @ts-expect-error typed as lnurl.auth.success

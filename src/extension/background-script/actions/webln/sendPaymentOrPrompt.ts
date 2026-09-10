@@ -23,27 +23,48 @@ const sendPaymentOrPrompt = async (message: Message, sender: Sender) => {
 
   // amountless invoices carry no amount to check against the budget, so they
   // always require explicit confirmation
-  if (amountInSats !== null && (await checkAllowance(host, amountInSats))) {
+  if (
+    amountInSats !== null &&
+    (await checkAndDebitAllowance(host, amountInSats))
+  ) {
     return sendPaymentWithAllowance(message);
   } else {
     return payWithPrompt(message);
   }
 };
 
-async function checkAllowance(host: string, amount: number) {
-  const allowance = await db.allowances
-    .where("host")
-    .equalsIgnoreCase(host)
-    .first();
+// Checks the budget and takes the amount out of it in a single transaction,
+// before the payment is sent. The amount is not put back if the payment fails.
+// Concurrent payments would otherwise all read the same budget and each spend
+// it.
+async function checkAndDebitAllowance(host: string, amount: number) {
+  if (!Number.isFinite(amount) || amount < 0) return false;
 
-  const enabledFor = new Set(allowance?.enabledFor);
+  const debited = await db.transaction("rw", db.allowances, async () => {
+    const allowance = await db.allowances
+      .where("host")
+      .equalsIgnoreCase(host)
+      .first();
 
-  return (
-    allowance &&
-    allowance.enabled &&
-    enabledFor.has("webln") &&
-    allowance.remainingBudget > amount // check that the budget is higher than the amount
-  );
+    const enabledFor = new Set(allowance?.enabledFor);
+
+    if (
+      !allowance?.id ||
+      !allowance.enabled ||
+      !enabledFor.has("webln") ||
+      !(allowance.remainingBudget > amount) // check that the budget is higher than the amount. amount can be 0
+    ) {
+      return false;
+    }
+
+    await db.allowances.update(allowance.id, {
+      remainingBudget: allowance.remainingBudget - amount,
+    });
+    return true;
+  });
+
+  if (debited) await db.saveToStorage();
+  return debited;
 }
 
 async function sendPaymentWithAllowance(message: Message) {
@@ -73,4 +94,4 @@ async function payWithPrompt(message: Message) {
   }
 }
 
-export { checkAllowance, payWithPrompt, sendPaymentOrPrompt };
+export { checkAndDebitAllowance, payWithPrompt, sendPaymentOrPrompt };

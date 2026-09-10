@@ -33,7 +33,9 @@ function message(millisatoshis?: number): Message {
 }
 
 describe("sendPaymentOrPrompt", () => {
-  beforeAll(async () => {
+  // the tests debit the budget, so start every one from the fixture
+  beforeEach(async () => {
+    await db.allowances.clear();
     await db.allowances.bulkAdd(mockAllowances);
     await db.allowances.add({
       ...mockAllowances[0],
@@ -52,6 +54,25 @@ describe("sendPaymentOrPrompt", () => {
 
   afterEach(() => {
     jest.clearAllMocks();
+  });
+
+  test("takes the amount out of the budget before paying", async () => {
+    await sendPaymentOrPrompt(message(100_000), sender);
+
+    expect(sendPayment).toHaveBeenCalled();
+    expect((await db.allowances.get(1))?.remainingBudget).toBe(400);
+  });
+
+  test("concurrent payments cannot spend more than the budget", async () => {
+    // five 200 sat payments against a 500 sat budget: only the two the budget
+    // covers may reach the connector, the rest have to ask the user
+    await Promise.all(
+      [1, 2, 3, 4, 5].map(() => sendPaymentOrPrompt(message(200_000), sender))
+    );
+
+    expect(sendPayment).toHaveBeenCalledTimes(2);
+    expect(utils.openPrompt).toHaveBeenCalledTimes(3);
+    expect((await db.allowances.get(1))?.remainingBudget).toBe(100);
   });
 
   test("pays without a prompt when the amount is within the budget", async () => {
@@ -83,6 +104,13 @@ describe("sendPaymentOrPrompt", () => {
 
     expect(sendPayment).toHaveBeenCalled();
     expect(utils.openPrompt).not.toHaveBeenCalled();
+  });
+
+  test("takes the rounded-up amount out of the budget for a sub-satoshi amount", async () => {
+    // 100.5 sats are rounded up to 101 so the budget is never under-debited
+    await sendPaymentOrPrompt(message(100_500), sender);
+
+    expect((await db.allowances.get(1))?.remainingBudget).toBe(399);
   });
 
   test("prompts for amountless invoices", async () => {
