@@ -320,7 +320,6 @@
       "content": "เว็บไซต์นี้ขอให้คุณลงชื่อ:"
     },
     "choose_path": {
-      "other": {},
       "alby": {
         "title": "บัญชี Alby"
       }
@@ -587,89 +586,6 @@
     },
     "transactions": {
       "title": "การทำธุรกรรม"
-    }
-  },
-  "permissions": {
-    "commando": {
-      "invoice": "สร้างความคาดหวังในการชำระเงิน",
-      "keysend": "ส่งการชำระเงินไปยัง node อื่น",
-      "listfunds": "แสดงรายการการเงินทั้งหมด",
-      "listinvoices": "รับสถานะของ invoice ทั้งหมด",
-      "listoffers": "แสดงรายการข้อเสนอทั้งหมดหรือรับข้อเสนอเฉพาะ",
-      "offer": "สร้างข้อเสนอ",
-      "pay": "ส่งการชำระเงินไปยัง invoice BOLT11",
-      "connect": "สร้างการเชื่อมต่อใหม่กับ node อื่น",
-      "decode": "ถอดรหัสสตริง bolt11/bolt12/rune",
-      "decodepay": "การตรวจสอบความถูกต้องของสตริง Bolt11",
-      "feerates": "คืนค่าธรรมเนียมที่ CLN จะใช้",
-      "fundchannel": "เปิดช่องทางการชำระเงินกับคู่ของคุณโดยการทำธุรกรรมทางการเงิน",
-      "getinfo": "รับข้อมูลสรุปเกี่ยวกับ node",
-      "getroute": "ค้นหาเส้นทางที่ดีที่สุดสำหรับการชำระเงินไปยัง lightning node",
-      "listforwards": "แสดงรายการ htlcs ทั้งหมดที่พยายามส่งต่อ",
-      "listnodes": "แสดงรายการ node ที่ได้รับ gossip messages",
-      "listtransactions": "รายการธุรกรรมที่ติดตามใน wallet",
-      "sendpay": "ส่งการชำระเงินผ่าน route",
-      "bkpr-listbalances": "ประวัติยอดคงเหลือบัญชีทั้งหมด",
-      "checkmessage": "ตรวจสอบว่าลายเซ็นถูกสร้างขึ้นโดย node ที่กำหนด",
-      "disconnect": "ปิดการเชื่อมต่อที่มีอยู่กับ peer",
-      "listpays": "รับสถานะของคำสั่งจ่ายทั้งหมด",
-      "multifundchannel": "เปิดช่องทางการชำระเงินหลายช่องทางด้วย node โดยการทำธุรกรรมทางการเงินเพียงครั้งเดียว",
-      "setchannel": "กำหนดค่าค่าธรรมเนียม / ช่วง htlc สำหรับ channel",
-      "signmessage": "สร้างลายเซ็นจาก node นี้",
-      "listpeers": "แสดงรายการ ืnode ที่เชื่อมต่อหรือมีการเปิด channel กับ node นี้",
-      "listsendpays": "รับสถานะของคำสั่งการส่งเงินทั้งหมด"
-    },
-    "lnd": {
-      "listinvoices": "รับรายการ invoice ทั้งหมด",
-      "walletbalance": "รับผลลัพธ์ที่ไม่ได้ใช้ทั้งหมดใน wallet",
-      "openchannel": "เปิด channel ใหม่",
-      "getnetworkinfo": "รับสถิติพื้นฐานจาก channel graph ที่รู้จัก",
-      "getchaninfo": "รับประกาศเครือข่ายจาก channel ที่กำหนด",
-      "settleinvoice": "ชำระ invoice ที่ยอมรับ",
-      "getinfo": "รับข้อมูลจาก node",
-      "channelbalance": "รับรายงานเกี่ยวกับเงินทุนรวมในทุก channel ที่เปิดอยู่",
-      "disconnectpeer": "หยุดการเชื่อมต่อกับ node ระยะไกล",
-      "estimatefee": "ประมาณการอัตราค่าธรรมเนียมและค่าธรรมเนียมทั้งหมดสำหรับการทำธุรกรรม",
-      "gettransactions": "รับรายการธุรกรรมทั้งหมดที่เกี่ยวข้องกับ wallet",
-      "listpayments": "รับรายการการชำระเงินขาออกทั้งหมด",
-      "listpeers": "รับรายชื่อเพื่อนที่ใช้งานอยู่ทั้งหมด",
-      "lookupinvoice": "ดูรายละเอียดของ invoice",
-      "queryroutes": "สอบถามเส้นทางที่เป็นไปได้",
-      "decodepayreq": "ถอดรหัสสตริงคำขอชำระเงิน",
-      "addinvoice": "สร้าง invoice ใหม่",
-      "addholdinvoice": "สร้าง HODL invoice ใหม่",
-      "routermc": "แสดงค่าสถานะการควบคุมภายใน",
-      "listchannels": "รับคำอธิบายของ channel ที่เปิดอยู่ทั้งหมด",
-      "connectpeer": "สร้างการเชื่อมต่อกับ node ระยะไกล",
-      "getnodeinfo": "รับข้อมูล channel จาก node",
-      "verifymessage": "ตรวจสอบลายเซ็นผ่านข้อความ",
-      "sendtoroute": "ชำระเงินตามเส้นทางที่กำหนด"
-    },
-    "lnc": {
-      "sendtoroute": "ชำระเงินตามเส้นทางที่กำหนด",
-      "decodepayreq": "ถอดรหัสสตริงคำขอชำระเงิน",
-      "routermc": "แสดงค่าสถานะการควบคุมภายใน",
-      "openchannel": "เปิด channel ใหม่",
-      "connectpeer": "สร้างการเชื่อมต่อกับ node ระยะไกล",
-      "disconnectpeer": "หยุดการเชื่อมต่อกับ node ระยะไกล",
-      "estimatefee": "ประมาณการอัตราค่าธรรมเนียมและค่าธรรมเนียมทั้งหมดสำหรับการทำธุรกรรม",
-      "getchaninfo": "รับประกาศเครือข่ายจาก channel ที่กำหนด",
-      "getnetworkinfo": "รับสถิติพื้นฐานจาก channel graph ที่รู้จัก",
-      "getnodeinfo": "รับข้อมูล channel จาก node",
-      "gettransactions": "รับรายการธุรกรรมทั้งหมดที่เกี่ยวข้องกับ wallet",
-      "listpayments": "รับรายการการชำระเงินขาออกทั้งหมด",
-      "listpeers": "รับรายชื่อเพื่อนที่ใช้งานอยู่ทั้งหมด",
-      "lookupinvoice": "ดูรายละเอียดของ invoice",
-      "queryroutes": "สอบถามเส้นทางที่เป็นไปได้",
-      "verifymessage": "ตรวจสอบลายเซ็นผ่านข้อความ",
-      "addholdinvoice": "สร้าง HODL invoice ใหม่",
-      "settleinvoice": "ชำระ invoice ที่ยอมรับ",
-      "addinvoice": "สร้าง invoice ใหม่",
-      "getinfo": "รับข้อมูลจาก node",
-      "listchannels": "รับคำอธิบายของ channel ที่เปิดอยู่ทั้งหมด",
-      "listinvoices": "รับรายการ invoice ทั้งหมด",
-      "channelbalance": "รับรายงานเกี่ยวกับเงินทุนรวมในทุก channel ที่เปิดอยู่",
-      "walletbalance": "รับผลลัพธ์ที่ไม่ได้ใช้ทั้งหมดใน wallet"
     }
   },
   "common": {

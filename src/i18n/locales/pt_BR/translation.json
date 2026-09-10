@@ -683,7 +683,6 @@
         "title": "Conta Alby",
         "description": "Ideal para iniciantes que procuram uma ótima carteira para gastos do dia a dia."
       },
-      "other": {},
       "title": "Conecte carteiras na extensão Alby"
     },
     "alby": {
@@ -1047,9 +1046,6 @@
     }
   },
   "permissions": {
-    "lnc": {
-      "openchannel": ""
-    },
     "nostr": {
       "getpublickey": {
         "title": "Ler chave pública",
