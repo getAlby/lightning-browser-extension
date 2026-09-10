@@ -59,7 +59,6 @@ async function checkAndDebitAllowance(host: string, amount: number) {
 
     await db.allowances.update(allowance.id, {
       remainingBudget: allowance.remainingBudget - amount,
-      lastPaymentAt: Date.now(),
     });
     return true;
   });
