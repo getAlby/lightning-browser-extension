@@ -15,11 +15,11 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5
         with:
           fetch-depth: 2 # Fetch the base commit as well
 
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v5
 
       - name: Check source translation file for changes
         run: |
