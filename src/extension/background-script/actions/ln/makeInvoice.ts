@@ -18,6 +18,7 @@ const makeInvoice = async (message: MessageMakeInvoice) => {
       const response = await connector.makeInvoice({
         amount,
         memo,
+        includePrivateChannels: message.args.includePrivateChannels,
       });
 
       return response;
