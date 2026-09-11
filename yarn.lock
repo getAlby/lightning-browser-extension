@@ -4931,11 +4931,6 @@ emittery@^0.13.1:
   resolved "https://registry.npmjs.org/emittery/-/emittery-0.13.1.tgz"
   integrity sha512-DeWwawk6r5yR9jFgnDKYt4sLS0LmHJJi3ZOnb5/JdbYwj3nW+FxQnHIjhBKz8YLC7oRNPVM9NQ47I3CVx34eqQ==
 
-emoji-log@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.npmjs.org/emoji-log/-/emoji-log-1.0.2.tgz"
-  integrity sha512-3r9WI8xWU3gaeuPSrHEO9cbTybzlud82v98qeJlwyeGhUhKMleKdvDLegn/CPd1UZiFfTgl5VmJ9OW7I0y7CVA==
-
 emoji-regex@^8.0.0:
   version "8.0.0"
   resolved "https://registry.npmjs.org/emoji-regex/-/emoji-regex-8.0.0.tgz"
@@ -11728,12 +11723,10 @@ wext-manifest-loader@^3.0.0:
     loader-utils "^3.2.0"
     schema-utils "^4.0.0"
 
-wext-manifest-webpack-plugin@^1.2.1:
-  version "1.2.1"
-  resolved "https://registry.npmjs.org/wext-manifest-webpack-plugin/-/wext-manifest-webpack-plugin-1.2.1.tgz"
-  integrity sha512-NvyNpyhCxMa5aHzJyWcH2RBKIBEoZkb+CFvIk2Pg4QPSvTIUXpPXsiYrtUf5ghJh/DUorPoijwzNFi6agSl4bg==
-  dependencies:
-    emoji-log "^1.0.2"
+wext-manifest-webpack-plugin@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/wext-manifest-webpack-plugin/-/wext-manifest-webpack-plugin-1.4.1.tgz#86ebd6cfc0d6e5bfeb5d4600a9b6efda29f0eb8f"
+  integrity sha512-vmoM7qzQiQKGr+wJ9Jkc9lsN3QOoXyP2W/GbMmT/d7nbD7NVnxGcn8UgMdCB8edJkucn4XSV6RS9mi9w1LqTdA==
 
 whatwg-encoding@^2.0.0:
   version "2.0.0"
