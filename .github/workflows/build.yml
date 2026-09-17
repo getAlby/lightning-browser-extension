@@ -20,8 +20,8 @@ jobs:
       pull-requests: write
 
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
           node-version: "22"
           cache: "yarn"
@@ -35,13 +35,13 @@ jobs:
         run: yarn build:chrome
 
       - name: Archive firefox production zip file
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: firefox.xpi
           path: dist/production/firefox.xpi
 
       - name: Archive chrome production zip file
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: chrome.zip
           path: dist/production/chrome.zip

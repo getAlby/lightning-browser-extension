@@ -12,9 +12,9 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v5
         env:
           PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: "true"
         with:
@@ -33,7 +33,7 @@ jobs:
           args: npx playwright test
 
       - name: Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: always()
         with:
           name: playwright-artifcats
