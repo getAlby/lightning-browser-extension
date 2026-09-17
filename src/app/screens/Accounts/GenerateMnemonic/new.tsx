@@ -23,7 +23,9 @@ function MnemonicExplanation() {
   });
   const { t: tCommon } = useTranslation("common");
 
-  const [selectedCard, setSelectedCard] = useState("backup");
+  const [selectedCard, setSelectedCard] = useState<
+    "backup" | "import" | "importNostr" | null
+  >(null);
   const [hasMnemonic, setHasMnemonic] = useState(false);
 
   useEffect(() => {
@@ -86,6 +88,7 @@ function MnemonicExplanation() {
             label={tCommon("actions.next")}
             primary
             flex
+            disabled={!selectedCard}
             onClick={() => {
               if (selectedCard === "backup") {
                 hasMnemonic
