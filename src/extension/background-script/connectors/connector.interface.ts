@@ -44,6 +44,7 @@ export interface ConnectorTransaction {
 export interface MakeInvoiceArgs {
   amount: string | number;
   memo: string;
+  includePrivateChannels?: boolean;
 }
 
 export type MakeInvoiceResponse = {
