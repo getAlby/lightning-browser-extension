@@ -295,7 +295,7 @@
             "title": "Configurações Nostr",
             "derive": "Derivar da chave mestra",
             "can_restore": "Sua chave Nostr atual foi gerada a partir da chave mestra.",
-            "no_secret_key": "💡 Você ainda não tem uma chave mestra. <0>Clique aqui</0></div> para gerar sua chave mestra e suas chaves Nostr.",
+            "no_secret_key": "💡 Você ainda não tem uma chave mestra. <0>Clique aqui</0> para gerar sua chave mestra e suas chaves Nostr.",
             "imported_key_warning": "No momento, você está usando uma chave Nostr importada ou gerada aleatoriamente. Sua chave privada Nostr não pode ser restaurada por sua frase de recuperação, então lembre-se de fazer o backup de sua chave privada Nostr separadamente.",
             "remove": "Remover esta chave",
             "nostr_address": {
@@ -395,7 +395,7 @@
           "subtitle": "Escolha a rede para gerar endereços e decodificar transações.",
           "title": "Rede bitcoin"
         },
-        "no_mnemonic_hint": "💡 Você ainda não tem uma chave mestra. <0>Clique aqui</0></div> para gerar sua chave mestra e desbloquear essas configurações.",
+        "no_mnemonic_hint": "💡 Você ainda não tem uma chave mestra. <0>Clique aqui</0> para gerar sua chave mestra e desbloquear essas configurações.",
         "danger_zone": "Zona de perigo",
         "lnaddress": {
           "title": "Endereço relâmpago"
