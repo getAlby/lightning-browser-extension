@@ -1,6 +1,6 @@
-import lightningPayReq from "bolt11-signet";
 import PubSub from "pubsub-js";
 import pubsub from "~/common/lib/pubsub";
+import { decodeInvoice } from "~/common/utils/paymentRequest";
 import state from "~/extension/background-script/state";
 import { Message, MessageSendPayment } from "~/types";
 
@@ -28,7 +28,7 @@ export default async function sendPayment(
   let response, paymentRequestDetails;
 
   try {
-    paymentRequestDetails = lightningPayReq.decode(paymentRequest);
+    paymentRequestDetails = decodeInvoice(paymentRequest);
 
     response = await connector.sendPayment({
       paymentRequest,
@@ -55,8 +55,7 @@ export default async function sendPayment(
     response,
     details: {
       ...(paymentRequestDetails && {
-        description: paymentRequestDetails.tagsObject.description,
-        destination: paymentRequestDetails.payeeNodeKey,
+        description: paymentRequestDetails.description ?? undefined,
       }),
     },
   });

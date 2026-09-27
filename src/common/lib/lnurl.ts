@@ -1,6 +1,6 @@
 import axios from "axios";
-import lightningPayReq from "bolt11-signet";
 import ipaddr from "ipaddr.js";
+import { decodeInvoice } from "~/common/utils/paymentRequest";
 import { isLNURLDetailsError } from "~/common/utils/typeHelpers";
 import {
   LNURLAuthServiceResponse,
@@ -184,9 +184,9 @@ const lnurl = {
     paymentInfo: LNURLPaymentInfo;
     amount: number;
   }) {
-    const paymentRequestDetails = lightningPayReq.decode(paymentInfo.pr);
+    const paymentRequestDetails = decodeInvoice(paymentInfo.pr);
     switch (true) {
-      case paymentRequestDetails.millisatoshis !== String(amount): // LN WALLET Verifies that amount in provided invoice equals an amount previously specified by user
+      case paymentRequestDetails.millisatoshi !== amount: // LN WALLET Verifies that amount in provided invoice equals an amount previously specified by user
       case paymentInfo.successAction &&
         !["url", "message", "aes"].includes(paymentInfo.successAction.tag): // If successAction is not null: LN WALLET makes sure that tag value of is of supported type, aborts a payment otherwise
         return false;

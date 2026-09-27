@@ -1,4 +1,4 @@
-import lightningPayReq from "bolt11-signet";
+import { decodeInvoice } from "~/common/utils/paymentRequest";
 import db from "~/extension/background-script/db";
 import { allowanceFixture } from "~/fixtures/allowances";
 import { paymentsFixture } from "~/fixtures/payment";
@@ -150,7 +150,7 @@ describe("Persist payments", () => {
   test("persists the invoice amount rather than what the connector reports", async () => {
     await persistSuccessfulPayment("ln.sendPayment.success", {
       ...data,
-      paymentRequestDetails: lightningPayReq.decode(createPaymentRequest(999)),
+      paymentRequestDetails: decodeInvoice(createPaymentRequest(999)),
       response: {
         data: {
           preimage: "msat",

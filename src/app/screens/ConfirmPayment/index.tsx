@@ -5,7 +5,6 @@ import Container from "@components/Container";
 import PaymentSummary from "@components/PaymentSummary";
 import PublisherCard from "@components/PublisherCard";
 import ResultCard from "@components/ResultCard";
-import lightningPayReq from "bolt11-signet";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -17,7 +16,10 @@ import { useNavigationState } from "~/app/hooks/useNavigationState";
 import { USER_REJECTED_ERROR } from "~/common/constants";
 import api from "~/common/lib/api";
 import msg from "~/common/lib/msg";
-import { getPaymentRequestAmountSats } from "~/common/utils/paymentRequest";
+import {
+  decodeInvoice,
+  getPaymentRequestAmountSats,
+} from "~/common/utils/paymentRequest";
 
 function ConfirmPayment() {
   const {
@@ -36,7 +38,7 @@ function ConfirmPayment() {
 
   const navState = useNavigationState();
   const paymentRequest = navState.args?.paymentRequest as string;
-  const invoice = lightningPayReq.decode(paymentRequest);
+  const invoice = decodeInvoice(paymentRequest);
 
   const amountSat = getPaymentRequestAmountSats(invoice) ?? 0;
 
@@ -153,7 +155,7 @@ function ConfirmPayment() {
                   <PaymentSummary
                     amount={amountSat} // TODO: allow entering amount or do not allow zero-amount invoices
                     fiatAmount={fiatAmount}
-                    description={invoice.tagsObject.description}
+                    description={invoice.description ?? undefined}
                   />
                 </div>
               </div>

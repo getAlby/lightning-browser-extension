@@ -1,7 +1,9 @@
-import lightningPayReq from "bolt11-signet";
 import utils from "~/common/lib/utils";
 import { getHostFromSender } from "~/common/utils/helpers";
-import { getPaymentRequestAmountSats } from "~/common/utils/paymentRequest";
+import {
+  decodeInvoice,
+  getPaymentRequestAmountSats,
+} from "~/common/utils/paymentRequest";
 import { Message, Sender } from "~/types";
 
 import db from "../../db";
@@ -18,7 +20,7 @@ const sendPaymentOrPrompt = async (message: Message, sender: Sender) => {
     };
   }
 
-  const paymentRequestDetails = lightningPayReq.decode(paymentRequest);
+  const paymentRequestDetails = decodeInvoice(paymentRequest);
   const amountInSats = getPaymentRequestAmountSats(paymentRequestDetails);
 
   // amountless invoices carry no amount to check against the budget, so they

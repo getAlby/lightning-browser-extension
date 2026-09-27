@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig } from "axios";
-import lightningPayReq from "bolt11-signet";
 import { ACCOUNT_CURRENCIES, CURRENCIES } from "~/common/constants";
 import {
+  decodeInvoice,
   getPaymentRequestAmountSats,
   getPaymentRequestDescription,
 } from "~/common/utils/paymentRequest";
@@ -380,10 +380,10 @@ class Galoy implements Connector {
       },
     };
 
-    const paymentRequestDetails = lightningPayReq.decode(args.paymentRequest);
+    const paymentRequestDetails = decodeInvoice(args.paymentRequest);
     const amountInSats =
       getPaymentRequestAmountSats(paymentRequestDetails) ?? 0;
-    const paymentHash = paymentRequestDetails.tagsObject.payment_hash || "";
+    const paymentHash = paymentRequestDetails.paymentHash || "";
 
     return this.request(query).then(({ data, errors }) => {
       const errs = errors || data.lnInvoicePaymentSend.errors;

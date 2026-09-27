@@ -1,9 +1,11 @@
 import { act, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import lightningPayReq from "bolt11-signet";
 import { MemoryRouter } from "react-router-dom";
 import { settingsFixture as mockSettings } from "~/../tests/fixtures/settings";
-import { getPaymentRequestAmountSats } from "~/common/utils/paymentRequest";
+import {
+  decodeInvoice,
+  getPaymentRequestAmountSats,
+} from "~/common/utils/paymentRequest";
 import { createPaymentRequest } from "~/fixtures/paymentRequests";
 import type { OriginData } from "~/types";
 
@@ -107,7 +109,7 @@ describe("ConfirmPayment", () => {
     });
 
     const amountSat =
-      getPaymentRequestAmountSats(lightningPayReq.decode(paymentRequest)) ?? 0;
+      getPaymentRequestAmountSats(decodeInvoice(paymentRequest)) ?? 0;
 
     expect(await screen.findByText(`${amountSat} sats`)).toBeInTheDocument();
 
@@ -148,7 +150,7 @@ describe("ConfirmPayment", () => {
     });
 
     const amountSat =
-      getPaymentRequestAmountSats(lightningPayReq.decode(paymentRequest)) ?? 0;
+      getPaymentRequestAmountSats(decodeInvoice(paymentRequest)) ?? 0;
     const input = await screen.findByLabelText("Budget");
     expect(input).toHaveValue(amountSat * 10);
   });

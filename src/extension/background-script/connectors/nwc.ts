@@ -1,10 +1,12 @@
 import { NWCClient } from "@getalby/sdk";
-import lightningPayReq from "bolt11-signet";
 import Base64 from "crypto-js/enc-base64";
 import Hex from "crypto-js/enc-hex";
 import UTF8 from "crypto-js/enc-utf8";
 import SHA256 from "crypto-js/sha256";
-import { getPaymentRequestAmountSats } from "~/common/utils/paymentRequest";
+import {
+  decodeInvoice,
+  getPaymentRequestAmountSats,
+} from "~/common/utils/paymentRequest";
 import { Account } from "~/types";
 import Connector, {
   CheckPaymentArgs,
@@ -141,10 +143,8 @@ class NWCConnector implements Connector {
   }
 
   async sendPayment(args: SendPaymentArgs): Promise<SendPaymentResponse> {
-    const invoice = lightningPayReq.decode(args.paymentRequest);
-    const paymentHash = invoice.tags.find(
-      (tag) => tag.tagName === "payment_hash"
-    )?.data as string | undefined;
+    const invoice = decodeInvoice(args.paymentRequest);
+    const paymentHash = invoice.paymentHash;
     if (!paymentHash) {
       throw new Error("Could not find payment hash in invoice");
     }

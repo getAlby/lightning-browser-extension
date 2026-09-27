@@ -1,10 +1,9 @@
-import lightningPayReq from "bolt11-signet";
 import { createPaymentRequest } from "~/fixtures/paymentRequests";
 
-import { getPaymentRequestAmountSats } from "../paymentRequest";
+import { decodeInvoice, getPaymentRequestAmountSats } from "../paymentRequest";
 
 function decode(millisatoshis?: number) {
-  return lightningPayReq.decode(createPaymentRequest(millisatoshis));
+  return decodeInvoice(createPaymentRequest(millisatoshis));
 }
 
 describe("getPaymentRequestAmountSats", () => {
