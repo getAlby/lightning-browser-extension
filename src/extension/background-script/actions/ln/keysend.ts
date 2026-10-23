@@ -1,5 +1,6 @@
 import PubSub from "pubsub-js";
 import pubsub from "~/common/lib/pubsub";
+import { parseSatoshis } from "~/common/utils/helpers";
 import { Message } from "~/types";
 
 import state from "../../state";
@@ -24,13 +25,20 @@ export default async function keysend(message: Message) {
     };
   }
 
+  const sats = parseSatoshis(amount);
+  if (!sats) {
+    return {
+      error: "Invalid amount.",
+    };
+  }
+
   const connector = await state.getState().getConnector();
 
   let response;
   try {
     response = await connector.keysend({
       pubkey: destination,
-      amount: parseInt(amount as string),
+      amount: sats,
       customRecords: customRecords as Record<string, string>,
     });
   } catch (e) {

@@ -1,6 +1,6 @@
 import utils from "~/common/lib/utils";
 // TODO: move checkAndDebitAllowance to some helpers/models?
-import { getHostFromSender } from "~/common/utils/helpers";
+import { getHostFromSender, parseSatoshis } from "~/common/utils/helpers";
 import { Message, Sender } from "~/types";
 
 import keysend from "../ln/keysend";
@@ -20,7 +20,13 @@ const keysendOrPrompt = async (message: Message, sender: Sender) => {
       error: "Destination or amount missing.",
     };
   }
-  if (await checkAndDebitAllowance(host, parseInt(amount as string))) {
+  const sats = parseSatoshis(amount);
+  if (!sats) {
+    return {
+      error: "Invalid amount.",
+    };
+  }
+  if (await checkAndDebitAllowance(host, sats)) {
     return keysendWithAllowance(message);
   } else {
     return keysendWithPrompt(message);
