@@ -26,6 +26,22 @@ export function getHostFromSender(sender: Sender) {
   else return null;
 }
 
+// accepts a positive whole number of sats, given as a number or as a string of
+// decimal digits only
+export function parseSatoshis(amount: unknown): number | undefined {
+  if (typeof amount === "string" && /^\d+$/.test(amount)) {
+    amount = Number(amount);
+  }
+  if (
+    typeof amount === "number" &&
+    Number.isSafeInteger(amount) &&
+    amount > 0
+  ) {
+    return amount;
+  }
+  return undefined;
+}
+
 export async function poll<T>({
   fn,
   validate,
