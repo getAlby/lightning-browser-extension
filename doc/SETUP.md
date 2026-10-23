@@ -8,7 +8,7 @@ If you have any setup problems, please ensure you have read through all the inst
 
 ## ⚡ Prerequisites
 
-- [Node.js](https://nodejs.org) v16 or newer installed (we run tests with v18)
+- [Node.js](https://nodejs.org) 22.23.4 or newer within Node 22 (use `nvm install && nvm use` for the pinned version)
 - [Yarn](https://yarnpkg.com) v1 or v2 installed
 
 Supported but not required
@@ -126,7 +126,7 @@ By default, Alby and NWC (Nostr Wallet Connect) connectors are sufficient for te
 You can also use a Docker container and run the yarn commands within a container:
 
 ```bash
-docker run --rm --volume="$(pwd):/app" --workdir="/app" -t -i node:lts "yarn install && yarn run package"
+docker run --rm --pull=always --volume="$(pwd):/app" --workdir="/app" -t -i node:22.23.4 sh -c "yarn install && yarn run package"
 ```
 
 Note: By default the `manifest.json` is set with version `0.0.0`. The webpack loader will update the version in the build with that of the `package.json` version. In order to release a new version, update version in `package.json` and run script.

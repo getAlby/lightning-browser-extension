@@ -1,6 +1,6 @@
 language: node_js
 node_js:
- - "stable"
+ - "22.23.4"
 cache: yarn
 before_script:
   - yarn install

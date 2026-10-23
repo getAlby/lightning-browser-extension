@@ -18,7 +18,8 @@ jobs:
         env:
           PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: "true"
         with:
-          node-version: "22"
+          node-version: ">=22.23.4 <23"
+          check-latest: true
 
       - run: yarn install --frozen-lockfile
 
@@ -26,11 +27,11 @@ jobs:
         run: yarn build:chrome
 
       - name: Test Code
-        uses: mujo-code/puppeteer-headful@18.9.0
+        # Keep tests on the patched runner Node, not the action's Node 18 image.
+        run: xvfb-run --auto-servernum npx playwright test
         env:
           CI: "true"
-        with:
-          args: npx playwright test
+          PUPPETEER_EXEC_PATH: "google-chrome-stable"
 
       - name: Artifact
         uses: actions/upload-artifact@v5

@@ -20,6 +20,9 @@ jobs:
           fetch-depth: 2 # Fetch the base commit as well
 
       - uses: actions/setup-node@v5
+        with:
+          node-version: ">=22.23.4 <23"
+          check-latest: true
 
       - name: Check source translation file for changes
         run: |
