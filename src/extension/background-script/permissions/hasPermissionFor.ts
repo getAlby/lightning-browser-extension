@@ -27,5 +27,7 @@ export async function hasPermissionFor(method: string, host: string) {
     accountId,
   });
 
-  return !!findPermission?.enabled;
+  // a remembered denial is stored as enabled with blocked set, so "enabled"
+  // on its own does not mean the method is allowed
+  return !!findPermission?.enabled && !findPermission.blocked;
 }
