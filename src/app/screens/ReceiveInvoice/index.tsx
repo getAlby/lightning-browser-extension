@@ -149,7 +149,7 @@ function ReceiveInvoice() {
                 <div className="relative flex items-center justify-center">
                   <QRCode
                     value={invoice.paymentRequest.toUpperCase()}
-                    size={512}
+                    size={192}
                   />
                   {isAlbyOAuthUser ? (
                     <>
