@@ -37,6 +37,7 @@
   },
   "dependencies": {
     "@bitcoinerlab/secp256k1": "^2.0.0",
+    "@getalby/lightning-tools": "^8.1.1",
     "@getalby/sdk": "^8.0.3",
     "@headlessui/react": "^2.2.10",
     "@lightninglabs/lnc-web": "^0.3.1-alpha",
@@ -51,7 +52,6 @@
     "axios": "^1.20.0",
     "bech32": "^2.0.0",
     "bitcoinjs-lib": "^7.0.1",
-    "bolt11-signet": "1.4.1",
     "crypto-js": "^4.2.0",
     "dexie": "^4.4.3",
     "dayjs": "^1.11.21",

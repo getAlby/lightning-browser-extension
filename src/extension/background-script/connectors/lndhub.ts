@@ -1,11 +1,13 @@
 import type { AxiosResponse } from "axios";
 import axios, { AxiosRequestConfig, Method } from "axios";
-import lightningPayReq from "bolt11-signet";
 import Base64 from "crypto-js/enc-base64";
 import Hex from "crypto-js/enc-hex";
 import hmacSHA256 from "crypto-js/hmac-sha256";
 import sha256 from "crypto-js/sha256";
-import { getPaymentRequestAmountSats } from "~/common/utils/paymentRequest";
+import {
+  decodeInvoice,
+  getPaymentRequestAmountSats,
+} from "~/common/utils/paymentRequest";
 import HashKeySigner from "~/common/utils/signer";
 import { Account } from "~/types";
 
@@ -257,7 +259,7 @@ export default class LndHub implements Connector {
     // to somewhat work around this we set a payment route and use the amount from the payment request.
     // lnbits needs to fix this and return proper route information with a total amount and fees
     if (!data.payment_route) {
-      const paymentRequestDetails = lightningPayReq.decode(args.paymentRequest);
+      const paymentRequestDetails = decodeInvoice(args.paymentRequest);
       const amountInSats =
         getPaymentRequestAmountSats(paymentRequestDetails) ?? 0;
       data.payment_route = { total_amt: amountInSats, total_fees: 0 };

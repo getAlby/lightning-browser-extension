@@ -2,9 +2,9 @@ import type {
   CreateSwapParams,
   GetAccountInformationResponse,
 } from "@getalby/sdk";
-import { PaymentRequestObject } from "bolt11-signet";
 import { Runtime } from "webextension-polyfill";
 import { ACCOUNT_CURRENCIES, CURRENCIES } from "~/common/constants";
+import { PaymentRequestDetails } from "~/common/utils/paymentRequest";
 import connectors from "~/extension/background-script/connectors";
 import {
   ConnectorTransaction,
@@ -89,7 +89,7 @@ export interface OriginData {
 
 export interface PaymentNotificationData {
   accountId: Account["id"];
-  paymentRequestDetails?: PaymentRequestObject | undefined;
+  paymentRequestDetails?: PaymentRequestDetails | undefined;
   response: SendPaymentResponse | { error: string };
   origin?: OriginData;
   details: {

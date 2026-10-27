@@ -1,7 +1,9 @@
-import lightningPayReq from "bolt11-signet";
 import Hex from "crypto-js/enc-hex";
 import sha256 from "crypto-js/sha256";
-import { getPaymentRequestAmountSats } from "~/common/utils/paymentRequest";
+import {
+  decodeInvoice,
+  getPaymentRequestAmountSats,
+} from "~/common/utils/paymentRequest";
 import HashKeySigner from "~/common/utils/signer";
 import { Account } from "~/types";
 
@@ -89,7 +91,7 @@ class LnBits implements Connector {
         "fee": 0,
         "memo": "LNbits",
         "time": 1000000000,
-        "bolt11-signet": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "bolt11": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
         "preimage": "0000000000000000000000000000000000000000000000000000000000000000",
         "payment_hash": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
         "extra": {},
@@ -125,7 +127,7 @@ class LnBits implements Connector {
       ) => {
         const transactions: ConnectorTransaction[] = data
           .map((transaction, index): ConnectorTransaction => {
-            const decoded = lightningPayReq.decode(transaction.bolt11);
+            const decoded = decodeInvoice(transaction.bolt11);
 
             const creationDate = decoded.timestamp
               ? decoded.timestamp * 1000
@@ -175,7 +177,7 @@ class LnBits implements Connector {
   }
 
   sendPayment(args: SendPaymentArgs): Promise<SendPaymentResponse> {
-    const paymentRequestDetails = lightningPayReq.decode(args.paymentRequest);
+    const paymentRequestDetails = decodeInvoice(args.paymentRequest);
     const amountInSats =
       getPaymentRequestAmountSats(paymentRequestDetails) ?? 0;
     return this.request("POST", "/api/v1/payments", this.config.adminkey, {
