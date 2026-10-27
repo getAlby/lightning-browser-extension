@@ -137,7 +137,7 @@
     "puppeteer": "^24.9.0",
     "stream-browserify": "^3.0.0",
     "swc-loader": "^0.2.3",
-    "tailwindcss": "^3.4.14",
+    "tailwindcss": "^4.3.3",
     "terser-webpack-plugin": "^5.3.9",
     "tsconfig-paths-webpack-plugin": "^4.1.0",
     "typescript": "^5.2.2",
