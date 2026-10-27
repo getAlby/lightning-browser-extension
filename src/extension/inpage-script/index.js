@@ -27,6 +27,17 @@ function init() {
     }
   });
 }
+// BOLT11 invoices and bech32-encoded LNURLs are case-insensitive, but mixed
+// case is not valid bech32 — normalize those to lowercase. Anything else is
+// left untouched: LUD-17 URLs (lnurlp:, lnurlw:, lnurlc:) and lightning
+// addresses carry a case-sensitive path, query, and username, so lowercasing
+// them would send the request to a different endpoint than the link points to.
+// The charset of a bech32 payload cannot contain a scheme separator, a slash,
+// a dot or an @, which is what tells the two apart here.
+function normalizeBech32(value) {
+  return /^ln[a-z0-9]+$/i.test(value) ? value.toLowerCase() : value;
+}
+
 function registerLightningLinkClickHandler() {
   // Intercept any `lightning:` requests
   window.addEventListener(
@@ -59,17 +70,22 @@ function registerLightningLinkClickHandler() {
       ev.preventDefault();
 
       if (lightningLink) {
-        href = lightningLink.getAttribute("href").toLowerCase();
-        paymentRequest = href.replace("lightning:", "");
+        href = lightningLink.getAttribute("href");
+        paymentRequest = normalizeBech32(href.replace(/^lightning:/i, ""));
         link = lightningLink;
       } else if (bitcoinLinkWithLighting) {
-        href = bitcoinLinkWithLighting.getAttribute("href").toLowerCase();
+        href = bitcoinLinkWithLighting.getAttribute("href");
         link = bitcoinLinkWithLighting;
         const url = new URL(href);
         const query = new URLSearchParams(url.search);
-        paymentRequest = query.get("lightning");
+        // the selector matches the parameter name case-insensitively, so the
+        // lookup has to as well
+        const lightningParam = Array.from(query).find(
+          ([key]) => key.toLowerCase() === "lightning"
+        );
+        paymentRequest = lightningParam && normalizeBech32(lightningParam[1]);
       } else if (lnurlLink) {
-        href = lnurlLink.getAttribute("href").toLowerCase();
+        href = lnurlLink.getAttribute("href");
         link = lnurlLink;
         lnurl = href.replace(/^lnurl[pwc]:/i, "");
       }
@@ -80,7 +96,7 @@ function registerLightningLinkClickHandler() {
       }
 
       // it could be it is a LNURL behind a lightning: link
-      if (paymentRequest && paymentRequest.startsWith("lnurl")) {
+      if (paymentRequest && /^lnurl/i.test(paymentRequest)) {
         lnurl = paymentRequest.replace(/^lnurl[pwc]:/i, ""); // replace potential scheme. the different lnurl types are handled in the lnurl action (by checking the type in the LNURL response)
       }
       // it could be a lightning address behind a lightning: link
