@@ -110,10 +110,55 @@ describe("ln keysend", () => {
     });
   });
 
+  describe("rejects", () => {
+    test.each([
+      "1e5",
+      "100000e-5",
+      "1.5",
+      " 10",
+      "10abc",
+      "0x10",
+      "",
+      "0",
+      "-1",
+    ])("the amount string %p", async (amount) => {
+      const result = await keysend({
+        ...message,
+        args: { ...message.args, amount },
+      });
+
+      expect(result).toStrictEqual({ error: "Invalid amount." });
+      expect(fullConnector.keysend).not.toHaveBeenCalled();
+    });
+
+    test.each([1.5, 0, -1, NaN, Infinity, 2 ** 53])(
+      "the amount number %p",
+      async (amount) => {
+        const result = await keysend({
+          ...message,
+          args: { ...message.args, amount },
+        });
+
+        expect(result).toStrictEqual({ error: "Invalid amount." });
+        expect(fullConnector.keysend).not.toHaveBeenCalled();
+      }
+    );
+  });
+
   describe("makes a successful payment", () => {
     test("if amount, destination and custom records are provided", async () => {
       const result = await keysend(message);
       expect(result).toStrictEqual(requestResponse);
+      expect(fullConnector.keysend).toHaveBeenCalledWith(
+        expect.objectContaining({ amount: 1000 })
+      );
+    });
+
+    test("if the amount is a number", async () => {
+      await keysend({ ...message, args: { ...message.args, amount: 1000 } });
+      expect(fullConnector.keysend).toHaveBeenCalledWith(
+        expect.objectContaining({ amount: 1000 })
+      );
     });
   });
 });
