@@ -433,6 +433,14 @@ export interface MessageSetPassword extends MessageDefault {
   action: "setPassword";
 }
 
+export interface MessageChangePassword extends MessageDefault {
+  args: {
+    currentPassword: string;
+    password: string;
+  };
+  action: "changePassword";
+}
+
 export interface MessageAccountValidate extends MessageDefault {
   args: {
     connector: ConnectorType;

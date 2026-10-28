@@ -4,6 +4,7 @@ import LocaleSwitcher from "@components/LocaleSwitcher/LocaleSwitcher";
 import PasswordForm from "@components/PasswordForm";
 import Setting from "@components/Setting";
 import Input from "@components/form/Input";
+import TextField from "@components/form/TextField";
 import Select from "@components/form/Select";
 import Toggle from "@components/form/Toggle";
 import { Html5Qrcode } from "html5-qrcode";
@@ -17,6 +18,7 @@ import { CURRENCIES } from "~/common/constants";
 import msg from "~/common/lib/msg";
 
 const initialFormData = {
+  currentPassword: "",
   password: "",
   passwordConfirmation: "",
 };
@@ -33,11 +35,13 @@ function Settings() {
 
   function closeModal() {
     setModalIsOpen(false);
+    setFormData(initialFormData);
   }
 
-  async function updateAccountPassword(password: string) {
+  async function updateAccountPassword() {
     try {
       await msg.request("changePassword", {
+        currentPassword: formData.currentPassword,
         password: formData.password,
       });
 
@@ -46,7 +50,7 @@ function Settings() {
     } catch (e) {
       console.error(e);
       if (e instanceof Error)
-        toast.error(`An unexpected error occurred: ${e.message}`);
+        toast.error(e.message);
     }
   }
 
@@ -322,9 +326,25 @@ function Settings() {
               <form
                 onSubmit={(e: FormEvent) => {
                   e.preventDefault();
-                  updateAccountPassword(formData.password);
+                  updateAccountPassword();
                 }}
               >
+                <div className="w-full mt-8">
+                  <TextField
+                    id="currentPassword"
+                    type="password"
+                    label={t("change_password.current_password.label")}
+                    required
+                    value={formData.currentPassword}
+                    onChange={(e) => {
+                      setFormData({
+                        ...formData,
+                        currentPassword: e.target.value,
+                      });
+                    }}
+                  />
+                </div>
+
                 <PasswordForm
                   i18nKeyPrefix="settings.change_password"
                   formData={formData}
@@ -337,6 +357,7 @@ function Settings() {
                     type="submit"
                     primary
                     disabled={
+                      !formData.currentPassword ||
                       !formData.password ||
                       formData.password !== formData.passwordConfirmation
                     }
