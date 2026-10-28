@@ -164,8 +164,16 @@ export const getPaymentsByAccount = (options: {
 export const getSettings = () => msg.request<SettingsStorage>("getSettings");
 export const getStatus = () => msg.request<StatusRes>("status");
 export const getInfo = () => msg.request<NodeInfo>("getInfo");
-export const makeInvoice = ({ amount, memo }: MakeInvoiceArgs) =>
-  msg.request<MakeInvoiceResponse["data"]>("makeInvoice", { amount, memo });
+export const makeInvoice = ({
+  amount,
+  memo,
+  includePrivateChannels,
+}: MakeInvoiceArgs) =>
+  msg.request<MakeInvoiceResponse["data"]>("makeInvoice", {
+    amount,
+    memo,
+    includePrivateChannels,
+  });
 export const connectPeer = ({ host, pubkey }: ConnectPeerArgs) =>
   msg.request<ConnectPeerResponse["data"]>("connectPeer", { host, pubkey });
 export const setSetting = (setting: MessageSettingsSet["args"]["setting"]) =>
