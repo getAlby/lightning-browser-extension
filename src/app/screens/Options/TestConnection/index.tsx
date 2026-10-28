@@ -162,7 +162,7 @@ export default function TestConnection() {
                     accountName={accountInfo.name}
                     alias={accountInfo.alias}
                     satoshis={
-                      typeof accountInfo.balance === "number"
+                      Number.isFinite(accountInfo.balance)
                         ? getFormattedInCurrency(
                             accountInfo.balance,
                             accountInfo.currency
