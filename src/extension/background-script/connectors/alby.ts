@@ -236,12 +236,19 @@ export default class Alby implements Connector {
     };
   }
 
-  signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {
-    // signMessage requires proof of ownership of a non-custodial node
-    // this is not the case in the Alby connector which connects to Lndhub
-    throw new Error(
-      "SignMessage is not supported by Alby accounts. Generate a Master Key to use LNURL auth."
+  async signMessage(args: SignMessageArgs): Promise<SignMessageResponse> {
+    const data = await this._request((client) =>
+      client.signMessage({
+        message: args.message,
+      })
     );
+
+    return {
+      data: {
+        message: data.message,
+        signature: data.signature,
+      },
+    };
   }
 
   async makeInvoice(args: MakeInvoiceArgs): Promise<MakeInvoiceResponse> {
