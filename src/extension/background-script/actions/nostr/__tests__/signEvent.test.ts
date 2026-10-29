@@ -95,6 +95,82 @@ describe("signEvent", () => {
     });
   });
 
+  describe("kind 3 warning functionality", () => {
+    test("shows warning for kind 3 event with fewer than 2 p-tags even with existing permissions", async () => {
+      // prepare DB with permission for kind 3
+      const kind3Permission = {
+        ...permissionInDB,
+        method: "nostr/signMessage/3",
+      };
+      await db.permissions.bulkAdd([kind3Permission]);
+
+      const kind3Message: MessageSignEvent = {
+        ...message,
+        args: {
+          event: {
+            content: "",
+            created_at: 1714716414,
+            kind: 3,
+            tags: [["p", "some-short-pubkey"]], // Only 1 p-tag
+          },
+        },
+      };
+
+      await signEvent(kind3Message, sender);
+
+      // Should prompt even with existing permission
+      expect(utils.openPrompt).toHaveBeenCalledWith({
+        args: {
+          event: kind3Message.args.event,
+          hasKind3Warning: true,
+        },
+        origin: kind3Message.origin,
+        action: "public/nostr/confirmSignMessage",
+      });
+    });
+
+    test("does not show warning for kind 3 event with 2 or more p-tags", async () => {
+      // prepare DB with permission for kind 3
+      const kind3Permission = {
+        ...permissionInDB,
+        method: "nostr/signMessage/3",
+      };
+      await db.permissions.bulkAdd([kind3Permission]);
+
+      const kind3Message: MessageSignEvent = {
+        ...message,
+        args: {
+          event: {
+            content: "",
+            created_at: 1714716414,
+            kind: 3,
+            tags: [
+              ["p", "pubkey1"],
+              ["p", "pubkey2"],
+            ], // 2 p-tags
+          },
+        },
+      };
+
+      const result = await signEvent(kind3Message, sender);
+
+      // Should not prompt, permission exists and no warning needed
+      expect(utils.openPrompt).not.toHaveBeenCalled();
+      expect(result).toStrictEqual(requestResponse);
+    });
+
+    test("does not show warning for non-kind 3 events", async () => {
+      // prepare DB with permission for kind 1
+      await db.permissions.bulkAdd([permissionInDB]);
+
+      const result = await signEvent(message, sender);
+
+      // Should not prompt, permission exists and it's not kind 3
+      expect(utils.openPrompt).not.toHaveBeenCalled();
+      expect(result).toStrictEqual(requestResponse);
+    });
+  });
+
   describe("directly calls signEvent with method and params", () => {
     test("if permission for signEvent exists and is enabled", async () => {
       // prepare DB with matching permission
