@@ -4,6 +4,26 @@ import type { MessageAccountAdd } from "~/types";
 import addAccount from "../add";
 
 jest.mock("~/extension/background-script/state");
+jest.mock("~/extension/background-script/connectors", () => ({
+  __esModule: true,
+  default: {
+    lnd: {},
+    nativelnd: {},
+    lndhub: {},
+    nativelndhub: {},
+    kollider: {},
+    lnbits: {},
+    lnc: {},
+    nativelnbits: {},
+    galoy: {},
+    eclair: {},
+    citadel: {},
+    nativecitadel: {},
+    alby: {},
+    nwc: {},
+    lawallet: {},
+  },
+}));
 jest.mock("uuid", () => {
   return {
     v4: jest.fn(() => "random-id-42"),
@@ -127,5 +147,56 @@ describe("add account to account-list", () => {
     });
 
     expect(spy).toHaveBeenCalledTimes(1);
+  });
+
+  test("returns error for invalid connector type", async () => {
+    const mockState = defaultMockState;
+    state.getState = jest.fn().mockReturnValue(mockState);
+
+    const invalidMessage: MessageAccountAdd = {
+      ...message,
+      args: {
+        ...message.args,
+        connector: "fakeconnector" as never,
+      },
+    };
+
+    expect(await addAccount(invalidMessage)).toStrictEqual({
+      error: "Invalid connector type",
+    });
+  });
+
+  test("returns error for missing config", async () => {
+    const mockState = defaultMockState;
+    state.getState = jest.fn().mockReturnValue(mockState);
+
+    const invalidMessage: MessageAccountAdd = {
+      ...message,
+      args: {
+        ...message.args,
+        config: "",
+      },
+    };
+
+    expect(await addAccount(invalidMessage)).toStrictEqual({
+      error: "Account config is required",
+    });
+  });
+
+  test("returns error for missing name", async () => {
+    const mockState = defaultMockState;
+    state.getState = jest.fn().mockReturnValue(mockState);
+
+    const invalidMessage: MessageAccountAdd = {
+      ...message,
+      args: {
+        ...message.args,
+        name: "",
+      },
+    };
+
+    expect(await addAccount(invalidMessage)).toStrictEqual({
+      error: "Account name is required",
+    });
   });
 });
