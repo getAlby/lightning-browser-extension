@@ -8,6 +8,9 @@ on:
       - opened
       - synchronize
 
+permissions:
+  contents: read
+
 jobs:
   check_source_translation_file:
     name: Check source translation file for changes
@@ -17,6 +20,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v5
         with:
+          persist-credentials: false
           fetch-depth: 2 # Fetch the base commit as well
 
       - uses: actions/setup-node@v5
