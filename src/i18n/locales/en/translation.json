@@ -1137,7 +1137,8 @@
     },
     "errors": {
       "connection_failed": "Connection failed",
-      "payment_failed": "Payment Failed"
+      "payment_failed": "Payment Failed",
+      "unsupported_connector": "The connection type of this wallet ({{connector}}) is no longer supported. Please remove this wallet and add it again."
     },
     "range": {
       "between": "between {{min}} and {{max}}",
