@@ -102,7 +102,8 @@ function LNURLAuthComponent() {
                 <PublisherCard
                   title={origin.name}
                   image={origin.icon}
-                  url={details.domain}
+                  // the requesting site; the LNURL domain is shown below
+                  url={origin.host}
                 />
               ) : (
                 <PublisherCard title={details.domain} />
