@@ -2,6 +2,7 @@ import { act, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router-dom";
 import { settingsFixture as mockSettings } from "~/../tests/fixtures/settings";
+import msg from "~/common/lib/msg";
 
 import type { Props } from "./index";
 import SitePreferences from "./index";
@@ -91,6 +92,11 @@ describe("SitePreferences", () => {
     });
 
     expect(mockOnEdit).toHaveBeenCalledTimes(1);
+    expect(msg.request).toHaveBeenCalledWith("updateAllowance", {
+      id: 1,
+      totalBudget: 250,
+      lnurlAuth: false,
+    });
   });
 
   test("enable website login", async () => {
@@ -118,5 +124,10 @@ describe("SitePreferences", () => {
     });
 
     await waitFor(() => expect(mockOnEdit).toHaveBeenCalled());
+    // the unchanged budget is not sent, so the remaining budget is not refilled
+    expect(msg.request).toHaveBeenCalledWith("updateAllowance", {
+      id: 1,
+      lnurlAuth: true,
+    });
   });
 });

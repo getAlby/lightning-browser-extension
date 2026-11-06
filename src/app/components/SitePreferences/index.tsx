@@ -163,9 +163,12 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
 
   async function updateAllowance() {
     try {
+      const totalBudget = parseInt(budget || "0");
       await msg.request("updateAllowance", {
         id: allowance.id,
-        totalBudget: parseInt(budget || "0"),
+        // only send the budget if it changed: the background resets
+        // remainingBudget whenever totalBudget is present
+        ...(totalBudget !== allowance.totalBudget && { totalBudget }),
         lnurlAuth,
       });
 
