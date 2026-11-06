@@ -206,9 +206,6 @@
       "umbrel_lightning_node": {
         "title": "Servidor Relâmpago"
       },
-      "voltage": {
-        "title": "Voltage"
-      },
       "nwc": {
         "page": {
           "url": {

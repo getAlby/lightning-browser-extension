@@ -213,23 +213,6 @@
           "instructions": "مطمئن شوید که ورژن 0.12.0 با جدیدتر Core Lightning را دارید، پلاگین روشن است و گره شما در شبکه لایتنینگ قابل دسترسی است. با راه اجرای 'lightning-cli commando-rune' یک رون بسازید."
         }
       },
-      "voltage": {
-        "title": "Voltage",
-        "page": {
-          "title": "به نود ولتاژ خود متصل شوید",
-          "description": "میزبانی نود لایتنینگ سازمانی. سریع تر از همیشه وارد شبکه لایتنینگ شوید. کنترل کامل بدون نیاز به مدیریت. <0>در راهنمای تنظیمات بیشتر یاد بگیرید</0>"
-        },
-        "url": {
-          "label": "URL نود",
-          "placeholder": "https://your-node.m.voltageapp.io:8080"
-        },
-        "errors": {
-          "connection_failed": "متصل نشد. اطلاعات ورودی شما صحیح است؟"
-        },
-        "macaroon": {
-          "label": "Admin Macaroon (hex)"
-        }
-      },
       "nwc": {
         "page": {
           "url": {

@@ -15,7 +15,6 @@ import i18n from "~/i18n/i18nConfig";
 
 import ConnectAlbyHub from "~/app/screens/connectors/ConnectAlbyHub";
 import ConnectNWC from "~/app/screens/connectors/ConnectNWC";
-import ConnectVoltage from "~/app/screens/connectors/ConnectVoltage";
 import ConnectCommando from "../screens/connectors/ConnectCommando";
 import albyhub from "/static/assets/icons/albyhub.svg";
 import btcpay from "/static/assets/icons/btcpay.svg";
@@ -34,7 +33,6 @@ import nwc from "/static/assets/icons/nwc.svg";
 import raspiblitz from "/static/assets/icons/raspiblitz.png";
 import startos from "/static/assets/icons/startos.png";
 import umbrel from "/static/assets/icons/umbrel.png";
-import voltage from "/static/assets/icons/voltage.png";
 
 export const normalizeKey = (key: string) =>
   key as unknown as TemplateStringsArray;
@@ -148,12 +146,6 @@ const connectorMap: { [key: string]: ConnectorRoute } = {
     title: i18n.t("translation:choose_connector.bitcoin_jungle.title"),
     logo: galoyBitcoinJungle,
   },
-  voltage: {
-    path: "voltage",
-    element: <ConnectVoltage />,
-    title: i18n.t("translation:choose_connector.voltage.title"),
-    logo: voltage,
-  },
   nwc: {
     path: "nwc",
     element: <ConnectNWC />,
@@ -250,7 +242,6 @@ function getConnectorRoutes(): ConnectorRoute[] {
     getDistribution("mynode"),
     getDistribution("nirvati"),
     connectorMap["btcpay"],
-    connectorMap["voltage"],
     connectorMap[galoyPaths.blink],
     connectorMap[galoyPaths.bitcoinJungle],
     connectorMap["lnd-hub-go"],

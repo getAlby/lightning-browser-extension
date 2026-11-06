@@ -215,23 +215,6 @@
           }
         }
       },
-      "voltage": {
-        "page": {
-          "description": "ව්‍යවසාය-ශ්‍රේණියේ ලයිට්නින්(lightning) නෝඩ්(node) සත්කාරකත්වය. වෙන කවරදාටත් වඩා වේගයෙන් ලයිට්නින්(Lightning ) ජාලයට පිවිසෙන්න. ශුන්‍ය කළමනාකරණය සමඟ සම්පූර්ණ පාලනය. <0>අපගේ සැකසුම් මාර්ගෝපදේශය තුළ තව දැන ගන්න</0>",
-          "title": "ඔබේ Voltage නෝඩ්(node) එකට සම්බන්ධ කරන්න"
-        },
-        "title": "වෝල්ටේජ්(Voltage)",
-        "url": {
-          "label": "නෝඩ්(node) URL",
-          "placeholder": "https://ඔබගේ-node.m.voltageapp.io:8080"
-        },
-        "macaroon": {
-          "label": "පරිපාලක මැකරූන්(Macaroon) (හෙක්ස්)"
-        },
-        "errors": {
-          "connection_failed": "සම්බන්ධතාවය අසාර්ථක විය. ඔබගේ අක්තපත්‍ර නිවැරදිද?"
-        }
-      },
       "albyhub": {
         "page": {
           "errors": {

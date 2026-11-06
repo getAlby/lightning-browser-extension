@@ -224,23 +224,6 @@
           "missing_token": "Zugriffstoken fehlt, konnte sich nicht anmelden."
         }
       },
-      "voltage": {
-        "macaroon": {
-          "label": "Admin Macaroon (hex)"
-        },
-        "url": {
-          "label": "Node URL",
-          "placeholder": "https://deine-node.m.voltageapp.io:8080"
-        },
-        "page": {
-          "title": "Verbinde dich mit deiner Voltage-Node",
-          "description": "\"Lightning-Node-Hosting auf Unternehmensniveau. Schneller denn je im Lightning-Netzwerk. Vollständige Kontrolle ohne Verwaltungsaufwand. <0>Mehr erfahren</0>"
-        },
-        "title": "Voltage",
-        "errors": {
-          "connection_failed": "Verbindung fehlgeschlagen. Sind deine Anmeldedaten korrekt?"
-        }
-      },
       "nwc": {
         "page": {
           "url": {

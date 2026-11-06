@@ -206,23 +206,6 @@
       "umbrel_lightning_node": {
         "title": "Lightning-solmu"
       },
-      "voltage": {
-        "page": {
-          "description": "Enterprise-luokan Lightning-solmun isännöinti. Liity Lightning-verkkoon nopeammin kuin koskaan. Täydellinen ohjaus ilman hallintaa. <0>Lisätietoja määritysoppaastamme</0>",
-          "title": "Yhdistä Voltage-solmuun"
-        },
-        "macaroon": {
-          "label": "Järjestelmänvalvojan Macaroon (hex)"
-        },
-        "errors": {
-          "connection_failed": "Yhteys epäonnistui. Ovatko tunnistetietosi oikein?"
-        },
-        "url": {
-          "placeholder": "https://sinun-solmusi.m.voltage-sovellus.io:8080",
-          "label": "Solmun URL"
-        },
-        "title": "Voltage"
-      },
       "nwc": {
         "page": {
           "errors": {

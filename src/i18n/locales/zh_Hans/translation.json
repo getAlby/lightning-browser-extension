@@ -206,23 +206,6 @@
           "label": "输入你的短信验证码"
         }
       },
-      "voltage": {
-        "title": "Voltage",
-        "page": {
-          "description": "企业级闪电网络节点托管。以前所未有的速度访问闪电网络。无需管理就能完全掌控。<0>在我们的设置指南中了解更多</0>",
-          "title": "连接到你的 Voltage 节点"
-        },
-        "url": {
-          "label": "节点链接",
-          "placeholder": "https://your-node.m.voltageapp.io:8080"
-        },
-        "macaroon": {
-          "label": "Macaroon 管理员（hex）"
-        },
-        "errors": {
-          "connection_failed": "连接失败。请检查凭据是否正确？"
-        }
-      },
       "nwc": {
         "page": {
           "url": {
