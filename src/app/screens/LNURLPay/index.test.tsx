@@ -1,9 +1,34 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import {
+  act,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from "@testing-library/react";
+import axios from "axios";
 import { MemoryRouter } from "react-router-dom";
 import { settingsFixture as mockSettings } from "~/../tests/fixtures/settings";
 import type { LNURLDetails, OriginData } from "~/types";
 
 import LNURLPay from "./index";
+
+jest.mock("axios", () => ({
+  __esModule: true,
+  default: { get: jest.fn() },
+}));
+
+jest.mock("~/app/context/AccountContext", () => ({
+  useAccount: () => ({
+    account: { id: "1", currency: "BTC", balance: 1000 },
+    balancesDecorated: { accountBalance: "1000 sats" },
+    fetchAccountInfo: jest.fn(),
+  }),
+}));
+
+jest.mock("~/app/components/Toast", () => ({
+  __esModule: true,
+  default: { error: jest.fn() },
+}));
 
 const mockGetFiatValue = jest.fn(() => Promise.resolve("$1,22"));
 
@@ -103,4 +128,42 @@ describe("LNURLPay", () => {
     expect(await screen.getByText("16sat/vB & empty")).toBeInTheDocument();
     expect(await screen.getByLabelText("Amount")).toHaveValue(satValue);
   });
+
+  test.each([
+    ["3", 3000],
+    ["3000e-3", undefined],
+  ])(
+    "requests the invoice for the amount entered (%p)",
+    async (input, expectedMsat) => {
+      jest.mocked(axios.get).mockResolvedValue({
+        status: 200,
+        data: { status: "ERROR", reason: "stop here" },
+      });
+      render(
+        <MemoryRouter>
+          <LNURLPay />
+        </MemoryRouter>
+      );
+
+      fireEvent.change(screen.getByLabelText("Amount"), {
+        target: { value: input },
+      });
+      await act(async () => {
+        fireEvent.click(screen.getByRole("button", { name: "Confirm" }));
+      });
+
+      if (expectedMsat) {
+        expect(axios.get).toHaveBeenCalledWith(
+          mockDetails.callback,
+          expect.objectContaining({
+            params: expect.objectContaining({ amount: expectedMsat }),
+          })
+        );
+      } else {
+        // exponent notation is rejected rather than read differently by the
+        // range check and the invoice request
+        expect(axios.get).not.toHaveBeenCalled();
+      }
+    }
+  );
 });
