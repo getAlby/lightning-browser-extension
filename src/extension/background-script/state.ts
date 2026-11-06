@@ -50,6 +50,10 @@ interface BrowserStorage {
   nostrPrivateKey: string | null;
 }
 
+// must match the <title> of the pages in static/views/*.html
+// used to find and close all extension tabs when locking
+export const EXTENSION_PAGE_TITLE = "Alby Extension";
+
 // these keys get synced from the state to the browser storage
 // the values are the default values
 const browserStorageDefaults: BrowserStorage = {
@@ -210,7 +214,7 @@ const state = create<State>((set, get) => ({
       set({ mv2Password: null });
     }
 
-    const allTabs = await browser.tabs.query({ title: "Alby" });
+    const allTabs = await browser.tabs.query({ title: EXTENSION_PAGE_TITLE });
 
     // https://stackoverflow.com/a/54317362/1667461
     const allTabIds = Array.from(allTabs, (tab) => tab.id).filter(
