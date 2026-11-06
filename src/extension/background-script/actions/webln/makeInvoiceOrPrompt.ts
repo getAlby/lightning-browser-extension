@@ -1,3 +1,5 @@
+import { parseSatoshis } from "~/common/utils/helpers";
+
 import utils from "../../../../common/lib/utils";
 import { Message } from "../../../../types";
 
@@ -7,9 +9,17 @@ const makeInvoiceOrPrompt = async (message: Message) => {
 };
 
 const makeInvoiceWithPrompt = async (message: Message) => {
-  const amount = message.args.amount || message.args.defaultAmount;
-  const memo = message.args.memo || message.args.defaultMemo;
   const amountEditable = !message.args.amount;
+  let amount = message.args.amount || message.args.defaultAmount;
+  // A fixed amount is shown read-only in the prompt and used as-is for the
+  // invoice, so it has to be a plain whole number of sats.
+  if (!amountEditable) {
+    amount = parseSatoshis(message.args.amount);
+    if (!amount) {
+      return { error: "Invalid amount." };
+    }
+  }
+  const memo = message.args.memo || message.args.defaultMemo;
   const memoEditable = !message.args.memo || message.args.memo === "";
   // If amount is not defined yet, let the user generate an invoice with an amount field.
   try {
