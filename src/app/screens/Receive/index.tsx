@@ -33,8 +33,9 @@ function Receive() {
       if (!auth.account) return;
       const accountInfo = await api.swr.getAccountInfo(auth.account.id);
 
-      const lightningAddress = accountInfo.lightningAddress;
-      if (lightningAddress) setLightningAddress(lightningAddress);
+      // also clear it, so an address that was removed (or belongs to the
+      // previously selected account) is no longer offered
+      setLightningAddress(accountInfo.lightningAddress || "");
 
       setLoadingLightningAddress(false);
     })();
