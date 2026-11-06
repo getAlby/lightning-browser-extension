@@ -55,7 +55,7 @@ export default function PasswordForm<
     ) {
       setFormData({
         ...formData,
-        [event.target.name]: event.target.value.trim(),
+        [event.target.name]: event.target.value,
       });
     }
 
@@ -64,7 +64,7 @@ export default function PasswordForm<
     } else if (
       event.target.name === "passwordConfirmation" &&
       errors.passwordConfirmationErrorMessage &&
-      formData.password === event.target.value.trim()
+      formData.password === event.target.value
     ) {
       setErrors({ ...errors, passwordConfirmationErrorMessage: "" });
     }
