@@ -11,7 +11,7 @@ function ContentMessage({ heading, content }: Props) {
           {heading}
         </dt>
         {content && (
-          <dd className="text-lg text-gray-600 dark:text-neutral-400 break-all line-clamp-[8]">
+          <dd className="text-lg text-gray-600 dark:text-neutral-400 break-all max-h-56 overflow-y-auto">
             {content}
           </dd>
         )}
