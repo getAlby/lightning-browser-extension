@@ -27,6 +27,7 @@ import { USER_REJECTED_ERROR } from "~/common/constants";
 import lnurl from "~/common/lib/lnurl";
 import msg from "~/common/lib/msg";
 import utils from "~/common/lib/utils";
+import { parseSatoshis } from "~/common/utils/helpers";
 import type {
   LNURLError,
   LNURLPayServiceResponse,
@@ -122,6 +123,15 @@ function LNURLPay() {
 
     const payerdata = getPayerData(details);
 
+    // the same whole-number amount is requested from the service and checked
+    // against the returned invoice
+    const amountSat = parseSatoshis(valueSat);
+    if (!amountSat) {
+      toast.error("Payment aborted: Invalid amount.");
+      return;
+    }
+    const amountMsat = amountSat * 1000;
+
     try {
       setLoadingConfirm(true);
       // Get the invoice
@@ -130,7 +140,7 @@ function LNURLPay() {
         comment?: string;
         payerdata?: string;
       } = {
-        amount: parseInt(valueSat) * 1000, // user specified sum in MilliSatoshi
+        amount: amountMsat, // user specified sum in MilliSatoshi
         comment: comment && comment, // https://github.com/fiatjaf/lnurl-rfc/blob/luds/12.md
         payerdata: payerdata && JSON.stringify(payerdata), // https://github.com/fiatjaf/lnurl-rfc/blob/luds/18.md
       };
@@ -174,7 +184,7 @@ function LNURLPay() {
 
       const isValidInvoice = lnurl.verifyInvoice({
         paymentInfo,
-        amount: parseInt(valueSat) * 1000,
+        amount: amountMsat,
       });
 
       if (!isValidInvoice) {
