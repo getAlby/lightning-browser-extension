@@ -118,6 +118,7 @@ export default function ConnectAlbyHub() {
           required
           onChange={handleChange}
           autoFocus={true}
+          type="password"
         />
       </div>
     </ConnectorForm>
