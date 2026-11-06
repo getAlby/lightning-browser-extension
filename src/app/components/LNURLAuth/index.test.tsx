@@ -124,4 +124,24 @@ describe("LNURLAuth", () => {
 
     expect(screen.queryByRole("checkbox")).not.toBeInTheDocument();
   });
+
+  test("shows the requesting host next to the LNURL login domain", async () => {
+    const lnurlDomain = mockLnurlDetails.domain;
+    mockLnurlDetails.domain = "bank.example";
+
+    try {
+      await act(async () => {
+        render(
+          <MemoryRouter>
+            <LNURLAuthComponent />
+          </MemoryRouter>
+        );
+      });
+
+      expect(screen.getByText("site.com")).toBeInTheDocument();
+      expect(screen.getByText("bank.example")).toBeInTheDocument();
+    } finally {
+      mockLnurlDetails.domain = lnurlDomain;
+    }
+  });
 });
