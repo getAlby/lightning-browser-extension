@@ -258,6 +258,32 @@ describe("auto-login", () => {
     );
   });
 
+  test.each([undefined, "login", "register"])(
+    "logs in without a prompt for action %s",
+    async (action) => {
+      await authOrPrompt(message, sender, {
+        ...lnurlDetailsFor("https://site.com/lnurl-login"),
+        action,
+      } as LNURLDetails);
+
+      expect(mockOpenPrompt).not.toHaveBeenCalled();
+      expect(new URL(fetchedUrl).host).toBe("site.com");
+    }
+  );
+
+  test.each(["link", "auth", "unknown"])(
+    "prompts for action %s despite a remembered login",
+    async (action) => {
+      await authOrPrompt(message, sender, {
+        ...lnurlDetailsFor("https://site.com/lnurl-login"),
+        action,
+      } as LNURLDetails);
+
+      expect(mockOpenPrompt).toHaveBeenCalled();
+      expect(fetchedUrl).toBe("");
+    }
+  );
+
   test("prompts if lnurlAuth is not enabled", async () => {
     mockAllowance = {
       id: 1,

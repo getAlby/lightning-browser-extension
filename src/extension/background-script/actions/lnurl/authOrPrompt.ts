@@ -12,6 +12,17 @@ import type {
 
 import { authFunction } from "./auth";
 
+// LUD-04 actions that may be performed by a remembered auto-login. "link"
+// and "auth" (and anything unknown) always need the user's confirmation
+const AUTO_LOGIN_ACTIONS = [undefined, "login", "register"];
+
+function isAutoLoginAction(lnurlDetails: LNURLDetails) {
+  return (
+    lnurlDetails.tag === "login" &&
+    AUTO_LOGIN_ACTIONS.includes(lnurlDetails.action)
+  );
+}
+
 async function authOrPrompt(
   message: MessageWebLnLnurl,
   sender: Sender,
@@ -63,11 +74,14 @@ async function authOrPrompt(
     }
   }
 
-  // check if there is a publisher, lnurlAuth is enabled and the LNURL-auth
-  // service belongs to the website that requested the login,
+  // check if there is a publisher, lnurlAuth is enabled, the LNURL-auth
+  // service belongs to the website that requested the login and it is a
+  // plain login (the remembered choice is for logging in, not for linking
+  // the key to an account or authorizing another action),
   // otherwise we prompt the user
 
   if (
+    isAutoLoginAction(lnurlDetails) &&
     isUnlocked &&
     allowance &&
     allowance.enabled &&
