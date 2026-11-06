@@ -99,7 +99,9 @@ function ConfirmSignSchnorr() {
                   publisher: origin.host,
                   action: tPermissions("nostr.signschnorr.title"),
                 })}
-                content={plaintext || sigHash || ""}
+                // must match the mode selected in actions/nostr/signSchnorr.ts:
+                // message mode whenever `message` is present (even if empty)
+                content={plaintext !== undefined ? plaintext : sigHash || ""}
               />
             </div>
             <div className="flex flex-col gap-4">
