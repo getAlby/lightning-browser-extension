@@ -52,10 +52,12 @@ const isLNURLResponse = (data: unknown): data is LNURLDetails | LNURLError => {
 
 const fromInternetIdentifier = (address: string) => {
   // email regex: https://emailregex.com/
-  // modified to allow _ in subdomains
+  // modified to allow _ in subdomains, and without quoted local parts
+  // ("a@b"@c), which LUD-16 does not allow and which would let the part
+  // before the first @ choose the host
   if (
     address.match(
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-_0-9]+\.)+[a-zA-Z]{2,}))$/
+      /^([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-_0-9]+\.)+[a-zA-Z]{2,}))$/
     )
   ) {
     let [name, host] = address.split("@");
