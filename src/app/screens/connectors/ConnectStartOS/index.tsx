@@ -42,6 +42,8 @@ export default function ConnectStartOS() {
         macaroon,
       });
     } catch (e) {
+      // do not keep a previously parsed connection once the input is invalid
+      setFormData(initialFormData);
       console.error("invalid lndconnect string", e);
     }
   }
