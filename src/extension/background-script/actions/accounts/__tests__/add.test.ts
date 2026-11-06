@@ -128,4 +128,20 @@ describe("add account to account-list", () => {
 
     expect(spy).toHaveBeenCalledTimes(1);
   });
+
+  test("rejects unsupported connectors", async () => {
+    state.getState = jest.fn().mockReturnValue(defaultMockState);
+    const spy = jest.spyOn(state, "setState");
+
+    expect(
+      await addAccount({
+        ...message,
+        args: {
+          ...message.args,
+          connector: "nativelnd" as MessageAccountAdd["args"]["connector"],
+        },
+      })
+    ).toStrictEqual({ error: "Unsupported connector: nativelnd" });
+    expect(spy).not.toHaveBeenCalled();
+  });
 });

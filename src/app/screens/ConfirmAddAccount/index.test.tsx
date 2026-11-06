@@ -28,7 +28,7 @@ jest.mock("~/app/hooks/useNavigationState", () => {
     useNavigationState: jest.fn(() => ({
       origin: mockOrigin,
       args: {
-        connector: "nativelnd",
+        connector: "lnd",
         name: "Your LND wallet",
         config: { connectionString: "..." },
       },
@@ -47,9 +47,7 @@ describe("ConfirmAddAccount", () => {
     });
 
     expect(
-      await screen.findByText(
-        "This website wants to add a wallet (LND (over Tor)):"
-      )
+      await screen.findByText("This website wants to add a wallet (LND):")
     ).toBeInTheDocument();
     expect(await screen.findByText("Your LND wallet")).toBeInTheDocument();
   });

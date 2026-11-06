@@ -585,7 +585,6 @@
     },
     "balance": "Balance",
     "connectors": {
-      "nativelnd": "LND (en Tor)",
       "lnd": "LND"
     },
     "website": "Página web"
@@ -670,18 +669,6 @@
       "label": {
         "auth": "INICIAR SESIÓN"
       }
-    },
-    "companion_download_info": {
-      "download": "Descargar",
-      "companion": {
-        "title": "Aplicación complementaria",
-        "description": "Aplicación ligera que conecta tu navegador a la red TOR."
-      },
-      "tor_native": {
-        "title": "TOR (nativa)",
-        "description": "Seleccione esta opción si este navegador ya está conectado a la red TOR."
-      },
-      "heading": "¿Cómo quieres conectarte a la red TOR?"
     }
   }
 }

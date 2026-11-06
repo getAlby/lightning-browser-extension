@@ -779,7 +779,6 @@
       "always_allow": "Lembrar e não perguntar novamente"
     },
     "confirm_add_account": {
-      "tor_info": "Para conectar através da rede TOR, precisa primeiro instalar a app Alby companion:",
       "title": "Adicionar carteira"
     },
     "liquid": {
@@ -923,11 +922,8 @@
     },
     "connectors": {
       "lnd": "LND",
-      "nativelnd": "LND (usando Tor)",
       "lndhub": "LNDHub",
-      "nativelndhub": "LNDHub (usando Tor)",
       "lnbits": "LNBits",
-      "nativelnbits": "LNBits (usando Tor)",
       "galoy": "Galoy",
       "eclair": "Eclair",
       "commando": "Commando"
@@ -1016,17 +1012,6 @@
       },
       "budget": {
         "label": "Orçamento"
-      }
-    },
-    "companion_download_info": {
-      "heading": "Como deseja conectar à rede TOR?",
-      "download": "Descarregar",
-      "tor_native": {
-        "title": "TOR (nativo)",
-        "description": "Selecione esta opção se este navegador já estiver conectado à rede TOR."
-      },
-      "companion": {
-        "title": "Aplicação companheira"
       }
     },
     "toasts": {

@@ -544,18 +544,6 @@
         "label": "बजेट"
       }
     },
-    "companion_download_info": {
-      "heading": "तुम्हाला TOR नेटवर्कशी कसे जोडायचे आहे?",
-      "download": "डाउनलोड करा",
-      "companion": {
-        "title": "सहकारी अॅप",
-        "description": "तुमच्या ब्राउझरला TOR नेटवर्कशी जोडणारे लाइटवेट अॅप."
-      },
-      "tor_native": {
-        "title": "TOR (native)",
-        "description": "हा ब्राउझर आधीच TOR नेटवर्कशी जोडलेला असल्यास हा पर्याय निवडा."
-      }
-    },
     "toasts": {
       "connection_error": {
         "what_you_can_do": "तुम्ही काय करू शकता ते येथे आहे:",

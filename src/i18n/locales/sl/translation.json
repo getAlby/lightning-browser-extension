@@ -443,18 +443,6 @@
     }
   },
   "components": {
-    "companion_download_info": {
-      "heading": "Kako se želiš povezati z omrežjem TOR?",
-      "download": "Prenos",
-      "tor_native": {
-        "title": "TOR (native)",
-        "description": "Izberi to možnost, če je ta brskalnik že povezan z omrežjem TOR."
-      },
-      "companion": {
-        "title": "Spremljevalna aplikacija",
-        "description": "Aplikacija, ki tvoj brskalnik poveže z omrežjem TOR."
-      }
-    },
     "badge": {
       "label": {
         "imported": "Uvožen",
@@ -572,11 +560,8 @@
       "close": "Zapri"
     },
     "connectors": {
-      "nativelnd": "LND (preko Tor)",
       "commando": "Commando",
-      "nativelndhub": "LNDHub (preko Tor)",
       "lnbits": "LNBits",
-      "nativelnbits": "LNBits (preko Tor)",
       "lnd": "LND",
       "lndhub": "LNDHub",
       "eclair": "Eclair",

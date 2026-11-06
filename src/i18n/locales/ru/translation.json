@@ -960,8 +960,7 @@
     },
     "confirm_add_account": {
       "title": "Добавить счет",
-      "content": "Этот сайт хочет добавить учетную запись ({{коннектор}}):",
-      "tor_info": "Чтобы подключиться через сеть TOR, необходимо сначала установить приложение-компаньон Alby:"
+      "content": "Этот сайт хочет добавить учетную запись ({{коннектор}}):"
     }
   },
   "common": {
@@ -1043,14 +1042,11 @@
     "general": "Общий",
     "full_screen": "Полный экран",
     "connectors": {
-      "nativelnd": "LND (за Тором)",
       "lndhub": "LNDHub",
       "lnd": "LND",
       "lnbits": "LNBits",
-      "nativelndhub": "LNDHub (второй Tor)",
       "galoy": "Галерея",
       "eclair": "Eclair",
-      "nativelnbits": "LNBits (через Tor)",
       "commando": "Командировка"
     },
     "range": {
@@ -1162,18 +1158,6 @@
       "dont_ask_any": "Не спрашивайте снова <0>любые запросы nostr</0>",
       "content_label": "Разрешения",
       "dont_ask_current": "Не просите больше <0>{{разрешение}}</0>"
-    },
-    "companion_download_info": {
-      "companion": {
-        "description": "Легкое приложение, подключающее ваш браузер к сети TOR.",
-        "title": "Приложение-компаньон"
-      },
-      "tor_native": {
-        "title": "TOR (родной)",
-        "description": "Выберите этот вариант, если этот браузер уже подключен к сети TOR."
-      },
-      "download": "Скачать",
-      "heading": "Как вы хотите подключиться к сети TOR?"
     }
   },
   "permissions": {

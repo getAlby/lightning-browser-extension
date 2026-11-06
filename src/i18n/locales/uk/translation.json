@@ -988,8 +988,7 @@
     },
     "confirm_add_account": {
       "title": "Додати гаманець",
-      "content": "Цей вебсайт хоче додати гаманець ({{connector}}):",
-      "tor_info": "Щоб підключитися через мережу TOR, вам спочатку потрібно встановити додаток-компаньйон Alby:"
+      "content": "Цей вебсайт хоче додати гаманець ({{connector}}):"
     },
     "liquid": {
       "title": "Рідина",
@@ -1111,11 +1110,8 @@
     "apps": "Програми",
     "connectors": {
       "lnd": "LND",
-      "nativelnd": "LND (через Tor)",
       "lndhub": "LNDHub",
-      "nativelndhub": "LNDHub (через Tor)",
       "lnbits": "LNBits",
-      "nativelnbits": "LNBits (через Tor)",
       "galoy": "Галой",
       "eclair": "Еклера",
       "commando": "Командос"
@@ -1240,18 +1236,6 @@
       "ask_everytime": "Запитувати щоразу <0>{{permission}}<0>",
       "dont_ask_current": "Більше не запитувати про <0>{{permission}}</0>",
       "dont_ask_any": "Більше не запитувати <0>жодних nostr-запитів</0>"
-    },
-    "companion_download_info": {
-      "heading": "Як ви хочете підключитися до мережі TOR?",
-      "download": "Завантажити",
-      "companion": {
-        "title": "Супутній додаток",
-        "description": "Легкий додаток, який підключає ваш браузер до мережі TOR."
-      },
-      "tor_native": {
-        "title": "TOR (нативний)",
-        "description": "Виберіть цю опцію, якщо цей браузер вже підключено до мережі TOR."
-      }
     }
   },
   "permissions": {

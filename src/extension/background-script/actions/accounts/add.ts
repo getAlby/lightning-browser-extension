@@ -1,11 +1,15 @@
 import { v4 as uuidv4 } from "uuid";
 import { encryptData } from "~/common/lib/crypto";
 import { getUniqueAccountName } from "~/common/utils/validations";
+import connectors from "~/extension/background-script/connectors";
 import state from "~/extension/background-script/state";
 import type { MessageAccountAdd } from "~/types";
 
 const add = async (message: MessageAccountAdd) => {
   const newAccount = message.args;
+  if (!Object.prototype.hasOwnProperty.call(connectors, newAccount.connector)) {
+    return { error: `Unsupported connector: ${newAccount.connector}` };
+  }
   const accounts = state.getState().accounts;
   const name = getUniqueAccountName(newAccount.name, accounts);
   const tmpAccounts = { ...accounts };

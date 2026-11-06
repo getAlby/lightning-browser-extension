@@ -913,7 +913,6 @@
       "instructions2": "आप अपना बिटकॉइन एड्रेस <0>रिसीव</0> पेज पर पा सकते हैं।"
     },
     "confirm_add_account": {
-      "tor_info": "टीओआर नेटवर्क से जुड़ने के लिए आपको सबसे पहले एल्बी कंपेनियन ऐप इंस्टॉल करना होगा:",
       "content": "यह वेबसाइट एक वॉलेट जोड़ना चाहती है ({{connector}}):",
       "title": "वॉलेट जोड़ें"
     },
@@ -1104,11 +1103,8 @@
       "block_and_ignore": "{{host}} को ब्लॉक और इग्नोर करें"
     },
     "connectors": {
-      "nativelnd": "LND (Tor पर)",
       "commando": "Commando",
-      "nativelndhub": "LNDHub (Tor पर)",
       "lnbits": "LNBits",
-      "nativelnbits": "LNbits (Tor पर)",
       "lnd": "LND",
       "lndhub": "LNDHub",
       "eclair": "एक्लेयर",
@@ -1194,18 +1190,6 @@
       },
       "budget": {
         "label": "बजट"
-      }
-    },
-    "companion_download_info": {
-      "heading": "आप TOR नेटवर्क से\nकैसे कनेक्ट\nकरना चाहते हैं?",
-      "download": "डाउनलोड",
-      "companion": {
-        "title": "कम्पैनियन ऐप",
-        "description": "लाइटवेट ऐप जो आपके ब्राउज़र को TOR नेटवर्क से कनेक्ट करता है।"
-      },
-      "tor_native": {
-        "title": "TOR (नेटिव)",
-        "description": "अगर यह ब्राउज़र पहले से ही TOR नेटवर्क से कनेक्टेड है तो इस विकल्प को चुनें।"
       }
     },
     "toasts": {

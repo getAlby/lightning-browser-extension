@@ -564,8 +564,7 @@
     },
     "confirm_add_account": {
       "title": "Lägg till konto",
-      "content": "Den här webbplatsen vill lägga till ett konto ({{connector}}):",
-      "tor_info": "För att kunna ansluta via TOR-nätverket måste du först installera Alby kompanion appen:"
+      "content": "Den här webbplatsen vill lägga till ett konto ({{connector}}):"
     },
     "on_chain": {
       "title": "Ta emot via bitcoin adress",
@@ -729,12 +728,9 @@
     "wallet": "Plånbok",
     "connectors": {
       "lnd": "LND",
-      "nativelnd": "LND (över Tor)",
-      "nativelndhub": "LNDHub (över Tor)",
       "galoy": "Galoy",
       "eclair": "Eclair",
       "commando": "Commando",
-      "nativelnbits": "LNBits (över Tor)",
       "lndhub": "LNDHub",
       "lnbits": "LNBits"
     },
@@ -835,18 +831,6 @@
         "auth": "LOGGA IN",
         "imported": "IMPORTERAD",
         "budget": "BUDGET"
-      }
-    },
-    "companion_download_info": {
-      "heading": "Hur vill du ansluta till TOR-nätverket?",
-      "companion": {
-        "title": "Companion App",
-        "description": "Lättviktsapp som ansluter din webbläsare till TOR-nätverket."
-      },
-      "download": "Ladda ner",
-      "tor_native": {
-        "title": "TOR (native)",
-        "description": "Välj det här alternativet om den här webbläsaren redan är ansluten till TOR-nätverket."
       }
     }
   }

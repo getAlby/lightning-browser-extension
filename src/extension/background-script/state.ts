@@ -5,6 +5,7 @@ import { create } from "zustand";
 import { decryptData } from "~/common/lib/crypto";
 import { DEFAULT_SETTINGS } from "~/common/settings";
 import { isManifestV3 } from "~/common/utils/mv3";
+import i18n from "~/i18n/i18nConfig";
 import Bitcoin from "~/extension/background-script/bitcoin";
 import { Migration } from "~/extension/background-script/migrations";
 import Mnemonic from "~/extension/background-script/mnemonic";
@@ -126,6 +127,16 @@ const state = create<State>((set, get) => ({
       const account = get().accounts[currentAccountId];
       const password = await get().password();
       if (!password) throw new Error("Password is not set");
+      // e.g. accounts still using a removed native (Tor companion) connector
+      if (
+        !Object.prototype.hasOwnProperty.call(connectors, account.connector)
+      ) {
+        throw new Error(
+          i18n.t("common:errors.unsupported_connector", {
+            connector: account.connector,
+          })
+        );
+      }
       const config = decryptData(account.config as string, password);
       const connector = new connectors[account.connector](account, config);
       await connector.init();
