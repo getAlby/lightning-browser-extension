@@ -11,6 +11,8 @@ import msg from "~/common/lib/msg";
 
 import logo from "/static/assets/icons/lndhub_go.png";
 
+import { parseLndHubUri } from "./parseLndHubUri";
+
 export default function ConnectLndHub() {
   const navigate = useNavigate();
 
@@ -41,15 +43,13 @@ export default function ConnectLndHub() {
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setLoading(true);
-    const match = formData.uri.match(/lndhub:\/\/(\S+):(\S+)@(\S+)/i);
-    if (!match) {
+    const credentials = parseLndHubUri(formData.uri);
+    if (!credentials) {
       toast.error(t("errors.invalid_uri"));
       setLoading(false);
       return;
     }
-    const login = match[1];
-    const password = match[2];
-    const url = match[3].replace(/\/$/, "");
+    const { login, password, url } = credentials;
     const account = {
       name: "LNDHub",
       config: {
