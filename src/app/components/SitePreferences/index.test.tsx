@@ -2,6 +2,7 @@ import { act, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router-dom";
 import { settingsFixture as mockSettings } from "~/../tests/fixtures/settings";
+import msg from "~/common/lib/msg";
 
 import type { Props } from "./index";
 import SitePreferences from "./index";
@@ -118,5 +119,60 @@ describe("SitePreferences", () => {
     });
 
     await waitFor(() => expect(mockOnEdit).toHaveBeenCalled());
+  });
+
+  test("discards unsaved permission removals when the modal is dismissed", async () => {
+    const user = userEvent.setup();
+    (msg.request as jest.Mock).mockImplementation((action: string) =>
+      action === "listPermissions"
+        ? Promise.resolve({
+            permissions: [
+              {
+                id: 7,
+                accountId: "1",
+                allowanceId: 1,
+                createdAt: "1",
+                host: "example.com",
+                method: "nostr/signMessage/4",
+                enabled: true,
+                blocked: true,
+              },
+            ],
+          })
+        : Promise.resolve()
+    );
+
+    await renderComponent();
+
+    // open, remove the "Always reject" badge, dismiss without saving
+    await act(() => user.click(screen.getByRole("button")));
+    await screen.findByText("Always reject");
+    const badgeDeleteButtons = screen
+      .getAllByRole("button")
+      .filter((b) => b.closest(".bg-red-50"));
+    await act(() => user.click(badgeDeleteButtons[0]));
+    const closeButton = screen
+      .getAllByRole("button")
+      .find((b) => b.classList.contains("absolute"));
+    await act(() => user.click(closeButton!));
+    await waitFor(() =>
+      expect(screen.queryByText("Always reject")).not.toBeInTheDocument()
+    );
+
+    // reopen, change only website login and save
+    await user.click(screen.getByRole("button"));
+    await screen.findByText("Always reject");
+    await act(async () => {
+      await user.click(screen.getByRole("switch"));
+    });
+    await act(async () => {
+      await user.click(screen.getByRole("button", { name: "Save" }));
+    });
+
+    await waitFor(() => expect(mockOnEdit).toHaveBeenCalled());
+    expect(msg.request).not.toHaveBeenCalledWith(
+      "deletePermissionsById",
+      expect.anything()
+    );
   });
 });

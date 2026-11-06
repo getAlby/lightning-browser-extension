@@ -97,6 +97,8 @@ function SitePreferences({ launcherType, allowance, onEdit, onDelete }: Props) {
   function openModal() {
     setBudget(allowance.totalBudget.toString());
     setLnurlAuth(allowance.lnurlAuth);
+    // discard unsaved permission edits from a previously dismissed modal
+    setPermissions(originalPermissions);
     /**
      * @HACK
      * @headless-ui/menu restores focus after closing a menu, to the button that opened it.
