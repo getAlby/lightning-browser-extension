@@ -11,6 +11,9 @@ describe("isPrivateHost", () => {
     "service.internal",
     "app.localhost",
     "umbrel.home.arpa",
+    "intranet", // single-label names
+    "nas.",
+    hostnameOf("https://INTRANET:8443/"),
     "127.0.0.1",
     "10.0.0.1",
     "172.16.5.5",

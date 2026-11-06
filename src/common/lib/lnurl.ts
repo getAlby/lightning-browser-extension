@@ -30,6 +30,9 @@ const isPrivateHost = (hostname: string): boolean => {
     .replace(/\.$/, "");
   if (!host || host === "localhost") return true;
   if (LOCAL_HOST_SUFFIXES.some((suffix) => host.endsWith(suffix))) return true;
+  // single-label names (e.g. "intranet", "nas") resolve via local search
+  // domains to hosts on the local network
+  if (!host.includes(".") && !ipaddr.isValid(host)) return true;
   // process() unwraps IPv4-mapped IPv6 (::ffff:a.b.c.d); everything that is
   // not plain unicast (loopback, private, link-local, CGNAT, NAT64, ...) is
   // treated as private.
