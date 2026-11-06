@@ -100,9 +100,6 @@
         "page": {
           "title": "Σύνδεση σε <0>myNode</0>"
         }
-      },
-      "voltage": {
-        "title": "Voltage"
       }
     },
     "distributions": {

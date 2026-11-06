@@ -228,23 +228,6 @@
       "umbrel_lightning_node": {
         "title": "Lightning нода"
       },
-      "voltage": {
-        "page": {
-          "title": "Подключитесь к своему узлу напряжения",
-          "description": "Хостинг Lightning Node корпоративного уровня. Включитесь в сеть Lightning Network быстрее, чем когда-либо. Полный контроль с нулевым управлением. <0> Узнайте больше в нашем руководстве по настройке</0>"
-        },
-        "url": {
-          "label": "URL узла",
-          "placeholder": "https://your-node.m.voltageapp.io:8080"
-        },
-        "title": "Напряжение",
-        "errors": {
-          "connection_failed": "Подключение не удалось. Ваши учетные данные верны?"
-        },
-        "macaroon": {
-          "label": "Администратор Macaroon (hex)"
-        }
-      },
       "albyhub": {
         "page": {
           "url": {

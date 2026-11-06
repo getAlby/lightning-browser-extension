@@ -259,23 +259,6 @@
           "connection_failed": "Connection failed. Is the BTCPay connection URL correct and accessible?"
         }
       },
-      "voltage": {
-        "title": "Voltage",
-        "page": {
-          "title": "Connect to your Voltage node",
-          "description": "Enterprise-grade lightning node hosting. Get on Lightning Network faster than ever. Total control with zero management. <0>Learn more in our setup guide</0>"
-        },
-        "url": {
-          "label": "Node URL",
-          "placeholder": "https://your-node.m.voltageapp.io:8080"
-        },
-        "macaroon": {
-          "label": "Admin Macaroon (hex)"
-        },
-        "errors": {
-          "connection_failed": "Connection failed. Are your credentials correct?"
-        }
-      },
       "commando": {
         "title": "Core Lightning Node",
         "page": {

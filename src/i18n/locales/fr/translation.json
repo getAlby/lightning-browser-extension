@@ -234,20 +234,6 @@
           "login": "Se connecter"
         }
       },
-      "voltage": {
-        "title": "Voltage",
-        "page": {
-          "title": "Connectez-vous à votre nœud Voltage",
-          "description": "Hébergement de nœuds Lightning de qualité professionnelle. Accédez à Lightning Network plus rapidement que jamais. Contrôle total sans aucune gestion. <0>Pour en savoir plus, consultez notre guide de configuration</0>"
-        },
-        "url": {
-          "label": "URL du nœud",
-          "placeholder": ""
-        },
-        "errors": {
-          "connection_failed": "La connexion a échoué. Vos identifiants sont-ils corrects ?"
-        }
-      },
       "albyhub": {
         "page": {
           "url": {
