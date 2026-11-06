@@ -17,6 +17,14 @@ const setPrivateKey = async (message: MessageNostrPrivateKeySet) => {
   // make sure private key is saved in hex format
   let privateKey;
   try {
+    // only accept nsec or raw hex keys
+    // (normalizeToHex also decodes public npub/note identifiers)
+    if (
+      !message.args.privateKey.startsWith("nsec1") &&
+      !/^[0-9a-f]{64}$/i.test(message.args.privateKey)
+    ) {
+      throw new Error("Invalid private key");
+    }
     privateKey = nostr.normalizeToHex(message.args.privateKey);
     // Validate the private key before saving
     nostr.derivePublicKey(privateKey);
