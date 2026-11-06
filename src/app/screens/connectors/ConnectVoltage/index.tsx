@@ -112,7 +112,7 @@ export default function ConnectVoltage() {
           id="url"
           label={t("url.label")}
           placeholder={t("url.placeholder")}
-          pattern="https?://.+"
+          pattern="https://.+"
           title={t("url.placeholder")}
           onChange={handleChange}
           required
