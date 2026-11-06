@@ -1,4 +1,3 @@
-import CompanionDownloadInfo from "@components/CompanionDownloadInfo";
 import ConnectorForm from "@components/ConnectorForm";
 import QrcodeScanner from "@components/QrcodeScanner";
 import TextField from "@components/form/TextField";
@@ -21,21 +20,12 @@ export default function ConnectLndHub() {
     uri: "",
   });
   const [loading, setLoading] = useState(false);
-  const [hasTorSupport, setHasTorSupport] = useState(false);
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setFormData({
       ...formData,
       [event.target.name]: event.target.value.trim(),
     });
-  }
-
-  function getConnectorType() {
-    if (formData.uri.match(/\.onion/i) && !hasTorSupport) {
-      return "nativelndhub";
-    }
-    // default to LndHub
-    return "lndhub";
   }
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -57,17 +47,11 @@ export default function ConnectLndHub() {
         password,
         url,
       },
-      connector: getConnectorType(),
+      connector: "lndhub",
     };
 
     try {
-      let validation;
-      // TODO: for native connectors we currently skip the validation because it is too slow (booting up Tor etc.)
-      if (account.connector === "nativelndhub") {
-        validation = { valid: true, error: "" };
-      } else {
-        validation = await msg.request("validateAccount", account);
-      }
+      const validation = await msg.request("validateAccount", account);
 
       if (validation.valid) {
         const addResult = await msg.request("addAccount", account);
@@ -119,15 +103,6 @@ export default function ConnectLndHub() {
           autoFocus={true}
         />
       </div>
-      {formData.uri.match(/\.onion/i) && (
-        <div className="mb-6">
-          <CompanionDownloadInfo
-            hasTorCallback={(hasTor: boolean) => {
-              setHasTorSupport(hasTor);
-            }}
-          />
-        </div>
-      )}
       <div>
         <p className="text-center my-6 dark:text-white">OR</p>
         <QrcodeScanner

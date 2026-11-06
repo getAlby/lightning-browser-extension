@@ -778,8 +778,7 @@
     },
     "confirm_add_account": {
       "title": "افزودن حساب کاربری",
-      "content": "این وبسایت می خواهد یک حساب کاربری بیافزاید ({{connector}}):",
-      "tor_info": "به منظور اتصال از راه شبکه TOR، ابتدا باید اپ همراه البی را نصب کنید:"
+      "content": "این وبسایت می خواهد یک حساب کاربری بیافزاید ({{connector}}):"
     },
     "scan_qrcode": {
       "title": "در انتظار اسکن"
@@ -954,11 +953,8 @@
     "connectors": {
       "eclair": "Eclair",
       "lnd": "LND",
-      "nativelnd": "LND (روی Tor)",
       "lndhub": "LNDHub",
       "lnbits": "LNBits",
-      "nativelndhub": "LNDHub (روی Tor)",
-      "nativelnbits": "LNBits (روی Tor)",
       "galoy": "Galoy",
       "commando": "Commando"
     },
@@ -1034,18 +1030,6 @@
       },
       "budget": {
         "label": "بودجه"
-      }
-    },
-    "companion_download_info": {
-      "heading": "چطور می خواهید به شبکه TOR وصل شوید؟",
-      "download": "بارگیری",
-      "companion": {
-        "title": "Companion App",
-        "description": "اپلیکشنی سبک که مرورگر شما را به شبکه TOR متصل می کند."
-      },
-      "tor_native": {
-        "title": "TOR (محلی)",
-        "description": "اگر این مرورگر در حال حاضر به شبکه تور وصل است این گزینه را انتخاب کنید."
       }
     },
     "toasts": {

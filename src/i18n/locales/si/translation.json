@@ -951,8 +951,7 @@
     },
     "confirm_add_account": {
       "title": "ගිණුම එකතු කරන්න",
-      "content": "මෙම වෙබ් අඩවියට ගිණුමක් එක් කිරීමට අවශ්‍යයි ({{connector}}):",
-      "tor_info": "TOR ජාලය හරහා සම්බන්ධ වීමට ඔබ මුලින්ම ඇල්බි(Alby) companion යෙදුම ස්ථාපනය කළ යුතුය:"
+      "content": "මෙම වෙබ් අඩවියට ගිණුමක් එක් කිරීමට අවශ්‍යයි ({{connector}}):"
     },
     "transactions": {
       "title": "ගනුදෙනු",
@@ -1009,9 +1008,6 @@
     },
     "connectors": {
       "lnd": "LND",
-      "nativelnd": "LND (ටෝර් හරහා)",
-      "nativelnbits": "LNBits (ටෝර් හරහා)",
-      "nativelndhub": "LNDHub (ටෝර් හරහා)",
       "lnbits": "LNBits",
       "lndhub": "LNDHub",
       "galoy": "Galoy",
@@ -1110,18 +1106,6 @@
         "link_label": "තනි-ක්ලික් ගෙවීම් සඳහා අයවැයක් සකසන්න"
       },
       "hint": "මෙම අංකය වෙනස් කිරීම වත්මන් අයවැය නැවත සකසනු ඇත"
-    },
-    "companion_download_info": {
-      "heading": "ඔබට TOR ජාලයට සම්බන්ධ වීමට අවශ්‍ය වන්නේ කෙසේද?",
-      "tor_native": {
-        "description": "මෙම බ්‍රවුසරය දැනටමත් TOR ජාලයට සම්බන්ධ වී ඇත්නම් මෙම විකල්පය තෝරන්න.",
-        "title": "TOR (native)"
-      },
-      "companion": {
-        "title": "සහකාර(Companion) යෙදුම",
-        "description": "ඔබේ බ්‍රවුසරය TOR ජාලයට සම්බන්ධ කරන සැහැල්ලු යෙදුම."
-      },
-      "download": "බාගත කරන්න"
     },
     "toasts": {
       "connection_error": {

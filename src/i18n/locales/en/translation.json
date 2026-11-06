@@ -883,8 +883,7 @@
     },
     "confirm_add_account": {
       "title": "Add wallet",
-      "content": "This website wants to add a wallet ({{connector}}):",
-      "tor_info": "In order to connect through the TOR network you need to first install the Alby companion app:"
+      "content": "This website wants to add a wallet ({{connector}}):"
     },
     "liquid": {
       "title": "Liquid",
@@ -1130,11 +1129,8 @@
     },
     "connectors": {
       "lnd": "LND",
-      "nativelnd": "LND (over Tor)",
       "lndhub": "LNDHub",
-      "nativelndhub": "LNDHub (over Tor)",
       "lnbits": "LNBits",
-      "nativelnbits": "LNBits (over Tor)",
       "galoy": "Galoy",
       "eclair": "Eclair",
       "commando": "Commando"
@@ -1224,18 +1220,6 @@
       },
       "budget": {
         "label": "Budget"
-      }
-    },
-    "companion_download_info": {
-      "heading": "How do you want to connect to the TOR network?",
-      "download": "Download",
-      "companion": {
-        "title": "Companion App",
-        "description": "Lightweight app that connects your browser to the TOR network."
-      },
-      "tor_native": {
-        "title": "TOR (native)",
-        "description": "Select this option if this browser is already connected to the TOR network."
       }
     },
     "toasts": {

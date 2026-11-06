@@ -540,8 +540,7 @@
     },
     "confirm_add_account": {
       "content": "此網站想要添加一個帳戶（{{connector}}）：",
-      "title": "添加帳戶",
-      "tor_info": "為了通過 TOR 網絡進行連接，你需要先安裝 Alby 配套應用程式："
+      "title": "添加帳戶"
     },
     "on_chain": {
       "instructions1": "要通過比特幣地址接收比特幣，請在 getalby.com 上登錄你的 <0>Alby 帳戶</0>",
@@ -660,14 +659,11 @@
     "wallet": "錢包",
     "connectors": {
       "lnd": "LND",
-      "nativelnd": "LND（通過 Tor）",
       "lndhub": "LNDHub",
       "lnbits": "LNBits",
-      "nativelnbits": "LNBits（通過 Tor）",
       "galoy": "Galoy",
       "eclair": "Eclair",
-      "commando": "Commando",
-      "nativelndhub": "LNDHub（通過 Tor）"
+      "commando": "Commando"
     },
     "or": "或",
     "pasted": "已貼上！"
@@ -750,18 +746,6 @@
         "auth": "登錄",
         "imported": "已導入"
       }
-    },
-    "companion_download_info": {
-      "download": "下載",
-      "companion": {
-        "title": "配套應用",
-        "description": "將瀏覽器連接到 TOR 網絡的輕量級應用程序。"
-      },
-      "tor_native": {
-        "title": "TOR（本地）",
-        "description": "如果該瀏覽器已經連線 TOR 網絡，請選擇該選項。"
-      },
-      "heading": "你想如何連接到 TOR 網絡？"
     }
   }
 }

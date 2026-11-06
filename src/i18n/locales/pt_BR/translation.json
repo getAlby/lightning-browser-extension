@@ -727,8 +727,7 @@
     },
     "confirm_add_account": {
       "content": "Este site deseja adicionar uma conta ({{connector}}):",
-      "title": "Adicionar conta",
-      "tor_info": "Para se conectar através da rede TOR, você precisa primeiro instalar o aplicativo Alby companion:"
+      "title": "Adicionar conta"
     },
     "on_chain": {
       "instructions1": "Para receber via endereço bitcoin, acesse sua <0>conta Alby</0> em getalby.com",
@@ -914,10 +913,7 @@
       "eclair": "Eclair",
       "lnd": "LND",
       "lnbits": "LNBits",
-      "nativelndhub": "LNDHub (usando Tor)",
-      "commando": "Commando",
-      "nativelnbits": "LNBits (usando Tor)",
-      "nativelnd": "LND (usando Tor)"
+      "commando": "Commando"
     },
     "pasted": "Colado!",
     "or": "ou",
@@ -1028,14 +1024,6 @@
         "imported": "importada",
         "budget": "Limite de gastos"
       }
-    },
-    "companion_download_info": {
-      "tor_native": {
-        "title": "TOR (nativo)",
-        "description": "Selecione esta opção se este navegador já estiver conectado à rede TOR."
-      },
-      "heading": "Como você deseja se conectar à rede TOR?",
-      "download": "Baixar"
     },
     "permissions_modal": {
       "content_label": "Permissões",

@@ -85,13 +85,6 @@ We welcome and appreciate new contributions! 🎉 To get started, [Refer to SETU
 - You can help with [translations](./doc/CONTRIBUTION.md#translations)
 - [Code of Conduct](./doc/CODE_OF_CONDUCT.md)
 
-## 🤝 Native Companions
-
-Alby supports native connectors to native applications on the host computer. For this, the extension passes each call to a native application (using [native messaging](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Native_messaging)).
-This allows Alby also to connect to nodes behind Tor (through this native "proxy" application).
-
-Currently, there is one native companion app available to connect to Tor nodes: [https://github.com/getAlby/alby-companion-rs](https://github.com/getAlby/alby-companion-rs)
-
 ## 💬 Join the conversation
 
 - [Discord](https://discord.gg/4DQu2pa72D)

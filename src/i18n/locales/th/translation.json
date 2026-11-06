@@ -581,8 +581,7 @@
     },
     "confirm_add_account": {
       "title": "เพื่มบัญชี",
-      "content": "เว็บไซต์นี้ต้องการเพิ่มบัญชี ({{connector}}):",
-      "tor_info": "ในการเชื่อมต่อผ่านเครือข่าย TOR คุณต้องติดตั้ง Alby companion app เสียก่อน:"
+      "content": "เว็บไซต์นี้ต้องการเพิ่มบัญชี ({{connector}}):"
     },
     "transactions": {
       "title": "การทำธุรกรรม"
@@ -631,11 +630,8 @@
     },
     "connectors": {
       "lnd": "LND",
-      "nativelnd": "LND(บน Tor)",
       "lndhub": "LNDHub",
-      "nativelndhub": "LNDHub(บนTor)",
       "lnbits": "LNbits",
-      "nativelnbits": "LNbits(บน Tor)",
       "galoy": "Galoy",
       "eclair": "Eclair",
       "commando": "Commando"
@@ -689,18 +685,6 @@
       "errors": {
         "allow_camera_access": "โปรดอนุญาตการเข้าถึงกล้องในหน้าจอการตั้งค่า"
       }
-    },
-    "companion_download_info": {
-      "download": "ดาวน์โหลด",
-      "companion": {
-        "title": "Companion App",
-        "description": "Lightweight app เชื่อมต่อเบราว์เซอร์ของคุณกับเครือข่าย TOR"
-      },
-      "tor_native": {
-        "title": "TOR (native)",
-        "description": "เลือกตัวเลือกนี้หากเบราว์เซอร์นี้เชื่อมต่อกับเครือข่าย TOR แล้ว"
-      },
-      "heading": "คุณต้องการเชื่อมต่อเครือข่าย TOR อย่างไร?"
     },
     "budget_control": {
       "remember": {

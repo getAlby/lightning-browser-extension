@@ -910,8 +910,7 @@
     },
     "confirm_add_account": {
       "title": "Wallet hinzufügen",
-      "content": "Diese Website möchte eine Wallet ({{connector}}) hinzufügen:",
-      "tor_info": "Um sich über das TOR-Netzwerk zu verbinden, musst du zunächst die Alby-Begleit-App installieren:"
+      "content": "Diese Website möchte eine Wallet ({{connector}}) hinzufügen:"
     },
     "on_chain": {
       "title": "Empfangen über Bitcoin-Adresse",
@@ -1077,18 +1076,6 @@
         "password_reset": "Dein Passwort vergessen? Klicke hier"
       }
     },
-    "companion_download_info": {
-      "download": "Download",
-      "companion": {
-        "title": "Begleitende App",
-        "description": "Leichte Anwendung, die deinen Browser mit dem TOR-Netzwerk verbindet."
-      },
-      "tor_native": {
-        "title": "TOR (native)",
-        "description": "Wähle diese Option, wenn dieser Browser bereits mit dem TOR-Netzwerk verbunden ist."
-      },
-      "heading": "Wie willst du dich mit dem TOR-Netzwerk verbinden?"
-    },
     "allowance_menu": {
       "edit_allowance": {
         "title": "Seiteneinstellung",
@@ -1237,12 +1224,9 @@
     "wallet": "Wallet",
     "connectors": {
       "lnd": "LND",
-      "nativelnd": "LND (über Tor)",
       "commando": "Befehl",
       "lnbits": "LNBits",
       "lndhub": "LNDHub",
-      "nativelndhub": "LNDHub (über Tor)",
-      "nativelnbits": "LNBits (über Tor)",
       "galoy": "Galoy",
       "eclair": "Eclair"
     },

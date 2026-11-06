@@ -1,4 +1,3 @@
-import CompanionDownloadInfo from "@components/CompanionDownloadInfo";
 import ConnectorForm from "@components/ConnectorForm";
 import TextField from "@components/form/TextField";
 import ConnectionErrorToast from "@components/toasts/ConnectionErrorToast";
@@ -23,7 +22,6 @@ export default function ConnectStartOS() {
   });
   const [formData, setFormData] = useState(initialFormData);
   const [loading, setLoading] = useState(false);
-  const [hasTorSupport, setHasTorSupport] = useState(false);
   const [lndconnectUrlVisible, setLndconnectUrlVisible] = useState(false);
 
   function handleLndconnectUrl(event: React.ChangeEvent<HTMLInputElement>) {
@@ -46,14 +44,6 @@ export default function ConnectStartOS() {
     }
   }
 
-  function getConnectorType() {
-    if (formData.url.match(/\.onion/i) && !hasTorSupport) {
-      return "nativelnd";
-    }
-    // default to LND
-    return "lnd";
-  }
-
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setLoading(true);
@@ -64,17 +54,11 @@ export default function ConnectStartOS() {
         macaroon,
         url,
       },
-      connector: getConnectorType(),
+      connector: "lnd",
     };
 
     try {
-      let validation;
-      // TODO: for native connectors we currently skip the validation because it is too slow (booting up Tor etc.)
-      if (account.connector === "nativelnd") {
-        validation = { valid: true, error: "" };
-      } else {
-        validation = await msg.request("validateAccount", account);
-      }
+      const validation = await msg.request("validateAccount", account);
 
       if (validation.valid) {
         const addResult = await msg.request("addAccount", account);
@@ -153,15 +137,6 @@ export default function ConnectStartOS() {
           }
         />
       </div>
-      {formData.url.match(/\.onion/i) && (
-        <div className="mt-6">
-          <CompanionDownloadInfo
-            hasTorCallback={(hasTor: boolean) => {
-              setHasTorSupport(hasTor);
-            }}
-          />
-        </div>
-      )}
     </ConnectorForm>
   );
 }

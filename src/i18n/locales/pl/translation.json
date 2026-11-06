@@ -674,18 +674,6 @@
       "label": {
         "auth": "LOGOWANIE"
       }
-    },
-    "companion_download_info": {
-      "heading": "Jak chcesz się połączyć do sieci TOR?",
-      "companion": {
-        "description": "Lekka aplikacja, która łączy Twoją przeglądarkę z siecią TOR.",
-        "title": "Aplikacja towarzysząca"
-      },
-      "download": "Pobierz",
-      "tor_native": {
-        "title": "TOR (natywny)",
-        "description": "Wybierz tę opcję jeśli Twoja przeglądarka już jest podłączona do sieci TOR."
-      }
     }
   }
 }

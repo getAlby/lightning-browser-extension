@@ -836,8 +836,7 @@
     },
     "confirm_add_account": {
       "title": "添加帐户",
-      "content": "该网站想要添加一个帐户（{{connector}}）：",
-      "tor_info": "为了通过 TOR 网络进行连接，你需要先安装 Alby 配套应用程序："
+      "content": "该网站想要添加一个帐户（{{connector}}）："
     },
     "on_chain": {
       "instructions1": "要通过比特币地址接收比特币，请在 getalby.com 上登录你的 <0>Alby 帐户</0>",
@@ -1018,11 +1017,8 @@
     "wallet": "钱包",
     "connectors": {
       "lnd": "LND",
-      "nativelnd": "LND（通过 Tor）",
       "lndhub": "LNDHub",
-      "nativelndhub": "LNDHub（通过 Tor）",
       "lnbits": "LNBits",
-      "nativelnbits": "LNBits（通过 Tor）",
       "galoy": "Galoy",
       "eclair": "Eclair",
       "commando": "Commando"
@@ -1139,18 +1135,6 @@
       "payments": "付款",
       "total": "总览",
       "budget": "预算"
-    },
-    "companion_download_info": {
-      "heading": "你想如何连接到 TOR 网络？",
-      "download": "下载",
-      "tor_native": {
-        "title": "TOR（本地）",
-        "description": "如果该浏览器已经连线 TOR 网络，请选择该选项。"
-      },
-      "companion": {
-        "title": "配套应用",
-        "description": "将浏览器连接到 TOR 网络的轻量级应用程序。"
-      }
     },
     "permissions_modal": {
       "dont_ask_current": "不要再询问「<0>{{permission}}</0>」",

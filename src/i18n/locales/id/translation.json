@@ -540,8 +540,7 @@
       "title": "Masuk"
     },
     "confirm_add_account": {
-      "title": "Tambah akun",
-      "tor_info": "Untuk menghubungkan melalui jaringan TOR kamu perlu memasang aplikasi pendamping Alby:"
+      "title": "Tambah akun"
     },
     "transactions": {
       "title": "Transaksi"
@@ -604,17 +603,6 @@
         "label": "Budget"
       }
     },
-    "companion_download_info": {
-      "heading": "Bagaimana kamu ingin terhubung ke jaringan TOR?",
-      "download": "Unduh",
-      "companion": {
-        "title": "Companion App"
-      },
-      "tor_native": {
-        "title": "TOR (native)",
-        "description": "Pilih opsi ini jika browser sudah tersambung dengan jaringan Tor."
-      }
-    },
     "publishers_table": {
       "payments": "Pembayaran"
     },
@@ -664,10 +652,7 @@
       "lnbits": "LNBits",
       "commando": "Commando",
       "lnd": "LND",
-      "nativelnd": "LND (melalui Tor)",
       "lndhub": "LNDHub",
-      "nativelndhub": "LNDHub (melalui Tor)",
-      "nativelnbits": "LNBits (melalui Tor)",
       "galoy": "Galoy",
       "eclair": "Eclair"
     },

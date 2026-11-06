@@ -5,9 +5,6 @@ import LnBits from "./lnbits";
 import Lnc from "./lnc";
 import Lnd from "./lnd";
 import LndHub from "./lndhub";
-import NativeLnBits from "./nativelnbits";
-import NativeLnd from "./nativelnd";
-import NativeLndHub from "./nativelndhub";
 import NWC from "./nwc";
 
 /*
@@ -20,12 +17,9 @@ const initialize = (account, password) => {
 
 const connectors = {
   lnd: Lnd,
-  nativelnd: NativeLnd,
   lndhub: LndHub,
-  nativelndhub: NativeLndHub,
   lnbits: LnBits,
   lnc: Lnc,
-  nativelnbits: NativeLnBits,
   galoy: Galoy,
   eclair: Eclair,
   alby: Alby,
