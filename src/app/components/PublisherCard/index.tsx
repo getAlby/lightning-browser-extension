@@ -71,8 +71,10 @@ export default function PublisherCard({
             href={`https://${url}`}
             title={url}
             target="_blank"
+            // wrap instead of truncating: truncation hides the end of the
+            // host (the registrable domain), enabling spoofed subdomains
             className={classNames(
-              "text-gray-600 dark:text-neutral-400 overflow-hidden text-ellipsis whitespace-nowrap text-xs"
+              "text-gray-600 dark:text-neutral-400 break-all text-xs"
             )}
             rel="noreferrer noopener"
           >
