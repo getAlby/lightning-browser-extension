@@ -50,7 +50,7 @@
     "@scure/bip39": "^2.4.0",
     "axios": "^1.20.0",
     "bech32": "^2.0.0",
-    "bitcoinjs-lib": "^7.0.1",
+    "bitcoinjs-lib": "^7.0.4",
     "bolt11-signet": "1.4.1",
     "crypto-js": "^4.2.0",
     "dexie": "^4.4.3",
