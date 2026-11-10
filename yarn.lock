@@ -3320,11 +3320,6 @@ base64-js@^1.3.1:
   resolved "https://registry.npmjs.org/base64-js/-/base64-js-1.5.1.tgz"
   integrity sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==
 
-baseline-browser-mapping@^2.11.22:
-  version "2.11.22"
-  resolved "https://registry.yarnpkg.com/baseline-browser-mapping/-/baseline-browser-mapping-2.11.22.tgz#d8b612f54517d8b3a31734623779e5ab8c5ff0b9"
-  integrity sha512-pWc4w51fBFd7mav43/zKRC+RI6f4yfzQoVlfvE8dECePyfkn1bzLp01Fj0QACcyCZyFhiEMyD2qScfKRWgWibA==
-
 baseline-browser-mapping@^2.9.0:
   version "2.9.19"
   resolved "https://registry.yarnpkg.com/baseline-browser-mapping/-/baseline-browser-mapping-2.9.19.tgz#3e508c43c46d961eb4d7d2e5b8d1dd0f9ee4f488"
@@ -3370,13 +3365,13 @@ bip174@^2.1.1:
   resolved "https://registry.yarnpkg.com/bip174/-/bip174-2.1.1.tgz#ef3e968cf76de234a546962bcf572cc150982f9f"
   integrity sha512-mdFV5+/v0XyNYXjBS6CQPLo9ekCx4gtKZFnJm5PMto7Fs9hTTDpkkzOB7/FtluRI6JbUUAu+snTYfJRgHLZbZQ==
 
-bip174@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/bip174/-/bip174-3.0.0.tgz#fbf60cc7a6e39dde17afdda0cf1a27e5508ae075"
-  integrity sha512-N3vz3rqikLEu0d6yQL8GTrSkpYb35NQKWMR7Hlza0lOj6ZOlvQ3Xr7N9Y+JPebaCVoEUHdBeBSuLxcHr71r+Lw==
+bip174@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/bip174/-/bip174-3.0.1.tgz#c213c888ab42dd0b113802b0c48285ede8c37cb0"
+  integrity sha512-avOnOoLOwdjw1MebWKh3bHqWOH558Q9VpqmRKUv2S63vjw0pnX7Y+yRihxIibgP55twhc7+YfC0IAH43IF5FqQ==
   dependencies:
-    uint8array-tools "^0.0.9"
-    varuint-bitcoin "^2.0.0"
+    uint8array-tools "^0.0.10"
+    varuint-bitcoin "^2.0.1"
 
 bip66@^1.1.0:
   version "1.1.5"
@@ -3411,18 +3406,18 @@ bitcoinjs-lib@^6.0.2:
     varuint-bitcoin "^1.1.2"
     wif "^2.0.1"
 
-bitcoinjs-lib@^7.0.1:
-  version "7.0.1"
-  resolved "https://registry.yarnpkg.com/bitcoinjs-lib/-/bitcoinjs-lib-7.0.1.tgz#55fd0a44f258669e2de9a5d50c8d8008d0a29ce0"
-  integrity sha512-vwEmpL5Tpj0I0RBdNkcDMXePoaYSTeKY6mL6/l5esbnTs+jGdPDuLp4NY1hSh6Zk5wSgePygZ4Wx5JJao30Pww==
+bitcoinjs-lib@^7.0.5:
+  version "7.0.5"
+  resolved "https://registry.yarnpkg.com/bitcoinjs-lib/-/bitcoinjs-lib-7.0.5.tgz#ef7175e79e50faae69c9ca61c273efd966a60c33"
+  integrity sha512-xH24P1ile3QtyChzX1ITitcgpfZgDzG986gy1glbGXFsvcSnRX0P6p4m3nuTQfJ+j97va8py0leEK7xG8oxMqQ==
   dependencies:
     "@noble/hashes" "^1.2.0"
     bech32 "^2.0.0"
-    bip174 "^3.0.0"
+    bip174 "^3.0.1"
     bs58check "^4.0.0"
-    uint8array-tools "^0.0.9"
+    uint8array-tools "^0.0.10"
     valibot "^1.2.0"
-    varuint-bitcoin "^2.0.0"
+    varuint-bitcoin "^2.0.1"
 
 bitset@^5.1.1:
   version "5.1.1"
@@ -3738,11 +3733,6 @@ caniuse-api@^3.0.0:
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001517, caniuse-lite@^1.0.30001538, caniuse-lite@^1.0.30001759:
   version "1.0.30001810"
   resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001810.tgz"
-  integrity sha512-TITQPUkaz+aVk5GL6NhOdwk1aEaNTSDPsGFWrTuhKGtjTF70jL/Oht2W4c6rXUe5fu7Ie19VIahAXHIIiWWNeg==
-
-caniuse-lite@^1.0.30001810:
-  version "1.0.30001810"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001810.tgz#4970b477dea3278374de9bc43aa8f5d39fc3cda2"
   integrity sha512-TITQPUkaz+aVk5GL6NhOdwk1aEaNTSDPsGFWrTuhKGtjTF70jL/Oht2W4c6rXUe5fu7Ie19VIahAXHIIiWWNeg==
 
 chalk@5.3.0:
@@ -11319,15 +11309,10 @@ typeson@^6.0.0, typeson@^6.1.0:
   resolved "https://registry.npmjs.org/typeson/-/typeson-6.1.0.tgz"
   integrity sha512-6FTtyGr8ldU0pfbvW/eOZrEtEkczHRUtduBnA90Jh9kMPCiFNnXIon3vF41N0S4tV1HHQt4Hk1j4srpESziCaA==
 
-uint8array-tools@^0.0.8:
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/uint8array-tools/-/uint8array-tools-0.0.8.tgz#712bab001f8347bd782f45bc47c76ffff32d1e0b"
-  integrity sha512-xS6+s8e0Xbx++5/0L+yyexukU7pz//Yg6IHg3BKhXotg1JcYtgxVcUctQ0HxLByiJzpAkNFawz1Nz5Xadzo82g==
-
-uint8array-tools@^0.0.9:
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/uint8array-tools/-/uint8array-tools-0.0.9.tgz#e29e6d05f3472273db1b0e370ac1d91e4a0a4e6f"
-  integrity sha512-9vqDWmoSXOoi+K14zNaf6LBV51Q8MayF0/IiQs3GlygIKUYtog603e6virExkjjFosfJUBI4LhbQK1iq8IG11A==
+uint8array-tools@^0.0.10:
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/uint8array-tools/-/uint8array-tools-0.0.10.tgz#acfcf118e072df79175c5f73f86af917885d095a"
+  integrity sha512-sSbrZqlr04w4p8KKpHw0ME/R4JzQaadum+BWhMlk2M7LrDyXWTfJOco3d1jNMdQNxgk5DDm88R3IWYH0nR+tzQ==
 
 unbox-primitive@^1.0.2:
   version "1.0.2"
@@ -11463,12 +11448,12 @@ varuint-bitcoin@^1.1.2:
   dependencies:
     safe-buffer "^5.1.1"
 
-varuint-bitcoin@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/varuint-bitcoin/-/varuint-bitcoin-2.0.0.tgz#59a53845a87ad18c42f184a3d325074465341523"
-  integrity sha512-6QZbU/rHO2ZQYpWFDALCDSRsXbAs1VOEmXAxtbtjLtKuMJ/FQ8YbhfxlaiKv5nklci0M6lZtlZyxo9Q+qNnyog==
+varuint-bitcoin@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/varuint-bitcoin/-/varuint-bitcoin-2.0.1.tgz#bbf7e790b900f47aad5b597a501337dff7978b17"
+  integrity sha512-TTl5qSPJ3FzjuTHo0Ex9WUE3jTxnUsQHR38vIDhHApoVstzJK4gE20WqmTWOT5oo7ilvOSNejXt4CJrfDcqm5A==
   dependencies:
-    uint8array-tools "^0.0.8"
+    uint8array-tools "^0.0.10"
 
 vary@~1.1.2:
   version "1.1.2"
